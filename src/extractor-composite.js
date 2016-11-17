@@ -7,11 +7,6 @@ const _         = require('lodash');
 const extractor = require('./extractor');
 const utl       = require('./utl');
 
-let gScanned    = new Set();
-
-const notInCache = pFileName => !gScanned.has(pFileName);
-const isIncludable = pDep => pDep.followable || path.extname(pDep.resolved) === '.json';
-
 function getAllJSFilesFromDir (pDirName, pOptions) {
     return fs.readdirSync(pDirName)
         .filter(pFileInDir => utl.ignore(pFileInDir, pOptions.exclude))
