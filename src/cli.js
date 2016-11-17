@@ -6,7 +6,7 @@ const semver   = require("semver");
 /* istanbul ignore if  */
 if (!semver.satisfies(process.versions.node, $package.engines.node)) {
     process.stderr.write(`\nERROR: your node version (${process.versions.node}) is not recent enough.\n`);
-    process.stderr.write(`       js-makedepend needs a version of node ${$package.engines.node}\n\n`);
+    process.stderr.write(`       dependency-cruiser needs a version of node ${$package.engines.node}\n\n`);
 
     /* eslint no-process-exit: 0 */
     process.exit(-1);
@@ -17,6 +17,7 @@ program
     .option("-f, --output-to <file>", "file to write output to; - for stdout (default: -)")
     .option("-x, --exclude <regex>", "a regular expression for excluding modules")
     .option("-M, --system <items>", "list of module systems (default: amd,cjs,es6)")
+    .option("-T, --output-type <type>", "output type (default:json)")
     .arguments("<directory-or-file>")
     .parse(process.argv);
 

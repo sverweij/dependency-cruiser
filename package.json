@@ -24,7 +24,7 @@
     "eslint": "3.10.2",
     "eslint-plugin-security": "1.2.0",
     "istanbul": "0.4.5",
-    "js-makedepend": "^1.0.6",
+    "js-makedepend": "1.0.6",
     "mocha": "3.1.2",
     "npm-check-updates": "2.8.6",
     "nsp": "2.6.2"

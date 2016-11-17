@@ -43,10 +43,10 @@
         ]
     },
     {
-        "title": "test on js-makedepend cjs fixture one",
+        "title": "test on dependency-cruiser cjs fixture one",
         "input": {
-            "fileName": "../js-makedepend/test/extractor-fixtures/cjs/root_one.js",
-            "baseDir": "../js-makedepend",
+            "fileName": "../dependency-cruiser/test/extractor-fixtures/cjs/root_one.js",
+            "baseDir": "../dependency-cruiser",
             "moduleSystems": ["cjs"]
         },
         "expected": [
