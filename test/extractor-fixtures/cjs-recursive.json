@@ -4,17 +4,21 @@
         "input": {
             "fileName": "test/extractor-fixtures/cjs/empty.js"
         },
-        "expected": {
-            "test/extractor-fixtures/cjs/empty.js" :[]
-        }
+        "expected": [
+            {
+                "source": "test/extractor-fixtures/cjs/empty.js",
+                "dependencies": []
+            }
+        ]
     },
     {
         "title": "root_one unfiltered",
         "input": {
             "fileName": "test/extractor-fixtures/cjs/root_two.js"
         },
-        "expected": {
-            "test/extractor-fixtures/cjs/root_two.js": [
+        "expected": [{
+            "source": "test/extractor-fixtures/cjs/root_two.js",
+            "dependencies": [
                 {
                     "module": "./shared",
                     "resolved": "test/extractor-fixtures/cjs/shared.js",
@@ -43,8 +47,11 @@
                     "coreModule": true,
                     "followable": false
                 }
-            ],
-            "test/extractor-fixtures/cjs/shared.js": [
+            ]
+        },
+        {
+            "source": "test/extractor-fixtures/cjs/shared.js",
+            "dependencies": [
                 {
                     "module": "path",
                     "resolved": "path",
@@ -52,8 +59,11 @@
                     "coreModule": true,
                     "followable": false
                 }
-            ],
-            "test/extractor-fixtures/cjs/two_only_one.js": [
+            ]
+        },
+        {
+            "source": "test/extractor-fixtures/cjs/two_only_one.js",
+            "dependencies": [
                 {
                     "module": "./sub/dir",
                     "resolved": "test/extractor-fixtures/cjs/sub/dir.js",
@@ -61,8 +71,11 @@
                     "coreModule": false,
                     "followable": true
                 }
-            ],
-            "test/extractor-fixtures/cjs/sub/dir.js": [
+            ]
+        },
+        {
+            "source": "test/extractor-fixtures/cjs/sub/dir.js",
+            "dependencies": [
                 {
                     "module": "./depindir",
                     "resolved": "test/extractor-fixtures/cjs/sub/depindir.js",
@@ -77,8 +90,11 @@
                     "coreModule": true,
                     "followable": false
                 }
-            ],
-            "test/extractor-fixtures/cjs/sub/depindir.js": [
+            ]
+        },
+        {
+            "source": "test/extractor-fixtures/cjs/sub/depindir.js",
+            "dependencies": [
                 {
                     "module": "path",
                     "resolved": "path",
@@ -87,7 +103,7 @@
                     "followable": false
                 }
             ]
-        }
+        }]
     },
     {
         "title": "root_one node_modules filtered out",
@@ -97,157 +113,190 @@
                 "exclude": "node_modules"
             }
         },
-        "expected": {
-            "test/extractor-fixtures/cjs/root_one.js": [
-                {
-                    "module": "./one_only_one",
-                    "resolved": "test/extractor-fixtures/cjs/one_only_one.js",
-                    "moduleSystem": "cjs",
-                    "coreModule": false,
-                    "followable": true
-                },
-                {
-                    "module": "./one_only_two",
-                    "resolved": "test/extractor-fixtures/cjs/one_only_two.js",
-                    "moduleSystem": "cjs",
-                    "coreModule": false,
-                    "followable": true
-                },
-                {
-                    "module": "./shared",
-                    "resolved": "test/extractor-fixtures/cjs/shared.js",
-                    "moduleSystem": "cjs",
-                    "coreModule": false,
-                    "followable": true
-                },
-                {
-                    "module": "./sub/dir",
-                    "resolved": "test/extractor-fixtures/cjs/sub/dir.js",
-                    "moduleSystem": "cjs",
-                    "coreModule": false,
-                    "followable": true
-                },
-                {
-                    "module": "fs",
-                    "resolved": "fs",
-                    "moduleSystem": "cjs",
-                    "coreModule": true,
-                    "followable": false
-                }
-            ],
-            "test/extractor-fixtures/cjs/one_only_one.js": [
-                {
-                    "module": "path",
-                    "resolved": "path",
-                    "moduleSystem": "cjs",
-                    "coreModule": true,
-                    "followable": false
-                }
-            ],
-            "test/extractor-fixtures/cjs/one_only_two.js": [
-                {
-                    "module": "path",
-                    "resolved": "path",
-                    "moduleSystem": "cjs",
-                    "coreModule": true,
-                    "followable": false
-                }
-            ],
-            "test/extractor-fixtures/cjs/shared.js": [
-                {
-                    "module": "path",
-                    "resolved": "path",
-                    "moduleSystem": "cjs",
-                    "coreModule": true,
-                    "followable": false
-                }
-            ],
-            "test/extractor-fixtures/cjs/sub/dir.js": [
-                {
-                    "module": "./depindir",
-                    "resolved": "test/extractor-fixtures/cjs/sub/depindir.js",
-                    "moduleSystem": "cjs",
-                    "coreModule": false,
-                    "followable": true
-                },
-                {
-                    "module": "path",
-                    "resolved": "path",
-                    "moduleSystem": "cjs",
-                    "coreModule": true,
-                    "followable": false
-                }
-            ],
-            "test/extractor-fixtures/cjs/sub/depindir.js": [
-                {
-                    "module": "path",
-                    "resolved": "path",
-                    "moduleSystem": "cjs",
-                    "coreModule": true,
-                    "followable": false
-                }
-            ]
-        }
+        "expected": [
+            {
+                "source": "test/extractor-fixtures/cjs/root_one.js",
+                "dependencies": [
+                    {
+                        "module": "./one_only_one",
+                        "resolved": "test/extractor-fixtures/cjs/one_only_one.js",
+                        "moduleSystem": "cjs",
+                        "coreModule": false,
+                        "followable": true
+                    },
+                    {
+                        "module": "./one_only_two",
+                        "resolved": "test/extractor-fixtures/cjs/one_only_two.js",
+                        "moduleSystem": "cjs",
+                        "coreModule": false,
+                        "followable": true
+                    },
+                    {
+                        "module": "./shared",
+                        "resolved": "test/extractor-fixtures/cjs/shared.js",
+                        "moduleSystem": "cjs",
+                        "coreModule": false,
+                        "followable": true
+                    },
+                    {
+                        "module": "./sub/dir",
+                        "resolved": "test/extractor-fixtures/cjs/sub/dir.js",
+                        "moduleSystem": "cjs",
+                        "coreModule": false,
+                        "followable": true
+                    },
+                    {
+                        "module": "fs",
+                        "resolved": "fs",
+                        "moduleSystem": "cjs",
+                        "coreModule": true,
+                        "followable": false
+                    }
+                ]
+            },
+            {
+                "source": "test/extractor-fixtures/cjs/one_only_one.js",
+                "dependencies": [
+                    {
+                        "module": "path",
+                        "resolved": "path",
+                        "moduleSystem": "cjs",
+                        "coreModule": true,
+                        "followable": false
+                    }
+                ]
+            },
+            {
+                "source": "test/extractor-fixtures/cjs/one_only_two.js",
+                "dependencies": [
+                    {
+                        "module": "path",
+                        "resolved": "path",
+                        "moduleSystem": "cjs",
+                        "coreModule": true,
+                        "followable": false
+                    }
+                ]
+            },
+            {
+                "source": "test/extractor-fixtures/cjs/shared.js",
+                "dependencies": [
+                    {
+                        "module": "path",
+                        "resolved": "path",
+                        "moduleSystem": "cjs",
+                        "coreModule": true,
+                        "followable": false
+                    }
+                ]
+            },
+            {
+                "source": "test/extractor-fixtures/cjs/sub/dir.js",
+                "dependencies": [
+                    {
+                        "module": "./depindir",
+                        "resolved": "test/extractor-fixtures/cjs/sub/depindir.js",
+                        "moduleSystem": "cjs",
+                        "coreModule": false,
+                        "followable": true
+                    },
+                    {
+                        "module": "path",
+                        "resolved": "path",
+                        "moduleSystem": "cjs",
+                        "coreModule": true,
+                        "followable": false
+                    }
+                ]
+            },
+            {
+                "source": "test/extractor-fixtures/cjs/sub/depindir.js",
+                "dependencies": [
+                    {
+                        "module": "path",
+                        "resolved": "path",
+                        "moduleSystem": "cjs",
+                        "coreModule": true,
+                        "followable": false
+                    }
+                ]
+            }
+        ]
     },
     {
         "title": "circular dependency (one step)",
         "input": {
             "fileName": "test/extractor-fixtures/cjs/circular.js"
         },
-        "expected": {
-            "test/extractor-fixtures/cjs/circular.js": [
-                {
-                    "module": "./ralucric",
-                    "resolved": "test/extractor-fixtures/cjs/ralucric.js",
-                    "moduleSystem": "cjs",
-                    "coreModule": false,
-                    "followable": true
-                }
-            ],
-            "test/extractor-fixtures/cjs/ralucric.js": [
-                {
-                    "module": "./circular",
-                    "resolved": "test/extractor-fixtures/cjs/circular.js",
-                    "moduleSystem": "cjs",
-                    "coreModule": false,
-                    "followable": true
-                }
-            ]
-        }
+        "expected": [
+            {
+                "source": "test/extractor-fixtures/cjs/circular.js",
+                "dependencies": [
+                    {
+                        "module": "./ralucric",
+                        "resolved": "test/extractor-fixtures/cjs/ralucric.js",
+                        "moduleSystem": "cjs",
+                        "coreModule": false,
+                        "followable": true
+                    }
+                ]
+            },
+            {
+                "source": "test/extractor-fixtures/cjs/ralucric.js",
+                "dependencies": [
+                    {
+                        "module": "./circular",
+                        "resolved": "test/extractor-fixtures/cjs/circular.js",
+                        "moduleSystem": "cjs",
+                        "coreModule": false,
+                        "followable": true
+                    }
+                ]
+            }
+        ]
     },
     {
         "title": "circular dependency (more steps)",
         "input": {
             "fileName": "test/extractor-fixtures/cjs/circle-one.js"
         },
-        "expected": {
-            "test/extractor-fixtures/cjs/circle-one.js": [
-                {
-                    "module": "./circle-two",
-                    "resolved": "test/extractor-fixtures/cjs/circle-two.js",
-                    "moduleSystem": "cjs",
-                    "coreModule": false,
-                    "followable": true
-                }
-            ],
-            "test/extractor-fixtures/cjs/circle-two.js": [
-                {
-                    "module": "./circle-three",
-                    "resolved": "test/extractor-fixtures/cjs/circle-three.js",
-                    "moduleSystem": "cjs",
-                    "coreModule": false,
-                    "followable": true
-                }
-            ],
-            "test/extractor-fixtures/cjs/circle-three.js": [
-                {
-                    "module": "./circle-one",
-                    "resolved": "test/extractor-fixtures/cjs/circle-one.js",
-                    "moduleSystem": "cjs",
-                    "coreModule": false,
-                    "followable": true
-                }
-            ]
-        }
+        "expected": [
+            {
+                "source": "test/extractor-fixtures/cjs/circle-one.js",
+                "dependencies": [
+                    {
+                        "module": "./circle-two",
+                        "resolved": "test/extractor-fixtures/cjs/circle-two.js",
+                        "moduleSystem": "cjs",
+                        "coreModule": false,
+                        "followable": true
+                    }
+                ]
+            },
+            {
+                "source": "test/extractor-fixtures/cjs/circle-two.js",
+                "dependencies": [
+                    {
+                        "module": "./circle-three",
+                        "resolved": "test/extractor-fixtures/cjs/circle-three.js",
+                        "moduleSystem": "cjs",
+                        "coreModule": false,
+                        "followable": true
+                    }
+                ]
+            },
+            {
+                "source": "test/extractor-fixtures/cjs/circle-three.js",
+                "dependencies": [
+                    {
+                        "module": "./circle-one",
+                        "resolved": "test/extractor-fixtures/cjs/circle-one.js",
+                        "moduleSystem": "cjs",
+                        "coreModule": false,
+                        "followable": true
+                    }
+                ]
+            }
+        ]
     }
 ]

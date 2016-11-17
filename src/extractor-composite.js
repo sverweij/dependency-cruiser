@@ -26,18 +26,20 @@ function extractRecursive (pFileName, pOptions, pVisited) {
     pVisited = pVisited || new Set();
     pVisited.add(pFileName);
 
-    let lRetval = {};
+    let lRetval = [];
     const lDependencies = extractor.extractDependencies(pFileName, pOptions);
 
-    lRetval[pFileName] = lDependencies;
+    lRetval.push({
+        source: pFileName,
+        dependencies: lDependencies
+    });
     lDependencies
         .filter(pDep => pDep.followable && !pVisited.has(pDep.resolved))
         .forEach(
             pDep => {
-                lRetval = _.merge(
-                            lRetval,
-                            extractRecursive(pDep.resolved, pOptions, pVisited)
-                        );
+                lRetval = lRetval.concat(
+                    extractRecursive(pDep.resolved, pOptions, pVisited)
+                );
             }
         );
     return lRetval;
@@ -46,7 +48,7 @@ function extractRecursive (pFileName, pOptions, pVisited) {
 function extractRecursiveDir(pDirName, pOptions) {
     let lVisited = new Set();
 
-    return _.spread(_.merge)(
+    return _.spread(_.concat)(
         getAllJSFilesFromDir(pDirName, pOptions)
             .reduce((pDependencies, pFilename) => {
                 if (!lVisited.has(pFilename)){
@@ -60,5 +62,5 @@ function extractRecursiveDir(pDirName, pOptions) {
     );
 }
 
-exports.extractRecursive             = extractRecursive;
-exports.extractRecursiveDir          = extractRecursiveDir;
+exports.extractRecursive    = extractRecursive;
+exports.extractRecursiveDir = extractRecursiveDir;
