@@ -1,0 +1,2 @@
+require('fs');
+require('./empty');

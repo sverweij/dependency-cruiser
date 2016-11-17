@@ -1,0 +1,13 @@
+# we might want to add latest - 1 && latest - 2 to this
+image: node:latest
+
+cache:
+  paths:
+  - node_modules/
+
+test_async:
+  script:
+   - npm install
+   - npm run lint
+   - npm run nsp
+   - npm run cover

@@ -1,0 +1,45 @@
+[
+    {
+        "title": "es6 imports and exports",
+        "input": {
+            "fileName": "test/extractor-fixtures/es6/imports-and-exports.js"
+        },
+        "expected": [
+            {
+                "module": "acorn",
+                "resolved": "node_modules/acorn/dist/acorn.js",
+                "moduleSystem": "es6",
+                "coreModule": false,
+                "followable": true
+            },
+            {
+                "module": "chai",
+                "resolved": "node_modules/chai/index.js",
+                "moduleSystem": "es6",
+                "coreModule": false,
+                "followable": true
+            },
+            {
+                "module": "lodash",
+                "resolved": "node_modules/lodash/lodash.js",
+                "moduleSystem": "es6",
+                "coreModule": false,
+                "followable": true
+            },
+            {
+                "module": "mocha",
+                "resolved": "node_modules/mocha/index.js",
+                "moduleSystem": "es6",
+                "coreModule": false,
+                "followable": true
+            },
+            {
+                "module": "os",
+                "resolved": "os",
+                "moduleSystem": "es6",
+                "coreModule": true,
+                "followable": false
+            }
+        ]
+    }
+]
