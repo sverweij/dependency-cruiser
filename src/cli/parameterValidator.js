@@ -1,10 +1,10 @@
 const _         = require("lodash");
 const safeRegex = require('safe-regex');
 
-const utl       = require("./utl");
+const utl       = require("../utl");
 
 const MODULE_SYSTEM_LIST_RE  = /^((cjs|amd|es6)(,|$))+$/gi;
-const OUTPUT_TYPES_RE        = /(json)/g;
+const OUTPUT_TYPES_RE        = /(csv|json)/g;
 
 function validateFileExistence(pDirOrFile) {
     if (!utl.fileExists(pDirOrFile)) {
@@ -31,9 +31,9 @@ function validateExcludePattern(pExclude) {
 }
 
 function validateOutputType(pOutputType) {
-    if (pOutputType && !OUTPUT_TYPES_RE.test(pOutputType)) {
+    if (Boolean(pOutputType) && !OUTPUT_TYPES_RE.test(pOutputType)) {
         throw Error(
-            `${pOutputType} is not a valid output type.`
+            `'${pOutputType}' is not a valid output type.`
         );
     }
 }

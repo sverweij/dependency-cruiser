@@ -83,25 +83,94 @@ depend:
 
 # cjs dependencies
 src/cli.js: \
-	package.json
+	package.json \
+	src/main.js
+
+src/main.js: \
+	src/extract/extractor-composite.js \
+	src/optionNormalizer.js \
+	src/parameterValidator.js \
+	src/render/csvRenderer.js
+
+src/extract/extractor-composite.js: \
+	src/extract/extractor.js \
+	src/utl.js
+
+src/extract/extractor.js: \
+	src/extract/resolver.js \
+	src/utl.js
+
+src/extract/resolver.js: \
+	src/utl.js
+
+src/parameterValidator.js: \
+	src/utl.js
 
 # cjs dependencies
 ALL_SRC=src/cli.js \
-	package.json
+	package.json \
+	src/extract/extractor-composite.js \
+	src/extract/extractor.js \
+	src/extract/resolver.js \
+	src/main.js \
+	src/optionNormalizer.js \
+	src/parameterValidator.js \
+	src/render/csvRenderer.js \
+	src/utl.js
+# cjs dependencies
+test/main.spec.js: \
+	src/main.js \
+	test/utl/testutensils.js
+
+src/main.js: \
+	src/extract/extractor-composite.js \
+	src/optionNormalizer.js \
+	src/parameterValidator.js \
+	src/render/csvRenderer.js
+
+src/extract/extractor-composite.js: \
+	src/extract/extractor.js \
+	src/utl.js
+
+src/extract/extractor.js: \
+	src/extract/resolver.js \
+	src/utl.js
+
+src/extract/resolver.js: \
+	src/utl.js
+
+src/parameterValidator.js: \
+	src/utl.js
+
 # cjs dependencies
 test/extractor-composite.spec.js: \
-	src/extractor-composite.js
+	src/extract/extractor-composite.js
 
-src/extractor-composite.js: \
-	src/extractor.js \
-	src/utl.js
+src/extract/extractor-composite.js: \
+	src/extract/extractor.js \
+	src/utl/index.js
 
-src/extractor.js: \
-	src/resolver.js \
-	src/utl.js
+src/extract/extractor.js: \
+	src/extract/resolver.js \
+	src/utl/index.js
 
-src/resolver.js: \
-	src/utl.js
+src/extract/resolver.js: \
+	src/utl/index.js
 
 test/extractor.spec.js: \
-	src/extractor.js
+	src/extract/extractor.js
+
+test/main.spec.js: \
+	src/cli/index.js \
+	test/utl/testutensils.js
+
+src/cli/index.js: \
+	src/cli/optionNormalizer.js \
+	src/cli/parameterValidator.js \
+	src/extract/extractor-composite.js \
+	src/render/csvRenderer.js \
+	src/render/jsonRenderer.js
+
+src/cli/parameterValidator.js: \
+	src/utl/index.js
+

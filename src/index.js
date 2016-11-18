@@ -1,5 +1,5 @@
 const program  = require("commander");
-const main     = require("./main");
+const cli      = require("./cli");
 const $package = require("../package.json");
 const semver   = require("semver");
 
@@ -22,7 +22,7 @@ program
     .parse(process.argv);
 
 if (Boolean(program.args[0])) {
-    main.main(
+    cli.main(
         program.args[0],
         program
     );

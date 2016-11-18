@@ -3,7 +3,7 @@
 const path    = require('path');
 const _       = require('lodash');
 const resolve = require('resolve');
-const utl     = require('./utl');
+const utl     = require('../utl');
 
 const isRelativeModuleName = pString => pString.startsWith(".");
 

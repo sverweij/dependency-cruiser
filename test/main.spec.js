@@ -1,6 +1,6 @@
 "use strict";
 const assert    = require("assert");
-const main      = require("../src/main.js");
+const main      = require("../src/cli");
 const fs        = require("fs");
 const tst       = require("./utl/testutensils");
 const path      = require("path");

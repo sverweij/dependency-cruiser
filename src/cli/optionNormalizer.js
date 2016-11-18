@@ -14,10 +14,6 @@ function normalizeModuleSystems(pSystemList) {
     return DEFAULT_MODULE_SYSTEMS;
 }
 
-function normalizeOutputType() {
-    return "json";
-}
-
 function normalize(pOptions){
     pOptions = _.defaults(pOptions, {
         exclude: "",
@@ -27,7 +23,6 @@ function normalize(pOptions){
     });
 
     pOptions.moduleSystems = normalizeModuleSystems(pOptions.system);
-    pOptions.outputType    = normalizeOutputType(pOptions.outputType);
     return pOptions;
 }
 

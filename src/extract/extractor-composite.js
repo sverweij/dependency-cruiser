@@ -5,7 +5,7 @@ const path      = require('path');
 const _         = require('lodash');
 
 const extractor = require('./extractor');
-const utl       = require('./utl');
+const utl       = require('../utl');
 
 function getAllJSFilesFromDir (pDirName, pOptions) {
     return fs.readdirSync(pDirName)

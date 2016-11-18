@@ -7,7 +7,7 @@ const fs          = require('fs');
 const _           = require('lodash');
 const path        = require('path');
 const resolver    = require('./resolver');
-const utl         = require('./utl');
+const utl         = require('../utl');
 
 function getASTBare(pFileName) {
     const lFile = fs.readFileSync(pFileName, 'utf8');

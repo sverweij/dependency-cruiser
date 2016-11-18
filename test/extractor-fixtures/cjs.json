@@ -6,8 +6,8 @@
         },
         "expected": [
             {
-                "module": "../src/extractor",
-                "resolved": "src/extractor.js",
+                "module": "../src/extract/extractor",
+                "resolved": "src/extract/extractor.js",
                 "moduleSystem": "cjs",
                 "coreModule": false,
                 "followable": true

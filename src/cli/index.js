@@ -1,10 +1,13 @@
 const fs                 = require("fs");
-const extract            = require("./extractor-composite").extract;
+const extract            = require("../extract/extractor-composite").extract;
 const validateParameters = require("./parameterValidator").validate;
 const normalizeOptions   = require("./optionNormalizer").normalize;
+const renderCsv          = require("../render/csvRenderer").render;
+const renderJson         = require("../render/jsonRenderer").render;
 
-const TYPE_TO_RENDERER       = {
-    "json": pInput => JSON.stringify(pInput, null, "  ")
+const TYPE2RENDERER      = {
+    "json": renderJson,
+    "csv": renderCsv
 };
 
 function writeToFile(pOutputTo, pDependencyString) {
@@ -36,7 +39,7 @@ exports.main = (pDirOrFile, pOptions) => {
             extract(
                 pDirOrFile,
                 pOptions,
-                TYPE_TO_RENDERER[pOptions.outputType]
+                TYPE2RENDERER[pOptions.outputType]
             )
         );
     } catch (e) {

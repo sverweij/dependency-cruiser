@@ -1,5 +1,5 @@
 const expect               = require('chai').expect;
-const extractor            = require('../src/extractor');
+const extractor            = require('../src/extract/extractor');
 const cjsFixtures          = require('./extractor-fixtures/cjs.json');
 const es6Fixtures          = require('./extractor-fixtures/es6.json');
 const amdFixtures          = require('./extractor-fixtures/amd.json');
