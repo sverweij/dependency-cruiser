@@ -13,3 +13,7 @@ visualize javascript dependencies. ES6, CommonJS, AMD.
     -M, --system <items>     list of module systems (default: amd,cjs,es6)
     -T, --output-type <type> output type (default:json)
 ```
+
+
+[![build status](https://gitlab.com/sverweij/dependency-cruiser/badges/develop/build.svg)](https://gitlab.com/sverweij/dependency-cruiser/commits/develop)
+[![coverage report](https://gitlab.com/sverweij/dependency-cruiser/badges/develop/coverage.svg)](https://gitlab.com/sverweij/dependency-cruiser/commits/develop)
