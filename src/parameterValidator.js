@@ -4,6 +4,7 @@ const safeRegex = require('safe-regex');
 const utl       = require("./utl");
 
 const MODULE_SYSTEM_LIST_RE  = /^((cjs|amd|es6)(,|$))+$/gi;
+const OUTPUT_TYPES_RE        = /(json)/g;
 
 function validateFileExistence(pDirOrFile) {
     if (!utl.fileExists(pDirOrFile)) {
@@ -29,11 +30,20 @@ function validateExcludePattern(pExclude) {
     }
 }
 
+function validateOutputType(pOutputType) {
+    if (pOutputType && !OUTPUT_TYPES_RE.test(pOutputType)) {
+        throw Error(
+            `${pOutputType} is not a valid output type.`
+        );
+    }
+}
+
 function validateParameters(pDirOrFile, pOptions) {
     validateFileExistence(pDirOrFile);
     if (Boolean(pOptions)) {
         validateSystems(pOptions.system);
         validateExcludePattern(pOptions.exclude);
+        validateOutputType(pOptions.outputType);
     }
 }
 
