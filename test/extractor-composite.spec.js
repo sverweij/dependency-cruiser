@@ -7,7 +7,7 @@ function runRecursiveFixture(pFixture) {
     if (!Boolean(pFixture.ignore)){
         it(pFixture.title, () => {
             expect(
-                extractor.extractRecursive(
+                extractor.extract(
                     pFixture.input.fileName,
                     pFixture.input.options
                 )

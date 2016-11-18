@@ -62,5 +62,16 @@ function extractRecursiveDir(pDirName, pOptions) {
     );
 }
 
-exports.extractRecursive    = extractRecursive;
-exports.extractRecursiveDir = extractRecursiveDir;
+function extract(pDirOrFile, pOptions, pCallback) {
+    let lRetvalToTransform = {};
+    let lCallback = pCallback ? pCallback : pInput => pInput;
+
+    if (fs.statSync(pDirOrFile).isDirectory()) {
+        lRetvalToTransform = extractRecursiveDir(pDirOrFile, pOptions);
+    } else {
+        lRetvalToTransform = extractRecursive(pDirOrFile, pOptions);
+    }
+    return lCallback(lRetvalToTransform);
+}
+
+exports.extract = extract;
