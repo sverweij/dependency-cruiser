@@ -37,3 +37,5 @@ function render(pInput) {
 }
 
 exports.render = render;
+
+/* eslint arrow-body-style: 0 */
