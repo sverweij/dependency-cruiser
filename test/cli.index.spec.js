@@ -48,6 +48,17 @@ const testPairs = [
         },
         expect: "{{moduleType}}.dir.filtered.mk",
         cleanup: true
+    },
+    {
+        description: "dependency-cruise -f test/output/{{moduleType}}.dir.filtered.mk -x node_modules test/fixtures/{{moduleType}}",
+        dirOrFile: "test/fixtures/{{moduleType}}",
+        options: {
+            outputTo: path.join(OUT_DIR, "{{moduleType}}.dir.filtered.html"),
+            outputType: "html",
+            exclude: "node_modules"
+        },
+        expect: "{{moduleType}}.dir.filtered.html",
+        cleanup: true
     }
 ];
 
@@ -123,13 +134,13 @@ describe("#main", () => {
 
     describe("specials", () => {
 
-        it("dependency-cruise -f - test/fixtures/cjs - outputs to stdout", () => {
+        it("dependency-cruise test/fixtures/cjs - outputs to stdout", () => {
             let lCapturedStdout = "";
             const unhookIntercept = intercept(pText => {
                 lCapturedStdout += pText;
             });
 
-            main.main("test/fixtures/cjs", {outputTo: "-"});
+            main.main("test/fixtures/cjs");
             unhookIntercept();
             fs.writeFileSync(
                 path.join(OUT_DIR, "cjs.dir.stdout.mk"),
@@ -143,13 +154,13 @@ describe("#main", () => {
             );
         });
 
-        it("dependency-cruise --json test/fixtures/cjs - outputs a slew of json to stdout", () => {
+        it("dependency-cruise --output-type json test/fixtures/cjs - outputs a slew of json to stdout", () => {
             let lCapturedStdout = "";
             const unhookIntercept = intercept(pText => {
                 lCapturedStdout += pText;
             });
 
-            main.main("test/fixtures/cjs", {outputType: "json"});
+            main.main("test/fixtures/cjs", {outputTo: "-", outputType: 'json'});
             unhookIntercept();
             fs.writeFileSync(
                 path.join(OUT_DIR, "cjs.dir.stdout.json"),
@@ -209,6 +220,35 @@ describe("#main", () => {
             return assert.equal(
                 lCapturedStderr,
                 "ERROR: Invalid module system list: 'invalidmodulesystem'\n"
+            );
+        });
+
+        it("dependency-cruise -f /dev/null -T invalidoutputtype - generates error", () => {
+            let lCapturedStderr = "";
+            const unhookInterceptStdOut = intercept(() => {
+                // This space intentionally left empty
+            });
+
+            const unhookInterceptStdErr = intercept(pText => {
+                lCapturedStderr += pText;
+            });
+
+            main.main(
+                "test/fixtures",
+                {
+                    outputTo: path.join(OUT_DIR, "/dev/null"),
+                    outputType: "invalidoutputtype"
+                }
+            );
+            unhookInterceptStdOut();
+            unhookInterceptStdErr();
+            intercept(pText => {
+                lCapturedStderr += pText;
+            })();
+
+            return assert.equal(
+                lCapturedStderr,
+                "ERROR: 'invalidoutputtype' is not a valid output type.\n"
             );
         });
 

@@ -16,6 +16,8 @@ help:
 	@echo
 
 # production rules
+src/render/%.template.js: src/render/%.template.hbs
+	handlebars --commonjs handlebars/runtime -f $@ $<
 
 # "phony" targets
 prerequisites:
@@ -75,92 +77,56 @@ check: lint test
 fullcheck: check outdated nsp
 
 depend:
-	$(MAKEDEPEND) src/cli.js
-	$(MAKEDEPEND) --append --flat-define ALL_SRC src/cli.js
+	$(MAKEDEPEND) src/index.js
+	$(MAKEDEPEND) --append --flat-define ALL_SRC src/index.js
 	$(MAKEDEPEND) --append test
 
 # DO NOT DELETE THIS LINE -- js-makedepend depends on it.
 
 # cjs dependencies
-src/cli.js: \
+src/index.js: \
 	package.json \
-	src/main.js
+	src/cli/index.js
 
-src/main.js: \
+src/cli/index.js: \
+	src/cli/optionNormalizer.js \
+	src/cli/parameterValidator.js \
 	src/extract/extractor-composite.js \
-	src/optionNormalizer.js \
-	src/parameterValidator.js \
-	src/render/csvRenderer.js
+	src/render/htmlRenderer.js \
+	src/render/jsonRenderer.js
 
 src/extract/extractor-composite.js: \
 	src/extract/extractor.js \
-	src/utl.js
+	src/utl/index.js
 
 src/extract/extractor.js: \
 	src/extract/resolver.js \
-	src/utl.js
+	src/utl/index.js
 
 src/extract/resolver.js: \
-	src/utl.js
+	src/utl/index.js
 
-src/parameterValidator.js: \
-	src/utl.js
+src/render/htmlRenderer.js: \
+	src/render/html.template.js
+
+src/cli/parameterValidator.js: \
+	src/utl/index.js
 
 # cjs dependencies
-ALL_SRC=src/cli.js \
+ALL_SRC=src/index.js \
 	package.json \
+	src/cli/index.js \
+	src/cli/optionNormalizer.js \
+	src/cli/parameterValidator.js \
 	src/extract/extractor-composite.js \
 	src/extract/extractor.js \
 	src/extract/resolver.js \
-	src/main.js \
-	src/optionNormalizer.js \
-	src/parameterValidator.js \
-	src/render/csvRenderer.js \
-	src/utl.js
+	src/render/html.template.js \
+	src/render/htmlRenderer.js \
+	src/render/jsonRenderer.js \
+	src/utl/index.js
 # cjs dependencies
-test/main.spec.js: \
-	src/main.js \
-	test/utl/testutensils.js
-
-src/main.js: \
-	src/extract/extractor-composite.js \
-	src/optionNormalizer.js \
-	src/parameterValidator.js \
-	src/render/csvRenderer.js
-
-src/extract/extractor-composite.js: \
-	src/extract/extractor.js \
-	src/utl.js
-
-src/extract/extractor.js: \
-	src/extract/resolver.js \
-	src/utl.js
-
-src/extract/resolver.js: \
-	src/utl.js
-
-src/parameterValidator.js: \
-	src/utl.js
-
-# cjs dependencies
-test/extractor-composite.spec.js: \
-	src/extract/extractor-composite.js
-
-src/extract/extractor-composite.js: \
-	src/extract/extractor.js \
-	src/utl/index.js
-
-src/extract/extractor.js: \
-	src/extract/resolver.js \
-	src/utl/index.js
-
-src/extract/resolver.js: \
-	src/utl/index.js
-
-test/extractor.spec.js: \
-	src/extract/extractor.js
-
-test/main.spec.js: \
+test/cli.index.spec.js: \
 	src/cli/index.js \
 	test/utl/testutensils.js
 
@@ -168,9 +134,29 @@ src/cli/index.js: \
 	src/cli/optionNormalizer.js \
 	src/cli/parameterValidator.js \
 	src/extract/extractor-composite.js \
-	src/render/csvRenderer.js \
+	src/render/htmlRenderer.js \
 	src/render/jsonRenderer.js
+
+src/extract/extractor-composite.js: \
+	src/extract/extractor.js \
+	src/utl/index.js
+
+src/extract/extractor.js: \
+	src/extract/resolver.js \
+	src/utl/index.js
+
+src/extract/resolver.js: \
+	src/utl/index.js
+
+src/render/htmlRenderer.js: \
+	src/render/html.template.js
 
 src/cli/parameterValidator.js: \
 	src/utl/index.js
+
+test/extract.extractor-composite.spec.js: \
+	src/extract/extractor-composite.js
+
+test/extract.extractor.spec.js: \
+	src/extract/extractor.js
 

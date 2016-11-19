@@ -33,13 +33,16 @@ function extractRecursive (pFileName, pOptions, pVisited) {
         source: pFileName,
         dependencies: lDependencies
     });
+
     lDependencies
         .filter(pDep => pDep.followable && !pVisited.has(pDep.resolved))
         .forEach(
             pDep => {
-                lRetval = lRetval.concat(
-                    extractRecursive(pDep.resolved, pOptions, pVisited)
-                );
+                if (!pVisited.has(pDep.resolved)){
+                    lRetval = lRetval.concat(
+                        extractRecursive(pDep.resolved, pOptions, pVisited)
+                    );
+                }
             }
         );
     return lRetval;

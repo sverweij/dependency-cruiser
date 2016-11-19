@@ -1,0 +1,135 @@
+<style media="screen">
+    html {
+        font-family: sans-serif;
+        font-size: 10pt;
+    }
+    table, td.controls {
+        transition-duration: 0.4s;
+    }
+    table, th, td{
+        border: solid black 1px;
+        border-collapse: collapse;
+        font-size: inherit;
+    }
+    th{
+        text-align:start;
+        vertical-align: bottom;
+        max-width: 1em;
+        max-height: 30em;
+        height: 20em;
+        font-weight: normal;
+        white-space: nowrap;
+        overflow: hidden;
+    }
+    th div {
+        transform: rotateZ(-90deg);
+        transform-origin: 0.5em;
+        text-align: start;
+        height: 1em;
+        width: 30em;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+    }
+    td {
+        text-align: center;
+        font-style: italic;
+    }
+    td.first-cell {
+        text-align: left;
+        font-style: normal;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+    }
+    td.top-left {
+        border-top: solid 1px transparent;
+        border-left: solid 1px transparent;
+    }
+    td.top-right {
+        border-top: solid 1px transparent;
+        border-right: solid 1px transparent;
+    }
+    td.bottom-left {
+        border-bottom: solid 1px transparent;
+        border-left: solid 1px transparent;
+    }
+    td.bottom-right {
+        border-bottom: solid 1px transparent;
+        border-right: solid 1px transparent;
+    }
+    tbody tr:hover {
+        background-color: lightgrey;
+    }
+    #table-rotated:target {
+        transform: rotateZ(45deg);
+        transform-origin: bottom left;
+    }
+    #table-rotated:target #unrotate {
+        opacity: 1;
+    }
+    #table-rotated:target #rotate {
+        opacity: 0;
+    }
+    #unrotate {
+        opacity: 0;
+    }
+    #rotate {
+        opacity: 1;
+    }
+    .controls {
+        opacity: 0.2;
+        vertical-align: bottom;
+        padding: 0.5em;
+    }
+    .controls:hover {
+        opacity: 1;
+    }
+    .controls a {
+        font-style: normal;
+        text-decoration: none;
+        background-color: #eee;
+        padding: 0.2em 0.5em 0.2em 0.5em;
+    }
+    .cell-true {
+        background-color: black;
+        opacity: 0.5;
+    }
+    .cell-false {
+        background-color: white;
+        opacity: 0.5;
+    }
+    .cell-error {
+        background-color: red;
+        opacity: 0.5;
+    }
+</style>
+<table id="table-rotated">
+    <thead>
+        <tr>
+            <td class="controls top-left">
+                <a id="rotate" href="#table-rotated">rotate</a>
+                <a id="unrotate" href="#">rotate back</a>
+            </td>
+            {{#each things}}<th><div>{{source}}</div></th>{{/each}}
+            <td class="top-right"></td>
+        </tr>
+    </thead>
+    <tbody>
+        {{#each things}}
+        <tr>
+            <td class="first-cell">{{source}}</td>
+            {{#each incidences}}<td class="cell cell-{{incidence}}" {{#if incidence}}title="{{../source}} ->
+{{to}}"{{/if}}></td>{{/each}}
+            <td class="first-cell">{{source}}</td>
+        </tr>
+        {{/each}}
+    </tbody>
+    <tfoot>
+        <tr>
+            <td class="bottom-left"></td>
+            {{#each things}}<th><div>{{source}}</div></th>{{/each}}
+            <td class="bottom-right"></td>
+        </tr>
+    </tfoot>
+</table>

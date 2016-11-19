@@ -4,7 +4,7 @@ const safeRegex = require('safe-regex');
 const utl       = require("../utl");
 
 const MODULE_SYSTEM_LIST_RE  = /^((cjs|amd|es6)(,|$))+$/gi;
-const OUTPUT_TYPES_RE        = /(csv|json)/g;
+const OUTPUT_TYPES_RE        = /(html|json)/g;
 
 function validateFileExistence(pDirOrFile) {
     if (!utl.fileExists(pDirOrFile)) {
@@ -31,9 +31,10 @@ function validateExcludePattern(pExclude) {
 }
 
 function validateOutputType(pOutputType) {
-    if (Boolean(pOutputType) && !OUTPUT_TYPES_RE.test(pOutputType)) {
+    // console.error(`|${pOutputType}|${OUTPUT_TYPES_RE.test(pOutputType)}`);
+    if (Boolean(pOutputType) && !(pOutputType.match(OUTPUT_TYPES_RE))) {
         throw Error(
-            `'${pOutputType}' is not a valid output type.`
+            `'${pOutputType}' is not a valid output type.\n`
         );
     }
 }

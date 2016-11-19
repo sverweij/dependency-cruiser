@@ -2,7 +2,7 @@
     {
         "title": "test on extractor.spec.js",
         "input": {
-            "fileName": "test/extractor.spec.js"
+            "fileName": "test/extract.extractor.spec.js"
         },
         "expected": [
             {

@@ -2,5 +2,6 @@ node_modules
 coverage
 tmp
 utl
+src/render/*.template.js
 test/fixtures/**
 test/extractor-fixtures/**
