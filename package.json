@@ -1,7 +1,7 @@
 {
   "name": "dependency-cruiser",
-  "version": "1.0.0",
-  "description": "visualize and validate javascript dependencies",
+  "version": "1.0.1",
+  "description": "Visualize and validate javascript dependencies. With your rules. ES6, CommonJS, AMD",
   "bin": {
     "dependency-cruiser": "bin/dependency-cruise",
     "dependency-cruise": "bin/dependency-cruise",
@@ -20,6 +20,7 @@
     "javascript",
     "dependencies",
     "ES6",
+    "ES2015",
     "AMD",
     "CommonJS",
     "validation"
