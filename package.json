@@ -47,6 +47,7 @@
     "commander": "2.9.0",
     "handlebars": "4.0.6",
     "lodash": "4.17.2",
+    "resolve": "1.1.7",
     "safe-regex": "1.1.0",
     "semver": "5.3.0"
   },
