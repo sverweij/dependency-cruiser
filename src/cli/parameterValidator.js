@@ -4,7 +4,7 @@ const safeRegex = require('safe-regex');
 const utl       = require("../utl");
 
 const MODULE_SYSTEM_LIST_RE  = /^((cjs|amd|es6)(,|$))+$/gi;
-const OUTPUT_TYPES_RE        = /(html|json)/g;
+const OUTPUT_TYPES_RE        = /(html|dot|json)/g;
 
 function validateFileExistence(pDirOrFile) {
     if (!utl.fileExists(pDirOrFile)) {

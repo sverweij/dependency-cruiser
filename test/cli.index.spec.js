@@ -59,6 +59,17 @@ const testPairs = [
         },
         expect: "{{moduleType}}.dir.filtered.html",
         cleanup: true
+    },
+    {
+        description: "dependency-cruise -f test/output/{{moduleType}}.dir.filtered.mk -x node_modules test/fixtures/{{moduleType}}",
+        dirOrFile: "test/fixtures/{{moduleType}}",
+        options: {
+            outputTo: path.join(OUT_DIR, "{{moduleType}}.dir.filtered.dot"),
+            outputType: "dot",
+            exclude: "node_modules"
+        },
+        expect: "{{moduleType}}.dir.filtered.dot",
+        cleanup: true
     }
 ];
 

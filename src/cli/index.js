@@ -2,12 +2,14 @@ const fs                 = require("fs");
 const extract            = require("../extract/extractor-composite").extract;
 const validateParameters = require("./parameterValidator").validate;
 const normalizeOptions   = require("./optionNormalizer").normalize;
-const renderHtml          = require("../render/htmlRenderer").render;
+const renderHtml         = require("../render/htmlRenderer").render;
 const renderJson         = require("../render/jsonRenderer").render;
+const renderDot          = require("../render/dotRenderer").render;
 
 const TYPE2RENDERER      = {
     "json": renderJson,
-    "html": renderHtml
+    "html": renderHtml,
+    "dot": renderDot
 };
 
 function writeToFile(pOutputTo, pDependencyString) {

@@ -17,7 +17,7 @@ program
     .option("-f, --output-to <file>", "file to write output to; - for stdout (default: -)")
     .option("-x, --exclude <regex>", "a regular expression for excluding modules")
     .option("-M, --system <items>", "list of module systems (default: amd,cjs,es6)")
-    .option("-T, --output-type <type>", "output type (default:json)")
+    .option("-T, --output-type <type>", "output type - html|dot|json (default:json)")
     .arguments("<directory-or-file>")
     .parse(process.argv);
 
