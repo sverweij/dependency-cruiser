@@ -1,7 +1,7 @@
-# Dependency cruiser ![Dependency cruiser](https://github.com/sverweij/dependency-cruiser/blob/master/doc/assets/ZKH-Dependency-recolored-160.png)
+# Dependency cruiser ![Dependency cruiser](https://raw.githubusercontent.com/sverweij/dependency-cruiser/master/doc/assets/ZKH-Dependency-recolored-160.png)
 _Visualize and validate javascript dependencies. With your rules._ ES6, CommonJS, AMD.
 
-![Snazzy dot output to whet your appetite](https://github.com/sverweij/dependency-cruiser/blob/master/doc/assets/sample-dot-output.png)
+![Snazzy dot output to whet your appetite](https://raw.githubusercontent.com/sverweij/dependency-cruiser/master/doc/assets/sample-dot-output.png)
 
 ## Installation
 Dependency cruiser works most comfortably if you install it globally
