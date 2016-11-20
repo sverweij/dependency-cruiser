@@ -5,11 +5,13 @@ const normalizeOptions   = require("./optionNormalizer").normalize;
 const renderHtml         = require("../render/htmlRenderer").render;
 const renderJson         = require("../render/jsonRenderer").render;
 const renderDot          = require("../render/dotRenderer").render;
+const renderCsv          = require("../render/csvRenderer").render;
 
 const TYPE2RENDERER      = {
     "json": renderJson,
     "html": renderHtml,
-    "dot": renderDot
+    "dot": renderDot,
+    "csv": renderCsv
 };
 
 function writeToFile(pOutputTo, pDependencyString) {
@@ -20,7 +22,7 @@ function writeToFile(pOutputTo, pDependencyString) {
             {encoding: "utf8", flag: "w"}
         );
     } catch (e) {
-        process.stderr.write(`Writing to ${pOutputTo} didn't work. ${e}`);
+        process.stderr.write(`ERROR: Writing to '${pOutputTo}' didn't work. ${e}`);
     }
 }
 

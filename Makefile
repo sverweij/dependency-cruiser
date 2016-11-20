@@ -4,7 +4,11 @@ GIT_CURRENT_BRANCH=$(shell utl/get_current_git_branch.sh)
 GIT_DEPLOY_FROM_BRANCH=master
 NPM=npm
 NODE=node
+RM=rm -f
 MAKEDEPEND=node_modules/.bin/js-makedepend --exclude "node_modules|fixtures|extractor-fixtures" --system cjs
+GENERATED_SOURCES=src/render/csv.template.js \
+	src/render/dot.template.js \
+	src/render/html.template.js
 
 .PHONY: help dev-build install check fullcheck mostlyclean clean lint cover prerequisites static-analysis test update-dependencies run-update-dependencies depend
 
@@ -23,7 +27,7 @@ src/render/%.template.js: src/render/%.template.hbs
 prerequisites:
 	$(NPM) install
 
-dev-build: bin/dependency-cruise $(ALL_SRC)
+dev-build: bin/dependency-cruise $(GENERATED_SOURCES) $(ALL_SRC)
 
 lint:
 	$(NPM) run lint
@@ -81,6 +85,9 @@ depend:
 	$(MAKEDEPEND) --append --flat-define ALL_SRC src/index.js
 	$(MAKEDEPEND) --append test
 
+clean:
+	$(RM) $(GENERATED_SOURCES)
+
 # DO NOT DELETE THIS LINE -- js-makedepend depends on it.
 
 # cjs dependencies
@@ -92,6 +99,8 @@ src/cli/index.js: \
 	src/cli/optionNormalizer.js \
 	src/cli/parameterValidator.js \
 	src/extract/extractor-composite.js \
+	src/render/csvRenderer.js \
+	src/render/dotRenderer.js \
 	src/render/htmlRenderer.js \
 	src/render/jsonRenderer.js
 
@@ -106,7 +115,15 @@ src/extract/extractor.js: \
 src/extract/resolver.js: \
 	src/utl/index.js
 
+src/render/csvRenderer.js: \
+	src/render/csv.template.js \
+	src/render/dependencyToIncidenceTransformer.js
+
+src/render/dotRenderer.js: \
+	src/render/dot.template.js
+
 src/render/htmlRenderer.js: \
+	src/render/dependencyToIncidenceTransformer.js \
 	src/render/html.template.js
 
 src/cli/parameterValidator.js: \
@@ -121,6 +138,11 @@ ALL_SRC=src/index.js \
 	src/extract/extractor-composite.js \
 	src/extract/extractor.js \
 	src/extract/resolver.js \
+	src/render/csv.template.js \
+	src/render/csvRenderer.js \
+	src/render/dependencyToIncidenceTransformer.js \
+	src/render/dot.template.js \
+	src/render/dotRenderer.js \
 	src/render/html.template.js \
 	src/render/htmlRenderer.js \
 	src/render/jsonRenderer.js \
@@ -134,6 +156,8 @@ src/cli/index.js: \
 	src/cli/optionNormalizer.js \
 	src/cli/parameterValidator.js \
 	src/extract/extractor-composite.js \
+	src/render/csvRenderer.js \
+	src/render/dotRenderer.js \
 	src/render/htmlRenderer.js \
 	src/render/jsonRenderer.js
 
@@ -148,15 +172,25 @@ src/extract/extractor.js: \
 src/extract/resolver.js: \
 	src/utl/index.js
 
+src/render/csvRenderer.js: \
+	src/render/csv.template.js \
+	src/render/dependencyToIncidenceTransformer.js
+
+src/render/dotRenderer.js: \
+	src/render/dot.template.js
+
 src/render/htmlRenderer.js: \
+	src/render/dependencyToIncidenceTransformer.js \
 	src/render/html.template.js
 
 src/cli/parameterValidator.js: \
 	src/utl/index.js
+
+test/cli.optionNormalizer.js: \
+	src/cli/optionNormalizer.js
 
 test/extract.extractor-composite.spec.js: \
 	src/extract/extractor-composite.js
 
 test/extract.extractor.spec.js: \
 	src/extract/extractor.js
-

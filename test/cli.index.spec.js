@@ -50,7 +50,7 @@ const testPairs = [
         cleanup: true
     },
     {
-        description: "dependency-cruise -f test/output/{{moduleType}}.dir.filtered.mk -x node_modules test/fixtures/{{moduleType}}",
+        description: "html",
         dirOrFile: "test/fixtures/{{moduleType}}",
         options: {
             outputTo: path.join(OUT_DIR, "{{moduleType}}.dir.filtered.html"),
@@ -61,7 +61,7 @@ const testPairs = [
         cleanup: true
     },
     {
-        description: "dependency-cruise -f test/output/{{moduleType}}.dir.filtered.mk -x node_modules test/fixtures/{{moduleType}}",
+        description: "dot",
         dirOrFile: "test/fixtures/{{moduleType}}",
         options: {
             outputTo: path.join(OUT_DIR, "{{moduleType}}.dir.filtered.dot"),
@@ -70,7 +70,19 @@ const testPairs = [
         },
         expect: "{{moduleType}}.dir.filtered.dot",
         cleanup: true
+    },
+    {
+        description: "csv",
+        dirOrFile: "test/fixtures/{{moduleType}}",
+        options: {
+            outputTo: path.join(OUT_DIR, "{{moduleType}}.dir.filtered.csv"),
+            outputType: "csv",
+            exclude: "node_modules"
+        },
+        expect: "{{moduleType}}.dir.filtered.csv",
+        cleanup: true
     }
+
 ];
 
 function deleteDammit(pFileName) {
@@ -260,6 +272,34 @@ describe("#main", () => {
             return assert.equal(
                 lCapturedStderr,
                 "ERROR: 'invalidoutputtype' is not a valid output type.\n"
+            );
+        });
+
+        it("dependency-cruise -f file/you/cant/write/to - generates error", () => {
+            let lCapturedStderr = "";
+            const unhookInterceptStdOut = intercept(() => {
+                // This space intentionally left empty
+            });
+
+            const unhookInterceptStdErr = intercept(pText => {
+                lCapturedStderr += pText;
+            });
+
+            main.main(
+                "test/fixtures",
+                {
+                    outputTo: path.join(OUT_DIR, "file/you/cant/write/to")
+                }
+            );
+            unhookInterceptStdOut();
+            unhookInterceptStdErr();
+            intercept(pText => {
+                lCapturedStderr += pText;
+            })();
+
+            return assert.equal(
+                lCapturedStderr,
+                "ERROR: Writing to 'test/output/file/you/cant/write/to' didn't work. Error: ENOENT: no such file or directory, open 'test/output/file/you/cant/write/to'"
             );
         });
 

@@ -8,12 +8,12 @@ digraph "dependency-cruiser output"{
     edge [color=black arrowhead=normal fontname="Helvetica" fontsize="9"]
 
     {{#each things}}
-    "{{source}}"
+    "{{{source}}}"
     {{/each}}
     {{#each things}}
-    "{{source}}" -> {
+    "{{{source}}}" -> {
         {{#each dependencies}}
-        "{{resolved}}"
+        "{{{resolved}}}"
         {{/each}}
     }
     {{/each}}
