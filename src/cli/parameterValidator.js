@@ -31,11 +31,28 @@ function validateExcludePattern(pExclude) {
 }
 
 function validateOutputType(pOutputType) {
-    // console.error(`|${pOutputType}|${OUTPUT_TYPES_RE.test(pOutputType)}`);
     if (Boolean(pOutputType) && !(pOutputType.match(OUTPUT_TYPES_RE))) {
         throw Error(
             `'${pOutputType}' is not a valid output type.\n`
         );
+    }
+}
+
+function validateValidationCombinations(pOptions) {
+    if (
+        pOptions.hasOwnProperty("validate") &&
+        Boolean(pOptions.rulesFile) &&
+        !(Boolean(pOptions.validate))
+    ){
+        throw Error(
+            `Confused here. You passed a rules file, but don't want to validate? :-S`
+        );
+    }
+
+    if (pOptions.hasOwnProperty("rulesFile")){
+        validateFileExistence(pOptions.rulesFile);
+    } else if (pOptions.validate){
+        validateFileExistence(".dependency-cruiser.json");
     }
 }
 
@@ -45,6 +62,7 @@ function validateParameters(pDirOrFile, pOptions) {
         validateSystems(pOptions.system);
         validateExcludePattern(pOptions.exclude);
         validateOutputType(pOptions.outputType);
+        validateValidationCombinations(pOptions);
     }
 }
 

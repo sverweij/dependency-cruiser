@@ -1,4 +1,3 @@
-"use strict";
 
 const acorn       = require('acorn');
 const acorn_loose = require('acorn/dist/acorn_loose');
@@ -7,6 +6,7 @@ const fs          = require('fs');
 const _           = require('lodash');
 const path        = require('path');
 const resolver    = require('./resolver');
+const validator   = require('../validate/validator');
 const utl         = require('../utl');
 
 function getASTBare(pFileName) {
@@ -170,7 +170,13 @@ function extractDependencies(pFileName, pOptions) {
                         resolved     : lResolved.resolved,
                         moduleSystem : pDependency.moduleSystem,
                         coreModule   : lResolved.coreModule,
-                        followable   : lResolved.followable
+                        followable   : lResolved.followable,
+                        valid        : validator.validate(
+                            pOptions.validate,
+                            pOptions.rulesFile,
+                            pFileName,
+                            lResolved.resolved
+                        )
                     };
                 }
             )

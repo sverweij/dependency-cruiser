@@ -15,14 +15,16 @@
         "resolved": "test/fixtures/cjs/node_modules/somemodule/src/moar-javascript.js",
         "moduleSystem": "cjs",
         "coreModule": false,
-        "followable": true
+        "followable": true,
+        "valid": true
       },
       {
         "module": "someothermodule",
         "resolved": "test/fixtures/cjs/node_modules/somemodule/node_modules/someothermodule/main.js",
         "moduleSystem": "cjs",
         "coreModule": false,
-        "followable": true
+        "followable": true,
+        "valid": true
       }
     ]
   },
@@ -34,7 +36,8 @@
         "resolved": "path",
         "moduleSystem": "cjs",
         "coreModule": true,
-        "followable": false
+        "followable": false,
+        "valid": true
       }
     ]
   },
@@ -46,7 +49,8 @@
         "resolved": "path",
         "moduleSystem": "cjs",
         "coreModule": true,
-        "followable": false
+        "followable": false,
+        "valid": true
       }
     ]
   },
@@ -58,42 +62,48 @@
         "resolved": "test/fixtures/cjs/one_only_one.js",
         "moduleSystem": "cjs",
         "coreModule": false,
-        "followable": true
+        "followable": true,
+        "valid": true
       },
       {
         "module": "./one_only_two",
         "resolved": "test/fixtures/cjs/one_only_two.js",
         "moduleSystem": "cjs",
         "coreModule": false,
-        "followable": true
+        "followable": true,
+        "valid": true
       },
       {
         "module": "./shared",
         "resolved": "test/fixtures/cjs/shared.js",
         "moduleSystem": "cjs",
         "coreModule": false,
-        "followable": true
+        "followable": true,
+        "valid": true
       },
       {
         "module": "./sub/dir",
         "resolved": "test/fixtures/cjs/sub/dir.js",
         "moduleSystem": "cjs",
         "coreModule": false,
-        "followable": true
+        "followable": true,
+        "valid": true
       },
       {
         "module": "fs",
         "resolved": "fs",
         "moduleSystem": "cjs",
         "coreModule": true,
-        "followable": false
+        "followable": false,
+        "valid": true
       },
       {
         "module": "somemodule",
         "resolved": "test/fixtures/cjs/node_modules/somemodule/src/somemodule.js",
         "moduleSystem": "cjs",
         "coreModule": false,
-        "followable": true
+        "followable": true,
+        "valid": true
       }
     ]
   },
@@ -105,7 +115,8 @@
         "resolved": "path",
         "moduleSystem": "cjs",
         "coreModule": true,
-        "followable": false
+        "followable": false,
+        "valid": true
       }
     ]
   },
@@ -117,14 +128,16 @@
         "resolved": "test/fixtures/cjs/sub/depindir.js",
         "moduleSystem": "cjs",
         "coreModule": false,
-        "followable": true
+        "followable": true,
+        "valid": true
       },
       {
         "module": "path",
         "resolved": "path",
         "moduleSystem": "cjs",
         "coreModule": true,
-        "followable": false
+        "followable": false,
+        "valid": true
       }
     ]
   },
@@ -136,7 +149,8 @@
         "resolved": "path",
         "moduleSystem": "cjs",
         "coreModule": true,
-        "followable": false
+        "followable": false,
+        "valid": true
       }
     ]
   },
@@ -148,28 +162,32 @@
         "resolved": "test/fixtures/cjs/shared.js",
         "moduleSystem": "cjs",
         "coreModule": false,
-        "followable": true
+        "followable": true,
+        "valid": true
       },
       {
         "module": "./somedata.json",
         "resolved": "test/fixtures/cjs/somedata.json",
         "moduleSystem": "cjs",
         "coreModule": false,
-        "followable": false
+        "followable": false,
+        "valid": true
       },
       {
         "module": "./two_only_one",
         "resolved": "test/fixtures/cjs/two_only_one.js",
         "moduleSystem": "cjs",
         "coreModule": false,
-        "followable": true
+        "followable": true,
+        "valid": true
       },
       {
         "module": "http",
         "resolved": "http",
         "moduleSystem": "cjs",
         "coreModule": true,
-        "followable": false
+        "followable": false,
+        "valid": true
       }
     ]
   },
@@ -181,7 +199,8 @@
         "resolved": "test/fixtures/cjs/sub/dir.js",
         "moduleSystem": "cjs",
         "coreModule": false,
-        "followable": true
+        "followable": true,
+        "valid": true
       }
     ]
   }

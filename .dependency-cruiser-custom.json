@@ -1,0 +1,31 @@
+{
+    "allowed": [{
+            "from": "^(src|test)",
+            "to": "^(src|node_modules)"
+        },{
+            "from": "^(src|test)",
+            "to": "^(fs|path)$",
+            "comment": "because these core modules make sense here"
+        },{
+            "from": "^bin",
+            "to": "^src/index\\.js"
+        },{
+            "from": "^src/index\\.js",
+            "to": "^package\\.json$"
+        },{
+            "from": "^node_modules",
+            "to": ".+"
+        },{
+            "from": "^test",
+            "to": "^test"
+        }
+    ],
+    "forbidden": [{
+        "from": "^src",
+        "to": "^test"
+    },{
+        "from": "node_modules",
+        "to": "^(src|test|lib)",
+        "comment": "you never know"
+    }]
+}

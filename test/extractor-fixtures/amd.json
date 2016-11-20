@@ -10,14 +10,16 @@
                 "resolved": "test/extractor-fixtures/amd/root_one.js",
                 "moduleSystem": "amd",
                 "coreModule": false,
-                "followable": true
+                "followable": true,
+                "valid": true
             },
             {
                 "module": "./root_two",
                 "resolved": "test/extractor-fixtures/amd/root_two.js",
                 "moduleSystem": "amd",
                 "coreModule": false,
-                "followable": true
+                "followable": true,
+                "valid": true
             }
         ]
     },
@@ -32,14 +34,16 @@
                 "resolved": "test/extractor-fixtures/amd/module-as-a-function.js",
                 "moduleSystem": "amd",
                 "coreModule": false,
-                "followable": true
+                "followable": true,
+                "valid": true
             },
             {
                 "module": "./root_one",
                 "resolved": "test/extractor-fixtures/amd/root_one.js",
                 "moduleSystem": "amd",
                 "coreModule": false,
-                "followable": true
+                "followable": true,
+                "valid": true
             }
         ]
     },
@@ -54,21 +58,27 @@
                 "resolved": "test/extractor-fixtures/amd/root_one.js",
                 "moduleSystem": "amd",
                 "coreModule": false,
-                "followable": true
+                "followable": true,
+                "valid": true
             },
             {
                 "module": "./root_two",
                 "resolved": "test/extractor-fixtures/amd/root_two.js",
                 "moduleSystem": "amd",
                 "coreModule": false,
-                "followable": true
+                "followable": true,
+                "valid": true
             },
             {
                 "module": "./sub/dir",
                 "resolved": "test/extractor-fixtures/amd/sub/dir.js",
                 "moduleSystem": "amd",
                 "coreModule": false,
-                "followable": true
+                "followable": true,
+                "valid": true,
+                "valid": true,
+                "valid": true,
+                "valid": true
             }
         ]
     },
@@ -84,14 +94,19 @@
                 "resolved": "test/extractor-fixtures/amd/root_one.js",
                 "moduleSystem": "amd",
                 "coreModule": false,
-                "followable": true
+                "followable": true,
+                "valid": true,
+                "valid": true,
+                "valid": true
             },
             {
                 "module": "./root_two",
                 "resolved": "test/extractor-fixtures/amd/root_two.js",
                 "moduleSystem": "amd",
                 "coreModule": false,
-                "followable": true
+                "followable": true,
+                "valid": true,
+                "valid": true
             }
         ]
     },
@@ -106,28 +121,33 @@
                 "resolved": "test/extractor-fixtures/amd/root_one.js",
                 "moduleSystem": "amd",
                 "coreModule": false,
-                "followable": true
+                "followable": true,
+                "valid": true
             },
             {
                 "module": "./root_one",
                 "resolved": "test/extractor-fixtures/amd/root_one.js",
                 "moduleSystem": "cjs",
                 "coreModule": false,
-                "followable": true
+                "followable": true,
+                "valid": true,
+                "valid": true
             },
             {
                 "module": "./root_two",
                 "resolved": "test/extractor-fixtures/amd/root_two.js",
                 "moduleSystem": "amd",
                 "coreModule": false,
-                "followable": true
+                "followable": true,
+                "valid": true
             },
             {
                 "module": "./root_two",
                 "resolved": "test/extractor-fixtures/amd/root_two.js",
                 "moduleSystem": "cjs",
                 "coreModule": false,
-                "followable": true
+                "followable": true,
+                "valid": true
             }
         ]
     },
@@ -142,21 +162,25 @@
                 "resolved": "lodash",
                 "moduleSystem": "amd",
                 "coreModule": false,
-                "followable": false
+                "followable": false,
+                "valid": true
             },
             {
                 "module": "other-module-in-the-config",
                 "resolved": "other-module-in-the-config",
                 "moduleSystem": "amd",
                 "coreModule": false,
-                "followable": false
+                "followable": false,
+                "valid": true,
+                "valid": true
             },
             {
                 "module": "sub/local-module-in-drag",
                 "resolved": "test/extractor-fixtures/amd/sub/local-module-in-drag.js",
                 "moduleSystem": "amd",
                 "coreModule": false,
-                "followable": true
+                "followable": true,
+                "valid": true
             }
         ]
     }

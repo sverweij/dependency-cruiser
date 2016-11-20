@@ -13,21 +13,24 @@
                         "resolved": "lodash",
                         "moduleSystem": "amd",
                         "coreModule": false,
-                        "followable": false
+                        "followable": false,
+                        "valid": true
                     },
                     {
                         "module": "other-module-in-the-config",
                         "resolved": "other-module-in-the-config",
                         "moduleSystem": "amd",
                         "coreModule": false,
-                        "followable": false
+                        "followable": false,
+                        "valid": true
                     },
                     {
                         "module": "sub/local-module-in-drag",
                         "resolved": "test/extractor-fixtures/amd/sub/local-module-in-drag.js",
                         "moduleSystem": "amd",
                         "coreModule": false,
-                        "followable": true
+                        "followable": true,
+                        "valid": true
                     }
                 ]
             },
