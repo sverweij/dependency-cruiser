@@ -1,7 +1,7 @@
-# Dependency cruiser ![Dependency cruiser](doc/assets/ZKH-Dependency-recolored-160.png)
+# Dependency cruiser ![Dependency cruiser](https://gitlab.com/sverweij/dependency-cruiser/raw/master/doc/assets/ZKH-Dependency-recolored-160.png)
 _Visualize and validate javascript dependencies. With your rules._ ES6, CommonJS, AMD.
 
-![Snazzy dot output to whet your appetite](doc/assets/sample-dot-output.png)
+![Snazzy dot output to whet your appetite](https://gitlab.com/sverweij/dependency-cruiser/raw/master/doc/assets/sample-dot-output.png)
 
 ## Installation
 Dependency cruiser works most comfortably if you install it globally
@@ -11,11 +11,12 @@ npm install --global dependency-cruiser
 ```
 
 ## Daphne's dependencies - a gentle introduction
-Head over to **[Daphne's dependencies](doc/sample-output.md)** to get an
-overview of all the output formats. And how Daphne uses it all. And how she
-uses the awesome _validation_ in her workflow. Go on. Read it. Or would you
-rather prefer continue the boring recount of a README written with _reference
-doc_ in mind?
+Head over to **[Daphne's
+dependencies](https://gitlab.com/sverweij/dependency-cruiser/raw/master/doc/sample-output.md)**
+to get an overview of all the output formats. And how Daphne uses it all. And
+how she uses the awesome _validation_ in her workflow. Go on. Read it. Or would
+you rather prefer continue the boring recount of a README written with
+_reference doc_ in mind?
 
 ## Basic usage
 To dump all the dependencies in `src` to into a dependency matrix you can
@@ -72,7 +73,7 @@ This will:
   will exit with exit code _number of violations found_ in the same fasion
   linters and test tools do.
 
-See the _dependency-cruise_ target in the [Makefile](Makefile) for a real world
+See the _dependency-cruise_ target in the [Makefile](https://gitlab.com/sverweij/dependency-cruiser/raw/master/Makefile) for a real world
 example.
 
 ## Validation
