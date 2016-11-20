@@ -4,7 +4,7 @@ _Visualize and validate javascript dependencies. With your rules._ ES6, CommonJS
 ![Snazzy dot output to whet your appetite](https://raw.githubusercontent.com/sverweij/dependency-cruiser/master/doc/assets/sample-dot-output.png)
 
 ## Installation
-Dependency cruiser works most comfortably if you install it globally
+Dependency cruiser works most comfortably when you install it globally.
 
 ```
 npm install --global dependency-cruiser
