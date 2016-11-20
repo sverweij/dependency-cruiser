@@ -1,6 +1,31 @@
-# dependency cruiser
-Visualize and javascript dependencies against your own rules. ES6, CommonJS, AMD.
+# Dependency cruiser ![Dependency cruiser](doc/assets/ZKH-Dependency-recolored-160.png)
+_Visualize and validate javascript dependencies. With your rules._ ES6, CommonJS, AMD.
 
+![Snazzy dot output to whet your appetite](doc/assets/sample-dot-output.png)
+
+## Installation
+Dependency cruiser works most comfortably if you install it globally
+
+```
+npm install --global dependency-cruiser
+```
+
+## Daphne's dependencies - a gentle introduction
+Head over to **[Daphne's dependencies](doc/sample-output.md)** to get an
+overview of all the output formats. And how Daphne uses it all. And how she
+uses the awesome _validation_ in her workflow. Go on. Read it. Or would you
+rather prefer continue the boring recount of a README written with _reference
+doc_ in mind?
+
+## Basic usage
+To dump all the dependencies in `src` to into a dependency matrix you can
+open in your browser:
+
+```shell
+dependency-cruise -T html -f deps.html src
+```
+
+Running with no parameters gets you help:
 ```
 Usage: dependency-cruise [options] <directory-or-file>
 
@@ -14,20 +39,6 @@ Options:
   -T, --output-type <type>  output type - html|dot|csv|err|json (default:json)
   -v, --validate            validate against rules in .dependency-cruiser.json
   -r, --rules-file <file>   read rules from <file> (default: .dependency-cruiser.json)
-```
-
-## Installation
-Dependency cruiser works most comfortably if you install it globally
-
-```
-npm install --global dependency-cruiser
-```
-
-## Basic usage
-To dump all the dependencies in `src` to stdout in json format:
-
-```shell
-dependency-cruise src
 ```
 
 ## Output formats
@@ -45,9 +56,6 @@ and analyze from there.
 ### dot
 Supplying `dot` as output type will make dependency-cruiser write
 a GraphViz dot format directed graph.
-
-### json
-The default.
 
 ### err
 For use in build scripts, in combination with `--validate` and/ or
@@ -131,12 +139,10 @@ A more elaborate configuration:
 }
 ```
 
-
 ### --rules-file implies --validate
 Because if you supply a rules file, you probably intend them to
 be used in validation, dependency-cruiser assumes `--validate`
 to be passed even if it wasn't.
-
 
 ## License
 [MIT](LICENSE)
