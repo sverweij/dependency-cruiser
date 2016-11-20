@@ -4,11 +4,9 @@ const dependencyToIncidenceTransformer = require("./dependencyToIncidenceTransfo
 require("./csv.template");
 
 function render(pInput) {
-    return Handlebars.templates['csv.template.hbs'](
-        {
-            "things" : dependencyToIncidenceTransformer.transform(pInput)
-        }
-    );
+    return Handlebars.templates['csv.template.hbs']({
+        "things" : dependencyToIncidenceTransformer.transform(pInput)
+    });
 }
 
 exports.render = render;

@@ -15,36 +15,20 @@ digraph "dependency-cruiser output"{
     "test/fixtures/cjs/sub/depindir.js"
     "test/fixtures/cjs/sub/dir.js"
     "test/fixtures/cjs/two_only_one.js"
-    "test/fixtures/cjs/one_only_one.js" -> {
-        "path"
-    }
-    "test/fixtures/cjs/one_only_two.js" -> {
-        "path"
-    }
-    "test/fixtures/cjs/root_one.js" -> {
-        "test/fixtures/cjs/one_only_one.js"
-        "test/fixtures/cjs/one_only_two.js"
-        "test/fixtures/cjs/shared.js"
-        "test/fixtures/cjs/sub/dir.js"
-        "fs"
-    }
-    "test/fixtures/cjs/root_two.js" -> {
-        "test/fixtures/cjs/shared.js"
-        "test/fixtures/cjs/somedata.json"
-        "test/fixtures/cjs/two_only_one.js"
-        "http"
-    }
-    "test/fixtures/cjs/shared.js" -> {
-        "path"
-    }
-    "test/fixtures/cjs/sub/depindir.js" -> {
-        "path"
-    }
-    "test/fixtures/cjs/sub/dir.js" -> {
-        "test/fixtures/cjs/sub/depindir.js"
-        "path"
-    }
-    "test/fixtures/cjs/two_only_one.js" -> {
-        "test/fixtures/cjs/sub/dir.js"
-    }
+    "test/fixtures/cjs/one_only_one.js" -> "path" 
+    "test/fixtures/cjs/one_only_two.js" -> "path" 
+    "test/fixtures/cjs/root_one.js" -> "test/fixtures/cjs/one_only_one.js" 
+    "test/fixtures/cjs/root_one.js" -> "test/fixtures/cjs/one_only_two.js" 
+    "test/fixtures/cjs/root_one.js" -> "test/fixtures/cjs/shared.js" 
+    "test/fixtures/cjs/root_one.js" -> "test/fixtures/cjs/sub/dir.js" [color="red" penwidth=2.0]
+    "test/fixtures/cjs/root_one.js" -> "fs" 
+    "test/fixtures/cjs/root_two.js" -> "test/fixtures/cjs/shared.js" 
+    "test/fixtures/cjs/root_two.js" -> "test/fixtures/cjs/somedata.json" 
+    "test/fixtures/cjs/root_two.js" -> "test/fixtures/cjs/two_only_one.js" 
+    "test/fixtures/cjs/root_two.js" -> "http" 
+    "test/fixtures/cjs/shared.js" -> "path" 
+    "test/fixtures/cjs/sub/depindir.js" -> "path" 
+    "test/fixtures/cjs/sub/dir.js" -> "test/fixtures/cjs/sub/depindir.js" [color="red" penwidth=2.0]
+    "test/fixtures/cjs/sub/dir.js" -> "path" 
+    "test/fixtures/cjs/two_only_one.js" -> "test/fixtures/cjs/sub/dir.js" [color="red" penwidth=2.0]
 }

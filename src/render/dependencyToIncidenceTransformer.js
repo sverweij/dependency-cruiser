@@ -2,16 +2,27 @@ function compareOnSource(pOne, pTwo) {
     return pOne.source > pTwo.source ? 1 : -1;
 }
 
+function determineIncidenceType(pDependencyListEntry) {
+    return pDependency => {
+        let lDep = pDependency.dependencies.find(
+            pDep => pDep.resolved === pDependencyListEntry.source
+        );
+
+        if (lDep) {
+            return lDep.valid ? "true" : "violation";
+        }
+
+        return "false";
+    };
+}
+
 function addIncidences(pDependencyList) {
     return (pDependency) => {
         return {
             source: pDependency.source,
             incidences: pDependencyList.map(pDependencyListEntry => {
                 return {
-                    incidence:
-                        pDependency.dependencies.some(
-                            pDep => pDep.resolved === pDependencyListEntry.source
-                        ),
+                    incidence:determineIncidenceType(pDependencyListEntry)(pDependency),
                     to: pDependencyListEntry.source
                 };
             })

@@ -14,15 +14,11 @@ templates['csv.template.hbs'] = template({"1":function(container,depth0,helpers,
     + ((stack1 = helpers.each.call(alias1,(depth0 != null ? depth0.incidences : depth0),{"name":"each","hash":{},"fn":container.program(4, data, 0),"inverse":container.noop,"data":data})) != null ? stack1 : "")
     + "\"\"\n";
 },"4":function(container,depth0,helpers,partials,data) {
-    var stack1;
+    var stack1, helper;
 
   return "\""
-    + ((stack1 = helpers["if"].call(depth0 != null ? depth0 : {},(depth0 != null ? depth0.incidence : depth0),{"name":"if","hash":{},"fn":container.program(5, data, 0),"inverse":container.program(7, data, 0),"data":data})) != null ? stack1 : "")
+    + ((stack1 = ((helper = (helper = helpers.incidence || (depth0 != null ? depth0.incidence : depth0)) != null ? helper : helpers.helperMissing),(typeof helper === "function" ? helper.call(depth0 != null ? depth0 : {},{"name":"incidence","hash":{},"data":data}) : helper))) != null ? stack1 : "")
     + "\",";
-},"5":function(container,depth0,helpers,partials,data) {
-    return "1";
-},"7":function(container,depth0,helpers,partials,data) {
-    return "";
 },"compiler":[7,">= 4.0.0"],"main":function(container,depth0,helpers,partials,data) {
     var stack1, alias1=depth0 != null ? depth0 : {};
 

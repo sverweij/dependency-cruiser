@@ -1,0 +1,10 @@
+{
+    "allowed":[{
+        "from": ".+",
+        "to": ".+"
+    }],
+    "forbidden":[{
+        "from": ".+",
+        "to": "sub"
+    }]
+}

@@ -1,5 +1,5 @@
 # dependency cruiser
-visualize javascript dependencies. ES6, CommonJS, AMD.
+Visualize and javascript dependencies against your own rules. ES6, CommonJS, AMD.
 
 ```
 Usage: dependency-cruise [options] <directory-or-file>

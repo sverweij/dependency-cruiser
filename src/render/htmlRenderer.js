@@ -4,11 +4,9 @@ const dependencyToIncidenceTransformer = require("./dependencyToIncidenceTransfo
 require("./html.template");
 
 function render(pInput) {
-    return Handlebars.templates['html.template.hbs'](
-        {
-            "things" : dependencyToIncidenceTransformer.transform(pInput)
-        }
-    );
+    return Handlebars.templates['html.template.hbs']({
+        "things" : dependencyToIncidenceTransformer.transform(pInput)
+    });
 }
 
 exports.render = render;
