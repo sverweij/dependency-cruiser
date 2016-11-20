@@ -11,7 +11,7 @@ Options:
   -f, --output-to <file>    file to write output to; - for stdout (default: -)
   -x, --exclude <regex>     a regular expression for excluding modules
   -M, --system <items>      list of module systems (default: amd,cjs,es6)
-  -T, --output-type <type>  output type - html|dot|csv|json (default:json)
+  -T, --output-type <type>  output type - html|dot|csv|err|json (default:json)
   -v, --validate            validate against rules in .dependency-cruiser.json
   -r, --rules-file <file>   read rules from <file> (default: .dependency-cruiser.json)
 ```
@@ -48,6 +48,24 @@ a GraphViz dot format directed graph.
 
 ### json
 The default.
+
+### err
+For use in build scripts, in combination with `--validate` and/ or
+`--rules-file` e.g.
+
+```sh
+dependency-cruise -T err --rules-file my-depcruise-rules.json src
+```
+
+This will:
+- ... print nothing and exit with code 0 if dependency-cruiser didn't
+  find any violations of the rules in .dependency-cruiser.json.
+- ... print the violating dependencies if there is any. Moreover it
+  will exit with exit code _number of violations found_ in the same fasion
+  linters and test tools do.
+
+See the _dependency-cruise_ target in the [Makefile](Makefile) for a real world
+example.
 
 ## Validation
 Validates against a list of rules in a rules file. This defaults to a file

@@ -8,6 +8,7 @@ RM=rm -f
 MAKEDEPEND=node_modules/.bin/js-makedepend --exclude "node_modules|fixtures|extractor-fixtures" --system cjs
 GENERATED_SOURCES=src/render/csv.template.js \
 	src/render/dot.template.js \
+	src/render/err.template.js \
 	src/render/html.template.js
 
 .PHONY: help dev-build install check fullcheck mostlyclean clean lint cover prerequisites static-analysis test update-dependencies run-update-dependencies depend
@@ -75,7 +76,10 @@ run-update-dependencies:
 	$(NPM) run npm-check-updates
 	$(NPM) install
 
-check: lint test
+dependency-cruise:
+	./bin/dependency-cruise -T err -r .dependency-cruiser-custom.json src
+
+check: lint test dependency-cruise
 	./bin/dependency-cruise --version # if that runs the cli script works
 
 fullcheck: check outdated nsp
@@ -110,7 +114,8 @@ src/extract/extractor-composite.js: \
 
 src/extract/extractor.js: \
 	src/extract/resolver.js \
-	src/utl/index.js
+	src/utl/index.js \
+	src/validate/validator.js
 
 src/extract/resolver.js: \
 	src/utl/index.js
@@ -146,7 +151,8 @@ ALL_SRC=src/index.js \
 	src/render/html.template.js \
 	src/render/htmlRenderer.js \
 	src/render/jsonRenderer.js \
-	src/utl/index.js
+	src/utl/index.js \
+	src/validate/validator.js
 # cjs dependencies
 test/cli.index.spec.js: \
 	src/cli/index.js \
@@ -167,7 +173,8 @@ src/extract/extractor-composite.js: \
 
 src/extract/extractor.js: \
 	src/extract/resolver.js \
-	src/utl/index.js
+	src/utl/index.js \
+	src/validate/validator.js
 
 src/extract/resolver.js: \
 	src/utl/index.js
@@ -186,11 +193,17 @@ src/render/htmlRenderer.js: \
 src/cli/parameterValidator.js: \
 	src/utl/index.js
 
-test/cli.optionNormalizer.js: \
+test/cli.optionNormalizer.spec.js: \
 	src/cli/optionNormalizer.js
+
+test/cli.parameterValidator.spec.js: \
+	src/cli/parameterValidator.js
 
 test/extract.extractor-composite.spec.js: \
 	src/extract/extractor-composite.js
 
 test/extract.extractor.spec.js: \
 	src/extract/extractor.js
+
+test/validate.validator.spec.js: \
+	src/validate/validator.js
