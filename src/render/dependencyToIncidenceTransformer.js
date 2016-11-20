@@ -22,7 +22,7 @@ function addIncidences(pDependencyList) {
             source: pDependency.source,
             incidences: pDependencyList.map(pDependencyListEntry => {
                 return {
-                    incidence:determineIncidenceType(pDependencyListEntry)(pDependency),
+                    incidence: determineIncidenceType(pDependencyListEntry)(pDependency),
                     to: pDependencyListEntry.source
                 };
             })
