@@ -1,7 +1,7 @@
 "use strict";
 
 const fs                 = require("fs");
-const extract            = require("../extract/extractor-composite").extract;
+const extract            = require("../extract").extract;
 const validateParameters = require("./parameterValidator").validate;
 const normalizeOptions   = require("./optionNormalizer").normalize;
 const renderHtml         = require("../render/htmlRenderer").render;

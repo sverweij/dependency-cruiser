@@ -1,14 +1,16 @@
 "use strict";
 
-const acorn       = require('acorn');
-const acorn_loose = require('acorn/dist/acorn_loose');
-const walk        = require('acorn/dist/walk');
-const fs          = require('fs');
-const _           = require('lodash');
-const path        = require('path');
-const resolver    = require('./resolver');
-const validator   = require('../validate/validator');
-const utl         = require('../utl');
+const acorn                       = require('acorn');
+const acorn_loose                 = require('acorn/dist/acorn_loose');
+const fs                          = require('fs');
+const _                           = require('lodash');
+const path                        = require('path');
+const resolver                    = require('./resolver');
+const validator                   = require('../validate/validator');
+const utl                         = require('../utl');
+const extractES6Dependencies      = require('./extractor-ES6').extract;
+const extractCommonJSDependencies = require('./extractor-commonJS').extract;
+const extractAMDDependencies      = require('./extractor-AMD').extract;
 
 function getASTBare(pFileName) {
     const lFile = fs.readFileSync(pFileName, 'utf8');
@@ -21,90 +23,6 @@ function getASTBare(pFileName) {
 }
 const getAST = _.memoize(getASTBare);
 
-function extractCommonJSDependencies(pAST, pDependencies, pModuleSystem) {
-
-    // var/const lalala = require('./lalala');
-    // require('./lalala');
-    // require('./lalala').doFunkyStuff();
-    walk.simple(
-        pAST,
-        {
-            "CallExpression": pNode => {
-                if (pNode.callee.type === "Identifier" && pNode.callee.name === "require"){
-                    if (pNode.arguments && pNode.arguments[0] && pNode.arguments[0].value){
-                        pDependencies.push({
-                            moduleName: pNode.arguments[0].value,
-                            moduleSystem: pModuleSystem ? pModuleSystem : "cjs"
-                        });
-                    }
-                }
-            }
-        }
-    );
-}
-
-function extractES6Dependencies(pAST, pDependencies) {
-    function pushSourceValue(pNode){
-        if (pNode.source && pNode.source.value){
-            pDependencies.push({
-                moduleName: pNode.source.value,
-                moduleSystem: "es6"
-            });
-        }
-    }
-
-    walk.simple(
-        pAST,
-        {
-            "ImportDeclaration"     : pushSourceValue,
-            "ExportAllDeclaration"  : pushSourceValue,
-            "ExportNamedDeclaration": pushSourceValue
-        }
-    );
-}
-
-function extractAMDDependencies(pAST, pDependencies) {
-    walk.simple(
-        pAST,
-        {
-            "ExpressionStatement": pNode => {
-                // module as a function (define(Array, function))
-                // module with a name (define(string, Array, function))
-                // 'root' require module (require(Array, function)
-                if (pNode.expression.type === "CallExpression" &&
-                     pNode.expression.callee.type === "Identifier" &&
-                     (pNode.expression.callee.name === "define" ||
-                       pNode.expression.callee.name === "require")){
-                    pNode.expression.arguments
-                        .filter(pArg => pArg.type === "ArrayExpression")
-                        .forEach(arg =>
-                            arg.elements.forEach(el => pDependencies.push({
-                                moduleName: el.value,
-                                moduleSystem: "amd"
-                            }))
-                        );
-                }
-                // CommonJS-wrappers:
-                //  (define(function(require, exports, module){
-                //  define(["require", ...], function(require, ...){
-                //      ... every 'require' call is a depencency
-                // Won't work if someone decides to name the first parameter of
-                // the function passed to the define something else from "require"
-                if (pNode.expression.type === "CallExpression" &&
-                     pNode.expression.callee.type === "Identifier" &&
-                     pNode.expression.callee.name === "define") {
-                    pNode.expression.arguments
-                        .filter(pArg => pArg.type === "FunctionExpression")
-                        .forEach(pFunction => {
-                            if (pFunction.params.filter(pParam => pParam.name === "require")){
-                                extractCommonJSDependencies(pFunction.body, pDependencies, "amd");
-                            }
-                        });
-                }
-            }
-        }
-    );
-}
 
 /**
  * Returns an array of dependencies present in the given file. Of

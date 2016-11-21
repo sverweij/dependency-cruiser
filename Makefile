@@ -102,20 +102,27 @@ src/index.js: \
 src/cli/index.js: \
 	src/cli/optionNormalizer.js \
 	src/cli/parameterValidator.js \
-	src/extract/extractor-composite.js \
+	src/extract/index.js \
 	src/render/csvRenderer.js \
 	src/render/dotRenderer.js \
+	src/render/errRenderer.js \
 	src/render/htmlRenderer.js \
 	src/render/jsonRenderer.js
 
-src/extract/extractor-composite.js: \
+src/extract/index.js: \
 	src/extract/extractor.js \
 	src/utl/index.js
 
 src/extract/extractor.js: \
+	src/extract/extractor-AMD.js \
+	src/extract/extractor-ES6.js \
+	src/extract/extractor-commonJS.js \
 	src/extract/resolver.js \
 	src/utl/index.js \
 	src/validate/validator.js
+
+src/extract/extractor-AMD.js: \
+	src/extract/extractor-commonJS.js
 
 src/extract/resolver.js: \
 	src/utl/index.js
@@ -126,6 +133,9 @@ src/render/csvRenderer.js: \
 
 src/render/dotRenderer.js: \
 	src/render/dot.template.js
+
+src/render/errRenderer.js: \
+	src/render/err.template.js
 
 src/render/htmlRenderer.js: \
 	src/render/dependencyToIncidenceTransformer.js \
@@ -140,14 +150,19 @@ ALL_SRC=src/index.js \
 	src/cli/index.js \
 	src/cli/optionNormalizer.js \
 	src/cli/parameterValidator.js \
-	src/extract/extractor-composite.js \
+	src/extract/extractor-AMD.js \
+	src/extract/extractor-ES6.js \
+	src/extract/extractor-commonJS.js \
 	src/extract/extractor.js \
+	src/extract/index.js \
 	src/extract/resolver.js \
 	src/render/csv.template.js \
 	src/render/csvRenderer.js \
 	src/render/dependencyToIncidenceTransformer.js \
 	src/render/dot.template.js \
 	src/render/dotRenderer.js \
+	src/render/err.template.js \
+	src/render/errRenderer.js \
 	src/render/html.template.js \
 	src/render/htmlRenderer.js \
 	src/render/jsonRenderer.js \
@@ -161,20 +176,27 @@ test/cli.index.spec.js: \
 src/cli/index.js: \
 	src/cli/optionNormalizer.js \
 	src/cli/parameterValidator.js \
-	src/extract/extractor-composite.js \
+	src/extract/index.js \
 	src/render/csvRenderer.js \
 	src/render/dotRenderer.js \
+	src/render/errRenderer.js \
 	src/render/htmlRenderer.js \
 	src/render/jsonRenderer.js
 
-src/extract/extractor-composite.js: \
+src/extract/index.js: \
 	src/extract/extractor.js \
 	src/utl/index.js
 
 src/extract/extractor.js: \
+	src/extract/extractor-AMD.js \
+	src/extract/extractor-ES6.js \
+	src/extract/extractor-commonJS.js \
 	src/extract/resolver.js \
 	src/utl/index.js \
 	src/validate/validator.js
+
+src/extract/extractor-AMD.js: \
+	src/extract/extractor-commonJS.js
 
 src/extract/resolver.js: \
 	src/utl/index.js
@@ -185,6 +207,9 @@ src/render/csvRenderer.js: \
 
 src/render/dotRenderer.js: \
 	src/render/dot.template.js
+
+src/render/errRenderer.js: \
+	src/render/err.template.js
 
 src/render/htmlRenderer.js: \
 	src/render/dependencyToIncidenceTransformer.js \
@@ -200,10 +225,14 @@ test/cli.parameterValidator.spec.js: \
 	src/cli/parameterValidator.js
 
 test/extract.extractor-composite.spec.js: \
-	src/extract/extractor-composite.js
+	src/extract/index.js
 
 test/extract.extractor.spec.js: \
 	src/extract/extractor.js
 
+test/render.errRenderer.spec.js: \
+	src/render/errRenderer.js
+
 test/validate.validator.spec.js: \
 	src/validate/validator.js
+
