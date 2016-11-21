@@ -9,6 +9,17 @@ test_async_node_latest:
    - npm run nsp
    - npm run cover
 
+test_async_node_6:
+  image: node:6
+  cache:
+    paths:
+    - node_modules/
+  script:
+   - npm install
+   - npm run lint
+   - npm run nsp
+   - npm run cover
+
 test_async_node_4:
   image: node:4
   cache:
