@@ -1,11 +1,19 @@
-# we might want to add latest - 1 && latest - 2 to this
-image: node:latest
+test_async_node_latest:
+  image: node:latest
+  cache:
+    paths:
+    - node_modules/
+  script:
+   - npm install
+   - npm run lint
+   - npm run nsp
+   - npm run cover
 
-cache:
-  paths:
-  - node_modules/
-
-test_async:
+test_async_node_4:
+  image: node:4
+  cache:
+    paths:
+    - node_modules/
   script:
    - npm install
    - npm run lint
