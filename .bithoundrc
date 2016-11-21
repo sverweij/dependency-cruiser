@@ -1,0 +1,8 @@
+{
+  "ignore": [
+    "src/render/*.template.js"
+  ],
+  "test": [
+    "test/**"
+  ]
+}
