@@ -1,3 +1,4 @@
+"use strict";
 
 const acorn       = require('acorn');
 const acorn_loose = require('acorn/dist/acorn_loose');

@@ -1,3 +1,5 @@
+"use strict";
+
 const Handlebars                       = require("handlebars/dist/cjs/handlebars.runtime");
 const dependencyToIncidenceTransformer = require("./dependencyToIncidenceTransformer");
 

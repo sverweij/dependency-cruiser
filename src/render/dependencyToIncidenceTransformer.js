@@ -1,3 +1,5 @@
+"use strict";
+
 function compareOnSource(pOne, pTwo) {
     return pOne.source > pTwo.source ? 1 : -1;
 }

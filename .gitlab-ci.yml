@@ -1,5 +1,8 @@
 # we might want to add latest - 1 && latest - 2 to this
-image: node:latest
+image: 
+    node:latest
+    node:latest - 1 
+    node:latest - 2
 
 cache:
   paths:

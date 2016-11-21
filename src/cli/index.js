@@ -1,3 +1,5 @@
+"use strict";
+
 const fs                 = require("fs");
 const extract            = require("../extract/extractor-composite").extract;
 const validateParameters = require("./parameterValidator").validate;

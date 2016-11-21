@@ -1,3 +1,5 @@
+"use strict";
+
 const _ = require("lodash");
 
 const DEFAULT_MODULE_SYSTEMS = ["cjs", "amd", "es6"];

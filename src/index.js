@@ -1,3 +1,5 @@
+"use strict";
+
 const program  = require("commander");
 const cli      = require("./cli");
 const $package = require("../package.json");
