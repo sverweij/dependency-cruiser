@@ -40,8 +40,12 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://gitlab.com/sverweij/dependency-cruiser"
+    "url": "git+https://github.com/sverweij/dependency-cruiser"
   },
+  "bugs": {
+    "url": "https://github.com/sverweij/dependency-cruiser/issues"
+  },
+  "homepage": "https://github.com/sverweij/dependency-cruiser",
   "dependencies": {
     "acorn": "4.0.3",
     "commander": "2.9.0",
