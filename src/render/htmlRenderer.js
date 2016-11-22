@@ -12,7 +12,7 @@ function addShowTitle(pDependencyEntry) {
             return {
                 incidence: pIncidence.incidence,
                 to: pIncidence.to,
-                show: pIncidence.incidence !== "false"
+                hasRelation: pIncidence.incidence !== "false"
             };
         })
     };
