@@ -1,18 +1,18 @@
 [
   {
-    "source": "test/fixtures/cjs/node_modules/somemodule/node_modules/someothermodule/main.js",
+    "source": "node_modules/somemodule/node_modules/someothermodule/main.js",
     "dependencies": []
   },
   {
-    "source": "test/fixtures/cjs/node_modules/somemodule/src/moar-javascript.js",
+    "source": "node_modules/somemodule/src/moar-javascript.js",
     "dependencies": []
   },
   {
-    "source": "test/fixtures/cjs/node_modules/somemodule/src/somemodule.js",
+    "source": "node_modules/somemodule/src/somemodule.js",
     "dependencies": [
       {
         "module": "./moar-javascript",
-        "resolved": "test/fixtures/cjs/node_modules/somemodule/src/moar-javascript.js",
+        "resolved": "node_modules/somemodule/src/moar-javascript.js",
         "moduleSystem": "cjs",
         "coreModule": false,
         "followable": true,
@@ -20,7 +20,7 @@
       },
       {
         "module": "someothermodule",
-        "resolved": "test/fixtures/cjs/node_modules/somemodule/node_modules/someothermodule/main.js",
+        "resolved": "node_modules/somemodule/node_modules/someothermodule/main.js",
         "moduleSystem": "cjs",
         "coreModule": false,
         "followable": true,
@@ -29,7 +29,7 @@
     ]
   },
   {
-    "source": "test/fixtures/cjs/one_only_one.js",
+    "source": "one_only_one.js",
     "dependencies": [
       {
         "module": "path",
@@ -42,7 +42,7 @@
     ]
   },
   {
-    "source": "test/fixtures/cjs/one_only_two.js",
+    "source": "one_only_two.js",
     "dependencies": [
       {
         "module": "path",
@@ -55,11 +55,11 @@
     ]
   },
   {
-    "source": "test/fixtures/cjs/root_one.js",
+    "source": "root_one.js",
     "dependencies": [
       {
         "module": "./one_only_one",
-        "resolved": "test/fixtures/cjs/one_only_one.js",
+        "resolved": "one_only_one.js",
         "moduleSystem": "cjs",
         "coreModule": false,
         "followable": true,
@@ -67,7 +67,7 @@
       },
       {
         "module": "./one_only_two",
-        "resolved": "test/fixtures/cjs/one_only_two.js",
+        "resolved": "one_only_two.js",
         "moduleSystem": "cjs",
         "coreModule": false,
         "followable": true,
@@ -75,7 +75,7 @@
       },
       {
         "module": "./shared",
-        "resolved": "test/fixtures/cjs/shared.js",
+        "resolved": "shared.js",
         "moduleSystem": "cjs",
         "coreModule": false,
         "followable": true,
@@ -83,7 +83,7 @@
       },
       {
         "module": "./sub/dir",
-        "resolved": "test/fixtures/cjs/sub/dir.js",
+        "resolved": "sub/dir.js",
         "moduleSystem": "cjs",
         "coreModule": false,
         "followable": true,
@@ -99,7 +99,7 @@
       },
       {
         "module": "somemodule",
-        "resolved": "test/fixtures/cjs/node_modules/somemodule/src/somemodule.js",
+        "resolved": "node_modules/somemodule/src/somemodule.js",
         "moduleSystem": "cjs",
         "coreModule": false,
         "followable": true,
@@ -108,7 +108,7 @@
     ]
   },
   {
-    "source": "test/fixtures/cjs/shared.js",
+    "source": "shared.js",
     "dependencies": [
       {
         "module": "path",
@@ -121,11 +121,11 @@
     ]
   },
   {
-    "source": "test/fixtures/cjs/sub/dir.js",
+    "source": "sub/dir.js",
     "dependencies": [
       {
         "module": "./depindir",
-        "resolved": "test/fixtures/cjs/sub/depindir.js",
+        "resolved": "sub/depindir.js",
         "moduleSystem": "cjs",
         "coreModule": false,
         "followable": true,
@@ -142,7 +142,7 @@
     ]
   },
   {
-    "source": "test/fixtures/cjs/sub/depindir.js",
+    "source": "sub/depindir.js",
     "dependencies": [
       {
         "module": "path",
@@ -155,11 +155,11 @@
     ]
   },
   {
-    "source": "test/fixtures/cjs/root_two.js",
+    "source": "root_two.js",
     "dependencies": [
       {
         "module": "./shared",
-        "resolved": "test/fixtures/cjs/shared.js",
+        "resolved": "shared.js",
         "moduleSystem": "cjs",
         "coreModule": false,
         "followable": true,
@@ -167,7 +167,7 @@
       },
       {
         "module": "./somedata.json",
-        "resolved": "test/fixtures/cjs/somedata.json",
+        "resolved": "somedata.json",
         "moduleSystem": "cjs",
         "coreModule": false,
         "followable": false,
@@ -175,7 +175,7 @@
       },
       {
         "module": "./two_only_one",
-        "resolved": "test/fixtures/cjs/two_only_one.js",
+        "resolved": "two_only_one.js",
         "moduleSystem": "cjs",
         "coreModule": false,
         "followable": true,
@@ -192,11 +192,11 @@
     ]
   },
   {
-    "source": "test/fixtures/cjs/two_only_one.js",
+    "source": "two_only_one.js",
     "dependencies": [
       {
         "module": "./sub/dir",
-        "resolved": "test/fixtures/cjs/sub/dir.js",
+        "resolved": "sub/dir.js",
         "moduleSystem": "cjs",
         "coreModule": false,
         "followable": true,

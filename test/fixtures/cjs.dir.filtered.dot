@@ -4,31 +4,35 @@ digraph "dependency-cruiser output"{
     splines=true
     overlap=false
     nodesep=0.16
+    fontname="Helvetica"
+    fontsize="9"
+    compound=true
     node [shape=box style="rounded, filled" fillcolor="#ffffcc" height=0.2 fontname=Helvetica fontsize=9]
     edge [color=black arrowhead=normal fontname="Helvetica" fontsize="9"]
 
-    "test/fixtures/cjs/one_only_one.js"
-    "test/fixtures/cjs/one_only_two.js"
-    "test/fixtures/cjs/root_one.js"
-    "test/fixtures/cjs/root_two.js"
-    "test/fixtures/cjs/shared.js"
-    "test/fixtures/cjs/sub/depindir.js"
-    "test/fixtures/cjs/sub/dir.js"
-    "test/fixtures/cjs/two_only_one.js"
-    "test/fixtures/cjs/one_only_one.js" -> "path" 
-    "test/fixtures/cjs/one_only_two.js" -> "path" 
+    subgraph "cluster_test/fixtures/cjs" {label="test/fixtures/cjs" style="rounded,filled" fillcolor="#f5f5f5" "test/fixtures/cjs/one_only_one.js" [label="one_only_one.js"]}
+    subgraph "cluster_test/fixtures/cjs" {label="test/fixtures/cjs" style="rounded,filled" fillcolor="#f5f5f5" "test/fixtures/cjs/one_only_two.js" [label="one_only_two.js"]}
+    subgraph "cluster_test/fixtures/cjs" {label="test/fixtures/cjs" style="rounded,filled" fillcolor="#f5f5f5" "test/fixtures/cjs/root_one.js" [label="root_one.js"]}
+    subgraph "cluster_test/fixtures/cjs" {label="test/fixtures/cjs" style="rounded,filled" fillcolor="#f5f5f5" "test/fixtures/cjs/root_two.js" [label="root_two.js"]}
+    subgraph "cluster_test/fixtures/cjs" {label="test/fixtures/cjs" style="rounded,filled" fillcolor="#f5f5f5" "test/fixtures/cjs/shared.js" [label="shared.js"]}
+    subgraph "cluster_test/fixtures/cjs/sub" {label="test/fixtures/cjs/sub" style="rounded,filled" fillcolor="#f5f5f5" "test/fixtures/cjs/sub/depindir.js" [label="depindir.js"]}
+    subgraph "cluster_test/fixtures/cjs/sub" {label="test/fixtures/cjs/sub" style="rounded,filled" fillcolor="#f5f5f5" "test/fixtures/cjs/sub/dir.js" [label="dir.js"]}
+    subgraph "cluster_test/fixtures/cjs" {label="test/fixtures/cjs" style="rounded,filled" fillcolor="#f5f5f5" "test/fixtures/cjs/two_only_one.js" [label="two_only_one.js"]}
+
+    "test/fixtures/cjs/one_only_one.js" -> "path" [color="grey"]
+    "test/fixtures/cjs/one_only_two.js" -> "path" [color="grey"]
     "test/fixtures/cjs/root_one.js" -> "test/fixtures/cjs/one_only_one.js" 
     "test/fixtures/cjs/root_one.js" -> "test/fixtures/cjs/one_only_two.js" 
     "test/fixtures/cjs/root_one.js" -> "test/fixtures/cjs/shared.js" 
     "test/fixtures/cjs/root_one.js" -> "test/fixtures/cjs/sub/dir.js" [color="red" penwidth=2.0]
-    "test/fixtures/cjs/root_one.js" -> "fs" 
+    "test/fixtures/cjs/root_one.js" -> "fs" [color="grey"]
     "test/fixtures/cjs/root_two.js" -> "test/fixtures/cjs/shared.js" 
     "test/fixtures/cjs/root_two.js" -> "test/fixtures/cjs/somedata.json" 
     "test/fixtures/cjs/root_two.js" -> "test/fixtures/cjs/two_only_one.js" 
-    "test/fixtures/cjs/root_two.js" -> "http" 
-    "test/fixtures/cjs/shared.js" -> "path" 
-    "test/fixtures/cjs/sub/depindir.js" -> "path" 
+    "test/fixtures/cjs/root_two.js" -> "http" [color="grey"]
+    "test/fixtures/cjs/shared.js" -> "path" [color="grey"]
+    "test/fixtures/cjs/sub/depindir.js" -> "path" [color="grey"]
     "test/fixtures/cjs/sub/dir.js" -> "test/fixtures/cjs/sub/depindir.js" [color="red" penwidth=2.0]
-    "test/fixtures/cjs/sub/dir.js" -> "path" 
+    "test/fixtures/cjs/sub/dir.js" -> "path" [color="grey"]
     "test/fixtures/cjs/two_only_one.js" -> "test/fixtures/cjs/sub/dir.js" [color="red" penwidth=2.0]
 }
