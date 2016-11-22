@@ -230,6 +230,9 @@ test/extract.extractor-composite.spec.js: \
 test/extract.extractor.spec.js: \
 	src/extract/extractor.js
 
+test/report.dotReporter.spec.js: \
+	src/report/dotReporter.js
+
 test/report.errReporter.spec.js: \
 	src/report/errReporter.js
 
