@@ -175,3 +175,4 @@ to be passed even if it wasn't.
 
 [![build status](https://gitlab.com/sverweij/dependency-cruiser/badges/develop/build.svg)](https://gitlab.com/sverweij/dependency-cruiser/commits/develop)
 [![coverage report](https://gitlab.com/sverweij/dependency-cruiser/badges/develop/coverage.svg)](https://gitlab.com/sverweij/dependency-cruiser/commits/develop)
+[![bitHound Overall Score](https://www.bithound.io/github/sverweij/dependency-cruiser/badges/score.svg)](https://www.bithound.io/github/sverweij/dependency-cruiser)
