@@ -5,10 +5,25 @@ const dependencyToIncidenceTransformer = require("./dependencyToIncidenceTransfo
 
 require("./html.template");
 
+function addShowTitle(pDependencyEntry) {
+    return {
+        source: pDependencyEntry.source,
+        incidences: pDependencyEntry.incidences.map(pIncidence => {
+            return {
+                incidence: pIncidence.incidence,
+                to: pIncidence.to,
+                show: pIncidence.incidence !== "false"
+            };
+        })
+    };
+}
+
 function render(pInput) {
     return Handlebars.templates['html.template.hbs']({
-        "things" : dependencyToIncidenceTransformer.transform(pInput)
+        "things" : dependencyToIncidenceTransformer.transform(pInput).map(addShowTitle)
     });
 }
 
 exports.render = render;
+
+/* eslint arrow-body-style: 0 */

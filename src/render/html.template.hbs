@@ -119,7 +119,7 @@
         {{#each things}}
         <tr>
             <td class="first-cell">{{source}}</td>
-            {{#each incidences}}<td class="cell cell-{{incidence}}" {{#if incidence}}title="{{../source}} ->
+            {{#each incidences}}<td class="cell cell-{{incidence}}"{{#if show}}title="{{../source}} ->
 {{to}}"{{/if}}></td>{{/each}}
             <td class="first-cell">{{source}}</td>
         </tr>
