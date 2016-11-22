@@ -76,6 +76,25 @@ This will:
 See the _dependency-cruise_ target in the [Makefile](https://github.com/sverweij/dependency-cruiser/blob/master/Makefile) for a real world
 example.
 
+## Excluding modules from being cruised: --exclude
+
+If you don't want to see certain modules in your report (or not have them
+validated), you can exclude them by passing a regular expression to the
+`--exclude` (short: `-x`) option. E.g. to exclude `node_modules` from being
+scanned:
+
+```sh
+dependency-cruise -x "node_modules" -T html -f deps-without-node_modules.html src
+```
+
+Beacuse it's regular expressions, you can do more interesting stuff here as well. To exclude
+all modules with a file path starting with coverage, test or node_modules, you could do this:
+
+```sh
+dependency-cruise -x "^(coverage|test|node_modules)" -T html -f deps-without-stuffs.html src
+```
+
+
 ## Validation
 Validates against a list of rules in a rules file. This defaults to a file
 called `.dependency-cruiser.json`, but you can specify your own rules file
