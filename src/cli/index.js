@@ -4,18 +4,18 @@ const fs                 = require("fs");
 const extract            = require("../extract").extract;
 const validateParameters = require("./parameterValidator").validate;
 const normalizeOptions   = require("./optionNormalizer").normalize;
-const renderHtml         = require("../render/htmlRenderer").render;
-const renderJson         = require("../render/jsonRenderer").render;
-const renderDot          = require("../render/dotRenderer").render;
-const renderCsv          = require("../render/csvRenderer").render;
-const renderErr          = require("../render/errRenderer").render;
+const reportHtml         = require("../report/htmlReporter").render;
+const reportJson         = require("../report/jsonReporter").render;
+const reportDot          = require("../report/dotReporter").render;
+const reportCsv          = require("../report/csvReporter").render;
+const reportErr          = require("../report/errReporter").render;
 
-const TYPE2RENDERER      = {
-    "json" : renderJson,
-    "html" : renderHtml,
-    "dot"  : renderDot,
-    "csv"  : renderCsv,
-    "err"  : renderErr
+const TYPE2REPORTER      = {
+    "json" : reportJson,
+    "html" : reportHtml,
+    "dot"  : reportDot,
+    "csv"  : reportCsv,
+    "err"  : reportErr
 };
 
 function writeToFile(pOutputTo, pDependencyString) {
@@ -52,7 +52,7 @@ exports.main = (pDirOrFile, pOptions) => {
         let lDependencyList = extract(
             pDirOrFile,
             pOptions,
-            TYPE2RENDERER[pOptions.outputType]
+            TYPE2REPORTER[pOptions.outputType]
         );
         let lExitCode = calculateExitCode(lDependencyList, pOptions.outputType);
 

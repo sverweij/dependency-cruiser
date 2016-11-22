@@ -6,10 +6,10 @@ NPM=npm
 NODE=node
 RM=rm -f
 MAKEDEPEND=node_modules/.bin/js-makedepend --exclude "node_modules|fixtures|extractor-fixtures" --system cjs
-GENERATED_SOURCES=src/render/csv.template.js \
-	src/render/dot.template.js \
-	src/render/err.template.js \
-	src/render/html.template.js
+GENERATED_SOURCES=src/report/csv.template.js \
+	src/report/dot.template.js \
+	src/report/err.template.js \
+	src/report/html.template.js
 
 .PHONY: help dev-build install check fullcheck mostlyclean clean lint cover prerequisites static-analysis test update-dependencies run-update-dependencies depend
 
@@ -21,7 +21,7 @@ help:
 	@echo
 
 # production rules
-src/render/%.template.js: src/render/%.template.hbs
+src/report/%.template.js: src/report/%.template.hbs
 	handlebars --commonjs handlebars/runtime -f $@ $<
 
 # "phony" targets
@@ -103,11 +103,11 @@ src/cli/index.js: \
 	src/cli/optionNormalizer.js \
 	src/cli/parameterValidator.js \
 	src/extract/index.js \
-	src/render/csvRenderer.js \
-	src/render/dotRenderer.js \
-	src/render/errRenderer.js \
-	src/render/htmlRenderer.js \
-	src/render/jsonRenderer.js
+	src/report/csvReporter.js \
+	src/report/dotReporter.js \
+	src/report/errReporter.js \
+	src/report/htmlReporter.js \
+	src/report/jsonReporter.js
 
 src/extract/index.js: \
 	src/extract/extractor.js \
@@ -127,19 +127,19 @@ src/extract/extractor-AMD.js: \
 src/extract/resolver.js: \
 	src/utl/index.js
 
-src/render/csvRenderer.js: \
-	src/render/csv.template.js \
-	src/render/dependencyToIncidenceTransformer.js
+src/report/csvReporter.js: \
+	src/report/csv.template.js \
+	src/report/dependencyToIncidenceTransformer.js
 
-src/render/dotRenderer.js: \
-	src/render/dot.template.js
+src/report/dotReporter.js: \
+	src/report/dot.template.js
 
-src/render/errRenderer.js: \
-	src/render/err.template.js
+src/report/errReporter.js: \
+	src/report/err.template.js
 
-src/render/htmlRenderer.js: \
-	src/render/dependencyToIncidenceTransformer.js \
-	src/render/html.template.js
+src/report/htmlReporter.js: \
+	src/report/dependencyToIncidenceTransformer.js \
+	src/report/html.template.js
 
 src/cli/parameterValidator.js: \
 	src/utl/index.js
@@ -156,16 +156,16 @@ ALL_SRC=src/index.js \
 	src/extract/extractor.js \
 	src/extract/index.js \
 	src/extract/resolver.js \
-	src/render/csv.template.js \
-	src/render/csvRenderer.js \
-	src/render/dependencyToIncidenceTransformer.js \
-	src/render/dot.template.js \
-	src/render/dotRenderer.js \
-	src/render/err.template.js \
-	src/render/errRenderer.js \
-	src/render/html.template.js \
-	src/render/htmlRenderer.js \
-	src/render/jsonRenderer.js \
+	src/report/csv.template.js \
+	src/report/csvReporter.js \
+	src/report/dependencyToIncidenceTransformer.js \
+	src/report/dot.template.js \
+	src/report/dotReporter.js \
+	src/report/err.template.js \
+	src/report/errReporter.js \
+	src/report/html.template.js \
+	src/report/htmlReporter.js \
+	src/report/jsonReporter.js \
 	src/utl/index.js \
 	src/validate/validator.js
 # cjs dependencies
@@ -177,11 +177,11 @@ src/cli/index.js: \
 	src/cli/optionNormalizer.js \
 	src/cli/parameterValidator.js \
 	src/extract/index.js \
-	src/render/csvRenderer.js \
-	src/render/dotRenderer.js \
-	src/render/errRenderer.js \
-	src/render/htmlRenderer.js \
-	src/render/jsonRenderer.js
+	src/report/csvReporter.js \
+	src/report/dotReporter.js \
+	src/report/errReporter.js \
+	src/report/htmlReporter.js \
+	src/report/jsonReporter.js
 
 src/extract/index.js: \
 	src/extract/extractor.js \
@@ -201,19 +201,19 @@ src/extract/extractor-AMD.js: \
 src/extract/resolver.js: \
 	src/utl/index.js
 
-src/render/csvRenderer.js: \
-	src/render/csv.template.js \
-	src/render/dependencyToIncidenceTransformer.js
+src/report/csvReporter.js: \
+	src/report/csv.template.js \
+	src/report/dependencyToIncidenceTransformer.js
 
-src/render/dotRenderer.js: \
-	src/render/dot.template.js
+src/report/dotReporter.js: \
+	src/report/dot.template.js
 
-src/render/errRenderer.js: \
-	src/render/err.template.js
+src/report/errReporter.js: \
+	src/report/err.template.js
 
-src/render/htmlRenderer.js: \
-	src/render/dependencyToIncidenceTransformer.js \
-	src/render/html.template.js
+src/report/htmlReporter.js: \
+	src/report/dependencyToIncidenceTransformer.js \
+	src/report/html.template.js
 
 src/cli/parameterValidator.js: \
 	src/utl/index.js
@@ -230,8 +230,8 @@ test/extract.extractor-composite.spec.js: \
 test/extract.extractor.spec.js: \
 	src/extract/extractor.js
 
-test/render.errRenderer.spec.js: \
-	src/render/errRenderer.js
+test/report.errReporter.spec.js: \
+	src/report/errReporter.js
 
 test/validate.validator.spec.js: \
 	src/validate/validator.js

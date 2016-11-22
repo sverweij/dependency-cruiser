@@ -1,6 +1,6 @@
 {
   "ignore": [
-    "src/render/*.template.js"
+    "src/report/*.template.js"
   ],
   "test": [
     "test/**"
