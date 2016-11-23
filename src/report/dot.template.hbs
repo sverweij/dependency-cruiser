@@ -11,7 +11,7 @@ digraph "dependency-cruiser output"{
     edge [color=black arrowhead=normal fontname="Helvetica" fontsize="9"]
 
 {{#each things}}
-    {{#if folder}}subgraph "cluster_{{{folder}}}" {label="{{{folder}}}" style="rounded,filled" fillcolor="#f5f5f5" "{{{source}}}" [label="{{{label}}}"]}
+    {{#if folder}}{{#each path}}subgraph "cluster_{{{.}}}" {label="{{{.}}}" style="rounded" {{/each}}"{{{source}}}" [label="{{{label}}}"]{{#each path}} }{{/each}}
     {{else~}}
     "{{{source}}}"
     {{/if}}

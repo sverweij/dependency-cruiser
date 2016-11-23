@@ -20,6 +20,7 @@ function folderify(pDependencyItem) {
 
     if (lDirName !== ".") {
         lAdditions.folder = lDirName;
+        lAdditions.path = lDirName.split(path.sep);
     }
 
     lAdditions.label = path.basename(pDependencyItem.source);
