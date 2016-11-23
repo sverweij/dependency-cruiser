@@ -56,7 +56,12 @@ and analyze from there.
 
 ### dot
 Supplying `dot` as output type will make dependency-cruiser write
-a GraphViz dot format directed graph.
+a GraphViz dot format directed graph. Typical use is in concert 
+with _GraphViz dot_:
+
+```shell
+dependency-cruise -x "^node_modules" -T dot src | dot -T svg > dependencygraph.svg
+```
 
 ### err
 For use in build scripts, in combination with `--validate` and/ or
@@ -99,6 +104,10 @@ dependency-cruise -x "^(coverage|test|node_modules)" -T html -f deps-without-stu
 Validates against a list of rules in a rules file. This defaults to a file
 called `.dependency-cruiser.json`, but you can specify your own rules file
 with `--rules-file`.
+
+```shell
+dependency-cruise -T err -x node_modules -v --rules-file my.rules.json
+```
 
 The file specifies a bunch of regular expressions pairs your dependencies
 should adhere to.
