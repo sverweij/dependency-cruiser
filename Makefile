@@ -121,6 +121,10 @@ src/extract/extractor.js: \
 	src/utl/index.js \
 	src/validate/validator.js
 
+src/validate/validator.js: \
+	src/validate/ruleSetNormalizer.js \
+	src/validate/ruleSetValidator.js
+
 src/extract/extractor-AMD.js: \
 	src/extract/extractor-commonJS.js
 
@@ -167,6 +171,8 @@ ALL_SRC=src/index.js \
 	src/report/htmlReporter.js \
 	src/report/jsonReporter.js \
 	src/utl/index.js \
+	src/validate/ruleSetNormalizer.js \
+	src/validate/ruleSetValidator.js \
 	src/validate/validator.js
 # cjs dependencies
 test/cli.index.spec.js: \
@@ -194,6 +200,10 @@ src/extract/extractor.js: \
 	src/extract/resolver.js \
 	src/utl/index.js \
 	src/validate/validator.js
+
+src/validate/validator.js: \
+	src/validate/ruleSetNormalizer.js \
+	src/validate/ruleSetValidator.js
 
 src/extract/extractor-AMD.js: \
 	src/extract/extractor-commonJS.js
@@ -235,6 +245,9 @@ test/report.dotReporter.spec.js: \
 
 test/report.errReporter.spec.js: \
 	src/report/errReporter.js
+
+test/validate.ruleSetNormalizer.js: \
+	src/validate/ruleSetNormalizer.js
 
 test/validate.validator.spec.js: \
 	src/validate/validator.js

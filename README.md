@@ -56,7 +56,7 @@ and analyze from there.
 
 ### dot
 Supplying `dot` as output type will make dependency-cruiser write
-a GraphViz dot format directed graph. Typical use is in concert 
+a GraphViz dot format directed graph. Typical use is in concert
 with _GraphViz dot_:
 
 ```shell
@@ -124,6 +124,20 @@ in the `test` folder and allows everything else:
 }
 ```
 
+You can optionally specify a name and an error level ('error',  'warning' (the
+default) and 'information') with them that will appear in some reporters:
+
+```json
+{
+    "forbidden": [{
+        "name": "no-src-to-test",
+        "level": "error",
+        "from": "^src",
+        "to": "^test"
+    }]
+}
+```
+
 A more elaborate configuration:
 - modules in `src` can get stuff from `src` and `node_modules`
 - modules in `src` can not get stuff from test
@@ -131,7 +145,7 @@ A more elaborate configuration:
   we wrote ourselves (in `src`, `bin` and `lib`)
 - modules with the pattern `no-deps-at-all-plz` in their name
   can't have dependencies to any module.
-- modules with the pattern `no-external-deps-plz` can't have
+- modules with the pattern `externalDependencyLess\.js` can't have
   dependencies to stuff in `node_modules`.
 
 
@@ -152,16 +166,22 @@ A more elaborate configuration:
     ],
     "forbidden": [{
             "from": "^src",
-            "to": "^test"
+            "to": "^test",
+            "name": "no-src-to-test",
+            "level": "error"
         },{
-            "from": "no-deps-at-all-plz",
-            "to": ".+"
+            "from": "dependencyless\\.js",
+            "to": ".+",
+            "comment": "level & name default to 'level' and 'unnamed'"
         },{
-            "from": "no-external-deps-plz",
-            "to": "node_modules"
+            "from": "externalDependencyLess\\.js",
+            "to": "node_modules",
+            "level": "warning"
         },{
             "from": "node_modules",
             "to": "^(src|test|lib)",
+            "name": "external-depends-on-you",
+            "level": "error",
             "comment": "well, you never know ..."
         }
     ]

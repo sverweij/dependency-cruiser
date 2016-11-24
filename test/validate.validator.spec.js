@@ -11,7 +11,7 @@ describe("validator", () => {
                 "koos koets",
                 "robby van de kerkhof"
             )
-        ).to.equal(true);
+        ).to.deep.equal({valid: true});
     });
 
     it("is ok with the 'everything allowed' validation", () => {
@@ -22,8 +22,20 @@ describe("validator", () => {
                 "koos koets",
                 "robby van de kerkhof"
             )
-        ).to.equal(true);
+        ).to.deep.equal({valid: true});
     });
+
+    it("is ok with the 'everything allowed' validation", () => {
+        expect(
+            validator.validate(
+                true,
+                "./test/fixtures/rules.impossible-to-match-allowed.json",
+                "koos koets",
+                "robby van de kerkhof"
+            )
+        ).to.deep.equal({valid: false, rule: {level: "warning", "name": "not-in-allowed"}});
+    });
+
 
     it("is ok with the 'nothing allowed' validation", () => {
         expect(
@@ -33,7 +45,7 @@ describe("validator", () => {
                 "koos koets",
                 "robby van de kerkhof"
             )
-        ).to.equal(false);
+        ).to.deep.equal({valid: false, rule: {level: 'warning', name: 'unnamed'}});
     });
 
     it("node_modules inhibition - ok", () => {
@@ -44,7 +56,7 @@ describe("validator", () => {
                 "koos koets",
                 "robby van de kerkhof"
             )
-        ).to.equal(true);
+        ).to.deep.equal({valid: true});
     });
 
     it("node_modules inhibition - transgression", () => {
@@ -55,7 +67,7 @@ describe("validator", () => {
                 "koos koets",
                 "./node_modules/evil-module"
             )
-        ).to.equal(false);
+        ).to.deep.equal({valid: false, rule: {level: 'warning', name: 'unnamed'}});
     });
 
     it("bails out on scary regexps", () => {
@@ -66,7 +78,7 @@ describe("validator", () => {
                 "koos koets",
                 "robby van de kerkhof"
             );
-            expect("not to be here").to.equal("still here, though");
+            expect("not to be here").to.deep.equal("still here, though");
         } catch (e) {
             expect(e).to.deep.equal(
                 Error(

@@ -1,60 +1,56 @@
 "use strict";
 
-const _         = require("lodash");
-const fs        = require("fs");
-const safeRegex = require('safe-regex');
-
-function checkRuleSafety(pRule) {
-    if (
-        !(
-            safeRegex(pRule.from) &&
-            safeRegex(pRule.to)
-        )
-    ){
-        throw new Error(
-            `rule ${JSON.stringify(pRule, null, "")} has an unsafe regular expression. Bailing out.\n`
-        );
-    }
-}
-
-function validateRuleSet(pRuleSet) {
-    if (pRuleSet.hasOwnProperty("allowed")){
-        pRuleSet.allowed.forEach(checkRuleSafety);
-    }
-    if (pRuleSet.hasOwnProperty("forbidden")){
-        pRuleSet.forbidden.forEach(checkRuleSafety);
-    }
-}
+const _                 = require("lodash");
+const fs                = require("fs");
+const ruleSetValidator  = require('./ruleSetValidator');
+const ruleSetNormalizer = require('./ruleSetNormalizer');
 
 const readRules = _.memoize(
     pRuleSetFile => {
         let lRetval = JSON.parse(fs.readFileSync(pRuleSetFile, 'utf8'));
 
-        validateRuleSet(lRetval);
-        return lRetval;
+        ruleSetValidator.validate(lRetval);
+        return ruleSetNormalizer.normalize(lRetval);
     }
 );
-
 
 function matchRule(pFrom, pTo) {
     return pRule => pFrom.match(pRule.from) && pTo.match(pRule.to);
 }
 
 function validateAgainstRules(pRuleSet, pFrom, pTo) {
-    let lRetval = true;
+    let lMatchedRule = {};
 
     if (pRuleSet.hasOwnProperty("allowed")){
-        lRetval = lRetval && pRuleSet.allowed.some(matchRule(pFrom, pTo));
+        lMatchedRule = pRuleSet.allowed.find(matchRule(pFrom, pTo));
+        if (!Boolean(lMatchedRule)){
+            return {
+                valid: false,
+                rule: {
+                    level: "warning",
+                    name: "not-in-allowed"
+                }
+            };
+        }
     }
     if (pRuleSet.hasOwnProperty("forbidden")){
-        lRetval = lRetval && !(pRuleSet.forbidden.some(matchRule(pFrom, pTo)));
+        lMatchedRule = pRuleSet.forbidden.find(matchRule(pFrom, pTo));
+        if (Boolean(lMatchedRule)){
+            return {
+                valid: false,
+                rule: {
+                    level: lMatchedRule.level,
+                    name : lMatchedRule.name
+                }
+            };
+        }
     }
-    return lRetval;
+    return {valid:true};
 }
 
 function validate (pValidate, pRuleSetFile, pFrom, pTo) {
     if (!pValidate) {
-        return true;
+        return {valid:true};
     }
     return validateAgainstRules(readRules(pRuleSetFile), pFrom, pTo);
 }

@@ -84,19 +84,21 @@ function extractDependencies(pFileName, pOptions) {
                         path.dirname(pFileName)
                     );
 
-                    return {
-                        module       : pDependency.moduleName,
-                        resolved     : lResolved.resolved,
-                        moduleSystem : pDependency.moduleSystem,
-                        coreModule   : lResolved.coreModule,
-                        followable   : lResolved.followable,
-                        valid        : validator.validate(
+                    return Object.assign(
+                        {
+                            module       : pDependency.moduleName,
+                            resolved     : lResolved.resolved,
+                            moduleSystem : pDependency.moduleSystem,
+                            coreModule   : lResolved.coreModule,
+                            followable   : lResolved.followable
+                        },
+                        validator.validate(
                             pOptions.validate,
                             pOptions.rulesFile,
                             pFileName,
                             lResolved.resolved
                         )
-                    };
+                    );
                 }
             )
             .filter(pDep => utl.ignore(pDep.resolved, pOptions.exclude))
