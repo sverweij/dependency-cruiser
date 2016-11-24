@@ -3,7 +3,7 @@ const expect = require('chai').expect;
 const render = require('../src/report/errReporter').render;
 const deps   = require('./fixtures/cjs-no-dependency-valid.json');
 
-const NUMBER_OF_INVALID_DEPS_IN_FIXTURE = 21;
+const NUMBER_OF_INVALID_DEPS_IN_FIXTURE = 24;
 
 describe("err reporter", () => {
     it("renders a bunch of errors", () => {

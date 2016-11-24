@@ -16,7 +16,11 @@
         "moduleSystem": "cjs",
         "coreModule": false,
         "followable": true,
-        "valid": false
+        "valid": false,
+        "rule": {
+          "level": "warning",
+          "name": "unnamed"
+        }
       },
       {
         "module": "someothermodule",
@@ -24,7 +28,11 @@
         "moduleSystem": "cjs",
         "coreModule": false,
         "followable": true,
-        "valid": false
+        "valid": false,
+        "rule": {
+          "level": "warning",
+          "name": "unnamed"
+        }
       }
     ]
   },
@@ -37,7 +45,11 @@
         "moduleSystem": "cjs",
         "coreModule": true,
         "followable": false,
-        "valid": false
+        "valid": false,
+        "rule": {
+          "level": "warning",
+          "name": "unnamed"
+        }
       }
     ]
   },
@@ -50,7 +62,11 @@
         "moduleSystem": "cjs",
         "coreModule": true,
         "followable": false,
-        "valid": false
+        "valid": false,
+        "rule": {
+          "level": "warning",
+          "name": "unnamed"
+        }
       }
     ]
   },
@@ -63,7 +79,11 @@
         "moduleSystem": "cjs",
         "coreModule": false,
         "followable": true,
-        "valid": false
+        "valid": false,
+        "rule": {
+          "level": "warning",
+          "name": "unnamed"
+        }
       },
       {
         "module": "./one_only_two",
@@ -71,7 +91,11 @@
         "moduleSystem": "cjs",
         "coreModule": false,
         "followable": true,
-        "valid": false
+        "valid": false,
+        "rule": {
+          "level": "warning",
+          "name": "unnamed"
+        }
       },
       {
         "module": "./shared",
@@ -79,7 +103,11 @@
         "moduleSystem": "cjs",
         "coreModule": false,
         "followable": true,
-        "valid": false
+        "valid": false,
+        "rule": {
+          "level": "warning",
+          "name": "unnamed"
+        }
       },
       {
         "module": "./sub/dir",
@@ -87,7 +115,11 @@
         "moduleSystem": "cjs",
         "coreModule": false,
         "followable": true,
-        "valid": false
+        "valid": false,
+        "rule": {
+          "level": "warning",
+          "name": "unnamed"
+        }
       },
       {
         "module": "fs",
@@ -95,7 +127,11 @@
         "moduleSystem": "cjs",
         "coreModule": true,
         "followable": false,
-        "valid": false
+        "valid": false,
+        "rule": {
+          "level": "warning",
+          "name": "unnamed"
+        }
       },
       {
         "module": "somemodule",
@@ -103,7 +139,11 @@
         "moduleSystem": "cjs",
         "coreModule": false,
         "followable": true,
-        "valid": false
+        "valid": false,
+        "rule": {
+          "level": "warning",
+          "name": "unnamed"
+        }
       }
     ]
   },
@@ -116,7 +156,11 @@
         "moduleSystem": "cjs",
         "coreModule": true,
         "followable": false,
-        "valid": false
+        "valid": false,
+        "rule": {
+          "level": "warning",
+          "name": "unnamed"
+        }
       }
     ]
   },
@@ -129,7 +173,11 @@
         "moduleSystem": "cjs",
         "coreModule": false,
         "followable": true,
-        "valid": false
+        "valid": false,
+        "rule": {
+          "level": "warning",
+          "name": "unnamed"
+        }
       },
       {
         "module": "path",
@@ -137,7 +185,11 @@
         "moduleSystem": "cjs",
         "coreModule": true,
         "followable": false,
-        "valid": false
+        "valid": false,
+        "rule": {
+          "level": "warning",
+          "name": "unnamed"
+        }
       }
     ]
   },
@@ -150,7 +202,11 @@
         "moduleSystem": "cjs",
         "coreModule": true,
         "followable": false,
-        "valid": false
+        "valid": false,
+        "rule": {
+          "level": "warning",
+          "name": "unnamed"
+        }
       }
     ]
   },
@@ -163,7 +219,11 @@
         "moduleSystem": "cjs",
         "coreModule": false,
         "followable": true,
-        "valid": false
+        "valid": false,
+        "rule": {
+          "level": "warning",
+          "name": "unnamed"
+        }
       },
       {
         "module": "./somedata.json",
@@ -171,7 +231,11 @@
         "moduleSystem": "cjs",
         "coreModule": false,
         "followable": false,
-        "valid": false
+        "valid": false,
+        "rule": {
+          "level": "warning",
+          "name": "unnamed"
+        }
       },
       {
         "module": "./two_only_one",
@@ -179,7 +243,11 @@
         "moduleSystem": "cjs",
         "coreModule": false,
         "followable": true,
-        "valid": false
+        "valid": false,
+        "rule": {
+          "level": "warning",
+          "name": "unnamed"
+        }
       },
       {
         "module": "http",
@@ -187,7 +255,11 @@
         "moduleSystem": "cjs",
         "coreModule": true,
         "followable": false,
-        "valid": false
+        "valid": false,
+        "rule": {
+          "level": "warning",
+          "name": "unnamed"
+        }
       }
     ]
   },
@@ -200,7 +272,11 @@
         "moduleSystem": "cjs",
         "coreModule": false,
         "followable": true,
-        "valid": false
+        "valid": false,
+        "rule": {
+          "level": "warning",
+          "name": "unnamed"
+        }
       }
     ]
   }

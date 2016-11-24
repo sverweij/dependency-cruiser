@@ -39,10 +39,12 @@ function write(pOutputTo, pContent) {
 }
 
 function calculateExitCode(pDependencyList, pOutputType) {
-    if (pOutputType !== "err") {
+    const ERROR_CHROME_OFFSET = 5;
+
+    if (pOutputType !== "err" || pDependencyList.length === 0) {
         return 0;
     }
-    return pDependencyList.split('\n').length - 1;
+    return pDependencyList.split('\n').length - ERROR_CHROME_OFFSET;
 }
 
 exports.main = (pDirOrFile, pOptions) => {

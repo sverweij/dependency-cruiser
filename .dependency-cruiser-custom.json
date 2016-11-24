@@ -21,11 +21,15 @@
         }
     ],
     "forbidden": [{
+		"name": "no-dep-on-test",
+		"level": "error",
         "from": "^src",
         "to": "^test"
     },{
+		"name": "no-external-to-here",
+		"level": "information",
         "from": "node_modules",
         "to": "^(src|test|lib)",
-        "comment": "you never know"
+        "comment": "you never know..."
     }]
 }

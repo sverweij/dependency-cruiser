@@ -4,6 +4,8 @@
         "to": ".+"
     }],
     "forbidden":[{
+        "name": "sub-not-allowed",
+        "level": "error",
         "from": ".+",
         "to": "sub"
     }]

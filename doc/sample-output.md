@@ -36,10 +36,13 @@ _loves_ how the exit code reflects the number of offending dependencies when
 she uses the `err` output type:
 ```sh
 dependency-cruise -T err -v test/fixtures
-Dependency-cruiser found the following illegal dependencies:
-  test/fixtures/cjs/root_one.js => test/fixtures/cjs/sub/dir.js
-  test/fixtures/cjs/sub/dir.js => test/fixtures/cjs/sub/depindir.js
-  test/fixtures/cjs/two_only_one.js => test/fixtures/cjs/sub/dir.js
+
+    error sub-not-allowed: test/fixtures/cjs/root_one.js => test/fixtures/cjs/sub/dir.js
+    error sub-not-allowed: test/fixtures/cjs/sub/dir.js => test/fixtures/cjs/sub/depindir.js
+    error sub-not-allowed: test/fixtures/cjs/two_only_one.js => test/fixtures/cjs/sub/dir.js
+
+  3 violations found
+
 make: *** [dependency-cruise] Error 3
 ```
 

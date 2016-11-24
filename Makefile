@@ -8,7 +8,6 @@ RM=rm -f
 MAKEDEPEND=node_modules/.bin/js-makedepend --exclude "node_modules|fixtures|extractor-fixtures" --system cjs
 GENERATED_SOURCES=src/report/csv.template.js \
 	src/report/dot.template.js \
-	src/report/err.template.js \
 	src/report/html.template.js
 
 .PHONY: help dev-build install check fullcheck mostlyclean clean lint cover prerequisites static-analysis test update-dependencies run-update-dependencies depend
@@ -138,9 +137,6 @@ src/report/csvReporter.js: \
 src/report/dotReporter.js: \
 	src/report/dot.template.js
 
-src/report/errReporter.js: \
-	src/report/err.template.js
-
 src/report/htmlReporter.js: \
 	src/report/dependencyToIncidenceTransformer.js \
 	src/report/html.template.js
@@ -165,7 +161,6 @@ ALL_SRC=src/index.js \
 	src/report/dependencyToIncidenceTransformer.js \
 	src/report/dot.template.js \
 	src/report/dotReporter.js \
-	src/report/err.template.js \
 	src/report/errReporter.js \
 	src/report/html.template.js \
 	src/report/htmlReporter.js \
@@ -217,9 +212,6 @@ src/report/csvReporter.js: \
 
 src/report/dotReporter.js: \
 	src/report/dot.template.js
-
-src/report/errReporter.js: \
-	src/report/err.template.js
 
 src/report/htmlReporter.js: \
 	src/report/dependencyToIncidenceTransformer.js \
