@@ -41,7 +41,7 @@ function write(pOutputTo, pContent) {
 function calculateExitCode(pDependencyList, pOutputType) {
     const ERROR_CHROME_OFFSET = 5;
 
-    if (pOutputType !== "err" || pDependencyList.length === 0) {
+    if (pOutputType !== "err") {
         return 0;
     }
     return pDependencyList.split('\n').length - ERROR_CHROME_OFFSET;
