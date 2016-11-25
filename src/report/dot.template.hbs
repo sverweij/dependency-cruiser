@@ -4,14 +4,15 @@ digraph "dependency-cruiser output"{
     splines=true
     overlap=false
     nodesep=0.16
-    fontname="Helvetica"
+    fontname="Helvetica-bold"
     fontsize="9"
+    style="rounded,bold"
     compound=true
     node [shape=box style="rounded, filled" fillcolor="#ffffcc" height=0.2 fontname=Helvetica fontsize=9]
     edge [color=black arrowhead=normal fontname="Helvetica" fontsize="9"]
 
 {{#each things}}
-    {{#if folder}}{{#each path}}subgraph "cluster_{{{aggregateSnippet}}}" {label="{{{snippet}}}" fontname="Helvetica-bold" style="rounded,bold" {{/each}}"{{{source}}}" [label="{{{label}}}"]{{#each path}} }{{/each}}
+    {{#if folder}}{{#each path}}subgraph "cluster_{{{aggregateSnippet}}}" {label="{{{snippet}}}" {{/each}}"{{{source}}}" [label="{{{label}}}"]{{#each path}} }{{/each}}
     {{else~}}
     "{{{source}}}"
     {{/if}}

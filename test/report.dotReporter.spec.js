@@ -9,22 +9,23 @@ const elFixture = `digraph "dependency-cruiser output"{
     splines=true
     overlap=false
     nodesep=0.16
-    fontname="Helvetica"
+    fontname="Helvetica-bold"
     fontsize="9"
+    style="rounded,bold"
     compound=true
     node [shape=box style="rounded, filled" fillcolor="#ffffcc" height=0.2 fontname=Helvetica fontsize=9]
     edge [color=black arrowhead=normal fontname="Helvetica" fontsize="9"]
 
-    subgraph "cluster_/node_modules" {label="node_modules" fontname="Helvetica-bold" style="rounded,bold" subgraph "cluster_/node_modules/somemodule" {label="somemodule" fontname="Helvetica-bold" style="rounded,bold" subgraph "cluster_/node_modules/somemodule/node_modules" {label="node_modules" fontname="Helvetica-bold" style="rounded,bold" subgraph "cluster_/node_modules/somemodule/node_modules/someothermodule" {label="someothermodule" fontname="Helvetica-bold" style="rounded,bold" "node_modules/somemodule/node_modules/someothermodule/main.js" [label="main.js"] } } } }
-    subgraph "cluster_/node_modules" {label="node_modules" fontname="Helvetica-bold" style="rounded,bold" subgraph "cluster_/node_modules/somemodule" {label="somemodule" fontname="Helvetica-bold" style="rounded,bold" subgraph "cluster_/node_modules/somemodule/src" {label="src" fontname="Helvetica-bold" style="rounded,bold" "node_modules/somemodule/src/moar-javascript.js" [label="moar-javascript.js"] } } }
-    subgraph "cluster_/node_modules" {label="node_modules" fontname="Helvetica-bold" style="rounded,bold" subgraph "cluster_/node_modules/somemodule" {label="somemodule" fontname="Helvetica-bold" style="rounded,bold" subgraph "cluster_/node_modules/somemodule/src" {label="src" fontname="Helvetica-bold" style="rounded,bold" "node_modules/somemodule/src/somemodule.js" [label="somemodule.js"] } } }
+    subgraph "cluster_/node_modules" {label="node_modules" subgraph "cluster_/node_modules/somemodule" {label="somemodule" subgraph "cluster_/node_modules/somemodule/node_modules" {label="node_modules" subgraph "cluster_/node_modules/somemodule/node_modules/someothermodule" {label="someothermodule" "node_modules/somemodule/node_modules/someothermodule/main.js" [label="main.js"] } } } }
+    subgraph "cluster_/node_modules" {label="node_modules" subgraph "cluster_/node_modules/somemodule" {label="somemodule" subgraph "cluster_/node_modules/somemodule/src" {label="src" "node_modules/somemodule/src/moar-javascript.js" [label="moar-javascript.js"] } } }
+    subgraph "cluster_/node_modules" {label="node_modules" subgraph "cluster_/node_modules/somemodule" {label="somemodule" subgraph "cluster_/node_modules/somemodule/src" {label="src" "node_modules/somemodule/src/somemodule.js" [label="somemodule.js"] } } }
     "one_only_one.js"
     "one_only_two.js"
     "root_one.js"
     "root_two.js"
     "shared.js"
-    subgraph "cluster_/sub" {label="sub" fontname="Helvetica-bold" style="rounded,bold" "sub/depindir.js" [label="depindir.js"] }
-    subgraph "cluster_/sub" {label="sub" fontname="Helvetica-bold" style="rounded,bold" "sub/dir.js" [label="dir.js"] }
+    subgraph "cluster_/sub" {label="sub" "sub/depindir.js" [label="depindir.js"] }
+    subgraph "cluster_/sub" {label="sub" "sub/dir.js" [label="dir.js"] }
     "two_only_one.js"
 
     "node_modules/somemodule/src/somemodule.js" -> "node_modules/somemodule/src/moar-javascript.js" [color="orange" penwidth=2.0]
