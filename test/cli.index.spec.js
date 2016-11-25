@@ -74,6 +74,17 @@ const testPairs = [
         cleanup: true
     },
     {
+        description: "dot - duplicate subs",
+        dirOrFile: "test/fixtures/duplicate-subs",
+        options: {
+            outputTo: path.join(OUT_DIR, "duplicate-subs.dot"),
+            outputType: "dot",
+            exclude: "node_modules"
+        },
+        expect: "duplicate-subs.dot",
+        cleanup: true
+    },
+    {
         description: "csv",
         dirOrFile: "test/fixtures/{{moduleType}}",
         options: {

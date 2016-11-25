@@ -5,13 +5,17 @@ const Handlebars = require("handlebars/dist/cjs/handlebars.runtime");
 
 require("./dot.template");
 
-Handlebars.registerPartial(
-    'dot.template.hbs',
-    Handlebars.templates['dot.template.hbs']
-);
-
 function compareOnSource(pOne, pTwo) {
     return pOne.source > pTwo.source ? 1 : -1;
+}
+
+let toFullPath = (pAll, pCurrent) => `${pAll}${path.sep}${pCurrent}`;
+
+function agg (pFolder, i, ary){
+    return {
+        dir: pFolder,
+        aggregateDir: `${ary.slice(0, i).reduce(toFullPath, '')}${path.sep}${pFolder}`
+    };
 }
 
 function folderify(pDependencyItem) {
@@ -20,7 +24,7 @@ function folderify(pDependencyItem) {
 
     if (lDirName !== ".") {
         lAdditions.folder = lDirName;
-        lAdditions.path = lDirName.split(path.sep);
+        lAdditions.path = lDirName.split(path.sep).map(agg);
     }
 
     lAdditions.label = path.basename(pDependencyItem.source);
