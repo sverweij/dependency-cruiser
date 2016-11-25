@@ -22,7 +22,7 @@ templates['dot.template.hbs'] = template({"1":function(container,depth0,helpers,
     + ((stack1 = ((helper = (helper = helpers.aggregateSnippet || (depth0 != null ? depth0.aggregateSnippet : depth0)) != null ? helper : alias2),(typeof helper === alias3 ? helper.call(alias1,{"name":"aggregateSnippet","hash":{},"data":data}) : helper))) != null ? stack1 : "")
     + "\" {label=\""
     + ((stack1 = ((helper = (helper = helpers.snippet || (depth0 != null ? depth0.snippet : depth0)) != null ? helper : alias2),(typeof helper === alias3 ? helper.call(alias1,{"name":"snippet","hash":{},"data":data}) : helper))) != null ? stack1 : "")
-    + "\" style=\"rounded\" ";
+    + "\" fontname=\"Helvetica-bold\" style=\"rounded,bold\" ";
 },"5":function(container,depth0,helpers,partials,data) {
     return " }";
 },"7":function(container,depth0,helpers,partials,data) {
