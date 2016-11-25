@@ -9,12 +9,14 @@ function compareOnSource(pOne, pTwo) {
     return pOne.source > pTwo.source ? 1 : -1;
 }
 
-let toFullPath = (pAll, pCurrent) => `${pAll}${path.sep}${pCurrent}`;
+function toFullPath (pAll, pCurrent) {
+    return `${pAll}${path.sep}${pCurrent}`;
+}
 
-function agg (pFolder, i, ary){
+function aggregate (pPathSnippet, pCounter, pPathArray){
     return {
-        dir: pFolder,
-        aggregateDir: `${ary.slice(0, i).reduce(toFullPath, '')}${path.sep}${pFolder}`
+        snippet: pPathSnippet,
+        aggregateSnippet: `${pPathArray.slice(0, pCounter).reduce(toFullPath, '')}${path.sep}${pPathSnippet}`
     };
 }
 
@@ -24,7 +26,7 @@ function folderify(pDependencyItem) {
 
     if (lDirName !== ".") {
         lAdditions.folder = lDirName;
-        lAdditions.path = lDirName.split(path.sep).map(agg);
+        lAdditions.path   = lDirName.split(path.sep).map(aggregate);
     }
 
     lAdditions.label = path.basename(pDependencyItem.source);

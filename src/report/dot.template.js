@@ -19,9 +19,9 @@ templates['dot.template.hbs'] = template({"1":function(container,depth0,helpers,
     var stack1, helper, alias1=depth0 != null ? depth0 : {}, alias2=helpers.helperMissing, alias3="function";
 
   return "subgraph \"cluster_"
-    + ((stack1 = ((helper = (helper = helpers.aggregateDir || (depth0 != null ? depth0.aggregateDir : depth0)) != null ? helper : alias2),(typeof helper === alias3 ? helper.call(alias1,{"name":"aggregateDir","hash":{},"data":data}) : helper))) != null ? stack1 : "")
+    + ((stack1 = ((helper = (helper = helpers.aggregateSnippet || (depth0 != null ? depth0.aggregateSnippet : depth0)) != null ? helper : alias2),(typeof helper === alias3 ? helper.call(alias1,{"name":"aggregateSnippet","hash":{},"data":data}) : helper))) != null ? stack1 : "")
     + "\" {label=\""
-    + ((stack1 = ((helper = (helper = helpers.dir || (depth0 != null ? depth0.dir : depth0)) != null ? helper : alias2),(typeof helper === alias3 ? helper.call(alias1,{"name":"dir","hash":{},"data":data}) : helper))) != null ? stack1 : "")
+    + ((stack1 = ((helper = (helper = helpers.snippet || (depth0 != null ? depth0.snippet : depth0)) != null ? helper : alias2),(typeof helper === alias3 ? helper.call(alias1,{"name":"snippet","hash":{},"data":data}) : helper))) != null ? stack1 : "")
     + "\" style=\"rounded\" ";
 },"5":function(container,depth0,helpers,partials,data) {
     return " }";
