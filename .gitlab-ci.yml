@@ -8,6 +8,8 @@ test_async_node_latest:
    - npm run lint
    - npm run nsp
    - npm run cover
+  except:
+   - tags
 
 test_async_node_6:
   image: node:6
@@ -19,6 +21,8 @@ test_async_node_6:
    - npm run lint
    - npm run nsp
    - npm run cover
+  except:
+   - tags
 
 test_async_node_4:
   image: node:4
@@ -30,3 +34,5 @@ test_async_node_4:
    - npm run lint
    - npm run nsp
    - npm run cover
+  except:
+   - tags
