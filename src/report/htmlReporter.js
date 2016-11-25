@@ -9,11 +9,12 @@ function addShowTitle(pDependencyEntry) {
     return {
         source: pDependencyEntry.source,
         incidences: pDependencyEntry.incidences.map(pIncidence => {
-            return {
-                incidence: pIncidence.incidence,
-                to: pIncidence.to,
-                hasRelation: pIncidence.incidence !== "false"
-            };
+            return Object.assign(
+                pIncidence,
+                {
+                    hasRelation: pIncidence.incidence !== "false"
+                }
+            );
         })
     };
 }
