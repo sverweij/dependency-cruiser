@@ -19,7 +19,7 @@ digraph "dependency-cruiser output"{
 
 {{#each things}}
     {{#each dependencies}}
-    "{{{../source}}}" -> "{{{resolved}}}" {{#if valid}}{{#if coreModule}}[color="grey"]{{/if}}{{else}}[color="red" penwidth=2.0]{{/if}}
+    "{{{../source}}}" -> "{{{resolved}}}" {{#if valid}}{{#if coreModule}}[color="grey"]{{/if}}{{else}}[color="{{color}}" penwidth=2.0]{{/if}}
     {{/each}}
 {{/each}}
 }

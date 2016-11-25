@@ -24,7 +24,7 @@ digraph "dependency-cruiser output"{
     "test/fixtures/cjs/root_one.js" -> "test/fixtures/cjs/one_only_one.js" 
     "test/fixtures/cjs/root_one.js" -> "test/fixtures/cjs/one_only_two.js" 
     "test/fixtures/cjs/root_one.js" -> "test/fixtures/cjs/shared.js" 
-    "test/fixtures/cjs/root_one.js" -> "test/fixtures/cjs/sub/dir.js" [color="red" penwidth=2.0]
+    "test/fixtures/cjs/root_one.js" -> "test/fixtures/cjs/sub/dir.js" [color="orange" penwidth=2.0]
     "test/fixtures/cjs/root_one.js" -> "fs" [color="grey"]
     "test/fixtures/cjs/root_two.js" -> "test/fixtures/cjs/shared.js" 
     "test/fixtures/cjs/root_two.js" -> "test/fixtures/cjs/somedata.json" 
@@ -32,7 +32,7 @@ digraph "dependency-cruiser output"{
     "test/fixtures/cjs/root_two.js" -> "http" [color="grey"]
     "test/fixtures/cjs/shared.js" -> "path" [color="grey"]
     "test/fixtures/cjs/sub/depindir.js" -> "path" [color="grey"]
-    "test/fixtures/cjs/sub/dir.js" -> "test/fixtures/cjs/sub/depindir.js" [color="red" penwidth=2.0]
+    "test/fixtures/cjs/sub/dir.js" -> "test/fixtures/cjs/sub/depindir.js" [color="orange" penwidth=2.0]
     "test/fixtures/cjs/sub/dir.js" -> "path" [color="grey"]
-    "test/fixtures/cjs/two_only_one.js" -> "test/fixtures/cjs/sub/dir.js" [color="red" penwidth=2.0]
+    "test/fixtures/cjs/two_only_one.js" -> "test/fixtures/cjs/sub/dir.js" [color="orange" penwidth=2.0]
 }
