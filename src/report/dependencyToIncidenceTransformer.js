@@ -11,10 +11,19 @@ function determineIncidenceType(pDependencyListEntry) {
         );
 
         if (lDep) {
-            return lDep.valid ? "true" : "violation";
+            return lDep.valid
+                ? {
+                    incidence: "true"
+                }
+                : {
+                    incidence: lDep.rule.level,
+                    rule: lDep.rule.name
+                };
         }
 
-        return "false";
+        return {
+            incidence: "false"
+        };
     };
 }
 
@@ -23,10 +32,12 @@ function addIncidences(pDependencyList) {
         return {
             source: pDependency.source,
             incidences: pDependencyList.map(pDependencyListEntry => {
-                return {
-                    incidence: determineIncidenceType(pDependencyListEntry)(pDependency),
-                    to: pDependencyListEntry.source
-                };
+                return Object.assign(
+                    {
+                        to: pDependencyListEntry.source
+                    },
+                    determineIncidenceType(pDependencyListEntry)(pDependency)
+                );
             })
         };
     };
