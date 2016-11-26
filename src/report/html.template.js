@@ -26,7 +26,7 @@ templates['html.template.hbs'] = template({"1":function(container,depth0,helpers
 },"5":function(container,depth0,helpers,partials,data,blockParams,depths) {
     var stack1, helper, alias1=depth0 != null ? depth0 : {}, alias2=container.escapeExpression;
 
-  return "title=\""
+  return " title=\""
     + ((stack1 = helpers["if"].call(alias1,(depth0 != null ? depth0.rule : depth0),{"name":"if","hash":{},"fn":container.program(6, data, 0, blockParams, depths),"inverse":container.noop,"data":data})) != null ? stack1 : "")
     + alias2(container.lambda((depths[1] != null ? depths[1].source : depths[1]), depth0))
     + " ->\n"
