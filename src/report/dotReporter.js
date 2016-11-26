@@ -6,7 +6,7 @@ const Handlebars = require("handlebars/dist/cjs/handlebars.runtime");
 require("./dot.template");
 
 const LEVEL2COLOR = {
-    error       : "orange",
+    error       : "red",
     warning     : "orange",
     information : "blue"
 };
