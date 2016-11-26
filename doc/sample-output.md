@@ -29,10 +29,10 @@ dependency-cruise -T dot -v test/fixtures | dot -T png > sample-dot-output.png
 ## err
 Her `Makefile` already has `dep-cruise` target, which is run as part of the
 checks on her ci. (She also has a run script in her package.json, because her
-colleagues like that, but she prefers `make` herself, it's just how she's wired)
+colleagues like that, but she prefers `make` herself - it's how she's wired)
 
-Low and behold - on the next push to her feature branch the build neatly fails. She
-_loves_ how the exit code reflects the number of offending dependencies when
+Lo and behold - on the next push to her feature branch the build neatly fails.
+She _loves_ how the exit code reflects the number of offending dependencies when
 she uses the `err` output type:
 ```sh
 dependency-cruise -T err -v test/fixtures
@@ -45,8 +45,7 @@ dependency-cruise -T err -v test/fixtures
 
 make: *** [dependency-cruise] Error 3
 ```
-
-(She also loves it how `-T err` just shuts up and stays out of the way
+(Daphne also loves how `-T err` just _shuts up_ and _stays out of her way_
 if there's nothing wrong.)
 
 So she gets on to refactor the code to obliterate those doubly blasted
@@ -56,7 +55,7 @@ modules in `sub`.
 In the mean Alex, who's an architect in Daphne's project, gets a whiff of what
 is afoot and heads over to the visual build output.
 
-The build server _knows_ it's architect, so it put a dependency report in a spot
+The build server _knows_ its architect, so it put a dependency report in a spot
 where Alex can find it easily. This is the _command_:
 ```sh
 dependency-cruise -T html -v -f stuff-for-alex/sample-dot-output.html test/fixtures
@@ -78,7 +77,7 @@ environs, however, is not. Hence: comma separated values. In a file. So excel
 (or LibreOffice) can chug it like it's 1999:
 
 ```sh
-dependency-cruise -T csv -v json -f sample-dot-output.csv test/fixtures
+dependency-cruise -T csv -v -f sample-dot-output.csv test/fixtures
 ```
 ![oldskool csv output. In a spreadsheet. Way out man!](https://raw.githubusercontent.com/sverweij/dependency-cruiser/master/doc/assets/sample-csv-output.png)
 

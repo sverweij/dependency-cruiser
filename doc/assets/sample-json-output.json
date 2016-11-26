@@ -1,34 +1,5 @@
 [
   {
-    "source": "test/fixtures/cjs/node_modules/somemodule/node_modules/someothermodule/main.js",
-    "dependencies": []
-  },
-  {
-    "source": "test/fixtures/cjs/node_modules/somemodule/src/moar-javascript.js",
-    "dependencies": []
-  },
-  {
-    "source": "test/fixtures/cjs/node_modules/somemodule/src/somemodule.js",
-    "dependencies": [
-      {
-        "module": "./moar-javascript",
-        "resolved": "test/fixtures/cjs/node_modules/somemodule/src/moar-javascript.js",
-        "moduleSystem": "cjs",
-        "coreModule": false,
-        "followable": true,
-        "valid": true
-      },
-      {
-        "module": "someothermodule",
-        "resolved": "test/fixtures/cjs/node_modules/somemodule/node_modules/someothermodule/main.js",
-        "moduleSystem": "cjs",
-        "coreModule": false,
-        "followable": true,
-        "valid": true
-      }
-    ]
-  },
-  {
     "source": "test/fixtures/cjs/one_only_one.js",
     "dependencies": [
       {
@@ -40,6 +11,12 @@
         "valid": true
       }
     ]
+  },
+  {
+    "source": "path",
+    "followable": false,
+    "coreModule": true,
+    "dependencies": []
   },
   {
     "source": "test/fixtures/cjs/one_only_two.js",
@@ -87,7 +64,11 @@
         "moduleSystem": "cjs",
         "coreModule": false,
         "followable": true,
-        "valid": false
+        "valid": false,
+        "rule": {
+          "level": "error",
+          "name": "sub-not-allowed"
+        }
       },
       {
         "module": "fs",
@@ -96,16 +77,14 @@
         "coreModule": true,
         "followable": false,
         "valid": true
-      },
-      {
-        "module": "somemodule",
-        "resolved": "test/fixtures/cjs/node_modules/somemodule/src/somemodule.js",
-        "moduleSystem": "cjs",
-        "coreModule": false,
-        "followable": true,
-        "valid": true
       }
     ]
+  },
+  {
+    "source": "fs",
+    "followable": false,
+    "coreModule": true,
+    "dependencies": []
   },
   {
     "source": "test/fixtures/cjs/shared.js",
@@ -129,7 +108,11 @@
         "moduleSystem": "cjs",
         "coreModule": false,
         "followable": true,
-        "valid": false
+        "valid": false,
+        "rule": {
+          "level": "error",
+          "name": "sub-not-allowed"
+        }
       },
       {
         "module": "path",
@@ -192,6 +175,18 @@
     ]
   },
   {
+    "source": "test/fixtures/cjs/somedata.json",
+    "followable": false,
+    "coreModule": false,
+    "dependencies": []
+  },
+  {
+    "source": "http",
+    "followable": false,
+    "coreModule": true,
+    "dependencies": []
+  },
+  {
     "source": "test/fixtures/cjs/two_only_one.js",
     "dependencies": [
       {
@@ -200,7 +195,11 @@
         "moduleSystem": "cjs",
         "coreModule": false,
         "followable": true,
-        "valid": false
+        "valid": false,
+        "rule": {
+          "level": "error",
+          "name": "sub-not-allowed"
+        }
       }
     ]
   }

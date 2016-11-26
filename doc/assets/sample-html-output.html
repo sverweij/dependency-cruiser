@@ -33,11 +33,9 @@
     }
     td {
         text-align: center;
-        font-style: italic;
     }
     td.first-cell {
         text-align: left;
-        font-style: normal;
         white-space: nowrap;
         overflow: hidden;
         text-overflow: ellipsis;
@@ -91,6 +89,10 @@
         background-color: #eee;
         padding: 0.2em 0.5em 0.2em 0.5em;
     }
+    .cell-core-module {
+        color: grey;
+        font-style: italic;
+    }
     .cell-true {
         background-color: black;
         opacity: 0.5;
@@ -99,8 +101,16 @@
         background-color: white;
         opacity: 0.5;
     }
-    .cell-violation {
+    .cell-error {
         background-color: red;
+        opacity: 0.5;
+    }
+    .cell-warning {
+        background-color: orange;
+        opacity: 0.5;
+    }
+    .cell-information {
+        background-color: blue;
         opacity: 0.5;
     }
 </style>
@@ -111,120 +121,95 @@
                 <a id="rotate" href="#table-rotated">rotate</a>
                 <a id="unrotate" href="#">rotate back</a>
             </td>
-            <th><div>test/fixtures/cjs/one_only_one.js</div></th><th><div>test/fixtures/cjs/one_only_two.js</div></th><th><div>test/fixtures/cjs/root_one.js</div></th><th><div>test/fixtures/cjs/root_two.js</div></th><th><div>test/fixtures/cjs/shared.js</div></th><th><div>test/fixtures/cjs/sub/depindir.js</div></th><th><div>test/fixtures/cjs/sub/dir.js</div></th><th><div>test/fixtures/cjs/two_only_one.js</div></th>
+            <th><div>test/fixtures/cjs/one_only_one.js</div></th><th><div>test/fixtures/cjs/one_only_two.js</div></th><th><div>test/fixtures/cjs/root_one.js</div></th><th><div>test/fixtures/cjs/root_two.js</div></th><th><div>test/fixtures/cjs/shared.js</div></th><th><div>test/fixtures/cjs/somedata.json</div></th><th><div>test/fixtures/cjs/sub/depindir.js</div></th><th><div>test/fixtures/cjs/sub/dir.js</div></th><th><div>test/fixtures/cjs/two_only_one.js</div></th><th><div class="cell-core-module">fs</div></th><th><div class="cell-core-module">http</div></th><th><div class="cell-core-module">path</div></th>
             <td class="top-right"></td>
         </tr>
     </thead>
     <tbody>
         <tr>
             <td class="first-cell">test/fixtures/cjs/one_only_one.js</td>
-            <td class="cell cell-false" title="test/fixtures/cjs/one_only_one.js ->
-test/fixtures/cjs/one_only_one.js"></td><td class="cell cell-false" title="test/fixtures/cjs/one_only_one.js ->
-test/fixtures/cjs/one_only_two.js"></td><td class="cell cell-false" title="test/fixtures/cjs/one_only_one.js ->
-test/fixtures/cjs/root_one.js"></td><td class="cell cell-false" title="test/fixtures/cjs/one_only_one.js ->
-test/fixtures/cjs/root_two.js"></td><td class="cell cell-false" title="test/fixtures/cjs/one_only_one.js ->
-test/fixtures/cjs/shared.js"></td><td class="cell cell-false" title="test/fixtures/cjs/one_only_one.js ->
-test/fixtures/cjs/sub/depindir.js"></td><td class="cell cell-false" title="test/fixtures/cjs/one_only_one.js ->
-test/fixtures/cjs/sub/dir.js"></td><td class="cell cell-false" title="test/fixtures/cjs/one_only_one.js ->
-test/fixtures/cjs/two_only_one.js"></td>
+            <td class="cell cell-false"></td><td class="cell cell-false"></td><td class="cell cell-false"></td><td class="cell cell-false"></td><td class="cell cell-false"></td><td class="cell cell-false"></td><td class="cell cell-false"></td><td class="cell cell-false"></td><td class="cell cell-false"></td><td class="cell cell-false"></td><td class="cell cell-false"></td><td class="cell cell-true" title="test/fixtures/cjs/one_only_one.js ->
+path"></td>
             <td class="first-cell">test/fixtures/cjs/one_only_one.js</td>
         </tr>
         <tr>
             <td class="first-cell">test/fixtures/cjs/one_only_two.js</td>
-            <td class="cell cell-false" title="test/fixtures/cjs/one_only_two.js ->
-test/fixtures/cjs/one_only_one.js"></td><td class="cell cell-false" title="test/fixtures/cjs/one_only_two.js ->
-test/fixtures/cjs/one_only_two.js"></td><td class="cell cell-false" title="test/fixtures/cjs/one_only_two.js ->
-test/fixtures/cjs/root_one.js"></td><td class="cell cell-false" title="test/fixtures/cjs/one_only_two.js ->
-test/fixtures/cjs/root_two.js"></td><td class="cell cell-false" title="test/fixtures/cjs/one_only_two.js ->
-test/fixtures/cjs/shared.js"></td><td class="cell cell-false" title="test/fixtures/cjs/one_only_two.js ->
-test/fixtures/cjs/sub/depindir.js"></td><td class="cell cell-false" title="test/fixtures/cjs/one_only_two.js ->
-test/fixtures/cjs/sub/dir.js"></td><td class="cell cell-false" title="test/fixtures/cjs/one_only_two.js ->
-test/fixtures/cjs/two_only_one.js"></td>
+            <td class="cell cell-false"></td><td class="cell cell-false"></td><td class="cell cell-false"></td><td class="cell cell-false"></td><td class="cell cell-false"></td><td class="cell cell-false"></td><td class="cell cell-false"></td><td class="cell cell-false"></td><td class="cell cell-false"></td><td class="cell cell-false"></td><td class="cell cell-false"></td><td class="cell cell-true" title="test/fixtures/cjs/one_only_two.js ->
+path"></td>
             <td class="first-cell">test/fixtures/cjs/one_only_two.js</td>
         </tr>
         <tr>
             <td class="first-cell">test/fixtures/cjs/root_one.js</td>
             <td class="cell cell-true" title="test/fixtures/cjs/root_one.js ->
 test/fixtures/cjs/one_only_one.js"></td><td class="cell cell-true" title="test/fixtures/cjs/root_one.js ->
-test/fixtures/cjs/one_only_two.js"></td><td class="cell cell-false" title="test/fixtures/cjs/root_one.js ->
-test/fixtures/cjs/root_one.js"></td><td class="cell cell-false" title="test/fixtures/cjs/root_one.js ->
-test/fixtures/cjs/root_two.js"></td><td class="cell cell-true" title="test/fixtures/cjs/root_one.js ->
-test/fixtures/cjs/shared.js"></td><td class="cell cell-false" title="test/fixtures/cjs/root_one.js ->
-test/fixtures/cjs/sub/depindir.js"></td><td class="cell cell-violation" title="test/fixtures/cjs/root_one.js ->
-test/fixtures/cjs/sub/dir.js"></td><td class="cell cell-false" title="test/fixtures/cjs/root_one.js ->
-test/fixtures/cjs/two_only_one.js"></td>
+test/fixtures/cjs/one_only_two.js"></td><td class="cell cell-false"></td><td class="cell cell-false"></td><td class="cell cell-true" title="test/fixtures/cjs/root_one.js ->
+test/fixtures/cjs/shared.js"></td><td class="cell cell-false"></td><td class="cell cell-false"></td><td class="cell cell-error" title="sub-not-allowed:
+test/fixtures/cjs/root_one.js ->
+test/fixtures/cjs/sub/dir.js"></td><td class="cell cell-false"></td><td class="cell cell-true" title="test/fixtures/cjs/root_one.js ->
+fs"></td><td class="cell cell-false"></td><td class="cell cell-false"></td>
             <td class="first-cell">test/fixtures/cjs/root_one.js</td>
         </tr>
         <tr>
             <td class="first-cell">test/fixtures/cjs/root_two.js</td>
-            <td class="cell cell-false" title="test/fixtures/cjs/root_two.js ->
-test/fixtures/cjs/one_only_one.js"></td><td class="cell cell-false" title="test/fixtures/cjs/root_two.js ->
-test/fixtures/cjs/one_only_two.js"></td><td class="cell cell-false" title="test/fixtures/cjs/root_two.js ->
-test/fixtures/cjs/root_one.js"></td><td class="cell cell-false" title="test/fixtures/cjs/root_two.js ->
-test/fixtures/cjs/root_two.js"></td><td class="cell cell-true" title="test/fixtures/cjs/root_two.js ->
-test/fixtures/cjs/shared.js"></td><td class="cell cell-false" title="test/fixtures/cjs/root_two.js ->
-test/fixtures/cjs/sub/depindir.js"></td><td class="cell cell-false" title="test/fixtures/cjs/root_two.js ->
-test/fixtures/cjs/sub/dir.js"></td><td class="cell cell-true" title="test/fixtures/cjs/root_two.js ->
-test/fixtures/cjs/two_only_one.js"></td>
+            <td class="cell cell-false"></td><td class="cell cell-false"></td><td class="cell cell-false"></td><td class="cell cell-false"></td><td class="cell cell-true" title="test/fixtures/cjs/root_two.js ->
+test/fixtures/cjs/shared.js"></td><td class="cell cell-true" title="test/fixtures/cjs/root_two.js ->
+test/fixtures/cjs/somedata.json"></td><td class="cell cell-false"></td><td class="cell cell-false"></td><td class="cell cell-true" title="test/fixtures/cjs/root_two.js ->
+test/fixtures/cjs/two_only_one.js"></td><td class="cell cell-false"></td><td class="cell cell-true" title="test/fixtures/cjs/root_two.js ->
+http"></td><td class="cell cell-false"></td>
             <td class="first-cell">test/fixtures/cjs/root_two.js</td>
         </tr>
         <tr>
             <td class="first-cell">test/fixtures/cjs/shared.js</td>
-            <td class="cell cell-false" title="test/fixtures/cjs/shared.js ->
-test/fixtures/cjs/one_only_one.js"></td><td class="cell cell-false" title="test/fixtures/cjs/shared.js ->
-test/fixtures/cjs/one_only_two.js"></td><td class="cell cell-false" title="test/fixtures/cjs/shared.js ->
-test/fixtures/cjs/root_one.js"></td><td class="cell cell-false" title="test/fixtures/cjs/shared.js ->
-test/fixtures/cjs/root_two.js"></td><td class="cell cell-false" title="test/fixtures/cjs/shared.js ->
-test/fixtures/cjs/shared.js"></td><td class="cell cell-false" title="test/fixtures/cjs/shared.js ->
-test/fixtures/cjs/sub/depindir.js"></td><td class="cell cell-false" title="test/fixtures/cjs/shared.js ->
-test/fixtures/cjs/sub/dir.js"></td><td class="cell cell-false" title="test/fixtures/cjs/shared.js ->
-test/fixtures/cjs/two_only_one.js"></td>
+            <td class="cell cell-false"></td><td class="cell cell-false"></td><td class="cell cell-false"></td><td class="cell cell-false"></td><td class="cell cell-false"></td><td class="cell cell-false"></td><td class="cell cell-false"></td><td class="cell cell-false"></td><td class="cell cell-false"></td><td class="cell cell-false"></td><td class="cell cell-false"></td><td class="cell cell-true" title="test/fixtures/cjs/shared.js ->
+path"></td>
             <td class="first-cell">test/fixtures/cjs/shared.js</td>
         </tr>
         <tr>
+            <td class="first-cell">test/fixtures/cjs/somedata.json</td>
+            <td class="cell cell-false"></td><td class="cell cell-false"></td><td class="cell cell-false"></td><td class="cell cell-false"></td><td class="cell cell-false"></td><td class="cell cell-false"></td><td class="cell cell-false"></td><td class="cell cell-false"></td><td class="cell cell-false"></td><td class="cell cell-false"></td><td class="cell cell-false"></td><td class="cell cell-false"></td>
+            <td class="first-cell">test/fixtures/cjs/somedata.json</td>
+        </tr>
+        <tr>
             <td class="first-cell">test/fixtures/cjs/sub/depindir.js</td>
-            <td class="cell cell-false" title="test/fixtures/cjs/sub/depindir.js ->
-test/fixtures/cjs/one_only_one.js"></td><td class="cell cell-false" title="test/fixtures/cjs/sub/depindir.js ->
-test/fixtures/cjs/one_only_two.js"></td><td class="cell cell-false" title="test/fixtures/cjs/sub/depindir.js ->
-test/fixtures/cjs/root_one.js"></td><td class="cell cell-false" title="test/fixtures/cjs/sub/depindir.js ->
-test/fixtures/cjs/root_two.js"></td><td class="cell cell-false" title="test/fixtures/cjs/sub/depindir.js ->
-test/fixtures/cjs/shared.js"></td><td class="cell cell-false" title="test/fixtures/cjs/sub/depindir.js ->
-test/fixtures/cjs/sub/depindir.js"></td><td class="cell cell-false" title="test/fixtures/cjs/sub/depindir.js ->
-test/fixtures/cjs/sub/dir.js"></td><td class="cell cell-false" title="test/fixtures/cjs/sub/depindir.js ->
-test/fixtures/cjs/two_only_one.js"></td>
+            <td class="cell cell-false"></td><td class="cell cell-false"></td><td class="cell cell-false"></td><td class="cell cell-false"></td><td class="cell cell-false"></td><td class="cell cell-false"></td><td class="cell cell-false"></td><td class="cell cell-false"></td><td class="cell cell-false"></td><td class="cell cell-false"></td><td class="cell cell-false"></td><td class="cell cell-true" title="test/fixtures/cjs/sub/depindir.js ->
+path"></td>
             <td class="first-cell">test/fixtures/cjs/sub/depindir.js</td>
         </tr>
         <tr>
             <td class="first-cell">test/fixtures/cjs/sub/dir.js</td>
-            <td class="cell cell-false" title="test/fixtures/cjs/sub/dir.js ->
-test/fixtures/cjs/one_only_one.js"></td><td class="cell cell-false" title="test/fixtures/cjs/sub/dir.js ->
-test/fixtures/cjs/one_only_two.js"></td><td class="cell cell-false" title="test/fixtures/cjs/sub/dir.js ->
-test/fixtures/cjs/root_one.js"></td><td class="cell cell-false" title="test/fixtures/cjs/sub/dir.js ->
-test/fixtures/cjs/root_two.js"></td><td class="cell cell-false" title="test/fixtures/cjs/sub/dir.js ->
-test/fixtures/cjs/shared.js"></td><td class="cell cell-violation" title="test/fixtures/cjs/sub/dir.js ->
-test/fixtures/cjs/sub/depindir.js"></td><td class="cell cell-false" title="test/fixtures/cjs/sub/dir.js ->
-test/fixtures/cjs/sub/dir.js"></td><td class="cell cell-false" title="test/fixtures/cjs/sub/dir.js ->
-test/fixtures/cjs/two_only_one.js"></td>
+            <td class="cell cell-false"></td><td class="cell cell-false"></td><td class="cell cell-false"></td><td class="cell cell-false"></td><td class="cell cell-false"></td><td class="cell cell-false"></td><td class="cell cell-error" title="sub-not-allowed:
+test/fixtures/cjs/sub/dir.js ->
+test/fixtures/cjs/sub/depindir.js"></td><td class="cell cell-false"></td><td class="cell cell-false"></td><td class="cell cell-false"></td><td class="cell cell-false"></td><td class="cell cell-true" title="test/fixtures/cjs/sub/dir.js ->
+path"></td>
             <td class="first-cell">test/fixtures/cjs/sub/dir.js</td>
         </tr>
         <tr>
             <td class="first-cell">test/fixtures/cjs/two_only_one.js</td>
-            <td class="cell cell-false" title="test/fixtures/cjs/two_only_one.js ->
-test/fixtures/cjs/one_only_one.js"></td><td class="cell cell-false" title="test/fixtures/cjs/two_only_one.js ->
-test/fixtures/cjs/one_only_two.js"></td><td class="cell cell-false" title="test/fixtures/cjs/two_only_one.js ->
-test/fixtures/cjs/root_one.js"></td><td class="cell cell-false" title="test/fixtures/cjs/two_only_one.js ->
-test/fixtures/cjs/root_two.js"></td><td class="cell cell-false" title="test/fixtures/cjs/two_only_one.js ->
-test/fixtures/cjs/shared.js"></td><td class="cell cell-false" title="test/fixtures/cjs/two_only_one.js ->
-test/fixtures/cjs/sub/depindir.js"></td><td class="cell cell-violation" title="test/fixtures/cjs/two_only_one.js ->
-test/fixtures/cjs/sub/dir.js"></td><td class="cell cell-false" title="test/fixtures/cjs/two_only_one.js ->
-test/fixtures/cjs/two_only_one.js"></td>
+            <td class="cell cell-false"></td><td class="cell cell-false"></td><td class="cell cell-false"></td><td class="cell cell-false"></td><td class="cell cell-false"></td><td class="cell cell-false"></td><td class="cell cell-false"></td><td class="cell cell-error" title="sub-not-allowed:
+test/fixtures/cjs/two_only_one.js ->
+test/fixtures/cjs/sub/dir.js"></td><td class="cell cell-false"></td><td class="cell cell-false"></td><td class="cell cell-false"></td><td class="cell cell-false"></td>
             <td class="first-cell">test/fixtures/cjs/two_only_one.js</td>
+        </tr>
+        <tr>
+            <td class="first-cell cell-core-module">fs</td>
+            <td class="cell cell-false"></td><td class="cell cell-false"></td><td class="cell cell-false"></td><td class="cell cell-false"></td><td class="cell cell-false"></td><td class="cell cell-false"></td><td class="cell cell-false"></td><td class="cell cell-false"></td><td class="cell cell-false"></td><td class="cell cell-false"></td><td class="cell cell-false"></td><td class="cell cell-false"></td>
+            <td class="first-cell cell-core-module">fs</td>
+        </tr>
+        <tr>
+            <td class="first-cell cell-core-module">http</td>
+            <td class="cell cell-false"></td><td class="cell cell-false"></td><td class="cell cell-false"></td><td class="cell cell-false"></td><td class="cell cell-false"></td><td class="cell cell-false"></td><td class="cell cell-false"></td><td class="cell cell-false"></td><td class="cell cell-false"></td><td class="cell cell-false"></td><td class="cell cell-false"></td><td class="cell cell-false"></td>
+            <td class="first-cell cell-core-module">http</td>
+        </tr>
+        <tr>
+            <td class="first-cell cell-core-module">path</td>
+            <td class="cell cell-false"></td><td class="cell cell-false"></td><td class="cell cell-false"></td><td class="cell cell-false"></td><td class="cell cell-false"></td><td class="cell cell-false"></td><td class="cell cell-false"></td><td class="cell cell-false"></td><td class="cell cell-false"></td><td class="cell cell-false"></td><td class="cell cell-false"></td><td class="cell cell-false"></td>
+            <td class="first-cell cell-core-module">path</td>
         </tr>
     </tbody>
     <tfoot>
         <tr>
             <td class="bottom-left"></td>
-            <th><div>test/fixtures/cjs/one_only_one.js</div></th><th><div>test/fixtures/cjs/one_only_two.js</div></th><th><div>test/fixtures/cjs/root_one.js</div></th><th><div>test/fixtures/cjs/root_two.js</div></th><th><div>test/fixtures/cjs/shared.js</div></th><th><div>test/fixtures/cjs/sub/depindir.js</div></th><th><div>test/fixtures/cjs/sub/dir.js</div></th><th><div>test/fixtures/cjs/two_only_one.js</div></th>
+            <th><div>test/fixtures/cjs/one_only_one.js</div></th><th><div>test/fixtures/cjs/one_only_two.js</div></th><th><div>test/fixtures/cjs/root_one.js</div></th><th><div>test/fixtures/cjs/root_two.js</div></th><th><div>test/fixtures/cjs/shared.js</div></th><th><div>test/fixtures/cjs/somedata.json</div></th><th><div>test/fixtures/cjs/sub/depindir.js</div></th><th><div>test/fixtures/cjs/sub/dir.js</div></th><th><div>test/fixtures/cjs/two_only_one.js</div></th><th><div class="cell-core-module">fs</div></th><th><div class="cell-core-module">http</div></th><th><div class="cell-core-module">path</div></th>
             <td class="bottom-right"></td>
         </tr>
     </tfoot>
