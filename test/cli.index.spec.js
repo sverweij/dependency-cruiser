@@ -1,5 +1,5 @@
 "use strict";
-const assert    = require("assert");
+const expect    = require('chai').expect;
 const main      = require("../src/cli");
 const fs        = require("fs");
 const tst       = require("./utl/testutensils");
@@ -236,8 +236,9 @@ describe("#main", () => {
             unhookInterceptStdOut();
             unhookInterceptStdErr();
 
-            return assert.equal(
-                lCapturedStderr,
+            return expect(
+                lCapturedStderr
+            ).to.equal(
                 "ERROR: Can't open 'this-doesnot-exist' for reading. Does it exist?\n"
             );
         });
@@ -265,8 +266,9 @@ describe("#main", () => {
                 lCapturedStderr += pText;
             })();
 
-            return assert.equal(
-                lCapturedStderr,
+            return expect(
+                lCapturedStderr
+            ).to.equal(
                 "ERROR: Invalid module system list: 'invalidmodulesystem'\n"
             );
         });
@@ -294,8 +296,9 @@ describe("#main", () => {
                 lCapturedStderr += pText;
             })();
 
-            return assert.equal(
-                lCapturedStderr,
+            return expect(
+                lCapturedStderr
+            ).to.equal(
                 "ERROR: 'invalidoutputtype' is not a valid output type.\n"
             );
         });
@@ -322,8 +325,9 @@ describe("#main", () => {
                 lCapturedStderr += pText;
             })();
 
-            return assert.equal(
-                lCapturedStderr,
+            return expect(
+                lCapturedStderr
+            ).to.equal(
                 "ERROR: Writing to 'test/output/file/you/cant/write/to' didn't work. Error: ENOENT: no such file or directory, open 'test/output/file/you/cant/write/to'"
             );
         });
@@ -348,8 +352,9 @@ describe("#main", () => {
             unhookInterceptStdOut();
             unhookInterceptStdErr();
 
-            return assert.equal(
-                lCapturedStderr,
+            return expect(
+                lCapturedStderr
+            ).to.equal(
                 "ERROR: The exclude pattern '([A-Za-z]+)*' will probably run very slowly - cowardly refusing to run.\n"
             );
         });
