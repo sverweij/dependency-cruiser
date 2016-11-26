@@ -1,34 +1,5 @@
 [
     {
-        "source": "test/fixtures/cjs/node_modules/somemodule/node_modules/someothermodule/main.js",
-        "dependencies": []
-    },
-    {
-        "source": "test/fixtures/cjs/node_modules/somemodule/src/moar-javascript.js",
-        "dependencies": []
-    },
-    {
-        "source": "test/fixtures/cjs/node_modules/somemodule/src/somemodule.js",
-        "dependencies": [
-            {
-                "module": "./moar-javascript",
-                "resolved": "test/fixtures/cjs/node_modules/somemodule/src/moar-javascript.js",
-                "moduleSystem": "cjs",
-                "coreModule": false,
-                "followable": true,
-                "valid": true
-            },
-            {
-                "module": "someothermodule",
-                "resolved": "test/fixtures/cjs/node_modules/somemodule/node_modules/someothermodule/main.js",
-                "moduleSystem": "cjs",
-                "coreModule": false,
-                "followable": true,
-                "valid": true
-            }
-        ]
-    },
-    {
         "source": "test/fixtures/cjs/one_only_one.js",
         "dependencies": [
             {
@@ -101,14 +72,6 @@
                 "moduleSystem": "cjs",
                 "coreModule": true,
                 "followable": false,
-                "valid": true
-            },
-            {
-                "module": "somemodule",
-                "resolved": "test/fixtures/cjs/node_modules/somemodule/src/somemodule.js",
-                "moduleSystem": "cjs",
-                "coreModule": false,
-                "followable": true,
                 "valid": true
             }
         ]

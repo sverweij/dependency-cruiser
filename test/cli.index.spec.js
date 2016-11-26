@@ -13,40 +13,40 @@ const FIX_DIR = "./test/fixtures";
 /* eslint max-len:0*/
 const testPairs = [
     {
-        description: "dependency-cruise -f test/output/{{moduleType}}.dir.mk test/fixtures/{{moduleType}}",
+        description: "dependency-cruise -f test/output/{{moduleType}}.dir.json test/fixtures/{{moduleType}}",
         dirOrFile: "test/fixtures/{{moduleType}}",
         options: {
-            outputTo: path.join(OUT_DIR, "{{moduleType}}.dir.mk")
+            outputTo: path.join(OUT_DIR, "{{moduleType}}.dir.json")
         },
-        expect: "{{moduleType}}.dir.mk",
+        expect: "{{moduleType}}.dir.json",
         cleanup: true
     },
     {
-        description: "dependency-cruise -f test/output/{{moduleType}}.dir.mk test/fixtures/{{moduleType}}",
+        description: "dependency-cruise -f test/output/{{moduleType}}.dir.json test/fixtures/{{moduleType}}",
         dirOrFile: "test/fixtures/{{moduleType}}",
         options: {
-            outputTo: path.join(OUT_DIR, "{{moduleType}}.dir.mk")
+            outputTo: path.join(OUT_DIR, "{{moduleType}}.dir.json")
         },
-        expect: "{{moduleType}}.dir.mk",
+        expect: "{{moduleType}}.dir.json",
         cleanup: true
     },
     {
-        description: "dependency-cruise -f test/output/{{moduleType}}.file.mk test/fixtures/{{moduleType}}/root_one.js",
+        description: "dependency-cruise -f test/output/{{moduleType}}.file.json test/fixtures/{{moduleType}}/root_one.js",
         dirOrFile: "test/fixtures/{{moduleType}}/root_one.js",
         options: {
-            outputTo: path.join(OUT_DIR, "{{moduleType}}.file.mk")
+            outputTo: path.join(OUT_DIR, "{{moduleType}}.file.json")
         },
-        expect: "{{moduleType}}.file.mk",
+        expect: "{{moduleType}}.file.json",
         cleanup: true
     },
     {
-        description: "dependency-cruise -f test/output/{{moduleType}}.dir.filtered.mk -x node_modules test/fixtures/{{moduleType}}",
+        description: "dependency-cruise -f test/output/{{moduleType}}.dir.filtered.json -x node_modules test/fixtures/{{moduleType}}",
         dirOrFile: "test/fixtures/{{moduleType}}",
         options: {
-            outputTo: path.join(OUT_DIR, "{{moduleType}}.dir.filtered.mk"),
+            outputTo: path.join(OUT_DIR, "{{moduleType}}.dir.filtered.json"),
             exclude: "node_modules"
         },
-        expect: "{{moduleType}}.dir.filtered.mk",
+        expect: "{{moduleType}}.dir.filtered.json",
         cleanup: true
     },
     {
@@ -131,8 +131,7 @@ function resetOutputDir() {
         });
 
     deleteDammit(path.join(OUT_DIR, "cjs.dir.stdout.json"));
-    deleteDammit(path.join(OUT_DIR, "cjs.dir.stdout.mk"));
-    deleteDammit(path.join(OUT_DIR, "amd.dir.stdout.mk"));
+    deleteDammit(path.join(OUT_DIR, "amd.dir.stdout.json"));
     deleteDammit(path.join(OUT_DIR, "cjs.dir.dot"));
 }
 
@@ -191,14 +190,14 @@ describe("#main", () => {
             main.main("test/fixtures/cjs");
             unhookIntercept();
             fs.writeFileSync(
-                path.join(OUT_DIR, "cjs.dir.stdout.mk"),
+                path.join(OUT_DIR, "cjs.dir.stdout.json"),
                 lCapturedStdout,
                 "utf8"
             );
 
             tst.assertFileEqual(
-                path.join(OUT_DIR, "cjs.dir.stdout.mk"),
-                path.join(FIX_DIR, "cjs.dir.stdout.mk")
+                path.join(OUT_DIR, "cjs.dir.stdout.json"),
+                path.join(FIX_DIR, "cjs.dir.stdout.json")
             );
         });
 
@@ -222,7 +221,7 @@ describe("#main", () => {
             );
         });
 
-        it("dependency-cruise -f cjs.dir.wontmarch.mk this-doesnot-exist - non-existing generates an error", () => {
+        it("dependency-cruise -f cjs.dir.wontmarch.json this-doesnot-exist - non-existing generates an error", () => {
             let lCapturedStderr = "";
             const unhookInterceptStdOut = intercept(() => {
                 // This space intentionally left empty
@@ -232,7 +231,7 @@ describe("#main", () => {
                 lCapturedStderr += pText;
             });
 
-            main.main("this-doesnot-exist", {outputTo: path.join(OUT_DIR, "cjs.dir.wontmarch.mk")});
+            main.main("this-doesnot-exist", {outputTo: path.join(OUT_DIR, "cjs.dir.wontmarch.json")});
             unhookInterceptStdOut();
             unhookInterceptStdErr();
 

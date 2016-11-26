@@ -1,3 +1,3 @@
 "use strict";
 
-exports.render = pInput => JSON.stringify(pInput, null, "  ");
+exports.render = pInput => JSON.stringify(pInput, null, "    ");
