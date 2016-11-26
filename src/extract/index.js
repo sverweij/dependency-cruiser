@@ -79,6 +79,7 @@ function toDependencyToSource(pToListItem) {
         source: pToListItem.resolved,
         followable: pToListItem.followable,
         coreModule: pToListItem.coreModule,
+        couldNotResolve: pToListItem.couldNotResolve,
         dependencies: []
     };
 }

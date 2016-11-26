@@ -11,6 +11,7 @@
                 "moduleSystem": "cjs",
                 "coreModule": false,
                 "followable": true,
+                "couldNotResolve": false,
                 "valid": true
             },
             {
@@ -19,6 +20,7 @@
                 "moduleSystem": "cjs",
                 "coreModule": false,
                 "followable": false,
+                "couldNotResolve": false,
                 "valid": true
             },
             {
@@ -27,6 +29,7 @@
                 "moduleSystem": "cjs",
                 "coreModule": false,
                 "followable": false,
+                "couldNotResolve": false,
                 "valid": true
             },
             {
@@ -35,6 +38,7 @@
                 "moduleSystem": "cjs",
                 "coreModule": false,
                 "followable": false,
+                "couldNotResolve": false,
                 "valid": true
             },
             {
@@ -43,6 +47,7 @@
                 "moduleSystem": "cjs",
                 "coreModule": false,
                 "followable": true,
+                "couldNotResolve": false,
                 "valid": true
             }
         ]
@@ -61,6 +66,7 @@
                 "moduleSystem": "cjs",
                 "coreModule": false,
                 "followable": true,
+                "couldNotResolve": false,
                 "valid": true
             },
             {
@@ -69,6 +75,7 @@
                 "moduleSystem": "cjs",
                 "coreModule": false,
                 "followable": true,
+                "couldNotResolve": false,
                 "valid": true
             },
             {
@@ -77,6 +84,7 @@
                 "moduleSystem": "cjs",
                 "coreModule": false,
                 "followable": true,
+                "couldNotResolve": false,
                 "valid": true
             },
             {
@@ -85,6 +93,7 @@
                 "moduleSystem": "cjs",
                 "coreModule": false,
                 "followable": true,
+                "couldNotResolve": false,
                 "valid": true
             },
             {
@@ -93,6 +102,7 @@
                 "moduleSystem": "cjs",
                 "coreModule": false,
                 "followable": true,
+                "couldNotResolve": false,
                 "valid": true
             },
             {
@@ -101,6 +111,7 @@
                 "moduleSystem": "cjs",
                 "coreModule": true,
                 "followable": false,
+                "couldNotResolve": false,
                 "valid": true
             }
         ]
@@ -124,6 +135,7 @@
                 "moduleSystem": "cjs",
                 "coreModule": false,
                 "followable": true,
+                "couldNotResolve": false,
                 "valid": true
             },
             {
@@ -132,6 +144,7 @@
                 "moduleSystem": "cjs",
                 "coreModule": true,
                 "followable": false,
+                "couldNotResolve": false,
                 "valid": true
             }
         ]
@@ -148,6 +161,7 @@
                 "moduleSystem": "cjs",
                 "coreModule": true,
                 "followable": false,
+                "couldNotResolve": false,
                 "valid": true
             }
         ]
@@ -164,6 +178,7 @@
                 "moduleSystem": "cjs",
                 "coreModule": true,
                 "followable": false,
+                "couldNotResolve": false,
                 "valid": true
             }
         ]
@@ -180,6 +195,7 @@
                 "moduleSystem": "cjs",
                 "coreModule": false,
                 "followable": true,
+                "couldNotResolve": false,
                 "valid": true
             }
         ]
@@ -203,6 +219,7 @@
                 "moduleSystem": "cjs",
                 "coreModule": false,
                 "followable": true,
+                "couldNotResolve": false,
                 "valid": true
             }
         ]
@@ -219,6 +236,7 @@
                 "moduleSystem": "cjs",
                 "coreModule": false,
                 "followable": true,
+                "couldNotResolve": false,
                 "valid": true
             }
         ]
@@ -235,6 +253,7 @@
                 "moduleSystem": "cjs",
                 "coreModule": false,
                 "followable": false,
+                "couldNotResolve": true,
                 "valid": true
             },
             {
@@ -243,6 +262,7 @@
                 "moduleSystem": "cjs",
                 "coreModule": false,
                 "followable": false,
+                "couldNotResolve": true,
                 "valid": true
             }
         ]

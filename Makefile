@@ -238,6 +238,9 @@ test/report.dotReporter.spec.js: \
 test/report.errReporter.spec.js: \
 	src/report/errReporter.js
 
+test/report.htmlReporter.spec.js: \
+	src/report/htmlReporter.js
+
 test/validate.ruleSetNormalizer.js: \
 	src/validate/ruleSetNormalizer.js
 

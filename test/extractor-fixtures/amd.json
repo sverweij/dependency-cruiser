@@ -11,6 +11,7 @@
                 "moduleSystem": "amd",
                 "coreModule": false,
                 "followable": true,
+                "couldNotResolve": false,
                 "valid": true
             },
             {
@@ -19,6 +20,7 @@
                 "moduleSystem": "amd",
                 "coreModule": false,
                 "followable": true,
+                "couldNotResolve": false,
                 "valid": true
             }
         ]
@@ -35,6 +37,7 @@
                 "moduleSystem": "amd",
                 "coreModule": false,
                 "followable": true,
+                "couldNotResolve": false,
                 "valid": true
             },
             {
@@ -43,6 +46,7 @@
                 "moduleSystem": "amd",
                 "coreModule": false,
                 "followable": true,
+                "couldNotResolve": false,
                 "valid": true
             }
         ]
@@ -59,6 +63,7 @@
                 "moduleSystem": "amd",
                 "coreModule": false,
                 "followable": true,
+                "couldNotResolve": false,
                 "valid": true
             },
             {
@@ -67,6 +72,7 @@
                 "moduleSystem": "amd",
                 "coreModule": false,
                 "followable": true,
+                "couldNotResolve": false,
                 "valid": true
             },
             {
@@ -75,9 +81,7 @@
                 "moduleSystem": "amd",
                 "coreModule": false,
                 "followable": true,
-                "valid": true,
-                "valid": true,
-                "valid": true,
+                "couldNotResolve": false,
                 "valid": true
             }
         ]
@@ -95,8 +99,7 @@
                 "moduleSystem": "amd",
                 "coreModule": false,
                 "followable": true,
-                "valid": true,
-                "valid": true,
+                "couldNotResolve": false,
                 "valid": true
             },
             {
@@ -105,7 +108,7 @@
                 "moduleSystem": "amd",
                 "coreModule": false,
                 "followable": true,
-                "valid": true,
+                "couldNotResolve": false,
                 "valid": true
             }
         ]
@@ -122,6 +125,7 @@
                 "moduleSystem": "amd",
                 "coreModule": false,
                 "followable": true,
+                "couldNotResolve": false,
                 "valid": true
             },
             {
@@ -130,7 +134,7 @@
                 "moduleSystem": "cjs",
                 "coreModule": false,
                 "followable": true,
-                "valid": true,
+                "couldNotResolve": false,
                 "valid": true
             },
             {
@@ -139,6 +143,7 @@
                 "moduleSystem": "amd",
                 "coreModule": false,
                 "followable": true,
+                "couldNotResolve": false,
                 "valid": true
             },
             {
@@ -147,6 +152,7 @@
                 "moduleSystem": "cjs",
                 "coreModule": false,
                 "followable": true,
+                "couldNotResolve": false,
                 "valid": true
             }
         ]
@@ -163,6 +169,7 @@
                 "moduleSystem": "amd",
                 "coreModule": false,
                 "followable": false,
+                "couldNotResolve": true,
                 "valid": true
             },
             {
@@ -171,7 +178,7 @@
                 "moduleSystem": "amd",
                 "coreModule": false,
                 "followable": false,
-                "valid": true,
+                "couldNotResolve": true,
                 "valid": true
             },
             {
@@ -180,6 +187,7 @@
                 "moduleSystem": "amd",
                 "coreModule": false,
                 "followable": true,
+                "couldNotResolve": false,
                 "valid": true
             }
         ]

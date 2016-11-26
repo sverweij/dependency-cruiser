@@ -93,6 +93,10 @@
         color: grey;
         font-style: italic;
     }
+    .cell-unresolvable-module {
+        color: red;
+        font-style: italic;
+    }
     .cell-true {
         background-color: black;
         opacity: 0.5;
@@ -121,25 +125,25 @@
                 <a id="rotate" href="#table-rotated">rotate</a>
                 <a id="unrotate" href="#">rotate back</a>
             </td>
-            {{#each things}}<th><div{{#if coreModule}} class="cell-core-module"{{/if}}>{{source}}</div></th>{{/each}}
+            {{#each things}}<th><div{{#if coreModule}} class="cell-core-module"{{else}}{{#if couldNotResolve}} class="cell-unresolvable-module"{{/if}}{{/if}}>{{source}}</div></th>{{/each}}
             <td class="top-right"></td>
         </tr>
     </thead>
     <tbody>
         {{#each things}}
         <tr>
-            <td class="first-cell{{#if coreModule}} cell-core-module{{/if}}">{{source}}</td>
+            <td class="first-cell{{#if coreModule}} cell-core-module{{else}}{{#if couldNotResolve}} cell-unresolvable-module{{/if}}{{/if}}">{{source}}</td>
             {{#each incidences}}<td class="cell cell-{{incidence}}"{{#if hasRelation}} title="{{# if rule}}{{rule}}:
 {{/if}}{{../source}} ->
 {{to}}"{{/if}}></td>{{/each}}
-            <td class="first-cell{{#if coreModule}} cell-core-module{{/if}}">{{source}}</td>
+            <td class="first-cell{{#if coreModule}} cell-core-module{{else}}{{#if couldNotResolve}} cell-unresolvable-module{{/if}}{{/if}}">{{source}}</td>
         </tr>
         {{/each}}
     </tbody>
     <tfoot>
         <tr>
             <td class="bottom-left"></td>
-            {{#each things}}<th><div{{#if coreModule}} class="cell-core-module"{{/if}}>{{source}}</div></th>{{/each}}
+            {{#each things}}<th><div{{#if coreModule}} class="cell-core-module"{{else}}{{#if couldNotResolve}} class="cell-unresolvable-module"{{/if}}{{/if}}>{{source}}</div></th>{{/each}}
             <td class="bottom-right"></td>
         </tr>
     </tfoot>

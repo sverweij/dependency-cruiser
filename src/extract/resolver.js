@@ -12,9 +12,10 @@ const isRelativeModuleName = pString => pString.startsWith(".");
  */
 function resolveCJSModule(pModuleName, pBaseDir, pFileDir) {
     let lRetval = {
-        resolved: pModuleName,
-        coreModule: false,
-        followable: false
+        resolved        : pModuleName,
+        coreModule      : false,
+        followable      : false,
+        couldNotResolve : false
     };
 
     if (resolve.isCore(pModuleName)){
@@ -27,18 +28,18 @@ function resolveCJSModule(pModuleName, pBaseDir, pFileDir) {
             );
             lRetval.followable = (path.extname(lRetval.resolved) !== ".json");
         } catch (e) {
-            // intentionally left blank
+            lRetval.couldNotResolve = true;
         }
     }
     return lRetval;
 }
 
 function resolveAMDModule(pModuleName, pBaseDir, pFileDir) {
-    // TODO resolution of non-relative AMD modules
     // lookups:
-    // - could be relative in the end (implemented)
-    // - require.config kerfuffle (command line, html, file, ...)
-    // - maybe use mrjoelkemp/module-lookup-amd ?
+    // - [x] could be relative in the end (implemented)
+    // - [ ] require.config kerfuffle (command line, html, file, ...)
+    // - [ ] maybe use mrjoelkemp/module-lookup-amd ?
+    // - [ ] funky plugins (json!wappie, screeching-cat!saberttooth)
     const lProbablePath = path.relative(
         pBaseDir,
         path.join(pFileDir, `${pModuleName}.js`)
@@ -47,7 +48,8 @@ function resolveAMDModule(pModuleName, pBaseDir, pFileDir) {
     return {
         resolved: utl.fileExists(lProbablePath) ? lProbablePath : pModuleName,
         coreModule: Boolean(resolve.isCore(pModuleName)),
-        followable: utl.fileExists(lProbablePath)
+        followable: utl.fileExists(lProbablePath),
+        couldNotResolve: !Boolean(resolve.isCore(pModuleName)) && !utl.fileExists(lProbablePath)
     };
 }
 

@@ -26,6 +26,7 @@
                     "moduleSystem": "cjs",
                     "coreModule": false,
                     "followable": true,
+                    "couldNotResolve": false,
                     "valid": true
                 },
                 {
@@ -34,6 +35,7 @@
                     "moduleSystem": "cjs",
                     "coreModule": false,
                     "followable": false,
+                    "couldNotResolve": false,
                     "valid": true
                 },
                 {
@@ -42,6 +44,7 @@
                     "moduleSystem": "cjs",
                     "coreModule": false,
                     "followable": true,
+                    "couldNotResolve": false,
                     "valid": true
                 },
                 {
@@ -50,6 +53,7 @@
                     "moduleSystem": "cjs",
                     "coreModule": true,
                     "followable": false,
+                    "couldNotResolve": false,
                     "valid": true
                 }
             ]
@@ -57,12 +61,14 @@
         {
             "source": "test/extractor-fixtures/cjs/somedata.json",
             "followable": false,
+            "couldNotResolve": false,
             "coreModule": false,
             "dependencies": []
         },
         {
             "source": "http",
             "followable": false,
+            "couldNotResolve": false,
             "coreModule": true,
             "dependencies": []
         },
@@ -75,6 +81,7 @@
                     "moduleSystem": "cjs",
                     "coreModule": true,
                     "followable": false,
+                    "couldNotResolve": false,
                     "valid": true
                 }
             ]
@@ -82,6 +89,7 @@
         {
             "source": "path",
             "followable": false,
+            "couldNotResolve": false,
             "coreModule": true,
             "dependencies": []
         },
@@ -94,6 +102,7 @@
                     "moduleSystem": "cjs",
                     "coreModule": false,
                     "followable": true,
+                    "couldNotResolve": false,
                     "valid": true
                 }
             ]
@@ -107,6 +116,7 @@
                     "moduleSystem": "cjs",
                     "coreModule": false,
                     "followable": true,
+                    "couldNotResolve": false,
                     "valid": true
                 },
                 {
@@ -115,6 +125,7 @@
                     "moduleSystem": "cjs",
                     "coreModule": true,
                     "followable": false,
+                    "couldNotResolve": false,
                     "valid": true
                 }
             ]
@@ -128,6 +139,7 @@
                     "moduleSystem": "cjs",
                     "coreModule": true,
                     "followable": false,
+                    "couldNotResolve": false,
                     "valid": true
                 }
             ]
@@ -152,6 +164,7 @@
                         "moduleSystem": "cjs",
                         "coreModule": false,
                         "followable": true,
+                        "couldNotResolve": false,
                         "valid": true
                     },
                     {
@@ -160,6 +173,7 @@
                         "moduleSystem": "cjs",
                         "coreModule": false,
                         "followable": true,
+                        "couldNotResolve": false,
                         "valid": true
                     },
                     {
@@ -168,6 +182,7 @@
                         "moduleSystem": "cjs",
                         "coreModule": false,
                         "followable": true,
+                        "couldNotResolve": false,
                         "valid": true
                     },
                     {
@@ -176,6 +191,7 @@
                         "moduleSystem": "cjs",
                         "coreModule": false,
                         "followable": true,
+                        "couldNotResolve": false,
                         "valid": true
                     },
                     {
@@ -184,6 +200,7 @@
                         "moduleSystem": "cjs",
                         "coreModule": true,
                         "followable": false,
+                        "couldNotResolve": false,
                         "valid": true
                     }
                 ]
@@ -191,6 +208,7 @@
             {
                 "source": "fs",
                 "followable": false,
+                "couldNotResolve": false,
                 "coreModule": true,
                 "dependencies": []
             },
@@ -203,6 +221,7 @@
                         "moduleSystem": "cjs",
                         "coreModule": true,
                         "followable": false,
+                        "couldNotResolve": false,
                         "valid": true
                     }
                 ]
@@ -210,6 +229,7 @@
             {
                 "source": "path",
                 "followable": false,
+                "couldNotResolve": false,
                 "coreModule": true,
                 "dependencies": []
             },
@@ -222,6 +242,7 @@
                         "moduleSystem": "cjs",
                         "coreModule": true,
                         "followable": false,
+                        "couldNotResolve": false,
                         "valid": true
                     }
                 ]
@@ -235,6 +256,7 @@
                         "moduleSystem": "cjs",
                         "coreModule": true,
                         "followable": false,
+                        "couldNotResolve": false,
                         "valid": true
                     }
                 ]
@@ -248,6 +270,7 @@
                         "moduleSystem": "cjs",
                         "coreModule": false,
                         "followable": true,
+                        "couldNotResolve": false,
                         "valid": true
                     },
                     {
@@ -256,6 +279,7 @@
                         "moduleSystem": "cjs",
                         "coreModule": true,
                         "followable": false,
+                        "couldNotResolve": false,
                         "valid": true
                     }
                 ]
@@ -269,6 +293,7 @@
                         "moduleSystem": "cjs",
                         "coreModule": true,
                         "followable": false,
+                        "couldNotResolve": false,
                         "valid": true
                     }
                 ]
@@ -290,6 +315,7 @@
                         "moduleSystem": "cjs",
                         "coreModule": false,
                         "followable": true,
+                        "couldNotResolve": false,
                         "valid": true
                     }
                 ]
@@ -303,6 +329,7 @@
                         "moduleSystem": "cjs",
                         "coreModule": false,
                         "followable": true,
+                        "couldNotResolve": false,
                         "valid": true
                     }
                 ]
@@ -324,7 +351,8 @@
                         "moduleSystem": "cjs",
                         "coreModule": false,
                         "followable": true,
-                    "valid": true
+                        "couldNotResolve": false,
+                        "valid": true
                     }
                 ]
             },
@@ -337,6 +365,7 @@
                         "moduleSystem": "cjs",
                         "coreModule": false,
                         "followable": true,
+                        "couldNotResolve": false,
                         "valid": true
                     }
                 ]
@@ -350,6 +379,7 @@
                         "moduleSystem": "cjs",
                         "coreModule": false,
                         "followable": true,
+                        "couldNotResolve": false,
                         "valid": true
                     }
                 ]

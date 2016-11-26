@@ -14,7 +14,7 @@ digraph "dependency-cruiser output"{
 {{#each things}}
     {{#if folder}}{{#each path}}subgraph "cluster_{{{aggregateSnippet}}}" {label="{{{snippet}}}" {{/each}}"{{{source}}}" [label="{{{label}}}"]{{#each path}} }{{/each}}
     {{else~}}
-    "{{{source}}}"{{#if coreModule}} [color="grey" fontcolor="grey"]{{/if}}
+    "{{{source}}}"{{#if coreModule}} [color="grey" fontcolor="grey"]{{else}}{{#if couldNotResolve}} [color="red" fontcolor="red"]{{/if}}{{/if}}
     {{/if}}
 {{/each}}
 

@@ -85,12 +85,10 @@ function extractDependencies(pFileName, pOptions) {
                     );
 
                     return Object.assign(
+                        lResolved,
                         {
                             module       : pDependency.moduleName,
-                            resolved     : lResolved.resolved,
-                            moduleSystem : pDependency.moduleSystem,
-                            coreModule   : lResolved.coreModule,
-                            followable   : lResolved.followable
+                            moduleSystem : pDependency.moduleSystem
                         },
                         validator.validate(
                             pOptions.validate,

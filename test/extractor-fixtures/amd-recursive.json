@@ -14,6 +14,7 @@
                         "moduleSystem": "amd",
                         "coreModule": false,
                         "followable": false,
+                        "couldNotResolve": true,
                         "valid": true
                     },
                     {
@@ -22,6 +23,7 @@
                         "moduleSystem": "amd",
                         "coreModule": false,
                         "followable": false,
+                        "couldNotResolve": true,
                         "valid": true
                     },
                     {
@@ -30,6 +32,7 @@
                         "moduleSystem": "amd",
                         "coreModule": false,
                         "followable": true,
+                        "couldNotResolve": false,
                         "valid": true
                     }
                 ]
@@ -38,12 +41,14 @@
                 "source": "lodash",
                 "followable": false,
                 "coreModule": false,
+                "couldNotResolve": true,
                 "dependencies": []
             },
             {
                 "source": "other-module-in-the-config",
                 "followable": false,
                 "coreModule": false,
+                "couldNotResolve": true,
                 "dependencies": []
             },
             {

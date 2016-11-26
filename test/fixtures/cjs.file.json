@@ -3,51 +3,57 @@
         "source": "test/fixtures/cjs/root_one.js",
         "dependencies": [
             {
-                "module": "./one_only_one",
                 "resolved": "test/fixtures/cjs/one_only_one.js",
-                "moduleSystem": "cjs",
                 "coreModule": false,
                 "followable": true,
+                "couldNotResolve": false,
+                "module": "./one_only_one",
+                "moduleSystem": "cjs",
                 "valid": true
             },
             {
-                "module": "./one_only_two",
                 "resolved": "test/fixtures/cjs/one_only_two.js",
-                "moduleSystem": "cjs",
                 "coreModule": false,
                 "followable": true,
+                "couldNotResolve": false,
+                "module": "./one_only_two",
+                "moduleSystem": "cjs",
                 "valid": true
             },
             {
-                "module": "./shared",
                 "resolved": "test/fixtures/cjs/shared.js",
-                "moduleSystem": "cjs",
                 "coreModule": false,
                 "followable": true,
+                "couldNotResolve": false,
+                "module": "./shared",
+                "moduleSystem": "cjs",
                 "valid": true
             },
             {
-                "module": "./sub/dir",
                 "resolved": "test/fixtures/cjs/sub/dir.js",
-                "moduleSystem": "cjs",
                 "coreModule": false,
                 "followable": true,
+                "couldNotResolve": false,
+                "module": "./sub/dir",
+                "moduleSystem": "cjs",
                 "valid": true
             },
             {
-                "module": "fs",
                 "resolved": "fs",
-                "moduleSystem": "cjs",
                 "coreModule": true,
                 "followable": false,
+                "couldNotResolve": false,
+                "module": "fs",
+                "moduleSystem": "cjs",
                 "valid": true
             },
             {
-                "module": "somemodule",
                 "resolved": "test/fixtures/cjs/node_modules/somemodule/src/somemodule.js",
-                "moduleSystem": "cjs",
                 "coreModule": false,
                 "followable": true,
+                "couldNotResolve": false,
+                "module": "somemodule",
+                "moduleSystem": "cjs",
                 "valid": true
             }
         ]
@@ -56,17 +62,19 @@
         "source": "fs",
         "followable": false,
         "coreModule": true,
+        "couldNotResolve": false,
         "dependencies": []
     },
     {
         "source": "test/fixtures/cjs/one_only_one.js",
         "dependencies": [
             {
-                "module": "path",
                 "resolved": "path",
-                "moduleSystem": "cjs",
                 "coreModule": true,
                 "followable": false,
+                "couldNotResolve": false,
+                "module": "path",
+                "moduleSystem": "cjs",
                 "valid": true
             }
         ]
@@ -75,17 +83,19 @@
         "source": "path",
         "followable": false,
         "coreModule": true,
+        "couldNotResolve": false,
         "dependencies": []
     },
     {
         "source": "test/fixtures/cjs/one_only_two.js",
         "dependencies": [
             {
-                "module": "path",
                 "resolved": "path",
-                "moduleSystem": "cjs",
                 "coreModule": true,
                 "followable": false,
+                "couldNotResolve": false,
+                "module": "path",
+                "moduleSystem": "cjs",
                 "valid": true
             }
         ]
@@ -94,11 +104,12 @@
         "source": "test/fixtures/cjs/shared.js",
         "dependencies": [
             {
-                "module": "path",
                 "resolved": "path",
-                "moduleSystem": "cjs",
                 "coreModule": true,
                 "followable": false,
+                "couldNotResolve": false,
+                "module": "path",
+                "moduleSystem": "cjs",
                 "valid": true
             }
         ]
@@ -107,19 +118,21 @@
         "source": "test/fixtures/cjs/sub/dir.js",
         "dependencies": [
             {
-                "module": "./depindir",
                 "resolved": "test/fixtures/cjs/sub/depindir.js",
-                "moduleSystem": "cjs",
                 "coreModule": false,
                 "followable": true,
+                "couldNotResolve": false,
+                "module": "./depindir",
+                "moduleSystem": "cjs",
                 "valid": true
             },
             {
-                "module": "path",
                 "resolved": "path",
-                "moduleSystem": "cjs",
                 "coreModule": true,
                 "followable": false,
+                "couldNotResolve": false,
+                "module": "path",
+                "moduleSystem": "cjs",
                 "valid": true
             }
         ]
@@ -128,11 +141,12 @@
         "source": "test/fixtures/cjs/sub/depindir.js",
         "dependencies": [
             {
-                "module": "path",
                 "resolved": "path",
-                "moduleSystem": "cjs",
                 "coreModule": true,
                 "followable": false,
+                "couldNotResolve": false,
+                "module": "path",
+                "moduleSystem": "cjs",
                 "valid": true
             }
         ]
@@ -141,19 +155,21 @@
         "source": "test/fixtures/cjs/node_modules/somemodule/src/somemodule.js",
         "dependencies": [
             {
-                "module": "./moar-javascript",
                 "resolved": "test/fixtures/cjs/node_modules/somemodule/src/moar-javascript.js",
-                "moduleSystem": "cjs",
                 "coreModule": false,
                 "followable": true,
+                "couldNotResolve": false,
+                "module": "./moar-javascript",
+                "moduleSystem": "cjs",
                 "valid": true
             },
             {
-                "module": "someothermodule",
                 "resolved": "test/fixtures/cjs/node_modules/somemodule/node_modules/someothermodule/main.js",
-                "moduleSystem": "cjs",
                 "coreModule": false,
                 "followable": true,
+                "couldNotResolve": false,
+                "module": "someothermodule",
+                "moduleSystem": "cjs",
                 "valid": true
             }
         ]

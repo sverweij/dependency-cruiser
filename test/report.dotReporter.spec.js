@@ -26,7 +26,7 @@ const elFixture = `digraph "dependency-cruiser output"{
     "path" [color="grey" fontcolor="grey"]
     "root_one.js"
     "root_two.js"
-    "shared.js"
+    "shared.js" [color="red" fontcolor="red"]
     "somedata.json"
     subgraph "cluster_/sub" {label="sub" "sub/depindir.js" [label="depindir.js"] }
     subgraph "cluster_/sub" {label="sub" "sub/dir.js" [label="dir.js"] }
