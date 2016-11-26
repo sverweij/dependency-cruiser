@@ -35,6 +35,18 @@
                 ]
             },
             {
+                "source": "lodash",
+                "followable": false,
+                "coreModule": false,
+                "dependencies": []
+            },
+            {
+                "source": "other-module-in-the-config",
+                "followable": false,
+                "coreModule": false,
+                "dependencies": []
+            },
+            {
                 "source": "test/extractor-fixtures/amd/sub/local-module-in-drag.js",
                 "dependencies": []
             }

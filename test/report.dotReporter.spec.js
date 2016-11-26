@@ -16,14 +16,18 @@ const elFixture = `digraph "dependency-cruiser output"{
     node [shape=box style="rounded, filled" fillcolor="#ffffcc" height=0.2 fontname=Helvetica fontsize=9]
     edge [color=black arrowhead=normal fontname="Helvetica" fontsize="9"]
 
+    "fs" [color="grey" fontcolor="grey"]
+    "http" [color="grey" fontcolor="grey"]
     subgraph "cluster_/node_modules" {label="node_modules" subgraph "cluster_/node_modules/somemodule" {label="somemodule" subgraph "cluster_/node_modules/somemodule/node_modules" {label="node_modules" subgraph "cluster_/node_modules/somemodule/node_modules/someothermodule" {label="someothermodule" "node_modules/somemodule/node_modules/someothermodule/main.js" [label="main.js"] } } } }
     subgraph "cluster_/node_modules" {label="node_modules" subgraph "cluster_/node_modules/somemodule" {label="somemodule" subgraph "cluster_/node_modules/somemodule/src" {label="src" "node_modules/somemodule/src/moar-javascript.js" [label="moar-javascript.js"] } } }
     subgraph "cluster_/node_modules" {label="node_modules" subgraph "cluster_/node_modules/somemodule" {label="somemodule" subgraph "cluster_/node_modules/somemodule/src" {label="src" "node_modules/somemodule/src/somemodule.js" [label="somemodule.js"] } } }
     "one_only_one.js"
     "one_only_two.js"
+    "path" [color="grey" fontcolor="grey"]
     "root_one.js"
     "root_two.js"
     "shared.js"
+    "somedata.json"
     subgraph "cluster_/sub" {label="sub" "sub/depindir.js" [label="depindir.js"] }
     subgraph "cluster_/sub" {label="sub" "sub/dir.js" [label="dir.js"] }
     "two_only_one.js"

@@ -18,8 +18,8 @@ digraph "dependency-cruiser output"{
     subgraph "cluster_/test" {label="test" subgraph "cluster_/test/fixtures" {label="fixtures" subgraph "cluster_/test/fixtures/duplicate-subs" {label="duplicate-subs" subgraph "cluster_/test/fixtures/duplicate-subs/sub" {label="sub" "test/fixtures/duplicate-subs/sub/more-in-sub.js" [label="more-in-sub.js"] } } } }
     subgraph "cluster_/test" {label="test" subgraph "cluster_/test/fixtures" {label="fixtures" subgraph "cluster_/test/fixtures/duplicate-subs" {label="duplicate-subs" subgraph "cluster_/test/fixtures/duplicate-subs/sub" {label="sub" "test/fixtures/duplicate-subs/sub/most-in-sub.js" [label="most-in-sub.js"] } } } }
 
-    "test/fixtures/duplicate-subs/nested-sub/sub/index.js" -> "test/fixtures/duplicate-subs/nested-sub/sub/sub.js" 
-    "test/fixtures/duplicate-subs/nested-sub/sub/index.js" -> "test/fixtures/duplicate-subs/nested-sub/sub/wakka.js" 
-    "test/fixtures/duplicate-subs/nested-sub/sub/sub.js" -> "test/fixtures/duplicate-subs/nested-sub/sub/wakka.js" 
-    "test/fixtures/duplicate-subs/sub/index.js" -> "test/fixtures/duplicate-subs/nested-sub/sub/index.js" 
+    "test/fixtures/duplicate-subs/nested-sub/sub/index.js" -> "test/fixtures/duplicate-subs/nested-sub/sub/sub.js"
+    "test/fixtures/duplicate-subs/nested-sub/sub/index.js" -> "test/fixtures/duplicate-subs/nested-sub/sub/wakka.js"
+    "test/fixtures/duplicate-subs/nested-sub/sub/sub.js" -> "test/fixtures/duplicate-subs/nested-sub/sub/wakka.js"
+    "test/fixtures/duplicate-subs/sub/index.js" -> "test/fixtures/duplicate-subs/nested-sub/sub/index.js"
 }

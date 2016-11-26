@@ -65,6 +65,35 @@ function extractRecursiveDir(pDirName, pOptions) {
     );
 }
 
+function isNotFollowable(pToDependency) {
+    return !(pToDependency.followable);
+}
+
+function notInFromListAlready(pFromList) {
+    return pToListItem =>
+        !pFromList.some(pFromListItem => pFromListItem.source === pToListItem.resolved);
+}
+
+function toDependencyToSource(pToListItem) {
+    return {
+        source: pToListItem.resolved,
+        followable: pToListItem.followable,
+        coreModule: pToListItem.coreModule,
+        dependencies: []
+    };
+}
+
+function complete(pAll, pFromListItem) {
+    return pAll
+        .concat(pFromListItem)
+        .concat(
+            pFromListItem.dependencies
+                .filter(isNotFollowable)
+                .filter(notInFromListAlready(pAll))
+                .map(toDependencyToSource)
+        );
+}
+
 function extract(pDirOrFile, pOptions, pCallback) {
     let lRetvalToTransform = {};
     let lCallback = pCallback ? pCallback : pInput => pInput;
@@ -74,7 +103,7 @@ function extract(pDirOrFile, pOptions, pCallback) {
     } else {
         lRetvalToTransform = extractRecursive(pDirOrFile, pOptions);
     }
-    return lCallback(lRetvalToTransform);
+    return lCallback(lRetvalToTransform.reduce(complete, []));
 }
 
 exports.extract = extract;

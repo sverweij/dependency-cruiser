@@ -1,13 +1,17 @@
 "use strict";
 
 function compareOnSource(pOne, pTwo) {
-    return pOne.source > pTwo.source ? 1 : -1;
+
+    return `${pOne.coreModule ? "1" : "0"}-${pOne.source}` >
+        `${pTwo.coreModule ? "1" : "0"}-${pTwo.source}`
+        ? 1
+        : -1;
 }
 
-function determineIncidenceType(pDependencyListEntry) {
+function determineIncidenceType(pFromListEntry) {
     return pDependency => {
         let lDep = pDependency.dependencies.find(
-            pDep => pDep.resolved === pDependencyListEntry.source
+            pDep => pDep.resolved === pFromListEntry.source
         );
 
         if (lDep) {
@@ -27,24 +31,28 @@ function determineIncidenceType(pDependencyListEntry) {
     };
 }
 
-function addIncidences(pDependencyList) {
-    return (pDependency) => {
-        return {
-            source: pDependency.source,
-            incidences: pDependencyList.map(pDependencyListEntry => {
-                return Object.assign(
-                    {
-                        to: pDependencyListEntry.source
-                    },
-                    determineIncidenceType(pDependencyListEntry)(pDependency)
-                );
-            })
-        };
-    };
+function addIncidences(pFromList) {
+    return (pDependency) =>
+        Object.assign(
+            pDependency,
+            {
+                incidences: pFromList.map(pFromListEntry => {
+                    return Object.assign(
+                        {
+                            to: pFromListEntry.source
+                        },
+                        determineIncidenceType(pFromListEntry)(pDependency)
+                    );
+                })
+            }
+        );
 }
 
-function transform(pDependencyList) {
-    return pDependencyList.sort(compareOnSource).map(addIncidences(pDependencyList));
+
+function transform(pFromList) {
+    return pFromList
+        .sort(compareOnSource)
+        .map(addIncidences(pFromList));
 }
 
 exports.transform = transform;

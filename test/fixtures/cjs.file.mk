@@ -53,6 +53,12 @@
     ]
   },
   {
+    "source": "fs",
+    "followable": false,
+    "coreModule": true,
+    "dependencies": []
+  },
+  {
     "source": "test/fixtures/cjs/one_only_one.js",
     "dependencies": [
       {
@@ -64,6 +70,12 @@
         "valid": true
       }
     ]
+  },
+  {
+    "source": "path",
+    "followable": false,
+    "coreModule": true,
+    "dependencies": []
   },
   {
     "source": "test/fixtures/cjs/one_only_two.js",

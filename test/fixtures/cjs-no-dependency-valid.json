@@ -54,6 +54,12 @@
     ]
   },
   {
+    "source": "path",
+    "followable": false,
+    "coreModule": true,
+    "dependencies": []
+  },
+  {
     "source": "one_only_two.js",
     "dependencies": [
       {
@@ -146,6 +152,12 @@
         }
       }
     ]
+  },
+  {
+    "source": "fs",
+    "followable": false,
+    "coreModule": true,
+    "dependencies": []
   },
   {
     "source": "shared.js",
@@ -262,6 +274,18 @@
         }
       }
     ]
+  },
+  {
+    "source": "somedata.json",
+    "followable": false,
+    "coreModule": false,
+    "dependencies": []
+  },
+  {
+    "source": "http",
+    "followable": false,
+    "coreModule": true,
+    "dependencies": []
   },
   {
     "source": "two_only_one.js",

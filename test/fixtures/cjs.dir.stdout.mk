@@ -42,6 +42,12 @@
     ]
   },
   {
+    "source": "path",
+    "followable": false,
+    "coreModule": true,
+    "dependencies": []
+  },
+  {
     "source": "test/fixtures/cjs/one_only_two.js",
     "dependencies": [
       {
@@ -106,6 +112,12 @@
         "valid": true
       }
     ]
+  },
+  {
+    "source": "fs",
+    "followable": false,
+    "coreModule": true,
+    "dependencies": []
   },
   {
     "source": "test/fixtures/cjs/shared.js",
@@ -190,6 +202,18 @@
         "valid": true
       }
     ]
+  },
+  {
+    "source": "test/fixtures/cjs/somedata.json",
+    "followable": false,
+    "coreModule": false,
+    "dependencies": []
+  },
+  {
+    "source": "http",
+    "followable": false,
+    "coreModule": true,
+    "dependencies": []
   },
   {
     "source": "test/fixtures/cjs/two_only_one.js",
