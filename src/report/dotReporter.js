@@ -5,7 +5,7 @@ const Handlebars = require("handlebars/dist/cjs/handlebars.runtime");
 
 require("./dot.template");
 
-const LEVEL2COLOR = {
+const SEVERITY2COLOR = {
     error       : "red",
     warning     : "orange",
     information : "blue"
@@ -48,7 +48,7 @@ function determineColor(pDependency) {
     let lColorAddition = {};
 
     if (pDependency.hasOwnProperty("valid") && !pDependency.valid) {
-        lColorAddition.color = LEVEL2COLOR[pDependency.rule.level] || DEFAULT_VIOLATION_COLOR;
+        lColorAddition.color = SEVERITY2COLOR[pDependency.rule.severity] || DEFAULT_VIOLATION_COLOR;
     }
 
     return Object.assign(

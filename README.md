@@ -124,14 +124,14 @@ in the `test` folder and allows everything else:
 }
 ```
 
-You can optionally specify a name and an error level ('error',  'warning' (the
+You can optionally specify a name and an error severity ('error',  'warning' (the
 default) and 'information') with them that will appear in some reporters:
 
 ```json
 {
     "forbidden": [{
         "name": "no-src-to-test",
-        "level": "error",
+        "severity": "error",
         "from": "^src",
         "to": "^test"
     }]
@@ -168,20 +168,20 @@ A more elaborate configuration:
             "from": "^src",
             "to": "^test",
             "name": "no-src-to-test",
-            "level": "error"
+            "severity": "error"
         },{
             "from": "dependencyless\\.js",
             "to": ".+",
-            "comment": "level & name default to 'level' and 'unnamed'"
+            "comment": "severity & name default to 'severity' and 'unnamed'"
         },{
             "from": "externalDependencyLess\\.js",
             "to": "node_modules",
-            "level": "warning"
+            "severity": "warning"
         },{
             "from": "node_modules",
             "to": "^(src|test|lib)",
             "name": "external-depends-on-you",
-            "level": "error",
+            "severity": "error",
             "comment": "well, you never know ..."
         }
     ]

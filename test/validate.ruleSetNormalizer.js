@@ -7,7 +7,7 @@ describe("validator", () => {
         expect(normalizer.normalize({})).to.deep.equal({});
     });
 
-    it("adds defaults for level and warning when they're not filled", () => {
+    it("adds defaults for severity and warning when they're not filled", () => {
         expect(normalizer.normalize({
             "allowed": [{
                 "from": ".+",
@@ -17,43 +17,43 @@ describe("validator", () => {
             "allowed": [{
                 "from": ".+",
                 "to": ".+",
-                "level": "warning",
+                "severity": "warning",
                 "name": "unnamed"
             }]
         });
     });
 
-    it("corrects the level to a default when it's not a recognized one", () => {
+    it("corrects the severity to a default when it's not a recognized one", () => {
         expect(normalizer.normalize({
             "allowed": [{
                 "from": ".+",
                 "to": ".+",
-                "level": "unrecognized",
+                "severity": "unrecognized",
                 "name": "all-ok"
             }]
         })).to.deep.equal({
             "allowed": [{
                 "from": ".+",
                 "to": ".+",
-                "level": "warning",
+                "severity": "warning",
                 "name": "all-ok"
             }]
         });
     });
 
-    it("keeps the level if it's a recognized one", () => {
+    it("keeps the severity if it's a recognized one", () => {
         expect(normalizer.normalize({
             "allowed": [{
                 "from": ".+",
                 "to": ".+",
-                "level": "error",
+                "severity": "error",
                 "name": "all-ok"
             }]
         })).to.deep.equal({
             "allowed": [{
                 "from": ".+",
                 "to": ".+",
-                "level": "error",
+                "severity": "error",
                 "name": "all-ok"
             }]
         });
@@ -64,7 +64,7 @@ describe("validator", () => {
             "forbidden": [{
                 "from": ".+",
                 "to": ".+",
-                "level": "error",
+                "severity": "error",
                 "name": "all-ok",
                 "comment": "this comment is kept"
             }]
@@ -72,7 +72,7 @@ describe("validator", () => {
             "forbidden": [{
                 "from": ".+",
                 "to": ".+",
-                "level": "error",
+                "severity": "error",
                 "name": "all-ok",
                 "comment": "this comment is kept"
             }]

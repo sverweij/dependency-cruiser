@@ -22,12 +22,12 @@
     ],
     "forbidden": [{
 		"name": "no-dep-on-test",
-		"level": "error",
+		"severity": "error",
         "from": "^src",
         "to": "^test"
     },{
 		"name": "no-external-to-here",
-		"level": "information",
+		"severity": "information",
         "from": "node_modules",
         "to": "^(src|test|lib)",
         "comment": "you never know..."

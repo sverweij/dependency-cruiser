@@ -20,7 +20,7 @@ function determineIncidenceType(pFromListEntry) {
                     incidence: "true"
                 }
                 : {
-                    incidence: lDep.rule.level,
+                    incidence: lDep.rule.severity,
                     rule: lDep.rule.name
                 };
         }

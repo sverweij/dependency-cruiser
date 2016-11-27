@@ -2,14 +2,14 @@
 
 const chalk = require('chalk');
 
-const LEVEL2CHALK = {
+const SEVERITY2CHALK = {
     'error'       : chalk.red,
     'warning'     : chalk.yellow,
     'information' : chalk.cyan
 };
 
 function formatError(pErr) {
-    return `${LEVEL2CHALK[pErr.rule.level](pErr.rule.level)} ${pErr.rule.name}: ` +
+    return `${SEVERITY2CHALK[pErr.rule.severity](pErr.rule.severity)} ${pErr.rule.name}: ` +
            `${chalk.bold(pErr.source)} => ${chalk.bold(pErr.resolved)}`;
 }
 

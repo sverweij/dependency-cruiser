@@ -5,7 +5,7 @@
     }],
     "forbidden":[{
         "name": "sub-not-allowed",
-        "level": "error",
+        "severity": "error",
         "from": ".+",
         "to": "sub"
     }]

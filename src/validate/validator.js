@@ -27,7 +27,7 @@ function validateAgainstRules(pRuleSet, pFrom, pTo) {
             return {
                 valid: false,
                 rule: {
-                    level: "warning",
+                    severity: "warning",
                     name: "not-in-allowed"
                 }
             };
@@ -39,7 +39,7 @@ function validateAgainstRules(pRuleSet, pFrom, pTo) {
             return {
                 valid: false,
                 rule: {
-                    level: lMatchedRule.level,
+                    severity: lMatchedRule.severity,
                     name : lMatchedRule.name
                 }
             };

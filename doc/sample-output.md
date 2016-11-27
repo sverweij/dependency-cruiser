@@ -9,7 +9,7 @@ the `.dependency-cruiser.json` in the root of her project:
 {
     "forbidden":[{
         "name": "sub-not-allowed",
-        "level": "error",
+        "severity": "error",
         "from": ".+",
         "to": "sub"
     }]

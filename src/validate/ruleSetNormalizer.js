@@ -1,13 +1,13 @@
 "use strict";
 
-const VALID_LEVELS  = /^(error|warning|information)$/;
-const DEFAULT_LEVEL = 'warning';
+const VALID_SEVERITIES  = /^(error|warning|information)$/;
+const DEFAULT_SEVERITY = 'warning';
 const DEFAULT_RULE  = 'unnamed';
 
 function normalizeLevel (pLevel){
-    let lLevel = pLevel ? pLevel : DEFAULT_LEVEL;
+    let lLevel = pLevel ? pLevel : DEFAULT_SEVERITY;
 
-    return Boolean(lLevel.match(VALID_LEVELS)) ? lLevel : DEFAULT_LEVEL;
+    return Boolean(lLevel.match(VALID_SEVERITIES)) ? lLevel : DEFAULT_SEVERITY;
 }
 
 function normalizeName(pRule) {
@@ -18,7 +18,7 @@ function normalizeRule(pRule) {
     return Object.assign(
         pRule,
         {
-            level : normalizeLevel(pRule.level),
+            severity : normalizeLevel(pRule.severity),
             name  : normalizeName(pRule.name)
         }
     );
