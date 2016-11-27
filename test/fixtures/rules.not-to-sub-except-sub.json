@@ -1,0 +1,15 @@
+{
+    "forbidden": [
+        {
+            "name": "not-to-sub-except-sub",
+            "severity": "error",
+            "comment": "everything to paths containing 'sub' is forbidden - except when the path contains 'sub' itself ",
+            "from": {
+                "pathNot": "\/sub\/"
+            },
+            "to": {
+                "path": "\/sub\/"
+            }
+        }
+    ]
+}

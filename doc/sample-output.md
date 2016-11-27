@@ -10,13 +10,13 @@ the `.dependency-cruiser.json` in the root of her project:
     "forbidden":[{
         "name": "sub-not-allowed",
         "severity": "error",
-        "from": { },
+        "from": { "pathNot": "sub" },
         "to": { "path": "sub" }
     }]
 }
 ```
 Dependencies from everywhere to the `sub` folder are _verboten_ from now on.
-:heart:.
+Except when they come from sub itself. :heart:.
 
 ## dot
 To get a feel of what she's in to, she runs a dep-cruise and runs the result
@@ -39,12 +39,11 @@ she uses the `err` output type:
 dependency-cruise -T err -v test/fixtures
 
     error sub-not-allowed: test/fixtures/cjs/root_one.js => test/fixtures/cjs/sub/dir.js
-    error sub-not-allowed: test/fixtures/cjs/sub/dir.js => test/fixtures/cjs/sub/depindir.js
     error sub-not-allowed: test/fixtures/cjs/two_only_one.js => test/fixtures/cjs/sub/dir.js
 
-  3 violations found
+  2 violations found
 
-make: *** [dependency-cruise] Error 3
+make: *** [dependency-cruise] Error 2
 ```
 (Daphne also loves how `-T err` just _shuts up_ and _stays out of her way_
 if there's nothing wrong.)

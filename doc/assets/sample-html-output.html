@@ -93,6 +93,10 @@
         color: grey;
         font-style: italic;
     }
+    .cell-unresolvable-module {
+        color: red;
+        font-style: italic;
+    }
     .cell-true {
         background-color: black;
         opacity: 0.5;
@@ -105,11 +109,11 @@
         background-color: red;
         opacity: 0.5;
     }
-    .cell-warning {
+    .cell-warn {
         background-color: orange;
         opacity: 0.5;
     }
-    .cell-information {
+    .cell-info {
         background-color: blue;
         opacity: 0.5;
     }
@@ -177,8 +181,7 @@ path"></td>
         </tr>
         <tr>
             <td class="first-cell">test/fixtures/cjs/sub/dir.js</td>
-            <td class="cell cell-false"></td><td class="cell cell-false"></td><td class="cell cell-false"></td><td class="cell cell-false"></td><td class="cell cell-false"></td><td class="cell cell-false"></td><td class="cell cell-error" title="sub-not-allowed:
-test/fixtures/cjs/sub/dir.js ->
+            <td class="cell cell-false"></td><td class="cell cell-false"></td><td class="cell cell-false"></td><td class="cell cell-false"></td><td class="cell cell-false"></td><td class="cell cell-false"></td><td class="cell cell-true" title="test/fixtures/cjs/sub/dir.js ->
 test/fixtures/cjs/sub/depindir.js"></td><td class="cell cell-false"></td><td class="cell cell-false"></td><td class="cell cell-false"></td><td class="cell cell-false"></td><td class="cell cell-true" title="test/fixtures/cjs/sub/dir.js ->
 path"></td>
             <td class="first-cell">test/fixtures/cjs/sub/dir.js</td>

@@ -1,0 +1,14 @@
+{
+    "forbidden": [
+        {
+            "name": "not-to-not-sub",
+            "severity": "error",
+            "comment": "everything to paths not containing 'sub' is forbidden",
+            "from": {
+            },
+            "to": {
+                "pathNot": "sub"
+            }
+        }
+    ]
+}

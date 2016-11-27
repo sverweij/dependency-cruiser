@@ -200,4 +200,70 @@ describe("validator", () => {
             )
         ).to.deep.equal({valid: false, rule: {severity: 'error', name: 'only-to-core'}});
     });
+
+    it("not to sub except sub itself - ok - sub to sub", () => {
+        expect(
+            validator.validate(
+                true,
+                "./test/fixtures/rules.not-to-sub-except-sub.json",
+                "./keek/op/de/sub/week.js",
+                {"resolved": "./keek/op/de/sub/maand.js", "coreModule": false}
+            )
+        ).to.deep.equal({valid: true});
+    });
+
+    it("not to sub except sub itself - ok - not sub to not sub", () => {
+        expect(
+            validator.validate(
+                true,
+                "./test/fixtures/rules.not-to-sub-except-sub.json",
+                "./doctor/clavan.js",
+                {"resolved": "./rochebrune.js", "coreModule": false}
+            )
+        ).to.deep.equal({valid: true});
+    });
+
+    it("not to sub except sub itself - ok - sub to not sub", () => {
+        expect(
+            validator.validate(
+                true,
+                "./test/fixtures/rules.not-to-sub-except-sub.json",
+                "./doctor/sub/clavan.js",
+                {"resolved": "./rochebrune.js", "coreModule": false}
+            )
+        ).to.deep.equal({valid: true});
+    });
+
+    it("not to sub except sub itself  - violation - not sub to sub", () => {
+        expect(
+            validator.validate(
+                true,
+                "./test/fixtures/rules.not-to-sub-except-sub.json",
+                "./doctor/clavan.js",
+                {"resolved": "./keek/op/de/sub/week.js", "coreModule": false}
+            )
+        ).to.deep.equal({valid: false, rule: {severity: 'error', name: 'not-to-sub-except-sub'}});
+    });
+
+    it("not to not sub (=> everything must go to 'sub')- ok - sub to sub", () => {
+        expect(
+            validator.validate(
+                true,
+                "./test/fixtures/rules.not-to-not-sub.json",
+                "./keek/op/de/sub/week.js",
+                {"resolved": "./keek/op/de/sub/maand.js", "coreModule": false}
+            )
+        ).to.deep.equal({valid: true});
+    });
+
+    it("not to not sub (=> everything must go to 'sub')- violation - not sub to not sub", () => {
+        expect(
+            validator.validate(
+                true,
+                "./test/fixtures/rules.not-to-not-sub.json",
+                "./amber.js",
+                {"resolved": "./jade.js", "coreModule": false}
+            )
+        ).to.deep.equal({valid: false, rule: {severity: 'error', name: 'not-to-not-sub'}});
+    });
 });
