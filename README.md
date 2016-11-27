@@ -146,16 +146,31 @@ A more elaborate configuration:
   dependencies to stuff in `node_modules`.
 - modules can't have references to modules that can't be resolved
 
-
 ```json
 {
+    "forbidden": [{
+            "name": "not-to-test",
+            "comment": "don't allow dependencies from outside the test folder to test",
+            "severity": "error",
+            "from": { "pathNot": "^test" },
+            "to": { "path": "^test" }
+        },{
+            "name": "not-to-unresolvable",
+            "comment": "don't allow dependencies to modules that cannot be resolved (and probably don't exist on disk)",
+            "severity": "error",
+            "from": {},
+            "to": { "couldNotResolve": true }
+        },{
+            "name": "not-to-core-puny-os",
+            "comment": "allow dependencies on core modules, but not on 'punycode' (which has been deprecated) or 'os' (for no reason)",
+            "severity": "info",
+            "from": { },
+            "to": { "coreModule": true, "path": "^(punycode|os)$"}
+
+        }],
     "allowed": [{
             "from": { "path": "^(src|test)" },
             "to": { "path": "^(src|node_modules)" }
-        }, {
-            "comment": "because these are the only core that modules make sense here",
-            "from": { "path": "^(src|test)" },
-            "to": { "coreModule": true, "path": "^(fs|path)$" }
         }, {
             "from": { "path": "^bin" },
             "to": { "path": "^src/index\\.js" }
@@ -168,23 +183,6 @@ A more elaborate configuration:
         }, {
             "from": { "path": "^test" },
             "to": { "path": "^test" }
-        }],
-    "forbidden": [{
-            "name": "no-dep-on-test",
-            "severity": "error",
-            "from": { "path": "^src" },
-            "to": { "path": "^test" }
-        }, {
-            "name": "no-external-to-here",
-            "comment": "you never know...",
-            "severity": "info",
-            "from": { "path": "node_modules" },
-            "to": { "path": "^(src|test|lib)" }
-        }, {
-            "name": "not-to-unresolvable",
-            "severity": "error",
-            "from": {},
-            "to": { "couldNotResolve": true }
         }]
 }
 ```
@@ -195,7 +193,7 @@ A more elaborate configuration:
 ## Thanks
 - [Marijn Haverbeke](http://marijnhaverbeke.nl) and other people who
   colaborated on [acorn](https://github.com/ternjs/acorn) -
-  the excelent javascript parser dependecy-cruiser uses to infer
+  the excelent javascript parser dependency-cruiser uses to infer
   dependencies.
 
 [![build status](https://gitlab.com/sverweij/dependency-cruiser/badges/develop/build.svg)](https://gitlab.com/sverweij/dependency-cruiser/commits/develop)
