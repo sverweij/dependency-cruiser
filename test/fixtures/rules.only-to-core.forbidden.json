@@ -1,0 +1,12 @@
+{
+    "forbidden": [
+        {
+            "name": "only-to-core",
+            "severity": "error",
+            "from": {},
+            "to": {
+                "coreModule": false
+            }
+        }
+    ]
+}

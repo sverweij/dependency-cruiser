@@ -14,8 +14,18 @@ const readRules = _.memoize(
     }
 );
 
+function propertyEquals(pTo, pRule, pProperty) {
+    return pRule.to.hasOwnProperty(pProperty)
+        ? pTo[pProperty] === pRule.to[pProperty]
+        : true;
+}
+
 function matchRule(pFrom, pTo) {
-    return pRule => pFrom.match(pRule.from.path) && pTo.match(pRule.to.path);
+    return pRule =>
+        (!Boolean(pRule.from.path) || pFrom.match(pRule.from.path)) &&
+        (!Boolean(pRule.to.path) || pTo.resolved.match(pRule.to.path)) &&
+        propertyEquals(pTo, pRule, "coreModule") &&
+        propertyEquals(pTo, pRule, "couldNotResolve");
 }
 
 function validateAgainstRules(pRuleSet, pFrom, pTo) {
@@ -39,8 +49,8 @@ function validateAgainstRules(pRuleSet, pFrom, pTo) {
             return {
                 valid: false,
                 rule: {
-                    severity: lMatchedRule.severity,
-                    name : lMatchedRule.name
+                    severity : lMatchedRule.severity,
+                    name     : lMatchedRule.name
                 }
             };
         }
@@ -56,3 +66,9 @@ function validate (pValidate, pRuleSetFile, pFrom, pTo) {
 }
 
 exports.validate = validate;
+
+/* ignore security/detect-object-injection because:
+   - we only use it from within the module with two fixed values
+   - the propertyEquals function is not exposed externaly
+ */
+/* eslint security/detect-object-injection: 0 */

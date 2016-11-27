@@ -1,10 +1,12 @@
 {
     "forbidden": [
         {
+            "name": "not-to-unresolvable",
+            "severity": "error",
             "from": {
             },
             "to": {
-                "path": ".+"
+                "couldNotResolve": true
             }
         }
     ]

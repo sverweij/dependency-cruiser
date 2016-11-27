@@ -10,12 +10,13 @@ the `.dependency-cruiser.json` in the root of her project:
     "forbidden":[{
         "name": "sub-not-allowed",
         "severity": "error",
-        "from": { "path": ".+" },
+        "from": { },
         "to": { "path": "sub" }
     }]
 }
 ```
-Dependencies from everywhere to the `sub` folder are _verboten_ from now on. :heart:.
+Dependencies from everywhere to the `sub` folder are _verboten_ from now on.
+:heart:.
 
 ## dot
 To get a feel of what she's in to, she runs a dep-cruise and runs the result
@@ -62,8 +63,8 @@ dependency-cruise -T html -v -f stuff-for-alex/sample-dot-output.html test/fixtu
 ```
 
 (_Actually the  build server didn't. You know that. Build servers aren't that
-nice. In fact that darn clever Daphne put it in her Makefile. Over where she
-lets the coverage reporting happen. The build server just ran it blindly._)
+nice. In fact that darn clever Daphne put it in her Makefile. Near her coverage
+reporting. The build server just ran it blindly._)
 
 ![sample html output](https://raw.githubusercontent.com/sverweij/dependency-cruiser/master/doc/assets/sample-html-output.png)
 

@@ -13,9 +13,13 @@
             "from": { "path": "^src/index\\.js" },
             "to": { "path": "^package\\.json$" }
         }, {
-			"comment": "node_modules may depend on node_modules and things looking like core modules",
+            "comment": "node_modules may depend core modules",
             "from": { "path": "^node_modules" },
-            "to": { "path": "(^node_modules|^[a-z_]+$)" }
+            "to": { "coreModule": false }
+        }, {
+            "comment": "node_modules may depend on node_modules",
+            "from": { "path": "^node_modules" },
+            "to": { "path": "^node_modules" }
         }, {
             "from": { "path": "^test" },
             "to": { "path": "^test" }
@@ -31,5 +35,10 @@
             "severity": "info",
             "from": { "path": "node_modules" },
             "to": { "path": "^(src|test|lib)" }
+        }, {
+            "name": "not-to-unresolvable",
+            "severity": "error",
+            "from": { },
+            "to": { "couldNotResolve": true }
         }]
 }

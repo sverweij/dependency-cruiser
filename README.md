@@ -144,6 +144,7 @@ A more elaborate configuration:
   can't have dependencies to any module.
 - modules with the pattern `externalDependencyLess\.js` can't have
   dependencies to stuff in `node_modules`.
+- modules can't have references to modules that can't be resolved
 
 
 ```json
@@ -152,9 +153,9 @@ A more elaborate configuration:
             "from": { "path": "^(src|test)" },
             "to": { "path": "^(src|node_modules)" }
         }, {
-            "comment": "because these core modules make sense here",
+            "comment": "because these are the only core that modules make sense here",
             "from": { "path": "^(src|test)" },
-            "to": { "path": "^(fs|path)$" }
+            "to": { "coreModule": true, "path": "^(fs|path)$" }
         }, {
             "from": { "path": "^bin" },
             "to": { "path": "^src/index\\.js" }
@@ -179,6 +180,11 @@ A more elaborate configuration:
             "severity": "info",
             "from": { "path": "node_modules" },
             "to": { "path": "^(src|test|lib)" }
+        }, {
+            "name": "not-to-unresolvable",
+            "severity": "error",
+            "from": {},
+            "to": { "couldNotResolve": true }
         }]
 }
 ```

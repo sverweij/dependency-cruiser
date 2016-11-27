@@ -1,9 +1,9 @@
 {
     "allowed": [
         {
-            "from": {
-            },
+            "from": {},
             "to": {
+                "coreModule": true
             }
         }
     ]

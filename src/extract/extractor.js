@@ -94,7 +94,7 @@ function extractDependencies(pFileName, pOptions) {
                             pOptions.validate,
                             pOptions.rulesFile,
                             pFileName,
-                            lResolved.resolved
+                            lResolved
                         )
                     );
                 }

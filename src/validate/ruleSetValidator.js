@@ -10,8 +10,8 @@ function hasPath(pObject, pPath) {
 function checkRuleSafety(pRule) {
     if (
         !(
-            hasPath(pRule, ["from", "path"]) && safeRegex(pRule.from.path) &&
-            hasPath(pRule, ["to", "path"]) && safeRegex(pRule.to.path)
+            (!hasPath(pRule, ["from", "path"]) || safeRegex(pRule.from.path)) &&
+            (!hasPath(pRule, ["to", "path"]) || safeRegex(pRule.to.path))
         )
     ){
         throw new Error(
