@@ -37,9 +37,8 @@ Options:
   -f, --output-to <file>    file to write output to; - for stdout (default: -)
   -x, --exclude <regex>     a regular expression for excluding modules
   -M, --system <items>      list of module systems (default: amd,cjs,es6)
-  -T, --output-type <type>  output type - html|dot|csv|err|json (default:json)
-  -v, --validate            validate against rules in .dependency-cruiser.json
-  -r, --rules-file <file>   read rules from <file> (default: .dependency-cruiser.json)
+  -T, --output-type <type>  output type - html|dot|err|json (default:json)
+  -v, --validate [file]     validate against rules from [file] (default: .dependency-cruiser.json)
 ```
 
 ## Output formats
@@ -64,11 +63,10 @@ dependency-cruise -x "^node_modules" -T dot src | dot -T svg > dependencygraph.s
 ```
 
 ### err
-For use in build scripts, in combination with `--validate` and/ or
-`--rules-file` e.g.
+For use in build scripts, in combination with `--validate` e.g.
 
 ```sh
-dependency-cruise -T err --rules-file my-depcruise-rules.json src
+dependency-cruise -T err --validate my-depcruise-rules.json src
 ```
 
 This will:
@@ -102,11 +100,10 @@ dependency-cruise -x "^(coverage|test|node_modules)" -T html -f deps-without-stu
 
 ## Validation
 Validates against a list of rules in a rules file. This defaults to a file
-called `.dependency-cruiser.json`, but you can specify your own rules file
-with `--rules-file`.
+called `.dependency-cruiser.json`, but you can specify your own rules file.
 
 ```shell
-dependency-cruise -T err -x node_modules -v --rules-file my.rules.json
+dependency-cruise -T err -x node_modules --validate my.rules.json
 ```
 
 The file specifies a bunch of regular expressions pairs your dependencies
@@ -185,11 +182,6 @@ A more elaborate configuration:
         }]
 }
 ```
-
-### --rules-file implies --validate
-Because if you supply a rules file, you probably intend them to
-be used in validation, dependency-cruiser assumes `--validate`
-to be passed even if it wasn't.
 
 ## License
 [MIT](LICENSE)

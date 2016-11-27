@@ -55,7 +55,7 @@ const testPairs = [
         options: {
             outputTo: path.join(OUT_DIR, "{{moduleType}}.dir.filtered.html"),
             outputType: "html",
-            rulesFile: "test/fixtures/rules.sub-not-allowed.json",
+            validate: "test/fixtures/rules.sub-not-allowed.json",
             exclude: "node_modules"
         },
         expect: "{{moduleType}}.dir.filtered.html",
@@ -66,7 +66,7 @@ const testPairs = [
         dirOrFile: "test/fixtures/{{moduleType}}",
         options: {
             outputTo: path.join(OUT_DIR, "{{moduleType}}.dir.filtered.dot"),
-            rulesFile: "test/fixtures/rules.sub-not-allowed.json",
+            validate: "test/fixtures/rules.sub-not-allowed.json",
             outputType: "dot",
             exclude: "node_modules"
         },
@@ -90,7 +90,7 @@ const testPairs = [
         options: {
             outputTo: path.join(OUT_DIR, "{{moduleType}}.dir.filtered.csv"),
             outputType: "csv",
-            rulesFile: "test/fixtures/rules.sub-not-allowed.json",
+            validate: "test/fixtures/rules.sub-not-allowed.json",
             exclude: "node_modules"
         },
         expect: "{{moduleType}}.dir.filtered.csv",
@@ -102,7 +102,7 @@ const testPairs = [
         options: {
             outputTo: path.join(OUT_DIR, "{{moduleType}}.dir.filtered.err"),
             outputType: "err",
-            rulesFile: "test/fixtures/rules.everything-allowed.json"
+            validate: "test/fixtures/rules.everything-allowed.json"
         },
         expect: "{{moduleType}}.dir.filtered.err",
         cleanup: true

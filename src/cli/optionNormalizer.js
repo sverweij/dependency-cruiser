@@ -16,16 +16,6 @@ function normalizeModuleSystems(pSystemList) {
     return DEFAULT_MODULE_SYSTEMS;
 }
 
-function normalizeValidation(pValidate, pRulesFile) {
-    if (pRulesFile){
-        return true;
-    }
-    if (Boolean(pValidate)){
-        return true;
-    }
-    return false;
-}
-
 function normalize(pOptions){
     pOptions = _.defaults(pOptions, {
         exclude: "",
@@ -35,10 +25,17 @@ function normalize(pOptions){
     });
 
     pOptions.moduleSystems = normalizeModuleSystems(pOptions.system);
-    pOptions.validate = normalizeValidation(pOptions.validate, pOptions.rulesFile);
-    if (pOptions.validate && !pOptions.hasOwnProperty("rulesFile")){
-        pOptions.rulesFile = ".dependency-cruiser.json";
+
+    if (pOptions.hasOwnProperty("validate")){
+        if (typeof pOptions.validate === 'boolean' && pOptions.validate){
+            pOptions.rulesFile = ".dependency-cruiser.json";
+        } else {
+            pOptions.rulesFile = pOptions.validate;
+        }
     }
+
+    pOptions.validate = pOptions.hasOwnProperty("validate");
+
     return pOptions;
 }
 

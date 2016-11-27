@@ -20,8 +20,7 @@ program
     .option("-x, --exclude <regex>", "a regular expression for excluding modules")
     .option("-M, --system <items>", "list of module systems (default: amd,cjs,es6)")
     .option("-T, --output-type <type>", "output type - html|dot|err|json (default:json)")
-    .option("-v, --validate", "validate against rules in .dependency-cruiser.json")
-    .option("-r, --rules-file <file>", "read rules from <file> (default: .dependency-cruiser.json)")
+    .option("-v, --validate [file]", "validate against rules in [file] (default: .dependency-cruiser.json)")
     .arguments("<directory-or-file>")
     .parse(process.argv);
 

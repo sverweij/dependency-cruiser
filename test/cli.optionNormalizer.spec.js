@@ -48,7 +48,7 @@ describe("optionNormalizer", () => {
         );
     });
 
-    it("-v without -r assumes .dependency-cruiser for rules", () => {
+    it("-v parameter assumes .dependency-cruiser for rules", () => {
         expect(
             optionNormalizer({validate: true})
         ).to.deep.equal(
@@ -58,14 +58,14 @@ describe("optionNormalizer", () => {
                 outputType: "json",
                 system: ["amd", "cjs", "es6"],
                 moduleSystems: ["amd", "cjs", "es6"],
-                validate: true,
-                rulesFile: ".dependency-cruiser.json"
+                rulesFile: ".dependency-cruiser.json",
+                validate: true
             }
         );
     });
-    it("-r implies -v", () => {
+    it("-v with parameter uses that parameter as rules file", () => {
         expect(
-            optionNormalizer({rulesFile: "./fixtures/rules.empty.json"})
+            optionNormalizer({validate: "./fixtures/rules.empty.json"})
         ).to.deep.equal(
             {
                 exclude: "",
@@ -73,8 +73,8 @@ describe("optionNormalizer", () => {
                 outputType: "json",
                 system: ["amd", "cjs", "es6"],
                 moduleSystems: ["amd", "cjs", "es6"],
-                validate: true,
-                rulesFile: "./fixtures/rules.empty.json"
+                rulesFile: "./fixtures/rules.empty.json",
+                validate: true
             }
         );
     });
