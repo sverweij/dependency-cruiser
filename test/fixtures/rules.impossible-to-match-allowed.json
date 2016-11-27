@@ -1,6 +1,12 @@
 {
-    "allowed":[{
-        "from": "only-this-one",
-        "to": "only-that-one"
-    }]
+    "allowed": [
+        {
+            "from": {
+                "path": "only-this-one"
+            },
+            "to": {
+                "path": "only-that-one"
+            }
+        }
+    ]
 }

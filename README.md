@@ -118,8 +118,8 @@ in the `test` folder and allows everything else:
 ```json
 {
     "forbidden": [{
-        "from": "^src",
-        "to": "^test"
+        "from": {"path": "^src"},
+        "to": {"path": "^test"}
     }]
 }
 ```
@@ -132,8 +132,8 @@ default) and 'info') with them that will appear in some reporters:
     "forbidden": [{
         "name": "no-src-to-test",
         "severity": "error",
-        "from": "^src",
-        "to": "^test"
+        "from": {"path": "^src"},
+        "to": {"path": "^test"}
     }]
 }
 ```
@@ -152,39 +152,37 @@ A more elaborate configuration:
 ```json
 {
     "allowed": [{
-            "from": "^src",
-            "to": "^(src|node_modules)"
-        },{
-            "from": "^src",
-            "to": "^(fs|path)$",
-            "comment": "other core modules don't make sense for the current project"
-        },{
-            "from": "^node_modules",
-            "to": ".+",
-            "comment": "outside our circle of influence"
-        }
-    ],
+            "from": { "path": "^(src|test)" },
+            "to": { "path": "^(src|node_modules)" }
+        }, {
+            "comment": "because these core modules make sense here",
+            "from": { "path": "^(src|test)" },
+            "to": { "path": "^(fs|path)$" }
+        }, {
+            "from": { "path": "^bin" },
+            "to": { "path": "^src/index\\.js" }
+        }, {
+            "from": { "path": "^src/index\\.js" },
+            "to": { "path": "^package\\.json$" }
+        }, {
+            "from": { "path": "^node_modules" },
+            "to": { "path": "^node_modules" }
+        }, {
+            "from": { "path": "^test" },
+            "to": { "path": "^test" }
+        }],
     "forbidden": [{
-            "from": "^src",
-            "to": "^test",
-            "name": "no-src-to-test",
-            "severity": "error"
-        },{
-            "from": "dependencyless\\.js",
-            "to": ".+",
-            "comment": "severity & name default to 'severity' and 'unnamed'"
-        },{
-            "from": "externalDependencyLess\\.js",
-            "to": "node_modules",
-            "severity": "warn"
-        },{
-            "from": "node_modules",
-            "to": "^(src|test|lib)",
-            "name": "external-depends-on-you",
+            "name": "no-dep-on-test",
             "severity": "error",
-            "comment": "well, you never know ..."
-        }
-    ]
+            "from": { "path": "^src" },
+            "to": { "path": "^test" }
+        }, {
+            "name": "no-external-to-here",
+            "comment": "you never know...",
+            "severity": "info",
+            "from": { "path": "node_modules" },
+            "to": { "path": "^(src|test|lib)" }
+        }]
 }
 ```
 

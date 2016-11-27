@@ -1,3 +1,3 @@
 instrumentation:
-    excludes: ["test/**/*", "src/index.js", "coverage/**/*", "tmp*"]
+    excludes: ["test/**/*", "src/index.js", "coverage/**/*", "tmp*", "utl/**/*"]
     include-all-sources: true

@@ -78,7 +78,7 @@ describe("validator", () => {
                 "koos koets",
                 "robby van de kerkhof"
             );
-            expect("not to be here").to.deep.equal("still here, though");
+            expect("not to be here").to.equal("still here, though");
         } catch (e) {
             expect(e).to.deep.equal(
                 Error(

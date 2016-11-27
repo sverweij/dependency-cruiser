@@ -15,7 +15,7 @@ const readRules = _.memoize(
 );
 
 function matchRule(pFrom, pTo) {
-    return pRule => pFrom.match(pRule.from) && pTo.match(pRule.to);
+    return pRule => pFrom.match(pRule.from.path) && pTo.match(pRule.to.path);
 }
 
 function validateAgainstRules(pRuleSet, pFrom, pTo) {

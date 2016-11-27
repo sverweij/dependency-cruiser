@@ -1,12 +1,24 @@
 {
-    "allowed":[{
-        "from": ".+",
-        "to": ".+"
-    }],
-    "forbidden":[{
-        "name": "sub-not-allowed",
-        "severity": "error",
-        "from": ".+",
-        "to": "sub"
-    }]
+    "allowed": [
+        {
+            "from": {
+                "path": ".+"
+            },
+            "to": {
+                "path": ".+"
+            }
+        }
+    ],
+    "forbidden": [
+        {
+            "name": "sub-not-allowed",
+            "severity": "error",
+            "from": {
+                "path": ".+"
+            },
+            "to": {
+                "path": "sub"
+            }
+        }
+    ]
 }
