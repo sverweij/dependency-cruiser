@@ -68,4 +68,4 @@ function validateParameters(pDirOrFile, pOptions) {
     }
 }
 
-exports.validate = validateParameters;
+module.exports = validateParameters;

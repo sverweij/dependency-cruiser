@@ -42,4 +42,4 @@ function normalize(pOptions){
     return pOptions;
 }
 
-exports.normalize = normalize;
+module.exports = normalize;

@@ -4,11 +4,11 @@ const normalizer = require('../src/validate/ruleSetNormalizer');
 
 describe("validator", () => {
     it("leaves the empty ruleset alone", () => {
-        expect(normalizer.normalize({})).to.deep.equal({});
+        expect(normalizer({})).to.deep.equal({});
     });
 
     it("adds defaults for severity and warn when they're not filled", () => {
-        expect(normalizer.normalize({
+        expect(normalizer({
             "allowed": [{
                 "from": ".+",
                 "to": ".+"
@@ -24,7 +24,7 @@ describe("validator", () => {
     });
 
     it("corrects the severity to a default when it's not a recognized one", () => {
-        expect(normalizer.normalize({
+        expect(normalizer({
             "allowed": [{
                 "from": ".+",
                 "to": ".+",
@@ -42,7 +42,7 @@ describe("validator", () => {
     });
 
     it("keeps the severity if it's a recognized one", () => {
-        expect(normalizer.normalize({
+        expect(normalizer({
             "allowed": [{
                 "from": ".+",
                 "to": ".+",
@@ -60,7 +60,7 @@ describe("validator", () => {
     });
 
     it("also works for 'forbidden' rules", () => {
-        expect(normalizer.normalize({
+        expect(normalizer({
             "forbidden": [{
                 "from": ".+",
                 "to": ".+",

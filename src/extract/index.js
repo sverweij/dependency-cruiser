@@ -27,7 +27,7 @@ function extractRecursive (pFileName, pOptions, pVisited) {
     pVisited.add(pFileName);
 
     let lRetval = [];
-    const lDependencies = extractor.extractDependencies(pFileName, pOptions);
+    const lDependencies = extractor(pFileName, pOptions);
 
     lRetval.push({
         source: pFileName,
@@ -107,4 +107,4 @@ function extract(pDirOrFile, pOptions, pCallback) {
     return lCallback(lRetvalToTransform.reduce(complete, []));
 }
 
-exports.extract = extract;
+module.exports = extract;

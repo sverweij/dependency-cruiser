@@ -36,4 +36,4 @@ function normalize(pRuleSet) {
     return pRuleSet;
 }
 
-exports.normalize = normalize;
+module.exports = normalize;

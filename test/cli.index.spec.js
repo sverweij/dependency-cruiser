@@ -157,7 +157,7 @@ function setModuleType(pTestPairs, pModuleType) {
 function runFileBasedTests(pModuleType) {
     setModuleType(testPairs, pModuleType).forEach(pPair => {
         it(pPair.description, () => {
-            main.main(pPair.dirOrFile, pPair.options);
+            main(pPair.dirOrFile, pPair.options);
             tst.assertFileEqual(
                 pPair.options.outputTo,
                 path.join(FIX_DIR, pPair.expect)
@@ -187,7 +187,7 @@ describe("#main", () => {
                 lCapturedStdout += pText;
             });
 
-            main.main("test/fixtures/cjs");
+            main("test/fixtures/cjs");
             unhookIntercept();
             fs.writeFileSync(
                 path.join(OUT_DIR, "cjs.dir.stdout.json"),
@@ -207,7 +207,7 @@ describe("#main", () => {
                 lCapturedStdout += pText;
             });
 
-            main.main("test/fixtures/cjs", {outputTo: "-", outputType: 'json'});
+            main("test/fixtures/cjs", {outputTo: "-", outputType: 'json'});
             unhookIntercept();
             fs.writeFileSync(
                 path.join(OUT_DIR, "cjs.dir.stdout.json"),
@@ -231,7 +231,7 @@ describe("#main", () => {
                 lCapturedStderr += pText;
             });
 
-            main.main("this-doesnot-exist", {outputTo: path.join(OUT_DIR, "cjs.dir.wontmarch.json")});
+            main("this-doesnot-exist", {outputTo: path.join(OUT_DIR, "cjs.dir.wontmarch.json")});
             unhookInterceptStdOut();
             unhookInterceptStdErr();
 
@@ -252,7 +252,7 @@ describe("#main", () => {
                 lCapturedStderr += pText;
             });
 
-            main.main(
+            main(
                 "test/fixtures",
                 {
                     outputTo: path.join(OUT_DIR, "/dev/null"),
@@ -282,7 +282,7 @@ describe("#main", () => {
                 lCapturedStderr += pText;
             });
 
-            main.main(
+            main(
                 "test/fixtures",
                 {
                     outputTo: path.join(OUT_DIR, "/dev/null"),
@@ -312,7 +312,7 @@ describe("#main", () => {
                 lCapturedStderr += pText;
             });
 
-            main.main(
+            main(
                 "test/fixtures",
                 {
                     outputTo: path.join(OUT_DIR, "file/you/cant/write/to")
@@ -341,7 +341,7 @@ describe("#main", () => {
                 lCapturedStderr += pText;
             });
 
-            main.main(
+            main(
                 "test/fixtures",
                 {
                     outputTo: path.join(OUT_DIR, "/dev/null"),

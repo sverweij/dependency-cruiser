@@ -1,6 +1,6 @@
 "use strict";
 const expect = require('chai').expect;
-const render = require('../src/report/htmlReporter').render;
+const render = require('../src/report/htmlReporter');
 const deps   = require('./fixtures/cjs-no-dependency-valid.json');
 
 const elFixture = `<style media="screen">

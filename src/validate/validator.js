@@ -9,8 +9,8 @@ const readRules = _.memoize(
     pRuleSetFile => {
         let lRetval = JSON.parse(fs.readFileSync(pRuleSetFile, 'utf8'));
 
-        ruleSetValidator.validate(lRetval);
-        return ruleSetNormalizer.normalize(lRetval);
+        ruleSetValidator(lRetval);
+        return ruleSetNormalizer(lRetval);
     }
 );
 

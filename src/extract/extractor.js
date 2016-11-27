@@ -8,9 +8,9 @@ const path                        = require('path');
 const resolver                    = require('./resolver');
 const validator                   = require('../validate/validator');
 const utl                         = require('../utl');
-const extractES6Dependencies      = require('./extractor-ES6').extract;
-const extractCommonJSDependencies = require('./extractor-commonJS').extract;
-const extractAMDDependencies      = require('./extractor-AMD').extract;
+const extractES6Dependencies      = require('./extractor-ES6');
+const extractCommonJSDependencies = require('./extractor-commonJS');
+const extractAMDDependencies      = require('./extractor-AMD');
 
 function getASTBare(pFileName) {
     const lFile = fs.readFileSync(pFileName, 'utf8');
@@ -78,7 +78,7 @@ function extractDependencies(pFileName, pOptions) {
             .sortBy(pDependency => `${pDependency.moduleName} ${pDependency.moduleSystem}`)
             .map(
                 pDependency => {
-                    const lResolved = resolver.resolveModuleToPath(
+                    const lResolved = resolver(
                         pDependency,
                         pOptions.baseDir,
                         path.dirname(pFileName)
@@ -106,4 +106,4 @@ function extractDependencies(pFileName, pOptions) {
     }
 }
 
-exports.extractDependencies = extractDependencies;
+module.exports = extractDependencies;

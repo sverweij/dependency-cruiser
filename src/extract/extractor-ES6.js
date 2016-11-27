@@ -2,7 +2,7 @@
 
 const walk        = require('acorn/dist/walk');
 
-exports.extract = (pAST, pDependencies) => {
+module.exports = (pAST, pDependencies) => {
     function pushSourceValue(pNode){
         if (pNode.source && pNode.source.value){
             pDependencies.push({

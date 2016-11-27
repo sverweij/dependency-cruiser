@@ -5,7 +5,7 @@ const optionNormalizer = require('../src/cli/optionNormalizer');
 describe("optionNormalizer", () => {
     it("normalizes empty options to no exclude, stdout, json and 'cjs, amd, es6'", () => {
         expect(
-            optionNormalizer.normalize({})
+            optionNormalizer({})
         ).to.deep.equal(
             {
                 exclude: "",
@@ -20,7 +20,7 @@ describe("optionNormalizer", () => {
 
     it("normalizes --system cjs,es6 to [cjs, es6]", () => {
         expect(
-            optionNormalizer.normalize({system: "cjs,es6"})
+            optionNormalizer({system: "cjs,es6"})
         ).to.deep.equal(
             {
                 exclude: "",
@@ -35,7 +35,7 @@ describe("optionNormalizer", () => {
 
     it("normalizes --system {} to [amd, cjs, es6]", () => {
         expect(
-            optionNormalizer.normalize({system: {}})
+            optionNormalizer({system: {}})
         ).to.deep.equal(
             {
                 exclude: "",
@@ -50,7 +50,7 @@ describe("optionNormalizer", () => {
 
     it("-v without -r assumes .dependency-cruiser for rules", () => {
         expect(
-            optionNormalizer.normalize({validate: true})
+            optionNormalizer({validate: true})
         ).to.deep.equal(
             {
                 exclude: "",
@@ -65,7 +65,7 @@ describe("optionNormalizer", () => {
     });
     it("-r implies -v", () => {
         expect(
-            optionNormalizer.normalize({rulesFile: "./fixtures/rules.empty.json"})
+            optionNormalizer({rulesFile: "./fixtures/rules.empty.json"})
         ).to.deep.equal(
             {
                 exclude: "",

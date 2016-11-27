@@ -29,4 +29,4 @@ function validate(pRuleSet) {
     }
 }
 
-exports.validate = validate;
+module.exports = validate;

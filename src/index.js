@@ -26,7 +26,7 @@ program
     .parse(process.argv);
 
 if (Boolean(program.args[0])) {
-    cli.main(
+    cli(
         program.args[0],
         program
     );

@@ -53,7 +53,7 @@ function resolveAMDModule(pModuleName, pBaseDir, pFileDir) {
     };
 }
 
-exports.resolveModuleToPath = (pDependency, pBaseDir, pFileDir) => {
+module.exports = (pDependency, pBaseDir, pFileDir) => {
     if (isRelativeModuleName(pDependency.moduleName)){
         return resolveCJSModule(pDependency.moduleName, pBaseDir, pFileDir);
     } else if (_.includes(["cjs", "es6"], pDependency.moduleSystem)){

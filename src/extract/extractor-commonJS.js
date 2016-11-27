@@ -2,7 +2,7 @@
 
 const walk = require('acorn/dist/walk');
 
-exports.extract = (pAST, pDependencies, pModuleSystem) => {
+module.exports = (pAST, pDependencies, pModuleSystem) => {
 
     // var/const lalala = require('./lalala');
     // require('./lalala');

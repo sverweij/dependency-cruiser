@@ -1,14 +1,14 @@
 "use strict";
 
 const fs                 = require("fs");
-const extract            = require("../extract").extract;
-const validateParameters = require("./parameterValidator").validate;
-const normalizeOptions   = require("./optionNormalizer").normalize;
-const reportHtml         = require("../report/htmlReporter").render;
-const reportJson         = require("../report/jsonReporter").render;
-const reportDot          = require("../report/dotReporter").render;
-const reportCsv          = require("../report/csvReporter").render;
-const reportErr          = require("../report/errReporter").render;
+const extract            = require("../extract");
+const validateParameters = require("./parameterValidator");
+const normalizeOptions   = require("./optionNormalizer");
+const reportHtml         = require("../report/htmlReporter");
+const reportJson         = require("../report/jsonReporter");
+const reportDot          = require("../report/dotReporter");
+const reportCsv          = require("../report/csvReporter");
+const reportErr          = require("../report/errReporter");
 
 const TYPE2REPORTER      = {
     "json" : reportJson,
@@ -47,7 +47,7 @@ function calculateExitCode(pDependencyList, pOutputType) {
     return pDependencyList.split('\n').length - ERROR_CHROME_OFFSET;
 }
 
-exports.main = (pDirOrFile, pOptions) => {
+module.exports = (pDirOrFile, pOptions) => {
     try {
         validateParameters(pDirOrFile, pOptions);
         pOptions = normalizeOptions(pOptions);

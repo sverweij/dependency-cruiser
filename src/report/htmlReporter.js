@@ -27,6 +27,6 @@ function render(pInput) {
     });
 }
 
-exports.render = render;
+module.exports = render;
 
 /* eslint arrow-body-style: 0 */

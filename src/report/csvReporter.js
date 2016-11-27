@@ -11,4 +11,4 @@ function render(pInput) {
     });
 }
 
-exports.render = render;
+module.exports = render;
