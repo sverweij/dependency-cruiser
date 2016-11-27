@@ -33,7 +33,7 @@ describe("validator", () => {
                 "koos koets",
                 "robby van de kerkhof"
             )
-        ).to.deep.equal({valid: false, rule: {severity: "warning", "name": "not-in-allowed"}});
+        ).to.deep.equal({valid: false, rule: {severity: "warn", "name": "not-in-allowed"}});
     });
 
 
@@ -45,7 +45,7 @@ describe("validator", () => {
                 "koos koets",
                 "robby van de kerkhof"
             )
-        ).to.deep.equal({valid: false, rule: {severity: 'warning', name: 'unnamed'}});
+        ).to.deep.equal({valid: false, rule: {severity: 'warn', name: 'unnamed'}});
     });
 
     it("node_modules inhibition - ok", () => {
@@ -67,7 +67,7 @@ describe("validator", () => {
                 "koos koets",
                 "./node_modules/evil-module"
             )
-        ).to.deep.equal({valid: false, rule: {severity: 'warning', name: 'unnamed'}});
+        ).to.deep.equal({valid: false, rule: {severity: 'warn', name: 'unnamed'}});
     });
 
     it("bails out on scary regexps", () => {

@@ -7,7 +7,7 @@ describe("validator", () => {
         expect(normalizer.normalize({})).to.deep.equal({});
     });
 
-    it("adds defaults for severity and warning when they're not filled", () => {
+    it("adds defaults for severity and warn when they're not filled", () => {
         expect(normalizer.normalize({
             "allowed": [{
                 "from": ".+",
@@ -17,7 +17,7 @@ describe("validator", () => {
             "allowed": [{
                 "from": ".+",
                 "to": ".+",
-                "severity": "warning",
+                "severity": "warn",
                 "name": "unnamed"
             }]
         });
@@ -35,7 +35,7 @@ describe("validator", () => {
             "allowed": [{
                 "from": ".+",
                 "to": ".+",
-                "severity": "warning",
+                "severity": "warn",
                 "name": "all-ok"
             }]
         });

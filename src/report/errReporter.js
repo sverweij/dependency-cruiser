@@ -4,8 +4,8 @@ const chalk = require('chalk');
 
 const SEVERITY2CHALK = {
     'error'       : chalk.red,
-    'warning'     : chalk.yellow,
-    'information' : chalk.cyan
+    'warn'     : chalk.yellow,
+    'info' : chalk.cyan
 };
 
 function formatError(pErr) {

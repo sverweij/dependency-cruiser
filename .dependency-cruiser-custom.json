@@ -27,7 +27,7 @@
         "to": "^test"
     },{
 		"name": "no-external-to-here",
-		"severity": "information",
+		"severity": "info",
         "from": "node_modules",
         "to": "^(src|test|lib)",
         "comment": "you never know..."

@@ -7,8 +7,8 @@ require("./dot.template");
 
 const SEVERITY2COLOR = {
     error       : "red",
-    warning     : "orange",
-    information : "blue"
+    warn     : "orange",
+    info : "blue"
 };
 const DEFAULT_VIOLATION_COLOR = "red";
 

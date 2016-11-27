@@ -27,7 +27,7 @@ function validateAgainstRules(pRuleSet, pFrom, pTo) {
             return {
                 valid: false,
                 rule: {
-                    severity: "warning",
+                    severity: "warn",
                     name: "not-in-allowed"
                 }
             };

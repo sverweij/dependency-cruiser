@@ -1,7 +1,7 @@
 "use strict";
 
-const VALID_SEVERITIES  = /^(error|warning|information)$/;
-const DEFAULT_SEVERITY = 'warning';
+const VALID_SEVERITIES  = /^(error|warn|info)$/;
+const DEFAULT_SEVERITY = 'warn';
 const DEFAULT_RULE  = 'unnamed';
 
 function normalizeLevel (pLevel){

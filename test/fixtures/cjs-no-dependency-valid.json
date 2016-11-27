@@ -18,7 +18,7 @@
         "followable": true,
         "valid": false,
         "rule": {
-          "severity": "warning",
+          "severity": "warn",
           "name": "unnamed"
         }
       },
@@ -30,7 +30,7 @@
         "followable": true,
         "valid": false,
         "rule": {
-          "severity": "warning",
+          "severity": "warn",
           "name": "unnamed"
         }
       }
@@ -47,7 +47,7 @@
         "followable": false,
         "valid": false,
         "rule": {
-          "severity": "warning",
+          "severity": "warn",
           "name": "unnamed"
         }
       }
@@ -70,7 +70,7 @@
         "followable": false,
         "valid": false,
         "rule": {
-          "severity": "warning",
+          "severity": "warn",
           "name": "unnamed"
         }
       }
@@ -87,7 +87,7 @@
         "followable": true,
         "valid": false,
         "rule": {
-          "severity": "warning",
+          "severity": "warn",
           "name": "unnamed"
         }
       },
@@ -99,7 +99,7 @@
         "followable": true,
         "valid": false,
         "rule": {
-          "severity": "warning",
+          "severity": "warn",
           "name": "unnamed"
         }
       },
@@ -111,7 +111,7 @@
         "followable": true,
         "valid": false,
         "rule": {
-          "severity": "warning",
+          "severity": "warn",
           "name": "unnamed"
         }
       },
@@ -123,7 +123,7 @@
         "followable": true,
         "valid": false,
         "rule": {
-          "severity": "warning",
+          "severity": "warn",
           "name": "unnamed"
         }
       },
@@ -135,7 +135,7 @@
         "followable": false,
         "valid": false,
         "rule": {
-          "severity": "warning",
+          "severity": "warn",
           "name": "unnamed"
         }
       },
@@ -147,7 +147,7 @@
         "followable": true,
         "valid": false,
         "rule": {
-          "severity": "warning",
+          "severity": "warn",
           "name": "unnamed"
         }
       }
@@ -171,7 +171,7 @@
         "followable": false,
         "valid": false,
         "rule": {
-          "severity": "warning",
+          "severity": "warn",
           "name": "unnamed"
         }
       }
@@ -188,7 +188,7 @@
         "followable": true,
         "valid": false,
         "rule": {
-          "severity": "warning",
+          "severity": "warn",
           "name": "unnamed"
         }
       },
@@ -200,7 +200,7 @@
         "followable": false,
         "valid": false,
         "rule": {
-          "severity": "warning",
+          "severity": "warn",
           "name": "unnamed"
         }
       }
@@ -217,7 +217,7 @@
         "followable": false,
         "valid": false,
         "rule": {
-          "severity": "warning",
+          "severity": "warn",
           "name": "unnamed"
         }
       }
@@ -234,7 +234,7 @@
         "followable": true,
         "valid": false,
         "rule": {
-          "severity": "warning",
+          "severity": "warn",
           "name": "unnamed"
         }
       },
@@ -246,7 +246,7 @@
         "followable": false,
         "valid": false,
         "rule": {
-          "severity": "warning",
+          "severity": "warn",
           "name": "unnamed"
         }
       },
@@ -258,7 +258,7 @@
         "followable": true,
         "valid": false,
         "rule": {
-          "severity": "warning",
+          "severity": "warn",
           "name": "unnamed"
         }
       },
@@ -270,7 +270,7 @@
         "followable": false,
         "valid": false,
         "rule": {
-          "severity": "warning",
+          "severity": "warn",
           "name": "unnamed"
         }
       }
@@ -299,7 +299,7 @@
         "followable": true,
         "valid": false,
         "rule": {
-          "severity": "warning",
+          "severity": "warn",
           "name": "unnamed"
         }
       }

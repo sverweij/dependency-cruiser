@@ -124,8 +124,8 @@ in the `test` folder and allows everything else:
 }
 ```
 
-You can optionally specify a name and an error severity ('error',  'warning' (the
-default) and 'information') with them that will appear in some reporters:
+You can optionally specify a name and an error severity ('error',  'warn' (the
+default) and 'info') with them that will appear in some reporters:
 
 ```json
 {
@@ -176,7 +176,7 @@ A more elaborate configuration:
         },{
             "from": "externalDependencyLess\\.js",
             "to": "node_modules",
-            "severity": "warning"
+            "severity": "warn"
         },{
             "from": "node_modules",
             "to": "^(src|test|lib)",
