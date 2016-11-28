@@ -62,11 +62,13 @@ templates['dot.template.hbs'] = template({"1":function(container,depth0,helpers,
 },"16":function(container,depth0,helpers,partials,data) {
     return " [color=\"grey\"]";
 },"18":function(container,depth0,helpers,partials,data) {
-    var helper;
+    var stack1, helper;
 
   return " [color=\""
-    + container.escapeExpression(((helper = (helper = helpers.color || (depth0 != null ? depth0.color : depth0)) != null ? helper : helpers.helperMissing),(typeof helper === "function" ? helper.call(depth0 != null ? depth0 : {},{"name":"color","hash":{},"data":data}) : helper)))
-    + "\" penwidth=2.0]";
+    + ((stack1 = ((helper = (helper = helpers.color || (depth0 != null ? depth0.color : depth0)) != null ? helper : helpers.helperMissing),(typeof helper === "function" ? helper.call(depth0 != null ? depth0 : {},{"name":"color","hash":{},"data":data}) : helper))) != null ? stack1 : "")
+    + "\" penwidth=2.0 tooltip=\""
+    + ((stack1 = container.lambda(((stack1 = (depth0 != null ? depth0.rule : depth0)) != null ? stack1.name : stack1), depth0)) != null ? stack1 : "")
+    + "\"]";
 },"compiler":[7,">= 4.0.0"],"main":function(container,depth0,helpers,partials,data,blockParams,depths) {
     var stack1, alias1=depth0 != null ? depth0 : {};
 
