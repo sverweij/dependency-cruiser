@@ -196,6 +196,10 @@ A more elaborate configuration:
   the excelent javascript parser dependency-cruiser uses to infer
   dependencies.
 
-[![build status](https://gitlab.com/sverweij/dependency-cruiser/badges/develop/build.svg)](https://gitlab.com/sverweij/dependency-cruiser/commits/develop)
-[![coverage report](https://gitlab.com/sverweij/dependency-cruiser/badges/develop/coverage.svg)](https://gitlab.com/sverweij/dependency-cruiser/commits/develop)
+[![build status](https://gitlab.com/sverweij/dependency-cruiser/badges/master/build.svg)](https://gitlab.com/sverweij/dependency-cruiser/builds)
+[![coverage](https://gitlab.com/sverweij/dependency-cruiser/badges/master/coverage.svg)](https://gitlab.com/sverweij/dependency-cruiser/builds)
 [![bitHound Overall Score](https://www.bithound.io/github/sverweij/dependency-cruiser/badges/score.svg)](https://www.bithound.io/github/sverweij/dependency-cruiser)
+[![bitHound Dependencies](https://www.bithound.io/github/sverweij/dependency-cruiser/badges/dependencies.svg)](https://www.bithound.io/github/sverweij/dependency-cruiser/master/dependencies/npm)
+[![bitHound Dev Dependencies](https://www.bithound.io/github/sverweij/dependency-cruiser/badges/devDependencies.svg)](https://www.bithound.io/github/sverweij/dependency-cruiser/master/dependencies/npm)
+[![npm stable version](https://img.shields.io/npm/v/dependency-cruiser.svg)](https://npmjs.com/package/dependency-cruiser)
+[![total downloads on npm](https://img.shields.io/npm/dt/dependency-cruiser.svg?maxAge=2592000)](https://npmjs.com/package/dependency-cruiser)
