@@ -36,3 +36,9 @@ test_async_node_4:
    - npm run cover
   except:
    - tags
+
+publish:
+  script:
+    - echo 'npm publish'
+  only:
+    - tags
