@@ -35,7 +35,7 @@ function extractRecursive (pFileName, pOptions, pVisited) {
     });
 
     lDependencies
-        .filter(pDep => pDep.followable && !pVisited.has(pDep.resolved))
+        .filter(pDep => pDep.followable)
         .forEach(
             pDep => {
                 if (!pVisited.has(pDep.resolved)){
@@ -76,11 +76,11 @@ function notInFromListAlready(pFromList) {
 
 function toDependencyToSource(pToListItem) {
     return {
-        source: pToListItem.resolved,
-        followable: pToListItem.followable,
-        coreModule: pToListItem.coreModule,
-        couldNotResolve: pToListItem.couldNotResolve,
-        dependencies: []
+        source          : pToListItem.resolved,
+        followable      : pToListItem.followable,
+        coreModule      : pToListItem.coreModule,
+        couldNotResolve : pToListItem.couldNotResolve,
+        dependencies    : []
     };
 }
 
