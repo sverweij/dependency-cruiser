@@ -38,6 +38,7 @@ test_async_node_4:
    - tags
 
 publish:
+  image: node:latest
   script:
     - echo 'npm publish'
   only:
