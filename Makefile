@@ -23,11 +23,16 @@ help:
 src/report/%.template.js: src/report/%.template.hbs
 	handlebars --commonjs handlebars/runtime -f $@ $<
 
+.npmignore: .gitignore
+	cp $< $@
+	echo "doc/real-world-samples.md" >> $@
+	echo "doc/real-world-samples/**" >> $@
+
 # "phony" targets
 prerequisites:
 	$(NPM) install
 
-dev-build: bin/dependency-cruise $(GENERATED_SOURCES) $(ALL_SRC)
+dev-build: bin/dependency-cruise $(GENERATED_SOURCES) $(ALL_SRC) .npmignore
 
 lint:
 	$(NPM) run lint
