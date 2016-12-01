@@ -36,14 +36,14 @@ function addIncidences(pFromList) {
         Object.assign(
             pDependency,
             {
-                incidences: pFromList.map(pFromListEntry => {
-                    return Object.assign(
+                incidences: pFromList.map(pFromListEntry =>
+                    Object.assign(
                         {
                             to: pFromListEntry.source
                         },
                         determineIncidenceType(pFromListEntry)(pDependency)
-                    );
-                })
+                    )
+                )
             }
         );
 }
@@ -56,5 +56,3 @@ function transform(pFromList) {
 }
 
 exports.transform = transform;
-
-/* eslint arrow-body-style: 0 */

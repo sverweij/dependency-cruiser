@@ -3,9 +3,9 @@
 const chalk = require('chalk');
 
 const SEVERITY2CHALK = {
-    'error'       : chalk.red,
-    'warn'     : chalk.yellow,
-    'info' : chalk.cyan
+    'error' : chalk.red,
+    'warn'  : chalk.yellow,
+    'info'  : chalk.cyan
 };
 
 function formatError(pErr) {
@@ -35,15 +35,33 @@ function render(pInput) {
         );
 
     if (lViolations.length === 0){
-        return "";
+        return {
+            content: ""
+        };
     }
 
-    return lViolations.reduce(
-        (pAll, pThis) => `${pAll}    ${formatError(pThis)}\n`,
-        "\n"
-    ).concat(
-        chalk.red(`\n  ${lViolations.length} violations found\n\n`)
+    let lMeta = lViolations.reduce(
+        (pAll, pThis) => {
+            pAll[pThis.rule.severity] += 1;
+            return pAll;
+        }
+        , {
+            error : 0,
+            warn  : 0,
+            info  : 0
+        }
     );
+
+    return {
+        content: lViolations.reduce(
+                (pAll, pThis) => `${pAll}    ${formatError(pThis)}\n`,
+                "\n"
+            ).concat(
+                chalk.red(`\n  ${lMeta.error > 0 ? `${lMeta.error} errors` : ""} found\n\n`)
+            ),
+        meta: lMeta
+    };
+
 }
 
 module.exports = render;

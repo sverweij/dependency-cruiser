@@ -9,24 +9,24 @@ function addShowTitle(pDependencyEntry) {
     return Object.assign(
         pDependencyEntry,
         {
-            incidences: pDependencyEntry.incidences.map(pIncidence => {
-                return Object.assign(
+            incidences: pDependencyEntry.incidences.map(pIncidence =>
+                Object.assign(
                     pIncidence,
                     {
                         hasRelation: pIncidence.incidence !== "false"
                     }
-                );
-            })
+                )
+            )
         }
     );
 }
 
 function render(pInput) {
-    return Handlebars.templates['html.template.hbs']({
-        "things" : dependencyToIncidenceTransformer.transform(pInput).map(addShowTitle)
-    });
+    return {
+        content: Handlebars.templates['html.template.hbs']({
+            "things" : dependencyToIncidenceTransformer.transform(pInput).map(addShowTitle)
+        })
+    };
 }
 
 module.exports = render;
-
-/* eslint arrow-body-style: 0 */

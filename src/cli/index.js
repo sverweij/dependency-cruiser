@@ -38,15 +38,6 @@ function write(pOutputTo, pContent) {
     }
 }
 
-function calculateExitCode(pDependencyList, pOutputType) {
-    const ERROR_CHROME_OFFSET = 5;
-
-    if (pOutputType !== "err") {
-        return 0;
-    }
-    return pDependencyList.split('\n').length - ERROR_CHROME_OFFSET;
-}
-
 module.exports = (pDirOrFile, pOptions) => {
     try {
         validateParameters(pDirOrFile, pOptions);
@@ -56,11 +47,11 @@ module.exports = (pDirOrFile, pOptions) => {
             pOptions,
             TYPE2REPORTER[pOptions.outputType]
         );
-        let lExitCode = calculateExitCode(lDependencyList, pOptions.outputType);
+        let lExitCode = lDependencyList.meta ? lDependencyList.meta.error : 0;
 
         write(
             pOptions.outputTo,
-            lDependencyList
+            lDependencyList.content
         );
 
         /* istanbul ignore if */

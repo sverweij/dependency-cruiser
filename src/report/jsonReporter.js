@@ -1,3 +1,5 @@
 "use strict";
 
-module.exports = pInput => JSON.stringify(pInput, null, "    ");
+module.exports = pInput => ({
+    content: JSON.stringify(pInput, null, "    ")
+});

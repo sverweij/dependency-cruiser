@@ -56,7 +56,7 @@ const elFixture = `digraph "dependency-cruiser output"{
 
 describe("dot reporter", () => {
     it("renders a dot - modules in the root don't come in a cluster", () => {
-        expect(render(deps)).to.deep.equal(elFixture);
+        expect(render(deps).content).to.deep.equal(elFixture);
         // console.log(render(deps));
         // expect(1).to.equal(1);
     });

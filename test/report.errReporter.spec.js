@@ -7,6 +7,6 @@ const NUMBER_OF_INVALID_DEPS_IN_FIXTURE = 24;
 
 describe("err reporter", () => {
     it("renders a bunch of errors", () => {
-        expect(render(deps).split('\n').length).to.equal(NUMBER_OF_INVALID_DEPS_IN_FIXTURE);
+        expect(render(deps).content.split('\n').length).to.equal(NUMBER_OF_INVALID_DEPS_IN_FIXTURE);
     });
 });

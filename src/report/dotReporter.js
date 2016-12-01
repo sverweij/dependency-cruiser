@@ -67,9 +67,11 @@ function colorize(pDependencyItem){
 }
 
 function render(pInput) {
-    return Handlebars.templates['dot.template.hbs']({
-        "things" : pInput.sort(compareOnSource).map(folderify).map(colorize)
-    });
+    return {
+        content: Handlebars.templates['dot.template.hbs']({
+            "things" : pInput.sort(compareOnSource).map(folderify).map(colorize)
+        })
+    };
 }
 
 module.exports = render;
