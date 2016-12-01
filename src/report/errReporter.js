@@ -1,6 +1,7 @@
 "use strict";
 
-const chalk = require('chalk');
+const chalk      = require('chalk');
+const logSymbols = require('log-symbols');
 
 const SEVERITY2CHALK = {
     'error' : chalk.red,
@@ -11,6 +12,10 @@ const SEVERITY2CHALK = {
 function formatError(pErr) {
     return `${SEVERITY2CHALK[pErr.rule.severity](pErr.rule.severity)} ${pErr.rule.name}: ` +
            `${chalk.bold(pErr.source)} => ${chalk.bold(pErr.resolved)}`;
+}
+
+function formatMeta(pMeta) {
+    return `${pMeta.error} errors, ${pMeta.warn} warnings`;
 }
 
 function cutNonTransgressions(pSourceEntry) {
@@ -54,10 +59,10 @@ function render(pInput) {
 
     return {
         content: lViolations.reduce(
-                (pAll, pThis) => `${pAll}    ${formatError(pThis)}\n`,
+                (pAll, pThis) => `${pAll}  ${formatError(pThis)}\n`,
                 "\n"
             ).concat(
-                chalk.red(`\n  ${lMeta.error > 0 ? `${lMeta.error} errors` : ""} found\n\n`)
+                chalk.red(`\n${logSymbols.error} ${lViolations.length} violations (${formatMeta(lMeta)}) \n\n`)
             ),
         meta: lMeta
     };
