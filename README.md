@@ -34,11 +34,12 @@ Options:
 
   -h, --help                output usage information
   -V, --version             output the version number
+  -v, --validate [file]     validate with rules from [file]
+                            (default: .dependency-cruiser.json)
   -f, --output-to <file>    file to write output to; - for stdout (default: -)
   -x, --exclude <regex>     a regular expression for excluding modules
   -M, --system <items>      list of module systems (default: amd,cjs,es6)
   -T, --output-type <type>  output type - html|dot|err|json (default:json)
-  -v, --validate [file]     validate against rules from [file] (default: .dependency-cruiser.json)
 ```
 
 ## Output formats
