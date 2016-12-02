@@ -1,6 +1,6 @@
 "use strict";
 const expect             = require('chai').expect;
-const parameterValidator = require('../src/cli/parameterValidator');
+const parameterValidator = require('../../src/cli/parameterValidator');
 
 describe("parameterValidator", () => {
     it("throws when the file or dir passed does not exists", () => {

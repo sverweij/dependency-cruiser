@@ -1,7 +1,7 @@
 "use strict";
 const expect = require('chai').expect;
-const render = require('../src/report/dotReporter');
-const deps   = require('./fixtures/cjs-no-dependency-valid.json');
+const render = require('../../src/report/dotReporter');
+const deps   = require('../fixtures/cjs-no-dependency-valid.json');
 
 const elFixture = `digraph "dependency-cruiser output"{
     ordering=out

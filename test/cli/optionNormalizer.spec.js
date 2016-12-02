@@ -1,6 +1,6 @@
 "use strict";
 const expect           = require('chai').expect;
-const optionNormalizer = require('../src/cli/optionNormalizer');
+const optionNormalizer = require('../../src/cli/optionNormalizer');
 
 describe("optionNormalizer", () => {
     it("normalizes empty options to no exclude, stdout, json and 'cjs, amd, es6'", () => {

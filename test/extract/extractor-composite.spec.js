@@ -1,7 +1,7 @@
 const expect               = require('chai').expect;
-const extractor            = require('../src/extract');
-const cjsRecursiveFixtures = require('./extractor-fixtures/cjs-recursive.json');
-const amdRecursiveFixtures = require('./extractor-fixtures/amd-recursive.json');
+const extractor            = require('../../src/extract');
+const cjsRecursiveFixtures = require('../extractor-fixtures/cjs-recursive.json');
+const amdRecursiveFixtures = require('../extractor-fixtures/amd-recursive.json');
 
 function runRecursiveFixture(pFixture) {
     if (!Boolean(pFixture.ignore)){

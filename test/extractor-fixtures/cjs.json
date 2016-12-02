@@ -1,58 +1,5 @@
 [
     {
-        "title": "test on extractor.spec.js",
-        "input": {
-            "fileName": "test/extract.extractor.spec.js"
-        },
-        "expected": [
-            {
-                "module": "../src/extract/extractor",
-                "resolved": "src/extract/extractor.js",
-                "moduleSystem": "cjs",
-                "coreModule": false,
-                "followable": true,
-                "couldNotResolve": false,
-                "valid": true
-            },
-            {
-                "module": "./extractor-fixtures/amd.json",
-                "resolved": "test/extractor-fixtures/amd.json",
-                "moduleSystem": "cjs",
-                "coreModule": false,
-                "followable": false,
-                "couldNotResolve": false,
-                "valid": true
-            },
-            {
-                "module": "./extractor-fixtures/cjs.json",
-                "resolved": "test/extractor-fixtures/cjs.json",
-                "moduleSystem": "cjs",
-                "coreModule": false,
-                "followable": false,
-                "couldNotResolve": false,
-                "valid": true
-            },
-            {
-                "module": "./extractor-fixtures/es6.json",
-                "resolved": "test/extractor-fixtures/es6.json",
-                "moduleSystem": "cjs",
-                "coreModule": false,
-                "followable": false,
-                "couldNotResolve": false,
-                "valid": true
-            },
-            {
-                "module": "chai",
-                "resolved": "node_modules/chai/index.js",
-                "moduleSystem": "cjs",
-                "coreModule": false,
-                "followable": true,
-                "couldNotResolve": false,
-                "valid": true
-            }
-        ]
-    },
-    {
         "title": "test on dependency-cruiser cjs fixture one",
         "input": {
             "fileName": "../dependency-cruiser/test/extractor-fixtures/cjs/root_one.js",

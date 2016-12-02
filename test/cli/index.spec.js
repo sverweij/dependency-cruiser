@@ -1,8 +1,8 @@
 "use strict";
 const expect    = require('chai').expect;
-const main      = require("../src/cli");
+const main      = require("../../src/cli");
 const fs        = require("fs");
-const tst       = require("./utl/testutensils");
+const tst       = require("../utl/testutensils");
 const path      = require("path");
 const _         = require("lodash");
 const intercept = require("intercept-stdout");

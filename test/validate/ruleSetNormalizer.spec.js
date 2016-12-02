@@ -1,6 +1,6 @@
 "use strict";
 const expect     = require('chai').expect;
-const normalizer = require('../src/validate/ruleSetNormalizer');
+const normalizer = require('../../src/validate/ruleSetNormalizer');
 
 describe("validator", () => {
     it("leaves the empty ruleset alone", () => {
