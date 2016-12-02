@@ -175,7 +175,7 @@ ALL_SRC=src/index.js \
 	src/validate/ruleSetValidator.js \
 	src/validate/validator.js
 # cjs dependencies
-test/cli.index.spec.js: \
+test/cli/index.spec.js: \
 	src/cli/index.js \
 	test/utl/testutensils.js
 
@@ -225,30 +225,30 @@ src/report/htmlReporter.js: \
 src/cli/parameterValidator.js: \
 	src/utl/index.js
 
-test/cli.optionNormalizer.spec.js: \
+test/cli/optionNormalizer.spec.js: \
 	src/cli/optionNormalizer.js
 
-test/cli.parameterValidator.spec.js: \
+test/cli/parameterValidator.spec.js: \
 	src/cli/parameterValidator.js
 
-test/extract.extractor-composite.spec.js: \
+test/extract/extractor-composite.spec.js: \
 	src/extract/index.js
 
-test/extract.extractor.spec.js: \
+test/extract/extractor.spec.js: \
 	src/extract/extractor.js
 
-test/report.dotReporter.spec.js: \
+test/report/dotReporter.spec.js: \
 	src/report/dotReporter.js
 
-test/report.errReporter.spec.js: \
+test/report/errReporter.spec.js: \
 	src/report/errReporter.js
 
-test/report.htmlReporter.spec.js: \
+test/report/htmlReporter.spec.js: \
 	src/report/htmlReporter.js
 
-test/validate.ruleSetNormalizer.js: \
+test/validate/ruleSetNormalizer.spec.js: \
 	src/validate/ruleSetNormalizer.js
 
-test/validate.validator.spec.js: \
+test/validate/validator.spec.js: \
 	src/validate/validator.js
 
