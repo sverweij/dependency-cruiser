@@ -1,6 +1,6 @@
 # Real world projects dependency cruised
 
-## Some opular projects on npm
+## Some popular projects on npm
 
 ### Commander
 [tj/commander.js](https://github.com/tj/commander.js) - For command line parsing - and cooking command line interfaces.
