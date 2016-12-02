@@ -23,7 +23,7 @@ To get a feel of what she's in to, she runs a dep-cruise and runs the result
 through dot. (_Daphne is like that. She and her command line: a *terrifying*
 weapon._)
 ```sh
-dependency-cruise -T dot -v test/fixtures | dot -T png > sample-dot-output.png
+dependency-cruise -v -T dot test/fixtures | dot -T png > sample-dot-output.png
 ```
 ![sample dot output](https://raw.githubusercontent.com/sverweij/dependency-cruiser/master/doc/assets/sample-dot-output.png)
 
@@ -58,7 +58,7 @@ is afoot and heads over to the visual build output.
 The build server _knows_ its architect, so it put a dependency report in a spot
 where Alex can find it easily. This is the _command_:
 ```sh
-dependency-cruise -T html -v -f stuff-for-alex/sample-dot-output.html test/fixtures
+dependency-cruise -v -T html -f stuff-for-alex/sample-dot-output.html test/fixtures
 ```
 
 (_Actually the  build server didn't. You know that. Build servers aren't that
@@ -77,7 +77,7 @@ environs, however, is not. Hence: comma separated values. In a file. So excel
 (or LibreOffice) can chug it like it's 1999:
 
 ```sh
-dependency-cruise -T csv -v -f sample-dot-output.csv test/fixtures
+dependency-cruise -v -T csv -f sample-dot-output.csv test/fixtures
 ```
 ![oldskool csv output. In a spreadsheet. Way out man!](https://raw.githubusercontent.com/sverweij/dependency-cruiser/master/doc/assets/sample-csv-output.png)
 
