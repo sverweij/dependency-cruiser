@@ -6,9 +6,9 @@ const Handlebars = require("handlebars/dist/cjs/handlebars.runtime");
 require("./dot.template");
 
 const SEVERITY2COLOR = {
-    error       : "red",
-    warn     : "orange",
-    info : "blue"
+    error : "red",
+    warn  : "orange",
+    info  : "blue"
 };
 const DEFAULT_VIOLATION_COLOR = "red";
 

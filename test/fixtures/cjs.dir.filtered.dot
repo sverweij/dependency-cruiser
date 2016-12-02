@@ -14,15 +14,15 @@ digraph "dependency-cruiser output"{
     "fs" [color="grey" fontcolor="grey"]
     "http" [color="grey" fontcolor="grey"]
     "path" [color="grey" fontcolor="grey"]
-    subgraph "cluster_/test" {label="test" subgraph "cluster_/test/fixtures" {label="fixtures" subgraph "cluster_/test/fixtures/cjs" {label="cjs" "test/fixtures/cjs/one_only_one.js" [label="one_only_one.js"] } } }
-    subgraph "cluster_/test" {label="test" subgraph "cluster_/test/fixtures" {label="fixtures" subgraph "cluster_/test/fixtures/cjs" {label="cjs" "test/fixtures/cjs/one_only_two.js" [label="one_only_two.js"] } } }
-    subgraph "cluster_/test" {label="test" subgraph "cluster_/test/fixtures" {label="fixtures" subgraph "cluster_/test/fixtures/cjs" {label="cjs" "test/fixtures/cjs/root_one.js" [label="root_one.js"] } } }
-    subgraph "cluster_/test" {label="test" subgraph "cluster_/test/fixtures" {label="fixtures" subgraph "cluster_/test/fixtures/cjs" {label="cjs" "test/fixtures/cjs/root_two.js" [label="root_two.js"] } } }
-    subgraph "cluster_/test" {label="test" subgraph "cluster_/test/fixtures" {label="fixtures" subgraph "cluster_/test/fixtures/cjs" {label="cjs" "test/fixtures/cjs/shared.js" [label="shared.js"] } } }
-    subgraph "cluster_/test" {label="test" subgraph "cluster_/test/fixtures" {label="fixtures" subgraph "cluster_/test/fixtures/cjs" {label="cjs" "test/fixtures/cjs/somedata.json" [label="somedata.json"] } } }
-    subgraph "cluster_/test" {label="test" subgraph "cluster_/test/fixtures" {label="fixtures" subgraph "cluster_/test/fixtures/cjs" {label="cjs" subgraph "cluster_/test/fixtures/cjs/sub" {label="sub" "test/fixtures/cjs/sub/depindir.js" [label="depindir.js"] } } } }
-    subgraph "cluster_/test" {label="test" subgraph "cluster_/test/fixtures" {label="fixtures" subgraph "cluster_/test/fixtures/cjs" {label="cjs" subgraph "cluster_/test/fixtures/cjs/sub" {label="sub" "test/fixtures/cjs/sub/dir.js" [label="dir.js"] } } } }
-    subgraph "cluster_/test" {label="test" subgraph "cluster_/test/fixtures" {label="fixtures" subgraph "cluster_/test/fixtures/cjs" {label="cjs" "test/fixtures/cjs/two_only_one.js" [label="two_only_one.js"] } } }
+    subgraph "cluster_/test" {label="test" subgraph "cluster_/test/fixtures" {label="fixtures" subgraph "cluster_/test/fixtures/cjs" {label="cjs" "test/fixtures/cjs/one_only_one.js" [label="one_only_one.js" URL="test/fixtures/cjs/one_only_one.js"] } } }
+    subgraph "cluster_/test" {label="test" subgraph "cluster_/test/fixtures" {label="fixtures" subgraph "cluster_/test/fixtures/cjs" {label="cjs" "test/fixtures/cjs/one_only_two.js" [label="one_only_two.js" URL="test/fixtures/cjs/one_only_two.js"] } } }
+    subgraph "cluster_/test" {label="test" subgraph "cluster_/test/fixtures" {label="fixtures" subgraph "cluster_/test/fixtures/cjs" {label="cjs" "test/fixtures/cjs/root_one.js" [label="root_one.js" URL="test/fixtures/cjs/root_one.js"] } } }
+    subgraph "cluster_/test" {label="test" subgraph "cluster_/test/fixtures" {label="fixtures" subgraph "cluster_/test/fixtures/cjs" {label="cjs" "test/fixtures/cjs/root_two.js" [label="root_two.js" URL="test/fixtures/cjs/root_two.js"] } } }
+    subgraph "cluster_/test" {label="test" subgraph "cluster_/test/fixtures" {label="fixtures" subgraph "cluster_/test/fixtures/cjs" {label="cjs" "test/fixtures/cjs/shared.js" [label="shared.js" URL="test/fixtures/cjs/shared.js"] } } }
+    subgraph "cluster_/test" {label="test" subgraph "cluster_/test/fixtures" {label="fixtures" subgraph "cluster_/test/fixtures/cjs" {label="cjs" "test/fixtures/cjs/somedata.json" [label="somedata.json" URL="test/fixtures/cjs/somedata.json"] } } }
+    subgraph "cluster_/test" {label="test" subgraph "cluster_/test/fixtures" {label="fixtures" subgraph "cluster_/test/fixtures/cjs" {label="cjs" subgraph "cluster_/test/fixtures/cjs/sub" {label="sub" "test/fixtures/cjs/sub/depindir.js" [label="depindir.js" URL="test/fixtures/cjs/sub/depindir.js"] } } } }
+    subgraph "cluster_/test" {label="test" subgraph "cluster_/test/fixtures" {label="fixtures" subgraph "cluster_/test/fixtures/cjs" {label="cjs" subgraph "cluster_/test/fixtures/cjs/sub" {label="sub" "test/fixtures/cjs/sub/dir.js" [label="dir.js" URL="test/fixtures/cjs/sub/dir.js"] } } } }
+    subgraph "cluster_/test" {label="test" subgraph "cluster_/test/fixtures" {label="fixtures" subgraph "cluster_/test/fixtures/cjs" {label="cjs" "test/fixtures/cjs/two_only_one.js" [label="two_only_one.js" URL="test/fixtures/cjs/two_only_one.js"] } } }
 
     "test/fixtures/cjs/one_only_one.js" -> "path" [color="grey"]
     "test/fixtures/cjs/one_only_two.js" -> "path" [color="grey"]

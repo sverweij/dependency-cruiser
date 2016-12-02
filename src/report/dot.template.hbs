@@ -12,9 +12,9 @@ digraph "dependency-cruiser output"{
     edge [color=black arrowhead=normal fontname="Helvetica" fontsize="9"]
 
 {{#each things}}
-    {{#if folder}}{{#each path}}subgraph "cluster_{{{aggregateSnippet}}}" {label="{{{snippet}}}" {{/each}}"{{{source}}}" [label="{{{label}}}"]{{#each path}} }{{/each}}
+    {{#if folder}}{{#each path}}subgraph "cluster_{{{aggregateSnippet}}}" {label="{{{snippet}}}" {{/each}}"{{{source}}}" [label="{{{label}}}" URL="{{{source}}}"]{{#each path}} }{{/each}}
     {{else~}}
-    "{{{source}}}"{{#if coreModule}} [color="grey" fontcolor="grey"]{{else}}{{#if couldNotResolve}} [color="red" fontcolor="red"]{{/if}}{{/if}}
+    "{{{source}}}"{{#if coreModule}} [color="grey" fontcolor="grey"]{{else}}{{#if couldNotResolve}} [color="red" fontcolor="red"]{{else}} [URL="{{{source}}}"]{{/if}}{{/if}}
     {{/if}}
 {{/each}}
 
