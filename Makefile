@@ -28,6 +28,14 @@ src/report/%.template.js: src/report/%.template.hbs
 	echo "doc/real-world-samples.md" >> $@
 	echo "doc/real-world-samples/**" >> $@
 	echo "test/**" >> $@
+	echo "utl/**" >> $@
+	echo ".bithoundrc" >> $@
+	echo ".dependency-cruiser-custom.json" >> $@
+	echo ".eslintignore" >> $@
+	echo ".eslintrc.json" >> $@
+	echo ".gitlab-ci.yml" >> $@
+	echo ".istanbul.yml" >> $@
+	echo "Makefile" >> $@
 
 # "phony" targets
 prerequisites:
@@ -262,4 +270,3 @@ test/validate/ruleSetNormalizer.spec.js: \
 
 test/validate/validator.spec.js: \
 	src/validate/validator.js
-
