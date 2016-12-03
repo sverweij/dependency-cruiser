@@ -50,10 +50,15 @@ Dependency cruiser used on itself. node_modules left out to keep it concise.
 
 ![mscgen.js](real-world-samples/mscgenjs-core-without-lodash-amdefine.png)
 
-
 ## Typescript
 It is possible to use dependency-cruiser to infer dependencies of typescript
-projects (and to validate them against sets of rules). For now it involves transpilation to javascript first (see [this gist](https://gist.github.com/sverweij/069a34c787982a7fea82d03d20a991f1) for a recipe).
+projects.
+
+We got the picture of tslint below by changing to the tslint/src folder and
+running this:
+```sh
+dependency-cruise -T dot -x node_modules index.ts  | dot -T png > tslint-without-node_modules.png
+```
 
 ### tslint
 [palantir/tslint](https://github.com/palantir/tslint) - linter for typescript.
