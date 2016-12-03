@@ -133,6 +133,10 @@ src/extract/extractor-AMD.js: \
 	src/extract/extractor-commonJS.js
 
 src/extract/resolver.js: \
+	src/extract/resolver-AMD.js \
+	src/extract/resolver-commonJS.js
+
+src/extract/resolver-AMD.js: \
 	src/utl/index.js
 
 src/report/csvReporter.js: \
@@ -160,6 +164,8 @@ ALL_SRC=src/index.js \
 	src/extract/extractor-commonJS.js \
 	src/extract/extractor.js \
 	src/extract/index.js \
+	src/extract/resolver-AMD.js \
+	src/extract/resolver-commonJS.js \
 	src/extract/resolver.js \
 	src/report/csv.template.js \
 	src/report/csvReporter.js \
@@ -209,6 +215,10 @@ src/extract/extractor-AMD.js: \
 	src/extract/extractor-commonJS.js
 
 src/extract/resolver.js: \
+	src/extract/resolver-AMD.js \
+	src/extract/resolver-commonJS.js
+
+src/extract/resolver-AMD.js: \
 	src/utl/index.js
 
 src/report/csvReporter.js: \
