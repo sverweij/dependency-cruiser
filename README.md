@@ -1,5 +1,5 @@
 # Dependency cruiser ![Dependency cruiser](https://raw.githubusercontent.com/sverweij/dependency-cruiser/master/doc/assets/ZKH-Dependency-recolored-160.png)
-_Visualize and validate javascript dependencies. With your rules._ ES6, CommonJS, AMD.
+_Visualize and validate javascript dependencies. With your rules._ ES6, CommonJS, AMD, TypeScript.
 
 ![Snazzy dot output to whet your appetite](https://raw.githubusercontent.com/sverweij/dependency-cruiser/master/doc/assets/sample-dot-output.png)
 

@@ -2,6 +2,7 @@
 
 const acorn                       = require('acorn');
 const acorn_loose                 = require('acorn/dist/acorn_loose');
+const typescript                  = require('typescript');
 const fs                          = require('fs');
 const _                           = require('lodash');
 const path                        = require('path');
@@ -12,8 +13,20 @@ const extractES6Dependencies      = require('./extractor-ES6');
 const extractCommonJSDependencies = require('./extractor-commonJS');
 const extractAMDDependencies      = require('./extractor-AMD');
 
+
 function getASTBare(pFileName) {
-    const lFile = fs.readFileSync(pFileName, 'utf8');
+    let lFile = fs.readFileSync(pFileName, 'utf8');
+
+    if (path.extname(pFileName) === ".ts"){
+        lFile = typescript.transpileModule(
+            lFile,
+            {
+                compilerOptions: {
+                    "target": "es2015"
+                }
+            }
+        ).outputText;
+    }
 
     try {
         return acorn.parse(lFile, {sourceType: 'module'});
