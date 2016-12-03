@@ -27,6 +27,7 @@ src/report/%.template.js: src/report/%.template.hbs
 	cp $< $@
 	echo "doc/real-world-samples.md" >> $@
 	echo "doc/real-world-samples/**" >> $@
+	echo "test/**" >> $@
 
 # "phony" targets
 prerequisites:

@@ -21,3 +21,4 @@ build
 .dependency-cruiser.json
 doc/real-world-samples.md
 doc/real-world-samples/**
+test/**
