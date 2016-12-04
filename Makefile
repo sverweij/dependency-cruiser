@@ -27,6 +27,8 @@ src/report/%.template.js: src/report/%.template.hbs
 	cp $< $@
 	echo "doc/real-world-samples.md" >> $@
 	echo "doc/real-world-samples/**" >> $@
+	echo "doc/assets/ZKH-Dependency-recolored-320.png" >> $@
+	echo "doc/assets/ZKH-Dependency-recolored-320.svg" >> $@
 	echo "test/**" >> $@
 	echo "utl/**" >> $@
 	echo ".bithoundrc" >> $@
@@ -278,4 +280,3 @@ test/validate/ruleSetNormalizer.spec.js: \
 
 test/validate/validator.spec.js: \
 	src/validate/validator.js
-

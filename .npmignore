@@ -21,6 +21,8 @@ build
 .dependency-cruiser.json
 doc/real-world-samples.md
 doc/real-world-samples/**
+doc/assets/ZKH-Dependency-recolored-320.png
+doc/assets/ZKH-Dependency-recolored-320.svg
 test/**
 utl/**
 .bithoundrc
