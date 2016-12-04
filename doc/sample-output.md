@@ -38,10 +38,10 @@ she uses the `err` output type:
 ```sh
 dependency-cruise -T err -v test/fixtures
 
-    error sub-not-allowed: test/fixtures/cjs/root_one.js => test/fixtures/cjs/sub/dir.js
-    error sub-not-allowed: test/fixtures/cjs/two_only_one.js => test/fixtures/cjs/sub/dir.js
+  error sub-not-allowed: test/fixtures/cjs/root_one.js → test/fixtures/cjs/sub/dir.js
+  error sub-not-allowed: test/fixtures/cjs/two_only_one.js → test/fixtures/cjs/sub/dir.js
 
-  2 violations found
+✖ 2 violations (2 errors, 0 warnings)
 
 make: *** [dependency-cruise] Error 2
 ```
