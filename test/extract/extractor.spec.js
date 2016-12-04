@@ -1,3 +1,5 @@
+"use strict";
+
 const expect      = require('chai').expect;
 const extractor   = require('../../src/extract/extractor');
 const cjsFixtures = require('../extractor-fixtures/cjs.json');
