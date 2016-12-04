@@ -134,9 +134,9 @@ src/extract/extractor.js: \
 	src/extract/extractor-commonJS.js \
 	src/extract/resolver.js \
 	src/utl/index.js \
-	src/validate/validator.js
+	src/validate/index.js
 
-src/validate/validator.js: \
+src/validate/index.js: \
 	src/validate/ruleSetNormalizer.js \
 	src/validate/ruleSetValidator.js
 
@@ -191,10 +191,10 @@ ALL_SRC=src/index.js \
 	src/report/htmlReporter.js \
 	src/report/jsonReporter.js \
 	src/utl/index.js \
+	src/validate/index.js \
 	src/validate/jsonschema.json \
 	src/validate/ruleSetNormalizer.js \
-	src/validate/ruleSetValidator.js \
-	src/validate/validator.js
+	src/validate/ruleSetValidator.js
 # cjs dependencies
 test/cli/index.spec.js: \
 	src/cli/index.js \
@@ -220,9 +220,9 @@ src/extract/extractor.js: \
 	src/extract/extractor-commonJS.js \
 	src/extract/resolver.js \
 	src/utl/index.js \
-	src/validate/validator.js
+	src/validate/index.js
 
-src/validate/validator.js: \
+src/validate/index.js: \
 	src/validate/ruleSetNormalizer.js \
 	src/validate/ruleSetValidator.js
 
@@ -279,4 +279,5 @@ test/validate/ruleSetNormalizer.spec.js: \
 	src/validate/ruleSetNormalizer.js
 
 test/validate/validator.spec.js: \
-	src/validate/validator.js
+	src/validate/index.js
+
