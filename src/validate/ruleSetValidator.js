@@ -1,6 +1,18 @@
 "use strict";
 
-const safeRegex = require('safe-regex');
+const safeRegex  = require('safe-regex');
+const Ajv        = require('ajv');
+const ruleSchema = require('./jsonschema.json');
+
+const ajv        = new Ajv();
+
+function validateAgainstSchema(pSchema, pRuleSet) {
+    if (!ajv.validate(pSchema, pRuleSet)) {
+        throw new Error(
+            `The rules file is not valid: ${ajv.errorsText()}.\n`
+        );
+    }
+}
 
 function hasPath(pObject, pPath) {
     return pObject.hasOwnProperty(pPath[0]) &&
@@ -21,6 +33,7 @@ function checkRuleSafety(pRule) {
 }
 
 function validate(pRuleSet) {
+    validateAgainstSchema(ruleSchema, pRuleSet);
     if (pRuleSet.hasOwnProperty("allowed")){
         pRuleSet.allowed.forEach(checkRuleSafety);
     }

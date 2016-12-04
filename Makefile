@@ -138,6 +138,9 @@ src/validate/validator.js: \
 	src/validate/ruleSetNormalizer.js \
 	src/validate/ruleSetValidator.js
 
+src/validate/ruleSetValidator.js: \
+	src/validate/jsonschema.json
+
 src/extract/extractor-AMD.js: \
 	src/extract/extractor-commonJS.js
 
@@ -186,6 +189,7 @@ ALL_SRC=src/index.js \
 	src/report/htmlReporter.js \
 	src/report/jsonReporter.js \
 	src/utl/index.js \
+	src/validate/jsonschema.json \
 	src/validate/ruleSetNormalizer.js \
 	src/validate/ruleSetValidator.js \
 	src/validate/validator.js
@@ -220,6 +224,9 @@ src/validate/validator.js: \
 	src/validate/ruleSetNormalizer.js \
 	src/validate/ruleSetValidator.js
 
+src/validate/ruleSetValidator.js: \
+	src/validate/jsonschema.json
+
 src/extract/extractor-AMD.js: \
 	src/extract/extractor-commonJS.js
 
@@ -251,7 +258,8 @@ test/cli/parameterValidator.spec.js: \
 	src/cli/parameterValidator.js
 
 test/extract/extractor-composite.spec.js: \
-	src/extract/index.js
+	src/extract/index.js \
+	src/extract/jsonschema.json
 
 test/extract/extractor.spec.js: \
 	src/extract/extractor.js
@@ -270,3 +278,4 @@ test/validate/ruleSetNormalizer.spec.js: \
 
 test/validate/validator.spec.js: \
 	src/validate/validator.js
+

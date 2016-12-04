@@ -1,0 +1,98 @@
+{
+    "$schema": "http://json-schema.org/draft-04/schema#",
+    "type": "array",
+    "title": "dependency-cruiser output format",
+    "description": "A list of modules, with for each module the modules it dependes upon",
+    "items": {
+        "type": "object",
+        "required": [ "source", "dependencies" ],
+        "additionalProperties": false,
+        "properties": {
+            "source": {
+                "type": "string",
+                "description": "The (resolved) file name of the module, e.g. 'src/main//index.js'"
+            },
+            "followable": {
+                "type": "boolean"
+            },
+            "coreModule": {
+                "type": "boolean"
+            },
+            "couldNotResolve": {
+                "type": "boolean"
+            },
+            "dependencies": {
+                "type": "array",
+                "items": {
+                    "type": "object",
+                    "required": [
+                        "module",
+                        "resolved",
+                        "coreModule",
+                        "followable",
+                        "couldNotResolve",
+                        "moduleSystem",
+                        "valid"
+                    ],
+                    "additionalProperties": false,
+                    "properties": {
+                        "module": {
+                            "type": "string",
+                            "description": "The name of the module as it appeared in the source code, e.g. './main'"
+                        },
+                        "resolved": {
+                            "type": "string",
+                            "description": "The (resolved) file name of the module, e.g. 'src/main//index.js'"
+                        },
+                        "coreModule": {
+                            "type": "boolean",
+                            "description": "Whether or not this is a node.js core module"
+                        },
+                        "followable": {
+                            "type": "boolean",
+                            "description": "Whether or not this is a dependency that can be followed any further. This is the case for core modules, json, and modules that could not be resolved to a file."
+                        },
+                        "couldNotResolve": {
+                            "type": "boolean",
+                            "description": "'true' if dependency-cruiser could not resulve the module name in the source code to a file name or core module. 'false' in all other cases."
+                        },
+                        "moduleSystem": {
+                            "type": "string",
+                            "enum": [
+                                "cjs",
+                                "amd",
+                                "es6"
+                            ],
+                            "description": "The module system according to which this 'module' is a dependency of the one specified in 'source'"
+                        },
+                        "valid": {
+                            "type": "boolean",
+                            "description": "'true' if this dependency violated a rule; 'false' in all other cases. The violated rule will be in the 'rule' object at the same level."
+                        },
+                        "rule": {
+                            "type": "object",
+                            "description": "If there was a rule violation (valid === false), this object contains the name of the rule and severity of violating it.",
+                            "required": [ "name", "severity" ],
+                            "additionalProperties": false,
+                            "properties": {
+                                "name": {
+                                    "type": "string",
+                                    "description": "The (short, eslint style) name of the violated rule. Typically something like 'no-core-punycode' or 'no-outside-deps'."
+                                },
+                                "severity": {
+                                    "type": "string",
+                                    "enum": [
+                                        "error",
+                                        "warn",
+                                        "info"
+                                    ],
+                                    "description": "The severity of the violation. Only errors make reporters return non-zero exit codes."
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+}

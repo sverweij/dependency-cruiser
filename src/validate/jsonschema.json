@@ -1,0 +1,118 @@
+{
+    "$schema": "http://json-schema.org/draft-04/schema#",
+    "title": "dependency-cruiser rule set",
+    "description": "A set of properties describing what dependencies are forbidden and what dependencies are allowed.",
+    "type": "object",
+    "additionalProperties": false,
+    "properties": {
+        "forbidden": {
+            "type": "array",
+            "description": "A list of rules that describe dependencies that are not allowed. dependency-cruiser will emit a separate error (warning/ informational) messages for each violated rule.",
+            "items": {
+                "type": "object",
+                "required": [ "from", "to" ],
+                "additionalProperties": false,
+                "properties": {
+                    "name": {
+                        "type": "string",
+                        "description": "A short name for the rule - will appear in reporters to enable customers to quickly identify a violated rule. Try to keep them short, eslint style. E.g. 'not-to-core' for a rule forbidding dependencies on core modules, or 'not-to-unresolvable' for one that prevents dependencies on modules that probably don't exist."
+                    },
+                    "severity": {
+                        "type": "string",
+                        "description": "How severe a violation of this rule is. The 'error' severity will make some reporters return a non-zero exit code, so if you want e.g. a build to stop when there's a rule violated use that.",
+                        "enum": [
+                            "error",
+                            "warn",
+                            "info"
+                        ]
+                    },
+                    "comment": {
+                        "type": "string",
+                        "description": "You can use this field to document why the rule is there."
+                    },
+                    "from": {
+                        "type": "object",
+                        "description": "Criteria a 'from' end of a dependency should match to be catched by this rule. Leave it empty if you want any module to be matched.",
+                        "additionalProperties": false,
+                        "properties": {
+                            "path": {
+                                "type": "string",
+                                "description": "A regular expression the 'from' end of a dependency should match to be catched by this rule."
+                            },
+                            "pathNot": {
+                                "type": "string",
+                                "description": "A regular expression the 'from' end of a dependency should NOT match to be catched by this rule."
+                            }
+                        }
+                    },
+                    "to": {
+                        "type": "object",
+                        "additionalProperties": false,
+                        "properties": {
+                            "path": {
+                                "type": "string",
+                                "description": "A regular expression the 'to' end of a dependency should match to be catched by this rule."
+                            },
+                            "pathNot": {
+                                "type": "string",
+                                "description": "A regular expression the 'to' end of a dependency should NOT match to be catched by this rule."
+                            },
+                            "coreModule": {
+                                "type": "boolean",
+                                "description": "Whether or not to match node.js core modules. Leave out if you don't care either way."
+                            },
+                            "couldNotResolve": {
+                                "type": "boolean",
+                                "description": "Whether or not to match modules dependency-cruiser could not resolve (and probably aren't on disk). For this one too: leave out if you don't care either way."
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "allowed": {
+            "type": "array",
+            "description": "A list of rules that describe dependencies that are allowed. dependency-cruiser will emit the warning message 'not-in-allowed' for each dependency that does not at least one of them.",
+            "items": {
+                "type": "object",
+                "required": [ "from", "to" ],
+                "additionalProperties": false,
+                "properties": {
+                    "comment" : {
+                        "type": "string"
+                    },
+                    "from": {
+                        "type": "object",
+                        "additionalProperties": false,
+                        "properties": {
+                            "path": {
+                                "type": "string"
+                            },
+                            "pathNot": {
+                                "type": "string"
+                            }
+                        }
+                    },
+                    "to": {
+                        "type": "object",
+                        "additionalProperties": false,
+                        "properties": {
+                            "path": {
+                                "type": "string"
+                            },
+                            "pathNot": {
+                                "type": "string"
+                            },
+                            "coreModule": {
+                                "type": "boolean"
+                            },
+                            "couldNotResolve": {
+                                "type": "boolean"
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+}

@@ -22,6 +22,24 @@ describe("validator", () => {
         }
     });
 
+    it("barfs on an invalid rules file", () => {
+        try {
+            validator.validate(
+                true,
+                "./test/fixtures/rules.not-a-valid-rulesfile.json",
+                "koos koets",
+                {"resolved": "robby van de kerkhof"}
+            );
+            expect("not to be here").to.equal("still here, though");
+        } catch (e) {
+            expect(e).to.deep.equal(
+                Error(
+                    'The rules file is not valid: data should NOT have additional properties.'
+                )
+            );
+        }
+    });
+
     it("is ok with the empty validation", () => {
         expect(
             validator.validate(
