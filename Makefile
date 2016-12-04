@@ -132,9 +132,16 @@ src/extract/extractor.js: \
 	src/extract/extractor-AMD.js \
 	src/extract/extractor-ES6.js \
 	src/extract/extractor-commonJS.js \
-	src/extract/resolver.js \
+	src/resolve/index.js \
 	src/utl/index.js \
 	src/validate/index.js
+
+src/resolve/index.js: \
+	src/resolve/resolver-AMD.js \
+	src/resolve/resolver-commonJS.js
+
+src/resolve/resolver-AMD.js: \
+	src/utl/index.js
 
 src/validate/index.js: \
 	src/validate/ruleSetNormalizer.js \
@@ -145,13 +152,6 @@ src/validate/ruleSetValidator.js: \
 
 src/extract/extractor-AMD.js: \
 	src/extract/extractor-commonJS.js
-
-src/extract/resolver.js: \
-	src/extract/resolver-AMD.js \
-	src/extract/resolver-commonJS.js
-
-src/extract/resolver-AMD.js: \
-	src/utl/index.js
 
 src/report/csvReporter.js: \
 	src/report/csv.template.js \
@@ -178,9 +178,6 @@ ALL_SRC=src/index.js \
 	src/extract/extractor-commonJS.js \
 	src/extract/extractor.js \
 	src/extract/index.js \
-	src/extract/resolver-AMD.js \
-	src/extract/resolver-commonJS.js \
-	src/extract/resolver.js \
 	src/report/csv.template.js \
 	src/report/csvReporter.js \
 	src/report/dependencyToIncidenceTransformer.js \
@@ -190,6 +187,9 @@ ALL_SRC=src/index.js \
 	src/report/html.template.js \
 	src/report/htmlReporter.js \
 	src/report/jsonReporter.js \
+	src/resolve/index.js \
+	src/resolve/resolver-AMD.js \
+	src/resolve/resolver-commonJS.js \
 	src/utl/index.js \
 	src/validate/index.js \
 	src/validate/jsonschema.json \
@@ -218,9 +218,16 @@ src/extract/extractor.js: \
 	src/extract/extractor-AMD.js \
 	src/extract/extractor-ES6.js \
 	src/extract/extractor-commonJS.js \
-	src/extract/resolver.js \
+	src/resolve/index.js \
 	src/utl/index.js \
 	src/validate/index.js
+
+src/resolve/index.js: \
+	src/resolve/resolver-AMD.js \
+	src/resolve/resolver-commonJS.js
+
+src/resolve/resolver-AMD.js: \
+	src/utl/index.js
 
 src/validate/index.js: \
 	src/validate/ruleSetNormalizer.js \
@@ -231,13 +238,6 @@ src/validate/ruleSetValidator.js: \
 
 src/extract/extractor-AMD.js: \
 	src/extract/extractor-commonJS.js
-
-src/extract/resolver.js: \
-	src/extract/resolver-AMD.js \
-	src/extract/resolver-commonJS.js
-
-src/extract/resolver-AMD.js: \
-	src/utl/index.js
 
 src/report/csvReporter.js: \
 	src/report/csv.template.js \
