@@ -92,7 +92,7 @@ run-update-dependencies:
 	$(NPM) install
 
 dependency-cruise:
-	./bin/dependency-cruise -T err -r .dependency-cruiser-custom.json src
+	./bin/dependency-cruise -T err -v .dependency-cruiser-custom.json src
 
 check: lint test dependency-cruise
 	./bin/dependency-cruise --version # if that runs the cli script works
