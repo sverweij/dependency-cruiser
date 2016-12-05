@@ -42,3 +42,5 @@ describe('Error scenarios - ', () => {
         );
     });
 });
+
+/* eslint max-len: 0 */
