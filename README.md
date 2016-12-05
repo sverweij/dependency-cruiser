@@ -3,190 +3,95 @@ _Validate and visualize dependencies. With your rules._ JavaScript, TypeScript. 
 
 ![Snazzy dot output to whet your appetite](https://raw.githubusercontent.com/sverweij/dependency-cruiser/master/doc/assets/sample-dot-output.png)
 
-## Installation
+## What's this do?
+- Run through the dependencies in any JavaScript or TypeScript project and ...
+  - ... show them e.g. in a graph
+  - ... validate them against a set of (your own!) rules
+  - ... report violated rules
+    - in text (for in your rules)
+    -
+
+## How do I use it?
+
+### Install it
 Dependency cruiser works most comfortably when you install it globally.
 
 ```
 npm install --global dependency-cruiser
 ```
 
-## Daphne's dependencies - a gentle introduction
-Head over to **[Daphne's
-dependencies](https://github.com/sverweij/dependency-cruiser/blob/master/doc/sample-output.md)**
-to get an overview of all the output formats. And how Daphne uses it all. And
-how she uses the awesome _validation_ in her workflow. Go on. Read it. Or would
-you rather prefer continue the boring recount of a README written with
-_reference doc_ in mind?
-
-## Basic usage
-To dump all the dependencies in `src` to into a dependency matrix you can
-open in your browser:
+### Show stuff
+To create a graph of the dependencies in your src folder, you'd run dependency
+cruiser with output type `dot` and run _GraphViz dot_ on the result. In
+a one liner:
 
 ```shell
-dependency-cruise -T html -f deps.html src
+dependency-cruise --exclude "^node_modules" --output-type dot src | dot -T svg > dependencygraph.svg
 ```
 
-Running with no parameters gets you help:
-```
-Usage: dependency-cruise [options] <directory-or-file>
+The `--exclude "^node_modules"` makes sure dependency-cruiser does not scan
+paths starting with *node_modules*.
 
-Options:
+- You can read more about what you can do with `--exclude` and other command line
+  options in the
+  [command line interface](https://github.com/sverweij/dependency-cruiser/blob/master/doc/cli.md)
+  documentation.
+- _[Real world samples](https://github.com/sverweij/dependency-cruiser/blob/master/doc/real-world-samples.md)_
+  contains dependency cruises of some of the most used projects on npm.
 
-  -h, --help                output usage information
-  -V, --version             output the version number
-  -v, --validate [file]     validate with rules from [file]
-                            (default: .dependency-cruiser.json)
-  -f, --output-to <file>    file to write output to; - for stdout (default: -)
-  -x, --exclude <regex>     a regular expression for excluding modules
-  -M, --system <items>      list of module systems (default: amd,cjs,es6)
-  -T, --output-type <type>  output type - html|dot|err|json (default:json)
-```
-
-## Output formats
-### html
-Write it to html with a dependency matrix instead:
-```shell
-dependency-cruise -T html -f dependencies.html src
-```
-
-### csv
-If you supply `csv` it will write the dependency matrix to a comma
-separated file - so you can import it into a spreadsheet program
-and analyze from there.
-
-### dot
-Supplying `dot` as output type will make dependency-cruiser write
-a GraphViz dot format directed graph. Typical use is in concert
-with _GraphViz dot_:
-
-```shell
-dependency-cruise -x "^node_modules" -T dot src | dot -T svg > dependencygraph.svg
-```
-
-### err
-For use in build scripts, in combination with `--validate` e.g.
-
-```sh
-dependency-cruise -T err --validate my-depcruise-rules.json src
-```
-
-This will:
-- ... print nothing and exit with code 0 if dependency-cruiser didn't
-  find any violations of the rules in .dependency-cruiser.json.
-- ... print the violating dependencies if there is any. Moreover it
-  will exit with exit code _number of violations found_ in the same fasion
-  linters and test tools do.
-
-See the _dependency-cruise_ target in the [Makefile](https://github.com/sverweij/dependency-cruiser/blob/master/Makefile#L78) for a real world
-example.
-
-## Excluding modules from being cruised: --exclude
-
-If you don't want to see certain modules in your report (or not have them
-validated), you can exclude them by passing a regular expression to the
-`--exclude` (short: `-x`) option. E.g. to exclude `node_modules` from being
-scanned:
-
-```sh
-dependency-cruise -x "node_modules" -T html -f deps-without-node_modules.html src
-```
-
-Beacuse it's regular expressions, you can do more interesting stuff here as well. To exclude
-all modules with a file path starting with coverage, test or node_modules, you could do this:
-
-```sh
-dependency-cruise -x "^(coverage|test|node_modules)" -T html -f deps-without-stuffs.html src
-```
-
-
-## Validation
-Validates against a list of rules in a rules file. This defaults to a file
-called `.dependency-cruiser.json`, but you can specify your own rules file.
-
-```shell
-dependency-cruise -T err -x node_modules --validate my.rules.json
-```
-
-The file specifies a bunch of regular expressions pairs your dependencies
-should adhere to.
-
-A simple validation configuration that forbids modules in `src` to use stuff
-in the `test` folder and allows everything else:
-
+### Validate stuff
+#### Declare some rules
+To have dependency-cruiser report on dependencies going _into_ the test folder
+(which is totally weird, right?) create a rules file (e.g. `my-rules.json`)
+and put this in there:
 ```json
 {
     "forbidden": [{
-        "from": {"path": "^src"},
-        "to": {"path": "^test"}
-    }]
-}
-```
-
-You can optionally specify a name and an error severity ('error',  'warn' (the
-default) and 'info') with them that will appear in some reporters:
-
-```json
-{
-    "forbidden": [{
-        "name": "no-src-to-test",
+        "name": "not-to-test",
+        "comment": "don't allow dependencies from outside the test folder to test",
         "severity": "error",
-        "from": {"path": "^src"},
-        "to": {"path": "^test"}
+        "from": { "pathNot": "^test" },
+        "to": { "path": "^test" }
     }]
 }
 ```
 
-A more elaborate configuration:
-- modules in `src` can get stuff from `src` and `node_modules`
-- modules in `src` can not get stuff from test
-- stuff in `node_modules` can call anything, except stuff
-  we wrote ourselves (in `src`, `bin` and `lib`)
-- modules with the pattern `no-deps-at-all-plz` in their name
-  can't have dependencies to any module.
-- modules with the pattern `externalDependencyLess\.js` can't have
-  dependencies to stuff in `node_modules`.
-- modules can't have references to modules that can't be resolved
+- To read more about writing rules check the
+  [writing rules](https://github.com/sverweij/dependency-cruiser/blob/master/doc/rules.md)
+  section.
+- There is practical rules configuration to get you started
+  [here](https://github.com/sverweij/dependency-cruiser/blob/master/doc/rules.starter.json)
 
-```json
-{
-    "forbidden": [{
-            "name": "not-to-test",
-            "comment": "don't allow dependencies from outside the test folder to test",
-            "severity": "error",
-            "from": { "pathNot": "^test" },
-            "to": { "path": "^test" }
-        },{
-            "name": "not-to-unresolvable",
-            "comment": "don't allow dependencies to modules that cannot be resolved (and probably don't exist on disk)",
-            "severity": "error",
-            "from": {},
-            "to": { "couldNotResolve": true }
-        },{
-            "name": "not-to-core-puny-os",
-            "comment": "allow dependencies on core modules, but not on 'punycode' (which has been deprecated) or 'os' (for no reason)",
-            "severity": "info",
-            "from": { },
-            "to": { "coreModule": true, "path": "^(punycode|os)$"}
+#### Report them
+Pass the `--validate` parameter, to the command line followed by the rules
+file.
 
-        }],
-    "allowed": [{
-            "from": { "path": "^(src|test)" },
-            "to": { "path": "^(src|node_modules)" }
-        }, {
-            "from": { "path": "^bin" },
-            "to": { "path": "^src/index\\.js" }
-        }, {
-            "from": { "path": "^src/index\\.js" },
-            "to": { "path": "^package\\.json$" }
-        }, {
-            "from": { "path": "^node_modules" },
-            "to": { "path": "^node_modules" }
-        }, {
-            "from": { "path": "^test" },
-            "to": { "path": "^test" }
-        }]
-}
+Most output-types will show violations of your rules in one way or another.
+The `dot` reporter, for instance, will color edges representing violated
+dependencies in a signaling color (red for errors, orange for warnings).
+
+The `err` reporter only emits (text) output when there's something wrong.
+This is useful when you want to check the rules in your build process:
+
+```sh
+dependency-cruise --validate my-rules.json --output-type err src
 ```
+![sample err output](https://github.com/sverweij/dependency-cruiser/blob/master/doc/assets/sample-err-output.png)
+
+- Read more about the err, dot, but also the csv and html reporters in the
+  [command line interface](https://github.com/sverweij/dependency-cruiser/blob/master/doc/cli.md)
+  documentation.
+- dependency-cruiser uses itself to check on itself in its own build process;
+  see the `dependency-cruise` target in the
+  [Makefile](https://github.com/sverweij/dependency-cruiser/blob/master/Makefile#L95)
+
+## I want to know more!
+You've come to the right place :-) :
+
+- [Command line reference](https://github.com/sverweij/dependency-cruiser/blob/master/doc/cli.md)
+- [Writing rules](https://github.com/sverweij/dependency-cruiser/blob/master/doc/rules.md)
+- [Real world show cases](https://github.com/sverweij/dependency-cruiser/blob/master/doc/real-world-samples.md)
+- [Output format](./doc/output-format.md)
 
 ## License
 [MIT](LICENSE)
