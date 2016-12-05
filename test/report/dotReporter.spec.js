@@ -1,7 +1,8 @@
 "use strict";
-const expect = require('chai').expect;
-const render = require('../../src/report/dotReporter');
-const deps   = require('../fixtures/cjs-no-dependency-valid.json');
+const expect           = require('chai').expect;
+const render           = require('../../src/report/dotReporter');
+const deps             = require('../fixtures/cjs-no-dependency-valid.json');
+const unresolvableDeps = require('../fixtures/es6-unresolvable-deps.json');
 
 const elFixture = `digraph "dependency-cruiser output"{
     ordering=out
@@ -54,12 +55,41 @@ const elFixture = `digraph "dependency-cruiser output"{
 }
 `;
 
+const unresolvableFixture = `digraph "dependency-cruiser output"{
+    ordering=out
+    rankdir=LR
+    splines=true
+    overlap=false
+    nodesep=0.16
+    fontname="Helvetica-bold"
+    fontsize="9"
+    style="rounded,bold"
+    compound=true
+    node [shape=box style="rounded, filled" fillcolor="#ffffcc" height=0.2 fontname=Helvetica fontsize=9]
+    edge [color=black arrowhead=normal fontname="Helvetica" fontsize="9"]
+
+    "./not-at-home" [color="red" fontcolor="red"]
+    subgraph "cluster_/." {label="." subgraph "cluster_/./this" {label="this" subgraph "cluster_/./this/path" {label="path" subgraph "cluster_/./this/path/does" {label="does" subgraph "cluster_/./this/path/does/not" {label="not" "./this/path/does/not/exist" [label="exist" color="red" fontcolor="red"] } } } } }
+    subgraph "cluster_/test" {label="test" subgraph "cluster_/test/fixtures" {label="fixtures" subgraph "cluster_/test/fixtures/unresolvable-in-sub" {label="unresolvable-in-sub" "test/fixtures/unresolvable-in-sub/refers-to-an-unresolvable-module.js" [label="refers-to-an-unresolvable-module.js" URL="test/fixtures/unresolvable-in-sub/refers-to-an-unresolvable-module.js"] } } }
+
+    "test/fixtures/unresolvable-in-sub/refers-to-an-unresolvable-module.js" -> "./not-at-home"
+    "test/fixtures/unresolvable-in-sub/refers-to-an-unresolvable-module.js" -> "./this/path/does/not/exist"
+}
+`;
+
 describe("dot reporter", () => {
     it("renders a dot - modules in the root don't come in a cluster", () => {
         expect(render(deps).content).to.deep.equal(elFixture);
         // console.log(render(deps));
         // expect(1).to.equal(1);
     });
+
+    it("renders a dot - unresolvable in a sub folder (either existing or not) get labeled as unresolvable", () => {
+        expect(render(unresolvableDeps).content).to.deep.equal(unresolvableFixture);
+        // console.log(render(deps));
+        // expect(1).to.equal(1);
+    });
+
 });
 
 /* eslint max-len: 0 */
