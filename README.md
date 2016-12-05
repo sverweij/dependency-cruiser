@@ -5,11 +5,13 @@ _Validate and visualize dependencies. With your rules._ JavaScript, TypeScript. 
 
 ## What's this do?
 - Run through the dependencies in any JavaScript or TypeScript project and ...
-  - ... show them e.g. in a graph
-  - ... validate them against a set of (your own!) rules
-  - ... report violated rules
-    - in text (for in your rules)
-    -
+  - ... **validate** them against a set of (your own) rules
+  - ... **report** violated rules
+    - in text (for in your builds)
+    - in graphics (for on your eyeballs)
+
+As a nice side effect it can generate **cool dependency graphs**
+you can stick on the wall to impress your grandma.
 
 ## How do I use it?
 
@@ -68,7 +70,8 @@ file.
 
 Most output-types will show violations of your rules in one way or another.
 The `dot` reporter, for instance, will color edges representing violated
-dependencies in a signaling color (red for errors, orange for warnings).
+dependencies in a signaling color (red for errors, orange for warnings) - the
+picture on top of this README is a sample of that.
 
 The `err` reporter only emits (text) output when there's something wrong.
 This is useful when you want to check the rules in your build process:
@@ -76,7 +79,7 @@ This is useful when you want to check the rules in your build process:
 ```sh
 dependency-cruise --validate my-rules.json --output-type err src
 ```
-![sample err output](https://github.com/sverweij/dependency-cruiser/blob/master/doc/assets/sample-err-output.png)
+![sample err output](https://raw.githubusercontent.com/sverweij/dependency-cruiser/master/doc/assets/sample-err-output.png)
 
 - Read more about the err, dot, but also the csv and html reporters in the
   [command line interface](https://github.com/sverweij/dependency-cruiser/blob/master/doc/cli.md)
@@ -92,6 +95,7 @@ You've come to the right place :-) :
 - [Writing rules](https://github.com/sverweij/dependency-cruiser/blob/master/doc/rules.md)
 - [Real world show cases](https://github.com/sverweij/dependency-cruiser/blob/master/doc/real-world-samples.md)
 - [Output format](./doc/output-format.md)
+- [Road map](https://github.com/sverweij/dependency-cruiser/projects/1)
 
 ## License
 [MIT](LICENSE)
