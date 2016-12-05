@@ -115,7 +115,7 @@ function extractDependencies(pFileName, pOptions) {
             .filter(pDep => utl.ignore(pDep.resolved, pOptions.exclude))
             .value();
     } catch (e) {
-        throw new Error(`Extracting dependencies ran afoul of... ${e.message} in ${pFileName}`);
+        throw new Error(`Extracting dependencies ran afoul of...\n\n  ${e.message}\n... in ${pFileName}\n\n`);
     }
 }
 
