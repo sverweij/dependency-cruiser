@@ -17,9 +17,13 @@
             "from": { "path": "^node_modules" },
             "to": { "coreModule": false }
         }, {
-            "comment": "node_modules may depend on node_modules",
+            "comment": "node_modules may depend on node_modules ...",
             "from": { "path": "^node_modules" },
             "to": { "path": "^node_modules" }
+        }, {
+            "comment": "... and on core modules",
+            "from": { "path": "^node_modules" },
+            "to": { "coreModule": true }
         }, {
             "from": { "path": "^test" },
             "to": { "path": "^test" }
