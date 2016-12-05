@@ -38,7 +38,7 @@ describe('Error scenarios - ', () => {
         expect(
             () => extractor("non-existing-file.js")
         ).to.throw(
-            "Extracting dependencies ran afoul of... ENOENT: no such file or directory, open 'non-existing-file.js'"
+            "Extracting dependencies ran afoul of...\n\n  ENOENT: no such file or directory, open 'non-existing-file.js'\n"
         );
     });
 });
