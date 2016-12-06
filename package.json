@@ -1,7 +1,7 @@
 {
   "name": "dependency-cruiser",
-  "version": "1.6.3",
-  "description": "Validate and visualize dependencies. With your rules. JavaScript, TypeScript. ES6, CommonJS, AMD.",
+  "version": "1.7.0",
+  "description": "Validate and visualize dependencies. With your rules. JavaScript, TypeScript, CoffeeScript. ES6, CommonJS, AMD.",
   "bin": {
     "dependency-cruiser": "bin/dependency-cruise",
     "dependency-cruise": "bin/dependency-cruise",
@@ -19,6 +19,7 @@
   "keywords": [
     "javascript",
     "typescript",
+    "coffeescript",
     "dependencies",
     "ES6",
     "ES2015",
