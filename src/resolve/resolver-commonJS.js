@@ -20,7 +20,7 @@ function resolveCJSModule(pModuleName, pBaseDir, pFileDir) {
         try {
             lRetval.resolved = path.relative(
                 pBaseDir,
-                resolve.sync(pModuleName, {basedir: pFileDir, extensions: [".js", ".ts", ".d.ts"]})
+                resolve.sync(pModuleName, {basedir: pFileDir, extensions: [".js", ".ts", ".d.ts", ".coffee"]})
             );
             lRetval.followable = (path.extname(lRetval.resolved) !== ".json");
         } catch (e) {

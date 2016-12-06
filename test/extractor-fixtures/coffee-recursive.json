@@ -1,0 +1,93 @@
+[
+    {
+        "title": "recursive on typescript modules",
+        "input": {
+            "fileName": "test/extractor-fixtures/coffee/index.coffee"
+        },
+        "expected": [
+            {
+                "source": "test/extractor-fixtures/coffee/index.coffee",
+                "dependencies": [
+                    {
+                        "resolved": "test/extractor-fixtures/coffee/javascriptThing.js",
+                        "coreModule": false,
+                        "followable": true,
+                        "couldNotResolve": false,
+                        "module": "./javascriptThing",
+                        "moduleSystem": "es6",
+                        "valid": true
+                    },
+                    {
+                        "resolved": "test/extractor-fixtures/coffee/sub/index.coffee",
+                        "coreModule": false,
+                        "followable": true,
+                        "couldNotResolve": false,
+                        "module": "./sub",
+                        "moduleSystem": "es6",
+                        "valid": true
+                    },
+                    {
+                        "resolved": "test/extractor-fixtures/coffee/sub/kaching.coffee",
+                        "coreModule": false,
+                        "followable": true,
+                        "couldNotResolve": false,
+                        "module": "./sub/kaching",
+                        "moduleSystem": "es6",
+                        "valid": true
+                    },
+                    {
+                        "resolved": "test/extractor-fixtures/coffee/sub/willBeReExported.coffee",
+                        "coreModule": false,
+                        "followable": true,
+                        "couldNotResolve": false,
+                        "module": "./sub/willBeReExported",
+                        "moduleSystem": "es6",
+                        "valid": true
+                    },
+                    {
+                        "resolved": "path",
+                        "coreModule": true,
+                        "followable": false,
+                        "couldNotResolve": false,
+                        "module": "path",
+                        "moduleSystem": "es6",
+                        "valid": true
+                    }
+                ]
+            },
+            {
+                "source": "path",
+                "followable": false,
+                "coreModule": true,
+                "couldNotResolve": false,
+                "dependencies": []
+            },
+            {
+                "source": "test/extractor-fixtures/coffee/javascriptThing.js",
+                "dependencies": []
+            },
+            {
+                "source": "test/extractor-fixtures/coffee/sub/index.coffee",
+                "dependencies": [
+                    {
+                        "resolved": "test/extractor-fixtures/coffee/sub/willBeReExported.coffee",
+                        "coreModule": false,
+                        "followable": true,
+                        "couldNotResolve": false,
+                        "module": "./willBeReExported",
+                        "moduleSystem": "es6",
+                        "valid": true
+                    }
+                ]
+            },
+            {
+                "source": "test/extractor-fixtures/coffee/sub/willBeReExported.coffee",
+                "dependencies": []
+            },
+            {
+                "source": "test/extractor-fixtures/coffee/sub/kaching.coffee",
+                "dependencies": []
+            }
+        ]
+    }
+]

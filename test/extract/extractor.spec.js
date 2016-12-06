@@ -1,11 +1,12 @@
 "use strict";
 
-const expect      = require('chai').expect;
-const extractor   = require('../../src/extract/extractor');
-const cjsFixtures = require('../extractor-fixtures/cjs.json');
-const es6Fixtures = require('../extractor-fixtures/es6.json');
-const amdFixtures = require('../extractor-fixtures/amd.json');
-const tsFixtures  = require('../extractor-fixtures/ts.json');
+const expect         = require('chai').expect;
+const extractor      = require('../../src/extract/extractor');
+const cjsFixtures    = require('../extractor-fixtures/cjs.json');
+const es6Fixtures    = require('../extractor-fixtures/es6.json');
+const amdFixtures    = require('../extractor-fixtures/amd.json');
+const tsFixtures     = require('../extractor-fixtures/ts.json');
+const coffeeFixtures = require('../extractor-fixtures/coffee.json');
 
 function runFixture(pFixture) {
     it(pFixture.title, () => {
@@ -27,6 +28,7 @@ describe('CommonJS - ', () => cjsFixtures.forEach(runFixture));
 describe('ES6 - ', () => es6Fixtures.forEach(runFixture));
 describe('AMD - ', () => amdFixtures.forEach(runFixture));
 describe('TypeScript - ', () => tsFixtures.forEach(runFixture));
+describe('CoffeeScript - ', () => coffeeFixtures.forEach(runFixture));
 
 describe('Error scenarios - ', () => {
     it('Does not raise an exception on syntax errors (because we\'re on the loose parser)', () => {

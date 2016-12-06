@@ -14,7 +14,7 @@ function getAllJSFilesFromDir (pDirName, pOptions) {
             if (fs.statSync(path.join(pDirName, pFileName)).isDirectory()){
                 return pSum.concat(getAllJSFilesFromDir(path.join(pDirName, pFileName), pOptions));
             }
-            if ([".js", ".ts"].some(pExt => path.extname(pFileName) === pExt)){
+            if ([".js", ".ts", ".coffee"].some(pExt => path.extname(pFileName) === pExt)){
                 return pSum.concat(path.join(pDirName, pFileName));
             }
             return pSum;

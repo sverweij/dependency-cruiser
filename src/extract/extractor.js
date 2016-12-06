@@ -3,6 +3,7 @@
 const acorn                       = require('acorn');
 const acorn_loose                 = require('acorn/dist/acorn_loose');
 const typescript                  = require('typescript');
+const coffeeScript                = require('coffee-script');
 const fs                          = require('fs');
 const _                           = require('lodash');
 const path                        = require('path');
@@ -26,6 +27,10 @@ function getASTBare(pFileName) {
                 }
             }
         ).outputText;
+    }
+
+    if (path.extname(pFileName) === ".coffee"){
+        lFile = coffeeScript.compile(lFile);
     }
 
     try {
