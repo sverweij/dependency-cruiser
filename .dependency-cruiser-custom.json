@@ -41,7 +41,7 @@
             "to": { "path": "^(src|test|lib)" }
         }, {
             "name": "not-to-unresolvable",
-            "severity": "error",
+            "severity": "warn",
             "from": { },
             "to": { "couldNotResolve": true }
         }]
