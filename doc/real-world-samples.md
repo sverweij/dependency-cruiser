@@ -1,4 +1,4 @@
-# Real world projects dependency cruised
+# Real world projects. Dependency cruised.
 
 ## Some popular projects on npm
 

@@ -32,8 +32,8 @@ This will:
   will exit with exit code _number of violations found_ in the same fasion
   linters and test tools do.
 
-See the _dependency-cruise_ target in the [Makefile](https://github.com/sverweij/dependency-cruiser/blob/master/Makefile#L78) for a real world
-example.
+See the _dependency-cruise_ target in the [Makefile](https://github.com/sverweij/dependency-cruiser/blob/master/Makefile#L95)
+for a real world example.
 
 ### dot
 Supplying `dot` as output type will make dependency-cruiser write

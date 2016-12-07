@@ -1,16 +1,16 @@
 # Dependency cruiser ![Dependency cruiser](https://raw.githubusercontent.com/sverweij/dependency-cruiser/master/doc/assets/ZKH-Dependency-recolored-160.png)
-_Validate and visualize dependencies. With your rules._ JavaScript, TypeScript. ES6, CommonJS, AMD.
+_Validate and visualize dependencies. With your rules._ JavaScript. TypeScript. CoffeeScript. ES6, CommonJS, AMD.
 
 ![Snazzy dot output to whet your appetite](https://raw.githubusercontent.com/sverweij/dependency-cruiser/master/doc/assets/sample-dot-output.png)
 
 ## What's this do?
-- Run through the dependencies in any JavaScript or TypeScript project and ...
+- Run through the dependencies in any JavaScript, TypeScript or CoffeeScript project and ...
   - ... **validate** them against a set of (your own) rules
   - ... **report** violated rules
     - in text (for in your builds)
     - in graphics (for on your eyeballs)
 
-As a nice side effect it can generate **cool dependency graphs**
+As a nice side effect it can generate [**cool dependency graphs**](https://github.com/sverweij/dependency-cruiser/blob/master/doc/real-world-samples.md)
 you can stick on the wall to impress your grandma.
 
 ## How do I use it?

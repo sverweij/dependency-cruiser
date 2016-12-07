@@ -1,7 +1,7 @@
 # dependency-cruiser's validation format
 - A [json schema](../src/validate/jsonschema.json) describes the output format.
 - Examples:
-  - a [starter rule set](./jsonschema.json)
+  - a [starter rule set](./rules.starter.json)
   - dependency-cruiser's [own rule set](../.dependency-cruiser-custom.json)
 
 ```json
@@ -33,3 +33,18 @@
     }]
 }
 ```
+
+## Basics
+- _Explain name/ severity/ comment/ from/ to/ path_
+- _Advise {} over {"path": ".+"}_
+
+
+## Reference
+### Forbidden
+### Allowed
+### Specifying and excluding paths
+### Attributes
+#### path
+#### pathNot
+#### couldNotResolve
+#### coreModule
