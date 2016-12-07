@@ -33,6 +33,40 @@ For coloring strings in the terminal. A typical _Sorhus style_ micro module that
 
 ![yargs](real-world-samples/yargs.png)
 
+## Typescript
+It is possible to use dependency-cruiser to infer dependencies of typescript
+projects.
+
+We got the picture of tslint below by changing to the tslint/src folder and
+running this:
+```sh
+dependency-cruise -T dot -x node_modules index.ts  | dot -T png > tslint-without-node_modules.png
+```
+
+(Yep, that's all - no separate transpilation steps necessary ...)
+
+### tslint
+[palantir/tslint](https://github.com/palantir/tslint) - linter for typescript.
+
+![tslint](real-world-samples/tslint-without-node_modules.png)
+
+
+## CoffeeScript
+In the same vein dependency-cruiser directly supports CoffeeScript.
+
+In the `src` folder of the coffeescript repo run this:
+```sh
+depcruise -x node_modules -T dot . | dot -T png > coffee-script-coffee-without-node_modules.png
+```
+
+### coffeescript
+[jashkenas/coffeescript](https://github.com/jashkenas/coffeescript) - the
+coffeescript transpiler:
+
+![coffee-script](real-world-samples/coffee-script-coffee-without-node_modules.png)
+
+(You see some modules flagged as _unresolvable_ - )
+
 
 ## My own projects
 ### dependency cruiser
@@ -49,18 +83,3 @@ Dependency cruiser used on itself. node_modules left out to keep it concise.
 [mscgenjs/mscgenjs-core](https://github.com/mscgenjs/mscgenjs-core) - an interpreter library for turning text (in MscGen or two other DSLs) into sequence charts.
 
 ![mscgen.js](real-world-samples/mscgenjs-core-without-lodash-amdefine.png)
-
-## Typescript
-It is possible to use dependency-cruiser to infer dependencies of typescript
-projects.
-
-We got the picture of tslint below by changing to the tslint/src folder and
-running this:
-```sh
-dependency-cruise -T dot -x node_modules index.ts  | dot -T png > tslint-without-node_modules.png
-```
-
-### tslint
-[palantir/tslint](https://github.com/palantir/tslint) - linter for typescript.
-
-![tslint](real-world-samples/tslint-without-node_modules.png)

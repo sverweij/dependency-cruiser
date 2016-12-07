@@ -7,6 +7,14 @@ const _         = require('lodash');
 const extractor = require('./extractor');
 const utl       = require('../utl');
 
+const SUPPORTED_EXTENSIONS = [
+    ".js",
+    ".ts",
+    ".coffee",
+    ".litcoffee",
+    ".coffee.md"
+];
+
 function getAllJSFilesFromDir (pDirName, pOptions) {
     return fs.readdirSync(pDirName)
         .filter(pFileInDir => utl.ignore(pFileInDir, pOptions.exclude))
@@ -14,7 +22,7 @@ function getAllJSFilesFromDir (pDirName, pOptions) {
             if (fs.statSync(path.join(pDirName, pFileName)).isDirectory()){
                 return pSum.concat(getAllJSFilesFromDir(path.join(pDirName, pFileName), pOptions));
             }
-            if ([".js", ".ts", ".coffee"].some(pExt => path.extname(pFileName) === pExt)){
+            if (SUPPORTED_EXTENSIONS.some(pExt => path.extname(pFileName) === pExt)){
                 return pSum.concat(path.join(pDirName, pFileName));
             }
             return pSum;

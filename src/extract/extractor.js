@@ -33,6 +33,10 @@ function getASTBare(pFileName) {
         lFile = coffeeScript.compile(lFile);
     }
 
+    if ([".litcoffee", ".coffee.md"].some(pExt => path.extname(pFileName) === pExt)){
+        lFile = coffeeScript.compile(lFile, {literate:true});
+    }
+
     try {
         return acorn.parse(lFile, {sourceType: 'module'});
     } catch (e) {

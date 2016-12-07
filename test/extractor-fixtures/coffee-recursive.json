@@ -27,7 +27,7 @@
                         "valid": true
                     },
                     {
-                        "resolved": "test/extractor-fixtures/coffee/sub/kaching.coffee",
+                        "resolved": "test/extractor-fixtures/coffee/sub/kaching.litcoffee",
                         "coreModule": false,
                         "followable": true,
                         "couldNotResolve": false,
@@ -36,7 +36,7 @@
                         "valid": true
                     },
                     {
-                        "resolved": "test/extractor-fixtures/coffee/sub/willBeReExported.coffee",
+                        "resolved": "test/extractor-fixtures/coffee/sub/willBeReExported.coffee.md",
                         "coreModule": false,
                         "followable": true,
                         "couldNotResolve": false,
@@ -70,7 +70,7 @@
                 "source": "test/extractor-fixtures/coffee/sub/index.coffee",
                 "dependencies": [
                     {
-                        "resolved": "test/extractor-fixtures/coffee/sub/willBeReExported.coffee",
+                        "resolved": "test/extractor-fixtures/coffee/sub/willBeReExported.coffee.md",
                         "coreModule": false,
                         "followable": true,
                         "couldNotResolve": false,
@@ -81,11 +81,11 @@
                 ]
             },
             {
-                "source": "test/extractor-fixtures/coffee/sub/willBeReExported.coffee",
+                "source": "test/extractor-fixtures/coffee/sub/willBeReExported.coffee.md",
                 "dependencies": []
             },
             {
-                "source": "test/extractor-fixtures/coffee/sub/kaching.coffee",
+                "source": "test/extractor-fixtures/coffee/sub/kaching.litcoffee",
                 "dependencies": []
             }
         ]

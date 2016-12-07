@@ -25,7 +25,7 @@
             },
             {
                 "module": "./sub/kaching",
-                "resolved": "test/extractor-fixtures/coffee/sub/kaching.coffee",
+                "resolved": "test/extractor-fixtures/coffee/sub/kaching.litcoffee",
                 "moduleSystem": "es6",
                 "coreModule": false,
                 "followable": true,
@@ -34,7 +34,7 @@
             },
             {
                 "module": "./sub/willBeReExported",
-                "resolved": "test/extractor-fixtures/coffee/sub/willBeReExported.coffee",
+                "resolved": "test/extractor-fixtures/coffee/sub/willBeReExported.coffee.md",
                 "moduleSystem": "es6",
                 "coreModule": false,
                 "followable": true,
