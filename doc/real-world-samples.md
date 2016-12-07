@@ -65,7 +65,9 @@ coffeescript transpiler:
 
 ![coffee-script](real-world-samples/coffee-script-coffee-without-node_modules.png)
 
-(You see some modules flagged as _unresolvable_ - )
+(You see one module flagged as _unresolvable_ - this is the parser code
+that the coffeescript build script generates jison into the folder with
+transpiled javascript.)
 
 
 ## My own projects
