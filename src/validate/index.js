@@ -22,10 +22,10 @@ function propertyEquals(pTo, pRule, pProperty) {
 
 function matchRule(pFrom, pTo) {
     return pRule =>
-        (!Boolean(pRule.from.path) || pFrom.match(pRule.from.path)) &&
+        (!Boolean(pRule.from.path)    ||   pFrom.match(pRule.from.path)) &&
         (!Boolean(pRule.from.pathNot) || !(pFrom.match(pRule.from.pathNot))) &&
-        (!Boolean(pRule.to.path) || pTo.resolved.match(pRule.to.path)) &&
-        (!Boolean(pRule.to.pathNot) || !(pTo.resolved.match(pRule.to.pathNot))) &&
+        (!Boolean(pRule.to.path)      ||   pTo.resolved.match(pRule.to.path)) &&
+        (!Boolean(pRule.to.pathNot)   || !(pTo.resolved.match(pRule.to.pathNot))) &&
         propertyEquals(pTo, pRule, "coreModule") &&
         propertyEquals(pTo, pRule, "couldNotResolve");
 }
