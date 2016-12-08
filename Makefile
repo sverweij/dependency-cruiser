@@ -8,7 +8,8 @@ RM=rm -f
 MAKEDEPEND=node_modules/.bin/js-makedepend --exclude "node_modules|fixtures|extractor-fixtures" --system cjs
 GENERATED_SOURCES=src/report/csv.template.js \
 	src/report/dot.template.js \
-	src/report/html.template.js
+	src/report/html.template.js \
+	src/report/vis.template.js
 
 .PHONY: help dev-build install check fullcheck mostlyclean clean lint cover prerequisites static-analysis test update-dependencies run-update-dependencies depend
 
@@ -122,7 +123,8 @@ src/cli/index.js: \
 	src/report/dotReporter.js \
 	src/report/errReporter.js \
 	src/report/htmlReporter.js \
-	src/report/jsonReporter.js
+	src/report/jsonReporter.js \
+	src/report/visReporter.js
 
 src/extract/index.js: \
 	src/extract/extractor.js \
@@ -163,6 +165,9 @@ src/report/dotReporter.js: \
 src/report/htmlReporter.js: \
 	src/report/dependencyToIncidenceTransformer.js \
 	src/report/html.template.js
+
+src/report/visReporter.js: \
+	src/report/vis.template.js
 
 src/cli/parameterValidator.js: \
 	src/utl/index.js
@@ -187,6 +192,8 @@ ALL_SRC=src/index.js \
 	src/report/html.template.js \
 	src/report/htmlReporter.js \
 	src/report/jsonReporter.js \
+	src/report/vis.template.js \
+	src/report/visReporter.js \
 	src/resolve/index.js \
 	src/resolve/resolver-AMD.js \
 	src/resolve/resolver-commonJS.js \
@@ -208,7 +215,8 @@ src/cli/index.js: \
 	src/report/dotReporter.js \
 	src/report/errReporter.js \
 	src/report/htmlReporter.js \
-	src/report/jsonReporter.js
+	src/report/jsonReporter.js \
+	src/report/visReporter.js
 
 src/extract/index.js: \
 	src/extract/extractor.js \
@@ -249,6 +257,9 @@ src/report/dotReporter.js: \
 src/report/htmlReporter.js: \
 	src/report/dependencyToIncidenceTransformer.js \
 	src/report/html.template.js
+
+src/report/visReporter.js: \
+	src/report/vis.template.js
 
 src/cli/parameterValidator.js: \
 	src/utl/index.js

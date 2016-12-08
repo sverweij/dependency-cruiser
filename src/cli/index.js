@@ -9,13 +9,15 @@ const reportJson         = require("../report/jsonReporter");
 const reportDot          = require("../report/dotReporter");
 const reportCsv          = require("../report/csvReporter");
 const reportErr          = require("../report/errReporter");
+const reportVis          = require("../report/visReporter");
 
 const TYPE2REPORTER      = {
     "json" : reportJson,
     "html" : reportHtml,
     "dot"  : reportDot,
     "csv"  : reportCsv,
-    "err"  : reportErr
+    "err"  : reportErr,
+    "vis"  : reportVis
 };
 
 function writeToFile(pOutputTo, pDependencyString) {

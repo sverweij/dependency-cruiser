@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <title>dependency-cruiser vis.js output</title>
+
+        <style>
+            body {
+                color: black;
+                font: 12pt sans-serif;
+                background-color: white;
+            }
+
+            #mynetwork {
+                position: fixed;
+                z-index: 1;
+                background-color: transparent;
+                color: transparent;
+                width: 100%;
+                height: 100%;
+                resize: none;
+                cursor: default;
+            }
+        </style>
+
+        <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/vis/4.16.1/vis.min.js"></script>
+        <link href="https://cdnjs.cloudflare.com/ajax/libs/vis/4.16.1//vis.css" rel="stylesheet" type="text/css">
+    </head>
+
+    <body>
+
+    <div id="mynetwork"></div>
+        <script type="text/javascript">
+            var color = 'gray';
+            var len = undefined;
+
+            var nodes = [
+                {{#each things}}
+                    {id: "{{{source}}}", label: "{{{source}}}", group: "{{{path}}}"},
+                {{/each}}
+            ];
+            var edges = [
+                {{#each things}}
+                    {{#each dependencies}}
+                    {from: "{{{../source}}}", to: "{{{resolved}}}", arrows: "to"},
+                    {{/each}}
+                {{/each}}
+            ]
+
+            // create a network
+            var container = document.getElementById('mynetwork');
+            var data = {
+                nodes: nodes,
+                edges: edges
+            };
+            var options = {
+                // layout: {
+                //     hierarchical: {
+                //         direction: "UD"
+                //     }
+                // },
+                physics: {
+                    enabled: true,
+                    // barnesHut: {
+                    //     avoidOverlap: 0.8
+                    // }
+                },
+                nodes: {
+                    shape: 'box',
+                    size: 10,
+                    font: {
+                        size: 18,
+                        color: 'black'
+                    },
+                    borderWidth: 2,
+                    shadow: true
+                },
+                edges: {
+                    width: 2,
+                    shadow: true
+                }
+            };
+            network = new vis.Network(container, data, options);
+        </script>
+    </body>
+</html>
