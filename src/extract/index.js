@@ -105,7 +105,7 @@ function complete(pAll, pFromListItem) {
 
 function extract(pDirOrFile, pOptions, pCallback) {
     let lRetvalToTransform = {};
-    let lCallback = pCallback ? pCallback : pInput => pInput;
+    let lCallback = pCallback ? pCallback : pInput => ({content: pInput, meta: {}});
 
     if (fs.statSync(pDirOrFile).isDirectory()) {
         lRetvalToTransform = extractRecursiveDir(pDirOrFile, pOptions);

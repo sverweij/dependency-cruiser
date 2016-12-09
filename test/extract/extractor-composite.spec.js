@@ -19,8 +19,8 @@ function runRecursiveFixture(pFixture) {
                     pFixture.input.options
                 );
 
-            expect(lResult).to.deep.equal(pFixture.expected);
-            expect(lResult).to.be.jsonSchema(depSchema);
+            expect(lResult.content).to.deep.equal(pFixture.expected);
+            expect(lResult.content).to.be.jsonSchema(depSchema);
         });
 
     }

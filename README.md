@@ -95,6 +95,7 @@ You've come to the right place :-) :
 - [Writing rules](https://github.com/sverweij/dependency-cruiser/blob/master/doc/rules.md)
 - [Real world show cases](https://github.com/sverweij/dependency-cruiser/blob/master/doc/real-world-samples.md)
 - [Output format](./doc/output-format.md)
+- [API](./doc/api.md)
 - [Road map](https://github.com/sverweij/dependency-cruiser/projects/1)
 
 ## License

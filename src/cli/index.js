@@ -1,24 +1,9 @@
 "use strict";
 
 const fs                 = require("fs");
-const extract            = require("../extract");
 const validateParameters = require("./parameterValidator");
 const normalizeOptions   = require("./optionNormalizer");
-const reportHtml         = require("../report/htmlReporter");
-const reportJson         = require("../report/jsonReporter");
-const reportDot          = require("../report/dotReporter");
-const reportCsv          = require("../report/csvReporter");
-const reportErr          = require("../report/errReporter");
-const reportVis          = require("../report/visReporter");
-
-const TYPE2REPORTER      = {
-    "json" : reportJson,
-    "html" : reportHtml,
-    "dot"  : reportDot,
-    "csv"  : reportCsv,
-    "err"  : reportErr,
-    "vis"  : reportVis
-};
+const main               = require("./main");
 
 function writeToFile(pOutputTo, pDependencyString) {
     try {
@@ -44,10 +29,10 @@ module.exports = (pDirOrFile, pOptions) => {
     try {
         validateParameters(pDirOrFile, pOptions);
         pOptions = normalizeOptions(pOptions);
-        let lDependencyList = extract(
+
+        let lDependencyList = main(
             pDirOrFile,
-            pOptions,
-            TYPE2REPORTER[pOptions.outputType]
+            pOptions
         );
         let lExitCode = lDependencyList.meta ? lDependencyList.meta.error : 0;
 

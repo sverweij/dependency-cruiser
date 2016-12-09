@@ -116,8 +116,11 @@ src/index.js: \
 	src/cli/index.js
 
 src/cli/index.js: \
+	src/cli/main.js \
 	src/cli/optionNormalizer.js \
-	src/cli/parameterValidator.js \
+	src/cli/parameterValidator.js
+
+src/cli/main.js: \
 	src/extract/index.js \
 	src/report/csvReporter.js \
 	src/report/dotReporter.js \
@@ -176,6 +179,7 @@ src/cli/parameterValidator.js: \
 ALL_SRC=src/index.js \
 	package.json \
 	src/cli/index.js \
+	src/cli/main.js \
 	src/cli/optionNormalizer.js \
 	src/cli/parameterValidator.js \
 	src/extract/extractor-AMD.js \
@@ -208,8 +212,11 @@ test/cli/index.spec.js: \
 	test/utl/testutensils.js
 
 src/cli/index.js: \
+	src/cli/main.js \
 	src/cli/optionNormalizer.js \
-	src/cli/parameterValidator.js \
+	src/cli/parameterValidator.js
+
+src/cli/main.js: \
 	src/extract/index.js \
 	src/report/csvReporter.js \
 	src/report/dotReporter.js \
