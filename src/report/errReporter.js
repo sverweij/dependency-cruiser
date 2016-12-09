@@ -39,23 +39,8 @@ function addSource(pSource) {
     return pDependency => Object.assign(pDependency, {source: pSource});
 }
 
-function render(pInput) {
-    let lViolations = pInput
-        .map(cutNonTransgressions)
-        .filter(pDep => pDep.dependencies.length > 0)
-        .sort((pOne, pTwo) => pOne.source > pTwo.source ? 1 : -1)
-        .reduce(
-            (pAll, pThis) => pAll.concat(pThis.dependencies.map(addSource(pThis.source))),
-            []
-        );
-
-    if (lViolations.length === 0){
-        return {
-            content: ""
-        };
-    }
-
-    let lMeta = lViolations.reduce(
+function extractMetaData(pViolations) {
+    return pViolations.reduce(
         (pAll, pThis) => {
             pAll[pThis.rule.severity] += 1;
             return pAll;
@@ -66,15 +51,38 @@ function render(pInput) {
             info  : 0
         }
     );
+}
+
+function extractViolations(pInput){
+    return pInput
+        .map(cutNonTransgressions)
+        .filter(pDep => pDep.dependencies.length > 0)
+        .sort((pOne, pTwo) => pOne.source > pTwo.source ? 1 : -1)
+        .reduce(
+            (pAll, pThis) => pAll.concat(pThis.dependencies.map(addSource(pThis.source))),
+            []
+        );
+}
+
+function render(pInput) {
+    const lViolations = extractViolations(pInput);
+
+    if (lViolations.length === 0){
+        return {
+            content: ""
+        };
+    }
+
+    const lMetaData = extractMetaData(lViolations);
 
     return {
         content: lViolations.reduce(
                 (pAll, pThis) => `${pAll}  ${formatError(pThis)}\n`,
                 "\n"
             ).concat(
-                formatSummary(lMeta)
+                formatSummary(lMetaData)
             ),
-        meta: lMeta
+        meta: lMetaData
     };
 
 }
