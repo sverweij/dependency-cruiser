@@ -27,21 +27,20 @@ To make this as easy as possible for you, here's some simple guidelines:
 - Code quality
     - Additions pass eslint (as configured for this repo)
     - Mocha tests prove your code does what it intends.
-    - Your code does not introduce regressions - ```make check``` proves this.
+    - Your code does not introduce regressions - ```make fullcheck``` proves
+      this.
     - Code style (you know, petty things like indentations, where brackets go,
       how variables & parameters are named) fits in with the current code base.
 - Plan to do something drastic?     
-  Contact @SanderSpeaks on Twitter, or leave an
-  [issue](https://github.com/sverweij/dependency-cruiser/issues/new) on GitHub
+  Leave an [issue](https://github.com/sverweij/dependency-cruiser/issues/new)
+  on GitHub
 - dependency-cruiser is released with a [code of conduct](CODE_OF_CONDUCT.md), adapted
   from the [contributor covenant](http://contributor-covenant.org/).
-
 
 ### Legal
 - the code you add will be subject to
   [the MIT license](LICENSE), just like the rest of dependency-cruiser
 - the code you add is your own original work
-
 
 ### Issue template
     ### steps taken
