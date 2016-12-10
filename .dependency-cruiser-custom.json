@@ -10,7 +10,7 @@
             "from": { "path": "^bin" },
             "to": { "path": "^src/index\\.js" }
         }, {
-            "from": { "path": "^src/index\\.js" },
+            "from": { "path": "^src/cli/index\\.js" },
             "to": { "path": "^package\\.json$" }
         }, {
             "comment": "node_modules may depend core modules",

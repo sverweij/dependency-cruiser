@@ -21,12 +21,8 @@ function addShowTitle(pDependencyEntry) {
     );
 }
 
-function render(pInput) {
-    return {
-        content: Handlebars.templates['html.template.hbs']({
-            "things" : dependencyToIncidenceTransformer.transform(pInput).map(addShowTitle)
-        })
-    };
-}
-
-module.exports = render;
+module.exports = (pInput) => ({
+    dependencies: Handlebars.templates['html.template.hbs']({
+        "things" : dependencyToIncidenceTransformer.transform(pInput).map(addShowTitle)
+    })
+});

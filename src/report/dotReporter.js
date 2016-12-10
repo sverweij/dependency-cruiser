@@ -66,12 +66,8 @@ function colorize(pDependencyItem){
     );
 }
 
-function render(pInput) {
-    return {
-        content: Handlebars.templates['dot.template.hbs']({
-            "things" : pInput.sort(compareOnSource).map(folderify).map(colorize)
-        })
-    };
-}
-
-module.exports = render;
+module.exports = (pInput) => ({
+    dependencies: Handlebars.templates['dot.template.hbs']({
+        "things" : pInput.sort(compareOnSource).map(folderify).map(colorize)
+    })
+});

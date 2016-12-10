@@ -1,19 +1,5 @@
 "use strict";
 
-const _                 = require("lodash");
-const fs                = require("fs");
-const ruleSetValidator  = require('./ruleSetValidator');
-const ruleSetNormalizer = require('./ruleSetNormalizer');
-
-const readRules = _.memoize(
-    pRuleSetFile => {
-        let lRetval = JSON.parse(fs.readFileSync(pRuleSetFile, 'utf8'));
-
-        ruleSetValidator(lRetval);
-        return ruleSetNormalizer(lRetval);
-    }
-);
-
 function propertyEquals(pTo, pRule, pProperty) {
     return pRule.to.hasOwnProperty(pProperty)
         ? pTo[pProperty] === pRule.to[pProperty]
@@ -60,14 +46,12 @@ function validateAgainstRules(pRuleSet, pFrom, pTo) {
     return {valid:true};
 }
 
-function validate (pValidate, pRuleSetFile, pFrom, pTo) {
+module.exports = (pValidate, pRuleSet, pFrom, pTo) => {
     if (!pValidate) {
         return {valid:true};
     }
-    return validateAgainstRules(readRules(pRuleSetFile), pFrom, pTo);
-}
-
-exports.validate = validate;
+    return validateAgainstRules(pRuleSet, pFrom, pTo);
+};
 
 /* ignore security/detect-object-injection because:
    - we only use it from within the module with two fixed values

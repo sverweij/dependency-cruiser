@@ -1,8 +1,8 @@
 "use strict";
 
 const _                = require('lodash');
-const resolveAMDModule = require('./resolver-AMD');
-const resolveCJSModule = require('./resolver-commonJS');
+const resolveAMDModule = require('./resolve-AMD');
+const resolveCJSModule = require('./resolve-commonJS');
 
 const isRelativeModuleName = pString => pString.startsWith(".");
 

@@ -1,0 +1,55 @@
+[
+    {
+        "title": "kitchensink",
+        "input": {
+            "fileName": "test/extract/fixtures/ts/index.ts"
+        },
+        "expected": [
+            {
+                "module": "./javascriptThing",
+                "resolved": "test/extract/fixtures/ts/javascriptThing.js",
+                "moduleSystem": "es6",
+                "coreModule": false,
+                "followable": true,
+                "couldNotResolve": false,
+                "valid": true
+            },
+            {
+                "module": "./sub",
+                "resolved": "test/extract/fixtures/ts/sub/index.ts",
+                "moduleSystem": "es6",
+                "coreModule": false,
+                "followable": true,
+                "couldNotResolve": false,
+                "valid": true
+            },
+            {
+                "module": "./sub/kaching",
+                "resolved": "test/extract/fixtures/ts/sub/kaching.ts",
+                "moduleSystem": "es6",
+                "coreModule": false,
+                "followable": true,
+                "couldNotResolve": false,
+                "valid": true
+            },
+            {
+                "module": "./sub/willBeReExported",
+                "resolved": "test/extract/fixtures/ts/sub/willBeReExported.ts",
+                "moduleSystem": "es6",
+                "coreModule": false,
+                "followable": true,
+                "couldNotResolve": false,
+                "valid": true
+            },
+            {
+                "module": "path",
+                "resolved": "path",
+                "moduleSystem": "es6",
+                "coreModule": true,
+                "followable": false,
+                "couldNotResolve": false,
+                "valid": true
+            }
+        ]
+    }
+]

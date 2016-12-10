@@ -1,7 +1,7 @@
 "use strict";
 const expect = require('chai').expect;
 const render = require('../../src/report/htmlReporter');
-const deps   = require('../fixtures/cjs-no-dependency-valid.json');
+const deps   = require('../cli/fixtures/cjs-no-dependency-valid.json');
 
 const elFixture = `<!DOCTYPE html>
 <html>
@@ -270,7 +270,7 @@ const elFixture = `<!DOCTYPE html>
 
 describe("html reporter", () => {
     it("renders html - modules in the root don't come in a cluster; and one module could not be resolved", () => {
-        expect(render(deps).content).to.deep.equal(elFixture);
+        expect(render(deps).dependencies).to.deep.equal(elFixture);
         // console.log(render(deps));
         // expect(1).to.equal(1);
     });

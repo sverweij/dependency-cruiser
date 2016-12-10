@@ -7,7 +7,7 @@
     "dependency-cruise": "bin/dependency-cruise",
     "depcruise": "bin/dependency-cruise"
   },
-  "main": "src/cli/main.js",
+  "main": "src/main/index.js",
   "scripts": {
     "cover": "istanbul cover node_modules/mocha/bin/_mocha -- test/*/*.spec.js",
     "lint": "eslint src test",

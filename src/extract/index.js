@@ -1,11 +1,11 @@
 "use strict";
 
-const fs        = require('fs');
-const path      = require('path');
-const _         = require('lodash');
+const fs      = require('fs');
+const path    = require('path');
+const _       = require('lodash');
 
-const extractor = require('./extractor');
-const utl       = require('../utl');
+const extract = require('./extract');
+const utl     = require('../utl');
 
 const SUPPORTED_EXTENSIONS = [
     ".js",
@@ -35,7 +35,7 @@ function extractRecursive (pFileName, pOptions, pVisited) {
     pVisited.add(pFileName);
 
     let lRetval = [];
-    const lDependencies = extractor(pFileName, pOptions);
+    const lDependencies = extract(pFileName, pOptions);
 
     lRetval.push({
         source: pFileName,
@@ -103,9 +103,9 @@ function complete(pAll, pFromListItem) {
         );
 }
 
-function extract(pDirOrFile, pOptions, pCallback) {
+module.exports = (pDirOrFile, pOptions, pCallback) => {
     let lRetvalToTransform = {};
-    let lCallback = pCallback ? pCallback : pInput => ({content: pInput, meta: {}});
+    let lCallback = pCallback ? pCallback : pInput => ({dependencies: pInput, metaData: {}});
 
     if (fs.statSync(pDirOrFile).isDirectory()) {
         lRetvalToTransform = extractRecursiveDir(pDirOrFile, pOptions);
@@ -113,6 +113,4 @@ function extract(pDirOrFile, pOptions, pCallback) {
         lRetvalToTransform = extractRecursive(pDirOrFile, pOptions);
     }
     return lCallback(lRetvalToTransform.reduce(complete, []));
-}
-
-module.exports = extract;
+};

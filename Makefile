@@ -26,10 +26,16 @@ src/report/%.template.js: src/report/%.template.hbs
 
 .npmignore: .gitignore
 	cp $< $@
+	echo "doc/api.md" >> $@
+	echo "doc/cli.md" >> $@
+	echo "doc/output-format.md" >> $@
 	echo "doc/real-world-samples.md" >> $@
 	echo "doc/real-world-samples/**" >> $@
 	echo "doc/assets/ZKH-Dependency-recolored-320.png" >> $@
 	echo "doc/assets/ZKH-Dependency-recolored-320.svg" >> $@
+	echo "doc/rules.md" >> $@
+	echo "doc/rules.starter.json.md" >> $@
+	echo "doc/sample-output.md" >> $@
 	echo "test/**" >> $@
 	echo "utl/**" >> $@
 	echo ".bithoundrc" >> $@
@@ -117,8 +123,16 @@ src/index.js: \
 
 src/cli/index.js: \
 	src/cli/main.js \
-	src/cli/optionNormalizer.js \
-	src/cli/parameterValidator.js
+	src/cli/normalizeOptions.js \
+	src/cli/validateParameters.js \
+	src/validate/readRuleSet.js
+
+src/validate/readRuleSet.js: \
+	src/validate/normalizeRuleSet.js \
+	src/validate/validateRuleSet.js
+
+src/validate/validateRuleSet.js: \
+	src/validate/jsonschema.json
 
 src/cli/main.js: \
 	src/extract/index.js \
@@ -130,33 +144,26 @@ src/cli/main.js: \
 	src/report/visReporter.js
 
 src/extract/index.js: \
-	src/extract/extractor.js \
+	src/extract/extract.js \
 	src/utl/index.js
 
-src/extract/extractor.js: \
-	src/extract/extractor-AMD.js \
-	src/extract/extractor-ES6.js \
-	src/extract/extractor-commonJS.js \
+src/extract/extract.js: \
+	src/extract/extract-AMD.js \
+	src/extract/extract-ES6.js \
+	src/extract/extract-commonJS.js \
 	src/resolve/index.js \
 	src/utl/index.js \
 	src/validate/index.js
 
 src/resolve/index.js: \
-	src/resolve/resolver-AMD.js \
-	src/resolve/resolver-commonJS.js
+	src/resolve/resolve-AMD.js \
+	src/resolve/resolve-commonJS.js
 
-src/resolve/resolver-AMD.js: \
+src/resolve/resolve-AMD.js: \
 	src/utl/index.js
 
-src/validate/index.js: \
-	src/validate/ruleSetNormalizer.js \
-	src/validate/ruleSetValidator.js
-
-src/validate/ruleSetValidator.js: \
-	src/validate/jsonschema.json
-
-src/extract/extractor-AMD.js: \
-	src/extract/extractor-commonJS.js
+src/extract/extract-AMD.js: \
+	src/extract/extract-commonJS.js
 
 src/report/csvReporter.js: \
 	src/report/csv.template.js \
@@ -172,7 +179,7 @@ src/report/htmlReporter.js: \
 src/report/visReporter.js: \
 	src/report/vis.template.js
 
-src/cli/parameterValidator.js: \
+src/cli/validateParameters.js: \
 	src/utl/index.js
 
 # cjs dependencies
@@ -180,12 +187,12 @@ ALL_SRC=src/index.js \
 	package.json \
 	src/cli/index.js \
 	src/cli/main.js \
-	src/cli/optionNormalizer.js \
-	src/cli/parameterValidator.js \
-	src/extract/extractor-AMD.js \
-	src/extract/extractor-ES6.js \
-	src/extract/extractor-commonJS.js \
-	src/extract/extractor.js \
+	src/cli/normalizeOptions.js \
+	src/cli/validateParameters.js \
+	src/extract/extract-AMD.js \
+	src/extract/extract-ES6.js \
+	src/extract/extract-commonJS.js \
+	src/extract/extract.js \
 	src/extract/index.js \
 	src/report/csv.template.js \
 	src/report/csvReporter.js \
@@ -199,13 +206,14 @@ ALL_SRC=src/index.js \
 	src/report/vis.template.js \
 	src/report/visReporter.js \
 	src/resolve/index.js \
-	src/resolve/resolver-AMD.js \
-	src/resolve/resolver-commonJS.js \
+	src/resolve/resolve-AMD.js \
+	src/resolve/resolve-commonJS.js \
 	src/utl/index.js \
 	src/validate/index.js \
 	src/validate/jsonschema.json \
-	src/validate/ruleSetNormalizer.js \
-	src/validate/ruleSetValidator.js
+	src/validate/normalizeRuleSet.js \
+	src/validate/readRuleSet.js \
+	src/validate/validateRuleSet.js
 # cjs dependencies
 test/cli/index.spec.js: \
 	src/cli/index.js \
@@ -213,8 +221,16 @@ test/cli/index.spec.js: \
 
 src/cli/index.js: \
 	src/cli/main.js \
-	src/cli/optionNormalizer.js \
-	src/cli/parameterValidator.js
+	src/cli/normalizeOptions.js \
+	src/cli/validateParameters.js \
+	src/validate/readRuleSet.js
+
+src/validate/readRuleSet.js: \
+	src/validate/normalizeRuleSet.js \
+	src/validate/validateRuleSet.js
+
+src/validate/validateRuleSet.js: \
+	src/validate/jsonschema.json
 
 src/cli/main.js: \
 	src/extract/index.js \
@@ -226,33 +242,26 @@ src/cli/main.js: \
 	src/report/visReporter.js
 
 src/extract/index.js: \
-	src/extract/extractor.js \
+	src/extract/extract.js \
 	src/utl/index.js
 
-src/extract/extractor.js: \
-	src/extract/extractor-AMD.js \
-	src/extract/extractor-ES6.js \
-	src/extract/extractor-commonJS.js \
+src/extract/extract.js: \
+	src/extract/extract-AMD.js \
+	src/extract/extract-ES6.js \
+	src/extract/extract-commonJS.js \
 	src/resolve/index.js \
 	src/utl/index.js \
 	src/validate/index.js
 
 src/resolve/index.js: \
-	src/resolve/resolver-AMD.js \
-	src/resolve/resolver-commonJS.js
+	src/resolve/resolve-AMD.js \
+	src/resolve/resolve-commonJS.js
 
-src/resolve/resolver-AMD.js: \
+src/resolve/resolve-AMD.js: \
 	src/utl/index.js
 
-src/validate/index.js: \
-	src/validate/ruleSetNormalizer.js \
-	src/validate/ruleSetValidator.js
-
-src/validate/ruleSetValidator.js: \
-	src/validate/jsonschema.json
-
-src/extract/extractor-AMD.js: \
-	src/extract/extractor-commonJS.js
+src/extract/extract-AMD.js: \
+	src/extract/extract-commonJS.js
 
 src/report/csvReporter.js: \
 	src/report/csv.template.js \
@@ -268,21 +277,21 @@ src/report/htmlReporter.js: \
 src/report/visReporter.js: \
 	src/report/vis.template.js
 
-src/cli/parameterValidator.js: \
+src/cli/validateParameters.js: \
 	src/utl/index.js
 
-test/cli/optionNormalizer.spec.js: \
-	src/cli/optionNormalizer.js
+test/cli/normalizeOptions.spec.js: \
+	src/cli/normalizeOptions.js
 
-test/cli/parameterValidator.spec.js: \
-	src/cli/parameterValidator.js
+test/cli/validateParameters.spec.js: \
+	src/cli/validateParameters.js
 
-test/extract/extractor-composite.spec.js: \
+test/extract/extract-composite.spec.js: \
 	src/extract/index.js \
 	src/extract/jsonschema.json
 
-test/extract/extractor.spec.js: \
-	src/extract/extractor.js
+test/extract/extract.spec.js: \
+	src/extract/extract.js
 
 test/report/dotReporter.spec.js: \
 	src/report/dotReporter.js
@@ -293,9 +302,12 @@ test/report/errReporter.spec.js: \
 test/report/htmlReporter.spec.js: \
 	src/report/htmlReporter.js
 
-test/validate/ruleSetNormalizer.spec.js: \
-	src/validate/ruleSetNormalizer.js
+test/validate/normalizeRuleSet.spec.js: \
+	src/validate/normalizeRuleSet.js
 
-test/validate/validator.spec.js: \
-	src/validate/index.js
+test/validate/readRuleSet.spec.js: \
+	src/validate/readRuleSet.js
 
+test/validate/validate.spec.js: \
+	src/validate/index.js \
+	src/validate/readRuleSet.js

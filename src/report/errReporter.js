@@ -69,20 +69,20 @@ function render(pInput) {
 
     if (lViolations.length === 0){
         return {
-            content: ""
+            dependencies: ""
         };
     }
 
     const lMetaData = extractMetaData(lViolations);
 
     return {
-        content: lViolations.reduce(
+        dependencies: lViolations.reduce(
                 (pAll, pThis) => `${pAll}  ${formatError(pThis)}\n`,
                 "\n"
             ).concat(
                 formatSummary(lMetaData)
             ),
-        meta: lMetaData
+        metaData: lMetaData
     };
 
 }

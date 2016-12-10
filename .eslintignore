@@ -3,5 +3,5 @@ coverage
 tmp
 utl
 src/report/*.template.js
-test/fixtures/**
-test/extractor-fixtures/**
+test/cli/fixtures/**
+test/extract/fixtures/**

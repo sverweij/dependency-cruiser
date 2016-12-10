@@ -19,10 +19,16 @@ npm-debug.log
 isolate-*-v8.log
 build
 .dependency-cruiser.json
+doc/api.md
+doc/cli.md
+doc/output-format.md
 doc/real-world-samples.md
 doc/real-world-samples/**
 doc/assets/ZKH-Dependency-recolored-320.png
 doc/assets/ZKH-Dependency-recolored-320.svg
+doc/rules.md
+doc/rules.starter.json.md
+doc/sample-output.md
 test/**
 utl/**
 .bithoundrc

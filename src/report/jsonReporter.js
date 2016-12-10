@@ -1,5 +1,5 @@
 "use strict";
 
 module.exports = pInput => ({
-    content: JSON.stringify(pInput, null, "    ")
+    dependencies: JSON.stringify(pInput, null, "    ")
 });

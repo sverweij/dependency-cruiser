@@ -1,54 +1,35 @@
 "use strict";
 
-const fs                 = require("fs");
-const validateParameters = require("./parameterValidator");
-const normalizeOptions   = require("./optionNormalizer");
-const main               = require("./main");
+const program    = require("commander");
+const processCLI = require("./processCLI");
+const $package   = require("../../package.json");
+const semver     = require("semver");
 
-function writeToFile(pOutputTo, pDependencyString) {
-    try {
-        fs.writeFileSync(
-            pOutputTo,
-            pDependencyString,
-            {encoding: "utf8", flag: "w"}
-        );
-    } catch (e) {
-        process.stderr.write(`ERROR: Writing to '${pOutputTo}' didn't work. ${e}`);
-    }
+/* istanbul ignore if  */
+if (!semver.satisfies(process.versions.node, $package.engines.node)) {
+    process.stderr.write(`\nERROR: your node version (${process.versions.node}) is not recent enough.\n`);
+    process.stderr.write(`       dependency-cruiser needs a version of node ${$package.engines.node}\n\n`);
+
+    /* eslint no-process-exit: 0 */
+    process.exit(-1);
 }
 
-function write(pOutputTo, pContent) {
-    if ("-" === pOutputTo) {
-        process.stdout.write(pContent);
-    } else {
-        writeToFile(pOutputTo, pContent);
-    }
+program
+    .version($package.version)
+    .option("-v, --validate [file]", `validate with rules in [file]
+                           (default: .dependency-cruiser.json)`)
+    .option("-f, --output-to <file>", "file to write output to; - for stdout (default: -)")
+    .option("-x, --exclude <regex>", "a regular expression for excluding modules")
+    .option("-M, --system <items>", "list of module systems (default: amd,cjs,es6)")
+    .option("-T, --output-type <type>", "output type - html|dot|err|json (default:json)")
+    .arguments("<directory-or-file>")
+    .parse(process.argv);
+
+if (Boolean(program.args[0])) {
+    processCLI(
+        program.args[0],
+        program
+    );
+} else {
+    program.help();
 }
-
-module.exports = (pDirOrFile, pOptions) => {
-    try {
-        validateParameters(pDirOrFile, pOptions);
-        pOptions = normalizeOptions(pOptions);
-
-        let lDependencyList = main(
-            pDirOrFile,
-            pOptions
-        );
-        let lExitCode = lDependencyList.meta ? lDependencyList.meta.error : 0;
-
-        write(
-            pOptions.outputTo,
-            lDependencyList.content
-        );
-
-        /* istanbul ignore if */
-        if (lExitCode > 0) {
-            process.exit(lExitCode);
-        }
-
-    } catch (e) {
-        process.stderr.write(`ERROR: ${e.message}`);
-    }
-};
-
-/* eslint no-process-exit: 0 */
