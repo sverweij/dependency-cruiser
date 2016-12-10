@@ -1,33 +1,9 @@
 "use strict";
 
-const fs      = require('fs');
-const path    = require('path');
 const _       = require('lodash');
 
 const extract = require('./extract');
-const utl     = require('../utl');
-
-const SUPPORTED_EXTENSIONS = [
-    ".js",
-    ".ts",
-    ".coffee",
-    ".litcoffee",
-    ".coffee.md"
-];
-
-function getAllJSFilesFromDir (pDirName, pOptions) {
-    return fs.readdirSync(pDirName)
-        .filter(pFileInDir => utl.ignore(pFileInDir, pOptions.exclude))
-        .reduce((pSum, pFileName) => {
-            if (fs.statSync(path.join(pDirName, pFileName)).isDirectory()){
-                return pSum.concat(getAllJSFilesFromDir(path.join(pDirName, pFileName), pOptions));
-            }
-            if (SUPPORTED_EXTENSIONS.some(pExt => path.extname(pFileName) === pExt)){
-                return pSum.concat(path.join(pDirName, pFileName));
-            }
-            return pSum;
-        }, []);
-}
+const gather  = require('./gatherInitialSources');
 
 function extractRecursive (pFileName, pOptions, pVisited) {
     pOptions = pOptions || {};
@@ -56,11 +32,11 @@ function extractRecursive (pFileName, pOptions, pVisited) {
     return lRetval;
 }
 
-function extractRecursiveDir(pDirName, pOptions) {
+function extractFileDirArray(pFileDirArray, pOptions) {
     let lVisited = new Set();
 
     return _.spread(_.concat)(
-        getAllJSFilesFromDir(pDirName, pOptions)
+        gather(pFileDirArray, pOptions)
             .reduce((pDependencies, pFilename) => {
                 if (!lVisited.has(pFilename)){
                     lVisited.add(pFilename);
@@ -103,14 +79,11 @@ function complete(pAll, pFromListItem) {
         );
 }
 
-module.exports = (pDirOrFile, pOptions, pCallback) => {
+module.exports = (pFileDirArray, pOptions, pCallback) => {
     let lRetvalToTransform = {};
     let lCallback = pCallback ? pCallback : pInput => ({dependencies: pInput, metaData: {}});
 
-    if (fs.statSync(pDirOrFile).isDirectory()) {
-        lRetvalToTransform = extractRecursiveDir(pDirOrFile, pOptions);
-    } else {
-        lRetvalToTransform = extractRecursive(pDirOrFile, pOptions);
-    }
+    lRetvalToTransform = extractFileDirArray(pFileDirArray, pOptions);
+
     return lCallback(lRetvalToTransform.reduce(complete, []));
 };

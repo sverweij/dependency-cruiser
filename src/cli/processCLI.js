@@ -26,9 +26,9 @@ function write(pOutputTo, pContent) {
     }
 }
 
-module.exports = (pDirOrFile, pOptions) => {
+module.exports = (pFileDirArray, pOptions) => {
     try {
-        validateParameters(pDirOrFile, pOptions);
+        validateParameters(pFileDirArray, pOptions);
         pOptions = normalizeOptions(pOptions);
 
         if (Boolean(pOptions.rulesFile)){
@@ -38,7 +38,7 @@ module.exports = (pDirOrFile, pOptions) => {
         }
 
         let lDependencyList = main(
-            pDirOrFile,
+            pFileDirArray,
             pOptions
         );
         let lExitCode = lDependencyList.metaData ? lDependencyList.metaData.error : 0;

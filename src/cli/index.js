@@ -22,12 +22,12 @@ program
     .option("-x, --exclude <regex>", "a regular expression for excluding modules")
     .option("-M, --system <items>", "list of module systems (default: amd,cjs,es6)")
     .option("-T, --output-type <type>", "output type - html|dot|err|json (default:json)")
-    .arguments("<directory-or-file>")
+    .arguments("<files-or-directories>")
     .parse(process.argv);
 
 if (Boolean(program.args[0])) {
     processCLI(
-        program.args[0],
+        program.args,
         program
     );
 } else {

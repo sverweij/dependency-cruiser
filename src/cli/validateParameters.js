@@ -48,8 +48,8 @@ function validateValidation(pOptions) {
     }
 }
 
-module.exports = (pDirOrFile, pOptions) => {
-    validateFileExistence(pDirOrFile);
+module.exports = (pFileDirArray, pOptions) => {
+    pFileDirArray.forEach(validateFileExistence);
     if (Boolean(pOptions)) {
         validateSystems(pOptions.system);
         validateExcludePattern(pOptions.exclude);

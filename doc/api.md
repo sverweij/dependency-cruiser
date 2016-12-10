@@ -11,7 +11,7 @@ stable <span style="color: orange">the API is under construction</span>.
 ```javascript
 const depcruise = require('dependency-cruiser');
 
-let dependencies = depcruise("src");
+let dependencies = depcruise(["src"]);
 ```
 
 This will return an object
@@ -32,7 +32,7 @@ followed, and having a GraphViz dot script returned, you'd do this:
 const depcruise = require('dependency-cruiser');
 
 let dependenciesInAGraphVizDotScript = depcruise(
-    "src"
+    ["src"]
     {
         exclude    : "(node_modules)",
         system     : ["cjs"],

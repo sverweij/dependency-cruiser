@@ -1,0 +1,87 @@
+[
+    {
+        "source": "test/cli/fixtures/cjs/sub/depindir.js",
+        "dependencies": [
+            {
+                "resolved": "path",
+                "coreModule": true,
+                "followable": false,
+                "couldNotResolve": false,
+                "module": "path",
+                "moduleSystem": "cjs",
+                "valid": true
+            }
+        ]
+    },
+    {
+        "source": "path",
+        "followable": false,
+        "coreModule": true,
+        "couldNotResolve": false,
+        "dependencies": []
+    },
+    {
+        "source": "test/cli/fixtures/cjs/sub/dir.js",
+        "dependencies": [
+            {
+                "resolved": "test/cli/fixtures/cjs/sub/depindir.js",
+                "coreModule": false,
+                "followable": true,
+                "couldNotResolve": false,
+                "module": "./depindir",
+                "moduleSystem": "cjs",
+                "valid": true
+            },
+            {
+                "resolved": "path",
+                "coreModule": true,
+                "followable": false,
+                "couldNotResolve": false,
+                "module": "path",
+                "moduleSystem": "cjs",
+                "valid": true
+            }
+        ]
+    },
+    {
+        "source": "test/cli/fixtures/duplicate-subs/sub/more-in-sub.js",
+        "dependencies": []
+    },
+    {
+        "source": "test/cli/fixtures/unresolvable-in-sub/refers-to-an-unresolvable-module.js",
+        "dependencies": [
+            {
+                "resolved": "./not-at-home",
+                "coreModule": false,
+                "followable": false,
+                "couldNotResolve": true,
+                "module": "./not-at-home",
+                "moduleSystem": "es6",
+                "valid": true
+            },
+            {
+                "resolved": "./this/path/does/not/exist",
+                "coreModule": false,
+                "followable": false,
+                "couldNotResolve": true,
+                "module": "./this/path/does/not/exist",
+                "moduleSystem": "es6",
+                "valid": true
+            }
+        ]
+    },
+    {
+        "source": "./not-at-home",
+        "followable": false,
+        "coreModule": false,
+        "couldNotResolve": true,
+        "dependencies": []
+    },
+    {
+        "source": "./this/path/does/not/exist",
+        "followable": false,
+        "coreModule": false,
+        "couldNotResolve": true,
+        "dependencies": []
+    }
+]

@@ -2,7 +2,7 @@
 
 Running with no parameters gets you help:
 ```
-Usage: dependency-cruise [options] <directory-or-file>
+Usage: dependency-cruise [options] <files-or-directories>
 
 Options:
 
@@ -110,6 +110,14 @@ default) and 'info') with them that will appear in some reporters:
         "to": {"path": "^test"}
     }]
 }
+```
+
+### Cruising multiple files and directories in one go
+Just pass them as arguments. This, e.g. will cruise every file in the folders
+src, test and lib (recursively)+ the file called index.ts in the root. 
+
+```sh
+depcruise --output-type dot src test lib index.ts
 ```
 
 ## Daphne's dependencies - a gentle introduction

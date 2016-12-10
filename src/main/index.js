@@ -37,14 +37,14 @@ const TYPE2REPORTER      = {
  *               out the function will return a javascript object as dependencies
  * }
  *
- * @param  {string} pDirOrFile The directory to cruise or the file to start
- *                             the cruise with
+ * @param  {array}  pFileDirArray An array of (names of) files and directories to
+ *                             start the cruise with
  * @param  {object} pOptions   see above
- * @return {object}
+ * @return {object} An object with ...
  * {
  *  dependencies : when outputType is defined: a string containing the dependencies
  *            in the format specified in outputType
- *            In all other cases: a javascript with the dependencies
+ *            In all other cases: a javascript array with the dependencies
  *  metaData    : meta data with a summary of
  *           { error : the number of errors,
  *             warn  : the number of warnings,
@@ -54,11 +54,11 @@ const TYPE2REPORTER      = {
  *            always return this in the near future)
  * }
  */
-module.exports = (pDirOrFile, pOptions) => {
+module.exports = (pFileDirArray, pOptions) => {
     pOptions = pOptions ? pOptions : {};
 
     return extract(
-        pDirOrFile,
+        pFileDirArray,
         pOptions,
         TYPE2REPORTER[pOptions.outputType]
     );

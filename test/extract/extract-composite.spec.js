@@ -15,7 +15,7 @@ function runRecursiveFixture(pFixture) {
     if (!Boolean(pFixture.ignore)){
         it(pFixture.title, () => {
             let lResult = extract(
-                    pFixture.input.fileName,
+                    [pFixture.input.fileName],
                     pFixture.input.options
                 );
 

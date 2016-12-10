@@ -107,7 +107,6 @@ const testPairs = [
         expect: "{{moduleType}}.dir.filtered.err",
         cleanup: true
     }
-
 ];
 
 function deleteDammit(pFileName) {
@@ -133,6 +132,7 @@ function resetOutputDir() {
     deleteDammit(path.join(OUT_DIR, "cjs.dir.stdout.json"));
     deleteDammit(path.join(OUT_DIR, "amd.dir.stdout.json"));
     deleteDammit(path.join(OUT_DIR, "cjs.dir.dot"));
+    deleteDammit(path.join(OUT_DIR, "multiple-in-one-go.json"));
 }
 
 function setModuleType(pTestPairs, pModuleType) {
@@ -157,7 +157,7 @@ function setModuleType(pTestPairs, pModuleType) {
 function runFileBasedTests(pModuleType) {
     setModuleType(testPairs, pModuleType).forEach(pPair => {
         it(pPair.description, () => {
-            processCLI(pPair.dirOrFile, pPair.options);
+            processCLI([pPair.dirOrFile], pPair.options);
             tst.assertFileEqual(
                 pPair.options.outputTo,
                 path.join(FIX_DIR, pPair.expect)
@@ -180,6 +180,25 @@ describe("#processCLI", () => {
     });
 
     describe("specials", () => {
+        it("dependency-cruises multiple files and folders in one go", () => {
+            const lOutputFileName = "multiple-in-one-go.json";
+            const lOutputTo       = path.join(OUT_DIR, lOutputFileName);
+
+            processCLI(
+                [
+                    "test/cli/fixtures/cjs/sub",
+                    "test/cli/fixtures/duplicate-subs/sub/more-in-sub.js",
+                    "test/cli/fixtures/unresolvable-in-sub"
+                ],
+                {
+                    outputTo: lOutputTo
+                }
+            );
+            tst.assertFileEqual(
+                lOutputTo,
+                path.join(FIX_DIR, lOutputFileName)
+            );
+        });
 
         it("dependency-cruise test/cli/fixtures/cjs - outputs to stdout", () => {
             let lCapturedStdout = "";
@@ -187,7 +206,7 @@ describe("#processCLI", () => {
                 lCapturedStdout += pText;
             });
 
-            processCLI("test/cli/fixtures/cjs");
+            processCLI(["test/cli/fixtures/cjs"]);
             unhookIntercept();
             fs.writeFileSync(
                 path.join(OUT_DIR, "cjs.dir.stdout.json"),
@@ -207,7 +226,7 @@ describe("#processCLI", () => {
                 lCapturedStdout += pText;
             });
 
-            processCLI("test/cli/fixtures/cjs", {outputTo: "-", outputType: 'json'});
+            processCLI(["test/cli/fixtures/cjs"], {outputTo: "-", outputType: 'json'});
             unhookIntercept();
             fs.writeFileSync(
                 path.join(OUT_DIR, "cjs.dir.stdout.json"),
@@ -231,7 +250,7 @@ describe("#processCLI", () => {
                 lCapturedStderr += pText;
             });
 
-            processCLI("this-doesnot-exist", {outputTo: path.join(OUT_DIR, "cjs.dir.wontmarch.json")});
+            processCLI(["this-doesnot-exist"], {outputTo: path.join(OUT_DIR, "cjs.dir.wontmarch.json")});
             unhookInterceptStdOut();
             unhookInterceptStdErr();
 
@@ -253,7 +272,7 @@ describe("#processCLI", () => {
             });
 
             processCLI(
-                "test/cli/fixtures",
+                ["test/cli/fixtures"],
                 {
                     outputTo: path.join(OUT_DIR, "/dev/null"),
                     system: "invalidmodulesystem"
@@ -283,7 +302,7 @@ describe("#processCLI", () => {
             });
 
             processCLI(
-                "test/cli/fixtures",
+                ["test/cli/fixtures"],
                 {
                     outputTo: path.join(OUT_DIR, "/dev/null"),
                     outputType: "invalidoutputtype"
@@ -313,7 +332,7 @@ describe("#processCLI", () => {
             });
 
             processCLI(
-                "test/cli/fixtures",
+                ["test/cli/fixtures"],
                 {
                     outputTo: path.join(OUT_DIR, "file/you/cant/write/to")
                 }
@@ -342,7 +361,7 @@ describe("#processCLI", () => {
             });
 
             processCLI(
-                "test/cli/fixtures",
+                ["test/cli/fixtures"],
                 {
                     outputTo: path.join(OUT_DIR, "/dev/null"),
                     exclude: "([A-Za-z]+)*"
