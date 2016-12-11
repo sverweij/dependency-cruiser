@@ -1,24 +1,22 @@
 # dependency-cruiser's validation format
 
 ## Basics
-- _Advise {} over {"path": ".+"}_
-
 ### A simple rule - take 1
 
-Let's say you want to prevent the use of the node core 'crypto' library for one
+Let's say you want to prevent the use of the node core 'http' library for one
 reason or other.
 
 ```json
 {
     "forbidden": [{
         "from": {},
-        "to": { "path": "crypto" }
+        "to": { "path": "http" }
     }]
 }
 ```
 
 This rule says it is `forbidden` to have a relation `from` anything `to` things
-with a `path` that contains the string `crypto`.
+with a `path` that contains the string `http`.
 
 You run a depcruise with these rules and lo and behold it comes up with
 something:
