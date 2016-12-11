@@ -3,7 +3,7 @@
 The typical use for dependency-cruiser is on the command line. However, you
 might want to use it programmatically. For this dependency-cruiser has an
 an API. While the engine behind the API and the command line interface are
-stable <span style="color: orange">the API is under construction</span>.
+stable *the API is under construction*.
 
 
 ### Basic use
@@ -18,7 +18,7 @@ This will return an object
 ```
 {
     dependencies: ... the dependencies
-    meta: {}
+    summary: {}
 }
 ```
 
@@ -54,6 +54,9 @@ These are all the options:
               defaults to ["es6", "cjs", "amd"]
  outputType : one of "json", "html", "dot", "csv", "err" or "vis". When left
               out the function will return a javascript object as dependencies
+ prefix     : a string to insert before links (in dot/ svg output) so with
+              cruising local dependencies it is possible to point to sources
+              elsewhere (e.g. in an online repository)
 }
 ```
 
@@ -70,10 +73,12 @@ These are all the options:
                 to: the resolved 'to'
                 rule: the violated rule, which consists of a
                     name: the (short) name of the rule
-                    severity: the severetiy of the violation (error, warn or info)
+                    severity: the severity of the violation (error, warn or info)
              error : the number of errors,
              warn  : the number of warnings,
-             info  : the number of informational messages
+             info  : the number of informational messages,
+             optionsUsed: the options used to generate the dependency graph - the
+                     same ones as mentioned under _options_ above.
            }
 }
 ```

@@ -1,9 +1,163 @@
 # dependency-cruiser's validation format
-- A [json schema](../src/validate/jsonschema.json) describes the output format.
-- Examples:
+
+## Basics
+- _Advise {} over {"path": ".+"}_
+
+### A simple rule - take 1
+
+Let's say you want to prevent the use of the node core 'crypto' library for one
+reason or other.
+
+```json
+{
+    "forbidden": [{
+        "from": {},
+        "to": { "path": "crypto" }
+    }]
+}
+```
+
+This rule says it is `forbidden` to have a relation `from` anything `to` things
+with a `path` that contains the string `crypto`.
+
+You run a depcruise with these rules and lo and behold it comes up with
+something:
+
+*warn* unnamed: **src/secure/index.ts** → **node_modules/@supsec/http/index.js**    
+*warn* unnamed: **src/secure/knappekop.ts** → **node_modules/@supsec/http/index.js**    
+*warn* unnamed: **node_modules/yudelyo/index.js** → **http**    
+*warn* unnamed: **src/secure/index.ts** → **http**    
+*warn* unnamed: **src/secure/index.ts** → **https**    
+
+There's a few things you notice:
+- dependency-cruiser generates _warnings_. This is the default, but maybe you
+  want to stop the build. You'd need _errors_.
+- The rule has no name. For this one rule - no probs. If there's more rules it
+  might be handy for your future self (and your co-workers) to reference the
+  rule.
+- The rule matches a little too much for your taste.
+
+Let's see how we can fix that - name and severity first.
+
+### A simple rule - take 2 - adding name and severity
+
+```json
+{
+    "forbidden": [{
+        "name": "not-to-core-http",
+        "comment": "Don't rely on node's http module because of internal guideline BOYLE-839 - use https and the internal @supsec variant in stead",
+        "severity": "error",
+        "from": {},
+        "to": { "path": "http" }
+    }]
+}
+```
+
+*error* not-to-core-http: **src/secure/index.ts** → **node_modules/@supsec/http/index.js**    
+*error* not-to-core-http: **src/secure/knappekop.ts** → **node_modules/@supsec/http/index.js**    
+*error* not-to-core-http: **node_modules/yudelyo/index.js** → **http**    
+*error* not-to-core-http: **src/secure/index.ts** → **http**    
+*error* not-to-core-http: **src/secure/index.ts** → **https**    
+
+That's a lot easier to understand - *and* it will stop the build from happening.
+
+### A simple rule - take 3 - tightening the rule down
+
+The rule as it is matches not only the core module, but also `@supsec/http`
+*which is module you should actually use* according to BOYLE-839.
+Dependency-cruiser has a special attribute for core modules with the predictable
+name `coreModule`. If we'd add that to the `to` rule
+(`"to": { "coreModule": true, "path": "http" }`) we'd be partly covered:
+
+*error* not-to-core-http: **node_modules/yudelyo/index.js** → **http**    
+*error* not-to-core-http: **src/secure/index.ts** → **http**    
+*error* not-to-core-http: **src/secure/index.ts** → **https**   
+
+... it still matches the `https` package. Luckily the `path` is a regular
+expresion, so you bang in a start (`^`) and an end symbol (`$`) and you're good
+to go:
+
+```json
+{
+    "forbidden": [{
+        "name": "not-to-core-http",
+        "comment": "Don't rely on node's http module because of internal guideline BOYLE-839 - use https and the internal @supsec variant in stead",
+        "severity": "error",
+        "from": {},
+        "to": { "coreModule": true, "path": "^http$" }
+    }]
+}
+```
+
+The result:
+
+*error* not-to-core-http: **node_modules/yudelyo/index.js** → **http**    
+*error* not-to-core-http: **src/secure/index.ts** → **http**    
+
+Now you can go about fixing so `src/secure/index.ts` relies on the internal
+`@supsec/http` module, so you're all BOYLE compliant.
+
+### But that pesky node_module relies on a forbidden dependency as well? Watnu?
+Yep. Don't you just *love* those 1500 npm packages you drag in and rely on for
+your website to run :grimace: .
+
+Luckily you know `cptslow`, the author of `yudelyo` - you submit a PR and wait.
+In the mean time you don't want to have the  build break until `cptslow` has
+found the time to merge your PR.
+
+You realize there might be more npm packages using http too, so ...
+- You change the `not-to-core-http` to only generate errors for paths *outside*
+  node_modules.
+- You add a new rule for node_modules, that just generate a warning. You'll
+  still see it in the build logs, but you can go on developing for the time
+  being.
+
+```json
+{
+    "forbidden": [{
+        "name": "not-to-core-http",
+        "comment": "Don't rely on node's http module because of internal guideline BOYLE-839 - use https and the internal @supsec variant in stead",
+        "severity": "error",
+        "from": {"pathNot": "^node_modules"},
+        "to": { "coreModule": true, "path": "^http$" }
+    },{
+        "name": "node_mods-not-to-http",
+        "comment": "Some node_modules use http - warn about these so we can replace them/ make PR's so we're BOYLE compliant",
+        "severity": "warn",
+        "from": { "path": "^node_modules"},
+        "to": { "coreModule": true, "path": "^http$" }
+    }]
+}
+```
+
+*warn* node_mods-not-to-http: **node_modules/yudelyo/index.js** → **http**    
+*error* not-to-core-http: **src/secure/index.ts** → **http**    
+
+## {} over { "path": ".+" }
+Functionally, `"from": {}` and `"from": { "path": ".+" }` are the same. The way
+depencency-cruiser is wired today, however, makes the former faster than the
+latter. So - unless you have CPU cycles to spare - use the former one
+(`"from": {}`).
+
+## Reference
+
+- Be advised there is a [json schema](../src/validate/jsonschema.json)  
+  that describes the output format for your convenience. Dependency-cruiser
+  checks rule sets against that schema
+- Some examples:
   - a [starter rule set](./rules.starter.json)
   - dependency-cruiser's [own rule set](../.dependency-cruiser-custom.json)
 
+### Forbidden
+### Allowed
+### Specifying and excluding paths
+### Attributes
+#### path
+#### pathNot
+#### couldNotResolve
+#### coreModule
+
+## A starter rule set
 ```json
 {
     "forbidden": [{
@@ -14,10 +168,10 @@
         "to": { "path": "^test" }
     },{
         "name": "not-to-spec",
-        "comment": "Don't allow dependencies to (typescript or javascript) spec files",
+        "comment": "Don't allow dependencies to (typescript/ javascript/ coffeescript) spec files",
         "severity": "error",
         "from": {},
-        "to": { "path": "\\.spec\\.[jt]s$" }
+        "to": { "path": "\\.spec\\.[js|ts|coffee|litcoffee|coffee\\.md]$" }
     },{
         "name": "not-to-core-punycode",
         "comment": "Warn about dependencies on the (deprecated) 'punycode' core module (use the userland punycode module instead).",
@@ -33,18 +187,3 @@
     }]
 }
 ```
-
-## Basics
-- _Explain name/ severity/ comment/ from/ to/ path_
-- _Advise {} over {"path": ".+"}_
-
-
-## Reference
-### Forbidden
-### Allowed
-### Specifying and excluding paths
-### Attributes
-#### path
-#### pathNot
-#### couldNotResolve
-#### coreModule
