@@ -5,12 +5,12 @@ _Validate and visualize dependencies. With your rules._ JavaScript. TypeScript. 
 
 ## What's this do?
 - Run through the dependencies in any JavaScript, TypeScript or CoffeeScript project and ...
-  - ... **validate** them against (your own) rules
+  - ... **validate** them against (your own) [rules](./doc/rules.md)
   - ... **report** violated rules
     - in text (for in your builds)
     - in graphics (for on your eyeballs)
 
-As a nice side effect it can generate [**cool dependency graphs**](https://github.com/sverweij/dependency-cruiser/blob/master/doc/real-world-samples.md)
+As a side effect it can generate [**cool dependency graphs**](https://github.com/sverweij/dependency-cruiser/blob/master/doc/real-world-samples.md)
 you can stick on the wall to impress your grandma.
 
 ## How do I use it?
