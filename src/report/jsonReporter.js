@@ -1,5 +1,10 @@
 "use strict";
 
-module.exports = pInput => ({
-    dependencies: JSON.stringify(pInput, null, "    ")
-});
+module.exports = pInput =>
+    Object.assign(
+        {},
+        pInput,
+        {
+            dependencies: JSON.stringify(pInput, null, "    ")
+        }
+    );

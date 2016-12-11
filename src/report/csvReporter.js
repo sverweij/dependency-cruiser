@@ -5,8 +5,13 @@ const dependencyToIncidenceTransformer = require("./dependencyToIncidenceTransfo
 
 require("./csv.template");
 
-module.exports = (pInput) => ({
-    dependencies: Handlebars.templates['csv.template.hbs']({
-        "things" : dependencyToIncidenceTransformer.transform(pInput)
-    })
-});
+module.exports = pInput =>
+    Object.assign(
+        {},
+        pInput,
+        {
+            dependencies: Handlebars.templates['csv.template.hbs']({
+                "things" : dependencyToIncidenceTransformer.transform(pInput.dependencies)
+            })
+        }
+    );

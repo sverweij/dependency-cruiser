@@ -63,12 +63,17 @@ These are all the options:
   dependencies : when outputType is defined: a string containing the dependencies
             in the format specified in outputType
             In all other cases: a javascript with the dependencies
-  meta    : meta data with a summary of
-           { error : the number of errors,
+  summary    : a summary of the violations found in the dependencies:
+           {
+             violations: each violation;
+                from: the resolved 'from'
+                to: the resolved 'to'
+                rule: the violated rule, which consists of a
+                    name: the (short) name of the rule
+                    severity: the severetiy of the violation (error, warn or info)
+             error : the number of errors,
              warn  : the number of warnings,
              info  : the number of informational messages
            }
-  (currently meta is filled for 'err' only - NOTE: we'll change this to
-            always return this in the near future)
 }
 ```

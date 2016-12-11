@@ -11,7 +11,7 @@ const SEVERITY2CHALK = {
 
 function formatError(pErr) {
     return `${SEVERITY2CHALK[pErr.rule.severity](pErr.rule.severity)} ${pErr.rule.name}: ` +
-           `${chalk.bold(pErr.source)} ${figures.arrowRight} ${chalk.bold(pErr.resolved)}`;
+           `${chalk.bold(pErr.from)} ${figures.arrowRight} ${chalk.bold(pErr.to)}`;
 }
 
 function formatMeta(pMeta) {
@@ -28,63 +28,28 @@ function formatSummary(pMeta) {
     return pMeta.error > 0 ? chalk.red(lMessage) : lMessage;
 }
 
-function cutNonTransgressions(pSourceEntry) {
-    return {
-        source: pSourceEntry.source,
-        dependencies: pSourceEntry.dependencies.filter(pDep => pDep.valid === false)
-    };
-}
+module.exports = (pInput) => {
 
-function addSource(pSource) {
-    return pDependency => Object.assign(pDependency, {source: pSource});
-}
-
-function extractMetaData(pViolations) {
-    return pViolations.reduce(
-        (pAll, pThis) => {
-            pAll[pThis.rule.severity] += 1;
-            return pAll;
-        }
-        , {
-            error : 0,
-            warn  : 0,
-            info  : 0
-        }
-    );
-}
-
-function extractViolations(pInput){
-    return pInput
-        .map(cutNonTransgressions)
-        .filter(pDep => pDep.dependencies.length > 0)
-        .sort((pOne, pTwo) => pOne.source > pTwo.source ? 1 : -1)
-        .reduce(
-            (pAll, pThis) => pAll.concat(pThis.dependencies.map(addSource(pThis.source))),
-            []
+    if (pInput.summary.violations.length === 0){
+        return Object.assign(
+            pInput,
+            {
+                dependencies: ""
+            }
         );
-}
-
-function render(pInput) {
-    const lViolations = extractViolations(pInput);
-
-    if (lViolations.length === 0){
-        return {
-            dependencies: ""
-        };
     }
 
-    const lMetaData = extractMetaData(lViolations);
-
-    return {
-        dependencies: lViolations.reduce(
+    return Object.assign(
+        {},
+        pInput,
+        {
+            dependencies: pInput.summary.violations.reduce(
                 (pAll, pThis) => `${pAll}  ${formatError(pThis)}\n`,
                 "\n"
             ).concat(
-                formatSummary(lMetaData)
-            ),
-        metaData: lMetaData
-    };
+                formatSummary(pInput.summary)
+            )
+        }
+    );
 
-}
-
-module.exports = render;
+};

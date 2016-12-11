@@ -10,7 +10,7 @@
     "forbidden": [
         {
             "name": "sub-not-allowed",
-            "severity": "error",
+            "severity": "warn",
             "from": {
             },
             "to": {

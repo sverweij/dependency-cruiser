@@ -1,12 +1,12 @@
 "use strict";
 
-const extract    = require("../extract");
-const reportHtml = require("../report/htmlReporter");
-const reportJson = require("../report/jsonReporter");
-const reportDot  = require("../report/dotReporter");
-const reportCsv  = require("../report/csvReporter");
-const reportErr  = require("../report/errReporter");
-const reportVis  = require("../report/visReporter");
+const extract      = require("../extract");
+const reportHtml   = require("../report/htmlReporter");
+const reportJson   = require("../report/jsonReporter");
+const reportDot    = require("../report/dotReporter");
+const reportCsv    = require("../report/csvReporter");
+const reportErr    = require("../report/errReporter");
+const reportVis    = require("../report/visReporter");
 
 const TYPE2REPORTER      = {
     "json" : reportJson,
@@ -45,14 +45,18 @@ const TYPE2REPORTER      = {
  *  dependencies : when outputType is defined: a string containing the dependencies
  *            in the format specified in outputType
  *            In all other cases: a javascript array with the dependencies
- *  metaData    : meta data with a summary of
- *           { error : the number of errors,
- *             warn  : the number of warnings,
- *             info  : the number of informational messages
- *           }
- *  (meta is filled for 'err' only currently - NOTE: we'll change this to
- *            always return this in the near future)
- * }
+ *  summary    : a summary of the violations found in the dependencies:
+ *              {
+ *                violations: each violation;
+ *                   from: the resolved 'from'
+ *                   to: the resolved 'to'
+ *                   rule: the violated rule, which consists of a
+ *                       name: the (short) name of the rule
+ *                       severity: the severetiy of the violation (error, warn or info)
+ *                error : the number of errors,
+ *                warn  : the number of warnings,
+ *                info  : the number of informational messages
+ *              }
  */
 module.exports = (pFileDirArray, pOptions) => {
     pOptions = pOptions ? pOptions : {};

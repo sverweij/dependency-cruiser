@@ -2,13 +2,53 @@
     "$schema": "http://json-schema.org/draft-04/schema#",
     "title": "dependency-cruiser output format",
     "type": "object",
-    "required": [ "metaData", "dependencies" ],
+    "required": [ "summary", "dependencies" ],
     "additionalProperties": false,
     "properties": {
-        "metaData": {
+        "summary": {
             "type": "object",
-            "description": "Data about the found dependencies",
+            "required": ["violations", "error", "warn", "info"],
+            "additionalProperties": false,
+            "description": "Data summarizing the found dependencies",
             "properties": {
+                "violations": {
+                    "type": "array",
+                    "description": "A list of violations found in the dependencies. The dependencies themselves also contain this information, this summary is here for convenience.",
+                    "items": {
+                        "type": "object",
+                        "required": ["from", "to", "rule"],
+                        "additionalProperties": false,
+                        "properties" : {
+                            "from": {
+                                "type": "string"
+                            },
+                            "to": {
+                                "type": "string"
+                            },
+                            "rule": {
+                                "type": "object",
+                                "description": "If there was a rule violation (valid === false), this object contains the name of the rule and severity of violating it.",
+                                "required": [ "name", "severity" ],
+                                "additionalProperties": false,
+                                "properties": {
+                                    "name": {
+                                        "type": "string",
+                                        "description": "The (short, eslint style) name of the violated rule. Typically something like 'no-core-punycode' or 'no-outside-deps'."
+                                    },
+                                    "severity": {
+                                        "type": "string",
+                                        "enum": [
+                                            "error",
+                                            "warn",
+                                            "info"
+                                        ],
+                                        "description": "The severity of the violation. Only errors make reporters return non-zero exit codes."
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
                 "error": {
                     "type": "number",
                     "description": "the number of errors in the dependencies"

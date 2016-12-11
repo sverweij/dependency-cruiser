@@ -311,3 +311,111 @@ test/validate/readRuleSet.spec.js: \
 test/validate/validate.spec.js: \
 	src/validate/index.js \
 	src/validate/readRuleSet.js
+# cjs dependencies
+test/cli/cli.spec.js: \
+	src/cli/processCLI.js \
+	test/utl/testutensils.js
+
+src/cli/processCLI.js: \
+	src/cli/normalizeOptions.js \
+	src/cli/validateParameters.js \
+	src/main/index.js \
+	src/validate/readRuleSet.js
+
+src/main/index.js: \
+	src/extract/index.js \
+	src/report/csvReporter.js \
+	src/report/dotReporter.js \
+	src/report/errReporter.js \
+	src/report/htmlReporter.js \
+	src/report/jsonReporter.js \
+	src/report/visReporter.js
+
+src/extract/index.js: \
+	src/extract/extract.js \
+	src/extract/gatherInitialSources.js
+
+src/extract/extract.js: \
+	src/extract/extract-AMD.js \
+	src/extract/extract-ES6.js \
+	src/extract/extract-commonJS.js \
+	src/resolve/index.js \
+	src/utl/index.js \
+	src/validate/index.js
+
+src/resolve/index.js: \
+	src/resolve/resolve-AMD.js \
+	src/resolve/resolve-commonJS.js
+
+src/resolve/resolve-AMD.js: \
+	src/utl/index.js
+
+src/extract/extract-AMD.js: \
+	src/extract/extract-commonJS.js
+
+src/extract/gatherInitialSources.js: \
+	src/utl/index.js
+
+src/report/csvReporter.js: \
+	src/report/csv.template.js \
+	src/report/dependencyToIncidenceTransformer.js
+
+src/report/dotReporter.js: \
+	src/report/dot.template.js
+
+src/report/htmlReporter.js: \
+	src/report/dependencyToIncidenceTransformer.js \
+	src/report/html.template.js
+
+src/report/visReporter.js: \
+	src/report/vis.template.js
+
+src/validate/readRuleSet.js: \
+	src/validate/normalizeRuleSet.js \
+	src/validate/validateRuleSet.js
+
+src/validate/validateRuleSet.js: \
+	src/validate/jsonschema.json
+
+src/cli/validateParameters.js: \
+	src/utl/index.js
+
+test/cli/normalizeOptions.spec.js: \
+	src/cli/normalizeOptions.js
+
+test/cli/validateParameters.spec.js: \
+	src/cli/validateParameters.js
+
+test/extract/extract-composite.spec.js: \
+	src/extract/index.js \
+	src/extract/jsonschema.json
+
+test/extract/extract.spec.js: \
+	src/extract/extract.js
+
+test/extract/gatherInitialSources.spec.js: \
+	src/extract/gatherInitialSources.js
+
+test/main/main.spec.js: \
+	src/extract/jsonschema.json \
+	src/main/index.js
+
+test/report/dotReporter.spec.js: \
+	src/report/dotReporter.js
+
+test/report/errReporter.spec.js: \
+	src/report/errReporter.js
+
+test/report/htmlReporter.spec.js: \
+	src/report/htmlReporter.js
+
+test/validate/normalizeRuleSet.spec.js: \
+	src/validate/normalizeRuleSet.js
+
+test/validate/readRuleSet.spec.js: \
+	src/validate/readRuleSet.js
+
+test/validate/validate.spec.js: \
+	src/validate/index.js \
+	src/validate/readRuleSet.js
+

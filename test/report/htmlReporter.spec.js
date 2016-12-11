@@ -1,7 +1,7 @@
 "use strict";
 const expect = require('chai').expect;
 const render = require('../../src/report/htmlReporter');
-const deps   = require('../cli/fixtures/cjs-no-dependency-valid.json');
+const deps   = require('./fixtures/cjs-no-dependency-valid.json');
 
 const elFixture = `<!DOCTYPE html>
 <html>

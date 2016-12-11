@@ -37,20 +37,13 @@ module.exports = (pFileDirArray, pOptions) => {
             );
         }
 
-        let lDependencyList = main(
-            pFileDirArray,
-            pOptions
-        );
-        let lExitCode = lDependencyList.metaData ? lDependencyList.metaData.error : 0;
+        const lDependencyList = main(pFileDirArray, pOptions);
 
-        write(
-            pOptions.outputTo,
-            lDependencyList.dependencies
-        );
+        write(pOptions.outputTo, lDependencyList.dependencies);
 
         /* istanbul ignore if */
-        if (lExitCode > 0) {
-            process.exit(lExitCode);
+        if (lDependencyList.summary.error > 0) {
+            process.exit(lDependencyList.summary.error);
         }
 
     } catch (e) {

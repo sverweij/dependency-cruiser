@@ -11,8 +11,13 @@ function addPath(pDependencyItem) {
     );
 }
 
-module.exports = (pInput) => ({
-    dependencies: Handlebars.templates['vis.template.hbs']({
-        "things" : pInput.map(addPath)
-    })
-});
+module.exports = (pInput) =>
+    Object.assign(
+        {},
+        pInput,
+        {
+            dependencies: Handlebars.templates['vis.template.hbs']({
+                "things" : pInput.dependencies.map(addPath)
+            })
+        }
+    );

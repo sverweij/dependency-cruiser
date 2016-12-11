@@ -66,8 +66,13 @@ function colorize(pDependencyItem){
     );
 }
 
-module.exports = (pInput) => ({
-    dependencies: Handlebars.templates['dot.template.hbs']({
-        "things" : pInput.sort(compareOnSource).map(folderify).map(colorize)
-    })
-});
+module.exports = (pInput) =>
+    Object.assign(
+        {},
+        pInput,
+        {
+            dependencies: Handlebars.templates['dot.template.hbs']({
+                "things" : pInput.dependencies.sort(compareOnSource).map(folderify).map(colorize)
+            })
+        }
+    );
