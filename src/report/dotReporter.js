@@ -39,6 +39,7 @@ function folderify(pDependencyItem) {
     lAdditions.label = path.basename(pDependencyItem.source);
 
     return Object.assign(
+        {},
         pDependencyItem,
         lAdditions
     );
@@ -52,6 +53,7 @@ function determineColor(pDependency) {
     }
 
     return Object.assign(
+        {},
         pDependency,
         lColorAddition
     );
@@ -59,11 +61,26 @@ function determineColor(pDependency) {
 
 function colorize(pDependencyItem){
     return Object.assign(
+        {},
         pDependencyItem,
         {
             dependencies: pDependencyItem.dependencies.map(determineColor)
         }
     );
+}
+
+function prefix(pInput) {
+    if (pInput.summary.hasOwnProperty("optionsUsed")){
+        return (pDependencyItem) =>
+            Object.assign(
+                {},
+                pDependencyItem,
+                {
+                    prefix: pInput.summary.optionsUsed.prefix
+                }
+            );
+    }
+    return (pDependencyItem => pDependencyItem);
 }
 
 module.exports = (pInput) =>
@@ -72,7 +89,11 @@ module.exports = (pInput) =>
         pInput,
         {
             dependencies: Handlebars.templates['dot.template.hbs']({
-                "things" : pInput.dependencies.sort(compareOnSource).map(folderify).map(colorize)
+                "things" : pInput.dependencies
+                            .sort(compareOnSource)
+                            .map(folderify)
+                            .map(colorize)
+                            .map(prefix(pInput))
             })
         }
     );

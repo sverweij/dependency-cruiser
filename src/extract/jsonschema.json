@@ -7,7 +7,7 @@
     "properties": {
         "summary": {
             "type": "object",
-            "required": ["violations", "error", "warn", "info"],
+            "required": ["violations", "error", "warn", "info", "optionsUsed"],
             "additionalProperties": false,
             "description": "Data summarizing the found dependencies",
             "properties": {
@@ -60,6 +60,49 @@
                 "info": {
                     "type": "number",
                     "description": "the number of informational level notices in the dependencies"
+                },
+                "optionsUsed": {
+                    "type": "object",
+                    "description": "the (command line) options used to generate the dependency-tree",
+                    "additionalProperties": false,
+                    "properties": {
+                        "rulesFile": {
+                            "type": "string",
+                            "description": "The rules file used to validate the dependencies (if any)"
+                        },
+                        "outputTo": {
+                            "type": "string",
+                            "description": "File the output was written to ('-' for stdout)"
+                        },
+                        "exclude": {
+                            "type": "string",
+                            "description": "The regular expression used for excluding modules from being cruised"
+                        },
+                        "system": {
+                            "type": "array",
+                            "items": {
+                                "type": "string",
+                                "enum": [
+                                    "cjs",
+                                    "amd",
+                                    "es6"
+                                ]
+                            }
+                        },
+                        "outputType": {
+                            "type": "string",
+                            "enum": [
+                                "html",
+                                "dot",
+                                "err",
+                                "json",
+                                "vis"
+                            ]
+                        },
+                        "prefix": {
+                            "type": "string"
+                        }
+                    }
                 }
             }
         },

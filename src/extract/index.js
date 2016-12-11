@@ -121,6 +121,29 @@ function extractViolations(pInput){
         );
 }
 
+function makeOptionsPresentable(pOptions) {
+    const SHARABLE_OPTIONS = [
+        "rulesFile",
+        "outputTo",
+        "exclude",
+        "system",
+        "outputType",
+        "prefix"
+    ];
+
+    if (!Boolean(pOptions)){
+        return {};
+    }
+    return SHARABLE_OPTIONS
+        .filter(pOption => pOptions.hasOwnProperty(pOption))
+        .reduce(
+            (pAll, pOption) => {
+                pAll[pOption] = pOptions[pOption];
+                return pAll;
+            },
+            {}
+        );
+}
 
 module.exports = (pFileDirArray, pOptions, pCallback) => {
     let lCallback = pCallback ? pCallback : (pInput => pInput);
@@ -136,8 +159,13 @@ module.exports = (pFileDirArray, pOptions, pCallback) => {
                     {
                         violations : lViolations
                     },
-                    extractMetaData(lViolations)
+                    extractMetaData(lViolations),
+                    {
+                        optionsUsed: makeOptionsPresentable(pOptions)
+                    }
                 )
         }
     );
 };
+
+/* eslint security/detect-object-injection: 0 */

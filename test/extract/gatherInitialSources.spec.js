@@ -107,4 +107,32 @@ describe("gatherInitial", () => {
             ]
         );
     });
+
+    /*
+    it("using the same file twice as input has the same result as using it once", () => {
+        expect(
+            gather([
+                "test/extract/fixtures/ts/index.ts",
+                "test/extract/fixtures/ts/index.ts"
+            ])
+        ).to.deep.equal(
+            gather([
+                "test/extract/fixtures/ts/index.ts"
+            ])
+        );
+    });
+
+    it("using the same folder twice as input has the same result as using it once", () => {
+        expect(
+            gather([
+                "test/extract/fixtures/ts",
+                "test/extract/fixtures/ts"
+            ])
+        ).to.deep.equal(
+            gather([
+                "test/extract/fixtures/ts"
+            ])
+        );
+    });
+    */
 });

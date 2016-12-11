@@ -217,6 +217,16 @@
         "violations": [],
         "error": 0,
         "warn": 0,
-        "info": 0
+        "info": 0,
+        "optionsUsed": {
+            "outputTo": "test/cli/output/cjs.dir.filtered.json",
+            "exclude": "node_modules",
+            "system": [
+                "amd",
+                "cjs",
+                "es6"
+            ],
+            "outputType": "json"
+        }
     }
 }

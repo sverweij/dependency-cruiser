@@ -17,11 +17,14 @@ if (!semver.satisfies(process.versions.node, $package.engines.node)) {
 program
     .version($package.version)
     .option("-v, --validate [file]", `validate with rules in [file]
-                           (default: .dependency-cruiser.json)`)
-    .option("-f, --output-to <file>", "file to write output to; - for stdout (default: -)")
+                          (default: .dependency-cruiser.json)`)
+    .option("-f, --output-to <file>", `file to write output to; - for stdout
+                          (default: -)`)
     .option("-x, --exclude <regex>", "a regular expression for excluding modules")
-    .option("-M, --system <items>", "list of module systems (default: amd,cjs,es6)")
-    .option("-T, --output-type <type>", "output type - html|dot|err|json (default:json)")
+    .option("-M, --system <items>", `list of module systems (default: amd,cjs,es6)`)
+    .option("-T, --output-type <type>", `output type - html|dot|err|json
+                          (default:json)`)
+    .option("-P --prefix <prefix>")
     .arguments("<files-or-directories>")
     .parse(process.argv);
 

@@ -42,6 +42,9 @@
         "violations": [],
         "err": 481,
         "warn": 30,
-        "info": 0
+        "info": 0,
+        "optionsUsed": {
+            "prefix": "STUFFCOMINGBEFORE"
+        }
     }
 }

@@ -16,14 +16,14 @@ digraph "dependency-cruiser output"{
     {{#each path}}subgraph "cluster_{{{aggregateSnippet}}}" {label="{{{snippet}}}" {{/each~}}
         "{{{source}}}"
             {{~#if couldNotResolve}} [label="{{{label}}}" color="red" fontcolor="red"]
-            {{~else}} [label="{{{label}}}" URL="{{{source}}}"]
+            {{~else}} [label="{{{label}}}" URL="{{{prefix}}}{{{source}}}"]
             {{~/if}}{{~#each path}} }{{/each}}
     {{else}}
     "{{{source}}}"
         {{~#if coreModule}} [color="grey" fontcolor="grey"]
         {{~else}}
             {{~#if couldNotResolve}} [color="red" fontcolor="red"]
-            {{~else}} [URL="{{{source}}}"]
+            {{~else}} [URL="{{{prefix}}}{{{source}}}"]
             {{~/if}}{{/if}}
     {{/if}}
 {{/each}}

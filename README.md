@@ -5,7 +5,7 @@ _Validate and visualize dependencies. With your rules._ JavaScript. TypeScript. 
 
 ## What's this do?
 - Run through the dependencies in any JavaScript, TypeScript or CoffeeScript project and ...
-  - ... **validate** them against a set of (your own) rules
+  - ... **validate** them against (your own) rules
   - ... **report** violated rules
     - in text (for in your builds)
     - in graphics (for on your eyeballs)

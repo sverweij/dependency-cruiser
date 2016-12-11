@@ -2,18 +2,24 @@
 
 Running with no parameters gets you help:
 ```
-Usage: dependency-cruise [options] <files-or-directories>
 
-Options:
+  Usage: dependency-cruise [options] <files-or-directories>
 
-  -h, --help                output usage information
-  -V, --version             output the version number
-  -v, --validate [file]     validate with rules from [file]
-                            (default: .dependency-cruiser.json)
-  -f, --output-to <file>    file to write output to; - for stdout (default: -)
-  -x, --exclude <regex>     a regular expression for excluding modules
-  -M, --system <items>      list of module systems (default: amd,cjs,es6)
-  -T, --output-type <type>  output type - html|dot|err|json (default:json)
+  Options:
+
+    -h, --help                output usage information
+    -V, --version             output the version number
+    -v, --validate [file]     validate with rules in [file]
+                              (default: .dependency-cruiser.json)
+    -f, --output-to <file>    file to write output to; - for stdout
+                              (default: -)
+    -x, --exclude <regex>     a regular expression for excluding modules
+    -M, --system <items>      list of module systems (default: amd,cjs,es6)
+    -T, --output-type <type>  output type - html|dot|err|json
+                              (default:json)
+    -P --prefix <prefix>      prefix to prepend links with (e.g. in the
+                              svg output type)
+
 ```
 
 ## Output formats
@@ -74,7 +80,6 @@ all modules with a file path starting with coverage, test or node_modules, you c
 dependency-cruise -x "^(coverage|test|node_modules)" -T html -f deps-without-stuffs.html src
 ```
 
-
 ## `--validate`
 Validates against a list of rules in a rules file. This defaults to a file
 called `.dependency-cruiser.json`, but you can specify your own rules file.
@@ -112,9 +117,22 @@ default) and 'info') with them that will appear in some reporters:
 }
 ```
 
+### `--prefix` prefixing links
+With this you can  pass a 'prefix' so you can have links to other places than
+the one you used to cruise the dependencies).
+
+If you want the links in the svg output to have a prefix (say,
+`https://github.com/you/yourrepo/tree/master/`) so when you click them you'll
+open the link on github instead of the local file - pass that after the
+`--prefix` option.
+
+```sh
+depcruise --prefix https://github.com/sverweij/dependency-cruiser/tree/develop/ -T dot -x node_modules src | dot -T svg > dependencies.svg
+```
+
 ### Cruising multiple files and directories in one go
 Just pass them as arguments. This, e.g. will cruise every file in the folders
-src, test and lib (recursively)+ the file called index.ts in the root. 
+src, test and lib (recursively)+ the file called index.ts in the root.
 
 ```sh
 depcruise --output-type dot src test lib index.ts

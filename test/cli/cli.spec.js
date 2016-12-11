@@ -172,7 +172,7 @@ describe("#processCLI", () => {
     });
 
     after("tear down", () => {
-        // resetOutputDir();
+        resetOutputDir();
     });
 
     describe("file based tests - commonJS", () => {
