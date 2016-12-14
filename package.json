@@ -33,7 +33,7 @@
   "devDependencies": {
     "chai": "3.5.0",
     "chai-json-schema": "1.4.0",
-    "eslint": "3.12.0",
+    "eslint": "3.12.2",
     "eslint-plugin-security": "1.2.0",
     "intercept-stdout": "0.1.2",
     "istanbul": "0.4.5",
@@ -59,7 +59,7 @@
     "figures": "2.0.0",
     "handlebars": "4.0.6",
     "lodash": "4.17.2",
-    "resolve": "1.1.7",
+    "resolve": "1.2.0",
     "safe-regex": "1.1.0",
     "semver": "5.3.0",
     "typescript": "2.1.4"
