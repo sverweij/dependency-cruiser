@@ -1,0 +1,74 @@
+[
+    {
+        "resolved": "../../../node_modules/commander/index",
+        "coreModule": false,
+        "followable": false,
+        "couldNotResolve": true,
+        "module": "../../../node_modules/commander/index",
+        "moduleSystem": "amd",
+        "valid": true
+    },
+    {
+        "resolved": "test/extract/fixtures/amd-bangs/excitingpolyfill.js",
+        "coreModule": false,
+        "followable": true,
+        "couldNotResolve": false,
+        "module": "./excitingpolyfill.js",
+        "moduleSystem": "amd",
+        "valid": true
+    },
+    {
+        "resolved": "./one_only_one",
+        "coreModule": false,
+        "followable": false,
+        "couldNotResolve": true,
+        "module": "./one_only_one",
+        "moduleSystem": "amd",
+        "valid": true
+    },
+    {
+        "resolved": "./shared",
+        "coreModule": false,
+        "followable": false,
+        "couldNotResolve": true,
+        "module": "./shared",
+        "moduleSystem": "amd",
+        "valid": true
+    },
+    {
+        "resolved": "./somedata.json'",
+        "coreModule": false,
+        "followable": false,
+        "couldNotResolve": true,
+        "module": "./somedata.json'",
+        "moduleSystem": "amd",
+        "valid": true
+    },
+    {
+        "resolved": "./sub/dir",
+        "coreModule": false,
+        "followable": false,
+        "couldNotResolve": true,
+        "module": "./sub/dir",
+        "moduleSystem": "amd",
+        "valid": true
+    },
+    {
+        "resolved": "fs",
+        "coreModule": true,
+        "followable": false,
+        "couldNotResolve": false,
+        "module": "fs",
+        "moduleSystem": "amd",
+        "valid": true
+    },
+    {
+        "resolved": "json",
+        "coreModule": false,
+        "followable": false,
+        "couldNotResolve": true,
+        "module": "json",
+        "moduleSystem": "amd",
+        "valid": true
+    }
+]

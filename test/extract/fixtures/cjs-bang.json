@@ -1,0 +1,20 @@
+[
+    {
+        "resolved": "test/extract/fixtures/cjs-bangs/dependency.js",
+        "coreModule": false,
+        "followable": true,
+        "couldNotResolve": false,
+        "module": "./dependency",
+        "moduleSystem": "cjs",
+        "valid": true
+    },
+    {
+        "resolved": "ieeeeeeeee",
+        "coreModule": false,
+        "followable": false,
+        "couldNotResolve": true,
+        "module": "ieeeeeeeee",
+        "moduleSystem": "cjs",
+        "valid": true
+    }
+]

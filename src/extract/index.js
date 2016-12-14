@@ -148,7 +148,10 @@ function makeOptionsPresentable(pOptions) {
 module.exports = (pFileDirArray, pOptions, pCallback) => {
     let lCallback = pCallback ? pCallback : (pInput => pInput);
 
-    const lDependencies = extractFileDirArray(pFileDirArray, pOptions).reduce(complete, []);
+    const lDependencies = _(
+            extractFileDirArray(pFileDirArray, pOptions).reduce(complete, [])
+        ).uniqBy(pDependency => pDependency.source)
+         .value();
     const lViolations   = extractViolations(lDependencies);
 
     return lCallback(

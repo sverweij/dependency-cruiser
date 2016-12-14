@@ -18,10 +18,14 @@ module.exports = (pAST, pDependencies) => {
                     pNode.expression.arguments
                         .filter(pArg => pArg.type === "ArrayExpression")
                         .forEach(arg =>
-                            arg.elements.forEach(el => pDependencies.push({
-                                moduleName: el.value,
-                                moduleSystem: "amd"
-                            }))
+                            arg.elements.forEach(el =>
+                                el.value.split('!').forEach(pString =>
+                                    pDependencies.push({
+                                        moduleName: pString,
+                                        moduleSystem: "amd"
+                                    })
+                                )
+                            )
                         );
                 }
                 // CommonJS-wrappers:
