@@ -14,40 +14,7 @@
                 "violations": {
                     "type": "array",
                     "description": "A list of violations found in the dependencies. The dependencies themselves also contain this information, this summary is here for convenience.",
-                    "items": {
-                        "type": "object",
-                        "required": ["from", "to", "rule"],
-                        "additionalProperties": false,
-                        "properties" : {
-                            "from": {
-                                "type": "string"
-                            },
-                            "to": {
-                                "type": "string"
-                            },
-                            "rule": {
-                                "type": "object",
-                                "description": "If there was a rule violation (valid === false), this object contains the name of the rule and severity of violating it.",
-                                "required": [ "name", "severity" ],
-                                "additionalProperties": false,
-                                "properties": {
-                                    "name": {
-                                        "type": "string",
-                                        "description": "The (short, eslint style) name of the violated rule. Typically something like 'no-core-punycode' or 'no-outside-deps'."
-                                    },
-                                    "severity": {
-                                        "type": "string",
-                                        "enum": [
-                                            "error",
-                                            "warn",
-                                            "info"
-                                        ],
-                                        "description": "The severity of the violation. Only errors make reporters return non-zero exit codes."
-                                    }
-                                }
-                            }
-                        }
-                    }
+                    "items": { "$ref": "#/definitions/ViolationType"}
                 },
                 "error": {
                     "type": "number",
@@ -61,49 +28,7 @@
                     "type": "number",
                     "description": "the number of informational level notices in the dependencies"
                 },
-                "optionsUsed": {
-                    "type": "object",
-                    "description": "the (command line) options used to generate the dependency-tree",
-                    "additionalProperties": false,
-                    "properties": {
-                        "rulesFile": {
-                            "type": "string",
-                            "description": "The rules file used to validate the dependencies (if any)"
-                        },
-                        "outputTo": {
-                            "type": "string",
-                            "description": "File the output was written to ('-' for stdout)"
-                        },
-                        "exclude": {
-                            "type": "string",
-                            "description": "The regular expression used for excluding modules from being cruised"
-                        },
-                        "system": {
-                            "type": "array",
-                            "items": {
-                                "type": "string",
-                                "enum": [
-                                    "cjs",
-                                    "amd",
-                                    "es6"
-                                ]
-                            }
-                        },
-                        "outputType": {
-                            "type": "string",
-                            "enum": [
-                                "html",
-                                "dot",
-                                "err",
-                                "json",
-                                "vis"
-                            ]
-                        },
-                        "prefix": {
-                            "type": "string"
-                        }
-                    }
-                }
+                "optionsUsed": { "$ref": "#/definitions/OptionsType" }
             }
         },
         "dependencies": {
@@ -128,7 +53,7 @@
                     },
                     "couldNotResolve": {
                         "type": "boolean",
-                        "description": "'true' if dependency-cruiser could not resulve the module name in the source code to a file name or core module. 'false' in all other cases."
+                        "description": "'true' if dependency-cruiser could not resolve the module name in the source code to a file name or core module. 'false' in all other cases."
                     },
                     "dependencies": {
                         "type": "array",
@@ -165,43 +90,98 @@
                                     "type": "boolean",
                                     "description": "'true' if dependency-cruiser could not resulve the module name in the source code to a file name or core module. 'false' in all other cases."
                                 },
-                                "moduleSystem": {
-                                    "type": "string",
-                                    "enum": [
-                                        "cjs",
-                                        "amd",
-                                        "es6"
-                                    ],
-                                    "description": "The module system according to which this 'module' is a dependency of the one specified in 'source'"
-                                },
+                                "moduleSystem": { "$ref": "#/definitions/ModuleSystemType" },
                                 "valid": {
                                     "type": "boolean",
                                     "description": "'true' if this dependency violated a rule; 'false' in all other cases. The violated rule will be in the 'rule' object at the same level."
                                 },
-                                "rule": {
-                                    "type": "object",
-                                    "description": "If there was a rule violation (valid === false), this object contains the name of the rule and severity of violating it.",
-                                    "required": [ "name", "severity" ],
-                                    "additionalProperties": false,
-                                    "properties": {
-                                        "name": {
-                                            "type": "string",
-                                            "description": "The (short, eslint style) name of the violated rule. Typically something like 'no-core-punycode' or 'no-outside-deps'."
-                                        },
-                                        "severity": {
-                                            "type": "string",
-                                            "enum": [
-                                                "error",
-                                                "warn",
-                                                "info"
-                                            ],
-                                            "description": "The severity of the violation. Only errors make reporters return non-zero exit codes."
-                                        }
-                                    }
-                                }
+                                "rule": { "$ref": "#/definitions/RuleSummaryType" }
                             }
                         }
                     }
+                }
+            }
+        }
+    },
+    "definitions": {
+        "SeverityType": {
+            "type": "string",
+            "description": "How severe a violation of a rule is. The 'error' severity will make some reporters return a non-zero exit code, so if you want e.g. a build to stop when there's a rule violated: use that.",
+            "enum": [
+                "error",
+                "warn",
+                "info"
+            ]
+        },
+        "RuleSummaryType": {
+            "type": "object",
+            "description": "If there was a rule violation (valid === false), this object contains the name of the rule and severity of violating it.",
+            "required": [ "name", "severity" ],
+            "additionalProperties": false,
+            "properties": {
+                "name": {
+                    "type": "string",
+                    "description": "The (short, eslint style) name of the violated rule. Typically something like 'no-core-punycode' or 'no-outside-deps'."
+                },
+                "severity": { "$ref": "#/definitions/SeverityType"}
+            }
+        },
+        "ViolationType": {
+            "type": "object",
+            "required": ["from", "to", "rule"],
+            "additionalProperties": false,
+            "properties" : {
+                "from": {
+                    "type": "string"
+                },
+                "to": {
+                    "type": "string"
+                },
+                "rule": { "$ref": "#/definitions/RuleSummaryType"}
+            }
+        },
+        "ModuleSystemType": {
+            "type": "string",
+            "enum": [
+                "cjs",
+                "amd",
+                "es6"
+            ]
+        },
+        "OutputType": {
+            "type": "string",
+            "enum": [
+                "html",
+                "dot",
+                "err",
+                "json",
+                "vis"
+            ]
+        },
+        "OptionsType": {
+            "type": "object",
+            "description": "the (command line) options used to generate the dependency-tree",
+            "additionalProperties": false,
+            "properties": {
+                "rulesFile": {
+                    "type": "string",
+                    "description": "The rules file used to validate the dependencies (if any)"
+                },
+                "outputTo": {
+                    "type": "string",
+                    "description": "File the output was written to ('-' for stdout)"
+                },
+                "exclude": {
+                    "type": "string",
+                    "description": "The regular expression used for excluding modules from being cruised"
+                },
+                "system": {
+                    "type": "array",
+                    "items": {"$ref": "#/definitions/ModuleSystemType" }
+                },
+                "outputType": { "$ref": "#/definitions/OutputType" },
+                "prefix": {
+                    "type": "string"
                 }
             }
         }
