@@ -23,7 +23,7 @@ function sumMeta(pMeta) {
 }
 
 function formatSummary(pMeta) {
-    let lMessage = `\n${figures.cross} ${sumMeta(pMeta)} violations (${formatMeta(pMeta)}) \n\n`;
+    let lMessage = `\n${figures.cross} ${sumMeta(pMeta)} dependency violations (${formatMeta(pMeta)}) \n\n`;
 
     return pMeta.error > 0 ? chalk.red(lMessage) : lMessage;
 }
@@ -34,7 +34,7 @@ module.exports = (pInput) => {
         return Object.assign(
             pInput,
             {
-                dependencies: ""
+                dependencies: `\n${chalk.green(figures.tick)} no dependency violations found \n\n`
             }
         );
     }

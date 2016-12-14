@@ -95,17 +95,6 @@ const testPairs = [
         },
         expect: "{{moduleType}}.dir.filtered.csv",
         cleanup: true
-    },
-    {
-        description: "err",
-        dirOrFile: "test/cli/fixtures/{{moduleType}}",
-        options: {
-            outputTo: path.join(OUT_DIR, "{{moduleType}}.dir.filtered.err"),
-            outputType: "err",
-            validate: "test/validate/fixtures/rules.everything-allowed.json"
-        },
-        expect: "{{moduleType}}.dir.filtered.err",
-        cleanup: true
     }
 ];
 
