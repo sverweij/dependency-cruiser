@@ -94,6 +94,10 @@
                 "couldNotResolve": {
                     "type": "boolean",
                     "description": "Whether or not to match modules dependency-cruiser could not resolve (and probably aren't on disk). For this one too: leave out if you don't care either way."
+                },
+                "ownFolder": {
+                    "type": "boolean",
+                    "description": "Whether or not to match modules in the same folder as the 'from'."
                 }
             }
         },

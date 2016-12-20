@@ -1,9 +1,16 @@
 "use strict";
 
+const path = require("path");
+
 function propertyEquals(pTo, pRule, pProperty) {
     return pRule.to.hasOwnProperty(pProperty)
         ? pTo[pProperty] === pRule.to[pProperty]
         : true;
+}
+
+function matchesOwnFolder(pFrom, pTo, pOwnFolder) {
+    return pOwnFolder ? path.dirname(pFrom) === path.dirname(pTo.resolved)
+                      : path.dirname(pFrom) !== path.dirname(pTo.resolved);
 }
 
 function matchRule(pFrom, pTo) {
@@ -12,6 +19,7 @@ function matchRule(pFrom, pTo) {
         (!Boolean(pRule.from.pathNot) || !(pFrom.match(pRule.from.pathNot))) &&
         (!Boolean(pRule.to.path)      ||   pTo.resolved.match(pRule.to.path)) &&
         (!Boolean(pRule.to.pathNot)   || !(pTo.resolved.match(pRule.to.pathNot))) &&
+        (!pRule.to.hasOwnProperty("ownFolder") || matchesOwnFolder(pFrom, pTo, pRule.to.ownFolder)) &&
         propertyEquals(pTo, pRule, "coreModule") &&
         propertyEquals(pTo, pRule, "couldNotResolve");
 }

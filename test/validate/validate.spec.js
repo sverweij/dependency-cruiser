@@ -256,4 +256,48 @@ describe("validator", () => {
             )
         ).to.deep.equal({valid: false, rule: {severity: 'error', name: 'not-to-not-sub'}});
     });
+
+    it("ownFolder === false: allows dependencies within the same folder", () => {
+        expect(
+            validate(
+                true,
+                _readRuleSet("./test/validate/fixtures/rules.ownfolder-false.json"),
+                "src/aap/kooskoets.ts",
+                {"resolved": "src/aap/robbyVanDeKerhof.ts"}
+            )
+        ).to.deep.equal({valid: true});
+    });
+
+    it("ownFolder === false: disallows dependencies between peer folders", () => {
+        expect(
+            validate(
+                true,
+                _readRuleSet("./test/validate/fixtures/rules.ownfolder-false.json"),
+                "src/aap/kooskoets.ts",
+                {"resolved": "src/noot/robbyVanDeKerhof.ts"}
+            )
+        ).to.deep.equal({valid: false, rule: {severity: 'error', name: 'not-between'}});
+    });
+
+    it("ownFolder === true: disallows dependencies within the same folder", () => {
+        expect(
+            validate(
+                true,
+                _readRuleSet("./test/validate/fixtures/rules.ownfolder-true.json"),
+                "src/aap/kooskoets.ts",
+                {"resolved": "src/aap/robbyVanDeKerhof.ts"}
+            )
+        ).to.deep.equal({valid: false, rule: {severity: 'error', name: 'not-between'}});
+    });
+
+    it("ownFolder === true: allows dependencies between peer folders", () => {
+        expect(
+            validate(
+                true,
+                _readRuleSet("./test/validate/fixtures/rules.ownfolder-true.json"),
+                "src/aap/kooskoets.ts",
+                {"resolved": "src/noot/robbyVanDeKerhof.ts"}
+            )
+        ).to.deep.equal({valid: true});
+    });
 });
