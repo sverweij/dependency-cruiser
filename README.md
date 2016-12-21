@@ -10,7 +10,7 @@ _Validate and visualize dependencies. With your rules._ JavaScript. TypeScript. 
     - in text (for your builds)
     - in graphics (for your eyeballs)
 
-As a side effect it can generate [**cool dependency graphs**](https://github.com/sverweij/dependency-cruiser/blob/master/doc/real-world-samples.md)
+As a side effect it can generate [**cool dependency graphs**](./doc/real-world-samples.md)
 you can stick on the wall to impress your grandma.
 
 ## How do I use it?
@@ -36,9 +36,9 @@ paths starting with *node_modules*.
 
 - You can read more about what you can do with `--exclude` and other command line
   options in the
-  [command line interface](https://github.com/sverweij/dependency-cruiser/blob/master/doc/cli.md)
+  [command line interface](./doc/cli.md)
   documentation.
-- _[Real world samples](https://github.com/sverweij/dependency-cruiser/blob/master/doc/real-world-samples.md)_
+- _[Real world samples](./doc/real-world-samples.md)_
   contains dependency cruises of some of the most used projects on npm.
 
 ### Validate stuff
@@ -59,10 +59,10 @@ and put this in there:
 ```
 
 - To read more about writing rules check the
-  [writing rules](https://github.com/sverweij/dependency-cruiser/blob/master/doc/rules.md)
+  [writing rules](./doc/rules.md)
   section.
 - There is practical rules configuration to get you started
-  [here](https://github.com/sverweij/dependency-cruiser/blob/master/doc/rules.starter.json)
+  [here](./doc/rules.starter.json)
 
 #### Report them
 Pass the `--validate` parameter, to the command line followed by the rules
@@ -82,7 +82,7 @@ depcruise --validate my-rules.json --output-type err src
 ![sample err output](https://raw.githubusercontent.com/sverweij/dependency-cruiser/master/doc/assets/sample-err-output.png)
 
 - Read more about the err, dot, but also the csv and html reporters in the
-  [command line interface](https://github.com/sverweij/dependency-cruiser/blob/master/doc/cli.md)
+  [command line interface](./doc/cli.md)
   documentation.
 - dependency-cruiser uses itself to check on itself in its own build process;
   see the `dependency-cruise` target in the
@@ -91,9 +91,9 @@ depcruise --validate my-rules.json --output-type err src
 ## I want to know more!
 You've come to the right place :-) :
 
-- [Command line reference](https://github.com/sverweij/dependency-cruiser/blob/master/doc/cli.md)
-- [Writing rules](https://github.com/sverweij/dependency-cruiser/blob/master/doc/rules.md)
-- [Real world show cases](https://github.com/sverweij/dependency-cruiser/blob/master/doc/real-world-samples.md)
+- [Command line reference](./doc/cli.md)
+- [Writing rules](./doc/rules.md)
+- [Real world show cases](./doc/real-world-samples.md)
 - [Output format](./doc/output-format.md)
 - [API](./doc/api.md)
 - [Road map](https://github.com/sverweij/dependency-cruiser/projects/1)
@@ -113,4 +113,4 @@ You've come to the right place :-) :
 [![bitHound Dependencies](https://www.bithound.io/github/sverweij/dependency-cruiser/badges/dependencies.svg)](https://www.bithound.io/github/sverweij/dependency-cruiser/master/dependencies/npm)
 [![bitHound Dev Dependencies](https://www.bithound.io/github/sverweij/dependency-cruiser/badges/devDependencies.svg)](https://www.bithound.io/github/sverweij/dependency-cruiser/master/dependencies/npm)
 [![npm stable version](https://img.shields.io/npm/v/dependency-cruiser.svg)](https://npmjs.com/package/dependency-cruiser)
-[![total downloads on npm](https://img.shields.io/npm/dt/dependency-cruiser.svg?maxAge=2592000)](https://npmjs.com/package/dependency-cruiser)
+[![total downloads on npm](https://img.shields.io/npm/dt/dependency-cruiser.svg?maxAge=2591999)](https://npmjs.com/package/dependency-cruiser)
