@@ -7,8 +7,8 @@ _Validate and visualize dependencies. With your rules._ JavaScript. TypeScript. 
 - Run through the dependencies in any JavaScript, TypeScript or CoffeeScript project and ...
   - ... **validate** them against (your own) [rules](./doc/rules.md)
   - ... **report** violated rules
-    - in text (for in your builds)
-    - in graphics (for on your eyeballs)
+    - in text (for your builds)
+    - in graphics (for your eyeballs)
 
 As a side effect it can generate [**cool dependency graphs**](https://github.com/sverweij/dependency-cruiser/blob/master/doc/real-world-samples.md)
 you can stick on the wall to impress your grandma.
@@ -28,7 +28,7 @@ cruiser with output type `dot` and run _GraphViz dot_ on the result. In
 a one liner:
 
 ```shell
-dependency-cruise --exclude "^node_modules" --output-type dot src | dot -T svg > dependencygraph.svg
+depcruise --exclude "^node_modules" --output-type dot src | dot -T svg > dependencygraph.svg
 ```
 
 The `--exclude "^node_modules"` makes sure dependency-cruiser does not scan
@@ -77,7 +77,7 @@ The `err` reporter only emits (text) output when there's something wrong.
 This is useful when you want to check the rules in your build process:
 
 ```sh
-dependency-cruise --validate my-rules.json --output-type err src
+depcruise --validate my-rules.json --output-type err src
 ```
 ![sample err output](https://raw.githubusercontent.com/sverweij/dependency-cruiser/master/doc/assets/sample-err-output.png)
 
