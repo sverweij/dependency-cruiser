@@ -11,26 +11,23 @@ function extractRecursive (pFileName, pOptions, pVisited) {
     pVisited = pVisited || new Set();
     pVisited.add(pFileName);
 
-    let lRetval = [];
     const lDependencies = extract(pFileName, pOptions);
 
-    lRetval.push({
-        source: pFileName,
-        dependencies: lDependencies
-    });
-
-    lDependencies
+    return lDependencies
         .filter(pDep => pDep.followable)
-        .forEach(
-            pDep => {
+        .reduce(
+            (pAll, pDep) => {
                 if (!pVisited.has(pDep.resolved)){
-                    lRetval = lRetval.concat(
+                    return pAll.concat(
                         extractRecursive(pDep.resolved, pOptions, pVisited)
                     );
                 }
-            }
+                return pAll;
+            }, [{
+                source: pFileName,
+                dependencies: lDependencies
+            }]
         );
-    return lRetval;
 }
 
 function extractFileDirArray(pFileDirArray, pOptions) {
