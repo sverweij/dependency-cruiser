@@ -37,7 +37,7 @@
             "name": "no-external-to-here",
             "comment": "you never know...",
             "severity": "info",
-            "from": { "path": "node_modules" },
+            "from": { "path": "^node_modules" },
             "to": { "path": "^(src|test|lib)" }
         }, {
             "name": "not-to-unresolvable",
