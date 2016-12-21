@@ -7,7 +7,7 @@
     "properties": {
         "summary": {
             "type": "object",
-            "required": ["violations", "error", "warn", "info", "optionsUsed"],
+            "required": ["violations", "error", "warn", "info", "totalCruised", "optionsUsed"],
             "additionalProperties": false,
             "description": "Data summarizing the found dependencies",
             "properties": {
@@ -27,6 +27,10 @@
                 "info": {
                     "type": "number",
                     "description": "the number of informational level notices in the dependencies"
+                },
+                "totalCruised": {
+                    "type": "number",
+                    "description": "the number of modules cruised"
                 },
                 "optionsUsed": { "$ref": "#/definitions/OptionsType" }
             }

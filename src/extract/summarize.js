@@ -49,6 +49,9 @@ module.exports = (pDependencies) => {
         {
             violations : lViolations
         },
-        extractMetaData(lViolations)
+        extractMetaData(lViolations),
+        {
+            totalCruised: pDependencies.length
+        }
     );
 };
