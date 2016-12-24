@@ -2,40 +2,31 @@
 
 const acorn                       = require('acorn');
 const acorn_loose                 = require('acorn/dist/acorn_loose');
-const typescript                  = require('typescript');
-const coffeeScript                = require('coffee-script');
 const fs                          = require('fs');
 const _                           = require('lodash');
 const path                        = require('path');
 const resolve                     = require('../resolve');
 const validate                    = require('../validate');
+const transpile                   = require('../transpile');
 const utl                         = require('../utl');
 const extractES6Dependencies      = require('./extract-ES6');
 const extractCommonJSDependencies = require('./extract-commonJS');
 const extractAMDDependencies      = require('./extract-AMD');
 
+function getExtension(pFileName) {
+    let lRetval = path.extname(pFileName);
+
+    if (lRetval === ".md") {
+        return pFileName.endsWith(".coffee.md") ? ".coffee.md" : lRetval;
+    }
+    return lRetval;
+}
 
 function getASTBare(pFileName) {
-    let lFile = fs.readFileSync(pFileName, 'utf8');
-
-    if (path.extname(pFileName) === ".ts"){
-        lFile = typescript.transpileModule(
-            lFile,
-            {
-                compilerOptions: {
-                    "target": "es2015"
-                }
-            }
-        ).outputText;
-    }
-
-    if (path.extname(pFileName) === ".coffee"){
-        lFile = coffeeScript.compile(lFile);
-    }
-
-    if ([".litcoffee", ".coffee.md"].some(pExt => path.extname(pFileName) === pExt)){
-        lFile = coffeeScript.compile(lFile, {literate:true});
-    }
+    const lFile = transpile(
+        getExtension(pFileName),
+        fs.readFileSync(pFileName, 'utf8')
+    );
 
     try {
         return acorn.parse(lFile, {sourceType: 'module'});

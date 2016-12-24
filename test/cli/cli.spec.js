@@ -189,6 +189,22 @@ describe("#processCLI", () => {
             );
         });
 
+        it("dependency-cruise -i shows meta info about the current environment", () => {
+            let lCapturedStdout = "";
+            const unhookIntercept = intercept(pText => {
+                lCapturedStdout += pText;
+            });
+
+            processCLI(null, ({info: true}));
+            unhookIntercept();
+
+            expect(
+                lCapturedStdout
+            ).to.contain(
+                "If you need a currently-not-enabled transpiler (those with a '"
+            );
+        });
+
         it("dependency-cruise test/cli/fixtures/cjs - outputs to stdout", () => {
             let lCapturedStdout = "";
             const unhookIntercept = intercept(pText => {

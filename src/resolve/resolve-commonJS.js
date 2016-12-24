@@ -2,15 +2,9 @@
 
 const path    = require('path');
 const resolve = require('resolve');
+const transpileMeta = require('../transpile/meta');
 
-const SUPPORTED_EXTENSIONS = [
-    ".js",
-    ".ts",
-    ".d.ts",
-    ".coffee",
-    ".litcoffee",
-    ".coffee.md"
-];
+const SUPPORTED_EXTENSIONS = transpileMeta.scannableExtensions;
 
 /*
  * resolves both CommonJS and ES6

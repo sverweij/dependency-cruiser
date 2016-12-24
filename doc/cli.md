@@ -9,6 +9,8 @@ Running with no parameters gets you help:
 
     -h, --help                output usage information
     -V, --version             output the version number
+    -i, --info                shows what languages and extensions
+                              dependency-cruiser supports
     -v, --validate [file]     validate with rules in [file]
                               (default: .dependency-cruiser.json)
     -f, --output-to <file>    file to write output to; - for stdout
@@ -128,6 +130,37 @@ open the link on github instead of the local file - pass that after the
 
 ```sh
 depcruise --prefix https://github.com/sverweij/dependency-cruiser/tree/develop/ -T dot -x node_modules src | dot -T svg > dependencies.svg
+```
+
+### `--info` showing what alt-js are supported
+
+Which alt-js languages dependency-cruiser supports depends on the availability
+it has to them. To see how dependency-cruiser perceives its environment use
+`depcruise --info` (any arguments are ignored). A typical output will look
+like this
+```
+Supported:
+
+  If you need a currently-not-enabled transpiler (those with a '✖'), just
+  install it. E.g. 'npm install --save-dev livescript' will enable livescript
+  support.
+
+Transpilers:
+
+  ✔ javascript (>es1)
+  ✔ coffee-script (>=1.0.0 <2.0.0)
+  ✖ livescript (>=1.0.0 <2.0.0)
+  ✔ typescript (>=2.0.0 <3.0.0)
+
+Extensions:
+
+  ✔ .js
+  ✔ .ts
+  ✔ .d.ts
+  ✖ .ls
+  ✔ .coffee
+  ✔ .litcoffee
+  ✔ .coffee.md
 ```
 
 ### Cruising multiple files and directories in one go

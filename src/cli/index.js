@@ -16,6 +16,8 @@ if (!semver.satisfies(process.versions.node, $package.engines.node)) {
 
 program
     .version($package.version)
+    .option("-i, --info", `shows what languages and extensions
+                          dependency-cruiser supports`)
     .option("-v, --validate [file]", `validate with rules in [file]
                           (default: .dependency-cruiser.json)`)
     .option("-f, --output-to <file>", `file to write output to; - for stdout
@@ -28,7 +30,7 @@ program
     .arguments("<files-or-directories>")
     .parse(process.argv);
 
-if (Boolean(program.args[0])) {
+if (Boolean(program.args[0]) || program.info) {
     processCLI(
         program.args,
         program

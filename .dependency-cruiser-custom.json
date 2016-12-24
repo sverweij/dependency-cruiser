@@ -1,16 +1,20 @@
 {
-
     "forbidden": [{
             "name": "no-deprecated-core",
             "comment": "These core modules are deprecated - find an alternative.",
             "severity": "error",
             "from": {},
             "to": { "coreModule": true, "path": "^(punycode|domain)$" }
-        },{
+        }, {
+            "name": "no-inter-module-test",
+            "severity": "error",
+            "from": { "path": "^test/[^\\/]+/[^\\.]+\\.spec\\.js" },
+            "to": { "path": "^test/[^\\/]+/.+", "pathNot": "utl"}
+        }, {
             "name": "no-dep-on-test",
             "severity": "error",
             "from": { "path": "^(src|bin)" },
-            "to": { "path": "^test|\\.spec\\.(js|ts|coffee|litcoffee|coffee\\.md)$" }
+            "to": { "path": "^test|\\.spec\\.(js|ts|coffee|litcoffee|coffee\\.md)$"}
         }, {
             "name": "no-external-to-here",
             "comment": "you never know...",

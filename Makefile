@@ -98,8 +98,11 @@ run-update-dependencies:
 	$(NPM) run npm-check-updates
 	$(NPM) install
 
+depgraph:
+	./bin/dependency-cruise -x "(^node_modules|^fs$$|^path$$)" -T dot -v .dependency-cruiser-custom.json src bin/dependency-cruise | dot -T svg > tmp_deps.svg
+
 dependency-cruise:
-	./bin/dependency-cruise -T err -v .dependency-cruiser-custom.json src bin/dependency-cruise
+	./bin/dependency-cruise -x fixtures -T err -v .dependency-cruiser-custom.json src bin/dependency-cruise test
 
 check: lint test dependency-cruise
 	./bin/dependency-cruise --version # if that runs the cli script works
@@ -136,6 +139,7 @@ src/extract/extract.js: \
 	src/extract/extract-ES6.js \
 	src/extract/extract-commonJS.js \
 	src/resolve/index.js \
+	src/transpile/index.js \
 	src/utl/index.js \
 	src/validate/index.js
 
@@ -146,10 +150,35 @@ src/resolve/index.js: \
 src/resolve/resolve-AMD.js: \
 	src/utl/index.js
 
+src/resolve/resolve-commonJS.js: \
+	src/transpile/meta.js
+
+src/transpile/meta.js: \
+	src/transpile/coffeeWrap.js \
+	src/transpile/javaScriptWrap.js \
+	src/transpile/liveScriptWrap.js \
+	src/transpile/typeScriptWrap.js
+
+src/transpile/coffeeWrap.js: \
+	package.json \
+	src/transpile/tryRequire.js
+
+src/transpile/liveScriptWrap.js: \
+	package.json \
+	src/transpile/tryRequire.js
+
+src/transpile/typeScriptWrap.js: \
+	package.json \
+	src/transpile/tryRequire.js
+
+src/transpile/index.js: \
+	src/transpile/meta.js
+
 src/extract/extract-AMD.js: \
 	src/extract/extract-commonJS.js
 
 src/extract/gatherInitialSources.js: \
+	src/transpile/meta.js \
 	src/utl/index.js
 
 src/report/csvReporter.js: \
@@ -168,6 +197,7 @@ src/report/visReporter.js: \
 
 # cjs dependencies
 ALL_SRC=src/main/index.js \
+	package.json \
 	src/extract/extract-AMD.js \
 	src/extract/extract-ES6.js \
 	src/extract/extract-commonJS.js \
@@ -189,6 +219,13 @@ ALL_SRC=src/main/index.js \
 	src/resolve/index.js \
 	src/resolve/resolve-AMD.js \
 	src/resolve/resolve-commonJS.js \
+	src/transpile/coffeeWrap.js \
+	src/transpile/index.js \
+	src/transpile/javaScriptWrap.js \
+	src/transpile/liveScriptWrap.js \
+	src/transpile/meta.js \
+	src/transpile/tryRequire.js \
+	src/transpile/typeScriptWrap.js \
 	src/utl/index.js \
 	src/validate/index.js
 # cjs dependencies
@@ -200,6 +237,7 @@ src/cli/processCLI.js: \
 	src/cli/normalizeOptions.js \
 	src/cli/validateParameters.js \
 	src/main/index.js \
+	src/transpile/formatMetaInfo.js \
 	src/validate/readRuleSet.js
 
 src/main/index.js: \
@@ -221,6 +259,7 @@ src/extract/extract.js: \
 	src/extract/extract-ES6.js \
 	src/extract/extract-commonJS.js \
 	src/resolve/index.js \
+	src/transpile/index.js \
 	src/utl/index.js \
 	src/validate/index.js
 
@@ -231,10 +270,35 @@ src/resolve/index.js: \
 src/resolve/resolve-AMD.js: \
 	src/utl/index.js
 
+src/resolve/resolve-commonJS.js: \
+	src/transpile/meta.js
+
+src/transpile/meta.js: \
+	src/transpile/coffeeWrap.js \
+	src/transpile/javaScriptWrap.js \
+	src/transpile/liveScriptWrap.js \
+	src/transpile/typeScriptWrap.js
+
+src/transpile/coffeeWrap.js: \
+	package.json \
+	src/transpile/tryRequire.js
+
+src/transpile/liveScriptWrap.js: \
+	package.json \
+	src/transpile/tryRequire.js
+
+src/transpile/typeScriptWrap.js: \
+	package.json \
+	src/transpile/tryRequire.js
+
+src/transpile/index.js: \
+	src/transpile/meta.js
+
 src/extract/extract-AMD.js: \
 	src/extract/extract-commonJS.js
 
 src/extract/gatherInitialSources.js: \
+	src/transpile/meta.js \
 	src/utl/index.js
 
 src/report/csvReporter.js: \
@@ -250,6 +314,11 @@ src/report/htmlReporter.js: \
 
 src/report/visReporter.js: \
 	src/report/vis.template.js
+
+src/transpile/formatMetaInfo.js: \
+	package.json \
+	src/transpile/meta.js \
+	src/transpile/tryRequire.js
 
 src/validate/readRuleSet.js: \
 	src/validate/normalizeRuleSet.js \
@@ -290,6 +359,29 @@ test/report/errReporter.spec.js: \
 test/report/htmlReporter.spec.js: \
 	src/report/htmlReporter.js
 
+test/transpile/coffeeWrap.spec.js: \
+	src/transpile/coffeeWrap.js
+
+test/transpile/formatMetaInfo.spec.js: \
+	src/transpile/formatMetaInfo.js
+
+test/transpile/index.spec.js: \
+	src/transpile/index.js
+
+test/transpile/liveScriptWrap.spec.js: \
+	src/transpile/liveScriptWrap.js
+
+test/transpile/meta.spec.js: \
+	src/transpile/javaScriptWrap.js \
+	src/transpile/liveScriptWrap.js \
+	src/transpile/meta.js
+
+test/transpile/tryRequire.spec.js: \
+	src/transpile/tryRequire.js
+
+test/transpile/typeScriptWrap.spec.js: \
+	src/transpile/typeScriptWrap.js
+
 test/validate/normalizeRuleSet.spec.js: \
 	src/validate/normalizeRuleSet.js
 
@@ -299,3 +391,4 @@ test/validate/readRuleSet.spec.js: \
 test/validate/validate.spec.js: \
 	src/validate/index.js \
 	src/validate/readRuleSet.js
+

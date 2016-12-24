@@ -5,6 +5,7 @@ const validateParameters = require("./validateParameters");
 const normalizeOptions   = require("./normalizeOptions");
 const main               = require("../main");
 const readRuleSet        = require('../validate/readRuleSet');
+const formatMetaInfo     = require('../transpile/formatMetaInfo');
 
 function writeToFile(pOutputTo, pDependencyString) {
     try {
@@ -27,27 +28,31 @@ function write(pOutputTo, pContent) {
 }
 
 module.exports = (pFileDirArray, pOptions) => {
-    try {
-        validateParameters(pFileDirArray, pOptions);
-        pOptions = normalizeOptions(pOptions);
+    if (pOptions && pOptions.info === true) {
+        process.stdout.write(formatMetaInfo());
+    } else {
+        try {
+            validateParameters(pFileDirArray, pOptions);
+            pOptions = normalizeOptions(pOptions);
 
-        if (Boolean(pOptions.rulesFile)){
-            pOptions.ruleSet = readRuleSet(
-                fs.readFileSync(pOptions.rulesFile, 'utf8')
-            );
+            if (Boolean(pOptions.rulesFile)){
+                pOptions.ruleSet = readRuleSet(
+                    fs.readFileSync(pOptions.rulesFile, 'utf8')
+                );
+            }
+
+            const lDependencyList = main(pFileDirArray, pOptions);
+
+            write(pOptions.outputTo, lDependencyList.dependencies);
+
+            /* istanbul ignore if */
+            if (lDependencyList.summary.error > 0) {
+                process.exit(lDependencyList.summary.error);
+            }
+
+        } catch (e) {
+            process.stderr.write(`ERROR: ${e.message}`);
         }
-
-        const lDependencyList = main(pFileDirArray, pOptions);
-
-        write(pOptions.outputTo, lDependencyList.dependencies);
-
-        /* istanbul ignore if */
-        if (lDependencyList.summary.error > 0) {
-            process.exit(lDependencyList.summary.error);
-        }
-
-    } catch (e) {
-        process.stderr.write(`ERROR: ${e.message}`);
     }
 };
 

@@ -1,14 +1,9 @@
 const fs   = require('fs');
 const path = require('path');
 const utl  = require('../utl');
+const transpileMeta = require('../transpile/meta');
 
-const SUPPORTED_EXTENSIONS = [
-    ".js",
-    ".ts",
-    ".coffee",
-    ".litcoffee",
-    ".coffee.md"
-];
+const SUPPORTED_EXTENSIONS = transpileMeta.scannableExtensions;
 
 function gatherScannableFilesFromDir (pDirName, pOptions) {
     return fs.readdirSync(pDirName)

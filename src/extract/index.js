@@ -8,7 +8,6 @@ const summarize = require('./summarize');
 
 function extractRecursive (pFileName, pOptions, pVisited) {
     pOptions = pOptions || {};
-    pVisited = pVisited || new Set();
     pVisited.add(pFileName);
 
     const lDependencies = extract(pFileName, pOptions);

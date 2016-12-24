@@ -82,7 +82,7 @@ describe('CoffeeScript - ', () => coffeeFixtures.forEach(runFixture));
 describe('Error scenarios - ', () => {
     it('Does not raise an exception on syntax errors (because we\'re on the loose parser)', () => {
         expect(
-            () => extract("test/extractor-fixtures/syntax-error.js")
+            () => extract("test/extract/fixtures/syntax-error.js")
         ).to.not.throw("Extracting dependencies ran afoul of... Unexpected token (1:3)");
     });
     it('Raises an exception on non-existing files', () => {
