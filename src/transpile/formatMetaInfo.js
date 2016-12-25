@@ -12,7 +12,8 @@ function bool2Symbol(pBool) {
 
 function formatTranspilers(pTranspilers) {
     return Object.keys(pTranspilers).reduce(
-        (pAll, pThis) => `${pAll}    ${bool2Symbol(tryRequire(pThis))} ${pThis} (${pTranspilers[pThis]})\n`,
+        (pAll, pThis) =>
+            `${pAll}    ${bool2Symbol(tryRequire(pThis, pTranspilers[pThis]))} ${pThis} (${pTranspilers[pThis]})\n`,
         `    ${bool2Symbol(true)} javascript (>es1)\n`
     );
 }
