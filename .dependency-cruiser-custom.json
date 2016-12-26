@@ -4,7 +4,7 @@
             "comment": "These core modules are deprecated - find an alternative.",
             "severity": "error",
             "from": {},
-            "to": { "coreModule": true, "path": "^(punycode|domain)$" }
+            "to": { "dependencyTypes": ["core"], "path": "^(punycode|domain)$" }
         }, {
             "name": "no-inter-module-test",
             "severity": "error",
@@ -24,7 +24,31 @@
         }, {
             "name": "not-to-unresolvable",
             "severity": "warn",
-            "from": { },
+            "from": {},
             "to": { "couldNotResolve": true }
+        }, {
+            "name": "not-to-devdep",
+            "severity": "error",
+            "comment": "because an npm i --production will otherwise deliver an unreliably running module",
+            "from": { "path": "^(bin|src)"},
+            "to": { "dependencyTypes": ["npm-dev"] }
+        }, {
+            "name": "no-non-package-json",
+            "severity": "error",
+            "comment": "because an npm i --production will otherwise deliver an unreliably running module",
+            "from": { "pathNot": "^(node_modules)"},
+            "to": { "dependencyTypes": ["unknown", "undetermined", "npm-no-pkg", "npm-unknown"] }
+        }, {
+            "name": "optional-deps-used",
+            "severity": "info",
+            "comment": "nothing serious - but just check you have some try/ catches around the import/ require of these",
+            "from": {},
+            "to": { "dependencyTypes": ["npm-optional"] }
+        }, {
+            "name": "peer-deps-used",
+            "comment": "peer dependencies are deprecated with the advent of npm 3 - and probably gone with version 4. Or with yarn.",
+            "severity": "warn",
+            "from": {},
+            "to": { "dependencyTypes": ["npm-peer"] }
         }]
 }

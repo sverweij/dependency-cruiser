@@ -10,6 +10,9 @@
                 "resolved": "test/extract/fixtures/coffee/javascriptThing.js",
                 "moduleSystem": "es6",
                 "coreModule": false,
+                "dependencyTypes": [
+                    "local"
+                ],
                 "followable": true,
                 "couldNotResolve": false,
                 "valid": true
@@ -19,6 +22,9 @@
                 "resolved": "test/extract/fixtures/coffee/sub/index.coffee",
                 "moduleSystem": "es6",
                 "coreModule": false,
+                "dependencyTypes": [
+                    "local"
+                ],
                 "followable": true,
                 "couldNotResolve": false,
                 "valid": true
@@ -28,6 +34,9 @@
                 "resolved": "test/extract/fixtures/coffee/sub/kaching.litcoffee",
                 "moduleSystem": "es6",
                 "coreModule": false,
+                "dependencyTypes": [
+                    "local"
+                ],
                 "followable": true,
                 "couldNotResolve": false,
                 "valid": true
@@ -37,6 +46,9 @@
                 "resolved": "test/extract/fixtures/coffee/sub/willBeReExported.coffee.md",
                 "moduleSystem": "es6",
                 "coreModule": false,
+                "dependencyTypes": [
+                    "local"
+                ],
                 "followable": true,
                 "couldNotResolve": false,
                 "valid": true
@@ -46,6 +58,9 @@
                 "resolved": "path",
                 "moduleSystem": "es6",
                 "coreModule": true,
+                "dependencyTypes": [
+                    "core"
+                ],
                 "followable": false,
                 "couldNotResolve": false,
                 "valid": true

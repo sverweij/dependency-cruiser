@@ -67,6 +67,7 @@
                                 "module",
                                 "resolved",
                                 "coreModule",
+                                "dependencyTypes",
                                 "followable",
                                 "couldNotResolve",
                                 "moduleSystem",
@@ -85,6 +86,25 @@
                                 "coreModule": {
                                     "type": "boolean",
                                     "description": "Whether or not this is a node.js core module"
+                                },
+                                "dependencyTypes": {
+                                    "type": "array",
+                                    "items": {
+                                        "type": "string",
+                                        "enum": [
+                                            "local",
+                                            "npm",
+                                            "npm-dev",
+                                            "npm-optional",
+                                            "npm-peer",
+                                            "npm-no-pkg",
+                                            "npm-unknown",
+                                            "core",
+                                            "unknown",
+                                            "undetermined"
+                                        ],
+                                        "description": "the type of inclusion - local, core, unknown (= we honestly don't know), undetermined (= we didn't bother determining it) or one of the npm dependencies defined in a package.jsom ('npm' for 'depenencies', 'npm-dev', 'npm-optional', 'npm-peer', 'npm-no-pkg' for development, optional, peer dependencies and dependencies in node_modules but not in package.json respectively)"
+                                    }
                                 },
                                 "followable": {
                                     "type": "boolean",

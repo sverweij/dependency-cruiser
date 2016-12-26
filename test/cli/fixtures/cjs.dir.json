@@ -16,6 +16,9 @@
                     "coreModule": false,
                     "followable": true,
                     "couldNotResolve": false,
+                    "dependencyTypes": [
+                        "local"
+                    ],
                     "module": "./moar-javascript",
                     "moduleSystem": "cjs",
                     "valid": true
@@ -25,6 +28,9 @@
                     "coreModule": false,
                     "followable": true,
                     "couldNotResolve": false,
+                    "dependencyTypes": [
+                        "npm-no-pkg"
+                    ],
                     "module": "someothermodule",
                     "moduleSystem": "cjs",
                     "valid": true
@@ -39,6 +45,9 @@
                     "coreModule": true,
                     "followable": false,
                     "couldNotResolve": false,
+                    "dependencyTypes": [
+                        "core"
+                    ],
                     "module": "path",
                     "moduleSystem": "cjs",
                     "valid": true
@@ -60,6 +69,9 @@
                     "coreModule": true,
                     "followable": false,
                     "couldNotResolve": false,
+                    "dependencyTypes": [
+                        "core"
+                    ],
                     "module": "path",
                     "moduleSystem": "cjs",
                     "valid": true
@@ -74,6 +86,9 @@
                     "coreModule": false,
                     "followable": true,
                     "couldNotResolve": false,
+                    "dependencyTypes": [
+                        "local"
+                    ],
                     "module": "./one_only_one",
                     "moduleSystem": "cjs",
                     "valid": true
@@ -83,6 +98,9 @@
                     "coreModule": false,
                     "followable": true,
                     "couldNotResolve": false,
+                    "dependencyTypes": [
+                        "local"
+                    ],
                     "module": "./one_only_two",
                     "moduleSystem": "cjs",
                     "valid": true
@@ -92,6 +110,9 @@
                     "coreModule": false,
                     "followable": true,
                     "couldNotResolve": false,
+                    "dependencyTypes": [
+                        "local"
+                    ],
                     "module": "./shared",
                     "moduleSystem": "cjs",
                     "valid": true
@@ -101,6 +122,9 @@
                     "coreModule": false,
                     "followable": true,
                     "couldNotResolve": false,
+                    "dependencyTypes": [
+                        "local"
+                    ],
                     "module": "./sub/dir",
                     "moduleSystem": "cjs",
                     "valid": true
@@ -110,6 +134,9 @@
                     "coreModule": true,
                     "followable": false,
                     "couldNotResolve": false,
+                    "dependencyTypes": [
+                        "core"
+                    ],
                     "module": "fs",
                     "moduleSystem": "cjs",
                     "valid": true
@@ -119,6 +146,9 @@
                     "coreModule": false,
                     "followable": true,
                     "couldNotResolve": false,
+                    "dependencyTypes": [
+                        "npm-no-pkg"
+                    ],
                     "module": "somemodule",
                     "moduleSystem": "cjs",
                     "valid": true
@@ -140,6 +170,9 @@
                     "coreModule": true,
                     "followable": false,
                     "couldNotResolve": false,
+                    "dependencyTypes": [
+                        "core"
+                    ],
                     "module": "path",
                     "moduleSystem": "cjs",
                     "valid": true
@@ -154,6 +187,9 @@
                     "coreModule": false,
                     "followable": true,
                     "couldNotResolve": false,
+                    "dependencyTypes": [
+                        "local"
+                    ],
                     "module": "./depindir",
                     "moduleSystem": "cjs",
                     "valid": true
@@ -163,6 +199,9 @@
                     "coreModule": true,
                     "followable": false,
                     "couldNotResolve": false,
+                    "dependencyTypes": [
+                        "core"
+                    ],
                     "module": "path",
                     "moduleSystem": "cjs",
                     "valid": true
@@ -177,6 +216,9 @@
                     "coreModule": true,
                     "followable": false,
                     "couldNotResolve": false,
+                    "dependencyTypes": [
+                        "core"
+                    ],
                     "module": "path",
                     "moduleSystem": "cjs",
                     "valid": true
@@ -191,6 +233,9 @@
                     "coreModule": false,
                     "followable": true,
                     "couldNotResolve": false,
+                    "dependencyTypes": [
+                        "local"
+                    ],
                     "module": "./shared",
                     "moduleSystem": "cjs",
                     "valid": true
@@ -200,6 +245,9 @@
                     "coreModule": false,
                     "followable": false,
                     "couldNotResolve": false,
+                    "dependencyTypes": [
+                        "local"
+                    ],
                     "module": "./somedata.json",
                     "moduleSystem": "cjs",
                     "valid": true
@@ -209,6 +257,9 @@
                     "coreModule": false,
                     "followable": true,
                     "couldNotResolve": false,
+                    "dependencyTypes": [
+                        "local"
+                    ],
                     "module": "./two_only_one",
                     "moduleSystem": "cjs",
                     "valid": true
@@ -218,6 +269,9 @@
                     "coreModule": true,
                     "followable": false,
                     "couldNotResolve": false,
+                    "dependencyTypes": [
+                        "core"
+                    ],
                     "module": "http",
                     "moduleSystem": "cjs",
                     "valid": true
@@ -246,6 +300,9 @@
                     "coreModule": false,
                     "followable": true,
                     "couldNotResolve": false,
+                    "dependencyTypes": [
+                        "local"
+                    ],
                     "module": "./sub/dir",
                     "moduleSystem": "cjs",
                     "valid": true

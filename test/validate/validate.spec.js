@@ -300,4 +300,40 @@ describe("validator", () => {
             )
         ).to.deep.equal({valid: true});
     });
+
+    it("not-to-dev-dep disallows relations to develop dependencies", () => {
+        expect(
+            validate(
+                true,
+                _readRuleSet("./test/validate/fixtures/rules.not-to-dev-dep.json"),
+                "src/aap/zus/jet.js",
+                {
+                    "module": "chai",
+                    "resolved": "node_modules/chai/index.js",
+                    "dependencyTypes": ["npm-dev"]
+                }
+            )
+        ).to.deep.equal({
+            valid: false,
+            rule : {
+                name: "not-to-dev-dep",
+                severity: "error"
+            }
+        });
+    });
+
+    it("not-to-dev-dep does allow relations to regular dependencies", () => {
+        expect(
+            validate(
+                true,
+                _readRuleSet("./test/validate/fixtures/rules.not-to-dev-dep.json"),
+                "src/aap/zus/jet.js",
+                {
+                    "module": "jip",
+                    "resolved": "node_modules/jip/janneke.js",
+                    "dependencyTypes": ["npm"]
+                }
+            )
+        ).to.deep.equal({valid: true});
+    });
 });

@@ -13,6 +13,14 @@ function matchesOwnFolder(pFrom, pTo, pOwnFolder) {
                       : path.dirname(pFrom) !== path.dirname(pTo.resolved);
 }
 
+function intersects(pToDependencyTypes, pRuleDependencyTypes) {
+    return pToDependencyTypes.some(
+        pDepType => pRuleDependencyTypes.some(
+            pRDepType => pDepType === pRDepType
+        )
+    );
+}
+
 function matchRule(pFrom, pTo) {
     return pRule =>
         (!Boolean(pRule.from.path)    ||   pFrom.match(pRule.from.path)) &&
@@ -20,6 +28,7 @@ function matchRule(pFrom, pTo) {
         (!Boolean(pRule.to.path)      ||   pTo.resolved.match(pRule.to.path)) &&
         (!Boolean(pRule.to.pathNot)   || !(pTo.resolved.match(pRule.to.pathNot))) &&
         (!pRule.to.hasOwnProperty("ownFolder") || matchesOwnFolder(pFrom, pTo, pRule.to.ownFolder)) &&
+        (!pRule.to.hasOwnProperty("dependencyTypes") || intersects(pTo.dependencyTypes, pRule.to.dependencyTypes)) &&
         propertyEquals(pTo, pRule, "coreModule") &&
         propertyEquals(pTo, pRule, "couldNotResolve");
 }

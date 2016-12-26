@@ -61,7 +61,7 @@
         },
         "RestrictionType": {
             "type": "object",
-            "description": "Criteria an end of a dependency should match to be catched by this rule. Leave it empty if you want any module to be matched.",
+            "description": "Criteria an end of a dependency should match to be caught by this rule. Leave it empty if you want any module to be matched.",
             "additionalProperties": false,
             "properties": {
                 "path": {
@@ -76,7 +76,7 @@
         },
         "ToRestrictionType": {
             "type": "object",
-            "description": "blablabla",
+            "description": "Criteria the 'to' end of a dependency should match to be caught by this rule. Leave it empty if you want any module to be matched.",
             "additionalProperties": false,
             "properties" : {
                 "path": {
@@ -98,6 +98,26 @@
                 "ownFolder": {
                     "type": "boolean",
                     "description": "Whether or not to match modules in the same folder as the 'from'."
+                },
+                "dependencyTypes": {
+                    "type": "array",
+                    "description": "Whether or not to match modules of any of these types (leaving out matches any of them)",
+                    "items": {
+                        "type": "string",
+                        "enum": [
+                            "local",
+                            "npm",
+                            "npm-dev",
+                            "npm-optional",
+                            "npm-peer",
+                            "npm-no-pkg",
+                            "npm-unknown",
+                            "core",
+                            "unknown",
+                            "undetermined"
+                        ]
+                    }
+
                 }
             }
         },

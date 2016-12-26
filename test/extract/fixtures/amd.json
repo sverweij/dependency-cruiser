@@ -10,6 +10,9 @@
                 "resolved": "test/extract/fixtures/amd/root_one.js",
                 "moduleSystem": "amd",
                 "coreModule": false,
+                "dependencyTypes": [
+                    "local"
+                ],
                 "followable": true,
                 "couldNotResolve": false,
                 "valid": true
@@ -19,6 +22,9 @@
                 "resolved": "test/extract/fixtures/amd/root_two.js",
                 "moduleSystem": "amd",
                 "coreModule": false,
+                "dependencyTypes": [
+                    "local"
+                ],
                 "followable": true,
                 "couldNotResolve": false,
                 "valid": true
@@ -36,6 +42,9 @@
                 "resolved": "test/extract/fixtures/amd/module-as-a-function.js",
                 "moduleSystem": "amd",
                 "coreModule": false,
+                "dependencyTypes": [
+                    "local"
+                ],
                 "followable": true,
                 "couldNotResolve": false,
                 "valid": true
@@ -45,6 +54,9 @@
                 "resolved": "test/extract/fixtures/amd/root_one.js",
                 "moduleSystem": "amd",
                 "coreModule": false,
+                "dependencyTypes": [
+                    "local"
+                ],
                 "followable": true,
                 "couldNotResolve": false,
                 "valid": true
@@ -62,6 +74,9 @@
                 "resolved": "test/extract/fixtures/amd/root_one.js",
                 "moduleSystem": "amd",
                 "coreModule": false,
+                "dependencyTypes": [
+                    "local"
+                ],
                 "followable": true,
                 "couldNotResolve": false,
                 "valid": true
@@ -71,6 +86,9 @@
                 "resolved": "test/extract/fixtures/amd/root_two.js",
                 "moduleSystem": "amd",
                 "coreModule": false,
+                "dependencyTypes": [
+                    "local"
+                ],
                 "followable": true,
                 "couldNotResolve": false,
                 "valid": true
@@ -80,6 +98,9 @@
                 "resolved": "test/extract/fixtures/amd/sub/dir.js",
                 "moduleSystem": "amd",
                 "coreModule": false,
+                "dependencyTypes": [
+                    "local"
+                ],
                 "followable": true,
                 "couldNotResolve": false,
                 "valid": true
@@ -98,6 +119,9 @@
                 "resolved": "test/extract/fixtures/amd/root_one.js",
                 "moduleSystem": "amd",
                 "coreModule": false,
+                "dependencyTypes": [
+                    "local"
+                ],
                 "followable": true,
                 "couldNotResolve": false,
                 "valid": true
@@ -107,6 +131,9 @@
                 "resolved": "test/extract/fixtures/amd/root_two.js",
                 "moduleSystem": "amd",
                 "coreModule": false,
+                "dependencyTypes": [
+                    "local"
+                ],
                 "followable": true,
                 "couldNotResolve": false,
                 "valid": true
@@ -124,6 +151,9 @@
                 "resolved": "test/extract/fixtures/amd/root_one.js",
                 "moduleSystem": "amd",
                 "coreModule": false,
+                "dependencyTypes": [
+                    "local"
+                ],
                 "followable": true,
                 "couldNotResolve": false,
                 "valid": true
@@ -133,6 +163,9 @@
                 "resolved": "test/extract/fixtures/amd/root_one.js",
                 "moduleSystem": "cjs",
                 "coreModule": false,
+                "dependencyTypes": [
+                    "local"
+                ],
                 "followable": true,
                 "couldNotResolve": false,
                 "valid": true
@@ -142,6 +175,9 @@
                 "resolved": "test/extract/fixtures/amd/root_two.js",
                 "moduleSystem": "amd",
                 "coreModule": false,
+                "dependencyTypes": [
+                    "local"
+                ],
                 "followable": true,
                 "couldNotResolve": false,
                 "valid": true
@@ -151,6 +187,9 @@
                 "resolved": "test/extract/fixtures/amd/root_two.js",
                 "moduleSystem": "cjs",
                 "coreModule": false,
+                "dependencyTypes": [
+                    "local"
+                ],
                 "followable": true,
                 "couldNotResolve": false,
                 "valid": true
@@ -168,6 +207,9 @@
                 "resolved": "lodash",
                 "moduleSystem": "amd",
                 "coreModule": false,
+                "dependencyTypes": [
+                    "unknown"
+                ],
                 "followable": false,
                 "couldNotResolve": true,
                 "valid": true
@@ -177,6 +219,9 @@
                 "resolved": "other-module-in-the-config",
                 "moduleSystem": "amd",
                 "coreModule": false,
+                "dependencyTypes": [
+                    "unknown"
+                ],
                 "followable": false,
                 "couldNotResolve": true,
                 "valid": true
@@ -186,6 +231,9 @@
                 "resolved": "test/extract/fixtures/amd/sub/local-module-in-drag.js",
                 "moduleSystem": "amd",
                 "coreModule": false,
+                "dependencyTypes": [
+                    "undetermined"
+                ],
                 "followable": true,
                 "couldNotResolve": false,
                 "valid": true

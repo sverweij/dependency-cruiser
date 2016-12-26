@@ -10,6 +10,9 @@
                 "resolved": "node_modules/acorn/dist/acorn.js",
                 "moduleSystem": "es6",
                 "coreModule": false,
+                "dependencyTypes": [
+                    "npm"
+                ],
                 "followable": true,
                 "couldNotResolve": false,
                 "valid": true
@@ -19,6 +22,9 @@
                 "resolved": "node_modules/chai/index.js",
                 "moduleSystem": "es6",
                 "coreModule": false,
+                "dependencyTypes": [
+                    "npm-dev"
+                ],
                 "followable": true,
                 "couldNotResolve": false,
                 "valid": true
@@ -28,6 +34,9 @@
                 "resolved": "node_modules/lodash/lodash.js",
                 "moduleSystem": "es6",
                 "coreModule": false,
+                "dependencyTypes": [
+                    "npm"
+                ],
                 "followable": true,
                 "couldNotResolve": false,
                 "valid": true
@@ -37,6 +46,9 @@
                 "resolved": "node_modules/mocha/index.js",
                 "moduleSystem": "es6",
                 "coreModule": false,
+                "dependencyTypes": [
+                    "npm-dev"
+                ],
                 "followable": true,
                 "couldNotResolve": false,
                 "valid": true
@@ -46,6 +58,9 @@
                 "resolved": "os",
                 "moduleSystem": "es6",
                 "coreModule": true,
+                "dependencyTypes": [
+                    "core"
+                ],
                 "followable": false,
                 "couldNotResolve": false,
                 "valid": true

@@ -1,8 +1,10 @@
 "use strict";
 
-const path    = require('path');
-const resolve = require('resolve');
-const transpileMeta = require('../transpile/meta');
+const path                     = require('path');
+const resolve                  = require('resolve');
+const transpileMeta            = require('../transpile/meta');
+const determineDependencyTypes = require('./determineDependencyTypes');
+const readPackageDeps          = require('./readPackageDeps');
 
 const SUPPORTED_EXTENSIONS = transpileMeta.scannableExtensions;
 
@@ -14,7 +16,8 @@ module.exports = (pModuleName, pBaseDir, pFileDir) => {
         resolved        : pModuleName,
         coreModule      : false,
         followable      : false,
-        couldNotResolve : false
+        couldNotResolve : false,
+        dependencyTypes : ["undetermined"]
     };
 
     if (resolve.isCore(pModuleName)){
@@ -36,5 +39,15 @@ module.exports = (pModuleName, pBaseDir, pFileDir) => {
             lRetval.couldNotResolve = true;
         }
     }
-    return lRetval;
+
+    return Object.assign(
+        lRetval,
+        {
+            dependencyTypes: determineDependencyTypes(
+                lRetval,
+                pModuleName,
+                readPackageDeps(pBaseDir)
+            )
+        }
+    );
 };

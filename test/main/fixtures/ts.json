@@ -8,6 +8,9 @@
                     "coreModule": false,
                     "followable": true,
                     "couldNotResolve": false,
+                    "dependencyTypes": [
+                        "local"
+                    ],
                     "module": "./javascriptThing",
                     "moduleSystem": "es6",
                     "valid": true
@@ -17,6 +20,9 @@
                     "coreModule": false,
                     "followable": true,
                     "couldNotResolve": false,
+                    "dependencyTypes": [
+                        "local"
+                    ],
                     "module": "./sub",
                     "moduleSystem": "es6",
                     "valid": true
@@ -26,6 +32,9 @@
                     "coreModule": false,
                     "followable": true,
                     "couldNotResolve": false,
+                    "dependencyTypes": [
+                        "local"
+                    ],
                     "module": "./sub/kaching",
                     "moduleSystem": "es6",
                     "valid": true
@@ -35,6 +44,9 @@
                     "coreModule": false,
                     "followable": true,
                     "couldNotResolve": false,
+                    "dependencyTypes": [
+                        "local"
+                    ],
                     "module": "./sub/willBeReExported",
                     "moduleSystem": "es6",
                     "valid": true
@@ -44,6 +56,9 @@
                     "coreModule": true,
                     "followable": false,
                     "couldNotResolve": false,
+                    "dependencyTypes": [
+                        "core"
+                    ],
                     "module": "path",
                     "moduleSystem": "es6",
                     "valid": true
@@ -69,6 +84,9 @@
                     "coreModule": false,
                     "followable": true,
                     "couldNotResolve": false,
+                    "dependencyTypes": [
+                        "local"
+                    ],
                     "module": "./willBeReExported",
                     "moduleSystem": "es6",
                     "valid": true

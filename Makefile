@@ -148,9 +148,13 @@ src/resolve/index.js: \
 	src/resolve/resolve-commonJS.js
 
 src/resolve/resolve-AMD.js: \
+	src/resolve/determineDependencyTypes.js \
+	src/resolve/readPackageDeps.js \
 	src/utl/index.js
 
 src/resolve/resolve-commonJS.js: \
+	src/resolve/determineDependencyTypes.js \
+	src/resolve/readPackageDeps.js \
 	src/transpile/meta.js
 
 src/transpile/meta.js: \
@@ -216,7 +220,9 @@ ALL_SRC=src/main/index.js \
 	src/report/jsonReporter.js \
 	src/report/vis.template.js \
 	src/report/visReporter.js \
+	src/resolve/determineDependencyTypes.js \
 	src/resolve/index.js \
+	src/resolve/readPackageDeps.js \
 	src/resolve/resolve-AMD.js \
 	src/resolve/resolve-commonJS.js \
 	src/transpile/coffeeWrap.js \
@@ -268,9 +274,13 @@ src/resolve/index.js: \
 	src/resolve/resolve-commonJS.js
 
 src/resolve/resolve-AMD.js: \
+	src/resolve/determineDependencyTypes.js \
+	src/resolve/readPackageDeps.js \
 	src/utl/index.js
 
 src/resolve/resolve-commonJS.js: \
+	src/resolve/determineDependencyTypes.js \
+	src/resolve/readPackageDeps.js \
 	src/transpile/meta.js
 
 src/transpile/meta.js: \
@@ -358,6 +368,12 @@ test/report/errReporter.spec.js: \
 
 test/report/htmlReporter.spec.js: \
 	src/report/htmlReporter.js
+
+test/resolve/determineDependencyTypes.spec.js: \
+	src/resolve/determineDependencyTypes.js
+
+test/resolve/readPackageDeps.spec.js: \
+	src/resolve/readPackageDeps.js
 
 test/transpile/coffeeWrap.spec.js: \
 	src/transpile/coffeeWrap.js

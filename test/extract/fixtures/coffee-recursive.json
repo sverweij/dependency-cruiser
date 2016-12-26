@@ -1,6 +1,6 @@
 [
     {
-        "title": "recursive on typescript modules",
+        "title": "recursive on coffeescript modules",
         "input": {
             "fileName": "test/extract/fixtures/coffee/index.coffee"
         },
@@ -11,6 +11,9 @@
                     {
                         "resolved": "test/extract/fixtures/coffee/javascriptThing.js",
                         "coreModule": false,
+                        "dependencyTypes": [
+                            "local"
+                        ],
                         "followable": true,
                         "couldNotResolve": false,
                         "module": "./javascriptThing",
@@ -20,6 +23,9 @@
                     {
                         "resolved": "test/extract/fixtures/coffee/sub/index.coffee",
                         "coreModule": false,
+                        "dependencyTypes": [
+                            "local"
+                        ],
                         "followable": true,
                         "couldNotResolve": false,
                         "module": "./sub",
@@ -29,6 +35,9 @@
                     {
                         "resolved": "test/extract/fixtures/coffee/sub/kaching.litcoffee",
                         "coreModule": false,
+                        "dependencyTypes": [
+                            "local"
+                        ],
                         "followable": true,
                         "couldNotResolve": false,
                         "module": "./sub/kaching",
@@ -38,6 +47,9 @@
                     {
                         "resolved": "test/extract/fixtures/coffee/sub/willBeReExported.coffee.md",
                         "coreModule": false,
+                        "dependencyTypes": [
+                            "local"
+                        ],
                         "followable": true,
                         "couldNotResolve": false,
                         "module": "./sub/willBeReExported",
@@ -47,6 +59,9 @@
                     {
                         "resolved": "path",
                         "coreModule": true,
+                        "dependencyTypes": [
+                            "core"
+                        ],
                         "followable": false,
                         "couldNotResolve": false,
                         "module": "path",
@@ -72,6 +87,9 @@
                     {
                         "resolved": "test/extract/fixtures/coffee/sub/willBeReExported.coffee.md",
                         "coreModule": false,
+                        "dependencyTypes": [
+                            "local"
+                        ],
                         "followable": true,
                         "couldNotResolve": false,
                         "module": "./willBeReExported",
