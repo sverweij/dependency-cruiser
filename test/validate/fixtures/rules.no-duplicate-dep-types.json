@@ -1,0 +1,10 @@
+{
+    "forbidden": [
+        {
+            "name": "no-duplicate-dep-types",
+            "severity": "warn",
+            "from": {},
+            "to": { "moreThanOneDependencyType": true }
+        }
+    ]
+}

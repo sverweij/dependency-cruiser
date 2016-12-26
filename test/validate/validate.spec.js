@@ -336,4 +336,25 @@ describe("validator", () => {
             )
         ).to.deep.equal({valid: true});
     });
+
+    it(`no relations with modules of > 1 dep type (e.g. specified 2x in package.json)`, () => {
+        expect(
+            validate(
+                true,
+                _readRuleSet("./test/validate/fixtures/rules.no-duplicate-dep-types.json"),
+                "src/aap/zus/jet.js",
+                {
+                    "module": "chai",
+                    "resolved": "node_modules/chai/index.js",
+                    "dependencyTypes": ["npm", "npm-dev"]
+                }
+            )
+        ).to.deep.equal({
+            valid: false,
+            rule : {
+                name: "no-duplicate-dep-types",
+                severity: "warn"
+            }
+        });
+    });
 });

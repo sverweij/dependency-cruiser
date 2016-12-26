@@ -117,7 +117,10 @@
                             "undetermined"
                         ]
                     }
-
+                },
+                "moreThanOneDependencyType": {
+                    "type": "boolean",
+                    "description": "If true matches dependencies with more than one dependency type (e.g. defined in _both_ npm and npm-dev)"
                 }
             }
         },

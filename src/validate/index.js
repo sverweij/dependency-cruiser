@@ -21,6 +21,7 @@ function intersects(pToDependencyTypes, pRuleDependencyTypes) {
     );
 }
 
+/* eslint complexity: 0 */
 function matchRule(pFrom, pTo) {
     return pRule =>
         (!Boolean(pRule.from.path)    ||   pFrom.match(pRule.from.path)) &&
@@ -29,6 +30,7 @@ function matchRule(pFrom, pTo) {
         (!Boolean(pRule.to.pathNot)   || !(pTo.resolved.match(pRule.to.pathNot))) &&
         (!pRule.to.hasOwnProperty("ownFolder") || matchesOwnFolder(pFrom, pTo, pRule.to.ownFolder)) &&
         (!pRule.to.hasOwnProperty("dependencyTypes") || intersects(pTo.dependencyTypes, pRule.to.dependencyTypes)) &&
+        (!pRule.to.hasOwnProperty("moreThanOneDependencyType") || pTo.dependencyTypes.length > 1) &&
         propertyEquals(pTo, pRule, "coreModule") &&
         propertyEquals(pTo, pRule, "couldNotResolve");
 }

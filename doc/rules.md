@@ -303,14 +303,29 @@ This is a list of dependency types dependency-cruiser currently detects.
 With the flexible character of package.json it's totally possible to specify
 a package more than once - e.g. both in the `peerDependencies` and in the
 `dependencies`. Sometimes this is intentional (e.g. to make sure a plugin
-type package works with both npm 2 and 3), but it can be
+type package works with both npm 2 and 3), but it can be a typo as well.
 
+Anyway, it's useful to be conscious about it - you can b.t.w simply check
+for it with a `moreThanOneDependencyType` attribute - which matches these
+when set to true:
 
-"description": "Whether or not to match modules of any of these types (leaving out matches any of them)",
-"items": {
-    "type": "string",
-    "enum": [
+```json
+{
+    "forbidden": [
+        {
+            "name": "no-duplicate-dep-types",
+            "severity": "warn",
+            "from": {},
+            "to": { "moreThanOneDependencyType": true }
+        }
+    ]
+}
+```
 
+When left out it doesn't matter how many dependency types a dependency has.
+
+(If you're more of an 'allowed' user: it matches the 0 and 1 cases when set to
+false).
 
 
 ## A starter rule set
@@ -364,6 +379,11 @@ type package works with both npm 2 and 3), but it can be
         "severity": "warn",
         "from": {},
         "to": { "dependencyTypes": ["npm-peer"] }
+    },{
+        "name": "no-duplicate-dep-types",
+        "severity": "warn",
+        "from": {},
+        "to": { "moreThanOneDependencyType": true }
     }]
 }
 ```
