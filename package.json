@@ -52,7 +52,7 @@
   "homepage": "https://github.com/sverweij/dependency-cruiser",
   "dependencies": {
     "acorn": "4.0.4",
-    "ajv": "4.10.2",
+    "ajv": "4.10.3",
     "chalk": "1.1.3",
     "coffee-script": "1.12.2",
     "commander": "2.9.0",
