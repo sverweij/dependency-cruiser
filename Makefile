@@ -98,6 +98,10 @@ run-update-dependencies:
 	$(NPM) run npm-check-updates
 	$(NPM) install
 
+depgraph-doc:
+	./bin/dependency-cruise -x "^node_modules" -T dot -v .dependency-cruiser-custom.json src | dot -T png > doc/real-world-samples/dependency-cruiser-without-node_modules.png
+	optipng doc/real-world-samples/dependency-cruiser-without-node_modules.png
+
 depgraph:
 	./bin/dependency-cruise -x "(^node_modules|^fs$$|^path$$)" -T dot -v .dependency-cruiser-custom.json src bin/dependency-cruise | dot -T svg > tmp_deps.svg
 
@@ -407,4 +411,3 @@ test/validate/readRuleSet.spec.js: \
 test/validate/validate.spec.js: \
 	src/validate/index.js \
 	src/validate/readRuleSet.js
-

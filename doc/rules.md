@@ -171,6 +171,9 @@ A regular expression an end of a dependency should NOT match to be catched by
 this rule.
 
 #### coreModule
+> The coreModule attribute is **deprecated**. Use `dependencyTypes`
+> in stead (like so: `"dependencyTypes" = ["core"]`)
+
 Whether or not to match node.js core modules. Leave out if you don't care either
 way.
 
@@ -240,6 +243,75 @@ components grow like a flock of rabbits. In stead, you can use
 ... which makes sure depdendency-cruiser does not match stuff in the from folder
 currently being matched.
 
+### dependencyTypes
+You might have spent some time wondering why something works on your machine,
+but not on other's. Only to discover you _did_ install a dependency, but
+_did not_ save it to package.json. Or you already had it in your devDependencies
+and started using it in a production source.
+
+To save you from embarassing moments like this, you can make rules with the
+`dependencyTypes` verb. E.g. to prevent you accidentally depend on a
+`devDependency` from anything in `src`:
+
+```json
+{
+    "forbidden": [{
+        "name": "not-to-dev-dep",
+        "severity": "error",
+        "comment": "because an npm i --production will otherwise deliver an unreliably running package",
+        "from": { "path": "^src" },
+        "to": { "dependencyTypes": ["npm-dev"] }
+    }]
+}
+```
+
+Or to detect stuff you npm i'd without putting it in your package.json:
+
+```json
+{
+    "forbidden": [{
+        "name": "no-non-package-json",
+        "severity": "error",
+        "comment": "because an npm i --production will otherwise deliver an unreliably running package",
+        "from": { "pathNot": "^(node_modules)"},
+        "to": { "dependencyTypes": ["unknown", "undetermined", "npm-no-pkg", "npm-unknown"] }
+    }]
+}
+```
+
+If you don't specify dependencyTypes in a rule, dependency-cruiser will ignore
+them in the evaluation of that rule.
+
+#### Ok - _unknown_, _npm-unknown_, _undetermined_ - I'm officially weirded out - what's that about?
+
+This is a list of dependency types dependency-cruiser currently detects.
+
+ dependency type | meaning | example
+ ---             | ---| ---
+ local           | a module in your own ('local') package            | "./klont"
+ npm             | it's a module in package.json's `dependencies`    | "lodash"
+ npm-dev         | it's a module in package.json's `devDependencies`      | "chai"
+ npm-optional    | it's a module in package.json's `optionalDependencies` | "livescript"
+ npm-peer        | it's a module in package.json's `peerDependencies` - note: deprecated in npm 3 | "thing-i-am-a-plugin-for"
+ npm-no-pkg      | it's an npm module - but it's nowhere in your package.json | "forgetmenot"
+ npm-unknown     | it's an npm module - but there is no (parseable/ valid) package.json in your package |
+ core            | it's a core module                                | "fs"
+ unknown         | it's unknown what kind of dependency type this is - probably because the module could not be resolved in the first place | "loodash"
+ undetermined    | the dependency fell through all detection holes. This could happen with amd dependencies - which have a whole jurasic park of ways to define where to resolve modules to | "veloci!./raptor"
+
+#### More than one dependencyType per dependency?
+With the flexible character of package.json it's totally possible to specify
+a package more than once - e.g. both in the `peerDependencies` and in the
+`dependencies`. Sometimes this is intentional (e.g. to make sure a plugin
+type package works with both npm 2 and 3), but it can be
+
+
+"description": "Whether or not to match modules of any of these types (leaving out matches any of them)",
+"items": {
+    "type": "string",
+    "enum": [
+
+
 
 ## A starter rule set
 ```json
@@ -261,13 +333,37 @@ currently being matched.
         "comment": "Warn about dependencies on the (deprecated) 'punycode' core module (use the userland punycode module instead).",
         "severity": "warn",
         "from": {},
-        "to": { "coreModule": true, "path": "^punycode$" }
+        "to": { "moduleTypes": ["core"], "path": "^punycode$" }
     },{
         "name": "not-to-unresolvable",
         "comment": "Don't allow dependencies on modules dependency-cruiser can't resolve to files on disk (which probably means they don't exist)",
         "severity": "error",
         "from": {},
         "to": { "couldNotResolve": true }
+    },{
+        "name": "not-to-dev-dep",
+        "severity": "error",
+        "comment": "because an npm i --production will otherwise deliver an unreliably running package",
+        "from": { "path": "^src" },
+        "to": { "dependencyTypes": ["npm-dev"] }
+    },{
+        "name": "no-non-package-json",
+        "severity": "error",
+        "comment": "because an npm i --production will otherwise deliver an unreliably running package",
+        "from": { "pathNot": "^node_modules"},
+        "to": { "dependencyTypes": ["unknown", "undetermined", "npm-no-pkg", "npm-unknown"] }
+    },{
+        "name": "optional-deps-used",
+        "severity": "info",
+        "comment": "nothing serious - but just check you have some serious try/ catches around the import/ requires of these",
+        "from": {},
+        "to": { "dependencyTypes": ["npm-optional"] }
+    },{
+        "name": "peer-deps-used",
+        "comment": "peer dependencies are deprecated with the advent of npm 3 - and probably gone with version 4. Or with yarn.",
+        "severity": "warn",
+        "from": {},
+        "to": { "dependencyTypes": ["npm-peer"] }
     }]
 }
 ```
