@@ -102,21 +102,7 @@
                 "dependencyTypes": {
                     "type": "array",
                     "description": "Whether or not to match modules of any of these types (leaving out matches any of them)",
-                    "items": {
-                        "type": "string",
-                        "enum": [
-                            "local",
-                            "npm",
-                            "npm-dev",
-                            "npm-optional",
-                            "npm-peer",
-                            "npm-no-pkg",
-                            "npm-unknown",
-                            "core",
-                            "unknown",
-                            "undetermined"
-                        ]
-                    }
+                    "items": { "$ref": "#/definitions/DependencyType" }
                 },
                 "moreThanOneDependencyType": {
                     "type": "boolean",
@@ -131,6 +117,21 @@
                 "error",
                 "warn",
                 "info"
+            ]
+        },
+        "DependencyType": {
+            "type": "string",
+            "enum": [
+                "local",
+                "npm",
+                "npm-dev",
+                "npm-optional",
+                "npm-peer",
+                "npm-no-pkg",
+                "npm-unknown",
+                "core",
+                "unknown",
+                "undetermined"
             ]
         }
     }
