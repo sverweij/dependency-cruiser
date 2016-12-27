@@ -70,6 +70,9 @@
             "followable": false,
             "coreModule": true,
             "couldNotResolve": false,
+            "dependencyTypes": [
+                "core"
+            ],
             "dependencies": []
         },
         {

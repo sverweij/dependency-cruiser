@@ -51,6 +51,9 @@
                 "followable": false,
                 "coreModule": false,
                 "couldNotResolve": true,
+                "dependencyTypes": [
+                    "unknown"
+                ],
                 "dependencies": []
             },
             {
@@ -58,6 +61,9 @@
                 "followable": false,
                 "coreModule": false,
                 "couldNotResolve": true,
+                "dependencyTypes": [
+                    "unknown"
+                ],
                 "dependencies": []
             },
             {

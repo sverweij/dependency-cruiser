@@ -82,6 +82,9 @@
             "followable": false,
             "coreModule": true,
             "couldNotResolve": false,
+            "dependencyTypes": [
+                "core"
+            ],
             "dependencies": []
         },
         {
@@ -106,6 +109,9 @@
             "followable": false,
             "coreModule": true,
             "couldNotResolve": false,
+            "dependencyTypes": [
+                "core"
+            ],
             "dependencies": []
         },
         {

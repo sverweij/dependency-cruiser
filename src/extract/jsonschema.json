@@ -59,6 +59,11 @@
                         "type": "boolean",
                         "description": "'true' if dependency-cruiser could not resolve the module name in the source code to a file name or core module. 'false' in all other cases."
                     },
+                    "dependencyTypes": {
+                        "type": "array",
+                        "items": { "$ref": "#/definitions/DependencyType" },
+                        "description": "the type of inclusion - local, core, unknown (= we honestly don't know), undetermined (= we didn't bother determining it) or one of the npm dependencies defined in a package.jsom ('npm' for 'depenencies', 'npm-dev', 'npm-optional', 'npm-peer', 'npm-no-pkg' for development, optional, peer dependencies and dependencies in node_modules but not in package.json respectively)"
+                    },
                     "dependencies": {
                         "type": "array",
                         "items": {
@@ -89,22 +94,8 @@
                                 },
                                 "dependencyTypes": {
                                     "type": "array",
-                                    "items": {
-                                        "type": "string",
-                                        "enum": [
-                                            "local",
-                                            "npm",
-                                            "npm-dev",
-                                            "npm-optional",
-                                            "npm-peer",
-                                            "npm-no-pkg",
-                                            "npm-unknown",
-                                            "core",
-                                            "unknown",
-                                            "undetermined"
-                                        ],
-                                        "description": "the type of inclusion - local, core, unknown (= we honestly don't know), undetermined (= we didn't bother determining it) or one of the npm dependencies defined in a package.jsom ('npm' for 'depenencies', 'npm-dev', 'npm-optional', 'npm-peer', 'npm-no-pkg' for development, optional, peer dependencies and dependencies in node_modules but not in package.json respectively)"
-                                    }
+                                    "items": { "$ref": "#/definitions/DependencyType" },
+                                    "description": "the type of inclusion - local, core, unknown (= we honestly don't know), undetermined (= we didn't bother determining it) or one of the npm dependencies defined in a package.jsom ('npm' for 'depenencies', 'npm-dev', 'npm-optional', 'npm-peer', 'npm-no-pkg' for development, optional, peer dependencies and dependencies in node_modules but not in package.json respectively)"
                                 },
                                 "followable": {
                                     "type": "boolean",
@@ -180,6 +171,21 @@
                 "err",
                 "json",
                 "vis"
+            ]
+        },
+        "DependencyType": {
+            "type": "string",
+            "enum": [
+                "local",
+                "npm",
+                "npm-dev",
+                "npm-optional",
+                "npm-peer",
+                "npm-no-pkg",
+                "npm-unknown",
+                "core",
+                "unknown",
+                "undetermined"
             ]
         },
         "OptionsType": {

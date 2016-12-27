@@ -18,6 +18,9 @@ module):
                     "coreModule": true,
                     "followable": false,
                     "couldNotResolve": false,
+                    "dependencyTypes": [
+                        "core"
+                    ],
                     "module": "child_process",
                     "moduleSystem": "cjs",
                     "valid": true
@@ -27,6 +30,9 @@ module):
                     "coreModule": true,
                     "followable": false,
                     "couldNotResolve": false,
+                    "dependencyTypes": [
+                        "core"
+                    ],
                     "module": "events",
                     "moduleSystem": "cjs",
                     "valid": true
@@ -36,6 +42,9 @@ module):
                     "coreModule": true,
                     "followable": false,
                     "couldNotResolve": false,
+                    "dependencyTypes": [
+                        "core"
+                    ],
                     "module": "fs",
                     "moduleSystem": "cjs",
                     "valid": true
@@ -45,6 +54,9 @@ module):
                     "coreModule": false,
                     "followable": true,
                     "couldNotResolve": false,
+                    "dependencyTypes": [
+                        "npm"
+                    ],
                     "module": "graceful-readlink",
                     "moduleSystem": "cjs",
                     "valid": true
@@ -54,6 +66,9 @@ module):
                     "coreModule": true,
                     "followable": false,
                     "couldNotResolve": false,
+                    "dependencyTypes": [
+                        "core"
+                    ],
                     "module": "path",
                     "moduleSystem": "cjs",
                     "valid": true
@@ -65,6 +80,9 @@ module):
             "followable": false,
             "coreModule": true,
             "couldNotResolve": false,
+            "dependencyTypes": [
+                "npm"
+            ],
             "dependencies": []
         },
         {
@@ -72,6 +90,9 @@ module):
             "followable": false,
             "coreModule": true,
             "couldNotResolve": false,
+            "dependencyTypes": [
+                "core"
+            ],
             "dependencies": []
         },
         {
@@ -79,6 +100,9 @@ module):
             "followable": false,
             "coreModule": true,
             "couldNotResolve": false,
+            "dependencyTypes": [
+                "core"
+            ],
             "dependencies": []
         },
         {
@@ -86,6 +110,9 @@ module):
             "followable": false,
             "coreModule": true,
             "couldNotResolve": false,
+            "dependencyTypes": [
+                "core"
+            ],
             "dependencies": []
         },
         {
@@ -96,6 +123,9 @@ module):
                     "coreModule": true,
                     "followable": false,
                     "couldNotResolve": false,
+                    "dependencyTypes": [
+                        "core"
+                    ],
                     "module": "fs",
                     "moduleSystem": "cjs",
                     "valid": true
@@ -108,7 +138,7 @@ module):
         "error": 0,
         "warn": 0,
         "info": 0,
-        "totalCruised": 6, 
+        "totalCruised": 6,
         "usedOptions": {
             "outputType": "json"
         }

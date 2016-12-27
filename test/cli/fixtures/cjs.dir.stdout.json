@@ -59,6 +59,9 @@
             "followable": false,
             "coreModule": true,
             "couldNotResolve": false,
+            "dependencyTypes": [
+                "core"
+            ],
             "dependencies": []
         },
         {
@@ -160,6 +163,9 @@
             "followable": false,
             "coreModule": true,
             "couldNotResolve": false,
+            "dependencyTypes": [
+                "core"
+            ],
             "dependencies": []
         },
         {
@@ -283,6 +289,9 @@
             "followable": false,
             "coreModule": false,
             "couldNotResolve": false,
+            "dependencyTypes": [
+                "local"
+            ],
             "dependencies": []
         },
         {
@@ -290,6 +299,9 @@
             "followable": false,
             "coreModule": true,
             "couldNotResolve": false,
+            "dependencyTypes": [
+                "core"
+            ],
             "dependencies": []
         },
         {
