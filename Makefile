@@ -83,7 +83,7 @@ profile:
 	@echo "    node --prof-process isolate-xxxx-v8.log | more"
 
 test: dev-build
-	$(NPM) run test
+	$(NPM) test
 
 nsp:
 	$(NPM) run nsp
