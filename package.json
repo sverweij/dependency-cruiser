@@ -26,7 +26,8 @@
     "ES2015",
     "AMD",
     "CommonJS",
-    "validation"
+    "validation",
+    "static analysis"
   ],
   "author": "Sander Verweij",
   "license": "MIT",
