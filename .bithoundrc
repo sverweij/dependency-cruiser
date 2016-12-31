@@ -4,5 +4,11 @@
   ],
   "test": [
     "test/**"
+  ],
+  "dependencies": [
+    "unused-ignores": [
+        "typescript",
+        "coffee-script"
+    ]
   ]
 }
