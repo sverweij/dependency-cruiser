@@ -21,6 +21,8 @@ Running with no parameters gets you help:
                               (default:json)
     -P --prefix <prefix>      prefix to prepend links with (e.g. in the
                               svg output type)
+    --init-rules              create a .dependency-cruiser.json with basic
+                              validations in the current folder.
 
 ```
 
@@ -120,9 +122,6 @@ default) and 'info') with them that will appear in some reporters:
 ```
 
 ### `--prefix` prefixing links
-With this you can  pass a 'prefix' so you can have links to other places than
-the one you used to cruise the dependencies).
-
 If you want the links in the svg output to have a prefix (say,
 `https://github.com/you/yourrepo/tree/master/`) so when you click them you'll
 open the link on github instead of the local file - pass that after the
@@ -137,13 +136,14 @@ depcruise --prefix https://github.com/sverweij/dependency-cruiser/tree/develop/ 
 Which alt-js languages dependency-cruiser supports depends on the availability
 it has to them. To see how dependency-cruiser perceives its environment use
 `depcruise --info` (any arguments are ignored). A typical output will look
-like this
+like this:
+
 ```
 Supported:
 
-  If you need a currently-not-enabled transpiler (those with a '✖'), just
-  install it. E.g. 'npm install --save-dev livescript' will enable livescript
-  support.
+  If you need a supported, but not enabled transpiler ('✖' below) just install
+  it in the same folder dependency-cruiser is installed. E.g. 'npm i livescript'
+  will enable livescript support if it's installed in your project folder.
 
 Transpilers:
 

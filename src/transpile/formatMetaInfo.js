@@ -28,9 +28,9 @@ function formatExtensions(pExtensions) {
 module.exports = () => `
   Supported:
 
-    If you need a currently-not-enabled transpiler (those with a '${chalk.red(figures.cross)}'), just
-    install it. E.g. 'npm install --save-dev livescript' will enable livescript
-    support.
+    If you need a supported, but not enabled transpiler ('${chalk.red(figures.cross)}' below), just install
+    it in the same folder dependency-cruiser is installed. E.g. 'npm i livescript'
+    will enable livescript support if it's installed in your project folder.
 
   Transpilers:
 
