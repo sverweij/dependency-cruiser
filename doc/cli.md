@@ -128,7 +128,7 @@ current folder and exits. use with `--validate`
 These are the rules in that .dependency-cruiser.json:
 
 Rule | Description
---|--
+---|---
 `not-to-test` | Don't allow dependencies from outside the test folder to test
 `not-to-spec` | Don't allow dependencies to (typescript/ javascript/ coffeescript) spec files
 `no-deprecated-core` | Warn about dependencies on deprecated core modules.
