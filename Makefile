@@ -244,6 +244,7 @@ test/cli/cli.spec.js: \
 	test/utl/testutensils.js
 
 src/cli/processCLI.js: \
+	src/cli/initRules.js \
 	src/cli/normalizeOptions.js \
 	src/cli/validateParameters.js \
 	src/main/index.js \
@@ -341,8 +342,15 @@ src/validate/readRuleSet.js: \
 src/validate/validateRuleSet.js: \
 	src/validate/jsonschema.json
 
+src/cli/initRules.js: \
+	src/validate/rules.starter.json
+
 src/cli/validateParameters.js: \
 	src/utl/index.js
+
+test/cli/initRules.spec.js: \
+	src/cli/initRules.js \
+	src/validate/jsonschema.json
 
 test/cli/normalizeOptions.spec.js: \
 	src/cli/normalizeOptions.js
@@ -411,3 +419,4 @@ test/validate/readRuleSet.spec.js: \
 test/validate/validate.spec.js: \
 	src/validate/index.js \
 	src/validate/readRuleSet.js
+
