@@ -14,7 +14,7 @@
             "name": "no-dep-on-test",
             "severity": "error",
             "from": { "path": "^(src|bin)" },
-            "to": { "path": "^test|\\.spec\\.(js|ts|coffee|litcoffee|coffee\\.md)$"}
+            "to": { "path": "^test|\\.spec\\.(js|ts|ls|coffee|litcoffee|coffee\\.md)$"}
         }, {
             "name": "no-external-to-here",
             "comment": "you never know...",
