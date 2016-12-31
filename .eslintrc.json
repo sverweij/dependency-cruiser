@@ -46,7 +46,7 @@
         "accessor-pairs":"error",
         "array-callback-return": "error",
         "block-scoped-var": "error",
-        "complexity": ["warn", 5],
+        "complexity": ["warn", 10],
         "consistent-return": "error",
         "curly": "error",
         "default-case": "error",

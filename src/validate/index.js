@@ -21,7 +21,6 @@ function intersects(pToDependencyTypes, pRuleDependencyTypes) {
     );
 }
 
-/* eslint complexity: 0 */
 function matchRule(pFrom, pTo) {
     return pRule =>
         (!Boolean(pRule.from.path)    ||   pFrom.match(pRule.from.path)) &&

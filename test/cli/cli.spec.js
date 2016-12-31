@@ -261,7 +261,7 @@ describe("#processCLI", () => {
 
             return expect(
                 lCapturedStderr
-            ).to.equal(
+            ).to.contain(
                 "ERROR: Can't open 'this-doesnot-exist' for reading. Does it exist?\n"
             );
         });
@@ -291,7 +291,7 @@ describe("#processCLI", () => {
 
             return expect(
                 lCapturedStderr
-            ).to.equal(
+            ).to.contain(
                 "ERROR: Invalid module system list: 'invalidmodulesystem'\n"
             );
         });
@@ -321,7 +321,7 @@ describe("#processCLI", () => {
 
             return expect(
                 lCapturedStderr
-            ).to.equal(
+            ).to.contain(
                 "ERROR: 'invalidoutputtype' is not a valid output type.\n"
             );
         });
@@ -350,7 +350,7 @@ describe("#processCLI", () => {
 
             return expect(
                 lCapturedStderr
-            ).to.equal(
+            ).to.contain(
                 "ERROR: Writing to 'test/cli/output/file/you/cant/write/to' didn't work. Error: ENOENT: no such file or directory, open 'test/cli/output/file/you/cant/write/to'"
             );
         });
@@ -377,7 +377,7 @@ describe("#processCLI", () => {
 
             return expect(
                 lCapturedStderr
-            ).to.equal(
+            ).to.contain(
                 "ERROR: The exclude pattern '([A-Za-z]+)*' will probably run very slowly - cowardly refusing to run.\n"
             );
         });

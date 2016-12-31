@@ -121,6 +121,25 @@ default) and 'info') with them that will appear in some reporters:
 }
 ```
 
+### `--init-rules`
+This creates a `.dependency-cruiser.json` with some useful rules in it to the
+current folder and exits. use with `--validate`
+
+These are the rules in that .dependency-cruiser.json:
+
+Rule | Description
+--|--
+`not-to-test` | Don't allow dependencies from outside the test folder to test
+`not-to-spec` | Don't allow dependencies to (typescript/ javascript/ coffeescript) spec files
+`no-deprecated-core` | Warn about dependencies on deprecated core modules.
+`not-to-unresolvable` | Don't allow dependencies on modules dependency-cruiser can't resolve to files on disk (which probably means they don't exist)
+`not-to-dev-dep` | Don't allow dependencies from src/app/lib to a development only package
+`no-non-package-json` | Don't allow dependencies to packages not in package.json (except from within node_modules)
+`optional-deps-used` | Inform about the use of dependencies labeled as 'optional' (so you can ensure their imports a are sufficiently managed)
+`peer-deps-used` | Warn about the use of a peer dependency (peer dependencies are deprecated with the advent of npm 3 - and probably gone with version 4).
+`no-duplicate-dep-types` | Warn if a dependency occurs in your package.json more than once (technically: has more than one dependency type)
+
+
 ### `--prefix` prefixing links
 If you want the links in the svg output to have a prefix (say,
 `https://github.com/you/yourrepo/tree/master/`) so when you click them you'll

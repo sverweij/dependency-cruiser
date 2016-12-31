@@ -25,12 +25,14 @@ program
     .option("-x, --exclude <regex>", "a regular expression for excluding modules")
     .option("-M, --system <items>", `list of module systems (default: amd,cjs,es6)`)
     .option("-T, --output-type <type>", `output type - html|dot|err|json
-                          (default:json)`)
-    .option("-P --prefix <prefix>")
+                          (default: json)`)
+    .option("-P, --prefix <prefix>", "prefix to use for links in the svg reporter")
+    .option("--init-rules", `write a .dependency-cruiser.json with basic
+                          validations to the current folder.`)
     .arguments("<files-or-directories>")
     .parse(process.argv);
 
-if (Boolean(program.args[0]) || program.info) {
+if (Boolean(program.args[0]) || program.info || program.initRules) {
     processCLI(
         program.args,
         program

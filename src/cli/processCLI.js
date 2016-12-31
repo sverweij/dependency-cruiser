@@ -3,6 +3,7 @@
 const fs                 = require("fs");
 const validateParameters = require("./validateParameters");
 const normalizeOptions   = require("./normalizeOptions");
+const initRules          = require("./initRules");
 const main               = require("../main");
 const readRuleSet        = require('../validate/readRuleSet');
 const formatMetaInfo     = require('../transpile/formatMetaInfo');
@@ -28,10 +29,13 @@ function write(pOutputTo, pContent) {
 }
 
 module.exports = (pFileDirArray, pOptions) => {
-    if (pOptions && pOptions.info === true) {
-        process.stdout.write(formatMetaInfo());
-    } else {
-        try {
+    try {
+        if (pOptions && pOptions.info === true) {
+            process.stdout.write(formatMetaInfo());
+        } else if (pOptions && pOptions.initRules === true){
+            initRules();
+            process.stdout.write(`\n  Successfully created '.dependency-cruiser.json'\n\n`);
+        } else {
             validateParameters(pFileDirArray, pOptions);
             pOptions = normalizeOptions(pOptions);
 
@@ -49,10 +53,9 @@ module.exports = (pFileDirArray, pOptions) => {
             if (lDependencyList.summary.error > 0) {
                 process.exit(lDependencyList.summary.error);
             }
-
-        } catch (e) {
-            process.stderr.write(`ERROR: ${e.message}`);
         }
+    } catch (e) {
+        process.stderr.write(`\n  ERROR: ${e.message}\n`);
     }
 };
 
