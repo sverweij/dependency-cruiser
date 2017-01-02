@@ -2,7 +2,7 @@
     "forbidden": [{
             "name": "not-between",
             "severity": "error",
-            "from": { "path": "^src/.+" },
-            "to": { "path": "^src/.+", "ownFolder": false }
+            "from": { "path": "^src/[^/]+/.+" },
+            "to": { "path": "^src/[^/]+/.+", "ownFolder": false }
         }]
 }

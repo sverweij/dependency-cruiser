@@ -9,8 +9,10 @@ function propertyEquals(pTo, pRule, pProperty) {
 }
 
 function matchesOwnFolder(pFrom, pTo, pOwnFolder) {
-    return pOwnFolder ? path.dirname(pFrom) === path.dirname(pTo.resolved)
-                      : path.dirname(pFrom) !== path.dirname(pTo.resolved);
+    return pOwnFolder ? path.dirname(pFrom).startsWith(path.dirname(pTo.resolved)) ||
+                        path.dirname(pTo.resolved).startsWith(path.dirname(pFrom))
+                      : !(path.dirname(pFrom).startsWith(path.dirname(pTo.resolved)) ||
+                          path.dirname(pTo.resolved).startsWith(path.dirname(pFrom)));
 }
 
 function intersects(pToDependencyTypes, pRuleDependencyTypes) {
