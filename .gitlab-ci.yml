@@ -37,9 +37,9 @@ test_async_node_4:
   except:
    - tags
 
-publish:
-  image: node:latest
-  script:
-    - echo 'npm publish'
-  only:
-    - tags
+# publish:
+#  image: node:latest
+#  script:
+#    - echo 'npm publish'
+#  only:
+#    - tags
