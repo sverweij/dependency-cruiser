@@ -23,17 +23,60 @@ function intersects(pToDependencyTypes, pRuleDependencyTypes) {
     );
 }
 
+
+/* if there is at least one group expression in the given pRulePath
+   return the first matched one.
+   return null in all other cases
+
+   This fills our current need. Later we can expand it to return all group
+   matches.
+*/
+
+function extractGroup(pRule, pActualPath) {
+    let lRetval = null;
+
+    if (Boolean(pRule.path)) {
+        let lMatchResult = pActualPath.match(pRule.path);
+
+        if (Boolean(lMatchResult) && lMatchResult.length > 1) {
+            lRetval = lMatchResult[1];
+        }
+    }
+    return lRetval;
+}
+
 function matchRule(pFrom, pTo) {
-    return pRule =>
-        (!Boolean(pRule.from.path)    ||   pFrom.match(pRule.from.path)) &&
-        (!Boolean(pRule.from.pathNot) || !(pFrom.match(pRule.from.pathNot))) &&
-        (!Boolean(pRule.to.path)      ||   pTo.resolved.match(pRule.to.path)) &&
-        (!Boolean(pRule.to.pathNot)   || !(pTo.resolved.match(pRule.to.pathNot))) &&
-        (!pRule.to.hasOwnProperty("ownFolder") || matchesOwnFolder(pFrom, pTo, pRule.to.ownFolder)) &&
-        (!pRule.to.hasOwnProperty("dependencyTypes") || intersects(pTo.dependencyTypes, pRule.to.dependencyTypes)) &&
-        (!pRule.to.hasOwnProperty("moreThanOneDependencyType") || pTo.dependencyTypes.length > 1) &&
-        propertyEquals(pTo, pRule, "coreModule") &&
-        propertyEquals(pTo, pRule, "couldNotResolve");
+    return pRule => {
+        const lGroup = extractGroup(pRule.from, pFrom);
+
+        /*
+         * the replace("$1", lGroup) things below are a bit simplistic (they
+         * also match \$, which they probably shouldn't) - but good enough for
+         * now.
+         */
+        return (!Boolean(pRule.from.path) ||
+                pFrom.match(pRule.from.path)
+            ) && (!Boolean(pRule.from.pathNot) ||
+                !(pFrom.match(pRule.from.pathNot))
+            ) && (!Boolean(pRule.to.path) ||
+                (Boolean(lGroup)
+                    ? pTo.resolved.match(pRule.to.path.replace("$1", lGroup))
+                    : pTo.resolved.match(pRule.to.path))
+            ) && (!Boolean(pRule.to.pathNot) ||
+                !(
+                    (Boolean(lGroup)
+                        ? pTo.resolved.match(pRule.to.pathNot.replace("$1", lGroup))
+                        : pTo.resolved.match(pRule.to.pathNot))
+                )
+            ) && (!pRule.to.hasOwnProperty("ownFolder") ||
+                matchesOwnFolder(pFrom, pTo, pRule.to.ownFolder)
+            ) && (!pRule.to.hasOwnProperty("dependencyTypes") ||
+                intersects(pTo.dependencyTypes, pRule.to.dependencyTypes)
+            ) && (!pRule.to.hasOwnProperty("moreThanOneDependencyType") ||
+                pTo.dependencyTypes.length > 1
+            ) && propertyEquals(pTo, pRule, "coreModule") &&
+            propertyEquals(pTo, pRule, "couldNotResolve");
+    };
 }
 
 function validateAgainstRules(pRuleSet, pFrom, pTo) {

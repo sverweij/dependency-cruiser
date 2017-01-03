@@ -166,9 +166,17 @@ rules.
 A regular expression an end of a dependency should match to be catched by this
 rule.
 
+When path is in a `to` part of a rule it accepts the regular expression
+'group matching' special variable `$1` as well. See 'group matching' below
+for an explanation & example.
+
 #### pathNot
 A regular expression an end of a dependency should NOT match to be catched by
 this rule.
+
+When pathNot is in a `to` part of a rule it accepts the regular expression
+'group matching' special variable `$1` as well. See 'group matching' below
+for an explanation & example.
 
 #### coreModule
 > The coreModule attribute is **deprecated**. Use `dependencyTypes`
@@ -183,8 +191,28 @@ probably aren't on disk). For this one too: leave out if you don't care either
 way.
 
 #### ownFolder
-Whether or not to match modules in the same folder as matched with 'from'. This
-can be useful in e.g. the following situation:
+> The ownFolder attribute is **deprecated**. Use the much more group flexible
+> (and straightforward) regular expression grouping feature in stead - see
+> 'group matching' below for an explanation.
+
+
+Whether or not to match modules in the same folder as matched with 'from'.
+
+
+#### 'group matching'
+Sometimes you'll want to use a part of the path the 'from' part of your rule
+matched and use it in the 'to' part. E.g. when you want to prevent stuff in
+the same folder to be matched.
+
+To achieve this you'll need to do two things:
+- In the `to` of your rule:    
+  Make sure the part of the `path` you want to be matched is between brackets.
+  Like so: `"^src/([^/]+)/.+"`
+- In the `from` part of your rule:    
+  You can reference the part matched between brackets by using `$1` in `path`
+  and `pathNot` rules. Like so: "pathNot": "^src/$1/.+".
+
+#### 'group matching' - an example: matching peer folders
 
 Say you have the following folder structure
 ```
@@ -206,9 +234,9 @@ you'd specify a rule like this to prevent accidents:
         "name": "no-inter-ubc",
         "comment": "Don't allow relations between code in business components",
         "severity": "error",
-        "from": {"path": "^src/business-components/.+"},
+        "from": {"path": "^src/business-components/([^/]+)/.+"},
         "to": {
-            "path": "^src/business-components/.+"
+            "path": "^src/business-components/([^/]+)/.+"
         }
     }]
 }
@@ -222,8 +250,8 @@ list e.g.
     from: upsell, to: search|check-out|view-trip|check-in,    
     ...
 
-But that'll grow old quadratically fast. Especially when your business
-components grow like a flock of rabbits. In stead, you can use
+But that'll grow old fast. Quadratically, to be precise. Especially when your
+business components breeds like a flock of rabbits. In stead, you can use
 
 ```json
 {
@@ -231,15 +259,14 @@ components grow like a flock of rabbits. In stead, you can use
         "name": "no-inter-ubc",
         "comment": "Don't allow relations between code in business components",
         "severity": "error",
-        "from": {"path": "^src/business-components/.+"},
+        "from": {"path": "^src/business-components/([^/]+)/.+"},
         "to": {
-            "path": "^src/business-components/.+",
-            "ownFolder": false
+            "path": "^src/business-components/([^/]+)/.+",
+            "pathNot": "^src/business-components/$1/.+"
         }
     }]
 }
 ```
-
 ... which makes sure depdendency-cruiser does not match stuff in the from folder
 currently being matched.
 
