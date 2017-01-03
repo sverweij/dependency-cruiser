@@ -23,7 +23,9 @@ function checkRuleSafety(pRule) {
     if (
         !(
             (!hasPath(pRule, ["from", "path"]) || safeRegex(pRule.from.path)) &&
-            (!hasPath(pRule, ["to", "path"]) || safeRegex(pRule.to.path))
+            (!hasPath(pRule, ["to", "path"]) || safeRegex(pRule.to.path)) &&
+            (!hasPath(pRule, ["from", "pathNot"]) || safeRegex(pRule.from.pathNot)) &&
+            (!hasPath(pRule, ["to", "pathNot"]) || safeRegex(pRule.to.pathNot))
         )
     ){
         throw new Error(

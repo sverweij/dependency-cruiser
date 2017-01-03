@@ -4,7 +4,7 @@ const readRuleSet = require('../../src/validate/readRuleSet');
 const fs          = require('fs');
 
 describe("ruleSetReader", () => {
-    it("bails out on scary regexps", () => {
+    it("bails out on scary regexps in paths", () => {
         try {
             readRuleSet(
                 fs.readFileSync("./test/validate/fixtures/rules.scary-regex.json", 'utf8')
@@ -13,6 +13,19 @@ describe("ruleSetReader", () => {
         } catch (e) {
             expect(e.message).to.contain(
                 'rule {"from":{"path":".+"},"to":{"path":"(.+)*"}} has an unsafe regular expression. Bailing out.\n'
+            );
+        }
+    });
+
+    it("bails out on scary regexps in pathNots", () => {
+        try {
+            readRuleSet(
+                fs.readFileSync("./test/validate/fixtures/rules.scary-regex-in-pathnot.json", 'utf8')
+            );
+            expect("not to be here").to.equal("still here, though");
+        } catch (e) {
+            expect(e.message).to.contain(
+                'rule {"from":{"path":".+"},"to":{"pathNot":"(.+)*"}} has an unsafe regular expression. Bailing out.\n'
             );
         }
     });
