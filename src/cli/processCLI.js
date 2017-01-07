@@ -8,6 +8,10 @@ const main               = require("../main");
 const readRuleSet        = require('../validate/readRuleSet');
 const formatMetaInfo     = require('../transpile/formatMetaInfo');
 
+
+/* OS pipe buffer size in bytes - which is what ulimit -a tells me on OSX */
+const PIPE_BUFFER_SIZE   = 512;
+
 function writeToFile(pOutputTo, pDependencyString) {
     try {
         fs.writeFileSync(
@@ -20,9 +24,32 @@ function writeToFile(pOutputTo, pDependencyString) {
     }
 }
 
+/**
+ * Writes the string pString to stdout in chunks of pBufferSize size.
+ *
+ * When writing to a pipe, it's possible that pipe's buffer is full.
+ * To prevent this problem from happening we should take the value at which
+ * the OS guarantees atomic writes to pipes - which on my OSX machine is
+ * 512 bytes. That seems pretty low (I've seen reports of 4k on the internet)
+ * so it looks like a safe limit.
+ *
+ * @param  {string} pString The string to write
+ * @param  {number} pBufferSize The size of the buffer to use.
+ * @returns {void} nothing
+ */
+function writeToStdOut(pString, pBufferSize) {
+    const lNumberOfChunks = Math.ceil(pString.length / pBufferSize);
+    let i = 0;
+
+    for (i = 0; i < lNumberOfChunks; i++) {
+        process.stdout.write(pString.substr(i * pBufferSize, pBufferSize));
+    }
+
+}
+
 function write(pOutputTo, pContent) {
     if ("-" === pOutputTo) {
-        process.stdout.write(pContent);
+        writeToStdOut(pContent, PIPE_BUFFER_SIZE);
     } else {
         writeToFile(pOutputTo, pContent);
     }
@@ -59,4 +86,4 @@ module.exports = (pFileDirArray, pOptions) => {
     }
 };
 
-/* eslint no-process-exit: 0 */
+/* eslint no-process-exit: 0 no-plusplus: 0*/
