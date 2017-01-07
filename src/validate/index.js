@@ -32,22 +32,29 @@ function intersects(pToDependencyTypes, pRuleDependencyTypes) {
    matches.
 */
 
-function extractGroup(pRule, pActualPath) {
-    let lRetval = null;
+function extractGroups(pRule, pActualPath) {
+    let lRetval = [];
 
     if (Boolean(pRule.path)) {
         let lMatchResult = pActualPath.match(pRule.path);
 
         if (Boolean(lMatchResult) && lMatchResult.length > 1) {
-            lRetval = lMatchResult[1];
+            lRetval = lMatchResult;
         }
     }
     return lRetval;
 }
 
+function replaceGroupPlaceholders(pString, pExtractedGroups) {
+    return pExtractedGroups.reduce(
+        (pAll, pThis, pIndex) => pAll.replace(`$${pIndex}`, pThis),
+        pString
+    );
+}
+
 function matchRule(pFrom, pTo) {
     return pRule => {
-        const lGroup = extractGroup(pRule.from, pFrom);
+        const lGroups = extractGroups(pRule.from, pFrom);
 
         /*
          * the replace("$1", lGroup) things below are a bit simplistic (they
@@ -59,13 +66,13 @@ function matchRule(pFrom, pTo) {
             ) && (!Boolean(pRule.from.pathNot) ||
                 !(pFrom.match(pRule.from.pathNot))
             ) && (!Boolean(pRule.to.path) ||
-                (Boolean(lGroup)
-                    ? pTo.resolved.match(pRule.to.path.replace("$1", lGroup))
+                (lGroups.length > 0
+                    ? pTo.resolved.match(replaceGroupPlaceholders(pRule.to.path, lGroups))
                     : pTo.resolved.match(pRule.to.path))
             ) && (!Boolean(pRule.to.pathNot) ||
                 !(
-                    (Boolean(lGroup)
-                        ? pTo.resolved.match(pRule.to.pathNot.replace("$1", lGroup))
+                    (lGroups.length > 0
+                        ? pTo.resolved.match(replaceGroupPlaceholders(pRule.to.pathNot, lGroups))
                         : pTo.resolved.match(pRule.to.pathNot))
                 )
             ) && (!pRule.to.hasOwnProperty("ownFolder") ||

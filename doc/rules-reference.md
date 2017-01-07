@@ -1,150 +1,28 @@
-# Writing dependency-cruiser rules
+# Dependency cruiser rules - reference
 
-## Basics
-### A simple rule - take 1
+## Introduction
 
-Let's say you want to prevent the use of the node core 'http' library for one
-reason or other.
-
-```json
-{
-    "forbidden": [{
-        "from": {},
-        "to": { "path": "http" }
-    }]
-}
-```
-
-This rule says it is `forbidden` to have a relation `from` anything `to` things
-with a `path` that contains the string `http`.
-
-You run a depcruise with these rules and lo and behold it comes up with
-something:
-
-*warn* unnamed: **src/secure/index.ts** → **node_modules/@supsec/http/index.js**    
-*warn* unnamed: **src/secure/knappekop.ts** → **node_modules/@supsec/http/index.js**    
-*warn* unnamed: **node_modules/yudelyo/index.js** → **http**    
-*warn* unnamed: **src/secure/index.ts** → **http**    
-*warn* unnamed: **src/secure/index.ts** → **https**    
-
-There's a few things you notice:
-- dependency-cruiser generates _warnings_. This is the default, but maybe you
-  want to stop the build. You'd need _errors_.
-- The rule has no name. For this one rule - no probs. If there's more rules it
-  might be handy for your future self (and your co-workers) to reference the
-  rule.
-- The rule matches a little too much for your taste.
-
-Let's see how we can fix that - name and severity first.
-
-### A simple rule - take 2 - adding name and severity
-
-```json
-{
-    "forbidden": [{
-        "name": "not-to-core-http",
-        "comment": "Don't rely on node's http module because of internal guideline BOYLE-839 - use https and the internal @supsec variant in stead",
-        "severity": "error",
-        "from": {},
-        "to": { "path": "http" }
-    }]
-}
-```
-
-*error* not-to-core-http: **src/secure/index.ts** → **node_modules/@supsec/http/index.js**    
-*error* not-to-core-http: **src/secure/knappekop.ts** → **node_modules/@supsec/http/index.js**    
-*error* not-to-core-http: **node_modules/yudelyo/index.js** → **http**    
-*error* not-to-core-http: **src/secure/index.ts** → **http**    
-*error* not-to-core-http: **src/secure/index.ts** → **https**    
-
-That's a lot easier to understand - *and* it will stop the build from happening.
-
-### A simple rule - take 3 - tightening the rule down
-
-The rule as it is matches not only the core module, but also `@supsec/http`
-*which is module you should actually use* according to BOYLE-839.
-Dependency-cruiser has a special attribute for core modules with the predictable
-name `coreModule`. If we'd add that to the `to` rule
-(`"to": { "coreModule": true, "path": "http" }`) we'd be partly covered:
-
-*error* not-to-core-http: **node_modules/yudelyo/index.js** → **http**    
-*error* not-to-core-http: **src/secure/index.ts** → **http**    
-*error* not-to-core-http: **src/secure/index.ts** → **https**   
-
-... it still matches the `https` package. Luckily the `path` is a regular
-expresion, so you bang in a start (`^`) and an end symbol (`$`) and you're good
-to go:
-
-```json
-{
-    "forbidden": [{
-        "name": "not-to-core-http",
-        "comment": "Don't rely on node's http module because of internal guideline BOYLE-839 - use https and the internal @supsec variant in stead",
-        "severity": "error",
-        "from": {},
-        "to": { "coreModule": true, "path": "^http$" }
-    }]
-}
-```
-
-The result:
-
-*error* not-to-core-http: **node_modules/yudelyo/index.js** → **http**    
-*error* not-to-core-http: **src/secure/index.ts** → **http**    
-
-Now you can go about fixing so `src/secure/index.ts` relies on the internal
-`@supsec/http` module, so you're all BOYLE-839 compliant.
-
-### But that pesky node_module relies on a forbidden dependency as well? Watnu?
-Yep. Don't you just *love* those 1500 npm packages you drag in and rely on for
-your website to run :grimace: .
-
-Luckily you know `kpttraag`, the author of `yudelyo` - you submit a PR and wait.
-In the mean time you don't want to have the  build break until `kpttraag` has
-found the time to merge your PR.
-
-You realize there might be more npm packages using http too, so ...
-- You change the `not-to-core-http` to only generate errors for paths *outside*
-  node_modules.
-- You add a new rule for node_modules, that just generate a warning. You'll
-  still see it in the build logs, but you can go on developing for the time
-  being.
-
-```json
-{
-    "forbidden": [{
-        "name": "not-to-core-http",
-        "comment": "Don't rely on node's http module because of internal guideline BOYLE-839 - use https and the internal @supsec variant in stead",
-        "severity": "error",
-        "from": {"pathNot": "^node_modules"},
-        "to": { "coreModule": true, "path": "^http$" }
-    },{
-        "name": "node_mods-not-to-http",
-        "comment": "Some node_modules use http - warn about these so we can replace them/ make PR's so we're BOYLE compliant",
-        "severity": "warn",
-        "from": { "path": "^node_modules"},
-        "to": { "coreModule": true, "path": "^http$" }
-    }]
-}
-```
-
-*warn* node_mods-not-to-http: **node_modules/yudelyo/index.js** → **http**    
-*error* not-to-core-http: **src/secure/index.ts** → **http**    
-
-## {} over { "path": ".+" }
-Functionally, `"from": {}` and `"from": { "path": ".+" }` are the same. The way
-depencency-cruiser is wired today, however, makes the former faster than the
-latter. So - unless you have CPU cycles to spare - use the former one
-(`"from": {}`).
-
-## Reference
-
+- This is a small reference guide to the elements you can use to write rules
+  for dependency-cruiser. If you want a step-by-step introduction check the
+  [rules _tutorial_](./rules-tutorial.md).
 - Be advised there is a [json schema](../src/validate/jsonschema.json)  
   that describes the output format for your convenience. Dependency-cruiser
-  checks rule sets against that schema
+  checks rule sets against that schema.
 - Some examples:
-  - a [starter rule set](./rules.starter.json)
+  - a [starter rule set](../src/validate/rules.starter.json) - duplicated for
+    perusal on the bottom of this file.
   - dependency-cruiser's [own rule set](../.dependency-cruiser-custom.json)
+
+## The structure of a dependency cruiser rules file
+The rules file is in json format. It can contain two sections - `forbidden` and
+`allowed`:
+
+```json
+{
+    "forbidden": [],
+    "allowed": []
+}
+```
 
 ### Forbidden
 A list of rules that describe dependencies that are not allowed.
@@ -156,47 +34,47 @@ A list of rules that describe dependencies that are allowed. dependency-cruiser
 will emit the warning message 'not-in-allowed' for each dependency that does not
 at least one of them.
 
-### Specifying and excluding paths
-I chose _regular expressions_ for matching paths over the more traditional
-_glob_ because they're more expressive - which makes it easier to specify
-rules.
+## The structure of an individual rule
 
-### Attributes
-#### path
+An individual rule consists of a 'from' and a 'to' attribute. Each of these
+can contain multiple attributes - which are described in the next section.
+```json
+{
+    "from": {},
+    "to": {}
+}
+```
+
+## Attributes
+### path
 A regular expression an end of a dependency should match to be catched by this
 rule.
 
 When path is in a `to` part of a rule it accepts the regular expression
-'group matching' special variable `$1` as well. See 'group matching' below
-for an explanation & example.
+'group matching' special variables `$0`, `$1`, `$2`, ...  as well. See
+'group matching' below for an explanation & example.
 
-#### pathNot
+### pathNot
 A regular expression an end of a dependency should NOT match to be catched by
 this rule.
 
 When pathNot is in a `to` part of a rule it accepts the regular expression
-'group matching' special variable `$1` as well. See 'group matching' below
-for an explanation & example.
-
-#### coreModule
-> The coreModule attribute is **deprecated**. Use `dependencyTypes`
-> in stead (like so: `"dependencyTypes" = ["core"]`)
-
-Whether or not to match node.js core modules. Leave out if you don't care either
-way.
-
-#### couldNotResolve
-Whether or not to match modules dependency-cruiser could not resolve (and
-probably aren't on disk). For this one too: leave out if you don't care either
-way.
-
-#### ownFolder
-> The ownFolder attribute is **deprecated**. Use the much more group flexible
-> (and straightforward) regular expression grouping feature in stead - see
-> 'group matching' below for an explanation.
+'group matching' special variables `$0`, `$1`, `$2`, ...  just like the path
+attribute. See 'group matching' below for an explanation & example.
 
 
-Whether or not to match modules in the same folder as matched with 'from'.
+### path specials
+
+#### regular expressions - not globs
+I chose _regular expressions_ for matching paths over the more traditional
+_glob_ because they're more expressive - which makes it easier to specify
+rules. Some common patterns
+
+glob | regular expression | this expresses:
+ --- | --- | ---
+`*.js`     | `[^/]+\.js$` | files in the current folder with the extension _.js_
+`src/**/*` | `^src` | all files in the _src_ folder
+_not possible_ | `^src/([^/]+)/.+` | everything in the src tree - remember the matched folder name directly under src for later reference.
 
 
 #### 'group matching'
@@ -211,6 +89,13 @@ To achieve this you'll need to do two things:
 - In the `from` part of your rule:    
   You can reference the part matched between brackets by using `$1` in `path`
   and `pathNot` rules. Like so: `"pathNot": "^src/$1/.+".`
+- It is possible to use more than one group per rule as well. E.g. this
+  expression `"^src/([^/]+)/[^\.]\.(.+)$"` has two groups; one
+  for the folder directly under src, and one for the extension. The first is
+  available in the `to` part of your rule with `$1`, the second with `$2`.
+- The special variable `$0` contains the _whole_ matched string. I haven't
+  seen a practical use for it in the context of depedendency-cruiser, but I'll
+  glad to be surprised.
 
 #### 'group matching' - an example: matching peer folders
 
@@ -270,7 +155,27 @@ business components breeds like a flock of rabbits. In stead, you can use
 ... which makes sure depdendency-cruiser does not match stuff in the from folder
 currently being matched.
 
-### dependencyTypes
+### coreModule
+> The coreModule attribute is **deprecated**. Use `dependencyTypes`
+> in stead (like so: `"dependencyTypes" = ["core"]`)
+
+Whether or not to match node.js core modules. Leave out if you don't care either
+way.
+
+### couldNotResolve
+Whether or not to match modules dependency-cruiser could not resolve (and
+probably aren't on disk). For this one too: leave out if you don't care either
+way.
+
+### ownFolder
+> The ownFolder attribute is **deprecated**. Use the much more group flexible
+> (and straightforward) regular expression grouping feature in stead - see
+> 'group matching' below for an explanation.
+
+
+Whether or not to match modules in the same folder as matched with 'from'.
+
+## dependencyTypes
 You might have spent some time wondering why something works on your machine,
 but not on other's. Only to discover you _did_ install a dependency, but
 _did not_ save it to package.json. Or you already had it in your devDependencies
@@ -309,7 +214,7 @@ Or to detect stuff you npm i'd without putting it in your package.json:
 If you don't specify dependencyTypes in a rule, dependency-cruiser will ignore
 them in the evaluation of that rule.
 
-#### Ok - _unknown_, _npm-unknown_, _undetermined_ - I'm officially weirded out - what's that about?
+### Ok - _unknown_, _npm-unknown_, _undetermined_ - I'm officially weirded out - what's that about?
 
 This is a list of dependency types dependency-cruiser currently detects.
 
@@ -355,7 +260,7 @@ When left out it doesn't matter how many dependency types a dependency has.
 false).
 
 
-## A starter rule set
+# A starter rule set
 ```json
 {
     "forbidden": [{

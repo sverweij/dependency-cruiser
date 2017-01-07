@@ -473,3 +473,69 @@ describe("group matching - path group matched in a pathnot", () => {
         ).to.deep.equal({valid: true});
     });
 });
+
+describe("group matching - path group matched in a pathnot", () => {
+
+    it("group-two-to-pathnot - Disallows dependencies between peer folders", () => {
+        expect(
+            validate(
+                true,
+                _readRuleSet("./test/validate/fixtures/rules.group-two-to-pathnot.json"),
+                "src/aap/chimpansee.ts",
+                {"resolved": "src/noot/pinda.ts"}
+            )
+        ).to.deep.equal(
+            {
+                "valid": false,
+                "rule": {
+                    "name": "group-two-to-pathnot",
+                    "severity": "warn"
+                }
+            }
+        );
+    });
+
+    it("group-two-to-pathnot - Allows dependencies within to peer folder 'shared'", () => {
+        expect(
+            validate(
+                true,
+                _readRuleSet("./test/validate/fixtures/rules.group-two-to-pathnot.json"),
+                "src/aap/chimpansee.ts",
+                {"resolved": "src/shared/bananas.ts"}
+            )
+        ).to.deep.equal({valid: true});
+    });
+
+    it("group-two-to-pathnot - Allows dependencies within own folder", () => {
+        expect(
+            validate(
+                true,
+                _readRuleSet("./test/validate/fixtures/rules.group-two-to-pathnot.json"),
+                "src/aap/chimpansee.ts",
+                {"resolved": "src/aap/oerangoetang.ts"}
+            )
+        ).to.deep.equal({valid: true});
+    });
+
+    it("group-two-to-pathnot - Allows dependencies to sub folders of own folder", () => {
+        expect(
+            validate(
+                true,
+                _readRuleSet("./test/validate/fixtures/rules.group-two-to-pathnot.json"),
+                "src/aap/chimpansee.ts",
+                {"resolved": "src/aap/speeltuigen/autoband.ts"}
+            )
+        ).to.deep.equal({valid: true});
+    });
+
+    it("group-two-to-pathnot - Allows peer dependencies between sub folders of own folder", () => {
+        expect(
+            validate(
+                true,
+                _readRuleSet("./test/validate/fixtures/rules.group-two-to-pathnot.json"),
+                "src/aap/rekwisieten/touw.ts",
+                {"resolved": "src/aap/speeltuigen/autoband.ts"}
+            )
+        ).to.deep.equal({valid: true});
+    });
+});

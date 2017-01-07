@@ -26,16 +26,7 @@ src/report/%.template.js: src/report/%.template.hbs
 
 .npmignore: .gitignore
 	cp $< $@
-	echo "doc/api.md" >> $@
-	echo "doc/cli.md" >> $@
-	echo "doc/output-format.md" >> $@
-	echo "doc/real-world-samples.md" >> $@
-	echo "doc/real-world-samples/**" >> $@
-	echo "doc/assets/ZKH-Dependency-recolored-320.png" >> $@
-	echo "doc/assets/ZKH-Dependency-recolored-320.svg" >> $@
-	echo "doc/rules.md" >> $@
-	echo "doc/rules.starter.json.md" >> $@
-	echo "doc/sample-output.md" >> $@
+	echo "doc/**" >> $@
 	echo "test/**" >> $@
 	echo "utl/**" >> $@
 	echo ".bithoundrc" >> $@
@@ -419,4 +410,3 @@ test/validate/readRuleSet.spec.js: \
 test/validate/validate.spec.js: \
 	src/validate/index.js \
 	src/validate/readRuleSet.js
-

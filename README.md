@@ -5,7 +5,7 @@ _Validate and visualize dependencies. With your rules._ JavaScript. TypeScript. 
 
 ## What's this do?
 - Run through the dependencies in any JavaScript, TypeScript or CoffeeScript project and ...
-  - ... **validate** them against (your own) [rules](./doc/rules.md)
+  - ... **validate** them against (your own) [rules](./doc/rules-reference.md)
   - ... **report** violated rules
     - in text (for your builds)
     - in graphics (for your eyeballs)
@@ -59,8 +59,8 @@ and put this in there:
 ```
 
 - To read more about writing rules check the
-  [writing rules](./doc/rules.md)
-  section.
+  [writing rules](./doc/rules-tutorial.md) tutorial
+  or the [rules reference](./doc/rules-reference.md)
 - There is practical rules configuration to get you started
   [here](./doc/rules.starter.json)
 
@@ -92,7 +92,8 @@ depcruise --validate my-rules.json --output-type err src
 You've come to the right place :-) :
 
 - [Command line reference](./doc/cli.md)
-- [Writing rules](./doc/rules.md)
+- [Writing rules](./doc/rules-tutorial.md)
+- [Rules reference](./doc/rules-reference.md)
 - [Real world show cases](./doc/real-world-samples.md)
 - [Output format](./doc/output-format.md)
 - [API](./doc/api.md)
