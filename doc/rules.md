@@ -210,7 +210,7 @@ To achieve this you'll need to do two things:
   Like so: `"^src/([^/]+)/.+"`
 - In the `from` part of your rule:    
   You can reference the part matched between brackets by using `$1` in `path`
-  and `pathNot` rules. Like so: "pathNot": "^src/$1/.+".
+  and `pathNot` rules. Like so: `"pathNot": "^src/$1/.+".`
 
 #### 'group matching' - an example: matching peer folders
 
