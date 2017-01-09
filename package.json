@@ -68,7 +68,6 @@
   "engines": {
     "node": ">=4"
   },
-  "preferGlobal": true,
   "supportedTranspilers": {
     "coffee-script": ">=1.0.0 <2.0.0",
     "livescript": ">=1.0.0 <2.0.0",
