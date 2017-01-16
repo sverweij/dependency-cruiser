@@ -5,8 +5,8 @@ const render           = require('../../src/report/dotReporter');
 const deps             = require('./fixtures/cjs-no-dependency-valid.json');
 const unresolvableDeps = require('./fixtures/es6-unresolvable-deps.json');
 
-const elFixture           = fs.readFileSync('test/report/fixtures/clusterless.dot', 'utf-8');
-const unresolvableFixture = fs.readFileSync('test/report/fixtures/unresolvable.dot', 'utf-8');
+const elFixture           = fs.readFileSync('test/report/fixtures/clusterless.dot', 'utf8');
+const unresolvableFixture = fs.readFileSync('test/report/fixtures/unresolvable.dot', 'utf8');
 
 describe("dot reporter", () => {
     it("renders a dot - modules in the root don't come in a cluster", () => {
