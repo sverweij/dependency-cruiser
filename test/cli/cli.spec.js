@@ -1,14 +1,15 @@
 "use strict";
-const expect     = require('chai').expect;
-const processCLI = require("../../src/cli/processCLI");
-const fs         = require("fs");
-const tst        = require("../utl/testutensils");
-const path       = require("path");
-const _          = require("lodash");
-const intercept  = require("intercept-stdout");
+const expect       = require('chai').expect;
+const processCLI   = require("../../src/cli/processCLI");
+const fs           = require("fs");
+const tst          = require("../utl/testutensils");
+const deleteDammit = require("./deleteDammit.utl");
+const path         = require("path");
+const _            = require("lodash");
+const intercept    = require("intercept-stdout");
 
-const OUT_DIR    = "./test/cli/output";
-const FIX_DIR    = "./test/cli/fixtures";
+const OUT_DIR      = "./test/cli/output";
+const FIX_DIR      = "./test/cli/fixtures";
 
 /* eslint max-len:0*/
 const testPairs = [
@@ -97,14 +98,6 @@ const testPairs = [
         cleanup: true
     }
 ];
-
-function deleteDammit(pFileName) {
-    try {
-        fs.unlinkSync(pFileName);
-    } catch (e) {
-        // process.stderr.write(e.message || e);
-    }
-}
 
 function resetOutputDir() {
     testPairs

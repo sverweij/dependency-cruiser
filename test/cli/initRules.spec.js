@@ -1,21 +1,14 @@
 "use strict";
-const chai        = require('chai');
-const expect      = chai.expect;
-const fs          = require('fs');
-const initRules   = require("../../src/cli/initRules");
-const rulesSchema = require('../../src/validate/jsonschema.json');
+const chai         = require('chai');
+const expect       = chai.expect;
+const fs           = require('fs');
+const deleteDammit = require("./deleteDammit.utl");
+const initRules    = require("../../src/cli/initRules");
+const rulesSchema  = require('../../src/validate/jsonschema.json');
 
 const RULES_FILE = ".dependency-cruiser.json";
 
 chai.use(require('chai-json-schema'));
-
-function deleteDammit(pFileName) {
-    try {
-        fs.unlinkSync(pFileName);
-    } catch (e) {
-        // process.stderr.write(e.message || e);
-    }
-}
 
 describe("normalizeOptions", () => {
 
