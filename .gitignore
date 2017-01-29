@@ -1,21 +1,26 @@
+# tmp files
 .DS_Store
 *.swp
 *.swo
-.project
-.settings/*
-/node_modules/
-platoreports
-jsdoc
-coverage
-src/favicon.ico
-src/*favicon-*.png
 src/*tmp*.*
 *tmp*.*
 *tmp*/**
-tracking.*
-siteverification.id
-tmp_*.md
-npm-debug.log
+
+# ide garbage
+.vscode
+.project
+.settings/*
+
+# metrics results
+.nyc
+platoreports
+jsdoc
+coverage
+
+# node and npm
+/node_modules/
 isolate-*-v8.log
-build
+npm-debug.log
+
+# other stuff
 .dependency-cruiser.json
