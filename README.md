@@ -1,12 +1,11 @@
 # Dependency cruiser ![Dependency cruiser](https://raw.githubusercontent.com/sverweij/dependency-cruiser/master/doc/assets/ZKH-Dependency-recolored-160.png)
 _Validate and visualize dependencies. With your rules._ JavaScript. TypeScript. CoffeeScript. ES6, CommonJS, AMD.
-
 ![Snazzy dot output to whet your appetite](https://raw.githubusercontent.com/sverweij/dependency-cruiser/master/doc/assets/sample-dot-output.png)
 
 ## What's this do?
-- Run through the dependencies in any JavaScript, TypeScript or CoffeeScript project and ...
-  - ... **validate** them against (your own) [rules](./doc/rules-reference.md)
-  - ... **report** violated rules
+This runs through the dependencies in any JavaScript, TypeScript or CoffeeScript project and ...
+  - ... **validates** them against (your own) [rules](./doc/rules-reference.md)
+  - ... **reports** violated rules
     - in text (for your builds)
     - in graphics (for your eyeballs)
 
@@ -16,13 +15,10 @@ you can stick on the wall to impress your grandma.
 ## How do I use it?
 
 ### Install it
-Dependency cruiser works most comfortably when you install it globally.
+- `npm install --save-dev dependency-cruiser` to use it as a validator in your project or...
+- `npm install --global depdendency-cruiser` if you just want to to inspect multiple projects.
 
-```
-npm install --global dependency-cruiser
-```
-
-### Show stuff
+### Show stuff to your grandma
 To create a graph of the dependencies in your src folder, you'd run dependency
 cruiser with output type `dot` and run _GraphViz dot_ on the result. In
 a one liner:
@@ -92,6 +88,8 @@ depcruise --validate my-rules.json --output-type err src
 You've come to the right place :-) :
 
 - [Command line reference](./doc/cli.md)
+- [TypeScript, CoffeeScript and LiveScript support](./doc/faq.md)
+- [Support for other alt-js languages](./doc/faq.md)
 - [Writing rules](./doc/rules-tutorial.md)
 - [Rules reference](./doc/rules-reference.md)
 - [Real world show cases](./doc/real-world-samples.md)
