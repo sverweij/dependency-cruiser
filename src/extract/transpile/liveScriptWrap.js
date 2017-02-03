@@ -3,7 +3,7 @@
 const tryRequire = require("./tryRequire");
 const livescript = tryRequire(
     "livescript",
-    require("../../package.json").supportedTranspilers.livescript
+    require("../../../package.json").supportedTranspilers.livescript
 );
 
 exports.isAvailable = () => livescript !== false;

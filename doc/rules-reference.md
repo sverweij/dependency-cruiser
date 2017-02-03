@@ -9,7 +9,7 @@
   that describes the output format for your convenience. Dependency-cruiser
   checks rule sets against that schema.
 - Some examples:
-  - a [starter rule set](../src/validate/rules.starter.json) - duplicated for
+  - a [starter rule set](../src/cli/rules.starter.json) - duplicated for
     perusal on the bottom of this file.
   - dependency-cruiser's [own rule set](../.dependency-cruiser-custom.json)
 

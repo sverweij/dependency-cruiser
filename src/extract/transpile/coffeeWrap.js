@@ -2,7 +2,7 @@
 const tryRequire   = require("./tryRequire");
 const coffeeScript = tryRequire(
     "coffee-script",
-    require("../../package.json").supportedTranspilers["coffee-script"]
+    require("../../../package.json").supportedTranspilers["coffee-script"]
 );
 
 module.exports = (pLiterate) => ({

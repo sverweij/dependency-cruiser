@@ -1,6 +1,6 @@
 "use strict";
 
-const supportedTranspilers = require("../../package.json").supportedTranspilers;
+const supportedTranspilers = require("../../../package.json").supportedTranspilers;
 const allExtensions        = require("./meta").allExtensions;
 const tryRequire           = require("./tryRequire");
 const chalk                = require('chalk');

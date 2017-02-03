@@ -1,7 +1,7 @@
 "use strict";
 
 const expect    = require("chai").expect;
-const transpile = require("../../src/transpile");
+const transpile = require("../../../src/extract/transpile");
 
 describe("transpiler", () => {
     it("As the 'livescript' transpiler is not available, returns the original source", () => {

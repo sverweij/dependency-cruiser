@@ -2,7 +2,7 @@
 
 const path                     = require('path');
 const resolve                  = require('resolve');
-const utl                      = require('../utl');
+const utl                      = require('../../utl');
 const determineDependencyTypes = require("./determineDependencyTypes");
 const readPackageDeps          = require('./readPackageDeps');
 

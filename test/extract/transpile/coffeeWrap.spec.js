@@ -2,8 +2,8 @@
 
 const expect  = require("chai").expect;
 const fs      = require('fs');
-const wrap    = require("../../src/transpile/coffeeWrap")();
-const litWrap = require("../../src/transpile/coffeeWrap")(true);
+const wrap    = require("../../../src/extract/transpile/coffeeWrap")();
+const litWrap = require("../../../src/extract/transpile/coffeeWrap")(true);
 
 describe("coffeescript transpiler", () => {
     it("tells the coffeescript transpiler is available", () => {
@@ -21,30 +21,30 @@ describe("coffeescript transpiler", () => {
     it("transpiles coffeescript", () => {
         expect(
             wrap.transpile(
-                fs.readFileSync("./test/transpile/fixtures/coffee.coffee", 'utf8')
+                fs.readFileSync("./test/extract/transpile/fixtures/coffee.coffee", 'utf8')
             )
         ).to.equal(
-            fs.readFileSync("./test/transpile/fixtures/coffee.js", 'utf8')
+            fs.readFileSync("./test/extract/transpile/fixtures/coffee.js", 'utf8')
         );
     });
 
     it("transpiles literate coffeescript", () => {
         expect(
             litWrap.transpile(
-                fs.readFileSync("./test/transpile/fixtures/litcoffee.litcoffee", 'utf8')
+                fs.readFileSync("./test/extract/transpile/fixtures/litcoffee.litcoffee", 'utf8')
             )
         ).to.equal(
-            fs.readFileSync("./test/transpile/fixtures/litcoffee.js", 'utf8')
+            fs.readFileSync("./test/extract/transpile/fixtures/litcoffee.js", 'utf8')
         );
     });
 
     it("transpiles literate coffeescript", () => {
         expect(
             litWrap.transpile(
-                fs.readFileSync("./test/transpile/fixtures/markdownlitcoffee.coffee.md", 'utf8')
+                fs.readFileSync("./test/extract/transpile/fixtures/markdownlitcoffee.coffee.md", 'utf8')
             )
         ).to.equal(
-            fs.readFileSync("./test/transpile/fixtures/markdownlitcoffee.js", 'utf8')
+            fs.readFileSync("./test/extract/transpile/fixtures/markdownlitcoffee.js", 'utf8')
         );
     });
 });

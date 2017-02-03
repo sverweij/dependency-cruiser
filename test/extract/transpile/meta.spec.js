@@ -1,9 +1,9 @@
 "use strict";
 
 const expect = require("chai").expect;
-const meta   = require("../../src/transpile/meta");
-const jsWrap = require("../../src/transpile/javaScriptWrap");
-const lsWrap = require("../../src/transpile/liveScriptWrap");
+const meta   = require("../../../src/extract/transpile/meta");
+const jsWrap = require("../../../src/extract/transpile/javaScriptWrap");
+const lsWrap = require("../../../src/extract/transpile/liveScriptWrap");
 
 describe("transpiler meta", () => {
     it("tells which extensions can be scanned", () => {

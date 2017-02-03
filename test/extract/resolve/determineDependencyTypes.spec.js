@@ -1,7 +1,7 @@
 "use strict";
 
 const expect    = require("chai").expect;
-const determine = require("../../src/resolve/determineDependencyTypes");
+const determine = require("../../../src/extract/resolve/determineDependencyTypes");
 
 describe("determine dependencyTypes", () => {
     it("sorts local dependencies into 'local'", () => {
