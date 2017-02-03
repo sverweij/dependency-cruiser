@@ -1,7 +1,7 @@
 "use strict";
 
 const fs                        = require('fs');
-const starterRules              = require('../validate/rules.starter.json');
+const starterRules              = require('./rules.starter.json');
 const DEPENDENCY_CRUISER_CONFIG = ".dependency-cruiser.json";
 
 /*

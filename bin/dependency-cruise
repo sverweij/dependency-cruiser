@@ -1,2 +1,43 @@
 #!/usr/bin/env node
-require("../src/cli");
+"use strict";
+
+const program    = require("commander");
+const processCLI = require("../src/cli/processCLI");
+const $package   = require("../package.json");
+const semver     = require("semver");
+
+/* istanbul ignore if  */
+if (!semver.satisfies(process.versions.node, $package.engines.node)) {
+    process.stderr.write(`\nERROR: your node version (${process.versions.node}) is not recent enough.\n`);
+    process.stderr.write(`       dependency-cruiser needs a version of node ${$package.engines.node}\n\n`);
+
+    /* eslint no-process-exit: 0 */
+    process.exit(-1);
+}
+
+program
+    .version($package.version)
+    .option("-i, --info", `shows what languages and extensions
+                          dependency-cruiser supports`)
+    .option("-v, --validate [file]", `validate with rules in [file]
+                          (default: .dependency-cruiser.json)`)
+    .option("-f, --output-to <file>", `file to write output to; - for stdout
+                          (default: -)`)
+    .option("-x, --exclude <regex>", "a regular expression for excluding modules")
+    .option("-M, --system <items>", `list of module systems (default: amd,cjs,es6)`)
+    .option("-T, --output-type <type>", `output type - html|dot|err|json
+                          (default: json)`)
+    .option("-P, --prefix <prefix>", "prefix to use for links in the svg reporter")
+    .option("--init-rules", `write a .dependency-cruiser.json with basic
+                          validations to the current folder.`)
+    .arguments("<files-or-directories>")
+    .parse(process.argv);
+
+if (Boolean(program.args[0]) || program.info || program.initRules) {
+    processCLI(
+        program.args,
+        program
+    );
+} else {
+    program.help();
+}

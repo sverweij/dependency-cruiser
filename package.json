@@ -9,12 +9,12 @@
   },
   "main": "src/main/index.js",
   "scripts": {
-    "cover": "istanbul cover node_modules/mocha/bin/_mocha -- test/*/*.spec.js",
+    "cover": "istanbul cover node_modules/mocha/bin/_mocha -- test/*/*.spec.js test/*/*/*.spec.js",
     "lint": "eslint src test",
     "nsp": "nsp check",
     "npm-check-updates": "ncu --upgrade",
-    "test": "mocha --bail -R dot test/*/*.spec.js",
-    "test-long": "mocha --bail test/*/*.spec.js",
+    "test": "mocha --bail -R dot test/*/*.spec.js test/*/*/*.spec.js",
+    "test-long": "mocha --bail test/*/*.spec.js test/*/*/*.spec.js",
     "watch": "mocha --watch --watch-extensions=json --reporter=min test/*/*.spec.js"
   },
   "keywords": [

@@ -2,9 +2,9 @@
 
 const expect = require("chai").expect;
 const path   = require("path");
-const read   = require("../../src/resolve/readPackageDeps");
+const read   = require("../../../src/extract/resolve/readPackageDeps");
 
-const FIXTUREDIR = "test/resolve/fixtures/";
+const FIXTUREDIR = "test/extract/resolve/fixtures/";
 
 describe("readPackageDeps", () => {
     it("returns 'null' if the base dir does not exist", () => {

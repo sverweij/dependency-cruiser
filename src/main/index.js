@@ -1,6 +1,7 @@
 "use strict";
 
 const extract      = require("../extract");
+const readRuleSet  = require("../validate/readRuleSet");
 const reportHtml   = require("../report/htmlReporter");
 const reportJson   = require("../report/jsonReporter");
 const reportDot    = require("../report/dotReporter");
@@ -28,7 +29,11 @@ const TYPE2REPORTER      = {
  *               Default false.
  *  ruleSet    : An object (or JSON string) containing the rules to validate
  *               against. The rules should adhere to the
- *               [ruleset schema](../src/validate/jsonschema.json)
+ *               [ruleset schema](../src/extract/validate/jsonschema.json)
+ *               The function with throw an Error when either
+ *               - the passed ruleSet violates that schema or
+ *               - it contains an 'unsafe' (= potentially super slow running)
+ *                 regular expression.
  *  exclude    : regular expression describing which dependencies the function
  *               should not cruise
  *  system     : an array of module systems to use for following dependencies;
@@ -60,6 +65,10 @@ const TYPE2REPORTER      = {
  */
 module.exports = (pFileDirArray, pOptions) => {
     pOptions = pOptions ? pOptions : {};
+
+    if (Boolean(pOptions.ruleSet)){
+        pOptions.ruleSet = readRuleSet(pOptions.ruleSet);
+    }
 
     return extract(
         pFileDirArray,

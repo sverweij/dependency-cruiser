@@ -5,8 +5,7 @@ const validateParameters = require("./validateParameters");
 const normalizeOptions   = require("./normalizeOptions");
 const initRules          = require("./initRules");
 const main               = require("../main");
-const readRuleSet        = require('../validate/readRuleSet');
-const formatMetaInfo     = require('../transpile/formatMetaInfo');
+const formatMetaInfo     = require('../extract/transpile/formatMetaInfo');
 
 
 /* OS pipe buffer size in bytes - which is what ulimit -a tells me on OSX */
@@ -67,9 +66,7 @@ module.exports = (pFileDirArray, pOptions) => {
             pOptions = normalizeOptions(pOptions);
 
             if (Boolean(pOptions.rulesFile)){
-                pOptions.ruleSet = readRuleSet(
-                    fs.readFileSync(pOptions.rulesFile, 'utf8')
-                );
+                pOptions.ruleSet = fs.readFileSync(pOptions.rulesFile, 'utf8');
             }
 
             const lDependencyList = main(pFileDirArray, pOptions);

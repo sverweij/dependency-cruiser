@@ -1,7 +1,7 @@
 const fs   = require('fs');
 const path = require('path');
 const utl  = require('../utl');
-const transpileMeta = require('../transpile/meta');
+const transpileMeta = require('./transpile/meta');
 
 const SUPPORTED_EXTENSIONS = transpileMeta.scannableExtensions;
 

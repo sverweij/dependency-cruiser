@@ -1,7 +1,7 @@
 "use strict";
 
 const expect     = require("chai").expect;
-const tryRequire = require("../../src/transpile/tryRequire");
+const tryRequire = require("../../../src/extract/transpile/tryRequire");
 const semver     = require('semver');
 
 describe("transpiler tryRequire", () => {
