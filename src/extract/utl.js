@@ -1,18 +1,5 @@
 "use strict";
 
-const fs = require("fs");
-const _  = require("lodash");
-
-exports.fileExists = _.memoize(pFile => {
-    try {
-        fs.accessSync(pFile, fs.R_OK);
-    } catch (e) {
-        return false;
-    }
-
-    return true;
-});
-
 /*
  * set detect-non-literal-regexp to ignore because we sanitized our input
  * (see main.js)

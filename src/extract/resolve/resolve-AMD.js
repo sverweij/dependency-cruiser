@@ -2,9 +2,20 @@
 
 const path                     = require('path');
 const resolve                  = require('resolve');
-const utl                      = require('../../utl');
-const determineDependencyTypes = require("./determineDependencyTypes");
+const fs                       = require('fs');
+const _                        = require('lodash');
+const determineDependencyTypes = require('./determineDependencyTypes');
 const readPackageDeps          = require('./readPackageDeps');
+
+const fileExists = _.memoize(pFile => {
+    try {
+        fs.accessSync(pFile, fs.R_OK);
+    } catch (e) {
+        return false;
+    }
+
+    return true;
+});
 
 module.exports = (pModuleName, pBaseDir, pFileDir) => {
     // lookups:
@@ -18,10 +29,10 @@ module.exports = (pModuleName, pBaseDir, pFileDir) => {
         path.join(pFileDir, `${pModuleName}.js`)
     );
     const lDependency = {
-        resolved: utl.fileExists(lProbablePath) ? lProbablePath : pModuleName,
+        resolved: fileExists(lProbablePath) ? lProbablePath : pModuleName,
         coreModule: Boolean(resolve.isCore(pModuleName)),
-        followable: utl.fileExists(lProbablePath),
-        couldNotResolve: !Boolean(resolve.isCore(pModuleName)) && !utl.fileExists(lProbablePath)
+        followable: fileExists(lProbablePath),
+        couldNotResolve: !Boolean(resolve.isCore(pModuleName)) && !fileExists(lProbablePath)
     };
 
     return Object.assign(
