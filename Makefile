@@ -135,9 +135,9 @@ src/extract/extract.js: \
 	src/extract/extract-AMD.js \
 	src/extract/extract-ES6.js \
 	src/extract/extract-commonJS.js \
+	src/extract/ignore.js \
 	src/extract/resolve/index.js \
 	src/extract/transpile/index.js \
-	src/extract/utl.js \
 	src/validate/index.js
 
 src/extract/extract-AMD.js: \
@@ -179,8 +179,8 @@ src/extract/transpile/index.js: \
 	src/extract/transpile/meta.js
 
 src/extract/gatherInitialSources.js: \
-	src/extract/transpile/meta.js \
-	src/extract/utl.js
+	src/extract/ignore.js \
+	src/extract/transpile/meta.js
 
 src/report/csvReporter.js: \
 	src/report/csv.template.js \
@@ -211,6 +211,7 @@ ALL_SRC=src/main/index.js \
 	src/extract/extract-commonJS.js \
 	src/extract/extract.js \
 	src/extract/gatherInitialSources.js \
+	src/extract/ignore.js \
 	src/extract/index.js \
 	src/extract/resolve/determineDependencyTypes.js \
 	src/extract/resolve/index.js \
@@ -225,7 +226,6 @@ ALL_SRC=src/main/index.js \
 	src/extract/transpile/meta.js \
 	src/extract/transpile/tryRequire.js \
 	src/extract/transpile/typeScriptWrap.js \
-	src/extract/utl.js \
 	src/report/csv.template.js \
 	src/report/csvReporter.js \
 	src/report/dependencyToIncidenceTransformer.js \
@@ -275,9 +275,9 @@ src/extract/extract.js: \
 	src/extract/extract-AMD.js \
 	src/extract/extract-ES6.js \
 	src/extract/extract-commonJS.js \
+	src/extract/ignore.js \
 	src/extract/resolve/index.js \
 	src/extract/transpile/index.js \
-	src/extract/utl.js \
 	src/validate/index.js
 
 src/extract/extract-AMD.js: \
@@ -319,8 +319,8 @@ src/extract/transpile/index.js: \
 	src/extract/transpile/meta.js
 
 src/extract/gatherInitialSources.js: \
-	src/extract/transpile/meta.js \
-	src/extract/utl.js
+	src/extract/ignore.js \
+	src/extract/transpile/meta.js
 
 src/report/csvReporter.js: \
 	src/report/csv.template.js \
