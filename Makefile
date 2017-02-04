@@ -351,9 +351,6 @@ src/cli/formatMetaInfo.js: \
 src/cli/initRules.js: \
 	src/cli/rules.starter.json
 
-src/cli/validateParameters.js: \
-	src/utl/index.js
-
 test/cli/formatMetaInfo.spec.js: \
 	src/cli/formatMetaInfo.js
 

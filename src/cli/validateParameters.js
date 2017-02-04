@@ -1,15 +1,16 @@
 "use strict";
 
 const _         = require("lodash");
+const fs        = require('fs');
 const safeRegex = require('safe-regex');
-
-const utl       = require("../utl");
 
 const MODULE_SYSTEM_LIST_RE  = /^((cjs|amd|es6)(,|$))+$/gi;
 const OUTPUT_TYPES_RE        = /^(html|dot|csv|err|json|vis)$/g;
 
 function validateFileExistence(pDirOrFile) {
-    if (!utl.fileExists(pDirOrFile)) {
+    try {
+        fs.accessSync(pDirOrFile, fs.R_OK);
+    } catch (e) {
         throw Error(`Can't open '${pDirOrFile}' for reading. Does it exist?\n`);
     }
 }
