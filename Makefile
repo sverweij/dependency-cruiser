@@ -137,7 +137,7 @@ src/extract/extract.js: \
 	src/extract/extract-commonJS.js \
 	src/extract/resolve/index.js \
 	src/extract/transpile/index.js \
-	src/utl/index.js \
+	src/extract/utl.js \
 	src/validate/index.js
 
 src/extract/extract-AMD.js: \
@@ -149,8 +149,7 @@ src/extract/resolve/index.js: \
 
 src/extract/resolve/resolve-AMD.js: \
 	src/extract/resolve/determineDependencyTypes.js \
-	src/extract/resolve/readPackageDeps.js \
-	src/utl/index.js
+	src/extract/resolve/readPackageDeps.js
 
 src/extract/resolve/resolve-commonJS.js: \
 	src/extract/resolve/determineDependencyTypes.js \
@@ -181,7 +180,7 @@ src/extract/transpile/index.js: \
 
 src/extract/gatherInitialSources.js: \
 	src/extract/transpile/meta.js \
-	src/utl/index.js
+	src/extract/utl.js
 
 src/report/csvReporter.js: \
 	src/report/csv.template.js \
@@ -226,6 +225,7 @@ ALL_SRC=src/main/index.js \
 	src/extract/transpile/meta.js \
 	src/extract/transpile/tryRequire.js \
 	src/extract/transpile/typeScriptWrap.js \
+	src/extract/utl.js \
 	src/report/csv.template.js \
 	src/report/csvReporter.js \
 	src/report/dependencyToIncidenceTransformer.js \
@@ -237,7 +237,6 @@ ALL_SRC=src/main/index.js \
 	src/report/jsonReporter.js \
 	src/report/vis.template.js \
 	src/report/visReporter.js \
-	src/utl/index.js \
 	src/validate/index.js \
 	src/validate/jsonschema.json \
 	src/validate/normalizeRuleSet.js \
@@ -278,7 +277,7 @@ src/extract/extract.js: \
 	src/extract/extract-commonJS.js \
 	src/extract/resolve/index.js \
 	src/extract/transpile/index.js \
-	src/utl/index.js \
+	src/extract/utl.js \
 	src/validate/index.js
 
 src/extract/extract-AMD.js: \
@@ -290,8 +289,7 @@ src/extract/resolve/index.js: \
 
 src/extract/resolve/resolve-AMD.js: \
 	src/extract/resolve/determineDependencyTypes.js \
-	src/extract/resolve/readPackageDeps.js \
-	src/utl/index.js
+	src/extract/resolve/readPackageDeps.js
 
 src/extract/resolve/resolve-commonJS.js: \
 	src/extract/resolve/determineDependencyTypes.js \
@@ -322,7 +320,7 @@ src/extract/transpile/index.js: \
 
 src/extract/gatherInitialSources.js: \
 	src/extract/transpile/meta.js \
-	src/utl/index.js
+	src/extract/utl.js
 
 src/report/csvReporter.js: \
 	src/report/csv.template.js \

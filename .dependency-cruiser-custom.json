@@ -1,5 +1,17 @@
 {
     "forbidden": [{
+            "name": "cli-to-main-only",
+            "comment": "These core modules are deprecated - find an alternative.",
+            "severity": "error",
+            "from": { "path": "(^src/cli)" },
+            "to": { "pathNot": "^src/main|^node_modules|^fs$|$1" }
+        }, {
+            "name": "bin-to-cli-only",
+            "comment": "These core modules are deprecated - find an alternative.",
+            "severity": "error",
+            "from": { "path": "(^bin/dependency-cruise)" },
+            "to": { "pathNot": "^src/cli|^node_modules|^package.json$" }
+        },{
             "name": "no-deprecated-core",
             "comment": "These core modules are deprecated - find an alternative.",
             "severity": "error",
