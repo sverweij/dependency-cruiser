@@ -5,7 +5,7 @@ const DEFAULT_SEVERITY = 'warn';
 const DEFAULT_RULE     = 'unnamed';
 
 function normalizeSeverity (pSeverity){
-    let lSeverity = pSeverity ? pSeverity : DEFAULT_SEVERITY;
+    const lSeverity = pSeverity ? pSeverity : DEFAULT_SEVERITY;
 
     return Boolean(lSeverity.match(VALID_SEVERITIES)) ? lSeverity : DEFAULT_SEVERITY;
 }
