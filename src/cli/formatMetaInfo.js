@@ -1,19 +1,17 @@
 "use strict";
 
-const supportedTranspilers = require("../../../package.json").supportedTranspilers;
-const allExtensions        = require("./meta").allExtensions;
-const tryRequire           = require("./tryRequire");
-const chalk                = require('chalk');
-const figures              = require('figures');
+const main     = require("../main");
+const chalk   = require('chalk');
+const figures = require('figures');
 
 function bool2Symbol(pBool) {
     return pBool ? chalk.green(figures.tick) : chalk.red(figures.cross);
 }
 
-function formatTranspilers(pTranspilers) {
-    return Object.keys(pTranspilers).reduce(
+function formatTranspilers() {
+    return main.getAvailableTranspilers().reduce(
         (pAll, pThis) =>
-            `${pAll}    ${bool2Symbol(tryRequire(pThis, pTranspilers[pThis]))} ${pThis} (${pTranspilers[pThis]})\n`,
+            `${pAll}    ${bool2Symbol(pThis.available)} ${pThis.name} (${pThis.version})\n`,
         `    ${bool2Symbol(true)} javascript (>es1)\n`
     );
 }
@@ -34,10 +32,10 @@ module.exports = () => `
 
   Transpilers:
 
-${formatTranspilers(supportedTranspilers)}
+${formatTranspilers()}
   Extensions:
 
-${formatExtensions(allExtensions)}
+${formatExtensions(main.allExtensions)}
 `;
 
 

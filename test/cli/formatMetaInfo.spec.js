@@ -1,7 +1,7 @@
 "use strict";
 
 const expect = require("chai").expect;
-const meta   = require("../../../src/extract/transpile/formatMetaInfo");
+const meta   = require("../../src/cli/formatMetaInfo");
 
 describe("transpiler formatted meta information", () => {
     it("tells which extensions can be scanned", () => {

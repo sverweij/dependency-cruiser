@@ -117,6 +117,7 @@ clean:
 # cjs dependencies
 src/main/index.js: \
 	src/extract/index.js \
+	src/extract/transpile/meta.js \
 	src/report/csvReporter.js \
 	src/report/dotReporter.js \
 	src/report/errReporter.js \
@@ -157,6 +158,7 @@ src/extract/resolve/resolve-commonJS.js: \
 	src/extract/transpile/meta.js
 
 src/extract/transpile/meta.js: \
+	package.json \
 	src/extract/transpile/coffeeWrap.js \
 	src/extract/transpile/javaScriptWrap.js \
 	src/extract/transpile/liveScriptWrap.js \
@@ -248,37 +250,15 @@ test/cli/cli.spec.js: \
 	test/utl/testutensils.js
 
 src/cli/processCLI.js: \
+	src/cli/formatMetaInfo.js \
 	src/cli/initRules.js \
 	src/cli/normalizeOptions.js \
 	src/cli/validateParameters.js \
-	src/extract/transpile/formatMetaInfo.js \
 	src/main/index.js
-
-src/extract/transpile/formatMetaInfo.js: \
-	package.json \
-	src/extract/transpile/meta.js \
-	src/extract/transpile/tryRequire.js
-
-src/extract/transpile/meta.js: \
-	src/extract/transpile/coffeeWrap.js \
-	src/extract/transpile/javaScriptWrap.js \
-	src/extract/transpile/liveScriptWrap.js \
-	src/extract/transpile/typeScriptWrap.js
-
-src/extract/transpile/coffeeWrap.js: \
-	package.json \
-	src/extract/transpile/tryRequire.js
-
-src/extract/transpile/liveScriptWrap.js: \
-	package.json \
-	src/extract/transpile/tryRequire.js
-
-src/extract/transpile/typeScriptWrap.js: \
-	package.json \
-	src/extract/transpile/tryRequire.js
 
 src/main/index.js: \
 	src/extract/index.js \
+	src/extract/transpile/meta.js \
 	src/report/csvReporter.js \
 	src/report/dotReporter.js \
 	src/report/errReporter.js \
@@ -318,6 +298,25 @@ src/extract/resolve/resolve-commonJS.js: \
 	src/extract/resolve/readPackageDeps.js \
 	src/extract/transpile/meta.js
 
+src/extract/transpile/meta.js: \
+	package.json \
+	src/extract/transpile/coffeeWrap.js \
+	src/extract/transpile/javaScriptWrap.js \
+	src/extract/transpile/liveScriptWrap.js \
+	src/extract/transpile/typeScriptWrap.js
+
+src/extract/transpile/coffeeWrap.js: \
+	package.json \
+	src/extract/transpile/tryRequire.js
+
+src/extract/transpile/liveScriptWrap.js: \
+	package.json \
+	src/extract/transpile/tryRequire.js
+
+src/extract/transpile/typeScriptWrap.js: \
+	package.json \
+	src/extract/transpile/tryRequire.js
+
 src/extract/transpile/index.js: \
 	src/extract/transpile/meta.js
 
@@ -346,11 +345,17 @@ src/validate/readRuleSet.js: \
 src/validate/validateRuleSet.js: \
 	src/validate/jsonschema.json
 
+src/cli/formatMetaInfo.js: \
+	src/main/index.js
+
 src/cli/initRules.js: \
 	src/cli/rules.starter.json
 
 src/cli/validateParameters.js: \
 	src/utl/index.js
+
+test/cli/formatMetaInfo.spec.js: \
+	src/cli/formatMetaInfo.js
 
 test/cli/initRules.spec.js: \
 	src/cli/initRules.js \
@@ -381,9 +386,6 @@ test/extract/resolve/readPackageDeps.spec.js: \
 
 test/extract/transpile/coffeeWrap.spec.js: \
 	src/extract/transpile/coffeeWrap.js
-
-test/extract/transpile/formatMetaInfo.spec.js: \
-	src/extract/transpile/formatMetaInfo.js
 
 test/extract/transpile/index.spec.js: \
 	src/extract/transpile/index.js

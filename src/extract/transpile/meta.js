@@ -1,10 +1,11 @@
 "use strict";
 
-const javaScriptWrap = require("./javaScriptWrap");
-const typeScriptWrap = require("./typeScriptWrap");
-const liveScriptWrap = require("./liveScriptWrap");
-const coffeeWrap     = require("./coffeeWrap")();
-const litCoffeeWrap  = require("./coffeeWrap")(true);
+const javaScriptWrap       = require("./javaScriptWrap");
+const typeScriptWrap       = require("./typeScriptWrap");
+const liveScriptWrap       = require("./liveScriptWrap");
+const coffeeWrap           = require("./coffeeWrap")();
+const litCoffeeWrap        = require("./coffeeWrap")(true);
+const supportedTranspilers = require("../../../package.json").supportedTranspilers;
 
 const extension2wrapper = {
     ".js"        : javaScriptWrap,
@@ -14,6 +15,13 @@ const extension2wrapper = {
     ".coffee"    : coffeeWrap,
     ".litcoffee" : litCoffeeWrap,
     ".coffee.md" : litCoffeeWrap
+};
+
+const transpiler2wrapper = {
+    "javascript"    : javaScriptWrap,
+    "coffee-script" : coffeeWrap,
+    "livescript"    : liveScriptWrap,
+    "typescript"    : typeScriptWrap
 };
 
 module.exports.getWrapper =
@@ -33,5 +41,14 @@ module.exports.scannableExtensions =
         .filter(
             pKey => extension2wrapper[pKey].isAvailable()
         );
+
+module.exports.getAvailableTranspilers =
+    () =>
+        Object.keys(supportedTranspilers).map(pTranspiler => ({
+            name: pTranspiler,
+            version: supportedTranspilers[pTranspiler],
+            available: transpiler2wrapper[pTranspiler].isAvailable()
+        })
+    );
 
 /* eslint security/detect-object-injection : 0*/

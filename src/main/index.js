@@ -1,6 +1,7 @@
 "use strict";
 
 const extract      = require("../extract");
+const meta         = require("../extract/transpile/meta");
 const readRuleSet  = require("../validate/readRuleSet");
 const reportHtml   = require("../report/htmlReporter");
 const reportJson   = require("../report/jsonReporter");
@@ -63,7 +64,7 @@ const TYPE2REPORTER      = {
  *                info  : the number of informational messages
  *              }
  */
-module.exports = (pFileDirArray, pOptions) => {
+exports.cruise = (pFileDirArray, pOptions) => {
     pOptions = pOptions ? pOptions : {};
 
     if (Boolean(pOptions.ruleSet)){
@@ -76,3 +77,8 @@ module.exports = (pFileDirArray, pOptions) => {
         TYPE2REPORTER[pOptions.outputType]
     );
 };
+
+
+exports.allExtensions = meta.allExtensions;
+
+exports.getAvailableTranspilers = meta.getAvailableTranspilers;
