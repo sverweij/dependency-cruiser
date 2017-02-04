@@ -6,5 +6,5 @@
  */
 
 /* eslint security/detect-non-literal-regexp: 0 */
-exports.ignore = (pString, pExcludeREString) =>
+module.exports = (pString, pExcludeREString) =>
     Boolean(pExcludeREString) ? !(RegExp(pExcludeREString, "g").test(pString)) : true;

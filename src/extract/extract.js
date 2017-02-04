@@ -8,7 +8,7 @@ const path                        = require('path');
 const resolve                     = require('./resolve');
 const validate                    = require('../validate');
 const transpile                   = require('./transpile');
-const utl                         = require('./utl');
+const ignore                      = require('./ignore');
 const extractES6Dependencies      = require('./extract-ES6');
 const extractCommonJSDependencies = require('./extract-commonJS');
 const extractAMDDependencies      = require('./extract-AMD');
@@ -61,7 +61,7 @@ const getAST = _.memoize(getASTBare);
  *                              "(node_modules)"). Default: none
  * @return {array}           an array of dependency objects (see above)
  */
-function extractDependencies(pFileName, pOptions) {
+module.exports = (pFileName, pOptions) => {
     try {
         const lAST = getAST(pFileName);
         let lDependencies = [];
@@ -112,11 +112,9 @@ function extractDependencies(pFileName, pOptions) {
                     );
                 }
             )
-            .filter(pDep => utl.ignore(pDep.resolved, pOptions.exclude))
+            .filter(pDep => ignore(pDep.resolved, pOptions.exclude))
             .value();
     } catch (e) {
         throw new Error(`Extracting dependencies ran afoul of...\n\n  ${e.message}\n... in ${pFileName}\n\n`);
     }
-}
-
-module.exports = extractDependencies;
+};
