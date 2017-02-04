@@ -10,7 +10,7 @@
   "main": "src/main/index.js",
   "scripts": {
     "cover": "istanbul cover node_modules/mocha/bin/_mocha -- test/*/*.spec.js test/*/*/*.spec.js",
-    "lint": "eslint src test",
+    "lint": "eslint bin src test",
     "nsp": "nsp check",
     "npm-check-updates": "ncu --upgrade",
     "test": "mocha --bail -R dot test/*/*.spec.js test/*/*/*.spec.js",
