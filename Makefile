@@ -99,7 +99,7 @@ depgraph:
 depcruise:
 	./bin/dependency-cruise -x fixtures -T err -v .dependency-cruiser-custom.json src bin/dependency-cruise test
 
-check: lint test dependency-cruise
+check: lint test depcruise
 	./bin/dependency-cruise --version # if that runs the cli script works
 
 fullcheck: check outdated nsp
