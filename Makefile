@@ -8,8 +8,7 @@ RM=rm -f
 MAKEDEPEND=node_modules/.bin/js-makedepend --exclude "node_modules|fixtures|extractor-fixtures" --system cjs
 GENERATED_SOURCES=src/report/csv.template.js \
 	src/report/dot.template.js \
-	src/report/html.template.js \
-	src/report/vis.template.js
+	src/report/html.template.js
 
 .PHONY: help dev-build install check fullcheck mostlyclean clean lint cover prerequisites static-analysis test update-dependencies run-update-dependencies depend
 
@@ -123,7 +122,6 @@ src/main/index.js: \
 	src/report/errReporter.js \
 	src/report/htmlReporter.js \
 	src/report/jsonReporter.js \
-	src/report/visReporter.js \
 	src/validate/readRuleSet.js
 
 src/extract/index.js: \
@@ -192,9 +190,6 @@ src/report/dotReporter.js: \
 src/report/htmlReporter.js: \
 	src/report/dependencyToIncidenceTransformer.js \
 	src/report/html.template.js
-
-src/report/visReporter.js: \
-	src/report/vis.template.js
 
 src/validate/readRuleSet.js: \
 	src/validate/normalizeRuleSet.js \
@@ -235,8 +230,6 @@ ALL_SRC=src/main/index.js \
 	src/report/html.template.js \
 	src/report/htmlReporter.js \
 	src/report/jsonReporter.js \
-	src/report/vis.template.js \
-	src/report/visReporter.js \
 	src/validate/index.js \
 	src/validate/jsonschema.json \
 	src/validate/normalizeRuleSet.js \
@@ -263,7 +256,6 @@ src/main/index.js: \
 	src/report/errReporter.js \
 	src/report/htmlReporter.js \
 	src/report/jsonReporter.js \
-	src/report/visReporter.js \
 	src/validate/readRuleSet.js
 
 src/extract/index.js: \
@@ -332,9 +324,6 @@ src/report/dotReporter.js: \
 src/report/htmlReporter.js: \
 	src/report/dependencyToIncidenceTransformer.js \
 	src/report/html.template.js
-
-src/report/visReporter.js: \
-	src/report/vis.template.js
 
 src/validate/readRuleSet.js: \
 	src/validate/normalizeRuleSet.js \
@@ -421,4 +410,3 @@ test/validate/readRuleSet.spec.js: \
 test/validate/validate.spec.js: \
 	src/validate/index.js \
 	src/validate/readRuleSet.js
-

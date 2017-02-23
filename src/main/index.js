@@ -8,15 +8,13 @@ const reportJson   = require("../report/jsonReporter");
 const reportDot    = require("../report/dotReporter");
 const reportCsv    = require("../report/csvReporter");
 const reportErr    = require("../report/errReporter");
-const reportVis    = require("../report/visReporter");
 
 const TYPE2REPORTER      = {
     "json" : reportJson,
     "html" : reportHtml,
     "dot"  : reportDot,
     "csv"  : reportCsv,
-    "err"  : reportErr,
-    "vis"  : reportVis
+    "err"  : reportErr
 };
 
 /**
@@ -39,7 +37,7 @@ const TYPE2REPORTER      = {
  *               should not cruise
  *  system     : an array of module systems to use for following dependencies;
  *               defaults to ["es6", "cjs", "amd"]
- *  outputType : one of "json", "html", "dot", "csv", "err" or "vis". When left
+ *  outputType : one of "json", "html", "dot", "csv" or "err". When left
  *               out the function will return a javascript object as dependencies
  * }
  *

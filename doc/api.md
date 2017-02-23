@@ -52,7 +52,7 @@ These are all the options:
               should not cruise
  system     : an array of module systems to use for following dependencies;
               defaults to ["es6", "cjs", "amd"]
- outputType : one of "json", "html", "dot", "csv", "err" or "vis". When left
+ outputType : one of "json", "html", "dot", "csv" or "err". When left
               out the function will return a javascript object as dependencies
  prefix     : a string to insert before links (in dot/ svg output) so with
               cruising local dependencies it is possible to point to sources

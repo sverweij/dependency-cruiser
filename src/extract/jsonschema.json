@@ -169,8 +169,7 @@
                 "html",
                 "dot",
                 "err",
-                "json",
-                "vis"
+                "json"
             ]
         },
         "DependencyType": {

@@ -5,7 +5,7 @@ const fs        = require('fs');
 const safeRegex = require('safe-regex');
 
 const MODULE_SYSTEM_LIST_RE  = /^((cjs|amd|es6)(,|$))+$/gi;
-const OUTPUT_TYPES_RE        = /^(html|dot|csv|err|json|vis)$/g;
+const OUTPUT_TYPES_RE        = /^(html|dot|csv|err|json)$/g;
 
 function validateFileExistence(pDirOrFile) {
     try {
