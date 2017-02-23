@@ -18,7 +18,7 @@ Running with no parameters gets you help:
     -x, --exclude <regex>     a regular expression for excluding modules
     -M, --system <items>      list of module systems (default: amd,cjs,es6)
     -T, --output-type <type>  output type - html|dot|err|json
-                              (default:json)
+                              (default:err)
     -P --prefix <prefix>      prefix to prepend links with (e.g. in the
                               svg output type)
     --init-rules              create a .dependency-cruiser.json with basic
@@ -32,7 +32,7 @@ Running with no parameters gets you help:
 For use in build scripts, in combination with `--validate` e.g.
 
 ```sh
-dependency-cruise -T err --validate my-depcruise-rules.json src
+dependency-cruise --validate my-depcruise-rules.json src
 ```
 
 This will:
@@ -89,7 +89,7 @@ Validates against a list of rules in a rules file. This defaults to a file
 called `.dependency-cruiser.json`, but you can specify your own rules file.
 
 ```shell
-dependency-cruise -T err -x node_modules --validate my.rules.json
+dependency-cruise -x node_modules --validate my.rules.json
 ```
 
 The file specifies a bunch of regular expressions pairs your dependencies
