@@ -5,7 +5,17 @@
             "severity": "error",
             "from": {},
             "to": {
-                "coreModule": false
+                "dependencyTypes": [
+                    "local",
+                    "npm",
+                    "npm-dev",
+                    "npm-optional",
+                    "npm-peer",
+                    "npm-no-pkg",
+                    "npm-unknown",
+                    "unknown",
+                    "undetermined"
+                ]
             }
         }
     ]

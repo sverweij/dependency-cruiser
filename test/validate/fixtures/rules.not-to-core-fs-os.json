@@ -5,7 +5,7 @@
             "severity": "error",
             "from": {},
             "to": {
-                "coreModule": true,
+                "dependencyTypes": ["core"],
                 "path": "(fs|os)"
             }
         }

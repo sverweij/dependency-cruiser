@@ -87,7 +87,7 @@ describe("validate - specific tests", () => {
                 true,
                 _readRuleSet("./test/validate/fixtures/rules.not-to-core.json"),
                 "koos koets",
-                {"resolved": "path", "coreModule": false}
+                {"resolved": "path", "dependencyTypes": ["npm"]}
             )
         ).to.deep.equal({valid: true});
     });
@@ -98,7 +98,7 @@ describe("validate - specific tests", () => {
                 true,
                 _readRuleSet("./test/validate/fixtures/rules.not-to-core.json"),
                 "koos koets",
-                {"resolved": "path", "coreModule": true}
+                {"resolved": "path", "dependencyTypes": ["core"]}
             )
         ).to.deep.equal({valid: false, rule: {severity: 'error', name: 'not-to-core'}});
     });
@@ -109,7 +109,7 @@ describe("validate - specific tests", () => {
                 true,
                 _readRuleSet("./test/validate/fixtures/rules.not-to-core-fs-os.json"),
                 "koos koets",
-                {"resolved": "path", "coreModule": true}
+                {"resolved": "path", "dependencyTypes": ["core"]}
             )
         ).to.deep.equal({valid: true});
     });
@@ -121,7 +121,7 @@ describe("validate - specific tests", () => {
                 true,
                 _readRuleSet("./test/validate/fixtures/rules.not-to-core-fs-os.json"),
                 "koos koets",
-                {"resolved": "os", "coreModule": true}
+                {"resolved": "os", "dependencyTypes": ["core"]}
             )
         ).to.deep.equal({valid: false, rule: {severity: 'error', name: 'not-to-core-fs-os'}});
     });
@@ -155,7 +155,7 @@ describe("validate - specific tests", () => {
                 true,
                 _readRuleSet("./test/validate/fixtures/rules.only-to-core.allowed.json"),
                 "koos koets",
-                {"resolved": "os", "coreModule": true}
+                {"resolved": "os", "dependencyTypes": ["core"]}
             )
         ).to.deep.equal({valid: true});
     });
@@ -166,7 +166,7 @@ describe("validate - specific tests", () => {
                 true,
                 _readRuleSet("./test/validate/fixtures/rules.only-to-core.allowed.json"),
                 "koos koets",
-                {"resolved": "ger hekking", "coreModule": false}
+                {"resolved": "ger hekking", "dependencyTypes": ["npm"]}
             )
         ).to.deep.equal({valid: false, rule: {severity: 'warn', name: 'not-in-allowed'}});
     });
@@ -177,7 +177,7 @@ describe("validate - specific tests", () => {
                 true,
                 _readRuleSet("./test/validate/fixtures/rules.only-to-core.forbidden.json"),
                 "koos koets",
-                {"resolved": "os", "coreModule": true}
+                {"resolved": "os", "dependencyTypes": ["core"]}
             )
         ).to.deep.equal({valid: true});
     });
@@ -188,7 +188,7 @@ describe("validate - specific tests", () => {
                 true,
                 _readRuleSet("./test/validate/fixtures/rules.only-to-core.forbidden.json"),
                 "koos koets",
-                {"resolved": "ger hekking", "coreModule": false}
+                {"resolved": "ger hekking", "dependencyTypes": ["local"]}
             )
         ).to.deep.equal({valid: false, rule: {severity: 'error', name: 'only-to-core'}});
     });

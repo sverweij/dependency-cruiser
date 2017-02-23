@@ -69,17 +69,8 @@ That's a lot easier to understand - *and* it will stop the build from happening.
 
 The rule as it is matches not only the core module, but also `@supsec/http`
 *which is module you should actually use* according to BOYLE-839.
-Dependency-cruiser has a special attribute for core modules with the predictable
-name `coreModule`. If we'd add that to the `to` rule
-(`"to": { "coreModule": true, "path": "http" }`) we'd be partly covered:
-
-*error* not-to-core-http: **node_modules/yudelyo/index.js** → **http**    
-*error* not-to-core-http: **src/secure/index.ts** → **http**    
-*error* not-to-core-http: **src/secure/index.ts** → **https**   
-
-... it still matches the `https` package. Luckily the `path` is a regular
-expresion, so you bang in a start (`^`) and an end symbol (`$`) and you're good
-to go:
+So we should make sure we only match the core module. We can do that by
+specifying we want to also match the  _dependencyType_ `core`:
 
 ```json
 {
@@ -88,7 +79,7 @@ to go:
         "comment": "Don't rely on node's http module because of internal guideline BOYLE-839 - use https and the internal @supsec variant in stead",
         "severity": "error",
         "from": {},
-        "to": { "coreModule": true, "path": "^http$" }
+        "to": { "dependencyTypes": ["core"], "path": "http" }
     }]
 }
 ```
@@ -123,13 +114,13 @@ You realize there might be more npm packages using http too, so ...
         "comment": "Don't rely on node's http module because of internal guideline BOYLE-839 - use https and the internal @supsec variant in stead",
         "severity": "error",
         "from": {"pathNot": "^node_modules"},
-        "to": { "coreModule": true, "path": "^http$" }
+        "to": { "dependencyTypes": ["core"], "path": "^http$" }
     },{
         "name": "node_mods-not-to-http",
         "comment": "Some node_modules use http - warn about these so we can replace them/ make PR's so we're BOYLE compliant",
         "severity": "warn",
         "from": { "path": "^node_modules"},
-        "to": { "coreModule": true, "path": "^http$" }
+        "to": { "dependencyTypes": ["core"], "path": "^http$" }
     }]
 }
 ```

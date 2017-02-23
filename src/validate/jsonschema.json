@@ -87,10 +87,6 @@
                     "type": "string",
                     "description": "A regular expression an end of a dependency should NOT match to be catched by this rule."
                 },
-                "coreModule": {
-                    "type": "boolean",
-                    "description": "Whether or not to match node.js core modules. Leave out if you don't care either way."
-                },
                 "couldNotResolve": {
                     "type": "boolean",
                     "description": "Whether or not to match modules dependency-cruiser could not resolve (and probably aren't on disk). For this one too: leave out if you don't care either way."

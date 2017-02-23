@@ -155,13 +155,6 @@ business components breeds like a flock of rabbits. In stead, you can use
 ... which makes sure depdendency-cruiser does not match stuff in the from folder
 currently being matched.
 
-### coreModule
-> The coreModule attribute is **deprecated**. Use `dependencyTypes`
-> in stead (like so: `"dependencyTypes" = ["core"]`)
-
-Whether or not to match node.js core modules. Leave out if you don't care either
-way.
-
 ### couldNotResolve
 Whether or not to match modules dependency-cruiser could not resolve (and
 probably aren't on disk). For this one too: leave out if you don't care either
