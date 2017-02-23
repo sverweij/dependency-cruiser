@@ -160,14 +160,6 @@ Whether or not to match modules dependency-cruiser could not resolve (and
 probably aren't on disk). For this one too: leave out if you don't care either
 way.
 
-### ownFolder
-> The ownFolder attribute is **deprecated**. Use the much more group flexible
-> (and straightforward) regular expression grouping feature in stead - see
-> 'group matching' below for an explanation.
-
-
-Whether or not to match modules in the same folder as matched with 'from'.
-
 ## dependencyTypes
 You might have spent some time wondering why something works on your machine,
 but not on other's. Only to discover you _did_ install a dependency, but
