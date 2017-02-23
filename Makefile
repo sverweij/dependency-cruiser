@@ -96,7 +96,7 @@ depgraph:
 	./bin/dependency-cruise -x "(^node_modules|^fs$$|^path$$)" -T dot -v .dependency-cruiser-custom.json src bin/dependency-cruise | dot -T svg > tmp_deps.svg
 
 depcruise:
-	./bin/dependency-cruise -x fixtures -T err -v .dependency-cruiser-custom.json src bin/dependency-cruise test
+	./bin/dependency-cruise -x fixtures -v .dependency-cruiser-custom.json src bin/dependency-cruise test
 
 check: lint test depcruise
 	./bin/dependency-cruise --version # if that runs the cli script works

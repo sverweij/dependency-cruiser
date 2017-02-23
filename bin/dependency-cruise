@@ -26,7 +26,7 @@ program
     .option("-x, --exclude <regex>", "a regular expression for excluding modules")
     .option("-M, --system <items>", `list of module systems (default: amd,cjs,es6)`)
     .option("-T, --output-type <type>", `output type - html|dot|err|json
-                          (default: json)`)
+                          (default: err)`)
     .option("-P, --prefix <prefix>", "prefix to use for links in the svg reporter")
     .option("--init-rules", `write a .dependency-cruiser.json with basic
                           validations to the current folder.`)

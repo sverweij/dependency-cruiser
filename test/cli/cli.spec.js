@@ -17,7 +17,8 @@ const testPairs = [
         description: "dependency-cruise -f test/output/{{moduleType}}.dir.json test/cli/fixtures/{{moduleType}}",
         dirOrFile: "test/cli/fixtures/{{moduleType}}",
         options: {
-            outputTo: path.join(OUT_DIR, "{{moduleType}}.dir.json")
+            outputTo: path.join(OUT_DIR, "{{moduleType}}.dir.json"),
+            outputType: "json"
         },
         expect: "{{moduleType}}.dir.json",
         cleanup: true
@@ -26,7 +27,8 @@ const testPairs = [
         description: "dependency-cruise -f test/output/{{moduleType}}.dir.json test/cli/fixtures/{{moduleType}}",
         dirOrFile: "test/cli/fixtures/{{moduleType}}",
         options: {
-            outputTo: path.join(OUT_DIR, "{{moduleType}}.dir.json")
+            outputTo: path.join(OUT_DIR, "{{moduleType}}.dir.json"),
+            outputType: "json"
         },
         expect: "{{moduleType}}.dir.json",
         cleanup: true
@@ -35,7 +37,8 @@ const testPairs = [
         description: "dependency-cruise -f test/output/{{moduleType}}.file.json test/cli/fixtures/{{moduleType}}/root_one.js",
         dirOrFile: "test/cli/fixtures/{{moduleType}}/root_one.js",
         options: {
-            outputTo: path.join(OUT_DIR, "{{moduleType}}.file.json")
+            outputTo: path.join(OUT_DIR, "{{moduleType}}.file.json"),
+            outputType: "json"
         },
         expect: "{{moduleType}}.file.json",
         cleanup: true
@@ -45,6 +48,7 @@ const testPairs = [
         dirOrFile: "test/cli/fixtures/{{moduleType}}",
         options: {
             outputTo: path.join(OUT_DIR, "{{moduleType}}.dir.filtered.json"),
+            outputType: "json",
             exclude: "node_modules"
         },
         expect: "{{moduleType}}.dir.filtered.json",
@@ -173,7 +177,8 @@ describe("#processCLI", () => {
                     "test/cli/fixtures/unresolvable-in-sub"
                 ],
                 {
-                    outputTo: lOutputTo
+                    outputTo: lOutputTo,
+                    outputType: "json"
                 }
             );
             tst.assertFileEqual(
@@ -204,7 +209,7 @@ describe("#processCLI", () => {
                 lCapturedStdout += pText;
             });
 
-            processCLI(["test/cli/fixtures/cjs"]);
+            processCLI(["test/cli/fixtures/cjs"], {outputType: "json"});
             unhookIntercept();
             fs.writeFileSync(
                 path.join(OUT_DIR, "cjs.dir.stdout.json"),

@@ -28,7 +28,7 @@ module.exports = (pOptions) => {
     pOptions = _.defaults(pOptions, {
         exclude: "",
         outputTo: "-",
-        outputType: "json",
+        outputType: "err",
         system: DEFAULT_MODULE_SYSTEMS
     });
 
