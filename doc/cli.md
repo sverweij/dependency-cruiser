@@ -184,7 +184,7 @@ Extensions:
 
 ### Cruising multiple files and directories in one go
 Just pass them as arguments. This, e.g. will cruise every file in the folders
-src, test and lib (recursively)+ the file called index.ts in the root.
+src, test and lib (recursively) + the file called index.ts in the root.
 
 ```sh
 depcruise --output-type dot src test lib index.ts

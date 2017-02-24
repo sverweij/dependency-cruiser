@@ -2,7 +2,7 @@
 
 The typical use for dependency-cruiser is on the command line. However, you
 might want to use it programmatically. For this dependency-cruiser has an
-an API. While the engine behind the API and the command line interface are
+API. While the engine behind the API and the command line interface are
 stable *the API is under construction*.
 
 
@@ -21,6 +21,8 @@ This will return an object
     summary: {}
 }
 ```
+
+See [dependency-cruiser's json output format](output-format) for details.
 
 ### Options
 The second parameter of the depcruise function is an object influencing the

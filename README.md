@@ -1,9 +1,10 @@
 # Dependency cruiser ![Dependency cruiser](https://raw.githubusercontent.com/sverweij/dependency-cruiser/master/doc/assets/ZKH-Dependency-recolored-160.png)
 _Validate and visualize dependencies. With your rules._ JavaScript. TypeScript. CoffeeScript. ES6, CommonJS, AMD.
+## What's this do?
 ![Snazzy dot output to whet your appetite](https://raw.githubusercontent.com/sverweij/dependency-cruiser/master/doc/assets/sample-dot-output.png)
 
-## What's this do?
-This runs through the dependencies in any JavaScript, TypeScript or CoffeeScript project and ...
+
+This runs through the dependencies in any JavaScript, TypeScript, LiveScript or CoffeeScript project and ...
   - ... **validates** them against (your own) [rules](./doc/rules-reference.md)
   - ... **reports** violated rules
     - in text (for your builds)
@@ -87,15 +88,18 @@ depcruise --validate my-rules.json --output-type err src
 ## I want to know more!
 You've come to the right place :-) :
 
-- [Command line reference](./doc/cli.md)
-- [TypeScript, CoffeeScript and LiveScript support](./doc/faq.md)
-- [Support for other alt-js languages](./doc/faq.md)
-- [Writing rules](./doc/rules-tutorial.md)
-- [Rules reference](./doc/rules-reference.md)
-- [Real world show cases](./doc/real-world-samples.md)
-- [Output format](./doc/output-format.md)
-- [API](./doc/api.md)
-- [Road map](https://github.com/sverweij/dependency-cruiser/projects/1)
+- Usage
+    - [Command line reference](./doc/cli.md)
+    - [Writing rules](./doc/rules-tutorial.md)
+    - [Rules reference](./doc/rules-reference.md)
+- Hacking on dependency-cruiser
+    - [API](./doc/api.md)
+    - [Output format](./doc/output-format.md)
+    - [Adding support for other alt-js languages](./doc/faq.md)
+- Other things
+    - [Road map](https://github.com/sverweij/dependency-cruiser/projects/1)
+    - [Real world show cases](./doc/real-world-samples.md)
+    - [TypeScript, CoffeeScript and LiveScript support](./doc/faq.md)
 
 ## License
 [MIT](LICENSE)
@@ -106,6 +110,7 @@ You've come to the right place :-) :
   the excelent javascript parser dependency-cruiser uses to infer
   dependencies.
 
+## Build status
 [![build status](https://gitlab.com/sverweij/dependency-cruiser/badges/master/build.svg)](https://gitlab.com/sverweij/dependency-cruiser/builds)
 [![coverage](https://gitlab.com/sverweij/dependency-cruiser/badges/master/coverage.svg)](https://gitlab.com/sverweij/dependency-cruiser/builds)
 [![bitHound Overall Score](https://www.bithound.io/github/sverweij/dependency-cruiser/badges/score.svg)](https://www.bithound.io/github/sverweij/dependency-cruiser)
@@ -113,3 +118,5 @@ You've come to the right place :-) :
 [![bitHound Dev Dependencies](https://www.bithound.io/github/sverweij/dependency-cruiser/badges/devDependencies.svg)](https://www.bithound.io/github/sverweij/dependency-cruiser/master/dependencies/npm)
 [![npm stable version](https://img.shields.io/npm/v/dependency-cruiser.svg)](https://npmjs.com/package/dependency-cruiser)
 [![total downloads on npm](https://img.shields.io/npm/dt/dependency-cruiser.svg?maxAge=2591999)](https://npmjs.com/package/dependency-cruiser)
+
+Made with :metal: in Holland.
