@@ -12,7 +12,7 @@ This has a few advantages over bundling the transpilers as dependencies:
 - `npm i`-ing dependency-cruiser will be faster.
 - Transpilers you don't need won't land on your disk.
 - Dependency-cruiser will use the version of the transpiler you are using
-  in your project (which might not be the most recent one).
+  in your project (which might not be the most recent one for valid reasons).
 
 ## How do I add support for my favorite alt-js language?
 Dependency-cruiser already supports TypeScript, CoffeeScript and LiveScript. If
