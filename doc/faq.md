@@ -29,7 +29,7 @@ If you want to add it yourself: a pull request is welcome. Recipe:
 - In `src/transpile`
   - add a `yourLanguageWrap.js` that invokes the transpiler transforming
     your language into javascript (preferablye ES6 or better, but lower versions
-    should work as well). (`liveScriptWrap.js`)[../src/transpile/liveScriptWrap.js]
+    should work as well). [`liveScriptWrap.js`](../src/transpile/liveScriptWrap.js)
     as an example on how to do this.
   - in [`meta.js`](../src/transpile/meta.js)
     - require `./yourLanguageWrap` and
