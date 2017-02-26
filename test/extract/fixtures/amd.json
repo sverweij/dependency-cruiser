@@ -239,5 +239,12 @@
                 "valid": true
             }
         ]
+    },
+    {
+        "title": "looks like an amd but isnt",
+        "input": {
+            "fileName": "test/extract/fixtures/amd/looks-like-amd-but-isnt.js"
+        },
+        "expected": []
     }
 ]
