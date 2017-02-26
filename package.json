@@ -1,6 +1,6 @@
 {
   "name": "dependency-cruiser",
-  "version": "2.0.0",
+  "version": "2.0.1",
   "description": "Validate and visualize dependencies. With your rules. JavaScript, TypeScript, CoffeeScript. ES6, CommonJS, AMD.",
   "bin": {
     "dependency-cruiser": "bin/dependency-cruise",
