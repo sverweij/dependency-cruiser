@@ -35,8 +35,8 @@ support for, let me know.
     your language into javascript (preferably ES6 or better, but lower versions
     should work as well). [`liveScriptWrap.js`](../src/extract/transpile/liveScriptWrap.js)
     as an example on how to do this.
-  - in [`meta.js`](../src/transpile/meta.js)
+  - in [`meta.js`](../src/extract/transpile/meta.js)
     - require `./yourLanguageWrap` and
     - add it to the `extension2wrapper` object with the extensions proper for your
     language.
-- In `test/transpile` add unit tests for `yourLanguageWrap`
+- In `test/extract/transpile` add unit tests for `yourLanguageWrap`
