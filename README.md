@@ -30,9 +30,6 @@ a one liner:
 depcruise --exclude "^node_modules" --output-type dot src | dot -T svg > dependencygraph.svg
 ```
 
-The `--exclude "^node_modules"` makes sure dependency-cruiser does not scan
-paths starting with *node_modules*.
-
 - You can read more about what you can do with `--exclude` and other command line
   options in the
   [command line interface](./doc/cli.md)
@@ -40,11 +37,19 @@ paths starting with *node_modules*.
 - _[Real world samples](./doc/real-world-samples.md)_
   contains dependency cruises of some of the most used projects on npm.
 
-### Validate stuff
+### Validate things
 #### Declare some rules
-To have dependency-cruiser report on dependencies going _into_ the test folder
-(which is totally weird, right?) create a rules file (e.g. `my-rules.json`)
-and put this in there:
+The easy way to get you started:
+
+```shell
+depcruise --init-rules
+```
+
+This will create a `.dependency-cruiser.json` with some rules that make sense
+in most projects. Start adding your rules by tweaking that file.
+
+
+Sample rule:
 ```json
 {
     "forbidden": [{
@@ -64,23 +69,18 @@ and put this in there:
   [here](./doc/rules.starter.json)
 
 #### Report them
-Pass the `--validate` parameter, to the command line followed by the rules
-file.
-
-Most output-types will show violations of your rules in one way or another.
-The `dot` reporter, for instance, will color edges representing violated
-dependencies in a signaling color (red for errors, orange for warnings) - the
-picture on top of this README is a sample of that.
-
-The `err` reporter only emits (text) output when there's something wrong.
-This is useful when you want to check the rules in your build process:
-
 ```sh
-depcruise --validate my-rules.json --output-type err src
+depcruise --validate .dependency-cruiser.json src
 ```
+
+This will validate your rules and shows any violations in an eslint-like format:
+
 ![sample err output](https://raw.githubusercontent.com/sverweij/dependency-cruiser/master/doc/assets/sample-err-output.png)
 
-- Read more about the err, dot, but also the csv and html reporters in the
+There's more ways to report validations; in a graph (like the one on top of this
+readme) or in a table.
+
+- Read more about the err, dot, csv and html reporters in the
   [command line interface](./doc/cli.md)
   documentation.
 - dependency-cruiser uses itself to check on itself in its own build process;
