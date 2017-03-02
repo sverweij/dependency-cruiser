@@ -26,6 +26,7 @@ src/report/%.template.js: src/report/%.template.hbs
 .npmignore: .gitignore
 	cp $< $@
 	echo "doc/**" >> $@
+	echo "docs/**" >> $@
 	echo "test/**" >> $@
 	echo "utl/**" >> $@
 	echo ".bithoundrc" >> $@

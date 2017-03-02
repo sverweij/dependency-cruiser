@@ -25,6 +25,7 @@ npm-debug.log
 # other stuff
 .dependency-cruiser.json
 doc/**
+docs/**
 test/**
 utl/**
 .bithoundrc
