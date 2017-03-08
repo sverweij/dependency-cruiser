@@ -19,7 +19,7 @@ you can stick on the wall to impress your grandma.
 
 ### Install it
 - `npm install --save-dev dependency-cruiser` to use it as a validator in your project or...
-- `npm install --global depdendency-cruiser` if you just want to to inspect multiple projects.
+- `npm install --global dependency-cruiser` if you just want to to inspect multiple projects.
 
 ### Show stuff to your grandma
 To create a graph of the dependencies in your src folder, you'd run dependency
