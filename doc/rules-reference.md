@@ -152,7 +152,7 @@ business components breeds like a flock of rabbits. In stead, you can use
     }]
 }
 ```
-... which makes sure depdendency-cruiser does not match stuff in the from folder
+... which makes sure dependency-cruiser does not match stuff in the from folder
 currently being matched.
 
 ### couldNotResolve
