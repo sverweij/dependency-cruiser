@@ -3,8 +3,24 @@
     <head>
         <meta charset="utf-8">
         <title>dependency-cruiser</title>
+        <script type="application/ld+json">
+        {
+          "@context" : "http://schema.org",
+          "@type" : "Article",
+          "name" : "dependency-cruiser",
+          "author" : {
+            "@type" : "Person",
+            "name" : "Sander Verweij"
+          }
+        }
+        </script>
         <style type="text/css">
+        * { transition: all ease 0.3s } /*cough* errm *cough*/
         body{font-family: sans-serif; margin:40px auto;max-width:650px;line-height:1.6;font-size:18px;color:#444;padding:0 10px}h1,h2,h3{line-height:1.2}
+        a, a:visited{color:inherit;text-decoration: none;border-bottom: 1px solid lightgray}
+        a:hover{border-bottom: 1px solid currentColor}
+        .p--right{text-align:right}
+        .p__svg--inline{vertical-align:top;width:1.2em;height:1.2em}
         </style>
         <script>
           (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
@@ -45,17 +61,17 @@
         <p>
             So your awesome project will be more awesomer.
         </p>
-        <h2>This site</h2>
+        <h2>With this site</h2>
         <p>
-            will poke around in your brain's pleasure center so you'll
+            we will poke around in your brain's pleasure center so you'll
             <code>npm i dependency-cruiser</code>.
         </p>
         <p>
             It's not done yet, though.
         </p>
-        <h2>In the mean time</h2>
+        <h2>To do more</h2>
         <ul>
-            <li>read more on
+            <li>read all about it on
             <a href="https://github.com/sverweij/dependency-cruiser">
                 dependency-cruiser's github page
             </a> or
@@ -64,8 +80,10 @@
                 ... <code>npm install dependency-cruiser</code>.
             </li>
         </ul>
-        <p style="text-align:right;">
-            Made with <img style="vertical-align:top;width:1.2em;height:1.2em;" src="assets/metal.svg" alt="metal"> in Holland
+        <p class="p--right">
+            Made with
+            <svg class="p__svg--inline" alt="rock" viewBox="0 0 25 25" style="fill:#fd9;stroke:currentColor"><rect x="8.9" y="10.5" rx="1.3" ry="1.5" width="3.2" height="6.7"/><rect x="12.2" y="10.5" rx="1.3" ry="1.5" width="3.1" height="6.7"/><path d="M13.4 19.2C13.2 17.2 15.2 16.5 16.2 16.5"/><rect x="15.5" y="2.5" rx="1.4" ry="1.5" width="3.1" height="13.7"/><path d="M17.1 17.1L11.3 17.1C10.6 17.1 10 16.3 10 15.6 10 14.8 10.6 14.1 11.3 14.1L18 14.1C18.8 14.1 19.5 14.7 19.5 15.5 19.5 16.3 19.5 16.8 19.5 18.9 19.5 20.9 18 22.5 16.2 22.5L8.8 22.5C7 22.5 5.5 20.9 5.5 18.9L5.5 18.1 5.5 6C5.5 5.2 6.1 4.6 6.9 4.6L7 4.6C7.8 4.6 8.5 5.2 8.5 6L8.5 15C8.5 16.2 9.9 15.9 9.9 15.9M14.6 20.1C14.4 18.7 15.2 17.1 16.8 17.1"/></svg>
+            in Holland.
         </p>
 
     </body>
