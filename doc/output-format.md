@@ -1,14 +1,14 @@
 # dependency-cruiser's json output format
 
 The output format contains two sections:
-- `dependencies` - an array of all sources dependency-cruiser visited, each with 
+- `dependencies` - an array of all sources dependency-cruiser visited, each with
               the sources they directly depend upon
 - `summary` - a summary with meta information like how many sources got visited,
               how many violations it found and an array of the actual violations
 
 
-A [json schema](../src/extract/jsonschema.json) describes the output format 
-attributes in painstaking detail. The schema is accurate and actual - each build 
+A [json schema](../src/extract/jsonschema.json) describes the output format
+attributes in painstaking detail. The schema is accurate and actual - each build
 unit tests assure the output format adheres to the schema.
 
 A sample output (for the popular [commander.js](https://github.com/tj/commander.js)
@@ -140,7 +140,7 @@ module):
             ]
         }
     ],
-    "summary" {
+    "summary": {
         "violations": [],
         "error": 0,
         "warn": 0,

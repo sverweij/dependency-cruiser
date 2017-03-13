@@ -22,7 +22,7 @@ This will return an object
 }
 ```
 
-See [dependency-cruiser's json output format](output-format) for details.
+See [dependency-cruiser's json output format](output-format.md) for details.
 
 ### Options
 The second parameter of the depcruise function is an object influencing the
