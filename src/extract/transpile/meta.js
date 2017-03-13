@@ -24,9 +24,24 @@ const transpiler2wrapper = {
     "typescript"    : typeScriptWrap
 };
 
+/**
+ * returns the wrapper module configured for the extension pExtension.
+ *
+ * returns the javascript wrapper if there's no wrapper module configured
+ * for the extension.
+ *
+ * @param {string}  pExtension the extension (e.g. ".ts", ".js", ".litcoffee")
+ * @returns {module} the module
+ */
 module.exports.getWrapper =
     pExtension => extension2wrapper[pExtension] || javaScriptWrap;
 
+/**
+ * all supported extensions and whether or not it is supported
+ * in the current environment
+ *
+ * @type {array}
+ */
 module.exports.allExtensions =
     Object.keys(extension2wrapper)
         .map(
@@ -36,12 +51,25 @@ module.exports.allExtensions =
             })
         );
 
+/**
+ * an array of extensions that are 'scannable' (have a valid transpiler
+ * available for) in the current environemnt.
+ *
+ * @type {array}
+ */
 module.exports.scannableExtensions =
     Object.keys(extension2wrapper)
         .filter(
             pKey => extension2wrapper[pKey].isAvailable()
         );
 
+/**
+ * returns an array of supported transpilers, whith for each transpiler:
+ * - the version (range) supported
+ * - whether or not it is available in the current environment
+ *
+ * @returns {array} an array of supported transpilers
+ */
 module.exports.getAvailableTranspilers =
     () =>
         Object.keys(supportedTranspilers).map(pTranspiler => ({
