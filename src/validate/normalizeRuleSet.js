@@ -24,6 +24,15 @@ function normalizeRule(pRule) {
     );
 }
 
+/**
+ * 'Normalizes' the given rule set pRuleSet by adding default values for
+ * attributes that are optional and not present in the rule set; in casu:
+ * - rule name (default 'unnamed')
+ * - severity (default 'warn')
+ *
+ * @param  {object} pRuleSet [description]
+ * @return {object}          [description]
+ */
 module.exports = (pRuleSet) => {
     if (pRuleSet.hasOwnProperty("allowed")){
         pRuleSet.allowed = pRuleSet.allowed.map(normalizeRule);

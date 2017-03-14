@@ -34,6 +34,17 @@ function checkRuleSafety(pRule) {
     }
 }
 
+/**
+ * Returns the passed ruleset pRuleSet when it is valid.
+ * Throws an Error in all other cases.
+ *
+ * Validations:
+ * - the ruleset adheres to the [rule set json schema](jsonschema.json)
+ * - any regular expression in the rule set is 'safe' (~= won't be too slow)
+ *
+ * @param  {object} pRuleSet The ruleset to validate
+ * @return {object}          The ruleset as passed
+ */
 module.exports = (pRuleSet) => {
     validateAgainstSchema(ruleSchema, pRuleSet);
     if (pRuleSet.hasOwnProperty("allowed")){
