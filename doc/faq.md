@@ -23,12 +23,12 @@ Dependency-cruiser already supports TypeScript, CoffeeScript and LiveScript. If
 there's another language (that transpiles to javascript) you'd like to see
 support for, let me know.
 
-... or add it yourself: your pull requeest is welcome. Recipe:
+... or add it yourself: your pull request is welcome. Recipe:
 - In `package.json`:
   - add your language (and supported version range) to the `supportedTranspilers`
     object.
   - Add your language's transpiler to `devDependencies` (you'll need that,
-    because you are going to write tests that proves the addition works
+    because you are going to write tests that prove the addition works
     correctly later on).
 - In `src/transpile`
   - add a `yourLanguageWrap.js` that invokes the transpiler transforming
@@ -40,3 +40,20 @@ support for, let me know.
     - add it to the `extension2wrapper` object with the extensions proper for your
     language.
 - In `test/extract/transpile` add unit tests for `yourLanguageWrap`
+
+## How do I add a new output format?
+
+Like so:
+- In `src/report`:
+  - add a module that exports a default function that
+    - takes a dependency cruiser output object
+      ([json schema](../src/extract/jsonschema.json))
+    - returns that same object with the values of the 'dependencies' attribute
+      replaced by the string containing the output you want.
+- In `main/index.js`
+    - require that module and
+    - add a key to the to the `TYPE2REPORTER` object with that module as value
+- In `bin/dependency-cruise`
+    - add it to the documentation of the -T option
+- In `test/report` add unit tests that proves your reporter does what it
+    intends.
