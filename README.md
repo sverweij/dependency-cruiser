@@ -97,7 +97,8 @@ You've come to the right place :-) :
 - Hacking on dependency-cruiser
     - [API](./doc/api.md)
     - [Output format](./doc/output-format.md)
-    - [Adding support for other alt-js languages](./doc/faq.md)
+    - [Adding support for other alt-js languages](./doc/faq.md#how-do-i-add-support-for-my-favorite-alt-js-language)
+    - [Adding other output formats](./doc/faq.md#how-do-i-add-a-new-output-format)
 - Other things
     - [Road map](https://github.com/sverweij/dependency-cruiser/projects/1)
     - [Real world show cases](./doc/real-world-samples.md)
