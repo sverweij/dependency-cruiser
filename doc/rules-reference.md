@@ -212,6 +212,7 @@ This is a list of dependency types dependency-cruiser currently detects.
  npm-peer        | it's a module in package.json's `peerDependencies` - note: deprecated in npm 3 | "thing-i-am-a-plugin-for"
  npm-no-pkg      | it's an npm module - but it's nowhere in your package.json | "forgetmenot"
  npm-unknown     | it's an npm module - but there is no (parseable/ valid) package.json in your package |
+ deprecated      | it's an npm module, but the version you're using or the module itself is officially deprecated                                | "some-deprecated-package"
  core            | it's a core module                                | "fs"
  unknown         | it's unknown what kind of dependency type this is - probably because the module could not be resolved in the first place | "loodash"
  undetermined    | the dependency fell through all detection holes. This could happen with amd dependencies - which have a whole jurasic park of ways to define where to resolve modules to | "veloci!./raptor"
@@ -259,13 +260,19 @@ false).
         "comment": "Don't allow dependencies to (typescript/ javascript/ coffeescript) spec files",
         "severity": "error",
         "from": {},
-        "to": { "path": "\\.spec\\.[js|ts|coffee|litcoffee|coffee\\.md]$" }
+        "to": { "path": "\\.spec\\.[js|ts|ls|coffee|litcoffee|coffee\\.md]$" }
     },{
-        "name": "not-to-core-punycode",
-        "comment": "Warn about dependencies on the (deprecated) 'punycode' core module (use the userland punycode module instead).",
+        "name": "no-deprecated-core",
+        "comment": "Warn about dependencies on deprecated core modules.",
         "severity": "warn",
         "from": {},
-        "to": { "moduleTypes": ["core"], "path": "^punycode$" }
+        "to": { "dependencyTypes": ["core"], "path": "^(punycode|domain)$" }
+    },{
+        "name": "no-deprecated-npm",
+        "comment": "These npm modules are deprecated - find an alternative.",
+        "severity": "warn",
+        "from": {},
+        "to": { "dependencyTypes": ["deprecated"] }
     },{
         "name": "not-to-unresolvable",
         "comment": "Don't allow dependencies on modules dependency-cruiser can't resolve to files on disk (which probably means they don't exist)",
@@ -275,13 +282,13 @@ false).
     },{
         "name": "not-to-dev-dep",
         "severity": "error",
-        "comment": "because an npm i --production will otherwise deliver an unreliably running package",
-        "from": { "path": "^src" },
+        "comment": "Don't allow dependencies from src/app/lib to a development only package",
+        "from": { "path": "^(src|app|lib)" },
         "to": { "dependencyTypes": ["npm-dev"] }
     },{
         "name": "no-non-package-json",
         "severity": "error",
-        "comment": "because an npm i --production will otherwise deliver an unreliably running package",
+        "comment": "Don't allow dependencies to packages not in package.json (except from within node_modules)",
         "from": { "pathNot": "^node_modules"},
         "to": { "dependencyTypes": ["unknown", "undetermined", "npm-no-pkg", "npm-unknown"] }
     },{
@@ -292,12 +299,13 @@ false).
         "to": { "dependencyTypes": ["npm-optional"] }
     },{
         "name": "peer-deps-used",
-        "comment": "peer dependencies are deprecated with the advent of npm 3 - and probably gone with version 4. Or with yarn.",
+        "comment": "Warn about the use of a peer dependency (peer dependencies are deprecated with the advent of npm 3 - and probably gone with version 4).",
         "severity": "warn",
         "from": {},
         "to": { "dependencyTypes": ["npm-peer"] }
     },{
         "name": "no-duplicate-dep-types",
+        "comment": "Warn if a dependency occurs in your package.json more than once (technically: has more than one dependency type)",
         "severity": "warn",
         "from": {},
         "to": { "moreThanOneDependencyType": true }

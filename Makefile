@@ -150,6 +150,9 @@ src/extract/resolve/resolve-AMD.js: \
 	src/extract/resolve/determineDependencyTypes.js \
 	src/extract/resolve/readPackageDeps.js
 
+src/extract/resolve/determineDependencyTypes.js: \
+	src/extract/resolve/getPackageJson.js
+
 src/extract/resolve/resolve-commonJS.js: \
 	src/extract/resolve/determineDependencyTypes.js \
 	src/extract/resolve/readPackageDeps.js \
@@ -210,6 +213,7 @@ ALL_SRC=src/main/index.js \
 	src/extract/ignore.js \
 	src/extract/index.js \
 	src/extract/resolve/determineDependencyTypes.js \
+	src/extract/resolve/getPackageJson.js \
 	src/extract/resolve/index.js \
 	src/extract/resolve/readPackageDeps.js \
 	src/extract/resolve/resolve-AMD.js \
@@ -283,6 +287,9 @@ src/extract/resolve/index.js: \
 src/extract/resolve/resolve-AMD.js: \
 	src/extract/resolve/determineDependencyTypes.js \
 	src/extract/resolve/readPackageDeps.js
+
+src/extract/resolve/determineDependencyTypes.js: \
+	src/extract/resolve/getPackageJson.js
 
 src/extract/resolve/resolve-commonJS.js: \
 	src/extract/resolve/determineDependencyTypes.js \
@@ -363,6 +370,9 @@ test/extract/extract.spec.js: \
 test/extract/gatherInitialSources.spec.js: \
 	src/extract/gatherInitialSources.js
 
+test/extract/getPackageJson.spec.js: \
+	src/extract/resolve/getPackageJson.js
+
 test/extract/resolve/determineDependencyTypes.spec.js: \
 	src/extract/resolve/determineDependencyTypes.js
 
@@ -411,3 +421,4 @@ test/validate/readRuleSet.spec.js: \
 test/validate/validate.spec.js: \
 	src/validate/index.js \
 	src/validate/readRuleSet.js
+

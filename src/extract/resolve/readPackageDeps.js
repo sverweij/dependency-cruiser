@@ -22,7 +22,7 @@ module.exports =
 
         try {
             lRetval = JSON.parse(
-                fs.readFileSync(`${pBaseDir}${path.sep}package.json`, 'utf8')
+                fs.readFileSync(path.join(pBaseDir, 'package.json'), 'utf8')
             );
         } catch (e) {
             // left empty on purpose

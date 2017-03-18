@@ -1,0 +1,56 @@
+[
+    {
+        "title": "can detect officially deprecated node modules",
+        "input": {
+            "fileName": "test/extract/fixtures/deprecated-node-module/require-something-deprecated.js",
+            "moduleSystems": ["cjs"]
+        },
+        "expected": [
+            {
+                "source": "test/extract/fixtures/deprecated-node-module/require-something-deprecated.js",
+                "dependencies": [
+                    {
+                        "resolved": "test/extract/fixtures/deprecated-node-module/node_modules/deprecated-at-the-start-for-test-purposes/index.js",
+                        "coreModule": false,
+                        "followable": true,
+                        "couldNotResolve": false,
+                        "dependencyTypes": [
+                            "npm-no-pkg",
+                            "deprecated"
+                        ],
+                        "module": "deprecated-at-the-start-for-test-purposes",
+                        "moduleSystem": "cjs",
+                        "valid": true
+                    }
+                ]
+            },
+            {
+                "source": "test/extract/fixtures/deprecated-node-module/node_modules/deprecated-at-the-start-for-test-purposes/index.js",
+                "dependencies": [
+                    {
+                        "resolved": "test/extract/fixtures/deprecated-node-module/node_modules/deprecated-at-the-start-for-test-purposes/package.json",
+                        "coreModule": false,
+                        "followable": false,
+                        "couldNotResolve": false,
+                        "dependencyTypes": [
+                            "local"
+                        ],
+                        "module": "./package.json",
+                        "moduleSystem": "cjs",
+                        "valid": true
+                    }
+                ]
+            },
+            {
+                "source": "test/extract/fixtures/deprecated-node-module/node_modules/deprecated-at-the-start-for-test-purposes/package.json",
+                "followable": false,
+                "coreModule": false,
+                "couldNotResolve": false,
+                "dependencyTypes": [
+                    "local"
+                ],
+                "dependencies": []
+            }
+        ]
+    }
+]
