@@ -212,6 +212,7 @@ This is a list of dependency types dependency-cruiser currently detects.
  npm-peer        | it's a module in package.json's `peerDependencies` - note: deprecated in npm 3 | "thing-i-am-a-plugin-for"
  npm-no-pkg      | it's an npm module - but it's nowhere in your package.json | "forgetmenot"
  npm-unknown     | it's an npm module - but there is no (parseable/ valid) package.json in your package |
+ deprecated      | it's an npm module, but the version you're using or the module itself is officially deprecated                                | "some-deprecated-package"
  core            | it's a core module                                | "fs"
  unknown         | it's unknown what kind of dependency type this is - probably because the module could not be resolved in the first place | "loodash"
  undetermined    | the dependency fell through all detection holes. This could happen with amd dependencies - which have a whole jurasic park of ways to define where to resolve modules to | "veloci!./raptor"

@@ -184,7 +184,8 @@
                 "npm-unknown",
                 "core",
                 "unknown",
-                "undetermined"
+                "undetermined",
+                "deprecated"
             ]
         },
         "OptionsType": {

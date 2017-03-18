@@ -1,6 +1,7 @@
 "use strict";
 
-const resolve = require('resolve');
+const resolve        = require("resolve");
+const getPackageJson = require("./getPackageJson");
 
 const npm2depType = {
     "dependencies"         : "npm",
@@ -8,6 +9,16 @@ const npm2depType = {
     "optionalDependencies" : "npm-optional",
     "peerDependencies"     : "npm-peer"
 };
+
+function dependencyIsDeprecated(pModule, pBaseDir) {
+    let lRetval = false;
+    let lPackageJson = getPackageJson(pModule, pBaseDir);
+
+    if (Boolean(lPackageJson)){
+        lRetval = lPackageJson.hasOwnProperty("deprecated");
+    }
+    return lRetval;
+}
 
 function determineNpmDependencyTypes(pModuleName, pPackageDeps) {
     let lRetval = ["npm-unknown"];
@@ -21,11 +32,11 @@ function determineNpmDependencyTypes(pModuleName, pPackageDeps) {
             .map(pKey => npm2depType[pKey] || "npm-no-pkg");
         lRetval = lRetval.length === 0 ? ["npm-no-pkg"] : lRetval;
     }
+
     return lRetval;
 }
 
-
-module.exports = (pDependency, pModuleName, pPackageDeps) => {
+module.exports = (pDependency, pModuleName, pPackageDeps, pBaseDir) => {
     let lRetval = ["undetermined"];
 
     if (pDependency.couldNotResolve) {
@@ -45,6 +56,11 @@ module.exports = (pDependency, pModuleName, pPackageDeps) => {
         // '/' (if any) - because e.g. 'lodash/fp' is ultimately the 'lodash'
         // package
         lRetval = determineNpmDependencyTypes(pModuleName.split("/")[0], pPackageDeps);
+
+        if (dependencyIsDeprecated(pModuleName, pBaseDir)) {
+            lRetval.push("deprecated");
+        }
+
     }
 
     return lRetval;

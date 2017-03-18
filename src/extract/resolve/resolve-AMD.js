@@ -41,7 +41,8 @@ module.exports = (pModuleName, pBaseDir, pFileDir) => {
             dependencyTypes: determineDependencyTypes(
                 lDependency,
                 pModuleName,
-                readPackageDeps(pBaseDir)
+                readPackageDeps(pBaseDir),
+                pFileDir
             )
         }
     );
