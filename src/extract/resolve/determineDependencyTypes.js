@@ -1,7 +1,7 @@
 "use strict";
 
-const resolve        = require("resolve");
-const getPackageJson = require("./getPackageJson");
+const resolve         = require("resolve");
+const localNpmHelpers = require("./localNpmHelpers");
 
 const npm2depType = {
     "dependencies"         : "npm",
@@ -9,16 +9,6 @@ const npm2depType = {
     "optionalDependencies" : "npm-optional",
     "peerDependencies"     : "npm-peer"
 };
-
-function dependencyIsDeprecated(pModule, pBaseDir) {
-    let lRetval = false;
-    let lPackageJson = getPackageJson(pModule, pBaseDir);
-
-    if (Boolean(lPackageJson)){
-        lRetval = lPackageJson.hasOwnProperty("deprecated");
-    }
-    return lRetval;
-}
 
 function determineNpmDependencyTypes(pModuleName, pPackageDeps) {
     let lRetval = ["npm-unknown"];
@@ -33,6 +23,16 @@ function determineNpmDependencyTypes(pModuleName, pPackageDeps) {
         lRetval = lRetval.length === 0 ? ["npm-no-pkg"] : lRetval;
     }
 
+    return lRetval;
+}
+
+function dependencyIsDeprecated (pModule, pBaseDir) {
+    let lRetval = false;
+    let lPackageJson = localNpmHelpers.getPackageJson(pModule, pBaseDir);
+
+    if (Boolean(lPackageJson)){
+        lRetval = lPackageJson.hasOwnProperty("deprecated");
+    }
     return lRetval;
 }
 
@@ -54,8 +54,14 @@ module.exports = (pDependency, pModuleName, pPackageDeps, pBaseDir) => {
         // probably a node_module  - let's see if we can find it in the package
         // deps - but we're only interested in anything up till the first
         // '/' (if any) - because e.g. 'lodash/fp' is ultimately the 'lodash'
-        // package
-        lRetval = determineNpmDependencyTypes(pModuleName.split("/")[0], pPackageDeps);
+        // package...
+        //
+        // unless the package is 'scoped (@organization/coolpackage),
+        //  in which case we'd need it until the second '/'
+        lRetval = determineNpmDependencyTypes(
+            localNpmHelpers.getPackageRoot(pModuleName),
+            pPackageDeps
+        );
 
         if (dependencyIsDeprecated(pModuleName, pBaseDir)) {
             lRetval.push("deprecated");
