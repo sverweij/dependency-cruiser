@@ -1,0 +1,24 @@
+digraph {
+    bgcolor=transparent
+    node [shape=circle color=gray fontcolor=gray]
+    edge [color=red]
+
+
+    a -> b -> a
+
+    c -> d -> e -> c
+
+    f -> g -> h -> i -> f
+    g -> i
+
+    edge [color=green]
+    y -> a
+    x -> e
+    w -> g
+
+    f -> v
+
+    ok -> all
+    all -> very
+    very -> { jolly nice well }
+}

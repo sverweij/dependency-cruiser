@@ -59,5 +59,10 @@
         "severity": "warn",
         "from": {},
         "to": { "moreThanOneDependencyType": true }
+    },{
+        "name": "no-circular",
+        "severity": "warn",
+        "from": {},
+        "to": { "circular": true }
     }]
 }

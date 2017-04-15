@@ -13,6 +13,7 @@
                     ],
                     "module": "path",
                     "moduleSystem": "cjs",
+                    "circular": false,
                     "valid": true
                 }
             ]
@@ -40,6 +41,7 @@
                     ],
                     "module": "./depindir",
                     "moduleSystem": "cjs",
+                    "circular": false,
                     "valid": true
                 },
                 {
@@ -52,6 +54,7 @@
                     ],
                     "module": "path",
                     "moduleSystem": "cjs",
+                    "circular": false,
                     "valid": true
                 }
             ]
@@ -73,6 +76,7 @@
                     ],
                     "module": "./not-at-home",
                     "moduleSystem": "es6",
+                    "circular": false,
                     "valid": true
                 },
                 {
@@ -85,6 +89,7 @@
                     ],
                     "module": "./this/path/does/not/exist",
                     "moduleSystem": "es6",
+                    "circular": false,
                     "valid": true
                 }
             ]

@@ -14,8 +14,7 @@
                     "npm"
                 ],
                 "followable": true,
-                "couldNotResolve": false,
-                "valid": true
+                "couldNotResolve": false
             },
             {
                 "module": "chai",
@@ -26,8 +25,7 @@
                     "npm-dev"
                 ],
                 "followable": true,
-                "couldNotResolve": false,
-                "valid": true
+                "couldNotResolve": false
             },
             {
                 "module": "lodash",
@@ -38,8 +36,7 @@
                     "npm"
                 ],
                 "followable": true,
-                "couldNotResolve": false,
-                "valid": true
+                "couldNotResolve": false
             },
             {
                 "module": "mocha",
@@ -50,8 +47,7 @@
                     "npm-dev"
                 ],
                 "followable": true,
-                "couldNotResolve": false,
-                "valid": true
+                "couldNotResolve": false
             },
             {
                 "module": "os",
@@ -62,8 +58,7 @@
                     "core"
                 ],
                 "followable": false,
-                "couldNotResolve": false,
-                "valid": true
+                "couldNotResolve": false
             }
         ]
     }

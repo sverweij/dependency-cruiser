@@ -18,7 +18,8 @@
                         ],
                         "followable": false,
                         "couldNotResolve": true,
-                        "valid": true
+                        "valid": true,
+        "circular": false
                     },
                     {
                         "module": "other-module-in-the-config",
@@ -30,7 +31,8 @@
                         ],
                         "followable": false,
                         "couldNotResolve": true,
-                        "valid": true
+                        "valid": true,
+        "circular": false
                     },
                     {
                         "module": "sub/local-module-in-drag",
@@ -42,7 +44,8 @@
                         ],
                         "followable": true,
                         "couldNotResolve": false,
-                        "valid": true
+                        "valid": true,
+        "circular": false
                     }
                 ]
             },

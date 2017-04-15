@@ -105,6 +105,10 @@
                                     "type": "boolean",
                                     "description": "'true' if dependency-cruiser could not resulve the module name in the source code to a file name or core module. 'false' in all other cases."
                                 },
+                                "circular": {
+                                    "type": "boolean",
+                                    "description": "'true' if following this dependency will ultimately return to the source, false in all other cases"
+                                },
                                 "moduleSystem": { "$ref": "#/definitions/ModuleSystemType" },
                                 "valid": {
                                     "type": "boolean",

@@ -21,6 +21,7 @@
                     ],
                     "module": "./moar-javascript",
                     "moduleSystem": "cjs",
+                    "circular": false,
                     "valid": true
                 },
                 {
@@ -33,6 +34,7 @@
                     ],
                     "module": "someothermodule",
                     "moduleSystem": "cjs",
+                    "circular": false,
                     "valid": true
                 }
             ]
@@ -50,6 +52,7 @@
                     ],
                     "module": "path",
                     "moduleSystem": "cjs",
+                    "circular": false,
                     "valid": true
                 }
             ]
@@ -77,6 +80,7 @@
                     ],
                     "module": "path",
                     "moduleSystem": "cjs",
+                    "circular": false,
                     "valid": true
                 }
             ]
@@ -94,6 +98,7 @@
                     ],
                     "module": "./one_only_one",
                     "moduleSystem": "cjs",
+                    "circular": false,
                     "valid": true
                 },
                 {
@@ -106,6 +111,7 @@
                     ],
                     "module": "./one_only_two",
                     "moduleSystem": "cjs",
+                    "circular": false,
                     "valid": true
                 },
                 {
@@ -118,6 +124,7 @@
                     ],
                     "module": "./shared",
                     "moduleSystem": "cjs",
+                    "circular": false,
                     "valid": true
                 },
                 {
@@ -130,6 +137,7 @@
                     ],
                     "module": "./sub/dir",
                     "moduleSystem": "cjs",
+                    "circular": false,
                     "valid": true
                 },
                 {
@@ -142,6 +150,7 @@
                     ],
                     "module": "fs",
                     "moduleSystem": "cjs",
+                    "circular": false,
                     "valid": true
                 },
                 {
@@ -154,6 +163,7 @@
                     ],
                     "module": "somemodule",
                     "moduleSystem": "cjs",
+                    "circular": false,
                     "valid": true
                 }
             ]
@@ -181,6 +191,7 @@
                     ],
                     "module": "path",
                     "moduleSystem": "cjs",
+                    "circular": false,
                     "valid": true
                 }
             ]
@@ -198,6 +209,7 @@
                     ],
                     "module": "./depindir",
                     "moduleSystem": "cjs",
+                    "circular": false,
                     "valid": true
                 },
                 {
@@ -210,6 +222,7 @@
                     ],
                     "module": "path",
                     "moduleSystem": "cjs",
+                    "circular": false,
                     "valid": true
                 }
             ]
@@ -227,6 +240,7 @@
                     ],
                     "module": "path",
                     "moduleSystem": "cjs",
+                    "circular": false,
                     "valid": true
                 }
             ]
@@ -244,6 +258,7 @@
                     ],
                     "module": "./shared",
                     "moduleSystem": "cjs",
+                    "circular": false,
                     "valid": true
                 },
                 {
@@ -256,6 +271,7 @@
                     ],
                     "module": "./somedata.json",
                     "moduleSystem": "cjs",
+                    "circular": false,
                     "valid": true
                 },
                 {
@@ -268,6 +284,7 @@
                     ],
                     "module": "./two_only_one",
                     "moduleSystem": "cjs",
+                    "circular": false,
                     "valid": true
                 },
                 {
@@ -280,6 +297,7 @@
                     ],
                     "module": "http",
                     "moduleSystem": "cjs",
+                    "circular": false,
                     "valid": true
                 }
             ]
@@ -317,6 +335,7 @@
                     ],
                     "module": "./sub/dir",
                     "moduleSystem": "cjs",
+                    "circular": false,
                     "valid": true
                 }
             ]

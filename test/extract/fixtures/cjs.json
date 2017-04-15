@@ -16,8 +16,7 @@
                     "local"
                 ],
                 "followable": true,
-                "couldNotResolve": false,
-                "valid": true
+                "couldNotResolve": false
             },
             {
                 "module": "./one_only_two",
@@ -28,8 +27,7 @@
                     "local"
                 ],
                 "followable": true,
-                "couldNotResolve": false,
-                "valid": true
+                "couldNotResolve": false
             },
             {
                 "module": "./shared",
@@ -40,8 +38,7 @@
                     "local"
                 ],
                 "followable": true,
-                "couldNotResolve": false,
-                "valid": true
+                "couldNotResolve": false
             },
             {
                 "module": "./sub/dir",
@@ -52,8 +49,7 @@
                     "local"
                 ],
                 "followable": true,
-                "couldNotResolve": false,
-                "valid": true
+                "couldNotResolve": false
             },
             {
                 "module": "commander",
@@ -64,8 +60,7 @@
                     "npm"
                 ],
                 "followable": true,
-                "couldNotResolve": false,
-                "valid": true
+                "couldNotResolve": false
             },
             {
                 "module": "fs",
@@ -76,8 +71,7 @@
                     "core"
                 ],
                 "followable": false,
-                "couldNotResolve": false,
-                "valid": true
+                "couldNotResolve": false
             }
         ]
     },
@@ -103,8 +97,7 @@
                     "local"
                 ],
                 "followable": true,
-                "couldNotResolve": false,
-                "valid": true
+                "couldNotResolve": false
             },
             {
                 "module": "fs",
@@ -115,8 +108,7 @@
                     "core"
                 ],
                 "followable": false,
-                "couldNotResolve": false,
-                "valid": true
+                "couldNotResolve": false
             }
         ]
     },
@@ -135,8 +127,7 @@
                     "core"
                 ],
                 "followable": false,
-                "couldNotResolve": false,
-                "valid": true
+                "couldNotResolve": false
             }
         ]
     },
@@ -155,8 +146,7 @@
                     "core"
                 ],
                 "followable": false,
-                "couldNotResolve": false,
-                "valid": true
+                "couldNotResolve": false
             }
         ]
     },
@@ -175,8 +165,7 @@
                     "local"
                 ],
                 "followable": true,
-                "couldNotResolve": false,
-                "valid": true
+                "couldNotResolve": false
             }
         ]
     },
@@ -202,8 +191,7 @@
                     "local"
                 ],
                 "followable": true,
-                "couldNotResolve": false,
-                "valid": true
+                "couldNotResolve": false
             }
         ]
     },
@@ -222,8 +210,7 @@
                     "npm-no-pkg"
                 ],
                 "followable": true,
-                "couldNotResolve": false,
-                "valid": true
+                "couldNotResolve": false
             }
         ]
     },
@@ -242,8 +229,7 @@
                     "unknown"
                 ],
                 "followable": false,
-                "couldNotResolve": true,
-                "valid": true
+                "couldNotResolve": true
             },
             {
                 "module": "really-does-not-exist",
@@ -254,8 +240,7 @@
                     "unknown"
                 ],
                 "followable": false,
-                "couldNotResolve": true,
-                "valid": true
+                "couldNotResolve": true
             }
         ]
     }

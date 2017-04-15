@@ -30,7 +30,8 @@
                         ],
                         "followable": true,
                         "couldNotResolve": false,
-                        "valid": true
+                        "valid": true,
+                        "circular": false
                     },
                     {
                         "module": "./somedata.json",
@@ -42,7 +43,8 @@
                         ],
                         "followable": false,
                         "couldNotResolve": false,
-                        "valid": true
+                        "valid": true,
+                        "circular": false
                     },
                     {
                         "module": "./two_only_one",
@@ -54,7 +56,8 @@
                         ],
                         "followable": true,
                         "couldNotResolve": false,
-                        "valid": true
+                        "valid": true,
+                        "circular": false
                     },
                     {
                         "module": "http",
@@ -66,7 +69,8 @@
                         ],
                         "followable": false,
                         "couldNotResolve": false,
-                        "valid": true
+                        "valid": true,
+                        "circular": false
                     }
                 ]
             },
@@ -103,7 +107,8 @@
                         ],
                         "followable": false,
                         "couldNotResolve": false,
-                        "valid": true
+                        "valid": true,
+                        "circular": false
                     }
                 ]
             },
@@ -130,7 +135,8 @@
                         ],
                         "followable": true,
                         "couldNotResolve": false,
-                        "valid": true
+                        "valid": true,
+                        "circular": false
                     }
                 ]
             },
@@ -147,7 +153,8 @@
                         ],
                         "followable": true,
                         "couldNotResolve": false,
-                        "valid": true
+                        "valid": true,
+                        "circular": false
                     },
                     {
                         "module": "path",
@@ -159,7 +166,8 @@
                         ],
                         "followable": false,
                         "couldNotResolve": false,
-                        "valid": true
+                        "valid": true,
+                        "circular": false
                     }
                 ]
             },
@@ -176,7 +184,8 @@
                         ],
                         "followable": false,
                         "couldNotResolve": false,
-                        "valid": true
+                        "valid": true,
+                        "circular": false
                     }
                 ]
             }
@@ -204,7 +213,8 @@
                         ],
                         "followable": true,
                         "couldNotResolve": false,
-                        "valid": true
+                        "valid": true,
+                        "circular": false
                     },
                     {
                         "module": "./one_only_two",
@@ -216,7 +226,8 @@
                         ],
                         "followable": true,
                         "couldNotResolve": false,
-                        "valid": true
+                        "valid": true,
+                        "circular": false
                     },
                     {
                         "module": "./shared",
@@ -228,7 +239,8 @@
                         ],
                         "followable": true,
                         "couldNotResolve": false,
-                        "valid": true
+                        "valid": true,
+                        "circular": false
                     },
                     {
                         "module": "./sub/dir",
@@ -240,7 +252,8 @@
                         ],
                         "followable": true,
                         "couldNotResolve": false,
-                        "valid": true
+                        "valid": true,
+                        "circular": false
                     },
                     {
                         "module": "fs",
@@ -252,7 +265,8 @@
                         ],
                         "followable": false,
                         "couldNotResolve": false,
-                        "valid": true
+                        "valid": true,
+                        "circular": false
                     }
                 ]
             },
@@ -279,7 +293,8 @@
                         ],
                         "followable": false,
                         "couldNotResolve": false,
-                        "valid": true
+                        "valid": true,
+                        "circular": false
                     }
                 ]
             },
@@ -306,7 +321,8 @@
                         ],
                         "followable": false,
                         "couldNotResolve": false,
-                        "valid": true
+                        "valid": true,
+                        "circular": false
                     }
                 ]
             },
@@ -323,7 +339,8 @@
                         ],
                         "followable": false,
                         "couldNotResolve": false,
-                        "valid": true
+                        "valid": true,
+                        "circular": false
                     }
                 ]
             },
@@ -340,7 +357,8 @@
                         ],
                         "followable": true,
                         "couldNotResolve": false,
-                        "valid": true
+                        "valid": true,
+                        "circular": false
                     },
                     {
                         "module": "path",
@@ -352,7 +370,8 @@
                         ],
                         "followable": false,
                         "couldNotResolve": false,
-                        "valid": true
+                        "valid": true,
+                        "circular": false
                     }
                 ]
             },
@@ -369,7 +388,8 @@
                         ],
                         "followable": false,
                         "couldNotResolve": false,
-                        "valid": true
+                        "valid": true,
+                        "circular": false
                     }
                 ]
             }
@@ -394,7 +414,8 @@
                         ],
                         "followable": true,
                         "couldNotResolve": false,
-                        "valid": true
+                        "valid": true,
+                        "circular": true
                     }
                 ]
             },
@@ -411,7 +432,8 @@
                         ],
                         "followable": true,
                         "couldNotResolve": false,
-                        "valid": true
+                        "valid": true,
+                        "circular": true
                     }
                 ]
             }
@@ -436,7 +458,8 @@
                         ],
                         "followable": true,
                         "couldNotResolve": false,
-                        "valid": true
+                        "valid": true,
+                        "circular": true
                     }
                 ]
             },
@@ -453,7 +476,8 @@
                         ],
                         "followable": true,
                         "couldNotResolve": false,
-                        "valid": true
+                        "valid": true,
+                        "circular": true
                     }
                 ]
             },
@@ -470,7 +494,8 @@
                         ],
                         "followable": true,
                         "couldNotResolve": false,
-                        "valid": true
+                        "valid": true,
+                        "circular": true
                     }
                 ]
             }

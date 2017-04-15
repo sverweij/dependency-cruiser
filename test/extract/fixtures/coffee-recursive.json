@@ -18,7 +18,8 @@
                         "couldNotResolve": false,
                         "module": "./javascriptThing",
                         "moduleSystem": "es6",
-                        "valid": true
+                        "valid": true,
+        "circular": false
                     },
                     {
                         "resolved": "test/extract/fixtures/coffee/sub/index.coffee",
@@ -30,7 +31,8 @@
                         "couldNotResolve": false,
                         "module": "./sub",
                         "moduleSystem": "es6",
-                        "valid": true
+                        "valid": true,
+        "circular": false
                     },
                     {
                         "resolved": "test/extract/fixtures/coffee/sub/kaching.litcoffee",
@@ -42,7 +44,8 @@
                         "couldNotResolve": false,
                         "module": "./sub/kaching",
                         "moduleSystem": "es6",
-                        "valid": true
+                        "valid": true,
+        "circular": false
                     },
                     {
                         "resolved": "test/extract/fixtures/coffee/sub/willBeReExported.coffee.md",
@@ -54,7 +57,8 @@
                         "couldNotResolve": false,
                         "module": "./sub/willBeReExported",
                         "moduleSystem": "es6",
-                        "valid": true
+                        "valid": true,
+        "circular": false
                     },
                     {
                         "resolved": "path",
@@ -66,7 +70,8 @@
                         "couldNotResolve": false,
                         "module": "path",
                         "moduleSystem": "es6",
-                        "valid": true
+                        "valid": true,
+        "circular": false
                     }
                 ]
             },
@@ -97,7 +102,8 @@
                         "couldNotResolve": false,
                         "module": "./willBeReExported",
                         "moduleSystem": "es6",
-                        "valid": true
+                        "valid": true,
+        "circular": false
                     }
                 ]
             },

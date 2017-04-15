@@ -1,10 +1,12 @@
 "use strict";
 
-const _         = require('lodash');
+const _                 = require('lodash');
 
-const extract   = require('./extract');
-const gather    = require('./gatherInitialSources');
-const summarize = require('./summarize');
+const extract           = require('./extract');
+const detectCircularity = require('./detectCircularity');
+const gather            = require('./gatherInitialSources');
+const summarize         = require('./summarize');
+const addValidations    = require('./addValidations');
 
 function extractRecursive (pFileName, pOptions, pVisited) {
     pOptions = pOptions || {};
@@ -104,10 +106,19 @@ function makeOptionsPresentable(pOptions) {
 module.exports = (pFileDirArray, pOptions, pCallback) => {
     const lCallback = pCallback ? pCallback : (pInput => pInput);
 
-    const lDependencies = _(
-            extractFileDirArray(pFileDirArray, pOptions).reduce(complete, [])
-        ).uniqBy(pDependency => pDependency.source)
-         .value();
+    let lDependencies =
+        detectCircularity(
+            _(
+                extractFileDirArray(pFileDirArray, pOptions).reduce(complete, [])
+            ).uniqBy(pDependency => pDependency.source)
+             .value()
+        );
+
+    lDependencies = addValidations(
+        lDependencies,
+        pOptions ? pOptions.validate : false,
+        pOptions ? pOptions.ruleSet : {}
+     );
 
     return lCallback(
         {

@@ -8,8 +8,7 @@
         "followable": false,
         "couldNotResolve": true,
         "module": "../../../node_modules/commander/index",
-        "moduleSystem": "amd",
-        "valid": true
+        "moduleSystem": "amd"
     },
     {
         "resolved": "test/extract/fixtures/amd-bangs/excitingpolyfill.js",
@@ -20,8 +19,7 @@
         "followable": true,
         "couldNotResolve": false,
         "module": "./excitingpolyfill.js",
-        "moduleSystem": "amd",
-        "valid": true
+        "moduleSystem": "amd"
     },
     {
         "resolved": "./one_only_one",
@@ -32,8 +30,7 @@
         "followable": false,
         "couldNotResolve": true,
         "module": "./one_only_one",
-        "moduleSystem": "amd",
-        "valid": true
+        "moduleSystem": "amd"
     },
     {
         "resolved": "./shared",
@@ -44,8 +41,7 @@
         "followable": false,
         "couldNotResolve": true,
         "module": "./shared",
-        "moduleSystem": "amd",
-        "valid": true
+        "moduleSystem": "amd"
     },
     {
         "resolved": "./somedata.json'",
@@ -56,8 +52,7 @@
         "followable": false,
         "couldNotResolve": true,
         "module": "./somedata.json'",
-        "moduleSystem": "amd",
-        "valid": true
+        "moduleSystem": "amd"
     },
     {
         "resolved": "./sub/dir",
@@ -68,8 +63,7 @@
         "followable": false,
         "couldNotResolve": true,
         "module": "./sub/dir",
-        "moduleSystem": "amd",
-        "valid": true
+        "moduleSystem": "amd"
     },
     {
         "resolved": "fs",
@@ -80,8 +74,7 @@
         "followable": false,
         "couldNotResolve": false,
         "module": "fs",
-        "moduleSystem": "amd",
-        "valid": true
+        "moduleSystem": "amd"
     },
     {
         "resolved": "json",
@@ -92,7 +85,6 @@
         "followable": false,
         "couldNotResolve": true,
         "module": "json",
-        "moduleSystem": "amd",
-        "valid": true
+        "moduleSystem": "amd"
     }
 ]

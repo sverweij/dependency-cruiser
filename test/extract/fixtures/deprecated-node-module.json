@@ -20,7 +20,8 @@
                         ],
                         "module": "deprecated-at-the-start-for-test-purposes",
                         "moduleSystem": "cjs",
-                        "valid": true
+                        "valid": true,
+                        "circular": false
                     }
                 ]
             },
@@ -37,7 +38,8 @@
                         ],
                         "module": "./package.json",
                         "moduleSystem": "cjs",
-                        "valid": true
+                        "valid": true,
+                        "circular": false
                     }
                 ]
             },

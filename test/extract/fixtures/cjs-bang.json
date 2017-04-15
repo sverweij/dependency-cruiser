@@ -8,8 +8,7 @@
         "followable": true,
         "couldNotResolve": false,
         "module": "./dependency",
-        "moduleSystem": "cjs",
-        "valid": true
+        "moduleSystem": "cjs"
     },
     {
         "resolved": "ieeeeeeeee",
@@ -20,7 +19,6 @@
         "followable": false,
         "couldNotResolve": true,
         "module": "ieeeeeeeee",
-        "moduleSystem": "cjs",
-        "valid": true
+        "moduleSystem": "cjs"
     }
 ]
