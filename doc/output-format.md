@@ -30,7 +30,8 @@ module):
                     ],
                     "module": "child_process",
                     "moduleSystem": "cjs",
-                    "valid": true
+                    "valid": true,
+                    "circular": false
                 },
                 {
                     "resolved": "events",
@@ -42,7 +43,8 @@ module):
                     ],
                     "module": "events",
                     "moduleSystem": "cjs",
-                    "valid": true
+                    "valid": true,
+                    "circular": false
                 },
                 {
                     "resolved": "fs",
@@ -54,7 +56,8 @@ module):
                     ],
                     "module": "fs",
                     "moduleSystem": "cjs",
-                    "valid": true
+                    "valid": true,
+                    "circular": false
                 },
                 {
                     "resolved": "graceful-readlink/index.js",
@@ -66,7 +69,8 @@ module):
                     ],
                     "module": "graceful-readlink",
                     "moduleSystem": "cjs",
-                    "valid": true
+                    "valid": true,
+                    "circular": false
                 },
                 {
                     "resolved": "path",
@@ -78,7 +82,8 @@ module):
                     ],
                     "module": "path",
                     "moduleSystem": "cjs",
-                    "valid": true
+                    "valid": true,
+                    "circular": false
                 }
             ]
         },
@@ -135,7 +140,8 @@ module):
                     ],
                     "module": "fs",
                     "moduleSystem": "cjs",
-                    "valid": true
+                    "valid": true,
+                    "circular": false
                 }
             ]
         }
