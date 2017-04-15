@@ -62,6 +62,7 @@
     },{
         "name": "no-circular",
         "severity": "warn",
+        "comment": "Warn in case there's circular dependencies",
         "from": {},
         "to": { "circular": true }
     }]
