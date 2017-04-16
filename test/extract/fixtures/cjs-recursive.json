@@ -405,6 +405,19 @@
                 "source": "test/extract/fixtures/cjs/circular.js",
                 "dependencies": [
                     {
+                        "module": "./pointed-to-by-circular",
+                        "resolved": "test/extract/fixtures/cjs/pointed-to-by-circular.js",
+                        "moduleSystem": "cjs",
+                        "coreModule": false,
+                        "dependencyTypes": [
+                            "local"
+                        ],
+                        "followable": true,
+                        "couldNotResolve": false,
+                        "valid": true,
+                        "circular": false
+                    },
+                    {
                         "module": "./ralucric",
                         "resolved": "test/extract/fixtures/cjs/ralucric.js",
                         "moduleSystem": "cjs",
@@ -418,6 +431,10 @@
                         "circular": true
                     }
                 ]
+            },
+            {
+                "source": "test/extract/fixtures/cjs/pointed-to-by-circular.js",
+                "dependencies": []
             },
             {
                 "source": "test/extract/fixtures/cjs/ralucric.js",
@@ -442,9 +459,27 @@
     {
         "title": "circular dependency (more steps)",
         "input": {
-            "fileName": "test/extract/fixtures/cjs/circle-one.js"
+            "fileName": "test/extract/fixtures/cjs/points-to-circle-one.js"
         },
         "expected": [
+            {
+                "source": "test/extract/fixtures/cjs/points-to-circle-one.js",
+                "dependencies": [
+                    {
+                        "module": "./circle-one",
+                        "resolved": "test/extract/fixtures/cjs/circle-one.js",
+                        "moduleSystem": "cjs",
+                        "coreModule": false,
+                        "dependencyTypes": [
+                            "local"
+                        ],
+                        "followable": true,
+                        "couldNotResolve": false,
+                        "valid": true,
+                        "circular": false
+                    }
+                ]
+            },
             {
                 "source": "test/extract/fixtures/cjs/circle-one.js",
                 "dependencies": [
