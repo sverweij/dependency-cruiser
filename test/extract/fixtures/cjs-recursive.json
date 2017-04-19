@@ -30,8 +30,7 @@
                         ],
                         "followable": true,
                         "couldNotResolve": false,
-                        "valid": true,
-                        "circular": false
+                        "valid": true
                     },
                     {
                         "module": "./somedata.json",
@@ -43,8 +42,7 @@
                         ],
                         "followable": false,
                         "couldNotResolve": false,
-                        "valid": true,
-                        "circular": false
+                        "valid": true
                     },
                     {
                         "module": "./two_only_one",
@@ -56,8 +54,7 @@
                         ],
                         "followable": true,
                         "couldNotResolve": false,
-                        "valid": true,
-                        "circular": false
+                        "valid": true
                     },
                     {
                         "module": "http",
@@ -69,8 +66,7 @@
                         ],
                         "followable": false,
                         "couldNotResolve": false,
-                        "valid": true,
-                        "circular": false
+                        "valid": true
                     }
                 ]
             },
@@ -107,8 +103,7 @@
                         ],
                         "followable": false,
                         "couldNotResolve": false,
-                        "valid": true,
-                        "circular": false
+                        "valid": true
                     }
                 ]
             },
@@ -135,8 +130,7 @@
                         ],
                         "followable": true,
                         "couldNotResolve": false,
-                        "valid": true,
-                        "circular": false
+                        "valid": true
                     }
                 ]
             },
@@ -153,8 +147,7 @@
                         ],
                         "followable": true,
                         "couldNotResolve": false,
-                        "valid": true,
-                        "circular": false
+                        "valid": true
                     },
                     {
                         "module": "path",
@@ -166,8 +159,7 @@
                         ],
                         "followable": false,
                         "couldNotResolve": false,
-                        "valid": true,
-                        "circular": false
+                        "valid": true
                     }
                 ]
             },
@@ -184,8 +176,7 @@
                         ],
                         "followable": false,
                         "couldNotResolve": false,
-                        "valid": true,
-                        "circular": false
+                        "valid": true
                     }
                 ]
             }
@@ -213,8 +204,7 @@
                         ],
                         "followable": true,
                         "couldNotResolve": false,
-                        "valid": true,
-                        "circular": false
+                        "valid": true
                     },
                     {
                         "module": "./one_only_two",
@@ -226,8 +216,7 @@
                         ],
                         "followable": true,
                         "couldNotResolve": false,
-                        "valid": true,
-                        "circular": false
+                        "valid": true
                     },
                     {
                         "module": "./shared",
@@ -239,9 +228,7 @@
                         ],
                         "followable": true,
                         "couldNotResolve": false,
-                        "valid": true,
-                        "circular": false
-                    },
+                        "valid": true                    },
                     {
                         "module": "./sub/dir",
                         "resolved": "test/extract/fixtures/cjs/sub/dir.js",
@@ -252,8 +239,7 @@
                         ],
                         "followable": true,
                         "couldNotResolve": false,
-                        "valid": true,
-                        "circular": false
+                        "valid": true
                     },
                     {
                         "module": "fs",
@@ -265,8 +251,7 @@
                         ],
                         "followable": false,
                         "couldNotResolve": false,
-                        "valid": true,
-                        "circular": false
+                        "valid": true
                     }
                 ]
             },
@@ -293,8 +278,7 @@
                         ],
                         "followable": false,
                         "couldNotResolve": false,
-                        "valid": true,
-                        "circular": false
+                        "valid": true
                     }
                 ]
             },
@@ -321,8 +305,7 @@
                         ],
                         "followable": false,
                         "couldNotResolve": false,
-                        "valid": true,
-                        "circular": false
+                        "valid": true
                     }
                 ]
             },
@@ -339,8 +322,7 @@
                         ],
                         "followable": false,
                         "couldNotResolve": false,
-                        "valid": true,
-                        "circular": false
+                        "valid": true
                     }
                 ]
             },
@@ -357,8 +339,7 @@
                         ],
                         "followable": true,
                         "couldNotResolve": false,
-                        "valid": true,
-                        "circular": false
+                        "valid": true
                     },
                     {
                         "module": "path",
@@ -370,8 +351,7 @@
                         ],
                         "followable": false,
                         "couldNotResolve": false,
-                        "valid": true,
-                        "circular": false
+                        "valid": true
                     }
                 ]
             },
@@ -388,8 +368,7 @@
                         ],
                         "followable": false,
                         "couldNotResolve": false,
-                        "valid": true,
-                        "circular": false
+                        "valid": true
                     }
                 ]
             }
@@ -398,7 +377,18 @@
     {
         "title": "circular dependency (one step)",
         "input": {
-            "fileName": "test/extract/fixtures/cjs/circular.js"
+            "fileName": "test/extract/fixtures/cjs/circular.js",
+            "options":{
+                "validate": true,
+                "ruleSet": {
+                    "forbidden": [{
+                        "name": "no-circular",
+                        "severity": "info",
+                        "from": {},
+                        "to": {"circular": true}
+                    }]
+                }
+            }
         },
         "expected": [
             {
@@ -427,8 +417,12 @@
                         ],
                         "followable": true,
                         "couldNotResolve": false,
-                        "valid": true,
-                        "circular": true
+                        "valid": false,
+                        "circular": true,
+                        "rule": {
+                            "name": "no-circular",
+                            "severity": "info"
+                        }
                     }
                 ]
             },
@@ -449,8 +443,12 @@
                         ],
                         "followable": true,
                         "couldNotResolve": false,
-                        "valid": true,
-                        "circular": true
+                        "valid": false,
+                        "circular": true,
+                        "rule": {
+                            "name": "no-circular",
+                            "severity": "info"
+                        }
                     }
                 ]
             }
@@ -459,7 +457,10 @@
     {
         "title": "circular dependency (more steps)",
         "input": {
-            "fileName": "test/extract/fixtures/cjs/points-to-circle-one.js"
+            "fileName": "test/extract/fixtures/cjs/points-to-circle-one.js",
+            "options": {
+                "forceCircular": true
+            }
         },
         "expected": [
             {

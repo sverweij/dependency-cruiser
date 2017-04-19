@@ -13,8 +13,7 @@
                     ],
                     "module": "./javascriptThing",
                     "moduleSystem": "es6",
-                    "valid": true,
-                    "circular": false
+                    "valid": true
                 },
                 {
                     "resolved": "test/main/fixtures/ts/sub/index.ts",
@@ -26,8 +25,7 @@
                     ],
                     "module": "./sub",
                     "moduleSystem": "es6",
-                    "valid": true,
-                    "circular": false
+                    "valid": true
                 },
                 {
                     "resolved": "test/main/fixtures/ts/sub/kaching.ts",
@@ -39,8 +37,7 @@
                     ],
                     "module": "./sub/kaching",
                     "moduleSystem": "es6",
-                    "valid": true,
-                    "circular": false
+                    "valid": true
                 },
                 {
                     "resolved": "test/main/fixtures/ts/sub/willBeReExported.ts",
@@ -52,8 +49,7 @@
                     ],
                     "module": "./sub/willBeReExported",
                     "moduleSystem": "es6",
-                    "valid": true,
-                    "circular": false
+                    "valid": true
                 },
                 {
                     "resolved": "path",
@@ -65,8 +61,7 @@
                     ],
                     "module": "path",
                     "moduleSystem": "es6",
-                    "valid": true,
-                    "circular": false
+                    "valid": true
                 }
             ]
         },
@@ -97,8 +92,7 @@
                     ],
                     "module": "./willBeReExported",
                     "moduleSystem": "es6",
-                    "valid": true,
-                    "circular": false
+                    "valid": true
                 }
             ]
         },

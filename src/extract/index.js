@@ -103,16 +103,32 @@ function makeOptionsPresentable(pOptions) {
         );
 }
 
+function circularityDetectionNecessary(pOptions) {
+    if (pOptions) {
+        if (pOptions.forceCircular) {
+            return true;
+        }
+        if (pOptions.validate && pOptions.ruleSet) {
+            return pOptions.ruleSet.forbidden &&
+                pOptions.ruleSet.forbidden.some(
+                    pRule => pRule.to.hasOwnProperty("circular")
+                );
+        }
+    }
+    return false;
+}
+
 module.exports = (pFileDirArray, pOptions, pCallback) => {
     const lCallback = pCallback ? pCallback : (pInput => pInput);
 
-    let lDependencies =
-        detectCircularity(
-            _(
-                extractFileDirArray(pFileDirArray, pOptions).reduce(complete, [])
-            ).uniqBy(pDependency => pDependency.source)
-             .value()
-        );
+    let lDependencies = _(
+        extractFileDirArray(pFileDirArray, pOptions).reduce(complete, [])
+    ).uniqBy(pDependency => pDependency.source)
+     .value();
+
+    if (circularityDetectionNecessary(pOptions)){
+        lDependencies = detectCircularity(lDependencies);
+    }
 
     lDependencies = addValidations(
         lDependencies,

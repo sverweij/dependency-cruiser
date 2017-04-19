@@ -18,7 +18,8 @@ const testPairs = [
         dirOrFile: "test/cli/fixtures/{{moduleType}}",
         options: {
             outputTo: path.join(OUT_DIR, "{{moduleType}}.dir.json"),
-            outputType: "json"
+            outputType: "json",
+            forceCircular: true
         },
         expect: "{{moduleType}}.dir.json",
         cleanup: true
@@ -28,7 +29,8 @@ const testPairs = [
         dirOrFile: "test/cli/fixtures/{{moduleType}}",
         options: {
             outputTo: path.join(OUT_DIR, "{{moduleType}}.dir.json"),
-            outputType: "json"
+            outputType: "json",
+            forceCircular: true
         },
         expect: "{{moduleType}}.dir.json",
         cleanup: true
@@ -38,7 +40,8 @@ const testPairs = [
         dirOrFile: "test/cli/fixtures/{{moduleType}}/root_one.js",
         options: {
             outputTo: path.join(OUT_DIR, "{{moduleType}}.file.json"),
-            outputType: "json"
+            outputType: "json",
+            forceCircular: true
         },
         expect: "{{moduleType}}.file.json",
         cleanup: true
@@ -49,6 +52,7 @@ const testPairs = [
         options: {
             outputTo: path.join(OUT_DIR, "{{moduleType}}.dir.filtered.json"),
             outputType: "json",
+            forceCircular: true,
             exclude: "node_modules"
         },
         expect: "{{moduleType}}.dir.filtered.json",
@@ -60,6 +64,7 @@ const testPairs = [
         options: {
             outputTo: path.join(OUT_DIR, "{{moduleType}}.dir.filtered.html"),
             outputType: "html",
+            forceCircular: true,
             validate: "test/cli/fixtures/rules.sub-not-allowed.json",
             exclude: "node_modules"
         },
@@ -73,6 +78,7 @@ const testPairs = [
             outputTo: path.join(OUT_DIR, "{{moduleType}}.dir.filtered.dot"),
             validate: "test/cli/fixtures/rules.sub-not-allowed.json",
             outputType: "dot",
+            forceCircular: true,
             exclude: "node_modules"
         },
         expect: "{{moduleType}}.dir.filtered.dot",
@@ -84,6 +90,7 @@ const testPairs = [
         options: {
             outputTo: path.join(OUT_DIR, "duplicate-subs.dot"),
             outputType: "dot",
+            forceCircular: true,
             exclude: "node_modules"
         },
         expect: "duplicate-subs.dot",
@@ -178,7 +185,8 @@ describe("#processCLI", () => {
                 ],
                 {
                     outputTo: lOutputTo,
-                    outputType: "json"
+                    outputType: "json",
+                    forceCircular: true
                 }
             );
             tst.assertFileEqual(
@@ -209,7 +217,7 @@ describe("#processCLI", () => {
                 lCapturedStdout += pText;
             });
 
-            processCLI(["test/cli/fixtures/cjs"], {outputType: "json"});
+            processCLI(["test/cli/fixtures/cjs"], {outputType: "json", forceCircular: true});
             unhookIntercept();
             fs.writeFileSync(
                 path.join(OUT_DIR, "cjs.dir.stdout.json"),
@@ -229,7 +237,7 @@ describe("#processCLI", () => {
                 lCapturedStdout += pText;
             });
 
-            processCLI(["test/cli/fixtures/cjs"], {outputTo: "-", outputType: 'json'});
+            processCLI(["test/cli/fixtures/cjs"], {outputTo: "-", outputType: 'json', forceCircular: true});
             unhookIntercept();
             fs.writeFileSync(
                 path.join(OUT_DIR, "cjs.dir.stdout.json"),
@@ -253,7 +261,7 @@ describe("#processCLI", () => {
                 lCapturedStderr += pText;
             });
 
-            processCLI(["this-doesnot-exist"], {outputTo: path.join(OUT_DIR, "cjs.dir.wontmarch.json")});
+            processCLI(["this-doesnot-exist"], {outputTo: path.join(OUT_DIR, "cjs.dir.wontmarch.json"), forceCircular: true});
             unhookInterceptStdOut();
             unhookInterceptStdErr();
 
@@ -278,7 +286,8 @@ describe("#processCLI", () => {
                 ["test/cli/fixtures"],
                 {
                     outputTo: path.join(OUT_DIR, "/dev/null"),
-                    system: "invalidmodulesystem"
+                    system: "invalidmodulesystem",
+                    forceCircular: true
                 }
             );
             unhookInterceptStdOut();
@@ -308,7 +317,8 @@ describe("#processCLI", () => {
                 ["test/cli/fixtures"],
                 {
                     outputTo: path.join(OUT_DIR, "/dev/null"),
-                    outputType: "invalidoutputtype"
+                    outputType: "invalidoutputtype",
+                    forceCircular: true
                 }
             );
             unhookInterceptStdOut();
@@ -337,7 +347,8 @@ describe("#processCLI", () => {
             processCLI(
                 ["test/cli/fixtures"],
                 {
-                    outputTo: path.join(OUT_DIR, "file/you/cant/write/to")
+                    outputTo: path.join(OUT_DIR, "file/you/cant/write/to"),
+                    forceCircular: true
                 }
             );
             unhookInterceptStdOut();
@@ -367,7 +378,8 @@ describe("#processCLI", () => {
                 ["test/cli/fixtures"],
                 {
                     outputTo: path.join(OUT_DIR, "/dev/null"),
-                    exclude: "([A-Za-z]+)*"
+                    exclude: "([A-Za-z]+)*",
+                    forceCircular: true
                 }
             );
             unhookInterceptStdOut();

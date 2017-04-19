@@ -2,7 +2,10 @@
     {
         "title": "recursive on typescript modules",
         "input": {
-            "fileName": "test/extract/fixtures/ts/index.ts"
+            "fileName": "test/extract/fixtures/ts/index.ts",
+            "options": {
+                "forceCircular": true
+            }
         },
         "expected": [
             {
