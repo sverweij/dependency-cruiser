@@ -166,8 +166,8 @@ where you started (a.k.a. circular dependencies). Leaving this out => you don't
 care either way.
 
 Detecting circular dependencies is heavy work. Especially on larger code bases
-you might notice an impact on the performance when you add a rule that checks
-for circular dependencies.
+(thousands of files in one dependency graph) you might notice an impact on
+the performance when you add a rule that checks for circular dependencies.
 
 ## dependencyTypes
 You might have spent some time wondering why something works on your machine,
