@@ -8,7 +8,7 @@ function relationEndsUpAtFrom(pGraph, pFrom, pTo, pVisited) {
     return Boolean(lToNode) &&
         lToNode.hasOwnProperty("dependencies") &&
         lToNode.dependencies.filter(
-            pToToNodeName => !pVisited.has(pToToNodeName)
+            pToToNodeName => !pVisited.has(pToToNodeName.resolved)
         ).some(
             pToToNodeName =>
                 (pToToNodeName.hasOwnProperty("resolved") && pToToNodeName.resolved === pFrom)
@@ -17,7 +17,7 @@ function relationEndsUpAtFrom(pGraph, pFrom, pTo, pVisited) {
                     pGraph,
                     pFrom,
                     pToToNodeName.resolved,
-                    pVisited.add(pToToNodeName)
+                    pVisited.add(pToToNodeName.resolved)
                 )
         );
 }
