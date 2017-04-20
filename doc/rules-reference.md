@@ -160,6 +160,15 @@ Whether or not to match modules dependency-cruiser could not resolve (and
 probably aren't on disk). For this one too: leave out if you don't care either
 way.
 
+### circular
+A boolean indicating whether or not to match module dependencies that end up
+where you started (a.k.a. circular dependencies). Leaving this out => you don't
+care either way.
+
+Detecting circular dependencies is heavy work. Especially on larger code bases
+(thousands of files in one dependency graph) you might notice an impact on
+the performance when you add a rule that checks for circular dependencies.
+
 ## dependencyTypes
 You might have spent some time wondering why something works on your machine,
 but not on other's. Only to discover you _did_ install a dependency, but
@@ -309,6 +318,12 @@ false).
         "severity": "warn",
         "from": {},
         "to": { "moreThanOneDependencyType": true }
+    },{
+        "name": "no-circular",
+        "comment": "Warn if there's a circular dependency",
+        "severity": "warn",
+        "from": {},
+        "to": { "circular": true }
     }]
 }
 ```

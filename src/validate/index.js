@@ -70,7 +70,8 @@ function matchRule(pFrom, pTo) {
                 intersects(pTo.dependencyTypes, pRule.to.dependencyTypes)
             ) && (!pRule.to.hasOwnProperty("moreThanOneDependencyType") ||
                 pTo.dependencyTypes.length > 1
-            ) && propertyEquals(pTo, pRule, "couldNotResolve");
+            ) && propertyEquals(pTo, pRule, "couldNotResolve") &&
+                 propertyEquals(pTo, pRule, "circular");
     };
 }
 

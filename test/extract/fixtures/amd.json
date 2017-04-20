@@ -14,8 +14,7 @@
                     "local"
                 ],
                 "followable": true,
-                "couldNotResolve": false,
-                "valid": true
+                "couldNotResolve": false
             },
             {
                 "module": "./root_two",
@@ -26,8 +25,7 @@
                     "local"
                 ],
                 "followable": true,
-                "couldNotResolve": false,
-                "valid": true
+                "couldNotResolve": false
             }
         ]
     },
@@ -46,8 +44,7 @@
                     "local"
                 ],
                 "followable": true,
-                "couldNotResolve": false,
-                "valid": true
+                "couldNotResolve": false
             },
             {
                 "module": "./root_one",
@@ -58,8 +55,7 @@
                     "local"
                 ],
                 "followable": true,
-                "couldNotResolve": false,
-                "valid": true
+                "couldNotResolve": false
             }
         ]
     },
@@ -78,8 +74,7 @@
                     "local"
                 ],
                 "followable": true,
-                "couldNotResolve": false,
-                "valid": true
+                "couldNotResolve": false
             },
             {
                 "module": "./root_two",
@@ -90,8 +85,7 @@
                     "local"
                 ],
                 "followable": true,
-                "couldNotResolve": false,
-                "valid": true
+                "couldNotResolve": false
             },
             {
                 "module": "./sub/dir",
@@ -102,8 +96,7 @@
                     "local"
                 ],
                 "followable": true,
-                "couldNotResolve": false,
-                "valid": true
+                "couldNotResolve": false
             }
         ]
     },
@@ -123,8 +116,7 @@
                     "local"
                 ],
                 "followable": true,
-                "couldNotResolve": false,
-                "valid": true
+                "couldNotResolve": false
             },
             {
                 "module": "./root_two",
@@ -135,8 +127,7 @@
                     "local"
                 ],
                 "followable": true,
-                "couldNotResolve": false,
-                "valid": true
+                "couldNotResolve": false
             }
         ]
     },
@@ -155,8 +146,7 @@
                     "local"
                 ],
                 "followable": true,
-                "couldNotResolve": false,
-                "valid": true
+                "couldNotResolve": false
             },
             {
                 "module": "./root_one",
@@ -167,8 +157,7 @@
                     "local"
                 ],
                 "followable": true,
-                "couldNotResolve": false,
-                "valid": true
+                "couldNotResolve": false
             },
             {
                 "module": "./root_two",
@@ -179,8 +168,7 @@
                     "local"
                 ],
                 "followable": true,
-                "couldNotResolve": false,
-                "valid": true
+                "couldNotResolve": false
             },
             {
                 "module": "./root_two",
@@ -191,8 +179,7 @@
                     "local"
                 ],
                 "followable": true,
-                "couldNotResolve": false,
-                "valid": true
+                "couldNotResolve": false
             }
         ]
     },
@@ -211,8 +198,7 @@
                     "unknown"
                 ],
                 "followable": false,
-                "couldNotResolve": true,
-                "valid": true
+                "couldNotResolve": true
             },
             {
                 "module": "other-module-in-the-config",
@@ -223,8 +209,7 @@
                     "unknown"
                 ],
                 "followable": false,
-                "couldNotResolve": true,
-                "valid": true
+                "couldNotResolve": true
             },
             {
                 "module": "sub/local-module-in-drag",
@@ -235,8 +220,7 @@
                     "undetermined"
                 ],
                 "followable": true,
-                "couldNotResolve": false,
-                "valid": true
+                "couldNotResolve": false
             }
         ]
     },

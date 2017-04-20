@@ -46,8 +46,10 @@ depcruise --init-rules
 ```
 
 This will create a `.dependency-cruiser.json` with some rules that make sense
-in most projects. Start adding your rules by tweaking that file.
+in most projects (detecting **circular dependencies**, dependencies **missing**
+in package.json, production code relying on dev- or optionalDependencies, ...).
 
+Start adding your rules by tweaking that file.
 
 Sample rule:
 ```json
@@ -65,15 +67,14 @@ Sample rule:
 - To read more about writing rules check the
   [writing rules](./doc/rules-tutorial.md) tutorial
   or the [rules reference](./doc/rules-reference.md)
-- There is practical rules configuration to get you started
-  [here](./doc/rules.starter.json)
+- You can find the `--init-rules` set   [here](./doc/rules.starter.json)
 
 #### Report them
 ```sh
 depcruise --validate .dependency-cruiser.json src
 ```
 
-This will validate your rules and shows any violations in an eslint-like format:
+This will validate aginst your rules and shows any violations in an eslint-like format:
 
 ![sample err output](https://raw.githubusercontent.com/sverweij/dependency-cruiser/master/doc/assets/sample-err-output.png)
 

@@ -6,7 +6,6 @@ const fs                          = require('fs');
 const _                           = require('lodash');
 const path                        = require('path');
 const resolve                     = require('./resolve');
-const validate                    = require('../validate');
 const transpile                   = require('./transpile');
 const ignore                      = require('./ignore');
 const extractES6Dependencies      = require('./extract-ES6');
@@ -102,13 +101,7 @@ module.exports = (pFileName, pOptions) => {
                         {
                             module       : pDependency.moduleName,
                             moduleSystem : pDependency.moduleSystem
-                        },
-                        validate(
-                            pOptions.validate,
-                            pOptions.ruleSet,
-                            pFileName,
-                            lResolved
-                        )
+                        }
                     );
                 }
             )

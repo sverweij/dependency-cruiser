@@ -2,7 +2,10 @@
     {
         "title": "recursive on typescript modules",
         "input": {
-            "fileName": "test/extract/fixtures/ts/index.ts"
+            "fileName": "test/extract/fixtures/ts/index.ts",
+            "options": {
+                "forceCircular": true
+            }
         },
         "expected": [
             {
@@ -18,7 +21,8 @@
                         "couldNotResolve": false,
                         "module": "./javascriptThing",
                         "moduleSystem": "es6",
-                        "valid": true
+                        "valid": true,
+                        "circular": false
                     },
                     {
                         "resolved": "test/extract/fixtures/ts/sub/index.ts",
@@ -30,7 +34,8 @@
                         "couldNotResolve": false,
                         "module": "./sub",
                         "moduleSystem": "es6",
-                        "valid": true
+                        "valid": true,
+                        "circular": false
                     },
                     {
                         "resolved": "test/extract/fixtures/ts/sub/kaching.ts",
@@ -42,7 +47,8 @@
                         "couldNotResolve": false,
                         "module": "./sub/kaching",
                         "moduleSystem": "es6",
-                        "valid": true
+                        "valid": true,
+                        "circular": false
                     },
                     {
                         "resolved": "test/extract/fixtures/ts/sub/willBeReExported.ts",
@@ -54,7 +60,8 @@
                         "couldNotResolve": false,
                         "module": "./sub/willBeReExported",
                         "moduleSystem": "es6",
-                        "valid": true
+                        "valid": true,
+                        "circular": false
                     },
                     {
                         "resolved": "path",
@@ -66,7 +73,8 @@
                         "couldNotResolve": false,
                         "module": "path",
                         "moduleSystem": "es6",
-                        "valid": true
+                        "valid": true,
+                        "circular": false
                     }
                 ]
             },
@@ -97,7 +105,8 @@
                         "couldNotResolve": false,
                         "module": "./willBeReExported",
                         "moduleSystem": "es6",
-                        "valid": true
+                        "valid": true,
+                        "circular": false
                     }
                 ]
             },

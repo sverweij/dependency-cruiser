@@ -1,10 +1,12 @@
 "use strict";
 
-const _         = require('lodash');
+const _                 = require('lodash');
 
-const extract   = require('./extract');
-const gather    = require('./gatherInitialSources');
-const summarize = require('./summarize');
+const extract           = require('./extract');
+const detectCircularity = require('./detectCircularity');
+const gather            = require('./gatherInitialSources');
+const summarize         = require('./summarize');
+const addValidations    = require('./addValidations');
 
 function extractRecursive (pFileName, pOptions, pVisited) {
     pOptions = pOptions || {};
@@ -101,13 +103,38 @@ function makeOptionsPresentable(pOptions) {
         );
 }
 
+function circularityDetectionNecessary(pOptions) {
+    if (pOptions) {
+        if (pOptions.forceCircular) {
+            return true;
+        }
+        if (pOptions.validate && pOptions.ruleSet) {
+            return pOptions.ruleSet.forbidden &&
+                pOptions.ruleSet.forbidden.some(
+                    pRule => pRule.to.hasOwnProperty("circular")
+                );
+        }
+    }
+    return false;
+}
+
 module.exports = (pFileDirArray, pOptions, pCallback) => {
     const lCallback = pCallback ? pCallback : (pInput => pInput);
 
-    const lDependencies = _(
-            extractFileDirArray(pFileDirArray, pOptions).reduce(complete, [])
-        ).uniqBy(pDependency => pDependency.source)
-         .value();
+    let lDependencies = _(
+        extractFileDirArray(pFileDirArray, pOptions).reduce(complete, [])
+    ).uniqBy(pDependency => pDependency.source)
+     .value();
+
+    if (circularityDetectionNecessary(pOptions)){
+        lDependencies = detectCircularity(lDependencies);
+    }
+
+    lDependencies = addValidations(
+        lDependencies,
+        pOptions ? pOptions.validate : false,
+        pOptions ? pOptions.ruleSet : {}
+     );
 
     return lCallback(
         {

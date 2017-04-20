@@ -126,9 +126,14 @@ src/main/index.js: \
 	src/validate/readRuleSet.js
 
 src/extract/index.js: \
+	src/extract/addValidations.js \
+	src/extract/detectCircularity.js \
 	src/extract/extract.js \
 	src/extract/gatherInitialSources.js \
 	src/extract/summarize.js
+
+src/extract/addValidations.js: \
+	src/validate/index.js
 
 src/extract/extract.js: \
 	src/extract/extract-AMD.js \
@@ -136,8 +141,7 @@ src/extract/extract.js: \
 	src/extract/extract-commonJS.js \
 	src/extract/ignore.js \
 	src/extract/resolve/index.js \
-	src/extract/transpile/index.js \
-	src/validate/index.js
+	src/extract/transpile/index.js
 
 src/extract/extract-AMD.js: \
 	src/extract/extract-commonJS.js
@@ -205,6 +209,8 @@ src/validate/validateRuleSet.js: \
 # cjs dependencies
 ALL_SRC=src/main/index.js \
 	package.json \
+	src/extract/addValidations.js \
+	src/extract/detectCircularity.js \
 	src/extract/extract-AMD.js \
 	src/extract/extract-ES6.js \
 	src/extract/extract-commonJS.js \
@@ -264,9 +270,14 @@ src/main/index.js: \
 	src/validate/readRuleSet.js
 
 src/extract/index.js: \
+	src/extract/addValidations.js \
+	src/extract/detectCircularity.js \
 	src/extract/extract.js \
 	src/extract/gatherInitialSources.js \
 	src/extract/summarize.js
+
+src/extract/addValidations.js: \
+	src/validate/index.js
 
 src/extract/extract.js: \
 	src/extract/extract-AMD.js \
@@ -274,8 +285,7 @@ src/extract/extract.js: \
 	src/extract/extract-commonJS.js \
 	src/extract/ignore.js \
 	src/extract/resolve/index.js \
-	src/extract/transpile/index.js \
-	src/validate/index.js
+	src/extract/transpile/index.js
 
 src/extract/extract-AMD.js: \
 	src/extract/extract-commonJS.js

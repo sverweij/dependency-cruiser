@@ -14,8 +14,7 @@
                     "local"
                 ],
                 "followable": true,
-                "couldNotResolve": false,
-                "valid": true
+                "couldNotResolve": false
             },
             {
                 "module": "./sub",
@@ -26,8 +25,7 @@
                     "local"
                 ],
                 "followable": true,
-                "couldNotResolve": false,
-                "valid": true
+                "couldNotResolve": false
             },
             {
                 "module": "./sub/kaching",
@@ -38,8 +36,7 @@
                     "local"
                 ],
                 "followable": true,
-                "couldNotResolve": false,
-                "valid": true
+                "couldNotResolve": false
             },
             {
                 "module": "./sub/willBeReExported",
@@ -50,8 +47,7 @@
                     "local"
                 ],
                 "followable": true,
-                "couldNotResolve": false,
-                "valid": true
+                "couldNotResolve": false
             },
             {
                 "module": "path",
@@ -62,8 +58,7 @@
                     "core"
                 ],
                 "followable": false,
-                "couldNotResolve": false,
-                "valid": true
+                "couldNotResolve": false
             }
         ]
     }

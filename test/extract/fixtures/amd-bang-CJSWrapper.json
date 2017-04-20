@@ -8,8 +8,7 @@
         "followable": true,
         "couldNotResolve": false,
         "module": "./excitingpolyfill",
-        "moduleSystem": "amd",
-        "valid": true
+        "moduleSystem": "amd"
     },
     {
         "resolved": "test/extract/fixtures/amd-bangs/root_one.js",
@@ -20,8 +19,7 @@
         "followable": true,
         "couldNotResolve": false,
         "module": "./root_one",
-        "moduleSystem": "amd",
-        "valid": true
+        "moduleSystem": "amd"
     },
     {
         "resolved": "./root_two",
@@ -32,8 +30,7 @@
         "followable": false,
         "couldNotResolve": true,
         "module": "./root_two",
-        "moduleSystem": "amd",
-        "valid": true
+        "moduleSystem": "amd"
     },
     {
         "resolved": "test/extract/fixtures/amd-bangs/somedata.json",
@@ -44,8 +41,7 @@
         "followable": false,
         "couldNotResolve": false,
         "module": "./somedata.json",
-        "moduleSystem": "amd",
-        "valid": true
+        "moduleSystem": "amd"
     },
     {
         "resolved": "json",
@@ -56,7 +52,6 @@
         "followable": false,
         "couldNotResolve": true,
         "module": "json",
-        "moduleSystem": "amd",
-        "valid": true
+        "moduleSystem": "amd"        
     }
 ]
