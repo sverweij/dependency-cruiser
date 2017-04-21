@@ -5,19 +5,25 @@ function relationEndsUpAtFrom(pGraph, pFrom, pTo, pVisited) {
 
     const lToNode = pGraph.filter(pNode => pNode.source === pTo)[0];
 
-    return Boolean(lToNode) &&
-        lToNode.hasOwnProperty("dependencies") &&
-        lToNode.dependencies.filter(
-            pToToNodeName => !pVisited.has(pToToNodeName.resolved)
+    /* about the absence of checks whether attributes/ objects actually
+     * exist:
+     * - it saves CPU cycles to the effect of being ~30% faster than with the
+     *   checks
+     * - lToNode: is guaranteed to be there by the extract/ complete in index.js
+     * - lToNode.dependencies is a mandatory attribute (as per json schema)
+     * - pToToNode.resolved is a mandatory attribute (as per json schema)
+     */
+    return lToNode.dependencies.filter(
+            pToToNode => !pVisited.has(pToToNode.resolved)
         ).some(
-            pToToNodeName =>
-                (pToToNodeName.hasOwnProperty("resolved") && pToToNodeName.resolved === pFrom)
+            pToToNode =>
+                pToToNode.resolved === pFrom
                 ? true
                 : relationEndsUpAtFrom(
                     pGraph,
                     pFrom,
-                    pToToNodeName.resolved,
-                    pVisited.add(pToToNodeName.resolved)
+                    pToToNode.resolved,
+                    pVisited.add(pToToNode.resolved)
                 )
         );
 }
