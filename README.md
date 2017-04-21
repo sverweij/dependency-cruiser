@@ -123,4 +123,4 @@ You've come to the right place :-) :
 [![npm stable version](https://img.shields.io/npm/v/dependency-cruiser.svg)](https://npmjs.com/package/dependency-cruiser)
 [![total downloads on npm](https://img.shields.io/npm/dt/dependency-cruiser.svg?maxAge=2591999)](https://npmjs.com/package/dependency-cruiser)
 
-Made with <svg style="vertical-align:top;width:1.2em;height:1.2em;fill:#fb7;stroke:currentColor" alt="rock" viewBox="0 0 25 25"><rect x="8.9" y="10.5" rx="1.3" ry="1.5" width="3.2" height="6.7"/><rect x="12.2" y="10.5" rx="1.3" ry="1.5" width="3.1" height="6.7"/><path d="M13.4 19.2C13.2 17.2 15.2 16.5 16.2 16.5"/><rect x="15.5" y="2.5" rx="1.4" ry="1.5" width="3.1" height="13.7"/><path d="M17.1 17.1L11.3 17.1C10.6 17.1 10 16.3 10 15.6 10 14.8 10.6 14.1 11.3 14.1L18 14.1C18.8 14.1 19.5 14.7 19.5 15.5 19.5 16.3 19.5 16.8 19.5 18.9 19.5 20.9 18 22.5 16.2 22.5L8.8 22.5C7 22.5 5.5 20.9 5.5 18.9L5.5 18.1 5.5 6C5.5 5.2 6.1 4.6 6.9 4.6L7 4.6C7.8 4.6 8.5 5.2 8.5 6L8.5 15C8.5 16.2 9.9 15.9 9.9 15.9M14.6 20.1C14.4 18.7 15.2 17.1 16.8 17.1"/></svg> in Holland.
+Made with :metal: in Holland.
