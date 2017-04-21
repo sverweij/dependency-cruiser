@@ -49,7 +49,7 @@
                     },
                     "followable": {
                         "type": "boolean",
-                        "description": "Whether or not this is a dependency that can be followed any further. This is the case for core modules, json, and modules that could not be resolved to a file."
+                        "description": "Whether or not this is a dependency that can be followed any further. This will be 'false' for for core modules, json, and modules that could not be resolved to a file."
                     },
                     "coreModule": {
                         "type": "boolean",
