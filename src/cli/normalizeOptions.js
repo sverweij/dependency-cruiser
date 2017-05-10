@@ -3,6 +3,7 @@
 const _ = require("lodash");
 
 const DEFAULT_MODULE_SYSTEMS = ["cjs", "amd", "es6"];
+const DEFAULT_RULES_FILE_NAME = ".dependency-cruiser.json";
 
 function normalizeModuleSystems(pSystemList) {
     if (_.isString(pSystemList)) {
@@ -18,12 +19,19 @@ function normalizeModuleSystems(pSystemList) {
 
 function determineRulesFileName(pValidate) {
     if (typeof pValidate === 'boolean' && pValidate){
-        return ".dependency-cruiser.json";
+        return DEFAULT_RULES_FILE_NAME;
     } else {
         return pValidate;
     }
 }
 
+/**
+ * returns the pOptions, so that the returned value contains a
+ * valid value for each possible option
+ *
+ * @param  {object} pOptions [description]
+ * @return {object}          [description]
+ */
 module.exports = (pOptions) => {
     pOptions = _.defaults(pOptions, {
         exclude: "",

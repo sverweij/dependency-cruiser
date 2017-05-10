@@ -17,6 +17,17 @@ function fileExists(pFile) {
     return true;
 }
 
+/**
+ * Creates a .dependency-cruiser config with a set of basic validations
+ * to the current directory.
+ *
+ * @returns {void} Nothing
+ * @throws {Error}  An error object with the root cause of the problem
+ *                  as a description:
+ *                  - file already exists
+ *                  - writing to the file doesn't work
+ *
+ */
 module.exports = () => {
     if (fileExists(DEPENDENCY_CRUISER_CONFIG)) {
         throw Error(`A '${DEPENDENCY_CRUISER_CONFIG}' already exists here - leaving it be.\n`);

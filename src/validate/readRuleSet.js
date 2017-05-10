@@ -14,6 +14,8 @@ const normalizeRuleSet = require('./normalizeRuleSet');
  * @param  {object} pRuleSetJSON    The to be validated ruleset (you can both pass
  *                                  an object or JSON as a string)
  * @return {object}                 The validated & normalized rule set
+ * @throws {Error}                  An error with the reason for the error as
+ *                                  a message
  */
 module.exports = pRuleSetJSON =>
     normalizeRuleSet(

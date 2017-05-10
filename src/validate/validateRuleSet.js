@@ -44,6 +44,8 @@ function checkRuleSafety(pRule) {
  *
  * @param  {object} pRuleSet The ruleset to validate
  * @return {object}          The ruleset as passed
+ * @throws {Error}           An error with the reason for the error as
+ *                           a message
  */
 module.exports = (pRuleSet) => {
     validateAgainstSchema(ruleSchema, pRuleSet);

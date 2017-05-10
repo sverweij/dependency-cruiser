@@ -127,7 +127,7 @@ src/main/index.js: \
 
 src/extract/index.js: \
 	src/extract/addValidations.js \
-	src/extract/detectCircularity.js \
+	src/extract/dependencyEndsUpAtFrom.js \
 	src/extract/extract.js \
 	src/extract/gatherInitialSources.js \
 	src/extract/summarize.js
@@ -210,7 +210,7 @@ src/validate/validateRuleSet.js: \
 ALL_SRC=src/main/index.js \
 	package.json \
 	src/extract/addValidations.js \
-	src/extract/detectCircularity.js \
+	src/extract/dependencyEndsUpAtFrom.js \
 	src/extract/extract-AMD.js \
 	src/extract/extract-ES6.js \
 	src/extract/extract-commonJS.js \
@@ -271,7 +271,7 @@ src/main/index.js: \
 
 src/extract/index.js: \
 	src/extract/addValidations.js \
-	src/extract/detectCircularity.js \
+	src/extract/dependencyEndsUpAtFrom.js \
 	src/extract/extract.js \
 	src/extract/gatherInitialSources.js \
 	src/extract/summarize.js
@@ -369,6 +369,9 @@ test/cli/normalizeOptions.spec.js: \
 
 test/cli/validateParameters.spec.js: \
 	src/cli/validateParameters.js
+
+test/extract/dependencyEndsUpAtFrom.spec.js: \
+	src/extract/dependencyEndsUpAtFrom.js
 
 test/extract/extract-composite.spec.js: \
 	src/extract/index.js \
