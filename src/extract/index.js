@@ -158,7 +158,7 @@ module.exports = (pFileDirArray, pOptions, pCallback) => {
     let lDependencies = _(
         extractFileDirArray(pFileDirArray, pOptions).reduce(complete, [])
     ).uniqBy(pDependency => pDependency.source)
-     .value();
+        .value();
 
     if (circularityDetectionNecessary(pOptions)){
         lDependencies = addCircularityCheckToGraph(lDependencies);
@@ -168,7 +168,7 @@ module.exports = (pFileDirArray, pOptions, pCallback) => {
         lDependencies,
         pOptions ? pOptions.validate : false,
         pOptions ? pOptions.ruleSet : {}
-     );
+    );
 
     return lCallback(
         {

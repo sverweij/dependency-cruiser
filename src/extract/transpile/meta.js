@@ -77,6 +77,6 @@ module.exports.getAvailableTranspilers =
             version: supportedTranspilers[pTranspiler],
             available: transpiler2wrapper[pTranspiler].isAvailable()
         })
-    );
+        );
 
 /* eslint security/detect-object-injection : 0*/

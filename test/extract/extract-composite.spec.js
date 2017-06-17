@@ -16,9 +16,9 @@ function runRecursiveFixture(pFixture) {
     if (!Boolean(pFixture.ignore)){
         it(pFixture.title, () => {
             let lResult = extract(
-                    [pFixture.input.fileName],
-                    pFixture.input.options
-                );
+                [pFixture.input.fileName],
+                pFixture.input.options
+            );
 
             expect(lResult.dependencies).to.deep.equal(pFixture.expected);
             expect(lResult).to.be.jsonSchema(depSchema);

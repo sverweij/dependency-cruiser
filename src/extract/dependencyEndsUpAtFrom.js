@@ -27,10 +27,10 @@ function dependencyEndsUpAtFrom(pGraph, pFrom, pTo, pVisited) {
      * - pToToNode.resolved is a mandatory attribute (as per json schema)
      */
     return lToNode.dependencies.filter(
-            pToToNode => !pVisited.has(pToToNode.resolved)
-        ).some(
-            pToToNode =>
-                pToToNode.resolved === pFrom
+        pToToNode => !pVisited.has(pToToNode.resolved)
+    ).some(
+        pToToNode =>
+            pToToNode.resolved === pFrom
                 ? true
                 : dependencyEndsUpAtFrom(
                     pGraph,
@@ -38,7 +38,7 @@ function dependencyEndsUpAtFrom(pGraph, pFrom, pTo, pVisited) {
                     pToToNode.resolved,
                     pVisited.add(pToToNode.resolved)
                 )
-        );
+    );
 }
 
 module.exports = dependencyEndsUpAtFrom;

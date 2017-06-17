@@ -90,10 +90,10 @@ module.exports = (pInput) =>
         {
             dependencies: Handlebars.templates['dot.template.hbs']({
                 "things" : pInput.dependencies
-                            .sort(compareOnSource)
-                            .map(folderify)
-                            .map(colorize)
-                            .map(prefix(pInput))
+                    .sort(compareOnSource)
+                    .map(folderify)
+                    .map(colorize)
+                    .map(prefix(pInput))
             })
         }
     );

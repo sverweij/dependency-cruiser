@@ -54,7 +54,7 @@ function matchRule(pFrom, pTo) {
          */
         return (!Boolean(pRule.from.path) ||
                 pFrom.match(pRule.from.path)
-            ) && (!Boolean(pRule.from.pathNot) ||
+        ) && (!Boolean(pRule.from.pathNot) ||
                 !(pFrom.match(pRule.from.pathNot))
             ) && (!Boolean(pRule.to.path) ||
                 (lGroups.length > 0
