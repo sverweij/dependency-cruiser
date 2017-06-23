@@ -82,7 +82,7 @@
         },{
             "name": "no-circular",
             "severity": "error",
-            "from": {},
+            "from": { "pathNot": "^(node_modules)"},
             "to": { "circular": true }
         }]
 }

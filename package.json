@@ -12,7 +12,7 @@
     "cover": "istanbul cover node_modules/mocha/bin/_mocha -- test/*/*.spec.js test/*/*/*.spec.js",
     "lint": "eslint bin src test",
     "nsp": "nsp check",
-    "npm-check-updates": "ncu --upgrade --reject mocha",
+    "npm-check-updates": "ncu --upgrade",
     "test": "mocha --bail -R dot test/*/*.spec.js test/*/*/*.spec.js",
     "test-long": "mocha --bail test/*/*.spec.js test/*/*/*.spec.js",
     "watch": "mocha --watch --watch-extensions=json --reporter=min test/*/*.spec.js"
@@ -33,7 +33,7 @@
   "author": "Sander Verweij",
   "license": "MIT",
   "devDependencies": {
-    "chai": "3.5.0",
+    "chai": "4.0.2",
     "chai-json-schema": "1.4.0",
     "coffee-script": "1.12.6",
     "eslint": "4.0.0",

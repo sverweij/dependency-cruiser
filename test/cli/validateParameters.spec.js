@@ -8,7 +8,9 @@ describe("validateParameters", () => {
             validateParameters(["file-or-dir-does-not-exist"]);
             expect("not to be here").to.equal("still here, though");
         } catch (e) {
-            expect(e).to.deep.equal(Error("Can't open 'file-or-dir-does-not-exist' for reading. Does it exist?\n"));
+            expect(e.toString()).to.deep.equal(
+                "Error: Can't open 'file-or-dir-does-not-exist' for reading. Does it exist?\n"
+            );
         }
     });
 
@@ -17,7 +19,9 @@ describe("validateParameters", () => {
             validateParameters(["test/cli/fixtures"], {"validate": "non-existing-rule-file"});
             expect("not to be here").to.equal("still here, though");
         } catch (e) {
-            expect(e).to.deep.equal(Error("Can't open 'non-existing-rule-file' for reading. Does it exist?\n"));
+            expect(e.toString()).to.deep.equal(
+                "Error: Can't open 'non-existing-rule-file' for reading. Does it exist?\n"
+            );
         }
     });
 
@@ -26,7 +30,9 @@ describe("validateParameters", () => {
             validateParameters(["test/cli/fixtures"], {"validate": true});
             expect("not to be here").to.equal("still here, though");
         } catch (e) {
-            expect(e).to.deep.equal(Error("Can't open '.dependency-cruiser.json' for reading. Does it exist?\n"));
+            expect(e.toString()).to.deep.equal(
+                "Error: Can't open '.dependency-cruiser.json' for reading. Does it exist?\n"
+            );
         }
     });
 
