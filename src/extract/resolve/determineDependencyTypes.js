@@ -31,7 +31,7 @@ function dependencyIsDeprecated (pModule, pBaseDir) {
     let lPackageJson = localNpmHelpers.getPackageJson(pModule, pBaseDir);
 
     if (Boolean(lPackageJson)){
-        lRetval = lPackageJson.hasOwnProperty("deprecated");
+        lRetval = lPackageJson.hasOwnProperty("deprecated") && lPackageJson.deprecated;
     }
     return lRetval;
 }
