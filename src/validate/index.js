@@ -56,21 +56,21 @@ function matchRule(pFrom, pTo) {
                 pFrom.match(pRule.from.path)
         ) && (!Boolean(pRule.from.pathNot) ||
                 !(pFrom.match(pRule.from.pathNot))
-            ) && (!Boolean(pRule.to.path) ||
+        ) && (!Boolean(pRule.to.path) ||
                 (lGroups.length > 0
                     ? pTo.resolved.match(replaceGroupPlaceholders(pRule.to.path, lGroups))
                     : pTo.resolved.match(pRule.to.path))
-            ) && (!Boolean(pRule.to.pathNot) ||
+        ) && (!Boolean(pRule.to.pathNot) ||
                 !(
                     (lGroups.length > 0
                         ? pTo.resolved.match(replaceGroupPlaceholders(pRule.to.pathNot, lGroups))
                         : pTo.resolved.match(pRule.to.pathNot))
                 )
-            ) && (!pRule.to.hasOwnProperty("dependencyTypes") ||
+        ) && (!pRule.to.hasOwnProperty("dependencyTypes") ||
                 intersects(pTo.dependencyTypes, pRule.to.dependencyTypes)
-            ) && (!pRule.to.hasOwnProperty("moreThanOneDependencyType") ||
+        ) && (!pRule.to.hasOwnProperty("moreThanOneDependencyType") ||
                 pTo.dependencyTypes.length > 1
-            ) && propertyEquals(pTo, pRule, "couldNotResolve") &&
+        ) && propertyEquals(pTo, pRule, "couldNotResolve") &&
                  propertyEquals(pTo, pRule, "circular");
     };
 }
