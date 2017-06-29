@@ -123,6 +123,7 @@
                 "npm-dev",
                 "npm-optional",
                 "npm-peer",
+                "npm-bundled",
                 "npm-no-pkg",
                 "npm-unknown",
                 "core",
