@@ -1,0 +1,52 @@
+[
+    {
+        "title": "can detect bundled dependencies",
+        "input": {
+            "fileName": "index.js",
+            "options": {
+                "moduleSystems": ["cjs"],
+                "baseDir": "test/extract/fixtures/bundled-dependencies"
+            }
+        },
+        "expected": [
+            {
+                "source": "index.js",
+                "dependencies": [
+                    {
+                        "resolved": "node_modules/idontgetbundled/index.js",
+                        "coreModule": false,
+                        "followable": true,
+                        "couldNotResolve": false,
+                        "dependencyTypes": [
+                            "npm"
+                        ],
+                        "module": "idontgetbundled",
+                        "moduleSystem": "cjs",
+                        "valid": true
+                    },
+                    {
+                        "resolved": "node_modules/igetbundled/index.js",
+                        "coreModule": false,
+                        "followable": true,
+                        "couldNotResolve": false,
+                        "dependencyTypes": [
+                            "npm",
+                            "npm-bundled"
+                        ],
+                        "module": "igetbundled",
+                        "moduleSystem": "cjs",
+                        "valid": true
+                    }
+                ]
+            },
+            {
+                "source": "node_modules/idontgetbundled/index.js",
+                "dependencies": []
+            },
+            {
+                "source": "node_modules/igetbundled/index.js",
+                "dependencies": []
+            }
+        ]
+    }
+]

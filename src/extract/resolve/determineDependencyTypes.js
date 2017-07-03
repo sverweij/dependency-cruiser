@@ -36,6 +36,19 @@ function dependencyIsDeprecated (pModule, pBaseDir) {
     return lRetval;
 }
 
+function dependencyIsBundled(pModule, pPackageDeps) {
+    let lRetval = false;
+
+    if (Boolean(pPackageDeps)){
+        const lBundledDependencies = pPackageDeps.bundledDependencies || pPackageDeps.bundleDependencies;
+
+        if (lBundledDependencies) {
+            lRetval = lBundledDependencies.some(pDep => pDep === pModule);
+        }
+    }
+    return lRetval;
+}
+
 module.exports = (pDependency, pModuleName, pPackageDeps, pBaseDir) => {
     let lRetval = ["undetermined"];
 
@@ -66,7 +79,9 @@ module.exports = (pDependency, pModuleName, pPackageDeps, pBaseDir) => {
         if (dependencyIsDeprecated(pModuleName, pBaseDir)) {
             lRetval.push("deprecated");
         }
-
+        if (dependencyIsBundled(pModuleName, pPackageDeps)) {
+            lRetval.push("npm-bundled");
+        }
     }
 
     return lRetval;

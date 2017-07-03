@@ -86,10 +86,11 @@ describe('Error scenarios - ', () => {
         ).to.not.throw("Extracting dependencies ran afoul of... Unexpected token (1:3)");
     });
     it('Raises an exception on non-existing files', () => {
+        // extract("non-existing-file.js")
         expect(
             () => extract("non-existing-file.js")
         ).to.throw(
-            "Extracting dependencies ran afoul of...\n\n  ENOENT: no such file or directory, open 'non-existing-file.js'\n"
+            "Extracting dependencies ran afoul of...\n\n  ENOENT: no such file or directory, open "
         );
     });
 });

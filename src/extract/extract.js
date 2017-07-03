@@ -62,9 +62,6 @@ const getAST = _.memoize(getASTBare);
  */
 module.exports = (pFileName, pOptions) => {
     try {
-        const lAST = getAST(pFileName);
-        let lDependencies = [];
-
         pOptions = _.defaults(
             pOptions,
             {
@@ -72,6 +69,9 @@ module.exports = (pFileName, pOptions) => {
                 moduleSystems: ["cjs", "es6", "amd"]
             }
         );
+
+        const lAST = getAST(path.join(pOptions.baseDir, pFileName));
+        let lDependencies = [];
 
         if (_.includes(pOptions.moduleSystems, "cjs")){
             extractCommonJSDependencies(lAST, lDependencies);
@@ -93,7 +93,7 @@ module.exports = (pFileName, pOptions) => {
                     const lResolved = resolve(
                         pDependency,
                         pOptions.baseDir,
-                        path.dirname(pFileName)
+                        path.join(pOptions.baseDir, path.dirname(pFileName))
                     );
 
                     return Object.assign(

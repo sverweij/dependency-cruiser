@@ -5,6 +5,7 @@ const expect                  = chai.expect;
 const extract                 = require('../../src/extract');
 const cjsRecursiveFixtures    = require('./fixtures/cjs-recursive.json');
 const deprecationFixtures     = require('./fixtures/deprecated-node-module.json');
+const bundledFixtures         = require('./fixtures/bundled-dependencies.json');
 const amdRecursiveFixtures    = require('./fixtures/amd-recursive.json');
 const tsRecursiveFixtures     = require('./fixtures/ts-recursive.json');
 const coffeeRecursiveFixtures = require('./fixtures/coffee-recursive.json');
@@ -29,6 +30,7 @@ function runRecursiveFixture(pFixture) {
 
 describe('CommonJS recursive - ', () => cjsRecursiveFixtures.forEach(runRecursiveFixture));
 describe('Deprecation - ', () => deprecationFixtures.forEach(runRecursiveFixture));
+describe('Bundled - ', () => bundledFixtures.forEach(runRecursiveFixture));
 describe('AMD recursive - ', () => amdRecursiveFixtures.forEach(runRecursiveFixture));
 describe('TypeScript recursive - ', () => tsRecursiveFixtures.forEach(runRecursiveFixture));
 describe('CoffeeScript recursive - ', () => coffeeRecursiveFixtures.forEach(runRecursiveFixture));

@@ -219,6 +219,7 @@ This is a list of dependency types dependency-cruiser currently detects.
  npm-dev         | it's a module in package.json's `devDependencies`      | "chai"
  npm-optional    | it's a module in package.json's `optionalDependencies` | "livescript"
  npm-peer        | it's a module in package.json's `peerDependencies` - note: deprecated in npm 3 | "thing-i-am-a-plugin-for"
+ npm-bundled     | it's a module that occurs in package.json's `bundle(d)Dependencies` array | "iwillgetbundled"
  npm-no-pkg      | it's an npm module - but it's nowhere in your package.json | "forgetmenot"
  npm-unknown     | it's an npm module - but there is no (parseable/ valid) package.json in your package |
  deprecated      | it's an npm module, but the version you're using or the module itself is officially deprecated                                | "some-deprecated-package"

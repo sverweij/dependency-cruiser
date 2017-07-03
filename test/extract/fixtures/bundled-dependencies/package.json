@@ -1,0 +1,17 @@
+{
+  "name": "bundled",
+  "version": "1.0.0",
+  "description": "Testing bundled dependencies. Yo",
+  "repository": "git://localhost",
+  "main": "index.js",
+  "dependencies": {
+    "igetbundled": "1.0.0",
+    "idontgetbundled": "1.0.0"
+  },
+  "bundledDependencies": [
+    "igetbundled"
+  ],
+  "keywords": [],
+  "author": "Bas Gitaar",
+  "license": "MIT"
+}

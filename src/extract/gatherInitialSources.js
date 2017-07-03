@@ -2,6 +2,7 @@ const fs            = require('fs');
 const path          = require('path');
 const ignore        = require('./ignore');
 const transpileMeta = require('./transpile/meta');
+const _             = require('lodash');
 
 const SUPPORTED_EXTENSIONS = transpileMeta.scannableExtensions;
 
@@ -19,10 +20,17 @@ function gatherScannableFilesFromDir (pDirName, pOptions) {
         }, []);
 }
 
-module.exports = (pFileDirArray, pOptions) =>
-    pFileDirArray.reduce(
+module.exports = (pFileDirArray, pOptions) => {
+    pOptions = _.defaults(
+        pOptions,
+        {
+            baseDir: process.cwd(),
+            moduleSystems: ["cjs", "es6", "amd"]
+        }
+    );
+    return pFileDirArray.reduce(
         (pAll, pThis) => {
-            if (fs.statSync(pThis).isDirectory()) {
+            if (fs.statSync(path.join(pOptions.baseDir, pThis)).isDirectory()) {
                 return pAll.concat(gatherScannableFilesFromDir(pThis, pOptions));
             } else {
                 return pAll.concat(pThis);
@@ -30,3 +38,4 @@ module.exports = (pFileDirArray, pOptions) =>
         },
         []
     );
+};
