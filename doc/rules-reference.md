@@ -111,19 +111,17 @@ src
 ```
 
 Business components should be completely independent of each other. So typically
-you'd specify a rule like this to prevent accidents:
+you'd specify a rule like this to prevent accidents in the "forbidden" section:
 
 ```json
 {
-    "forbidden": [{
-        "name": "no-inter-ubc",
-        "comment": "Don't allow relations between code in business components",
-        "severity": "error",
-        "from": {"path": "^src/business-components/([^/]+)/.+"},
-        "to": {
-            "path": "^src/business-components/([^/]+)/.+"
-        }
-    }]
+    "name": "no-inter-ubc",
+    "comment": "Don't allow relations between code in business components",
+    "severity": "error",
+    "from": {"path": "^src/business-components/([^/]+)/.+"},
+    "to": {
+        "path": "^src/business-components/([^/]+)/.+"
+    }
 }
 ```
 
@@ -140,16 +138,14 @@ business components breeds like a flock of rabbits. In stead, you can use
 
 ```json
 {
-    "forbidden": [{
-        "name": "no-inter-ubc",
-        "comment": "Don't allow relations between code in business components",
-        "severity": "error",
-        "from": {"path": "^src/business-components/([^/]+)/.+"},
-        "to": {
-            "path": "^src/business-components/([^/]+)/.+",
-            "pathNot": "^src/business-components/$1/.+"
-        }
-    }]
+    "name": "no-inter-ubc",
+    "comment": "Don't allow relations between code in business components",
+    "severity": "error",
+    "from": {"path": "^src/business-components/([^/]+)/.+"},
+    "to": {
+        "path": "^src/business-components/([^/]+)/.+",
+        "pathNot": "^src/business-components/$1/.+"
+    }
 }
 ```
 ... which makes sure dependency-cruiser does not match stuff in the from folder
@@ -160,6 +156,17 @@ Whether or not to match modules dependency-cruiser could not resolve (and
 probably aren't on disk). For this one too: leave out if you don't care either
 way.
 
+To get an error for each unresolvable dependency, put this in your "forbidden"
+section:
+```json
+{
+    "name": "not-to-unresolvable",
+    "severity": "error",
+    "from": {},
+    "to": { "couldNotResolve": true }
+}
+```
+
 ### circular
 A boolean indicating whether or not to match module dependencies that end up
 where you started (a.k.a. circular dependencies). Leaving this out => you don't
@@ -169,6 +176,20 @@ Detecting circular dependencies is heavy work. Especially on larger code bases
 (thousands of files in one dependency graph) you might notice an impact on
 the performance when you add a rule that checks for circular dependencies.
 
+For example, adding this rule to the "forbiddden" section in your
+.dependency-cruiser.json will issue a warning for each dependency that ends
+up at itself.
+
+```json
+{
+    "name": "no-circular",
+    "severity": "warn",
+    "from": { "pathNot": "^(node_modules)"},
+    "to": { "circular": true }
+}
+```
+
+
 ## dependencyTypes
 You might have spent some time wondering why something works on your machine,
 but not on other's. Only to discover you _did_ install a dependency, but
@@ -177,17 +198,16 @@ and started using it in a production source.
 
 To save you from embarassing moments like this, you can make rules with the
 `dependencyTypes` verb. E.g. to prevent you accidentally depend on a
-`devDependency` from anything in `src`:
+`devDependency` from anything in `src` add this to your
+.dependency-cruiser.json's "forbidden" section:
 
 ```json
 {
-    "forbidden": [{
-        "name": "not-to-dev-dep",
-        "severity": "error",
-        "comment": "because an npm i --production will otherwise deliver an unreliably running package",
-        "from": { "path": "^src" },
-        "to": { "dependencyTypes": ["npm-dev"] }
-    }]
+    "name": "not-to-dev-dep",
+    "severity": "error",
+    "comment": "because an npm i --production will otherwise deliver an unreliably running package",
+    "from": { "path": "^src" },
+    "to": { "dependencyTypes": ["npm-dev"] }
 }
 ```
 
@@ -195,13 +215,11 @@ Or to detect stuff you npm i'd without putting it in your package.json:
 
 ```json
 {
-    "forbidden": [{
-        "name": "no-non-package-json",
-        "severity": "error",
-        "comment": "because an npm i --production will otherwise deliver an unreliably running package",
-        "from": { "pathNot": "^(node_modules)"},
-        "to": { "dependencyTypes": ["unknown", "undetermined", "npm-no-pkg", "npm-unknown"] }
-    }]
+    "name": "no-non-package-json",
+    "severity": "error",
+    "comment": "because an npm i --production will otherwise deliver an unreliably running package",
+    "from": { "pathNot": "^(node_modules)"},
+    "to": { "dependencyTypes": ["unknown", "undetermined", "npm-no-pkg", "npm-unknown"] }
 }
 ```
 
@@ -239,14 +257,10 @@ when set to true:
 
 ```json
 {
-    "forbidden": [
-        {
-            "name": "no-duplicate-dep-types",
-            "severity": "warn",
-            "from": {},
-            "to": { "moreThanOneDependencyType": true }
-        }
-    ]
+    "name": "no-duplicate-dep-types",
+    "severity": "warn",
+    "from": {},
+    "to": { "moreThanOneDependencyType": true }
 }
 ```
 
