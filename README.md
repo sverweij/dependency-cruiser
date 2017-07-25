@@ -110,8 +110,8 @@ You've come to the right place :-) :
 
 ## Thanks
 - [Marijn Haverbeke](http://marijnhaverbeke.nl) and other people who
-  colaborated on [acorn](https://github.com/ternjs/acorn) -
-  the excelent javascript parser dependency-cruiser uses to infer
+  collaborated on [acorn](https://github.com/ternjs/acorn) -
+  the excellent JavaScript parser dependency-cruiser uses to infer
   dependencies.
 
 ## Build status
