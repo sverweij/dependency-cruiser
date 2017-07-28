@@ -24,7 +24,6 @@ test_async_node_6:
   except:
    - tags
 
-chai-json-schema barfs on node 4 -> I've proposed a patch, but befor that is accepted - don't run & install there ...
 test_async_node_4:
  image: node:4
  cache:
