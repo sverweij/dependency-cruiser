@@ -1,7 +1,7 @@
 # API
 
 The typical use for dependency-cruiser is on the command line. However, you
-might want to use it programmatically. For this dependency-cruiser has an
+might want to use it programmatically. For this, dependency-cruiser has an
 API. While the engine behind the API and the command line interface are
 stable *the API is under construction*.
 
