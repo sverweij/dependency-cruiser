@@ -46,8 +46,11 @@ dev-build: bin/dependency-cruise $(GENERATED_SOURCES) $(ALL_SRC) .npmignore
 lint:
 	$(NPM) run lint
 
+lint-fix:
+	$(NPM) run lint:fix
+
 cover: dev-build
-	$(NPM) run cover
+	$(NPM) run test:cover
 
 bump-patch:
 	$(NPM) version patch
@@ -82,7 +85,7 @@ nsp:
 outdated:
 	$(NPM) outdated
 
-update-dependencies: run-update-dependencies dev-build test
+update-dependencies: run-update-dependencies dev-build test lint-fix
 	$(GIT) diff package.json
 
 run-update-dependencies:
