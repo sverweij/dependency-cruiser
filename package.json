@@ -13,6 +13,7 @@
     "lint:fix": "eslint --fix bin src test",
     "nsp": "nsp check",
     "npm-check-updates": "ncu --upgrade",
+    "postversion": "git push && git push --tags && npm publish",
     "test": "mocha --bail -R dot test/*/*.spec.js test/*/*/*.spec.js",
     "test:cover": "istanbul cover node_modules/mocha/bin/_mocha -- test/*/*.spec.js test/*/*/*.spec.js",
     "test:long": "mocha --bail test/*/*.spec.js test/*/*/*.spec.js",

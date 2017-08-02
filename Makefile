@@ -18,6 +18,25 @@ help:
 	@echo "| More information and other targets: open the Makefile  |"
 	@echo " -------------------------------------------------------- "
 	@echo
+	@echo "Useful targets:"
+	@echo
+	@echo "dev-build. If necessary this ..."
+	@echo "- ... recompiles the handlebar templates"
+	@echo "- ... recreates a proper .npmignore"
+	@echo
+	@echo "fullcheck"
+	@echo "- runs all possible static checks (lint, depcruise, npm outdated, nsp)"
+	@echo
+	@echo "update-dependencies"
+	@echo "- updates node dependencies and devDependencies to latest"
+	@echo "- autofixes any lint regressions and runs all tests"
+	@echo "- shows the diff of package.json"
+	@echo
+	@echo "publish-patch, publish-minor, publish-major"
+	@echo "- ups the version semver compliantly"
+	@echo "- commits & tags it"
+	@echo "- publishes to npm"
+	@echo
 
 # production rules
 src/report/%.template.js: src/report/%.template.hbs
@@ -52,23 +71,14 @@ lint-fix:
 cover: dev-build
 	$(NPM) run test:cover
 
-bump-patch:
+publish-patch:
 	$(NPM) version patch
 
-bump-minor:
+publish-minor:
 	$(NPM) version minor
 
-bump-major:
+publish-major:
 	$(NPM) version major
-
-tag:
-	$(GIT) tag -a v`utl/getver` -m "v`utl/getver`"
-	$(GIT) push --tags
-
-publish:
-	$(GIT) push
-	$(GIT) push --tags
-	$(NPM) publish
 
 profile:
 	$(NODE) --prof src/cli.js -f - test
@@ -85,7 +95,7 @@ nsp:
 outdated:
 	$(NPM) outdated
 
-update-dependencies: run-update-dependencies dev-build test lint-fix
+: run-update-dependencies dev-build test lint-fix
 	$(GIT) diff package.json
 
 run-update-dependencies:
@@ -437,4 +447,3 @@ test/validate/readRuleSet.spec.js: \
 test/validate/validate.spec.js: \
 	src/validate/index.js \
 	src/validate/readRuleSet.js
-
