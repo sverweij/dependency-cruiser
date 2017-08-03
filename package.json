@@ -14,6 +14,7 @@
     "nsp": "nsp check",
     "npm-check-updates": "ncu --upgrade",
     "postversion": "git push && git push --tags && npm publish",
+    "preversion": "test `git branch | grep \"^* [a-zA-Z]\" | cut -c 3-` = 'master'",
     "test": "mocha --bail -R dot test/*/*.spec.js test/*/*/*.spec.js",
     "test:cover": "istanbul cover node_modules/mocha/bin/_mocha -- test/*/*.spec.js test/*/*/*.spec.js",
     "test:long": "mocha --bail test/*/*.spec.js test/*/*/*.spec.js",
