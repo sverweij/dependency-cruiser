@@ -95,7 +95,7 @@ nsp:
 outdated:
 	$(NPM) outdated
 
-: run-update-dependencies dev-build test lint-fix
+update-dependencies: run-update-dependencies dev-build test lint-fix
 	$(GIT) diff package.json
 
 run-update-dependencies:
