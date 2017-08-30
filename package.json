@@ -39,7 +39,7 @@
     "chai": "4.1.1",
     "chai-json-schema": "1.5.0",
     "coffee-script": "1.12.7",
-    "eslint": "4.4.1",
+    "eslint": "4.5.0",
     "eslint-plugin-security": "1.4.0",
     "intercept-stdout": "0.1.2",
     "istanbul": "0.4.5",
