@@ -121,6 +121,10 @@ default) and 'info') with them that will appear in some reporters:
 }
 ```
 
+For more information about writing rules see the [tutorial](tutorial.md) and the
+[rules-reference](rules-reference.md). For an easy set up use ...
+
+
 ### `--init-rules`
 This creates a `.dependency-cruiser.json` with some useful rules in it to the
 current folder and exits. use with `--validate`
