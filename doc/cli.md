@@ -121,7 +121,7 @@ default) and 'info') with them that will appear in some reporters:
 }
 ```
 
-For more information about writing rules see the [tutorial](tutorial.md) and the
+For more information about writing rules see the [tutorial](rules-tutorial.md) and the
 [rules-reference](rules-reference.md). For an easy set up use ...
 
 
