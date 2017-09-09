@@ -39,14 +39,14 @@
     "chai": "4.1.2",
     "chai-json-schema": "1.5.0",
     "coffee-script": "1.12.7",
-    "eslint": "4.6.1",
+    "eslint": "4.7.0",
     "eslint-plugin-security": "1.4.0",
     "intercept-stdout": "0.1.2",
     "istanbul": "0.4.5",
-    "js-makedepend": "2.2.6",
-    "mocha": "3.5.0",
+    "js-makedepend": "2.2.7",
+    "mocha": "3.5.3",
     "npm-check-updates": "2.12.1",
-    "nsp": "2.7.0",
+    "nsp": "2.8.0",
     "typescript": "2.5.2"
   },
   "repository": {
