@@ -74,7 +74,7 @@ Sample rule:
 depcruise --validate .dependency-cruiser.json src
 ```
 
-This will validate aginst your rules and shows any violations in an eslint-like format:
+This will validate against your rules and shows any violations in an eslint-like format:
 
 ![sample err output](https://raw.githubusercontent.com/sverweij/dependency-cruiser/master/doc/assets/sample-err-output.png)
 
