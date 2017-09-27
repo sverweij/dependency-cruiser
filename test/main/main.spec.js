@@ -1,9 +1,10 @@
 "use strict";
-const chai      = require('chai');
-const expect    = chai.expect;
-const main      = require("../../src/main");
-const tsFixture = require('./fixtures/ts.json');
-const depSchema = require('../../src/extract/jsonschema.json');
+const chai       = require('chai');
+const expect     = chai.expect;
+const main       = require("../../src/main");
+const tsFixture  = require('./fixtures/ts.json');
+const tsxFixture = require('./fixtures/tsx.json');
+const depSchema  = require('../../src/extract/jsonschema.json');
 
 chai.use(require('chai-json-schema'));
 
@@ -12,6 +13,12 @@ describe("main", () => {
         const lResult = main.cruise(["test/main/fixtures/ts"]);
 
         expect(lResult).to.deep.equal(tsFixture);
+        expect(lResult).to.be.jsonSchema(depSchema);
+    });
+    it("Also processes tsx correctly", () => {
+        const lResult = main.cruise(["test/main/fixtures/tsx"]);
+
+        expect(lResult).to.deep.equal(tsxFixture);
         expect(lResult).to.be.jsonSchema(depSchema);
     });
 });

@@ -10,6 +10,7 @@ const supportedTranspilers = require("../../../package.json").supportedTranspile
 const extension2wrapper = {
     ".js"        : javaScriptWrap,
     ".ts"        : typeScriptWrap,
+    ".tsx"       : typeScriptWrap,
     ".d.ts"      : typeScriptWrap,
     ".ls"        : liveScriptWrap,
     ".coffee"    : coffeeWrap,
