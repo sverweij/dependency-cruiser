@@ -1,0 +1,56 @@
+{
+    "dependencies": [
+        {
+            "source": "test/main/fixtures/jsx/index.js",
+            "dependencies": [
+                {
+                    "resolved": "test/main/fixtures/jsx/sub/render.jsx",
+                    "coreModule": false,
+                    "followable": true,
+                    "couldNotResolve": false,
+                    "dependencyTypes": [
+                        "local"
+                    ],
+                    "module": "./sub/render",
+                    "moduleSystem": "es6",
+                    "valid": true
+                }
+            ]
+        },
+        {
+            "source": "test/main/fixtures/jsx/sub/render.jsx",
+            "dependencies": [
+                {
+                    "resolved": "react-dom",
+                    "coreModule": false,
+                    "followable": false,
+                    "couldNotResolve": true,
+                    "dependencyTypes": [
+                        "unknown"
+                    ],
+                    "module": "react-dom",
+                    "moduleSystem": "es6",
+                    "valid": true
+                }
+            ]
+        },
+        {
+            "source": "react-dom",
+            "followable": false,
+            "coreModule": false,
+            "couldNotResolve": true,
+            "dependencyTypes": [
+                "unknown"
+            ],
+            "dependencies": []
+        }
+    ],
+    "summary": {
+        "violations": [],
+        "error": 0,
+        "warn": 0,
+        "info": 0,
+        "totalCruised": 3,
+        "optionsUsed": {}
+    }
+}

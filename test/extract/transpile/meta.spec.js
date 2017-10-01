@@ -9,7 +9,7 @@ describe("transpiler meta", () => {
     it("tells which extensions can be scanned", () => {
         expect(
             meta.scannableExtensions
-        ).to.deep.equal([".js", ".ts", ".tsx", ".d.ts", ".coffee", ".litcoffee", ".coffee.md"]);
+        ).to.deep.equal([".js", ".jsx", ".ts", ".tsx", ".d.ts", ".coffee", ".litcoffee", ".coffee.md"]);
     });
 
     it("returns the 'js' wrapper for unknown extensions", () => {
@@ -38,6 +38,14 @@ describe("transpiler meta", () => {
         }, {
             "name": "typescript",
             "version": ">=2.0.0 <3.0.0",
+            "available": true
+        }, {
+            "name": "babel-core",
+            "version": ">=6.0.0 <8.0.0",
+            "available": true
+        }, {
+            "name": "babel-preset-react",
+            "version": ">=6.0.0 <8.0.0",
             "available": true
         }]);
     });

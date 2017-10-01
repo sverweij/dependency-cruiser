@@ -36,6 +36,8 @@
   "author": "Sander Verweij",
   "license": "MIT",
   "devDependencies": {
+    "babel-core": "6.26.0",
+    "babel-preset-react": "6.24.1",
     "chai": "4.1.2",
     "chai-json-schema": "1.5.0",
     "coffee-script": "1.12.7",
@@ -75,6 +77,8 @@
   "supportedTranspilers": {
     "coffee-script": ">=1.0.0 <2.0.0",
     "livescript": ">=1.0.0 <2.0.0",
-    "typescript": ">=2.0.0 <3.0.0"
+    "typescript": ">=2.0.0 <3.0.0",
+    "babel-core": ">=6.0.0 <8.0.0",
+    "babel-preset-react": ">=6.0.0 <8.0.0"
   }
 }
