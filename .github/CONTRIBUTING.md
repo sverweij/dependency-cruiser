@@ -34,10 +34,10 @@ To make this as easy as possible for you, here's some simple guidelines:
 - Plan to do something drastic?     
   Leave an [issue](https://github.com/sverweij/dependency-cruiser/issues/new)
   on GitHub, so we can talk about it
-- dependency-cruiser is released with a [code of conduct](CODE_OF_CONDUCT.md), adapted
+- dependency-cruiser is released with a [code of conduct](../CODE_OF_CONDUCT.md), adapted
   from the [contributor covenant](http://contributor-covenant.org/).
 
 ### Legal
 - the code you add will be subject to
-  [the MIT license](LICENSE), just like the rest of dependency-cruiser
+  [the MIT license](../LICENSE), just like the rest of dependency-cruiser
 - the code you add is your own original work
