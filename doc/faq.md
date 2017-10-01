@@ -33,7 +33,7 @@ support for, let me know.
 - In `src/transpile`
   - add a `yourLanguageWrap.js` that invokes the transpiler transforming
     your language into javascript (preferably ES6 or better, but lower versions
-    should work as well). [`liveScriptWrap.js`](../src/extract/transpile/liveScriptWrap.js)
+    should work as well). [`typeScriptWrap.js`](../src/extract/transpile/typeScriptWrap.js)
     as an example on how to do this.
   - in [`meta.js`](../src/extract/transpile/meta.js)
     - require `./yourLanguageWrap` and
