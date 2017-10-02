@@ -2,7 +2,7 @@
 
 const expect = require("chai").expect;
 const fs     = require('fs');
-const wrap   = require("../../../src/extract/transpile/typescriptWrap");
+const wrap   = require("../../../src/extract/transpile/typeScriptWrap");
 
 describe("tsx transpiler (plain old typescript)", () => {
     it("tells the jsx transpiler is available", () => {
