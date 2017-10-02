@@ -5,8 +5,8 @@ const babel = tryRequire(
     require("../../../package.json").supportedTranspilers['babel-core']
 );
 const presetReact = tryRequire(
-    "babel-preset-react",
-    require("../../../package.json").supportedTranspilers['babel-preset-react']
+    "babel-plugin-transform-react-jsx",
+    require("../../../package.json").supportedTranspilers['babel-plugin-transform-react-jsx']
 );
 
 exports.isAvailable = () => (Boolean(babel) && Boolean(presetReact)) !== false;
@@ -15,8 +15,8 @@ exports.transpile = pFile =>
     babel.transform(
         pFile,
         {
-            presets: [
-                "react"
+            plugins: [
+                "transform-react-jsx"
             ]
         }
     ).code;

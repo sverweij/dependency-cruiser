@@ -23,7 +23,7 @@ const extension2wrapper = {
 const transpiler2wrapper = {
     "javascript"         : javaScriptWrap,
     "babel-core"         : jsxWrap,
-    "babel-preset-react" : jsxWrap,
+    "babel-plugin-transform-react-jsx" : jsxWrap,
     "coffee-script"      : coffeeWrap,
     "livescript"         : liveScriptWrap,
     "typescript"         : typeScriptWrap

@@ -44,7 +44,7 @@ describe("transpiler meta", () => {
             "version": ">=6.0.0 <8.0.0",
             "available": true
         }, {
-            "name": "babel-preset-react",
+            "name": "babel-plugin-transform-react-jsx",
             "version": ">=6.0.0 <8.0.0",
             "available": true
         }]);
