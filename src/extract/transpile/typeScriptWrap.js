@@ -12,7 +12,8 @@ exports.transpile = pFile =>
         pFile,
         {
             compilerOptions: {
-                "target": "es2015"
+                "target": "es2015",
+                "jsx": "react"
             }
         }
     ).outputText;
