@@ -44,7 +44,7 @@
     "intercept-stdout": "0.1.2",
     "istanbul": "0.4.5",
     "js-makedepend": "2.2.7",
-    "mocha": "3.5.3",
+    "mocha": "4.0.0",
     "npm-check-updates": "2.13.0",
     "nsp": "2.8.1",
     "typescript": "2.5.3"
