@@ -7,8 +7,17 @@ const coffeeWrap           = require("./coffeeWrap")();
 const litCoffeeWrap        = require("./coffeeWrap")(true);
 const supportedTranspilers = require("../../../package.json").supportedTranspilers;
 
+/*
+  jsx - acorn_loose will handle this correctly when imports
+        etc are on top, which is the most likely use case.
+        Alternatives (making a jsxWrap with babel-core & a bunch
+        of plugins or using acorn-jsx) might be more correct in
+        edge cases but are either much harder to implement or
+        likely to fail in basic use cases.
+ */
 const extension2wrapper = {
     ".js"        : javaScriptWrap,
+    ".jsx"       : javaScriptWrap,
     ".ts"        : typeScriptWrap,
     ".tsx"       : typeScriptWrap,
     ".d.ts"      : typeScriptWrap,
