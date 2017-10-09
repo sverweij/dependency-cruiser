@@ -1,6 +1,7 @@
 "use strict";
 
 const javaScriptWrap       = require("./javaScriptWrap");
+const jsxWrap              = require("./jsxWrap");
 const typeScriptWrap       = require("./typeScriptWrap");
 const liveScriptWrap       = require("./liveScriptWrap");
 const coffeeWrap           = require("./coffeeWrap")();
@@ -9,6 +10,7 @@ const supportedTranspilers = require("../../../package.json").supportedTranspile
 
 const extension2wrapper = {
     ".js"        : javaScriptWrap,
+    ".jsx"       : jsxWrap,
     ".ts"        : typeScriptWrap,
     ".tsx"       : typeScriptWrap,
     ".d.ts"      : typeScriptWrap,
@@ -19,10 +21,12 @@ const extension2wrapper = {
 };
 
 const transpiler2wrapper = {
-    "javascript"    : javaScriptWrap,
-    "coffee-script" : coffeeWrap,
-    "livescript"    : liveScriptWrap,
-    "typescript"    : typeScriptWrap
+    "javascript"         : javaScriptWrap,
+    "babel-core"         : jsxWrap,
+    "babel-plugin-transform-react-jsx" : jsxWrap,
+    "coffee-script"      : coffeeWrap,
+    "livescript"         : liveScriptWrap,
+    "typescript"         : typeScriptWrap
 };
 
 /**
