@@ -14,6 +14,9 @@ const supportedTranspilers = require("../../../package.json").supportedTranspile
         of plugins or using acorn-jsx) might be more correct in
         edge cases but are either much harder to implement or
         likely to fail in basic use cases.
+
+        See ./jsxImplementationRationale.md for an implementation
+        rationale on jsx ...
  */
 const extension2wrapper = {
     ".js"        : javaScriptWrap,
