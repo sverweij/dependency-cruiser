@@ -43,7 +43,7 @@
     "eslint-plugin-security": "1.4.0",
     "intercept-stdout": "0.1.2",
     "istanbul": "0.4.5",
-    "js-makedepend": "2.3.0",
+    "js-makedepend": "2.4.0",
     "mocha": "4.0.1",
     "npm-check-updates": "2.13.0",
     "nsp": "2.8.1",

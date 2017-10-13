@@ -411,6 +411,9 @@ test/extract/transpile/coffeeWrap.spec.js: \
 test/extract/transpile/index.spec.js: \
 	src/extract/transpile/index.js
 
+test/extract/transpile/jsxWrap.spec.js: \
+	src/extract/transpile/javaScriptWrap.js
+
 test/extract/transpile/liveScriptWrap.spec.js: \
 	src/extract/transpile/liveScriptWrap.js
 
@@ -421,6 +424,9 @@ test/extract/transpile/meta.spec.js: \
 
 test/extract/transpile/tryRequire.spec.js: \
 	src/extract/transpile/tryRequire.js
+
+test/extract/transpile/tsxWrap.spec.js: \
+	src/extract/transpile/typeScriptWrap.js
 
 test/extract/transpile/typeScriptWrap.spec.js: \
 	src/extract/transpile/typeScriptWrap.js
@@ -447,3 +453,4 @@ test/validate/readRuleSet.spec.js: \
 test/validate/validate.spec.js: \
 	src/validate/index.js \
 	src/validate/readRuleSet.js
+
