@@ -350,6 +350,7 @@
         "optionsUsed": {
             "outputTo": "-",
             "exclude": "",
+            "maxDepth": 0,
             "system": [
                 "amd",
                 "cjs",

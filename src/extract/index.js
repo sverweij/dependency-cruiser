@@ -8,11 +8,14 @@ const gather                 = require('./gatherInitialSources');
 const summarize              = require('./summarize');
 const addValidations         = require('./addValidations');
 
-function extractRecursive (pFileName, pOptions, pVisited) {
+function extractRecursive (pFileName, pOptions, pVisited, pDepth) {
     pOptions = pOptions || {};
+    pDepth = pDepth || 0;
     pVisited.add(pFileName);
 
-    const lDependencies = extract(pFileName, pOptions);
+    const lDependencies = (!pOptions.maxDepthSpecified || pDepth < pOptions.maxDepth)
+        ? extract(pFileName, pOptions)
+        : [];
 
     return lDependencies
         .filter(pDep => pDep.followable)
@@ -20,7 +23,7 @@ function extractRecursive (pFileName, pOptions, pVisited) {
             (pAll, pDep) => {
                 if (!pVisited.has(pDep.resolved)){
                     return pAll.concat(
-                        extractRecursive(pDep.resolved, pOptions, pVisited)
+                        extractRecursive(pDep.resolved, pOptions, pVisited, pDepth + 1)
                     );
                 }
                 return pAll;
@@ -84,6 +87,7 @@ function makeOptionsPresentable(pOptions) {
         "rulesFile",
         "outputTo",
         "exclude",
+        "maxDepth",
         "system",
         "outputType",
         "prefix"

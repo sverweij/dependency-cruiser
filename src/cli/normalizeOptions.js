@@ -37,7 +37,8 @@ module.exports = (pOptions) => {
         exclude: "",
         outputTo: "-",
         outputType: "err",
-        system: DEFAULT_MODULE_SYSTEMS
+        system: DEFAULT_MODULE_SYSTEMS,
+        maxDepthSpecified: false
     });
 
     pOptions.moduleSystems = normalizeModuleSystems(pOptions.system);
@@ -47,6 +48,13 @@ module.exports = (pOptions) => {
     }
 
     pOptions.validate = pOptions.hasOwnProperty("validate");
+
+    if (pOptions.hasOwnProperty("maxDepth")) {
+        pOptions.maxDepth = parseInt(pOptions.maxDepth, 10);
+        pOptions.maxDepthSpecified = pOptions.maxDepth > 0;
+    } else {
+        pOptions.maxDepth = 0;
+    }
 
     return pOptions;
 };
