@@ -297,6 +297,7 @@
         "totalCruised": 12,
         "optionsUsed": {
             "outputTo": "test/cli/output/cjs.dir.filtered.json",
+            "doNotFollow": "",
             "exclude": "node_modules",
             "system": [
                 "amd",

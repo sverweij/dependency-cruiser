@@ -8,6 +8,7 @@ describe("normalizeOptions", () => {
             normalizeOptions({})
         ).to.deep.equal(
             {
+                doNotFollow: "",
                 exclude: "",
                 outputTo: "-",
                 outputType: "err",
@@ -23,6 +24,7 @@ describe("normalizeOptions", () => {
             normalizeOptions({system: "cjs,es6"})
         ).to.deep.equal(
             {
+                doNotFollow: "",
                 exclude: "",
                 outputTo: "-",
                 outputType: "err",
@@ -38,6 +40,7 @@ describe("normalizeOptions", () => {
             normalizeOptions({system: {}})
         ).to.deep.equal(
             {
+                doNotFollow: "",
                 exclude: "",
                 outputTo: "-",
                 outputType: "err",
@@ -53,6 +56,7 @@ describe("normalizeOptions", () => {
             normalizeOptions({validate: true})
         ).to.deep.equal(
             {
+                doNotFollow: "",
                 exclude: "",
                 outputTo: "-",
                 outputType: "err",
@@ -68,6 +72,7 @@ describe("normalizeOptions", () => {
             normalizeOptions({validate: "./fixtures/rules.empty.json"})
         ).to.deep.equal(
             {
+                doNotFollow: "",
                 exclude: "",
                 outputTo: "-",
                 outputType: "err",

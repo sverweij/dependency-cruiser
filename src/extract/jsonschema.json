@@ -49,7 +49,11 @@
                     },
                     "followable": {
                         "type": "boolean",
-                        "description": "Whether or not this is a dependency that can be followed any further. This will be 'false' for for core modules, json, and modules that could not be resolved to a file."
+                        "description": "Whether or not this is a dependency that can be followed any further. This will be 'false' for for core modules, json, modules that could not be resolved to a file and modules that weren't followed because it matches the doNotFollow expression."
+                    },
+                    "matchesDoNotFollow": {
+                        "type": "boolean",
+                        "description": "'true' if the file name of this module matches the doNotFollow regular expression"
                     },
                     "coreModule": {
                         "type": "boolean",
@@ -99,7 +103,7 @@
                                 },
                                 "followable": {
                                     "type": "boolean",
-                                    "description": "Whether or not this is a dependency that can be followed any further. This is the case for core modules, json, and modules that could not be resolved to a file."
+                                    "description": "Whether or not this is a dependency that can be followed any further. This will be 'false' for for core modules, json, modules that could not be resolved to a file and modules that weren't followed because it matches the doNotFollow expression."
                                 },
                                 "couldNotResolve": {
                                     "type": "boolean",
@@ -205,6 +209,10 @@
                 "outputTo": {
                     "type": "string",
                     "description": "File the output was written to ('-' for stdout)"
+                },
+                "doNotFollow": {
+                    "type": "string",
+                    "description": "The regular expression used for preventing modules from being cruised any further"
                 },
                 "exclude": {
                     "type": "string",

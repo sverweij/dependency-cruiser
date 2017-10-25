@@ -83,6 +83,7 @@ function makeOptionsPresentable(pOptions) {
     const SHARABLE_OPTIONS = [
         "rulesFile",
         "outputTo",
+        "doNotFollow",
         "exclude",
         "system",
         "outputType",

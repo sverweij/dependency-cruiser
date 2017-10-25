@@ -254,6 +254,7 @@
         "totalCruised": 11,
         "optionsUsed": {
             "outputTo": "test/cli/output/cjs.file.json",
+            "doNotFollow": "",
             "exclude": "",
             "system": [
                 "amd",

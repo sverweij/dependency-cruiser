@@ -349,6 +349,7 @@
         "totalCruised": 15,
         "optionsUsed": {
             "outputTo": "-",
+            "doNotFollow": "",
             "exclude": "",
             "system": [
                 "amd",

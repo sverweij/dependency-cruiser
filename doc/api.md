@@ -46,19 +46,21 @@ let dependenciesInAGraphVizDotScript = depcruise(
 These are all the options:
 ```
 {
- validate   : if true, will attempt to validate with the rules in ruleSet.
-              Default false.
- ruleSet    : An object containing the rules to validate against. The rules
-              should adhere to the [ruleset schema](../src/validate/jsonschema.json)
- exclude    : regular expression describing which dependencies the function
-              should not cruise
- system     : an array of module systems to use for following dependencies;
-              defaults to ["es6", "cjs", "amd"]
- outputType : one of "json", "html", "dot", "csv" or "err". When left
-              out the function will return a javascript object as dependencies
- prefix     : a string to insert before links (in dot/ svg output) so with
-              cruising local dependencies it is possible to point to sources
-              elsewhere (e.g. in an online repository)
+ validate    : if true, will attempt to validate with the rules in ruleSet.
+               Default false.
+ ruleSet     : An object containing the rules to validate against. The rules
+               should adhere to the [ruleset schema](../src/validate/jsonschema.json)
+ doNotFollow : regular expression describing which dependencies the function
+               should cruise, but not resolve or follow any further              
+ exclude     : regular expression describing which dependencies the function
+               should not cruise
+ system      : an array of module systems to use for following dependencies;
+               defaults to ["es6", "cjs", "amd"]
+ outputType  : one of "json", "html", "dot", "csv" or "err". When left
+               out the function will return a javascript object as dependencies
+ prefix      : a string to insert before links (in dot/ svg output) so with
+               cruising local dependencies it is possible to point to sources
+               elsewhere (e.g. in an online repository)
 }
 ```
 

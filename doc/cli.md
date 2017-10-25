@@ -2,29 +2,31 @@
 
 Running with no parameters gets you help:
 ```
+Usage: dependency-cruise [options] <files-or-directories>
 
-  Usage: dependency-cruise [options] <files-or-directories>
 
-  Options:
+Options:
 
-    -h, --help                output usage information
-    -V, --version             output the version number
-    -i, --info                shows what languages and extensions
-                              dependency-cruiser supports
-    -v, --validate [file]     validate with rules in [file]
-                              (default: .dependency-cruiser.json)
-    -f, --output-to <file>    file to write output to; - for stdout
-                              (default: -)
-    -x, --exclude <regex>     a regular expression for excluding modules
-    -M, --system <items>      list of module systems (default: amd,cjs,es6)
-    -T, --output-type <type>  output type - html|dot|err|json
-                              (default:err)
-    -P --prefix <prefix>      prefix to prepend links with (e.g. in the
-                              svg output type)
-    --init-rules              create a .dependency-cruiser.json with basic
-                              validations in the current folder.
-
+-V, --version                output the version number
+-i, --info                   shows what languages and extensions
+                             dependency-cruiser supports
+-v, --validate [file]        validate with rules in [file]
+                             (default: .dependency-cruiser.json)
+-f, --output-to <file>       file to write output to; - for stdout
+                             (default: -)
+-d, --do-not-follow <regex>  a regular expression for modules to include,
+                             but not follow further
+-x, --exclude <regex>        a regular expression for excluding modules
+-M, --system <items>         list of module systems (default: amd,cjs,es6)
+-T, --output-type <type>     output type - html|dot|err|json
+                             (default: err)
+-P, --prefix <prefix>        prefix to use for links in the svg reporter
+--init-rules                 write a .dependency-cruiser.json with basic
+                             validations to the current folder.
+-h, --help                   output usage information
 ```
+
+
 
 ## Output formats
 
@@ -65,9 +67,17 @@ If you supply `csv` it will write the dependency matrix to a comma
 separated file - so you can import it into a spreadsheet program
 and analyze from there.
 
+## `--do-not-follow`: don't cruise modules adhering to this pattern any further
+If you _do_ want to see certain modules in your reports, but are not interested
+in these modules' dependencies, you'd pass the regular expression for those
+modules to the `--do-not-follow` (short: `-d`) option. A typical pattern you'd
+use with this is "node_modules":
+
+```sh
+dependency-cruise -d "node_modules" -T html -f deps-with-unfollowed-node_modules.html src
+```
 
 ## `--exclude`: exclude modules from being cruised
-
 If you don't want to see certain modules in your report (or not have them
 validated), you can exclude them by passing a regular expression to the
 `--exclude` (short: `-x`) option. E.g. to exclude `node_modules` from being

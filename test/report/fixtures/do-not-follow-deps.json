@@ -1,0 +1,32 @@
+{
+    "dependencies": [
+        {
+            "source": "test/cli/fixtures/unresolvable-in-sub/refers-to-a-do-not-follow-module.js",
+            "dependencies": [
+                {
+                    "resolved": "dontFollowThis",
+                    "coreModule": false,
+                    "followable": false,
+                    "couldNotResolve": false,
+                    "module": "dontFollowThis",
+                    "moduleSystem": "es6",
+                    "valid": true
+                }
+            ]
+        },
+        {
+            "source": "dontFollowThis",
+            "matchesDoNotFollow": true,
+            "dependencies": []
+        }
+    ],
+    "summary": {
+        "violations": [],
+        "err": 481,
+        "warn": 30,
+        "info": 0,
+        "optionsUsed": {
+            "prefix": "STUFFCOMINGBEFORE"
+        }
+    }
+}

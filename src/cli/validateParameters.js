@@ -25,10 +25,10 @@ function validateSystems(pSystem) {
     }
 }
 
-function validateExcludePattern(pExclude) {
-    if (Boolean(pExclude) && !safeRegex(pExclude)) {
+function isSafeRegExp(pPattern) {
+    if (Boolean(pPattern) && !safeRegex(pPattern)) {
         throw Error(
-            `The exclude pattern '${pExclude}' will probably run very slowly - cowardly refusing to run.\n`
+            `The pattern '${pPattern}' will probably run very slowly - cowardly refusing to run.\n`
         );
     }
 }
@@ -53,7 +53,8 @@ module.exports = (pFileDirArray, pOptions) => {
     pFileDirArray.forEach(validateFileExistence);
     if (Boolean(pOptions)) {
         validateSystems(pOptions.system);
-        validateExcludePattern(pOptions.exclude);
+        isSafeRegExp(pOptions.exclude);
+        isSafeRegExp(pOptions.doNotFollow);
         validateOutputType(pOptions.outputType);
         validateValidation(pOptions);
     }
