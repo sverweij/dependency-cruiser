@@ -52,6 +52,8 @@ These are all the options:
               should adhere to the [ruleset schema](../src/validate/jsonschema.json)
  exclude    : regular expression describing which dependencies the function
               should not cruise
+ maxDepth   : the maximum depth to cruise; 0 <= n <= 99
+              (default: 0, which means 'infinite depth')
  system     : an array of module systems to use for following dependencies;
               defaults to ["es6", "cjs", "amd"]
  outputType : one of "json", "html", "dot", "csv" or "err". When left

@@ -24,6 +24,8 @@ program
     .option("-f, --output-to <file>", `file to write output to; - for stdout
                           (default: -)`)
     .option("-x, --exclude <regex>", "a regular expression for excluding modules")
+    .option("-d, --max-depth <n>", `the maximum depth to cruise; 0 <= n <= 99
+                          (default: 0, which means 'infinite depth')`)
     .option("-M, --system <items>", `list of module systems (default: amd,cjs,es6)`)
     .option("-T, --output-type <type>", `output type - html|dot|err|json
                           (default: err)`)

@@ -1,0 +1,97 @@
+{
+    "dependencies": [
+        {
+            "source": "./test/extract/fixtures/maxDepth/index.js",
+            "dependencies": [
+                {
+                    "resolved": "test/extract/fixtures/maxDepth/oneAndTwoDeep.js",
+                    "coreModule": false,
+                    "followable": true,
+                    "couldNotResolve": false,
+                    "dependencyTypes": [
+                        "local"
+                    ],
+                    "module": "./oneAndTwoDeep",
+                    "moduleSystem": "es6",
+                    "valid": true
+                },
+                {
+                    "resolved": "test/extract/fixtures/maxDepth/oneDeep.js",
+                    "coreModule": false,
+                    "followable": true,
+                    "couldNotResolve": false,
+                    "dependencyTypes": [
+                        "local"
+                    ],
+                    "module": "./oneDeep",
+                    "moduleSystem": "es6",
+                    "valid": true
+                },
+                {
+                    "resolved": "test/extract/fixtures/maxDepth/sub/oneDeepInSub.js",
+                    "coreModule": false,
+                    "followable": true,
+                    "couldNotResolve": false,
+                    "dependencyTypes": [
+                        "local"
+                    ],
+                    "module": "./sub/oneDeepInSub",
+                    "moduleSystem": "es6",
+                    "valid": true
+                },
+                {
+                    "resolved": "os",
+                    "coreModule": true,
+                    "followable": false,
+                    "couldNotResolve": false,
+                    "dependencyTypes": [
+                        "core"
+                    ],
+                    "module": "os",
+                    "moduleSystem": "es6",
+                    "valid": true
+                }
+            ]
+        },
+        {
+            "source": "os",
+            "followable": false,
+            "coreModule": true,
+            "couldNotResolve": false,
+            "dependencyTypes": [
+                "core"
+            ],
+            "dependencies": []
+        },
+        {
+            "source": "test/extract/fixtures/maxDepth/oneAndTwoDeep.js",
+            "dependencies": []
+        },
+        {
+            "source": "test/extract/fixtures/maxDepth/oneDeep.js",
+            "dependencies": []
+        },
+        {
+            "source": "test/extract/fixtures/maxDepth/sub/oneDeepInSub.js",
+            "dependencies": []
+        }
+    ],
+    "summary": {
+        "violations": [],
+        "error": 0,
+        "warn": 0,
+        "info": 0,
+        "totalCruised": 5,
+        "optionsUsed": {
+            "outputTo": "./test/extract/maxDepth1.json",
+            "exclude": "",
+            "maxDepth": 1,
+            "system": [
+                "amd",
+                "cjs",
+                "es6"
+            ],
+            "outputType": "json"
+        }
+    }
+}
