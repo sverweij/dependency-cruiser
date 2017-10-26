@@ -36,7 +36,7 @@ export default class ProductPayChooser extends Component {
     if (product.seller.kind === 'donations') {
       submitPrompt = gettext('Donate now');
     } else {
-      // TODO: also handle non-recurring, non-donations here.
+      // Also handle non-recurring, non-donations here.
       submitPrompt = gettext('Subscribe');
     }
 
