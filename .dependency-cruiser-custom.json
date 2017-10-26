@@ -26,8 +26,8 @@
         }, {
             "name": "no-inter-module-test",
             "severity": "error",
-            "from": { "path": "^test/[^\\/]+/[^\\.]+\\.spec\\.js" },
-            "to": { "path": "^test/[^\\/]+/.+", "pathNot": "utl"}
+            "from": { "path": "(^test/[^\\/]+/)[^\\.]+\\.spec\\.js" },
+            "to": { "path": "^test/[^\\/]+/.+", "pathNot": "utl|$1[^\\.]+\\.json$"}
         }, {
             "name": "no-dep-on-test",
             "severity": "error",
