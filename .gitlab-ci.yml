@@ -6,6 +6,7 @@ test_async_node_latest:
   script:
    - npm install
    - npm run lint
+   - npm run depcruise
    - npm run nsp
    - npm run test:cover
   except:
@@ -19,6 +20,7 @@ test_async_node_6:
   script:
    - npm install
    - npm run lint
+   - npm run depcruise
    - npm run nsp
    - npm run test:cover
   except:
@@ -32,6 +34,7 @@ test_async_node_4:
  script:
   - npm install
   - npm run lint
+  - npm run depcruise
   - npm run nsp
   - npm run test:cover
  except:
