@@ -34,3 +34,74 @@ describe('Bundled - ', () => bundledFixtures.forEach(runRecursiveFixture));
 describe('AMD recursive - ', () => amdRecursiveFixtures.forEach(runRecursiveFixture));
 describe('TypeScript recursive - ', () => tsRecursiveFixtures.forEach(runRecursiveFixture));
 describe('CoffeeScript recursive - ', () => coffeeRecursiveFixtures.forEach(runRecursiveFixture));
+
+describe('Max depth', () => {
+    it('returns the complete graph when max-depth is not specified', () => {
+        const lResult = extract(
+            ["./test/extract/fixtures/maxDepth/index.js"]
+        );
+
+        expect(lResult.dependencies).to.deep.equal(
+            require('./maxDepthUnspecified.json').dependencies
+        );
+        expect(lResult).to.be.jsonSchema(depSchema);
+    });
+
+    it('returns the file and one deep with --max-depth 1', () => {
+        const lResult = extract(
+            ["./test/extract/fixtures/maxDepth/index.js"],
+            {
+                maxDepth: 1
+            }
+        );
+
+        expect(lResult.dependencies).to.deep.equal(
+            require('./maxDepth1.json').dependencies
+        );
+        expect(lResult).to.be.jsonSchema(depSchema);
+    });
+
+    it('returns the file and one deep with --max-depth 2', () => {
+        const lResult = extract(
+            ["./test/extract/fixtures/maxDepth/index.js"],
+            {
+                maxDepth: 2
+            }
+        );
+
+        expect(lResult.dependencies).to.deep.equal(
+            require('./maxDepth2.json').dependencies
+        );
+        expect(lResult).to.be.jsonSchema(depSchema);
+    });
+
+    it('returns the file and one deep with --max-depth 3', () => {
+        const lResult = extract(
+            ["./test/extract/fixtures/maxDepth/index.js"],
+            {
+                maxDepth: 3
+            }
+        );
+
+        expect(lResult.dependencies).to.deep.equal(
+            require('./maxDepth3.json').dependencies
+        );
+        expect(lResult).to.be.jsonSchema(depSchema);
+    });
+
+    it('returns the file and one deep with --max-depth 4', () => {
+        const lResult = extract(
+            ["./test/extract/fixtures/maxDepth/index.js"],
+            {
+                maxDepth: 4
+            }
+        );
+
+        expect(lResult.dependencies).to.deep.equal(
+            require('./maxDepth4.json').dependencies
+        );
+        expect(lResult).to.be.jsonSchema(depSchema);
+    });
+});
+
+/* eslint global-require: 0*/

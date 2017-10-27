@@ -49,5 +49,11 @@ module.exports = (pOptions) => {
 
     pOptions.validate = pOptions.hasOwnProperty("validate");
 
+    if (pOptions.hasOwnProperty("maxDepth")) {
+        pOptions.maxDepth = parseInt(pOptions.maxDepth, 10);
+    } else {
+        pOptions.maxDepth = 0;
+    }
+
     return pOptions;
 };

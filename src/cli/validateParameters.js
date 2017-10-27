@@ -6,6 +6,7 @@ const safeRegex = require('safe-regex');
 
 const MODULE_SYSTEM_LIST_RE  = /^((cjs|amd|es6)(,|$))+$/gi;
 const OUTPUT_TYPES_RE        = /^(html|dot|csv|err|json)$/g;
+const VALID_DEPTH_RE         = /^[0-9]{1,2}$/g;
 
 function validateFileExistence(pDirOrFile) {
     try {
@@ -49,6 +50,14 @@ function validateValidation(pOptions) {
     }
 }
 
+function validateMaxDepth(pDepth) {
+    if (Boolean(pDepth) && !(pDepth.match(VALID_DEPTH_RE))) {
+        throw Error(
+            `'${pDepth}' is not a valid depth - use an integer between 0 and 99`
+        );
+    }
+}
+
 module.exports = (pFileDirArray, pOptions) => {
     pFileDirArray.forEach(validateFileExistence);
     if (Boolean(pOptions)) {
@@ -56,6 +65,7 @@ module.exports = (pFileDirArray, pOptions) => {
         isSafeRegExp(pOptions.exclude);
         isSafeRegExp(pOptions.doNotFollow);
         validateOutputType(pOptions.outputType);
+        validateMaxDepth(pOptions.maxDepth);
         validateValidation(pOptions);
     }
 };

@@ -26,6 +26,30 @@ Options:
 -h, --help                   output usage information
 ```
 
+  Usage: dependency-cruise [options] <files-or-directories>
+
+  Options:
+
+    -h, --help                  output usage information
+    -V, --version                output the version number
+    -i, --info                   shows what languages and extensions
+                                 dependency-cruiser supports
+    -v, --validate [file]        validate with rules in [file]
+                                 (default: .dependency-cruiser.json)
+    -f, --output-to <file>       file to write output to; - for stdout
+                                 (default: -)
+    -X, --do-not-follow <regex>  a regular expression for modules to include,
+                                 but not follow further
+    -x, --exclude <regex>        a regular expression for excluding modules
+    -d, --max-depth <n>          the maximum depth to cruise; 0 <= n <= 99
+                                 (default: 0, which means 'infinite depth')
+    -M, --system <items>         list of module systems (default: amd,cjs,es6)
+    -T, --output-type <type>     output type - html|dot|err|json
+                                 (default:err)
+    -P --prefix <prefix>         prefix to prepend links with (e.g. in the
+                                 svg output type)
+    --init-rules                 create a .dependency-cruiser.json with basic
+                                 validations in the current folder.
 
 
 ## Output formats
@@ -87,12 +111,34 @@ scanned:
 dependency-cruise -x "node_modules" -T html -f deps-without-node_modules.html src
 ```
 
-Beacuse it's regular expressions, you can do more interesting stuff here as well. To exclude
+Because it's regular expressions, you can do more interesting stuff here as well. To exclude
 all modules with a file path starting with coverage, test or node_modules, you could do this:
 
 ```sh
 dependency-cruise -x "^(coverage|test|node_modules)" -T html -f deps-without-stuffs.html src
 ```
+
+## `--max-depth`
+Only cruise the specified depth, counting from the specified root-module(s). This
+command is mostly useful in combination with visualisation output like _dot_ to
+keep the generated output to a manageable size.
+
+Although totally up to you I advise you to not use this with the `err` reporter;
+you'll probably miss validating a dependency or two.
+
+This will cruise the dependencies of each file directly in the src folder, up
+to a depth of 3:
+```sh
+dependency-cruise --max-depth 3 -T dot src | dot -T svg > depth_three.svg
+```
+
+This will cruise the dependencies of the dependency-cruiser command up till 3
+deep:
+```sh
+dependency-cruise -x node_modules --max-depth 3 -T dot src | dot -T png > dependency-cruiser-max-depth-3.png
+```
+Result:
+![dependency-cruiser cruised with max depth 3](real-world-samples/dependency-cruiser-max-depth-3.png)
 
 ## `--validate`
 Validates against a list of rules in a rules file. This defaults to a file

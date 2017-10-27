@@ -218,6 +218,10 @@
                     "type": "string",
                     "description": "The regular expression used for excluding modules from being cruised"
                 },
+                "maxDepth": {
+                    "type": "number",
+                    "description": "The maximum cruise depth specified. 0 means no maximum specified"
+                },
                 "system": {
                     "type": "array",
                     "items": {"$ref": "#/definitions/ModuleSystemType" }

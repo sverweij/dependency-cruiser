@@ -12,6 +12,7 @@ describe("normalizeOptions", () => {
                 exclude: "",
                 outputTo: "-",
                 outputType: "err",
+                maxDepth: 0,
                 system: ["amd", "cjs", "es6"],
                 moduleSystems: ["amd", "cjs", "es6"],
                 validate: false
@@ -28,6 +29,7 @@ describe("normalizeOptions", () => {
                 exclude: "",
                 outputTo: "-",
                 outputType: "err",
+                maxDepth: 0,
                 system: "cjs,es6",
                 moduleSystems: ["cjs", "es6"],
                 validate: false
@@ -44,6 +46,7 @@ describe("normalizeOptions", () => {
                 exclude: "",
                 outputTo: "-",
                 outputType: "err",
+                maxDepth: 0,
                 system: {},
                 moduleSystems: ["amd", "cjs", "es6"],
                 validate: false
@@ -60,6 +63,7 @@ describe("normalizeOptions", () => {
                 exclude: "",
                 outputTo: "-",
                 outputType: "err",
+                maxDepth: 0,
                 system: ["amd", "cjs", "es6"],
                 moduleSystems: ["amd", "cjs", "es6"],
                 rulesFile: ".dependency-cruiser.json",
@@ -76,6 +80,7 @@ describe("normalizeOptions", () => {
                 exclude: "",
                 outputTo: "-",
                 outputType: "err",
+                maxDepth: 0,
                 system: ["amd", "cjs", "es6"],
                 moduleSystems: ["amd", "cjs", "es6"],
                 rulesFile: "./fixtures/rules.empty.json",
@@ -83,5 +88,4 @@ describe("normalizeOptions", () => {
             }
         );
     });
-
 });

@@ -8,11 +8,13 @@ const gather                 = require('./gatherInitialSources');
 const summarize              = require('./summarize');
 const addValidations         = require('./addValidations');
 
-function extractRecursive (pFileName, pOptions, pVisited) {
+function extractRecursive (pFileName, pOptions, pVisited, pDepth) {
     pOptions = pOptions || {};
+    pDepth = pDepth || 0;
     pVisited.add(pFileName);
-
-    const lDependencies = extract(pFileName, pOptions);
+    const lDependencies = (pOptions.maxDepth <= 0 || pDepth < pOptions.maxDepth)
+        ? extract(pFileName, pOptions)
+        : [];
 
     return lDependencies
         .filter(pDep => pDep.followable)
@@ -20,7 +22,7 @@ function extractRecursive (pFileName, pOptions, pVisited) {
             (pAll, pDep) => {
                 if (!pVisited.has(pDep.resolved)){
                     return pAll.concat(
-                        extractRecursive(pDep.resolved, pOptions, pVisited)
+                        extractRecursive(pDep.resolved, pOptions, pVisited, pDepth + 1)
                     );
                 }
                 return pAll;
@@ -85,6 +87,7 @@ function makeOptionsPresentable(pOptions) {
         "outputTo",
         "doNotFollow",
         "exclude",
+        "maxDepth",
         "system",
         "outputType",
         "prefix"
@@ -94,7 +97,7 @@ function makeOptionsPresentable(pOptions) {
         return {};
     }
     return SHARABLE_OPTIONS
-        .filter(pOption => pOptions.hasOwnProperty(pOption))
+        .filter(pOption => pOptions.hasOwnProperty(pOption) && pOptions[pOption] !== 0)
         .reduce(
             (pAll, pOption) => {
                 pAll[pOption] = pOptions[pOption];
@@ -160,7 +163,8 @@ module.exports = (pFileDirArray, pOptions, pCallback) => {
         pOptions,
         {
             baseDir: process.cwd(),
-            moduleSystems: ["cjs", "es6", "amd"]
+            moduleSystems: ["cjs", "es6", "amd"],
+            maxDepth: 0
         }
     );
 

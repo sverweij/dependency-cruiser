@@ -1,0 +1,23 @@
+sudo: false
+
+language: node_js
+
+node_js:
+  - "4"
+  - "6"
+  - stable
+
+install:
+  - npm install
+
+script:
+  - make lint depcruise cover
+  - npm run nsp
+
+branches:
+  except:
+    - gh-pages
+
+cache:
+  directories:
+    - node_modules
