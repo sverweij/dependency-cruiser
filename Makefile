@@ -388,7 +388,12 @@ test/extract/dependencyEndsUpAtFrom.spec.js: \
 
 test/extract/extract-composite.spec.js: \
 	src/extract/index.js \
-	src/extract/jsonschema.json
+	src/extract/jsonschema.json \
+	test/extract/maxDepth1.json \
+	test/extract/maxDepth2.json \
+	test/extract/maxDepth3.json \
+	test/extract/maxDepth4.json \
+	test/extract/maxDepthUnspecified.json
 
 test/extract/extract.spec.js: \
 	src/extract/extract.js
