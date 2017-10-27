@@ -12,7 +12,6 @@ describe("normalizeOptions", () => {
                 outputTo: "-",
                 outputType: "err",
                 maxDepth: 0,
-                maxDepthSpecified: false,
                 system: ["amd", "cjs", "es6"],
                 moduleSystems: ["amd", "cjs", "es6"],
                 validate: false
@@ -29,7 +28,6 @@ describe("normalizeOptions", () => {
                 outputTo: "-",
                 outputType: "err",
                 maxDepth: 0,
-                maxDepthSpecified: false,
                 system: "cjs,es6",
                 moduleSystems: ["cjs", "es6"],
                 validate: false
@@ -46,7 +44,6 @@ describe("normalizeOptions", () => {
                 outputTo: "-",
                 outputType: "err",
                 maxDepth: 0,
-                maxDepthSpecified: false,
                 system: {},
                 moduleSystems: ["amd", "cjs", "es6"],
                 validate: false
@@ -63,7 +60,6 @@ describe("normalizeOptions", () => {
                 outputTo: "-",
                 outputType: "err",
                 maxDepth: 0,
-                maxDepthSpecified: false,
                 system: ["amd", "cjs", "es6"],
                 moduleSystems: ["amd", "cjs", "es6"],
                 rulesFile: ".dependency-cruiser.json",
@@ -80,7 +76,6 @@ describe("normalizeOptions", () => {
                 outputTo: "-",
                 outputType: "err",
                 maxDepth: 0,
-                maxDepthSpecified: false,
                 system: ["amd", "cjs", "es6"],
                 moduleSystems: ["amd", "cjs", "es6"],
                 rulesFile: "./fixtures/rules.empty.json",
@@ -88,37 +83,4 @@ describe("normalizeOptions", () => {
             }
         );
     });
-    it("--max-depth '0' keeps maxDepthSpecified on false", () => {
-        expect(
-            normalizeOptions({maxDepth: "0"})
-        ).to.deep.equal(
-            {
-                exclude: "",
-                outputTo: "-",
-                outputType: "err",
-                maxDepth: 0,
-                maxDepthSpecified: false,
-                system: ["amd", "cjs", "es6"],
-                moduleSystems: ["amd", "cjs", "es6"],
-                validate: false
-            }
-        );
-    });
-    it("--max-depth '7' switches maxDepthSpecified to true. And parseInt's to 7", () => {
-        expect(
-            normalizeOptions({maxDepth: "7"})
-        ).to.deep.equal(
-            {
-                exclude: "",
-                outputTo: "-",
-                outputType: "err",
-                maxDepth: 7,
-                maxDepthSpecified: true,
-                system: ["amd", "cjs", "es6"],
-                moduleSystems: ["amd", "cjs", "es6"],
-                validate: false
-            }
-        );
-    });
-
 });

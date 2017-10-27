@@ -51,8 +51,7 @@ describe('Max depth', () => {
         const lResult = extract(
             ["./test/extract/fixtures/maxDepth/index.js"],
             {
-                maxDepth: 1,
-                maxDepthSpecified: true
+                maxDepth: 1
             }
         );
 
@@ -66,8 +65,7 @@ describe('Max depth', () => {
         const lResult = extract(
             ["./test/extract/fixtures/maxDepth/index.js"],
             {
-                maxDepth: 2,
-                maxDepthSpecified: true
+                maxDepth: 2
             }
         );
 
@@ -81,8 +79,7 @@ describe('Max depth', () => {
         const lResult = extract(
             ["./test/extract/fixtures/maxDepth/index.js"],
             {
-                maxDepth: 3,
-                maxDepthSpecified: true
+                maxDepth: 3
             }
         );
 
@@ -96,8 +93,7 @@ describe('Max depth', () => {
         const lResult = extract(
             ["./test/extract/fixtures/maxDepth/index.js"],
             {
-                maxDepth: 4,
-                maxDepthSpecified: true
+                maxDepth: 4
             }
         );
 

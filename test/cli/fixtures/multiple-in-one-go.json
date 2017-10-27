@@ -124,7 +124,6 @@
         "optionsUsed": {
             "outputTo": "test/cli/output/multiple-in-one-go.json",
             "exclude": "",
-            "maxDepth": 0,
             "system": [
                 "amd",
                 "cjs",

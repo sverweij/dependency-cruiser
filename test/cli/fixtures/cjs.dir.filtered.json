@@ -298,7 +298,6 @@
         "optionsUsed": {
             "outputTo": "test/cli/output/cjs.dir.filtered.json",
             "exclude": "node_modules",
-            "maxDepth": 0,
             "system": [
                 "amd",
                 "cjs",

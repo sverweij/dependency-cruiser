@@ -350,7 +350,6 @@
         "optionsUsed": {
             "outputTo": "test/cli/output/cjs.dir.json",
             "exclude": "",
-            "maxDepth": 0,
             "system": [
                 "amd",
                 "cjs",
