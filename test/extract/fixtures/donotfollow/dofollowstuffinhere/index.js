@@ -1,2 +1,2 @@
 const meta = require('../donotfollowonceinthisfolder/meta');
-const calledFromLocalIndex = require('./calledFromLocalIndex');
+const calledFromLocalIndex = require('./callfromlocal');

@@ -83,14 +83,14 @@
                     "valid": true
                 },
                 {
-                    "resolved": "test/extract/fixtures/donotfollow/dofollowstuffinhere/calledFromLocalIndex.js",
+                    "resolved": "test/extract/fixtures/donotfollow/dofollowstuffinhere/callfromlocal.js",
                     "coreModule": false,
                     "followable": true,
                     "couldNotResolve": false,
                     "dependencyTypes": [
                         "local"
                     ],
-                    "module": "./calledFromLocalIndex",
+                    "module": "./callfromlocal",
                     "moduleSystem": "cjs",
                     "matchesDoNotFollow": false,
                     "valid": true
@@ -98,7 +98,7 @@
             ]
         },
         {
-            "source": "test/extract/fixtures/donotfollow/dofollowstuffinhere/calledFromLocalIndex.js",
+            "source": "test/extract/fixtures/donotfollow/dofollowstuffinhere/callfromlocal.js",
             "dependencies": []
         }
     ],
