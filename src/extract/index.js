@@ -17,7 +17,7 @@ function extractRecursive (pFileName, pOptions, pVisited, pDepth) {
         : [];
 
     return lDependencies
-        .filter(pDep => pDep.followable)
+        .filter(pDep => pDep.followable && !pDep.matchesDoNotFollow)
         .reduce(
             (pAll, pDep) => {
                 if (!pVisited.has(pDep.resolved)){
@@ -65,6 +65,7 @@ function toDependencyToSource(pToListItem) {
         followable      : pToListItem.followable,
         coreModule      : pToListItem.coreModule,
         couldNotResolve : pToListItem.couldNotResolve,
+        matchesDoNotFollow: pToListItem.matchesDoNotFollow,
         dependencyTypes : pToListItem.dependencyTypes,
         dependencies    : []
     };

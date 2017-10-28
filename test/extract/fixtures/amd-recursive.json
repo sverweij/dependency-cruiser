@@ -17,6 +17,7 @@
                             "unknown"
                         ],
                         "followable": false,
+                        "matchesDoNotFollow": false,
                         "couldNotResolve": true,
                         "valid": true
                     },
@@ -29,6 +30,7 @@
                             "unknown"
                         ],
                         "followable": false,
+                        "matchesDoNotFollow": false,
                         "couldNotResolve": true,
                         "valid": true
                     },
@@ -41,6 +43,7 @@
                             "undetermined"
                         ],
                         "followable": true,
+                        "matchesDoNotFollow": false,
                         "couldNotResolve": false,
                         "valid": true
                     }
@@ -49,6 +52,7 @@
             {
                 "source": "lodash",
                 "followable": false,
+                "matchesDoNotFollow": false,
                 "coreModule": false,
                 "couldNotResolve": true,
                 "dependencyTypes": [
@@ -59,6 +63,7 @@
             {
                 "source": "other-module-in-the-config",
                 "followable": false,
+                "matchesDoNotFollow": false,
                 "coreModule": false,
                 "couldNotResolve": true,
                 "dependencyTypes": [

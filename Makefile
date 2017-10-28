@@ -110,7 +110,7 @@ depgraph:
 	./bin/dependency-cruise -x "(^node_modules|^fs$$|^path$$)" -T dot -v .dependency-cruiser-custom.json src bin/dependency-cruise | dot -T svg > tmp_deps.svg
 
 depcruise:
-	./bin/dependency-cruise -x fixtures -v .dependency-cruiser-custom.json src bin/dependency-cruise test
+	./bin/dependency-cruise -X ^node_modules -x fixtures -v .dependency-cruiser-custom.json src bin/dependency-cruise test
 
 check: lint test depcruise
 	./bin/dependency-cruise --version # if that runs the cli script works
@@ -388,12 +388,7 @@ test/extract/dependencyEndsUpAtFrom.spec.js: \
 
 test/extract/extract-composite.spec.js: \
 	src/extract/index.js \
-	src/extract/jsonschema.json \
-	test/extract/maxDepth1.json \
-	test/extract/maxDepth2.json \
-	test/extract/maxDepth3.json \
-	test/extract/maxDepth4.json \
-	test/extract/maxDepthUnspecified.json
+	src/extract/jsonschema.json
 
 test/extract/extract.spec.js: \
 	src/extract/extract.js

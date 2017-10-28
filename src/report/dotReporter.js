@@ -1,7 +1,7 @@
 "use strict";
 
 const path       = require('path');
-const Handlebars = require("handlebars/dist/cjs/handlebars.runtime");
+const Handlebars = require("handlebars/runtime");
 
 require("./dot.template");
 

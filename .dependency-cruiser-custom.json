@@ -29,6 +29,12 @@
             "from": { "path": "(^test/[^\\/]+/)[^\\.]+\\.spec\\.js" },
             "to": { "path": "^test/[^\\/]+/.+", "pathNot": "utl|$1[^\\.]+\\.json$"}
         }, {
+            "name": "prefer-no-lodash",
+            "comment": "We want to minimize the dependency on lodash a bit - so flag dependencies that go there",
+            "severity": "info",
+            "from": {},
+            "to": { "path": "lodash"}
+        }, {
             "name": "no-dep-on-test",
             "severity": "error",
             "from": { "path": "^(src|bin)" },

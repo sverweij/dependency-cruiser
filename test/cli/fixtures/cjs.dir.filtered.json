@@ -13,6 +13,7 @@
                     ],
                     "module": "path",
                     "moduleSystem": "cjs",
+                    "matchesDoNotFollow": false,
                     "circular": false,
                     "valid": true
                 }
@@ -23,6 +24,7 @@
             "followable": false,
             "coreModule": true,
             "couldNotResolve": false,
+            "matchesDoNotFollow": false,
             "dependencyTypes": [
                 "core"
             ],
@@ -41,6 +43,7 @@
                     ],
                     "module": "path",
                     "moduleSystem": "cjs",
+                    "matchesDoNotFollow": false,
                     "circular": false,
                     "valid": true
                 }
@@ -59,6 +62,7 @@
                     ],
                     "module": "./one_only_one",
                     "moduleSystem": "cjs",
+                    "matchesDoNotFollow": false,
                     "circular": false,
                     "valid": true
                 },
@@ -72,6 +76,7 @@
                     ],
                     "module": "./one_only_two",
                     "moduleSystem": "cjs",
+                    "matchesDoNotFollow": false,
                     "circular": false,
                     "valid": true
                 },
@@ -85,6 +90,7 @@
                     ],
                     "module": "./shared",
                     "moduleSystem": "cjs",
+                    "matchesDoNotFollow": false,
                     "circular": false,
                     "valid": true
                 },
@@ -98,6 +104,7 @@
                     ],
                     "module": "./sub/dir",
                     "moduleSystem": "cjs",
+                    "matchesDoNotFollow": false,
                     "circular": false,
                     "valid": true
                 },
@@ -111,6 +118,7 @@
                     ],
                     "module": "fs",
                     "moduleSystem": "cjs",
+                    "matchesDoNotFollow": false,
                     "circular": false,
                     "valid": true
                 }
@@ -121,6 +129,7 @@
             "followable": false,
             "coreModule": true,
             "couldNotResolve": false,
+            "matchesDoNotFollow": false,
             "dependencyTypes": [
                 "core"
             ],
@@ -139,6 +148,7 @@
                     ],
                     "module": "path",
                     "moduleSystem": "cjs",
+                    "matchesDoNotFollow": false,
                     "circular": false,
                     "valid": true
                 }
@@ -157,6 +167,7 @@
                     ],
                     "module": "./depindir",
                     "moduleSystem": "cjs",
+                    "matchesDoNotFollow": false,
                     "circular": false,
                     "valid": true
                 },
@@ -170,6 +181,7 @@
                     ],
                     "module": "path",
                     "moduleSystem": "cjs",
+                    "matchesDoNotFollow": false,
                     "circular": false,
                     "valid": true
                 }
@@ -188,6 +200,7 @@
                     ],
                     "module": "path",
                     "moduleSystem": "cjs",
+                    "matchesDoNotFollow": false,
                     "circular": false,
                     "valid": true
                 }
@@ -206,6 +219,7 @@
                     ],
                     "module": "./shared",
                     "moduleSystem": "cjs",
+                    "matchesDoNotFollow": false,
                     "circular": false,
                     "valid": true
                 },
@@ -219,6 +233,7 @@
                     ],
                     "module": "./somedata.json",
                     "moduleSystem": "cjs",
+                    "matchesDoNotFollow": false,
                     "circular": false,
                     "valid": true
                 },
@@ -232,6 +247,7 @@
                     ],
                     "module": "./two_only_one",
                     "moduleSystem": "cjs",
+                    "matchesDoNotFollow": false,
                     "circular": false,
                     "valid": true
                 },
@@ -245,6 +261,7 @@
                     ],
                     "module": "http",
                     "moduleSystem": "cjs",
+                    "matchesDoNotFollow": false,
                     "circular": false,
                     "valid": true
                 }
@@ -255,6 +272,7 @@
             "followable": false,
             "coreModule": false,
             "couldNotResolve": false,
+            "matchesDoNotFollow": false,
             "dependencyTypes": [
                 "local"
             ],
@@ -265,6 +283,7 @@
             "followable": false,
             "coreModule": true,
             "couldNotResolve": false,
+            "matchesDoNotFollow": false,
             "dependencyTypes": [
                 "core"
             ],
@@ -283,6 +302,7 @@
                     ],
                     "module": "./sub/dir",
                     "moduleSystem": "cjs",
+                    "matchesDoNotFollow": false,
                     "circular": false,
                     "valid": true
                 }

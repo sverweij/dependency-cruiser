@@ -42,7 +42,7 @@ describe('Max depth', () => {
         );
 
         expect(lResult.dependencies).to.deep.equal(
-            require('./maxDepthUnspecified.json').dependencies
+            require('./fixtures/maxDepthUnspecified.json').dependencies
         );
         expect(lResult).to.be.jsonSchema(depSchema);
     });
@@ -56,12 +56,12 @@ describe('Max depth', () => {
         );
 
         expect(lResult.dependencies).to.deep.equal(
-            require('./maxDepth1.json').dependencies
+            require('./fixtures/maxDepth1.json').dependencies
         );
         expect(lResult).to.be.jsonSchema(depSchema);
     });
 
-    it('returns the file and one deep with --max-depth 2', () => {
+    it('returns the file and two deep with --max-depth 2', () => {
         const lResult = extract(
             ["./test/extract/fixtures/maxDepth/index.js"],
             {
@@ -70,12 +70,12 @@ describe('Max depth', () => {
         );
 
         expect(lResult.dependencies).to.deep.equal(
-            require('./maxDepth2.json').dependencies
+            require('./fixtures/maxDepth2.json').dependencies
         );
         expect(lResult).to.be.jsonSchema(depSchema);
     });
 
-    it('returns the file and one deep with --max-depth 3', () => {
+    it('returns the file and three deep with --max-depth 3', () => {
         const lResult = extract(
             ["./test/extract/fixtures/maxDepth/index.js"],
             {
@@ -84,12 +84,12 @@ describe('Max depth', () => {
         );
 
         expect(lResult.dependencies).to.deep.equal(
-            require('./maxDepth3.json').dependencies
+            require('./fixtures/maxDepth3.json').dependencies
         );
         expect(lResult).to.be.jsonSchema(depSchema);
     });
 
-    it('returns the file and one deep with --max-depth 4', () => {
+    it('returns the file and four deep with --max-depth 4', () => {
         const lResult = extract(
             ["./test/extract/fixtures/maxDepth/index.js"],
             {
@@ -98,7 +98,21 @@ describe('Max depth', () => {
         );
 
         expect(lResult.dependencies).to.deep.equal(
-            require('./maxDepth4.json').dependencies
+            require('./fixtures/maxDepth4.json').dependencies
+        );
+        expect(lResult).to.be.jsonSchema(depSchema);
+    });
+
+    it('returns the file and one deep with --max-depth 4', () => {
+        const lResult = extract(
+            ["./test/extract/fixtures/donotfollow/index.js"],
+            {
+                doNotFollow: "donotfollowonceinthisfolder"
+            }
+        );
+
+        expect(lResult.dependencies).to.deep.equal(
+            require('./fixtures/donotfollow.json').dependencies
         );
         expect(lResult).to.be.jsonSchema(depSchema);
     });

@@ -14,6 +14,7 @@
                     "local"
                 ],
                 "followable": true,
+                "matchesDoNotFollow": false,
                 "couldNotResolve": false
             },
             {
@@ -25,6 +26,7 @@
                     "local"
                 ],
                 "followable": true,
+                "matchesDoNotFollow": false,
                 "couldNotResolve": false
             }
         ]
@@ -44,6 +46,7 @@
                     "local"
                 ],
                 "followable": true,
+                "matchesDoNotFollow": false,
                 "couldNotResolve": false
             },
             {
@@ -55,6 +58,7 @@
                     "local"
                 ],
                 "followable": true,
+                "matchesDoNotFollow": false,
                 "couldNotResolve": false
             }
         ]
@@ -74,6 +78,7 @@
                     "local"
                 ],
                 "followable": true,
+                "matchesDoNotFollow": false,
                 "couldNotResolve": false
             },
             {
@@ -85,6 +90,7 @@
                     "local"
                 ],
                 "followable": true,
+                "matchesDoNotFollow": false,
                 "couldNotResolve": false
             },
             {
@@ -96,6 +102,7 @@
                     "local"
                 ],
                 "followable": true,
+                "matchesDoNotFollow": false,
                 "couldNotResolve": false
             }
         ]
@@ -116,6 +123,7 @@
                     "local"
                 ],
                 "followable": true,
+                "matchesDoNotFollow": false,
                 "couldNotResolve": false
             },
             {
@@ -127,6 +135,7 @@
                     "local"
                 ],
                 "followable": true,
+                "matchesDoNotFollow": false,
                 "couldNotResolve": false
             }
         ]
@@ -146,6 +155,7 @@
                     "local"
                 ],
                 "followable": true,
+                "matchesDoNotFollow": false,
                 "couldNotResolve": false
             },
             {
@@ -157,6 +167,7 @@
                     "local"
                 ],
                 "followable": true,
+                "matchesDoNotFollow": false,
                 "couldNotResolve": false
             },
             {
@@ -168,6 +179,7 @@
                     "local"
                 ],
                 "followable": true,
+                "matchesDoNotFollow": false,
                 "couldNotResolve": false
             },
             {
@@ -179,6 +191,7 @@
                     "local"
                 ],
                 "followable": true,
+                "matchesDoNotFollow": false,
                 "couldNotResolve": false
             }
         ]
@@ -198,6 +211,7 @@
                     "unknown"
                 ],
                 "followable": false,
+                "matchesDoNotFollow": false,
                 "couldNotResolve": true
             },
             {
@@ -209,6 +223,7 @@
                     "unknown"
                 ],
                 "followable": false,
+                "matchesDoNotFollow": false,
                 "couldNotResolve": true
             },
             {
@@ -220,6 +235,7 @@
                     "undetermined"
                 ],
                 "followable": true,
+                "matchesDoNotFollow": false,
                 "couldNotResolve": false
             }
         ]

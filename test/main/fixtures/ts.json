@@ -7,6 +7,7 @@
                     "resolved": "test/main/fixtures/ts/javascriptThing.js",
                     "coreModule": false,
                     "followable": true,
+                    "matchesDoNotFollow": false,
                     "couldNotResolve": false,
                     "dependencyTypes": [
                         "local"
@@ -19,6 +20,7 @@
                     "resolved": "test/main/fixtures/ts/sub/index.ts",
                     "coreModule": false,
                     "followable": true,
+                    "matchesDoNotFollow": false,
                     "couldNotResolve": false,
                     "dependencyTypes": [
                         "local"
@@ -31,6 +33,7 @@
                     "resolved": "test/main/fixtures/ts/sub/kaching.ts",
                     "coreModule": false,
                     "followable": true,
+                    "matchesDoNotFollow": false,
                     "couldNotResolve": false,
                     "dependencyTypes": [
                         "local"
@@ -43,6 +46,7 @@
                     "resolved": "test/main/fixtures/ts/sub/willBeReExported.ts",
                     "coreModule": false,
                     "followable": true,
+                    "matchesDoNotFollow": false,
                     "couldNotResolve": false,
                     "dependencyTypes": [
                         "local"
@@ -55,6 +59,7 @@
                     "resolved": "path",
                     "coreModule": true,
                     "followable": false,
+                    "matchesDoNotFollow": false,
                     "couldNotResolve": false,
                     "dependencyTypes": [
                         "core"
@@ -68,6 +73,7 @@
         {
             "source": "path",
             "followable": false,
+            "matchesDoNotFollow": false,
             "coreModule": true,
             "couldNotResolve": false,
             "dependencyTypes": [
@@ -86,6 +92,7 @@
                     "resolved": "test/main/fixtures/ts/sub/willBeReExported.ts",
                     "coreModule": false,
                     "followable": true,
+                    "matchesDoNotFollow": false,
                     "couldNotResolve": false,
                     "dependencyTypes": [
                         "local"

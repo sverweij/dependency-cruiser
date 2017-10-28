@@ -9,7 +9,7 @@
   },
   "main": "src/main/index.js",
   "scripts": {
-    "depcruise": "./bin/dependency-cruise -x fixtures -v .dependency-cruiser-custom.json src bin/dependency-cruise test",
+    "depcruise": "./bin/dependency-cruise -X ^node_modules -x fixtures -v .dependency-cruiser-custom.json src bin/dependency-cruise test",
     "lint": "eslint bin src test",
     "lint:fix": "eslint --fix bin src test",
     "nsp": "nsp check",

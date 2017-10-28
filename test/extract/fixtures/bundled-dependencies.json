@@ -16,6 +16,7 @@
                         "resolved": "node_modules/idontgetbundled/index.js",
                         "coreModule": false,
                         "followable": true,
+                        "matchesDoNotFollow": false,
                         "couldNotResolve": false,
                         "dependencyTypes": [
                             "npm"
@@ -28,6 +29,7 @@
                         "resolved": "node_modules/igetbundled/index.js",
                         "coreModule": false,
                         "followable": true,
+                        "matchesDoNotFollow": false,
                         "couldNotResolve": false,
                         "dependencyTypes": [
                             "npm",

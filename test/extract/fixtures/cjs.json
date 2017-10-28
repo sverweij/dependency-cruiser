@@ -16,6 +16,7 @@
                     "local"
                 ],
                 "followable": true,
+                "matchesDoNotFollow": false,
                 "couldNotResolve": false
             },
             {
@@ -27,6 +28,7 @@
                     "local"
                 ],
                 "followable": true,
+                "matchesDoNotFollow": false,
                 "couldNotResolve": false
             },
             {
@@ -38,6 +40,7 @@
                     "local"
                 ],
                 "followable": true,
+                "matchesDoNotFollow": false,
                 "couldNotResolve": false
             },
             {
@@ -49,6 +52,7 @@
                     "local"
                 ],
                 "followable": true,
+                "matchesDoNotFollow": false,
                 "couldNotResolve": false
             },
             {
@@ -60,6 +64,7 @@
                     "npm"
                 ],
                 "followable": true,
+                "matchesDoNotFollow": false,
                 "couldNotResolve": false
             },
             {
@@ -71,6 +76,7 @@
                     "core"
                 ],
                 "followable": false,
+                "matchesDoNotFollow": false,
                 "couldNotResolve": false
             }
         ]
@@ -97,6 +103,7 @@
                     "local"
                 ],
                 "followable": true,
+                "matchesDoNotFollow": false,
                 "couldNotResolve": false
             },
             {
@@ -108,6 +115,7 @@
                     "core"
                 ],
                 "followable": false,
+                "matchesDoNotFollow": false,
                 "couldNotResolve": false
             }
         ]
@@ -127,6 +135,7 @@
                     "core"
                 ],
                 "followable": false,
+                "matchesDoNotFollow": false,
                 "couldNotResolve": false
             }
         ]
@@ -146,6 +155,7 @@
                     "core"
                 ],
                 "followable": false,
+                "matchesDoNotFollow": false,
                 "couldNotResolve": false
             }
         ]
@@ -165,6 +175,7 @@
                     "local"
                 ],
                 "followable": true,
+                "matchesDoNotFollow": false,
                 "couldNotResolve": false
             }
         ]
@@ -191,6 +202,7 @@
                     "local"
                 ],
                 "followable": true,
+                "matchesDoNotFollow": false,
                 "couldNotResolve": false
             }
         ]
@@ -210,6 +222,7 @@
                     "npm-no-pkg"
                 ],
                 "followable": true,
+                "matchesDoNotFollow": false,
                 "couldNotResolve": false
             }
         ]
@@ -229,6 +242,7 @@
                     "unknown"
                 ],
                 "followable": false,
+                "matchesDoNotFollow": false,
                 "couldNotResolve": true
             },
             {
@@ -240,6 +254,7 @@
                     "unknown"
                 ],
                 "followable": false,
+                "matchesDoNotFollow": false,
                 "couldNotResolve": true
             }
         ]

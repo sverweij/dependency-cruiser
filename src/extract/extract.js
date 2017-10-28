@@ -95,12 +95,17 @@ module.exports = (pFileName, pOptions) => {
                         pOptions.baseDir,
                         path.join(pOptions.baseDir, path.dirname(pFileName))
                     );
+                    const lMatchesDoNotFollow = Boolean(pOptions.doNotFollow)
+                        ? RegExp(pOptions.doNotFollow, "g").test(lResolved.resolved)
+                        : false;
 
                     return Object.assign(
                         lResolved,
                         {
                             module       : pDependency.moduleName,
-                            moduleSystem : pDependency.moduleSystem
+                            moduleSystem : pDependency.moduleSystem,
+                            followable   : lResolved.followable && !lMatchesDoNotFollow,
+                            matchesDoNotFollow : lMatchesDoNotFollow
                         }
                     );
                 }

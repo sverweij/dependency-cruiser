@@ -105,6 +105,10 @@
                                     "type": "boolean",
                                     "description": "Whether or not this is a dependency that can be followed any further. This will be 'false' for for core modules, json, modules that could not be resolved to a file and modules that weren't followed because it matches the doNotFollow expression."
                                 },
+                                "matchesDoNotFollow": {
+                                    "type": "boolean",
+                                    "description": "'true' if the file name of this module matches the doNotFollow regular expression"
+                                },
                                 "couldNotResolve": {
                                     "type": "boolean",
                                     "description": "'true' if dependency-cruiser could not resulve the module name in the source code to a file name or core module. 'false' in all other cases."

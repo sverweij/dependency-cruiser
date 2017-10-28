@@ -7,6 +7,7 @@
                     "resolved": "test/extract/fixtures/maxDepth/oneAndTwoDeep.js",
                     "coreModule": false,
                     "followable": true,
+                    "matchesDoNotFollow": false,
                     "couldNotResolve": false,
                     "dependencyTypes": [
                         "local"
@@ -19,6 +20,7 @@
                     "resolved": "test/extract/fixtures/maxDepth/oneDeep.js",
                     "coreModule": false,
                     "followable": true,
+                    "matchesDoNotFollow": false,
                     "couldNotResolve": false,
                     "dependencyTypes": [
                         "local"
@@ -31,6 +33,7 @@
                     "resolved": "test/extract/fixtures/maxDepth/sub/oneDeepInSub.js",
                     "coreModule": false,
                     "followable": true,
+                    "matchesDoNotFollow": false,
                     "couldNotResolve": false,
                     "dependencyTypes": [
                         "local"
@@ -43,6 +46,7 @@
                     "resolved": "os",
                     "coreModule": true,
                     "followable": false,
+                    "matchesDoNotFollow": false,
                     "couldNotResolve": false,
                     "dependencyTypes": [
                         "core"
@@ -56,6 +60,7 @@
         {
             "source": "os",
             "followable": false,
+            "matchesDoNotFollow": false,
             "coreModule": true,
             "couldNotResolve": false,
             "dependencyTypes": [
@@ -74,6 +79,7 @@
                     "resolved": "test/extract/fixtures/maxDepth/oneAndTwoDeep.js",
                     "coreModule": false,
                     "followable": true,
+                    "matchesDoNotFollow": false,
                     "couldNotResolve": false,
                     "dependencyTypes": [
                         "local"
@@ -86,6 +92,7 @@
                     "resolved": "test/extract/fixtures/maxDepth/twoDeep.js",
                     "coreModule": false,
                     "followable": true,
+                    "matchesDoNotFollow": false,
                     "couldNotResolve": false,
                     "dependencyTypes": [
                         "local"
@@ -103,6 +110,7 @@
                     "resolved": "test/extract/fixtures/maxDepth/sub/threeDeepInSub.js",
                     "coreModule": false,
                     "followable": true,
+                    "matchesDoNotFollow": false,
                     "couldNotResolve": false,
                     "dependencyTypes": [
                         "local"
@@ -120,6 +128,7 @@
                     "resolved": "os",
                     "coreModule": true,
                     "followable": false,
+                    "matchesDoNotFollow": false,
                     "couldNotResolve": false,
                     "dependencyTypes": [
                         "core"
@@ -137,6 +146,7 @@
                     "resolved": "test/extract/fixtures/maxDepth/sub/twoDeepInSub.js",
                     "coreModule": false,
                     "followable": true,
+                    "matchesDoNotFollow": false,
                     "couldNotResolve": false,
                     "dependencyTypes": [
                         "local"
@@ -154,6 +164,7 @@
                     "resolved": "test/extract/fixtures/maxDepth/sub/threeDeepInSub.js",
                     "coreModule": false,
                     "followable": true,
+                    "matchesDoNotFollow": false,
                     "couldNotResolve": false,
                     "dependencyTypes": [
                         "local"
@@ -172,9 +183,9 @@
         "info": 0,
         "totalCruised": 8,
         "optionsUsed": {
-            "outputTo": "./test/extract/maxDepthUnspecified.json",
+            "outputTo": "./test/extract/maxDepth4.json",
             "exclude": "",
-            "maxDepth": 0,
+            "maxDepth": 4,
             "system": [
                 "amd",
                 "cjs",

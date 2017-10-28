@@ -6,6 +6,7 @@
             "local"
         ],
         "followable": true,
+        "matchesDoNotFollow": false,
         "couldNotResolve": false,
         "module": "./excitingpolyfill",
         "moduleSystem": "amd"
@@ -17,6 +18,7 @@
             "local"
         ],
         "followable": true,
+        "matchesDoNotFollow": false,
         "couldNotResolve": false,
         "module": "./root_one",
         "moduleSystem": "amd"
@@ -28,6 +30,7 @@
             "unknown"
         ],
         "followable": false,
+        "matchesDoNotFollow": false,
         "couldNotResolve": true,
         "module": "./root_two",
         "moduleSystem": "amd"
@@ -39,6 +42,7 @@
             "local"
         ],
         "followable": false,
+        "matchesDoNotFollow": false,
         "couldNotResolve": false,
         "module": "./somedata.json",
         "moduleSystem": "amd"
@@ -50,8 +54,9 @@
             "unknown"
         ],
         "followable": false,
+        "matchesDoNotFollow": false,
         "couldNotResolve": true,
         "module": "json",
-        "moduleSystem": "amd"        
+        "moduleSystem": "amd"
     }
 ]
