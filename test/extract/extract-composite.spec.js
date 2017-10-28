@@ -102,8 +102,10 @@ describe('Max depth', () => {
         );
         expect(lResult).to.be.jsonSchema(depSchema);
     });
+});
 
-    it('returns the file and one deep with --max-depth 4', () => {
+describe('Do not follow', () => {
+    it('does not follow files matching the doNotFollow RE', () => {
         const lResult = extract(
             ["./test/extract/fixtures/donotfollow/index.js"],
             {
