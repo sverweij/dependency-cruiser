@@ -5,7 +5,6 @@ const fs           = require("fs");
 const tst          = require("../utl/testutensils");
 const deleteDammit = require("./deleteDammit.utl");
 const path         = require("path");
-const _            = require("lodash");
 const intercept    = require("intercept-stdout");
 
 const OUT_DIR      = "./test/cli/output";
@@ -137,7 +136,7 @@ function setModuleType(pTestPairs, pModuleType) {
             cleanup: pTestPair.cleanup
         };
 
-        lRetval.options = _.clone(pTestPair.options);
+        lRetval.options = Object.assign({}, pTestPair.options);
         lRetval.options.outputTo = pTestPair.options.outputTo.replace(/{{moduleType}}/g, pModuleType);
         if (Boolean(pTestPair.options.system)) {
             lRetval.options.system = pTestPair.options.system.replace(/{{moduleType}}/g, pModuleType);
