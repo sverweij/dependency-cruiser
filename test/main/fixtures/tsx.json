@@ -7,6 +7,7 @@
                     "resolved": "test/main/fixtures/tsx/sub/render.tsx",
                     "coreModule": false,
                     "followable": true,
+                    "matchesDoNotFollow": false,
                     "couldNotResolve": false,
                     "dependencyTypes": [
                         "local"
@@ -24,6 +25,7 @@
                     "resolved": "react-dom",
                     "coreModule": false,
                     "followable": false,
+                    "matchesDoNotFollow": false,
                     "couldNotResolve": true,
                     "dependencyTypes": [
                         "unknown"
@@ -37,6 +39,7 @@
         {
             "source": "react-dom",
             "followable": false,
+            "matchesDoNotFollow": false,
             "coreModule": false,
             "couldNotResolve": true,
             "dependencyTypes": [

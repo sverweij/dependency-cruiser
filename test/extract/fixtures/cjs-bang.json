@@ -6,6 +6,7 @@
             "local"
         ],
         "followable": true,
+        "matchesDoNotFollow": false,
         "couldNotResolve": false,
         "module": "./dependency",
         "moduleSystem": "cjs"
@@ -18,6 +19,7 @@
         ],
         "followable": false,
         "couldNotResolve": true,
+        "matchesDoNotFollow": false,
         "module": "ieeeeeeeee",
         "moduleSystem": "cjs"
     }

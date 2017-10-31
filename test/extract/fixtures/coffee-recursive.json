@@ -15,6 +15,7 @@
                             "local"
                         ],
                         "followable": true,
+                        "matchesDoNotFollow": false,
                         "couldNotResolve": false,
                         "module": "./javascriptThing",
                         "moduleSystem": "es6",
@@ -27,6 +28,7 @@
                             "local"
                         ],
                         "followable": true,
+                        "matchesDoNotFollow": false,
                         "couldNotResolve": false,
                         "module": "./sub",
                         "moduleSystem": "es6",
@@ -35,10 +37,12 @@
                     {
                         "resolved": "test/extract/fixtures/coffee/sub/kaching.litcoffee",
                         "coreModule": false,
+                        "matchesDoNotFollow": false,
                         "dependencyTypes": [
                             "local"
                         ],
                         "followable": true,
+                        "matchesDoNotFollow": false,
                         "couldNotResolve": false,
                         "module": "./sub/kaching",
                         "moduleSystem": "es6",
@@ -51,6 +55,7 @@
                             "local"
                         ],
                         "followable": true,
+                        "matchesDoNotFollow": false,
                         "couldNotResolve": false,
                         "module": "./sub/willBeReExported",
                         "moduleSystem": "es6",
@@ -63,6 +68,7 @@
                             "core"
                         ],
                         "followable": false,
+                        "matchesDoNotFollow": false,
                         "couldNotResolve": false,
                         "module": "path",
                         "moduleSystem": "es6",
@@ -73,6 +79,7 @@
             {
                 "source": "path",
                 "followable": false,
+                "matchesDoNotFollow": false,
                 "coreModule": true,
                 "couldNotResolve": false,
                 "dependencyTypes": [
@@ -94,6 +101,7 @@
                             "local"
                         ],
                         "followable": true,
+                        "matchesDoNotFollow": false,
                         "couldNotResolve": false,
                         "module": "./willBeReExported",
                         "moduleSystem": "es6",

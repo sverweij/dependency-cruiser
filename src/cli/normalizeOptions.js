@@ -34,6 +34,7 @@ function determineRulesFileName(pValidate) {
  */
 module.exports = (pOptions) => {
     pOptions = _.defaults(pOptions, {
+        doNotFollow: "",
         exclude: "",
         outputTo: "-",
         outputType: "err",

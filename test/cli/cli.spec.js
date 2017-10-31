@@ -387,7 +387,7 @@ describe("#processCLI", () => {
             return expect(
                 lCapturedStderr
             ).to.contain(
-                "ERROR: The exclude pattern '([A-Za-z]+)*' will probably run very slowly - cowardly refusing to run.\n"
+                "ERROR: The pattern '([A-Za-z]+)*' will probably run very slowly - cowardly refusing to run.\n"
             );
         });
     });

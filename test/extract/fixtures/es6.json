@@ -14,6 +14,7 @@
                     "npm"
                 ],
                 "followable": true,
+                "matchesDoNotFollow": false,
                 "couldNotResolve": false
             },
             {
@@ -25,6 +26,7 @@
                     "npm-dev"
                 ],
                 "followable": true,
+                "matchesDoNotFollow": false,
                 "couldNotResolve": false
             },
             {
@@ -36,6 +38,7 @@
                     "npm"
                 ],
                 "followable": true,
+                "matchesDoNotFollow": false,
                 "couldNotResolve": false
             },
             {
@@ -47,6 +50,7 @@
                     "npm-dev"
                 ],
                 "followable": true,
+                "matchesDoNotFollow": false,
                 "couldNotResolve": false
             },
             {
@@ -58,6 +62,7 @@
                     "core"
                 ],
                 "followable": false,
+                "matchesDoNotFollow": false,
                 "couldNotResolve": false
             }
         ]

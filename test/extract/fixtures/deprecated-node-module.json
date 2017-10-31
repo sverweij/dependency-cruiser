@@ -13,6 +13,7 @@
                         "resolved": "test/extract/fixtures/deprecated-node-module/node_modules/deprecated-at-the-start-for-test-purposes/index.js",
                         "coreModule": false,
                         "followable": true,
+                        "matchesDoNotFollow": false,
                         "couldNotResolve": false,
                         "dependencyTypes": [
                             "npm-no-pkg",
@@ -30,6 +31,7 @@
                         "resolved": "test/extract/fixtures/deprecated-node-module/node_modules/deprecated-at-the-start-for-test-purposes/package.json",
                         "coreModule": false,
                         "followable": false,
+                        "matchesDoNotFollow": false,
                         "couldNotResolve": false,
                         "dependencyTypes": [
                             "local"
@@ -43,6 +45,7 @@
             {
                 "source": "test/extract/fixtures/deprecated-node-module/node_modules/deprecated-at-the-start-for-test-purposes/package.json",
                 "followable": false,
+                "matchesDoNotFollow": false,
                 "coreModule": false,
                 "couldNotResolve": false,
                 "dependencyTypes": [

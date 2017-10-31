@@ -5,25 +5,25 @@ digraph "dependency-cruiser output"{
     overlap=false
     nodesep=0.16
     fontname="Helvetica-bold"
-    fontsize="9"
+    fontsize=9
     style="rounded,bold"
     compound=true
     node [shape=box style="rounded, filled" fillcolor="#ffffcc" height=0.2 fontname=Helvetica fontsize=9]
-    edge [color=black arrowhead=normal fontname="Helvetica" fontsize="9"]
+    edge [color=black arrowhead=normal fontname=Helvetica fontsize=9]
 
 {{#each things}}
     {{#if folder}}
     {{#each path}}subgraph "cluster_{{{aggregateSnippet}}}" {label="{{{snippet}}}" {{/each~}}
         "{{{source}}}"
             {{~#if couldNotResolve}} [label="{{{label}}}" color="red" fontcolor="red"]
-            {{~else}} [label="{{{label}}}" URL="{{{prefix}}}{{{source}}}"]
+            {{~else}} {{~#if matchesDoNotFollow}} [label="{{{label}}}" shape="folder" URL="{{{prefix}}}{{{source}}}"]{{~else}} [label="{{{label}}}" URL="{{{prefix}}}{{{source}}}"]{{~/if}}
             {{~/if}}{{~#each path}} }{{/each}}
     {{else}}
     "{{{source}}}"
         {{~#if coreModule}} [color="grey" fontcolor="grey"]
         {{~else}}
             {{~#if couldNotResolve}} [color="red" fontcolor="red"]
-            {{~else}} [URL="{{{prefix}}}{{{source}}}"]
+            {{~else}} {{~#if matchesDoNotFollow}} [shape="folder" URL="{{{prefix}}}{{{source}}}"]{{~else}} [URL="{{{prefix}}}{{{source}}}"]{{~/if}}
             {{~/if}}{{/if}}
     {{/if}}
 {{/each}}
