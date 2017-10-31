@@ -48,7 +48,7 @@
     "mocha": "4.0.1",
     "npm-check-updates": "2.13.0",
     "nsp": "2.8.1",
-    "typescript": "2.5.3"
+    "typescript": "2.6.1"
   },
   "repository": {
     "type": "git",
