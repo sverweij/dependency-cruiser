@@ -160,13 +160,13 @@ function addCircularityCheckToGraph (pDependencies) {
 module.exports = (pFileDirArray, pOptions, pCallback) => {
     const lCallback = pCallback ? pCallback : (pInput => pInput);
 
-    pOptions = _.defaults(
-        pOptions,
+    pOptions = Object.assign(
         {
             baseDir: process.cwd(),
             moduleSystems: ["cjs", "es6", "amd"],
             maxDepth: 0
-        }
+        },
+        pOptions
     );
 
     let lDependencies = _(

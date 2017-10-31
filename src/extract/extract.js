@@ -69,19 +69,26 @@ module.exports = (pFileName, pOptions) => {
                 moduleSystems: ["cjs", "es6", "amd"]
             }
         );
+        // pOptions = Object.assign(
+        //     {
+        //         baseDir: process.cwd(),
+        //         moduleSystems: ["cjs", "es6", "amd"]
+        //     },
+        //     pOptions
+        // );
 
         const lAST = getAST(path.join(pOptions.baseDir, pFileName));
         let lDependencies = [];
 
-        if (_.includes(pOptions.moduleSystems, "cjs")){
+        if (pOptions.moduleSystems.indexOf("cjs") > -1){
             extractCommonJSDependencies(lAST, lDependencies);
         }
 
-        if (_.includes(pOptions.moduleSystems, "es6")){
+        if (pOptions.moduleSystems.indexOf("es6") > -1){
             extractES6Dependencies(lAST, lDependencies);
         }
 
-        if (_.includes(pOptions.moduleSystems, "amd")){
+        if (pOptions.moduleSystems.indexOf("amd") > -1){
             extractAMDDependencies(lAST, lDependencies);
         }
 

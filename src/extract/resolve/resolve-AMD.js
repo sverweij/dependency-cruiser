@@ -3,11 +3,11 @@
 const path                     = require('path');
 const resolve                  = require('resolve');
 const fs                       = require('fs');
-const _                        = require('lodash');
+const memoize                  = require('lodash/memoize');
 const determineDependencyTypes = require('./determineDependencyTypes');
 const readPackageDeps          = require('./readPackageDeps');
 
-const fileExists = _.memoize(pFile => {
+const fileExists = memoize(pFile => {
     try {
         fs.accessSync(pFile, fs.R_OK);
     } catch (e) {
