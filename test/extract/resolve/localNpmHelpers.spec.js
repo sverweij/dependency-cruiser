@@ -1,7 +1,7 @@
 "use strict";
 
 const expect = require('chai').expect;
-const localNpmHelpers = require('../../src/extract/resolve/localNpmHelpers');
+const localNpmHelpers = require('../../../src/extract/resolve/localNpmHelpers');
 
 describe("localNpmHelpers.getPackageJson", () => {
     it("returns null if the module does not exist", () => {

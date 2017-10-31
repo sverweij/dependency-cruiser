@@ -21,3 +21,21 @@ describe("typescript transpiler", () => {
         );
     });
 });
+
+describe("tsx transpiler (plain old typescript)", () => {
+    it("tells the jsx transpiler is available", () => {
+        expect(
+            wrap.isAvailable()
+        ).to.equal(true);
+    });
+
+    it("transpiles tsx", () => {
+        expect(
+            wrap.transpile(
+                fs.readFileSync("./test/extract/transpile/fixtures/tsx.tsx", 'utf8')
+            )
+        ).to.equal(
+            fs.readFileSync("./test/extract/transpile/fixtures/tsx.js", 'utf8')
+        );
+    });
+});

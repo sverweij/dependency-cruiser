@@ -260,16 +260,10 @@ ALL_SRC=src/main/index.js \
 	src/validate/readRuleSet.js \
 	src/validate/validateRuleSet.js
 # cjs dependencies
-test/cli/cli.spec.js: \
-	src/cli/processCLI.js \
-	test/cli/deleteDammit.utl.js \
-	test/utl/testutensils.js
+test/cli/formatMetaInfo.spec.js: \
+	src/cli/formatMetaInfo.js
 
-src/cli/processCLI.js: \
-	src/cli/formatMetaInfo.js \
-	src/cli/initRules.js \
-	src/cli/normalizeOptions.js \
-	src/cli/validateParameters.js \
+src/cli/formatMetaInfo.js: \
 	src/main/index.js
 
 src/main/index.js: \
@@ -363,22 +357,28 @@ src/validate/readRuleSet.js: \
 src/validate/validateRuleSet.js: \
 	src/validate/jsonschema.json
 
-src/cli/formatMetaInfo.js: \
-	src/main/index.js
-
-src/cli/initRules.js: \
-	src/cli/rules.starter.json
-
-test/cli/formatMetaInfo.spec.js: \
-	src/cli/formatMetaInfo.js
-
 test/cli/initRules.spec.js: \
 	src/cli/initRules.js \
 	src/validate/jsonschema.json \
 	test/cli/deleteDammit.utl.js
 
+src/cli/initRules.js: \
+	src/cli/rules.starter.json
+
 test/cli/normalizeOptions.spec.js: \
 	src/cli/normalizeOptions.js
+
+test/cli/processCLI.spec.js: \
+	src/cli/processCLI.js \
+	test/cli/deleteDammit.utl.js \
+	test/utl/testutensils.js
+
+src/cli/processCLI.js: \
+	src/cli/formatMetaInfo.js \
+	src/cli/initRules.js \
+	src/cli/normalizeOptions.js \
+	src/cli/validateParameters.js \
+	src/main/index.js
 
 test/cli/validateParameters.spec.js: \
 	src/cli/validateParameters.js
@@ -386,21 +386,21 @@ test/cli/validateParameters.spec.js: \
 test/extract/dependencyEndsUpAtFrom.spec.js: \
 	src/extract/dependencyEndsUpAtFrom.js
 
-test/extract/extract-composite.spec.js: \
-	src/extract/index.js \
-	src/extract/jsonschema.json
-
 test/extract/extract.spec.js: \
 	src/extract/extract.js
 
 test/extract/gatherInitialSources.spec.js: \
 	src/extract/gatherInitialSources.js
 
-test/extract/localNpmHelpers.spec.js: \
-	src/extract/resolve/localNpmHelpers.js
+test/extract/index.spec.js: \
+	src/extract/index.js \
+	src/extract/jsonschema.json
 
 test/extract/resolve/determineDependencyTypes.spec.js: \
 	src/extract/resolve/determineDependencyTypes.js
+
+test/extract/resolve/localNpmHelpers.spec.js: \
+	src/extract/resolve/localNpmHelpers.js
 
 test/extract/resolve/readPackageDeps.spec.js: \
 	src/extract/resolve/readPackageDeps.js
@@ -411,7 +411,7 @@ test/extract/transpile/coffeeWrap.spec.js: \
 test/extract/transpile/index.spec.js: \
 	src/extract/transpile/index.js
 
-test/extract/transpile/jsxWrap.spec.js: \
+test/extract/transpile/javascriptWrap.spec.js: \
 	src/extract/transpile/javaScriptWrap.js
 
 test/extract/transpile/liveScriptWrap.spec.js: \
@@ -424,9 +424,6 @@ test/extract/transpile/meta.spec.js: \
 
 test/extract/transpile/tryRequire.spec.js: \
 	src/extract/transpile/tryRequire.js
-
-test/extract/transpile/tsxWrap.spec.js: \
-	src/extract/transpile/typeScriptWrap.js
 
 test/extract/transpile/typeScriptWrap.spec.js: \
 	src/extract/transpile/typeScriptWrap.js
@@ -444,13 +441,13 @@ test/report/errReporter.spec.js: \
 test/report/htmlReporter.spec.js: \
 	src/report/htmlReporter.js
 
+test/validate/index.spec.js: \
+	src/validate/index.js \
+	src/validate/readRuleSet.js
+
 test/validate/normalizeRuleSet.spec.js: \
 	src/validate/normalizeRuleSet.js
 
 test/validate/readRuleSet.spec.js: \
-	src/validate/readRuleSet.js
-
-test/validate/validate.spec.js: \
-	src/validate/index.js \
 	src/validate/readRuleSet.js
 
