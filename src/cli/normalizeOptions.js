@@ -1,20 +1,23 @@
 "use strict";
 
-const _ = require("lodash");
-
 const DEFAULT_MODULE_SYSTEMS = ["cjs", "amd", "es6"];
 const DEFAULT_RULES_FILE_NAME = ".dependency-cruiser.json";
 
+function uniq(pArray) {
+    return Array.from(new Set(pArray));
+}
+
 function normalizeModuleSystems(pSystemList) {
-    if (_.isString(pSystemList)) {
-        return _(pSystemList.split(",")).sort().uniq().valueOf();
+    let lRetval = DEFAULT_MODULE_SYSTEMS;
+
+    if (typeof pSystemList === "string") {
+        lRetval = pSystemList.split(",");
     }
-    // istanbul ignore else
-    if (_.isArray(pSystemList)) {
-        return _(pSystemList).sort().uniq().valueOf();
+    if (Array.isArray(pSystemList)) {
+        lRetval = pSystemList;
     }
-    // istanbul ignore next
-    return DEFAULT_MODULE_SYSTEMS;
+
+    return uniq(lRetval.sort());
 }
 
 function determineRulesFileName(pValidate) {
@@ -33,13 +36,16 @@ function determineRulesFileName(pValidate) {
  * @return {object}          [description]
  */
 module.exports = (pOptions) => {
-    pOptions = _.defaults(pOptions, {
-        doNotFollow: "",
-        exclude: "",
-        outputTo: "-",
-        outputType: "err",
-        system: DEFAULT_MODULE_SYSTEMS
-    });
+    pOptions = Object.assign(
+        {
+            doNotFollow: "",
+            exclude: "",
+            outputTo: "-",
+            outputType: "err",
+            system: DEFAULT_MODULE_SYSTEMS
+        },
+        pOptions
+    );
 
     pOptions.moduleSystems = normalizeModuleSystems(pOptions.system);
 

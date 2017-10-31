@@ -1,6 +1,5 @@
 "use strict";
 
-const _         = require("lodash");
 const fs        = require('fs');
 const safeRegex = require('safe-regex');
 
@@ -17,7 +16,7 @@ function validateFileExistence(pDirOrFile) {
 }
 
 function validateSystems(pSystem) {
-    if (Boolean(pSystem) && _.isString(pSystem)) {
+    if (Boolean(pSystem) && typeof pSystem === 'string') {
         const lParamArray = pSystem.match(MODULE_SYSTEM_LIST_RE);
 
         if (!lParamArray || lParamArray.length !== 1) {
