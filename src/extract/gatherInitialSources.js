@@ -2,7 +2,7 @@ const fs            = require('fs');
 const path          = require('path');
 const ignore        = require('./ignore');
 const transpileMeta = require('./transpile/meta');
-const _             = require('lodash');
+const _defaults     = require('lodash/defaults');
 
 const SUPPORTED_EXTENSIONS = transpileMeta.scannableExtensions;
 
@@ -21,7 +21,7 @@ function gatherScannableFilesFromDir (pDirName, pOptions) {
 }
 
 module.exports = (pFileDirArray, pOptions) => {
-    pOptions = _.defaults(
+    pOptions = _defaults(
         pOptions,
         {
             baseDir: process.cwd(),
