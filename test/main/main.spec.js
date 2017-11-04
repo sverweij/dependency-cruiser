@@ -28,4 +28,15 @@ describe("main", () => {
         expect(lResult).to.deep.equal(jsxFixture);
         expect(lResult).to.be.jsonSchema(depSchema);
     });
+    it("And rulesets in the form a an object instead of json", () => {
+        const lResult = main.cruise(
+            ["test/main/fixtures/jsx"],
+            {
+                ruleSet : {}
+            }
+        );
+
+        expect(lResult).to.deep.equal(jsxFixture);
+        expect(lResult).to.be.jsonSchema(depSchema);
+    });
 });

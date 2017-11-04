@@ -131,14 +131,15 @@ clean:
 src/main/index.js: \
 	src/extract/index.js \
 	src/extract/transpile/meta.js \
-	src/main/normalizeOptions.js \
-	src/main/validateOptions.js \
+	src/main/options/normalize.js \
+	src/main/options/validate.js \
+	src/main/ruleSet/normalize.js \
+	src/main/ruleSet/validate.js \
 	src/report/csvReporter.js \
 	src/report/dotReporter.js \
 	src/report/errReporter.js \
 	src/report/htmlReporter.js \
-	src/report/jsonReporter.js \
-	src/validate/readRuleSet.js
+	src/report/jsonReporter.js
 
 src/extract/index.js: \
 	src/extract/addValidations.js \
@@ -214,15 +215,11 @@ src/report/htmlReporter.js: \
 	src/report/dependencyToIncidenceTransformer.js \
 	src/report/html.template.js
 
-src/validate/readRuleSet.js: \
-	src/validate/normalizeRuleSet.js \
-	src/validate/validateRuleSet.js
+src/main/options/normalize.js: \
+	src/main/options/defaults.json
 
-src/validate/validateRuleSet.js: \
-	src/validate/jsonschema.json
-
-src/main/normalizeOptions.js: \
-	src/main/defaults.json
+src/main/ruleSet/validate.js: \
+	src/main/ruleSet/jsonschema.json
 
 # cjs dependencies
 ALL_SRC=src/main/index.js \
@@ -250,9 +247,12 @@ ALL_SRC=src/main/index.js \
 	src/extract/transpile/meta.js \
 	src/extract/transpile/tryRequire.js \
 	src/extract/transpile/typeScriptWrap.js \
-	src/main/defaults.json \
-	src/main/normalizeOptions.js \
-	src/main/validateOptions.js \
+	src/main/options/defaults.json \
+	src/main/options/normalize.js \
+	src/main/options/validate.js \
+	src/main/ruleSet/jsonschema.json \
+	src/main/ruleSet/normalize.js \
+	src/main/ruleSet/validate.js \
 	src/report/csv.template.js \
 	src/report/csvReporter.js \
 	src/report/dependencyToIncidenceTransformer.js \
@@ -262,11 +262,7 @@ ALL_SRC=src/main/index.js \
 	src/report/html.template.js \
 	src/report/htmlReporter.js \
 	src/report/jsonReporter.js \
-	src/validate/index.js \
-	src/validate/jsonschema.json \
-	src/validate/normalizeRuleSet.js \
-	src/validate/readRuleSet.js \
-	src/validate/validateRuleSet.js
+	src/validate/index.js
 # cjs dependencies
 test/cli/formatMetaInfo.spec.js: \
 	src/cli/formatMetaInfo.js
@@ -277,14 +273,15 @@ src/cli/formatMetaInfo.js: \
 src/main/index.js: \
 	src/extract/index.js \
 	src/extract/transpile/meta.js \
-	src/main/normalizeOptions.js \
-	src/main/validateOptions.js \
+	src/main/options/normalize.js \
+	src/main/options/validate.js \
+	src/main/ruleSet/normalize.js \
+	src/main/ruleSet/validate.js \
 	src/report/csvReporter.js \
 	src/report/dotReporter.js \
 	src/report/errReporter.js \
 	src/report/htmlReporter.js \
-	src/report/jsonReporter.js \
-	src/validate/readRuleSet.js
+	src/report/jsonReporter.js
 
 src/extract/index.js: \
 	src/extract/addValidations.js \
@@ -360,15 +357,11 @@ src/report/htmlReporter.js: \
 	src/report/dependencyToIncidenceTransformer.js \
 	src/report/html.template.js
 
-src/validate/readRuleSet.js: \
-	src/validate/normalizeRuleSet.js \
-	src/validate/validateRuleSet.js
+src/main/options/normalize.js: \
+	src/main/options/defaults.json
 
-src/validate/validateRuleSet.js: \
-	src/validate/jsonschema.json
-
-src/main/normalizeOptions.js: \
-	src/main/defaults.json
+src/main/ruleSet/validate.js: \
+	src/main/ruleSet/jsonschema.json
 
 test/cli/index.spec.js: \
 	src/cli/index.js \
@@ -391,7 +384,7 @@ src/cli/normalizeOptions.js: \
 
 test/cli/initRules.spec.js: \
 	src/cli/initRules.js \
-	src/validate/jsonschema.json \
+	src/main/ruleSet/jsonschema.json \
 	test/cli/deleteDammit.utl.js
 
 test/cli/normalizeOptions.spec.js: \
@@ -449,11 +442,17 @@ test/main/main.spec.js: \
 	src/extract/jsonschema.json \
 	src/main/index.js
 
-test/main/normalizeOptions.spec.js: \
-	src/main/normalizeOptions.js
+test/main/options/normalize.spec.js: \
+	src/main/options/normalize.js
 
-test/main/validateOptions.spec.js: \
-	src/main/validateOptions.js
+test/main/options/validate.spec.js: \
+	src/main/options/validate.js
+
+test/main/ruleSet/normalize.spec.js: \
+	src/main/ruleSet/normalize.js
+
+test/main/ruleSet/validate.spec.js: \
+	src/main/ruleSet/validate.js
 
 test/report/dotReporter.spec.js: \
 	src/report/dotReporter.js
@@ -465,12 +464,7 @@ test/report/htmlReporter.spec.js: \
 	src/report/htmlReporter.js
 
 test/validate/index.spec.js: \
-	src/validate/index.js \
-	src/validate/readRuleSet.js
-
-test/validate/normalizeRuleSet.spec.js: \
-	src/validate/normalizeRuleSet.js
-
-test/validate/readRuleSet.spec.js: \
-	src/validate/readRuleSet.js
+	src/main/ruleSet/normalize.js \
+	src/main/ruleSet/validate.js \
+	src/validate/index.js
 

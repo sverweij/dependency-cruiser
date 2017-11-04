@@ -4,7 +4,7 @@ const expect       = chai.expect;
 const fs           = require('fs');
 const deleteDammit = require("./deleteDammit.utl");
 const initRules    = require("../../src/cli/initRules");
-const rulesSchema  = require('../../src/validate/jsonschema.json');
+const rulesSchema  = require('../../src/main/ruleSet/jsonschema.json');
 
 const RULES_FILE = ".dependency-cruiser.json";
 

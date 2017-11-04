@@ -1,12 +1,15 @@
 "use strict";
-const expect      = require('chai').expect;
-const validate    = require('../../src/validate');
-const readRuleSet = require('../../src/validate/readRuleSet');
-const fs          = require('fs');
+const expect           = require('chai').expect;
+const validate         = require('../../src/validate');
+const normalizeRuleSet = require('../../src/main/ruleSet/normalize');
+const validateRuleSet  = require('../../src/main/ruleSet/validate');
+const fs               = require('fs');
 
 function _readRuleSet(pFileName) {
-    return readRuleSet(
-        fs.readFileSync(pFileName, 'utf8')
+    return normalizeRuleSet(
+        validateRuleSet(
+            JSON.parse(fs.readFileSync(pFileName, 'utf8'))
+        )
     );
 }
 

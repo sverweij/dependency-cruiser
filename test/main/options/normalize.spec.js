@@ -1,4 +1,4 @@
-const normalizeOptions = require('../../src/main/normalizeOptions');
+const normalizeOptions = require('../../../src/main/options/normalize');
 const expect           = require('chai').expect;
 
 describe("main/normalizeOptions", () => {
