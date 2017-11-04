@@ -270,9 +270,7 @@
         "totalCruised": 11,
         "optionsUsed": {
             "outputTo": "test/cli/output/cjs.file.json",
-            "doNotFollow": "",
-            "exclude": "",
-            "system": [
+            "moduleSystems": [
                 "amd",
                 "cjs",
                 "es6"

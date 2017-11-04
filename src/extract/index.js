@@ -89,7 +89,7 @@ function makeOptionsPresentable(pOptions) {
         "doNotFollow",
         "exclude",
         "maxDepth",
-        "system",
+        "moduleSystems",
         "outputType",
         "prefix"
     ];

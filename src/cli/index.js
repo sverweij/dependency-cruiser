@@ -1,15 +1,12 @@
 "use strict";
 
-const fs                 = require("fs");
-const validateParameters = require("./validateParameters");
-const normalizeOptions   = require("./normalizeOptions");
-const initRules          = require("./initRules");
-const main               = require("../main");
+const fs                 = require('fs');
+const validateFileShizzle = require('./validateFileShizzle');
+const normalizeOptions   = require('./normalizeOptions');
+const initRules          = require('./initRules');
+const main               = require('../main');
 const formatMetaInfo     = require('./formatMetaInfo');
-
-
-/* OS pipe buffer size in bytes - which is what ulimit -a tells me on OSX */
-const PIPE_BUFFER_SIZE   = 512;
+const defaults           = require('./defaults.json');
 
 function writeToFile(pOutputTo, pDependencyString) {
     try {
@@ -48,7 +45,8 @@ function writeToStdOut(pString, pBufferSize) {
 
 function write(pOutputTo, pContent) {
     if ("-" === pOutputTo) {
-        writeToStdOut(pContent, PIPE_BUFFER_SIZE);
+        // OS pipe buffer size in bytes - which is what ulimit -a tells me on OSX
+        writeToStdOut(pContent, defaults.PIPE_BUFFER_SIZE);
     } else {
         writeToFile(pOutputTo, pContent);
     }
@@ -62,12 +60,8 @@ module.exports = (pFileDirArray, pOptions) => {
             initRules();
             process.stdout.write(`\n  Successfully created '.dependency-cruiser.json'\n\n`);
         } else {
-            validateParameters(pFileDirArray, pOptions);
+            validateFileShizzle(pFileDirArray, pOptions ? pOptions.validate : false);
             pOptions = normalizeOptions(pOptions);
-
-            if (Boolean(pOptions.rulesFile)){
-                pOptions.ruleSet = fs.readFileSync(pOptions.rulesFile, 'utf8');
-            }
 
             const lDependencyList = main.cruise(pFileDirArray, pOptions);
 

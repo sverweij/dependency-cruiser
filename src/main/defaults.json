@@ -1,0 +1,5 @@
+{
+    "validate": false,
+    "maxDepth": 0,
+    "moduleSystems": ["amd", "cjs", "es6"]
+}

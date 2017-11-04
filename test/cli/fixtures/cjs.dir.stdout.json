@@ -372,9 +372,7 @@
         "totalCruised": 15,
         "optionsUsed": {
             "outputTo": "-",
-            "doNotFollow": "",
-            "exclude": "",
-            "system": [
+            "moduleSystems": [
                 "amd",
                 "cjs",
                 "es6"

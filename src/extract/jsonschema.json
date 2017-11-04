@@ -226,7 +226,7 @@
                     "type": "number",
                     "description": "The maximum cruise depth specified. 0 means no maximum specified"
                 },
-                "system": {
+                "moduleSystems": {
                     "type": "array",
                     "items": {"$ref": "#/definitions/ModuleSystemType" }
                 },

@@ -131,9 +131,7 @@
         "totalCruised": 7,
         "optionsUsed": {
             "outputTo": "test/cli/output/multiple-in-one-go.json",
-            "doNotFollow": "",
-            "exclude": "",
-            "system": [
+            "moduleSystems": [
                 "amd",
                 "cjs",
                 "es6"

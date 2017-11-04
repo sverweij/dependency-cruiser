@@ -112,7 +112,7 @@
             "outputTo": "-",
             "doNotFollow": "donotfollowonceinthisfolder",
             "exclude": "",
-            "system": [
+            "moduleSystems": [
                 "amd",
                 "cjs",
                 "es6"

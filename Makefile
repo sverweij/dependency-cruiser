@@ -131,6 +131,8 @@ clean:
 src/main/index.js: \
 	src/extract/index.js \
 	src/extract/transpile/meta.js \
+	src/main/normalizeOptions.js \
+	src/main/validateOptions.js \
 	src/report/csvReporter.js \
 	src/report/dotReporter.js \
 	src/report/errReporter.js \
@@ -218,6 +220,9 @@ src/validate/readRuleSet.js: \
 
 src/validate/validateRuleSet.js: \
 	src/validate/jsonschema.json
+
+src/main/normalizeOptions.js: \
+	src/main/defaults.json
 
 # cjs dependencies
 ALL_SRC=src/main/index.js \
@@ -245,6 +250,9 @@ ALL_SRC=src/main/index.js \
 	src/extract/transpile/meta.js \
 	src/extract/transpile/tryRequire.js \
 	src/extract/transpile/typeScriptWrap.js \
+	src/main/defaults.json \
+	src/main/normalizeOptions.js \
+	src/main/validateOptions.js \
 	src/report/csv.template.js \
 	src/report/csvReporter.js \
 	src/report/dependencyToIncidenceTransformer.js \
@@ -269,6 +277,8 @@ src/cli/formatMetaInfo.js: \
 src/main/index.js: \
 	src/extract/index.js \
 	src/extract/transpile/meta.js \
+	src/main/normalizeOptions.js \
+	src/main/validateOptions.js \
 	src/report/csvReporter.js \
 	src/report/dotReporter.js \
 	src/report/errReporter.js \
@@ -357,31 +367,39 @@ src/validate/readRuleSet.js: \
 src/validate/validateRuleSet.js: \
 	src/validate/jsonschema.json
 
+src/main/normalizeOptions.js: \
+	src/main/defaults.json
+
+test/cli/index.spec.js: \
+	src/cli/index.js \
+	test/cli/deleteDammit.utl.js \
+	test/utl/testutensils.js
+
+src/cli/index.js: \
+	src/cli/defaults.json \
+	src/cli/formatMetaInfo.js \
+	src/cli/initRules.js \
+	src/cli/normalizeOptions.js \
+	src/cli/validateFileShizzle.js \
+	src/main/index.js
+
+src/cli/initRules.js: \
+	src/cli/defaults.json \
+	src/cli/rules.starter.json
+
+src/cli/normalizeOptions.js: \
+	src/cli/defaults.json
+
 test/cli/initRules.spec.js: \
 	src/cli/initRules.js \
 	src/validate/jsonschema.json \
 	test/cli/deleteDammit.utl.js
 
-src/cli/initRules.js: \
-	src/cli/rules.starter.json
-
 test/cli/normalizeOptions.spec.js: \
 	src/cli/normalizeOptions.js
 
-test/cli/processCLI.spec.js: \
-	src/cli/processCLI.js \
-	test/cli/deleteDammit.utl.js \
-	test/utl/testutensils.js
-
-src/cli/processCLI.js: \
-	src/cli/formatMetaInfo.js \
-	src/cli/initRules.js \
-	src/cli/normalizeOptions.js \
-	src/cli/validateParameters.js \
-	src/main/index.js
-
-test/cli/validateParameters.spec.js: \
-	src/cli/validateParameters.js
+test/cli/validateFileShizzle.spec.js: \
+	src/cli/validateFileShizzle.js
 
 test/extract/dependencyEndsUpAtFrom.spec.js: \
 	src/extract/dependencyEndsUpAtFrom.js
@@ -431,6 +449,12 @@ test/extract/transpile/typeScriptWrap.spec.js: \
 test/main/main.spec.js: \
 	src/extract/jsonschema.json \
 	src/main/index.js
+
+test/main/normalizeOptions.spec.js: \
+	src/main/normalizeOptions.js
+
+test/main/validateOptions.spec.js: \
+	src/main/validateOptions.js
 
 test/report/dotReporter.spec.js: \
 	src/report/dotReporter.js

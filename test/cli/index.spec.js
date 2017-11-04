@@ -1,6 +1,6 @@
 "use strict";
 const expect       = require('chai').expect;
-const processCLI   = require("../../src/cli/processCLI");
+const processCLI   = require("../../src/cli");
 const fs           = require("fs");
 const tst          = require("../utl/testutensils");
 const deleteDammit = require("./deleteDammit.utl");
@@ -138,8 +138,8 @@ function setModuleType(pTestPairs, pModuleType) {
 
         lRetval.options = Object.assign({}, pTestPair.options);
         lRetval.options.outputTo = pTestPair.options.outputTo.replace(/{{moduleType}}/g, pModuleType);
-        if (Boolean(pTestPair.options.system)) {
-            lRetval.options.system = pTestPair.options.system.replace(/{{moduleType}}/g, pModuleType);
+        if (Boolean(pTestPair.options.moduleSystems)) {
+            lRetval.options.moduleSystems = pTestPair.options.moduleSystems.replace(/{{moduleType}}/g, pModuleType);
         }
 
         return lRetval;
@@ -284,8 +284,8 @@ describe("#processCLI", () => {
             processCLI(
                 ["test/cli/fixtures"],
                 {
-                    outputTo: path.join(OUT_DIR, "/dev/null"),
-                    system: "invalidmodulesystem",
+                    outputTo: path.join("/dev/null"),
+                    moduleSystems: "invalidmodulesystem",
                     forceCircular: true
                 }
             );

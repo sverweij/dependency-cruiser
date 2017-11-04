@@ -1,13 +1,15 @@
 "use strict";
 
-const extract      = require("../extract");
-const meta         = require("../extract/transpile/meta");
-const readRuleSet  = require("../validate/readRuleSet");
-const reportHtml   = require("../report/htmlReporter");
-const reportJson   = require("../report/jsonReporter");
-const reportDot    = require("../report/dotReporter");
-const reportCsv    = require("../report/csvReporter");
-const reportErr    = require("../report/errReporter");
+const extract          = require("../extract");
+const meta             = require("../extract/transpile/meta");
+const readRuleSet      = require("../validate/readRuleSet");
+const reportHtml       = require("../report/htmlReporter");
+const reportJson       = require("../report/jsonReporter");
+const reportDot        = require("../report/dotReporter");
+const reportCsv        = require("../report/csvReporter");
+const reportErr        = require("../report/errReporter");
+const validateOptions  = require("./validateOptions");
+const normalizeOptions = require("./normalizeOptions");
 
 const TYPE2REPORTER      = {
     "json" : reportJson,
@@ -24,21 +26,25 @@ const TYPE2REPORTER      = {
  *
  * The options influence how the function returns the dependencies.
  * {
- *  validate   : if true, will attempt to validate with the rules in rulesFile.
- *               Default false.
- *  ruleSet    : An object (or JSON string) containing the rules to validate
- *               against. The rules should adhere to the
- *               [ruleset schema](../src/extract/validate/jsonschema.json)
- *               The function with throw an Error when either
- *               - the passed ruleSet violates that schema or
- *               - it contains an 'unsafe' (= potentially super slow running)
- *                 regular expression.
- *  exclude    : regular expression describing which dependencies the function
- *               should not cruise
- *  system     : an array of module systems to use for following dependencies;
- *               defaults to ["es6", "cjs", "amd"]
- *  outputType : one of "json", "html", "dot", "csv" or "err". When left
- *               out the function will return a javascript object as dependencies
+ *  validate    : if true, will attempt to validate with the rules in rulesFile.
+ *                Default false.
+ *  ruleSet     : An object (or JSON string) containing the rules to validate
+ *                against. The rules should adhere to the
+ *                [ruleset schema](../src/extract/validate/jsonschema.json)
+ *                The function with throw an Error when either
+ *                - the passed ruleSet violates that schema or
+ *                - it contains an 'unsafe' (= potentially super slow running)
+ *                  regular expression.
+ *  doNotFollow : regular expression describing which dependencies the function
+ *                should cruise, but not resolve or follow any further
+ *  exclude     : regular expression describing which dependencies the function
+ *                should not cruise
+ *  maxDepth    : the maximum depth to cruise; 0 <= n <= 99
+ *                (default: 0, which means 'infinite depth')
+ *  moduleSystems: an array of module systems to use for following dependencies;
+ *                defaults to ["es6", "cjs", "amd"]
+ *  outputType  : one of "json", "html", "dot", "csv" or "err". When left
+ *                out the function will return a javascript object as dependencies
  * }
  *
  * @param  {array}  pFileDirArray An array of (names of) files and directories to
@@ -63,7 +69,9 @@ const TYPE2REPORTER      = {
  *              }
  */
 exports.cruise = (pFileDirArray, pOptions) => {
-    pOptions = pOptions ? pOptions : {};
+    pOptions = normalizeOptions(
+        validateOptions(pOptions)
+    );
 
     if (Boolean(pOptions.ruleSet)){
         pOptions.ruleSet = readRuleSet(pOptions.ruleSet);
@@ -75,7 +83,6 @@ exports.cruise = (pFileDirArray, pOptions) => {
         TYPE2REPORTER[pOptions.outputType]
     );
 };
-
 
 exports.allExtensions = meta.allExtensions;
 

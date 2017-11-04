@@ -36,9 +36,9 @@ const depcruise = require('dependency-cruiser');
 let dependenciesInAGraphVizDotScript = depcruise(
     ["src"]
     {
-        exclude    : "(node_modules)",
-        system     : ["cjs"],
-        outputType : "dot"
+        exclude       : "(node_modules)",
+        moduleSystems : ["cjs"],
+        outputType    : "dot"
     }
 );
 ```
@@ -56,7 +56,7 @@ These are all the options:
                should not cruise
  maxDepth    : the maximum depth to cruise; 0 <= n <= 99
                (default: 0, which means 'infinite depth')
- system      : an array of module systems to use for following dependencies;
+ moduleSystems : an array of module systems to use for following dependencies;
                defaults to ["es6", "cjs", "amd"]
  outputType  : one of "json", "html", "dot", "csv" or "err". When left
                out the function will return a javascript object as dependencies

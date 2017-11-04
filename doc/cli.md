@@ -7,50 +7,26 @@ Usage: dependency-cruise [options] <files-or-directories>
 
 Options:
 
--V, --version                output the version number
--i, --info                   shows what languages and extensions
-                             dependency-cruiser supports
--v, --validate [file]        validate with rules in [file]
-                             (default: .dependency-cruiser.json)
--f, --output-to <file>       file to write output to; - for stdout
-                             (default: -)
--d, --do-not-follow <regex>  a regular expression for modules to include,
-                             but not follow further
--x, --exclude <regex>        a regular expression for excluding modules
--M, --system <items>         list of module systems (default: amd,cjs,es6)
--T, --output-type <type>     output type - html|dot|err|json
-                             (default: err)
--P, --prefix <prefix>        prefix to use for links in the svg reporter
---init-rules                 write a .dependency-cruiser.json with basic
-                             validations to the current folder.
--h, --help                   output usage information
+  -V, --version                 output the version number
+  -i, --info                    shows what languages and extensions
+                                dependency-cruiser supports
+  -v, --validate [file]         validate with rules in [file]
+                                (default: .dependency-cruiser.json)
+  -f, --output-to <file>        file to write output to; - for stdout
+                                (default: -)
+  -X, --do-not-follow <regex>   a regular expression for modules to include,
+                                but not follow further
+  -x, --exclude <regex>         a regular expression for excluding modules
+  -d, --max-depth <n>           the maximum depth to cruise; 0 <= n <= 99
+                                (default: 0, which means 'infinite depth')
+  -M, --module-systems <items>  list of module systems (default: amd,cjs,es6)
+  -T, --output-type <type>      output type - html|dot|err|json
+                                (default: err)
+  -P, --prefix <prefix>         prefix to use for links in the svg reporter
+  --init-rules                  write a .dependency-cruiser.json with basic
+                                validations to the current folder.
+  -h, --help                    output usage information
 ```
-
-  Usage: dependency-cruise [options] <files-or-directories>
-
-  Options:
-
-    -h, --help                  output usage information
-    -V, --version                output the version number
-    -i, --info                   shows what languages and extensions
-                                 dependency-cruiser supports
-    -v, --validate [file]        validate with rules in [file]
-                                 (default: .dependency-cruiser.json)
-    -f, --output-to <file>       file to write output to; - for stdout
-                                 (default: -)
-    -X, --do-not-follow <regex>  a regular expression for modules to include,
-                                 but not follow further
-    -x, --exclude <regex>        a regular expression for excluding modules
-    -d, --max-depth <n>          the maximum depth to cruise; 0 <= n <= 99
-                                 (default: 0, which means 'infinite depth')
-    -M, --system <items>         list of module systems (default: amd,cjs,es6)
-    -T, --output-type <type>     output type - html|dot|err|json
-                                 (default:err)
-    -P --prefix <prefix>         prefix to prepend links with (e.g. in the
-                                 svg output type)
-    --init-rules                 create a .dependency-cruiser.json with basic
-                                 validations in the current folder.
-
 
 ## Output formats
 

@@ -1,28 +1,11 @@
 "use strict";
 
-const DEFAULT_MODULE_SYSTEMS = ["cjs", "amd", "es6"];
-const DEFAULT_RULES_FILE_NAME = ".dependency-cruiser.json";
-
-function uniq(pArray) {
-    return Array.from(new Set(pArray));
-}
-
-function normalizeModuleSystems(pSystemList) {
-    let lRetval = DEFAULT_MODULE_SYSTEMS;
-
-    if (typeof pSystemList === "string") {
-        lRetval = pSystemList.split(",");
-    }
-    if (Array.isArray(pSystemList)) {
-        lRetval = pSystemList;
-    }
-
-    return uniq(lRetval.sort());
-}
+const fs       = require('fs');
+const defaults = require('./defaults.json');
 
 function determineRulesFileName(pValidate) {
     if (typeof pValidate === 'boolean' && pValidate){
-        return DEFAULT_RULES_FILE_NAME;
+        return defaults.RULES_FILE_NAME;
     } else {
         return pValidate;
     }
@@ -38,28 +21,22 @@ function determineRulesFileName(pValidate) {
 module.exports = (pOptions) => {
     pOptions = Object.assign(
         {
-            doNotFollow: "",
-            exclude: "",
-            outputTo: "-",
-            outputType: "err",
-            system: DEFAULT_MODULE_SYSTEMS
+            outputTo: defaults.OUTPUT_TO,
+            outputType: defaults.OUTPUT_TYPE
         },
         pOptions
     );
 
-    pOptions.moduleSystems = normalizeModuleSystems(pOptions.system);
+    if (pOptions.hasOwnProperty("moduleSystems")) {
+        pOptions.moduleSystems = pOptions.moduleSystems.split(",");
+    }
 
     if (pOptions.hasOwnProperty("validate")){
         pOptions.rulesFile = determineRulesFileName(pOptions.validate);
+        pOptions.ruleSet   = fs.readFileSync(pOptions.rulesFile, 'utf8');
     }
 
     pOptions.validate = pOptions.hasOwnProperty("validate");
-
-    if (pOptions.hasOwnProperty("maxDepth")) {
-        pOptions.maxDepth = parseInt(pOptions.maxDepth, 10);
-    } else {
-        pOptions.maxDepth = 0;
-    }
 
     return pOptions;
 };

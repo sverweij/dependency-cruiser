@@ -1,26 +1,18 @@
 "use strict";
 
-const fs        = require('fs');
 const safeRegex = require('safe-regex');
 
 const MODULE_SYSTEM_LIST_RE  = /^((cjs|amd|es6)(,|$))+$/gi;
 const OUTPUT_TYPES_RE        = /^(html|dot|csv|err|json)$/g;
 const VALID_DEPTH_RE         = /^[0-9]{1,2}$/g;
 
-function validateFileExistence(pDirOrFile) {
-    try {
-        fs.accessSync(pDirOrFile, fs.R_OK);
-    } catch (e) {
-        throw Error(`Can't open '${pDirOrFile}' for reading. Does it exist?\n`);
-    }
-}
+function validateSystems(pModuleSystems) {
+    if (Boolean(pModuleSystems) && typeof Array.isArray(pModuleSystems)) {
 
-function validateSystems(pSystem) {
-    if (Boolean(pSystem) && typeof pSystem === 'string') {
-        const lParamArray = pSystem.match(MODULE_SYSTEM_LIST_RE);
-
-        if (!lParamArray || lParamArray.length !== 1) {
-            throw Error(`Invalid module system list: '${pSystem}'\n`);
+        if (!pModuleSystems.every(
+            pModuleSystem => Boolean(pModuleSystem.match(MODULE_SYSTEM_LIST_RE))
+        )) {
+            throw Error(`Invalid module system list: '${pModuleSystems.join(', ')}'\n`);
         }
     }
 }
@@ -41,14 +33,6 @@ function validateOutputType(pOutputType) {
     }
 }
 
-function validateValidation(pOptions) {
-    if (pOptions.hasOwnProperty("validate") && typeof pOptions.validate !== 'boolean'){
-        validateFileExistence(pOptions.validate);
-    } else if (pOptions.validate === true){
-        validateFileExistence(".dependency-cruiser.json");
-    }
-}
-
 function validateMaxDepth(pDepth) {
     if (Boolean(pDepth) && !(pDepth.match(VALID_DEPTH_RE))) {
         throw Error(
@@ -57,14 +41,14 @@ function validateMaxDepth(pDepth) {
     }
 }
 
-module.exports = (pFileDirArray, pOptions) => {
-    pFileDirArray.forEach(validateFileExistence);
+module.exports = (pOptions) => {
     if (Boolean(pOptions)) {
-        validateSystems(pOptions.system);
+        validateSystems(pOptions.moduleSystems);
         isSafeRegExp(pOptions.exclude);
         isSafeRegExp(pOptions.doNotFollow);
         validateOutputType(pOptions.outputType);
         validateMaxDepth(pOptions.maxDepth);
-        validateValidation(pOptions);
+        return pOptions;
     }
+    return {};
 };

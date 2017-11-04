@@ -91,7 +91,7 @@
             "outputTo": "./test/extract/maxDepth1.json",
             "exclude": "",
             "maxDepth": 1,
-            "system": [
+            "moduleSystems": [
                 "amd",
                 "cjs",
                 "es6"

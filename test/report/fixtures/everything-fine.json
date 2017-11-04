@@ -192,7 +192,7 @@
         "optionsUsed": {
             "outputTo": "test/cli/output/cjs.file.json",
             "exclude": "",
-            "system": [
+            "moduleSystems": [
                 "amd",
                 "cjs",
                 "es6"

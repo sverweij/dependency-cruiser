@@ -43,7 +43,7 @@ const getAST = _.memoize(getASTBare);
  *   resolved      - the filename the dependency resides in (including the path
  *                   to the current directory or the directory passed as
  *                   'baseDir' in the options)
- *   moduleSystem  - the module system
+ *   moduleSystems  - the module system(s)
  *   coreModule    - a boolean indicating whether it is a (nodejs) core module
  *
  *
@@ -69,13 +69,6 @@ module.exports = (pFileName, pOptions) => {
                 moduleSystems: ["cjs", "es6", "amd"]
             }
         );
-        // pOptions = Object.assign(
-        //     {
-        //         baseDir: process.cwd(),
-        //         moduleSystems: ["cjs", "es6", "amd"]
-        //     },
-        //     pOptions
-        // );
 
         const lAST = getAST(path.join(pOptions.baseDir, pFileName));
         let lDependencies = [];
