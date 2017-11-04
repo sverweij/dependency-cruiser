@@ -57,8 +57,8 @@ module.exports = (pFileDirArray, pOptions) => {
         if (pOptions && pOptions.info === true) {
             process.stdout.write(formatMetaInfo());
         } else if (pOptions && pOptions.initRules === true){
-            initRules();
-            process.stdout.write(`\n  Successfully created '.dependency-cruiser.json'\n\n`);
+            initRules(defaults.RULES_FILE_NAME);
+            process.stdout.write(`\n  Successfully created '${defaults.RULES_FILE_NAME}'\n\n`);
         } else {
             pFileDirArray.forEach(validateFileExistence);
             if (pOptions.hasOwnProperty("validate")) {

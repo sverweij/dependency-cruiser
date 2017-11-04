@@ -384,7 +384,6 @@ src/cli/index.js: \
 	src/main/index.js
 
 src/cli/initRules.js: \
-	src/cli/defaults.json \
 	src/cli/rules.starter.json
 
 src/cli/normalizeOptions.js: \

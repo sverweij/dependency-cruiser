@@ -21,7 +21,7 @@ describe("normalizeOptions", () => {
     });
 
     it("writes a valid rules file to .dependency-cruiser.json", () => {
-        initRules();
+        initRules(RULES_FILE);
         expect(
             JSON.parse(fs.readFileSync(RULES_FILE, "utf8"))
         ).to.be.jsonSchema(rulesSchema);
@@ -32,7 +32,7 @@ describe("normalizeOptions", () => {
 
         fs.writeFileSync(RULES_FILE, "{}", {encoding: "utf8", flag: "w"});
         try {
-            initRules();
+            initRules(RULES_FILE);
         } catch (e) {
             lStillHere = false;
             expect(e.message).to.contain("already exists here - leaving it be");
