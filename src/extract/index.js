@@ -155,8 +155,6 @@ module.exports = (pFileDirArray, pOptions, pCallback) => {
 
     pOptions = Object.assign(
         {
-            baseDir: process.cwd(),
-            moduleSystems: ["cjs", "es6", "amd"],
             maxDepth: 0
         },
         pOptions
