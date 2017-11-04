@@ -380,7 +380,7 @@ src/cli/index.js: \
 	src/cli/formatMetaInfo.js \
 	src/cli/initRules.js \
 	src/cli/normalizeOptions.js \
-	src/cli/validateFileShizzle.js \
+	src/cli/validateFileExistence.js \
 	src/main/index.js
 
 src/cli/initRules.js: \
@@ -398,8 +398,8 @@ test/cli/initRules.spec.js: \
 test/cli/normalizeOptions.spec.js: \
 	src/cli/normalizeOptions.js
 
-test/cli/validateFileShizzle.spec.js: \
-	src/cli/validateFileShizzle.js
+test/cli/validateFileExistence.spec.js: \
+	src/cli/validateFileExistence.js
 
 test/extract/dependencyEndsUpAtFrom.spec.js: \
 	src/extract/dependencyEndsUpAtFrom.js

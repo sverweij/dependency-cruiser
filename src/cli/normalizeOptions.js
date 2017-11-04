@@ -40,3 +40,5 @@ module.exports = (pOptions) => {
 
     return pOptions;
 };
+
+module.exports.determineRulesFileName = determineRulesFileName;

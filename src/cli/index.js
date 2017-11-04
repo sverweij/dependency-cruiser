@@ -1,7 +1,7 @@
 "use strict";
 
 const fs                 = require('fs');
-const validateFileShizzle = require('./validateFileShizzle');
+const validateFileExistence = require('./validateFileExistence');
 const normalizeOptions   = require('./normalizeOptions');
 const initRules          = require('./initRules');
 const main               = require('../main');
@@ -60,7 +60,13 @@ module.exports = (pFileDirArray, pOptions) => {
             initRules();
             process.stdout.write(`\n  Successfully created '.dependency-cruiser.json'\n\n`);
         } else {
-            validateFileShizzle(pFileDirArray, pOptions ? pOptions.validate : false);
+            pFileDirArray.forEach(validateFileExistence);
+            if (pOptions.hasOwnProperty("validate")) {
+                validateFileExistence(
+                    normalizeOptions.determineRulesFileName(pOptions.validate)
+                );
+            }
+
             pOptions = normalizeOptions(pOptions);
 
             const lDependencyList = main.cruise(pFileDirArray, pOptions);
