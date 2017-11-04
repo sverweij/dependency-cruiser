@@ -9,8 +9,6 @@ const summarize              = require('./summarize');
 const addValidations         = require('./addValidations');
 
 function extractRecursive (pFileName, pOptions, pVisited, pDepth) {
-    pOptions = pOptions || {};
-    pDepth = pDepth || 0;
     pVisited.add(pFileName);
     const lDependencies = (pOptions.maxDepth <= 0 || pDepth < pOptions.maxDepth)
         ? extract(pFileName, pOptions)
@@ -42,7 +40,7 @@ function extractFileDirArray(pFileDirArray, pOptions) {
                 if (!lVisited.has(pFilename)){
                     lVisited.add(pFilename);
                     return pDependencies.concat(
-                        extractRecursive(pFilename, pOptions, lVisited)
+                        extractRecursive(pFilename, pOptions, lVisited, 0)
                     );
                 }
                 return pDependencies;
@@ -94,9 +92,6 @@ function makeOptionsPresentable(pOptions) {
         "prefix"
     ];
 
-    if (!Boolean(pOptions)){
-        return {};
-    }
     return SHARABLE_OPTIONS
         .filter(pOption => pOptions.hasOwnProperty(pOption) && pOptions[pOption] !== 0)
         .reduce(
@@ -109,16 +104,14 @@ function makeOptionsPresentable(pOptions) {
 }
 
 function circularityDetectionNecessary(pOptions) {
-    if (pOptions) {
-        if (pOptions.forceCircular) {
-            return true;
-        }
-        if (pOptions.validate && pOptions.ruleSet) {
-            return pOptions.ruleSet.forbidden &&
-                pOptions.ruleSet.forbidden.some(
-                    pRule => pRule.to.hasOwnProperty("circular")
-                );
-        }
+    if (pOptions.forceCircular) {
+        return true;
+    }
+    if (pOptions.validate && pOptions.ruleSet) {
+        return pOptions.ruleSet.forbidden &&
+            pOptions.ruleSet.forbidden.some(
+                pRule => pRule.to.hasOwnProperty("circular")
+            );
     }
     return false;
 }
@@ -180,8 +173,8 @@ module.exports = (pFileDirArray, pOptions, pCallback) => {
 
     lDependencies = addValidations(
         lDependencies,
-        pOptions ? pOptions.validate : false,
-        pOptions ? pOptions.ruleSet : {}
+        pOptions.validate,
+        pOptions.ruleSet
     );
 
     return lCallback(
