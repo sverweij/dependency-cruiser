@@ -4,11 +4,12 @@ const fs       = require('fs');
 const defaults = require('./defaults.json');
 
 function determineRulesFileName(pValidate) {
-    if (typeof pValidate === 'boolean' && pValidate){
-        return defaults.RULES_FILE_NAME;
-    } else {
-        return pValidate;
+    let lRetval = defaults.RULES_FILE_NAME;
+
+    if (typeof pValidate === 'string'){
+        lRetval = pValidate;
     }
+    return lRetval;
 }
 
 /**
@@ -26,6 +27,10 @@ module.exports = (pOptions) => {
         },
         pOptions
     );
+
+    if (pOptions.hasOwnProperty("system") && !pOptions.hasOwnProperty("moduleSystems")) {
+        pOptions.moduleSystems = pOptions.system;
+    }
 
     if (pOptions.hasOwnProperty("moduleSystems")) {
         pOptions.moduleSystems = pOptions.moduleSystems.split(",");

@@ -363,6 +363,67 @@ describe("#processCLI", () => {
             );
         });
 
+        it("dependency-cruise --system cjs,es6 will generate a warning", () => {
+            let lCapturedStderr = "";
+            const unhookInterceptStdOut = intercept(() => {
+                // This space intentionally left empty
+            });
+
+            const unhookInterceptStdErr = intercept(pText => {
+                lCapturedStderr += pText;
+            });
+
+            processCLI(
+                ["test/cli/fixtures"],
+                {
+                    system: "cjs,es6"
+                }
+            );
+            unhookInterceptStdOut();
+            unhookInterceptStdErr();
+            intercept(pText => {
+                lCapturedStderr += pText;
+            })();
+
+            return expect(
+                lCapturedStderr
+            ).to.contain(
+                "depcrecated"
+            );
+        });
+
+        it("dependency-cruise --init-rules will generate a rules file and tell that back on stdout", () => {
+            let lCapturedStdout = "";
+            const lValidationFileName = "test/cli/output/some-dependency-cruiser-config.json";
+            const unhookInterceptStdOut = intercept(pText => {
+                lCapturedStdout += pText;
+            });
+            const unhookInterceptStdErr = intercept(() => {
+                // This space intentionally left empty
+            });
+
+            deleteDammit(lValidationFileName);
+            processCLI(
+                ["test/cli/fixtures"],
+                {
+                    validate: lValidationFileName,
+                    initRules: true
+                }
+            );
+            unhookInterceptStdOut();
+            unhookInterceptStdErr();
+            intercept(pText => {
+                lCapturedStdout += pText;
+            })();
+
+            expect(
+                lCapturedStdout
+            ).to.contain(
+                `Successfully created '${lValidationFileName}'`
+            );
+            deleteDammit(lValidationFileName);
+        });
+
         it("dependency-cruise -f /dev/null -x '([a-zA-z]+)*'  - unsafe exclusion patterns don't run", () => {
             let lCapturedStderr = "";
             const unhookInterceptStdOut = intercept(() => {

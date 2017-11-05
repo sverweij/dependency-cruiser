@@ -53,18 +53,27 @@ function write(pOutputTo, pContent) {
 }
 
 module.exports = (pFileDirArray, pOptions) => {
+    pOptions = pOptions || {};
+
     try {
-        if (pOptions && pOptions.info === true) {
+        if (pOptions.info === true) {
             process.stdout.write(formatMetaInfo());
-        } else if (pOptions && pOptions.initRules === true){
-            initRules(defaults.RULES_FILE_NAME);
-            process.stdout.write(`\n  Successfully created '${defaults.RULES_FILE_NAME}'\n\n`);
+        } else if (pOptions.initRules === true){
+            initRules(normalizeOptions.determineRulesFileName(pOptions.validate));
+            process.stdout.write(
+                `\n  Successfully created '${normalizeOptions.determineRulesFileName(pOptions.validate)}'\n\n`
+            );
         } else {
             pFileDirArray.forEach(validateFileExistence);
             if (pOptions.hasOwnProperty("validate")) {
                 validateFileExistence(
                     normalizeOptions.determineRulesFileName(pOptions.validate)
                 );
+            }
+
+            if (pOptions.hasOwnProperty("system")) {
+                process.stderr.write(`  WARNING: The '--system' command line option is depcrecated in favor of\n`);
+                process.stderr.write(`           '--module-systems'. Use that or '-M' instead.\n`);
             }
 
             pOptions = normalizeOptions(pOptions);
