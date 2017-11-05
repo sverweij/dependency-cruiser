@@ -28,6 +28,14 @@ describe("normalizeOptions", () => {
         );
     });
 
+    it("trims module system strings", () => {
+        expect(
+            normalizeOptions({
+                moduleSystems: " amd,cjs ,  es6 "
+            }).moduleSystems
+        ).to.deep.equal(["amd", "cjs", "es6"]);
+    });
+
     it("--system acts as an alias for --module-systems", () => {
         expect(
             normalizeOptions({system: "something,something"}).moduleSystems
