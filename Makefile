@@ -104,10 +104,10 @@ depgraph-doc:
 	optipng doc/real-world-samples/dependency-cruiser-without-node_modules.png
 
 depgraph:
-	./bin/dependency-cruise -x "(^node_modules|^fs$$|^path$$)" -T dot -v .dependency-cruiser-custom.json src bin/dependency-cruise | dot -T svg > tmp_deps.svg
+	$(NPM) run depcruise:graph
 
 depcruise:
-	./bin/dependency-cruise -X ^node_modules -x fixtures -v .dependency-cruiser-custom.json src bin/dependency-cruise test
+	$(NPM) run depcruise
 
 check: lint test depcruise
 	./bin/dependency-cruise --version # if that runs the cli script works

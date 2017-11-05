@@ -10,6 +10,7 @@
   "main": "src/main/index.js",
   "scripts": {
     "depcruise": "./bin/dependency-cruise -X ^node_modules -x fixtures -v .dependency-cruiser-custom.json src bin/dependency-cruise test",
+    "depcruise:graph": "./bin/dependency-cruise -x \"(^node_modules|^fs$|^path$)\" -T dot -v .dependency-cruiser-custom.json bin/dependency-cruise | dot -T svg > tmp_deps.svg",
     "lint": "eslint bin src test",
     "lint:fix": "eslint --fix bin src test",
     "nsp": "nsp check",
@@ -18,7 +19,7 @@
     "preversion": "test `git branch | grep \"^* [a-zA-Z]\" | cut -c 3-` = 'master'",
     "test": "mocha --bail -R dot test/*/*.spec.js test/*/*/*.spec.js",
     "test:cover": "istanbul cover node_modules/mocha/bin/_mocha -- test/*/*.spec.js test/*/*/*.spec.js",
-    "test:long": "mocha --bail test/*/*.spec.js test/*/*/*.spec.js",
+    "test:long": "mocha test/*/*.spec.js test/*/*/*.spec.js",
     "test:watch": "mocha --watch --watch-extensions=json --reporter=min test/*/*.spec.js"
   },
   "keywords": [
