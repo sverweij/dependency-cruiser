@@ -1,7 +1,5 @@
 .SUFFIXES: .js .css .html
 GIT=git
-GIT_CURRENT_BRANCH=$(shell utl/get_current_git_branch.sh)
-GIT_DEPLOY_FROM_BRANCH=master
 NPM=npm
 NODE=node
 RM=rm -f
@@ -47,7 +45,6 @@ src/report/%.template.js: src/report/%.template.hbs
 	echo "doc/**" >> $@
 	echo "docs/**" >> $@
 	echo "test/**" >> $@
-	echo "utl/**" >> $@
 	echo ".bithoundrc" >> $@
 	echo ".dependency-cruiser-custom.json" >> $@
 	echo ".eslintignore" >> $@

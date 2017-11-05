@@ -1,7 +1,6 @@
 node_modules
 coverage
 tmp
-utl
 src/report/*.template.js
 test/*/fixtures/**
 test/*/*/fixtures/**

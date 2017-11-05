@@ -1,2 +1,0 @@
-#!/usr/bin/env node
-process.stdout.write(require("../package.json").version + "\n");

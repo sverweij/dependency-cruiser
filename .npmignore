@@ -28,7 +28,6 @@ package-lock.json
 doc/**
 docs/**
 test/**
-utl/**
 .bithoundrc
 .dependency-cruiser-custom.json
 .eslintignore
