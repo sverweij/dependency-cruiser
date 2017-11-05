@@ -12,6 +12,10 @@ function determineRulesFileName(pValidate) {
     return lRetval;
 }
 
+function trim(pString) {
+    return pString.trim();
+}
+
 /**
  * returns the pOptions, so that the returned value contains a
  * valid value for each possible option
@@ -33,7 +37,7 @@ module.exports = (pOptions) => {
     }
 
     if (pOptions.hasOwnProperty("moduleSystems")) {
-        pOptions.moduleSystems = pOptions.moduleSystems.split(",");
+        pOptions.moduleSystems = pOptions.moduleSystems.split(",").map(trim);
     }
 
     if (pOptions.hasOwnProperty("validate")){
