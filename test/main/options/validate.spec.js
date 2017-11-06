@@ -24,6 +24,26 @@ describe("validateOptions", () => {
         }
     });
 
+    it("throws when a invalid output type is passed ", () => {
+        try {
+            validateOptions({"outputType": "notAValidOutputType"});
+            expect("not to be here").to.equal("still here, though");
+        } catch (e) {
+            expect(e.toString()).to.deep.equal(
+                "Error: 'notAValidOutputType' is not a valid output type.\n"
+            );
+        }
+    });
+
+    it("passes when a valid output type is passed", () => {
+        try {
+            validateOptions({"outputType": "err"});
+            expect("to be here without throws happening").to.equal("to be here without throws happening");
+        } catch (e) {
+            expect("not to be here").to.equal(`still here, though: ${e}`);
+        }
+    });
+
     it("throws when a non-integer is passed as maxDepth", () => {
         try {
             validateOptions({"maxDepth": "not an integer"});
@@ -60,6 +80,26 @@ describe("validateOptions", () => {
     it("passes when a valid depth is passed as maxDepth", () => {
         try {
             validateOptions({"maxDepth": "42"});
+            expect("to be here without throws happening").to.equal("to be here without throws happening");
+        } catch (e) {
+            expect("not to be here").to.equal(`still here, though: ${e}`);
+        }
+    });
+
+    it("throws when --exclude is passed an unsafe regex", () => {
+        try {
+            validateOptions({"exclude": "([A-Za-z]+)*"});
+            expect("not to be here").to.equal("still here, though");
+        } catch (e) {
+            expect(e.toString()).to.deep.equal(
+                "Error: The pattern '([A-Za-z]+)*' will probably run very slowly - cowardly refusing to run.\n"
+            );
+        }
+    });
+
+    it("passes when --exclude is passed an safe regex", () => {
+        try {
+            validateOptions({"exclude": "([A-Za-z]+)"});
             expect("to be here without throws happening").to.equal("to be here without throws happening");
         } catch (e) {
             expect("not to be here").to.equal(`still here, though: ${e}`);

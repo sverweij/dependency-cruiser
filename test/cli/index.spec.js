@@ -121,9 +121,6 @@ function resetOutputDir() {
             }
         });
 
-    deleteDammit(path.join(OUT_DIR, "cjs.dir.stdout.json"));
-    deleteDammit(path.join(OUT_DIR, "amd.dir.stdout.json"));
-    deleteDammit(path.join(OUT_DIR, "cjs.dir.dot"));
     deleteDammit(path.join(OUT_DIR, "multiple-in-one-go.json"));
 }
 
@@ -167,10 +164,6 @@ describe("#processCLI", () => {
         resetOutputDir();
     });
 
-    describe("file based tests - commonJS", () => {
-        runFileBasedTests("cjs");
-    });
-
     describe("specials", () => {
         it("dependency-cruises multiple files and folders in one go", () => {
             const lOutputFileName = "multiple-in-one-go.json";
@@ -210,46 +203,6 @@ describe("#processCLI", () => {
             );
         });
 
-        it("dependency-cruise test/cli/fixtures/cjs - outputs to stdout", () => {
-            let lCapturedStdout = "";
-            const unhookIntercept = intercept(pText => {
-                lCapturedStdout += pText;
-            });
-
-            processCLI(["test/cli/fixtures/cjs"], {outputType: "json", forceCircular: true});
-            unhookIntercept();
-            fs.writeFileSync(
-                path.join(OUT_DIR, "cjs.dir.stdout.json"),
-                lCapturedStdout,
-                "utf8"
-            );
-
-            tst.assertFileEqual(
-                path.join(OUT_DIR, "cjs.dir.stdout.json"),
-                path.join(FIX_DIR, "cjs.dir.stdout.json")
-            );
-        });
-
-        it("dependency-cruise --output-type json test/cli/fixtures/cjs - outputs a slew of json to stdout", () => {
-            let lCapturedStdout = "";
-            const unhookIntercept = intercept(pText => {
-                lCapturedStdout += pText;
-            });
-
-            processCLI(["test/cli/fixtures/cjs"], {outputTo: "-", outputType: 'json', forceCircular: true});
-            unhookIntercept();
-            fs.writeFileSync(
-                path.join(OUT_DIR, "cjs.dir.stdout.json"),
-                lCapturedStdout,
-                "utf8"
-            );
-
-            tst.assertFileEqual(
-                path.join(OUT_DIR, "cjs.dir.stdout.json"),
-                path.join(FIX_DIR, "cjs.dir.stdout.json")
-            );
-        });
-
         it("dependency-cruise -f cjs.dir.wontmarch.json this-doesnot-exist - non-existing generates an error", () => {
             let lCapturedStderr = "";
             const unhookInterceptStdOut = intercept(() => {
@@ -268,68 +221,6 @@ describe("#processCLI", () => {
                 lCapturedStderr
             ).to.contain(
                 "ERROR: Can't open 'this-doesnot-exist' for reading. Does it exist?\n"
-            );
-        });
-
-        it("dependency-cruise -f /dev/null -M invalidmodulesystem - generates error", () => {
-            let lCapturedStderr = "";
-            const unhookInterceptStdOut = intercept(() => {
-                // This space intentionally left empty
-            });
-
-            const unhookInterceptStdErr = intercept(pText => {
-                lCapturedStderr += pText;
-            });
-
-            processCLI(
-                ["test/cli/fixtures"],
-                {
-                    outputTo: path.join("/dev/null"),
-                    moduleSystems: "invalidmodulesystem",
-                    forceCircular: true
-                }
-            );
-            unhookInterceptStdOut();
-            unhookInterceptStdErr();
-            intercept(pText => {
-                lCapturedStderr += pText;
-            })();
-
-            return expect(
-                lCapturedStderr
-            ).to.contain(
-                "ERROR: Invalid module system list: 'invalidmodulesystem'\n"
-            );
-        });
-
-        it("dependency-cruise -f /dev/null -T invalidoutputtype - generates error", () => {
-            let lCapturedStderr = "";
-            const unhookInterceptStdOut = intercept(() => {
-                // This space intentionally left empty
-            });
-
-            const unhookInterceptStdErr = intercept(pText => {
-                lCapturedStderr += pText;
-            });
-
-            processCLI(
-                ["test/cli/fixtures"],
-                {
-                    outputTo: path.join(OUT_DIR, "/dev/null"),
-                    outputType: "invalidoutputtype",
-                    forceCircular: true
-                }
-            );
-            unhookInterceptStdOut();
-            unhookInterceptStdErr();
-            intercept(pText => {
-                lCapturedStderr += pText;
-            })();
-
-            return expect(
-                lCapturedStderr
-            ).to.contain(
-                "ERROR: 'invalidoutputtype' is not a valid output type.\n"
             );
         });
 
@@ -363,7 +254,7 @@ describe("#processCLI", () => {
             );
         });
 
-        it("dependency-cruise --system cjs,es6 will generate a warning", () => {
+        it("dependency-cruise --system cjs,es6 will generates a deprecation warning", () => {
             let lCapturedStderr = "";
             const unhookInterceptStdOut = intercept(() => {
                 // This space intentionally left empty
@@ -392,7 +283,7 @@ describe("#processCLI", () => {
             );
         });
 
-        it("dependency-cruise --init-rules will generate a rules file and tell that back on stdout", () => {
+        it("dependency-cruise --init-rules will generate a rules file and tells that back on stdout", () => {
             let lCapturedStdout = "";
             const lValidationFileName = "test/cli/output/some-dependency-cruiser-config.json";
             const unhookInterceptStdOut = intercept(pText => {
@@ -424,32 +315,9 @@ describe("#processCLI", () => {
             deleteDammit(lValidationFileName);
         });
 
-        it("dependency-cruise -f /dev/null -x '([a-zA-z]+)*'  - unsafe exclusion patterns don't run", () => {
-            let lCapturedStderr = "";
-            const unhookInterceptStdOut = intercept(() => {
-                // This space intentionally left empty
-            });
-
-            const unhookInterceptStdErr = intercept(pText => {
-                lCapturedStderr += pText;
-            });
-
-            processCLI(
-                ["test/cli/fixtures"],
-                {
-                    outputTo: path.join(OUT_DIR, "/dev/null"),
-                    exclude: "([A-Za-z]+)*",
-                    forceCircular: true
-                }
-            );
-            unhookInterceptStdOut();
-            unhookInterceptStdErr();
-
-            return expect(
-                lCapturedStderr
-            ).to.contain(
-                "ERROR: The pattern '([A-Za-z]+)*' will probably run very slowly - cowardly refusing to run.\n"
-            );
+        describe("file based tests - commonJS", () => {
+            runFileBasedTests("cjs");
         });
+
     });
 });
