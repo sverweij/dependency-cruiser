@@ -3,6 +3,12 @@
 ## How do I enable TypeScript, CoffeeScript or LiveScript in dependency-cruiser?
 You don't. They work out of the box.
 
+## I'm developing in React and use jsx. How do I get that to work?
+jsx works out of the box
+
+## I use React, but with TypeScript and tsx. That works out of the box too?
+Yep.
+
 ## Does this mean dependency-cruiser installs transpilers for all these languages?
 No.
 
