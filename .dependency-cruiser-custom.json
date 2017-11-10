@@ -12,10 +12,10 @@
             "from": { "path": "(^bin/dependency-cruise)" },
             "to": { "pathNot": "^src/cli|^node_modules|^package.json$" }
         }, {
-            "name": "reporters-no-file-access",
-            "comment": "reporters just report - file access is for the caller",
+            "name": "restricct-fs-access",
+            "comment": "restrict file access to a few modules only",
             "severity": "error",
-            "from": { "path": "^src/(report|validate|extract/transpile)" },
+            "from": { "path": "^src/(report|validate|main|extract/transpile)" },
             "to": { "path": "^fs$" }
         }, {
             "name": "no-deprecated-core",
