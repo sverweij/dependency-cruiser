@@ -12,6 +12,20 @@ test_async_node_latest:
   except:
    - tags
 
+test_async_node_8:
+  image: node:8
+  cache:
+    paths:
+    - node_modules/
+  script:
+   - npm install
+   - npm run lint
+   - npm run depcruise
+   - npm run nsp
+   - npm run test:cover
+  except:
+   - tags
+
 test_async_node_6:
   image: node:6
   cache:
@@ -35,8 +49,8 @@ test_async_node_4:
   - npm install
   - npm run lint
   - npm run depcruise
-  - npm run nsp
   - npm run test:cover
+  # - npm run nsp - nsp is not supported on node 4 anymore
  except:
   - tags
 
