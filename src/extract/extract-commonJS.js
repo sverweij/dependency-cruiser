@@ -13,7 +13,12 @@ module.exports = (pAST, pDependencies, pModuleSystem) => {
         {
             "CallExpression": pNode => {
                 if (pNode.callee.type === "Identifier" && pNode.callee.name === "require"){
-                    if (pNode.arguments && pNode.arguments[0] && pNode.arguments[0].value){
+                    if (Boolean(pNode.arguments) &&
+                        pNode.arguments[0] &&
+                        pNode.arguments[0].value &&
+                        typeof pNode.arguments[0].value === "string"
+                    ){
+
                         pNode.arguments[0].value.split("!").forEach(pString =>
                             pDependencies.push({
                                 moduleName: pString,

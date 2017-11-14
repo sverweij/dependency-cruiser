@@ -86,12 +86,31 @@ describe('Error scenarios - ', () => {
         ).to.not.throw("Extracting dependencies ran afoul of... Unexpected token (1:3)");
     });
     it('Raises an exception on non-existing files', () => {
-        // extract("non-existing-file.js")
         expect(
             () => extract("non-existing-file.js")
         ).to.throw(
             "Extracting dependencies ran afoul of...\n\n  ENOENT: no such file or directory, open "
         );
+    });
+});
+
+describe('even when require gets non-string arguments, extract doesn\'t break', () => {
+    it('Just skips require(481)', () => {
+        expect(
+            extract("./test/extract/fixtures/cjs-require-non-strings/require-a-number.js").length
+        ).to.equal(1);
+    });
+
+    it('Just skips require(a function)', () => {
+        expect(
+            extract("./test/extract/fixtures/cjs-require-non-strings/require-a-function.js").length
+        ).to.equal(1);
+    });
+
+    it('Just skips require(an iife)', () => {
+        expect(
+            extract("./test/extract/fixtures/cjs-require-non-strings/require-an-iife.js").length
+        ).to.equal(1);
     });
 });
 
