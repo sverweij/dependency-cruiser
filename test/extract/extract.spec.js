@@ -95,7 +95,7 @@ describe('Error scenarios - ', () => {
 });
 
 describe('even when require gets non-string arguments, extract doesn\'t break', () => {
-    it('Just skips require(481)', () =>{
+    it('Just skips require(481)', () => {
         expect(
             extract("./test/extract/fixtures/cjs-require-non-strings/require-a-number.js").length
         ).to.equal(1);
