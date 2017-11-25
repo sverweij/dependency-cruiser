@@ -189,6 +189,49 @@ up at itself.
 }
 ```
 
+### _license_ and _licenseNot_
+You can flag dependent modules that have licenses that are e.g. not compatible with your own license or with the policies within your company with
+`license` and `licenseNot`. Both take a regular expression that matches
+against the license string that goes with the dependency.
+
+E.g. to forbid GPL and APL licenses (which require you to publish your source
+code - which will not always be what you want):
+
+```json
+{
+    "name": "no-gpl-apl-licenses",
+    "severity": "error",
+    "from": {},
+    "to": { "license": "GPL|APL" }
+}
+```
+This raise an error when you use a dependency that has a string with GPL or
+APL in the "license" attribute of its package.json (e.g.
+[SPDX](https://spdx.org) compatible expressions like `GPL-3.0`, `APL-1.0` and
+`MIT OR GPL-3.0` but also on non SPDX compatible)
+
+To only allow licenses from an approved list (e.g. a whitelist provided by your
+legal department):
+```json
+{
+    "name": "only-licenses-approved-by-legal",
+    "severity": "warn",
+    "from": {},
+    "to": { "licenseNot": "MIT|ISC" }
+}
+```
+
+Note: dependency-cruiser can help out a bit here, but you remain responsible
+for managing your own legal stuff. To re-iterate what is in the
+ [LICENSE](../LICENSE) to dependency-cruiser:
+> THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+SOFTWARE.
+
 
 ## dependencyTypes
 You might have spent some time wondering why something works on your machine,
