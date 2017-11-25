@@ -19,13 +19,16 @@ function hasPath(pObject, pPath) {
         pObject[pPath[0]].hasOwnProperty(pPath[1]);
 }
 
+
 function checkRuleSafety(pRule) {
     if (
         !(
             (!hasPath(pRule, ["from", "path"]) || safeRegex(pRule.from.path)) &&
             (!hasPath(pRule, ["to", "path"]) || safeRegex(pRule.to.path)) &&
             (!hasPath(pRule, ["from", "pathNot"]) || safeRegex(pRule.from.pathNot)) &&
-            (!hasPath(pRule, ["to", "pathNot"]) || safeRegex(pRule.to.pathNot))
+            (!hasPath(pRule, ["to", "pathNot"]) || safeRegex(pRule.to.pathNot)) &&
+            (!hasPath(pRule, ["to", "license"]) || safeRegex(pRule.to.license)) &&
+            (!hasPath(pRule, ["to", "licenseNot"]) || safeRegex(pRule.to.licenseNot))
         )
     ){
         throw new Error(

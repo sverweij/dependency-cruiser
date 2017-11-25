@@ -172,6 +172,7 @@ src/extract/resolve/determineDependencyTypes.js: \
 
 src/extract/resolve/resolve-commonJS.js: \
 	src/extract/resolve/determineDependencyTypes.js \
+	src/extract/resolve/localNpmHelpers.js \
 	src/extract/resolve/readPackageDeps.js \
 	src/extract/transpile/meta.js
 
@@ -314,6 +315,7 @@ src/extract/resolve/determineDependencyTypes.js: \
 
 src/extract/resolve/resolve-commonJS.js: \
 	src/extract/resolve/determineDependencyTypes.js \
+	src/extract/resolve/localNpmHelpers.js \
 	src/extract/resolve/readPackageDeps.js \
 	src/extract/transpile/meta.js
 

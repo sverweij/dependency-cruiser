@@ -5,6 +5,7 @@ const resolve                  = require('resolve');
 const transpileMeta            = require('../transpile/meta');
 const determineDependencyTypes = require('./determineDependencyTypes');
 const readPackageDeps          = require('./readPackageDeps');
+const localNpmHelpers          = require('./localNpmHelpers');
 
 const SUPPORTED_EXTENSIONS = transpileMeta.scannableExtensions;
 
@@ -38,6 +39,12 @@ module.exports = (pModuleName, pBaseDir, pFileDir) => {
         } catch (e) {
             lRetval.couldNotResolve = true;
         }
+    }
+
+    const lLicense = localNpmHelpers.getLicense(pModuleName, pBaseDir);
+
+    if (Boolean(lLicense)) {
+        lRetval.license = lLicense;
     }
 
     return Object.assign(

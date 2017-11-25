@@ -1,8 +1,9 @@
 "use strict";
 
-const fs      = require('fs');
-const path    = require('path');
-const resolve = require('resolve');
+const fs       = require('fs');
+const path     = require('path');
+const resolve  = require('resolve');
+const _memoize = require('lodash/memoize');
 
 const isLocal     = (pModule) => pModule.startsWith('.');
 const isScoped    = (pModule) => pModule.startsWith('@');
@@ -34,7 +35,7 @@ const isScoped    = (pModule) => pModule.startsWith('@');
  * @param  {string} pModule a module name
  * @return {string}         the module name root
  */
-module.exports.getPackageRoot = (pModule) => {
+function getPackageRoot (pModule) {
     if (!Boolean(pModule) || isLocal(pModule)) {
         return pModule;
     }
@@ -55,7 +56,7 @@ module.exports.getPackageRoot = (pModule) => {
     // lodash
     // lodash/fp
     return lPathElements[0];
-};
+}
 
 /**
  * returns the contents of the package.json of the given pModule as it would
@@ -74,12 +75,12 @@ module.exports.getPackageRoot = (pModule) => {
  *                           null if either module or package.json could
  *                           not be found
  */
-module.exports.getPackageJson = (pModule, pBaseDir) => {
+function bareGetPackageJson (pModule, pBaseDir) {
     let lRetval = null;
 
     try {
         let lPackageJsonFilename = resolve.sync(
-            path.join(module.exports.getPackageRoot(pModule), "package.json"),
+            path.join(getPackageRoot(pModule), "package.json"),
             {
                 basedir: pBaseDir ? pBaseDir : "."
             }
@@ -93,4 +94,56 @@ module.exports.getPackageJson = (pModule, pBaseDir) => {
         // left empty on purpose
     }
     return lRetval;
+}
+
+const getPackageJson =
+    _memoize(
+        bareGetPackageJson,
+        (pModule, pBaseDir) => `${pBaseDir}|${pModule}`
+    );
+
+/**
+ * Tells whether the pModule as resolved to pBaseDir is deprecated
+ *
+ * @param  {string} pModule  The module to get the deprecation status of
+ * @param  {string} pBaseDir The base dir. Defaults to '.'
+ * @return {boolean}         true if depcrecated, false in all other cases
+ */
+function dependencyIsDeprecated (pModule, pBaseDir) {
+    let lRetval = false;
+    let lPackageJson = getPackageJson(pModule, pBaseDir);
+
+    if (Boolean(lPackageJson)){
+        lRetval = lPackageJson.hasOwnProperty("deprecated") && lPackageJson.deprecated;
+    }
+    return lRetval;
+}
+
+/**
+ * Returns the license of pModule as resolved to pBaseDir - if any
+ *
+ * @param  {string} pModule  The module to get the deprecation status of
+ * @param  {string} pBaseDir The base dir. Defaults to '.'
+ * @return {string}          The module's license string, or '' in case
+ *                           there is no package.json or no license field
+ */
+function getLicense (pModule, pBaseDir) {
+    let lRetval = "";
+    let lPackageJson = getPackageJson(pModule, pBaseDir);
+
+    if (
+        Boolean(lPackageJson) &&
+        lPackageJson.hasOwnProperty("license") &&
+        typeof lPackageJson.license === "string"
+    ){
+        lRetval = lPackageJson.license;
+    }
+    return lRetval;
+}
+
+module.exports = {
+    getPackageRoot,
+    getPackageJson,
+    dependencyIsDeprecated,
+    getLicense
 };

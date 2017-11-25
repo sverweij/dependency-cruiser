@@ -6,6 +6,7 @@ const fs                       = require('fs');
 const memoize                  = require('lodash/memoize');
 const determineDependencyTypes = require('./determineDependencyTypes');
 const readPackageDeps          = require('./readPackageDeps');
+const localNpmHelpers          = require('./localNpmHelpers');
 
 const fileExists = memoize(pFile => {
     try {
@@ -34,6 +35,12 @@ module.exports = (pModuleName, pBaseDir, pFileDir) => {
         followable: fileExists(lProbablePath),
         couldNotResolve: !Boolean(resolve.isCore(pModuleName)) && !fileExists(lProbablePath)
     };
+
+    const lLicense = localNpmHelpers.getLicense(pModuleName, pBaseDir);
+
+    if (Boolean(lLicense)) {
+        lDependency.license = lLicense;
+    }
 
     return Object.assign(
         lDependency,

@@ -105,4 +105,63 @@ describe("localNpmHelpers.getPackageRoot", () => {
     });
 });
 
+describe("localNpmHelpers.getLicense", () => {
+    it("returns '' if the module does not exist", () => {
+        expect(
+            localNpmHelpers.getLicense('this-module-does-not-exist')
+        ).to.equal('');
+    });
+
+    it("returns '' if the module does exist but has no associated package.json", () => {
+        expect(
+            localNpmHelpers.getLicense('./test/extract/resolve/fixtures/no-package-json')
+        ).to.equal('');
+    });
+
+    it("returns '' if the module does exist, has a package.json, but no license field", () => {
+        expect(
+            localNpmHelpers.getLicense(
+                'no-license',
+                './test/extract/resolve/fixtures/licenses/'
+            )
+        ).to.equal('');
+    });
+
+    it("returns '' if the module exists, has a package.json, and a license field that is a boolean", () => {
+        expect(
+            localNpmHelpers.getLicense(
+                'boolean-license',
+                './test/extract/resolve/fixtures/licenses/'
+            )
+        ).to.equal('');
+    });
+
+    it("returns '' if the module exists, has a package.json, and a license field that is an object", () => {
+        expect(
+            localNpmHelpers.getLicense(
+                'object-license',
+                './test/extract/resolve/fixtures/licenses/'
+            )
+        ).to.equal('');
+    });
+
+    it("returns '' package.json has a licenses field that is an array (and no license field)", () => {
+        expect(
+            localNpmHelpers.getLicense(
+                'array-license',
+                './test/extract/resolve/fixtures/licenses/'
+            )
+        ).to.equal('');
+    });
+
+    it("returns the license if the module exists, has a package.json, and a string license field", () => {
+        expect(
+            localNpmHelpers.getLicense(
+                'GPL-license',
+                './test/extract/resolve/fixtures/licenses/'
+            )
+        ).to.equal('GPL-3.0');
+    });
+
+});
 /* eslint no-unused-expressions: 0 */
