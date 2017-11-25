@@ -63,6 +63,7 @@
                 "dependencyTypes": [
                     "npm"
                 ],
+                "license": "MIT",
                 "followable": true,
                 "matchesDoNotFollow": false,
                 "couldNotResolve": false

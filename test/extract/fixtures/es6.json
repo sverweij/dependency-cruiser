@@ -13,6 +13,7 @@
                 "dependencyTypes": [
                     "npm"
                 ],
+                "license": "MIT",
                 "followable": true,
                 "matchesDoNotFollow": false,
                 "couldNotResolve": false
@@ -25,6 +26,7 @@
                 "dependencyTypes": [
                     "npm-dev"
                 ],
+                "license": "MIT",
                 "followable": true,
                 "matchesDoNotFollow": false,
                 "couldNotResolve": false
@@ -37,6 +39,7 @@
                 "dependencyTypes": [
                     "npm"
                 ],
+                "license": "MIT",
                 "followable": true,
                 "matchesDoNotFollow": false,
                 "couldNotResolve": false
@@ -49,6 +52,7 @@
                 "dependencyTypes": [
                     "npm-dev"
                 ],
+                "license": "MIT",
                 "followable": true,
                 "matchesDoNotFollow": false,
                 "couldNotResolve": false

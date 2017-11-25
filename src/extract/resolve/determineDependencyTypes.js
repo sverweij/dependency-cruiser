@@ -26,16 +26,6 @@ function determineNpmDependencyTypes(pModuleName, pPackageDeps) {
     return lRetval;
 }
 
-function dependencyIsDeprecated (pModule, pBaseDir) {
-    let lRetval = false;
-    let lPackageJson = localNpmHelpers.getPackageJson(pModule, pBaseDir);
-
-    if (Boolean(lPackageJson)){
-        lRetval = lPackageJson.hasOwnProperty("deprecated") && lPackageJson.deprecated;
-    }
-    return lRetval;
-}
-
 function dependencyIsBundled(pModule, pPackageDeps) {
     let lRetval = false;
 
@@ -64,19 +54,12 @@ module.exports = (pDependency, pModuleName, pPackageDeps, pBaseDir) => {
     } else if (pModuleName.startsWith(".")) {
         lRetval = ["local"];
     } else if (pDependency.resolved.includes("node_modules")) {
-        // probably a node_module  - let's see if we can find it in the package
-        // deps - but we're only interested in anything up till the first
-        // '/' (if any) - because e.g. 'lodash/fp' is ultimately the 'lodash'
-        // package...
-        //
-        // unless the package is 'scoped (@organization/coolpackage),
-        //  in which case we'd need it until the second '/'
         lRetval = determineNpmDependencyTypes(
             localNpmHelpers.getPackageRoot(pModuleName),
             pPackageDeps
         );
 
-        if (dependencyIsDeprecated(pModuleName, pBaseDir)) {
+        if (localNpmHelpers.dependencyIsDeprecated(pModuleName, pBaseDir)) {
             lRetval.push("deprecated");
         }
         if (dependencyIsBundled(pModuleName, pPackageDeps)) {

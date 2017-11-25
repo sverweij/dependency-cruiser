@@ -21,6 +21,7 @@
                         "dependencyTypes": [
                             "npm"
                         ],
+                        "license": "MIT",
                         "module": "idontgetbundled",
                         "moduleSystem": "cjs",
                         "valid": true
@@ -35,6 +36,7 @@
                             "npm",
                             "npm-bundled"
                         ],
+                        "license": "MIT",
                         "module": "igetbundled",
                         "moduleSystem": "cjs",
                         "valid": true

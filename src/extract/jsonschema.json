@@ -68,6 +68,10 @@
                         "items": { "$ref": "#/definitions/DependencyType" },
                         "description": "the type of inclusion - local, core, unknown (= we honestly don't know), undetermined (= we didn't bother determining it) or one of the npm dependencies defined in a package.jsom ('npm' for 'depenencies', 'npm-dev', 'npm-optional', 'npm-peer', 'npm-no-pkg' for development, optional, peer dependencies and dependencies in node_modules but not in package.json respectively)"
                     },
+                    "license": {
+                        "type": "string",
+                        "description": "the license, if known (usually known for modules pulled from npm, not for local ones)"
+                    },
                     "dependencies": {
                         "type": "array",
                         "items": {
@@ -100,6 +104,10 @@
                                     "type": "array",
                                     "items": { "$ref": "#/definitions/DependencyType" },
                                     "description": "the type of inclusion - local, core, unknown (= we honestly don't know), undetermined (= we didn't bother determining it) or one of the npm dependencies defined in a package.jsom ('npm' for 'depenencies', 'npm-dev', 'npm-optional', 'npm-peer', 'npm-no-pkg' for development, optional, peer dependencies and dependencies in node_modules but not in package.json respectively)"
+                                },
+                                "license": {
+                                    "type": "string",
+                                    "description": "the license, if known (usually known for modules pulled from npm, not for local ones)"
                                 },
                                 "followable": {
                                     "type": "boolean",
