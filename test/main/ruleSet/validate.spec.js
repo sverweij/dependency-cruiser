@@ -34,6 +34,37 @@ describe("ruleSetReader", () => {
         }
     });
 
+    it("bails out on scary regexps in licenses", () => {
+        try {
+            validate(
+                JSON.parse(
+                    fs.readFileSync("./test/validate/fixtures/rules.scary-regex-in-license.json", 'utf8')
+                )
+            );
+            expect("not to be here").to.equal("still here, though");
+        } catch (e) {
+            expect(e.message).to.contain(
+                'rule {"from":{},"to":{"license":"(.+)*"}} has an unsafe regular expression. Bailing out.\n'
+            );
+        }
+    });
+
+
+    it("bails out on scary regexps in licenseNots", () => {
+        try {
+            validate(
+                JSON.parse(
+                    fs.readFileSync("./test/validate/fixtures/rules.scary-regex-in-licensenot.json", 'utf8')
+                )
+            );
+            expect("not to be here").to.equal("still here, though");
+        } catch (e) {
+            expect(e.message).to.contain(
+                'rule {"from":{},"to":{"licenseNot":"(.+)*"}} has an unsafe regular expression. Bailing out.\n'
+            );
+        }
+    });
+
     it("barfs on an invalid rules file", () => {
         try {
             validate(

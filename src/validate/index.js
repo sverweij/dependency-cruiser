@@ -70,6 +70,10 @@ function matchRule(pFrom, pTo) {
                 intersects(pTo.dependencyTypes, pRule.to.dependencyTypes)
         ) && (!pRule.to.hasOwnProperty("moreThanOneDependencyType") ||
                 pTo.dependencyTypes.length > 1
+        ) && (!pRule.to.hasOwnProperty("license") ||
+                pTo.license && pTo.license.match(pRule.to.license)
+        ) && (!pRule.to.hasOwnProperty("licenseNot") ||
+                pTo.license && !pTo.license.match(pRule.to.licenseNot)
         ) && propertyEquals(pTo, pRule, "couldNotResolve") &&
                  propertyEquals(pTo, pRule, "circular");
     };
@@ -137,4 +141,4 @@ module.exports = (pValidate, pRuleSet, pFrom, pTo) => {
    - we only use it from within the module with two fixed values
    - the propertyEquals function is not exposed externaly
  */
-/* eslint security/detect-object-injection: 0 */
+/* eslint security/detect-object-injection: 0, complexity: 0 */

@@ -90,5 +90,11 @@
             "severity": "error",
             "from": { "pathNot": "^(node_modules)"},
             "to": { "circular": true }
+        },{
+            "name": "no-GPL-license",
+            "comment": "Our license (MIT) is not compatible with any form of GPL, so we are not allowed to use GPL licensed modules",
+            "severity": "error",
+            "from": {},
+            "to": { "license": "GPL" }
         }]
 }

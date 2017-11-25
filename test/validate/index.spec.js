@@ -452,3 +452,86 @@ describe("group matching - path group matched in a pathnot", () => {
         ).to.deep.equal({valid: true});
     });
 });
+
+
+describe("validate - license", () => {
+    it("Skips dependencies that have no license attached", () => {
+        expect(
+            validate(
+                true,
+                _readRuleSet("./test/validate/fixtures/rules.license.json"),
+                "something",
+                {"resolved": "src/aap/speeltuigen/autoband.ts"}
+            )
+        ).to.deep.equal({valid: true});
+    });
+
+    it("does not flag dependencies that do not match the license expression", () => {
+        expect(
+            validate(
+                true,
+                _readRuleSet("./test/validate/fixtures/rules.license.json"),
+                "something",
+                {
+                    "resolved": "src/aap/speeltuigen/autoband.ts",
+                    "license": "Monkey-PL"
+                }
+            )
+        ).to.deep.equal({valid: true});
+    });
+
+    it("flags dependencies that match the license expression", () => {
+        expect(
+            validate(
+                true,
+                _readRuleSet("./test/validate/fixtures/rules.license.json"),
+                "something",
+                {
+                    "resolved": "src/aap/speeltuigen/autoband.ts",
+                    "license": "SomePL-3.1"
+                }
+            )
+        ).to.deep.equal({valid: false, rule: {name: "no-somepl-license", severity: "warn"}});
+    });
+});
+
+describe("validate - licenseNot", () => {
+    it("Skips dependencies that have no license attached", () => {
+        expect(
+            validate(
+                true,
+                _readRuleSet("./test/validate/fixtures/rules.licensenot.json"),
+                "something",
+                {"resolved": "src/aap/speeltuigen/autoband.ts"}
+            )
+        ).to.deep.equal({valid: true});
+    });
+
+    it("does not flag dependencies that do match the license expression", () => {
+        expect(
+            validate(
+                true,
+                _readRuleSet("./test/validate/fixtures/rules.licensenot.json"),
+                "something",
+                {
+                    "resolved": "src/aap/speeltuigen/autoband.ts",
+                    "license": "SomePL-3.1"
+                }
+            )
+        ).to.deep.equal({valid: true});
+    });
+
+    it("flags dependencies that do not match the license expression", () => {
+        expect(
+            validate(
+                true,
+                _readRuleSet("./test/validate/fixtures/rules.licensenot.json"),
+                "something",
+                {
+                    "resolved": "src/aap/speeltuigen/autoband.ts",
+                    "license": "Monkey-PL"
+                }
+            )
+        ).to.deep.equal({valid: false, rule: {name: "only-somepl-license", severity: "warn"}});
+    });
+});
