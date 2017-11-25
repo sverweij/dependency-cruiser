@@ -1,8 +1,9 @@
 "use strict";
 
-const fs      = require('fs');
-const path    = require('path');
-const resolve = require('resolve');
+const fs       = require('fs');
+const path     = require('path');
+const resolve  = require('resolve');
+const _memoize = require('lodash/memoize');
 
 const isLocal     = (pModule) => pModule.startsWith('.');
 const isScoped    = (pModule) => pModule.startsWith('@');
@@ -74,7 +75,7 @@ function getPackageRoot (pModule) {
  *                           null if either module or package.json could
  *                           not be found
  */
-function getPackageJson (pModule, pBaseDir) {
+function bareGetPackageJson (pModule, pBaseDir) {
     let lRetval = null;
 
     try {
@@ -94,6 +95,11 @@ function getPackageJson (pModule, pBaseDir) {
     }
     return lRetval;
 }
+
+const getPackageJson = _memoize(
+    bareGetPackageJson,
+    (pModule, pBaseDir) => `${pBaseDir}||${pModule}`
+);
 
 /**
  * Tells whether the pModule as resolved to pBaseDir is deprecated
