@@ -165,6 +165,7 @@ src/extract/resolve/index.js: \
 
 src/extract/resolve/resolve-AMD.js: \
 	src/extract/resolve/determineDependencyTypes.js \
+	src/extract/resolve/localNpmHelpers.js \
 	src/extract/resolve/readPackageDeps.js
 
 src/extract/resolve/determineDependencyTypes.js: \
@@ -308,6 +309,7 @@ src/extract/resolve/index.js: \
 
 src/extract/resolve/resolve-AMD.js: \
 	src/extract/resolve/determineDependencyTypes.js \
+	src/extract/resolve/localNpmHelpers.js \
 	src/extract/resolve/readPackageDeps.js
 
 src/extract/resolve/determineDependencyTypes.js: \
