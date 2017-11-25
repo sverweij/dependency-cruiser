@@ -96,10 +96,11 @@ function bareGetPackageJson (pModule, pBaseDir) {
     return lRetval;
 }
 
-const getPackageJson = _memoize(
-    bareGetPackageJson,
-    (pModule, pBaseDir) => `${pBaseDir}||${pModule}`
-);
+const getPackageJson =
+    _memoize(
+        bareGetPackageJson,
+        (pModule, pBaseDir) => `${pBaseDir}|${pModule}`
+    );
 
 /**
  * Tells whether the pModule as resolved to pBaseDir is deprecated
