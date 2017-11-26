@@ -55,4 +55,4 @@ function transform(pFromList) {
         .map(addIncidences(pFromList));
 }
 
-exports.transform = transform;
+module.exports.transform = transform;

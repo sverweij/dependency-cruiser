@@ -69,7 +69,7 @@ const TYPE2REPORTER      = {
  *                info  : the number of informational messages
  *              }
  */
-exports.cruise = (pFileDirArray, pOptions) => {
+function cruise (pFileDirArray, pOptions) {
     pOptions = normalizeOptions(
         validateOptions(pOptions)
     );
@@ -87,8 +87,10 @@ exports.cruise = (pFileDirArray, pOptions) => {
         pOptions,
         TYPE2REPORTER[pOptions.outputType]
     );
+}
+
+module.exports = {
+    cruise,
+    allExtensions: meta.allExtensions,
+    getAvailableTranspilers: meta.getAvailableTranspilers
 };
-
-exports.allExtensions = meta.allExtensions;
-
-exports.getAvailableTranspilers = meta.getAvailableTranspilers;

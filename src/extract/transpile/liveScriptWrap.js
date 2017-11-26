@@ -6,10 +6,12 @@ const livescript = tryRequire(
     require("../../../package.json").supportedTranspilers.livescript
 );
 
-exports.isAvailable = () => livescript !== false;
+module.exports = {
+    isAvailable: () => livescript !== false,
 
-/* istanbul ignore next */
-exports.transpile = pFile =>
-    livescript.compile(
-        pFile
-    );
+    /* istanbul ignore next */
+    transpile: pFile =>
+        livescript.compile(
+            pFile
+        )
+};

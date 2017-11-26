@@ -154,7 +154,7 @@ function runFileBasedTests(pModuleType) {
         });
     });
 }
-
+/* eslint mocha/no-hooks-for-single-case: off */
 describe("#processCLI", () => {
     before("set up", () => {
         resetOutputDir();

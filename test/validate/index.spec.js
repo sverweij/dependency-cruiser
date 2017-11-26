@@ -37,7 +37,7 @@ describe("validate - generic tests", () => {
         ).to.deep.equal({valid: true});
     });
 
-    it("is ok with the 'everything allowed' validation", () => {
+    it("is ok with the 'impossible to match allowed' validation", () => {
         expect(
             validate(
                 true,
@@ -387,7 +387,7 @@ describe("group matching - path group matched in a pathnot", () => {
     });
 });
 
-describe("group matching - path group matched in a pathnot", () => {
+describe("group matching - second path group matched in a pathnot", () => {
 
     it("group-two-to-pathnot - Disallows dependencies between peer folders", () => {
         expect(

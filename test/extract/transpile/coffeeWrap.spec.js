@@ -38,7 +38,7 @@ describe("coffeescript transpiler", () => {
         );
     });
 
-    it("transpiles literate coffeescript", () => {
+    it("transpiles literate coffeescript in markdown", () => {
         expect(
             litWrap.transpile(
                 fs.readFileSync("./test/extract/transpile/fixtures/markdownlitcoffee.coffee.md", 'utf8')

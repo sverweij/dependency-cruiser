@@ -1,4 +1,7 @@
 "use strict";
 
-exports.isAvailable = () => true;
-exports.transpile = pFile => pFile;
+module.exports = {
+    isAvailable: () => true,
+    transpile: pFile => pFile
+};
+
