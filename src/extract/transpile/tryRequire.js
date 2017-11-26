@@ -38,4 +38,5 @@ module.exports = (pModuleName, pSemVer) => {
   eslint
     global-require: 0,
     security/detect-non-literal-require: 0
+    import/no-dynamic-require: 0
  */

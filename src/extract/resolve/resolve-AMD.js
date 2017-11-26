@@ -1,8 +1,8 @@
 "use strict";
 
+const fs                       = require('fs');
 const path                     = require('path');
 const resolve                  = require('resolve');
-const fs                       = require('fs');
 const memoize                  = require('lodash/memoize');
 const determineDependencyTypes = require('./determineDependencyTypes');
 const readPackageDeps          = require('./readPackageDeps');

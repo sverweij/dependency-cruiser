@@ -1,7 +1,7 @@
 "use strict";
 
-const expect  = require("chai").expect;
 const fs      = require('fs');
+const expect  = require("chai").expect;
 const wrap    = require("../../../src/extract/transpile/coffeeWrap")();
 const litWrap = require("../../../src/extract/transpile/coffeeWrap")(true);
 
@@ -38,7 +38,7 @@ describe("coffeescript transpiler", () => {
         );
     });
 
-    it("transpiles literate coffeescript", () => {
+    it("transpiles literate coffeescript in markdown", () => {
         expect(
             litWrap.transpile(
                 fs.readFileSync("./test/extract/transpile/fixtures/markdownlitcoffee.coffee.md", 'utf8')

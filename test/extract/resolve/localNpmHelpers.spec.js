@@ -12,7 +12,7 @@ describe("localNpmHelpers.getPackageJson", () => {
         ).to.be.null;
     });
 
-    it("returns null if there's no package.json for the module", () => {
+    it("returns null if there's no package.json for the module (no basePath specified)", () => {
         expect(
             localNpmHelpers.getPackageJson(
                 'test/extract/fixtures/deprecated-node-module/require-something-deprecated'
@@ -20,7 +20,7 @@ describe("localNpmHelpers.getPackageJson", () => {
         ).to.be.null;
     });
 
-    it("returns null if there's no package.json for the module", () => {
+    it("returns null if there's no package.json for the module (basePath specified)", () => {
         expect(
             localNpmHelpers.getPackageJson(
                 './require-something-deprecated',

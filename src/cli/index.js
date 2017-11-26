@@ -1,12 +1,12 @@
 "use strict";
 
-const fs                 = require('fs');
+const fs                    = require('fs');
+const main                  = require('../main');
 const validateFileExistence = require('./validateFileExistence');
-const normalizeOptions   = require('./normalizeOptions');
-const initRules          = require('./initRules');
-const main               = require('../main');
-const formatMetaInfo     = require('./formatMetaInfo');
-const defaults           = require('./defaults.json');
+const normalizeOptions      = require('./normalizeOptions');
+const initRules             = require('./initRules');
+const formatMetaInfo        = require('./formatMetaInfo');
+const defaults              = require('./defaults.json');
 
 function writeToFile(pOutputTo, pDependencyString) {
     try {

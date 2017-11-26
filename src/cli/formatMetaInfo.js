@@ -1,8 +1,8 @@
 "use strict";
 
-const main     = require("../main");
 const chalk   = require('chalk');
 const figures = require('figures');
+const main    = require("../main");
 
 function bool2Symbol(pBool) {
     return pBool ? chalk.green(figures.tick) : chalk.red(figures.cross);

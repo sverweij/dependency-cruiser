@@ -1,15 +1,16 @@
 "use strict";
 
 const chai                    = require('chai');
-const expect                  = chai.expect;
 const extract                 = require('../../src/extract');
+const depSchema               = require('../../src/extract/jsonschema.json');
 const cjsRecursiveFixtures    = require('./fixtures/cjs-recursive.json');
 const deprecationFixtures     = require('./fixtures/deprecated-node-module.json');
 const bundledFixtures         = require('./fixtures/bundled-dependencies.json');
 const amdRecursiveFixtures    = require('./fixtures/amd-recursive.json');
 const tsRecursiveFixtures     = require('./fixtures/ts-recursive.json');
 const coffeeRecursiveFixtures = require('./fixtures/coffee-recursive.json');
-const depSchema               = require('../../src/extract/jsonschema.json');
+
+const expect = chai.expect;
 
 chai.use(require('chai-json-schema'));
 

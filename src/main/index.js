@@ -2,13 +2,13 @@
 
 const extract          = require("../extract");
 const meta             = require("../extract/transpile/meta");
-const validateRuleSet  = require("./ruleSet/validate");
-const normalizeRuleSet = require("./ruleSet/normalize");
 const reportHtml       = require("../report/htmlReporter");
 const reportJson       = require("../report/jsonReporter");
 const reportDot        = require("../report/dotReporter");
 const reportCsv        = require("../report/csvReporter");
 const reportErr        = require("../report/errReporter");
+const validateRuleSet  = require("./ruleSet/validate");
+const normalizeRuleSet = require("./ruleSet/normalize");
 const validateOptions  = require("./options/validate");
 const normalizeOptions = require("./options/normalize");
 
@@ -69,7 +69,7 @@ const TYPE2REPORTER      = {
  *                info  : the number of informational messages
  *              }
  */
-exports.cruise = (pFileDirArray, pOptions) => {
+function cruise (pFileDirArray, pOptions) {
     pOptions = normalizeOptions(
         validateOptions(pOptions)
     );
@@ -87,8 +87,10 @@ exports.cruise = (pFileDirArray, pOptions) => {
         pOptions,
         TYPE2REPORTER[pOptions.outputType]
     );
+}
+
+module.exports = {
+    cruise,
+    allExtensions: meta.allExtensions,
+    getAvailableTranspilers: meta.getAvailableTranspilers
 };
-
-exports.allExtensions = meta.allExtensions;
-
-exports.getAvailableTranspilers = meta.getAvailableTranspilers;

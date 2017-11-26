@@ -1,5 +1,5 @@
-const normalizeOptions = require('../../../src/main/options/normalize');
 const expect           = require('chai').expect;
+const normalizeOptions = require('../../../src/main/options/normalize');
 
 describe("main/normalizeOptions", () => {
     it("ensures maxDepth is an int when passed an int", () => {

@@ -13,3 +13,5 @@ module.exports = (pLiterate) => ({
         return coffeeScript.compile(pFile, lOptions);
     }
 });
+
+/* eslint import/order: off */

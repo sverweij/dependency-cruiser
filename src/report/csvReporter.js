@@ -15,3 +15,5 @@ module.exports = pInput =>
             })
         }
     );
+
+/* eslint import/no-unassigned-import: 0 */

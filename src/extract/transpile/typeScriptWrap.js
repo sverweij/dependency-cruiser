@@ -5,15 +5,19 @@ const typescript = tryRequire(
     require("../../../package.json").supportedTranspilers.typescript
 );
 
-exports.isAvailable = () => typescript !== false;
+module.exports = {
+    isAvailable: () => typescript !== false,
 
-exports.transpile = pFile =>
-    typescript.transpileModule(
-        pFile,
-        {
-            compilerOptions: {
-                "target": "es2015",
-                "jsx": "react"
+    transpile: pFile =>
+        typescript.transpileModule(
+            pFile,
+            {
+                compilerOptions: {
+                    "target": "es2015",
+                    "jsx": "react"
+                }
             }
-        }
-    ).outputText;
+        ).outputText
+};
+
+/* eslint import/order: off */

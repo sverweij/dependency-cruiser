@@ -1,8 +1,9 @@
 const fs            = require('fs');
 const path          = require('path');
+const _defaults     = require('lodash/defaults');
 const ignore        = require('./ignore');
 const transpileMeta = require('./transpile/meta');
-const _defaults     = require('lodash/defaults');
+
 
 const SUPPORTED_EXTENSIONS = transpileMeta.scannableExtensions;
 

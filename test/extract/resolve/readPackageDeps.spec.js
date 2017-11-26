@@ -1,7 +1,7 @@
 "use strict";
 
-const expect = require("chai").expect;
 const path   = require("path");
+const expect = require("chai").expect;
 const read   = require("../../../src/extract/resolve/readPackageDeps");
 
 const FIXTUREDIR = "test/extract/resolve/fixtures/";
