@@ -2,9 +2,9 @@
 "use strict";
 
 const program    = require("commander");
+const semver     = require("semver");
 const processCLI = require("../src/cli");
 const $package   = require("../package.json");
-const semver     = require("semver");
 
 /* istanbul ignore if  */
 if (!semver.satisfies(process.versions.node, $package.engines.node)) {

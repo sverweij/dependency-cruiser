@@ -19,3 +19,5 @@ module.exports = {
             }
         ).outputText
 };
+
+/* eslint import/order: off */

@@ -1,11 +1,12 @@
 "use strict";
 const chai       = require('chai');
-const expect     = chai.expect;
 const main       = require("../../src/main");
+const depSchema  = require('../../src/extract/jsonschema.json');
 const tsFixture  = require('./fixtures/ts.json');
 const tsxFixture = require('./fixtures/tsx.json');
 const jsxFixture = require('./fixtures/jsx.json');
-const depSchema  = require('../../src/extract/jsonschema.json');
+
+const expect     = chai.expect;
 
 chai.use(require('chai-json-schema'));
 

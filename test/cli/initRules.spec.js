@@ -1,11 +1,11 @@
 "use strict";
-const chai         = require('chai');
-const expect       = chai.expect;
 const fs           = require('fs');
-const deleteDammit = require("./deleteDammit.utl");
+const chai         = require('chai');
 const initRules    = require("../../src/cli/initRules");
 const rulesSchema  = require('../../src/main/ruleSet/jsonschema.json');
+const deleteDammit = require("./deleteDammit.utl");
 
+const expect       = chai.expect;
 const RULES_FILE = ".dependency-cruiser.json";
 
 chai.use(require('chai-json-schema'));

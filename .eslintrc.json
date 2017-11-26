@@ -3,7 +3,8 @@
     "plugins": [
         "security",
         "mocha",
-        "node"
+        "node",
+        "import"
     ],
     "parserOptions": {
         "ecmaVersion": 6,
@@ -279,7 +280,45 @@
         "node/no-unpublished-require": "error",
         "node/no-unsupported-features": "error",
         "node/process-exit-as-throw": "error",
-        "node/shebang": "error"
+        "node/shebang": "error",
+
+        // imports
+        "import/no-unresolved": "error",
+        "import/named": "error",
+        "import/default": "error",
+        "import/namespace": "error",
+        "import/no-stricted-paths": "off",
+        "import/no-absolute-path": "error",
+        "import/no-dynamic-require": "error",
+        "import/no-internal-modules": "off",
+        "import/no-webpack-loader-syntax": "error",
+        
+        "import/export": "error",
+        "import/no-named-as-default": "error",
+        "import/no-named-as-default-member": "error",
+        "import/no-deprecated": "error",
+        "import/no-extraneous-dependencies": "error",
+        "import/no-mutable-exports": "error",
+        
+        "import/unambiguous": "off",
+        "import/no-commonjs": "off",
+        "import/no-amd": "error",
+        "import/no-nodejs-modules": "off",
+        
+        "import/first": "error",
+        "import/exports-last": "error",
+        "import/no-duplicates": "error",
+        "import/no-namespace": "error",
+        "import/extensions": "off",
+        "import/order": "error",
+        "import/newline-after-import": "error",
+        "import/prefer-default-export": "error",
+        "import/max-dependencies": ["error", {"max": 20}],
+        "import/no-unassigned-import": "error",
+        "import/no-named-default": "error",
+        "import/no-anonymous-default-export": "error"
+        // "import/group-exports": "error"
+        
     },
     "env": {
         "node": true,

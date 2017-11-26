@@ -11,8 +11,8 @@
   "scripts": {
     "depcruise": "./bin/dependency-cruise -X ^node_modules -x fixtures -v .dependency-cruiser-custom.json src bin/dependency-cruise test",
     "depcruise:graph": "./bin/dependency-cruise -x \"(^node_modules|^fs$|^path$)\" -T dot -v .dependency-cruiser-custom.json bin/dependency-cruise | dot -T svg > tmp_deps.svg",
-    "lint": "eslint bin src test",
-    "lint:fix": "eslint --fix bin src test",
+    "lint": "eslint bin/dependency-cruise src test",
+    "lint:fix": "eslint --fix bin/dependency-cruise src test",
     "nsp": "nsp check",
     "npm-check-updates": "ncu --upgrade",
     "postversion": "git push && git push --tags && npm publish",
@@ -42,6 +42,7 @@
     "chai-json-schema": "1.5.0",
     "coffee-script": "1.12.7",
     "eslint": "4.12.0",
+    "eslint-plugin-import": "^2.8.0",
     "eslint-plugin-mocha": "4.11.0",
     "eslint-plugin-node": "5.2.1",
     "eslint-plugin-security": "1.4.0",

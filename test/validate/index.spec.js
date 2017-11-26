@@ -1,9 +1,9 @@
 "use strict";
+const fs               = require('fs');
 const expect           = require('chai').expect;
 const validate         = require('../../src/validate');
 const normalizeRuleSet = require('../../src/main/ruleSet/normalize');
 const validateRuleSet  = require('../../src/main/ruleSet/validate');
-const fs               = require('fs');
 
 function _readRuleSet(pFileName) {
     return normalizeRuleSet(

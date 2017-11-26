@@ -1,7 +1,7 @@
 "use strict";
 
-const expect = require("chai").expect;
 const fs     = require('fs');
+const expect = require("chai").expect;
 const wrap  = require("../../../src/extract/transpile/typeScriptWrap");
 
 describe("typescript transpiler", () => {

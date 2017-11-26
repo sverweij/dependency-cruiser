@@ -1,7 +1,7 @@
 "use strict";
+const fs       = require('fs');
 const expect   = require('chai').expect;
 const validate = require('../../../src/main/ruleSet/validate');
-const fs       = require('fs');
 
 describe("ruleSetReader", () => {
     it("bails out on scary regexps in paths", () => {

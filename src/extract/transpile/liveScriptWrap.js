@@ -6,12 +6,14 @@ const livescript = tryRequire(
     require("../../../package.json").supportedTranspilers.livescript
 );
 
+/* istanbul ignore next */
 module.exports = {
     isAvailable: () => livescript !== false,
 
-    /* istanbul ignore next */
     transpile: pFile =>
         livescript.compile(
             pFile
         )
 };
+
+/* eslint import/order: off */

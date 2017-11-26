@@ -1,11 +1,11 @@
 "use strict";
-const expect       = require('chai').expect;
-const processCLI   = require("../../src/cli");
 const fs           = require("fs");
+const path         = require("path");
+const expect       = require('chai').expect;
+const intercept    = require("intercept-stdout");
+const processCLI   = require("../../src/cli");
 const tst          = require("../utl/testutensils");
 const deleteDammit = require("./deleteDammit.utl");
-const path         = require("path");
-const intercept    = require("intercept-stdout");
 
 const OUT_DIR      = "./test/cli/output";
 const FIX_DIR      = "./test/cli/fixtures";

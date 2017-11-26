@@ -1,11 +1,11 @@
 "use strict";
 
+const supportedTranspilers = require("../../../package.json").supportedTranspilers;
 const javaScriptWrap       = require("./javaScriptWrap");
 const typeScriptWrap       = require("./typeScriptWrap");
 const liveScriptWrap       = require("./liveScriptWrap");
 const coffeeWrap           = require("./coffeeWrap")();
 const litCoffeeWrap        = require("./coffeeWrap")(true);
-const supportedTranspilers = require("../../../package.json").supportedTranspilers;
 
 /*
   jsx - acorn_loose will handle this correctly when imports
