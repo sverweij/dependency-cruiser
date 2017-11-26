@@ -52,11 +52,11 @@ function matchRule(pFrom, pTo) {
          * also match \$, which they probably shouldn't) - but good enough for
          * now.
          */
-        return (!Boolean(pRule.from.path) ||
+        return (!pRule.from.path ||
                 pFrom.match(pRule.from.path)
-        ) && (!Boolean(pRule.from.pathNot) ||
+        ) && (!pRule.from.pathNot ||
                 !(pFrom.match(pRule.from.pathNot))
-        ) && (!Boolean(pRule.to.path) ||
+        ) && (!pRule.to.path ||
                 (lGroups.length > 0
                     ? pTo.resolved.match(replaceGroupPlaceholders(pRule.to.path, lGroups))
                     : pTo.resolved.match(pRule.to.path))
@@ -66,13 +66,13 @@ function matchRule(pFrom, pTo) {
                         ? pTo.resolved.match(replaceGroupPlaceholders(pRule.to.pathNot, lGroups))
                         : pTo.resolved.match(pRule.to.pathNot))
                 )
-        ) && (!pRule.to.hasOwnProperty("dependencyTypes") ||
+        ) && (!pRule.to.dependencyTypes ||
                 intersects(pTo.dependencyTypes, pRule.to.dependencyTypes)
         ) && (!pRule.to.hasOwnProperty("moreThanOneDependencyType") ||
                 pTo.dependencyTypes.length > 1
-        ) && (!pRule.to.hasOwnProperty("license") ||
+        ) && (!pRule.to.license ||
                 pTo.license && pTo.license.match(pRule.to.license)
-        ) && (!pRule.to.hasOwnProperty("licenseNot") ||
+        ) && (!pRule.to.licenseNot ||
                 pTo.license && !pTo.license.match(pRule.to.licenseNot)
         ) && propertyEquals(pTo, pRule, "couldNotResolve") &&
                  propertyEquals(pTo, pRule, "circular");
@@ -82,7 +82,7 @@ function matchRule(pFrom, pTo) {
 function validateAgainstRules(pRuleSet, pFrom, pTo) {
     let lMatchedRule = {};
 
-    if (pRuleSet.hasOwnProperty("allowed")){
+    if (pRuleSet.allowed){
         lMatchedRule = pRuleSet.allowed.find(matchRule(pFrom, pTo));
         if (!Boolean(lMatchedRule)){
             return {
@@ -94,7 +94,7 @@ function validateAgainstRules(pRuleSet, pFrom, pTo) {
             };
         }
     }
-    if (pRuleSet.hasOwnProperty("forbidden")){
+    if (pRuleSet.forbidden){
         lMatchedRule = pRuleSet.forbidden.find(matchRule(pFrom, pTo));
         if (Boolean(lMatchedRule)){
             return {
