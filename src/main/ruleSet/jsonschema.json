@@ -18,6 +18,36 @@
             "items": {
                 "$ref" :"#/definitions/RuleType"
             }
+        },
+        "options": {
+            "type": "object",
+            "description": "Runtime configuration options",
+            "additionalProperties": false,
+            "properties": {
+                "doNotFollow": {
+                    "type": "string",
+                    "description": "a regular expression for modules to include, but not follow further"
+                },
+                "exclude": {
+                    "type": "string",
+                    "description": "a regular expression for excluding modules"
+                },
+                "moduleSystems": {
+                    "type": "array",
+                    "description": "list of module systems to cruise. Defaults to [amd, cjs, es6]",
+                    "items": {
+                        "type": "string",
+                        "enum": [
+                            "amd",
+                            "cjs",
+                            "es6"
+                        ]
+                    }
+                },
+                "prefix": {
+                    "type": "string"
+                }
+            }
         }
     },
     "definitions": {

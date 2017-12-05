@@ -65,5 +65,8 @@
         "comment": "Warn in case there's circular dependencies",
         "from": {},
         "to": { "circular": true }
-    }]
+    }],
+    "options": {
+        "doNotFollow": "^node_modules"
+    }
 }

@@ -1,10 +1,11 @@
 "use strict";
 
-const safeRegex  = require('safe-regex');
-const Ajv        = require('ajv');
-const ruleSchema = require('./jsonschema.json');
+const safeRegex       = require('safe-regex');
+const Ajv             = require('ajv');
+const validateOptions = require('../options/validate');
+const ruleSchema      = require('./jsonschema.json');
 
-const ajv        = new Ajv();
+const ajv             = new Ajv();
 
 function validateAgainstSchema(pSchema, pRuleSet) {
     if (!ajv.validate(pSchema, pRuleSet)) {
@@ -18,7 +19,6 @@ function hasPath(pObject, pPath) {
     return pObject.hasOwnProperty(pPath[0]) &&
         pObject[pPath[0]].hasOwnProperty(pPath[1]);
 }
-
 
 function checkRuleSafety(pRule) {
     if (
@@ -57,6 +57,9 @@ module.exports = (pRuleSet) => {
     }
     if (pRuleSet.hasOwnProperty("forbidden")){
         pRuleSet.forbidden.forEach(checkRuleSafety);
+    }
+    if (pRuleSet.hasOwnProperty("options")){
+        validateOptions(pRuleSet.options);
     }
     return pRuleSet;
 };

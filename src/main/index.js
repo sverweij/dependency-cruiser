@@ -29,7 +29,7 @@ const TYPE2REPORTER      = {
  * {
  *  validate    : if true, will attempt to validate with the rules in rulesFile.
  *                Default false.
- *  ruleSet     : An object (or JSON string) containing the rules to validate
+ *  ruleSet     : An object containing the rules to validate
  *                against. The rules should adhere to the
  *                [ruleset schema](../src/main/ruleSet/jsonschema.json)
  *                The function with throw an Error when either
@@ -77,7 +77,7 @@ function cruise (pFileDirArray, pOptions) {
     if (Boolean(pOptions.ruleSet)){
         pOptions.ruleSet = normalizeRuleSet(
             validateRuleSet(
-                typeof pOptions.ruleSet === 'object' ? pOptions.ruleSet : JSON.parse(pOptions.ruleSet)
+                pOptions.ruleSet
             )
         );
     }

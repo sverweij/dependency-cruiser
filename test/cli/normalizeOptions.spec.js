@@ -73,7 +73,7 @@ describe("normalizeOptions", () => {
                 outputTo: "-",
                 outputType: "err",
                 rulesFile: "./test/cli/fixtures/rules.empty.json",
-                "ruleSet": "{}\n",
+                "ruleSet": {},
                 validate: true
             }
         );

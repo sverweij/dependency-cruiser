@@ -14,13 +14,14 @@
   - dependency-cruiser's [own rule set](../.dependency-cruiser-custom.json)
 
 ## The structure of a dependency cruiser rules file
-The rules file is in json format. It can contain two sections - `forbidden` and
-`allowed`:
+The rules file is in json format. It can contain three sections - `forbidden`,
+`allowed` and `options`:
 
 ```json
 {
     "forbidden": [],
-    "allowed": []
+    "allowed": [],
+    "options": {}
 }
 ```
 
@@ -33,6 +34,12 @@ for each violated rule.
 A list of rules that describe dependencies that are allowed. dependency-cruiser
 will emit the warning message 'not-in-allowed' for each dependency that does not
 at least one of them.
+
+### Options
+Some of the command line options, so you don't have to specify them on the 
+command line on each run. Currently supported: `doNotFollow`, `exclude`, 
+`moduleSystems` and `prefix`. See the [command line documentation](./cli.md)
+for the details.
 
 ## The structure of an individual rule
 

@@ -298,7 +298,7 @@ describe("#processCLI", () => {
                 ["test/cli/fixtures"],
                 {
                     validate: lValidationFileName,
-                    initRules: true
+                    init: true
                 }
             );
             unhookInterceptStdOut();

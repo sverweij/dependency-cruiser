@@ -23,7 +23,7 @@ Options:
   -T, --output-type <type>      output type - html|dot|err|json
                                 (default: err)
   -P, --prefix <prefix>         prefix to use for links in the svg reporter
-  --init-rules                  write a .dependency-cruiser.json with basic
+  --init                        write a .dependency-cruiser.json with basic
                                 validations to the current folder.
   -h, --help                    output usage information
 ```
