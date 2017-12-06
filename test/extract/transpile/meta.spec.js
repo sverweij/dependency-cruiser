@@ -5,7 +5,7 @@ const meta   = require("../../../src/extract/transpile/meta");
 const jsWrap = require("../../../src/extract/transpile/javaScriptWrap");
 const lsWrap = require("../../../src/extract/transpile/liveScriptWrap");
 
-describe("transpiler meta", () => {
+describe("transpiler meta (not-testable-in-node4)", () => {
     it("tells which extensions can be scanned", () => {
         expect(
             meta.scannableExtensions
@@ -26,7 +26,7 @@ describe("transpiler meta", () => {
         ).to.deep.equal(lsWrap);
     });
 
-    it("returns me the available transpilers", () => {
+    it("returns me the available transpilers (not-testable-in-node4)", () => {
         expect(
             meta.getAvailableTranspilers()
         ).to.deep.equal([{

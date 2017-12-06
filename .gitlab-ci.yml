@@ -49,7 +49,7 @@ test_async_node_4:
   - npm install
   - npm run lint
   - npm run depcruise
-  # - npm run test:cover - coffeescript doesn't support node 4 anymore
+  - npm run test:cover-node4 - coffeescript doesn't support node 4 anymore
   # - npm run nsp - nsp is not supported on node 4 anymore
  except:
   - tags

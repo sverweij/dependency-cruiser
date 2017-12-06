@@ -5,7 +5,7 @@ const expect  = require("chai").expect;
 const wrap    = require("../../../src/extract/transpile/coffeeWrap")();
 const litWrap = require("../../../src/extract/transpile/coffeeWrap")(true);
 
-describe("coffeescript transpiler", () => {
+describe("coffeescript transpiler (not-testable-in-node4)", () => {
     it("tells the coffeescript transpiler is available", () => {
         expect(
             wrap.isAvailable()
