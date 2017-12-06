@@ -1,31 +1,43 @@
-var extend = function(child, parent) { for (var key in parent) { if (hasProp.call(parent, key)) child[key] = parent[key]; } function ctor() { this.constructor = child; } ctor.prototype = parent.prototype; child.prototype = new ctor(); child.__super__ = parent.prototype; return child; },
-  hasProp = {}.hasOwnProperty;
+// # Literate programming - .litcoffee extension
 
+// CoffeeScript supports literate programming - either use .litcoffee or
+// .coffee.md as extension and it'll magically filter out the code from
+// between the documentation.
+
+// ## The Ching class
+// Here's an _extremely_ simple base class - we'll just export it and later on
+// it'll be extended to Ka.
 export var Ching = (function() {
   var message;
 
-  message = "nothing much";
+  class Ching {
+    constructor(message1) {
+      this.message = message1;
+    }
 
-  function Ching(message1) {
-    this.message = message1;
-  }
+  };
+
+  message = "nothing much";
 
   return Ching;
 
 })();
 
-export var Ka = (function(superClass) {
+export var Ka = (function() {
   var NAME;
 
-  extend(Ka, superClass);
+  // ## The Ka class
+  // It's just dummy stuff, but you can see the potential here
+  class Ka extends Ching {
+    constructor(message1) {
+      super(message);
+      this.message = message1;
+    }
+
+  };
 
   NAME = "FatalError";
 
-  function Ka(message1) {
-    this.message = message1;
-    Ka.__super__.constructor.call(this, message);
-  }
-
   return Ka;
 
-})(Ching);
+})();

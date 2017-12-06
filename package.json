@@ -14,7 +14,7 @@
     "lint": "eslint bin/dependency-cruise src test",
     "lint:fix": "eslint --fix bin/dependency-cruise src test",
     "nsp": "nsp check",
-    "npm-check-updates": "ncu --upgrade --reject coffeescript",
+    "npm-check-updates": "ncu --upgrade",
     "postversion": "git push && git push --tags && npm publish",
     "preversion": "test `git branch | grep \"^* [a-zA-Z]\" | cut -c 3-` = 'master'",
     "test": "mocha --bail -R dot test/*/*.spec.js test/*/*/*.spec.js",
@@ -40,9 +40,9 @@
   "devDependencies": {
     "chai": "4.1.2",
     "chai-json-schema": "1.5.0",
-    "coffeescript": "1.12.7",
+    "coffeescript": "2.0.3",
     "eslint": "4.12.1",
-    "eslint-plugin-import": "^2.8.0",
+    "eslint-plugin-import": "2.8.0",
     "eslint-plugin-mocha": "4.11.0",
     "eslint-plugin-node": "5.2.1",
     "eslint-plugin-security": "1.4.0",
@@ -79,7 +79,7 @@
   },
   "supportedTranspilers": {
     "coffee-script": ">=1.0.0 <2.0.0",
-    "coffeescript": ">=1.0.0 <2.0.0",
+    "coffeescript": ">=1.0.0 <3.0.0",
     "livescript": ">=1.0.0 <2.0.0",
     "typescript": ">=2.0.0 <3.0.0"
   }
