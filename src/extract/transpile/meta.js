@@ -27,7 +27,9 @@ const extension2wrapper = {
     ".ls"        : liveScriptWrap,
     ".coffee"    : coffeeWrap,
     ".litcoffee" : litCoffeeWrap,
-    ".coffee.md" : litCoffeeWrap
+    ".coffee.md" : litCoffeeWrap,
+    ".csx"       : coffeeWrap,
+    ".cjsx"      : coffeeWrap
 };
 
 const transpiler2wrapper = {
