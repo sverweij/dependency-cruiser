@@ -9,6 +9,9 @@ jsx works out of the box
 ## I use React, but with TypeScript and tsx. That works out of the box too?
 Yep.
 
+## I use the CoffeeScript variant of jsx (csx, cjsx)
+Works out of the box
+
 ## Does this mean dependency-cruiser installs transpilers for all these languages?
 No.
 

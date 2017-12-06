@@ -42,7 +42,7 @@ describe("gatherInitial", () => {
         );
     });
 
-    it("expands and concats the scannable files in two folders", () => {
+    it("expands and concats the scannable files in two folders (not-testable-in-node4)", () => {
         expect(
             gather([
                 "test/extract/fixtures/ts",
@@ -64,7 +64,7 @@ describe("gatherInitial", () => {
         );
     });
 
-    it("expands and concats the scannable files in two folders + a separate file", () => {
+    it("expands and concats the scannable files in two folders + a separate file (not-testable-in-node4)", () => {
         expect(
             gather([
                 "test/extract/fixtures/ts",
@@ -88,7 +88,7 @@ describe("gatherInitial", () => {
         );
     });
 
-    it("filters the 'excluded' pattern from the collection", () => {
+    it("filters the 'excluded' pattern from the collection (not-testable-in-node4)", () => {
         expect(
             gather([
                 "test/extract/fixtures/ts",

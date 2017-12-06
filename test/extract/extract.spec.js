@@ -77,7 +77,7 @@ describe('AMD - with bangs', () => {
 });
 
 describe('TypeScript - ', () => tsFixtures.forEach(runFixture));
-describe('CoffeeScript - ', () => coffeeFixtures.forEach(runFixture));
+describe('CoffeeScript - (not-testable-in-node4)', () => coffeeFixtures.forEach(runFixture));
 
 describe('Error scenarios - ', () => {
     it('Does not raise an exception on syntax errors (because we\'re on the loose parser)', () => {
