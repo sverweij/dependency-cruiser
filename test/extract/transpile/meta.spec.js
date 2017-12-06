@@ -32,6 +32,10 @@ describe("transpiler meta", () => {
             "version": ">=1.0.0 <2.0.0",
             "available": true
         }, {
+            "name": "coffeescript",
+            "version": ">=1.0.0 <2.0.0",
+            "available": true
+        }, {
             "name": "livescript",
             "version": ">=1.0.0 <2.0.0",
             "available": false

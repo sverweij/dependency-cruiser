@@ -33,6 +33,7 @@ const extension2wrapper = {
 const transpiler2wrapper = {
     "javascript"    : javaScriptWrap,
     "coffee-script" : coffeeWrap,
+    "coffeescript"  : coffeeWrap,
     "livescript"    : liveScriptWrap,
     "typescript"    : typeScriptWrap
 };
