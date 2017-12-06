@@ -47,4 +47,14 @@ describe("coffeescript transpiler", () => {
             fs.readFileSync("./test/extract/transpile/fixtures/markdownlitcoffee.js", 'utf8')
         );
     });
+
+    it("transpiles jsx'y coffeescript", () => {
+        expect(
+            wrap.transpile(
+                fs.readFileSync("./test/extract/transpile/fixtures/csx.cjsx", 'utf8')
+            )
+        ).to.equal(
+            fs.readFileSync("./test/extract/transpile/fixtures/csx.jsx", 'utf8')
+        );
+    });
 });
