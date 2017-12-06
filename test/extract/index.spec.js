@@ -34,7 +34,10 @@ describe('Deprecation - ', () => deprecationFixtures.forEach(runRecursiveFixture
 describe('Bundled - ', () => bundledFixtures.forEach(runRecursiveFixture));
 describe('AMD recursive - ', () => amdRecursiveFixtures.forEach(runRecursiveFixture));
 describe('TypeScript recursive - ', () => tsRecursiveFixtures.forEach(runRecursiveFixture));
-describe('CoffeeScript recursive - (not-testable-in-node4)', () => coffeeRecursiveFixtures.forEach(runRecursiveFixture));
+describe(
+    'CoffeeScript recursive - (not-testable-in-node4)',
+    () => coffeeRecursiveFixtures.forEach(runRecursiveFixture)
+);
 
 describe('Max depth', () => {
     it('returns the complete graph when max-depth is not specified', () => {
