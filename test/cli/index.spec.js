@@ -283,7 +283,7 @@ describe("#processCLI", () => {
             );
         });
 
-        it("dependency-cruise --init-rules will generate a rules file and tells that back on stdout", () => {
+        it("dependency-cruise --init will generate a rules file and tells that back on stdout", () => {
             let lCapturedStdout = "";
             const lValidationFileName = "test/cli/output/some-dependency-cruiser-config.json";
             const unhookInterceptStdOut = intercept(pText => {

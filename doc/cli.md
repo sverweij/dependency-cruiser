@@ -157,7 +157,7 @@ For more information about writing rules see the [tutorial](rules-tutorial.md) a
 [rules-reference](rules-reference.md). For an easy set up use ...
 
 
-### `--init-rules`
+### `--init`
 This creates a `.dependency-cruiser.json` with some useful rules in it to the
 current folder and exits. use with `--validate`
 
