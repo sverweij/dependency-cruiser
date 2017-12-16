@@ -1,3 +1,4 @@
+
 {
   "ignore": [
     "src/report/*.template.js"
@@ -5,10 +6,15 @@
   "test": [
     "test/**"
   ],
+  "critics": {
+    "wc": { 
+      "limit": 250
+    }
+  },
   "dependencies": {
     "unused-ignores": [
         "typescript",
-        "coffee-script"
+        "coffeescript"
     ]
   }
 }
