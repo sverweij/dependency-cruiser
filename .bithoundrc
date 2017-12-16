@@ -1,14 +1,21 @@
+
 {
   "ignore": [
-    "src/report/*.template.js"
+    "src/report/*.template.js",
+    "test/extract/fixtures/**"
   ],
   "test": [
     "test/**"
   ],
+  "critics": {
+    "wc": { 
+      "limit": 6000
+    }
+  },
   "dependencies": {
     "unused-ignores": [
         "typescript",
-        "coffee-script"
+        "coffeescript"
     ]
   }
 }
