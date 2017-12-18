@@ -218,6 +218,7 @@ src/main/options/normalize.js: \
 	src/main/options/defaults.json
 
 src/main/ruleSet/validate.js: \
+	src/main/options/validate.js \
 	src/main/ruleSet/jsonschema.json
 
 # cjs dependencies
@@ -362,6 +363,7 @@ src/main/options/normalize.js: \
 	src/main/options/defaults.json
 
 src/main/ruleSet/validate.js: \
+	src/main/options/validate.js \
 	src/main/ruleSet/jsonschema.json
 
 test/cli/index.spec.js: \
