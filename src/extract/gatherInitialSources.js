@@ -1,6 +1,5 @@
 const fs            = require('fs');
 const path          = require('path');
-const _defaults     = require('lodash/defaults');
 const ignore        = require('./ignore');
 const transpileMeta = require('./transpile/meta');
 
@@ -21,18 +20,31 @@ function gatherScannableFilesFromDir (pDirName, pOptions) {
         }, []);
 }
 
+/**
+ * Returns an array of strings, representing paths to files to be gathered
+ *
+ * If an entry in the array passed is a (path to a) directory, it recursively
+ * scans that directory for files with a scannable extension.
+ * If an entry is a path to a file it just adds it.
+ *
+ * Files and directories are assumed to be either absolute, or relative to the
+ * current working directory.
+ *
+ * @param  {array} pFileDirArray an array of strings, representing paths to
+ *                               files or directories to be gathered
+ * @param  {object} pOptions     (optional) object with attributes
+ *                               - exclude - regexp of a path to exclude being
+ *                                 gathered
+ * @return {array}               an array of strings, representing paths to
+ *                               files to be gathered.
+ */
 module.exports = (pFileDirArray, pOptions) => {
-    pOptions = _defaults(
-        pOptions,
-        {
-            baseDir: process.cwd(),
-            moduleSystems: ["cjs", "es6", "amd"]
-        }
-    );
+    const lOptions = Object.assign({baseDir: process.cwd()}, pOptions);
+
     return pFileDirArray.reduce(
         (pAll, pThis) => {
-            if (fs.statSync(path.join(pOptions.baseDir, pThis)).isDirectory()) {
-                return pAll.concat(gatherScannableFilesFromDir(pThis, pOptions));
+            if (fs.statSync(path.join(lOptions.baseDir, pThis)).isDirectory()) {
+                return pAll.concat(gatherScannableFilesFromDir(pThis, lOptions));
             } else {
                 return pAll.concat(pThis);
             }

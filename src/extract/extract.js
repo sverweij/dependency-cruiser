@@ -12,6 +12,16 @@ const extractES6Dependencies      = require('./extract-ES6');
 const extractCommonJSDependencies = require('./extract-commonJS');
 const extractAMDDependencies      = require('./extract-AMD');
 
+/**
+ * Returns the extension of the given file name path.
+ *
+ * Just using path.extname would be fine for most cases,
+ * except for coffeescript, where a markdown extension can
+ * mean literate coffeescript.
+ *
+ * @param {string} pFileName path to the file to be parsed
+ * @return {string}          extension
+ */
 function getExtension(pFileName) {
     let lRetval = path.extname(pFileName);
 
@@ -21,7 +31,17 @@ function getExtension(pFileName) {
     return lRetval;
 }
 
-function getASTBare(pFileName) {
+/**
+ * Returns the abstract syntax tree of the module identified by the passed
+ * file name. It obtains this by (1) transpiling the contents of the file
+ * into javascript (if necessary) (2) parsing it.
+ *
+ * If parsing fails we fall back to acorn's 'loose' parser
+ *
+ * @param {string} pFileName path to the file to be parsed
+ * @returns {object}         the abstract syntax tree
+ */
+function getAST(pFileName) {
     const lFile = transpile(
         getExtension(pFileName),
         fs.readFileSync(pFileName, 'utf8')
@@ -33,7 +53,7 @@ function getASTBare(pFileName) {
         return acorn_loose.parse_dammit(lFile, {sourceType: 'module'});
     }
 }
-const getAST = _.memoize(getASTBare);
+const getASTCached = _.memoize(getAST);
 
 
 /**
@@ -62,26 +82,26 @@ const getAST = _.memoize(getASTBare);
  */
 module.exports = (pFileName, pOptions) => {
     try {
-        pOptions = _.defaults(
-            pOptions,
+        const lOptions = Object.assign(
             {
                 baseDir: process.cwd(),
                 moduleSystems: ["cjs", "es6", "amd"]
-            }
+            },
+            pOptions
         );
 
-        const lAST = getAST(path.join(pOptions.baseDir, pFileName));
+        const lAST = getASTCached(path.join(lOptions.baseDir, pFileName));
         let lDependencies = [];
 
-        if (pOptions.moduleSystems.indexOf("cjs") > -1){
+        if (lOptions.moduleSystems.indexOf("cjs") > -1){
             extractCommonJSDependencies(lAST, lDependencies);
         }
 
-        if (pOptions.moduleSystems.indexOf("es6") > -1){
+        if (lOptions.moduleSystems.indexOf("es6") > -1){
             extractES6Dependencies(lAST, lDependencies);
         }
 
-        if (pOptions.moduleSystems.indexOf("amd") > -1){
+        if (lOptions.moduleSystems.indexOf("amd") > -1){
             extractAMDDependencies(lAST, lDependencies);
         }
 
@@ -92,11 +112,11 @@ module.exports = (pFileName, pOptions) => {
                 pDependency => {
                     const lResolved = resolve(
                         pDependency,
-                        pOptions.baseDir,
-                        path.join(pOptions.baseDir, path.dirname(pFileName))
+                        lOptions.baseDir,
+                        path.join(lOptions.baseDir, path.dirname(pFileName))
                     );
-                    const lMatchesDoNotFollow = Boolean(pOptions.doNotFollow)
-                        ? RegExp(pOptions.doNotFollow, "g").test(lResolved.resolved)
+                    const lMatchesDoNotFollow = Boolean(lOptions.doNotFollow)
+                        ? RegExp(lOptions.doNotFollow, "g").test(lResolved.resolved)
                         : false;
 
                     return Object.assign(
@@ -110,7 +130,7 @@ module.exports = (pFileName, pOptions) => {
                     );
                 }
             )
-            .filter(pDep => ignore(pDep.resolved, pOptions.exclude))
+            .filter(pDep => ignore(pDep.resolved, lOptions.exclude))
             .value();
     } catch (e) {
         throw new Error(`Extracting dependencies ran afoul of...\n\n  ${e.message}\n... in ${pFileName}\n\n`);

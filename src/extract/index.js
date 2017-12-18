@@ -152,8 +152,7 @@ function addCircularityCheckToGraph (pDependencies) {
 
 module.exports = (pFileDirArray, pOptions, pCallback) => {
     const lCallback = pCallback ? pCallback : (pInput => pInput);
-
-    pOptions = Object.assign(
+    const lOptions = Object.assign(
         {
             maxDepth: 0
         },
@@ -161,18 +160,18 @@ module.exports = (pFileDirArray, pOptions, pCallback) => {
     );
 
     let lDependencies = _(
-        extractFileDirArray(pFileDirArray, pOptions).reduce(complete, [])
+        extractFileDirArray(pFileDirArray, lOptions).reduce(complete, [])
     ).uniqBy(pDependency => pDependency.source)
         .value();
 
-    if (circularityDetectionNecessary(pOptions)){
+    if (circularityDetectionNecessary(lOptions)){
         lDependencies = addCircularityCheckToGraph(lDependencies);
     }
 
     lDependencies = addValidations(
         lDependencies,
-        pOptions.validate,
-        pOptions.ruleSet
+        lOptions.validate,
+        lOptions.ruleSet
     );
 
     return lCallback(
@@ -182,7 +181,7 @@ module.exports = (pFileDirArray, pOptions, pCallback) => {
                 Object.assign(
                     summarize(lDependencies),
                     {
-                        optionsUsed: makeOptionsPresentable(pOptions)
+                        optionsUsed: makeOptionsPresentable(lOptions)
                     }
                 )
         }

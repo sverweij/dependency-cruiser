@@ -13,14 +13,20 @@ const amdBangRequirejs  = require('./fixtures/amd-bang-requirejs.json');
 const amdBangCJSWrapper = require('./fixtures/amd-bang-CJSWrapper.json');
 
 function runFixture(pFixture) {
+    const lOptions = {};
+
+    if (pFixture.input.baseDir) {
+        lOptions.baseDir = pFixture.input.baseDir;
+    }
+    if (pFixture.input.moduleSystems) {
+        lOptions.moduleSystems = pFixture.input.moduleSystems;
+    }
+
     it(pFixture.title, () => {
         expect(
             extract(
                 pFixture.input.fileName,
-                {
-                    baseDir: pFixture.input.baseDir,
-                    moduleSystems: pFixture.input.moduleSystems
-                }
+                lOptions
             )
         ).to.deep.equal(
             pFixture.expected
