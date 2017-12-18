@@ -38,7 +38,7 @@ program
     .arguments("<files-or-directories>")
     .parse(process.argv);
 
-if (Boolean(program.args[0]) || program.info || program.initRules) {
+if (Boolean(program.args[0]) || program.info || program.init) {
     processCLI(
         program.args,
         program
