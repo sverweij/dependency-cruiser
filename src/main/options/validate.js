@@ -41,14 +41,21 @@ function validateMaxDepth(pDepth) {
     }
 }
 
-module.exports = (pOptions) => {
+function validate(pOptions) {
+    let lRetval = {};
+
     if (Boolean(pOptions)) {
         validateSystems(pOptions.moduleSystems);
         isSafeRegExp(pOptions.exclude);
         isSafeRegExp(pOptions.doNotFollow);
         validateOutputType(pOptions.outputType);
         validateMaxDepth(pOptions.maxDepth);
-        return pOptions;
+        if (pOptions.hasOwnProperty('ruleSet') && pOptions.ruleSet.options) {
+            lRetval = module.exports(pOptions.ruleSet.options);
+        }
+        return Object.assign(lRetval, pOptions);
     }
-    return {};
-};
+    return lRetval;
+}
+
+module.exports = validate;

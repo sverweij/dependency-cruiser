@@ -42,7 +42,7 @@ depcruise --exclude "^node_modules" --output-type dot src | dot -T svg > depende
 The easy way to get you started:
 
 ```shell
-depcruise --init-rules
+depcruise --init
 ```
 
 This will create a `.dependency-cruiser.json` with some rules that make sense

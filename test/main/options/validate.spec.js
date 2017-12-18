@@ -97,12 +97,49 @@ describe("validateOptions", () => {
         }
     });
 
-    it("passes when --exclude is passed an safe regex", () => {
+    it("passes when --exclude is passed a safe regex", () => {
         try {
             validateOptions({"exclude": "([A-Za-z]+)"});
             expect("to be here without throws happening").to.equal("to be here without throws happening");
         } catch (e) {
             expect("not to be here").to.equal(`still here, though: ${e}`);
         }
+    });
+
+    it("passes when --validate is passed a safe regex in ruleSet.exclude", () => {
+        try {
+            validateOptions({ruleSet:{options:{exclude: "([A-Za-z]+)"}}});
+            expect("to be here without throws happening").to.equal("to be here without throws happening");
+        } catch (e) {
+            expect("not to be here").to.equal(`still here, though: ${e}`);
+        }
+    });
+
+    it("throws when --validate is passed an unsafe regex in ruleSet.exclude", () => {
+        try {
+            validateOptions({ruleSet:{options:{exclude: "(.*)+"}}});
+            expect("not to be here").to.equal("still here, though");
+        } catch (e) {
+            expect(e.toString()).to.deep.equal(
+                "Error: The pattern '(.*)+' will probably run very slowly - cowardly refusing to run.\n"
+            );
+        }
+    });
+
+    it("command line options trump those passed in --validate ruleSet", () => {
+        const lOptions = validateOptions(
+            {exclude: "from the commandline", ruleSet:{options:{exclude: "from the ruleset"}}}
+        );
+
+        expect(lOptions.exclude).to.equal("from the commandline");
+    });
+
+    it("options passed in --validate ruleSet drip down to the proper options", () => {
+        const lOptions = validateOptions(
+            {doNotFollow: "from the commandline", ruleSet:{options:{exclude: "from the ruleset"}}}
+        );
+
+        expect(lOptions.exclude).to.equal("from the ruleset");
+        expect(lOptions.doNotFollow).to.equal("from the commandline");
     });
 });

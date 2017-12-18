@@ -23,7 +23,7 @@ Options:
   -T, --output-type <type>      output type - html|dot|err|json
                                 (default: err)
   -P, --prefix <prefix>         prefix to use for links in the svg reporter
-  --init-rules                  write a .dependency-cruiser.json with basic
+  --init                        write a .dependency-cruiser.json with basic
                                 validations to the current folder.
   -h, --help                    output usage information
 ```
@@ -157,7 +157,7 @@ For more information about writing rules see the [tutorial](rules-tutorial.md) a
 [rules-reference](rules-reference.md). For an easy set up use ...
 
 
-### `--init-rules`
+### `--init`
 This creates a `.dependency-cruiser.json` with some useful rules in it to the
 current folder and exits. use with `--validate`
 

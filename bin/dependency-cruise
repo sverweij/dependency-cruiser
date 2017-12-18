@@ -33,7 +33,7 @@ program
     .option("-T, --output-type <type>", `output type - html|dot|err|json
                               (default: err)`)
     .option("-P, --prefix <prefix>", "prefix to use for links in the svg reporter")
-    .option("--init-rules", `write a .dependency-cruiser.json with basic
+    .option("--init", `write a .dependency-cruiser.json with basic
                               validations to the current folder.`)
     .arguments("<files-or-directories>")
     .parse(process.argv);

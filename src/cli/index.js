@@ -58,7 +58,7 @@ module.exports = (pFileDirArray, pOptions) => {
     try {
         if (pOptions.info === true) {
             process.stdout.write(formatMetaInfo());
-        } else if (pOptions.initRules === true){
+        } else if (pOptions.init === true){
             initRules(normalizeOptions.determineRulesFileName(pOptions.validate));
             process.stdout.write(
                 `\n  Successfully created '${normalizeOptions.determineRulesFileName(pOptions.validate)}'\n\n`

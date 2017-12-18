@@ -42,7 +42,7 @@ module.exports = (pOptions) => {
 
     if (pOptions.hasOwnProperty("validate")){
         pOptions.rulesFile = determineRulesFileName(pOptions.validate);
-        pOptions.ruleSet   = fs.readFileSync(pOptions.rulesFile, 'utf8');
+        pOptions.ruleSet   = JSON.parse(fs.readFileSync(pOptions.rulesFile, 'utf8'));
     }
 
     pOptions.validate = pOptions.hasOwnProperty("validate");
