@@ -64,5 +64,5 @@ Like so:
     - add a key to the to the `TYPE2REPORTER` object with that module as value
 - In `bin/dependency-cruise`
     - add it to the documentation of the -T option
-- In `test/report` add unit tests that proves your reporter does what it
+- In `test/report` add unit tests that prove your reporter does what it
     intends.
