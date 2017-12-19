@@ -13,6 +13,24 @@
     perusal on the bottom of this file.
   - dependency-cruiser's [own rule set](../.dependency-cruiser-custom.json)
 
+
+## Contents
+1. [The structure of a dependency-cruiser rules file](#the-structure-of-a-dependency-cruiser-rules-file)
+    - [`forbidden`](#forbidden)
+    - [`allowed`](#allowed)
+    - [`options`](#options)
+2. [The structure of an individual rule](#the-structure-of-an-individual-rule)
+3. [Attributes](#attributes)
+    - [`path`](#path)
+    - [`pathNot`](#pathnot)
+    - [path specials](#path-specials)
+    - [`couldNotResolve`](#couldnotresolve)
+    - [`circular`](#circular)
+    - [`license` and `licenseNot`](#license-and-licenseNot)
+    - [`dependencyTypes`](#dependencytypes)
+    - [`moreThanOneDependencyType`](#more-than-one-dependencytype-per-dependency--moreThanOneDependencyType)
+4. [Starter rule set](#a-starter-rule-set)
+
 ## The structure of a dependency cruiser rules file
 The rules file is in json format. It can contain three sections - `forbidden`,
 `allowed` and `options`:
@@ -240,7 +258,7 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
 
 
-## dependencyTypes
+### dependencyTypes
 You might have spent some time wondering why something works on your machine,
 but not on other's. Only to discover you _did_ install a dependency, but
 _did not_ save it to package.json. Or you already had it in your devDependencies
@@ -295,7 +313,7 @@ This is a list of dependency types dependency-cruiser currently detects.
  unknown         | it's unknown what kind of dependency type this is - probably because the module could not be resolved in the first place | "loodash"
  undetermined    | the dependency fell through all detection holes. This could happen with amd dependencies - which have a whole jurasic park of ways to define where to resolve modules to | "veloci!./raptor"
 
-#### More than one dependencyType per dependency?
+#### More than one dependencyType per dependency? `moreThanOneDependencyType`
 With the flexible character of package.json it's totally possible to specify
 a package more than once - e.g. both in the `peerDependencies` and in the
 `dependencies`. Sometimes this is intentional (e.g. to make sure a plugin
@@ -320,7 +338,7 @@ When left out it doesn't matter how many dependency types a dependency has.
 false).
 
 
-# A starter rule set
+## A starter rule set
 ```json
 {
     "forbidden": [{
