@@ -84,7 +84,7 @@ dependency-cruise -v -T csv -f sample-dot-output.csv test/fixtures
 ## json
 This is there for the _persona_ 'Marty the maintainer', so he can debug things.
 ```sh
-dependency-cruise -v -f sample-dot-output.json test/fixtures
+dependency-cruise -T json -v -f sample-dot-output.json test/fixtures
 ```
 The result is rather voluminous, so here's just a link if you want to see it
 [assets/sample-json-output.json](https://raw.githubusercontent.com/sverweij/dependency-cruiser/master/doc/assets/sample-json-output.json).
