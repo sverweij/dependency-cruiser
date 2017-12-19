@@ -26,9 +26,9 @@
     - [path specials](#path-specials)
     - [`couldNotResolve`](#couldnotresolve)
     - [`circular`](#circular)
-    - [`license` and `licenseNot`](#license-and-licenseNot)
+    - [`license` and `licenseNot`](#license-and-licensenot)
     - [`dependencyTypes`](#dependencytypes)
-    - [`moreThanOneDependencyType`](#more-than-one-dependencytype-per-dependency--moreThanOneDependencyType)
+    - [`moreThanOneDependencyType`](#more-than-one-dependencytype-per-dependency-morethanonedependencytype)
 4. [Starter rule set](#a-starter-rule-set)
 
 ## The structure of a dependency cruiser rules file
@@ -43,17 +43,17 @@ The rules file is in json format. It can contain three sections - `forbidden`,
 }
 ```
 
-### Forbidden
+### `forbidden`
 A list of rules that describe dependencies that are not allowed.
 dependency-cruiser will emit a separate error (warning/ informational) messages
 for each violated rule.
 
-### Allowed
+### `allowed`
 A list of rules that describe dependencies that are allowed. dependency-cruiser
 will emit the warning message 'not-in-allowed' for each dependency that does not
 at least one of them.
 
-### Options
+### `options`
 Some of the command line options, so you don't have to specify them on the 
 command line on each run. Currently supported: `doNotFollow`, `exclude`, 
 `moduleSystems` and `prefix`. See the [command line documentation](./cli.md)
@@ -71,7 +71,7 @@ can contain multiple attributes - which are described in the next section.
 ```
 
 ## Attributes
-### path
+### `path`
 A regular expression an end of a dependency should match to be catched by this
 rule.
 
@@ -79,7 +79,7 @@ When path is in a `to` part of a rule it accepts the regular expression
 'group matching' special variables `$0`, `$1`, `$2`, ...  as well. See
 'group matching' below for an explanation & example.
 
-### pathNot
+### `pathNot`
 A regular expression an end of a dependency should NOT match to be catched by
 this rule.
 
@@ -176,7 +176,7 @@ business components breeds like a flock of rabbits. In stead, you can use
 ... which makes sure dependency-cruiser does not match stuff in the from folder
 currently being matched.
 
-### couldNotResolve
+### `couldNotResolve`
 Whether or not to match modules dependency-cruiser could not resolve (and
 probably aren't on disk). For this one too: leave out if you don't care either
 way.
@@ -192,7 +192,7 @@ section:
 }
 ```
 
-### circular
+### `circular`
 A boolean indicating whether or not to match module dependencies that end up
 where you started (a.k.a. circular dependencies). Leaving this out => you don't
 care either way.
@@ -214,7 +214,7 @@ up at itself.
 }
 ```
 
-### _license_ and _licenseNot_
+### `license` and `licenseNot`
 You can flag dependent modules that have licenses that are e.g. not compatible with your own license or with the policies within your company with
 `license` and `licenseNot`. Both take a regular expression that matches
 against the license string that goes with the dependency.
@@ -258,7 +258,7 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
 
 
-### dependencyTypes
+### `dependencyTypes`
 You might have spent some time wondering why something works on your machine,
 but not on other's. Only to discover you _did_ install a dependency, but
 _did not_ save it to package.json. Or you already had it in your devDependencies
@@ -294,7 +294,7 @@ Or to detect stuff you npm i'd without putting it in your package.json:
 If you don't specify dependencyTypes in a rule, dependency-cruiser will ignore
 them in the evaluation of that rule.
 
-### Ok - _unknown_, _npm-unknown_, _undetermined_ - I'm officially weirded out - what's that about?
+#### Ok - `unknown`, `npm-unknown`, `undetermined` - I'm officially weirded out - what's that about?
 
 This is a list of dependency types dependency-cruiser currently detects.
 
