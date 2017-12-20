@@ -5,14 +5,15 @@
 - This is a small reference guide to the elements you can use to write rules
   for dependency-cruiser. If you want a step-by-step introduction check the
   [rules _tutorial_](./rules-tutorial.md).
-- Be advised there is a [json schema](../src/validate/jsonschema.json)  
-  that describes the output format for your convenience. Dependency-cruiser
-  checks rule sets against that schema.
+- There is a [json schema](../src/validate/jsonschema.json)
+  that describes the output format. Dependency-cruiser
+  checks rule sets against it.
 - Some examples:
   - a [starter rule set](../src/cli/rules.starter.json) - duplicated for
     perusal on the bottom of this file.
   - dependency-cruiser's [own rule set](../.dependency-cruiser-custom.json)
-
+- Tip: run `depcruise --init` to create a .depdendency-cruiser.json with
+  some rules that make sense in most projects.
 
 ## Contents
 1. [The structure of a dependency-cruiser rules file](#the-structure-of-a-dependency-cruiser-rules-file)
@@ -20,7 +21,7 @@
     - [`allowed`](#allowed)
     - [`options`](#options)
 2. [The structure of an individual rule](#the-structure-of-an-individual-rule)
-3. [Attributes](#attributes)
+3. [Conditions](#conditions)
     - [`path`](#path)
     - [`pathNot`](#pathnot)
     - [path specials](#path-specials)
@@ -45,32 +46,88 @@ The rules file is in json format. It can contain three sections - `forbidden`,
 
 ### `forbidden`
 A list of rules that describe dependencies that are not allowed.
-dependency-cruiser will emit a separate error (warning/ informational) messages
+dependency-cruiser will emit a separate error (warning/ informational) message
 for each violated rule.
 
 ### `allowed`
-A list of rules that describe dependencies that are allowed. dependency-cruiser
+A list of rules that describe dependencies that are _allowed_. dependency-cruiser
 will emit the warning message 'not-in-allowed' for each dependency that does not
-at least one of them.
+satisfy at least one of them.
 
 ### `options`
-Some of the command line options, so you don't have to specify them on the 
-command line on each run. Currently supported: `doNotFollow`, `exclude`, 
-`moduleSystems` and `prefix`. See the [command line documentation](./cli.md)
-for the details.
+Some of the command line options, so you don't have to specify them on each run.
+The currently supported options are 
+[`doNotFollow`](./cli.md#--do-not-follow-dont-cruise-modules-adhering-to-this-pattern-any-further), 
+[`exclude`](./cli.md#--exclude-exclude-modules-from-being-cruised), 
+[`moduleSystems`](./cli.md#--module-systems) and 
+[`prefix`](./cli.md#--prefix-prefixing-links). 
+See the [command line documentation](./cli.md) for details.
 
 ## The structure of an individual rule
+An individual rule consists at least of a `from` and a `to` 
+attribute that contain one or more conditions that trigger the rule, so
+a minimal rule will look like this:
 
-An individual rule consists of a 'from' and a 'to' attribute. Each of these
-can contain multiple attributes - which are described in the next section.
 ```json
 {
-    "from": {},
-    "to": {}
+    "from"    : {},
+    "to"      : {}
 }
 ```
 
-## Attributes
+A rule within the 'allowed' section can also have a `comment` attribute
+which you can use to describe the rule. 
+
+Rules within the 'forbidden' section can have a `name` and a `severity`.
+
+```json
+{
+    "name"    : "kebab-cased-name",
+    "comment" : "(optional) description of the rule",
+    "severity": "warn",
+    "from"    : {},
+    "to"      : {}
+}
+```
+
+### `from` and `to`
+Conditions an end of a dependency should match to be caught by this
+rule. Leave it empty if you want any module to be matched.
+
+The [conditions](#conditions) section below describes them all.
+
+### `comment`
+You can use this field to document why the rule is there. It's not
+used in any rule logic.
+
+### `name`
+> (only available in the `forbidden` section )
+
+A short name for the rule - will appear in reporters to enable
+customers to quickly identify a violated rule. Try to keep them
+short, eslint style. E.g. 'not-to-core' for a rule forbidding
+dependencies on core modules, or 'not-to-unresolvable' for one
+that prevents dependencies on modules that probably don't exist.
+
+If you do not provide a name, dependency-cruiser will default it
+to `unnamed`.
+- suggested: short, kebab-case, unique
+- defaults to `unnamed`
+- will show up in reporters 
+- not used for 'allowed' rules, 
+
+### `severity`
+> (only available in the `forbidden` section )
+
+How severe a violation of a rule is. The 'error' severity will make
+some reporters (at least the `err` one) return a non-zero exit
+code, so if you want e.g. a build to stop when there's a rule
+violated: use that.
+
+The other values you can use are `info` and `warn`. If you leave it
+out dependency-cruiser will assume it to be `warn`.
+
+## Conditions
 ### `path`
 A regular expression an end of a dependency should match to be catched by this
 rule.
