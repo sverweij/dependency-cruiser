@@ -114,7 +114,8 @@ deep:
 dependency-cruise -x node_modules --max-depth 3 -T dot src | dot -T png > dependency-cruiser-max-depth-3.png
 ```
 Result:
-![dependency-cruiser cruised with max depth 3](real-world-samples/dependency-cruiser-max-depth-3.png)
+
+<img width="623" alt="dependency-cruiser cruised with max depth 3" src="real-world-samples/dependency-cruiser-max-depth-3.svg">
 
 ## `--validate`
 Validates against a list of rules in a rules file. This defaults to a file
