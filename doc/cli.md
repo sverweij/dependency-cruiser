@@ -28,9 +28,9 @@ Options:
   -h, --help                    output usage information
 ```
 
-## Output formats
+### `--output-type`: specify the output format
 
-### err
+#### err
 For use in build scripts, in combination with `--validate` e.g.
 
 ```sh
@@ -47,7 +47,7 @@ This will:
 See the _dependency-cruise_ target in the [Makefile](https://github.com/sverweij/dependency-cruiser/blob/master/Makefile#L95)
 for a real world example.
 
-### dot
+#### dot
 Supplying `dot` as output type will make dependency-cruiser write
 a GraphViz dot format directed graph. Typical use is in concert
 with _GraphViz dot_:
@@ -56,18 +56,18 @@ with _GraphViz dot_:
 dependency-cruise -x "^node_modules" -T dot src | dot -T svg > dependencygraph.svg
 ```
 
-### html
+#### html
 Write it to html with a dependency matrix instead:
 ```shell
 dependency-cruise -T html -f dependencies.html src
 ```
 
-### csv
+#### csv
 If you supply `csv` it will write the dependency matrix to a comma
 separated file - so you can import it into a spreadsheet program
 and analyze from there.
 
-## `--do-not-follow`: don't cruise modules adhering to this pattern any further
+### `--do-not-follow`: don't cruise modules adhering to this pattern any further
 If you _do_ want to see certain modules in your reports, but are not interested
 in these modules' dependencies, you'd pass the regular expression for those
 modules to the `--do-not-follow` (short: `-d`) option. A typical pattern you'd
@@ -77,7 +77,7 @@ use with this is "node_modules":
 dependency-cruise -d "node_modules" -T html -f deps-with-unfollowed-node_modules.html src
 ```
 
-## `--exclude`: exclude modules from being cruised
+### `--exclude`: exclude modules from being cruised
 If you don't want to see certain modules in your report (or not have them
 validated), you can exclude them by passing a regular expression to the
 `--exclude` (short: `-x`) option. E.g. to exclude `node_modules` from being
@@ -94,7 +94,7 @@ all modules with a file path starting with coverage, test or node_modules, you c
 dependency-cruise -x "^(coverage|test|node_modules)" -T html -f deps-without-stuffs.html src
 ```
 
-## `--max-depth`
+### `--max-depth`
 Only cruise the specified depth, counting from the specified root-module(s). This
 command is mostly useful in combination with visualisation output like _dot_ to
 keep the generated output to a manageable size.
@@ -103,26 +103,38 @@ Although totally up to you I advise you to not use this with the `err` reporter;
 you'll probably miss validating a dependency or two.
 
 This will cruise the dependencies of each file directly in the src folder, up
-to a depth of 3:
+to a depth of 1:
 ```sh
-dependency-cruise --max-depth 3 -T dot src | dot -T svg > depth_three.svg
+dependency-cruise --max-depth 1 -T dot bin/dependency-cruise | dot -T png > dependency-cruiser-max-depth-1.png
 ```
 
-This will cruise the dependencies of the dependency-cruiser command up till 3
-deep:
-```sh
-dependency-cruise -x node_modules --max-depth 3 -T dot src | dot -T png > dependency-cruiser-max-depth-3.png
-```
-Result:
-![dependency-cruiser cruised with max depth 3](real-world-samples/dependency-cruiser-max-depth-3.png)
+<img width="237" alt="max depth = 1" src="real-world-samples/dependency-cruiser-max-depth-1.png">
 
-## `--validate`
+With `--max-depth 2` it'll look like this:
+
+<img width="390" alt="max depth = 2" src="real-world-samples/dependency-cruiser-max-depth-2.png">
+
+And with `--max-depth 3` like this:
+
+<img width="623" alt="dependency-cruiser cruised with max depth 3" src="real-world-samples/dependency-cruiser-max-depth-3.png">
+
+
+### `--validate`
 Validates against a list of rules in a rules file. This defaults to a file
 called `.dependency-cruiser.json`, but you can specify your own rules file.
 
 ```shell
 dependency-cruise -x node_modules --validate my.rules.json
 ```
+
+> _Tip_: usually you don't need to specify the rules file. However if run 
+> `depcruise --validate src`, _src_ will be interpreted as the rules file.
+> which is probably is not whant you want. To prevent this place `--`
+> after the last option, like so:
+> ```
+> dependency-cruise --validate -- src
+> ```
+
 
 The file specifies a bunch of regular expressions pairs your dependencies
 should adhere to.
@@ -217,6 +229,10 @@ Extensions:
   ✔ .litcoffee
   ✔ .coffee.md
 ```
+
+### `--module-systems`
+Here you can pass a list of module systems dependency-cruiser should use
+to detect dependencies. It defaults to `amd, cjs, es6`.
 
 ### Cruising multiple files and directories in one go
 Just pass them as arguments. This, e.g. will cruise every file in the folders
