@@ -116,6 +116,7 @@ With `--max-depth 2` it'll look like this:
 
 And with `--max-depth 3` like this:
 
+
 <img width="623" alt="dependency-cruiser cruised with max depth 3" src="real-world-samples/dependency-cruiser-max-depth-3.png">
 
 
