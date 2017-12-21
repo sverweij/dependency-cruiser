@@ -12,7 +12,7 @@
   - a [starter rule set](../src/cli/rules.starter.json) - duplicated for
     perusal on the bottom of this file.
   - dependency-cruiser's [own rule set](../.dependency-cruiser-custom.json)
-- Tip: run `depcruise --init` to create a .depdendency-cruiser.json with
+- Tip: run `depcruise --init` to create a .dependency-cruiser.json with
   some rules that make sense in most projects.
 
 ## Contents
@@ -111,10 +111,6 @@ that prevents dependencies on modules that probably don't exist.
 
 If you do not provide a name, dependency-cruiser will default it
 to `unnamed`.
-- suggested: short, kebab-case, unique
-- defaults to `unnamed`
-- will show up in reporters 
-- not used for 'allowed' rules, 
 
 ### `severity`
 > (only available in the `forbidden` section )
