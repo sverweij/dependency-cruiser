@@ -92,10 +92,10 @@
             "to": { "circular": true }
         },{
             "name": "no-GPL-license",
-            "comment": "Our license (MIT) is not compatible with any form of GPL, so we are not allowed to use GPL licensed modules",
-            "severity": "error",
+            "comment": "Warn in case some dependency uses either GPL or APL (the licenses are OK, but your legal department might have 2nd thoughts about them)",
+            "severity": "warn",
             "from": {},
-            "to": { "license": "GPL" }
+            "to": { "license": "GPL|APL" }
         }],
     "options": {
         "exclude": "fixtures",
