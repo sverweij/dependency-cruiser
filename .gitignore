@@ -2,9 +2,7 @@
 .DS_Store
 *.swp
 *.swo
-src/*tmp*.*
-*tmp*.*
-*tmp*/**
+**tmp**
 
 # ide garbage
 .vscode
