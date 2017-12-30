@@ -7,7 +7,6 @@ cache:
 test_async_node_latest:
   image: node:latest
   script:
-   - rm -rf node_modules
    - npm install
    - npm run lint
    - npm run depcruise
@@ -19,7 +18,6 @@ test_async_node_latest:
 test_async_node_8:
   image: node:8
   script:
-   - rm -rf node_modules
    - npm install
    - npm run test:cover
   except:
@@ -28,7 +26,6 @@ test_async_node_8:
 test_async_node_6:
   image: node:6
   script:
-   - rm -rf node_modules
    - npm install
    - npm run test:cover
   except:
@@ -37,7 +34,6 @@ test_async_node_6:
 test_async_node_4:
  image: node:4
  script:
-  - rm -rf node_modules
   - npm install
   - npm run test:cover-node4 # - coffeescript doesn't support node 4 anymore
   # - npm run nsp - nsp is not supported on node 4 anymore
