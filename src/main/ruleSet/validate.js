@@ -15,20 +15,24 @@ function validateAgainstSchema(pSchema, pRuleSet) {
     }
 }
 
-function hasPath(pObject, pPath) {
-    return pObject.hasOwnProperty(pPath[0]) &&
-        pObject[pPath[0]].hasOwnProperty(pPath[1]);
+function hasPath(pObject, pSection, pCondition) {
+    return pObject.hasOwnProperty(pSection) &&
+        pObject[pSection].hasOwnProperty(pCondition);
+}
+
+function safeRule(pRule, pSection, pCondition) {
+    return !hasPath(pRule, pSection, pCondition) || safeRegex(pRule[pSection][pCondition]);
 }
 
 function checkRuleSafety(pRule) {
     if (
         !(
-            (!hasPath(pRule, ["from", "path"]) || safeRegex(pRule.from.path)) &&
-            (!hasPath(pRule, ["to", "path"]) || safeRegex(pRule.to.path)) &&
-            (!hasPath(pRule, ["from", "pathNot"]) || safeRegex(pRule.from.pathNot)) &&
-            (!hasPath(pRule, ["to", "pathNot"]) || safeRegex(pRule.to.pathNot)) &&
-            (!hasPath(pRule, ["to", "license"]) || safeRegex(pRule.to.license)) &&
-            (!hasPath(pRule, ["to", "licenseNot"]) || safeRegex(pRule.to.licenseNot))
+            safeRule(pRule, "from", "path") &&
+            safeRule(pRule, "to", "path") &&
+            safeRule(pRule, "from", "pathNot") &&
+            safeRule(pRule, "to", "pathNot") &&
+            safeRule(pRule, "to", "license") &&
+            safeRule(pRule, "to", "licenseNot")
         )
     ){
         throw new Error(
@@ -63,3 +67,7 @@ module.exports = (pRuleSet) => {
     }
     return pRuleSet;
 };
+
+
+/* think we can ignore object injection here because it's not a public function */
+/* eslint security/detect-object-injection: 0 */
