@@ -21,7 +21,7 @@ export var Ching = (function() {
 
   return Ching;
 
-})();
+}).call(this);
 
 export var Ka = (function() {
   var NAME;
@@ -40,4 +40,4 @@ export var Ka = (function() {
 
   return Ka;
 
-})();
+}).call(this);
