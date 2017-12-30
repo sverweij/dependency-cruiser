@@ -30,6 +30,7 @@ test_async_node_6:
    - npm run test:cover
   except:
    - tags
+   - master
 
 test_async_node_4:
  image: node:4
@@ -39,6 +40,7 @@ test_async_node_4:
   # - npm run nsp - nsp is not supported on node 4 anymore
  except:
   - tags
+  - master
 
 # publish:
 #  image: node:latest
