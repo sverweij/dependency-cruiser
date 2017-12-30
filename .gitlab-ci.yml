@@ -1,12 +1,11 @@
 cache:
   key: "$CI_JOB_NAME"
   untracked: true
+  paths:
+    - node_modules
 
 test_async_node_latest:
   image: node:latest
-  cache:
-    paths:
-    - node_modules/
   script:
    - rm -rf node_modules
    - npm install
@@ -19,9 +18,6 @@ test_async_node_latest:
 
 test_async_node_8:
   image: node:8
-  cache:
-    paths:
-    - node_modules/
   script:
    - rm -rf node_modules
    - npm install
@@ -31,9 +27,6 @@ test_async_node_8:
 
 test_async_node_6:
   image: node:6
-  cache:
-    paths:
-    - node_modules/
   script:
    - rm -rf node_modules
    - npm install
@@ -43,9 +36,6 @@ test_async_node_6:
 
 test_async_node_4:
  image: node:4
- cache:
-   paths:
-   - node_modules/
  script:
   - rm -rf node_modules
   - npm install
