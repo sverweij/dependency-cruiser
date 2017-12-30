@@ -8,6 +8,7 @@ test_async_node_latest:
     paths:
     - node_modules/
   script:
+   - rm -rf node_modules
    - npm install
    - npm run lint
    - npm run depcruise
@@ -22,6 +23,7 @@ test_async_node_8:
     paths:
     - node_modules/
   script:
+   - rm -rf node_modules
    - npm install
    - npm run test:cover
   except:
@@ -33,6 +35,7 @@ test_async_node_6:
     paths:
     - node_modules/
   script:
+   - rm -rf node_modules
    - npm install
    - npm run test:cover
   except:
@@ -44,6 +47,7 @@ test_async_node_4:
    paths:
    - node_modules/
  script:
+  - rm -rf node_modules
   - npm install
   - npm run test:cover-node4 # - coffeescript doesn't support node 4 anymore
   # - npm run nsp - nsp is not supported on node 4 anymore
