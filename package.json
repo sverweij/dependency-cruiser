@@ -78,6 +78,7 @@
   "engines": {
     "node": ">=4"
   },
+  "types": "types/dependency-cruiser.d.ts",
   "supportedTranspilers": {
     "coffee-script": ">=1.0.0 <2.0.0",
     "coffeescript": ">=1.0.0 <3.0.0",
