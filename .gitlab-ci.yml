@@ -1,8 +1,11 @@
+cache:
+  key: "$CI_JOB_NAME"
+  untracked: true
+  paths:
+    - node_modules
+
 test_async_node_latest:
   image: node:latest
-  cache:
-    paths:
-    - node_modules/
   script:
    - npm install
    - npm run lint
@@ -14,45 +17,30 @@ test_async_node_latest:
 
 test_async_node_8:
   image: node:8
-  cache:
-    paths:
-    - node_modules/
   script:
    - npm install
-   - npm run lint
-   - npm run depcruise
-   - npm run nsp
    - npm run test:cover
   except:
    - tags
 
 test_async_node_6:
   image: node:6
-  cache:
-    paths:
-    - node_modules/
   script:
    - npm install
-   - npm run lint
-   - npm run depcruise
-   - npm run nsp
    - npm run test:cover
   except:
    - tags
+   - master
 
 test_async_node_4:
  image: node:4
- cache:
-   paths:
-   - node_modules/
  script:
   - npm install
-  - npm run lint
-  - npm run depcruise
   - npm run test:cover-node4 # - coffeescript doesn't support node 4 anymore
   # - npm run nsp - nsp is not supported on node 4 anymore
  except:
   - tags
+  - master
 
 # publish:
 #  image: node:latest
