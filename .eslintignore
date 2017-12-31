@@ -4,3 +4,4 @@ tmp
 src/report/*.template.js
 test/*/fixtures/**
 test/*/*/fixtures/**
+types/**
