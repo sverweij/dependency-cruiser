@@ -206,18 +206,19 @@ you'd specify a rule like this to prevent accidents in the "forbidden" section:
 This will correctly flag relations from one folder to another, but also
 relations _within_ folders. It's possible to get around that by specifying it
 for each folder explicitly, leaving the current 'from' folder from the to
-list e.g.
-    from: search, to: upsell|check-out|view-trip|check-in,    
-    from: upsell, to: search|check-out|view-trip|check-in,    
-    ...
+list e.g.    
+_from: search, to: upsell|check-out|view-trip|check-in,_    
+_from: upsell, to: search|check-out|view-trip|check-in,_    
+ _..._
 
-But that'll grow old fast. Quadratically, to be precise. Especially when your
-business components breeds like a flock of rabbits. In stead, you can use
+That'll be heavy maintenance though; especially when your
+business components breed like a litter of rabbits. In stead, you can use
+group matching:
 
 ```json
 {
     "name": "no-inter-ubc",
-    "comment": "Don't allow relations between code in business components",
+    "comment": "Don't allow relations between business components",
     "severity": "error",
     "from": {"path": "^src/business-components/([^/]+)/.+"},
     "to": {
