@@ -1,18 +1,9 @@
 "use strict";
 
-const path             = require('path');
 const resolveAMDModule = require('./resolve-AMD');
 const resolveCJSModule = require('./resolve-commonJS');
 
 const isRelativeModuleName = pString => pString.startsWith(".");
-
-const ensurePosix = (pFilePath) => {
-    if (path.sep !== path.posix.sep) {
-        return pFilePath.split(path.sep).join(path.posix.sep);
-    }
-
-    return pFilePath;
-};
 
 /**
  * resolves the module name of the pDependency to a file on disk.
@@ -40,10 +31,10 @@ const ensurePosix = (pFilePath) => {
  */
 module.exports = (pDependency, pBaseDir, pFileDir) => {
     if (isRelativeModuleName(pDependency.moduleName)){
-        return ensurePosix(resolveCJSModule(pDependency.moduleName, pBaseDir, pFileDir));
+        return resolveCJSModule(pDependency.moduleName, pBaseDir, pFileDir);
     } else if (["cjs", "es6"].indexOf(pDependency.moduleSystem) > -1){
-        return ensurePosix(resolveCJSModule(pDependency.moduleName, pBaseDir, pFileDir));
+        return resolveCJSModule(pDependency.moduleName, pBaseDir, pFileDir);
     } else {
-        return ensurePosix(resolveAMDModule(pDependency.moduleName, pBaseDir, pFileDir));
+        return resolveAMDModule(pDependency.moduleName, pBaseDir, pFileDir);
     }
 };

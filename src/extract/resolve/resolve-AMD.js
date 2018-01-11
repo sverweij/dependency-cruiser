@@ -7,6 +7,7 @@ const memoize                  = require('lodash/memoize');
 const determineDependencyTypes = require('./determineDependencyTypes');
 const readPackageDeps          = require('./readPackageDeps');
 const localNpmHelpers          = require('./localNpmHelpers');
+const pathToPosix              = require('./pathToPosix');
 
 const fileExists = memoize(pFile => {
     try {
@@ -26,7 +27,7 @@ module.exports = (pModuleName, pBaseDir, pFileDir) => {
     // - [ ] or https://github.com/jaredhanson/amd-resolve ?
     // - [x] funky plugins (json!wappie, ./screeching-cat!sabertooth) -> fixed in 'extract'
     const lProbablePath = path.relative(
-        pBaseDir,
+        pathToPosix(pBaseDir),
         path.join(pFileDir, `${pModuleName}.js`)
     );
     const lDependency = {
