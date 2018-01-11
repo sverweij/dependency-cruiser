@@ -1,6 +1,6 @@
 "use strict";
 const fs           = require("fs");
-const path         = require("path");
+const path         = require("path").posix;
 const expect       = require('chai').expect;
 const intercept    = require("intercept-stdout");
 const processCLI   = require("../../src/cli");
