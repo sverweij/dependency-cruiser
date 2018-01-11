@@ -1,5 +1,5 @@
 const fs            = require('fs');
-const path          = require('path');
+const path          = require('path').posix;
 const ignore        = require('./ignore');
 const transpileMeta = require('./transpile/meta');
 

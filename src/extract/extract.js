@@ -1,7 +1,7 @@
 "use strict";
 
 const fs                          = require('fs');
-const path                        = require('path');
+const path                        = require('path').posix;
 const acorn                       = require('acorn');
 const acorn_loose                 = require('acorn/dist/acorn_loose');
 const _                           = require('lodash');

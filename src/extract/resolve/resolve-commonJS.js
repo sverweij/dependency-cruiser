@@ -1,6 +1,6 @@
 "use strict";
 
-const path                     = require('path');
+const path                     = require('path').posix;
 const resolve                  = require('resolve');
 const transpileMeta            = require('../transpile/meta');
 const determineDependencyTypes = require('./determineDependencyTypes');

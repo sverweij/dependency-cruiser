@@ -1,7 +1,7 @@
 "use strict";
 
 const fs                       = require('fs');
-const path                     = require('path');
+const path                     = require('path').posix;
 const resolve                  = require('resolve');
 const memoize                  = require('lodash/memoize');
 const determineDependencyTypes = require('./determineDependencyTypes');
