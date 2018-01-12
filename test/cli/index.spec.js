@@ -279,7 +279,7 @@ describe("#processCLI", () => {
             return expect(
                 lCapturedStderr
             ).to.contain(
-                "depcrecated"
+                "deprecated"
             );
         });
 
