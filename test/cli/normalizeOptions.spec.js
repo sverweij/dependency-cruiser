@@ -61,7 +61,7 @@ describe("normalizeOptions", () => {
         try {
             normalizeOptions({validate: true});
         } catch (e) {
-            expect(e.message).to.include("'.dependency-cruiser.json'");
+            expect(e.message).to.include(".dependency-cruiser.json'");
         }
     });
 

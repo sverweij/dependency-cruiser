@@ -250,7 +250,7 @@ describe("#processCLI", () => {
             return expect(
                 lCapturedStderr
             ).to.contain(
-                "ERROR: Writing to 'test/cli/output/file/you/cant/write/to' didn't work. Error: ENOENT: no such file or directory, open 'test/cli/output/file/you/cant/write/to'"
+                "ERROR: Writing to 'test/cli/output/file/you/cant/write/to' didn't work. Error: ENOENT: no such file or directory, open"
             );
         });
 
