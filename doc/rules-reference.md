@@ -5,7 +5,7 @@
 - This is a small reference guide to the elements you can use to write rules
   for dependency-cruiser. If you want a step-by-step introduction check the
   [rules _tutorial_](./rules-tutorial.md).
-- There is a [json schema](../src/validate/jsonschema.json)
+- There is a [json schema](../src/main/ruleSet/jsonschema.json)
   that describes the output format. Dependency-cruiser
   checks rule sets against it.
 - Some examples:
