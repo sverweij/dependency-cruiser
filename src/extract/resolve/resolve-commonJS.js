@@ -2,11 +2,11 @@
 
 const path                     = require('path').posix;
 const resolve                  = require('resolve');
+const pathToPosix              = require('../../utl/pathToPosix');
 const transpileMeta            = require('../transpile/meta');
 const determineDependencyTypes = require('./determineDependencyTypes');
 const readPackageDeps          = require('./readPackageDeps');
 const localNpmHelpers          = require('./localNpmHelpers');
-const pathToPosix              = require('./pathToPosix');
 
 const SUPPORTED_EXTENSIONS = transpileMeta.scannableExtensions;
 

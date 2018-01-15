@@ -1,6 +1,6 @@
 "use strict";
 
-const pathToPosix = require('../../extract/resolve/pathToPosix');
+const pathToPosix = require('../../utl/pathToPosix');
 const defaults    = require('./defaults.json');
 
 function uniq(pArray) {

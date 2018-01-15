@@ -4,10 +4,10 @@ const fs                       = require('fs');
 const path                     = require('path').posix;
 const resolve                  = require('resolve');
 const memoize                  = require('lodash/memoize');
+const pathToPosix              = require('../../utl/pathToPosix');
 const determineDependencyTypes = require('./determineDependencyTypes');
 const readPackageDeps          = require('./readPackageDeps');
 const localNpmHelpers          = require('./localNpmHelpers');
-const pathToPosix              = require('./pathToPosix');
 
 const fileExists = memoize(pFile => {
     try {
