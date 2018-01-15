@@ -7,7 +7,7 @@ const path = require('path');
  * This function is just to make dependency-cruiser's internal
  * representation consistent. This is the reason it doesn't have
  * exceptions for extended paths (\\my-cool-share\bladiebla)
- * and paths that contain non-ascii characters like e.g. 
+ * and paths that contain non-ascii characters like e.g.
  * sindresorhus/slash does.
  *
  * One consequence of this is that internal dependency-cruise
