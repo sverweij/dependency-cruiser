@@ -56,15 +56,15 @@ satisfy at least one of them.
 
 ### `options`
 Some of the command line options, so you don't have to specify them on each run.
-The currently supported options are 
-[`doNotFollow`](./cli.md#--do-not-follow-dont-cruise-modules-adhering-to-this-pattern-any-further), 
-[`exclude`](./cli.md#--exclude-exclude-modules-from-being-cruised), 
-[`moduleSystems`](./cli.md#--module-systems) and 
-[`prefix`](./cli.md#--prefix-prefixing-links). 
+The currently supported options are
+[`doNotFollow`](./cli.md#--do-not-follow-dont-cruise-modules-adhering-to-this-pattern-any-further),
+[`exclude`](./cli.md#--exclude-exclude-modules-from-being-cruised),
+[`moduleSystems`](./cli.md#--module-systems) and
+[`prefix`](./cli.md#--prefix-prefixing-links).
 See the [command line documentation](./cli.md) for details.
 
 ## The structure of an individual rule
-An individual rule consists at least of a `from` and a `to` 
+An individual rule consists at least of a `from` and a `to`
 attribute that contain one or more conditions that trigger the rule, so
 a minimal rule will look like this:
 
@@ -76,7 +76,7 @@ a minimal rule will look like this:
 ```
 
 A rule within the 'allowed' section can also have a `comment` attribute
-which you can use to describe the rule. 
+which you can use to describe the rule.
 
 Rules within the 'forbidden' section can have a `name` and a `severity`.
 
@@ -154,6 +154,10 @@ glob | regular expression | this expresses:
 `src/**/*` | `^src` | all files in the _src_ folder
 _not possible_ | `^src/([^/]+)/.+` | everything in the src tree - remember the matched folder name directly under src for later reference.
 
+#### forward slashes
+To make sure rules you specify run on all platforms, dependency-cruiser
+internally represents paths with forward slashes as path separators
+(`src/alez/houpe`).
 
 #### 'group matching'
 Sometimes you'll want to use a part of the path the 'from' part of your rule
