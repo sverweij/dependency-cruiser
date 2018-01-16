@@ -9,8 +9,8 @@
   },
   "main": "src/main/index.js",
   "scripts": {
-    "depcruise": "./bin/dependency-cruise --validate .dependency-cruiser-custom.json src bin/dependency-cruise test",
-    "depcruise:graph": "./bin/dependency-cruise --exclude \"(^node_modules|^fs$|^path$)\" --output-type dot --validate .dependency-cruiser-custom.json bin/dependency-cruise | dot -T svg > tmp_deps.svg",
+    "depcruise": "node ./bin/dependency-cruise --validate .dependency-cruiser-custom.json src bin/dependency-cruise test",
+    "depcruise:graph": "node ./bin/dependency-cruise --exclude \"(^node_modules|^fs$|^path$)\" --output-type dot --validate .dependency-cruiser-custom.json bin/dependency-cruise | dot -T svg > tmp_deps.svg",
     "lint": "eslint bin/dependency-cruise src test",
     "lint:fix": "eslint --fix bin/dependency-cruise src test",
     "nsp": "nsp check",
