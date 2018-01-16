@@ -154,7 +154,8 @@ src/extract/extract.js: \
 	src/extract/extract-commonJS.js \
 	src/extract/ignore.js \
 	src/extract/resolve/index.js \
-	src/extract/transpile/index.js
+	src/extract/transpile/index.js \
+	src/utl/pathToPosix.js
 
 src/extract/extract-AMD.js: \
 	src/extract/extract-commonJS.js
@@ -166,7 +167,8 @@ src/extract/resolve/index.js: \
 src/extract/resolve/resolve-AMD.js: \
 	src/extract/resolve/determineDependencyTypes.js \
 	src/extract/resolve/localNpmHelpers.js \
-	src/extract/resolve/readPackageDeps.js
+	src/extract/resolve/readPackageDeps.js \
+	src/utl/pathToPosix.js
 
 src/extract/resolve/determineDependencyTypes.js: \
 	src/extract/resolve/localNpmHelpers.js
@@ -175,7 +177,8 @@ src/extract/resolve/resolve-commonJS.js: \
 	src/extract/resolve/determineDependencyTypes.js \
 	src/extract/resolve/localNpmHelpers.js \
 	src/extract/resolve/readPackageDeps.js \
-	src/extract/transpile/meta.js
+	src/extract/transpile/meta.js \
+	src/utl/pathToPosix.js
 
 src/extract/transpile/meta.js: \
 	package.json \
@@ -215,7 +218,8 @@ src/report/htmlReporter.js: \
 	src/report/html.template.js
 
 src/main/options/normalize.js: \
-	src/main/options/defaults.json
+	src/main/options/defaults.json \
+	src/utl/pathToPosix.js
 
 src/main/ruleSet/validate.js: \
 	src/main/options/validate.js \
@@ -262,6 +266,7 @@ ALL_SRC=src/main/index.js \
 	src/report/html.template.js \
 	src/report/htmlReporter.js \
 	src/report/jsonReporter.js \
+	src/utl/pathToPosix.js \
 	src/validate/index.js
 # cjs dependencies
 test/cli/formatMetaInfo.spec.js: \
@@ -299,7 +304,8 @@ src/extract/extract.js: \
 	src/extract/extract-commonJS.js \
 	src/extract/ignore.js \
 	src/extract/resolve/index.js \
-	src/extract/transpile/index.js
+	src/extract/transpile/index.js \
+	src/utl/pathToPosix.js
 
 src/extract/extract-AMD.js: \
 	src/extract/extract-commonJS.js
@@ -311,7 +317,8 @@ src/extract/resolve/index.js: \
 src/extract/resolve/resolve-AMD.js: \
 	src/extract/resolve/determineDependencyTypes.js \
 	src/extract/resolve/localNpmHelpers.js \
-	src/extract/resolve/readPackageDeps.js
+	src/extract/resolve/readPackageDeps.js \
+	src/utl/pathToPosix.js
 
 src/extract/resolve/determineDependencyTypes.js: \
 	src/extract/resolve/localNpmHelpers.js
@@ -320,7 +327,8 @@ src/extract/resolve/resolve-commonJS.js: \
 	src/extract/resolve/determineDependencyTypes.js \
 	src/extract/resolve/localNpmHelpers.js \
 	src/extract/resolve/readPackageDeps.js \
-	src/extract/transpile/meta.js
+	src/extract/transpile/meta.js \
+	src/utl/pathToPosix.js
 
 src/extract/transpile/meta.js: \
 	package.json \
@@ -360,7 +368,8 @@ src/report/htmlReporter.js: \
 	src/report/html.template.js
 
 src/main/options/normalize.js: \
-	src/main/options/defaults.json
+	src/main/options/defaults.json \
+	src/utl/pathToPosix.js
 
 src/main/ruleSet/validate.js: \
 	src/main/options/validate.js \
@@ -465,6 +474,9 @@ test/report/errReporter.spec.js: \
 
 test/report/htmlReporter.spec.js: \
 	src/report/htmlReporter.js
+
+test/utl/pathToPosix.spec.js: \
+	src/utl/pathToPosix.js
 
 test/validate/index.spec.js: \
 	src/main/ruleSet/normalize.js \
