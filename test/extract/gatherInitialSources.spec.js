@@ -1,14 +1,19 @@
 "use strict";
 
-const expect = require('chai').expect;
-const gather = require('../../src/extract/gatherInitialSources');
+const expect      = require('chai').expect;
+const gather      = require('../../src/extract/gatherInitialSources');
+const pathToPosix = require('../../src/utl/pathToPosix');
+
+function p2p(pPath) {
+    return pathToPosix(pPath);
+}
 
 describe("gatherInitial", () => {
     it("one file stays one file", () => {
         expect(
             gather(["test/extract/fixtures/cjs/root_one.js"], {})
         ).to.deep.equal(
-            ["test/extract/fixtures/cjs/root_one.js"]
+            ["test/extract/fixtures/cjs/root_one.js"].map(p2p)
         );
     });
 
@@ -22,7 +27,7 @@ describe("gatherInitial", () => {
             [
                 "test/extract/fixtures/cjs/root_one.js",
                 "test/extract/fixtures/ts/index.ts"
-            ]
+            ].map(p2p)
         );
     });
 
@@ -38,7 +43,7 @@ describe("gatherInitial", () => {
                 "test/extract/fixtures/ts/sub/index.ts",
                 "test/extract/fixtures/ts/sub/kaching.ts",
                 "test/extract/fixtures/ts/sub/willBeReExported.ts"
-            ]
+            ].map(p2p)
         );
     });
 
@@ -60,7 +65,7 @@ describe("gatherInitial", () => {
                 "test/extract/fixtures/coffee/sub/index.coffee",
                 "test/extract/fixtures/coffee/sub/kaching.litcoffee",
                 "test/extract/fixtures/coffee/sub/willBeReExported.coffee.md"
-            ]
+            ].map(p2p)
         );
     });
 
@@ -84,7 +89,7 @@ describe("gatherInitial", () => {
                 "test/extract/fixtures/coffee/sub/index.coffee",
                 "test/extract/fixtures/coffee/sub/kaching.litcoffee",
                 "test/extract/fixtures/coffee/sub/willBeReExported.coffee.md"
-            ]
+            ].map(p2p)
         );
     });
 
@@ -104,7 +109,7 @@ describe("gatherInitial", () => {
                 "test/extract/fixtures/coffee/javascriptThing.js",
                 "test/extract/fixtures/coffee/sub/kaching.litcoffee",
                 "test/extract/fixtures/coffee/sub/willBeReExported.coffee.md"
-            ]
+            ].map(p2p)
         );
     });
 
