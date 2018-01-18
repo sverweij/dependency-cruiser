@@ -1,2 +1,2 @@
-var path = require("path").posix;
+var path = require("path");
 var depindir = require("./depindir");

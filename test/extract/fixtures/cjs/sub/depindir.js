@@ -1,1 +1,1 @@
-var path = require("path").posix;
+var path = require("path");
