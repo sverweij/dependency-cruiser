@@ -11,9 +11,9 @@ function p2p(pPath) {
 describe("gatherInitial", () => {
     it("one file stays one file", () => {
         expect(
-            gather(["test/extract/fixtures/cjs/root_one.js"], {})
+            gather(["test/extract/fixtures/cjs/root_one.js"], {}).map(p2p)
         ).to.deep.equal(
-            ["test/extract/fixtures/cjs/root_one.js"].map(p2p)
+            ["test/extract/fixtures/cjs/root_one.js"]
         );
     });
 
@@ -22,12 +22,12 @@ describe("gatherInitial", () => {
             gather([
                 "test/extract/fixtures/cjs/root_one.js",
                 "test/extract/fixtures/ts/index.ts"
-            ], {})
+            ], {}).map(p2p)
         ).to.deep.equal(
             [
                 "test/extract/fixtures/cjs/root_one.js",
                 "test/extract/fixtures/ts/index.ts"
-            ].map(p2p)
+            ]
         );
     });
 
@@ -35,7 +35,7 @@ describe("gatherInitial", () => {
         expect(
             gather([
                 "test/extract/fixtures/ts"
-            ], {})
+            ], {}).map(p2p)
         ).to.deep.equal(
             [
                 "test/extract/fixtures/ts/index.ts",
@@ -43,7 +43,7 @@ describe("gatherInitial", () => {
                 "test/extract/fixtures/ts/sub/index.ts",
                 "test/extract/fixtures/ts/sub/kaching.ts",
                 "test/extract/fixtures/ts/sub/willBeReExported.ts"
-            ].map(p2p)
+            ]
         );
     });
 
@@ -52,7 +52,7 @@ describe("gatherInitial", () => {
             gather([
                 "test/extract/fixtures/ts",
                 "test/extract/fixtures/coffee"
-            ], {})
+            ], {}).map(p2p)
         ).to.deep.equal(
             [
                 "test/extract/fixtures/ts/index.ts",
@@ -65,7 +65,7 @@ describe("gatherInitial", () => {
                 "test/extract/fixtures/coffee/sub/index.coffee",
                 "test/extract/fixtures/coffee/sub/kaching.litcoffee",
                 "test/extract/fixtures/coffee/sub/willBeReExported.coffee.md"
-            ].map(p2p)
+            ]
         );
     });
 
@@ -75,7 +75,7 @@ describe("gatherInitial", () => {
                 "test/extract/fixtures/ts",
                 "test/extract/fixtures/es6/imports-and-exports.js",
                 "test/extract/fixtures/coffee"
-            ], {})
+            ], {}).map(p2p)
         ).to.deep.equal(
             [
                 "test/extract/fixtures/ts/index.ts",
@@ -89,7 +89,7 @@ describe("gatherInitial", () => {
                 "test/extract/fixtures/coffee/sub/index.coffee",
                 "test/extract/fixtures/coffee/sub/kaching.litcoffee",
                 "test/extract/fixtures/coffee/sub/willBeReExported.coffee.md"
-            ].map(p2p)
+            ]
         );
     });
 
@@ -99,7 +99,7 @@ describe("gatherInitial", () => {
                 "test/extract/fixtures/ts",
                 "test/extract/fixtures/es6/imports-and-exports.js",
                 "test/extract/fixtures/coffee"
-            ], {exclude: "dex"})
+            ], {exclude: "dex"}).map(p2p)
         ).to.deep.equal(
             [
                 "test/extract/fixtures/ts/javascriptThing.js",
@@ -109,7 +109,7 @@ describe("gatherInitial", () => {
                 "test/extract/fixtures/coffee/javascriptThing.js",
                 "test/extract/fixtures/coffee/sub/kaching.litcoffee",
                 "test/extract/fixtures/coffee/sub/willBeReExported.coffee.md"
-            ].map(p2p)
+            ]
         );
     });
 
