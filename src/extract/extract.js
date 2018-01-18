@@ -1,11 +1,10 @@
 "use strict";
 
 const fs                          = require('fs');
-const path                        = require('path').posix;
+const path                        = require('path');
 const acorn                       = require('acorn');
 const acorn_loose                 = require('acorn/dist/acorn_loose');
 const _                           = require('lodash');
-const pathToPosix                 = require('../utl/pathToPosix');
 const resolve                     = require('./resolve');
 const transpile                   = require('./transpile');
 const ignore                      = require('./ignore');
@@ -91,7 +90,7 @@ module.exports = (pFileName, pOptions) => {
             pOptions
         );
 
-        lOptions.baseDir = pathToPosix(lOptions.baseDir);
+        // lOptions.baseDir = pathToPosix(lOptions.baseDir);
         const lAST = getASTCached(path.join(lOptions.baseDir, pFileName));
         let lDependencies = [];
 

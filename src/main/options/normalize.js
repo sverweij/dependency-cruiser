@@ -1,6 +1,6 @@
 "use strict";
 
-const pathToPosix = require('../../utl/pathToPosix');
+// const pathToPosix = require('../../utl/pathToPosix');
 const defaults    = require('./defaults.json');
 
 function uniq(pArray) {
@@ -16,7 +16,7 @@ module.exports = pOptions => {
         pOptions
     );
 
-    lRetval.baseDir = pathToPosix(lRetval.baseDir);
+    // lRetval.baseDir = pathToPosix(lRetval.baseDir);
     lRetval.maxDepth = parseInt(lRetval.maxDepth, 10);
     lRetval.moduleSystems = uniq(lRetval.moduleSystems.sort());
 

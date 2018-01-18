@@ -1,7 +1,7 @@
 "use strict";
 
 const fs                       = require('fs');
-const path                     = require('path').posix;
+const path                     = require('path');
 const resolve                  = require('resolve');
 const memoize                  = require('lodash/memoize');
 const pathToPosix              = require('../../utl/pathToPosix');
