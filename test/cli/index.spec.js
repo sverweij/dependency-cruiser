@@ -1,6 +1,8 @@
 "use strict";
 const fs           = require("fs");
-const path         = require("path");
+// path.posix instead of path because otherwise on win32 the resulting
+// outputTo would contain \\ instead of / which for this unit test doesn't matter
+const path         = require("path").posix;
 const expect       = require('chai').expect;
 const intercept    = require("intercept-stdout");
 const processCLI   = require("../../src/cli");
@@ -250,7 +252,7 @@ describe("#processCLI", () => {
             return expect(
                 lCapturedStderr
             ).to.contain(
-                "ERROR: Writing to 'test/cli/output/file/you/cant/write/to' didn't work. Error: ENOENT: no such file or directory, open"
+                "didn't work. Error: ENOENT: no such file or directory, open"
             );
         });
 
