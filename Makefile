@@ -143,7 +143,8 @@ src/extract/index.js: \
 	src/extract/dependencyEndsUpAtFrom.js \
 	src/extract/extract.js \
 	src/extract/gatherInitialSources.js \
-	src/extract/summarize.js
+	src/extract/summarize.js \
+	src/utl/pathToPosix.js
 
 src/extract/addValidations.js: \
 	src/validate/index.js
@@ -154,8 +155,7 @@ src/extract/extract.js: \
 	src/extract/extract-commonJS.js \
 	src/extract/ignore.js \
 	src/extract/resolve/index.js \
-	src/extract/transpile/index.js \
-	src/utl/pathToPosix.js
+	src/extract/transpile/index.js
 
 src/extract/extract-AMD.js: \
 	src/extract/extract-commonJS.js
@@ -218,8 +218,7 @@ src/report/htmlReporter.js: \
 	src/report/html.template.js
 
 src/main/options/normalize.js: \
-	src/main/options/defaults.json \
-	src/utl/pathToPosix.js
+	src/main/options/defaults.json
 
 src/main/ruleSet/validate.js: \
 	src/main/options/validate.js \
@@ -293,7 +292,8 @@ src/extract/index.js: \
 	src/extract/dependencyEndsUpAtFrom.js \
 	src/extract/extract.js \
 	src/extract/gatherInitialSources.js \
-	src/extract/summarize.js
+	src/extract/summarize.js \
+	src/utl/pathToPosix.js
 
 src/extract/addValidations.js: \
 	src/validate/index.js
@@ -304,8 +304,7 @@ src/extract/extract.js: \
 	src/extract/extract-commonJS.js \
 	src/extract/ignore.js \
 	src/extract/resolve/index.js \
-	src/extract/transpile/index.js \
-	src/utl/pathToPosix.js
+	src/extract/transpile/index.js
 
 src/extract/extract-AMD.js: \
 	src/extract/extract-commonJS.js
@@ -368,8 +367,7 @@ src/report/htmlReporter.js: \
 	src/report/html.template.js
 
 src/main/options/normalize.js: \
-	src/main/options/defaults.json \
-	src/utl/pathToPosix.js
+	src/main/options/defaults.json
 
 src/main/ruleSet/validate.js: \
 	src/main/options/validate.js \
@@ -412,7 +410,8 @@ test/extract/extract.spec.js: \
 	src/extract/extract.js
 
 test/extract/gatherInitialSources.spec.js: \
-	src/extract/gatherInitialSources.js
+	src/extract/gatherInitialSources.js \
+	src/utl/pathToPosix.js
 
 test/extract/index.spec.js: \
 	src/extract/index.js \
