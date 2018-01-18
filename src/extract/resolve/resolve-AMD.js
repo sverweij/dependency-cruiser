@@ -26,9 +26,11 @@ module.exports = (pModuleName, pBaseDir, pFileDir) => {
     // - [ ] maybe use mrjoelkemp/module-lookup-amd ?
     // - [ ] or https://github.com/jaredhanson/amd-resolve ?
     // - [x] funky plugins (json!wappie, ./screeching-cat!sabertooth) -> fixed in 'extract'
-    const lProbablePath = path.relative(
-        pathToPosix(pBaseDir),
-        path.join(pathToPosix(pFileDir), `${pModuleName}.js`)
+    const lProbablePath = pathToPosix(
+        path.relative(
+            pBaseDir,
+            path.join(pFileDir, `${pModuleName}.js`)
+        )
     );
     const lDependency = {
         resolved: fileExists(lProbablePath) ? lProbablePath : pModuleName,

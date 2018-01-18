@@ -1,6 +1,6 @@
 "use strict";
 
-const path                     = require('path').posix;
+const path                     = require('path');
 const resolve                  = require('resolve');
 const pathToPosix              = require('../../utl/pathToPosix');
 const transpileMeta            = require('../transpile/meta');
@@ -26,9 +26,9 @@ module.exports = (pModuleName, pBaseDir, pFileDir) => {
         lRetval.coreModule = true;
     } else {
         try {
-            lRetval.resolved = path.relative(
-                pathToPosix(pBaseDir),
-                pathToPosix(
+            lRetval.resolved = pathToPosix(
+                path.relative(
+                    pBaseDir,
                     resolve.sync(
                         pModuleName,
                         {

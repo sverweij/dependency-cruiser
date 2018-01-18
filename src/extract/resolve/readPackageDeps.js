@@ -1,6 +1,6 @@
 "use strict";
 
-const path = require('path').posix;
+const path = require('path');
 const fs   = require('fs');
 
 /* a note on the un-cached fs.readFileSync:
