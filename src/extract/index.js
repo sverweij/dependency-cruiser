@@ -1,7 +1,7 @@
 "use strict";
 
 const _                      = require('lodash');
-
+const pathToPosix            = require('../utl/pathToPosix');
 const extract                = require('./extract');
 const dependencyEndsUpAtFrom = require('./dependencyEndsUpAtFrom');
 const gather                 = require('./gatherInitialSources');
@@ -25,7 +25,7 @@ function extractRecursive (pFileName, pOptions, pVisited, pDepth) {
                 }
                 return pAll;
             }, [{
-                source: pFileName,
+                source: pathToPosix(pFileName),
                 dependencies: lDependencies
             }]
         );

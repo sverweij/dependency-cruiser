@@ -1,6 +1,6 @@
 {
   "name": "dependency-cruiser",
-  "version": "2.10.1",
+  "version": "2.11.0-beta-3",
   "description": "Validate and visualize dependencies. With your rules. JavaScript, TypeScript, CoffeeScript. ES6, CommonJS, AMD.",
   "bin": {
     "dependency-cruiser": "bin/dependency-cruise",
@@ -9,8 +9,8 @@
   },
   "main": "src/main/index.js",
   "scripts": {
-    "depcruise": "./bin/dependency-cruise --validate .dependency-cruiser-custom.json src bin/dependency-cruise test",
-    "depcruise:graph": "./bin/dependency-cruise --exclude \"(^node_modules|^fs$|^path$)\" --output-type dot --validate .dependency-cruiser-custom.json bin/dependency-cruise | dot -T svg > tmp_deps.svg",
+    "depcruise": "node ./bin/dependency-cruise --validate .dependency-cruiser-custom.json src bin/dependency-cruise test",
+    "depcruise:graph": "node ./bin/dependency-cruise --exclude \"(^node_modules|^fs$|^path$)\" --output-type dot --validate .dependency-cruiser-custom.json bin/dependency-cruise | dot -T svg > tmp_deps.svg",
     "lint": "eslint bin/dependency-cruise src test",
     "lint:fix": "eslint --fix bin/dependency-cruise src test",
     "nsp": "nsp check",
@@ -71,6 +71,7 @@
     "figures": "2.0.0",
     "handlebars": "4.0.11",
     "lodash": "4.17.4",
+    "normalize-newline": "3.0.0",
     "resolve": "1.5.0",
     "safe-regex": "1.1.0",
     "semver": "5.5.0"

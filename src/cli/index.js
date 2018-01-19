@@ -72,7 +72,7 @@ module.exports = (pFileDirArray, pOptions) => {
             }
 
             if (pOptions.hasOwnProperty("system")) {
-                process.stderr.write(`  WARNING: The '--system' command line option is depcrecated in favor of\n`);
+                process.stderr.write(`  WARNING: The '--system' command line option is deprecated in favor of\n`);
                 process.stderr.write(`           '--module-systems'. Use that or '-M' instead.\n`);
             }
 

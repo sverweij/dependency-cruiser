@@ -82,7 +82,7 @@ const getASTCached = _.memoize(getAST);
  */
 module.exports = (pFileName, pOptions) => {
     try {
-        const lOptions = Object.assign(
+        let lOptions = Object.assign(
             {
                 baseDir: process.cwd(),
                 moduleSystems: ["cjs", "es6", "amd"]
@@ -90,6 +90,7 @@ module.exports = (pFileName, pOptions) => {
             pOptions
         );
 
+        // lOptions.baseDir = pathToPosix(lOptions.baseDir);
         const lAST = getASTCached(path.join(lOptions.baseDir, pFileName));
         let lDependencies = [];
 

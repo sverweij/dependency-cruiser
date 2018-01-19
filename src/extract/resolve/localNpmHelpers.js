@@ -107,7 +107,7 @@ const getPackageJson =
  *
  * @param  {string} pModule  The module to get the deprecation status of
  * @param  {string} pBaseDir The base dir. Defaults to '.'
- * @return {boolean}         true if depcrecated, false in all other cases
+ * @return {boolean}         true if deprecated, false in all other cases
  */
 function dependencyIsDeprecated (pModule, pBaseDir) {
     let lRetval = false;

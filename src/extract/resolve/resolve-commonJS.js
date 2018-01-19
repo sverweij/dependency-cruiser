@@ -2,6 +2,7 @@
 
 const path                     = require('path');
 const resolve                  = require('resolve');
+const pathToPosix              = require('../../utl/pathToPosix');
 const transpileMeta            = require('../transpile/meta');
 const determineDependencyTypes = require('./determineDependencyTypes');
 const readPackageDeps          = require('./readPackageDeps');
@@ -25,14 +26,16 @@ module.exports = (pModuleName, pBaseDir, pFileDir) => {
         lRetval.coreModule = true;
     } else {
         try {
-            lRetval.resolved = path.relative(
-                pBaseDir,
-                resolve.sync(
-                    pModuleName,
-                    {
-                        basedir: pFileDir,
-                        extensions: SUPPORTED_EXTENSIONS
-                    }
+            lRetval.resolved = pathToPosix(
+                path.relative(
+                    pBaseDir,
+                    resolve.sync(
+                        pModuleName,
+                        {
+                            basedir: pathToPosix(pFileDir),
+                            extensions: SUPPORTED_EXTENSIONS
+                        }
+                    )
                 )
             );
             lRetval.followable = (path.extname(lRetval.resolved) !== ".json");

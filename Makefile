@@ -143,7 +143,8 @@ src/extract/index.js: \
 	src/extract/dependencyEndsUpAtFrom.js \
 	src/extract/extract.js \
 	src/extract/gatherInitialSources.js \
-	src/extract/summarize.js
+	src/extract/summarize.js \
+	src/utl/pathToPosix.js
 
 src/extract/addValidations.js: \
 	src/validate/index.js
@@ -166,7 +167,8 @@ src/extract/resolve/index.js: \
 src/extract/resolve/resolve-AMD.js: \
 	src/extract/resolve/determineDependencyTypes.js \
 	src/extract/resolve/localNpmHelpers.js \
-	src/extract/resolve/readPackageDeps.js
+	src/extract/resolve/readPackageDeps.js \
+	src/utl/pathToPosix.js
 
 src/extract/resolve/determineDependencyTypes.js: \
 	src/extract/resolve/localNpmHelpers.js
@@ -175,7 +177,8 @@ src/extract/resolve/resolve-commonJS.js: \
 	src/extract/resolve/determineDependencyTypes.js \
 	src/extract/resolve/localNpmHelpers.js \
 	src/extract/resolve/readPackageDeps.js \
-	src/extract/transpile/meta.js
+	src/extract/transpile/meta.js \
+	src/utl/pathToPosix.js
 
 src/extract/transpile/meta.js: \
 	package.json \
@@ -262,6 +265,7 @@ ALL_SRC=src/main/index.js \
 	src/report/html.template.js \
 	src/report/htmlReporter.js \
 	src/report/jsonReporter.js \
+	src/utl/pathToPosix.js \
 	src/validate/index.js
 # cjs dependencies
 test/cli/formatMetaInfo.spec.js: \
@@ -288,7 +292,8 @@ src/extract/index.js: \
 	src/extract/dependencyEndsUpAtFrom.js \
 	src/extract/extract.js \
 	src/extract/gatherInitialSources.js \
-	src/extract/summarize.js
+	src/extract/summarize.js \
+	src/utl/pathToPosix.js
 
 src/extract/addValidations.js: \
 	src/validate/index.js
@@ -311,7 +316,8 @@ src/extract/resolve/index.js: \
 src/extract/resolve/resolve-AMD.js: \
 	src/extract/resolve/determineDependencyTypes.js \
 	src/extract/resolve/localNpmHelpers.js \
-	src/extract/resolve/readPackageDeps.js
+	src/extract/resolve/readPackageDeps.js \
+	src/utl/pathToPosix.js
 
 src/extract/resolve/determineDependencyTypes.js: \
 	src/extract/resolve/localNpmHelpers.js
@@ -320,7 +326,8 @@ src/extract/resolve/resolve-commonJS.js: \
 	src/extract/resolve/determineDependencyTypes.js \
 	src/extract/resolve/localNpmHelpers.js \
 	src/extract/resolve/readPackageDeps.js \
-	src/extract/transpile/meta.js
+	src/extract/transpile/meta.js \
+	src/utl/pathToPosix.js
 
 src/extract/transpile/meta.js: \
 	package.json \
@@ -403,7 +410,8 @@ test/extract/extract.spec.js: \
 	src/extract/extract.js
 
 test/extract/gatherInitialSources.spec.js: \
-	src/extract/gatherInitialSources.js
+	src/extract/gatherInitialSources.js \
+	src/utl/pathToPosix.js
 
 test/extract/index.spec.js: \
 	src/extract/index.js \
@@ -465,6 +473,9 @@ test/report/errReporter.spec.js: \
 
 test/report/htmlReporter.spec.js: \
 	src/report/htmlReporter.js
+
+test/utl/pathToPosix.spec.js: \
+	src/utl/pathToPosix.js
 
 test/validate/index.spec.js: \
 	src/main/ruleSet/normalize.js \

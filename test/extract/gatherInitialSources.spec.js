@@ -1,12 +1,17 @@
 "use strict";
 
-const expect = require('chai').expect;
-const gather = require('../../src/extract/gatherInitialSources');
+const expect      = require('chai').expect;
+const gather      = require('../../src/extract/gatherInitialSources');
+const pathToPosix = require('../../src/utl/pathToPosix');
+
+function p2p(pPath) {
+    return pathToPosix(pPath);
+}
 
 describe("gatherInitial", () => {
     it("one file stays one file", () => {
         expect(
-            gather(["test/extract/fixtures/cjs/root_one.js"], {})
+            gather(["test/extract/fixtures/cjs/root_one.js"], {}).map(p2p)
         ).to.deep.equal(
             ["test/extract/fixtures/cjs/root_one.js"]
         );
@@ -17,7 +22,7 @@ describe("gatherInitial", () => {
             gather([
                 "test/extract/fixtures/cjs/root_one.js",
                 "test/extract/fixtures/ts/index.ts"
-            ], {})
+            ], {}).map(p2p)
         ).to.deep.equal(
             [
                 "test/extract/fixtures/cjs/root_one.js",
@@ -30,7 +35,7 @@ describe("gatherInitial", () => {
         expect(
             gather([
                 "test/extract/fixtures/ts"
-            ], {})
+            ], {}).map(p2p)
         ).to.deep.equal(
             [
                 "test/extract/fixtures/ts/index.ts",
@@ -47,7 +52,7 @@ describe("gatherInitial", () => {
             gather([
                 "test/extract/fixtures/ts",
                 "test/extract/fixtures/coffee"
-            ], {})
+            ], {}).map(p2p)
         ).to.deep.equal(
             [
                 "test/extract/fixtures/ts/index.ts",
@@ -70,7 +75,7 @@ describe("gatherInitial", () => {
                 "test/extract/fixtures/ts",
                 "test/extract/fixtures/es6/imports-and-exports.js",
                 "test/extract/fixtures/coffee"
-            ], {})
+            ], {}).map(p2p)
         ).to.deep.equal(
             [
                 "test/extract/fixtures/ts/index.ts",
@@ -94,7 +99,7 @@ describe("gatherInitial", () => {
                 "test/extract/fixtures/ts",
                 "test/extract/fixtures/es6/imports-and-exports.js",
                 "test/extract/fixtures/coffee"
-            ], {exclude: "dex"})
+            ], {exclude: "dex"}).map(p2p)
         ).to.deep.equal(
             [
                 "test/extract/fixtures/ts/javascriptThing.js",

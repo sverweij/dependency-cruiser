@@ -1,8 +1,9 @@
 "use strict";
 
-const fs     = require('fs');
-const expect = require("chai").expect;
-const wrap  = require("../../../src/extract/transpile/typeScriptWrap");
+const fs               = require('fs');
+const expect           = require("chai").expect;
+const normalizeNewline = require('normalize-newline');
+const wrap             = require("../../../src/extract/transpile/typeScriptWrap");
 
 describe("typescript transpiler", () => {
     it("tells the typescript transpiler is available", () => {
@@ -13,8 +14,10 @@ describe("typescript transpiler", () => {
 
     it("transpiles typescript", () => {
         expect(
-            wrap.transpile(
-                fs.readFileSync("./test/extract/transpile/fixtures/typescriptscript.ts", 'utf8')
+            normalizeNewline(
+                wrap.transpile(
+                    fs.readFileSync("./test/extract/transpile/fixtures/typescriptscript.ts", 'utf8')
+                )
             )
         ).to.equal(
             fs.readFileSync("./test/extract/transpile/fixtures/typescriptscript.js", 'utf8')
@@ -31,8 +34,10 @@ describe("tsx transpiler (plain old typescript)", () => {
 
     it("transpiles tsx", () => {
         expect(
-            wrap.transpile(
-                fs.readFileSync("./test/extract/transpile/fixtures/tsx.tsx", 'utf8')
+            normalizeNewline(
+                wrap.transpile(
+                    fs.readFileSync("./test/extract/transpile/fixtures/tsx.tsx", 'utf8')
+                )
             )
         ).to.equal(
             fs.readFileSync("./test/extract/transpile/fixtures/tsx.js", 'utf8')
