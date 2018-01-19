@@ -117,6 +117,7 @@ You've come to the right place :-) :
 
 ## Build status
 [![build status](https://gitlab.com/sverweij/dependency-cruiser/badges/master/build.svg)](https://gitlab.com/sverweij/dependency-cruiser/builds)
+[![Build status](https://ci.appveyor.com/api/projects/status/u18tbeujml0knk08/branch/master?svg=true)](https://ci.appveyor.com/project/sverweij/dependency-cruiser/branch/master)
 [![coverage](https://gitlab.com/sverweij/dependency-cruiser/badges/master/coverage.svg)](https://gitlab.com/sverweij/dependency-cruiser/builds)
 [![bitHound Overall Score](https://www.bithound.io/github/sverweij/dependency-cruiser/badges/score.svg)](https://www.bithound.io/github/sverweij/dependency-cruiser)
 [![bitHound Dependencies](https://www.bithound.io/github/sverweij/dependency-cruiser/badges/dependencies.svg)](https://www.bithound.io/github/sverweij/dependency-cruiser/master/dependencies/npm)
