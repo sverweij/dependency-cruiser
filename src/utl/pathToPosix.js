@@ -22,8 +22,8 @@ const path = require('path');
 module.exports = (pFilePath, pPathModule) => {
     const lPathModule = pPathModule || path;
 
-    if (lPathModule.sep !== lPathModule.posix.sep) {
-        return pFilePath.split(lPathModule.sep).join(lPathModule.posix.sep);
+    if (lPathModule.sep !== path.posix.sep) {
+        return pFilePath.split(lPathModule.sep).join(path.posix.sep);
     }
 
     return pFilePath;
