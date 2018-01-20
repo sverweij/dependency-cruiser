@@ -10,7 +10,7 @@
         "comment": "Don't allow dependencies to (typescript/ javascript/ coffeescript) spec files",
         "severity": "error",
         "from": {},
-        "to": { "path": "\\.spec\\.[js|ts|ls|coffee|litcoffee|coffee\\.md]$" }
+        "to": { "path": "\\.spec\\.(js|ts|ls|coffee|litcoffee|coffee\\.md)$" }
     },{
         "name": "no-circular",
         "severity": "warn",
@@ -39,7 +39,7 @@
         "name": "not-to-dev-dep",
         "severity": "error",
         "comment": "Don't allow dependencies from src/app/lib to a development only package",
-        "from": { "path": "^(src|app|lib)", "pathNot": "\\.spec\\.[js|ts|ls|coffee|litcoffee|coffee\\.md]$" },
+        "from": { "path": "^(src|app|lib)", "pathNot": "\\.spec\\.(js|ts|ls|coffee|litcoffee|coffee\\.md)$" },
         "to": { "dependencyTypes": ["npm-dev"] }
     },{
         "name": "no-non-package-json",
