@@ -194,16 +194,13 @@ src/extract/transpile/meta.js: \
 	src/extract/transpile/typeScriptWrap.js
 
 src/extract/transpile/coffeeWrap.js: \
-	package.json \
-	src/extract/transpile/tryRequire.js
+	package.json
 
 src/extract/transpile/liveScriptWrap.js: \
-	package.json \
-	src/extract/transpile/tryRequire.js
+	package.json
 
 src/extract/transpile/typeScriptWrap.js: \
-	package.json \
-	src/extract/transpile/tryRequire.js
+	package.json
 
 src/extract/transpile/index.js: \
 	src/extract/transpile/meta.js
@@ -254,7 +251,6 @@ ALL_SRC=src/main/index.js \
 	src/extract/transpile/javaScriptWrap.js \
 	src/extract/transpile/liveScriptWrap.js \
 	src/extract/transpile/meta.js \
-	src/extract/transpile/tryRequire.js \
 	src/extract/transpile/typeScriptWrap.js \
 	src/main/options/defaults.json \
 	src/main/options/normalize.js \
@@ -343,16 +339,13 @@ src/extract/transpile/meta.js: \
 	src/extract/transpile/typeScriptWrap.js
 
 src/extract/transpile/coffeeWrap.js: \
-	package.json \
-	src/extract/transpile/tryRequire.js
+	package.json
 
 src/extract/transpile/liveScriptWrap.js: \
-	package.json \
-	src/extract/transpile/tryRequire.js
+	package.json
 
 src/extract/transpile/typeScriptWrap.js: \
-	package.json \
-	src/extract/transpile/tryRequire.js
+	package.json
 
 src/extract/transpile/index.js: \
 	src/extract/transpile/meta.js
@@ -448,9 +441,6 @@ test/extract/transpile/meta.spec.js: \
 	src/extract/transpile/javaScriptWrap.js \
 	src/extract/transpile/liveScriptWrap.js \
 	src/extract/transpile/meta.js
-
-test/extract/transpile/tryRequire.spec.js: \
-	src/extract/transpile/tryRequire.js
 
 test/extract/transpile/typeScriptWrap.spec.js: \
 	src/extract/transpile/typeScriptWrap.js

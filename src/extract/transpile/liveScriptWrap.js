@@ -1,6 +1,6 @@
 "use strict";
 
-const tryRequire = require("./tryRequire");
+const tryRequire = require("semver-try-require");
 const livescript = tryRequire(
     "livescript",
     require("../../../package.json").supportedTranspilers.livescript

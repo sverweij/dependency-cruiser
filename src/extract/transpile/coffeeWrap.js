@@ -1,5 +1,5 @@
 "use strict";
-const tryRequire   = require("./tryRequire");
+const tryRequire   = require("semver-try-require");
 const $package     = require("../../../package.json");
 
 /*
