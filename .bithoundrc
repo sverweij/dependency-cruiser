@@ -15,6 +15,7 @@
   },
   "dependencies": {
     "unused-ignores": [
+        "semver",
         "typescript",
         "coffeescript"
     ]
