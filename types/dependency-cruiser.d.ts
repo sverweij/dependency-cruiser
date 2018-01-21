@@ -2,7 +2,9 @@
  * all supported extensions; for each extension whether or not
  * it is supported in the current environment
  */
-export const allExtensions: Array<{
+export const allExtensions: IAvailableExtension[];
+
+export interface IAvailableExtension {
     /**
      * File extension (e.g. ".js", ".ts", ".jsx")
      */
@@ -11,9 +13,9 @@ export const allExtensions: Array<{
      * Whether or not the extension is available as supported in the current environment
      */
     available: boolean;
-}>;
+}
 
-export type AvailableTranspilersType = Array<{
+export interface IAvailableTranspiler {
     /**
      * The name of the transpiler (e.g. "typescript", "coffeescript")
      */
@@ -26,7 +28,7 @@ export type AvailableTranspilersType = Array<{
      * Whether or not the transpiler is available in the current environment
      */
     available: boolean;
-}>;
+}
 
 export type ModuleSystemType = "cjs" | "amd" | "es6";
 
@@ -218,7 +220,7 @@ export function cruise(pFileDirArray: string[], pOptions?: ICruiseOptions ): obj
  * - the supported version range (semver version range)
  * - whether or not the transpiler is available in the current environment
  */
-export function getAvailableTranspilers(): AvailableTranspilersType;
+export function getAvailableTranspilers(): IAvailableTranspiler[];
 
 // export namespace cruise {
 //     const prototype: {
