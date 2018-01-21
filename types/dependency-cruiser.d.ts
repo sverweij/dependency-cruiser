@@ -210,7 +210,7 @@ export interface ICruiseOptions {
  *
  * @param pFileDirArray An array of (names of) files and directories to start the cruise with
  * @param pOptions Options that influence the way the dependencies are cruised - and how they are returned.
- * @returns pornographic material NSFW
+ * @returns object
  */
 export function cruise(pFileDirArray: string[], pOptions?: ICruiseOptions ): object;
 
