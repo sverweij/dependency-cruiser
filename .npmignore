@@ -39,3 +39,4 @@ doc/**
 docs/**
 Makefile
 test/**
+tslint.json

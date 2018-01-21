@@ -58,6 +58,7 @@ src/report/%.template.js: src/report/%.template.hbs
 	echo "docs/**" >> $@
 	echo "Makefile" >> $@
 	echo "test/**" >> $@
+	echo "tslint.json" >> $@
 
 # "phony" targets
 prerequisites:
