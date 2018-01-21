@@ -1,19 +1,19 @@
 # tmp files
 .DS_Store
-*.swp
 *.swo
+*.swp
 **tmp**
 
 # ide garbage
-.vscode
 .project
 .settings/*
+.vscode
 
 # metrics results
 .nyc
-platoreports
-jsdoc
 coverage
+jsdoc
+platoreports
 
 # node and npm
 /node_modules/

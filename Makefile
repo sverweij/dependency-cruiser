@@ -42,16 +42,22 @@ src/report/%.template.js: src/report/%.template.hbs
 
 .npmignore: .gitignore
 	cp $< $@
-	echo "doc/**" >> $@
-	echo "docs/**" >> $@
-	echo "test/**" >> $@
+	echo "" >> $@
+	echo "# specificly ignore for npm" >> $@
 	echo ".bithoundrc" >> $@
 	echo ".dependency-cruiser-custom.json" >> $@
 	echo ".eslintignore" >> $@
 	echo ".eslintrc.json" >> $@
+	echo ".github" >> $@
 	echo ".gitlab-ci.yml" >> $@
 	echo ".istanbul.yml" >> $@
+	echo ".travis.yml" >> $@
+	echo "appveyor.yml" >> $@
+	echo "CODE_OF_CONDUCT.md" >> $@
+	echo "doc/**" >> $@
+	echo "docs/**" >> $@
 	echo "Makefile" >> $@
+	echo "test/**" >> $@
 
 # "phony" targets
 prerequisites:
