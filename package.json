@@ -15,7 +15,7 @@
     "lint:fix": "eslint --fix bin/dependency-cruise src test",
     "nsp": "nsp check",
     "npm-check-updates": "ncu --upgrade",
-    "postversion": "git push && git push --tags && npm publish",
+    "postversion": "git push && git push --tags",
     "preversion": "test `git branch | grep \"^* [a-zA-Z]\" | cut -c 3-` = 'master'",
     "test": "mocha --bail --reporter dot test/*/*.spec.js test/*/*/*.spec.js",
     "test:cover": "istanbul cover node_modules/mocha/bin/_mocha -- test/*/*.spec.js test/*/*/*.spec.js",
