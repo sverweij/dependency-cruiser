@@ -9,6 +9,7 @@ test_async_node_latest:
   script:
    - npm install
    - npm run lint
+   - npm run lint:types
    - npm run depcruise
    - npm run nsp
    - npm run test:cover

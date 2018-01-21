@@ -67,6 +67,7 @@ dev-build: bin/dependency-cruise $(GENERATED_SOURCES) $(ALL_SRC) .npmignore
 
 lint:
 	$(NPM) run lint
+	$(NPM) run lint:types
 
 lint-fix:
 	$(NPM) run lint:fix
