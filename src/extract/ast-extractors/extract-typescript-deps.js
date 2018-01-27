@@ -1,32 +1,4 @@
 "use strict";
-const tryRequire = require("semver-try-require");
-const _memoize   = require("lodash").memoize;
-const typescript = tryRequire(
-    "typescript",
-    require("../../package.json").supportedTranspilers.typescript
-);
-
-/*
-let indent = 0;
-function print(node) {
-    console.log(`${'|'.repeat(indent + 1)}{ts.SyntaxKind[node.kind]}: ${node.text||''}`);
-    indent++;
-    ts.forEachChild(node, print);
-    indent--;
-}
-print(lAST);
- */
-function getAST(pTypescriptSource) {
-    return typescript.createSourceFile(
-        '$internal-file-name',
-        pTypescriptSource,
-        typescript.ScriptTarget.Latest,
-        false
-        // scriptKind - Unknown = 0, JS = 1, JSX = 2, TS = 3, TSX = 4, External = 5, JSON = 6,
-    );
-}
-const getASTCached = _memoize(getAST);
-
 
 /*
  * Both extractImport* assume the imports/ exports can only occur at
@@ -92,15 +64,8 @@ function extractTrippleSlashDirectives(pAST) {
     );
 }
 
-module.exports = (pTypescriptSource) => {
-    const lAST = getASTCached(pTypescriptSource);
+module.exports = (pTypeScriptAST) =>
+    extractImportsAndExports(pTypeScriptAST)
+        .concat(extractImportEquals(pTypeScriptAST))
+        .concat(extractTrippleSlashDirectives(pTypeScriptAST));
 
-    /* istanbul ignore if */
-    if (typescript === false) {
-        return [];
-    } else {
-        return extractImportsAndExports(lAST)
-            .concat(extractImportEquals(lAST))
-            .concat(extractTrippleSlashDirectives(lAST));
-    }
-};

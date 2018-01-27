@@ -1,5 +1,5 @@
 const expect            = require('chai').expect;
-const extractTypescript = require('../../../src/extract/extract-typescript');
+const extractTypescript = require('./extract-typescript.utl');
 
 describe("extract-typescript - re-exports", () => {
 
