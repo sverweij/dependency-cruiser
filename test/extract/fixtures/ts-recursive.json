@@ -126,7 +126,8 @@
                 "dependencies": []
             }
         ]
-    },    {
+    },
+    {
         "title": "also detect dependencies on typescript types",
         "input": {
             "fileName": "test/extract/fixtures/ts-circular-with-types/A.ts",
@@ -172,6 +173,67 @@
                         "circular": true
                     }
                 ]
+            }
+        ]
+    },
+    {
+        "title": "also detect dependencies on modules that aren't used",
+        "input": {
+            "fileName": "test/extract/fixtures/ts-unused-dependencies/a.ts"
+        },
+        "expected": [
+            {
+                "source": "test/extract/fixtures/ts-unused-dependencies/a.ts",
+                "dependencies": [
+                    {
+                        "resolved": "test/extract/fixtures/ts-unused-dependencies/b.ts",
+                        "coreModule": false,
+                        "followable": true,
+                        "couldNotResolve": false,
+                        "dependencyTypes": [
+                            "local"
+                        ],
+                        "module": "./b",
+                        "moduleSystem": "es6",
+                        "matchesDoNotFollow": false,
+                        "valid": true
+                    },
+                    {
+                        "resolved": "test/extract/fixtures/ts-unused-dependencies/c.ts",
+                        "coreModule": false,
+                        "followable": true,
+                        "couldNotResolve": false,
+                        "dependencyTypes": [
+                            "local"
+                        ],
+                        "module": "./c",
+                        "moduleSystem": "es6",
+                        "matchesDoNotFollow": false,
+                        "valid": true
+                    }
+                ]
+            },
+            {
+                "source": "test/extract/fixtures/ts-unused-dependencies/b.ts",
+                "dependencies": [
+                    {
+                        "resolved": "test/extract/fixtures/ts-unused-dependencies/c.ts",
+                        "coreModule": false,
+                        "followable": true,
+                        "couldNotResolve": false,
+                        "dependencyTypes": [
+                            "local"
+                        ],
+                        "module": "./c",
+                        "moduleSystem": "es6",
+                        "matchesDoNotFollow": false,
+                        "valid": true
+                    }
+                ]
+            },
+            {
+                "source": "test/extract/fixtures/ts-unused-dependencies/c.ts",
+                "dependencies": []
             }
         ]
     }
