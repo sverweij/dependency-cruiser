@@ -11,6 +11,7 @@ const ignore                      = require('./ignore');
 const extractES6Dependencies      = require('./extract-ES6');
 const extractCommonJSDependencies = require('./extract-commonJS');
 const extractAMDDependencies      = require('./extract-AMD');
+const extractTypeScript           = require('./extract-typescript');
 
 /**
  * Returns the extension of the given file name path.
@@ -90,7 +91,6 @@ module.exports = (pFileName, pOptions) => {
             pOptions
         );
 
-        // lOptions.baseDir = pathToPosix(lOptions.baseDir);
         const lAST = getASTCached(path.join(lOptions.baseDir, pFileName));
         let lDependencies = [];
 
@@ -98,8 +98,14 @@ module.exports = (pFileName, pOptions) => {
             extractCommonJSDependencies(lAST, lDependencies);
         }
 
-        if (lOptions.moduleSystems.indexOf("es6") > -1){
-            extractES6Dependencies(lAST, lDependencies);
+        if (lOptions.moduleSystems.indexOf("es6") > -1) {
+            if (getExtension(pFileName).startsWith(".ts")) {
+                lDependencies = lDependencies.concat(
+                    extractTypeScript(fs.readFileSync(path.join(lOptions.baseDir, pFileName), 'utf8'))
+                );
+            } else {
+                extractES6Dependencies(lAST, lDependencies);
+            }
         }
 
         if (lOptions.moduleSystems.indexOf("amd") > -1){

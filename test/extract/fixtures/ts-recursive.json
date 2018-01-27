@@ -126,5 +126,53 @@
                 "dependencies": []
             }
         ]
+    },    {
+        "title": "also detect dependencies on typescript types",
+        "input": {
+            "fileName": "test/extract/fixtures/ts-circular-with-types/A.ts",
+            "options": {
+                "forceCircular": true
+            }
+        },
+        "expected": [
+            {
+                "source": "test/extract/fixtures/ts-circular-with-types/A.ts",
+                "dependencies": [
+                    {
+                        "resolved": "test/extract/fixtures/ts-circular-with-types/B.ts",
+                        "coreModule": false,
+                        "dependencyTypes": [
+                            "local"
+                        ],
+                        "followable": true,
+                        "matchesDoNotFollow": false,
+                        "couldNotResolve": false,
+                        "module": "./B",
+                        "moduleSystem": "es6",
+                        "valid": true,
+                        "circular": true
+                    }
+                ]
+            },
+            {
+                "source": "test/extract/fixtures/ts-circular-with-types/B.ts",
+                "dependencies": [
+                    {
+                        "resolved": "test/extract/fixtures/ts-circular-with-types/A.ts",
+                        "coreModule": false,
+                        "dependencyTypes": [
+                            "local"
+                        ],
+                        "followable": true,
+                        "matchesDoNotFollow": false,
+                        "couldNotResolve": false,
+                        "module": "./A",
+                        "moduleSystem": "es6",
+                        "valid": true,
+                        "circular": true
+                    }
+                ]
+            }
+        ]
     }
 ]

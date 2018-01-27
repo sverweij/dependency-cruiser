@@ -2,7 +2,7 @@
 
 const safeRegex = require('safe-regex');
 
-const MODULE_SYSTEM_LIST_RE  = /^((cjs|amd|es6)(,|$))+$/gi;
+const MODULE_SYSTEM_LIST_RE  = /^((cjs|amd|es6|tsd)(,|$))+$/gi;
 const OUTPUT_TYPES_RE        = /^(html|dot|csv|err|json)$/g;
 const VALID_DEPTH_RE         = /^[0-9]{1,2}$/g;
 
