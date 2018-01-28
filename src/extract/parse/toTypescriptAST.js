@@ -7,9 +7,9 @@ const typescript = tryRequire(
     require("../../../package.json").supportedTranspilers.typescript
 );
 
-function getASTFromSource(pTypescriptSource) {
+function getASTFromSource(pTypescriptSource, pFileName) {
     return typescript.createSourceFile(
-        '$internal-file-name',
+        pFileName || '$internal-file-name',
         pTypescriptSource,
         typescript.ScriptTarget.Latest,
         false
@@ -17,7 +17,10 @@ function getASTFromSource(pTypescriptSource) {
 }
 
 function getAST(pFileName){
-    return getASTFromSource(fs.readFileSync(pFileName, 'utf8'));
+    return getASTFromSource(
+        fs.readFileSync(pFileName, 'utf8'),
+        pFileName
+    );
 }
 
 module.exports = {
