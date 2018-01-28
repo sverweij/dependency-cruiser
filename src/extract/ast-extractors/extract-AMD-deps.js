@@ -1,7 +1,7 @@
 "use strict";
 
 const walk                        = require('acorn/dist/walk');
-const extractCommonJSDependencies = require("./extract-commonJS");
+const extractCommonJSDependencies = require("./extract-commonJS-deps");
 
 module.exports = (pAST, pDependencies) => {
     walk.simple(

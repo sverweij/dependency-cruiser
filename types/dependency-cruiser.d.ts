@@ -30,7 +30,7 @@ export interface IAvailableTranspiler {
     available: boolean;
 }
 
-export type ModuleSystemType = "cjs" | "amd" | "es6";
+export type ModuleSystemType = "cjs" | "amd" | "es6"  | "tsd";
 
 export type OutputType = "json" | "html" | "dot" | "csv" | "err";
 

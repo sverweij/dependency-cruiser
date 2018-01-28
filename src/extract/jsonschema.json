@@ -180,7 +180,8 @@
             "enum": [
                 "cjs",
                 "amd",
-                "es6"
+                "es6",
+                "tsd"
             ]
         },
         "OutputType": {

@@ -15,7 +15,7 @@
             "name": "restrict-fs-access",
             "comment": "restrict file access to a few modules only",
             "severity": "error",
-            "from": { "path": "^src/(report|validate|main|extract/transpile)" },
+            "from": { "pathNot": "^src/(extract/parse|extract/resolve|extract/gatherInitialSources\\.js|cli)|^test" },
             "to": { "path": "^fs$" }
         }, {
             "name": "no-deprecated-core",
@@ -30,10 +30,10 @@
             "to": { "path": "^test/[^\\/]+/.+", "pathNot": "utl|$1[^\\.]+\\.json$"}
         }, {
             "name": "prefer-no-lodash",
-            "comment": "We want to minimize the dependency on lodash a bit - so flag dependencies that go there",
+            "comment": "We want to minimize the dependency on lodash a bit - so flag dependencies that go there and include it as a whole",
             "severity": "info",
             "from": {},
-            "to": { "path": "lodash"}
+            "to": { "path": "lodash\\.js"}
         }, {
             "name": "no-dep-on-test",
             "severity": "error",

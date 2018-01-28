@@ -37,16 +37,18 @@ For coloring strings in the terminal. A typical _Sorhus style_ micro module that
 It is possible to use dependency-cruiser to infer dependencies of typescript
 projects.
 
-We got the picture of tslint below by changing to the tslint/src folder and
-running this:
+We got the picture of tslint by running this in its source folder:
 ```sh
-dependency-cruise -T dot -x node_modules index.ts  | dot -T png > tslint-without-node_modules.png
+dependency-cruise -T dot -x node_modules -v -- src/index.ts  | dot -T png > tslint-without-node_modules.png
 ```
 
 (Yep, that's all - no separate transpilation steps necessary ...)
 
 ### tslint
 [palantir/tslint](https://github.com/palantir/tslint) - linter for typescript.
+
+The orange lines are warnings for circular dependencies, which occur around two of 
+tslint's 'barrel' `index.ts` modules:
 
 ![tslint](real-world-samples/tslint-without-node_modules.png)
 
