@@ -37,17 +37,26 @@ function getExtension(pFileName) {
  * @returns {object}         the abstract syntax tree
  */
 function getAST(pFileName) {
-    const lFile = transpile(
+    const lJavaScriptSource = transpile(
         getExtension(pFileName),
         fs.readFileSync(pFileName, 'utf8')
     );
 
     try {
-        return acorn.parse(lFile, {sourceType: 'module'});
+        return acorn.parse(lJavaScriptSource, {sourceType: 'module'});
     } catch (e) {
-        return acorn_loose.parse_dammit(lFile, {sourceType: 'module'});
+        return acorn_loose.parse_dammit(lJavaScriptSource, {sourceType: 'module'});
     }
 }
 module.exports = {
+
+    /**
+     * Compiles the file identified by pFileName into a (javascript)
+     * AST and returns it. Subsequent calls for the same file name will
+     * return the result from a cache.
+     *
+     * @param {string} pFileName - the name of the file to compile
+     * @return {object} - a (typescript) AST
+     */
     getASTCached: _memoize(getAST)
 };
