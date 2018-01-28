@@ -55,4 +55,15 @@ describe("extract-typescript - regular imports", () => {
         );
     });
 
+    it("leaves 'import equals' of variables alone", () => {
+        expect(
+            // typescript/lib/protocol.d.ts has this little pearl:
+            extractTypescript("import protocol = ts.server.protocol")
+        ).to.deep.equal(
+            [
+            ]
+        );
+    });
+
+
 });

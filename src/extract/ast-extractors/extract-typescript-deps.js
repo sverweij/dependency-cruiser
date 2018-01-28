@@ -27,7 +27,10 @@ function extractImportEquals(pAST) {
 
     return pAST.statements
         .filter(pStatement =>
-            pStatement.kind === IMPORT_EQUALS_DECLARATION_KIND
+            pStatement.kind === IMPORT_EQUALS_DECLARATION_KIND &&
+            pStatement.moduleReference &&
+            pStatement.moduleReference.expression &&
+            pStatement.moduleReference.expression.text
         ).map(pStatement => ({
             moduleName: pStatement.moduleReference.expression.text,
             moduleSystem: 'cjs'
