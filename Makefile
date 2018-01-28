@@ -158,15 +158,42 @@ src/extract/addValidations.js: \
 	src/validate/index.js
 
 src/extract/extract.js: \
-	src/extract/extract-AMD.js \
-	src/extract/extract-ES6.js \
-	src/extract/extract-commonJS.js \
+	src/extract/ast-extractors/extract-AMD-deps.js \
+	src/extract/ast-extractors/extract-ES6-deps.js \
+	src/extract/ast-extractors/extract-commonJS-deps.js \
+	src/extract/ast-extractors/extract-typescript-deps.js \
 	src/extract/ignore.js \
-	src/extract/resolve/index.js \
+	src/extract/parse/toJavascriptAST.js \
+	src/extract/parse/toTypescriptAST.js \
+	src/extract/resolve/index.js
+
+src/extract/ast-extractors/extract-AMD-deps.js: \
+	src/extract/ast-extractors/extract-commonJS-deps.js
+
+src/extract/parse/toJavascriptAST.js: \
 	src/extract/transpile/index.js
 
-src/extract/extract-AMD.js: \
-	src/extract/extract-commonJS.js
+src/extract/transpile/index.js: \
+	src/extract/transpile/meta.js
+
+src/extract/transpile/meta.js: \
+	package.json \
+	src/extract/transpile/coffeeWrap.js \
+	src/extract/transpile/javaScriptWrap.js \
+	src/extract/transpile/liveScriptWrap.js \
+	src/extract/transpile/typeScriptWrap.js
+
+src/extract/transpile/coffeeWrap.js: \
+	package.json
+
+src/extract/transpile/liveScriptWrap.js: \
+	package.json
+
+src/extract/transpile/typeScriptWrap.js: \
+	package.json
+
+src/extract/parse/toTypescriptAST.js: \
+	package.json
 
 src/extract/resolve/index.js: \
 	src/extract/resolve/resolve-AMD.js \
@@ -187,25 +214,6 @@ src/extract/resolve/resolve-commonJS.js: \
 	src/extract/resolve/readPackageDeps.js \
 	src/extract/transpile/meta.js \
 	src/utl/pathToPosix.js
-
-src/extract/transpile/meta.js: \
-	package.json \
-	src/extract/transpile/coffeeWrap.js \
-	src/extract/transpile/javaScriptWrap.js \
-	src/extract/transpile/liveScriptWrap.js \
-	src/extract/transpile/typeScriptWrap.js
-
-src/extract/transpile/coffeeWrap.js: \
-	package.json
-
-src/extract/transpile/liveScriptWrap.js: \
-	package.json
-
-src/extract/transpile/typeScriptWrap.js: \
-	package.json
-
-src/extract/transpile/index.js: \
-	src/extract/transpile/meta.js
 
 src/extract/gatherInitialSources.js: \
 	src/extract/ignore.js \
@@ -233,14 +241,17 @@ src/main/ruleSet/validate.js: \
 ALL_SRC=src/main/index.js \
 	package.json \
 	src/extract/addValidations.js \
+	src/extract/ast-extractors/extract-AMD-deps.js \
+	src/extract/ast-extractors/extract-ES6-deps.js \
+	src/extract/ast-extractors/extract-commonJS-deps.js \
+	src/extract/ast-extractors/extract-typescript-deps.js \
 	src/extract/dependencyEndsUpAtFrom.js \
-	src/extract/extract-AMD.js \
-	src/extract/extract-ES6.js \
-	src/extract/extract-commonJS.js \
 	src/extract/extract.js \
 	src/extract/gatherInitialSources.js \
 	src/extract/ignore.js \
 	src/extract/index.js \
+	src/extract/parse/toJavascriptAST.js \
+	src/extract/parse/toTypescriptAST.js \
 	src/extract/resolve/determineDependencyTypes.js \
 	src/extract/resolve/index.js \
 	src/extract/resolve/localNpmHelpers.js \
@@ -303,15 +314,42 @@ src/extract/addValidations.js: \
 	src/validate/index.js
 
 src/extract/extract.js: \
-	src/extract/extract-AMD.js \
-	src/extract/extract-ES6.js \
-	src/extract/extract-commonJS.js \
+	src/extract/ast-extractors/extract-AMD-deps.js \
+	src/extract/ast-extractors/extract-ES6-deps.js \
+	src/extract/ast-extractors/extract-commonJS-deps.js \
+	src/extract/ast-extractors/extract-typescript-deps.js \
 	src/extract/ignore.js \
-	src/extract/resolve/index.js \
+	src/extract/parse/toJavascriptAST.js \
+	src/extract/parse/toTypescriptAST.js \
+	src/extract/resolve/index.js
+
+src/extract/ast-extractors/extract-AMD-deps.js: \
+	src/extract/ast-extractors/extract-commonJS-deps.js
+
+src/extract/parse/toJavascriptAST.js: \
 	src/extract/transpile/index.js
 
-src/extract/extract-AMD.js: \
-	src/extract/extract-commonJS.js
+src/extract/transpile/index.js: \
+	src/extract/transpile/meta.js
+
+src/extract/transpile/meta.js: \
+	package.json \
+	src/extract/transpile/coffeeWrap.js \
+	src/extract/transpile/javaScriptWrap.js \
+	src/extract/transpile/liveScriptWrap.js \
+	src/extract/transpile/typeScriptWrap.js
+
+src/extract/transpile/coffeeWrap.js: \
+	package.json
+
+src/extract/transpile/liveScriptWrap.js: \
+	package.json
+
+src/extract/transpile/typeScriptWrap.js: \
+	package.json
+
+src/extract/parse/toTypescriptAST.js: \
+	package.json
 
 src/extract/resolve/index.js: \
 	src/extract/resolve/resolve-AMD.js \
@@ -332,25 +370,6 @@ src/extract/resolve/resolve-commonJS.js: \
 	src/extract/resolve/readPackageDeps.js \
 	src/extract/transpile/meta.js \
 	src/utl/pathToPosix.js
-
-src/extract/transpile/meta.js: \
-	package.json \
-	src/extract/transpile/coffeeWrap.js \
-	src/extract/transpile/javaScriptWrap.js \
-	src/extract/transpile/liveScriptWrap.js \
-	src/extract/transpile/typeScriptWrap.js
-
-src/extract/transpile/coffeeWrap.js: \
-	package.json
-
-src/extract/transpile/liveScriptWrap.js: \
-	package.json
-
-src/extract/transpile/typeScriptWrap.js: \
-	package.json
-
-src/extract/transpile/index.js: \
-	src/extract/transpile/meta.js
 
 src/extract/gatherInitialSources.js: \
 	src/extract/ignore.js \
@@ -403,6 +422,22 @@ test/cli/normalizeOptions.spec.js: \
 
 test/cli/validateFileExistence.spec.js: \
 	src/cli/validateFileExistence.js
+
+test/extract/ast-extractors/extract-typescript-commonjs.spec.js: \
+	test/extract/ast-extractors/extract-typescript.utl.js
+
+test/extract/ast-extractors/extract-typescript.utl.js: \
+	src/extract/ast-extractors/extract-typescript-deps.js \
+	src/extract/parse/toTypescriptAST.js
+
+test/extract/ast-extractors/extract-typescript-exports.spec.js: \
+	test/extract/ast-extractors/extract-typescript.utl.js
+
+test/extract/ast-extractors/extract-typescript-imports.spec.js: \
+	test/extract/ast-extractors/extract-typescript.utl.js
+
+test/extract/ast-extractors/extract-typescript-triple-slash-directives.spec.js: \
+	test/extract/ast-extractors/extract-typescript.utl.js
 
 test/extract/dependencyEndsUpAtFrom.spec.js: \
 	src/extract/dependencyEndsUpAtFrom.js
