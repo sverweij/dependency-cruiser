@@ -70,18 +70,18 @@ and analyze from there.
 ### `--do-not-follow`: don't cruise modules adhering to this pattern any further
 If you _do_ want to see certain modules in your reports, but are not interested
 in these modules' dependencies, you'd pass the regular expression for those
-modules to the `--do-not-follow` (short: `-d`) option. A typical pattern you'd
+modules to the `--do-not-follow` (short: `-X`) option. A typical pattern you'd
 use with this is "node_modules":
 
 ```sh
-dependency-cruise -d "node_modules" -T html -f deps-with-unfollowed-node_modules.html src
+dependency-cruise -X "^node_modules" -T html -f deps-with-unfollowed-node_modules.html src
 ```
 
 ### `--exclude`: exclude modules from being cruised
 If you don't want to see certain modules in your report (or not have them
 validated), you can exclude them by passing a regular expression to the
 `--exclude` (short: `-x`) option. E.g. to exclude `node_modules` from being
-scanned:
+scanned altogether:
 
 ```sh
 dependency-cruise -x "node_modules" -T html -f deps-without-node_modules.html src
