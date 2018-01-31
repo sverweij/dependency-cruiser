@@ -33,6 +33,9 @@ program
     .option("-T, --output-type <type>", `output type - html|dot|err|json
                               (default: err)`)
     .option("-P, --prefix <prefix>", "prefix to use for links in the svg reporter")
+    .option("--ts-pre-compilation-deps", `detect dependencies that only exist before
+                              typescript-to-javascript compilation
+                              (off by default)`)
     .option("--init", `write a .dependency-cruiser.json with basic
                               validations to the current folder.`)
     .arguments("<files-or-directories>")

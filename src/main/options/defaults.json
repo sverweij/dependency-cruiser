@@ -1,5 +1,6 @@
 {
     "validate": false,
     "maxDepth": 0,
-    "moduleSystems": ["amd", "cjs", "es6"]
+    "moduleSystems": ["amd", "cjs", "es6"],
+    "tsPreCompilationDeps": false
 }

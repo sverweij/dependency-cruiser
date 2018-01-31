@@ -275,7 +275,8 @@
                 "cjs",
                 "es6"
             ],
-            "outputType": "json"
+            "outputType": "json",
+            "tsPreCompilationDeps": false
         }
     }
 }

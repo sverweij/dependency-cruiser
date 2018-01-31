@@ -242,6 +242,9 @@
                 "outputType": { "$ref": "#/definitions/OutputType" },
                 "prefix": {
                     "type": "string"
+                },
+                "tsPreCompilationDeps": {
+                    "type": "boolean"
                 }
             }
         }
