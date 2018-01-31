@@ -1,19 +1,21 @@
 "use strict";
 
+const tryRequire = require('semver-try-require');
+const $package   = require('../../../package.json');
+
+const typescript = tryRequire('typescript', $package.supportedTranspilers.typescript);
+
 /*
  * Both extractImport* assume the imports/ exports can only occur at
  * top level. AFAIK this the only place they're allowed, so we should
  * be good. Otherwise we'll need to walk the tree.
  */
 function extractImportsAndExports(pAST) {
-    const IMPORT_DECLARATION_KIND = 238;
-    const EXPORT_DECLARATION_KIND = 244;
-
     return pAST.statements
         .filter(pStatement =>
             (
-                pStatement.kind === IMPORT_DECLARATION_KIND ||
-                pStatement.kind === EXPORT_DECLARATION_KIND
+                typescript.SyntaxKind[pStatement.kind] === 'ImportDeclaration' ||
+                typescript.SyntaxKind[pStatement.kind] === 'ExportDeclaration'
             ) &&
             Boolean(pStatement.moduleSpecifier)
         ).map(pStatement => ({
@@ -23,11 +25,9 @@ function extractImportsAndExports(pAST) {
 }
 
 function extractImportEquals(pAST) {
-    const IMPORT_EQUALS_DECLARATION_KIND = 237;
-
     return pAST.statements
         .filter(pStatement =>
-            pStatement.kind === IMPORT_EQUALS_DECLARATION_KIND &&
+            typescript.SyntaxKind[pStatement.kind] === 'ImportEqualsDeclaration' &&
             pStatement.moduleReference &&
             pStatement.moduleReference.expression &&
             pStatement.moduleReference.expression.text
@@ -68,7 +68,9 @@ function extractTrippleSlashDirectives(pAST) {
 }
 
 module.exports = (pTypeScriptAST) =>
-    extractImportsAndExports(pTypeScriptAST)
-        .concat(extractImportEquals(pTypeScriptAST))
-        .concat(extractTrippleSlashDirectives(pTypeScriptAST));
+    Boolean(typescript)
+        ? extractImportsAndExports(pTypeScriptAST)
+            .concat(extractImportEquals(pTypeScriptAST))
+            .concat(extractTrippleSlashDirectives(pTypeScriptAST))
+        : [];
 
