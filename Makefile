@@ -170,6 +170,9 @@ src/extract/extract.js: \
 src/extract/ast-extractors/extract-AMD-deps.js: \
 	src/extract/ast-extractors/extract-commonJS-deps.js
 
+src/extract/ast-extractors/extract-typescript-deps.js: \
+	package.json
+
 src/extract/parse/toJavascriptAST.js: \
 	src/extract/transpile/index.js
 
@@ -325,6 +328,9 @@ src/extract/extract.js: \
 
 src/extract/ast-extractors/extract-AMD-deps.js: \
 	src/extract/ast-extractors/extract-commonJS-deps.js
+
+src/extract/ast-extractors/extract-typescript-deps.js: \
+	package.json
 
 src/extract/parse/toJavascriptAST.js: \
 	src/extract/transpile/index.js
