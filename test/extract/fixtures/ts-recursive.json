@@ -4,7 +4,8 @@
         "input": {
             "fileName": "test/extract/fixtures/ts/index.ts",
             "options": {
-                "forceCircular": true
+                "forceCircular": true,
+                "tsPreCompilationDeps": true
             }
         },
         "expected": [
@@ -128,11 +129,12 @@
         ]
     },
     {
-        "title": "also detect dependencies on typescript types",
+        "title": "also detect dependencies on typescript types (with --ts-pre-compilation-deps)",
         "input": {
             "fileName": "test/extract/fixtures/ts-circular-with-types/A.ts",
             "options": {
-                "forceCircular": true
+                "forceCircular": true,
+                "tsPreCompilationDeps": true
             }
         },
         "expected": [
@@ -177,9 +179,12 @@
         ]
     },
     {
-        "title": "also detect dependencies on modules that aren't used",
+        "title": "also detect dependencies on modules that aren't used (with --ts-pre-compilation-deps)",
         "input": {
-            "fileName": "test/extract/fixtures/ts-unused-dependencies/a.ts"
+            "fileName": "test/extract/fixtures/ts-unused-dependencies/a.ts",
+            "options": {
+                "tsPreCompilationDeps": true
+            }
         },
         "expected": [
             {
@@ -233,6 +238,52 @@
             },
             {
                 "source": "test/extract/fixtures/ts-unused-dependencies/c.ts",
+                "dependencies": []
+            }
+        ]
+    },
+    {
+        "title": "don't detect dependencies on typescript types (without --ts-pre-compilation-deps)",
+        "input": {
+            "fileName": "test/extract/fixtures/ts-circular-with-types/A.ts",
+            "options": {
+                "forceCircular": true
+            }
+        },
+        "expected": [
+            {
+                "source": "test/extract/fixtures/ts-circular-with-types/A.ts",
+                "dependencies": [
+                    {
+                        "resolved": "test/extract/fixtures/ts-circular-with-types/B.ts",
+                        "coreModule": false,
+                        "dependencyTypes": [
+                            "local"
+                        ],
+                        "followable": true,
+                        "matchesDoNotFollow": false,
+                        "couldNotResolve": false,
+                        "module": "./B",
+                        "moduleSystem": "es6",
+                        "valid": true,
+                        "circular": false
+                    }
+                ]
+            },
+            {
+                "source": "test/extract/fixtures/ts-circular-with-types/B.ts",
+                "dependencies": []
+            }
+        ]
+    },
+    {
+        "title": "don't detect dependencies on modules that aren't used (with --ts-pre-compilation-deps)",
+        "input": {
+            "fileName": "test/extract/fixtures/ts-unused-dependencies/a.ts"
+        },
+        "expected": [
+            {
+                "source": "test/extract/fixtures/ts-unused-dependencies/a.ts",
                 "dependencies": []
             }
         ]

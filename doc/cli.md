@@ -23,6 +23,9 @@ Options:
   -T, --output-type <type>      output type - html|dot|err|json
                                 (default: err)
   -P, --prefix <prefix>         prefix to use for links in the svg reporter
+  --ts-pre-compilation-deps     detect dependencies that only exist before
+                                typescript-to-javascript compilation
+                                (off by default)
   --init                        write a .dependency-cruiser.json with basic
                                 validations to the current folder.
   -h, --help                    output usage information
@@ -234,6 +237,81 @@ Extensions:
 ### `--module-systems`
 Here you can pass a list of module systems dependency-cruiser should use
 to detect dependencies. It defaults to `amd, cjs, es6`.
+
+### `--ts-pre-compilation-deps` (typescript only)
+By default dependency-cruiser does not take dependencies between typescript
+modules that don't exist after compilation to javascript. Pass this command
+line switch to do take them into account.
+
+#### Pre-compilation dependencies example: only importing a type
+As the javascript doesn't really know about types, dependencies on
+types only exist before, but not after compile time.
+
+`a.ts` exports an interface ...
+```typescript
+import { B } from './b';
+export interface A {
+  foo: string;
+}
+const b = new B();
+```
+... and `b.ts` uses that interface:
+```typescript
+import { A } from './a';
+export class B {};
+const a: A = {foo: "foo"};
+```
+
+After compilation `b.js` looks like this:
+```javascript
+// import omitted as it only contained a reference to a type
+export class B { };
+const a = { foo: "foo" }; // no type refer
+```
+
+Normally, without `--ts-pre-compilation-deps` the output will
+look like this:
+<img alt="'no import use' with typescript pre-compilation dependencies" src="real-world-samples/only-types-without-pre-compilation-deps.png">
+
+_With_ `--ts-pre-compilation-deps` the dependency graph _does_ include the
+dependency-on-a-type-only from `b.ts` to `a.ts`:
+
+<img alt="'no import use' with typescript pre-compilation dependencies" src="real-world-samples/only-types-with-pre-compilation-deps.png">
+
+#### Pre-compilation dependencies example: import without use 
+
+Similarly, if you import something, but don't use it, the dependency
+only exists before compilation. Take for example thse two 
+typescript modules:
+
+`a.ts`:
+```typescript
+import { B } from './b';
+export class A {
+}
+```
+
+`b.ts`:
+```typescript
+export class B {
+}
+```
+
+As `a.ts` uses none of the imports from b are used, the typescript
+compiler will omit them when compiling and yield this for `a.js`:
+```javascript
+// no imports here anymore...
+export class A {
+}
+```
+Hence, without `--ts-pre-compilation-deps` dependency-cruiser's
+output will look like this:
+
+<img alt="'no import use' without typescript pre-compilation dependencies" src="real-world-samples/no-use-without-pre-compilation-deps.png">
+
+... and with `--ts-pre-compilation-deps` like this:
+
+<img alt="'no import use' with typescript pre-compilation dependencies" src="real-world-samples/no-use-with-pre-compilation-deps.png">
 
 ### Cruising multiple files and directories in one go
 Just pass them as arguments. This, e.g. will cruise every file in the folders

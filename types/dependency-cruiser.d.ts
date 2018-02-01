@@ -201,6 +201,11 @@ export interface ICruiseOptions {
      * elsewhere (e.g. in an online repository)
      */
     prefix?: string;
+    /**
+     * if true detect dependencies that only exist before 
+     * typescript-to-javascript compilation.
+     */
+    tsPreCompilationDeps?: boolean;
 }
 
 /**

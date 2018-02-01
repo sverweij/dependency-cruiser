@@ -175,7 +175,8 @@
         "info": 0,
         "totalCruised": 8,
         "optionsUsed": {
-            "moduleSystems": ["amd", "cjs", "es6"]
+            "moduleSystems": ["amd", "cjs", "es6"],
+            "tsPreCompilationDeps": false
         }
     }
 }

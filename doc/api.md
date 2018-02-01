@@ -63,6 +63,8 @@ These are all the options:
  prefix      : a string to insert before links (in dot/ svg output) so with
                cruising local dependencies it is possible to point to sources
                elsewhere (e.g. in an online repository)
+ tsPreCompilationDeps: if true detect dependencies that only exist before 
+               typescript-to-javascript compilation.
 }
 ```
 

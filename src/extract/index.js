@@ -89,7 +89,8 @@ function makeOptionsPresentable(pOptions) {
         "maxDepth",
         "moduleSystems",
         "outputType",
-        "prefix"
+        "prefix",
+        "tsPreCompilationDeps"
     ];
 
     return SHARABLE_OPTIONS

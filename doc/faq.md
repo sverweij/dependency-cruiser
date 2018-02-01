@@ -25,6 +25,26 @@ This has a few advantages over bundling the transpilers as dependencies:
 - Dependency-cruiser will use the version of the transpiler you are using
   in your project (which might not be the most recent one for valid reasons).
 
+## (typescript) some dependencies I'd expect don't show up. What gives?
+### TL;DR
+Use `--ts-pre-compilation-deps` or put `"tsPreCompilationDeps" : true` in
+the `options` section of your `.dependency-cruiser.json`
+
+### Longer
+By default dependency-cruiser only takes post-compilation dependencies into
+account; dependencies between typescript modules that exist after compilation
+to javascript. Two types of dependencies do not fall into this category
+- imports that aren't used (yet)
+- imports of types only
+
+If you _do_ want to see these dependencies, do one of these:
+- pass `--ts-pre-compilation-deps` as a command line option
+- if you have a `.dependency-cruiser.json`, put `"tsPreCompilationDeps" : true` in
+the `options` section.
+
+See [--ts-pre-compilation-deps-typescript-only](./cli.md#--ts-pre-compilation-deps-typescript-only)
+for details and examples.
+
 ## How do I add support for my favorite alt-js language?
 Ask me nicely.
 

@@ -40,7 +40,8 @@ module.exports = (pFileName, pOptions) => {
         let lOptions = Object.assign(
             {
                 baseDir: process.cwd(),
-                moduleSystems: ["cjs", "es6", "amd"]
+                moduleSystems: ["cjs", "es6", "amd"],
+                tsPreCompilationDeps: false
             },
             pOptions
         );
@@ -53,7 +54,11 @@ module.exports = (pFileName, pOptions) => {
         }
 
         if (lOptions.moduleSystems.indexOf("es6") > -1) {
-            if (path.extname(pFileName).startsWith(".ts") && toTypescriptAST.isAvailable()) {
+            if (
+                lOptions.tsPreCompilationDeps &&
+                path.extname(pFileName).startsWith(".ts") &&
+                toTypescriptAST.isAvailable()
+            ) {
                 lDependencies = lDependencies.concat(
                     extractTypeScript(
                         toTypescriptAST.getASTCached(
