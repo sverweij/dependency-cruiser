@@ -31,6 +31,14 @@ Options:
   -h, --help                    output usage information
 ```
 
+### arguments
+You can pass a bunch of files, directories and 'glob' patterns. 
+dependency-cruiser will 
+- resolve the glob patterns (if any) to files and directories
+- scan directories (if any) for files with supported extensions
+- add the passed files to that
+... and start the cruise with the files thus found.
+
 ### `--output-type`: specify the output format
 
 #### err

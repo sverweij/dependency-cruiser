@@ -135,7 +135,7 @@ describe("gatherInitial", () => {
         );
     });
 
-    it("expands glob patterns (*/src/**/*.js)", () => {
+    it("expands glob patterns (**/src/**/*.js)", () => {
         expect(
             gather([
                 "test/extract/fixtures/gather-globbing/**/src/**/*.js"
