@@ -13,7 +13,7 @@ install:
 
 script:
   - make lint depcruise
-  - 'if test `node --version | cut -c 2` = 4; then npm run test:cover-node4; else npm run test:cover; fi'
+  - 'if test `node --version | cut -c 2` = 4; then npm run test:cover-node4; else npm run test:glob && npm run test:cover; fi'
   - 'if test `node --version | cut -c 2` = 8; then npm run nsp; fi'
 
 branches:
