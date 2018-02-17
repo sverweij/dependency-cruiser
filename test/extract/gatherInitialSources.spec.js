@@ -113,13 +113,52 @@ describe("gatherInitial", () => {
         );
     });
 
+    it("expands glob patterns (**/*.js)", () => {
+        expect(
+            gather([
+                "test/extract/fixtures/gather-globbing/packages/**/*.js"
+            ]).map(p2p)
+        ).to.deep.equal(
+            [
+                "test/extract/fixtures/gather-globbing/packages/baldr/spec/bow.spec.js",
+                "test/extract/fixtures/gather-globbing/packages/baldr/spec/index.spec.js",
+                "test/extract/fixtures/gather-globbing/packages/baldr/src/bow.js",
+                "test/extract/fixtures/gather-globbing/packages/baldr/src/index.js",
+                "test/extract/fixtures/gather-globbing/packages/freyja/index.js",
+                "test/extract/fixtures/gather-globbing/packages/loki/script/hots.js",
+                "test/extract/fixtures/gather-globbing/packages/odin/src/deep/ly.js",
+                "test/extract/fixtures/gather-globbing/packages/odin/src/deep/ly.spec.js",
+                "test/extract/fixtures/gather-globbing/packages/odin/src/deep/ly/index.js",
+                "test/extract/fixtures/gather-globbing/packages/odin/src/deep/ly/nested.js",
+                "test/extract/fixtures/gather-globbing/packages/odin/test/index.spec.js"
+            ]
+        );
+    });
+
+    it("expands glob patterns (**/src/**/*.js)", () => {
+        expect(
+            gather([
+                "test/extract/fixtures/gather-globbing/**/src/**/*.js"
+            ]).map(p2p)
+        ).to.deep.equal(
+            [
+                "test/extract/fixtures/gather-globbing/packages/baldr/src/bow.js",
+                "test/extract/fixtures/gather-globbing/packages/baldr/src/index.js",
+                "test/extract/fixtures/gather-globbing/packages/odin/src/deep/ly.js",
+                "test/extract/fixtures/gather-globbing/packages/odin/src/deep/ly.spec.js",
+                "test/extract/fixtures/gather-globbing/packages/odin/src/deep/ly/index.js",
+                "test/extract/fixtures/gather-globbing/packages/odin/src/deep/ly/nested.js"
+            ]
+        );
+    });
+
     /*
     it("using the same file twice as input has the same result as using it once", () => {
         expect(
             gather([
                 "test/extract/fixtures/ts/index.ts",
                 "test/extract/fixtures/ts/index.ts"
-            ])
+            ]).map(p2p)
         ).to.deep.equal(
             gather([
                 "test/extract/fixtures/ts/index.ts"
@@ -132,7 +171,7 @@ describe("gatherInitial", () => {
             gather([
                 "test/extract/fixtures/ts",
                 "test/extract/fixtures/ts"
-            ])
+            ]).map(p2p)
         ).to.deep.equal(
             gather([
                 "test/extract/fixtures/ts"
