@@ -22,18 +22,20 @@ module.exports =
         let lPackageContent = null;
         let lLookupDir = path.resolve(pFileDir);
 
-        while (lPackageContent === null) {
+        do {
             try {
                 // find the closest package.json from pFileDir
                 lPackageContent = fs.readFileSync(path.join(lLookupDir, 'package.json'), 'utf8');
             } catch (e) {
                 const lNextDir = path.dirname(lLookupDir);
+
                 if (lNextDir === lLookupDir) {
-                    break; // reached root directory
+                    // reached root directory
+                    break;
                 }
                 lLookupDir = lNextDir;
             }
-        }
+        } while (lPackageContent === null);
 
         if (lPackageContent !== null) {
             try {

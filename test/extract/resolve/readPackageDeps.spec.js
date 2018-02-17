@@ -1,8 +1,9 @@
 "use strict";
 
-const path   = require("path");
-const expect = require("chai").expect;
-const read   = require("../../../src/extract/resolve/readPackageDeps");
+const path            = require("path");
+const expect          = require("chai").expect;
+const read            = require("../../../src/extract/resolve/readPackageDeps");
+const rootPackageJson = require('../../../package.json');
 
 const FIXTUREDIR = "test/extract/resolve/fixtures/";
 
@@ -34,6 +35,6 @@ describe("readPackageDeps", () => {
     it("looks up the closest package.json", () => {
         expect(
             read(`${FIXTUREDIR}${path.sep}no-package-json`)
-        ).to.deep.equal(require('../../../package.json'));
+        ).to.deep.equal(rootPackageJson);
     });
 });
