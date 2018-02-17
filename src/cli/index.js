@@ -1,6 +1,7 @@
 "use strict";
 
 const fs                    = require('fs');
+const glob                  = require('glob');
 const main                  = require('../main');
 const validateFileExistence = require('./validateFileExistence');
 const normalizeOptions      = require('./normalizeOptions');
@@ -64,7 +65,9 @@ module.exports = (pFileDirArray, pOptions) => {
                 `\n  Successfully created '${normalizeOptions.determineRulesFileName(pOptions.validate)}'\n\n`
             );
         } else {
-            pFileDirArray.forEach(validateFileExistence);
+            pFileDirArray
+                .filter(pFileOrDir => !glob.hasMagic(pFileOrDir))
+                .forEach(validateFileExistence);
             if (pOptions.hasOwnProperty("validate")) {
                 validateFileExistence(
                     normalizeOptions.determineRulesFileName(pOptions.validate)
