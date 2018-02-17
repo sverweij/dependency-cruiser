@@ -7,15 +7,9 @@ const read   = require("../../../src/extract/resolve/readPackageDeps");
 const FIXTUREDIR = "test/extract/resolve/fixtures/";
 
 describe("readPackageDeps", () => {
-    it("returns 'null' if the base dir does not exist", () => {
-        expect(
-            read('this-folder-does-not-exist')
-        ).to.equal(null);
-    });
-
     it("returns 'null' if the package.json does not exist over there", () => {
         expect(
-            read(`${FIXTUREDIR}${path.sep}no-package-json`)
+            read(path.parse(process.cwd()).root)
         ).to.equal(null);
     });
 
@@ -35,5 +29,11 @@ describe("readPackageDeps", () => {
         expect(
             read(`${FIXTUREDIR}${path.sep}minimal-package-json`)
         ).to.deep.equal({name: "the-absolute-bare-minimum-package-json", version: "481.0.0"});
+    });
+
+    it("looks up the closest package.json", () => {
+        expect(
+            read(`${FIXTUREDIR}${path.sep}no-package-json`)
+        ).to.deep.equal(require('../../../package.json'));
     });
 });

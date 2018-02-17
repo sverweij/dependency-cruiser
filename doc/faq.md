@@ -86,3 +86,8 @@ Like so:
     - add it to the documentation of the -T option
 - In `test/report` add unit tests that prove your reporter does what it
     intends.
+
+## Does it work with my monorepo?
+
+Absolutely. For every cruised module the closest `package.json` file is used to determine
+if a package was declared as dependency.
