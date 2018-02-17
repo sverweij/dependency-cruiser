@@ -313,6 +313,11 @@ output will look like this:
 
 <img alt="'no import use' with typescript pre-compilation dependencies" src="real-world-samples/no-use-with-pre-compilation-deps.png">
 
+### `--preserve-symlinks`
+Whether to leave symlinks as is or resolve them to their realpath. This option defaults
+to `true` for backwards compatibility. This will change in a future major release,
+because Node resolves symlinks by default.
+
 ### Cruising multiple files and directories in one go
 Just pass them as arguments. This, e.g. will cruise every file in the folders
 src, test and lib (recursively) + the file called index.ts in the root.

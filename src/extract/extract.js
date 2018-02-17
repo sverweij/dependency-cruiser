@@ -24,15 +24,16 @@ const toTypescriptAST             = require('./parse/toTypescriptAST');
  *
  * @param  {string} pFileName path to the file
  * @param  {object} pOptions  an object with one or more of these properties:
- *                            - baseDir       - the directory to consider as the
- *                                              base for all files
- *                                              Default: the current working directory
- *                            - moduleSystems - an array of module systems to
- *                                              consider.
- *                                              Default: ["cjs", "es6", "amd"]
- *                            - exclude       - a regular expression string
- *                              with a pattern of modules to exclude (e.g.
- *                              "(node_modules)"). Default: none
+ *                            - baseDir         - the directory to consider as the
+ *                                                base for all files
+ *                                                Default: the current working directory
+ *                            - moduleSystems   - an array of module systems to
+ *                                                consider.
+ *                                                Default: ["cjs", "es6", "amd"]
+ *                            - exclude         - a regular expression string
+ *                                                with a pattern of modules to exclude
+ *                                                (e.g. "(node_modules)"). Default: none
+ *                            - preserveSymlink - don't resolve symlinks.
  * @return {array}           an array of dependency objects (see above)
  */
 module.exports = (pFileName, pOptions) => {
@@ -41,7 +42,8 @@ module.exports = (pFileName, pOptions) => {
             {
                 baseDir: process.cwd(),
                 moduleSystems: ["cjs", "es6", "amd"],
-                tsPreCompilationDeps: false
+                tsPreCompilationDeps: false,
+                preserveSymlinks: true
             },
             pOptions
         );
@@ -83,7 +85,8 @@ module.exports = (pFileName, pOptions) => {
                     const lResolved = resolve(
                         pDependency,
                         lOptions.baseDir,
-                        path.join(lOptions.baseDir, path.dirname(pFileName))
+                        path.join(lOptions.baseDir, path.dirname(pFileName)),
+                        lOptions.preserveSymlinks
                     );
                     const lMatchesDoNotFollow = Boolean(lOptions.doNotFollow)
                         ? RegExp(lOptions.doNotFollow, "g").test(lResolved.resolved)

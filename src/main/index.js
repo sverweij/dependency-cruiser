@@ -46,6 +46,7 @@ const TYPE2REPORTER      = {
  *                defaults to ["es6", "cjs", "amd"]
  *  outputType  : one of "json", "html", "dot", "csv" or "err". When left
  *                out the function will return a javascript object as dependencies
+ *  preserveSymlinks: if true does not resolve symlinks, defaults to true
  * }
  *
  * @param  {array}  pFileDirArray An array of (names of) files and directories to

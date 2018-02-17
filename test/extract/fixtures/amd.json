@@ -247,5 +247,67 @@
             "fileName": "test/extract/fixtures/amd/looks-like-amd-but-isnt.js"
         },
         "expected": []
+    },
+    {
+        "title": "require a symlinked module",
+        "input": {
+            "fileName": "test/extract/fixtures/amd/symlink.js"
+        },
+        "expected": [
+            {
+                "module": "../symlinked",
+                "resolved": "test/extract/fixtures/symlinked/index.js",
+                "moduleSystem": "amd",
+                "coreModule": false,
+                "dependencyTypes": [
+                    "local"
+                ],
+                "followable": true,
+                "matchesDoNotFollow": false,
+                "couldNotResolve": false
+            }
+        ]
+    },
+    {
+        "title": "require a symlinked module -- with preserveSymlinks=true",
+        "input": {
+            "fileName": "test/extract/fixtures/amd/symlink.js",
+            "preserveSymlinks": true
+        },
+        "expected": [
+            {
+                "module": "../symlinked",
+                "resolved": "test/extract/fixtures/symlinked/index.js",
+                "moduleSystem": "amd",
+                "coreModule": false,
+                "dependencyTypes": [
+                    "local"
+                ],
+                "followable": true,
+                "matchesDoNotFollow": false,
+                "couldNotResolve": false
+            }
+        ]
+    },
+    {
+        "title": "require a symlinked module -- with preserveSymlinks=false",
+        "input": {
+            "fileName": "test/extract/fixtures/amd/symlink.js",
+            "preserveSymlinks": false
+        },
+        "expected": [
+            {
+                "module": "../symlinked",
+                "resolved": "test/extract/fixtures/symlinkTarget/index.js",
+                "moduleSystem": "amd",
+                "coreModule": false,
+                "dependencyTypes": [
+                    "local"
+                ],
+                "followable": true,
+                "matchesDoNotFollow": false,
+                "couldNotResolve": false
+            }
+        ]
     }
 ]

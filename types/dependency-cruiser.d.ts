@@ -206,6 +206,11 @@ export interface ICruiseOptions {
      * typescript-to-javascript compilation.
      */
     tsPreCompilationDeps?: boolean;
+    /**
+     * if true leave symlinks untouched, otherwise use the realpath.
+     * Defaults to `true`
+     */
+    preserveSymlinks?: boolean;
 }
 
 /**

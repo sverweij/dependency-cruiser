@@ -41,6 +41,14 @@ function validateMaxDepth(pDepth) {
     }
 }
 
+function validatePreserveSymlinks(pOption) {
+    if (pOption !== undefined && typeof pOption !== 'boolean') {
+        throw Error(
+            `'${pOption}' is not a valid option for preserveSymlinks.`
+        );
+    }
+}
+
 function validate(pOptions) {
     let lRetval = {};
 
@@ -50,6 +58,7 @@ function validate(pOptions) {
         isSafeRegExp(pOptions.doNotFollow);
         validateOutputType(pOptions.outputType);
         validateMaxDepth(pOptions.maxDepth);
+        validatePreserveSymlinks(pOptions.preserveSymlinks);
         if (pOptions.hasOwnProperty('ruleSet') && pOptions.ruleSet.options) {
             lRetval = module.exports(pOptions.ruleSet.options);
         }

@@ -1,5 +1,8 @@
 "use strict";
 
+const path              = require('path');
+const fs                = require('fs');
+const symlinkDir        = require('symlink-dir');
 const expect            = require('chai').expect;
 const extract           = require('../../src/extract/extract');
 const cjsFixtures       = require('./fixtures/cjs.json');
@@ -12,6 +15,18 @@ const cjsBang           = require('./fixtures/cjs-bang.json');
 const amdBangRequirejs  = require('./fixtures/amd-bang-requirejs.json');
 const amdBangCJSWrapper = require('./fixtures/amd-bang-CJSWrapper.json');
 
+var symlinkDirectory = path.join(__dirname, 'fixtures', 'symlinked');
+before((cb) => {
+    symlinkDir(path.join(__dirname, 'fixtures', 'symlinkTarget'), symlinkDirectory)
+        .then(() => cb(), (err) => cb(err));
+});
+
+after(() => {
+    try {
+        fs.unlinkSync(symlinkDirectory);
+    } catch (e) {}
+});
+
 function runFixture(pFixture) {
     const lOptions = {};
 
@@ -20,6 +35,9 @@ function runFixture(pFixture) {
     }
     if (pFixture.input.moduleSystems) {
         lOptions.moduleSystems = pFixture.input.moduleSystems;
+    }
+    if (pFixture.input.preserveSymlinks !== undefined) {
+        lOptions.preserveSymlinks = pFixture.input.preserveSymlinks;
     }
 
     it(pFixture.title, () => {

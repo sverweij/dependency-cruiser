@@ -51,6 +51,9 @@
                 "tsPreCompilationDeps": {
                     "type": "boolean",
                     "description": "if true detect dependencies that only exist before typescript-to-javascript compilation."
+                },
+                "preserveSymlinks": {
+                    "type": "boolean"
                 }
             }
         }
