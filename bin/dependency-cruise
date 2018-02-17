@@ -15,17 +15,6 @@ if (!semver.satisfies(process.versions.node, $package.engines.node)) {
     process.exit(-1);
 }
 
-function boolean(arg) {
-    switch (arg) {
-        case 'true':
-            return true;
-        case 'false':
-            return false;
-        default:
-            return undefined;
-    }
-}
-
 program
     .version($package.version)
     .option("-i, --info", `shows what languages and extensions
@@ -49,7 +38,7 @@ program
                               (off by default)`)
     .option("--init", `write a .dependency-cruiser.json with basic
                               validations to the current folder.`)
-    .option("--preserve-symlinks <enabled>", `leave symlinks unchanged, defaults to true`, boolean)
+    .option("--preserve-symlinks <enabled>", `leave symlinks unchanged, defaults to true`, (arg) => arg !== 'false')
     .arguments("<files-or-directories>")
     .parse(process.argv);
 

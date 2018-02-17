@@ -42,7 +42,7 @@ function validateMaxDepth(pDepth) {
 }
 
 function validatePreserveSymlinks(pOption) {
-    if (pOption !== undefined && typeof pOption !== 'boolean') {
+    if (typeof pOption !== "undefined" && typeof pOption !== 'boolean') {
         throw Error(
             `'${pOption}' is not a valid option for preserveSymlinks.`
         );

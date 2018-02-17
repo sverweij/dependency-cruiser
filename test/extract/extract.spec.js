@@ -15,7 +15,9 @@ const cjsBang           = require('./fixtures/cjs-bang.json');
 const amdBangRequirejs  = require('./fixtures/amd-bang-requirejs.json');
 const amdBangCJSWrapper = require('./fixtures/amd-bang-CJSWrapper.json');
 
-var symlinkDirectory = path.join(__dirname, 'fixtures', 'symlinked');
+let symlinkDirectory = path.join(__dirname, 'fixtures', 'symlinked');
+
+/* eslint-disable mocha/no-top-level-hooks */
 before((cb) => {
     symlinkDir(path.join(__dirname, 'fixtures', 'symlinkTarget'), symlinkDirectory)
         .then(() => cb(), (err) => cb(err));
@@ -24,7 +26,9 @@ before((cb) => {
 after(() => {
     try {
         fs.unlinkSync(symlinkDirectory);
-    } catch (e) {}
+    } catch (e) {
+        // just swallow the error, there's nothing we can do about it
+    }
 });
 
 function runFixture(pFixture) {
@@ -36,7 +40,7 @@ function runFixture(pFixture) {
     if (pFixture.input.moduleSystems) {
         lOptions.moduleSystems = pFixture.input.moduleSystems;
     }
-    if (pFixture.input.preserveSymlinks !== undefined) {
+    if (typeof pFixture.input.preserveSymlinks !== "undefined") {
         lOptions.preserveSymlinks = pFixture.input.preserveSymlinks;
     }
 
