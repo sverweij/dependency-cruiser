@@ -321,5 +321,27 @@
                 "couldNotResolve": false
             }
         ]
+    },
+    {
+        "title": "require a symlinked module -- with preserveSymlinks=false and baseDir",
+        "input": {
+            "fileName": "symlink.js",
+            "baseDir": "test/extract/fixtures/cjs",
+            "preserveSymlinks": false
+        },
+        "expected": [
+            {
+                "module": "../symlinked",
+                "resolved": "../symlinkTarget/index.js",
+                "moduleSystem": "cjs",
+                "coreModule": false,
+                "dependencyTypes": [
+                    "local"
+                ],
+                "followable": true,
+                "matchesDoNotFollow": false,
+                "couldNotResolve": false
+            }
+        ]
     }
 ]

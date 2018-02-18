@@ -46,7 +46,7 @@ module.exports = (pDependency, pBaseDir, pFileDir, pPreserveSymlinks) => {
     if (!pPreserveSymlinks && !lResolvedModule.coreModule && !lResolvedModule.couldNotResolve) {
         try {
             lResolvedModule.resolved =
-                pathToPosix(path.relative(pBaseDir, fs.realpathSync(lResolvedModule.resolved)));
+                pathToPosix(path.relative(pBaseDir, fs.realpathSync(path.resolve(pBaseDir, lResolvedModule.resolved))));
         } catch (e) {
             lResolvedModule.couldNotResolve = true;
         }
