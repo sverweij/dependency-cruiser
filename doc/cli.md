@@ -23,6 +23,7 @@ Options:
   -T, --output-type <type>      output type - html|dot|err|json
                                 (default: err)
   -P, --prefix <prefix>         prefix to use for links in the svg reporter
+  --preserve-symlinks           leave symlinks unchanged (off by default)
   --ts-pre-compilation-deps     detect dependencies that only exist before
                                 typescript-to-javascript compilation
                                 (off by default)
@@ -315,8 +316,7 @@ output will look like this:
 
 ### `--preserve-symlinks`
 Whether to leave symlinks as is or resolve them to their realpath. This option defaults
-to `true` for backwards compatibility. This will change in a future major release,
-because Node resolves symlinks by default.
+to `false` (which is also nodejs' default behavior since release 6).
 
 ### arguments
 You can pass a bunch of files, directories and 'glob' patterns. 

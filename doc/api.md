@@ -65,8 +65,7 @@ These are all the options:
                elsewhere (e.g. in an online repository)
  tsPreCompilationDeps: if true detect dependencies that only exist before
                typescript-to-javascript compilation.
- preserveSymlinks: if true does not resolve symlinks.
-               Defaults to true for backwards compatibility.
+ preserveSymlinks: if true does not resolve symlinks; defaults to false
 }
 ```
 
