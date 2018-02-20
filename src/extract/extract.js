@@ -43,7 +43,7 @@ module.exports = (pFileName, pOptions) => {
                 baseDir: process.cwd(),
                 moduleSystems: ["cjs", "es6", "amd"],
                 tsPreCompilationDeps: false,
-                preserveSymlinks: true
+                preserveSymlinks: false
             },
             pOptions
         );

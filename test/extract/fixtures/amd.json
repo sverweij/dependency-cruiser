@@ -256,7 +256,7 @@
         "expected": [
             {
                 "module": "../symlinked",
-                "resolved": "test/extract/fixtures/symlinked/index.js",
+                "resolved": "test/extract/fixtures/symlinkTarget/index.js",
                 "moduleSystem": "amd",
                 "coreModule": false,
                 "dependencyTypes": [
