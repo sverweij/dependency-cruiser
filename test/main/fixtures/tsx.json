@@ -56,7 +56,8 @@
         "totalCruised": 3,
         "optionsUsed": {
             "moduleSystems": ["amd", "cjs", "es6"],
-            "tsPreCompilationDeps": false
+            "tsPreCompilationDeps": false,
+            "preserveSymlinks": false
         }
     }
 }

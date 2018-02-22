@@ -90,7 +90,8 @@ function makeOptionsPresentable(pOptions) {
         "moduleSystems",
         "outputType",
         "prefix",
-        "tsPreCompilationDeps"
+        "tsPreCompilationDeps",
+        "preserveSymlinks"
     ];
 
     return SHARABLE_OPTIONS

@@ -206,6 +206,12 @@ export interface ICruiseOptions {
      * typescript-to-javascript compilation.
      */
     tsPreCompilationDeps?: boolean;
+    /**
+     * if true leave symlinks untouched, otherwise use the realpath.
+     * Defaults to `false` (which is also nodejs's default behavior 
+     * since version 6)
+     */
+    preserveSymlinks?: boolean;
 }
 
 /**

@@ -60,8 +60,9 @@ The currently supported options are
 [`doNotFollow`](./cli.md#--do-not-follow-dont-cruise-modules-adhering-to-this-pattern-any-further),
 [`exclude`](./cli.md#--exclude-exclude-modules-from-being-cruised),
 [`moduleSystems`](./cli.md#--module-systems),
-[`prefix`](./cli.md#--prefix-prefixing-links) and
-[`tsPreCompilationDeps`](/cli.md#--ts-pre-compilation-deps-typescript-only).
+[`prefix`](./cli.md#--prefix-prefixing-links),
+[`tsPreCompilationDeps`](/cli.md#--ts-pre-compilation-deps-typescript-only) and
+[`preserveSymlinks`](/cli.md#--preserve-symlinks).
 See the [command line documentation](./cli.md) for details.
 
 ## The structure of an individual rule

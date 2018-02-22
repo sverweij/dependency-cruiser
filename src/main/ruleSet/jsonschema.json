@@ -51,6 +51,10 @@
                 "tsPreCompilationDeps": {
                     "type": "boolean",
                     "description": "if true detect dependencies that only exist before typescript-to-javascript compilation."
+                },
+                "preserveSymlinks": {
+                    "type": "boolean",
+                    "description": "if true leave symlinks untouched, otherwise use the realpath. Defaults to `false` (which is also nodejs's default behavior since version 6)"
                 }
             }
         }

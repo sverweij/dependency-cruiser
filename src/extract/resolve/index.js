@@ -1,5 +1,8 @@
 "use strict";
 
+const fs               = require('fs');
+const path             = require('path');
+const pathToPosix      = require('../../utl/pathToPosix');
 const resolveAMDModule = require('./resolve-AMD');
 const resolveCJSModule = require('./resolve-commonJS');
 
@@ -14,6 +17,7 @@ const isRelativeModuleName = pString => pString.startsWith(".");
  *                              for resolved files.
  * @param  {string} pFileDir    the directory of the file the dependency was
  *                              detected in
+ * @param  {boolean} pPreserveSymlinks whether to use `fs.realpath` to resolve symlinks
  * @return {object}             an object with as attributes:
  *                              - resolved: a string representing the pDependency
  *                                  resolved to a file on disk (or the pDependency
@@ -29,12 +33,23 @@ const isRelativeModuleName = pString => pString.startsWith(".");
  *                              - dependencyTypes: an array of dependencyTypes
  *
  */
-module.exports = (pDependency, pBaseDir, pFileDir) => {
+module.exports = (pDependency, pBaseDir, pFileDir, pPreserveSymlinks) => {
+    let lResolvedModule = null;
+
     if (isRelativeModuleName(pDependency.moduleName)){
-        return resolveCJSModule(pDependency.moduleName, pBaseDir, pFileDir);
+        lResolvedModule = resolveCJSModule(pDependency.moduleName, pBaseDir, pFileDir);
     } else if (["cjs", "es6"].indexOf(pDependency.moduleSystem) > -1){
-        return resolveCJSModule(pDependency.moduleName, pBaseDir, pFileDir);
+        lResolvedModule = resolveCJSModule(pDependency.moduleName, pBaseDir, pFileDir);
     } else {
-        return resolveAMDModule(pDependency.moduleName, pBaseDir, pFileDir);
+        lResolvedModule = resolveAMDModule(pDependency.moduleName, pBaseDir, pFileDir);
     }
+    if (!pPreserveSymlinks && !lResolvedModule.coreModule && !lResolvedModule.couldNotResolve) {
+        try {
+            lResolvedModule.resolved =
+                pathToPosix(path.relative(pBaseDir, fs.realpathSync(path.resolve(pBaseDir, lResolvedModule.resolved))));
+        } catch (e) {
+            lResolvedModule.couldNotResolve = true;
+        }
+    }
+    return lResolvedModule;
 };
