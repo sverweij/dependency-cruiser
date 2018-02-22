@@ -245,6 +245,9 @@
                 },
                 "tsPreCompilationDeps": {
                     "type": "boolean"
+                },
+                "preserveSymlinks": {
+                    "type": "boolean"
                 }
             }
         }

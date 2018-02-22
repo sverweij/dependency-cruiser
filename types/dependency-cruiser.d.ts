@@ -206,6 +206,12 @@ export interface ICruiseOptions {
      * typescript-to-javascript compilation.
      */
     tsPreCompilationDeps?: boolean;
+    /**
+     * if true leave symlinks untouched, otherwise use the realpath.
+     * Defaults to `false` (which is also nodejs's default behavior 
+     * since version 6)
+     */
+    preserveSymlinks?: boolean;
 }
 
 /**
@@ -213,11 +219,11 @@ export interface ICruiseOptions {
  * the specified directories in the pFileDirArray and returns the result
  * in an object.
  *
- * @param pFileDirArray An array of (names of) files and directories to start the cruise with
+ * @param pFileDirArray An array of (names of) files, directories and/ or glob patterns to start the cruise with
  * @param pOptions Options that influence the way the dependencies are cruised - and how they are returned.
- * @returns object
+ * @returns any
  */
-export function cruise(pFileDirArray: string[], pOptions?: ICruiseOptions ): object;
+export function cruise(pFileDirArray: string[], pOptions?: ICruiseOptions ): any;
 
 /**
  * Returns an array of supported transpilers and for each of the transpilers

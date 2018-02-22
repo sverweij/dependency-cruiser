@@ -1,6 +1,6 @@
 {
   "name": "dependency-cruiser",
-  "version": "2.13.1",
+  "version": "3.0.0-beta-0",
   "description": "Validate and visualize dependencies. With your rules. JavaScript, TypeScript, CoffeeScript. ES6, CommonJS, AMD.",
   "bin": {
     "dependency-cruiser": "bin/dependency-cruise",
@@ -22,7 +22,8 @@
     "test:cover": "istanbul cover node_modules/mocha/bin/_mocha -- test/*/*.spec.js test/*/*/*.spec.js",
     "test:cover-node4": "istanbul cover node_modules/mocha/bin/_mocha -- --invert --fgrep not-testable-in-node4 test/*/*.spec.js test/*/*/*.spec.js",
     "test:long": "mocha test/*/*.spec.js test/*/*/*.spec.js",
-    "test:watch": "mocha --watch --watch-extensions=json --reporter=min test/*/*.spec.js"
+    "test:watch": "mocha --watch --watch-extensions=json --reporter=min test/*/*.spec.js",
+    "test:glob": "set -f && test \"`bin/dependency-cruise test/extract/fixtures/gather-globbing/packages/**/src/**/*.js | grep \"no dependency violations found\"`\" = \"✔ no dependency violations found (6 modules cruised)\""
   },
   "keywords": [
     "javascript",
@@ -42,9 +43,9 @@
   "devDependencies": {
     "chai": "4.1.2",
     "chai-json-schema": "1.5.0",
-    "coffeescript": "2.2.1",
-    "eslint": "4.17.0",
-    "eslint-plugin-import": "2.8.0",
+    "coffeescript": "2.2.2",
+    "eslint": "4.18.1",
+    "eslint-plugin-import": "2.9.0",
     "eslint-plugin-mocha": "4.11.0",
     "eslint-plugin-node": "6.0.0",
     "eslint-plugin-security": "1.4.0",
@@ -55,6 +56,7 @@
     "normalize-newline": "3.0.0",
     "npm-check-updates": "2.14.0",
     "nsp": "3.2.1",
+    "symlink-dir": "^1.1.2",
     "tslint": "5.9.1",
     "typescript": "2.7.2"
   },
@@ -72,6 +74,7 @@
     "chalk": "2.3.1",
     "commander": "2.14.1",
     "figures": "2.0.0",
+    "glob": "7.1.2",
     "handlebars": "4.0.11",
     "lodash": "4.17.5",
     "resolve": "1.5.0",

@@ -276,7 +276,8 @@
                 "es6"
             ],
             "outputType": "json",
-            "tsPreCompilationDeps": false
+            "tsPreCompilationDeps": false,
+            "preserveSymlinks": false
         }
     }
 }

@@ -23,6 +23,7 @@ Options:
   -T, --output-type <type>      output type - html|dot|err|json
                                 (default: err)
   -P, --prefix <prefix>         prefix to use for links in the svg reporter
+  --preserve-symlinks           leave symlinks unchanged (off by default)
   --ts-pre-compilation-deps     detect dependencies that only exist before
                                 typescript-to-javascript compilation
                                 (off by default)
@@ -313,12 +314,40 @@ output will look like this:
 
 <img alt="'no import use' with typescript pre-compilation dependencies" src="real-world-samples/no-use-with-pre-compilation-deps.png">
 
-### Cruising multiple files and directories in one go
+### `--preserve-symlinks`
+Whether to leave symlinks as is or resolve them to their realpath. This option defaults
+to `false` (which is also nodejs' default behavior since release 6).
+
+### arguments
+You can pass a bunch of files, directories and 'glob' patterns. 
+dependency-cruiser will 
+- resolve the glob patterns (if any) to files and directories
+- scan directories (if any) for files with supported extensions
+- add the passed files to that
+... and start the cruise with the files thus found.
+
+#### Cruising multiple files and directories in one go
 Just pass them as arguments. This, e.g. will cruise every file in the folders
 src, test and lib (recursively) + the file called index.ts in the root.
 
 ```sh
 depcruise --output-type dot src test lib index.ts
+```
+
+#### passing globs as parameters
+dependency-cruiser uses [node-glob](https://github.com/isaacs/node-glob) to
+make sure globs work the same accross platforms. It cannot prevent the
+environment from expanding globs before it can process it, however.
+
+As each environment interprets globs slightly differently, a pattern
+like `packages/**/src/**/*.js` will yield different results.
+
+To make sure glob expansion works _exactly_ the same accross
+platforms slap some quotes around them, so the it's not the environment
+(/ shell) expanding the glob, but dependency-cruiser itself:
+
+```sh
+depcruise "packages/**/src/**/*.js"
 ```
 
 ## Daphne's dependencies - a gentle introduction

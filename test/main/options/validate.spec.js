@@ -44,6 +44,26 @@ describe("validateOptions", () => {
         }
     });
 
+    it("passes when boolean is passed for preserveSymlinks ", () => {
+        try {
+            validateOptions({"preserveSymlinks": true});
+            expect("to be here without throws happening").to.equal("to be here without throws happening");
+        } catch (e) {
+            expect("not to be here").to.equal(`still here, though: ${e}`);
+        }
+    });
+
+    it("throws when non-boolean is passed for preserveSymlinks ", () => {
+        try {
+            validateOptions({"preserveSymlinks": 481});
+            expect("not to be here").to.equal("still here, though");
+        } catch (e) {
+            expect(e.toString()).to.deep.equal(
+                "Error: '481' is not a valid option for preserveSymlinks - use either true or false"
+            );
+        }
+    });
+
     it("throws when a non-integer is passed as maxDepth", () => {
         try {
             validateOptions({"maxDepth": "not an integer"});
@@ -125,6 +145,7 @@ describe("validateOptions", () => {
             );
         }
     });
+
 
     it("command line options trump those passed in --validate ruleSet", () => {
         const lOptions = validateOptions(
