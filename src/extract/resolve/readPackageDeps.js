@@ -2,6 +2,7 @@
 
 const path = require('path');
 const fs   = require('fs');
+const _memoize = require('lodash/memoize');
 
 /* a note on the un-cached fs.readFileSync:
  *   I've done some tests with caching the function (with _.memoize), however
@@ -16,7 +17,7 @@ const fs   = require('fs');
  *   - ~400 javascript, typescript and coffeescript modules
  */
 
-module.exports =
+const readPackageDeps =
     (pFileDir) => {
         let lRetval = null;
         let lPackageContent = null;
@@ -46,3 +47,5 @@ module.exports =
         }
         return lRetval;
     };
+
+module.exports = _memoize(readPackageDeps);
