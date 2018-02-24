@@ -56,7 +56,7 @@ module.exports = (pModuleName, pBaseDir, pFileDir) => {
             dependencyTypes: determineDependencyTypes(
                 lRetval,
                 pModuleName,
-                readPackageDeps(pBaseDir),
+                readPackageDeps(pFileDir),
                 pFileDir
             )
         }
