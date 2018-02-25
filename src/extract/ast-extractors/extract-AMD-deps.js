@@ -41,11 +41,8 @@ module.exports = (pAST, pDependencies) => {
                      pNode.expression.callee.name === "define") {
                     pNode.expression.arguments
                         .filter(pArg => pArg.type === "FunctionExpression")
-                        .forEach(pFunction => {
-                            if (pFunction.params.filter(pParam => pParam.name === "require")){
-                                extractCommonJSDependencies(pFunction.body, pDependencies, "amd");
-                            }
-                        });
+                        .filter(pFunction => pFunction.params.some(pParam => pParam.name === "require"))
+                        .forEach(pFunction => extractCommonJSDependencies(pFunction.body, pDependencies, "amd"));
                 }
             }
         }

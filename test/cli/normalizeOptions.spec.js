@@ -36,27 +36,6 @@ describe("normalizeOptions", () => {
         ).to.deep.equal(["amd", "cjs", "es6"]);
     });
 
-    it("--system acts as an alias for --module-systems", () => {
-        expect(
-            normalizeOptions({system: "something,something"}).moduleSystems
-        ).to.deep.equal(
-            ["something", "something"]
-        );
-    });
-
-    it("--system acts as an alias for --module-systems, but does not overwrite moduleSystems", () => {
-        expect(
-            normalizeOptions(
-                {
-                    moduleSystems: "something,something",
-                    system: "sytem,othersystem"
-                }
-            ).moduleSystems
-        ).to.deep.equal(
-            ["something", "something"]
-        );
-    });
-
     it("-v parameter assumes .dependency-cruiser for rules", () => {
         try {
             normalizeOptions({validate: true});
