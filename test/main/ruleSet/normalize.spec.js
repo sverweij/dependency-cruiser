@@ -2,12 +2,12 @@
 const expect     = require('chai').expect;
 const normalizer = require('../../../src/main/ruleSet/normalize');
 
-describe("validator", () => {
+describe("ruleSet/normalize", () => {
     it("leaves the empty ruleset alone", () => {
         expect(normalizer({})).to.deep.equal({});
     });
 
-    it("adds defaults for severity and warn when they're not filled", () => {
+    it("allowed: adds allowedSeverity when it wasn't filled out; does not add severity/ name to the rule", () => {
         expect(normalizer({
             "allowed": [{
                 "from": ".+",
@@ -16,23 +16,38 @@ describe("validator", () => {
         })).to.deep.equal({
             "allowed": [{
                 "from": ".+",
-                "to": ".+",
-                "severity": "warn",
-                "name": "unnamed"
-            }]
+                "to": ".+"
+            }],
+            "allowedSeverity": "warn"
+        });
+    });
+
+    it("allowed: leaves allowedSeverity alone when it wasn filled out; does not add severity/ name to the rule", () => {
+        expect(normalizer({
+            "allowed": [{
+                "from": ".+",
+                "to": ".+"
+            }],
+            "allowedSeverity": "error"
+        })).to.deep.equal({
+            "allowed": [{
+                "from": ".+",
+                "to": ".+"
+            }],
+            "allowedSeverity": "error"
         });
     });
 
     it("corrects the severity to a default when it's not a recognized one", () => {
         expect(normalizer({
-            "allowed": [{
+            "forbidden": [{
                 "from": ".+",
                 "to": ".+",
                 "severity": "unrecognized",
                 "name": "all-ok"
             }]
         })).to.deep.equal({
-            "allowed": [{
+            "forbidden": [{
                 "from": ".+",
                 "to": ".+",
                 "severity": "warn",
@@ -43,14 +58,14 @@ describe("validator", () => {
 
     it("keeps the severity if it's a recognized one", () => {
         expect(normalizer({
-            "allowed": [{
+            "forbidden": [{
                 "from": ".+",
                 "to": ".+",
                 "severity": "error",
                 "name": "all-ok"
             }]
         })).to.deep.equal({
-            "allowed": [{
+            "forbidden": [{
                 "from": ".+",
                 "to": ".+",
                 "severity": "error",

@@ -19,6 +19,10 @@
                 "$ref" :"#/definitions/RuleType"
             }
         },
+        "allowedSeverity": {
+            "$ref": "#/definitions/SeverityType",
+            "description": "Severity to use when a dependency is not in the 'allowed' set of rules. Defaults to 'warn'"
+        },
         "options": {
             "type": "object",
             "description": "Runtime configuration options",
