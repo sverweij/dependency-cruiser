@@ -50,7 +50,6 @@ src/report/%.template.js: src/report/%.template.hbs
 	echo ".eslintrc.json" >> $@
 	echo ".github" >> $@
 	echo ".gitlab-ci.yml" >> $@
-	echo ".istanbul.yml" >> $@
 	echo ".travis.yml" >> $@
 	echo "appveyor.yml" >> $@
 	echo "CODE_OF_CONDUCT.md" >> $@
