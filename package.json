@@ -19,8 +19,10 @@
     "postversion": "git push && git push --tags",
     "preversion": "test `git branch | grep \"^* [a-zA-Z]\" | cut -c 3-` = 'master'",
     "test": "mocha --bail --reporter dot test/*/*.spec.js test/*/*/*.spec.js",
-    "test:cover": "istanbul cover node_modules/mocha/bin/_mocha -- test/*/*.spec.js test/*/*/*.spec.js",
-    "test:cover-node4": "istanbul cover node_modules/mocha/bin/_mocha -- --invert --fgrep not-testable-in-node4 test/*/*.spec.js test/*/*/*.spec.js",
+    "test:node4": "mocha --bail --reporter dot --invert --fgrep not-testable-in-node4 test/*/*.spec.js test/*/*/*.spec.js",
+    "test:cover": "nyc --check-coverage npm test",
+    "test:cover:report": "nyc report --reporter=html",
+    "test:cover-node4": "nyc npm run test:node4",
     "test:long": "mocha test/*/*.spec.js test/*/*/*.spec.js",
     "test:watch": "mocha --watch --watch-extensions=json --reporter=min test/*/*.spec.js",
     "test:glob": "set -f && test \"`bin/dependency-cruise test/extract/fixtures/gather-globbing/packages/**/src/**/*.js | grep \"no dependency violations found\"`\" = \"✔ no dependency violations found (6 modules cruised)\""
@@ -42,10 +44,12 @@
     "name": "Sander Verweij",
     "url": "https://sverweij.github.io"
   },
-  "contributors": [{
-    "name": "Klaus Meinhardt",
-    "url": "https://github.com/ajafff"
-  }],
+  "contributors": [
+    {
+      "name": "Klaus Meinhardt",
+      "url": "https://github.com/ajafff"
+    }
+  ],
   "license": "MIT",
   "devDependencies": {
     "chai": "4.1.2",
@@ -54,15 +58,15 @@
     "eslint": "4.18.1",
     "eslint-plugin-import": "2.9.0",
     "eslint-plugin-mocha": "4.11.0",
-    "eslint-plugin-node": "6.0.0",
+    "eslint-plugin-node": "6.0.1",
     "eslint-plugin-security": "1.4.0",
     "intercept-stdout": "0.1.2",
-    "istanbul": "0.4.5",
     "js-makedepend": "2.4.6",
     "mocha": "5.0.1",
     "normalize-newline": "3.0.0",
     "npm-check-updates": "2.14.0",
     "nsp": "3.2.1",
+    "nyc": "11.4.1",
     "symlink-dir": "^1.1.2",
     "tslint": "5.9.1",
     "typescript": "2.7.2"
@@ -88,6 +92,15 @@
     "safe-regex": "1.1.0",
     "semver": "5.5.0",
     "semver-try-require": "1.1.1"
+  },
+  "nyc": {
+    "statements": 99.85,
+    "branches": 98.77,
+    "functions": 100,
+    "lines": 99.84,
+    "exclude": ["test/**/*", "src/report/*.template.js", "coverage/**/*", "tmp*", "docs/**/*"],
+    "reporter": ["text-summary"],
+    "all": true
   },
   "engines": {
     "node": ">=4"

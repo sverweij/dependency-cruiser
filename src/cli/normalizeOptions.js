@@ -32,10 +32,6 @@ module.exports = (pOptions) => {
         pOptions
     );
 
-    if (pOptions.hasOwnProperty("system") && !pOptions.hasOwnProperty("moduleSystems")) {
-        pOptions.moduleSystems = pOptions.system;
-    }
-
     if (pOptions.hasOwnProperty("moduleSystems")) {
         pOptions.moduleSystems = pOptions.moduleSystems.split(",").map(trim);
     }

@@ -1,3 +1,0 @@
-instrumentation:
-    excludes: ["test/**/*", "src/report/*.template.js", "coverage/**/*", "tmp*", "docs/**/*"]
-    include-all-sources: true

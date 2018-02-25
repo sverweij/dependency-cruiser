@@ -10,7 +10,7 @@
 .vscode
 
 # metrics results
-.nyc
+.nyc_output
 coverage
 jsdoc
 platoreports

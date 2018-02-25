@@ -256,7 +256,7 @@ describe("#processCLI", () => {
             );
         });
 
-        it("dependency-cruise --system cjs,es6 will generates a deprecation warning", () => {
+        it("dependency-cruise test/cli/fixtures without rules will report no dependency violations on stdout", () => {
             let lCapturedStderr = "";
             const unhookInterceptStdOut = intercept(() => {
                 // This space intentionally left empty
@@ -269,7 +269,7 @@ describe("#processCLI", () => {
             processCLI(
                 ["test/cli/fixtures"],
                 {
-                    system: "cjs,es6"
+                    moduleSystem: "cjs,es6"
                 }
             );
             unhookInterceptStdOut();
@@ -281,7 +281,7 @@ describe("#processCLI", () => {
             return expect(
                 lCapturedStderr
             ).to.contain(
-                "deprecated"
+                "no dependency violations found"
             );
         });
 
