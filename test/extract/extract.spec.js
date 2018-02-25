@@ -115,7 +115,7 @@ describe('Error scenarios - ', () => {
     });
     it('Raises an exception on non-existing files', () => {
         expect(
-            () => extract("non-existing-file.js")
+            () => extract("non-existing-file.md")
         ).to.throw(
             "Extracting dependencies ran afoul of...\n\n  ENOENT: no such file or directory, open "
         );
