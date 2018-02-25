@@ -544,4 +544,17 @@ describe("validate - licenseNot", () => {
             )
         ).to.deep.equal({valid: false, rule: {name: "only-somepl-license", severity: "warn"}});
     });
+
+    it("if there's more than one violated rule, the first one with the highest severity is returned", () => {
+        expect(
+            validate(
+                true,
+                _readRuleSet("./test/validate/fixtures/rules.not-in-allowed-and-a-forbidden.json"),
+                "something",
+                {
+                    "resolved": "src/some/thing/else.js"
+                }
+            )
+        ).to.deep.equal({valid: false, rule: {name: "everything-is-forbidden", severity: "error"}});
+    });
 });
