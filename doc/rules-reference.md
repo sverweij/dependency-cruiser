@@ -54,7 +54,7 @@ for each violated rule.
 A list of rules that describe dependencies that are _allowed_. dependency-cruiser
 will emit a 'not-in-allowed' message for each dependency that does not
 satisfy at least one of them. The severity of the message is _warning_ by
-default, but you can override it with `
+default, but you can override it with `allowedSeverity`:
 
 ### `allowedSeverity`
 The severity to use in reports when a dependency is not in the `allowed`
