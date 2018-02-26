@@ -1,0 +1,13 @@
+{
+    "allowed": [
+        {
+            "from": {
+                "path": "only-this-one"
+            },
+            "to": {
+                "path": "only-that-one"
+            }
+        }
+    ],
+    "allowedSeverity": "error"
+}

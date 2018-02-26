@@ -35,7 +35,7 @@ function normalizeRule(pRule) {
  */
 module.exports = (pRuleSet) => {
     if (pRuleSet.hasOwnProperty("allowed")){
-        pRuleSet.allowed = pRuleSet.allowed.map(normalizeRule);
+        pRuleSet.allowedSeverity = normalizeSeverity(pRuleSet.allowedSeverity);
     }
 
     if (pRuleSet.hasOwnProperty("forbidden")){

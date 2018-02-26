@@ -48,6 +48,16 @@ describe("validate - generic tests", () => {
         ).to.deep.equal({valid: false, rule: {severity: "warn", "name": "not-in-allowed"}});
     });
 
+    it("is ok with the 'impossible to match allowed' validation - errors when configured so", () => {
+        expect(
+            validate(
+                true,
+                _readRuleSet("./test/validate/fixtures/rules.impossible-to-match-error.allowed.json"),
+                "koos koets",
+                {"resolved": "robby van de kerkhof"}
+            )
+        ).to.deep.equal({valid: false, rule: {severity: "error", "name": "not-in-allowed"}});
+    });
 
     it("is ok with the 'nothing allowed' validation", () => {
         expect(

@@ -19,6 +19,7 @@
 1. [The structure of a dependency-cruiser rules file](#the-structure-of-a-dependency-cruiser-rules-file)
     - [`forbidden`](#forbidden)
     - [`allowed`](#allowed)
+    - [`allowedSeverity`](#allowedSeverity)
     - [`options`](#options)
 2. [The structure of an individual rule](#the-structure-of-an-individual-rule)
 3. [Conditions](#conditions)
@@ -51,8 +52,14 @@ for each violated rule.
 
 ### `allowed`
 A list of rules that describe dependencies that are _allowed_. dependency-cruiser
-will emit the warning message 'not-in-allowed' for each dependency that does not
-satisfy at least one of them.
+will emit a 'not-in-allowed' message for each dependency that does not
+satisfy at least one of them. The severity of the message is _warning_ by
+default, but you can override it with `allowedSeverity`:
+
+### `allowedSeverity`
+The severity to use in reports when a dependency is not in the `allowed`
+list of rules. It takes the same values as other `severity` fields and
+also defaults to `warn`.
 
 ### `options`
 Some of the command line options, so you don't have to specify them on each run.
