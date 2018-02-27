@@ -9,7 +9,7 @@ stable *the API is under construction*.
 ### Basic use
 
 ```javascript
-const depcruise = require('dependency-cruiser');
+const depcruise = require('dependency-cruiser').cruise;
 
 let dependencies = depcruise(["src"]);
 ```
