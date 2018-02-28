@@ -446,10 +446,10 @@
                         "couldNotResolve": false,
                         "valid": false,
                         "circular": true,
-                        "rule": {
+                        "rules": [{
                             "name": "no-circular",
                             "severity": "info"
-                        }
+                        }]
                     }
                 ]
             },
@@ -473,10 +473,10 @@
                         "couldNotResolve": false,
                         "valid": false,
                         "circular": true,
-                        "rule": {
+                        "rules": [{
                             "name": "no-circular",
                             "severity": "info"
-                        }
+                        }]
                     }
                 ]
             }

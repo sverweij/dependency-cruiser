@@ -10,7 +10,7 @@ describe("err reporter", () => {
         expect(render(okdeps).dependencies).to.contain('no dependency violations found');
     });
     it("renders a bunch of errors", () => {
-        expect(render(deps).dependencies).to.contain('1 dependency violations (1 errors, 0 warnings)');
+        expect(render(deps).dependencies).to.contain('2 dependency violations (2 errors, 0 warnings)');
     });
     it("renders a bunch of warnings", () => {
         expect(render(warndeps).dependencies).to.contain('1 dependency violations (0 errors, 1 warnings)');

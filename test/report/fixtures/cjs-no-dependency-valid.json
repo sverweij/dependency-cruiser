@@ -18,10 +18,10 @@
             "coreModule": false,
             "followable": true,
             "valid": false,
-            "rule": {
+            "rules": [{
               "severity": "warn",
               "name": "unnamed"
-            }
+            }]
           },
           {
             "module": "someothermodule",
@@ -30,10 +30,10 @@
             "coreModule": false,
             "followable": true,
             "valid": false,
-            "rule": {
+            "rules": [{
               "severity": "warn",
               "name": "unnamed"
-            }
+            }]
           }
         ]
       },
@@ -47,10 +47,10 @@
             "coreModule": true,
             "followable": false,
             "valid": false,
-            "rule": {
+            "rules": [{
               "severity": "warn",
               "name": "unnamed"
-            }
+            }]
           }
         ]
       },
@@ -70,10 +70,10 @@
             "coreModule": true,
             "followable": false,
             "valid": false,
-            "rule": {
+            "rules": [{
               "severity": "warn",
               "name": "unnamed"
-            }
+            }]
           }
         ]
       },
@@ -87,10 +87,10 @@
             "coreModule": false,
             "followable": true,
             "valid": false,
-            "rule": {
+            "rules": [{
               "severity": "warn",
               "name": "unnamed"
-            }
+            }]
           },
           {
             "module": "./one_only_two",
@@ -99,10 +99,10 @@
             "coreModule": false,
             "followable": true,
             "valid": false,
-            "rule": {
+            "rules": [{
               "severity": "warn",
               "name": "unnamed"
-            }
+            }]
           },
           {
             "module": "./shared",
@@ -111,10 +111,10 @@
             "coreModule": false,
             "followable": true,
             "valid": false,
-            "rule": {
+            "rules": [{
               "severity": "warn",
               "name": "unnamed"
-            }
+            }]
           },
           {
             "module": "./sub/dir",
@@ -123,10 +123,10 @@
             "coreModule": false,
             "followable": true,
             "valid": false,
-            "rule": {
+            "rules": [{
               "severity": "warn",
               "name": "unnamed"
-            }
+            }]
           },
           {
             "module": "fs",
@@ -135,10 +135,10 @@
             "coreModule": true,
             "followable": false,
             "valid": false,
-            "rule": {
+            "rules": [{
               "severity": "warn",
               "name": "unnamed"
-            }
+            }]
           },
           {
             "module": "somemodule",
@@ -147,10 +147,10 @@
             "coreModule": false,
             "followable": true,
             "valid": false,
-            "rule": {
+            "rules": [{
               "severity": "warn",
               "name": "unnamed"
-            }
+            }]
           }
         ]
       },
@@ -171,10 +171,10 @@
             "coreModule": true,
             "followable": false,
             "valid": false,
-            "rule": {
+            "rules": [{
               "severity": "warn",
               "name": "unnamed"
-            }
+            }]
           }
         ]
       },
@@ -188,10 +188,10 @@
             "coreModule": false,
             "followable": true,
             "valid": false,
-            "rule": {
+            "rules": [{
               "severity": "warn",
               "name": "unnamed"
-            }
+            }]
           },
           {
             "module": "path",
@@ -200,10 +200,10 @@
             "coreModule": true,
             "followable": false,
             "valid": false,
-            "rule": {
+            "rules": [{
               "severity": "warn",
               "name": "unnamed"
-            }
+            }]
           }
         ]
       },
@@ -217,10 +217,10 @@
             "coreModule": true,
             "followable": false,
             "valid": false,
-            "rule": {
+            "rules": [{
               "severity": "warn",
               "name": "unnamed"
-            }
+            }]
           }
         ]
       },
@@ -234,10 +234,10 @@
             "coreModule": false,
             "followable": true,
             "valid": false,
-            "rule": {
+            "rules": [{
               "severity": "warn",
               "name": "unnamed"
-            }
+            }]
           },
           {
             "module": "./somedata.json",
@@ -246,10 +246,10 @@
             "coreModule": false,
             "followable": false,
             "valid": false,
-            "rule": {
+            "rules": [{
               "severity": "warn",
               "name": "unnamed"
-            }
+            }]
           },
           {
             "module": "./two_only_one",
@@ -258,10 +258,10 @@
             "coreModule": false,
             "followable": true,
             "valid": false,
-            "rule": {
+            "rules": [{
               "severity": "warn",
               "name": "unnamed"
-            }
+            }]
           },
           {
             "module": "http",
@@ -270,10 +270,10 @@
             "coreModule": true,
             "followable": false,
             "valid": false,
-            "rule": {
+            "rules": [{
               "severity": "warn",
               "name": "unnamed"
-            }
+            }]
           }
         ]
       },
@@ -299,10 +299,10 @@
             "coreModule": false,
             "followable": true,
             "valid": false,
-            "rule": {
+            "rules": [{
               "severity": "warn",
               "name": "unnamed"
-            }
+            }]
           }
         ]
       }
@@ -316,9 +316,17 @@
                   "name": "no-leesplank",
                   "severity": "error"
               }
-          }
+          },
+          {
+            "from": "aap",
+            "to": "noot",
+            "rule": {
+                "name": "no-schaap",
+                "severity": "error"
+            }
+        }
       ],
-      "error": 1,
+      "error": 2,
       "warn": 0,
       "info": 0
   }

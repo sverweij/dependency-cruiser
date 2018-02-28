@@ -94,7 +94,7 @@ function validateAgainstRules(pRuleSet, pFrom, pTo) {
     let lRetval = {valid:true};
 
     if (pRuleSet.allowed){
-        if (!Boolean(pRuleSet.allowed.find(matchRule(pFrom, pTo)))){
+        if (!Boolean(pRuleSet.allowed.some(matchRule(pFrom, pTo)))){
             lFoundRuleViolations.push({
                 severity: pRuleSet.allowedSeverity,
                 name: "not-in-allowed"
@@ -115,8 +115,9 @@ function validateAgainstRules(pRuleSet, pFrom, pTo) {
     }
 
     lRetval.valid = lFoundRuleViolations.length === 0;
+    lFoundRuleViolations = lFoundRuleViolations.sort(compareSeverity);
     if (!lRetval.valid){
-        lRetval.rule = lFoundRuleViolations.sort(compareSeverity)[0];
+        lRetval.rules = lFoundRuleViolations;
     }
     return lRetval;
 }
