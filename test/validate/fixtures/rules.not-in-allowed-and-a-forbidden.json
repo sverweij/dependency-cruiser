@@ -1,0 +1,17 @@
+{
+    "forbidden": [
+        {
+            "severity": "error",
+            "name": "everything-is-forbidden",
+            "from": {},
+            "to": {}
+        }
+    ],
+    "allowedSeverity": "info",
+    "allowed": [
+        {
+            "from": {},
+            "to": { "path": "does-not-exist" }
+        }
+    ]
+}

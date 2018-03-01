@@ -69,6 +69,27 @@ function colorize(pDependencyItem){
     );
 }
 
+function extractFirstTransgression(pDependencyItem){
+    return Object.assign(
+        {},
+        pDependencyItem,
+        {
+            dependencies: pDependencyItem.dependencies.map(
+                pDependency =>
+                    pDependency.rules
+                        ? Object.assign(
+                            {},
+                            pDependency,
+                            {
+                                rule: pDependency.rules[0]
+                            }
+                        )
+                        : pDependency
+            )
+        }
+    );
+}
+
 function prefix(pInput) {
     if (pInput.summary.hasOwnProperty("optionsUsed")){
         return (pDependencyItem) =>
@@ -83,6 +104,7 @@ function prefix(pInput) {
     return (pDependencyItem => pDependencyItem);
 }
 
+
 module.exports = (pInput) =>
     Object.assign(
         {},
@@ -91,6 +113,7 @@ module.exports = (pInput) =>
             dependencies: Handlebars.templates['dot.template.hbs']({
                 "things" : pInput.dependencies
                     .sort(compareOnSource)
+                    .map(extractFirstTransgression)
                     .map(folderify)
                     .map(colorize)
                     .map(prefix(pInput))

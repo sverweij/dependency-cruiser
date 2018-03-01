@@ -45,7 +45,7 @@ describe("validate - generic tests", () => {
                 "koos koets",
                 {"resolved": "robby van de kerkhof"}
             )
-        ).to.deep.equal({valid: false, rule: {severity: "warn", "name": "not-in-allowed"}});
+        ).to.deep.equal({valid: false, rules: [{severity: "warn", "name": "not-in-allowed"}]});
     });
 
     it("is ok with the 'impossible to match allowed' validation - errors when configured so", () => {
@@ -56,7 +56,7 @@ describe("validate - generic tests", () => {
                 "koos koets",
                 {"resolved": "robby van de kerkhof"}
             )
-        ).to.deep.equal({valid: false, rule: {severity: "error", "name": "not-in-allowed"}});
+        ).to.deep.equal({valid: false, rules: [{severity: "error", "name": "not-in-allowed"}]});
     });
 
     it("is ok with the 'nothing allowed' validation", () => {
@@ -67,7 +67,7 @@ describe("validate - generic tests", () => {
                 "koos koets",
                 {"resolved": "robby van de kerkhof"}
             )
-        ).to.deep.equal({valid: false, rule: {severity: 'warn', name: 'unnamed'}});
+        ).to.deep.equal({valid: false, rules: [{severity: 'warn', name: 'unnamed'}]});
     });
 });
 
@@ -91,7 +91,7 @@ describe("validate - specific tests", () => {
                 "koos koets",
                 {"resolved": "./node_modules/evil-module"}
             )
-        ).to.deep.equal({valid: false, rule: {severity: 'warn', name: 'unnamed'}});
+        ).to.deep.equal({valid: false, rules: [{severity: 'warn', name: 'unnamed'}]});
     });
 
     it("not to core - ok", () => {
@@ -113,7 +113,7 @@ describe("validate - specific tests", () => {
                 "koos koets",
                 {"resolved": "path", "dependencyTypes": ["core"]}
             )
-        ).to.deep.equal({valid: false, rule: {severity: 'error', name: 'not-to-core'}});
+        ).to.deep.equal({valid: false, rules: [{severity: 'error', name: 'not-to-core'}]});
     });
 
     it("not to core fs os - ok", () => {
@@ -136,7 +136,7 @@ describe("validate - specific tests", () => {
                 "koos koets",
                 {"resolved": "os", "dependencyTypes": ["core"]}
             )
-        ).to.deep.equal({valid: false, rule: {severity: 'error', name: 'not-to-core-fs-os'}});
+        ).to.deep.equal({valid: false, rules: [{severity: 'error', name: 'not-to-core-fs-os'}]});
     });
 
     it("not to unresolvable - ok", () => {
@@ -159,7 +159,7 @@ describe("validate - specific tests", () => {
                 "koos koets",
                 {"resolved": "diana charitee", "couldNotResolve": true}
             )
-        ).to.deep.equal({valid: false, rule: {severity: 'error', name: 'not-to-unresolvable'}});
+        ).to.deep.equal({valid: false, rules: [{severity: 'error', name: 'not-to-unresolvable'}]});
     });
 
     it("only to core - via 'allowed' - ok", () => {
@@ -181,7 +181,7 @@ describe("validate - specific tests", () => {
                 "koos koets",
                 {"resolved": "ger hekking", "dependencyTypes": ["npm"]}
             )
-        ).to.deep.equal({valid: false, rule: {severity: 'warn', name: 'not-in-allowed'}});
+        ).to.deep.equal({valid: false, rules: [{severity: 'warn', name: 'not-in-allowed'}]});
     });
 
     it("only to core - via 'forbidden' - ok", () => {
@@ -203,7 +203,7 @@ describe("validate - specific tests", () => {
                 "koos koets",
                 {"resolved": "ger hekking", "dependencyTypes": ["local"]}
             )
-        ).to.deep.equal({valid: false, rule: {severity: 'error', name: 'only-to-core'}});
+        ).to.deep.equal({valid: false, rules: [{severity: 'error', name: 'only-to-core'}]});
     });
 
     it("not to sub except sub itself - ok - sub to sub", () => {
@@ -247,7 +247,7 @@ describe("validate - specific tests", () => {
                 "./doctor/clavan.js",
                 {"resolved": "./keek/op/de/sub/week.js", "coreModule": false}
             )
-        ).to.deep.equal({valid: false, rule: {severity: 'error', name: 'not-to-sub-except-sub'}});
+        ).to.deep.equal({valid: false, rules: [{severity: 'error', name: 'not-to-sub-except-sub'}]});
     });
 
     it("not to not sub (=> everything must go to 'sub')- ok - sub to sub", () => {
@@ -269,7 +269,7 @@ describe("validate - specific tests", () => {
                 "./amber.js",
                 {"resolved": "./jade.js", "coreModule": false}
             )
-        ).to.deep.equal({valid: false, rule: {severity: 'error', name: 'not-to-not-sub'}});
+        ).to.deep.equal({valid: false, rules: [{severity: 'error', name: 'not-to-not-sub'}]});
     });
 
     it("not-to-dev-dep disallows relations to develop dependencies", () => {
@@ -286,10 +286,10 @@ describe("validate - specific tests", () => {
             )
         ).to.deep.equal({
             valid: false,
-            rule : {
+            rules : [{
                 name: "not-to-dev-dep",
                 severity: "error"
-            }
+            }]
         });
     });
 
@@ -322,10 +322,10 @@ describe("validate - specific tests", () => {
             )
         ).to.deep.equal({
             valid: false,
-            rule : {
+            rules : [{
                 name: "no-duplicate-dep-types",
                 severity: "warn"
-            }
+            }]
         });
     });
 });
@@ -344,10 +344,10 @@ describe("group matching - path group matched in a pathnot", () => {
         ).to.deep.equal(
             {
                 "valid": false,
-                "rule": {
+                "rules": [{
                     "name": "group-to-pathnot",
                     "severity": "warn"
-                }
+                }]
             }
         );
     });
@@ -410,10 +410,10 @@ describe("group matching - second path group matched in a pathnot", () => {
         ).to.deep.equal(
             {
                 "valid": false,
-                "rule": {
+                "rules": [{
                     "name": "group-two-to-pathnot",
                     "severity": "warn"
-                }
+                }]
             }
         );
     });
@@ -501,7 +501,7 @@ describe("validate - license", () => {
                     "license": "SomePL-3.1"
                 }
             )
-        ).to.deep.equal({valid: false, rule: {name: "no-somepl-license", severity: "warn"}});
+        ).to.deep.equal({valid: false, rules: [{name: "no-somepl-license", severity: "warn"}]});
     });
 });
 
@@ -542,6 +542,27 @@ describe("validate - licenseNot", () => {
                     "license": "Monkey-PL"
                 }
             )
-        ).to.deep.equal({valid: false, rule: {name: "only-somepl-license", severity: "warn"}});
+        ).to.deep.equal({valid: false, rules: [{name: "only-somepl-license", severity: "warn"}]});
+    });
+
+    it("if there's more than one violated rule, both are returned", () => {
+        expect(
+            validate(
+                true,
+                _readRuleSet("./test/validate/fixtures/rules.not-in-allowed-and-a-forbidden.json"),
+                "something",
+                {
+                    "resolved": "src/some/thing/else.js"
+                }
+            )
+        ).to.deep.equal(
+            {
+                valid: false,
+                rules: [
+                    {name: "everything-is-forbidden", severity: "error"},
+                    {name: "not-in-allowed", severity: "info"}
+                ]
+            }
+        );
     });
 });
