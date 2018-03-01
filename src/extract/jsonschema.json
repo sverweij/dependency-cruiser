@@ -130,7 +130,11 @@
                                     "type": "boolean",
                                     "description": "'true' if this dependency violated a rule; 'false' in all other cases. The violated rule will be in the 'rule' object at the same level."
                                 },
-                                "rule": { "$ref": "#/definitions/RuleSummaryType" }
+                                "rules": {
+                                    "type": "array",
+                                    "items": {"$ref": "#/definitions/RuleSummaryType"},
+                                    "description": "an array of rules violated by this dependency - left out if the dependency is valid"
+                                }
                             }
                         }
                     }

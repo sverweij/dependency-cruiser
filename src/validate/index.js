@@ -79,34 +79,47 @@ function matchRule(pFrom, pTo) {
     };
 }
 
+function compareSeverity(pFirst, pSecond) {
+    const SEVERITY2INT = {
+        "error": 1,
+        "warn": 2,
+        "info": 3
+    };
+
+    return SEVERITY2INT[pFirst.severity] - SEVERITY2INT[pSecond.severity];
+}
+
 function validateAgainstRules(pRuleSet, pFrom, pTo) {
-    let lMatchedRule = {};
+    let lFoundRuleViolations = [];
+    let lRetval = {valid:true};
 
     if (pRuleSet.allowed){
-        lMatchedRule = pRuleSet.allowed.find(matchRule(pFrom, pTo));
-        if (!Boolean(lMatchedRule)){
-            return {
-                valid: false,
-                rule: {
-                    severity: pRuleSet.allowedSeverity,
-                    name: "not-in-allowed"
-                }
-            };
+        if (!Boolean(pRuleSet.allowed.some(matchRule(pFrom, pTo)))){
+            lFoundRuleViolations.push({
+                severity: pRuleSet.allowedSeverity,
+                name: "not-in-allowed"
+            });
         }
     }
     if (pRuleSet.forbidden){
-        lMatchedRule = pRuleSet.forbidden.find(matchRule(pFrom, pTo));
-        if (Boolean(lMatchedRule)){
-            return {
-                valid: false,
-                rule: {
-                    severity : lMatchedRule.severity,
-                    name     : lMatchedRule.name
-                }
-            };
-        }
+        lFoundRuleViolations = lFoundRuleViolations
+            .concat(
+                pRuleSet
+                    .forbidden
+                    .filter(matchRule(pFrom, pTo))
+                    .map(pMatchedRule => ({
+                        severity : pMatchedRule.severity,
+                        name     : pMatchedRule.name
+                    }))
+            );
     }
-    return {valid:true};
+
+    lRetval.valid = lFoundRuleViolations.length === 0;
+    lFoundRuleViolations = lFoundRuleViolations.sort(compareSeverity);
+    if (!lRetval.valid){
+        lRetval.rules = lFoundRuleViolations;
+    }
+    return lRetval;
 }
 
 /**
