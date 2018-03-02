@@ -12,11 +12,11 @@ describe('dependencyToIncidenceTransformer', () => {
         expect(transform([])).to.deep.equal([]);
     });
 
-    it('snoggels de warempel', () => {
+    it('reports single rule violations at the incidence', () => {
         expect(transform(ONE_VIOLATION_DEPS_INPUT)).to.deep.equal(ONE_VIOLATION_DEPS_FIXTURE);
     });
 
-    it('snoggels de warempel maal twee', () => {
+    it('reports multiple rule violations per dependency at the incidence with a hint there\'s more', () => {
         expect(transform(MORE_VIOLATIONS_DEPS_INPUT)).to.deep.equal(MORE_VIOLATIONS_DEPS_FIXTURE);
     });
 });
