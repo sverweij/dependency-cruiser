@@ -95,7 +95,7 @@
   },
   "nyc": {
     "statements": 99.85,
-    "branches": 98.77,
+    "branches": 98.78,
     "functions": 100,
     "lines": 99.84,
     "exclude": [

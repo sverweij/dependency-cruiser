@@ -21,7 +21,7 @@ function determineIncidenceType(pFromListEntry) {
                 }
                 : {
                     incidence: lDep.rules[0].severity,
-                    rule: lDep.rules[0].name
+                    rule: `${lDep.rules[0].name}${lDep.rules.length > 1 ? ` (+${lDep.rules.length - 1} others)` : ""}`
                 };
         }
 
