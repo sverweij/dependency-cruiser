@@ -63,9 +63,9 @@ function matchRule(pFrom, pTo) {
                 )
         ) && (!Boolean(pRule.to.pathNot) ||
                 !(lGroups.length > 0
-                ? pTo.resolved.match(replaceGroupPlaceholders(pRule.to.pathNot, lGroups))
-                : pTo.resolved.match(pRule.to.pathNot)
-            )
+                    ? pTo.resolved.match(replaceGroupPlaceholders(pRule.to.pathNot, lGroups))
+                    : pTo.resolved.match(pRule.to.pathNot)
+                )
         ) && (!pRule.to.dependencyTypes ||
                 intersects(pTo.dependencyTypes, pRule.to.dependencyTypes)
         ) && (!pRule.to.hasOwnProperty("moreThanOneDependencyType") ||
