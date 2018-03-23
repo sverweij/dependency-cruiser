@@ -100,7 +100,7 @@
     "lines": 99.84,
     "exclude": [
       "test/**/*",
-      "src/report/*.template.js",
+      "src/report/**/*.template.js",
       "coverage/**/*",
       "tmp*",
       "docs/**/*"

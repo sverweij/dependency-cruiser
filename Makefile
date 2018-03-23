@@ -4,9 +4,9 @@ NPM=npm
 NODE=node
 RM=rm -f
 MAKEDEPEND=node_modules/.bin/js-makedepend --exclude "node_modules|fixtures|extractor-fixtures" --system cjs
-GENERATED_SOURCES=src/report/csv.template.js \
-	src/report/dot.template.js \
-	src/report/html.template.js
+GENERATED_SOURCES=src/report/csv/csv.template.js \
+	src/report/dot/dot.template.js \
+	src/report/html/html.template.js
 
 .PHONY: help dev-build install check fullcheck mostlyclean clean lint cover prerequisites static-analysis test update-dependencies run-update-dependencies depend
 
@@ -139,11 +139,11 @@ src/main/index.js: \
 	src/main/options/validate.js \
 	src/main/ruleSet/normalize.js \
 	src/main/ruleSet/validate.js \
-	src/report/csvReporter.js \
-	src/report/dotReporter.js \
-	src/report/errReporter.js \
-	src/report/htmlReporter.js \
-	src/report/jsonReporter.js
+	src/report/csv/index.js \
+	src/report/dot/index.js \
+	src/report/err.js \
+	src/report/html/index.js \
+	src/report/json.js
 
 src/extract/index.js: \
 	src/extract/addValidations.js \
@@ -199,7 +199,8 @@ src/extract/parse/toTypescriptAST.js: \
 
 src/extract/resolve/index.js: \
 	src/extract/resolve/resolve-AMD.js \
-	src/extract/resolve/resolve-commonJS.js
+	src/extract/resolve/resolve-commonJS.js \
+	src/utl/pathToPosix.js
 
 src/extract/resolve/resolve-AMD.js: \
 	src/extract/resolve/determineDependencyTypes.js \
@@ -221,16 +222,16 @@ src/extract/gatherInitialSources.js: \
 	src/extract/ignore.js \
 	src/extract/transpile/meta.js
 
-src/report/csvReporter.js: \
-	src/report/csv.template.js \
+src/report/csv/index.js: \
+	src/report/csv/csv.template.js \
 	src/report/dependencyToIncidenceTransformer.js
 
-src/report/dotReporter.js: \
-	src/report/dot.template.js
+src/report/dot/index.js: \
+	src/report/dot/dot.template.js
 
-src/report/htmlReporter.js: \
+src/report/html/index.js: \
 	src/report/dependencyToIncidenceTransformer.js \
-	src/report/html.template.js
+	src/report/html/html.template.js
 
 src/main/options/normalize.js: \
 	src/main/options/defaults.json
@@ -273,15 +274,15 @@ ALL_SRC=src/main/index.js \
 	src/main/ruleSet/jsonschema.json \
 	src/main/ruleSet/normalize.js \
 	src/main/ruleSet/validate.js \
-	src/report/csv.template.js \
-	src/report/csvReporter.js \
+	src/report/csv/csv.template.js \
+	src/report/csv/index.js \
 	src/report/dependencyToIncidenceTransformer.js \
-	src/report/dot.template.js \
-	src/report/dotReporter.js \
-	src/report/errReporter.js \
-	src/report/html.template.js \
-	src/report/htmlReporter.js \
-	src/report/jsonReporter.js \
+	src/report/dot/dot.template.js \
+	src/report/dot/index.js \
+	src/report/err.js \
+	src/report/html/html.template.js \
+	src/report/html/index.js \
+	src/report/json.js \
 	src/utl/pathToPosix.js \
 	src/validate/index.js
 # cjs dependencies
@@ -298,11 +299,11 @@ src/main/index.js: \
 	src/main/options/validate.js \
 	src/main/ruleSet/normalize.js \
 	src/main/ruleSet/validate.js \
-	src/report/csvReporter.js \
-	src/report/dotReporter.js \
-	src/report/errReporter.js \
-	src/report/htmlReporter.js \
-	src/report/jsonReporter.js
+	src/report/csv/index.js \
+	src/report/dot/index.js \
+	src/report/err.js \
+	src/report/html/index.js \
+	src/report/json.js
 
 src/extract/index.js: \
 	src/extract/addValidations.js \
@@ -358,7 +359,8 @@ src/extract/parse/toTypescriptAST.js: \
 
 src/extract/resolve/index.js: \
 	src/extract/resolve/resolve-AMD.js \
-	src/extract/resolve/resolve-commonJS.js
+	src/extract/resolve/resolve-commonJS.js \
+	src/utl/pathToPosix.js
 
 src/extract/resolve/resolve-AMD.js: \
 	src/extract/resolve/determineDependencyTypes.js \
@@ -380,16 +382,16 @@ src/extract/gatherInitialSources.js: \
 	src/extract/ignore.js \
 	src/extract/transpile/meta.js
 
-src/report/csvReporter.js: \
-	src/report/csv.template.js \
+src/report/csv/index.js: \
+	src/report/csv/csv.template.js \
 	src/report/dependencyToIncidenceTransformer.js
 
-src/report/dotReporter.js: \
-	src/report/dot.template.js
+src/report/dot/index.js: \
+	src/report/dot/dot.template.js
 
-src/report/htmlReporter.js: \
+src/report/html/index.js: \
 	src/report/dependencyToIncidenceTransformer.js \
-	src/report/html.template.js
+	src/report/html/html.template.js
 
 src/main/options/normalize.js: \
 	src/main/options/defaults.json
@@ -465,6 +467,7 @@ test/extract/resolve/localNpmHelpers.spec.js: \
 	src/extract/resolve/localNpmHelpers.js
 
 test/extract/resolve/readPackageDeps.spec.js: \
+	package.json \
 	src/extract/resolve/readPackageDeps.js
 
 test/extract/transpile/coffeeWrap.spec.js: \
@@ -503,14 +506,17 @@ test/main/ruleSet/normalize.spec.js: \
 test/main/ruleSet/validate.spec.js: \
 	src/main/ruleSet/validate.js
 
-test/report/dotReporter.spec.js: \
-	src/report/dotReporter.js
+test/report/dependencyToIncidenceTransformer.spec.js: \
+	src/report/dependencyToIncidenceTransformer.js
 
-test/report/errReporter.spec.js: \
-	src/report/errReporter.js
+test/report/dot.spec.js: \
+	src/report/dot/index.js
 
-test/report/htmlReporter.spec.js: \
-	src/report/htmlReporter.js
+test/report/err.spec.js: \
+	src/report/err.js
+
+test/report/html.spec.js: \
+	src/report/html/index.js
 
 test/utl/pathToPosix.spec.js: \
 	src/utl/pathToPosix.js

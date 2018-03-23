@@ -1,7 +1,7 @@
 
 {
   "ignore": [
-    "src/report/*.template.js",
+    "src/report/**/*.template.js",
     "test/extract/fixtures/**",
     "types/**"
   ],

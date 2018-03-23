@@ -2,11 +2,11 @@
 
 const extract          = require("../extract");
 const meta             = require("../extract/transpile/meta");
-const reportHtml       = require("../report/htmlReporter");
-const reportJson       = require("../report/jsonReporter");
-const reportDot        = require("../report/dotReporter");
-const reportCsv        = require("../report/csvReporter");
-const reportErr        = require("../report/errReporter");
+const reportHtml       = require("../report/html");
+const reportJson       = require("../report/json");
+const reportDot        = require("../report/dot");
+const reportCsv        = require("../report/csv");
+const reportErr        = require("../report/err");
 const validateRuleSet  = require("./ruleSet/validate");
 const normalizeRuleSet = require("./ruleSet/normalize");
 const validateOptions  = require("./options/validate");
