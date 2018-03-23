@@ -48,5 +48,5 @@ function addIncidences(pFromList) {
         );
 }
 
-module.exports.transform =
+module.exports =
     pFromList => pFromList.sort(compareOnSource).map(addIncidences(pFromList));

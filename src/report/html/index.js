@@ -1,7 +1,7 @@
 "use strict";
 
 const Handlebars                       = require("handlebars/runtime");
-const dependencyToIncidenceTransformer = require("./dependencyToIncidenceTransformer");
+const dependencyToIncidenceTransformer = require("../dependencyToIncidenceTransformer");
 
 require("./html.template");
 
@@ -27,7 +27,7 @@ module.exports = pInput =>
         pInput,
         {
             dependencies: Handlebars.templates['html.template.hbs']({
-                "things" : dependencyToIncidenceTransformer.transform(pInput.dependencies).map(addShowTitle)
+                "things" : dependencyToIncidenceTransformer(pInput.dependencies).map(addShowTitle)
             })
         }
     );

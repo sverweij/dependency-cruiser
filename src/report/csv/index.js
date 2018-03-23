@@ -1,7 +1,7 @@
 "use strict";
 
 const Handlebars                       = require("handlebars/runtime");
-const dependencyToIncidenceTransformer = require("./dependencyToIncidenceTransformer");
+const dependencyToIncidenceTransformer = require("../dependencyToIncidenceTransformer");
 
 require("./csv.template");
 
@@ -11,7 +11,7 @@ module.exports = pInput =>
         pInput,
         {
             dependencies: Handlebars.templates['csv.template.hbs']({
-                "things" : dependencyToIncidenceTransformer.transform(pInput.dependencies)
+                "things" : dependencyToIncidenceTransformer(pInput.dependencies)
             })
         }
     );

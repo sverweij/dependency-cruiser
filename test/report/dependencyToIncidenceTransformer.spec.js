@@ -1,6 +1,6 @@
 "use strict";
 const expect    = require('chai').expect;
-const transform = require('../../src/report/dependencyToIncidenceTransformer').transform;
+const transform = require('../../src/report/dependencyToIncidenceTransformer');
 
 const ONE_VIOLATION_DEPS_INPUT = require("./fixtures/one-violation.json").dependencies;
 const ONE_VIOLATION_DEPS_FIXTURE = require("./fixtures/one-violation-incidences.json");
