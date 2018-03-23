@@ -137,7 +137,9 @@ out dependency-cruiser will assume it to be `warn`.
 A regular expression an end of a dependency should match to be catched by this
 rule.
 
-In `from`, this is the path from project root to the file containing a dependency. In `to`, this is the path from project root to the file the dependency resolves to.
+In `from`, this is the path from the current working directory (typically your 
+project root) to the file containing a dependency. In `to`, this is the path from
+the current working directory to the file the dependency resolves to.
 
 When path is in a `to` part of a rule it accepts the regular expression
 'group matching' special variables `$0`, `$1`, `$2`, ...  as well. See
