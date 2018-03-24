@@ -12,9 +12,9 @@ install:
   - npm install
 
 script:
-  - make lint depcruise
+  - make depcruise
   - 'if test `node --version | cut -c 2` = 4; then npm run test:cover-node4; else npm run test:glob && npm run test:cover; fi'
-  - 'if test `node --version | cut -c 2` = 8; then npm run nsp; fi'
+  - 'if test `node --version | cut -c 2` = 8; then npm run nsp && npm run lint; fi'
 
 branches:
   except:
