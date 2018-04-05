@@ -1,4 +1,4 @@
-# JSX in dependency-cruiser: mplementation rationale
+# JSX in dependency-cruiser: implementation rationale
 I've tried three options to implement cruising jsx. I've chosen to go with acorn_loose (the third option) - here's the rationale, so those who want to make another implementation for it don't have to do the same digging.
 
 ## Alternative: babel (not chosen - possibility for later)
