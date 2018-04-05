@@ -104,7 +104,7 @@ You've come to the right place :-) :
     - [Road map](https://github.com/sverweij/dependency-cruiser/projects/1)
     - [Real world show cases](./doc/real-world-samples.md)
     - [TypeScript, CoffeeScript and LiveScript support](./doc/faq.md)
-    - [Support for .jsx, .tsx and .csx/ .cjsx](./doc/faq.md#im-developing-in-react-and-use-jsx-how-do-i-get-that-to-work)
+    - [Support for .jsx, .tsx, .csx/ .cjsx and .vue](./doc/faq.md#im-developing-in-react-and-use-jsx-how-do-i-get-that-to-work)
 
 ## License
 [MIT](LICENSE)
