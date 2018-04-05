@@ -8,6 +8,7 @@ const deprecationFixtures     = require('./fixtures/deprecated-node-module.json'
 const bundledFixtures         = require('./fixtures/bundled-dependencies.json');
 const amdRecursiveFixtures    = require('./fixtures/amd-recursive.json');
 const tsRecursiveFixtures     = require('./fixtures/ts-recursive.json');
+const vueFixtures             = require('./fixtures/vue.json');
 const coffeeRecursiveFixtures = require('./fixtures/coffee-recursive.json');
 
 const expect = chai.expect;
@@ -34,6 +35,7 @@ describe('Deprecation - ', () => deprecationFixtures.forEach(runRecursiveFixture
 describe('Bundled - ', () => bundledFixtures.forEach(runRecursiveFixture));
 describe('AMD recursive - ', () => amdRecursiveFixtures.forEach(runRecursiveFixture));
 describe('TypeScript recursive - ', () => tsRecursiveFixtures.forEach(runRecursiveFixture));
+describe('vue - ', () => vueFixtures.forEach(runRecursiveFixture));
 describe(
     'CoffeeScript recursive - (not-testable-in-node4)',
     () => coffeeRecursiveFixtures.forEach(runRecursiveFixture)
