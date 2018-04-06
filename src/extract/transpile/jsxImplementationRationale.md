@@ -1,4 +1,4 @@
-# JSX in dependency-cruiser: mplementation rationale
+# JSX in dependency-cruiser: implementation rationale
 I've tried three options to implement cruising jsx. I've chosen to go with acorn_loose (the third option) - here's the rationale, so those who want to make another implementation for it don't have to do the same digging.
 
 ## Alternative: babel (not chosen - possibility for later)
@@ -43,3 +43,9 @@ Observing
 - ... implementing & testing this is a doddle ...
 
 **=> acorn_loose it is for now** ; maybe later an elegant solution for one of the above (plugin? passing babelrc?)
+
+# vue templates in dependency-cruiser
+For vue templates I've followed a similar process of elimination. I found several ways
+to transform vue templates to javascript but didn't find a satisfying one that would work in
+all cases. So I ended up using the acorn_loose route for vue templates as well. It
+seems to perform pretty ok, but a more elegant solution is welcome.

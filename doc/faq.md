@@ -10,7 +10,10 @@ jsx works out of the box
 Yep.
 
 ## I use the CoffeeScript variant of jsx (csx, cjsx)
-Works out of the box
+Works out of the box.
+
+## Let me guess, vue works out of the box as well?
+You guessed correctly.
 
 ## Does this mean dependency-cruiser installs transpilers for all these languages?
 No.

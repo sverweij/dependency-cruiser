@@ -10,7 +10,7 @@ describe("transpiler meta (not-testable-in-node4)", () => {
         expect(
             meta.scannableExtensions
         ).to.deep.equal([
-            ".js", ".jsx", ".ts", ".tsx", ".d.ts", ".coffee", ".litcoffee", ".coffee.md", ".csx", ".cjsx"
+            ".js", ".jsx", ".vue", ".ts", ".tsx", ".d.ts", ".coffee", ".litcoffee", ".coffee.md", ".csx", ".cjsx"
         ]);
     });
 
