@@ -93,26 +93,25 @@ function validateAgainstRules(pRuleSet, pFrom, pTo) {
     let lFoundRuleViolations = [];
     let lRetval = {valid:true};
 
-    if (pRuleSet.allowed){
-        if (!Boolean(pRuleSet.allowed.some(matchRule(pFrom, pTo)))){
-            lFoundRuleViolations.push({
-                severity: pRuleSet.allowedSeverity,
-                name: "not-in-allowed"
-            });
-        }
+    pRuleSet.forbidden = pRuleSet.forbidden || [];
+
+    if (pRuleSet.allowed && !(pRuleSet.allowed.some(matchRule(pFrom, pTo)))){
+        lFoundRuleViolations.push({
+            severity: pRuleSet.allowedSeverity,
+            name: "not-in-allowed"
+        });
     }
-    if (pRuleSet.forbidden){
-        lFoundRuleViolations = lFoundRuleViolations
-            .concat(
-                pRuleSet
-                    .forbidden
-                    .filter(matchRule(pFrom, pTo))
-                    .map(pMatchedRule => ({
-                        severity : pMatchedRule.severity,
-                        name     : pMatchedRule.name
-                    }))
-            );
-    }
+
+    lFoundRuleViolations = lFoundRuleViolations
+        .concat(
+            pRuleSet
+                .forbidden
+                .filter(matchRule(pFrom, pTo))
+                .map(pMatchedRule => ({
+                    severity : pMatchedRule.severity,
+                    name     : pMatchedRule.name
+                }))
+        );
 
     lRetval.valid = lFoundRuleViolations.length === 0;
     lFoundRuleViolations = lFoundRuleViolations.sort(compareSeverity);
