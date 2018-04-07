@@ -56,12 +56,8 @@ function checkRuleSafety(pRule) {
  */
 module.exports = (pRuleSet) => {
     validateAgainstSchema(ruleSchema, pRuleSet);
-    if (pRuleSet.hasOwnProperty("allowed")){
-        pRuleSet.allowed.forEach(checkRuleSafety);
-    }
-    if (pRuleSet.hasOwnProperty("forbidden")){
-        pRuleSet.forbidden.forEach(checkRuleSafety);
-    }
+    (pRuleSet.allowed   || []).forEach(checkRuleSafety);
+    (pRuleSet.forbidden || []).forEach(checkRuleSafety);
     if (pRuleSet.hasOwnProperty("options")){
         validateOptions(pRuleSet.options);
     }
