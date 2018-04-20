@@ -67,6 +67,6 @@
         "to": { "moreThanOneDependencyType": true }
     }],
     "options": {
-        "doNotFollow": "^node_modules"
+        "doNotFollow": "node_modules"
     }
 }
