@@ -3,7 +3,7 @@
 const _                      = require('lodash');
 const pathToPosix            = require('../utl/pathToPosix');
 const extract                = require('./extract');
-const dependencyEndsUpAtFrom = require('./dependencyEndsUpAtFrom');
+const deriveCirculars        = require('./derive/circular');
 const gather                 = require('./gatherInitialSources');
 const summarize              = require('./summarize');
 const addValidations         = require('./addValidations');
@@ -105,53 +105,6 @@ function makeOptionsPresentable(pOptions) {
         );
 }
 
-function circularityDetectionNecessary(pOptions) {
-    if (pOptions.forceCircular) {
-        return true;
-    }
-    if (pOptions.validate && pOptions.ruleSet) {
-        return pOptions.ruleSet.forbidden &&
-            pOptions.ruleSet.forbidden.some(
-                pRule => pRule.to.hasOwnProperty("circular")
-            );
-    }
-    return false;
-}
-
-function addCircularityCheckToDependency (pToDep, pGraph, pFrom) {
-    return Object.assign(
-        {},
-        pToDep,
-        {
-            circular: dependencyEndsUpAtFrom(pGraph, pFrom, pToDep.resolved)
-        }
-    );
-}
-
-/**
- * Runs through all dependencies, for each of them determines
- * whether it's (part of a) circular (relationship) and returns the
- * dependencies with that added.
- *
- * @param  {Object} pDependencies [description]
- * @return {Object}               the same dependencies, but for each
- *                                of them added whether or not it is
- *                                part of
- */
-function addCircularityCheckToGraph (pDependencies) {
-    return pDependencies.map(
-        pNode => Object.assign(
-            {},
-            pNode,
-            {
-                dependencies: pNode.dependencies.map(
-                    pToDep => addCircularityCheckToDependency(pToDep, pDependencies, pNode.source)
-                )
-            }
-        )
-    );
-}
-
 module.exports = (pFileDirArray, pOptions, pCallback) => {
     const lCallback = pCallback ? pCallback : (pInput => pInput);
     const lOptions = Object.assign(
@@ -166,9 +119,7 @@ module.exports = (pFileDirArray, pOptions, pCallback) => {
     ).uniqBy(pDependency => pDependency.source)
         .value();
 
-    if (circularityDetectionNecessary(lOptions)){
-        lDependencies = addCircularityCheckToGraph(lDependencies);
-    }
+    lDependencies = deriveCirculars(lDependencies, lOptions);
 
     lDependencies = addValidations(
         lDependencies,
