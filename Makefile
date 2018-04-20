@@ -147,7 +147,7 @@ src/main/index.js: \
 
 src/extract/index.js: \
 	src/extract/addValidations.js \
-	src/extract/dependencyEndsUpAtFrom.js \
+	src/extract/derive/circular/index.js \
 	src/extract/extract.js \
 	src/extract/gatherInitialSources.js \
 	src/extract/summarize.js \
@@ -155,6 +155,9 @@ src/extract/index.js: \
 
 src/extract/addValidations.js: \
 	src/validate/index.js
+
+src/extract/derive/circular/index.js: \
+	src/extract/derive/circular/dependencyEndsUpAtFrom.js
 
 src/extract/extract.js: \
 	src/extract/ast-extractors/extract-AMD-deps.js \
@@ -248,7 +251,8 @@ ALL_SRC=src/main/index.js \
 	src/extract/ast-extractors/extract-ES6-deps.js \
 	src/extract/ast-extractors/extract-commonJS-deps.js \
 	src/extract/ast-extractors/extract-typescript-deps.js \
-	src/extract/dependencyEndsUpAtFrom.js \
+	src/extract/derive/circular/dependencyEndsUpAtFrom.js \
+	src/extract/derive/circular/index.js \
 	src/extract/extract.js \
 	src/extract/gatherInitialSources.js \
 	src/extract/ignore.js \
@@ -307,7 +311,7 @@ src/main/index.js: \
 
 src/extract/index.js: \
 	src/extract/addValidations.js \
-	src/extract/dependencyEndsUpAtFrom.js \
+	src/extract/derive/circular/index.js \
 	src/extract/extract.js \
 	src/extract/gatherInitialSources.js \
 	src/extract/summarize.js \
@@ -315,6 +319,9 @@ src/extract/index.js: \
 
 src/extract/addValidations.js: \
 	src/validate/index.js
+
+src/extract/derive/circular/index.js: \
+	src/extract/derive/circular/dependencyEndsUpAtFrom.js
 
 src/extract/extract.js: \
 	src/extract/ast-extractors/extract-AMD-deps.js \
@@ -446,8 +453,8 @@ test/extract/ast-extractors/extract-typescript-imports.spec.js: \
 test/extract/ast-extractors/extract-typescript-triple-slash-directives.spec.js: \
 	test/extract/ast-extractors/extract-typescript.utl.js
 
-test/extract/dependencyEndsUpAtFrom.spec.js: \
-	src/extract/dependencyEndsUpAtFrom.js
+test/extract/derivations/circular/dependencyEndsUpAtFrom.spec.js: \
+	src/extract/derive/circular/dependencyEndsUpAtFrom.js
 
 test/extract/extract.spec.js: \
 	src/extract/extract.js

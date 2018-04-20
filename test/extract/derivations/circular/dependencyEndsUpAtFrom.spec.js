@@ -1,7 +1,7 @@
 "use strict";
 
 const expect = require('chai').expect;
-const dependencyEndsUpAtFrom = require('../../src/extract/dependencyEndsUpAtFrom');
+const dependencyEndsUpAtFrom = require('../../../../src/extract/derive/circular/dependencyEndsUpAtFrom');
 
 const A_B = [{
     "source": "a",
