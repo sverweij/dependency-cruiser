@@ -62,7 +62,7 @@ describe("localNpmHelpers.getPackageRoot", () => {
         ).to.equal('undefined');
     });
 
-    it("returns null if called without null", () => {
+    it("returns null if called with null", () => {
         expect(
             localNpmHelpers.getPackageRoot(null)
         ).to.equal(null);
