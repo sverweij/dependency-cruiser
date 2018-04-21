@@ -343,7 +343,7 @@ As each environment interprets globs slightly differently, a pattern
 like `packages/**/src/**/*.js` will yield different results.
 
 To make sure glob expansion works _exactly_ the same accross
-platforms slap some quotes around them, so the it's not the environment
+platforms slap some quotes around them, so it's not the environment
 (/ shell) expanding the glob, but dependency-cruiser itself:
 
 ```sh
