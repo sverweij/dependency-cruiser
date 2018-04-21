@@ -72,6 +72,10 @@
                         "type": "string",
                         "description": "the license, if known (usually known for modules pulled from npm, not for local ones)"
                     },
+                    "orphan": {
+                        "type": "boolean",
+                        "description": "'true' if this dependency does not have dependencies, and no module has it as a dependency"
+                    },
                     "dependencies": {
                         "type": "array",
                         "items": {
