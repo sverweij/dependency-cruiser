@@ -16,7 +16,7 @@
 function dependencyEndsUpAtFrom(pGraph, pFrom, pTo, pVisited) {
     pVisited = pVisited || new Set();
 
-    const lToNode = pGraph.filter(pNode => pNode.source === pTo)[0];
+    const lToNode = pGraph.find(pNode => pNode.source === pTo);
 
     /* about the absence of checks whether attributes/ objects actually
      * exist:
