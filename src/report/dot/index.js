@@ -105,20 +105,16 @@ function extractFirstTransgression(pModule){
     );
 }
 
-function prefix(pInput) {
-    if (pInput.summary.hasOwnProperty("optionsUsed")){
-        return (pModule) =>
-            Object.assign(
-                {},
-                pModule,
-                {
-                    prefix: pInput.summary.optionsUsed.prefix
-                }
-            );
-    }
-    return (pModule => pModule);
-}
+function addURL(pInput) {
+    const lPrefix = pInput.summary.optionsUsed ? pInput.summary.optionsUsed.prefix || "" : "";
 
+    return (pModule) =>
+        Object.assign(
+            {},
+            pModule,
+            (pModule.coreModule || pModule.couldNotResolve) ? {} : {url: `${path.join(lPrefix, pModule.source)}`}
+        );
+}
 
 module.exports = (pInput) =>
     Object.assign(
@@ -131,7 +127,7 @@ module.exports = (pInput) =>
                     .map(extractFirstTransgression)
                     .map(folderify)
                     .map(colorize)
-                    .map(prefix(pInput))
+                    .map(addURL(pInput))
             })
         }
     );
