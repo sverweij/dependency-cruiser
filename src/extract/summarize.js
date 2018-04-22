@@ -36,19 +36,19 @@ function extractMetaData(pViolations) {
  *      }
  * }
  *
- * @param {any} pDependencies an array of dependencies
+ * @param {any} pModules an array of modules
  * @return {any} an array of violations
  */
-function extractViolations(pDependencies){
-    return _flattenDeep(pDependencies
+function extractViolations(pModules){
+    return _flattenDeep(pModules
         .map(cutNonTransgressions)
-        .filter(pDep => pDep.dependencies.length > 0)
+        .filter(pModule => pModule.dependencies.length > 0)
         .sort((pOne, pTwo) => pOne.source > pTwo.source ? 1 : -1)
         .map(
-            pSource => pSource.dependencies.map(
+            pModule => pModule.dependencies.map(
                 pDep => pDep.rules.map(
                     pRule => ({
-                        from:pSource.source,
+                        from:pModule.source,
                         to:pDep.resolved,
                         rule: pRule
                     })
@@ -58,8 +58,8 @@ function extractViolations(pDependencies){
     );
 }
 
-module.exports = (pDependencies) => {
-    const lViolations = extractViolations(pDependencies);
+module.exports = (pModules) => {
+    const lViolations = extractViolations(pModules);
 
     return Object.assign(
         {
@@ -67,7 +67,7 @@ module.exports = (pDependencies) => {
         },
         extractMetaData(lViolations),
         {
-            totalCruised: pDependencies.length
+            totalCruised: pModules.length
         }
     );
 };
