@@ -62,7 +62,8 @@ function determineDependencyColor(pDependency) {
 function determineModuleColor(pModule) {
     const MODULE2COLOR = {
         "couldNotResolve": "red",
-        "coreModule": "grey"
+        "coreModule": "grey",
+        "orphan": "#008800"
     };
 
     return MODULE2COLOR[
@@ -70,7 +71,6 @@ function determineModuleColor(pModule) {
             (pKey) => pModule[pKey]
         )
     ] || null;
-
 }
 
 function colorize(pModule){
