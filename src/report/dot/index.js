@@ -12,8 +12,8 @@ const SEVERITY2COLOR = {
 };
 const DEFAULT_VIOLATION_COLOR = "red";
 
-function compareOnSource(pOne, pTwo) {
-    return pOne.source > pTwo.source ? 1 : -1;
+function compareOnSource(pModuleOne, pModuleTwo) {
+    return pModuleOne.source > pModuleTwo.source ? 1 : -1;
 }
 
 function toFullPath (pAll, pCurrent) {
@@ -27,25 +27,25 @@ function aggregate (pPathSnippet, pCounter, pPathArray){
     };
 }
 
-function folderify(pDependencyItem) {
+function folderify(pModule) {
     let lAdditions = {};
-    let lDirName = path.dirname(pDependencyItem.source);
+    let lDirName = path.dirname(pModule.source);
 
     if (lDirName !== ".") {
         lAdditions.folder = lDirName;
         lAdditions.path   = lDirName.split(path.sep).map(aggregate);
     }
 
-    lAdditions.label = path.basename(pDependencyItem.source);
+    lAdditions.label = path.basename(pModule.source);
 
     return Object.assign(
         {},
-        pDependencyItem,
+        pModule,
         lAdditions
     );
 }
 
-function determineColor(pDependency) {
+function determineDependencyColor(pDependency) {
     let lColorAddition = {};
 
     if (pDependency.hasOwnProperty("valid") && !pDependency.valid) {
@@ -58,23 +58,38 @@ function determineColor(pDependency) {
         lColorAddition
     );
 }
+/* eslint security/detect-object-injection: 0 */
+function determineModuleColor(pModule) {
+    const MODULE2COLOR = {
+        "couldNotResolve": "red",
+        "coreModule": "grey"
+    };
 
-function colorize(pDependencyItem){
+    return MODULE2COLOR[
+        Object.keys(MODULE2COLOR).find(
+            (pKey) => pModule[pKey]
+        )
+    ] || null;
+
+}
+
+function colorize(pModule){
     return Object.assign(
         {},
-        pDependencyItem,
+        pModule,
         {
-            dependencies: pDependencyItem.dependencies.map(determineColor)
+            color: determineModuleColor(pModule),
+            dependencies: pModule.dependencies.map(determineDependencyColor)
         }
     );
 }
 
-function extractFirstTransgression(pDependencyItem){
+function extractFirstTransgression(pModule){
     return Object.assign(
         {},
-        pDependencyItem,
+        pModule,
         {
-            dependencies: pDependencyItem.dependencies.map(
+            dependencies: pModule.dependencies.map(
                 pDependency =>
                     pDependency.rules
                         ? Object.assign(
@@ -92,16 +107,16 @@ function extractFirstTransgression(pDependencyItem){
 
 function prefix(pInput) {
     if (pInput.summary.hasOwnProperty("optionsUsed")){
-        return (pDependencyItem) =>
+        return (pModule) =>
             Object.assign(
                 {},
-                pDependencyItem,
+                pModule,
                 {
                     prefix: pInput.summary.optionsUsed.prefix
                 }
             );
     }
-    return (pDependencyItem => pDependencyItem);
+    return (pModule => pModule);
 }
 
 
