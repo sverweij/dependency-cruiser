@@ -28,28 +28,28 @@ function addCircularityCheckToDependency (pToDep, pGraph, pFrom) {
  * whether it's (part of a) circular (relationship) and returns the
  * dependencies with that added.
  *
- * @param  {Object} pDependencies [description]
+ * @param  {Object} pModules [description]
  * @return {Object}               the same dependencies, but for each
  *                                of them added whether or not it is
  *                                part of
  */
-function addCircularityCheckToGraph (pDependencies) {
-    return pDependencies.map(
-        pNode => Object.assign(
+function addCircularityCheckToGraph (pModules) {
+    return pModules.map(
+        pModule => Object.assign(
             {},
-            pNode,
+            pModule,
             {
-                dependencies: pNode.dependencies.map(
-                    pToDep => addCircularityCheckToDependency(pToDep, pDependencies, pNode.source)
+                dependencies: pModule.dependencies.map(
+                    pToDep => addCircularityCheckToDependency(pToDep, pModules, pModule.source)
                 )
             }
         )
     );
 }
 
-module.exports = (pDependencies, pOptions) => {
+module.exports = (pModules, pOptions) => {
     if (circularityDetectionNecessary(pOptions)){
-        return addCircularityCheckToGraph(pDependencies);
+        return addCircularityCheckToGraph(pModules);
     }
-    return pDependencies;
+    return pModules;
 };

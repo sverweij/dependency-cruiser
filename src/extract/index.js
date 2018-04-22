@@ -115,26 +115,26 @@ module.exports = (pFileDirArray, pOptions, pCallback) => {
         pOptions
     );
 
-    let lDependencies = _(
+    let lModules = _(
         extractFileDirArray(pFileDirArray, lOptions).reduce(complete, [])
     ).uniqBy(pDependency => pDependency.source)
         .value();
 
-    lDependencies = deriveCirculars(lDependencies, lOptions);
-    lDependencies = deriveOrphans(lDependencies, lOptions);
+    lModules = deriveCirculars(lModules, lOptions);
+    lModules = deriveOrphans(lModules, lOptions);
 
-    lDependencies = addValidations(
-        lDependencies,
+    lModules = addValidations(
+        lModules,
         lOptions.validate,
         lOptions.ruleSet
     );
 
     return lCallback(
         {
-            dependencies : lDependencies,
+            dependencies : lModules,
             summary      :
                 Object.assign(
-                    summarize(lDependencies),
+                    summarize(lModules),
                     {
                         optionsUsed: makeOptionsPresentable(lOptions)
                     }

@@ -18,20 +18,20 @@ function addValidation (pToDep, pValidate, pRuleSet, pFrom) {
  * - when there's a transgression: adds it
  * - when everything is hunky-dory: adds the dependency is valid
  *
- * @param  {Object} pDependencies [description]
+ * @param  {Object} pModules [description]
  * @param  {Object} pValidate [description]
  * @param  {Object} pRuleSet [description]
  * @return {Object}               the same dependencies, but for each
  *                                of them added whether or not it is
  *                                part of
  */
-module.exports = (pDependencies, pValidate, pRuleSet) => pDependencies.map(
-    pNode => Object.assign(
+module.exports = (pModules, pValidate, pRuleSet) => pModules.map(
+    pModule => Object.assign(
         {},
-        pNode,
+        pModule,
         {
-            dependencies: pNode.dependencies.map(
-                pToDep => addValidation(pToDep, pValidate, pRuleSet, pNode.source)
+            dependencies: pModule.dependencies.map(
+                pToDep => addValidation(pToDep, pValidate, pRuleSet, pModule.source)
             )
         }
     )
