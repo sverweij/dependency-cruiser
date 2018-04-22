@@ -38,7 +38,7 @@ help:
 
 # production rules
 src/report/%.template.js: src/report/%.template.hbs
-	handlebars --commonjs handlebars/runtime -f $@ $<
+	./node_modules/.bin/handlebars --commonjs handlebars/runtime -f $@ $<
 
 .npmignore: .gitignore
 	cp $< $@
