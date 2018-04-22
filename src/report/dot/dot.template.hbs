@@ -14,16 +14,9 @@ digraph "dependency-cruiser output"{
 {{#each things}}
     {{#if folder}}
     {{#each path}}subgraph "cluster_{{{aggregateSnippet}}}" {label="{{{snippet}}}" {{/each~}}
-        "{{{source}}}"
-            {{~#if couldNotResolve}} [label="{{{label}}}" color="{{{color}}}" fontcolor="{{{color}}}"]
-            {{~else}} {{~#if matchesDoNotFollow}} [label="{{{label}}}" shape="folder" URL="{{{prefix}}}{{{source}}}"]{{~else}} [label="{{{label}}}" URL="{{{prefix}}}{{{source}}}"]{{~/if}}
-            {{~/if}}{{~#each path}} }{{/each}}
+        "{{{source}}}" [label="{{{label}}}" {{#if color}}color="{{{color}}}" fontcolor="{{{color}}}" {{/if}}{{#if matchesDoNotFollow}}shape="folder" {{/if}}{{~#if url}}URL="{{{url}}}"{{/if~}}]{{#each path}} }{{/each}}
     {{else}}
-    "{{{source}}}"
-        {{~#if color}} [color="{{{color}}}" fontcolor="{{{color}}}"]
-        {{else}}
-            {{~#if matchesDoNotFollow}} [shape="folder" URL="{{{prefix}}}{{{source}}}"]{{~else}} [URL="{{{prefix}}}{{{source}}}"]{{~/if}}
-            {{/if}}
+    "{{{source}}}" [label="{{{label}}}" {{#if color}}color="{{{color}}}" fontcolor="{{{color}}}" {{/if}}{{#if matchesDoNotFollow}}shape="folder" {{/if}}{{~#if url}}URL="{{{url}}}"{{/if~}}]
     {{/if}}
 {{/each}}
 
