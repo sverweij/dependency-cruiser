@@ -6,7 +6,7 @@ node_js:
   - "4"
   - "6"
   - "8"
-  - "9"
+  - "10"
 
 install:
   - npm install
@@ -14,7 +14,7 @@ install:
 script:
   - make depcruise
   - 'if test `node --version | cut -c 2` = 4; then npm run test:cover-node4; else npm run test:glob && npm run test:cover; fi'
-  - 'if test `node --version | cut -c 2` = 8; then npm run nsp && npm run lint; fi'
+  - 'if test `node --version | cut -c 2` = 10; then npm run nsp && npm run lint; fi'
 
 branches:
   except:

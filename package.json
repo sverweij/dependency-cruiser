@@ -28,17 +28,17 @@
     "test:glob": "set -f && test \"`bin/dependency-cruise test/extract/fixtures/gather-globbing/packages/**/src/**/*.js | grep \"no dependency violations found\"`\" = \"✔ no dependency violations found (6 modules cruised)\""
   },
   "keywords": [
-    "javascript",
+    "static analysis",
+    "circular",
+   "dependencies",
     "typescript",
+    "javascript",
     "coffeescript",
-    "dependencies",
     "ES6",
     "ES2015",
     "AMD",
     "CommonJS",
-    "validation",
-    "static analysis",
-    "circular"
+    "validation"
   ],
   "author": {
     "name": "Sander Verweij",
