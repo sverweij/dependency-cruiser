@@ -1,5 +1,5 @@
 {
-    "dependencies": [
+    "modules": [
       {
         "source": "node_modules/somemodule/node_modules/someothermodule/main.js",
         "dependencies": []

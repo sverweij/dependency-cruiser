@@ -23,7 +23,7 @@ function runRecursiveFixture(pFixture) {
                 pFixture.input.options
             );
 
-            expect(lResult.dependencies).to.deep.equal(pFixture.expected);
+            expect(lResult.modules).to.deep.equal(pFixture.expected);
             expect(lResult).to.be.jsonSchema(depSchema);
         });
 
@@ -47,8 +47,8 @@ describe('Max depth', () => {
             ["./test/extract/fixtures/maxDepth/index.js"]
         );
 
-        expect(lResult.dependencies).to.deep.equal(
-            require('./fixtures/maxDepthUnspecified.json').dependencies
+        expect(lResult.modules).to.deep.equal(
+            require('./fixtures/maxDepthUnspecified.json').modules
         );
         expect(lResult).to.be.jsonSchema(depSchema);
     });
@@ -61,8 +61,8 @@ describe('Max depth', () => {
             }
         );
 
-        expect(lResult.dependencies).to.deep.equal(
-            require('./fixtures/maxDepth1.json').dependencies
+        expect(lResult.modules).to.deep.equal(
+            require('./fixtures/maxDepth1.json').modules
         );
         expect(lResult).to.be.jsonSchema(depSchema);
     });
@@ -75,8 +75,8 @@ describe('Max depth', () => {
             }
         );
 
-        expect(lResult.dependencies).to.deep.equal(
-            require('./fixtures/maxDepth2.json').dependencies
+        expect(lResult.modules).to.deep.equal(
+            require('./fixtures/maxDepth2.json').modules
         );
         expect(lResult).to.be.jsonSchema(depSchema);
     });
@@ -89,8 +89,8 @@ describe('Max depth', () => {
             }
         );
 
-        expect(lResult.dependencies).to.deep.equal(
-            require('./fixtures/maxDepth3.json').dependencies
+        expect(lResult.modules).to.deep.equal(
+            require('./fixtures/maxDepth3.json').modules
         );
         expect(lResult).to.be.jsonSchema(depSchema);
     });
@@ -103,8 +103,8 @@ describe('Max depth', () => {
             }
         );
 
-        expect(lResult.dependencies).to.deep.equal(
-            require('./fixtures/maxDepth4.json').dependencies
+        expect(lResult.modules).to.deep.equal(
+            require('./fixtures/maxDepth4.json').modules
         );
         expect(lResult).to.be.jsonSchema(depSchema);
     });
@@ -119,8 +119,8 @@ describe('Do not follow', () => {
             }
         );
 
-        expect(lResult.dependencies).to.deep.equal(
-            require('./fixtures/donotfollow.json').dependencies
+        expect(lResult.modules).to.deep.equal(
+            require('./fixtures/donotfollow.json').modules
         );
         expect(lResult).to.be.jsonSchema(depSchema);
     });

@@ -1,5 +1,5 @@
 {
-    "dependencies": [
+    "modules": [
         {
             "source": "./test/extract/fixtures/maxDepth/index.js",
             "dependencies": [
@@ -55,7 +55,8 @@
                     "moduleSystem": "es6",
                     "valid": true
                 }
-            ]
+            ],
+            "valid": true
         },
         {
             "source": "os",
@@ -66,19 +67,23 @@
             "dependencyTypes": [
                 "core"
             ],
-            "dependencies": []
+            "dependencies": [],
+            "valid": true
         },
         {
             "source": "test/extract/fixtures/maxDepth/oneAndTwoDeep.js",
-            "dependencies": []
+            "dependencies": [],
+            "valid": true
         },
         {
             "source": "test/extract/fixtures/maxDepth/oneDeep.js",
-            "dependencies": []
+            "dependencies": [],
+            "valid": true
         },
         {
             "source": "test/extract/fixtures/maxDepth/sub/oneDeepInSub.js",
-            "dependencies": []
+            "dependencies": [],
+            "valid": true
         }
     ],
     "summary": {

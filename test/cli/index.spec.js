@@ -316,10 +316,9 @@ describe("#processCLI", () => {
             );
             deleteDammit(lValidationFileName);
         });
+    });
 
-        describe("file based tests - commonJS", () => {
-            runFileBasedTests("cjs");
-        });
-
+    describe("file based tests - commonJS", () => {
+        runFileBasedTests("cjs");
     });
 });

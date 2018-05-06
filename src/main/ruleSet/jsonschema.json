@@ -14,7 +14,7 @@
         },
         "allowed": {
             "type": "array",
-            "description": "A list of rules that describe dependencies that are allowed. dependency-cruiser will emit the warning message 'not-in-allowed' for each dependency that does not at least one of them.",
+            "description": "A list of rules that describe dependencies that are allowed. dependency-cruiser will emit the warning message 'not-in-allowed' for each dependency that does not at least meet one of them.",
             "items": {
                 "$ref" :"#/definitions/RuleType"
             }
@@ -73,7 +73,7 @@
                     "type": "string"
                 },
                 "from": {
-                    "$ref": "#/definitions/RestrictionType"
+                    "$ref": "#/definitions/FromRestrictionType"
                 },
                 "to": {
                     "$ref": "#/definitions/ToRestrictionType"
@@ -95,14 +95,14 @@
                     "description": "You can use this field to document why the rule is there."
                 },
                 "from": {
-                    "$ref": "#/definitions/RestrictionType"
+                    "$ref": "#/definitions/FromRestrictionType"
                 },
                 "to": {
                     "$ref": "#/definitions/ToRestrictionType"
                  }
             }
         },
-        "RestrictionType": {
+        "FromRestrictionType": {
             "type": "object",
             "description": "Criteria an end of a dependency should match to be caught by this rule. Leave it empty if you want any module to be matched.",
             "additionalProperties": false,
@@ -114,6 +114,10 @@
                 "pathNot": {
                     "type": "string",
                     "description": "A regular expression an end of a dependency should NOT match to be catched by this rule."
+                },
+                "orphan": {
+                    "type": "boolean",
+                    "description": "Whether or not to match when the module is an orphan (= has no incoming or outgoing dependencies). When this property it is part of a rule, dependency-cruiser will ignore the 'to' part."
                 }
             }
         },

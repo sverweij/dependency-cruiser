@@ -1,0 +1,9 @@
+{
+    "forbidden": [
+        {
+            "name": "no-orphans",
+            "from": {"orphan":true, "pathNot": "orphansallowedhere"},
+            "to": {}
+        }
+    ]
+}

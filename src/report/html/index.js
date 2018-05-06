@@ -26,8 +26,8 @@ module.exports = pInput =>
         {},
         pInput,
         {
-            dependencies: Handlebars.templates['html.template.hbs']({
-                "things" : dependencyToIncidenceTransformer(pInput.dependencies).map(addShowTitle)
+            modules: Handlebars.templates['html.template.hbs']({
+                "things" : dependencyToIncidenceTransformer(pInput.modules).map(addShowTitle)
             })
         }
     );

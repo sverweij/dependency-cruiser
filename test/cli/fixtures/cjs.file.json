@@ -1,5 +1,5 @@
 {
-    "dependencies": [
+    "modules": [
         {
             "source": "test/cli/fixtures/cjs/root_one.js",
             "dependencies": [
@@ -87,7 +87,8 @@
                     "circular": false,
                     "valid": true
                 }
-            ]
+            ],
+            "valid": true
         },
         {
             "source": "fs",
@@ -98,7 +99,8 @@
             "dependencyTypes": [
                 "core"
             ],
-            "dependencies": []
+            "dependencies": [],
+            "valid": true
         },
         {
             "source": "test/cli/fixtures/cjs/one_only_one.js",
@@ -117,7 +119,8 @@
                     "circular": false,
                     "valid": true
                 }
-            ]
+            ],
+            "valid": true
         },
         {
             "source": "path",
@@ -128,7 +131,8 @@
             "dependencyTypes": [
                 "core"
             ],
-            "dependencies": []
+            "dependencies": [],
+            "valid": true
         },
         {
             "source": "test/cli/fixtures/cjs/one_only_two.js",
@@ -147,7 +151,8 @@
                     "circular": false,
                     "valid": true
                 }
-            ]
+            ],
+            "valid": true
         },
         {
             "source": "test/cli/fixtures/cjs/shared.js",
@@ -166,7 +171,8 @@
                     "circular": false,
                     "valid": true
                 }
-            ]
+            ],
+            "valid": true
         },
         {
             "source": "test/cli/fixtures/cjs/sub/dir.js",
@@ -199,7 +205,8 @@
                     "circular": false,
                     "valid": true
                 }
-            ]
+            ],
+            "valid": true
         },
         {
             "source": "test/cli/fixtures/cjs/sub/depindir.js",
@@ -218,7 +225,8 @@
                     "circular": false,
                     "valid": true
                 }
-            ]
+            ],
+            "valid": true
         },
         {
             "source": "test/cli/fixtures/cjs/node_modules/somemodule/src/somemodule.js",
@@ -251,15 +259,18 @@
                     "circular": false,
                     "valid": true
                 }
-            ]
+            ],
+            "valid": true
         },
         {
             "source": "test/cli/fixtures/cjs/node_modules/somemodule/src/moar-javascript.js",
-            "dependencies": []
+            "dependencies": [],
+            "valid": true
         },
         {
             "source": "test/cli/fixtures/cjs/node_modules/somemodule/node_modules/someothermodule/main.js",
-            "dependencies": []
+            "dependencies": [],
+            "valid": true
         }
     ],
     "summary": {

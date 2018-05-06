@@ -74,7 +74,8 @@
                         "moduleSystem": "es6",
                         "valid": true
                     }
-                ]
+                ],
+                "valid": true
             },
             {
                 "source": "path",
@@ -85,11 +86,13 @@
                 "dependencyTypes": [
                     "core"
                 ],
-                "dependencies": []
+                "dependencies": [],
+                "valid": true
             },
             {
                 "source": "test/extract/fixtures/coffee/javascriptThing.js",
-                "dependencies": []
+                "dependencies": [],
+                "valid": true
             },
             {
                 "source": "test/extract/fixtures/coffee/sub/index.coffee",
@@ -107,15 +110,18 @@
                         "moduleSystem": "es6",
                         "valid": true
                     }
-                ]
+                ],
+                "valid": true
             },
             {
                 "source": "test/extract/fixtures/coffee/sub/willBeReExported.coffee.md",
-                "dependencies": []
+                "dependencies": [],
+                "valid": true
             },
             {
                 "source": "test/extract/fixtures/coffee/sub/kaching.litcoffee",
-                "dependencies": []
+                "dependencies": [],
+                "valid": true
             }
         ]
     }

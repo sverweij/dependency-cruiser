@@ -20,6 +20,10 @@ function toFullPath (pAll, pCurrent) {
     return `${pAll}${path.sep}${pCurrent}`;
 }
 
+function severity2Color(pSeverity){
+    return SEVERITY2COLOR[pSeverity] || DEFAULT_VIOLATION_COLOR;
+}
+
 function aggregate (pPathSnippet, pCounter, pPathArray){
     return {
         snippet: pPathSnippet,
@@ -49,7 +53,7 @@ function determineDependencyColor(pDependency) {
     let lColorAddition = {};
 
     if (pDependency.hasOwnProperty("valid") && !pDependency.valid) {
-        lColorAddition.color = SEVERITY2COLOR[pDependency.rule.severity] || DEFAULT_VIOLATION_COLOR;
+        lColorAddition.color = severity2Color(pDependency.rule.severity);
     }
 
     return Object.assign(
@@ -66,6 +70,9 @@ function determineModuleColor(pModule) {
         "orphan": "#008800"
     };
 
+    if (pModule.hasOwnProperty("valid") && !pModule.valid) {
+        return severity2Color(pModule.rules[0].severity);
+    }
     return MODULE2COLOR[
         Object.keys(MODULE2COLOR).find(
             (pKey) => pModule[pKey]
@@ -87,7 +94,7 @@ function colorize(pModule){
 function extractFirstTransgression(pModule){
     return Object.assign(
         {},
-        pModule,
+        (pModule.rules ? Object.assign({}, pModule, {rule: pModule.rules[0]}) : pModule),
         {
             dependencies: pModule.dependencies.map(
                 pDependency =>
@@ -121,8 +128,8 @@ module.exports = (pInput) =>
         {},
         pInput,
         {
-            dependencies: Handlebars.templates['dot.template.hbs']({
-                "things" : pInput.dependencies
+            modules: Handlebars.templates['dot.template.hbs']({
+                "things" : pInput.modules
                     .sort(compareOnSource)
                     .map(extractFirstTransgression)
                     .map(folderify)

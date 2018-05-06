@@ -1,7 +1,8 @@
 {
-    "dependencies": [
+    "modules": [
         {
             "source": "test/main/fixtures/tsx/index.ts",
+            "valid": true,
             "dependencies": [
                 {
                     "resolved": "test/main/fixtures/tsx/sub/render.tsx",
@@ -20,6 +21,7 @@
         },
         {
             "source": "test/main/fixtures/tsx/sub/render.tsx",
+            "valid": true,
             "dependencies": [
                 {
                     "resolved": "react-dom",
@@ -45,6 +47,7 @@
             "dependencyTypes": [
                 "unknown"
             ],
+            "valid": true,
             "dependencies": []
         }
     ],

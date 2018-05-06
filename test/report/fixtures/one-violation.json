@@ -1,5 +1,5 @@
 {
-    "dependencies": [
+    "modules": [
         {
             "source": "src/main/options/normalize.js",
             "dependencies": [

@@ -131,8 +131,8 @@ module.exports = (pFileDirArray, pOptions, pCallback) => {
 
     return lCallback(
         {
-            dependencies : lModules,
-            summary      :
+            modules : lModules,
+            summary :
                 Object.assign(
                     summarize(lModules),
                     {

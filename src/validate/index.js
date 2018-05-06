@@ -43,9 +43,25 @@ function replaceGroupPlaceholders(pString, pExtractedGroups) {
     );
 }
 
-function matchRule(pFrom, pTo) {
+function isModuleOnlyRule(pRule){
+    return pRule.from.hasOwnProperty("orphan");
+}
+
+function matchModuleRule(pModule){
+    return pRule => (
+        pModule.orphan === true &&
+            pRule.from.orphan === true
+    ) && (!pRule.from.path ||
+                pModule.source.match(pRule.from.path)
+    ) && (!pRule.from.pathNot ||
+            !(pModule.source.match(pRule.from.pathNot))
+    );
+}
+matchModuleRule.isInteresting = pRule => isModuleOnlyRule(pRule);
+
+function matchDependencyRule(pFrom, pTo) {
     return pRule => {
-        const lGroups = extractGroups(pRule.from, pFrom);
+        const lGroups = extractGroups(pRule.from, pFrom.source);
 
         /*
          * the replace("$1", lGroup) things below are a bit simplistic (they
@@ -53,9 +69,9 @@ function matchRule(pFrom, pTo) {
          * now.
          */
         return (!pRule.from.path ||
-                pFrom.match(pRule.from.path)
+                pFrom.source.match(pRule.from.path)
         ) && (!pRule.from.pathNot ||
-                !(pFrom.match(pRule.from.pathNot))
+                !(pFrom.source.match(pRule.from.pathNot))
         ) && (!pRule.to.path ||
                 (lGroups.length > 0
                     ? pTo.resolved.match(replaceGroupPlaceholders(pRule.to.path, lGroups))
@@ -78,6 +94,7 @@ function matchRule(pFrom, pTo) {
                  propertyEquals(pTo, pRule, "circular");
     };
 }
+matchDependencyRule.isInteresting = pRule => !isModuleOnlyRule(pRule);
 
 function compareSeverity(pFirst, pSecond) {
     const SEVERITY2INT = {
@@ -89,24 +106,29 @@ function compareSeverity(pFirst, pSecond) {
     return SEVERITY2INT[pFirst.severity] - SEVERITY2INT[pSecond.severity];
 }
 
-function validateAgainstRules(pRuleSet, pFrom, pTo) {
+function validateAgainstRules(pRuleSet, pFrom, pTo, pMatchFunction) {
     let lFoundRuleViolations = [];
     let lRetval = {valid:true};
 
     pRuleSet.forbidden = pRuleSet.forbidden || [];
 
-    if (pRuleSet.allowed && !(pRuleSet.allowed.some(matchRule(pFrom, pTo)))){
-        lFoundRuleViolations.push({
-            severity: pRuleSet.allowedSeverity,
-            name: "not-in-allowed"
-        });
+    if (pRuleSet.allowed){
+        const lInterestingAllowedRules = pRuleSet.allowed.filter(pMatchFunction.isInteresting);
+
+        if (lInterestingAllowedRules.length > 0 && !(lInterestingAllowedRules.some(pMatchFunction(pFrom, pTo)))){
+            lFoundRuleViolations.push({
+                severity: pRuleSet.allowedSeverity,
+                name: "not-in-allowed"
+            });
+        }
     }
 
     lFoundRuleViolations = lFoundRuleViolations
         .concat(
             pRuleSet
                 .forbidden
-                .filter(matchRule(pFrom, pTo))
+                .filter(pMatchFunction.isInteresting)
+                .filter(pMatchFunction(pFrom, pTo))
                 .map(pMatchedRule => ({
                     severity : pMatchedRule.severity,
                     name     : pMatchedRule.name
@@ -142,11 +164,20 @@ function validateAgainstRules(pRuleSet, pFrom, pTo) {
  *                              - severity: the severity of that rule - as per
  *                                  the ruleset
  */
-module.exports = (pValidate, pRuleSet, pFrom, pTo) => {
-    if (!pValidate) {
-        return {valid:true};
+module.exports = {
+    module: (pValidate, pRuleSet, pModule) => {
+        if (!pValidate) {
+            return {valid:true};
+        }
+        // return {};
+        return validateAgainstRules(pRuleSet, pModule, {}, matchModuleRule);
+    },
+    dependency: (pValidate, pRuleSet, pFrom, pTo) => {
+        if (!pValidate) {
+            return {valid:true};
+        }
+        return validateAgainstRules(pRuleSet, pFrom, pTo, matchDependencyRule);
     }
-    return validateAgainstRules(pRuleSet, pFrom, pTo);
 };
 
 /* ignore security/detect-object-injection because:

@@ -82,7 +82,8 @@
                         "valid": true,
                         "circular": false
                     }
-                ]
+                ],
+                "valid": true
             },
             {
                 "source": "path",
@@ -93,11 +94,13 @@
                 "dependencyTypes": [
                     "core"
                 ],
-                "dependencies": []
+                "dependencies": [],
+                "valid": true
             },
             {
                 "source": "test/extract/fixtures/ts/javascriptThing.js",
-                "dependencies": []
+                "dependencies": [],
+                "valid": true
             },
             {
                 "source": "test/extract/fixtures/ts/sub/index.ts",
@@ -116,15 +119,18 @@
                         "valid": true,
                         "circular": false
                     }
-                ]
+                ],
+                "valid": true
             },
             {
                 "source": "test/extract/fixtures/ts/sub/willBeReExported.ts",
-                "dependencies": []
+                "dependencies": [],
+                "valid": true
             },
             {
                 "source": "test/extract/fixtures/ts/sub/kaching.ts",
-                "dependencies": []
+                "dependencies": [],
+                "valid": true
             }
         ]
     },
@@ -155,7 +161,8 @@
                         "valid": true,
                         "circular": true
                     }
-                ]
+                ],
+                "valid": true
             },
             {
                 "source": "test/extract/fixtures/ts-circular-with-types/B.ts",
@@ -174,7 +181,8 @@
                         "valid": true,
                         "circular": true
                     }
-                ]
+                ],
+                "valid": true
             }
         ]
     },
@@ -216,7 +224,8 @@
                         "matchesDoNotFollow": false,
                         "valid": true
                     }
-                ]
+                ],
+                "valid": true
             },
             {
                 "source": "test/extract/fixtures/ts-unused-dependencies/b.ts",
@@ -234,11 +243,13 @@
                         "matchesDoNotFollow": false,
                         "valid": true
                     }
-                ]
+                ],
+                "valid": true
             },
             {
                 "source": "test/extract/fixtures/ts-unused-dependencies/c.ts",
-                "dependencies": []
+                "dependencies": [],
+                "valid": true
             }
         ]
     },
@@ -268,11 +279,13 @@
                         "valid": true,
                         "circular": false
                     }
-                ]
+                ],
+                "valid": true
             },
             {
                 "source": "test/extract/fixtures/ts-circular-with-types/B.ts",
-                "dependencies": []
+                "dependencies": [],
+                "valid": true
             }
         ]
     },
@@ -284,7 +297,8 @@
         "expected": [
             {
                 "source": "test/extract/fixtures/ts-unused-dependencies/a.ts",
-                "dependencies": []
+                "dependencies": [],
+                "valid": true
             }
         ]
     }

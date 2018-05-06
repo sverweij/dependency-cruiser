@@ -1,5 +1,5 @@
 {
-    "dependencies": [
+    "modules": [
         {
             "source": "test/cli/fixtures/cjs/root_one.js",
             "dependencies": [

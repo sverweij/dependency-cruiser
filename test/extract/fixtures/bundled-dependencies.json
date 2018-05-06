@@ -41,15 +41,18 @@
                         "moduleSystem": "cjs",
                         "valid": true
                     }
-                ]
+                ],
+                "valid": true
             },
             {
                 "source": "node_modules/idontgetbundled/index.js",
-                "dependencies": []
+                "dependencies": [],
+                "valid": true
             },
             {
                 "source": "node_modules/igetbundled/index.js",
-                "dependencies": []
+                "dependencies": [],
+                "valid": true
             }
         ]
     }

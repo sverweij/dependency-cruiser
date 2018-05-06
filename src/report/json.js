@@ -5,6 +5,6 @@ module.exports = pInput =>
         {},
         pInput,
         {
-            dependencies: JSON.stringify(pInput, null, "    ")
+            modules: JSON.stringify(pInput, null, "    ")
         }
     );

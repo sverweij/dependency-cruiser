@@ -1,5 +1,5 @@
 {
-    "dependencies": [
+    "modules": [
         {
             "source": "test/cli/fixtures/unresolvable-in-sub/refers-to-an-unresolvable-module.js",
             "dependencies": [

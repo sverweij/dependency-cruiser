@@ -1,5 +1,5 @@
 {
-    "dependencies": [
+    "modules": [
         {
             "source": "test/cli/fixtures/cjs/one_only_one.js",
             "dependencies": [
@@ -17,7 +17,8 @@
                     "circular": false,
                     "valid": true
                 }
-            ]
+            ],
+            "valid": true
         },
         {
             "source": "path",
@@ -28,7 +29,8 @@
             "dependencyTypes": [
                 "core"
             ],
-            "dependencies": []
+            "dependencies": [],
+            "valid": true
         },
         {
             "source": "test/cli/fixtures/cjs/one_only_two.js",
@@ -47,7 +49,8 @@
                     "circular": false,
                     "valid": true
                 }
-            ]
+            ],
+            "valid": true
         },
         {
             "source": "test/cli/fixtures/cjs/root_one.js",
@@ -122,7 +125,8 @@
                     "circular": false,
                     "valid": true
                 }
-            ]
+            ],
+            "valid": true
         },
         {
             "source": "fs",
@@ -133,7 +137,8 @@
             "dependencyTypes": [
                 "core"
             ],
-            "dependencies": []
+            "dependencies": [],
+            "valid": true
         },
         {
             "source": "test/cli/fixtures/cjs/shared.js",
@@ -152,7 +157,8 @@
                     "circular": false,
                     "valid": true
                 }
-            ]
+            ],
+            "valid": true
         },
         {
             "source": "test/cli/fixtures/cjs/sub/dir.js",
@@ -185,7 +191,8 @@
                     "circular": false,
                     "valid": true
                 }
-            ]
+            ],
+            "valid": true
         },
         {
             "source": "test/cli/fixtures/cjs/sub/depindir.js",
@@ -204,7 +211,8 @@
                     "circular": false,
                     "valid": true
                 }
-            ]
+            ],
+            "valid": true
         },
         {
             "source": "test/cli/fixtures/cjs/root_two.js",
@@ -265,7 +273,8 @@
                     "circular": false,
                     "valid": true
                 }
-            ]
+            ],
+            "valid": true
         },
         {
             "source": "test/cli/fixtures/cjs/somedata.json",
@@ -276,7 +285,8 @@
             "dependencyTypes": [
                 "local"
             ],
-            "dependencies": []
+            "dependencies": [],
+            "valid": true
         },
         {
             "source": "http",
@@ -287,7 +297,8 @@
             "dependencyTypes": [
                 "core"
             ],
-            "dependencies": []
+            "dependencies": [],
+            "valid": true
         },
         {
             "source": "test/cli/fixtures/cjs/two_only_one.js",
@@ -306,7 +317,8 @@
                     "circular": false,
                     "valid": true
                 }
-            ]
+            ],
+            "valid": true
         }
     ],
     "summary": {
