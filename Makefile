@@ -148,6 +148,7 @@ src/main/index.js: \
 src/extract/index.js: \
 	src/extract/addValidations.js \
 	src/extract/derive/circular/index.js \
+	src/extract/derive/orphan/index.js \
 	src/extract/extract.js \
 	src/extract/gatherInitialSources.js \
 	src/extract/summarize.js \
@@ -158,6 +159,9 @@ src/extract/addValidations.js: \
 
 src/extract/derive/circular/index.js: \
 	src/extract/derive/circular/dependencyEndsUpAtFrom.js
+
+src/extract/derive/orphan/index.js: \
+	src/extract/derive/orphan/isOrphan.js
 
 src/extract/extract.js: \
 	src/extract/ast-extractors/extract-AMD-deps.js \
@@ -253,6 +257,8 @@ ALL_SRC=src/main/index.js \
 	src/extract/ast-extractors/extract-typescript-deps.js \
 	src/extract/derive/circular/dependencyEndsUpAtFrom.js \
 	src/extract/derive/circular/index.js \
+	src/extract/derive/orphan/index.js \
+	src/extract/derive/orphan/isOrphan.js \
 	src/extract/extract.js \
 	src/extract/gatherInitialSources.js \
 	src/extract/ignore.js \
@@ -312,6 +318,7 @@ src/main/index.js: \
 src/extract/index.js: \
 	src/extract/addValidations.js \
 	src/extract/derive/circular/index.js \
+	src/extract/derive/orphan/index.js \
 	src/extract/extract.js \
 	src/extract/gatherInitialSources.js \
 	src/extract/summarize.js \
@@ -322,6 +329,9 @@ src/extract/addValidations.js: \
 
 src/extract/derive/circular/index.js: \
 	src/extract/derive/circular/dependencyEndsUpAtFrom.js
+
+src/extract/derive/orphan/index.js: \
+	src/extract/derive/orphan/isOrphan.js
 
 src/extract/extract.js: \
 	src/extract/ast-extractors/extract-AMD-deps.js \
@@ -456,6 +466,12 @@ test/extract/ast-extractors/extract-typescript-triple-slash-directives.spec.js: 
 test/extract/derivations/circular/dependencyEndsUpAtFrom.spec.js: \
 	src/extract/derive/circular/dependencyEndsUpAtFrom.js
 
+test/extract/derivations/orphan/index.spec.js: \
+	src/extract/derive/orphan/index.js
+
+test/extract/derivations/orphan/isOrphan.spec.js: \
+	src/extract/derive/orphan/isOrphan.js
+
 test/extract/extract.spec.js: \
 	src/extract/extract.js
 
@@ -476,6 +492,9 @@ test/extract/resolve/localNpmHelpers.spec.js: \
 test/extract/resolve/readPackageDeps.spec.js: \
 	package.json \
 	src/extract/resolve/readPackageDeps.js
+
+test/extract/summarize.spec.js: \
+	src/extract/summarize.js
 
 test/extract/transpile/coffeeWrap.spec.js: \
 	src/extract/transpile/coffeeWrap.js
