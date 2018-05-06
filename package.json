@@ -19,10 +19,8 @@
     "postversion": "git push && git push --tags",
     "preversion": "test `git branch | grep \"^* [a-zA-Z]\" | cut -c 3-` = 'master'",
     "test": "mocha test/*/*.spec.js test/*/*/*.spec.js test/*/*/*/*.spec.js",
-    "test:node4": "mocha --bail --reporter dot --invert --fgrep not-testable-in-node4 test/*/*.spec.js test/*/*/*.spec.js test/*/*/*/*.spec.js",
     "test:cover": "nyc --check-coverage npm test",
     "test:cover:report": "nyc report --reporter=html",
-    "test:cover-node4": "nyc npm run test:node4",
     "test:long": "mocha test/*/*.spec.js test/*/*/*.spec.js test/*/*/*/*.spec.js",
     "test:watch": "mocha --watch --watch-extensions=json --reporter=min test/*/*.spec.js test/*/*/*.spec.js test/*/*/*/*.spec.js",
     "test:glob": "set -f && test \"`bin/dependency-cruise test/extract/fixtures/gather-globbing/packages/**/src/**/*.js | grep \"no dependency violations found\"`\" = \"✔ no dependency violations found (6 modules cruised)\""
@@ -112,7 +110,7 @@
     "all": true
   },
   "engines": {
-    "node": ">=4"
+    "node": ">=6"
   },
   "types": "types/dependency-cruiser.d.ts",
   "supportedTranspilers": {

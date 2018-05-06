@@ -33,16 +33,6 @@ test_async_node_6:
    - tags
    - master
 
-test_async_node_4:
- image: node:4
- script:
-  - npm install
-  - npm run test:cover-node4 # - coffeescript doesn't support node 4 anymore
-  # - npm run nsp - nsp is not supported on node 4 anymore
- except:
-  - tags
-  - master
-
 # publish:
 #  image: node:latest
 #  script:

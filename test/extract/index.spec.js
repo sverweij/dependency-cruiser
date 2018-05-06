@@ -37,7 +37,7 @@ describe('AMD recursive - ', () => amdRecursiveFixtures.forEach(runRecursiveFixt
 describe('TypeScript recursive - ', () => tsRecursiveFixtures.forEach(runRecursiveFixture));
 describe('vue - ', () => vueFixtures.forEach(runRecursiveFixture));
 describe(
-    'CoffeeScript recursive - (not-testable-in-node4)',
+    'CoffeeScript recursive - ',
     () => coffeeRecursiveFixtures.forEach(runRecursiveFixture)
 );
 

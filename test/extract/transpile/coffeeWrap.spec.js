@@ -6,7 +6,7 @@ const normalizeNewline = require('normalize-newline');
 const wrap             = require("../../../src/extract/transpile/coffeeWrap")();
 const litWrap          = require("../../../src/extract/transpile/coffeeWrap")(true);
 
-describe("coffeescript transpiler (not-testable-in-node4)", () => {
+describe("coffeescript transpiler", () => {
     it("tells the coffeescript transpiler is available", () => {
         expect(
             wrap.isAvailable()
