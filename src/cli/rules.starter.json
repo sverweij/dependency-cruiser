@@ -18,6 +18,12 @@
         "from": {},
         "to": { "circular": true }
     },{
+        "name": "no-orphans",
+        "severity": "warn",
+        "comment": "Warn in case there's orphans hiding in the code base",
+        "from": { "orphan": true },
+        "to": {}
+    },{
         "name": "no-deprecated-core",
         "comment": "Warn about dependencies on deprecated core modules.",
         "severity": "warn",
