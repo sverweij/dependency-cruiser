@@ -1,16 +1,9 @@
 "use strict";
-
 const path       = require('path').posix;
 const Handlebars = require("handlebars/runtime");
+const coloring   = require('./coloring');
 
 require("./dot.template");
-
-const SEVERITY2COLOR = {
-    error : "red",
-    warn  : "orange",
-    info  : "blue"
-};
-const DEFAULT_VIOLATION_COLOR = "red";
 
 function compareOnSource(pModuleOne, pModuleTwo) {
     return pModuleOne.source > pModuleTwo.source ? 1 : -1;
@@ -18,10 +11,6 @@ function compareOnSource(pModuleOne, pModuleTwo) {
 
 function toFullPath (pAll, pCurrent) {
     return `${pAll}${path.sep}${pCurrent}`;
-}
-
-function severity2Color(pSeverity){
-    return SEVERITY2COLOR[pSeverity] || DEFAULT_VIOLATION_COLOR;
 }
 
 function aggregate (pPathSnippet, pCounter, pPathArray){
@@ -49,44 +38,13 @@ function folderify(pModule) {
     );
 }
 
-function determineDependencyColor(pDependency) {
-    let lColorAddition = {};
-
-    if (pDependency.hasOwnProperty("valid") && !pDependency.valid) {
-        lColorAddition.color = severity2Color(pDependency.rule.severity);
-    }
-
-    return Object.assign(
-        {},
-        pDependency,
-        lColorAddition
-    );
-}
-/* eslint security/detect-object-injection: 0 */
-function determineModuleColor(pModule) {
-    const MODULE2COLOR = {
-        "couldNotResolve": "red",
-        "coreModule": "grey",
-        "orphan": "#008800"
-    };
-
-    if (pModule.hasOwnProperty("valid") && !pModule.valid) {
-        return severity2Color(pModule.rules[0].severity);
-    }
-    return MODULE2COLOR[
-        Object.keys(MODULE2COLOR).find(
-            (pKey) => pModule[pKey]
-        )
-    ] || null;
-}
-
-function colorize(pModule){
+function colorize(pModule) {
     return Object.assign(
         {},
         pModule,
         {
-            color: determineModuleColor(pModule),
-            dependencies: pModule.dependencies.map(determineDependencyColor)
+            color: coloring.determineModuleColor(pModule),
+            dependencies: pModule.dependencies.map(coloring.determineDependencyColor)
         }
     );
 }
