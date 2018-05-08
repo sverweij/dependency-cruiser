@@ -413,7 +413,7 @@ false).
 ### orphans
 
 A boolean indicating whether or not to match modules that have no incoming
-or outgoing dependencies. Orphans might need special attention becuase 
+or outgoing dependencies. Orphans might need special attention because 
 they're unused leftovers from a refactoring. Or the start of some feature
 that never got finished but which was merged anyway. Leaving the `orphan`
 attribute out means you don't care about orphans in your code.
