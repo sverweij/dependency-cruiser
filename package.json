@@ -93,9 +93,9 @@
   },
   "nyc": {
     "statements": 99.86,
-    "branches": 98.91,
+    "branches": 99.18,
     "functions": 100,
-    "lines": 99.85,
+    "lines": 99.86,
     "exclude": [
       "test/**/*",
       "src/report/**/*.template.js",
