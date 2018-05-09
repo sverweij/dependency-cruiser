@@ -64,7 +64,7 @@
     "normalize-newline": "3.0.0",
     "npm-check-updates": "2.14.2",
     "nsp": "3.2.1",
-    "nyc": "11.7.1",
+    "nyc": "11.7.2",
     "symlink-dir": "1.1.2",
     "tslint": "5.10.0",
     "typescript": "2.8.3"
@@ -79,7 +79,7 @@
   "homepage": "https://github.com/sverweij/dependency-cruiser",
   "dependencies": {
     "acorn": "5.5.3",
-    "ajv": "6.4.0",
+    "ajv": "6.5.0",
     "chalk": "2.4.1",
     "commander": "2.15.1",
     "figures": "2.0.0",
