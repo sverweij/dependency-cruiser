@@ -267,10 +267,7 @@ describe("#processCLI", () => {
             });
 
             processCLI(
-                ["test/cli/fixtures"],
-                {
-                    moduleSystem: "cjs,es6"
-                }
+                ["test/cli/fixtures"]
             );
             unhookInterceptStdOut();
             unhookInterceptStdErr();
