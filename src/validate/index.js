@@ -86,7 +86,3 @@ module.exports = {
     }
 };
 
-/* ignore security/detect-object-injection because:
-   - we only use it from within the module with two fixed values
-   - the propertyEquals function is not exposed externaly
- */
