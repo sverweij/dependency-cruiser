@@ -8,9 +8,9 @@ const typescript = tryRequire(
 module.exports = {
     isAvailable: () => typescript !== false,
 
-    transpile: pFile =>
+    transpile: pSource =>
         typescript.transpileModule(
-            pFile,
+            pSource,
             {
                 compilerOptions: {
                     "target": "es2015",

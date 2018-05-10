@@ -14,17 +14,17 @@ const meta = require("./meta");
  * @see [meta.js](meta.js) for the extension -> transpiler mapping
  *
  * @param  {string} pExtension extension of the file to transpile
- * @param  {string} pFile      the contents of the file to transpile
+ * @param  {string} pSource    the contents of the file to transpile
  * @return {string}            the transpiled version of the file (or the file
  *                             itself when the function could not find a
  *                             transpiler matching pExtension
  */
-module.exports = (pExtension, pFile) => {
+module.exports = (pExtension, pSource) => {
     const lWrapper = meta.getWrapper(pExtension);
 
     if (lWrapper.isAvailable()) {
-        return lWrapper.transpile(pFile);
+        return lWrapper.transpile(pSource);
     } else {
-        return pFile;
+        return pSource;
     }
 };
