@@ -64,7 +64,7 @@
     "normalize-newline": "3.0.0",
     "npm-check-updates": "2.14.2",
     "nsp": "3.2.1",
-    "nyc": "11.7.2",
+    "nyc": "11.7.3",
     "symlink-dir": "1.1.2",
     "tslint": "5.10.0",
     "typescript": "2.8.3"
