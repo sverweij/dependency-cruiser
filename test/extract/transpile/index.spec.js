@@ -1,5 +1,7 @@
 "use strict";
 
+const fs        = require("fs");
+const path      = require("path");
 const expect    = require("chai").expect;
 const transpile = require("../../../src/extract/transpile");
 
@@ -8,5 +10,20 @@ describe("transpiler", () => {
         expect(
             transpile(".ls", "whatever the bever")
         ).to.equal("whatever the bever");
+    });
+
+    it("Does not confuse .ts for .tsx", () => {
+        const lInputFixture = fs.readFileSync(
+            path.join(__dirname, "fixtures/dontconfuse_ts_for_tsx/input/Observable.ts"),
+            'utf8'
+        );
+        const lTranspiledFixture = fs.readFileSync(
+            path.join(__dirname, "fixtures/dontconfuse_ts_for_tsx/transpiled/Observable.js"),
+            'utf8'
+        );
+
+        expect(
+            transpile(".ts", lInputFixture)
+        ).to.equal(lTranspiledFixture);
     });
 });

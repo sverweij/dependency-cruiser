@@ -5,17 +5,23 @@ const typescript = tryRequire(
     require("../../../package.json").supportedTranspilers.typescript
 );
 
-module.exports = {
+module.exports = (pTsx) => ({
     isAvailable: () => typescript !== false,
 
-    transpile: pSource =>
-        typescript.transpileModule(
+    transpile: (pSource) => {
+        let lCompilerOptions = {
+            "target": "es2015"
+        };
+
+        if (pTsx){
+            lCompilerOptions.jsx = "react";
+        }
+
+        return typescript.transpileModule(
             pSource,
             {
-                compilerOptions: {
-                    "target": "es2015",
-                    "jsx": "react"
-                }
+                compilerOptions: lCompilerOptions
             }
-        ).outputText
-};
+        ).outputText;
+    }
+});
