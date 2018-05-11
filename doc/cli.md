@@ -282,7 +282,7 @@ dependency-on-a-type-only from `b.ts` to `a.ts`:
 #### Pre-compilation dependencies example: import without use 
 
 Similarly, if you import something, but don't use it, the dependency
-only exists before compilation. Take for example thse two 
+only exists before compilation. Take for example these two 
 typescript modules:
 
 `a.ts`:
