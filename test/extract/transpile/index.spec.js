@@ -1,9 +1,10 @@
 "use strict";
 
-const fs        = require("fs");
-const path      = require("path");
-const expect    = require("chai").expect;
-const transpile = require("../../../src/extract/transpile");
+const fs               = require("fs");
+const path             = require("path");
+const expect           = require("chai").expect;
+const normalizeNewline = require('normalize-newline');
+const transpile        = require("../../../src/extract/transpile");
 
 describe("transpiler", () => {
     it("As the 'livescript' transpiler is not available, returns the original source", () => {
@@ -23,7 +24,11 @@ describe("transpiler", () => {
         );
 
         expect(
-            transpile(".ts", lInputFixture)
-        ).to.equal(lTranspiledFixture);
+            normalizeNewline(
+                transpile(".ts", lInputFixture)
+            )
+        ).to.equal(
+            normalizeNewline(lTranspiledFixture)
+        );
     });
 });
