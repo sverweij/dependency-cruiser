@@ -157,6 +157,16 @@ src/extract/index.js: \
 src/extract/addValidations.js: \
 	src/validate/index.js
 
+src/validate/index.js: \
+	src/validate/matchDependencyRule.js \
+	src/validate/matchModuleRule.js
+
+src/validate/matchDependencyRule.js: \
+	src/validate/isModuleOnlyRule.js
+
+src/validate/matchModuleRule.js: \
+	src/validate/isModuleOnlyRule.js
+
 src/extract/derive/circular/index.js: \
 	src/extract/derive/circular/dependencyEndsUpAtFrom.js
 
@@ -234,6 +244,7 @@ src/report/csv/index.js: \
 	src/report/dependencyToIncidenceTransformer.js
 
 src/report/dot/index.js: \
+	src/report/dot/coloring.js \
 	src/report/dot/dot.template.js
 
 src/report/html/index.js: \
@@ -287,6 +298,7 @@ ALL_SRC=src/main/index.js \
 	src/report/csv/csv.template.js \
 	src/report/csv/index.js \
 	src/report/dependencyToIncidenceTransformer.js \
+	src/report/dot/coloring.js \
 	src/report/dot/dot.template.js \
 	src/report/dot/index.js \
 	src/report/err.js \
@@ -294,7 +306,10 @@ ALL_SRC=src/main/index.js \
 	src/report/html/index.js \
 	src/report/json.js \
 	src/utl/pathToPosix.js \
-	src/validate/index.js
+	src/validate/index.js \
+	src/validate/isModuleOnlyRule.js \
+	src/validate/matchDependencyRule.js \
+	src/validate/matchModuleRule.js
 # cjs dependencies
 test/cli/formatMetaInfo.spec.js: \
 	src/cli/formatMetaInfo.js
@@ -326,6 +341,16 @@ src/extract/index.js: \
 
 src/extract/addValidations.js: \
 	src/validate/index.js
+
+src/validate/index.js: \
+	src/validate/matchDependencyRule.js \
+	src/validate/matchModuleRule.js
+
+src/validate/matchDependencyRule.js: \
+	src/validate/isModuleOnlyRule.js
+
+src/validate/matchModuleRule.js: \
+	src/validate/isModuleOnlyRule.js
 
 src/extract/derive/circular/index.js: \
 	src/extract/derive/circular/dependencyEndsUpAtFrom.js
@@ -404,6 +429,7 @@ src/report/csv/index.js: \
 	src/report/dependencyToIncidenceTransformer.js
 
 src/report/dot/index.js: \
+	src/report/dot/coloring.js \
 	src/report/dot/dot.template.js
 
 src/report/html/index.js: \
@@ -535,8 +561,11 @@ test/main/ruleSet/validate.spec.js: \
 test/report/dependencyToIncidenceTransformer.spec.js: \
 	src/report/dependencyToIncidenceTransformer.js
 
-test/report/dot.spec.js: \
+test/report/dot/dot.spec.js: \
 	src/report/dot/index.js
+
+test/report/dot/dotColoring.spec.js: \
+	src/report/dot/coloring.js
 
 test/report/err.spec.js: \
 	src/report/err.js
