@@ -70,7 +70,7 @@ The currently supported options are
 [`exclude`](./cli.md#--exclude-exclude-modules-from-being-cruised),
 [`moduleSystems`](./cli.md#--module-systems),
 [`prefix`](./cli.md#--prefix-prefixing-links),
-[`tsPreCompilationDeps`](/cli.md#--ts-pre-compilation-deps-typescript-only) and
+[`tsPreCompilationDeps`](./cli.md#--ts-pre-compilation-deps-typescript-only) and
 [`preserveSymlinks`](/cli.md#--preserve-symlinks).
 See the [command line documentation](./cli.md) for details.
 
