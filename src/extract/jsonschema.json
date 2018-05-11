@@ -2,7 +2,7 @@
     "$schema": "http://json-schema.org/draft-07/schema#",
     "title": "dependency-cruiser output format",
     "type": "object",
-    "required": [ "summary", "dependencies" ],
+    "required": [ "summary", "modules" ],
     "additionalProperties": false,
     "properties": {
         "summary": {
@@ -35,12 +35,12 @@
                 "optionsUsed": { "$ref": "#/definitions/OptionsType" }
             }
         },
-        "dependencies": {
+        "modules": {
             "type": "array",
             "description": "A list of modules, with for each module the modules it depends upon",
             "items": {
                 "type": "object",
-                "required": [ "source", "dependencies" ],
+                "required": [ "source", "dependencies", "valid" ],
                 "additionalProperties": false,
                 "properties": {
                     "source": {
@@ -71,6 +71,19 @@
                     "license": {
                         "type": "string",
                         "description": "the license, if known (usually known for modules pulled from npm, not for local ones)"
+                    },
+                    "orphan": {
+                        "type": "boolean",
+                        "description": "'true' if this dependency does not have dependencies, and no module has it as a dependency"
+                    },
+                    "valid": {
+                        "type": "boolean",
+                        "description": "'true' if this module violated a rule; 'false' in all other cases. The violated rule will be in the 'rule' object at the same level."
+                    },
+                    "rules": {
+                        "type": "array",
+                        "items": {"$ref": "#/definitions/RuleSummaryType"},
+                        "description": "an array of rules violated by this module - left out if the module is valid"
                     },
                     "dependencies": {
                         "type": "array",

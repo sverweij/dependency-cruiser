@@ -35,7 +35,7 @@ module.exports = (pInput) => {
         return Object.assign(
             pInput,
             {
-                dependencies:
+                modules:
                     `\n${chalk.green(figures.tick)} no dependency violations found (${pInput.summary.totalCruised} modules cruised)\n\n`
             }
         );
@@ -45,7 +45,7 @@ module.exports = (pInput) => {
         {},
         pInput,
         {
-            dependencies: pInput.summary.violations.reduce(
+            modules: pInput.summary.violations.reduce(
                 (pAll, pThis) => `${pAll}  ${formatError(pThis)}\n`,
                 "\n"
             ).concat(

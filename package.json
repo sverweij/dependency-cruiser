@@ -1,6 +1,6 @@
 {
   "name": "dependency-cruiser",
-  "version": "3.1.1",
+  "version": "4.0.0-beta-1",
   "description": "Validate and visualize dependencies. With your rules. JavaScript, TypeScript, CoffeeScript. ES6, CommonJS, AMD.",
   "bin": {
     "dependency-cruiser": "bin/dependency-cruise",
@@ -10,7 +10,7 @@
   "main": "src/main/index.js",
   "scripts": {
     "depcruise": "node ./bin/dependency-cruise --validate .dependency-cruiser-custom.json src bin/dependency-cruise test",
-    "depcruise:graph": "node ./bin/dependency-cruise --exclude \"(^node_modules|^fs$|^path$)\" --output-type dot --validate .dependency-cruiser-custom.json bin/dependency-cruise | dot -T svg > tmp_deps.svg",
+    "depcruise:graph": "node ./bin/dependency-cruise --exclude \"(^node_modules|^fs$|^path$)\" --output-type dot --validate .dependency-cruiser-custom.json bin src | dot -T svg > tmp_deps.svg",
     "lint": "eslint bin/dependency-cruise src test",
     "lint:types": "tslint types/dependency-cruiser.d.ts",
     "lint:fix": "eslint --fix bin/dependency-cruise src test",
@@ -18,7 +18,7 @@
     "npm-check-updates": "ncu --upgrade",
     "postversion": "git push && git push --tags",
     "preversion": "test `git branch | grep \"^* [a-zA-Z]\" | cut -c 3-` = 'master'",
-    "test": "mocha --bail --reporter dot test/*/*.spec.js test/*/*/*.spec.js test/*/*/*/*.spec.js",
+    "test": "mocha test/*/*.spec.js test/*/*/*.spec.js test/*/*/*/*.spec.js",
     "test:cover": "nyc --check-coverage npm test",
     "test:cover:report": "nyc report --reporter=html",
     "test:long": "mocha test/*/*.spec.js test/*/*/*.spec.js test/*/*/*/*.spec.js",
@@ -92,10 +92,10 @@
     "semver-try-require": "1.1.1"
   },
   "nyc": {
-    "statements": 99.85,
-    "branches": 98.78,
+    "statements": 99.86,
+    "branches": 99.46,
     "functions": 100,
-    "lines": 99.84,
+    "lines": 99.86,
     "exclude": [
       "test/**/*",
       "src/report/**/*.template.js",

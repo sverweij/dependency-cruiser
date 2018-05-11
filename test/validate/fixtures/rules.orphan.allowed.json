@@ -1,0 +1,8 @@
+{
+    "allowed": [
+        {
+            "from": {"orphan":false},
+            "to": {}
+        }
+    ]
+}

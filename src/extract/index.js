@@ -4,6 +4,7 @@ const _                      = require('lodash');
 const pathToPosix            = require('../utl/pathToPosix');
 const extract                = require('./extract');
 const deriveCirculars        = require('./derive/circular');
+const deriveOrphans          = require('./derive/orphan');
 const gather                 = require('./gatherInitialSources');
 const summarize              = require('./summarize');
 const addValidations         = require('./addValidations');
@@ -120,6 +121,7 @@ module.exports = (pFileDirArray, pOptions, pCallback) => {
         .value();
 
     lModules = deriveCirculars(lModules, lOptions);
+    lModules = deriveOrphans(lModules, lOptions);
 
     lModules = addValidations(
         lModules,
@@ -129,8 +131,8 @@ module.exports = (pFileDirArray, pOptions, pCallback) => {
 
     return lCallback(
         {
-            dependencies : lModules,
-            summary      :
+            modules : lModules,
+            summary :
                 Object.assign(
                     summarize(lModules),
                     {

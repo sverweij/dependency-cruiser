@@ -39,17 +39,16 @@ function extractMetaData(pViolations) {
  * @param {any} pModules an array of modules
  * @return {any} an array of violations
  */
-function extractViolations(pModules){
+function extractDependencyViolations(pModules){
     return _flattenDeep(pModules
         .map(cutNonTransgressions)
         .filter(pModule => pModule.dependencies.length > 0)
-        .sort((pOne, pTwo) => pOne.source > pTwo.source ? 1 : -1)
         .map(
             pModule => pModule.dependencies.map(
                 pDep => pDep.rules.map(
                     pRule => ({
-                        from:pModule.source,
-                        to:pDep.resolved,
+                        from: pModule.source,
+                        to: pDep.resolved,
                         rule: pRule
                     })
                 )
@@ -58,8 +57,25 @@ function extractViolations(pModules){
     );
 }
 
+function extractModuleViolations(pModules){
+    return _flattenDeep(pModules
+        .filter(pModule => pModule.valid === false)
+        .map(
+            pModule => pModule.rules.map(
+                pRule => ({
+                    from: pModule.source,
+                    to: pModule.source,
+                    rule: pRule
+                })
+            )
+        )
+    );
+}
+
 module.exports = (pModules) => {
-    const lViolations = extractViolations(pModules);
+    const lViolations = extractDependencyViolations(pModules)
+        .concat(extractModuleViolations(pModules))
+        .sort((pOne, pTwo) => pOne.from > pTwo.from ? 1 : -1);
 
     return Object.assign(
         {

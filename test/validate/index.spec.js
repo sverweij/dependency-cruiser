@@ -13,14 +13,14 @@ function _readRuleSet(pFileName) {
     );
 }
 
-describe("validate - generic tests", () => {
+describe("validate dependency - generic tests", () => {
 
     it("is ok with the empty validation", () => {
         expect(
-            validate(
+            validate.dependency(
                 true,
                 _readRuleSet("./test/validate/fixtures/rules.empty.json"),
-                "koos koets",
+                {source: "koos koets"},
                 {"resolved": "robby van de kerkhof"}
             )
         ).to.deep.equal({valid: true});
@@ -28,21 +28,31 @@ describe("validate - generic tests", () => {
 
     it("is ok with the 'everything allowed' validation", () => {
         expect(
-            validate(
+            validate.dependency(
                 true,
                 _readRuleSet("./test/validate/fixtures/rules.everything-allowed.json"),
-                "koos koets",
+                {source: "koos koets"},
                 {"resolved": "robby van de kerkhof"}
+            )
+        ).to.deep.equal({valid: true});
+    });
+
+    it("is ok with the 'everything allowed' validation - even when there's a module only rule in 'forbidden'", () => {
+        expect(
+            validate.module(
+                true,
+                _readRuleSet("./test/validate/fixtures/rules.module-only.empty.allowed.json"),
+                {source: "koos koets"}
             )
         ).to.deep.equal({valid: true});
     });
 
     it("is ok with the 'impossible to match allowed' validation", () => {
         expect(
-            validate(
+            validate.dependency(
                 true,
                 _readRuleSet("./test/validate/fixtures/rules.impossible-to-match-allowed.json"),
-                "koos koets",
+                {source: "koos koets"},
                 {"resolved": "robby van de kerkhof"}
             )
         ).to.deep.equal({valid: false, rules: [{severity: "warn", "name": "not-in-allowed"}]});
@@ -50,10 +60,10 @@ describe("validate - generic tests", () => {
 
     it("is ok with the 'impossible to match allowed' validation - errors when configured so", () => {
         expect(
-            validate(
+            validate.dependency(
                 true,
                 _readRuleSet("./test/validate/fixtures/rules.impossible-to-match-error.allowed.json"),
-                "koos koets",
+                {source: "koos koets"},
                 {"resolved": "robby van de kerkhof"}
             )
         ).to.deep.equal({valid: false, rules: [{severity: "error", "name": "not-in-allowed"}]});
@@ -61,23 +71,45 @@ describe("validate - generic tests", () => {
 
     it("is ok with the 'nothing allowed' validation", () => {
         expect(
-            validate(
+            validate.dependency(
                 true,
                 _readRuleSet("./test/validate/fixtures/rules.nothing-allowed.json"),
-                "koos koets",
+                {source: "koos koets"},
                 {"resolved": "robby van de kerkhof"}
             )
         ).to.deep.equal({valid: false, rules: [{severity: 'warn', name: 'unnamed'}]});
     });
+
+    it("if there's more than one violated rule, both are returned", () => {
+        expect(
+            validate.dependency(
+                true,
+                _readRuleSet("./test/validate/fixtures/rules.not-in-allowed-and-a-forbidden.json"),
+                {source: "something"},
+                {
+                    "resolved": "src/some/thing/else.js"
+                }
+            )
+        ).to.deep.equal(
+            {
+                valid: false,
+                rules: [
+                    {name: "everything-is-forbidden", severity: "error"},
+                    {name: "not-in-allowed", severity: "info"}
+                ]
+            }
+        );
+    });
+
 });
 
 describe("validate - specific tests", () => {
     it("node_modules inhibition - ok", () => {
         expect(
-            validate(
+            validate.dependency(
                 true,
                 _readRuleSet("./test/validate/fixtures/rules.node_modules-not-allowed.json"),
-                "koos koets",
+                {source: "koos koets"},
                 {"resolved": "robby van de kerkhof"}
             )
         ).to.deep.equal({valid: true});
@@ -85,10 +117,10 @@ describe("validate - specific tests", () => {
 
     it("node_modules inhibition - violation", () => {
         expect(
-            validate(
+            validate.dependency(
                 true,
                 _readRuleSet("./test/validate/fixtures/rules.node_modules-not-allowed.json"),
-                "koos koets",
+                {source: "koos koets"},
                 {"resolved": "./node_modules/evil-module"}
             )
         ).to.deep.equal({valid: false, rules: [{severity: 'warn', name: 'unnamed'}]});
@@ -96,10 +128,10 @@ describe("validate - specific tests", () => {
 
     it("not to core - ok", () => {
         expect(
-            validate(
+            validate.dependency(
                 true,
                 _readRuleSet("./test/validate/fixtures/rules.not-to-core.json"),
-                "koos koets",
+                {source: "koos koets"},
                 {"resolved": "path", "dependencyTypes": ["npm"]}
             )
         ).to.deep.equal({valid: true});
@@ -107,10 +139,10 @@ describe("validate - specific tests", () => {
 
     it("not to core - violation", () => {
         expect(
-            validate(
+            validate.dependency(
                 true,
                 _readRuleSet("./test/validate/fixtures/rules.not-to-core.json"),
-                "koos koets",
+                {source: "koos koets"},
                 {"resolved": "path", "dependencyTypes": ["core"]}
             )
         ).to.deep.equal({valid: false, rules: [{severity: 'error', name: 'not-to-core'}]});
@@ -118,10 +150,10 @@ describe("validate - specific tests", () => {
 
     it("not to core fs os - ok", () => {
         expect(
-            validate(
+            validate.dependency(
                 true,
                 _readRuleSet("./test/validate/fixtures/rules.not-to-core-fs-os.json"),
-                "koos koets",
+                {source: "koos koets"},
                 {"resolved": "path", "dependencyTypes": ["core"]}
             )
         ).to.deep.equal({valid: true});
@@ -130,10 +162,10 @@ describe("validate - specific tests", () => {
 
     it("not to core fs os - violation", () => {
         expect(
-            validate(
+            validate.dependency(
                 true,
                 _readRuleSet("./test/validate/fixtures/rules.not-to-core-fs-os.json"),
-                "koos koets",
+                {source: "koos koets"},
                 {"resolved": "os", "dependencyTypes": ["core"]}
             )
         ).to.deep.equal({valid: false, rules: [{severity: 'error', name: 'not-to-core-fs-os'}]});
@@ -141,10 +173,10 @@ describe("validate - specific tests", () => {
 
     it("not to unresolvable - ok", () => {
         expect(
-            validate(
+            validate.dependency(
                 true,
                 _readRuleSet("./test/validate/fixtures/rules.not-to-unresolvable.json"),
-                "koos koets",
+                {source: "koos koets"},
                 {"resolved": "diana charitee", "couldNotResolve": false}
             )
         ).to.deep.equal({valid: true});
@@ -153,10 +185,10 @@ describe("validate - specific tests", () => {
 
     it("not to unresolvable - violation", () => {
         expect(
-            validate(
+            validate.dependency(
                 true,
                 _readRuleSet("./test/validate/fixtures/rules.not-to-unresolvable.json"),
-                "koos koets",
+                {source: "koos koets"},
                 {"resolved": "diana charitee", "couldNotResolve": true}
             )
         ).to.deep.equal({valid: false, rules: [{severity: 'error', name: 'not-to-unresolvable'}]});
@@ -164,10 +196,10 @@ describe("validate - specific tests", () => {
 
     it("only to core - via 'allowed' - ok", () => {
         expect(
-            validate(
+            validate.dependency(
                 true,
                 _readRuleSet("./test/validate/fixtures/rules.only-to-core.allowed.json"),
-                "koos koets",
+                {source: "koos koets"},
                 {"resolved": "os", "dependencyTypes": ["core"]}
             )
         ).to.deep.equal({valid: true});
@@ -175,10 +207,10 @@ describe("validate - specific tests", () => {
 
     it("only to core - via 'allowed' - violation", () => {
         expect(
-            validate(
+            validate.dependency(
                 true,
                 _readRuleSet("./test/validate/fixtures/rules.only-to-core.allowed.json"),
-                "koos koets",
+                {source: "koos koets"},
                 {"resolved": "ger hekking", "dependencyTypes": ["npm"]}
             )
         ).to.deep.equal({valid: false, rules: [{severity: 'warn', name: 'not-in-allowed'}]});
@@ -186,10 +218,10 @@ describe("validate - specific tests", () => {
 
     it("only to core - via 'forbidden' - ok", () => {
         expect(
-            validate(
+            validate.dependency(
                 true,
                 _readRuleSet("./test/validate/fixtures/rules.only-to-core.forbidden.json"),
-                "koos koets",
+                {source: "koos koets"},
                 {"resolved": "os", "dependencyTypes": ["core"]}
             )
         ).to.deep.equal({valid: true});
@@ -197,10 +229,10 @@ describe("validate - specific tests", () => {
 
     it("only to core - via 'forbidden' - violation", () => {
         expect(
-            validate(
+            validate.dependency(
                 true,
                 _readRuleSet("./test/validate/fixtures/rules.only-to-core.forbidden.json"),
-                "koos koets",
+                {source: "koos koets"},
                 {"resolved": "ger hekking", "dependencyTypes": ["local"]}
             )
         ).to.deep.equal({valid: false, rules: [{severity: 'error', name: 'only-to-core'}]});
@@ -208,10 +240,10 @@ describe("validate - specific tests", () => {
 
     it("not to sub except sub itself - ok - sub to sub", () => {
         expect(
-            validate(
+            validate.dependency(
                 true,
                 _readRuleSet("./test/validate/fixtures/rules.not-to-sub-except-sub.json"),
-                "./keek/op/de/sub/week.js",
+                {source: "./keek/op/de/sub/week.js"},
                 {"resolved": "./keek/op/de/sub/maand.js", "coreModule": false}
             )
         ).to.deep.equal({valid: true});
@@ -219,10 +251,10 @@ describe("validate - specific tests", () => {
 
     it("not to sub except sub itself - ok - not sub to not sub", () => {
         expect(
-            validate(
+            validate.dependency(
                 true,
                 _readRuleSet("./test/validate/fixtures/rules.not-to-sub-except-sub.json"),
-                "./doctor/clavan.js",
+                {source: "./doctor/clavan.js"},
                 {"resolved": "./rochebrune.js", "coreModule": false}
             )
         ).to.deep.equal({valid: true});
@@ -230,10 +262,10 @@ describe("validate - specific tests", () => {
 
     it("not to sub except sub itself - ok - sub to not sub", () => {
         expect(
-            validate(
+            validate.dependency(
                 true,
                 _readRuleSet("./test/validate/fixtures/rules.not-to-sub-except-sub.json"),
-                "./doctor/sub/clavan.js",
+                {source: "./doctor/sub/clavan.js"},
                 {"resolved": "./rochebrune.js", "coreModule": false}
             )
         ).to.deep.equal({valid: true});
@@ -241,10 +273,10 @@ describe("validate - specific tests", () => {
 
     it("not to sub except sub itself  - violation - not sub to sub", () => {
         expect(
-            validate(
+            validate.dependency(
                 true,
                 _readRuleSet("./test/validate/fixtures/rules.not-to-sub-except-sub.json"),
-                "./doctor/clavan.js",
+                {source: "./doctor/clavan.js"},
                 {"resolved": "./keek/op/de/sub/week.js", "coreModule": false}
             )
         ).to.deep.equal({valid: false, rules: [{severity: 'error', name: 'not-to-sub-except-sub'}]});
@@ -252,10 +284,10 @@ describe("validate - specific tests", () => {
 
     it("not to not sub (=> everything must go to 'sub')- ok - sub to sub", () => {
         expect(
-            validate(
+            validate.dependency(
                 true,
                 _readRuleSet("./test/validate/fixtures/rules.not-to-not-sub.json"),
-                "./keek/op/de/sub/week.js",
+                {source: "./keek/op/de/sub/week.js"},
                 {"resolved": "./keek/op/de/sub/maand.js", "coreModule": false}
             )
         ).to.deep.equal({valid: true});
@@ -263,10 +295,10 @@ describe("validate - specific tests", () => {
 
     it("not to not sub (=> everything must go to 'sub')- violation - not sub to not sub", () => {
         expect(
-            validate(
+            validate.dependency(
                 true,
                 _readRuleSet("./test/validate/fixtures/rules.not-to-not-sub.json"),
-                "./amber.js",
+                {source: "./amber.js"},
                 {"resolved": "./jade.js", "coreModule": false}
             )
         ).to.deep.equal({valid: false, rules: [{severity: 'error', name: 'not-to-not-sub'}]});
@@ -274,10 +306,10 @@ describe("validate - specific tests", () => {
 
     it("not-to-dev-dep disallows relations to develop dependencies", () => {
         expect(
-            validate(
+            validate.dependency(
                 true,
                 _readRuleSet("./test/validate/fixtures/rules.not-to-dev-dep.json"),
-                "src/aap/zus/jet.js",
+                {source: "src/aap/zus/jet.js"},
                 {
                     "module": "chai",
                     "resolved": "node_modules/chai/index.js",
@@ -295,10 +327,10 @@ describe("validate - specific tests", () => {
 
     it("not-to-dev-dep does allow relations to regular dependencies", () => {
         expect(
-            validate(
+            validate.dependency(
                 true,
                 _readRuleSet("./test/validate/fixtures/rules.not-to-dev-dep.json"),
-                "src/aap/zus/jet.js",
+                {source: "src/aap/zus/jet.js"},
                 {
                     "module": "jip",
                     "resolved": "node_modules/jip/janneke.js",
@@ -310,10 +342,10 @@ describe("validate - specific tests", () => {
 
     it(`no relations with modules of > 1 dep type (e.g. specified 2x in package.json)`, () => {
         expect(
-            validate(
+            validate.dependency(
                 true,
                 _readRuleSet("./test/validate/fixtures/rules.no-duplicate-dep-types.json"),
-                "src/aap/zus/jet.js",
+                {source: "src/aap/zus/jet.js"},
                 {
                     "module": "chai",
                     "resolved": "node_modules/chai/index.js",
@@ -335,10 +367,10 @@ describe("group matching - path group matched in a pathnot", () => {
 
     it("group-to-pathnot - Disallows dependencies between peer folders", () => {
         expect(
-            validate(
+            validate.dependency(
                 true,
                 _readRuleSet("./test/validate/fixtures/rules.group-to-pathnot.json"),
-                "src/aap/chimpansee.ts",
+                {source: "src/aap/chimpansee.ts"},
                 {"resolved": "src/noot/pinda.ts"}
             )
         ).to.deep.equal(
@@ -354,10 +386,10 @@ describe("group matching - path group matched in a pathnot", () => {
 
     it("group-to-pathnot - Allows dependencies within to peer folder 'shared'", () => {
         expect(
-            validate(
+            validate.dependency(
                 true,
                 _readRuleSet("./test/validate/fixtures/rules.group-to-pathnot.json"),
-                "src/aap/chimpansee.ts",
+                {source: "src/aap/chimpansee.ts"},
                 {"resolved": "src/shared/bananas.ts"}
             )
         ).to.deep.equal({valid: true});
@@ -365,10 +397,10 @@ describe("group matching - path group matched in a pathnot", () => {
 
     it("group-to-pathnot - Allows dependencies within own folder", () => {
         expect(
-            validate(
+            validate.dependency(
                 true,
                 _readRuleSet("./test/validate/fixtures/rules.group-to-pathnot.json"),
-                "src/aap/chimpansee.ts",
+                {source: "src/aap/chimpansee.ts"},
                 {"resolved": "src/aap/oerangoetang.ts"}
             )
         ).to.deep.equal({valid: true});
@@ -376,10 +408,10 @@ describe("group matching - path group matched in a pathnot", () => {
 
     it("group-to-pathnot - Allows dependencies to sub folders of own folder", () => {
         expect(
-            validate(
+            validate.dependency(
                 true,
                 _readRuleSet("./test/validate/fixtures/rules.group-to-pathnot.json"),
-                "src/aap/chimpansee.ts",
+                {source: "src/aap/chimpansee.ts"},
                 {"resolved": "src/aap/speeltuigen/autoband.ts"}
             )
         ).to.deep.equal({valid: true});
@@ -387,10 +419,10 @@ describe("group matching - path group matched in a pathnot", () => {
 
     it("group-to-pathnot - Allows peer dependencies between sub folders of own folder", () => {
         expect(
-            validate(
+            validate.dependency(
                 true,
                 _readRuleSet("./test/validate/fixtures/rules.group-to-pathnot.json"),
-                "src/aap/rekwisieten/touw.ts",
+                {source: "src/aap/rekwisieten/touw.ts"},
                 {"resolved": "src/aap/speeltuigen/autoband.ts"}
             )
         ).to.deep.equal({valid: true});
@@ -401,10 +433,10 @@ describe("group matching - second path group matched in a pathnot", () => {
 
     it("group-two-to-pathnot - Disallows dependencies between peer folders", () => {
         expect(
-            validate(
+            validate.dependency(
                 true,
                 _readRuleSet("./test/validate/fixtures/rules.group-two-to-pathnot.json"),
-                "src/aap/chimpansee.ts",
+                {source: "src/aap/chimpansee.ts"},
                 {"resolved": "src/noot/pinda.ts"}
             )
         ).to.deep.equal(
@@ -420,10 +452,10 @@ describe("group matching - second path group matched in a pathnot", () => {
 
     it("group-two-to-pathnot - Allows dependencies within to peer folder 'shared'", () => {
         expect(
-            validate(
+            validate.dependency(
                 true,
                 _readRuleSet("./test/validate/fixtures/rules.group-two-to-pathnot.json"),
-                "src/aap/chimpansee.ts",
+                {source: "src/aap/chimpansee.ts"},
                 {"resolved": "src/shared/bananas.ts"}
             )
         ).to.deep.equal({valid: true});
@@ -431,10 +463,10 @@ describe("group matching - second path group matched in a pathnot", () => {
 
     it("group-two-to-pathnot - Allows dependencies within own folder", () => {
         expect(
-            validate(
+            validate.dependency(
                 true,
                 _readRuleSet("./test/validate/fixtures/rules.group-two-to-pathnot.json"),
-                "src/aap/chimpansee.ts",
+                {source: "src/aap/chimpansee.ts"},
                 {"resolved": "src/aap/oerangoetang.ts"}
             )
         ).to.deep.equal({valid: true});
@@ -442,10 +474,10 @@ describe("group matching - second path group matched in a pathnot", () => {
 
     it("group-two-to-pathnot - Allows dependencies to sub folders of own folder", () => {
         expect(
-            validate(
+            validate.dependency(
                 true,
                 _readRuleSet("./test/validate/fixtures/rules.group-two-to-pathnot.json"),
-                "src/aap/chimpansee.ts",
+                {source: "src/aap/chimpansee.ts"},
                 {"resolved": "src/aap/speeltuigen/autoband.ts"}
             )
         ).to.deep.equal({valid: true});
@@ -453,10 +485,10 @@ describe("group matching - second path group matched in a pathnot", () => {
 
     it("group-two-to-pathnot - Allows peer dependencies between sub folders of own folder", () => {
         expect(
-            validate(
+            validate.dependency(
                 true,
                 _readRuleSet("./test/validate/fixtures/rules.group-two-to-pathnot.json"),
-                "src/aap/rekwisieten/touw.ts",
+                {source: "src/aap/rekwisieten/touw.ts"},
                 {"resolved": "src/aap/speeltuigen/autoband.ts"}
             )
         ).to.deep.equal({valid: true});
@@ -467,10 +499,10 @@ describe("group matching - second path group matched in a pathnot", () => {
 describe("validate - license", () => {
     it("Skips dependencies that have no license attached", () => {
         expect(
-            validate(
+            validate.dependency(
                 true,
                 _readRuleSet("./test/validate/fixtures/rules.license.json"),
-                "something",
+                {source: "something"},
                 {"resolved": "src/aap/speeltuigen/autoband.ts"}
             )
         ).to.deep.equal({valid: true});
@@ -478,10 +510,10 @@ describe("validate - license", () => {
 
     it("does not flag dependencies that do not match the license expression", () => {
         expect(
-            validate(
+            validate.dependency(
                 true,
                 _readRuleSet("./test/validate/fixtures/rules.license.json"),
-                "something",
+                {source: "something"},
                 {
                     "resolved": "src/aap/speeltuigen/autoband.ts",
                     "license": "Monkey-PL"
@@ -492,10 +524,10 @@ describe("validate - license", () => {
 
     it("flags dependencies that match the license expression", () => {
         expect(
-            validate(
+            validate.dependency(
                 true,
                 _readRuleSet("./test/validate/fixtures/rules.license.json"),
-                "something",
+                {source: "something"},
                 {
                     "resolved": "src/aap/speeltuigen/autoband.ts",
                     "license": "SomePL-3.1"
@@ -508,10 +540,10 @@ describe("validate - license", () => {
 describe("validate - licenseNot", () => {
     it("Skips dependencies that have no license attached", () => {
         expect(
-            validate(
+            validate.dependency(
                 true,
                 _readRuleSet("./test/validate/fixtures/rules.licensenot.json"),
-                "something",
+                {source: "something"},
                 {"resolved": "src/aap/speeltuigen/autoband.ts"}
             )
         ).to.deep.equal({valid: true});
@@ -519,10 +551,10 @@ describe("validate - licenseNot", () => {
 
     it("does not flag dependencies that do match the license expression", () => {
         expect(
-            validate(
+            validate.dependency(
                 true,
                 _readRuleSet("./test/validate/fixtures/rules.licensenot.json"),
-                "something",
+                {source: "something"},
                 {
                     "resolved": "src/aap/speeltuigen/autoband.ts",
                     "license": "SomePL-3.1"
@@ -533,10 +565,10 @@ describe("validate - licenseNot", () => {
 
     it("flags dependencies that do not match the license expression", () => {
         expect(
-            validate(
+            validate.dependency(
                 true,
                 _readRuleSet("./test/validate/fixtures/rules.licensenot.json"),
-                "something",
+                {source: "something"},
                 {
                     "resolved": "src/aap/speeltuigen/autoband.ts",
                     "license": "Monkey-PL"
@@ -544,25 +576,88 @@ describe("validate - licenseNot", () => {
             )
         ).to.deep.equal({valid: false, rules: [{name: "only-somepl-license", severity: "warn"}]});
     });
+});
 
-    it("if there's more than one violated rule, both are returned", () => {
+describe("validate - orphans", () => {
+    it("Skips modules that have no orphan attribute", () => {
         expect(
-            validate(
+            validate.module(
                 true,
-                _readRuleSet("./test/validate/fixtures/rules.not-in-allowed-and-a-forbidden.json"),
-                "something",
-                {
-                    "resolved": "src/some/thing/else.js"
-                }
+                _readRuleSet("./test/validate/fixtures/rules.orphan.json"),
+                {source: "something"}
             )
-        ).to.deep.equal(
-            {
-                valid: false,
-                rules: [
-                    {name: "everything-is-forbidden", severity: "error"},
-                    {name: "not-in-allowed", severity: "info"}
-                ]
-            }
-        );
+        ).to.deep.equal({valid: true});
     });
+
+    it("Flags modules that are orphans", () => {
+        expect(
+            validate.module(
+                true,
+                _readRuleSet("./test/validate/fixtures/rules.orphan.json"),
+                {source: "something", "orphan": true}
+            )
+        ).to.deep.equal({valid: false, rules: [{name: "no-orphans", severity: "warn"}]});
+    });
+
+    it("Flags modules that are orphans if they're in the 'allowed' section", () => {
+        expect(
+            validate.module(
+                true,
+                _readRuleSet("./test/validate/fixtures/rules.orphan.allowed.json"),
+                {source: "something", "orphan": true}
+            )
+        ).to.deep.equal({valid: false, rules: [{name: "not-in-allowed", severity: "warn"}]});
+    });
+
+    it("Leaves modules that are orphans, but that don't match the rule path", () => {
+        expect(
+            validate.module(
+                true,
+                _readRuleSet("./test/validate/fixtures/rules.orphan.path.json"),
+                {source: "something", "orphan": true}
+            )
+        ).to.deep.equal({valid: true});
+    });
+
+    it("Flags modules that are orphans and that match the rule's path", () => {
+        expect(
+            validate.module(
+                true,
+                _readRuleSet("./test/validate/fixtures/rules.orphan.path.json"),
+                {source: "noorphansallowedhere/blah/something.ts", "orphan": true}
+            )
+        ).to.deep.equal({valid: false, rules: [{name: "no-orphans", severity: "error"}]});
+    });
+
+    it("Leaves modules that are orphans, but that do match the rule's pathNot", () => {
+        expect(
+            validate.module(
+                true,
+                _readRuleSet("./test/validate/fixtures/rules.orphan.pathnot.json"),
+                {source: "orphansallowedhere/something", "orphan": true}
+            )
+        ).to.deep.equal({valid: true});
+    });
+
+    it("Flags modules that are orphans, but that do not match the rule's pathNot", () => {
+        expect(
+            validate.module(
+                true,
+                _readRuleSet("./test/validate/fixtures/rules.orphan.pathnot.json"),
+                {source: "blah/something.ts", "orphan": true}
+            )
+        ).to.deep.equal({valid: false, rules: [{name: "no-orphans", severity: "warn"}]});
+    });
+
+    it("The 'dependency' validation leaves the module only orphan rule alone", () => {
+        expect(
+            validate.dependency(
+                true,
+                _readRuleSet("./test/validate/fixtures/rules.orphan.path.json"),
+                {source: "noorphansallowedhere/something.ts", "orphan": true},
+                {}
+            )
+        ).to.deep.equal({valid: true});
+    });
+
 });

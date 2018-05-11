@@ -2,9 +2,9 @@
 const expect    = require('chai').expect;
 const transform = require('../../src/report/dependencyToIncidenceTransformer');
 
-const ONE_VIOLATION_DEPS_INPUT = require("./fixtures/one-violation.json").dependencies;
+const ONE_VIOLATION_DEPS_INPUT = require("./fixtures/one-violation.json").modules;
 const ONE_VIOLATION_DEPS_FIXTURE = require("./fixtures/one-violation-incidences.json");
-const MORE_VIOLATIONS_DEPS_INPUT = require("./fixtures/more-violations.json").dependencies;
+const MORE_VIOLATIONS_DEPS_INPUT = require("./fixtures/more-violations.json").modules;
 const MORE_VIOLATIONS_DEPS_FIXTURE = require("./fixtures/more-violations-incidences.json");
 
 describe('dependencyToIncidenceTransformer', () => {

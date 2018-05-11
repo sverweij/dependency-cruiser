@@ -1,5 +1,5 @@
 {
-    "dependencies": [
+    "modules": [
         {
             "source": "./test/extract/fixtures/maxDepth/index.js",
             "dependencies": [
@@ -55,7 +55,8 @@
                     "moduleSystem": "es6",
                     "valid": true
                 }
-            ]
+            ],
+            "valid": true
         },
         {
             "source": "os",
@@ -66,11 +67,13 @@
             "dependencyTypes": [
                 "core"
             ],
-            "dependencies": []
+            "dependencies": [],
+            "valid": true
         },
         {
             "source": "test/extract/fixtures/maxDepth/oneAndTwoDeep.js",
-            "dependencies": []
+            "dependencies": [],
+            "valid": true
         },
         {
             "source": "test/extract/fixtures/maxDepth/oneDeep.js",
@@ -101,7 +104,8 @@
                     "moduleSystem": "es6",
                     "valid": true
                 }
-            ]
+            ],
+            "valid": true
         },
         {
             "source": "test/extract/fixtures/maxDepth/twoDeep.js",
@@ -119,7 +123,8 @@
                     "moduleSystem": "cjs",
                     "valid": true
                 }
-            ]
+            ],
+            "valid": true
         },
         {
             "source": "test/extract/fixtures/maxDepth/sub/threeDeepInSub.js",
@@ -137,7 +142,8 @@
                     "moduleSystem": "cjs",
                     "valid": true
                 }
-            ]
+            ],
+            "valid": true
         },
         {
             "source": "test/extract/fixtures/maxDepth/sub/oneDeepInSub.js",
@@ -155,7 +161,8 @@
                     "moduleSystem": "es6",
                     "valid": true
                 }
-            ]
+            ],
+            "valid": true
         },
         {
             "source": "test/extract/fixtures/maxDepth/sub/twoDeepInSub.js",
@@ -173,7 +180,8 @@
                     "moduleSystem": "cjs",
                     "valid": true
                 }
-            ]
+            ],
+            "valid": true
         }
     ],
     "summary": {

@@ -1,16 +1,9 @@
 "use strict";
-
 const path       = require('path').posix;
 const Handlebars = require("handlebars/runtime");
+const coloring   = require('./coloring');
 
 require("./dot.template");
-
-const SEVERITY2COLOR = {
-    error : "red",
-    warn  : "orange",
-    info  : "blue"
-};
-const DEFAULT_VIOLATION_COLOR = "red";
 
 function compareOnSource(pModuleOne, pModuleTwo) {
     return pModuleOne.source > pModuleTwo.source ? 1 : -1;
@@ -45,41 +38,13 @@ function folderify(pModule) {
     );
 }
 
-function determineDependencyColor(pDependency) {
-    let lColorAddition = {};
-
-    if (pDependency.hasOwnProperty("valid") && !pDependency.valid) {
-        lColorAddition.color = SEVERITY2COLOR[pDependency.rule.severity] || DEFAULT_VIOLATION_COLOR;
-    }
-
-    return Object.assign(
-        {},
-        pDependency,
-        lColorAddition
-    );
-}
-/* eslint security/detect-object-injection: 0 */
-function determineModuleColor(pModule) {
-    const MODULE2COLOR = {
-        "couldNotResolve": "red",
-        "coreModule": "grey"
-    };
-
-    return MODULE2COLOR[
-        Object.keys(MODULE2COLOR).find(
-            (pKey) => pModule[pKey]
-        )
-    ] || null;
-
-}
-
-function colorize(pModule){
+function colorize(pModule) {
     return Object.assign(
         {},
         pModule,
         {
-            color: determineModuleColor(pModule),
-            dependencies: pModule.dependencies.map(determineDependencyColor)
+            color: coloring.determineModuleColor(pModule),
+            dependencies: pModule.dependencies.map(coloring.determineDependencyColor)
         }
     );
 }
@@ -87,7 +52,7 @@ function colorize(pModule){
 function extractFirstTransgression(pModule){
     return Object.assign(
         {},
-        pModule,
+        (pModule.rules ? Object.assign({}, pModule, {rule: pModule.rules[0]}) : pModule),
         {
             dependencies: pModule.dependencies.map(
                 pDependency =>
@@ -121,8 +86,8 @@ module.exports = (pInput) =>
         {},
         pInput,
         {
-            dependencies: Handlebars.templates['dot.template.hbs']({
-                "things" : pInput.dependencies
+            modules: Handlebars.templates['dot.template.hbs']({
+                "things" : pInput.modules
                     .sort(compareOnSource)
                     .map(extractFirstTransgression)
                     .map(folderify)

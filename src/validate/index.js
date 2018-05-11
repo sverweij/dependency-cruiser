@@ -1,83 +1,7 @@
 "use strict";
 
-function propertyEquals(pTo, pRule, pProperty) {
-    return pRule.to.hasOwnProperty(pProperty)
-        ? pTo[pProperty] === pRule.to[pProperty]
-        : true;
-}
-
-function intersects(pToDependencyTypes, pRuleDependencyTypes) {
-    return pToDependencyTypes.some(
-        pDepType => pRuleDependencyTypes.some(
-            pRDepType => pDepType === pRDepType
-        )
-    );
-}
-
-
-/* if there is at least one group expression in the given pRulePath
-   return the first matched one.
-   return null in all other cases
-
-   This fills our current need. Later we can expand it to return all group
-   matches.
-*/
-
-function extractGroups(pRule, pActualPath) {
-    let lRetval = [];
-
-    if (Boolean(pRule.path)) {
-        let lMatchResult = pActualPath.match(pRule.path);
-
-        if (Boolean(lMatchResult) && lMatchResult.length > 1) {
-            lRetval = lMatchResult;
-        }
-    }
-    return lRetval;
-}
-
-function replaceGroupPlaceholders(pString, pExtractedGroups) {
-    return pExtractedGroups.reduce(
-        (pAll, pThis, pIndex) => pAll.replace(`$${pIndex}`, pThis),
-        pString
-    );
-}
-
-function matchRule(pFrom, pTo) {
-    return pRule => {
-        const lGroups = extractGroups(pRule.from, pFrom);
-
-        /*
-         * the replace("$1", lGroup) things below are a bit simplistic (they
-         * also match \$, which they probably shouldn't) - but good enough for
-         * now.
-         */
-        return (!pRule.from.path ||
-                pFrom.match(pRule.from.path)
-        ) && (!pRule.from.pathNot ||
-                !(pFrom.match(pRule.from.pathNot))
-        ) && (!pRule.to.path ||
-                (lGroups.length > 0
-                    ? pTo.resolved.match(replaceGroupPlaceholders(pRule.to.path, lGroups))
-                    : pTo.resolved.match(pRule.to.path)
-                )
-        ) && (!Boolean(pRule.to.pathNot) ||
-                !(lGroups.length > 0
-                    ? pTo.resolved.match(replaceGroupPlaceholders(pRule.to.pathNot, lGroups))
-                    : pTo.resolved.match(pRule.to.pathNot)
-                )
-        ) && (!pRule.to.dependencyTypes ||
-                intersects(pTo.dependencyTypes, pRule.to.dependencyTypes)
-        ) && (!pRule.to.hasOwnProperty("moreThanOneDependencyType") ||
-                pTo.dependencyTypes.length > 1
-        ) && (!pRule.to.license ||
-                pTo.license && pTo.license.match(pRule.to.license)
-        ) && (!pRule.to.licenseNot ||
-                pTo.license && !pTo.license.match(pRule.to.licenseNot)
-        ) && propertyEquals(pTo, pRule, "couldNotResolve") &&
-                 propertyEquals(pTo, pRule, "circular");
-    };
-}
+const matchModuleRule     = require('./matchModuleRule');
+const matchDependencyRule = require('./matchDependencyRule');
 
 function compareSeverity(pFirst, pSecond) {
     const SEVERITY2INT = {
@@ -89,24 +13,29 @@ function compareSeverity(pFirst, pSecond) {
     return SEVERITY2INT[pFirst.severity] - SEVERITY2INT[pSecond.severity];
 }
 
-function validateAgainstRules(pRuleSet, pFrom, pTo) {
+function validateAgainstRules(pRuleSet, pFrom, pTo, pMatchModule) {
     let lFoundRuleViolations = [];
     let lRetval = {valid:true};
 
     pRuleSet.forbidden = pRuleSet.forbidden || [];
 
-    if (pRuleSet.allowed && !(pRuleSet.allowed.some(matchRule(pFrom, pTo)))){
-        lFoundRuleViolations.push({
-            severity: pRuleSet.allowedSeverity,
-            name: "not-in-allowed"
-        });
+    if (pRuleSet.allowed){
+        const lInterestingAllowedRules = pRuleSet.allowed.filter(pMatchModule.isInteresting);
+
+        if (lInterestingAllowedRules.length > 0 && !(lInterestingAllowedRules.some(pMatchModule.match(pFrom, pTo)))){
+            lFoundRuleViolations.push({
+                severity: pRuleSet.allowedSeverity,
+                name: "not-in-allowed"
+            });
+        }
     }
 
     lFoundRuleViolations = lFoundRuleViolations
         .concat(
             pRuleSet
                 .forbidden
-                .filter(matchRule(pFrom, pTo))
+                .filter(pMatchModule.isInteresting)
+                .filter(pMatchModule.match(pFrom, pTo))
                 .map(pMatchedRule => ({
                     severity : pMatchedRule.severity,
                     name     : pMatchedRule.name
@@ -142,15 +71,18 @@ function validateAgainstRules(pRuleSet, pFrom, pTo) {
  *                              - severity: the severity of that rule - as per
  *                                  the ruleset
  */
-module.exports = (pValidate, pRuleSet, pFrom, pTo) => {
-    if (!pValidate) {
-        return {valid:true};
+module.exports = {
+    module: (pValidate, pRuleSet, pModule) => {
+        if (!pValidate) {
+            return {valid:true};
+        }
+        return validateAgainstRules(pRuleSet, pModule, {}, matchModuleRule);
+    },
+    dependency: (pValidate, pRuleSet, pFrom, pTo) => {
+        if (!pValidate) {
+            return {valid:true};
+        }
+        return validateAgainstRules(pRuleSet, pFrom, pTo, matchDependencyRule);
     }
-    return validateAgainstRules(pRuleSet, pFrom, pTo);
 };
 
-/* ignore security/detect-object-injection because:
-   - we only use it from within the module with two fixed values
-   - the propertyEquals function is not exposed externaly
- */
-/* eslint security/detect-object-injection: 0, complexity: 0 */

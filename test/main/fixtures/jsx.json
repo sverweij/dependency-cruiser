@@ -1,7 +1,8 @@
 {
-    "dependencies": [
+    "modules": [
         {
             "source": "test/main/fixtures/jsx/index.js",
+            "valid": true,
             "dependencies": [
                 {
                     "resolved": "test/main/fixtures/jsx/jsx.jsx",
@@ -20,6 +21,7 @@
         },
         {
             "source": "test/main/fixtures/jsx/jsx.jsx",
+            "valid": true,
             "dependencies": [
                 {
                     "resolved": "components/pay-method-choice",
@@ -110,6 +112,7 @@
             "dependencyTypes": [
                 "unknown"
             ],
+            "valid": true,
             "dependencies": []
         },
         {
@@ -121,6 +124,7 @@
             "dependencyTypes": [
                 "unknown"
             ],
+            "valid": true,
             "dependencies": []
         },
         {
@@ -132,6 +136,7 @@
             "dependencyTypes": [
                 "unknown"
             ],
+            "valid": true,
             "dependencies": []
         },
         {
@@ -143,6 +148,7 @@
             "dependencyTypes": [
                 "unknown"
             ],
+            "valid": true,
             "dependencies": []
         },
         {
@@ -154,6 +160,7 @@
             "dependencyTypes": [
                 "unknown"
             ],
+            "valid": true,
             "dependencies": []
         },
         {
@@ -165,6 +172,7 @@
             "dependencyTypes": [
                 "unknown"
             ],
+            "valid": true,
             "dependencies": []
         }
     ],

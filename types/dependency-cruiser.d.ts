@@ -40,7 +40,7 @@ export type DependencyType = "local"     | "npm"         | "npm-dev"      | "npm
                             | "npm-peer" | "npm-bundled" | "npm-no-pkg"   | "npm-unknown"
                             | "core"     | "unknown"     | "undetermined" | "deprecated";
 
-export interface IRestriction {
+export interface IFromRestriction {
     /**
      * A regular expression an end of a dependency should match to be catched by this rule.
      */
@@ -49,6 +49,12 @@ export interface IRestriction {
      * A regular expression an end of a dependency should NOT match to be catched by this rule.
      */
     pathNot?: string;
+    /**
+     * Whether or not to match when the module is an orphan (= has no incoming or outgoing
+     * dependencies). When this property it is part of a rule, dependency-cruiser will
+     * ignore the 'to' part.
+     */
+    orphan?: boolean;
 }
 
 export interface IToRestriction {
@@ -100,7 +106,7 @@ export interface IRule {
      * Criteria the 'from' end of a dependency should match to be caught by this rule.
      * Leave it empty if you want any module to be matched.
      */
-    from: IRestriction;
+    from: IFromRestriction;
     /**
      * Criteria the 'to' end of a dependency should match to be caught by this rule.
      * Leave it empty if you want any module to be matched.
@@ -131,7 +137,7 @@ export interface IForbiddenRuleType {
      * Criteria the 'from' end of a dependency should match to be caught by this
      * rule. Leave it empty if you want any module to be matched.
      */
-    from: IRestriction;
+    from: IFromRestriction;
     /**
      * Criteria the 'to' end of a dependency should match to be caught by this
      * rule. Leave it empty if you want any module to be matched.
@@ -212,6 +218,22 @@ export interface ICruiseOptions {
      * since version 6)
      */
     preserveSymlinks?: boolean;
+    /**
+     * (API only) when set to `true` forces the extraction module to
+     * detect circular dependencies even when there is no rule in the rule
+     * set that requires it.
+     *
+     * Defaults to `false`
+     */
+    forceCircularCheck?: boolean;
+    /**
+     * (API only) when set to `true` forces the extraction module to
+     * detect orphan modules even when there is no rule in the rule
+     * set that requires it
+     *
+     * Defaults to `false`
+     */
+    forceOrphanCheck?: boolean;
 }
 
 /**
@@ -232,8 +254,3 @@ export function cruise(pFileDirArray: string[], pOptions?: ICruiseOptions ): any
  * - whether or not the transpiler is available in the current environment
  */
 export function getAvailableTranspilers(): IAvailableTranspiler[];
-
-// export namespace cruise {
-//     const prototype: {
-//     };
-// }

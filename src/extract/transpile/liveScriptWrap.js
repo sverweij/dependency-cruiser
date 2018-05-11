@@ -10,9 +10,9 @@ const livescript = tryRequire(
 module.exports = {
     isAvailable: () => livescript !== false,
 
-    transpile: pFile =>
+    transpile: pSource =>
         livescript.compile(
-            pFile
+            pSource
         )
 };
 

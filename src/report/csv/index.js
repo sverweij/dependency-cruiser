@@ -10,8 +10,8 @@ module.exports = pInput =>
         {},
         pInput,
         {
-            dependencies: Handlebars.templates['csv.template.hbs']({
-                "things" : dependencyToIncidenceTransformer(pInput.dependencies)
+            modules: Handlebars.templates['csv.template.hbs']({
+                "things" : dependencyToIncidenceTransformer(pInput.modules)
             })
         }
     );

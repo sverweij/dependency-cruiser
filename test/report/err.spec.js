@@ -7,12 +7,12 @@ const warndeps = require('./fixtures/err-only-warnings.json');
 
 describe("err reporter", () => {
     it("says everything fine", () => {
-        expect(render(okdeps).dependencies).to.contain('no dependency violations found');
+        expect(render(okdeps).modules).to.contain('no dependency violations found');
     });
     it("renders a bunch of errors", () => {
-        expect(render(deps).dependencies).to.contain('2 dependency violations (2 errors, 0 warnings)');
+        expect(render(deps).modules).to.contain('2 dependency violations (2 errors, 0 warnings)');
     });
     it("renders a bunch of warnings", () => {
-        expect(render(warndeps).dependencies).to.contain('1 dependency violations (0 errors, 1 warnings)');
+        expect(render(warndeps).modules).to.contain('1 dependency violations (0 errors, 1 warnings)');
     });
 });

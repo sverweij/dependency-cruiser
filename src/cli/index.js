@@ -78,7 +78,7 @@ module.exports = (pFileDirArray, pOptions) => {
 
             const lDependencyList = main.cruise(pFileDirArray, pOptions);
 
-            write(pOptions.outputTo, lDependencyList.dependencies);
+            write(pOptions.outputTo, lDependencyList.modules);
 
             /* istanbul ignore if */
             if (lDependencyList.summary.error > 0) {

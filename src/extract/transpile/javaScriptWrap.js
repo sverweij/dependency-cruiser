@@ -2,6 +2,6 @@
 
 module.exports = {
     isAvailable: () => true,
-    transpile: pFile => pFile
+    transpile: pSource => pSource
 };
 

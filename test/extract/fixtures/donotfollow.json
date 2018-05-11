@@ -1,5 +1,5 @@
 {
-    "dependencies": [
+    "modules": [
         {
             "source": "./test/extract/fixtures/donotfollow/index.js",
             "dependencies": [
@@ -42,7 +42,8 @@
                     "matchesDoNotFollow": true,
                     "valid": true
                 }
-            ]
+            ],
+            "valid": true
         },
         {
             "source": "test/extract/fixtures/donotfollow/donotfollowonceinthisfolder/index.js",
@@ -53,7 +54,8 @@
             "dependencyTypes": [
                 "local"
             ],
-            "dependencies": []
+            "dependencies": [],
+            "valid": true
         },
         {
             "source": "test/extract/fixtures/donotfollow/donotfollowonceinthisfolder/meta.js",
@@ -64,7 +66,8 @@
             "dependencyTypes": [
                 "local"
             ],
-            "dependencies": []
+            "dependencies": [],
+            "valid": true
         },
         {
             "source": "test/extract/fixtures/donotfollow/dofollowstuffinhere/index.js",
@@ -95,11 +98,13 @@
                     "matchesDoNotFollow": false,
                     "valid": true
                 }
-            ]
+            ],
+            "valid": true
         },
         {
             "source": "test/extract/fixtures/donotfollow/dofollowstuffinhere/callfromlocal.js",
-            "dependencies": []
+            "dependencies": [],
+            "valid": true
         }
     ],
     "summary": {

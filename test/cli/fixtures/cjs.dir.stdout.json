@@ -1,15 +1,18 @@
 {
-    "dependencies": [
+    "modules": [
         {
             "source": "test/cli/fixtures/cjs/node_modules/somemodule/node_modules/someothermodule/main.js",
+            "valid": true,
             "dependencies": []
         },
         {
             "source": "test/cli/fixtures/cjs/node_modules/somemodule/src/moar-javascript.js",
+            "valid": true,
             "dependencies": []
         },
         {
             "source": "test/cli/fixtures/cjs/node_modules/somemodule/src/somemodule.js",
+            "valid": true,
             "dependencies": [
                 {
                     "resolved": "test/cli/fixtures/cjs/node_modules/somemodule/src/moar-javascript.js",
@@ -43,6 +46,7 @@
         },
         {
             "source": "test/cli/fixtures/cjs/one_only_one.js",
+            "valid": true,
             "dependencies": [
                 {
                     "resolved": "path",
@@ -69,10 +73,12 @@
             "dependencyTypes": [
                 "core"
             ],
+            "valid": true,
             "dependencies": []
         },
         {
             "source": "test/cli/fixtures/cjs/one_only_two.js",
+            "valid": true,
             "dependencies": [
                 {
                     "resolved": "path",
@@ -92,6 +98,7 @@
         },
         {
             "source": "test/cli/fixtures/cjs/root_one.js",
+            "valid": true,
             "dependencies": [
                 {
                     "resolved": "test/cli/fixtures/cjs/one_only_one.js",
@@ -188,10 +195,12 @@
             "dependencyTypes": [
                 "core"
             ],
+            "valid": true,
             "dependencies": []
         },
         {
             "source": "test/cli/fixtures/cjs/shared.js",
+            "valid": true,
             "dependencies": [
                 {
                     "resolved": "path",
@@ -211,6 +220,7 @@
         },
         {
             "source": "test/cli/fixtures/cjs/sub/dir.js",
+            "valid": true,
             "dependencies": [
                 {
                     "resolved": "test/cli/fixtures/cjs/sub/depindir.js",
@@ -244,6 +254,7 @@
         },
         {
             "source": "test/cli/fixtures/cjs/sub/depindir.js",
+            "valid": true,
             "dependencies": [
                 {
                     "resolved": "path",
@@ -263,6 +274,7 @@
         },
         {
             "source": "test/cli/fixtures/cjs/root_two.js",
+            "valid": true,
             "dependencies": [
                 {
                     "resolved": "test/cli/fixtures/cjs/shared.js",
@@ -331,6 +343,7 @@
             "dependencyTypes": [
                 "local"
             ],
+            "valid": true,
             "dependencies": []
         },
         {
@@ -342,10 +355,12 @@
             "dependencyTypes": [
                 "core"
             ],
+            "valid": true,
             "dependencies": []
         },
         {
             "source": "test/cli/fixtures/cjs/two_only_one.js",
+            "valid": true,
             "dependencies": [
                 {
                     "resolved": "test/cli/fixtures/cjs/sub/dir.js",

@@ -1,14 +1,26 @@
-const validate          = require('../validate');
+const validate = require('../validate');
 
-function addValidation (pToDep, pValidate, pRuleSet, pFrom) {
+function addDependencyValidation (pDependency, pValidate, pRuleSet, pModule) {
     return Object.assign(
         {},
-        pToDep,
-        validate(
+        pDependency,
+        validate.dependency(
             pValidate,
             pRuleSet,
-            pFrom,
-            pToDep
+            pModule,
+            pDependency
+        )
+    );
+}
+
+function addModuleValidation(pModule, pValidate, pRuleSet) {
+    return Object.assign(
+        {},
+        pModule,
+        validate.module(
+            pValidate,
+            pRuleSet,
+            pModule
         )
     );
 }
@@ -28,10 +40,10 @@ function addValidation (pToDep, pValidate, pRuleSet, pFrom) {
 module.exports = (pModules, pValidate, pRuleSet) => pModules.map(
     pModule => Object.assign(
         {},
-        pModule,
+        addModuleValidation(pModule, pValidate, pRuleSet),
         {
             dependencies: pModule.dependencies.map(
-                pToDep => addValidation(pToDep, pValidate, pRuleSet, pModule.source)
+                pDependency => addDependencyValidation(pDependency, pValidate, pRuleSet, pModule)
             )
         }
     )

@@ -9,8 +9,8 @@ function compareOnSource(pOne, pTwo) {
 }
 
 function determineIncidenceType(pFromListEntry) {
-    return pDependency => {
-        let lDep = pDependency.dependencies.find(
+    return pModule => {
+        let lDep = pModule.dependencies.find(
             pDep => pDep.resolved === pFromListEntry.source
         );
 

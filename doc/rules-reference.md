@@ -26,12 +26,14 @@
     - [`path`](#path)
     - [`pathNot`](#pathnot)
     - [path specials](#path-specials)
+    - [`orphan`](#orphans)
     - [`couldNotResolve`](#couldnotresolve)
     - [`circular`](#circular)
     - [`license` and `licenseNot`](#license-and-licensenot)
     - [`dependencyTypes`](#dependencytypes)
     - [`moreThanOneDependencyType`](#more-than-one-dependencytype-per-dependency-morethanonedependencytype)
 4. [Starter rule set](#a-starter-rule-set)
+    
 
 ## The structure of a dependency cruiser rules file
 The rules file is in json format. It can contain three sections - `forbidden`,
@@ -408,6 +410,55 @@ When left out it doesn't matter how many dependency types a dependency has.
 (If you're more of an 'allowed' user: it matches the 0 and 1 cases when set to
 false).
 
+### orphans
+
+A boolean indicating whether or not to match modules that have no incoming
+or outgoing dependencies. Orphans might need special attention because 
+they're unused leftovers from a refactoring. Or the start of some feature
+that never got finished but which was merged anyway. Leaving the `orphan`
+attribute out means you don't care about orphans in your code.
+
+Detecting orphans will have an impact on performance. You will probably
+only notice it when you have a larger code base (thousands of modules
+in your dependency graph), but it is something to
+keep in mind.
+
+To detect orphans guys you can add e.g. this snippet to your 
+.dependency-cruiser.json's `forbidden` section:
+
+```json
+{
+    "name": "no-orphans",
+    "severity": "warn",
+    "from": {"orphan": true},
+    "to": {}
+}
+```
+
+Things to keep in mind:
+- dependency-cruiser will typically not find orphans when you give it
+  only one  module to start with. Any module it finds, it finds by
+  following its dependencies, so each module will have at least one
+  dependency incoming or outgoing. Specify one or more folder, several
+  files or a glob. E.g.    
+  ```
+  depcruise -v -- src lib test
+  ```    
+  will find orphans if they exist,
+  whereas    
+  ```sh
+  depcruise -v -- src/index.ts
+  ```    
+  probably won't (unless index.ts is an orphan itself).
+- by definition orphan modules have no dependencies. So when `orphan` is
+  part of a rule, the `to` part won't make sense. This is why
+  dependency-cruiser will ignore the `to` part of these rules.
+- For similar reasons `orphan` is not allowed in the `to` part of rules.
+- (_for API users only_) to prevent dependency-cruiser from
+  needlessly running the orphan detection algorithm, it only runs it
+  when there's an orphan rule in the rule set. If you want to have it
+  the detection in without a rule set or without an orphan rule,
+  pass `forceOrphanCheck: true` as part of the `pOptions` parameter.
 
 ## A starter rule set
 ```json
@@ -478,6 +529,12 @@ false).
         "severity": "warn",
         "from": {},
         "to": { "circular": true }
+    },{
+        "name": "no-orphans",
+        "comment": "Warn about orphans",
+        "severity": "warn",
+        "from": { "orphan": true },
+        "to": {}
     }]
 }
 ```

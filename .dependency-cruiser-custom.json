@@ -91,6 +91,11 @@
             "from": { "pathNot": "^(node_modules)"},
             "to": { "circular": true }
         },{
+            "name": "no-orphans",
+            "severity": "error",
+            "from": { "pathNot": "^(node_modules)", "orphan": true },
+            "to": { }
+        },{
             "name": "no-GPL-license",
             "comment": "Warn in case some dependency uses either GPL or APL (the licenses are OK, but your legal department might have 2nd thoughts about them)",
             "severity": "warn",

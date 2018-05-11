@@ -48,7 +48,8 @@
                         "couldNotResolve": false,
                         "valid": true
                     }
-                ]
+                ],
+                "valid": true
             },
             {
                 "source": "lodash",
@@ -59,7 +60,8 @@
                 "dependencyTypes": [
                     "unknown"
                 ],
-                "dependencies": []
+                "dependencies": [],
+                "valid": true
             },
             {
                 "source": "other-module-in-the-config",
@@ -70,11 +72,13 @@
                 "dependencyTypes": [
                     "unknown"
                 ],
-                "dependencies": []
+                "dependencies": [],
+                "valid": true
             },
             {
                 "source": "test/extract/fixtures/amd/sub/local-module-in-drag.js",
-                "dependencies": []
+                "dependencies": [],
+                "valid": true
             }
         ]
     }

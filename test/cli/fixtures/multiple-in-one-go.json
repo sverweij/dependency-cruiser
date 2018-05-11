@@ -1,5 +1,5 @@
 {
-    "dependencies": [
+    "modules": [
         {
             "source": "test/cli/fixtures/cjs/sub/depindir.js",
             "dependencies": [
@@ -17,7 +17,8 @@
                     "circular": false,
                     "valid": true
                 }
-            ]
+            ],
+            "valid": true
         },
         {
             "source": "path",
@@ -28,7 +29,8 @@
             "dependencyTypes": [
                 "core"
             ],
-            "dependencies": []
+            "dependencies": [],
+            "valid": true
         },
         {
             "source": "test/cli/fixtures/cjs/sub/dir.js",
@@ -61,11 +63,13 @@
                     "circular": false,
                     "valid": true
                 }
-            ]
+            ],
+            "valid": true
         },
         {
             "source": "test/cli/fixtures/duplicate-subs/sub/more-in-sub.js",
-            "dependencies": []
+            "dependencies": [],
+            "valid": true
         },
         {
             "source": "test/cli/fixtures/unresolvable-in-sub/refers-to-an-unresolvable-module.js",
@@ -98,7 +102,8 @@
                     "circular": false,
                     "valid": true
                 }
-            ]
+            ],
+            "valid": true
         },
         {
             "source": "./not-at-home",
@@ -109,7 +114,8 @@
             "dependencyTypes": [
                 "unknown"
             ],
-            "dependencies": []
+            "dependencies": [],
+            "valid": true
         },
         {
             "source": "./this/path/does/not/exist",
@@ -120,7 +126,8 @@
             "dependencyTypes": [
                 "unknown"
             ],
-            "dependencies": []
+            "dependencies": [],
+            "valid": true
         }
     ],
     "summary": {

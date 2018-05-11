@@ -22,7 +22,8 @@
                         "module": "deprecated-at-the-start-for-test-purposes",
                         "moduleSystem": "cjs",
                         "valid": true                    }
-                ]
+                ],
+                "valid": true
             },
             {
                 "source": "test/extract/fixtures/deprecated-node-module/node_modules/deprecated-at-the-start-for-test-purposes/index.js",
@@ -40,7 +41,8 @@
                         "moduleSystem": "cjs",
                         "valid": true
                     }
-                ]
+                ],
+                "valid": true
             },
             {
                 "source": "test/extract/fixtures/deprecated-node-module/node_modules/deprecated-at-the-start-for-test-purposes/package.json",
@@ -51,7 +53,8 @@
                 "dependencyTypes": [
                     "local"
                 ],
-                "dependencies": []
+                "dependencies": [],
+                "valid": true
             }
         ]
     }

@@ -148,6 +148,7 @@ src/main/index.js: \
 src/extract/index.js: \
 	src/extract/addValidations.js \
 	src/extract/derive/circular/index.js \
+	src/extract/derive/orphan/index.js \
 	src/extract/extract.js \
 	src/extract/gatherInitialSources.js \
 	src/extract/summarize.js \
@@ -156,8 +157,21 @@ src/extract/index.js: \
 src/extract/addValidations.js: \
 	src/validate/index.js
 
+src/validate/index.js: \
+	src/validate/matchDependencyRule.js \
+	src/validate/matchModuleRule.js
+
+src/validate/matchDependencyRule.js: \
+	src/validate/isModuleOnlyRule.js
+
+src/validate/matchModuleRule.js: \
+	src/validate/isModuleOnlyRule.js
+
 src/extract/derive/circular/index.js: \
 	src/extract/derive/circular/dependencyEndsUpAtFrom.js
+
+src/extract/derive/orphan/index.js: \
+	src/extract/derive/orphan/isOrphan.js
 
 src/extract/extract.js: \
 	src/extract/ast-extractors/extract-AMD-deps.js \
@@ -230,6 +244,7 @@ src/report/csv/index.js: \
 	src/report/dependencyToIncidenceTransformer.js
 
 src/report/dot/index.js: \
+	src/report/dot/coloring.js \
 	src/report/dot/dot.template.js
 
 src/report/html/index.js: \
@@ -253,6 +268,8 @@ ALL_SRC=src/main/index.js \
 	src/extract/ast-extractors/extract-typescript-deps.js \
 	src/extract/derive/circular/dependencyEndsUpAtFrom.js \
 	src/extract/derive/circular/index.js \
+	src/extract/derive/orphan/index.js \
+	src/extract/derive/orphan/isOrphan.js \
 	src/extract/extract.js \
 	src/extract/gatherInitialSources.js \
 	src/extract/ignore.js \
@@ -281,6 +298,7 @@ ALL_SRC=src/main/index.js \
 	src/report/csv/csv.template.js \
 	src/report/csv/index.js \
 	src/report/dependencyToIncidenceTransformer.js \
+	src/report/dot/coloring.js \
 	src/report/dot/dot.template.js \
 	src/report/dot/index.js \
 	src/report/err.js \
@@ -288,7 +306,10 @@ ALL_SRC=src/main/index.js \
 	src/report/html/index.js \
 	src/report/json.js \
 	src/utl/pathToPosix.js \
-	src/validate/index.js
+	src/validate/index.js \
+	src/validate/isModuleOnlyRule.js \
+	src/validate/matchDependencyRule.js \
+	src/validate/matchModuleRule.js
 # cjs dependencies
 test/cli/formatMetaInfo.spec.js: \
 	src/cli/formatMetaInfo.js
@@ -312,6 +333,7 @@ src/main/index.js: \
 src/extract/index.js: \
 	src/extract/addValidations.js \
 	src/extract/derive/circular/index.js \
+	src/extract/derive/orphan/index.js \
 	src/extract/extract.js \
 	src/extract/gatherInitialSources.js \
 	src/extract/summarize.js \
@@ -320,8 +342,21 @@ src/extract/index.js: \
 src/extract/addValidations.js: \
 	src/validate/index.js
 
+src/validate/index.js: \
+	src/validate/matchDependencyRule.js \
+	src/validate/matchModuleRule.js
+
+src/validate/matchDependencyRule.js: \
+	src/validate/isModuleOnlyRule.js
+
+src/validate/matchModuleRule.js: \
+	src/validate/isModuleOnlyRule.js
+
 src/extract/derive/circular/index.js: \
 	src/extract/derive/circular/dependencyEndsUpAtFrom.js
+
+src/extract/derive/orphan/index.js: \
+	src/extract/derive/orphan/isOrphan.js
 
 src/extract/extract.js: \
 	src/extract/ast-extractors/extract-AMD-deps.js \
@@ -394,6 +429,7 @@ src/report/csv/index.js: \
 	src/report/dependencyToIncidenceTransformer.js
 
 src/report/dot/index.js: \
+	src/report/dot/coloring.js \
 	src/report/dot/dot.template.js
 
 src/report/html/index.js: \
@@ -456,6 +492,12 @@ test/extract/ast-extractors/extract-typescript-triple-slash-directives.spec.js: 
 test/extract/derivations/circular/dependencyEndsUpAtFrom.spec.js: \
 	src/extract/derive/circular/dependencyEndsUpAtFrom.js
 
+test/extract/derivations/orphan/index.spec.js: \
+	src/extract/derive/orphan/index.js
+
+test/extract/derivations/orphan/isOrphan.spec.js: \
+	src/extract/derive/orphan/isOrphan.js
+
 test/extract/extract.spec.js: \
 	src/extract/extract.js
 
@@ -476,6 +518,9 @@ test/extract/resolve/localNpmHelpers.spec.js: \
 test/extract/resolve/readPackageDeps.spec.js: \
 	package.json \
 	src/extract/resolve/readPackageDeps.js
+
+test/extract/summarize.spec.js: \
+	src/extract/summarize.js
 
 test/extract/transpile/coffeeWrap.spec.js: \
 	src/extract/transpile/coffeeWrap.js
@@ -516,8 +561,11 @@ test/main/ruleSet/validate.spec.js: \
 test/report/dependencyToIncidenceTransformer.spec.js: \
 	src/report/dependencyToIncidenceTransformer.js
 
-test/report/dot.spec.js: \
+test/report/dot/dot.spec.js: \
 	src/report/dot/index.js
+
+test/report/dot/dotColoring.spec.js: \
+	src/report/dot/coloring.js
 
 test/report/err.spec.js: \
 	src/report/err.js
