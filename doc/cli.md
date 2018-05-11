@@ -298,7 +298,7 @@ export class B {
 }
 ```
 
-As `a.ts` uses none of the imports from b are used, the typescript
+As `a.ts` uses none of the imports from b, the typescript
 compiler will omit them when compiling and yield this for `a.js`:
 ```javascript
 // no imports here anymore...
