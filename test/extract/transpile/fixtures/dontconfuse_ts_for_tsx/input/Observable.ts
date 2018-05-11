@@ -7,9 +7,9 @@ export class Observable<T> {
    * @constructor
    */
   constructor(subscribe?: (this: Observable<T>, subscriber: Subscriber<T>) => TeardownLogic) {
-    // if (subscribe) {
-    //   this._subscribe = subscribe;
-    // }
+    if (subscribe) {
+      this._subscribe = subscribe;
+    }
   }
 
   // HACK: Since TypeScript inherits static properties too, we have to
