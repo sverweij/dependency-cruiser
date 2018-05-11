@@ -27,10 +27,10 @@ const coffeeScript = getCoffeeScriptModule();
 
 module.exports = (pLiterate) => ({
     isAvailable : () => coffeeScript !== false,
-    transpile : (pFile) => {
+    transpile : (pSource) => {
         const lOptions = pLiterate ? {literate:true} : {};
 
-        return coffeeScript.compile(pFile, lOptions);
+        return coffeeScript.compile(pSource, lOptions);
     }
 });
 
