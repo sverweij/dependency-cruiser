@@ -21,7 +21,7 @@
         "name": "no-orphans",
         "severity": "info",
         "comment": "Inform in case there's orphans hiding in the code base",
-        "from": { "orphan": true },
+        "from": { "orphan": true, "pathNot": "\\.d\\.ts$" },
         "to": {}
     },{
         "name": "no-deprecated-core",
