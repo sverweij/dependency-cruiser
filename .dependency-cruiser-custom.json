@@ -93,7 +93,7 @@
         },{
             "name": "no-orphans",
             "severity": "error",
-            "from": { "pathNot": "^(node_modules)", "orphan": true },
+            "from": { "orphan": true },
             "to": { }
         },{
             "name": "no-GPL-license",
