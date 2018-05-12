@@ -2,7 +2,8 @@
 
 const supportedTranspilers = require("../../../package.json").supportedTranspilers;
 const javaScriptWrap       = require("./javaScriptWrap");
-const typeScriptWrap       = require("./typeScriptWrap");
+const typeScriptWrap       = require("./typeScriptWrap")();
+const tsxWrap              = require("./typeScriptWrap")(true);
 const liveScriptWrap       = require("./liveScriptWrap");
 const coffeeWrap           = require("./coffeeWrap")();
 const litCoffeeWrap        = require("./coffeeWrap")(true);
@@ -23,7 +24,7 @@ const extension2wrapper = {
     ".jsx"       : javaScriptWrap,
     ".vue"       : javaScriptWrap,
     ".ts"        : typeScriptWrap,
-    ".tsx"       : typeScriptWrap,
+    ".tsx"       : tsxWrap,
     ".d.ts"      : typeScriptWrap,
     ".ls"        : liveScriptWrap,
     ".coffee"    : coffeeWrap,
