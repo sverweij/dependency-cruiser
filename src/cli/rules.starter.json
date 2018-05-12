@@ -19,8 +19,8 @@
         "to": { "circular": true }
     },{
         "name": "no-orphans",
-        "severity": "warn",
-        "comment": "Warn in case there's orphans hiding in the code base",
+        "severity": "info",
+        "comment": "Inform in case there's orphans hiding in the code base",
         "from": { "orphan": true },
         "to": {}
     },{
