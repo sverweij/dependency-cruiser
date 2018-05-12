@@ -116,7 +116,7 @@ depgraph:
 depcruise:
 	$(NPM) run depcruise
 
-check: lint test depcruise
+check: lint cover depcruise
 	./bin/dependency-cruise --version # if that runs the cli script works
 
 fullcheck: check outdated nsp
