@@ -11,7 +11,7 @@ install:
   - npm install
 
 script:
-  - make depcruise
+  - npm run depcruise
   - 'npm run test:glob && npm run test:cover'
   - 'if test `node --version | cut -c 2` = 10; then npm run nsp && npm run lint; fi'
 

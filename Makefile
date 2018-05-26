@@ -1,6 +1,4 @@
 .SUFFIXES: .js .css .html
-GIT=git
-NPM=npm
 NODE=node
 RM=rm -f
 MAKEDEPEND=node_modules/.bin/js-makedepend --exclude "node_modules|fixtures|extractor-fixtures" --system cjs
@@ -8,7 +6,7 @@ GENERATED_SOURCES=src/report/csv/csv.template.js \
 	src/report/dot/dot.template.js \
 	src/report/html/html.template.js
 
-.PHONY: help dev-build install check fullcheck mostlyclean clean lint cover prerequisites static-analysis test update-dependencies run-update-dependencies depend
+.PHONY: help dev-build clean depend
 
 help:
 	@echo
@@ -22,18 +20,10 @@ help:
 	@echo "- ... recompiles the handlebar templates"
 	@echo "- ... recreates a proper .npmignore"
 	@echo
-	@echo "fullcheck"
-	@echo "- runs all possible static checks (lint, depcruise, npm outdated, nsp)"
+	@echo "clean. Removes all generated sources."
 	@echo
-	@echo "update-dependencies"
-	@echo "- updates node dependencies and devDependencies to latest"
-	@echo "- autofixes any lint regressions and runs all tests"
-	@echo "- shows the diff of package.json"
-	@echo
-	@echo "publish-patch, publish-minor, publish-major"
-	@echo "- ups the version semver compliantly"
-	@echo "- commits & tags it"
-	@echo "- publishes to npm"
+	@echo "depend. This updates the dependendency tree 'make'"
+	@echo "uses to infer whether re-compilation is necessary."
 	@echo
 
 # production rules
@@ -60,66 +50,13 @@ src/report/%.template.js: src/report/%.template.hbs
 	echo "tslint.json" >> $@
 
 # "phony" targets
-prerequisites:
-	$(NPM) install
-
 dev-build: bin/dependency-cruise $(GENERATED_SOURCES) $(ALL_SRC) .npmignore
-
-lint:
-	$(NPM) run lint
-	$(NPM) run lint:types
-
-lint-fix:
-	$(NPM) run lint:fix
-
-cover: dev-build
-	$(NPM) run test:cover
-
-publish-patch:
-	$(NPM) version patch
-
-publish-minor:
-	$(NPM) version minor
-
-publish-major:
-	$(NPM) version major
 
 profile:
 	$(NODE) --prof src/cli.js -f - test
 	@echo "output will be in a file called 'isolate-xxxx-v8.log'"
 	@echo "- translate to readable output with:"
 	@echo "    node --prof-process isolate-xxxx-v8.log | more"
-
-test: dev-build
-	$(NPM) test
-
-nsp:
-	$(NPM) run nsp
-
-outdated:
-	$(NPM) outdated
-
-update-dependencies: run-update-dependencies dev-build test lint-fix
-	$(GIT) diff package.json
-
-run-update-dependencies:
-	$(NPM) run npm-check-updates
-	$(NPM) install
-
-depgraph-doc:
-	./bin/dependency-cruise -x "(^node_modules|^fs$$|^path$$)" -T dot -v .dependency-cruiser-custom.json src bin/dependency-cruise | dot -T png > doc/real-world-samples/dependency-cruiser-without-node_modules.png
-	optipng doc/real-world-samples/dependency-cruiser-without-node_modules.png
-
-depgraph:
-	$(NPM) run depcruise:graph
-
-depcruise:
-	$(NPM) run depcruise
-
-check: lint cover depcruise
-	./bin/dependency-cruise --version # if that runs the cli script works
-
-fullcheck: check outdated nsp
 
 depend:
 	$(MAKEDEPEND) src/main/index.js
