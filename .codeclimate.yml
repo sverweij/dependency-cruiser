@@ -10,8 +10,12 @@ plugins:
     config: 
       config: .eslintrc.json
     checks:
+      # compat is not a codeclimeate supported eslint plugin
       compat/compat:
         enabled: false
+      # indent rules on codeclimate seem to be different from
+      # the local ones - probably because cc uses an older version
+      # of eslint
       indent:
         enabled: false
 exclude_patterns:
