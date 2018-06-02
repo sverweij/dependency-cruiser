@@ -53,6 +53,34 @@ function write(pOutputTo, pContent) {
     }
 }
 
+function createRulesFile(pOptions) {
+    initRules(normalizeOptions.determineRulesFileName(pOptions.validate));
+    process.stdout.write(
+        `\n  Successfully created '${normalizeOptions.determineRulesFileName(pOptions.validate)}'\n\n`
+    );
+}
+
+function runCruise(pFileDirArray, pOptions) {
+    pFileDirArray
+        .filter(pFileOrDir => !glob.hasMagic(pFileOrDir))
+        .forEach(validateFileExistence);
+
+    if (pOptions.hasOwnProperty("validate")) {
+        validateFileExistence(normalizeOptions.determineRulesFileName(pOptions.validate));
+    }
+
+    pOptions = normalizeOptions(pOptions);
+
+    const lDependencyList = main.cruise(pFileDirArray, pOptions);
+
+    write(pOptions.outputTo, lDependencyList.modules);
+
+    /* istanbul ignore if */
+    if (lDependencyList.summary.error > 0) {
+        process.exit(lDependencyList.summary.error);
+    }
+}
+
 module.exports = (pFileDirArray, pOptions) => {
     pOptions = pOptions || {};
 
@@ -60,30 +88,9 @@ module.exports = (pFileDirArray, pOptions) => {
         if (pOptions.info === true) {
             process.stdout.write(formatMetaInfo());
         } else if (pOptions.init === true){
-            initRules(normalizeOptions.determineRulesFileName(pOptions.validate));
-            process.stdout.write(
-                `\n  Successfully created '${normalizeOptions.determineRulesFileName(pOptions.validate)}'\n\n`
-            );
+            createRulesFile(pOptions);
         } else {
-            pFileDirArray
-                .filter(pFileOrDir => !glob.hasMagic(pFileOrDir))
-                .forEach(validateFileExistence);
-            if (pOptions.hasOwnProperty("validate")) {
-                validateFileExistence(
-                    normalizeOptions.determineRulesFileName(pOptions.validate)
-                );
-            }
-
-            pOptions = normalizeOptions(pOptions);
-
-            const lDependencyList = main.cruise(pFileDirArray, pOptions);
-
-            write(pOptions.outputTo, lDependencyList.modules);
-
-            /* istanbul ignore if */
-            if (lDependencyList.summary.error > 0) {
-                process.exit(lDependencyList.summary.error);
-            }
+            runCruise(pFileDirArray, pOptions);
         }
     } catch (e) {
         process.stderr.write(`\n  ERROR: ${e.message}\n`);
