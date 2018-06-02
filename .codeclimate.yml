@@ -13,9 +13,10 @@ plugins:
       compat/compat:
         enabled: false  
 exclude_patterns:
-  - "docs/"
+  - ".github/"
+  - "doc/"
   - "docs/"
   - "test/"
+  - "types/"
   - "**/node_modules/"
-  - "**/*.d.ts"
   - "src/report/**/*.template.js"
