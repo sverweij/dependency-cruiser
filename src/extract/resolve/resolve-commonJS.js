@@ -50,9 +50,7 @@ function addLicenseAttribute(pModuleName, pBaseDir) {
  * resolves both CommonJS and ES6
  */
 module.exports = (pModuleName, pBaseDir, pFileDir) => {
-    let lRetval = {};
-
-    lRetval = Object.assign(
+    let lRetval = Object.assign(
         {
             resolved        : pModuleName,
             coreModule      : false,
