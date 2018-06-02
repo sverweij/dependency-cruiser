@@ -30,6 +30,46 @@ function extractECMADependencies(pAST, pDependencies, pOptions, pFileName) {
     return pDependencies;
 }
 
+function extractDependencies(pOptions, pFileName) {
+    const lAST = getJSASTCached(path.join(pOptions.baseDir, pFileName));
+    let lDependencies = [];
+
+    if (pOptions.moduleSystems.indexOf("cjs") > -1) {
+        extractCommonJSDependencies(lAST, lDependencies);
+    }
+    if (pOptions.moduleSystems.indexOf("es6") > -1) {
+        lDependencies = extractECMADependencies(lAST, lDependencies, pOptions, pFileName);
+    }
+    if (pOptions.moduleSystems.indexOf("amd") > -1) {
+        extractAMDDependencies(lAST, lDependencies);
+    }
+    return lDependencies;
+}
+
+function addResolutionAttributes(pOptions, pFileName) {
+    return pDependency => {
+        const lResolved = resolve(
+            pDependency,
+            pOptions.baseDir,
+            path.join(pOptions.baseDir, path.dirname(pFileName)),
+            pOptions.preserveSymlinks
+        );
+        const lMatchesDoNotFollow = Boolean(pOptions.doNotFollow)
+            ? RegExp(pOptions.doNotFollow, "g").test(lResolved.resolved)
+            : false;
+
+        return Object.assign(
+            lResolved,
+            {
+                module: pDependency.moduleName,
+                moduleSystem: pDependency.moduleSystem,
+                followable: lResolved.followable && !lMatchesDoNotFollow,
+                matchesDoNotFollow: lMatchesDoNotFollow
+            }
+        );
+    };
+}
+
 /**
  * Returns an array of dependencies present in the given file. Of
  * each dependency it returns
@@ -67,52 +107,13 @@ module.exports = (pFileName, pOptions) => {
             pOptions
         );
 
-        const lAST = getJSASTCached(path.join(lOptions.baseDir, pFileName));
-        let lDependencies = [];
-
-        if (lOptions.moduleSystems.indexOf("cjs") > -1){
-            extractCommonJSDependencies(lAST, lDependencies);
-        }
-
-        if (lOptions.moduleSystems.indexOf("es6") > -1) {
-            lDependencies = extractECMADependencies(lAST, lDependencies, lOptions, pFileName);
-        }
-
-        if (lOptions.moduleSystems.indexOf("amd") > -1){
-            extractAMDDependencies(lAST, lDependencies);
-        }
-
-        return _(lDependencies)
+        return _(extractDependencies(lOptions, pFileName))
             .uniqBy(pDependency => `${pDependency.moduleName} ${pDependency.moduleSystem}`)
             .sortBy(pDependency => `${pDependency.moduleName} ${pDependency.moduleSystem}`)
-            .map(
-                pDependency => {
-                    const lResolved = resolve(
-                        pDependency,
-                        lOptions.baseDir,
-                        path.join(lOptions.baseDir, path.dirname(pFileName)),
-                        lOptions.preserveSymlinks
-                    );
-                    const lMatchesDoNotFollow = Boolean(lOptions.doNotFollow)
-                        ? RegExp(lOptions.doNotFollow, "g").test(lResolved.resolved)
-                        : false;
-
-                    return Object.assign(
-                        lResolved,
-                        {
-                            module       : pDependency.moduleName,
-                            moduleSystem : pDependency.moduleSystem,
-                            followable   : lResolved.followable && !lMatchesDoNotFollow,
-                            matchesDoNotFollow : lMatchesDoNotFollow
-                        }
-                    );
-                }
-            )
+            .map(addResolutionAttributes(lOptions, pFileName))
             .filter(pDep => ignore(pDep.resolved, lOptions.exclude))
             .value();
     } catch (e) {
         throw new Error(`Extracting dependencies ran afoul of...\n\n  ${e.message}\n... in ${pFileName}\n\n`);
     }
 };
-
-
