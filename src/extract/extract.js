@@ -11,6 +11,25 @@ const extractTypeScript           = require('./ast-extractors/extract-typescript
 const getJSASTCached              = require('./parse/toJavascriptAST').getASTCached;
 const toTypescriptAST             = require('./parse/toTypescriptAST');
 
+function extractECMADependencies(pAST, pDependencies, pOptions, pFileName) {
+    if (
+        pOptions.tsPreCompilationDeps &&
+        path.extname(pFileName).startsWith(".ts") &&
+        toTypescriptAST.isAvailable()
+    ) {
+        pDependencies = pDependencies.concat(
+            extractTypeScript(
+                toTypescriptAST.getASTCached(
+                    path.join(pOptions.baseDir, pFileName)
+                )
+            )
+        );
+    } else {
+        extractES6Dependencies(pAST, pDependencies);
+    }
+    return pDependencies;
+}
+
 /**
  * Returns an array of dependencies present in the given file. Of
  * each dependency it returns
@@ -56,21 +75,7 @@ module.exports = (pFileName, pOptions) => {
         }
 
         if (lOptions.moduleSystems.indexOf("es6") > -1) {
-            if (
-                lOptions.tsPreCompilationDeps &&
-                path.extname(pFileName).startsWith(".ts") &&
-                toTypescriptAST.isAvailable()
-            ) {
-                lDependencies = lDependencies.concat(
-                    extractTypeScript(
-                        toTypescriptAST.getASTCached(
-                            path.join(lOptions.baseDir, pFileName)
-                        )
-                    )
-                );
-            } else {
-                extractES6Dependencies(lAST, lDependencies);
-            }
+            lDependencies = extractECMADependencies(lAST, lDependencies, lOptions, pFileName);
         }
 
         if (lOptions.moduleSystems.indexOf("amd") > -1){
@@ -109,3 +114,5 @@ module.exports = (pFileName, pOptions) => {
         throw new Error(`Extracting dependencies ran afoul of...\n\n  ${e.message}\n... in ${pFileName}\n\n`);
     }
 };
+
+
