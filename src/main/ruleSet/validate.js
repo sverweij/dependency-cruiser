@@ -25,16 +25,18 @@ function safeRule(pRule, pSection, pCondition) {
 }
 
 function checkRuleSafety(pRule) {
-    if (
-        !(
-            safeRule(pRule, "from", "path") &&
-            safeRule(pRule, "to", "path") &&
-            safeRule(pRule, "from", "pathNot") &&
-            safeRule(pRule, "to", "pathNot") &&
-            safeRule(pRule, "to", "license") &&
-            safeRule(pRule, "to", "licenseNot")
-        )
-    ){
+    const REGEX_CONDITIONS = [
+        {section: "from", condition: "path"},
+        {section: "to", condition: "path"},
+        {section: "from", condition: "pathNot"},
+        {section: "to", condition: "pathNot"},
+        {section: "to", condition: "license"},
+        {section: "to", condition: "licenseNot"}
+    ];
+
+    if (REGEX_CONDITIONS.some(
+        pCondition => !safeRule(pRule, pCondition.section, pCondition.condition)
+    )){
         throw new Error(
             `rule ${JSON.stringify(pRule, null, "")} has an unsafe regular expression. Bailing out.\n`
         );

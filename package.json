@@ -101,10 +101,10 @@
     "semver-try-require": "1.1.1"
   },
   "nyc": {
-    "statements": 99.86,
-    "branches": 99.46,
+    "statements": 99.8,
+    "branches": 99.4,
     "functions": 100,
-    "lines": 99.86,
+    "lines": 99.8,
     "exclude": [
       "test/**/*",
       "src/report/**/*.template.js",
