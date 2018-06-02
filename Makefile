@@ -34,7 +34,6 @@ src/report/%.template.js: src/report/%.template.hbs
 	cp $< $@
 	echo "" >> $@
 	echo "# specificly ignore for npm" >> $@
-	echo ".bithoundrc" >> $@
 	echo ".dependency-cruiser-custom.json" >> $@
 	echo ".eslintignore" >> $@
 	echo ".eslintrc.json" >> $@

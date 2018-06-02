@@ -25,7 +25,6 @@ package-lock.json
 .dependency-cruiser.json
 
 # specificly ignore for npm
-.bithoundrc
 .dependency-cruiser-custom.json
 .eslintignore
 .eslintrc.json
