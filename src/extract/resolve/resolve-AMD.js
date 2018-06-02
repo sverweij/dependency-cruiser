@@ -7,7 +7,7 @@ const memoize                  = require('lodash/memoize');
 const pathToPosix              = require('../../utl/pathToPosix');
 const determineDependencyTypes = require('./determineDependencyTypes');
 const readPackageDeps          = require('./readPackageDeps');
-const localNpmHelpers          = require('./localNpmHelpers');
+const resolveHelpers           = require('./resolve-helpers');
 
 const fileExists = memoize(pFile => {
     try {
@@ -18,16 +18,6 @@ const fileExists = memoize(pFile => {
 
     return true;
 });
-
-function addLicenseAttribute(pModuleName, pBaseDir) {
-    let lRetval = {};
-    const lLicense = localNpmHelpers.getLicense(pModuleName, pBaseDir);
-
-    if (Boolean(lLicense)) {
-        lRetval.license = lLicense;
-    }
-    return lRetval;
-}
 
 module.exports = (pModuleName, pBaseDir, pFileDir) => {
     // lookups:
@@ -51,7 +41,7 @@ module.exports = (pModuleName, pBaseDir, pFileDir) => {
 
     return Object.assign(
         lRetval,
-        addLicenseAttribute(pModuleName, pBaseDir),
+        resolveHelpers.addLicenseAttribute(pModuleName, pBaseDir),
         {
             dependencyTypes: determineDependencyTypes(
                 lRetval,

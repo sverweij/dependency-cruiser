@@ -6,7 +6,7 @@ const pathToPosix              = require('../../utl/pathToPosix');
 const transpileMeta            = require('../transpile/meta');
 const determineDependencyTypes = require('./determineDependencyTypes');
 const readPackageDeps          = require('./readPackageDeps');
-const localNpmHelpers          = require('./localNpmHelpers');
+const resolveHelpers           = require('./resolve-helpers');
 
 const SUPPORTED_EXTENSIONS = transpileMeta.scannableExtensions;
 
@@ -36,16 +36,6 @@ function addResolutionAttributes(pBaseDir, pModuleName, pFileDir) {
     return lRetval;
 }
 
-function addLicenseAttribute(pModuleName, pBaseDir) {
-    let lRetval = {};
-    const lLicense = localNpmHelpers.getLicense(pModuleName, pBaseDir);
-
-    if (Boolean(lLicense)) {
-        lRetval.license = lLicense;
-    }
-    return lRetval;
-}
-
 /*
  * resolves both CommonJS and ES6
  */
@@ -63,7 +53,7 @@ module.exports = (pModuleName, pBaseDir, pFileDir) => {
 
     return Object.assign(
         lRetval,
-        addLicenseAttribute(pModuleName, pBaseDir),
+        resolveHelpers.addLicenseAttribute(pModuleName, pBaseDir),
         {
             dependencyTypes: determineDependencyTypes(
                 lRetval,

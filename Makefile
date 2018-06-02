@@ -157,17 +157,20 @@ src/extract/resolve/index.js: \
 
 src/extract/resolve/resolve-AMD.js: \
 	src/extract/resolve/determineDependencyTypes.js \
-	src/extract/resolve/localNpmHelpers.js \
 	src/extract/resolve/readPackageDeps.js \
+	src/extract/resolve/resolve-helpers.js \
 	src/utl/pathToPosix.js
 
 src/extract/resolve/determineDependencyTypes.js: \
 	src/extract/resolve/localNpmHelpers.js
 
+src/extract/resolve/resolve-helpers.js: \
+	src/extract/resolve/localNpmHelpers.js
+
 src/extract/resolve/resolve-commonJS.js: \
 	src/extract/resolve/determineDependencyTypes.js \
-	src/extract/resolve/localNpmHelpers.js \
 	src/extract/resolve/readPackageDeps.js \
+	src/extract/resolve/resolve-helpers.js \
 	src/extract/transpile/meta.js \
 	src/utl/pathToPosix.js
 
@@ -218,6 +221,7 @@ ALL_SRC=src/main/index.js \
 	src/extract/resolve/readPackageDeps.js \
 	src/extract/resolve/resolve-AMD.js \
 	src/extract/resolve/resolve-commonJS.js \
+	src/extract/resolve/resolve-helpers.js \
 	src/extract/summarize.js \
 	src/extract/transpile/coffeeWrap.js \
 	src/extract/transpile/index.js \
@@ -342,17 +346,20 @@ src/extract/resolve/index.js: \
 
 src/extract/resolve/resolve-AMD.js: \
 	src/extract/resolve/determineDependencyTypes.js \
-	src/extract/resolve/localNpmHelpers.js \
 	src/extract/resolve/readPackageDeps.js \
+	src/extract/resolve/resolve-helpers.js \
 	src/utl/pathToPosix.js
 
 src/extract/resolve/determineDependencyTypes.js: \
 	src/extract/resolve/localNpmHelpers.js
 
+src/extract/resolve/resolve-helpers.js: \
+	src/extract/resolve/localNpmHelpers.js
+
 src/extract/resolve/resolve-commonJS.js: \
 	src/extract/resolve/determineDependencyTypes.js \
-	src/extract/resolve/localNpmHelpers.js \
 	src/extract/resolve/readPackageDeps.js \
+	src/extract/resolve/resolve-helpers.js \
 	src/extract/transpile/meta.js \
 	src/utl/pathToPosix.js
 
