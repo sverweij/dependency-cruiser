@@ -19,6 +19,16 @@ const fileExists = memoize(pFile => {
     return true;
 });
 
+function addLicenseAttribute(pModuleName, pBaseDir) {
+    let lRetval = {};
+    const lLicense = localNpmHelpers.getLicense(pModuleName, pBaseDir);
+
+    if (Boolean(lLicense)) {
+        lRetval.license = lLicense;
+    }
+    return lRetval;
+}
+
 module.exports = (pModuleName, pBaseDir, pFileDir) => {
     // lookups:
     // - [x] could be relative in the end (implemented)
@@ -32,24 +42,19 @@ module.exports = (pModuleName, pBaseDir, pFileDir) => {
             path.join(pFileDir, `${pModuleName}.js`)
         )
     );
-    const lDependency = {
+    let lRetval = {
         resolved: fileExists(lProbablePath) ? lProbablePath : pModuleName,
         coreModule: Boolean(resolve.isCore(pModuleName)),
         followable: fileExists(lProbablePath),
         couldNotResolve: !Boolean(resolve.isCore(pModuleName)) && !fileExists(lProbablePath)
     };
 
-    const lLicense = localNpmHelpers.getLicense(pModuleName, pBaseDir);
-
-    if (Boolean(lLicense)) {
-        lDependency.license = lLicense;
-    }
-
     return Object.assign(
-        lDependency,
+        lRetval,
+        addLicenseAttribute(pModuleName, pBaseDir),
         {
             dependencyTypes: determineDependencyTypes(
-                lDependency,
+                lRetval,
                 pModuleName,
                 readPackageDeps(pFileDir),
                 pFileDir
