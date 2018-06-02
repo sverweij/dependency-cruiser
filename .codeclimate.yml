@@ -12,6 +12,8 @@ plugins:
     checks:
       compat/compat:
         enabled: false
+      indent:
+        enabled: false
 exclude_patterns:
   - ".github/"
   - "doc/"
