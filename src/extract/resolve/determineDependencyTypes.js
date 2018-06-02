@@ -39,6 +39,21 @@ function dependencyIsBundled(pModule, pPackageDeps) {
     return lRetval;
 }
 
+function determineNodeModuleDependencyTypes(pModuleName, pPackageDeps, pBaseDir) {
+    let lRetval = determineNpmDependencyTypes(
+        localNpmHelpers.getPackageRoot(pModuleName),
+        pPackageDeps
+    );
+
+    if (localNpmHelpers.dependencyIsDeprecated(pModuleName, pBaseDir)) {
+        lRetval.push("deprecated");
+    }
+    if (dependencyIsBundled(pModuleName, pPackageDeps)) {
+        lRetval.push("npm-bundled");
+    }
+    return lRetval;
+}
+
 module.exports = (pDependency, pModuleName, pPackageDeps, pBaseDir) => {
     let lRetval = ["undetermined"];
 
@@ -54,17 +69,7 @@ module.exports = (pDependency, pModuleName, pPackageDeps, pBaseDir) => {
     } else if (pModuleName.startsWith(".")) {
         lRetval = ["local"];
     } else if (pDependency.resolved.includes("node_modules")) {
-        lRetval = determineNpmDependencyTypes(
-            localNpmHelpers.getPackageRoot(pModuleName),
-            pPackageDeps
-        );
-
-        if (localNpmHelpers.dependencyIsDeprecated(pModuleName, pBaseDir)) {
-            lRetval.push("deprecated");
-        }
-        if (dependencyIsBundled(pModuleName, pPackageDeps)) {
-            lRetval.push("npm-bundled");
-        }
+        lRetval = determineNodeModuleDependencyTypes(pModuleName, pPackageDeps, pBaseDir);
     }
 
     return lRetval;
