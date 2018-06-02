@@ -2,6 +2,13 @@
 
 const walk = require('acorn/dist/walk');
 
+function firstArgumentIsAString(pNodeArguments) {
+    return Boolean(pNodeArguments) &&
+        pNodeArguments[0] &&
+        pNodeArguments[0].value &&
+        typeof pNodeArguments[0].value === "string";
+}
+
 module.exports = (pAST, pDependencies, pModuleSystem) => {
 
     // var/const lalala = require('./lalala');
@@ -12,20 +19,16 @@ module.exports = (pAST, pDependencies, pModuleSystem) => {
         pAST,
         {
             "CallExpression": pNode => {
-                if (pNode.callee.type === "Identifier" && pNode.callee.name === "require"){
-                    if (Boolean(pNode.arguments) &&
-                        pNode.arguments[0] &&
-                        pNode.arguments[0].value &&
-                        typeof pNode.arguments[0].value === "string"
-                    ){
-
-                        pNode.arguments[0].value.split("!").forEach(pString =>
-                            pDependencies.push({
-                                moduleName: pString,
-                                moduleSystem: pModuleSystem ? pModuleSystem : "cjs"
-                            })
-                        );
-                    }
+                if (pNode.callee.type === "Identifier" &&
+                    pNode.callee.name === "require" &&
+                    firstArgumentIsAString(pNode.arguments)
+                ){
+                    pNode.arguments[0].value.split("!").forEach(pString =>
+                        pDependencies.push({
+                            moduleName: pString,
+                            moduleSystem: pModuleSystem ? pModuleSystem : "cjs"
+                        })
+                    );
                 }
             }
         }
