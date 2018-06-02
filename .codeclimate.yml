@@ -11,7 +11,7 @@ plugins:
       config: .eslintrc.json
     checks:
       compat/compat:
-        enabled: false  
+        enabled: false
 exclude_patterns:
   - ".github/"
   - "doc/"
