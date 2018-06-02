@@ -10,17 +10,8 @@ const localNpmHelpers          = require('./localNpmHelpers');
 
 const SUPPORTED_EXTENSIONS = transpileMeta.scannableExtensions;
 
-/*
- * resolves both CommonJS and ES6
- */
-module.exports = (pModuleName, pBaseDir, pFileDir) => {
-    let lRetval = {
-        resolved        : pModuleName,
-        coreModule      : false,
-        followable      : false,
-        couldNotResolve : false,
-        dependencyTypes : ["undetermined"]
-    };
+function addResolutionAttributes(pBaseDir, pModuleName, pFileDir) {
+    let lRetval = {};
 
     if (resolve.isCore(pModuleName)){
         lRetval.coreModule = true;
@@ -30,8 +21,7 @@ module.exports = (pModuleName, pBaseDir, pFileDir) => {
                 path.relative(
                     pBaseDir,
                     resolve.sync(
-                        pModuleName,
-                        {
+                        pModuleName, {
                             basedir: pathToPosix(pFileDir),
                             extensions: SUPPORTED_EXTENSIONS
                         }
@@ -43,15 +33,39 @@ module.exports = (pModuleName, pBaseDir, pFileDir) => {
             lRetval.couldNotResolve = true;
         }
     }
+    return lRetval;
+}
 
+function addLicenseAttribute(pModuleName, pBaseDir) {
+    let lRetval = {};
     const lLicense = localNpmHelpers.getLicense(pModuleName, pBaseDir);
 
     if (Boolean(lLicense)) {
         lRetval.license = lLicense;
     }
+    return lRetval;
+}
+
+/*
+ * resolves both CommonJS and ES6
+ */
+module.exports = (pModuleName, pBaseDir, pFileDir) => {
+    let lRetval = {};
+
+    lRetval = Object.assign(
+        {
+            resolved        : pModuleName,
+            coreModule      : false,
+            followable      : false,
+            couldNotResolve : false,
+            dependencyTypes : ["undetermined"]
+        },
+        addResolutionAttributes(pBaseDir, pModuleName, pFileDir)
+    );
 
     return Object.assign(
         lRetval,
+        addLicenseAttribute(pModuleName, pBaseDir),
         {
             dependencyTypes: determineDependencyTypes(
                 lRetval,
