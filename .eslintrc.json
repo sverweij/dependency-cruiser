@@ -49,7 +49,7 @@
         "accessor-pairs":"error",
         "array-callback-return": "error",
         "block-scoped-var": "error",
-        "complexity": ["warn", 8],
+        "complexity": ["warn", 7],
         "consistent-return": "error",
         "curly": "error",
         "default-case": "error",
