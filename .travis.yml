@@ -3,10 +3,7 @@ sudo: false
 language: node_js
 
 node_js:
-# temporarily disable node 6 builds - there's a weird, dependency-cruiser
-# unrelated thing where npm installing breaks on there - something with
-# nyc and babel parser
-#  - "6"
+  - "6"
   - "8"
   - "10"
 

@@ -24,17 +24,14 @@ test_async_node_8:
   except:
    - tags
 
-# temporarily disable node 6 builds - there's a weird, dependency-cruiser
-# unrelated thing where npm installing breaks on there - something with
-# nyc and babel parser
-# test_async_node_6:
-#   image: node:6
-#   script:
-#    - npm install
-#    - npm run test:cover
-#   except:
-#    - tags
-#    - master
+test_async_node_6:
+  image: node:6
+  script:
+   - npm install
+   - npm run test:cover
+  except:
+   - tags
+   - master
 
 # publish:
 #  image: node:latest
