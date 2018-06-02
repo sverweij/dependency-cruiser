@@ -9,6 +9,11 @@ function firstArgumentIsAString(pNodeArguments) {
         typeof pNodeArguments[0].value === "string";
 }
 
+function isRequireIdentifier(pCallee) {
+    return pCallee.type === "Identifier" &&
+        pCallee.name === "require";
+}
+
 module.exports = (pAST, pDependencies, pModuleSystem) => {
 
     // var/const lalala = require('./lalala');
@@ -19,8 +24,7 @@ module.exports = (pAST, pDependencies, pModuleSystem) => {
         pAST,
         {
             "CallExpression": pNode => {
-                if (pNode.callee.type === "Identifier" &&
-                    pNode.callee.name === "require" &&
+                if (isRequireIdentifier(pNode.callee) &&
                     firstArgumentIsAString(pNode.arguments)
                 ){
                     pNode.arguments[0].value.split("!").forEach(pString =>
