@@ -14,6 +14,11 @@ function isRequireIdentifier(pCallee) {
         pCallee.name === "require";
 }
 
+function isRequireCall(pNode){
+    return isRequireIdentifier(pNode.callee) &&
+        firstArgumentIsAString(pNode.arguments);
+}
+
 module.exports = (pAST, pDependencies, pModuleSystem) => {
 
     // var/const lalala = require('./lalala');
@@ -24,9 +29,7 @@ module.exports = (pAST, pDependencies, pModuleSystem) => {
         pAST,
         {
             "CallExpression": pNode => {
-                if (isRequireIdentifier(pNode.callee) &&
-                    firstArgumentIsAString(pNode.arguments)
-                ){
+                if (isRequireCall(pNode)){
                     pNode.arguments[0].value.split("!").forEach(pString =>
                         pDependencies.push({
                             moduleName: pString,
