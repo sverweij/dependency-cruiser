@@ -30,10 +30,11 @@ help:
 src/report/%.template.js: src/report/%.template.hbs
 	./node_modules/.bin/handlebars --commonjs handlebars/runtime -f $@ $<
 
-.npmignore: .gitignore
+.npmignore: .gitignore Makefile
 	cp $< $@
 	echo "" >> $@
 	echo "# specificly ignore for npm" >> $@
+	echo ".codeclimate.yml" >> $@
 	echo ".dependency-cruiser-custom.json" >> $@
 	echo ".eslintignore" >> $@
 	echo ".eslintrc.json" >> $@
