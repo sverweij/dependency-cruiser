@@ -19,7 +19,21 @@ function isRequireCall(pNode){
         firstArgumentIsAString(pNode.arguments);
 }
 
+function pushRequireCallsToDependencies(pDependencies, pModuleSystem) {
+    return pNode => {
+        if (isRequireCall(pNode)) {
+            pNode.arguments[0].value.split("!").forEach(
+                pString => pDependencies.push({
+                    moduleName: pString,
+                    moduleSystem: pModuleSystem
+                })
+            );
+        }
+    };
+}
+
 module.exports = (pAST, pDependencies, pModuleSystem) => {
+    pModuleSystem = pModuleSystem || "cjs";
 
     // var/const lalala = require('./lalala');
     // require('./lalala');
@@ -28,16 +42,7 @@ module.exports = (pAST, pDependencies, pModuleSystem) => {
     walk.simple(
         pAST,
         {
-            "CallExpression": pNode => {
-                if (isRequireCall(pNode)){
-                    pNode.arguments[0].value.split("!").forEach(pString =>
-                        pDependencies.push({
-                            moduleName: pString,
-                            moduleSystem: pModuleSystem ? pModuleSystem : "cjs"
-                        })
-                    );
-                }
-            }
+            "CallExpression": pushRequireCallsToDependencies(pDependencies, pModuleSystem)
         }
     );
 };
