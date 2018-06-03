@@ -13,37 +13,48 @@ function compareSeverity(pFirst, pSecond) {
     return SEVERITY2INT[pFirst.severity] - SEVERITY2INT[pSecond.severity];
 }
 
-function validateAgainstRules(pRuleSet, pFrom, pTo, pMatchModule) {
+
+function validateAgainstAllowedRules(pRuleSet, pMatchModule, pFrom, pTo) {
     let lFoundRuleViolations = [];
-    let lRetval = {valid:true};
 
-    pRuleSet.forbidden = pRuleSet.forbidden || [];
-
-    if (pRuleSet.allowed){
+    if (pRuleSet.allowed) {
         const lInterestingAllowedRules = pRuleSet.allowed.filter(pMatchModule.isInteresting);
 
-        if (lInterestingAllowedRules.length > 0 && !(lInterestingAllowedRules.some(pMatchModule.match(pFrom, pTo)))){
+        if (
+            lInterestingAllowedRules.length > 0 &&
+            !(lInterestingAllowedRules.some(pMatchModule.match(pFrom, pTo)))
+        ) {
             lFoundRuleViolations.push({
                 severity: pRuleSet.allowedSeverity,
                 name: "not-in-allowed"
             });
         }
     }
+    return lFoundRuleViolations;
+}
 
-    lFoundRuleViolations = lFoundRuleViolations
-        .concat(
-            pRuleSet
-                .forbidden
-                .filter(pMatchModule.isInteresting)
-                .filter(pMatchModule.match(pFrom, pTo))
-                .map(pMatchedRule => ({
-                    severity : pMatchedRule.severity,
-                    name     : pMatchedRule.name
-                }))
-        );
+function validateAgainstForbiddenRules(pRuleSet, pMatchModule, pFrom, pTo) {
+    pRuleSet.forbidden = pRuleSet.forbidden || [];
+
+    return pRuleSet
+        .forbidden
+        .filter(pMatchModule.isInteresting)
+        .filter(pMatchModule.match(pFrom, pTo))
+        .map(pMatchedRule => ({
+            severity: pMatchedRule.severity,
+            name: pMatchedRule.name
+        }));
+}
+
+function validateAgainstRules(pRuleSet, pFrom, pTo, pMatchModule) {
+    let lRetval = {valid:true};
+
+    const lFoundRuleViolations =
+        validateAgainstAllowedRules(pRuleSet, pMatchModule, pFrom, pTo)
+            .concat(validateAgainstForbiddenRules(pRuleSet, pMatchModule, pFrom, pTo))
+            .sort(compareSeverity);
 
     lRetval.valid = lFoundRuleViolations.length === 0;
-    lFoundRuleViolations = lFoundRuleViolations.sort(compareSeverity);
     if (!lRetval.valid){
         lRetval.rules = lFoundRuleViolations;
     }
@@ -85,4 +96,3 @@ module.exports = {
         return validateAgainstRules(pRuleSet, pFrom, pTo, matchDependencyRule);
     }
 };
-
