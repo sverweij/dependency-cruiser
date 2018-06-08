@@ -87,7 +87,7 @@
   },
   "homepage": "https://github.com/sverweij/dependency-cruiser",
   "dependencies": {
-    "acorn": "5.6.1",
+    "acorn": "5.6.2",
     "ajv": "6.5.0",
     "chalk": "2.4.1",
     "commander": "2.15.1",
