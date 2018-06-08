@@ -2,13 +2,27 @@
 
 const path                     = require('path');
 const resolve                  = require('resolve');
+const enhancedResolve          = require('enhanced-resolve');
 const pathToPosix              = require('../../utl/pathToPosix');
 const transpileMeta            = require('../transpile/meta');
 const determineDependencyTypes = require('./determineDependencyTypes');
 const readPackageDeps          = require('./readPackageDeps');
 const resolveHelpers           = require('./resolve-helpers');
 
-const SUPPORTED_EXTENSIONS = transpileMeta.scannableExtensions;
+const CACHE_DURATION = 4000;
+
+const resolver = enhancedResolve.ResolverFactory.createResolver({
+    fileSystem: new enhancedResolve.CachedInputFileSystem(
+        new enhancedResolve.NodeJsInputFileSystem(),
+        CACHE_DURATION
+    ),
+    extensions: transpileMeta.scannableExtensions,
+    useSyncFileSystemCalls: true,
+    // we can later on make symlinks listen to the preserveSymlinks option
+    // and chuck some code to manually do this in index.js
+    symlinks: false
+    // alias and aliasFields to address #4 will come here
+});
 
 function addResolutionAttributes(pBaseDir, pModuleName, pFileDir) {
     let lRetval = {};
@@ -20,11 +34,15 @@ function addResolutionAttributes(pBaseDir, pModuleName, pFileDir) {
             lRetval.resolved = pathToPosix(
                 path.relative(
                     pBaseDir,
-                    resolve.sync(
-                        pModuleName, {
-                            basedir: pathToPosix(pFileDir),
-                            extensions: SUPPORTED_EXTENSIONS
-                        }
+                    resolver.resolveSync(
+                        // context
+                        {},
+                        // lookupStartPath
+                        pathToPosix(pFileDir),
+                        // request
+                        pModuleName,
+                        // resolveContext
+                        {}
                     )
                 )
             );
