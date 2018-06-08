@@ -8,6 +8,19 @@ const resolveCJSModule = require('./resolve-commonJS');
 
 const isRelativeModuleName = pString => pString.startsWith(".");
 
+function resolveModule(pDependency, pBaseDir, pFileDir) {
+    let lRetval = null;
+
+    if (isRelativeModuleName(pDependency.moduleName)) {
+        lRetval = resolveCJSModule(pDependency.moduleName, pBaseDir, pFileDir);
+    } else if (["cjs", "es6"].indexOf(pDependency.moduleSystem) > -1) {
+        lRetval = resolveCJSModule(pDependency.moduleName, pBaseDir, pFileDir);
+    } else {
+        lRetval = resolveAMDModule(pDependency.moduleName, pBaseDir, pFileDir);
+    }
+    return lRetval;
+}
+
 /**
  * resolves the module name of the pDependency to a file on disk.
  *
@@ -34,15 +47,8 @@ const isRelativeModuleName = pString => pString.startsWith(".");
  *
  */
 module.exports = (pDependency, pBaseDir, pFileDir, pPreserveSymlinks) => {
-    let lResolvedModule = null;
+    let lResolvedModule = resolveModule(pDependency, pBaseDir, pFileDir);
 
-    if (isRelativeModuleName(pDependency.moduleName)){
-        lResolvedModule = resolveCJSModule(pDependency.moduleName, pBaseDir, pFileDir);
-    } else if (["cjs", "es6"].indexOf(pDependency.moduleSystem) > -1){
-        lResolvedModule = resolveCJSModule(pDependency.moduleName, pBaseDir, pFileDir);
-    } else {
-        lResolvedModule = resolveAMDModule(pDependency.moduleName, pBaseDir, pFileDir);
-    }
     if (!pPreserveSymlinks && !lResolvedModule.coreModule && !lResolvedModule.couldNotResolve) {
         try {
             lResolvedModule.resolved =
@@ -53,3 +59,5 @@ module.exports = (pDependency, pBaseDir, pFileDir, pPreserveSymlinks) => {
     }
     return lResolvedModule;
 };
+
+
