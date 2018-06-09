@@ -3,20 +3,21 @@
 const fs               = require('fs');
 const path             = require('path');
 const pathToPosix      = require('../../utl/pathToPosix');
-const resolveAMDModule = require('./resolve-AMD');
-const resolveCJSModule = require('./resolve-commonJS');
+const resolveAMD       = require('./resolve-AMD');
+const resolveCommonJS  = require('./resolve-commonJS');
 
 const isRelativeModuleName = pString => pString.startsWith(".");
 
 function resolveModule(pDependency, pBaseDir, pFileDir) {
     let lRetval = null;
 
-    if (isRelativeModuleName(pDependency.moduleName)) {
-        lRetval = resolveCJSModule(pDependency.moduleName, pBaseDir, pFileDir);
-    } else if (["cjs", "es6"].indexOf(pDependency.moduleSystem) > -1) {
-        lRetval = resolveCJSModule(pDependency.moduleName, pBaseDir, pFileDir);
+    if (
+        isRelativeModuleName(pDependency.moduleName) ||
+        ["cjs", "es6"].indexOf(pDependency.moduleSystem) > -1
+    ) {
+        lRetval = resolveCommonJS(pDependency.moduleName, pBaseDir, pFileDir);
     } else {
-        lRetval = resolveAMDModule(pDependency.moduleName, pBaseDir, pFileDir);
+        lRetval = resolveAMD(pDependency.moduleName, pBaseDir, pFileDir);
     }
     return lRetval;
 }
