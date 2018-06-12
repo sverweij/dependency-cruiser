@@ -36,14 +36,16 @@ function determineResolveOptions(pResolveOptions){
     );
 }
 
+function initResolver(pResolveOptions) {
+    if (!gResolver || pResolveOptions.bustTheCache) {
+        gResolver = enhancedResolve.ResolverFactory.createResolver(determineResolveOptions(pResolveOptions));
+    }
+}
+
 function addResolutionAttributes(pBaseDir, pModuleName, pFileDir, pResolveOptions) {
     let lRetval = {};
 
-    if (!gResolver || pResolveOptions.bustTheCache) {
-        gResolver = enhancedResolve.ResolverFactory.createResolver(
-            determineResolveOptions(pResolveOptions)
-        );
-    }
+    initResolver(pResolveOptions);
 
     if (resolve.isCore(pModuleName)){
         lRetval.coreModule = true;
@@ -98,3 +100,5 @@ module.exports = (pModuleName, pBaseDir, pFileDir, pResolveOptions) => {
         }
     );
 };
+
+
