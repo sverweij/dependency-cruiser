@@ -456,6 +456,9 @@ test/extract/index.spec.js: \
 test/extract/resolve/determineDependencyTypes.spec.js: \
 	src/extract/resolve/determineDependencyTypes.js
 
+test/extract/resolve/index.spec.js: \
+	src/extract/resolve/index.js
+
 test/extract/resolve/localNpmHelpers.spec.js: \
 	src/extract/resolve/localNpmHelpers.js
 

@@ -11,21 +11,39 @@ const resolveHelpers           = require('./resolve-helpers');
 
 const CACHE_DURATION = 4000;
 
-const resolver = enhancedResolve.ResolverFactory.createResolver({
-    fileSystem: new enhancedResolve.CachedInputFileSystem(
-        new enhancedResolve.NodeJsInputFileSystem(),
-        CACHE_DURATION
-    ),
-    extensions: transpileMeta.scannableExtensions,
-    useSyncFileSystemCalls: true,
-    // we can later on make symlinks listen to the preserveSymlinks option
-    // and chuck some code to manually do this in index.js
-    symlinks: false
-    // alias and aliasFields to address #4 will come here
-});
+let gResolver = null;
 
-function addResolutionAttributes(pBaseDir, pModuleName, pFileDir) {
+function determineResolveOptions(pResolveOptions){
+    let DEFAULT_RESOLVE_OPTIONS = {
+        // we can later on make symlinks listen to the preserveSymlinks option
+        // and chuck some code to manually do this in index.js
+        symlinks: false
+    };
+
+    const NON_OVERRIDABLE_RESOLVE_OPTIONS = {
+        fileSystem: new enhancedResolve.CachedInputFileSystem(
+            new enhancedResolve.NodeJsInputFileSystem(),
+            CACHE_DURATION
+        ),
+        extensions: transpileMeta.scannableExtensions,
+        useSyncFileSystemCalls: true
+    };
+
+    return Object.assign(
+        DEFAULT_RESOLVE_OPTIONS,
+        pResolveOptions,
+        NON_OVERRIDABLE_RESOLVE_OPTIONS
+    );
+}
+
+function addResolutionAttributes(pBaseDir, pModuleName, pFileDir, pResolveOptions) {
     let lRetval = {};
+
+    if (!gResolver || pResolveOptions.bustTheCache) {
+        gResolver = enhancedResolve.ResolverFactory.createResolver(
+            determineResolveOptions(pResolveOptions)
+        );
+    }
 
     if (resolve.isCore(pModuleName)){
         lRetval.coreModule = true;
@@ -34,15 +52,12 @@ function addResolutionAttributes(pBaseDir, pModuleName, pFileDir) {
             lRetval.resolved = pathToPosix(
                 path.relative(
                     pBaseDir,
-                    resolver.resolveSync(
-                        // context
+                    gResolver.resolveSync(
                         {},
                         // lookupStartPath
                         pathToPosix(pFileDir),
                         // request
-                        pModuleName,
-                        // resolveContext
-                        {}
+                        pModuleName
                     )
                 )
             );
@@ -57,7 +72,8 @@ function addResolutionAttributes(pBaseDir, pModuleName, pFileDir) {
 /*
  * resolves both CommonJS and ES6
  */
-module.exports = (pModuleName, pBaseDir, pFileDir) => {
+module.exports = (pModuleName, pBaseDir, pFileDir, pResolveOptions) => {
+
     let lRetval = Object.assign(
         {
             resolved        : pModuleName,
@@ -66,7 +82,7 @@ module.exports = (pModuleName, pBaseDir, pFileDir) => {
             couldNotResolve : false,
             dependencyTypes : ["undetermined"]
         },
-        addResolutionAttributes(pBaseDir, pModuleName, pFileDir)
+        addResolutionAttributes(pBaseDir, pModuleName, pFileDir, pResolveOptions)
     );
 
     return Object.assign(

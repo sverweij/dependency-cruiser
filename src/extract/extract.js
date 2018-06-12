@@ -52,7 +52,7 @@ function addResolutionAttributes(pOptions, pFileName) {
             pDependency,
             pOptions.baseDir,
             path.join(pOptions.baseDir, path.dirname(pFileName)),
-            pOptions.preserveSymlinks
+            {symlinks: pOptions.preserveSymlinks}
         );
         const lMatchesDoNotFollow = Boolean(pOptions.doNotFollow)
             ? RegExp(pOptions.doNotFollow, "g").test(lResolved.resolved)
