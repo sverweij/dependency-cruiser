@@ -3,6 +3,7 @@
 const fs                    = require('fs');
 const glob                  = require('glob');
 const main                  = require('../main');
+const getResolveConfig      = require('./getResolveConfig');
 const validateFileExistence = require('./validateFileExistence');
 const normalizeOptions      = require('./normalizeOptions');
 const initRules             = require('./initRules');
@@ -61,6 +62,8 @@ function createRulesFile(pOptions) {
 }
 
 function runCruise(pFileDirArray, pOptions) {
+    let lResolveOptions = {};
+
     pFileDirArray
         .filter(pFileOrDir => !glob.hasMagic(pFileOrDir))
         .forEach(validateFileExistence);
@@ -69,9 +72,15 @@ function runCruise(pFileDirArray, pOptions) {
         validateFileExistence(normalizeOptions.determineRulesFileName(pOptions.validate));
     }
 
+    if (pOptions.hasOwnProperty("webpackConfig")) {
+        lResolveOptions = getResolveConfig(
+            normalizeOptions.determineWebpackConfigFileName(pOptions.webpackConfig)
+        );
+    }
+
     pOptions = normalizeOptions(pOptions);
 
-    const lDependencyList = main.cruise(pFileDirArray, pOptions);
+    const lDependencyList = main.cruise(pFileDirArray, pOptions, lResolveOptions);
 
     write(pOptions.outputTo, lDependencyList.modules);
 

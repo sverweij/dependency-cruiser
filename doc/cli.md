@@ -1,3 +1,4 @@
+
 # dependency-cruiser command line interface
 
 Running with no parameters gets you help:
@@ -27,6 +28,8 @@ Options:
   --ts-pre-compilation-deps     detect dependencies that only exist before
                                 typescript-to-javascript compilation
                                 (off by default)
+   --webpack-config [file]      use a webpack configuration
+                                (default: webpack.config.js)
   --init                        write a .dependency-cruiser.json with basic
                                 validations to the current folder.
   -h, --help                    output usage information
@@ -317,6 +320,18 @@ output will look like this:
 ### `--preserve-symlinks`
 Whether to leave symlinks as is or resolve them to their realpath. This option defaults
 to `false` (which is also nodejs' default behavior since release 6).
+
+### `--webpack-config`: use (the resolution options of) a webpack configuration
+Dependency-cruiser will pluck the `resolve` key from the configuration
+use the information to resolve files on disk.
+
+The configuration file you can pass as an argument to this option is
+relative to the current working directory.
+
+If you're a webpack user and you have a `resolve` key in your webpack
+config you probably already know what happens with this. If not (or if
+you're curious; see the [webpack resolve](https://webpack.js.org/configuration/resolve/)
+documentation for details.
 
 ### arguments
 You can pass a bunch of files, directories and 'glob' patterns. 

@@ -124,6 +124,7 @@ function resetOutputDir() {
         });
 
     deleteDammit(path.join(OUT_DIR, "multiple-in-one-go.json"));
+    deleteDammit(path.join(OUT_DIR, "webpack-config-alias.json"));
 }
 
 function setModuleType(pTestPairs, pModuleType) {
@@ -312,6 +313,26 @@ describe("#processCLI", () => {
                 `Successfully created '${lValidationFileName}'`
             );
             deleteDammit(lValidationFileName);
+        });
+
+        it("dependency-cruise with a webpack config will respect the resolve stuff on there", () => {
+            const lOutputFileName = "webpack-config-alias.json";
+            const lOutputTo       = path.join(OUT_DIR, lOutputFileName);
+
+            processCLI(
+                [
+                    "test/cli/fixtures/webpackconfig/aliassy/src"
+                ],
+                {
+                    outputTo: lOutputTo,
+                    outputType: "json",
+                    webpackConfig: "test/cli/fixtures/webpackconfig/aliassy/webpack.config.js"
+                }
+            );
+            tst.assertFileEqual(
+                lOutputTo,
+                path.join(FIX_DIR, lOutputFileName)
+            );
         });
     });
 

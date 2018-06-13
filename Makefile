@@ -387,6 +387,9 @@ src/main/ruleSet/validate.js: \
 	src/main/options/validate.js \
 	src/main/ruleSet/jsonschema.json
 
+test/cli/getResolveConfig.spec.js: \
+	src/cli/getResolveConfig.js
+
 test/cli/index.spec.js: \
 	src/cli/index.js \
 	test/cli/deleteDammit.utl.js \
@@ -395,6 +398,7 @@ test/cli/index.spec.js: \
 src/cli/index.js: \
 	src/cli/defaults.json \
 	src/cli/formatMetaInfo.js \
+	src/cli/getResolveConfig.js \
 	src/cli/initRules.js \
 	src/cli/normalizeOptions.js \
 	src/cli/validateFileExistence.js \

@@ -52,6 +52,7 @@ const TYPE2REPORTER      = {
  * @param  {array}  pFileDirArray An array of (names of) files and directories to
  *                             start the cruise with
  * @param  {object} pOptions   see above
+ * @param  {object} pResolveOptions an object with options enhanced-resolve)
  * @return {object} An object with ...
  * {
  *  dependencies : when outputType is defined: a string containing the dependencies
@@ -70,10 +71,12 @@ const TYPE2REPORTER      = {
  *                info  : the number of informational messages
  *              }
  */
-function cruise (pFileDirArray, pOptions) {
+function cruise (pFileDirArray, pOptions, pResolveOptions) {
     pOptions = normalizeOptions(
         validateOptions(pOptions)
     );
+
+    pResolveOptions = pResolveOptions || {};
 
     if (Boolean(pOptions.ruleSet)){
         pOptions.ruleSet = normalizeRuleSet(
@@ -86,7 +89,8 @@ function cruise (pFileDirArray, pOptions) {
     return extract(
         pFileDirArray,
         pOptions,
-        TYPE2REPORTER[pOptions.outputType]
+        TYPE2REPORTER[pOptions.outputType],
+        pResolveOptions
     );
 }
 

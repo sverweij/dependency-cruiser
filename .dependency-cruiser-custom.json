@@ -4,7 +4,7 @@
             "comment": "cli should only depend on the public interface in main",
             "severity": "error",
             "from": { "path": "(^src/cli)" },
-            "to": { "pathNot": "^src/main|^node_modules|^fs$|$1" }
+            "to": { "pathNot": "^src/main|^node_modules|^fs$|^path$|$1" }
         }, {
             "name": "bin-to-cli-only",
             "comment": "bin should only depend on cli",

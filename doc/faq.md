@@ -28,6 +28,11 @@ This has a few advantages over bundling the transpilers as dependencies:
 - Dependency-cruiser will use the version of the transpiler you are using
   in your project (which might not be the most recent one for valid reasons).
 
+## Does this work with webpack (specifically alias'es)?
+Yes. You can even feed dependency-cruiser a webpack configuration and it
+will take the `resolve` section in there into account when cruising
+your dependencies. This includes any `alias` you might have in there.
+
 ## (typescript) some dependencies I'd expect don't show up. What gives?
 ### TL;DR
 Use `--ts-pre-compilation-deps` or put `"tsPreCompilationDeps" : true` in

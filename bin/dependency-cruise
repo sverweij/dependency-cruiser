@@ -20,9 +20,9 @@ program
     .option("-i, --info", `shows what languages and extensions
                               dependency-cruiser supports`)
     .option("-v, --validate [file]", `validate with rules in [file]
-                              (default: .dependency-cruiser.json)`)
+                              (default: .dependency-cruiser.json`)
     .option("-f, --output-to <file>", `file to write output to; - for stdout
-                              (default: -)`)
+                             `, "-")
     .option("-X, --do-not-follow <regex>", `a regular expression for modules to include,
                               but not follow further`)
     .option("-x, --exclude <regex>", "a regular expression for excluding modules")
@@ -36,6 +36,8 @@ program
     .option("--ts-pre-compilation-deps", `detect dependencies that only exist before
                               typescript-to-javascript compilation
                               (off by default)`)
+    .option("--webpack-config [file]", `use a webpack configuration
+                              (default: webpack.config.js)`)
     .option("--init", `write a .dependency-cruiser.json with basic
                               validations to the current folder.`)
     .arguments("<files-or-directories>")

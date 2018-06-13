@@ -1,6 +1,7 @@
 {
     "PIPE_BUFFER_SIZE" : 512,
     "RULES_FILE_NAME": ".dependency-cruiser.json",
+    "WEBPACK_CONFIG": "webpack.config.js",
     "OUTPUT_TYPE": "err",
     "OUTPUT_TO": "-"
 }

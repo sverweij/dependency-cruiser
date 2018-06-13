@@ -9,10 +9,11 @@ const gather                 = require('./gatherInitialSources');
 const summarize              = require('./summarize');
 const addValidations         = require('./addValidations');
 
-function extractRecursive (pFileName, pOptions, pVisited, pDepth) {
+/* eslint max-params:0 */
+function extractRecursive (pFileName, pOptions, pVisited, pDepth, pResolveOptions) {
     pVisited.add(pFileName);
     const lDependencies = (pOptions.maxDepth <= 0 || pDepth < pOptions.maxDepth)
-        ? extract(pFileName, pOptions)
+        ? extract(pFileName, pOptions, pResolveOptions)
         : [];
 
     return lDependencies
@@ -32,7 +33,7 @@ function extractRecursive (pFileName, pOptions, pVisited, pDepth) {
         );
 }
 
-function extractFileDirArray(pFileDirArray, pOptions) {
+function extractFileDirArray(pFileDirArray, pOptions, pResolveOptions) {
     let lVisited = new Set();
 
     return _.spread(_.concat)(
@@ -41,7 +42,7 @@ function extractFileDirArray(pFileDirArray, pOptions) {
                 if (!lVisited.has(pFilename)){
                     lVisited.add(pFilename);
                     return pDependencies.concat(
-                        extractRecursive(pFilename, pOptions, lVisited, 0)
+                        extractRecursive(pFilename, pOptions, lVisited, 0, pResolveOptions)
                     );
                 }
                 return pDependencies;
@@ -92,7 +93,8 @@ function makeOptionsPresentable(pOptions) {
         "outputType",
         "prefix",
         "tsPreCompilationDeps",
-        "preserveSymlinks"
+        "preserveSymlinks",
+        "webpackConfig"
     ];
 
     return SHARABLE_OPTIONS
@@ -106,7 +108,7 @@ function makeOptionsPresentable(pOptions) {
         );
 }
 
-module.exports = (pFileDirArray, pOptions, pCallback) => {
+module.exports = (pFileDirArray, pOptions, pCallback, pResolveOptions) => {
     const lCallback = pCallback ? pCallback : (pInput => pInput);
     const lOptions = Object.assign(
         {
@@ -116,7 +118,7 @@ module.exports = (pFileDirArray, pOptions, pCallback) => {
     );
 
     let lModules = _(
-        extractFileDirArray(pFileDirArray, lOptions).reduce(complete, [])
+        extractFileDirArray(pFileDirArray, lOptions, pResolveOptions).reduce(complete, [])
     ).uniqBy(pDependency => pDependency.source)
         .value();
 
