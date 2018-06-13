@@ -22,7 +22,7 @@ function extractRecursive (pFileName, pOptions, pVisited, pDepth, pResolveOption
             (pAll, pDep) => {
                 if (!pVisited.has(pDep.resolved)){
                     return pAll.concat(
-                        extractRecursive(pDep.resolved, pOptions, pVisited, pDepth + 1)
+                        extractRecursive(pDep.resolved, pOptions, pVisited, pDepth + 1, pResolveOptions)
                     );
                 }
                 return pAll;
