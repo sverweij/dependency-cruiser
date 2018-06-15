@@ -332,7 +332,7 @@ Useful things to know:
   webpack config file name in in your .dependency-cruiser.json like this:
   ```json
   "options": {
-    "webpackConfig" {
+    "webpackConfig": {
       "fileName": "webpack.config.js",
     }
   }
@@ -343,9 +343,9 @@ Useful things to know:
   parameters in .dependency-cruiser.json in the webpackConfig section
   ```json
   "options": {
-    "webpackConfig" {
+    "webpackConfig": {
       "env": { "production": true },
-      "arguments": { mode: "production" } 
+      "arguments": { "mode": "production" } 
     }
   }
   ```
