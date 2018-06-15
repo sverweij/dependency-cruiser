@@ -33,4 +33,54 @@ describe("getResolveConfig", () => {
             }
         });
     });
+
+    it("returns the production resolve section of the webpack config if that's an environment specific", () => {
+        expect(
+            getResolveConfig(
+                path.join(__dirname, "./fixtures/webpackconfig/hastwoseparateresolves.config.js"),
+                {production: true}
+            )
+        ).to.deep.equal({
+            alias: {
+                'config': "src/config",
+                'magic$': "src/merlin/browserify/magic"
+            }
+        });
+    });
+
+    it("returns the 'other' resolve section of the webpack config if development environment is requested", () => {
+        expect(
+            getResolveConfig(
+                path.join(__dirname, "./fixtures/webpackconfig/hastwoseparateresolves.config.js"),
+                {develop: true}
+            )
+        ).to.deep.equal({
+            alias: {
+                'config': "src/dev-config",
+                'magic$': "src/merlin/browserify/hipsterlib"
+            }
+        });
+    });
+
+    it("returns the resolve section of the function returning webpack config if there's any", () => {
+        expect(
+            getResolveConfig(path.join(__dirname, "./fixtures/webpackconfig/aliassy/webpack.functionexport.config.js"))
+        ).to.deep.equal({
+            alias: {
+                configSpullenAlias: "./configspullen"
+            },
+            bustTheCache: true
+        });
+    });
+
+    it("returns the resolve section of the first element of the array returning webpack config if there's any", () => {
+        expect(
+            getResolveConfig(path.join(__dirname, "./fixtures/webpackconfig/aliassy/webpack.arrayexport.config.js"))
+        ).to.deep.equal({
+            alias: {
+                configSpullenAlias: "./configspullen"
+            },
+            bustTheCache: true
+        });
+    });
 });

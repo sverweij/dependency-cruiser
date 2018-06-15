@@ -267,8 +267,27 @@
                     "type": "boolean"
                 },
                 "webpackConfig": {
-                    "type": "string",
-                    "description": "The name of the webpack config file used in the cruise"
+                    "type": "object",
+                    "additionalProperties": false,
+                    "description": "The webpack configuration options used for the cruise",
+                    "properties": {
+                        "fileName": {
+                            "type": "string",
+                            "description": "The name of the webpack configuration file used"
+                        },
+                        "env": {
+                            "description": "The 'env' parameters passed",
+                            "oneOf": [{
+                                "type": "object"
+                            }, {
+                                "type": "string"
+                            }]
+                        },
+                        "arguments": {
+                            "type": "object",
+                            "description": "The arguments used"
+                        }
+                    }
                 }
             }
         }

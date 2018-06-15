@@ -70,8 +70,9 @@ The currently supported options are
 [`exclude`](./cli.md#--exclude-exclude-modules-from-being-cruised),
 [`moduleSystems`](./cli.md#--module-systems),
 [`prefix`](./cli.md#--prefix-prefixing-links),
-[`tsPreCompilationDeps`](./cli.md#--ts-pre-compilation-deps-typescript-only) and
-[`preserveSymlinks`](/cli.md#--preserve-symlinks).
+[`tsPreCompilationDeps`](./cli.md#--ts-pre-compilation-deps-typescript-only),
+[`preserveSymlinks`](/cli.md#--preserve-symlinks) and 
+[`webpackConfig`](/cli.md#--webpack-config-use-the-resolution-options-of-a-webpack-configuration).
 See the [command line documentation](./cli.md) for details.
 
 ## The structure of an individual rule

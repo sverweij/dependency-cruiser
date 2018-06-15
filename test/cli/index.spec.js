@@ -125,6 +125,7 @@ function resetOutputDir() {
 
     deleteDammit(path.join(OUT_DIR, "multiple-in-one-go.json"));
     deleteDammit(path.join(OUT_DIR, "webpack-config-alias.json"));
+    deleteDammit(path.join(OUT_DIR, "webpack-config-alias-cruiser-config.json"));
 }
 
 function setModuleType(pTestPairs, pModuleType) {
@@ -315,7 +316,7 @@ describe("#processCLI", () => {
             deleteDammit(lValidationFileName);
         });
 
-        it("dependency-cruise with a webpack config will respect the resolve stuff on there", () => {
+        it("dependency-cruise with a --webpack-config with an object export will respect the resolve stuff on there", () => {
             const lOutputFileName = "webpack-config-alias.json";
             const lOutputTo       = path.join(OUT_DIR, lOutputFileName);
 
@@ -326,7 +327,27 @@ describe("#processCLI", () => {
                 {
                     outputTo: lOutputTo,
                     outputType: "json",
-                    webpackConfig: "test/cli/fixtures/webpackconfig/aliassy/webpack.config.js"
+                    webpackConfig: "test/cli/fixtures/webpackconfig/aliassy/webpack.regularexport.config.js"
+                }
+            );
+            tst.assertFileEqual(
+                lOutputTo,
+                path.join(FIX_DIR, lOutputFileName)
+            );
+        });
+
+        it("dependency-cruise with a .dependency-cruiser config with a webpackConfig section will respect that config", () => {
+            const lOutputFileName = "webpack-config-alias-cruiser-config.json";
+            const lOutputTo       = path.join(OUT_DIR, lOutputFileName);
+
+            processCLI(
+                [
+                    "test/cli/fixtures/webpackconfig/aliassy/src"
+                ],
+                {
+                    outputTo: lOutputTo,
+                    outputType: "json",
+                    validate: "test/cli/fixtures/webpackconfig/aliassy/dependency-cruiser-json-with-webpack-config.json"
                 }
             );
             tst.assertFileEqual(

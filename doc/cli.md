@@ -323,10 +323,35 @@ to `false` (which is also nodejs' default behavior since release 6).
 
 ### `--webpack-config`: use (the resolution options of) a webpack configuration
 Dependency-cruiser will pluck the `resolve` key from the configuration
-use the information to resolve files on disk.
+use the information to resolve files on disk. 
 
-The configuration file you can pass as an argument to this option is
-relative to the current working directory.
+Useful things to know:
+- The configuration file you can pass as an argument to this option is
+  relative to the current working directory.
+- As an alternative to this command line parameter you can pass the
+  webpack config file name in in your .dependency-cruiser.json like this:
+  ```json
+  "options": {
+    "webpackConfig" {
+      "fileName": "webpack.config.js",
+    }
+  }
+  ```
+  This also allows you to pass additional parameters in case your
+  webpack config exports a function instead of an object literal.
+- If your webpack configuration exports a function, you can provide the
+  parameters in .dependency-cruiser.json in the webpackConfig section
+  ```json
+  "options": {
+    "webpackConfig" {
+      "env": { "production": true },
+      "arguments": { mode: "production" } 
+    }
+  }
+  ```
+- If your webpack config exports an array of configurations,
+  dependency-cruiser will only use the resolve options of the first
+  configuration in that array.
 
 If you're a webpack user and you have a `resolve` key in your webpack
 config you probably already know what happens with this. If not (or if

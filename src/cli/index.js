@@ -2,6 +2,7 @@
 
 const fs                    = require('fs');
 const glob                  = require('glob');
+const _get                  = require('lodash').get;
 const main                  = require('../main');
 const getResolveConfig      = require('./getResolveConfig');
 const validateFileExistence = require('./validateFileExistence');
@@ -61,6 +62,16 @@ function createRulesFile(pOptions) {
     );
 }
 
+function extractResolveOptions(pOptions) {
+    return getResolveConfig(
+        normalizeOptions.determineWebpackConfigFileName(
+            pOptions.webpackConfig || _get(pOptions, 'ruleSet.options.webpackConfig.fileName', defaults.webpackConfig)
+        ),
+        _get(pOptions, 'ruleSet.options.webpackConfig.env', null),
+        _get(pOptions, 'ruleSet.options.webpackConfig.arguments', null)
+    );
+}
+
 function runCruise(pFileDirArray, pOptions) {
     let lResolveOptions = {};
 
@@ -72,13 +83,11 @@ function runCruise(pFileDirArray, pOptions) {
         validateFileExistence(normalizeOptions.determineRulesFileName(pOptions.validate));
     }
 
-    if (pOptions.hasOwnProperty("webpackConfig")) {
-        lResolveOptions = getResolveConfig(
-            normalizeOptions.determineWebpackConfigFileName(pOptions.webpackConfig)
-        );
-    }
-
     pOptions = normalizeOptions(pOptions);
+
+    if (pOptions.hasOwnProperty("webpackConfig") || _get(pOptions, 'ruleSet.options.webpackConfig', null)) {
+        lResolveOptions = extractResolveOptions(pOptions);
+    }
 
     const lDependencyList = main.cruise(pFileDirArray, pOptions, lResolveOptions);
 
@@ -105,5 +114,4 @@ module.exports = (pFileDirArray, pOptions) => {
         process.stderr.write(`\n  ERROR: ${e.message}\n`);
     }
 };
-
 /* eslint no-process-exit: 0 no-plusplus: 0*/

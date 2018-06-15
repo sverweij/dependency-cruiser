@@ -57,7 +57,8 @@
         "info": 0,
         "totalCruised": 3,
         "optionsUsed": {
-            "outputTo": "test/cli/output/webpack-config-alias.json",
+            "rulesFile": "test/cli/fixtures/webpackconfig/aliassy/dependency-cruiser-json-with-webpack-config.json",
+            "outputTo": "test/cli/output/webpack-config-alias-cruiser-config.json",
             "moduleSystems": [
                 "amd",
                 "cjs",
@@ -66,7 +67,9 @@
             "outputType": "json",
             "tsPreCompilationDeps": false,
             "preserveSymlinks": false,
-            "webpackConfig": "test/cli/fixtures/webpackconfig/aliassy/webpack.regularexport.config.js"
+            "webpackConfig": {
+                "fileName": "test/cli/fixtures/webpackconfig/aliassy/webpack.regularexport.config.js"
+            }
         }
     }
 }

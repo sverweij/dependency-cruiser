@@ -59,6 +59,29 @@
                 "preserveSymlinks": {
                     "type": "boolean",
                     "description": "if true leave symlinks untouched, otherwise use the realpath. Defaults to `false` (which is also nodejs's default behavior since version 6)"
+                },
+                "webpackConfig": {
+                    "type": "object",
+                    "additionalProperties": false,
+                    "description": "Webpack configuration to use to get resolve options from",
+                    "properties": {
+                        "fileName": {
+                            "type": "string",
+                            "description": "The webpack conf file to use (typically something like 'webpack.conf.js')"
+                        },
+                        "env": {
+                            "description": "Environment to pass if your config file returns a function",
+                            "oneOf": [{
+                                "type": "object"
+                            }, {
+                                "type": "string"
+                            }]
+                        },
+                        "arguments": {
+                            "type": "object",
+                            "description": "Arguments to pass if your config file returns a function. E.g. {mode: 'production'} if you want to use webpack 4's 'mode' feature"
+                        }
+                    }
                 }
             }
         }
