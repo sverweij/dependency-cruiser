@@ -243,9 +243,10 @@ export interface ICruiseOptions {
  *
  * @param pFileDirArray An array of (names of) files, directories and/ or glob patterns to start the cruise with
  * @param pOptions Options that influence the way the dependencies are cruised - and how they are returned.
+ * @param pResolveOptions Options that influence how dependency references are resolved to disk. See https://webpack.js.org/configuration/resolve/ for the details.
  * @returns any
  */
-export function cruise(pFileDirArray: string[], pOptions?: ICruiseOptions ): any;
+export function cruise(pFileDirArray: string[], pOptions?: ICruiseOptions, pResolveOptions?: any ): any;
 
 /**
  * Returns an array of supported transpilers and for each of the transpilers
