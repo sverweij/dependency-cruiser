@@ -83,4 +83,20 @@ describe("getResolveConfig", () => {
             bustTheCache: true
         });
     });
+
+    it("returns the resolve section of the result of the first element of the array if that's a function", () => {
+        expect(
+            getResolveConfig(
+                path.join(
+                    __dirname,
+                    "./fixtures/webpackconfig/aliassy/webpack.functionarrayexport.config.js"
+                )
+            )
+        ).to.deep.equal({
+            alias: {
+                configSpullenAlias: "./configspullen"
+            },
+            bustTheCache: true
+        });
+    });
 });

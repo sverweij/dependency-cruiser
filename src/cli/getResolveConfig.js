@@ -6,7 +6,7 @@ function pryConfigFromTheConfig(pWebpackConfigModule, pEnvironment, pArguments){
     }
 
     if (Array.isArray(pWebpackConfigModule)){
-        lRetval = pWebpackConfigModule[0];
+        lRetval = pryConfigFromTheConfig(pWebpackConfigModule[0], pEnvironment, pArguments);
     }
 
     return lRetval;
