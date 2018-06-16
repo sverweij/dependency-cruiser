@@ -355,7 +355,7 @@ Useful things to know:
 
 If you're a webpack user and you have a `resolve` key in your webpack
 config you probably already know what happens with this. If not (or if
-you're curious; see the [webpack resolve](https://webpack.js.org/configuration/resolve/)
+you're curious) see the [webpack resolve](https://webpack.js.org/configuration/resolve/)
 documentation for details.
 
 ### arguments
