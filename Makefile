@@ -44,6 +44,7 @@ src/report/%.template.js: src/report/%.template.hbs
 	echo "appveyor.yml" >> $@
 	echo "CODE_OF_CONDUCT.md" >> $@
 	echo "doc/**" >> $@
+	echo src/**/*.hbs >> $@
 	echo "docs/**" >> $@
 	echo "Makefile" >> $@
 	echo "test/**" >> $@
