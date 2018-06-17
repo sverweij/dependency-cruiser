@@ -14,7 +14,7 @@
                     "followable": true,
                     "couldNotResolve": false,
                     "dependencyTypes": [
-                        "undetermined"
+                        "aliased"
                     ],
                     "module": "configSpullenAlias",
                     "moduleSystem": "cjs",
@@ -27,7 +27,7 @@
                     "followable": false,
                     "couldNotResolve": false,
                     "dependencyTypes": [
-                        "undetermined"
+                        "aliased"
                     ],
                     "module": "configSpullenAlias/someconfig.json",
                     "moduleSystem": "cjs",
@@ -44,7 +44,7 @@
             "couldNotResolve": false,
             "matchesDoNotFollow": false,
             "dependencyTypes": [
-                "undetermined"
+                "aliased"
             ],
             "dependencies": [],
             "valid": true

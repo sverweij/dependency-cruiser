@@ -68,8 +68,7 @@ describe("resolve/index", () => {
             coreModule: false,
             couldNotResolve: false,
             dependencyTypes: [
-                // probably better 'local' or even 'aliased' - ok for now
-                "undetermined"
+                "aliased"
             ],
             followable: true,
             resolved: 'i-got-aliased-to-hoepla/hoi/index.js'

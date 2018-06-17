@@ -13,7 +13,7 @@ const CACHE_DURATION = 4000;
 
 let gResolver = null;
 
-function determineResolveOptions(pResolveOptions){
+function compileResolveOptions(pResolveOptions){
     let DEFAULT_RESOLVE_OPTIONS = {
         // we can later on make symlinks listen to the preserveSymlinks option
         // and chuck some code to manually do this in index.js
@@ -50,7 +50,7 @@ function determineResolveOptions(pResolveOptions){
 
 function initResolver(pResolveOptions) {
     if (!gResolver || pResolveOptions.bustTheCache) {
-        gResolver = enhancedResolve.ResolverFactory.createResolver(determineResolveOptions(pResolveOptions));
+        gResolver = enhancedResolve.ResolverFactory.createResolver(compileResolveOptions(pResolveOptions));
     }
 }
 
@@ -107,7 +107,8 @@ module.exports = (pModuleName, pBaseDir, pFileDir, pResolveOptions) => {
                 lRetval,
                 pModuleName,
                 readPackageDeps(pFileDir),
-                pFileDir
+                pFileDir,
+                pResolveOptions
             )
         }
     );
