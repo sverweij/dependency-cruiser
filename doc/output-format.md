@@ -16,7 +16,7 @@ module):
 
 ```json
 {
-    "dependencies": [
+    "modules": [
         {
             "source": "commander/index.js",
             "dependencies": [
