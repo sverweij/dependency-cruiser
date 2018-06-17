@@ -80,7 +80,7 @@ describe("ruleSetReader", () => {
     it("accepts a 'dependencyTypes' with value 'aliased'", () => {
         shouldBeOK("./test/validate/fixtures/rules.no-aliased-dependency-types.json");
     });
-    
+
 
     it("accepts some command line options in a 'options' object", () => {
         shouldBeOK("./test/validate/fixtures/rules.options-section.json");
