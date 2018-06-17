@@ -35,6 +35,7 @@ package-lock.json
 appveyor.yml
 CODE_OF_CONDUCT.md
 doc/**
+src/**/*.hbs
 docs/**
 Makefile
 test/**
