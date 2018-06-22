@@ -1,7 +1,7 @@
 "use strict";
 
 const fs       = require('fs');
-const path     = require('path');
+const _set     = require('lodash').set;
 const defaults = require('./defaults.json');
 
 function getOptionValue(pDefault) {
@@ -13,11 +13,14 @@ function getOptionValue(pDefault) {
         }
         return lRetval;
     };
-
 }
 
 function trim(pString) {
     return pString.trim();
+}
+
+function determineWebpackConfigFileName(pPassedWebpackConfigFileName) {
+    return getOptionValue(defaults.WEBPACK_CONFIG)(pPassedWebpackConfigFileName);
 }
 
 /**
@@ -45,17 +48,19 @@ module.exports = (pOptions) => {
         pOptions.ruleSet   = JSON.parse(fs.readFileSync(pOptions.rulesFile, 'utf8'));
     }
 
+    if (pOptions.hasOwnProperty("webpackConfig")){
+        _set(
+            pOptions,
+            "ruleSet.options.webpackConfig.fileName",
+            determineWebpackConfigFileName(pOptions.webpackConfig)
+        );
+        Reflect.deleteProperty(pOptions, "webpackConfig");
+    }
+
     pOptions.validate = pOptions.hasOwnProperty("validate");
 
     return pOptions;
 };
-
-function determineWebpackConfigFileName(pPassedWebpackConfigFileName) {
-    return path.join(
-        process.cwd(),
-        getOptionValue(defaults.WEBPACK_CONFIG)(pPassedWebpackConfigFileName)
-    );
-}
 
 module.exports.determineRulesFileName = getOptionValue(defaults.RULES_FILE_NAME);
 module.exports.determineWebpackConfigFileName = determineWebpackConfigFileName;

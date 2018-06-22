@@ -65,7 +65,7 @@ function createRulesFile(pOptions) {
 function extractResolveOptions(pOptions) {
     return getResolveConfig(
         normalizeOptions.determineWebpackConfigFileName(
-            pOptions.webpackConfig || _get(pOptions, 'ruleSet.options.webpackConfig.fileName', defaults.webpackConfig)
+            _get(pOptions, 'ruleSet.options.webpackConfig.fileName', defaults.webpackConfig)
         ),
         _get(pOptions, 'ruleSet.options.webpackConfig.env', null),
         _get(pOptions, 'ruleSet.options.webpackConfig.arguments', null)

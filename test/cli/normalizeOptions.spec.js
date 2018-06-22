@@ -1,5 +1,4 @@
 "use strict";
-const path             = require('path');
 const expect           = require('chai').expect;
 const normalizeOptions = require('../../src/cli/normalizeOptions');
 
@@ -61,15 +60,15 @@ describe("normalizeOptions", () => {
 });
 
 describe("normalizeOptions.determineWebpackConfigFileName", () => {
-    it("returns webpack.config.js in the current working directory when passed nothing", () => {
+    it("returns webpack.config.js when passed nothing", () => {
         expect(
             normalizeOptions.determineWebpackConfigFileName()
-        ).to.equal(path.join(process.cwd(), 'webpack.config.js'));
+        ).to.equal('webpack.config.js');
     });
 
-    it("returns the passed config in the current working directory when passed nothing", () => {
+    it("returns the passed config when passed", () => {
         expect(
             normalizeOptions.determineWebpackConfigFileName('config/production.webpack.config.js')
-        ).to.equal(path.join(process.cwd(), 'config/production.webpack.config.js'));
+        ).to.equal('config/production.webpack.config.js');
     });
 });

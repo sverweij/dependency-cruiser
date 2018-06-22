@@ -1,3 +1,5 @@
+const path = require('path');
+
 function pryConfigFromTheConfig(pWebpackConfigModule, pEnvironment, pArguments){
     let lRetval = pWebpackConfigModule;
 
@@ -12,12 +14,19 @@ function pryConfigFromTheConfig(pWebpackConfigModule, pEnvironment, pArguments){
     return lRetval;
 }
 
+function makeAbsolute (pFilename) {
+    if (path.isAbsolute(pFilename)) {
+        return pFilename;
+    }
+    return path.join(process.cwd(), pFilename);
+}
+
 module.exports = (pWebpackConfigFilename, pEnvironment, pArguments) => {
     let lRetval = {};
 
     try {
         /* eslint global-require:0, security/detect-non-literal-require:0, import/no-dynamic-require:0 */
-        const lWebpackConfigModule = require(pWebpackConfigFilename);
+        const lWebpackConfigModule = require(makeAbsolute(pWebpackConfigFilename));
         const lWebpackConfig = pryConfigFromTheConfig(lWebpackConfigModule, pEnvironment, pArguments);
 
         if (lWebpackConfig.resolve){
