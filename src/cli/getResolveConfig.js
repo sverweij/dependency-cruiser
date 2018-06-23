@@ -15,10 +15,13 @@ function pryConfigFromTheConfig(pWebpackConfigModule, pEnvironment, pArguments){
 }
 
 function makeAbsolute (pFilename) {
-    if (path.isAbsolute(pFilename)) {
-        return pFilename;
+    let lRetval = pFilename;
+
+    if (!path.isAbsolute(pFilename)) {
+        lRetval = path.join(process.cwd(), pFilename);
     }
-    return path.join(process.cwd(), pFilename);
+    return lRetval;
+
 }
 
 module.exports = (pWebpackConfigFilename, pEnvironment, pArguments) => {
