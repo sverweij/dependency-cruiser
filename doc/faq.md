@@ -28,10 +28,24 @@ This has a few advantages over bundling the transpilers as dependencies:
 - Dependency-cruiser will use the version of the transpiler you are using
   in your project (which might not be the most recent one for valid reasons).
 
-## Does this work with webpack (specifically alias'es)?
-Yes. You can even feed dependency-cruiser a webpack configuration and it
+## Does this work with webpack configs (e.g. `alias` and `module`)?
+Yes. You can feed dependency-cruiser a webpack configuration and it
 will take the `resolve` section in there into account when cruising
 your dependencies. This includes any `alias` you might have in there.
+
+Currently dependency-cruiser supports a reasonable subset of webpack
+config file formats:
+- nodejs parsable javascript only
+- webpack 4 compatilbe and up (although earlier ones _might_ work 
+  there's no guarantee)
+- exporting either:
+  - an object literal
+  - a function (webpack 4 style, taking up to two parameters)
+  - an array of the above (where dependency-cruiser takes the
+    first element in the array)
+
+Support for other formats (promise exports, typescript, fancier
+ecmascript) might come later.
 
 ## (typescript) some dependencies I'd expect don't show up. What gives?
 ### TL;DR
