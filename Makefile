@@ -401,12 +401,16 @@ src/cli/index.js: \
 	src/cli/formatMetaInfo.js \
 	src/cli/getResolveConfig.js \
 	src/cli/initRules.js \
+	src/cli/io.js \
 	src/cli/normalizeOptions.js \
 	src/cli/validateFileExistence.js \
 	src/main/index.js
 
 src/cli/initRules.js: \
 	src/cli/rules.starter.json
+
+src/cli/io.js: \
+	src/cli/defaults.json
 
 src/cli/normalizeOptions.js: \
 	src/cli/defaults.json
