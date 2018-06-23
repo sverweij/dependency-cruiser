@@ -159,6 +159,25 @@ describe("determine dependencyTypes", () => {
         ).to.deep.equal(["npm-no-pkg"]);
     });
 
+    it("classifies aliased modules as aliased", () => {
+        expect(
+            determine(
+                {
+                    couldNotResolve: false,
+                    resolved: "src/wappie.js"
+                },
+                "@wappie",
+                {},
+                null,
+                {
+                    alias: {
+                        "@": "src"
+                    }
+                }
+            )
+        ).to.deep.equal(["aliased"]);
+    });
+
     it("has a fallback for weirdistan situations", () => {
         expect(
             determine(

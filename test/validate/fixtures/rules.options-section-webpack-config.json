@@ -1,0 +1,9 @@
+{
+    "options": {
+        "doNotFollow": "^node_modules",
+        "moduleSystems": ["es6", "cjs"],
+        "webpackConfig": {
+            "env": "prod"
+        }
+    }
+}

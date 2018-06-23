@@ -1,0 +1,10 @@
+{
+    "forbidden": [
+        {
+            "name": "no-aliased-dependencies",
+            "severity": "warn",
+            "from": {},
+            "to": { "dependencyTypes": ["aliased"] }
+        }
+    ]
+}

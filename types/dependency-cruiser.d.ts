@@ -36,9 +36,10 @@ export type OutputType = "json" | "html" | "dot" | "csv" | "err";
 
 export type SeverityType = "error" | "warn" | "info";
 
-export type DependencyType = "local"     | "npm"         | "npm-dev"      | "npm-optional"
-                            | "npm-peer" | "npm-bundled" | "npm-no-pkg"   | "npm-unknown"
-                            | "core"     | "unknown"     | "undetermined" | "deprecated";
+export type DependencyType = "aliased"       | "core"        | "deprecated"  | "local"
+                            | "npm"          | "npm-bundled" | "npm-dev"     | "npm-no-pkg"
+                            | "npm-optional" | "npm-peer"    | "npm-unknown" | "undetermined"
+                            | "unknown";
 
 export interface IFromRestriction {
     /**
@@ -214,7 +215,7 @@ export interface ICruiseOptions {
     tsPreCompilationDeps?: boolean;
     /**
      * if true leave symlinks untouched, otherwise use the realpath.
-     * Defaults to `false` (which is also nodejs's default behavior 
+     * Defaults to `false` (which is also nodejs's default behavior
      * since version 6)
      */
     preserveSymlinks?: boolean;
@@ -243,9 +244,11 @@ export interface ICruiseOptions {
  *
  * @param pFileDirArray An array of (names of) files, directories and/ or glob patterns to start the cruise with
  * @param pOptions Options that influence the way the dependencies are cruised - and how they are returned.
+ * @param pResolveOptions Options that influence how dependency references are resolved to disk.
+ *                        See https://webpack.js.org/configuration/resolve/ for the details.
  * @returns any
  */
-export function cruise(pFileDirArray: string[], pOptions?: ICruiseOptions ): any;
+export function cruise(pFileDirArray: string[], pOptions?: ICruiseOptions, pResolveOptions?: any ): any;
 
 /**
  * Returns an array of supported transpilers and for each of the transpilers

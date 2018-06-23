@@ -54,7 +54,20 @@ function determineNodeModuleDependencyTypes(pModuleName, pPackageDeps, pBaseDir)
     return lRetval;
 }
 
-module.exports = (pDependency, pModuleName, pPackageDeps, pBaseDir) => {
+function isNodeModule(pDependency) {
+    return pDependency.resolved.includes("node_modules");
+}
+
+function isLocal(pModuleName) {
+    return pModuleName.startsWith(".");
+}
+
+function isAliased(pModuleName, pAliasObject) {
+    return Object.keys(pAliasObject || {}).some(pAliasLHS => pModuleName.startsWith(pAliasLHS));
+}
+
+/* eslint max-params:0, complexity:0 */
+function determineDependencyTypes (pDependency, pModuleName, pPackageDeps, pBaseDir, pResolveOptions) {
     let lRetval = ["undetermined"];
 
     if (pDependency.couldNotResolve) {
@@ -66,13 +79,17 @@ module.exports = (pDependency, pModuleName, pPackageDeps, pBaseDir) => {
         // attribute in favor of this one and determining it here will make
         // live easier in the future
         lRetval = ["core"];
-    } else if (pModuleName.startsWith(".")) {
+    } else if (isLocal(pModuleName)) {
         lRetval = ["local"];
-    } else if (pDependency.resolved.includes("node_modules")) {
+    } else if (isNodeModule(pDependency)) {
         lRetval = determineNodeModuleDependencyTypes(pModuleName, pPackageDeps, pBaseDir);
+    } else if (isAliased(pModuleName, (pResolveOptions || {}).alias)){
+        lRetval = ["aliased"];
     }
 
     return lRetval;
-};
+}
+
+module.exports = determineDependencyTypes;
 
 /* eslint security/detect-object-injection: 0*/

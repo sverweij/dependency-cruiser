@@ -388,6 +388,9 @@ src/main/ruleSet/validate.js: \
 	src/main/options/validate.js \
 	src/main/ruleSet/jsonschema.json
 
+test/cli/getResolveConfig.spec.js: \
+	src/cli/getResolveConfig.js
+
 test/cli/index.spec.js: \
 	src/cli/index.js \
 	test/cli/deleteDammit.utl.js \
@@ -396,13 +399,18 @@ test/cli/index.spec.js: \
 src/cli/index.js: \
 	src/cli/defaults.json \
 	src/cli/formatMetaInfo.js \
+	src/cli/getResolveConfig.js \
 	src/cli/initRules.js \
+	src/cli/io.js \
 	src/cli/normalizeOptions.js \
 	src/cli/validateFileExistence.js \
 	src/main/index.js
 
 src/cli/initRules.js: \
 	src/cli/rules.starter.json
+
+src/cli/io.js: \
+	src/cli/defaults.json
 
 src/cli/normalizeOptions.js: \
 	src/cli/defaults.json
@@ -456,6 +464,9 @@ test/extract/index.spec.js: \
 
 test/extract/resolve/determineDependencyTypes.spec.js: \
 	src/extract/resolve/determineDependencyTypes.js
+
+test/extract/resolve/index.spec.js: \
+	src/extract/resolve/index.js
 
 test/extract/resolve/localNpmHelpers.spec.js: \
 	src/extract/resolve/localNpmHelpers.js

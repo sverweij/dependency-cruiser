@@ -213,18 +213,19 @@
         "DependencyType": {
             "type": "string",
             "enum": [
+                "aliased",
+                "core",
+                "deprecated",
                 "local",
                 "npm",
+                "npm-bundled",
                 "npm-dev",
+                "npm-no-pkg",
                 "npm-optional",
                 "npm-peer",
-                "npm-bundled",
-                "npm-no-pkg",
                 "npm-unknown",
-                "core",
-                "unknown",
                 "undetermined",
-                "deprecated"
+                "unknown"
             ]
         },
         "OptionsType": {
@@ -265,6 +266,29 @@
                 },
                 "preserveSymlinks": {
                     "type": "boolean"
+                },
+                "webpackConfig": {
+                    "type": "object",
+                    "additionalProperties": false,
+                    "description": "The webpack configuration options used for the cruise",
+                    "properties": {
+                        "fileName": {
+                            "type": "string",
+                            "description": "The name of the webpack configuration file used"
+                        },
+                        "env": {
+                            "description": "The 'env' parameters passed",
+                            "oneOf": [{
+                                "type": "object"
+                            }, {
+                                "type": "string"
+                            }]
+                        },
+                        "arguments": {
+                            "type": "object",
+                            "description": "The arguments used"
+                        }
+                    }
                 }
             }
         }

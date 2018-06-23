@@ -46,13 +46,13 @@ function extractDependencies(pOptions, pFileName) {
     return lDependencies;
 }
 
-function addResolutionAttributes(pOptions, pFileName) {
+function addResolutionAttributes(pOptions, pFileName, pResolveOptions) {
     return pDependency => {
         const lResolved = resolve(
             pDependency,
             pOptions.baseDir,
             path.join(pOptions.baseDir, path.dirname(pFileName)),
-            pOptions.preserveSymlinks
+            pResolveOptions
         );
         const lMatchesDoNotFollow = Boolean(pOptions.doNotFollow)
             ? RegExp(pOptions.doNotFollow, "g").test(lResolved.resolved)
@@ -93,9 +93,10 @@ function addResolutionAttributes(pOptions, pFileName) {
  *                                                with a pattern of modules to exclude
  *                                                (e.g. "(node_modules)"). Default: none
  *                            - preserveSymlink - don't resolve symlinks.
+ * @param {object} pResolveOptions an object with webpack 'enhanced-resolve' options
  * @return {array}           an array of dependency objects (see above)
  */
-module.exports = (pFileName, pOptions) => {
+module.exports = (pFileName, pOptions, pResolveOptions) => {
     try {
         let lOptions = Object.assign(
             {
@@ -106,11 +107,16 @@ module.exports = (pFileName, pOptions) => {
             },
             pOptions
         );
+        const lResolveOptions = Object.assign(
+            {},
+            pResolveOptions,
+            {symlinks: lOptions.preserveSymlinks}
+        );
 
         return _(extractDependencies(lOptions, pFileName))
             .uniqBy(pDependency => `${pDependency.moduleName} ${pDependency.moduleSystem}`)
             .sortBy(pDependency => `${pDependency.moduleName} ${pDependency.moduleSystem}`)
-            .map(addResolutionAttributes(lOptions, pFileName))
+            .map(addResolutionAttributes(lOptions, pFileName, lResolveOptions))
             .filter(pDep => ignore(pDep.resolved, lOptions.exclude))
             .value();
     } catch (e) {

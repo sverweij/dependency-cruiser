@@ -73,6 +73,15 @@ describe("ruleSetReader", () => {
         shouldBeOK("./test/validate/fixtures/rules.empty-options-section.json");
     });
 
+    it("accepts a 'webpackConfig' config", () => {
+        shouldBeOK("./test/validate/fixtures/rules.options-section-webpack-config.json");
+    });
+
+    it("accepts a 'dependencyTypes' with value 'aliased'", () => {
+        shouldBeOK("./test/validate/fixtures/rules.no-aliased-dependency-types.json");
+    });
+
+
     it("accepts some command line options in a 'options' object", () => {
         shouldBeOK("./test/validate/fixtures/rules.options-section.json");
     });

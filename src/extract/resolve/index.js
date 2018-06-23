@@ -8,14 +8,14 @@ const resolveCommonJS  = require('./resolve-commonJS');
 
 const isRelativeModuleName = pString => pString.startsWith(".");
 
-function resolveModule(pDependency, pBaseDir, pFileDir) {
+function resolveModule(pDependency, pBaseDir, pFileDir, pResolveOptions) {
     let lRetval = null;
 
     if (
         isRelativeModuleName(pDependency.moduleName) ||
         ["cjs", "es6"].indexOf(pDependency.moduleSystem) > -1
     ) {
-        lRetval = resolveCommonJS(pDependency.moduleName, pBaseDir, pFileDir);
+        lRetval = resolveCommonJS(pDependency.moduleName, pBaseDir, pFileDir, pResolveOptions);
     } else {
         lRetval = resolveAMD(pDependency.moduleName, pBaseDir, pFileDir);
     }
@@ -31,7 +31,16 @@ function resolveModule(pDependency, pBaseDir, pFileDir) {
  *                              for resolved files.
  * @param  {string} pFileDir    the directory of the file the dependency was
  *                              detected in
- * @param  {boolean} pPreserveSymlinks whether to use `fs.realpath` to resolve symlinks
+ * @param  {object} pResolveOptions an object with options to pass to the resolver
+ *                              see https://github.com/webpack/enhanced-resolve#resolver-options
+ *                              for a complete list
+ *                              (also supports the attribute `bustTheCache`. Without
+ *                              that attribute (or with the value `false`) the resolver
+ *                              is initialized only once per session. If the attribute
+ *                              equals `true` the resolver is initialized on each call
+ *                              (which is slower, but might is useful in some situations,
+ *                              like in executing unit tests that verify if different
+ *                              passed options yield different results))
  * @return {object}             an object with as attributes:
  *                              - resolved: a string representing the pDependency
  *                                  resolved to a file on disk (or the pDependency
@@ -47,10 +56,12 @@ function resolveModule(pDependency, pBaseDir, pFileDir) {
  *                              - dependencyTypes: an array of dependencyTypes
  *
  */
-module.exports = (pDependency, pBaseDir, pFileDir, pPreserveSymlinks) => {
-    let lResolvedModule = resolveModule(pDependency, pBaseDir, pFileDir);
+module.exports = (pDependency, pBaseDir, pFileDir, pResolveOptions) => {
+    pResolveOptions = pResolveOptions || {};
 
-    if (!pPreserveSymlinks && !lResolvedModule.coreModule && !lResolvedModule.couldNotResolve) {
+    let lResolvedModule = resolveModule(pDependency, pBaseDir, pFileDir, pResolveOptions);
+
+    if (!(pResolveOptions.symlinks) && !lResolvedModule.coreModule && !lResolvedModule.couldNotResolve) {
         try {
             lResolvedModule.resolved =
                 pathToPosix(path.relative(pBaseDir, fs.realpathSync(path.resolve(pBaseDir, lResolvedModule.resolved))));

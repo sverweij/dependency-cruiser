@@ -1,19 +1,26 @@
 "use strict";
 
 const fs       = require('fs');
+const _set     = require('lodash').set;
 const defaults = require('./defaults.json');
 
-function determineRulesFileName(pValidate) {
-    let lRetval = defaults.RULES_FILE_NAME;
+function getOptionValue(pDefault) {
+    return (pValue) => {
+        let lRetval = pDefault;
 
-    if (typeof pValidate === 'string'){
-        lRetval = pValidate;
-    }
-    return lRetval;
+        if (typeof pValue === 'string'){
+            lRetval = pValue;
+        }
+        return lRetval;
+    };
 }
 
 function trim(pString) {
     return pString.trim();
+}
+
+function determineWebpackConfigFileName(pPassedWebpackConfigFileName) {
+    return getOptionValue(defaults.WEBPACK_CONFIG)(pPassedWebpackConfigFileName);
 }
 
 /**
@@ -37,8 +44,17 @@ module.exports = (pOptions) => {
     }
 
     if (pOptions.hasOwnProperty("validate")){
-        pOptions.rulesFile = determineRulesFileName(pOptions.validate);
+        pOptions.rulesFile = module.exports.determineRulesFileName(pOptions.validate);
         pOptions.ruleSet   = JSON.parse(fs.readFileSync(pOptions.rulesFile, 'utf8'));
+    }
+
+    if (pOptions.hasOwnProperty("webpackConfig")){
+        _set(
+            pOptions,
+            "ruleSet.options.webpackConfig.fileName",
+            determineWebpackConfigFileName(pOptions.webpackConfig)
+        );
+        Reflect.deleteProperty(pOptions, "webpackConfig");
     }
 
     pOptions.validate = pOptions.hasOwnProperty("validate");
@@ -46,4 +62,5 @@ module.exports = (pOptions) => {
     return pOptions;
 };
 
-module.exports.determineRulesFileName = determineRulesFileName;
+module.exports.determineRulesFileName = getOptionValue(defaults.RULES_FILE_NAME);
+module.exports.determineWebpackConfigFileName = determineWebpackConfigFileName;
