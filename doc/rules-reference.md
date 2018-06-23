@@ -181,10 +181,10 @@ matched and use it in the 'to' part. E.g. when you want to prevent stuff in
 the same folder to be matched.
 
 To achieve this you'll need to do two things:
-- In the `to` of your rule:    
+- In the `from` of your rule:    
   Make sure the part of the `path` you want to be matched is between brackets.
   Like so: `"^src/([^/]+)/.+"`
-- In the `from` part of your rule:    
+- In the `to` part of your rule:    
   You can reference the part matched between brackets by using `$1` in `path`
   and `pathNot` rules. Like so: `"pathNot": "^src/$1/.+".`
 - It is possible to use more than one group per rule as well. E.g. this
@@ -192,8 +192,8 @@ To achieve this you'll need to do two things:
   for the folder directly under src, and one for the extension. The first is
   available in the `to` part of your rule with `$1`, the second with `$2`.
 - The special variable `$0` contains the _whole_ matched string. I haven't
-  seen a practical use for it in the context of depedendency-cruiser, but I'll
-  glad to be surprised.
+  seen a practical use for it in the context of depedendency-cruiser, but 
+  I'll be glad to be surprised.
 
 #### 'group matching' - an example: matching peer folders
 
@@ -289,7 +289,8 @@ up at itself.
 ```
 
 ### `license` and `licenseNot`
-You can flag dependent modules that have licenses that are e.g. not compatible with your own license or with the policies within your company with
+You can flag dependent modules that have licenses that are e.g. not
+compatible with your own license or with the policies within your company with
 `license` and `licenseNot`. Both take a regular expression that matches
 against the license string that goes with the dependency.
 
@@ -384,6 +385,7 @@ This is a list of dependency types dependency-cruiser currently detects.
  npm-unknown     | it's an npm module - but there is no (parseable/ valid) package.json in your package |
  deprecated      | it's an npm module, but the version you're using or the module itself is officially deprecated                                | "some-deprecated-package"
  core            | it's a core module                                | "fs"
+ aliased         | it's a module that's linked through an aliased (webpack)| "~/hello.ts"
  unknown         | it's unknown what kind of dependency type this is - probably because the module could not be resolved in the first place | "loodash"
  undetermined    | the dependency fell through all detection holes. This could happen with amd dependencies - which have a whole jurasic park of ways to define where to resolve modules to | "veloci!./raptor"
 
