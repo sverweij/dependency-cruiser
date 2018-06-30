@@ -46,8 +46,9 @@ depcruise --init
 ```
 
 This will create a `.dependency-cruiser.json` with some rules that make sense
-in most projects (detecting **circular dependencies**, dependencies **missing**
-in package.json, production code relying on dev- or optionalDependencies, ...).
+in most projects (detecting **circular dependencies**, dependencies
+**missing** in package.json, **orphans**, production code relying on
+dev- or optionalDependencies, ...).
 
 Start adding your rules by tweaking that file.
 
@@ -105,6 +106,7 @@ You've come to the right place :-) :
     - [Real world show cases](./doc/real-world-samples.md)
     - [TypeScript, CoffeeScript and LiveScript support](./doc/faq.md)
     - [Support for .jsx, .tsx, .csx/ .cjsx and .vue](./doc/faq.md#im-developing-in-react-and-use-jsx-how-do-i-get-that-to-work)
+    - [Webpack alias/ modules support](./doc/faq.md#does-this-work-with-webpack-configs-eg-alias-and-modules)
 
 ## License
 [MIT](LICENSE)
