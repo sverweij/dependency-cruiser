@@ -1,21 +1,18 @@
 # FAQ
 
-## How do I enable TypeScript, CoffeeScript or LiveScript in dependency-cruiser?
-You don't. They work out of the box.
+## Features
+### How do I enable TypeScript, CoffeeScript or LiveScript in dependency-cruiser?
+You don't. They work out of the box, as long as it has the
+necessary compilers at its disposal.
 
-## I'm developing in React and use jsx. How do I get that to work?
-jsx works out of the box
+### I'm developing in React and use jsx/ tsx/ csx/ cjsx. How do I get that to work?
+jsx and its typescript and coffeescript variants work
+out of the box as well.
 
-## I use React, but with TypeScript and tsx. That works out of the box too?
-Yep.
+### Does this work with vue as well?
+Yes.
 
-## I use the CoffeeScript variant of jsx (csx, cjsx)
-Works out of the box.
-
-## Let me guess, vue works out of the box as well?
-You guessed correctly.
-
-## Does this mean dependency-cruiser installs transpilers for all these languages?
+### Does this mean dependency-cruiser installs transpilers for all these languages?
 No.
 
 For LiveScript, TypeScript and CoffeeScript dependency-cruiser will use the
@@ -28,15 +25,20 @@ This has a few advantages over bundling the transpilers as dependencies:
 - Dependency-cruiser will use the version of the transpiler you are using
   in your project (which might not be the most recent one for valid reasons).
 
-## Does this work with webpack configs (e.g. `alias` and `module`)?
-Yes. You can feed dependency-cruiser a webpack configuration and it
-will take the `resolve` section in there into account when cruising
+### Does this work with webpack configs (e.g. `alias` and `modules`)?
+Yes.
+
+You can feed dependency-cruiser a webpack configuration 
+([`--webpack-config`](./doc/cli.md#--webpack-config-use-the-resolution-options-of-a-webpack-configuration)
+on the cli or `webpackConfig` .dependency-cruiser.json's 
+[`options`](./doc/rules.md#options) section) and it
+will take the `resolve` part in there into account when cruising
 your dependencies. This includes any `alias` you might have in there.
 
 Currently dependency-cruiser supports a reasonable subset of webpack
 config file formats:
 - nodejs parsable javascript only
-- webpack 4 compatilbe and up (although earlier ones _might_ work 
+- webpack 4 compatible and up (although earlier ones _might_ work 
   there's no guarantee)
 - exporting either:
   - an object literal
@@ -47,12 +49,35 @@ config file formats:
 Support for other formats (promise exports, typescript, fancier
 ecmascript) might come later.
 
-## (typescript) some dependencies I'd expect don't show up. What gives?
-### TL;DR
+### Does it work with my monorepo?
+
+Absolutely. For every cruised module the closest `package.json` file is used to determine
+if a package was declared as dependency.
+
+## Troubleshooting
+### Typescript, coffeescript or livescript dependencies don't show up. How can I fix that?
+
+Dependency-cruiser doesn't come shipped with the necessary transpilers to
+handle these languages. In stead it uses what is already available in the 
+environment (see above). You can check if the transpilers 
+are available to dependency-cruiser by running `depcruise --info`.
+
+When it turns out they aren't yet:
+
+- if you're runnning dependency-cruiser as a global install, install
+  the necessary transpilers globally as well.
+- if you're running dependency-cruiser as a local (development-)
+  dependency, install the necessary transpilers there.
+
+For some types of typescript dependencies you need to flip a switch,
+which is what the next question is about:
+
+### Some Typescript dependencies I'd expect don't show up. What gives?
+#### TL;DR
 Use `--ts-pre-compilation-deps` or put `"tsPreCompilationDeps" : true` in
 the `options` section of your `.dependency-cruiser.json`
 
-### Longer
+#### Longer
 By default dependency-cruiser only takes post-compilation dependencies into
 account; dependencies between typescript modules that exist after compilation
 to javascript. Two types of dependencies do not fall into this category
@@ -67,7 +92,8 @@ the `options` section.
 See [--ts-pre-compilation-deps-typescript-only](./cli.md#--ts-pre-compilation-deps-typescript-only)
 for details and examples.
 
-## How do I add support for my favorite alt-js language?
+## Expanding dependency-cruiser
+### How do I add support for my favorite alt-js language?
 Ask me nicely.
 
 Dependency-cruiser already supports TypeScript, CoffeeScript and LiveScript. If
@@ -92,7 +118,7 @@ support for, let me know.
     language.
 - In `test/extract/transpile` add unit tests for `yourLanguageWrap`
 
-## How do I add a new output format?
+### How do I add a new output format?
 
 Like so:
 - In `src/report`:
@@ -108,8 +134,3 @@ Like so:
     - add it to the documentation of the -T option
 - In `test/report` add unit tests that prove your reporter does what it
     intends.
-
-## Does it work with my monorepo?
-
-Absolutely. For every cruised module the closest `package.json` file is used to determine
-if a package was declared as dependency.
