@@ -120,6 +120,7 @@ You've come to the right place :-) :
 ## Build status
 [![build status](https://gitlab.com/sverweij/dependency-cruiser/badges/master/build.svg)](https://gitlab.com/sverweij/dependency-cruiser/builds)
 [![Build status](https://ci.appveyor.com/api/projects/status/u18tbeujml0knk08/branch/master?svg=true)](https://ci.appveyor.com/project/sverweij/dependency-cruiser/branch/master)
+[![Build Status](https://travis-ci.org/sverweij/dependency-cruiser.svg?branch=master)](https://travis-ci.org/sverweij/dependency-cruiser)
 [![coverage](https://gitlab.com/sverweij/dependency-cruiser/badges/master/coverage.svg)](https://gitlab.com/sverweij/dependency-cruiser/builds)
 [![Maintainability](https://api.codeclimate.com/v1/badges/93035ef5fba33901d479/maintainability)](https://codeclimate.com/github/sverweij/dependency-cruiser/maintainability)
 [![Test Coverage](https://api.codeclimate.com/v1/badges/93035ef5fba33901d479/test_coverage)](https://codeclimate.com/github/sverweij/dependency-cruiser/test_coverage)
