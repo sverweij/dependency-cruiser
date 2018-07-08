@@ -21,7 +21,7 @@ test_script:
   - npm run depcruise
   - npm run lint
   - npm run lint:types
-  - npm run test:long
+  - npm test
 
 # Don't actually build.
 build: off
