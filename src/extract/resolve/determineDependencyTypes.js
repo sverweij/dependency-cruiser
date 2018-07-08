@@ -58,6 +58,23 @@ function isNodeModule(pDependency) {
     return pDependency.resolved.includes("node_modules");
 }
 
+function determineModuleDependencyTypes(pDependency, pModuleName, pPackageDeps, pBaseDir) {
+    let lRetval = [];
+
+    if (isNodeModule(pDependency)) {
+        lRetval = determineNodeModuleDependencyTypes(pModuleName, pPackageDeps, pBaseDir);
+    } else {
+        lRetval = ["localmodule"];
+    }
+    return lRetval;
+}
+
+function isModule(pDependency, pModules = ["node_modules"]) {
+    return pModules.some(
+        pModule => pDependency.resolved.includes(pModule)
+    );
+}
+
 function isLocal(pModuleName) {
     return pModuleName.startsWith(".");
 }
@@ -66,9 +83,22 @@ function isAliased(pModuleName, pAliasObject) {
     return Object.keys(pAliasObject || {}).some(pAliasLHS => pModuleName.startsWith(pAliasLHS));
 }
 
+
 /* eslint max-params:0, complexity:0 */
+/**
+ *
+ * @param {any} pDependency the dependency object with all information found hitherto
+ * @param {string} pModuleName the module name as found in the source
+ * @param {any} pPackageDeps a package.json, in object format
+ * @param {string} pBaseDir the directory relative to which to resolve (only used for npm deps here)
+ * @param {any} pResolveOptions an enhanced resolve 'resolve' key
+ *
+ * @return {string[]} an array of dependency types for the dependency
+ */
 function determineDependencyTypes (pDependency, pModuleName, pPackageDeps, pBaseDir, pResolveOptions) {
     let lRetval = ["undetermined"];
+
+    pResolveOptions = pResolveOptions || {};
 
     if (pDependency.couldNotResolve) {
         lRetval = ["unknown"];
@@ -81,9 +111,14 @@ function determineDependencyTypes (pDependency, pModuleName, pPackageDeps, pBase
         lRetval = ["core"];
     } else if (isLocal(pModuleName)) {
         lRetval = ["local"];
-    } else if (isNodeModule(pDependency)) {
-        lRetval = determineNodeModuleDependencyTypes(pModuleName, pPackageDeps, pBaseDir);
-    } else if (isAliased(pModuleName, (pResolveOptions || {}).alias)){
+    } else if (isModule(pDependency, pResolveOptions.modules)) {
+        lRetval = determineModuleDependencyTypes(
+            pDependency,
+            pModuleName,
+            pPackageDeps,
+            pBaseDir
+        );
+    } else if (isAliased(pModuleName, pResolveOptions.alias)){
         lRetval = ["aliased"];
     }
 

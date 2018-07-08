@@ -37,9 +37,9 @@ export type OutputType = "json" | "html" | "dot" | "csv" | "err";
 export type SeverityType = "error" | "warn" | "info";
 
 export type DependencyType = "aliased"       | "core"        | "deprecated"  | "local"
-                            | "npm"          | "npm-bundled" | "npm-dev"     | "npm-no-pkg"
-                            | "npm-optional" | "npm-peer"    | "npm-unknown" | "undetermined"
-                            | "unknown";
+                            | "localmodule"  | "npm"         | "npm-bundled" | "npm-dev"
+                            | "npm-no-pkg"   | "npm-optional" | "npm-peer"   | "npm-unknown"
+                            | "undetermined" | "unknown";
 
 export interface IFromRestriction {
     /**

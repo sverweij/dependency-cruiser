@@ -195,4 +195,38 @@ describe("determine dependencyTypes", () => {
         ).to.deep.equal(["undetermined"]);
     });
 
+    it("classifies local, non-node_modules modules as local (and module)", () => {
+        expect(
+            determine(
+                {
+                    couldNotResolve: false,
+                    resolved: "src/bla/somethinglocal.ts"
+                },
+                "bla/somethinglocal",
+                {},
+                "whatever",
+                {
+                    modules: ["node_modules", "src"]
+                }
+            )
+        ).to.deep.equal(["localmodule"]);
+    });
+
+    it("classifies local, non-node_modules non-modules as undetermined", () => {
+        expect(
+            determine(
+                {
+                    couldNotResolve: false,
+                    resolved: "test/bla/localthing.spec.js"
+                },
+                "test/bla/localthing.spec",
+                {},
+                "whatever",
+                {
+                    modules: ["node_modules", "src"]
+                }
+            )
+        ).to.deep.equal(["undetermined"]);
+    });
+
 });
