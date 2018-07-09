@@ -1,5 +1,6 @@
 "use strict";
 
+const path      = require("path");
 const expect    = require("chai").expect;
 const determine = require("../../../src/extract/resolve/determineDependencyTypes");
 
@@ -212,7 +213,7 @@ describe("determine dependencyTypes", () => {
         ).to.deep.equal(["localmodule"]);
     });
 
-    it("classifies local, non-node_modules modules with an absolute path as localmodule", () => {
+    it("classifies local, non-node_modules modules with an absolute path as localmodule (posix & win32 paths)", () => {
         expect(
             determine(
                 {
@@ -221,13 +222,14 @@ describe("determine dependencyTypes", () => {
                 },
                 "bla/somethinglocal",
                 {},
-                "/home/socrates/hemlock/",
+                path.resolve(__dirname, "socrates", "hemlock"),
                 {
-                    modules: ["node_modules", "/home/socrates/hemlock/src"]
+                    modules: ["node_modules", path.resolve(__dirname, "socrates", "hemlock", "src")]
                 }
             )
         ).to.deep.equal(["localmodule"]);
     });
+
 
     it("classifies local, non-node_modules non-modules as undetermined", () => {
         expect(
