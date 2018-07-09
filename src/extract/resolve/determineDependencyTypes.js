@@ -1,5 +1,6 @@
 "use strict";
 
+const path            = require("path");
 const resolve         = require("resolve");
 const localNpmHelpers = require("./localNpmHelpers");
 
@@ -69,9 +70,22 @@ function determineModuleDependencyTypes(pDependency, pModuleName, pPackageDeps, 
     return lRetval;
 }
 
-function isModule(pDependency, pModules = ["node_modules"]) {
+function isModule(pDependency, pModules = ["node_modules"], pBaseDir = ".") {
     return pModules.some(
-        pModule => pDependency.resolved.includes(pModule)
+        // pModules can contain relative paths, but also absolute ones.
+        // WebPack treats these differently:
+        // - absolute paths only match that exact path
+        // - relative paths get a node lookup treatment so "turtle" matches
+        //   "turtle", "../turtle", "../../turtle", "../../../turtle" (.. =>
+        // turtles all the way down)
+        // hence we'll have to test for them in different fashion as well.
+        // reference: https://webpack.js.org/configuration/resolve/#resolve-modules
+        pModule => {
+            if (path.isAbsolute(pModule)){
+                return path.resolve(pBaseDir, pDependency.resolved).startsWith(pModule);
+            }
+            return pDependency.resolved.includes(pModule);
+        }
     );
 }
 
@@ -111,7 +125,7 @@ function determineDependencyTypes (pDependency, pModuleName, pPackageDeps, pBase
         lRetval = ["core"];
     } else if (isLocal(pModuleName)) {
         lRetval = ["local"];
-    } else if (isModule(pDependency, pResolveOptions.modules)) {
+    } else if (isModule(pDependency, pResolveOptions.modules, pBaseDir)) {
         lRetval = determineModuleDependencyTypes(
             pDependency,
             pModuleName,

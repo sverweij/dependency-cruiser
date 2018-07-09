@@ -168,7 +168,7 @@ describe("determine dependencyTypes", () => {
                 },
                 "@wappie",
                 {},
-                null,
+                ".",
                 {
                     alias: {
                         "@": "src"
@@ -195,7 +195,7 @@ describe("determine dependencyTypes", () => {
         ).to.deep.equal(["undetermined"]);
     });
 
-    it("classifies local, non-node_modules modules as local (and module)", () => {
+    it("classifies local, non-node_modules modules as localmodule", () => {
         expect(
             determine(
                 {
@@ -207,6 +207,23 @@ describe("determine dependencyTypes", () => {
                 "whatever",
                 {
                     modules: ["node_modules", "src"]
+                }
+            )
+        ).to.deep.equal(["localmodule"]);
+    });
+
+    it("classifies local, non-node_modules modules with an absolute path as localmodule", () => {
+        expect(
+            determine(
+                {
+                    couldNotResolve: false,
+                    resolved: "src/bla/somethinglocal.ts"
+                },
+                "bla/somethinglocal",
+                {},
+                "/home/socrates/hemlock/",
+                {
+                    modules: ["node_modules", "/home/socrates/hemlock/src"]
                 }
             )
         ).to.deep.equal(["localmodule"]);
