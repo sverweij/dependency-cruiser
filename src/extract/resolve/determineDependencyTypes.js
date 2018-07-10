@@ -40,13 +40,13 @@ function dependencyIsBundled(pModule, pPackageDeps) {
     return lRetval;
 }
 
-function determineNodeModuleDependencyTypes(pModuleName, pPackageDeps, pBaseDir) {
+function determineNodeModuleDependencyTypes(pModuleName, pPackageDeps, pFileDir) {
     let lRetval = determineNpmDependencyTypes(
         localNpmHelpers.getPackageRoot(pModuleName),
         pPackageDeps
     );
 
-    if (localNpmHelpers.dependencyIsDeprecated(pModuleName, pBaseDir)) {
+    if (localNpmHelpers.dependencyIsDeprecated(pModuleName, pFileDir)) {
         lRetval.push("deprecated");
     }
     if (dependencyIsBundled(pModuleName, pPackageDeps)) {
@@ -59,11 +59,11 @@ function isNodeModule(pDependency) {
     return pDependency.resolved.includes("node_modules");
 }
 
-function determineModuleDependencyTypes(pDependency, pModuleName, pPackageDeps, pBaseDir) {
+function determineModuleDependencyTypes(pDependency, pModuleName, pPackageDeps, pFileDir) {
     let lRetval = [];
 
     if (isNodeModule(pDependency)) {
-        lRetval = determineNodeModuleDependencyTypes(pModuleName, pPackageDeps, pBaseDir);
+        lRetval = determineNodeModuleDependencyTypes(pModuleName, pPackageDeps, pFileDir);
     } else {
         lRetval = ["localmodule"];
     }
@@ -104,12 +104,13 @@ function isAliased(pModuleName, pAliasObject) {
  * @param {any} pDependency the dependency object with all information found hitherto
  * @param {string} pModuleName the module name as found in the source
  * @param {any} pPackageDeps a package.json, in object format
- * @param {string} pBaseDir the directory relative to which to resolve (only used for npm deps here)
+ * @param {string} pFileDir the directory relative to which to resolve (only used for npm deps here)
  * @param {any} pResolveOptions an enhanced resolve 'resolve' key
+ * @param {string} pBaseDir the base directory dependency cruise is run on
  *
  * @return {string[]} an array of dependency types for the dependency
  */
-function determineDependencyTypes (pDependency, pModuleName, pPackageDeps, pBaseDir, pResolveOptions) {
+function determineDependencyTypes (pDependency, pModuleName, pPackageDeps, pFileDir, pResolveOptions, pBaseDir) {
     let lRetval = ["undetermined"];
 
     pResolveOptions = pResolveOptions || {};
@@ -130,7 +131,7 @@ function determineDependencyTypes (pDependency, pModuleName, pPackageDeps, pBase
             pDependency,
             pModuleName,
             pPackageDeps,
-            pBaseDir
+            pFileDir
         );
     } else if (isAliased(pModuleName, pResolveOptions.alias)){
         lRetval = ["aliased"];

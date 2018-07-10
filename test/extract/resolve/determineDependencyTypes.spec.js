@@ -222,10 +222,11 @@ describe("determine dependencyTypes", () => {
                 },
                 "bla/somethinglocal",
                 {},
-                path.resolve(__dirname, "socrates", "hemlock"),
+                path.resolve(__dirname, "socrates", "hemlock", "src", "bla"),
                 {
                     modules: ["node_modules", path.resolve(__dirname, "socrates", "hemlock", "src")]
-                }
+                },
+                path.resolve(__dirname, "socrates", "hemlock", "src", "bla")
             )
         ).to.deep.equal(["localmodule"]);
     });
