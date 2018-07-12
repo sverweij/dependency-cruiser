@@ -1,5 +1,6 @@
 "use strict";
 
+const path      = require("path");
 const expect    = require("chai").expect;
 const determine = require("../../../src/extract/resolve/determineDependencyTypes");
 
@@ -168,7 +169,7 @@ describe("determine dependencyTypes", () => {
                 },
                 "@wappie",
                 {},
-                null,
+                ".",
                 {
                     alias: {
                         "@": "src"
@@ -190,6 +191,59 @@ describe("determine dependencyTypes", () => {
                     cerebralDependencies: {
                         "cool-module": "1.2.3"
                     }
+                }
+            )
+        ).to.deep.equal(["undetermined"]);
+    });
+
+    it("classifies local, non-node_modules modules as localmodule", () => {
+        expect(
+            determine(
+                {
+                    couldNotResolve: false,
+                    resolved: "src/bla/somethinglocal.ts"
+                },
+                "bla/somethinglocal",
+                {},
+                "whatever",
+                {
+                    modules: ["node_modules", "src"]
+                }
+            )
+        ).to.deep.equal(["localmodule"]);
+    });
+
+    it("classifies local, non-node_modules modules with an absolute path as localmodule (posix & win32 paths)", () => {
+        expect(
+            determine(
+                {
+                    couldNotResolve: false,
+                    resolved: "src/bla/somethinglocal.ts"
+                },
+                "bla/somethinglocal",
+                {},
+                path.resolve(__dirname, "socrates", "hemlock", "src", "bla"),
+                {
+                    modules: ["node_modules", path.resolve(__dirname, "socrates", "hemlock", "src")]
+                },
+                path.resolve(__dirname, "socrates", "hemlock", "src", "bla")
+            )
+        ).to.deep.equal(["localmodule"]);
+    });
+
+
+    it("classifies local, non-node_modules non-modules as undetermined", () => {
+        expect(
+            determine(
+                {
+                    couldNotResolve: false,
+                    resolved: "test/bla/localthing.spec.js"
+                },
+                "test/bla/localthing.spec",
+                {},
+                "whatever",
+                {
+                    modules: ["node_modules", "src"]
                 }
             )
         ).to.deep.equal(["undetermined"]);

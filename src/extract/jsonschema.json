@@ -217,6 +217,7 @@
                 "core",
                 "deprecated",
                 "local",
+                "localmodule",
                 "npm",
                 "npm-bundled",
                 "npm-dev",

@@ -376,6 +376,7 @@ This is a list of dependency types dependency-cruiser currently detects.
  dependency type | meaning | example
  ---             | ---| ---
  local           | a module in your own ('local') package            | "./klont"
+ localmodule     | a module in your own ('local') package, but which was in the `resolve.modules` attribute of the webpack config you passed| "shared/stuff.ts"
  npm             | it's a module in package.json's `dependencies`    | "lodash"
  npm-dev         | it's a module in package.json's `devDependencies`      | "chai"
  npm-optional    | it's a module in package.json's `optionalDependencies` | "livescript"
