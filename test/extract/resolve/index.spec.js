@@ -74,5 +74,30 @@ describe("resolve/index", () => {
             resolved: 'i-got-aliased-to-hoepla/hoi/index.js'
         });
     });
+
+    it("considers a passed (webpack) modules array", () => {
+        expect(
+            resolve(
+                {
+                    moduleName: 'shared',
+                    moduleSystem: 'es6'
+                },
+                path.join(__dirname, 'fixtures'),
+                path.join(__dirname, 'fixtures', 'resolve'),
+                {
+                    modules: ["node_modules", path.join(__dirname, 'fixtures', 'localmodulesfix', 'localmoduleshere')],
+                    bustTheCache: true
+                }
+            )
+        ).to.deep.equal({
+            coreModule: false,
+            couldNotResolve: false,
+            dependencyTypes: [
+                "localmodule"
+            ],
+            followable: true,
+            resolved: 'localmodulesfix/localmoduleshere/shared/index.js'
+        });
+    });
 });
 
