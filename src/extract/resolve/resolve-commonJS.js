@@ -4,6 +4,7 @@ const path                     = require('path');
 const resolve                  = require('resolve');
 const enhancedResolve          = require('enhanced-resolve');
 const pathToPosix              = require('../../utl/pathToPosix');
+const getExtension             = require('../../utl/getExtension');
 const transpileMeta            = require('../transpile/meta');
 const determineDependencyTypes = require('./determineDependencyTypes');
 const readPackageDeps          = require('./readPackageDeps');
@@ -12,6 +13,8 @@ const resolveHelpers           = require('./resolve-helpers');
 const CACHE_DURATION = 4000;
 
 let gResolver = null;
+let gFollowableExtensions = [];
+let gInitialized = false;
 
 function compileResolveOptions(pResolveOptions){
     let DEFAULT_RESOLVE_OPTIONS = {
@@ -49,15 +52,51 @@ function compileResolveOptions(pResolveOptions){
 }
 
 function initResolver(pResolveOptions) {
-    if (!gResolver || pResolveOptions.bustTheCache) {
-        gResolver = enhancedResolve.ResolverFactory.createResolver(compileResolveOptions(pResolveOptions));
+    return enhancedResolve.ResolverFactory.createResolver(pResolveOptions);
+}
+
+function initFollowableExtensions(pResolveOptions) {
+    let lRetval = new Set(pResolveOptions.extensions);
+
+    // we could include things like pictures, movies, html, xml
+    // etc in KNOWN_UNFOLLOWABLES as well. Typically in
+    // javascript-like sources you don't import non-javascript
+    // stuff without mentioning the extension (`import 'styles.scss`
+    // is more clear than`import 'styles'` as you'd expect that
+    // to resolve to something javascript-like.
+    // Defensively added the stylesheetlanguages here explicitly
+    // nonetheless - they can contain import statements and the
+    // fallback javascript parser will happily parse them, which
+    // will result in false positives.
+    const KNOWN_UNFOLLOWABLES = [
+        ".json",
+        ".css", ".sass", ".scss", ".stylus", ".less"
+    ];
+
+    KNOWN_UNFOLLOWABLES.forEach(pUnfollowable => {
+        lRetval.delete(pUnfollowable);
+    });
+    return lRetval;
+}
+
+function init(pResolveOptions) {
+    if (!gInitialized || pResolveOptions.bustTheCache) {
+        const lResolveOptions = compileResolveOptions(pResolveOptions);
+
+        gResolver = initResolver(lResolveOptions);
+        gFollowableExtensions = initFollowableExtensions(lResolveOptions);
+        gInitialized = true;
     }
+}
+
+function isFollowable(pResolvedFilename) {
+    return gFollowableExtensions.has(getExtension(pResolvedFilename));
 }
 
 function addResolutionAttributes(pBaseDir, pModuleName, pFileDir, pResolveOptions) {
     let lRetval = {};
 
-    initResolver(pResolveOptions);
+    init(pResolveOptions);
 
     if (resolve.isCore(pModuleName)){
         lRetval.coreModule = true;
@@ -75,7 +114,7 @@ function addResolutionAttributes(pBaseDir, pModuleName, pFileDir, pResolveOption
                     )
                 )
             );
-            lRetval.followable = (path.extname(lRetval.resolved) !== ".json");
+            lRetval.followable = isFollowable(lRetval.resolved);
         } catch (e) {
             lRetval.couldNotResolve = true;
         }

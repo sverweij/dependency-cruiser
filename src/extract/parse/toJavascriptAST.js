@@ -1,30 +1,11 @@
 "use strict";
 
 const fs           = require('fs');
-const path         = require('path');
 const acorn        = require('acorn');
 const acorn_loose  = require('acorn/dist/acorn_loose');
 const _memoize     = require('lodash/memoize');
 const transpile    = require('../transpile');
-
-/**
- * Returns the extension of the given file name path.
- *
- * Just using path.extname would be fine for most cases,
- * except for coffeescript, where a markdown extension can
- * mean literate coffeescript.
- *
- * @param {string} pFileName path to the file to be parsed
- * @return {string}          extension
- */
-function getExtension(pFileName) {
-    let lRetval = path.extname(pFileName);
-
-    if (lRetval === ".md") {
-        return pFileName.endsWith(".coffee.md") ? ".coffee.md" : lRetval;
-    }
-    return lRetval;
-}
+const getExtension = require('../../utl/getExtension');
 
 /**
  * Returns the abstract syntax tree of the module identified by the passed

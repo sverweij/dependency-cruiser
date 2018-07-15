@@ -48,6 +48,103 @@ describe("resolve/index", () => {
         });
     });
 
+    it("resolves to the moduleName input (and depType 'unknown') when not resolvable on disk", () => {
+        expect(
+            resolve(
+                {
+                    moduleName: './doesnotexist',
+                    moduleSystem: 'es6'
+                },
+                path.join(__dirname, 'fixtures'),
+                path.join(__dirname, 'fixtures', 'followability'),
+                {
+                    bustTheCache: true
+                }
+            )
+        ).to.deep.equal({
+            coreModule: false,
+            couldNotResolve: true,
+            dependencyTypes: [
+                "unknown"
+            ],
+            followable: false,
+            resolved: './doesnotexist'
+        });
+    });
+
+    it("resolves known non-followables as not followable: json", () => {
+        expect(
+            resolve(
+                {
+                    moduleName: './something.json',
+                    moduleSystem: 'es6'
+                },
+                path.join(__dirname, 'fixtures'),
+                path.join(__dirname, 'fixtures', 'followability'),
+                {bustTheCache:true}
+            )
+        ).to.deep.equal({
+            coreModule: false,
+            couldNotResolve: false,
+            dependencyTypes: [
+                "local"
+            ],
+            followable: false,
+            resolved: 'followability/something.json'
+        });
+    });
+
+
+    it("resolves known non-followables as not followable, even when it's a resolve registered extension: json", () => {
+        expect(
+            resolve(
+                {
+                    moduleName: './something.json',
+                    moduleSystem: 'es6'
+                },
+                path.join(__dirname, 'fixtures'),
+                path.join(__dirname, 'fixtures', 'followability'),
+                {
+                    extensions: [".js", ".json"],
+                    bustTheCache: true
+                }
+            )
+        ).to.deep.equal({
+            coreModule: false,
+            couldNotResolve: false,
+            dependencyTypes: [
+                "local"
+            ],
+            followable: false,
+            resolved: 'followability/something.json'
+        });
+    });
+
+    it("resolves known non-followables as not followable, even when it's a resolve registered extension: sass", () => {
+        expect(
+            resolve(
+                {
+                    moduleName: './something.scss',
+                    moduleSystem: 'es6'
+                },
+                path.join(__dirname, 'fixtures'),
+                path.join(__dirname, 'fixtures', 'followability'),
+                {
+                    extensions: [".js", ".json", ".scss"],
+                    bustTheCache: true
+                }
+            )
+        ).to.deep.equal({
+            coreModule: false,
+            couldNotResolve: false,
+            dependencyTypes: [
+                "local"
+            ],
+            followable: false,
+            resolved: 'followability/something.scss'
+        });
+    });
+
     it("considers passed (webpack) aliases", () => {
         expect(
             resolve(
