@@ -11,7 +11,6 @@ test_async_node_latest:
    - npm run lint
    - npm run lint:types
    - npm run depcruise
-   - npm run nsp
    - npm run test:cover
   except:
    - tags
