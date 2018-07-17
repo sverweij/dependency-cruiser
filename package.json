@@ -8,6 +8,15 @@
     "depcruise": "bin/dependency-cruise"
   },
   "main": "src/main/index.js",
+  "files": [
+    "bin/",
+    "src/**/*.js",
+    "src/**/*.json",
+    "types/*.d.ts",
+    "LICENSE",
+    "package.json",
+    "README.md"
+  ],
   "scripts": {
     "build": "make dev-build",
     "build:clean": "make clean",
