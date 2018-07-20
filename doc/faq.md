@@ -134,3 +134,14 @@ Like so:
     - add it to the documentation of the -T option
 - In `test/report` add unit tests that prove your reporter does what it
     intends.
+
+## Contact
+If you have an issue, suggestion - don't hesitate to create an
+[issue](https://github.com/sverweij/dependency-cruiser/issues/new). 
+
+You're welcome to create a pull request - if it's something more complex it's
+probably wise to first create an issue or hit 
+[@depcruise](https://twitter.com/depcruise) up on twitter.
+
+For things that doesn't fit an issue or pull request you're welcome to 
+contact the [@depcruise](https://twitter.com/depcruise) twitter account as well.
