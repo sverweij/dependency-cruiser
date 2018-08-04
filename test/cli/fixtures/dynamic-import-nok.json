@@ -1,0 +1,53 @@
+{
+    "modules": [
+        {
+            "source": "test/cli/fixtures/typescriptconfig/cli-dynamic-imports/import_dynamically2.ts",
+            "dependencies": [
+                {
+                    "resolved": "✖",
+                    "coreModule": false,
+                    "followable": false,
+                    "couldNotResolve": true,
+                    "dependencyTypes": [
+                        "unknown"
+                    ],
+                    "module": "✖",
+                    "moduleSystem": "es6",
+                    "matchesDoNotFollow": false,
+                    "valid": true
+                }
+            ],
+            "valid": true
+        },
+        {
+            "source": "✖",
+            "followable": false,
+            "coreModule": false,
+            "couldNotResolve": true,
+            "matchesDoNotFollow": false,
+            "dependencyTypes": [
+                "unknown"
+            ],
+            "dependencies": [],
+            "valid": true
+        }
+    ],
+    "summary": {
+        "violations": [],
+        "error": 0,
+        "warn": 0,
+        "info": 0,
+        "totalCruised": 2,
+        "optionsUsed": {
+            "outputTo": "test/cli/output/dynamic-import-nok.json",
+            "moduleSystems": [
+                "amd",
+                "cjs",
+                "es6"
+            ],
+            "outputType": "json",
+            "tsPreCompilationDeps": false,
+            "preserveSymlinks": false
+        }
+    }
+}

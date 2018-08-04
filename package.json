@@ -106,7 +106,8 @@
     "resolve": "1.8.1",
     "safe-regex": "1.1.0",
     "semver": "5.5.0",
-    "semver-try-require": "2.0.1"
+    "semver-try-require": "2.0.1",
+    "strip-json-comments": "2.0.1"
   },
   "nyc": {
     "statements": 99.8,

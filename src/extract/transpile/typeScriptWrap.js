@@ -1,27 +1,37 @@
 "use strict";
 const tryRequire = require("semver-try-require");
+const _get     = require('lodash').get;
 const typescript = tryRequire(
     "typescript",
     require("../../../package.json").supportedTranspilers.typescript
 );
 
+function getCompilerOptions(pTsx, pTSConfig = {}) {
+    let lCompilerOptions = {};
+
+    if (pTsx){
+        lCompilerOptions.jsx = "react";
+    }
+
+    return Object.assign(
+        {"target": "es2015"},
+        lCompilerOptions,
+        _get(pTSConfig, "compilerOptions", {})
+    );
+}
+
 module.exports = (pTsx) => ({
     isAvailable: () => typescript !== false,
 
-    transpile: (pSource) => {
-        let lCompilerOptions = {
-            "target": "es2015"
-        };
-
-        if (pTsx){
-            lCompilerOptions.jsx = "react";
-        }
-
-        return typescript.transpileModule(
-            pSource,
+    transpile: (pSource, pTSConfig) => typescript.transpileModule(
+        pSource,
+        Object.assign(
+            {},
+            pTSConfig,
             {
-                compilerOptions: lCompilerOptions
+                compilerOptions: getCompilerOptions(pTsx, pTSConfig)
             }
-        ).outputText;
-    }
+        )
+
+    ).outputText
 });
