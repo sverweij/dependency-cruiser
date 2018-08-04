@@ -1,6 +1,6 @@
 {
   "name": "dependency-cruiser",
-  "version": "4.3.2",
+  "version": "4.4.0-beta-0",
   "description": "Validate and visualize dependencies. With your rules. JavaScript, TypeScript, CoffeeScript. ES6, CommonJS, AMD.",
   "bin": {
     "dependency-cruiser": "bin/dependency-cruise",
@@ -106,7 +106,8 @@
     "resolve": "1.8.1",
     "safe-regex": "1.1.0",
     "semver": "5.5.0",
-    "semver-try-require": "2.0.1"
+    "semver-try-require": "2.0.1",
+    "strip-json-comments": "2.0.1"
   },
   "nyc": {
     "statements": 99.8,

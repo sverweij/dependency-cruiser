@@ -15,14 +15,6 @@ function getOptionValue(pDefault) {
     };
 }
 
-function trim(pString) {
-    return pString.trim();
-}
-
-function determineWebpackConfigFileName(pPassedWebpackConfigFileName) {
-    return getOptionValue(defaults.WEBPACK_CONFIG)(pPassedWebpackConfigFileName);
-}
-
 /**
  * returns the pOptions, so that the returned value contains a
  * valid value for each possible option
@@ -40,7 +32,7 @@ module.exports = (pOptions) => {
     );
 
     if (pOptions.hasOwnProperty("moduleSystems")) {
-        pOptions.moduleSystems = pOptions.moduleSystems.split(",").map(trim);
+        pOptions.moduleSystems = pOptions.moduleSystems.split(",").map(pString => pString.trim());
     }
 
     if (pOptions.hasOwnProperty("validate")){
@@ -52,7 +44,7 @@ module.exports = (pOptions) => {
         _set(
             pOptions,
             "ruleSet.options.webpackConfig.fileName",
-            determineWebpackConfigFileName(pOptions.webpackConfig)
+            getOptionValue(defaults.WEBPACK_CONFIG)(pOptions.webpackConfig)
         );
         Reflect.deleteProperty(pOptions, "webpackConfig");
     }
@@ -63,4 +55,5 @@ module.exports = (pOptions) => {
 };
 
 module.exports.determineRulesFileName = getOptionValue(defaults.RULES_FILE_NAME);
-module.exports.determineWebpackConfigFileName = determineWebpackConfigFileName;
+module.exports.determineWebpackConfigFileName = getOptionValue(defaults.WEBPACK_CONFIG);
+module.exports.determineTSConfigFileName = getOptionValue(defaults.TYPESCRIPT_CONFIG);

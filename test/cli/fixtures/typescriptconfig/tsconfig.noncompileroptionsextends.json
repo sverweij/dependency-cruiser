@@ -1,0 +1,9 @@
+{
+    "extends": "./tsconfig.noncompileroptionsbase.json",
+    "exclude": [
+        "only in the extends" // only in the extends
+    ],
+    "include": [
+        "override from extends here" // overridden from base
+    ]
+}

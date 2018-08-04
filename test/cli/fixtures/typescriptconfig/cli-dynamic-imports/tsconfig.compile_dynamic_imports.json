@@ -1,0 +1,10 @@
+{
+    "compilerOptions": {
+        "target": "ES5",
+        "lib": ["ES2015"]
+    },
+    "files": [
+        "./import_dynamically.ts"
+    ]
+}
+

@@ -28,6 +28,8 @@ Options:
   --ts-pre-compilation-deps     detect dependencies that only exist before
                                 typescript-to-javascript compilation
                                 (off by default)
+  --ts-config [file]            use a typescript configuration ('project')
+                                (default: tsconfig.json)
    --webpack-config [file]      use a webpack configuration
                                 (default: webpack.config.js)
   --init                        write a .dependency-cruiser.json with basic
@@ -316,6 +318,44 @@ output will look like this:
 ... and with `--ts-pre-compilation-deps` like this:
 
 <img alt="'no import use' with typescript pre-compilation dependencies" src="real-world-samples/no-use-with-pre-compilation-deps.png">
+
+### `--ts-config`: use a typescript configuration file ('project')
+If dependency-cruiser encounters typescript, it compiles it to understand what it
+is looking at. If you have compilerOptions in your `tsconfig.json` you think
+it should take into account, you can use this option to make it do that.
+Dependency-cruiser understands the `extends` configuration in tsconfig's so
+if you have a hierarchy of configs, you just need to pass the relevant one.
+
+```sh
+### use the `tsconfig.json` in the current directory into account when looking
+### at typescript sources:
+depcruise --ts-config --validate src
+
+### use `tsconfig.prod.json for the same purpose:
+depcruise --ts-config tsconfig.prod.json --validate src
+```
+> Note: at this moment dependency-cruiser does take the `paths` and `rootDirs` 
+> compiler options into account, but not to correctly resolve them to files,
+> resulting in _could not resolve_ errors if you configured that to be flagged
+> in your .dependency-cruiser.json.
+> - We'll resolve this is in a future feature
+> - As a temporary workaround you can use a webpack-config with a `resolve` 
+>   section and pass that in dependency-cruiser's `--webpack-config`.
+>   Contents of wepback configs that should work:
+>   - manually add `alias` and `modules` in that section that correspond with
+>     your tsconfig `paths` and `rootDirs` or ...
+>   - [use `awesome-typescript-loader`'s `TsConfigPathsPlugin`](https://github.com/s-panferov/awesome-typescript-loader#advanced-path-resolution-in-typescript-20) in that section e.g.
+>    ```javascript
+>      const { TsConfigPathsPlugin } = require('awesome-typescript-loader');
+>
+>      module.exports = {
+>         resolve: {
+>            plugins: [
+>                new TsConfigPathsPlugin({ configFileName: './tsconfig.json'})
+>            ]
+>         }
+>      }
+>    ```
 
 ### `--preserve-symlinks`
 Whether to leave symlinks as is or resolve them to their realpath. This option defaults

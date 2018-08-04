@@ -1,0 +1,8 @@
+{
+    "compilerOptions": {
+        "lib": [
+            "es2016.array.include", // extended by extends - so remains
+            "dom"// extended by extends - so remains
+        ]
+    }
+}

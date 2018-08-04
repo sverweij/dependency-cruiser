@@ -10,10 +10,10 @@ const summarize              = require('./summarize');
 const addValidations         = require('./addValidations');
 
 /* eslint max-params:0 */
-function extractRecursive (pFileName, pOptions, pVisited, pDepth, pResolveOptions) {
+function extractRecursive (pFileName, pOptions, pVisited, pDepth, pResolveOptions, pTSConfig) {
     pVisited.add(pFileName);
     const lDependencies = (pOptions.maxDepth <= 0 || pDepth < pOptions.maxDepth)
-        ? extract(pFileName, pOptions, pResolveOptions)
+        ? extract(pFileName, pOptions, pResolveOptions, pTSConfig)
         : [];
 
     return lDependencies
@@ -22,7 +22,7 @@ function extractRecursive (pFileName, pOptions, pVisited, pDepth, pResolveOption
             (pAll, pDep) => {
                 if (!pVisited.has(pDep.resolved)){
                     return pAll.concat(
-                        extractRecursive(pDep.resolved, pOptions, pVisited, pDepth + 1, pResolveOptions)
+                        extractRecursive(pDep.resolved, pOptions, pVisited, pDepth + 1, pResolveOptions, pTSConfig)
                     );
                 }
                 return pAll;
@@ -33,7 +33,7 @@ function extractRecursive (pFileName, pOptions, pVisited, pDepth, pResolveOption
         );
 }
 
-function extractFileDirArray(pFileDirArray, pOptions, pResolveOptions) {
+function extractFileDirArray(pFileDirArray, pOptions, pResolveOptions, pTSConfig) {
     let lVisited = new Set();
 
     return _.spread(_.concat)(
@@ -42,7 +42,7 @@ function extractFileDirArray(pFileDirArray, pOptions, pResolveOptions) {
                 if (!lVisited.has(pFilename)){
                     lVisited.add(pFilename);
                     return pDependencies.concat(
-                        extractRecursive(pFilename, pOptions, lVisited, 0, pResolveOptions)
+                        extractRecursive(pFilename, pOptions, lVisited, 0, pResolveOptions, pTSConfig)
                     );
                 }
                 return pDependencies;
@@ -108,7 +108,7 @@ function makeOptionsPresentable(pOptions) {
         );
 }
 
-module.exports = (pFileDirArray, pOptions, pCallback, pResolveOptions) => {
+module.exports = (pFileDirArray, pOptions, pCallback, pResolveOptions, pTSConfig) => {
     const lCallback = pCallback ? pCallback : (pInput => pInput);
     const lOptions = Object.assign(
         {
@@ -118,7 +118,7 @@ module.exports = (pFileDirArray, pOptions, pCallback, pResolveOptions) => {
     );
 
     let lModules = _(
-        extractFileDirArray(pFileDirArray, lOptions, pResolveOptions).reduce(complete, [])
+        extractFileDirArray(pFileDirArray, lOptions, pResolveOptions, pTSConfig).reduce(complete, [])
     ).uniqBy(pDependency => pDependency.source)
         .value();
 

@@ -15,12 +15,14 @@ const getExtension = require('../../utl/getExtension');
  * If parsing fails we fall back to acorn's 'loose' parser
  *
  * @param {string} pFileName path to the file to be parsed
+ * @param {any} pTSConfig    (optional) (flattened) typescript config object
  * @returns {object}         the abstract syntax tree
  */
-function getAST(pFileName) {
+function getAST(pFileName, pTSConfig) {
     const lJavaScriptSource = transpile(
         getExtension(pFileName),
-        fs.readFileSync(pFileName, 'utf8')
+        fs.readFileSync(pFileName, 'utf8'),
+        pTSConfig
     );
 
     try {
@@ -39,5 +41,5 @@ module.exports = {
      * @param {string} pFileName - the name of the file to compile
      * @return {object} - a (typescript) AST
      */
-    getASTCached: _memoize(getAST)
+    getASTCached: _memoize(getAST, (pFileName, pTSConfig) => `${pFileName}|${pTSConfig}`)
 };

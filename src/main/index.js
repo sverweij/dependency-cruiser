@@ -51,9 +51,12 @@ const TYPE2REPORTER      = {
  *
  * @param  {array}  pFileDirArray An array of (names of) files and directories to
  *                             start the cruise with
- * @param  {object} pOptions   see above
- * @param  {object} pResolveOptions an object with options enhanced-resolve)
- * @return {object} An object with ...
+ * @param  {any} pOptions   see above
+ * @param  {any} pResolveOptions an object with enhanced-resolve resolve options
+ * @param  {any} pTSConfig       an object with tsconfig ('typescript project') options
+ *                               ('flattened' so there's no need for file access on any
+ *                               'extends' option in there)
+ * @return {any} An object with ...
  * {
  *  dependencies : when outputType is defined: a string containing the dependencies
  *            in the format specified in outputType
@@ -71,7 +74,7 @@ const TYPE2REPORTER      = {
  *                info  : the number of informational messages
  *              }
  */
-function cruise (pFileDirArray, pOptions, pResolveOptions) {
+function cruise (pFileDirArray, pOptions, pResolveOptions, pTSConfig) {
     pOptions = normalizeOptions(
         validateOptions(pOptions)
     );
@@ -90,7 +93,8 @@ function cruise (pFileDirArray, pOptions, pResolveOptions) {
         pFileDirArray,
         pOptions,
         TYPE2REPORTER[pOptions.outputType],
-        pResolveOptions
+        pResolveOptions,
+        pTSConfig
     );
 }
 
