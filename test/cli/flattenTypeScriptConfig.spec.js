@@ -104,6 +104,22 @@ describe("flatten typescript config - 'extend' config scenarios", () => {
         });
     });
 
+    it("returns an object with properties from base, extends compilerOptions.lib array", () => {
+        expect(
+            flattenTypeScriptConfig(
+                path.join(__dirname, "./fixtures/typescriptconfig/tsconfig.compileroptionsextendslib.json")
+            )
+        ).to.deep.equal({
+            "compilerOptions": {
+                lib: [
+                    "dom.iterable",
+                    "es2016.array.include",
+                    "dom"
+                ]
+            }
+        });
+    });
+
     // only compiler options in base
     // only compiler options in extends
 });

@@ -1,7 +1,23 @@
 const fs = require('fs');
 const path = require('path');
-const _merge = require('lodash').merge;
+const _mergeWith = require('lodash/mergeWith');
+const _isArray = require('lodash/isArray');
 const stripJSONComments = require('strip-json-comments');
+
+function butConcatArrays(pObjectValue, pSrcValue, pKey) {
+    if (['files', 'include', 'exclude'].includes(pKey)){
+        return pSrcValue;
+    }
+    if (_isArray(pObjectValue)) {
+        return pSrcValue.concat(pObjectValue);
+    }
+    // leave all other types of object alone, so mergeWith does the
+    // default thing on it - which is fine. returning
+    // undefined (~= not returning anything) is the
+    // way lodash documentation describes to do that, hence the
+    // conscious ignore of the consistent-return rule here
+    /* eslint consistent-return: 0 */
+}
 
 function flattenTypeScriptConfig(pTSConfigFileName, pReadConfigSet = new Set()) {
     pTSConfigFileName = path.resolve(pTSConfigFileName);
@@ -12,12 +28,19 @@ function flattenTypeScriptConfig(pTSConfigFileName, pReadConfigSet = new Set()) 
         let lConfig = JSON.parse(stripJSONComments(fs.readFileSync(pTSConfigFileName, 'utf8')));
 
         if (lConfig.extends) {
-            lConfig = _merge(
+            lConfig = _mergeWith(
                 flattenTypeScriptConfig(
                     path.join(path.dirname(pTSConfigFileName), lConfig.extends),
                     pReadConfigSet
                 ),
-                lConfig
+                lConfig,
+                // Arrays from parents shouldn't get half-overwritten, but
+                // actually slapped on the back of what's already there
+                // we override the default _.merge behavior for those.
+                // for `files`, `include` and `exclude` the child always
+                // overwrites the parent, according to the
+                // [typescript handbook](https://www.typescriptlang.org/docs/handbook/tsconfig-json.html)
+                butConcatArrays
             );
             Reflect.deleteProperty(lConfig, "extends");
         }

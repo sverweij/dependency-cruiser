@@ -1,6 +1,7 @@
 {
     "compileOnSave": true, // base only
     "include": [
-        "from base, but overridden by extends" // overridden by extends
+        "from base, but overridden by extends", // overridden by extends
+        "from base, but overridden by extends as well" // overridden by extends
     ]
 }

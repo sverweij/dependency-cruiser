@@ -153,5 +153,3 @@ module.exports = (pModuleName, pBaseDir, pFileDir, pResolveOptions) => {
         }
     );
 };
-
-
