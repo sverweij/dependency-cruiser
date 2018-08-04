@@ -36,10 +36,10 @@ program
     .option("--ts-pre-compilation-deps", `detect dependencies that only exist before
                               typescript-to-javascript compilation
                               (off by default)`)
-    .option("--webpack-config [file]", `use a webpack configuration
-                              (default: webpack.config.js)`)
     .option("--ts-config [file]", `use a typescript configuration ('project')
                               (default: tsconfig.json)`)
+    .option("--webpack-config [file]", `use a webpack configuration
+                              (default: webpack.config.js)`)
     .option("--init", `write a .dependency-cruiser.json with basic
                               validations to the current folder.`)
     .arguments("<files-or-directories>")

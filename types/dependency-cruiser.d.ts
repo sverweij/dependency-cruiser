@@ -242,13 +242,25 @@ export interface ICruiseOptions {
  * the specified directories in the pFileDirArray and returns the result
  * in an object.
  *
- * @param pFileDirArray An array of (names of) files, directories and/ or glob patterns to start the cruise with
- * @param pOptions Options that influence the way the dependencies are cruised - and how they are returned.
+ * @param pFileDirArray   An array of (names of) files, directories and/ or glob patterns
+ *                        to start the cruise with
+ * @param pOptions        Options that influence the way the dependencies are cruised - and 
+ *                        how they are returned.
  * @param pResolveOptions Options that influence how dependency references are resolved to disk.
  *                        See https://webpack.js.org/configuration/resolve/ for the details.
+ * @param pTSConfig       An object with with a typescript config object. Note that the
+ *                        API will not take any 'extends' keys there into account, so
+ *                        before calling make sure to flatten them out if you want them
+ *                        used (the dependency-cruiser cli does this 
+ *                        [here](../src/cli/flattenTypeScriptConfig.js))
  * @returns any
  */
-export function cruise(pFileDirArray: string[], pOptions?: ICruiseOptions, pResolveOptions?: any ): any;
+export function cruise(
+    pFileDirArray: string[],
+    pOptions?: ICruiseOptions,
+    pResolveOptions?: any,
+    pTSConfig?: any
+): any;
 
 /**
  * Returns an array of supported transpilers and for each of the transpilers

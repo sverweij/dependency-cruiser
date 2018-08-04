@@ -92,6 +92,24 @@ the `options` section.
 See [--ts-pre-compilation-deps-typescript-only](./cli.md#--ts-pre-compilation-deps-typescript-only)
 for details and examples.
 
+### Typescript dynamic imports show up as "x" . What's up there?
+By default dependency-cruiser uses _ES2015_ as compilation target to figure out
+what your typescript sources look like. That does not play nice with dynamic
+imports. Chances are you already have a `tsconfig.json` with a configuration
+that makes your typescript compiler happy about compiling dynamic imports.
+If so: feed it to dependency-cruiser with the `--ts-config` command line 
+parameter and dependency-cruiser will attempt to resolve the dynamic imports -
+which will work as long as you're not importing variables (or expressions).
+
+### Does dependency-cruiser handle variable or expression requires and imports?
+If you have imports with variables (`require(someVariable)`,
+`import(someOtherVariable).then((pMod) => {...})`) or expressions 
+(`require(funkyBoolean ? 'lodash' : 'underscore'))`
+in your code dependency-cruiser won't be able to determinewhat dependencies
+they're about. For now dependency-cruiser focusses on doing static analysis
+only and doing that well. Dynamic/ runtime analysis is fun, but also a whole
+different ball game.
+
 ## Expanding dependency-cruiser
 ### How do I add support for my favorite alt-js language?
 Ask me nicely.
@@ -143,5 +161,5 @@ You're welcome to create a pull request - if it's something more complex it's
 probably wise to first create an issue or hit 
 [@depcruise](https://twitter.com/depcruise) up on twitter.
 
-For things that doesn't fit an issue or pull request you're welcome to 
+For things that don't fit an issue or pull request you're welcome to 
 contact the [@depcruise](https://twitter.com/depcruise) twitter account as well.
