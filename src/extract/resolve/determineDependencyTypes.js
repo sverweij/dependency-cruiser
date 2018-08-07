@@ -97,6 +97,9 @@ function isAliased(pModuleName, pAliasObject) {
     return Object.keys(pAliasObject || {}).some(pAliasLHS => pModuleName.startsWith(pAliasLHS));
 }
 
+function isLikelyTSAliased(pModule, pResolved, pTsConfig) {
+    return pTsConfig && !isLocal(pModule) && pResolved && !pResolved.includes("node_modules");
+}
 
 /* eslint max-params:0, complexity:0 */
 /**
@@ -133,7 +136,9 @@ function determineDependencyTypes (pDependency, pModuleName, pPackageDeps, pFile
             pPackageDeps,
             pFileDir
         );
-    } else if (isAliased(pModuleName, pResolveOptions.alias)){
+    } else if (
+        isAliased(pModuleName, pResolveOptions.alias) ||
+        isLikelyTSAliased(pModuleName, pDependency.resolved, pResolveOptions.tsConfig)){
         lRetval = ["aliased"];
     }
 

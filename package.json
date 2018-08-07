@@ -96,6 +96,7 @@
   "dependencies": {
     "acorn": "5.7.1",
     "ajv": "6.5.2",
+    "awesome-typescript-loader": "5.2.0",
     "chalk": "2.4.1",
     "commander": "2.17.0",
     "enhanced-resolve": "4.1.0",

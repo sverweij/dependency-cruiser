@@ -1,0 +1,68 @@
+{
+    "modules": [
+        {
+            "source": "test/cli/fixtures/typescriptconfig/cli-config-with-path/src/index.ts",
+            "dependencies": [
+                {
+                    "resolved": "test/cli/fixtures/typescriptconfig/cli-config-with-path/src/shared/index.ts",
+                    "coreModule": false,
+                    "followable": true,
+                    "couldNotResolve": false,
+                    "dependencyTypes": [
+                        "aliased"
+                    ],
+                    "module": "shared",
+                    "moduleSystem": "cjs",
+                    "matchesDoNotFollow": false,
+                    "valid": true
+                }
+            ],
+            "valid": true
+        },
+        {
+            "source": "test/cli/fixtures/typescriptconfig/cli-config-with-path/src/shared/index.ts",
+            "dependencies": [],
+            "valid": true
+        },
+        {
+            "source": "test/cli/fixtures/typescriptconfig/cli-config-with-path/src/something/else.ts",
+            "dependencies": [
+                {
+                    "resolved": "test/cli/fixtures/typescriptconfig/cli-config-with-path/src/shared/index.ts",
+                    "coreModule": false,
+                    "followable": true,
+                    "couldNotResolve": false,
+                    "dependencyTypes": [
+                        "aliased"
+                    ],
+                    "module": "shared",
+                    "moduleSystem": "cjs",
+                    "matchesDoNotFollow": false,
+                    "valid": true
+                }
+            ],
+            "valid": true
+        }
+    ],
+    "summary": {
+        "violations": [],
+        "error": 0,
+        "warn": 0,
+        "info": 0,
+        "totalCruised": 3,
+        "optionsUsed": {
+            "outputTo": "test/cli/output/typescript-path-resolution.json",
+            "moduleSystems": [
+                "amd",
+                "cjs",
+                "es6"
+            ],
+            "outputType": "json",
+            "tsPreCompilationDeps": false,
+            "preserveSymlinks": false,
+            "webpackConfig": {
+                "fileName": "test/cli/fixtures/typescriptconfig/cli-config-with-path/webpack.config.js"
+            }
+        }
+    }
+}

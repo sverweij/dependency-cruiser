@@ -113,7 +113,8 @@ module.exports = (pFileName, pOptions, pResolveOptions, pTSConfig) => {
         const lResolveOptions = Object.assign(
             {},
             pResolveOptions,
-            {symlinks: lOptions.preserveSymlinks}
+            {symlinks: lOptions.preserveSymlinks},
+            {tsConfig: lOptions.tsConfig}
         );
 
         return _(extractDependencies(lOptions, pFileName, pTSConfig))

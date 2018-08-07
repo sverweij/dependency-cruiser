@@ -196,5 +196,54 @@ describe("resolve/index", () => {
             resolved: 'localmodulesfix/localmoduleshere/shared/index.js'
         });
     });
+
+    it("considers a webpack config", () => {
+        expect(
+            resolve(
+                {
+                    moduleName: 'shared',
+                    moduleSystem: 'es6'
+                },
+                path.join(__dirname, 'fixtures'),
+                path.join(__dirname, 'fixtures', 'ts-config-with-path'),
+                {
+                    tsConfig: path.join(__dirname, 'fixtures', 'ts-config-with-path', 'tsconfig.json'),
+                    bustTheCache: true
+                }
+            )
+        ).to.deep.equal({
+            coreModule: false,
+            couldNotResolve: false,
+            dependencyTypes: [
+                "aliased"
+            ],
+            followable: true,
+            resolved: 'ts-config-with-path/src/shared/index.ts'
+        });
+    });
+
+    it("considers gives a different result for the same input without a webpack config", () => {
+        expect(
+            resolve(
+                {
+                    moduleName: 'shared',
+                    moduleSystem: 'es6'
+                },
+                path.join(__dirname, 'fixtures'),
+                path.join(__dirname, 'fixtures', 'ts-config-with-path'),
+                {
+                    bustTheCache: true
+                }
+            )
+        ).to.deep.equal({
+            coreModule: false,
+            couldNotResolve: true,
+            dependencyTypes: [
+                "unknown"
+            ],
+            followable: false,
+            resolved: 'shared'
+        });
+    });
 });
 
