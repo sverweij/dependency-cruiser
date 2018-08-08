@@ -2,7 +2,7 @@
 # dependency-cruiser command line interface
 
 ### Contents
-1. [`--help`/ no parameters](#)
+1. [`--help`/ no parameters](#--help--no-parameters)
 2. [`--output-type`: specify the output format](#--output-type-specify-the-output-format)
 3. [`--do-not-follow`: don't cruise modules adhering to this pattern any further](#--do-not-follow-dont-cruise-modules-adhering-to-this-pattern-any-further)
 4. [`--exclude`: exclude modules from being cruised](#--exclude-exclude-modules-from-being-cruised)
