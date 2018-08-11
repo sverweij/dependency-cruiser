@@ -1,41 +1,27 @@
 
 # dependency-cruiser command line interface
 
-Running with no parameters gets you help:
-```
-Usage: dependency-cruise [options] <files-or-directories>
+### Contents
+1. [`--help`/ no parameters](#--help--no-parameters)
+2. [`--output-type`: specify the output format](#--output-type-specify-the-output-format)
+3. [`--do-not-follow`: don't cruise modules adhering to this pattern any further](#--do-not-follow-dont-cruise-modules-adhering-to-this-pattern-any-further)
+4. [`--exclude`: exclude modules from being cruised](#--exclude-exclude-modules-from-being-cruised)
+5. [`--max-depth`](#--max-depth)
+6. [`--validate`](#--validate)
+7. [`--init`](#--init)
+8. [`--prefix` prefixing links](#--prefix-prefixing-links)
+9. [`--info` showing what alt-js are supported](#--info-showing-what-alt-js-are-supported)
+10. [`--module-systems`](#--module-systems)
+11. [`--ts-pre-compilation-deps` (typescript only)](#--ts-pre-compilation-deps-typescript-only)
+12. [`--ts-config`: use a typescript configuration file ('project')](#--ts-config-use-a-typescript-configuration-file-project)
+13. [`--preserve-symlinks`](#--preserve-symlinks)
+14. [`--webpack-config`: use (the resolution options of) a webpack configuration`](#--webpack-config-use-the-resolution-options-of-a-webpack-configuration)
+15. [arguments](#arguments)
 
 
-Options:
+### `--help` / no parameters
+Running with no parameters gets you help.
 
-  -V, --version                 output the version number
-  -i, --info                    shows what languages and extensions
-                                dependency-cruiser supports
-  -v, --validate [file]         validate with rules in [file]
-                                (default: .dependency-cruiser.json)
-  -f, --output-to <file>        file to write output to; - for stdout
-                                (default: -)
-  -X, --do-not-follow <regex>   a regular expression for modules to include,
-                                but not follow further
-  -x, --exclude <regex>         a regular expression for excluding modules
-  -d, --max-depth <n>           the maximum depth to cruise; 0 <= n <= 99
-                                (default: 0, which means 'infinite depth')
-  -M, --module-systems <items>  list of module systems (default: amd,cjs,es6)
-  -T, --output-type <type>      output type - html|dot|err|json
-                                (default: err)
-  -P, --prefix <prefix>         prefix to use for links in the svg reporter
-  --preserve-symlinks           leave symlinks unchanged (off by default)
-  --ts-pre-compilation-deps     detect dependencies that only exist before
-                                typescript-to-javascript compilation
-                                (off by default)
-  --ts-config [file]            use a typescript configuration ('project')
-                                (default: tsconfig.json)
-   --webpack-config [file]      use a webpack configuration
-                                (default: webpack.config.js)
-  --init                        write a .dependency-cruiser.json with basic
-                                validations to the current folder.
-  -h, --help                    output usage information
-```
 
 ### `--output-type`: specify the output format
 
@@ -139,7 +125,7 @@ dependency-cruise -x node_modules --validate my.rules.json
 
 > _Tip_: usually you don't need to specify the rules file. However if run 
 > `depcruise --validate src`, _src_ will be interpreted as the rules file.
-> which is probably is not whant you want. To prevent this place `--`
+> Which is probably is not what you want. To prevent this, place `--`
 > after the last option, like so:
 > ```
 > dependency-cruise --validate -- src
@@ -321,8 +307,13 @@ output will look like this:
 
 ### `--ts-config`: use a typescript configuration file ('project')
 If dependency-cruiser encounters typescript, it compiles it to understand what it
-is looking at. If you have compilerOptions in your `tsconfig.json` you think
-it should take into account, you can use this option to make it do that.
+is looking at. If you have `compilerOptions` in your `tsconfig.json` you think
+it should take into account, you can use this option to make it do that. 
+You might want to do this e.g. if you have `baseDir`/ `paths` keys in your
+`tsconfig`, are using 
+[dynamic imports](./faq.md#typescript-dynamic-imports-show-up-as-x--whats-up-there)
+or jsx/ tsx outside of a react context.
+
 Dependency-cruiser understands the `extends` configuration in tsconfig's so
 if you have a hierarchy of configs, you just need to pass the relevant one.
 
@@ -334,28 +325,10 @@ depcruise --ts-config --validate src
 ### use `tsconfig.prod.json for the same purpose:
 depcruise --ts-config tsconfig.prod.json --validate src
 ```
-> Note: at this moment dependency-cruiser does take the `paths` and `rootDirs` 
-> compiler options into account, but not to correctly resolve them to files,
-> resulting in _could not resolve_ errors if you configured that to be flagged
-> in your .dependency-cruiser.json.
-> - We'll resolve this is in a future feature
-> - As a temporary workaround you can use a webpack-config with a `resolve` 
->   section and pass that in dependency-cruiser's `--webpack-config`.
->   Contents of wepback configs that should work:
->   - manually add `alias` and `modules` in that section that correspond with
->     your tsconfig `paths` and `rootDirs` or ...
->   - [use `awesome-typescript-loader`'s `TsConfigPathsPlugin`](https://github.com/s-panferov/awesome-typescript-loader#advanced-path-resolution-in-typescript-20) in that section e.g.
->    ```javascript
->      const { TsConfigPathsPlugin } = require('awesome-typescript-loader');
->
->      module.exports = {
->         resolve: {
->            plugins: [
->                new TsConfigPathsPlugin({ configFileName: './tsconfig.json'})
->            ]
->         }
->      }
->    ```
+
+> note: dependency-cruiser currently only looks at the `compilerOptions` key
+> in the tsconfig.json and not at other keys (e.g. `files`, `include` and
+> `exclude`).
 
 ### `--preserve-symlinks`
 Whether to leave symlinks as is or resolve them to their realpath. This option defaults

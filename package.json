@@ -1,6 +1,6 @@
 {
   "name": "dependency-cruiser",
-  "version": "4.4.0-beta-0",
+  "version": "4.4.0-beta-1",
   "description": "Validate and visualize dependencies. With your rules. JavaScript, TypeScript, CoffeeScript. ES6, CommonJS, AMD.",
   "bin": {
     "dependency-cruiser": "bin/dependency-cruise",
@@ -96,6 +96,7 @@
   "dependencies": {
     "acorn": "5.7.1",
     "ajv": "6.5.2",
+    "awesome-typescript-loader": "5.2.0",
     "chalk": "2.4.1",
     "commander": "2.17.1",
     "enhanced-resolve": "4.1.0",
