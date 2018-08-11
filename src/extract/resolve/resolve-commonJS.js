@@ -3,6 +3,7 @@
 const path                     = require('path');
 const resolve                  = require('resolve');
 const enhancedResolve          = require('enhanced-resolve');
+const {TsConfigPathsPlugin}    = require('awesome-typescript-loader');
 const pathToPosix              = require('../../utl/pathToPosix');
 const getExtension             = require('../../utl/getExtension');
 const transpileMeta            = require('../transpile/meta');
@@ -44,8 +45,17 @@ function compileResolveOptions(pResolveOptions){
         useSyncFileSystemCalls: true
     };
 
+    let lResolveOptions = {};
+
+    if (pResolveOptions.tsConfig) {
+        lResolveOptions.plugins = [
+            new TsConfigPathsPlugin({configFileName: pResolveOptions.tsConfig})
+        ];
+    }
+
     return Object.assign(
         DEFAULT_RESOLVE_OPTIONS,
+        lResolveOptions,
         pResolveOptions,
         NON_OVERRIDABLE_RESOLVE_OPTIONS
     );
@@ -153,5 +163,3 @@ module.exports = (pModuleName, pBaseDir, pFileDir, pResolveOptions) => {
         }
     );
 };
-
-

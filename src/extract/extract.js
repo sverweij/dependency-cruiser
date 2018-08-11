@@ -30,8 +30,8 @@ function extractECMADependencies(pAST, pDependencies, pOptions, pFileName) {
     return pDependencies;
 }
 
-function extractDependencies(pOptions, pFileName) {
-    const lAST = getJSASTCached(path.join(pOptions.baseDir, pFileName));
+function extractDependencies(pOptions, pFileName, pTSConfig) {
+    const lAST = getJSASTCached(path.join(pOptions.baseDir, pFileName), pTSConfig);
     let lDependencies = [];
 
     if (pOptions.moduleSystems.indexOf("cjs") > -1) {
@@ -94,9 +94,12 @@ function addResolutionAttributes(pOptions, pFileName, pResolveOptions) {
  *                                                (e.g. "(node_modules)"). Default: none
  *                            - preserveSymlink - don't resolve symlinks.
  * @param {object} pResolveOptions an object with webpack 'enhanced-resolve' options
+ * @param  {any} pTSConfig       an object with tsconfig ('typescript project') options
+ *                               ('flattened' so there's no need for file access on any
+ *                               'extends' option in there)
  * @return {array}           an array of dependency objects (see above)
  */
-module.exports = (pFileName, pOptions, pResolveOptions) => {
+module.exports = (pFileName, pOptions, pResolveOptions, pTSConfig) => {
     try {
         let lOptions = Object.assign(
             {
@@ -110,10 +113,11 @@ module.exports = (pFileName, pOptions, pResolveOptions) => {
         const lResolveOptions = Object.assign(
             {},
             pResolveOptions,
-            {symlinks: lOptions.preserveSymlinks}
+            {symlinks: lOptions.preserveSymlinks},
+            {tsConfig: lOptions.tsConfig}
         );
 
-        return _(extractDependencies(lOptions, pFileName))
+        return _(extractDependencies(lOptions, pFileName, pTSConfig))
             .uniqBy(pDependency => `${pDependency.moduleName} ${pDependency.moduleSystem}`)
             .sortBy(pDependency => `${pDependency.moduleName} ${pDependency.moduleSystem}`)
             .map(addResolutionAttributes(lOptions, pFileName, lResolveOptions))

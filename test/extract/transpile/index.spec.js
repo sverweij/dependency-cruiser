@@ -31,4 +31,34 @@ describe("transpiler", () => {
             normalizeNewline(lTranspiledFixture)
         );
     });
+
+    it("Takes a tsconfig and takes that into account on transpilation", () => {
+        const lInputFixture = fs.readFileSync(
+            path.join(__dirname, "fixtures/dontconfuse_ts_for_tsx/input/Observable.ts"),
+            'utf8'
+        );
+        const lTranspiledFixture = fs.readFileSync(
+            path.join(__dirname, "fixtures/dontconfuse_ts_for_tsx/transpiled/Observable.js"),
+            'utf8'
+        );
+        // extends
+        // references
+        const lTranspilerOptions = {
+            "baseUrl": "src",
+            "paths": {
+                "@core/*": ["core/*"]
+            },
+            "rootDirs": ["shared", "hello"],
+            "typeRoots": ["../../types"],
+            "types": ["foo", "bar", "baz"]
+        };
+
+        expect(
+            normalizeNewline(
+                transpile(".ts", lInputFixture, lTranspilerOptions)
+            )
+        ).to.equal(
+            normalizeNewline(lTranspiledFixture)
+        );
+    });
 });

@@ -1,0 +1,46 @@
+{
+    "modules": [
+        {
+            "source": "test/cli/fixtures/typescriptconfig/cli-dynamic-imports/import_dynamically.ts",
+            "dependencies": [
+                {
+                    "resolved": "test/cli/fixtures/typescriptconfig/cli-dynamic-imports/import_this.ts",
+                    "coreModule": false,
+                    "followable": true,
+                    "couldNotResolve": false,
+                    "dependencyTypes": [
+                        "local"
+                    ],
+                    "module": "./import_this",
+                    "moduleSystem": "cjs",
+                    "matchesDoNotFollow": false,
+                    "valid": true
+                }
+            ],
+            "valid": true
+        },
+        {
+            "source": "test/cli/fixtures/typescriptconfig/cli-dynamic-imports/import_this.ts",
+            "dependencies": [],
+            "valid": true
+        }
+    ],
+    "summary": {
+        "violations": [],
+        "error": 0,
+        "warn": 0,
+        "info": 0,
+        "totalCruised": 2,
+        "optionsUsed": {
+            "outputTo": "test/cli/output/dynamic-import-ok.json",
+            "moduleSystems": [
+                "amd",
+                "cjs",
+                "es6"
+            ],
+            "outputType": "json",
+            "tsPreCompilationDeps": false,
+            "preserveSymlinks": false
+        }
+    }
+}

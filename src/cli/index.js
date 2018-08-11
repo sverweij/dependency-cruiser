@@ -1,15 +1,16 @@
 "use strict";
 
-const glob                  = require('glob');
-const _get                  = require('lodash').get;
-const main                  = require('../main');
-const getResolveConfig      = require('./getResolveConfig');
-const validateFileExistence = require('./validateFileExistence');
-const normalizeOptions      = require('./normalizeOptions');
-const initRules             = require('./initRules');
-const io                    = require('./io');
-const formatMetaInfo        = require('./formatMetaInfo');
-const defaults              = require('./defaults.json');
+const glob                    = require('glob');
+const _get                    = require('lodash').get;
+const main                    = require('../main');
+const flattenTypeScriptConfig = require('./flattenTypeScriptConfig');
+const getResolveConfig        = require('./getResolveConfig');
+const validateFileExistence   = require('./validateFileExistence');
+const normalizeOptions        = require('./normalizeOptions');
+const initRules               = require('./initRules');
+const io                      = require('./io');
+const formatMetaInfo          = require('./formatMetaInfo');
+const defaults                = require('./defaults.json');
 
 
 function createRulesFile(pOptions) {
@@ -20,18 +21,33 @@ function createRulesFile(pOptions) {
 }
 
 function extractResolveOptions(pOptions) {
-    return getResolveConfig(
-        normalizeOptions.determineWebpackConfigFileName(
-            _get(pOptions, 'ruleSet.options.webpackConfig.fileName', defaults.webpackConfig)
-        ),
-        _get(pOptions, 'ruleSet.options.webpackConfig.env', null),
-        _get(pOptions, 'ruleSet.options.webpackConfig.arguments', null)
-    );
+    let lResolveOptions = {};
+
+    if (pOptions.hasOwnProperty("webpackConfig") || _get(pOptions, 'ruleSet.options.webpackConfig', null)) {
+        lResolveOptions = getResolveConfig(
+            normalizeOptions.determineWebpackConfigFileName(
+                _get(pOptions, 'ruleSet.options.webpackConfig.fileName', defaults.webpackConfig)
+            ),
+            _get(pOptions, 'ruleSet.options.webpackConfig.env', null),
+            _get(pOptions, 'ruleSet.options.webpackConfig.arguments', null)
+        );
+    }
+    return lResolveOptions;
+}
+
+function extractTSConfigOptions(pOptions) {
+    let lRetval = {};
+
+    if (pOptions.hasOwnProperty("tsConfig")) {
+        lRetval = flattenTypeScriptConfig(
+            normalizeOptions.determineTSConfigFileName(pOptions.tsConfig)
+        );
+    }
+
+    return lRetval;
 }
 
 function runCruise(pFileDirArray, pOptions) {
-    let lResolveOptions = {};
-
     pFileDirArray
         .filter(pFileOrDir => !glob.hasMagic(pFileOrDir))
         .forEach(validateFileExistence);
@@ -42,11 +58,12 @@ function runCruise(pFileDirArray, pOptions) {
 
     pOptions = normalizeOptions(pOptions);
 
-    if (pOptions.hasOwnProperty("webpackConfig") || _get(pOptions, 'ruleSet.options.webpackConfig', null)) {
-        lResolveOptions = extractResolveOptions(pOptions);
-    }
-
-    const lDependencyList = main.cruise(pFileDirArray, pOptions, lResolveOptions);
+    const lDependencyList = main.cruise(
+        pFileDirArray,
+        pOptions,
+        extractResolveOptions(pOptions),
+        extractTSConfigOptions(pOptions)
+    );
 
     io.write(pOptions.outputTo, lDependencyList.modules);
 
@@ -71,4 +88,6 @@ module.exports = (pFileDirArray, pOptions) => {
         process.stderr.write(`\n  ERROR: ${e.message}\n`);
     }
 };
+
+
 /* eslint no-process-exit: 0 */

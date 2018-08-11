@@ -18,7 +18,6 @@ help:
 	@echo
 	@echo "dev-build. If necessary this ..."
 	@echo "- ... recompiles the handlebar templates"
-	@echo "- ... recreates a proper .npmignore"
 	@echo
 	@echo "clean. Removes all generated sources."
 	@echo
@@ -30,28 +29,8 @@ help:
 src/report/%.template.js: src/report/%.template.hbs
 	./node_modules/.bin/handlebars --commonjs handlebars/runtime -f $@ $<
 
-.npmignore: .gitignore Makefile
-	cp $< $@
-	echo "" >> $@
-	echo "# specificly ignore for npm" >> $@
-	echo ".codeclimate.yml" >> $@
-	echo ".dependency-cruiser-custom.json" >> $@
-	echo ".eslintignore" >> $@
-	echo ".eslintrc.json" >> $@
-	echo ".github" >> $@
-	echo ".gitlab-ci.yml" >> $@
-	echo ".travis.yml" >> $@
-	echo "appveyor.yml" >> $@
-	echo "CODE_OF_CONDUCT.md" >> $@
-	echo "doc/**" >> $@
-	echo src/**/*.hbs >> $@
-	echo "docs/**" >> $@
-	echo "Makefile" >> $@
-	echo "test/**" >> $@
-	echo "tslint.json" >> $@
-
 # "phony" targets
-dev-build: bin/dependency-cruise $(GENERATED_SOURCES) $(ALL_SRC) .npmignore
+dev-build: bin/dependency-cruise $(GENERATED_SOURCES) $(ALL_SRC)
 
 profile:
 	$(NODE) --prof src/cli.js -f - test

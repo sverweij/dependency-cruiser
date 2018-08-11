@@ -126,6 +126,9 @@ function resetOutputDir() {
     deleteDammit(path.join(OUT_DIR, "multiple-in-one-go.json"));
     deleteDammit(path.join(OUT_DIR, "webpack-config-alias.json"));
     deleteDammit(path.join(OUT_DIR, "webpack-config-alias-cruiser-config.json"));
+    deleteDammit(path.join(OUT_DIR, "dynamic-import-ok.json"));
+    deleteDammit(path.join(OUT_DIR, "dynamic-import-nok.json"));
+    deleteDammit(path.join(OUT_DIR, "typescript-path-resolution.json"));
 }
 
 function setModuleType(pTestPairs, pModuleType) {
@@ -316,7 +319,7 @@ describe("#processCLI", () => {
             deleteDammit(lValidationFileName);
         });
 
-        it("dependency-cruise with a --webpack-config with an object export will respect the resolve stuff on there", () => {
+        it("dependency-cruise with a --webpack-config with an object export will respect the resolve stuff in there", () => {
             const lOutputFileName = "webpack-config-alias.json";
             const lOutputTo       = path.join(OUT_DIR, lOutputFileName);
 
@@ -355,6 +358,67 @@ describe("#processCLI", () => {
                 path.join(FIX_DIR, lOutputFileName)
             );
         });
+    });
+
+    it("dependency-cruise with a --ts-config will respect the configuration in there (working dynamic imports)", () => {
+        const lOutputFileName = "dynamic-import-ok.json";
+        const lOutputTo       = path.join(OUT_DIR, lOutputFileName);
+
+        processCLI(
+            [
+                "test/cli/fixtures/typescriptconfig/cli-dynamic-imports/import_dynamically.ts"
+            ],
+            {
+                outputTo: lOutputTo,
+                outputType: "json",
+                tsConfig: "test/cli/fixtures/typescriptconfig/cli-dynamic-imports/tsconfig.compile_dynamic_imports.json"
+            }
+        );
+        tst.assertFileEqual(
+            lOutputTo,
+            path.join(FIX_DIR, lOutputFileName)
+        );
+    });
+
+    it("dependency-cruise with a --ts-config will respect the configuration in there", () => {
+        const lOutputFileName = "dynamic-import-nok.json";
+        const lOutputTo       = path.join(OUT_DIR, lOutputFileName);
+
+        processCLI(
+            [
+                "test/cli/fixtures/typescriptconfig/cli-dynamic-imports/import_dynamically2.ts"
+            ],
+            {
+                outputTo: lOutputTo,
+                outputType: "json",
+                tsConfig: "test/cli/fixtures/typescriptconfig/cli-dynamic-imports/tsconfig.error_on_compile_dynamic_imports.json"
+            }
+        );
+        tst.assertFileEqual(
+            lOutputTo,
+            path.join(FIX_DIR, lOutputFileName)
+        );
+    });
+
+    it("dependency-cruise with a --ts-config with a path will resolve 'path' things", () => {
+        const lOutputFileName = "typescript-path-resolution.json";
+        const lOutputTo       = path.join(OUT_DIR, lOutputFileName);
+
+        processCLI(
+            [
+                "test/cli/fixtures/typescriptconfig/cli-config-with-path/src"
+            ],
+            {
+                outputTo: lOutputTo,
+                outputType: "json",
+                tsConfig: "test/cli/fixtures/typescriptconfig/cli-config-with-path/tsconfig.json",
+                webpackConfig: "test/cli/fixtures/typescriptconfig/cli-config-with-path/webpack.config.js"
+            }
+        );
+        tst.assertFileEqual(
+            lOutputTo,
+            path.join(FIX_DIR, lOutputFileName)
+        );
     });
 
     describe("file based tests - commonJS", () => {

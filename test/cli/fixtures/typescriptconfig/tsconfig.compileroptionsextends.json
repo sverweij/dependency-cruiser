@@ -1,0 +1,7 @@
+{
+    "extends": "./tsconfig.compileroptionsbase.json",
+    "compilerOptions": {
+        "allowJs": true, // only in extends,
+        "allowUnreachableCode": false // override from base
+    }
+}

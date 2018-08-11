@@ -1,6 +1,6 @@
 {
   "name": "dependency-cruiser",
-  "version": "4.3.1",
+  "version": "4.4.0-beta-1",
   "description": "Validate and visualize dependencies. With your rules. JavaScript, TypeScript, CoffeeScript. ES6, CommonJS, AMD.",
   "bin": {
     "dependency-cruiser": "bin/dependency-cruise",
@@ -8,11 +8,21 @@
     "depcruise": "bin/dependency-cruise"
   },
   "main": "src/main/index.js",
+  "files": [
+    "bin/",
+    "src/",
+    "!src/**/*.hbs",
+    "!src/**/*.md",
+    "types/*.d.ts",
+    "LICENSE",
+    "package.json",
+    "README.md"
+  ],
   "scripts": {
     "build": "make dev-build",
     "build:clean": "make clean",
     "check": "npm-run-all build lint depcruise test:cover",
-    "check:full": "npm-run-all check nsp",
+    "check:full": "npm-run-all check",
     "depcruise": "node ./bin/dependency-cruise --validate .dependency-cruiser-custom.json src bin/dependency-cruise test",
     "depcruise:graph": "node ./bin/dependency-cruise --exclude \"(^node_modules|^fs$|^path$)\" --output-type dot --validate .dependency-cruiser-custom.json bin src | dot -T svg > tmp_deps.svg",
     "depcruise:graph:doc": "npm-run-all depcruise:graph:doc:generate depcruise:graph:doc:optimize",
@@ -21,16 +31,15 @@
     "lint": "eslint bin/dependency-cruise src test",
     "lint:types": "tslint types/dependency-cruiser.d.ts",
     "lint:fix": "eslint --fix bin/dependency-cruise src test",
-    "nsp": "nsp check",
-    "npm-install": "npm install",
     "postversion": "git push && git push --tags",
     "preversion": "test `git branch | grep \"^* [a-zA-Z]\" | cut -c 3-` = 'master'",
     "test": "mocha test/*/*.spec.js test/*/*/*.spec.js test/*/*/*/*.spec.js",
     "test:cover": "nyc --check-coverage npm test",
     "test:glob": "set -f && test \"`bin/dependency-cruise test/extract/fixtures/gather-globbing/packages/**/src/**/*.js | grep \"no dependency violations found\"`\" = \"✔ no dependency violations found (6 modules cruised)\"",
     "test:watch": "mocha --watch --watch-extensions=json --reporter=min test/*/*.spec.js test/*/*/*.spec.js test/*/*/*/*.spec.js",
-    "update-dependencies": "npm-run-all update-dependencies:upem npm-install build:clean build lint:fix depcruise test:cover",
-    "update-dependencies:upem": "npm outdated --json | upem"
+    "update-dependencies": "npm-run-all upem:update upem:install build:clean build lint:fix depcruise test:cover",
+    "upem:install": "npm install",
+    "upem:update": "npm outdated --json | upem"
   },
   "keywords": [
     "static analysis",
@@ -60,21 +69,20 @@
     "chai": "4.1.2",
     "chai-json-schema": "1.5.0",
     "coffeescript": "2.3.1",
-    "eslint": "5.1.0",
+    "eslint": "5.3.0",
     "eslint-plugin-import": "2.13.0",
     "eslint-plugin-mocha": "5.1.0",
-    "eslint-plugin-node": "6.0.1",
+    "eslint-plugin-node": "7.0.1",
     "eslint-plugin-security": "1.4.0",
     "intercept-stdout": "0.1.2",
-    "js-makedepend": "3.0.1",
+    "js-makedepend": "3.0.2",
     "mocha": "5.2.0",
     "normalize-newline": "3.0.0",
     "npm-run-all": "4.1.3",
-    "nsp": "3.2.1",
     "nyc": "12.0.2",
     "symlink-dir": "1.1.3",
-    "tslint": "5.10.0",
-    "typescript": "2.9.2",
+    "tslint": "5.11.0",
+    "typescript": "3.0.1",
     "upem": "1.0.0"
   },
   "repository": {
@@ -88,8 +96,9 @@
   "dependencies": {
     "acorn": "5.7.1",
     "ajv": "6.5.2",
+    "awesome-typescript-loader": "5.2.0",
     "chalk": "2.4.1",
-    "commander": "2.16.0",
+    "commander": "2.17.1",
     "enhanced-resolve": "4.1.0",
     "figures": "2.0.0",
     "glob": "7.1.2",
@@ -98,7 +107,8 @@
     "resolve": "1.8.1",
     "safe-regex": "1.1.0",
     "semver": "5.5.0",
-    "semver-try-require": "2.0.0"
+    "semver-try-require": "2.0.1",
+    "strip-json-comments": "2.0.1"
   },
   "nyc": {
     "statements": 99.8,
@@ -127,6 +137,6 @@
     "coffee-script": ">=1.0.0 <2.0.0",
     "coffeescript": ">=1.0.0 <3.0.0",
     "livescript": ">=1.0.0 <2.0.0",
-    "typescript": ">=2.0.0 <3.0.0"
+    "typescript": ">=2.0.0 <4.0.0"
   }
 }
