@@ -114,7 +114,7 @@ module.exports = (pFileName, pOptions, pResolveOptions, pTSConfig) => {
             {},
             pResolveOptions,
             {symlinks: lOptions.preserveSymlinks},
-            {tsConfig: lOptions.tsConfig}
+            {tsConfig: _.get(lOptions, "ruleSet.options.tsConfig.fileName", null)}
         );
 
         return _(extractDependencies(lOptions, pFileName, pTSConfig))

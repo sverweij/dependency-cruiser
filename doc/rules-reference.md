@@ -71,7 +71,8 @@ The currently supported options are
 [`moduleSystems`](./cli.md#--module-systems),
 [`prefix`](./cli.md#--prefix-prefixing-links),
 [`tsPreCompilationDeps`](./cli.md#--ts-pre-compilation-deps-typescript-only),
-[`preserveSymlinks`](./cli.md#--preserve-symlinks) and 
+[`preserveSymlinks`](./cli.md#--preserve-symlinks),
+[`tsConfig`](./cli.md#--ts-config-use-a-typescript-configuration-file-project) and 
 [`webpackConfig`](./cli.md#--webpack-config-use-the-resolution-options-of-a-webpack-configuration).
 See the [command line documentation](./cli.md) for details.
 

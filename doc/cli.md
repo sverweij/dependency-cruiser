@@ -326,6 +326,26 @@ depcruise --ts-config --validate src
 depcruise --ts-config tsconfig.prod.json --validate src
 ```
 
+Useful things to know:
+- The configuration file you can pass as an argument to this option is
+  relative to the current working directory.
+- As an alternative to this command line parameter you can pass the
+  typescript project file name in in your .dependency-cruiser.json like this:
+  ```json
+  "options": {
+    "tsConfig": {
+      "fileName": "tsconfig.json"
+    }
+  }
+  ```
+  or even more minimalistically like so (in which case dependency-cruiser will
+  assume the fileName to be `tsconfig.json`)
+  ```json
+  "options": {
+    "tsConfig": {}
+  }
+  ```
+
 > note: dependency-cruiser currently only looks at the `compilerOptions` key
 > in the tsconfig.json and not at other keys (e.g. `files`, `include` and
 > `exclude`).
