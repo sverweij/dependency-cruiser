@@ -17,53 +17,30 @@ function getOptionValue(pDefault) {
     };
 }
 
-function normalizeWebPackConfig(pOptions) {
+function normalizeConfigFile(pOptions, pConfigWrapperName, pDefault) {
     let lOptions = _clone(pOptions);
 
-    if (lOptions.hasOwnProperty("webpackConfig")) {
+    if (lOptions.hasOwnProperty(pConfigWrapperName)) {
         _set(
-            lOptions, "ruleSet.options.webpackConfig.fileName",
-            getOptionValue(defaults.WEBPACK_CONFIG)(lOptions.webpackConfig)
+            lOptions, `ruleSet.options.${pConfigWrapperName}.fileName`,
+            getOptionValue(pDefault)(lOptions[pConfigWrapperName])
         );
-        Reflect.deleteProperty(lOptions, "webpackConfig");
+        Reflect.deleteProperty(lOptions, pConfigWrapperName);
     }
 
-    if (_get(lOptions, "ruleSet.options.webpackConfig", null)) {
-        if (!_get(lOptions, "ruleSet.options.webpackConfig.fileName", null)) {
+    if (_get(lOptions, `ruleSet.options.${pConfigWrapperName}`, null)) {
+        if (!_get(lOptions, `ruleSet.options.${pConfigWrapperName}.fileName`, null)) {
             _set(
-                lOptions, "ruleSet.options.webpackConfig.fileName",
-                defaults.WEBPACK_CONFIG
+                lOptions, `ruleSet.options.${pConfigWrapperName}.fileName`,
+                pDefault
             );
         }
     }
 
     return lOptions;
 }
+/* eslint security/detect-object-injection: 0 */
 
-
-function normalizeTSConfig(pOptions) {
-    let lOptions = _clone(pOptions);
-
-    if (lOptions.hasOwnProperty("tsConfig")) {
-        _set(
-            lOptions, "ruleSet.options.tsConfig.fileName",
-            getOptionValue(defaults.TYPESCRIPT_CONFIG)(lOptions.tsConfig)
-        );
-        Reflect.deleteProperty(lOptions, "tsConfig");
-    }
-
-    if (_get(lOptions, "ruleSet.options.tsConfig", null)) {
-        if (!_get(lOptions, "ruleSet.options.tsConfig.fileName", null)) {
-            _set(
-                lOptions, "ruleSet.options.tsConfig.fileName",
-                defaults.TYPESCRIPT_CONFIG
-            );
-        }
-    }
-
-    return lOptions;
-}
-/* eslint complexity:0 */
 /**
  * returns the pOptions, so that the returned value contains a
  * valid value for each possible option
@@ -89,8 +66,8 @@ module.exports = (pOptions) => {
         pOptions.ruleSet   = JSON.parse(fs.readFileSync(pOptions.rulesFile, 'utf8'));
     }
 
-    pOptions = normalizeWebPackConfig(pOptions);
-    pOptions = normalizeTSConfig(pOptions);
+    pOptions = normalizeConfigFile(pOptions, "webpackConfig", defaults.WEBPACK_CONFIG);
+    pOptions = normalizeConfigFile(pOptions, "tsConfig", defaults.TYPESCRIPT_CONFIG);
 
     pOptions.validate = pOptions.hasOwnProperty("validate");
 
