@@ -10,7 +10,6 @@ const normalizeOptions        = require('./normalizeOptions');
 const initRules               = require('./initRules');
 const io                      = require('./io');
 const formatMetaInfo          = require('./formatMetaInfo');
-const defaults                = require('./defaults.json');
 
 
 function createRulesFile(pOptions) {
@@ -22,12 +21,11 @@ function createRulesFile(pOptions) {
 
 function extractResolveOptions(pOptions) {
     let lResolveOptions = {};
+    const lWebPackConfigFileName = _get(pOptions, 'ruleSet.options.webpackConfig.fileName', null);
 
-    if (pOptions.hasOwnProperty("webpackConfig") || _get(pOptions, 'ruleSet.options.webpackConfig', null)) {
+    if (lWebPackConfigFileName) {
         lResolveOptions = getResolveConfig(
-            normalizeOptions.determineWebpackConfigFileName(
-                _get(pOptions, 'ruleSet.options.webpackConfig.fileName', defaults.webpackConfig)
-            ),
+            lWebPackConfigFileName,
             _get(pOptions, 'ruleSet.options.webpackConfig.env', null),
             _get(pOptions, 'ruleSet.options.webpackConfig.arguments', null)
         );
@@ -37,11 +35,10 @@ function extractResolveOptions(pOptions) {
 
 function extractTSConfigOptions(pOptions) {
     let lRetval = {};
+    const lTSConfigFileName = _get(pOptions, "ruleSet.options.tsConfig.fileName", null);
 
-    if (pOptions.hasOwnProperty("tsConfig")) {
-        lRetval = flattenTypeScriptConfig(
-            normalizeOptions.determineTSConfigFileName(pOptions.tsConfig)
-        );
+    if (lTSConfigFileName) {
+        lRetval = flattenTypeScriptConfig(lTSConfigFileName);
     }
 
     return lRetval;

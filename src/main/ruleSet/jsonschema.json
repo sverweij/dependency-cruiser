@@ -60,6 +60,17 @@
                     "type": "boolean",
                     "description": "if true leave symlinks untouched, otherwise use the realpath. Defaults to `false` (which is also nodejs's default behavior since version 6)"
                 },
+                "tsConfig": {
+                    "type": "object",
+                    "additionalProperties": false,
+                    "description": "Typescript project file ('tsconfig.json') to use for (1) compilation and (2) resolution (e.g. with the paths property)",
+                    "properties": {
+                        "fileName": {
+                            "description": "The typescript project file to use. The fileName is relative to dependency-cruiser's current working directory. When not provided defaults to './tsconfig.json'.",
+                            "type": "string"
+                        }
+                    }
+                },
                 "webpackConfig": {
                     "type": "object",
                     "additionalProperties": false,
@@ -67,7 +78,7 @@
                     "properties": {
                         "fileName": {
                             "type": "string",
-                            "description": "The webpack conf file to use (typically something like 'webpack.conf.js')"
+                            "description": "The webpack conf file to use (typically something like 'webpack.conf.js'). The fileName is relative to dependency-cruiser's current working directory. When not provided defaults to './webpack.conf.js'."
                         },
                         "env": {
                             "description": "Environment to pass if your config file returns a function",
