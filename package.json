@@ -129,6 +129,15 @@
     ],
     "all": true
   },
+  "eslintIgnore": [
+    "node_modules",
+    "coverage",
+    "tmp",
+    "src/report/**/*.template.js",
+    "test/*/fixtures/**",
+    "test/*/*/fixtures/**",
+    "types/**"
+  ],
   "engines": {
     "node": ">=6"
   },
