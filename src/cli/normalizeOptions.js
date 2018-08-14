@@ -1,7 +1,9 @@
 "use strict";
 
 const fs       = require('fs');
-const _set     = require('lodash').set;
+const _set     = require('lodash/set');
+const _get     = require('lodash/get');
+const _clone   = require('lodash/clone');
 const defaults = require('./defaults.json');
 
 function getOptionValue(pDefault) {
@@ -14,6 +16,30 @@ function getOptionValue(pDefault) {
         return lRetval;
     };
 }
+
+function normalizeConfigFile(pOptions, pConfigWrapperName, pDefault) {
+    let lOptions = _clone(pOptions);
+
+    if (lOptions.hasOwnProperty(pConfigWrapperName)) {
+        _set(
+            lOptions, `ruleSet.options.${pConfigWrapperName}.fileName`,
+            getOptionValue(pDefault)(lOptions[pConfigWrapperName])
+        );
+        Reflect.deleteProperty(lOptions, pConfigWrapperName);
+    }
+
+    if (_get(lOptions, `ruleSet.options.${pConfigWrapperName}`, null)) {
+        if (!_get(lOptions, `ruleSet.options.${pConfigWrapperName}.fileName`, null)) {
+            _set(
+                lOptions, `ruleSet.options.${pConfigWrapperName}.fileName`,
+                pDefault
+            );
+        }
+    }
+
+    return lOptions;
+}
+/* eslint security/detect-object-injection: 0 */
 
 /**
  * returns the pOptions, so that the returned value contains a
@@ -40,14 +66,8 @@ module.exports = (pOptions) => {
         pOptions.ruleSet   = JSON.parse(fs.readFileSync(pOptions.rulesFile, 'utf8'));
     }
 
-    if (pOptions.hasOwnProperty("webpackConfig")){
-        _set(
-            pOptions,
-            "ruleSet.options.webpackConfig.fileName",
-            getOptionValue(defaults.WEBPACK_CONFIG)(pOptions.webpackConfig)
-        );
-        Reflect.deleteProperty(pOptions, "webpackConfig");
-    }
+    pOptions = normalizeConfigFile(pOptions, "webpackConfig", defaults.WEBPACK_CONFIG);
+    pOptions = normalizeConfigFile(pOptions, "tsConfig", defaults.TYPESCRIPT_CONFIG);
 
     pOptions.validate = pOptions.hasOwnProperty("validate");
 
@@ -55,5 +75,4 @@ module.exports = (pOptions) => {
 };
 
 module.exports.determineRulesFileName = getOptionValue(defaults.RULES_FILE_NAME);
-module.exports.determineWebpackConfigFileName = getOptionValue(defaults.WEBPACK_CONFIG);
-module.exports.determineTSConfigFileName = getOptionValue(defaults.TYPESCRIPT_CONFIG);
+

@@ -22,7 +22,7 @@ describe("ruleSet/normalize", () => {
         });
     });
 
-    it("allowed: leaves allowedSeverity alone when it wasn filled out; does not add severity/ name to the rule", () => {
+    it("allowed: leaves allowedSeverity alone when it wasn't filled; doesn't add severity/ name to the rule", () => {
         expect(normalizer({
             "allowed": [{
                 "from": ".+",

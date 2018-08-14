@@ -1,4 +1,3 @@
-"use strict";
 const expect           = require('chai').expect;
 const normalizeOptions = require('../../src/cli/normalizeOptions');
 
@@ -57,18 +56,44 @@ describe("normalizeOptions", () => {
             }
         );
     });
+
+    it("defaults tsConfig.fileName to 'tsconfig.json' if it wasn't specified", () => {
+        expect(
+            normalizeOptions({validate: "./test/cli/fixtures/rules.tsConfigNoFileName.json"})
+        ).to.deep.equal(
+            {
+                outputTo: "-",
+                outputType: "err",
+                rulesFile: "./test/cli/fixtures/rules.tsConfigNoFileName.json",
+                "ruleSet": {
+                    options: {
+                        tsConfig: {
+                            fileName: "tsconfig.json"
+                        }
+                    }
+                },
+                validate: true
+            }
+        );
+    });
+    it("defaults webpackConfig.fileName to 'tsconfig.json' if it wasn't specified", () => {
+        expect(
+            normalizeOptions({validate: "./test/cli/fixtures/rules.webpackConfigNoFileName.json"})
+        ).to.deep.equal(
+            {
+                outputTo: "-",
+                outputType: "err",
+                rulesFile: "./test/cli/fixtures/rules.webpackConfigNoFileName.json",
+                "ruleSet": {
+                    options: {
+                        webpackConfig: {
+                            fileName: "webpack.config.js"
+                        }
+                    }
+                },
+                validate: true
+            }
+        );
+    });
 });
 
-describe("normalizeOptions.determineWebpackConfigFileName", () => {
-    it("returns webpack.config.js when passed nothing", () => {
-        expect(
-            normalizeOptions.determineWebpackConfigFileName()
-        ).to.equal('webpack.config.js');
-    });
-
-    it("returns the passed config when passed", () => {
-        expect(
-            normalizeOptions.determineWebpackConfigFileName('config/production.webpack.config.js')
-        ).to.equal('config/production.webpack.config.js');
-    });
-});
