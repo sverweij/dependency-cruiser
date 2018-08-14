@@ -19,6 +19,18 @@ function butConcatArrays(pObjectValue, pSrcValue, pKey) {
     /* eslint consistent-return: 0 */
 }
 
+/**
+ * Reads the provided tsconfig, strips any comments and merges it with any
+ * file mentioned in the "extends" section of the config
+ *
+ * @param {string} pTSConfigFileName The file name of the tsconfig.json to flatten
+ * @param {Set} pReadConfigSet       (optional) set of config file names already
+ *                                   read; internally used for circular
+ *                                   reference detection. Typically you don't
+ *                                   need to specify this when calling
+ * @return {any}                     Object with the config in the pTSConfigFileName,
+ *                                   with all extends 'flattened'
+ */
 function flattenTypeScriptConfig(pTSConfigFileName, pReadConfigSet = new Set()) {
     pTSConfigFileName = path.resolve(pTSConfigFileName);
     if (pReadConfigSet.has(pTSConfigFileName)) {
@@ -35,9 +47,9 @@ function flattenTypeScriptConfig(pTSConfigFileName, pReadConfigSet = new Set()) 
                 ),
                 lConfig,
                 // Arrays from parents shouldn't get half-overwritten, but
-                // actually slapped on the back of what's already there
-                // we override the default _.merge behavior for those.
-                // for `files`, `include` and `exclude` the child always
+                // actually slapped on the back of what's already there.
+                // We override the default _.merge behavior for `files`,
+                // `include` and `exclude`. for those the child always
                 // overwrites the parent, according to the
                 // [typescript handbook](https://www.typescriptlang.org/docs/handbook/tsconfig-json.html)
                 butConcatArrays
@@ -47,17 +59,6 @@ function flattenTypeScriptConfig(pTSConfigFileName, pReadConfigSet = new Set()) 
 
         return lConfig;
     }
-
 }
 
-/**
- * Reads the provided tsconfig, strips any comments and merges it with any
- * file mentioned in the "extends" section of the config
- *
- * @param {string} pTSConfigFileName The file name of the tsconfig.json to flatten
- * @param {Set} pReadConfigSet       (optional) set of config file names already
- *                                   read; internally used for circular
- *                                   reference detection. Typically you don't
- *                                   need to specify this when calling
- */
 module.exports = flattenTypeScriptConfig;
