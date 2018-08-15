@@ -1,4 +1,6 @@
-"use strict";
+const _get = require('lodash/get');
+const DEFAULT_MODULE_COLORING_SCHEME = require('./defaultModuleColorScheme.json');
+
 const SEVERITY2COLOR = {
     error : "red",
     warn  : "orange",
@@ -10,45 +12,36 @@ function severity2Color(pSeverity){
     return SEVERITY2COLOR[pSeverity] || DEFAULT_VIOLATION_COLOR;
 }
 
-/* eslint security/detect-object-injection: 0 */
-function determineModuleColor(pModule) {
-    const MODULE2COLOR = {
-        "couldNotResolve": "red",
-        "coreModule": "grey"
-    };
+function matchesRE(pValue, pRE) {
+    const lMatchResult = pValue.match && pValue.match(pRE);
 
-    if (pModule.hasOwnProperty("valid") && !pModule.valid) {
-        return severity2Color(pModule.rules[0].severity);
-    }
-    return MODULE2COLOR[
-        Object.keys(MODULE2COLOR).find(
-            (pKey) => pModule[pKey]
-        )
-    ] || null;
+    return Boolean(lMatchResult) && lMatchResult.length > 0;
 }
 
-/* eslint complexity:0 */
-function determineModuleFillColor(pModule) {
-    // falsy gets overwritten with the standard color
-    let lRetval = null;
+function moduleMatchesCriteria(pSchemeEntry, pModule) {
+    return Object.keys(pSchemeEntry.criteria)
+        .every(
+            pKey =>
+                pModule.hasOwnProperty(pKey) &&
+                (
+                    pSchemeEntry.criteria[pKey] === pModule[pKey] ||
+                    matchesRE(pModule[pKey], pSchemeEntry.criteria[pKey])
+                )
+        );
+}
 
-    if (pModule.orphan) {
-        lRetval = "#ccffcc";
+/* eslint security/detect-object-injection: 0 */
+function determineModuleColors(pModule, pColoringScheme) {
+    const lColoringScheme = pColoringScheme || DEFAULT_MODULE_COLORING_SCHEME;
+    let lInvalidColoring = {};
+
+    if (pModule.hasOwnProperty("valid") && !pModule.valid) {
+        lInvalidColoring = {color: severity2Color(pModule.rules[0].severity)};
     }
-
-    if (pModule.source && pModule.source.endsWith('.ts')) {
-        lRetval = "#ccccff";
-    }
-
-    if (pModule.source && pModule.source.endsWith('.json')) {
-        lRetval = "#ffc400";
-    }
-
-    if (pModule.source && pModule.source.endsWith('.coffee')) {
-        lRetval = "#deb887";
-    }
-
-    return lRetval;
+    return Object.assign(
+        _get(lColoringScheme.find(pSchemeEntry => moduleMatchesCriteria(pSchemeEntry, pModule)), 'colors', {}),
+        lInvalidColoring
+    );
 }
 
 function determineDependencyColor(pDependency) {
@@ -67,7 +60,6 @@ function determineDependencyColor(pDependency) {
 
 module.exports = {
     severity2Color,
-    determineModuleColor,
-    determineModuleFillColor,
+    determineModuleColors,
     determineDependencyColor
 };

@@ -1,0 +1,42 @@
+[
+    {
+        "criteria": {"couldNotResolve": true},
+        "colors": {"color": "red"}
+    },
+    {
+        "criteria": {"coreModule": true},
+        "colors": {"color": "grey"}
+    },
+    {
+        "criteria": {"orphan": true},
+        "colors": {"fillcolor": "#ccffcc"}
+    },
+    {
+        "criteria": {"source": "\\.json$"},
+        "colors": {"fillcolor": "#ffee44"}
+    },
+    {
+        "criteria": {"source": "\\.jsx$"},
+        "colors": {"fillcolor": "#ffff77"}
+    },
+    {
+        "criteria": {"source": "\\.ts$"},
+        "colors": {"fillcolor": "#eeeeff"}
+    },
+    {
+        "criteria": {"source": "\\.tsx$"},
+        "colors": {"fillcolor": "#cceeff"}
+    },
+    {
+        "criteria": {"source": "(\\.coffee|\\.litcoffee|\\.coffee\\.md)$"},
+        "colors": {"fillcolor": "#eeccaa"}
+    },
+    {
+        "criteria": {"source": "(\\.csx|\\.cjsx)$"},
+        "colors": {"fillcolor": "#eebb77"}
+    },
+    {
+        "criteria": {"source": "\\.ls$/g"},
+        "colors": {"fillcolor": "pink"}
+    }
+]

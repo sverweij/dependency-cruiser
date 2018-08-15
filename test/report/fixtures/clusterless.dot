@@ -22,7 +22,7 @@ digraph "dependency-cruiser output"{
     "root_one.js" [label="root_one.js" URL="root_one.js"]
     "root_two.js" [label="root_two.js" URL="root_two.js"]
     "shared.js" [label="shared.js" color="red" fontcolor="red" ]
-    "somedata.json" [label="somedata.json" URL="somedata.json"]
+    "somedata.json" [label="somedata.json" fillcolor="#ffee44" URL="somedata.json"]
     subgraph "cluster_/sub" {label="sub" "sub/depindir.js" [label="depindir.js" URL="sub/depindir.js"] }
     subgraph "cluster_/sub" {label="sub" "sub/dir.js" [label="dir.js" URL="sub/dir.js"] }
     "two_only_one.js" [label="two_only_one.js" URL="two_only_one.js"]

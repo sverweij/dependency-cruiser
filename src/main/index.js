@@ -4,7 +4,8 @@ const extract          = require("../extract");
 const meta             = require("../extract/transpile/meta");
 const reportHtml       = require("../report/html");
 const reportJson       = require("../report/json");
-const reportDot        = require("../report/dot");
+const reportDot        = require("../report/dot")();
+const reportRCDot      = require("../report/dot")(require('../report/dot/richModuleColorScheme.json'));
 const reportCsv        = require("../report/csv");
 const reportErr        = require("../report/err");
 const validateRuleSet  = require("./ruleSet/validate");
@@ -16,6 +17,7 @@ const TYPE2REPORTER      = {
     "json" : reportJson,
     "html" : reportHtml,
     "dot"  : reportDot,
+    "rcdot"  : reportRCDot,
     "csv"  : reportCsv,
     "err"  : reportErr
 };

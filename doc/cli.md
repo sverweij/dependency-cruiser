@@ -42,14 +42,18 @@ This will:
 See the _dependency-cruise_ target in the [Makefile](https://github.com/sverweij/dependency-cruiser/blob/master/Makefile#L95)
 for a real world example.
 
-#### dot
-Supplying `dot` as output type will make dependency-cruiser write
+#### dot and rcdot
+Supplying `dot` or `rcdot` as output type will make dependency-cruiser write
 a GraphViz dot format directed graph. Typical use is in concert
 with _GraphViz dot_:
 
 ```shell
 dependency-cruise -x "^node_modules" -T dot src | dot -T svg > dependencygraph.svg
 ```
+
+The `rcdot` variant colors modules based on their extension - which might
+be useful for mixed source code bases or when you're converting from one
+type to another.
 
 #### html
 Write it to html with a dependency matrix instead:

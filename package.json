@@ -1,6 +1,6 @@
 {
   "name": "dependency-cruiser",
-  "version": "4.5.0-beta-0",
+  "version": "4.5.0-beta-1",
   "description": "Validate and visualize dependencies. With your rules. JavaScript, TypeScript, CoffeeScript. ES6, CommonJS, AMD.",
   "bin": {
     "dependency-cruiser": "bin/dependency-cruise",
@@ -24,7 +24,7 @@
     "check": "npm-run-all build lint depcruise test:cover",
     "check:full": "npm-run-all check",
     "depcruise": "node ./bin/dependency-cruise --validate .dependency-cruiser-custom.json src bin/dependency-cruise test",
-    "depcruise:graph": "node ./bin/dependency-cruise --exclude \"(^node_modules|^fs$|^path$)\" --output-type dot --validate .dependency-cruiser-custom.json bin src | dot -T svg > tmp_deps.svg",
+    "depcruise:graph": "node ./bin/dependency-cruise --exclude \"(^node_modules|^fs$|^path$)\" --output-type rcdot --validate .dependency-cruiser-custom.json bin src | dot -T svg > tmp_deps.svg",
     "depcruise:graph:doc": "npm-run-all depcruise:graph:doc:generate depcruise:graph:doc:optimize",
     "depcruise:graph:doc:generate": "./bin/dependency-cruise --exclude \"(^node_modules|^fs$|^path$)\" --output-type dot --validate .dependency-cruiser-custom.json src bin/dependency-cruise | dot -T png > doc/real-world-samples/dependency-cruiser-without-node_modules.png",
     "depcruise:graph:doc:optimize": "optipng doc/real-world-samples/dependency-cruiser-without-node_modules.png",

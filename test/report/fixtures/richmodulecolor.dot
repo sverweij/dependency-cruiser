@@ -1,0 +1,25 @@
+digraph "dependency-cruiser output"{
+    ordering=out
+    rankdir=LR
+    splines=true
+    overlap=false
+    nodesep=0.16
+    fontname="Helvetica-bold"
+    fontsize=9
+    style="rounded,bold"
+    compound=true
+    node [shape=box style="rounded, filled" fillcolor="#ffffcc" height=0.2 fontname=Helvetica fontsize=9]
+    edge [color=black arrowhead=normal fontname=Helvetica fontsize=9]
+
+    subgraph "cluster_/src" {label="src" "src/coffee.coffee" [label="coffee.coffee" fillcolor="#eeccaa" URL="src/coffee.coffee"] }
+    subgraph "cluster_/src" {label="src" "src/javascript.js" [label="javascript.js" URL="src/javascript.js"] }
+    subgraph "cluster_/src" {label="src" "src/json.json" [label="json.json" fillcolor="#ffee44" URL="src/json.json"] }
+    subgraph "cluster_/src" {label="src" "src/litcoffee.litcoffee" [label="litcoffee.litcoffee" fillcolor="#eeccaa" URL="src/litcoffee.litcoffee"] }
+    subgraph "cluster_/src" {label="src" "src/litcoffeemarkdown.coffee.md" [label="litcoffeemarkdown.coffee.md" fillcolor="#eeccaa" URL="src/litcoffeemarkdown.coffee.md"] }
+    subgraph "cluster_/src" {label="src" "src/reactthing.cjsx" [label="reactthing.cjsx" fillcolor="#eebb77" URL="src/reactthing.cjsx"] }
+    subgraph "cluster_/src" {label="src" "src/reactthing.csx" [label="reactthing.csx" fillcolor="#eebb77" URL="src/reactthing.csx"] }
+    subgraph "cluster_/src" {label="src" "src/reactthing.jsx" [label="reactthing.jsx" fillcolor="#ffff77" URL="src/reactthing.jsx"] }
+    subgraph "cluster_/src" {label="src" "src/reactthing.tsx" [label="reactthing.tsx" fillcolor="#cceeff" URL="src/reactthing.tsx"] }
+    subgraph "cluster_/src" {label="src" "src/typescript.ts" [label="typescript.ts" fillcolor="#eeeeff" URL="src/typescript.ts"] }
+
+}

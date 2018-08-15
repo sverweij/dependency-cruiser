@@ -29,7 +29,7 @@ program
     .option("-d, --max-depth <n>", `the maximum depth to cruise; 0 <= n <= 99
                               (default: 0, which means 'infinite depth')`)
     .option("-M, --module-systems <items>", `list of module systems (default: amd,cjs,es6)`)
-    .option("-T, --output-type <type>", `output type - html|dot|err|json
+    .option("-T, --output-type <type>", `output type - html|dot|rcdot|err|json
                               (default: err)`)
     .option("-P, --prefix <prefix>", "prefix to use for links in the svg reporter")
     .option("--preserve-symlinks", `leave symlinks unchanged (off by default)`)
