@@ -27,6 +27,30 @@ function determineModuleColor(pModule) {
     ] || null;
 }
 
+/* eslint complexity:0 */
+function determineModuleFillColor(pModule) {
+    // falsy gets overwritten with the standard color
+    let lRetval = null;
+
+    if (pModule.orphan) {
+        lRetval = "#ccffcc";
+    }
+
+    if (pModule.source && pModule.source.endsWith('.ts')) {
+        lRetval = "#ccccff";
+    }
+
+    if (pModule.source && pModule.source.endsWith('.json')) {
+        lRetval = "#ffc400";
+    }
+
+    if (pModule.source && pModule.source.endsWith('.coffee')) {
+        lRetval = "#deb887";
+    }
+
+    return lRetval;
+}
+
 function determineDependencyColor(pDependency) {
     let lColorAddition = {};
 
@@ -44,5 +68,6 @@ function determineDependencyColor(pDependency) {
 module.exports = {
     severity2Color,
     determineModuleColor,
+    determineModuleFillColor,
     determineDependencyColor
 };

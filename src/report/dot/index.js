@@ -44,6 +44,7 @@ function colorize(pModule) {
         pModule,
         {
             color: coloring.determineModuleColor(pModule),
+            fillcolor: coloring.determineModuleFillColor(pModule),
             dependencies: pModule.dependencies.map(coloring.determineDependencyColor)
         }
     );
