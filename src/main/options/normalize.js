@@ -1,7 +1,4 @@
-"use strict";
-
-// const pathToPosix = require('../../utl/pathToPosix');
-const defaults    = require('./defaults.json');
+const defaults = require('./defaults.json');
 
 function uniq(pArray) {
     return Array.from(new Set(pArray));
