@@ -19,7 +19,7 @@ digraph "dependency-cruiser output"{
     subgraph "cluster_/src" {label="src" "src/reactthing.cjsx" [label="reactthing.cjsx" fillcolor="#eebb77" URL="src/reactthing.cjsx"] }
     subgraph "cluster_/src" {label="src" "src/reactthing.csx" [label="reactthing.csx" fillcolor="#eebb77" URL="src/reactthing.csx"] }
     subgraph "cluster_/src" {label="src" "src/reactthing.jsx" [label="reactthing.jsx" fillcolor="#ffff77" URL="src/reactthing.jsx"] }
-    subgraph "cluster_/src" {label="src" "src/reactthing.tsx" [label="reactthing.tsx" fillcolor="#cceeff" URL="src/reactthing.tsx"] }
-    subgraph "cluster_/src" {label="src" "src/typescript.ts" [label="typescript.ts" fillcolor="#eeeeff" URL="src/typescript.ts"] }
+    subgraph "cluster_/src" {label="src" "src/reactthing.tsx" [label="reactthing.tsx" fillcolor="#bbfeff" URL="src/reactthing.tsx"] }
+    subgraph "cluster_/src" {label="src" "src/typescript.ts" [label="typescript.ts" fillcolor="#ddfeff" URL="src/typescript.ts"] }
 
 }

@@ -21,11 +21,11 @@
     },
     {
         "criteria": {"source": "\\.ts$"},
-        "colors": {"fillcolor": "#eeeeff"}
+        "colors": {"fillcolor": "#ddfeff"}
     },
     {
         "criteria": {"source": "\\.tsx$"},
-        "colors": {"fillcolor": "#cceeff"}
+        "colors": {"fillcolor": "#bbfeff"}
     },
     {
         "criteria": {"source": "(\\.coffee|\\.litcoffee|\\.coffee\\.md)$"},
