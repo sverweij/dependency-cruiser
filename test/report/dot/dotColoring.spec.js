@@ -26,13 +26,13 @@ describe("dot: determineModuleColors", () => {
     it("core module => grey", () => {
         expect(
             dotColoring.determineModuleColors({coreModule: true})
-        ).to.deep.equal({color:"grey"});
+        ).to.deep.equal({color:"grey", fontcolor:"grey"});
     });
 
     it("couldNotResolve => red", () => {
         expect(
             dotColoring.determineModuleColors({couldNotResolve: true})
-        ).to.deep.equal({color:"red"});
+        ).to.deep.equal({color:"red", fontcolor:"red"});
     });
 
     it("json => darker yellowish fillcolor", () => {

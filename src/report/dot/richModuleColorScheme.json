@@ -1,11 +1,15 @@
 [
     {
         "criteria": {"couldNotResolve": true},
-        "colors": {"color": "red"}
+        "colors": {"color": "red", "fontcolor": "red"}
     },
     {
         "criteria": {"coreModule": true},
-        "colors": {"color": "grey"}
+        "colors": {"color": "grey", "fontcolor": "grey"}
+    },
+    {
+        "criteria": {"source": "node_modules"},
+        "colors": {"fillcolor": "#c40b0a", "fontcolor": "white"}
     },
     {
         "criteria": {"orphan": true},
@@ -18,6 +22,10 @@
     {
         "criteria": {"source": "\\.jsx$"},
         "colors": {"fillcolor": "#ffff77"}
+    },
+    {
+        "criteria": {"source": "\\.vue$"},
+        "colors": {"fillcolor": "#41f083"}
     },
     {
         "criteria": {"source": "\\.ts$"},

@@ -36,7 +36,9 @@ function determineModuleColors(pModule, pColoringScheme) {
     let lInvalidColoring = {};
 
     if (pModule.hasOwnProperty("valid") && !pModule.valid) {
-        lInvalidColoring = {color: severity2Color(pModule.rules[0].severity)};
+        const lColor = severity2Color(pModule.rules[0].severity);
+
+        lInvalidColoring = {color: lColor, fontcolor: lColor};
     }
     return Object.assign(
         _get(lColoringScheme.find(pSchemeEntry => moduleMatchesCriteria(pSchemeEntry, pModule)), 'colors', {}),
