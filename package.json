@@ -13,6 +13,7 @@
     "src/",
     "!src/**/*.hbs",
     "!src/**/*.md",
+    "!**/*.DS_Store",
     "types/*.d.ts",
     "LICENSE",
     "package.json",
