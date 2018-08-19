@@ -1,0 +1,50 @@
+[
+    {
+        "criteria": {"couldNotResolve": true},
+        "colors": {"color": "red", "fontcolor": "red"}
+    },
+    {
+        "criteria": {"coreModule": true},
+        "colors": {"color": "grey", "fontcolor": "grey"}
+    },
+    {
+        "criteria": {"source": "node_modules"},
+        "colors": {"fillcolor": "#c40b0a", "fontcolor": "white"}
+    },
+    {
+        "criteria": {"orphan": true},
+        "colors": {"fillcolor": "#ccffcc"}
+    },
+    {
+        "criteria": {"source": "\\.json$"},
+        "colors": {"fillcolor": "#ffee44"}
+    },
+    {
+        "criteria": {"source": "\\.jsx$"},
+        "colors": {"fillcolor": "#ffff77"}
+    },
+    {
+        "criteria": {"source": "\\.vue$"},
+        "colors": {"fillcolor": "#41f083"}
+    },
+    {
+        "criteria": {"source": "\\.ts$"},
+        "colors": {"fillcolor": "#ddfeff"}
+    },
+    {
+        "criteria": {"source": "\\.tsx$"},
+        "colors": {"fillcolor": "#bbfeff"}
+    },
+    {
+        "criteria": {"source": "(\\.coffee|\\.litcoffee|\\.coffee\\.md)$"},
+        "colors": {"fillcolor": "#eeccaa"}
+    },
+    {
+        "criteria": {"source": "(\\.csx|\\.cjsx)$"},
+        "colors": {"fillcolor": "#eebb77"}
+    },
+    {
+        "criteria": {"source": "\\.ls$/g"},
+        "colors": {"fillcolor": "pink"}
+    }
+]

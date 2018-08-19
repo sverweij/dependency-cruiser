@@ -38,14 +38,14 @@ function folderify(pModule) {
     );
 }
 
-function colorize(pModule) {
-    return Object.assign(
+function colorize(pColoringScheme) {
+    return pModule => Object.assign(
         {},
         pModule,
         {
-            color: coloring.determineModuleColor(pModule),
             dependencies: pModule.dependencies.map(coloring.determineDependencyColor)
-        }
+        },
+        coloring.determineModuleColors(pModule, pColoringScheme)
     );
 }
 
@@ -81,7 +81,7 @@ function addURL(pInput) {
         );
 }
 
-module.exports = (pInput) =>
+module.exports = (pColoringScheme) => (pInput) =>
     Object.assign(
         {},
         pInput,
@@ -91,7 +91,7 @@ module.exports = (pInput) =>
                     .sort(compareOnSource)
                     .map(extractFirstTransgression)
                     .map(folderify)
-                    .map(colorize)
+                    .map(colorize(pColoringScheme))
                     .map(addURL(pInput))
             })
         }

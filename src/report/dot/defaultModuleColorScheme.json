@@ -1,0 +1,14 @@
+[
+    {
+        "criteria": {"couldNotResolve": true},
+        "colors": {"color": "red", "fontcolor": "red"}
+    },
+    {
+        "criteria": {"coreModule": true},
+        "colors": {"color": "grey", "fontcolor": "grey"}
+    },
+    {
+        "criteria": {"source": "\\.json$"},
+        "colors": {"fillcolor": "#ffee44"}
+    }
+]

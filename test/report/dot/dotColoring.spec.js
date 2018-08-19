@@ -15,3 +15,29 @@ describe("dot: severity2color", () => {
         expect(dotColoring.severity2Color('fatal')).to.equal('red');
     });
 });
+
+describe("dot: determineModuleColors", () => {
+    it("empty module => no colors", () => {
+        expect(
+            dotColoring.determineModuleColors({})
+        ).to.deep.equal({});
+    });
+
+    it("core module => grey", () => {
+        expect(
+            dotColoring.determineModuleColors({coreModule: true})
+        ).to.deep.equal({color:"grey", fontcolor:"grey"});
+    });
+
+    it("couldNotResolve => red", () => {
+        expect(
+            dotColoring.determineModuleColors({couldNotResolve: true})
+        ).to.deep.equal({color:"red", fontcolor:"red"});
+    });
+
+    it("json => darker yellowish fillcolor", () => {
+        expect(
+            dotColoring.determineModuleColors({source: "package.json"})
+        ).to.deep.equal({fillcolor:"#ffee44"});
+    });
+});

@@ -4,7 +4,8 @@ const extract          = require("../extract");
 const meta             = require("../extract/transpile/meta");
 const reportHtml       = require("../report/html");
 const reportJson       = require("../report/json");
-const reportDot        = require("../report/dot");
+const reportDot        = require("../report/dot")();
+const reportRCDot      = require("../report/dot")(require('../report/dot/richModuleColorScheme.json'));
 const reportCsv        = require("../report/csv");
 const reportErr        = require("../report/err");
 const validateRuleSet  = require("./ruleSet/validate");
@@ -16,6 +17,7 @@ const TYPE2REPORTER      = {
     "json" : reportJson,
     "html" : reportHtml,
     "dot"  : reportDot,
+    "rcdot"  : reportRCDot,
     "csv"  : reportCsv,
     "err"  : reportErr
 };
@@ -44,7 +46,7 @@ const TYPE2REPORTER      = {
  *                (default: 0, which means 'infinite depth')
  *  moduleSystems: an array of module systems to use for following dependencies;
  *                defaults to ["es6", "cjs", "amd"]
- *  outputType  : one of "json", "html", "dot", "csv" or "err". When left
+ *  outputType  : one of "json", "html", "dot", "rcdot", "csv" or "err". When left
  *                out the function will return a javascript object as dependencies
  *  preserveSymlinks: if true does not resolve symlinks, defaults to false
  * }

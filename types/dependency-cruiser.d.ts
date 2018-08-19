@@ -32,7 +32,7 @@ export interface IAvailableTranspiler {
 
 export type ModuleSystemType = "cjs" | "amd" | "es6"  | "tsd";
 
-export type OutputType = "json" | "html" | "dot" | "csv" | "err";
+export type OutputType = "json" | "html" | "dot" | "rcdot" | "csv" | "err";
 
 export type SeverityType = "error" | "warn" | "info";
 
