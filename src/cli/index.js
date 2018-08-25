@@ -1,7 +1,7 @@
 "use strict";
 
 const glob                    = require('glob');
-const _get                    = require('lodash').get;
+const _get                    = require('lodash/get');
 const main                    = require('../main');
 const flattenTypeScriptConfig = require('./flattenTypeScriptConfig');
 const getResolveConfig        = require('./getResolveConfig');
