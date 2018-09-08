@@ -2,12 +2,38 @@
   "name": "dependency-cruiser",
   "version": "4.5.0",
   "description": "Validate and visualize dependencies. With your rules. JavaScript, TypeScript, CoffeeScript. ES6, CommonJS, AMD.",
+  "keywords": [
+    "static analysis",
+    "circular",
+    "dependencies",
+    "typescript",
+    "javascript",
+    "coffeescript",
+    "ES6",
+    "ES2015",
+    "AMD",
+    "CommonJS",
+    "validation",
+    "spelunking"
+  ],
+  "author": {
+    "name": "Sander Verweij",
+    "url": "https://sverweij.github.io"
+  },
+  "contributors": [
+    {
+      "name": "Klaus Meinhardt",
+      "url": "https://github.com/ajafff"
+    }
+  ],
+  "license": "MIT",
   "bin": {
     "dependency-cruiser": "bin/dependency-cruise",
     "dependency-cruise": "bin/dependency-cruise",
     "depcruise": "bin/dependency-cruise"
   },
   "main": "src/main/index.js",
+  "types": "types/dependency-cruiser.d.ts",
   "files": [
     "bin/",
     "src/",
@@ -42,30 +68,23 @@
     "upem:install": "npm install",
     "upem:update": "npm outdated --json | upem"
   },
-  "keywords": [
-    "static analysis",
-    "circular",
-    "dependencies",
-    "typescript",
-    "javascript",
-    "coffeescript",
-    "ES6",
-    "ES2015",
-    "AMD",
-    "CommonJS",
-    "validation"
-  ],
-  "author": {
-    "name": "Sander Verweij",
-    "url": "https://sverweij.github.io"
+  "dependencies": {
+    "acorn": "5.7.2",
+    "ajv": "6.5.3",
+    "awesome-typescript-loader": "5.2.1",
+    "chalk": "2.4.1",
+    "commander": "2.18.0",
+    "enhanced-resolve": "4.1.0",
+    "figures": "2.0.0",
+    "glob": "7.1.3",
+    "handlebars": "4.0.12",
+    "lodash": "4.17.10",
+    "resolve": "1.8.1",
+    "safe-regex": "1.1.0",
+    "semver": "5.5.1",
+    "semver-try-require": "2.0.2",
+    "strip-json-comments": "2.0.1"
   },
-  "contributors": [
-    {
-      "name": "Klaus Meinhardt",
-      "url": "https://github.com/ajafff"
-    }
-  ],
-  "license": "MIT",
   "devDependencies": {
     "chai": "4.1.2",
     "chai-json-schema": "1.5.0",
@@ -94,23 +113,6 @@
     "url": "https://github.com/sverweij/dependency-cruiser/issues"
   },
   "homepage": "https://github.com/sverweij/dependency-cruiser",
-  "dependencies": {
-    "acorn": "5.7.2",
-    "ajv": "6.5.3",
-    "awesome-typescript-loader": "5.2.1",
-    "chalk": "2.4.1",
-    "commander": "2.18.0",
-    "enhanced-resolve": "4.1.0",
-    "figures": "2.0.0",
-    "glob": "7.1.3",
-    "handlebars": "4.0.12",
-    "lodash": "4.17.10",
-    "resolve": "1.8.1",
-    "safe-regex": "1.1.0",
-    "semver": "5.5.1",
-    "semver-try-require": "2.0.2",
-    "strip-json-comments": "2.0.1"
-  },
   "nyc": {
     "statements": 99.8,
     "branches": 99.4,
@@ -142,7 +144,6 @@
   "engines": {
     "node": ">=6"
   },
-  "types": "types/dependency-cruiser.d.ts",
   "supportedTranspilers": {
     "coffee-script": ">=1.0.0 <2.0.0",
     "coffeescript": ">=1.0.0 <3.0.0",
