@@ -16,7 +16,7 @@ function getCompilerOptions(pTsx, pTSConfig = {}) {
     return Object.assign(
         {"target": "es2015"},
         lCompilerOptions,
-        _get(pTSConfig, "compilerOptions", {})
+        _get(pTSConfig, "options", {})
     );
 }
 

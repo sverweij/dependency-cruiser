@@ -3,7 +3,8 @@
 const glob                    = require('glob');
 const _get                    = require('lodash/get');
 const main                    = require('../main');
-const flattenTypeScriptConfig = require('./flattenTypeScriptConfig');
+// const flattenTypeScriptConfig = require('./flattenTypeScriptConfig');
+const parseTSConfig           = require('./parseTSConfig');
 const getResolveConfig        = require('./getResolveConfig');
 const validateFileExistence   = require('./validateFileExistence');
 const normalizeOptions        = require('./normalizeOptions');
@@ -38,7 +39,8 @@ function extractTSConfigOptions(pOptions) {
     const lTSConfigFileName = _get(pOptions, "ruleSet.options.tsConfig.fileName", null);
 
     if (lTSConfigFileName) {
-        lRetval = flattenTypeScriptConfig(lTSConfigFileName);
+        // lRetval = flattenTypeScriptConfig(lTSConfigFileName);
+        lRetval = parseTSConfig(lTSConfigFileName);
     }
 
     return lRetval;
