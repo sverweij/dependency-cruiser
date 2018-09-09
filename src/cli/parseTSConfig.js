@@ -9,7 +9,7 @@ let formatDiagnosticsHost = {
     getCanonicalFileName(pFileName) {
         let lRetval = pFileName.toLowerCase();
 
-        /* istanbul ignore if */
+        /* istanbul ignore next - depends on the platform which branch is taken */
         if (_get(typescript, 'sys.useCaseSensitiveFileNames', false)){
             lRetval = pFileName;
         }
