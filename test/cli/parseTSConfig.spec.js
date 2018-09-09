@@ -1,8 +1,9 @@
 const path          = require("path").posix;
 const expect        = require("chai").expect;
 const parseTSConfig = require("../../src/cli/parseTSConfig");
+const pathToPosix   = require("../../src/utl/pathToPosix");
 
-const DIRNAME = path.normalize(__dirname);
+const DIRNAME = pathToPosix(__dirname);
 
 describe("flatten typescript config - simple config scenarios", () => {
     it("throws when no config file name is passed", () => {
