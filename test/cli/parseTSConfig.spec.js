@@ -2,6 +2,8 @@ const path          = require("path").posix;
 const expect        = require("chai").expect;
 const parseTSConfig = require("../../src/cli/parseTSConfig");
 
+const DIRNAME = path.normalize(__dirname);
+
 describe("flatten typescript config - simple config scenarios", () => {
     it("throws when no config file name is passed", () => {
         expect(() => parseTSConfig()).to.throw();
@@ -21,7 +23,7 @@ describe("flatten typescript config - simple config scenarios", () => {
         expect(
             parseTSConfig(path.join(__dirname, "./fixtures/typescriptconfig/tsconfig.empty.json")).options
         ).to.deep.equal({
-            configFilePath: path.join(__dirname, "./fixtures/typescriptconfig/tsconfig.empty.json")
+            configFilePath: path.join(DIRNAME, "./fixtures/typescriptconfig/tsconfig.empty.json")
         });
     });
 
@@ -29,7 +31,7 @@ describe("flatten typescript config - simple config scenarios", () => {
         expect(
             parseTSConfig(path.join(__dirname, "./fixtures/typescriptconfig/tsconfig.withcomments.json")).options
         ).to.deep.equal({
-            configFilePath: path.join(__dirname, "./fixtures/typescriptconfig/tsconfig.withcomments.json")
+            configFilePath: path.join(DIRNAME, "./fixtures/typescriptconfig/tsconfig.withcomments.json")
         });
     });
 
@@ -39,7 +41,7 @@ describe("flatten typescript config - simple config scenarios", () => {
                 path.join(__dirname, "./fixtures/typescriptconfig/tsconfig.asgeneratedbydefault.json")
             ).options
         ).to.deep.equal({
-            configFilePath: path.join(__dirname, "./fixtures/typescriptconfig/tsconfig.asgeneratedbydefault.json"),
+            configFilePath: path.join(DIRNAME, "./fixtures/typescriptconfig/tsconfig.asgeneratedbydefault.json"),
             esModuleInterop: true,
             module: 1,
             strict: true,
@@ -67,7 +69,7 @@ describe("flatten typescript config - 'extend' config scenarios", () => {
         expect(
             parseTSConfig(path.join(__dirname, "./fixtures/typescriptconfig/tsconfig.simpleextends.json")).options
         ).to.deep.equal({
-            configFilePath: path.join(__dirname, "./fixtures/typescriptconfig/tsconfig.simpleextends.json")
+            configFilePath: path.join(DIRNAME, "./fixtures/typescriptconfig/tsconfig.simpleextends.json")
         });
     });
 
@@ -77,7 +79,7 @@ describe("flatten typescript config - 'extend' config scenarios", () => {
         );
         const lWildCardDirectories = {};
 
-        lWildCardDirectories[path.join(__dirname, "./fixtures/typescriptconfig/override from extends here")] = 1;
+        lWildCardDirectories[path.join(DIRNAME, "./fixtures/typescriptconfig/override from extends here")] = 1;
 
         /* eslint no-undefined:0 */
         expect(
@@ -121,16 +123,16 @@ describe("flatten typescript config - 'extend' config scenarios", () => {
                 path.join(__dirname, "./fixtures/typescriptconfig/tsconfig.compileroptionsextends.json")
             ).options
         ).to.deep.equal({
-            configFilePath: path.join(__dirname, "./fixtures/typescriptconfig/tsconfig.compileroptionsextends.json"),
+            configFilePath: path.join(DIRNAME, "./fixtures/typescriptconfig/tsconfig.compileroptionsextends.json"),
             // only in extends:
             allowJs: true,
             // overridden from base:
             allowUnreachableCode: false,
             // only in base:
             rootDirs: [
-                path.join(__dirname, "fixtures/typescriptconfig/foo"),
-                path.join(__dirname, "fixtures/typescriptconfig/bar"),
-                path.join(__dirname, "fixtures/typescriptconfig/baz")
+                path.join(DIRNAME, "fixtures/typescriptconfig/foo"),
+                path.join(DIRNAME, "fixtures/typescriptconfig/bar"),
+                path.join(DIRNAME, "fixtures/typescriptconfig/baz")
             ]
         });
     });
@@ -141,7 +143,7 @@ describe("flatten typescript config - 'extend' config scenarios", () => {
                 path.join(__dirname, "./fixtures/typescriptconfig/tsconfig.compileroptionsextendslib.json")
             ).options
         ).to.deep.equal({
-            configFilePath: path.join(__dirname, "./fixtures/typescriptconfig/tsconfig.compileroptionsextendslib.json"),
+            configFilePath: path.join(DIRNAME, "./fixtures/typescriptconfig/tsconfig.compileroptionsextendslib.json"),
             lib: [
                 // "dom.iterable",
                 "lib.dom.iterable.d.ts"
@@ -153,6 +155,4 @@ describe("flatten typescript config - 'extend' config scenarios", () => {
         });
     });
 
-    // only compiler options in base
-    // only compiler options in extends
 });
