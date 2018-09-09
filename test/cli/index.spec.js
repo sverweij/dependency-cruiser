@@ -252,7 +252,7 @@ describe("#processCLI", () => {
             unhookInterceptStdOut();
             unhookInterceptStdErr();
 
-            expect(lExitCode).to.equal(-1);
+            expect(lExitCode).to.equal(1);
             return expect(
                 lCapturedStderr
             ).to.contain(
@@ -281,7 +281,7 @@ describe("#processCLI", () => {
                 lCapturedStderr += pText;
             })();
 
-            expect(lExitCode).to.equal(-1);
+            expect(lExitCode).to.equal(1);
             return expect(
                 lCapturedStderr
             ).to.contain(
