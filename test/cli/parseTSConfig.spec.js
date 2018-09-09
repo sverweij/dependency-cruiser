@@ -1,4 +1,4 @@
-const path                    = require("path");
+const path                    = require("path").posix;
 const expect                  = require("chai").expect;
 const parseTSConfig = require("../../src/cli/parseTSConfig");
 
