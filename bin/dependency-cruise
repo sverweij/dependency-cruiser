@@ -46,10 +46,12 @@ program
     .parse(process.argv);
 
 if (Boolean(program.args[0]) || program.info || program.init) {
-    processCLI(
+    const lExitCode = processCLI(
         program.args,
         program
     );
+
+    process.exit(lExitCode);
 } else {
     program.help();
 }

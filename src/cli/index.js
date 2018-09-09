@@ -45,6 +45,8 @@ function extractTSConfigOptions(pOptions) {
 }
 
 function runCruise(pFileDirArray, pOptions) {
+    let lExitCode = 0;
+
     pFileDirArray
         .filter(pFileOrDir => !glob.hasMagic(pFileOrDir))
         .forEach(validateFileExistence);
@@ -64,14 +66,15 @@ function runCruise(pFileDirArray, pOptions) {
 
     io.write(pOptions.outputTo, lDependencyList.modules);
 
-    /* istanbul ignore if */
     if (lDependencyList.summary.error > 0) {
-        process.exit(lDependencyList.summary.error);
+        lExitCode = lDependencyList.summary.error;
     }
+    return lExitCode;
 }
 
 module.exports = (pFileDirArray, pOptions) => {
     pOptions = pOptions || {};
+    let lExitCode = 0;
 
     try {
         if (pOptions.info === true) {
@@ -79,12 +82,11 @@ module.exports = (pFileDirArray, pOptions) => {
         } else if (pOptions.init === true){
             createRulesFile(pOptions);
         } else {
-            runCruise(pFileDirArray, pOptions);
+            lExitCode = runCruise(pFileDirArray, pOptions);
         }
     } catch (e) {
         process.stderr.write(`\n  ERROR: ${e.message}\n`);
+        lExitCode = -1;
     }
+    return lExitCode;
 };
-
-
-/* eslint no-process-exit: 0 */

@@ -9,7 +9,7 @@ function writeToFile(pOutputTo, pDependencyString) {
             {encoding: "utf8", flag: "w"}
         );
     } catch (e) {
-        process.stderr.write(`ERROR: Writing to '${pOutputTo}' didn't work. ${e}`);
+        throw Error(`Writing to '${pOutputTo}' didn't work. ${e}`);
     }
 }
 
