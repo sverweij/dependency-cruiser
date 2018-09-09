@@ -1,5 +1,5 @@
-const path                    = require("path").posix;
-const expect                  = require("chai").expect;
+const path          = require("path").posix;
+const expect        = require("chai").expect;
 const parseTSConfig = require("../../src/cli/parseTSConfig");
 
 describe("flatten typescript config - simple config scenarios", () => {
