@@ -11,8 +11,7 @@ if (!semver.satisfies(process.versions.node, $package.engines.node)) {
     process.stderr.write(`\nERROR: your node version (${process.versions.node}) is not recent enough.\n`);
     process.stderr.write(`       dependency-cruiser needs a version of node ${$package.engines.node}\n\n`);
 
-    /* eslint no-process-exit: 0 */
-    process.exit(-1);
+    process.exitCode = 1;
 }
 
 program
@@ -51,7 +50,7 @@ if (Boolean(program.args[0]) || program.info || program.init) {
         program
     );
 
-    process.exit(lExitCode);
+    process.exitCode = lExitCode;
 } else {
     program.help();
 }

@@ -86,7 +86,7 @@ module.exports = (pFileDirArray, pOptions) => {
         }
     } catch (e) {
         process.stderr.write(`\n  ERROR: ${e.message}\n`);
-        lExitCode = -1;
+        lExitCode = 1;
     }
     return lExitCode;
 };
