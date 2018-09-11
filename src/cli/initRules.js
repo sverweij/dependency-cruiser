@@ -1,7 +1,9 @@
 "use strict";
 
-const fs           = require('fs');
-const starterRules = require('./rules.starter.json');
+const fs   = require('fs');
+const path = require('path');
+
+const STARTER_RULES_FILENAME = path.join(__dirname, './rules.starter.json');
 
 /*
   We could have used utl.fileExists - but that one is cached.
@@ -33,10 +35,10 @@ module.exports = (pFileName) => {
         throw Error(`A '${pFileName}' already exists here - leaving it be.\n`);
     } else {
         try {
-            fs.writeFileSync(
+            fs.copyFileSync(
+                STARTER_RULES_FILENAME,
                 pFileName,
-                JSON.stringify(starterRules, null, "  "),
-                {encoding: "utf8", flag: "w"}
+                fs.constants.COPYFILE_EXCL
             );
         } catch (e) {
 
