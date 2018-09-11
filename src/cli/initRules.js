@@ -35,10 +35,15 @@ module.exports = (pFileName) => {
         throw Error(`A '${pFileName}' already exists here - leaving it be.\n`);
     } else {
         try {
-            fs.copyFileSync(
-                STARTER_RULES_FILENAME,
+            // when dropping node 6 support use this in stead:
+            // fs.copyFileSync(STARTER_RULES_FILENAME, pFileName, fs.constants.COPYFILE_EXCL);
+            fs.writeFileSync(
                 pFileName,
-                fs.constants.COPYFILE_EXCL
+                fs.readFileSync(
+                    STARTER_RULES_FILENAME,
+                    {encoding: "utf8", flag: "r"}
+                ),
+                {encoding: "utf8", flag: "w"}
             );
         } catch (e) {
 
