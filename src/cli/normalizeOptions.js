@@ -4,6 +4,7 @@ const fs       = require('fs');
 const _set     = require('lodash/set');
 const _get     = require('lodash/get');
 const _clone   = require('lodash/clone');
+const stripJSONComments = require('strip-json-comments');
 const defaults = require('./defaults.json');
 
 function getOptionValue(pDefault) {
@@ -63,7 +64,11 @@ module.exports = (pOptions) => {
 
     if (pOptions.hasOwnProperty("validate")){
         pOptions.rulesFile = module.exports.determineRulesFileName(pOptions.validate);
-        pOptions.ruleSet   = JSON.parse(fs.readFileSync(pOptions.rulesFile, 'utf8'));
+        pOptions.ruleSet   = JSON.parse(
+            stripJSONComments(
+                fs.readFileSync(pOptions.rulesFile, 'utf8')
+            )
+        );
     }
 
     pOptions = normalizeConfigFile(pOptions, "webpackConfig", defaults.WEBPACK_CONFIG);
