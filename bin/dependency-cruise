@@ -12,7 +12,7 @@ if (!semver.satisfies(process.versions.node, $package.engines.node)) {
     process.stderr.write(`       dependency-cruiser needs a version of node ${$package.engines.node}\n\n`);
 
     /* eslint no-process-exit: 0 */
-    process.exit(-1);
+    process.exit(1);
 }
 
 program
@@ -46,7 +46,7 @@ program
     .parse(process.argv);
 
 if (Boolean(program.args[0]) || program.info || program.init) {
-    processCLI(
+    process.exitCode = processCLI(
         program.args,
         program
     );
