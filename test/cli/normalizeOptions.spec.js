@@ -57,6 +57,32 @@ describe("normalizeOptions", () => {
         );
     });
 
+    it("a rules file with comments gets the comments stripped out & parsed", () => {
+        expect(
+            normalizeOptions({validate: "./test/cli/fixtures/rules.withcomments.json"})
+        ).to.deep.equal(
+            {
+                outputTo: "-",
+                outputType: "err",
+                rulesFile: "./test/cli/fixtures/rules.withcomments.json",
+                "ruleSet": {
+                    "forbidden": [
+                        {
+                            "name": "sub-not-allowed",
+                            "severity": "warn",
+                            "from": {
+                            },
+                            "to": {
+                                "path": "sub"
+                            }
+                        }
+                    ]
+                },
+                validate: true
+            }
+        );
+    });
+
     it("defaults tsConfig.fileName to 'tsconfig.json' if it wasn't specified", () => {
         expect(
             normalizeOptions({validate: "./test/cli/fixtures/rules.tsConfigNoFileName.json"})
