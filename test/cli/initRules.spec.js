@@ -1,16 +1,17 @@
 "use strict";
-const fs           = require('fs');
-const chai         = require('chai');
-const initRules    = require("../../src/cli/initRules");
-const rulesSchema  = require('../../src/main/ruleSet/jsonschema.json');
-const deleteDammit = require("./deleteDammit.utl");
+const fs                = require('fs');
+const chai              = require('chai');
+const stripJSONComments = require('strip-json-comments');
+const initRules         = require("../../src/cli/initRules");
+const rulesSchema       = require('../../src/main/ruleSet/jsonschema.json');
+const deleteDammit      = require("./deleteDammit.utl");
 
 const expect       = chai.expect;
 const RULES_FILE = ".dependency-cruiser.json";
 
 chai.use(require('chai-json-schema'));
 
-describe("normalizeOptions", () => {
+describe("initRules", () => {
 
     beforeEach("set up", () => {
         deleteDammit(RULES_FILE);
@@ -23,7 +24,11 @@ describe("normalizeOptions", () => {
     it("writes a valid rules file to .dependency-cruiser.json", () => {
         initRules(RULES_FILE);
         expect(
-            JSON.parse(fs.readFileSync(RULES_FILE, "utf8"))
+            JSON.parse(
+                stripJSONComments(
+                    fs.readFileSync(RULES_FILE, "utf8")
+                )
+            )
         ).to.be.jsonSchema(rulesSchema);
     });
 

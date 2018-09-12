@@ -1,7 +1,9 @@
 "use strict";
 
-const fs           = require('fs');
-const starterRules = require('./rules.starter.json');
+const fs   = require('fs');
+const path = require('path');
+
+const STARTER_RULES_FILENAME = path.join(__dirname, './rules.starter.json');
 
 /*
   We could have used utl.fileExists - but that one is cached.
@@ -33,9 +35,14 @@ module.exports = (pFileName) => {
         throw Error(`A '${pFileName}' already exists here - leaving it be.\n`);
     } else {
         try {
+            // when dropping node 6 support use this in stead:
+            // fs.copyFileSync(STARTER_RULES_FILENAME, pFileName, fs.constants.COPYFILE_EXCL);
             fs.writeFileSync(
                 pFileName,
-                JSON.stringify(starterRules, null, "  "),
+                fs.readFileSync(
+                    STARTER_RULES_FILENAME,
+                    {encoding: "utf8", flag: "r"}
+                ),
                 {encoding: "utf8", flag: "w"}
             );
         } catch (e) {

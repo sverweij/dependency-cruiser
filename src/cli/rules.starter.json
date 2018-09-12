@@ -73,6 +73,19 @@
         "to": { "moreThanOneDependencyType": true }
     }],
     "options": {
-        "doNotFollow": "node_modules"
+        "doNotFollow": "node_modules"                    /* pattern specifying which files not to follow further when encountered*/
+        // "exclude" : "",                               /* pattern specifying which files to exclude (regular expression) */
+        // "moduleSystems: ["amd", "cjs", "es6", "tsd"], /* list of module systems to cruise */
+        // "prefix": "",                                 /* prefix for links in html and svg output (e.g. https://github.com/you/yourrepo/blob/develop/) */
+        // "tsPreCompilationDeps: false,                 /* if true detect dependencies that only exist before typescript-to-javascript compilation */
+        // "preserveSymlinks": false,                    /* if true leave symlinks untouched, otherwise use the realpath */
+        // "tsConfig": {                                 /* Typescript project file ('tsconfig.json') to use for (1) compilation and (2) resolution (e.g. with the paths property) */
+        //    "fileName": "./tsconfig.json"              /* The typescript project file to use. The fileName is relative to dependency-cruiser's current working directory. When not provided defaults to './tsconfig.json'.*/
+        //},
+        // "webpackConfig": {                            /* Webpack configuration to use to get resolve options from */
+        //    "fileName": "./webpack.conf.js"            /* The webpack conf file to use (typically something like 'webpack.conf.js'). The fileName is relative to dependency-cruiser's current working directory. When not provided defaults to './webpack.conf.js'. */
+        //    "env": {},                                 /* Environment to pass if your config file returns a function */
+        //    "args": {}                                 /* Arguments to pass if your config file returns a function. E.g. {mode: 'production'} if you want to use webpack 4's 'mode' feature */
+        //}
     }
 }
