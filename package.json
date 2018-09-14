@@ -69,7 +69,9 @@
     "upem:update": "npm outdated --json | upem"
   },
   "dependencies": {
-    "acorn": "5.7.3",
+    "acorn": "6.0.1",
+    "acorn-loose": "6.0.0",
+    "acorn-walk": "6.0.1",
     "ajv": "6.5.3",
     "awesome-typescript-loader": "5.2.1",
     "chalk": "2.4.1",

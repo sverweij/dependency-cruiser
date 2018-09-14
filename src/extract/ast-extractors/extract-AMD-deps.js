@@ -1,6 +1,6 @@
 "use strict";
 
-const walk                        = require('acorn/dist/walk');
+const walk                        = require('acorn-walk');
 const extractCommonJSDependencies = require("./extract-commonJS-deps");
 
 function extractRegularAMDDependencies(pNode, pDependencies) {
