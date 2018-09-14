@@ -2,7 +2,7 @@
 
 const fs           = require('fs');
 const acorn        = require('acorn');
-const acorn_loose  = require('acorn/dist/acorn_loose');
+const acorn_loose  = require('acorn-loose');
 const _memoize     = require('lodash/memoize');
 const transpile    = require('../transpile');
 const getExtension = require('../../utl/getExtension');
@@ -28,7 +28,7 @@ function getAST(pFileName, pTSConfig) {
     try {
         return acorn.parse(lJavaScriptSource, {sourceType: 'module'});
     } catch (e) {
-        return acorn_loose.parse_dammit(lJavaScriptSource, {sourceType: 'module'});
+        return acorn_loose.parse(lJavaScriptSource, {sourceType: 'module'});
     }
 }
 module.exports = {

@@ -1,6 +1,6 @@
 "use strict";
 
-const walk        = require('acorn/dist/walk');
+const walk        = require('acorn-walk');
 
 module.exports = (pAST, pDependencies) => {
     function pushSourceValue(pNode){

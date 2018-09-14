@@ -1,6 +1,6 @@
 "use strict";
 
-const walk = require('acorn/dist/walk');
+const walk = require('acorn-walk');
 
 function firstArgumentIsAString(pNodeArguments) {
     return Boolean(pNodeArguments) &&
