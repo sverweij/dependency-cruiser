@@ -5,7 +5,7 @@ const $package   = require('../../package.json');
 
 const typescript = tryRequire('typescript', _get($package, 'supportedTranspilers.typescript', null));
 
-let formatDiagnosticsHost = {
+const formatDiagnosticsHost = {
     getCanonicalFileName(pFileName) {
         let lRetval = pFileName.toLowerCase();
 
@@ -23,7 +23,7 @@ let formatDiagnosticsHost = {
     }
 };
 
-function parseConfig(pTSConfigFileName) {
+module.exports = function parseConfig(pTSConfigFileName) {
     let lRetval = {};
 
     /* istanbul ignore else */
@@ -49,6 +49,4 @@ function parseConfig(pTSConfigFileName) {
     }
 
     return lRetval;
-}
-
-module.exports = parseConfig;
+};
