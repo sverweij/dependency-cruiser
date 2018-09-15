@@ -33,7 +33,6 @@
     - [`dependencyTypes`](#dependencytypes)
     - [`moreThanOneDependencyType`](#more-than-one-dependencytype-per-dependency-morethanonedependencytype)
 4. [Starter rule set](#a-starter-rule-set)
-    
 
 ## The structure of a dependency cruiser rules file
 The rules file is in json format. It can contain three sections - `forbidden`,
@@ -466,80 +465,4 @@ Things to keep in mind:
   pass `forceOrphanCheck: true` as part of the `pOptions` parameter.
 
 ## A starter rule set
-```json
-{
-    "forbidden": [{
-        "name": "not-to-test",
-        "comment": "Don't allow dependencies from outside the test folder to test",
-        "severity": "error",
-        "from": { "pathNot": "^test" },
-        "to": { "path": "^test" }
-    },{
-        "name": "not-to-spec",
-        "comment": "Don't allow dependencies to (typescript/ javascript/ coffeescript) spec files",
-        "severity": "error",
-        "from": {},
-        "to": { "path": "\\.spec\\.[js|ts|ls|coffee|litcoffee|coffee\\.md]$" }
-    },{
-        "name": "no-deprecated-core",
-        "comment": "Warn about dependencies on deprecated core modules.",
-        "severity": "warn",
-        "from": {},
-        "to": { "dependencyTypes": ["core"], "path": "^(punycode|domain)$" }
-    },{
-        "name": "no-deprecated-npm",
-        "comment": "These npm modules are deprecated - find an alternative.",
-        "severity": "warn",
-        "from": {},
-        "to": { "dependencyTypes": ["deprecated"] }
-    },{
-        "name": "not-to-unresolvable",
-        "comment": "Don't allow dependencies on modules dependency-cruiser can't resolve to files on disk (which probably means they don't exist)",
-        "severity": "error",
-        "from": {},
-        "to": { "couldNotResolve": true }
-    },{
-        "name": "not-to-dev-dep",
-        "severity": "error",
-        "comment": "Don't allow dependencies from src/app/lib to a development only package",
-        "from": { "path": "^(src|app|lib)" },
-        "to": { "dependencyTypes": ["npm-dev"] }
-    },{
-        "name": "no-non-package-json",
-        "severity": "error",
-        "comment": "Don't allow dependencies to packages not in package.json (except from within node_modules)",
-        "from": { "pathNot": "^node_modules"},
-        "to": { "dependencyTypes": ["unknown", "undetermined", "npm-no-pkg", "npm-unknown"] }
-    },{
-        "name": "optional-deps-used",
-        "severity": "info",
-        "comment": "nothing serious - but just check you have some serious try/ catches around the import/ requires of these",
-        "from": {},
-        "to": { "dependencyTypes": ["npm-optional"] }
-    },{
-        "name": "peer-deps-used",
-        "comment": "Warn about the use of a peer dependency (peer dependencies are deprecated with the advent of npm 3 - and probably gone with version 4).",
-        "severity": "warn",
-        "from": {},
-        "to": { "dependencyTypes": ["npm-peer"] }
-    },{
-        "name": "no-duplicate-dep-types",
-        "comment": "Warn if a dependency occurs in your package.json more than once (technically: has more than one dependency type)",
-        "severity": "warn",
-        "from": {},
-        "to": { "moreThanOneDependencyType": true }
-    },{
-        "name": "no-circular",
-        "comment": "Warn if there's a circular dependency",
-        "severity": "warn",
-        "from": {},
-        "to": { "circular": true }
-    },{
-        "name": "no-orphans",
-        "comment": "Warn about orphans",
-        "severity": "warn",
-        "from": { "orphan": true },
-        "to": {}
-    }]
-}
-```
+You can find the one dependency-cruiser uses on initialization [here](./rules.starter.json)
