@@ -1,17 +1,23 @@
 ---
 name: Feature request
-about: Suggest an idea for dependency-cruiser
+about: Suggest an improvement for dependency-cruiser
 
 ---
 
-**Is your feature request related to a problem? Please describe.**
-A clear and concise description of what the problem is. Ex. I'm always frustrated when [...]
+<!--- Provide a general summary of the issue in the Title above -->
 
-**Describe the solution you'd like**
-A clear and concise description of what you want to happen.
+### Expected Behavior
+<!--- If you're describing a bug, tell us what should happen -->
+<!--- If you're suggesting a change/improvement, tell us how it should work -->
 
-**Describe alternatives you've considered**
-A clear and concise description of any alternative solutions or features you've considered.
+### Current Behavior
+<!--- If describing a bug, tell us what happens instead of the expected behavior -->
+<!--- If suggesting a change/improvement, explain the difference from current behavior (if any)-->
 
-**Additional context**
-Add any other context or screenshots about the feature request here.
+### Possible Solution
+<!--- Not obligatory, but suggest a fix/reason for the bug, -->
+<!--- or ideas how to implement the addition or change -->
+
+### Context
+<!--- How has this issue affected you? What are you trying to accomplish? -->
+<!--- Providing context helps us come up with a solution that is most useful in the real world -->
