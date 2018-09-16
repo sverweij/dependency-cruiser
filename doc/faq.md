@@ -89,7 +89,7 @@ If you _do_ want to see these dependencies, do one of these:
 - if you have a `.dependency-cruiser.json`, put `"tsPreCompilationDeps" : true` in
 the `options` section.
 
-See [--ts-pre-compilation-deps-typescript-only](./cli.md#--ts-pre-compilation-deps-typescript-only)
+See [--ts-pre-compilation-deps](./cli.md#--ts-pre-compilation-deps-typescript-only)
 for details and examples.
 
 ### Typescript dynamic imports show up as "x" . What's up there?
