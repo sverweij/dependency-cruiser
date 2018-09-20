@@ -10,7 +10,8 @@ describe("transpiler meta", () => {
         expect(
             meta.scannableExtensions
         ).to.deep.equal([
-            ".js", ".jsx", ".vue", ".ts", ".tsx", ".d.ts", ".coffee", ".litcoffee", ".coffee.md", ".csx", ".cjsx"
+            ".js", ".mjs", ".jsx", ".vue", ".ts", ".tsx",
+            ".d.ts", ".coffee", ".litcoffee", ".coffee.md", ".csx", ".cjsx"
         ]);
     });
 

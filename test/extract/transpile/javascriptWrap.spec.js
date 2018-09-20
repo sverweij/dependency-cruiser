@@ -30,4 +30,14 @@ describe("jsx transpiler (the plain old javascript one)", () => {
             fs.readFileSync("./test/extract/transpile/fixtures/vue.js", 'utf8')
         );
     });
+
+    it("transpiles mjs", () => {
+        expect(
+            wrap.transpile(
+                fs.readFileSync("./test/extract/transpile/fixtures/mjs.mjs", 'utf8')
+            )
+        ).to.equal(
+            fs.readFileSync("./test/extract/transpile/fixtures/mjs.js", 'utf8')
+        );
+    });
 });
