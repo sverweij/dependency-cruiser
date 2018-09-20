@@ -21,6 +21,7 @@ const litCoffeeWrap        = require("./coffeeWrap")(true);
  */
 const extension2wrapper = {
     ".js"        : javaScriptWrap,
+    ".mjs"       : javaScriptWrap,
     ".jsx"       : javaScriptWrap,
     ".vue"       : javaScriptWrap,
     ".ts"        : typeScriptWrap,
