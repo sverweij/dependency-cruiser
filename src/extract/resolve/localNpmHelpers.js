@@ -2,8 +2,8 @@
 
 const fs       = require('fs');
 const path     = require('path');
-const resolve  = require('resolve');
 const _memoize = require('lodash/memoize');
+const resolve  = require('./resolve');
 
 const isLocal     = (pModule) => pModule.startsWith('.');
 const isScoped    = (pModule) => pModule.startsWith('@');
@@ -71,19 +71,19 @@ function getPackageRoot (pModule) {
  *
  * @param  {string} pModule  The module to get the package.json of
  * @param  {string} pBaseDir The base dir. Defaults to '.'
+ * @param  {any} pResolveOptions options for the resolver
  * @return {object}          The package.json as a javascript object, or
  *                           null if either module or package.json could
  *                           not be found
  */
-function bareGetPackageJson (pModule, pBaseDir) {
+function bareGetPackageJson (pModule, pBaseDir, pResolveOptions){
     let lRetval = null;
 
     try {
-        let lPackageJsonFilename = resolve.sync(
+        let lPackageJsonFilename = resolve(
             path.join(getPackageRoot(pModule), "package.json"),
-            {
-                basedir: pBaseDir ? pBaseDir : "."
-            }
+            pBaseDir ? pBaseDir : ".",
+            pResolveOptions
         );
 
         lRetval = JSON.parse(
@@ -107,11 +107,12 @@ const getPackageJson =
  *
  * @param  {string} pModule  The module to get the deprecation status of
  * @param  {string} pBaseDir The base dir. Defaults to '.'
+ * @param  {any} pResolveOptions options for the resolver
  * @return {boolean}         true if deprecated, false in all other cases
  */
-function dependencyIsDeprecated (pModule, pBaseDir) {
+function dependencyIsDeprecated (pModule, pBaseDir, pResolveOptions) {
     let lRetval = false;
-    let lPackageJson = getPackageJson(pModule, pBaseDir);
+    let lPackageJson = getPackageJson(pModule, pBaseDir, pResolveOptions);
 
     if (Boolean(lPackageJson)){
         lRetval = lPackageJson.hasOwnProperty("deprecated") && lPackageJson.deprecated;
@@ -124,12 +125,13 @@ function dependencyIsDeprecated (pModule, pBaseDir) {
  *
  * @param  {string} pModule  The module to get the deprecation status of
  * @param  {string} pBaseDir The base dir. Defaults to '.'
+ * @param  {any} pResolveOptions options for the resolver
  * @return {string}          The module's license string, or '' in case
  *                           there is no package.json or no license field
  */
-function getLicense (pModule, pBaseDir) {
+function getLicense (pModule, pBaseDir, pResolveOptions) {
     let lRetval = "";
-    let lPackageJson = getPackageJson(pModule, pBaseDir);
+    let lPackageJson = getPackageJson(pModule, pBaseDir, pResolveOptions);
 
     if (
         Boolean(lPackageJson) &&
