@@ -49,8 +49,8 @@ module.exports = (pModuleName, pBaseDir, pFileDir, pResolveOptions) => {
                 pModuleName,
                 readPackageDeps(pFileDir),
                 pFileDir,
-                pBaseDir,
-                pResolveOptions
+                pResolveOptions,
+                pBaseDir
             )
         }
     );

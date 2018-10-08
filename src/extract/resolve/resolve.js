@@ -14,7 +14,15 @@ function init(pResolveOptions) {
     }
 }
 
-function resolve(pModuleName, pFileDir, pResolveOptions){
+/**
+ * Resolves the given module to a path to a file on disk.
+ *
+ * @param {string} pModuleName The module name to resolve (e.g. 'slodash', './myModule')
+ * @param {string} pFileDir The directory from which to resolve the module
+ * @param {any} pResolveOptions Options to pass to enhanced resolve
+ * @returns {string} path to the resolved file on disk
+ */
+function resolve (pModuleName, pFileDir, pResolveOptions) {
 
     init(pResolveOptions);
 
@@ -26,6 +34,5 @@ function resolve(pModuleName, pFileDir, pResolveOptions){
         pModuleName
     );
 }
-
 
 module.exports = resolve;
