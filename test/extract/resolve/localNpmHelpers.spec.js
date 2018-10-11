@@ -7,7 +7,9 @@ describe("localNpmHelpers.getPackageJson", () => {
     it("returns null if the module does not exist", () => {
         expect(
             localNpmHelpers.getPackageJson(
-                './module-does-not-exist'
+                './module-does-not-exist',
+                '.',
+                {}
             )
         ).to.be.null;
     });
@@ -15,7 +17,9 @@ describe("localNpmHelpers.getPackageJson", () => {
     it("returns null if there's no package.json for the module (no basePath specified)", () => {
         expect(
             localNpmHelpers.getPackageJson(
-                'test/extract/fixtures/deprecated-node-module/require-something-deprecated'
+                'test/extract/fixtures/deprecated-node-module/require-something-deprecated',
+                '.',
+                {}
             )
         ).to.be.null;
     });
@@ -24,14 +28,17 @@ describe("localNpmHelpers.getPackageJson", () => {
         expect(
             localNpmHelpers.getPackageJson(
                 './require-something-deprecated',
-                './fixtures/deprecated-node-module/'
+                './fixtures/deprecated-node-module/',
+                {}
             )
         ).to.be.null;
     });
 
     it("returns a package.json when there is one", () => {
         let lPackageJson = localNpmHelpers.getPackageJson(
-            'chai'
+            'chai',
+            ".",
+            {}
         );
 
         expect(
@@ -44,7 +51,8 @@ describe("localNpmHelpers.getPackageJson", () => {
     it("returns a package.json when there is one ('local' node_modules)", () => {
         let lPackageJson = localNpmHelpers.getPackageJson(
             'deprecated-at-the-start-for-test-purposes',
-            './test/extract/fixtures/deprecated-node-module/'
+            './test/extract/fixtures/deprecated-node-module/',
+            {}
         );
 
         expect(
@@ -108,13 +116,13 @@ describe("localNpmHelpers.getPackageRoot", () => {
 describe("localNpmHelpers.getLicense", () => {
     it("returns '' if the module does not exist", () => {
         expect(
-            localNpmHelpers.getLicense('this-module-does-not-exist')
+            localNpmHelpers.getLicense('this-module-does-not-exist', '.', {})
         ).to.equal('');
     });
 
     it("returns '' if the module does exist but has no associated package.json", () => {
         expect(
-            localNpmHelpers.getLicense('./test/extract/resolve/fixtures/no-package-json')
+            localNpmHelpers.getLicense('./test/extract/resolve/fixtures/no-package-json', '.', {})
         ).to.equal('');
     });
 
@@ -122,7 +130,8 @@ describe("localNpmHelpers.getLicense", () => {
         expect(
             localNpmHelpers.getLicense(
                 'no-license',
-                './test/extract/resolve/fixtures/licenses/'
+                './test/extract/resolve/fixtures/licenses/',
+                {}
             )
         ).to.equal('');
     });
@@ -131,7 +140,8 @@ describe("localNpmHelpers.getLicense", () => {
         expect(
             localNpmHelpers.getLicense(
                 'boolean-license',
-                './test/extract/resolve/fixtures/licenses/'
+                './test/extract/resolve/fixtures/licenses/',
+                {}
             )
         ).to.equal('');
     });
@@ -140,7 +150,8 @@ describe("localNpmHelpers.getLicense", () => {
         expect(
             localNpmHelpers.getLicense(
                 'object-license',
-                './test/extract/resolve/fixtures/licenses/'
+                './test/extract/resolve/fixtures/licenses/',
+                {}
             )
         ).to.equal('');
     });
@@ -149,7 +160,8 @@ describe("localNpmHelpers.getLicense", () => {
         expect(
             localNpmHelpers.getLicense(
                 'array-license',
-                './test/extract/resolve/fixtures/licenses/'
+                './test/extract/resolve/fixtures/licenses/',
+                {}
             )
         ).to.equal('');
     });
@@ -158,7 +170,8 @@ describe("localNpmHelpers.getLicense", () => {
         expect(
             localNpmHelpers.getLicense(
                 'GPL-license',
-                './test/extract/resolve/fixtures/licenses/'
+                './test/extract/resolve/fixtures/licenses/',
+                {}
             )
         ).to.equal('GPL-3.0');
     });

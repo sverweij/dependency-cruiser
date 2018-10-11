@@ -2,7 +2,7 @@
 
 const fs                       = require('fs');
 const path                     = require('path');
-const resolve                  = require('resolve');
+const isCore                   = require('resolve').isCore;
 const memoize                  = require('lodash/memoize');
 const pathToPosix              = require('../../utl/pathToPosix');
 const determineDependencyTypes = require('./determineDependencyTypes');
@@ -19,7 +19,7 @@ const fileExists = memoize(pFile => {
     return true;
 });
 
-module.exports = (pModuleName, pBaseDir, pFileDir) => {
+module.exports = (pModuleName, pBaseDir, pFileDir, pResolveOptions) => {
     // lookups:
     // - [x] could be relative in the end (implemented)
     // - [ ] require.config kerfuffle (command line, html, file, ...)
@@ -34,20 +34,23 @@ module.exports = (pModuleName, pBaseDir, pFileDir) => {
     );
     let lRetval = {
         resolved: fileExists(lProbablePath) ? lProbablePath : pModuleName,
-        coreModule: Boolean(resolve.isCore(pModuleName)),
+        coreModule: Boolean(isCore(pModuleName)),
         followable: fileExists(lProbablePath),
-        couldNotResolve: !Boolean(resolve.isCore(pModuleName)) && !fileExists(lProbablePath)
+        couldNotResolve: !Boolean(isCore(pModuleName)) && !fileExists(lProbablePath)
     };
 
     return Object.assign(
         lRetval,
-        resolveHelpers.addLicenseAttribute(pModuleName, pBaseDir),
+        // we might want to use resolve options instead of {} here
+        resolveHelpers.addLicenseAttribute(pModuleName, pBaseDir, {}),
         {
             dependencyTypes: determineDependencyTypes(
                 lRetval,
                 pModuleName,
                 readPackageDeps(pFileDir),
-                pFileDir
+                pFileDir,
+                pResolveOptions,
+                pBaseDir
             )
         }
     );

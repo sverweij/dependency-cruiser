@@ -1,8 +1,8 @@
 "use strict";
 
-const path            = require("path");
-const resolve         = require("resolve");
-const localNpmHelpers = require("./localNpmHelpers");
+const path            = require('path');
+const isCore          = require('resolve').isCore;
+const localNpmHelpers = require('./localNpmHelpers');
 
 const npm2depType = {
     "dependencies"         : "npm",
@@ -40,13 +40,13 @@ function dependencyIsBundled(pModule, pPackageDeps) {
     return lRetval;
 }
 
-function determineNodeModuleDependencyTypes(pModuleName, pPackageDeps, pFileDir) {
+function determineNodeModuleDependencyTypes(pModuleName, pPackageDeps, pFileDir, pResolveOptions) {
     let lRetval = determineNpmDependencyTypes(
         localNpmHelpers.getPackageRoot(pModuleName),
         pPackageDeps
     );
 
-    if (localNpmHelpers.dependencyIsDeprecated(pModuleName, pFileDir)) {
+    if (localNpmHelpers.dependencyIsDeprecated(pModuleName, pFileDir, pResolveOptions)) {
         lRetval.push("deprecated");
     }
     if (dependencyIsBundled(pModuleName, pPackageDeps)) {
@@ -59,11 +59,11 @@ function isNodeModule(pDependency) {
     return pDependency.resolved.includes("node_modules");
 }
 
-function determineModuleDependencyTypes(pDependency, pModuleName, pPackageDeps, pFileDir) {
+function determineModuleDependencyTypes(pDependency, pModuleName, pPackageDeps, pFileDir, pResolveOptions) {
     let lRetval = [];
 
     if (isNodeModule(pDependency)) {
-        lRetval = determineNodeModuleDependencyTypes(pModuleName, pPackageDeps, pFileDir);
+        lRetval = determineNodeModuleDependencyTypes(pModuleName, pPackageDeps, pFileDir, pResolveOptions);
     } else {
         lRetval = ["localmodule"];
     }
@@ -118,15 +118,15 @@ function isAliassy(pModuleName, pDependency, pResolveOptions){
  *
  * @return {string[]} an array of dependency types for the dependency
  */
-function determineDependencyTypes (pDependency, pModuleName, pPackageDeps, pFileDir, pResolveOptions, pBaseDir) {
+module.exports = (pDependency, pModuleName, pPackageDeps, pFileDir, pResolveOptions, pBaseDir) => {
     let lRetval = ["undetermined"];
 
     pResolveOptions = pResolveOptions || {};
 
     if (pDependency.couldNotResolve) {
         lRetval = ["unknown"];
-    } else if (resolve.isCore(pModuleName)) {
-        // this 'resolve.isCore' business seems duplicate (it's already in
+    } else if (isCore(pModuleName)) {
+        // this 'isCore' business seems duplicate (it's already in
         // the passed object as `coreModule`- determined by the resolve-AMD or
         // resolve-commonJS module). I want to deprecate the `coreModule`
         // attribute in favor of this one and determining it here will make
@@ -139,15 +139,14 @@ function determineDependencyTypes (pDependency, pModuleName, pPackageDeps, pFile
             pDependency,
             pModuleName,
             pPackageDeps,
-            pFileDir
+            pFileDir,
+            pResolveOptions
         );
     } else if (isAliassy(pModuleName, pDependency, pResolveOptions)){
         lRetval = ["aliased"];
     }
 
     return lRetval;
-}
-
-module.exports = determineDependencyTypes;
+};
 
 /* eslint security/detect-object-injection: 0*/

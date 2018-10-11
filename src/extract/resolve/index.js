@@ -17,7 +17,7 @@ function resolveModule(pDependency, pBaseDir, pFileDir, pResolveOptions) {
     ) {
         lRetval = resolveCommonJS(pDependency.moduleName, pBaseDir, pFileDir, pResolveOptions);
     } else {
-        lRetval = resolveAMD(pDependency.moduleName, pBaseDir, pFileDir);
+        lRetval = resolveAMD(pDependency.moduleName, pBaseDir, pFileDir, pResolveOptions);
     }
     return lRetval;
 }
