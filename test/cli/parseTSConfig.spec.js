@@ -90,7 +90,9 @@ describe("flatten typescript config - 'extend' config scenarios", () => {
             "filesSpecs": [
                 "./dummysrc.ts"
             ],
-            "referencesSpecs": undefined,
+            // as of typescript 3.1.2 there's no referenceSpecs anymore when
+            // it's in neither base nor extends
+            // "referencesSpecs": undefined,
             // only in the extends:
             "excludeSpecs": [
                 "only in the extends"
