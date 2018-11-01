@@ -2,6 +2,8 @@
 
 const _flattenDeep = require('lodash/flattenDeep');
 
+const dependencySortFn = (left, right) => `${left.from}|${left.to}` > `${right.from}|${right.to}` ? 1 : -1;
+
 function cutNonTransgressions(pSourceEntry) {
     return {
         source       : pSourceEntry.source,
@@ -75,7 +77,7 @@ function extractModuleViolations(pModules){
 module.exports = (pModules) => {
     const lViolations = extractDependencyViolations(pModules)
         .concat(extractModuleViolations(pModules))
-        .sort((pOne, pTwo) => pOne.from > pTwo.from ? 1 : -1);
+        .sort(dependencySortFn);
 
     return Object.assign(
         {

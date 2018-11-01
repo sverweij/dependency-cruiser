@@ -148,6 +148,7 @@ describe('summarize extraction', () => {
             }]
         );
 
+        // also: sorted on from, to
         expect(lResult).to.deep.equal({
             violations: [{
                 from: "violation.js",
