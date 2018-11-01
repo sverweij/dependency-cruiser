@@ -58,15 +58,25 @@
     "lint": "eslint bin/dependency-cruise src test",
     "lint:types": "tslint types/dependency-cruiser.d.ts",
     "lint:fix": "eslint --fix bin/dependency-cruise src test",
-    "postversion": "git push && git push --tags",
-    "preversion": "test `git branch | grep \"^* [a-zA-Z]\" | cut -c 3-` = 'master'",
+    "scm:push": "run-p --aggregate-output scm:push:*",
+    "scm:push:github": "run-p --aggregate-output scm:push:github:*",
+    "scm:push:github:commits": "git push",
+    "scm:push:github:tags": "git push --tags",
+    "scm:push:gitlab-mirror": "run-p --aggregate-output scm:push:gitlab-mirror:*",
+    "scm:push:gitlab-mirror:commits": "git push gitlab-mirror",
+    "scm:push:gitlab-mirror:tags": "git push --tags gitlab-mirror",
+    "scm:push:bitbucket-mirror": "run-p --aggregate-output scm:push:bitbucket-mirror:*",
+    "scm:push:bitbucket-mirror:commits": "git push bitbucket-mirror",
+    "scm:push:bitbucket-mirror:tags": "git push --tags bitbucket-mirror",
+    "scm:stage": "git add .",
     "test": "mocha test/*/*.spec.js test/*/*/*.spec.js test/*/*/*/*.spec.js",
     "test:cover": "nyc --check-coverage npm test",
     "test:glob": "set -f && test \"`bin/dependency-cruise test/extract/fixtures/gather-globbing/packages/**/src/**/*.js | grep \"no dependency violations found\"`\" = \"✔ no dependency violations found (6 modules cruised)\"",
     "test:watch": "mocha --watch --watch-extensions=json --reporter=min test/*/*.spec.js test/*/*/*.spec.js test/*/*/*/*.spec.js",
     "update-dependencies": "npm-run-all upem:update upem:install build:clean build lint:fix depcruise test:cover",
     "upem:install": "npm install",
-    "upem:update": "npm outdated --json | upem"
+    "upem:update": "npm outdated --json | upem",
+    "version": "npm-run-all build depcruise:graph:doc scm:stage"
   },
   "upem": {
     "donotup": [
