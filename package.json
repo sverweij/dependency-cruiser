@@ -79,9 +79,7 @@
     "version": "npm-run-all build depcruise:graph:doc scm:stage"
   },
   "upem": {
-    "donotup": [
-      "safe-regex"
-    ]
+    "donotup": []
   },
   "dependencies": {
     "acorn": "6.0.2",
@@ -97,7 +95,7 @@
     "handlebars": "4.0.12",
     "lodash": "4.17.11",
     "resolve": "1.8.1",
-    "safe-regex": "1.1.0",
+    "safe-regex": "2.0.1",
     "semver": "5.6.0",
     "semver-try-require": "2.0.3",
     "strip-json-comments": "2.0.1"
