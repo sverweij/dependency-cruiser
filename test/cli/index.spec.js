@@ -199,7 +199,7 @@ describe("#processCLI", () => {
             );
         });
 
-        it("returns the number of transgressions", () => {
+        it("returns 0 even if there's transgressions when outputType !== 'err' ", () => {
             const lOutputFileName = "transgression-count.json";
             const lOutputTo       = path.join(OUT_DIR, lOutputFileName);
             const lExitCode = processCLI(
@@ -209,6 +209,24 @@ describe("#processCLI", () => {
                 {
                     outputTo: lOutputTo,
                     outputType: "json",
+                    validate: "test/cli/fixtures/rules.sub-not-allowed-error.json"
+                }
+            );
+            const lExpectedTransgressions = 0;
+
+            expect(lExitCode).to.equal(lExpectedTransgressions);
+        });
+
+        it("returns the number of transgressions if outputType === 'err' ", () => {
+            const lOutputFileName = "transgression-count.json";
+            const lOutputTo       = path.join(OUT_DIR, lOutputFileName);
+            const lExitCode = processCLI(
+                [
+                    "test/cli/fixtures/cjs"
+                ],
+                {
+                    outputTo: lOutputTo,
+                    outputType: "err",
                     validate: "test/cli/fixtures/rules.sub-not-allowed-error.json"
                 }
             );
