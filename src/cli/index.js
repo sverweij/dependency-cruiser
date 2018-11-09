@@ -66,7 +66,7 @@ function runCruise(pFileDirArray, pOptions) {
 
     io.write(pOptions.outputTo, lDependencyList.modules);
 
-    if (lDependencyList.summary.error > 0) {
+    if (lDependencyList.summary.error > 0 && pOptions.outputType === "err") {
         lExitCode = lDependencyList.summary.error;
     }
     return lExitCode;
