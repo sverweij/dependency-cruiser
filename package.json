@@ -112,7 +112,6 @@
     "eslint-plugin-node": "8.0.0",
     "eslint-plugin-security": "1.4.0",
     "intercept-stdout": "0.1.2",
-    "js-makedepend": "3.0.5",
     "mocha": "5.2.0",
     "normalize-newline": "3.0.0",
     "npm-run-all": "4.1.3",
