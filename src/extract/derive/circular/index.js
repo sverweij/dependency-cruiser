@@ -1,14 +1,14 @@
+const _get = require('lodash/get');
 const dependencyEndsUpAtFrom = require('./dependencyEndsUpAtFrom');
 
 function circularityDetectionNecessary(pOptions) {
     if (pOptions.forceCircular) {
         return true;
     }
-    if (pOptions.validate && pOptions.ruleSet) {
-        return pOptions.ruleSet.forbidden &&
-            pOptions.ruleSet.forbidden.some(
-                pRule => pRule.to.hasOwnProperty("circular")
-            );
+    if (pOptions.validate) {
+        return _get(pOptions, 'ruleSet.forbidden', []).some(
+            pRule => pRule.to.hasOwnProperty("circular")
+        );
     }
     return false;
 }

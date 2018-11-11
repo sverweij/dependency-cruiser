@@ -1,14 +1,14 @@
+const _get = require('lodash/get');
 const isOrphan = require('./isOrphan');
 
 function orphanCheckNecessary(pOptions){
     if (pOptions.forceOrphanCheck) {
         return true;
     }
-    if (pOptions.validate && pOptions.ruleSet) {
-        return pOptions.ruleSet.forbidden &&
-            pOptions.ruleSet.forbidden.some(
-                pRule => pRule.from.hasOwnProperty("orphan")
-            );
+    if (pOptions.validate) {
+        return _get(pOptions, 'ruleSet.forbidden', []).some(
+            pRule => pRule.from.hasOwnProperty("orphan")
+        );
     }
     return false;
 }
