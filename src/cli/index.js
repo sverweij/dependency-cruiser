@@ -1,14 +1,12 @@
-"use strict";
-
 const glob                    = require('glob');
 const _get                    = require('lodash/get');
 const main                    = require('../main');
 const parseTSConfig           = require('./parseTSConfig');
 const getResolveConfig        = require('./getResolveConfig');
-const validateFileExistence   = require('./validateFileExistence');
+const validateFileExistence   = require('./utl/validateFileExistence');
 const normalizeOptions        = require('./normalizeOptions');
 const initRules               = require('./initRules');
-const io                      = require('./io');
+const io                      = require('./utl/io');
 const formatMetaInfo          = require('./formatMetaInfo');
 
 

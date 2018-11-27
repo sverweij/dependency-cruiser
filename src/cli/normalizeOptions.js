@@ -1,12 +1,11 @@
-"use strict";
-
-const fs       = require('fs');
-const path     = require('path');
-const _set     = require('lodash/set');
-const _get     = require('lodash/get');
-const _clone   = require('lodash/clone');
+const fs           = require('fs');
+const path         = require('path');
+const _set         = require('lodash/set');
+const _get         = require('lodash/get');
+const _clone       = require('lodash/clone');
 const stripJSONComments = require('strip-json-comments');
-const defaults = require('./defaults.json');
+const makeAbsolute = require('./utl/makeAbsolute');
+const defaults     = require('./defaults.json');
 
 function getOptionValue(pDefault) {
     return (pValue) => {
@@ -42,23 +41,6 @@ function normalizeConfigFile(pOptions, pConfigWrapperName, pDefault) {
 
     return lOptions;
 }
-
-/*
- * That's a duplicate, Kate! It's also in getResolveConfig :-/
- * Technical drag accepted for beta 4.7.0-beta-0
- *
- * To be fixed in 4.7.1 at the latest.
- */
-function makeAbsolute (pFilename) {
-    let lRetval = pFilename;
-
-    if (!path.isAbsolute(pFilename)) {
-        lRetval = path.join(process.cwd(), pFilename);
-    }
-    return lRetval;
-
-}
-
 
 function extractRuleSet(pRulesFile) {
     if (path.extname(pRulesFile) === '.js') {

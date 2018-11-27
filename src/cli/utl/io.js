@@ -1,5 +1,6 @@
-const fs                    = require('fs');
-const defaults              = require('./defaults.json');
+const fs               = require('fs');
+
+const PIPE_BUFFER_SIZE = 512;
 
 function writeToFile(pOutputTo, pDependencyString) {
     try {
@@ -39,7 +40,7 @@ function writeToStdOut(pString, pBufferSize) {
 function write (pOutputTo, pContent) {
     if ("-" === pOutputTo) {
         // OS pipe buffer size in bytes - which is what ulimit -a tells me on OSX
-        writeToStdOut(pContent, defaults.PIPE_BUFFER_SIZE);
+        writeToStdOut(pContent, PIPE_BUFFER_SIZE);
     } else {
         writeToFile(pOutputTo, pContent);
     }

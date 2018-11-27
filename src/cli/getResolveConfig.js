@@ -1,4 +1,4 @@
-const path = require('path');
+const makeAbsolute = require('./utl/makeAbsolute');
 
 function pryConfigFromTheConfig(pWebpackConfigModule, pEnvironment, pArguments){
     let lRetval = pWebpackConfigModule;
@@ -14,15 +14,6 @@ function pryConfigFromTheConfig(pWebpackConfigModule, pEnvironment, pArguments){
     return lRetval;
 }
 
-function makeAbsolute (pFilename) {
-    let lRetval = pFilename;
-
-    if (!path.isAbsolute(pFilename)) {
-        lRetval = path.join(process.cwd(), pFilename);
-    }
-    return lRetval;
-
-}
 
 module.exports = (pWebpackConfigFilename, pEnvironment, pArguments) => {
     let lRetval = {};
