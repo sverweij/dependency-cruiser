@@ -1,3 +1,4 @@
+const path             = require('path');
 const expect           = require('chai').expect;
 const normalizeOptions = require('../../src/cli/normalizeOptions');
 
@@ -65,6 +66,60 @@ describe("normalizeOptions", () => {
                 outputTo: "-",
                 outputType: "err",
                 rulesFile: "./test/cli/fixtures/rules.withcomments.json",
+                "ruleSet": {
+                    "forbidden": [
+                        {
+                            "name": "sub-not-allowed",
+                            "severity": "warn",
+                            "from": {
+                            },
+                            "to": {
+                                "path": "sub"
+                            }
+                        }
+                    ]
+                },
+                validate: true
+            }
+        );
+    });
+
+    it("accepts and interprets a javascript rule file (relative path)", () => {
+        expect(
+            normalizeOptions({validate: "./test/cli/fixtures/rules.withcomments.js"})
+        ).to.deep.equal(
+            {
+                outputTo: "-",
+                outputType: "err",
+                rulesFile: "./test/cli/fixtures/rules.withcomments.js",
+                "ruleSet": {
+                    "forbidden": [
+                        {
+                            "name": "sub-not-allowed",
+                            "severity": "warn",
+                            "from": {
+                            },
+                            "to": {
+                                "path": "sub"
+                            }
+                        }
+                    ]
+                },
+                validate: true
+            }
+        );
+    });
+
+    it("accepts and interprets a javascript rule file (absolute path)", () => {
+        const lRulesFileName = path.join(__dirname, "fixtures/rules.withcomments.js");
+
+        expect(
+            normalizeOptions({validate: lRulesFileName})
+        ).to.deep.equal(
+            {
+                outputTo: "-",
+                outputType: "err",
+                rulesFile: lRulesFileName,
                 "ruleSet": {
                     "forbidden": [
                         {

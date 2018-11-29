@@ -121,10 +121,12 @@ And with `--max-depth 3` like this:
 
 ### `--validate`
 Validates against a list of rules in a rules file. This defaults to a file
-called `.dependency-cruiser.json`, but you can specify your own rules file.
+called `.dependency-cruiser.json`, but you can specify your own rules file,
+which can be in json format or a valid node module returning a rules object
+literal.
 
 ```shell
-dependency-cruise -x node_modules --validate my.rules.json
+dependency-cruise -x node_modules --validate my.rules.json src spec
 ```
 
 > _Tip_: usually you don't need to specify the rules file. However if run 

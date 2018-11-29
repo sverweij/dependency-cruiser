@@ -1,6 +1,5 @@
-"use strict";
-const expect             = require('chai').expect;
-const validateFileExistence = require('../../src/cli/validateFileExistence');
+const expect                = require('chai').expect;
+const validateFileExistence = require('../../../src/cli/utl/validateFileExistence');
 
 describe("validateFileExistence", () => {
     it("throws when the file or dir passed does not exists", () => {

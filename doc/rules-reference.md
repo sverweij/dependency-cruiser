@@ -464,5 +464,39 @@ Things to keep in mind:
   the detection in without a rule set or without an orphan rule,
   pass `forceOrphanCheck: true` as part of the `pOptions` parameter.
 
+## Rules in a javascript configuration
+From version 4.7.0 you can pass a javascript module to `--validate`.
+It'll work as long as it exports a valid configuration object 
+and node can understand it.
+
+This allows you to do all sorts of nifty stuff, like composing
+rule sets or using function predicates in rules. For example:
+
+```javascript
+const baseRules = require('./.dependency-cruiser.base.config')
+
+const additionalRules = {
+    forbidden: [
+        {
+            name: 'sub-not-allowed,
+            severity: 'warn',
+            from: {
+                // left empty on purpose
+            },
+            to: {
+                path: 'sub'
+            }
+        }
+    ],
+    options: {
+        tsConfig: {
+            fileName: './tsconfig.json'
+        }
+    }
+};
+
+module.exports = Object.assign({}, baseRules, additionalRules)
+```
+
 ## A starter rule set
 You can find the one dependency-cruiser uses on initialization [here](./rules.starter.json)

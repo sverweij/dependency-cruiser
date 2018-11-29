@@ -1,5 +1,4 @@
 {
-    "PIPE_BUFFER_SIZE" : 512,
     "RULES_FILE_NAME": ".dependency-cruiser.json",
     "WEBPACK_CONFIG": "webpack.config.js",
     "TYPESCRIPT_CONFIG": "tsconfig.json",
