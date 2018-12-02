@@ -33,7 +33,10 @@ function writeToStdOut(pString, pBufferSize) {
 
     /* eslint no-plusplus: 0 */
     for (i = 0; i < lNumberOfChunks; i++) {
-        process.stdout.write(pString.substr(i * pBufferSize, pBufferSize));
+        process.stdout.write(
+            pString.substr(i * pBufferSize, pBufferSize),
+            "utf8"
+        );
     }
 
 }
