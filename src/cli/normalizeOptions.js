@@ -1,10 +1,8 @@
-const fs           = require('fs');
-const path         = require('path');
+
 const _set         = require('lodash/set');
 const _get         = require('lodash/get');
 const _clone       = require('lodash/clone');
-const stripJSONComments = require('strip-json-comments');
-const makeAbsolute = require('./utl/makeAbsolute');
+const extractRuleSet = require('./extractRuleSet');
 const defaults     = require('./defaults.json');
 
 function getOptionValue(pDefault) {
@@ -42,17 +40,6 @@ function normalizeConfigFile(pOptions, pConfigWrapperName, pDefault) {
     return lOptions;
 }
 
-function extractRuleSet(pRulesFile) {
-    if (path.extname(pRulesFile) === '.js') {
-        /* eslint global-require:0, security/detect-non-literal-require:0, import/no-dynamic-require:0 */
-        return require(makeAbsolute(pRulesFile));
-    }
-    return JSON.parse(
-        stripJSONComments(
-            fs.readFileSync(pRulesFile, 'utf8')
-        )
-    );
-}
 
 /**
  * returns the pOptions, so that the returned value contains a

@@ -148,6 +148,16 @@ export interface IForbiddenRuleType {
 
 export interface IRuleSetType {
     /**
+     * A (node require resolvable) file path to a dependency-cruiser config
+     * that serves as the base for this one - or an array thereof, in which
+     * case all of em will be the base (in right to left order).
+     * 
+     * TODO: that last part is a temporary lie - it'll currently take only
+     *       the the zeroeth element in the array and use that only as a
+     *       base
+     */
+    extends?: string | string[];
+    /**
      * A list of rules that describe dependencies that are not allowed.
      * dependency-cruiser will emit a separate error (warning/ informational)
      * messages for each violated rule.
@@ -159,6 +169,11 @@ export interface IRuleSetType {
      * each dependency that does not at least one of them.
      */
     allowed?: IRule[];
+    /**
+     * Severity to use when a dependency is not in the 'allowed' set of rules.
+     * Defaults to 'warn'
+     */
+    allowedSeverity?: SeverityType;
     /**
      * Runtime configuration options
      */
