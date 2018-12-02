@@ -1,5 +1,8 @@
+
 {
-    "forbidden": [{
+    "extends": "./configs/recommended",
+    "forbidden": [
+        {
             "name": "cli-to-main-only",
             "comment": "cli should only depend on the public interface in main",
             "severity": "error",
@@ -17,12 +20,6 @@
             "severity": "error",
             "from": { "pathNot": "^src/(extract/parse|extract/resolve|extract/gatherInitialSources\\.js|cli)|^test" },
             "to": { "path": "^fs$" }
-        }, {
-            "name": "no-deprecated-core",
-            "comment": "These core modules are deprecated - find an alternative.",
-            "severity": "error",
-            "from": {},
-            "to": { "dependencyTypes": ["core"], "path": "^(punycode|domain|constants|sys|_linklist)$" }
         }, {
             "name": "no-inter-module-test",
             "severity": "error",
@@ -46,28 +43,11 @@
             "from": { "pathNot": "^(src|test|bin)" },
             "to": { "path": "^(src|test)" }
         }, {
-            "name": "not-to-unresolvable",
-            "severity": "warn",
-            "from": {},
-            "to": { "couldNotResolve": true }
-        }, {
-            "name": "not-to-deprecated",
-            "comment": "These modules are deprecated - find an alternative.",
-            "severity": "warn",
-            "from": {},
-            "to": { "dependencyTypes": ["deprecated"] }
-        }, {
             "name": "not-to-dev-dep",
             "severity": "error",
             "comment": "because an npm i --production will otherwise deliver an unreliably running module",
             "from": { "path": "^(bin|src)"},
             "to": { "dependencyTypes": ["npm-dev"] }
-        }, {
-            "name": "no-non-package-json",
-            "severity": "error",
-            "comment": "because an npm i --production will otherwise deliver an unreliably running module",
-            "from": { "pathNot": "^(node_modules)"},
-            "to": { "dependencyTypes": ["unknown", "undetermined", "npm-no-pkg", "npm-unknown"] }
         }, {
             "name": "optional-deps-used",
             "severity": "info",
@@ -81,30 +61,16 @@
             "from": {},
             "to": { "dependencyTypes": ["npm-peer"] }
         },{
-            "name": "no-duplicate-dep-types",
-            "severity": "warn",
-            "from": {},
-            "to": { "moreThanOneDependencyType": true }
-        },{
-            "name": "no-circular",
-            "severity": "error",
-            "from": { "pathNot": "^(node_modules)"},
-            "to": { "circular": true }
-        },{
-            "name": "no-orphans",
-            "severity": "error",
-            "from": { "orphan": true, "pathNot": "\\.d\\.ts$" },
-            "to": { }
-        },{
             "name": "no-GPL-license",
             "comment": "Warn in case some dependency uses either GPL or APL (the licenses are OK, but your legal department might have 2nd thoughts about them)",
             "severity": "warn",
             "from": {},
             "to": { "license": "GPL|APL" }
-        }],
+        }
+    ],
     "options": {
         "exclude": "fixtures",                           /* pattern specifying which files to exclude (regular expression) */
-        "doNotFollow": "^node_modules",                  /* pattern specifying which files not to follow further when encountered*/
+        // "doNotFollow": "^node_modules",                  /* pattern specifying which files not to follow further when encountered*/
         // "moduleSystems": ["amd", "cjs", "es6", "tsd"], /* list of module systems to cruise */
         "prefix": "https://github.com/sverweij/dependency-cruiser/blob/develop/" /* prefix for links in html and svg output */
         // "tsPreCompilationDeps": false,                 /* if true detect dependencies that only exist before typescript-to-javascript compilation */
