@@ -36,6 +36,7 @@
   "types": "types/dependency-cruiser.d.ts",
   "files": [
     "bin/",
+    "configs/",
     "src/",
     "!src/**/*.hbs",
     "!src/**/*.md",
