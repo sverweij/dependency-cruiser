@@ -478,7 +478,7 @@ const baseRules = require('./.dependency-cruiser.base.config')
 const additionalRules = {
     forbidden: [
         {
-            name: 'sub-not-allowed,
+            name: 'sub-not-allowed',
             severity: 'warn',
             from: {
                 // left empty on purpose
@@ -499,4 +499,4 @@ module.exports = Object.assign({}, baseRules, additionalRules)
 ```
 
 ## A starter rule set
-You can find the one dependency-cruiser uses on initialization [here](./rules.starter.json)
+You can find the one dependency-cruiser uses on initialization [here](./rules.starter.json).
