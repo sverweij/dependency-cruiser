@@ -87,7 +87,7 @@
     "acorn": "6.0.4",
     "acorn-loose": "6.0.0",
     "acorn-walk": "6.1.1",
-    "ajv": "6.5.5",
+    "ajv": "6.6.1",
     "awesome-typescript-loader": "5.2.1",
     "chalk": "2.4.1",
     "commander": "2.19.0",
@@ -118,7 +118,7 @@
     "nyc": "13.1.0",
     "symlink-dir": "2.0.2",
     "tslint": "5.11.0",
-    "typescript": "3.1.6",
+    "typescript": "3.2.1",
     "upem": "1.0.2"
   },
   "repository": {
