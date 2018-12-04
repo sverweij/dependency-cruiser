@@ -106,7 +106,10 @@ describe("ruleSetReader - extends", () => {
         shouldBeOK("./test/validate/fixtures/extends/extending.as.string.json");
     });
 
-    it("accepts the 'extends' attribute (array)", () => {
-        shouldBeOK("./test/validate/fixtures/extends/extending.as.array.json");
+    it("bails out on non-strings in the 'extends' attribute (array)", () => {
+        shouldBarfWithMessage(
+            "./test/validate/fixtures/extends/extending.as.array.json",
+            "The rules file is not valid: data.extends should be string."
+        );
     });
 });

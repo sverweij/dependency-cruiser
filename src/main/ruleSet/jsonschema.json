@@ -6,16 +6,8 @@
     "additionalProperties": false,
     "properties": {
         "extends": {
-            "oneOf": [{
-                "type": "array",
-                "description": "A list of dependency-cruiser configs this config uses as base",
-                "items": {
-                    "type": "string"
-                }
-            }, {
-                "description": "A config this config uses as a base",
-                "type": "string"
-            }]
+            "description": "A config this config uses as a base",
+            "type": "string"
         },
         "forbidden": {
             "type": "array",
