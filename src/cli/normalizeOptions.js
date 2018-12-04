@@ -2,7 +2,7 @@
 const _set         = require('lodash/set');
 const _get         = require('lodash/get');
 const _clone       = require('lodash/clone');
-const extractRuleSet = require('./extractRuleSet');
+const extractRuleSet = require('./compileRuleSet');
 const defaults     = require('./defaults.json');
 
 function getOptionValue(pDefault) {
