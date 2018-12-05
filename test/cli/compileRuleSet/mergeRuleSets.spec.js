@@ -63,7 +63,41 @@ describe("mergeRuleSets - forbidden", () => {
             {
                 "allowed": [],
                 "allowedSeverity": "warn",
-                "forbidden": [{from: 'src', to: 'test'}, {from: 'bin', to: 'test'}],
+                "forbidden": [{from: 'bin', to: 'test'}, {from: 'src', to: 'test'}],
+                "options": {}
+            }
+        );
+    });
+
+    it("extending forbidden with a named rule already in there takes the extended named rule", () => {
+        expect(
+            merge(
+                {forbidden: [{name: 'already-in-base', from: 'bin', to: 'test'}]},
+                {forbidden: [{name: 'already-in-base', from: 'src', to: 'test'}]}
+            )
+        ).to.deep.equal(
+            {
+                "allowed": [],
+                "allowedSeverity": "warn",
+                "forbidden": [{name: 'already-in-base', from: 'bin', to: 'test'}],
+                "options": {}
+            }
+        );
+    });
+    it("extending forbidden with a named rule not in there adds it", () => {
+        expect(
+            merge(
+                {forbidden: [{name: 'not-in-base', from: 'bin', to: 'test'}]},
+                {forbidden: [{name: 'already-in-base', from: 'src', to: 'test'}]}
+            )
+        ).to.deep.equal(
+            {
+                "allowed": [],
+                "allowedSeverity": "warn",
+                "forbidden": [
+                    {name: 'not-in-base', from: 'bin', to: 'test'},
+                    {name: 'already-in-base', from: 'src', to: 'test'}
+                ],
                 "options": {}
             }
         );
@@ -115,7 +149,7 @@ describe("mergeRuleSets - allowed", () => {
             merge({allowed: [{from: 'bin', to: 'test'}]}, {allowed: [{from: 'src', to: 'test'}]})
         ).to.deep.equal(
             {
-                "allowed": [{from: 'src', to: 'test'}, {from: 'bin', to: 'test'}],
+                "allowed": [{from: 'bin', to: 'test'}, {from: 'src', to: 'test'}],
                 "allowedSeverity": "warn",
                 "forbidden": [],
                 "options": {}
