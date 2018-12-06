@@ -1,17 +1,11 @@
-"use strict";
-
 const expect      = require('chai').expect;
 const gather      = require('../../src/extract/gatherInitialSources');
 const pathToPosix = require('../../src/utl/pathToPosix');
 
-function p2p(pPath) {
-    return pathToPosix(pPath);
-}
-
 describe("gatherInitial", () => {
     it("one file stays one file", () => {
         expect(
-            gather(["test/extract/fixtures/cjs/root_one.js"], {}).map(p2p)
+            gather(["test/extract/fixtures/cjs/root_one.js"], {}).map(pathToPosix)
         ).to.deep.equal(
             ["test/extract/fixtures/cjs/root_one.js"]
         );
@@ -22,7 +16,7 @@ describe("gatherInitial", () => {
             gather([
                 "test/extract/fixtures/cjs/root_one.js",
                 "test/extract/fixtures/ts/index.ts"
-            ], {}).map(p2p)
+            ], {}).map(pathToPosix)
         ).to.deep.equal(
             [
                 "test/extract/fixtures/cjs/root_one.js",
@@ -35,7 +29,7 @@ describe("gatherInitial", () => {
         expect(
             gather([
                 "test/extract/fixtures/ts"
-            ], {}).map(p2p)
+            ], {}).map(pathToPosix)
         ).to.deep.equal(
             [
                 "test/extract/fixtures/ts/index.ts",
@@ -52,7 +46,7 @@ describe("gatherInitial", () => {
             gather([
                 "test/extract/fixtures/ts",
                 "test/extract/fixtures/coffee"
-            ], {}).map(p2p)
+            ], {}).map(pathToPosix)
         ).to.deep.equal(
             [
                 "test/extract/fixtures/ts/index.ts",
@@ -75,7 +69,7 @@ describe("gatherInitial", () => {
                 "test/extract/fixtures/ts",
                 "test/extract/fixtures/es6/imports-and-exports.js",
                 "test/extract/fixtures/coffee"
-            ], {}).map(p2p)
+            ], {}).map(pathToPosix)
         ).to.deep.equal(
             [
                 "test/extract/fixtures/ts/index.ts",
@@ -99,7 +93,7 @@ describe("gatherInitial", () => {
                 "test/extract/fixtures/ts",
                 "test/extract/fixtures/es6/imports-and-exports.js",
                 "test/extract/fixtures/coffee"
-            ], {exclude: "dex"}).map(p2p)
+            ], {exclude: "dex"}).map(pathToPosix)
         ).to.deep.equal(
             [
                 "test/extract/fixtures/ts/javascriptThing.js",
@@ -117,7 +111,7 @@ describe("gatherInitial", () => {
         expect(
             gather([
                 "test/extract/fixtures/gather-globbing/packages/**/*.js"
-            ]).map(p2p)
+            ]).map(pathToPosix)
         ).to.deep.equal(
             [
                 "test/extract/fixtures/gather-globbing/packages/baldr/spec/bow.spec.js",
@@ -139,7 +133,7 @@ describe("gatherInitial", () => {
         expect(
             gather([
                 "test/extract/fixtures/gather-globbing/**/src/**/*.js"
-            ]).map(p2p)
+            ]).map(pathToPosix)
         ).to.deep.equal(
             [
                 "test/extract/fixtures/gather-globbing/packages/baldr/src/bow.js",
