@@ -107,6 +107,22 @@ describe("gatherInitial", () => {
         );
     });
 
+    it("filters the 'excluded' pattern from the collection - regexp", () => {
+        expect(
+            gather([
+                "test/extract/fixtures/ts"
+            ], {exclude: "^[a-z]+$"}).map(pathToPosix)
+        ).to.deep.equal(
+            [
+                "test/extract/fixtures/ts/index.ts",
+                "test/extract/fixtures/ts/javascriptThing.js",
+                "test/extract/fixtures/ts/sub/index.ts",
+                "test/extract/fixtures/ts/sub/kaching.ts",
+                "test/extract/fixtures/ts/sub/willBeReExported.ts"
+            ]
+        );
+    });
+
     it("expands glob patterns (**/*.js)", () => {
         expect(
             gather([
