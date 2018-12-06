@@ -1,6 +1,12 @@
-const expect      = require('chai').expect;
-const gather      = require('../../src/extract/gatherInitialSources');
-const pathToPosix = require('../../src/utl/pathToPosix');
+const expect  = require('chai').expect;
+const gather  = require('../../src/extract/gatherInitialSources');
+const p2p     = require('../../src/utl/pathToPosix');
+
+// make the import pathToPosix the correct function profile
+// (1 parameter exactly) for use in map
+function pathToPosix(pPath) {
+    return p2p(pPath);
+}
 
 describe("gatherInitial", () => {
     it("one file stays one file", () => {
