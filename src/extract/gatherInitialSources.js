@@ -9,7 +9,6 @@ const SUPPORTED_EXTENSIONS = transpileMeta.scannableExtensions;
 
 function gatherScannableFilesFromDir (pDirName, pOptions) {
     return fs.readdirSync(pDirName)
-        .filter(pFileInDir => ignore(pFileInDir, pOptions.exclude))
         .reduce((pSum, pFileName) => {
             if (fs.statSync(path.join(pDirName, pFileName)).isDirectory()){
                 return pSum.concat(gatherScannableFilesFromDir(path.join(pDirName, pFileName), pOptions));
@@ -18,7 +17,8 @@ function gatherScannableFilesFromDir (pDirName, pOptions) {
                 return pSum.concat(path.join(pDirName, pFileName));
             }
             return pSum;
-        }, []);
+        }, [])
+        .filter(pFullPathToFile => ignore(pFullPathToFile, pOptions.exclude));
 }
 
 /**

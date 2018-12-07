@@ -1,17 +1,17 @@
-"use strict";
+const expect  = require('chai').expect;
+const gather  = require('../../src/extract/gatherInitialSources');
+const p2p     = require('../../src/utl/pathToPosix');
 
-const expect      = require('chai').expect;
-const gather      = require('../../src/extract/gatherInitialSources');
-const pathToPosix = require('../../src/utl/pathToPosix');
-
-function p2p(pPath) {
-    return pathToPosix(pPath);
+// make the import pathToPosix the correct function profile
+// (1 parameter exactly) for use in map
+function pathToPosix(pPath) {
+    return p2p(pPath);
 }
 
 describe("gatherInitial", () => {
     it("one file stays one file", () => {
         expect(
-            gather(["test/extract/fixtures/cjs/root_one.js"], {}).map(p2p)
+            gather(["test/extract/fixtures/cjs/root_one.js"], {}).map(pathToPosix)
         ).to.deep.equal(
             ["test/extract/fixtures/cjs/root_one.js"]
         );
@@ -22,7 +22,7 @@ describe("gatherInitial", () => {
             gather([
                 "test/extract/fixtures/cjs/root_one.js",
                 "test/extract/fixtures/ts/index.ts"
-            ], {}).map(p2p)
+            ], {}).map(pathToPosix)
         ).to.deep.equal(
             [
                 "test/extract/fixtures/cjs/root_one.js",
@@ -35,7 +35,7 @@ describe("gatherInitial", () => {
         expect(
             gather([
                 "test/extract/fixtures/ts"
-            ], {}).map(p2p)
+            ], {}).map(pathToPosix)
         ).to.deep.equal(
             [
                 "test/extract/fixtures/ts/index.ts",
@@ -52,7 +52,7 @@ describe("gatherInitial", () => {
             gather([
                 "test/extract/fixtures/ts",
                 "test/extract/fixtures/coffee"
-            ], {}).map(p2p)
+            ], {}).map(pathToPosix)
         ).to.deep.equal(
             [
                 "test/extract/fixtures/ts/index.ts",
@@ -75,7 +75,7 @@ describe("gatherInitial", () => {
                 "test/extract/fixtures/ts",
                 "test/extract/fixtures/es6/imports-and-exports.js",
                 "test/extract/fixtures/coffee"
-            ], {}).map(p2p)
+            ], {}).map(pathToPosix)
         ).to.deep.equal(
             [
                 "test/extract/fixtures/ts/index.ts",
@@ -99,7 +99,7 @@ describe("gatherInitial", () => {
                 "test/extract/fixtures/ts",
                 "test/extract/fixtures/es6/imports-and-exports.js",
                 "test/extract/fixtures/coffee"
-            ], {exclude: "dex"}).map(p2p)
+            ], {exclude: "dex"}).map(pathToPosix)
         ).to.deep.equal(
             [
                 "test/extract/fixtures/ts/javascriptThing.js",
@@ -113,11 +113,27 @@ describe("gatherInitial", () => {
         );
     });
 
+    it("filters the 'excluded' pattern from the collection - regexp", () => {
+        expect(
+            gather([
+                "test/extract/fixtures/ts"
+            ], {exclude: "^[a-z]+$"}).map(pathToPosix)
+        ).to.deep.equal(
+            [
+                "test/extract/fixtures/ts/index.ts",
+                "test/extract/fixtures/ts/javascriptThing.js",
+                "test/extract/fixtures/ts/sub/index.ts",
+                "test/extract/fixtures/ts/sub/kaching.ts",
+                "test/extract/fixtures/ts/sub/willBeReExported.ts"
+            ]
+        );
+    });
+
     it("expands glob patterns (**/*.js)", () => {
         expect(
             gather([
                 "test/extract/fixtures/gather-globbing/packages/**/*.js"
-            ]).map(p2p)
+            ]).map(pathToPosix)
         ).to.deep.equal(
             [
                 "test/extract/fixtures/gather-globbing/packages/baldr/spec/bow.spec.js",
@@ -139,7 +155,7 @@ describe("gatherInitial", () => {
         expect(
             gather([
                 "test/extract/fixtures/gather-globbing/**/src/**/*.js"
-            ]).map(p2p)
+            ]).map(pathToPosix)
         ).to.deep.equal(
             [
                 "test/extract/fixtures/gather-globbing/packages/baldr/src/bow.js",
