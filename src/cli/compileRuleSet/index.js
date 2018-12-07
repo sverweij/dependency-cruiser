@@ -1,17 +1,29 @@
-
-const readRuleSet = require('./readRuleSet');
+const path          = require('path');
+const resolve       = require('../../extract/resolve/resolve');
+const readRuleSet   = require('./readRuleSet');
 const mergeRuleSets = require('./mergeRuleSets');
 
-function compileRuleSet(pRulesFile, pAlreadyVisited = new Set()) {
-    if (pAlreadyVisited.has(pRulesFile)){
-        throw new Error(`config is circular - ${Array.from(pAlreadyVisited).join(' -> ')} -> ${pRulesFile}.\n`);
-    }
-    pAlreadyVisited.add(pRulesFile);
+function compileRuleSet(pRulesFile, pAlreadyVisited = new Set(), pBaseDir = process.cwd()) {
 
-    let lRetval = readRuleSet(pRulesFile);
+    const lResolvedFileName = resolve(
+        pRulesFile,
+        pBaseDir,
+        {
+            extensions: [".js", ".json"]
+        },
+        'cli'
+    );
+    const lBaseDir = path.dirname(lResolvedFileName);
+
+    if (pAlreadyVisited.has(lResolvedFileName)){
+        throw new Error(`config is circular - ${Array.from(pAlreadyVisited).join(' -> ')} -> ${lResolvedFileName}.\n`);
+    }
+    pAlreadyVisited.add(lResolvedFileName);
+
+    let lRetval = readRuleSet(lResolvedFileName, pBaseDir);
 
     if (lRetval.hasOwnProperty("extends") && typeof lRetval.extends === "string"){
-        lRetval = mergeRuleSets(lRetval, compileRuleSet(lRetval.extends, pAlreadyVisited));
+        lRetval = mergeRuleSets(lRetval, compileRuleSet(lRetval.extends, pAlreadyVisited, lBaseDir));
     }
     return lRetval;
 }

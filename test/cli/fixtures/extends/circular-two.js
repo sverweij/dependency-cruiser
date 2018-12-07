@@ -1,3 +1,3 @@
 module.exports = {
-    extends: require.resolve('./circular-one')
+    extends: './circular-one'
 };

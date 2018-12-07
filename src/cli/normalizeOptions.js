@@ -1,8 +1,8 @@
-
+const path         = require('path');
 const _set         = require('lodash/set');
 const _get         = require('lodash/get');
 const _clone       = require('lodash/clone');
-const extractRuleSet = require('./compileRuleSet');
+const compileRuleSet = require('./compileRuleSet');
 const defaults     = require('./defaults.json');
 
 function getOptionValue(pDefault) {
@@ -63,7 +63,9 @@ module.exports = (pOptions) => {
 
     if (pOptions.hasOwnProperty("validate")){
         pOptions.rulesFile = module.exports.determineRulesFileName(pOptions.validate);
-        pOptions.ruleSet   = extractRuleSet(pOptions.rulesFile);
+        pOptions.ruleSet   = compileRuleSet(
+            path.isAbsolute(pOptions.rulesFile) ? pOptions.rulesFile : `./${pOptions.rulesFile}`
+        );
     }
 
     pOptions = normalizeConfigFile(pOptions, "webpackConfig", defaults.WEBPACK_CONFIG);

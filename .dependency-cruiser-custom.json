@@ -6,7 +6,7 @@
             "name": "cli-to-main-only",
             "comment": "cli should only depend on the public interface in main",
             "severity": "error",
-            "from": { "path": "(^src/cli)" },
+            "from": { "path": "(^src/cli)", "pathNot": "^(src/cli/compileRuleSet/index\\.js)$" },
             "to": { "pathNot": "^src/main|^node_modules|^fs$|^path$|$1|^package.json$" }
         }, {
             "name": "bin-to-cli-only",

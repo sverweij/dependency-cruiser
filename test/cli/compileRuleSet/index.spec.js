@@ -15,9 +15,31 @@ describe("compileRuleSet", () => {
 
     it("a rule set with an extends returns that rule set, extending the mentioned base", () => {
         expect(
-            compileRuleSet("./test/cli/fixtures/extends/extending")
+            compileRuleSet("./test/cli/fixtures/extends/extending.json")
         ).to.deep.equal(
             mergedFixture
+        );
+    });
+
+    it("a rule set with an extends from node_modules gets merged properly as well", () => {
+        expect(
+            compileRuleSet("./test/cli/fixtures/extends/extending-from-node-modules.json")
+        ).to.deep.equal(
+            {
+                allowed: [{
+                    from: {
+                        path: "src"
+                    },
+                    to: {
+                        path: "src"
+                    }
+                }],
+                allowedSeverity: "warn",
+                forbidden: [],
+                options: {
+                    doNotFollow: "node_modules"
+                }
+            }
         );
     });
 

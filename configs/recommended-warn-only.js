@@ -1,10 +1,10 @@
-const base = require('./recommended');
+const recommended = require('./recommended');
 
 module.exports = Object.assign(
     {},
-    base,
+    recommended,
     {
-        forbidden: base.forbidden.map(
+        forbidden: recommended.forbidden.map(
             pRule => {
                 pRule.severity = "warn";
                 return pRule;
