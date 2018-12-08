@@ -38,8 +38,8 @@
 
 ## The structure of a dependency cruiser rules file
 The typical dependency-cruiser config is json file (although you can use javascript -
-see below). The three most important sections are `forbidden`, `allowed` and `options`,
-so a skeleton config could look something like this:
+see [below](#configurations-in-javascript))). The three most important sections
+are `forbidden`, `allowed` and `options`, so a skeleton config could look something like this:
 
 ```json
 {
@@ -49,7 +49,7 @@ so a skeleton config could look something like this:
 }
 ```
 
-These and the other 
+The following paragraphs explain these three and the other sections.
 
 ### `forbidden`
 A list of rules that describe dependencies that are not allowed.
