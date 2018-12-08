@@ -20,8 +20,9 @@ function extendNamedRule(pExtendedRule, pForbiddenArrayBase) {
  *
  * Conflict resolution:
  * - if the rule is anonymous: unique on the complete content of the rule
- * - if the rule has a name: unique by that name (where the one in
- *   pForbiddenArrayExtended win)
+ * - if the rule has a name: unique by that name (where the same name
+ *   rules get merged, where individual attributes of the named rules
+ *   in pForbiddenArrayExtended win)
  *
  * @param {*} pForbiddenArrayExtended - array of 'fobidden' rules that extend the ...
  * @param {*} pForbiddenArrayBase - array of 'forbidden' rules to extend
