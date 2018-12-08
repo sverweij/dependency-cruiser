@@ -118,9 +118,11 @@ module.exports = {
         // because we still use a deprecated core module, still let
         // the no-deprecated-core rule from recommended fire,
         // but at least temporarily don't let it break our build
-        // by setting the severity to "warn"
+        // by setting the severity to "warn" here
         name: "no-deprecated-core",
         severity: "warn"
+        // no need to specify the from and to, because they're already
+        // defined in 'recommended'
     }]
 }
 ```
@@ -539,10 +541,10 @@ rule sets or using function predicates in rules. For example:
 const subNotAllowed     = require('rules/sub-not-allowed.json')
 const noInterComponents = require('rules/sub-no-inter-components.json')
 
-const rules = {
+module.exports = {
     forbidden: [
         subNotAllowed,
-        noInterUBC
+        noInterComponents
     ],
     options: {
         tsConfig: {
@@ -550,8 +552,6 @@ const rules = {
         }
     }
 };
-
-module.exports = rules;
 ```
 
 ## A starter rule set
