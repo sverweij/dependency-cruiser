@@ -3,6 +3,18 @@ const _uniqBy   = require('lodash/uniqBy');
 const _uniqWith = require('lodash/uniqWith');
 const _isEqual  = require('lodash/isEqual');
 
+function extendNamedRule(pExtendedRule, pForbiddenArrayBase) {
+    return pForbiddenArrayBase
+        .filter(pBaseRule => pBaseRule.name === pExtendedRule.name)
+        .reduce(
+            (pAll, pBaseRule) => Object.assign(
+                pBaseRule,
+                pAll
+            ),
+            pExtendedRule
+        );
+}
+
 /**
  * Extends the given pForbiddenArrayBase with the pForbiddenArrayExtended.
  *
@@ -11,7 +23,7 @@ const _isEqual  = require('lodash/isEqual');
  * - if the rule has a name: unique by that name (where the one in
  *   pForbiddenArrayExtended win)
  *
- * @param {*} pForbiddenArrayExtended - array of 'fobidden' rules that extend the ///
+ * @param {*} pForbiddenArrayExtended - array of 'fobidden' rules that extend the ...
  * @param {*} pForbiddenArrayBase - array of 'forbidden' rules to extend
  *
  * @return {Array} - the merged array
@@ -26,19 +38,31 @@ function mergeForbidden(pForbiddenArrayExtended, pForbiddenArrayBase){
         _isEqual
     );
 
+
+    let lNamedRules = pForbiddenArrayExtended
+        .filter(pRule => pRule.name)
+        .map(
+            (pNamedRule) =>
+                extendNamedRule(
+                    pNamedRule,
+                    pForbiddenArrayBase
+                )
+        );
+
     // merge named rules based on unique name
-    let lNamedRules = _uniqBy(
+    lNamedRules = _uniqBy(
         // ordered extended => base because the uniqBy picks the
         // first it encounters and we want the ones from the
         // extended in case of a conflict
 
         // the other concats (anonymous, allowed) don't need it
         // but have it to be consistent with this
-        pForbiddenArrayExtended
+        lNamedRules
             .concat(pForbiddenArrayBase)
             .filter(pRule => pRule.name),
         pRule => pRule.name
     );
+
 
     return lNamedRules.concat(lAnonymousRules);
 }

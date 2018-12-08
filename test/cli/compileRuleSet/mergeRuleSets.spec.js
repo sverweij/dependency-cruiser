@@ -69,7 +69,7 @@ describe("mergeRuleSets - forbidden", () => {
         );
     });
 
-    it("extending forbidden with a named rule already in there takes the extended named rule", () => {
+    it("extending an existing named rule - the extended wins", () => {
         expect(
             merge(
                 {forbidden: [{name: 'already-in-base', from: 'bin', to: 'test'}]},
@@ -84,6 +84,55 @@ describe("mergeRuleSets - forbidden", () => {
             }
         );
     });
+
+    it("extending an existing named rule - keep attributes not in extended", () => {
+        expect(
+            merge(
+                {forbidden: [{name: 'already-in-base', from: {path: 'bin'}, to: {path: 'test'}}]},
+                {forbidden: [{name: 'already-in-base', severity: 'error', from: {path: 'src'}, to: {path:'test'}}]}
+            )
+        ).to.deep.equal(
+            {
+                "allowed": [],
+                "allowedSeverity": "warn",
+                "forbidden": [{name: 'already-in-base', severity: 'error', from: {path: 'bin'}, to: {path:'test'}}],
+                "options": {}
+            }
+        );
+    });
+
+    it("extending an existing named rule - adds attributes only in extended", () => {
+        expect(
+            merge(
+                {forbidden: [{name: 'already-in-base', severity: 'info', from: {path: 'bin'}, to: {path: 'test'}}]},
+                {forbidden: [{name: 'already-in-base', from: {path: 'src'}, to: {path:'test'}}]}
+            )
+        ).to.deep.equal(
+            {
+                "allowed": [],
+                "allowedSeverity": "warn",
+                "forbidden": [{name: 'already-in-base', severity: 'info', from: {path: 'bin'}, to: {path:'test'}}],
+                "options": {}
+            }
+        );
+    });
+
+    it("extending an existing named rule - adds attributes only in extended (which is very partial only)", () => {
+        expect(
+            merge(
+                {forbidden: [{name: 'already-in-base', severity: 'info'}]},
+                {forbidden: [{name: 'already-in-base', from: {path: 'src'}, to: {path:'test'}}]}
+            )
+        ).to.deep.equal(
+            {
+                "allowed": [],
+                "allowedSeverity": "warn",
+                "forbidden": [{name: 'already-in-base', severity: 'info', from: {path: 'src'}, to: {path:'test'}}],
+                "options": {}
+            }
+        );
+    });
+
     it("extending forbidden with a named rule not in there adds it", () => {
         expect(
             merge(

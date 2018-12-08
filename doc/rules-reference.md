@@ -85,7 +85,10 @@ dependency-cruiser resolves the `extends` relative to the file name with the
   them. 
 - `forbidden` rules    
   For `forbidden` rules it uses the same approach, except when the rules
-  have a name, in which case the rule with the same name in the current file wins.
+  have a name, in which case the rule with the same name in the current file 
+  gets merged into the one from extends, where attributes from the current file
+  win.
+  This allows you to override only one attribute, e.g. the severity
 - `allowedSeverity`    
   If there's an `allowedSeverity` in the current file, it wins. If neither file
   has an `allowedSeverity` dependency-cruiser uses _warn_ as a default
@@ -104,13 +107,21 @@ To use a local base config:
 To use a base config from an npm package:
 ```json
 {
-    "extends": "dependency-cruiser/configs/recommended"
+    "extends": "@ourcompany/dependency-cruiser-configs/frontend-rules-base.json"
 }
 ```
 
 ```js
 module.exports = {
-    extends: '@ourcompany/dependency-cruiser-configs/frontend-rules-base.json'
+    extends: "dependency-cruiser/configs/recommended",
+    forbidden: [{
+        // because we still use a deprecated core module, still let
+        // the no-deprecated-core rule from recommended fire,
+        // but at least temporarily don't let it break our build
+        // by setting the severity to "warn"
+        name: "no-deprecated-core",
+        severity: "warn"
+    }]
 }
 ```
 
