@@ -69,8 +69,8 @@
         }
     ],
     "options": {
-        "exclude": "fixtures",                           /* pattern specifying which files to exclude (regular expression) */
-        // "doNotFollow": "^node_modules",                  /* pattern specifying which files not to follow further when encountered*/
+        "exclude": "fixtures",                            /* pattern specifying which files to exclude (regular expression) */
+        // "doNotFollow": "node_modules",                 /* pattern specifying which files not to follow further when encountered - already defined in ./configs/recommended to a sane default ('node_modules')*/
         // "moduleSystems": ["amd", "cjs", "es6", "tsd"], /* list of module systems to cruise */
         "prefix": "https://github.com/sverweij/dependency-cruiser/blob/develop/" /* prefix for links in html and svg output */
         // "tsPreCompilationDeps": false,                 /* if true detect dependencies that only exist before typescript-to-javascript compilation */

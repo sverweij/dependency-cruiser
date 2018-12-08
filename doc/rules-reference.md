@@ -20,6 +20,7 @@
     - [`forbidden`](#forbidden)
     - [`allowed`](#allowed)
     - [`allowedSeverity`](#allowedSeverity)
+    - [`extends`](#extends)
     - [`options`](#options)
 2. [The structure of an individual rule](#the-structure-of-an-individual-rule)
 3. [Conditions](#conditions)
@@ -32,11 +33,13 @@
     - [`license` and `licenseNot`](#license-and-licensenot)
     - [`dependencyTypes`](#dependencytypes)
     - [`moreThanOneDependencyType`](#more-than-one-dependencytype-per-dependency-morethanonedependencytype)
-4. [Starter rule set](#a-starter-rule-set)
+4. [Configurations in javascript](#configurations-in-javascript)
+5. [Starter rule set](#a-starter-rule-set)
 
 ## The structure of a dependency cruiser rules file
-The rules file is in json format. It can contain three sections - `forbidden`,
-`allowed` and `options`:
+The typical dependency-cruiser config is json file (although you can use javascript -
+see below). The three most important sections are `forbidden`, `allowed` and `options`,
+so a skeleton config could look something like this:
 
 ```json
 {
@@ -46,6 +49,8 @@ The rules file is in json format. It can contain three sections - `forbidden`,
 }
 ```
 
+These and the other 
+
 ### `forbidden`
 A list of rules that describe dependencies that are not allowed.
 dependency-cruiser will emit a separate error (warning/ informational) message
@@ -54,13 +59,60 @@ for each violated rule.
 ### `allowed`
 A list of rules that describe dependencies that are _allowed_. dependency-cruiser
 will emit a 'not-in-allowed' message for each dependency that does not
-satisfy at least one of them. The severity of the message is _warning_ by
-default, but you can override it with `allowedSeverity`:
+satisfy at least one of them. The severity of the message is _warn_ by
+default, but you can override it with `allowedSeverity`
 
 ### `allowedSeverity`
 The severity to use in reports when a dependency is not in the `allowed`
 list of rules. It takes the same values as other `severity` fields and
 also defaults to `warn`.
+
+### `extends`
+This takes a file path to another dependency-cruiser-config. When
+dependency-cruiser reads your config, it takes the contents of the
+`extends` and merges them with the contents of your config.
+
+#### File resolution
+dependency-cruiser resolves the `extends` relative to the file name with the
+  same algorithm node uses, which means a.o.
+- names starting with `./` are local
+- you can use external node_modules to reference rule sets (e.g. `dependency-cruiser/configs/recommended`)
+- there's no need to specify the extension for javascript files, but for json it's mandatory.
+
+#### How rules are merged
+- `allowed` rules    
+  Dependency-cruiser concats `allowed` rules from the extends, and de-duplicates
+  them. 
+- `forbidden` rules    
+  For `forbidden` rules it uses the same approach, except when the rules
+  have a name, in which case the rule with the same name in the current file wins.
+- `allowedSeverity`    
+  If there's an `allowedSeverity` in the current file, it wins. If neither file
+  has an `allowedSeverity` dependency-cruiser uses _warn_ as a default
+- `options`     
+  `options` get the Object.assign treatment - where the option in the current
+  file wins.
+
+#### Examples
+To use a local base config:
+```json
+{
+    "extends": "./configs/dependency-cruiser-base.json"
+}
+```
+
+To use a base config from an npm package:
+```json
+{
+    "extends": "dependency-cruiser/configs/recommended"
+}
+```
+
+```js
+module.exports = {
+    extends: '@ourcompany/dependency-cruiser-configs/frontend-rules-base.json'
+}
+```
 
 ### `options`
 Some of the command line options, so you don't have to specify them on each run.
@@ -464,7 +516,7 @@ Things to keep in mind:
   the detection in without a rule set or without an orphan rule,
   pass `forceOrphanCheck: true` as part of the `pOptions` parameter.
 
-## Rules in a javascript configuration
+## Configurations in javascript
 From version 4.7.0 you can pass a javascript module to `--validate`.
 It'll work as long as it exports a valid configuration object 
 and node can understand it.
@@ -473,20 +525,13 @@ This allows you to do all sorts of nifty stuff, like composing
 rule sets or using function predicates in rules. For example:
 
 ```javascript
-const baseRules = require('./.dependency-cruiser.base.config')
+const subNotAllowed     = require('rules/sub-not-allowed.json')
+const noInterComponents = require('rules/sub-no-inter-components.json')
 
-const additionalRules = {
+const rules = {
     forbidden: [
-        {
-            name: 'sub-not-allowed',
-            severity: 'warn',
-            from: {
-                // left empty on purpose
-            },
-            to: {
-                path: 'sub'
-            }
-        }
+        subNotAllowed,
+        noInterUBC
     ],
     options: {
         tsConfig: {
@@ -495,7 +540,7 @@ const additionalRules = {
     }
 };
 
-module.exports = Object.assign({}, baseRules, additionalRules)
+module.exports = rules;
 ```
 
 ## A starter rule set
