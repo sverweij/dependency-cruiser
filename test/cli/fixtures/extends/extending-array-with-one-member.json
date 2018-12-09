@@ -1,0 +1,12 @@
+{
+    "extends": ["./base-for-extends"],
+    "forbidden": [{
+        "name": "no-circular",
+        "severity": "ignore"
+    },{
+        "name": "only-in-extending",
+        "severity": "info",
+        "from": { "pathNot": "^test" },
+        "to": { "path": "^test" }
+    }]
+}

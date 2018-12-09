@@ -22,9 +22,19 @@ function compileRuleSet(pRulesFile, pAlreadyVisited = new Set(), pBaseDir = proc
 
     let lRetval = readRuleSet(lResolvedFileName, pBaseDir);
 
-    if (lRetval.hasOwnProperty("extends") && typeof lRetval.extends === "string"){
-        lRetval = mergeRuleSets(lRetval, compileRuleSet(lRetval.extends, pAlreadyVisited, lBaseDir));
+    if (lRetval.hasOwnProperty("extends")) {
+        if (typeof lRetval.extends === "string"){
+            lRetval = mergeRuleSets(lRetval, compileRuleSet(lRetval.extends, pAlreadyVisited, lBaseDir));
+        }
+        if (Array.isArray(lRetval.extends)){
+            lRetval = lRetval.extends.reduce(
+                (pAll, pExtends) => mergeRuleSets(pAll, compileRuleSet(pExtends, pAlreadyVisited, lBaseDir)),
+                lRetval
+            );
+        }
+        Reflect.deleteProperty(lRetval, 'extends');
     }
+
     return lRetval;
 }
 

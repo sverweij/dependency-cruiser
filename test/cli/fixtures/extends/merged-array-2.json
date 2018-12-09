@@ -1,0 +1,23 @@
+{
+    "allowed": [],
+    "allowedSeverity": "warn",
+    "forbidden": [{
+        "name": "no-circular",
+        "severity": "ignore",
+        "from": {},
+        "to": { "circular": true }
+    },{
+        "name": "only-in-extending",
+        "severity": "info",
+        "from": { "pathNot": "^test" },
+        "to": { "path": "^test" }
+    },{
+        "name": "rule-from-second-base",
+        "severity": "error",
+        "from": { "orphan": true },
+        "to": {}
+    }],
+    "options": {
+        "doNotFollow": "node_modules"
+    }
+}

@@ -60,10 +60,15 @@ describe("ruleSetReader - regular", () => {
         shouldBeOK("./test/validate/fixtures/extends/extending.as.string.json");
     });
 
-    it("bails out on non-strings in the 'extends' attribute (array)", () => {
+    it("accepts the 'extends' attribute (array of strings)", () => {
+        shouldBeOK("./test/validate/fixtures/extends/extending.as.array.json");
+    });
+
+    it("bails out on non-strings in the 'extends' attribute (number)", () => {
         shouldBarfWithMessage(
-            "./test/validate/fixtures/extends/extending.as.array.json",
-            "The rules file is not valid: data.extends should be string."
+            "./test/validate/fixtures/extends/extending.as.number.json",
+            "The rules file is not valid: data.extends should be string, data.extends should be " +
+            "array, data.extends should match exactly one schema in oneOf."
         );
     });
 
