@@ -1,4 +1,3 @@
-"use strict";
 const fs       = require('fs');
 const expect   = require('chai').expect;
 const validate = require('../../../src/main/ruleSet/validate');
@@ -32,7 +31,7 @@ function shouldBeOK(pRulesFile){
     );
 }
 
-describe("ruleSetReader", () => {
+describe("ruleSetReader - regular", () => {
     it("bails out on scary regexps in paths", () => {
         shouldBarfWithMessage(
             "./test/validate/fixtures/rules.scary-regex.json",
@@ -100,5 +99,17 @@ describe("ruleSetReader", () => {
         );
     });
 
+});
 
+describe("ruleSetReader - extends", () => {
+    it("accepts the 'extends' attribute (string)", () => {
+        shouldBeOK("./test/validate/fixtures/extends/extending.as.string.json");
+    });
+
+    it("bails out on non-strings in the 'extends' attribute (array)", () => {
+        shouldBarfWithMessage(
+            "./test/validate/fixtures/extends/extending.as.array.json",
+            "The rules file is not valid: data.extends should be string."
+        );
+    });
 });

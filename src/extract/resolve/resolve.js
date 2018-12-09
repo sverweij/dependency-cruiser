@@ -3,14 +3,15 @@ const pathToPosix           = require('../../utl/pathToPosix');
 const compileResolveOptions = require('./compileResolveOptions');
 
 let gResolver = null;
-let gInitialized = false;
+let gInitialized = {};
 
-function init(pResolveOptions) {
-    if (!gInitialized || pResolveOptions.bustTheCache) {
+function init(pResolveOptions, pCachingContext) {
+    if (!gInitialized[pCachingContext] || pResolveOptions.bustTheCache) {
         gResolver = enhancedResolve.ResolverFactory.createResolver(
             compileResolveOptions(pResolveOptions)
         );
-        gInitialized = true;
+        /* eslint security/detect-object-injection:0 */
+        gInitialized[pCachingContext] = true;
     }
 }
 
@@ -20,11 +21,13 @@ function init(pResolveOptions) {
  * @param {string} pModuleName The module name to resolve (e.g. 'slodash', './myModule')
  * @param {string} pFileDir The directory from which to resolve the module
  * @param {any} pResolveOptions Options to pass to enhanced resolve
+ * @param {any} pCachingContext - caching
+ *
  * @returns {string} path to the resolved file on disk
  */
-function resolve (pModuleName, pFileDir, pResolveOptions) {
+function resolve (pModuleName, pFileDir, pResolveOptions, pCachingContext = 'cruise') {
 
-    init(pResolveOptions);
+    init(pResolveOptions, pCachingContext);
 
     return gResolver.resolveSync(
         {},
