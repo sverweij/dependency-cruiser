@@ -5,13 +5,13 @@
 ### Commander
 [tj/commander.js](https://github.com/tj/commander.js) - For command line parsing - and cooking command line interfaces.
 
-![commander](real-world-samples/commander.png)
+<img width="242" alt="commander" src="real-world-samples/commander.png">
 
 ### Chalk
 [chalk/chalk](https://github.com/chalk/chalk) -
 For coloring strings in the terminal. A typical _Sorhus style_ micro module that uses other micro modules to accomplish its goals.
 
-![chalk](real-world-samples/chalk.png)
+<img width="704" alt="chalk" src="real-world-samples/chalk.png">
 
 ### Bluebird
 [petkaantonov/bluebird](https://github.com/petkaantonov/bluebird) - promise library
@@ -26,7 +26,7 @@ For coloring strings in the terminal. A typical _Sorhus style_ micro module that
 ### Resolve
 [substack/node-resolve](https://github.com/substack/node-resolve) - resolves (node) module names to files on disk.
 
-![resolve](real-world-samples/resolve.png)
+<img width="482" alt="resolve" src="real-world-samples/resolve.png">
 
 ### Yargs
 [yargs/yargs](https://github.com/yargs/yargs) - Another library to parse command line options/ cook command line interfaces.
@@ -81,9 +81,10 @@ Dependency cruiser used on itself. node_modules left out to keep it concise.
 ### state machine cat
 [sverweij/state-machine-cat](https://github.com/sverweij/state-machine-cat) - an interpreter for writing nice state diagrams.
 
-![state-machine-cat-without-amdefine](real-world-samples/state-machine-cat-without-amdefine.png)
+<img width="912" alt="state-machine-cat without external dependencies" src="real-world-samples/state-machine-cat-without-external-deps.png">
 
 ### mscgen.js
 [mscgenjs/mscgenjs-core](https://github.com/mscgenjs/mscgenjs-core) - an interpreter library for turning text (in MscGen or two other DSLs) into sequence charts.
 
-![mscgen.js](real-world-samples/mscgenjs-core-without-lodash-amdefine.png)
+
+![mscgen.js](real-world-samples/mscgenjs-core-without-external-deps.png)
