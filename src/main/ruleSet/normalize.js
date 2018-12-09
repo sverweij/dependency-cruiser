@@ -1,6 +1,6 @@
 "use strict";
 
-const VALID_SEVERITIES = /^(error|warn|info)$/;
+const VALID_SEVERITIES = /^(error|warn|info|ignore)$/;
 const DEFAULT_SEVERITY = 'warn';
 const DEFAULT_RULE     = 'unnamed';
 
@@ -36,10 +36,16 @@ function normalizeRule(pRule) {
 module.exports = (pRuleSet) => {
     if (pRuleSet.hasOwnProperty("allowed")){
         pRuleSet.allowedSeverity = normalizeSeverity(pRuleSet.allowedSeverity);
+        if (pRuleSet.allowedSeverity === 'ignore') {
+            Reflect.deleteProperty(pRuleSet, 'allowed');
+            Reflect.deleteProperty(pRuleSet, 'allowedSeverity');
+        }
     }
 
     if (pRuleSet.hasOwnProperty("forbidden")){
-        pRuleSet.forbidden = pRuleSet.forbidden.map(normalizeRule);
+        pRuleSet.forbidden = pRuleSet.forbidden
+            .map(normalizeRule)
+            .filter(pRule => pRule.severity !== 'ignore');
     }
 
     return pRuleSet;

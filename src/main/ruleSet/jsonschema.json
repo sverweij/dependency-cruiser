@@ -206,7 +206,8 @@
             "enum": [
                 "error",
                 "warn",
-                "info"
+                "info",
+                "ignore"
             ]
         },
         "DependencyType": {

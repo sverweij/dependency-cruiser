@@ -158,7 +158,7 @@
     "definitions": {
         "SeverityType": {
             "type": "string",
-            "description": "How severe a violation of a rule is. The 'error' severity will make some reporters return a non-zero exit code, so if you want e.g. a build to stop when there's a rule violated: use that.",
+            "description": "How severe a violation of a rule is. The 'error' severity will make some reporters return a non-zero exit code, so if you want e.g. a build to stop when there's a rule violated: use that. The absence of the 'ignore' severity here is by design; ignored rules don't show up in the output.",
             "enum": [
                 "error",
                 "warn",
