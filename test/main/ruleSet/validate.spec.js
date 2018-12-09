@@ -31,7 +31,45 @@ function shouldBeOK(pRulesFile){
     );
 }
 
+
 describe("ruleSetReader - regular", () => {
+    it("barfs on an invalid rules file", () => {
+        shouldBarfWithMessage(
+            "./test/validate/fixtures/rules.not-a-valid-rulesfile.json",
+            "The rules file is not valid: data should NOT have additional properties."
+        );
+    });
+
+    it("accepts an empty 'options' object", () => {
+        shouldBeOK("./test/validate/fixtures/rules.empty-options-section.json");
+    });
+
+    it("accepts a 'webpackConfig' config", () => {
+        shouldBeOK("./test/validate/fixtures/rules.options-section-webpack-config.json");
+    });
+
+    it("accepts a 'dependencyTypes' with value 'aliased'", () => {
+        shouldBeOK("./test/validate/fixtures/rules.no-aliased-dependency-types.json");
+    });
+
+    it("accepts some command line options in a 'options' object", () => {
+        shouldBeOK("./test/validate/fixtures/rules.options-section.json");
+    });
+
+    it("accepts the 'extends' attribute (string)", () => {
+        shouldBeOK("./test/validate/fixtures/extends/extending.as.string.json");
+    });
+
+    it("bails out on non-strings in the 'extends' attribute (array)", () => {
+        shouldBarfWithMessage(
+            "./test/validate/fixtures/extends/extending.as.array.json",
+            "The rules file is not valid: data.extends should be string."
+        );
+    });
+
+});
+
+describe("ruleSetReader - regexp safety checks", () => {
     it("bails out on scary regexps in paths", () => {
         shouldBarfWithMessage(
             "./test/validate/fixtures/rules.scary-regex.json",
@@ -61,30 +99,6 @@ describe("ruleSetReader - regular", () => {
         );
     });
 
-    it("barfs on an invalid rules file", () => {
-        shouldBarfWithMessage(
-            "./test/validate/fixtures/rules.not-a-valid-rulesfile.json",
-            "The rules file is not valid: data should NOT have additional properties."
-        );
-    });
-
-    it("accepts an empty 'options' object", () => {
-        shouldBeOK("./test/validate/fixtures/rules.empty-options-section.json");
-    });
-
-    it("accepts a 'webpackConfig' config", () => {
-        shouldBeOK("./test/validate/fixtures/rules.options-section-webpack-config.json");
-    });
-
-    it("accepts a 'dependencyTypes' with value 'aliased'", () => {
-        shouldBeOK("./test/validate/fixtures/rules.no-aliased-dependency-types.json");
-    });
-
-
-    it("accepts some command line options in a 'options' object", () => {
-        shouldBeOK("./test/validate/fixtures/rules.options-section.json");
-    });
-
     it("bails out on scary regexps in options.doNotFollow", () => {
         shouldBarfWithMessage(
             "./test/validate/fixtures/rules.options-section-scary-regex-do-not-follow.json",
@@ -96,20 +110,6 @@ describe("ruleSetReader - regular", () => {
         shouldBarfWithMessage(
             "./test/validate/fixtures/rules.options-section-scary-regex-exclude.json",
             'The pattern \'(.*)*\' will probably run very slowly - cowardly refusing to run.\n'
-        );
-    });
-
-});
-
-describe("ruleSetReader - extends", () => {
-    it("accepts the 'extends' attribute (string)", () => {
-        shouldBeOK("./test/validate/fixtures/extends/extending.as.string.json");
-    });
-
-    it("bails out on non-strings in the 'extends' attribute (array)", () => {
-        shouldBarfWithMessage(
-            "./test/validate/fixtures/extends/extending.as.array.json",
-            "The rules file is not valid: data.extends should be string."
         );
     });
 });

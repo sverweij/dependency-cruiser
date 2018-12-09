@@ -197,8 +197,13 @@ some reporters (at least the `err` one) return a non-zero exit
 code, so if you want e.g. a build to stop when there's a rule
 violated: use that.
 
-The other values you can use are `info` and `warn`. If you leave it
-out dependency-cruiser will assume it to be `warn`.
+The other values you can use are `info`, `warn` and `ignore`. If you
+leave it out dependency-cruiser will assume it to be `warn`.
+
+With the severity set to `ignore` dependency-cruiser will not check
+the rule at all. This can be useful if you want to temporarily 
+disable a rule or disable a rule you inherited from a rule set you
+extended.
 
 ## Conditions
 ### `path`
