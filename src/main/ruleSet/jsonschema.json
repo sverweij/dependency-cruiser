@@ -7,7 +7,18 @@
     "properties": {
         "extends": {
             "description": "A config this config uses as a base",
-            "type": "string"
+            "oneOf": [
+                {
+                    "type": "string"
+                },
+                {
+                    "type": "array",
+                    "description": "A list of rules that describe dependencies that are allowed. dependency-cruiser will emit the warning message 'not-in-allowed' for each dependency that does not at least meet one of them.",
+                    "items": {
+                        "type" :"string"
+                    }
+                }
+            ]
         },
         "forbidden": {
             "type": "array",

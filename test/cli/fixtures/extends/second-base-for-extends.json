@@ -1,0 +1,13 @@
+{
+    "forbidden": [{
+        "name": "no-circular",
+        "severity": "info",
+        "from": { "pathNot": "circularity-testing" },
+        "to": { "circular": true }
+    }, {
+        "name": "rule-from-second-base",
+        "severity": "error",
+        "from": { "orphan": true },
+        "to": {}
+    }]
+}

@@ -68,7 +68,7 @@ list of rules. It takes the same values as other `severity` fields and
 also defaults to `warn`.
 
 ### `extends`
-This takes a file path to another dependency-cruiser-config. When
+This takes one or more file path to other dependency-cruiser-configs. When
 dependency-cruiser reads your config, it takes the contents of the
 `extends` and merges them with the contents of your config.
 
@@ -95,6 +95,8 @@ dependency-cruiser resolves the `extends` relative to the file name with the
 - `options`     
   `options` get the Object.assign treatment - where the option in the current
   file wins.
+- If there's more than one path in extends, they get merged into the current file
+  one by one, running through the array left to right.
 
 #### Examples
 To use a local base config:

@@ -149,9 +149,10 @@ export interface IForbiddenRuleType {
 export interface IRuleSetType {
     /**
      * A (node require resolvable) file path to a dependency-cruiser config
-     * that serves as the base for this one.
+     * that serves as the base for this one...
+     * ... or an array of these
      */
-    extends?: string;
+    extends?: string | string[];
     /**
      * A list of rules that describe dependencies that are not allowed.
      * dependency-cruiser will emit a separate error (warning/ informational)
