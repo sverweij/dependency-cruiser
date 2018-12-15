@@ -50,20 +50,33 @@ function fileExists (pFileName) {
     }
 }
 
+function validateAndGetCustomRulesFileName(pValidate) {
+    let lRetval = '';
+
+    if (fileExists(pValidate)) {
+        lRetval = pValidate;
+    } else {
+        throw new Error(`Can't open '${pValidate}' for reading. Does it exist?\n`);
+    }
+    return lRetval;
+}
+
+function validateAndGetDefaultRulesFileName() {
+    let lRetval = defaults.RULES_FILE_NAME_SEARCH_ARRAY.find(fileExists);
+
+    if (typeof lRetval === 'undefined') {
+        throw new Error(`Can't open '${defaults.RULES_FILE_NAME}' for reading. Does it exist?\n`);
+    }
+    return lRetval;
+}
+
 function validateAndNormalizeRulesFileName (pValidate) {
     let lRetval = '';
 
     if (typeof pValidate === 'string') {
-        if (fileExists(pValidate)){
-            lRetval = pValidate;
-        } else {
-            throw new Error(`Can't open '${pValidate}' for reading. Does it exist?\n`);
-        }
+        lRetval = validateAndGetCustomRulesFileName(pValidate);
     } else {
-        lRetval = defaults.RULES_FILE_NAME_SEARCH_ARRAY.find(fileExists);
-        if (typeof lRetval === 'undefined') {
-            throw new Error(`Can't open '${defaults.RULES_FILE_NAME}' for reading. Does it exist?\n`);
-        }
+        lRetval = validateAndGetDefaultRulesFileName();
     }
 
     return lRetval;
@@ -106,4 +119,5 @@ module.exports = (pOptions) => {
 };
 
 module.exports.determineRulesFileName = getOptionValue(defaults.RULES_FILE_NAME);
+
 
