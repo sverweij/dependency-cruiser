@@ -1,3 +1,4 @@
+
 const glob                    = require('glob');
 const _get                    = require('lodash/get');
 const main                    = require('../main');
@@ -8,7 +9,6 @@ const normalizeOptions        = require('./normalizeOptions');
 const initRules               = require('./initRules');
 const io                      = require('./utl/io');
 const formatMetaInfo          = require('./formatMetaInfo');
-
 
 function createRulesFile(pOptions) {
     initRules(normalizeOptions.determineRulesFileName(pOptions.validate));
@@ -48,10 +48,6 @@ function runCruise(pFileDirArray, pOptions) {
     pFileDirArray
         .filter(pFileOrDir => !glob.hasMagic(pFileOrDir))
         .forEach(validateFileExistence);
-
-    if (pOptions.hasOwnProperty("validate")) {
-        validateFileExistence(normalizeOptions.determineRulesFileName(pOptions.validate));
-    }
 
     pOptions = normalizeOptions(pOptions);
 

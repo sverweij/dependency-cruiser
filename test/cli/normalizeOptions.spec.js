@@ -3,6 +3,12 @@ const expect           = require('chai').expect;
 const normalizeOptions = require('../../src/cli/normalizeOptions');
 
 describe("normalizeOptions", () => {
+    const WORKINGDIR = process.cwd();
+
+    afterEach(() => {
+        process.chdir(WORKINGDIR);
+    });
+
     it("normalizes empty options to no exclude, stdout, json and 'cjs, amd, es6'", () => {
         expect(
             normalizeOptions({})
@@ -36,11 +42,65 @@ describe("normalizeOptions", () => {
         ).to.deep.equal(["amd", "cjs", "es6"]);
     });
 
-    it("-v parameter assumes .dependency-cruiser for rules", () => {
+    it("-v argument assumes .dependency-cruiser.json for rules (and borks if it doesn't exist)", () => {
+        process.chdir('test/cli/fixtures/normalize-config/no-default-config');
         try {
             normalizeOptions({validate: true});
         } catch (e) {
             expect(e.message).to.include(".dependency-cruiser.json'");
+        }
+    });
+
+    it("-v finds .dependency-cruiser.js when no parameters to it are passed and it exists", () => {
+        process.chdir('test/cli/fixtures/normalize-config/js-only');
+        expect(
+            normalizeOptions({validate: true})
+        ).to.deep.equal(
+            {
+                outputTo: "-",
+                outputType: "err",
+                rulesFile: ".dependency-cruiser.js",
+                "ruleSet": {},
+                validate: true
+            }
+        );
+    });
+
+    it("-v finds .dependency-cruiser.json when no parameters to it are passed and it exists", () => {
+        process.chdir('test/cli/fixtures/normalize-config/json-only');
+        expect(
+            normalizeOptions({validate: true})
+        ).to.deep.equal(
+            {
+                outputTo: "-",
+                outputType: "err",
+                rulesFile: ".dependency-cruiser.json",
+                "ruleSet": {},
+                validate: true
+            }
+        );
+    });
+
+    it("-v finds .dependency-cruiser.json when no parameters to it are passed and also the .js variant exists", () => {
+        process.chdir('test/cli/fixtures/normalize-config/both-js-and-json');
+        expect(
+            normalizeOptions({validate: true})
+        ).to.deep.equal(
+            {
+                outputTo: "-",
+                outputType: "err",
+                rulesFile: ".dependency-cruiser.json",
+                "ruleSet": {},
+                validate: true
+            }
+        );
+    });
+
+    it("-v with parameter borks when that parameter doesn't exist as a rules file", () => {
+        try {
+            normalizeOptions({validate: './non-existing-config-file-name'});
+        } catch (e) {
+            expect(e.message).to.include("./non-existing-config-file-name");
         }
     });
 
@@ -178,3 +238,28 @@ describe("normalizeOptions", () => {
     });
 });
 
+describe("normalizeOptions.determineRulesFileName", () => {
+    it("returns '.dependency-cruiser.json' when no file name is passed", () => {
+        expect(
+            normalizeOptions.determineRulesFileName()
+        ).to.equal(
+            ".dependency-cruiser.json"
+        );
+    });
+
+    it("returns '.dependency-cruiser.json' when a non-string is passed", () => {
+        expect(
+            normalizeOptions.determineRulesFileName(true)
+        ).to.equal(
+            ".dependency-cruiser.json"
+        );
+    });
+
+    it("returns string passed when a string is passed", () => {
+        expect(
+            normalizeOptions.determineRulesFileName("a string")
+        ).to.equal(
+            "a string"
+        );
+    });
+});

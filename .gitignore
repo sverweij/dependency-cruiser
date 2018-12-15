@@ -22,6 +22,3 @@ npm-debug.log
 yarn-error.log
 package-lock.json
 .pnp*
-
-# other stuff
-.dependency-cruiser.json
