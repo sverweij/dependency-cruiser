@@ -11,7 +11,7 @@
 - Some examples:
   - a [starter rule set](../src/cli/rules.starter.json) - duplicated for
     perusal on the bottom of this file.
-  - dependency-cruiser's [own rule set](../.dependency-cruiser-custom.json)
+  - dependency-cruiser's [own rule set](../.dependency-cruiser.json)
 - Tip: run `depcruise --init` to create a .dependency-cruiser.json with
   some rules that make sense in most projects.
 

@@ -12,16 +12,14 @@ const RULES_FILE = ".dependency-cruiser.json";
 chai.use(require('chai-json-schema'));
 
 describe("initRules", () => {
-
-    beforeEach("set up", () => {
-        deleteDammit(RULES_FILE);
-    });
+    const WORKINGDIR = process.cwd();
 
     afterEach("tear down", () => {
-        deleteDammit(RULES_FILE);
+        process.chdir(WORKINGDIR);
     });
 
     it("writes a valid rules file to .dependency-cruiser.json", () => {
+        process.chdir('test/cli/fixtures/init-config/no-config-files-exist');
         initRules(RULES_FILE);
         expect(
             JSON.parse(
@@ -30,9 +28,11 @@ describe("initRules", () => {
                 )
             )
         ).to.be.jsonSchema(rulesSchema);
+        deleteDammit(RULES_FILE);
     });
 
     it("does not overwrite an existing config", () => {
+        process.chdir('test/cli/fixtures/init-config/config-file-exists');
         let lStillHere = true;
 
         fs.writeFileSync(RULES_FILE, "{}", {encoding: "utf8", flag: "w"});

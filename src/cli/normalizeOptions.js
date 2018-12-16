@@ -1,3 +1,4 @@
+const fs = require('fs');
 const path         = require('path');
 const _set         = require('lodash/set');
 const _get         = require('lodash/get');
@@ -40,6 +41,46 @@ function normalizeConfigFile(pOptions, pConfigWrapperName, pDefault) {
     return lOptions;
 }
 
+function fileExists (pFileName) {
+    try {
+        fs.accessSync(pFileName, fs.R_OK);
+        return true;
+    } catch (e) {
+        return false;
+    }
+}
+
+function validateAndGetCustomRulesFileName(pValidate) {
+    let lRetval = '';
+
+    if (fileExists(pValidate)) {
+        lRetval = pValidate;
+    } else {
+        throw new Error(`Can't open '${pValidate}' for reading. Does it exist?\n`);
+    }
+    return lRetval;
+}
+
+function validateAndGetDefaultRulesFileName() {
+    let lRetval = defaults.RULES_FILE_NAME_SEARCH_ARRAY.find(fileExists);
+
+    if (typeof lRetval === 'undefined') {
+        throw new Error(`Can't open '${defaults.RULES_FILE_NAME}' for reading. Does it exist?\n`);
+    }
+    return lRetval;
+}
+
+function validateAndNormalizeRulesFileName (pValidate) {
+    let lRetval = '';
+
+    if (typeof pValidate === 'string') {
+        lRetval = validateAndGetCustomRulesFileName(pValidate);
+    } else {
+        lRetval = validateAndGetDefaultRulesFileName();
+    }
+
+    return lRetval;
+}
 
 /**
  * returns the pOptions, so that the returned value contains a
@@ -62,10 +103,11 @@ module.exports = (pOptions) => {
     }
 
     if (pOptions.hasOwnProperty("validate")){
-        pOptions.rulesFile = module.exports.determineRulesFileName(pOptions.validate);
+        pOptions.rulesFile = validateAndNormalizeRulesFileName(pOptions.validate);
         pOptions.ruleSet   = compileRuleSet(
             path.isAbsolute(pOptions.rulesFile) ? pOptions.rulesFile : `./${pOptions.rulesFile}`
         );
+        pOptions.validate = true;
     }
 
     pOptions = normalizeConfigFile(pOptions, "webpackConfig", defaults.WEBPACK_CONFIG);
@@ -77,4 +119,5 @@ module.exports = (pOptions) => {
 };
 
 module.exports.determineRulesFileName = getOptionValue(defaults.RULES_FILE_NAME);
+
 
