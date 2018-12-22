@@ -1,7 +1,7 @@
 "use strict";
 
 const _                      = require('lodash');
-const pathToPosix            = require('../utl/pathToPosix');
+const pathToPosix            = require('./utl/pathToPosix');
 const extract                = require('./extract');
 const deriveCirculars        = require('./derive/circular');
 const deriveOrphans          = require('./derive/orphan');

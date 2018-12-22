@@ -2,7 +2,7 @@
 
 const fs               = require('fs');
 const path             = require('path');
-const pathToPosix      = require('../../utl/pathToPosix');
+const pathToPosix      = require('../utl/pathToPosix');
 const resolveAMD       = require('./resolve-AMD');
 const resolveCommonJS  = require('./resolve-commonJS');
 

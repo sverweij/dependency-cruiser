@@ -1,4 +1,4 @@
-const getExtension = require('../../utl/getExtension');
+const getExtension = require('../utl/getExtension');
 const compileResolveOptions = require('./compileResolveOptions');
 
 let gFollowableExtensions = new Set();

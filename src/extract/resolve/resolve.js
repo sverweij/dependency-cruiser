@@ -1,5 +1,5 @@
 const enhancedResolve       = require('enhanced-resolve');
-const pathToPosix           = require('../../utl/pathToPosix');
+const pathToPosix           = require('../utl/pathToPosix');
 const compileResolveOptions = require('./compileResolveOptions');
 
 let gResolver = null;
