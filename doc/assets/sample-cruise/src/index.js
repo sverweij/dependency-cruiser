@@ -1,0 +1,5 @@
+require('http')
+require('./two')
+require('./somedata.json')
+require('./shared')
+// require('./one')
