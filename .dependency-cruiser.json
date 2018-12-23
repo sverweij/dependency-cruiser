@@ -1,6 +1,6 @@
 
 {
-    "extends": "./configs/recommended",
+    "extends": "./configs/recommended-strict",
     "forbidden": [
         {
             "name": "cli-to-main-only",
@@ -26,8 +26,8 @@
             "from": { "path": "(^test/[^\\/]+/)[^\\.]+\\.spec\\.js" },
             "to": { "path": "^test/[^\\/]+/.+", "pathNot": "utl|$1[^\\.]+\\.json$"}
         }, {
-            "name": "prefer-no-lodash",
-            "comment": "We want to minimize the dependency on lodash a bit - so flag dependencies that go there and include it as a whole",
+            "name": "prefer-lodash-individuals",
+            "comment": "Flag dependencies that include lodash as a whole (better use individual lodash packages e.g. 'lodash/get')",
             "severity": "info",
             "from": {},
             "to": { "path": "lodash\\.js"}
@@ -35,7 +35,7 @@
             "name": "no-dep-on-test",
             "severity": "error",
             "from": { "path": "^(src|bin)" },
-            "to": { "path": "^test|\\.spec\\.(js|ts|ls|coffee|litcoffee|coffee\\.md)$"}
+            "to": { "path": "^test|\\.spec\\.js$"}
         }, {
             "name": "no-external-to-here",
             "comment": "you never know...",
@@ -50,14 +50,14 @@
             "to": { "dependencyTypes": ["npm-dev"] }
         }, {
             "name": "optional-deps-used",
-            "severity": "info",
-            "comment": "nothing serious - but just check you have some try/ catches around the import/ require of these",
+            "severity": "error",
+            "comment": "we don't work with optional dependencies",
             "from": {},
             "to": { "dependencyTypes": ["npm-optional"] }
         }, {
             "name": "peer-deps-used",
-            "comment": "peer dependencies are deprecated with the advent of npm 3 - and probably gone with version 4. Or with yarn.",
-            "severity": "warn",
+            "comment": "we don't work with peer dependencies",
+            "severity": "error",
             "from": {},
             "to": { "dependencyTypes": ["npm-peer"] }
         },{

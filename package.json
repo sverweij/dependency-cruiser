@@ -142,7 +142,8 @@
       "src/report/**/*.template.js",
       "coverage/**/*",
       "tmp*",
-      "docs/**/*"
+      "docs/**/*",
+      "doc/**/*"
     ],
     "reporter": [
       "text-summary",

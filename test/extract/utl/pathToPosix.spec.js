@@ -2,7 +2,7 @@
 
 const path        = require('path');
 const expect      = require('chai').expect;
-const pathToPosix = require('../../src/utl/pathToPosix');
+const pathToPosix = require('../../../src/extract/utl/pathToPosix');
 
 describe("pathToPosix on win32", () => {
     it("transforms win32 style paths to posix ones: \"\"", () => {

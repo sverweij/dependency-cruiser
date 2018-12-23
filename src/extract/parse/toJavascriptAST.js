@@ -5,7 +5,7 @@ const acorn        = require('acorn');
 const acorn_loose  = require('acorn-loose');
 const _memoize     = require('lodash/memoize');
 const transpile    = require('../transpile');
-const getExtension = require('../../utl/getExtension');
+const getExtension = require('../utl/getExtension');
 
 /**
  * Returns the abstract syntax tree of the module identified by the passed
