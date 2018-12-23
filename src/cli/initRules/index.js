@@ -1,9 +1,8 @@
-"use strict";
-
 const fs   = require('fs');
 const path = require('path');
 
-const STARTER_RULES_FILENAME = path.join(__dirname, './rules.starter.json');
+const STARTER_RULES_MOLD_JSON = path.join(__dirname, './rules.starter.json.mold');
+const STARTER_RULES_MOLD_JS   = path.join(__dirname, './rules.starter.js.mold');
 
 /*
   We could have used utl.fileExists - but that one is cached.
@@ -16,6 +15,27 @@ function fileExists(pFile) {
         return false;
     }
     return true;
+}
+
+/**
+ * Yet undocumented feature: when specifying a rules file name
+ * that ends in .js use a (1) javascript config that (2) extends
+ * dependency-cruiser/configs/recommended.
+ * Otherwise use the (existing) plain & simple json
+ *
+ * Put in here as preparation for an improved --init experience
+ * (that's probably going to be an Inquirer.js ui)
+ *
+ * @param  {string} pFileName The configuration file name to write to
+ * @return {string}           The mold/ template to use
+ */
+function getStarterRulesMold(pFileName) {
+    let lRetval = STARTER_RULES_MOLD_JSON;
+
+    if (path.extname(pFileName) === '.js'){
+        lRetval = STARTER_RULES_MOLD_JS;
+    }
+    return lRetval;
 }
 
 /**
@@ -36,11 +56,11 @@ module.exports = (pFileName) => {
     } else {
         try {
             // when dropping node 6 support use this in stead:
-            // fs.copyFileSync(STARTER_RULES_FILENAME, pFileName, fs.constants.COPYFILE_EXCL);
+            // fs.copyFileSync(getStarterRulesMold(pFileName), pFileName, fs.constants.COPYFILE_EXCL);
             fs.writeFileSync(
                 pFileName,
                 fs.readFileSync(
-                    STARTER_RULES_FILENAME,
+                    getStarterRulesMold(pFileName),
                     {encoding: "utf8", flag: "r"}
                 ),
                 {encoding: "utf8", flag: "w"}
