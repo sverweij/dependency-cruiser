@@ -75,7 +75,7 @@
         "doNotFollow": "node_modules",
 
         /* pattern specifying which files to exclude (regular expression) */
-        // "exclude" : "fixtures",
+        "exclude" : "fixtures",
 
         /* list of module systems to cruise */
         // "moduleSystems": ["amd", "cjs", "es6", "tsd"],
