@@ -1,6 +1,6 @@
 
 {
-    "extends": "./configs/recommended",
+    "extends": "./configs/recommended-strict",
     "forbidden": [
         {
             "name": "cli-to-main-only",
