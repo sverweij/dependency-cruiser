@@ -197,7 +197,7 @@ describe("resolve/index", () => {
         });
     });
 
-    it("considers a webpack config", () => {
+    it("considers a typescript config", () => {
         expect(
             resolve(
                 {
@@ -246,4 +246,3 @@ describe("resolve/index", () => {
         });
     });
 });
-

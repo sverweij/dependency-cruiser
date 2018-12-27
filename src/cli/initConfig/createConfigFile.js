@@ -1,5 +1,6 @@
 const fs         = require('fs');
 const Handlebars = require('handlebars/runtime');
+const $package   = require('../../../package.json');
 
 /* eslint import/no-unassigned-import: 0 */
 require("./config.json.template");
@@ -18,29 +19,33 @@ function fileExists(pFile) {
     return true;
 }
 
-function buildConfigFile(pInitOptions){
+function getFileName(pInitOptions) {
+    return `.dependency-cruiser${pInitOptions.configFormat}`;
+}
+
+function buildConfig(pInitOptions){
     if (pInitOptions.configFormat === ".json") {
         return Handlebars.templates['config.json.template.hbs'](pInitOptions);
     }
     return Handlebars.templates['config.js.template.hbs'](pInitOptions);
 }
 
-function writeTheThing (pInitOptions) {
-    if (fileExists(pInitOptions.fileName)) {
-        throw Error(`A '${pInitOptions.fileName}' already exists here - leaving it be.\n`);
+function writeTheThing (pFileName, pConfig) {
+    if (fileExists(pFileName)) {
+        throw Error(`A '${pFileName}' already exists here - leaving it be.\n`);
     } else {
         try {
             fs.writeFileSync(
-                pInitOptions.fileName,
-                buildConfigFile(pInitOptions)
+                pFileName,
+                pConfig
             );
             process.stdout.write(
-                `\n  Successfully created '${pInitOptions.fileName}'\n\n`
+                `\n  Successfully created '${pFileName}'\n\n`
             );
         } catch (e) {
 
             /* istanbul ignore next  */
-            throw Error(`ERROR: Writing to '${pInitOptions.fileName}' didn't work. ${e}\n`);
+            throw Error(`ERROR: Writing to '${pFileName}' didn't work. ${e}\n`);
         }
     }
 }
@@ -48,13 +53,14 @@ function writeTheThing (pInitOptions) {
 function normalizeInitOptions(pInitOptions){
     let lRetval = Object.assign(
         {
+            version: $package.version,
+            date: (new Date()).toJSON(),
             configFormat: ".json",
             configType: "self-contained"
         },
         pInitOptions
     );
 
-    lRetval.fileName = `.dependency-cruiser${lRetval.configFormat}`;
     if (lRetval.configType === "preset" && !lRetval.preset) {
         lRetval.preset = "dependency-cruiser/configs/recommended-warn-only";
     }
@@ -75,5 +81,10 @@ function normalizeInitOptions(pInitOptions){
  *
  */
 module.exports = (pInitOptions) => {
-    writeTheThing(normalizeInitOptions(pInitOptions));
+    const lNormalizedInitOptions = normalizeInitOptions(pInitOptions);
+
+    writeTheThing(
+        getFileName(lNormalizedInitOptions),
+        buildConfig(lNormalizedInitOptions)
+    );
 };

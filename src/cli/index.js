@@ -5,7 +5,7 @@ const parseTSConfig           = require('./parseTSConfig');
 const getResolveConfig        = require('./getResolveConfig');
 const validateFileExistence   = require('./utl/validateFileExistence');
 const normalizeOptions        = require('./normalizeOptions');
-const initRules               = require('./initRules');
+const initConfig               = require('./initConfig');
 const io                      = require('./utl/io');
 const formatMetaInfo          = require('./formatMetaInfo');
 
@@ -66,7 +66,7 @@ module.exports = (pFileDirArray, pOptions) => {
         if (pOptions.info === true) {
             process.stdout.write(formatMetaInfo());
         } else if (pOptions.init){
-            initRules(pOptions.init);
+            initConfig(pOptions.init);
         } else {
             lExitCode = runCruise(pFileDirArray, pOptions);
         }

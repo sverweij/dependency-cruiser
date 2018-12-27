@@ -1,8 +1,8 @@
 .SUFFIXES: .js .css .html
 NODE=node
 RM=rm -f
-GENERATED_SOURCES=src/cli/initRules/config.json.template.js \
-	src/cli/initRules/config.js.template.js \
+GENERATED_SOURCES=src/cli/initConfig/config.json.template.js \
+	src/cli/initConfig/config.js.template.js \
 	src/report/csv/csv.template.js \
 	src/report/dot/dot.template.js \
 	src/report/html/html.template.js

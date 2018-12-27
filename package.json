@@ -142,7 +142,7 @@
       "configs/**/*",
       "test/**/*",
       "src/**/*.template.js",
-      "src/cli/initRules/getUserInput.js",
+      "src/cli/initConfig/getUserInput.js",
       "coverage/**/*",
       "tmp*",
       "docs/**/*",

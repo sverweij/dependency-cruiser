@@ -2,7 +2,7 @@ const fs                = require('fs');
 const path              = require('path');
 const chai              = require('chai');
 const stripJSONComments = require('strip-json-comments');
-const initRules         = require("../../../src/cli/initRules");
+const initConfig         = require("../../../src/cli/initConfig");
 const rulesSchema       = require('../../../src/main/ruleSet/jsonschema.json');
 const deleteDammit      = require("../deleteDammit.utl");
 
@@ -11,7 +11,7 @@ const expect            = chai.expect;
 const RULES_FILE_JSON   = ".dependency-cruiser.json";
 const RULES_FILE_JS     = ".dependency-cruiser.js";
 
-describe("initRules/index.js", () => {
+describe("initConfig/index.js", () => {
     const WORKINGDIR = process.cwd();
 
     afterEach("tear down", () => {
@@ -21,7 +21,7 @@ describe("initRules/index.js", () => {
     it("init 'oneshot' creates a self-contained json rules file", () => {
         process.chdir('test/cli/fixtures/init-config/no-config-files-exist');
         try {
-            initRules("oneshot");
+            initConfig("oneshot");
             const lResult = JSON.parse(
                 stripJSONComments(
                     fs.readFileSync(RULES_FILE_JSON, "utf8")
@@ -40,7 +40,7 @@ describe("initRules/index.js", () => {
         const configResultFileName = `./${path.join('../fixtures/init-config/no-config-files-exist', RULES_FILE_JS)}`;
 
         try {
-            initRules("js");
+            initConfig("js");
             /* eslint global-require:0, security/detect-non-literal-require:0, import/no-dynamic-require:0 */
             const lResult = require(configResultFileName);
 
@@ -60,7 +60,7 @@ describe("initRules/index.js", () => {
         process.chdir('test/cli/fixtures/init-config/no-config-files-exist');
 
         try {
-            initRules("json");
+            initConfig("json");
             const lResult = JSON.parse(
                 stripJSONComments(
                     fs.readFileSync(RULES_FILE_JSON, "utf8")
@@ -78,7 +78,7 @@ describe("initRules/index.js", () => {
     // it("init on user input", () => {
     //     process.chdir('test/cli/fixtures/init-config/no-config-files-exist');
     //     try {
-    //         initRules(true);
+    //         initConfig(true);
     //         const lResult = JSON.parse(
     //             stripJSONComments(
     //                 fs.readFileSync(RULES_FILE_JSON, "utf8")
