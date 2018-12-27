@@ -1,7 +1,9 @@
 .SUFFIXES: .js .css .html
 NODE=node
 RM=rm -f
-GENERATED_SOURCES=src/report/csv/csv.template.js \
+GENERATED_SOURCES=src/cli/initRules/config.json.template.js \
+	src/cli/initRules/config.js.template.js \
+	src/report/csv/csv.template.js \
 	src/report/dot/dot.template.js \
 	src/report/html/html.template.js
 
@@ -24,7 +26,7 @@ help:
 	@echo
 
 # production rules
-src/report/%.template.js: src/report/%.template.hbs
+src/%.template.js: src/%.template.hbs
 	./node_modules/.bin/handlebars --commonjs handlebars/runtime -f $@ $<
 
 # "phony" targets

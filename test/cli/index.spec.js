@@ -335,7 +335,7 @@ describe("#processCLI", () => {
 
         it("dependency-cruise --init will generate a rules file and tells that back on stdout", () => {
             let lCapturedStdout = "";
-            const lValidationFileName = "test/cli/output/some-dependency-cruiser-config.json";
+            const lValidationFileName = ".dependency-cruiser.js";
             const unhookInterceptStdOut = intercept(pText => {
                 lCapturedStdout += pText;
             });
@@ -347,8 +347,7 @@ describe("#processCLI", () => {
             const lExitCode = processCLI(
                 ["test/cli/fixtures"],
                 {
-                    validate: lValidationFileName,
-                    init: true
+                    init: "js"
                 }
             );
 

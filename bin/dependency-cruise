@@ -40,7 +40,7 @@ program
                               (default: tsconfig.json)`)
     .option("--webpack-config [file]", `use a webpack configuration
                               (default: webpack.config.js)`)
-    .option("--init", `write a .dependency-cruiser config with basic
+    .option("--init [oneshot]", `write a .dependency-cruiser config with basic
                               validations to the current folder.`)
     .arguments("<files-or-directories>")
     .parse(process.argv);

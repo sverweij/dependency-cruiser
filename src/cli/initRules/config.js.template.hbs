@@ -1,8 +1,108 @@
 /* eslint-disable */
 /* istanbul ignore next */
 module.exports = {
-    'extends': 'dependency-cruiser/configs/recommended',
+{{#if preset}}
+    'extends': '{{preset}}',
+    /*
+       the '{{preset}}' preset
+       contains these rules:
+       no-circular            - flags all circular dependencies
+       no-orphans             - flags orphan modules (except typescript .d.ts files)
+       no-deprecated-core     - flags dependencies on deprecated node 'core' module
+       no-deprecated-npm      - flags dependencies on deprecated npm modules
+       no-non-package-json    - flags (npm) dependencies that don't occur in package.json
+       not-to-unresolvable    - flags dependencies that can't be resolved
+       no-duplicate-dep-types - flags dependencies that occur more than once in package.json
+
+       If you need to, you can override these rules. E.g. to ignore the
+       no-duplicate-dep-types rule, you can set its severity to "ignore" by
+       adding this to the 'forbidden' section:
+       {
+            name: 'no-duplicate-dep-types',
+            severity: 'ignore'
+       }
+     */
     forbidden: [
+{{^}}
+    forbidden: [
+        /* rules from the 'recommended' preset: */
+        {
+            name: 'no-circular',
+            severity: 'warn',
+            comment: 'Warn in case there\'s circular dependencies',
+            from: {},
+            to: {
+                circular: true
+            }
+        },
+        {
+            name: 'no-orphans',
+            severity: 'info',
+            comment: 'Inform in case there\'s orphans hiding in the code base',
+            from: {
+                orphan: true,
+                pathNot: '\\.d\\.ts$'
+            },
+            to: {}
+        },
+        {
+            name: 'no-deprecated-core',
+            comment: 'Warn about dependencies on deprecated core modules.',
+            severity: 'warn',
+            from: {},
+            to: {
+                dependencyTypes: [
+                  'core'
+                ],
+                path: '^(punycode|domain|constants|sys|_linklist)$'
+            }
+        },
+        {
+            name: 'no-deprecated-npm',
+            comment: 'These npm modules are deprecated - find an alternative.',
+            severity: 'warn',
+            from: {},
+            to: {
+                dependencyTypes: [
+                  'deprecated'
+                ]
+            }
+        },
+        {
+            name: 'no-non-package-json',
+            severity: 'error',
+            comment: 'Don\'t allow dependencies to packages not in package.json',
+            from: {},
+            to: {
+                dependencyTypes: [
+                  'unknown',
+                  'undetermined',
+                  'npm-no-pkg',
+                  'npm-unknown'
+                ]
+            }
+        },
+        {
+            name: 'not-to-unresolvable',
+            comment: 'Don\'t allow dependencies on modules dependency-cruiser can\'t resolve to files on disk (which probably means they don\'t exist)',
+            severity: 'error',
+            from: {},
+            to: {
+                couldNotResolve: true
+            }
+        },
+        {
+            name: 'no-duplicate-dep-types',
+            comment: 'Warn if a dependency you\'re actually using occurs in your package.json more than once (technically: has more than one dependency type)',
+            severity: 'warn',
+            from: {},
+            to: {
+                moreThanOneDependencyType: true
+            }
+        },
+
+        /* rules you might want to tweak for your specific situation: */
+{{/if}}
         {
             name: 'not-to-test',
             comment: 'Don\'t allow dependencies from outside the test folder to test',
