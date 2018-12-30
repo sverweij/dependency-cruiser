@@ -7,8 +7,8 @@ const ruleSchema      = require('./jsonschema.json');
 
 const ajv             = new Ajv();
 
-function validateAgainstSchema(pSchema, pRuleSet) {
-    if (!ajv.validate(pSchema, pRuleSet)) {
+function validateAgainstSchema(pSchema, pConfiguration) {
+    if (!ajv.validate(pSchema, pConfiguration)) {
         throw new Error(
             `The rules file is not valid: ${ajv.errorsText()}.\n`
         );
@@ -44,26 +44,26 @@ function checkRuleSafety(pRule) {
 }
 
 /**
- * Returns the passed ruleset pRuleSet when it is valid.
+ * Returns the passed configuration pConfiguration when it is valid.
  * Throws an Error in all other cases.
  *
  * Validations:
  * - the ruleset adheres to the [rule set json schema](jsonschema.json)
  * - any regular expression in the rule set is 'safe' (~= won't be too slow)
  *
- * @param  {object} pRuleSet The ruleset to validate
- * @return {object}          The ruleset as passed
- * @throws {Error}           An error with the reason for the error as
- *                           a message
+ * @param  {object} pConfiguration The configuration to validate
+ * @return {object}                The configuration as passed
+ * @throws {Error}                 An error with the reason for the error as
+ *                                 a message
  */
-module.exports = (pRuleSet) => {
-    validateAgainstSchema(ruleSchema, pRuleSet);
-    (pRuleSet.allowed   || []).forEach(checkRuleSafety);
-    (pRuleSet.forbidden || []).forEach(checkRuleSafety);
-    if (pRuleSet.hasOwnProperty("options")){
-        validateOptions(pRuleSet.options);
+module.exports = (pConfiguration) => {
+    validateAgainstSchema(ruleSchema, pConfiguration);
+    (pConfiguration.allowed   || []).forEach(checkRuleSafety);
+    (pConfiguration.forbidden || []).forEach(checkRuleSafety);
+    if (pConfiguration.hasOwnProperty("options")){
+        validateOptions(pConfiguration.options);
     }
-    return pRuleSet;
+    return pConfiguration;
 };
 
 
