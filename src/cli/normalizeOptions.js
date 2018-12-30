@@ -56,7 +56,10 @@ function validateAndGetCustomRulesFileName(pValidate) {
     if (fileExists(pValidate)) {
         lRetval = pValidate;
     } else {
-        throw new Error(`Can't open '${pValidate}' for reading. Does it exist?\n`);
+        throw new Error(
+            `Can't open '${pValidate}' for reading. Does it exist?` +
+            ` (You can create a dependency-cruiser configuration file with depcruise --init .)\n`
+        );
     }
     return lRetval;
 }
@@ -119,5 +122,3 @@ module.exports = (pOptions) => {
 };
 
 module.exports.determineRulesFileName = getOptionValue(defaults.RULES_FILE_NAME);
-
-
