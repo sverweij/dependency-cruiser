@@ -1,4 +1,4 @@
-"use strict";
+
 
 const matchModuleRule     = require('./matchModuleRule');
 const matchDependencyRule = require('./matchDependencyRule');

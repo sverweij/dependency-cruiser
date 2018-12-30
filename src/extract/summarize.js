@@ -1,4 +1,4 @@
-"use strict";
+
 
 const _flattenDeep = require('lodash/flattenDeep');
 

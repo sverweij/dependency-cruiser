@@ -1,4 +1,4 @@
-"use strict";
+
 
 const extract          = require("../extract");
 const meta             = require("../extract/transpile/meta");

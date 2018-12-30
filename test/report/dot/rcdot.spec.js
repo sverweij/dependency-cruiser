@@ -1,4 +1,4 @@
-"use strict";
+
 const fs          = require('fs');
 const expect      = require('chai').expect;
 const renderRCDot = require('../../../src/report/dot')(require('../../../src/report/dot/richModuleColorScheme.json'));

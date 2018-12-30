@@ -1,7 +1,6 @@
 const fs                = require('fs');
 const path              = require('path');
 const stripJSONComments = require('strip-json-comments');
-// const makeAbsolute      = require('../utl/makeAbsolute');
 
 module.exports = function readRuleSet(pRulesFile) {
 

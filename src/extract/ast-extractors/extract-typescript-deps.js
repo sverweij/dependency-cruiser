@@ -1,4 +1,4 @@
-"use strict";
+
 
 const tryRequire = require('semver-try-require');
 const $package   = require('../../../package.json');

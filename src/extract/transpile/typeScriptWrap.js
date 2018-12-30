@@ -1,4 +1,4 @@
-"use strict";
+
 const tryRequire = require("semver-try-require");
 const _get     = require('lodash/get');
 const typescript = tryRequire(

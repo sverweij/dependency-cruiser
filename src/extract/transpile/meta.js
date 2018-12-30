@@ -1,4 +1,4 @@
-"use strict";
+
 
 const supportedTranspilers = require("../../../package.json").supportedTranspilers;
 const javaScriptWrap       = require("./javaScriptWrap");

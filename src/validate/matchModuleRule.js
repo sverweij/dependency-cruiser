@@ -1,4 +1,4 @@
-"use strict";
+
 const isModuleOnlyRule = require('./isModuleOnlyRule');
 
 function match(pModule){

@@ -1,4 +1,4 @@
-"use strict";
+
 
 function compareOnSource(pOne, pTwo) {
     const deriveSortKey = (pModule) => `${pModule.coreModule ? "1" : "0"}-${pModule.source}`;

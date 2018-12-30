@@ -1,4 +1,4 @@
-"use strict";
+
 const path       = require('path').posix;
 const Handlebars = require("handlebars/runtime");
 const coloring   = require('./coloring');

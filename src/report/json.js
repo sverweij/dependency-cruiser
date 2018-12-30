@@ -1,4 +1,4 @@
-"use strict";
+
 
 module.exports = pInput =>
     Object.assign(

@@ -1,4 +1,4 @@
-"use strict";
+
 
 const expect = require('chai').expect;
 const orphan = require('../../../../src/extract/derive/orphan');

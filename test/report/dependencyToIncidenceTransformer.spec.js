@@ -1,4 +1,4 @@
-"use strict";
+
 const expect    = require('chai').expect;
 const transform = require('../../src/report/dependencyToIncidenceTransformer');
 

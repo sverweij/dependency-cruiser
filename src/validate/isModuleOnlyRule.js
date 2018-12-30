@@ -1,4 +1,4 @@
-"use strict";
+
 
 /**
  * @param {any} pRule a dependency-cruiser rule

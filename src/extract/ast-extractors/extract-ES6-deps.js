@@ -1,4 +1,4 @@
-"use strict";
+
 
 const walk        = require('acorn-walk');
 

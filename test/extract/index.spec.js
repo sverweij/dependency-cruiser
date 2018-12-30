@@ -1,4 +1,4 @@
-"use strict";
+
 
 const chai                    = require('chai');
 const extract                 = require('../../src/extract');

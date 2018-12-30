@@ -1,4 +1,4 @@
-"use strict";
+
 
 const safeRegex       = require('safe-regex');
 const Ajv             = require('ajv');
