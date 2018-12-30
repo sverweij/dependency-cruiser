@@ -26,7 +26,7 @@ templates['config.json.template.hbs'] = template({"1":function(container,depth0,
 },"11":function(container,depth0,helpers,partials,data) {
     return "        // , \"webpackConfig\": {\n        //    \"fileName\": \"./webpack.conf.js\"\n        //    , \"env\": {}\n        //    , \"args\": {}\n        // }\n";
 },"compiler":[7,">= 4.0.0"],"main":function(container,depth0,helpers,partials,data) {
-    var stack1, alias1=depth0 != null ? depth0 : (container.nullContext || {});
+    var stack1, helper, alias1=depth0 != null ? depth0 : (container.nullContext || {}), alias2=helpers.helperMissing, alias3="function", alias4=container.escapeExpression;
 
   return "{\n"
     + ((stack1 = helpers["if"].call(alias1,(depth0 != null ? depth0.preset : depth0),{"name":"if","hash":{},"fn":container.program(1, data, 0),"inverse":container.program(3, data, 0),"data":data})) != null ? stack1 : "")
@@ -34,5 +34,9 @@ templates['config.json.template.hbs'] = template({"1":function(container,depth0,
     + ((stack1 = helpers["if"].call(alias1,(depth0 != null ? depth0.tsConfig : depth0),{"name":"if","hash":{},"fn":container.program(5, data, 0),"inverse":container.program(7, data, 0),"data":data})) != null ? stack1 : "")
     + "\n        /* Webpack configuration to use to get resolve options from.\n\n          The (optional) fileName attribute specifies which file to take (relative to dependency-cruiser's\n          current working directory. When not provided defaults to './webpack.conf.js'.\n\n          The (optional) `env` and `args` attributes contain the parameters to be passed if\n          your webpack config is a function and takes them (see webpack documentation\n          for details)\n         */\n"
     + ((stack1 = helpers["if"].call(alias1,(depth0 != null ? depth0.webpackConfig : depth0),{"name":"if","hash":{},"fn":container.program(9, data, 0),"inverse":container.program(11, data, 0),"data":data})) != null ? stack1 : "")
-    + "    }\n}\n";
+    + "    }\n}\n// generated: dependency-cruiser@"
+    + alias4(((helper = (helper = helpers.version || (depth0 != null ? depth0.version : depth0)) != null ? helper : alias2),(typeof helper === alias3 ? helper.call(alias1,{"name":"version","hash":{},"data":data}) : helper)))
+    + " on "
+    + alias4(((helper = (helper = helpers.date || (depth0 != null ? depth0.date : depth0)) != null ? helper : alias2),(typeof helper === alias3 ? helper.call(alias1,{"name":"date","hash":{},"data":data}) : helper)))
+    + "\n";
 },"useData":true});
