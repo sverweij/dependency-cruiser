@@ -1,4 +1,3 @@
-"use strict";
 const chai       = require('chai');
 const main       = require("../../src/main");
 const depSchema  = require('../../src/extract/jsonschema.json');

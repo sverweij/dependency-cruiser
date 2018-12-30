@@ -1,5 +1,3 @@
-"use strict";
-
 const _                      = require('lodash');
 const pathToPosix            = require('./utl/pathToPosix');
 const extract                = require('./extract');

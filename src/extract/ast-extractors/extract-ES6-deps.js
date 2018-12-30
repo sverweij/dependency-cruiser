@@ -1,5 +1,3 @@
-"use strict";
-
 const walk        = require('acorn-walk');
 
 module.exports = (pAST, pDependencies) => {

@@ -1,5 +1,3 @@
-"use strict";
-
 const path                        = require('path');
 const _                           = require('lodash');
 const resolve                     = require('./resolve');

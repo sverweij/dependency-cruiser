@@ -13,7 +13,6 @@ module.exports = pOptions => {
         pOptions
     );
 
-    // lRetval.baseDir = pathToPosix(lRetval.baseDir);
     lRetval.maxDepth = parseInt(lRetval.maxDepth, 10);
     lRetval.moduleSystems = uniq(lRetval.moduleSystems.sort());
 

@@ -1,5 +1,3 @@
-"use strict";
-
 const path        = require('path');
 const expect      = require('chai').expect;
 const pathToPosix = require('../../../src/extract/utl/pathToPosix');

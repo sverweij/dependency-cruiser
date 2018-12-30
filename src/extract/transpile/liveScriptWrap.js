@@ -1,5 +1,3 @@
-"use strict";
-
 const tryRequire = require("semver-try-require");
 const livescript = tryRequire(
     "livescript",

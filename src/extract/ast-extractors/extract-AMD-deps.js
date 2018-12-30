@@ -1,5 +1,3 @@
-"use strict";
-
 const walk                        = require('acorn-walk');
 const extractCommonJSDependencies = require("./extract-commonJS-deps");
 

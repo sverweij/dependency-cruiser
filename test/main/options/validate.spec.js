@@ -1,4 +1,3 @@
-"use strict";
 const expect          = require('chai').expect;
 const validateOptions = require('../../../src/main/options/validate');
 

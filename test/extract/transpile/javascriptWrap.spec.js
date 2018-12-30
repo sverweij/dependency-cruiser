@@ -1,5 +1,3 @@
-"use strict";
-
 const fs     = require('fs');
 const expect = require("chai").expect;
 const wrap   = require("../../../src/extract/transpile/javaScriptWrap");

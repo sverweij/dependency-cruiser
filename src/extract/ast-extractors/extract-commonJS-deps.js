@@ -1,5 +1,3 @@
-"use strict";
-
 const walk = require('acorn-walk');
 
 function firstArgumentIsAString(pNodeArguments) {

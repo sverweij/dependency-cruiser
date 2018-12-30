@@ -1,5 +1,3 @@
-"use strict";
-
 const path                     = require('path');
 const isCore                   = require('resolve').isCore;
 const pathToPosix              = require('../utl/pathToPosix');

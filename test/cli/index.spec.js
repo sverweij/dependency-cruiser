@@ -1,4 +1,3 @@
-"use strict";
 const fs           = require("fs");
 // path.posix instead of path because otherwise on win32 the resulting
 // outputTo would contain \\ instead of / which for this unit test doesn't matter
@@ -335,7 +334,7 @@ describe("#processCLI", () => {
 
         it("dependency-cruise --init will generate a rules file and tells that back on stdout", () => {
             let lCapturedStdout = "";
-            const lValidationFileName = "test/cli/output/some-dependency-cruiser-config.json";
+            const lValidationFileName = ".dependency-cruiser.js";
             const unhookInterceptStdOut = intercept(pText => {
                 lCapturedStdout += pText;
             });
@@ -347,8 +346,7 @@ describe("#processCLI", () => {
             const lExitCode = processCLI(
                 ["test/cli/fixtures"],
                 {
-                    validate: lValidationFileName,
-                    init: true
+                    init: "js"
                 }
             );
 

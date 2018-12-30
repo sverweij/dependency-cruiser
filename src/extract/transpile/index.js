@@ -1,5 +1,3 @@
-"use strict";
-
 const meta = require("./meta");
 
 /**

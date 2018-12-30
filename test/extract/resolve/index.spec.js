@@ -1,5 +1,3 @@
-"use strict";
-
 const path    = require('path');
 const expect  = require('chai').expect;
 const resolve = require('../../../src/extract/resolve');
@@ -197,7 +195,7 @@ describe("resolve/index", () => {
         });
     });
 
-    it("considers a webpack config", () => {
+    it("considers a typescript config", () => {
         expect(
             resolve(
                 {
@@ -246,4 +244,3 @@ describe("resolve/index", () => {
         });
     });
 });
-

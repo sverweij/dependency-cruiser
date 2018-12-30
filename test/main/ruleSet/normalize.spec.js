@@ -1,4 +1,3 @@
-"use strict";
 const expect    = require('chai').expect;
 const normalize = require('../../../src/main/ruleSet/normalize');
 

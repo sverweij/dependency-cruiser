@@ -1,5 +1,3 @@
-"use strict";
-
 const _flattenDeep = require('lodash/flattenDeep');
 
 const dependencySortFn = (left, right) => `${left.from}|${left.to}` > `${right.from}|${right.to}` ? 1 : -1;

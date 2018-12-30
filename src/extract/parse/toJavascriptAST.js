@@ -1,5 +1,3 @@
-"use strict";
-
 const fs           = require('fs');
 const acorn        = require('acorn');
 const acorn_loose  = require('acorn-loose');

@@ -1,5 +1,3 @@
-"use strict";
-
 const expect = require('chai').expect;
 const localNpmHelpers = require('../../../src/extract/resolve/localNpmHelpers');
 

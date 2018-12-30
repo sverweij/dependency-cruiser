@@ -129,7 +129,7 @@ module returning a rules object literal.
 dependency-cruise -x node_modules --validate my.rules.json src spec
 ```
 
-> _Tip_: usually you don't need to specify the rules file. However if run 
+> _Tip_: usually you don't need to specify the rules file. However if run
 > `depcruise --validate src`, _src_ will be interpreted as the rules file.
 > Which is probably is not what you want. To prevent this, place `--`
 > after the last option, like so:
@@ -172,21 +172,27 @@ For more information about writing rules see the [tutorial](rules-tutorial.md) a
 
 
 ### `--init`
-This creates a `.dependency-cruiser.json` with some useful rules in it to the
-current folder and exits. use with `--validate`
+This asks some questions and depending on the answers creates a dependency-cruiser
+configuration with some useful rules in it to the current folder and exits.
+use with `--validate`
 
-These are the rules in that .dependency-cruiser.json:
+Some of the rules that will be in the configuration (either directly or from a
+preset):
 
-Rule | Description
----|---
-`not-to-test` | Don't allow dependencies from outside the test folder to test
-`not-to-spec` | Don't allow dependencies to (typescript/ javascript/ coffeescript) spec files
-`no-deprecated-core` | Warn about dependencies on deprecated core modules.
-`not-to-unresolvable` | Don't allow dependencies on modules dependency-cruiser can't resolve to files on disk (which probably means they don't exist)
-`not-to-dev-dep` | Don't allow dependencies from src/app/lib to a development only package
-`no-non-package-json` | Don't allow dependencies to packages not in package.json (except from within node_modules)
-`optional-deps-used` | Inform about the use of dependencies labeled as 'optional' (so you can ensure their imports a are sufficiently managed)
-`peer-deps-used` | Warn about the use of a peer dependency (peer dependencies are deprecated with the advent of npm 3 - and probably gone with version 4).
+Rule                     | Description
+---                      |---
+`no-circular`            | flags all circular dependencies
+`no-orphans`             | flags orphan modules (except typescript `.d.ts` files)
+`no-deprecated-core`     | flags dependencies on deprecated node 'core' modules
+`no-deprecated-npm`      | flags dependencies on deprecated npm modules
+`no-non-package-json`    | flags (npm) dependencies that don't occur in package.json
+`not-to-unresolvable`    | flags dependencies that can't be resolved
+`no-duplicate-dep-types` | flags dependencies that occur more than once in package.json
+`not-to-test`            | Don't allow dependencies from outside test folders to test folders
+`not-to-spec`            | Don't allow dependencies to (typescript/ javascript/ coffeescript) spec files
+`not-to-dev-dep`         | Don't allow dependencies from src/app/lib to a development only package
+`optional-deps-used`     | Inform about the use of 'optional' dependencies (so you can ensure their imports a are sufficiently managed)
+`peer-deps-used`         | Warn about the use of a peer dependency (they might be OK for you, but it's not typical you have them).
 `no-duplicate-dep-types` | Warn if a dependency occurs in your package.json more than once (technically: has more than one dependency type)
 
 
@@ -276,10 +282,10 @@ dependency-on-a-type-only from `b.ts` to `a.ts`:
 
 <img alt="'no import use' with typescript pre-compilation dependencies" src="real-world-samples/only-types-with-pre-compilation-deps.png">
 
-#### Pre-compilation dependencies example: import without use 
+#### Pre-compilation dependencies example: import without use
 
 Similarly, if you import something, but don't use it, the dependency
-only exists before compilation. Take for example these two 
+only exists before compilation. Take for example these two
 typescript modules:
 
 `a.ts`:
@@ -314,9 +320,9 @@ output will look like this:
 ### `--ts-config`: use a typescript configuration file ('project')
 If dependency-cruiser encounters typescript, it compiles it to understand what it
 is looking at. If you have `compilerOptions` in your `tsconfig.json` you think
-it should take into account, you can use this option to make it do that. 
+it should take into account, you can use this option to make it do that.
 You might want to do this e.g. if you have `baseDir`/ `paths` keys in your
-`tsconfig`, are using 
+`tsconfig`, are using
 [dynamic imports](./faq.md#typescript-dynamic-imports-show-up-as-x--whats-up-there)
 or jsx/ tsx outside of a react context.
 
@@ -362,7 +368,7 @@ to `false` (which is also nodejs' default behavior since release 6).
 
 ### `--webpack-config`: use (the resolution options of) a webpack configuration
 Dependency-cruiser will pluck the `resolve` key from the configuration
-use the information to resolve files on disk. 
+use the information to resolve files on disk.
 
 Useful things to know:
 - The configuration file you can pass as an argument to this option is
@@ -384,7 +390,7 @@ Useful things to know:
   "options": {
     "webpackConfig": {
       "env": { "production": true },
-      "arguments": { "mode": "production" } 
+      "arguments": { "mode": "production" }
     }
   }
   ```
@@ -398,8 +404,8 @@ you're curious) see the [webpack resolve](https://webpack.js.org/configuration/r
 documentation for details.
 
 ### arguments
-You can pass a bunch of files, directories and 'glob' patterns. 
-dependency-cruiser will 
+You can pass a bunch of files, directories and 'glob' patterns.
+dependency-cruiser will
 - resolve the glob patterns (if any) to files and directories
 - scan directories (if any) for files with supported extensions
 - add the passed files to that

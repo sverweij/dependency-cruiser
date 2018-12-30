@@ -1,4 +1,3 @@
-
 const glob                    = require('glob');
 const _get                    = require('lodash/get');
 const main                    = require('../main');
@@ -6,16 +5,9 @@ const parseTSConfig           = require('./parseTSConfig');
 const getResolveConfig        = require('./getResolveConfig');
 const validateFileExistence   = require('./utl/validateFileExistence');
 const normalizeOptions        = require('./normalizeOptions');
-const initRules               = require('./initRules');
+const initConfig               = require('./initConfig');
 const io                      = require('./utl/io');
 const formatMetaInfo          = require('./formatMetaInfo');
-
-function createRulesFile(pOptions) {
-    initRules(normalizeOptions.determineRulesFileName(pOptions.validate));
-    process.stdout.write(
-        `\n  Successfully created '${normalizeOptions.determineRulesFileName(pOptions.validate)}'\n\n`
-    );
-}
 
 function extractResolveOptions(pOptions) {
     let lResolveOptions = {};
@@ -73,8 +65,8 @@ module.exports = (pFileDirArray, pOptions) => {
     try {
         if (pOptions.info === true) {
             process.stdout.write(formatMetaInfo());
-        } else if (pOptions.init === true){
-            createRulesFile(pOptions);
+        } else if (pOptions.init){
+            initConfig(pOptions.init);
         } else {
             lExitCode = runCruise(pFileDirArray, pOptions);
         }
