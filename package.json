@@ -53,7 +53,7 @@
     "check": "npm-run-all build lint depcruise test:cover",
     "check:full": "npm-run-all check",
     "depcruise": "node ./bin/dependency-cruise --validate -- src bin/dependency-cruise test configs",
-    "depcruise:graph": "node ./bin/dependency-cruise --validate --exclude \"(node_modules|^[a-z]+$)\" --output-type rcdot bin src | dot -T svg > tmp_deps.svg",
+    "depcruise:graph": "node ./bin/dependency-cruise --validate --exclude \"(node_modules|^[a-z]+$)\" --output-type rcdot bin src | dot -T svg -Ecolor=#00000077 -Epenwidth=2.0 -Gsplines=ortho | cat docs/assets/depcruise-graph-head.snippet.html - docs/assets/depcruise-graph-foot.snippet.html > docs/dependency-cruiser-dependency-graph.html",
     "depcruise:graph:osage": "node ./bin/dependency-cruise --validate --exclude \"(node_modules|^[a-z]+$)\" --output-type rcdot bin src | osage -Gpack=16 -GpackMode=array2 -T svg > tmp_deps.svg",
     "depcruise:graph:fdp": "node ./bin/dependency-cruise --validate --exclude \"(node_modules|^[a-z]+$)\" --output-type rcdot bin src | fdp -GK=0.1 -Gsplines=ortho -T svg > tmp_deps.svg",
     "depcruise:graph:doc": "npm-run-all depcruise:graph:doc:generate depcruise:graph:doc:optimize",
@@ -80,7 +80,7 @@
     "update-dependencies": "npm-run-all upem:update upem:install build:clean build lint:fix depcruise test:cover",
     "upem:install": "npm install",
     "upem:update": "npm outdated --json | upem",
-    "version": "npm-run-all build depcruise:graph:doc scm:stage"
+    "version": "npm-run-all build depcruise:graph:doc depcruise:graph scm:stage"
   },
   "upem": {
     "donotup": []
