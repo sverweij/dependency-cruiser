@@ -1,5 +1,3 @@
-
-
 /*
  * set detect-non-literal-regexp to ignore because we sanitized our input
  * (see main.js)

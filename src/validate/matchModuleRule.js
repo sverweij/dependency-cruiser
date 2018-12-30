@@ -1,4 +1,3 @@
-
 const isModuleOnlyRule = require('./isModuleOnlyRule');
 
 function match(pModule){
@@ -17,4 +16,3 @@ module.exports = {
     match,
     isInteresting
 };
-

@@ -1,5 +1,3 @@
-
-
 const path            = require('path');
 const isCore          = require('resolve').isCore;
 const localNpmHelpers = require('./localNpmHelpers');

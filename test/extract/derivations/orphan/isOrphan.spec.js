@@ -1,5 +1,3 @@
-
-
 const expect = require('chai').expect;
 const isOrphan = require('../../../../src/extract/derive/orphan/isOrphan');
 

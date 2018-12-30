@@ -1,5 +1,3 @@
-
-
 const Handlebars                       = require("handlebars/runtime");
 const dependencyToIncidenceTransformer = require("../dependencyToIncidenceTransformer");
 

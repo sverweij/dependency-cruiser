@@ -1,5 +1,3 @@
-
-
 const fs               = require('fs');
 const path             = require('path');
 const pathToPosix      = require('../utl/pathToPosix');
@@ -71,5 +69,3 @@ module.exports = (pDependency, pBaseDir, pFileDir, pResolveOptions) => {
     }
     return lResolvedModule;
 };
-
-

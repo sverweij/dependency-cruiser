@@ -1,4 +1,3 @@
-
 const isModuleOnlyRule = require('./isModuleOnlyRule');
 
 function propertyEquals(pTo, pRule, pProperty) {

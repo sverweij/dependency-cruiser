@@ -1,4 +1,3 @@
-
 const expect = require('chai').expect;
 const render = require('../../src/report/html');
 const deps   = require('./fixtures/cjs-no-dependency-valid.json');

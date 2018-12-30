@@ -1,5 +1,3 @@
-
-
 const expect = require("chai").expect;
 const wrap   = require("../../../src/extract/transpile/liveScriptWrap");
 

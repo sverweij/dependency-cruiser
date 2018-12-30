@@ -1,6 +1,5 @@
-
 const tryRequire = require("semver-try-require");
-const _get     = require('lodash/get');
+const _get       = require('lodash/get');
 const typescript = tryRequire(
     "typescript",
     require("../../../package.json").supportedTranspilers.typescript

@@ -1,5 +1,3 @@
-
-
 const path      = require("path");
 const expect    = require("chai").expect;
 const determine = require("../../../src/extract/resolve/determineDependencyTypes");

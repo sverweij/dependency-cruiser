@@ -1,5 +1,3 @@
-
-
 const VALID_SEVERITIES = /^(error|warn|info|ignore)$/;
 const DEFAULT_SEVERITY = 'warn';
 const DEFAULT_RULE     = 'unnamed';

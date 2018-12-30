@@ -1,5 +1,3 @@
-
-
 const safeRegex       = require('safe-regex');
 const Ajv             = require('ajv');
 const validateOptions = require('../options/validate');

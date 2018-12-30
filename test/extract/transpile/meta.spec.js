@@ -1,5 +1,3 @@
-
-
 const expect = require("chai").expect;
 const meta   = require("../../../src/extract/transpile/meta");
 const jsWrap = require("../../../src/extract/transpile/javaScriptWrap");

@@ -1,5 +1,3 @@
-
-
 const chai                    = require('chai');
 const extract                 = require('../../src/extract');
 const depSchema               = require('../../src/extract/jsonschema.json');

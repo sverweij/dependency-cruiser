@@ -1,4 +1,3 @@
-
 const fs         = require('fs');
 const tryRequire = require("semver-try-require");
 const _memoize   = require("lodash/memoize");

@@ -1,4 +1,3 @@
-
 const fs           = require("fs");
 // path.posix instead of path because otherwise on win32 the resulting
 // outputTo would contain \\ instead of / which for this unit test doesn't matter
