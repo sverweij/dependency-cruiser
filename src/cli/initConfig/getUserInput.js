@@ -28,10 +28,6 @@ const INQUIRER_QUESTIONS = [
         message: "Pick a preset",
         choices: [
             {
-                name: "recommended",
-                value: "dependency-cruiser/configs/recommended"
-            },
-            {
                 name: "recommended, warn only (good starter choice)",
                 value: "dependency-cruiser/configs/recommended-warn-only"
             },
