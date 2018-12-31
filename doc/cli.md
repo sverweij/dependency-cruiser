@@ -7,7 +7,7 @@
 3. [`--do-not-follow`: don't cruise modules adhering to this pattern any further](#--do-not-follow-dont-cruise-modules-adhering-to-this-pattern-any-further)
 4. [`--exclude`: exclude modules from being cruised](#--exclude-exclude-modules-from-being-cruised)
 5. [`--max-depth`](#--max-depth)
-6. [`--config`/ `--validate`](#--config----validate)
+6. [`--config`/ `--validate`](#--config---validate)
 7. [`--init`](#--init)
 8. [`--prefix` prefixing links](#--prefix-prefixing-links)
 9. [`--info` showing what alt-js are supported](#--info-showing-what-alt-js-are-supported)
