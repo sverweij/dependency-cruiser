@@ -1,23 +1,23 @@
-const path          = require('path');
-const resolve       = require('../../extract/resolve/resolve');
-const readRuleSet   = require('./readRuleSet');
-const mergeRuleSets = require('./mergeRuleSets');
+const path         = require('path');
+const resolve      = require('../../extract/resolve/resolve');
+const readConfig   = require('./readConfig');
+const mergeConfigs = require('./mergeConfigs');
 
 /* eslint no-use-before-define: 0 */
 function processExtends(pRetval, pAlreadyVisited, pBaseDir) {
     if (typeof pRetval.extends === "string") {
-        pRetval = mergeRuleSets(
+        pRetval = mergeConfigs(
             pRetval,
-            compileRuleSet(pRetval.extends, pAlreadyVisited, pBaseDir)
+            compileConfig(pRetval.extends, pAlreadyVisited, pBaseDir)
         );
     }
 
     if (Array.isArray(pRetval.extends)) {
         pRetval = pRetval.extends.reduce(
             (pAll, pExtends) =>
-                mergeRuleSets(
+                mergeConfigs(
                     pAll,
-                    compileRuleSet(pExtends, pAlreadyVisited, pBaseDir)
+                    compileConfig(pExtends, pAlreadyVisited, pBaseDir)
                 ),
             pRetval
         );
@@ -26,10 +26,10 @@ function processExtends(pRetval, pAlreadyVisited, pBaseDir) {
     return pRetval;
 }
 
-function compileRuleSet(pRulesFile, pAlreadyVisited = new Set(), pBaseDir = process.cwd()) {
+function compileConfig(pConfigFileName, pAlreadyVisited = new Set(), pBaseDir = process.cwd()) {
 
     const lResolvedFileName = resolve(
-        pRulesFile,
+        pConfigFileName,
         pBaseDir,
         {
             extensions: [".js", ".json"]
@@ -43,7 +43,7 @@ function compileRuleSet(pRulesFile, pAlreadyVisited = new Set(), pBaseDir = proc
     }
     pAlreadyVisited.add(lResolvedFileName);
 
-    let lRetval = readRuleSet(lResolvedFileName, pBaseDir);
+    let lRetval = readConfig(lResolvedFileName, pBaseDir);
 
     if (lRetval.hasOwnProperty("extends")) {
         lRetval = processExtends(lRetval, pAlreadyVisited, lBaseDir);
@@ -52,4 +52,4 @@ function compileRuleSet(pRulesFile, pAlreadyVisited = new Set(), pBaseDir = proc
     return lRetval;
 }
 
-module.exports = compileRuleSet;
+module.exports = compileConfig;

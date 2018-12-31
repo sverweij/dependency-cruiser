@@ -19,8 +19,9 @@ program
     .version($package.version)
     .option("-i, --info", `shows what languages and extensions
                               dependency-cruiser supports`)
-    .option("-v, --validate [file]", `validate with rules in [file]
+    .option("-c, --config [file]", `read rules and options from [file]
                               (default: .dependency-cruiser.json)`)
+    .option("-v, --validate [file]", `alias for --config`)
     .option("-f, --output-to <file>", `file to write output to; - for stdout
                              `, "-")
     .option("-X, --do-not-follow <regex>", `a regular expression for modules to include,
