@@ -94,17 +94,17 @@ function mergeOptions(pOptionsExtended, pOptionsBase) {
  * returns the severity for the allowed rule - and "warn" if neither
  * passed dependency-cruiser configs contain it.
  *
- * @param {*} pRuleSetExtended - a dependency-cruiser-config that extends ...
- * @param {*} pRuleSetBase - a base dependency-cruiser-config
+ * @param {*} pConfigExtended - a dependency-cruiser-config that extends ...
+ * @param {*} pConfigBase - a base dependency-cruiser-config
  *
  * @returns {string} - a string from the SeverityType value set
  */
-function mergeAllowedSeverities(pRuleSetExtended, pRuleSetBase){
+function mergeAllowedSeverities(pConfigExtended, pConfigBase){
     return _get(
-        pRuleSetExtended,
+        pConfigExtended,
         'allowedSeverity',
         _get(
-            pRuleSetBase,
+            pConfigBase,
             'allowedSeverity',
             "warn"
         )
@@ -120,30 +120,28 @@ function mergeAllowedSeverities(pRuleSetExtended, pRuleSetBase){
  * - for the allowedSeverity the extended one 'wins' - if none is present it
  *   gets to be 'warn'
  * - options get simply object assigned
- * @param {*} pRuleSetExtended - a dependency-cruiser-config that extends ...
- * @param {*} pRuleSetBase - a base dependency-cruiser-config
+ * @param {*} pConfigExtended - a dependency-cruiser-config that extends ...
+ * @param {*} pConfigBase - a base dependency-cruiser-config
  *
  * @returns {Object} - The merged rule set
  */
-module.exports = (pRuleSetExtended, pRuleSetBase) => {
-    let lRetval = {
+module.exports = (pConfigExtended, pConfigBase) => (
+    {
         forbidden: mergeForbidden(
-            _get(pRuleSetExtended, 'forbidden', []),
-            _get(pRuleSetBase, 'forbidden', [])
+            _get(pConfigExtended, 'forbidden', []),
+            _get(pConfigBase, 'forbidden', [])
         ),
         allowed: mergeAllowed(
-            _get(pRuleSetExtended, 'allowed', []),
-            _get(pRuleSetBase, 'allowed', [])
+            _get(pConfigExtended, 'allowed', []),
+            _get(pConfigBase, 'allowed', [])
         ),
         allowedSeverity: mergeAllowedSeverities(
-            pRuleSetExtended,
-            pRuleSetBase
+            pConfigExtended,
+            pConfigBase
         ),
         options: mergeOptions(
-            _get(pRuleSetExtended, 'options', {}),
-            _get(pRuleSetBase, 'options', {})
+            _get(pConfigExtended, 'options', {}),
+            _get(pConfigBase, 'options', {})
         )
-    };
-
-    return lRetval;
-};
+    }
+);

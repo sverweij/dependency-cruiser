@@ -42,6 +42,38 @@ describe("normalizeOptions", () => {
         ).to.deep.equal(["amd", "cjs", "es6"]);
     });
 
+    it("-c / --config without params gets translated to -v/ --validate.", () => {
+        process.chdir('test/cli/fixtures/normalize-config/json-only');
+        expect(
+            normalizeOptions({config: true})
+        ).to.deep.equal(
+            {
+                outputTo: "-",
+                outputType: "err",
+                rulesFile: ".dependency-cruiser.json",
+                ruleSet: {},
+                config: true,
+                validate: true
+            }
+        );
+    });
+
+    it("-c / --config with something gets translated to -v/ --validate.", () => {
+        process.chdir('test/cli/fixtures/normalize-config/json-only');
+        expect(
+            normalizeOptions({config: ".dependency-cruiser.json"})
+        ).to.deep.equal(
+            {
+                outputTo: "-",
+                outputType: "err",
+                rulesFile: ".dependency-cruiser.json",
+                ruleSet: {},
+                config: ".dependency-cruiser.json",
+                validate: true
+            }
+        );
+    });
+
     it("-v argument assumes .dependency-cruiser.json for rules (and borks if it doesn't exist)", () => {
         process.chdir('test/cli/fixtures/normalize-config/no-default-config');
         try {

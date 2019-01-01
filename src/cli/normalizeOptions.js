@@ -1,10 +1,10 @@
 const fs = require('fs');
-const path         = require('path');
-const _set         = require('lodash/set');
-const _get         = require('lodash/get');
-const _clone       = require('lodash/clone');
-const compileRuleSet = require('./compileRuleSet');
-const defaults     = require('./defaults.json');
+const path          = require('path');
+const _set          = require('lodash/set');
+const _get          = require('lodash/get');
+const _clone        = require('lodash/clone');
+const compileConfig = require('./compileConfig');
+const defaults      = require('./defaults.json');
 
 function getOptionValue(pDefault) {
     return (pValue) => {
@@ -105,9 +105,13 @@ module.exports = (pOptions) => {
         pOptions.moduleSystems = pOptions.moduleSystems.split(",").map(pString => pString.trim());
     }
 
+    if (pOptions.hasOwnProperty("config")){
+        pOptions.validate = pOptions.config;
+    }
+
     if (pOptions.hasOwnProperty("validate")){
         pOptions.rulesFile = validateAndNormalizeRulesFileName(pOptions.validate);
-        pOptions.ruleSet   = compileRuleSet(
+        pOptions.ruleSet   = compileConfig(
             path.isAbsolute(pOptions.rulesFile) ? pOptions.rulesFile : `./${pOptions.rulesFile}`
         );
         pOptions.validate = true;

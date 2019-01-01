@@ -7,7 +7,7 @@
 3. [`--do-not-follow`: don't cruise modules adhering to this pattern any further](#--do-not-follow-dont-cruise-modules-adhering-to-this-pattern-any-further)
 4. [`--exclude`: exclude modules from being cruised](#--exclude-exclude-modules-from-being-cruised)
 5. [`--max-depth`](#--max-depth)
-6. [`--validate`](#--validate)
+6. [`--config`/ `--validate`](#--config---validate)
 7. [`--init`](#--init)
 8. [`--prefix` prefixing links](#--prefix-prefixing-links)
 9. [`--info` showing what alt-js are supported](#--info-showing-what-alt-js-are-supported)
@@ -119,8 +119,8 @@ And with `--max-depth 3` like this:
 <img width="623" alt="dependency-cruiser cruised with max depth 3" src="real-world-samples/dependency-cruiser-max-depth-3.png">
 
 
-### `--validate`
-Validates against a list of rules in a rules file. This defaults to a file
+### `--config`/ `--validate`
+Validates against a list of rules in a configuration file. This defaults to a file
 called `.dependency-cruiser.json` (/ `.dependency-cruiser.js`), but you can
 specify your own rules file, which can be in json format or a valid node
 module returning a rules object literal.

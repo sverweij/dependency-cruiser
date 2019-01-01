@@ -1,12 +1,12 @@
 {
     "$schema": "http://json-schema.org/draft-07/schema#",
-    "title": "dependency-cruiser rule set",
+    "title": "dependency-cruiser configuration",
     "description": "A set of properties describing what dependencies are forbidden and what dependencies are allowed.",
     "type": "object",
     "additionalProperties": false,
     "properties": {
         "extends": {
-            "description": "A config this config uses as a base",
+            "description": "A configuration this configuration uses as a base",
             "oneOf": [
                 {
                     "type": "string"
