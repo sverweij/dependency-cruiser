@@ -1,7 +1,7 @@
 const path            = require("path");
 const expect          = require("chai").expect;
-const read            = require("../../../src/extract/resolve/readPackageDeps");
-const rootPackageJson = require('../../../package.json');
+const read            = require("../../../../src/extract/resolve/readPackageDeps");
+const rootPackageJson = require('../../../../package.json');
 
 const FIXTUREDIR = "test/extract/resolve/fixtures/";
 
