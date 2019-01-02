@@ -265,6 +265,9 @@
                 "tsPreCompilationDeps": {
                     "type": "boolean"
                 },
+                "combinedDependencies": {
+                    "type": "boolean"
+                },
                 "preserveSymlinks": {
                     "type": "boolean"
                 },

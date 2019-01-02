@@ -3,5 +3,6 @@
     "maxDepth": 0,
     "moduleSystems": ["amd", "cjs", "es6"],
     "tsPreCompilationDeps": false,
-    "preserveSymlinks": false
+    "preserveSymlinks": false,
+    "combinedDependencies": false
 }
