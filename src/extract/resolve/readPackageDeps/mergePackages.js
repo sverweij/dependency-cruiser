@@ -1,5 +1,5 @@
-const _uniq = require('lodash/uniq');
-const _get  = require('lodash/get');
+const _uniq  = require('lodash/uniq');
+const _get   = require('lodash/get');
 const _clone = require('lodash/clone');
 
 function normalizePackageKeys(pPackage) {

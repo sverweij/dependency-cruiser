@@ -26,7 +26,7 @@ function determineNpmDependencyTypes(pModuleName, pPackageDeps) {
 }
 
 /*
- * there's a sepearete 'isBundled' function because bundle(d)Dependencies is
+ * there's a separate 'isBundled' function because bundle(d)Dependencies is
  * an array, and not an object, hence needs different treatment
  */
 function dependencyIsBundled(pModule, pPackageDeps) {

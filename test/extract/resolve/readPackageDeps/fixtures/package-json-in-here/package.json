@@ -1,0 +1,7 @@
+{
+  "name": "package-json-in-here",
+  "version": "0.0.0",
+  "dependencies": {
+    "modash": "11.11.11"
+  }
+}
