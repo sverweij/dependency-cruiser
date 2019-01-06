@@ -60,26 +60,17 @@ function getIntermediatePaths(pFileDir, pBaseDir) {
     let lRetval = [];
     let lIntermediate = pFileDir;
 
-    if (pFileDir.startsWith(pBaseDir) && !pBaseDir.endsWith(path.sep)) {
-        while (
-            lIntermediate !== pBaseDir &&
-            // safety hatch in case pBaseDir is either not a part of
-            // pFileDir or not something uniquely comparable to a
-            // dirname
-            lIntermediate !== path.dirname(lIntermediate)
-        ) {
-            lRetval.push(lIntermediate);
-            lIntermediate = path.dirname(lIntermediate);
-        }
-        lRetval.push(pBaseDir);
-    } else {
-        throw new Error(
-            `Unexpected Error: Unusal baseDir passed to package reading function: '${pBaseDir}'\n` +
-            `Please file a bug: https://github.com/sverweij/dependency-cruiser/issues/new?template=bug-report.md` +
-            `&title=Unexpected Error: Unusal baseDir passed to package reading function: '${pBaseDir}'`
-        );
+    while (
+        lIntermediate !== pBaseDir &&
+        // safety hatch in case pBaseDir is either not a part of
+        // pFileDir or not something uniquely comparable to a
+        // dirname
+        lIntermediate !== path.dirname(lIntermediate)
+    ) {
+        lRetval.push(lIntermediate);
+        lIntermediate = path.dirname(lIntermediate);
     }
-
+    lRetval.push(pBaseDir);
     return lRetval;
 }
 
@@ -88,13 +79,17 @@ function getIntermediatePaths(pFileDir, pBaseDir) {
 // be the same for each call in a typical cruise, so the lodash'
 // default memoize resolver (the first param) will suffice.
 const readPackageDepsCombined = _memoize((pFileDir, pBaseDir) => {
-    let lRetval  = maybeReadPackage(pFileDir);
+    // The way this is called, this shouldn't happen. If it is, there's
+    // something gone terribly awry
+    if (!pFileDir.startsWith(pBaseDir) || pBaseDir.endsWith(path.sep)) {
+        throw new Error(
+            `Unexpected Error: Unusal baseDir passed to package reading function: '${pBaseDir}'\n` +
+            `Please file a bug: https://github.com/sverweij/dependency-cruiser/issues/new?template=bug-report.md` +
+            `&title=Unexpected Error: Unusal baseDir passed to package reading function: '${pBaseDir}'`
+        );
+    }
 
-    // assuming pFileDir.startsWith(pBaseDir) and pBaseDir doesn't endWith('/')
-    // with the default way this gets called (pBaseDir === process.cwd(),
-    // pFileDirs subfolders of the pBaseDir that should be good enough
-    // not to have the actual perf penalty of checking
-    lRetval = getIntermediatePaths(pFileDir, pBaseDir)
+    const lRetval = getIntermediatePaths(pFileDir, pBaseDir)
         .reduce(
             (pAll, pCurrent) => mergePackages(pAll, maybeReadPackage(pCurrent)),
             {}
