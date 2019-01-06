@@ -60,11 +60,26 @@ function getIntermediatePaths(pFileDir, pBaseDir) {
     let lRetval = [];
     let lIntermediate = pFileDir;
 
-    while (lIntermediate !== pBaseDir) {
-        lRetval.push(lIntermediate);
-        lIntermediate = path.dirname(lIntermediate);
+    if (pFileDir.startsWith(pBaseDir) && !pBaseDir.endsWith(path.sep)) {
+        while (
+            lIntermediate !== pBaseDir &&
+            // safety hatch in case pBaseDir is either not a part of
+            // pFileDir or not something uniquely comparable to a
+            // dirname
+            lIntermediate !== path.dirname(lIntermediate)
+        ) {
+            lRetval.push(lIntermediate);
+            lIntermediate = path.dirname(lIntermediate);
+        }
+        lRetval.push(pBaseDir);
+    } else {
+        throw new Error(
+            `Unexpected Error: Unusal baseDir passed to package reading function: '${pBaseDir}'\n` +
+            `Please file a bug: https://github.com/sverweij/dependency-cruiser/issues/new?template=bug-report.md` +
+            `&title=Unexpected Error: Unusal baseDir passed to package reading function: '${pBaseDir}'`
+        );
     }
-    lRetval.push(pBaseDir);
+
     return lRetval;
 }
 

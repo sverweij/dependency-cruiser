@@ -135,4 +135,26 @@ describe("readPackageDeps - combined dependencies strategy", () => {
         );
     });
 
+    it("passing a non-matching or non-existing basedir doesn't make combining dependencies loop eternaly", () => {
+        process.chdir('test/extract/resolve/readPackageDeps/fixtures/amok-prevention-non-exist');
+        expect(
+            () => readPackageDeps(
+                process.cwd(),
+                "bullocks-or-non-valid-basedir",
+                true
+            )
+        ).to.throw(/Unusal baseDir passed to package reading function/);
+    });
+
+
+    it("passing a basedir that weirdly ends in '/' doesn't make combining dependencies loop eternaly", () => {
+        process.chdir('test/extract/resolve/readPackageDeps/fixtures/amok-prevention-bogus-sub');
+        expect(
+            () => readPackageDeps(
+                process.cwd(),
+                `${path.dirname(process.cwd())}/`,
+                true
+            )
+        ).to.throw(/Unusal baseDir passed to package reading function/);
+    });
 });
