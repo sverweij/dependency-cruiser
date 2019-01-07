@@ -1,0 +1,12 @@
+{
+  "name": "subthing",
+  "version": "0.0.0",
+  "dependencies": {
+    "base-and-subthing": "1.2.3-subthing",
+    "subthing-only": "11.11.11"
+  },
+  "devDependencies": {
+    "esdoorn": "4.2.1"
+  },
+  "bundledDependencies": ["subthing-only", "base-and-subthing"]
+}

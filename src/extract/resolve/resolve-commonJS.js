@@ -52,7 +52,7 @@ module.exports = (pModuleName, pBaseDir, pFileDir, pResolveOptions) => {
             dependencyTypes: determineDependencyTypes(
                 lRetval,
                 pModuleName,
-                readPackageDeps(pFileDir),
+                readPackageDeps(pFileDir, pBaseDir, pResolveOptions.combinedDependencies),
                 pFileDir,
                 pResolveOptions,
                 pBaseDir

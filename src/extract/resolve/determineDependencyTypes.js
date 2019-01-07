@@ -25,6 +25,10 @@ function determineNpmDependencyTypes(pModuleName, pPackageDeps) {
     return lRetval;
 }
 
+/*
+ * there's a separate 'isBundled' function because bundle(d)Dependencies is
+ * an array, and not an object, hence needs different treatment
+ */
 function dependencyIsBundled(pModule, pPackageDeps) {
     let lRetval = false;
 

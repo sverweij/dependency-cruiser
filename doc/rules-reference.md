@@ -82,10 +82,10 @@ dependency-cruiser resolves the `extends` relative to the file name with the
 #### How rules are merged
 - `allowed` rules    
   Dependency-cruiser concats `allowed` rules from the extends, and de-duplicates
-  them. 
+  them.
 - `forbidden` rules    
   For `forbidden` rules it uses the same approach, except when the rules
-  have a name, in which case the rule with the same name in the current file 
+  have a name, in which case the rule with the same name in the current file
   gets merged into the one from extends, where attributes from the current file
   win.
   This allows you to override only one attribute, e.g. the severity
@@ -138,9 +138,45 @@ The currently supported options are
 [`prefix`](./cli.md#--prefix-prefixing-links),
 [`tsPreCompilationDeps`](./cli.md#--ts-pre-compilation-deps-typescript-only),
 [`preserveSymlinks`](./cli.md#--preserve-symlinks),
-[`tsConfig`](./cli.md#--ts-config-use-a-typescript-configuration-file-project) and 
+[`tsConfig`](./cli.md#--ts-config-use-a-typescript-configuration-file-project) and
 [`webpackConfig`](./cli.md#--webpack-config-use-the-resolution-options-of-a-webpack-configuration).
 See the [command line documentation](./cli.md) for details.
+
+In addition you can configure here how dependency-cruiser behaves itself in
+mono repos with [`combinedDependencies`](#mono-repo-behavior--combinedDependencies)
+
+#### mono repo behavior - combinedDependencies
+If `combinedDependencies` is on `false` (the default) dependency-cruiser will
+search for a `package.json` closest up from the source file it investigates.
+This is the behavior you expect in a regular repo and in mono repos with
+independent packages. When in doubt keep this switch out of your config or
+set it on `false`.
+
+Example:
+- monodash/    
+  - package.json    
+  - packages/    
+     - begindash/    
+        - **package.json** <- _only look in this one_    
+        - src/    
+           - index.ts
+
+With `combinedDependencies` on `true` dependency-cruiser will merge dependencies
+from `package.json`s from closest up from the source file until the place you
+started the cruise (typically the root of your monorepo). It 'll give
+precedence to the dependencies declared in the package.json closest to
+the file it investigates:
+
+- monodash/    
+ - **package.json** _<- look in this one as well; merge it into the one down the tree_    
+ - packages/    
+    - begindash/    
+       - **package.json** _<- look in this one_    
+       - src/    
+          - index.ts
+
+
+
 
 ## The structure of an individual rule
 An individual rule consists at least of a `from` and a `to`
@@ -203,7 +239,7 @@ The other values you can use are `info`, `warn` and `ignore`. If you
 leave it out dependency-cruiser will assume it to be `warn`.
 
 With the severity set to `ignore` dependency-cruiser will not check
-the rule at all. This can be useful if you want to temporarily 
+the rule at all. This can be useful if you want to temporarily
 disable a rule or disable a rule you inherited from a rule set you
 extended.
 
@@ -212,7 +248,7 @@ extended.
 A regular expression an end of a dependency should match to be catched by this
 rule.
 
-In `from`, this is the path from the current working directory (typically your 
+In `from`, this is the path from the current working directory (typically your
 project root) to the file containing a dependency. In `to`, this is the path from
 the current working directory to the file the dependency resolves to.
 
@@ -264,7 +300,7 @@ To achieve this you'll need to do two things:
   for the folder directly under src, and one for the extension. The first is
   available in the `to` part of your rule with `$1`, the second with `$2`.
 - The special variable `$0` contains the _whole_ matched string. I haven't
-  seen a practical use for it in the context of depedendency-cruiser, but 
+  seen a practical use for it in the context of depedendency-cruiser, but
   I'll be glad to be surprised.
 
 #### 'group matching' - an example: matching peer folders
@@ -489,7 +525,7 @@ false).
 ### orphans
 
 A boolean indicating whether or not to match modules that have no incoming
-or outgoing dependencies. Orphans might need special attention because 
+or outgoing dependencies. Orphans might need special attention because
 they're unused leftovers from a refactoring. Or the start of some feature
 that never got finished but which was merged anyway. Leaving the `orphan`
 attribute out means you don't care about orphans in your code.
@@ -499,7 +535,7 @@ only notice it when you have a larger code base (thousands of modules
 in your dependency graph), but it is something to
 keep in mind.
 
-To detect orphans guys you can add e.g. this snippet to your 
+To detect orphans guys you can add e.g. this snippet to your
 .dependency-cruiser.json's `forbidden` section:
 
 ```json
@@ -538,7 +574,7 @@ Things to keep in mind:
 
 ## Configurations in javascript
 From version 4.7.0 you can pass a javascript module to `--validate`.
-It'll work as long as it exports a valid configuration object 
+It'll work as long as it exports a valid configuration object
 and node can understand it.
 
 This allows you to do all sorts of nifty stuff, like composing

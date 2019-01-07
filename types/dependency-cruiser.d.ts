@@ -231,6 +231,14 @@ export interface ICruiseOptions {
      */
     preserveSymlinks?: boolean;
     /**
+     * if true combines the package.jsons found from the module up to the base
+     * folder the cruise is initiated from. Useful for how (some) mono-repos
+     * manage dependencies & dependency definitions.
+     *
+     * Defaults to `false`.
+     */
+    combinedDependencies?: boolean;
+    /**
      * (API only) when set to `true` forces the extraction module to
      * detect circular dependencies even when there is no rule in the rule
      * set that requires it.

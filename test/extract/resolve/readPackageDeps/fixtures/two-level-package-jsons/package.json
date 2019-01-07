@@ -1,0 +1,12 @@
+{
+  "name": "base",
+  "version": "0.0.0",
+  "dependencies": {
+    "base-and-subthing": "1.2.3-base",
+    "base-only": "1.0.0"
+  },
+  "devDependencies": {
+    "snorkel": "1.2.1"
+  },
+  "bundleDependencies": ["base-only", "base-and-subthing"]
+}

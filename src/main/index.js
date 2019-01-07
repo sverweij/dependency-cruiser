@@ -50,12 +50,12 @@ const TYPE2REPORTER      = {
  * }
  *
  * @param  {array}  pFileDirArray An array of (names of) files and directories to
- *                             start the cruise with
- * @param  {any} pOptions   see above
- * @param  {any} pResolveOptions an object with enhanced-resolve resolve options
- * @param  {any} pTSConfig       an object with tsconfig ('typescript project') options
- *                               ('flattened' so there's no need for file access on any
- *                               'extends' option in there)
+ *                                start the cruise with
+ * @param  {any} pOptions         see above
+ * @param  {any} pResolveOptions  an object with enhanced-resolve resolve options
+ * @param  {any} pTSConfig        an object with tsconfig ('typescript project') options
+ *                                ('flattened' so there's no need for file access on any
+ *                                'extends' option in there)
  * @return {any} An object with ...
  * {
  *  dependencies : when outputType is defined: a string containing the dependencies
@@ -79,7 +79,17 @@ function cruise (pFileDirArray, pOptions, pResolveOptions, pTSConfig) {
         validateOptions(pOptions)
     );
 
-    pResolveOptions = pResolveOptions || {};
+    /* squirel the combinedDependencies thing into the resolve options
+       - they're not for enhanced resolve, but they are for what we consider
+       resolve options ...
+     */
+    pResolveOptions = Object.assign(
+        pResolveOptions || {},
+        {
+            combinedDependencies: pOptions.combinedDependencies
+        }
+    );
+
 
     if (Boolean(pOptions.ruleSet)){
         pOptions.ruleSet = normalizeRuleSet(
