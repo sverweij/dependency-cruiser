@@ -9,6 +9,12 @@
             "from": { "path": "(^src/cli)", "pathNot": "^(src/cli/compileConfig/index\\.js)$" },
             "to": { "pathNot": "^src/main|^node_modules|^fs$|^path$|$1|^package.json$" }
         }, {
+            "name": "cli-to-main-only-warn",
+            "comment": "cli should only depend on the public interface in main (temp exception)",
+            "severity": "warn",
+            "from": { "path": "^(src/cli/compileConfig/index\\.js)$" },
+            "to": { "pathNot": "^src/(cli|main)|^node_modules|^fs$|^path$|$1|^package.json$" }
+        }, {
             "name": "bin-to-cli-only",
             "comment": "bin should only depend on cli",
             "severity": "error",
