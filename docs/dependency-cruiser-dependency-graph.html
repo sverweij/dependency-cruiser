@@ -4,21 +4,24 @@
         <meta charset="utf-8">
         <title>dependency-cruiser dependency-graph</title>
         <style>
-             .edge:active path, .edge:hover path{
-                 stroke:fuchsia;
-                 stroke-width:3;
-                 stroke-opacity:1;
-             }
-             .edge:active polygon, .edge:hover polygon  {
-                 stroke:fuchsia;
-                 stroke-width:3;
-                 fill:fuchsia;
-                 stroke-opacity:1;
-                 fill-opacity:1;
-             }
-             .cluster path {
+            .edge:active path, .edge:hover path{
+                stroke:fuchsia;
+                stroke-width:3;
+                stroke-opacity:1;
+            }
+            .edge:active polygon, .edge:hover polygon  {
+                stroke:fuchsia;
+                stroke-width:3;
+                fill:fuchsia;
+                stroke-opacity:1;
+                fill-opacity:1;
+            }
+            .edge:active text, .edge:hover text{
+                fill:fuchsia;
+            }
+            .cluster path {
                stroke-width:3;
-             }
+            }
         </style>
     </head>
     <body>
@@ -208,8 +211,12 @@
 <!-- src/cli/compileConfig/index.js&#45;&gt;src/extract/resolve/resolve.js -->
 <g id="edge1" class="edge">
 <title>src/cli/compileConfig/index.js&#45;&gt;src/extract/resolve/resolve.js</title>
-<path fill="none" stroke="#000000" stroke-width="2" stroke-opacity="0.466667" d="M284.9217,-55C446.0968,-55 1271.3135,-55 1271.3135,-55 1271.3135,-55 1271.3135,-885.3206 1271.3135,-885.3206"/>
-<polygon fill="#000000" fill-opacity="0.466667" stroke="#000000" stroke-width="2" stroke-opacity="0.466667" points="1267.8136,-885.3206 1271.3135,-895.3206 1274.8136,-885.3206 1267.8136,-885.3206"/>
+<g id="a_edge1"><a xlink:title="cli&#45;to&#45;main&#45;only&#45;warn">
+<path fill="none" stroke="#ffa500" stroke-width="2" d="M284.9217,-55C446.0968,-55 1271.3135,-55 1271.3135,-55 1271.3135,-55 1271.3135,-885.3206 1271.3135,-885.3206"/>
+<polygon fill="#ffa500" stroke="#ffa500" stroke-width="2" points="1267.8136,-885.3206 1271.3135,-895.3206 1274.8136,-885.3206 1267.8136,-885.3206"/>
+</a>
+</g>
+<text text-anchor="middle" x="1151.5188" y="-47.8" font-family="Helvetica,sans-Serif" font-size="9.00" fill="#ffa500">cli&#45;to&#45;main&#45;only&#45;warn</text>
 </g>
 <!-- src/cli/defaults.json -->
 <g id="node5" class="node">

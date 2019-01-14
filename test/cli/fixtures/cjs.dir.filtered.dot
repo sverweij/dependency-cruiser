@@ -30,7 +30,7 @@ digraph "dependency-cruiser output"{
     "test/cli/fixtures/cjs/root_one.js" -> "test/cli/fixtures/cjs/one_only_one.js"
     "test/cli/fixtures/cjs/root_one.js" -> "test/cli/fixtures/cjs/one_only_two.js"
     "test/cli/fixtures/cjs/root_one.js" -> "test/cli/fixtures/cjs/shared.js"
-    "test/cli/fixtures/cjs/root_one.js" -> "test/cli/fixtures/cjs/sub/dir.js" [color="orange" penwidth=2.0 tooltip="sub-not-allowed"]
+    "test/cli/fixtures/cjs/root_one.js" -> "test/cli/fixtures/cjs/sub/dir.js" [color="orange" penwidth=2.0 tooltip="sub-not-allowed" fontcolor="orange" xlabel="sub-not-allowed"]
     "test/cli/fixtures/cjs/root_one.js" -> "fs" [color="grey"]
     "test/cli/fixtures/cjs/root_two.js" -> "test/cli/fixtures/cjs/shared.js"
     "test/cli/fixtures/cjs/root_two.js" -> "test/cli/fixtures/cjs/somedata.json"
@@ -38,7 +38,7 @@ digraph "dependency-cruiser output"{
     "test/cli/fixtures/cjs/root_two.js" -> "http" [color="grey"]
     "test/cli/fixtures/cjs/shared.js" -> "path" [color="grey"]
     "test/cli/fixtures/cjs/sub/depindir.js" -> "path" [color="grey"]
-    "test/cli/fixtures/cjs/sub/dir.js" -> "test/cli/fixtures/cjs/sub/depindir.js" [color="orange" penwidth=2.0 tooltip="sub-not-allowed"]
+    "test/cli/fixtures/cjs/sub/dir.js" -> "test/cli/fixtures/cjs/sub/depindir.js" [color="orange" penwidth=2.0 tooltip="sub-not-allowed" fontcolor="orange" xlabel="sub-not-allowed"]
     "test/cli/fixtures/cjs/sub/dir.js" -> "path" [color="grey"]
-    "test/cli/fixtures/cjs/two_only_one.js" -> "test/cli/fixtures/cjs/sub/dir.js" [color="orange" penwidth=2.0 tooltip="sub-not-allowed"]
+    "test/cli/fixtures/cjs/two_only_one.js" -> "test/cli/fixtures/cjs/sub/dir.js" [color="orange" penwidth=2.0 tooltip="sub-not-allowed" fontcolor="orange" xlabel="sub-not-allowed"]
 }
