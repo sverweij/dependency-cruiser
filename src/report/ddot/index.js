@@ -1,8 +1,8 @@
 const path       = require('path').posix;
 const Handlebars = require("handlebars/runtime");
-const _uniqBy    = require('lodash/uniqBy');
-const _get       = require('lodash/get');
 const _clone     = require('lodash/clone');
+const _get       = require('lodash/get');
+const _uniqBy    = require('lodash/uniqBy');
 const coloring   = require('../dot/coloring');
 
 require("./ddot.template");
