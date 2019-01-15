@@ -5,6 +5,7 @@ GENERATED_SOURCES=src/cli/initConfig/config.json.template.js \
 	src/cli/initConfig/config.js.template.js \
 	src/report/csv/csv.template.js \
 	src/report/dot/dot.template.js \
+	src/report/ddot/ddot.template.js \
 	src/report/html/html.template.js
 
 .PHONY: help dev-build clean

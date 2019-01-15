@@ -3,6 +3,7 @@ const meta             = require("../extract/transpile/meta");
 const reportHtml       = require("../report/html");
 const reportJson       = require("../report/json");
 const reportDot        = require("../report/dot")();
+const reportDDot       = require("../report/ddot");
 const reportRCDot      = require("../report/dot")(require('../report/dot/richModuleColorScheme.json'));
 const reportCsv        = require("../report/csv");
 const reportErr        = require("../report/err");
@@ -12,12 +13,13 @@ const validateOptions  = require("./options/validate");
 const normalizeOptions = require("./options/normalize");
 
 const TYPE2REPORTER      = {
-    "json" : reportJson,
-    "html" : reportHtml,
-    "dot"  : reportDot,
-    "rcdot"  : reportRCDot,
-    "csv"  : reportCsv,
-    "err"  : reportErr
+    "json"  : reportJson,
+    "html"  : reportHtml,
+    "dot"   : reportDot,
+    "ddot"  : reportDDot,
+    "rcdot" : reportRCDot,
+    "csv"   : reportCsv,
+    "err"   : reportErr
 };
 
 /**

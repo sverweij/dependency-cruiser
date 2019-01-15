@@ -1,0 +1,143 @@
+digraph "dependency-cruiser output"{
+    ordering=out
+    rankdir=LR
+    splines=true
+    overlap=true
+    nodesep=0.16
+    ranksep=0.18
+    fontname="Helvetica-bold"
+    fontsize=9
+    style="rounded,bold"
+    compound=true
+    node [shape=box style="rounded, filled" fillcolor="#ffffcc" height=0.2 fontname=Helvetica fontsize=9]
+    edge [color="#00000077" penwidth=2.0 arrowhead=normal fontname=Helvetica fontsize=9]
+
+    "." [label="." ]
+    "bin" [label="bin" ]
+    subgraph "cluster_node_modules" {label="node_modules" "node_modules" [label="" shape=point style=invis width="0"] subgraph "cluster_node_modules/acorn-loose" {label="acorn-loose" "node_modules/acorn-loose" [label="" shape=point style=invis width="0"] "node_modules/acorn-loose/dist" [label="dist" shape="folder" ] } }
+    subgraph "cluster_node_modules" {label="node_modules" "node_modules" [label="" shape=point style=invis width="0"] subgraph "cluster_node_modules/acorn-walk" {label="acorn-walk" "node_modules/acorn-walk" [label="" shape=point style=invis width="0"] "node_modules/acorn-walk/dist" [label="dist" shape="folder" ] } }
+    subgraph "cluster_node_modules" {label="node_modules" "node_modules" [label="" shape=point style=invis width="0"] subgraph "cluster_node_modules/acorn" {label="acorn" "node_modules/acorn" [label="" shape=point style=invis width="0"] "node_modules/acorn/dist" [label="dist" shape="folder" ] } }
+    subgraph "cluster_node_modules" {label="node_modules" "node_modules" [label="" shape=point style=invis width="0"] subgraph "cluster_node_modules/ajv" {label="ajv" "node_modules/ajv" [label="" shape=point style=invis width="0"] "node_modules/ajv/lib" [label="lib" shape="folder" ] } }
+    subgraph "cluster_node_modules" {label="node_modules" "node_modules" [label="" shape=point style=invis width="0"] subgraph "cluster_node_modules/awesome-typescript-loader" {label="awesome-typescript-loader" "node_modules/awesome-typescript-loader" [label="" shape=point style=invis width="0"] "node_modules/awesome-typescript-loader/dist" [label="dist" shape="folder" ] } }
+    subgraph "cluster_node_modules" {label="node_modules" "node_modules" [label="" shape=point style=invis width="0"] "node_modules/chalk" [label="chalk" shape="folder" ] }
+    subgraph "cluster_node_modules" {label="node_modules" "node_modules" [label="" shape=point style=invis width="0"] "node_modules/commander" [label="commander" shape="folder" ] }
+    subgraph "cluster_node_modules" {label="node_modules" "node_modules" [label="" shape=point style=invis width="0"] subgraph "cluster_node_modules/enhanced-resolve" {label="enhanced-resolve" "node_modules/enhanced-resolve" [label="" shape=point style=invis width="0"] "node_modules/enhanced-resolve/lib" [label="lib" shape="folder" ] } }
+    subgraph "cluster_node_modules" {label="node_modules" "node_modules" [label="" shape=point style=invis width="0"] "node_modules/figures" [label="figures" shape="folder" ] }
+    subgraph "cluster_node_modules" {label="node_modules" "node_modules" [label="" shape=point style=invis width="0"] "node_modules/glob" [label="glob" shape="folder" ] }
+    subgraph "cluster_node_modules" {label="node_modules" "node_modules" [label="" shape=point style=invis width="0"] "node_modules/handlebars" [label="handlebars" shape="folder" ] }
+    subgraph "cluster_node_modules" {label="node_modules" "node_modules" [label="" shape=point style=invis width="0"] subgraph "cluster_node_modules/inquirer" {label="inquirer" "node_modules/inquirer" [label="" shape=point style=invis width="0"] "node_modules/inquirer/lib" [label="lib" shape="folder" ] } }
+    subgraph "cluster_node_modules" {label="node_modules" "node_modules" [label="" shape=point style=invis width="0"] "node_modules/lodash" [label="lodash" shape="folder" ] }
+    subgraph "cluster_node_modules" {label="node_modules" "node_modules" [label="" shape=point style=invis width="0"] "node_modules/resolve" [label="resolve" shape="folder" ] }
+    subgraph "cluster_node_modules" {label="node_modules" "node_modules" [label="" shape=point style=invis width="0"] "node_modules/safe-regex" [label="safe-regex" shape="folder" ] }
+    subgraph "cluster_node_modules" {label="node_modules" "node_modules" [label="" shape=point style=invis width="0"] "node_modules/semver" [label="semver" shape="folder" ] }
+    subgraph "cluster_node_modules" {label="node_modules" "node_modules" [label="" shape=point style=invis width="0"] subgraph "cluster_node_modules/semver-try-require" {label="semver-try-require" "node_modules/semver-try-require" [label="" shape=point style=invis width="0"] "node_modules/semver-try-require/src" [label="src" shape="folder" ] } }
+    subgraph "cluster_node_modules" {label="node_modules" "node_modules" [label="" shape=point style=invis width="0"] "node_modules/strip-json-comments" [label="strip-json-comments" shape="folder" ] }
+    subgraph "cluster_src" {label="src" "src" [label="" shape=point style=invis width="0"] "src/cli" [label="cli" ] }
+    subgraph "cluster_src" {label="src" "src" [label="" shape=point style=invis width="0"] subgraph "cluster_src/cli" {label="cli" "src/cli" [label="" shape=point style=invis width="0"] "src/cli/compileConfig" [label="compileConfig" ] } }
+    subgraph "cluster_src" {label="src" "src" [label="" shape=point style=invis width="0"] subgraph "cluster_src/cli" {label="cli" "src/cli" [label="" shape=point style=invis width="0"] "src/cli/initConfig" [label="initConfig" ] } }
+    subgraph "cluster_src" {label="src" "src" [label="" shape=point style=invis width="0"] subgraph "cluster_src/cli" {label="cli" "src/cli" [label="" shape=point style=invis width="0"] "src/cli/utl" [label="utl" ] } }
+    subgraph "cluster_src" {label="src" "src" [label="" shape=point style=invis width="0"] "src/extract" [label="extract" ] }
+    subgraph "cluster_src" {label="src" "src" [label="" shape=point style=invis width="0"] subgraph "cluster_src/extract" {label="extract" "src/extract" [label="" shape=point style=invis width="0"] "src/extract/ast-extractors" [label="ast-extractors" ] } }
+    subgraph "cluster_src" {label="src" "src" [label="" shape=point style=invis width="0"] subgraph "cluster_src/extract" {label="extract" "src/extract" [label="" shape=point style=invis width="0"] subgraph "cluster_src/extract/derive" {label="derive" "src/extract/derive" [label="" shape=point style=invis width="0"] "src/extract/derive/circular" [label="circular" ] } } }
+    subgraph "cluster_src" {label="src" "src" [label="" shape=point style=invis width="0"] subgraph "cluster_src/extract" {label="extract" "src/extract" [label="" shape=point style=invis width="0"] subgraph "cluster_src/extract/derive" {label="derive" "src/extract/derive" [label="" shape=point style=invis width="0"] "src/extract/derive/orphan" [label="orphan" ] } } }
+    subgraph "cluster_src" {label="src" "src" [label="" shape=point style=invis width="0"] subgraph "cluster_src/extract" {label="extract" "src/extract" [label="" shape=point style=invis width="0"] "src/extract/parse" [label="parse" ] } }
+    subgraph "cluster_src" {label="src" "src" [label="" shape=point style=invis width="0"] subgraph "cluster_src/extract" {label="extract" "src/extract" [label="" shape=point style=invis width="0"] "src/extract/resolve" [label="resolve" ] } }
+    subgraph "cluster_src" {label="src" "src" [label="" shape=point style=invis width="0"] subgraph "cluster_src/extract" {label="extract" "src/extract" [label="" shape=point style=invis width="0"] subgraph "cluster_src/extract/resolve" {label="resolve" "src/extract/resolve" [label="" shape=point style=invis width="0"] "src/extract/resolve/readPackageDeps" [label="readPackageDeps" ] } } }
+    subgraph "cluster_src" {label="src" "src" [label="" shape=point style=invis width="0"] subgraph "cluster_src/extract" {label="extract" "src/extract" [label="" shape=point style=invis width="0"] "src/extract/transpile" [label="transpile" ] } }
+    subgraph "cluster_src" {label="src" "src" [label="" shape=point style=invis width="0"] subgraph "cluster_src/extract" {label="extract" "src/extract" [label="" shape=point style=invis width="0"] "src/extract/utl" [label="utl" ] } }
+    subgraph "cluster_src" {label="src" "src" [label="" shape=point style=invis width="0"] "src/main" [label="main" ] }
+    subgraph "cluster_src" {label="src" "src" [label="" shape=point style=invis width="0"] subgraph "cluster_src/main" {label="main" "src/main" [label="" shape=point style=invis width="0"] "src/main/options" [label="options" ] } }
+    subgraph "cluster_src" {label="src" "src" [label="" shape=point style=invis width="0"] subgraph "cluster_src/main" {label="main" "src/main" [label="" shape=point style=invis width="0"] "src/main/ruleSet" [label="ruleSet" ] } }
+    subgraph "cluster_src" {label="src" "src" [label="" shape=point style=invis width="0"] "src/report" [label="report" ] }
+    subgraph "cluster_src" {label="src" "src" [label="" shape=point style=invis width="0"] subgraph "cluster_src/report" {label="report" "src/report" [label="" shape=point style=invis width="0"] "src/report/csv" [label="csv" ] } }
+    subgraph "cluster_src" {label="src" "src" [label="" shape=point style=invis width="0"] subgraph "cluster_src/report" {label="report" "src/report" [label="" shape=point style=invis width="0"] "src/report/ddot" [label="ddot" ] } }
+    subgraph "cluster_src" {label="src" "src" [label="" shape=point style=invis width="0"] subgraph "cluster_src/report" {label="report" "src/report" [label="" shape=point style=invis width="0"] "src/report/dot" [label="dot" ] } }
+    subgraph "cluster_src" {label="src" "src" [label="" shape=point style=invis width="0"] subgraph "cluster_src/report" {label="report" "src/report" [label="" shape=point style=invis width="0"] "src/report/html" [label="html" ] } }
+    subgraph "cluster_src" {label="src" "src" [label="" shape=point style=invis width="0"] "src/validate" [label="validate" ] }
+
+    "bin" -> "."
+    "bin" -> "src/cli"
+    "bin" -> "node_modules/commander"
+    "bin" -> "node_modules/semver"
+    "src/cli" -> "src/main"
+    "src/cli" -> "src/cli/initConfig"
+    "src/cli" -> "src/cli/utl"
+    "src/cli" -> "node_modules/glob"
+    "src/cli" -> "node_modules/lodash"
+    "src/cli" -> "node_modules/chalk"
+    "src/cli" -> "node_modules/figures"
+    "src/cli" -> "src/cli/compileConfig"
+    "src/cli" -> "." [color="grey"]
+    "src/cli" -> "node_modules/semver-try-require/src"
+    "src/cli/compileConfig" -> "src/extract/resolve" [color="orange" penwidth="2.0" tooltip="cli-to-main-only-warn" fontcolor="orange" xlabel="cli-to-main-only-warn"]
+    "src/cli/compileConfig" -> "." [color="grey"]
+    "src/cli/compileConfig" -> "node_modules/lodash"
+    "src/cli/compileConfig" -> "node_modules/strip-json-comments"
+    "src/cli/initConfig" -> "." [color="grey"]
+    "src/cli/initConfig" -> "node_modules/handlebars"
+    "src/cli/initConfig" -> "node_modules/inquirer/lib"
+    "src/cli/utl" -> "." [color="grey"]
+    "src/extract" -> "src/extract/derive/circular"
+    "src/extract" -> "src/extract/derive/orphan"
+    "src/extract" -> "src/extract/utl"
+    "src/extract" -> "node_modules/lodash" [color="blue" penwidth="2.0" tooltip="prefer-lodash-individuals" fontcolor="blue" xlabel="prefer-lodash-individuals"]
+    "src/extract" -> "src/validate"
+    "src/extract" -> "src/extract/ast-extractors"
+    "src/extract" -> "src/extract/parse"
+    "src/extract" -> "src/extract/resolve"
+    "src/extract" -> "." [color="grey"]
+    "src/extract" -> "src/extract/transpile"
+    "src/extract" -> "node_modules/glob"
+    "src/extract/ast-extractors" -> "node_modules/acorn-walk/dist"
+    "src/extract/ast-extractors" -> "."
+    "src/extract/ast-extractors" -> "node_modules/semver-try-require/src"
+    "src/extract/derive/circular" -> "node_modules/lodash"
+    "src/extract/derive/orphan" -> "node_modules/lodash"
+    "src/extract/parse" -> "src/extract/transpile"
+    "src/extract/parse" -> "src/extract/utl"
+    "src/extract/parse" -> "node_modules/acorn/dist"
+    "src/extract/parse" -> "node_modules/acorn-loose/dist"
+    "src/extract/parse" -> "." [color="grey"]
+    "src/extract/parse" -> "node_modules/lodash"
+    "src/extract/parse" -> "node_modules/semver-try-require/src"
+    "src/extract/resolve" -> "src/extract/utl"
+    "src/extract/resolve" -> "." [color="grey"]
+    "src/extract/resolve" -> "src/extract/resolve/readPackageDeps"
+    "src/extract/resolve" -> "node_modules/lodash"
+    "src/extract/resolve" -> "node_modules/resolve"
+    "src/extract/resolve" -> "node_modules/enhanced-resolve/lib"
+    "src/extract/resolve" -> "src/extract/transpile"
+    "src/extract/resolve" -> "node_modules/awesome-typescript-loader/dist"
+    "src/extract/resolve/readPackageDeps" -> "." [color="grey"]
+    "src/extract/resolve/readPackageDeps" -> "node_modules/lodash"
+    "src/extract/transpile" -> "."
+    "src/extract/transpile" -> "node_modules/semver-try-require/src"
+    "src/extract/transpile" -> "node_modules/lodash"
+    "src/extract/utl" -> "." [color="grey"]
+    "src/main" -> "src/extract"
+    "src/main" -> "src/extract/transpile"
+    "src/main" -> "src/report/csv"
+    "src/main" -> "src/report/ddot"
+    "src/main" -> "src/report/dot"
+    "src/main" -> "src/report"
+    "src/main" -> "src/report/html"
+    "src/main" -> "src/main/options"
+    "src/main" -> "src/main/ruleSet"
+    "src/main/options" -> "node_modules/safe-regex"
+    "src/main/ruleSet" -> "src/main/options"
+    "src/main/ruleSet" -> "node_modules/ajv/lib"
+    "src/main/ruleSet" -> "node_modules/safe-regex"
+    "src/report" -> "node_modules/chalk"
+    "src/report" -> "node_modules/figures"
+    "src/report/csv" -> "src/report"
+    "src/report/csv" -> "node_modules/handlebars"
+    "src/report/ddot" -> "src/report/dot"
+    "src/report/ddot" -> "node_modules/handlebars"
+    "src/report/ddot" -> "node_modules/lodash"
+    "src/report/ddot" -> "." [color="grey"]
+    "src/report/dot" -> "node_modules/lodash"
+    "src/report/dot" -> "node_modules/handlebars"
+    "src/report/dot" -> "." [color="grey"]
+    "src/report/html" -> "src/report"
+    "src/report/html" -> "node_modules/handlebars"
+}

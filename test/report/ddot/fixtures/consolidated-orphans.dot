@@ -1,0 +1,17 @@
+digraph "dependency-cruiser output"{
+    ordering=out
+    rankdir=LR
+    splines=true
+    overlap=true
+    nodesep=0.16
+    ranksep=0.18
+    fontname="Helvetica-bold"
+    fontsize=9
+    style="rounded,bold"
+    compound=true
+    node [shape=box style="rounded, filled" fillcolor="#ffffcc" height=0.2 fontname=Helvetica fontsize=9]
+    edge [color="#00000077" penwidth=2.0 arrowhead=normal fontname=Helvetica fontsize=9]
+
+    "tmp" [label="tmp" tooltip="no-orphans" ]
+
+}
