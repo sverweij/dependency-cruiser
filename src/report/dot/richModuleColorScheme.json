@@ -9,7 +9,7 @@
     },
     {
         "criteria": {"source": "node_modules"},
-        "colors": {"fillcolor": "#c40b0a", "fontcolor": "white"}
+        "colors": {"fillcolor": "#c40b0a1a", "fontcolor": "#c40b0a"}
     },
     {
         "criteria": {"orphan": true},
