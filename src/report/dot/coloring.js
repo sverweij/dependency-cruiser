@@ -1,5 +1,5 @@
 const _get = require('lodash/get');
-const DEFAULT_MODULE_COLORING_SCHEME = require('./defaultModuleColorScheme.json');
+const DEFAULT_MODULE_COLORING_SCHEME = require('./richModuleColorScheme.json');
 
 const SEVERITY2COLOR = {
     error : "red",

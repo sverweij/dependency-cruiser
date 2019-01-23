@@ -1,6 +1,6 @@
 const fs               = require('fs');
 const expect           = require('chai').expect;
-const render           = require('../../../src/report/dot')();
+const render           = require('../../../src/report/dot')(require('../../../src/report/dot/boringModuleColorScheme.json'));
 const deps             = require('../fixtures/cjs-no-dependency-valid.json');
 const unresolvableDeps = require('../fixtures/es6-unresolvable-deps.json');
 const doNotFollowDeps  = require('../fixtures/do-not-follow-deps.json');
