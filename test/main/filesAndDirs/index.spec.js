@@ -1,4 +1,5 @@
-const expect    = require('chai').expect;
+const path         = require('path');
+const expect       = require('chai').expect;
 const filesAndDirs = require('../../../src/main/filesAndDirs');
 
 describe("main/filesAndDirs", () => {
@@ -36,9 +37,9 @@ describe("main/filesAndDirs", () => {
         expect(
             filesAndDirs.normalize(
                 [__dirname]
-            )
+            ).map(path.win32.normalize)
         ).to.deep.equal(
-            ["test/main/filesAndDirs"]
+            ["test\\main\\filesAndDirs"]
         );
     });
 
@@ -46,9 +47,9 @@ describe("main/filesAndDirs", () => {
         expect(
             filesAndDirs.normalize(
                 [`${__dirname}/**/*.{js,ts}`]
-            )
+            ).map(path.win32.normalize)
         ).to.deep.equal(
-            ["test/main/filesAndDirs/**/*.{js,ts}"]
+            ["test\\main\\filesAndDirs\\**\\*.{js,ts}"]
         );
     });
 });
