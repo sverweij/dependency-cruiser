@@ -6,6 +6,7 @@ const reportDot        = require("../report/dot")();
 const reportRCDot      = require("../report/dot")(require('../report/dot/richModuleColorScheme.json'));
 const reportCsv        = require("../report/csv");
 const reportErr        = require("../report/err");
+const filesAndDirs     = require("./filesAndDirs");
 const validateRuleSet  = require("./ruleSet/validate");
 const normalizeRuleSet = require("./ruleSet/normalize");
 const validateOptions  = require("./options/validate");
@@ -100,7 +101,7 @@ function cruise (pFileDirArray, pOptions, pResolveOptions, pTSConfig) {
     }
 
     return extract(
-        pFileDirArray,
+        filesAndDirs.normalize(pFileDirArray),
         pOptions,
         TYPE2REPORTER[pOptions.outputType],
         pResolveOptions,

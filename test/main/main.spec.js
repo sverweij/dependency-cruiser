@@ -16,6 +16,12 @@ describe("main", () => {
         expect(lResult).to.deep.equal(tsFixture);
         expect(lResult).to.be.jsonSchema(depSchema);
     });
+    it("Returns an object when no options are passed (absolute path)", () => {
+        const lResult = main.cruise([`${__dirname}/fixtures/ts`], {}, {bustTheCache:true});
+
+        expect(lResult).to.deep.equal(tsFixture);
+        expect(lResult).to.be.jsonSchema(depSchema);
+    });
     it("Also processes tsx correctly", () => {
         const lResult = main.cruise(["test/main/fixtures/tsx"]);
 
