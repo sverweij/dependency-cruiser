@@ -100,8 +100,7 @@ function mergeModule(pLeft, pRight) {
         {
             dependencies: pLeft
                 .dependencies
-                .concat(pRight.dependencies)
-                .filter(pDependency => pDependency.resolved !== pLeft.source),
+                .concat(pRight.dependencies),
             valid: pLeft.valid && pRight.valid
         }
     );
