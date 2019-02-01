@@ -60,6 +60,7 @@ digraph "dependency-cruiser output"{
     "bin" -> "node_modules/commander"
     "bin" -> "node_modules/semver"
     "src/cli" -> "src/main"
+    "src/cli" -> "src/cli"
     "src/cli" -> "src/cli/initConfig"
     "src/cli" -> "src/cli/utl"
     "src/cli" -> "node_modules/glob"
@@ -70,13 +71,16 @@ digraph "dependency-cruiser output"{
     "src/cli" -> "." [color="grey"]
     "src/cli" -> "node_modules/semver-try-require/src"
     "src/cli/compileConfig" -> "src/extract/resolve" [color="orange" penwidth="2.0" tooltip="cli-to-main-only-warn" fontcolor="orange" xlabel="cli-to-main-only-warn"]
+    "src/cli/compileConfig" -> "src/cli/compileConfig"
     "src/cli/compileConfig" -> "." [color="grey"]
     "src/cli/compileConfig" -> "node_modules/lodash"
     "src/cli/compileConfig" -> "node_modules/strip-json-comments"
+    "src/cli/initConfig" -> "src/cli/initConfig"
     "src/cli/initConfig" -> "." [color="grey"]
     "src/cli/initConfig" -> "node_modules/handlebars"
     "src/cli/initConfig" -> "node_modules/inquirer/lib"
     "src/cli/utl" -> "." [color="grey"]
+    "src/extract" -> "src/extract"
     "src/extract" -> "src/extract/derive/circular"
     "src/extract" -> "src/extract/derive/orphan"
     "src/extract" -> "src/extract/utl"
@@ -88,10 +92,13 @@ digraph "dependency-cruiser output"{
     "src/extract" -> "." [color="grey"]
     "src/extract" -> "src/extract/transpile"
     "src/extract" -> "node_modules/glob"
+    "src/extract/ast-extractors" -> "src/extract/ast-extractors"
     "src/extract/ast-extractors" -> "node_modules/acorn-walk/dist"
     "src/extract/ast-extractors" -> "."
     "src/extract/ast-extractors" -> "node_modules/semver-try-require/src"
+    "src/extract/derive/circular" -> "src/extract/derive/circular"
     "src/extract/derive/circular" -> "node_modules/lodash"
+    "src/extract/derive/orphan" -> "src/extract/derive/orphan"
     "src/extract/derive/orphan" -> "node_modules/lodash"
     "src/extract/parse" -> "src/extract/transpile"
     "src/extract/parse" -> "src/extract/utl"
@@ -101,6 +108,7 @@ digraph "dependency-cruiser output"{
     "src/extract/parse" -> "node_modules/lodash"
     "src/extract/parse" -> "node_modules/semver-try-require/src"
     "src/extract/resolve" -> "src/extract/utl"
+    "src/extract/resolve" -> "src/extract/resolve"
     "src/extract/resolve" -> "." [color="grey"]
     "src/extract/resolve" -> "src/extract/resolve/readPackageDeps"
     "src/extract/resolve" -> "node_modules/lodash"
@@ -108,8 +116,10 @@ digraph "dependency-cruiser output"{
     "src/extract/resolve" -> "node_modules/enhanced-resolve/lib"
     "src/extract/resolve" -> "src/extract/transpile"
     "src/extract/resolve" -> "node_modules/awesome-typescript-loader/dist"
+    "src/extract/resolve/readPackageDeps" -> "src/extract/resolve/readPackageDeps"
     "src/extract/resolve/readPackageDeps" -> "." [color="grey"]
     "src/extract/resolve/readPackageDeps" -> "node_modules/lodash"
+    "src/extract/transpile" -> "src/extract/transpile"
     "src/extract/transpile" -> "."
     "src/extract/transpile" -> "node_modules/semver-try-require/src"
     "src/extract/transpile" -> "node_modules/lodash"
@@ -123,21 +133,28 @@ digraph "dependency-cruiser output"{
     "src/main" -> "src/report/html"
     "src/main" -> "src/main/options"
     "src/main" -> "src/main/ruleSet"
+    "src/main/options" -> "src/main/options"
     "src/main/options" -> "node_modules/safe-regex"
     "src/main/ruleSet" -> "src/main/options"
+    "src/main/ruleSet" -> "src/main/ruleSet"
     "src/main/ruleSet" -> "node_modules/ajv/lib"
     "src/main/ruleSet" -> "node_modules/safe-regex"
     "src/report" -> "node_modules/chalk"
     "src/report" -> "node_modules/figures"
     "src/report/csv" -> "src/report"
+    "src/report/csv" -> "src/report/csv"
     "src/report/csv" -> "node_modules/handlebars"
     "src/report/ddot" -> "src/report/dot"
+    "src/report/ddot" -> "src/report/ddot"
     "src/report/ddot" -> "node_modules/handlebars"
     "src/report/ddot" -> "node_modules/lodash"
     "src/report/ddot" -> "." [color="grey"]
+    "src/report/dot" -> "src/report/dot"
     "src/report/dot" -> "node_modules/lodash"
     "src/report/dot" -> "node_modules/handlebars"
     "src/report/dot" -> "." [color="grey"]
     "src/report/html" -> "src/report"
+    "src/report/html" -> "src/report/html"
     "src/report/html" -> "node_modules/handlebars"
+    "src/validate" -> "src/validate"
 }
