@@ -1,5 +1,5 @@
 const expect      = require('chai').expect;
-const dotColoring = require('../../../src/report/dot/coloring');
+const dotColoring = require('../../../../src/report/dot/common/coloring');
 
 describe("dot: severity2color", () => {
     it("info => blue", () => {

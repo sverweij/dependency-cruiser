@@ -13,7 +13,7 @@ digraph "dependency-cruiser output"{
     edge [color=black arrowhead=normal fontname=Helvetica fontsize=9]
 
     "dontFollowThis" [label="dontFollowThis" shape="folder" URL="STUFFCOMINGBEFORE/dontFollowThis"]
-    subgraph "cluster_/test" {label="test" subgraph "cluster_/test/cli" {label="cli" subgraph "cluster_/test/cli/fixtures" {label="fixtures" subgraph "cluster_/test/cli/fixtures/unresolvable-in-sub" {label="unresolvable-in-sub" "test/cli/fixtures/unresolvable-in-sub/refers-to-a-do-not-follow-module.js" [label="refers-to-a-do-not-follow-module.js" URL="STUFFCOMINGBEFORE/test/cli/fixtures/unresolvable-in-sub/refers-to-a-do-not-follow-module.js"] } } } }
+    subgraph "cluster_test" {label="test" subgraph "cluster_test/cli" {label="cli" subgraph "cluster_test/cli/fixtures" {label="fixtures" subgraph "cluster_test/cli/fixtures/unresolvable-in-sub" {label="unresolvable-in-sub" "test/cli/fixtures/unresolvable-in-sub/refers-to-a-do-not-follow-module.js" [label="refers-to-a-do-not-follow-module.js" URL="STUFFCOMINGBEFORE/test/cli/fixtures/unresolvable-in-sub/refers-to-a-do-not-follow-module.js"] } } } }
 
     "test/cli/fixtures/unresolvable-in-sub/refers-to-a-do-not-follow-module.js" -> "dontFollowThis"
 }
