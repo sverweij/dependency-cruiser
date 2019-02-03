@@ -1,11 +1,10 @@
-const path            = require('path').posix;
-const Handlebars      = require("handlebars/runtime");
-const _clone          = require('lodash/clone');
-const _get            = require('lodash/get');
-const _uniqBy         = require('lodash/uniqBy');
-const coloring        = require('../common/coloring');
-const folderify       = require('../common/folderify');
-const compareOnSource = require("../common/compareOnSource");
+const path                          = require('path').posix;
+const Handlebars                    = require("handlebars/runtime");
+const coloring                      = require('../common/coloring');
+const folderify                     = require('../common/folderify');
+const compareOnSource               = require("../common/compareOnSource");
+const consolidateModules            = require("./consolidateModules");
+const consolidateModuleDependencies = require("./consolidateModuleDependencies");
 
 require("./ddot.template");
 
@@ -61,90 +60,6 @@ function squashToDir (pModules) {
         );
 }
 
-function mergeModule(pLeft, pRight) {
-    return Object.assign(
-        {},
-        pLeft,
-        pRight,
-        {
-            dependencies: pLeft
-                .dependencies
-                .concat(pRight.dependencies),
-            valid: pLeft.valid && pRight.valid
-        }
-    );
-}
-
-function mergeModules(pSourceString, pModules){
-    return pModules
-        .filter(
-            pModule => pModule.source === pSourceString
-        )
-        .reduce(
-            (pAll, pCurrentModule) => mergeModule(pAll, pCurrentModule),
-            {
-                dependencies: [],
-                valid: true
-            }
-        );
-}
-
-function mergeDependency(pLeft, pRight) {
-    return Object.assign(
-        {},
-        pLeft,
-        pRight,
-        {
-            dependendencyTypes: _uniqBy(pLeft.dependendencyTypes.concat(pRight.dependendencyTypes)),
-            rules: pLeft.rules.concat(_get(pRight, 'rules', [])),
-            valid: pLeft.valid && pRight.valid
-        }
-    );
-}
-
-function mergeDependencies(pResolvedName, pDependencies){
-    return pDependencies
-        .filter(
-            pDependency => pDependency.resolved === pResolvedName
-        )
-        .reduce(
-            (pAll, pCurrentDependency) => mergeDependency(pAll, pCurrentDependency),
-            {
-                dependendencyTypes: [],
-                rules: [],
-                valid: true
-            }
-        );
-}
-
-function consolidateDependencies(pDependencies) {
-    let lDependencies = _clone(pDependencies);
-    let lRetval = [];
-    const notThisDependency = (pResolvedName) => (pDependency) => pDependency.resolved !== pResolvedName;
-
-    while (lDependencies.length > 0){
-        lRetval.push(mergeDependencies(lDependencies[0].resolved, lDependencies));
-        lDependencies = lDependencies.filter(notThisDependency(lDependencies[0].resolved));
-    }
-
-    return lRetval;
-}
-
-function consolidateModules(pModules){
-    let lModules = _clone(pModules);
-    let lRetval = [];
-    const notThisSource = (pSourceString) => (pModule) => pModule.source !== pSourceString;
-
-    while (lModules.length > 0){
-        lRetval.push(mergeModules(lModules[0].source, lModules));
-        lModules = lModules.filter(notThisSource(lModules[0].source));
-    }
-    return lRetval
-        .map(
-            pModule => Object.assign({}, pModule, {dependencies: consolidateDependencies(pModule.dependencies)})
-        );
-}
-
 module.exports = (pInput) =>
     Object.assign(
         {},
@@ -152,6 +67,7 @@ module.exports = (pInput) =>
         {
             modules: Handlebars.templates['ddot.template.hbs']({
                 "things" : consolidateModules(squashToDir(pInput.modules))
+                    .map(consolidateModuleDependencies)
                     .sort(compareOnSource)
                     .map(extractRelevantTransgressions)
                     .map(folderify)

@@ -9,29 +9,29 @@ digraph "dependency-cruiser output"{
     fontsize=9
     style="rounded,bold"
     compound=true
-    node [shape=box style="rounded, filled" fillcolor="#ffffcc" height=0.2 fontname=Helvetica fontsize=9]
-    edge [color="#00000077" penwidth=2.0 arrowhead=normal fontname=Helvetica fontsize=9]
+    node [shape=folder style="rounded, filled" fillcolor="#ffffcc" height=0.2 fontname=Helvetica fontsize=9]
+    edge [color=black arrowhead=normal fontname=Helvetica fontsize=9]
 
     "compat" [label="compat" ]
-    subgraph "cluster_compat" {label="compat" "compat" [label="" shape=point style=invis width="0"] subgraph "cluster_compat/add" {label="add" "compat/add" [label="" shape=point style=invis width="0"] "compat/add/observable" [label="observable" ] } }
-    subgraph "cluster_compat" {label="compat" "compat" [label="" shape=point style=invis width="0"] subgraph "cluster_compat/add" {label="add" "compat/add" [label="" shape=point style=invis width="0"] subgraph "cluster_compat/add/observable" {label="observable" "compat/add/observable" [label="" shape=point style=invis width="0"] "compat/add/observable/dom" [label="dom" ] } } }
-    subgraph "cluster_compat" {label="compat" "compat" [label="" shape=point style=invis width="0"] subgraph "cluster_compat/add" {label="add" "compat/add" [label="" shape=point style=invis width="0"] "compat/add/operator" [label="operator" ] } }
-    subgraph "cluster_compat" {label="compat" "compat" [label="" shape=point style=invis width="0"] "compat/operator" [label="operator" ] }
-    subgraph "cluster_dist" {label="dist" "dist" [label="" shape=point style=invis width="0"] "dist/package" [label="package" ] }
+    subgraph "cluster_compat" {label="compat" "compat" [label="." width="0.5"] subgraph "cluster_compat/add" {label="add" "compat/add" [label="." width="0.5"] "compat/add/observable" [label="observable" ] } }
+    subgraph "cluster_compat" {label="compat" "compat" [label="." width="0.5"] subgraph "cluster_compat/add" {label="add" "compat/add" [label="." width="0.5"] subgraph "cluster_compat/add/observable" {label="observable" "compat/add/observable" [label="." width="0.5"] "compat/add/observable/dom" [label="dom" ] } } }
+    subgraph "cluster_compat" {label="compat" "compat" [label="." width="0.5"] subgraph "cluster_compat/add" {label="add" "compat/add" [label="." width="0.5"] "compat/add/operator" [label="operator" ] } }
+    subgraph "cluster_compat" {label="compat" "compat" [label="." width="0.5"] "compat/operator" [label="operator" ] }
+    subgraph "cluster_dist" {label="dist" "dist" [label="." width="0.5"] "dist/package" [label="package" ] }
     "src" [label="src" ]
-    subgraph "cluster_src" {label="src" "src" [label="" shape=point style=invis width="0"] "src/ajax" [label="ajax" ] }
-    subgraph "cluster_src" {label="src" "src" [label="" shape=point style=invis width="0"] "src/internal" [label="internal" ] }
-    subgraph "cluster_src" {label="src" "src" [label="" shape=point style=invis width="0"] "src/internal-compatibility" [label="internal-compatibility" ] }
-    subgraph "cluster_src" {label="src" "src" [label="" shape=point style=invis width="0"] subgraph "cluster_src/internal" {label="internal" "src/internal" [label="" shape=point style=invis width="0"] "src/internal/observable" [label="observable" ] } }
-    subgraph "cluster_src" {label="src" "src" [label="" shape=point style=invis width="0"] subgraph "cluster_src/internal" {label="internal" "src/internal" [label="" shape=point style=invis width="0"] subgraph "cluster_src/internal/observable" {label="observable" "src/internal/observable" [label="" shape=point style=invis width="0"] "src/internal/observable/dom" [label="dom" ] } } }
-    subgraph "cluster_src" {label="src" "src" [label="" shape=point style=invis width="0"] subgraph "cluster_src/internal" {label="internal" "src/internal" [label="" shape=point style=invis width="0"] "src/internal/operators" [label="operators" ] } }
-    subgraph "cluster_src" {label="src" "src" [label="" shape=point style=invis width="0"] subgraph "cluster_src/internal" {label="internal" "src/internal" [label="" shape=point style=invis width="0"] "src/internal/scheduler" [label="scheduler" ] } }
-    subgraph "cluster_src" {label="src" "src" [label="" shape=point style=invis width="0"] subgraph "cluster_src/internal" {label="internal" "src/internal" [label="" shape=point style=invis width="0"] "src/internal/symbol" [label="symbol" ] } }
-    subgraph "cluster_src" {label="src" "src" [label="" shape=point style=invis width="0"] subgraph "cluster_src/internal" {label="internal" "src/internal" [label="" shape=point style=invis width="0"] "src/internal/testing" [label="testing" ] } }
-    subgraph "cluster_src" {label="src" "src" [label="" shape=point style=invis width="0"] subgraph "cluster_src/internal" {label="internal" "src/internal" [label="" shape=point style=invis width="0"] "src/internal/util" [label="util" ] } }
-    subgraph "cluster_src" {label="src" "src" [label="" shape=point style=invis width="0"] "src/operators" [label="operators" ] }
-    subgraph "cluster_src" {label="src" "src" [label="" shape=point style=invis width="0"] "src/testing" [label="testing" ] }
-    subgraph "cluster_src" {label="src" "src" [label="" shape=point style=invis width="0"] "src/webSocket" [label="webSocket" ] }
+    subgraph "cluster_src" {label="src" "src" [label="." width="0.5"] "src/ajax" [label="ajax" ] }
+    subgraph "cluster_src" {label="src" "src" [label="." width="0.5"] "src/internal" [label="internal" ] }
+    subgraph "cluster_src" {label="src" "src" [label="." width="0.5"] "src/internal-compatibility" [label="internal-compatibility" ] }
+    subgraph "cluster_src" {label="src" "src" [label="." width="0.5"] subgraph "cluster_src/internal" {label="internal" "src/internal" [label="." width="0.5"] "src/internal/observable" [label="observable" ] } }
+    subgraph "cluster_src" {label="src" "src" [label="." width="0.5"] subgraph "cluster_src/internal" {label="internal" "src/internal" [label="." width="0.5"] subgraph "cluster_src/internal/observable" {label="observable" "src/internal/observable" [label="." width="0.5"] "src/internal/observable/dom" [label="dom" ] } } }
+    subgraph "cluster_src" {label="src" "src" [label="." width="0.5"] subgraph "cluster_src/internal" {label="internal" "src/internal" [label="." width="0.5"] "src/internal/operators" [label="operators" ] } }
+    subgraph "cluster_src" {label="src" "src" [label="." width="0.5"] subgraph "cluster_src/internal" {label="internal" "src/internal" [label="." width="0.5"] "src/internal/scheduler" [label="scheduler" ] } }
+    subgraph "cluster_src" {label="src" "src" [label="." width="0.5"] subgraph "cluster_src/internal" {label="internal" "src/internal" [label="." width="0.5"] "src/internal/symbol" [label="symbol" ] } }
+    subgraph "cluster_src" {label="src" "src" [label="." width="0.5"] subgraph "cluster_src/internal" {label="internal" "src/internal" [label="." width="0.5"] "src/internal/testing" [label="testing" ] } }
+    subgraph "cluster_src" {label="src" "src" [label="." width="0.5"] subgraph "cluster_src/internal" {label="internal" "src/internal" [label="." width="0.5"] "src/internal/util" [label="util" ] } }
+    subgraph "cluster_src" {label="src" "src" [label="." width="0.5"] "src/operators" [label="operators" ] }
+    subgraph "cluster_src" {label="src" "src" [label="." width="0.5"] "src/testing" [label="testing" ] }
+    subgraph "cluster_src" {label="src" "src" [label="." width="0.5"] "src/webSocket" [label="webSocket" ] }
 
     "compat" -> "compat"
     "compat" -> "compat/add/observable"
