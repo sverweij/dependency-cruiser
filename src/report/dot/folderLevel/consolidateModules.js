@@ -1,16 +1,15 @@
 const _clone  = require('lodash/clone');
 const _reject = require('lodash/reject');
 
-function mergeModule(pLeft, pRight) {
+function mergeModule(pLeftModule, pRightModule) {
     return Object.assign(
         {},
-        pLeft,
-        pRight,
+        pLeftModule,
+        pRightModule,
         {
-            dependencies: pLeft
-                .dependencies
-                .concat(pRight.dependencies),
-            valid: pLeft.valid && pRight.valid
+            dependencies: pLeftModule.dependencies
+                .concat(pRightModule.dependencies),
+            valid: pLeftModule.valid && pRightModule.valid
         }
     );
 }
@@ -21,7 +20,7 @@ function mergeModules(pSourceString, pModules){
             pModule => pModule.source === pSourceString
         )
         .reduce(
-            (pAll, pCurrentModule) => mergeModule(pAll, pCurrentModule),
+            (pAllModules, pCurrentModule) => mergeModule(pAllModules, pCurrentModule),
             {
                 dependencies: [],
                 valid: true
