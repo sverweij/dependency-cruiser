@@ -42,8 +42,8 @@ This will:
 See the _dependency-cruise_ target in the [Makefile](https://github.com/sverweij/dependency-cruiser/blob/master/Makefile#L95)
 for a real world example.
 
-#### dot and rcdot
-Supplying `dot` or `rcdot` as output type will make dependency-cruiser write
+#### dot
+Supplying `dot` as output type will make dependency-cruiser write
 a GraphViz dot format directed graph. Typical use is in concert
 with _GraphViz dot_:
 
@@ -51,9 +51,16 @@ with _GraphViz dot_:
 dependency-cruise -x "^node_modules" -T dot src | dot -T svg > dependencygraph.svg
 ```
 
-The `rcdot` variant colors modules based on their extension - which might
-be useful for mixed source code bases or when you're converting from one
-type to another.
+> ##### ddot - summarize on folder level
+> Since version 4.13.0 there's an _experimental_ `ddot` reporter that summarizes
+> modules on folder level. It works fine, but its output is a tad more ugly
+> than I'd like so there'll be tweaks to spruce it up in the future.
+
+> ##### rcdot
+> The `rcdot` reporter is deprecated.    
+> Since version 4.12.0 `rcdot` reporter's
+> coloring has become the default for the `dot` reporter, so `dot` and `rcdot`
+> will yield the same results.
 
 #### html
 Write it to html with a dependency matrix instead:
