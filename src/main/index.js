@@ -2,8 +2,10 @@ const extract          = require("../extract");
 const meta             = require("../extract/transpile/meta");
 const reportHtml       = require("../report/html");
 const reportJson       = require("../report/json");
-const reportDot        = require("../report/dot")();
-const reportRCDot      = require("../report/dot")(require('../report/dot/richModuleColorScheme.json'));
+const reportDot        = require("../report/dot/moduleLevel")();
+const reportDDot       = require("../report/dot/folderLevel");
+const RCScheme         = require('../report/dot/common/richModuleColorScheme.json');
+const reportRCDot      = require("../report/dot/moduleLevel")(RCScheme);
 const reportCsv        = require("../report/csv");
 const reportErr        = require("../report/err");
 const filesAndDirs     = require("./filesAndDirs");
@@ -13,12 +15,13 @@ const validateOptions  = require("./options/validate");
 const normalizeOptions = require("./options/normalize");
 
 const TYPE2REPORTER      = {
-    "json" : reportJson,
-    "html" : reportHtml,
-    "dot"  : reportDot,
-    "rcdot"  : reportRCDot,
-    "csv"  : reportCsv,
-    "err"  : reportErr
+    "json"  : reportJson,
+    "html"  : reportHtml,
+    "dot"   : reportDot,
+    "ddot"  : reportDDot,
+    "rcdot" : reportRCDot,
+    "csv"   : reportCsv,
+    "err"   : reportErr
 };
 
 /**
