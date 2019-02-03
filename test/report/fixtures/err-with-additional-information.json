@@ -1,0 +1,20 @@
+{
+    "modules": [],
+    "summary": {
+        "violations": [
+            {
+                "from": "aap",
+                "to": "noot",
+                "additionalInformation": "aap -> noot -> mies -> aap",
+                "rule": {
+                    "name": "no-leesplank",
+                    "severity": "warn"
+                }
+            }
+        ],
+    "error": 0,
+    "warn": 1,
+    "info": 0,
+    "optionsUsed": {}
+  }
+}
