@@ -6,8 +6,6 @@ module.exports = {
     },
     to: {
         dependencyTypes: [
-            'unknown',
-            'undetermined',
             'npm-no-pkg',
             'npm-unknown'
         ]
