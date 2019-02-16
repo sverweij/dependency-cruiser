@@ -120,7 +120,6 @@
     "normalize-newline": "3.0.0",
     "npm-run-all": "4.1.5",
     "nyc": "13.3.0",
-    "proxyquire": "2.1.0",
     "symlink-dir": "2.0.2",
     "tslint": "5.12.1",
     "typescript": "3.3.3",
