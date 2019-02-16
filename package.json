@@ -100,8 +100,8 @@
     "handlebars": "4.1.0",
     "inquirer": "6.2.2",
     "lodash": "4.17.11",
+    "regexp-tree": "0.1.1",
     "resolve": "1.10.0",
-    "safe-regex": "2.0.1",
     "semver": "5.6.0",
     "semver-try-require": "2.0.3",
     "strip-json-comments": "2.0.1"
