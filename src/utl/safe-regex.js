@@ -1,12 +1,51 @@
 const regexpTree = require('regexp-tree');
 
-const DEFAULT_REPLIMIT = 25;
+const DEFAULT_REPETITION_LIMIT = 25;
 
-/* this is a ~1:1 copy from safe-regex, maybe we refactor later */
-/* eslint complexity:0 */
 
 /* this thing is for testing any regexpses, so non-literal regexps are expected */
 /* eslint security/detect-non-literal-regexp:0 */
+function pryRegExASTFromInput(pRegEx) {
+    let lRegExp = null;
+
+    if (pRegEx instanceof RegExp) {
+        lRegExp = pRegEx;
+    } else if (typeof pRegEx === 'string') {
+        lRegExp = new RegExp(pRegEx);
+    } else {
+        lRegExp = new RegExp(String(pRegEx));
+    }
+
+    // Build an AST
+    return regexpTree.parse(lRegExp);
+}
+
+function isProbablySafe(pRegExAST, pOptions) {
+    const lRepLimit = pOptions.limit || DEFAULT_REPETITION_LIMIT;
+    let currentStarHeight = 0;
+    let maxObservedStarHeight = 0;
+
+    let repetitionCount = 0;
+
+    regexpTree.traverse(pRegExAST, {
+        'Repetition': {
+            pre () {
+                repetitionCount += 1;
+
+                currentStarHeight += 1;
+                if (maxObservedStarHeight < currentStarHeight) {
+                    maxObservedStarHeight = currentStarHeight;
+                }
+            },
+
+            post () {
+                currentStarHeight -= 1;
+            }
+        }
+    });
+
+    return (maxObservedStarHeight <= 1) && (repetitionCount <= lRepLimit);
+}
 
 /**
  * returns true if the passed regular expression is probably 'safe'
@@ -25,51 +64,17 @@ const DEFAULT_REPLIMIT = 25;
  */
 module.exports = (pRegEx, pOptions) => {
     pOptions = pOptions || {};
-    const lRepLimit = pOptions.limit || DEFAULT_REPLIMIT;
-
-    // Build an AST
-    let lRegExp = null;
-    let lAST = null;
 
     try {
-    // Construct a RegExp object
-        if (pRegEx instanceof RegExp) {
-            lRegExp = pRegEx;
-        } else if (typeof pRegEx === 'string') {
-            lRegExp = new RegExp(pRegEx);
-        } else {
-            lRegExp = new RegExp(String(pRegEx));
-        }
-
-        // Build an AST
-        lAST = regexpTree.parse(lRegExp);
+        return isProbablySafe(
+            pryRegExASTFromInput(pRegEx),
+            pOptions
+        );
     } catch (err) {
     // Invalid or unparseable input
     /* istanbul ignore next */
         return false;
     }
 
-    let currentStarHeight = 0;
-    let maxObservedStarHeight = 0;
 
-    let repetitionCount = 0;
-
-    regexpTree.traverse(lAST, {
-        'Repetition': {
-            pre () {
-                repetitionCount += 1;
-
-                currentStarHeight += 1;
-                if (maxObservedStarHeight < currentStarHeight) {
-                    maxObservedStarHeight = currentStarHeight;
-                }
-            },
-
-            post () {
-                currentStarHeight -= 1;
-            }
-        }
-    });
-
-    return (maxObservedStarHeight <= 1) && (repetitionCount <= lRepLimit);
 };
