@@ -1,6 +1,6 @@
 
 
-const safeRegex = require('safe-regex');
+const safeRegex = require('../../utl/safe-regex');
 
 const MODULE_SYSTEM_LIST_RE  = /^((cjs|amd|es6|tsd)(,|$))+$/gi;
 const OUTPUT_TYPES_RE        = /^(html|dot|rcdot|ddot|csv|err|json)$/g;
