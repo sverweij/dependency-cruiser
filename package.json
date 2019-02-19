@@ -104,7 +104,8 @@
     "resolve": "1.10.0",
     "semver": "5.6.0",
     "semver-try-require": "2.0.3",
-    "strip-json-comments": "2.0.1"
+    "strip-json-comments": "2.0.1",
+    "tsconfig-paths-webpack-plugin": "3.2.0"
   },
   "devDependencies": {
     "chai": "4.2.0",
