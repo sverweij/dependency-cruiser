@@ -195,7 +195,7 @@ describe("resolve/index", () => {
         });
     });
 
-    it("considers a typescript config", () => {
+    it("considers a typescript config - non-* alias", () => {
         expect(
             resolve(
                 {
@@ -217,6 +217,56 @@ describe("resolve/index", () => {
             ],
             followable: true,
             resolved: 'ts-config-with-path/src/shared/index.ts'
+        });
+    });
+
+    it("considers a typescript config - combined/* alias", () => {
+        expect(
+            resolve(
+                {
+                    moduleName: 'gewoon/wood/tree',
+                    moduleSystem: 'es6'
+                },
+                path.join(__dirname, 'fixtures'),
+                path.join(__dirname, 'fixtures', 'ts-config-with-path'),
+                {
+                    tsConfig: path.join(__dirname, 'fixtures', 'ts-config-with-path', 'tsconfig.json'),
+                    bustTheCache: true
+                }
+            )
+        ).to.deep.equal({
+            coreModule: false,
+            couldNotResolve: false,
+            dependencyTypes: [
+                "aliased"
+            ],
+            followable: true,
+            resolved: 'ts-config-with-path/src/common/wood/tree.ts'
+        });
+    });
+
+    it("considers a typescript config - * alias", () => {
+        expect(
+            resolve(
+                {
+                    moduleName: 'daddayaddaya',
+                    moduleSystem: 'es6'
+                },
+                path.join(__dirname, 'fixtures'),
+                path.join(__dirname, 'fixtures', 'ts-config-with-path'),
+                {
+                    tsConfig: path.join(__dirname, 'fixtures', 'ts-config-with-path', 'tsconfig.json'),
+                    bustTheCache: true
+                }
+            )
+        ).to.deep.equal({
+            coreModule: false,
+            couldNotResolve: false,
+            dependencyTypes: [
+                "aliased"
+            ],
+            followable: true,
+            resolved: 'ts-config-with-path/src/typos/daddayaddaya.ts'
         });
     });
 

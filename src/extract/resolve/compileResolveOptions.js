@@ -1,5 +1,5 @@
 const enhancedResolve          = require('enhanced-resolve');
-const {TsConfigPathsPlugin}    = require('awesome-typescript-loader');
+const TsConfigPathsPlugin      = require('tsconfig-paths-webpack-plugin');
 const transpileMeta            = require('../transpile/meta');
 
 const CACHE_DURATION = 4000;
@@ -36,7 +36,7 @@ function compileResolveOptions(pResolveOptions){
 
     if (pResolveOptions.tsConfig) {
         lResolveOptions.plugins = [
-            new TsConfigPathsPlugin({configFileName: pResolveOptions.tsConfig})
+            new TsConfigPathsPlugin({configFile: pResolveOptions.tsConfig})
         ];
     }
 
