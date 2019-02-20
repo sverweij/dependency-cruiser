@@ -97,7 +97,7 @@ describe("dependencyEndsUpAtFrom", () => {
     it("detects 1 step circular (d <-> e)", () => {
         expect(dependencyEndsUpAtFrom(D_E_D, "d", "e")).to.equal(true);
     });
-    it("detects 2 step circular (a -> b -> c -> a)", () => {
+    it("detects 2 step circular (q -> r -> s -> q)", () => {
         expect(dependencyEndsUpAtFrom(Q_R_S_Q, "q", "r")).to.equal(true);
         expect(dependencyEndsUpAtFrom(Q_R_S_Q, "r", "s")).to.equal(true);
         expect(dependencyEndsUpAtFrom(Q_R_S_Q, "s", "q")).to.equal(true);

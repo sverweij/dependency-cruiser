@@ -189,6 +189,10 @@
                 "to": {
                     "type": "string"
                 },
+                "additionalInformation": {
+                    "description": "if there's more information on the violation (e.g. the complete path in case of a circular dependency) it'll be here",
+                    "type": "string"
+                },
                 "rule": { "$ref": "#/definitions/RuleSummaryType"}
             }
         },

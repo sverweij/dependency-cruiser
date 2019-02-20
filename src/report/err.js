@@ -9,7 +9,8 @@ const SEVERITY2CHALK = {
 
 function formatError(pErr) {
     return `${SEVERITY2CHALK[pErr.rule.severity](pErr.rule.severity)} ${pErr.rule.name}: ` +
-           `${chalk.bold(pErr.from)} ${figures.arrowRight} ${chalk.bold(pErr.to)}`;
+           `${chalk.bold(pErr.from)} ${figures.arrowRight} ${chalk.bold(pErr.to)}` +
+           `${pErr.additionalInformation ? `\n  ${pErr.additionalInformation}` : ""}`;
 }
 
 function formatMeta(pMeta) {
