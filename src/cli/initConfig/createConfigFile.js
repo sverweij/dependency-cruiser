@@ -1,23 +1,12 @@
-const fs         = require('fs');
-const Handlebars = require('handlebars/runtime');
-const $package   = require('../../../package.json');
+const fs             = require('fs');
+const Handlebars     = require('handlebars/runtime');
+const $package       = require('../../../package.json');
+const {fileExists} = require('./helpers');
 
 /* eslint import/no-unassigned-import: 0 */
 require("./config.json.template");
 require("./config.js.template");
 
-/*
-  We could have used utl.fileExists - but that one is cached.
-  Not typically what we want for this util.
- */
-function fileExists(pFile) {
-    try {
-        fs.accessSync(pFile, fs.R_OK);
-    } catch (e) {
-        return false;
-    }
-    return true;
-}
 
 function getFileName(pInitOptions) {
     return `.dependency-cruiser${pInitOptions.configFormat}`;
@@ -73,7 +62,9 @@ function normalizeInitOptions(pInitOptions){
  *
  * @returns {void}  Nothing
  * @param  {any}    pInitOptions Options that influence the shape of the
- *                  config
+ *                  configFormat - file format to use either ".json" or ".js"
+ *                  configType   - "self-contained" or "preset"
+ *                  preset       -
  * @throws {Error}  An error object with the root cause of the problem
  *                  as a description:
  *                  - file already exists

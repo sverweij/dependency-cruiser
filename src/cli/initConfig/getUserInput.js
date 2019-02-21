@@ -1,4 +1,10 @@
-const inquirer = require('inquirer');
+const inquirer     = require('inquirer');
+const $defaults    = require('../defaults.json');
+const {fileExists} = require('./helpers');
+
+
+const TYPESCRIPT_CONFIG = `./${$defaults.TYPESCRIPT_CONFIG}`;
+const WEBPACK_CONFIG    = `./${$defaults.WEBPACK_CONFIG}`;
 
 const INQUIRER_QUESTIONS = [
     {
@@ -38,6 +44,36 @@ const INQUIRER_QUESTIONS = [
         ],
         default: "dependency-cruiser/configs/recommended-warn-only",
         when: pAnswers => pAnswers.configType === "preset"
+    },
+    {
+        name: "useTsConfig",
+        type: "confirm",
+        message: "Looks like you're using TypeScript. Use a 'tsconfig.json'?",
+        default: true,
+        when: () => fileExists(TYPESCRIPT_CONFIG)
+    },
+    {
+        name: "tsConfig",
+        type: "input",
+        message: "Full path to 'tsconfig.json':",
+        default: TYPESCRIPT_CONFIG,
+        validate: (pInput) => fileExists(pInput) || `hmm, '${pInput}' doesn't seem to exist - try again?`,
+        when: (pAnswers) => pAnswers.useTsConfig
+    },
+    {
+        name: "useWebpackConfig",
+        type: "confirm",
+        message: "Looks like you're using webpack - specify a webpack config?",
+        default: true,
+        when: () => fileExists(WEBPACK_CONFIG)
+    },
+    {
+        name: "webpackConfig",
+        type: "input",
+        message: "Full path to webpack config:",
+        default: WEBPACK_CONFIG,
+        validate: (pInput) => fileExists(pInput) || `hmm, '${pInput}' doesn't seem to exist - try again?`,
+        when: (pAnswers) => pAnswers.useWebpackConfig
     }
 ];
 
