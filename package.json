@@ -91,7 +91,6 @@
     "acorn-loose": "6.0.0",
     "acorn-walk": "6.1.1",
     "ajv": "6.9.1",
-    "awesome-typescript-loader": "5.2.1",
     "chalk": "2.4.2",
     "commander": "2.19.0",
     "enhanced-resolve": "4.1.0",
