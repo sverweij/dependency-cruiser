@@ -134,10 +134,10 @@
   },
   "homepage": "https://github.com/sverweij/dependency-cruiser",
   "nyc": {
-    "statements": 99.8,
-    "branches": 99.4,
+    "statements": 99.9,
+    "branches": 99.5,
     "functions": 100,
-    "lines": 99.8,
+    "lines": 99.9,
     "exclude": [
       "configs/**/*",
       "test/**/*",
