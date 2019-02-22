@@ -1,11 +1,11 @@
-const _                      = require('lodash');
-const pathToPosix            = require('./utl/pathToPosix');
-const extract                = require('./extract');
-const deriveCirculars        = require('./derive/circular');
-const deriveOrphans          = require('./derive/orphan');
-const gather                 = require('./gatherInitialSources');
-const summarize              = require('./summarize');
-const addValidations         = require('./addValidations');
+const _               = require('lodash');
+const pathToPosix     = require('./utl/pathToPosix');
+const extract         = require('./extract');
+const deriveCirculars = require('./derive/circular');
+const deriveOrphans   = require('./derive/orphan');
+const gather          = require('./gatherInitialSources');
+const summarize       = require('./summarize');
+const addValidations  = require('./addValidations');
 
 /* eslint max-params:0 */
 function extractRecursive (pFileName, pOptions, pVisited, pDepth, pResolveOptions, pTSConfig) {
@@ -108,25 +108,19 @@ function makeOptionsPresentable(pOptions) {
 
 module.exports = (pFileDirArray, pOptions, pCallback, pResolveOptions, pTSConfig) => {
     const lCallback = pCallback ? pCallback : (pInput => pInput);
-    const lOptions = Object.assign(
-        {
-            maxDepth: 0
-        },
-        pOptions
-    );
 
     let lModules = _(
-        extractFileDirArray(pFileDirArray, lOptions, pResolveOptions, pTSConfig).reduce(complete, [])
+        extractFileDirArray(pFileDirArray, pOptions, pResolveOptions, pTSConfig).reduce(complete, [])
     ).uniqBy(pDependency => pDependency.source)
         .value();
 
-    lModules = deriveCirculars(lModules, lOptions);
-    lModules = deriveOrphans(lModules, lOptions);
+    lModules = deriveCirculars(lModules, pOptions);
+    lModules = deriveOrphans(lModules, pOptions);
 
     lModules = addValidations(
         lModules,
-        lOptions.validate,
-        lOptions.ruleSet
+        pOptions.validate,
+        pOptions.ruleSet
     );
 
     return lCallback(
@@ -136,7 +130,7 @@ module.exports = (pFileDirArray, pOptions, pCallback, pResolveOptions, pTSConfig
                 Object.assign(
                     summarize(lModules),
                     {
-                        optionsUsed: makeOptionsPresentable(lOptions)
+                        optionsUsed: makeOptionsPresentable(pOptions)
                     }
                 )
         }

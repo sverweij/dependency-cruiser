@@ -1,11 +1,11 @@
 const path         = require('path');
 const expect       = require('chai').expect;
-const filesAndDirs = require('../../../src/main/filesAndDirs');
+const normalizeFilesAndDirs = require('../../../src/main/filesAndDirs/normalize');
 
 describe("main/filesAndDirs", () => {
     it("Keeps an empty file dir array as is", () => {
         expect(
-            filesAndDirs.normalize(
+            normalizeFilesAndDirs(
                 []
             )
         ).to.deep.equal(
@@ -15,7 +15,7 @@ describe("main/filesAndDirs", () => {
 
     it("Keeps relative paths as is", () => {
         expect(
-            filesAndDirs.normalize(
+            normalizeFilesAndDirs(
                 ["./src", "./test"]
             )
         ).to.deep.equal(
@@ -25,7 +25,7 @@ describe("main/filesAndDirs", () => {
 
     it("Keeps relative paths as is - keeping globs in tact", () => {
         expect(
-            filesAndDirs.normalize(
+            normalizeFilesAndDirs(
                 ["{src,test}/**/*.js"]
             )
         ).to.deep.equal(
@@ -35,7 +35,7 @@ describe("main/filesAndDirs", () => {
 
     it("Normalizes absolute paths to paths relative to the current working dir", () => {
         expect(
-            filesAndDirs.normalize(
+            normalizeFilesAndDirs(
                 [__dirname]
             ).map(path.win32.normalize)
         ).to.deep.equal(
@@ -45,7 +45,7 @@ describe("main/filesAndDirs", () => {
 
     it("Normalizes absolute paths to paths relative to the current working dir keeping globs in tact", () => {
         expect(
-            filesAndDirs.normalize(
+            normalizeFilesAndDirs(
                 [`${__dirname}/**/*.{js,ts}`]
             ).map(path.win32.normalize)
         ).to.deep.equal(

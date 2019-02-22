@@ -1,18 +1,19 @@
-const extract          = require("../extract");
-const meta             = require("../extract/transpile/meta");
-const reportHtml       = require("../report/html");
-const reportJson       = require("../report/json");
-const reportDot        = require("../report/dot/moduleLevel")();
-const reportDDot       = require("../report/dot/folderLevel");
-const RCScheme         = require('../report/dot/common/richModuleColorScheme.json');
-const reportRCDot      = require("../report/dot/moduleLevel")(RCScheme);
-const reportCsv        = require("../report/csv");
-const reportErr        = require("../report/err");
-const filesAndDirs     = require("./filesAndDirs");
-const validateRuleSet  = require("./ruleSet/validate");
-const normalizeRuleSet = require("./ruleSet/normalize");
-const validateOptions  = require("./options/validate");
-const normalizeOptions = require("./options/normalize");
+const extract                 = require("../extract");
+const meta                    = require("../extract/transpile/meta");
+const reportHtml              = require("../report/html");
+const reportJson              = require("../report/json");
+const reportDot               = require("../report/dot/moduleLevel")();
+const reportDDot              = require("../report/dot/folderLevel");
+const RCScheme                = require('../report/dot/common/richModuleColorScheme.json');
+const reportRCDot             = require("../report/dot/moduleLevel")(RCScheme);
+const reportCsv               = require("../report/csv");
+const reportErr               = require("../report/err");
+const normalizeFilesAndDirs   = require("./filesAndDirs/normalize");
+const validateRuleSet         = require("./ruleSet/validate");
+const normalizeRuleSet        = require("./ruleSet/normalize");
+const validateOptions         = require("./options/validate");
+const normalizeOptions        = require("./options/normalize");
+const normalizeResolveOptions = require("./resolveOptions/normalize");
 
 const TYPE2REPORTER      = {
     "json"  : reportJson,
@@ -83,18 +84,6 @@ function cruise (pFileDirArray, pOptions, pResolveOptions, pTSConfig) {
         validateOptions(pOptions)
     );
 
-    /* squirel the combinedDependencies thing into the resolve options
-       - they're not for enhanced resolve, but they are for what we consider
-       resolve options ...
-     */
-    pResolveOptions = Object.assign(
-        pResolveOptions || {},
-        {
-            combinedDependencies: pOptions.combinedDependencies
-        }
-    );
-
-
     if (Boolean(pOptions.ruleSet)){
         pOptions.ruleSet = normalizeRuleSet(
             validateRuleSet(
@@ -104,10 +93,10 @@ function cruise (pFileDirArray, pOptions, pResolveOptions, pTSConfig) {
     }
 
     return extract(
-        filesAndDirs.normalize(pFileDirArray),
+        normalizeFilesAndDirs(pFileDirArray),
         pOptions,
         TYPE2REPORTER[pOptions.outputType],
-        pResolveOptions,
+        normalizeResolveOptions(pResolveOptions, pOptions),
         pTSConfig
     );
 }
