@@ -11,7 +11,8 @@ describe("resolve/index", () => {
                     moduleSystem: 'es6'
                 },
                 path.join(__dirname, 'fixtures'),
-                path.join(__dirname, 'fixtures', 'resolve')
+                path.join(__dirname, 'fixtures', 'resolve'),
+                {}
             )
         ).to.deep.equal({
             coreModule: false,

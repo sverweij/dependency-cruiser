@@ -55,8 +55,6 @@ function resolveModule(pDependency, pBaseDir, pFileDir, pResolveOptions) {
  *
  */
 module.exports = (pDependency, pBaseDir, pFileDir, pResolveOptions) => {
-    pResolveOptions = pResolveOptions || {};
-
     let lResolvedModule = resolveModule(pDependency, pBaseDir, pFileDir, pResolveOptions);
 
     if (!(pResolveOptions.symlinks) && !lResolvedModule.coreModule && !lResolvedModule.couldNotResolve) {

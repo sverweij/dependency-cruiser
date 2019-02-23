@@ -1,132 +1,161 @@
-const chai                    = require('chai');
-const extract                 = require('../../src/extract');
-const depSchema               = require('../../src/extract/jsonschema.json');
-const normalize               = require('../../src/main/options/normalize');
-const cjsRecursiveFixtures    = require('./fixtures/cjs-recursive.json');
-const deprecationFixtures     = require('./fixtures/deprecated-node-module.json');
-const bundledFixtures         = require('./fixtures/bundled-dependencies.json');
-const amdRecursiveFixtures    = require('./fixtures/amd-recursive.json');
-const tsRecursiveFixtures     = require('./fixtures/ts-recursive.json');
-const vueFixtures             = require('./fixtures/vue.json');
-const coffeeRecursiveFixtures = require('./fixtures/coffee-recursive.json');
+const path              = require('path');
+const fs                = require('fs');
+const symlinkDir        = require('symlink-dir');
+const expect            = require('chai').expect;
+const extract           = require('../../src/extract/extract');
+const normalize         = require('../../src/main/options/normalize');
+const normalizeResolveOptions = require('../../src/main/resolveOptions/normalize');
+const cjsFixtures       = require('./fixtures/cjs.json');
+const es6Fixtures       = require('./fixtures/es6.json');
+const amdFixtures       = require('./fixtures/amd.json');
+const tsFixtures        = require('./fixtures/ts.json');
+const coffeeFixtures    = require('./fixtures/coffee.json');
 
-const expect = chai.expect;
+const cjsBang           = require('./fixtures/cjs-bang.json');
+const amdBangRequirejs  = require('./fixtures/amd-bang-requirejs.json');
+const amdBangCJSWrapper = require('./fixtures/amd-bang-CJSWrapper.json');
 
-chai.use(require('chai-json-schema'));
+let symlinkDirectory = path.join(__dirname, 'fixtures', 'symlinked');
 
-function runRecursiveFixture(pFixture) {
-    if (!Boolean(pFixture.ignore)){
-        it(pFixture.title, () => {
-            let lResult = extract(
-                [pFixture.input.fileName],
-                normalize(pFixture.input.options)
-            );
+/* eslint-disable mocha/no-top-level-hooks */
+before((cb) => {
+    symlinkDir(path.join(__dirname, 'fixtures', 'symlinkTarget'), symlinkDirectory)
+        .then(() => cb(), (err) => cb(err));
+});
 
-            expect(lResult.modules).to.deep.equal(pFixture.expected);
-            expect(lResult).to.be.jsonSchema(depSchema);
-        });
-
+after(() => {
+    try {
+        fs.unlinkSync(symlinkDirectory);
+    } catch (e) {
+        // just swallow the error, there's nothing we can do about it
     }
+});
+
+function runFixture(pFixture) {
+    const lOptions = {};
+
+    if (pFixture.input.baseDir) {
+        lOptions.baseDir = pFixture.input.baseDir;
+    }
+    if (pFixture.input.moduleSystems) {
+        lOptions.moduleSystems = pFixture.input.moduleSystems;
+    }
+    if (typeof pFixture.input.preserveSymlinks !== "undefined") {
+        lOptions.preserveSymlinks = pFixture.input.preserveSymlinks;
+    }
+
+    it(pFixture.title, () => {
+        expect(
+            extract(
+                pFixture.input.fileName,
+                normalize(lOptions),
+                normalizeResolveOptions({}, lOptions)
+            )
+        ).to.deep.equal(
+            pFixture.expected
+        );
+    });
 }
 
-describe('CommonJS recursive - ', () => cjsRecursiveFixtures.forEach(runRecursiveFixture));
-describe('Deprecation - ', () => deprecationFixtures.forEach(runRecursiveFixture));
-describe('Bundled - ', () => bundledFixtures.forEach(runRecursiveFixture));
-describe('AMD recursive - ', () => amdRecursiveFixtures.forEach(runRecursiveFixture));
-describe('TypeScript recursive - ', () => tsRecursiveFixtures.forEach(runRecursiveFixture));
-describe('vue - ', () => vueFixtures.forEach(runRecursiveFixture));
-describe(
-    'CoffeeScript recursive - ',
-    () => coffeeRecursiveFixtures.forEach(runRecursiveFixture)
-);
+describe('CommonJS - ', () => cjsFixtures.forEach(runFixture));
+describe('CommonJS - with bangs', () => {
 
-describe('Max depth', () => {
-    it('returns the complete graph when max-depth is 0', () => {
-        const lResult = extract(
-            ["./test/extract/fixtures/maxDepth/index.js"],
-            normalize({
-                maxDepth: 0
-            })
+    it('splits bang!./blabla into bang and ./blabla', () => {
+        expect(
+            extract(
+                "test/extract/fixtures/cjs-bangs/index.js",
+                normalize({
+                    moduleSystems: ["cjs"]
+                }),
+                {}
+            )
+        ).to.deep.equal(
+            cjsBang
         );
-
-        expect(lResult.modules).to.deep.equal(
-            require('./fixtures/maxDepthUnspecified.json').modules
-        );
-        expect(lResult).to.be.jsonSchema(depSchema);
-    });
-
-    it('returns the file and one deep with --max-depth 1', () => {
-        const lResult = extract(
-            ["./test/extract/fixtures/maxDepth/index.js"],
-            normalize({
-                maxDepth: 1
-            })
-        );
-
-        expect(lResult.modules).to.deep.equal(
-            require('./fixtures/maxDepth1.json').modules
-        );
-        expect(lResult).to.be.jsonSchema(depSchema);
-    });
-
-    it('returns the file and two deep with --max-depth 2', () => {
-        const lResult = extract(
-            ["./test/extract/fixtures/maxDepth/index.js"],
-            normalize({
-                maxDepth: 2
-            })
-        );
-
-        expect(lResult.modules).to.deep.equal(
-            require('./fixtures/maxDepth2.json').modules
-        );
-        expect(lResult).to.be.jsonSchema(depSchema);
-    });
-
-    it('returns the file and three deep with --max-depth 3', () => {
-        const lResult = extract(
-            ["./test/extract/fixtures/maxDepth/index.js"],
-            normalize({
-                maxDepth: 3
-            })
-        );
-
-        expect(lResult.modules).to.deep.equal(
-            require('./fixtures/maxDepth3.json').modules
-        );
-        expect(lResult).to.be.jsonSchema(depSchema);
-    });
-
-    it('returns the file and four deep with --max-depth 4', () => {
-        const lResult = extract(
-            ["./test/extract/fixtures/maxDepth/index.js"],
-            normalize({
-                maxDepth: 4
-            })
-        );
-
-        expect(lResult.modules).to.deep.equal(
-            require('./fixtures/maxDepth4.json').modules
-        );
-        expect(lResult).to.be.jsonSchema(depSchema);
     });
 });
 
-describe('Do not follow', () => {
-    it('does not follow files matching the doNotFollow RE', () => {
-        const lResult = extract(
-            ["./test/extract/fixtures/donotfollow/index.js"],
-            normalize({
-                doNotFollow: "donotfollowonceinthisfolder",
-                maxDepth: 0
-            })
-        );
+describe('ES6 - ', () => es6Fixtures.forEach(runFixture));
+describe('AMD - ', () => amdFixtures.forEach(runFixture));
+describe('AMD - with bangs', () => {
 
-        expect(lResult.modules).to.deep.equal(
-            require('./fixtures/donotfollow.json').modules
+    it('splits bang!./blabla into bang and ./blabla - regular requirejs', () => {
+        expect(
+            extract(
+                "test/extract/fixtures/amd-bangs/root_one.js",
+                normalize({
+                    moduleSystems: ["amd"]
+                }),
+                {}
+            )
+        ).to.deep.equal(
+            amdBangRequirejs
         );
-        expect(lResult).to.be.jsonSchema(depSchema);
+    });
+
+    it('splits bang!./blabla into bang and ./blabla - CommonJS wrapper', () => {
+        expect(
+            extract(
+                "test/extract/fixtures/amd-bangs/simplified-commonjs-wrapper.js",
+                normalize({
+                    moduleSystems: ["amd"]
+                }),
+                {}
+            )
+        ).to.deep.equal(
+            amdBangCJSWrapper
+        );
     });
 });
 
-/* eslint global-require: 0*/
+describe('TypeScript - ', () => tsFixtures.forEach(runFixture));
+describe('CoffeeScript - ', () => coffeeFixtures.forEach(runFixture));
+
+describe('Error scenarios - ', () => {
+    it('Does not raise an exception on syntax errors (because we\'re on the loose parser)', () => {
+        expect(
+            () => extract("test/extract/fixtures/syntax-error.js", normalize({}), {})
+        ).to.not.throw("Extracting dependencies ran afoul of... Unexpected token (1:3)");
+    });
+    it('Raises an exception on non-existing files', () => {
+        expect(
+            () => extract("non-existing-file.md", normalize({}), {})
+        ).to.throw(
+            "Extracting dependencies ran afoul of...\n\n  ENOENT: no such file or directory, open "
+        );
+    });
+});
+
+describe('even when require gets non-string arguments, extract doesn\'t break', () => {
+    it('Just skips require(481)', () => {
+        expect(
+            extract(
+                "./test/extract/fixtures/cjs-require-non-strings/require-a-number.js",
+                normalize({}),
+                {}
+            ).length
+        ).to.equal(1);
+    });
+
+    it('Just skips require(a function)', () => {
+        expect(
+            extract(
+                "./test/extract/fixtures/cjs-require-non-strings/require-a-function.js",
+                normalize({}),
+                {}
+            ).length
+        ).to.equal(1);
+    });
+
+    it('Just skips require(an iife)', () => {
+        expect(
+            extract(
+                "./test/extract/fixtures/cjs-require-non-strings/require-an-iife.js",
+                normalize({}),
+                {}
+            ).length
+        ).to.equal(1);
+    });
+});
+
+/* eslint max-len: 0 */

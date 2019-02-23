@@ -108,9 +108,10 @@ function makeOptionsPresentable(pOptions) {
 
 module.exports = (pFileDirArray, pOptions, pCallback, pResolveOptions, pTSConfig) => {
     const lCallback = pCallback ? pCallback : (pInput => pInput);
+    const lResolveOptions = pResolveOptions || {};
 
     let lModules = _(
-        extractFileDirArray(pFileDirArray, pOptions, pResolveOptions, pTSConfig).reduce(complete, [])
+        extractFileDirArray(pFileDirArray, pOptions, lResolveOptions, pTSConfig).reduce(complete, [])
     ).uniqBy(pDependency => pDependency.source)
         .value();
 
