@@ -1,7 +1,9 @@
-const path         = require('path');
-const resolve      = require('../../extract/resolve/resolve');
-const readConfig   = require('./readConfig');
-const mergeConfigs = require('./mergeConfigs');
+const path                    = require('path');
+const resolve                 = require('../../extract/resolve/resolve');
+const normalizeResolveOptions = require('../../main/resolveOptions/normalize');
+const readConfig              = require('./readConfig');
+const mergeConfigs            = require('./mergeConfigs');
+
 
 /* eslint no-use-before-define: 0 */
 function processExtends(pRetval, pAlreadyVisited, pBaseDir) {
@@ -31,9 +33,12 @@ function compileConfig(pConfigFileName, pAlreadyVisited = new Set(), pBaseDir = 
     const lResolvedFileName = resolve(
         pConfigFileName,
         pBaseDir,
-        {
-            extensions: [".js", ".json"]
-        },
+        normalizeResolveOptions(
+            {
+                extensions: [".js", ".json"]
+            },
+            {}
+        ),
         'cli'
     );
     const lBaseDir = path.dirname(lResolvedFileName);

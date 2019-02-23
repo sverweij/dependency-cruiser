@@ -1,6 +1,7 @@
-const path    = require('path');
-const expect  = require('chai').expect;
-const resolve = require('../../../src/extract/resolve');
+const path                    = require('path');
+const expect                  = require('chai').expect;
+const resolve                 = require('../../../src/extract/resolve');
+const normalizeResolveOptions = require('../../../src/main/resolveOptions/normalize');
 
 describe("resolve/index", () => {
     it("resolves a local dependency to a file on disk", () => {
@@ -12,7 +13,7 @@ describe("resolve/index", () => {
                 },
                 path.join(__dirname, 'fixtures'),
                 path.join(__dirname, 'fixtures', 'resolve'),
-                {}
+                normalizeResolveOptions({}, {})
             )
         ).to.deep.equal({
             coreModule: false,
@@ -80,7 +81,7 @@ describe("resolve/index", () => {
                 },
                 path.join(__dirname, 'fixtures'),
                 path.join(__dirname, 'fixtures', 'followability'),
-                {bustTheCache:true}
+                normalizeResolveOptions({bustTheCache:true}, {})
             )
         ).to.deep.equal({
             coreModule: false,
@@ -103,10 +104,14 @@ describe("resolve/index", () => {
                 },
                 path.join(__dirname, 'fixtures'),
                 path.join(__dirname, 'fixtures', 'followability'),
-                {
-                    extensions: [".js", ".json"],
-                    bustTheCache: true
-                }
+                normalizeResolveOptions(
+                    {
+                        extensions: [".js", ".json"],
+                        bustTheCache: true
+                    },
+                    {}
+                )
+
             )
         ).to.deep.equal({
             coreModule: false,
@@ -128,10 +133,13 @@ describe("resolve/index", () => {
                 },
                 path.join(__dirname, 'fixtures'),
                 path.join(__dirname, 'fixtures', 'followability'),
-                {
-                    extensions: [".js", ".json", ".scss"],
-                    bustTheCache: true
-                }
+                normalizeResolveOptions(
+                    {
+                        extensions: [".js", ".json", ".scss"],
+                        bustTheCache: true
+                    },
+                    {}
+                )
             )
         ).to.deep.equal({
             coreModule: false,
@@ -153,12 +161,15 @@ describe("resolve/index", () => {
                 },
                 path.join(__dirname, 'fixtures'),
                 path.join(__dirname, 'fixtures', 'resolve'),
-                {
-                    alias:{
-                        hoepla: path.join(__dirname, 'fixtures', 'i-got-aliased-to-hoepla')
+                normalizeResolveOptions(
+                    {
+                        alias:{
+                            hoepla: path.join(__dirname, 'fixtures', 'i-got-aliased-to-hoepla')
+                        },
+                        bustTheCache: true
                     },
-                    bustTheCache: true
-                }
+                    {}
+                )
             )
         ).to.deep.equal({
             coreModule: false,
@@ -180,10 +191,16 @@ describe("resolve/index", () => {
                 },
                 path.join(__dirname, 'fixtures'),
                 path.join(__dirname, 'fixtures', 'resolve'),
-                {
-                    modules: ["node_modules", path.join(__dirname, 'fixtures', 'localmodulesfix', 'localmoduleshere')],
-                    bustTheCache: true
-                }
+                normalizeResolveOptions(
+                    {
+                        modules: [
+                            "node_modules",
+                            path.join(__dirname, 'fixtures', 'localmodulesfix', 'localmoduleshere')
+                        ],
+                        bustTheCache: true
+                    },
+                    {}
+                )
             )
         ).to.deep.equal({
             coreModule: false,
@@ -205,10 +222,13 @@ describe("resolve/index", () => {
                 },
                 path.join(__dirname, 'fixtures'),
                 path.join(__dirname, 'fixtures', 'ts-config-with-path'),
-                {
-                    tsConfig: path.join(__dirname, 'fixtures', 'ts-config-with-path', 'tsconfig.json'),
-                    bustTheCache: true
-                }
+                normalizeResolveOptions(
+                    {
+                        tsConfig: path.join(__dirname, 'fixtures', 'ts-config-with-path', 'tsconfig.json'),
+                        bustTheCache: true
+                    },
+                    {}
+                )
             )
         ).to.deep.equal({
             coreModule: false,
@@ -230,10 +250,13 @@ describe("resolve/index", () => {
                 },
                 path.join(__dirname, 'fixtures'),
                 path.join(__dirname, 'fixtures', 'ts-config-with-path'),
-                {
-                    tsConfig: path.join(__dirname, 'fixtures', 'ts-config-with-path', 'tsconfig.json'),
-                    bustTheCache: true
-                }
+                normalizeResolveOptions(
+                    {
+                        tsConfig: path.join(__dirname, 'fixtures', 'ts-config-with-path', 'tsconfig.json'),
+                        bustTheCache: true
+                    },
+                    {}
+                )
             )
         ).to.deep.equal({
             coreModule: false,
@@ -255,10 +278,13 @@ describe("resolve/index", () => {
                 },
                 path.join(__dirname, 'fixtures'),
                 path.join(__dirname, 'fixtures', 'ts-config-with-path'),
-                {
-                    tsConfig: path.join(__dirname, 'fixtures', 'ts-config-with-path', 'tsconfig.json'),
-                    bustTheCache: true
-                }
+                normalizeResolveOptions(
+                    {
+                        tsConfig: path.join(__dirname, 'fixtures', 'ts-config-with-path', 'tsconfig.json'),
+                        bustTheCache: true
+                    },
+                    {}
+                )
             )
         ).to.deep.equal({
             coreModule: false,
@@ -271,7 +297,7 @@ describe("resolve/index", () => {
         });
     });
 
-    it("considers gives a different result for the same input without a webpack config", () => {
+    it("gives a different result for the same input without a webpack config", () => {
         expect(
             resolve(
                 {
@@ -280,9 +306,12 @@ describe("resolve/index", () => {
                 },
                 path.join(__dirname, 'fixtures'),
                 path.join(__dirname, 'fixtures', 'ts-config-with-path'),
-                {
-                    bustTheCache: true
-                }
+                normalizeResolveOptions(
+                    {
+                        bustTheCache: true
+                    },
+                    {}
+                )
             )
         ).to.deep.equal({
             coreModule: false,
