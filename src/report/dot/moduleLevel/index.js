@@ -53,7 +53,7 @@ function extractFirstTransgression(pModule){
  */
 function concatenateify(pPrefix, pSource) {
     if (pPrefix.match(/^[a-z]+:\/\//)) {
-        return `${pPrefix}/${pSource}`;
+        return `${pPrefix}${pSource}`;
     } else {
         return path.join(pPrefix, pSource);
     }
