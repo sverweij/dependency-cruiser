@@ -1,5 +1,6 @@
 const path            = require('path').posix;
-const Handlebars      = require("handlebars/runtime");
+const Handlebars      = require('handlebars/runtime');
+const _get            = require('lodash/get');
 const coloring        = require('../common/coloring');
 const folderify       = require('../common/folderify');
 const compareOnSource = require("../common/compareOnSource");
@@ -38,14 +39,34 @@ function extractFirstTransgression(pModule){
     );
 }
 
+/**
+ * Sort of smartly concatenate the given prefix and source:
+ *
+ * if it's an uri pattern (e.g. https://yadda, file://snorkel/bla)
+ * simply concat.
+ *
+ * in all other cases path.posix.join the two
+ *
+ * @param {string} pPrefix - prefix
+ * @param {string} pSource - filename
+ * @return {string} prefix and filename concatenated
+ */
+function concatenateify(pPrefix, pSource) {
+    if (pPrefix.match(/^[a-z]+:\/\//)) {
+        return `${pPrefix}${pSource}`;
+    } else {
+        return path.join(pPrefix, pSource);
+    }
+}
+
 function addURL(pInput) {
-    const lPrefix = pInput.summary.optionsUsed ? pInput.summary.optionsUsed.prefix || "" : "";
+    const lPrefix = _get(pInput, "summary.optionsUsed.prefix", '');
 
     return (pModule) =>
         Object.assign(
             {},
             pModule,
-            (pModule.coreModule || pModule.couldNotResolve) ? {} : {url: `${path.join(lPrefix, pModule.source)}`}
+            (pModule.coreModule || pModule.couldNotResolve) ? {} : {url: concatenateify(lPrefix, pModule.source)}
         );
 }
 

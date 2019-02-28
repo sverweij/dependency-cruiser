@@ -5,11 +5,15 @@ const deps             = require('../../fixtures/cjs-no-dependency-valid.json');
 const unresolvableDeps = require('../../fixtures/es6-unresolvable-deps.json');
 const doNotFollowDeps  = require('../../fixtures/do-not-follow-deps.json');
 const orphanDeps       = require('../../fixtures/orphan-deps.json');
+const prefixUri        = require('../../fixtures/prefix-uri.json');
+const prefixNonUri     = require('../../fixtures/prefix-non-uri.json');
 
 const clusterlessFixture  = fs.readFileSync('test/report/fixtures/clusterless.dot', 'utf8');
 const unresolvableFixture = fs.readFileSync('test/report/fixtures/unresolvable.dot', 'utf8');
 const doNotFollowFixture  = fs.readFileSync('test/report/fixtures/donotfollow.dot', 'utf8');
 const orphanFixture       = fs.readFileSync('test/report/fixtures/orphan-deps.dot', 'utf8');
+const prefixUriFixture    = fs.readFileSync('test/report/fixtures/prefix-uri.dot', 'utf8');
+const prefixNonUriFixture = fs.readFileSync('test/report/fixtures/prefix-non-uri.dot', 'utf8');
 
 describe("report/dot/moduleLevel reporter", () => {
     it("renders a dot - modules in the root don't come in a cluster", () => {
@@ -28,6 +32,13 @@ describe("report/dot/moduleLevel reporter", () => {
         expect(render(orphanDeps).modules).to.deep.equal(orphanFixture);
     });
 
+    it("renders a dot - uri prefix get concatenated", () => {
+        expect(render(prefixUri).modules).to.deep.equal(prefixUriFixture);
+    });
+
+    it("renders a dot - non-ur prefixes get path.posix.joined", () => {
+        expect(render(prefixNonUri).modules).to.deep.equal(prefixNonUriFixture);
+    });
 });
 
 /* eslint max-len: 0 */
