@@ -207,7 +207,7 @@ Rule                     | Description
 If you want the links in the svg output to have a prefix (say,
 `https://github.com/you/yourrepo/tree/master/`) so when you click them you'll
 open the link on github instead of the local file - pass that after the
-`--prefix` option.
+`--prefix` option. Typically you want the prefix to end on a `/`.
 
 ```sh
 depcruise --prefix https://github.com/sverweij/dependency-cruiser/tree/develop/ -T dot -x node_modules src | dot -T svg > dependencies.svg
