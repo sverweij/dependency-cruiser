@@ -1,7 +1,7 @@
 const expect = require('chai').expect;
 const localNpmHelpers = require('../../../src/extract/resolve/localNpmHelpers');
 
-describe("localNpmHelpers.getPackageJson", () => {
+describe("extract/resolve/localNpmHelpers.getPackageJson", () => {
     it("returns null if the module does not exist", () => {
         expect(
             localNpmHelpers.getPackageJson(
@@ -61,7 +61,7 @@ describe("localNpmHelpers.getPackageJson", () => {
     });
 });
 
-describe("localNpmHelpers.getPackageRoot", () => {
+describe("extract/resolve/localNpmHelpers.getPackageRoot", () => {
     it("returns undefined if called without parameters", () => {
         expect(
             typeof localNpmHelpers.getPackageRoot()
@@ -111,7 +111,7 @@ describe("localNpmHelpers.getPackageRoot", () => {
     });
 });
 
-describe("localNpmHelpers.getLicense", () => {
+describe("extract/resolve/localNpmHelpers.getLicense", () => {
     it("returns '' if the module does not exist", () => {
         expect(
             localNpmHelpers.getLicense('this-module-does-not-exist', '.', {})

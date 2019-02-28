@@ -6,7 +6,7 @@ const rootPackageJson = require('../../../../package.json');
 const FIXTUREDIR = "test/extract/resolve/fixtures";
 const WORKINGDIR = process.cwd();
 
-describe("readPackageDeps - classic strategy", () => {
+describe("extract/resolve/readPackageDeps - classic strategy", () => {
     afterEach("tear down", () => {
         process.chdir(WORKINGDIR);
     });
@@ -43,7 +43,7 @@ describe("readPackageDeps - classic strategy", () => {
     });
 });
 
-describe("readPackageDeps - combined dependencies strategy", () => {
+describe("extract/resolve/readPackageDeps - combined dependencies strategy", () => {
 
     afterEach("tear down", () => {
         process.chdir(WORKINGDIR);

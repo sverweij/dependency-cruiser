@@ -57,8 +57,8 @@ function runFixture(pFixture) {
     });
 }
 
-describe('CommonJS - ', () => cjsFixtures.forEach(runFixture));
-describe('CommonJS - with bangs', () => {
+describe('extract/extract - CommonJS - ', () => cjsFixtures.forEach(runFixture));
+describe('extract/extract - CommonJS - with bangs', () => {
 
     it('splits bang!./blabla into bang and ./blabla', () => {
         expect(
@@ -75,8 +75,8 @@ describe('CommonJS - with bangs', () => {
     });
 });
 
-describe('ES6 - ', () => es6Fixtures.forEach(runFixture));
-describe('AMD - ', () => amdFixtures.forEach(runFixture));
+describe('extract/extract - ES6 - ', () => es6Fixtures.forEach(runFixture));
+describe('extract/extract - AMD - ', () => amdFixtures.forEach(runFixture));
 describe('AMD - with bangs', () => {
 
     it('splits bang!./blabla into bang and ./blabla - regular requirejs', () => {
@@ -108,10 +108,10 @@ describe('AMD - with bangs', () => {
     });
 });
 
-describe('TypeScript - ', () => tsFixtures.forEach(runFixture));
-describe('CoffeeScript - ', () => coffeeFixtures.forEach(runFixture));
+describe('extract/extract - TypeScript - ', () => tsFixtures.forEach(runFixture));
+describe('extract/extract - CoffeeScript - ', () => coffeeFixtures.forEach(runFixture));
 
-describe('Error scenarios - ', () => {
+describe('extract/extract - Error scenarios - ', () => {
     it('Does not raise an exception on syntax errors (because we\'re on the loose parser)', () => {
         expect(
             () => extract("test/extract/fixtures/syntax-error.js", normalize({}), {})
@@ -126,7 +126,7 @@ describe('Error scenarios - ', () => {
     });
 });
 
-describe('even when require gets non-string arguments, extract doesn\'t break', () => {
+describe('extract/extract - even when require gets non-string arguments, extract doesn\'t break', () => {
     it('Just skips require(481)', () => {
         expect(
             extract(

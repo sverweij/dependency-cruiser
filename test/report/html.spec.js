@@ -267,7 +267,7 @@ const elFixture = `<!DOCTYPE html>
 </html>
 `;
 
-describe("html reporter", () => {
+describe("report/html reporter", () => {
     it("renders html - modules in the root don't come in a cluster; and one module could not be resolved", () => {
         expect(render(deps).modules).to.deep.equal(elFixture);
         // console.log(render(deps));

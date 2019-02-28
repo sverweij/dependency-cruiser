@@ -8,7 +8,7 @@ function pathToPosix(pPath) {
     return p2p(pPath);
 }
 
-describe("gatherInitial", () => {
+describe("extract/gatherInitialSources", () => {
     it("one file stays one file", () => {
         expect(
             gather(["test/extract/fixtures/cjs/root_one.js"], {}).map(pathToPosix)

@@ -29,18 +29,18 @@ function runRecursiveFixture(pFixture) {
     }
 }
 
-describe('CommonJS recursive - ', () => cjsRecursiveFixtures.forEach(runRecursiveFixture));
-describe('Deprecation - ', () => deprecationFixtures.forEach(runRecursiveFixture));
-describe('Bundled - ', () => bundledFixtures.forEach(runRecursiveFixture));
-describe('AMD recursive - ', () => amdRecursiveFixtures.forEach(runRecursiveFixture));
-describe('TypeScript recursive - ', () => tsRecursiveFixtures.forEach(runRecursiveFixture));
-describe('vue - ', () => vueFixtures.forEach(runRecursiveFixture));
+describe('extract/index - CommonJS recursive - ', () => cjsRecursiveFixtures.forEach(runRecursiveFixture));
+describe('extract/index - Deprecation - ', () => deprecationFixtures.forEach(runRecursiveFixture));
+describe('extract/index - Bundled - ', () => bundledFixtures.forEach(runRecursiveFixture));
+describe('extract/index - AMD recursive - ', () => amdRecursiveFixtures.forEach(runRecursiveFixture));
+describe('extract/index - TypeScript recursive - ', () => tsRecursiveFixtures.forEach(runRecursiveFixture));
+describe('extract/index - vue - ', () => vueFixtures.forEach(runRecursiveFixture));
 describe(
-    'CoffeeScript recursive - ',
+    'extract/index - CoffeeScript recursive - ',
     () => coffeeRecursiveFixtures.forEach(runRecursiveFixture)
 );
 
-describe('Max depth', () => {
+describe('extract/index - Max depth', () => {
     it('returns the complete graph when max-depth is 0', () => {
         const lResult = extract(
             ["./test/extract/fixtures/maxDepth/index.js"],
@@ -112,7 +112,7 @@ describe('Max depth', () => {
     });
 });
 
-describe('Do not follow', () => {
+describe('extract/index - Do not follow', () => {
     it('does not follow files matching the doNotFollow RE', () => {
         const lResult = extract(
             ["./test/extract/fixtures/donotfollow/index.js"],

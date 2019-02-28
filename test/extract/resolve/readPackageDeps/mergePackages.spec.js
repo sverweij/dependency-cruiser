@@ -62,7 +62,7 @@ const FIXTURE_MERGED =
         bundledDependencies: ["nodash", "slodash", "furtherdash"]
     };
 
-describe("mergePackages", () => {
+describe("extract/resolve/readPackageDeps/mergePackages", () => {
     it("merging empty packages yields {}", () => {
         expect(
             mergePackages({}, {})

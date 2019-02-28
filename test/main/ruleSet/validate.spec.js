@@ -32,7 +32,7 @@ function shouldBeOK(pRulesFile){
 }
 
 
-describe("ruleSetReader - regular", () => {
+describe("main/ruleSet/validate - regular", () => {
     it("barfs on an invalid rules file", () => {
         shouldBarfWithMessage(
             "./test/validate/fixtures/rules.not-a-valid-rulesfile.json",
@@ -74,7 +74,7 @@ describe("ruleSetReader - regular", () => {
 
 });
 
-describe("ruleSetReader - regexp safety checks", () => {
+describe("main/ruleSet/validate - regexp safety checks", () => {
     it("bails out on scary regexps in paths", () => {
         shouldBarfWithMessage(
             "./test/validate/fixtures/rules.scary-regex.json",

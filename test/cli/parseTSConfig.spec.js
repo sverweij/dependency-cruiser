@@ -5,7 +5,7 @@ const pathToPosix   = require("../../src/extract/utl/pathToPosix");
 
 const DIRNAME = pathToPosix(__dirname);
 
-describe("flatten typescript config - simple config scenarios", () => {
+describe("cli/parseTSConfig - flatten typescript config - simple config scenarios", () => {
     it("throws when no config file name is passed", () => {
         expect(() => parseTSConfig()).to.throw();
     });
@@ -51,7 +51,7 @@ describe("flatten typescript config - simple config scenarios", () => {
     });
 });
 
-describe("flatten typescript config - 'extend' config scenarios", () => {
+describe("cli/parseTSConfig - flatten typescript config - 'extend' config scenarios", () => {
     it("throws when a config file is passed that contains a extends to a non-existing file", () => {
         expect(
             () => parseTSConfig(

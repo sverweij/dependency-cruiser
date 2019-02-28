@@ -1,7 +1,7 @@
 const expect = require("chai").expect;
 const merge   = require("../../../src/cli/compileConfig/mergeConfigs");
 
-describe("mergeRuleSets - general", () => {
+describe("cli/mergeRuleSets - general", () => {
     it("two empty rule sets yield an empty rule set with named attributes", () => {
         expect(
             merge({}, {})
@@ -16,7 +16,7 @@ describe("mergeRuleSets - general", () => {
     });
 });
 
-describe("mergeRuleSets - forbidden", () => {
+describe("cli/mergeRuleSets - forbidden", () => {
     it("extending empty forbidden yields that forbidden", () => {
         expect(
             merge({forbidden: [{from: 'src', to: 'test'}]}, {})
@@ -153,7 +153,7 @@ describe("mergeRuleSets - forbidden", () => {
     });
 });
 
-describe("mergeRuleSets - allowed", () => {
+describe("cli/mergeRuleSets - allowed", () => {
     it("extending empty allowed yields that allowed", () => {
         expect(
             merge({allowed: [{from: 'test', to: 'src'}]}, {})
@@ -207,7 +207,7 @@ describe("mergeRuleSets - allowed", () => {
     });
 });
 
-describe("mergeRuleSets - allowedSeverity", () => {
+describe("cli/mergeRuleSets - allowedSeverity", () => {
     it("extending empty allowed yields allowedSeverity warn", () => {
         expect(
             merge({}, {})
@@ -261,7 +261,7 @@ describe("mergeRuleSets - allowedSeverity", () => {
     });
 });
 
-describe("mergeRuleSets - options", () => {
+describe("cli/mergeRuleSets - options", () => {
     it("extending empty options with some options yield those options", () => {
         expect(
             merge({options: {doNotFollow: 'node_modules', tsConfig: {fileName: './tsConfig.json'}}}, {})

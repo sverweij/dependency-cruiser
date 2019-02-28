@@ -6,7 +6,7 @@ const mergedFixture         = require('../fixtures/extends/merged.json');
 const mergedArrayOneFixture = require('../fixtures/extends/merged-array-1.json');
 const mergedArrayTwoFixture = require('../fixtures/extends/merged-array-2.json');
 
-describe("compileConfig", () => {
+describe("cli/compileConfig", () => {
     it("a rule set without an extends returns just that rule set", () => {
         expect(
             compileConfig(path.join(__dirname, "../fixtures/rules.sub-not-allowed-error.json"))

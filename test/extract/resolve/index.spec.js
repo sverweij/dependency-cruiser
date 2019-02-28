@@ -3,7 +3,7 @@ const expect                  = require('chai').expect;
 const resolve                 = require('../../../src/extract/resolve');
 const normalizeResolveOptions = require('../../../src/main/resolveOptions/normalize');
 
-describe("resolve/index", () => {
+describe("extract/resolve/index", () => {
     it("resolves a local dependency to a file on disk", () => {
         expect(
             resolve(

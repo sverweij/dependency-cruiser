@@ -4,7 +4,7 @@ const isOrphan = require('../../../../src/extract/derive/orphan/isOrphan');
 const ONE_MODULE_FIXTURE = require('./fixtures/oneModule.json');
 const TWO_MODULES_FIXTURE = require('./fixtures/twoModule.json');
 
-describe('isOrphan', () => {
+describe('extract/derive/orphan/isOrphan', () => {
     it('flags a single module dependency graph as orphan', () => {
         expect(
             isOrphan(

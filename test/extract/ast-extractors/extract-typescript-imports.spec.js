@@ -1,7 +1,7 @@
 const expect            = require('chai').expect;
 const extractTypescript = require('./extract-typescript.utl');
 
-describe("extract-typescript - regular imports", () => {
+describe("ast-extractors/extract-typescript - regular imports", () => {
 
     it("extracts 'import for side effects only'", () => {
         expect(
