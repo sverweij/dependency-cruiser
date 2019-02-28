@@ -1,7 +1,8 @@
 {
     "compilerOptions": {
         "target": "ES2015",
-        "lib": ["es2015"]
+        "lib": ["es2015"],
+        "baseUrl": "."
     },
     "files": [
         "./import_dynamically.ts"

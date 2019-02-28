@@ -87,7 +87,7 @@ const TO_A_CIRCLE_AND_IN_IT = [{
     "dependencies":[{"resolved":"a"}, {"resolved":"z"}]
 }];
 
-describe("dependencyEndsUpAtFrom", () => {
+describe("extract/derive/circular/dependencyEndsUpAtFrom", () => {
     it("leaves non circular dependencies alone", () => {
         expect(dependencyEndsUpAtFrom(A_B, "a", "b")).to.equal(false);
     });

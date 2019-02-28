@@ -2,7 +2,7 @@ const path             = require('path');
 const expect           = require('chai').expect;
 const normalizeOptions = require('../../src/cli/normalizeOptions');
 
-describe("normalizeOptions", () => {
+describe("cli/normalizeOptions", () => {
     const WORKINGDIR = process.cwd();
 
     afterEach(() => {
@@ -270,7 +270,7 @@ describe("normalizeOptions", () => {
     });
 });
 
-describe("normalizeOptions.determineRulesFileName", () => {
+describe("cli/normalizeOptions.determineRulesFileName", () => {
     it("returns '.dependency-cruiser.json' when no file name is passed", () => {
         expect(
             normalizeOptions.determineRulesFileName()

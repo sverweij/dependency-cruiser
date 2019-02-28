@@ -1,7 +1,7 @@
 const expect            = require('chai').expect;
 const extractTypescript = require('./extract-typescript.utl');
 
-describe("extract-typescript - triple slash directives", () => {
+describe("ast-extractors/extract-typescript - triple slash directives", () => {
 
     it("path", () => {
         expect(

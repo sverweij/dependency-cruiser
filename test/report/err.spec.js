@@ -5,7 +5,7 @@ const deps     = require('./fixtures/cjs-no-dependency-valid.json');
 const warndeps = require('./fixtures/err-only-warnings.json');
 const erradds  = require('./fixtures/err-with-additional-information.json');
 
-describe("err reporter", () => {
+describe("report/err", () => {
     it("says everything fine", () => {
         expect(render(okdeps).modules).to.contain('no dependency violations found');
     });

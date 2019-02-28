@@ -9,7 +9,7 @@ const consolidatedDot        = fs.readFileSync('test/report/dot/folderLevel/fixt
 const consolidatedOrphansDot = fs.readFileSync('test/report/dot/folderLevel/fixtures/consolidated-orphans.dot', 'utf8');
 const consolidatedRxJs       = fs.readFileSync('test/report/dot/folderLevel/fixtures/consolidated-rxjs.dot', 'utf8');
 
-describe("ddot reporter", () => {
+describe("report/dot/folderLevel reporter", () => {
     it("consolidates to folder level", () => {
         expect(render(deps).modules).to.deep.equal(consolidatedDot);
     });

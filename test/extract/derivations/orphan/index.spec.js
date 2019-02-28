@@ -6,7 +6,7 @@ const ONE_MODULE_AFTER_PROCESSING = require('./fixtures/oneModule.afterprocessin
 const TWO_MODULES_FIXTURE = require('./fixtures/twoModule.json');
 
 
-describe('orphan detection', () => {
+describe('extract/derive/orphan/index - orphan detection', () => {
 
     it('does _not_ attach the "orphan" boolean to orphan modules by default', () => {
         expect(orphan(ONE_MODULE_FIXTURE, {})).to.deep.equal(ONE_MODULE_FIXTURE);

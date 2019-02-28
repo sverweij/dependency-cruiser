@@ -1,6 +1,7 @@
-const enhancedResolve          = require('enhanced-resolve');
-const TsConfigPathsPlugin      = require('tsconfig-paths-webpack-plugin');
-const transpileMeta            = require('../transpile/meta');
+const _get                = require('lodash/get');
+const enhancedResolve     = require('enhanced-resolve');
+const TsConfigPathsPlugin = require('tsconfig-paths-webpack-plugin');
+const transpileMeta       = require('../../extract/transpile/meta');
 
 const CACHE_DURATION = 4000;
 
@@ -48,4 +49,18 @@ function compileResolveOptions(pResolveOptions){
     );
 }
 
-module.exports = compileResolveOptions;
+module.exports = (pResolveOptions, pOptions) => compileResolveOptions(
+    Object.assign(
+        {
+            symlinks: pOptions.preserveSymlinks,
+            tsConfig: _get(pOptions, "ruleSet.options.tsConfig.fileName", null),
+
+            /* squirel the combinedDependencies thing into the resolve options
+                - they're not for enhanced resolve, but they are for what we consider
+                resolve options ...
+            */
+            combinedDependencies: pOptions.combinedDependencies
+        },
+        pResolveOptions || {}
+    )
+);

@@ -2,7 +2,7 @@ const path             = require('path');
 const expect           = require('chai').expect;
 const getResolveConfig = require('../../src/cli/getResolveConfig');
 
-describe("getResolveConfig", () => {
+describe("cli/ getResolveConfig", () => {
     it("throws whenno config file name is passed", () => {
         expect(() => getResolveConfig()).to.throw();
     });

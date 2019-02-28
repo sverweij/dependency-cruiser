@@ -12,7 +12,7 @@ function _readRuleSet(pFileName) {
     );
 }
 
-describe("validate dependency - generic tests", () => {
+describe("validate/index dependency - generic tests", () => {
 
     it("is ok with the empty validation", () => {
         expect(
@@ -102,7 +102,7 @@ describe("validate dependency - generic tests", () => {
 
 });
 
-describe("validate - specific tests", () => {
+describe("validate/index - specific tests", () => {
     it("node_modules inhibition - ok", () => {
         expect(
             validate.dependency(
@@ -362,7 +362,7 @@ describe("validate - specific tests", () => {
 });
 
 
-describe("group matching - path group matched in a pathnot", () => {
+describe("validate/index group matching - path group matched in a pathnot", () => {
 
     it("group-to-pathnot - Disallows dependencies between peer folders", () => {
         expect(
@@ -428,7 +428,7 @@ describe("group matching - path group matched in a pathnot", () => {
     });
 });
 
-describe("group matching - second path group matched in a pathnot", () => {
+describe("validate/index group matching - second path group matched in a pathnot", () => {
 
     it("group-two-to-pathnot - Disallows dependencies between peer folders", () => {
         expect(
@@ -495,7 +495,7 @@ describe("group matching - second path group matched in a pathnot", () => {
 });
 
 
-describe("validate - license", () => {
+describe("validate/index - license", () => {
     it("Skips dependencies that have no license attached", () => {
         expect(
             validate.dependency(
@@ -536,7 +536,7 @@ describe("validate - license", () => {
     });
 });
 
-describe("validate - licenseNot", () => {
+describe("validate/index - licenseNot", () => {
     it("Skips dependencies that have no license attached", () => {
         expect(
             validate.dependency(
@@ -577,7 +577,7 @@ describe("validate - licenseNot", () => {
     });
 });
 
-describe("validate - orphans", () => {
+describe("validate/index - orphans", () => {
     it("Skips modules that have no orphan attribute", () => {
         expect(
             validate.module(

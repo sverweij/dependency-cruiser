@@ -11,7 +11,7 @@ const expect            = chai.expect;
 const RULES_FILE_JSON   = ".dependency-cruiser.json";
 const RULES_FILE_JS     = ".dependency-cruiser.js";
 
-describe("initConfig/index.js", () => {
+describe("initConfig/index", () => {
     const WORKINGDIR = process.cwd();
 
     afterEach("tear down", () => {

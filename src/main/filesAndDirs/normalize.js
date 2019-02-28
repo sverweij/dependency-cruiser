@@ -6,4 +6,4 @@ function relativize(pFileDir) {
         : pFileDir;
 }
 
-module.exports.normalize = (pFileDirArray) => pFileDirArray.map(relativize);
+module.exports = (pFileDirArray) => pFileDirArray.map(relativize);

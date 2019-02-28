@@ -90,7 +90,7 @@ function addResolutionAttributes(pOptions, pFileName, pResolveOptions) {
  *                            - exclude         - a regular expression string
  *                                                with a pattern of modules to exclude
  *                                                (e.g. "(node_modules)"). Default: none
- *                            - preserveSymlink - don't resolve symlinks.
+ *                            - preserveSymlinks - don't resolve symlinks.
  * @param {object} pResolveOptions an object with webpack 'enhanced-resolve' options
  * @param  {any} pTSConfig       an object with tsconfig ('typescript project') options
  *                               ('flattened' so there's no need for file access on any
@@ -99,27 +99,11 @@ function addResolutionAttributes(pOptions, pFileName, pResolveOptions) {
  */
 module.exports = (pFileName, pOptions, pResolveOptions, pTSConfig) => {
     try {
-        let lOptions = Object.assign(
-            {
-                baseDir: process.cwd(),
-                moduleSystems: ["cjs", "es6", "amd"],
-                tsPreCompilationDeps: false,
-                preserveSymlinks: false
-            },
-            pOptions
-        );
-        const lResolveOptions = Object.assign(
-            {},
-            pResolveOptions,
-            {symlinks: lOptions.preserveSymlinks},
-            {tsConfig: _.get(lOptions, "ruleSet.options.tsConfig.fileName", null)}
-        );
-
-        return _(extractDependencies(lOptions, pFileName, pTSConfig))
+        return _(extractDependencies(pOptions, pFileName, pTSConfig))
             .uniqBy(pDependency => `${pDependency.moduleName} ${pDependency.moduleSystem}`)
             .sortBy(pDependency => `${pDependency.moduleName} ${pDependency.moduleSystem}`)
-            .map(addResolutionAttributes(lOptions, pFileName, lResolveOptions))
-            .filter(pDep => ignore(pDep.resolved, lOptions.exclude))
+            .map(addResolutionAttributes(pOptions, pFileName, pResolveOptions))
+            .filter(pDep => ignore(pDep.resolved, pOptions.exclude))
             .value();
     } catch (e) {
         throw new Error(`Extracting dependencies ran afoul of...\n\n  ${e.message}\n... in ${pFileName}\n\n`);

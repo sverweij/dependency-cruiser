@@ -1,7 +1,7 @@
 const expect    = require('chai').expect;
 const normalize = require('../../../src/main/ruleSet/normalize');
 
-describe("ruleSet/normalize", () => {
+describe("main/ruleSet/normalize", () => {
     it("leaves the empty ruleset alone", () => {
         expect(normalize({})).to.deep.equal({});
     });

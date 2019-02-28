@@ -1,6 +1,7 @@
 const chai                    = require('chai');
 const extract                 = require('../../src/extract');
 const depSchema               = require('../../src/extract/jsonschema.json');
+const normalize               = require('../../src/main/options/normalize');
 const cjsRecursiveFixtures    = require('./fixtures/cjs-recursive.json');
 const deprecationFixtures     = require('./fixtures/deprecated-node-module.json');
 const bundledFixtures         = require('./fixtures/bundled-dependencies.json');
@@ -18,7 +19,7 @@ function runRecursiveFixture(pFixture) {
         it(pFixture.title, () => {
             let lResult = extract(
                 [pFixture.input.fileName],
-                pFixture.input.options
+                normalize(pFixture.input.options)
             );
 
             expect(lResult.modules).to.deep.equal(pFixture.expected);
@@ -28,21 +29,24 @@ function runRecursiveFixture(pFixture) {
     }
 }
 
-describe('CommonJS recursive - ', () => cjsRecursiveFixtures.forEach(runRecursiveFixture));
-describe('Deprecation - ', () => deprecationFixtures.forEach(runRecursiveFixture));
-describe('Bundled - ', () => bundledFixtures.forEach(runRecursiveFixture));
-describe('AMD recursive - ', () => amdRecursiveFixtures.forEach(runRecursiveFixture));
-describe('TypeScript recursive - ', () => tsRecursiveFixtures.forEach(runRecursiveFixture));
-describe('vue - ', () => vueFixtures.forEach(runRecursiveFixture));
+describe('extract/index - CommonJS recursive - ', () => cjsRecursiveFixtures.forEach(runRecursiveFixture));
+describe('extract/index - Deprecation - ', () => deprecationFixtures.forEach(runRecursiveFixture));
+describe('extract/index - Bundled - ', () => bundledFixtures.forEach(runRecursiveFixture));
+describe('extract/index - AMD recursive - ', () => amdRecursiveFixtures.forEach(runRecursiveFixture));
+describe('extract/index - TypeScript recursive - ', () => tsRecursiveFixtures.forEach(runRecursiveFixture));
+describe('extract/index - vue - ', () => vueFixtures.forEach(runRecursiveFixture));
 describe(
-    'CoffeeScript recursive - ',
+    'extract/index - CoffeeScript recursive - ',
     () => coffeeRecursiveFixtures.forEach(runRecursiveFixture)
 );
 
-describe('Max depth', () => {
-    it('returns the complete graph when max-depth is not specified', () => {
+describe('extract/index - Max depth', () => {
+    it('returns the complete graph when max-depth is 0', () => {
         const lResult = extract(
-            ["./test/extract/fixtures/maxDepth/index.js"]
+            ["./test/extract/fixtures/maxDepth/index.js"],
+            normalize({
+                maxDepth: 0
+            })
         );
 
         expect(lResult.modules).to.deep.equal(
@@ -54,9 +58,9 @@ describe('Max depth', () => {
     it('returns the file and one deep with --max-depth 1', () => {
         const lResult = extract(
             ["./test/extract/fixtures/maxDepth/index.js"],
-            {
+            normalize({
                 maxDepth: 1
-            }
+            })
         );
 
         expect(lResult.modules).to.deep.equal(
@@ -68,9 +72,9 @@ describe('Max depth', () => {
     it('returns the file and two deep with --max-depth 2', () => {
         const lResult = extract(
             ["./test/extract/fixtures/maxDepth/index.js"],
-            {
+            normalize({
                 maxDepth: 2
-            }
+            })
         );
 
         expect(lResult.modules).to.deep.equal(
@@ -82,9 +86,9 @@ describe('Max depth', () => {
     it('returns the file and three deep with --max-depth 3', () => {
         const lResult = extract(
             ["./test/extract/fixtures/maxDepth/index.js"],
-            {
+            normalize({
                 maxDepth: 3
-            }
+            })
         );
 
         expect(lResult.modules).to.deep.equal(
@@ -96,9 +100,9 @@ describe('Max depth', () => {
     it('returns the file and four deep with --max-depth 4', () => {
         const lResult = extract(
             ["./test/extract/fixtures/maxDepth/index.js"],
-            {
+            normalize({
                 maxDepth: 4
-            }
+            })
         );
 
         expect(lResult.modules).to.deep.equal(
@@ -108,13 +112,14 @@ describe('Max depth', () => {
     });
 });
 
-describe('Do not follow', () => {
+describe('extract/index - Do not follow', () => {
     it('does not follow files matching the doNotFollow RE', () => {
         const lResult = extract(
             ["./test/extract/fixtures/donotfollow/index.js"],
-            {
-                doNotFollow: "donotfollowonceinthisfolder"
-            }
+            normalize({
+                doNotFollow: "donotfollowonceinthisfolder",
+                maxDepth: 0
+            })
         );
 
         expect(lResult.modules).to.deep.equal(

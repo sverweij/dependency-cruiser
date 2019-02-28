@@ -10,7 +10,7 @@ const deps            = require('../../fixtures/richmodulecolor.json');
 const richColorFixture = fs.readFileSync('test/report/fixtures/richmodulecolor.dot', 'utf8');
 const boringColorFixture = fs.readFileSync('test/report/fixtures/defaultmodulecolor.dot', 'utf8');
 
-describe("dot reporter coloring", () => {
+describe("report/dot reporter coloring", () => {
     it("richly colors when passed a rich color scheme", () => {
         expect(renderRCDot(deps).modules).to.deep.equal(richColorFixture);
     });

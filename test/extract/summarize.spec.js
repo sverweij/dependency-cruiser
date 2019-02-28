@@ -3,7 +3,7 @@ const summarize = require('../../src/extract/summarize');
 
 const expect = chai.expect;
 
-describe('summarize extraction', () => {
+describe('extract/summarize - summarize extraction', () => {
     it('empty', () => {
         const lResult = summarize(
             []

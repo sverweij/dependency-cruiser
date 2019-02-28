@@ -1,7 +1,7 @@
 const expect            = require('chai').expect;
 const extractTypescript = require('./extract-typescript.utl');
 
-describe("extract-typescript - regular commonjs require", () => {
+describe("ast-extractors/extract-typescript - regular commonjs require", () => {
 
     it("extracts require of a module that uses an export-equals'", () => {
         expect(

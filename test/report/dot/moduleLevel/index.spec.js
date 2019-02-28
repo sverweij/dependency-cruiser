@@ -11,7 +11,7 @@ const unresolvableFixture = fs.readFileSync('test/report/fixtures/unresolvable.d
 const doNotFollowFixture  = fs.readFileSync('test/report/fixtures/donotfollow.dot', 'utf8');
 const orphanFixture       = fs.readFileSync('test/report/fixtures/orphan-deps.dot', 'utf8');
 
-describe("dot reporter", () => {
+describe("report/dot/moduleLevel reporter", () => {
     it("renders a dot - modules in the root don't come in a cluster", () => {
         expect(render(deps).modules).to.deep.equal(clusterlessFixture);
     });

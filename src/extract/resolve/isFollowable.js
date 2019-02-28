@@ -1,5 +1,4 @@
 const getExtension = require('../utl/getExtension');
-const compileResolveOptions = require('./compileResolveOptions');
 
 let gFollowableExtensions = new Set();
 let gFollowableExtensionsInitialized = false;
@@ -30,7 +29,7 @@ function initFollowableExtensions(pResolveOptions) {
 
 function init(pResolveOptions) {
     if (!gFollowableExtensionsInitialized || pResolveOptions.bustTheCache) {
-        gFollowableExtensions = initFollowableExtensions(compileResolveOptions(pResolveOptions));
+        gFollowableExtensions = initFollowableExtensions(pResolveOptions);
         gFollowableExtensionsInitialized = true;
     }
 }

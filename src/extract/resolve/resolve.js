@@ -1,6 +1,5 @@
 const enhancedResolve       = require('enhanced-resolve');
 const pathToPosix           = require('../utl/pathToPosix');
-const compileResolveOptions = require('./compileResolveOptions');
 
 let gResolver = null;
 let gInitialized = {};
@@ -8,7 +7,7 @@ let gInitialized = {};
 function init(pResolveOptions, pCachingContext) {
     if (!gInitialized[pCachingContext] || pResolveOptions.bustTheCache) {
         gResolver = enhancedResolve.ResolverFactory.createResolver(
-            compileResolveOptions(pResolveOptions)
+            pResolveOptions
         );
         /* eslint security/detect-object-injection:0 */
         gInitialized[pCachingContext] = true;
