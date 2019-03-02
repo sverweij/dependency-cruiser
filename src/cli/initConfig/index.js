@@ -1,6 +1,6 @@
 const createConfigFile = require('./createConfigFile');
 const getUserInput     = require('./getUserInput');
-const { pnpIsEnabled } = require('./helpers');
+const {pnpIsEnabled} = require('./helpers');
 
 const ONESHOT_CONFIGS = {
     "json": {

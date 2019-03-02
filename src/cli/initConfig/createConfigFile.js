@@ -1,7 +1,7 @@
 const fs             = require('fs');
 const Handlebars     = require('handlebars/runtime');
 const $package       = require('../../../package.json');
-const { fileExists } = require('./helpers');
+const {fileExists} = require('./helpers');
 
 /* eslint import/no-unassigned-import: 0 */
 require("./config.json.template");
