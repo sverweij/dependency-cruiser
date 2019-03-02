@@ -33,8 +33,9 @@
     - [`license` and `licenseNot`](#license-and-licensenot)
     - [`dependencyTypes`](#dependencytypes)
     - [`moreThanOneDependencyType`](#more-than-one-dependencytype-per-dependency-morethanonedependencytype)
-4. [Configurations in javascript](#configurations-in-javascript)
-5. [Starter rule set](#a-starter-rule-set)
+4. [`options` not also command line options](#options-not-also-command-line-options)
+5. [Configurations in javascript](#configurations-in-javascript)
+6. [Starter rule set](#a-starter-rule-set)
 
 ## The structure of a dependency cruiser rules file
 The typical dependency-cruiser config is json file (although you can use javascript -
@@ -142,41 +143,9 @@ The currently supported options are
 [`webpackConfig`](./cli.md#--webpack-config-use-the-resolution-options-of-a-webpack-configuration).
 See the [command line documentation](./cli.md) for details.
 
-In addition you can configure here how dependency-cruiser behaves itself in
+In addition you can configure here how dependency-cruiser should resolve external 
+modules and how dependency-cruiser behaves itself in
 mono repos with [`combinedDependencies`](#mono-repo-behavior--combinedDependencies)
-
-#### mono repo behavior - combinedDependencies
-If `combinedDependencies` is on `false` (the default) dependency-cruiser will
-search for a `package.json` closest up from the source file it investigates.
-This is the behavior you expect in a regular repo and in mono repos with
-independent packages. When in doubt keep this switch out of your config or
-set it on `false`.
-
-Example:
-- monodash/    
-  - package.json    
-  - packages/    
-     - begindash/    
-        - **package.json** <- _only look in this one_    
-        - src/    
-           - index.ts
-
-With `combinedDependencies` on `true` dependency-cruiser will merge dependencies
-from `package.json`s from closest up from the source file until the place you
-started the cruise (typically the root of your monorepo). It 'll give
-precedence to the dependencies declared in the package.json closest to
-the file it investigates:
-
-- monodash/    
- - **package.json** _<- look in this one as well; merge it into the one down the tree_    
- - packages/    
-    - begindash/    
-       - **package.json** _<- look in this one_    
-       - src/    
-          - index.ts
-
-
-
 
 ## The structure of an individual rule
 An individual rule consists at least of a `from` and a `to`
@@ -571,6 +540,45 @@ Things to keep in mind:
   when there's an orphan rule in the rule set. If you want to have it
   the detection in without a rule set or without an orphan rule,
   pass `forceOrphanCheck: true` as part of the `pOptions` parameter.
+
+## `options` not also command line options
+#### Yarn Plug'n'Play support - externalModuleResolutionStrategy
+If you're using yarn's Plug'n'Play to have external modules resolved and want 
+dependency-cruiser to take that into account, set the 
+`externalModuleResolutionStrategy` attribute to `yarn-pnp`. The default for this 
+attribute is `node_modules` which is the default strategy in the node ecosystem
+as well.
+
+#### mono repo behavior - combinedDependencies
+If `combinedDependencies` is on `false` (the default) dependency-cruiser will
+search for a `package.json` closest up from the source file it investigates.
+This is the behavior you expect in a regular repo and in mono repos with
+independent packages. When in doubt keep this switch out of your config or
+set it to `false`.
+
+Example:
+- monodash/    
+  - package.json    
+  - packages/    
+     - begindash/    
+        - **package.json** <- _only look in this one_    
+        - src/    
+           - index.ts
+
+With `combinedDependencies` on `true` dependency-cruiser will merge dependencies
+from `package.json`s from closest up from the source file until the place you
+started the cruise (typically the root of your monorepo). It 'll give
+precedence to the dependencies declared in the package.json closest to
+the file it investigates:
+
+- monodash/    
+ - **package.json** _<- look in this one as well; merge it into the one down the tree_    
+ - packages/    
+    - begindash/    
+       - **package.json** _<- look in this one_    
+       - src/    
+          - index.ts
+
 
 ## Configurations in javascript
 From version 4.7.0 you can pass a javascript module to `--validate`.
