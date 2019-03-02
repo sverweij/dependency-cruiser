@@ -1,11 +1,11 @@
-const path             = require('path').posix;
+const path             = require('path');
 const expect           = require('chai').expect;
 const normalizeOptions = require('../../../src/main/options/normalize');
 const normalize        = require('../../../src/main/resolveOptions/normalize');
 
 describe("main/resolveOptions/normalize", () => {
     const DEFAULT_NO_OF_RESOLVE_OPTIONS = 7;
-    const A_TEST_TSCONFIG = path.join(__dirname, "../fixtures/tsconfig.test.json");
+    const A_TEST_TSCONFIG = path.join(__dirname, "..", "fixtures", "tsconfig.test.json");
 
     it("comes with a set of defaults when passed with no options at all", () => {
         const lNormalizedOptions = normalize({}, normalizeOptions({}));
