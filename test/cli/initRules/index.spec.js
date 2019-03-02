@@ -2,7 +2,7 @@ const fs                = require('fs');
 const path              = require('path');
 const chai              = require('chai');
 const stripJSONComments = require('strip-json-comments');
-const initConfig         = require("../../../src/cli/initConfig");
+const initConfig        = require("../../../src/cli/initConfig");
 const rulesSchema       = require('../../../src/main/ruleSet/jsonschema.json');
 const deleteDammit      = require("../deleteDammit.utl");
 

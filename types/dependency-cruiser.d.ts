@@ -41,6 +41,8 @@ export type DependencyType = "aliased"       | "core"        | "deprecated"  | "
                             | "npm-no-pkg"   | "npm-optional" | "npm-peer"   | "npm-unknown"
                             | "undetermined" | "unknown";
 
+export type ExternalModuleResolutionStrategyType = "node_modules" | "yarn-pnp";
+
 export interface IFromRestriction {
     /**
      * A regular expression an end of a dependency should match to be catched by this rule.
@@ -230,6 +232,14 @@ export interface ICruiseOptions {
      * since version 6)
      */
     preserveSymlinks?: boolean;
+    /**
+     * The way to resolve external modules - either via node_modules
+     * ('node_modules') or yarn plug and play ('yarn-pnp').
+     * Might later also include npm's tink (?)
+     *
+     * Defaults to 'node_modules'
+     */
+    externalModuleResolutionStrategy?: ExternalModuleResolutionStrategyType;
     /**
      * if true combines the package.jsons found from the module up to the base
      * folder the cruise is initiated from. Useful for how (some) mono-repos

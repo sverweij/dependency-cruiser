@@ -90,6 +90,14 @@
                     "type": "boolean",
                     "description": "if true detect dependencies that only exist before typescript-to-javascript compilation."
                 },
+                "externalModuleResolutionStrategy": {
+                    "type": "string",
+                    "description": "What external module resolution strategy to use. Defaults to 'node_modules'",
+                    "enum": [
+                        "node_modules",
+                        "yarn-pnp"
+                    ]
+                },
                 "webpackConfig": {
                     "type": "object",
                     "additionalProperties": false,
