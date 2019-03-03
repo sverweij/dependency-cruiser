@@ -26,6 +26,11 @@ function runTest(){
             return lReturnValue;
         }
 
+        if (lDependencyGraph.summary.optionsUsed.externalModuleResolutionStrategy !== "yarn-pnp") {
+            lReturnValue.message = "surprisingly, hasn't run with yarn pnp as resolution strategy";
+            return lReturnValue;
+        }
+
         lReturnValue.message = "everything seems to be fine";
         lReturnValue.exitCode = 0;
         return lReturnValue;
