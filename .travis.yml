@@ -17,7 +17,7 @@ before_script:
 
 script:
   - npm run depcruise
-  - 'npm run test:glob && npm run test:cover'
+  - 'npm run test:glob && npm run test:cover && npm run test:integration'
   - 'if test `node --version | cut -c 2` = 10; then npm run lint; fi'
 
 after_script:

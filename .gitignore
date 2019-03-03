@@ -22,3 +22,6 @@ npm-debug.log
 yarn-error.log
 package-lock.json
 .pnp*
+
+# integration test intermediate files
+test/integration/*.testing-ground
