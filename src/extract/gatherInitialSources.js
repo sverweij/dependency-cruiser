@@ -3,7 +3,7 @@ const path          = require('path');
 const glob          = require('glob');
 const ignore        = require('./ignore');
 const transpileMeta = require('./transpile/meta');
-
+const pathToPosix   = require('./utl/pathToPosix');
 
 const SUPPORTED_EXTENSIONS = transpileMeta.scannableExtensions;
 
@@ -18,7 +18,7 @@ function gatherScannableFilesFromDir (pDirName, pOptions) {
             }
             return pSum;
         }, [])
-        .filter(pFullPathToFile => ignore(pFullPathToFile, pOptions.exclude));
+        .filter(pFullPathToFile => ignore(pathToPosix(pFullPathToFile), pOptions.exclude));
 }
 
 /**
