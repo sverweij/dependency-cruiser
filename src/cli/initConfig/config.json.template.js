@@ -25,6 +25,14 @@ templates['config.json.template.hbs'] = template({"1":function(container,depth0,
     + "\"\n            //, \"env\": {}\n            //, \"args\": {}\n        }\n";
 },"11":function(container,depth0,helpers,partials,data) {
     return "        // , \"webpackConfig\": {\n        //    \"fileName\": \"./webpack.conf.js\"\n        //    , \"env\": {}\n        //    , \"args\": {}\n        // }\n";
+},"13":function(container,depth0,helpers,partials,data) {
+    var helper;
+
+  return "        , \"externalModuleResolutionStrategy\": \""
+    + container.escapeExpression(((helper = (helper = helpers.externalModuleResolutionStrategy || (depth0 != null ? depth0.externalModuleResolutionStrategy : depth0)) != null ? helper : helpers.helperMissing),(typeof helper === "function" ? helper.call(depth0 != null ? depth0 : (container.nullContext || {}),{"name":"externalModuleResolutionStrategy","hash":{},"data":data}) : helper)))
+    + "\"\n";
+},"15":function(container,depth0,helpers,partials,data) {
+    return "        // , \"externalModuleResolutionStrategy\": \"node_modules\"\n";
 },"compiler":[7,">= 4.0.0"],"main":function(container,depth0,helpers,partials,data) {
     var stack1, helper, alias1=depth0 != null ? depth0 : (container.nullContext || {}), alias2=helpers.helperMissing, alias3="function", alias4=container.escapeExpression;
 
@@ -34,6 +42,8 @@ templates['config.json.template.hbs'] = template({"1":function(container,depth0,
     + ((stack1 = helpers["if"].call(alias1,(depth0 != null ? depth0.tsConfig : depth0),{"name":"if","hash":{},"fn":container.program(5, data, 0),"inverse":container.program(7, data, 0),"data":data})) != null ? stack1 : "")
     + "\n        /* Webpack configuration to use to get resolve options from.\n\n          The (optional) fileName attribute specifies which file to take (relative to dependency-cruiser's\n          current working directory. When not provided defaults to './webpack.conf.js'.\n\n          The (optional) `env` and `args` attributes contain the parameters to be passed if\n          your webpack config is a function and takes them (see webpack documentation\n          for details)\n         */\n"
     + ((stack1 = helpers["if"].call(alias1,(depth0 != null ? depth0.webpackConfig : depth0),{"name":"if","hash":{},"fn":container.program(9, data, 0),"inverse":container.program(11, data, 0),"data":data})) != null ? stack1 : "")
+    + "\n        /* How to resolve external modules - use \"yarn-pnp\" if you're using yarn's Plug'n'Play.\n           otherwise leave it out (or set to the default, which is 'node_modules')\n        */\n"
+    + ((stack1 = helpers["if"].call(alias1,(depth0 != null ? depth0.externalModuleResolutionStrategy : depth0),{"name":"if","hash":{},"fn":container.program(13, data, 0),"inverse":container.program(15, data, 0),"data":data})) != null ? stack1 : "")
     + "    }\n}\n// generated: dependency-cruiser@"
     + alias4(((helper = (helper = helpers.version || (depth0 != null ? depth0.version : depth0)) != null ? helper : alias2),(typeof helper === alias3 ? helper.call(alias1,{"name":"version","hash":{},"data":data}) : helper)))
     + " on "

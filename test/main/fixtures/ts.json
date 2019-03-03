@@ -127,7 +127,8 @@
         "optionsUsed":{
             "moduleSystems": ["amd", "cjs", "es6"],
             "tsPreCompilationDeps": false,
-            "preserveSymlinks": false
+            "preserveSymlinks": false,
+            "externalModuleResolutionStrategy": "node_modules"
         }
     }
 }

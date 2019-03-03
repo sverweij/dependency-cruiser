@@ -92,7 +92,8 @@ function makeOptionsPresentable(pOptions) {
         "prefix",
         "tsPreCompilationDeps",
         "preserveSymlinks",
-        "webpackConfig"
+        "webpackConfig",
+        "externalModuleResolutionStrategy"
     ];
 
     return SHARABLE_OPTIONS

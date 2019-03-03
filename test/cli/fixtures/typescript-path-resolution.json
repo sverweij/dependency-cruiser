@@ -62,7 +62,8 @@
             "preserveSymlinks": false,
             "webpackConfig": {
                 "fileName": "test/cli/fixtures/typescriptconfig/cli-config-with-path/webpack.config.js"
-            }
+            },
+            "externalModuleResolutionStrategy": "node_modules"
         }
     }
 }

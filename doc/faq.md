@@ -54,6 +54,17 @@ ecmascript) might come later.
 Absolutely. For every cruised module the closest `package.json` file is used to determine
 if a package was declared as dependency.
 
+### You ever heard of Yarn Plug'n'Play? When are you going to support it?
+Yarn Plug'n'Play (_pnp_) works since version 4.6.1, but you did have to
+pass a webpack config that had the pnp resolver plugin configured.
+
+From version 4.14.0 dependency-cruiser supports yarn pnp out of the box -
+just specify it in your dependency-cruiser configuration with the 
+_externalModuleResolutionStrategy_ key:
+```json
+"externalModuleResolutionStrategy": "yarn-pnp"
+```
+
 ## Troubleshooting
 ### Typescript, coffeescript or livescript dependencies don't show up. How can I fix that?
 

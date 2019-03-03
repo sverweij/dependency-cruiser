@@ -68,7 +68,8 @@
             "preserveSymlinks": false,
             "webpackConfig": {
                 "fileName": "test/cli/fixtures/webpackconfig/aliassy/webpack.regularexport.config.js"
-            }
+            },
+            "externalModuleResolutionStrategy": "node_modules"
         }
     }
 }

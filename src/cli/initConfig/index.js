@@ -1,16 +1,19 @@
 const createConfigFile = require('./createConfigFile');
 const getUserInput     = require('./getUserInput');
+const {pnpIsEnabled} = require('./helpers');
 
 const ONESHOT_CONFIGS = {
     "json": {
         configFormat: ".json",
         configType: "preset",
-        preset: "dependency-cruiser/configs/recommended-strict"
+        preset: "dependency-cruiser/configs/recommended-strict",
+        useYarnPnP: pnpIsEnabled()
     },
     "js": {
         configFormat: ".js",
         configType: "preset",
-        preset: "dependency-cruiser/configs/recommended-strict"
+        preset: "dependency-cruiser/configs/recommended-strict",
+        useYarnPnP: pnpIsEnabled()
     }
 };
 

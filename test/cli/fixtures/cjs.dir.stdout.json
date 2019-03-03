@@ -392,7 +392,8 @@
                 "cjs",
                 "es6"
             ],
-            "outputType": "json"
+            "outputType": "json",
+            "externalModuleResolutionStrategy": "node_modules"
         }
     }
 }

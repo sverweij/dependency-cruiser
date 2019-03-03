@@ -4,5 +4,6 @@
     "moduleSystems": ["amd", "cjs", "es6"],
     "tsPreCompilationDeps": false,
     "preserveSymlinks": false,
-    "combinedDependencies": false
+    "combinedDependencies": false,
+    "externalModuleResolutionStrategy": "node_modules"
 }

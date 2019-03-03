@@ -53,6 +53,11 @@ function normalizeInitOptions(pInitOptions){
     if (lRetval.configType === "preset" && !lRetval.preset) {
         lRetval.preset = "dependency-cruiser/configs/recommended-warn-only";
     }
+
+    if (lRetval.useYarnPnP) {
+        lRetval.externalModuleResolutionStrategy = "yarn-pnp";
+    }
+
     return lRetval;
 }
 

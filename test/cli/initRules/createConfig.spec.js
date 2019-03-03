@@ -137,6 +137,36 @@ describe("cli/initRules/createConfig", () => {
         }
     });
 
+    it("writes a valid config to .dependency-cruiser.json - useYarnPnP", () => {
+        process.chdir('test/cli/fixtures/init-config/no-config-files-exist');
+        const configResultFileName = `./${path.join('../fixtures/init-config/no-config-files-exist', RULES_FILE_JSON)}`;
+
+        try {
+            createConfigFile(
+                {
+                    configFormat:".json",
+                    useYarnPnP: true
+                }
+            );
+            /* eslint global-require:0, security/detect-non-literal-require:0, import/no-dynamic-require:0 */
+            const lResult = JSON.parse(
+                stripJSONComments(
+                    fs.readFileSync(RULES_FILE_JSON, "utf8")
+                )
+            );
+
+            expect(lResult).to.be.jsonSchema(rulesSchema);
+            expect(lResult).to.haveOwnProperty("options");
+            expect(lResult.options.externalModuleResolutionStrategy).to.equal("yarn-pnp");
+        } finally {
+            Reflect.deleteProperty(
+                require.cache,
+                require.resolve(configResultFileName)
+            );
+            deleteDammit(RULES_FILE_JSON);
+        }
+    });
+
     it("writes a valid config to .dependency-cruiser.js", () => {
         process.chdir('test/cli/fixtures/init-config/no-config-files-exist');
         const configResultFileName = `./${path.join('../fixtures/init-config/no-config-files-exist', RULES_FILE_JS)}`;
@@ -231,6 +261,32 @@ describe("cli/initRules/createConfig", () => {
             expect(lResult).to.be.jsonSchema(rulesSchema);
             expect(lResult).to.haveOwnProperty("options");
             expect(lResult.options.tsConfig).to.deep.equal({fileName: "./tsconfig.json"});
+        } finally {
+            Reflect.deleteProperty(
+                require.cache,
+                require.resolve(configResultFileName)
+            );
+            deleteDammit(RULES_FILE_JS);
+        }
+    });
+
+    it("writes a valid config to .dependency-cruiser.js - useYarnPnP", () => {
+        process.chdir('test/cli/fixtures/init-config/no-config-files-exist');
+        const configResultFileName = `./${path.join('../fixtures/init-config/no-config-files-exist', RULES_FILE_JS)}`;
+
+        try {
+            createConfigFile(
+                {
+                    configFormat:".js",
+                    useYarnPnP: true
+                }
+            );
+            /* eslint global-require:0, security/detect-non-literal-require:0, import/no-dynamic-require:0 */
+            const lResult = require(configResultFileName);
+
+            expect(lResult).to.be.jsonSchema(rulesSchema);
+            expect(lResult).to.haveOwnProperty("options");
+            expect(lResult.options.externalModuleResolutionStrategy).to.equal("yarn-pnp");
         } finally {
             Reflect.deleteProperty(
                 require.cache,

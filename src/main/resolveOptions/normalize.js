@@ -1,9 +1,14 @@
 const _get                = require('lodash/get');
 const enhancedResolve     = require('enhanced-resolve');
+const PnpWebpackPlugin    = require('pnp-webpack-plugin');
 const TsConfigPathsPlugin = require('tsconfig-paths-webpack-plugin');
 const transpileMeta       = require('../../extract/transpile/meta');
 
 const CACHE_DURATION = 4000;
+
+function pushPlugin(pPlugins, pPluginToPush) {
+    return (pPlugins || []).concat(pPluginToPush);
+}
 
 function compileResolveOptions(pResolveOptions){
     let DEFAULT_RESOLVE_OPTIONS = {
@@ -36,9 +41,17 @@ function compileResolveOptions(pResolveOptions){
     let lResolveOptions = {};
 
     if (pResolveOptions.tsConfig) {
-        lResolveOptions.plugins = [
+        lResolveOptions.plugins = pushPlugin(
+            lResolveOptions.plugins,
             new TsConfigPathsPlugin({configFile: pResolveOptions.tsConfig})
-        ];
+        );
+    }
+
+    if (pResolveOptions.externalModuleResolutionStrategy === 'yarn-pnp') {
+        lResolveOptions.plugins = pushPlugin(
+            lResolveOptions.plugins,
+            PnpWebpackPlugin
+        );
     }
 
     return Object.assign(
@@ -55,10 +68,12 @@ module.exports = (pResolveOptions, pOptions) => compileResolveOptions(
             symlinks: pOptions.preserveSymlinks,
             tsConfig: _get(pOptions, "ruleSet.options.tsConfig.fileName", null),
 
-            /* squirel the combinedDependencies thing into the resolve options
+            /* squirel the externalModuleResolutionStrategy and combinedDependencies
+               thing into the resolve options
                 - they're not for enhanced resolve, but they are for what we consider
                 resolve options ...
             */
+            externalModuleResolutionStrategy: pOptions.externalModuleResolutionStrategy,
             combinedDependencies: pOptions.combinedDependencies
         },
         pResolveOptions || {}

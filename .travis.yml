@@ -18,7 +18,7 @@ before_script:
 script:
   - npm run depcruise
   - 'npm run test:glob && npm run test:cover'
-  - 'if test `node --version | cut -c 2` = 10; then npm run lint; fi'
+  - 'if test `node --version | cut -c 2,3` = 10; then npm run lint && npm run test:integration; fi'
 
 after_script:
   - ./cc-test-reporter after-build --exit-code $TRAVIS_TEST_RESULT

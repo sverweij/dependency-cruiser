@@ -1,6 +1,6 @@
 const inquirer     = require('inquirer');
 const $defaults    = require('../defaults.json');
-const {fileExists} = require('./helpers');
+const {fileExists, pnpIsEnabled} = require('./helpers');
 
 
 const TYPESCRIPT_CONFIG = `./${$defaults.TYPESCRIPT_CONFIG}`;
@@ -44,6 +44,13 @@ const INQUIRER_QUESTIONS = [
         ],
         default: "dependency-cruiser/configs/recommended-warn-only",
         when: pAnswers => pAnswers.configType === "preset"
+    },
+    {
+        name: "useYarnPnP",
+        type: "confirm",
+        message: "You seem to be using yarn Plug'n'Play. Take that into account?",
+        default: true,
+        when: () => pnpIsEnabled()
     },
     {
         name: "useTsConfig",

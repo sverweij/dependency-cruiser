@@ -288,7 +288,8 @@
             ],
             "outputType": "json",
             "tsPreCompilationDeps": false,
-            "preserveSymlinks": false
+            "preserveSymlinks": false,
+            "externalModuleResolutionStrategy": "node_modules"
         }
     }
 }
