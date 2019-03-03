@@ -168,6 +168,30 @@ describe("extract/gatherInitialSources", () => {
         );
     });
 
+    it("filters out the stuff in the exclude pattern", () => {
+        expect(
+            gather(
+                [
+                    "test/extract/fixtures/gather-globbing/**/src"
+                ],
+                {
+                    exclude: "/deep/ly/"
+                }
+            ).map(pathToPosix)
+        ).to.deep.equal(
+            [
+                "test/extract/fixtures/gather-globbing/packages/baldr/src/bow.js",
+                "test/extract/fixtures/gather-globbing/packages/baldr/src/index.js",
+                "test/extract/fixtures/gather-globbing/packages/baldr/src/typo.ts",
+                "test/extract/fixtures/gather-globbing/packages/loki/src/fake/nothing.to.see.here.ts",
+                "test/extract/fixtures/gather-globbing/packages/loki/src/index.spec.ts",
+                "test/extract/fixtures/gather-globbing/packages/loki/src/index.ts",
+                "test/extract/fixtures/gather-globbing/packages/odin/src/deep/ly.js",
+                "test/extract/fixtures/gather-globbing/packages/odin/src/deep/ly.spec.js"
+            ]
+        );
+    });
+
     /*
     it("using the same file twice as input has the same result as using it once", () => {
         expect(

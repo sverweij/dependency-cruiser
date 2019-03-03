@@ -44,6 +44,12 @@ function extractDependencies(pOptions, pFileName, pTSConfig) {
     return lDependencies;
 }
 
+function matchesDoNotFollow(pResolved, pDoNotFollow) {
+    return Boolean(pDoNotFollow)
+        ? RegExp(pDoNotFollow, "g").test(pResolved)
+        : false;
+}
+
 function addResolutionAttributes(pOptions, pFileName, pResolveOptions) {
     return pDependency => {
         const lResolved = resolve(
@@ -52,9 +58,7 @@ function addResolutionAttributes(pOptions, pFileName, pResolveOptions) {
             path.join(pOptions.baseDir, path.dirname(pFileName)),
             pResolveOptions
         );
-        const lMatchesDoNotFollow = Boolean(pOptions.doNotFollow)
-            ? RegExp(pOptions.doNotFollow, "g").test(lResolved.resolved)
-            : false;
+        const lMatchesDoNotFollow = matchesDoNotFollow(lResolved.resolved, pOptions.doNotFollow);
 
         return Object.assign(
             lResolved,
