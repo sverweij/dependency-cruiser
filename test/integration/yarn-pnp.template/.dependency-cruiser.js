@@ -1,84 +1,29 @@
 module.exports = {
-    forbidden: [
-        /* rules from the 'recommended' preset: */
-        {
-            name: 'no-circular',
-            severity: 'warn',
-            comment: 'Warn in case there\'s circular dependencies',
-            from: {},
-            to: {
-                circular: true
-            }
-        },
-        {
-            name: 'no-orphans',
-            severity: 'info',
-            comment: 'Inform in case there\'s orphans hiding in the code base',
-            from: {
-                orphan: true,
-                pathNot: '\\.d\\.ts$'
-            },
-            to: {}
-        },
-        {
-            name: 'no-deprecated-core',
-            comment: 'Warn about dependencies on deprecated core modules.',
-            severity: 'warn',
-            from: {},
-            to: {
-                dependencyTypes: [
-                  'core'
-                ],
-                path: '^(punycode|domain|constants|sys|_linklist)$'
-            }
-        },
-        {
-            name: 'no-deprecated-npm',
-            comment: 'These npm modules are deprecated - find an alternative.',
-            severity: 'warn',
-            from: {},
-            to: {
-                dependencyTypes: [
-                  'deprecated'
-                ]
-            }
-        },
-        {
-            name: 'no-non-package-json',
-            severity: 'warn',
-            comment: 'Don\'t allow dependencies to packages not in package.json',
-            from: {},
-            to: {
-                dependencyTypes: [
-                  'npm-no-pkg',
-                  'npm-unknown'
-                ]
-            }
-        },
-        {
-            name: 'not-to-unresolvable',
-            comment: 'Don\'t allow dependencies on modules dependency-cruiser can\'t resolve to files on disk (which probably means they don\'t exist)',
-            severity: 'warn',
-            from: {},
-            to: {
-                couldNotResolve: true
-            }
-        },
-        {
-            name: 'no-duplicate-dep-types',
-            comment: 'Warn if a dependency you\'re actually using occurs in your package.json more than once (technically: has more than one dependency type)',
-            severity: 'warn',
-            from: {},
-            to: {
-                moreThanOneDependencyType: true
-            }
-        },
+    'extends': 'dependency-cruiser/configs/recommended-strict',
+    /*
+       the 'dependency-cruiser/configs/recommended-strict' preset
+       contains these rules:
+       no-circular            - flags all circular dependencies
+       no-orphans             - flags orphan modules (except typescript .d.ts files)
+       no-deprecated-core     - flags dependencies on deprecated node 'core' modules
+       no-deprecated-npm      - flags dependencies on deprecated npm modules
+       no-non-package-json    - flags (npm) dependencies that don't occur in package.json
+       not-to-unresolvable    - flags dependencies that can't be resolved
+       no-duplicate-dep-types - flags dependencies that occur more than once in package.json
 
-        /* rules you might want to tweak for your specific situation: */
+       If you need to, you can override these rules. E.g. to ignore the
+       no-duplicate-dep-types rule, you can set its severity to "ignore" by
+       adding this to the 'forbidden' section:
+       {
+            name: 'no-duplicate-dep-types',
+            severity: 'ignore'
+       }
+     */
+    forbidden: [
         {
             name: 'not-to-test',
             comment: 'Don\'t allow dependencies from outside the test folder to test',
-            severity: 'warn',
+            severity: 'error',
             from: {
                 pathNot: '^(test|spec)'
             },
@@ -89,7 +34,7 @@ module.exports = {
         {
             name: 'not-to-spec',
             comment: 'Don\'t allow dependencies to (typescript/ javascript/ coffeescript) spec files',
-            severity: 'warn',
+            severity: 'error',
             from: {},
             to: {
                 path: '\\.spec\\.(js|ts|ls|coffee|litcoffee|coffee\\.md)$'
@@ -97,7 +42,7 @@ module.exports = {
         },
         {
             name: 'not-to-dev-dep',
-            severity: 'warn',
+            severity: 'error',
             comment: 'Don\'t allow dependencies from src/app/lib to a development only package',
             from: {
                 path: '^(src|app|lib)',
@@ -193,4 +138,4 @@ module.exports = {
         , externalModuleResolutionStrategy: 'yarn-pnp'
     }
 };
-// generated: dependency-cruiser@4.14.0-beta-3 on 2019-03-03T14:22:42.548Z
+// generated: dependency-cruiser@4.14.0-beta-4 on 2019-03-04T20:12:32.129Z

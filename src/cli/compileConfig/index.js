@@ -28,6 +28,11 @@ function processExtends(pRetval, pAlreadyVisited, pBaseDir) {
     return pRetval;
 }
 
+function getRunningProcessResolutionStrategy() {
+    /* istanbul ignore next - the pnp branch _is_ covered in the integration test, though */
+    return process.versions.pnp ? "yarn-pnp" : "node_modules";
+}
+
 function compileConfig(pConfigFileName, pAlreadyVisited = new Set(), pBaseDir = process.cwd()) {
 
     const lResolvedFileName = resolve(
@@ -37,7 +42,9 @@ function compileConfig(pConfigFileName, pAlreadyVisited = new Set(), pBaseDir = 
             {
                 extensions: [".js", ".json"]
             },
-            {}
+            {
+                externalModuleResolutionStrategy: getRunningProcessResolutionStrategy()
+            }
         ),
         'cli'
     );
