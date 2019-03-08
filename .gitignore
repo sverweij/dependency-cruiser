@@ -22,6 +22,7 @@ npm-debug.log
 yarn-error.log
 package-lock.json
 .pnp*
+dependency-cruiser-*.tgz
 
 # integration test intermediate files
 test/integration/*.testing-ground

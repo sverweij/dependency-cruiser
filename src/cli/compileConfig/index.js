@@ -29,8 +29,13 @@ function processExtends(pRetval, pAlreadyVisited, pBaseDir) {
 }
 
 function getRunningProcessResolutionStrategy() {
-    /* istanbul ignore next - the pnp branch _is_ covered in the integration test, though */
-    return process.versions.pnp ? "yarn-pnp" : "node_modules";
+    // This should work, but doesn't:
+    // process.versions.pnp ? "yarn-pnp" : "node_modules";
+
+    // "yarn-pnp" works both for the pnp and for the node_modules strategies,
+    // and because it's only for the config it won't hamper performance
+    // (should typically be 0 - 2 calls for an entire run)
+    return "yarn-pnp";
 }
 
 function compileConfig(pConfigFileName, pAlreadyVisited = new Set(), pBaseDir = process.cwd()) {
