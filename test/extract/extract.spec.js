@@ -17,20 +17,6 @@ const amdBangCJSWrapper = require('./fixtures/amd-bang-CJSWrapper.json');
 
 let symlinkDirectory = path.join(__dirname, 'fixtures', 'symlinked');
 
-/* eslint-disable mocha/no-top-level-hooks */
-before((cb) => {
-    symlinkDir(path.join(__dirname, 'fixtures', 'symlinkTarget'), symlinkDirectory)
-        .then(() => cb(), (err) => cb(err));
-});
-
-after(() => {
-    try {
-        fs.unlinkSync(symlinkDirectory);
-    } catch (e) {
-        // just swallow the error, there's nothing we can do about it
-    }
-});
-
 function runFixture(pFixture) {
     const lOptions = {};
 
@@ -56,6 +42,20 @@ function runFixture(pFixture) {
         );
     });
 }
+
+/* eslint-disable mocha/no-top-level-hooks */
+before((cb) => {
+    symlinkDir(path.join(__dirname, 'fixtures', 'symlinkTarget'), symlinkDirectory)
+        .then(() => cb(), (err) => cb(err));
+});
+
+after(() => {
+    try {
+        fs.unlinkSync(symlinkDirectory);
+    } catch (e) {
+        // just swallow the error, there's nothing we can do about it
+    }
+});
 
 describe('extract/extract - CommonJS - ', () => cjsFixtures.forEach(runFixture));
 describe('extract/extract - CommonJS - with bangs', () => {
@@ -157,5 +157,3 @@ describe('extract/extract - even when require gets non-string arguments, extract
         ).to.equal(1);
     });
 });
-
-/* eslint max-len: 0 */
