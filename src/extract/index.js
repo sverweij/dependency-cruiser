@@ -98,6 +98,7 @@ function makeOptionsPresentable(pOptions) {
 
     return SHARABLE_OPTIONS
         .filter(pOption => pOptions.hasOwnProperty(pOption) && pOptions[pOption] !== 0)
+        .filter(pOption => pOption !== "doNotFollow" || Object.keys(pOptions.doNotFollow).length > 0)
         .reduce(
             (pAll, pOption) => {
                 pAll[pOption] = pOptions[pOption];
@@ -109,10 +110,9 @@ function makeOptionsPresentable(pOptions) {
 
 module.exports = (pFileDirArray, pOptions, pCallback, pResolveOptions, pTSConfig) => {
     const lCallback = pCallback ? pCallback : (pInput => pInput);
-    const lResolveOptions = pResolveOptions || {};
 
     let lModules = _(
-        extractFileDirArray(pFileDirArray, pOptions, lResolveOptions, pTSConfig).reduce(complete, [])
+        extractFileDirArray(pFileDirArray, pOptions, pResolveOptions, pTSConfig).reduce(complete, [])
     ).uniqBy(pDependency => pDependency.source)
         .value();
 

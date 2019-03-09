@@ -16,9 +16,13 @@
        no-duplicate-dep-types rule, you can set its severity to "ignore" by
        adding this to the 'forbidden' section:
        {
-            "name": "no-duplicate-dep-types",
-            "severity": "ignore"
+            name: 'no-duplicate-dep-types',
+            severity: 'ignore'
        }
+
+       Also, by default, the preset does not follow any external modules (things in
+       node_modules or in yarn's plug'n'play magic). If you want to have that
+       differently, just override it the options.doNotFollow key.
      */
     "forbidden": [
 {{^}}
@@ -157,10 +161,22 @@
         }
     ],
     "options": {
-        /* pattern specifying which files not to follow further when encountered
-           (regular expression)
-         */
-        "doNotFollow": "node_modules"
+        /* conditions specifying which files not to follow further when encountered:
+           - path: a regular expression to match
+           - dependencyTypes: see https://github.com/sverweij/dependency-cruiser/blob/develop/doc/rules-reference.md#dependencytypes
+             for a complete list
+        */
+        "doNotFollow": {
+            // "path": "node_modules",
+            "dependencyTypes": [
+                "npm",
+                "npm-dev",
+                "npm-optional",
+                "npm-peer",
+                "npm-bundled",
+                "npm-no-pkg"
+            ]
+        }
 
         /* pattern specifying which files to exclude (regular expression) */
         // , "exclude" : ""

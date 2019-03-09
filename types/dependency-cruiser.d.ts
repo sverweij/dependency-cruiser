@@ -178,6 +178,17 @@ export interface IRuleSetType {
     options?: ICruiseOptions;
 }
 
+export interface IDoNotFollowType {
+    /**
+     * a regular expression for modules to include, but not follow further
+     */
+    path?: string;
+    /**
+     * an array of dependency types to include, but not follow further
+     */
+    dependencyTypes?: DependencyType;
+}
+
 export interface ICruiseOptions {
     /**
      * if true, will attempt to validate with the rules in ruleSet.
@@ -193,8 +204,11 @@ export interface ICruiseOptions {
     /**
      * regular expression describing which dependencies the function
      * should cruise, but not resolve or follow any further
+     *
+     * ... or conditions that describe what dependencies not to follow
+     * (includ)
      */
-    doNotFollow?: string;
+    doNotFollow?: string | IDoNotFollowType;
     /**
      * regular expression describing which dependencies the function
      * should not cruise

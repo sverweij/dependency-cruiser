@@ -43,6 +43,10 @@ const TYPE2REPORTER      = {
  *                  regular expression.
  *  doNotFollow : regular expression describing which dependencies the function
  *                should cruise, but not resolve or follow any further
+ *                OR
+ *                an object of the following shape:
+ *                path: a regular expression as above
+ *                dependencyTypes: an array of dependency types
  *  exclude     : regular expression describing which dependencies the function
  *                should not cruise
  *  maxDepth    : the maximum depth to cruise; 0 <= n <= 99
