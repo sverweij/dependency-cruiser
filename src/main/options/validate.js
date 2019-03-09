@@ -1,5 +1,4 @@
-
-
+const _get      = require('lodash/get');
 const safeRegex = require('../../utl/safe-regex');
 
 const MODULE_SYSTEM_LIST_RE  = /^((cjs|amd|es6|tsd)(,|$))+$/gi;
@@ -49,13 +48,22 @@ function validatePreserveSymlinks(pOption) {
     }
 }
 
+function validateDoNotFollow(pDoNotFollow){
+    if (typeof pDoNotFollow === "string") {
+        return isSafeRegExp(pDoNotFollow);
+    }
+    return _get(pDoNotFollow, "path", "");
+
+}
+
 function validate(pOptions) {
     let lRetval = {};
 
     if (Boolean(pOptions)) {
         validateSystems(pOptions.moduleSystems);
         isSafeRegExp(pOptions.exclude);
-        isSafeRegExp(pOptions.doNotFollow);
+        validateDoNotFollow(pOptions.doNotFollow);
+
         validateOutputType(pOptions.outputType);
         validateMaxDepth(pOptions.maxDepth);
         validatePreserveSymlinks(pOptions.preserveSymlinks);

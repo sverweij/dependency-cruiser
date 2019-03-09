@@ -17,6 +17,16 @@ module.exports = {
         notToUnresolvable
     ],
     options: {
-        doNotFollow: 'node_modules'
+        doNotFollow: {
+            // path: "node_modules",
+            dependencyTypes: [
+                "npm",
+                "npm-dev",
+                "npm-optional",
+                "npm-peer",
+                "npm-bundled",
+                "npm-no-pkg"
+            ]
+        }
     }
 };

@@ -2,6 +2,7 @@ const chai                    = require('chai');
 const extract                 = require('../../src/extract');
 const depSchema               = require('../../src/extract/jsonschema.json');
 const normalize               = require('../../src/main/options/normalize');
+const normalizeResolveOptions = require('../../src/main/resolveOptions/normalize');
 const cjsRecursiveFixtures    = require('./fixtures/cjs-recursive.json');
 const deprecationFixtures     = require('./fixtures/deprecated-node-module.json');
 const bundledFixtures         = require('./fixtures/bundled-dependencies.json');
@@ -17,9 +18,18 @@ chai.use(require('chai-json-schema'));
 function runRecursiveFixture(pFixture) {
     if (!Boolean(pFixture.ignore)){
         it(pFixture.title, () => {
+            const lOptions = normalize(pFixture.input.options);
+            const lResolveOptions = normalizeResolveOptions(
+                {
+                    bustTheCache: true
+                },
+                lOptions
+            );
             let lResult = extract(
                 [pFixture.input.fileName],
-                normalize(pFixture.input.options)
+                lOptions,
+                null,
+                lResolveOptions
             );
 
             expect(lResult.modules).to.deep.equal(pFixture.expected);
@@ -41,89 +51,101 @@ describe(
 );
 
 describe('extract/index - Max depth', () => {
-    it('returns the complete graph when max-depth is 0', () => {
-        const lResult = extract(
-            ["./test/extract/fixtures/maxDepth/index.js"],
-            normalize({
-                maxDepth: 0
-            })
-        );
+    /* eslint no-magic-numbers:0 */
+    [0, 1, 2, 4].forEach((pDepth) =>
+        it(`returns the correct graph when max-depth === ${pDepth}`, () => {
+            const lOptions = normalize({
+                maxDepth: pDepth
+            });
+            const lResolveOptions = normalizeResolveOptions(
+                {
+                    bustTheCache: true
+                },
+                lOptions
+            );
+            const lResult = extract(
+                ["./test/extract/fixtures/maxDepth/index.js"],
+                lOptions,
+                null,
+                lResolveOptions
+            );
+            /* eslint import/no-dynamic-require:0, security/detect-non-literal-require:0 */
 
-        expect(lResult.modules).to.deep.equal(
-            require('./fixtures/maxDepthUnspecified.json').modules
-        );
-        expect(lResult).to.be.jsonSchema(depSchema);
-    });
-
-    it('returns the file and one deep with --max-depth 1', () => {
-        const lResult = extract(
-            ["./test/extract/fixtures/maxDepth/index.js"],
-            normalize({
-                maxDepth: 1
-            })
-        );
-
-        expect(lResult.modules).to.deep.equal(
-            require('./fixtures/maxDepth1.json').modules
-        );
-        expect(lResult).to.be.jsonSchema(depSchema);
-    });
-
-    it('returns the file and two deep with --max-depth 2', () => {
-        const lResult = extract(
-            ["./test/extract/fixtures/maxDepth/index.js"],
-            normalize({
-                maxDepth: 2
-            })
-        );
-
-        expect(lResult.modules).to.deep.equal(
-            require('./fixtures/maxDepth2.json').modules
-        );
-        expect(lResult).to.be.jsonSchema(depSchema);
-    });
-
-    it('returns the file and three deep with --max-depth 3', () => {
-        const lResult = extract(
-            ["./test/extract/fixtures/maxDepth/index.js"],
-            normalize({
-                maxDepth: 3
-            })
-        );
-
-        expect(lResult.modules).to.deep.equal(
-            require('./fixtures/maxDepth3.json').modules
-        );
-        expect(lResult).to.be.jsonSchema(depSchema);
-    });
-
-    it('returns the file and four deep with --max-depth 4', () => {
-        const lResult = extract(
-            ["./test/extract/fixtures/maxDepth/index.js"],
-            normalize({
-                maxDepth: 4
-            })
-        );
-
-        expect(lResult.modules).to.deep.equal(
-            require('./fixtures/maxDepth4.json').modules
-        );
-        expect(lResult).to.be.jsonSchema(depSchema);
-    });
+            expect(lResult.modules).to.deep.equal(
+                require(`./fixtures/maxDepth${pDepth}.json`).modules
+            );
+            expect(lResult).to.be.jsonSchema(depSchema);
+        })
+    );
 });
 
-describe('extract/index - Do not follow', () => {
-    it('does not follow files matching the doNotFollow RE', () => {
+describe('extract/index - do not follow', () => {
+
+    it('do not follow - doNotFollow.path', () => {
+        const lOptions = normalize({
+            doNotFollow: {
+                path: "donotfollowonceinthisfolder"
+            }
+        });
+        const lResolveOptions = normalizeResolveOptions(
+            {
+                bustTheCache: true
+            },
+            lOptions
+        );
         const lResult = extract(
             ["./test/extract/fixtures/donotfollow/index.js"],
-            normalize({
-                doNotFollow: "donotfollowonceinthisfolder",
-                maxDepth: 0
-            })
+            lOptions,
+            null,
+            lResolveOptions
         );
 
         expect(lResult.modules).to.deep.equal(
             require('./fixtures/donotfollow.json').modules
+        );
+        expect(lResult).to.be.jsonSchema(depSchema);
+    });
+
+    // it('do not follow - doNotFollow.path and doNotFollow.dependencyTypes (only "path" matching)', () => {
+    //     const lResult = extract(
+    //         ["./test/extract/fixtures/donotfollow/index.js"],
+    //         normalize({
+    //             doNotFollow: {
+    //                 path: "donotfollowonceinthisfolder",
+    //                 // dependencyTypes: ["npm", "npm-dev"]
+    //             },
+    //             maxDepth: 0
+    //         })
+    //     );
+
+    //     // console.log(JSON.stringify(lResult, 0, "    "));
+    //     expect(lResult.modules).to.deep.equal(
+    //         require('./fixtures/donotfollow.json').modules
+    //     );
+    //     expect(lResult).to.be.jsonSchema(depSchema);
+    // });
+
+    it('do not follow - doNotFollow.dependencyTypes', () => {
+        const lOptions = normalize({
+            doNotFollow: {
+                dependencyTypes: ["npm-no-pkg"]
+            }
+        });
+        const lResolveOptions = normalizeResolveOptions(
+            {
+                bustTheCache: true
+            },
+            lOptions
+        );
+        const lResult = extract(
+            ["./test/extract/fixtures/donotfollow-dependency-types/index.js"],
+            lOptions,
+            null,
+            lResolveOptions
+        );
+
+        expect(lResult.modules).to.deep.equal(
+            require('./fixtures/donotfollow-dependency-types.json').modules
         );
         expect(lResult).to.be.jsonSchema(depSchema);
     });

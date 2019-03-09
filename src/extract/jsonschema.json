@@ -247,8 +247,28 @@
                     "description": "File the output was written to ('-' for stdout)"
                 },
                 "doNotFollow": {
-                    "type": "string",
-                    "description": "The regular expression used for preventing modules from being cruised any further"
+                    "oneOf": [
+                        {
+                            "type": "string",
+                            "description": "a regular expression for modules to include, but not follow further"
+                        },
+                        {
+                            "type": "object",
+                            "description": "Criteria the 'to' end of a dependency should match to be caught by this rule. Leave it empty if you want any module to be matched.",
+                            "additionalProperties": false,
+                            "properties" : {
+                                "path": {
+                                    "type": "string",
+                                    "description": "a regular expression for modules to include, but not follow further"
+                                },
+                                "dependencyTypes": {
+                                    "type": "array",
+                                    "description": "an array of dependency types to include, but not follow further",
+                                    "items": { "$ref": "#/definitions/DependencyType" }
+                                }
+                            }
+                        }
+                    ]
                 },
                 "exclude": {
                     "type": "string",

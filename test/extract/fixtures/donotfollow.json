@@ -114,9 +114,9 @@
         "info": 0,
         "totalCruised": 5,
         "optionsUsed": {
-            "outputTo": "-",
-            "doNotFollow": "donotfollowonceinthisfolder",
-            "exclude": "",
+            "doNotFollow": {
+                "path": "donotfollowonceinthisfolder"
+            },
             "moduleSystems": [
                 "amd",
                 "cjs",

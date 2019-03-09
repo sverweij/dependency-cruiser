@@ -34,6 +34,9 @@
     - [`dependencyTypes`](#dependencytypes)
     - [`moreThanOneDependencyType`](#more-than-one-dependencytype-per-dependency-morethanonedependencytype)
 4. [`options` not also command line options](#options-not-also-command-line-options)
+    - [`externalModuleResolutionStrategy` (for yarn pnp)](#yarn-plugnplay-support---externalmoduleresolutionstrategy)
+    - [fine grained `doNotFollow`](#specifying-dependency-types-in-donotfollow)
+    - [`combinedDependencies`](#mono-repo-behavior---combineddependencies)
 5. [Configurations in javascript](#configurations-in-javascript)
 6. [Starter rule set](#a-starter-rule-set)
 
@@ -542,14 +545,37 @@ Things to keep in mind:
   pass `forceOrphanCheck: true` as part of the `pOptions` parameter.
 
 ## `options` not also command line options
-#### Yarn Plug'n'Play support - externalModuleResolutionStrategy
+
+### Yarn Plug'n'Play support - externalModuleResolutionStrategy
 If you're using yarn's Plug'n'Play to have external modules resolved and want 
 dependency-cruiser to take that into account, set the 
 `externalModuleResolutionStrategy` attribute to `yarn-pnp`. The default for this 
 attribute is `node_modules` which is the default strategy in the node ecosystem
 as well.
 
-#### mono repo behavior - combinedDependencies
+### Specifying dependency types in `doNotFollow`
+On the command line you can use `--do-not-follow` to specify a regular expression
+for files that dependency-cruiser should cruise, but not follow any further.
+In the options section you can restrict what gets cruised by specifying
+[dependency types](#dependencytypes). So if e.g. you don't want dependency-cruiser 
+to follow external dependencies, in stead of specifying the "node_modules" path:
+
+```json
+    "options": {
+        "doNotFollow": {
+            // "path": "node_modules",
+            dependencyTypes: [
+                "npm",
+                "npm-dev",
+                "npm-optional",
+                "npm-peer",
+                "npm-bundled"
+            ]
+        }
+    }
+```
+
+### mono repo behavior - combinedDependencies
 If `combinedDependencies` is on `false` (the default) dependency-cruiser will
 search for a `package.json` closest up from the source file it investigates.
 This is the behavior you expect in a regular repo and in mono repos with

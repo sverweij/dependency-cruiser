@@ -1,0 +1,1 @@
+import {thisiscool} from './notcalledfromoutside';

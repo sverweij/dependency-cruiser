@@ -1,5 +1,6 @@
 const path                        = require('path');
 const _                           = require('lodash');
+const intersects                  = require('../utl/arrayUtil').intersects;
 const resolve                     = require('./resolve');
 const ignore                      = require('./ignore');
 const extractES6Dependencies      = require('./ast-extractors/extract-ES6-deps');
@@ -45,9 +46,14 @@ function extractDependencies(pOptions, pFileName, pTSConfig) {
 }
 
 function matchesDoNotFollow(pResolved, pDoNotFollow) {
-    return Boolean(pDoNotFollow)
-        ? RegExp(pDoNotFollow, "g").test(pResolved)
+    const lMatchesPath = Boolean(pDoNotFollow.path)
+        ? RegExp(pDoNotFollow.path, "g").test(pResolved.resolved)
         : false;
+    const lMatchesDependencyTypes = Boolean(pDoNotFollow.dependencyTypes)
+        ? intersects(pResolved.dependencyTypes, pDoNotFollow.dependencyTypes)
+        : false;
+
+    return lMatchesPath || lMatchesDependencyTypes;
 }
 
 function addResolutionAttributes(pOptions, pFileName, pResolveOptions) {
@@ -58,7 +64,7 @@ function addResolutionAttributes(pOptions, pFileName, pResolveOptions) {
             path.join(pOptions.baseDir, path.dirname(pFileName)),
             pResolveOptions
         );
-        const lMatchesDoNotFollow = matchesDoNotFollow(lResolved.resolved, pOptions.doNotFollow);
+        const lMatchesDoNotFollow = matchesDoNotFollow(lResolved, pOptions.doNotFollow);
 
         return Object.assign(
             lResolved,

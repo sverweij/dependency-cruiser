@@ -17,6 +17,18 @@ describe("main/options/normalize", () => {
             }).maxDepth
         ).to.equal(42);
     });
+
+    it("makes doNotFollow strings into an object", () => {
+        expect(
+            normalizeOptions({
+                doNotFollow: "42"
+            }).doNotFollow
+        ).to.deep.equal(
+            {
+                path: "42"
+            }
+        );
+    });
 });
 
 /* eslint no-magic-numbers: 0*/
