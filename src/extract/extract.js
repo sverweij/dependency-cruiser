@@ -2,7 +2,6 @@ const path                        = require('path');
 const _                           = require('lodash');
 const intersects                  = require('../utl/arrayUtil').intersects;
 const resolve                     = require('./resolve');
-const ignore                      = require('./ignore');
 const extractES6Dependencies      = require('./ast-extractors/extract-ES6-deps');
 const extractCommonJSDependencies = require('./ast-extractors/extract-commonJS-deps');
 const extractAMDDependencies      = require('./ast-extractors/extract-AMD-deps');
@@ -45,6 +44,7 @@ function extractDependencies(pOptions, pFileName, pTSConfig) {
     return lDependencies;
 }
 
+
 function matchesDoNotFollow(pResolved, pDoNotFollow) {
     const lMatchesPath = Boolean(pDoNotFollow.path)
         ? RegExp(pDoNotFollow.path, "g").test(pResolved.resolved)
@@ -76,6 +76,12 @@ function addResolutionAttributes(pOptions, pFileName, pResolveOptions) {
             }
         );
     };
+}
+
+function matchesExclude(pFullPathToFile, pExclude) {
+    const lMatchesExcludePath = pExclude && RegExp(pExclude, "g").test(pFullPathToFile);
+
+    return lMatchesExcludePath;
 }
 
 /**
@@ -113,7 +119,7 @@ module.exports = (pFileName, pOptions, pResolveOptions, pTSConfig) => {
             .uniqBy(pDependency => `${pDependency.moduleName} ${pDependency.moduleSystem}`)
             .sortBy(pDependency => `${pDependency.moduleName} ${pDependency.moduleSystem}`)
             .map(addResolutionAttributes(pOptions, pFileName, pResolveOptions))
-            .filter(pDep => ignore(pDep.resolved, pOptions.exclude))
+            .filter(pDep => !matchesExclude(pDep.resolved, pOptions.exclude))
             .value();
     } catch (e) {
         throw new Error(`Extracting dependencies ran afoul of...\n\n  ${e.message}\n... in ${pFileName}\n\n`);

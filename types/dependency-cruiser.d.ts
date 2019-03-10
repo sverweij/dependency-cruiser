@@ -206,7 +206,6 @@ export interface ICruiseOptions {
      * should cruise, but not resolve or follow any further
      *
      * ... or conditions that describe what dependencies not to follow
-     * (includ)
      */
     doNotFollow?: string | IDoNotFollowType;
     /**

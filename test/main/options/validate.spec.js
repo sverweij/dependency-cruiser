@@ -116,6 +116,39 @@ describe("main/options/validate", () => {
         }
     });
 
+    it("throws when exclude.path is passed an unsafe regex", () => {
+        try {
+            validateOptions({exclude: "([A-Za-z]+)*"});
+            expect("not to be here").to.equal("still here, though");
+        } catch (e) {
+            expect(e.toString()).to.deep.equal(
+                "Error: The pattern '([A-Za-z]+)*' will probably run very slowly - cowardly refusing to run.\n"
+            );
+        }
+    });
+
+    it("throws when exclude.pathNot is passed an unsafe regex", () => {
+        try {
+            validateOptions({exclude: "([A-Za-z]+)*"});
+            expect("not to be here").to.equal("still here, though");
+        } catch (e) {
+            expect(e.toString()).to.deep.equal(
+                "Error: The pattern '([A-Za-z]+)*' will probably run very slowly - cowardly refusing to run.\n"
+            );
+        }
+    });
+
+    it("throws when doNotFollow.pathNot is passed an unsafe regex", () => {
+        try {
+            validateOptions({doNotFollow: "([A-Za-z]+)*"});
+            expect("not to be here").to.equal("still here, though");
+        } catch (e) {
+            expect(e.toString()).to.deep.equal(
+                "Error: The pattern '([A-Za-z]+)*' will probably run very slowly - cowardly refusing to run.\n"
+            );
+        }
+    });
+
     it("passes when --exclude is passed a safe regex", () => {
         try {
             validateOptions({"exclude": "([A-Za-z]+)"});
