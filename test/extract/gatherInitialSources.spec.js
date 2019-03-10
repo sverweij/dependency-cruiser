@@ -195,6 +195,27 @@ describe("extract/gatherInitialSources", () => {
         );
     });
 
+    it("only gathers stuff in the include pattern", () => {
+        expect(
+            gather(
+                [
+                    "test/extract/fixtures/gather-globbing/packages"
+                ],
+                {
+                    include: "/loki/"
+                }
+            ).map(pathToPosix)
+        ).to.deep.equal(
+            [
+                "test/extract/fixtures/gather-globbing/packages/loki/index.ts",
+                "test/extract/fixtures/gather-globbing/packages/loki/script/hots.js",
+                "test/extract/fixtures/gather-globbing/packages/loki/src/fake/nothing.to.see.here.ts",
+                "test/extract/fixtures/gather-globbing/packages/loki/src/index.spec.ts",
+                "test/extract/fixtures/gather-globbing/packages/loki/src/index.ts"
+            ]
+        );
+    });
+
     /*
     it("using the same file twice as input has the same result as using it once", () => {
         expect(

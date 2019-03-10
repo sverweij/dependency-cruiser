@@ -27,6 +27,7 @@ program
     .option("-X, --do-not-follow <regex>", `a regular expression for modules to include,
                               but not follow further`)
     .option("-x, --exclude <regex>", "a regular expression for excluding modules")
+    .option("--include <regex>",     "a regular expression for including modules")
     .option("-d, --max-depth <n>", `the maximum depth to cruise; 0 <= n <= 99
                               (default: 0, which means 'infinite depth')`)
     .option("-M, --module-systems <items>", `list of module systems (default: amd,cjs,es6)`)

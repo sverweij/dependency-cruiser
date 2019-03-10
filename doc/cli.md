@@ -100,6 +100,22 @@ all modules with a file path starting with coverage, test or node_modules, you c
 dependency-cruise -x "^(coverage|test|node_modules)" -T html -f deps-without-stuffs.html src
 ```
 
+### `--include`
+In the `include` option you can pass a regular expression of all file paths
+dependency-cruiser should include in a cruise. It will discard all files
+not in the `include` pattern.
+
+E.g. to only take modules into account that are in the `src` tree (and exclude all
+node_modules, core modules and modules otherwise outside it):
+
+```sh
+dependency-cruise --include "^src" -T dot src | dot -T svg > internal-dependency-graph.svg
+```
+
+If you specify both an exclude and an include, dependency-cruiser takes them
+_both_ into account.
+
+
 ### `--max-depth`
 Only cruise the specified depth, counting from the specified root-module(s). This
 command is mostly useful in combination with visualisation output like _dot_ to

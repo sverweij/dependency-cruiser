@@ -214,6 +214,11 @@ export interface ICruiseOptions {
      */
     exclude?: string;
     /**
+     * regular expression describing which dependencies the function
+     * should cruise - anything not matching this will be skipped
+     */
+    include?: string;
+    /**
      * the maximum depth to cruise; 0 <= n <= 99
      * (default: 0, which means 'infinite depth')
      */

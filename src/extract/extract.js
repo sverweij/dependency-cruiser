@@ -78,10 +78,8 @@ function addResolutionAttributes(pOptions, pFileName, pResolveOptions) {
     };
 }
 
-function matchesExclude(pFullPathToFile, pExclude) {
-    const lMatchesExcludePath = pExclude && RegExp(pExclude, "g").test(pFullPathToFile);
-
-    return lMatchesExcludePath;
+function matchesPattern(pFullPathToFile, pPattern) {
+    return RegExp(pPattern, "g").test(pFullPathToFile);
 }
 
 /**
@@ -119,7 +117,8 @@ module.exports = (pFileName, pOptions, pResolveOptions, pTSConfig) => {
             .uniqBy(pDependency => `${pDependency.moduleName} ${pDependency.moduleSystem}`)
             .sortBy(pDependency => `${pDependency.moduleName} ${pDependency.moduleSystem}`)
             .map(addResolutionAttributes(pOptions, pFileName, pResolveOptions))
-            .filter(pDep => !matchesExclude(pDep.resolved, pOptions.exclude))
+            .filter(pDep => !pOptions.exclude || !matchesPattern(pDep.resolved, pOptions.exclude))
+            .filter(pDep => !pOptions.include || matchesPattern(pDep.resolved, pOptions.include))
             .value();
     } catch (e) {
         throw new Error(`Extracting dependencies ran afoul of...\n\n  ${e.message}\n... in ${pFileName}\n\n`);

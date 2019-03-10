@@ -71,6 +71,10 @@
                     "type": "string",
                     "description": "a regular expression for modules to exclude from being cruised"
                 },
+                "include": {
+                    "type": "string",
+                    "description": "a regular expression for modules to cruise; anything outside it will be skipped"
+                },
                 "moduleSystems": {
                     "type": "array",
                     "description": "list of module systems to cruise. Defaults to [amd, cjs, es6]",

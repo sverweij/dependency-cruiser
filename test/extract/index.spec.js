@@ -106,25 +106,6 @@ describe('extract/index - do not follow', () => {
         expect(lResult).to.be.jsonSchema(depSchema);
     });
 
-    // it('do not follow - doNotFollow.path and doNotFollow.dependencyTypes (only "path" matching)', () => {
-    //     const lResult = extract(
-    //         ["./test/extract/fixtures/donotfollow/index.js"],
-    //         normalize({
-    //             doNotFollow: {
-    //                 path: "donotfollowonceinthisfolder",
-    //                 // dependencyTypes: ["npm", "npm-dev"]
-    //             },
-    //             maxDepth: 0
-    //         })
-    //     );
-
-    //     // console.log(JSON.stringify(lResult, 0, "    "));
-    //     expect(lResult.modules).to.deep.equal(
-    //         require('./fixtures/donotfollow.json').modules
-    //     );
-    //     expect(lResult).to.be.jsonSchema(depSchema);
-    // });
-
     it('do not follow - doNotFollow.dependencyTypes', () => {
         const lOptions = normalize({
             doNotFollow: {

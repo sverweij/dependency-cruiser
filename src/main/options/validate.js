@@ -66,6 +66,7 @@ function validate(pOptions) {
         validateSystems(pOptions.moduleSystems);
         validatePathsSafety(pOptions.doNotFollow);
         validateRegExpSafety(pOptions.exclude);
+        validateRegExpSafety(pOptions.include);
 
         validateOutputType(pOptions.outputType);
         validateMaxDepth(pOptions.maxDepth);

@@ -6,10 +6,8 @@ const pathToPosix   = require('./utl/pathToPosix');
 
 const SUPPORTED_EXTENSIONS = transpileMeta.scannableExtensions;
 
-function matchesExclude(pFullPathToFile, pExclude) {
-    const lMatchesExcludePath = pExclude && RegExp(pExclude, "g").test(pFullPathToFile);
-
-    return lMatchesExcludePath;
+function matchesPattern(pFullPathToFile, pPattern) {
+    return RegExp(pPattern, "g").test(pFullPathToFile);
 }
 
 function gatherScannableFilesFromDir (pDirName, pOptions) {
@@ -23,7 +21,8 @@ function gatherScannableFilesFromDir (pDirName, pOptions) {
             }
             return pSum;
         }, [])
-        .filter(pFullPathToFile => !matchesExclude(pathToPosix(pFullPathToFile), pOptions.exclude));
+        .filter(pFullPathToFile => !pOptions.exclude || !matchesPattern(pathToPosix(pFullPathToFile), pOptions.exclude))
+        .filter(pFullPathToFile => !pOptions.include || matchesPattern(pathToPosix(pFullPathToFile), pOptions.include));
 }
 
 /**

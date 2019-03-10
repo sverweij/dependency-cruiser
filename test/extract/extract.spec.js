@@ -166,3 +166,88 @@ describe('extract/extract - even when require gets non-string arguments, extract
         ).to.equal(1);
     });
 });
+
+describe('extract/extract - include', () => {
+    it('returns no dependencies when the include pattern is erroneous', () => {
+        const lOptions = normalize({include: 'will-not-match-dependencies-for-this-file'});
+        const lResolveOptions = normalizeResolveOptions({bustTheCache: true}, lOptions);
+
+        expect(
+            extract(
+                "./test/extract/fixtures/include/src/index.js",
+                lOptions,
+                lResolveOptions
+            )
+        ).to.deep.equal(
+            []
+        );
+    });
+
+    it('only includes dependencies matching the passed "include" (1)', () => {
+        const lOptions = normalize({include: '/src/'});
+        const lResolveOptions = normalizeResolveOptions({bustTheCache: true}, lOptions);
+
+        expect(
+            extract(
+                "./test/extract/fixtures/include/src/index.js",
+                lOptions,
+                lResolveOptions
+            )
+        ).to.deep.equal(
+            [
+                {
+                    "coreModule": false,
+                    "couldNotResolve": false,
+                    "dependencyTypes": [
+                        "local"
+                    ],
+                    "followable": true,
+                    "matchesDoNotFollow": false,
+                    "module": "./bla",
+                    "moduleSystem": "cjs",
+                    "resolved": "test/extract/fixtures/include/src/bla.js"
+                }
+            ]
+        );
+    });
+
+    it('only includes dependencies matching the passed "include" (2)', () => {
+        const lOptions = normalize({include: 'include'});
+        const lResolveOptions = normalizeResolveOptions({bustTheCache: true}, lOptions);
+
+        expect(
+            extract(
+                "./test/extract/fixtures/include/src/index.js",
+                lOptions,
+                lResolveOptions
+            )
+        ).to.deep.equal(
+            [
+                {
+                    "coreModule": false,
+                    "couldNotResolve": false,
+                    "dependencyTypes": [
+                        "local"
+                    ],
+                    "followable": true,
+                    "matchesDoNotFollow": false,
+                    "module": "../di",
+                    "moduleSystem": "cjs",
+                    "resolved": "test/extract/fixtures/include/di.js"
+                },
+                {
+                    "coreModule": false,
+                    "couldNotResolve": false,
+                    "dependencyTypes": [
+                        "local"
+                    ],
+                    "followable": true,
+                    "matchesDoNotFollow": false,
+                    "module": "./bla",
+                    "moduleSystem": "cjs",
+                    "resolved": "test/extract/fixtures/include/src/bla.js"
+                }
+            ]
+        );
+    });
+});
