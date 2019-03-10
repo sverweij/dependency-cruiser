@@ -254,7 +254,7 @@
                         },
                         {
                             "type": "object",
-                            "description": "Criteria the 'to' end of a dependency should match to be caught by this rule. Leave it empty if you want any module to be matched.",
+                            "description": "Criteria for modules to include, but not to follow further",
                             "additionalProperties": false,
                             "properties" : {
                                 "path": {
@@ -272,7 +272,11 @@
                 },
                 "exclude": {
                     "type": "string",
-                    "description": "The regular expression used for excluding modules from being cruised"
+                    "description": "a regular expression for modules to exclude from being cruised"
+                },
+                "include": {
+                    "type": "string",
+                    "description": "a regular expression for modules to cruise; anything outside it will be skipped"
                 },
                 "maxDepth": {
                     "type": "number",

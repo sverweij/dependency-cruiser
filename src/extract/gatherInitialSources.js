@@ -1,11 +1,14 @@
 const fs            = require('fs');
 const path          = require('path');
 const glob          = require('glob');
-const ignore        = require('./ignore');
 const transpileMeta = require('./transpile/meta');
 const pathToPosix   = require('./utl/pathToPosix');
 
 const SUPPORTED_EXTENSIONS = transpileMeta.scannableExtensions;
+
+function matchesPattern(pFullPathToFile, pPattern) {
+    return RegExp(pPattern, "g").test(pFullPathToFile);
+}
 
 function gatherScannableFilesFromDir (pDirName, pOptions) {
     return fs.readdirSync(pDirName)
@@ -18,7 +21,8 @@ function gatherScannableFilesFromDir (pDirName, pOptions) {
             }
             return pSum;
         }, [])
-        .filter(pFullPathToFile => ignore(pathToPosix(pFullPathToFile), pOptions.exclude));
+        .filter(pFullPathToFile => !pOptions.exclude || !matchesPattern(pathToPosix(pFullPathToFile), pOptions.exclude))
+        .filter(pFullPathToFile => !pOptions.include || matchesPattern(pathToPosix(pFullPathToFile), pOptions.include));
 }
 
 /**
@@ -34,8 +38,9 @@ function gatherScannableFilesFromDir (pDirName, pOptions) {
  * @param  {array} pFileDirArray an array of strings, representing globs and/ or
  *                               paths to files or directories to be gathered
  * @param  {object} pOptions     (optional) object with attributes
- *                               - exclude - regexp of a path to exclude being
- *                                 gathered
+ *                               - exclude - an object with criteria on what to exclude:
+ *                                  - path: regexp of what to exclude
+ *                                  - pathNot: regexp of what to include
  * @return {array}               an array of strings, representing paths to
  *                               files to be gathered.
  */

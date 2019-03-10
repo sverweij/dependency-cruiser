@@ -16,7 +16,7 @@ function validateSystems(pModuleSystems) {
     }
 }
 
-function isSafeRegExp(pPattern) {
+function validateRegExpSafety(pPattern) {
     if (Boolean(pPattern) && !safeRegex(pPattern)) {
         throw Error(
             `The pattern '${pPattern}' will probably run very slowly - cowardly refusing to run.\n`
@@ -48,11 +48,14 @@ function validatePreserveSymlinks(pOption) {
     }
 }
 
-function validateDoNotFollow(pDoNotFollow){
+function validatePathsSafety(pDoNotFollow){
+
     if (typeof pDoNotFollow === "string") {
-        return isSafeRegExp(pDoNotFollow);
+        validateRegExpSafety(pDoNotFollow);
     }
-    return _get(pDoNotFollow, "path", "");
+
+    validateRegExpSafety(_get(pDoNotFollow, "path", ""));
+    validateRegExpSafety(_get(pDoNotFollow, "pathNot", ""));
 
 }
 
@@ -61,8 +64,9 @@ function validate(pOptions) {
 
     if (Boolean(pOptions)) {
         validateSystems(pOptions.moduleSystems);
-        isSafeRegExp(pOptions.exclude);
-        validateDoNotFollow(pOptions.doNotFollow);
+        validatePathsSafety(pOptions.doNotFollow);
+        validateRegExpSafety(pOptions.exclude);
+        validateRegExpSafety(pOptions.include);
 
         validateOutputType(pOptions.outputType);
         validateMaxDepth(pOptions.maxDepth);

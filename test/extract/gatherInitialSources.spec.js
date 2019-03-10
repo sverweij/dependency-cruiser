@@ -1,6 +1,7 @@
-const expect  = require('chai').expect;
-const gather  = require('../../src/extract/gatherInitialSources');
-const p2p     = require('../../src/extract/utl/pathToPosix');
+const expect    = require('chai').expect;
+const gather    = require('../../src/extract/gatherInitialSources');
+const p2p       = require('../../src/extract/utl/pathToPosix');
+const normalize = require('../../src/main/options/normalize');
 
 // make the import pathToPosix the correct function profile
 // (1 parameter exactly) for use in map
@@ -8,10 +9,12 @@ function pathToPosix(pPath) {
     return p2p(pPath);
 }
 
+const EMPTYOPTIONS = normalize({});
+
 describe("extract/gatherInitialSources", () => {
     it("one file stays one file", () => {
         expect(
-            gather(["test/extract/fixtures/cjs/root_one.js"], {}).map(pathToPosix)
+            gather(["test/extract/fixtures/cjs/root_one.js"], EMPTYOPTIONS).map(pathToPosix)
         ).to.deep.equal(
             ["test/extract/fixtures/cjs/root_one.js"]
         );
@@ -22,7 +25,7 @@ describe("extract/gatherInitialSources", () => {
             gather([
                 "test/extract/fixtures/cjs/root_one.js",
                 "test/extract/fixtures/ts/index.ts"
-            ], {}).map(pathToPosix)
+            ], EMPTYOPTIONS).map(pathToPosix)
         ).to.deep.equal(
             [
                 "test/extract/fixtures/cjs/root_one.js",
@@ -35,7 +38,7 @@ describe("extract/gatherInitialSources", () => {
         expect(
             gather([
                 "test/extract/fixtures/ts"
-            ], {}).map(pathToPosix)
+            ], EMPTYOPTIONS).map(pathToPosix)
         ).to.deep.equal(
             [
                 "test/extract/fixtures/ts/index.ts",
@@ -52,7 +55,7 @@ describe("extract/gatherInitialSources", () => {
             gather([
                 "test/extract/fixtures/ts",
                 "test/extract/fixtures/coffee"
-            ], {}).map(pathToPosix)
+            ], EMPTYOPTIONS).map(pathToPosix)
         ).to.deep.equal(
             [
                 "test/extract/fixtures/ts/index.ts",
@@ -75,7 +78,7 @@ describe("extract/gatherInitialSources", () => {
                 "test/extract/fixtures/ts",
                 "test/extract/fixtures/es6/imports-and-exports.js",
                 "test/extract/fixtures/coffee"
-            ], {}).map(pathToPosix)
+            ], EMPTYOPTIONS).map(pathToPosix)
         ).to.deep.equal(
             [
                 "test/extract/fixtures/ts/index.ts",
@@ -133,7 +136,7 @@ describe("extract/gatherInitialSources", () => {
         expect(
             gather([
                 "test/extract/fixtures/gather-globbing/packages/**/*.js"
-            ]).map(pathToPosix)
+            ], EMPTYOPTIONS).map(pathToPosix)
         ).to.deep.equal(
             [
                 "test/extract/fixtures/gather-globbing/packages/baldr/spec/bow.spec.js",
@@ -155,7 +158,7 @@ describe("extract/gatherInitialSources", () => {
         expect(
             gather([
                 "test/extract/fixtures/gather-globbing/**/src/**/*.js"
-            ]).map(pathToPosix)
+            ], EMPTYOPTIONS).map(pathToPosix)
         ).to.deep.equal(
             [
                 "test/extract/fixtures/gather-globbing/packages/baldr/src/bow.js",
@@ -188,6 +191,27 @@ describe("extract/gatherInitialSources", () => {
                 "test/extract/fixtures/gather-globbing/packages/loki/src/index.ts",
                 "test/extract/fixtures/gather-globbing/packages/odin/src/deep/ly.js",
                 "test/extract/fixtures/gather-globbing/packages/odin/src/deep/ly.spec.js"
+            ]
+        );
+    });
+
+    it("only gathers stuff in the include pattern", () => {
+        expect(
+            gather(
+                [
+                    "test/extract/fixtures/gather-globbing/packages"
+                ],
+                {
+                    include: "/loki/"
+                }
+            ).map(pathToPosix)
+        ).to.deep.equal(
+            [
+                "test/extract/fixtures/gather-globbing/packages/loki/index.ts",
+                "test/extract/fixtures/gather-globbing/packages/loki/script/hots.js",
+                "test/extract/fixtures/gather-globbing/packages/loki/src/fake/nothing.to.see.here.ts",
+                "test/extract/fixtures/gather-globbing/packages/loki/src/index.spec.ts",
+                "test/extract/fixtures/gather-globbing/packages/loki/src/index.ts"
             ]
         );
     });

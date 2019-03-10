@@ -81,11 +81,12 @@ function complete(pAll, pFromListItem) {
 }
 
 function makeOptionsPresentable(pOptions) {
-    const SHARABLE_OPTIONS = [
+    const SHAREABLE_OPTIONS = [
         "rulesFile",
         "outputTo",
         "doNotFollow",
         "exclude",
+        "include",
         "maxDepth",
         "moduleSystems",
         "outputType",
@@ -96,7 +97,7 @@ function makeOptionsPresentable(pOptions) {
         "externalModuleResolutionStrategy"
     ];
 
-    return SHARABLE_OPTIONS
+    return SHAREABLE_OPTIONS
         .filter(pOption => pOptions.hasOwnProperty(pOption) && pOptions[pOption] !== 0)
         .filter(pOption => pOption !== "doNotFollow" || Object.keys(pOptions.doNotFollow).length > 0)
         .reduce(
