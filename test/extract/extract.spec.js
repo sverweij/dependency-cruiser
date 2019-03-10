@@ -35,7 +35,7 @@ function runFixture(pFixture) {
             extract(
                 pFixture.input.fileName,
                 normalize(lOptions),
-                normalizeResolveOptions({}, lOptions)
+                normalizeResolveOptions({bustTheCache: true}, normalize(lOptions))
             )
         ).to.deep.equal(
             pFixture.expected
@@ -61,13 +61,14 @@ describe('extract/extract - CommonJS - ', () => cjsFixtures.forEach(runFixture))
 describe('extract/extract - CommonJS - with bangs', () => {
 
     it('splits bang!./blabla into bang and ./blabla', () => {
+        const lOptions = normalize({moduleSystems: ["cjs"]});
+        const lResolveOptions = normalizeResolveOptions({bustTheCache: true}, lOptions);
+
         expect(
             extract(
                 "test/extract/fixtures/cjs-bangs/index.js",
-                normalize({
-                    moduleSystems: ["cjs"]
-                }),
-                {}
+                lOptions,
+                lResolveOptions
             )
         ).to.deep.equal(
             cjsBang
@@ -80,13 +81,14 @@ describe('extract/extract - AMD - ', () => amdFixtures.forEach(runFixture));
 describe('AMD - with bangs', () => {
 
     it('splits bang!./blabla into bang and ./blabla - regular requirejs', () => {
+        const lOptions = normalize({moduleSystems: ["amd"]});
+        const lResolveOptions = normalizeResolveOptions({bustTheCache: true}, lOptions);
+
         expect(
             extract(
                 "test/extract/fixtures/amd-bangs/root_one.js",
-                normalize({
-                    moduleSystems: ["amd"]
-                }),
-                {}
+                lOptions,
+                lResolveOptions
             )
         ).to.deep.equal(
             amdBangRequirejs
@@ -94,13 +96,14 @@ describe('AMD - with bangs', () => {
     });
 
     it('splits bang!./blabla into bang and ./blabla - CommonJS wrapper', () => {
+        const lOptions = normalize({moduleSystems: ["amd"]});
+        const lResolveOptions = normalizeResolveOptions({bustTheCache: true}, lOptions);
+
         expect(
             extract(
                 "test/extract/fixtures/amd-bangs/simplified-commonjs-wrapper.js",
-                normalize({
-                    moduleSystems: ["amd"]
-                }),
-                {}
+                lOptions,
+                lResolveOptions
             )
         ).to.deep.equal(
             amdBangCJSWrapper
@@ -113,8 +116,11 @@ describe('extract/extract - CoffeeScript - ', () => coffeeFixtures.forEach(runFi
 
 describe('extract/extract - Error scenarios - ', () => {
     it('Does not raise an exception on syntax errors (because we\'re on the loose parser)', () => {
+        const lOptions = normalize({});
+        const lResolveOptions = normalizeResolveOptions({bustTheCache: true}, lOptions);
+
         expect(
-            () => extract("test/extract/fixtures/syntax-error.js", normalize({}), {})
+            () => extract("test/extract/fixtures/syntax-error.js", lOptions, lResolveOptions)
         ).to.not.throw("Extracting dependencies ran afoul of... Unexpected token (1:3)");
     });
     it('Raises an exception on non-existing files', () => {
@@ -127,12 +133,15 @@ describe('extract/extract - Error scenarios - ', () => {
 });
 
 describe('extract/extract - even when require gets non-string arguments, extract doesn\'t break', () => {
+    const lOptions = normalize({});
+    const lResolveOptions = normalizeResolveOptions({bustTheCache: true}, lOptions);
+
     it('Just skips require(481)', () => {
         expect(
             extract(
                 "./test/extract/fixtures/cjs-require-non-strings/require-a-number.js",
-                normalize({}),
-                {}
+                lOptions,
+                lResolveOptions
             ).length
         ).to.equal(1);
     });
@@ -141,8 +150,8 @@ describe('extract/extract - even when require gets non-string arguments, extract
         expect(
             extract(
                 "./test/extract/fixtures/cjs-require-non-strings/require-a-function.js",
-                normalize({}),
-                {}
+                lOptions,
+                lResolveOptions
             ).length
         ).to.equal(1);
     });
