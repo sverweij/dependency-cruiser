@@ -74,7 +74,7 @@
     "scm:push:bitbucket-mirror:commits": "git push bitbucket-mirror",
     "scm:push:bitbucket-mirror:tags": "git push --tags bitbucket-mirror",
     "scm:stage": "git add .",
-    "test": "mocha test/*/*.spec.js test/*/*/*.spec.js test/*/*/*/*.spec.js",
+    "test": "mocha --timeout 4000 test/*/*.spec.js test/*/*/*.spec.js test/*/*/*/*.spec.js",
     "test:cover": "nyc --check-coverage npm test",
     "test:glob": "set -f && test \"`bin/dependency-cruise test/extract/fixtures/gather-globbing/packages/**/src/**/*.js | grep \"no dependency violations found\"`\" = \"✔ no dependency violations found (6 modules cruised)\"",
     "test:integration": "npm-run-all test:integration:cleanup test:integration:copy test:integration:install test:integration:run test:integration:test test:integration:cleanup",
