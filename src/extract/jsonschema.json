@@ -274,7 +274,7 @@
                     "type": "string",
                     "description": "a regular expression for modules to exclude from being cruised"
                 },
-                "include": {
+                "includeOnly": {
                     "type": "string",
                     "description": "a regular expression for modules to cruise; anything outside it will be skipped"
                 },

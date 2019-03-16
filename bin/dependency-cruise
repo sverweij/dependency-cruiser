@@ -24,10 +24,10 @@ program
     .option("-v, --validate [file]", `alias for --config`)
     .option("-f, --output-to <file>", `file to write output to; - for stdout
                              `, "-")
-    .option("-X, --do-not-follow <regex>", `a regular expression for modules to include,
-                              but not follow further`)
-    .option("-x, --exclude <regex>", "a regular expression for excluding modules")
-    .option("--include <regex>",     "a regular expression for including modules")
+    .option("-X, --do-not-follow <regex>", `include modules matching the regex,
+                              but not follow them any further`)
+    .option("-x, --exclude <regex>", "exclude all modules matching the regex")
+    .option("--include-only <regex>",     "only include modules matching the regex")
     .option("-d, --max-depth <n>", `the maximum depth to cruise; 0 <= n <= 99
                               (default: 0, which means 'infinite depth')`)
     .option("-M, --module-systems <items>", `list of module systems (default: amd,cjs,es6)`)

@@ -6,17 +6,18 @@
 2. [`--output-type`: specify the output format](#--output-type-specify-the-output-format)
 3. [`--do-not-follow`: don't cruise modules adhering to this pattern any further](#--do-not-follow-dont-cruise-modules-adhering-to-this-pattern-any-further)
 4. [`--exclude`: exclude modules from being cruised](#--exclude-exclude-modules-from-being-cruised)
-5. [`--max-depth`](#--max-depth)
-6. [`--config`/ `--validate`](#--config---validate)
-7. [`--init`](#--init)
-8. [`--prefix` prefixing links](#--prefix-prefixing-links)
-9. [`--info` showing what alt-js are supported](#--info-showing-what-alt-js-are-supported)
-10. [`--module-systems`](#--module-systems)
-11. [`--ts-pre-compilation-deps` (typescript only)](#--ts-pre-compilation-deps-typescript-only)
-12. [`--ts-config`: use a typescript configuration file ('project')](#--ts-config-use-a-typescript-configuration-file-project)
-13. [`--preserve-symlinks`](#--preserve-symlinks)
-14. [`--webpack-config`: use (the resolution options of) a webpack configuration`](#--webpack-config-use-the-resolution-options-of-a-webpack-configuration)
-15. [arguments](#arguments)
+5. [`--include-only`: only include modules satisfying a apttern](#--include-only-only-include-modules-satisfying-a-pattern)
+6. [`--max-depth`](#--max-depth)
+7. [`--config`/ `--validate`](#--config---validate)
+8. [`--init`](#--init)
+9. [`--prefix` prefixing links](#--prefix-prefixing-links)
+10. [`--info` showing what alt-js are supported](#--info-showing-what-alt-js-are-supported)
+11. [`--module-systems`](#--module-systems)
+12. [`--ts-pre-compilation-deps` (typescript only)](#--ts-pre-compilation-deps-typescript-only)
+13. [`--ts-config`: use a typescript configuration file ('project')](#--ts-config-use-a-typescript-configuration-file-project)
+14. [`--preserve-symlinks`](#--preserve-symlinks)
+15. [`--webpack-config`: use (the resolution options of) a webpack configuration`](#--webpack-config-use-the-resolution-options-of-a-webpack-configuration)
+16. [arguments](#arguments)
 
 
 ### `--help` / no parameters
@@ -100,10 +101,10 @@ all modules with a file path starting with coverage, test or node_modules, you c
 dependency-cruise -x "^(coverage|test|node_modules)" -T html -f deps-without-stuffs.html src
 ```
 
-### `--include`
-In the `include` option you can pass a regular expression of all file paths
+### `--include-only`: only include modules satisfying a apttern
+In the `include-only` option you can pass a regular expression of all file paths
 dependency-cruiser should include in a cruise. It will discard all files
-not in the `include` pattern.
+not matching the `include-only` pattern.
 
 E.g. to only take modules into account that are in the `src` tree (and exclude all
 node_modules, core modules and modules otherwise outside it):

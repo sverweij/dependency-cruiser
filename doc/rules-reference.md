@@ -138,6 +138,7 @@ Some of the command line options, so you don't have to specify them on each run.
 The currently supported options are
 [`doNotFollow`](./cli.md#--do-not-follow-dont-cruise-modules-adhering-to-this-pattern-any-further),
 [`exclude`](./cli.md#--exclude-exclude-modules-from-being-cruised),
+[`includeOnly`](./cli.md#--include-only-only-include-modules-satisfying-a-pattern)
 [`moduleSystems`](./cli.md#--module-systems),
 [`prefix`](./cli.md#--prefix-prefixing-links),
 [`tsPreCompilationDeps`](./cli.md#--ts-pre-compilation-deps-typescript-only),

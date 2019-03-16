@@ -168,8 +168,8 @@ describe('extract/extract - even when require gets non-string arguments, extract
 });
 
 describe('extract/extract - include', () => {
-    it('returns no dependencies when the include pattern is erroneous', () => {
-        const lOptions = normalize({include: 'will-not-match-dependencies-for-this-file'});
+    it('returns no dependencies when the includeOnly pattern is erroneous', () => {
+        const lOptions = normalize({includeOnly: 'will-not-match-dependencies-for-this-file'});
         const lResolveOptions = normalizeResolveOptions({bustTheCache: true}, lOptions);
 
         expect(
@@ -183,8 +183,8 @@ describe('extract/extract - include', () => {
         );
     });
 
-    it('only includes dependencies matching the passed "include" (1)', () => {
-        const lOptions = normalize({include: '/src/'});
+    it('only includes dependencies matching the passed "includeOnly" (1)', () => {
+        const lOptions = normalize({includeOnly: '/src/'});
         const lResolveOptions = normalizeResolveOptions({bustTheCache: true}, lOptions);
 
         expect(
@@ -211,8 +211,8 @@ describe('extract/extract - include', () => {
         );
     });
 
-    it('only includes dependencies matching the passed "include" (2)', () => {
-        const lOptions = normalize({include: 'include'});
+    it('only includes dependencies matching the passed "includeOnly" (2)', () => {
+        const lOptions = normalize({includeOnly: 'include'});
         const lResolveOptions = normalizeResolveOptions({bustTheCache: true}, lOptions);
 
         expect(
