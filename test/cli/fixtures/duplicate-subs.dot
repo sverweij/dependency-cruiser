@@ -1,4 +1,4 @@
-digraph "dependency-cruiser output"{
+strict digraph "dependency-cruiser output"{
     ordering=out
     rankdir=LR
     splines=true
@@ -7,10 +7,11 @@ digraph "dependency-cruiser output"{
     ranksep=0.18
     fontname="Helvetica-bold"
     fontsize=9
-    style="rounded,bold"
+    style="rounded,bold,filled"
+    fillcolor="#ffffff"
     compound=true
     node [shape=box style="rounded, filled" fillcolor="#ffffcc" height=0.2 fontname=Helvetica fontsize=9]
-    edge [color=black arrowhead=normal fontname=Helvetica fontsize=9]
+    edge [color="#00000077" penwidth=2.0 arrowhead=normal fontname=Helvetica fontsize=9]
 
     subgraph "cluster_test" {label="test" subgraph "cluster_test/cli" {label="cli" subgraph "cluster_test/cli/fixtures" {label="fixtures" subgraph "cluster_test/cli/fixtures/duplicate-subs" {label="duplicate-subs" subgraph "cluster_test/cli/fixtures/duplicate-subs/nested-sub" {label="nested-sub" subgraph "cluster_test/cli/fixtures/duplicate-subs/nested-sub/sub" {label="sub" "test/cli/fixtures/duplicate-subs/nested-sub/sub/index.js" [label="index.js" URL="test/cli/fixtures/duplicate-subs/nested-sub/sub/index.js"] } } } } } }
     subgraph "cluster_test" {label="test" subgraph "cluster_test/cli" {label="cli" subgraph "cluster_test/cli/fixtures" {label="fixtures" subgraph "cluster_test/cli/fixtures/duplicate-subs" {label="duplicate-subs" subgraph "cluster_test/cli/fixtures/duplicate-subs/nested-sub" {label="nested-sub" subgraph "cluster_test/cli/fixtures/duplicate-subs/nested-sub/sub" {label="sub" "test/cli/fixtures/duplicate-subs/nested-sub/sub/sub.js" [label="sub.js" URL="test/cli/fixtures/duplicate-subs/nested-sub/sub/sub.js"] } } } } } }

@@ -1,4 +1,4 @@
-digraph "dependency-cruiser output"{
+strict digraph "dependency-cruiser output"{
     ordering=out
     rankdir=LR
     splines=true
@@ -7,10 +7,11 @@ digraph "dependency-cruiser output"{
     ranksep=0.18
     fontname="Helvetica-bold"
     fontsize=9
-    style="rounded,bold"
+    style="rounded,bold,filled"
+    fillcolor="#ffffff"
     compound=true
     node [shape=folder style="rounded, filled" fillcolor="#ffffcc" height=0.2 fontname=Helvetica fontsize=9]
-    edge [color=black arrowhead=normal fontname=Helvetica fontsize=9]
+    edge [color="#00000077" penwidth=2.0 arrowhead=normal fontname=Helvetica fontsize=9]
 
     "." [label="." ]
     "bin" [label="bin" ]
@@ -68,18 +69,18 @@ digraph "dependency-cruiser output"{
     "src/cli" -> "node_modules/chalk"
     "src/cli" -> "node_modules/figures"
     "src/cli" -> "src/cli/compileConfig"
-    "src/cli" -> "." [color="grey"]
+    "src/cli" -> "." [color="grey" penwidth=1.0]
     "src/cli" -> "node_modules/semver-try-require/src"
     "src/cli/compileConfig" -> "src/extract/resolve" [color="orange" penwidth="2.0" tooltip="cli-to-main-only-warn" fontcolor="orange" xlabel="cli-to-main-only-warn"]
     "src/cli/compileConfig" -> "src/cli/compileConfig"
-    "src/cli/compileConfig" -> "." [color="grey"]
+    "src/cli/compileConfig" -> "." [color="grey" penwidth=1.0]
     "src/cli/compileConfig" -> "node_modules/lodash"
     "src/cli/compileConfig" -> "node_modules/strip-json-comments"
     "src/cli/initConfig" -> "src/cli/initConfig"
-    "src/cli/initConfig" -> "." [color="grey"]
+    "src/cli/initConfig" -> "." [color="grey" penwidth=1.0]
     "src/cli/initConfig" -> "node_modules/handlebars"
     "src/cli/initConfig" -> "node_modules/inquirer/lib"
-    "src/cli/utl" -> "." [color="grey"]
+    "src/cli/utl" -> "." [color="grey" penwidth=1.0]
     "src/extract" -> "src/extract"
     "src/extract" -> "src/extract/derive/circular"
     "src/extract" -> "src/extract/derive/orphan"
@@ -89,7 +90,7 @@ digraph "dependency-cruiser output"{
     "src/extract" -> "src/extract/ast-extractors"
     "src/extract" -> "src/extract/parse"
     "src/extract" -> "src/extract/resolve"
-    "src/extract" -> "." [color="grey"]
+    "src/extract" -> "." [color="grey" penwidth=1.0]
     "src/extract" -> "src/extract/transpile"
     "src/extract" -> "node_modules/glob"
     "src/extract/ast-extractors" -> "src/extract/ast-extractors"
@@ -104,12 +105,12 @@ digraph "dependency-cruiser output"{
     "src/extract/parse" -> "src/extract/utl"
     "src/extract/parse" -> "node_modules/acorn/dist"
     "src/extract/parse" -> "node_modules/acorn-loose/dist"
-    "src/extract/parse" -> "." [color="grey"]
+    "src/extract/parse" -> "." [color="grey" penwidth=1.0]
     "src/extract/parse" -> "node_modules/lodash"
     "src/extract/parse" -> "node_modules/semver-try-require/src"
     "src/extract/resolve" -> "src/extract/utl"
     "src/extract/resolve" -> "src/extract/resolve"
-    "src/extract/resolve" -> "." [color="grey"]
+    "src/extract/resolve" -> "." [color="grey" penwidth=1.0]
     "src/extract/resolve" -> "src/extract/resolve/readPackageDeps"
     "src/extract/resolve" -> "node_modules/lodash"
     "src/extract/resolve" -> "node_modules/resolve"
@@ -117,13 +118,13 @@ digraph "dependency-cruiser output"{
     "src/extract/resolve" -> "src/extract/transpile"
     "src/extract/resolve" -> "node_modules/awesome-typescript-loader/dist"
     "src/extract/resolve/readPackageDeps" -> "src/extract/resolve/readPackageDeps"
-    "src/extract/resolve/readPackageDeps" -> "." [color="grey"]
+    "src/extract/resolve/readPackageDeps" -> "." [color="grey" penwidth=1.0]
     "src/extract/resolve/readPackageDeps" -> "node_modules/lodash"
     "src/extract/transpile" -> "src/extract/transpile"
     "src/extract/transpile" -> "."
     "src/extract/transpile" -> "node_modules/semver-try-require/src"
     "src/extract/transpile" -> "node_modules/lodash"
-    "src/extract/utl" -> "." [color="grey"]
+    "src/extract/utl" -> "." [color="grey" penwidth=1.0]
     "src/main" -> "src/extract"
     "src/main" -> "src/extract/transpile"
     "src/main" -> "src/report/csv"
@@ -148,11 +149,11 @@ digraph "dependency-cruiser output"{
     "src/report/ddot" -> "src/report/ddot"
     "src/report/ddot" -> "node_modules/handlebars"
     "src/report/ddot" -> "node_modules/lodash"
-    "src/report/ddot" -> "." [color="grey"]
+    "src/report/ddot" -> "." [color="grey" penwidth=1.0]
     "src/report/dot" -> "src/report/dot"
     "src/report/dot" -> "node_modules/lodash"
     "src/report/dot" -> "node_modules/handlebars"
-    "src/report/dot" -> "." [color="grey"]
+    "src/report/dot" -> "." [color="grey" penwidth=1.0]
     "src/report/html" -> "src/report"
     "src/report/html" -> "src/report/html"
     "src/report/html" -> "node_modules/handlebars"
