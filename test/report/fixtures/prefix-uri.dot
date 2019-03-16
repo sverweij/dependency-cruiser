@@ -1,4 +1,4 @@
-digraph "dependency-cruiser output"{
+strict digraph "dependency-cruiser output"{
     ordering=out
     rankdir=LR
     splines=true
@@ -7,10 +7,11 @@ digraph "dependency-cruiser output"{
     ranksep=0.18
     fontname="Helvetica-bold"
     fontsize=9
-    style="rounded,bold"
+    style="rounded,bold,filled"
+    fillcolor="#ffffff"
     compound=true
     node [shape=box style="rounded, filled" fillcolor="#ffffcc" height=0.2 fontname=Helvetica fontsize=9]
-    edge [color=black arrowhead=normal fontname=Helvetica fontsize=9]
+    edge [color="#00000077" penwidth=2.0 arrowhead=normal fontname=Helvetica fontsize=9]
 
     "remi.js" [label="remi.js" color="red" fontcolor="red" tooltip="no-orphans" URL="testprefix://ladida/remi.js"]
 

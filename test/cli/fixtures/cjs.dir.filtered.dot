@@ -1,4 +1,4 @@
-digraph "dependency-cruiser output"{
+strict digraph "dependency-cruiser output"{
     ordering=out
     rankdir=LR
     splines=true
@@ -7,10 +7,11 @@ digraph "dependency-cruiser output"{
     ranksep=0.18
     fontname="Helvetica-bold"
     fontsize=9
-    style="rounded,bold"
+    style="rounded,bold,filled"
+    fillcolor="#ffffff"
     compound=true
     node [shape=box style="rounded, filled" fillcolor="#ffffcc" height=0.2 fontname=Helvetica fontsize=9]
-    edge [color=black arrowhead=normal fontname=Helvetica fontsize=9]
+    edge [color="#00000077" penwidth=2.0 arrowhead=normal fontname=Helvetica fontsize=9]
 
     "fs" [label="fs" color="grey" fontcolor="grey" ]
     "http" [label="http" color="grey" fontcolor="grey" ]
@@ -25,20 +26,20 @@ digraph "dependency-cruiser output"{
     subgraph "cluster_test" {label="test" subgraph "cluster_test/cli" {label="cli" subgraph "cluster_test/cli/fixtures" {label="fixtures" subgraph "cluster_test/cli/fixtures/cjs" {label="cjs" subgraph "cluster_test/cli/fixtures/cjs/sub" {label="sub" "test/cli/fixtures/cjs/sub/dir.js" [label="dir.js" URL="test/cli/fixtures/cjs/sub/dir.js"] } } } } }
     subgraph "cluster_test" {label="test" subgraph "cluster_test/cli" {label="cli" subgraph "cluster_test/cli/fixtures" {label="fixtures" subgraph "cluster_test/cli/fixtures/cjs" {label="cjs" "test/cli/fixtures/cjs/two_only_one.js" [label="two_only_one.js" URL="test/cli/fixtures/cjs/two_only_one.js"] } } } }
 
-    "test/cli/fixtures/cjs/one_only_one.js" -> "path" [color="grey"]
-    "test/cli/fixtures/cjs/one_only_two.js" -> "path" [color="grey"]
+    "test/cli/fixtures/cjs/one_only_one.js" -> "path" [color="grey" penwidth=1.0]
+    "test/cli/fixtures/cjs/one_only_two.js" -> "path" [color="grey" penwidth=1.0]
     "test/cli/fixtures/cjs/root_one.js" -> "test/cli/fixtures/cjs/one_only_one.js"
     "test/cli/fixtures/cjs/root_one.js" -> "test/cli/fixtures/cjs/one_only_two.js"
     "test/cli/fixtures/cjs/root_one.js" -> "test/cli/fixtures/cjs/shared.js"
     "test/cli/fixtures/cjs/root_one.js" -> "test/cli/fixtures/cjs/sub/dir.js" [color="orange" penwidth=2.0 tooltip="sub-not-allowed" fontcolor="orange" xlabel="sub-not-allowed"]
-    "test/cli/fixtures/cjs/root_one.js" -> "fs" [color="grey"]
+    "test/cli/fixtures/cjs/root_one.js" -> "fs" [color="grey" penwidth=1.0]
     "test/cli/fixtures/cjs/root_two.js" -> "test/cli/fixtures/cjs/shared.js"
     "test/cli/fixtures/cjs/root_two.js" -> "test/cli/fixtures/cjs/somedata.json"
     "test/cli/fixtures/cjs/root_two.js" -> "test/cli/fixtures/cjs/two_only_one.js"
-    "test/cli/fixtures/cjs/root_two.js" -> "http" [color="grey"]
-    "test/cli/fixtures/cjs/shared.js" -> "path" [color="grey"]
-    "test/cli/fixtures/cjs/sub/depindir.js" -> "path" [color="grey"]
+    "test/cli/fixtures/cjs/root_two.js" -> "http" [color="grey" penwidth=1.0]
+    "test/cli/fixtures/cjs/shared.js" -> "path" [color="grey" penwidth=1.0]
+    "test/cli/fixtures/cjs/sub/depindir.js" -> "path" [color="grey" penwidth=1.0]
     "test/cli/fixtures/cjs/sub/dir.js" -> "test/cli/fixtures/cjs/sub/depindir.js" [color="orange" penwidth=2.0 tooltip="sub-not-allowed" fontcolor="orange" xlabel="sub-not-allowed"]
-    "test/cli/fixtures/cjs/sub/dir.js" -> "path" [color="grey"]
+    "test/cli/fixtures/cjs/sub/dir.js" -> "path" [color="grey" penwidth=1.0]
     "test/cli/fixtures/cjs/two_only_one.js" -> "test/cli/fixtures/cjs/sub/dir.js" [color="orange" penwidth=2.0 tooltip="sub-not-allowed" fontcolor="orange" xlabel="sub-not-allowed"]
 }
