@@ -21,8 +21,11 @@ function gatherScannableFilesFromDir (pDirName, pOptions) {
             }
             return pSum;
         }, [])
-        .filter(pFullPathToFile => !pOptions.exclude || !matchesPattern(pathToPosix(pFullPathToFile), pOptions.exclude))
-        .filter(pFullPathToFile => !pOptions.include || matchesPattern(pathToPosix(pFullPathToFile), pOptions.include));
+        .filter(
+            pFullPathToFile =>
+                (!pOptions.exclude || !matchesPattern(pathToPosix(pFullPathToFile), pOptions.exclude)) &&
+                (!pOptions.includeOnly || matchesPattern(pathToPosix(pFullPathToFile), pOptions.includeOnly))
+        );
 }
 
 /**
@@ -38,9 +41,8 @@ function gatherScannableFilesFromDir (pDirName, pOptions) {
  * @param  {array} pFileDirArray an array of strings, representing globs and/ or
  *                               paths to files or directories to be gathered
  * @param  {object} pOptions     (optional) object with attributes
- *                               - exclude - an object with criteria on what to exclude:
- *                                  - path: regexp of what to exclude
- *                                  - pathNot: regexp of what to include
+ *                               - exclude - regexp of what to exclude
+ *                               - includeOnly - regexp what to exclude
  * @return {array}               an array of strings, representing paths to
  *                               files to be gathered.
  */

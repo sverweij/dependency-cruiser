@@ -86,7 +86,7 @@ function makeOptionsPresentable(pOptions) {
         "outputTo",
         "doNotFollow",
         "exclude",
-        "include",
+        "includeOnly",
         "maxDepth",
         "moduleSystems",
         "outputType",

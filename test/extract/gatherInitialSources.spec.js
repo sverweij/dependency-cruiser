@@ -195,14 +195,14 @@ describe("extract/gatherInitialSources", () => {
         );
     });
 
-    it("only gathers stuff in the include pattern", () => {
+    it("only gathers stuff in the includeOnly pattern", () => {
         expect(
             gather(
                 [
                     "test/extract/fixtures/gather-globbing/packages"
                 ],
                 {
-                    include: "/loki/"
+                    includeOnly: "/loki/"
                 }
             ).map(pathToPosix)
         ).to.deep.equal(
