@@ -21,10 +21,10 @@ function gatherScannableFilesFromDir (pDirName, pOptions) {
             }
             return pSum;
         }, [])
-        .filter(pFullPathToFile => !pOptions.exclude || !matchesPattern(pathToPosix(pFullPathToFile), pOptions.exclude))
         .filter(
             pFullPathToFile =>
-                !pOptions.includeOnly || matchesPattern(pathToPosix(pFullPathToFile), pOptions.includeOnly)
+                (!pOptions.exclude || !matchesPattern(pathToPosix(pFullPathToFile), pOptions.exclude)) &&
+                (!pOptions.includeOnly || matchesPattern(pathToPosix(pFullPathToFile), pOptions.includeOnly))
         );
 }
 
