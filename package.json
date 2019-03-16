@@ -51,7 +51,7 @@
     "build": "make dev-build",
     "build:clean": "make clean",
     "check": "npm-run-all build lint depcruise test:cover",
-    "check:full": "npm-run-all check",
+    "check:full": "npm-run-all check test:integration",
     "depcruise": "node ./bin/dependency-cruise --validate -- src bin/dependency-cruise test configs",
     "depcruise:graph": "node ./bin/dependency-cruise --validate --include-only '(^src|^[^/]+(js|json)$)' --output-type dot bin src | dot -T svg -Gsplines=ortho | cat docs/assets/depcruise-graph-head.snippet.html - docs/assets/depcruise-graph-foot.snippet.html > docs/dependency-cruiser-dependency-graph.html",
     "depcruise:graph:dir": "node ./bin/dependency-cruise --validate --include-only '(^src|^[^/]+(js|json)$)' --output-type ddot bin src | dot -T png > tmp_deps.png",
