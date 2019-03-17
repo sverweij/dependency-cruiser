@@ -1,6 +1,6 @@
 {
   "name": "dependency-cruiser",
-  "version": "4.15.0-beta-2",
+  "version": "4.15.0",
   "description": "Validate and visualize dependencies. With your rules. JavaScript, TypeScript, CoffeeScript. ES6, CommonJS, AMD.",
   "keywords": [
     "static analysis",
@@ -104,7 +104,7 @@
     "enhanced-resolve": "4.1.0",
     "figures": "2.0.0",
     "glob": "7.1.3",
-    "handlebars": "4.1.0",
+    "handlebars": "4.1.1",
     "inquirer": "6.2.2",
     "lodash": "4.17.11",
     "pnp-webpack-plugin": "1.4.1",
@@ -119,7 +119,7 @@
     "chai": "4.2.0",
     "chai-json-schema": "1.5.0",
     "coffeescript": "2.3.2",
-    "eslint": "5.15.1",
+    "eslint": "5.15.2",
     "eslint-plugin-import": "2.16.0",
     "eslint-plugin-mocha": "5.3.0",
     "eslint-plugin-node": "8.0.1",
@@ -131,7 +131,7 @@
     "nyc": "13.3.0",
     "shx": "0.3.2",
     "symlink-dir": "2.0.2",
-    "tslint": "5.13.1",
+    "tslint": "5.14.0",
     "typescript": "3.3.3333",
     "upem": "2.0.0",
     "yarn": "1.13.0"

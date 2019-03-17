@@ -25,7 +25,7 @@ program
     .option("-f, --output-to <file>", `file to write output to; - for stdout
                              `, "-")
     .option("-X, --do-not-follow <regex>", `include modules matching the regex,
-                              but not follow them any further`)
+                              but don't follow them any further`)
     .option("-x, --exclude <regex>", "exclude all modules matching the regex")
     .option("--include-only <regex>",     "only include modules matching the regex")
     .option("-d, --max-depth <n>", `the maximum depth to cruise; 0 <= n <= 99
