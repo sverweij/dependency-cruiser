@@ -81,6 +81,11 @@ function extractTrippleSlashDirectives(pAST) {
     );
 }
 
+function isRequireCallExpression(pASTNode) {
+    return typescript.SyntaxKind[pASTNode.kind] === 'CallExpression' &&
+        typescript.SyntaxKind[pASTNode.expression.originalKeywordKind] === 'RequireKeyword';
+}
+
 /**
  * returns an array of all commonJS in the AST (toplevel or otherwise)
  *
@@ -91,8 +96,7 @@ function extractCommonJS(pAST) {
     let lResult = [];
 
     function walk (pASTNode) {
-        if (typescript.SyntaxKind[pASTNode.kind] === 'CallExpression' &&
-            typescript.SyntaxKind[pASTNode.expression.originalKeywordKind] === 'RequireKeyword') {
+        if (isRequireCallExpression(pASTNode)) {
             const lFirstArgument = pASTNode.arguments.shift();
 
             if (lFirstArgument) {
@@ -123,3 +127,5 @@ module.exports = (pTypeScriptAST) =>
             .concat(extractTrippleSlashDirectives(pTypeScriptAST))
             .concat(extractCommonJS(pTypeScriptAST))
         : [];
+
+
