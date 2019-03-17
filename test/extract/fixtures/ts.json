@@ -54,6 +54,18 @@
                 "couldNotResolve": false
             },
             {
+                "module": "fs",
+                "resolved": "fs",
+                "moduleSystem": "cjs",
+                "coreModule": true,
+                "dependencyTypes": [
+                    "core"
+                ],
+                "followable": false,
+                "matchesDoNotFollow": false,
+                "couldNotResolve": false
+            },
+            {
                 "module": "path",
                 "resolved": "path",
                 "moduleSystem": "es6",
