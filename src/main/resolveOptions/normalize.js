@@ -12,14 +12,14 @@ function pushPlugin(pPlugins, pPluginToPush) {
 
 function compileResolveOptions(pResolveOptions){
     let DEFAULT_RESOLVE_OPTIONS = {
-        // symlinks listens to the 'preserveSymlinks' option - but note
-        // that symlinks = true means _follow_, which is the opposite
-        // of _preserve_ - which we have on false by default (following)
-        // nodejs default behavior.
+        // for later: check semantics of enhanced-resolve symlinks and
+        // node's preserveSymlinks. They seem to be
+        // symlink === !preserveSynlinks - but using it that way
+        // breaks backwards compatibility
         //
         // Someday we'll rely on this and remove the code that manually
-        // does this in index.js
-        symlinks: true,
+        // does this in extract/resolve/index.js
+        symlinks: false,
         // if a webpack config overrides extensions, there's probably
         // good cause. The scannableExtensions are an educated guess
         // anyway, that works well in most circumstances.
@@ -72,10 +72,12 @@ module.exports = (pResolveOptions, pOptions) => compileResolveOptions(
         {
 
             /*
-                enhanced-resolve's "symlinks" means "follow symlinks", which is the
-                opposite of "preserve symlinks" - hence the negation
-             */
-            symlinks: !(pOptions.preserveSymlinks),
+                for later: check semantics of enhanced-resolve symlinks and
+                node's preserveSymlinks. They seem to be
+                symlink === !preserveSymlinks - but using it that way
+                breaks backwards compatibility
+            */
+            symlinks: pOptions.preserveSymlinks,
             tsConfig: _get(pOptions, "ruleSet.options.tsConfig.fileName", null),
 
             /* squirel the externalModuleResolutionStrategy and combinedDependencies
