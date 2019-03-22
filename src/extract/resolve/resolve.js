@@ -7,7 +7,14 @@ let gInitialized = {};
 function init(pResolveOptions, pCachingContext) {
     if (!gInitialized[pCachingContext] || pResolveOptions.bustTheCache) {
         gResolver = enhancedResolve.ResolverFactory.createResolver(
-            pResolveOptions
+            Object.assign(
+                {},
+                pResolveOptions,
+                {
+                    // we're doing that ourselves for now
+                    symlinks: false
+                }
+            )
         );
         /* eslint security/detect-object-injection:0 */
         gInitialized[pCachingContext] = true;

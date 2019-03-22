@@ -323,6 +323,26 @@
         ]
     },
     {
+        "title": "require a symlinked module -- without preserveSymlinks specified",
+        "input": {
+            "fileName": "test/extract/fixtures/cjs/symlink.js"
+        },
+        "expected": [
+            {
+                "module": "../symlinked",
+                "resolved": "test/extract/fixtures/symlinkTarget/index.js",
+                "moduleSystem": "cjs",
+                "coreModule": false,
+                "dependencyTypes": [
+                    "local"
+                ],
+                "followable": true,
+                "matchesDoNotFollow": false,
+                "couldNotResolve": false
+            }
+        ]
+    },
+    {
         "title": "require a symlinked module -- with preserveSymlinks=false and baseDir",
         "input": {
             "fileName": "symlink.js",

@@ -57,7 +57,7 @@ function resolveModule(pDependency, pBaseDir, pFileDir, pResolveOptions) {
 module.exports = (pDependency, pBaseDir, pFileDir, pResolveOptions) => {
     let lResolvedModule = resolveModule(pDependency, pBaseDir, pFileDir, pResolveOptions);
 
-    if (pResolveOptions.symlinks && !lResolvedModule.coreModule && !lResolvedModule.couldNotResolve) {
+    if (!(pResolveOptions.symlinks) && !lResolvedModule.coreModule && !lResolvedModule.couldNotResolve) {
         try {
             lResolvedModule.resolved =
                 pathToPosix(path.relative(pBaseDir, fs.realpathSync(path.resolve(pBaseDir, lResolvedModule.resolved))));
