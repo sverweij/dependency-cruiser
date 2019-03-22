@@ -11,7 +11,7 @@ describe("main/resolveOptions/normalize", () => {
         const lNormalizedOptions = normalize({}, normalizeOptions({}));
 
         expect(Object.keys(lNormalizedOptions).length).to.equal(DEFAULT_NO_OF_RESOLVE_OPTIONS);
-        expect(lNormalizedOptions.symlinks).to.equal(true);
+        expect(lNormalizedOptions.symlinks).to.equal(false);
         expect(lNormalizedOptions.tsConfig).to.equal(null);
         expect(lNormalizedOptions.combinedDependencies).to.equal(false);
         expect(lNormalizedOptions).to.ownProperty('extensions');
@@ -23,7 +23,7 @@ describe("main/resolveOptions/normalize", () => {
         const lNormalizedOptions = normalize({}, normalizeOptions({externalModuleResolutionStrategy: "yarn-pnp"}));
 
         expect(Object.keys(lNormalizedOptions).length).to.equal(DEFAULT_NO_OF_RESOLVE_OPTIONS + 1);
-        expect(lNormalizedOptions.symlinks).to.equal(true);
+        expect(lNormalizedOptions.symlinks).to.equal(false);
         expect(lNormalizedOptions.tsConfig).to.equal(null);
         expect(lNormalizedOptions.combinedDependencies).to.equal(false);
         expect(lNormalizedOptions).to.ownProperty('extensions');
@@ -41,7 +41,7 @@ describe("main/resolveOptions/normalize", () => {
         );
 
         expect(Object.keys(lNormalizedOptions).length).to.equal(DEFAULT_NO_OF_RESOLVE_OPTIONS + 1);
-        expect(lNormalizedOptions.symlinks).to.equal(true);
+        expect(lNormalizedOptions.symlinks).to.equal(false);
         expect(lNormalizedOptions.tsConfig).to.equal(A_TEST_TSCONFIG);
         expect(lNormalizedOptions.combinedDependencies).to.equal(false);
         expect(lNormalizedOptions).to.ownProperty('extensions');
