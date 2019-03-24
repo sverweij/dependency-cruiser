@@ -1,49 +1,60 @@
-const path                        = require('path');
-const _                           = require('lodash');
-const intersects                  = require('../utl/arrayUtil').intersects;
-const resolve                     = require('./resolve');
-const extractES6Dependencies      = require('./ast-extractors/extract-ES6-deps');
-const extractCommonJSDependencies = require('./ast-extractors/extract-commonJS-deps');
-const extractAMDDependencies      = require('./ast-extractors/extract-AMD-deps');
-const extractTypeScript           = require('./ast-extractors/extract-typescript-deps');
-const getJSASTCached              = require('./parse/toJavascriptAST').getASTCached;
-const toTypescriptAST             = require('./parse/toTypescriptAST');
+const path                  = require('path');
+const _                     = require('lodash');
+const intersects            = require('../utl/arrayUtil').intersects;
+const resolve               = require('./resolve');
+const extractES6Deps        = require('./ast-extractors/extract-ES6-deps');
+const extractCommonJSDeps   = require('./ast-extractors/extract-commonJS-deps');
+const extractAMDDeps        = require('./ast-extractors/extract-AMD-deps');
+const extractTypeScriptDeps = require('./ast-extractors/extract-typescript-deps');
+const getJSASTCached        = require('./parse/toJavascriptAST').getASTCached;
+const toTypescriptAST       = require('./parse/toTypescriptAST');
 
-function extractECMADependencies(pAST, pDependencies, pOptions, pFileName) {
-    if (
-        pOptions.tsPreCompilationDeps &&
-        path.extname(pFileName).startsWith(".ts") &&
-        toTypescriptAST.isAvailable()
-    ) {
-        pDependencies = pDependencies.concat(
-            extractTypeScript(
-                toTypescriptAST.getASTCached(
-                    path.join(pOptions.baseDir, pFileName)
-                )
+function extractFromTypeScriptAST(pDependencies, pOptions, pFileName) {
+    return pDependencies.concat(
+        extractTypeScriptDeps(
+            toTypescriptAST.getASTCached(
+                path.join(pOptions.baseDir, pFileName)
             )
-        );
-    } else {
-        extractES6Dependencies(pAST, pDependencies);
+        )
+    );
+}
+
+function shouldUseTSC(pOptions, pFileName) {
+    return toTypescriptAST.isAvailable() &&
+        path.extname(pFileName).startsWith(".ts") &&
+        pOptions.tsPreCompilationDeps;
+}
+
+function extractFromJavaScriptAST(pDependencies, pOptions, pFileName, pTSConfig) {
+    const lAST = getJSASTCached(path.join(pOptions.baseDir, pFileName), pTSConfig);
+
+    if (pOptions.moduleSystems.indexOf("cjs") > -1) {
+        extractCommonJSDeps(lAST, pDependencies);
     }
-    return pDependencies;
+    if (pOptions.moduleSystems.indexOf("es6") > -1) {
+        extractES6Deps(lAST, pDependencies);
+    }
+    if (pOptions.moduleSystems.indexOf("amd") > -1) {
+        extractAMDDeps(lAST, pDependencies);
+    }
 }
 
 function extractDependencies(pOptions, pFileName, pTSConfig) {
-    const lAST = getJSASTCached(path.join(pOptions.baseDir, pFileName), pTSConfig);
     let lDependencies = [];
 
-    if (pOptions.moduleSystems.indexOf("cjs") > -1) {
-        extractCommonJSDependencies(lAST, lDependencies);
+    if (shouldUseTSC(pOptions, pFileName)){
+        lDependencies = extractFromTypeScriptAST(lDependencies, pOptions, pFileName)
+            .filter(
+                pDep => pOptions.moduleSystems.some(
+                    pModuleSystem => pModuleSystem === pDep.moduleSystem
+                )
+            );
+    } else {
+        extractFromJavaScriptAST(lDependencies, pOptions, pFileName, pTSConfig);
     }
-    if (pOptions.moduleSystems.indexOf("es6") > -1) {
-        lDependencies = extractECMADependencies(lAST, lDependencies, pOptions, pFileName);
-    }
-    if (pOptions.moduleSystems.indexOf("amd") > -1) {
-        extractAMDDependencies(lAST, lDependencies);
-    }
+
     return lDependencies;
 }
-
 
 function matchesDoNotFollow(pResolved, pDoNotFollow) {
     const lMatchesPath = Boolean(pDoNotFollow.path)

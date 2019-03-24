@@ -69,6 +69,20 @@
                         "circular": false
                     },
                     {
+                        "resolved": "fs",
+                        "coreModule": true,
+                        "dependencyTypes": [
+                            "core"
+                        ],
+                        "followable": false,
+                        "matchesDoNotFollow": false,
+                        "couldNotResolve": false,
+                        "module": "fs",
+                        "moduleSystem": "cjs",
+                        "valid": true,
+                        "circular": false
+                    },
+                    {
                         "resolved": "path",
                         "coreModule": true,
                         "dependencyTypes": [
@@ -83,6 +97,18 @@
                         "circular": false
                     }
                 ],
+                "valid": true
+            },
+            {
+                "source": "fs",
+                "followable": false,
+                "matchesDoNotFollow": false,
+                "coreModule": true,
+                "couldNotResolve": false,
+                "dependencyTypes": [
+                    "core"
+                ],
+                "dependencies": [],
                 "valid": true
             },
             {

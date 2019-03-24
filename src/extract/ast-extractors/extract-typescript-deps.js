@@ -1,3 +1,4 @@
+/* eslint-disable valid-jsdoc */
 const tryRequire = require('semver-try-require');
 const $package   = require('../../../package.json');
 
@@ -7,6 +8,14 @@ const typescript = tryRequire('typescript', $package.supportedTranspilers.typesc
  * Both extractImport* assume the imports/ exports can only occur at
  * top level. AFAIK this the only place they're allowed, so we should
  * be good. Otherwise we'll need to walk the tree.
+ */
+
+/**
+ * Get all import and export statements from the top level AST node
+ *
+ * @param {import("typescript").Node} pAST - the (top-level in this case) AST node
+ * @returns {{moduleName: string, moduleSystem: string}[]} - all import and export statements in the
+ *                                  (top level) AST node
  */
 function extractImportsAndExports(pAST) {
     return pAST.statements
@@ -22,6 +31,13 @@ function extractImportsAndExports(pAST) {
         }));
 }
 
+/**
+ * Get all import equals statements from the top level AST node
+ *
+ * @param {import("typescript").Node} pAST - the (top-level in this case) AST node
+ * @returns {{moduleName: string, moduleSystem: string}[]} - all import equals statements in the
+ *                                  (top level) AST node
+ */
 function extractImportEquals(pAST) {
     return pAST.statements
         .filter(pStatement =>
@@ -39,8 +55,8 @@ function extractImportEquals(pAST) {
  * might be wise to distinguish the three types of /// directive that
  * can come out of this as the resolution algorithm might differ
  *
- * @param {*} pAST - typescript syntax tree
- * @returns {object} - 'tripple slash' dependencies
+ * @param {import("typescript").Node} pAST - typescript syntax tree
+ * @returns {{moduleName: string, moduleSystem: string}[]} - 'tripple slash' dependencies
  */
 function extractTrippleSlashDirectives(pAST) {
     return pAST.referencedFiles.map(
@@ -65,9 +81,51 @@ function extractTrippleSlashDirectives(pAST) {
     );
 }
 
+function isRequireCallExpression(pASTNode) {
+    return typescript.SyntaxKind[pASTNode.kind] === 'CallExpression' &&
+        typescript.SyntaxKind[pASTNode.expression.originalKeywordKind] === 'RequireKeyword';
+}
+
+/**
+ * returns an array of all commonJS in the AST (toplevel or otherwise)
+ *
+ * @param {import("typescript").Node} pAST - typescript syntax tree
+ * @returns {{moduleName: string, moduleSystem: string}[]} - all commonJS dependencies
+ */
+function extractCommonJS(pAST) {
+    let lResult = [];
+
+    function walk (pASTNode) {
+        if (isRequireCallExpression(pASTNode)) {
+            const lFirstArgument = pASTNode.arguments.shift();
+
+            if (lFirstArgument) {
+                lResult.push({
+                    moduleName: lFirstArgument.text,
+                    moduleSystem: 'cjs'
+                });
+            }
+        }
+        typescript.forEachChild(pASTNode, walk);
+    }
+
+    walk(pAST);
+
+    return lResult;
+}
+
+
+/**
+ * returns all dependencies in the (top level) AST
+ *
+ * @type {(pTypeScriptAST: import("typescript").Node) => {moduleName: string, moduleSystem: string}[]}
+ */
 module.exports = (pTypeScriptAST) =>
     Boolean(typescript)
         ? extractImportsAndExports(pTypeScriptAST)
             .concat(extractImportEquals(pTypeScriptAST))
             .concat(extractTrippleSlashDirectives(pTypeScriptAST))
+            .concat(extractCommonJS(pTypeScriptAST))
         : [];
+
+

@@ -1,0 +1,81 @@
+{
+    "modules": [
+        {
+            "dependencies": [],
+            "source": "test/main/fixtures/ts-precompilation-deps-on-es/also-used.ts",
+            "valid": true
+        },
+        {
+            "dependencies": [],
+            "source": "test/main/fixtures/ts-precompilation-deps-on-es/definitely-used.ts",
+            "valid": true
+        },
+        {
+            "dependencies": [],
+            "source": "test/main/fixtures/ts-precompilation-deps-on-es/imported-from-index-but-not-used.ts",
+            "valid": true
+        },
+        {
+            "dependencies": [
+                {
+                    "coreModule": false,
+                    "couldNotResolve": false,
+                    "dependencyTypes": [
+                        "local"
+                    ],
+                    "followable": true,
+                    "matchesDoNotFollow": false,
+                    "module": "./also-used",
+                    "moduleSystem": "cjs",
+                    "resolved": "test/main/fixtures/ts-precompilation-deps-on-es/also-used.ts",
+                    "valid": true
+                },
+                {
+                    "coreModule": false,
+                    "couldNotResolve": false,
+                    "dependencyTypes": [
+                        "local"
+                    ],
+                    "followable": true,
+                    "matchesDoNotFollow": false,
+                    "module": "./definitely-used",
+                    "moduleSystem": "es6",
+                    "resolved": "test/main/fixtures/ts-precompilation-deps-on-es/definitely-used.ts",
+                    "valid": true
+                },
+                {
+                    "coreModule": false,
+                    "couldNotResolve": false,
+                    "dependencyTypes": [
+                        "local"
+                    ],
+                    "followable": true,
+                    "matchesDoNotFollow": false,
+                    "module": "./imported-from-index-but-not-used",
+                    "moduleSystem": "es6",
+                    "resolved": "test/main/fixtures/ts-precompilation-deps-on-es/imported-from-index-but-not-used.ts",
+                    "valid": true
+                }
+            ],
+            "source": "test/main/fixtures/ts-precompilation-deps-on-es/index.ts",
+            "valid": true
+        }
+    ],
+    "summary": {
+        "error": 0,
+        "info": 0,
+        "optionsUsed": {
+            "externalModuleResolutionStrategy": "node_modules",
+            "moduleSystems": [
+                "amd",
+                "cjs",
+                "es6"
+            ],
+            "preserveSymlinks": false,
+            "tsPreCompilationDeps": true
+        },
+        "totalCruised": 4,
+        "violations": [],
+        "warn": 0
+    }
+}
