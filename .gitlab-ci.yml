@@ -4,22 +4,23 @@ cache:
   paths:
     - node_modules
 
-test_async_node_10:
-  image: node:10
+test_async_node_11:
+  image: node:11
   script:
    - npm install
    - npm run lint
    - npm run lint:types
    - npm run depcruise
-   - npm run test:cover
    - npm run test:integration
+   - npm run test:cover
   except:
    - tags
 
-test_async_node_11:
-  image: node:11
+test_async_node_10:
+  image: node:10
   script:
    - npm install
+   - npm run test:integration
    - npm run test:cover
   except:
    - tags
@@ -28,6 +29,7 @@ test_async_node_8:
   image: node:8
   script:
    - npm install
+   - npm run test:integration
    - npm run test:cover
   except:
    - tags
