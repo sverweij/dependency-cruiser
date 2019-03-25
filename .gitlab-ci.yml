@@ -4,8 +4,8 @@ cache:
   paths:
     - node_modules
 
-test_async_node_10:
-  image: node:10
+test_async_node_11:
+  image: node:11
   script:
    - npm install
    - npm run lint
@@ -16,8 +16,8 @@ test_async_node_10:
   except:
    - tags
 
-test_async_node_11:
-  image: node:11
+test_async_node_10:
+  image: node:10
   script:
    - npm install
    - npm run test:cover
