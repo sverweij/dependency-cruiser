@@ -23,10 +23,21 @@ case (we're on ES2015 as compilation target in `extract/transpile`)
 these things won't end up post compile either and will have to
 be handled by surfing the typescript AST.
 
+Dynamic imports are not in the javascript standard yet, but typescript
+already has it:
+
+```typescript
+import('aju').then(aju => aju.paraplu());
+```
+Same shortcoming as the import `yadda = require('aju')` thing when
+downcompiling - and likewise supported when ts-precompilation-deps
+are _on_.
+
+
 
 Regular (es6 style) imports need to be handled by surfing the typescript AST,
 as the typescript compiler output won't contain references to types
-nore references to modules that are unused
+nor references to modules that are unused
 ```typescript
 import './import-for-side-effects';
 import { SomeSingleExport } from './ts-thing';
