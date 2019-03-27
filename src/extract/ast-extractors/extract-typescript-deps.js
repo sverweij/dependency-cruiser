@@ -86,25 +86,39 @@ function isRequireCallExpression(pASTNode) {
         typescript.SyntaxKind[pASTNode.expression.originalKeywordKind] === 'RequireKeyword';
 }
 
+function isDynamicImportExpression(pASTNode) {
+    return typescript.SyntaxKind[pASTNode.kind] === 'CallExpression' &&
+        typescript.SyntaxKind[pASTNode.expression.kind] === 'ImportKeyword';
+}
+
+function firstArgIsAString(pASTNode) {
+    const lFirstArgument = pASTNode.arguments[0];
+
+    return lFirstArgument && typescript.SyntaxKind[lFirstArgument.kind] === "StringLiteral";
+}
+
 /**
- * returns an array of all commonJS in the AST (toplevel or otherwise)
+ * returns an array of dependencies that come potentially nested within
+ * a source file, like commonJS or dynamic imports
  *
  * @param {import("typescript").Node} pAST - typescript syntax tree
  * @returns {{moduleName: string, moduleSystem: string}[]} - all commonJS dependencies
  */
-function extractCommonJS(pAST) {
+function extractNestedDependencies(pAST) {
     let lResult = [];
 
     function walk (pASTNode) {
-        if (isRequireCallExpression(pASTNode)) {
-            const lFirstArgument = pASTNode.arguments.shift();
-
-            if (lFirstArgument) {
-                lResult.push({
-                    moduleName: lFirstArgument.text,
-                    moduleSystem: 'cjs'
-                });
-            }
+        if (isRequireCallExpression(pASTNode) && firstArgIsAString(pASTNode)) {
+            lResult.push({
+                moduleName: pASTNode.arguments[0].text,
+                moduleSystem: 'cjs'
+            });
+        }
+        if (isDynamicImportExpression(pASTNode) && firstArgIsAString(pASTNode)) {
+            lResult.push({
+                moduleName: pASTNode.arguments[0].text,
+                moduleSystem: 'es6'
+            });
         }
         typescript.forEachChild(pASTNode, walk);
     }
@@ -125,7 +139,7 @@ module.exports = (pTypeScriptAST) =>
         ? extractImportsAndExports(pTypeScriptAST)
             .concat(extractImportEquals(pTypeScriptAST))
             .concat(extractTrippleSlashDirectives(pTypeScriptAST))
-            .concat(extractCommonJS(pTypeScriptAST))
+            .concat(extractNestedDependencies(pTypeScriptAST))
         : [];
 
 
