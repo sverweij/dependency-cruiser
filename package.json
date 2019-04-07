@@ -53,13 +53,12 @@
     "check": "npm-run-all build lint depcruise test:cover",
     "check:full": "npm-run-all check test:integration",
     "depcruise": "node ./bin/dependency-cruise --validate -- src bin/dependency-cruise test configs",
-    "depcruise:graph": "node ./bin/dependency-cruise --validate --include-only '(^src|^[^/]+(js|json)$)' --output-type dot bin src | dot -T svg -Gsplines=ortho | cat docs/assets/depcruise-graph-head.snippet.html - docs/assets/depcruise-graph-foot.snippet.html > docs/dependency-cruiser-dependency-graph.html",
     "depcruise:graph:dir": "node ./bin/dependency-cruise --validate --include-only '(^src|^[^/]+(js|json)$)' --output-type ddot bin src | dot -T png > tmp_deps.png",
     "depcruise:graph:osage": "node ./bin/dependency-cruise --validate --include-only '(^src|^[^/]+(js|json)$)' --output-type dot bin src | osage -Gpack=16 -GpackMode=array2 -T svg > tmp_deps.svg",
     "depcruise:graph:fdp": "node ./bin/dependency-cruise --validate --include-only '^src' --output-type dot bin src | fdp -GK=0.1 -Gsplines=ortho -T svg > tmp_deps.svg",
-    "depcruise:graph:doc": "npm-run-all depcruise:graph:doc:generate depcruise:graph:doc:optimize",
-    "depcruise:graph:doc:generate": "./bin/dependency-cruise --validate --do-not-follow report --include-only '(^src|^[^/]+(js|json)$)' --output-type dot bin/dependency-cruise | dot -T png > doc/real-world-samples/dependency-cruiser-without-node_modules.png",
-    "depcruise:graph:doc:optimize": "optipng doc/real-world-samples/dependency-cruiser-without-node_modules.png",
+    "depcruise:graph:doc": "npm-run-all --parallel depcruise:graph:doc:*",
+    "depcruise:graph:doc:html": "node ./bin/dependency-cruise --validate --include-only '(^src|^[^/]+(js|json)$)' --output-type dot bin src | dot -T svg -Gsplines=ortho | cat docs/assets/depcruise-graph-head.snippet.html - docs/assets/depcruise-graph-foot.snippet.html > docs/dependency-cruiser-dependency-graph.html",
+    "depcruise:graph:doc:png": "./bin/dependency-cruise --validate --do-not-follow report --include-only '(^src|^[^/]+(js|json)$)' --output-type dot bin/dependency-cruise | dot -Gdpi=192 -Gsplines=ortho -T png | pngquant - > doc/real-world-samples/dependency-cruiser-without-node_modules.png",
     "lint": "eslint bin/dependency-cruise src test configs",
     "lint:types": "tslint types/dependency-cruiser.d.ts",
     "lint:fix": "eslint --fix bin/dependency-cruise src test configs",
@@ -88,7 +87,7 @@
     "update-dependencies": "npm-run-all upem:update upem:install build:clean build lint:fix depcruise test:cover",
     "upem:install": "npm install",
     "upem:update": "npm outdated --json | upem",
-    "version": "npm-run-all build depcruise:graph:doc depcruise:graph scm:stage"
+    "version": "npm-run-all build depcruise:graph:doc scm:stage"
   },
   "upem": {
     "donotup": [

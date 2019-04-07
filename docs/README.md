@@ -5,7 +5,7 @@ The bootstrap jumbotron + ukelele movie site on dependency-cruiser.
 In the making.
 
 
-####In case you're confused:
+#### In case you're confused:
 - doc contains the documentation for dependency-cruiser (at the moment)
 - docs (not the s - this folder) is the website. 
 
