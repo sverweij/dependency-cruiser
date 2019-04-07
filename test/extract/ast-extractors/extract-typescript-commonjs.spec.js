@@ -82,4 +82,24 @@ describe("ast-extractors/extract-typescript - regular commonjs require", () => {
             []
         );
     });
+
+    it("ignores regular require with a non-string argument", () => {
+        expect(
+            extractTypescript(
+                "const lala = require(666)"
+            )
+        ).to.deep.equal(
+            []
+        );
+    });
+
+    it("ignores regular require with a function for a parameter", () => {
+        expect(
+            extractTypescript(
+                "const lala = require(helvete())"
+            )
+        ).to.deep.equal(
+            []
+        );
+    });
 });
