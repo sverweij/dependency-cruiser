@@ -1,7 +1,7 @@
 const fs     = require("fs");
 const expect = require('chai').expect;
 
-module.exports = (() => ({
+module.exports = {
     assertFileEqual (pActualFileName, pExpectedFileName) {
         expect(
             fs.readFileSync(pActualFileName, {encoding: "utf8"})
@@ -9,4 +9,4 @@ module.exports = (() => ({
             fs.readFileSync(pExpectedFileName, {encoding: "utf8"})
         );
     }
-}))();
+};
