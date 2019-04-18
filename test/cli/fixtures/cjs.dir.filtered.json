@@ -337,6 +337,7 @@
             ],
             "outputType": "json",
             "tsPreCompilationDeps": false,
+            "combinedDependencies": false,
             "preserveSymlinks": false,
             "externalModuleResolutionStrategy": "node_modules"
         }

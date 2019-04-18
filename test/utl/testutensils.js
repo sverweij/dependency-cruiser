@@ -8,5 +8,13 @@ module.exports = {
         ).to.equal(
             fs.readFileSync(pExpectedFileName, {encoding: "utf8"})
         );
+    },
+
+    assertJSONFileEqual (pActualFileName, pExpectedFileName) {
+        expect(
+            JSON.parse(fs.readFileSync(pActualFileName, {encoding: "utf8"}))
+        ).to.deep.equal(
+            JSON.parse(fs.readFileSync(pExpectedFileName, {encoding: "utf8"}))
+        );
     }
 };

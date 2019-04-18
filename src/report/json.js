@@ -3,6 +3,6 @@ module.exports = pInput =>
         {},
         pInput,
         {
-            modules: JSON.stringify(pInput, null, "    ")
+            modules: JSON.stringify(pInput, null, "  ")
         }
     );

@@ -182,6 +182,7 @@
         "warn": 0,
         "info": 0,
         "totalCruised": 8,
+        "ruleSetUsed": {},
         "optionsUsed": {
             "moduleSystems": ["amd", "cjs", "es6"],
             "tsPreCompilationDeps": false,

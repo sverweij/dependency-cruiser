@@ -4,6 +4,7 @@ const depSchema  = require('../../src/extract/jsonschema.json');
 const tsFixture  = require('./fixtures/ts.json');
 const tsxFixture = require('./fixtures/tsx.json');
 const jsxFixture = require('./fixtures/jsx.json');
+const jsxAsObjectFixture = require('./fixtures/jsx-as-object.json');
 const tsPreCompFixtureCJS = require('./fixtures/ts-precomp-cjs.json');
 const tsPreCompFixtureES = require('./fixtures/ts-precomp-es.json');
 const tsNoPrecompFixtureCJS = require('./fixtures/ts-no-precomp-cjs.json');
@@ -47,7 +48,7 @@ describe("main", () => {
             {bustTheCache:true}
         );
 
-        expect(lResult).to.deep.equal(jsxFixture);
+        expect(lResult).to.deep.equal(jsxAsObjectFixture);
         expect(lResult).to.be.jsonSchema(depSchema);
     });
     it("ts-pre-compilation-deps: on, target CJS", () => {

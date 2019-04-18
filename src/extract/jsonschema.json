@@ -32,6 +32,9 @@
                     "type": "number",
                     "description": "the number of modules cruised"
                 },
+                "ruleSetUsed": {
+                    "type": "object"
+                },
                 "optionsUsed": { "$ref": "#/definitions/OptionsType" }
             }
         },
@@ -238,6 +241,10 @@
             "description": "the (command line) options used to generate the dependency-tree",
             "additionalProperties": false,
             "properties": {
+                "args": {
+                    "type": "string",
+                    "description": "arguments passed on the command line"
+                },
                 "rulesFile": {
                     "type": "string",
                     "description": "The rules file used to validate the dependencies (if any)"

@@ -1,4 +1,5 @@
 const _               = require('lodash');
+const _get            = require('lodash/get');
 const pathToPosix     = require('./utl/pathToPosix');
 const extract         = require('./extract');
 const deriveCirculars = require('./derive/circular');
@@ -82,19 +83,21 @@ function complete(pAll, pFromListItem) {
 
 function makeOptionsPresentable(pOptions) {
     const SHAREABLE_OPTIONS = [
-        "rulesFile",
-        "outputTo",
+        "args",
+        "combinedDependencies",
         "doNotFollow",
         "exclude",
+        "externalModuleResolutionStrategy",
         "includeOnly",
         "maxDepth",
         "moduleSystems",
+        "outputTo",
         "outputType",
         "prefix",
-        "tsPreCompilationDeps",
         "preserveSymlinks",
-        "webpackConfig",
-        "externalModuleResolutionStrategy"
+        "rulesFile",
+        "tsPreCompilationDeps",
+        "webpackConfig"
     ];
 
     return SHAREABLE_OPTIONS
@@ -107,6 +110,25 @@ function makeOptionsPresentable(pOptions) {
             },
             {}
         );
+}
+
+function addRuleSetUsed(pOptions) {
+    const lForbidden = _get(pOptions, "ruleSet.forbidden");
+    const lAllowed = _get(pOptions, "ruleSet.allowed");
+    const lAllowedSeverity = _get(pOptions, "ruleSet.allowedSeverity");
+    let lRetval = {};
+
+    if (pOptions.ruleSet) {
+        lRetval = {
+            ruleSetUsed : Object.assign(
+                lForbidden ? {forbidden: lForbidden} : {},
+                lAllowed ? {allowed: lAllowed} : {},
+                lAllowedSeverity ? {allowedSeverity: lAllowedSeverity} : {}
+            )
+        };
+    }
+
+    return lRetval;
 }
 
 module.exports = (pFileDirArray, pOptions, pCallback, pResolveOptions, pTSConfig) => {
@@ -134,7 +156,8 @@ module.exports = (pFileDirArray, pOptions, pCallback, pResolveOptions, pTSConfig
                     summarize(lModules),
                     {
                         optionsUsed: makeOptionsPresentable(pOptions)
-                    }
+                    },
+                    addRuleSetUsed(pOptions)
                 )
         }
     );
