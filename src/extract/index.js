@@ -116,19 +116,12 @@ function addRuleSetUsed(pOptions) {
     const lForbidden = _get(pOptions, "ruleSet.forbidden");
     const lAllowed = _get(pOptions, "ruleSet.allowed");
     const lAllowedSeverity = _get(pOptions, "ruleSet.allowedSeverity");
-    let lRetval = {};
 
-    if (pOptions.ruleSet) {
-        lRetval = {
-            ruleSetUsed : Object.assign(
-                lForbidden ? {forbidden: lForbidden} : {},
-                lAllowed ? {allowed: lAllowed} : {},
-                lAllowedSeverity ? {allowedSeverity: lAllowedSeverity} : {}
-            )
-        };
-    }
-
-    return lRetval;
+    return Object.assign(
+        lForbidden ? {forbidden: lForbidden} : {},
+        lAllowed ? {allowed: lAllowed} : {},
+        lAllowedSeverity ? {allowedSeverity: lAllowedSeverity} : {}
+    );
 }
 
 module.exports = (pFileDirArray, pOptions, pCallback, pResolveOptions, pTSConfig) => {
@@ -157,7 +150,9 @@ module.exports = (pFileDirArray, pOptions, pCallback, pResolveOptions, pTSConfig
                     {
                         optionsUsed: makeOptionsPresentable(pOptions)
                     },
-                    addRuleSetUsed(pOptions)
+                    pOptions.ruleSet
+                        ? {ruleSetUsed: addRuleSetUsed(pOptions)}
+                        : {}
                 )
         }
     );
