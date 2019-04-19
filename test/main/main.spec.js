@@ -1,6 +1,6 @@
 const chai       = require('chai');
 const main       = require("../../src/main");
-const depSchema  = require('../../src/extract/jsonschema.json');
+const depSchema  = require('../../src/extract/results-schema.json');
 const tsFixture  = require('./fixtures/ts.json');
 const tsxFixture = require('./fixtures/tsx.json');
 const jsxFixture = require('./fixtures/jsx.json');

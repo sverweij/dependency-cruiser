@@ -1,7 +1,7 @@
 const Ajv             = require('ajv');
 const safeRegex       = require('../../utl/safe-regex');
 const validateOptions = require('../options/validate');
-const ruleSchema      = require('./jsonschema.json');
+const ruleSchema      = require('./config-schema.json');
 
 const ajv             = new Ajv();
 

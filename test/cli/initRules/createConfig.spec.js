@@ -3,7 +3,7 @@ const path              = require('path');
 const chai              = require('chai');
 const stripJSONComments = require('strip-json-comments');
 const createConfigFile  = require("../../../src/cli/initConfig/createConfigFile");
-const rulesSchema       = require('../../../src/main/ruleSet/jsonschema.json');
+const rulesSchema       = require('../../../src/main/ruleSet/config-schema.json');
 const deleteDammit      = require("../deleteDammit.utl");
 
 const expect            = chai.expect;
