@@ -7,7 +7,7 @@ The output format contains two sections:
               how many violations it found and an array of the actual violations
 
 
-A [json schema](../src/extract/jsonschema.json) describes the output format
+A [json schema](../src/extract/results-schema.json) describes the output format
 attributes in painstaking detail. The schema is accurate and actual - each build
 unit tests assure the output format adheres to the schema.
 
@@ -152,7 +152,7 @@ module):
         "warn": 0,
         "info": 0,
         "totalCruised": 6,
-        "usedOptions": {
+        "optionsUsed": {
             "outputType": "json"
         }
     }
