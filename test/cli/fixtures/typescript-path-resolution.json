@@ -50,6 +50,7 @@
         "warn": 0,
         "info": 0,
         "totalCruised": 3,
+        "ruleSetUsed": {},
         "optionsUsed": {
             "outputTo": "test/cli/output/typescript-path-resolution.json",
             "moduleSystems": [
@@ -59,6 +60,7 @@
             ],
             "outputType": "json",
             "tsPreCompilationDeps": false,
+            "combinedDependencies": false,
             "preserveSymlinks": false,
             "webpackConfig": {
                 "fileName": "test/cli/fixtures/typescriptconfig/cli-config-with-path/webpack.config.js"

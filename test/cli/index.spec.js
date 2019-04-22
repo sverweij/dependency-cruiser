@@ -157,10 +157,17 @@ function runFileBasedTests(pModuleType) {
             const lExitCode = processCLI([pPair.dirOrFile], pPair.options);
 
             expect(lExitCode).to.equal(pPair.expectExitCode);
-            tst.assertFileEqual(
-                pPair.options.outputTo,
-                path.join(FIX_DIR, pPair.expect)
-            );
+            if (pPair.options.outputType === "json") {
+                tst.assertJSONFileEqual(
+                    pPair.options.outputTo,
+                    path.join(FIX_DIR, pPair.expect)
+                );
+            } else {
+                tst.assertFileEqual(
+                    pPair.options.outputTo,
+                    path.join(FIX_DIR, pPair.expect)
+                );
+            }
         });
     });
 }
@@ -192,7 +199,7 @@ describe("cli/index", () => {
             );
 
             expect(lExitCode).to.equal(0);
-            tst.assertFileEqual(
+            tst.assertJSONFileEqual(
                 lOutputTo,
                 path.join(FIX_DIR, lOutputFileName)
             );
@@ -380,7 +387,7 @@ describe("cli/index", () => {
             );
 
             expect(lExitCode).to.equal(0);
-            tst.assertFileEqual(
+            tst.assertJSONFileEqual(
                 lOutputTo,
                 path.join(FIX_DIR, lOutputFileName)
             );
@@ -401,7 +408,7 @@ describe("cli/index", () => {
             );
 
             expect(lExitCode).to.equal(0);
-            tst.assertFileEqual(
+            tst.assertJSONFileEqual(
                 lOutputTo,
                 path.join(FIX_DIR, lOutputFileName)
             );
@@ -423,7 +430,7 @@ describe("cli/index", () => {
         );
 
         expect(lExitCode).to.equal(0);
-        tst.assertFileEqual(
+        tst.assertJSONFileEqual(
             lOutputTo,
             path.join(FIX_DIR, lOutputFileName)
         );
@@ -444,7 +451,7 @@ describe("cli/index", () => {
         );
 
         expect(lExitCode).to.equal(0);
-        tst.assertFileEqual(
+        tst.assertJSONFileEqual(
             lOutputTo,
             path.join(FIX_DIR, lOutputFileName)
         );
@@ -467,7 +474,7 @@ describe("cli/index", () => {
         );
 
         expect(lExitCode).to.equal(0);
-        tst.assertFileEqual(
+        tst.assertJSONFileEqual(
             lOutputTo,
             path.join(FIX_DIR, lOutputFileName)
         );

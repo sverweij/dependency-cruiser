@@ -72,7 +72,8 @@
                 "es6"
             ],
             "preserveSymlinks": false,
-            "tsPreCompilationDeps": true
+            "tsPreCompilationDeps": true,
+            "combinedDependencies": false
         },
         "totalCruised": 4,
         "violations": [],

@@ -393,6 +393,7 @@
                 "es6"
             ],
             "outputType": "json",
+            "combinedDependencies": false,
             "externalModuleResolutionStrategy": "node_modules"
         }
     }

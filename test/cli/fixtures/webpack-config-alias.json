@@ -56,6 +56,7 @@
         "warn": 0,
         "info": 0,
         "totalCruised": 3,
+        "ruleSetUsed": {},
         "optionsUsed": {
             "outputTo": "test/cli/output/webpack-config-alias.json",
             "moduleSystems": [
@@ -65,6 +66,7 @@
             ],
             "outputType": "json",
             "tsPreCompilationDeps": false,
+            "combinedDependencies": false,
             "preserveSymlinks": false,
             "webpackConfig": {
                 "fileName": "test/cli/fixtures/webpackconfig/aliassy/webpack.regularexport.config.js"
