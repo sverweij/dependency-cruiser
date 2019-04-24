@@ -4,8 +4,8 @@ cache:
   paths:
     - node_modules
 
-test_async_node_11:
-  image: node:11
+test_async_node_12:
+  image: node:12
   script:
    - npm install
    - npm run lint
