@@ -52,4 +52,14 @@ describe("main/filesAndDirs", () => {
             ["test\\main\\filesAndDirs\\**\\*.{js,ts}"]
         );
     });
+
+    it("Normalizes the current working dir passed as an absolute path to '.'", () => {
+        expect(
+            normalizeFilesAndDirs(
+                [process.cwd()]
+            ).map(path.win32.normalize)
+        ).to.deep.equal(
+            ["."]
+        );
+    });
 });
