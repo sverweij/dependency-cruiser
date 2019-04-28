@@ -108,8 +108,8 @@
     "inquirer": "6.3.1",
     "lodash": "4.17.11",
     "pnp-webpack-plugin": "1.4.3",
-    "regexp-tree": "0.1.5",
-    "resolve": "1.10.0",
+    "regexp-tree": "0.1.6",
+    "resolve": "1.10.1",
     "semver": "6.0.0",
     "semver-try-require": "2.0.4",
     "strip-json-comments": "2.0.1",
@@ -132,8 +132,8 @@
     "shx": "0.3.2",
     "symlink-dir": "2.0.2",
     "tslint": "5.16.0",
-    "typescript": "3.4.4",
-    "upem": "2.0.0",
+    "typescript": "3.4.5",
+    "upem": "2.0.1",
     "yarn": "1.15.2"
   },
   "repository": {
