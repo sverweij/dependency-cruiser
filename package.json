@@ -96,6 +96,7 @@
   },
   "dependencies": {
     "acorn": "6.1.1",
+    "acorn-dynamic-import": "4.0.0",
     "acorn-loose": "6.0.0",
     "acorn-walk": "6.1.1",
     "ajv": "6.10.0",

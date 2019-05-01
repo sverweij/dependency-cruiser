@@ -4,14 +4,14 @@
             "source": "test/cli/fixtures/typescriptconfig/cli-dynamic-imports/import_dynamically2.ts",
             "dependencies": [
                 {
-                    "resolved": "✖",
+                    "resolved": "test/cli/fixtures/typescriptconfig/cli-dynamic-imports/import_this.ts",
                     "coreModule": false,
-                    "followable": false,
-                    "couldNotResolve": true,
+                    "followable": true,
+                    "couldNotResolve": false,
                     "dependencyTypes": [
-                        "unknown"
+                        "local"
                     ],
-                    "module": "✖",
+                    "module": "./import_this",
                     "moduleSystem": "es6",
                     "matchesDoNotFollow": false,
                     "valid": true
@@ -20,14 +20,7 @@
             "valid": true
         },
         {
-            "source": "✖",
-            "followable": false,
-            "coreModule": false,
-            "couldNotResolve": true,
-            "matchesDoNotFollow": false,
-            "dependencyTypes": [
-                "unknown"
-            ],
+            "source": "test/cli/fixtures/typescriptconfig/cli-dynamic-imports/import_this.ts",
             "dependencies": [],
             "valid": true
         }

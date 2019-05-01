@@ -1,4 +1,4 @@
-const walk = require('acorn-walk');
+const walk = require('./walk');
 
 function firstArgumentIsAString(pNodeArguments) {
     return Boolean(pNodeArguments) &&
@@ -41,6 +41,8 @@ module.exports = (pAST, pDependencies, pModuleSystem) => {
         pAST,
         {
             "CallExpression": pushRequireCallsToDependencies(pDependencies, pModuleSystem)
-        }
+        },
+        // see https://github.com/acornjs/acorn/issues/746
+        walk.base
     );
 };

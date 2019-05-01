@@ -1,4 +1,4 @@
-const walk                        = require('acorn-walk');
+const walk                        = require('./walk');
 const extractCommonJSDependencies = require("./extract-commonJS-deps");
 
 function extractRegularAMDDependencies(pNode, pDependencies) {
@@ -47,6 +47,8 @@ module.exports = (pAST, pDependencies) => {
                 // the function passed to the define something else from "require"
                 extractCommonJSWrappers(pNode, pDependencies);
             }
-        }
+        },
+        // see https://github.com/acornjs/acorn/issues/746
+        walk.base
     );
 };
