@@ -7,11 +7,11 @@ const extractES6 =
 
 
 describe("ast-extractors/extract-ES6-deps", () => {
-    let lDeps = [];
 
-    extractES6("import('./dynamic').then(pModule => pModule.x);", lDeps);
+    it("dynamic imports of strings", () => {
+        let lDeps = [];
 
-    it("dynamic imports", () => {
+        extractES6("import('./dynamic').then(pModule => pModule.x);", lDeps);
         expect(
             lDeps
         ).to.deep.equal(
@@ -21,6 +21,62 @@ describe("ast-extractors/extract-ES6-deps", () => {
                     moduleSystem: 'es6'
                 }
             ]
+        );
+    });
+
+    it("dynamic imports of a template literal doesn't yield an import", () => {
+        let lDeps = [];
+
+        extractES6("import(`./dynamic`).then(pModule => pModule.x);", lDeps);
+        expect(
+            lDeps
+        ).to.deep.equal(
+            []
+        );
+    });
+
+    it("yield a dynamic import yields an import", () => {
+        let lDeps = [];
+        const yieldImport = `function* a() {
+            yield import('http');
+        }`;
+
+        extractES6(yieldImport, lDeps);
+        expect(
+            lDeps
+        ).to.deep.equal(
+            [
+                {
+                    moduleName: 'http',
+                    moduleSystem: 'es6'
+                }
+            ]
+        );
+    });
+
+    it("dynamic imports of a number doesn't yield an import", () => {
+        let lDeps = [];
+
+        extractES6("import(42).then(pModule => pModule.x);", lDeps);
+        expect(
+            lDeps
+        ).to.deep.equal(
+            []
+        );
+    });
+
+    it("dynamic imports of a function call doesn't yield an import", () => {
+        let lDeps = [];
+
+        extractES6(`
+            determineWhatToImport = () => 'bla';
+            import(determineWhatToImport()).then(pModule => pModule.x);
+        `,
+        lDeps);
+        expect(
+            lDeps
+        ).to.deep.equal(
+            []
         );
     });
 });
