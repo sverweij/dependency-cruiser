@@ -1,6 +1,6 @@
 {
   "name": "dependency-cruiser",
-  "version": "4.16.1",
+  "version": "4.17.0-beta-1",
   "description": "Validate and visualize dependencies. With your rules. JavaScript, TypeScript, CoffeeScript. ES6, CommonJS, AMD.",
   "keywords": [
     "static analysis",
@@ -96,6 +96,7 @@
   },
   "dependencies": {
     "acorn": "6.1.1",
+    "acorn-dynamic-import": "4.0.0",
     "acorn-loose": "6.0.0",
     "acorn-walk": "6.1.1",
     "ajv": "6.10.0",
