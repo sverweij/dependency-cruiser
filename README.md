@@ -96,6 +96,7 @@ You've come to the right place :-) :
     - [Command line reference](./doc/cli.md)
     - [Writing rules](./doc/rules-tutorial.md)
     - [Rules reference](./doc/rules-reference.md)
+    - [FAQ](./doc/faq.md)
 - Hacking on dependency-cruiser
     - [API](./doc/api.md)
     - [Output format](./doc/output-format.md)
