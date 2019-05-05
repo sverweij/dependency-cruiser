@@ -1,8 +1,12 @@
 ## Contributing
 
-So you want to contribute to dependency-cruiser? We already love you!
+So you want to contribute to dependency-cruiser? We already love you! :heart:
 
 To make this as easy as possible for you, here's some simple guidelines:
+
+### FAQ
+It might be a solution to your issue already exists. Dependency-cruiser has
+a [FAQ](../doc/faq.md) that might help you out.
 
 ### Reporting issues
 - All **issues** are **welcome**.    
@@ -10,15 +14,10 @@ To make this as easy as possible for you, here's some simple guidelines:
     proposals
   - [GitHub's issue tracker](https://github.com/sverweij/dependency-cruiser/issues)
     is the easiest way to submit them.
-- We prefer bug reports in  **_steps taken_ - _expected_ - _found_** format.
-  -  that makes it more easy to reproduce it, and concoct a solution that fits
-     your expectation.
-  - If applicable, it is also nice when you provide
-    - the **input** you used and
-    - the **environment** (browser version/ os, or node.js version + os).
-  - [template](./ISSUE_TEMPLATE.md)
 - In turn, we try to **respond within a week**.    
   This might or might not include an actual code fix.
+- If there's something that doesn't fit an issue, feel free to contact us on
+  twitter [@depcruise](https://twitter.com/depcruise).
 
 ### Contributing code
 - We prefer well documented
@@ -27,13 +26,13 @@ To make this as easy as possible for you, here's some simple guidelines:
 - Code quality
     - Additions pass eslint and depcruise (as configured for this repo)
     - Mocha tests prove your code does what it intends.
-    - Your code does not introduce regressions - ```make fullcheck``` proves
-      this.
+    - Your code does not introduce regressions - ```npm run check:full``` and a build/
+      check on the configured ci's proves this.
     - Code style (you know, petty things like indentations, where brackets go,
       how variables & parameters are named) fits in with the current code base.
 - Plan to do something drastic?     
   Leave an [issue](https://github.com/sverweij/dependency-cruiser/issues/new)
-  on GitHub, so we can talk about it
+  on GitHub, so we can talk about it.
 - dependency-cruiser is released with a [code of conduct](../CODE_OF_CONDUCT.md), adapted
   from the [contributor covenant](http://contributor-covenant.org/).
 
