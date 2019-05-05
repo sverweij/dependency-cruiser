@@ -8,7 +8,7 @@
 
 ## Troubleshooting
 ### Q: Typescript, coffeescript or livescript dependencies don't show up. How can I fix that?
-A: Install the compiler you use in the same spot dependency-cruiser is installed (or vv).
+**A**: Install the compiler you use in the same spot dependency-cruiser is installed (or vv).
 
 Dependency-cruiser doesn't come shipped with the necessary transpilers to
 handle these languages. In stead it uses what is already available in the 
@@ -27,7 +27,7 @@ For some types of typescript dependencies you need to flip a switch,
 which is what the next question is about:
 
 ### Q: Some Typescript dependencies I'd expect don't show up. What gives?
-A: Put `"tsPreCompilationDeps" : true` in the `options` section of your
+**A**: Put `"tsPreCompilationDeps" : true` in the `options` section of your
 dependency-cruiser configuration (`.dependency-cruiser.json` or
 `.dependency-cruiser.js`) or use `--ts-pre-compilation-deps` on the
 command line.
@@ -49,7 +49,7 @@ See [--ts-pre-compilation-deps](./cli.md#--ts-pre-compilation-deps-typescript-on
 for details and examples.
 
 ### Q: Typescript dynamic imports show up as "✖" . What's up there?
-A: You're using a version of depedendency-cruiser < 4.17.0. Dynamic imports,
+**A**: You're using a version of depedendency-cruiser < 4.17.0. Dynamic imports,
 both in Typescript and Javascript are supported as of version 4.17.0 -
 and ✖'s in the output should be a thing of the past.
 
@@ -65,18 +65,18 @@ and ✖'s in the output should be a thing of the past.
 
 ## Features
 ### Q: How do I enable TypeScript, CoffeeScript or LiveScript in dependency-cruiser?
-A: You don't. They work out of the box, as long as it has the
+**A**: You don't. They work out of the box, as long as it has the
 necessary compilers at its disposal.
 
 ### Q: I'm developing in React and use jsx/ tsx/ csx/ cjsx. How do I get that to work?
-A: jsx and its typescript and coffeescript variants work
+**A**: jsx and its typescript and coffeescript variants work
 out of the box as well.
 
 ### Q: Does this work with vue as well?
-A: Yes.
+**A**: Yes.
 
 ### Q: Does this mean dependency-cruiser installs transpilers for all these languages?
-A: No.
+**A**: No.
 
 For LiveScript, TypeScript and CoffeeScript dependency-cruiser will use the
 transpiler already in your project (or, if you installed dependency-cruiser
@@ -89,7 +89,7 @@ This has a few advantages over bundling the transpilers as dependencies:
   in your project (which might not be the most recent one for valid reasons).
 
 ### Q: Does this work with webpack configs (e.g. `alias` and `modules`)?
-A: Yes.
+**A**: Yes.
 
 You can feed dependency-cruiser a webpack configuration 
 ([`--webpack-config`](./doc/cli.md#--webpack-config-use-the-resolution-options-of-a-webpack-configuration)
@@ -113,12 +113,12 @@ Support for other formats (promise exports, typescript, fancier
 ecmascript) might come later.
 
 ### Q: Does dependency-cruiser detect [dynamic imports](https://github.com/tc39/proposal-dynamic-import)?
-A: Yes; in both typescript and javascript - but only with static string arugments
+**A**: Yes; in both typescript and javascript - but only with static string arguments
 (see the next question). This should cover most of the use cases for dynamic
 imports that leverage asynchronous module loading (like [webpack code splitting](https://webpack.js.org/guides/code-splitting/#dynamic-imports)), though.
 
 ### Q: Does dependency-cruiser handle variable or expression requires and imports?
-A: No.
+**A**: No.
 
 If you have imports with variables (`require(someVariable)`,
 `import(someOtherVariable).then((pMod) => {...})`) or expressions 
@@ -131,11 +131,11 @@ different ball game.
 
 ### Q: Does it work with my monorepo?
 
-A: Absolutely. For every cruised module the closest `package.json` file is used to determine
+**A**: Absolutely. For every cruised module the closest `package.json` file is used to determine
 if a package was declared as dependency.
 
 ### Q: Does dependency-cruiser work with Yarn Plug'n'Play?
-A: Yes.
+**A**: Yes.
 
 From version 4.14.0 dependency-cruiser supports yarn pnp out of the box -
 just specify it in your dependency-cruiser configuration with the 
@@ -150,7 +150,7 @@ _externalModuleResolutionStrategy_ key:
 ## Expanding dependency-cruiser
 ### Q: How do I add a new output format?
 
-A: Like so:
+**A**: Like so:
 - In `src/report`:
   - add a module that exports a default function that
     - takes a dependency cruiser output object
@@ -166,7 +166,7 @@ A: Like so:
     intends.
 
 ### Q: How do I add support for my favorite alt-js language?
-A: Ask me nicely or make a PR.
+**A**: Ask me nicely or make a PR.
 
 Dependency-cruiser already supports TypeScript, CoffeeScript and LiveScript. If
 there's another language (that transpiles to javascript) you'd like to see
