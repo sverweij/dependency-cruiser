@@ -91,6 +91,12 @@ function isDynamicImportExpression(pASTNode) {
         typescript.SyntaxKind[pASTNode.expression.kind] === 'ImportKeyword';
 }
 
+function isTypeImport(pASTNode) {
+    return typescript.SyntaxKind[pASTNode.kind] === 'LastTypeNode' &&
+        typescript.SyntaxKind[pASTNode.argument.kind] === 'LiteralType' &&
+        typescript.SyntaxKind[pASTNode.argument.literal.kind] === 'StringLiteral';
+}
+
 function firstArgIsAString(pASTNode) {
     const lFirstArgument = pASTNode.arguments[0];
 
@@ -117,6 +123,12 @@ function extractNestedDependencies(pAST) {
         if (isDynamicImportExpression(pASTNode) && firstArgIsAString(pASTNode)) {
             lResult.push({
                 moduleName: pASTNode.arguments[0].text,
+                moduleSystem: 'es6'
+            });
+        }
+        if (isTypeImport(pASTNode)) {
+            lResult.push({
+                moduleName: pASTNode.argument.literal.text,
                 moduleSystem: 'es6'
             });
         }

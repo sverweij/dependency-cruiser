@@ -55,9 +55,48 @@ describe("ast-extractors/extract-typescript - regular imports", () => {
         );
     });
 
+    it("extracts type imports in const declarations", () => {
+        expect(
+            extractTypescript("const tiepetjes: import('./types').T;")
+        ).to.deep.equal(
+            [
+                {
+                    moduleName: './types',
+                    moduleSystem: 'es6'
+                }
+            ]
+        );
+    });
+
+    it("extracts type imports in parameter declarations", () => {
+        expect(
+            extractTypescript("function f(snort: import('./vypes').T){console.log(snort.bla)}")
+        ).to.deep.equal(
+            [
+                {
+                    moduleName: './vypes',
+                    moduleSystem: 'es6'
+                }
+            ]
+        );
+    });
+
+    it("extracts type imports in class members", () => {
+        expect(
+            extractTypescript("class Klass{ private membert: import('./wypes').T); constructor() { membert = 'x'}}")
+        ).to.deep.equal(
+            [
+                {
+                    moduleName: './wypes',
+                    moduleSystem: 'es6'
+                }
+            ]
+        );
+    });
+
     it("leaves 'import equals' of variables alone", () => {
         expect(
-            // typescript/lib/protocol.d.ts has this little pearl:
+            // typescript/lib/protocol.d.ts has this thing
             extractTypescript("import protocol = ts.server.protocol")
         ).to.deep.equal(
             [
