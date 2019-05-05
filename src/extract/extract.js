@@ -93,6 +93,10 @@ function matchesPattern(pFullPathToFile, pPattern) {
     return RegExp(pPattern, "g").test(pFullPathToFile);
 }
 
+function getDependencyUniqueKey(pDependency) {
+    return `${pDependency.moduleName} ${pDependency.moduleSystem}`;
+}
+
 /**
  * Returns an array of dependencies present in the given file. Of
  * each dependency it returns
@@ -125,8 +129,8 @@ function matchesPattern(pFullPathToFile, pPattern) {
 module.exports = (pFileName, pOptions, pResolveOptions, pTSConfig) => {
     try {
         return _(extractDependencies(pOptions, pFileName, pTSConfig))
-            .uniqBy(pDependency => `${pDependency.moduleName} ${pDependency.moduleSystem}`)
-            .sortBy(pDependency => `${pDependency.moduleName} ${pDependency.moduleSystem}`)
+            .uniqBy(getDependencyUniqueKey)
+            .sortBy(getDependencyUniqueKey)
             .map(addResolutionAttributes(pOptions, pFileName, pResolveOptions))
             .filter(pDep =>
                 (!pOptions.exclude || !matchesPattern(pDep.resolved, pOptions.exclude)) &&
