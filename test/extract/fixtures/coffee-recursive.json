@@ -42,7 +42,6 @@
                             "local"
                         ],
                         "followable": true,
-                        "matchesDoNotFollow": false,
                         "couldNotResolve": false,
                         "module": "./sub/kaching",
                         "moduleSystem": "es6",

@@ -16,7 +16,6 @@
                         "dependencyTypes": [
                             "unknown"
                         ],
-                        "license": "MIT",
                         "followable": false,
                         "matchesDoNotFollow": false,
                         "couldNotResolve": true,

@@ -53,3 +53,7 @@ module.exports = (pModuleName, pBaseDir, pFileDir, pResolveOptions) => {
         }
     );
 };
+
+module.exports.clearCache = () => {
+    fileExists.cache.clear();
+};

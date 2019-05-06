@@ -123,3 +123,7 @@ module.exports = (pFileDir, pBaseDir, pCombinedDependencies = false) => {
     }
 
 };
+module.exports.clearCache = () => {
+    readPackageDepsCombined.cache.clear();
+    readPackageDeps.cache.clear();
+};

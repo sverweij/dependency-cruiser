@@ -45,3 +45,6 @@ function resolve (pModuleName, pFileDir, pResolveOptions, pCachingContext = 'cru
 }
 
 module.exports = resolve;
+module.exports.clearCache = () => {
+    gInitialized = {};
+};
