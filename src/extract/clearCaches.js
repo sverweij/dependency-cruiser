@@ -1,15 +1,15 @@
 const toTypescriptAST = require('./parse/toTypescriptAST');
 const toJavascriptAST = require('./parse/toJavascriptAST');
 const localNpmHelpers = require('./resolve/localNpmHelpers');
-const readPackageDepsClearCache = require('./resolve/readPackageDeps').clearCache;
-const resolveAMDClearCache = require('./resolve/resolve-AMD').clearCache;
-const resolveClearCache = require('./resolve/resolve').clearCache;
+const readPackageDeps = require('./resolve/readPackageDeps');
+const resolveAMD      = require('./resolve/resolve-AMD');
+const resolve         = require('./resolve/resolve');
 
 module.exports = () => {
-    toTypescriptAST.getASTCached.cache.clear();
-    toJavascriptAST.getASTCached.cache.clear();
-    localNpmHelpers.getPackageJson.cache.clear();
-    readPackageDepsClearCache();
-    resolveAMDClearCache();
-    resolveClearCache();
+    toTypescriptAST.clearCache();
+    toJavascriptAST.clearCache();
+    localNpmHelpers.clearCache();
+    readPackageDeps.clearCache();
+    resolveAMD.clearCache();
+    resolve.clearCache();
 };

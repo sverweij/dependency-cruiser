@@ -37,6 +37,14 @@ function getAST(pFileName, pTSConfig) {
     );
 }
 
+const getASTCached =
+    _memoize(getAST, (pFileName, pTSConfig) => `${pFileName}|${pTSConfig}`);
+
+function clearCache() {
+    getASTCached.cache.clear();
+
+}
+
 module.exports = {
     getASTFromSource,
 
@@ -48,5 +56,7 @@ module.exports = {
      * @param {string} pFileName - the name of the file to compile
      * @return {object} - a (typescript) AST
      */
-    getASTCached: _memoize(getAST, (pFileName, pTSConfig) => `${pFileName}|${pTSConfig}`)
+    getASTCached,
+
+    clearCache
 };
