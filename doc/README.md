@@ -1,7 +1,7 @@
 ### Dependency graph
 
 Below is a dependency graph of dependency-cruiser, without external dependencies, and
-reporting folders collapes to keep it concise. Click on it to
+reporting folders collaped to keep it concise. Click on it to
 go to a slightly more interactive version that allows you to navigate the
 source by clicking the nodes.
 
