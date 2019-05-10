@@ -6,7 +6,7 @@
 2. [`--output-type`: specify the output format](#--output-type-specify-the-output-format)
 3. [`--do-not-follow`: don't cruise modules adhering to this pattern any further](#--do-not-follow-dont-cruise-modules-adhering-to-this-pattern-any-further)
 4. [`--exclude`: exclude modules from being cruised](#--exclude-exclude-modules-from-being-cruised)
-5. [`--include-only`: only include modules satisfying a apttern](#--include-only-only-include-modules-satisfying-a-pattern)
+5. [`--include-only`: only include modules satisfying a pattern](#--include-only-only-include-modules-satisfying-a-pattern)
 6. [`--max-depth`](#--max-depth)
 7. [`--config`/ `--validate`](#--config---validate)
 8. [`--init`](#--init)
@@ -101,7 +101,7 @@ all modules with a file path starting with coverage, test or node_modules, you c
 dependency-cruise -x "^(coverage|test|node_modules)" -T html -f deps-without-stuffs.html src
 ```
 
-### `--include-only`: only include modules satisfying a apttern
+### `--include-only`: only include modules satisfying a pattern
 In the `include-only` option you can pass a regular expression of all file paths
 dependency-cruiser should include in a cruise. It will discard all files
 not matching the `include-only` pattern.
