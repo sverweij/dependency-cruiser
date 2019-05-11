@@ -6,6 +6,8 @@ let gInitialized = {};
 
 function init(pResolveOptions, pCachingContext) {
     if (!gInitialized[pCachingContext] || pResolveOptions.bustTheCache) {
+        // assuming the cached file system here
+        pResolveOptions.fileSystem.purge();
         gResolver = enhancedResolve.ResolverFactory.createResolver(
             Object.assign(
                 {},
@@ -45,3 +47,6 @@ function resolve (pModuleName, pFileDir, pResolveOptions, pCachingContext = 'cru
 }
 
 module.exports = resolve;
+module.exports.clearCache = () => {
+    gInitialized = {};
+};

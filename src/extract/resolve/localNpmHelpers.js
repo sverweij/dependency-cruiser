@@ -141,9 +141,14 @@ function getLicense (pModule, pBaseDir, pResolveOptions) {
     return lRetval;
 }
 
+function clearCache() {
+    getPackageJson.cache.clear();
+}
+
 module.exports = {
     getPackageRoot,
     getPackageJson,
     dependencyIsDeprecated,
-    getLicense
+    getLicense,
+    clearCache
 };

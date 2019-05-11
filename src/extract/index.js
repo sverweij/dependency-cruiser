@@ -7,6 +7,7 @@ const deriveOrphans   = require('./derive/orphan');
 const gather          = require('./gatherInitialSources');
 const summarize       = require('./summarize');
 const addValidations  = require('./addValidations');
+const clearCaches     = require('./clearCaches');
 
 /* eslint max-params:0 */
 function extractRecursive (pFileName, pOptions, pVisited, pDepth, pResolveOptions, pTSConfig) {
@@ -126,6 +127,8 @@ function addRuleSetUsed(pOptions) {
 
 module.exports = (pFileDirArray, pOptions, pCallback, pResolveOptions, pTSConfig) => {
     const lCallback = pCallback ? pCallback : (pInput => pInput);
+
+    clearCaches();
 
     let lModules = _(
         extractFileDirArray(pFileDirArray, pOptions, pResolveOptions, pTSConfig).reduce(complete, [])
