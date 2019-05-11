@@ -1,0 +1,7 @@
+{
+  "name": "cache-busting",
+  "version": "1.0.0",
+  "dependencies": {
+      "different-in-other-tree": "1.0.0"
+  }
+}
