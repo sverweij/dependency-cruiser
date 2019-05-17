@@ -68,6 +68,12 @@ const INQUIRER_QUESTIONS = [
         when: (pAnswers) => pAnswers.useTsConfig
     },
     {
+        name: "tsPreCompilationDeps",
+        type: "confirm",
+        message: "Also regard TypeScript dependencies that exist only before compilation?",
+        when: () => fileExists(TYPESCRIPT_CONFIG)
+    },
+    {
         name: "useWebpackConfig",
         type: "confirm",
         message: "Looks like you're using webpack - specify a webpack config?",
