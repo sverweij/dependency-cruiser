@@ -1,7 +1,12 @@
 const path                    = require('path');
 const expect                  = require('chai').expect;
+const parseTSConfig           = require('../../../src/cli/parseTSConfig');
 const resolve                 = require('../../../src/extract/resolve');
 const normalizeResolveOptions = require('../../../src/main/resolveOptions/normalize');
+
+
+const TSCONFIG = path.join(__dirname, 'fixtures', 'ts-config-with-path', 'tsconfig.json');
+const PARSED_TSCONFIG = parseTSConfig(TSCONFIG);
 
 describe("extract/resolve/index", () => {
     it("resolves a local dependency to a file on disk", () => {
@@ -224,10 +229,11 @@ describe("extract/resolve/index", () => {
                 path.join(__dirname, 'fixtures', 'ts-config-with-path'),
                 normalizeResolveOptions(
                     {
-                        tsConfig: path.join(__dirname, 'fixtures', 'ts-config-with-path', 'tsconfig.json'),
+                        tsConfig: TSCONFIG,
                         bustTheCache: true
                     },
-                    {}
+                    {},
+                    PARSED_TSCONFIG
                 )
             )
         ).to.deep.equal({
@@ -252,10 +258,11 @@ describe("extract/resolve/index", () => {
                 path.join(__dirname, 'fixtures', 'ts-config-with-path'),
                 normalizeResolveOptions(
                     {
-                        tsConfig: path.join(__dirname, 'fixtures', 'ts-config-with-path', 'tsconfig.json'),
+                        tsConfig: TSCONFIG,
                         bustTheCache: true
                     },
-                    {}
+                    {},
+                    PARSED_TSCONFIG
                 )
             )
         ).to.deep.equal({
@@ -280,10 +287,11 @@ describe("extract/resolve/index", () => {
                 path.join(__dirname, 'fixtures', 'ts-config-with-path'),
                 normalizeResolveOptions(
                     {
-                        tsConfig: path.join(__dirname, 'fixtures', 'ts-config-with-path', 'tsconfig.json'),
+                        tsConfig: TSCONFIG,
                         bustTheCache: true
                     },
-                    {}
+                    {},
+                    PARSED_TSCONFIG
                 )
             )
         ).to.deep.equal({
