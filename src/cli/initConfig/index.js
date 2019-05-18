@@ -1,19 +1,30 @@
+const $defaults        = require('../defaults.json');
 const createConfigFile = require('./createConfigFile');
 const getUserInput     = require('./getUserInput');
-const {pnpIsEnabled} = require('./helpers');
+const {pnpIsEnabled, fileExists} = require('./helpers');
 
+const TYPESCRIPT_CONFIG = `./${$defaults.TYPESCRIPT_CONFIG}`;
+const WEBPACK_CONFIG    = `./${$defaults.WEBPACK_CONFIG}`;
 const ONESHOT_CONFIGS = {
     "json": {
         configFormat: ".json",
         configType: "preset",
         preset: "dependency-cruiser/configs/recommended-strict",
-        useYarnPnP: pnpIsEnabled()
+        useTsConfig: fileExists(TYPESCRIPT_CONFIG),
+        tsconfig: TYPESCRIPT_CONFIG,
+        useYarnPnP: pnpIsEnabled(),
+        useWebpackConfig: fileExists(WEBPACK_CONFIG),
+        webpackConfig: WEBPACK_CONFIG
     },
     "js": {
         configFormat: ".js",
         configType: "preset",
         preset: "dependency-cruiser/configs/recommended-strict",
-        useYarnPnP: pnpIsEnabled()
+        useTsConfig: fileExists(TYPESCRIPT_CONFIG),
+        tsconfig: TYPESCRIPT_CONFIG,
+        useYarnPnP: pnpIsEnabled(),
+        useWebpackConfig: fileExists(WEBPACK_CONFIG),
+        webpackConfig: WEBPACK_CONFIG
     }
 };
 

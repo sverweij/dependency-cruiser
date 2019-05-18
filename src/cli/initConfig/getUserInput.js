@@ -2,7 +2,6 @@ const inquirer     = require('inquirer');
 const $defaults    = require('../defaults.json');
 const {fileExists, pnpIsEnabled} = require('./helpers');
 
-
 const TYPESCRIPT_CONFIG = `./${$defaults.TYPESCRIPT_CONFIG}`;
 const WEBPACK_CONFIG    = `./${$defaults.WEBPACK_CONFIG}`;
 
@@ -38,7 +37,7 @@ const INQUIRER_QUESTIONS = [
                 value: "dependency-cruiser/configs/recommended-warn-only"
             },
             {
-                name: "recommended, strict ",
+                name: "recommended, strict",
                 value:"dependency-cruiser/configs/recommended-strict"
             }
         ],
