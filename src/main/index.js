@@ -100,7 +100,7 @@ function cruise (pFileDirArray, pOptions, pResolveOptions, pTSConfig) {
         normalizeFilesAndDirs(pFileDirArray),
         pOptions,
         TYPE2REPORTER[pOptions.outputType],
-        normalizeResolveOptions(pResolveOptions, pOptions),
+        normalizeResolveOptions(pResolveOptions, pOptions, pTSConfig),
         pTSConfig
     );
 }

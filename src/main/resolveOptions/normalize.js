@@ -1,4 +1,5 @@
 const _get                = require('lodash/get');
+const _has                = require('lodash/has');
 const enhancedResolve     = require('enhanced-resolve');
 const PnpWebpackPlugin    = require('pnp-webpack-plugin');
 const TsConfigPathsPlugin = require('tsconfig-paths-webpack-plugin');
@@ -10,7 +11,7 @@ function pushPlugin(pPlugins, pPluginToPush) {
     return (pPlugins || []).concat(pPluginToPush);
 }
 
-function compileResolveOptions(pResolveOptions){
+function compileResolveOptions(pResolveOptions, pTSConfig){
     let DEFAULT_RESOLVE_OPTIONS = {
         // for later: check semantics of enhanced-resolve symlinks and
         // node's preserveSymlinks. They seem to be
@@ -45,7 +46,13 @@ function compileResolveOptions(pResolveOptions){
 
     let lResolveOptions = {};
 
-    if (pResolveOptions.tsConfig) {
+    // TsConfigPathsPlugin requires a baseUrl to be present in the
+    // tsconfig, otherwise it prints scary messages that it didn't
+    // and read the tsConfig (potentially making users think it's
+    // dependency-cruiser disregarding the tsconfig). Hence:
+    // only load TsConfigPathsPlugin when an options.baseUrl
+    // exists
+    if (pResolveOptions.tsConfig && _has(pTSConfig, "options.baseUrl")) {
         lResolveOptions.plugins = pushPlugin(
             lResolveOptions.plugins,
             new TsConfigPathsPlugin({configFile: pResolveOptions.tsConfig})
@@ -67,7 +74,7 @@ function compileResolveOptions(pResolveOptions){
     );
 }
 
-module.exports = (pResolveOptions, pOptions) => compileResolveOptions(
+module.exports = (pResolveOptions, pOptions, pTSConfig) => compileResolveOptions(
     Object.assign(
         {
 
@@ -89,5 +96,6 @@ module.exports = (pResolveOptions, pOptions) => compileResolveOptions(
             combinedDependencies: pOptions.combinedDependencies
         },
         pResolveOptions || {}
-    )
+    ),
+    pTSConfig || {}
 );
