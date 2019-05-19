@@ -12,7 +12,7 @@
 
 Dependency-cruiser doesn't come shipped with the necessary transpilers to
 handle these languages. In stead it uses what is already available in the 
-environment (see [below](#does-this-mean-dependency-cruiser-installs-transpilers-for-all-these-languages)).
+environment (see [below](#q-does-this-mean-dependency-cruiser-installs-transpilers-for-all-these-languages)).
 You can check if the transpilers are available to dependency-cruiser by
 running `depcruise --info`.
 

@@ -100,15 +100,15 @@ You've come to the right place :-) :
 - Hacking on dependency-cruiser
     - [API](./doc/api.md)
     - [Output format](./doc/output-format.md)
-    - [Adding support for other alt-js languages](./doc/faq.md#how-do-i-add-support-for-my-favorite-alt-js-language)
-    - [Adding other output formats](./doc/faq.md#how-do-i-add-a-new-output-format)
+    - [Adding other output formats](./doc/faq.md#q-how-do-i-add-a-new-output-format)
+    - [Adding support for other alt-js languages](./doc/faq.md#q-how-do-i-add-support-for-my-favorite-alt-js-language)
 - Other things
     - [Road map](https://github.com/sverweij/dependency-cruiser/projects/1)
     - [Contact](./doc/faq.md#contact)
     - [Real world show cases](./doc/real-world-samples.md)
-    - [TypeScript, CoffeeScript and LiveScript support](./doc/faq.md)
-    - [Support for .jsx, .tsx, .csx/ .cjsx and .vue](./doc/faq.md#im-developing-in-react-and-use-jsx-how-do-i-get-that-to-work)
-    - [Webpack alias/ modules support](./doc/faq.md#does-this-work-with-webpack-configs-eg-alias-and-modules)
+    - [TypeScript, CoffeeScript and LiveScript support](./doc/faq.md#features)
+    - [Support for .jsx, .tsx, .csx/ .cjsx and .vue](./doc/faq.md#q-im-developing-in-react-and-use-jsx-tsx-csx-cjsx-how-do-i-get-that-to-work)
+    - [Webpack alias/ modules support](./doc/faq.md#q-does-this-work-with-webpack-configs-eg-alias-and-modules)
 
 ## License
 [MIT](LICENSE)
