@@ -9,8 +9,8 @@ node_js:
   - "12"
 
 before_install:
-  - sudo apt-get update
-  - sudo apt-get install -y hyperfine
+  - wget https://github.com/sharkdp/hyperfine/releases/download/v1.5.0/hyperfine_1.5.0_amd64.deb
+  - sudo dpkg -i hyperfine_1.5.0_amd64.deb
 
 install:
   - npm install
