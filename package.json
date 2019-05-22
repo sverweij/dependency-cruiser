@@ -83,6 +83,7 @@
     "test:integration:run": "cd test/integration/yarn-pnp.testing-ground && yarn dependency-cruise:json",
     "test:integration:test": "cd test/integration/yarn-pnp.testing-ground && yarn test",
     "test:load": "hyperfine --warmup 3 --runs 30 \"bin/dependency-cruise --validate -- src bin/dependency-cruise test configs\"",
+    "test:load:short": "hyperfine --warmup 1 --runs 5 \"bin/dependency-cruise --validate -- src bin/dependency-cruise test configs\"",
     "test:integration:cleanup": "shx rm -rf test/integration/yarn-pnp.testing-ground dependency-cruiser*.tgz",
     "test:watch": "mocha --watch --watch-extensions=json --reporter=min test/*/*.spec.js test/*/*/*.spec.js test/*/*/*/*.spec.js",
     "update-dependencies": "npm-run-all upem:update upem:install build:clean build lint:fix depcruise test:cover",
