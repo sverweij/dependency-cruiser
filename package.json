@@ -93,7 +93,10 @@
   },
   "upem": {
     "donotup": [
-      "symlink-dir"
+      {
+        "package": "symlink-dir",
+        "because": "symlink-dir >= 3 doesn't work on node < 8 - while dependency-cruiser still supports node 6"
+      }
     ]
   },
   "dependencies": {
