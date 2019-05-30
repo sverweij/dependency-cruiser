@@ -29,7 +29,6 @@ function runRecursiveFixture(pFixture) {
             let lResult = extract(
                 [pFixture.input.fileName],
                 lOptions,
-                null,
                 lResolveOptions
             );
 
@@ -67,7 +66,6 @@ describe('extract/index - Max depth', () => {
             const lResult = extract(
                 ["./test/extract/fixtures/maxDepth/index.js"],
                 lOptions,
-                null,
                 lResolveOptions
             );
             /* eslint import/no-dynamic-require:0, security/detect-non-literal-require:0 */
@@ -97,7 +95,6 @@ describe('extract/index - do not follow', () => {
         const lResult = extract(
             ["./test/extract/fixtures/donotfollow/index.js"],
             lOptions,
-            null,
             lResolveOptions
         );
 
@@ -122,7 +119,6 @@ describe('extract/index - do not follow', () => {
         const lResult = extract(
             ["./test/extract/fixtures/donotfollow-dependency-types/index.js"],
             lOptions,
-            null,
             lResolveOptions
         );
 
@@ -177,7 +173,6 @@ describe('extract/index - cache busting', () => {
         const lFirstResult = extract(
             ["./test/extract/fixtures/cache-busting/index.ts"],
             lOptions,
-            null,
             lResolveOptions
         );
 
@@ -194,7 +189,6 @@ describe('extract/index - cache busting', () => {
         const lSecondResult = extract(
             ["./test/extract/fixtures/cache-busting/index.ts"],
             lOptions,
-            null,
             lResolveOptions
         );
 

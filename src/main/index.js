@@ -25,6 +25,11 @@ const TYPE2REPORTER      = {
     "err"   : reportErr
 };
 
+function getReporter(pOutputType) {
+    // eslint-disable-next-line security/detect-object-injection
+    return TYPE2REPORTER[pOutputType] || ((x) => x);
+}
+
 /**
  * Cruises through and returns the dependencies in a directory, or
  * starting with a file. Supports javascript (ES2015 and older), typescript
@@ -96,12 +101,13 @@ function cruise (pFileDirArray, pOptions, pResolveOptions, pTSConfig) {
         );
     }
 
-    return extract(
-        normalizeFilesAndDirs(pFileDirArray),
-        pOptions,
-        TYPE2REPORTER[pOptions.outputType],
-        normalizeResolveOptions(pResolveOptions, pOptions, pTSConfig),
-        pTSConfig
+    return getReporter(pOptions.outputType)(
+        extract(
+            normalizeFilesAndDirs(pFileDirArray),
+            pOptions,
+            normalizeResolveOptions(pResolveOptions, pOptions, pTSConfig),
+            pTSConfig
+        )
     );
 }
 

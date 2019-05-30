@@ -125,9 +125,7 @@ function addRuleSetUsed(pOptions) {
     );
 }
 
-module.exports = (pFileDirArray, pOptions, pCallback, pResolveOptions, pTSConfig) => {
-    const lCallback = pCallback ? pCallback : (pInput => pInput);
-
+module.exports = (pFileDirArray, pOptions, pResolveOptions, pTSConfig) => {
     clearCaches();
 
     let lModules = _(
@@ -144,21 +142,19 @@ module.exports = (pFileDirArray, pOptions, pCallback, pResolveOptions, pTSConfig
         pOptions.ruleSet
     );
 
-    return lCallback(
-        {
-            modules : lModules,
-            summary :
-                Object.assign(
-                    summarize(lModules),
-                    {
-                        optionsUsed: makeOptionsPresentable(pOptions)
-                    },
-                    pOptions.ruleSet
-                        ? {ruleSetUsed: addRuleSetUsed(pOptions)}
-                        : {}
-                )
-        }
-    );
+    return {
+        modules : lModules,
+        summary :
+            Object.assign(
+                summarize(lModules),
+                {
+                    optionsUsed: makeOptionsPresentable(pOptions)
+                },
+                pOptions.ruleSet
+                    ? {ruleSetUsed: addRuleSetUsed(pOptions)}
+                    : {}
+            )
+    };
 };
 
 /* eslint security/detect-object-injection: 0 */
