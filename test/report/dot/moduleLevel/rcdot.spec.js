@@ -12,12 +12,12 @@ const boringColorFixture = fs.readFileSync('test/report/fixtures/defaultmoduleco
 
 describe("report/dot reporter coloring", () => {
     it("richly colors when passed a rich color scheme", () => {
-        expect(renderRCDot(deps).modules).to.deep.equal(richColorFixture);
+        expect(renderRCDot(deps)).to.deep.equal(richColorFixture);
     });
     it("defaultly colors when passed no color scheme", () => {
-        expect(renderDot(deps).modules).to.deep.equal(richColorFixture);
+        expect(renderDot(deps)).to.deep.equal(richColorFixture);
     });
     it("colors boringly when passed the boring color scheme", () => {
-        expect(renderBoringDot(deps).modules).to.deep.equal(boringColorFixture);
+        expect(renderBoringDot(deps)).to.deep.equal(boringColorFixture);
     });
 });

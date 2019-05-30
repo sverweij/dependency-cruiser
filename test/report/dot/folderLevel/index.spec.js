@@ -11,15 +11,15 @@ const consolidatedRxJs       = fs.readFileSync('test/report/dot/folderLevel/fixt
 
 describe("report/dot/folderLevel reporter", () => {
     it("consolidates to folder level", () => {
-        expect(render(deps).modules).to.deep.equal(consolidatedDot);
+        expect(render(deps)).to.deep.equal(consolidatedDot);
     });
 
     it("consolidates module only transgressions correctly", () => {
-        expect(render(orphans).modules).to.deep.equal(consolidatedOrphansDot);
+        expect(render(orphans)).to.deep.equal(consolidatedOrphansDot);
     });
 
     it("consolidates a slightly larger code base in a timely fashion", () => {
-        expect(render(rxjs).modules).to.deep.equal(consolidatedRxJs);
+        expect(render(rxjs)).to.deep.equal(consolidatedRxJs);
     });
 });
 

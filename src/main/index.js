@@ -25,6 +25,21 @@ const TYPE2REPORTER      = {
     "err"   : reportErr
 };
 
+function wrapInDependencyList(pExtractResult, pReporterOutput, pOutputType) {
+    let lRetval = pExtractResult;
+
+    if (pOutputType) {
+        lRetval = Object.assign(
+            {},
+            pExtractResult,
+            {
+                modules: pReporterOutput
+            }
+        );
+    }
+    return lRetval;
+}
+
 function getReporter(pOutputType) {
     // eslint-disable-next-line security/detect-object-injection
     return TYPE2REPORTER[pOutputType] || ((x) => x);
@@ -101,14 +116,17 @@ function cruise (pFileDirArray, pOptions, pResolveOptions, pTSConfig) {
         );
     }
 
-    return getReporter(pOptions.outputType)(
-        extract(
-            normalizeFilesAndDirs(pFileDirArray),
-            pOptions,
-            normalizeResolveOptions(pResolveOptions, pOptions, pTSConfig),
-            pTSConfig
-        )
+    const lExtractionResult = extract(
+        normalizeFilesAndDirs(pFileDirArray),
+        pOptions,
+        normalizeResolveOptions(pResolveOptions, pOptions, pTSConfig),
+        pTSConfig
     );
+    const lReporterOutput = getReporter(pOptions.outputType)(
+        lExtractionResult
+    );
+
+    return wrapInDependencyList(lExtractionResult, lReporterOutput, pOptions.outputType);
 }
 
 module.exports = {

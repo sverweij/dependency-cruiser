@@ -1,8 +1,1 @@
-module.exports = pInput =>
-    Object.assign(
-        {},
-        pInput,
-        {
-            modules: JSON.stringify(pInput, null, "  ")
-        }
-    );
+module.exports = pInput => JSON.stringify(pInput, null, "  ");

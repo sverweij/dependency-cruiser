@@ -19,16 +19,11 @@ function addShowTitle(pDependencyEntry) {
     );
 }
 
-module.exports = pInput =>
-    Object.assign(
-        {},
-        pInput,
-        {
-            modules: Handlebars.templates['html.template.hbs']({
-                "things" : dependencyToIncidenceTransformer(pInput.modules).map(addShowTitle)
-            })
-        }
-    );
+module.exports = pInput => Handlebars.templates['html.template.hbs'](
+    {
+        "things" : dependencyToIncidenceTransformer(pInput.modules).map(addShowTitle)
+    }
+);
 
 
 /* eslint import/no-unassigned-import: 0 */

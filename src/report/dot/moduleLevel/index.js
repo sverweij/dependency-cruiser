@@ -70,20 +70,15 @@ function addURL(pInput) {
         );
 }
 
-module.exports = (pColoringScheme) => (pInput) =>
-    Object.assign(
-        {},
-        pInput,
-        {
-            modules: Handlebars.templates['dot.template.hbs']({
-                "things" : pInput.modules
-                    .sort(compareOnSource)
-                    .map(extractFirstTransgression)
-                    .map(folderify)
-                    .map(colorize(pColoringScheme))
-                    .map(addURL(pInput))
-            })
-        }
-    );
+module.exports = (pColoringScheme) => (pInput) => Handlebars.templates['dot.template.hbs'](
+    {
+        "things" : pInput.modules
+            .sort(compareOnSource)
+            .map(extractFirstTransgression)
+            .map(folderify)
+            .map(colorize(pColoringScheme))
+            .map(addURL(pInput))
+    }
+);
 
 /* eslint import/no-unassigned-import: 0 */

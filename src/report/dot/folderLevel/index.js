@@ -60,20 +60,15 @@ function squashToDir (pModules) {
         );
 }
 
-module.exports = (pInput) =>
-    Object.assign(
-        {},
-        pInput,
-        {
-            modules: Handlebars.templates['ddot.template.hbs']({
-                "things" : consolidateModules(squashToDir(pInput.modules))
-                    .map(consolidateModuleDependencies)
-                    .sort(compareOnSource)
-                    .map(extractRelevantTransgressions)
-                    .map(folderify)
-                    .map(colorize)
-            })
-        }
-    );
+module.exports = (pInput) => Handlebars.templates['ddot.template.hbs'](
+    {
+        "things" : consolidateModules(squashToDir(pInput.modules))
+            .map(consolidateModuleDependencies)
+            .sort(compareOnSource)
+            .map(extractRelevantTransgressions)
+            .map(folderify)
+            .map(colorize)
+    }
+);
 
 /* eslint import/no-unassigned-import: 0 */
