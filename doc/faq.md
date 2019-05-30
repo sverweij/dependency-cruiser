@@ -154,12 +154,12 @@ _externalModuleResolutionStrategy_ key:
 - In `src/report`:
   - add a module that exports a default function that
     - takes a dependency cruiser output object
-      ([json schema](../src/extract/jsonschema.json))
-    - returns that same object with the values of the 'dependencies' attribute
-      replaced by the string containing the output you want.
+      ([json schema](../src/extract/results-schema.json))
+    - returns the string containing the output you want.
 - In `main/index.js`
     - require that module and
     - add a key to the to the `TYPE2REPORTER` object with that module as value
+- In `main/options/validate.js` add the key to the `OUTPUT_TYPES_RE`
 - In `bin/dependency-cruise`
     - add it to the documentation of the -T option
 - In `test/report` add unit tests that prove your reporter does what it

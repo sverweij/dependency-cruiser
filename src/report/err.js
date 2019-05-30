@@ -31,26 +31,14 @@ function formatSummary(pMeta) {
 module.exports = (pInput) => {
 
     if (pInput.summary.violations.length === 0){
-        return Object.assign(
-            pInput,
-            {
-                modules:
-                    `\n${chalk.green(figures.tick)} no dependency violations found (${pInput.summary.totalCruised} modules cruised)\n\n`
-            }
-        );
+        return `\n${chalk.green(figures.tick)} no dependency violations found (${pInput.summary.totalCruised} modules cruised)\n\n`;
     }
 
-    return Object.assign(
-        {},
-        pInput,
-        {
-            modules: pInput.summary.violations.reduce(
-                (pAll, pThis) => `${pAll}  ${formatError(pThis)}\n`,
-                "\n"
-            ).concat(
-                formatSummary(pInput.summary)
-            )
-        }
+    return pInput.summary.violations.reduce(
+        (pAll, pThis) => `${pAll}  ${formatError(pThis)}\n`,
+        "\n"
+    ).concat(
+        formatSummary(pInput.summary)
     );
 
 };

@@ -3,15 +3,10 @@ const dependencyToIncidenceTransformer = require("../dependencyToIncidenceTransf
 
 require("./csv.template");
 
-module.exports = pInput =>
-    Object.assign(
-        {},
-        pInput,
-        {
-            modules: Handlebars.templates['csv.template.hbs']({
-                "things" : dependencyToIncidenceTransformer(pInput.modules)
-            })
-        }
-    );
+module.exports = pInput => Handlebars.templates['csv.template.hbs'](
+    {
+        "things" : dependencyToIncidenceTransformer(pInput.modules)
+    }
+);
 
 /* eslint import/no-unassigned-import: 0 */

@@ -7,16 +7,16 @@ const erradds  = require('./fixtures/err-with-additional-information.json');
 
 describe("report/err", () => {
     it("says everything fine", () => {
-        expect(render(okdeps).modules).to.contain('no dependency violations found');
+        expect(render(okdeps)).to.contain('no dependency violations found');
     });
     it("renders a bunch of errors", () => {
-        expect(render(deps).modules).to.contain('2 dependency violations (2 errors, 0 warnings)');
+        expect(render(deps)).to.contain('2 dependency violations (2 errors, 0 warnings)');
     });
     it("renders a bunch of warnings", () => {
-        expect(render(warndeps).modules).to.contain('1 dependency violations (0 errors, 1 warnings)');
+        expect(render(warndeps)).to.contain('1 dependency violations (0 errors, 1 warnings)');
     });
     it("renders addtional information", () => {
-        const lResult = render(erradds).modules;
+        const lResult = render(erradds);
 
         expect(lResult).to.contain('\n  aap -> noot -> mies -> aap');
     });
