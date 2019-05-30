@@ -1,0 +1,216 @@
+[
+    {
+      "filePath": "node_modules/somemodule/src/somemodule.js",
+      "messages": [
+        {
+          "ruleId": "unnamed",
+          "severity": 1,
+          "message": "-> node_modules/somemodule/src/moar-javascript.js",
+          "line": 0,
+          "column": 0
+        },
+        {
+          "ruleId": "unnamed",
+          "severity": 1,
+          "message": "-> node_modules/somemodule/node_modules/someothermodule/main.js",
+          "line": 0,
+          "column": 0
+        }
+      ],
+      "errorCount": 0,
+      "warningCount": 2,
+      "fixableErrorCount": 0,
+      "fixableWarningCount": 0
+    },
+    {
+      "filePath": "one_only_one.js",
+      "messages": [
+        {
+          "ruleId": "unnamed",
+          "severity": 1,
+          "message": "-> path",
+          "line": 0,
+          "column": 0
+        }
+      ],
+      "errorCount": 0,
+      "warningCount": 1,
+      "fixableErrorCount": 0,
+      "fixableWarningCount": 0
+    },
+    {
+      "filePath": "one_only_two.js",
+      "messages": [
+        {
+          "ruleId": "unnamed",
+          "severity": 1,
+          "message": "-> path",
+          "line": 0,
+          "column": 0
+        }
+      ],
+      "errorCount": 0,
+      "warningCount": 1,
+      "fixableErrorCount": 0,
+      "fixableWarningCount": 0
+    },
+    {
+      "filePath": "root_one.js",
+      "messages": [
+        {
+          "ruleId": "unnamed",
+          "severity": 1,
+          "message": "-> one_only_one.js",
+          "line": 0,
+          "column": 0
+        },
+        {
+          "ruleId": "unnamed",
+          "severity": 1,
+          "message": "-> one_only_two.js",
+          "line": 0,
+          "column": 0
+        },
+        {
+          "ruleId": "unnamed",
+          "severity": 1,
+          "message": "-> shared.js",
+          "line": 0,
+          "column": 0
+        },
+        {
+          "ruleId": "unnamed",
+          "severity": 1,
+          "message": "-> sub/dir.js",
+          "line": 0,
+          "column": 0
+        },
+        {
+          "ruleId": "unnamed",
+          "severity": 1,
+          "message": "-> fs",
+          "line": 0,
+          "column": 0
+        },
+        {
+          "ruleId": "unnamed",
+          "severity": 1,
+          "message": "-> node_modules/somemodule/src/somemodule.js",
+          "line": 0,
+          "column": 0
+        }
+      ],
+      "errorCount": 0,
+      "warningCount": 6,
+      "fixableErrorCount": 0,
+      "fixableWarningCount": 0
+    },
+    {
+      "filePath": "shared.js",
+      "messages": [
+        {
+          "ruleId": "unnamed",
+          "severity": 1,
+          "message": "-> path",
+          "line": 0,
+          "column": 0
+        }
+      ],
+      "errorCount": 0,
+      "warningCount": 1,
+      "fixableErrorCount": 0,
+      "fixableWarningCount": 0
+    },
+    {
+      "filePath": "sub/dir.js",
+      "messages": [
+        {
+          "ruleId": "unnamed",
+          "severity": 1,
+          "message": "-> sub/depindir.js",
+          "line": 0,
+          "column": 0
+        },
+        {
+          "ruleId": "unnamed",
+          "severity": 1,
+          "message": "-> path",
+          "line": 0,
+          "column": 0
+        }
+      ],
+      "errorCount": 0,
+      "warningCount": 2,
+      "fixableErrorCount": 0,
+      "fixableWarningCount": 0
+    },
+    {
+      "filePath": "sub/depindir.js",
+      "messages": [
+        {
+          "ruleId": "unnamed",
+          "severity": 1,
+          "message": "-> path",
+          "line": 0,
+          "column": 0
+        }
+      ],
+      "errorCount": 0,
+      "warningCount": 1,
+      "fixableErrorCount": 0,
+      "fixableWarningCount": 0
+    },
+    {
+      "filePath": "root_two.js",
+      "messages": [
+        {
+          "ruleId": "unnamed",
+          "severity": 1,
+          "message": "-> shared.js",
+          "line": 0,
+          "column": 0
+        },
+        {
+          "ruleId": "unnamed",
+          "severity": 1,
+          "message": "-> somedata.json",
+          "line": 0,
+          "column": 0
+        },
+        {
+          "ruleId": "unnamed",
+          "severity": 1,
+          "message": "-> two_only_one.js",
+          "line": 0,
+          "column": 0
+        },
+        {
+          "ruleId": "unnamed",
+          "severity": 1,
+          "message": "-> http",
+          "line": 0,
+          "column": 0
+        }
+      ],
+      "errorCount": 0,
+      "warningCount": 4,
+      "fixableErrorCount": 0,
+      "fixableWarningCount": 0
+    },
+    {
+      "filePath": "two_only_one.js",
+      "messages": [
+        {
+          "ruleId": "unnamed",
+          "severity": 1,
+          "message": "-> sub/dir.js",
+          "line": 0,
+          "column": 0
+        }
+      ],
+      "errorCount": 0,
+      "warningCount": 1,
+      "fixableErrorCount": 0,
+      "fixableWarningCount": 0
+    }
+  ]

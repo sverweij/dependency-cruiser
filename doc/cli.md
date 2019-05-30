@@ -74,6 +74,10 @@ If you supply `csv` it will write the dependency matrix to a comma
 separated file - so you can import it into a spreadsheet program
 and analyze from there.
 
+#### eslint
+*experimental* emits [eslint json format](https://eslint.org/docs/developer-guide/working-with-custom-formatters#the-results-object)
+so you can integrate it with your own eslint formatters.
+
 ### `--do-not-follow`: don't cruise modules adhering to this pattern any further
 If you _do_ want to see certain modules in your reports, but are not interested
 in these modules' dependencies, you'd pass the regular expression for those

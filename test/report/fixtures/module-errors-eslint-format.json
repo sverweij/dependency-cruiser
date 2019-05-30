@@ -1,0 +1,41 @@
+[
+  {
+    "filePath": "src/tmp_lonely.js",
+    "messages": [
+      {
+        "ruleId": "no-orphans",
+        "severity": 2,
+        "message": "",
+        "line": 0,
+        "column": 0
+      }
+    ],
+    "errorCount": 1,
+    "warningCount": 0,
+    "fixableErrorCount": 0,
+    "fixableWarningCount": 0
+  },
+  {
+    "filePath": "src/tmp_other.js",
+    "messages": [
+      {
+        "ruleId": "not-to-unresolvable",
+        "severity": 2,
+        "message": "-> does-not-exist",
+        "line": 0,
+        "column": 0
+      },
+      {
+        "ruleId": "prefer-lodash-individuals",
+        "severity": 1,
+        "message": "-> node_modules/lodash/lodash.js",
+        "line": 0,
+        "column": 0
+      }
+    ],
+    "errorCount": 1,
+    "warningCount": 1,
+    "fixableErrorCount": 0,
+    "fixableWarningCount": 0
+  }
+]

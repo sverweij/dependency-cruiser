@@ -8,6 +8,7 @@ const RCScheme                = require('../report/dot/common/richModuleColorSch
 const reportRCDot             = require("../report/dot/moduleLevel")(RCScheme);
 const reportCsv               = require("../report/csv");
 const reportErr               = require("../report/err");
+const reportEslint            = require("../report/eslint");
 const normalizeFilesAndDirs   = require("./filesAndDirs/normalize");
 const validateRuleSet         = require("./ruleSet/validate");
 const normalizeRuleSet        = require("./ruleSet/normalize");
@@ -22,7 +23,8 @@ const TYPE2REPORTER      = {
     "ddot"  : reportDDot,
     "rcdot" : reportRCDot,
     "csv"   : reportCsv,
-    "err"   : reportErr
+    "err"   : reportErr,
+    "eslint": reportEslint
 };
 
 function wrapInDependencyList(pExtractResult, pReporterOutput, pOutputType) {
