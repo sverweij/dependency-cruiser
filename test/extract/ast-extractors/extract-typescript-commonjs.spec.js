@@ -73,6 +73,21 @@ describe("ast-extractors/extract-typescript - regular commonjs require", () => {
         );
     });
 
+    it("extracts regular require with a template string without placeholders", () => {
+        expect(
+            extractTypescript(
+                "const lala = require(`thunderscore`)"
+            )
+        ).to.deep.equal(
+            [
+                {
+                    moduleName: 'thunderscore',
+                    moduleSystem: 'cjs'
+                }
+            ]
+        );
+    });
+
     it("ignores regular require without parameters", () => {
         expect(
             extractTypescript(
@@ -87,6 +102,16 @@ describe("ast-extractors/extract-typescript - regular commonjs require", () => {
         expect(
             extractTypescript(
                 "const lala = require(666)"
+            )
+        ).to.deep.equal(
+            []
+        );
+    });
+
+    it("ignores regular require with a template literal with placeholders", () => {
+        expect(
+            extractTypescript(
+                "const lala = require(`shwoooop/${blabla}`)"
             )
         ).to.deep.equal(
             []

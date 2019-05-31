@@ -16,6 +16,28 @@ describe("ast-extractors/extract-typescript - dynamic imports", () => {
         );
     });
 
+    it("correctly detects a dynamic import statement with a template that has no placeholders", () => {
+        expect(
+            extractTypescript("import(`judeljo`).then(judeljo => { judeljo.hochik() }")
+        ).to.deep.equal(
+            [
+                {
+                    moduleName: 'judeljo',
+                    moduleSystem: 'es6'
+                }
+            ]
+        );
+    });
+
+    it("ignores dynamic import statements with a template that has placeholders", () => {
+        expect(
+            extractTypescript("import(`judeljo/${vlap}`).then(judeljo => { judeljo.hochik() }")
+        ).to.deep.equal(
+            []
+        );
+    });
+
+
     it("ignores dynamic import statements with a non-string parameter", () => {
         expect(
             extractTypescript("import(elaborateFunctionCall()).then(judeljo => { judeljo.hochik() }")

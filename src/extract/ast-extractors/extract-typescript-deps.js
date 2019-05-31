@@ -100,7 +100,13 @@ function isTypeImport(pASTNode) {
 function firstArgIsAString(pASTNode) {
     const lFirstArgument = pASTNode.arguments[0];
 
-    return lFirstArgument && typescript.SyntaxKind[lFirstArgument.kind] === "StringLiteral";
+    return lFirstArgument &&
+        (
+            // "thing" or 'thing'
+            typescript.SyntaxKind[lFirstArgument.kind] === "StringLiteral" ||
+            // `thing`
+            typescript.SyntaxKind[lFirstArgument.kind] === "FirstTemplateToken"
+        );
 }
 
 /**
