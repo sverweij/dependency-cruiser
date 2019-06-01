@@ -1,31 +1,28 @@
+const _get = require('lodash/get');
 const walk = require('./walk');
+const estreeHelpers = require('./estree-utl');
 
-function firstArgumentIsAString(pNodeArguments) {
-    return Boolean(pNodeArguments) &&
-        pNodeArguments[0] &&
-        pNodeArguments[0].value &&
-        typeof pNodeArguments[0].value === "string";
-}
-
-function isRequireIdentifier(pCallee) {
-    return pCallee.type === "Identifier" &&
-        pCallee.name === "require";
-}
-
-function isRequireCall(pNode){
-    return isRequireIdentifier(pNode.callee) &&
-        firstArgumentIsAString(pNode.arguments);
+function isRequireIdentifier(pNode) {
+    return 'Identifier' === _get(pNode, 'callee.type') &&
+        'require' === _get(pNode, 'callee.name');
 }
 
 function pushRequireCallsToDependencies(pDependencies, pModuleSystem) {
-    return pNode => {
-        if (isRequireCall(pNode)) {
-            pNode.arguments[0].value.split("!").forEach(
-                pString => pDependencies.push({
-                    moduleName: pString,
+    return (pNode) => {
+        if (isRequireIdentifier(pNode)) {
+            if (estreeHelpers.firstArgumentIsAString(pNode.arguments)) {
+                pNode.arguments[0].value.split("!").forEach(
+                    pString => pDependencies.push({
+                        moduleName: pString,
+                        moduleSystem: pModuleSystem
+                    })
+                );
+            } else if (estreeHelpers.firstArgumentIsATemplateLiteral(pNode.arguments)) {
+                pDependencies.push({
+                    moduleName: pNode.arguments[0].quasis[0].value.cooked,
                     moduleSystem: pModuleSystem
-                })
-            );
+                });
+            }
         }
     };
 }
@@ -37,6 +34,7 @@ module.exports = (pAST, pDependencies, pModuleSystem) => {
     // require('./lalala');
     // require('./lalala').doFunkyStuff();
     // require('zoinks!./wappie')
+    // require(`./withatemplateliteral`)
     walk.simple(
         pAST,
         {

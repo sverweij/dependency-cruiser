@@ -114,7 +114,8 @@ ecmascript) might come later.
 
 ### Q: Does dependency-cruiser detect [dynamic imports](https://github.com/tc39/proposal-dynamic-import)?
 **A**: Yes; in both typescript and javascript - but only with static string arguments
-(see the next question). This should cover most of the use cases for dynamic
+or template expressions that don't contain no placeholders (see the next question).
+This should cover most of the use cases for dynamic
 imports that leverage asynchronous module loading (like [webpack code splitting](https://webpack.js.org/guides/code-splitting/#dynamic-imports)), though.
 
 ### Q: Does dependency-cruiser handle variable or expression requires and imports?
@@ -125,9 +126,7 @@ If you have imports with variables (`require(someVariable)`,
 (`require(funkyBoolean ? 'lodash' : 'underscore'))`
 in your code dependency-cruiser won't be able to determinewhat dependencies
 they're about. For now dependency-cruiser focusses on doing static analysis
-only and doing that well. Dynamic/ runtime analysis is fun, but also a whole
-different ball game.
-
+only and doing that well.
 
 ### Q: Does it work with my monorepo?
 

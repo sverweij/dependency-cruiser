@@ -24,10 +24,26 @@ describe("ast-extractors/extract-ES6-deps", () => {
         );
     });
 
-    it("dynamic imports of a template literal doesn't yield an import", () => {
+    it("dynamic imports of a template literal without placeholders yields an import", () => {
         let lDeps = [];
 
         extractES6("import(`./dynamic`).then(pModule => pModule.x);", lDeps);
+        expect(
+            lDeps
+        ).to.deep.equal(
+            [
+                {
+                    moduleName: './dynamic',
+                    moduleSystem: 'es6'
+                }
+            ]
+        );
+    });
+
+    it("dynamic imports of a template literal with placeholders doesn't yield an import", () => {
+        let lDeps = [];
+
+        extractES6("import(`./dynamic/${enhop}`).then(pModule => pModule.x);", lDeps);
         expect(
             lDeps
         ).to.deep.equal(
