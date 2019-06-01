@@ -1,17 +1,13 @@
 const _get = require('lodash/get');
 const walk = require('./walk');
+const estreeHelpers = require('./estree-utl');
 
 function isImportStatement(pNode) {
     return 'Import' === _get(pNode, 'callee.type');
 }
-function isPlaceholderlessTemplateLiteral(pArgument){
-    return pArgument.type === 'TemplateLiteral' &&
-        pArgument.quasis.length === 1 &&
-        pArgument.expressions.length === 0;
-}
 
 function hasPlaceholderlessTemplateLiteralArgument(pNode) {
-    return _get(pNode, 'arguments', []).some(isPlaceholderlessTemplateLiteral);
+    return estreeHelpers.isPlaceholderlessTemplateLiteral(_get(pNode, 'arguments[0]', {}));
 }
 function isStringLiteral(pArgument) {
     return pArgument.type === 'Literal' &&
@@ -32,7 +28,7 @@ function pushImportNodeValue(pDependencies) {
                 });
             } else if (hasPlaceholderlessTemplateLiteralArgument(pNode)) {
                 pDependencies.push({
-                    moduleName: pNode.arguments.find(isPlaceholderlessTemplateLiteral).quasis[0].value.cooked,
+                    moduleName: pNode.arguments[0].quasis[0].value.cooked,
                     moduleSystem: "es6"
                 });
             }

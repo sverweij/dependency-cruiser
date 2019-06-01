@@ -1,4 +1,5 @@
 const walk = require('./walk');
+const estreeHelpers = require('./estree-utl');
 
 function firstArgumentIsAString(pArgumentsNode) {
     return Boolean(pArgumentsNode) &&
@@ -17,16 +18,10 @@ function isRequireCall(pNode){
         firstArgumentIsAString(pNode.arguments);
 }
 
-function isPlaceholderlessTemplateLiteral(pArgument){
-    return pArgument.type === 'TemplateLiteral' &&
-        pArgument.quasis.length === 1 &&
-        pArgument.expressions.length === 0;
-}
-
 function firstArgumentIsATemplateLiteral(pArgumentsNode) {
     return Boolean(pArgumentsNode) &&
         pArgumentsNode[0] &&
-        isPlaceholderlessTemplateLiteral(pArgumentsNode[0]);
+        estreeHelpers.isPlaceholderlessTemplateLiteral(pArgumentsNode[0]);
 }
 
 function isRequireCallWithTemplateString(pNode){
