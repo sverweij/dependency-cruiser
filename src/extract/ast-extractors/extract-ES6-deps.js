@@ -7,7 +7,9 @@ function isImportStatement(pNode) {
 }
 
 function hasPlaceholderlessTemplateLiteralArgument(pNode) {
-    return estreeHelpers.isPlaceholderlessTemplateLiteral(_get(pNode, 'arguments[0]', {}));
+    return estreeHelpers.isPlaceholderlessTemplateLiteral(
+        _get(pNode, 'arguments[0]', {})
+    );
 }
 function isStringLiteral(pArgument) {
     return pArgument.type === 'Literal' &&
@@ -15,7 +17,9 @@ function isStringLiteral(pArgument) {
 }
 
 function hasStringArgument(pNode) {
-    return _get(pNode, 'arguments', []).some(isStringLiteral);
+    return isStringLiteral(
+        _get(pNode, 'arguments[0]', {})
+    );
 }
 
 function pushImportNodeValue(pDependencies) {
@@ -23,7 +27,7 @@ function pushImportNodeValue(pDependencies) {
         if (isImportStatement(pNode)) {
             if (hasStringArgument(pNode)) {
                 pDependencies.push({
-                    moduleName: pNode.arguments.find(isStringLiteral).value,
+                    moduleName: pNode.arguments[0].value,
                     moduleSystem: "es6"
                 });
             } else if (hasPlaceholderlessTemplateLiteralArgument(pNode)) {
