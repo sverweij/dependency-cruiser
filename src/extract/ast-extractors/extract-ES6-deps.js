@@ -6,31 +6,15 @@ function isImportStatement(pNode) {
     return 'Import' === _get(pNode, 'callee.type');
 }
 
-function hasPlaceholderlessTemplateLiteralArgument(pNode) {
-    return estreeHelpers.isPlaceholderlessTemplateLiteral(
-        _get(pNode, 'arguments[0]', {})
-    );
-}
-function isStringLiteral(pArgument) {
-    return pArgument.type === 'Literal' &&
-        typeof pArgument.value === 'string';
-}
-
-function hasStringArgument(pNode) {
-    return isStringLiteral(
-        _get(pNode, 'arguments[0]', {})
-    );
-}
-
 function pushImportNodeValue(pDependencies) {
     return (pNode) => {
         if (isImportStatement(pNode)) {
-            if (hasStringArgument(pNode)) {
+            if (estreeHelpers.firstArgumentIsAString(pNode.arguments)) {
                 pDependencies.push({
                     moduleName: pNode.arguments[0].value,
                     moduleSystem: "es6"
                 });
-            } else if (hasPlaceholderlessTemplateLiteralArgument(pNode)) {
+            } else if (estreeHelpers.firstArgumentIsATemplateLiteral(pNode.arguments)) {
                 pDependencies.push({
                     moduleName: pNode.arguments[0].quasis[0].value.cooked,
                     moduleSystem: "es6"

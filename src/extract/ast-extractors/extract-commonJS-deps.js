@@ -1,35 +1,23 @@
+const _get = require('lodash/get');
 const walk = require('./walk');
 const estreeHelpers = require('./estree-utl');
 
-function firstArgumentIsAString(pArgumentsNode) {
-    return Boolean(pArgumentsNode) &&
-        pArgumentsNode[0] &&
-        pArgumentsNode[0].value &&
-        typeof pArgumentsNode[0].value === "string";
-}
-
 function isRequireIdentifier(pNode) {
-    return pNode.callee.type === "Identifier" &&
-        pNode.callee.name === "require";
-}
-
-function firstArgumentIsATemplateLiteral(pArgumentsNode) {
-    return Boolean(pArgumentsNode) &&
-        pArgumentsNode[0] &&
-        estreeHelpers.isPlaceholderlessTemplateLiteral(pArgumentsNode[0]);
+    return 'Identifier' === _get(pNode, 'callee.type') &&
+        'require' === _get(pNode, 'callee.name');
 }
 
 function pushRequireCallsToDependencies(pDependencies, pModuleSystem) {
     return (pNode) => {
         if (isRequireIdentifier(pNode)) {
-            if (firstArgumentIsAString(pNode.arguments)) {
+            if (estreeHelpers.firstArgumentIsAString(pNode.arguments)) {
                 pNode.arguments[0].value.split("!").forEach(
                     pString => pDependencies.push({
                         moduleName: pString,
                         moduleSystem: pModuleSystem
                     })
                 );
-            } else if (firstArgumentIsATemplateLiteral(pNode.arguments)) {
+            } else if (estreeHelpers.firstArgumentIsATemplateLiteral(pNode.arguments)) {
                 pDependencies.push({
                     moduleName: pNode.arguments[0].quasis[0].value.cooked,
                     moduleSystem: pModuleSystem
