@@ -8,14 +8,9 @@ function firstArgumentIsAString(pArgumentsNode) {
         typeof pArgumentsNode[0].value === "string";
 }
 
-function isRequireIdentifier(pCallee) {
-    return pCallee.type === "Identifier" &&
-        pCallee.name === "require";
-}
-
-function isRequireCall(pNode){
-    return isRequireIdentifier(pNode.callee) &&
-        firstArgumentIsAString(pNode.arguments);
+function isRequireIdentifier(pNode) {
+    return pNode.callee.type === "Identifier" &&
+        pNode.callee.name === "require";
 }
 
 function firstArgumentIsATemplateLiteral(pArgumentsNode) {
@@ -24,25 +19,22 @@ function firstArgumentIsATemplateLiteral(pArgumentsNode) {
         estreeHelpers.isPlaceholderlessTemplateLiteral(pArgumentsNode[0]);
 }
 
-function isRequireCallWithTemplateString(pNode){
-    return isRequireIdentifier(pNode.callee) &&
-        firstArgumentIsATemplateLiteral(pNode.arguments);
-}
-
 function pushRequireCallsToDependencies(pDependencies, pModuleSystem) {
-    return pNode => {
-        if (isRequireCall(pNode)) {
-            pNode.arguments[0].value.split("!").forEach(
-                pString => pDependencies.push({
-                    moduleName: pString,
+    return (pNode) => {
+        if (isRequireIdentifier(pNode)) {
+            if (firstArgumentIsAString(pNode.arguments)) {
+                pNode.arguments[0].value.split("!").forEach(
+                    pString => pDependencies.push({
+                        moduleName: pString,
+                        moduleSystem: pModuleSystem
+                    })
+                );
+            } else if (firstArgumentIsATemplateLiteral(pNode.arguments)) {
+                pDependencies.push({
+                    moduleName: pNode.arguments[0].quasis[0].value.cooked,
                     moduleSystem: pModuleSystem
-                })
-            );
-        } else if (isRequireCallWithTemplateString(pNode)) {
-            pDependencies.push({
-                moduleName: pNode.arguments[0].quasis[0].value.cooked,
-                moduleSystem: pModuleSystem
-            });
+                });
+            }
         }
     };
 }
