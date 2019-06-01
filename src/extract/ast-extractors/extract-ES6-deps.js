@@ -1,26 +1,26 @@
 const _get = require('lodash/get');
 const walk = require('./walk');
+const estreeHelpers = require('./estree-utl');
 
 function isImportStatement(pNode) {
     return 'Import' === _get(pNode, 'callee.type');
 }
 
-function isStringLiteral(pArgument) {
-    return pArgument.type === 'Literal' &&
-        typeof pArgument.value === 'string';
-}
-
-function hasStringArgument(pNode) {
-    return _get(pNode, 'arguments', []).some(isStringLiteral);
-}
-
 function pushImportNodeValue(pDependencies) {
     return (pNode) => {
-        if (isImportStatement(pNode) && hasStringArgument(pNode)) {
-            pDependencies.push({
-                moduleName: pNode.arguments.find(isStringLiteral).value,
-                moduleSystem: "es6"
-            });
+        if (isImportStatement(pNode)) {
+            if (estreeHelpers.firstArgumentIsAString(pNode.arguments)) {
+                pDependencies.push({
+                    moduleName: pNode.arguments[0].value,
+                    moduleSystem: "es6"
+                });
+            } else if (estreeHelpers.firstArgumentIsATemplateLiteral(pNode.arguments)) {
+                pDependencies.push({
+                    moduleName: pNode.arguments[0].quasis[0].value.cooked,
+                    moduleSystem: "es6"
+                });
+            }
+
         }
     };
 }
