@@ -1,10 +1,10 @@
 const walk = require('./walk');
 
-function firstArgumentIsAString(pNodeArguments) {
-    return Boolean(pNodeArguments) &&
-        pNodeArguments[0] &&
-        pNodeArguments[0].value &&
-        typeof pNodeArguments[0].value === "string";
+function firstArgumentIsAString(pArgumentsNode) {
+    return Boolean(pArgumentsNode) &&
+        pArgumentsNode[0] &&
+        pArgumentsNode[0].value &&
+        typeof pArgumentsNode[0].value === "string";
 }
 
 function isRequireIdentifier(pCallee) {
@@ -17,6 +17,23 @@ function isRequireCall(pNode){
         firstArgumentIsAString(pNode.arguments);
 }
 
+function isPlaceholderlessTemplateLiteral(pArgument){
+    return pArgument.type === 'TemplateLiteral' &&
+        pArgument.quasis.length === 1 &&
+        pArgument.expressions.length === 0;
+}
+
+function firstArgumentIsATemplateLiteral(pArgumentsNode) {
+    return Boolean(pArgumentsNode) &&
+        pArgumentsNode[0] &&
+        isPlaceholderlessTemplateLiteral(pArgumentsNode[0]);
+}
+
+function isRequireCallWithTemplateString(pNode){
+    return isRequireIdentifier(pNode.callee) &&
+        firstArgumentIsATemplateLiteral(pNode.arguments);
+}
+
 function pushRequireCallsToDependencies(pDependencies, pModuleSystem) {
     return pNode => {
         if (isRequireCall(pNode)) {
@@ -26,6 +43,11 @@ function pushRequireCallsToDependencies(pDependencies, pModuleSystem) {
                     moduleSystem: pModuleSystem
                 })
             );
+        } else if (isRequireCallWithTemplateString(pNode)) {
+            pDependencies.push({
+                moduleName: pNode.arguments[0].quasis[0].value.cooked,
+                moduleSystem: pModuleSystem
+            });
         }
     };
 }
@@ -37,6 +59,7 @@ module.exports = (pAST, pDependencies, pModuleSystem) => {
     // require('./lalala');
     // require('./lalala').doFunkyStuff();
     // require('zoinks!./wappie')
+    // require(`./withatemplateliteral`)
     walk.simple(
         pAST,
         {
