@@ -94,7 +94,10 @@ function isDynamicImportExpression(pASTNode) {
 function isTypeImport(pASTNode) {
     return typescript.SyntaxKind[pASTNode.kind] === 'LastTypeNode' &&
         typescript.SyntaxKind[pASTNode.argument.kind] === 'LiteralType' &&
-        typescript.SyntaxKind[pASTNode.argument.literal.kind] === 'StringLiteral';
+        (
+            typescript.SyntaxKind[pASTNode.argument.literal.kind] === 'StringLiteral' ||
+            typescript.SyntaxKind[pASTNode.argument.literal.kind] === 'FirstTemplateToken'
+        );
 }
 
 function firstArgIsAString(pASTNode) {
@@ -120,18 +123,22 @@ function extractNestedDependencies(pAST) {
     let lResult = [];
 
     function walk (pASTNode) {
+        // require('a-string'), require(`a-template-literal`)
         if (isRequireCallExpression(pASTNode) && firstArgIsAString(pASTNode)) {
             lResult.push({
                 moduleName: pASTNode.arguments[0].text,
                 moduleSystem: 'cjs'
             });
         }
+        // import('a-string'), import(`a-template-literal`)
         if (isDynamicImportExpression(pASTNode) && firstArgIsAString(pASTNode)) {
             lResult.push({
                 moduleName: pASTNode.arguments[0].text,
                 moduleSystem: 'es6'
             });
         }
+        // const atype: import('./types').T
+        // const atype: import(`./types`).T
         if (isTypeImport(pASTNode)) {
             lResult.push({
                 moduleName: pASTNode.argument.literal.text,

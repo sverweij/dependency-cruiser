@@ -68,6 +68,19 @@ describe("ast-extractors/extract-typescript - regular imports", () => {
         );
     });
 
+    it("extracts type imports in const declarations (template literal argument)", () => {
+        expect(
+            extractTypescript("const tiepetjes: import(`./types`).T;")
+        ).to.deep.equal(
+            [
+                {
+                    moduleName: './types',
+                    moduleSystem: 'es6'
+                }
+            ]
+        );
+    });
+
     it("extracts type imports in parameter declarations", () => {
         expect(
             extractTypescript("function f(snort: import('./vypes').T){console.log(snort.bla)}")
@@ -90,6 +103,16 @@ describe("ast-extractors/extract-typescript - regular imports", () => {
                     moduleName: './wypes',
                     moduleSystem: 'es6'
                 }
+            ]
+        );
+    });
+
+    it("leaves type imports with template literals with placeholders alone", () => {
+        expect(
+            // typescript/lib/protocol.d.ts has this thing
+            extractTypescript("const tiepetjes: import(`./types/${lalala()}`).T;")
+        ).to.deep.equal(
+            [
             ]
         );
     });
