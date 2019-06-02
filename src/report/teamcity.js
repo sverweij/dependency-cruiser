@@ -63,9 +63,17 @@ function reportViolations(pViolations) {
     );
 }
 
-module.exports = (pInput) => {
+/**
+ * Returns a bunch of TeamCity service messages:
+ * - for each rule in the passed results: an `inspectionType` with the name and comment of that rule
+ * - for each violation in the passed results: an `inspection` with the violated rule name and the tos and froms
+ *
+ * @param {any} pResults - the output of a dependency-cruise adhering to ../extract/results-schema.json
+ * @returns {string} - a '\n' separated string of TeamCity service messages
+ */
+module.exports = (pResults) => {
     tsm.stdout = false;
-    return reportUsedRules(_get(pInput, 'summary.ruleSetUsed', []))
-        .concat(reportViolations(_get(pInput, 'summary.violations', [])))
+    return reportUsedRules(_get(pResults, 'summary.ruleSetUsed', []))
+        .concat(reportViolations(_get(pResults, 'summary.violations', [])))
         .join('\n');
 };
