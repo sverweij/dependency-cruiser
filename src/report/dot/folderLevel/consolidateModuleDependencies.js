@@ -43,12 +43,9 @@ function consolidateDependencies(pDependencies) {
     return lRetval;
 }
 
-function consolidateModuleDependencies(pModule) {
-    return Object.assign(
+module.exports = (pModule) =>
+    Object.assign(
         {},
         pModule,
         {dependencies: consolidateDependencies(pModule.dependencies)}
     );
-}
-
-module.exports = consolidateModuleDependencies;

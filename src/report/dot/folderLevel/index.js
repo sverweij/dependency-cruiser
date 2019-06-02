@@ -6,6 +6,7 @@ const compareOnSource               = require("../common/compareOnSource");
 const consolidateModules            = require("./consolidateModules");
 const consolidateModuleDependencies = require("./consolidateModuleDependencies");
 
+// eslint-disable-next-line import/no-unassigned-import
 require("./ddot.template");
 
 function colorize(pModule) {
@@ -60,9 +61,16 @@ function squashToDir (pModules) {
         );
 }
 
-module.exports = (pInput) => Handlebars.templates['ddot.template.hbs'](
+/**
+ * Returns the results of a cruise as a directed graph in the dot language. The dependencies
+ * are collapsed to folder level, though
+ *
+ * @param {any} pResults - the output of a dependency-cruise adhering to ../../../extract/results-schema.json
+ * @returns {string} - a dot program
+ */
+module.exports = (pResults) => Handlebars.templates['ddot.template.hbs'](
     {
-        "things" : consolidateModules(squashToDir(pInput.modules))
+        "things" : consolidateModules(squashToDir(pResults.modules))
             .map(consolidateModuleDependencies)
             .sort(compareOnSource)
             .map(extractRelevantTransgressions)
@@ -70,5 +78,3 @@ module.exports = (pInput) => Handlebars.templates['ddot.template.hbs'](
             .map(colorize)
     }
 );
-
-/* eslint import/no-unassigned-import: 0 */
