@@ -75,6 +75,4 @@ module.exports = (pRegEx, pOptions) => {
     /* istanbul ignore next */
         return false;
     }
-
-
 };
