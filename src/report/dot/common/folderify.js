@@ -10,8 +10,7 @@ function aggregate (pPathSnippet, pCounter, pPathArray){
         aggregateSnippet: `${pPathArray.slice(0, pCounter).reduce(toFullPath, '')}${pPathSnippet}`
     };
 }
-
-function folderify(pModule) {
+module.exports = (pModule) => {
     let lAdditions = {};
     let lDirName = path.dirname(pModule.source);
 
@@ -27,6 +26,4 @@ function folderify(pModule) {
         pModule,
         lAdditions
     );
-}
-
-module.exports = folderify;
+};

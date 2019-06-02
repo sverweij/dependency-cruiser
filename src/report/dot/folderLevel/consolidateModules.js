@@ -28,7 +28,7 @@ function mergeModules(pSourceString, pModules){
         );
 }
 
-function consolidateModules(pModules){
+module.exports = (pModules) => {
     let lModules = _clone(pModules);
     let lRetval = [];
 
@@ -37,6 +37,4 @@ function consolidateModules(pModules){
         lModules = _reject(lModules, {source: lModules[0].source});
     }
     return lRetval;
-}
-
-module.exports = consolidateModules;
+};

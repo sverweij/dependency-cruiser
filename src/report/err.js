@@ -28,17 +28,26 @@ function formatSummary(pMeta) {
     return pMeta.error > 0 ? chalk.red(lMessage) : lMessage;
 }
 
-module.exports = (pInput) => {
+/**
+ * Returns the results of a cruise in a text only format, reminiscent of how eslint prints
+ * to stdout:
+ * - for each violation a message stating the violation name and the to and from
+ * - a summary with total number of errors and warnings found, and the total number of files cruised
+ *
+ * @param {any} pResults - the output of a dependency-cruise adhering to ../extract/results-schema.json
+ * @returns {string} - eslint like output
+ */
+module.exports = (pResults) => {
 
-    if (pInput.summary.violations.length === 0){
-        return `\n${chalk.green(figures.tick)} no dependency violations found (${pInput.summary.totalCruised} modules cruised)\n\n`;
+    if (pResults.summary.violations.length === 0){
+        return `\n${chalk.green(figures.tick)} no dependency violations found (${pResults.summary.totalCruised} modules cruised)\n\n`;
     }
 
-    return pInput.summary.violations.reduce(
+    return pResults.summary.violations.reduce(
         (pAll, pThis) => `${pAll}  ${formatError(pThis)}\n`,
         "\n"
     ).concat(
-        formatSummary(pInput.summary)
+        formatSummary(pResults.summary)
     );
 
 };

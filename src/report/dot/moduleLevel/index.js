@@ -5,6 +5,7 @@ const coloring        = require('../common/coloring');
 const folderify       = require('../common/folderify');
 const compareOnSource = require("../common/compareOnSource");
 
+// eslint-disable-next-line import/no-unassigned-import
 require("./dot.template");
 
 function colorize(pColoringScheme) {
@@ -70,15 +71,21 @@ function addURL(pInput) {
         );
 }
 
-module.exports = (pColoringScheme) => (pInput) => Handlebars.templates['dot.template.hbs'](
+/**
+ * Returns the results of a cruise as a directed graph in the dot language.
+ *
+ * @param {any} pColoringScheme - a mapping of source properties to a color, fillcolor and fontcolor
+ *                              - see ../comon/richModuleCOlorScheme.json for an example
+ * @param {any} pResults - the output of a dependency-cruise adhering to ../../../extract/results-schema.json
+ * @returns {string} - a dot program
+ */
+module.exports = (pColoringScheme) => (pResults) => Handlebars.templates['dot.template.hbs'](
     {
-        "things" : pInput.modules
+        "things" : pResults.modules
             .sort(compareOnSource)
             .map(extractFirstTransgression)
             .map(folderify)
             .map(colorize(pColoringScheme))
-            .map(addURL(pInput))
+            .map(addURL(pResults))
     }
 );
-
-/* eslint import/no-unassigned-import: 0 */
