@@ -1,0 +1,5 @@
+##teamcity[inspectionType id='not-to-dev-dep' name='not-to-dev-dep' description='Don|'t allow dependencies from src/app/lib to a development only package' category='dependency-cruiser']
+##teamcity[inspectionType id='no-orphans' name='no-orphans' description='Modules without any incoming or outgoing dependencies are might indicate unused code.' category='dependency-cruiser']
+##teamcity[inspectionType id='no-circular' name='no-circular' description='circular dependencies will make you dizzy' category='dependency-cruiser']
+##teamcity[inspectionType id='not-to-unresolvable' name='not-to-unresolvable' description='' category='dependency-cruiser']
+##teamcity[inspectionType id='not-in-allowed' name='not-in-allowed' description='dependency is not in the |'allowed|' set of rules' category='dependency-cruiser']

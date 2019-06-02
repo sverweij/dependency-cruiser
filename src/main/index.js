@@ -8,6 +8,7 @@ const RCScheme                = require('../report/dot/common/richModuleColorSch
 const reportRCDot             = require("../report/dot/moduleLevel")(RCScheme);
 const reportCsv               = require("../report/csv");
 const reportErr               = require("../report/err");
+const reportTeamCity          = require("../report/teamcity");
 const normalizeFilesAndDirs   = require("./filesAndDirs/normalize");
 const validateRuleSet         = require("./ruleSet/validate");
 const normalizeRuleSet        = require("./ruleSet/normalize");
@@ -16,13 +17,14 @@ const normalizeOptions        = require("./options/normalize");
 const normalizeResolveOptions = require("./resolveOptions/normalize");
 
 const TYPE2REPORTER      = {
-    "json"  : reportJson,
-    "html"  : reportHtml,
-    "dot"   : reportDot,
-    "ddot"  : reportDDot,
-    "rcdot" : reportRCDot,
-    "csv"   : reportCsv,
-    "err"   : reportErr
+    "json"     : reportJson,
+    "html"     : reportHtml,
+    "dot"      : reportDot,
+    "ddot"     : reportDDot,
+    "rcdot"    : reportRCDot,
+    "csv"      : reportCsv,
+    "err"      : reportErr,
+    "teamcity" : reportTeamCity
 };
 
 function wrapInDependencyList(pExtractResult, pReporterOutput, pOutputType) {
