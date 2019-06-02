@@ -13,23 +13,25 @@ function severity2teamcitySeverity(pSeverity) {
     return SEVERITY2TEAMCITY_SEVERITY[pSeverity];
 }
 
-function reportForbiddenRules(pForbiddenRules) {
-    return pForbiddenRules.map(pForbiddenRule =>
-        tsm.inspectionType(
-            {
-                id: pForbiddenRule.name,
-                name: pForbiddenRule.name,
-                description: pForbiddenRule.comment,
-                category: CATEGORY
-            }
-        )
-    );
+function reportForbiddenRules(pForbiddenRules, pViolations) {
+    return pForbiddenRules
+        .filter(pForbiddenRule => pViolations.some(pViolation => pForbiddenRule.name === pViolation.rule.name))
+        .map(pForbiddenRule =>
+            tsm.inspectionType(
+                {
+                    id: pForbiddenRule.name,
+                    name: pForbiddenRule.name,
+                    description: pForbiddenRule.comment || pForbiddenRule.name,
+                    category: CATEGORY
+                }
+            )
+        );
 }
 
-function reportAllowedRule(pAllowedRule) {
+function reportAllowedRule(pAllowedRule, pViolations) {
     let lRetval = [];
 
-    if (pAllowedRule.length > 0) {
+    if (pAllowedRule.length > 0 && pViolations.some(pViolation => pViolation.rule.name === "not-in-allowed")) {
         lRetval = tsm.inspectionType(
             {
                 id: "not-in-allowed",
@@ -42,9 +44,9 @@ function reportAllowedRule(pAllowedRule) {
     return lRetval;
 }
 
-function reportUsedRules(pRuleSetUsed) {
-    return reportForbiddenRules(_get(pRuleSetUsed, 'forbidden', []))
-        .concat(reportAllowedRule(_get(pRuleSetUsed, 'allowed', [])));
+function reportViolatedRules(pRuleSetUsed, pViolations) {
+    return reportForbiddenRules(_get(pRuleSetUsed, 'forbidden', []), pViolations)
+        .concat(reportAllowedRule(_get(pRuleSetUsed, 'allowed', []), pViolations));
 }
 
 function bakeViolationMessage(pViolation) {
@@ -73,7 +75,11 @@ function reportViolations(pViolations) {
  */
 module.exports = (pResults) => {
     tsm.stdout = false;
-    return reportUsedRules(_get(pResults, 'summary.ruleSetUsed', []))
-        .concat(reportViolations(_get(pResults, 'summary.violations', [])))
+
+    const lRuleSet = _get(pResults, 'summary.ruleSetUsed', []);
+    const lViolations = _get(pResults, 'summary.violations', []);
+
+    return reportViolatedRules(lRuleSet, lViolations)
+        .concat(reportViolations(lViolations))
         .join('\n');
 };

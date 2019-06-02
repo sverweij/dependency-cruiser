@@ -218,6 +218,14 @@
           "severity": "error",
           "name": "no-orphans"
         }
+      },
+      {
+        "from": "src/index.js",
+        "to": "./medontexist.json",
+        "rule": {
+          "severity": "warn",
+          "name": "not-in-allowed"
+        }
       }
     ],
     "error": 5,
@@ -295,7 +303,16 @@
           }
         }
       ],
-      "allowed": [],
+      "allowed": [
+        {
+          "from": {
+            "path": "src"
+          },
+          "to": {
+            "path": "^(src|node_modules)"
+          }
+        }
+      ],
       "allowedSeverity": "warn"
     }
   }
