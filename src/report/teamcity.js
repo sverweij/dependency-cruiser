@@ -74,6 +74,12 @@ function reportViolations(pViolations) {
  * @returns {string} - a '\n' separated string of TeamCity service messages
  */
 module.exports = (pResults) => {
+    // this is the documented way to get tsm to emit strings
+    // Alternatively we could've used tne 'low level API', which
+    // involves creating new `Message`s and stringifying those.
+    // The abstraction of the 'higher level API' makes this
+    // reporter more easy to implement and maintain, despite
+    // setting this property directly
     tsm.stdout = false;
 
     const lRuleSet = _get(pResults, 'summary.ruleSetUsed', []);
