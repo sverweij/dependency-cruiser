@@ -81,5 +81,5 @@ module.exports = (pResults) => {
 
     return reportViolatedRules(lRuleSet, lViolations)
         .concat(reportViolations(lViolations))
-        .join('\n');
+        .reduce((pAll, pCurrent) => `${pAll}${pCurrent}\n`, '');
 };
