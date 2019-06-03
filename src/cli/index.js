@@ -52,7 +52,7 @@ function runCruise(pFileDirArray, pOptions) {
 
     io.write(pOptions.outputTo, lDependencyList.modules);
 
-    if (lDependencyList.summary.error > 0 && pOptions.outputType === "err") {
+    if (lDependencyList.summary.error > 0 && ["err", "teamcity"].includes(pOptions.outputType)) {
         lExitCode = lDependencyList.summary.error;
     }
     return lExitCode;

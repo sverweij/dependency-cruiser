@@ -37,8 +37,8 @@ This will:
 - ... print nothing and exit with code 0 if dependency-cruiser didn't
   find any violations of the rules in .dependency-cruiser.json.
 - ... print the violating dependencies if there is any. Moreover it
-  will exit with exit code _number of violations found_ in the same fasion
-  linters and test tools do.
+  will exit with exit code _number of violations with severity `error` found_ 
+  in the same fashion linters and test tools do.
 
 See the _dependency-cruise_ target in the [Makefile](https://github.com/sverweij/dependency-cruiser/blob/master/Makefile#L95)
 for a real world example.
@@ -73,6 +73,31 @@ dependency-cruise -T html -f dependencies.html src
 If you supply `csv` it will write the dependency matrix to a comma
 separated file - so you can import it into a spreadsheet program
 and analyze from there.
+
+#### teamcity
+Write the output in [TeamCity service message format](https://www.jetbrains.com/help/teamcity/build-script-interaction-with-teamcity.html).
+
+E.g. to cruise src (using the .dependency-cruiser config) and emit TeamCity messages to stdout:
+
+```shell
+dependency-cruise -v -T teamcity  -- src
+```
+
+Sample output:
+
+```
+##teamcity[inspectionType id='not-to-dev-dep' name='not-to-dev-dep' description='Don|'t allow dependencies from src/app/lib to a development only package' category='dependency-cruiser' flowId='8970869134' timestamp='2019-06-02T10:37:56.812']
+##teamcity[inspectionType id='no-orphans' name='no-orphans' description='Modules without any incoming or outgoing dependencies are might indicate unused code.' category='dependency-cruiser' flowId='8970869134' timestamp='2019-06-02T10:37:56.812']
+##teamcity[inspectionType id='not-to-unresolvable' name='not-to-unresolvable' description='' category='dependency-cruiser' flowId='8970869134' timestamp='2019-06-02T10:37:56.812']
+##teamcity[inspection typeId='not-to-dev-dep' message='src/asneeze.js -> node_modules/eslint/lib/api.js' file='src/asneeze.js' SEVERITY='ERROR' flowId='8970869134' timestamp='2019-06-02T10:37:56.812']
+##teamcity[inspection typeId='not-to-unresolvable' message='src/index.js -> ./medontexist.json' file='src/index.js' SEVERITY='ERROR' flowId='8970869134' timestamp='2019-06-02T10:37:56.812']
+##teamcity[inspection typeId='not-to-dev-dep' message='src/index.js -> node_modules/dependency-cruiser/src/main/index.js' file='src/index.js' SEVERITY='ERROR' flowId='8970869134' timestamp='2019-06-02T10:37:56.812']
+##teamcity[inspection typeId='not-to-dev-dep' message='src/index.js -> node_modules/eslint/lib/api.js' file='src/index.js' SEVERITY='ERROR' flowId='8970869134' timestamp='2019-06-02T10:37:56.812']
+##teamcity[inspection typeId='no-orphans' message='src/orphan.js -> src/orphan.js' file='src/orphan.js' SEVERITY='ERROR' flowId='8970869134' timestamp='2019-06-02T10:37:56.812']
+```
+
+Just like the `err` reporter the teamcity reporter has an empty output when there's
+no violations - and a non-zero exit code when there's errors.
 
 ### `--do-not-follow`: don't cruise modules adhering to this pattern any further
 If you _do_ want to see certain modules in your reports, but are not interested
