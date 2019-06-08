@@ -1,4 +1,5 @@
 const expect     = require('chai').expect;
+const chalk      = require('chalk');
 const render     = require('../../src/report/err');
 const okdeps     = require('./fixtures/everything-fine.json');
 const deps       = require('./fixtures/cjs-no-dependency-valid.json');
@@ -7,6 +8,14 @@ const erradds    = require('./fixtures/err-with-additional-information.json');
 const orphanerrs = require('./fixtures/orphan-deps.json');
 
 describe("report/err", () => {
+    let chalkEnabled = chalk.enabled;
+
+    before("disable chalk coloring", () => {
+        chalk.enabled = false;
+    });
+    after("put chalk enabled back to its original value", () => {
+        chalk.enabled = chalkEnabled;
+    });
     it("says everything fine", () => {
         expect(render(okdeps)).to.contain('no dependency violations found');
     });
@@ -14,7 +23,7 @@ describe("report/err", () => {
         const lResult = render(deps);
 
         expect(lResult).to.contain(
-            '\u001b[31merror\u001b[39m no-leesplank: \u001b[1maap\u001b[22m → \u001b[1mnoot\u001b[22m\n'
+            'error no-leesplank: aap → noot\n'
         );
         expect(lResult).to.contain('2 dependency violations (2 errors, 0 warnings)');
     });
@@ -24,7 +33,7 @@ describe("report/err", () => {
     it("renders module only violations as module only", () => {
         const lResult = render(orphanerrs);
 
-        expect(lResult).to.contain('\u001b[31merror\u001b[39m no-orphans: \u001b[1mremi.js\u001b[22m\n');
+        expect(lResult).to.contain('error no-orphans: remi.js\n');
         expect(lResult).to.contain('1 dependency violations (1 errors, 0 warnings)');
     });
     it("renders addtional information", () => {
