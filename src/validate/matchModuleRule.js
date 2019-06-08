@@ -11,10 +11,21 @@ function matchesOrphanRule(pRule, pModule) {
     );
 }
 
-function match(pModule){
-    return pRule => matchesOrphanRule(pRule, pModule);
+function matchesReachableRule(pRule, pModule) {
+    return pRule.to.hasOwnProperty('reachable') && (
+        (
+            pRule.to.reachable === pModule.reachable
+        ) && (!pRule.to.path ||
+            pModule.source.match(pRule.to.path)
+        ) && (!pRule.to.pathNot ||
+            !(pModule.source.match(pRule.to.pathNot))
+        )
+    );
 }
 
+function match(pModule){
+    return pRule => matchesOrphanRule(pRule, pModule) || matchesReachableRule(pRule, pModule);
+}
 const isInteresting = pRule => isModuleOnlyRule(pRule);
 
 module.exports = {

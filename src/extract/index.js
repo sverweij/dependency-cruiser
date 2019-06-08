@@ -4,6 +4,7 @@ const pathToPosix     = require('./utl/pathToPosix');
 const extract         = require('./extract');
 const deriveCirculars = require('./derive/circular');
 const deriveOrphans   = require('./derive/orphan');
+const deriveReachable = require('./derive/reachable');
 const gather          = require('./gatherInitialSources');
 const summarize       = require('./summarize');
 const addValidations  = require('./addValidations');
@@ -135,6 +136,8 @@ module.exports = (pFileDirArray, pOptions, pResolveOptions, pTSConfig) => {
 
     lModules = deriveCirculars(lModules, pOptions);
     lModules = deriveOrphans(lModules, pOptions);
+    lModules = deriveReachable(lModules, pOptions.ruleSet);
+
 
     lModules = addValidations(
         lModules,

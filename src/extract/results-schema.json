@@ -100,7 +100,11 @@
                     },
                     "orphan": {
                         "type": "boolean",
-                        "description": "'true' if this dependency does not have dependencies, and no module has it as a dependency"
+                        "description": "'true' if this module does not have dependencies, and no module has it as a dependency"
+                    },
+                    "reachable": {
+                        "type": "boolean",
+                        "description": "'true' if this module is reachable from any of the modules matched by the from part of a reachability-rule, 'false' if not, not there if there's no reachability-rule"
                     },
                     "valid": {
                         "type": "boolean",

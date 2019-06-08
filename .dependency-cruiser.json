@@ -72,6 +72,11 @@
             "severity": "warn",
             "from": {},
             "to": { "licenseNot": "MIT|ISC" }
+        },{
+            "name": "not-unreachable-from-cli",
+            "severity": "info",
+            "from": { "path": "^src/cli/index\\.js$" },
+            "to": { "path": "^src", "reachable": false }
         }
     ],
     "options": {
