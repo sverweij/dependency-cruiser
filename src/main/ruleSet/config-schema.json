@@ -244,6 +244,10 @@
                 "licenseNot": {
                     "type": "string",
                     "description": "Whether or not to match modules that were NOT released under one of the mentioned licenses. E.g. to flag everyting non MIT use \"MIT\" here"
+                },
+                "reachable": {
+                    "type": "boolean",
+                    "description": "Whether or not to match modules that aren't reachable from the from part of the rule. NOTE & TODO: should be separate rule type that ensures there's only one, and that has only path and pathNot in the to part"
                 }
 
             }

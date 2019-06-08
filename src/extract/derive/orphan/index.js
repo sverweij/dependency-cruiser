@@ -13,7 +13,6 @@ function orphanCheckNecessary(pOptions){
     return false;
 }
 
-
 function addOrphanCheckToGraph(pDependencies){
     return pDependencies.map(
         pNode => Object.assign(
