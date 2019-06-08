@@ -8,8 +8,11 @@ const SEVERITY2CHALK = {
 };
 
 function formatError(pErr) {
-    return `${SEVERITY2CHALK[pErr.rule.severity](pErr.rule.severity)} ${pErr.rule.name}: ` +
-           `${chalk.bold(pErr.from)} ${figures.arrowRight} ${chalk.bold(pErr.to)}` +
+    const lModuleNames = pErr.from === pErr.to
+        ? chalk.bold(pErr.from)
+        : `${chalk.bold(pErr.from)} ${figures.arrowRight} ${chalk.bold(pErr.to)}`;
+
+    return `${SEVERITY2CHALK[pErr.rule.severity](pErr.rule.severity)} ${pErr.rule.name}: ${lModuleNames}` +
            `${pErr.additionalInformation ? `\n  ${pErr.additionalInformation}` : ""}`;
 }
 

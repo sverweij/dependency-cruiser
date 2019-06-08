@@ -6,5 +6,5 @@
 ##teamcity[inspection typeId='not-to-unresolvable' message='src/index.js -> ./medontexist.json' file='src/index.js' SEVERITY='ERROR']
 ##teamcity[inspection typeId='not-to-dev-dep' message='src/index.js -> node_modules/dependency-cruiser/src/main/index.js' file='src/index.js' SEVERITY='ERROR']
 ##teamcity[inspection typeId='not-to-dev-dep' message='src/index.js -> node_modules/eslint/lib/api.js' file='src/index.js' SEVERITY='ERROR']
-##teamcity[inspection typeId='no-orphans' message='src/orphan.js -> src/orphan.js' file='src/orphan.js' SEVERITY='ERROR']
+##teamcity[inspection typeId='no-orphans' message='src/orphan.js' file='src/orphan.js' SEVERITY='ERROR']
 ##teamcity[inspection typeId='not-in-allowed' message='src/index.js -> ./medontexist.json' file='src/index.js' SEVERITY='WARNING']

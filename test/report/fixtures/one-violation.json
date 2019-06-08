@@ -91,6 +91,14 @@
                     "severity": "info",
                     "name": "everything-is-a-violation"
                 }
+            },
+            {
+                "from": "src/main/options/validate.js",
+                "to": "node_modules/safe-regex/index.js",
+                "rule": {
+                    "severity": "info",
+                    "name": "everything-is-a-violation"
+                }
             }
         ],
         "error": 0,

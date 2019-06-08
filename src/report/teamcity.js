@@ -50,7 +50,7 @@ function reportViolatedRules(pRuleSetUsed, pViolations) {
 }
 
 function bakeViolationMessage(pViolation) {
-    return `${pViolation.from} -> ${pViolation.to}`;
+    return pViolation.from === pViolation.to ? pViolation.from : `${pViolation.from} -> ${pViolation.to}`;
 }
 function reportViolations(pViolations) {
     return pViolations.map(pViolation =>
