@@ -2,9 +2,13 @@ const _clone      = require('lodash/clone');
 const _get        = require('lodash/get');
 const isReachable = require('./isReachable');
 
-function getReachableRule(pRuleSet) {
-    return _get(pRuleSet, 'forbidden', []).find(pRule => pRule.to.hasOwnProperty('reachable')) ||
-    _get(pRuleSet, 'allowed', []).find(pRule => pRule.to.hasOwnProperty('reachable'));
+function getReachableRules(pRuleSet) {
+    return _get(pRuleSet, 'forbidden', [])
+        .filter(pRule => pRule.to.hasOwnProperty('reachable'))
+        .concat(
+            _get(pRuleSet, 'allowed', [])
+                .filter(pRule => pRule.to.hasOwnProperty('reachable'))
+        );
 }
 
 function onlyModulesInRuleFrom (pRule) {
@@ -19,6 +23,18 @@ function isModuleInRuleTo (pRule, pModule) {
         (!pRule.to.pathNot || !(pModule.source.match(pRule.to.pathNot)));
 }
 
+function mergeReachableProperties(pToModule, pRule, pIsReachable) {
+    const lReachables = (pToModule.reachable || []);
+    const lIndexExistingReachable = lReachables.findIndex(pReachable => pReachable.asDefinedInRule === pRule.name);
+
+    if (lIndexExistingReachable > -1) {
+        // eslint-disable-next-line security/detect-object-injection
+        lReachables[lIndexExistingReachable].value = lReachables[lIndexExistingReachable].value || pIsReachable;
+        return lReachables;
+    } else {
+        return lReachables.concat({value: pIsReachable, asDefinedInRule: pRule.name || 'not-in-allowed'});
+    }
+}
 
 function addReachableToGraph (pGraph, pReachableRule) {
     return pGraph
@@ -33,8 +49,11 @@ function addReachableToGraph (pGraph, pReachableRule) {
                             pToModule,
                             isModuleInRuleTo(pReachableRule, pToModule)
                                 ? {
-                                    reachable:
-                                        pToModule.reachable || isReachable(pGraph, pFromSource, pToModule.source)
+                                    reachable: mergeReachableProperties(
+                                        pToModule,
+                                        pReachableRule,
+                                        isReachable(pGraph, pFromSource, pToModule.source)
+                                    )
                                 }
                                 : {}
                         )
@@ -45,11 +64,11 @@ function addReachableToGraph (pGraph, pReachableRule) {
 }
 
 module.exports = (pGraph, pRuleSet) => {
-    const lReachableRule = pRuleSet ? getReachableRule(pRuleSet) : false;
+    const lReachableRules = pRuleSet ? getReachableRules(pRuleSet) : [];
 
-    if (lReachableRule) {
-        return addReachableToGraph(pGraph, lReachableRule);
-    }
+    return lReachableRules.reduce(
+        (pReturnGraph, pRule) => addReachableToGraph(pReturnGraph, pRule),
+        _clone(pGraph)
+    );
 
-    return pGraph;
 };
