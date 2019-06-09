@@ -42,8 +42,6 @@ describe('extract/index - reachable', () => {
             lResolveOptions
         );
 
-        console.log(JSON.stringify(lResult, null, 2));
-
         expect(lResult).to.be.jsonSchema(depSchema);
     });
 });
