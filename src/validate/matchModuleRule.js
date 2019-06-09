@@ -11,16 +11,21 @@ function matchesOrphanRule(pRule, pModule) {
     );
 }
 
+function matchesReachableProperty(pRule, pModule) {
+    return pRule.to.hasOwnProperty('reachable') &&
+        (pModule.reachable || []).some(
+            pReachable => pReachable.asDefinedInRule === pRule.name && pRule.to.reachable === pReachable.value
+        );
+}
+
 function matchesReachableRule(pRule, pModule) {
-    return pRule.to.hasOwnProperty('reachable') && (
-        (
-            pRule.to.reachable === pModule.reachable
-        ) && (!pRule.to.path ||
+    return matchesReachableProperty(pRule, pModule) &&
+        (!pRule.to.path ||
             pModule.source.match(pRule.to.path)
-        ) && (!pRule.to.pathNot ||
+        ) &&
+        (!pRule.to.pathNot ||
             !(pModule.source.match(pRule.to.pathNot))
-        )
-    );
+        );
 }
 
 function match(pModule){

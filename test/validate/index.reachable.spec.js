@@ -19,7 +19,7 @@ describe("validate/index - orphans", () => {
             validate.module(
                 true,
                 _readRuleSet("./test/validate/fixtures/rules.reachable.json"),
-                {source: "something", reachable: true}
+                {source: "something", reachable: [{"asDefinedInRule": "no-unreachable", value: true}]}
             )
         ).to.deep.equal({valid: true});
     });
@@ -29,7 +29,7 @@ describe("validate/index - orphans", () => {
             validate.module(
                 true,
                 _readRuleSet("./test/validate/fixtures/rules.reachable.json"),
-                {source: "something", reachable: false}
+                {source: "something", reachable: [{"asDefinedInRule": "no-unreachable", value: false}]}
             )
         ).to.deep.equal({
             valid: false,
@@ -47,7 +47,7 @@ describe("validate/index - orphans", () => {
             validate.module(
                 true,
                 _readRuleSet("./test/validate/fixtures/rules.reachable.path.json"),
-                {source: "something", reachable: false}
+                {source: "something", reachable: [{"asDefinedInRule": "no-unreachable", value: false}]}
             )
         ).to.deep.equal({
             valid: false,
@@ -65,7 +65,7 @@ describe("validate/index - orphans", () => {
             validate.module(
                 true,
                 _readRuleSet("./test/validate/fixtures/rules.reachable.pathnot.json"),
-                {source: "something", reachable: false}
+                {source: "something", reachable: [{"asDefinedInRule": "no-unreachable", value: false}]}
             )
         ).to.deep.equal({valid: true});
     });
