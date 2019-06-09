@@ -1,3 +1,5 @@
+const _memoize = require('lodash/memoize');
+
 /**
  * Returns true if, in the graph pGraph, pTo is a (transient) dependency of pFrom,
  * returns false in all other cases
@@ -24,7 +26,8 @@ function isReachable(pGraph, pFrom, pTo, pVisited = new Set()) {
         } else {
             lRetval = lDirectUnvisitedDependencies
                 .some(
-                    pDirectDependency => isReachable(pGraph, pDirectDependency, pTo, pVisited)
+                    // eslint-disable-next-line no-use-before-define
+                    pDirectDependency => isReachableMemoized(pGraph, pDirectDependency, pTo, pVisited)
                 );
         }
     }
@@ -32,4 +35,7 @@ function isReachable(pGraph, pFrom, pTo, pVisited = new Set()) {
     return lRetval;
 }
 
-module.exports = isReachable;
+const isReachableMemoized = _memoize(isReachable, (_pGraph, pFrom, pTo) => `${pFrom}|${pTo}`);
+
+module.exports = isReachableMemoized;
+module.exports.clearCache = () => isReachableMemoized.cache.clear();
