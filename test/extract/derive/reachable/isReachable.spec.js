@@ -2,6 +2,9 @@ const expect = require('chai').expect;
 const isReachable = require('../../../../src/extract/derive/reachable/isReachable');
 
 describe('extract/derive/reachable/isReachable - reachability detection', () => {
+    beforeEach(() => {
+        isReachable.clearCache();
+    });
 
     it('does not explode when passed an empty graph', () => {
         expect(isReachable([], './src/index.js', './src/hajoo.js')).to.equal(false);
