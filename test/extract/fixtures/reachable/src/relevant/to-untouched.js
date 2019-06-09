@@ -1,0 +1,2 @@
+require('../other-stuff')
+require('.')

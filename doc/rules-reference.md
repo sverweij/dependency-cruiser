@@ -28,6 +28,7 @@
     - [`pathNot`](#pathnot)
     - [path specials](#path-specials)
     - [`orphan`](#orphans)
+    - [`reachable`](#reachable---detecting-dead-wood)
     - [`couldNotResolve`](#couldnotresolve)
     - [`circular`](#circular)
     - [`license` and `licenseNot`](#license-and-licensenot)
@@ -541,9 +542,78 @@ Things to keep in mind:
 - For similar reasons `orphan` is not allowed in the `to` part of rules.
 - (_for API users only_) to prevent dependency-cruiser from
   needlessly running the orphan detection algorithm, it only runs it
-  when there's an orphan rule in the rule set. If you want to have it
+  when there's an orphan rule in the rule set. If you want to have
   the detection in without a rule set or without an orphan rule,
   pass `forceOrphanCheck: true` as part of the `pOptions` parameter.
+
+### `reachable` - detecting dead wood
+
+`reachable` is a boolean indicating whether or not modules matching the `to` part
+of the rule are _reachable_ (either directly or via other moduels) from modules
+matching the `from` part of the rule. This can be useful for detecting dead wood.
+
+For instance, in this dependency-graph several modules are not reachable from
+the root `index.js`. If `index.js` is the only (legal) entry to this package,
+those unreachable modules are likely candidates for removal:
+
+<img width="533" alt="dependencies unreachable from src/index.js - reachable rule off" src="assets/reachable-deps-rule-off.png">
+
+
+Here's a rule snippet that will detect these for you:
+
+```javascript
+{
+    "forbidden": [
+        {
+            "name": "no-unreachable-from-root",
+            "severity": "error",
+            "from": {
+                "path": "src/index\\.js$"
+            },
+            "to": {
+                "path": "src",
+                
+                /*
+                  spec files shouldn't be reachable from regular code anyway, so you
+                  might typically want to exclude these from reachability rules:
+                 */
+                "pathNot": "\\.spec\\.(js|ts)$" // 
+                
+                /* 
+                  for each file matching path and pathNot, check if it's reachable from the
+                  modules matching the criteria mentioned in "from"
+                 */
+                "reachable": false 
+            }
+        }
+    ]
+}
+
+```
+With this rule enabled, the unreachable rules jump out immediately. Both in the output of the `err` reporter
+
+```sh
+  error no-unreachable-from-root: src/other-stuff/index.js
+  error no-unreachable-from-root: src/other-stuff/untouched-one.js
+  error no-unreachable-from-root: src/other-stuff/untouched-two.js
+  error no-unreachable-from-root: src/relevant/to-untouched.js
+
+✖ 4 dependency violations (4 errors, 0 warnings). 8 modules cruised.
+```
+... and in the output of the `dot` one:
+
+<img width="533" alt="dependencies unreachable from src/index.js - reachable rule on" src="assets/reachable-deps-rule-on.png">
+
+Some useful things to know when using `reachable` in rules:
+
+- You can set up multiple rules with a `reachable` attribute in the `to` section. If you do so,
+  make sure you give a `name` to each rule. It's not only the only way dependency-cruiser can keep
+  reachable rules apart - it will be for you as well :-).
+- The operation to calculate the reachability of modules can be quite resource intensive, especially
+  if you dependency-graph is wide and deep and 
+- Different from other rules, at this moment only the `path` and `pathNot` attributes are supported 
+  along side a `reachable` in the `to` part of a rule. Currently other attributes will be ignored.
+
 
 ## `options` not also command line options
 
