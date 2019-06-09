@@ -77,6 +77,12 @@
             "severity": "info",
             "from": { "path": "^src/cli/index\\.js$" },
             "to": { "path": "^src", "reachable": false }
+        },{
+            "name": "not-unreachable-from-test",
+            "comment": "everything in src must be reachable from a spec file (poor man's test coverage - this task is better suited for a proper test coverage tool :-)",
+            "severity": "error",
+            "from": { "path": "\\.spec\\.js$" },
+            "to": { "path": "^src", "reachable": false }
         }
     ],
     "options": {
