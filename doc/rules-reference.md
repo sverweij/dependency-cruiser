@@ -28,6 +28,7 @@
     - [`pathNot`](#pathnot)
     - [path specials](#path-specials)
     - [`orphan`](#orphans)
+    - [`reachable`](#reachable---detecting-dead-wood)
     - [`couldNotResolve`](#couldnotresolve)
     - [`circular`](#circular)
     - [`license` and `licenseNot`](#license-and-licensenot)
@@ -324,6 +325,125 @@ group matching:
 ... which makes sure dependency-cruiser does not match stuff in the from folder
 currently being matched.
 
+### orphans
+
+A boolean indicating whether or not to match modules that have no incoming
+or outgoing dependencies. Orphans might need special attention because
+they're unused leftovers from a refactoring. Or the start of some feature
+that never got finished but which was merged anyway. Leaving the `orphan`
+attribute out means you don't care about orphans in your code.
+
+Detecting orphans will have an impact on performance. You will probably
+only notice it when you have a larger code base (thousands of modules
+in your dependency graph), but it is something to
+keep in mind.
+
+To detect orphans guys you can add e.g. this snippet to your
+.dependency-cruiser.json's `forbidden` section:
+
+```json
+{
+    "name": "no-orphans",
+    "severity": "warn",
+    "from": {"orphan": true},
+    "to": {}
+}
+```
+
+#### Usage notes
+- dependency-cruiser will typically not find orphans when you give it
+  only one  module to start with. Any module it finds, it finds by
+  following its dependencies, so each module will have at least one
+  dependency incoming or outgoing. Specify one or more folder, several
+  files or a glob. E.g.    
+  ```
+  depcruise -v -- src lib test
+  ```    
+  will find orphans if they exist,
+  whereas    
+  ```sh
+  depcruise -v -- src/index.ts
+  ```    
+  probably won't (unless index.ts is an orphan itself).
+- by definition orphan modules have no dependencies. So when `orphan` is
+  part of a rule, the `to` part won't make sense. This is why
+  dependency-cruiser will ignore the `to` part of these rules.
+- For similar reasons `orphan` is not allowed in the `to` part of rules.
+- (_for API users only_) to prevent dependency-cruiser from
+  needlessly running the orphan detection algorithm, it only runs it
+  when there's an orphan rule in the rule set. If you want to have
+  the detection in without a rule set or without an orphan rule,
+  pass `forceOrphanCheck: true` as part of the `pOptions` parameter.
+
+### `reachable` - detecting dead wood
+
+`reachable` is a boolean indicating whether or not modules matching the `to` part
+of the rule are _reachable_ (either directly or via other moduels) from modules
+matching the `from` part of the rule. This can be useful for detecting dead wood.
+
+For instance, in this dependency-graph several modules are not reachable from
+the root `index.js`. If `index.js` is the only (legal) entry to this package,
+those unreachable modules are likely candidates for removal:
+
+<img width="533" alt="dependencies unreachable from src/index.js - reachable rule off" src="assets/reachable-deps-rule-off.png">
+
+
+Here's a rule snippet that will detect these for you:
+
+```javascript
+{
+    "forbidden": [
+        {
+            "name": "no-unreachable-from-root",
+            "severity": "error",
+            "from": {
+                "path": "src/index\\.js$"
+            },
+            "to": {
+                "path": "src",
+                
+                /*
+                  spec files shouldn't be reachable from regular code anyway, so you
+                  might typically want to exclude these from reachability rules:
+                 */
+                "pathNot": "\\.spec\\.(js|ts)$" // 
+                
+                /* 
+                  for each file matching path and pathNot, check if it's reachable from the
+                  modules matching the criteria mentioned in "from"
+                 */
+                "reachable": false 
+            }
+        }
+    ]
+}
+
+```
+With this rule enabled, the unreachable rules jump out immediately. Both in the output of the `err` reporter
+
+```sh
+  error no-unreachable-from-root: src/other-stuff/index.js
+  error no-unreachable-from-root: src/other-stuff/untouched-one.js
+  error no-unreachable-from-root: src/other-stuff/untouched-two.js
+  error no-unreachable-from-root: src/relevant/to-untouched.js
+
+✖ 4 dependency violations (4 errors, 0 warnings). 8 modules cruised.
+```
+... and in the output of the `dot` one:
+
+<img width="533" alt="dependencies unreachable from src/index.js - reachable rule on" src="assets/reachable-deps-rule-on.png">
+
+Some useful things to know when using `reachable` in rules:
+
+- You can set up multiple rules with a `reachable` attribute in the `to` section. If you do so,
+  make sure you give a `name` to each rule. It's not only the only way dependency-cruiser can keep
+  reachable rules apart - it will be for you as well :-).
+- The operation to calculate the reachability of modules can be quite resource intensive, especially
+  if you dependency-graph is wide and deep and 
+- Different from other rules, at this moment only the `path` and `pathNot` attributes are supported 
+  along side a `reachable` in the `to` part of a rule. Currently other attributes will be ignored.
+
+
 ### `couldNotResolve`
 Whether or not to match modules dependency-cruiser could not resolve (and
 probably aren't on disk). For this one too: leave out if you don't care either
@@ -406,7 +526,6 @@ LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
 
-
 ### `dependencyTypes`
 You might have spent some time wondering why something works on your machine,
 but not on other's. Only to discover you _did_ install a dependency, but
@@ -470,7 +589,7 @@ a package more than once - e.g. both in the `peerDependencies` and in the
 `dependencies`. Sometimes this is intentional (e.g. to make sure a plugin
 type package works with both npm 2 and 3), but it can be a typo as well.
 
-Anyway, it's useful to be conscious about it - you can b.t.w simply check
+Anyway, it's useful to be conscious about it. You can check
 for it with a `moreThanOneDependencyType` attribute - which matches these
 when set to true:
 
@@ -488,55 +607,6 @@ When left out it doesn't matter how many dependency types a dependency has.
 (If you're more of an 'allowed' user: it matches the 0 and 1 cases when set to
 false).
 
-### orphans
-
-A boolean indicating whether or not to match modules that have no incoming
-or outgoing dependencies. Orphans might need special attention because
-they're unused leftovers from a refactoring. Or the start of some feature
-that never got finished but which was merged anyway. Leaving the `orphan`
-attribute out means you don't care about orphans in your code.
-
-Detecting orphans will have an impact on performance. You will probably
-only notice it when you have a larger code base (thousands of modules
-in your dependency graph), but it is something to
-keep in mind.
-
-To detect orphans guys you can add e.g. this snippet to your
-.dependency-cruiser.json's `forbidden` section:
-
-```json
-{
-    "name": "no-orphans",
-    "severity": "warn",
-    "from": {"orphan": true},
-    "to": {}
-}
-```
-
-#### Usage notes
-- dependency-cruiser will typically not find orphans when you give it
-  only one  module to start with. Any module it finds, it finds by
-  following its dependencies, so each module will have at least one
-  dependency incoming or outgoing. Specify one or more folder, several
-  files or a glob. E.g.    
-  ```
-  depcruise -v -- src lib test
-  ```    
-  will find orphans if they exist,
-  whereas    
-  ```sh
-  depcruise -v -- src/index.ts
-  ```    
-  probably won't (unless index.ts is an orphan itself).
-- by definition orphan modules have no dependencies. So when `orphan` is
-  part of a rule, the `to` part won't make sense. This is why
-  dependency-cruiser will ignore the `to` part of these rules.
-- For similar reasons `orphan` is not allowed in the `to` part of rules.
-- (_for API users only_) to prevent dependency-cruiser from
-  needlessly running the orphan detection algorithm, it only runs it
-  when there's an orphan rule in the rule set. If you want to have it
-  the detection in without a rule set or without an orphan rule,
-  pass `forceOrphanCheck: true` as part of the `pOptions` parameter.
 
 ## The `options`
 

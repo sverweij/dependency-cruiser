@@ -1,3 +1,3 @@
-const things = require('./relevanty');
+const things = require('./relevant');
 
 console.log(things);
