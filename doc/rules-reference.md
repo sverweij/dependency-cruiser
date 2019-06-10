@@ -433,16 +433,16 @@ With this rule enabled, the unreachable rules jump out immediately. Both in the 
 
 <img width="533" alt="dependencies unreachable from src/index.js - reachable rule on" src="assets/reachable-deps-rule-on.png">
 
-Some useful things to know when using `reachable` in rules:
-
+#### Usage notes
 - You can set up multiple rules with a `reachable` attribute in the `to` section. If you do so,
   make sure you give a `name` to each rule. It's not only the only way dependency-cruiser can keep
   reachable rules apart - it will be for you as well :-).
 - The operation to calculate the reachability of modules can be quite resource intensive, especially
-  if you dependency-graph is wide and deep and 
-- Different from other rules, at this moment only the `path` and `pathNot` attributes are supported 
-  along side a `reachable` in the `to` part of a rule. Currently other attributes will be ignored.
-
+  if you dependency-graph is wide and deep.
+- Different from other rules, rules with a `reachable` attribute can only have
+  - `path` and `pathNot` in the `from` part of the rule
+  - `path` and `pathNot` alongside the `reachable` in the `to` part of the rule    
+  (these limitations might get lifted somewhere in the future)
 
 ### `couldNotResolve`
 Whether or not to match modules dependency-cruiser could not resolve (and
@@ -846,7 +846,6 @@ assume the fileName to be `tsconfig.json`)
   "tsConfig": {}
 }
 ```
-
 
 #### On the command line
 ```sh
