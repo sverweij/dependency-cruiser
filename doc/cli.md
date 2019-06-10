@@ -1,17 +1,26 @@
+ # dependency-cruiser command line interface
+The command line interface is a straightforward affair - you pass it a bunch of
+files, and dependency-cruiser will start cruising them: 
 
-# dependency-cruiser command line interface
+```sh
+depcruise [options] <files-or-directories>
+```
+
+Below you'll find a list of command line options you can use, divided into ones that
+are only available as options on the command line and into those also
+available in dependency-cruiser configrautions.
 
 ### Contents
-Command line only 
 
-1. [arguments](#arguments)
-1. [`--output-type`: specify the output format](#--output-type-specify-the-output-format)
-1. [`--config`/ `--validate`](#--config---validate)
-1. [`--init`](#--init)
-1. [`--info` showing what alt-js are supported](#--info-showing-what-alt-js-are-supported)
-1. [`--help`/ no parameters](#--help--no-parameters)
+Command line only options
+  1. [arguments](#arguments---files-and-or-directories)
+  1. [`--output-type`: specify the output format](#--output-type-specify-the-output-format)
+  1. [`--config`/ `--validate`](#--config---validate)
+  1. [`--init`](#--init)
+  1. [`--info` showing what alt-js are supported](#--info-showing-what-alt-js-are-supported)
+  1. [`--help`/ no parameters](#--help--no-parameters)
 
-Also available in dependency-cruiser configurations
+Options also available in dependency-cruiser configurations
 1. [`--do-not-follow`: don't cruise modules adhering to this pattern any further](#--do-not-follow-dont-cruise-modules-adhering-to-this-pattern-any-further)
 1. [`--exclude`: exclude modules from being cruised](#--exclude-exclude-modules-from-being-cruised)
 1. [`--include-only`: only include modules satisfying a pattern](#--include-only-only-include-modules-satisfying-a-pattern)
@@ -26,7 +35,7 @@ Also available in dependency-cruiser configurations
 
 ## Command line only
 
-### arguments
+### arguments - files and/ or directories
 You can pass a bunch of files, directories and 'glob' patterns.
 dependency-cruiser will
 - resolve the glob patterns (if any) to files and directories
@@ -117,7 +126,8 @@ E.g. to cruise src (using the .dependency-cruiser config) and emit TeamCity mess
 dependency-cruise -v -T teamcity  -- src
 ```
 
-Sample output:
+<details>
+<summary>Sample output</summary>
 
 ```
 ##teamcity[inspectionType id='not-to-dev-dep' name='not-to-dev-dep' description='Don|'t allow dependencies from src/app/lib to a development only package' category='dependency-cruiser' flowId='8970869134' timestamp='2019-06-02T10:37:56.812']
@@ -129,6 +139,8 @@ Sample output:
 ##teamcity[inspection typeId='not-to-dev-dep' message='src/index.js -> node_modules/eslint/lib/api.js' file='src/index.js' SEVERITY='ERROR' flowId='8970869134' timestamp='2019-06-02T10:37:56.812']
 ##teamcity[inspection typeId='no-orphans' message='src/orphan.js -> src/orphan.js' file='src/orphan.js' SEVERITY='ERROR' flowId='8970869134' timestamp='2019-06-02T10:37:56.812']
 ```
+
+</details>
 
 Just like the `err` reporter the teamcity reporter has an empty output when there's
 no violations - and a non-zero exit code when there's errors.
