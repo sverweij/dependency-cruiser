@@ -8,17 +8,17 @@ depcruise [options] <files-or-directories>
 
 Below you'll find a list of command line options you can use, divided into ones that
 are only available as options on the command line and into those also
-available in dependency-cruiser configrautions.
+available in dependency-cruiser configurations.
 
 ## Contents
 
 ### [Command line only options](#command-line-only-options)
-  1. [arguments - files and/ or directories](#arguments---files-and-or-directories)
-  1. [`--output-type`: specify the output format](#--output-type-specify-the-output-format)
-  1. [`--config`/ `--validate`: use a configuration with rules and/or options](#--config---validate) 
-  1. [`--init`](#--init)
-  1. [`--info`: show what alt-js are supported](#--info-showing-what-alt-js-are-supported)
-  1. [`--help`/ no parameters: get help](#--help--no-parameters)
+1. [arguments - files and/ or directories](#arguments---files-and-or-directories)
+1. [`--output-type`: specify the output format](#--output-type-specify-the-output-format)
+1. [`--config`/ `--validate`: use a configuration with rules and/or options](#--config---validate) 
+1. [`--init`](#--init)
+1. [`--info`: show what alt-js are supported](#--info-showing-what-alt-js-are-supported)
+1. [`--help`/ no parameters: get help](#--help--no-parameters)
 
 ### [Options also available in dependency-cruiser configurations](#options-also-available-in-dependency-cruiser-configurations)
 1. [`--do-not-follow`: don't cruise modules adhering to this pattern any further](#--do-not-follow-dont-cruise-modules-adhering-to-this-pattern-any-further)
