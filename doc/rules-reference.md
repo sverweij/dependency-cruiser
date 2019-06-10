@@ -611,8 +611,10 @@ Some useful things to know when using `reachable` in rules:
   reachable rules apart - it will be for you as well :-).
 - The operation to calculate the reachability of modules can be quite resource intensive, especially
   if you dependency-graph is wide and deep and 
-- Different from other rules, at this moment only the `path` and `pathNot` attributes are supported 
-  along side a `reachable` in the `to` part of a rule. Currently other attributes will be ignored.
+- Different from other rules, rules with a `reachable` attribute can only have
+  - `path` and `pathNot` in the `from` part of the rule
+  - `path` and `pathNot` alongside the `reachable` in the `to` part of the rule    
+  (these limitations might get lifted somewhere in the future)
 
 
 ## `options` not also command line options
