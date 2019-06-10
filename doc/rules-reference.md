@@ -577,32 +577,37 @@ to follow external dependencies, in stead of specifying the "node_modules" path:
 
 If you don't want to see certain modules in your report (or not have them
 validated), you can exclude them by passing a regular expression to the
-`--exclude` (short: `-x`) option. E.g. to exclude `node_modules` from being
-scanned altogether:
+`exclude`. E.g. to exclude `node_modules` from being scanned altogether:
 
-```sh
-dependency-cruise -x "node_modules" -T html -f deps-without-node_modules.html src
+```json
+"options": {
+    "exclude": "node_modules"
+}
 ```
 
 Because it's regular expressions, you can do more interesting stuff here as well. To exclude
 all modules with a file path starting with coverage, test or node_modules, you could do this:
 
 ```sh
-dependency-cruise -x "^(coverage|test|node_modules)" -T html -f deps-without-stuffs.html src
+"options": {
+    "exclude": "^(coverage|test|node_modules)"
+}
 ```
 
 ### `includeOnly`: only include modules satisfying a pattern
 > command line option equivalent: `--include-only`
 
-In the `include-only` option you can pass a regular expression of all file paths
+In the `includeOnly` option you can pass a regular expression of all file paths
 dependency-cruiser should include in a cruise. It will discard all files
-not matching the `include-only` pattern.
+not matching the `includeOnly` pattern.
 
 E.g. to only take modules into account that are in the `src` tree (and exclude all
 node_modules, core modules and modules otherwise outside it):
 
 ```sh
-dependency-cruise --include "^src" -T dot src | dot -T svg > internal-dependency-graph.svg
+"options": {
+    "includeOnly": "^src/"
+}
 ```
 
 If you specify both an exclude and an include, dependency-cruiser takes them

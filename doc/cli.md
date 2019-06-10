@@ -298,19 +298,18 @@ option in the rules reference.
 ### `--exclude`: exclude modules from being cruised
 If you don't want to see certain modules in your report (or not have them
 validated), you can exclude them by passing a regular expression to the
-`--exclude` (short: `-x`) option. E.g. to exclude `node_modules` from being
-scanned altogether:
+`--exclude` (short: `-x`) option. Two examples:
 
 ```sh
 dependency-cruise -x "node_modules" -T html -f deps-without-node_modules.html src
 ```
 
-Because it's regular expressions, you can do more interesting stuff here as well. To exclude
-all modules with a file path starting with coverage, test or node_modules, you could do this:
-
 ```sh
 dependency-cruise -x "^(coverage|test|node_modules)" -T html -f deps-without-stuffs.html src
 ```
+
+See the [exclude](./rules-reference.md#exclude-exclude-modules-from-being-cruised) option
+in the rules reference for details.
 
 ### `--include-only`: only include modules satisfying a pattern
 E.g. to only take modules into account that are in the `src` tree (and exclude all
