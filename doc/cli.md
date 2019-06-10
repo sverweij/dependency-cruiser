@@ -12,7 +12,7 @@ available in dependency-cruiser configurations.
 
 ## Contents
 
-### [Command line only options](#command-line-only-options)
+### Command line only options
 1. [arguments - files and/ or directories](#arguments---files-and-or-directories)
 1. [`--output-type`: specify the output format](#--output-type-specify-the-output-format)
 1. [`--config`/ `--validate`: use a configuration with rules and/or options](#--config---validate) 
@@ -20,7 +20,7 @@ available in dependency-cruiser configurations.
 1. [`--info`: show what alt-js are supported](#--info-showing-what-alt-js-are-supported)
 1. [`--help`/ no parameters: get help](#--help--no-parameters)
 
-### [Options also available in dependency-cruiser configurations](#options-also-available-in-dependency-cruiser-configurations)
+### Options also available in dependency-cruiser configurations
 1. [`--do-not-follow`: don't cruise modules adhering to this pattern any further](#--do-not-follow-dont-cruise-modules-adhering-to-this-pattern-any-further)
 1. [`--exclude`: exclude modules from being cruised](#--exclude-exclude-modules-from-being-cruised)
 1. [`--include-only`: only include modules satisfying a pattern](#--include-only-only-include-modules-satisfying-a-pattern)
@@ -285,7 +285,7 @@ If you _do_ want to see certain modules in your reports, but are not interested
 in these modules' dependencies, you'd pass the regular expression for those
 modules to the `--do-not-follow` (short: `-X`) option. A typical pattern you'd
 use with this is "node_modules" (but be sure to check out the possibilities you
-have with the [`doNotFollow` option](#donotfollow-dont-cruise-modules-adhering-to-this-pattern-any-further))
+have with the [`doNotFollow` option](#./rules-reference.md#donotfollow-dont-cruise-modules-adhering-to-this-pattern-any-further))
 
 ```sh
 dependency-cruise -X "^node_modules" -T html -f deps-with-unfollowed-node_modules.html src
@@ -331,22 +331,20 @@ keep the generated output to a manageable size.
 See [maxDepth](./rules-reference.md#maxdepth)
 
 ### `--prefix` prefixing links
-
 See [prefix](./rules-reference.md#prefix-prefix-links-in-reports) in the rules reference
-
 
 ### `--module-systems`
 Here you can pass a list of module systems dependency-cruiser should use
 to detect dependencies. It defaults to `amd, cjs, es6`.
 
-See [moduleSystems](./rules-reference#modulesystems) in the rules reference
+See [moduleSystems](./rules-reference.md#modulesystems) in the rules reference
 
 ### `--ts-pre-compilation-deps` (typescript only)
 By default dependency-cruiser does not take dependencies between typescript
 modules that don't exist after compilation to javascript. Pass this command
 line switch to do take them into account.
 
-For details see [tsPreCompilationDeps](./rules-reference#tsprecompilationdeps) in the
+For details see [tsPreCompilationDeps](./rules-reference.md#tsprecompilationdeps) in the
 rules reference.
 
 ### `--ts-config`: use a typescript configuration file ('project')
@@ -355,11 +353,8 @@ you can pass it a tsconfig.json.
 
 Although it's possible to pass it as a command line parameter, you typically 
 want to do this in a configuration file - see 
-[tsConfig](./rules-reference#tsconfig-use-a-typescript-configuration-file-project)
+[tsConfig](./rules-reference.md#tsconfig-use-a-typescript-configuration-file-project)
 section in the rules reference for details.
-
-### `--preserve-symlinks`
-Equivalent of the [preserveSymlinks](#preservesymlinks) configuration option.
 
 ### `--webpack-config`: use (the resolution options of) a webpack configuration
 With a webpack config you can drastically alter how module names resolve to
@@ -367,8 +362,11 @@ files on disk, a.o. with aliases. If you want dependency-cruiser to take that
 into account (you probaly do), you can pass the webpack config here.
 
 However, just like with tsconfigs, you probably want to put this in a configuration
-file - see the [webpackConfig](./rules-reference#webpackconfig-use-the-resolution-options-of-a-webpack-configuration)
+file - see the [webpackConfig](./rules-reference.md#webpackconfig-use-the-resolution-options-of-a-webpack-configuration)
 section in the rules reference.
+
+### `--preserve-symlinks`
+Equivalent of the [preserveSymlinks](./rules-reference.md#preservesymlinks) configuration option.
 
 ## Daphne's dependencies - a gentle introduction
 **[Daphne's dependencies](sample-output.md)**

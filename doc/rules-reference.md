@@ -5,13 +5,14 @@
 - This is a small reference guide to the elements you can use to write rules
   for dependency-cruiser. If you want a step-by-step introduction check the
   [rules _tutorial_](./rules-tutorial.md).
-- There is a [json schema](../src/main/ruleSet/jsonschema.json)
+- There is a [json schema](../src/main/ruleSet/config-schema.json)
   that describes the output format. Dependency-cruiser
   checks rule sets against it.
 - Some examples:
-  - a [starter rule set](../src/cli/rules.starter.json)
-  - dependency-cruiser's [own rule set](../.dependency-cruiser.json)
-- Tip: run `depcruise --init` to create a .dependency-cruiser.json with
+  - dependency-cruiser's [own configuration](../.dependency-cruiser.json)
+  - the configuration [State Machine cat](https://state-machine-cat.js.org) uses [for validation](https://github.com/sverweij/state-machine-cat/blob/develop/config/dependency-cruiser.js) and the one it uses [for generating a visual graph](https://github.com/sverweij/state-machine-cat/blob/develop/config/dependency-cruiser-graph.js).
+  - [mscgen.js](https://mscgen.js.org)'s [.dependency-cruiser.json](https://github.com/mscgenjs/mscgenjs-core/blob/develop/.dependency-cruiser.json)
+- Tip: run `depcruise --init` to create a .dependency-cruiser.json (or .js) with
   some rules that make sense in most projects.
 
 ## Contents
@@ -45,7 +46,6 @@
     - [`webackConfig`: use (the resolution options of) a webpack configuration](#webpackconfig-use-the-resolution-options-of-a-webpack-configuration)
     - [Some more esoteric options](#some-more-esoteric-options)
 5. [Configurations in javascript](#configurations-in-javascript)
-6. [Starter rule set](#a-starter-rule-set)
 
 ## The structure of a dependency cruiser configuration
 The typical dependency-cruiser config is json file (although you can use javascript -
@@ -141,22 +141,8 @@ module.exports = {
 ```
 
 ### `options`
-Some of the command line options, so you don't have to specify them on each run.
-The currently supported options are
-[`doNotFollow`](./cli.md#--do-not-follow-dont-cruise-modules-adhering-to-this-pattern-any-further),
-[`exclude`](./cli.md#--exclude-exclude-modules-from-being-cruised),
-[`includeOnly`](./cli.md#--include-only-only-include-modules-satisfying-a-pattern)
-[`moduleSystems`](./cli.md#--module-systems),
-[`prefix`](./cli.md#--prefix-prefixing-links),
-[`tsPreCompilationDeps`](./cli.md#--ts-pre-compilation-deps-typescript-only),
-[`preserveSymlinks`](./cli.md#--preserve-symlinks),
-[`tsConfig`](./cli.md#--ts-config-use-a-typescript-configuration-file-project) and
-[`webpackConfig`](./cli.md#--webpack-config-use-the-resolution-options-of-a-webpack-configuration).
-See the [command line documentation](./cli.md) for details.
-
-In addition you can configure here how dependency-cruiser should resolve external 
-modules and how dependency-cruiser behaves itself in
-mono repos with [`combinedDependencies`](#mono-repo-behavior--combinedDependencies)
+Options that influence what is cruised, and how it is cruised. See 
+[The options](#the-options) below for an exhaustive list.
 
 ## The structure of an individual rule
 An individual rule consists at least of a `from` and a `to`
@@ -764,9 +750,7 @@ If dependency-cruiser encounters typescript, it compiles it to understand what i
 is looking at. If you have `compilerOptions` in your `tsconfig.json` you think
 it should take into account, you can use this option to make it do that.
 You might want to do this e.g. if you have `baseDir`/ `paths` keys in your
-`tsconfig`, are using
-[dynamic imports](./faq.md#typescript-dynamic-imports-show-up-as-x--whats-up-there)
-or jsx/ tsx outside of a react context.
+`tsconfig`, or are using jsx/ tsx outside of a react context.
 
 Dependency-cruiser understands the `extends` configuration in tsconfig's so
 if you have a hierarchy of configs, you just need to pass the relevant one.
