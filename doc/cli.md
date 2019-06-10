@@ -331,20 +331,15 @@ keep the generated output to a manageable size.
 See [maxDepth](./rules-reference.md#maxdepth)
 
 ### `--prefix` prefixing links
-If you want the links in the svg output to have a prefix (say,
-`https://github.com/you/yourrepo/tree/master/`) so when you click them you'll
-open the link on github instead of the local file - pass that after the
-`--prefix` option. 
 
-Typically you want the prefix to end on a `/`.
+See [prefix](./rules-reference.md#prefix-prefix-links-in-reports) in the rules reference
 
-```sh
-depcruise --prefix https://github.com/sverweij/dependency-cruiser/tree/develop/ -T dot -x node_modules src | dot -T svg > dependencies.svg
-```
 
 ### `--module-systems`
 Here you can pass a list of module systems dependency-cruiser should use
 to detect dependencies. It defaults to `amd, cjs, es6`.
+
+See [moduleSystems](./rules-reference#modulesystems) in the rules reference
 
 ### `--ts-pre-compilation-deps` (typescript only)
 By default dependency-cruiser does not take dependencies between typescript
@@ -355,25 +350,24 @@ For details see [tsPreCompilationDeps](./rules-reference#tsprecompilationdeps) i
 rules reference.
 
 ### `--ts-config`: use a typescript configuration file ('project')
-If dependency-cruiser encounters typescript, it compiles it to understand what it
-is looking at. If you have `compilerOptions` in your `tsconfig.json` you think
-it should take into account, you can use this option to make it do that.
-You might want to do this e.g. if you have `baseDir`/ `paths` keys in your
-`tsconfig`, are using
-[dynamic imports](./faq.md#typescript-dynamic-imports-show-up-as-x--whats-up-there)
-or jsx/ tsx outside of a react context.
+If you want dependency-cruiser to take `baseDir`'s and/ or `paths` into account
+you can pass it a tsconfig.json.
 
-For details see [tsConfig](./rules-reference#tsconfig-use-a-typescript-configuration-file-project)
-section in the rules reference.
+Although it's possible to pass it as a command line parameter, you typically 
+want to do this in a configuration file - see 
+[tsConfig](./rules-reference#tsconfig-use-a-typescript-configuration-file-project)
+section in the rules reference for details.
 
 ### `--preserve-symlinks`
 Equivalent of the [preserveSymlinks](#preservesymlinks) configuration option.
 
 ### `--webpack-config`: use (the resolution options of) a webpack configuration
-Dependency-cruiser will pluck the `resolve` key from the configuration
-use the information to resolve files on disk.
+With a webpack config you can drastically alter how module names resolve to
+files on disk, a.o. with aliases. If you want dependency-cruiser to take that
+into account (you probaly do), you can pass the webpack config here.
 
-For details see the [webpackConfig](./rules-reference#webpackconfig-use-the-resolution-options-of-a-webpack-configuration)
+However, just like with tsconfigs, you probably want to put this in a configuration
+file - see the [webpackConfig](./rules-reference#webpackconfig-use-the-resolution-options-of-a-webpack-configuration)
 section in the rules reference.
 
 ## Daphne's dependencies - a gentle introduction
