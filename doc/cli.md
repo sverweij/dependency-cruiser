@@ -10,7 +10,7 @@ Below you'll find a list of command line options you can use, divided into ones 
 are only available as options on the command line and into those also
 available in dependency-cruiser configrautions.
 
-### Contents
+## Contents
 
 Command line only options
   1. [arguments](#arguments---files-and-or-directories)
