@@ -12,7 +12,7 @@ available in dependency-cruiser configrautions.
 
 ## Contents
 
-Command line only options
+### [Command line only options](#command-line-only-options)
   1. [arguments](#arguments---files-and-or-directories)
   1. [`--output-type`: specify the output format](#--output-type-specify-the-output-format)
   1. [`--config`/ `--validate`](#--config---validate)
@@ -20,7 +20,7 @@ Command line only options
   1. [`--info` showing what alt-js are supported](#--info-showing-what-alt-js-are-supported)
   1. [`--help`/ no parameters](#--help--no-parameters)
 
-Options also available in dependency-cruiser configurations
+### [Options also available in dependency-cruiser configurations](#options-also-available-in-dependency-cruiser-configurations)
 1. [`--do-not-follow`: don't cruise modules adhering to this pattern any further](#--do-not-follow-dont-cruise-modules-adhering-to-this-pattern-any-further)
 1. [`--exclude`: exclude modules from being cruised](#--exclude-exclude-modules-from-being-cruised)
 1. [`--include-only`: only include modules satisfying a pattern](#--include-only-only-include-modules-satisfying-a-pattern)
@@ -33,7 +33,7 @@ Options also available in dependency-cruiser configurations
 1. [`--preserve-symlinks`](#--preserve-symlinks)
 
 
-## Command line only
+## Command line only options
 
 ### arguments - files and/ or directories
 You can pass a bunch of files, directories and 'glob' patterns.
@@ -274,7 +274,7 @@ Extensions:
 Running with no parameters gets you help.
 
 
-## Also available in dependency-cruiser configurations
+## Options also available in dependency-cruiser configurations
 Some of the `options` in dependency-cruiser configurations are also available as
 command line options. They _override_ what's in the configuration, so they're great
 if you need to quickly experiment with an option, or when you want to use one
