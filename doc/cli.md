@@ -2,35 +2,69 @@
 # dependency-cruiser command line interface
 
 ### Contents
+Command line only 
+
+1. [arguments](#arguments)
+1. [`--output-type`: specify the output format](#--output-type-specify-the-output-format)
+1. [`--config`/ `--validate`](#--config---validate)
+1. [`--init`](#--init)
+1. [`--info` showing what alt-js are supported](#--info-showing-what-alt-js-are-supported)
 1. [`--help`/ no parameters](#--help--no-parameters)
-2. [`--output-type`: specify the output format](#--output-type-specify-the-output-format)
-3. [`--do-not-follow`: don't cruise modules adhering to this pattern any further](#--do-not-follow-dont-cruise-modules-adhering-to-this-pattern-any-further)
-4. [`--exclude`: exclude modules from being cruised](#--exclude-exclude-modules-from-being-cruised)
-5. [`--include-only`: only include modules satisfying a pattern](#--include-only-only-include-modules-satisfying-a-pattern)
-6. [`--max-depth`](#--max-depth)
-7. [`--config`/ `--validate`](#--config---validate)
-8. [`--init`](#--init)
-9. [`--prefix` prefixing links](#--prefix-prefixing-links)
-10. [`--info` showing what alt-js are supported](#--info-showing-what-alt-js-are-supported)
-11. [`--module-systems`](#--module-systems)
-12. [`--ts-pre-compilation-deps` (typescript only)](#--ts-pre-compilation-deps-typescript-only)
-13. [`--ts-config`: use a typescript configuration file ('project')](#--ts-config-use-a-typescript-configuration-file-project)
-14. [`--preserve-symlinks`](#--preserve-symlinks)
-15. [`--webpack-config`: use (the resolution options of) a webpack configuration`](#--webpack-config-use-the-resolution-options-of-a-webpack-configuration)
-16. [arguments](#arguments)
+
+Also available in dependency-cruiser configurations
+1. [`--do-not-follow`: don't cruise modules adhering to this pattern any further](#--do-not-follow-dont-cruise-modules-adhering-to-this-pattern-any-further)
+1. [`--exclude`: exclude modules from being cruised](#--exclude-exclude-modules-from-being-cruised)
+1. [`--include-only`: only include modules satisfying a pattern](#--include-only-only-include-modules-satisfying-a-pattern)
+1. [`--max-depth`](#--max-depth)
+1. [`--prefix` prefixing links](#--prefix-prefixing-links)
+1. [`--module-systems`](#--module-systems)
+1. [`--ts-pre-compilation-deps` (typescript only)](#--ts-pre-compilation-deps-typescript-only)
+1. [`--ts-config`: use a typescript configuration file ('project')](#--ts-config-use-a-typescript-configuration-file-project)
+1. [`--webpack-config`: use (the resolution options of) a webpack configuration`](#--webpack-config-use-the-resolution-options-of-a-webpack-configuration)
+1. [`--preserve-symlinks`](#--preserve-symlinks)
 
 
-### `--help` / no parameters
-Running with no parameters gets you help.
+## Command line only
 
+### arguments
+You can pass a bunch of files, directories and 'glob' patterns.
+dependency-cruiser will
+- resolve the glob patterns (if any) to files and directories
+- scan directories (if any) for files with supported extensions
+- add the passed files to that
+... and start the cruise with the files thus found.
+
+#### Cruising multiple files and directories in one go
+Just pass them as arguments. This, e.g. will cruise every file in the folders
+src, test and lib (recursively) + the file called index.ts in the root.
+
+```sh
+depcruise --output-type dot src test lib index.ts
+```
+
+#### passing globs as parameters
+dependency-cruiser uses [node-glob](https://github.com/isaacs/node-glob) to
+make sure globs work the same accross platforms. It cannot prevent the
+environment from expanding globs before it can process it, however.
+
+As each environment interprets globs slightly differently, a pattern
+like `packages/**/src/**/*.js` will yield different results.
+
+To make sure glob expansion works _exactly_ the same accross
+platforms slap some quotes around them, so it's not the environment
+(/ shell) expanding the glob, but dependency-cruiser itself:
+
+```sh
+depcruise "packages/**/src/**/*.js"
+```
 
 ### `--output-type`: specify the output format
 
 #### err
-For use in build scripts, in combination with `--validate` e.g.
+For use in build scripts, in combination with `--config` e.g.
 
 ```sh
-dependency-cruise --validate my-depcruise-rules.json src
+dependency-cruise --config my-depcruise-rules.json src
 ```
 
 This will:
@@ -40,13 +74,13 @@ This will:
   will exit with exit code _number of violations with severity `error` found_ 
   in the same fashion linters and test tools do.
 
-See the _dependency-cruise_ target in the [Makefile](https://github.com/sverweij/dependency-cruiser/blob/master/Makefile#L95)
+See the _depcruise_ target in the [package.json](https://github.com/sverweij/dependency-cruiser/blob/master/package.json#L55)
 for a real world example.
 
 #### dot
 Supplying `dot` as output type will make dependency-cruiser write
 a GraphViz dot format directed graph. Typical use is in concert
-with _GraphViz dot_:
+with _GraphViz dot_ (`-T` is the short form of `--output-type`:)
 
 ```shell
 dependency-cruise -x "^node_modules" -T dot src | dot -T svg > dependencygraph.svg
@@ -99,75 +133,6 @@ Sample output:
 Just like the `err` reporter the teamcity reporter has an empty output when there's
 no violations - and a non-zero exit code when there's errors.
 
-### `--do-not-follow`: don't cruise modules adhering to this pattern any further
-If you _do_ want to see certain modules in your reports, but are not interested
-in these modules' dependencies, you'd pass the regular expression for those
-modules to the `--do-not-follow` (short: `-X`) option. A typical pattern you'd
-use with this is "node_modules":
-
-```sh
-dependency-cruise -X "^node_modules" -T html -f deps-with-unfollowed-node_modules.html src
-```
-
-### `--exclude`: exclude modules from being cruised
-If you don't want to see certain modules in your report (or not have them
-validated), you can exclude them by passing a regular expression to the
-`--exclude` (short: `-x`) option. E.g. to exclude `node_modules` from being
-scanned altogether:
-
-```sh
-dependency-cruise -x "node_modules" -T html -f deps-without-node_modules.html src
-```
-
-Because it's regular expressions, you can do more interesting stuff here as well. To exclude
-all modules with a file path starting with coverage, test or node_modules, you could do this:
-
-```sh
-dependency-cruise -x "^(coverage|test|node_modules)" -T html -f deps-without-stuffs.html src
-```
-
-### `--include-only`: only include modules satisfying a pattern
-In the `include-only` option you can pass a regular expression of all file paths
-dependency-cruiser should include in a cruise. It will discard all files
-not matching the `include-only` pattern.
-
-E.g. to only take modules into account that are in the `src` tree (and exclude all
-node_modules, core modules and modules otherwise outside it):
-
-```sh
-dependency-cruise --include "^src" -T dot src | dot -T svg > internal-dependency-graph.svg
-```
-
-If you specify both an exclude and an include, dependency-cruiser takes them
-_both_ into account.
-
-
-### `--max-depth`
-Only cruise the specified depth, counting from the specified root-module(s). This
-command is mostly useful in combination with visualisation output like _dot_ to
-keep the generated output to a manageable size.
-
-Although totally up to you I advise you to not use this with the `err` reporter;
-you'll probably miss validating a dependency or two.
-
-This will cruise the dependencies of each file directly in the src folder, up
-to a depth of 1:
-```sh
-dependency-cruise --max-depth 1 -T dot bin/dependency-cruise | dot -T png > dependency-cruiser-max-depth-1.png
-```
-
-<img width="237" alt="max depth = 1" src="real-world-samples/dependency-cruiser-max-depth-1.png">
-
-With `--max-depth 2` it'll look like this:
-
-<img width="390" alt="max depth = 2" src="real-world-samples/dependency-cruiser-max-depth-2.png">
-
-And with `--max-depth 3` like this:
-
-
-<img width="623" alt="dependency-cruiser cruised with max depth 3" src="real-world-samples/dependency-cruiser-max-depth-3.png">
-
-
 ### `--config`/ `--validate`
 Validates against a list of rules in a configuration file. This defaults to a file
 called `.dependency-cruiser.json` (/ `.dependency-cruiser.js`), but you can
@@ -175,20 +140,20 @@ specify your own rules file, which can be in json format or a valid node
 module returning a rules object literal.
 
 ```shell
-dependency-cruise -x node_modules --validate my.rules.json src spec
+dependency-cruise -x node_modules --config my.rules.json src spec
 ```
 
 > _Tip_: usually you don't need to specify the rules file. However if run
-> `depcruise --validate src`, _src_ will be interpreted as the rules file.
+> `depcruise --config src`, _src_ will be interpreted as the rules file.
 > Which is probably is not what you want. To prevent this, place `--`
 > after the last option, like so:
 > ```
-> dependency-cruise --validate -- src
+> dependency-cruise --config -- src
 > ```
 
-
-The file specifies a bunch of regular expressions pairs your dependencies
-should adhere to.
+The configuration specifies a bunch of regular expressions pairs your dependencies
+should adhere tom as well as configuration options that tweak what is cruised and
+how.
 
 A simple validation configuration that forbids modules in `src` to use stuff
 in the `test` folder and allows everything else:
@@ -217,16 +182,20 @@ default) and 'info') with them that will appear in some reporters:
 ```
 
 For more information about writing rules see the [tutorial](rules-tutorial.md) and the
-[rules-reference](rules-reference.md). For an easy set up use ...
+[rules-reference](rules-reference.md). The rules-reference also describes all the
+[options](rules-reference.md#the-options).
 
+For an easy set up of both use [--init](#--init)
 
 ### `--init`
 This asks some questions and depending on the answers creates a dependency-cruiser
 configuration with some useful rules in it to the current folder and exits.
-use with `--validate`
+use with `--config`
 
-Some of the rules that will be in the configuration (either directly or from a
-preset):
+<details>
+<summary>Some of the rules that will be in the configuration (either directly or from a
+preset):</summary>
+
 
 Rule                     | Description
 ---                      |---
@@ -245,27 +214,21 @@ Rule                     | Description
 `no-duplicate-dep-types` | Warn if a dependency occurs in your package.json more than once (technically: has more than one dependency type)
 
 
-### `--prefix` prefixing links
-If you want the links in the svg output to have a prefix (say,
-`https://github.com/you/yourrepo/tree/master/`) so when you click them you'll
-open the link on github instead of the local file - pass that after the
-`--prefix` option. Typically you want the prefix to end on a `/`.
-
-```sh
-depcruise --prefix https://github.com/sverweij/dependency-cruiser/tree/develop/ -T dot -x node_modules src | dot -T svg > dependencies.svg
-```
+</details>
 
 ### `--info` showing what alt-js are supported
 
 Which alt-js languages dependency-cruiser supports depends on the availability
 it has to them. To see how dependency-cruiser perceives its environment use
-`depcruise --info` (any arguments are ignored). A typical output will look
-like this:
+`depcruise --info` (any arguments are ignored). 
+
+<details>
+<summary>Typical output</summary>
 
 ```
 Supported:
 
-  If you need a supported, but not enabled transpiler ('✖' below) just install
+  If you need a supported, but not enabled transpiler ('✖' below), just install
   it in the same folder dependency-cruiser is installed. E.g. 'npm i livescript'
   will enable livescript support if it's installed in your project folder.
 
@@ -273,18 +236,98 @@ Transpilers:
 
   ✔ javascript (>es1)
   ✔ coffee-script (>=1.0.0 <2.0.0)
+  ✔ coffeescript (>=1.0.0 <3.0.0)
   ✖ livescript (>=1.0.0 <2.0.0)
-  ✔ typescript (>=2.0.0 <3.0.0)
+  ✔ typescript (>=2.0.0 <4.0.0)
 
 Extensions:
 
   ✔ .js
+  ✔ .mjs
+  ✔ .jsx
+  ✔ .vue
   ✔ .ts
+  ✔ .tsx
   ✔ .d.ts
   ✖ .ls
   ✔ .coffee
   ✔ .litcoffee
   ✔ .coffee.md
+  ✔ .csx
+  ✔ .cjsx
+```
+</details>
+
+### `--help` / no parameters
+Running with no parameters gets you help.
+
+
+## Also available in dependency-cruiser configurations
+Some of the `options` in dependency-cruiser configurations are also available as
+command line options. They _override_ what's in the configuration, so they're great
+if you need to quickly experiment with an option, or when you want to use one
+configuration for multiple purposes.
+
+### `--do-not-follow`: don't cruise modules adhering to this pattern any further
+If you _do_ want to see certain modules in your reports, but are not interested
+in these modules' dependencies, you'd pass the regular expression for those
+modules to the `--do-not-follow` (short: `-X`) option. A typical pattern you'd
+use with this is "node_modules" (but be sure to check out the possibilities you
+have with the [`doNotFollow` option](#donotfollow-dont-cruise-modules-adhering-to-this-pattern-any-further))
+
+```sh
+dependency-cruise -X "^node_modules" -T html -f deps-with-unfollowed-node_modules.html src
+```
+
+Details and more ways to limit dependency-cruiser from following things: check out
+the [doNotFollow](./rules-reference.md#donotfollow-dont-cruise-modules-adhering-to-this-pattern-any-further) 
+option in the rules reference.
+
+### `--exclude`: exclude modules from being cruised
+If you don't want to see certain modules in your report (or not have them
+validated), you can exclude them by passing a regular expression to the
+`--exclude` (short: `-x`) option. E.g. to exclude `node_modules` from being
+scanned altogether:
+
+```sh
+dependency-cruise -x "node_modules" -T html -f deps-without-node_modules.html src
+```
+
+Because it's regular expressions, you can do more interesting stuff here as well. To exclude
+all modules with a file path starting with coverage, test or node_modules, you could do this:
+
+```sh
+dependency-cruise -x "^(coverage|test|node_modules)" -T html -f deps-without-stuffs.html src
+```
+
+### `--include-only`: only include modules satisfying a pattern
+E.g. to only take modules into account that are in the `src` tree (and exclude all
+node_modules, core modules and modules otherwise outside it):
+
+```sh
+dependency-cruise --include-only "^src" -T dot src | dot -T svg > internal-dependency-graph.svg
+```
+
+See [includeOnly](./rules-reference.md#includeonly-only-include-modules-satisfying-a-pattern) in the rules reference
+for more details.
+
+### `--max-depth`
+Only cruise the specified depth, counting from the specified root-module(s). This
+command is mostly useful in combination with visualisation output like _dot_ to
+keep the generated output to a manageable size.
+
+See [maxDepth](./rules-reference.md#maxdepth)
+
+### `--prefix` prefixing links
+If you want the links in the svg output to have a prefix (say,
+`https://github.com/you/yourrepo/tree/master/`) so when you click them you'll
+open the link on github instead of the local file - pass that after the
+`--prefix` option. 
+
+Typically you want the prefix to end on a `/`.
+
+```sh
+depcruise --prefix https://github.com/sverweij/dependency-cruiser/tree/develop/ -T dot -x node_modules src | dot -T svg > dependencies.svg
 ```
 
 ### `--module-systems`
@@ -296,75 +339,8 @@ By default dependency-cruiser does not take dependencies between typescript
 modules that don't exist after compilation to javascript. Pass this command
 line switch to do take them into account.
 
-#### Pre-compilation dependencies example: only importing a type
-As the javascript doesn't really know about types, dependencies on
-types only exist before, but not after compile time.
-
-`a.ts` exports an interface ...
-```typescript
-import { B } from './b';
-export interface A {
-  foo: string;
-}
-const b = new B();
-```
-... and `b.ts` uses that interface:
-```typescript
-import { A } from './a';
-export class B {};
-const a: A = {foo: "foo"};
-```
-
-After compilation `b.js` looks like this:
-```javascript
-// import omitted as it only contained a reference to a type
-export class B { };
-const a = { foo: "foo" }; // no type refer
-```
-
-Normally, without `--ts-pre-compilation-deps` the output will
-look like this:
-<img alt="'no import use' with typescript pre-compilation dependencies" src="real-world-samples/only-types-without-pre-compilation-deps.png">
-
-_With_ `--ts-pre-compilation-deps` the dependency graph _does_ include the
-dependency-on-a-type-only from `b.ts` to `a.ts`:
-
-<img alt="'no import use' with typescript pre-compilation dependencies" src="real-world-samples/only-types-with-pre-compilation-deps.png">
-
-#### Pre-compilation dependencies example: import without use
-
-Similarly, if you import something, but don't use it, the dependency
-only exists before compilation. Take for example these two
-typescript modules:
-
-`a.ts`:
-```typescript
-import { B } from './b';
-export class A {
-}
-```
-
-`b.ts`:
-```typescript
-export class B {
-}
-```
-
-As `a.ts` uses none of the imports from b, the typescript
-compiler will omit them when compiling and yield this for `a.js`:
-```javascript
-// no imports here anymore...
-export class A {
-}
-```
-Hence, without `--ts-pre-compilation-deps` dependency-cruiser's
-output will look like this:
-
-<img alt="'no import use' without typescript pre-compilation dependencies" src="real-world-samples/no-use-without-pre-compilation-deps.png">
-
-... and with `--ts-pre-compilation-deps` like this:
-
-<img alt="'no import use' with typescript pre-compilation dependencies" src="real-world-samples/no-use-with-pre-compilation-deps.png">
+For details see [tsPreCompilationDeps](./rules-reference#tsprecompilationdeps) in the
+rules reference.
 
 ### `--ts-config`: use a typescript configuration file ('project')
 If dependency-cruiser encounters typescript, it compiles it to understand what it
@@ -375,117 +351,20 @@ You might want to do this e.g. if you have `baseDir`/ `paths` keys in your
 [dynamic imports](./faq.md#typescript-dynamic-imports-show-up-as-x--whats-up-there)
 or jsx/ tsx outside of a react context.
 
-Dependency-cruiser understands the `extends` configuration in tsconfig's so
-if you have a hierarchy of configs, you just need to pass the relevant one.
-
-```sh
-### use the `tsconfig.json` in the current directory into account when looking
-### at typescript sources:
-depcruise --ts-config --validate src
-
-### use `tsconfig.prod.json for the same purpose:
-depcruise --ts-config tsconfig.prod.json --validate src
-```
-
-Useful things to know:
-- The configuration file you can pass as an argument to this option is
-  relative to the current working directory.
-- As an alternative to this command line parameter you can pass the
-  typescript project file name in in your .dependency-cruiser.json like this:
-  ```json
-  "options": {
-    "tsConfig": {
-      "fileName": "tsconfig.json"
-    }
-  }
-  ```
-  or even more minimalistically like so (in which case dependency-cruiser will
-  assume the fileName to be `tsconfig.json`)
-  ```json
-  "options": {
-    "tsConfig": {}
-  }
-  ```
-
-> note: dependency-cruiser currently only looks at the `compilerOptions` key
-> in the tsconfig.json and not at other keys (e.g. `files`, `include` and
-> `exclude`).
+For details see [tsConfig](./rules-reference#tsconfig-use-a-typescript-configuration-file-project)
+section in the rules reference.
 
 ### `--preserve-symlinks`
-Whether to leave symlinks as is or resolve them to their realpath. This option defaults
-to `false` (which is also nodejs' default behavior since release 6).
+Equivalent of the [preserveSymlinks](#preservesymlinks) configuration option.
 
 ### `--webpack-config`: use (the resolution options of) a webpack configuration
 Dependency-cruiser will pluck the `resolve` key from the configuration
 use the information to resolve files on disk.
 
-Useful things to know:
-- The configuration file you can pass as an argument to this option is
-  relative to the current working directory.
-- As an alternative to this command line parameter you can pass the
-  webpack config file name in in your .dependency-cruiser.json like this:
-  ```json
-  "options": {
-    "webpackConfig": {
-      "fileName": "webpack.config.js",
-    }
-  }
-  ```
-  This also allows you to pass additional parameters in case your
-  webpack config exports a function instead of an object literal.
-- If your webpack configuration exports a function, you can provide the
-  parameters in .dependency-cruiser.json in the webpackConfig section
-  ```json
-  "options": {
-    "webpackConfig": {
-      "env": { "production": true },
-      "arguments": { "mode": "production" }
-    }
-  }
-  ```
-- If your webpack config exports an array of configurations,
-  dependency-cruiser will only use the resolve options of the first
-  configuration in that array.
-
-If you're a webpack user and you have a `resolve` key in your webpack
-config you probably already know what happens with this. If not (or if
-you're curious) see the [webpack resolve](https://webpack.js.org/configuration/resolve/)
-documentation for details.
-
-### arguments
-You can pass a bunch of files, directories and 'glob' patterns.
-dependency-cruiser will
-- resolve the glob patterns (if any) to files and directories
-- scan directories (if any) for files with supported extensions
-- add the passed files to that
-... and start the cruise with the files thus found.
-
-#### Cruising multiple files and directories in one go
-Just pass them as arguments. This, e.g. will cruise every file in the folders
-src, test and lib (recursively) + the file called index.ts in the root.
-
-```sh
-depcruise --output-type dot src test lib index.ts
-```
-
-#### passing globs as parameters
-dependency-cruiser uses [node-glob](https://github.com/isaacs/node-glob) to
-make sure globs work the same accross platforms. It cannot prevent the
-environment from expanding globs before it can process it, however.
-
-As each environment interprets globs slightly differently, a pattern
-like `packages/**/src/**/*.js` will yield different results.
-
-To make sure glob expansion works _exactly_ the same accross
-platforms slap some quotes around them, so it's not the environment
-(/ shell) expanding the glob, but dependency-cruiser itself:
-
-```sh
-depcruise "packages/**/src/**/*.js"
-```
+For details see the [webpackConfig](./rules-reference#webpackconfig-use-the-resolution-options-of-a-webpack-configuration)
+section in the rules reference.
 
 ## Daphne's dependencies - a gentle introduction
-**[Daphne's
-dependencies](sample-output.md)**
+**[Daphne's dependencies](sample-output.md)**
 sport a visual overview of all the output formats. It also shows how Daphne and
 her colleagues use them in their workflow.
