@@ -1,12 +1,12 @@
 const fs               = require('fs');
 const expect           = require('chai').expect;
-const render           = require('../../../../src/report/dot/moduleLevel')(require('../../../../src/report/dot/common/boringModuleColorScheme.json'));
 const deps             = require('../../fixtures/cjs-no-dependency-valid.json');
 const unresolvableDeps = require('../../fixtures/es6-unresolvable-deps.json');
 const doNotFollowDeps  = require('../../fixtures/do-not-follow-deps.json');
 const orphanDeps       = require('../../fixtures/orphan-deps.json');
 const prefixUri        = require('../../fixtures/prefix-uri.json');
 const prefixNonUri     = require('../../fixtures/prefix-non-uri.json');
+const render           = require('../../../../src/report/dot/moduleLevel')(require('./boringModuleColorScheme.json'));
 
 const clusterlessFixture  = fs.readFileSync('test/report/fixtures/clusterless.dot', 'utf8');
 const unresolvableFixture = fs.readFileSync('test/report/fixtures/unresolvable.dot', 'utf8');
