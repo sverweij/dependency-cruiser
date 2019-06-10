@@ -13,12 +13,12 @@ available in dependency-cruiser configrautions.
 ## Contents
 
 ### [Command line only options](#command-line-only-options)
-  1. [arguments](#arguments---files-and-or-directories)
+  1. [arguments - files and/ or directories](#arguments---files-and-or-directories)
   1. [`--output-type`: specify the output format](#--output-type-specify-the-output-format)
-  1. [`--config`/ `--validate`](#--config---validate)
+  1. [`--config`/ `--validate`: use a configuration with rules and/or options](#--config---validate) 
   1. [`--init`](#--init)
-  1. [`--info` showing what alt-js are supported](#--info-showing-what-alt-js-are-supported)
-  1. [`--help`/ no parameters](#--help--no-parameters)
+  1. [`--info`: show what alt-js are supported](#--info-showing-what-alt-js-are-supported)
+  1. [`--help`/ no parameters: get help](#--help--no-parameters)
 
 ### [Options also available in dependency-cruiser configurations](#options-also-available-in-dependency-cruiser-configurations)
 1. [`--do-not-follow`: don't cruise modules adhering to this pattern any further](#--do-not-follow-dont-cruise-modules-adhering-to-this-pattern-any-further)
