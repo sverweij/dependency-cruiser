@@ -404,9 +404,10 @@ Here's a rule snippet that will detect these for you:
                 
                 /*
                   spec files shouldn't be reachable from regular code anyway, so you
-                  might typically want to exclude these from reachability rules:
+                  might typically want to exclude these from reachability rules.
+                  The same goes for typescript definition files:
                  */
-                "pathNot": "\\.spec\\.(js|ts)$" // 
+                "pathNot": "\\.spec\\.(js|ts)$|\\.d\\.ts$"
                 
                 /* 
                   for each file matching path and pathNot, check if it's reachable from the
