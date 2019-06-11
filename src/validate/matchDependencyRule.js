@@ -1,5 +1,5 @@
-const intersects       = require('../utl/arrayUtil').intersects;
 const isModuleOnlyRule = require('./isModuleOnlyRule');
+const matches          = require('./matches');
 
 function propertyEquals(pTo, pRule, pProperty) {
     return pRule.to.hasOwnProperty(pProperty)
@@ -27,13 +27,6 @@ function extractGroups(pRule, pActualPath) {
     return lRetval;
 }
 
-function replaceGroupPlaceholders(pString, pExtractedGroups) {
-    return pExtractedGroups.reduce(
-        (pAll, pThis, pIndex) => pAll.replace(`$${pIndex}`, pThis),
-        pString
-    );
-}
-
 function match(pFrom, pTo) {
     return pRule => {
         const lGroups = extractGroups(pRule.from, pFrom.source);
@@ -43,30 +36,18 @@ function match(pFrom, pTo) {
          * also match \$, which they probably shouldn't) - but good enough for
          * now.
          */
-        return (!pRule.from.path ||
-                pFrom.source.match(pRule.from.path)
-        ) && (!pRule.from.pathNot ||
-                !(pFrom.source.match(pRule.from.pathNot))
-        ) && (!pRule.to.path ||
-                (lGroups.length > 0
-                    ? pTo.resolved.match(replaceGroupPlaceholders(pRule.to.path, lGroups))
-                    : pTo.resolved.match(pRule.to.path)
-                )
-        ) && (!Boolean(pRule.to.pathNot) ||
-                !(lGroups.length > 0
-                    ? pTo.resolved.match(replaceGroupPlaceholders(pRule.to.pathNot, lGroups))
-                    : pTo.resolved.match(pRule.to.pathNot)
-                )
-        ) && (!pRule.to.dependencyTypes ||
-                intersects(pTo.dependencyTypes, pRule.to.dependencyTypes)
-        ) && (!pRule.to.hasOwnProperty("moreThanOneDependencyType") ||
-                pTo.dependencyTypes.length > 1
-        ) && (!pRule.to.license ||
-                pTo.license && pTo.license.match(pRule.to.license)
-        ) && (!pRule.to.licenseNot ||
-                pTo.license && !pTo.license.match(pRule.to.licenseNot)
-        ) && propertyEquals(pTo, pRule, "couldNotResolve") &&
-                 propertyEquals(pTo, pRule, "circular");
+        return matches.fromPath(pRule, pFrom) &&
+            matches.fromPathNot(pRule, pFrom) &&
+            matches.toDependencyPath(pRule, pTo, lGroups) &&
+            matches.toDependencyPathNot(pRule, pTo, lGroups) &&
+            matches.toDependencyTypes(pRule, pTo) &&
+            (!pRule.to.hasOwnProperty("moreThanOneDependencyType") ||
+                    pTo.dependencyTypes.length > 1
+            ) &&
+            matches.toLicense(pRule, pTo) &&
+            matches.toLicenseNot(pRule, pTo) &&
+            propertyEquals(pTo, pRule, "couldNotResolve") &&
+            propertyEquals(pTo, pRule, "circular");
     };
 }
 const isInteresting = pRule => !isModuleOnlyRule(pRule);

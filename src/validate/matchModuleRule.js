@@ -1,35 +1,43 @@
 const isModuleOnlyRule = require('./isModuleOnlyRule');
+const matches = require('./matches');
 
 function matchesOrphanRule(pRule, pModule) {
-    return (
-        pRule.from.hasOwnProperty('orphan') &&
-            pModule.orphan === pRule.from.orphan
-    ) && (!pRule.from.path ||
-                pModule.source.match(pRule.from.path)
-    ) && (!pRule.from.pathNot ||
-            !(pModule.source.match(pRule.from.pathNot))
-    );
-}
+    let lRetval = true;
 
-function matchesReachableProperty(pRule, pModule) {
-    return pRule.to.hasOwnProperty('reachable') &&
-        (pModule.reachable || []).some(
-            pReachable => pReachable.asDefinedInRule === pRule.name && pRule.to.reachable === pReachable.value
-        );
+    if (pRule.from.hasOwnProperty('orphan')) {
+        if (pModule.hasOwnProperty('orphan')) {
+            lRetval = (pModule.orphan === pRule.from.orphan) &&
+                matches.fromPath(pRule, pModule) &&
+                matches.fromPathNot(pRule, pModule);
+        } else {
+            lRetval = !pRule.from.orphan;
+        }
+    }
+    return lRetval;
 }
 
 function matchesReachableRule(pRule, pModule) {
-    return matchesReachableProperty(pRule, pModule) &&
-        (!pRule.to.path ||
-            pModule.source.match(pRule.to.path)
-        ) &&
-        (!pRule.to.pathNot ||
-            !(pModule.source.match(pRule.to.pathNot))
-        );
+    let lRetval = true;
+
+    if (pRule.to.hasOwnProperty('reachable')) {
+        if (pModule.hasOwnProperty('reachable')) {
+            lRetval = pModule.reachable
+                .some(
+                    pReachable =>
+                        pReachable.asDefinedInRule === (pRule.name || 'not-in-allowed') &&
+                        (pRule.to.reachable === pReachable.value)
+                ) &&
+                matches.toModulePath(pRule, pModule) &&
+                matches.toModulePathNot(pRule, pModule);
+        } else {
+            lRetval = pRule.to.reachable;
+        }
+    }
+    return lRetval;
 }
 
 function match(pModule){
-    return pRule => matchesOrphanRule(pRule, pModule) || matchesReachableRule(pRule, pModule);
+    return pRule => matchesOrphanRule(pRule, pModule) && matchesReachableRule(pRule, pModule);
 }
 const isInteresting = pRule => isModuleOnlyRule(pRule);
 
