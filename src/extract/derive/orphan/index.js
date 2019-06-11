@@ -8,18 +8,22 @@ function orphanCheckNecessary(pOptions){
     if (pOptions.validate) {
         return _get(pOptions, 'ruleSet.forbidden', []).some(
             pRule => pRule.from.hasOwnProperty("orphan")
+        ) ||
+        _get(pOptions, 'ruleSet.allowed', []).some(
+            pRule => pRule.from.hasOwnProperty("orphan")
         );
     }
     return false;
 }
-
 
 function addOrphanCheckToGraph(pDependencies){
     return pDependencies.map(
         pNode => Object.assign(
             {},
             pNode,
-            isOrphan(pNode, pDependencies) ? {orphan: true} : {}
+            {
+                orphan: isOrphan(pNode, pDependencies)
+            }
         )
     );
 }
