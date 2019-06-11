@@ -200,9 +200,12 @@ For more information about writing rules see the [tutorial](rules-tutorial.md) a
 For an easy set up of both use [--init](#--init)
 
 ### `--init`
-This asks some questions and depending on the answers creates a dependency-cruiser
-configuration with some useful rules in it to the current folder and exits.
-use with `--config`
+This asks some questions and - depending on the answers - creates a dependency-cruiser
+configuration with some useful rules to the current folder and exits.
+
+The configuration file is larded with documentation to make it easy to tweak.
+
+Use `--config` to have dependency-cruiser take the configuration file into account.
 
 <details>
 <summary>Some of the rules that will be in the configuration (either directly or from a
@@ -280,6 +283,11 @@ command line options. They _override_ what's in the configuration, so they're gr
 if you need to quickly experiment with an option, or when you want to use one
 configuration for multiple purposes.
 
+The first four options below will be of use when you want to tame the size of
+the visual representation of a big dependency graph. For the rest of the options
+you're typically best off setting in a configuration file (generate one with
+`depcruise --init`).
+
 ### `--do-not-follow`: don't cruise modules adhering to this pattern any further
 If you _do_ want to see certain modules in your reports, but are not interested
 in these modules' dependencies, you'd pass the regular expression for those
@@ -330,7 +338,15 @@ keep the generated output to a manageable size.
 See [maxDepth](./rules-reference.md#maxdepth)
 
 ### `--prefix` prefixing links
+In the dot output prefix links to the source files with a string - useful to link to
+e.g. an on line repository.
+
+```sh
+dependency-cruise --prefix "https://github.com/you/yourrepo/tree/master/" -T dot src | dot -T svg > dependency-graph-with-links-to-gh.svg
+```
+
 See [prefix](./rules-reference.md#prefix-prefix-links-in-reports) in the rules reference
+for details.
 
 ### `--module-systems`
 Here you can pass a list of module systems dependency-cruiser should use
@@ -347,10 +363,10 @@ For details see [tsPreCompilationDeps](./rules-reference.md#tsprecompilationdeps
 rules reference.
 
 ### `--ts-config`: use a typescript configuration file ('project')
-If you want dependency-cruiser to take `baseDir`'s and/ or `paths` into account
-you can pass it a tsconfig.json.
+If you use typescript and want dependency-cruiser to take the `baseDir`'s and/ or `paths`
+in your tsconfig.json into account- can pass it with this option.
 
-Although it's possible to pass it as a command line parameter, you typically 
+Although it's possible to pass it as a command line option, you typically 
 want to do this in a configuration file - see 
 [tsConfig](./rules-reference.md#tsconfig-use-a-typescript-configuration-file-project)
 section in the rules reference for details.
@@ -365,7 +381,11 @@ file - see the [webpackConfig](./rules-reference.md#webpackconfig-use-the-resolu
 section in the rules reference.
 
 ### `--preserve-symlinks`
-Equivalent of the [preserveSymlinks](./rules-reference.md#preservesymlinks) configuration option.
+Whether to leave symlinks as is or resolve them to their realpath. This option defaults
+to `false` (which is also nodejs' default behavior since release 6).
+
+You'll typically want to set this in the configuration file with the [preserveSymlinks](./rules-reference.md#preservesymlinks)
+option. 
 
 ## Daphne's dependencies - a gentle introduction
 **[Daphne's dependencies](sample-output.md)**
