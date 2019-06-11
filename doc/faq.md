@@ -48,6 +48,72 @@ If you _do_ want to see these dependencies, do one of these:
 See [--ts-pre-compilation-deps](./cli.md#--ts-pre-compilation-deps-typescript-only)
 for details and examples.
 
+### Q: The graph dependency-cruiser generates is humoungous, and I can't follow the lines very well what can I do?
+**A**: Usually you don't need to see all modules and dependencies that make up
+your app. It can e.g. be helpfull to make separate graphs for each of the `packages`
+in your monorepo. That won't solve all readability issues, though, so dependency-cruiser
+has a few options to get you sorted:
+
+#### Filtering 
+The `--include-only`, `exclude`, `--do-not-follow` (and for more extreme measures
+`--max-depth`) command line options and their configuration file equivalents
+provide various ways to 
+
+#### Bonus: separate config for your graph
+Instead of tweaking command line parameters each time with these filtering options,
+you can make a seperate configuration file that extends the one you use for
+validation, e.g. like so:
+
+```js
+module.exports = {
+    // The 'extends' ensures things configured for your validation also apply
+    // to the graph you generate as well.
+    extends: "./.dependency-cruiser.js",
+    options: {
+        includeOnly: "^src/",
+        exclude: "node_modules|\\.spec\\.ts$|\\.mock\\.ts$",
+        doNotFollow: {
+            "path": "^src/report"
+            // these are the dependencyTypes dependency-cruiser's
+            // generated config does not follow by default
+            dependencyTypes: [
+                "npm",
+                "npm-dev",
+                "npm-optional",
+                "npm-peer",
+                "npm-bundled",
+                "npm-no-pkg"
+            ]
+        }
+    }
+}
+```
+
+Run with 
+```sh
+dependency-cruiser --config .dependency-cruiser-graph.js --output-type dot src | dot -T svg > 
+```
+
+#### Folder level dependency graph
+For a birds-eye view, you can use the `ddot` reporter that summarizes dependencies
+on a folder level:
+```sh
+dependency-cruiser --config .dependency-cruiser.js --output-type ddot -- src | dot -T svg > folder-level-dependency-graph.svg
+```
+
+#### Make dot render orthogonal edges instead of splines
+Some of the examples you see in the documentation have orthogonal edges, instead
+of splines. Sometimes this will improve legibility quite a bit. To achive that pass
+`-Gsplines=ortho` to dot, e.g. in a complete incantation:
+
+```sh
+depcruise --config .dependency-cruiser-graph.js --output-type dot -- src | dot -Gsplines=ortho -T svg > dependency-graph-with-orthogonal-edges.svg
+```
+
+The reason it's not the default for the dot reporter output is that it isn't guaranteed
+to render a graph, so YMMV.
+
+
 ### Q: Typescript dynamic imports show up as "✖" . What's up there?
 **A**: You're using a version of depedendency-cruiser < 4.17.0. Dynamic imports,
 both in Typescript and Javascript are supported as of version 4.17.0 -

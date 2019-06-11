@@ -5,18 +5,18 @@
 - This is a small reference guide to the elements you can use to write rules
   for dependency-cruiser. If you want a step-by-step introduction check the
   [rules _tutorial_](./rules-tutorial.md).
-- There is a [json schema](../src/main/ruleSet/jsonschema.json)
+- There is a [json schema](../src/main/ruleSet/config-schema.json)
   that describes the output format. Dependency-cruiser
   checks rule sets against it.
 - Some examples:
-  - a [starter rule set](../src/cli/rules.starter.json) - duplicated for
-    perusal on the bottom of this file.
-  - dependency-cruiser's [own rule set](../.dependency-cruiser.json)
-- Tip: run `depcruise --init` to create a .dependency-cruiser.json with
+  - dependency-cruiser's [own configuration](../.dependency-cruiser.json)
+  - the configuration [State Machine cat](https://state-machine-cat.js.org) uses [for validation](https://github.com/sverweij/state-machine-cat/blob/develop/config/dependency-cruiser.js) and the one it uses [for generating a visual graph](https://github.com/sverweij/state-machine-cat/blob/develop/config/dependency-cruiser-graph.js).
+  - [mscgen.js](https://mscgen.js.org)'s [.dependency-cruiser.json](https://github.com/mscgenjs/mscgenjs-core/blob/develop/.dependency-cruiser.json)
+- Tip: run `depcruise --init` to create a .dependency-cruiser.json (or .js) with
   some rules that make sense in most projects.
 
 ## Contents
-1. [The structure of a dependency-cruiser rules file](#the-structure-of-a-dependency-cruiser-rules-file)
+1. [The structure of a dependency-cruiser configuration](#the-structure-of-a-dependency-cruiser-configuration)
     - [`forbidden`](#forbidden)
     - [`allowed`](#allowed)
     - [`allowedSeverity`](#allowedSeverity)
@@ -33,14 +33,21 @@
     - [`license` and `licenseNot`](#license-and-licensenot)
     - [`dependencyTypes`](#dependencytypes)
     - [`moreThanOneDependencyType`](#more-than-one-dependencytype-per-dependency-morethanonedependencytype)
-4. [`options` not also command line options](#options-not-also-command-line-options)
-    - [`externalModuleResolutionStrategy` (for yarn pnp)](#yarn-plugnplay-support---externalmoduleresolutionstrategy)
-    - [fine grained `doNotFollow`](#specifying-dependency-types-in-donotfollow)
-    - [`combinedDependencies`](#mono-repo-behavior---combineddependencies)
+4. [The `options`](#the-options)
+    - [`doNotFollow`: don't cruise modules adhering to this pattern any further](#donotfollow-dont-cruise-modules-adhering-to-this-pattern-any-further)
+    - [`exclude`: exclude modules from being cruised](#exclude-exclude-modules-from-being-cruised)
+    - [`includeOnly`: only include modules satisfying a pattern](#includeonly-only-include-modules-satisfying-a-pattern)
+    - [`maxDepth`](#maxdepth)
+    - [`prefix`: prefix links in reports](#prefix-prefix-links-in-reports)
+    - [`moduleSystems`](#modulesystems)
+    - [`tsPreCompilationDeps`](#tsprecompilationdeps)
+    - [`tsConfig`: use a typscript configuration file ('project')](#tsconfig-use-a-typescript-configuration-file-project)
+    - [Yarn Plug'n'Play support - `externalModuleResolutionStrategy`](#yarn-plugnplay-support---externalmoduleresolutionstrategy)
+    - [`webackConfig`: use (the resolution options of) a webpack configuration](#webpackconfig-use-the-resolution-options-of-a-webpack-configuration)
+    - [Some more esoteric options](#some-more-esoteric-options)
 5. [Configurations in javascript](#configurations-in-javascript)
-6. [Starter rule set](#a-starter-rule-set)
 
-## The structure of a dependency cruiser rules file
+## The structure of a dependency cruiser configuration
 The typical dependency-cruiser config is json file (although you can use javascript -
 see [below](#configurations-in-javascript))). The three most important sections
 are `forbidden`, `allowed` and `options`, so a skeleton config could look something like this:
@@ -134,22 +141,8 @@ module.exports = {
 ```
 
 ### `options`
-Some of the command line options, so you don't have to specify them on each run.
-The currently supported options are
-[`doNotFollow`](./cli.md#--do-not-follow-dont-cruise-modules-adhering-to-this-pattern-any-further),
-[`exclude`](./cli.md#--exclude-exclude-modules-from-being-cruised),
-[`includeOnly`](./cli.md#--include-only-only-include-modules-satisfying-a-pattern)
-[`moduleSystems`](./cli.md#--module-systems),
-[`prefix`](./cli.md#--prefix-prefixing-links),
-[`tsPreCompilationDeps`](./cli.md#--ts-pre-compilation-deps-typescript-only),
-[`preserveSymlinks`](./cli.md#--preserve-symlinks),
-[`tsConfig`](./cli.md#--ts-config-use-a-typescript-configuration-file-project) and
-[`webpackConfig`](./cli.md#--webpack-config-use-the-resolution-options-of-a-webpack-configuration).
-See the [command line documentation](./cli.md) for details.
-
-In addition you can configure here how dependency-cruiser should resolve external 
-modules and how dependency-cruiser behaves itself in
-mono repos with [`combinedDependencies`](#mono-repo-behavior--combinedDependencies)
+Options that influence what is cruised, and how it is cruised. See 
+[The options](#the-options) below for an exhaustive list.
 
 ## The structure of an individual rule
 An individual rule consists at least of a `from` and a `to`
@@ -520,7 +513,7 @@ To detect orphans guys you can add e.g. this snippet to your
 }
 ```
 
-Things to keep in mind:
+#### Usage notes
 - dependency-cruiser will typically not find orphans when you give it
   only one  module to start with. Any module it finds, it finds by
   following its dependencies, so each module will have at least one
@@ -545,16 +538,19 @@ Things to keep in mind:
   the detection in without a rule set or without an orphan rule,
   pass `forceOrphanCheck: true` as part of the `pOptions` parameter.
 
-## `options` not also command line options
+## The `options`
 
-### Yarn Plug'n'Play support - externalModuleResolutionStrategy
-If you're using yarn's Plug'n'Play to have external modules resolved and want 
-dependency-cruiser to take that into account, set the 
-`externalModuleResolutionStrategy` attribute to `yarn-pnp`. The default for this 
-attribute is `node_modules` which is the default strategy in the node ecosystem
-as well.
+### `doNotFollow`: don't cruise modules adhering to this pattern any further
+> command line option equivalent: `--do-not-follow` (string values only)
 
-### Specifying dependency types in `doNotFollow`
+If you _do_ want to see certain modules in your reports, but are not interested
+in these modules' dependencies, you'd pass the regular expression for those
+modules to the `--do-not-follow` (short: `-X`) option. A typical pattern you'd
+use with this is "node_modules":
+
+#### Specifying dependency types in `doNotFollow`
+> It's not possible to use this on the command line
+
 On the command line you can use `--do-not-follow` to specify a regular expression
 for files that dependency-cruiser should cruise, but not follow any further.
 In the options section you can restrict what gets cruised by specifying
@@ -576,14 +572,303 @@ to follow external dependencies, in stead of specifying the "node_modules" path:
     }
 ```
 
-### mono repo behavior - combinedDependencies
+### `exclude`: exclude modules from being cruised
+> command line option equivalent: `--exclude`
+
+If you don't want to see certain modules in your report (or not have them
+validated), you can exclude them by passing a regular expression to the
+`exclude`. E.g. to exclude `node_modules` from being scanned altogether:
+
+```json
+"options": {
+    "exclude": "node_modules"
+}
+```
+
+Because it's regular expressions, you can do more interesting stuff here as well. To exclude
+all modules with a file path starting with coverage, test or node_modules, you could do this:
+
+```sh
+"options": {
+    "exclude": "^(coverage|test|node_modules)"
+}
+```
+
+### `includeOnly`: only include modules satisfying a pattern
+> command line option equivalent: `--include-only`
+
+In the `includeOnly` option you can pass a regular expression of all file paths
+dependency-cruiser should include in a cruise. It will discard all files
+not matching the `includeOnly` pattern.
+
+E.g. to only take modules into account that are in the `src` tree (and exclude all
+node_modules, core modules and modules otherwise outside it):
+
+```sh
+"options": {
+    "includeOnly": "^src/"
+}
+```
+
+If you specify both an exclude and an include, dependency-cruiser takes them
+_both_ into account.
+
+
+### `maxDepth`
+> command line option equivalent: `--max-depth`
+
+Only cruise the specified depth, counting from the specified root-module(s). This
+command is mostly useful in combination with visualisation output like _dot_ to
+keep the generated output to a manageable size.
+
+This will cruise the dependencies of each file directly in the src folder, up
+to a depth of 1:
+```javascript
+...
+  "maxDepth": 1
+...
+```
+
+<img width="237" alt="max depth = 1" src="real-world-samples/dependency-cruiser-max-depth-1.png">
+
+With `"maxDepth": 2` it'll look like this:
+
+<img width="390" alt="max depth = 2" src="real-world-samples/dependency-cruiser-max-depth-2.png">
+
+And with `"maxDepth": 3` like this:
+
+<img width="623" alt="dependency-cruiser cruised with max depth 3" src="real-world-samples/dependency-cruiser-max-depth-3.png">
+
+#### Usage note
+The `maxDepth` option is there to help with visualizing. If your goal is to _validate_
+this option is best left alone as you'll miss a dependency or two otherwise.
+
+### `prefix`: prefix links in reports
+> command line option equivalent: `--prefix`
+
+If you want the links in the svg output to have a prefix (say,
+`https://github.com/you/yourrepo/tree/master/`) so when you click them you'll
+open the link on github instead of the local file - pass that in the
+`prefix` option, e.g.:
+
+```javascript
+...
+  "prefix": "https://github.com/sverweij/dependency-cruiser/tree/develop/"
+...
+```
+
+#### Usage note
+Typically you want the prefix to end on a `/`.
+
+### `moduleSystems`
+> command line option equivalent: `--module-systems`
+
+Here you can pass a list of module systems dependency-cruiser should use
+to detect dependencies. It defaults to `["amd", "cjs", "es6"]`
+
+### `tsPreCompilationDeps`
+> command line option equivalent: `--ts-pre-compilation-deps`
+
+By default dependency-cruiser does not take dependencies between typescript
+modules that don't exist after compilation to javascript. Pass this command
+line switch to _do_ take them into account.
+
+<details>
+<summary><b>Pre-compilation dependencies example: only importing a type</b></summary>
+As the javascript doesn't really know about types, dependencies on
+types only exist before, but not after compile time.
+
+`a.ts` exports an interface ...
+```typescript
+import { B } from './b';
+export interface A {
+  foo: string;
+}
+const b = new B();
+```
+... and `b.ts` uses that interface:
+```typescript
+import { A } from './a';
+export class B {};
+const a: A = {foo: "foo"};
+```
+
+After compilation `b.js` looks like this:
+```javascript
+// import omitted as it only contained a reference to a type
+export class B { };
+const a = { foo: "foo" }; // no type refer
+```
+
+Normally, without `tsPreCompilationDeps` the output will
+look like this:
+<img alt="'no import use' with typescript pre-compilation dependencies" src="real-world-samples/only-types-without-pre-compilation-deps.png">
+
+_With_ `tsPreCompilationDeps` the dependency graph _does_ include the
+dependency-on-a-type-only from `b.ts` to `a.ts`:
+
+<img alt="'no import use' with typescript pre-compilation dependencies" src="real-world-samples/only-types-with-pre-compilation-deps.png">
+</details>
+
+<details>
+<summary><b>Pre-compilation dependencies example: import without use</b></summary>
+
+Similarly, if you import something, but don't use it, the dependency
+only exists before compilation. Take for example these two
+typescript modules:
+
+`a.ts`:
+```typescript
+import { B } from './b';
+export class A {
+}
+```
+
+`b.ts`:
+```typescript
+export class B {
+}
+```
+
+As `a.ts` uses none of the imports from b, the typescript
+compiler will omit them when compiling and yield this for `a.js`:
+```javascript
+// no imports here anymore...
+export class A {
+}
+```
+Hence, without `tsPreCompilationDeps` dependency-cruiser's
+output will look like this:
+
+<img alt="'no import use' without typescript pre-compilation dependencies" src="real-world-samples/no-use-without-pre-compilation-deps.png">
+
+... and with `tsPreCompilationDeps` like this:
+
+<img alt="'no import use' with typescript pre-compilation dependencies" src="real-world-samples/no-use-with-pre-compilation-deps.png">
+</details>
+
+
+### `tsConfig`: use a typescript configuration file ('project')
+> command line option equivalent: --ts-config
+
+If dependency-cruiser encounters typescript, it compiles it to understand what it
+is looking at. If you have `compilerOptions` in your `tsconfig.json` you think
+it should take into account, you can use this option to make it do that.
+You might want to do this e.g. if you have `baseDir`/ `paths` keys in your
+`tsconfig`, or are using jsx/ tsx outside of a react context.
+
+Dependency-cruiser understands the `extends` configuration in tsconfig's so
+if you have a hierarchy of configs, you just need to pass the relevant one.
+
+Sample
+```json
+  "options": {
+  "tsConfig": {
+    "fileName": "tsconfig.json"
+  }
+}
+```
+
+You can do it even more minimalistically like so (in which case dependency-cruiser will
+assume the fileName to be `tsconfig.json`)
+```json
+"options": {
+  "tsConfig": {}
+}
+```
+
+
+#### On the command line
+```sh
+### use the `tsconfig.json` in the current directory into account when looking
+### at typescript sources:
+depcruise --ts-config --validate -- src
+
+### use `tsconfig.prod.json for the same purpose:
+depcruise --ts-config tsconfig.prod.json --validate -- src
+```
+
+#### Usage notes
+- The configuration file you can pass as an argument to this option is
+  relative to the current working directory.
+-  dependency-cruiser currently only looks at the `compilerOptions` key
+  in the tsconfig.json and not at other keys (e.g. `files`, `include` and
+  `exclude`).
+
+
+### Yarn Plug'n'Play support - `externalModuleResolutionStrategy`
+> there is no command line equivalent for this
+
+If you're using yarn's Plug'n'Play to have external modules resolved and want 
+dependency-cruiser to take that into account, set the 
+`externalModuleResolutionStrategy` attribute to `yarn-pnp`. The default for this 
+attribute is `node_modules` which is the default strategy in the node ecosystem
+as well.
+
+
+### `webpackConfig`: use (the resolution options of) a webpack configuration
+> command line option equivalent: `--webpack-config`    
+> passing `env` and `arguments` is only available in the configuration file's
+> options
+
+Dependency-cruiser will pluck the `resolve` key from the webpack configuration
+you pass here and will use that information to resolve files on disk.
+
+```json
+"options": {
+  "webpackConfig": {
+    "fileName": "webpack.config.js"
+  }
+}
+```
+
+Or, shorter, to let dependency-cruiser pick the default webpack.config.js all by
+itself:
+```json
+"options": {
+  "webpackConfig": {}
+}
+```
+
+If your webpack configuration exports a function that takes parameters,
+you can provide the parameters like so:
+  ```json
+  "options": {
+    "webpackConfig": {
+      "fileName": "webpack.config.js",
+      "env": { "production": true },
+      "arguments": { "mode": "production" }
+    }
+  }
+  ```
+
+#### Usage notes
+- The configuration file you can pass as an argument to this option is
+  relative to the current working directory.
+- If your webpack config exports an array of configurations,
+  dependency-cruiser will only use the resolve options of the first
+  configuration in that array.
+- For more information check out the the [webpack resolve](https://webpack.js.org/configuration/resolve/)
+  documentation.
+
+
+### Some more esoteric options
+#### preserveSymlinks
+> command line option equivalent: `--preserve-symlinks`
+
+Whether to leave symlinks as is or resolve them to their realpath. This option defaults
+to `false` (which is also nodejs' default behavior since release 6).
+
+#### mono repo behavior - combinedDependencies
 If `combinedDependencies` is on `false` (the default) dependency-cruiser will
 search for a `package.json` closest up from the source file it investigates.
 This is the behavior you expect in a regular repo and in mono repos with
 independent packages. When in doubt keep this switch out of your config or
 set it to `false`.
 
-Example:
+<details>
+<summary>Example</summary>
+
 - monodash/    
   - package.json    
   - packages/    
@@ -605,7 +890,7 @@ the file it investigates:
        - **package.json** _<- look in this one_    
        - src/    
           - index.ts
-
+</details>
 
 ## Configurations in javascript
 From version 4.7.0 you can pass a javascript module to `--validate`.
@@ -631,6 +916,3 @@ module.exports = {
     }
 };
 ```
-
-## A starter rule set
-You can find the one dependency-cruiser uses on initialization [here](./rules.starter.json).
