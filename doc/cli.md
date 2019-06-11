@@ -335,7 +335,13 @@ Only cruise the specified depth, counting from the specified root-module(s). Thi
 command is mostly useful in combination with visualisation output like _dot_ to
 keep the generated output to a manageable size.
 
+```sh
+dependency-cruise --max-depth 2 -T dot src/main/index.ts | dot -T svg > depth-limited-dependency-graph.svg
+```
+
 See [maxDepth](./rules-reference.md#maxdepth)
+
+> This will only be effective when you pass one file as an argument.
 
 ### `--prefix` prefixing links
 In the dot output prefix links to the source files with a string - useful to link to
