@@ -33,6 +33,16 @@ describe("validate/index - orphans", () => {
         ).to.deep.equal({valid: false, rules: [{name: "not-in-allowed", severity: "warn"}]});
     });
 
+    it("Leaves modules alone that aren't orphans if there's a rule in the 'allowed' section forbidding them", () => {
+        expect(
+            validate.module(
+                true,
+                _readRuleSet("./test/validate/fixtures/rules.orphan.allowed.json"),
+                {source: "something", "orphan": false}
+            )
+        ).to.deep.equal({valid: true});
+    });
+
     it("Leaves modules that are orphans, but that don't match the rule path", () => {
         expect(
             validate.module(
