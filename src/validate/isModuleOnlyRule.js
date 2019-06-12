@@ -3,7 +3,7 @@
  * @returns {boolean} whether or not the rule is 'module only'
  */
 function isModuleOnlyRule(pRule){
-    return pRule.from.hasOwnProperty("orphan");
+    return pRule.from.hasOwnProperty("orphan") || pRule.to.hasOwnProperty("reachable");
 }
 
 module.exports = isModuleOnlyRule;

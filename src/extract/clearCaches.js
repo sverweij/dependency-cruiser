@@ -4,6 +4,7 @@ const localNpmHelpers = require('./resolve/localNpmHelpers');
 const readPackageDeps = require('./resolve/readPackageDeps');
 const resolveAMD      = require('./resolve/resolve-AMD');
 const resolve         = require('./resolve/resolve');
+const reachable       = require('./derive/reachable/isReachable');
 
 module.exports = () => {
     toTypescriptAST.clearCache();
@@ -12,4 +13,5 @@ module.exports = () => {
     readPackageDeps.clearCache();
     resolveAMD.clearCache();
     resolve.clearCache();
+    reachable.clearCache();
 };

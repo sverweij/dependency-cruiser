@@ -100,7 +100,12 @@
                     },
                     "orphan": {
                         "type": "boolean",
-                        "description": "'true' if this dependency does not have dependencies, and no module has it as a dependency"
+                        "description": "'true' if this module does not have dependencies, and no module has it as a dependency"
+                    },
+                    "reachable": {
+                        "type": "array",
+                        "items": { "$ref": "#/definitions/ReachableType"},
+                        "description": "An array of objects that tell whether this module is 'reachable', and according to rule in which this reachability was defined"
                     },
                     "valid": {
                         "type": "boolean",
@@ -269,6 +274,10 @@
                     "type": "boolean",
                     "description": "If true matches dependencies with more than one dependency type (e.g. defined in _both_ npm and npm-dev)"
                 },
+                "reachable": {
+                    "type": "boolean",
+                    "description": "Whether or not to match modules that aren't reachable from the from part of the rule. NOTE & TODO: should be separate rule type that ensures there's only one, and that has only path and pathNot in the to part"
+                },
                 "license": {
                     "type": "string",
                     "description": "Whether or not to match modules that were released under one of the mentioned licenses. E.g. to flag GPL-1.0, GPL-2.0 licensed modules (e.g. because your app is not compatible with the GPL) use \"GPL\""
@@ -356,6 +365,21 @@
                 "undetermined",
                 "unknown"
             ]
+        },
+        "ReachableType": {
+            "type":"object",
+            "required": ["value", "asDefinedInRule"],
+            "additionalProperties": false,
+            "properties": {
+                "value": {
+                    "type": "boolean",
+                    "description": "'true' if this module is reachable from any of the modules matched by the from part of a reachability-rule in 'asDefinedInRule', 'false' if not."
+                },
+                "asDefinedInRule": {
+                    "type": "string",
+                    "description": "The name of the rule where the reachability was defined"
+                }
+            }
         },
         "OptionsType": {
             "type": "object",

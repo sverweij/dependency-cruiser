@@ -25,14 +25,14 @@
             "type": "array",
             "description": "A list of rules that describe dependencies that are not allowed. dependency-cruiser will emit a separate error (warning/ informational) messages for each violated rule.",
             "items": {
-                "$ref": "#/definitions/ForiddenRuleType"
+                "$ref": "#/definitions/ForbiddenRuleType"
             }
         },
         "allowed": {
             "type": "array",
             "description": "A list of rules that describe dependencies that are allowed. dependency-cruiser will emit the warning message 'not-in-allowed' for each dependency that does not at least meet one of them.",
             "items": {
-                "$ref" :"#/definitions/RuleType"
+                "$ref" :"#/definitions/AllowedRuleType"
             }
         },
         "allowedSeverity": {
@@ -150,7 +150,13 @@
         }
     },
     "definitions": {
-        "RuleType": {
+        "AllowedRuleType": {
+            "oneOf": [
+                {"$ref": "#/definitions/RegularAllowedRuleType"},
+                {"$ref": "#/definitions/ReachabilityAllowedRuleType"}
+            ]
+        },
+        "RegularAllowedRuleType": {
             "type": "object",
             "required": [ "from", "to" ],
             "additionalProperties": false,
@@ -166,7 +172,29 @@
                 }
             }
         },
-        "ForiddenRuleType": {
+        "ReachabilityAllowedRuleType": {
+            "type": "object",
+            "required": [ "from", "to" ],
+            "additionalProperties": false,
+            "properties": {
+                "comment" : {
+                    "type": "string"
+                },
+                "from": {
+                    "$ref": "#/definitions/ReachabilityFromRestrictionType"
+                },
+                "to": {
+                    "$ref": "#/definitions/ReachabilityToRestrictionType"
+                }
+            }
+        },
+        "ForbiddenRuleType": {
+            "oneOf": [
+                {"$ref": "#/definitions/RegularForbiddenRuleType"},
+                {"$ref": "#/definitions/ReachabilityForbiddenRuleType"}
+            ]
+        },
+        "RegularForbiddenRuleType": {
             "type": "object",
             "required": [ "from", "to" ],
             "additionalProperties": false,
@@ -188,6 +216,26 @@
                  }
             }
         },
+        "ReachabilityForbiddenRuleType": {
+            "type": "object",
+            "required": [ "from", "to" ],
+            "additionalProperties": false,
+            "properties": {
+                "name": {
+                    "type": "string"
+                },
+                "severity": { "$ref": "#/definitions/SeverityType" },
+                "comment" : {
+                    "type": "string"
+                },
+                "from": {
+                    "$ref": "#/definitions/ReachabilityFromRestrictionType"
+                },
+                "to": {
+                    "$ref": "#/definitions/ReachabilityToRestrictionType"
+                }
+            }
+        },
         "FromRestrictionType": {
             "type": "object",
             "description": "Criteria an end of a dependency should match to be caught by this rule. Leave it empty if you want any module to be matched.",
@@ -204,6 +252,21 @@
                 "orphan": {
                     "type": "boolean",
                     "description": "Whether or not to match when the module is an orphan (= has no incoming or outgoing dependencies). When this property it is part of a rule, dependency-cruiser will ignore the 'to' part."
+                }
+            }
+        },
+        "ReachabilityFromRestrictionType": {
+            "type": "object",
+            "description": "Criteria an end of a dependency should match to be caught by this rule. Leave it empty if you want any module to be matched.",
+            "additionalProperties": false,
+            "properties": {
+                "path": {
+                    "type": "string",
+                    "description": "A regular expression an end of a dependency should match to be catched by this rule."
+                },
+                "pathNot": {
+                    "type": "string",
+                    "description": "A regular expression an end of a dependency should NOT match to be catched by this rule."
                 }
             }
         },
@@ -245,7 +308,25 @@
                     "type": "string",
                     "description": "Whether or not to match modules that were NOT released under one of the mentioned licenses. E.g. to flag everyting non MIT use \"MIT\" here"
                 }
-
+            }
+        },
+        "ReachabilityToRestrictionType": {
+            "description": "Criteria the 'to' end of a dependency should match to be caught by this rule. Leave it empty if you want any module to be matched.",
+            "required": ["reachable"],
+            "additionalProperties": false,
+            "properties" : {
+                "path": {
+                    "type": "string",
+                    "description": "A regular expression an end of a dependency should match to be catched by this rule."
+                },
+                "pathNot": {
+                    "type": "string",
+                    "description": "A regular expression an end of a dependency should NOT match to be catched by this rule."
+                },
+                "reachable": {
+                    "type": "boolean",
+                    "description": "Whether or not to match modules that aren't reachable from the from part of the rule. NOTE & TODO: should be separate rule type hat has only path and pathNot in the to part"
+                }
             }
         },
         "SeverityType": {
