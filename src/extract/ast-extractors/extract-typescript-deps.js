@@ -134,7 +134,8 @@ function extractNestedDependencies(pAST) {
         if (isDynamicImportExpression(pASTNode) && firstArgIsAString(pASTNode)) {
             lResult.push({
                 moduleName: pASTNode.arguments[0].text,
-                moduleSystem: 'es6'
+                moduleSystem: 'es6',
+                dynamic: true
             });
         }
         // const atype: import('./types').T
@@ -157,7 +158,7 @@ function extractNestedDependencies(pAST) {
 /**
  * returns all dependencies in the (top level) AST
  *
- * @type {(pTypeScriptAST: import("typescript").Node) => {moduleName: string, moduleSystem: string}[]}
+ * @type {(pTypeScriptAST: import("typescript").Node) => {moduleName: string, moduleSystem: string, dynamic: boolean}[]}
  */
 module.exports = (pTypeScriptAST) =>
     Boolean(typescript)
@@ -165,6 +166,7 @@ module.exports = (pTypeScriptAST) =>
             .concat(extractImportEquals(pTypeScriptAST))
             .concat(extractTrippleSlashDirectives(pTypeScriptAST))
             .concat(extractNestedDependencies(pTypeScriptAST))
+            .map(pModule => Object.assign({dynamic: false}, pModule))
         : [];
 
 

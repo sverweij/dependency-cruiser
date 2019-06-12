@@ -10,7 +10,8 @@ describe("ast-extractors/extract-typescript - regular commonjs require", () => {
             [
                 {
                     moduleName: './thing-that-uses-export-equals',
-                    moduleSystem: 'cjs'
+                    moduleSystem: 'cjs',
+                    dynamic: false
                 }
             ]
         );
@@ -27,15 +28,18 @@ describe("ast-extractors/extract-typescript - regular commonjs require", () => {
             [
                 {
                     moduleName: 'legit-one',
-                    moduleSystem: 'cjs'
+                    moduleSystem: 'cjs',
+                    dynamic: false
                 },
                 {
                     moduleName: 'legit-two',
-                    moduleSystem: 'cjs'
+                    moduleSystem: 'cjs',
+                    dynamic: false
                 },
                 {
                     moduleName: 'legit-three',
-                    moduleSystem: 'cjs'
+                    moduleSystem: 'cjs',
+                    dynamic: false
                 }
             ]
         );
@@ -60,15 +64,18 @@ describe("ast-extractors/extract-typescript - regular commonjs require", () => {
         ).to.deep.equal(
             [{
                 moduleName: 'midash',
-                moduleSystem: 'cjs'
+                moduleSystem: 'cjs',
+                dynamic: false
             },
             {
                 moduleName: 'slodash',
-                moduleSystem: 'cjs'
+                moduleSystem: 'cjs',
+                dynamic: false
             },
             {
                 moduleName: 'hidash',
-                moduleSystem: 'cjs'
+                moduleSystem: 'cjs',
+                dynamic: false
             }]
         );
     });
@@ -82,7 +89,8 @@ describe("ast-extractors/extract-typescript - regular commonjs require", () => {
             [
                 {
                     moduleName: 'thunderscore',
-                    moduleSystem: 'cjs'
+                    moduleSystem: 'cjs',
+                    dynamic: false
                 }
             ]
         );
