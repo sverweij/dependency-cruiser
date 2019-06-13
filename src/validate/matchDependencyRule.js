@@ -47,7 +47,8 @@ function match(pFrom, pTo) {
             matches.toLicense(pRule, pTo) &&
             matches.toLicenseNot(pRule, pTo) &&
             propertyEquals(pTo, pRule, "couldNotResolve") &&
-            propertyEquals(pTo, pRule, "circular");
+            propertyEquals(pTo, pRule, "circular") &&
+            propertyEquals(pTo, pRule, "dynamic");
     };
 }
 const isInteresting = pRule => !isModuleOnlyRule(pRule);
