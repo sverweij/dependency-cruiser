@@ -5,6 +5,7 @@
         "dependencyTypes": [
             "local"
         ],
+        "dynamic": false,
         "followable": true,
         "matchesDoNotFollow": false,
         "couldNotResolve": false,
@@ -17,6 +18,7 @@
         "dependencyTypes": [
             "unknown"
         ],
+        "dynamic": false,
         "followable": false,
         "couldNotResolve": true,
         "matchesDoNotFollow": false,

@@ -16,6 +16,7 @@
                     "dependencyTypes": [
                         "aliased"
                     ],
+                    "dynamic": false,
                     "module": "configSpullenAlias",
                     "moduleSystem": "cjs",
                     "matchesDoNotFollow": false,
@@ -29,6 +30,7 @@
                     "dependencyTypes": [
                         "aliased"
                     ],
+                    "dynamic": false,
                     "module": "configSpullenAlias/someconfig.json",
                     "moduleSystem": "cjs",
                     "matchesDoNotFollow": false,

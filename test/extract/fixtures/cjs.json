@@ -15,6 +15,7 @@
                 "dependencyTypes": [
                     "local"
                 ],
+                "dynamic": false,
                 "followable": true,
                 "matchesDoNotFollow": false,
                 "couldNotResolve": false
@@ -27,6 +28,7 @@
                 "dependencyTypes": [
                     "local"
                 ],
+                "dynamic": false,
                 "followable": true,
                 "matchesDoNotFollow": false,
                 "couldNotResolve": false
@@ -39,6 +41,7 @@
                 "dependencyTypes": [
                     "local"
                 ],
+                "dynamic": false,
                 "followable": true,
                 "matchesDoNotFollow": false,
                 "couldNotResolve": false
@@ -51,6 +54,7 @@
                 "dependencyTypes": [
                     "local"
                 ],
+                "dynamic": false,
                 "followable": true,
                 "matchesDoNotFollow": false,
                 "couldNotResolve": false
@@ -63,6 +67,7 @@
                 "dependencyTypes": [
                     "npm"
                 ],
+                "dynamic": false,
                 "license": "MIT",
                 "followable": true,
                 "matchesDoNotFollow": false,
@@ -76,6 +81,7 @@
                 "dependencyTypes": [
                     "core"
                 ],
+                "dynamic": false,
                 "followable": false,
                 "matchesDoNotFollow": false,
                 "couldNotResolve": false
@@ -103,6 +109,7 @@
                 "dependencyTypes": [
                     "local"
                 ],
+                "dynamic": false,
                 "followable": true,
                 "matchesDoNotFollow": false,
                 "couldNotResolve": false
@@ -115,6 +122,7 @@
                 "dependencyTypes": [
                     "core"
                 ],
+                "dynamic": false,
                 "followable": false,
                 "matchesDoNotFollow": false,
                 "couldNotResolve": false
@@ -135,6 +143,7 @@
                 "dependencyTypes": [
                     "core"
                 ],
+                "dynamic": false,
                 "followable": false,
                 "matchesDoNotFollow": false,
                 "couldNotResolve": false
@@ -155,6 +164,7 @@
                 "dependencyTypes": [
                     "core"
                 ],
+                "dynamic": false,
                 "followable": false,
                 "matchesDoNotFollow": false,
                 "couldNotResolve": false
@@ -175,6 +185,7 @@
                 "dependencyTypes": [
                     "local"
                 ],
+                "dynamic": false,
                 "followable": true,
                 "matchesDoNotFollow": false,
                 "couldNotResolve": false
@@ -202,6 +213,7 @@
                 "dependencyTypes": [
                     "local"
                 ],
+                "dynamic": false,
                 "followable": true,
                 "matchesDoNotFollow": false,
                 "couldNotResolve": false
@@ -222,6 +234,7 @@
                 "dependencyTypes": [
                     "npm-no-pkg"
                 ],
+                "dynamic": false,
                 "followable": true,
                 "matchesDoNotFollow": false,
                 "couldNotResolve": false
@@ -242,6 +255,7 @@
                 "dependencyTypes": [
                     "unknown"
                 ],
+                "dynamic": false,
                 "followable": false,
                 "matchesDoNotFollow": false,
                 "couldNotResolve": true
@@ -254,6 +268,7 @@
                 "dependencyTypes": [
                     "unknown"
                 ],
+                "dynamic": false,
                 "followable": false,
                 "matchesDoNotFollow": false,
                 "couldNotResolve": true
@@ -274,6 +289,7 @@
                 "dependencyTypes": [
                     "local"
                 ],
+                "dynamic": false,
                 "followable": true,
                 "matchesDoNotFollow": false,
                 "couldNotResolve": false
@@ -295,6 +311,7 @@
                 "dependencyTypes": [
                     "local"
                 ],
+                "dynamic": false,
                 "followable": true,
                 "matchesDoNotFollow": false,
                 "couldNotResolve": false
@@ -316,6 +333,7 @@
                 "dependencyTypes": [
                     "local"
                 ],
+                "dynamic": false,
                 "followable": true,
                 "matchesDoNotFollow": false,
                 "couldNotResolve": false
@@ -336,6 +354,7 @@
                 "dependencyTypes": [
                     "local"
                 ],
+                "dynamic": false,
                 "followable": true,
                 "matchesDoNotFollow": false,
                 "couldNotResolve": false
@@ -358,6 +377,7 @@
                 "dependencyTypes": [
                     "local"
                 ],
+                "dynamic": false,
                 "followable": true,
                 "matchesDoNotFollow": false,
                 "couldNotResolve": false

@@ -11,6 +11,7 @@
      "dependencyTypes": [
       "local"
      ],
+     "dynamic": false,
      "module": "./local",
      "moduleSystem": "cjs",
      "matchesDoNotFollow": false,
@@ -24,6 +25,7 @@
      "dependencyTypes": [
       "npm"
      ],
+     "dynamic": false,
      "module": "different-in-other-tree",
      "moduleSystem": "es6",
      "matchesDoNotFollow": true,
@@ -37,6 +39,7 @@
      "dependencyTypes": [
       "core"
      ],
+     "dynamic": false,
      "module": "path",
      "moduleSystem": "es6",
      "matchesDoNotFollow": false,

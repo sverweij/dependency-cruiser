@@ -11,6 +11,7 @@
                     "dependencyTypes": [
                         "local"
                     ],
+                    "dynamic": true,
                     "module": "./import_this",
                     "moduleSystem": "es6",
                     "matchesDoNotFollow": false,

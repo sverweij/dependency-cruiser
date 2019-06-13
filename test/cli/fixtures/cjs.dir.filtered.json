@@ -11,6 +11,7 @@
                     "dependencyTypes": [
                         "core"
                     ],
+                    "dynamic": false,
                     "module": "path",
                     "moduleSystem": "cjs",
                     "matchesDoNotFollow": false,
@@ -43,6 +44,7 @@
                     "dependencyTypes": [
                         "core"
                     ],
+                    "dynamic": false,
                     "module": "path",
                     "moduleSystem": "cjs",
                     "matchesDoNotFollow": false,
@@ -63,6 +65,7 @@
                     "dependencyTypes": [
                         "local"
                     ],
+                    "dynamic": false,
                     "module": "./one_only_one",
                     "moduleSystem": "cjs",
                     "matchesDoNotFollow": false,
@@ -77,6 +80,7 @@
                     "dependencyTypes": [
                         "local"
                     ],
+                    "dynamic": false,
                     "module": "./one_only_two",
                     "moduleSystem": "cjs",
                     "matchesDoNotFollow": false,
@@ -91,6 +95,7 @@
                     "dependencyTypes": [
                         "local"
                     ],
+                    "dynamic": false,
                     "module": "./shared",
                     "moduleSystem": "cjs",
                     "matchesDoNotFollow": false,
@@ -105,6 +110,7 @@
                     "dependencyTypes": [
                         "local"
                     ],
+                    "dynamic": false,
                     "module": "./sub/dir",
                     "moduleSystem": "cjs",
                     "matchesDoNotFollow": false,
@@ -119,6 +125,7 @@
                     "dependencyTypes": [
                         "core"
                     ],
+                    "dynamic": false,
                     "module": "fs",
                     "moduleSystem": "cjs",
                     "matchesDoNotFollow": false,
@@ -151,6 +158,7 @@
                     "dependencyTypes": [
                         "core"
                     ],
+                    "dynamic": false,
                     "module": "path",
                     "moduleSystem": "cjs",
                     "matchesDoNotFollow": false,
@@ -171,6 +179,7 @@
                     "dependencyTypes": [
                         "local"
                     ],
+                    "dynamic": false,
                     "module": "./depindir",
                     "moduleSystem": "cjs",
                     "matchesDoNotFollow": false,
@@ -185,6 +194,7 @@
                     "dependencyTypes": [
                         "core"
                     ],
+                    "dynamic": false,
                     "module": "path",
                     "moduleSystem": "cjs",
                     "matchesDoNotFollow": false,
@@ -205,6 +215,7 @@
                     "dependencyTypes": [
                         "core"
                     ],
+                    "dynamic": false,
                     "module": "path",
                     "moduleSystem": "cjs",
                     "matchesDoNotFollow": false,
@@ -225,6 +236,7 @@
                     "dependencyTypes": [
                         "local"
                     ],
+                    "dynamic": false,
                     "module": "./shared",
                     "moduleSystem": "cjs",
                     "matchesDoNotFollow": false,
@@ -239,6 +251,7 @@
                     "dependencyTypes": [
                         "local"
                     ],
+                    "dynamic": false,
                     "module": "./somedata.json",
                     "moduleSystem": "cjs",
                     "matchesDoNotFollow": false,
@@ -253,6 +266,7 @@
                     "dependencyTypes": [
                         "local"
                     ],
+                    "dynamic": false,
                     "module": "./two_only_one",
                     "moduleSystem": "cjs",
                     "matchesDoNotFollow": false,
@@ -267,6 +281,7 @@
                     "dependencyTypes": [
                         "core"
                     ],
+                    "dynamic": false,
                     "module": "http",
                     "moduleSystem": "cjs",
                     "matchesDoNotFollow": false,
@@ -311,6 +326,7 @@
                     "dependencyTypes": [
                         "local"
                     ],
+                    "dynamic": false,
                     "module": "./sub/dir",
                     "moduleSystem": "cjs",
                     "matchesDoNotFollow": false,

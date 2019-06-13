@@ -13,6 +13,7 @@
                     "dependencyTypes": [
                         "local"
                     ],
+                    "dynamic": false,
                     "module": "./sub/render",
                     "moduleSystem": "es6",
                     "valid": true
@@ -32,6 +33,7 @@
                     "dependencyTypes": [
                         "unknown"
                     ],
+                    "dynamic": false,
                     "module": "react-dom",
                     "moduleSystem": "es6",
                     "valid": true
