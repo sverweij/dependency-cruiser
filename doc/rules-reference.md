@@ -610,7 +610,7 @@ You can use this e.g. to restrict the usage of dynamic dependencies:
 {
     "forbidden":[
         {
-            "name": "no-non-dynamic-dependencies",
+            "name": "only-dyn-deps-to-otherside",
             "comment": "only dynamically depend on 'otherside' modules",
             "severity": "error",
             "from": {},
