@@ -275,6 +275,10 @@
                     "description": "Whether or not to match modules of any of these types (leaving out matches any of them)",
                     "items": { "$ref": "#/definitions/DependencyType" }
                 },
+                "dynamic": {
+                    "type": "boolean",
+                    "description": "true if this dependency is dynamic, false in all other cases"
+                },
                 "moreThanOneDependencyType": {
                     "type": "boolean",
                     "description": "If true matches dependencies with more than one dependency type (e.g. defined in _both_ npm and npm-dev)"
