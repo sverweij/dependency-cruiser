@@ -593,27 +593,31 @@ it uses the async ES import statement a la `import('othermodule').then(pMod => p
 You can use this e.g. to restrict the usage of dynamic dependencies:
 
 ```json
-"forbidden":[
-    {
-        "name": "no-non-dynamic-dependencies",
-        "severity": "error",
-        "from": {},
-        "to": { "dynamic": "true" }
-    }
-]
+{
+    "forbidden":[
+        {
+            "name": "no-non-dynamic-dependencies",
+            "severity": "error",
+            "from": {},
+            "to": { "dynamic": "true" }
+        }
+    ]
+}
 ```
 
 ... or to enforce the use of dynamic dependencies for certain dependencies
 ```json
-"forbidden":[
-    {
-        "name": "no-non-dynamic-dependencies",
-        "comment": "only dynamically depend on 'otherside' modules",
-        "severity": "error",
-        "from": {},
-        "to": { "path": "@theotherside/", dynamic": "false" }
-    }
-]
+{
+    "forbidden":[
+        {
+            "name": "no-non-dynamic-dependencies",
+            "comment": "only dynamically depend on 'otherside' modules",
+            "severity": "error",
+            "from": {},
+            "to": { "path": "@theotherside/", "dynamic": "false" }
+        }
+    ]
+}
 ```
 
 #### More than one dependencyType per dependency? `moreThanOneDependencyType`
