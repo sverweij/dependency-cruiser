@@ -16,6 +16,7 @@
                         "dependencyTypes": [
                             "unknown"
                         ],
+                        "dynamic": false,
                         "followable": false,
                         "matchesDoNotFollow": false,
                         "couldNotResolve": true,
@@ -29,6 +30,7 @@
                         "dependencyTypes": [
                             "unknown"
                         ],
+                        "dynamic": false,
                         "followable": false,
                         "matchesDoNotFollow": false,
                         "couldNotResolve": true,
@@ -42,6 +44,7 @@
                         "dependencyTypes": [
                             "undetermined"
                         ],
+                        "dynamic": false,
                         "followable": true,
                         "matchesDoNotFollow": false,
                         "couldNotResolve": false,

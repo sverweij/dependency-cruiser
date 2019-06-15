@@ -11,6 +11,7 @@
                     "dependencyTypes": [
                         "aliased"
                     ],
+                    "dynamic": false,
                     "module": "shared",
                     "moduleSystem": "cjs",
                     "matchesDoNotFollow": false,
@@ -35,6 +36,7 @@
                     "dependencyTypes": [
                         "aliased"
                     ],
+                    "dynamic": false,
                     "module": "shared",
                     "moduleSystem": "cjs",
                     "matchesDoNotFollow": false,

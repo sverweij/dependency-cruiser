@@ -12,12 +12,14 @@ function pushImportNodeValue(pDependencies) {
             if (estreeHelpers.firstArgumentIsAString(pNode.arguments)) {
                 pDependencies.push({
                     moduleName: pNode.arguments[0].value,
-                    moduleSystem: "es6"
+                    moduleSystem: "es6",
+                    dynamic: true
                 });
             } else if (estreeHelpers.firstArgumentIsATemplateLiteral(pNode.arguments)) {
                 pDependencies.push({
                     moduleName: pNode.arguments[0].quasis[0].value.cooked,
-                    moduleSystem: "es6"
+                    moduleSystem: "es6",
+                    dynamic: true
                 });
             }
 
@@ -30,7 +32,8 @@ module.exports = (pAST, pDependencies) => {
         if (pNode.source && pNode.source.value){
             pDependencies.push({
                 moduleName: pNode.source.value,
-                moduleSystem: "es6"
+                moduleSystem: "es6",
+                dynamic: false
             });
         }
     }

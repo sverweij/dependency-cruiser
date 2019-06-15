@@ -10,7 +10,8 @@ describe("ast-extractors/extract-typescript - regular imports", () => {
             [
                 {
                     moduleName: './import-for-side-effects',
-                    moduleSystem: 'es6'
+                    moduleSystem: 'es6',
+                    dynamic: false
                 }
             ]
         );
@@ -23,7 +24,8 @@ describe("ast-extractors/extract-typescript - regular imports", () => {
             [
                 {
                     moduleName: './ts-thing',
-                    moduleSystem: 'es6'
+                    moduleSystem: 'es6',
+                    dynamic: false
                 }
             ]
         );
@@ -36,7 +38,8 @@ describe("ast-extractors/extract-typescript - regular imports", () => {
             [
                 {
                     moduleName: './ts-thing',
-                    moduleSystem: 'es6'
+                    moduleSystem: 'es6',
+                    dynamic: false
                 }
             ]
         );
@@ -49,7 +52,8 @@ describe("ast-extractors/extract-typescript - regular imports", () => {
             [
                 {
                     moduleName: './ts-thing',
-                    moduleSystem: 'es6'
+                    moduleSystem: 'es6',
+                    dynamic: false
                 }
             ]
         );
@@ -62,7 +66,8 @@ describe("ast-extractors/extract-typescript - regular imports", () => {
             [
                 {
                     moduleName: './types',
-                    moduleSystem: 'es6'
+                    moduleSystem: 'es6',
+                    dynamic: false
                 }
             ]
         );
@@ -75,7 +80,8 @@ describe("ast-extractors/extract-typescript - regular imports", () => {
             [
                 {
                     moduleName: './types',
-                    moduleSystem: 'es6'
+                    moduleSystem: 'es6',
+                    dynamic: false
                 }
             ]
         );
@@ -88,7 +94,8 @@ describe("ast-extractors/extract-typescript - regular imports", () => {
             [
                 {
                     moduleName: './vypes',
-                    moduleSystem: 'es6'
+                    moduleSystem: 'es6',
+                    dynamic: false
                 }
             ]
         );
@@ -101,7 +108,8 @@ describe("ast-extractors/extract-typescript - regular imports", () => {
             [
                 {
                     moduleName: './wypes',
-                    moduleSystem: 'es6'
+                    moduleSystem: 'es6',
+                    dynamic: false
                 }
             ]
         );

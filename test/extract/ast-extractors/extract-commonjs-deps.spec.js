@@ -18,7 +18,8 @@ describe("ast-extractors/extract-commonJS-deps", () => {
             [
                 {
                     moduleName: './static',
-                    moduleSystem: 'cjs'
+                    moduleSystem: 'cjs',
+                    dynamic: false
                 }
             ]
         );
@@ -34,7 +35,8 @@ describe("ast-extractors/extract-commonJS-deps", () => {
             [
                 {
                     moduleName: 'template-literal',
-                    moduleSystem: 'cjs'
+                    moduleSystem: 'cjs',
+                    dynamic: false
                 }
             ]
         );

@@ -10,7 +10,8 @@ describe("ast-extractors/extract-typescript - dynamic imports", () => {
             [
                 {
                     moduleName: 'judeljo',
-                    moduleSystem: 'es6'
+                    moduleSystem: 'es6',
+                    dynamic: true
                 }
             ]
         );
@@ -23,7 +24,8 @@ describe("ast-extractors/extract-typescript - dynamic imports", () => {
             [
                 {
                     moduleName: 'judeljo',
-                    moduleSystem: 'es6'
+                    moduleSystem: 'es6',
+                    dynamic: true
                 }
             ]
         );

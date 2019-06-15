@@ -82,6 +82,7 @@ function addResolutionAttributes(pOptions, pFileName, pResolveOptions) {
             {
                 module: pDependency.moduleName,
                 moduleSystem: pDependency.moduleSystem,
+                dynamic: pDependency.dynamic,
                 followable: lResolved.followable && !lMatchesDoNotFollow,
                 matchesDoNotFollow: lMatchesDoNotFollow
             }

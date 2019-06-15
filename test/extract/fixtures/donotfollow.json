@@ -11,6 +11,7 @@
                     "dependencyTypes": [
                         "local"
                     ],
+                    "dynamic": false,
                     "module": "./dofollowstuffinhere",
                     "moduleSystem": "cjs",
                     "matchesDoNotFollow": false,
@@ -24,6 +25,7 @@
                     "dependencyTypes": [
                         "local"
                     ],
+                    "dynamic": false,
                     "module": "./donotfollowonceinthisfolder",
                     "moduleSystem": "cjs",
                     "matchesDoNotFollow": true,
@@ -37,6 +39,7 @@
                     "dependencyTypes": [
                         "local"
                     ],
+                    "dynamic": false,
                     "module": "./donotfollowonceinthisfolder/meta",
                     "moduleSystem": "cjs",
                     "matchesDoNotFollow": true,
@@ -80,6 +83,7 @@
                     "dependencyTypes": [
                         "local"
                     ],
+                    "dynamic": false,
                     "module": "../donotfollowonceinthisfolder/meta",
                     "moduleSystem": "cjs",
                     "matchesDoNotFollow": true,
@@ -93,6 +97,7 @@
                     "dependencyTypes": [
                         "local"
                     ],
+                    "dynamic": false,
                     "module": "./callfromlocal",
                     "moduleSystem": "cjs",
                     "matchesDoNotFollow": false,

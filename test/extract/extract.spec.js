@@ -78,7 +78,7 @@ describe('extract/extract - CommonJS - with bangs', () => {
 
 describe('extract/extract - ES6 - ', () => es6Fixtures.forEach(runFixture));
 describe('extract/extract - AMD - ', () => amdFixtures.forEach(runFixture));
-describe('AMD - with bangs', () => {
+describe('extract/extract - AMD - with bangs', () => {
 
     it('splits bang!./blabla into bang and ./blabla - regular requirejs', () => {
         const lOptions = normalize({moduleSystems: ["amd"]});
@@ -201,6 +201,7 @@ describe('extract/extract - include', () => {
                     "dependencyTypes": [
                         "local"
                     ],
+                    "dynamic": false,
                     "followable": true,
                     "matchesDoNotFollow": false,
                     "module": "./bla",
@@ -229,6 +230,7 @@ describe('extract/extract - include', () => {
                     "dependencyTypes": [
                         "local"
                     ],
+                    "dynamic": false,
                     "followable": true,
                     "matchesDoNotFollow": false,
                     "module": "../di",
@@ -241,6 +243,7 @@ describe('extract/extract - include', () => {
                     "dependencyTypes": [
                         "local"
                     ],
+                    "dynamic": false,
                     "followable": true,
                     "matchesDoNotFollow": false,
                     "module": "./bla",

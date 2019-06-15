@@ -16,6 +16,7 @@
                         "dependencyTypes": [
                             "local"
                         ],
+                        "dynamic": false,
                         "module": "./App.vue",
                         "moduleSystem": "es6",
                         "matchesDoNotFollow": false,
@@ -29,6 +30,7 @@
                         "dependencyTypes": [
                             "unknown"
                         ],
+                        "dynamic": false,
                         "module": "vue",
                         "moduleSystem": "es6",
                         "matchesDoNotFollow": false,
@@ -60,6 +62,7 @@
                         "dependencyTypes": [
                             "local"
                         ],
+                        "dynamic": false,
                         "module": "./components/HelloWorld.vue",
                         "moduleSystem": "es6",
                         "matchesDoNotFollow": false,

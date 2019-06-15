@@ -21,6 +21,7 @@
                         "dependencyTypes": [
                             "npm"
                         ],
+                        "dynamic": false,
                         "license": "MIT",
                         "module": "idontgetbundled",
                         "moduleSystem": "cjs",
@@ -36,6 +37,7 @@
                             "npm",
                             "npm-bundled"
                         ],
+                        "dynamic": false,
                         "license": "MIT",
                         "module": "igetbundled",
                         "moduleSystem": "cjs",

@@ -1,6 +1,6 @@
 const intersects = require('../utl/arrayUtil').intersects;
 
-function _fromPath(pRule, pModule) {
+function fromPath(pRule, pModule) {
     return (!pRule.from.path || pModule.source.match(pRule.from.path));
 }
 
@@ -68,7 +68,7 @@ function toLicenseNot(pRule, pDependency) {
 }
 
 module.exports = {
-    fromPath: _fromPath,
+    fromPath,
     fromPathNot,
     toDependencyPath,
     toModulePath,

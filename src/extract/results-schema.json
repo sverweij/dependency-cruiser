@@ -128,7 +128,8 @@
                                 "followable",
                                 "couldNotResolve",
                                 "moduleSystem",
-                                "valid"
+                                "valid",
+                                "dynamic"
                             ],
                             "additionalProperties": false,
                             "properties": {
@@ -156,6 +157,10 @@
                                 "followable": {
                                     "type": "boolean",
                                     "description": "Whether or not this is a dependency that can be followed any further. This will be 'false' for for core modules, json, modules that could not be resolved to a file and modules that weren't followed because it matches the doNotFollow expression."
+                                },
+                                "dynamic": {
+                                    "type": "boolean",
+                                    "description": "true if this dependency is dynamic, false in all other cases"
                                 },
                                 "matchesDoNotFollow": {
                                     "type": "boolean",
@@ -269,6 +274,10 @@
                     "type": "array",
                     "description": "Whether or not to match modules of any of these types (leaving out matches any of them)",
                     "items": { "$ref": "#/definitions/DependencyType" }
+                },
+                "dynamic": {
+                    "type": "boolean",
+                    "description": "true if this dependency is dynamic, false in all other cases"
                 },
                 "moreThanOneDependencyType": {
                     "type": "boolean",

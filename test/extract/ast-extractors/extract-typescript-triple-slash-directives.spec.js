@@ -10,7 +10,8 @@ describe("ast-extractors/extract-typescript - triple slash directives", () => {
             [
                 {
                     moduleName: './ts-thing',
-                    moduleSystem: 'tsd'
+                    moduleSystem: 'tsd',
+                    dynamic: false
                 }
             ]
         );
@@ -23,7 +24,8 @@ describe("ast-extractors/extract-typescript - triple slash directives", () => {
             [
                 {
                     moduleName: './ts-thing-types',
-                    moduleSystem: 'tsd'
+                    moduleSystem: 'tsd',
+                    dynamic: false
                 }
             ]
         );
@@ -36,7 +38,8 @@ describe("ast-extractors/extract-typescript - triple slash directives", () => {
             [
                 {
                     moduleName: './ts-thing-types',
-                    moduleSystem: 'tsd'
+                    moduleSystem: 'tsd',
+                    dynamic: false
                 }
             ]
         );

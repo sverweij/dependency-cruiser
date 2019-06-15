@@ -23,6 +23,7 @@
                     "dependencyTypes": [
                         "local"
                     ],
+                    "dynamic": false,
                     "followable": true,
                     "matchesDoNotFollow": false,
                     "module": "./also-used",
@@ -36,6 +37,7 @@
                     "dependencyTypes": [
                         "local"
                     ],
+                    "dynamic": false,
                     "followable": true,
                     "matchesDoNotFollow": false,
                     "module": "./definitely-used",
@@ -49,6 +51,7 @@
                     "dependencyTypes": [
                         "local"
                     ],
+                    "dynamic": false,
                     "followable": true,
                     "matchesDoNotFollow": false,
                     "module": "./imported-from-index-but-not-used",

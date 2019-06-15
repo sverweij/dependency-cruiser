@@ -14,13 +14,15 @@ function pushRequireCallsToDependencies(pDependencies, pModuleSystem) {
                 pNode.arguments[0].value.split("!").forEach(
                     pString => pDependencies.push({
                         moduleName: pString,
-                        moduleSystem: pModuleSystem
+                        moduleSystem: pModuleSystem,
+                        dynamic: false
                     })
                 );
             } else if (estreeHelpers.firstArgumentIsATemplateLiteral(pNode.arguments)) {
                 pDependencies.push({
                     moduleName: pNode.arguments[0].quasis[0].value.cooked,
-                    moduleSystem: pModuleSystem
+                    moduleSystem: pModuleSystem,
+                    dynamic: false
                 });
             }
         }

@@ -10,7 +10,8 @@ describe("ast-extractors/extract-typescript - re-exports", () => {
             [
                 {
                     moduleName: './ts-thing',
-                    moduleSystem: 'es6'
+                    moduleSystem: 'es6',
+                    dynamic: false
                 }
             ]
         );
@@ -23,7 +24,8 @@ describe("ast-extractors/extract-typescript - re-exports", () => {
             [
                 {
                     moduleName: './ts-thing',
-                    moduleSystem: 'es6'
+                    moduleSystem: 'es6',
+                    dynamic: false
                 }
             ]
         );

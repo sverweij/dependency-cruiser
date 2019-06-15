@@ -33,6 +33,7 @@
     - [`circular`](#circular)
     - [`license` and `licenseNot`](#license-and-licensenot)
     - [`dependencyTypes`](#dependencytypes)
+    - [`dynamic`](#dynamic)
     - [`moreThanOneDependencyType`](#more-than-one-dependencytype-per-dependency-morethanonedependencytype)
 4. [The `options`](#the-options)
     - [`doNotFollow`: don't cruise modules adhering to this pattern any further](#donotfollow-dont-cruise-modules-adhering-to-this-pattern-any-further)
@@ -583,6 +584,41 @@ This is a list of dependency types dependency-cruiser currently detects.
  aliased         | it's a module that's linked through an aliased (webpack)| "~/hello.ts"
  unknown         | it's unknown what kind of dependency type this is - probably because the module could not be resolved in the first place | "loodash"
  undetermined    | the dependency fell through all detection holes. This could happen with amd dependencies - which have a whole jurasic park of ways to define where to resolve modules to | "veloci!./raptor"
+
+
+#### `dynamic`
+A boolean that tells you whether the dependency is a dynamic one (i.e. 
+it uses the async ES import statement a la `import('othermodule').then(pMod => pMod.doStuff())`).
+
+You can use this e.g. to restrict the usage of dynamic dependencies:
+
+```json
+{
+    "forbidden":[
+        {
+            "name": "no-non-dynamic-dependencies",
+            "severity": "error",
+            "from": {},
+            "to": { "dynamic": "true" }
+        }
+    ]
+}
+```
+
+... or to enforce the use of dynamic dependencies for certain dependencies
+```json
+{
+    "forbidden":[
+        {
+            "name": "only-dyn-deps-to-otherside",
+            "comment": "only dynamically depend on 'otherside' modules",
+            "severity": "error",
+            "from": {},
+            "to": { "path": "@theotherside/", "dynamic": "false" }
+        }
+    ]
+}
+```
 
 #### More than one dependencyType per dependency? `moreThanOneDependencyType`
 With the flexible character of package.json it's totally possible to specify

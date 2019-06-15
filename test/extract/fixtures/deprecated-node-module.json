@@ -19,6 +19,7 @@
                             "npm-no-pkg",
                             "deprecated"
                         ],
+                        "dynamic": false,
                         "module": "deprecated-at-the-start-for-test-purposes",
                         "moduleSystem": "cjs",
                         "valid": true                    }
@@ -37,6 +38,7 @@
                         "dependencyTypes": [
                             "local"
                         ],
+                        "dynamic": false,
                         "module": "./package.json",
                         "moduleSystem": "cjs",
                         "valid": true
