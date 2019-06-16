@@ -153,7 +153,7 @@ module.exports = (pFileDirArray, pOptions, pResolveOptions, pTSConfig) => {
                     optionsUsed: Object.assign(
                         makeOptionsPresentable(pOptions),
                         {
-                            args: pFileDirArray.join(" ")
+                            args: pFileDirArray.map(pathToPosix).join(" ")
                         }
                     )
                 },
