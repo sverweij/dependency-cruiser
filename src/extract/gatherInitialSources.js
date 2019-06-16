@@ -1,6 +1,7 @@
 const fs            = require('fs');
 const path          = require('path');
 const glob          = require('glob');
+const _get          = require('lodash/get');
 const transpileMeta = require('./transpile/meta');
 const pathToPosix   = require('./utl/pathToPosix');
 
@@ -23,8 +24,14 @@ function gatherScannableFilesFromDir (pDirName, pOptions) {
         }, [])
         .filter(
             pFullPathToFile =>
-                (!pOptions.exclude || !matchesPattern(pathToPosix(pFullPathToFile), pOptions.exclude)) &&
-                (!pOptions.includeOnly || matchesPattern(pathToPosix(pFullPathToFile), pOptions.includeOnly))
+                (
+                    !_get(pOptions, 'exclude.path') ||
+                    !matchesPattern(pathToPosix(pFullPathToFile), pOptions.exclude.path)
+                ) &&
+                (
+                    !pOptions.includeOnly ||
+                    matchesPattern(pathToPosix(pFullPathToFile), pOptions.includeOnly)
+                )
         );
 }
 

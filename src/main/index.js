@@ -71,6 +71,9 @@ function getReporter(pOutputType) {
  *                dependencyTypes: an array of dependency types
  *  exclude     : regular expression describing which dependencies the function
  *                should not cruise
+ *                OR
+ *                an object of the following shape:
+ *                path: a regular expression as above
  *  maxDepth    : the maximum depth to cruise; 0 <= n <= 99
  *                (default: 0, which means 'infinite depth')
  *  moduleSystems: an array of module systems to use for following dependencies;

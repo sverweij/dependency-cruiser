@@ -48,14 +48,14 @@ function validatePreserveSymlinks(pOption) {
     }
 }
 
-function validatePathsSafety(pDoNotFollow){
+function validatePathsSafety(pFilterOption){
 
-    if (typeof pDoNotFollow === "string") {
-        validateRegExpSafety(pDoNotFollow);
+    if (typeof pFilterOption === "string") {
+        validateRegExpSafety(pFilterOption);
     }
 
-    validateRegExpSafety(_get(pDoNotFollow, "path", ""));
-    validateRegExpSafety(_get(pDoNotFollow, "pathNot", ""));
+    validateRegExpSafety(_get(pFilterOption, "path", ""));
+    validateRegExpSafety(_get(pFilterOption, "pathNot", ""));
 
 }
 
@@ -65,14 +65,14 @@ function validate(pOptions) {
     if (Boolean(pOptions)) {
         validateSystems(pOptions.moduleSystems);
         validatePathsSafety(pOptions.doNotFollow);
-        validateRegExpSafety(pOptions.exclude);
+        validatePathsSafety(pOptions.exclude);
         validateRegExpSafety(pOptions.includeOnly);
 
         validateOutputType(pOptions.outputType);
         validateMaxDepth(pOptions.maxDepth);
         validatePreserveSymlinks(pOptions.preserveSymlinks);
-        if (pOptions.hasOwnProperty('ruleSet') && pOptions.ruleSet.options) {
-            lRetval = module.exports(pOptions.ruleSet.options);
+        if (_get(pOptions, 'ruleSet.options')) {
+            lRetval = validate(pOptions.ruleSet.options);
         }
         return Object.assign(lRetval, pOptions);
     }

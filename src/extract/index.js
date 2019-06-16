@@ -104,6 +104,7 @@ function makeOptionsPresentable(pOptions) {
     return SHAREABLE_OPTIONS
         .filter(pOption => pOptions.hasOwnProperty(pOption) && pOptions[pOption] !== 0)
         .filter(pOption => pOption !== "doNotFollow" || Object.keys(pOptions.doNotFollow).length > 0)
+        .filter(pOption => pOption !== "exclude" || Object.keys(pOptions.exclude).length > 0)
         .reduce(
             (pAll, pOption) => {
                 pAll[pOption] = pOptions[pOption];

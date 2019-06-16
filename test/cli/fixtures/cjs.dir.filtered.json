@@ -346,7 +346,9 @@
         "optionsUsed": {
             "args": "test/cli/fixtures/cjs",
             "outputTo": "test/cli/output/cjs.dir.filtered.json",
-            "exclude": "node_modules",
+            "exclude": {
+                "path": "node_modules"
+            },
             "moduleSystems": [
                 "amd",
                 "cjs",
