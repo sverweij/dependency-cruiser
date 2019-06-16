@@ -40,14 +40,15 @@ function validateMaxDepth(pDepth) {
     }
 }
 
-function validatePathsSafety(pDoNotFollow){
 
-    if (typeof pDoNotFollow === "string") {
-        validateRegExpSafety(pDoNotFollow);
+function validatePathsSafety(pFilterOption){
+
+    if (typeof pFilterOption === "string") {
+        validateRegExpSafety(pFilterOption);
     }
 
-    validateRegExpSafety(_get(pDoNotFollow, "path", ""));
-    validateRegExpSafety(_get(pDoNotFollow, "pathNot", ""));
+    validateRegExpSafety(_get(pFilterOption, "path", ""));
+    validateRegExpSafety(_get(pFilterOption, "pathNot", ""));
 
 }
 
@@ -60,7 +61,7 @@ function validate(pOptions) {
 
         // neccessary because this safety check can't be done in json schema (a.f.a.i.k.)
         validatePathsSafety(pOptions.doNotFollow);
-        validateRegExpSafety(pOptions.exclude);
+        validatePathsSafety(pOptions.exclude);
         validateRegExpSafety(pOptions.includeOnly);
 
         // necessary because not in the config schema
@@ -68,8 +69,9 @@ function validate(pOptions) {
 
         // neccessary because not found a way to do this properly in JSON schema
         validateMaxDepth(pOptions.maxDepth);
-        if (pOptions.hasOwnProperty('ruleSet') && pOptions.ruleSet.options) {
-            lRetval = module.exports(pOptions.ruleSet.options);
+
+        if (_get(pOptions, 'ruleSet.options')) {
+            lRetval = validate(pOptions.ruleSet.options);
         }
         return Object.assign(lRetval, pOptions);
     }

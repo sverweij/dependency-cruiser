@@ -102,7 +102,7 @@ describe("extract/gatherInitialSources", () => {
                 "test/extract/fixtures/ts",
                 "test/extract/fixtures/es6/imports-and-exports.js",
                 "test/extract/fixtures/coffee"
-            ], {exclude: "dex"}).map(pathToPosix)
+            ], {exclude: {path: "dex"}}).map(pathToPosix)
         ).to.deep.equal(
             [
                 "test/extract/fixtures/ts/javascriptThing.js",
@@ -120,7 +120,7 @@ describe("extract/gatherInitialSources", () => {
         expect(
             gather([
                 "test/extract/fixtures/ts"
-            ], {exclude: "^[a-z]+$"}).map(pathToPosix)
+            ], {exclude: {path: "^[a-z]+$"}}).map(pathToPosix)
         ).to.deep.equal(
             [
                 "test/extract/fixtures/ts/index.ts",
@@ -178,7 +178,7 @@ describe("extract/gatherInitialSources", () => {
                     "test/extract/fixtures/gather-globbing/**/src"
                 ],
                 {
-                    exclude: "/deep/ly/"
+                    exclude: {path: "/deep/ly/"}
                 }
             ).map(pathToPosix)
         ).to.deep.equal(

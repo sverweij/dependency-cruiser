@@ -134,7 +134,7 @@ module.exports = (pFileName, pOptions, pResolveOptions, pTSConfig) => {
             .sortBy(getDependencyUniqueKey)
             .map(addResolutionAttributes(pOptions, pFileName, pResolveOptions))
             .filter(pDep =>
-                (!pOptions.exclude || !matchesPattern(pDep.resolved, pOptions.exclude)) &&
+                (!_.get(pOptions, 'exclude.path') || !matchesPattern(pDep.resolved, pOptions.exclude.path)) &&
                 (!pOptions.includeOnly || matchesPattern(pDep.resolved, pOptions.includeOnly))
             )
             .value();

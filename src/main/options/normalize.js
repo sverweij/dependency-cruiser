@@ -4,15 +4,15 @@ function uniq(pArray) {
     return Array.from(new Set(pArray));
 }
 
-function normalizeDoNotFollow(pDoNotFollow) {
-    const lDoNotFollow = pDoNotFollow || {};
+function normalizeFilterOption(pFilterOption) {
+    const lFilterOption = pFilterOption || {};
 
-    if (typeof lDoNotFollow === 'string') {
+    if (typeof lFilterOption === 'string') {
         return {
-            path: lDoNotFollow
+            path: lFilterOption
         };
     }
-    return lDoNotFollow;
+    return lFilterOption;
 }
 
 module.exports = pOptions => {
@@ -26,7 +26,8 @@ module.exports = pOptions => {
 
     lRetval.maxDepth = parseInt(lRetval.maxDepth, 10);
     lRetval.moduleSystems = uniq(lRetval.moduleSystems.sort());
-    lRetval.doNotFollow = normalizeDoNotFollow(lRetval.doNotFollow);
+    lRetval.doNotFollow = normalizeFilterOption(lRetval.doNotFollow);
+    lRetval.exclude = normalizeFilterOption(lRetval.exclude);
 
     return lRetval;
 };
