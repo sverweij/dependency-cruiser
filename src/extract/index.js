@@ -113,6 +113,17 @@ function makeOptionsPresentable(pOptions) {
         );
 }
 
+function summarizeOptions(pFileDirArray, pOptions) {
+    return {
+        optionsUsed: Object.assign(
+            makeOptionsPresentable(pOptions),
+            {
+                args: pFileDirArray.map(pathToPosix).join(" ")
+            }
+        )
+    };
+}
+
 function addRuleSetUsed(pOptions) {
     const lForbidden = _get(pOptions, "ruleSet.forbidden");
     const lAllowed = _get(pOptions, "ruleSet.allowed");
@@ -149,14 +160,7 @@ module.exports = (pFileDirArray, pOptions, pResolveOptions, pTSConfig) => {
         summary :
             Object.assign(
                 summarize(lModules),
-                {
-                    optionsUsed: Object.assign(
-                        makeOptionsPresentable(pOptions),
-                        {
-                            args: pFileDirArray.map(pathToPosix).join(" ")
-                        }
-                    )
-                },
+                summarizeOptions(pFileDirArray, pOptions),
                 pOptions.ruleSet
                     ? {ruleSetUsed: addRuleSetUsed(pOptions)}
                     : {}
