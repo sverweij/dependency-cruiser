@@ -22,7 +22,7 @@ available in dependency-cruiser configurations.
 
 ### Options also available in dependency-cruiser configurations
 1. [`--do-not-follow`: don't cruise modules adhering to this pattern any further](#--do-not-follow-dont-cruise-modules-adhering-to-this-pattern-any-further)
-1. [`--exclude`: exclude modules from being cruised](#--exclude-exclude-modules-from-being-cruised)
+1. [`--exclude`: exclude dependencies from being cruised](#--exclude-exclude-dependencies-from-being-cruised)
 1. [`--include-only`: only include modules satisfying a pattern](#--include-only-only-include-modules-satisfying-a-pattern)
 1. [`--max-depth`](#--max-depth)
 1. [`--prefix` prefixing links](#--prefix-prefixing-links)
@@ -303,7 +303,7 @@ Details and more ways to limit dependency-cruiser from following things: check o
 the [doNotFollow](./rules-reference.md#donotfollow-dont-cruise-modules-adhering-to-this-pattern-any-further) 
 option in the rules reference.
 
-### `--exclude`: exclude modules from being cruised
+### `--exclude`: exclude dependencies from being cruised
 If you don't want to see certain modules in your report (or not have them
 validated), you can exclude them by passing a regular expression to the
 `--exclude` (short: `-x`) option. Two examples:
@@ -316,7 +316,7 @@ dependency-cruise -x "node_modules" -T html -f deps-without-node_modules.html sr
 dependency-cruise -x "^(coverage|test|node_modules)" -T html -f deps-without-stuffs.html src
 ```
 
-See the [exclude](./rules-reference.md#exclude-exclude-modules-from-being-cruised) option
+See the [exclude](./rules-reference.md#exclude-exclude-dependencies-from-being-cruised) option
 in the rules reference for details.
 
 ### `--include-only`: only include modules satisfying a pattern
