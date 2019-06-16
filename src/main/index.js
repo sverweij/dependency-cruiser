@@ -4,8 +4,6 @@ const reportHtml              = require("../report/html");
 const reportJson              = require("../report/json");
 const reportDot               = require("../report/dot/moduleLevel")();
 const reportDDot              = require("../report/dot/folderLevel");
-const RCScheme                = require('../report/dot/common/richModuleColorScheme.json');
-const reportRCDot             = require("../report/dot/moduleLevel")(RCScheme);
 const reportCsv               = require("../report/csv");
 const reportErr               = require("../report/err");
 const reportTeamCity          = require("../report/teamcity");
@@ -20,8 +18,8 @@ const TYPE2REPORTER      = {
     "json"     : reportJson,
     "html"     : reportHtml,
     "dot"      : reportDot,
+    "rcdot"    : reportDot,
     "ddot"     : reportDDot,
-    "rcdot"    : reportRCDot,
     "csv"      : reportCsv,
     "err"      : reportErr,
     "teamcity" : reportTeamCity
