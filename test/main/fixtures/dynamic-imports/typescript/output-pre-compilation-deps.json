@@ -114,6 +114,7 @@
     "info": 2,
     "totalCruised": 3,
     "optionsUsed": {
+      "args": "src",
       "combinedDependencies": false,
       "externalModuleResolutionStrategy": "node_modules",
       "moduleSystems": [

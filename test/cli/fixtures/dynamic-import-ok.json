@@ -34,6 +34,7 @@
         "totalCruised": 2,
         "ruleSetUsed": {},
         "optionsUsed": {
+            "args": "test/cli/fixtures/typescriptconfig/cli-dynamic-imports/import_dynamically.ts",
             "outputTo": "test/cli/output/dynamic-import-ok.json",
             "moduleSystems": [
                 "amd",

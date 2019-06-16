@@ -100,6 +100,7 @@
   "info": 0,
   "totalCruised": 4,
   "optionsUsed": {
+   "args": "./test/extract/fixtures/cache-busting/index.ts",
    "combinedDependencies": false,
    "doNotFollow": {
     "dependencyTypes": [

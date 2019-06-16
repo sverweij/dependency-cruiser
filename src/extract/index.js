@@ -85,7 +85,6 @@ function complete(pAll, pFromListItem) {
 
 function makeOptionsPresentable(pOptions) {
     const SHAREABLE_OPTIONS = [
-        "args",
         "combinedDependencies",
         "doNotFollow",
         "exclude",
@@ -151,7 +150,12 @@ module.exports = (pFileDirArray, pOptions, pResolveOptions, pTSConfig) => {
             Object.assign(
                 summarize(lModules),
                 {
-                    optionsUsed: makeOptionsPresentable(pOptions)
+                    optionsUsed: Object.assign(
+                        makeOptionsPresentable(pOptions),
+                        {
+                            args: pFileDirArray.join(" ")
+                        }
+                    )
                 },
                 pOptions.ruleSet
                     ? {ruleSetUsed: addRuleSetUsed(pOptions)}

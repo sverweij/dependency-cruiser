@@ -190,6 +190,7 @@
         "info": 0,
         "totalCruised": 8,
         "optionsUsed": {
+            "args": "test/main/fixtures/jsx",
             "moduleSystems": ["amd", "cjs", "es6"],
             "tsPreCompilationDeps": false,
             "preserveSymlinks": false,

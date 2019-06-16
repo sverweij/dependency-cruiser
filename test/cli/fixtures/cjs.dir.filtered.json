@@ -344,6 +344,7 @@
         "info": 0,
         "totalCruised": 12,
         "optionsUsed": {
+            "args": "test/cli/fixtures/cjs",
             "outputTo": "test/cli/output/cjs.dir.filtered.json",
             "exclude": "node_modules",
             "moduleSystems": [

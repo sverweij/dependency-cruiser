@@ -405,6 +405,7 @@
         "info": 0,
         "totalCruised": 15,
         "optionsUsed": {
+            "args": "test/cli/fixtures/cjs",
             "outputTo": "test/cli/output/cjs.dir.json",
             "moduleSystems": [
                 "amd",
