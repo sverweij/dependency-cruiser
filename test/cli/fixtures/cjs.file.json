@@ -294,6 +294,7 @@
         "info": 0,
         "totalCruised": 11,
         "optionsUsed": {
+            "args": "test/cli/fixtures/cjs/root_one.js",
             "outputTo": "test/cli/output/cjs.file.json",
             "moduleSystems": [
                 "amd",

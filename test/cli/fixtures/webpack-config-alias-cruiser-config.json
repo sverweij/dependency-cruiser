@@ -62,6 +62,7 @@
             "forbidden": []
         },
         "optionsUsed": {
+            "args": "test/cli/fixtures/webpackconfig/aliassy/src",
             "rulesFile": "test/cli/fixtures/webpackconfig/aliassy/dependency-cruiser-json-with-webpack-config.json",
             "outputTo": "test/cli/output/webpack-config-alias-cruiser-config.json",
             "moduleSystems": [

@@ -60,6 +60,7 @@
         "totalCruised": 3,
         "ruleSetUsed": {},
         "optionsUsed": {
+            "args": "test/cli/fixtures/webpackconfig/aliassy/src",
             "outputTo": "test/cli/output/webpack-config-alias.json",
             "moduleSystems": [
                 "amd",

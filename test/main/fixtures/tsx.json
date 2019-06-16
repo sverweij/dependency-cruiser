@@ -60,6 +60,7 @@
         "info": 0,
         "totalCruised": 3,
         "optionsUsed": {
+            "args": "test/main/fixtures/tsx",
             "moduleSystems": ["amd", "cjs", "es6"],
             "tsPreCompilationDeps": false,
             "preserveSymlinks": false,

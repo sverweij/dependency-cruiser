@@ -54,6 +54,7 @@
         "totalCruised": 3,
         "ruleSetUsed": {},
         "optionsUsed": {
+            "args": "test/cli/fixtures/typescriptconfig/cli-config-with-path/src",
             "outputTo": "test/cli/output/typescript-path-resolution.json",
             "moduleSystems": [
                 "amd",

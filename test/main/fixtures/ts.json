@@ -131,6 +131,7 @@
         "info": 0,
         "totalCruised": 6,
         "optionsUsed":{
+            "args": "test/main/fixtures/ts",
             "moduleSystems": ["amd", "cjs", "es6"],
             "tsPreCompilationDeps": false,
             "preserveSymlinks": false,

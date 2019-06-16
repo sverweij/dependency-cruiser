@@ -85,7 +85,6 @@ function complete(pAll, pFromListItem) {
 
 function makeOptionsPresentable(pOptions) {
     const SHAREABLE_OPTIONS = [
-        "args",
         "combinedDependencies",
         "doNotFollow",
         "exclude",
@@ -112,6 +111,17 @@ function makeOptionsPresentable(pOptions) {
             },
             {}
         );
+}
+
+function summarizeOptions(pFileDirArray, pOptions) {
+    return {
+        optionsUsed: Object.assign(
+            makeOptionsPresentable(pOptions),
+            {
+                args: pFileDirArray.map(pathToPosix).join(" ")
+            }
+        )
+    };
 }
 
 function addRuleSetUsed(pOptions) {
@@ -150,9 +160,7 @@ module.exports = (pFileDirArray, pOptions, pResolveOptions, pTSConfig) => {
         summary :
             Object.assign(
                 summarize(lModules),
-                {
-                    optionsUsed: makeOptionsPresentable(pOptions)
-                },
+                summarizeOptions(pFileDirArray, pOptions),
                 pOptions.ruleSet
                     ? {ruleSetUsed: addRuleSetUsed(pOptions)}
                     : {}
