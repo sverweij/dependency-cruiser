@@ -40,14 +40,6 @@ function validateMaxDepth(pDepth) {
     }
 }
 
-function validatePreserveSymlinks(pOption) {
-    if (typeof pOption !== "undefined" && typeof pOption !== 'boolean') {
-        throw Error(
-            `'${pOption}' is not a valid option for preserveSymlinks - use either true or false`
-        );
-    }
-}
-
 function validatePathsSafety(pDoNotFollow){
 
     if (typeof pDoNotFollow === "string") {
@@ -63,14 +55,19 @@ function validate(pOptions) {
     let lRetval = {};
 
     if (Boolean(pOptions)) {
+        // neccessary because can slip through the cracks when passed as a cli parameter
         validateSystems(pOptions.moduleSystems);
+
+        // neccessary because this safety check can't be done in json schema (a.f.a.i.k.)
         validatePathsSafety(pOptions.doNotFollow);
         validateRegExpSafety(pOptions.exclude);
         validateRegExpSafety(pOptions.includeOnly);
 
+        // necessary because not in the config schema
         validateOutputType(pOptions.outputType);
+
+        // neccessary because not found a way to do this properly in JSON schema
         validateMaxDepth(pOptions.maxDepth);
-        validatePreserveSymlinks(pOptions.preserveSymlinks);
         if (pOptions.hasOwnProperty('ruleSet') && pOptions.ruleSet.options) {
             lRetval = module.exports(pOptions.ruleSet.options);
         }
