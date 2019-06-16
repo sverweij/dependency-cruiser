@@ -137,12 +137,26 @@ function addRuleSetUsed(pOptions) {
     );
 }
 
+function filterExcludedDependencies(pModule, pExclude) {
+    // no need to do the 'path' thing as that was addressed in extractFileDirArray already
+    return Object.assign(
+        {},
+        pModule,
+        {
+            dependencies: pModule.dependencies.filter(
+                pDependency => !pExclude.hasOwnProperty('dynamic') || (pExclude.dynamic !== pDependency.dynamic)
+            )
+        }
+    );
+}
+
 module.exports = (pFileDirArray, pOptions, pResolveOptions, pTSConfig) => {
     clearCaches();
 
     let lModules = _(
         extractFileDirArray(pFileDirArray, pOptions, pResolveOptions, pTSConfig).reduce(complete, [])
-    ).uniqBy(pDependency => pDependency.source)
+    ).uniqBy(pModule => pModule.source)
+        .map(pModule => filterExcludedDependencies(pModule, pOptions.exclude))
         .value();
 
     lModules = deriveCirculars(lModules, pOptions);
