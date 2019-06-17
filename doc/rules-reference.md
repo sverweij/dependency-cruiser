@@ -37,7 +37,7 @@
     - [`moreThanOneDependencyType`](#more-than-one-dependencytype-per-dependency-morethanonedependencytype)
 4. [The `options`](#the-options)
     - [`doNotFollow`: don't cruise modules adhering to this pattern any further](#donotfollow-dont-cruise-modules-adhering-to-this-pattern-any-further)
-    - [`exclude`: exclude modules from being cruised](#exclude-exclude-modules-from-being-cruised)
+    - [`exclude`: exclude dependencies from being cruised](#exclude-exclude-dependencies-from-being-cruised)
     - [`includeOnly`: only include modules satisfying a pattern](#includeonly-only-include-modules-satisfying-a-pattern)
     - [`maxDepth`](#maxdepth)
     - [`prefix`: prefix links in reports](#prefix-prefix-links-in-reports)
@@ -648,17 +648,23 @@ false).
 ## The `options`
 
 ### `doNotFollow`: don't cruise modules adhering to this pattern any further
-> command line option equivalent: `--do-not-follow` (string values only)
+> command line option equivalent: `--do-not-follow` (string values passed to 'path' only)
 
 If you _do_ want to see certain modules in your reports, but are not interested
 in these modules' dependencies, you'd pass the regular expression for those
-modules to the `--do-not-follow` (short: `-X`) option. A typical pattern you'd
+modules to the `doNotFollow` option. A typical pattern you'd
 use with this is "node_modules":
+
+```json
+    "options": {
+        "path": "node_modules"
+    }
+```
 
 #### Specifying dependency types in `doNotFollow`
 > It's not possible to use this on the command line
 
-On the command line you can use `--do-not-follow` to specify a regular expression
+`--do-not-follow` to specify a regular expression
 for files that dependency-cruiser should cruise, but not follow any further.
 In the options section you can restrict what gets cruised by specifying
 [dependency types](#dependencytypes). So if e.g. you don't want dependency-cruiser 
@@ -679,27 +685,45 @@ to follow external dependencies, in stead of specifying the "node_modules" path:
     }
 ```
 
-### `exclude`: exclude modules from being cruised
-> command line option equivalent: `--exclude`
+### `exclude`: exclude dependencies from being cruised
+> command line option equivalent: `--exclude` (string values passed to 'path' only)
 
 If you don't want to see certain modules in your report (or not have them
 validated), you can exclude them by passing a regular expression to the
 `exclude`. E.g. to exclude `node_modules` from being scanned altogether:
 
 ```json
-"options": {
-    "exclude": "node_modules"
-}
+   "options": {
+        "exclude": {
+            "path": "node_modules"
+        }
+    }
 ```
 
 Because it's regular expressions, you can do more interesting stuff here as well. To exclude
 all modules with a file path starting with coverage, test or node_modules, you could do this:
 
-```sh
-"options": {
-    "exclude": "^(coverage|test|node_modules)"
-}
+```json
+   "options": {
+        "exclude": {
+            "path": "^(coverage|test|node_modules)"
+        }
+    }
 ```
+
+#### Other 'exclude' attributes
+It's also possible to exclude dependencies on other properties than the (resolved) paths
+at either end of them. To exclude all dependencies that result of an (ecmascript)
+dynamic import from being included in a cruise, you can use the `dynamic` attibute:
+
+```json
+    "options": {
+        "exclude": {
+            "dynamic": true
+        }
+    }
+```
+> Other attributes might come in future releases
 
 ### `includeOnly`: only include modules satisfying a pattern
 > command line option equivalent: `--include-only`

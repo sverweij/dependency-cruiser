@@ -179,8 +179,15 @@ module.exports = {
             ]
         }
 
-        /* pattern specifying which files to exclude (regular expression) */
-        // , exclude : ''
+        /* conditions specifying which dependencies to exclude 
+           - path: a regular expression to match
+           - dynamic: a boolean indicating whether to ignore dynamic (true) or static (false) dependencies.
+                    leave out if you want to exclude neither (recommended!)
+        */
+        // , exclude : {
+        //   path: ''
+        //   , dynamic: true
+        // }
 
         /* pattern specifying which files to include (regular expression) 
            dependency-cruiser will skip everything not matching this pattern

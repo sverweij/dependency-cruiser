@@ -1,0 +1,51 @@
+{
+  "modules": [
+    {
+      "source": "test/extract/fixtures/exclude/path/es/src/circular.js",
+      "dependencies": [
+        {
+          "resolved": "test/extract/fixtures/exclude/path/es/src/index.js",
+          "coreModule": false,
+          "followable": true,
+          "couldNotResolve": false,
+          "dependencyTypes": [
+            "local"
+          ],
+          "module": "./index",
+          "moduleSystem": "es6",
+          "dynamic": false,
+          "matchesDoNotFollow": false,
+          "valid": true
+        }
+      ],
+      "valid": true
+    },
+    {
+      "source": "test/extract/fixtures/exclude/path/es/src/index.js",
+      "dependencies": [],
+      "valid": true
+    }
+  ],
+  "summary": {
+    "violations": [],
+    "error": 0,
+    "warn": 0,
+    "info": 0,
+    "totalCruised": 2,
+    "optionsUsed": {
+      "combinedDependencies": false,
+      "exclude": {
+        "path": "dynamic-to-circular"
+      },
+      "externalModuleResolutionStrategy": "node_modules",
+      "moduleSystems": [
+        "amd",
+        "cjs",
+        "es6"
+      ],
+      "preserveSymlinks": false,
+      "tsPreCompilationDeps": false,
+      "args": "./test/extract/fixtures/exclude/path/es/src"
+    }
+  }
+}
