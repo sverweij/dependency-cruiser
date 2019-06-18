@@ -272,6 +272,18 @@ export interface IDoNotFollowType {
     dependencyTypes?: DependencyType;
 }
 
+export interface IExcludeType {
+    /**
+     * a regular expression for modules to exclude
+     */
+    path?: string;
+    /**
+     * a boolean indicating whether or not to exclude dynamic dependencies
+     * leave out to match both
+     */
+    dynamic?: boolean;
+}
+
 export interface ICruiseOptions {
     /**
      * if true, will attempt to validate with the rules in ruleSet.
@@ -295,7 +307,7 @@ export interface ICruiseOptions {
      * regular expression describing which dependencies the function
      * should not cruise
      */
-    exclude?: string;
+    exclude?: string | IExcludeType;
     /**
      * regular expression describing which dependencies the function
      * should cruise - anything not matching this will be skipped
