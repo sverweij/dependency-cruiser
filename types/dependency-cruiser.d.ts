@@ -79,6 +79,10 @@ export interface IToRestriction {
      */
     circular?: boolean;
     /**
+     * Whether or not to match when the dependency is a dynamic one.
+     */
+    dynamic?: boolean;
+    /**
      * Whether or not to match modules of any of these types (leaving out matches any of them)
      */
     dependencyTypes?: DependencyType[];
@@ -166,7 +170,7 @@ export interface IReachabilityAllowedRuleType {
 export type IForbiddenRuleType = IRegularForbiddenRuleType | IReachabilityForbiddenRuleType;
 
 export interface IRegularForbiddenRuleType {
-    /** 
+    /**
      * A short name for the rule - will appear in reporters to enable customers to
      * quickly identify a violated rule. Try to keep them short, eslint style.
      * E.g. 'not-to-core' for a rule forbidding dependencies on core modules, or
@@ -197,7 +201,7 @@ export interface IRegularForbiddenRuleType {
 }
 
 export interface IReachabilityForbiddenRuleType {
-    /** 
+    /**
      * A short name for the rule - will appear in reporters to enable customers to
      * quickly identify a violated rule. Try to keep them short, eslint style.
      * E.g. 'not-to-core' for a rule forbidding dependencies on core modules, or
