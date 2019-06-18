@@ -98,9 +98,38 @@ export interface IToRestriction {
      * licenses. E.g. to flag everyting non MIT use "MIT" here
      */
     licenseNot?: string;
+
 }
 
-export interface IRule {
+export interface IReachabilityFromRestrictionType {
+    /**
+     * A regular expression an end of a dependency should match to be catched by this rule.
+     */
+    path?: string;
+    /**
+     * A regular expression an end of a dependency should NOT match to be catched by this rule.
+     */
+    pathNot?: string;
+}
+
+export interface IReachabilityToRestrictionType {
+    /**
+     * A regular expression an end of a dependency should match to be catched by this rule.
+     */
+    path?: string;
+    /**
+     * A regular expression an end of a dependency should NOT match to be catched by this rule.
+     */
+    pathNot?: string;
+    /**
+     * Whether or not to match modules that aren't reachable from the from part of the rule.
+     */
+    reachable: boolean;
+}
+
+export type IAllowedRuleType = IRegularAllowedRuleType | IReachabilityAllowedRuleType;
+
+export interface IRegularAllowedRuleType {
     /**
      * You can use this field to document why the rule is there.
      */
@@ -117,8 +146,27 @@ export interface IRule {
     to: IToRestriction;
 }
 
-export interface IForbiddenRuleType {
+export interface IReachabilityAllowedRuleType {
     /**
+     * You can use this field to document why the rule is there.
+     */
+    comment?: string;
+    /**
+     * Criteria the 'from' end of a dependency should match to be caught by this rule.
+     * Leave it empty if you want any module to be matched.
+     */
+    from: IReachabilityFromRestrictionType;
+    /**
+     * Criteria the 'to' end of a dependency should match to be caught by this rule.
+     * Leave it empty if you want any module to be matched.
+     */
+    to: IReachabilityToRestrictionType;
+}
+
+export type IForbiddenRuleType = IRegularForbiddenRuleType | IReachabilityForbiddenRuleType;
+
+export interface IRegularForbiddenRuleType {
+    /** 
      * A short name for the rule - will appear in reporters to enable customers to
      * quickly identify a violated rule. Try to keep them short, eslint style.
      * E.g. 'not-to-core' for a rule forbidding dependencies on core modules, or
@@ -148,6 +196,37 @@ export interface IForbiddenRuleType {
     to: IToRestriction;
 }
 
+export interface IReachabilityForbiddenRuleType {
+    /** 
+     * A short name for the rule - will appear in reporters to enable customers to
+     * quickly identify a violated rule. Try to keep them short, eslint style.
+     * E.g. 'not-to-core' for a rule forbidding dependencies on core modules, or
+     * 'not-to-unresolvable' for one that prevents dependencies on modules that
+     * probably don't exist.
+     */
+    name?: string;
+    /**
+     * How severe a violation of the rule is. The 'error' severity will make some
+     * reporters return a non-zero exit code, so if you want e.g. a build to stop
+     * when there's a rule violated: use that.
+     */
+    severity?: SeverityType;
+    /**
+     * You can use this field to document why the rule is there.
+     */
+    comment?: string;
+    /**
+     * Criteria the 'from' end of a dependency should match to be caught by this
+     * rule. Leave it empty if you want any module to be matched.
+     */
+    from: IReachabilityFromRestrictionType;
+    /**
+     * Criteria the 'to' end of a dependency should match to be caught by this
+     * rule. Leave it empty if you want any module to be matched.
+     */
+    to: IReachabilityToRestrictionType;
+}
+
 export interface IRuleSetType {
     /**
      * A (node require resolvable) file path to a dependency-cruiser config
@@ -166,7 +245,7 @@ export interface IRuleSetType {
      * dependency-cruiser will emit the warning message 'not-in-allowed' for
      * each dependency that does not at least one of them.
      */
-    allowed?: IRule[];
+    allowed?: IAllowedRuleType[];
     /**
      * Severity to use when a dependency is not in the 'allowed' set of rules.
      * Defaults to 'warn'
