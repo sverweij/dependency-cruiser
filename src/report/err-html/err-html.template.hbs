@@ -25,13 +25,11 @@
             h1,h2,h3{
                 line-height:1.2
             }
-            th {
-                text-align: left
-            }
             table {
                 border-collapse: collapse;
             }
             th, td {
+                text-align: left;
                 border: 4px solid transparent;
             }
             tbody tr:nth-child(odd){
@@ -52,7 +50,11 @@
             svg{
                 fill:currentColor
             }
-            .p__svg--inline{vertical-align:top;width:1.2em;height:1.2em}
+            .p__svg--inline{
+                vertical-align: top;
+                width: 1.2em;
+                height: 1.2em
+            }
         </style>
     </head>
     <body>
@@ -65,7 +67,6 @@
             <div style="float:left;padding-right:20px">
                 <strong>{{summary.totalDependenciesCruised}}</strong> dependencies
             </div>
-            
             <div style="float:left;padding-right:20px">
                 <strong>{{summary.error}}</strong> errors
             </div>
@@ -75,8 +76,8 @@
             <div style="float:left;padding-right:20px">
                 <strong>{{summary.info}}</strong> informational
             </div>
+            &nbsp;
         </p>
-        <p>.</p>
         {{#if summary.violations}}
         <table>
             <tbody>
@@ -116,9 +117,6 @@
                 </tr>
                 {{/each}}
             </tbody>
-            <tfoot>
-
-            </tfoot>
         </table>
         {{else}}
         <p>No violations found. Get gummy bears to celebrate.</p>
