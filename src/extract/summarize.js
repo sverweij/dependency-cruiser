@@ -83,7 +83,8 @@ module.exports = (pModules) => {
         },
         extractMetaData(lViolations),
         {
-            totalCruised: pModules.length
+            totalCruised: pModules.length,
+            totalDependenciesCruised: pModules.reduce((pAll, pCurrent) => pAll + pCurrent.dependencies.length, 0)
         }
     );
 };

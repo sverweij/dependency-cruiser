@@ -80,6 +80,7 @@
             "combinedDependencies": false
         },
         "totalCruised": 4,
+        "totalDependenciesCruised": 3,
         "violations": [],
         "warn": 0
     }

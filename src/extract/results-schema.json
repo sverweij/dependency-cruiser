@@ -33,6 +33,10 @@
                     "type": "number",
                     "description": "the number of modules cruised"
                 },
+                "totalDependenciesCruised": {
+                    "type": "number",
+                    "description": "the number of dependencies cruised"
+                },
                 "ruleSetUsed": {
                     "type":"object",
                     "additionalProperties": false,

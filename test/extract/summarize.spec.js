@@ -14,6 +14,7 @@ describe('extract/summarize - summarize extraction', () => {
             info: 0,
             warn: 0,
             error: 0,
+            totalDependenciesCruised: 0,
             totalCruised: 0
         });
     });
@@ -32,6 +33,7 @@ describe('extract/summarize - summarize extraction', () => {
             info: 0,
             warn: 0,
             error: 0,
+            totalDependenciesCruised: 0,
             totalCruised: 1
         });
     });
@@ -61,6 +63,7 @@ describe('extract/summarize - summarize extraction', () => {
             info: 0,
             warn: 1,
             error: 0,
+            totalDependenciesCruised: 0,
             totalCruised: 1
         });
     });
@@ -103,6 +106,7 @@ describe('extract/summarize - summarize extraction', () => {
             info: 0,
             warn: 0,
             error: 0,
+            totalDependenciesCruised: 1,
             totalCruised: 2
         });
     });
@@ -168,6 +172,7 @@ describe('extract/summarize - summarize extraction', () => {
             info: 1,
             warn: 0,
             error: 1,
+            totalDependenciesCruised: 1,
             totalCruised: 2
         });
     });

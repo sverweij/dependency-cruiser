@@ -113,6 +113,7 @@
     "warn": 1,
     "info": 2,
     "totalCruised": 3,
+    "totalDependenciesCruised": 3,
     "optionsUsed": {
       "args": "src",
       "combinedDependencies": false,
