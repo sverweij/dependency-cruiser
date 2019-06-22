@@ -348,7 +348,7 @@
                 },
                 "reachable": {
                     "type": "boolean",
-                    "description": "Whether or not to match modules that aren't reachable from the from part of the rule. NOTE & TODO: should be separate rule type hat has only path and pathNot in the to part"
+                    "description": "Whether or not to match modules that aren't reachable from the from part of the rule."
                 }
             }
         },
