@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <title>dependency-cruiser - results</title>
+        <style type="text/css" media="screen">
+            body{
+                font-family:sans-serif;
+                margin:0 auto;
+                max-width:90%;
+                line-height:1.6;
+                font-size:14px;
+                color:#444;
+                padding:0 10px;
+                background-color:#fff;
+            }
+            footer{
+                color: gray;
+                margin-top: 1.4em;
+                border-top: solid 1px currentColor
+            }
+            a {
+                text-decoration: none
+            }
+            h1,h2,h3{
+                line-height:1.2
+            }
+            table {
+                border-collapse: collapse;
+            }
+            th, td {
+                text-align: left;
+                border: 4px solid transparent;
+            }
+            tbody tr:nth-child(odd){
+                background-color: rgba(128,128,128,0.2);
+            }
+            td.error {
+                color: red;
+            }
+            td.warn {
+                color: orange;
+            }
+            td.info {
+                color: blue;
+            }
+            td.nowrap {
+                white-space: nowrap
+            }
+            svg{
+                fill:currentColor
+            }
+            .p__svg--inline{
+                vertical-align: top;
+                width: 1.2em;
+                height: 1.2em
+            }
+        </style>
+    </head>
+    <body>
+        <h1>Forbidden dependency check - results</h1>
+        <h2><svg class="p__svg--inline" viewBox="0 0 14 16" version="1.1" aria-hidden="true"><path fill-rule="evenodd" d="M11.5 8L8.8 5.4 6.6 8.5 5.5 1.6 2.38 8H0v2h3.6l.9-1.8.9 5.4L9 8.5l1.6 1.5H14V8h-2.5z"></path></svg> Summary</h2>
+        <p>
+            <div style="float:left;padding-right:20px">
+                <strong>{{summary.totalCruised}}</strong> modules
+            </div>
+            <div style="float:left;padding-right:20px">
+                <strong>{{summary.totalDependenciesCruised}}</strong> dependencies
+            </div>
+            <div style="float:left;padding-right:20px">
+                <strong>{{summary.error}}</strong> errors
+            </div>
+            <div style="float:left;padding-right:20px">
+                <strong>{{summary.warn}}</strong> warnings
+            </div>
+            <div style="float:left;padding-right:20px">
+                <strong>{{summary.info}}</strong> informational
+            </div>
+            &nbsp;
+        </p>
+        {{#if summary.violations}}
+        <table>
+            <tbody>
+                <thead>
+                    <tr>
+                        <th>severity</th>
+                        <th>rule</th>
+                        <th>violation count</th>
+                    </tr>
+                </thead>
+                {{#each summary.agggregateViolations}}
+                <tr>
+                    <td class="{{severity}}">{{severity}}</td>
+                    <td class="nowrap">{{name}}</td>
+                    <td><strong>{{count}}</strong></td>
+                </tr>
+                {{/each}}
+            </tbody>
+        </table>
+        <h2><svg class="p__svg--inline" viewBox="0 0 12 16" version="1.1" aria-hidden="true"><path fill-rule="evenodd" d="M5.05.31c.81 2.17.41 3.38-.52 4.31C3.55 5.67 1.98 6.45.9 7.98c-1.45 2.05-1.7 6.53 3.53 7.7-2.2-1.16-2.67-4.52-.3-6.61-.61 2.03.53 3.33 1.94 2.86 1.39-.47 2.3.53 2.27 1.67-.02.78-.31 1.44-1.13 1.81 3.42-.59 4.78-3.42 4.78-5.56 0-2.84-2.53-3.22-1.25-5.61-1.52.13-2.03 1.13-1.89 2.75.09 1.08-1.02 1.8-1.86 1.33-.67-.41-.66-1.19-.06-1.78C8.18 5.31 8.68 2.45 5.05.32L5.03.3l.02.01z"></path></svg> All violations</h2>
+        <table>
+            <thead>
+                <tr>
+                    <th>severity</th>
+                    <th>rule</th>
+                    <th>from</th>
+                    <th>to</th>
+                </tr>
+            </thead>
+            <tbody>
+                {{#each summary.violations}}
+                <tr>
+                    <td class="{{rule.severity}}">{{rule.severity}}</td>
+                    <td class="nowrap">{{rule.name}}</td>
+                    <td><a href="{{../summary.optionsUsed.prefix}}{{from}}">{{from}}</a></td>
+                    <td>{{to}}</td>
+                </tr>
+                {{/each}}
+            </tbody>
+        </table>
+        {{else}}
+        <p>No violations found. Get gummy bears to celebrate.</p>
+        {{/if}}
+        <footer>
+            <p><a href="https://github.com/sverweij/dependency-cruiser">{{summary.depcruiseVersion}}</a> / {{summary.runDate}}</p>
+        </footer>
+    </body>
+</html>

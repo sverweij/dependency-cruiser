@@ -25,7 +25,9 @@ describe("report/err", () => {
         expect(lResult).to.contain(
             'error no-leesplank: aap → noot\n'
         );
-        expect(lResult).to.contain('2 dependency violations (2 errors, 0 warnings)');
+        expect(lResult).to.contain(
+            '2 dependency violations (2 errors, 0 warnings). 33 modules, 333 dependencies cruised.'
+        );
     });
     it("renders a bunch of warnings", () => {
         expect(render(warndeps)).to.contain('1 dependency violations (0 errors, 1 warnings)');
@@ -34,7 +36,9 @@ describe("report/err", () => {
         const lResult = render(orphanerrs);
 
         expect(lResult).to.contain('error no-orphans: remi.js\n');
-        expect(lResult).to.contain('1 dependency violations (1 errors, 0 warnings)');
+        expect(lResult).to.contain(
+            '1 dependency violations (1 errors, 0 warnings). 1 modules, 0 dependencies cruised.'
+        );
     });
     it("renders addtional information", () => {
         const lResult = render(erradds);

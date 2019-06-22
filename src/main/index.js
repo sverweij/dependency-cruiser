@@ -6,6 +6,7 @@ const reportDot               = require("../report/dot/moduleLevel")();
 const reportDDot              = require("../report/dot/folderLevel");
 const reportCsv               = require("../report/csv");
 const reportErr               = require("../report/err");
+const reportErrHtml           = require("../report/err-html");
 const reportTeamCity          = require("../report/teamcity");
 const normalizeFilesAndDirs   = require("./filesAndDirs/normalize");
 const validateRuleSet         = require("./ruleSet/validate");
@@ -22,6 +23,7 @@ const TYPE2REPORTER      = {
     "ddot"     : reportDDot,
     "csv"      : reportCsv,
     "err"      : reportErr,
+    "err-html" : reportErrHtml,
     "teamcity" : reportTeamCity
 };
 
