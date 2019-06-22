@@ -24,11 +24,11 @@ function sumMeta(pMeta) {
     return pMeta.error + pMeta.warn + pMeta.info;
 }
 
-function formatSummary(pMeta) {
+function formatSummary(pSummary) {
     let lMessage =
-        `\n${figures.cross} ${sumMeta(pMeta)} dependency violations (${formatMeta(pMeta)}). ${pMeta.totalCruised} modules cruised.\n\n`;
+        `\n${figures.cross} ${sumMeta(pSummary)} dependency violations (${formatMeta(pSummary)}). ${pSummary.totalCruised} modules, ${pSummary.totalDependenciesCruised} dependencies cruised.\n\n`;
 
-    return pMeta.error > 0 ? chalk.red(lMessage) : lMessage;
+    return pSummary.error > 0 ? chalk.red(lMessage) : lMessage;
 }
 
 /**
@@ -46,7 +46,7 @@ module.exports = (pResults) => {
         return `\n${chalk.green(figures.tick)} no dependency violations found (${pResults.summary.totalCruised} modules cruised)\n\n`;
     }
 
-    return pResults.summary.violations.reduce(
+    return pResults.summary.violations.reverse().reduce(
         (pAll, pThis) => `${pAll}  ${formatError(pThis)}\n`,
         "\n"
     ).concat(

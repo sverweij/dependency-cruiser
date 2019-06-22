@@ -28,6 +28,7 @@
         "warn": 0,
         "info": 0,
         "totalCruised": 1,
+        "totalDependenciesCruised": 0,
         "optionsUsed": {
             "rulesFile": ".dependency-cruiser-custom.json",
             "outputTo": "-",
