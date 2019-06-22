@@ -13,7 +13,15 @@ function mangle(pSummary) {
         {
             depcruiseVersion: `dependency-cruiser@${version}`,
             runDate: (new Date()).toISOString(),
-            violations: pSummary.violations
+            violations: pSummary.violations.map(
+                pViolation => Object.assign(
+                    {},
+                    pViolation,
+                    {
+                        to: pViolation.from === pViolation.to ? "" : pViolation.to
+                    }
+                )
+            )
         }
     );
 }
