@@ -66,6 +66,7 @@
             "combinedDependencies": false
         },
         "totalCruised": 4,
+        "totalDependenciesCruised": 2,
         "violations": [],
         "warn": 0
     }

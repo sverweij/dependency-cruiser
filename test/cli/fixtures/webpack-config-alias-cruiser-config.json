@@ -58,6 +58,7 @@
         "warn": 0,
         "info": 0,
         "totalCruised": 3,
+        "totalDependenciesCruised": 2,
         "ruleSetUsed": {
             "forbidden": []
         },

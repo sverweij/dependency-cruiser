@@ -293,6 +293,7 @@
         "warn": 0,
         "info": 0,
         "totalCruised": 11,
+        "totalDependenciesCruised": 14,
         "optionsUsed": {
             "args": "test/cli/fixtures/cjs/root_one.js",
             "outputTo": "test/cli/output/cjs.file.json",

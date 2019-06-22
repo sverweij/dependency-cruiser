@@ -85,14 +85,6 @@
   "summary": {
     "violations": [
       {
-        "from": "src/circular.js",
-        "to": "src/index.js",
-        "rule": {
-          "severity": "info",
-          "name": "no-circular"
-        }
-      },
-      {
         "from": "src/dynamic-to-circular.js",
         "to": "src/circular.js",
         "rule": {
@@ -100,6 +92,15 @@
           "name": "no-dynamic"
         }
       },
+      {
+        "from": "src/circular.js",
+        "to": "src/index.js",
+        "rule": {
+          "severity": "info",
+          "name": "no-circular"
+        }
+      },
+
       {
         "from": "src/index.js",
         "to": "src/dynamic-to-circular.js",
@@ -113,6 +114,7 @@
     "warn": 1,
     "info": 2,
     "totalCruised": 3,
+    "totalDependenciesCruised": 3,
     "optionsUsed": {
       "args": "src",
       "combinedDependencies": false,

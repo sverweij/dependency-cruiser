@@ -343,6 +343,7 @@
         "warn": 0,
         "info": 0,
         "totalCruised": 12,
+        "totalDependenciesCruised": 16,
         "optionsUsed": {
             "args": "test/cli/fixtures/cjs",
             "outputTo": "test/cli/output/cjs.dir.filtered.json",

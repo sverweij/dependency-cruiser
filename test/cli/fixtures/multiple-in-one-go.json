@@ -141,6 +141,7 @@
         "warn": 0,
         "info": 0,
         "totalCruised": 7,
+        "totalDependenciesCruised": 5,
         "optionsUsed": {
             "args": "test/cli/fixtures/cjs/sub test/cli/fixtures/duplicate-subs/sub/more-in-sub.js test/cli/fixtures/unresolvable-in-sub",
             "outputTo": "test/cli/output/multiple-in-one-go.json",
