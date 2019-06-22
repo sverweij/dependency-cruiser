@@ -43,7 +43,7 @@ function formatSummary(pSummary) {
 module.exports = (pResults) => {
 
     if (pResults.summary.violations.length === 0){
-        return `\n${chalk.green(figures.tick)} no dependency violations found (${pResults.summary.totalCruised} modules cruised)\n\n`;
+        return `\n${chalk.green(figures.tick)} no dependency violations found (${pResults.summary.totalCruised} modules, ${pResults.summary.totalDependenciesCruised} dependencies cruised)\n\n`;
     }
 
     return pResults.summary.violations.reverse().reduce(
