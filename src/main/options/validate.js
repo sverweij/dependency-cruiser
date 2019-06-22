@@ -2,7 +2,7 @@ const _get      = require('lodash/get');
 const safeRegex = require('../../utl/safe-regex');
 
 const MODULE_SYSTEM_LIST_RE  = /^((cjs|amd|es6|tsd)(,|$))+$/gi;
-const OUTPUT_TYPES_RE        = /^(html|dot|rcdot|ddot|csv|err|json|teamcity)$/g;
+const OUTPUT_TYPES_RE        = /^(html|dot|rcdot|ddot|csv|err|json|teamcity|err-html)$/g;
 const VALID_DEPTH_RE         = /^[0-9]{1,2}$/g;
 
 function validateSystems(pModuleSystems) {
