@@ -106,6 +106,18 @@ dependency-cruise -x "^node_modules" -T dot src | dot -T svg > dependencygraph.s
 > coloring has become the default for the `dot` reporter, so `dot` and `rcdot`
 > will yield the same results.
 
+#### err-html
+Generates an stand alone html report with:
+- a summary with files & dependencies cruised and the number of errors and warnings found
+- all violated rules, ordered by the number of violations
+- a list of all dependency and module violations, ordered by severity, rule name, from module, to module.
+
+```shell
+dependency-cruise --validate --output-type err-html -f dependency-report.html src test configs
+```
+
+<img width="694" alt="screen shot of an err-html report - the real one is accessible" src="assets/sample-err-html-output.png">
+
 #### html
 Write it to html with a dependency matrix instead:
 ```shell
