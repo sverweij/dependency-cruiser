@@ -4,7 +4,7 @@ const normalizeOptions        = require('../../../src/main/options/normalize');
 const normalizeResolveOptions = require('../../../src/main/resolveOptions/normalize');
 
 describe("main/resolveOptions/normalize", () => {
-    const DEFAULT_NO_OF_RESOLVE_OPTIONS = 7;
+    const DEFAULT_NO_OF_RESOLVE_OPTIONS = 8;
     const TEST_TSCONFIG = path.join(__dirname, "..", "fixtures", "tsconfig.test.json");
     const TSCONFIG_CONTENTS = {};
     const TSCONFIG_CONTENTS_WITH_BASEURL = {options:{baseUrl:""}};
