@@ -26,7 +26,14 @@ function compileResolveOptions(pResolveOptions, pTSConfig){
         // anyway, that works well in most circumstances.
         // Note that if extract/transpile/index gets an unknown extension
         // passed, it'll fall back to the javascript parser
-        extensions: transpileMeta.scannableExtensions
+        extensions: transpileMeta.scannableExtensions,
+        // for typescript projects that import stuff that's only in
+        // node_modules/@types we need:
+        // - the inclusion of .d.ts to the extensions (see above)
+        // - an explicit inclusion of node_modules/@types to the spots
+        //   to look for modules (in addition to "node_modules" which
+        //   is the default for enhanced-resolve)
+        modules: ["node_modules", "node_modules/@types"]
     };
 
     const NON_OVERRIDABLE_RESOLVE_OPTIONS = {

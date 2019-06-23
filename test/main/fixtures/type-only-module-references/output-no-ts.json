@@ -1,0 +1,29 @@
+{
+  "modules": [
+    {
+      "source": "src/use-maybe.ts",
+      "dependencies": [],
+      "valid": true
+    }
+  ],
+  "summary": {
+    "violations": [],
+    "error": 0,
+    "warn": 0,
+    "info": 0,
+    "totalCruised": 1,
+    "totalDependenciesCruised": 0,
+    "optionsUsed": {
+      "combinedDependencies": false,
+      "externalModuleResolutionStrategy": "node_modules",
+      "moduleSystems": [
+        "amd",
+        "cjs",
+        "es6"
+      ],
+      "preserveSymlinks": false,
+      "tsPreCompilationDeps": false,
+      "args": "src"
+    }
+  }
+}
