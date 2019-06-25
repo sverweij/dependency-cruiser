@@ -1,17 +1,21 @@
 const expect                  = require('chai').expect;
-const errHTML                 = require('../../src/report/err-html');
-const everythingFineResult    = require('./fixtures/everything-fine.json');
-const validationMoreThanOnce  = require('./fixtures/violation-more-than-once.json');
+const errHTML                 = require('../../../src/report/err-html');
+const everythingFineResult    = require('../fixtures/everything-fine.json');
+const validationMoreThanOnce  = require('../fixtures/violation-more-than-once.json');
 
 
 describe("report/err-html", () => {
     const lOkeliDokelyKey = 'gummy bears';
 
-    it('lalala everything fine', () => {
+    it('happy day no errors', () => {
         expect(errHTML(everythingFineResult)).to.contain(lOkeliDokelyKey);
     });
 
-    it('lalala everything not fine', () => {
+    it('happy day module only', () => {
+        expect(errHTML(everythingFineResult)).to.contain(lOkeliDokelyKey);
+    });
+
+    it('report with errors', () => {
         const lReport = errHTML(validationMoreThanOnce);
 
         expect(lReport).to.not.contain(lOkeliDokelyKey);
