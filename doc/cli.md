@@ -116,7 +116,7 @@ Generates an stand alone html report with:
 dependency-cruise --validate --output-type err-html -f dependency-report.html src test configs
 ```
 
-<img width="694" alt="screen shot of an err-html report - the real one is accessible" src="assets/sample-err-html-output.png">
+<img width="722" alt="screen shot of an err-html report - the real one is accessible" src="assets/sample-err-html-output.png">
 
 #### html
 Write it to html with a dependency matrix instead:

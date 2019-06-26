@@ -1,6 +1,8 @@
 /* eslint-disable security/detect-object-injection */
-const Handlebars = require("handlebars/runtime");
-const version = require('../../../package.json').version;
+const Handlebars     = require('handlebars/runtime');
+const _get           = require('lodash/get');
+const version        = require('../../../package.json').version;
+const findRuleByName = require('./findRuleByName');
 
 // eslint-disable-next-line import/no-unassigned-import
 require("./err-html.template");
@@ -26,7 +28,7 @@ function mangle(pSummary) {
     );
 }
 
-function aggregateViolations(pViolations) {
+function aggregateViolations(pViolations, pRuleSetUsed) {
     const lAggregateViolationsObject = pViolations.reduce(
         (pAll, pCurrentViolation) => {
             if (pAll[pCurrentViolation.rule.name]) {
@@ -46,7 +48,8 @@ function aggregateViolations(pViolations) {
         pKey => ({
             name: pKey,
             severity:lAggregateViolationsObject[pKey].severity,
-            count: lAggregateViolationsObject[pKey].count
+            count: lAggregateViolationsObject[pKey].count,
+            comment: _get(findRuleByName(pRuleSetUsed, pKey), 'comment', '-')
         })
     ).sort(
         (pFirst, pSecond) => Math.sign(pSecond.count - pFirst.count)
@@ -64,7 +67,9 @@ module.exports = pResults => Handlebars.templates['err-html.template.hbs'](
         summary: Object.assign(
             mangle(pResults.summary),
             {
-                agggregateViolations: aggregateViolations(pResults.summary.violations)
+                agggregateViolations: aggregateViolations(
+                    pResults.summary.violations, pResults.summary.ruleSetUsed
+                )
             }
         )
     }

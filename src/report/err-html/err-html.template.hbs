@@ -85,7 +85,8 @@
                     <tr>
                         <th>severity</th>
                         <th>rule</th>
-                        <th>violation count</th>
+                        <th>#&nbsp;violations</th>
+                        <th>explanation</th>
                     </tr>
                 </thead>
                 {{#each summary.agggregateViolations}}
@@ -93,6 +94,7 @@
                     <td class="{{severity}}">{{severity}}</td>
                     <td class="nowrap">{{name}}</td>
                     <td><strong>{{count}}</strong></td>
+                    <td>{{comment}}</td>
                 </tr>
                 {{/each}}
             </tbody>

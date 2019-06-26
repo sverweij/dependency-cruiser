@@ -4,25 +4,25 @@
     "forbidden": [
         {
             "name": "cli-to-main-only",
-            "comment": "cli should only depend on the public interface in main",
+            "comment": "Code in the cli should only depend on the public interface in main",
             "severity": "error",
             "from": { "path": "(^src/cli)", "pathNot": "^(src/cli/compileConfig/index\\.js)$" },
             "to": { "pathNot": "^src/main|^node_modules|^fs$|^path$|$1|^package.json$" }
         }, {
             "name": "cli-to-main-only-warn",
-            "comment": "cli should only depend on the public interface in main (temp exception)",
+            "comment": "Code in the cli should only depend on the public interface in main (this warn-only rule is a temporary exception for the compileConfig depending on the resolver)",
             "severity": "warn",
             "from": { "path": "^(src/cli/compileConfig/index\\.js)$" },
             "to": { "pathNot": "^src/(cli|main)|^node_modules|^fs$|^path$|$1|^package.json$" }
         }, {
             "name": "bin-to-cli-only",
-            "comment": "bin should only depend on cli",
+            "comment": "Code in bin should only depend on modules in cli",
             "severity": "error",
             "from": { "path": "(^bin/dependency-cruise)" },
             "to": { "pathNot": "^src/cli|^node_modules|^package.json$" }
         }, {
             "name": "restrict-fs-access",
-            "comment": "restrict file access to a few modules only",
+            "comment": "File access is restricted to the cli and a few spots in the extract tree.",
             "severity": "error",
             "from": { "pathNot": "^src/(extract/parse|extract/resolve|extract/gatherInitialSources\\.js|cli)|^test" },
             "to": { "path": "^fs$" }
@@ -33,53 +33,55 @@
             "to": { "path": "^test/[^\\/]+/.+", "pathNot": "utl|$1[^\\.]+\\.json$"}
         }, {
             "name": "prefer-lodash-individuals",
-            "comment": "Flag dependencies that include lodash as a whole (better use individual lodash packages e.g. 'lodash/get')",
+            "comment": "Preferably don't include lodash as a whole, but use individual lodash packages instead e.g. 'lodash/get' - this keeps the download of the package small(er)",
             "severity": "info",
             "from": {},
             "to": { "path": "lodash\\.js"}
         }, {
             "name": "no-dep-on-test",
+            "comment": "Do not depend on spec files - if there's something in a spec that's of use, factor it out into (e.g.) a separate utility/ helper or mock",
             "severity": "error",
             "from": { "path": "^(src|bin)" },
             "to": { "path": "^test|\\.spec\\.js$"}
         }, {
             "name": "no-external-to-here",
-            "comment": "you never know...",
+            "comment": "Apparently something outside of ",
             "severity": "info",
             "from": { "pathNot": "^(src|test|bin)" },
             "to": { "path": "^(src|test)" }
         }, {
             "name": "not-to-dev-dep",
             "severity": "error",
-            "comment": "because an npm i --production will otherwise deliver an unreliably running module",
+            "comment": "In production code do not depend on external ('npm') modules not declared in your package.json's dependencies - otherwise a production only install (i.e. 'npm ci') will break. If this rule triggers on something that's only used in production, adapt the 'from' of the rule in the dependency-cruiser configuration.",
             "from": { "path": "^(bin|src)"},
             "to": { "dependencyTypes": ["npm-dev"] }
         }, {
             "name": "optional-deps-used",
             "severity": "error",
-            "comment": "we don't work with optional dependencies",
+            "comment": "In dependency-cruiser optional dependencies donot make sense - and are hence forbidden.",
             "from": {},
             "to": { "dependencyTypes": ["npm-optional"] }
         }, {
             "name": "peer-deps-used",
-            "comment": "we don't work with peer dependencies",
+            "comment": "In dependency-cruiser peer dependencies donot make sense - and are hence forbidden.",
             "severity": "error",
             "from": {},
             "to": { "dependencyTypes": ["npm-peer"] }
         },{
             "name": "no-unvetted-license",
-            "comment": "Warn in case some dependency uses a license that's not vetted (the licenses might be OK, but your legal department might have 2nd thoughts about them)",
+            "comment": "Warn in case some dependency uses a license that's not vetted (the licenses might be OK, but your legal department might have 2nd thoughts about them) - either use an alternative package, or have a chat with your legal department for a chat",
             "severity": "warn",
             "from": {},
             "to": { "licenseNot": "MIT|ISC" }
         },{
             "name": "not-unreachable-from-cli",
             "severity": "warn",
+            "comment": "Code in the src/ tree which is not reachable from the cli is likely dead wood. Either use it or remove it. If a module is flagged for which it's logical it is not reachable from cli (i.e. a configuration file), add it to the pathNot in the 'to' of this rule.",
             "from": { "path": "^src/cli/index\\.js$" },
             "to": { "path": "^src", "reachable": false }
         },{
             "name": "not-unreachable-from-test",
-            "comment": "everything in src must be reachable from a spec file (poor man's test coverage - this task is better suited for a proper test coverage tool :-)",
+            "comment": "Everything in src must be reachable from a spec file. Please provide a test that covers this (poor man's test coverage - this task is better suited for a proper test coverage tool :-)",
             "severity": "error",
             "from": { "path": "\\.spec\\.js$" },
             "to": { "path": "^src", "reachable": false }
