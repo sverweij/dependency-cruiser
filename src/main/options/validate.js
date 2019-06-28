@@ -33,7 +33,7 @@ function validateOutputType(pOutputType) {
 }
 
 function validateMaxDepth(pDepth) {
-    if (Boolean(pDepth) && !(pDepth.match(VALID_DEPTH_RE))) {
+    if (Boolean(pDepth) && !(pDepth.toString().match(VALID_DEPTH_RE))) {
         throw Error(
             `'${pDepth}' is not a valid depth - use an integer between 0 and 99`
         );
