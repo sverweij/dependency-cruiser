@@ -54,7 +54,7 @@ describe("main/options/validate", () => {
         }
     });
 
-    it("throws when > 99 is passed as maxDepth", () => {
+    it("throws when > 99 is passed as maxDepth (string)", () => {
         try {
             validateOptions({"maxDepth": "101"});
             expect("not to be here").to.equal("still here, though");
@@ -65,7 +65,18 @@ describe("main/options/validate", () => {
         }
     });
 
-    it("throws when < 0 is passed as maxDepth", () => {
+    it("throws when > 99 is passed as maxDepth (number)", () => {
+        try {
+            validateOptions({"maxDepth": 101});
+            expect("not to be here").to.equal("still here, though");
+        } catch (e) {
+            expect(e.toString()).to.deep.equal(
+                "Error: '101' is not a valid depth - use an integer between 0 and 99"
+            );
+        }
+    });
+
+    it("throws when < 0 is passed as maxDepth (string)", () => {
         try {
             validateOptions({"maxDepth": "-1"});
             expect("not to be here").to.equal("still here, though");
@@ -76,9 +87,29 @@ describe("main/options/validate", () => {
         }
     });
 
-    it("passes when a valid depth is passed as maxDepth", () => {
+    it("throws when < 0 is passed as maxDepth (number)", () => {
+        try {
+            validateOptions({"maxDepth": -1});
+            expect("not to be here").to.equal("still here, though");
+        } catch (e) {
+            expect(e.toString()).to.deep.equal(
+                "Error: '-1' is not a valid depth - use an integer between 0 and 99"
+            );
+        }
+    });
+
+    it("passes when a valid depth is passed as maxDepth (string)", () => {
         try {
             validateOptions({"maxDepth": "42"});
+            expect("to be here without throws happening").to.equal("to be here without throws happening");
+        } catch (e) {
+            expect("not to be here").to.equal(`still here, though: ${e}`);
+        }
+    });
+
+    it("passes when a valid depth is passed as maxDepth (number)", () => {
+        try {
+            validateOptions({"maxDepth": 42});
             expect("to be here without throws happening").to.equal("to be here without throws happening");
         } catch (e) {
             expect("not to be here").to.equal(`still here, though: ${e}`);
