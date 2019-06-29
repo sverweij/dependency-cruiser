@@ -43,6 +43,6 @@ describe("report/err", () => {
     it("renders addtional information", () => {
         const lResult = render(erradds);
 
-        expect(lResult).to.contain('\n  aap -> noot -> mies -> aap');
+        expect(lResult).to.contain('aap -> noot -> mies -> aap');
     });
 });
