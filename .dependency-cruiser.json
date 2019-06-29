@@ -45,7 +45,7 @@
             "to": { "path": "^test|\\.spec\\.js$"}
         }, {
             "name": "no-external-to-here",
-            "comment": "Apparently something outside of ",
+            "comment": "Apparently something outside of the src/ test/ and bin/ points to something inside them. That's incredibly odd and might denote a security problem.",
             "severity": "info",
             "from": { "pathNot": "^(src|test|bin)" },
             "to": { "path": "^(src|test)" }

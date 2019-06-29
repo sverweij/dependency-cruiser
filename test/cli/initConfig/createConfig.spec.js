@@ -12,7 +12,7 @@ const RULES_FILE_JS     = ".dependency-cruiser.js";
 
 chai.use(require('chai-json-schema'));
 
-describe("cli/initRules/createConfig", () => {
+describe("cli/initConfig/createConfig", () => {
     const WORKINGDIR = process.cwd();
 
     afterEach("tear down", () => {

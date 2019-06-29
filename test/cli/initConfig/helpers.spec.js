@@ -1,7 +1,7 @@
 const expect         = require('chai').expect;
 const {pnpIsEnabled} = require('../../../src/cli/initConfig/helpers');
 
-describe('src/cli/initConfig/helpers - pnpIsEnabled', (() => {
+describe('cli/initConfig/helpers - pnpIsEnabled', (() => {
     const WORKINGDIR = process.cwd();
 
     afterEach("tear down", () => {
