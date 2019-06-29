@@ -28,6 +28,9 @@ describe("report/err", () => {
         expect(lResult).to.contain(
             '2 dependency violations (2 errors, 0 warnings). 33 modules, 333 dependencies cruised.'
         );
+        expect(lResult).to.not.contain(
+            '    comment to no-leesplank'
+        );
     });
     it("renders a bunch of warnings", () => {
         expect(render(warndeps)).to.contain('1 dependency violations (0 errors, 1 warnings)');
