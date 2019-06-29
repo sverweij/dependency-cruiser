@@ -96,6 +96,10 @@
       {
         "package": "symlink-dir",
         "because": "symlink-dir >= 3 doesn't work on node < 8 - while dependency-cruiser still supports node 6"
+      },
+      {
+        "package": "indent-string",
+        "because": "indent-string >= 4 dropped node 6 support, while dependency-cruiser still supports node 6"
       }
     ]
   },
@@ -111,7 +115,7 @@
     "figures": "3.0.0",
     "glob": "7.1.4",
     "handlebars": "4.1.2",
-    "indent-string": "4.0.0",
+    "indent-string": "3.2.0",
     "inquirer": "6.4.1",
     "lodash": "4.17.11",
     "pnp-webpack-plugin": "1.5.0",
