@@ -79,3 +79,5 @@ function validate(pOptions) {
 }
 
 module.exports = validate;
+
+module.exports.validateOutputType = validateOutputType;

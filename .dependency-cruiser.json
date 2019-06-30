@@ -6,8 +6,8 @@
             "name": "cli-to-main-only",
             "comment": "Code in the cli should only depend on the public interface in main",
             "severity": "error",
-            "from": { "path": "(^src/cli)", "pathNot": "^(src/cli/compileConfig/index\\.js)$" },
-            "to": { "pathNot": "^src/main|^node_modules|^fs$|^path$|$1|^package.json$" }
+            "from": { "path": "(^src/cli/)", "pathNot": "^(src/cli/compileConfig/index\\.js)$" },
+            "to": { "pathNot": "^src/main/|^node_modules|^fs$|^path$|$1|^package.json$" }
         }, {
             "name": "cli-to-main-only-warn",
             "comment": "Code in the cli should only depend on the public interface in main (this warn-only rule is a temporary exception for the compileConfig depending on the resolver)",
@@ -18,7 +18,7 @@
             "name": "bin-to-cli-only",
             "comment": "Code in bin should only depend on modules in cli",
             "severity": "error",
-            "from": { "path": "(^bin/dependency-cruise)" },
+            "from": { "path": "(^bin/)" },
             "to": { "pathNot": "^src/cli|^node_modules|^package.json$" }
         }, {
             "name": "restrict-fs-access",

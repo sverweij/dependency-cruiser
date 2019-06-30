@@ -1,6 +1,5 @@
 #!/usr/bin/env node
 
-
 const program    = require("commander");
 const semver     = require("semver");
 const processCLI = require("../src/cli");
@@ -17,6 +16,7 @@ if (!semver.satisfies(process.versions.node, $package.engines.node)) {
 
 program
     .version($package.version)
+    .description("Validate and visualize dependencies")
     .option("-i, --info", `shows what languages and extensions
                               dependency-cruiser supports`)
     .option("-c, --config [file]", `read rules and options from [file]
