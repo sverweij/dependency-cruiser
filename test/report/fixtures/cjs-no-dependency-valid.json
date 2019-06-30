@@ -330,6 +330,18 @@
       "warn": 0,
       "info": 0,
       "totalCruised": 33,
-      "totalDependenciesCruised": 333
+      "totalDependenciesCruised": 333,
+      "ruleSetUsed": {
+        "forbidden": [{
+          "name": "no-leesplank",
+          "comment": "comment to no-leesplank",
+          "from": {
+            "path": "^aap$"
+          },
+          "to": {
+            "path": "^noot$"
+          }
+        }]
+      }
   }
 }

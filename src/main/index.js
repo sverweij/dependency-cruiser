@@ -5,7 +5,8 @@ const reportJson              = require("../report/json");
 const reportDot               = require("../report/dot/moduleLevel")();
 const reportDDot              = require("../report/dot/folderLevel");
 const reportCsv               = require("../report/csv");
-const reportErr               = require("../report/err");
+const reportErr               = require("../report/err-short");
+const reportErrLong           = require("../report/err-long");
 const reportErrHtml           = require("../report/err-html");
 const reportTeamCity          = require("../report/teamcity");
 const normalizeFilesAndDirs   = require("./filesAndDirs/normalize");
@@ -23,6 +24,7 @@ const TYPE2REPORTER      = {
     "ddot"     : reportDDot,
     "csv"      : reportCsv,
     "err"      : reportErr,
+    "err-long" : reportErrLong,
     "err-html" : reportErrHtml,
     "teamcity" : reportTeamCity
 };

@@ -70,7 +70,8 @@ depcruise "packages/**/src/**/*.js"
 ### `--output-type`: specify the output format
 
 #### err
-For use in build scripts, in combination with `--config` e.g.
+For use in build scripts, in combination with `--config`. It's also 
+the default reporter. Sample use:
 
 ```sh
 dependency-cruise --config my-depcruise-rules.json src
@@ -85,6 +86,17 @@ This will:
 
 See the _depcruise_ target in the [package.json](https://github.com/sverweij/dependency-cruiser/blob/master/package.json#L55)
 for a real world example.
+
+#### err-long
+Similar to `err`, but in addition for each violation it emits the _comment_ 
+that went with the violated rule, so it's easier to put the rule into context
+(and if the comment contains that information: why the rule is there, and
+how to fix it). If you use dependency-cruiser in a lint-staged like setup, this
+might be a useful format, 
+
+```sh
+dependency-cruise --output-type err-long --config my-depcruise-rules.json src
+```
 
 #### dot
 Supplying `dot` as output type will make dependency-cruiser write

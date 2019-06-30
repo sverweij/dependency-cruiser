@@ -53,6 +53,7 @@
     "check": "npm-run-all build lint depcruise test:cover",
     "check:full": "npm-run-all check test:glob test:integration",
     "depcruise": "node ./bin/dependency-cruise --validate -- src bin/dependency-cruise test configs",
+    "depcruise:explain": "node ./bin/dependency-cruise --output-type err-long --validate -- src bin/dependency-cruise test configs",
     "depcruise:graph:dir": "node ./bin/dependency-cruise --validate --include-only '(^src|^[^/]+(js|json)$)' --output-type ddot bin src | dot -T png > tmp_deps.png",
     "depcruise:graph:doc": "npm-run-all --parallel depcruise:graph:doc:*",
     "depcruise:graph:doc:html": "node ./bin/dependency-cruise --validate --include-only '(^src|^[^/]+(js|json)$)' --output-type dot bin src | dot -T svg -Gsplines=ortho | cat docs/assets/depcruise-graph-head.snippet.html - docs/assets/depcruise-graph-foot.snippet.html > docs/dependency-cruiser-dependency-graph.html",
@@ -94,9 +95,18 @@
   "upem": {
     "donotup": [
       {
+        "package": "indent-string",
+        "because": "indent-string >= 4 dropped node 6 support, while dependency-cruiser still supports node 6"
+      },
+      {
         "package": "symlink-dir",
         "because": "symlink-dir >= 3 doesn't work on node < 8 - while dependency-cruiser still supports node 6"
+      },
+      {
+        "package": "wrap-ansi",
+        "because": "wrap-ansi >= 6 dropped node 6 support, while dependency-cruiser still supports node 6"
       }
+
     ]
   },
   "dependencies": {
@@ -111,6 +121,7 @@
     "figures": "3.0.0",
     "glob": "7.1.4",
     "handlebars": "4.1.2",
+    "indent-string": "3.2.0",
     "inquirer": "6.4.1",
     "lodash": "4.17.11",
     "pnp-webpack-plugin": "1.5.0",
@@ -120,7 +131,8 @@
     "semver-try-require": "2.0.6",
     "strip-json-comments": "3.0.1",
     "teamcity-service-messages": "0.1.10",
-    "tsconfig-paths-webpack-plugin": "3.2.0"
+    "tsconfig-paths-webpack-plugin": "3.2.0",
+    "wrap-ansi": "5.1.0"
   },
   "devDependencies": {
     "chai": "4.2.0",

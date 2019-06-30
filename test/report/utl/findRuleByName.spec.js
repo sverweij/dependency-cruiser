@@ -1,8 +1,8 @@
 /* eslint-disable no-unused-expressions */
 const expect         = require('chai').expect;
-const findRuleByName = require('../../../src/report/err-html/findRuleByName');
+const findRuleByName = require('../../../src/report/utl/findRuleByName');
 
-describe("report/err-html/findRuleByName", () => {
+describe("report/utl/findRuleByName", () => {
     const lRuleSet = {forbidden:[{name: 'a-rule', severity: 'warn', from: {}, to:{}}]};
 
     it('returns undefined for null rule set/ null rule name', () => {

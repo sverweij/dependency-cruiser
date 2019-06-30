@@ -1,6 +1,6 @@
 const expect     = require('chai').expect;
 const chalk      = require('chalk');
-const render     = require('../../src/report/err');
+const render     = require('../../src/report/err-long');
 const okdeps     = require('./fixtures/everything-fine.json');
 const deps       = require('./fixtures/cjs-no-dependency-valid.json');
 const warndeps   = require('./fixtures/err-only-warnings.json');
@@ -28,7 +28,7 @@ describe("report/err", () => {
         expect(lResult).to.contain(
             '2 dependency violations (2 errors, 0 warnings). 33 modules, 333 dependencies cruised.'
         );
-        expect(lResult).to.not.contain(
+        expect(lResult).to.contain(
             '    comment to no-leesplank'
         );
     });
@@ -43,9 +43,9 @@ describe("report/err", () => {
             '1 dependency violations (1 errors, 0 warnings). 1 modules, 0 dependencies cruised.'
         );
     });
-    it("renders addtional information", () => {
+    it("renders a '-' for comment if it couldn't find the rule", () => {
         const lResult = render(erradds);
 
-        expect(lResult).to.contain('aap -> noot -> mies -> aap');
+        expect(lResult).to.contain('    -');
     });
 });

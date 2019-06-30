@@ -5,7 +5,7 @@
             {
                 "from": "aap",
                 "to": "noot",
-                "additionalInformation": "aap -> noot -> mies -> aap",
+                "comment": "aap -> noot -> mies -> aap",
                 "rule": {
                     "name": "no-leesplank",
                     "severity": "warn"

@@ -1,5 +1,5 @@
 const Handlebars                       = require("handlebars/runtime");
-const dependencyToIncidenceTransformer = require("../dependencyToIncidenceTransformer");
+const dependencyToIncidenceTransformer = require("../utl/dependencyToIncidenceTransformer");
 
 // eslint-disable-next-line import/no-unassigned-import
 require("./html.template");

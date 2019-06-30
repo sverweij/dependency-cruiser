@@ -2,7 +2,7 @@
 const Handlebars     = require('handlebars/runtime');
 const _get           = require('lodash/get');
 const version        = require('../../../package.json').version;
-const findRuleByName = require('./findRuleByName');
+const findRuleByName = require('../utl/findRuleByName');
 
 // eslint-disable-next-line import/no-unassigned-import
 require("./err-html.template");
