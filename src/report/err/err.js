@@ -3,7 +3,7 @@ const figures        = require('figures');
 const indentString   = require('indent-string');
 const wrapAnsi       = require('wrap-ansi');
 const _get           = require('lodash/get');
-const findRuleByName = require('./utl/findRuleByName');
+const findRuleByName = require('../utl/findRuleByName');
 
 const SEVERITY2CHALK = {
     'error' : chalk.red,

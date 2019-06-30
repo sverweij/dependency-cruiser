@@ -1,14 +1,8 @@
+const Ajv                     = require('ajv');
 const extract                 = require("../extract");
+const ruleSchema              = require('../extract/results-schema.json');
 const meta                    = require("../extract/transpile/meta");
-const reportHtml              = require("../report/html");
-const reportJson              = require("../report/json");
-const reportDot               = require("../report/dot/moduleLevel");
-const reportDDot              = require("../report/dot/folderLevel");
-const reportCsv               = require("../report/csv");
-const reportErr               = require("../report/err-short");
-const reportErrLong           = require("../report/err-long");
-const reportErrHtml           = require("../report/err-html");
-const reportTeamCity          = require("../report/teamcity");
+const report                  = require("../report");
 const normalizeFilesAndDirs   = require("./filesAndDirs/normalize");
 const validateRuleSet         = require("./ruleSet/validate");
 const normalizeRuleSet        = require("./ruleSet/normalize");
@@ -16,18 +10,18 @@ const validateOptions         = require("./options/validate");
 const normalizeOptions        = require("./options/normalize");
 const normalizeResolveOptions = require("./resolveOptions/normalize");
 
-const TYPE2REPORTER      = {
-    "json"     : reportJson,
-    "html"     : reportHtml,
-    "dot"      : reportDot,
-    "rcdot"    : reportDot,
-    "ddot"     : reportDDot,
-    "csv"      : reportCsv,
-    "err"      : reportErr,
-    "err-long" : reportErrLong,
-    "err-html" : reportErrHtml,
-    "teamcity" : reportTeamCity
-};
+function format(pResult, pOutputType) {
+    const ajv = new Ajv();
+
+    validateOptions.validateOutputType(pOutputType);
+
+    if (!ajv.validate(ruleSchema, pResult)) {
+        throw new Error(
+            `The supplied dependency-cruiser result is not valid: ${ajv.errorsText()}.\n`
+        );
+    }
+    return report.getReporter(pOutputType)(pResult);
+}
 
 function wrapInDependencyList(pExtractResult, pReporterOutput, pOutputType) {
     let lRetval = pExtractResult;
@@ -42,11 +36,6 @@ function wrapInDependencyList(pExtractResult, pReporterOutput, pOutputType) {
         );
     }
     return lRetval;
-}
-
-function getReporter(pOutputType) {
-    // eslint-disable-next-line security/detect-object-injection
-    return TYPE2REPORTER[pOutputType] || ((x) => x);
 }
 
 /**
@@ -129,7 +118,7 @@ function cruise (pFileDirArray, pOptions, pResolveOptions, pTSConfig) {
         normalizeResolveOptions(pResolveOptions, pOptions, pTSConfig),
         pTSConfig
     );
-    const lReporterOutput = getReporter(pOptions.outputType)(
+    const lReporterOutput = report.getReporter(pOptions.outputType)(
         lExtractionResult
     );
 
@@ -138,6 +127,7 @@ function cruise (pFileDirArray, pOptions, pResolveOptions, pTSConfig) {
 
 module.exports = {
     cruise,
+    format,
     allExtensions: meta.allExtensions,
     getAvailableTranspilers: meta.getAvailableTranspilers
 };
