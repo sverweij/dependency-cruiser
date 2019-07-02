@@ -22,6 +22,9 @@
             a {
                 text-decoration: none
             }
+            a.noiseless {
+                color: currentColor
+            }
             h1,h2,h3{
                 line-height:1.2
             }
@@ -92,7 +95,7 @@
                 {{#each summary.agggregateViolations}}
                 <tr>
                     <td class="{{severity}}">{{severity}}</td>
-                    <td class="nowrap">{{name}}</td>
+                    <td class="nowrap"><a id="{{name}}" class="noiseless">{{name}}</a></td>
                     <td><strong>{{count}}</strong></td>
                     <td>{{comment}}</td>
                 </tr>
@@ -113,7 +116,7 @@
                 {{#each summary.violations}}
                 <tr>
                     <td class="{{rule.severity}}">{{rule.severity}}</td>
-                    <td class="nowrap">{{rule.name}}</td>
+                    <td class="nowrap"><a href="#{{rule.name}}" class="noiseless">{{rule.name}}</a></td>
                     <td><a href="{{../summary.optionsUsed.prefix}}{{from}}">{{from}}</a></td>
                     <td>{{to}}</td>
                 </tr>
