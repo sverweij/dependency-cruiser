@@ -60,6 +60,7 @@
     "depcruise:graph:doc:png": "./bin/dependency-cruise --validate --do-not-follow report --include-only '(^src|^[^/]+(js|json)$)' --output-type dot bin/dependency-cruise | dot -Gdpi=192 -Gsplines=ortho -T png | pngquant - > doc/real-world-samples/dependency-cruiser-without-node_modules.png",
     "depcruise:graph:osage": "node ./bin/dependency-cruise --validate --include-only '(^src|^[^/]+(js|json)$)' --output-type dot bin src | osage -Gpack=16 -GpackMode=array2 -T svg > tmp_deps.svg",
     "depcruise:graph:fdp": "node ./bin/dependency-cruise --validate --include-only '^src' --output-type dot bin src | fdp -GK=0.1 -Gsplines=ortho -T svg > tmp_deps.svg",
+    "depcruise:report": "node ./bin/dependency-cruise --output-type err-html --validate -- src bin/dependency-cruise test configs > dependency-violations.html",
     "lint": "eslint bin/dependency-cruise src test configs",
     "lint:types": "tslint types/dependency-cruiser.d.ts",
     "lint:fix": "eslint --fix bin/dependency-cruise src test configs",
@@ -164,7 +165,7 @@
   "homepage": "https://github.com/sverweij/dependency-cruiser",
   "nyc": {
     "statements": 99.9,
-    "branches": 99.5,
+    "branches": 99.8,
     "functions": 100,
     "lines": 99.9,
     "exclude": [
