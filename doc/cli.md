@@ -121,7 +121,7 @@ dependency-cruise -x "^node_modules" -T dot src | dot -T svg > dependencygraph.s
 #### err-html
 Generates an stand alone html report with:
 - a summary with files & dependencies cruised and the number of errors and warnings found
-- all violated rules, ordered by the number of violations
+- all rules, ordered by the number of violations (unviolated ones are hidden by default)
 - a list of all dependency and module violations, ordered by severity, rule name, from module, to module.
 
 ```shell
