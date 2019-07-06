@@ -1,9 +1,11 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
     <head>
-        <meta charset="utf-8">
         <title>dependency-cruiser - results</title>
-        <style type="text/css" media="screen">
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        
+        <style type="text/css">
             body{
                 font-family:sans-serif;
                 margin:0 auto;
@@ -30,22 +32,26 @@
             }
             table {
                 border-collapse: collapse;
+                width: 100%;
             }
             th, td {
                 text-align: left;
-                border: 4px solid transparent;
+                padding: 4px;
             }
             tbody tr:nth-child(odd){
                 background-color: rgba(128,128,128,0.2);
             }
-            td.error {
+            .error {
                 color: red;
             }
-            td.warn {
+            .warn {
                 color: orange;
             }
-            td.info {
+            .info {
                 color: blue;
+            }
+            .ok {
+                color: limegreen;
             }
             td.nowrap {
                 white-space: nowrap
@@ -53,14 +59,58 @@
             svg{
                 fill:currentColor
             }
+            #show-unviolated {
+                display: block
+                
+            }
+            #hide-unviolated {
+                display: none
+            }
+            #show-all-the-rules:target #show-unviolated{
+                display: none
+            }
+            #show-all-the-rules:target #hide-unviolated{
+                display: block
+            }
+            tr.unviolated {
+                display: none
+            }
+            #show-all-the-rules:target tr.unviolated {
+                display: table-row;
+                color: gray;
+            }
             .p__svg--inline{
                 vertical-align: top;
                 width: 1.2em;
                 height: 1.2em
             }
+            .controls {
+                background-color: #fff;
+                vertical-align: bottom;
+                text-align: center
+            }
+            .controls:hover {
+                opacity: 1;
+            }
+            .controls a {
+                text-decoration: none;
+                color: gray;
+            }
+            .controls a:hover {
+                text-decoration: underline;
+                color: blue;
+            }
+        </style>
+        <style type="text/css" media="print">
+            th, td {
+                border: 1px solid #444;
+            }
+            .controls {
+                display: none
+            }
         </style>
     </head>
-    <body>
+    <body id="show-all-the-rules">
         <h1>Forbidden dependency check - results</h1>
         <h2><svg class="p__svg--inline" viewBox="0 0 14 16" version="1.1" aria-hidden="true"><path fill-rule="evenodd" d="M11.5 8L8.8 5.4 6.6 8.5 5.5 1.6 2.38 8H0v2h3.6l.9-1.8.9 5.4L9 8.5l1.6 1.5H14V8h-2.5z"></path></svg> Summary</h2>
         <p>
@@ -86,6 +136,7 @@
             <tbody>
                 <thead>
                     <tr>
+                        <th></th>
                         <th>severity</th>
                         <th>rule</th>
                         <th>#&nbsp;violations</th>
@@ -93,15 +144,27 @@
                     </tr>
                 </thead>
                 {{#each summary.agggregateViolations}}
-                <tr>
-                    <td class="{{severity}}">{{severity}}</td>
+                <tr {{#if unviolated}}class="unviolated"{{/if}}>
+                    <td>{{#if unviolated}}<span class="ok">&check;</span>{{else}}<span class="{{severity}}">&cross;</span>{{/if}}</td>
+                    <td class={{#if unviolated}}"{{ok}}"{{else}}"{{severity}}"{{/if}}>{{severity}}</td>
                     <td class="nowrap"><a id="{{name}}" class="noiseless">{{name}}</a></td>
                     <td><strong>{{count}}</strong></td>
                     <td>{{comment}}</td>
                 </tr>
                 {{/each}}
+                <tr>
+                    <td colspan="5" class="controls">
+                        <div id="show-unviolated">
+                            &downarrow; <a href="#show-all-the-rules">also show unviolated rules</a>
+                        </div>
+                        <div id="hide-unviolated">
+                            &uparrow; <a href="">hide unviolated rules</a>
+                        </div>
+                    </td>
+                </tr>
             </tbody>
         </table>
+
         <h2><svg class="p__svg--inline" viewBox="0 0 12 16" version="1.1" aria-hidden="true"><path fill-rule="evenodd" d="M5.05.31c.81 2.17.41 3.38-.52 4.31C3.55 5.67 1.98 6.45.9 7.98c-1.45 2.05-1.7 6.53 3.53 7.7-2.2-1.16-2.67-4.52-.3-6.61-.61 2.03.53 3.33 1.94 2.86 1.39-.47 2.3.53 2.27 1.67-.02.78-.31 1.44-1.13 1.81 3.42-.59 4.78-3.42 4.78-5.56 0-2.84-2.53-3.22-1.25-5.61-1.52.13-2.03 1.13-1.89 2.75.09 1.08-1.02 1.8-1.86 1.33-.67-.41-.66-1.19-.06-1.78C8.18 5.31 8.68 2.45 5.05.32L5.03.3l.02.01z"></path></svg> All violations</h2>
         <table>
             <thead>

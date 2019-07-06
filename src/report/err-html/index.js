@@ -1,59 +1,33 @@
 /* eslint-disable security/detect-object-injection */
 const Handlebars     = require('handlebars/runtime');
 const _get           = require('lodash/get');
-const version        = require('../../../package.json').version;
-const findRuleByName = require('../utl/findRuleByName');
+const {getFormattedAllowedRule, mergeCountIntoRule, formatSummaryForReport} = require('./utl');
 
 // eslint-disable-next-line import/no-unassigned-import
 require("./err-html.template");
 
 
-function mangle(pSummary) {
-    return Object.assign(
-        {},
-        pSummary,
-        {
-            depcruiseVersion: `dependency-cruiser@${version}`,
-            runDate: (new Date()).toISOString(),
-            violations: pSummary.violations.map(
-                pViolation => Object.assign(
-                    {},
-                    pViolation,
-                    {
-                        to: pViolation.from === pViolation.to ? "" : pViolation.to
-                    }
-                )
-            )
-        }
-    );
-}
-
 function aggregateViolations(pViolations, pRuleSetUsed) {
-    const lAggregateViolationsObject = pViolations.reduce(
+    const lViolationCounts = pViolations.reduce(
         (pAll, pCurrentViolation) => {
             if (pAll[pCurrentViolation.rule.name]) {
-                pAll[pCurrentViolation.rule.name].count += 1;
+                pAll[pCurrentViolation.rule.name] += 1;
             } else {
-                pAll[pCurrentViolation.rule.name] = {
-                    count: 1,
-                    severity: pCurrentViolation.rule.severity
-                };
+                pAll[pCurrentViolation.rule.name] = 1;
             }
             return pAll;
         },
         {}
     );
 
-    return Object.keys(lAggregateViolationsObject).map(
-        pKey => ({
-            name: pKey,
-            severity:lAggregateViolationsObject[pKey].severity,
-            count: lAggregateViolationsObject[pKey].count,
-            comment: _get(findRuleByName(pRuleSetUsed, pKey), 'comment', '-')
-        })
-    ).sort(
-        (pFirst, pSecond) => Math.sign(pSecond.count - pFirst.count)
-    );
+    return _get(pRuleSetUsed, 'forbidden', [])
+        .concat(getFormattedAllowedRule(pRuleSetUsed))
+        .map(pRule => mergeCountIntoRule(pRule, lViolationCounts))
+        .sort(
+            (pFirst, pSecond) =>
+                Math.sign(pSecond.count - pFirst.count) ||
+                pFirst.name.localeCompare(pSecond.name)
+        );
 }
 
 /**
@@ -65,7 +39,7 @@ function aggregateViolations(pViolations, pRuleSetUsed) {
 module.exports = pResults => Handlebars.templates['err-html.template.hbs'](
     {
         summary: Object.assign(
-            mangle(pResults.summary),
+            formatSummaryForReport(pResults.summary),
             {
                 agggregateViolations: aggregateViolations(
                     pResults.summary.violations, pResults.summary.ruleSetUsed

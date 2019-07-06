@@ -164,7 +164,7 @@
   "homepage": "https://github.com/sverweij/dependency-cruiser",
   "nyc": {
     "statements": 99.9,
-    "branches": 99.5,
+    "branches": 99.8,
     "functions": 100,
     "lines": 99.9,
     "exclude": [
