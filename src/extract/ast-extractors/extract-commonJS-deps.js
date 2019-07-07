@@ -1,15 +1,10 @@
-const _get = require('lodash/get');
-const walk = require('./walk');
-const estreeHelpers = require('./estree-utl');
+const walk          = require('./walk');
+const estreeHelpers = require('./estree-helpers');
 
-function isRequireIdentifier(pNode) {
-    return 'Identifier' === _get(pNode, 'callee.type') &&
-        'require' === _get(pNode, 'callee.name');
-}
 
 function pushRequireCallsToDependencies(pDependencies, pModuleSystem) {
     return (pNode) => {
-        if (isRequireIdentifier(pNode)) {
+        if (estreeHelpers.isRequireIdentifier(pNode)) {
             if (estreeHelpers.firstArgumentIsAString(pNode.arguments)) {
                 pNode.arguments[0].value.split("!").forEach(
                     pString => pDependencies.push({
