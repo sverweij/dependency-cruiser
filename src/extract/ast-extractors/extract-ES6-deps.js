@@ -1,14 +1,9 @@
-const _get = require('lodash/get');
-const walk = require('./walk');
-const estreeHelpers = require('./estree-utl');
-
-function isImportStatement(pNode) {
-    return 'Import' === _get(pNode, 'callee.type');
-}
+const walk          = require('./walk');
+const estreeHelpers = require('./estree-helpers');
 
 function pushImportNodeValue(pDependencies) {
     return (pNode) => {
-        if (isImportStatement(pNode)) {
+        if (estreeHelpers.isImportStatement(pNode)) {
             if (estreeHelpers.firstArgumentIsAString(pNode.arguments)) {
                 pDependencies.push({
                     moduleName: pNode.arguments[0].value,

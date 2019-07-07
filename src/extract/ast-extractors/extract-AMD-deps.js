@@ -1,11 +1,9 @@
 const walk                        = require('./walk');
-const extractCommonJSDependencies = require("./extract-commonJS-deps");
+const extractCommonJSDependencies = require('./extract-commonJS-deps');
+const estreeHelpers               = require('./estree-helpers');
 
 function extractRegularAMDDependencies(pNode, pDependencies) {
-    if (pNode.expression.type === "CallExpression" &&
-        pNode.expression.callee.type === "Identifier" &&
-        (pNode.expression.callee.name === "define" ||
-            pNode.expression.callee.name === "require")) {
+    if (estreeHelpers.isLikelyAMDDefineOrRequire(pNode)) {
         pNode.expression.arguments
             .filter(pArg => pArg.type === "ArrayExpression")
             .forEach(arg => arg.elements.forEach(el => {
@@ -21,12 +19,9 @@ function extractRegularAMDDependencies(pNode, pDependencies) {
 }
 
 function extractCommonJSWrappers(pNode, pDependencies) {
-    if (pNode.expression.type === "CallExpression" &&
-        pNode.expression.callee.type === "Identifier" &&
-        pNode.expression.callee.name === "define") {
+    if (estreeHelpers.isLikelyAMDDefine(pNode)) {
         pNode.expression.arguments
-            .filter(pArg => pArg.type === "FunctionExpression")
-            .filter(pFunction => pFunction.params.some(pParam => pParam.name === "require"))
+            .filter(pArg => pArg.type === "FunctionExpression" && pArg.params.some(pParam => pParam.name === "require"))
             .forEach(pFunction => extractCommonJSDependencies(pFunction.body, pDependencies, "amd"));
     }
 }
