@@ -6,19 +6,23 @@ const validationMoreThanOnce  = require('../fixtures/violation-more-than-once.js
 
 describe("report/err-html", () => {
     const lOkeliDokelyKey = 'gummy bears';
+    const lOkeliDokelyHeader = 'No violations found';
 
     it('happy day no errors', () => {
         expect(errHTML(everythingFineResult)).to.contain(lOkeliDokelyKey);
+        expect(errHTML(everythingFineResult)).to.contain(lOkeliDokelyHeader);
     });
 
     it('happy day module only', () => {
         expect(errHTML(everythingFineResult)).to.contain(lOkeliDokelyKey);
+        expect(errHTML(everythingFineResult)).to.contain(lOkeliDokelyHeader);
     });
 
     it('report with errors', () => {
         const lReport = errHTML(validationMoreThanOnce);
 
         expect(lReport).to.not.contain(lOkeliDokelyKey);
+        expect(lReport).to.not.contain(lOkeliDokelyHeader);
         expect(lReport).to.contain('All violations');
         expect(lReport).to.contain('<strong>127</strong> modules');
         expect(lReport).to.contain('<strong>259</strong> dependencies');
