@@ -123,7 +123,7 @@
     "handlebars": "4.1.2",
     "indent-string": "3.2.0",
     "inquirer": "6.4.1",
-    "lodash": "4.17.11",
+    "lodash": "4.17.12",
     "pnp-webpack-plugin": "1.5.0",
     "regexp-tree": "0.1.11",
     "resolve": "1.11.1",
@@ -151,7 +151,7 @@
     "shx": "0.3.2",
     "symlink-dir": "2.0.2",
     "tslint": "5.18.0",
-    "typescript": "3.5.2",
+    "typescript": "3.5.3",
     "upem": "2.1.0",
     "yarn": "1.16.0"
   },
