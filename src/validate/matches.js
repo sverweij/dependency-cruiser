@@ -10,7 +10,8 @@ function fromPathNot (pRule, pModule){
 
 function _replaceGroupPlaceholders(pString, pExtractedGroups) {
     return pExtractedGroups.reduce(
-        (pAll, pThis, pIndex) => pAll.replace(`$${pIndex}`, pThis),
+        // eslint-disable-next-line security/detect-non-literal-regexp
+        (pAll, pThis, pIndex) => pAll.replace(new RegExp(`\\$${pIndex}`, 'g'), pThis),
         pString
     );
 }
@@ -68,6 +69,7 @@ function toLicenseNot(pRule, pDependency) {
 }
 
 module.exports = {
+    _replaceGroupPlaceholders,
     fromPath,
     fromPathNot,
     toDependencyPath,
