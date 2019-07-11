@@ -21,7 +21,7 @@ function extractGroups(pRule, pActualPath) {
         let lMatchResult = pActualPath.match(pRule.path);
 
         if (Boolean(lMatchResult) && lMatchResult.length > 1) {
-            lRetval = lMatchResult;
+            lRetval = lMatchResult.filter(pResult => typeof pResult === 'string');
         }
     }
     return lRetval;
