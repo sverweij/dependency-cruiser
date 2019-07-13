@@ -96,12 +96,28 @@
   "upem": {
     "donotup": [
       {
+        "package": "eslint",
+        "because": "eslint 5.16 is the last still running under node 6"
+      },
+      {
+        "package": "eslint-plugin-node",
+        "because": "eslint-plugin-node 8.0.1 is the last still running under node 6"
+      },
+      {
         "package": "indent-string",
         "because": "indent-string >= 4 dropped node 6 support, while dependency-cruiser still supports node 6"
       },
       {
+        "package": "semver-try-require",
+        "because": "semver-try-require 2.0.7 is the last version still supporting node 6"
+      },
+      {
         "package": "symlink-dir",
         "because": "symlink-dir >= 3 doesn't work on node < 8 - while dependency-cruiser still supports node 6"
+      },
+      {
+        "package": "upem",
+        "because": "upem 2.1.1 is the last one still running under node 6"
       },
       {
         "package": "wrap-ansi",
@@ -138,10 +154,10 @@
     "chai": "4.2.0",
     "chai-json-schema": "1.5.1",
     "coffeescript": "2.4.1",
-    "eslint": "6.0.1",
+    "eslint": "5.16.0",
     "eslint-plugin-import": "2.18.0",
     "eslint-plugin-mocha": "5.3.0",
-    "eslint-plugin-node": "9.1.0",
+    "eslint-plugin-node": "8.0.1",
     "eslint-plugin-security": "1.4.0",
     "intercept-stdout": "0.1.2",
     "mocha": "6.1.4",
@@ -152,8 +168,8 @@
     "symlink-dir": "2.0.2",
     "tslint": "5.18.0",
     "typescript": "3.5.3",
-    "upem": "2.1.0",
-    "yarn": "1.16.0"
+    "upem": "2.1.1",
+    "yarn": "1.17.3"
   },
   "repository": {
     "type": "git",
