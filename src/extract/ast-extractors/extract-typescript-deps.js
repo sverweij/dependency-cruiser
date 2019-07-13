@@ -83,18 +83,22 @@ function extractTrippleSlashDirectives(pAST) {
 
 function isRequireCallExpression(pASTNode) {
     return typescript.SyntaxKind[pASTNode.kind] === 'CallExpression' &&
+        pASTNode.expression &&
         typescript.SyntaxKind[pASTNode.expression.originalKeywordKind] === 'RequireKeyword';
 }
 
 function isDynamicImportExpression(pASTNode) {
     return typescript.SyntaxKind[pASTNode.kind] === 'CallExpression' &&
+        pASTNode.expression &&
         typescript.SyntaxKind[pASTNode.expression.kind] === 'ImportKeyword';
 }
 
 function isTypeImport(pASTNode) {
     return typescript.SyntaxKind[pASTNode.kind] === 'LastTypeNode' &&
+        pASTNode.argument &&
         typescript.SyntaxKind[pASTNode.argument.kind] === 'LiteralType' &&
         (
+            pASTNode.argument.literal &&
             typescript.SyntaxKind[pASTNode.argument.literal.kind] === 'StringLiteral' ||
             typescript.SyntaxKind[pASTNode.argument.literal.kind] === 'FirstTemplateToken'
         );
