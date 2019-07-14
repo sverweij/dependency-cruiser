@@ -116,7 +116,8 @@ dependency-cruise -x "^node_modules" -T dot src | dot -T svg > dependencygraph.s
 > The `rcdot` reporter is deprecated.    
 > Since version 4.12.0 `rcdot` reporter's
 > coloring has become the default for the `dot` reporter, so `dot` and `rcdot`
-> will yield the same results.
+> will yield the same results. As of version 5.0.0 the rcdot option will be
+> removed.
 
 #### err-html
 Generates an stand alone html report with:
