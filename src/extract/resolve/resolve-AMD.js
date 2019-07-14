@@ -1,9 +1,9 @@
 const fs                       = require('fs');
 const path                     = require('path');
-const isCore                   = require('resolve').isCore;
 const memoize                  = require('lodash/memoize');
 const pathToPosix              = require('../utl/pathToPosix');
 const determineDependencyTypes = require('./determineDependencyTypes');
+const isCore                   = require('./isCore');
 const readPackageDeps          = require('./readPackageDeps');
 const resolveHelpers           = require('./resolve-helpers');
 

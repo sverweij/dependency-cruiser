@@ -1,5 +1,5 @@
 const path            = require('path');
-const isCore          = require('resolve').isCore;
+const isCore          = require('./isCore');
 const localNpmHelpers = require('./localNpmHelpers');
 
 const npm2depType = {
