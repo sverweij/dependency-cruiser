@@ -1,5 +1,6 @@
 const path                  = require('path');
-const _                     = require('lodash');
+const _get                  = require('lodash/get');
+const _uniqBy               = require('lodash/uniqBy');
 const intersects            = require('../utl/arrayUtil').intersects;
 const resolve               = require('./resolve');
 const extractES6Deps        = require('./ast-extractors/extract-ES6-deps');
@@ -98,6 +99,11 @@ function getDependencyUniqueKey(pDependency) {
     return `${pDependency.moduleName} ${pDependency.moduleSystem}`;
 }
 
+function compareDeps(pLeft, pRight) {
+    return getDependencyUniqueKey(pLeft).localeCompare(getDependencyUniqueKey(pRight));
+
+}
+
 /**
  * Returns an array of dependencies present in the given file. Of
  * each dependency it returns
@@ -129,15 +135,14 @@ function getDependencyUniqueKey(pDependency) {
  */
 module.exports = (pFileName, pOptions, pResolveOptions, pTSConfig) => {
     try {
-        return _(extractDependencies(pOptions, pFileName, pTSConfig))
-            .uniqBy(getDependencyUniqueKey)
-            .sortBy(getDependencyUniqueKey)
+        return _uniqBy(extractDependencies(pOptions, pFileName, pTSConfig), getDependencyUniqueKey)
+            .sort(compareDeps)
             .map(addResolutionAttributes(pOptions, pFileName, pResolveOptions))
             .filter(pDep =>
-                (!_.get(pOptions, 'exclude.path') || !matchesPattern(pDep.resolved, pOptions.exclude.path)) &&
+                (!_get(pOptions, 'exclude.path') || !matchesPattern(pDep.resolved, pOptions.exclude.path)) &&
                 (!pOptions.includeOnly || matchesPattern(pDep.resolved, pOptions.includeOnly))
-            )
-            .value();
+            );
+        // .value();
     } catch (e) {
         throw new Error(`Extracting dependencies ran afoul of...\n\n  ${e.message}\n... in ${pFileName}\n\n`);
     }

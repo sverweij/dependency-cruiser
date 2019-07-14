@@ -1,6 +1,6 @@
 const fs         = require('fs');
-const tryRequire = require("semver-try-require");
-const _memoize   = require("lodash/memoize");
+const tryRequire = require('semver-try-require');
+const _memoize   = require('lodash/memoize');
 const typescript = tryRequire(
     "typescript",
     require("../../../package.json").supportedTranspilers.typescript

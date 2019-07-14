@@ -34,12 +34,12 @@
                 "couldNotResolve": false
             },
             {
-                "module": "lodash",
-                "resolved": "node_modules/lodash/lodash.js",
+                "module": "eslint",
+                "resolved": "node_modules/eslint/lib/api.js",
                 "moduleSystem": "es6",
                 "coreModule": false,
                 "dependencyTypes": [
-                    "npm"
+                    "npm-dev"
                 ],
                 "dynamic": false,
                 "license": "MIT",
