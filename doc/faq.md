@@ -7,7 +7,7 @@
 - [Contact](#contact)
 
 ## Troubleshooting
-### Q: Typescript, coffeescript or livescript dependencies don't show up. How can I fix that?
+### Q: TypeScript, coffeescript or livescript dependencies don't show up. How can I fix that?
 **A**: Install the compiler you use in the same spot dependency-cruiser is installed (or vv).
 
 Dependency-cruiser doesn't come shipped with the necessary transpilers to
@@ -23,18 +23,17 @@ When it turns out they aren't yet:
 - if you're running dependency-cruiser as a local (development-)
   dependency, install the necessary transpilers there.
 
-For some types of typescript dependencies you need to flip a switch,
+For some types of TypeScript dependencies you need to flip a switch,
 which is what the next question is about:
 
-### Q: Some Typescript dependencies I'd expect don't show up. What gives?
+### Q: Some TypeScript dependencies I'd expect don't show up. What gives?
 **A**: Put `"tsPreCompilationDeps" : true` in the `options` section of your
 dependency-cruiser configuration (`.dependency-cruiser.json` or
 `.dependency-cruiser.js`) or use `--ts-pre-compilation-deps` on the
 command line.
 
-
 By default dependency-cruiser only takes post-compilation dependencies into
-account; dependencies between typescript modules that exist after compilation
+account; dependencies between TypeScript modules that exist after compilation
 to javascript. Two types of dependencies do not fall into this category
 - imports that aren't used (yet)
 - imports of types only
@@ -44,9 +43,28 @@ If you _do_ want to see these dependencies, do one of these:
   in the `options` section.
 - pass `--ts-pre-compilation-deps` as a command line option
 
-
-See [--ts-pre-compilation-deps](./cli.md#--ts-pre-compilation-deps-typescript-only)
+See [--ts-pre-compilation-deps](./cli.md#--ts-pre-compilation-deps-TypeScript-only)
 for details and examples.
+
+### Q: Some TypeScript dependencies _still_ don't show up (`/// tripple slash directives`)
+***A***: By default dependency-cruiser ignores TypeScript's tripple slash directives. 
+To ensure it _does_ detect them:
+- Switch TypesScript pre-compilation dependencies on (see previous question)
+- Do one of the following
+  - if you have a dependency-cruiser configuration file, add the tripple slash directive
+    module system to the array of module systems e.g. 
+    ```json
+     "moduleSystems": ["amd", "cjs", "es6", "tsd"]
+    ```
+  - pass `tsd` with the `--module-systems` on the command line e.g.
+    ```
+    depcruise -T dot --module-systems amd,cjs,es6,tsd
+    ```
+
+> It might be more intuitive to do have these directives detected by default, so
+> in a future (major) version of dependency-cruiser, this might be happening.
+> It'd be a breaking change, though so for now you'll have to be
+> explicit with these.
 
 ### Q: The graph dependency-cruiser generates is humoungous, and I can't follow the lines very well what can I do?
 **A**: Usually you don't need to see all modules and dependencies that make up
@@ -114,17 +132,17 @@ The reason it's not the default for the dot reporter output is that it isn't gua
 to render a graph, so YMMV.
 
 
-### Q: Typescript dynamic imports show up as "✖" . What's up there?
+### Q: TypeScript dynamic imports show up as "✖" . What's up there?
 **A**: You're using a version of depedendency-cruiser < 4.17.0. Dynamic imports,
-both in Typescript and Javascript are supported as of version 4.17.0 -
+both in TypeScript and Javascript are supported as of version 4.17.0 -
 and ✖'s in the output should be a thing of the past.
 
 > Before dependency-cruiser@4.17.0 this instruction was in place:
 >
 > By default dependency-cruiser uses _ES2015_ as compilation target to figure out
-> what your typescript sources look like. That does not play nice with dynamic
+> what your TypeScript sources look like. That does not play nice with dynamic
 > imports. Chances are you already have a `tsconfig.json` with a configuration
-> that makes your typescript compiler happy about compiling dynamic imports.
+> that makes your TypeScript compiler happy about compiling dynamic imports.
 > If so: feed it to dependency-cruiser with the `--ts-config` command line 
 > parameter and dependency-cruiser will attempt to resolve the dynamic imports -
 > which will work as long as you're not importing variables (or expressions).
@@ -135,7 +153,7 @@ and ✖'s in the output should be a thing of the past.
 necessary compilers at its disposal.
 
 ### Q: I'm developing in React and use jsx/ tsx/ csx/ cjsx. How do I get that to work?
-**A**: jsx and its typescript and coffeescript variants work
+**A**: jsx and its TypeScript and coffeescript variants work
 out of the box as well.
 
 ### Q: Does this work with vue as well?
@@ -175,11 +193,11 @@ config file formats:
   - an array of the above (where dependency-cruiser takes the
     first element in the array)
 
-Support for other formats (promise exports, typescript, fancier
+Support for other formats (promise exports, TypeScript, fancier
 ecmascript) might come later.
 
 ### Q: Does dependency-cruiser detect [dynamic imports](https://github.com/tc39/proposal-dynamic-import)?
-**A**: Yes; in both typescript and javascript - but only with static string arguments
+**A**: Yes; in both TypeScript and javascript - but only with static string arguments
 or template expressions that don't contain no placeholders (see the next question).
 This should cover most of the use cases for dynamic
 imports that leverage asynchronous module loading (like [webpack code splitting](https://webpack.js.org/guides/code-splitting/#dynamic-imports)), though.
