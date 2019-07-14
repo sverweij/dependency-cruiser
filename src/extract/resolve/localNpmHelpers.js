@@ -1,9 +1,9 @@
-const fs       = require('fs');
-const path     = require('path');
-const _memoize = require('lodash/memoize');
-const resolve  = require('./resolve');
+const fs                   = require('fs');
+const path                 = require('path');
+const _memoize             = require('lodash/memoize');
+const resolve              = require('./resolve');
+const isRelativeModuleName = require('./isRelativeModuleName');
 
-const isLocal     = (pModule) => pModule.startsWith('.');
 const isScoped    = (pModule) => pModule.startsWith('@');
 
 /**
@@ -34,7 +34,7 @@ const isScoped    = (pModule) => pModule.startsWith('@');
  * @return {string}         the module name root
  */
 function getPackageRoot (pModule) {
-    if (!Boolean(pModule) || isLocal(pModule)) {
+    if (!Boolean(pModule) || isRelativeModuleName(pModule)) {
         return pModule;
     }
 
