@@ -1,10 +1,9 @@
-const fs               = require('fs');
-const path             = require('path');
-const pathToPosix      = require('../utl/pathToPosix');
-const resolveAMD       = require('./resolve-AMD');
-const resolveCommonJS  = require('./resolve-commonJS');
-
-const isRelativeModuleName = pString => pString.startsWith(".");
+const fs                   = require('fs');
+const path                 = require('path');
+const pathToPosix          = require('../utl/pathToPosix');
+const isRelativeModuleName = require('./isRelativeModuleName');
+const resolveAMD           = require('./resolve-AMD');
+const resolveCommonJS      = require('./resolve-commonJS');
 
 function resolveModule(pDependency, pBaseDir, pFileDir, pResolveOptions) {
     let lRetval = null;

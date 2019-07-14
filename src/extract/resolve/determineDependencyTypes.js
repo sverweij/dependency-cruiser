@@ -1,6 +1,7 @@
-const path            = require('path');
-const isCore          = require('./isCore');
-const localNpmHelpers = require('./localNpmHelpers');
+const path                 = require('path');
+const isCore               = require('./isCore');
+const isRelativeModuleName = require('./isRelativeModuleName');
+const localNpmHelpers      = require('./localNpmHelpers');
 
 const npm2depType = {
     "dependencies"         : "npm",
@@ -91,16 +92,12 @@ function isModule(pDependency, pModules = ["node_modules"], pBaseDir = ".") {
     );
 }
 
-function isLocal(pModuleName) {
-    return pModuleName.startsWith(".");
-}
-
 function isAliased(pModuleName, pAliasObject) {
     return Object.keys(pAliasObject || {}).some(pAliasLHS => pModuleName.startsWith(pAliasLHS));
 }
 
 function isLikelyTSAliased(pModuleName, pResolved, pTsConfig) {
-    return pTsConfig && !isLocal(pModuleName) && pResolved && !pResolved.includes("node_modules");
+    return pTsConfig && !isRelativeModuleName(pModuleName) && pResolved && !pResolved.includes("node_modules");
 }
 
 function isAliassy(pModuleName, pDependency, pResolveOptions){
@@ -134,7 +131,7 @@ module.exports = (pDependency, pModuleName, pPackageDeps, pFileDir, pResolveOpti
         // attribute in favor of this one and determining it here will make
         // live easier in the future
         lRetval = ["core"];
-    } else if (isLocal(pModuleName)) {
+    } else if (isRelativeModuleName(pModuleName)) {
         lRetval = ["local"];
     } else if (isModule(pDependency, pResolveOptions.modules, pBaseDir)) {
         lRetval = determineModuleDependencyTypes(
