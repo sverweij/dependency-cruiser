@@ -16,7 +16,7 @@ if (!semver.satisfies(process.versions.node, $package.engines.node)) {
 
 program
     .version($package.version)
-    .description("Validate and visualize dependencies")
+    .description("Validate and visualize dependencies.\nDetails: https://github.com/sverweij/dependency-cruiser")
     .option("-i, --info", `shows what languages and extensions
                               dependency-cruiser supports`)
     .option("-c, --config [file]", `read rules and options from [file]
@@ -31,9 +31,10 @@ program
     .option("-d, --max-depth <n>", `the maximum depth to cruise; 0 <= n <= 99
                               (default: 0, which means 'infinite depth')`)
     .option("-M, --module-systems <items>", `list of module systems (default: amd,cjs,es6)`)
-    .option("-T, --output-type <type>", `output type - html|dot|err|json
+    .option("-T, --output-type <type>", `output type - err|err-long|err-html|dot|json
                               (default: err)`)
-    .option("-P, --prefix <prefix>", "prefix to use for links in the svg reporter")
+    .option("-P, --prefix <prefix>", `prefix to use for links in the dot, err and
+                              err-html reporters`)
     .option("--preserve-symlinks", `leave symlinks unchanged (off by default)`)
     .option("--ts-pre-compilation-deps", `detect dependencies that only exist before
                               typescript-to-javascript compilation
