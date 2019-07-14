@@ -1,5 +1,7 @@
-const _               = require('lodash');
 const _get            = require('lodash/get');
+const _uniqBy         = require('lodash/uniqBy');
+const _spread         = require('lodash/spread');
+const _concat         = require('lodash/concat');
 const pathToPosix     = require('./utl/pathToPosix');
 const extract         = require('./extract');
 const deriveCirculars = require('./derive/circular');
@@ -37,7 +39,7 @@ function extractRecursive (pFileName, pOptions, pVisited, pDepth, pResolveOption
 function extractFileDirArray(pFileDirArray, pOptions, pResolveOptions, pTSConfig) {
     let lVisited = new Set();
 
-    return _.spread(_.concat)(
+    return _spread(_concat)(
         gather(pFileDirArray, pOptions)
             .reduce((pDependencies, pFilename) => {
                 if (!lVisited.has(pFilename)){
@@ -153,11 +155,10 @@ function filterExcludedDependencies(pModule, pExclude) {
 module.exports = (pFileDirArray, pOptions, pResolveOptions, pTSConfig) => {
     clearCaches();
 
-    let lModules = _(
-        extractFileDirArray(pFileDirArray, pOptions, pResolveOptions, pTSConfig).reduce(complete, [])
-    ).uniqBy(pModule => pModule.source)
-        .map(pModule => filterExcludedDependencies(pModule, pOptions.exclude))
-        .value();
+    let lModules = _uniqBy(
+        extractFileDirArray(pFileDirArray, pOptions, pResolveOptions, pTSConfig).reduce(complete, []),
+        pModule => pModule.source
+    ).map(pModule => filterExcludedDependencies(pModule, pOptions.exclude));
 
     lModules = deriveCirculars(lModules, pOptions);
     lModules = deriveOrphans(lModules, pOptions);
