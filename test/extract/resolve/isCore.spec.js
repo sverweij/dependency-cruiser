@@ -1,21 +1,22 @@
+/* eslint-disable no-unused-expressions */
 const expect = require('chai').expect;
 const isCore = require('../../../src/extract/resolve/isCore');
 
 describe("extract/resolve/isCore", () => {
     it("returns false when passed nothing", () => {
-        expect(isCore()).to.equal(false);
+        expect(isCore()).to.be.undefined;
     });
 
     it("returns false when passed null", () => {
-        expect(isCore(null)).to.equal(false);
+        expect(isCore(null)).to.be.undefined;
     });
 
     it("returns false when passed a local module", () => {
-        expect(isCore("./path")).to.equal(false);
+        expect(isCore("./path")).to.be.undefined;
     });
 
     it("returns false when passed a non core module", () => {
-        expect(isCore("flowdash")).to.equal(false);
+        expect(isCore("flowdash")).to.be.undefined;
     });
 
     it("returns true when passed a core module", () => {
