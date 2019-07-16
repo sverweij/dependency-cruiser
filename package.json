@@ -130,7 +130,7 @@
     "acorn-dynamic-import": "4.0.0",
     "acorn-loose": "6.1.0",
     "acorn-walk": "6.2.0",
-    "ajv": "6.10.1",
+    "ajv": "6.10.2",
     "chalk": "2.4.2",
     "commander": "2.20.0",
     "enhanced-resolve": "4.1.0",
