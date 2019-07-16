@@ -1,0 +1,310 @@
+{
+  "pos": 0,
+  "end": 103,
+  "flags": 0,
+  "kind": 272,
+  "text": "export interface request { method?: \"get\" | \"post\" | \"patch\" | \"put\" | \"delete\" | \"head\" | \"options\"; }",
+  "bindDiagnostics": [],
+  "languageVersion": 6,
+  "fileName": "$internal-file-name",
+  "languageVariant": 0,
+  "isDeclarationFile": false,
+  "scriptKind": 3,
+  "pragmas": {},
+  "referencedFiles": [],
+  "typeReferenceDirectives": [],
+  "amdDependencies": [],
+  "hasNoDefaultLib": false,
+  "statements": [
+    {
+      "pos": 0,
+      "end": 103,
+      "flags": 0,
+      "kind": 234,
+      "modifiers": [
+        {
+          "pos": 0,
+          "end": 6,
+          "flags": 0,
+          "kind": 84
+        }
+      ],
+      "name": {
+        "pos": 16,
+        "end": 24,
+        "flags": 0,
+        "escapedText": "request"
+      },
+      "members": [
+        {
+          "pos": 26,
+          "end": 101,
+          "flags": 0,
+          "kind": 150,
+          "name": {
+            "pos": 26,
+            "end": 33,
+            "flags": 0,
+            "escapedText": "method"
+          },
+          "questionToken": {
+            "pos": 33,
+            "end": 34,
+            "flags": 0,
+            "kind": 55
+          },
+          "type": {
+            "pos": 35,
+            "end": 100,
+            "flags": 0,
+            "kind": 168,
+            "types": [
+              {
+                "pos": 35,
+                "end": 41,
+                "flags": 0,
+                "kind": 177,
+                "literal": {
+                  "pos": 35,
+                  "end": 41,
+                  "flags": 0,
+                  "kind": 9,
+                  "text": "get"
+                }
+              },
+              {
+                "pos": 43,
+                "end": 50,
+                "flags": 0,
+                "kind": 177,
+                "literal": {
+                  "pos": 43,
+                  "end": 50,
+                  "flags": 0,
+                  "kind": 9,
+                  "text": "post"
+                }
+              },
+              {
+                "pos": 52,
+                "end": 60,
+                "flags": 0,
+                "kind": 177,
+                "literal": {
+                  "pos": 52,
+                  "end": 60,
+                  "flags": 0,
+                  "kind": 9,
+                  "text": "patch"
+                }
+              },
+              {
+                "pos": 62,
+                "end": 68,
+                "flags": 0,
+                "kind": 177,
+                "literal": {
+                  "pos": 62,
+                  "end": 68,
+                  "flags": 0,
+                  "kind": 9,
+                  "text": "put"
+                }
+              },
+              {
+                "pos": 70,
+                "end": 79,
+                "flags": 0,
+                "kind": 177,
+                "literal": {
+                  "pos": 70,
+                  "end": 79,
+                  "flags": 0,
+                  "kind": 9,
+                  "text": "delete"
+                }
+              },
+              {
+                "pos": 81,
+                "end": 88,
+                "flags": 0,
+                "kind": 177,
+                "literal": {
+                  "pos": 81,
+                  "end": 88,
+                  "flags": 0,
+                  "kind": 9,
+                  "text": "head"
+                }
+              },
+              {
+                "pos": 90,
+                "end": 100,
+                "flags": 0,
+                "kind": 177,
+                "literal": {
+                  "pos": 90,
+                  "end": 100,
+                  "flags": 0,
+                  "kind": 9,
+                  "text": "options"
+                }
+              }
+            ]
+          }
+        }
+      ],
+      "modifierFlagsCache": 536870913
+    }
+  ],
+  "endOfFileToken": {
+    "pos": 103,
+    "end": 103,
+    "flags": 0,
+    "kind": 1
+  },
+  "externalModuleIndicator": {
+    "pos": 0,
+    "end": 103,
+    "flags": 0,
+    "kind": 234,
+    "modifiers": [
+      {
+        "pos": 0,
+        "end": 6,
+        "flags": 0,
+        "kind": 84
+      }
+    ],
+    "name": {
+      "pos": 16,
+      "end": 24,
+      "flags": 0,
+      "escapedText": "request"
+    },
+    "members": [
+      {
+        "pos": 26,
+        "end": 101,
+        "flags": 0,
+        "kind": 150,
+        "name": {
+          "pos": 26,
+          "end": 33,
+          "flags": 0,
+          "escapedText": "method"
+        },
+        "questionToken": {
+          "pos": 33,
+          "end": 34,
+          "flags": 0,
+          "kind": 55
+        },
+        "type": {
+          "pos": 35,
+          "end": 100,
+          "flags": 0,
+          "kind": 168,
+          "types": [
+            {
+              "pos": 35,
+              "end": 41,
+              "flags": 0,
+              "kind": 177,
+              "literal": {
+                "pos": 35,
+                "end": 41,
+                "flags": 0,
+                "kind": 9,
+                "text": "get"
+              }
+            },
+            {
+              "pos": 43,
+              "end": 50,
+              "flags": 0,
+              "kind": 177,
+              "literal": {
+                "pos": 43,
+                "end": 50,
+                "flags": 0,
+                "kind": 9,
+                "text": "post"
+              }
+            },
+            {
+              "pos": 52,
+              "end": 60,
+              "flags": 0,
+              "kind": 177,
+              "literal": {
+                "pos": 52,
+                "end": 60,
+                "flags": 0,
+                "kind": 9,
+                "text": "patch"
+              }
+            },
+            {
+              "pos": 62,
+              "end": 68,
+              "flags": 0,
+              "kind": 177,
+              "literal": {
+                "pos": 62,
+                "end": 68,
+                "flags": 0,
+                "kind": 9,
+                "text": "put"
+              }
+            },
+            {
+              "pos": 70,
+              "end": 79,
+              "flags": 0,
+              "kind": 177,
+              "literal": {
+                "pos": 70,
+                "end": 79,
+                "flags": 0,
+                "kind": 9,
+                "text": "delete"
+              }
+            },
+            {
+              "pos": 81,
+              "end": 88,
+              "flags": 0,
+              "kind": 177,
+              "literal": {
+                "pos": 81,
+                "end": 88,
+                "flags": 0,
+                "kind": 9,
+                "text": "head"
+              }
+            },
+            {
+              "pos": 90,
+              "end": 100,
+              "flags": 0,
+              "kind": 177,
+              "literal": {
+                "pos": 90,
+                "end": 100,
+                "flags": 0,
+                "kind": 9,
+                "text": "options"
+              }
+            }
+          ]
+        }
+      }
+    ],
+    "modifierFlagsCache": 536870913
+  },
+  "nodeCount": 23,
+  "identifierCount": 2,
+  "identifiers": {},
+  "parseDiagnostics": []
+}
