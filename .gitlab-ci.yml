@@ -34,15 +34,6 @@ test_async_node_8:
   except:
    - tags
 
-test_async_node_6:
-  image: node:6
-  script:
-   - npm install
-   - npm run test:cover
-  except:
-   - tags
-   - master
-
 # publish:
 #  image: node:latest
 #  script:
