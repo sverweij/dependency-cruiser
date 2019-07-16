@@ -93,38 +93,6 @@
     "upem:update": "npm outdated --json | upem",
     "version": "npm-run-all build depcruise:graph:doc scm:stage"
   },
-  "upem": {
-    "donotup": [
-      {
-        "package": "eslint",
-        "because": "eslint 5.16 is the last still running under node 6"
-      },
-      {
-        "package": "eslint-plugin-node",
-        "because": "eslint-plugin-node 8.0.1 is the last still running under node 6"
-      },
-      {
-        "package": "indent-string",
-        "because": "indent-string >= 4 dropped node 6 support, while dependency-cruiser still supports node 6"
-      },
-      {
-        "package": "semver-try-require",
-        "because": "semver-try-require 2.0.7 is the last version still supporting node 6"
-      },
-      {
-        "package": "symlink-dir",
-        "because": "symlink-dir >= 3 doesn't work on node < 8 - while dependency-cruiser still supports node 6"
-      },
-      {
-        "package": "upem",
-        "because": "upem 2.1.1 is the last one still running under node 6"
-      },
-      {
-        "package": "wrap-ansi",
-        "because": "wrap-ansi >= 6 dropped node 6 support, while dependency-cruiser still supports node 6"
-      }
-    ]
-  },
   "dependencies": {
     "acorn": "6.2.0",
     "acorn-dynamic-import": "4.0.0",
@@ -137,27 +105,27 @@
     "figures": "3.0.0",
     "glob": "7.1.4",
     "handlebars": "4.1.2",
-    "indent-string": "3.2.0",
+    "indent-string": "4.0.0",
     "inquirer": "6.5.0",
     "lodash": "4.17.14",
     "pnp-webpack-plugin": "1.5.0",
     "regexp-tree": "0.1.11",
     "resolve": "1.11.1",
     "semver": "6.2.0",
-    "semver-try-require": "2.0.7",
+    "semver-try-require": "3.0.0",
     "strip-json-comments": "3.0.1",
     "teamcity-service-messages": "0.1.10",
     "tsconfig-paths-webpack-plugin": "3.2.0",
-    "wrap-ansi": "5.1.0"
+    "wrap-ansi": "6.0.0"
   },
   "devDependencies": {
     "chai": "4.2.0",
     "chai-json-schema": "1.5.1",
     "coffeescript": "2.4.1",
-    "eslint": "5.16.0",
+    "eslint": "6.0.1",
     "eslint-plugin-import": "2.18.0",
     "eslint-plugin-mocha": "5.3.0",
-    "eslint-plugin-node": "8.0.1",
+    "eslint-plugin-node": "9.1.0",
     "eslint-plugin-security": "1.4.0",
     "intercept-stdout": "0.1.2",
     "mocha": "6.1.4",
@@ -165,10 +133,10 @@
     "npm-run-all": "4.1.5",
     "nyc": "14.1.1",
     "shx": "0.3.2",
-    "symlink-dir": "2.0.2",
+    "symlink-dir": "3.1.0",
     "tslint": "5.18.0",
     "typescript": "3.5.3",
-    "upem": "2.1.1",
+    "upem": "3.0.0",
     "yarn": "1.17.3"
   },
   "repository": {
@@ -212,7 +180,7 @@
     "types/**"
   ],
   "engines": {
-    "node": ">=6"
+    "node": "^8||^10||^12"
   },
   "supportedTranspilers": {
     "coffee-script": ">=1.0.0 <2.0.0",
