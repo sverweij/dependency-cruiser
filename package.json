@@ -123,7 +123,7 @@
     "coffeescript": "2.4.1",
     "eslint": "6.0.1",
     "eslint-plugin-import": "2.18.0",
-    "eslint-plugin-mocha": "5.3.0",
+    "eslint-plugin-mocha": "6.0.0",
     "eslint-plugin-node": "9.1.0",
     "eslint-plugin-security": "1.4.0",
     "intercept-stdout": "0.1.2",
