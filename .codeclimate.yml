@@ -13,6 +13,9 @@ plugins:
       # compat is not a codeclimeate supported eslint plugin
       compat/compat:
         enabled: false
+      # fairly fresh mocha rule, not supported by codeclimate yet
+      mocha/no-async-describe:
+        enabled: false
       # indent rules on codeclimate seem to be different from
       # the local ones - probably because cc uses an older version
       # of eslint
