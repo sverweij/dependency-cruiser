@@ -16,13 +16,11 @@ function normalizeFilterOption(pFilterOption) {
 }
 
 module.exports = pOptions => {
-    let lRetval = Object.assign(
-        {
-            baseDir: process.cwd()
-        },
-        defaults,
-        pOptions
-    );
+    let lRetval = {
+        baseDir: process.cwd(),
+        ...defaults,
+        ...pOptions
+    };
 
     lRetval.maxDepth = parseInt(lRetval.maxDepth, 10);
     lRetval.moduleSystems = uniq(lRetval.moduleSystems.sort());

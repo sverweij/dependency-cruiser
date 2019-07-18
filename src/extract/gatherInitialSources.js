@@ -54,7 +54,7 @@ function gatherScannableFilesFromDir (pDirName, pOptions) {
  *                               files to be gathered.
  */
 module.exports = (pFileDirArray, pOptions) => {
-    const lOptions = Object.assign({baseDir: process.cwd()}, pOptions);
+    const lOptions = {baseDir: process.cwd(), ...pOptions};
 
     return pFileDirArray
         .reduce(

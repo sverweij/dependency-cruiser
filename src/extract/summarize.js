@@ -76,14 +76,10 @@ module.exports = (pModules) => {
         .concat(extractModuleViolations(pModules))
         .sort(order.violations);
 
-    return Object.assign(
-        {
-            violations : lViolations
-        },
-        extractMetaData(lViolations),
-        {
-            totalCruised: pModules.length,
-            totalDependenciesCruised: pModules.reduce((pAll, pModule) => pAll + pModule.dependencies.length, 0)
-        }
-    );
+    return {
+        violations : lViolations,
+        ...extractMetaData(lViolations),
+        totalCruised: pModules.length,
+        totalDependenciesCruised: pModules.reduce((pAll, pModule) => pAll + pModule.dependencies.length, 0)
+    };
 };

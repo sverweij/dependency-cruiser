@@ -1,28 +1,26 @@
 const validate = require('../validate');
 
 function addDependencyValidation (pDependency, pValidate, pRuleSet, pModule) {
-    return Object.assign(
-        {},
-        pDependency,
-        validate.dependency(
+    return {
+        ...pDependency,
+        ...validate.dependency(
             pValidate,
             pRuleSet,
             pModule,
             pDependency
         )
-    );
+    };
 }
 
 function addModuleValidation(pModule, pValidate, pRuleSet) {
-    return Object.assign(
-        {},
-        pModule,
-        validate.module(
+    return {
+        ...pModule,
+        ...validate.module(
             pValidate,
             pRuleSet,
             pModule
         )
-    );
+    };
 }
 
 /**
@@ -38,10 +36,9 @@ function addModuleValidation(pModule, pValidate, pRuleSet) {
  *                                part of
  */
 module.exports = (pModules, pValidate, pRuleSet) => pModules.map(
-    pModule => Object.assign(
-        {},
-        addModuleValidation(pModule, pValidate, pRuleSet),
+    pModule => (
         {
+            ...addModuleValidation(pModule, pValidate, pRuleSet),
             dependencies: pModule.dependencies.map(
                 pDependency => addDependencyValidation(pDependency, pValidate, pRuleSet, pModule)
             )

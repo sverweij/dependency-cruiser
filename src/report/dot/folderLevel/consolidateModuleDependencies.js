@@ -4,16 +4,13 @@ const _reject = require('lodash/reject');
 const _uniqBy = require('lodash/uniqBy');
 
 function mergeDependency(pLeftDependency, pRightDependency) {
-    return Object.assign(
-        {},
-        pLeftDependency,
-        pRightDependency,
-        {
-            dependendencyTypes: _uniqBy(pLeftDependency.dependendencyTypes.concat(pRightDependency.dependendencyTypes)),
-            rules: pLeftDependency.rules.concat(_get(pRightDependency, 'rules', [])),
-            valid: pLeftDependency.valid && pRightDependency.valid
-        }
-    );
+    return {
+        ...pLeftDependency,
+        ...pRightDependency,
+        dependendencyTypes: _uniqBy(pLeftDependency.dependendencyTypes.concat(pRightDependency.dependendencyTypes)),
+        rules: pLeftDependency.rules.concat(_get(pRightDependency, 'rules', [])),
+        valid: pLeftDependency.valid && pRightDependency.valid
+    };
 }
 
 function mergeDependencies(pResolvedName, pDependencies){
@@ -43,9 +40,9 @@ function consolidateDependencies(pDependencies) {
     return lRetval;
 }
 
-module.exports = (pModule) =>
-    Object.assign(
-        {},
-        pModule,
-        {dependencies: consolidateDependencies(pModule.dependencies)}
-    );
+module.exports = (pModule) => (
+    {
+        ...pModule,
+        dependencies: consolidateDependencies(pModule.dependencies)
+    }
+);

@@ -8,16 +8,11 @@ function init(pResolveOptions, pCachingContext) {
     if (!gInitialized[pCachingContext] || pResolveOptions.bustTheCache) {
         // assuming the cached file system here
         pResolveOptions.fileSystem.purge();
-        gResolver = enhancedResolve.ResolverFactory.createResolver(
-            Object.assign(
-                {},
-                pResolveOptions,
-                {
-                    // we're doing that ourselves for now
-                    symlinks: false
-                }
-            )
-        );
+        gResolver = enhancedResolve.ResolverFactory.createResolver({
+            ...pResolveOptions,
+            // we're doing that ourselves for now
+            symlinks: false
+        });
         /* eslint security/detect-object-injection:0 */
         gInitialized[pCachingContext] = true;
     }

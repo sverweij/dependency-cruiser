@@ -13,11 +13,10 @@ function normalizePackageKeys(pPackage) {
 }
 
 function mergeDependencyKey(pClosestDependencyKey, pFurtherDependencyKey) {
-    return Object.assign(
-        {},
-        pFurtherDependencyKey,
-        pClosestDependencyKey
-    );
+    return {
+        ...pFurtherDependencyKey,
+        ...pClosestDependencyKey
+    };
 }
 
 function mergeDependencyArray(pClosestDependencyKey, pFurtherDependencyKey) {

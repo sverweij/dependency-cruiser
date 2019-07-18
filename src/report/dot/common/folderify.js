@@ -21,9 +21,8 @@ module.exports = (pModule) => {
 
     lAdditions.label = path.basename(pModule.source);
 
-    return Object.assign(
-        {},
-        pModule,
-        lAdditions
-    );
+    return {
+        ...pModule,
+        ...lAdditions
+    };
 };

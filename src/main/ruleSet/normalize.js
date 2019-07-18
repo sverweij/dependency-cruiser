@@ -13,13 +13,11 @@ function normalizeName(pRule) {
 }
 
 function normalizeRule(pRule) {
-    return Object.assign(
-        pRule,
-        {
-            severity : normalizeSeverity(pRule.severity),
-            name     : normalizeName(pRule.name)
-        }
-    );
+    return {
+        ...pRule,
+        severity : normalizeSeverity(pRule.severity),
+        name     : normalizeName(pRule.name)
+    };
 }
 
 /**

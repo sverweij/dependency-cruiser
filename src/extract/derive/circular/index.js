@@ -14,13 +14,10 @@ function circularityDetectionNecessary(pOptions) {
 }
 
 function addCircularityCheckToDependency (pToDep, pGraph, pFrom) {
-    return Object.assign(
-        {},
-        pToDep,
-        {
-            circular: dependencyEndsUpAtFrom(pGraph, pFrom, pToDep.resolved)
-        }
-    );
+    return {
+        ...pToDep,
+        circular: dependencyEndsUpAtFrom(pGraph, pFrom, pToDep.resolved)
+    };
 }
 
 /**
@@ -35,10 +32,9 @@ function addCircularityCheckToDependency (pToDep, pGraph, pFrom) {
  */
 function addCircularityCheckToGraph (pModules) {
     return pModules.map(
-        pModule => Object.assign(
-            {},
-            pModule,
+        pModule => (
             {
+                ...pModule,
                 dependencies: pModule.dependencies.map(
                     pToDep => addCircularityCheckToDependency(pToDep, pModules, pModule.source)
                 )

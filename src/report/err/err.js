@@ -46,14 +46,10 @@ function formatSummary(pSummary) {
 
 function addExplanation(pRuleSet, pLong) {
     return pLong
-        ? (pViolation) =>
-            Object.assign(
-                {},
-                pViolation,
-                {
-                    comment: _get(findRuleByName(pRuleSet, pViolation.rule.name), 'comment', '-')
-                }
-            )
+        ? (pViolation) => ({
+            ...pViolation,
+            comment: _get(findRuleByName(pRuleSet, pViolation.rule.name), 'comment', '-')
+        })
         : pViolation => pViolation;
 }
 

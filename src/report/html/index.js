@@ -5,19 +5,17 @@ const dependencyToIncidenceTransformer = require("../utl/dependencyToIncidenceTr
 require("./html.template");
 
 function addShowTitle(pDependencyEntry) {
-    return Object.assign(
-        pDependencyEntry,
-        {
-            incidences: pDependencyEntry.incidences.map(pIncidence =>
-                Object.assign(
-                    pIncidence,
-                    {
-                        hasRelation: pIncidence.incidence !== "false"
-                    }
-                )
+    return {
+        ...pDependencyEntry,
+        incidences: pDependencyEntry.incidences.map(
+            pIncidence => (
+                {
+                    ...pIncidence,
+                    hasRelation: pIncidence.incidence !== "false"
+                }
             )
-        }
-    );
+        )
+    };
 }
 
 /**

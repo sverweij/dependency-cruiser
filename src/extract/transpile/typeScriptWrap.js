@@ -12,11 +12,11 @@ function getCompilerOptions(pTsx, pTSConfig = {}) {
         lCompilerOptions.jsx = "react";
     }
 
-    return Object.assign(
-        {"target": "es2015"},
-        lCompilerOptions,
-        _get(pTSConfig, "options", {})
-    );
+    return {
+        "target": "es2015",
+        ...lCompilerOptions,
+        ..._get(pTSConfig, "options", {})
+    };
 }
 
 module.exports = (pTsx) => ({
@@ -24,13 +24,9 @@ module.exports = (pTsx) => ({
 
     transpile: (pSource, pTSConfig) => typescript.transpileModule(
         pSource,
-        Object.assign(
-            {},
-            pTSConfig,
-            {
-                compilerOptions: getCompilerOptions(pTsx, pTSConfig)
-            }
-        )
-
+        {
+            ...pTSConfig,
+            compilerOptions: getCompilerOptions(pTsx, pTSConfig)
+        }
     ).outputText
 });

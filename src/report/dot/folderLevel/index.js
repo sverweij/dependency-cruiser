@@ -10,50 +10,38 @@ const consolidateModuleDependencies = require("./consolidateModuleDependencies")
 require("./ddot.template");
 
 function colorize(pModule) {
-    return Object.assign(
-        {},
-        pModule,
-        {
-            dependencies: pModule.dependencies.map(coloring.determineDependencyColor)
-        }
-    );
+    return {
+        ...pModule,
+        dependencies: pModule.dependencies.map(coloring.determineDependencyColor)
+    };
 }
 function extractRelevantTransgressions(pModule){
-    return Object.assign(
-        {},
-        (pModule.rules ? Object.assign({}, pModule, {rule: pModule.rules[0]}) : pModule),
-        {
-            dependencies: pModule.dependencies.map(
-                pDependency =>
-                    Object.assign(
-                        {},
-                        pDependency,
-                        {
-                            rule: pDependency.rules[0]
-                        }
-                    )
+    return {
+        ...(pModule.rules ? {...pModule, rule: pModule.rules[0]} : pModule),
+        dependencies: pModule.dependencies.map(
+            pDependency => (
+                {
+                    ...pDependency,
+                    rule: pDependency.rules[0]
+                }
             )
-        }
-    );
+        )
+    };
 }
 
 function shortendep (pDep) {
-    return Object.assign(
-        {},
-        pDep,
-        {
-            resolved: path.dirname(pDep.resolved)
-        }
-    );
+    return {
+        ...pDep,
+        resolved: path.dirname(pDep.resolved)
+    };
 }
 
 function squashToDir (pModules) {
     return pModules
-        .map(pModule =>
-            Object.assign(
-                {},
-                pModule,
+        .map(
+            pModule => (
                 {
+                    ...pModule,
                     source: path.dirname(pModule.source),
                     dependencies: pModule.dependencies.map(shortendep)
                 }

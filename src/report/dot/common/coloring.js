@@ -40,10 +40,10 @@ function determineModuleColors(pModule, pColoringScheme) {
 
         lInvalidColoring = {color: lColor, fontcolor: lColor};
     }
-    return Object.assign(
-        _get(lColoringScheme.find(pSchemeEntry => moduleMatchesCriteria(pSchemeEntry, pModule)), 'colors', {}),
-        lInvalidColoring
-    );
+    return {
+        ..._get(lColoringScheme.find(pSchemeEntry => moduleMatchesCriteria(pSchemeEntry, pModule)), 'colors', {}),
+        ...lInvalidColoring
+    };
 }
 
 function determineDependencyColor(pDependency) {
@@ -53,11 +53,10 @@ function determineDependencyColor(pDependency) {
         lColorAddition.color = severity2Color(pDependency.rule.severity);
     }
 
-    return Object.assign(
-        {},
-        pDependency,
-        lColorAddition
-    );
+    return {
+        ...pDependency,
+        ...lColorAddition
+    };
 }
 
 module.exports = {

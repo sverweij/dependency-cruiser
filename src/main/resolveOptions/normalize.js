@@ -72,37 +72,34 @@ function compileResolveOptions(pResolveOptions, pTSConfig){
         );
     }
 
-    return Object.assign(
-        {},
-        DEFAULT_RESOLVE_OPTIONS,
-        lResolveOptions,
-        pResolveOptions,
-        NON_OVERRIDABLE_RESOLVE_OPTIONS
-    );
+    return {
+        ...DEFAULT_RESOLVE_OPTIONS,
+        ...lResolveOptions,
+        ...pResolveOptions,
+        ...NON_OVERRIDABLE_RESOLVE_OPTIONS
+    };
 }
 
 module.exports = (pResolveOptions, pOptions, pTSConfig) => compileResolveOptions(
-    Object.assign(
-        {
+    {
 
-            /*
-                for later: check semantics of enhanced-resolve symlinks and
-                node's preserveSymlinks. They seem to be
-                symlink === !preserveSymlinks - but using it that way
-                breaks backwards compatibility
-            */
-            symlinks: pOptions.preserveSymlinks,
-            tsConfig: _get(pOptions, "ruleSet.options.tsConfig.fileName", null),
+        /*
+            for later: check semantics of enhanced-resolve symlinks and
+            node's preserveSymlinks. They seem to be
+            symlink === !preserveSymlinks - but using it that way
+            breaks backwards compatibility
+        */
+        symlinks: pOptions.preserveSymlinks,
+        tsConfig: _get(pOptions, "ruleSet.options.tsConfig.fileName", null),
 
-            /* squirel the externalModuleResolutionStrategy and combinedDependencies
-               thing into the resolve options
-                - they're not for enhanced resolve, but they are for what we consider
-                resolve options ...
-            */
-            externalModuleResolutionStrategy: pOptions.externalModuleResolutionStrategy,
-            combinedDependencies: pOptions.combinedDependencies
-        },
-        pResolveOptions || {}
-    ),
+        /* squirel the externalModuleResolutionStrategy and combinedDependencies
+            thing into the resolve options
+            - they're not for enhanced resolve, but they are for what we consider
+            resolve options ...
+        */
+        externalModuleResolutionStrategy: pOptions.externalModuleResolutionStrategy,
+        combinedDependencies: pOptions.combinedDependencies,
+        ...(pResolveOptions || {})
+    },
     pTSConfig || {}
 );

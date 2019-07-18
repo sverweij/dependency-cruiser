@@ -20,34 +20,27 @@ function mergeCountIntoRule(pRule, pViolationCounts) {
         ? pViolationCounts[pRule.name]
         : 0;
 
-    return Object.assign(
-        {},
-        pRule,
-        {
-            count: lCount,
-            unviolated: lCount <= 0
-        }
-    );
+    return {
+        ...pRule,
+        count: lCount,
+        unviolated: lCount <= 0
+    };
 }
 
 function formatSummaryForReport(pSummary) {
-    return Object.assign(
-        {},
-        pSummary,
-        {
-            depcruiseVersion: `dependency-cruiser@${version}`,
-            runDate: (new Date()).toISOString(),
-            violations: (pSummary.violations || []).map(
-                pViolation => Object.assign(
-                    {},
-                    pViolation,
-                    {
-                        to: pViolation.from === pViolation.to ? "" : pViolation.to
-                    }
-                )
+    return {
+        ...pSummary,
+        depcruiseVersion: `dependency-cruiser@${version}`,
+        runDate: (new Date()).toISOString(),
+        violations: (pSummary.violations || []).map(
+            pViolation => (
+                {
+                    ...pViolation,
+                    to: pViolation.from === pViolation.to ? "" : pViolation.to
+                }
             )
-        }
-    );
+        )
+    };
 }
 
 module.exports = {

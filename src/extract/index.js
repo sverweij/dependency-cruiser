@@ -118,12 +118,10 @@ function makeOptionsPresentable(pOptions) {
 
 function summarizeOptions(pFileDirArray, pOptions) {
     return {
-        optionsUsed: Object.assign(
-            makeOptionsPresentable(pOptions),
-            {
-                args: pFileDirArray.map(pathToPosix).join(" ")
-            }
-        )
+        optionsUsed: {
+            ...makeOptionsPresentable(pOptions),
+            args: pFileDirArray.map(pathToPosix).join(" ")
+        }
     };
 }
 
@@ -141,15 +139,12 @@ function addRuleSetUsed(pOptions) {
 
 function filterExcludedDependencies(pModule, pExclude) {
     // no need to do the 'path' thing as that was addressed in extractFileDirArray already
-    return Object.assign(
-        {},
-        pModule,
-        {
-            dependencies: pModule.dependencies.filter(
-                pDependency => !pExclude.hasOwnProperty('dynamic') || (pExclude.dynamic !== pDependency.dynamic)
-            )
-        }
-    );
+    return {
+        ...pModule,
+        dependencies: pModule.dependencies.filter(
+            pDependency => !pExclude.hasOwnProperty('dynamic') || (pExclude.dynamic !== pDependency.dynamic)
+        )
+    };
 }
 
 module.exports = (pFileDirArray, pOptions, pResolveOptions, pTSConfig) => {
