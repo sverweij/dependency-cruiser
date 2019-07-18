@@ -110,7 +110,6 @@
     "lodash": "4.17.14",
     "pnp-webpack-plugin": "1.5.0",
     "regexp-tree": "0.1.11",
-    "resolve": "1.11.1",
     "semver": "6.2.0",
     "semver-try-require": "3.0.0",
     "strip-json-comments": "3.0.1",
@@ -180,7 +179,7 @@
     "types/**"
   ],
   "engines": {
-    "node": "^8||^10||^12"
+    "node": "^8.10||^10||^12"
   },
   "supportedTranspilers": {
     "coffee-script": ">=1.0.0 <2.0.0",

@@ -4,19 +4,19 @@ const isCore = require('../../../src/extract/resolve/isCore');
 
 describe("extract/resolve/isCore", () => {
     it("returns false when passed nothing", () => {
-        expect(isCore()).to.be.undefined;
+        expect(isCore()).to.equal(false);
     });
 
     it("returns false when passed null", () => {
-        expect(isCore(null)).to.be.undefined;
+        expect(isCore(null)).to.equal(false);
     });
 
     it("returns false when passed a local module", () => {
-        expect(isCore("./path")).to.be.undefined;
+        expect(isCore("./path")).to.equal(false);
     });
 
     it("returns false when passed a non core module", () => {
-        expect(isCore("flowdash")).to.be.undefined;
+        expect(isCore("flowdash")).to.equal(false);
     });
 
     it("returns true when passed a core module", () => {

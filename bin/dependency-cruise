@@ -6,7 +6,8 @@ const processCLI = require("../src/cli");
 const $package   = require("../package.json");
 
 const VERSION_ERR = `\nERROR: your node version (${process.versions.node}) is not supported. dependency-cruiser
-       follows the node.js release cycle and runs on node versions ${$package.engines.node}
+       follows the node.js release cycle and runs on these node versions:
+       ${$package.engines.node}
        See https://nodejs.org/en/about/releases/ for details.
 
 `;
