@@ -49,6 +49,19 @@ function squashToDir (pModules) {
         );
 }
 
+function report(pResults) {
+    return Handlebars.templates['ddot.template.hbs'](
+        {
+            "things" : consolidateModules(squashToDir(pResults.modules))
+                .map(consolidateModuleDependencies)
+                .sort(compareOnSource)
+                .map(extractRelevantTransgressions)
+                .map(folderify)
+                .map(colorize)
+        }
+    );
+}
+
 /**
  * Returns the results of a cruise as a directed graph in the dot language. The dependencies
  * are collapsed to folder level, though
@@ -56,13 +69,9 @@ function squashToDir (pModules) {
  * @param {any} pResults - the output of a dependency-cruise adhering to ../../../extract/results-schema.json
  * @returns {string} - a dot program
  */
-module.exports = (pResults) => Handlebars.templates['ddot.template.hbs'](
+module.exports = (pResults) => (
     {
-        "things" : consolidateModules(squashToDir(pResults.modules))
-            .map(consolidateModuleDependencies)
-            .sort(compareOnSource)
-            .map(extractRelevantTransgressions)
-            .map(folderify)
-            .map(colorize)
+        output: report(pResults),
+        exitCode: 0
     }
 );

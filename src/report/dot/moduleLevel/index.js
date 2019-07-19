@@ -64,21 +64,31 @@ function addURL(pInput) {
         );
 }
 
+function report(pResults, pColoringScheme) {
+    return Handlebars.templates['dot.template.hbs'](
+        {
+            "things" : pResults.modules
+                .sort(compareOnSource)
+                .map(extractFirstTransgression)
+                .map(folderify)
+                .map(colorize(pColoringScheme))
+                .map(addURL(pResults))
+        }
+    );
+}
+
 /**
  * Returns the results of a cruise as a directed graph in the dot language.
  *
  * @param {any} pResults - the output of a dependency-cruise adhering to ../../../extract/results-schema.json
  * @param {any} pColoringScheme - a mapping of source properties to a color, fillcolor and fontcolor
  *                              - see ../comon/richModuleCOlorScheme.json for an example
- * @returns {string} - a dot program
+ * @returns {object} - output: a dot program
+ *                     exitCode: 0
  */
-module.exports = (pResults, pColoringScheme) => Handlebars.templates['dot.template.hbs'](
+module.exports = (pResults, pColoringScheme) => (
     {
-        "things" : pResults.modules
-            .sort(compareOnSource)
-            .map(extractFirstTransgression)
-            .map(folderify)
-            .map(colorize(pColoringScheme))
-            .map(addURL(pResults))
+        output: report(pResults, pColoringScheme),
+        exitCode: 0
     }
 );

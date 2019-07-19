@@ -53,17 +53,7 @@ function addExplanation(pRuleSet, pLong) {
         : pViolation => pViolation;
 }
 
-/**
- * Returns the results of a cruise in a text only format, reminiscent of how eslint prints
- * to stdout:
- * - for each violation a message stating the violation name and the to and from
- * - a summary with total number of errors and warnings found, and the total number of files cruised
- *
- * @param {any} pResults - the output of a dependency-cruise adhering to ../extract/results-schema.json
- * @param {boolean} pLong - whether or not to include an explanation (/ comment) which each violation
- * @returns {string} - eslint like output
- */
-module.exports = (pResults, pLong = false) => {
+function report (pResults, pLong) {
 
     if (pResults.summary.violations.length === 0){
         return `\n${chalk.green(figures.tick)} no dependency violations found (${pResults.summary.totalCruised} modules, ${pResults.summary.totalDependenciesCruised} dependencies cruised)\n\n`;
@@ -76,6 +66,24 @@ module.exports = (pResults, pLong = false) => {
         formatSummary(pResults.summary)
     );
 
-};
+}
+
+/**
+ * Returns the results of a cruise in a text only format, reminiscent of how eslint prints
+ * to stdout:
+ * - for each violation a message stating the violation name and the to and from
+ * - a summary with total number of errors and warnings found, and the total number of files cruised
+ *
+ * @param {any} pResults - the output of a dependency-cruise adhering to ../extract/results-schema.json
+ * @param {boolean} pLong - whether or not to include an explanation (/ comment) which each violation
+ * @returns {object} - output: eslint like output
+ *                     exitCode: the number of errors found
+ */
+module.exports = (pResults, pLong = false) => (
+    {
+        output: report(pResults, pLong),
+        exitCode: pResults.summary.error
+    }
+);
 
 /* eslint max-len: 0 */

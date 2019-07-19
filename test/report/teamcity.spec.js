@@ -18,7 +18,7 @@ describe("report/teamcity", () => {
 
         expect(
             removePerSessionAttributes(
-                render(okdeps)
+                render(okdeps).output
             )
         ).to.equal(
             lFixture
@@ -32,7 +32,7 @@ describe("report/teamcity", () => {
 
         expect(
             removePerSessionAttributes(
-                render(moduleErrs)
+                render(moduleErrs).output
             )
         ).to.equal(
             lFixture

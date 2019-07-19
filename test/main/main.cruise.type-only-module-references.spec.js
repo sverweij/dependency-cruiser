@@ -11,7 +11,7 @@ chai.use(require('chai-json-schema'));
 
 const gWorkingDir = process.cwd();
 
-describe('main - type only module references', () => {
+describe('main.cruise - type only module references', () => {
     beforeEach("reset current wd", () => {
         process.chdir(gWorkingDir);
     });
@@ -31,8 +31,8 @@ describe('main - type only module references', () => {
             {bustTheCache:true}
         );
 
-        expect(lResult).to.deep.equal(output);
-        expect(lResult).to.be.jsonSchema(depSchema);
+        expect(lResult.output).to.deep.equal(output);
+        expect(lResult.output).to.be.jsonSchema(depSchema);
     });
 
     it("don't find it when not looking for pre-compilation deps", () => {
@@ -46,8 +46,8 @@ describe('main - type only module references', () => {
             {bustTheCache:true}
         );
 
-        expect(lResult).to.deep.equal(outputNoTS);
-        expect(lResult).to.be.jsonSchema(depSchema);
+        expect(lResult.output).to.deep.equal(outputNoTS);
+        expect(lResult.output).to.be.jsonSchema(depSchema);
     });
 
 });

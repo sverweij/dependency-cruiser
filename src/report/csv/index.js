@@ -8,10 +8,16 @@ require("./csv.template");
  * Returns the results of a cruise in an 'incidence matrix'
  *
  * @param {any} pResults - the output of a dependency-cruise adhering to ../../extract/results-schema.json
- * @returns {string} - incidence matrix in csv format
+ * @returns {object} - output: incidence matrix in csv format
+ *                     exitCode: 0
  */
-module.exports = pResults => Handlebars.templates['csv.template.hbs'](
+module.exports = pResults => (
     {
-        "things" : dependencyToIncidenceTransformer(pResults.modules)
+        output: Handlebars.templates['csv.template.hbs'](
+            {
+                "things" : dependencyToIncidenceTransformer(pResults.modules)
+            }
+        ),
+        exitCode: 0
     }
 );

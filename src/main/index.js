@@ -23,18 +23,6 @@ function format(pResult, pOutputType) {
     return report.getReporter(pOutputType)(pResult);
 }
 
-function wrapInDependencyList(pExtractResult, pReporterOutput, pOutputType) {
-    let lRetval = pExtractResult;
-
-    if (pOutputType) {
-        lRetval = {
-            ...pExtractResult,
-            modules: pReporterOutput
-        };
-    }
-    return lRetval;
-}
-
 /**
  * Cruises through and returns the dependencies in a directory, or
  * starting with a file. Supports javascript (ES2015 and older), typescript
@@ -115,11 +103,10 @@ function cruise (pFileDirArray, pOptions, pResolveOptions, pTSConfig) {
         normalizeResolveOptions(pResolveOptions, pOptions, pTSConfig),
         pTSConfig
     );
-    const lReporterOutput = report.getReporter(pOptions.outputType)(
+
+    return report.getReporter(pOptions.outputType)(
         lExtractionResult
     );
-
-    return wrapInDependencyList(lExtractionResult, lReporterOutput, pOptions.outputType);
 }
 
 module.exports = {

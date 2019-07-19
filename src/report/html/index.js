@@ -25,8 +25,17 @@ function addShowTitle(pDependencyEntry) {
  * @returns {string} - incidence matrix in an html table with some simple bits and bobs to make
  *                     it easier to navigate.
  */
-module.exports = pResults => Handlebars.templates['html.template.hbs'](
+function report(pResults) {
+    return Handlebars.templates['html.template.hbs'](
+        {
+            "things" : dependencyToIncidenceTransformer(pResults.modules).map(addShowTitle)
+        }
+    );
+}
+
+module.exports = (pResults) => (
     {
-        "things" : dependencyToIncidenceTransformer(pResults.modules).map(addShowTitle)
+        output: report(pResults),
+        exitCode: 0
     }
 );

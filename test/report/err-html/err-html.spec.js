@@ -9,31 +9,30 @@ describe("report/err-html", () => {
     const lOkeliDokelyHeader = 'No violations found';
 
     it('happy day no errors', () => {
-        expect(errHTML(everythingFineResult)).to.contain(lOkeliDokelyKey);
-        expect(errHTML(everythingFineResult)).to.contain(lOkeliDokelyHeader);
-    });
+        const lResult = errHTML(everythingFineResult);
 
-    it('happy day module only', () => {
-        expect(errHTML(everythingFineResult)).to.contain(lOkeliDokelyKey);
-        expect(errHTML(everythingFineResult)).to.contain(lOkeliDokelyHeader);
+        expect(lResult.output).to.contain(lOkeliDokelyKey);
+        expect(lResult.output).to.contain(lOkeliDokelyHeader);
+        expect(lResult.exitCode).to.equal(0);
     });
 
     it('report with errors', () => {
         const lReport = errHTML(validationMoreThanOnce);
 
-        expect(lReport).to.not.contain(lOkeliDokelyKey);
-        expect(lReport).to.not.contain(lOkeliDokelyHeader);
-        expect(lReport).to.contain('All violations');
-        expect(lReport).to.contain('<strong>127</strong> modules');
-        expect(lReport).to.contain('<strong>259</strong> dependencies');
-        expect(lReport).to.contain('<strong>0</strong> errors');
-        expect(lReport).to.contain('<strong>1</strong> warnings');
-        expect(lReport).to.contain('<strong>2</strong> informational');
+        expect(lReport.output).to.not.contain(lOkeliDokelyKey);
+        expect(lReport.output).to.not.contain(lOkeliDokelyHeader);
+        expect(lReport.output).to.contain('All violations');
+        expect(lReport.output).to.contain('<strong>127</strong> modules');
+        expect(lReport.output).to.contain('<strong>259</strong> dependencies');
+        expect(lReport.output).to.contain('<strong>0</strong> errors');
+        expect(lReport.output).to.contain('<strong>1</strong> warnings');
+        expect(lReport.output).to.contain('<strong>2</strong> informational');
 
-        expect(lReport).to.contain('<td><strong>2</strong></td>');
-        expect(lReport).to.contain(
+        expect(lReport.output).to.contain('<td><strong>2</strong></td>');
+        expect(lReport.output).to.contain(
             '<a href="https://github.com/sverweij/dependency-cruiser/blob/develop/src/cli/compileConfig/index.js">'
         );
+        expect(lReport.exitCode).to.equal(0);
     });
 
 });

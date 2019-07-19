@@ -75,7 +75,7 @@ function reportViolations(pViolations) {
  */
 module.exports = (pResults) => {
     // this is the documented way to get tsm to emit strings
-    // Alternatively we could've used tne 'low level API', which
+    // Alternatively we could've used the 'low level API', which
     // involves creating new `Message`s and stringifying those.
     // The abstraction of the 'higher level API' makes this
     // reporter more easy to implement and maintain, despite
@@ -85,7 +85,10 @@ module.exports = (pResults) => {
     const lRuleSet = _get(pResults, 'summary.ruleSetUsed', []);
     const lViolations = _get(pResults, 'summary.violations', []);
 
-    return reportViolatedRules(lRuleSet, lViolations)
-        .concat(reportViolations(lViolations))
-        .reduce((pAll, pCurrent) => `${pAll}${pCurrent}\n`, '');
+    return {
+        output: reportViolatedRules(lRuleSet, lViolations)
+            .concat(reportViolations(lViolations))
+            .reduce((pAll, pCurrent) => `${pAll}${pCurrent}\n`, ''),
+        exitCode: pResults.summary.error
+    };
 };

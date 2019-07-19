@@ -22,7 +22,7 @@ const TYPE2REPORTER      = {
 
 function getReporter(pOutputType) {
     // eslint-disable-next-line security/detect-object-injection
-    return TYPE2REPORTER[pOutputType] || ((x) => x);
+    return TYPE2REPORTER[pOutputType] || ((x) => ({output: x, exitCode: 0}));
 }
 
 module.exports = {
