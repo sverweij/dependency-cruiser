@@ -6,7 +6,7 @@ checks:
 plugins:
   eslint:
     enabled: true
-    channel: "eslint-4"
+    channel: "eslint-5"
     config: 
       config: .eslintrc.json
     checks:
@@ -20,7 +20,7 @@ plugins:
       # the local ones - probably because cc uses an older version
       # of eslint
       indent:
-        enabled: false
+        enabled: true
 exclude_patterns:
   - ".github/"
   - "configs/"
