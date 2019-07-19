@@ -18,10 +18,9 @@ function orphanCheckNecessary(pOptions){
 
 function addOrphanCheckToGraph(pDependencies){
     return pDependencies.map(
-        pNode => Object.assign(
-            {},
-            pNode,
+        pNode => (
             {
+                ...pNode,
                 orphan: isOrphan(pNode, pDependencies)
             }
         )

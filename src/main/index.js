@@ -27,13 +27,10 @@ function wrapInDependencyList(pExtractResult, pReporterOutput, pOutputType) {
     let lRetval = pExtractResult;
 
     if (pOutputType) {
-        lRetval = Object.assign(
-            {},
-            pExtractResult,
-            {
-                modules: pReporterOutput
-            }
-        );
+        lRetval = {
+            ...pExtractResult,
+            modules: pReporterOutput
+        };
     }
     return lRetval;
 }

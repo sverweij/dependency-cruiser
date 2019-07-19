@@ -170,7 +170,7 @@ module.exports = (pTypeScriptAST) =>
             .concat(extractImportEquals(pTypeScriptAST))
             .concat(extractTrippleSlashDirectives(pTypeScriptAST))
             .concat(extractNestedDependencies(pTypeScriptAST))
-            .map(pModule => Object.assign({dynamic: false}, pModule))
+            .map(pModule => ({dynamic: false, ...pModule}))
         : [];
 
 

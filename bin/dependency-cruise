@@ -5,10 +5,17 @@ const semver     = require("semver");
 const processCLI = require("../src/cli");
 const $package   = require("../package.json");
 
+const VERSION_ERR = `\nERROR: your node version (${process.versions.node}) is not supported. dependency-cruiser
+       follows the node.js release cycle and runs on these node versions:
+       ${$package.engines.node}
+       See https://nodejs.org/en/about/releases/ for details.
+
+`;
+
 /* istanbul ignore if  */
 if (!semver.satisfies(process.versions.node, $package.engines.node)) {
-    process.stderr.write(`\nERROR: your node version (${process.versions.node}) is not recent enough.\n`);
-    process.stderr.write(`       dependency-cruiser needs a version of node ${$package.engines.node}\n\n`);
+
+    process.stderr.write(VERSION_ERR);
 
     /* eslint no-process-exit: 0 */
     process.exit(1);

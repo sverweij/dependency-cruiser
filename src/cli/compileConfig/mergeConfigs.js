@@ -7,10 +7,10 @@ function extendNamedRule(pExtendedRule, pForbiddenArrayBase) {
     return pForbiddenArrayBase
         .filter(pBaseRule => pBaseRule.name === pExtendedRule.name)
         .reduce(
-            (pAll, pBaseRule) => Object.assign(
-                pBaseRule,
-                pAll
-            ),
+            (pAll, pBaseRule) => ({
+                ...pBaseRule,
+                ...pAll
+            }),
             pExtendedRule
         );
 }
@@ -87,7 +87,7 @@ function mergeAllowed(pAllowedArrayExtended, pAllowedArrayBase){
 
 function mergeOptions(pOptionsExtended, pOptionsBase) {
     // TODO: make implementation less naive (?)
-    return Object.assign({}, pOptionsBase, pOptionsExtended);
+    return {...pOptionsBase, ...pOptionsExtended};
 }
 
 /**

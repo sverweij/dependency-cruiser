@@ -37,21 +37,19 @@ module.exports = (pModuleName, pBaseDir, pFileDir, pResolveOptions) => {
         couldNotResolve: !Boolean(isCore(pModuleName)) && !fileExists(lProbablePath)
     };
 
-    return Object.assign(
-        lRetval,
-        // we might want to use resolve options instead of {} here
-        resolveHelpers.addLicenseAttribute(pModuleName, pBaseDir, {}),
-        {
-            dependencyTypes: determineDependencyTypes(
-                lRetval,
-                pModuleName,
-                readPackageDeps(pFileDir, pBaseDir, pResolveOptions.combinedDependencies),
-                pFileDir,
-                pResolveOptions,
-                pBaseDir
-            )
-        }
-    );
+    // we might want to use resolve options instead of {} here
+    return {
+        ...lRetval,
+        ...(resolveHelpers.addLicenseAttribute(pModuleName, pBaseDir, {})),
+        dependencyTypes: determineDependencyTypes(
+            lRetval,
+            pModuleName,
+            readPackageDeps(pFileDir, pBaseDir, pResolveOptions.combinedDependencies),
+            pFileDir,
+            pResolveOptions,
+            pBaseDir
+        )
+    };
 };
 
 module.exports.clearCache = () => {

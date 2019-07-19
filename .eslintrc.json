@@ -7,7 +7,7 @@
         "import"
     ],
     "parserOptions": {
-        "ecmaVersion": 6,
+        "ecmaVersion": 2018,
         "sourceType": "module",
         "ecmaFeatures": {
             "jsx": false
@@ -270,6 +270,7 @@
         "mocha/no-top-level-hooks": "error",// disallow top-level hooks
         "mocha/valid-suite-description": "error",// match suite descriptions against a pre-configured regular expression
         "mocha/valid-test-description": "off", // match test descriptions against a pre-configured regular expression
+        "mocha/no-async-describe": "error",
 
         // node
         "node/exports-style": ["error", "module.exports"],

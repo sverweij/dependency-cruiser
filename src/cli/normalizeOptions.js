@@ -93,13 +93,11 @@ function validateAndNormalizeRulesFileName (pValidate) {
  * @return {object}          [description]
  */
 module.exports = (pOptions) => {
-    pOptions = Object.assign(
-        {
-            outputTo: defaults.OUTPUT_TO,
-            outputType: defaults.OUTPUT_TYPE
-        },
-        pOptions
-    );
+    pOptions = {
+        outputTo: defaults.OUTPUT_TO,
+        outputType: defaults.OUTPUT_TYPE,
+        ...pOptions
+    };
 
     if (pOptions.hasOwnProperty("moduleSystems")) {
         pOptions.moduleSystems = pOptions.moduleSystems.split(",").map(pString => pString.trim());

@@ -40,15 +40,13 @@ function writeTheThing (pFileName, pConfig) {
 }
 
 function normalizeInitOptions(pInitOptions){
-    let lRetval = Object.assign(
-        {
-            version: $package.version,
-            date: (new Date()).toJSON(),
-            configFormat: ".json",
-            configType: "self-contained"
-        },
-        pInitOptions
-    );
+    let lRetval = {
+        version: $package.version,
+        date: (new Date()).toJSON(),
+        configFormat: ".json",
+        configType: "self-contained",
+        ...pInitOptions
+    };
 
     if (lRetval.configType === "preset" && !lRetval.preset) {
         lRetval.preset = "dependency-cruiser/configs/recommended-warn-only";

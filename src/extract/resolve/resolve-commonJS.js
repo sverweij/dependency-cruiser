@@ -34,29 +34,25 @@ function addResolutionAttributes(pBaseDir, pModuleName, pFileDir, pResolveOption
  */
 module.exports = (pModuleName, pBaseDir, pFileDir, pResolveOptions) => {
 
-    let lRetval = Object.assign(
-        {
-            resolved        : pModuleName,
-            coreModule      : false,
-            followable      : false,
-            couldNotResolve : false,
-            dependencyTypes : ["undetermined"]
-        },
-        addResolutionAttributes(pBaseDir, pModuleName, pFileDir, pResolveOptions)
-    );
+    let lRetval = {
+        resolved        : pModuleName,
+        coreModule      : false,
+        followable      : false,
+        couldNotResolve : false,
+        dependencyTypes : ["undetermined"],
+        ...addResolutionAttributes(pBaseDir, pModuleName, pFileDir, pResolveOptions)
+    };
 
-    return Object.assign(
-        lRetval,
-        resolveHelpers.addLicenseAttribute(pModuleName, pBaseDir, pResolveOptions),
-        {
-            dependencyTypes: determineDependencyTypes(
-                lRetval,
-                pModuleName,
-                readPackageDeps(pFileDir, pBaseDir, pResolveOptions.combinedDependencies),
-                pFileDir,
-                pResolveOptions,
-                pBaseDir
-            )
-        }
-    );
+    return {
+        ...lRetval,
+        ...(resolveHelpers.addLicenseAttribute(pModuleName, pBaseDir, pResolveOptions)),
+        dependencyTypes: determineDependencyTypes(
+            lRetval,
+            pModuleName,
+            readPackageDeps(pFileDir, pBaseDir, pResolveOptions.combinedDependencies),
+            pFileDir,
+            pResolveOptions,
+            pBaseDir
+        )
+    };
 };

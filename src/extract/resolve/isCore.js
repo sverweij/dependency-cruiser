@@ -1,5 +1,3 @@
-// const builtinModules = require('module').builtinModules;
-const resolve = require('resolve');
+const builtinModules = require('module').builtinModules;
 
-module.exports = resolve.isCore;
-// module.exports = (pModuleName) => builtinModules.some(pBuiltinModule => pBuiltinModule === pModuleName);
+module.exports = (pModuleName) => builtinModules.some(pBuiltinModule => pBuiltinModule === pModuleName);

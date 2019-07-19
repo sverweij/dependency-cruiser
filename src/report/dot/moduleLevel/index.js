@@ -9,35 +9,28 @@ const compareOnSource = require("../common/compareOnSource");
 require("./dot.template");
 
 function colorize(pColoringScheme) {
-    return pModule => Object.assign(
-        {},
-        pModule,
+    return pModule => (
         {
-            dependencies: pModule.dependencies.map(coloring.determineDependencyColor)
-        },
-        coloring.determineModuleColors(pModule, pColoringScheme)
+            ...pModule,
+            dependencies: pModule.dependencies.map(coloring.determineDependencyColor),
+            ...coloring.determineModuleColors(pModule, pColoringScheme)
+        }
     );
 }
 
 function extractFirstTransgression(pModule){
-    return Object.assign(
-        {},
-        (pModule.rules ? Object.assign({}, pModule, {rule: pModule.rules[0]}) : pModule),
-        {
-            dependencies: pModule.dependencies.map(
-                pDependency =>
-                    pDependency.rules
-                        ? Object.assign(
-                            {},
-                            pDependency,
-                            {
-                                rule: pDependency.rules[0]
-                            }
-                        )
-                        : pDependency
-            )
-        }
-    );
+    return {
+        ...(pModule.rules ? {...pModule, rule: pModule.rules[0]} : pModule),
+        dependencies: pModule.dependencies.map(
+            pDependency =>
+                pDependency.rules
+                    ? {
+                        ...pDependency,
+                        rule: pDependency.rules[0]
+                    }
+                    : pDependency
+        )
+    };
 }
 
 /**

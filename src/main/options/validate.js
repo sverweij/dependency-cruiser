@@ -73,7 +73,7 @@ function validate(pOptions) {
         if (_get(pOptions, 'ruleSet.options')) {
             lRetval = validate(pOptions.ruleSet.options);
         }
-        return Object.assign(lRetval, pOptions);
+        return {...lRetval, ...pOptions};
     }
     return lRetval;
 }

@@ -38,13 +38,11 @@ function aggregateViolations(pViolations, pRuleSetUsed) {
  */
 module.exports = pResults => Handlebars.templates['err-html.template.hbs'](
     {
-        summary: Object.assign(
-            formatSummaryForReport(pResults.summary),
-            {
-                agggregateViolations: aggregateViolations(
-                    pResults.summary.violations, pResults.summary.ruleSetUsed
-                )
-            }
-        )
+        summary: {
+            ...formatSummaryForReport(pResults.summary),
+            agggregateViolations: aggregateViolations(
+                pResults.summary.violations, pResults.summary.ruleSetUsed
+            )
+        }
     }
 );

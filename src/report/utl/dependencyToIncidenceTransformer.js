@@ -30,20 +30,19 @@ function determineIncidenceType(pFromListEntry) {
 }
 
 function addIncidences(pFromList) {
-    return (pDependency) =>
-        Object.assign(
-            pDependency,
-            {
-                incidences: pFromList.map(pFromListEntry =>
-                    Object.assign(
-                        {
-                            to: pFromListEntry.source
-                        },
-                        determineIncidenceType(pFromListEntry)(pDependency)
-                    )
+    return (pDependency) => (
+        {
+            ...pDependency,
+            incidences: pFromList.map(
+                pFromListEntry => (
+                    {
+                        to: pFromListEntry.source,
+                        ...(determineIncidenceType(pFromListEntry)(pDependency))
+                    }
                 )
-            }
-        );
+            )
+        }
+    );
 }
 
 module.exports =
