@@ -12,7 +12,6 @@ const TYPE2REPORTER      = {
     "json"     : reportJson,
     "html"     : reportHtml,
     "dot"      : reportDot,
-    "rcdot"    : reportDot,
     "ddot"     : reportDDot,
     "csv"      : reportCsv,
     "err"      : reportErr,

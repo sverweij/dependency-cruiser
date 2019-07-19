@@ -112,13 +112,6 @@ dependency-cruise -x "^node_modules" -T dot src | dot -T svg > dependencygraph.s
 > modules on folder level. It works fine, but its output is a tad more ugly
 > than I'd like so there'll be tweaks to spruce it up in the future.
 
-> ##### rcdot
-> The `rcdot` reporter is deprecated.    
-> Since version 4.12.0 `rcdot` reporter's
-> coloring has become the default for the `dot` reporter, so `dot` and `rcdot`
-> will yield the same results. As of version 5.0.0 the rcdot option will be
-> removed.
-
 #### err-html
 Generates an stand alone html report with:
 - a summary with files & dependencies cruised and the number of errors and warnings found
