@@ -1,15 +1,12 @@
 {
-    "root": true,
-    "extends": [
-        "./configs/eslint-config.json",
-        "eslint-config-prettier"
-    ],
-    "overrides": [
-        {
-            "files": ["test/**/*.js"],
-            "env": {
-                "mocha": true
-            }
-        }
-    ]
+  "root": true,
+  "extends": ["./configs/eslint-config.json", "eslint-config-prettier"],
+  "overrides": [
+    {
+      "files": ["test/**/*.js"],
+      "env": {
+        "mocha": true
+      }
+    }
+  ]
 }

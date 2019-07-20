@@ -7,33 +7,32 @@ cache:
 test_async_node_12:
   image: node:12
   script:
-   - npm install
-   - npm run lint
-   - npm run lint:types
-   - npm run depcruise
-   - npm run test:integration
-   - npm run test:cover
+    - npm install
+    - npm run lint
+    - npm run lint:types
+    - npm run depcruise
+    - npm run test:integration
+    - npm run test:cover
   except:
-   - tags
+    - tags
 
 test_async_node_10:
   image: node:10
   script:
-   - npm install
-   - npm run test:integration
-   - npm run test:cover
+    - npm install
+    - npm run test:integration
+    - npm run test:cover
   except:
-   - tags
+    - tags
 
 test_async_node_8:
   image: node:8
   script:
-   - npm install
-   - npm run test:integration
-   - npm run test:cover
+    - npm install
+    - npm run test:integration
+    - npm run test:cover
   except:
-   - tags
-
+    - tags
 # publish:
 #  image: node:latest
 #  script:
