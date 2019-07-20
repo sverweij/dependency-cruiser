@@ -59,8 +59,8 @@ outputType | One of the output types mentioned in the [--output-format](cli.md#-
 
 ### Return value
 An object with two attributes:
+
 attribute|content
 ---|---
 output|the result of the cruise. The outputType you pass in the options determines how it will look. If you don't supply an outputType it will will contain a javascript object that adheres to dependency-cruiser's [results schema](../src/extract/results-schema.json).
 exitCode|The exit code the command line (typically 0, but some reporters will return a non-zero value in here e.g. when errors were detected in the output)
-
