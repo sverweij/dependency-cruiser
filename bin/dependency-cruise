@@ -2,7 +2,7 @@
 const validateNodeEnv = require("../src/cli/validateNodeEnv");
 
 try {
-    validateNodeEnv(process.versions.node);
+    validateNodeEnv();
 
     // importing things only after the validateNodeEnv check so we can show an understandable
     // error. Otherwise, on unsupported platforms we would show a stack trace, which is
