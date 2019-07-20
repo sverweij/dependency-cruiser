@@ -11,15 +11,24 @@ const consolidatedRxJs       = fs.readFileSync('test/report/dot/folderLevel/fixt
 
 describe("report/dot/folderLevel reporter", () => {
     it("consolidates to folder level", () => {
-        expect(render(deps).output).to.deep.equal(consolidatedDot);
+        const lRetval = render(deps);
+
+        expect(lRetval.output).to.deep.equal(consolidatedDot);
+        expect(lRetval.exitCode).to.equal(0);
     });
 
     it("consolidates module only transgressions correctly", () => {
-        expect(render(orphans).output).to.deep.equal(consolidatedOrphansDot);
+        const lRetval = render(orphans);
+
+        expect(lRetval.output).to.deep.equal(consolidatedOrphansDot);
+        expect(lRetval.exitCode).to.equal(0);
     });
 
     it("consolidates a slightly larger code base in a timely fashion", () => {
-        expect(render(rxjs).output).to.deep.equal(consolidatedRxJs);
+        const lRetval = render(rxjs);
+
+        expect(lRetval.output).to.deep.equal(consolidatedRxJs);
+        expect(lRetval.exitCode).to.equal(0);
     });
 });
 
