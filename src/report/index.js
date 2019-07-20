@@ -1,30 +1,36 @@
-const reportHtml     = require("../report/html");
-const reportJson     = require("../report/json");
-const reportDot      = require("../report/dot/moduleLevel");
-const reportDDot     = require("../report/dot/folderLevel");
-const reportCsv      = require("../report/csv");
-const reportErr      = require("./err/err-short");
-const reportErrLong  = require("./err/err-long");
-const reportErrHtml  = require("./err-html");
-const reportTeamCity = require("./teamcity");
+const csv      = require("../report/csv");
+const html     = require("../report/html");
+const ddot     = require("../report/dot/folderLevel");
+const dot      = require("../report/dot/moduleLevel");
+const json     = require("../report/json");
+const errLong  = require("./err/err-long");
+const err      = require("./err/err-short");
+const errHtml  = require("./err-html");
+const identity = require("./identity");
+const teamcity = require("./teamcity");
 
-const TYPE2REPORTER      = {
-    "json"     : reportJson,
-    "html"     : reportHtml,
-    "dot"      : reportDot,
-    "ddot"     : reportDDot,
-    "csv"      : reportCsv,
-    "err"      : reportErr,
-    "err-long" : reportErrLong,
-    "err-html" : reportErrHtml,
-    "teamcity" : reportTeamCity
+const TYPE2REPORTER = {
+    json,
+    html,
+    dot,
+    ddot,
+    csv,
+    err,
+    "err-long" : errLong,
+    "err-html" : errHtml,
+    teamcity
 };
 
 function getReporter(pOutputType) {
     // eslint-disable-next-line security/detect-object-injection
-    return TYPE2REPORTER[pOutputType] || ((x) => ({output: x, exitCode: 0}));
+    return TYPE2REPORTER[pOutputType] || identity;
+}
+
+function getAvailableReporters() {
+    return Object.keys(TYPE2REPORTER);
 }
 
 module.exports = {
+    getAvailableReporters,
     getReporter
 };
