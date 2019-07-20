@@ -1,21 +1,21 @@
-const enhancedResolve       = require('enhanced-resolve');
-const pathToPosix           = require('../utl/pathToPosix');
+const enhancedResolve = require("enhanced-resolve");
+const pathToPosix = require("../utl/pathToPosix");
 
 let gResolver = null;
 let gInitialized = {};
 
 function init(pResolveOptions, pCachingContext) {
-    if (!gInitialized[pCachingContext] || pResolveOptions.bustTheCache) {
-        // assuming the cached file system here
-        pResolveOptions.fileSystem.purge();
-        gResolver = enhancedResolve.ResolverFactory.createResolver({
-            ...pResolveOptions,
-            // we're doing that ourselves for now
-            symlinks: false
-        });
-        /* eslint security/detect-object-injection:0 */
-        gInitialized[pCachingContext] = true;
-    }
+  if (!gInitialized[pCachingContext] || pResolveOptions.bustTheCache) {
+    // assuming the cached file system here
+    pResolveOptions.fileSystem.purge();
+    gResolver = enhancedResolve.ResolverFactory.createResolver({
+      ...pResolveOptions,
+      // we're doing that ourselves for now
+      symlinks: false
+    });
+    /* eslint security/detect-object-injection:0 */
+    gInitialized[pCachingContext] = true;
+  }
 }
 
 /**
@@ -28,20 +28,24 @@ function init(pResolveOptions, pCachingContext) {
  *
  * @returns {string} path to the resolved file on disk
  */
-function resolve (pModuleName, pFileDir, pResolveOptions, pCachingContext = 'cruise') {
+function resolve(
+  pModuleName,
+  pFileDir,
+  pResolveOptions,
+  pCachingContext = "cruise"
+) {
+  init(pResolveOptions, pCachingContext);
 
-    init(pResolveOptions, pCachingContext);
-
-    return gResolver.resolveSync(
-        {},
-        // lookupStartPath
-        pathToPosix(pFileDir),
-        // request
-        pModuleName
-    );
+  return gResolver.resolveSync(
+    {},
+    // lookupStartPath
+    pathToPosix(pFileDir),
+    // request
+    pModuleName
+  );
 }
 
 module.exports = resolve;
 module.exports.clearCache = () => {
-    gInitialized = {};
+  gInitialized = {};
 };

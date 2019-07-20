@@ -1,4 +1,4 @@
-const _memoize = require('lodash/memoize');
+const _memoize = require("lodash/memoize");
 
 /**
  * Returns true if, in the graph pGraph, pTo is a (transient) dependency of pFrom,
@@ -11,31 +11,38 @@ const _memoize = require('lodash/memoize');
  * @returns {boolean} - the result
  */
 function isReachable(pGraph, pFrom, pTo, pVisited = new Set()) {
-    let lRetval = false;
-    const lNode = pGraph.find(pNode => pNode.source === pFrom);
+  let lRetval = false;
+  const lNode = pGraph.find(pNode => pNode.source === pFrom);
 
-    pVisited.add(pFrom);
+  pVisited.add(pFrom);
 
-    if (lNode) {
-        const lDirectUnvisitedDependencies = lNode.dependencies
-            .filter(pDependency => !pVisited.has(pDependency.resolved))
-            .map(pDependency => pDependency.resolved);
+  if (lNode) {
+    const lDirectUnvisitedDependencies = lNode.dependencies
+      .filter(pDependency => !pVisited.has(pDependency.resolved))
+      .map(pDependency => pDependency.resolved);
 
-        if (pFrom === pTo || lDirectUnvisitedDependencies.some(pDirectDependency => pDirectDependency === pTo)) {
-            lRetval = true;
-        } else {
-            lRetval = lDirectUnvisitedDependencies
-                .some(
-                    // eslint-disable-next-line no-use-before-define
-                    pDirectDependency => isReachableMemoized(pGraph, pDirectDependency, pTo, pVisited)
-                );
-        }
+    if (
+      pFrom === pTo ||
+      lDirectUnvisitedDependencies.some(
+        pDirectDependency => pDirectDependency === pTo
+      )
+    ) {
+      lRetval = true;
+    } else {
+      lRetval = lDirectUnvisitedDependencies.some(pDirectDependency =>
+        // eslint-disable-next-line no-use-before-define
+        isReachableMemoized(pGraph, pDirectDependency, pTo, pVisited)
+      );
     }
+  }
 
-    return lRetval;
+  return lRetval;
 }
 
-const isReachableMemoized = _memoize(isReachable, (_pGraph, pFrom, pTo) => `${pFrom}|${pTo}`);
+const isReachableMemoized = _memoize(
+  isReachable,
+  (_pGraph, pFrom, pTo) => `${pFrom}|${pTo}`
+);
 
 module.exports = isReachableMemoized;
 module.exports.clearCache = () => isReachableMemoized.cache.clear();

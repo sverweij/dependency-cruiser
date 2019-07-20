@@ -21,11 +21,11 @@ const meta = require("./meta");
  *                                transpiler matching pExtension
  */
 module.exports = (pExtension, pSource, pTSConfig) => {
-    const lWrapper = meta.getWrapper(pExtension);
+  const lWrapper = meta.getWrapper(pExtension);
 
-    if (lWrapper.isAvailable()) {
-        return lWrapper.transpile(pSource, pTSConfig);
-    } else {
-        return pSource;
-    }
+  if (lWrapper.isAvailable()) {
+    return lWrapper.transpile(pSource, pTSConfig);
+  } else {
+    return pSource;
+  }
 };

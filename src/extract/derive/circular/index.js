@@ -1,23 +1,23 @@
-const _get = require('lodash/get');
-const dependencyEndsUpAtFrom = require('./dependencyEndsUpAtFrom');
+const _get = require("lodash/get");
+const dependencyEndsUpAtFrom = require("./dependencyEndsUpAtFrom");
 
 function circularityDetectionNecessary(pOptions) {
-    if (pOptions.forceCircular) {
-        return true;
-    }
-    if (pOptions.validate) {
-        return _get(pOptions, 'ruleSet.forbidden', []).some(
-            pRule => pRule.to.hasOwnProperty("circular")
-        );
-    }
-    return false;
+  if (pOptions.forceCircular) {
+    return true;
+  }
+  if (pOptions.validate) {
+    return _get(pOptions, "ruleSet.forbidden", []).some(pRule =>
+      pRule.to.hasOwnProperty("circular")
+    );
+  }
+  return false;
 }
 
-function addCircularityCheckToDependency (pToDep, pGraph, pFrom) {
-    return {
-        ...pToDep,
-        circular: dependencyEndsUpAtFrom(pGraph, pFrom, pToDep.resolved)
-    };
+function addCircularityCheckToDependency(pToDep, pGraph, pFrom) {
+  return {
+    ...pToDep,
+    circular: dependencyEndsUpAtFrom(pGraph, pFrom, pToDep.resolved)
+  };
 }
 
 /**
@@ -30,22 +30,18 @@ function addCircularityCheckToDependency (pToDep, pGraph, pFrom) {
  *                                of them added whether or not it is
  *                                part of
  */
-function addCircularityCheckToGraph (pModules) {
-    return pModules.map(
-        pModule => (
-            {
-                ...pModule,
-                dependencies: pModule.dependencies.map(
-                    pToDep => addCircularityCheckToDependency(pToDep, pModules, pModule.source)
-                )
-            }
-        )
-    );
+function addCircularityCheckToGraph(pModules) {
+  return pModules.map(pModule => ({
+    ...pModule,
+    dependencies: pModule.dependencies.map(pToDep =>
+      addCircularityCheckToDependency(pToDep, pModules, pModule.source)
+    )
+  }));
 }
 
 module.exports = (pModules, pOptions) => {
-    if (circularityDetectionNecessary(pOptions)){
-        return addCircularityCheckToGraph(pModules);
-    }
-    return pModules;
+  if (circularityDetectionNecessary(pOptions)) {
+    return addCircularityCheckToGraph(pModules);
+  }
+  return pModules;
 };

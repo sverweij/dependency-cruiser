@@ -1,5 +1,5 @@
 module.exports = pString =>
-    pString.startsWith("./") ||
-    pString.startsWith("../") ||
-    pString === "." ||
-    pString === "..";
+  pString.startsWith("./") ||
+  pString.startsWith("../") ||
+  pString === "." ||
+  pString === "..";

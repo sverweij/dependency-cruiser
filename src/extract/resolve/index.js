@@ -1,22 +1,32 @@
-const fs                   = require('fs');
-const path                 = require('path');
-const pathToPosix          = require('../utl/pathToPosix');
-const isRelativeModuleName = require('./isRelativeModuleName');
-const resolveAMD           = require('./resolve-AMD');
-const resolveCommonJS      = require('./resolve-commonJS');
+const fs = require("fs");
+const path = require("path");
+const pathToPosix = require("../utl/pathToPosix");
+const isRelativeModuleName = require("./isRelativeModuleName");
+const resolveAMD = require("./resolve-AMD");
+const resolveCommonJS = require("./resolve-commonJS");
 
 function resolveModule(pDependency, pBaseDir, pFileDir, pResolveOptions) {
-    let lRetval = null;
+  let lRetval = null;
 
-    if (
-        isRelativeModuleName(pDependency.moduleName) ||
-        ["cjs", "es6"].indexOf(pDependency.moduleSystem) > -1
-    ) {
-        lRetval = resolveCommonJS(pDependency.moduleName, pBaseDir, pFileDir, pResolveOptions);
-    } else {
-        lRetval = resolveAMD(pDependency.moduleName, pBaseDir, pFileDir, pResolveOptions);
-    }
-    return lRetval;
+  if (
+    isRelativeModuleName(pDependency.moduleName) ||
+    ["cjs", "es6"].indexOf(pDependency.moduleSystem) > -1
+  ) {
+    lRetval = resolveCommonJS(
+      pDependency.moduleName,
+      pBaseDir,
+      pFileDir,
+      pResolveOptions
+    );
+  } else {
+    lRetval = resolveAMD(
+      pDependency.moduleName,
+      pBaseDir,
+      pFileDir,
+      pResolveOptions
+    );
+  }
+  return lRetval;
 }
 
 /**
@@ -54,15 +64,28 @@ function resolveModule(pDependency, pBaseDir, pFileDir, pResolveOptions) {
  *
  */
 module.exports = (pDependency, pBaseDir, pFileDir, pResolveOptions) => {
-    let lResolvedModule = resolveModule(pDependency, pBaseDir, pFileDir, pResolveOptions);
+  let lResolvedModule = resolveModule(
+    pDependency,
+    pBaseDir,
+    pFileDir,
+    pResolveOptions
+  );
 
-    if (!(pResolveOptions.symlinks) && !lResolvedModule.coreModule && !lResolvedModule.couldNotResolve) {
-        try {
-            lResolvedModule.resolved =
-                pathToPosix(path.relative(pBaseDir, fs.realpathSync(path.resolve(pBaseDir, lResolvedModule.resolved))));
-        } catch (e) {
-            lResolvedModule.couldNotResolve = true;
-        }
+  if (
+    !pResolveOptions.symlinks &&
+    !lResolvedModule.coreModule &&
+    !lResolvedModule.couldNotResolve
+  ) {
+    try {
+      lResolvedModule.resolved = pathToPosix(
+        path.relative(
+          pBaseDir,
+          fs.realpathSync(path.resolve(pBaseDir, lResolvedModule.resolved))
+        )
+      );
+    } catch (e) {
+      lResolvedModule.couldNotResolve = true;
     }
-    return lResolvedModule;
+  }
+  return lResolvedModule;
 };

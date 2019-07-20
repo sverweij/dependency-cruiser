@@ -1,17 +1,16 @@
-const fs               = require('fs');
+const fs = require("fs");
 
 const PIPE_BUFFER_SIZE = 512;
 
 function writeToFile(pOutputTo, pDependencyString) {
-    try {
-        fs.writeFileSync(
-            pOutputTo,
-            pDependencyString,
-            {encoding: "utf8", flag: "w"}
-        );
-    } catch (e) {
-        throw Error(`Writing to '${pOutputTo}' didn't work. ${e}`);
-    }
+  try {
+    fs.writeFileSync(pOutputTo, pDependencyString, {
+      encoding: "utf8",
+      flag: "w"
+    });
+  } catch (e) {
+    throw Error(`Writing to '${pOutputTo}' didn't work. ${e}`);
+  }
 }
 
 /**
@@ -28,27 +27,23 @@ function writeToFile(pOutputTo, pDependencyString) {
  * @returns {void} nothing
  */
 function writeToStdOut(pString, pBufferSize) {
-    const lNumberOfChunks = Math.ceil(pString.length / pBufferSize);
-    let i = 0;
+  const lNumberOfChunks = Math.ceil(pString.length / pBufferSize);
+  let i = 0;
 
-    /* eslint no-plusplus: 0 */
-    for (i = 0; i < lNumberOfChunks; i++) {
-        process.stdout.write(
-            pString.substr(i * pBufferSize, pBufferSize),
-            "utf8"
-        );
-    }
-
+  /* eslint no-plusplus: 0 */
+  for (i = 0; i < lNumberOfChunks; i++) {
+    process.stdout.write(pString.substr(i * pBufferSize, pBufferSize), "utf8");
+  }
 }
-function write (pOutputTo, pContent) {
-    if ("-" === pOutputTo) {
-        // OS pipe buffer size in bytes - which is what ulimit -a tells me on OSX
-        writeToStdOut(pContent, PIPE_BUFFER_SIZE);
-    } else {
-        writeToFile(pOutputTo, pContent);
-    }
+function write(pOutputTo, pContent) {
+  if ("-" === pOutputTo) {
+    // OS pipe buffer size in bytes - which is what ulimit -a tells me on OSX
+    writeToStdOut(pContent, PIPE_BUFFER_SIZE);
+  } else {
+    writeToFile(pOutputTo, pContent);
+  }
 }
 
 module.exports = {
-    write
+  write
 };

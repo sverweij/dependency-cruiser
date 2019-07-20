@@ -1,36 +1,33 @@
-const path            = require('path').posix;
-const Handlebars      = require('handlebars/runtime');
-const _get            = require('lodash/get');
-const coloring        = require('../common/coloring');
-const folderify       = require('../common/folderify');
+const path = require("path").posix;
+const Handlebars = require("handlebars/runtime");
+const _get = require("lodash/get");
+const coloring = require("../common/coloring");
+const folderify = require("../common/folderify");
 const compareOnSource = require("../common/compareOnSource");
 
 // eslint-disable-next-line import/no-unassigned-import
 require("./dot.template");
 
 function colorize(pColoringScheme) {
-    return pModule => (
-        {
-            ...pModule,
-            dependencies: pModule.dependencies.map(coloring.determineDependencyColor),
-            ...coloring.determineModuleColors(pModule, pColoringScheme)
-        }
-    );
+  return pModule => ({
+    ...pModule,
+    dependencies: pModule.dependencies.map(coloring.determineDependencyColor),
+    ...coloring.determineModuleColors(pModule, pColoringScheme)
+  });
 }
 
-function extractFirstTransgression(pModule){
-    return {
-        ...(pModule.rules ? {...pModule, rule: pModule.rules[0]} : pModule),
-        dependencies: pModule.dependencies.map(
-            pDependency =>
-                pDependency.rules
-                    ? {
-                        ...pDependency,
-                        rule: pDependency.rules[0]
-                    }
-                    : pDependency
-        )
-    };
+function extractFirstTransgression(pModule) {
+  return {
+    ...(pModule.rules ? { ...pModule, rule: pModule.rules[0] } : pModule),
+    dependencies: pModule.dependencies.map(pDependency =>
+      pDependency.rules
+        ? {
+            ...pDependency,
+            rule: pDependency.rules[0]
+          }
+        : pDependency
+    )
+  };
 }
 
 /**
@@ -46,35 +43,35 @@ function extractFirstTransgression(pModule){
  * @return {string} prefix and filename concatenated
  */
 function concatenateify(pPrefix, pSource) {
-    if (pPrefix.match(/^[a-z]+:\/\//)) {
-        return `${pPrefix}${pSource}`;
-    } else {
-        return path.join(pPrefix, pSource);
-    }
+  if (pPrefix.match(/^[a-z]+:\/\//)) {
+    return `${pPrefix}${pSource}`;
+  } else {
+    return path.join(pPrefix, pSource);
+  }
 }
 
 function addURL(pInput) {
-    const lPrefix = _get(pInput, "summary.optionsUsed.prefix", '');
+  const lPrefix = _get(pInput, "summary.optionsUsed.prefix", "");
 
-    return (pModule) =>
-        Object.assign(
-            {},
-            pModule,
-            (pModule.coreModule || pModule.couldNotResolve) ? {} : {url: concatenateify(lPrefix, pModule.source)}
-        );
+  return pModule =>
+    Object.assign(
+      {},
+      pModule,
+      pModule.coreModule || pModule.couldNotResolve
+        ? {}
+        : { url: concatenateify(lPrefix, pModule.source) }
+    );
 }
 
 function report(pResults, pColoringScheme) {
-    return Handlebars.templates['dot.template.hbs'](
-        {
-            "things" : pResults.modules
-                .sort(compareOnSource)
-                .map(extractFirstTransgression)
-                .map(folderify)
-                .map(colorize(pColoringScheme))
-                .map(addURL(pResults))
-        }
-    );
+  return Handlebars.templates["dot.template.hbs"]({
+    things: pResults.modules
+      .sort(compareOnSource)
+      .map(extractFirstTransgression)
+      .map(folderify)
+      .map(colorize(pColoringScheme))
+      .map(addURL(pResults))
+  });
 }
 
 /**
@@ -86,9 +83,7 @@ function report(pResults, pColoringScheme) {
  * @returns {object} - output: a dot program
  *                     exitCode: 0
  */
-module.exports = (pResults, pColoringScheme) => (
-    {
-        output: report(pResults, pColoringScheme),
-        exitCode: 0
-    }
-);
+module.exports = (pResults, pColoringScheme) => ({
+  output: report(pResults, pColoringScheme),
+  exitCode: 0
+});

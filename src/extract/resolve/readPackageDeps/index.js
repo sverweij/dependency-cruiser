@@ -1,7 +1,7 @@
-const path          = require('path');
-const fs            = require('fs');
-const _memoize      = require('lodash/memoize');
-const mergePackages = require('./mergePackages');
+const path = require("path");
+const fs = require("fs");
+const _memoize = require("lodash/memoize");
+const mergePackages = require("./mergePackages");
 
 /**
  * return the contents of the package.json closest to the passed
@@ -16,62 +16,68 @@ const mergePackages = require('./mergePackages');
  *               object or null if the package.json could not be
  *               found or is invalid
  */
-const readPackageDeps = _memoize((pFileDir) => {
-    let lRetval = null;
+const readPackageDeps = _memoize(pFileDir => {
+  let lRetval = null;
+
+  try {
+    // find the closest package.json from pFileDir
+    const lPackageContent = fs.readFileSync(
+      path.join(pFileDir, "package.json"),
+      "utf8"
+    );
 
     try {
-        // find the closest package.json from pFileDir
-        const lPackageContent = fs.readFileSync(path.join(pFileDir, 'package.json'), 'utf8');
-
-        try {
-            lRetval = JSON.parse(lPackageContent);
-        } catch (e) {
-            // left empty on purpose
-        }
+      lRetval = JSON.parse(lPackageContent);
     } catch (e) {
-        const lNextDir = path.dirname(pFileDir);
-
-        if (lNextDir !== pFileDir) {
-            // not yet reached root directory
-            lRetval = readPackageDeps(lNextDir);
-        }
+      // left empty on purpose
     }
-    return lRetval;
+  } catch (e) {
+    const lNextDir = path.dirname(pFileDir);
+
+    if (lNextDir !== pFileDir) {
+      // not yet reached root directory
+      lRetval = readPackageDeps(lNextDir);
+    }
+  }
+  return lRetval;
 });
 
 function maybeReadPackage(pFileDir) {
-    let lRetval = {};
+  let lRetval = {};
+
+  try {
+    const lPackageContent = fs.readFileSync(
+      path.join(pFileDir, "package.json"),
+      "utf8"
+    );
 
     try {
-        const lPackageContent = fs.readFileSync(path.join(pFileDir, 'package.json'), 'utf8');
-
-        try {
-            lRetval = JSON.parse(lPackageContent);
-        } catch (e) {
-            // left empty on purpose
-        }
+      lRetval = JSON.parse(lPackageContent);
     } catch (e) {
-        // left empty on purpose
+      // left empty on purpose
     }
-    return lRetval;
+  } catch (e) {
+    // left empty on purpose
+  }
+  return lRetval;
 }
 
 function getIntermediatePaths(pFileDir, pBaseDir) {
-    let lRetval = [];
-    let lIntermediate = pFileDir;
+  let lRetval = [];
+  let lIntermediate = pFileDir;
 
-    while (
-        lIntermediate !== pBaseDir &&
-        // safety hatch in case pBaseDir is either not a part of
-        // pFileDir or not something uniquely comparable to a
-        // dirname
-        lIntermediate !== path.dirname(lIntermediate)
-    ) {
-        lRetval.push(lIntermediate);
-        lIntermediate = path.dirname(lIntermediate);
-    }
-    lRetval.push(pBaseDir);
-    return lRetval;
+  while (
+    lIntermediate !== pBaseDir &&
+    // safety hatch in case pBaseDir is either not a part of
+    // pFileDir or not something uniquely comparable to a
+    // dirname
+    lIntermediate !== path.dirname(lIntermediate)
+  ) {
+    lRetval.push(lIntermediate);
+    lIntermediate = path.dirname(lIntermediate);
+  }
+  lRetval.push(pBaseDir);
+  return lRetval;
 }
 
 // despite the two parameters there's no resolver function provided
@@ -79,25 +85,23 @@ function getIntermediatePaths(pFileDir, pBaseDir) {
 // be the same for each call in a typical cruise, so the lodash'
 // default memoize resolver (the first param) will suffice.
 const readPackageDepsCombined = _memoize((pFileDir, pBaseDir) => {
-    // The way this is called, this shouldn't happen. If it is, there's
-    // something gone terribly awry
-    if (!pFileDir.startsWith(pBaseDir) || pBaseDir.endsWith(path.sep)) {
-        throw new Error(
-            `Unexpected Error: Unusal baseDir passed to package reading function: '${pBaseDir}'\n` +
-            `Please file a bug: https://github.com/sverweij/dependency-cruiser/issues/new?template=bug-report.md` +
-            `&title=Unexpected Error: Unusal baseDir passed to package reading function: '${pBaseDir}'`
-        );
-    }
+  // The way this is called, this shouldn't happen. If it is, there's
+  // something gone terribly awry
+  if (!pFileDir.startsWith(pBaseDir) || pBaseDir.endsWith(path.sep)) {
+    throw new Error(
+      `Unexpected Error: Unusal baseDir passed to package reading function: '${pBaseDir}'\n` +
+        `Please file a bug: https://github.com/sverweij/dependency-cruiser/issues/new?template=bug-report.md` +
+        `&title=Unexpected Error: Unusal baseDir passed to package reading function: '${pBaseDir}'`
+    );
+  }
 
-    const lRetval = getIntermediatePaths(pFileDir, pBaseDir)
-        .reduce(
-            (pAll, pCurrent) => mergePackages(pAll, maybeReadPackage(pCurrent)),
-            {}
-        );
+  const lRetval = getIntermediatePaths(pFileDir, pBaseDir).reduce(
+    (pAll, pCurrent) => mergePackages(pAll, maybeReadPackage(pCurrent)),
+    {}
+  );
 
-    return Object.keys(lRetval).length > 0 ? lRetval : null;
+  return Object.keys(lRetval).length > 0 ? lRetval : null;
 });
-
 
 /**
  * return
@@ -116,14 +120,13 @@ const readPackageDepsCombined = _memoize((pFileDir, pBaseDir) => {
  *                                        found or is invalid
  */
 module.exports = (pFileDir, pBaseDir, pCombinedDependencies = false) => {
-    if (pCombinedDependencies) {
-        return readPackageDepsCombined(pFileDir, pBaseDir);
-    } else {
-        return readPackageDeps(pFileDir);
-    }
-
+  if (pCombinedDependencies) {
+    return readPackageDepsCombined(pFileDir, pBaseDir);
+  } else {
+    return readPackageDeps(pFileDir);
+  }
 };
 module.exports.clearCache = () => {
-    readPackageDepsCombined.cache.clear();
-    readPackageDeps.cache.clear();
+  readPackageDepsCombined.cache.clear();
+  readPackageDeps.cache.clear();
 };
