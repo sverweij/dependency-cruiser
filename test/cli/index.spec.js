@@ -5,7 +5,7 @@ const path         = require("path").posix;
 const expect       = require('chai').expect;
 const intercept    = require("intercept-stdout");
 const processCLI   = require("../../src/cli");
-const tst          = require("../utl/testutensils");
+const asserthelpers = require("../utl/asserthelpers.utl");
 const deleteDammit = require("./deleteDammit.utl");
 
 const OUT_DIR      = "./test/cli/output";
@@ -158,12 +158,12 @@ function runFileBasedTests(pModuleType) {
 
             expect(lExitCode).to.equal(pPair.expectExitCode);
             if (pPair.options.outputType === "json") {
-                tst.assertJSONFileEqual(
+                asserthelpers.assertJSONFileEqual(
                     pPair.options.outputTo,
                     path.join(FIX_DIR, pPair.expect)
                 );
             } else {
-                tst.assertFileEqual(
+                asserthelpers.assertFileEqual(
                     pPair.options.outputTo,
                     path.join(FIX_DIR, pPair.expect)
                 );
@@ -199,7 +199,7 @@ describe("cli/index", () => {
             );
 
             expect(lExitCode).to.equal(0);
-            tst.assertJSONFileEqual(
+            asserthelpers.assertJSONFileEqual(
                 lOutputTo,
                 path.join(FIX_DIR, lOutputFileName)
             );
@@ -387,7 +387,7 @@ describe("cli/index", () => {
             );
 
             expect(lExitCode).to.equal(0);
-            tst.assertJSONFileEqual(
+            asserthelpers.assertJSONFileEqual(
                 lOutputTo,
                 path.join(FIX_DIR, lOutputFileName)
             );
@@ -408,7 +408,7 @@ describe("cli/index", () => {
             );
 
             expect(lExitCode).to.equal(0);
-            tst.assertJSONFileEqual(
+            asserthelpers.assertJSONFileEqual(
                 lOutputTo,
                 path.join(FIX_DIR, lOutputFileName)
             );
@@ -430,7 +430,7 @@ describe("cli/index", () => {
         );
 
         expect(lExitCode).to.equal(0);
-        tst.assertJSONFileEqual(
+        asserthelpers.assertJSONFileEqual(
             lOutputTo,
             path.join(FIX_DIR, lOutputFileName)
         );
@@ -451,7 +451,7 @@ describe("cli/index", () => {
         );
 
         expect(lExitCode).to.equal(0);
-        tst.assertJSONFileEqual(
+        asserthelpers.assertJSONFileEqual(
             lOutputTo,
             path.join(FIX_DIR, lOutputFileName)
         );
@@ -474,7 +474,7 @@ describe("cli/index", () => {
         );
 
         expect(lExitCode).to.equal(0);
-        tst.assertJSONFileEqual(
+        asserthelpers.assertJSONFileEqual(
             lOutputTo,
             path.join(FIX_DIR, lOutputFileName)
         );
