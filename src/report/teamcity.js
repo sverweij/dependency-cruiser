@@ -67,7 +67,7 @@ function reportViolations(pViolations) {
 
 /**
  * Returns a bunch of TeamCity service messages:
- * - for each rule in the passed results: an `inspectionType` with the name and comment of that rule
+ * - for each violated rule in the passed results: an `inspectionType` with the name and comment of that rule
  * - for each violation in the passed results: an `inspection` with the violated rule name and the tos and froms
  *
  * @param {any} pResults - the output of a dependency-cruise adhering to ../extract/results-schema.json
