@@ -1,7 +1,7 @@
 {
     "root": true,
     "extends": [
-        "./configs/eslint-config",
+        "./configs/eslint-config.json",
         "eslint-config-prettier"
     ],
     "overrides": [
