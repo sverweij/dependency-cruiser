@@ -132,7 +132,9 @@
     "eslint-plugin-mocha": "6.0.0",
     "eslint-plugin-node": "9.1.0",
     "eslint-plugin-security": "1.4.0",
+    "husky": "3.0.1",
     "intercept-stdout": "0.1.2",
+    "lint-staged": "9.2.0",
     "mocha": "6.1.4",
     "normalize-newline": "3.0.0",
     "npm-run-all": "4.1.5",
@@ -194,5 +196,32 @@
     "coffeescript": ">=1.0.0 <3.0.0",
     "livescript": ">=1.0.0 <2.0.0",
     "typescript": ">=2.0.0 <4.0.0"
+  },
+  "husky": {
+    "hooks": {
+      "pre-commit": "lint-staged"
+    }
+  },
+  "lint-staged": {
+    "{src,config}/**/*.{js,json}": [
+      "eslint --fix",
+      "prettier --write",
+      "git add"
+    ],
+    "bin/*": [
+      "eslint --fix",
+      "prettier --write",
+      "git add"
+    ],
+    "test/**/*.{utl,spec}.js": [
+      "eslint --fix",
+      "prettier --write",
+      "git add"
+    ],
+    "*.d.ts": [
+      "tslint --fix",
+      "prettier --write",
+      "git add"
+    ]
   }
 }
