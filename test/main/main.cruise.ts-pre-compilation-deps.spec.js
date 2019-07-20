@@ -10,7 +10,7 @@ const expect     = chai.expect;
 
 chai.use(require('chai-json-schema'));
 
-describe('main - tsPreCompilationDeps', () => {
+describe('main.cruise - tsPreCompilationDeps', () => {
     it("ts-pre-compilation-deps: on, target CJS", () => {
         const lResult = main.cruise(
             ["test/main/fixtures/ts-precompilation-deps-on-cjs"],
@@ -29,8 +29,8 @@ describe('main - tsPreCompilationDeps', () => {
             }
         );
 
-        expect(lResult).to.deep.equal(tsPreCompFixtureCJS);
-        expect(lResult).to.be.jsonSchema(depSchema);
+        expect(lResult.output).to.deep.equal(tsPreCompFixtureCJS);
+        expect(lResult.output).to.be.jsonSchema(depSchema);
     });
     it("ts-pre-compilation-deps: on, target ES", () => {
         const lResult = main.cruise(
@@ -50,8 +50,8 @@ describe('main - tsPreCompilationDeps', () => {
             }
         );
 
-        expect(lResult).to.deep.equal(tsPreCompFixtureES);
-        expect(lResult).to.be.jsonSchema(depSchema);
+        expect(lResult.output).to.deep.equal(tsPreCompFixtureES);
+        expect(lResult.output).to.be.jsonSchema(depSchema);
     });
     it("ts-pre-compilation-deps: off, target CJS", () => {
         const lResult = main.cruise(
@@ -71,8 +71,8 @@ describe('main - tsPreCompilationDeps', () => {
             }
         );
 
-        expect(lResult).to.deep.equal(tsNoPrecompFixtureCJS);
-        expect(lResult).to.be.jsonSchema(depSchema);
+        expect(lResult.output).to.deep.equal(tsNoPrecompFixtureCJS);
+        expect(lResult.output).to.be.jsonSchema(depSchema);
     });
     it("ts-pre-compilation-deps: off, target ES", () => {
         const lResult = main.cruise(
@@ -92,7 +92,7 @@ describe('main - tsPreCompilationDeps', () => {
             }
         );
 
-        expect(lResult).to.deep.equal(tsNoPrecompFixtureES);
-        expect(lResult).to.be.jsonSchema(depSchema);
+        expect(lResult.output).to.deep.equal(tsNoPrecompFixtureES);
+        expect(lResult.output).to.be.jsonSchema(depSchema);
     });
 });

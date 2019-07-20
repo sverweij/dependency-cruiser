@@ -35,27 +35,22 @@ function extractTSConfigOptions(pOptions) {
 }
 
 function runCruise(pFileDirArray, pOptions) {
-    let lExitCode = 0;
-
     pFileDirArray
         .filter(pFileOrDir => !glob.hasMagic(pFileOrDir))
         .forEach(validateFileExistence);
 
     pOptions = normalizeOptions(pOptions);
 
-    const lDependencyList = main.cruise(
+    const lReportingResult = main.cruise(
         pFileDirArray,
         pOptions,
         extractResolveOptions(pOptions),
         extractTSConfigOptions(pOptions)
     );
 
-    io.write(pOptions.outputTo, lDependencyList.modules);
+    io.write(pOptions.outputTo, lReportingResult.output);
 
-    if (lDependencyList.summary.error > 0 && ["err", "err-long", "teamcity"].includes(pOptions.outputType)) {
-        lExitCode = lDependencyList.summary.error;
-    }
-    return lExitCode;
+    return lReportingResult.exitCode;
 }
 
 module.exports = (pFileDirArray, pOptions) => {

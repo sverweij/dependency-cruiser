@@ -1,8 +1,8 @@
 const _get      = require('lodash/get');
 const safeRegex = require('../../utl/safe-regex');
+const report    = require('../../report');
 
 const MODULE_SYSTEM_LIST_RE  = /^((cjs|amd|es6|tsd)(,|$))+$/gi;
-const OUTPUT_TYPES_RE        = /^(html|dot|ddot|csv|err|json|teamcity|err-html|err-long)$/g;
 const VALID_DEPTH_RE         = /^[0-9]{1,2}$/g;
 
 function validateSystems(pModuleSystems) {
@@ -25,7 +25,7 @@ function validateRegExpSafety(pPattern) {
 }
 
 function validateOutputType(pOutputType) {
-    if (Boolean(pOutputType) && !(pOutputType.match(OUTPUT_TYPES_RE))) {
+    if (Boolean(pOutputType) && !(report.getAvailableReporters().includes(pOutputType))) {
         throw Error(
             `'${pOutputType}' is not a valid output type.\n`
         );

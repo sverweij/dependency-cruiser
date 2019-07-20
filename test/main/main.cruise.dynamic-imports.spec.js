@@ -11,7 +11,7 @@ chai.use(require('chai-json-schema'));
 
 const gWorkingDir = process.cwd();
 
-describe('main - dynamic imports', () => {
+describe('main.cruise - dynamic imports', () => {
     beforeEach("reset current wd", () => {
         process.chdir(gWorkingDir);
     });
@@ -53,8 +53,8 @@ describe('main - dynamic imports', () => {
             {bustTheCache:true}
         );
 
-        expect(lResult).to.deep.equal(esOut);
-        expect(lResult).to.be.jsonSchema(depSchema);
+        expect(lResult.output).to.deep.equal(esOut);
+        expect(lResult.output).to.be.jsonSchema(depSchema);
     });
 
     it("detects dynamic dependencies in typescript", () => {
@@ -90,8 +90,8 @@ describe('main - dynamic imports', () => {
             {bustTheCache:true}
         );
 
-        expect(lResult).to.deep.equal(tsOut);
-        expect(lResult).to.be.jsonSchema(depSchema);
+        expect(lResult.output).to.deep.equal(tsOut);
+        expect(lResult.output).to.be.jsonSchema(depSchema);
     });
 
     it("detects dynamic dependencies in typescript when using tsPreCompilationDeps", () => {
@@ -128,7 +128,7 @@ describe('main - dynamic imports', () => {
             {bustTheCache:true}
         );
 
-        expect(lResult).to.deep.equal(tsOutpre);
-        expect(lResult).to.be.jsonSchema(depSchema);
+        expect(lResult.output).to.deep.equal(tsOutpre);
+        expect(lResult.output).to.be.jsonSchema(depSchema);
     });
 });

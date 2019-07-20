@@ -16,7 +16,7 @@ const MINIMAL_RESULT = {
     }
 };
 
-describe("main/index - format", () => {
+describe("main.format - format", () => {
     it("barfs when it gets an invalid output type", () => {
         try {
             main.format({}, 'not-a-valid-reporter');
@@ -55,7 +55,7 @@ describe("main/index - format", () => {
             main.format(
                 MINIMAL_RESULT,
                 'err'
-            )
+            ).output
         ).to.contain("no dependency violations found (0 modules, 0 dependencies cruised)");
     });
 
@@ -65,7 +65,7 @@ describe("main/index - format", () => {
                 main.format(
                     MINIMAL_RESULT,
                     'json'
-                )
+                ).output
             )
         ).to.deep.equal(MINIMAL_RESULT);
     });

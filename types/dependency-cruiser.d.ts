@@ -33,7 +33,7 @@ export interface IAvailableTranspiler {
 export type ModuleSystemType = "cjs" | "amd" | "es6" | "tsd";
 
 export type OutputType = "json"  | "html" | "dot" | "ddot" | "csv" | "err" | "err-html" |
-                         "rcdot" | "teamcity";
+                         "teamcity";
 
 export type SeverityType = "error" | "warn" | "info" | "ignore";
 
@@ -380,6 +380,22 @@ export interface ICruiseOptions {
     forceOrphanCheck?: boolean;
 }
 
+export interface IReporterOutput {
+    /**
+     * The output proper of the reporter. For most reporters this will be
+     * a string.
+     */
+    output: any;
+    /**
+     * The exit code - reporters can return a non-zero value when they find
+     * errors here. api consumers (like a cli) can use this to return a
+     * non-zero exit code, so the build breaks when something is wrong
+     *
+     * This is e.g. the default behavior of the `err` and `err-long` reporters.
+     */
+    exitCode: number;
+}
+
 /**
  * Cruises the specified files and files with supported extensions in
  * the specified directories in the pFileDirArray and returns the result
@@ -396,14 +412,25 @@ export interface ICruiseOptions {
  *                        before calling make sure to flatten them out if you want them
  *                        used (the dependency-cruiser cli does this
  *                        [here](../src/cli/flattenTypeScriptConfig.js))
- * @returns any
  */
 export function cruise(
     pFileDirArray: string[],
     pOptions?: ICruiseOptions,
     pResolveOptions?: any,
     pTSConfig?: any,
-): any;
+): IReporterOutput;
+
+/**
+ * Given a cruise result, formats it with the given reporter (pOutputType)
+ * 
+ * @param pResult     A javascript object that contains the result of a cruise. Must adhere 
+ *                    to the [dependency-cruiser results schema](https://github.com/sverweij/dependency-cruiser/blob/develop/src/extract/results-schema.json)
+ * @param pOutputType Which reporter to use to format the cruise result with
+ */
+export function format(
+    pResult: any,
+    pOutputType: OutputType,
+): IReporterOutput;
 
 /**
  * Returns an array of supported transpilers and for each of the transpilers

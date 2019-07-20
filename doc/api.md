@@ -11,11 +11,11 @@ stable *the API is under construction*.
 ```javascript
 const depcruise = require('dependency-cruiser').cruise;
 
-let dependencies = depcruise(["src"]);
+let dependencies = depcruise(["src"]).output;
 ```
 
 This will return an object
-```
+```javascript
 {
     dependencies: ... the dependencies
     summary: {}
@@ -24,7 +24,13 @@ This will return an object
 
 See [dependency-cruiser's json output format](output-format.md) for details.
 
-### Options
+### Parameters
+
+#### Files and or folders to cruise
+The first parameter is an array of strings, each of which is a file, folder
+and/ or glob pattern to start the cruise with.
+
+#### Options
 The second parameter of the depcruise function is an object influencing the
 way the dependencies are cruised and how they're returned. For instance to
 cruise the src folder, excluding all dependencies to node_modules from being
@@ -33,61 +39,28 @@ followed, and having a GraphViz dot script returned, you'd do this:
 ```javascript
 const depcruise = require('dependency-cruiser');
 
-let dependenciesInAGraphVizDotScript = depcruise(
+const dependenciesInAGraphVizDotScript = depcruise(
     ["src"]
     {
         exclude       : "(node_modules)",
         moduleSystems : ["cjs"],
         outputType    : "dot"
     }
-);
+).output;
 ```
 
-These are all the options:
-```
-{
- validate    : if true, will attempt to validate with the rules in ruleSet.
-               Default false.
- ruleSet     : An object containing the rules to validate against. The rules
-               should adhere to the [ruleset schema](../src/validate/jsonschema.json)
- doNotFollow : regular expression describing which dependencies the function
-               should cruise, but not resolve or follow any further
- exclude     : regular expression describing which dependencies the function
-               should not cruise
- maxDepth    : the maximum depth to cruise; 0 <= n <= 99
-               (default: 0, which means 'infinite depth')
- moduleSystems : an array of module systems to use for following dependencies;
-               defaults to ["es6", "cjs", "amd"]
- outputType  : one of "json", "html", "dot", "csv" or "err". When left
-               out the function will return a javascript object as dependencies
- prefix      : a string to insert before links (in dot/ svg output) so with
-               cruising local dependencies it is possible to point to sources
-               elsewhere (e.g. in an online repository)
- tsPreCompilationDeps: if true detect dependencies that only exist before
-               typescript-to-javascript compilation.
- preserveSymlinks: if true does not resolve symlinks; defaults to false
-}
-```
+Apart from all the ones mentioned in the [options section](rules-reference.md#the-options) of the [rules reference](rules-reference.md), you can use these options:
 
-### The return value
-```
-{
-  dependencies : when outputType is defined: a string containing the dependencies
-            in the format specified in outputType
-            In all other cases: a javascript with the dependencies
-  summary    : a summary of the violations found in the dependencies:
-           {
-             violations: each violation;
-                from: the resolved 'from'
-                to: the resolved 'to'
-                rule: the violated rule, which consists of a
-                    name: the (short) name of the rule
-                    severity: the severity of the violation (error, warn or info)
-             error : the number of errors,
-             warn  : the number of warnings,
-             info  : the number of informational messages,
-             optionsUsed: the options used to generate the dependency graph - the
-                     same ones as mentioned under _options_ above.
-           }
-}
-```
+option| meaning
+--- | ---
+validate | if true, will attempt to validate with the rules in ruleSet - defaults to false.
+ruleSet | An object containing the rules to validate against. The rules should adhere to the [ruleset schema](../src/main/ruleSet/config-schema.json)
+outputType | One of the output types mentioned in the [--output-format](cli.md#--output-type-specify-the-output-format) command line options
+
+### Return value
+An object with two attributes:
+
+attribute|content
+---|---
+output|the result of the cruise. The outputType you pass in the options determines how it will look. If you don't supply an outputType it will will contain a javascript object that adheres to dependency-cruiser's [results schema](../src/extract/results-schema.json).
+exitCode|The exit code the command line (typically 0, but some reporters will return a non-zero value in here e.g. when errors were detected in the output)

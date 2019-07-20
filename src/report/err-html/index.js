@@ -30,19 +30,29 @@ function aggregateViolations(pViolations, pRuleSetUsed) {
         );
 }
 
+function report(pResults) {
+    return Handlebars.templates['err-html.template.hbs'](
+        {
+            summary: {
+                ...formatSummaryForReport(pResults.summary),
+                agggregateViolations: aggregateViolations(
+                    pResults.summary.violations, pResults.summary.ruleSetUsed
+                )
+            }
+        }
+    );
+}
+
 /**
  * Returns the results of a cruise in an 'incidence matrix'
  *
  * @param {any} pResults - the output of a dependency-cruise adhering to ../../extract/results-schema.json
- * @returns {string} - an html program showing the summary & the violations (if any)
+ * @returns {object} - output: an html program showing the summary & the violations (if any)
+ *                     exitCode: 0
  */
-module.exports = pResults => Handlebars.templates['err-html.template.hbs'](
+module.exports = pResults => (
     {
-        summary: {
-            ...formatSummaryForReport(pResults.summary),
-            agggregateViolations: aggregateViolations(
-                pResults.summary.violations, pResults.summary.ruleSetUsed
-            )
-        }
+        output: report(pResults),
+        exitCode: 0
     }
 );
