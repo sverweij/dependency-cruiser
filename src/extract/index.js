@@ -12,6 +12,23 @@ const summarize = require("./summarize");
 const addValidations = require("./addValidations");
 const clearCaches = require("./clearCaches");
 
+const SHAREABLE_OPTIONS = [
+  "combinedDependencies",
+  "doNotFollow",
+  "exclude",
+  "externalModuleResolutionStrategy",
+  "includeOnly",
+  "maxDepth",
+  "moduleSystems",
+  "outputTo",
+  "outputType",
+  "prefix",
+  "preserveSymlinks",
+  "rulesFile",
+  "tsPreCompilationDeps",
+  "webpackConfig"
+];
+
 /* eslint max-params:0 */
 function extractRecursive(
   pFileName,
@@ -115,23 +132,6 @@ function complete(pAll, pFromListItem) {
 }
 
 function makeOptionsPresentable(pOptions) {
-  const SHAREABLE_OPTIONS = [
-    "combinedDependencies",
-    "doNotFollow",
-    "exclude",
-    "externalModuleResolutionStrategy",
-    "includeOnly",
-    "maxDepth",
-    "moduleSystems",
-    "outputTo",
-    "outputType",
-    "prefix",
-    "preserveSymlinks",
-    "rulesFile",
-    "tsPreCompilationDeps",
-    "webpackConfig"
-  ];
-
   return SHAREABLE_OPTIONS.filter(
     pOption => pOptions.hasOwnProperty(pOption) && pOptions[pOption] !== 0
   )
