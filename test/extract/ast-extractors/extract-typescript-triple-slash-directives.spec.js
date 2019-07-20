@@ -1,47 +1,40 @@
-const expect            = require('chai').expect;
-const extractTypescript = require('./extract-typescript.utl');
+const expect = require("chai").expect;
+const extractTypescript = require("./extract-typescript.utl");
 
 describe("ast-extractors/extract-typescript - triple slash directives", () => {
+  it("path", () => {
+    expect(
+      extractTypescript('/// <reference path="./ts-thing" />')
+    ).to.deep.equal([
+      {
+        moduleName: "./ts-thing",
+        moduleSystem: "tsd",
+        dynamic: false
+      }
+    ]);
+  });
 
-    it("path", () => {
-        expect(
-            extractTypescript('/// <reference path="./ts-thing" />')
-        ).to.deep.equal(
-            [
-                {
-                    moduleName: './ts-thing',
-                    moduleSystem: 'tsd',
-                    dynamic: false
-                }
-            ]
-        );
-    });
+  it("types", () => {
+    expect(
+      extractTypescript('/// <reference types="./ts-thing-types" />')
+    ).to.deep.equal([
+      {
+        moduleName: "./ts-thing-types",
+        moduleSystem: "tsd",
+        dynamic: false
+      }
+    ]);
+  });
 
-    it("types", () => {
-        expect(
-            extractTypescript('/// <reference types="./ts-thing-types" />')
-        ).to.deep.equal(
-            [
-                {
-                    moduleName: './ts-thing-types',
-                    moduleSystem: 'tsd',
-                    dynamic: false
-                }
-            ]
-        );
-    });
-
-    it("amd-dependencies", () => {
-        expect(
-            extractTypescript('/// <amd-dependency path="./ts-thing-types" />')
-        ).to.deep.equal(
-            [
-                {
-                    moduleName: './ts-thing-types',
-                    moduleSystem: 'tsd',
-                    dynamic: false
-                }
-            ]
-        );
-    });
+  it("amd-dependencies", () => {
+    expect(
+      extractTypescript('/// <amd-dependency path="./ts-thing-types" />')
+    ).to.deep.equal([
+      {
+        moduleName: "./ts-thing-types",
+        moduleSystem: "tsd",
+        dynamic: false
+      }
+    ]);
+  });
 });

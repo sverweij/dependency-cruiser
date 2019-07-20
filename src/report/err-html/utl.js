@@ -1,50 +1,48 @@
-const _get    = require('lodash/get');
-const version = require('../../../package.json').version;
+const _get = require("lodash/get");
+const version = require("../../../package.json").version;
 
 function getFormattedAllowedRule(pRuleSetUsed) {
-    const lAllowed = _get(pRuleSetUsed, 'allowed', []);
-    const lCommentedRule = lAllowed.find(pRule => pRule.hasOwnProperty('comment'));
-    const lComment = lCommentedRule ? lCommentedRule.comment : '-';
+  const lAllowed = _get(pRuleSetUsed, "allowed", []);
+  const lCommentedRule = lAllowed.find(pRule =>
+    pRule.hasOwnProperty("comment")
+  );
+  const lComment = lCommentedRule ? lCommentedRule.comment : "-";
 
-    return lAllowed.length > 0
-        ? {
-            name: 'not-in-allowed',
-            comment: lComment,
-            severity: _get(pRuleSetUsed, 'allowedSeverity', 'warn')
-        }
-        : [];
+  return lAllowed.length > 0
+    ? {
+        name: "not-in-allowed",
+        comment: lComment,
+        severity: _get(pRuleSetUsed, "allowedSeverity", "warn")
+      }
+    : [];
 }
 
 function mergeCountIntoRule(pRule, pViolationCounts) {
-    const lCount = pViolationCounts[pRule.name]
-        ? pViolationCounts[pRule.name]
-        : 0;
+  const lCount = pViolationCounts[pRule.name]
+    ? pViolationCounts[pRule.name]
+    : 0;
 
-    return {
-        ...pRule,
-        count: lCount,
-        unviolated: lCount <= 0
-    };
+  return {
+    ...pRule,
+    count: lCount,
+    unviolated: lCount <= 0
+  };
 }
 
 function formatSummaryForReport(pSummary) {
-    return {
-        ...pSummary,
-        depcruiseVersion: `dependency-cruiser@${version}`,
-        runDate: (new Date()).toISOString(),
-        violations: (pSummary.violations || []).map(
-            pViolation => (
-                {
-                    ...pViolation,
-                    to: pViolation.from === pViolation.to ? "" : pViolation.to
-                }
-            )
-        )
-    };
+  return {
+    ...pSummary,
+    depcruiseVersion: `dependency-cruiser@${version}`,
+    runDate: new Date().toISOString(),
+    violations: (pSummary.violations || []).map(pViolation => ({
+      ...pViolation,
+      to: pViolation.from === pViolation.to ? "" : pViolation.to
+    }))
+  };
 }
 
 module.exports = {
-    getFormattedAllowedRule,
-    mergeCountIntoRule,
-    formatSummaryForReport
+  getFormattedAllowedRule,
+  mergeCountIntoRule,
+  formatSummaryForReport
 };

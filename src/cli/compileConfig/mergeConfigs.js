@@ -1,18 +1,18 @@
-const _get      = require('lodash/get');
-const _uniqBy   = require('lodash/uniqBy');
-const _uniqWith = require('lodash/uniqWith');
-const _isEqual  = require('lodash/isEqual');
+const _get = require("lodash/get");
+const _uniqBy = require("lodash/uniqBy");
+const _uniqWith = require("lodash/uniqWith");
+const _isEqual = require("lodash/isEqual");
 
 function extendNamedRule(pExtendedRule, pForbiddenArrayBase) {
-    return pForbiddenArrayBase
-        .filter(pBaseRule => pBaseRule.name === pExtendedRule.name)
-        .reduce(
-            (pAll, pBaseRule) => ({
-                ...pBaseRule,
-                ...pAll
-            }),
-            pExtendedRule
-        );
+  return pForbiddenArrayBase
+    .filter(pBaseRule => pBaseRule.name === pExtendedRule.name)
+    .reduce(
+      (pAll, pBaseRule) => ({
+        ...pBaseRule,
+        ...pAll
+      }),
+      pExtendedRule
+    );
 }
 
 /**
@@ -29,43 +29,32 @@ function extendNamedRule(pExtendedRule, pForbiddenArrayBase) {
  *
  * @return {Array} - the merged array
  */
-function mergeForbidden(pForbiddenArrayExtended, pForbiddenArrayBase){
+function mergeForbidden(pForbiddenArrayExtended, pForbiddenArrayBase) {
+  // merge anonymous on 100% equality
+  let lAnonymousRules = _uniqWith(
+    pForbiddenArrayExtended
+      .concat(pForbiddenArrayBase)
+      .filter(pRule => !pRule.name),
+    _isEqual
+  );
 
-    // merge anonymous on 100% equality
-    let lAnonymousRules = _uniqWith(
-        pForbiddenArrayExtended
-            .concat(pForbiddenArrayBase)
-            .filter(pRule => !(pRule.name)),
-        _isEqual
-    );
+  let lNamedRules = pForbiddenArrayExtended
+    .filter(pRule => pRule.name)
+    .map(pNamedRule => extendNamedRule(pNamedRule, pForbiddenArrayBase));
 
+  // merge named rules based on unique name
+  lNamedRules = _uniqBy(
+    // ordered extended => base because the uniqBy picks the
+    // first it encounters and we want the ones from the
+    // extended in case of a conflict
 
-    let lNamedRules = pForbiddenArrayExtended
-        .filter(pRule => pRule.name)
-        .map(
-            (pNamedRule) =>
-                extendNamedRule(
-                    pNamedRule,
-                    pForbiddenArrayBase
-                )
-        );
+    // the other concats (anonymous, allowed) don't need it
+    // but have it to be consistent with this
+    lNamedRules.concat(pForbiddenArrayBase).filter(pRule => pRule.name),
+    pRule => pRule.name
+  );
 
-    // merge named rules based on unique name
-    lNamedRules = _uniqBy(
-        // ordered extended => base because the uniqBy picks the
-        // first it encounters and we want the ones from the
-        // extended in case of a conflict
-
-        // the other concats (anonymous, allowed) don't need it
-        // but have it to be consistent with this
-        lNamedRules
-            .concat(pForbiddenArrayBase)
-            .filter(pRule => pRule.name),
-        pRule => pRule.name
-    );
-
-
-    return lNamedRules.concat(lAnonymousRules);
+  return lNamedRules.concat(lAnonymousRules);
 }
 
 /**
@@ -78,16 +67,13 @@ function mergeForbidden(pForbiddenArrayExtended, pForbiddenArrayBase){
  *
  * @return {Array} - the merged array
  */
-function mergeAllowed(pAllowedArrayExtended, pAllowedArrayBase){
-    return _uniqWith(
-        pAllowedArrayExtended.concat(pAllowedArrayBase),
-        _isEqual
-    );
+function mergeAllowed(pAllowedArrayExtended, pAllowedArrayBase) {
+  return _uniqWith(pAllowedArrayExtended.concat(pAllowedArrayBase), _isEqual);
 }
 
 function mergeOptions(pOptionsExtended, pOptionsBase) {
-    // TODO: make implementation less naive (?)
-    return {...pOptionsBase, ...pOptionsExtended};
+  // TODO: make implementation less naive (?)
+  return { ...pOptionsBase, ...pOptionsExtended };
 }
 
 /**
@@ -99,16 +85,12 @@ function mergeOptions(pOptionsExtended, pOptionsBase) {
  *
  * @returns {string} - a string from the SeverityType value set
  */
-function mergeAllowedSeverities(pConfigExtended, pConfigBase){
-    return _get(
-        pConfigExtended,
-        'allowedSeverity',
-        _get(
-            pConfigBase,
-            'allowedSeverity',
-            "warn"
-        )
-    );
+function mergeAllowedSeverities(pConfigExtended, pConfigBase) {
+  return _get(
+    pConfigExtended,
+    "allowedSeverity",
+    _get(pConfigBase, "allowedSeverity", "warn")
+  );
 }
 
 /**
@@ -125,23 +107,18 @@ function mergeAllowedSeverities(pConfigExtended, pConfigBase){
  *
  * @returns {Object} - The merged rule set
  */
-module.exports = (pConfigExtended, pConfigBase) => (
-    {
-        forbidden: mergeForbidden(
-            _get(pConfigExtended, 'forbidden', []),
-            _get(pConfigBase, 'forbidden', [])
-        ),
-        allowed: mergeAllowed(
-            _get(pConfigExtended, 'allowed', []),
-            _get(pConfigBase, 'allowed', [])
-        ),
-        allowedSeverity: mergeAllowedSeverities(
-            pConfigExtended,
-            pConfigBase
-        ),
-        options: mergeOptions(
-            _get(pConfigExtended, 'options', {}),
-            _get(pConfigBase, 'options', {})
-        )
-    }
-);
+module.exports = (pConfigExtended, pConfigBase) => ({
+  forbidden: mergeForbidden(
+    _get(pConfigExtended, "forbidden", []),
+    _get(pConfigBase, "forbidden", [])
+  ),
+  allowed: mergeAllowed(
+    _get(pConfigExtended, "allowed", []),
+    _get(pConfigBase, "allowed", [])
+  ),
+  allowedSeverity: mergeAllowedSeverities(pConfigExtended, pConfigBase),
+  options: mergeOptions(
+    _get(pConfigExtended, "options", {}),
+    _get(pConfigBase, "options", {})
+  )
+});

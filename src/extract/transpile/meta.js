@@ -1,10 +1,11 @@
-const supportedTranspilers = require("../../../package.json").supportedTranspilers;
-const javaScriptWrap       = require("./javaScriptWrap");
-const typeScriptWrap       = require("./typeScriptWrap")();
-const tsxWrap              = require("./typeScriptWrap")(true);
-const liveScriptWrap       = require("./liveScriptWrap");
-const coffeeWrap           = require("./coffeeWrap")();
-const litCoffeeWrap        = require("./coffeeWrap")(true);
+const supportedTranspilers = require("../../../package.json")
+  .supportedTranspilers;
+const javaScriptWrap = require("./javaScriptWrap");
+const typeScriptWrap = require("./typeScriptWrap")();
+const tsxWrap = require("./typeScriptWrap")(true);
+const liveScriptWrap = require("./liveScriptWrap");
+const coffeeWrap = require("./coffeeWrap")();
+const litCoffeeWrap = require("./coffeeWrap")(true);
 
 /*
   jsx - acorn_loose will handle this correctly when imports
@@ -18,27 +19,27 @@ const litCoffeeWrap        = require("./coffeeWrap")(true);
         rationale on jsx ...
  */
 const extension2wrapper = {
-    ".js"        : javaScriptWrap,
-    ".mjs"       : javaScriptWrap,
-    ".jsx"       : javaScriptWrap,
-    ".vue"       : javaScriptWrap,
-    ".ts"        : typeScriptWrap,
-    ".tsx"       : tsxWrap,
-    ".d.ts"      : typeScriptWrap,
-    ".ls"        : liveScriptWrap,
-    ".coffee"    : coffeeWrap,
-    ".litcoffee" : litCoffeeWrap,
-    ".coffee.md" : litCoffeeWrap,
-    ".csx"       : coffeeWrap,
-    ".cjsx"      : coffeeWrap
+  ".js": javaScriptWrap,
+  ".mjs": javaScriptWrap,
+  ".jsx": javaScriptWrap,
+  ".vue": javaScriptWrap,
+  ".ts": typeScriptWrap,
+  ".tsx": tsxWrap,
+  ".d.ts": typeScriptWrap,
+  ".ls": liveScriptWrap,
+  ".coffee": coffeeWrap,
+  ".litcoffee": litCoffeeWrap,
+  ".coffee.md": litCoffeeWrap,
+  ".csx": coffeeWrap,
+  ".cjsx": coffeeWrap
 };
 
 const transpiler2wrapper = {
-    "javascript"    : javaScriptWrap,
-    "coffee-script" : coffeeWrap,
-    "coffeescript"  : coffeeWrap,
-    "livescript"    : liveScriptWrap,
-    "typescript"    : typeScriptWrap
+  javascript: javaScriptWrap,
+  "coffee-script": coffeeWrap,
+  coffeescript: coffeeWrap,
+  livescript: liveScriptWrap,
+  typescript: typeScriptWrap
 };
 
 /**
@@ -50,8 +51,8 @@ const transpiler2wrapper = {
  * @param {string}  pExtension the extension (e.g. ".ts", ".js", ".litcoffee")
  * @returns {module} the module
  */
-module.exports.getWrapper =
-    pExtension => extension2wrapper[pExtension] || javaScriptWrap;
+module.exports.getWrapper = pExtension =>
+  extension2wrapper[pExtension] || javaScriptWrap;
 
 /**
  * all supported extensions and whether or not it is supported
@@ -59,14 +60,10 @@ module.exports.getWrapper =
  *
  * @type {array}
  */
-module.exports.allExtensions =
-    Object.keys(extension2wrapper)
-        .map(
-            pKey => ({
-                extension: pKey,
-                available: extension2wrapper[pKey].isAvailable()
-            })
-        );
+module.exports.allExtensions = Object.keys(extension2wrapper).map(pKey => ({
+  extension: pKey,
+  available: extension2wrapper[pKey].isAvailable()
+}));
 
 /**
  * an array of extensions that are 'scannable' (have a valid transpiler
@@ -74,11 +71,9 @@ module.exports.allExtensions =
  *
  * @type {array}
  */
-module.exports.scannableExtensions =
-    Object.keys(extension2wrapper)
-        .filter(
-            pKey => extension2wrapper[pKey].isAvailable()
-        );
+module.exports.scannableExtensions = Object.keys(extension2wrapper).filter(
+  pKey => extension2wrapper[pKey].isAvailable()
+);
 
 /**
  * returns an array of supported transpilers, whith for each transpiler:
@@ -87,13 +82,11 @@ module.exports.scannableExtensions =
  *
  * @returns {array} an array of supported transpilers
  */
-module.exports.getAvailableTranspilers =
-    () =>
-        Object.keys(supportedTranspilers).map(pTranspiler => ({
-            name: pTranspiler,
-            version: supportedTranspilers[pTranspiler],
-            available: transpiler2wrapper[pTranspiler].isAvailable()
-        })
-        );
+module.exports.getAvailableTranspilers = () =>
+  Object.keys(supportedTranspilers).map(pTranspiler => ({
+    name: pTranspiler,
+    version: supportedTranspilers[pTranspiler],
+    available: transpiler2wrapper[pTranspiler].isAvailable()
+  }));
 
 /* eslint security/detect-object-injection : 0*/

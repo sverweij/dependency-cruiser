@@ -1,3 +1,3 @@
-const err = require('./err');
+const err = require("./err");
 
-module.exports = (pResults) => err(pResults, true);
+module.exports = pResults => err(pResults, true);

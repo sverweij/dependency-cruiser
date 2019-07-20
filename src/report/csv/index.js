@@ -1,4 +1,4 @@
-const Handlebars                       = require("handlebars/runtime");
+const Handlebars = require("handlebars/runtime");
 const dependencyToIncidenceTransformer = require("../utl/dependencyToIncidenceTransformer");
 
 // eslint-disable-next-line import/no-unassigned-import
@@ -11,13 +11,9 @@ require("./csv.template");
  * @returns {object} - output: incidence matrix in csv format
  *                     exitCode: 0
  */
-module.exports = pResults => (
-    {
-        output: Handlebars.templates['csv.template.hbs'](
-            {
-                "things" : dependencyToIncidenceTransformer(pResults.modules)
-            }
-        ),
-        exitCode: 0
-    }
-);
+module.exports = pResults => ({
+  output: Handlebars.templates["csv.template.hbs"]({
+    things: dependencyToIncidenceTransformer(pResults.modules)
+  }),
+  exitCode: 0
+});

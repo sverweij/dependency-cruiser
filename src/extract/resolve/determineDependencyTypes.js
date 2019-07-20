@@ -1,29 +1,30 @@
-const path                 = require('path');
-const isCore               = require('./isCore');
-const isRelativeModuleName = require('./isRelativeModuleName');
-const localNpmHelpers      = require('./localNpmHelpers');
+const path = require("path");
+const isCore = require("./isCore");
+const isRelativeModuleName = require("./isRelativeModuleName");
+const localNpmHelpers = require("./localNpmHelpers");
 
 const npm2depType = {
-    "dependencies"         : "npm",
-    "devDependencies"      : "npm-dev",
-    "optionalDependencies" : "npm-optional",
-    "peerDependencies"     : "npm-peer"
+  dependencies: "npm",
+  devDependencies: "npm-dev",
+  optionalDependencies: "npm-optional",
+  peerDependencies: "npm-peer"
 };
 
 function determineNpmDependencyTypes(pModuleName, pPackageDeps) {
-    let lRetval = ["npm-unknown"];
+  let lRetval = ["npm-unknown"];
 
-    if (Boolean(pPackageDeps)) {
-        lRetval = Object.keys(pPackageDeps)
-            .filter(pKey =>
-                pKey.includes("ependencies") &&
-                pPackageDeps[pKey].hasOwnProperty(pModuleName)
-            )
-            .map(pKey => npm2depType[pKey] || "npm-no-pkg");
-        lRetval = lRetval.length === 0 ? ["npm-no-pkg"] : lRetval;
-    }
+  if (Boolean(pPackageDeps)) {
+    lRetval = Object.keys(pPackageDeps)
+      .filter(
+        pKey =>
+          pKey.includes("ependencies") &&
+          pPackageDeps[pKey].hasOwnProperty(pModuleName)
+      )
+      .map(pKey => npm2depType[pKey] || "npm-no-pkg");
+    lRetval = lRetval.length === 0 ? ["npm-no-pkg"] : lRetval;
+  }
 
-    return lRetval;
+  return lRetval;
 }
 
 /*
@@ -31,78 +32,114 @@ function determineNpmDependencyTypes(pModuleName, pPackageDeps) {
  * an array, and not an object, hence needs different treatment
  */
 function dependencyIsBundled(pModule, pPackageDeps) {
-    let lRetval = false;
+  let lRetval = false;
 
-    if (Boolean(pPackageDeps)){
-        const lBundledDependencies = pPackageDeps.bundledDependencies || pPackageDeps.bundleDependencies;
+  if (Boolean(pPackageDeps)) {
+    const lBundledDependencies =
+      pPackageDeps.bundledDependencies || pPackageDeps.bundleDependencies;
 
-        if (lBundledDependencies) {
-            lRetval = lBundledDependencies.some(pDep => pDep === pModule);
-        }
+    if (lBundledDependencies) {
+      lRetval = lBundledDependencies.some(pDep => pDep === pModule);
     }
-    return lRetval;
+  }
+  return lRetval;
 }
 
-function determineNodeModuleDependencyTypes(pModuleName, pPackageDeps, pFileDir, pResolveOptions) {
-    let lRetval = determineNpmDependencyTypes(
-        localNpmHelpers.getPackageRoot(pModuleName),
-        pPackageDeps
-    );
+function determineNodeModuleDependencyTypes(
+  pModuleName,
+  pPackageDeps,
+  pFileDir,
+  pResolveOptions
+) {
+  let lRetval = determineNpmDependencyTypes(
+    localNpmHelpers.getPackageRoot(pModuleName),
+    pPackageDeps
+  );
 
-    if (localNpmHelpers.dependencyIsDeprecated(pModuleName, pFileDir, pResolveOptions)) {
-        lRetval.push("deprecated");
-    }
-    if (dependencyIsBundled(pModuleName, pPackageDeps)) {
-        lRetval.push("npm-bundled");
-    }
-    return lRetval;
+  if (
+    localNpmHelpers.dependencyIsDeprecated(
+      pModuleName,
+      pFileDir,
+      pResolveOptions
+    )
+  ) {
+    lRetval.push("deprecated");
+  }
+  if (dependencyIsBundled(pModuleName, pPackageDeps)) {
+    lRetval.push("npm-bundled");
+  }
+  return lRetval;
 }
 
 function isNodeModule(pDependency) {
-    return pDependency.resolved.includes("node_modules");
+  return pDependency.resolved.includes("node_modules");
 }
 
-function determineModuleDependencyTypes(pDependency, pModuleName, pPackageDeps, pFileDir, pResolveOptions) {
-    let lRetval = [];
+function determineModuleDependencyTypes(
+  pDependency,
+  pModuleName,
+  pPackageDeps,
+  pFileDir,
+  pResolveOptions
+) {
+  let lRetval = [];
 
-    if (isNodeModule(pDependency)) {
-        lRetval = determineNodeModuleDependencyTypes(pModuleName, pPackageDeps, pFileDir, pResolveOptions);
-    } else {
-        lRetval = ["localmodule"];
-    }
-    return lRetval;
+  if (isNodeModule(pDependency)) {
+    lRetval = determineNodeModuleDependencyTypes(
+      pModuleName,
+      pPackageDeps,
+      pFileDir,
+      pResolveOptions
+    );
+  } else {
+    lRetval = ["localmodule"];
+  }
+  return lRetval;
 }
 
 function isModule(pDependency, pModules = ["node_modules"], pBaseDir = ".") {
-    return pModules.some(
-        // pModules can contain relative paths, but also absolute ones.
-        // WebPack treats these differently:
-        // - absolute paths only match that exact path
-        // - relative paths get a node lookup treatment so "turtle" matches
-        //   "turtle", "../turtle", "../../turtle", "../../../turtle" (.. =>
-        // turtles all the way down)
-        // hence we'll have to test for them in different fashion as well.
-        // reference: https://webpack.js.org/configuration/resolve/#resolve-modules
-        pModule => {
-            if (path.isAbsolute(pModule)){
-                return path.resolve(pBaseDir, pDependency.resolved).startsWith(pModule);
-            }
-            return pDependency.resolved.includes(pModule);
-        }
-    );
+  return pModules.some(
+    // pModules can contain relative paths, but also absolute ones.
+    // WebPack treats these differently:
+    // - absolute paths only match that exact path
+    // - relative paths get a node lookup treatment so "turtle" matches
+    //   "turtle", "../turtle", "../../turtle", "../../../turtle" (.. =>
+    // turtles all the way down)
+    // hence we'll have to test for them in different fashion as well.
+    // reference: https://webpack.js.org/configuration/resolve/#resolve-modules
+    pModule => {
+      if (path.isAbsolute(pModule)) {
+        return path.resolve(pBaseDir, pDependency.resolved).startsWith(pModule);
+      }
+      return pDependency.resolved.includes(pModule);
+    }
+  );
 }
 
 function isAliased(pModuleName, pAliasObject) {
-    return Object.keys(pAliasObject || {}).some(pAliasLHS => pModuleName.startsWith(pAliasLHS));
+  return Object.keys(pAliasObject || {}).some(pAliasLHS =>
+    pModuleName.startsWith(pAliasLHS)
+  );
 }
 
 function isLikelyTSAliased(pModuleName, pResolved, pTsConfig) {
-    return pTsConfig && !isRelativeModuleName(pModuleName) && pResolved && !pResolved.includes("node_modules");
+  return (
+    pTsConfig &&
+    !isRelativeModuleName(pModuleName) &&
+    pResolved &&
+    !pResolved.includes("node_modules")
+  );
 }
 
-function isAliassy(pModuleName, pDependency, pResolveOptions){
-    return isAliased(pModuleName, pResolveOptions.alias) ||
-        isLikelyTSAliased(pModuleName, pDependency.resolved, pResolveOptions.tsConfig);
+function isAliassy(pModuleName, pDependency, pResolveOptions) {
+  return (
+    isAliased(pModuleName, pResolveOptions.alias) ||
+    isLikelyTSAliased(
+      pModuleName,
+      pDependency.resolved,
+      pResolveOptions.tsConfig
+    )
+  );
 }
 
 /* eslint max-params:0, complexity:0 */
@@ -117,35 +154,42 @@ function isAliassy(pModuleName, pDependency, pResolveOptions){
  *
  * @return {string[]} an array of dependency types for the dependency
  */
-module.exports = (pDependency, pModuleName, pPackageDeps, pFileDir, pResolveOptions, pBaseDir) => {
-    let lRetval = ["undetermined"];
+module.exports = (
+  pDependency,
+  pModuleName,
+  pPackageDeps,
+  pFileDir,
+  pResolveOptions,
+  pBaseDir
+) => {
+  let lRetval = ["undetermined"];
 
-    pResolveOptions = pResolveOptions || {};
+  pResolveOptions = pResolveOptions || {};
 
-    if (pDependency.couldNotResolve) {
-        lRetval = ["unknown"];
-    } else if (isCore(pModuleName)) {
-        // this 'isCore' business seems duplicate (it's already in
-        // the passed object as `coreModule`- determined by the resolve-AMD or
-        // resolve-commonJS module). I want to deprecate the `coreModule`
-        // attribute in favor of this one and determining it here will make
-        // live easier in the future
-        lRetval = ["core"];
-    } else if (isRelativeModuleName(pModuleName)) {
-        lRetval = ["local"];
-    } else if (isModule(pDependency, pResolveOptions.modules, pBaseDir)) {
-        lRetval = determineModuleDependencyTypes(
-            pDependency,
-            pModuleName,
-            pPackageDeps,
-            pFileDir,
-            pResolveOptions
-        );
-    } else if (isAliassy(pModuleName, pDependency, pResolveOptions)){
-        lRetval = ["aliased"];
-    }
+  if (pDependency.couldNotResolve) {
+    lRetval = ["unknown"];
+  } else if (isCore(pModuleName)) {
+    // this 'isCore' business seems duplicate (it's already in
+    // the passed object as `coreModule`- determined by the resolve-AMD or
+    // resolve-commonJS module). I want to deprecate the `coreModule`
+    // attribute in favor of this one and determining it here will make
+    // live easier in the future
+    lRetval = ["core"];
+  } else if (isRelativeModuleName(pModuleName)) {
+    lRetval = ["local"];
+  } else if (isModule(pDependency, pResolveOptions.modules, pBaseDir)) {
+    lRetval = determineModuleDependencyTypes(
+      pDependency,
+      pModuleName,
+      pPackageDeps,
+      pFileDir,
+      pResolveOptions
+    );
+  } else if (isAliassy(pModuleName, pDependency, pResolveOptions)) {
+    lRetval = ["aliased"];
+  }
 
-    return lRetval;
+  return lRetval;
 };
 
 /* eslint security/detect-object-injection: 0*/

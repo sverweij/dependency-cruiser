@@ -1,23 +1,25 @@
 const VALID_SEVERITIES = /^(error|warn|info|ignore)$/;
-const DEFAULT_SEVERITY = 'warn';
-const DEFAULT_RULE     = 'unnamed';
+const DEFAULT_SEVERITY = "warn";
+const DEFAULT_RULE = "unnamed";
 
-function normalizeSeverity (pSeverity){
-    const lSeverity = pSeverity ? pSeverity : DEFAULT_SEVERITY;
+function normalizeSeverity(pSeverity) {
+  const lSeverity = pSeverity ? pSeverity : DEFAULT_SEVERITY;
 
-    return Boolean(lSeverity.match(VALID_SEVERITIES)) ? lSeverity : DEFAULT_SEVERITY;
+  return Boolean(lSeverity.match(VALID_SEVERITIES))
+    ? lSeverity
+    : DEFAULT_SEVERITY;
 }
 
 function normalizeName(pRule) {
-    return pRule ? pRule : DEFAULT_RULE;
+  return pRule ? pRule : DEFAULT_RULE;
 }
 
 function normalizeRule(pRule) {
-    return {
-        ...pRule,
-        severity : normalizeSeverity(pRule.severity),
-        name     : normalizeName(pRule.name)
-    };
+  return {
+    ...pRule,
+    severity: normalizeSeverity(pRule.severity),
+    name: normalizeName(pRule.name)
+  };
 }
 
 /**
@@ -29,20 +31,20 @@ function normalizeRule(pRule) {
  * @param  {object} pRuleSet [description]
  * @return {object}          [description]
  */
-module.exports = (pRuleSet) => {
-    if (pRuleSet.hasOwnProperty("allowed")){
-        pRuleSet.allowedSeverity = normalizeSeverity(pRuleSet.allowedSeverity);
-        if (pRuleSet.allowedSeverity === 'ignore') {
-            Reflect.deleteProperty(pRuleSet, 'allowed');
-            Reflect.deleteProperty(pRuleSet, 'allowedSeverity');
-        }
+module.exports = pRuleSet => {
+  if (pRuleSet.hasOwnProperty("allowed")) {
+    pRuleSet.allowedSeverity = normalizeSeverity(pRuleSet.allowedSeverity);
+    if (pRuleSet.allowedSeverity === "ignore") {
+      Reflect.deleteProperty(pRuleSet, "allowed");
+      Reflect.deleteProperty(pRuleSet, "allowedSeverity");
     }
+  }
 
-    if (pRuleSet.hasOwnProperty("forbidden")){
-        pRuleSet.forbidden = pRuleSet.forbidden
-            .map(normalizeRule)
-            .filter(pRule => pRule.severity !== 'ignore');
-    }
+  if (pRuleSet.hasOwnProperty("forbidden")) {
+    pRuleSet.forbidden = pRuleSet.forbidden
+      .map(normalizeRule)
+      .filter(pRule => pRule.severity !== "ignore");
+  }
 
-    return pRuleSet;
+  return pRuleSet;
 };

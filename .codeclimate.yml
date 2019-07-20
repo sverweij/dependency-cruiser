@@ -7,7 +7,7 @@ plugins:
   eslint:
     enabled: true
     channel: "eslint-5"
-    config: 
+    config:
       config: .eslintrc.json
     checks:
       # compat is not a codeclimeate supported eslint plugin

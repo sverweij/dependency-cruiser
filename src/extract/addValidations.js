@@ -1,26 +1,17 @@
-const validate = require('../validate');
+const validate = require("../validate");
 
-function addDependencyValidation (pDependency, pValidate, pRuleSet, pModule) {
-    return {
-        ...pDependency,
-        ...validate.dependency(
-            pValidate,
-            pRuleSet,
-            pModule,
-            pDependency
-        )
-    };
+function addDependencyValidation(pDependency, pValidate, pRuleSet, pModule) {
+  return {
+    ...pDependency,
+    ...validate.dependency(pValidate, pRuleSet, pModule, pDependency)
+  };
 }
 
 function addModuleValidation(pModule, pValidate, pRuleSet) {
-    return {
-        ...pModule,
-        ...validate.module(
-            pValidate,
-            pRuleSet,
-            pModule
-        )
-    };
+  return {
+    ...pModule,
+    ...validate.module(pValidate, pRuleSet, pModule)
+  };
 }
 
 /**
@@ -35,13 +26,10 @@ function addModuleValidation(pModule, pValidate, pRuleSet) {
  *                                of them added whether or not it is
  *                                part of
  */
-module.exports = (pModules, pValidate, pRuleSet) => pModules.map(
-    pModule => (
-        {
-            ...addModuleValidation(pModule, pValidate, pRuleSet),
-            dependencies: pModule.dependencies.map(
-                pDependency => addDependencyValidation(pDependency, pValidate, pRuleSet, pModule)
-            )
-        }
+module.exports = (pModules, pValidate, pRuleSet) =>
+  pModules.map(pModule => ({
+    ...addModuleValidation(pModule, pValidate, pRuleSet),
+    dependencies: pModule.dependencies.map(pDependency =>
+      addDependencyValidation(pDependency, pValidate, pRuleSet, pModule)
     )
-);
+  }));

@@ -1,71 +1,83 @@
-const chalk          = require('chalk');
-const figures        = require('figures');
-const indentString   = require('indent-string');
-const wrapAnsi       = require('wrap-ansi');
-const _get           = require('lodash/get');
-const findRuleByName = require('../utl/findRuleByName');
+const chalk = require("chalk");
+const figures = require("figures");
+const indentString = require("indent-string");
+const wrapAnsi = require("wrap-ansi");
+const _get = require("lodash/get");
+const findRuleByName = require("../utl/findRuleByName");
 
 const SEVERITY2CHALK = {
-    'error' : chalk.red,
-    'warn'  : chalk.yellow,
-    'info'  : chalk.cyan
+  error: chalk.red,
+  warn: chalk.yellow,
+  info: chalk.cyan
 };
 
 function wrapAndIndent(pString) {
-    const INDENT = 4;
-    const DOGMATIC_MAX_CONSOLE_WIDTH = 78;
-    const MAX_WIDTH = DOGMATIC_MAX_CONSOLE_WIDTH - INDENT;
+  const INDENT = 4;
+  const DOGMATIC_MAX_CONSOLE_WIDTH = 78;
+  const MAX_WIDTH = DOGMATIC_MAX_CONSOLE_WIDTH - INDENT;
 
-    return indentString(wrapAnsi(pString, MAX_WIDTH), INDENT);
+  return indentString(wrapAnsi(pString, MAX_WIDTH), INDENT);
 }
 
-
 function formatError(pErr) {
-    const lModuleNames = pErr.from === pErr.to
-        ? chalk.bold(pErr.from)
-        : `${chalk.bold(pErr.from)} ${figures.arrowRight} ${chalk.bold(pErr.to)}`;
+  const lModuleNames =
+    pErr.from === pErr.to
+      ? chalk.bold(pErr.from)
+      : `${chalk.bold(pErr.from)} ${figures.arrowRight} ${chalk.bold(pErr.to)}`;
 
-    return `${SEVERITY2CHALK[pErr.rule.severity](pErr.rule.severity)} ${pErr.rule.name}: ${lModuleNames}` +
-           `${pErr.comment ? `\n${wrapAndIndent(chalk.dim(pErr.comment))}\n` : ""}`;
+  return (
+    `${SEVERITY2CHALK[pErr.rule.severity](pErr.rule.severity)} ${
+      pErr.rule.name
+    }: ${lModuleNames}` +
+    `${pErr.comment ? `\n${wrapAndIndent(chalk.dim(pErr.comment))}\n` : ""}`
+  );
 }
 
 function formatMeta(pMeta) {
-    return `${pMeta.error} errors, ${pMeta.warn} warnings`;
+  return `${pMeta.error} errors, ${pMeta.warn} warnings`;
 }
 
 function sumMeta(pMeta) {
-    return pMeta.error + pMeta.warn + pMeta.info;
+  return pMeta.error + pMeta.warn + pMeta.info;
 }
 
 function formatSummary(pSummary) {
-    let lMessage =
-        `\n${figures.cross} ${sumMeta(pSummary)} dependency violations (${formatMeta(pSummary)}). ${pSummary.totalCruised} modules, ${pSummary.totalDependenciesCruised} dependencies cruised.\n\n`;
+  let lMessage = `\n${figures.cross} ${sumMeta(
+    pSummary
+  )} dependency violations (${formatMeta(pSummary)}). ${
+    pSummary.totalCruised
+  } modules, ${pSummary.totalDependenciesCruised} dependencies cruised.\n\n`;
 
-    return pSummary.error > 0 ? chalk.red(lMessage) : lMessage;
+  return pSummary.error > 0 ? chalk.red(lMessage) : lMessage;
 }
 
 function addExplanation(pRuleSet, pLong) {
-    return pLong
-        ? (pViolation) => ({
-            ...pViolation,
-            comment: _get(findRuleByName(pRuleSet, pViolation.rule.name), 'comment', '-')
-        })
-        : pViolation => pViolation;
+  return pLong
+    ? pViolation => ({
+        ...pViolation,
+        comment: _get(
+          findRuleByName(pRuleSet, pViolation.rule.name),
+          "comment",
+          "-"
+        )
+      })
+    : pViolation => pViolation;
 }
 
-function report (pResults, pLong) {
+function report(pResults, pLong) {
+  if (pResults.summary.violations.length === 0) {
+    return `\n${chalk.green(figures.tick)} no dependency violations found (${
+      pResults.summary.totalCruised
+    } modules, ${
+      pResults.summary.totalDependenciesCruised
+    } dependencies cruised)\n\n`;
+  }
 
-    if (pResults.summary.violations.length === 0){
-        return `\n${chalk.green(figures.tick)} no dependency violations found (${pResults.summary.totalCruised} modules, ${pResults.summary.totalDependenciesCruised} dependencies cruised)\n\n`;
-    }
-
-    return pResults.summary.violations.reverse().map(addExplanation(pResults.summary.ruleSetUsed, pLong)).reduce(
-        (pAll, pThis) => `${pAll}  ${formatError(pThis)}\n`,
-        "\n"
-    ).concat(
-        formatSummary(pResults.summary)
-    );
-
+  return pResults.summary.violations
+    .reverse()
+    .map(addExplanation(pResults.summary.ruleSetUsed, pLong))
+    .reduce((pAll, pThis) => `${pAll}  ${formatError(pThis)}\n`, "\n")
+    .concat(formatSummary(pResults.summary));
 }
 
 /**
@@ -79,11 +91,9 @@ function report (pResults, pLong) {
  * @returns {object} - output: eslint like output
  *                     exitCode: the number of errors found
  */
-module.exports = (pResults, pLong = false) => (
-    {
-        output: report(pResults, pLong),
-        exitCode: pResults.summary.error
-    }
-);
+module.exports = (pResults, pLong = false) => ({
+  output: report(pResults, pLong),
+  exitCode: pResults.summary.error
+});
 
 /* eslint max-len: 0 */

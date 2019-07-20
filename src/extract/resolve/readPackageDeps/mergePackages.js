@@ -1,43 +1,42 @@
-const _uniq  = require('lodash/uniq');
-const _get   = require('lodash/get');
-const _clone = require('lodash/clone');
+const _uniq = require("lodash/uniq");
+const _get = require("lodash/get");
+const _clone = require("lodash/clone");
 
 function normalizePackageKeys(pPackage) {
-    let lRetval = pPackage;
+  let lRetval = pPackage;
 
-    if (pPackage.bundleDependencies) {
-        pPackage.bundledDependencies = _clone(pPackage.bundleDependencies);
-        Reflect.deleteProperty(pPackage, "bundleDependencies");
-    }
-    return lRetval;
+  if (pPackage.bundleDependencies) {
+    pPackage.bundledDependencies = _clone(pPackage.bundleDependencies);
+    Reflect.deleteProperty(pPackage, "bundleDependencies");
+  }
+  return lRetval;
 }
 
 function mergeDependencyKey(pClosestDependencyKey, pFurtherDependencyKey) {
-    return {
-        ...pFurtherDependencyKey,
-        ...pClosestDependencyKey
-    };
+  return {
+    ...pFurtherDependencyKey,
+    ...pClosestDependencyKey
+  };
 }
 
 function mergeDependencyArray(pClosestDependencyKey, pFurtherDependencyKey) {
-    return _uniq(
-        pClosestDependencyKey.concat(pFurtherDependencyKey)
-    );
+  return _uniq(pClosestDependencyKey.concat(pFurtherDependencyKey));
 }
 
 function isDependencyKey(pKey) {
-    return pKey.endsWith("ependencies");
+  return pKey.endsWith("ependencies");
 }
 
 function getDependencyKeys(pPackage) {
-    return Object.keys(pPackage).filter(isDependencyKey);
+  return Object.keys(pPackage).filter(isDependencyKey);
 }
 
 function getJointDependencyKeys(pClosestPackage, pFurtherPackage) {
-    return _uniq(
-        getDependencyKeys(pClosestPackage)
-            .concat(getDependencyKeys(pFurtherPackage))
-    );
+  return _uniq(
+    getDependencyKeys(pClosestPackage).concat(
+      getDependencyKeys(pFurtherPackage)
+    )
+  );
 }
 
 /**
@@ -57,28 +56,23 @@ function getJointDependencyKeys(pClosestPackage, pFurtherPackage) {
  * @return {any}                 the dependency-keys of
  */
 module.exports = (pClosestPackage, pFurtherPackage) =>
-    getJointDependencyKeys(
-        normalizePackageKeys(pClosestPackage),
-        normalizePackageKeys(pFurtherPackage)
-    )
-        .map(
-            pKey => ({
-                key: pKey,
-                value: pKey.startsWith("bundle")
-                    ? mergeDependencyArray(
-                        _get(pClosestPackage, pKey, []),
-                        _get(pFurtherPackage, pKey, [])
-                    )
-                    : mergeDependencyKey(
-                        _get(pClosestPackage, pKey, {}),
-                        _get(pFurtherPackage, pKey, {})
-                    )
-            })
-        )
-        .reduce(
-            (pJoinedObject, pJoinedKey) => {
-                pJoinedObject[pJoinedKey.key] = pJoinedKey.value;
-                return pJoinedObject;
-            },
-            {}
-        );
+  getJointDependencyKeys(
+    normalizePackageKeys(pClosestPackage),
+    normalizePackageKeys(pFurtherPackage)
+  )
+    .map(pKey => ({
+      key: pKey,
+      value: pKey.startsWith("bundle")
+        ? mergeDependencyArray(
+            _get(pClosestPackage, pKey, []),
+            _get(pFurtherPackage, pKey, [])
+          )
+        : mergeDependencyKey(
+            _get(pClosestPackage, pKey, {}),
+            _get(pFurtherPackage, pKey, {})
+          )
+    }))
+    .reduce((pJoinedObject, pJoinedKey) => {
+      pJoinedObject[pJoinedKey.key] = pJoinedKey.value;
+      return pJoinedObject;
+    }, {});

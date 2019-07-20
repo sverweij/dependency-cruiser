@@ -1,10 +1,10 @@
-const fs                   = require('fs');
-const path                 = require('path');
-const _memoize             = require('lodash/memoize');
-const resolve              = require('./resolve');
-const isRelativeModuleName = require('./isRelativeModuleName');
+const fs = require("fs");
+const path = require("path");
+const _memoize = require("lodash/memoize");
+const resolve = require("./resolve");
+const isRelativeModuleName = require("./isRelativeModuleName");
 
-const isScoped    = (pModule) => pModule.startsWith('@');
+const isScoped = pModule => pModule.startsWith("@");
 
 /**
  * Returns the 'root' of the package - the spot where we can probably find
@@ -33,27 +33,27 @@ const isScoped    = (pModule) => pModule.startsWith('@');
  * @param  {string} pModule a module name
  * @return {string}         the module name root
  */
-function getPackageRoot (pModule) {
-    if (!Boolean(pModule) || isRelativeModuleName(pModule)) {
-        return pModule;
+function getPackageRoot(pModule) {
+  if (!Boolean(pModule) || isRelativeModuleName(pModule)) {
+    return pModule;
+  }
+
+  let lPathElements = pModule.split("/");
+
+  if (isScoped(pModule)) {
+    // '@imdoingweirdvoodoo'
+    if (lPathElements.length === 1) {
+      return pModule;
     }
 
-    let lPathElements = pModule.split("/");
+    // @scope/package
+    // @scope/package/some/thing
+    return `${lPathElements[0]}/${lPathElements[1]}`;
+  }
 
-    if (isScoped(pModule)) {
-        // '@imdoingweirdvoodoo'
-        if (lPathElements.length === 1) {
-            return pModule;
-        }
-
-        // @scope/package
-        // @scope/package/some/thing
-        return `${lPathElements[0]}/${lPathElements[1]}`;
-    }
-
-    // lodash
-    // lodash/fp
-    return lPathElements[0];
+  // lodash
+  // lodash/fp
+  return lPathElements[0];
 }
 
 /**
@@ -74,31 +74,27 @@ function getPackageRoot (pModule) {
  *                           null if either module or package.json could
  *                           not be found
  */
-function bareGetPackageJson (pModule, pBaseDir, pResolveOptions){
-    let lRetval = null;
+function bareGetPackageJson(pModule, pBaseDir, pResolveOptions) {
+  let lRetval = null;
 
-    try {
-        let lPackageJsonFilename = resolve(
-            path.join(getPackageRoot(pModule), "package.json"),
-            pBaseDir ? pBaseDir : ".",
-            pResolveOptions
-        );
+  try {
+    let lPackageJsonFilename = resolve(
+      path.join(getPackageRoot(pModule), "package.json"),
+      pBaseDir ? pBaseDir : ".",
+      pResolveOptions
+    );
 
-        lRetval = JSON.parse(
-            fs.readFileSync(lPackageJsonFilename, 'utf8')
-        );
-
-    } catch (e) {
-        // left empty on purpose
-    }
-    return lRetval;
+    lRetval = JSON.parse(fs.readFileSync(lPackageJsonFilename, "utf8"));
+  } catch (e) {
+    // left empty on purpose
+  }
+  return lRetval;
 }
 
-const getPackageJson =
-    _memoize(
-        bareGetPackageJson,
-        (pModule, pBaseDir) => `${pBaseDir}|${pModule}`
-    );
+const getPackageJson = _memoize(
+  bareGetPackageJson,
+  (pModule, pBaseDir) => `${pBaseDir}|${pModule}`
+);
 
 /**
  * Tells whether the pModule as resolved to pBaseDir is deprecated
@@ -108,14 +104,15 @@ const getPackageJson =
  * @param  {any} pResolveOptions options for the resolver
  * @return {boolean}         true if deprecated, false in all other cases
  */
-function dependencyIsDeprecated (pModule, pBaseDir, pResolveOptions) {
-    let lRetval = false;
-    let lPackageJson = getPackageJson(pModule, pBaseDir, pResolveOptions);
+function dependencyIsDeprecated(pModule, pBaseDir, pResolveOptions) {
+  let lRetval = false;
+  let lPackageJson = getPackageJson(pModule, pBaseDir, pResolveOptions);
 
-    if (Boolean(lPackageJson)){
-        lRetval = lPackageJson.hasOwnProperty("deprecated") && lPackageJson.deprecated;
-    }
-    return lRetval;
+  if (Boolean(lPackageJson)) {
+    lRetval =
+      lPackageJson.hasOwnProperty("deprecated") && lPackageJson.deprecated;
+  }
+  return lRetval;
 }
 
 /**
@@ -127,28 +124,28 @@ function dependencyIsDeprecated (pModule, pBaseDir, pResolveOptions) {
  * @return {string}          The module's license string, or '' in case
  *                           there is no package.json or no license field
  */
-function getLicense (pModule, pBaseDir, pResolveOptions) {
-    let lRetval = "";
-    let lPackageJson = getPackageJson(pModule, pBaseDir, pResolveOptions);
+function getLicense(pModule, pBaseDir, pResolveOptions) {
+  let lRetval = "";
+  let lPackageJson = getPackageJson(pModule, pBaseDir, pResolveOptions);
 
-    if (
-        Boolean(lPackageJson) &&
-        lPackageJson.hasOwnProperty("license") &&
-        typeof lPackageJson.license === "string"
-    ){
-        lRetval = lPackageJson.license;
-    }
-    return lRetval;
+  if (
+    Boolean(lPackageJson) &&
+    lPackageJson.hasOwnProperty("license") &&
+    typeof lPackageJson.license === "string"
+  ) {
+    lRetval = lPackageJson.license;
+  }
+  return lRetval;
 }
 
 function clearCache() {
-    getPackageJson.cache.clear();
+  getPackageJson.cache.clear();
 }
 
 module.exports = {
-    getPackageRoot,
-    getPackageJson,
-    dependencyIsDeprecated,
-    getLicense,
-    clearCache
+  getPackageRoot,
+  getPackageJson,
+  dependencyIsDeprecated,
+  getLicense,
+  clearCache
 };

@@ -1,28 +1,30 @@
-const path = require('path').posix;
+const path = require("path").posix;
 
-function toFullPath (pAll, pCurrent) {
-    return `${pAll}${pCurrent}${path.sep}`;
+function toFullPath(pAll, pCurrent) {
+  return `${pAll}${pCurrent}${path.sep}`;
 }
 
-function aggregate (pPathSnippet, pCounter, pPathArray){
-    return {
-        snippet: pPathSnippet,
-        aggregateSnippet: `${pPathArray.slice(0, pCounter).reduce(toFullPath, '')}${pPathSnippet}`
-    };
+function aggregate(pPathSnippet, pCounter, pPathArray) {
+  return {
+    snippet: pPathSnippet,
+    aggregateSnippet: `${pPathArray
+      .slice(0, pCounter)
+      .reduce(toFullPath, "")}${pPathSnippet}`
+  };
 }
-module.exports = (pModule) => {
-    let lAdditions = {};
-    let lDirName = path.dirname(pModule.source);
+module.exports = pModule => {
+  let lAdditions = {};
+  let lDirName = path.dirname(pModule.source);
 
-    if (lDirName !== ".") {
-        lAdditions.folder = lDirName;
-        lAdditions.path   = lDirName.split(path.sep).map(aggregate);
-    }
+  if (lDirName !== ".") {
+    lAdditions.folder = lDirName;
+    lAdditions.path = lDirName.split(path.sep).map(aggregate);
+  }
 
-    lAdditions.label = path.basename(pModule.source);
+  lAdditions.label = path.basename(pModule.source);
 
-    return {
-        ...pModule,
-        ...lAdditions
-    };
+  return {
+    ...pModule,
+    ...lAdditions
+  };
 };

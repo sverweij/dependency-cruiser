@@ -1,4 +1,4 @@
-const _get = require('lodash/get');
+const _get = require("lodash/get");
 
 /**
  * Finds the first rule in the rule set that has name pName,
@@ -10,6 +10,7 @@ const _get = require('lodash/get');
  * @return {IForbiddenRuleType|IAllowedRuleType} - a rule (or 'undefined' if nothing found)
  */
 module.exports = function findRuleByName(pRuleSet, pName) {
-    return _get(pRuleSet, 'forbidden', [])
-        .find(pForbiddenRule => pForbiddenRule.name === pName);
+  return _get(pRuleSet, "forbidden", []).find(
+    pForbiddenRule => pForbiddenRule.name === pName
+  );
 };

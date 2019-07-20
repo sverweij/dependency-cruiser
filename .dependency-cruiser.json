@@ -1,140 +1,161 @@
-
 {
-    "extends": "./configs/recommended-strict",
-    "forbidden": [
-        {
-            "name": "cli-to-main-only",
-            "comment": "This cli module depends on something not in the public interface - which means it either doesn't belong in cli, or the main public interface needs to be expanded.",
-            "severity": "error",
-            "from": { "path": "(^src/cli/)", "pathNot": "^(src/cli/compileConfig/index\\.js)$" },
-            "to": { "pathNot": "^src/main/|^node_modules|^fs$|^path$|$1|^package.json$" }
-        }, {
-            "name": "cli-to-main-only-warn",
-            "comment": "This cli module depends on something not in the public interface - which means it either doesn't belong in cli, or the main public interface needs to be expanded (this warn-only rule is a temporary exception for the compileConfig depending on the resolver).",
-            "severity": "warn",
-            "from": { "path": "^(src/cli/compileConfig/index\\.js)$" },
-            "to": { "pathNot": "^src/(cli|main)|^node_modules|^fs$|^path$|$1|^package.json$" }
-        }, {
-            "name": "bin-to-cli-only",
-            "comment": "This module in the bin/ folder depends on something not in the cli interface. This means it either contains code that doesn't belong in bin/, or the thing it depends upon should be put in the cli interface. ",
-            "severity": "error",
-            "from": { "path": "(^bin/)" },
-            "to": { "pathNot": "^src/cli|^node_modules|^package.json$" }
-        }, {
-            "name": "restrict-fs-access",
-            "comment": "This module depends on a the node 'fs' module, and it resides in a spot where that is not allowed.",
-            "severity": "error",
-            "from": { "pathNot": "^src/(extract/parse|extract/resolve|extract/gatherInitialSources\\.js|cli)|^test" },
-            "to": { "path": "^fs$" }
-        }, {
-            "name": "no-inter-module-test",
-            "comment": "This test depends on something in the test tree that is neither a utility, nor a mock nor a fixture.",
-            "severity": "error",
-            "from": { "path": "(^test/[^\\/]+/)[^\\.]+\\.spec\\.js" },
-            "to": { "path": "^test/[^\\/]+/.+", "pathNot": "utl|$1[^\\.]+\\.json$"}
-        }, {
-            "name": "prefer-lodash-individuals",
-            "comment": "This module directly depends on 'lodash' as a whole. Preferably don't include lodash as a whole, but use individual lodash packages instead e.g. 'lodash/get' - this keeps the download of the package small(er)",
-            "severity": "info",
-            "from": {},
-            "to": { "path": "lodash\\.js$"}
-        }, {
-            "name": "no-dep-on-test",
-            "comment": "This module depends on a spec files. A spec file should have a single responsibility (testing whether a module function correctly). If there's something in a spec that's of use, factor it out into (e.g.) a separate utility/ helper or mock",
-            "severity": "error",
-            "from": { "path": "^(src|bin)" },
-            "to": { "path": "^test|\\.spec\\.js$"}
-        }, {
-            "name": "no-external-to-here",
-            "comment": "Apparently something outside of the src/ test/ and bin/ points to something inside them. That's incredibly odd and might denote a security problem.",
-            "severity": "error",
-            "from": { "pathNot": "^(src|test|bin)" },
-            "to": { "path": "^(src|test)" }
-        }, {
-            "name": "not-to-dev-dep",
-            "severity": "error",
-            "comment": "In production code do not depend on external ('npm') modules not declared in your package.json's dependencies - otherwise a production only install (i.e. 'npm ci') will break. If this rule triggers on something that's only used during development, adapt the 'from' of the rule in the dependency-cruiser configuration.",
-            "from": { "path": "^(bin|src)"},
-            "to": { "dependencyTypes": ["npm-dev"] }
-        }, {
-            "name": "optional-deps-used",
-            "severity": "error",
-            "comment": "This module uses an external dependency that in package.json shows up as an optional dependency. In dependency-cruiser optional dependencies donot make sense - and are hence forbidden. Either make it a regular dependency (if it's production code) or a dev one (if it's for development only)",
-            "from": {},
-            "to": { "dependencyTypes": ["npm-optional"] }
-        }, {
-            "name": "peer-deps-used",
-            "comment": "This module uses an external dependency that in package.json shows up as a peer dependency. In dependency-cruiser peer dependencies donot make sense - and are hence forbidden. Either make it a regular dependency (if it's production code) or a dev one (if it's for development only)",
-            "severity": "error",
-            "from": {},
-            "to": { "dependencyTypes": ["npm-peer"] }
-        },{
-            "name": "no-unvetted-license",
-            "comment": "This module uses an external dependency that has license that's not vetted. The license itself might be OK, but bigcorp legal departments might get jittery over anything other than MIT (or ISC).",
-            "severity": "warn",
-            "from": {},
-            "to": { "licenseNot": "MIT|ISC" }
-        },{
-            "name": "not-unreachable-from-cli",
-            "severity": "warn",
-            "comment": "This module in the src/ tree is not reachable from the cli - and is likely dead wood. Either use it or remove it. If a module is flagged for which it's logical it is not reachable from cli (i.e. a configuration file), add it to the pathNot in the 'to' of this rule.",
-            "from": { "path": "^src/cli/index\\.js$" },
-            "to": { "path": "^src", "reachable": false }
-        },{
-            "name": "not-unreachable-from-test",
-            "comment": "This module in src is not reachable by any test. Please provide a test that covers this (poor man's test coverage - this task is better suited for a proper test coverage tool :-) )",
-            "severity": "error",
-            "from": { "path": "\\.spec\\.js$" },
-            "to": { "path": "^src", "reachable": false }
-        }
-    ],
-    "options": {
-        /* pattern specifying which files not to follow further when encountered
-           (regular expression)
-           no need to specify here as well as we use the same as is in the
-           recommended preset anyway
-         */
-        // "doNotFollow": "node_modules",
-
-        /* pattern specifying which files to exclude (regular expression) */
-        "exclude" : "fixtures|test/integration",
-
-        /* list of module systems to cruise */
-        // "moduleSystems": ["amd", "cjs", "es6", "tsd"],
-
-        /* prefix for links in html and svg output (e.g. https://github.com/you/yourrepo/blob/develop/) */
-        "prefix": "https://github.com/sverweij/dependency-cruiser/blob/develop/"
-
-        /* if true detect dependencies that only exist before typescript-to-javascript compilation */
-        // "tsPreCompilationDeps": false,
-
-        /* if true leave symlinks untouched, otherwise use the realpath */
-        // "preserveSymlinks": false,
-
-        /* Typescript project file ('tsconfig.json') to use for
-           (1) compilation and
-           (2) resolution (e.g. with the paths property)
-
-           The (optional) fileName attribute specifies which file to take (relative to dependency-cruiser's
-           current working directory. When not provided defaults to './tsconfig.json'.
-         */
-        // "tsConfig": {
-        //    "fileName": "./tsconfig.json"
-        // },
-
-        /* Webpack configuration to use to get resolve options from.
-
-          The (optional) fileName attribute specifies which file to take (relative to dependency-cruiser's
-          current working directory. When not provided defaults to './webpack.conf.js'.
-
-          The (optional) `env` and `args` attributes contain the parameters to be passed if
-          your webpack config is a function and takes them (see webpack documentation
-          for details)
-         */
-        // "webpackConfig": {
-        //    "fileName": "./webpack.conf.js",
-        //    "env": {},
-        //    "args": {}
-        // }
+  "extends": "./configs/recommended-strict",
+  "forbidden": [
+    {
+      "name": "cli-to-main-only",
+      "comment": "This cli module depends on something not in the public interface - which means it either doesn't belong in cli, or the main public interface needs to be expanded.",
+      "severity": "error",
+      "from": {
+        "path": "(^src/cli/)",
+        "pathNot": "^(src/cli/compileConfig/index\\.js)$"
+      },
+      "to": {
+        "pathNot": "^src/main/|^node_modules|^fs$|^path$|$1|^package.json$"
+      }
+    },
+    {
+      "name": "cli-to-main-only-warn",
+      "comment": "This cli module depends on something not in the public interface - which means it either doesn't belong in cli, or the main public interface needs to be expanded (this warn-only rule is a temporary exception for the compileConfig depending on the resolver).",
+      "severity": "warn",
+      "from": { "path": "^(src/cli/compileConfig/index\\.js)$" },
+      "to": {
+        "pathNot": "^src/(cli|main)|^node_modules|^fs$|^path$|$1|^package.json$"
+      }
+    },
+    {
+      "name": "bin-to-cli-only",
+      "comment": "This module in the bin/ folder depends on something not in the cli interface. This means it either contains code that doesn't belong in bin/, or the thing it depends upon should be put in the cli interface. ",
+      "severity": "error",
+      "from": { "path": "(^bin/)" },
+      "to": { "pathNot": "^src/cli|^node_modules|^package.json$" }
+    },
+    {
+      "name": "restrict-fs-access",
+      "comment": "This module depends on a the node 'fs' module, and it resides in a spot where that is not allowed.",
+      "severity": "error",
+      "from": {
+        "pathNot": "^src/(extract/parse|extract/resolve|extract/gatherInitialSources\\.js|cli)|^test"
+      },
+      "to": { "path": "^fs$" }
+    },
+    {
+      "name": "no-inter-module-test",
+      "comment": "This test depends on something in the test tree that is neither a utility, nor a mock nor a fixture.",
+      "severity": "error",
+      "from": { "path": "(^test/[^\\/]+/)[^\\.]+\\.spec\\.js" },
+      "to": { "path": "^test/[^\\/]+/.+", "pathNot": "utl|$1[^\\.]+\\.json$" }
+    },
+    {
+      "name": "prefer-lodash-individuals",
+      "comment": "This module directly depends on 'lodash' as a whole. Preferably don't include lodash as a whole, but use individual lodash packages instead e.g. 'lodash/get' - this keeps the download of the package small(er)",
+      "severity": "info",
+      "from": {},
+      "to": { "path": "lodash\\.js$" }
+    },
+    {
+      "name": "no-dep-on-test",
+      "comment": "This module depends on a spec files. A spec file should have a single responsibility (testing whether a module function correctly). If there's something in a spec that's of use, factor it out into (e.g.) a separate utility/ helper or mock",
+      "severity": "error",
+      "from": { "path": "^(src|bin)" },
+      "to": { "path": "^test|\\.spec\\.js$" }
+    },
+    {
+      "name": "no-external-to-here",
+      "comment": "Apparently something outside of the src/ test/ and bin/ points to something inside them. That's incredibly odd and might denote a security problem.",
+      "severity": "error",
+      "from": { "pathNot": "^(src|test|bin)" },
+      "to": { "path": "^(src|test)" }
+    },
+    {
+      "name": "not-to-dev-dep",
+      "severity": "error",
+      "comment": "In production code do not depend on external ('npm') modules not declared in your package.json's dependencies - otherwise a production only install (i.e. 'npm ci') will break. If this rule triggers on something that's only used during development, adapt the 'from' of the rule in the dependency-cruiser configuration.",
+      "from": { "path": "^(bin|src)" },
+      "to": { "dependencyTypes": ["npm-dev"] }
+    },
+    {
+      "name": "optional-deps-used",
+      "severity": "error",
+      "comment": "This module uses an external dependency that in package.json shows up as an optional dependency. In dependency-cruiser optional dependencies donot make sense - and are hence forbidden. Either make it a regular dependency (if it's production code) or a dev one (if it's for development only)",
+      "from": {},
+      "to": { "dependencyTypes": ["npm-optional"] }
+    },
+    {
+      "name": "peer-deps-used",
+      "comment": "This module uses an external dependency that in package.json shows up as a peer dependency. In dependency-cruiser peer dependencies donot make sense - and are hence forbidden. Either make it a regular dependency (if it's production code) or a dev one (if it's for development only)",
+      "severity": "error",
+      "from": {},
+      "to": { "dependencyTypes": ["npm-peer"] }
+    },
+    {
+      "name": "no-unvetted-license",
+      "comment": "This module uses an external dependency that has license that's not vetted. The license itself might be OK, but bigcorp legal departments might get jittery over anything other than MIT (or ISC).",
+      "severity": "error",
+      "from": {},
+      "to": { "licenseNot": "MIT|ISC" }
+    },
+    {
+      "name": "not-unreachable-from-cli",
+      "severity": "error",
+      "comment": "This module in the src/ tree is not reachable from the cli - and is likely dead wood. Either use it or remove it. If a module is flagged for which it's logical it is not reachable from cli (i.e. a configuration file), add it to the pathNot in the 'to' of this rule.",
+      "from": { "path": "^bin/" },
+      "to": { "path": "^src", "reachable": false }
+    },
+    {
+      "name": "not-unreachable-from-test",
+      "comment": "This module in src is not reachable by any test. Please provide a test that covers this (poor man's test coverage - this task is better suited for a proper test coverage tool :-) )",
+      "severity": "error",
+      "from": { "path": "\\.spec\\.js$" },
+      "to": { "path": "^src", "reachable": false }
     }
+  ],
+  "options": {
+    /* pattern specifying which files not to follow further when encountered
+      (regular expression)
+      no need to specify here as well as we use the same as is in the
+      recommended preset anyway
+    */
+    // "doNotFollow": "node_modules",
+
+    /* pattern specifying which files to exclude (regular expression) */
+    "exclude": "fixtures|test/integration",
+
+    /* list of module systems to cruise */
+    // "moduleSystems": ["amd", "cjs", "es6", "tsd"],
+
+    /* prefix for links in html and svg output (e.g. https://github.com/you/yourrepo/blob/develop/) */
+    "prefix": "https://github.com/sverweij/dependency-cruiser/blob/develop/"
+
+    /* if true detect dependencies that only exist before typescript-to-javascript compilation */
+    // "tsPreCompilationDeps": false,
+
+    /* if true leave symlinks untouched, otherwise use the realpath */
+    // "preserveSymlinks": false,
+
+    /* Typescript project file ('tsconfig.json') to use for
+      (1) compilation and
+      (2) resolution (e.g. with the paths property)
+
+      The (optional) fileName attribute specifies which file to take (relative to dependency-cruiser's
+      current working directory. When not provided defaults to './tsconfig.json'.
+    */
+    // "tsConfig": {
+    //    "fileName": "./tsconfig.json"
+    // },
+
+    /* Webpack configuration to use to get resolve options from.
+
+      The (optional) fileName attribute specifies which file to take (relative to dependency-cruiser's
+      current working directory. When not provided defaults to './webpack.conf.js'.
+
+      The (optional) `env` and `args` attributes contain the parameters to be passed if
+      your webpack config is a function and takes them (see webpack documentation
+      for details)
+    */
+    // "webpackConfig": {
+    //    "fileName": "./webpack.conf.js",
+    //    "env": {},
+    //    "args": {}
+    // }
+  }
 }

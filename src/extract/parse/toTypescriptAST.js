@@ -1,9 +1,9 @@
-const fs         = require('fs');
-const tryRequire = require('semver-try-require');
-const _memoize   = require('lodash/memoize');
+const fs = require("fs");
+const tryRequire = require("semver-try-require");
+const _memoize = require("lodash/memoize");
 const typescript = tryRequire(
-    "typescript",
-    require("../../../package.json").supportedTranspilers.typescript
+  "typescript",
+  require("../../../package.json").supportedTranspilers.typescript
 );
 
 /**
@@ -15,12 +15,12 @@ const typescript = tryRequire(
  * @return {object} - a (typescript) AST
  */
 function getASTFromSource(pTypescriptSource, pFileName) {
-    return typescript.createSourceFile(
-        pFileName || '$internal-file-name',
-        pTypescriptSource,
-        typescript.ScriptTarget.Latest,
-        false
-    );
+  return typescript.createSourceFile(
+    pFileName || "$internal-file-name",
+    pTypescriptSource,
+    typescript.ScriptTarget.Latest,
+    false
+  );
 }
 
 /**
@@ -30,37 +30,34 @@ function getASTFromSource(pTypescriptSource, pFileName) {
  * @param {string} pFileName - the name of the file to compile
  * @return {object} - a (typescript) AST
  */
-function getAST(pFileName){
-    return getASTFromSource(
-        fs.readFileSync(pFileName, 'utf8'),
-        pFileName
-    );
+function getAST(pFileName) {
+  return getASTFromSource(fs.readFileSync(pFileName, "utf8"), pFileName);
 }
 
 const getASTCached = _memoize(getAST);
 
 function clearCache() {
-    getASTCached.cache.clear();
+  getASTCached.cache.clear();
 }
 
 module.exports = {
-    getASTFromSource,
+  getASTFromSource,
 
-    /**
-     * @return {boolean} - true if the typescript compiler is available,
-     *                     false in all other cases
-     */
-    isAvailable: () => typescript !== false,
+  /**
+   * @return {boolean} - true if the typescript compiler is available,
+   *                     false in all other cases
+   */
+  isAvailable: () => typescript !== false,
 
-    /**
-     * Compiles the file identified by pFileName into a (typescript)
-     * AST and returns it. Subsequent calls for the same file name will
-     * return the result from a cache
-     *
-     * @param {string} pFileName - the name of the file to compile
-     * @return {object} - a (typescript) AST
-     */
-    getASTCached,
+  /**
+   * Compiles the file identified by pFileName into a (typescript)
+   * AST and returns it. Subsequent calls for the same file name will
+   * return the result from a cache
+   *
+   * @param {string} pFileName - the name of the file to compile
+   * @return {object} - a (typescript) AST
+   */
+  getASTCached,
 
-    clearCache
+  clearCache
 };

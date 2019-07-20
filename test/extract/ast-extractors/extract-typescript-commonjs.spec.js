@@ -1,54 +1,51 @@
-const expect            = require('chai').expect;
-const extractTypescript = require('./extract-typescript.utl');
+const expect = require("chai").expect;
+const extractTypescript = require("./extract-typescript.utl");
 
 describe("ast-extractors/extract-typescript - regular commonjs require", () => {
+  it("extracts require of a module that uses an export-equals'", () => {
+    expect(
+      extractTypescript(
+        "import thing = require('./thing-that-uses-export-equals');"
+      )
+    ).to.deep.equal([
+      {
+        moduleName: "./thing-that-uses-export-equals",
+        moduleSystem: "cjs",
+        dynamic: false
+      }
+    ]);
+  });
 
-    it("extracts require of a module that uses an export-equals'", () => {
-        expect(
-            extractTypescript("import thing = require('./thing-that-uses-export-equals');")
-        ).to.deep.equal(
-            [
-                {
-                    moduleName: './thing-that-uses-export-equals',
-                    moduleSystem: 'cjs',
-                    dynamic: false
-                }
-            ]
-        );
-    });
-
-    it("extracts regular require as a const, let or var", () => {
-        expect(
-            extractTypescript(
-                `const lala1 = require('legit-one');
+  it("extracts regular require as a const, let or var", () => {
+    expect(
+      extractTypescript(
+        `const lala1 = require('legit-one');
                  let lala2 = require('legit-two');
                  var lala3 = require('legit-three');`
-            )
-        ).to.deep.equal(
-            [
-                {
-                    moduleName: 'legit-one',
-                    moduleSystem: 'cjs',
-                    dynamic: false
-                },
-                {
-                    moduleName: 'legit-two',
-                    moduleSystem: 'cjs',
-                    dynamic: false
-                },
-                {
-                    moduleName: 'legit-three',
-                    moduleSystem: 'cjs',
-                    dynamic: false
-                }
-            ]
-        );
-    });
+      )
+    ).to.deep.equal([
+      {
+        moduleName: "legit-one",
+        moduleSystem: "cjs",
+        dynamic: false
+      },
+      {
+        moduleName: "legit-two",
+        moduleSystem: "cjs",
+        dynamic: false
+      },
+      {
+        moduleName: "legit-three",
+        moduleSystem: "cjs",
+        dynamic: false
+      }
+    ]);
+  });
 
-    it("extracts regular requires that are not on the top level in the AST", () => {
-        expect(
-            extractTypescript(
-                `function f(x) {
+  it("extracts regular requires that are not on the top level in the AST", () => {
+    expect(
+      extractTypescript(
+        `function f(x) {
                     if(x > 0) {
                         return require('midash')
                     } else {
@@ -60,79 +57,55 @@ describe("ast-extractors/extract-typescript - regular commonjs require", () => {
                         }
                     }
                 }`
-            )
-        ).to.deep.equal(
-            [{
-                moduleName: 'midash',
-                moduleSystem: 'cjs',
-                dynamic: false
-            },
-            {
-                moduleName: 'slodash',
-                moduleSystem: 'cjs',
-                dynamic: false
-            },
-            {
-                moduleName: 'hidash',
-                moduleSystem: 'cjs',
-                dynamic: false
-            }]
-        );
-    });
+      )
+    ).to.deep.equal([
+      {
+        moduleName: "midash",
+        moduleSystem: "cjs",
+        dynamic: false
+      },
+      {
+        moduleName: "slodash",
+        moduleSystem: "cjs",
+        dynamic: false
+      },
+      {
+        moduleName: "hidash",
+        moduleSystem: "cjs",
+        dynamic: false
+      }
+    ]);
+  });
 
-    it("extracts regular require with a template string without placeholders", () => {
-        expect(
-            extractTypescript(
-                "const lala = require(`thunderscore`)"
-            )
-        ).to.deep.equal(
-            [
-                {
-                    moduleName: 'thunderscore',
-                    moduleSystem: 'cjs',
-                    dynamic: false
-                }
-            ]
-        );
-    });
+  it("extracts regular require with a template string without placeholders", () => {
+    expect(
+      extractTypescript("const lala = require(`thunderscore`)")
+    ).to.deep.equal([
+      {
+        moduleName: "thunderscore",
+        moduleSystem: "cjs",
+        dynamic: false
+      }
+    ]);
+  });
 
-    it("ignores regular require without parameters", () => {
-        expect(
-            extractTypescript(
-                "const lala = require()"
-            )
-        ).to.deep.equal(
-            []
-        );
-    });
+  it("ignores regular require without parameters", () => {
+    expect(extractTypescript("const lala = require()")).to.deep.equal([]);
+  });
 
-    it("ignores regular require with a non-string argument", () => {
-        expect(
-            extractTypescript(
-                "const lala = require(666)"
-            )
-        ).to.deep.equal(
-            []
-        );
-    });
+  it("ignores regular require with a non-string argument", () => {
+    expect(extractTypescript("const lala = require(666)")).to.deep.equal([]);
+  });
 
-    it("ignores regular require with a template literal with placeholders", () => {
-        expect(
-            extractTypescript(
-                "const lala = require(`shwoooop/${blabla}`)"
-            )
-        ).to.deep.equal(
-            []
-        );
-    });
+  it("ignores regular require with a template literal with placeholders", () => {
+    expect(
+      extractTypescript("const lala = require(`shwoooop/${blabla}`)")
+    ).to.deep.equal([]);
+  });
 
-    it("ignores regular require with a function for a parameter", () => {
-        expect(
-            extractTypescript(
-                "const lala = require(helvete())"
-            )
-        ).to.deep.equal(
-            []
-        );
-    });
+  it("ignores regular require with a function for a parameter", () => {
+    expect(extractTypescript("const lala = require(helvete())")).to.deep.equal(
+      []
+    );
+  });
 });

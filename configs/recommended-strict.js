@@ -1,11 +1,9 @@
-const recommended = require('./recommended');
+const recommended = require("./recommended");
 
 module.exports = {
-    ...recommended,
-    forbidden: recommended.forbidden.map(
-        pRule => {
-            pRule.severity = "error";
-            return pRule;
-        }
-    )
+  ...recommended,
+  forbidden: recommended.forbidden.map(pRule => {
+    pRule.severity = "error";
+    return pRule;
+  })
 };

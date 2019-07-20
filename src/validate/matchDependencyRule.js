@@ -1,10 +1,10 @@
-const isModuleOnlyRule = require('./isModuleOnlyRule');
-const matches          = require('./matches');
+const isModuleOnlyRule = require("./isModuleOnlyRule");
+const matches = require("./matches");
 
 function propertyEquals(pTo, pRule, pProperty) {
-    return pRule.to.hasOwnProperty(pProperty)
-        ? pTo[pProperty] === pRule.to[pProperty]
-        : true;
+  return pRule.to.hasOwnProperty(pProperty)
+    ? pTo[pProperty] === pRule.to[pProperty]
+    : true;
 }
 
 /* if there is at least one group expression in the given pRulePath
@@ -15,47 +15,48 @@ function propertyEquals(pTo, pRule, pProperty) {
    matches.
 */
 function extractGroups(pRule, pActualPath) {
-    let lRetval = [];
+  let lRetval = [];
 
-    if (Boolean(pRule.path)) {
-        let lMatchResult = pActualPath.match(pRule.path);
+  if (Boolean(pRule.path)) {
+    let lMatchResult = pActualPath.match(pRule.path);
 
-        if (Boolean(lMatchResult) && lMatchResult.length > 1) {
-            lRetval = lMatchResult.filter(pResult => typeof pResult === 'string');
-        }
+    if (Boolean(lMatchResult) && lMatchResult.length > 1) {
+      lRetval = lMatchResult.filter(pResult => typeof pResult === "string");
     }
-    return lRetval;
+  }
+  return lRetval;
 }
 
 function match(pFrom, pTo) {
-    return pRule => {
-        const lGroups = extractGroups(pRule.from, pFrom.source);
+  return pRule => {
+    const lGroups = extractGroups(pRule.from, pFrom.source);
 
-        /*
-         * the replace("$1", lGroup) things below are a bit simplistic (they
-         * also match \$, which they probably shouldn't) - but good enough for
-         * now.
-         */
-        return matches.fromPath(pRule, pFrom) &&
-            matches.fromPathNot(pRule, pFrom) &&
-            matches.toDependencyPath(pRule, pTo, lGroups) &&
-            matches.toDependencyPathNot(pRule, pTo, lGroups) &&
-            matches.toDependencyTypes(pRule, pTo) &&
-            (!pRule.to.hasOwnProperty("moreThanOneDependencyType") ||
-                    pTo.dependencyTypes.length > 1
-            ) &&
-            matches.toLicense(pRule, pTo) &&
-            matches.toLicenseNot(pRule, pTo) &&
-            propertyEquals(pTo, pRule, "couldNotResolve") &&
-            propertyEquals(pTo, pRule, "circular") &&
-            propertyEquals(pTo, pRule, "dynamic");
-    };
+    /*
+     * the replace("$1", lGroup) things below are a bit simplistic (they
+     * also match \$, which they probably shouldn't) - but good enough for
+     * now.
+     */
+    return (
+      matches.fromPath(pRule, pFrom) &&
+      matches.fromPathNot(pRule, pFrom) &&
+      matches.toDependencyPath(pRule, pTo, lGroups) &&
+      matches.toDependencyPathNot(pRule, pTo, lGroups) &&
+      matches.toDependencyTypes(pRule, pTo) &&
+      (!pRule.to.hasOwnProperty("moreThanOneDependencyType") ||
+        pTo.dependencyTypes.length > 1) &&
+      matches.toLicense(pRule, pTo) &&
+      matches.toLicenseNot(pRule, pTo) &&
+      propertyEquals(pTo, pRule, "couldNotResolve") &&
+      propertyEquals(pTo, pRule, "circular") &&
+      propertyEquals(pTo, pRule, "dynamic")
+    );
+  };
 }
 const isInteresting = pRule => !isModuleOnlyRule(pRule);
 
 module.exports = {
-    match,
-    isInteresting
+  match,
+  isInteresting
 };
 
 /* ignore security/detect-object-injection because:

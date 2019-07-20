@@ -14,30 +14,29 @@
  * @return {boolean}        see description above
  */
 function dependencyEndsUpAtFrom(pGraph, pFrom, pTo, pVisited) {
-    pVisited = pVisited || new Set();
+  pVisited = pVisited || new Set();
 
-    const lToNode = pGraph.find(pNode => pNode.source === pTo);
+  const lToNode = pGraph.find(pNode => pNode.source === pTo);
 
-    /* about the absence of checks whether attributes/ objects actually
-     * exist:
-     * - it saves CPU cycles to the effect of being ~30% faster than with the
-     *   checks
-     * - lToNode: is guaranteed to be there by the extract/ complete in index.js
-     * - lToNode.dependencies is a mandatory attribute (as per json schema)
-     * - pToToNode.resolved is a mandatory attribute (as per json schema)
-     */
-    return lToNode.dependencies.filter(
-        pToToNode => !pVisited.has(pToToNode.resolved)
-    ).some(
-        pToToNode =>
-            pToToNode.resolved === pFrom
-                ? true
-                : dependencyEndsUpAtFrom(
-                    pGraph,
-                    pFrom,
-                    pToToNode.resolved,
-                    pVisited.add(pToToNode.resolved)
-                )
+  /* about the absence of checks whether attributes/ objects actually
+   * exist:
+   * - it saves CPU cycles to the effect of being ~30% faster than with the
+   *   checks
+   * - lToNode: is guaranteed to be there by the extract/ complete in index.js
+   * - lToNode.dependencies is a mandatory attribute (as per json schema)
+   * - pToToNode.resolved is a mandatory attribute (as per json schema)
+   */
+  return lToNode.dependencies
+    .filter(pToToNode => !pVisited.has(pToToNode.resolved))
+    .some(pToToNode =>
+      pToToNode.resolved === pFrom
+        ? true
+        : dependencyEndsUpAtFrom(
+            pGraph,
+            pFrom,
+            pToToNode.resolved,
+            pVisited.add(pToToNode.resolved)
+          )
     );
 }
 

@@ -1,11 +1,10 @@
-const path = require('path');
+const path = require("path");
 
-module.exports = (pFilename) => {
-    let lRetval = pFilename;
+module.exports = pFilename => {
+  let lRetval = pFilename;
 
-    if (!path.isAbsolute(pFilename)) {
-        lRetval = path.join(process.cwd(), pFilename);
-    }
-    return lRetval;
-
+  if (!path.isAbsolute(pFilename)) {
+    lRetval = path.join(process.cwd(), pFilename);
+  }
+  return lRetval;
 };

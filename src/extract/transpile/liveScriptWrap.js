@@ -1,17 +1,14 @@
 const tryRequire = require("semver-try-require");
 const livescript = tryRequire(
-    "livescript",
-    require("../../../package.json").supportedTranspilers.livescript
+  "livescript",
+  require("../../../package.json").supportedTranspilers.livescript
 );
 
 /* istanbul ignore next */
 module.exports = {
-    isAvailable: () => livescript !== false,
+  isAvailable: () => livescript !== false,
 
-    transpile: pSource =>
-        livescript.compile(
-            pSource
-        )
+  transpile: pSource => livescript.compile(pSource)
 };
 
 /* eslint import/order: off */

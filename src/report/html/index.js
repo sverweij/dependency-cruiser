@@ -1,21 +1,17 @@
-const Handlebars                       = require("handlebars/runtime");
+const Handlebars = require("handlebars/runtime");
 const dependencyToIncidenceTransformer = require("../utl/dependencyToIncidenceTransformer");
 
 // eslint-disable-next-line import/no-unassigned-import
 require("./html.template");
 
 function addShowTitle(pDependencyEntry) {
-    return {
-        ...pDependencyEntry,
-        incidences: pDependencyEntry.incidences.map(
-            pIncidence => (
-                {
-                    ...pIncidence,
-                    hasRelation: pIncidence.incidence !== "false"
-                }
-            )
-        )
-    };
+  return {
+    ...pDependencyEntry,
+    incidences: pDependencyEntry.incidences.map(pIncidence => ({
+      ...pIncidence,
+      hasRelation: pIncidence.incidence !== "false"
+    }))
+  };
 }
 
 /**
@@ -26,16 +22,12 @@ function addShowTitle(pDependencyEntry) {
  *                     it easier to navigate.
  */
 function report(pResults) {
-    return Handlebars.templates['html.template.hbs'](
-        {
-            "things" : dependencyToIncidenceTransformer(pResults.modules).map(addShowTitle)
-        }
-    );
+  return Handlebars.templates["html.template.hbs"]({
+    things: dependencyToIncidenceTransformer(pResults.modules).map(addShowTitle)
+  });
 }
 
-module.exports = (pResults) => (
-    {
-        output: report(pResults),
-        exitCode: 0
-    }
-);
+module.exports = pResults => ({
+  output: report(pResults),
+  exitCode: 0
+});
