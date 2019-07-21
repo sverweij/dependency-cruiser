@@ -1,10 +1,9 @@
 <!--- Provide a general summary of your changes in the Title above -->
 
-> Plan to do something drastic?     
+> Plan to do something drastic?  
 > Leave an [issue](https://github.com/sverweij/dependency-cruiser/issues/new) with a
 > summary of the changes you propose + some context on why you'd want to
 > do that.
-
 
 ## Description
 <!--- Describe your changes in detail -->
@@ -18,15 +17,17 @@
 <!--- Include details of your testing environment, and the tests you ran to -->
 <!--- see how your change affects other areas of the code, etc. -->
 
-## Screenshots (if appropriate):
+## Screenshots
+<!-- Only if appropriate - feel free to delete this section if it's not applicable -->
 
 ## Types of changes
 <!--- What types of changes does your code introduce? Put an `x` in all the boxes that apply: -->
 - [ ] Bug fix (non-breaking change which fixes an issue)
+- [ ] Refactor (non-breaking change which fixes an issue without changing functionality)
 - [ ] New feature (non-breaking change which adds functionality)
 - [ ] Breaking change (fix or feature that would cause existing functionality to change)
 
-## Checklist:
+## Checklist
 <!--- Go over all the following points, and put an `x` in all the boxes that apply. -->
 <!--- If you're unsure about any of these, don't hesitate to ask. We're here to help! -->
 - [ ] The code I add will be subject to [The MIT license](../LICENSE), and I'm OK with that.
