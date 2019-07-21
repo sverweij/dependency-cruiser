@@ -104,6 +104,10 @@
         "because": "eslint-plugin-node 8.0.1 is the last still running under node 6"
       },
       {
+        "package": "eslint-plugin-mocha",
+        "because": "eslint-plugin-mocha >= 6 require node >= 8"
+      },
+      {
         "package": "figures",
         "because": "figures >= 3 require node >= 8"
       },
@@ -134,7 +138,7 @@
     ]
   },
   "dependencies": {
-    "acorn": "6.2.0",
+    "acorn": "6.2.1",
     "acorn-dynamic-import": "4.0.0",
     "acorn-loose": "6.1.0",
     "acorn-walk": "6.2.0",
@@ -147,7 +151,7 @@
     "handlebars": "4.1.2",
     "indent-string": "3.2.0",
     "inquirer": "6.5.0",
-    "lodash": "4.17.14",
+    "lodash": "4.17.15",
     "pnp-webpack-plugin": "1.5.0",
     "regexp-tree": "0.1.11",
     "resolve": "1.11.1",
@@ -163,12 +167,12 @@
     "chai-json-schema": "1.5.1",
     "coffeescript": "2.4.1",
     "eslint": "5.16.0",
-    "eslint-plugin-import": "2.18.0",
+    "eslint-plugin-import": "2.18.2",
     "eslint-plugin-mocha": "5.3.0",
     "eslint-plugin-node": "8.0.1",
     "eslint-plugin-security": "1.4.0",
     "intercept-stdout": "0.1.2",
-    "mocha": "6.1.4",
+    "mocha": "6.2.0",
     "normalize-newline": "3.0.0",
     "npm-run-all": "4.1.5",
     "nyc": "14.1.1",
