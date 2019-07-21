@@ -78,21 +78,16 @@ describe("cli/compileConfig", () => {
   });
 
   it("borks on a circular extends (1 step)", () => {
-    try {
-      compileConfig(
-        path.join(__dirname, "../fixtures/extends/circular-one.js")
-      );
-      expect("not to be here").to.equal("still here, though");
-    } catch (e) {
-      expect(e.message).to.contain(
-        `config is circular - ${path.join(
-          __dirname,
-          "../fixtures/extends/circular-one.js"
-        )} -> ${path.join(
-          __dirname,
-          "../fixtures/extends/circular-two.js"
-        )} -> ${path.join(__dirname, "../fixtures/extends/circular-one.js")}.`
-      );
-    }
+    const lMessageOutTake = `config is circular - ${path.join(
+      __dirname,
+      "../fixtures/extends/circular-one.js"
+    )} -> ${path.join(
+      __dirname,
+      "../fixtures/extends/circular-two.js"
+    )} -> ${path.join(__dirname, "../fixtures/extends/circular-one.js")}.`;
+
+    expect(() =>
+      compileConfig(path.join(__dirname, "../fixtures/extends/circular-one.js"))
+    ).to.throw(lMessageOutTake);
   });
 });

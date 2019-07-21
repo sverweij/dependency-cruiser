@@ -18,36 +18,23 @@ const MINIMAL_RESULT = {
 
 describe("main.format - format", () => {
   it("barfs when it gets an invalid output type", () => {
-    try {
-      main.format({}, "not-a-valid-reporter");
-      expect("not to be here").to.equal("still here, though");
-    } catch (e) {
-      expect(e.toString()).to.contain(
-        "Error: 'not-a-valid-reporter' is not a valid output type."
-      );
-    }
+    expect(() => main.format({}, "not-a-valid-reporter")).to.throw(
+      "'not-a-valid-reporter' is not a valid output type."
+    );
   });
 
   it("barfs when it gets a result passed that is invalid json", () => {
-    try {
-      main.format("that is no json");
-      expect("not to be here").to.equal("still here, though");
-    } catch (e) {
-      expect(e.toString()).to.contain(
-        "Error: The supplied dependency-cruiser result is not valid:"
-      );
-    }
+    expect(() => main.format("that is no json")).to.throw(
+      "The supplied dependency-cruiser result is not valid:"
+    );
   });
 
   it("barfs when it gets a result passed that doesn't comply to the result schema", () => {
-    try {
-      main.format({ valid: "JSON", not: "schema compliant though" });
-      expect("not to be here").to.equal("still here, though");
-    } catch (e) {
-      expect(e.toString()).to.contain(
-        "Error: The supplied dependency-cruiser result is not valid: data should NOT have additional properties"
-      );
-    }
+    expect(() =>
+      main.format({ valid: "JSON", not: "schema compliant though" })
+    ).to.throw(
+      "The supplied dependency-cruiser result is not valid: data should NOT have additional properties"
+    );
   });
 
   it("returns an err reporter formatted report when presented with a legal result", () => {

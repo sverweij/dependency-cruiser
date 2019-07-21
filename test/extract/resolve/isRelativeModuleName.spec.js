@@ -3,25 +3,15 @@ const isRelativeModuleName = require("../../../src/extract/resolve/isRelativeMod
 
 describe("extract/resolve/isRelativeModuleName", () => {
   it("throws an error when passed nothing", () => {
-    try {
-      isRelativeModuleName();
-      expect("not here").to.equal("here, though");
-    } catch (e) {
-      expect(e.message).to.contain(
-        "Cannot read property 'startsWith' of undefined"
-      );
-    }
+    expect(() => isRelativeModuleName()).to.throw(
+      "Cannot read property 'startsWith' of undefined"
+    );
   });
 
   it("throws an error when passed null", () => {
-    try {
-      isRelativeModuleName();
-      expect("not here").to.equal("here, though");
-    } catch (e) {
-      expect(e.message).to.contain(
-        "Cannot read property 'startsWith' of undefined"
-      );
-    }
+    expect(() => isRelativeModuleName(null)).to.throw(
+      "Cannot read property 'startsWith' of null"
+    );
   });
 
   it("returns false when passed an empty string", () => {

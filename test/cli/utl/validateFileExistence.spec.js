@@ -3,22 +3,12 @@ const validateFileExistence = require("../../../src/cli/utl/validateFileExistenc
 
 describe("cli/utl/validateFileExistence", () => {
   it("throws when the file or dir passed does not exists", () => {
-    try {
-      validateFileExistence("file-or-dir-does-not-exist");
-      expect("not to be here").to.equal("still here, though");
-    } catch (e) {
-      expect(e.toString()).to.deep.equal(
-        "Error: Can't open 'file-or-dir-does-not-exist' for reading. Does it exist?\n"
-      );
-    }
+    expect(() => validateFileExistence("file-or-dir-does-not-exist")).to.throw(
+      "Can't open 'file-or-dir-does-not-exist' for reading. Does it exist?"
+    );
   });
 
   it("passes when the file or dir passed exists", () => {
-    try {
-      validateFileExistence("package.json");
-      expect("getting here").to.equal("getting here");
-    } catch (e) {
-      expect("not to go into an exception").to.equal(e.message);
-    }
+    expect(() => validateFileExistence("package.json")).to.not.throw();
   });
 });

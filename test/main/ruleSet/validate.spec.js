@@ -3,12 +3,9 @@ const expect = require("chai").expect;
 const validate = require("../../../src/main/ruleSet/validate");
 
 function shouldBarfWithMessage(pRulesFile, pMessage) {
-  try {
-    validate(JSON.parse(fs.readFileSync(pRulesFile, "utf8")));
-    expect("not to be here").to.equal("still here, though");
-  } catch (e) {
-    expect(e.message).to.contain(pMessage);
-  }
+  expect(() =>
+    validate(JSON.parse(fs.readFileSync(pRulesFile, "utf8")))
+  ).to.throw(pMessage);
 }
 
 function shouldBeOK(pRulesFile) {
