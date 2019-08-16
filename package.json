@@ -38,6 +38,7 @@
     "bin/",
     "configs/**/*.js",
     "configs/**/*.json",
+    "!configs/eslint-config.json",
     "src/",
     "!src/**/*.hbs",
     "!src/**/*.md",
