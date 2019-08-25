@@ -1,6 +1,7 @@
- # dependency-cruiser command line interface
+# dependency-cruiser command line interface
+
 The command line interface is a straightforward affair - you pass it a bunch of
-files, and dependency-cruiser will start cruising them: 
+files, and dependency-cruiser will start cruising them:
 
 ```sh
 depcruise [options] <files-or-directories>
@@ -13,14 +14,16 @@ available in dependency-cruiser configurations.
 ## Contents
 
 ### Command line only options
+
 1. [arguments - files and/ or directories](#arguments---files-and-or-directories)
 1. [`--output-type`: specify the output format](#--output-type-specify-the-output-format)
-1. [`--config`/ `--validate`: use a configuration with rules and/or options](#--config---validate) 
+1. [`--config`/ `--validate`: use a configuration with rules and/or options](#--config---validate)
 1. [`--init`](#--init)
 1. [`--info`: show what alt-js are supported](#--info-showing-what-alt-js-are-supported)
 1. [`--help`/ no parameters: get help](#--help--no-parameters)
 
 ### Options also available in dependency-cruiser configurations
+
 1. [`--do-not-follow`: don't cruise modules adhering to this pattern any further](#--do-not-follow-dont-cruise-modules-adhering-to-this-pattern-any-further)
 1. [`--exclude`: exclude dependencies from being cruised](#--exclude-exclude-dependencies-from-being-cruised)
 1. [`--include-only`: only include modules satisfying a pattern](#--include-only-only-include-modules-satisfying-a-pattern)
@@ -32,18 +35,22 @@ available in dependency-cruiser configurations.
 1. [`--webpack-config`: use (the resolution options of) a webpack configuration`](#--webpack-config-use-the-resolution-options-of-a-webpack-configuration)
 1. [`--preserve-symlinks`](#--preserve-symlinks)
 
+### depcruise-fmt
 
 ## Command line only options
 
 ### arguments - files and/ or directories
+
 You can pass a bunch of files, directories and 'glob' patterns.
 dependency-cruiser will
+
 - resolve the glob patterns (if any) to files and directories
 - scan directories (if any) for files with supported extensions
 - add the passed files to that
-... and start the cruise with the files thus found.
+  ... and start the cruise with the files thus found.
 
 #### Cruising multiple files and directories in one go
+
 Just pass them as arguments. This, e.g. will cruise every file in the folders
 src, test and lib (recursively) + the file called index.ts in the root.
 
@@ -52,6 +59,7 @@ depcruise --output-type dot src test lib index.ts
 ```
 
 #### passing globs as parameters
+
 dependency-cruiser uses [node-glob](https://github.com/isaacs/node-glob) to
 make sure globs work the same accross platforms. It cannot prevent the
 environment from expanding globs before it can process it, however.
@@ -70,7 +78,8 @@ depcruise "packages/**/src/**/*.js"
 ### `--output-type`: specify the output format
 
 #### err
-For use in build scripts, in combination with `--config`. It's also 
+
+For use in build scripts, in combination with `--config`. It's also
 the default reporter. Sample use:
 
 ```sh
@@ -78,27 +87,30 @@ dependency-cruise --config my-depcruise-rules.json src
 ```
 
 This will:
+
 - ... print nothing and exit with code 0 if dependency-cruiser didn't
   find any violations of the rules in .dependency-cruiser.json.
 - ... print the violating dependencies if there is any. Moreover it
-  will exit with exit code _number of violations with severity `error` found_ 
+  will exit with exit code _number of violations with severity `error` found_
   in the same fashion linters and test tools do.
 
 See the _depcruise_ target in the [package.json](https://github.com/sverweij/dependency-cruiser/blob/master/package.json#L55)
 for a real world example.
 
 #### err-long
-Similar to `err`, but in addition for each violation it emits the _comment_ 
+
+Similar to `err`, but in addition for each violation it emits the _comment_
 that went with the violated rule, so it's easier to put the rule into context
 (and if the comment contains that information: why the rule is there, and
 how to fix it). If you use dependency-cruiser in a lint-staged like setup, this
-might be a useful format, 
+might be a useful format,
 
 ```sh
 dependency-cruise --output-type err-long --config my-depcruise-rules.json src
 ```
 
 #### dot
+
 Supplying `dot` as output type will make dependency-cruiser write
 a GraphViz dot format directed graph. Typical use is in concert
 with _GraphViz dot_ (`-T` is the short form of `--output-type`:)
@@ -108,12 +120,15 @@ dependency-cruise -x "^node_modules" -T dot src | dot -T svg > dependencygraph.s
 ```
 
 > ##### ddot - summarize on folder level
+>
 > Since version 4.13.0 there's an _experimental_ `ddot` reporter that summarizes
 > modules on folder level. It works fine, but its output is a tad more ugly
 > than I'd like so there'll be tweaks to spruce it up in the future.
 
 #### err-html
+
 Generates an stand alone html report with:
+
 - a summary with files & dependencies cruised and the number of errors and warnings found
 - all rules, ordered by the number of violations (unviolated ones are hidden by default)
 - a list of all dependency and module violations, ordered by severity, rule name, from module, to module.
@@ -125,17 +140,21 @@ dependency-cruise --validate --output-type err-html -f dependency-report.html sr
 <img width="722" alt="screen shot of an err-html report - the real one is accessible" src="assets/sample-err-html-output.png">
 
 #### html
+
 Write it to html with a dependency matrix instead:
+
 ```shell
 dependency-cruise -T html -f dependencies.html src
 ```
 
 #### csv
+
 If you supply `csv` it will write the dependency matrix to a comma
 separated file - so you can import it into a spreadsheet program
 and analyze from there.
 
 #### teamcity
+
 Write the output in [TeamCity service message format](https://www.jetbrains.com/help/teamcity/build-script-interaction-with-teamcity.html).
 
 E.g. to cruise src (using the .dependency-cruiser config) and emit TeamCity messages to stdout:
@@ -164,6 +183,7 @@ Just like the `err` reporter the teamcity reporter has an empty output when ther
 no violations - and a non-zero exit code when there's errors.
 
 ### `--config`/ `--validate`
+
 Validates against a list of rules in a configuration file. This defaults to a file
 called `.dependency-cruiser.json` (/ `.dependency-cruiser.js`), but you can
 specify your own rules file, which can be in json format or a valid node
@@ -177,6 +197,7 @@ dependency-cruise -x node_modules --config my.rules.json src spec
 > `depcruise --config src`, _src_ will be interpreted as the rules file.
 > Which is probably is not what you want. To prevent this, place `--`
 > after the last option, like so:
+>
 > ```
 > dependency-cruise --config -- src
 > ```
@@ -190,24 +211,28 @@ in the `test` folder and allows everything else:
 
 ```json
 {
-    "forbidden": [{
-        "from": {"path": "^src"},
-        "to": {"path": "^test"}
-    }]
+  "forbidden": [
+    {
+      "from": { "path": "^src" },
+      "to": { "path": "^test" }
+    }
+  ]
 }
 ```
 
-You can optionally specify a name and an error severity ('error',  'warn' (the
+You can optionally specify a name and an error severity ('error', 'warn' (the
 default) and 'info') with them that will appear in some reporters:
 
 ```json
 {
-    "forbidden": [{
-        "name": "no-src-to-test",
-        "severity": "error",
-        "from": {"path": "^src"},
-        "to": {"path": "^test"}
-    }]
+  "forbidden": [
+    {
+      "name": "no-src-to-test",
+      "severity": "error",
+      "from": { "path": "^src" },
+      "to": { "path": "^test" }
+    }
+  ]
 }
 ```
 
@@ -218,6 +243,7 @@ For more information about writing rules see the [tutorial](rules-tutorial.md) a
 For an easy set up of both use [--init](#--init)
 
 ### `--init`
+
 This asks some questions and - depending on the answers - creates a dependency-cruiser
 configuration with some useful rules to the current folder and exits.
 
@@ -229,23 +255,21 @@ Use `--config` to have dependency-cruiser take the configuration file into accou
 <summary>Some of the rules that will be in the configuration (either directly or from a
 preset):</summary>
 
-
-Rule                     | Description
----                      |---
-`no-circular`            | flags all circular dependencies
-`no-orphans`             | flags orphan modules (except typescript `.d.ts` files)
-`no-deprecated-core`     | flags dependencies on deprecated node 'core' modules
-`no-deprecated-npm`      | flags dependencies on deprecated npm modules
-`no-non-package-json`    | flags (npm) dependencies that don't occur in package.json
-`not-to-unresolvable`    | flags dependencies that can't be resolved
-`no-duplicate-dep-types` | flags dependencies that occur more than once in package.json
-`not-to-test`            | Don't allow dependencies from outside test folders to test folders
-`not-to-spec`            | Don't allow dependencies to (typescript/ javascript/ coffeescript) spec files
-`not-to-dev-dep`         | Don't allow dependencies from src/app/lib to a development only package
-`optional-deps-used`     | Inform about the use of 'optional' dependencies (so you can ensure their imports a are sufficiently managed)
-`peer-deps-used`         | Warn about the use of a peer dependency (they might be OK for you, but it's not typical you have them).
-`no-duplicate-dep-types` | Warn if a dependency occurs in your package.json more than once (technically: has more than one dependency type)
-
+| Rule                     | Description                                                                                                      |
+| ------------------------ | ---------------------------------------------------------------------------------------------------------------- |
+| `no-circular`            | flags all circular dependencies                                                                                  |
+| `no-orphans`             | flags orphan modules (except typescript `.d.ts` files)                                                           |
+| `no-deprecated-core`     | flags dependencies on deprecated node 'core' modules                                                             |
+| `no-deprecated-npm`      | flags dependencies on deprecated npm modules                                                                     |
+| `no-non-package-json`    | flags (npm) dependencies that don't occur in package.json                                                        |
+| `not-to-unresolvable`    | flags dependencies that can't be resolved                                                                        |
+| `no-duplicate-dep-types` | flags dependencies that occur more than once in package.json                                                     |
+| `not-to-test`            | Don't allow dependencies from outside test folders to test folders                                               |
+| `not-to-spec`            | Don't allow dependencies to (typescript/ javascript/ coffeescript) spec files                                    |
+| `not-to-dev-dep`         | Don't allow dependencies from src/app/lib to a development only package                                          |
+| `optional-deps-used`     | Inform about the use of 'optional' dependencies (so you can ensure their imports a are sufficiently managed)     |
+| `peer-deps-used`         | Warn about the use of a peer dependency (they might be OK for you, but it's not typical you have them).          |
+| `no-duplicate-dep-types` | Warn if a dependency occurs in your package.json more than once (technically: has more than one dependency type) |
 
 </details>
 
@@ -253,7 +277,7 @@ Rule                     | Description
 
 Which alt-js languages dependency-cruiser supports depends on the availability
 it has to them. To see how dependency-cruiser perceives its environment use
-`depcruise --info` (any arguments are ignored). 
+`depcruise --info` (any arguments are ignored).
 
 <details>
 <summary>Typical output</summary>
@@ -289,13 +313,15 @@ Extensions:
   ✔ .csx
   ✔ .cjsx
 ```
+
 </details>
 
 ### `--help` / no parameters
+
 Running with no parameters gets you help.
 
-
 ## Options also available in dependency-cruiser configurations
+
 Some of the `options` in dependency-cruiser configurations are also available as
 command line options. They _override_ what's in the configuration, so they're great
 if you need to quickly experiment with an option, or when you want to use one
@@ -307,6 +333,7 @@ you're typically best off setting in a configuration file (generate one with
 `depcruise --init`).
 
 ### `--do-not-follow`: don't cruise modules adhering to this pattern any further
+
 If you _do_ want to see certain modules in your reports, but are not interested
 in these modules' dependencies, you'd pass the regular expression for those
 modules to the `--do-not-follow` (short: `-X`) option. A typical pattern you'd
@@ -318,10 +345,11 @@ dependency-cruise -X "^node_modules" -T html -f deps-with-unfollowed-node_module
 ```
 
 Details and more ways to limit dependency-cruiser from following things: check out
-the [doNotFollow](./rules-reference.md#donotfollow-dont-cruise-modules-adhering-to-this-pattern-any-further) 
+the [doNotFollow](./rules-reference.md#donotfollow-dont-cruise-modules-adhering-to-this-pattern-any-further)
 option in the rules reference.
 
 ### `--exclude`: exclude dependencies from being cruised
+
 If you don't want to see certain modules in your report (or not have them
 validated), you can exclude them by passing a regular expression to the
 `--exclude` (short: `-x`) option. Two examples:
@@ -338,6 +366,7 @@ See the [exclude](./rules-reference.md#exclude-exclude-dependencies-from-being-c
 in the rules reference for details.
 
 ### `--include-only`: only include modules satisfying a pattern
+
 E.g. to only take modules into account that are in the `src` tree (and exclude all
 node_modules, core modules and modules otherwise outside it):
 
@@ -349,6 +378,7 @@ See [includeOnly](./rules-reference.md#includeonly-only-include-modules-satisfyi
 for more details.
 
 ### `--max-depth`
+
 Only cruise the specified depth, counting from the specified root-module(s). This
 command is mostly useful in combination with visualisation output like _dot_ to
 keep the generated output to a manageable size.
@@ -362,6 +392,7 @@ See [maxDepth](./rules-reference.md#maxdepth)
 > This will only be effective when you pass one file as an argument.
 
 ### `--prefix` prefixing links
+
 In the dot output prefix links to the source files with a string - useful to link to
 e.g. an on line repository.
 
@@ -373,12 +404,14 @@ See [prefix](./rules-reference.md#prefix-prefix-links-in-reports) in the rules r
 for details.
 
 ### `--module-systems`
+
 Here you can pass a list of module systems dependency-cruiser should use
 to detect dependencies. It defaults to `amd, cjs, es6`.
 
 See [moduleSystems](./rules-reference.md#modulesystems) in the rules reference
 
 ### `--ts-pre-compilation-deps` (typescript only)
+
 By default dependency-cruiser does not take dependencies between typescript
 modules that don't exist after compilation to javascript. Pass this command
 line switch to do take them into account.
@@ -387,15 +420,17 @@ For details see [tsPreCompilationDeps](./rules-reference.md#tsprecompilationdeps
 rules reference.
 
 ### `--ts-config`: use a typescript configuration file ('project')
+
 If you use typescript and want dependency-cruiser to take the `baseDir`'s and/ or `paths`
 in your tsconfig.json into account- can pass it with this option.
 
-Although it's possible to pass it as a command line option, you typically 
-want to do this in a configuration file - see 
+Although it's possible to pass it as a command line option, you typically
+want to do this in a configuration file - see
 [tsConfig](./rules-reference.md#tsconfig-use-a-typescript-configuration-file-project)
 section in the rules reference for details.
 
 ### `--webpack-config`: use (the resolution options of) a webpack configuration
+
 With a webpack config you can drastically alter how module names resolve to
 files on disk, a.o. with aliases. If you want dependency-cruiser to take that
 into account (you probaly do), you can pass the webpack config here.
@@ -405,13 +440,55 @@ file - see the [webpackConfig](./rules-reference.md#webpackconfig-use-the-resolu
 section in the rules reference.
 
 ### `--preserve-symlinks`
+
 Whether to leave symlinks as is or resolve them to their realpath. This option defaults
 to `false` (which is also nodejs' default behavior since release 6).
 
 You'll typically want to set this in the configuration file with the [preserveSymlinks](./rules-reference.md#preservesymlinks)
-option. 
+option.
+
+## depcruise-fmt
+
+`depcruise-fmt` is a separate command line program, that takes the (json)
+output of a dependency-cruise and runs one of the reporters over it. This
+could be useful if you want to display the results of the same cruise in
+different ways, without having to run the cruise repeatedly. Especially on
+bigger code bases this can save time. Cruising all code can sometimes take
+more than a minute, while formatting usually takes well below a second.
+
+For instance, to report any violations to console, create a distributable
+report _and_ generate a dependency graph. With just the `depcruise` command
+this would look like
+
+```sh
+depcruise -v -T err-long src
+depcruise -v -T err-html src -f violation-report.html
+depcruise -v -T dot src | dot -T svg > dependency-graph.svg
+```
+
+With depcruise-fmt there's just one cruise and three quick depcruise-fmt commands
+
+```sh
+depcruise -v -T json src -f cruise_result.json
+depcruise-fmt -T err-long cruise_result.json
+depcruise-fmt -T err-html -f violation-report.html cruise_result.json
+depcruise-fmt -T dot cruise_result.json | dot -T svg > dependency-graph.svg
+```
+
+```
+Usage: depcruise-fmt [options] <dependency-cruiser-json>
+
+Options:
+  -V, --version             output the version number
+  -f, --output-to <file>    file to write output to; - for stdout
+                            (default: "-")
+  -T, --output-type <type>  output type - err|err-long|err-html|dot|ddot|json
+                            (default: "err")
+  -h, --help                output usage information
+```
 
 ## Daphne's dependencies - a gentle introduction
+
 **[Daphne's dependencies](sample-output.md)**
 sport a visual overview of all the output formats. It also shows how Daphne and
 her colleagues use them in their workflow.

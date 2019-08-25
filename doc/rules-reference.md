@@ -16,145 +16,161 @@
   some rules that make sense in most projects.
 
 ## Contents
+
 1. [The structure of a dependency-cruiser configuration](#the-structure-of-a-dependency-cruiser-configuration)
-    - [`forbidden`](#forbidden)
-    - [`allowed`](#allowed)
-    - [`allowedSeverity`](#allowedSeverity)
-    - [`extends`](#extends)
-    - [`options`](#options)
+   - [`forbidden`](#forbidden)
+   - [`allowed`](#allowed)
+   - [`allowedSeverity`](#allowedSeverity)
+   - [`extends`](#extends)
+   - [`options`](#options)
 2. [The structure of an individual rule](#the-structure-of-an-individual-rule)
 3. [Conditions](#conditions)
-    - [`path`](#path)
-    - [`pathNot`](#pathnot)
-    - [path specials](#path-specials)
-    - [`orphan`](#orphans)
-    - [`reachable`](#reachable---detecting-dead-wood)
-    - [`couldNotResolve`](#couldnotresolve)
-    - [`circular`](#circular)
-    - [`license` and `licenseNot`](#license-and-licensenot)
-    - [`dependencyTypes`](#dependencytypes)
-    - [`dynamic`](#dynamic)
-    - [`moreThanOneDependencyType`](#more-than-one-dependencytype-per-dependency-morethanonedependencytype)
+   - [`path`](#path)
+   - [`pathNot`](#pathnot)
+   - [path specials](#path-specials)
+   - [`orphan`](#orphans)
+   - [`reachable`](#reachable---detecting-dead-wood)
+   - [`couldNotResolve`](#couldnotresolve)
+   - [`circular`](#circular)
+   - [`license` and `licenseNot`](#license-and-licensenot)
+   - [`dependencyTypes`](#dependencytypes)
+   - [`dynamic`](#dynamic)
+   - [`moreThanOneDependencyType`](#more-than-one-dependencytype-per-dependency-morethanonedependencytype)
 4. [The `options`](#the-options)
-    - [`doNotFollow`: don't cruise modules adhering to this pattern any further](#donotfollow-dont-cruise-modules-adhering-to-this-pattern-any-further)
-    - [`exclude`: exclude dependencies from being cruised](#exclude-exclude-dependencies-from-being-cruised)
-    - [`includeOnly`: only include modules satisfying a pattern](#includeonly-only-include-modules-satisfying-a-pattern)
-    - [`maxDepth`](#maxdepth)
-    - [`prefix`: prefix links in reports](#prefix-prefix-links-in-reports)
-    - [`moduleSystems`](#modulesystems)
-    - [`tsPreCompilationDeps`](#tsprecompilationdeps)
-    - [`tsConfig`: use a typscript configuration file ('project')](#tsconfig-use-a-typescript-configuration-file-project)
-    - [Yarn Plug'n'Play support - `externalModuleResolutionStrategy`](#yarn-plugnplay-support---externalmoduleresolutionstrategy)
-    - [`webackConfig`: use (the resolution options of) a webpack configuration](#webpackconfig-use-the-resolution-options-of-a-webpack-configuration)
-    - [Some more esoteric options](#some-more-esoteric-options)
+   - [`doNotFollow`: don't cruise modules adhering to this pattern any further](#donotfollow-dont-cruise-modules-adhering-to-this-pattern-any-further)
+   - [`exclude`: exclude dependencies from being cruised](#exclude-exclude-dependencies-from-being-cruised)
+   - [`includeOnly`: only include modules satisfying a pattern](#includeonly-only-include-modules-satisfying-a-pattern)
+   - [`maxDepth`](#maxdepth)
+   - [`prefix`: prefix links in reports](#prefix-prefix-links-in-reports)
+   - [`moduleSystems`](#modulesystems)
+   - [`tsPreCompilationDeps`](#tsprecompilationdeps)
+   - [`tsConfig`: use a typscript configuration file ('project')](#tsconfig-use-a-typescript-configuration-file-project)
+   - [Yarn Plug'n'Play support - `externalModuleResolutionStrategy`](#yarn-plugnplay-support---externalmoduleresolutionstrategy)
+   - [`webackConfig`: use (the resolution options of) a webpack configuration](#webpackconfig-use-the-resolution-options-of-a-webpack-configuration)
+   - [Some more esoteric options](#some-more-esoteric-options)
 5. [Configurations in javascript](#configurations-in-javascript)
 
 ## The structure of a dependency cruiser configuration
+
 The typical dependency-cruiser config is json file (although you can use javascript -
 see [below](#configurations-in-javascript))). The three most important sections
 are `forbidden`, `allowed` and `options`, so a skeleton config could look something like this:
 
 ```json
 {
-    "forbidden": [],
-    "allowed": [],
-    "options": {}
+  "forbidden": [],
+  "allowed": [],
+  "options": {}
 }
 ```
 
 The following paragraphs explain these three and the other sections.
 
 ### `forbidden`
+
 A list of rules that describe dependencies that are not allowed.
 dependency-cruiser will emit a separate error (warning/ informational) message
 for each violated rule.
 
 ### `allowed`
+
 A list of rules that describe dependencies that are _allowed_. dependency-cruiser
 will emit a 'not-in-allowed' message for each dependency that does not
 satisfy at least one of them. The severity of the message is _warn_ by
 default, but you can override it with `allowedSeverity`
 
 ### `allowedSeverity`
+
 The severity to use in reports when a dependency is not in the `allowed`
 list of rules. It takes the same values as other `severity` fields and
 also defaults to `warn`.
 
 ### `extends`
+
 This takes one or more file path to other dependency-cruiser-configs. When
 dependency-cruiser reads your config, it takes the contents of the
 `extends` and merges them with the contents of your config.
 
 #### File resolution
+
 dependency-cruiser resolves the `extends` relative to the file name with the
-  same algorithm node uses, which means a.o.
+same algorithm node uses, which means a.o.
+
 - names starting with `./` are local
 - you can use external node_modules to reference rule sets (e.g. `dependency-cruiser/configs/recommended`)
 - there's no need to specify the extension for javascript files, but for json it's mandatory.
 
 #### How rules are merged
-- `allowed` rules    
+
+- `allowed` rules  
   Dependency-cruiser concats `allowed` rules from the extends, and de-duplicates
   them.
-- `forbidden` rules    
+- `forbidden` rules  
   For `forbidden` rules it uses the same approach, except when the rules
   have a name, in which case the rule with the same name in the current file
   gets merged into the one from extends, where attributes from the current file
   win.
   This allows you to override only one attribute, e.g. the severity
-- `allowedSeverity`    
+- `allowedSeverity`  
   If there's an `allowedSeverity` in the current file, it wins. If neither file
   has an `allowedSeverity` dependency-cruiser uses _warn_ as a default
-- `options`     
+- `options`  
   `options` get the Object.assign treatment - where the option in the current
   file wins.
 - If there's more than one path in extends, they get merged into the current file
   one by one, running through the array left to right.
 
 #### Examples
+
 To use a local base config:
+
 ```json
 {
-    "extends": "./configs/dependency-cruiser-base.json"
+  "extends": "./configs/dependency-cruiser-base.json"
 }
 ```
 
 To use a base config from an npm package:
+
 ```json
 {
-    "extends": "@ourcompany/dependency-cruiser-configs/frontend-rules-base.json"
+  "extends": "@ourcompany/dependency-cruiser-configs/frontend-rules-base.json"
 }
 ```
 
 ```js
 module.exports = {
-    extends: "dependency-cruiser/configs/recommended",
-    forbidden: [{
-        // because we still use a deprecated core module, still let
-        // the no-deprecated-core rule from recommended fire,
-        // but at least temporarily don't let it break our build
-        // by setting the severity to "warn" here
-        name: "no-deprecated-core",
-        severity: "warn"
-        // no need to specify the from and to, because they're already
-        // defined in 'recommended'
-    }]
-}
+  extends: "dependency-cruiser/configs/recommended",
+  forbidden: [
+    {
+      // because we still use a deprecated core module, still let
+      // the no-deprecated-core rule from recommended fire,
+      // but at least temporarily don't let it break our build
+      // by setting the severity to "warn" here
+      name: "no-deprecated-core",
+      severity: "warn"
+      // no need to specify the from and to, because they're already
+      // defined in 'recommended'
+    }
+  ]
+};
 ```
 
 ### `options`
-Options that influence what is cruised, and how it is cruised. See 
+
+Options that influence what is cruised, and how it is cruised. See
 [The options](#the-options) below for an exhaustive list.
 
 ## The structure of an individual rule
+
 An individual rule consists at least of a `from` and a `to`
 attribute that contain one or more conditions that trigger the rule, so
 a minimal rule will look like this:
 
 ```json
 {
-    "from"    : {},
-    "to"      : {}
+  "from": {},
+  "to": {}
 }
 ```
 
@@ -165,25 +181,28 @@ Rules within the 'forbidden' section can have a `name` and a `severity`.
 
 ```json
 {
-    "name"    : "kebab-cased-name",
-    "comment" : "(optional) description of the rule",
-    "severity": "warn",
-    "from"    : {},
-    "to"      : {}
+  "name": "kebab-cased-name",
+  "comment": "(optional) description of the rule",
+  "severity": "warn",
+  "from": {},
+  "to": {}
 }
 ```
 
 ### `from` and `to`
+
 Conditions an end of a dependency should match to be caught by this
 rule. Leave it empty if you want any module to be matched.
 
 The [conditions](#conditions) section below describes them all.
 
 ### `comment`
+
 You can use this field to document why the rule is there. It's not
 used in any rule logic.
 
 ### `name`
+
 > (only available in the `forbidden` section )
 
 A short name for the rule - will appear in reporters to enable
@@ -196,6 +215,7 @@ If you do not provide a name, dependency-cruiser will default it
 to `unnamed`.
 
 ### `severity`
+
 > (only available in the `forbidden` section )
 
 How severe a violation of a rule is. The 'error' severity will make
@@ -212,7 +232,9 @@ disable a rule or disable a rule you inherited from a rule set you
 extended.
 
 ## Conditions
+
 ### `path`
+
 A regular expression an end of a dependency should match to be catched by this
 rule.
 
@@ -221,46 +243,50 @@ project root) to the file containing a dependency. In `to`, this is the path fro
 the current working directory to the file the dependency resolves to.
 
 When path is in a `to` part of a rule it accepts the regular expression
-'group matching' special variables `$0`, `$1`, `$2`, ...  as well. See
+'group matching' special variables `$0`, `$1`, `$2`, ... as well. See
 'group matching' below for an explanation & example.
 
 ### `pathNot`
+
 A regular expression an end of a dependency should NOT match to be catched by
 this rule.
 
 When pathNot is in a `to` part of a rule it accepts the regular expression
-'group matching' special variables `$0`, `$1`, `$2`, ...  just like the path
+'group matching' special variables `$0`, `$1`, `$2`, ... just like the path
 attribute. See 'group matching' below for an explanation & example.
-
 
 ### path specials
 
 #### regular expressions - not globs
+
 I chose _regular expressions_ for matching paths over the more traditional
 _glob_ because they're more expressive - which makes it easier to specify
 rules. Some common patterns
 
-glob | regular expression | this expresses:
- --- | --- | ---
-`*.js`     | `[^/]+\.js$` | files in the current folder with the extension _.js_
-`src/**/*` | `^src` | all files in the _src_ folder
-_not possible_ | `^src/([^/]+)/.+` | everything in the src tree - remember the matched folder name directly under src for later reference.
+| glob           | regular expression | this expresses:                                                                                       |
+| -------------- | ------------------ | ----------------------------------------------------------------------------------------------------- |
+| `*.js`         | `[^/]+\.js$`       | files in the current folder with the extension _.js_                                                  |
+| `src/**/*`     | `^src`             | all files in the _src_ folder                                                                         |
+| _not possible_ | `^src/([^/]+)/.+`  | everything in the src tree - remember the matched folder name directly under src for later reference. |
 
 #### forward slashes
+
 To make sure rules you specify run on all platforms, dependency-cruiser
 internally represents paths with forward slashes as path separators
 (`src/alez/houpe`).
 
 #### 'group matching'
+
 Sometimes you'll want to use a part of the path the 'from' part of your rule
 matched and use it in the 'to' part. E.g. when you want to prevent stuff in
 the same folder to be matched.
 
 To achieve this you'll need to do two things:
-- In the `from` of your rule:    
+
+- In the `from` of your rule:  
   Make sure the part of the `path` you want to be matched is between brackets.
   Like so: `"^src/([^/]+)/.+"`
-- In the `to` part of your rule:    
+- In the `to` part of your rule:  
   You can reference the part matched between brackets by using `$1` in `path`
   and `pathNot` rules. Like so: `"pathNot": "^src/$1/.+".`
 - It is possible to use more than one group per rule as well. E.g. this
@@ -274,6 +300,7 @@ To achieve this you'll need to do two things:
 #### 'group matching' - an example: matching peer folders
 
 Say you have the following folder structure
+
 ```
 src
 └── business-components
@@ -289,22 +316,22 @@ you'd specify a rule like this to prevent accidents in the "forbidden" section:
 
 ```json
 {
-    "name": "no-inter-ubc",
-    "comment": "Don't allow relations between code in business components",
-    "severity": "error",
-    "from": {"path": "^src/business-components/([^/]+)/.+"},
-    "to": {
-        "path": "^src/business-components/([^/]+)/.+"
-    }
+  "name": "no-inter-ubc",
+  "comment": "Don't allow relations between code in business components",
+  "severity": "error",
+  "from": { "path": "^src/business-components/([^/]+)/.+" },
+  "to": {
+    "path": "^src/business-components/([^/]+)/.+"
+  }
 }
 ```
 
 This will correctly flag relations from one folder to another, but also
 relations _within_ folders. It's possible to get around that by specifying it
 for each folder explicitly, leaving the current 'from' folder from the to
-list e.g.    
-_from: search, to: upsell|check-out|view-trip|check-in,_    
-_from: upsell, to: search|check-out|view-trip|check-in,_    
+list e.g.  
+_from: search, to: upsell|check-out|view-trip|check-in,_  
+_from: upsell, to: search|check-out|view-trip|check-in,_  
  _..._
 
 That'll be heavy maintenance though; especially when your
@@ -313,16 +340,17 @@ group matching:
 
 ```json
 {
-    "name": "no-inter-ubc",
-    "comment": "Don't allow relations between business components",
-    "severity": "error",
-    "from": {"path": "^src/business-components/([^/]+)/.+"},
-    "to": {
-        "path": "^src/business-components/([^/]+)/.+",
-        "pathNot": "^src/business-components/$1/.+"
-    }
+  "name": "no-inter-ubc",
+  "comment": "Don't allow relations between business components",
+  "severity": "error",
+  "from": { "path": "^src/business-components/([^/]+)/.+" },
+  "to": {
+    "path": "^src/business-components/([^/]+)/.+",
+    "pathNot": "^src/business-components/$1/.+"
+  }
 }
 ```
+
 ... which makes sure dependency-cruiser does not match stuff in the from folder
 currently being matched.
 
@@ -344,27 +372,28 @@ To detect orphans guys you can add e.g. this snippet to your
 
 ```json
 {
-    "name": "no-orphans",
-    "severity": "warn",
-    "from": {"orphan": true},
-    "to": {}
+  "name": "no-orphans",
+  "severity": "warn",
+  "from": { "orphan": true },
+  "to": {}
 }
 ```
 
 #### Usage notes
+
 - dependency-cruiser will typically not find orphans when you give it
-  only one  module to start with. Any module it finds, it finds by
+  only one module to start with. Any module it finds, it finds by
   following its dependencies, so each module will have at least one
   dependency incoming or outgoing. Specify one or more folder, several
-  files or a glob. E.g.    
+  files or a glob. E.g.
   ```
   depcruise -v -- src lib test
-  ```    
+  ```
   will find orphans if they exist,
-  whereas    
+  whereas
   ```sh
   depcruise -v -- src/index.ts
-  ```    
+  ```
   probably won't (unless index.ts is an orphan itself).
 - by definition orphan modules have no dependencies. So when `orphan` is
   part of a rule, the `to` part won't make sense. This is why
@@ -388,7 +417,6 @@ those unreachable modules are likely candidates for removal:
 
 <img width="533" alt="dependencies unreachable from src/index.js - reachable rule off" src="assets/reachable-deps-rule-off.png">
 
-
 Here's a rule snippet that will detect these for you:
 
 ```javascript
@@ -402,25 +430,26 @@ Here's a rule snippet that will detect these for you:
             },
             "to": {
                 "path": "src",
-                
+
                 /*
                   spec files shouldn't be reachable from regular code anyway, so you
                   might typically want to exclude these from reachability rules.
                   The same goes for typescript definition files:
                  */
                 "pathNot": "\\.spec\\.(js|ts)$|\\.d\\.ts$"
-                
-                /* 
+
+                /*
                   for each file matching path and pathNot, check if it's reachable from the
                   modules matching the criteria mentioned in "from"
                  */
-                "reachable": false 
+                "reachable": false
             }
         }
     ]
 }
 
 ```
+
 With this rule enabled, the unreachable rules jump out immediately. Both in the output of the `err` reporter
 
 ```sh
@@ -431,11 +460,13 @@ With this rule enabled, the unreachable rules jump out immediately. Both in the 
 
 ✖ 4 dependency violations (4 errors, 0 warnings). 8 modules cruised.
 ```
+
 ... and in the output of the `dot` one:
 
 <img width="533" alt="dependencies unreachable from src/index.js - reachable rule on" src="assets/reachable-deps-rule-on.png">
 
 #### Usage notes
+
 - You can set up multiple rules with a `reachable` attribute in the `to` section. If you do so,
   make sure you give a `name` to each rule. It's not only the only way dependency-cruiser can keep
   reachable rules apart - it will be for you as well :-).
@@ -443,26 +474,29 @@ With this rule enabled, the unreachable rules jump out immediately. Both in the 
   if you dependency-graph is wide and deep.
 - Different from other rules, rules with a `reachable` attribute can only have
   - `path` and `pathNot` in the `from` part of the rule
-  - `path` and `pathNot` alongside the `reachable` in the `to` part of the rule    
-  (these limitations might get lifted somewhere in the future)
+  - `path` and `pathNot` alongside the `reachable` in the `to` part of the rule  
+    (these limitations might get lifted somewhere in the future)
 
 ### `couldNotResolve`
+
 Whether or not to match modules dependency-cruiser could not resolve (and
 probably aren't on disk). For this one too: leave out if you don't care either
 way.
 
 To get an error for each unresolvable dependency, put this in your "forbidden"
 section:
+
 ```json
 {
-    "name": "not-to-unresolvable",
-    "severity": "error",
-    "from": {},
-    "to": { "couldNotResolve": true }
+  "name": "not-to-unresolvable",
+  "severity": "error",
+  "from": {},
+  "to": { "couldNotResolve": true }
 }
 ```
 
 ### `circular`
+
 A boolean indicating whether or not to match module dependencies that end up
 where you started (a.k.a. circular dependencies). Leaving this out => you don't
 care either way.
@@ -477,14 +511,15 @@ up at itself.
 
 ```json
 {
-    "name": "no-circular",
-    "severity": "warn",
-    "from": { "pathNot": "^(node_modules)"},
-    "to": { "circular": true }
+  "name": "no-circular",
+  "severity": "warn",
+  "from": { "pathNot": "^(node_modules)" },
+  "to": { "circular": true }
 }
 ```
 
 ### `license` and `licenseNot`
+
 You can flag dependent modules that have licenses that are e.g. not
 compatible with your own license or with the policies within your company with
 `license` and `licenseNot`. Both take a regular expression that matches
@@ -495,12 +530,13 @@ code - which will not always be what you want):
 
 ```json
 {
-    "name": "no-gpl-apl-licenses",
-    "severity": "error",
-    "from": {},
-    "to": { "license": "GPL|APL" }
+  "name": "no-gpl-apl-licenses",
+  "severity": "error",
+  "from": {},
+  "to": { "license": "GPL|APL" }
 }
 ```
+
 This raise an error when you use a dependency that has a string with GPL or
 APL in the "license" attribute of its package.json (e.g.
 [SPDX](https://spdx.org) compatible expressions like `GPL-3.0`, `APL-1.0` and
@@ -508,27 +544,30 @@ APL in the "license" attribute of its package.json (e.g.
 
 To only allow licenses from an approved list (e.g. a whitelist provided by your
 legal department):
+
 ```json
 {
-    "name": "only-licenses-approved-by-legal",
-    "severity": "warn",
-    "from": {},
-    "to": { "licenseNot": "MIT|ISC" }
+  "name": "only-licenses-approved-by-legal",
+  "severity": "warn",
+  "from": {},
+  "to": { "licenseNot": "MIT|ISC" }
 }
 ```
 
 Note: dependency-cruiser can help out a bit here, but you remain responsible
 for managing your own legal stuff. To re-iterate what is in the
- [LICENSE](../LICENSE) to dependency-cruiser:
+[LICENSE](../LICENSE) to dependency-cruiser:
+
 > THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
-IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
-FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
-AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
-LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
-OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
-SOFTWARE.
+> IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+> FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+> AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+> LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+> OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+> SOFTWARE.
 
 ### `dependencyTypes`
+
 You might have spent some time wondering why something works on your machine,
 but not on other's. Only to discover you _did_ install a dependency, but
 _did not_ save it to package.json. Or you already had it in your devDependencies
@@ -541,11 +580,11 @@ To save you from embarassing moments like this, you can make rules with the
 
 ```json
 {
-    "name": "not-to-dev-dep",
-    "severity": "error",
-    "comment": "because an npm i --production will otherwise deliver an unreliably running package",
-    "from": { "path": "^src" },
-    "to": { "dependencyTypes": ["npm-dev"] }
+  "name": "not-to-dev-dep",
+  "severity": "error",
+  "comment": "because an npm i --production will otherwise deliver an unreliably running package",
+  "from": { "path": "^src" },
+  "to": { "dependencyTypes": ["npm-dev"] }
 }
 ```
 
@@ -553,11 +592,13 @@ Or to detect stuff you npm i'd without putting it in your package.json:
 
 ```json
 {
-    "name": "no-non-package-json",
-    "severity": "error",
-    "comment": "because an npm i --production will otherwise deliver an unreliably running package",
-    "from": { "pathNot": "^(node_modules)"},
-    "to": { "dependencyTypes": ["unknown", "undetermined", "npm-no-pkg", "npm-unknown"] }
+  "name": "no-non-package-json",
+  "severity": "error",
+  "comment": "because an npm i --production will otherwise deliver an unreliably running package",
+  "from": { "pathNot": "^(node_modules)" },
+  "to": {
+    "dependencyTypes": ["unknown", "undetermined", "npm-no-pkg", "npm-unknown"]
+  }
 }
 ```
 
@@ -568,59 +609,61 @@ them in the evaluation of that rule.
 
 This is a list of dependency types dependency-cruiser currently detects.
 
- dependency type | meaning | example
- ---             | ---| ---
- local           | a module in your own ('local') package            | "./klont"
- localmodule     | a module in your own ('local') package, but which was in the `resolve.modules` attribute of the webpack config you passed| "shared/stuff.ts"
- npm             | it's a module in package.json's `dependencies`    | "lodash"
- npm-dev         | it's a module in package.json's `devDependencies`      | "chai"
- npm-optional    | it's a module in package.json's `optionalDependencies` | "livescript"
- npm-peer        | it's a module in package.json's `peerDependencies` - note: deprecated in npm 3 | "thing-i-am-a-plugin-for"
- npm-bundled     | it's a module that occurs in package.json's `bundle(d)Dependencies` array | "iwillgetbundled"
- npm-no-pkg      | it's an npm module - but it's nowhere in your package.json | "forgetmenot"
- npm-unknown     | it's an npm module - but there is no (parseable/ valid) package.json in your package |
- deprecated      | it's an npm module, but the version you're using or the module itself is officially deprecated                                | "some-deprecated-package"
- core            | it's a core module                                | "fs"
- aliased         | it's a module that's linked through an aliased (webpack)| "~/hello.ts"
- unknown         | it's unknown what kind of dependency type this is - probably because the module could not be resolved in the first place | "loodash"
- undetermined    | the dependency fell through all detection holes. This could happen with amd dependencies - which have a whole jurasic park of ways to define where to resolve modules to | "veloci!./raptor"
-
+| dependency type | meaning                                                                                                                                                                  | example                   |
+| --------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------- |
+| local           | a module in your own ('local') package                                                                                                                                   | "./klont"                 |
+| localmodule     | a module in your own ('local') package, but which was in the `resolve.modules` attribute of the webpack config you passed                                                | "shared/stuff.ts"         |
+| npm             | it's a module in package.json's `dependencies`                                                                                                                           | "lodash"                  |
+| npm-dev         | it's a module in package.json's `devDependencies`                                                                                                                        | "chai"                    |
+| npm-optional    | it's a module in package.json's `optionalDependencies`                                                                                                                   | "livescript"              |
+| npm-peer        | it's a module in package.json's `peerDependencies` - note: deprecated in npm 3                                                                                           | "thing-i-am-a-plugin-for" |
+| npm-bundled     | it's a module that occurs in package.json's `bundle(d)Dependencies` array                                                                                                | "iwillgetbundled"         |
+| npm-no-pkg      | it's an npm module - but it's nowhere in your package.json                                                                                                               | "forgetmenot"             |
+| npm-unknown     | it's an npm module - but there is no (parseable/ valid) package.json in your package                                                                                     |
+| deprecated      | it's an npm module, but the version you're using or the module itself is officially deprecated                                                                           | "some-deprecated-package" |
+| core            | it's a core module                                                                                                                                                       | "fs"                      |
+| aliased         | it's a module that's linked through an aliased (webpack)                                                                                                                 | "~/hello.ts"              |
+| unknown         | it's unknown what kind of dependency type this is - probably because the module could not be resolved in the first place                                                 | "loodash"                 |
+| undetermined    | the dependency fell through all detection holes. This could happen with amd dependencies - which have a whole jurasic park of ways to define where to resolve modules to | "veloci!./raptor"         |
 
 #### `dynamic`
-A boolean that tells you whether the dependency is a dynamic one (i.e. 
+
+A boolean that tells you whether the dependency is a dynamic one (i.e.
 it uses the async ES import statement a la `import('othermodule').then(pMod => pMod.doStuff())`).
 
 You can use this e.g. to restrict the usage of dynamic dependencies:
 
 ```json
 {
-    "forbidden":[
-        {
-            "name": "no-non-dynamic-dependencies",
-            "severity": "error",
-            "from": {},
-            "to": { "dynamic": "true" }
-        }
-    ]
+  "forbidden": [
+    {
+      "name": "no-non-dynamic-dependencies",
+      "severity": "error",
+      "from": {},
+      "to": { "dynamic": "true" }
+    }
+  ]
 }
 ```
 
 ... or to enforce the use of dynamic dependencies for certain dependencies
+
 ```json
 {
-    "forbidden":[
-        {
-            "name": "only-dyn-deps-to-otherside",
-            "comment": "only dynamically depend on 'otherside' modules",
-            "severity": "error",
-            "from": {},
-            "to": { "path": "@theotherside/", "dynamic": "false" }
-        }
-    ]
+  "forbidden": [
+    {
+      "name": "only-dyn-deps-to-otherside",
+      "comment": "only dynamically depend on 'otherside' modules",
+      "severity": "error",
+      "from": {},
+      "to": { "path": "@theotherside/", "dynamic": "false" }
+    }
+  ]
 }
 ```
 
 #### More than one dependencyType per dependency? `moreThanOneDependencyType`
+
 With the flexible character of package.json it's totally possible to specify
 a package more than once - e.g. both in the `peerDependencies` and in the
 `dependencies`. Sometimes this is intentional (e.g. to make sure a plugin
@@ -632,10 +675,10 @@ when set to true:
 
 ```json
 {
-    "name": "no-duplicate-dep-types",
-    "severity": "warn",
-    "from": {},
-    "to": { "moreThanOneDependencyType": true }
+  "name": "no-duplicate-dep-types",
+  "severity": "warn",
+  "from": {},
+  "to": { "moreThanOneDependencyType": true }
 }
 ```
 
@@ -644,10 +687,10 @@ When left out it doesn't matter how many dependency types a dependency has.
 (If you're more of an 'allowed' user: it matches the 0 and 1 cases when set to
 false).
 
-
 ## The `options`
 
 ### `doNotFollow`: don't cruise modules adhering to this pattern any further
+
 > command line option equivalent: `--do-not-follow` (string values passed to 'path' only)
 
 If you _do_ want to see certain modules in your reports, but are not interested
@@ -662,12 +705,13 @@ use with this is "node_modules":
 ```
 
 #### Specifying dependency types in `doNotFollow`
+
 > It's not possible to use this on the command line
 
 `--do-not-follow` to specify a regular expression
 for files that dependency-cruiser should cruise, but not follow any further.
 In the options section you can restrict what gets cruised by specifying
-[dependency types](#dependencytypes). So if e.g. you don't want dependency-cruiser 
+[dependency types](#dependencytypes). So if e.g. you don't want dependency-cruiser
 to follow external dependencies, in stead of specifying the "node_modules" path:
 
 ```json
@@ -686,6 +730,7 @@ to follow external dependencies, in stead of specifying the "node_modules" path:
 ```
 
 ### `exclude`: exclude dependencies from being cruised
+
 > command line option equivalent: `--exclude` (string values passed to 'path' only)
 
 If you don't want to see certain modules in your report (or not have them
@@ -712,6 +757,7 @@ all modules with a file path starting with coverage, test or node_modules, you c
 ```
 
 #### Other 'exclude' attributes
+
 It's also possible to exclude dependencies on other properties than the (resolved) paths
 at either end of them. To exclude all dependencies that result of an (ecmascript)
 dynamic import from being included in a cruise, you can use the `dynamic` attibute:
@@ -723,9 +769,11 @@ dynamic import from being included in a cruise, you can use the `dynamic` attibu
         }
     }
 ```
+
 > Other attributes might come in future releases
 
 ### `includeOnly`: only include modules satisfying a pattern
+
 > command line option equivalent: `--include-only`
 
 In the `includeOnly` option you can pass a regular expression of all file paths
@@ -744,8 +792,8 @@ node_modules, core modules and modules otherwise outside it):
 If you specify both an exclude and an include, dependency-cruiser takes them
 _both_ into account.
 
-
 ### `maxDepth`
+
 > command line option equivalent: `--max-depth`
 
 Only cruise the specified depth, counting from the specified root-module(s). This
@@ -754,6 +802,7 @@ keep the generated output to a manageable size.
 
 This will cruise the dependencies of each file directly in the src folder, up
 to a depth of 1:
+
 ```javascript
 ...
   "maxDepth": 1
@@ -771,10 +820,12 @@ And with `"maxDepth": 3` like this:
 <img width="623" alt="dependency-cruiser cruised with max depth 3" src="real-world-samples/dependency-cruiser-max-depth-3.png">
 
 #### Usage note
+
 The `maxDepth` option is there to help with visualizing. If your goal is to _validate_
 this option is best left alone as you'll miss a dependency or two otherwise.
 
 ### `prefix`: prefix links in reports
+
 > command line option equivalent: `--prefix`
 
 If you want the links in the svg output to have a prefix (say,
@@ -789,23 +840,26 @@ open the link on github instead of the local file - pass that in the
 ```
 
 #### Usage note
+
 Typically you want the prefix to end on a `/`.
 
 ### `moduleSystems`
+
 > command line option equivalent: `--module-systems`
 
 Here you can pass a list of module systems dependency-cruiser should use
 to detect dependencies. It defaults to `["amd", "cjs", "es6"]` The 'module systems'
 dependency-cruiser supports:
 
-System|Meaning
----|---
-`amd`|[Asynchronous Module Defintion](https://github.com/amdjs/amdjs-api/wiki/AMD) as used by a.o. [RequireJS](requirejs.org)
-`cjs`|Common js as popularized by [node.js](https://nodejs.org/dist/latest-v12.x/docs/api/modules.html) which uses the `require` function to include other modules
-`es6`|modules as defined for ECMAScript 6 in 2015 in [ecma-262](http://www.ecma-international.org/ecma-262/6.0/index.html#sec-modules), with proper `import` and `export` statements
-`tsd`|[TypeScript 'tripple slash directives'](https://www.typescriptlang.org/docs/handbook/triple-slash-directives.html)
+| System | Meaning                                                                                                                                                                        |
+| ------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| `amd`  | [Asynchronous Module Defintion](https://github.com/amdjs/amdjs-api/wiki/AMD) as used by a.o. [RequireJS](requirejs.org)                                                        |
+| `cjs`  | Common js as popularized by [node.js](https://nodejs.org/dist/latest-v12.x/docs/api/modules.html) which uses the `require` function to include other modules                   |
+| `es6`  | modules as defined for ECMAScript 6 in 2015 in [ecma-262](http://www.ecma-international.org/ecma-262/6.0/index.html#sec-modules), with proper `import` and `export` statements |
+| `tsd`  | [TypeScript 'tripple slash directives'](https://www.typescriptlang.org/docs/handbook/triple-slash-directives.html)                                                             |
 
 ### `tsPreCompilationDeps`
+
 > command line option equivalent: `--ts-pre-compilation-deps`
 
 By default dependency-cruiser does not take dependencies between typescript
@@ -818,24 +872,28 @@ As the javascript doesn't really know about types, dependencies on
 types only exist before, but not after compile time.
 
 `a.ts` exports an interface ...
+
 ```typescript
-import { B } from './b';
+import { B } from "./b";
 export interface A {
   foo: string;
 }
 const b = new B();
 ```
+
 ... and `b.ts` uses that interface:
+
 ```typescript
-import { A } from './a';
-export class B {};
-const a: A = {foo: "foo"};
+import { A } from "./a";
+export class B {}
+const a: A = { foo: "foo" };
 ```
 
 After compilation `b.js` looks like this:
+
 ```javascript
 // import omitted as it only contained a reference to a type
-export class B { };
+export class B {}
 const a = { foo: "foo" }; // no type refer
 ```
 
@@ -857,25 +915,26 @@ only exists before compilation. Take for example these two
 typescript modules:
 
 `a.ts`:
+
 ```typescript
-import { B } from './b';
-export class A {
-}
+import { B } from "./b";
+export class A {}
 ```
 
 `b.ts`:
+
 ```typescript
-export class B {
-}
+export class B {}
 ```
 
 As `a.ts` uses none of the imports from b, the typescript
 compiler will omit them when compiling and yield this for `a.js`:
+
 ```javascript
 // no imports here anymore...
-export class A {
-}
+export class A {}
 ```
+
 Hence, without `tsPreCompilationDeps` dependency-cruiser's
 output will look like this:
 
@@ -886,8 +945,8 @@ output will look like this:
 <img alt="'no import use' with typescript pre-compilation dependencies" src="real-world-samples/no-use-with-pre-compilation-deps.png">
 </details>
 
-
 ### `tsConfig`: use a typescript configuration file ('project')
+
 > command line option equivalent: --ts-config
 
 If dependency-cruiser encounters typescript, it compiles it to understand what it
@@ -900,6 +959,7 @@ Dependency-cruiser understands the `extends` configuration in tsconfig's so
 if you have a hierarchy of configs, you just need to pass the relevant one.
 
 Sample
+
 ```json
   "options": {
   "tsConfig": {
@@ -910,6 +970,7 @@ Sample
 
 You can do it even more minimalistically like so (in which case dependency-cruiser will
 assume the fileName to be `tsconfig.json`)
+
 ```json
 "options": {
   "tsConfig": {}
@@ -917,6 +978,7 @@ assume the fileName to be `tsconfig.json`)
 ```
 
 #### On the command line
+
 ```sh
 ### use the `tsconfig.json` in the current directory into account when looking
 ### at typescript sources:
@@ -927,25 +989,26 @@ depcruise --ts-config tsconfig.prod.json --validate -- src
 ```
 
 #### Usage notes
+
 - The configuration file you can pass as an argument to this option is
   relative to the current working directory.
--  dependency-cruiser currently only looks at the `compilerOptions` key
+- dependency-cruiser currently only looks at the `compilerOptions` key
   in the tsconfig.json and not at other keys (e.g. `files`, `include` and
   `exclude`).
 
-
 ### Yarn Plug'n'Play support - `externalModuleResolutionStrategy`
+
 > there is no command line equivalent for this
 
-If you're using yarn's Plug'n'Play to have external modules resolved and want 
-dependency-cruiser to take that into account, set the 
-`externalModuleResolutionStrategy` attribute to `yarn-pnp`. The default for this 
+If you're using yarn's Plug'n'Play to have external modules resolved and want
+dependency-cruiser to take that into account, set the
+`externalModuleResolutionStrategy` attribute to `yarn-pnp`. The default for this
 attribute is `node_modules` which is the default strategy in the node ecosystem
 as well.
 
-
 ### `webpackConfig`: use (the resolution options of) a webpack configuration
-> command line option equivalent: `--webpack-config`    
+
+> command line option equivalent: `--webpack-config`  
 > passing `env` and `arguments` is only available in the configuration file's
 > options
 
@@ -962,6 +1025,7 @@ you pass here and will use that information to resolve files on disk.
 
 Or, shorter, to let dependency-cruiser pick the default webpack.config.js all by
 itself:
+
 ```json
 "options": {
   "webpackConfig": {}
@@ -970,17 +1034,19 @@ itself:
 
 If your webpack configuration exports a function that takes parameters,
 you can provide the parameters like so:
-  ```json
-  "options": {
-    "webpackConfig": {
-      "fileName": "webpack.config.js",
-      "env": { "production": true },
-      "arguments": { "mode": "production" }
-    }
+
+```json
+"options": {
+  "webpackConfig": {
+    "fileName": "webpack.config.js",
+    "env": { "production": true },
+    "arguments": { "mode": "production" }
   }
-  ```
+}
+```
 
 #### Usage notes
+
 - The configuration file you can pass as an argument to this option is
   relative to the current working directory.
 - If your webpack config exports an array of configurations,
@@ -989,15 +1055,17 @@ you can provide the parameters like so:
 - For more information check out the the [webpack resolve](https://webpack.js.org/configuration/resolve/)
   documentation.
 
-
 ### Some more esoteric options
+
 #### preserveSymlinks
+
 > command line option equivalent: `--preserve-symlinks`
 
 Whether to leave symlinks as is or resolve them to their realpath. This option defaults
 to `false` (which is also nodejs' default behavior since release 6).
 
 #### mono repo behavior - combinedDependencies
+
 If `combinedDependencies` is on `false` (the default) dependency-cruiser will
 search for a `package.json` closest up from the source file it investigates.
 This is the behavior you expect in a regular repo and in mono repos with
@@ -1007,13 +1075,13 @@ set it to `false`.
 <details>
 <summary>Example</summary>
 
-- monodash/    
-  - package.json    
-  - packages/    
-     - begindash/    
-        - **package.json** <- _only look in this one_    
-        - src/    
-           - index.ts
+- monodash/
+  - package.json
+  - packages/
+    - begindash/
+      - **package.json** <- _only look in this one_
+      - src/
+        - index.ts
 
 With `combinedDependencies` on `true` dependency-cruiser will merge dependencies
 from `package.json`s from closest up from the source file until the place you
@@ -1021,16 +1089,17 @@ started the cruise (typically the root of your monorepo). It 'll give
 precedence to the dependencies declared in the package.json closest to
 the file it investigates:
 
-- monodash/    
- - **package.json** _<- look in this one as well; merge it into the one down the tree_    
- - packages/    
-    - begindash/    
-       - **package.json** _<- look in this one_    
-       - src/    
-          - index.ts
-</details>
+- monodash/
+- **package.json** _<- look in this one as well; merge it into the one down the tree_
+- packages/  
+   - begindash/  
+   - **package.json** _<- look in this one_  
+   - src/  
+   - index.ts
+  </details>
 
 ## Configurations in javascript
+
 From version 4.7.0 you can pass a javascript module to `--validate`.
 It'll work as long as it exports a valid configuration object
 and node can understand it.
@@ -1039,18 +1108,15 @@ This allows you to do all sorts of nifty stuff, like composing
 rule sets or using function predicates in rules. For example:
 
 ```javascript
-const subNotAllowed     = require('rules/sub-not-allowed.json')
-const noInterComponents = require('rules/sub-no-inter-components.json')
+const subNotAllowed = require("rules/sub-not-allowed.json");
+const noInterComponents = require("rules/sub-no-inter-components.json");
 
 module.exports = {
-    forbidden: [
-        subNotAllowed,
-        noInterComponents
-    ],
-    options: {
-        tsConfig: {
-            fileName: './tsconfig.json'
-        }
+  forbidden: [subNotAllowed, noInterComponents],
+  options: {
+    tsConfig: {
+      fileName: "./tsconfig.json"
     }
+  }
 };
 ```

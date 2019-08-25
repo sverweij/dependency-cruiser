@@ -44,6 +44,14 @@ function write(pOutputTo, pContent) {
   }
 }
 
+function getInStream(pInputFrom) {
+  if ("-" === pInputFrom) {
+    return process.stdin;
+  }
+  return fs.createReadStream(pInputFrom);
+}
+
 module.exports = {
-  write
+  write,
+  getInStream
 };
