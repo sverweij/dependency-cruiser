@@ -1,24 +1,20 @@
-const walk = require("./walk");
+const walk = require("acorn-walk");
 const estreeHelpers = require("./estree-helpers");
 
 function pushImportNodeValue(pDependencies) {
   return pNode => {
-    if (estreeHelpers.isImportStatement(pNode)) {
-      if (estreeHelpers.firstArgumentIsAString(pNode.arguments)) {
-        pDependencies.push({
-          moduleName: pNode.arguments[0].value,
-          moduleSystem: "es6",
-          dynamic: true
-        });
-      } else if (
-        estreeHelpers.firstArgumentIsATemplateLiteral(pNode.arguments)
-      ) {
-        pDependencies.push({
-          moduleName: pNode.arguments[0].quasis[0].value.cooked,
-          moduleSystem: "es6",
-          dynamic: true
-        });
-      }
+    if (estreeHelpers.isStringLiteral(pNode.source)) {
+      pDependencies.push({
+        moduleName: pNode.source.value,
+        moduleSystem: "es6",
+        dynamic: true
+      });
+    } else if (estreeHelpers.isPlaceholderlessTemplateLiteral(pNode.source)) {
+      pDependencies.push({
+        moduleName: pNode.source.quasis[0].value.cooked,
+        moduleSystem: "es6",
+        dynamic: true
+      });
     }
   };
 }
@@ -38,9 +34,9 @@ module.exports = (pAST, pDependencies) => {
     pAST,
     {
       ImportDeclaration: pushSourceValue,
+      ImportExpression: pushImportNodeValue(pDependencies),
       ExportAllDeclaration: pushSourceValue,
-      ExportNamedDeclaration: pushSourceValue,
-      CallExpression: pushImportNodeValue(pDependencies)
+      ExportNamedDeclaration: pushSourceValue
     },
     // see https://github.com/acornjs/acorn/issues/746
     walk.base

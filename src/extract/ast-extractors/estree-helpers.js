@@ -35,10 +35,6 @@ function isRequireIdentifier(pNode) {
   );
 }
 
-function isImportStatement(pNode) {
-  return "Import" === _get(pNode, "callee.type");
-}
-
 function isLikelyAMDDefineOrRequire(pNode) {
   return (
     pNode.expression.type === "CallExpression" &&
@@ -59,8 +55,9 @@ function isLikelyAMDDefine(pNode) {
 module.exports = {
   firstArgumentIsAString,
   firstArgumentIsATemplateLiteral,
+  isStringLiteral,
+  isPlaceholderlessTemplateLiteral,
   isRequireIdentifier,
-  isImportStatement,
   isLikelyAMDDefineOrRequire,
   isLikelyAMDDefine
 };
