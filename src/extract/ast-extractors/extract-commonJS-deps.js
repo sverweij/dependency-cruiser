@@ -1,4 +1,4 @@
-const walk = require("./walk");
+const walk = require("acorn-walk");
 const estreeHelpers = require("./estree-helpers");
 
 function pushRequireCallsToDependencies(pDependencies, pModuleSystem) {

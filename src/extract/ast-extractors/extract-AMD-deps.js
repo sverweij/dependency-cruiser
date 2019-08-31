@@ -1,4 +1,4 @@
-const walk = require("./walk");
+const walk = require("acorn-walk");
 const extractCommonJSDependencies = require("./extract-commonJS-deps");
 const estreeHelpers = require("./estree-helpers");
 
