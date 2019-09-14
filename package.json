@@ -224,7 +224,7 @@
     ],
     "*.d.ts": [
       "tslint --fix",
-      "prettier --write",
+      "prettier --write --ignore-path .prettierignore",
       "git add"
     ]
   }

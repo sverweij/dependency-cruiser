@@ -63,7 +63,7 @@ describe("report/dot/moduleLevel reporter", () => {
     );
   });
 
-  it("renders a dot - non-ur prefixes get path.posix.joined", () => {
+  it("renders a dot - non-uri prefixes get path.posix.joined", () => {
     expect(render(prefixNonUri, boringScheme).output).to.deep.equal(
       prefixNonUriFixture
     );
