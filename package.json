@@ -1,6 +1,6 @@
 {
   "name": "dependency-cruiser",
-  "version": "5.1.1",
+  "version": "5.1.2-beta-1",
   "description": "Validate and visualize dependencies. With your rules. JavaScript, TypeScript, CoffeeScript. ES6, CommonJS, AMD.",
   "keywords": [
     "static analysis",
@@ -224,7 +224,7 @@
     ],
     "*.d.ts": [
       "tslint --fix",
-      "prettier --write",
+      "prettier --write --ignore-path .prettierignore",
       "git add"
     ]
   }
