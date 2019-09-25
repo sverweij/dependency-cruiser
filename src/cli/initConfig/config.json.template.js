@@ -1,6 +1,6 @@
 var Handlebars = require("handlebars/runtime");  var template = Handlebars.template, templates = Handlebars.templates = Handlebars.templates || {};
 templates['config.json.template.hbs'] = template({"1":function(container,depth0,helpers,partials,data) {
-    var helper, alias1=depth0 != null ? depth0 : (container.nullContext || {}), alias2=helpers.helperMissing, alias3="function", alias4=container.escapeExpression;
+    var helper, alias1=depth0 != null ? depth0 : (container.nullContext || {}), alias2=container.hooks.helperMissing, alias3="function", alias4=container.escapeExpression;
 
   return "    \"extends\": \""
     + alias4(((helper = (helper = helpers.preset || (depth0 != null ? depth0.preset : depth0)) != null ? helper : alias2),(typeof helper === alias3 ? helper.call(alias1,{"name":"preset","hash":{},"data":data}) : helper)))
@@ -17,7 +17,7 @@ templates['config.json.template.hbs'] = template({"1":function(container,depth0,
     var helper;
 
   return "        , \"tsConfig\": {\n            \"fileName\": \""
-    + container.escapeExpression(((helper = (helper = helpers.tsConfig || (depth0 != null ? depth0.tsConfig : depth0)) != null ? helper : helpers.helperMissing),(typeof helper === "function" ? helper.call(depth0 != null ? depth0 : (container.nullContext || {}),{"name":"tsConfig","hash":{},"data":data}) : helper)))
+    + container.escapeExpression(((helper = (helper = helpers.tsConfig || (depth0 != null ? depth0.tsConfig : depth0)) != null ? helper : container.hooks.helperMissing),(typeof helper === "function" ? helper.call(depth0 != null ? depth0 : (container.nullContext || {}),{"name":"tsConfig","hash":{},"data":data}) : helper)))
     + "\"\n        }\n";
 },"11":function(container,depth0,helpers,partials,data) {
     return "        // , \"tsConfig\": {\n        //    \"fileName\": \"./tsconfig.json\"\n        // }\n";
@@ -25,7 +25,7 @@ templates['config.json.template.hbs'] = template({"1":function(container,depth0,
     var helper;
 
   return "        , \"webpackConfig\": {\n            \"fileName\": \""
-    + container.escapeExpression(((helper = (helper = helpers.webpackConfig || (depth0 != null ? depth0.webpackConfig : depth0)) != null ? helper : helpers.helperMissing),(typeof helper === "function" ? helper.call(depth0 != null ? depth0 : (container.nullContext || {}),{"name":"webpackConfig","hash":{},"data":data}) : helper)))
+    + container.escapeExpression(((helper = (helper = helpers.webpackConfig || (depth0 != null ? depth0.webpackConfig : depth0)) != null ? helper : container.hooks.helperMissing),(typeof helper === "function" ? helper.call(depth0 != null ? depth0 : (container.nullContext || {}),{"name":"webpackConfig","hash":{},"data":data}) : helper)))
     + "\"\n            //, \"env\": {}\n            //, \"args\": {}\n        }\n";
 },"15":function(container,depth0,helpers,partials,data) {
     return "        // , \"webpackConfig\": {\n        //    \"fileName\": \"./webpack.conf.js\"\n        //    , \"env\": {}\n        //    , \"args\": {}\n        // }\n";
@@ -33,12 +33,12 @@ templates['config.json.template.hbs'] = template({"1":function(container,depth0,
     var helper;
 
   return "        , \"externalModuleResolutionStrategy\": \""
-    + container.escapeExpression(((helper = (helper = helpers.externalModuleResolutionStrategy || (depth0 != null ? depth0.externalModuleResolutionStrategy : depth0)) != null ? helper : helpers.helperMissing),(typeof helper === "function" ? helper.call(depth0 != null ? depth0 : (container.nullContext || {}),{"name":"externalModuleResolutionStrategy","hash":{},"data":data}) : helper)))
+    + container.escapeExpression(((helper = (helper = helpers.externalModuleResolutionStrategy || (depth0 != null ? depth0.externalModuleResolutionStrategy : depth0)) != null ? helper : container.hooks.helperMissing),(typeof helper === "function" ? helper.call(depth0 != null ? depth0 : (container.nullContext || {}),{"name":"externalModuleResolutionStrategy","hash":{},"data":data}) : helper)))
     + "\"\n";
 },"19":function(container,depth0,helpers,partials,data) {
     return "        // , \"externalModuleResolutionStrategy\": \"node_modules\"\n";
-},"compiler":[7,">= 4.0.0"],"main":function(container,depth0,helpers,partials,data) {
-    var stack1, helper, alias1=depth0 != null ? depth0 : (container.nullContext || {}), alias2=helpers.helperMissing, alias3="function", alias4=container.escapeExpression;
+},"compiler":[8,">= 4.3.0"],"main":function(container,depth0,helpers,partials,data) {
+    var stack1, helper, alias1=depth0 != null ? depth0 : (container.nullContext || {}), alias2=container.hooks.helperMissing, alias3="function", alias4=container.escapeExpression;
 
   return "{\n"
     + ((stack1 = helpers["if"].call(alias1,(depth0 != null ? depth0.preset : depth0),{"name":"if","hash":{},"fn":container.program(1, data, 0),"inverse":container.program(3, data, 0),"data":data})) != null ? stack1 : "")

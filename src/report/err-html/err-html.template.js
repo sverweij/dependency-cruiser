@@ -1,6 +1,6 @@
 var Handlebars = require("handlebars/runtime");  var template = Handlebars.template, templates = Handlebars.templates = Handlebars.templates || {};
 templates['err-html.template.hbs'] = template({"1":function(container,depth0,helpers,partials,data) {
-    var stack1, helper, alias1=depth0 != null ? depth0 : (container.nullContext || {}), alias2=helpers.helperMissing, alias3="function", alias4=container.escapeExpression;
+    var stack1, helper, alias1=depth0 != null ? depth0 : (container.nullContext || {}), alias2=container.hooks.helperMissing, alias3="function", alias4=container.escapeExpression;
 
   return "                <tr "
     + ((stack1 = helpers["if"].call(alias1,(depth0 != null ? depth0.unviolated : depth0),{"name":"if","hash":{},"fn":container.program(2, data, 0),"inverse":container.noop,"data":data})) != null ? stack1 : "")
@@ -27,19 +27,19 @@ templates['err-html.template.hbs'] = template({"1":function(container,depth0,hel
     var helper;
 
   return "<span class=\""
-    + container.escapeExpression(((helper = (helper = helpers.severity || (depth0 != null ? depth0.severity : depth0)) != null ? helper : helpers.helperMissing),(typeof helper === "function" ? helper.call(depth0 != null ? depth0 : (container.nullContext || {}),{"name":"severity","hash":{},"data":data}) : helper)))
+    + container.escapeExpression(((helper = (helper = helpers.severity || (depth0 != null ? depth0.severity : depth0)) != null ? helper : container.hooks.helperMissing),(typeof helper === "function" ? helper.call(depth0 != null ? depth0 : (container.nullContext || {}),{"name":"severity","hash":{},"data":data}) : helper)))
     + "\">&cross;</span>";
 },"8":function(container,depth0,helpers,partials,data) {
     var helper;
 
   return "\""
-    + container.escapeExpression(((helper = (helper = helpers.ok || (depth0 != null ? depth0.ok : depth0)) != null ? helper : helpers.helperMissing),(typeof helper === "function" ? helper.call(depth0 != null ? depth0 : (container.nullContext || {}),{"name":"ok","hash":{},"data":data}) : helper)))
+    + container.escapeExpression(((helper = (helper = helpers.ok || (depth0 != null ? depth0.ok : depth0)) != null ? helper : container.hooks.helperMissing),(typeof helper === "function" ? helper.call(depth0 != null ? depth0 : (container.nullContext || {}),{"name":"ok","hash":{},"data":data}) : helper)))
     + "\"";
 },"10":function(container,depth0,helpers,partials,data) {
     var helper;
 
   return "\""
-    + container.escapeExpression(((helper = (helper = helpers.severity || (depth0 != null ? depth0.severity : depth0)) != null ? helper : helpers.helperMissing),(typeof helper === "function" ? helper.call(depth0 != null ? depth0 : (container.nullContext || {}),{"name":"severity","hash":{},"data":data}) : helper)))
+    + container.escapeExpression(((helper = (helper = helpers.severity || (depth0 != null ? depth0.severity : depth0)) != null ? helper : container.hooks.helperMissing),(typeof helper === "function" ? helper.call(depth0 != null ? depth0 : (container.nullContext || {}),{"name":"severity","hash":{},"data":data}) : helper)))
     + "\"";
 },"12":function(container,depth0,helpers,partials,data,blockParams,depths) {
     var stack1;
@@ -48,7 +48,7 @@ templates['err-html.template.hbs'] = template({"1":function(container,depth0,hel
     + ((stack1 = helpers.each.call(depth0 != null ? depth0 : (container.nullContext || {}),((stack1 = (depth0 != null ? depth0.summary : depth0)) != null ? stack1.violations : stack1),{"name":"each","hash":{},"fn":container.program(13, data, 0, blockParams, depths),"inverse":container.noop,"data":data})) != null ? stack1 : "")
     + "            </tbody>\n        </table>\n";
 },"13":function(container,depth0,helpers,partials,data,blockParams,depths) {
-    var stack1, helper, alias1=container.lambda, alias2=container.escapeExpression, alias3=depth0 != null ? depth0 : (container.nullContext || {}), alias4=helpers.helperMissing, alias5="function";
+    var stack1, helper, alias1=container.lambda, alias2=container.escapeExpression, alias3=depth0 != null ? depth0 : (container.nullContext || {}), alias4=container.hooks.helperMissing, alias5="function";
 
   return "                <tr>\n                    <td class=\""
     + alias2(alias1(((stack1 = (depth0 != null ? depth0.rule : depth0)) != null ? stack1.severity : stack1), depth0))
@@ -68,7 +68,7 @@ templates['err-html.template.hbs'] = template({"1":function(container,depth0,hel
     + "</td>\n                </tr>\n";
 },"15":function(container,depth0,helpers,partials,data) {
     return "        <h2><span aria-hidden=\"true\">&hearts;</span> No violations found</h2>\n        <p>Get gummy bears to celebrate.</p>\n";
-},"compiler":[7,">= 4.0.0"],"main":function(container,depth0,helpers,partials,data,blockParams,depths) {
+},"compiler":[8,">= 4.3.0"],"main":function(container,depth0,helpers,partials,data,blockParams,depths) {
     var stack1, alias1=container.lambda, alias2=container.escapeExpression, alias3=depth0 != null ? depth0 : (container.nullContext || {});
 
   return "<!DOCTYPE html>\n<html lang=\"en\">\n    <head>\n        <title>dependency-cruiser - results</title>\n        <meta charset=\"utf-8\">\n        <meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">\n        \n        <style type=\"text/css\">\n            body{\n                font-family:sans-serif;\n                margin:0 auto;\n                max-width:90%;\n                line-height:1.6;\n                font-size:14px;\n                color:#444;\n                padding:0 10px;\n                background-color:#fff;\n            }\n            footer{\n                color: gray;\n                margin-top: 1.4em;\n                border-top: solid 1px currentColor\n            }\n            a {\n                text-decoration: none\n            }\n            a.noiseless {\n                color: currentColor\n            }\n            h1,h2,h3{\n                line-height:1.2\n            }\n            table {\n                border-collapse: collapse;\n                width: 100%;\n            }\n            th, td {\n                text-align: left;\n                padding: 4px;\n            }\n            tbody tr:nth-child(odd){\n                background-color: rgba(128,128,128,0.2);\n            }\n            .error {\n                color: red;\n            }\n            .warn {\n                color: orange;\n            }\n            .info {\n                color: blue;\n            }\n            .ok {\n                color: limegreen;\n            }\n            td.nowrap {\n                white-space: nowrap\n            }\n            svg{\n                fill:currentColor\n            }\n            #show-unviolated {\n                display: block\n                \n            }\n            #hide-unviolated {\n                display: none\n            }\n            #show-all-the-rules:target #show-unviolated{\n                display: none\n            }\n            #show-all-the-rules:target #hide-unviolated{\n                display: block\n            }\n            tr.unviolated {\n                display: none\n            }\n            #show-all-the-rules:target tr.unviolated {\n                display: table-row;\n                color: gray;\n            }\n            .p__svg--inline{\n                vertical-align: top;\n                width: 1.2em;\n                height: 1.2em\n            }\n            .controls {\n                background-color: #fff;\n                vertical-align: bottom;\n                text-align: center\n            }\n            .controls:hover {\n                opacity: 1;\n            }\n            .controls a {\n                text-decoration: none;\n                color: gray;\n            }\n            .controls a:hover {\n                text-decoration: underline;\n                color: blue;\n            }\n        </style>\n        <style type=\"text/css\" media=\"print\">\n            th, td {\n                border: 1px solid #444;\n            }\n            .controls {\n                display: none\n            }\n        </style>\n    </head>\n    <body id=\"show-all-the-rules\">\n        <h1>Forbidden dependency check - results</h1>\n        <h2><svg class=\"p__svg--inline\" viewBox=\"0 0 14 16\" version=\"1.1\" aria-hidden=\"true\"><path fill-rule=\"evenodd\" d=\"M11.5 8L8.8 5.4 6.6 8.5 5.5 1.6 2.38 8H0v2h3.6l.9-1.8.9 5.4L9 8.5l1.6 1.5H14V8h-2.5z\"></path></svg> Summary</h2>\n        <p>\n            <div style=\"float:left;padding-right:20px\">\n                <strong>"
