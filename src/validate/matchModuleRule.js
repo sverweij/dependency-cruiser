@@ -21,6 +21,7 @@ function matchesReachableRule(pRule, pModule) {
   let lRetval = true;
 
   if (pRule.to.hasOwnProperty("reachable")) {
+    lRetval = pRule.to.reachable;
     if (pModule.hasOwnProperty("reachable")) {
       lRetval =
         pModule.reachable.some(
@@ -30,8 +31,6 @@ function matchesReachableRule(pRule, pModule) {
         ) &&
         matches.toModulePath(pRule, pModule) &&
         matches.toModulePathNot(pRule, pModule);
-    } else {
-      lRetval = pRule.to.reachable;
     }
   }
   return lRetval;

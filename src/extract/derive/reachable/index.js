@@ -25,8 +25,8 @@ function isModuleInRuleTo(pRule, pModule) {
   );
 }
 
-function mergeReachableProperties(pToModule, pRule, pIsReachable) {
-  const lReachables = pToModule.reachable || [];
+function mergeReachableProperties(pModule, pRule, pIsReachable) {
+  const lReachables = pModule.reachable || [];
   const lIndexExistingReachable = lReachables.findIndex(
     pReachable => pReachable.asDefinedInRule === pRule.name
   );
@@ -45,28 +45,25 @@ function mergeReachableProperties(pToModule, pRule, pIsReachable) {
 }
 
 function addReachableToGraph(pGraph, pReachableRule) {
-  return pGraph
-    .filter(onlyModulesInRuleFrom(pReachableRule))
-    .map(pModule => pModule.source)
-    .reduce(
-      (pReturnGraph, pFromSource) =>
-        pReturnGraph.map(pToModule =>
-          Object.assign(
-            {},
-            pToModule,
-            isModuleInRuleTo(pReachableRule, pToModule)
-              ? {
-                  reachable: mergeReachableProperties(
-                    pToModule,
-                    pReachableRule,
-                    isReachable(pGraph, pFromSource, pToModule.source)
-                  )
-                }
-              : {}
-          )
-        ),
-      _clone(pGraph)
-    );
+  return pGraph.filter(onlyModulesInRuleFrom(pReachableRule)).reduce(
+    (pReturnGraph, pFromModule) =>
+      pReturnGraph.map(pToModule =>
+        Object.assign(
+          {},
+          pToModule,
+          isModuleInRuleTo(pReachableRule, pToModule)
+            ? {
+                reachable: mergeReachableProperties(
+                  pToModule,
+                  pReachableRule,
+                  isReachable(pGraph, pFromModule.source, pToModule.source)
+                )
+              }
+            : {}
+        )
+      ),
+    _clone(pGraph)
+  );
 }
 
 module.exports = (pGraph, pRuleSet) => {

@@ -35,7 +35,6 @@ function isReachable(pGraph, pFrom, pTo, pVisited = new Set()) {
       );
     }
   }
-
   return lRetval;
 }
 
