@@ -31,11 +31,6 @@ function match(pFrom, pTo) {
   return pRule => {
     const lGroups = extractGroups(pRule.from, pFrom.source);
 
-    /*
-     * the replace("$1", lGroup) things below are a bit simplistic (they
-     * also match \$, which they probably shouldn't) - but good enough for
-     * now.
-     */
     return (
       matches.fromPath(pRule, pFrom) &&
       matches.fromPathNot(pRule, pFrom) &&
