@@ -1,4 +1,4 @@
-const path = require("path");
+const path = require("path").posix;
 const _get = require("lodash/get");
 const version = require("../../../package.json").version;
 
