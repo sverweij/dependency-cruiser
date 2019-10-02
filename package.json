@@ -207,8 +207,11 @@
     }
   },
   "lint-staged": {
-    "{src,config}/**/*.{js,json}": [
+    "{src,config}/**/*.js": [
       "eslint --fix",
+      "git add"
+    ],
+    "{src,config}/**/*.{js,json}": [
       "prettier --write",
       "git add"
     ],
