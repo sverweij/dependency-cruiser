@@ -486,6 +486,10 @@
                         "couldNotResolve": false,
                         "valid": false,
                         "circular": true,
+                        "cycle": [
+                            "test/extract/fixtures/cjs/ralucric.js",
+                            "test/extract/fixtures/cjs/circular.js"
+                          ],
                         "rules": [{
                             "name": "no-circular",
                             "severity": "info"
@@ -516,6 +520,10 @@
                         "couldNotResolve": false,
                         "valid": false,
                         "circular": true,
+                        "cycle": [
+                            "test/extract/fixtures/cjs/circular.js",
+                            "test/extract/fixtures/cjs/ralucric.js"
+                        ],
                         "rules": [{
                             "name": "no-circular",
                             "severity": "info"
@@ -572,7 +580,12 @@
                         "matchesDoNotFollow": false,
                         "couldNotResolve": false,
                         "valid": true,
-                        "circular": true
+                        "circular": true,
+                        "cycle": [
+                            "test/extract/fixtures/cjs/circle-two.js",
+                            "test/extract/fixtures/cjs/circle-three.js",
+                            "test/extract/fixtures/cjs/circle-one.js"
+                        ]
                     }
                 ],
                 "valid": true
@@ -593,7 +606,12 @@
                         "matchesDoNotFollow": false,
                         "couldNotResolve": false,
                         "valid": true,
-                        "circular": true
+                        "circular": true,
+                        "cycle": [
+                            "test/extract/fixtures/cjs/circle-three.js",
+                            "test/extract/fixtures/cjs/circle-one.js",
+                            "test/extract/fixtures/cjs/circle-two.js"
+                        ]
                     }
                 ],
                 "valid": true
@@ -614,7 +632,12 @@
                         "matchesDoNotFollow": false,
                         "couldNotResolve": false,
                         "valid": true,
-                        "circular": true
+                        "circular": true,
+                        "cycle": [
+                            "test/extract/fixtures/cjs/circle-one.js",
+                            "test/extract/fixtures/cjs/circle-two.js",
+                            "test/extract/fixtures/cjs/circle-three.js"
+                        ]
                     }
                 ],
                 "valid": true

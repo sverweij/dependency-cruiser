@@ -45,11 +45,24 @@ function extractDependencyViolations(pModules) {
       .filter(pModule => pModule.dependencies.length > 0)
       .map(pModule =>
         pModule.dependencies.map(pDep =>
-          pDep.rules.map(pRule => ({
-            from: pModule.source,
-            to: pDep.resolved,
-            rule: pRule
-          }))
+          pDep.rules.map(pRule => {
+            let lRetval = {
+              from: pModule.source,
+              to: pDep.resolved,
+              rule: pRule
+            };
+
+            if (pDep.cycle) {
+              // should probably check whether the rule has a circular
+              // attribute in its 'to' part
+              lRetval = {
+                ...lRetval,
+                cycle: pDep.cycle
+              };
+            }
+
+            return lRetval;
+          })
         )
       )
   );

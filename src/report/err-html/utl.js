@@ -1,3 +1,4 @@
+const path = require("path");
 const _get = require("lodash/get");
 const version = require("../../../package.json").version;
 
@@ -29,6 +30,19 @@ function mergeCountIntoRule(pRule, pViolationCounts) {
   };
 }
 
+function shorten(pFrom) {
+  return pPath => path.relative(path.dirname(pFrom), pPath);
+}
+
+function determineTo(pViolation) {
+  if (pViolation.cycle) {
+    return pViolation.cycle
+      .map(shorten(pViolation.from))
+      .join(" &rightarrow;<br/>");
+  }
+  return pViolation.from === pViolation.to ? "" : pViolation.to;
+}
+
 function formatSummaryForReport(pSummary) {
   return {
     ...pSummary,
@@ -36,7 +50,7 @@ function formatSummaryForReport(pSummary) {
     runDate: new Date().toISOString(),
     violations: (pSummary.violations || []).map(pViolation => ({
       ...pViolation,
-      to: pViolation.from === pViolation.to ? "" : pViolation.to
+      to: determineTo(pViolation)
     }))
   };
 }
@@ -44,5 +58,6 @@ function formatSummaryForReport(pSummary) {
 module.exports = {
   getFormattedAllowedRule,
   mergeCountIntoRule,
-  formatSummaryForReport
+  formatSummaryForReport,
+  determineTo
 };

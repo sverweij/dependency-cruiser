@@ -100,6 +100,9 @@
                 text-decoration: underline;
                 color: blue;
             }
+            .extra {
+                color: gray;
+            }
         </style>
         <style type="text/css" media="print">
             th, td {
@@ -181,7 +184,8 @@
                     <td class="{{rule.severity}}">{{rule.severity}}</td>
                     <td class="nowrap"><a href="#{{rule.name}}" class="noiseless">{{rule.name}}</a></td>
                     <td><a href="{{../summary.optionsUsed.prefix}}{{from}}">{{from}}</a></td>
-                    <td>{{to}}</td>
+                    <td>{{{to}}}</td>
+                    
                 </tr>
                 {{/each}}
             </tbody>

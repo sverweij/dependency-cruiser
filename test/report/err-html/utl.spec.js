@@ -142,4 +142,39 @@ describe("report/err-html/utl", () => {
       }
     ]);
   });
+
+  it("determineTo - circular violation", () => {
+    const lInputViolation = {
+      cycle: ["thing/a", "b", "thingy/bingy/c", "a"],
+      from: "a",
+      to: "thing/a"
+    };
+
+    const lExpectation =
+      "thing/a &rightarrow;<br/>b &rightarrow;<br/>thingy/bingy/c &rightarrow;<br/>a";
+
+    expect(utl.determineTo(lInputViolation)).to.deep.equal(lExpectation);
+  });
+
+  it("determineTo - dependency violation", () => {
+    const lInputViolation = {
+      from: "a",
+      to: "thing/a"
+    };
+
+    const lExpectation = "thing/a";
+
+    expect(utl.determineTo(lInputViolation)).to.deep.equal(lExpectation);
+  });
+
+  it("determineTo - module violation", () => {
+    const lInputViolation = {
+      from: "a",
+      to: "a"
+    };
+
+    const lExpectation = "";
+
+    expect(utl.determineTo(lInputViolation)).to.deep.equal(lExpectation);
+  });
 });
