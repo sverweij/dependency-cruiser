@@ -1,5 +1,5 @@
 const _get = require("lodash/get");
-const dependencyEndsUpAtFrom = require("./dependencyEndsUpAtFrom");
+const getCycle = require("./getCycle");
 
 function circularityDetectionNecessary(pOptions) {
   if (pOptions.forceCircular) {
@@ -14,10 +14,20 @@ function circularityDetectionNecessary(pOptions) {
 }
 
 function addCircularityCheckToDependency(pToDep, pGraph, pFrom) {
-  return {
+  const lCycle = getCycle(pGraph, pFrom, pToDep.resolved);
+  let lRetval = {
     ...pToDep,
-    circular: dependencyEndsUpAtFrom(pGraph, pFrom, pToDep.resolved)
+    circular: lCycle.length > 0
   };
+
+  if (lRetval.circular) {
+    lRetval = {
+      ...lRetval,
+      cycle: lCycle
+    };
+  }
+
+  return lRetval;
 }
 
 /**

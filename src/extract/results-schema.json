@@ -185,6 +185,11 @@
                   "type": "boolean",
                   "description": "'true' if following this dependency will ultimately return to the source, false in all other cases"
                 },
+                "cycle": {
+                  "type": "array",
+                  "items": { "type": "string" },
+                  "description": "If following this dependency will ultimately return to the source (circular === true), this attribute will contain an (ordered) array of module names that shows (one of the) circular path(s)"
+                },
                 "moduleSystem": { "$ref": "#/definitions/ModuleSystemType" },
                 "valid": {
                   "type": "boolean",
@@ -337,11 +342,12 @@
         "to": {
           "type": "string"
         },
-        "additionalInformation": {
-          "description": "if there's more information on the violation (e.g. the complete path in case of a circular dependency) it'll be here",
-          "type": "string"
-        },
-        "rule": { "$ref": "#/definitions/RuleSummaryType" }
+        "rule": { "$ref": "#/definitions/RuleSummaryType" },
+        "cycle": {
+          "type": "array",
+          "items": { "type": "string" },
+          "description": "The circular path if the violation was about circularity"
+        }
       }
     },
     "ModuleSystemType": {

@@ -98,6 +98,12 @@ export interface IToRestriction {
    */
   circular?: boolean;
   /**
+   * If following this dependency will ultimately return to the source
+   * (circular === true), this attribute will contain an (ordered) array of module
+   * names that shows (one of the) circular path(s)
+   */
+  cycle?: string[];
+  /**
    * Whether or not to match when the dependency is a dynamic one.
    */
   dynamic?: boolean;
