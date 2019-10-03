@@ -14,12 +14,34 @@
       }
     },
     {
+      "name": "report-stays-in-report",
+      "comment": "This reporting module depends directly on a non-reporting one that is not a utility. That is odd as reporting modules should only read dependency cruiser output json.",
+      "severity": "error",
+      "from": {
+        "path": "(^src/report/)"
+      },
+      "to": {
+        "pathNot": "$1|^node_modules|^(path|package.json)$|^src/utl"
+      }
+    },
+    {
+      "name": "extract-to-validate-only",
+      "comment": "This extraction module depends on something outside extraction that is not a utility or validation. Which is odd, given the goal of the extraction step.",
+      "severity": "error",
+      "from": {
+        "path": "(^src/extract/)"
+      },
+      "to": {
+        "pathNot": "$1|^node_modules|^(path|fs|module|package.json)$|^src/(utl|validate)"
+      }
+    },
+    {
       "name": "cli-to-main-only-warn",
       "comment": "This cli module depends on something not in the public interface - which means it either doesn't belong in cli, or the main public interface needs to be expanded (this warn-only rule is a temporary exception for the compileConfig depending on the resolver).",
       "severity": "warn",
       "from": { "path": "^(src/cli/compileConfig/index\\.js)$" },
       "to": {
-        "pathNot": "^src/(cli|main)|^node_modules|^fs$|^path$|$1|^package.json$"
+        "pathNot": "$1|^src/(cli|main)|^node_modules|^(fs|path|package.json)$"
       }
     },
     {
