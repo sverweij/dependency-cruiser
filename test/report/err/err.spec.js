@@ -7,6 +7,7 @@ const deps = require("../fixtures/cjs-no-dependency-valid.json");
 const warndeps = require("../fixtures/err-only-warnings.json");
 const erradds = require("../fixtures/err-with-additional-information.json");
 const orphanerrs = require("../fixtures/orphan-deps.json");
+const circularerrs = require("../fixtures/circular-deps.json");
 
 describe("report/err", () => {
   let chalkEnabled = chalk.enabled;
@@ -49,6 +50,17 @@ describe("report/err", () => {
       "1 dependency violations (1 errors, 0 warnings). 1 modules, 0 dependencies cruised."
     );
     expect(lResult.exitCode).to.equal(1);
+  });
+  it("renders circular violations as circulars", () => {
+    const lResult = render(circularerrs);
+
+    expect(lResult.output).to.contain(
+      "error no-circular: src/some/folder/nested/center.js → \n"
+    );
+    expect(lResult.output).to.contain(
+      "      src/some/folder/loop-a.js →\n      src/some/folder/loop-b.js →\n      src/some/folder/nested/center.js"
+    );
+    expect(lResult.exitCode).to.equal(3);
   });
   it("renders addtional information", () => {
     const lResult = render(erradds);
