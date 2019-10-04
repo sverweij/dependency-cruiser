@@ -1,21 +1,15 @@
 path_classifiers:
   docs:
-    # Identify the top-level file called `generate_javadoc.py` as documentation-related.
+    # Identify everyting in doc and docs as documentation
     - doc
     - docs
   test:
     # Override LGTM's default classification of test files by excluding all files.
     - exclude: /
-    # Classify all files in the top-level directories test/ and testsuites/ as test code.
+    # Classify all files test/ as test
     - test
-    # Classify all files with suffix `.test` as test code.
-    #        Note: use only forward slash / as a path separator.
-    #        Use ** to indicate an arbitrary parent path.
-    #        Use * to indicate any sequence of characters excluding /.
-    #        Always enclose the expression in double quotes if it includes *.
+    # Classify all files with suffix `.spec.js` as test code.
     - "**/*.spec.js"
-    # Refine the classifications above by excluding utility scripts in test
-    - exclude: "test/**/*.utl.js"
 
 #########################################################################################
 # Use the `queries` block to change the default display of query results.               #
@@ -32,47 +26,10 @@ queries:
         - "correctness"
       severity: "error"
 
-#########################################################################################
-# Define changes to the default code extraction process.                                #
-# Each block configures the extraction of a single language, and modifies actions in a  #
-# named step. Every named step includes automatic default actions,                      #
-# except for the 'prepare' step. The steps are performed in the following sequence:     #
-# prepare                                                                               #
-# after_prepare                                                                         #
-# configure (C/C++ only)                                                                #
-# python_setup (Python only)                                                            #
-# before_index                                                                          #
-# index                                                                                 #
-##########################################################################################
-
-#########################################################################################
-# Environment variables available to the steps:                                         #
-#########################################################################################
-
-# LGTM_SRC
-#   The root of the source tree.
-# LGTM_WORKSPACE
-#   An existing (initially empty) folder outside the source tree.
-#   Used for temporary download and setup commands.
-
-#########################################################################################
-# Use the extraction block to define changes to the default code extraction process     #
-# for one or more languages. The settings for each language are defined in a child      #
-# block, with one or more steps.                                                        #
-#########################################################################################
-
 extraction: 
   # Define settings for JavaScript analysis
   ##########################################
   javascript:
-    # The `prepare` step exists for customization on LGTM.com only.
-    # prepare:
-    #   packages:
-    #     - example_package
-    # Add an `after-prepare` step if you need to run commands after the prepare step.
-    # Each command should be listed on a separate line.
-    # after_prepare:
-      # - export PATH=$LGTM_WORKSPACE/tools:$PATH
     # The `index` step extracts information from the files in the codebase.
     index:
       # Specify a list of files and folders to extract.
@@ -86,13 +43,6 @@ extraction:
       # Specify a list of files and folders to exclude from extraction.
       exclude:
         - node_modules
-      # You can add additional file types for LGTM to extract, by mapping file 
-      # extensions (including the leading dot) to file types. The usual 
-      # include/exclude patterns apply, so, for example, `.jsm` files under
-      # `thirdparty/lib` and `node_modules` will not be extracted.
-      # filetypes:
-        # ".jsm": "js"
-        # ".tmpl": "html"
       # Specify a list of glob patterns to include/exclude files from extraction; this 
       # is applied on top of the include/exclude paths from above; patterns are 
       # processed in the same way as for path classifiers above.
@@ -106,12 +56,3 @@ extraction:
         # exclude fixtures from scrutiny. By design they will contain problems
         # for dependency-cruiser to detect in tests
         - exclude: "**/fixtures/*"
-      # Specify how TypeScript files should be extracted:
-      #   none = exclude all TypeScript files.
-      #   basic = extract syntactic information from TypeScript files.
-      #   full = extract syntactic and type information from TypeScript files.
-      # Default: full.
-      # typescript: full
-      # By default, LGTM doesn't extract any XML files. You can override this by 
-      # using the `xml_mode` property and setting it to `all`.
-      # xml_mode: all
