@@ -205,7 +205,7 @@ module.exports = (pFileDirArray, pOptions, pResolveOptions, pTSConfig) => {
   return {
     modules: lModules,
     summary: Object.assign(
-      summarize(lModules),
+      summarize(lModules, pOptions.ruleSet),
       summarizeOptions(pFileDirArray, pOptions),
       pOptions.ruleSet ? { ruleSetUsed: addRuleSetUsed(pOptions) } : {}
     )
