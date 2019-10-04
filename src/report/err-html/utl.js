@@ -1,4 +1,3 @@
-const path = require("path").posix;
 const _get = require("lodash/get");
 const version = require("../../../package.json").version;
 
@@ -30,15 +29,9 @@ function mergeCountIntoRule(pRule, pViolationCounts) {
   };
 }
 
-function shorten(pFrom) {
-  return pPath => path.relative(path.dirname(pFrom), pPath);
-}
-
 function determineTo(pViolation) {
   if (pViolation.cycle) {
-    return pViolation.cycle
-      .map(shorten(pViolation.from))
-      .join(" &rightarrow;<br/>");
+    return pViolation.cycle.join(" &rightarrow;<br/>");
   }
   return pViolation.from === pViolation.to ? "" : pViolation.to;
 }
