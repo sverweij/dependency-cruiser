@@ -13,7 +13,7 @@ path_classifiers:
     #        Use ** to indicate an arbitrary parent path.
     #        Use * to indicate any sequence of characters excluding /.
     #        Always enclose the expression in double quotes if it includes *.
-      - "**/*.spec.js"
+    - "**/*.spec.js"
     # Refine the classifications above by excluding utility scripts in test
     - exclude: "test/**/*.utl.js"
 
