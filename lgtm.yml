@@ -1,0 +1,58 @@
+path_classifiers:
+  docs:
+    # Identify everyting in doc and docs as documentation
+    - doc
+    - docs
+  test:
+    # Override LGTM's default classification of test files by excluding all files.
+    - exclude: /
+    # Classify all files test/ as test
+    - test
+    # Classify all files with suffix `.spec.js` as test code.
+    - "**/*.spec.js"
+
+#########################################################################################
+# Use the `queries` block to change the default display of query results.               #
+#########################################################################################
+
+queries:
+  # Start by hiding the results of all queries.
+  - exclude: "*"
+  # Then include all queries tagged 'security' and 'correctness', and with a severity of
+  # 'error'.
+  - include:
+      tags:
+        - "security"
+        - "correctness"
+      severity: "error"
+
+extraction: 
+  # Define settings for JavaScript analysis
+  ##########################################
+  javascript:
+    # The `index` step extracts information from the files in the codebase.
+    index:
+      # Specify a list of files and folders to extract.
+      # Default: The project root directory.
+      include:
+        - bin
+        - configs
+        - src
+        - test
+        - types
+      # Specify a list of files and folders to exclude from extraction.
+      exclude:
+        - node_modules
+      # Specify a list of glob patterns to include/exclude files from extraction; this 
+      # is applied on top of the include/exclude paths from above; patterns are 
+      # processed in the same way as for path classifiers above.
+      # Default: include all files with known extensions (such as .js, .ts and .html),
+      # but exclude files ending in `-min.js` or `.min.js`.
+      filters:
+        # exclude generated templates
+        - exclude: "src/**/*.template.js"
+        # exclude any node_modules folders anywhere.
+        - exclude: "**/node_modules/*"
+        # exclude fixtures from scrutiny. By design they will contain problems
+        # for dependency-cruiser to detect in tests
+        - exclude: "**/fixtures/*"
