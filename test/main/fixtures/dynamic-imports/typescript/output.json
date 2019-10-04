@@ -99,12 +99,7 @@
         "rule": {
           "severity": "warn",
           "name": "no-dynamic"
-        },
-        "cycle": [
-          "src/circular.ts",
-          "src/index.ts",
-          "src/dynamic-to-circular.ts"
-        ]
+        }
       },
       {
         "from": "src/circular.ts",
