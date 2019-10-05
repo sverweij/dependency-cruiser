@@ -4,6 +4,7 @@ const expect = require("chai").expect;
 const render = require("../../src/report/teamcity");
 const okdeps = require("./fixtures/teamcity/everything-fine.json");
 const moduleErrs = require("./fixtures/teamcity/module-errors.json");
+const circulars = require("./fixtures/teamcity/circular-deps.json");
 
 function removePerSessionAttributes(pString) {
   return pString.replace(/ flowId='[^']+' timestamp='[^']+'/g, "");
@@ -41,5 +42,24 @@ describe("report/teamcity", () => {
     expect(removePerSessionAttributes(lResult.output)).to.equal(lFixture);
     // eslint-disable-next-line no-magic-numbers
     expect(lResult.exitCode).to.equal(5);
+  });
+
+  it("renders circular transgressions", () => {
+    const lFixture = fs.readFileSync(
+      path.join(
+        __dirname,
+        "fixtures",
+        "teamcity",
+        "circular-deps-teamcity-format.txt"
+      ),
+      "utf8"
+    );
+    const lResult = render(circulars);
+
+    expect(removePerSessionAttributes(lResult.output)).to.equal(
+      removePerSessionAttributes(lFixture)
+    );
+    // eslint-disable-next-line no-magic-numbers
+    expect(lResult.exitCode).to.equal(3);
   });
 });

@@ -3,33 +3,52 @@ const figures = require("figures");
 const indentString = require("indent-string");
 const wrapAnsi = require("wrap-ansi");
 const _get = require("lodash/get");
-const findRuleByName = require("../utl/findRuleByName");
+const findRuleByName = require("../../utl/findRuleByName");
 
 const SEVERITY2CHALK = {
   error: chalk.red,
   warn: chalk.yellow,
   info: chalk.cyan
 };
+const DEFAULT_INDENT = 4;
+const CYCLIC_PATH_INDENT = 6;
 
-function wrapAndIndent(pString) {
-  const INDENT = 4;
+function wrapAndIndent(pString, pIndent = DEFAULT_INDENT) {
   const DOGMATIC_MAX_CONSOLE_WIDTH = 78;
-  const MAX_WIDTH = DOGMATIC_MAX_CONSOLE_WIDTH - INDENT;
+  const MAX_WIDTH = DOGMATIC_MAX_CONSOLE_WIDTH - pIndent;
 
-  return indentString(wrapAnsi(pString, MAX_WIDTH), INDENT);
+  return indentString(wrapAnsi(pString, MAX_WIDTH), pIndent);
 }
 
-function formatError(pErr) {
+function determineTo(pViolation) {
+  if (pViolation.cycle) {
+    return "\n".concat(
+      wrapAndIndent(
+        pViolation.cycle.join(` ${figures.arrowRight} \n`),
+        CYCLIC_PATH_INDENT
+      )
+    );
+  }
+  return `${chalk.bold(pViolation.to)}`;
+}
+
+function formatViolation(pViolation) {
   const lModuleNames =
-    pErr.from === pErr.to
-      ? chalk.bold(pErr.from)
-      : `${chalk.bold(pErr.from)} ${figures.arrowRight} ${chalk.bold(pErr.to)}`;
+    pViolation.from === pViolation.to
+      ? chalk.bold(pViolation.from)
+      : `${chalk.bold(pViolation.from)} ${figures.arrowRight} ${determineTo(
+          pViolation
+        )}`;
 
   return (
-    `${SEVERITY2CHALK[pErr.rule.severity](pErr.rule.severity)} ${
-      pErr.rule.name
+    `${SEVERITY2CHALK[pViolation.rule.severity](pViolation.rule.severity)} ${
+      pViolation.rule.name
     }: ${lModuleNames}` +
-    `${pErr.comment ? `\n${wrapAndIndent(chalk.dim(pErr.comment))}\n` : ""}`
+    `${
+      pViolation.comment
+        ? `\n${wrapAndIndent(chalk.dim(pViolation.comment))}\n`
+        : ""
+    }`
   );
 }
 
@@ -76,7 +95,7 @@ function report(pResults, pLong) {
   return pResults.summary.violations
     .reverse()
     .map(addExplanation(pResults.summary.ruleSetUsed, pLong))
-    .reduce((pAll, pThis) => `${pAll}  ${formatError(pThis)}\n`, "\n")
+    .reduce((pAll, pThis) => `${pAll}  ${formatViolation(pThis)}\n`, "\n")
     .concat(formatSummary(pResults.summary));
 }
 

@@ -1,4 +1,6 @@
 const _flattenDeep = require("lodash/flattenDeep");
+const _get = require("lodash/get");
+const findRuleByName = require("../utl/findRuleByName");
 const order = require("./utl/order");
 
 function cutNonTransgressions(pSourceEntry) {
@@ -36,20 +38,35 @@ function extractMetaData(pViolations) {
  * }
  *
  * @param {any} pModules an array of modules
+ * @param {any} pRuleSet? a rule set
  * @return {any} an array of violations
  */
-function extractDependencyViolations(pModules) {
+function extractDependencyViolations(pModules, pRuleSet) {
   return _flattenDeep(
     pModules
       .map(cutNonTransgressions)
       .filter(pModule => pModule.dependencies.length > 0)
       .map(pModule =>
         pModule.dependencies.map(pDep =>
-          pDep.rules.map(pRule => ({
-            from: pModule.source,
-            to: pDep.resolved,
-            rule: pRule
-          }))
+          pDep.rules.map(pRule => {
+            let lRetval = {
+              from: pModule.source,
+              to: pDep.resolved,
+              rule: pRule
+            };
+
+            if (
+              pDep.cycle &&
+              _get(findRuleByName(pRuleSet, pRule.name), "to.circular")
+            ) {
+              lRetval = {
+                ...lRetval,
+                cycle: pDep.cycle
+              };
+            }
+
+            return lRetval;
+          })
         )
       )
   );
@@ -69,8 +86,8 @@ function extractModuleViolations(pModules) {
   );
 }
 
-module.exports = pModules => {
-  const lViolations = extractDependencyViolations(pModules)
+module.exports = (pModules, pRuleSet) => {
+  const lViolations = extractDependencyViolations(pModules, pRuleSet)
     .concat(extractModuleViolations(pModules))
     .sort(order.violations);
 

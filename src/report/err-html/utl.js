@@ -29,6 +29,13 @@ function mergeCountIntoRule(pRule, pViolationCounts) {
   };
 }
 
+function determineTo(pViolation) {
+  if (pViolation.cycle) {
+    return pViolation.cycle.join(" &rightarrow;<br/>");
+  }
+  return pViolation.from === pViolation.to ? "" : pViolation.to;
+}
+
 function formatSummaryForReport(pSummary) {
   return {
     ...pSummary,
@@ -36,7 +43,7 @@ function formatSummaryForReport(pSummary) {
     runDate: new Date().toISOString(),
     violations: (pSummary.violations || []).map(pViolation => ({
       ...pViolation,
-      to: pViolation.from === pViolation.to ? "" : pViolation.to
+      to: determineTo(pViolation)
     }))
   };
 }
@@ -44,5 +51,6 @@ function formatSummaryForReport(pSummary) {
 module.exports = {
   getFormattedAllowedRule,
   mergeCountIntoRule,
-  formatSummaryForReport
+  formatSummaryForReport,
+  determineTo
 };

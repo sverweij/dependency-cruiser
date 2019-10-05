@@ -8,14 +8,17 @@
           "coreModule": false,
           "followable": true,
           "couldNotResolve": false,
-          "dependencyTypes": [
-            "local"
-          ],
+          "dependencyTypes": ["local"],
           "module": "./index",
           "moduleSystem": "es6",
           "dynamic": false,
           "matchesDoNotFollow": false,
           "circular": true,
+          "cycle": [
+            "src/index.ts",
+            "src/dynamic-to-circular.ts",
+            "src/circular.ts"
+          ],
           "valid": false,
           "rules": [
             {
@@ -35,14 +38,17 @@
           "coreModule": false,
           "followable": true,
           "couldNotResolve": false,
-          "dependencyTypes": [
-            "local"
-          ],
+          "dependencyTypes": ["local"],
           "module": "./dynamic-to-circular",
           "moduleSystem": "es6",
           "dynamic": false,
           "matchesDoNotFollow": false,
           "circular": true,
+          "cycle": [
+            "src/dynamic-to-circular.ts",
+            "src/circular.ts",
+            "src/index.ts"
+          ],
           "valid": false,
           "rules": [
             {
@@ -62,14 +68,17 @@
           "coreModule": false,
           "followable": true,
           "couldNotResolve": false,
-          "dependencyTypes": [
-            "local"
-          ],
+          "dependencyTypes": ["local"],
           "module": "./circular",
           "moduleSystem": "es6",
           "dynamic": true,
           "matchesDoNotFollow": false,
           "circular": true,
+          "cycle": [
+            "src/circular.ts",
+            "src/index.ts",
+            "src/dynamic-to-circular.ts"
+          ],
           "valid": false,
           "rules": [
             {
@@ -98,7 +107,12 @@
         "rule": {
           "severity": "info",
           "name": "no-circular"
-        }
+        },
+        "cycle": [
+          "src/index.ts",
+          "src/dynamic-to-circular.ts",
+          "src/circular.ts"
+        ]
       },
       {
         "from": "src/index.ts",
@@ -106,7 +120,12 @@
         "rule": {
           "severity": "info",
           "name": "no-circular"
-        }
+        },
+        "cycle": [
+          "src/dynamic-to-circular.ts",
+          "src/circular.ts",
+          "src/index.ts"
+        ]
       }
     ],
     "error": 0,
@@ -118,11 +137,7 @@
       "args": "src",
       "combinedDependencies": false,
       "externalModuleResolutionStrategy": "node_modules",
-      "moduleSystems": [
-        "amd",
-        "cjs",
-        "es6"
-      ],
+      "moduleSystems": ["amd", "cjs", "es6"],
       "preserveSymlinks": false,
       "tsPreCompilationDeps": false
     },

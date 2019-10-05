@@ -193,7 +193,11 @@
                         "module": "./B",
                         "moduleSystem": "es6",
                         "valid": true,
-                        "circular": true
+                        "circular": true,
+                        "cycle": [
+                            "test/extract/fixtures/ts-circular-with-types/B.ts",
+                            "test/extract/fixtures/ts-circular-with-types/A.ts"
+                        ]
                     }
                 ],
                 "valid": true
@@ -214,7 +218,11 @@
                         "module": "./A",
                         "moduleSystem": "es6",
                         "valid": true,
-                        "circular": true
+                        "circular": true,
+                        "cycle": [
+                            "test/extract/fixtures/ts-circular-with-types/A.ts",
+                            "test/extract/fixtures/ts-circular-with-types/B.ts"
+                        ]
                     }
                 ],
                 "valid": true
