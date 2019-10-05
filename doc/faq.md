@@ -256,6 +256,12 @@ _externalModuleResolutionStrategy_ key:
 > For earlier versions (up to 4.6.1) you did have to pass a webpack config that
 > that had the pnp resolver plugin configured.
 
+### Q: dependency-cruiser detected a circular dependency. How can I see (one of the) cycles that dependency-cruiser saw?
+
+**A**: Upgrade to version 5.2.0 or higher - from that version on dependency-cruiser
+emits the circular path in the _err_, _err-long_, _err-html_ and
+_teamcity_ reporters.
+
 ## Expanding dependency-cruiser
 
 ### Q: How do I add a new output format?
