@@ -54,10 +54,14 @@ function reportViolatedRules(pRuleSetUsed, pViolations) {
   ).concat(reportAllowedRule(_get(pRuleSetUsed, "allowed", []), pViolations));
 }
 
+function determineTo(pViolation) {
+  return pViolation.cycle ? pViolation.cycle.join(" -> ") : pViolation.to;
+}
+
 function bakeViolationMessage(pViolation) {
   return pViolation.from === pViolation.to
     ? pViolation.from
-    : `${pViolation.from} -> ${pViolation.to}`;
+    : `${pViolation.from} -> ${determineTo(pViolation)}`;
 }
 function reportViolations(pViolations) {
   return pViolations.map(pViolation =>
