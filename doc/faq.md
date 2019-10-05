@@ -75,10 +75,10 @@ To ensure it _does_ detect them:
 
 ### Q: The graph dependency-cruiser generates is humoungous, and I can't follow the lines very well what can I do?
 
-**A**: Usually you don't need to see all modules and dependencies that make up
-your app. It can e.g. be helpfull to make separate graphs for each of the `packages`
-in your monorepo. That won't solve all readability issues, though, so dependency-cruiser
-has a few options to get you sorted:
+**A**: Usually you don't need to see _all_ modules and dependencies that make up
+your app at the same time. It can e.g. be helpfull to make separate graphs for
+each of the `packages` in your monorepo. That won't solve all readability issues,
+though, so dependency-cruiser has a few options to get you sorted:
 
 #### Filtering
 

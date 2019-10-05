@@ -2,10 +2,11 @@
 
 The output format contains two sections:
 
-- `dependencies` - an array of all sources dependency-cruiser visited, each with
+- `modules` - an array of all sources dependency-cruiser visited, each with
   the sources they directly depend upon
 - `summary` - a summary with meta information like how many sources got visited,
-  how many violations it found and an array of the actual violations
+  how many violations it found, array of the actual violations and the rule set
+  used in the cruise.
 
 A [json schema](../src/extract/results-schema.json) describes the output format
 attributes in painstaking detail. The schema is accurate and actual - each build

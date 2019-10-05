@@ -13,16 +13,21 @@ const depcruise = require("dependency-cruiser").cruise;
 let dependencies = depcruise(["src"]).output;
 ```
 
-This will return an object
+With no other parameters than this, it will return an javascript object with
+a shape like this:
 
 ```javascript
 {
-    dependencies: ... the dependencies
-    summary: {}
+    output: {
+        modules: ... the modules with their dependencies
+        summary: {}
+    },
+    exitCode: 0
 }
+
 ```
 
-See [dependency-cruiser's json output format](output-format.md) for details.
+The object in the `output` attribute is in [dependency-cruiser's json output format](output-format.md).
 
 ### Parameters
 
