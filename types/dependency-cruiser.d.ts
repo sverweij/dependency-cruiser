@@ -410,14 +410,14 @@ export interface ICruiseResult {
   /**
    * A list of modules, with for each module the modules it depends upon
    */
-  modules: Module[];
+  modules: IModule[];
   /**
    * Data summarizing the found dependencies
    */
-  summary: Summary;
+  summary: ISummary;
 }
 
-export interface Module {
+export interface IModule {
   /**
    * Whether or not this is a node.js core module
    */
@@ -427,7 +427,7 @@ export interface Module {
    * file name or core module. 'false' in all other cases.
    */
   couldNotResolve?: boolean;
-  dependencies:     Dependency[];
+  dependencies: IDependency[];
   /**
    * the type of inclusion - local, core, unknown (= we honestly don't know), undetermined (=
    * we didn't bother determining it) or one of the npm dependencies defined in a package.jsom
@@ -458,11 +458,11 @@ export interface Module {
    * An array of objects that tell whether this module is 'reachable', and according to rule
    * in which this reachability was defined
    */
-  reachable?: ReachableType[];
+  reachable?: IReachableType[];
   /**
    * an array of rules violated by this module - left out if the module is valid
    */
-  rules?: RuleSummaryType[];
+  rules?: IRuleSummaryType[];
   /**
    * The (resolved) file name of the module, e.g. 'src/main/index.js'
    */
@@ -474,7 +474,7 @@ export interface Module {
   valid: boolean;
 }
 
-export interface Dependency {
+export interface IDependency {
   /**
    * 'true' if following this dependency will ultimately return to the source, false in all
    * other cases
@@ -525,7 +525,7 @@ export interface Dependency {
   /**
    * The name of the module as it appeared in the source code, e.g. './main'
    */
-  module:       string;
+  module: string;
   moduleSystem: ModuleSystemType;
   /**
    * The (resolved) file name of the module, e.g. 'src/main//index.js'
@@ -534,7 +534,7 @@ export interface Dependency {
   /**
    * an array of rules violated by this dependency - left out if the dependency is valid
    */
-  rules?: RuleSummaryType[];
+  rules?: IRuleSummaryType[];
   /**
    * 'true' if this dependency violated a rule; 'false' in all other cases. The violated rule
    * will be in the 'rule' object at the same level.
@@ -543,28 +543,28 @@ export interface Dependency {
 }
 
 /**
-* If there was a rule violation (valid === false), this object contains the name of the
-* rule and severity of violating it.
-*/
-export interface RuleSummaryType {
+ * If there was a rule violation (valid === false), this object contains the name of the
+ * rule and severity of violating it.
+ */
+export interface IRuleSummaryType {
   /**
    * The (short, eslint style) name of the violated rule. Typically something like
    * 'no-core-punycode' or 'no-outside-deps'.
    */
-  name:     string;
+  name: string;
   severity: SeverityType;
 }
 
 /**
-* How severe a violation of a rule is. The 'error' severity will make some reporters return
-* a non-zero exit code, so if you want e.g. a build to stop when there's a rule violated:
-* use that. The absence of the 'ignore' severity here is by design; ignored rules don't
-* show up in the output.
-*
-* Severity to use when a dependency is not in the 'allowed' set of rules. Defaults to 'warn'
-*/
+ * How severe a violation of a rule is. The 'error' severity will make some reporters return
+ * a non-zero exit code, so if you want e.g. a build to stop when there's a rule violated:
+ * use that. The absence of the 'ignore' severity here is by design; ignored rules don't
+ * show up in the output.
+ *
+ * Severity to use when a dependency is not in the 'allowed' set of rules. Defaults to 'warn'
+ */
 
-export interface ReachableType {
+export interface IReachableType {
   /**
    * The name of the rule where the reachability was defined
    */
@@ -577,9 +577,9 @@ export interface ReachableType {
 }
 
 /**
-* Data summarizing the found dependencies
-*/
-export interface Summary {
+ * Data summarizing the found dependencies
+ */
+export interface ISummary {
   /**
    * the number of errors in the dependencies
    */
@@ -587,12 +587,12 @@ export interface Summary {
   /**
    * the number of informational level notices in the dependencies
    */
-  info:        number;
-  optionsUsed: OptionsType;
+  info: number;
+  optionsUsed: IOptionsType;
   /**
    * rules used in the cruise
    */
-  ruleSetUsed?: RuleSetUsed;
+  ruleSetUsed?: IRuleSetUsed;
   /**
    * the number of modules cruised
    */
@@ -605,7 +605,7 @@ export interface Summary {
    * A list of violations found in the dependencies. The dependencies themselves also contain
    * this information, this summary is here for convenience.
    */
-  violations: ViolationType[];
+  violations: IViolationType[];
   /**
    * the number of warnings in the dependencies
    */
@@ -613,22 +613,22 @@ export interface Summary {
 }
 
 /**
-* the (command line) options used to generate the dependency-tree
-*/
-export interface OptionsType {
+ * the (command line) options used to generate the dependency-tree
+ */
+export interface IOptionsType {
   /**
    * arguments passed on the command line
    */
-  args?:                 string;
+  args?: string;
   combinedDependencies?: boolean;
   /**
    * Criteria for modules to include, but not to follow further
    */
-  doNotFollow?: DoNotFollow;
+  doNotFollow?: IDoNotFollow;
   /**
    * Criteria for dependencies to exclude
    */
-  exclude?: Exclude;
+  exclude?: IExclude;
   /**
    * What external module resolution strategy to use. Defaults to 'node_modules'
    */
@@ -640,31 +640,31 @@ export interface OptionsType {
   /**
    * The maximum cruise depth specified. 0 means no maximum specified
    */
-  maxDepth?:      number;
+  maxDepth?: number;
   moduleSystems?: ModuleSystemType[];
   /**
    * File the output was written to ('-' for stdout)
    */
-  outputTo?:         string;
-  outputType?:       OutputType;
-  prefix?:           string;
+  outputTo?: string;
+  outputType?: OutputType;
+  prefix?: string;
   preserveSymlinks?: boolean;
   /**
    * The rules file used to validate the dependencies (if any)
    */
-  rulesFile?:            string;
-  tsConfig?:             TsConfig;
+  rulesFile?: string;
+  tsConfig?: ITsConfig;
   tsPreCompilationDeps?: boolean;
   /**
    * The webpack configuration options used for the cruise
    */
-  webpackConfig?: WebpackConfig;
+  webpackConfig?: IWebpackConfig;
 }
 
 /**
-* Criteria for modules to include, but not to follow further
-*/
-export interface DoNotFollow {
+ * Criteria for modules to include, but not to follow further
+ */
+export interface IDoNotFollow {
   /**
    * an array of dependency types to include, but not follow further
    */
@@ -676,9 +676,9 @@ export interface DoNotFollow {
 }
 
 /**
-* Criteria for dependencies to exclude
-*/
-export interface Exclude {
+ * Criteria for dependencies to exclude
+ */
+export interface IExclude {
   /**
    * a boolean indicating whether or not to exclude dynamic dependencies
    */
@@ -689,14 +689,14 @@ export interface Exclude {
   path?: string;
 }
 
-export interface TsConfig {
+export interface ITsConfig {
   fileName?: string;
 }
 
 /**
-* The webpack configuration options used for the cruise
-*/
-export interface WebpackConfig {
+ * The webpack configuration options used for the cruise
+ */
+export interface IWebpackConfig {
   /**
    * The arguments used
    */
@@ -712,20 +712,20 @@ export interface WebpackConfig {
 }
 
 /**
-* The 'env' parameters passed
-*/
+ * The 'env' parameters passed
+ */
 export type Env = { [key: string]: any } | string;
 
 /**
-* rules used in the cruise
-*/
-export interface RuleSetUsed {
+ * rules used in the cruise
+ */
+export interface IRuleSetUsed {
   /**
    * A list of rules that describe dependencies that are allowed. dependency-cruiser will emit
    * the warning message 'not-in-allowed' for each dependency that does not at least meet one
    * of them.
    */
-  allowed?: RuleType[];
+  allowed?: IRuleType[];
   /**
    * Severity to use when a dependency is not in the 'allowed' set of rules. Defaults to 'warn'
    */
@@ -734,20 +734,20 @@ export interface RuleSetUsed {
    * A list of rules that describe dependencies that are not allowed. dependency-cruiser will
    * emit a separate error (warning/ informational) messages for each violated rule.
    */
-  forbidden?: ForiddenRuleType[];
+  forbidden?: IForiddenRuleType[];
 }
 
-export interface RuleType {
+export interface IRuleType {
   comment?: string;
-  from:     FromRestrictionType;
-  to:       ToRestrictionType;
+  from: IFromRestrictionType;
+  to: IToRestrictionType;
 }
 
 /**
-* Criteria an end of a dependency should match to be caught by this rule. Leave it empty if
-* you want any module to be matched.
-*/
-export interface FromRestrictionType {
+ * Criteria an end of a dependency should match to be caught by this rule. Leave it empty if
+ * you want any module to be matched.
+ */
+export interface IFromRestrictionType {
   /**
    * Whether or not to match when the module is an orphan (= has no incoming or outgoing
    * dependencies). When this property it is part of a rule, dependency-cruiser will ignore
@@ -765,10 +765,10 @@ export interface FromRestrictionType {
 }
 
 /**
-* Criteria the 'to' end of a dependency should match to be caught by this rule. Leave it
-* empty if you want any module to be matched.
-*/
-export interface ToRestrictionType {
+ * Criteria the 'to' end of a dependency should match to be caught by this rule. Leave it
+ * empty if you want any module to be matched.
+ */
+export interface IToRestrictionType {
   /**
    * Whether or not to match when following to the to will ultimately end up in the from.
    */
@@ -818,31 +818,31 @@ export interface ToRestrictionType {
   reachable?: boolean;
 }
 
-export interface ForiddenRuleType {
+export interface IForiddenRuleType {
   /**
    * You can use this field to document why the rule is there.
    */
   comment?: string;
-  from:     FromRestrictionType;
+  from: IFromRestrictionType;
   /**
    * A short name for the rule - will appear in reporters to enable customers to quickly
    * identify a violated rule. Try to keep them short, eslint style. E.g. 'not-to-core' for a
    * rule forbidding dependencies on core modules, or 'not-to-unresolvable' for one that
    * prevents dependencies on modules that probably don't exist.
    */
-  name?:     string;
+  name?: string;
   severity?: SeverityType;
-  to:        ToRestrictionType;
+  to: IToRestrictionType;
 }
 
-export interface ViolationType {
+export interface IViolationType {
   /**
    * The circular path if the violation was about circularity
    */
   cycle?: string[];
-  from:   string;
-  rule:   RuleSummaryType;
-  to:     string;
+  from: string;
+  rule: IRuleSummaryType;
+  to: string;
 }
 
 export interface IReporterOutput {
