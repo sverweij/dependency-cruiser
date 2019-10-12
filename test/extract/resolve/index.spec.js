@@ -318,4 +318,24 @@ describe("extract/resolve/index", () => {
       resolved: "shared"
     });
   });
+
+  it("strips query parameters from file names", () => {
+    expect(
+      resolve(
+        {
+          moduleName: "./hots.js?blah",
+          moduleSystem: "es6"
+        },
+        path.join(__dirname, "fixtures"),
+        path.join(__dirname, "fixtures", "resolve"),
+        normalizeResolveOptions({}, {})
+      )
+    ).to.deep.equal({
+      coreModule: false,
+      couldNotResolve: false,
+      dependencyTypes: ["local"],
+      followable: true,
+      resolved: "resolve/hots.js"
+    });
+  });
 });
