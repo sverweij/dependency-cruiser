@@ -94,7 +94,7 @@ Dependency cruiser used on itself. node_modules left out to keep it concise.
 
 [sverweij/state-machine-cat](https://github.com/sverweij/state-machine-cat) - an interpreter for writing nice state diagrams.
 
-<img width="912" alt="state-machine-cat without external dependencies" src="real-world-samples/state-machine-cat-without-external-deps.png">
+<img width="1177" alt="state-machine-cat without external dependencies" src="real-world-samples/state-machine-cat-without-external-deps.png">
 
 ### mscgen.js
 
