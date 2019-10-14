@@ -1,5 +1,6 @@
 const enhancedResolve = require("enhanced-resolve");
 const pathToPosix = require("../utl/pathToPosix");
+const stripQueryParams = require("../utl/stripQueryParams");
 
 let gResolver = null;
 let gInitialized = {};
@@ -36,12 +37,14 @@ function resolve(
 ) {
   init(pResolveOptions, pCachingContext);
 
-  return gResolver.resolveSync(
-    {},
-    // lookupStartPath
-    pathToPosix(pFileDir),
-    // request
-    pModuleName
+  return stripQueryParams(
+    gResolver.resolveSync(
+      {},
+      // lookupStartPath
+      pathToPosix(pFileDir),
+      // request
+      pModuleName
+    )
   );
 }
 
