@@ -9,6 +9,7 @@ export type OutputType =
   | "ddot"
   | "csv"
   | "err"
+  | "err-long"
   | "err-html"
   | "teamcity";
 
