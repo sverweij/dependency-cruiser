@@ -1,9 +1,9 @@
-import { IFlattenedRuleSetType } from "./rule-set";
+import { IFlattenedRuleSet } from "./rule-set";
 import { DependencyType, ModuleSystemType, OutputType } from "./shared-types";
 
 export type ExternalModuleResolutionStrategyType = "node_modules" | "yarn-pnp";
 
-export interface IConfigurationObject extends IFlattenedRuleSetType {
+export interface IRuleSetType extends IFlattenedRuleSet {
   /**
    * A (node require resolvable) file path to a dependency-cruiser config
    * that serves as the base for this one...
@@ -15,11 +15,6 @@ export interface IConfigurationObject extends IFlattenedRuleSetType {
    */
   options?: ICruiseOptions;
 }
-
-/**
- * @deprecated use IConfigurationObject in stead
- */
-export interface IRuleSetType extends IConfigurationObject {}
 
 export interface IDoNotFollowType {
   /**

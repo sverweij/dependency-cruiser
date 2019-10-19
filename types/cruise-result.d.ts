@@ -1,5 +1,5 @@
 import { ICruiseOptions } from "./cruise-options";
-import { IFlattenedRuleSetType } from "./rule-set";
+import { IFlattenedRuleSet } from "./rule-set";
 import { DependencyType, ModuleSystemType, SeverityType } from "./shared-types";
 
 export interface ICruiseResult {
@@ -187,7 +187,7 @@ export interface ISummary {
   /**
    * rules used in the cruise
    */
-  ruleSetUsed?: IFlattenedRuleSetType;
+  ruleSetUsed?: IFlattenedRuleSet;
   /**
    * the number of modules cruised
    */

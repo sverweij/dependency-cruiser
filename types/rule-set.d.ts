@@ -197,7 +197,7 @@ export interface IReachabilityForbiddenRuleType {
   to: IReachabilityToRestrictionType;
 }
 
-export interface IFlattenedRuleSetType {
+export interface IFlattenedRuleSet {
   /**
    * A list of rules that describe dependencies that are not allowed.
    * dependency-cruiser will emit a separate error (warning/ informational)
