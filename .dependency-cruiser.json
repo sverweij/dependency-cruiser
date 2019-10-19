@@ -146,10 +146,10 @@
     // "moduleSystems": ["amd", "cjs", "es6", "tsd"],
 
     /* prefix for links in html and svg output (e.g. https://github.com/you/yourrepo/blob/develop/) */
-    "prefix": "https://github.com/sverweij/dependency-cruiser/blob/develop/"
+    "prefix": "https://github.com/sverweij/dependency-cruiser/blob/develop/",
 
     /* if true detect dependencies that only exist before typescript-to-javascript compilation */
-    // "tsPreCompilationDeps": false,
+    "tsPreCompilationDeps": true
 
     /* if true leave symlinks untouched, otherwise use the realpath */
     // "preserveSymlinks": false,
