@@ -446,6 +446,8 @@
         },
         "maxDepth": {
           "type": "number",
+          "minimum": 0,
+          "maximum": 99,
           "description": "The maximum cruise depth specified. 0 means no maximum specified"
         },
         "moduleSystems": {

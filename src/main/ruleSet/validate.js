@@ -55,7 +55,7 @@ function checkRuleSafety(pRule) {
  * Throws an Error in all other cases.
  *
  * Validations:
- * - the ruleset adheres to the [rule set json schema](jsonschema.json)
+ * - the ruleset adheres to the [config json schema](config-schema.json)
  * - any regular expression in the rule set is 'safe' (~= won't be too slow)
  *
  * @param  {object} pConfiguration The configuration to validate

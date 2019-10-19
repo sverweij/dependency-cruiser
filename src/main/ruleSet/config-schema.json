@@ -95,6 +95,12 @@
           "type": "string",
           "description": "a regular expression for modules to cruise; anything outside it will be skipped"
         },
+        "maxDepth": {
+          "type": "number",
+          "minimum": 0,
+          "maximum": 99,
+          "description": "The maximum cruise depth specified. 0 means no maximum specified"
+        },
         "moduleSystems": {
           "type": "array",
           "description": "list of module systems to cruise. Defaults to [amd, cjs, es6]",
