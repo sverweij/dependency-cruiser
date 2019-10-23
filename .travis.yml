@@ -6,6 +6,7 @@ node_js:
   - "8"
   - "10"
   - "12"
+  - "13"
 
 before_install:
   - wget https://github.com/sharkdp/hyperfine/releases/download/v1.5.0/hyperfine_1.5.0_amd64.deb
@@ -22,7 +23,8 @@ before_script:
 script:
   - npm run depcruise
   - "npm run test:glob && npm run test:cover"
-  - "if test `node --version | cut -c 2,3` = 12; then npm run lint && npm run test:integration && npm run test:load:short; fi"
+  - "if test `node --version | cut -c 2,3` = 13; then npm run lint && npm run test:integration && npm run test:load:short; fi"
+  - "if test `node --version | cut -c 2,3` = 12; then npm run test:integration; fi"
   - "if test `node --version | cut -c 2,3` = 10; then npm run test:integration; fi"
   - "if test `node --version | cut -c 2,2` = 8; then npm run test:integration; fi"
 
