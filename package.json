@@ -195,7 +195,7 @@
     "types/**"
   ],
   "engines": {
-    "node": "^8.10||^10||^12"
+    "node": "^8.10||^10||^12||^13"
   },
   "supportedTranspilers": {
     "coffee-script": ">=1.0.0 <2.0.0",
