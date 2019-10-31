@@ -94,3 +94,4 @@ try {
   process.stderr.write(e.message);
   process.exitCode = 1;
 }
+/* eslint-disable node/shebang */
