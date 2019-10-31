@@ -1,4 +1,5 @@
 #!/usr/bin/env node
+/* eslint-disable node/shebang */
 const validateNodeEnv = require("../src/cli/validateNodeEnv");
 
 try {
@@ -94,4 +95,3 @@ try {
   process.stderr.write(e.message);
   process.exitCode = 1;
 }
-/* eslint-disable node/shebang */
