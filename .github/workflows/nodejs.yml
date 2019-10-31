@@ -45,11 +45,13 @@ jobs:
       run: |
         node --version
         npm install
+      shell: bash
       env:
         CI: true
     - name: run check
       run: |
         node --version
         npm run check
+      shell: bash
       env:
         CI: true
