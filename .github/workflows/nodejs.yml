@@ -29,8 +29,43 @@ jobs:
           platform: windows-latest
         - node-version: 10.x
           platform: windows-latest
-        - node-version: 12.x
+        - node-version: 13.x
           platform: windows-latest
+
+    runs-on: ${{matrix.platform}}
+
+    steps:
+    - name: checkout
+      uses: actions/checkout@v1
+    - name: set up node ${{matrix.node-version}}@${{matrix.platform}}
+      uses: actions/setup-node@v1
+      with:
+        node-version: ${{matrix.node-version}}
+    - name: install
+      run: |
+        node --version
+        npm install
+      shell: bash
+      env:
+        CI: true
+    - name: run check
+      run: |
+        node --version
+        npm run check
+      shell: bash
+      env:
+        CI: true
+
+  yarn-pnp-integration:
+
+    strategy:
+      fail-fast: false
+      matrix:
+        node-version: [10.x, 12.x]
+        platform:
+          - ubuntu-latest
+          - macos-latest
+          - windows-latest
 
     runs-on: ${{matrix.platform}}
 
@@ -51,7 +86,7 @@ jobs:
     - name: run check
       run: |
         node --version
-        npm run check
+        npm run test:integration
       shell: bash
       env:
         CI: true
