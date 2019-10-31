@@ -1,25 +1,57 @@
 name: Node CI
 
-on: [push]
+on:
+  push:
+      branches:
+      - master
+      - develop
+  pull_request:
 
 jobs:
-  build:
+  check:
 
     runs-on: ubuntu-latest
 
     strategy:
+      fail-fast: false
       matrix:
-        node-version: [8.x, 10.x, 12.x, 13.x]
+        node-version: [^8.12, 10.x, 12.x, 13.x]
+        platform:
+          - ubuntu-latest
+          - macos-latest
+          - windows-latest
+        exclude:
+        - node-version: ^8.12
+          platform: 
+            - macos-latest
+            - windows-latest
+        - node-version: 10.x
+          platform: 
+            - macos-latest
+            - windows-latest
+        - node-version: 12.x
+          platform: 
+            - macos-latest
+            - windows-latest
+
+    runs-on: ${{matrix.platform}}
 
     steps:
-    - uses: actions/checkout@v1
-    - name: Use Node.js ${{ matrix.node-version }}
+    - name: checkout
+      uses: actions/checkout@v1
+    - name: set up node ${{matrix.node-version}}@${{matrix.platform}}
       uses: actions/setup-node@v1
       with:
         node-version: ${{ matrix.node-version }}
-    - name: npm install, build, and test
+    - name: install
       run: |
+        node --version
         npm install
+      env:
+        CI: true
+    - name: run check
+      run: |
+        node --version
         npm run check
       env:
         CI: true
