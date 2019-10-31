@@ -22,17 +22,17 @@ jobs:
           - windows-latest
         exclude:
         - node-version: ^8.12
-          platform: 
-            - macos-latest
-            - windows-latest
+          platform: macos-latest
         - node-version: 10.x
-          platform: 
-            - macos-latest
-            - windows-latest
+          platform: macos-latest
         - node-version: 12.x
-          platform: 
-            - macos-latest
-            - windows-latest
+          platform: macos-latest
+        - node-version: ^8.12
+          platform: windows-latest
+        - node-version: 10.x
+          platform: windows-latest
+        - node-version: 12.x
+          platform: windows-latest
 
     runs-on: ${{matrix.platform}}
 
