@@ -85,7 +85,7 @@
     "scm:push:gitlab-mirror:commits": "git push gitlab-mirror",
     "scm:push:gitlab-mirror:tags": "git push --tags gitlab-mirror",
     "scm:stage": "git add .",
-    "test": "mocha --timeout 4000 test\/\\*\\*\/\\*.spec.js",
+    "test": "mocha --timeout 4000 \"test/**/*.spec.js\"",
     "test:cover": "nyc --check-coverage npm test",
     "test:glob": "set -f && test \"`bin/dependency-cruise.js test/extract/fixtures/gather-globbing/packages/**/src/**/*.js | grep \"no dependency violations found\"`\" = \"✔ no dependency violations found (6 modules, 0 dependencies cruised)\"",
     "test:integration": "npm-run-all test:integration:cleanup test:integration:pack test:integration:copy test:integration:install test:integration:run test:integration:test test:integration:cleanup",
