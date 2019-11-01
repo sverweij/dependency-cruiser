@@ -15,16 +15,9 @@ jobs:
       matrix:
         node-version: [^8.12, 10.x, 12.x, 13.x]
         platform:
-          - ubuntu-latest
-          - macos-latest
+          # - ubuntu-latest
           - windows-latest
         exclude:
-        - node-version: ^8.12
-          platform: macos-latest
-        - node-version: 10.x
-          platform: macos-latest
-        - node-version: 12.x
-          platform: macos-latest
         - node-version: ^8.12
           platform: windows-latest
         - node-version: 10.x
@@ -64,7 +57,6 @@ jobs:
         node-version: [10.x, 12.x]
         platform:
           - ubuntu-latest
-          - macos-latest
 
     runs-on: ${{matrix.platform}}
 
