@@ -13,17 +13,10 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        node-version: [^8.12, 10.x, 12.x, 13.x]
+        node-version: [13.x]
         platform:
           - ubuntu-latest
           - windows-latest
-        exclude:
-        - node-version: ^8.12
-          platform: windows-latest
-        - node-version: 10.x
-          platform: windows-latest
-        - node-version: 13.x
-          platform: windows-latest
 
     runs-on: ${{matrix.platform}}
 
@@ -44,7 +37,8 @@ jobs:
     - name: run check
       run: |
         node --version
-        npm run check
+        npm run build
+        npm run lint
       shell: bash
       env:
         CI: true

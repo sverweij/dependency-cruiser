@@ -1,0 +1,51 @@
+name: lint and test
+
+on:
+  push:
+      branches:
+      - master
+      - develop
+  pull_request:
+
+jobs:
+  check:
+
+    strategy:
+      fail-fast: false
+      matrix:
+        node-version: [^8.12, 10.x, 12.x, 13.x]
+        platform:
+          - ubuntu-latest
+          - windows-latest
+        exclude:
+        - node-version: ^8.12
+          platform: windows-latest
+        - node-version: 10.x
+          platform: windows-latest
+        - node-version: 13.x
+          platform: windows-latest
+
+    runs-on: ${{matrix.platform}}
+
+    steps:
+    - name: checkout
+      uses: actions/checkout@v1
+    - name: set up node ${{matrix.node-version}}@${{matrix.platform}}
+      uses: actions/setup-node@v1
+      with:
+        node-version: ${{matrix.node-version}}
+    - name: install
+      run: |
+        node --version
+        npm install
+      shell: bash
+      env:
+        CI: true
+    - name: run tests
+      run: |
+        node --version
+        npm run build
+        npm run test:cover
+      shell: bash
+      env:
+        CI: true
