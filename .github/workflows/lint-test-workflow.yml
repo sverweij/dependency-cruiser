@@ -51,7 +51,7 @@ jobs:
       run: |
         node --version
         npm run lint
-      if: matrix.platform == ubuntu-latest && matrix.node-version == 13.x
+      if: matrix.platform == 'ubuntu-latest' && matrix.node-version == '13.x'
       shell: bash
       env:
         CI: true
