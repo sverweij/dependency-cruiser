@@ -9,9 +9,8 @@ test_async_node_13:
   script:
     - npm install
     - npm run lint
-    - npm run lint:types
     - npm run depcruise
-    - npm run test:integration
+    # - npm run test:integration # yarn(1) pnp doesn't work on node 13 yet
     - npm run test:cover
   except:
     - tags

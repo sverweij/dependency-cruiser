@@ -3,8 +3,6 @@ sudo: required
 language: node_js
 
 node_js:
-  - "8"
-  - "10"
   - "12"
   - "13"
 
@@ -26,8 +24,6 @@ script:
   - "npm run test:glob && npm run test:cover"
   - "if test `node --version | cut -c 2,3` = 13; then npm run lint && npm run test:load:short; fi"
   - "if test `node --version | cut -c 2,3` = 12; then npm run test:integration; fi"
-  - "if test `node --version | cut -c 2,3` = 10; then npm run test:integration; fi"
-  - "if test `node --version | cut -c 2,2` = 8; then npm run test:integration; fi"
 
 after_script:
   - ./cc-test-reporter after-build --exit-code $TRAVIS_TEST_RESULT

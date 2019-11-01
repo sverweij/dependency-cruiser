@@ -1,0 +1,71 @@
+name: linting & test coverage
+
+on:
+  push:
+      branches:
+      - master
+      - develop
+  pull_request:
+
+jobs:
+
+  test:
+
+    strategy:
+      fail-fast: false
+      matrix:
+        node-version: 
+          - ^8.12
+          - 10.x
+          - 12.x
+          - 13.x
+        platform:
+          - ubuntu-latest
+          - windows-latest
+        exclude:
+        - node-version: ^8.12
+          platform: windows-latest
+        - node-version: 10.x
+          platform: windows-latest
+        - node-version: 13.x
+          platform: windows-latest
+
+    runs-on: ${{matrix.platform}}
+
+    steps:
+    - name: checkout
+      uses: actions/checkout@v1
+    - name: set up node ${{matrix.node-version}}@${{matrix.platform}}
+      uses: actions/setup-node@v1
+      with:
+        node-version: ${{matrix.node-version}}
+    - name: install & build
+      run: |
+        node --version
+        npm install
+        npm run build
+      shell: bash
+      env:
+        CI: true
+    - name: lint (run on one platform only)
+      run: |
+        node --version
+        npm run lint
+      if: matrix.platform == 'ubuntu-latest' && matrix.node-version == '13.x'
+      shell: bash
+      env:
+        CI: true
+    - name: dependency cruise
+      run: |
+        node --version
+        npm run depcruise
+      shell: bash
+      env:
+        CI: true
+    - name: test coverage
+      run: |
+        node --version
+        npm run test:cover
+      shell: bash
+      env:
+        CI: true
