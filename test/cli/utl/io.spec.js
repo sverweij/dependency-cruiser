@@ -19,6 +19,7 @@ const removeDammit = pFileName => {
   } catch (e) {
     // probably files didn't exist in the first place
     // so ignore the exception
+    process.stderr.write(`|>|>|>|> could not unlink ${pFileName} - ${e}\n`);
   }
 };
 
@@ -28,7 +29,9 @@ describe("cli/utl/io", () => {
     fs.writeFileSync(OUTFILE, "{}", "utf8");
   });
 
-  after("tear down", () => removeDammit(OUTFILE));
+  after("tear down", () => {
+    removeDammit(OUTFILE);
+  });
 
   it("getInStream('-') is a readable stream", () => {
     expect(getInStream("-") instanceof stream.Readable).to.be.true;
