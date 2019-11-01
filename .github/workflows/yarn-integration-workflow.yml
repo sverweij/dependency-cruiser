@@ -26,7 +26,7 @@ jobs:
     - name: set up node ${{matrix.node-version}}@${{matrix.platform}}
       uses: actions/setup-node@v1
       with:
-        node-version: ${{ matrix.node-version }}
+        node-version: ${{matrix.node-version}}
     - name: install
       run: |
         node --version
@@ -34,7 +34,7 @@ jobs:
       shell: bash
       env:
         CI: true
-    - name: run check
+    - name: forbidden dependency checks in a yarn pnp environment
       run: |
         node --version
         npm run test:integration
