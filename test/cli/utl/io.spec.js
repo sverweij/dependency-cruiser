@@ -15,11 +15,16 @@ const OUTFILE = path.join(
 
 const removeDammit = pFileName => {
   try {
+    process.stdout.write(`|>|>|>|> unlinkin ${pFileName} starting\n`);
     fs.unlinkSync(pFileName);
+    process.stdout.write(`|>|>|>|> unlinkin ${pFileName} done\n`);
   } catch (e) {
     // probably files didn't exist in the first place
     // so ignore the exception
     process.stdout.write(`|>|>|>|> could not unlink ${pFileName} - ${e}\n`);
+  } finally {
+    // hard ignore as well
+    process.stdout.write(`|>|>|>|> finally!\n`);
   }
 };
 
@@ -33,9 +38,9 @@ describe("cli/utl/io", () => {
   });
 
   after("tear down", () => {
-    process.stdout.write(`|>|>|> tear down - start`);
+    process.stdout.write(`|>|>|> tear down - start\n`);
     removeDammit(OUTFILE);
-    process.stdout.write(`|>|>|> tear down - done dee dee done`);
+    process.stdout.write(`|>|>|> tear down - done dee dee done\n`);
   });
 
   it("getInStream('-') is a readable stream", () => {
