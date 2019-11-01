@@ -1,4 +1,4 @@
-name: lint and test
+name: lint
 
 on:
   push:
@@ -8,7 +8,7 @@ on:
   pull_request:
 
 jobs:
-  check:
+  lint:
 
     strategy:
       fail-fast: false
