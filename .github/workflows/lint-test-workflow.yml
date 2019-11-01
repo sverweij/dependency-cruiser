@@ -22,6 +22,7 @@ jobs:
         platform:
           - ubuntu-latest
           - windows-latest
+          - macos-latest
         # exclude:
         # - node-version: ^8.12
         #   platform: windows-latest
