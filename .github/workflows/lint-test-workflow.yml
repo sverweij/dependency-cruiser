@@ -9,7 +9,7 @@ on:
 
 jobs:
 
-  test:
+  check:
 
     strategy:
       fail-fast: false
