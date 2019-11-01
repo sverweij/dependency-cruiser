@@ -19,18 +19,23 @@ const removeDammit = pFileName => {
   } catch (e) {
     // probably files didn't exist in the first place
     // so ignore the exception
-    process.stderr.write(`|>|>|>|> could not unlink ${pFileName} - ${e}\n`);
+    process.stdout.write(`|>|>|>|> could not unlink ${pFileName} - ${e}\n`);
   }
 };
 
 describe("cli/utl/io", () => {
   before("set up", () => {
+    process.stdout.write(`|>|>|> set up`);
     removeDammit(OUTFILE);
+    process.stdout.write(`|>|>|> set up - removed`);
     fs.writeFileSync(OUTFILE, "{}", "utf8");
+    process.stdout.write(`|>|>|> set up - written`);
   });
 
   after("tear down", () => {
+    process.stdout.write(`|>|>|> tear down - start`);
     removeDammit(OUTFILE);
+    process.stdout.write(`|>|>|> tear down - done dee dee done`);
   });
 
   it("getInStream('-') is a readable stream", () => {
