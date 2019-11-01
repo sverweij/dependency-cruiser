@@ -47,7 +47,7 @@ jobs:
       shell: bash
       env:
         CI: true
-    - name: lint 
+    - name: lint (run on one platform only)
       run: |
         node --version
         npm run lint
@@ -55,10 +55,16 @@ jobs:
       shell: bash
       env:
         CI: true
-    - name: run coverage
+    - name: dependency cruise
       run: |
         node --version
-        npm run build
+        npm run depcruise
+      shell: bash
+      env:
+        CI: true
+    - name: test coverage
+      run: |
+        node --version
         npm run test:cover
       shell: bash
       env:
