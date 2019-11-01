@@ -1,4 +1,4 @@
-name: test coverage
+name: linting & test coverage
 
 on:
   push:
@@ -8,6 +8,41 @@ on:
   pull_request:
 
 jobs:
+  lint:
+
+    strategy:
+      fail-fast: false
+      matrix:
+        node-version: [13.x]
+        platform:
+          - ubuntu-latest
+          - windows-latest
+
+    runs-on: ${{matrix.platform}}
+
+    steps:
+    - name: checkout
+      uses: actions/checkout@v1
+    - name: set up node ${{matrix.node-version}}@${{matrix.platform}}
+      uses: actions/setup-node@v1
+      with:
+        node-version: ${{matrix.node-version}}
+    - name: install
+      run: |
+        node --version
+        npm install
+      shell: bash
+      env:
+        CI: true
+    - name: run check
+      run: |
+        node --version
+        npm run build
+        npm run lint
+      shell: bash
+      env:
+        CI: true
+
   test:
 
     strategy:
