@@ -20,7 +20,7 @@ jobs:
           - 12.x
           - 13.x
         platform:
-          # - ubuntu-latest
+          - ubuntu-latest
           - windows-latest
         # exclude:
         # - node-version: ^8.12
