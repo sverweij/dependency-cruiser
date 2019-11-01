@@ -12,7 +12,7 @@ jobs:
   test:
 
     strategy:
-      fail-fast: false
+      fail-fast: true
       matrix:
         node-version: 
           - ^8.12
