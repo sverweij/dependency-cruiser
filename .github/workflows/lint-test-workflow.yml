@@ -55,7 +55,7 @@ jobs:
       shell: bash
       env:
         CI: true
-    - name: dependency cruise
+    - name: forbidden dependency check
       run: |
         node --version
         npm run depcruise
