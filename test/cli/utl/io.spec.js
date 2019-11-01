@@ -23,7 +23,7 @@ const removeDammit = pFileName => {
     // so ignore the exception
     process.stdout.write(`|>|>|>|> could not unlink ${pFileName} - ${e}\n`);
   } finally {
-    // hard ignore as well
+    // explicitly ignore finally as well
     process.stdout.write(`|>|>|>|> finally!\n`);
   }
 };
