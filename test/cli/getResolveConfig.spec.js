@@ -8,15 +8,17 @@ describe("cli/ getResolveConfig", () => {
   });
 
   it("throws when a non-existing config file is passed", () => {
-    expect(() => getResolveConfig("config-does-not-exist")).to.throw();
+    expect(() => {
+      getResolveConfig("config-does-not-exist");
+    }).to.throw();
   });
 
   it("throws when a config file is passed that does not contain valid javascript", () => {
-    expect(() =>
+    expect(() => {
       getResolveConfig(
         path.join(__dirname, "./fixtures/webpackconfig/invalid.config.js")
-      )
-    ).to.throw();
+      );
+    }).to.throw();
   });
 
   it("returns an empty object when a config file is passed without a 'resolve' section", () => {

@@ -137,7 +137,9 @@ describe("extract/extract - Error scenarios - ", () => {
     );
   });
   it("Raises an exception on non-existing files", () => {
-    expect(() => extract("non-existing-file.md", normalize({}), {})).to.throw(
+    expect(() => {
+      extract("non-existing-file.md", normalize({}), {});
+    }).to.throw(
       "Extracting dependencies ran afoul of...\n\n  ENOENT: no such file or directory, open "
     );
   });
