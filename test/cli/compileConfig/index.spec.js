@@ -86,8 +86,10 @@ describe("cli/compileConfig", () => {
       "../fixtures/extends/circular-two.js"
     )} -> ${path.join(__dirname, "../fixtures/extends/circular-one.js")}.`;
 
-    expect(() =>
-      compileConfig(path.join(__dirname, "../fixtures/extends/circular-one.js"))
-    ).to.throw(lMessageOutTake);
+    expect(() => {
+      compileConfig(
+        path.join(__dirname, "../fixtures/extends/circular-one.js")
+      );
+    }).to.throw(lMessageOutTake);
   });
 });

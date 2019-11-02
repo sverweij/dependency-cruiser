@@ -7,22 +7,26 @@ const DIRNAME = pathToPosix(__dirname);
 
 describe("cli/parseTSConfig - flatten typescript config - simple config scenarios", () => {
   it("throws when no config file name is passed", () => {
-    expect(() => parseTSConfig()).to.throw();
+    expect(() => {
+      parseTSConfig();
+    }).to.throw();
   });
 
   it("throws when a non-existing config file is passed", () => {
-    expect(() => parseTSConfig("config-does-not-exist")).to.throw();
+    expect(() => {
+      parseTSConfig("config-does-not-exist");
+    }).to.throw();
   });
 
   it("throws when a config file is passed that does not contain valid json", () => {
-    expect(() =>
+    expect(() => {
       parseTSConfig(
         path.join(
           __dirname,
           "./fixtures/typescriptconfig/tsconfig.invalid.json"
         )
-      )
-    ).to.throw();
+      );
+    }).to.throw();
   });
 
   it("returns an empty object when an empty config file is passed", () => {
@@ -77,25 +81,25 @@ describe("cli/parseTSConfig - flatten typescript config - simple config scenario
 
 describe("cli/parseTSConfig - flatten typescript config - 'extend' config scenarios", () => {
   it("throws when a config file is passed that contains a extends to a non-existing file", () => {
-    expect(() =>
+    expect(() => {
       parseTSConfig(
         path.join(
           __dirname,
           "./fixtures/typescriptconfig/tsconfig.extendsnonexisting.json"
         )
-      )
-    ).to.throw();
+      );
+    }).to.throw();
   });
 
   it("throws when a config file is passed that has a circular reference", () => {
-    expect(() =>
+    expect(() => {
       parseTSConfig(
         path.join(
           __dirname,
           "./fixtures/typescriptconfig/tsconfig.circular.json"
         )
-      )
-    ).to.throw(
+      );
+    }).to.throw(
       "error TS18000: Circularity detected while resolving configuration"
     );
   });
