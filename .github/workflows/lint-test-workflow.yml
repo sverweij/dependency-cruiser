@@ -27,8 +27,6 @@ jobs:
           platform: windows-latest
         - node-version: 10.x
           platform: windows-latest
-        - node-version: 13.x
-          platform: windows-latest
 
     runs-on: ${{matrix.platform}}
 
