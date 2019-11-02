@@ -30,9 +30,7 @@ const removeDammit = pFileName => {
 
 describe("cli/utl/io", () => {
   before("set up", () => {
-    process.stdout.write(`|>|>|> set up\n`);
-    removeDammit(OUTFILE);
-    process.stdout.write(`|>|>|> set up - removed\n`);
+    process.stdout.write(`|>|>|> set up - started\n`);
     fs.writeFileSync(OUTFILE, "{}", "utf8");
     process.stdout.write(`|>|>|> set up - written\n`);
   });
