@@ -41,15 +41,6 @@ describe("cli/utl/io", () => {
     process.stdout.write(`|>|>|> tear down - done dee dee done\n`);
   });
 
-  it("getInStream('-') is a readable stream", () => {
-    expect(getInStream("-") instanceof stream.Readable).to.be.true;
-  });
-  it("getInStream('-') yields stdin", () => {
-    expect(getInStream("-")).to.equal(process.stdin);
-  });
-  it("getInStream('-') does not yield a file stream", () => {
-    expect(getInStream("-") instanceof fs.ReadStream).to.be.false;
-  });
   it("getInStream(OUTFILE) yields a readable stream", () => {
     expect(getInStream(OUTFILE) instanceof stream.Readable).to.be.true;
   });
@@ -58,5 +49,14 @@ describe("cli/utl/io", () => {
   });
   it("getInStream(OUTFILE) does not yields stdin", () => {
     expect(getInStream(OUTFILE)).to.not.equal(process.stdin);
+  });
+  it("getInStream('-') is a readable stream", () => {
+    expect(getInStream("-") instanceof stream.Readable).to.be.true;
+  });
+  it("getInStream('-') yields stdin", () => {
+    expect(getInStream("-")).to.equal(process.stdin);
+  });
+  it("getInStream('-') does not yield a file stream", () => {
+    expect(getInStream("-") instanceof fs.ReadStream).to.be.false;
   });
 });
