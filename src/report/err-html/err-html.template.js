@@ -3,21 +3,21 @@ templates['err-html.template.hbs'] = template({"1":function(container,depth0,hel
     var stack1, helper, alias1=container.propertyIsEnumerable, alias2=depth0 != null ? depth0 : (container.nullContext || {}), alias3=container.hooks.helperMissing, alias4="function", alias5=container.escapeExpression;
 
   return "                <tr "
-    + ((stack1 = helpers["if"].call(alias2,(depth0 != null ? depth0.unviolated : depth0),{"name":"if","hash":{},"fn":container.program(2, data, 0),"inverse":container.noop,"data":data})) != null ? stack1 : "")
+    + ((stack1 = helpers["if"].call(alias2,(depth0 != null ? depth0.unviolated : depth0),{"name":"if","hash":{},"fn":container.program(2, data, 0),"inverse":container.noop,"data":data,"loc":{"start":{"line":149,"column":20},"end":{"line":149,"column":63}}})) != null ? stack1 : "")
     + ">\n                    <td>"
-    + ((stack1 = helpers["if"].call(alias2,(depth0 != null ? depth0.unviolated : depth0),{"name":"if","hash":{},"fn":container.program(4, data, 0),"inverse":container.program(6, data, 0),"data":data})) != null ? stack1 : "")
+    + ((stack1 = helpers["if"].call(alias2,(depth0 != null ? depth0.unviolated : depth0),{"name":"if","hash":{},"fn":container.program(4, data, 0),"inverse":container.program(6, data, 0),"data":data,"loc":{"start":{"line":150,"column":24},"end":{"line":150,"column":129}}})) != null ? stack1 : "")
     + "</td>\n                    <td class="
-    + ((stack1 = helpers["if"].call(alias2,(depth0 != null ? depth0.unviolated : depth0),{"name":"if","hash":{},"fn":container.program(8, data, 0),"inverse":container.program(10, data, 0),"data":data})) != null ? stack1 : "")
+    + ((stack1 = helpers["if"].call(alias2,(depth0 != null ? depth0.unviolated : depth0),{"name":"if","hash":{},"fn":container.program(8, data, 0),"inverse":container.program(10, data, 0),"data":data,"loc":{"start":{"line":151,"column":30},"end":{"line":151,"column":85}}})) != null ? stack1 : "")
     + ">"
-    + alias5(((helper = (helper = helpers.severity || (depth0 != null ? depth0.severity : depth0)) != null ? helper : alias3),(typeof helper === alias4 ? helper.call(alias2,{"name":"severity","hash":{},"data":data}) : helper)))
+    + alias5(((helper = (helper = helpers.severity || (depth0 != null ? depth0.severity : depth0)) != null ? helper : alias3),(typeof helper === alias4 ? helper.call(alias2,{"name":"severity","hash":{},"data":data,"loc":{"start":{"line":151,"column":86},"end":{"line":151,"column":98}}}) : helper)))
     + "</td>\n                    <td class=\"nowrap\"><a id=\""
-    + alias5(((helper = (helper = helpers.name || (depth0 != null ? depth0.name : depth0)) != null ? helper : alias3),(typeof helper === alias4 ? helper.call(alias2,{"name":"name","hash":{},"data":data}) : helper)))
+    + alias5(((helper = (helper = helpers.name || (depth0 != null ? depth0.name : depth0)) != null ? helper : alias3),(typeof helper === alias4 ? helper.call(alias2,{"name":"name","hash":{},"data":data,"loc":{"start":{"line":152,"column":46},"end":{"line":152,"column":54}}}) : helper)))
     + "\" class=\"noiseless\">"
-    + alias5(((helper = (helper = helpers.name || (depth0 != null ? depth0.name : depth0)) != null ? helper : alias3),(typeof helper === alias4 ? helper.call(alias2,{"name":"name","hash":{},"data":data}) : helper)))
+    + alias5(((helper = (helper = helpers.name || (depth0 != null ? depth0.name : depth0)) != null ? helper : alias3),(typeof helper === alias4 ? helper.call(alias2,{"name":"name","hash":{},"data":data,"loc":{"start":{"line":152,"column":74},"end":{"line":152,"column":82}}}) : helper)))
     + "</a></td>\n                    <td><strong>"
-    + alias5(((helper = (helper = helpers.count || (depth0 != null ? depth0.count : depth0)) != null ? helper : alias3),(typeof helper === alias4 ? helper.call(alias2,{"name":"count","hash":{},"data":data}) : helper)))
+    + alias5(((helper = (helper = helpers.count || (depth0 != null ? depth0.count : depth0)) != null ? helper : alias3),(typeof helper === alias4 ? helper.call(alias2,{"name":"count","hash":{},"data":data,"loc":{"start":{"line":153,"column":32},"end":{"line":153,"column":41}}}) : helper)))
     + "</strong></td>\n                    <td>"
-    + alias5(((helper = (helper = helpers.comment || (depth0 != null ? depth0.comment : depth0)) != null ? helper : alias3),(typeof helper === alias4 ? helper.call(alias2,{"name":"comment","hash":{},"data":data}) : helper)))
+    + alias5(((helper = (helper = helpers.comment || (depth0 != null ? depth0.comment : depth0)) != null ? helper : alias3),(typeof helper === alias4 ? helper.call(alias2,{"name":"comment","hash":{},"data":data,"loc":{"start":{"line":154,"column":24},"end":{"line":154,"column":35}}}) : helper)))
     + "</td>\n                </tr>\n";
 },"2":function(container,depth0,helpers,partials,data) {
     return "class=\"unviolated\"";
@@ -27,25 +27,25 @@ templates['err-html.template.hbs'] = template({"1":function(container,depth0,hel
     var helper, alias1=container.propertyIsEnumerable;
 
   return "<span class=\""
-    + container.escapeExpression(((helper = (helper = helpers.severity || (depth0 != null ? depth0.severity : depth0)) != null ? helper : container.hooks.helperMissing),(typeof helper === "function" ? helper.call(depth0 != null ? depth0 : (container.nullContext || {}),{"name":"severity","hash":{},"data":data}) : helper)))
+    + container.escapeExpression(((helper = (helper = helpers.severity || (depth0 != null ? depth0.severity : depth0)) != null ? helper : container.hooks.helperMissing),(typeof helper === "function" ? helper.call(depth0 != null ? depth0 : (container.nullContext || {}),{"name":"severity","hash":{},"data":data,"loc":{"start":{"line":150,"column":94},"end":{"line":150,"column":106}}}) : helper)))
     + "\">&cross;</span>";
 },"8":function(container,depth0,helpers,partials,data) {
     var helper, alias1=container.propertyIsEnumerable;
 
   return "\""
-    + container.escapeExpression(((helper = (helper = helpers.ok || (depth0 != null ? depth0.ok : depth0)) != null ? helper : container.hooks.helperMissing),(typeof helper === "function" ? helper.call(depth0 != null ? depth0 : (container.nullContext || {}),{"name":"ok","hash":{},"data":data}) : helper)))
+    + container.escapeExpression(((helper = (helper = helpers.ok || (depth0 != null ? depth0.ok : depth0)) != null ? helper : container.hooks.helperMissing),(typeof helper === "function" ? helper.call(depth0 != null ? depth0 : (container.nullContext || {}),{"name":"ok","hash":{},"data":data,"loc":{"start":{"line":151,"column":49},"end":{"line":151,"column":55}}}) : helper)))
     + "\"";
 },"10":function(container,depth0,helpers,partials,data) {
     var helper, alias1=container.propertyIsEnumerable;
 
   return "\""
-    + container.escapeExpression(((helper = (helper = helpers.severity || (depth0 != null ? depth0.severity : depth0)) != null ? helper : container.hooks.helperMissing),(typeof helper === "function" ? helper.call(depth0 != null ? depth0 : (container.nullContext || {}),{"name":"severity","hash":{},"data":data}) : helper)))
+    + container.escapeExpression(((helper = (helper = helpers.severity || (depth0 != null ? depth0.severity : depth0)) != null ? helper : container.hooks.helperMissing),(typeof helper === "function" ? helper.call(depth0 != null ? depth0 : (container.nullContext || {}),{"name":"severity","hash":{},"data":data,"loc":{"start":{"line":151,"column":65},"end":{"line":151,"column":77}}}) : helper)))
     + "\"";
 },"12":function(container,depth0,helpers,partials,data,blockParams,depths) {
     var stack1, alias1=container.propertyIsEnumerable;
 
   return "        <h2><svg class=\"p__svg--inline\" viewBox=\"0 0 12 16\" version=\"1.1\" aria-hidden=\"true\"><path fill-rule=\"evenodd\" d=\"M5.05.31c.81 2.17.41 3.38-.52 4.31C3.55 5.67 1.98 6.45.9 7.98c-1.45 2.05-1.7 6.53 3.53 7.7-2.2-1.16-2.67-4.52-.3-6.61-.61 2.03.53 3.33 1.94 2.86 1.39-.47 2.3.53 2.27 1.67-.02.78-.31 1.44-1.13 1.81 3.42-.59 4.78-3.42 4.78-5.56 0-2.84-2.53-3.22-1.25-5.61-1.52.13-2.03 1.13-1.89 2.75.09 1.08-1.02 1.8-1.86 1.33-.67-.41-.66-1.19-.06-1.78C8.18 5.31 8.68 2.45 5.05.32L5.03.3l.02.01z\"></path></svg> All violations</h2>\n        <table>\n            <thead>\n                <tr>\n                    <th>severity</th>\n                    <th>rule</th>\n                    <th>from</th>\n                    <th>to</th>\n                </tr>\n            </thead>\n            <tbody>\n"
-    + ((stack1 = helpers.each.call(depth0 != null ? depth0 : (container.nullContext || {}),((stack1 = (depth0 != null ? depth0.summary : depth0)) != null ? stack1.violations : stack1),{"name":"each","hash":{},"fn":container.program(13, data, 0, blockParams, depths),"inverse":container.noop,"data":data})) != null ? stack1 : "")
+    + ((stack1 = helpers.each.call(depth0 != null ? depth0 : (container.nullContext || {}),((stack1 = (depth0 != null ? depth0.summary : depth0)) != null ? stack1.violations : stack1),{"name":"each","hash":{},"fn":container.program(13, data, 0, blockParams, depths),"inverse":container.noop,"data":data,"loc":{"start":{"line":182,"column":16},"end":{"line":190,"column":25}}})) != null ? stack1 : "")
     + "            </tbody>\n        </table>\n";
 },"13":function(container,depth0,helpers,partials,data,blockParams,depths) {
     var stack1, helper, alias1=container.propertyIsEnumerable, alias2=container.lambda, alias3=container.escapeExpression, alias4=depth0 != null ? depth0 : (container.nullContext || {}), alias5=container.hooks.helperMissing, alias6="function";
@@ -60,11 +60,11 @@ templates['err-html.template.hbs'] = template({"1":function(container,depth0,hel
     + alias3(alias2(((stack1 = (depth0 != null ? depth0.rule : depth0)) != null ? stack1.name : stack1), depth0))
     + "</a></td>\n                    <td><a href=\""
     + alias3(alias2(((stack1 = ((stack1 = (depths[1] != null ? depths[1].summary : depths[1])) != null ? stack1.optionsUsed : stack1)) != null ? stack1.prefix : stack1), depth0))
-    + alias3(((helper = (helper = helpers.from || (depth0 != null ? depth0.from : depth0)) != null ? helper : alias5),(typeof helper === alias6 ? helper.call(alias4,{"name":"from","hash":{},"data":data}) : helper)))
+    + alias3(((helper = (helper = helpers.from || (depth0 != null ? depth0.from : depth0)) != null ? helper : alias5),(typeof helper === alias6 ? helper.call(alias4,{"name":"from","hash":{},"data":data,"loc":{"start":{"line":186,"column":66},"end":{"line":186,"column":74}}}) : helper)))
     + "\">"
-    + alias3(((helper = (helper = helpers.from || (depth0 != null ? depth0.from : depth0)) != null ? helper : alias5),(typeof helper === alias6 ? helper.call(alias4,{"name":"from","hash":{},"data":data}) : helper)))
+    + alias3(((helper = (helper = helpers.from || (depth0 != null ? depth0.from : depth0)) != null ? helper : alias5),(typeof helper === alias6 ? helper.call(alias4,{"name":"from","hash":{},"data":data,"loc":{"start":{"line":186,"column":76},"end":{"line":186,"column":84}}}) : helper)))
     + "</a></td>\n                    <td>"
-    + ((stack1 = ((helper = (helper = helpers.to || (depth0 != null ? depth0.to : depth0)) != null ? helper : alias5),(typeof helper === alias6 ? helper.call(alias4,{"name":"to","hash":{},"data":data}) : helper))) != null ? stack1 : "")
+    + ((stack1 = ((helper = (helper = helpers.to || (depth0 != null ? depth0.to : depth0)) != null ? helper : alias5),(typeof helper === alias6 ? helper.call(alias4,{"name":"to","hash":{},"data":data,"loc":{"start":{"line":187,"column":24},"end":{"line":187,"column":32}}}) : helper))) != null ? stack1 : "")
     + "</td>\n                    \n                </tr>\n";
 },"15":function(container,depth0,helpers,partials,data) {
     return "        <h2><span aria-hidden=\"true\">&hearts;</span> No violations found</h2>\n        <p>Get gummy bears to celebrate.</p>\n";
@@ -82,9 +82,9 @@ templates['err-html.template.hbs'] = template({"1":function(container,depth0,hel
     + "</strong> warnings\n            </div>\n            <div style=\"float:left;padding-right:20px\">\n                <strong>"
     + alias3(alias2(((stack1 = (depth0 != null ? depth0.summary : depth0)) != null ? stack1.info : stack1), depth0))
     + "</strong> informational\n            </div>\n            &nbsp;\n        </p>\n        <table>\n            <tbody>\n                <thead>\n                    <tr>\n                        <th></th>\n                        <th>severity</th>\n                        <th>rule</th>\n                        <th>#&nbsp;violations</th>\n                        <th>explanation</th>\n                    </tr>\n                </thead>\n"
-    + ((stack1 = helpers.each.call(alias4,((stack1 = (depth0 != null ? depth0.summary : depth0)) != null ? stack1.agggregateViolations : stack1),{"name":"each","hash":{},"fn":container.program(1, data, 0, blockParams, depths),"inverse":container.noop,"data":data})) != null ? stack1 : "")
+    + ((stack1 = helpers.each.call(alias4,((stack1 = (depth0 != null ? depth0.summary : depth0)) != null ? stack1.agggregateViolations : stack1),{"name":"each","hash":{},"fn":container.program(1, data, 0, blockParams, depths),"inverse":container.noop,"data":data,"loc":{"start":{"line":148,"column":16},"end":{"line":156,"column":25}}})) != null ? stack1 : "")
     + "                <tr>\n                    <td colspan=\"5\" class=\"controls\">\n                        <div id=\"show-unviolated\">\n                            &downarrow; <a href=\"#show-all-the-rules\">also show unviolated rules</a>\n                        </div>\n                        <div id=\"hide-unviolated\">\n                            &uparrow; <a href=\"\">hide unviolated rules</a>\n                        </div>\n                    </td>\n                </tr>\n            </tbody>\n        </table>\n\n"
-    + ((stack1 = helpers["if"].call(alias4,((stack1 = (depth0 != null ? depth0.summary : depth0)) != null ? stack1.violations : stack1),{"name":"if","hash":{},"fn":container.program(12, data, 0, blockParams, depths),"inverse":container.program(15, data, 0, blockParams, depths),"data":data})) != null ? stack1 : "")
+    + ((stack1 = helpers["if"].call(alias4,((stack1 = (depth0 != null ? depth0.summary : depth0)) != null ? stack1.violations : stack1),{"name":"if","hash":{},"fn":container.program(12, data, 0, blockParams, depths),"inverse":container.program(15, data, 0, blockParams, depths),"data":data,"loc":{"start":{"line":170,"column":8},"end":{"line":196,"column":15}}})) != null ? stack1 : "")
     + "        <footer>\n            <p><a href=\"https://github.com/sverweij/dependency-cruiser\">"
     + alias3(alias2(((stack1 = (depth0 != null ? depth0.summary : depth0)) != null ? stack1.depcruiseVersion : stack1), depth0))
     + "</a> / "
