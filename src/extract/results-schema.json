@@ -356,7 +356,18 @@
     },
     "OutputType": {
       "type": "string",
-      "enum": ["html", "dot", "err", "json"]
+      "enum": [
+        "json",
+        "html",
+        "dot",
+        "ddot",
+        "csv",
+        "err",
+        "err-long",
+        "err-html",
+        "teamcity",
+        "anon"
+      ]
     },
     "DependencyType": {
       "type": "string",

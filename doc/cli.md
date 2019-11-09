@@ -35,7 +35,7 @@ available in dependency-cruiser configurations.
 1. [`--webpack-config`: use (the resolution options of) a webpack configuration`](#--webpack-config-use-the-resolution-options-of-a-webpack-configuration)
 1. [`--preserve-symlinks`](#--preserve-symlinks)
 
-### depcruise-fmt
+### [depcruise-fmt](#depcruise-fmt)
 
 ## Command line only options
 
@@ -181,6 +181,67 @@ dependency-cruise -v -T teamcity  -- src
 
 Just like the `err` reporter the teamcity reporter has an empty output when there's
 no violations - and a non-zero exit code when there's errors.
+
+#### json
+
+This emits the internal representation of a cruise as json. It's the input format for
+[depcruise-fmt](#depcruise-fmt), and is useful for debugging. If you ever
+
+See [output-format](output-format.md) for more information
+
+#### anon - obfuscated json
+
+The same as json - but with all paths obfuscated. This enables you to share the result
+of a cruise for troubleshooting purposes without showing what the source code is
+about.
+
+To save an anonymized dependency graph to `anonymized-result.json` do this:
+
+```sh
+depcruise --validate --output-type anon --output-to anonymized-result.json bin src
+```
+
+e.g. to save an anonymized graph into and svg:
+
+```sh
+depcruise --validate --output-type anon bin src | depcruise-fmt --output-type dot - | dot -T svg > anonymized_graph.svg
+```
+
+<details>
+<summary>Sample output</summary>
+
+Here's a part of dependency-cruiser's own dependency graph both original
+and obfuscated (after converting it to a graph via depcruise-fmt and dot -
+so it's easier to compare than the two json's):
+
+##### Original
+
+<img width="616" alt="original" src="assets/original.png">
+
+##### Obfuscated
+
+<img width="425" alt="obfuscated" src="assets/obfuscated.png">
+
+</details>
+
+<details>
+<summary>How does the obfuscation work?</summary>
+
+- It uses a small corpus of short words to replace non-common path elements
+  with (`src/search/dragonfly-algorithm.js` -> `src/animal/announce.js`,
+  `src/search/dragonfly-algorithm.spec.js` -> `src/animal/announce.spec.js`).
+- It will retain name similarties (like the `announce.js`/ `announce.spec.js` above).
+- When there's more path elements in your dependency graph than in the corpus
+  the algorithm falls back to random strings that have the same length and pattern
+  as the original one (`secretService-record.ts` -> `fnwarqVboiuvq-pugnmh.ts`).
+- The algorithm considers some patterns to be 'common'. It leaves those
+  alone to retain some readability. 'Common' patterns include `src`, `test`,
+  `node_modules`, `.`, `index` etc. You can find the full regexp in
+  [anonymizePath.js](../src/report/anonymous/anonymizePath.js#4).
+- The algorithm obfuscates _within_ node_modules is obfuscated as well, so
+  it won't become apparent from the dependency graph which ones your app
+  uses either.
+  </details>
 
 ### `--config`/ `--validate`
 
