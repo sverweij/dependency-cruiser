@@ -46,7 +46,10 @@ before(cb => {
   symlinkDir(
     path.join(__dirname, "fixtures", "symlinkTarget"),
     symlinkDirectory
-  ).then(() => cb(), err => cb(err));
+  ).then(
+    () => cb(),
+    err => cb(err)
+  );
 });
 
 after(() => {

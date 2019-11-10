@@ -10,13 +10,13 @@ const orphanerrs = require("../fixtures/orphan-deps.json");
 const circularerrs = require("../fixtures/circular-deps.json");
 
 describe("report/err", () => {
-  let chalkEnabled = chalk.enabled;
+  let chalkLevel = chalk.level;
 
   before("disable chalk coloring", () => {
-    chalk.enabled = false;
+    chalk.level = 0;
   });
   after("put chalk enabled back to its original value", () => {
-    chalk.enabled = chalkEnabled;
+    chalk.level = chalkLevel;
   });
   it("says everything fine", () => {
     const lResult = render(okdeps);

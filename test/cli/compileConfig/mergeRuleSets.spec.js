@@ -58,7 +58,10 @@ describe("cli/mergeRuleSets - forbidden", () => {
     ).to.deep.equal({
       allowed: [],
       allowedSeverity: "warn",
-      forbidden: [{ from: "bin", to: "test" }, { from: "src", to: "test" }],
+      forbidden: [
+        { from: "bin", to: "test" },
+        { from: "src", to: "test" }
+      ],
       options: {}
     });
   });
@@ -244,7 +247,10 @@ describe("cli/mergeRuleSets - allowed", () => {
         { allowed: [{ from: "src", to: "test" }] }
       )
     ).to.deep.equal({
-      allowed: [{ from: "bin", to: "test" }, { from: "src", to: "test" }],
+      allowed: [
+        { from: "bin", to: "test" },
+        { from: "src", to: "test" }
+      ],
       allowedSeverity: "warn",
       forbidden: [],
       options: {}
