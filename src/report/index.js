@@ -8,6 +8,7 @@ const err = require("./err/err-short");
 const errHtml = require("./err-html");
 const identity = require("./identity");
 const teamcity = require("./teamcity");
+const anon = require("./anonymous");
 
 const TYPE2REPORTER = {
   json,
@@ -18,7 +19,8 @@ const TYPE2REPORTER = {
   err,
   "err-long": errLong,
   "err-html": errHtml,
-  teamcity
+  teamcity,
+  anon
 };
 
 function getReporter(pOutputType) {

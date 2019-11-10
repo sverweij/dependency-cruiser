@@ -118,6 +118,7 @@
     "indent-string": "4.0.0",
     "inquirer": "7.0.0",
     "lodash": "4.17.15",
+    "mnemonic-words": "1.1.0",
     "pnp-webpack-plugin": "1.5.0",
     "regexp-tree": "0.1.14",
     "semver": "6.3.0",
