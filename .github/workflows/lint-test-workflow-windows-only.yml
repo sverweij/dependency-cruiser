@@ -1,4 +1,4 @@
-name: test coverage - windows only
+name: test coverage - windows
 
 on:
   push:
