@@ -1,4 +1,4 @@
-name: linting & test coverage - linux
+name: test coverage - windows
 
 on:
   push:
@@ -15,12 +15,9 @@ jobs:
       fail-fast: false
       matrix:
         node-version: 
-          - ^8.12
-          - 10.x
           - 12.x
-          - 13.x
         platform:
-          - ubuntu-latest
+          - windows-latest
 
     runs-on: ${{matrix.platform}}
 
@@ -43,14 +40,6 @@ jobs:
         node --version
         npm install
         npm run build
-      shell: bash
-      env:
-        CI: true
-    - name: lint (run on one platform only)
-      run: |
-        node --version
-        npm run lint
-      if: matrix.platform == 'ubuntu-latest' && matrix.node-version == '13.x'
       shell: bash
       env:
         CI: true
