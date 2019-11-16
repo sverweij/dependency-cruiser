@@ -116,6 +116,15 @@ export interface ICruiseOptions {
    * Defaults to `false`.
    */
   combinedDependencies?: boolean;
+  /*
+   * List of strings you have in use in addition to cjs/ es6 requires
+   * & imports to declare module dependencies. Use this e.g. if you've
+   * redeclared require (`const want = require`), use a require-wrapper
+   * (like semver-try-require) or use window.require as a hack
+   *
+   * Defaults to `[]`
+   */
+  exoticRequireStrings?: string[];
   /**
    * (API only) when set to `true` forces the extraction module to
    * detect circular dependencies even when there is no rule in the rule

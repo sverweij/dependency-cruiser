@@ -13,7 +13,8 @@ const toTypescriptAST = require("./parse/toTypescriptAST");
 function extractFromTypeScriptAST(pDependencies, pOptions, pFileName) {
   return pDependencies.concat(
     extractTypeScriptDeps(
-      toTypescriptAST.getASTCached(path.join(pOptions.baseDir, pFileName))
+      toTypescriptAST.getASTCached(path.join(pOptions.baseDir, pFileName)),
+      pOptions.exoticRequireStrings
     )
   );
 }

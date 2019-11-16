@@ -92,6 +92,14 @@ function isRequireCallExpression(pASTNode) {
   );
 }
 
+function isExoticRequire(pASTNode, pString) {
+  return (
+    typescript.SyntaxKind[pASTNode.kind] === "CallExpression" &&
+    pASTNode.expression &&
+    pASTNode.expression.text === pString
+  );
+}
+
 function isDynamicImportExpression(pASTNode) {
   return (
     typescript.SyntaxKind[pASTNode.kind] === "CallExpression" &&
@@ -132,7 +140,7 @@ function firstArgIsAString(pASTNode) {
  * @param {import("typescript").Node} pAST - typescript syntax tree
  * @returns {{moduleName: string, moduleSystem: string}[]} - all commonJS dependencies
  */
-function extractNestedDependencies(pAST) {
+function extractNestedDependencies(pAST, pExoticRequireStrings) {
   let lResult = [];
 
   function walk(pASTNode) {
@@ -143,6 +151,19 @@ function extractNestedDependencies(pAST) {
         moduleSystem: "cjs"
       });
     }
+
+    // const want = require; {lalala} = want('yudelyo'), window.require('elektron')
+    pExoticRequireStrings.forEach(pExoticRequireString => {
+      if (
+        isExoticRequire(pASTNode, pExoticRequireString) &&
+        firstArgIsAString(pASTNode)
+      ) {
+        lResult.push({
+          moduleName: pASTNode.arguments[0].text,
+          moduleSystem: "cjs"
+        });
+      }
+    });
     // import('a-string'), import(`a-template-literal`)
     if (isDynamicImportExpression(pASTNode) && firstArgIsAString(pASTNode)) {
       lResult.push({
@@ -170,13 +191,15 @@ function extractNestedDependencies(pAST) {
 /**
  * returns all dependencies in the (top level) AST
  *
- * @type {(pTypeScriptAST: import("typescript").Node) => {moduleName: string, moduleSystem: string, dynamic: boolean}[]}
+ * @type {(pTypeScriptAST: (import("typescript").Node), pExoticRequireStrings: string[]) => {moduleName: string, moduleSystem: string, dynamic: boolean}[]}
  */
-module.exports = pTypeScriptAST =>
+module.exports = (pTypeScriptAST, pExoticRequireStrings) =>
   Boolean(typescript)
     ? extractImportsAndExports(pTypeScriptAST)
         .concat(extractImportEquals(pTypeScriptAST))
         .concat(extractTrippleSlashDirectives(pTypeScriptAST))
-        .concat(extractNestedDependencies(pTypeScriptAST))
+        .concat(
+          extractNestedDependencies(pTypeScriptAST, pExoticRequireStrings)
+        )
         .map(pModule => ({ dynamic: false, ...pModule }))
     : [];

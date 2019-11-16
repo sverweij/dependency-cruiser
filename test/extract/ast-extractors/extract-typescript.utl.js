@@ -2,5 +2,8 @@ const extractTypescript = require("../../../src/extract/ast-extractors/extract-t
 const getASTFromSource = require("../../../src/extract/parse/toTypescriptAST")
   .getASTFromSource;
 
-module.exports = pTypesScriptSource =>
-  extractTypescript(getASTFromSource(pTypesScriptSource));
+module.exports = (pTypesScriptSource, pExoticRequireStrings = []) =>
+  extractTypescript(
+    getASTFromSource(pTypesScriptSource),
+    pExoticRequireStrings
+  );
