@@ -135,6 +135,46 @@ function isTypeImport(pASTNode) {
         "FirstTemplateToken")
   );
 }
+function walk(pResult, pExoticRequireStrings) {
+  return pASTNode => {
+    // require('a-string'), require(`a-template-literal`)
+    if (isRequireCallExpression(pASTNode)) {
+      pResult.push({
+        moduleName: pASTNode.arguments[0].text,
+        moduleSystem: "cjs"
+      });
+    }
+
+    // const want = require; {lalala} = want('yudelyo'), window.require('elektron')
+    pExoticRequireStrings.forEach(pExoticRequireString => {
+      if (isExoticRequire(pASTNode, pExoticRequireString)) {
+        pResult.push({
+          moduleName: pASTNode.arguments[0].text,
+          moduleSystem: "cjs"
+        });
+      }
+    });
+
+    // import('a-string'), import(`a-template-literal`)
+    if (isDynamicImportExpression(pASTNode)) {
+      pResult.push({
+        moduleName: pASTNode.arguments[0].text,
+        moduleSystem: "es6",
+        dynamic: true
+      });
+    }
+
+    // const atype: import('./types').T
+    // const atype: import(`./types`).T
+    if (isTypeImport(pASTNode)) {
+      pResult.push({
+        moduleName: pASTNode.argument.literal.text,
+        moduleSystem: "es6"
+      });
+    }
+    typescript.forEachChild(pASTNode, walk(pResult, pExoticRequireStrings));
+  };
+}
 
 /**
  * returns an array of dependencies that come potentially nested within
@@ -146,46 +186,7 @@ function isTypeImport(pASTNode) {
 function extractNestedDependencies(pAST, pExoticRequireStrings) {
   let lResult = [];
 
-  function walk(pASTNode) {
-    // require('a-string'), require(`a-template-literal`)
-    if (isRequireCallExpression(pASTNode)) {
-      lResult.push({
-        moduleName: pASTNode.arguments[0].text,
-        moduleSystem: "cjs"
-      });
-    }
-
-    // const want = require; {lalala} = want('yudelyo'), window.require('elektron')
-    pExoticRequireStrings.forEach(pExoticRequireString => {
-      if (isExoticRequire(pASTNode, pExoticRequireString)) {
-        lResult.push({
-          moduleName: pASTNode.arguments[0].text,
-          moduleSystem: "cjs"
-        });
-      }
-    });
-
-    // import('a-string'), import(`a-template-literal`)
-    if (isDynamicImportExpression(pASTNode)) {
-      lResult.push({
-        moduleName: pASTNode.arguments[0].text,
-        moduleSystem: "es6",
-        dynamic: true
-      });
-    }
-
-    // const atype: import('./types').T
-    // const atype: import(`./types`).T
-    if (isTypeImport(pASTNode)) {
-      lResult.push({
-        moduleName: pASTNode.argument.literal.text,
-        moduleSystem: "es6"
-      });
-    }
-    typescript.forEachChild(pASTNode, walk);
-  }
-
-  walk(pAST);
+  walk(lResult, pExoticRequireStrings)(pAST);
 
   return lResult;
 }
