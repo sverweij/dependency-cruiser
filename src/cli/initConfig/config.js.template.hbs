@@ -302,6 +302,12 @@ module.exports = {
         {{^}}
         // , externalModuleResolutionStrategy: 'node_modules'
         {{/if}}
+        /* List of strings you have in use in addition to cjs/ es6 requires
+           & imports to declare module dependencies. Use this e.g. if you've
+           redeclared require, use a require-wrapper or use window.require as
+           a hack 
+        */
+        // , exoticRequireStrings: []
     }
 };
 // generated: dependency-cruiser@{{version}} on {{date}}
