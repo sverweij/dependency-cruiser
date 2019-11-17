@@ -26,6 +26,7 @@ module.exports = pOptions => {
   lRetval.moduleSystems = uniq(lRetval.moduleSystems.sort());
   lRetval.doNotFollow = normalizeFilterOption(lRetval.doNotFollow);
   lRetval.exclude = normalizeFilterOption(lRetval.exclude);
+  lRetval.exoticRequireStrings = uniq(lRetval.exoticRequireStrings.sort());
 
   return lRetval;
 };
