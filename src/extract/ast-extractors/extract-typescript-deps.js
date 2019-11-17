@@ -83,12 +83,25 @@ function extractTrippleSlashDirectives(pAST) {
     );
 }
 
+function firstArgIsAString(pASTNode) {
+  const lFirstArgument = pASTNode.arguments[0];
+
+  return (
+    lFirstArgument &&
+    // "thing" or 'thing'
+    (typescript.SyntaxKind[lFirstArgument.kind] === "StringLiteral" ||
+      // `thing`
+      typescript.SyntaxKind[lFirstArgument.kind] === "FirstTemplateToken")
+  );
+}
+
 function isRequireCallExpression(pASTNode) {
   return (
     typescript.SyntaxKind[pASTNode.kind] === "CallExpression" &&
     pASTNode.expression &&
     typescript.SyntaxKind[pASTNode.expression.originalKeywordKind] ===
-      "RequireKeyword"
+      "RequireKeyword" &&
+    firstArgIsAString(pASTNode)
   );
 }
 
@@ -96,7 +109,8 @@ function isExoticRequire(pASTNode, pString) {
   return (
     typescript.SyntaxKind[pASTNode.kind] === "CallExpression" &&
     pASTNode.expression &&
-    pASTNode.expression.text === pString
+    pASTNode.expression.text === pString &&
+    firstArgIsAString(pASTNode)
   );
 }
 
@@ -104,7 +118,8 @@ function isDynamicImportExpression(pASTNode) {
   return (
     typescript.SyntaxKind[pASTNode.kind] === "CallExpression" &&
     pASTNode.expression &&
-    typescript.SyntaxKind[pASTNode.expression.kind] === "ImportKeyword"
+    typescript.SyntaxKind[pASTNode.expression.kind] === "ImportKeyword" &&
+    firstArgIsAString(pASTNode)
   );
 }
 
@@ -121,18 +136,6 @@ function isTypeImport(pASTNode) {
   );
 }
 
-function firstArgIsAString(pASTNode) {
-  const lFirstArgument = pASTNode.arguments[0];
-
-  return (
-    lFirstArgument &&
-    // "thing" or 'thing'
-    (typescript.SyntaxKind[lFirstArgument.kind] === "StringLiteral" ||
-      // `thing`
-      typescript.SyntaxKind[lFirstArgument.kind] === "FirstTemplateToken")
-  );
-}
-
 /**
  * returns an array of dependencies that come potentially nested within
  * a source file, like commonJS or dynamic imports
@@ -145,7 +148,7 @@ function extractNestedDependencies(pAST, pExoticRequireStrings) {
 
   function walk(pASTNode) {
     // require('a-string'), require(`a-template-literal`)
-    if (isRequireCallExpression(pASTNode) && firstArgIsAString(pASTNode)) {
+    if (isRequireCallExpression(pASTNode)) {
       lResult.push({
         moduleName: pASTNode.arguments[0].text,
         moduleSystem: "cjs"
@@ -154,24 +157,23 @@ function extractNestedDependencies(pAST, pExoticRequireStrings) {
 
     // const want = require; {lalala} = want('yudelyo'), window.require('elektron')
     pExoticRequireStrings.forEach(pExoticRequireString => {
-      if (
-        isExoticRequire(pASTNode, pExoticRequireString) &&
-        firstArgIsAString(pASTNode)
-      ) {
+      if (isExoticRequire(pASTNode, pExoticRequireString)) {
         lResult.push({
           moduleName: pASTNode.arguments[0].text,
           moduleSystem: "cjs"
         });
       }
     });
+
     // import('a-string'), import(`a-template-literal`)
-    if (isDynamicImportExpression(pASTNode) && firstArgIsAString(pASTNode)) {
+    if (isDynamicImportExpression(pASTNode)) {
       lResult.push({
         moduleName: pASTNode.arguments[0].text,
         moduleSystem: "es6",
         dynamic: true
       });
     }
+
     // const atype: import('./types').T
     // const atype: import(`./types`).T
     if (isTypeImport(pASTNode)) {
