@@ -1,33 +1,42 @@
 const walk = require("acorn-walk");
 const estreeHelpers = require("./estree-helpers");
 
-function pushRequireCallsToDependencies(pDependencies, pModuleSystem) {
+function pushRequireCallsToDependencies(
+  pDependencies,
+  pModuleSystem,
+  pExoticRequireStrings
+) {
   return pNode => {
-    if (estreeHelpers.isRequireIdentifier(pNode)) {
-      if (estreeHelpers.firstArgumentIsAString(pNode.arguments)) {
-        pNode.arguments[0].value.split("!").forEach(pString =>
+    ["require"].concat(pExoticRequireStrings).forEach(pName => {
+      if (estreeHelpers.isRequireIdentifier(pNode, pName)) {
+        if (estreeHelpers.firstArgumentIsAString(pNode.arguments)) {
+          pNode.arguments[0].value.split("!").forEach(pString =>
+            pDependencies.push({
+              moduleName: pString,
+              moduleSystem: pModuleSystem,
+              dynamic: false
+            })
+          );
+        } else if (
+          estreeHelpers.firstArgumentIsATemplateLiteral(pNode.arguments)
+        ) {
           pDependencies.push({
-            moduleName: pString,
+            moduleName: pNode.arguments[0].quasis[0].value.cooked,
             moduleSystem: pModuleSystem,
             dynamic: false
-          })
-        );
-      } else if (
-        estreeHelpers.firstArgumentIsATemplateLiteral(pNode.arguments)
-      ) {
-        pDependencies.push({
-          moduleName: pNode.arguments[0].quasis[0].value.cooked,
-          moduleSystem: pModuleSystem,
-          dynamic: false
-        });
+          });
+        }
       }
-    }
+    });
   };
 }
 
-module.exports = (pAST, pDependencies, pModuleSystem) => {
-  pModuleSystem = pModuleSystem || "cjs";
-
+module.exports = (
+  pAST,
+  pDependencies,
+  pModuleSystem,
+  pExoticRequireStrings
+) => {
   // var/const lalala = require('./lalala');
   // require('./lalala');
   // require('./lalala').doFunkyStuff();
@@ -38,7 +47,8 @@ module.exports = (pAST, pDependencies, pModuleSystem) => {
     {
       CallExpression: pushRequireCallsToDependencies(
         pDependencies,
-        pModuleSystem
+        pModuleSystem,
+        pExoticRequireStrings
       )
     },
     // see https://github.com/acornjs/acorn/issues/746

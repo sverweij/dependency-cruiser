@@ -22,21 +22,32 @@ function extractRegularAMDDependencies(pNode, pDependencies) {
   }
 }
 
-function extractCommonJSWrappers(pNode, pDependencies) {
+function extractCommonJSWrappers(pNode, pDependencies, pExoticRequireStrings) {
   if (estreeHelpers.isLikelyAMDDefine(pNode)) {
     pNode.expression.arguments
       .filter(
         pArg =>
           pArg.type === "FunctionExpression" &&
-          pArg.params.some(pParam => pParam.name === "require")
+          pArg.params.some(
+            pParam =>
+              pParam.name === "require" ||
+              pExoticRequireStrings.some(
+                pExoticRequireString => pExoticRequireString === pParam.name
+              )
+          )
       )
       .forEach(pFunction =>
-        extractCommonJSDependencies(pFunction.body, pDependencies, "amd")
+        extractCommonJSDependencies(
+          pFunction.body,
+          pDependencies,
+          "amd",
+          pExoticRequireStrings
+        )
       );
   }
 }
 
-module.exports = (pAST, pDependencies) => {
+module.exports = (pAST, pDependencies, pExoticRequireStrings) => {
   walk.simple(
     pAST,
     {
@@ -51,7 +62,7 @@ module.exports = (pAST, pDependencies) => {
         //      ... every 'require' call is a depencency
         // Won't work if someone decides to name the first parameter of
         // the function passed to the define something else from "require"
-        extractCommonJSWrappers(pNode, pDependencies);
+        extractCommonJSWrappers(pNode, pDependencies, pExoticRequireStrings);
       }
     },
     // see https://github.com/acornjs/acorn/issues/746

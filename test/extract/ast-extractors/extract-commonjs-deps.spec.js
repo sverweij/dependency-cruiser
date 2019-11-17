@@ -3,8 +3,17 @@ const extractcommonJSDeps = require("../../../src/extract/ast-extractors/extract
 const getASTFromSource = require("../../../src/extract/parse/toJavascriptAST")
   .getASTFromSource;
 
-const extractcommonJS = (pJavaScriptSource, pDependencies) =>
-  extractcommonJSDeps(getASTFromSource(pJavaScriptSource, "js"), pDependencies);
+const extractcommonJS = (
+  pJavaScriptSource,
+  pDependencies,
+  pExoticRequireStrings = []
+) =>
+  extractcommonJSDeps(
+    getASTFromSource(pJavaScriptSource, "js"),
+    pDependencies,
+    "cjs",
+    pExoticRequireStrings
+  );
 
 describe("ast-extractors/extract-commonJS-deps", () => {
   it("require with in an assignment", () => {
@@ -18,6 +27,33 @@ describe("ast-extractors/extract-commonJS-deps", () => {
         dynamic: false
       }
     ]);
+  });
+
+  it("use an exotic require and specify it as exoticRequireString", () => {
+    let lDeps = [];
+
+    extractcommonJS(
+      "const need = require; const x = need('./static-required-with-need')",
+      lDeps,
+      ["need"]
+    );
+    expect(lDeps).to.deep.equal([
+      {
+        moduleName: "./static-required-with-need",
+        moduleSystem: "cjs",
+        dynamic: false
+      }
+    ]);
+  });
+
+  it("use an exotic require and don't specify it as exoticRequireString", () => {
+    let lDeps = [];
+
+    extractcommonJS(
+      "const need = require; const x = need('./static-required-with-need')",
+      lDeps
+    );
+    expect(lDeps).to.deep.equal([]);
   });
 
   it("require with in an assignment - template literal argument", () => {
