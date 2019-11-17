@@ -165,6 +165,13 @@
               "description": "Arguments to pass if your config file returns a function. E.g. {mode: 'production'} if you want to use webpack 4's 'mode' feature"
             }
           }
+        },
+        "exoticRequireStrings": {
+          "type": "array",
+          "description": "List of strings you have in use in addition to cjs/ es6 requires & imports to declare module dependencies. Use this e.g. if you've redeclared require (`const want = require`), use a require-wrapper (like semver-try-require) or use window.require as a hack to workaround something",
+          "items": {
+            "type": "string"
+          }
         }
       }
     }

@@ -83,12 +83,34 @@ function extractTrippleSlashDirectives(pAST) {
     );
 }
 
+function firstArgIsAString(pASTNode) {
+  const lFirstArgument = pASTNode.arguments[0];
+
+  return (
+    lFirstArgument &&
+    // "thing" or 'thing'
+    (typescript.SyntaxKind[lFirstArgument.kind] === "StringLiteral" ||
+      // `thing`
+      typescript.SyntaxKind[lFirstArgument.kind] === "FirstTemplateToken")
+  );
+}
+
 function isRequireCallExpression(pASTNode) {
   return (
     typescript.SyntaxKind[pASTNode.kind] === "CallExpression" &&
     pASTNode.expression &&
     typescript.SyntaxKind[pASTNode.expression.originalKeywordKind] ===
-      "RequireKeyword"
+      "RequireKeyword" &&
+    firstArgIsAString(pASTNode)
+  );
+}
+
+function isExoticRequire(pASTNode, pString) {
+  return (
+    typescript.SyntaxKind[pASTNode.kind] === "CallExpression" &&
+    pASTNode.expression &&
+    pASTNode.expression.text === pString &&
+    firstArgIsAString(pASTNode)
   );
 }
 
@@ -96,7 +118,8 @@ function isDynamicImportExpression(pASTNode) {
   return (
     typescript.SyntaxKind[pASTNode.kind] === "CallExpression" &&
     pASTNode.expression &&
-    typescript.SyntaxKind[pASTNode.expression.kind] === "ImportKeyword"
+    typescript.SyntaxKind[pASTNode.expression.kind] === "ImportKeyword" &&
+    firstArgIsAString(pASTNode)
   );
 }
 
@@ -112,17 +135,45 @@ function isTypeImport(pASTNode) {
         "FirstTemplateToken")
   );
 }
+function walk(pResult, pExoticRequireStrings) {
+  return pASTNode => {
+    // require('a-string'), require(`a-template-literal`)
+    if (isRequireCallExpression(pASTNode)) {
+      pResult.push({
+        moduleName: pASTNode.arguments[0].text,
+        moduleSystem: "cjs"
+      });
+    }
 
-function firstArgIsAString(pASTNode) {
-  const lFirstArgument = pASTNode.arguments[0];
+    // const want = require; {lalala} = want('yudelyo'), window.require('elektron')
+    pExoticRequireStrings.forEach(pExoticRequireString => {
+      if (isExoticRequire(pASTNode, pExoticRequireString)) {
+        pResult.push({
+          moduleName: pASTNode.arguments[0].text,
+          moduleSystem: "cjs"
+        });
+      }
+    });
 
-  return (
-    lFirstArgument &&
-    // "thing" or 'thing'
-    (typescript.SyntaxKind[lFirstArgument.kind] === "StringLiteral" ||
-      // `thing`
-      typescript.SyntaxKind[lFirstArgument.kind] === "FirstTemplateToken")
-  );
+    // import('a-string'), import(`a-template-literal`)
+    if (isDynamicImportExpression(pASTNode)) {
+      pResult.push({
+        moduleName: pASTNode.arguments[0].text,
+        moduleSystem: "es6",
+        dynamic: true
+      });
+    }
+
+    // const atype: import('./types').T
+    // const atype: import(`./types`).T
+    if (isTypeImport(pASTNode)) {
+      pResult.push({
+        moduleName: pASTNode.argument.literal.text,
+        moduleSystem: "es6"
+      });
+    }
+    typescript.forEachChild(pASTNode, walk(pResult, pExoticRequireStrings));
+  };
 }
 
 /**
@@ -132,37 +183,10 @@ function firstArgIsAString(pASTNode) {
  * @param {import("typescript").Node} pAST - typescript syntax tree
  * @returns {{moduleName: string, moduleSystem: string}[]} - all commonJS dependencies
  */
-function extractNestedDependencies(pAST) {
+function extractNestedDependencies(pAST, pExoticRequireStrings) {
   let lResult = [];
 
-  function walk(pASTNode) {
-    // require('a-string'), require(`a-template-literal`)
-    if (isRequireCallExpression(pASTNode) && firstArgIsAString(pASTNode)) {
-      lResult.push({
-        moduleName: pASTNode.arguments[0].text,
-        moduleSystem: "cjs"
-      });
-    }
-    // import('a-string'), import(`a-template-literal`)
-    if (isDynamicImportExpression(pASTNode) && firstArgIsAString(pASTNode)) {
-      lResult.push({
-        moduleName: pASTNode.arguments[0].text,
-        moduleSystem: "es6",
-        dynamic: true
-      });
-    }
-    // const atype: import('./types').T
-    // const atype: import(`./types`).T
-    if (isTypeImport(pASTNode)) {
-      lResult.push({
-        moduleName: pASTNode.argument.literal.text,
-        moduleSystem: "es6"
-      });
-    }
-    typescript.forEachChild(pASTNode, walk);
-  }
-
-  walk(pAST);
+  walk(lResult, pExoticRequireStrings)(pAST);
 
   return lResult;
 }
@@ -170,13 +194,15 @@ function extractNestedDependencies(pAST) {
 /**
  * returns all dependencies in the (top level) AST
  *
- * @type {(pTypeScriptAST: import("typescript").Node) => {moduleName: string, moduleSystem: string, dynamic: boolean}[]}
+ * @type {(pTypeScriptAST: (import("typescript").Node), pExoticRequireStrings: string[]) => {moduleName: string, moduleSystem: string, dynamic: boolean}[]}
  */
-module.exports = pTypeScriptAST =>
+module.exports = (pTypeScriptAST, pExoticRequireStrings) =>
   Boolean(typescript)
     ? extractImportsAndExports(pTypeScriptAST)
         .concat(extractImportEquals(pTypeScriptAST))
         .concat(extractTrippleSlashDirectives(pTypeScriptAST))
-        .concat(extractNestedDependencies(pTypeScriptAST))
+        .concat(
+          extractNestedDependencies(pTypeScriptAST, pExoticRequireStrings)
+        )
         .map(pModule => ({ dynamic: false, ...pModule }))
     : [];

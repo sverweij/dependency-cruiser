@@ -28,10 +28,10 @@ function firstArgumentIsATemplateLiteral(pArgumentsNode) {
   );
 }
 
-function isRequireIdentifier(pNode) {
+function isRequireIdentifier(pNode, pName) {
   return (
     "Identifier" === _get(pNode, "callee.type") &&
-    "require" === _get(pNode, "callee.name")
+    pName === _get(pNode, "callee.name")
   );
 }
 

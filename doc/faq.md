@@ -262,6 +262,14 @@ _externalModuleResolutionStrategy_ key:
 emits the circular path in the _err_, _err-long_, _err-html_ and
 _teamcity_ reporters.
 
+### Q: I'm using window.require or a require wrapper - how do I make sure dependencies I declared like that are included?
+
+**A**: Add a _exoticRequireStrings_ key in your configuration with the 
+
+```json
+"exoticRequireStrings": ["window.require"]
+```
+
 ## Expanding dependency-cruiser
 
 ### Q: How do I add a new output format?

@@ -50,9 +50,9 @@ templates['config.js.template.hbs'] = template({"1":function(container,depth0,he
     + ((stack1 = helpers["if"].call(alias1,(depth0 != null ? depth0.webpackConfig : depth0),{"name":"if","hash":{},"fn":container.program(13, data, 0),"inverse":container.program(15, data, 0),"data":data,"loc":{"start":{"line":283,"column":8},"end":{"line":295,"column":15}}})) != null ? stack1 : "")
     + "\n        /* How to resolve external modules - use \"yarn-pnp\" if you're using yarn's Plug'n'Play.\n           otherwise leave it out (or set to the default, which is 'node_modules')\n        */\n"
     + ((stack1 = helpers["if"].call(alias1,(depth0 != null ? depth0.externalModuleResolutionStrategy : depth0),{"name":"if","hash":{},"fn":container.program(17, data, 0),"inverse":container.program(19, data, 0),"data":data,"loc":{"start":{"line":300,"column":8},"end":{"line":304,"column":15}}})) != null ? stack1 : "")
-    + "    }\n};\n// generated: dependency-cruiser@"
-    + alias4(((helper = (helper = helpers.version || (depth0 != null ? depth0.version : depth0)) != null ? helper : alias2),(typeof helper === alias3 ? helper.call(alias1,{"name":"version","hash":{},"data":data,"loc":{"start":{"line":307,"column":33},"end":{"line":307,"column":44}}}) : helper)))
+    + "        /* List of strings you have in use in addition to cjs/ es6 requires\n           & imports to declare module dependencies. Use this e.g. if you've\n           redeclared require, use a require-wrapper or use window.require as\n           a hack \n        */\n        // , exoticRequireStrings: []\n    }\n};\n// generated: dependency-cruiser@"
+    + alias4(((helper = (helper = helpers.version || (depth0 != null ? depth0.version : depth0)) != null ? helper : alias2),(typeof helper === alias3 ? helper.call(alias1,{"name":"version","hash":{},"data":data,"loc":{"start":{"line":313,"column":33},"end":{"line":313,"column":44}}}) : helper)))
     + " on "
-    + alias4(((helper = (helper = helpers.date || (depth0 != null ? depth0.date : depth0)) != null ? helper : alias2),(typeof helper === alias3 ? helper.call(alias1,{"name":"date","hash":{},"data":data,"loc":{"start":{"line":307,"column":48},"end":{"line":307,"column":56}}}) : helper)))
+    + alias4(((helper = (helper = helpers.date || (depth0 != null ? depth0.date : depth0)) != null ? helper : alias2),(typeof helper === alias3 ? helper.call(alias1,{"name":"date","hash":{},"data":data,"loc":{"start":{"line":313,"column":48},"end":{"line":313,"column":56}}}) : helper)))
     + "\n";
 },"useData":true});

@@ -1091,12 +1091,34 @@ the file it investigates:
 
 - monodash/
 - **package.json** _<- look in this one as well; merge it into the one down the tree_
-- packages/  
-   - begindash/  
-   - **package.json** _<- look in this one_  
-   - src/  
-   - index.ts
-  </details>
+- packages/
+  - begindash/
+  - **package.json** _<- look in this one_
+  - src/
+  - index.ts
+    </details>
+
+#### exotic ways to require modules - exoticRequireStrings
+
+In some situations you might not be able to use the `require` function
+directly or at all. E.g. when you're not sure a module is present and
+want to have a fallback ([semver-try-require](https://github.com/sverweij/semnver-try-require)).
+Or because require in your environment is used for something else and
+you needed to redefine require (`const want = require; const whoa = want('whoadash')`).
+Or because you're in AMD and you named the require parameter something
+else because of a company wide standard to do so.
+
+In each of these cases you can still infer dependencies with the exoticRequireStrings
+option by adding an exoticRequireStrings array to the options in your
+dependency cruiser config. 
+
+E.g.:
+
+```json
+"options": {
+  "exoticRequireStrings": ["want", "tryRequire", "window.require"]
+}
+```
 
 ## Configurations in javascript
 

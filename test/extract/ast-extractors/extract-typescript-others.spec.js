@@ -15,7 +15,8 @@ describe("ast-extractors/extract-typescript - others", () => {
             path.join(__dirname, "typescript2.8-union-types-ast.json"),
             "utf8"
           )
-        )
+        ),
+        []
       )
     ).to.deep.equal([]);
   });

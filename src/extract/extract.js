@@ -13,7 +13,8 @@ const toTypescriptAST = require("./parse/toTypescriptAST");
 function extractFromTypeScriptAST(pDependencies, pOptions, pFileName) {
   return pDependencies.concat(
     extractTypeScriptDeps(
-      toTypescriptAST.getASTCached(path.join(pOptions.baseDir, pFileName))
+      toTypescriptAST.getASTCached(path.join(pOptions.baseDir, pFileName)),
+      pOptions.exoticRequireStrings
     )
   );
 }
@@ -38,13 +39,18 @@ function extractFromJavaScriptAST(
   );
 
   if (pOptions.moduleSystems.indexOf("cjs") > -1) {
-    extractCommonJSDeps(lAST, pDependencies);
+    extractCommonJSDeps(
+      lAST,
+      pDependencies,
+      "cjs",
+      pOptions.exoticRequireStrings
+    );
   }
   if (pOptions.moduleSystems.indexOf("es6") > -1) {
     extractES6Deps(lAST, pDependencies);
   }
   if (pOptions.moduleSystems.indexOf("amd") > -1) {
-    extractAMDDeps(lAST, pDependencies);
+    extractAMDDeps(lAST, pDependencies, pOptions.exoticRequireStrings);
   }
 }
 
