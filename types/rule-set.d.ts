@@ -46,6 +46,14 @@ export interface IToRestriction {
    */
   dynamic?: boolean;
   /**
+   * A regular expression to match against any 'exotic' require strings
+   */
+  exoticRequire?: string;
+  /**
+   * A regular expression to match against any 'exotic' require strings - when it should NOT be caught by the rule
+   */
+  exoticRequireNot?: string;
+  /**
    * Whether or not to match modules of any of these types (leaving out matches any of them)
    */
   dependencyTypes?: DependencyType[];

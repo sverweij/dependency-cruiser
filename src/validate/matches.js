@@ -72,6 +72,22 @@ function toLicenseNot(pRule, pDependency) {
   );
 }
 
+function toExoticRequire(pRule, pDependency) {
+  return (
+    !pRule.to.exoticRequire ||
+    (pDependency.exoticRequire &&
+      pDependency.exoticRequire.match(pRule.to.exoticRequire))
+  );
+}
+
+function toExoticRequireNot(pRule, pDependency) {
+  return (
+    !pRule.to.exoticRequireNot ||
+    (pDependency.exoticRequire &&
+      !pDependency.exoticRequire.match(pRule.to.exoticRequireNot))
+  );
+}
+
 module.exports = {
   _replaceGroupPlaceholders,
   fromPath,
@@ -82,5 +98,7 @@ module.exports = {
   toModulePathNot,
   toDependencyTypes,
   toLicense,
-  toLicenseNot
+  toLicenseNot,
+  toExoticRequire,
+  toExoticRequireNot
 };

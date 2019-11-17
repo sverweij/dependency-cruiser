@@ -271,4 +271,33 @@ describe("extract/extract - include", () => {
       }
     ]);
   });
+
+  it("annotates the exotic require", () => {
+    const lOptions = normalize({ exoticRequireStrings: ["need"] });
+    const lResolveOptions = normalizeResolveOptions(
+      { bustTheCache: true },
+      lOptions
+    );
+
+    expect(
+      extract(
+        "./test/extract/fixtures/exotic-require/index.js",
+        lOptions,
+        lResolveOptions
+      )
+    ).to.deep.equal([
+      {
+        coreModule: false,
+        couldNotResolve: false,
+        dependencyTypes: ["local"],
+        dynamic: false,
+        followable: true,
+        matchesDoNotFollow: false,
+        module: "./required-with-need",
+        moduleSystem: "cjs",
+        exoticRequire: "need",
+        resolved: "test/extract/fixtures/exotic-require/required-with-need.js"
+      }
+    ]);
+  });
 });

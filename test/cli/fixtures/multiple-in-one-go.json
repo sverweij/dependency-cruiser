@@ -153,6 +153,7 @@
             "outputType": "json",
             "tsPreCompilationDeps": false,
             "combinedDependencies": false,
+            "exoticRequireStrings": [],
             "preserveSymlinks": false,
             "externalModuleResolutionStrategy": "node_modules"
         }

@@ -417,6 +417,7 @@
             "tsPreCompilationDeps": false,
             "preserveSymlinks": false,
             "combinedDependencies": false,
+            "exoticRequireStrings": [],
             "externalModuleResolutionStrategy": "node_modules"
         }
     }

@@ -1,13 +1,13 @@
 const expect = require("chai").expect;
 const validate = require("../../src/validate");
-const _readRuleSet = require("./readruleset.utl");
+const readRuleSet = require("./readruleset.utl");
 
 describe("validate/index - reachable", () => {
   it("Skips modules that have no reachable attribute", () => {
     expect(
       validate.module(
         true,
-        _readRuleSet("./test/validate/fixtures/rules.reachable.json"),
+        readRuleSet("./test/validate/fixtures/rules.reachable.json"),
         { source: "something" }
       )
     ).to.deep.equal({ valid: true });
@@ -17,7 +17,7 @@ describe("validate/index - reachable", () => {
     expect(
       validate.module(
         true,
-        _readRuleSet("./test/validate/fixtures/rules.reachable.json"),
+        readRuleSet("./test/validate/fixtures/rules.reachable.json"),
         {
           source: "something",
           reachable: [{ asDefinedInRule: "no-unreachable", value: true }]
@@ -30,7 +30,7 @@ describe("validate/index - reachable", () => {
     expect(
       validate.module(
         true,
-        _readRuleSet("./test/validate/fixtures/rules.reachable.json"),
+        readRuleSet("./test/validate/fixtures/rules.reachable.json"),
         {
           source: "something",
           reachable: [{ asDefinedInRule: "no-unreachable", value: false }]
@@ -51,7 +51,7 @@ describe("validate/index - reachable", () => {
     expect(
       validate.module(
         true,
-        _readRuleSet("./test/validate/fixtures/rules.reachable.path.json"),
+        readRuleSet("./test/validate/fixtures/rules.reachable.path.json"),
         {
           source: "something",
           reachable: [{ asDefinedInRule: "no-unreachable", value: false }]
@@ -72,7 +72,7 @@ describe("validate/index - reachable", () => {
     expect(
       validate.module(
         true,
-        _readRuleSet("./test/validate/fixtures/rules.reachable.pathnot.json"),
+        readRuleSet("./test/validate/fixtures/rules.reachable.pathnot.json"),
         {
           source: "something",
           reachable: [{ asDefinedInRule: "no-unreachable", value: false }]
@@ -85,7 +85,7 @@ describe("validate/index - reachable", () => {
     expect(
       validate.module(
         true,
-        _readRuleSet("./test/validate/fixtures/rules.reachable.allowed.json"),
+        readRuleSet("./test/validate/fixtures/rules.reachable.allowed.json"),
         { source: "something" }
       )
     ).to.deep.equal({ valid: true });
@@ -95,7 +95,7 @@ describe("validate/index - reachable", () => {
     expect(
       validate.module(
         true,
-        _readRuleSet("./test/validate/fixtures/rules.reachable.allowed.json"),
+        readRuleSet("./test/validate/fixtures/rules.reachable.allowed.json"),
         {
           source: "something",
           reachable: [{ value: true, asDefinedInRule: "not-in-allowed" }]
@@ -108,7 +108,7 @@ describe("validate/index - reachable", () => {
     expect(
       validate.module(
         true,
-        _readRuleSet("./test/validate/fixtures/rules.reachable.allowed.json"),
+        readRuleSet("./test/validate/fixtures/rules.reachable.allowed.json"),
         {
           source: "something",
           reachable: [{ value: false, asDefinedInRule: "not-in-allowed" }]

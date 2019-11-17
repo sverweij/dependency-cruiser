@@ -103,6 +103,7 @@
   "optionsUsed": {
    "args": "./test/extract/fixtures/cache-busting/index.ts",
    "combinedDependencies": false,
+   "exoticRequireStrings": [],
    "doNotFollow": {
     "dependencyTypes": [
      "npm",

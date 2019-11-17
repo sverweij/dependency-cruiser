@@ -150,7 +150,8 @@ function walk(pResult, pExoticRequireStrings) {
       if (isExoticRequire(pASTNode, pExoticRequireString)) {
         pResult.push({
           moduleName: pASTNode.arguments[0].text,
-          moduleSystem: "cjs"
+          moduleSystem: "cjs",
+          exoticRequire: pExoticRequireString
         });
       }
     });

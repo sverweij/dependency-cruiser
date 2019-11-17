@@ -21,7 +21,8 @@ describe("ast-extractors/extract-typescript - exotics", () => {
       {
         moduleName: "./required-with-want",
         moduleSystem: "cjs",
-        dynamic: false
+        dynamic: false,
+        exoticRequire: "want"
       }
     ]);
   });
@@ -36,12 +37,14 @@ describe("ast-extractors/extract-typescript - exotics", () => {
       {
         moduleName: "./required-with-want",
         moduleSystem: "cjs",
-        dynamic: false
+        dynamic: false,
+        exoticRequire: "want"
       },
       {
         moduleName: "./required-with-need",
         moduleSystem: "cjs",
-        dynamic: false
+        dynamic: false,
+        exoticRequire: "need"
       }
     ]);
   });

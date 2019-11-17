@@ -41,7 +41,8 @@ describe("ast-extractors/extract-commonJS-deps", () => {
       {
         moduleName: "./static-required-with-need",
         moduleSystem: "cjs",
-        dynamic: false
+        dynamic: false,
+        exoticRequire: "need"
       }
     ]);
   });

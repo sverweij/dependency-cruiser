@@ -70,12 +70,14 @@ describe("ast-extractors/extract-AMD-deps", () => {
       {
         moduleName: "./one-with-want",
         moduleSystem: "amd",
-        dynamic: false
+        dynamic: false,
+        exoticRequire: "want"
       },
       {
         moduleName: "./two-with-want",
         moduleSystem: "amd",
-        dynamic: false
+        dynamic: false,
+        exoticRequire: "want"
       }
     ]);
   });

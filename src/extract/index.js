@@ -26,7 +26,8 @@ const SHAREABLE_OPTIONS = [
   "preserveSymlinks",
   "rulesFile",
   "tsPreCompilationDeps",
-  "webpackConfig"
+  "webpackConfig",
+  "exoticRequireStrings"
 ];
 
 /* eslint max-params:0 */

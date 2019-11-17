@@ -105,6 +105,11 @@ export interface IDependency {
    */
   dynamic: boolean;
   /**
+   * If this dependency was defined by a require not named require (as defined in the
+   * exoticRequireStrings option): the string that was used
+   */
+  exoticRequire?: string;
+  /**
    * Whether or not this is a dependency that can be followed any further. This will be
    * 'false' for for core modules, json, modules that could not be resolved to a file and
    * modules that weren't followed because it matches the doNotFollow expression.

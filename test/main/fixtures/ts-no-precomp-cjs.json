@@ -1,73 +1,66 @@
 {
-    "modules": [
+  "modules": [
+    {
+      "dependencies": [],
+      "source": "test/main/fixtures/ts-precompilation-deps-off-cjs/also-used.ts",
+      "valid": true
+    },
+    {
+      "dependencies": [],
+      "source": "test/main/fixtures/ts-precompilation-deps-off-cjs/definitely-used.ts",
+      "valid": true
+    },
+    {
+      "dependencies": [],
+      "source": "test/main/fixtures/ts-precompilation-deps-off-cjs/imported-from-index-but-not-used.ts",
+      "valid": true
+    },
+    {
+      "dependencies": [
         {
-            "dependencies": [],
-            "source": "test/main/fixtures/ts-precompilation-deps-off-cjs/also-used.ts",
-            "valid": true
+          "coreModule": false,
+          "couldNotResolve": false,
+          "dependencyTypes": ["local"],
+          "dynamic": false,
+          "followable": true,
+          "matchesDoNotFollow": false,
+          "module": "./also-used",
+          "moduleSystem": "cjs",
+          "resolved": "test/main/fixtures/ts-precompilation-deps-off-cjs/also-used.ts",
+          "valid": true
         },
         {
-            "dependencies": [],
-            "source": "test/main/fixtures/ts-precompilation-deps-off-cjs/definitely-used.ts",
-            "valid": true
-        },
-        {
-            "dependencies": [],
-            "source": "test/main/fixtures/ts-precompilation-deps-off-cjs/imported-from-index-but-not-used.ts",
-            "valid": true
-        },
-        {
-            "dependencies": [
-                {
-                    "coreModule": false,
-                    "couldNotResolve": false,
-                    "dependencyTypes": [
-                        "local"
-                    ],
-                    "dynamic": false,
-                    "followable": true,
-                    "matchesDoNotFollow": false,
-                    "module": "./also-used",
-                    "moduleSystem": "cjs",
-                    "resolved": "test/main/fixtures/ts-precompilation-deps-off-cjs/also-used.ts",
-                    "valid": true
-                },
-                {
-                    "coreModule": false,
-                    "couldNotResolve": false,
-                    "dependencyTypes": [
-                        "local"
-                    ],
-                    "dynamic": false,
-                    "followable": true,
-                    "matchesDoNotFollow": false,
-                    "module": "./definitely-used",
-                    "moduleSystem": "cjs",
-                    "resolved": "test/main/fixtures/ts-precompilation-deps-off-cjs/definitely-used.ts",
-                    "valid": true
-                }
-            ],
-            "source": "test/main/fixtures/ts-precompilation-deps-off-cjs/index.ts",
-            "valid": true
+          "coreModule": false,
+          "couldNotResolve": false,
+          "dependencyTypes": ["local"],
+          "dynamic": false,
+          "followable": true,
+          "matchesDoNotFollow": false,
+          "module": "./definitely-used",
+          "moduleSystem": "cjs",
+          "resolved": "test/main/fixtures/ts-precompilation-deps-off-cjs/definitely-used.ts",
+          "valid": true
         }
-    ],
-    "summary": {
-        "error": 0,
-        "info": 0,
-        "optionsUsed": {
-            "args": "test/main/fixtures/ts-precompilation-deps-off-cjs",
-            "externalModuleResolutionStrategy": "node_modules",
-            "moduleSystems": [
-                "amd",
-                "cjs",
-                "es6"
-            ],
-            "preserveSymlinks": false,
-            "tsPreCompilationDeps": false,
-            "combinedDependencies": false
-        },
-        "totalCruised": 4,
-        "totalDependenciesCruised": 2,
-        "violations": [],
-        "warn": 0
+      ],
+      "source": "test/main/fixtures/ts-precompilation-deps-off-cjs/index.ts",
+      "valid": true
     }
+  ],
+  "summary": {
+    "error": 0,
+    "info": 0,
+    "optionsUsed": {
+      "args": "test/main/fixtures/ts-precompilation-deps-off-cjs",
+      "externalModuleResolutionStrategy": "node_modules",
+      "moduleSystems": ["amd", "cjs", "es6"],
+      "preserveSymlinks": false,
+      "tsPreCompilationDeps": false,
+      "combinedDependencies": false,
+      "exoticRequireStrings": []
+    },
+    "totalCruised": 4,
+    "totalDependenciesCruised": 2,
+    "violations": [],
+    "warn": 0
+  }
 }

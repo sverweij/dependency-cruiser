@@ -53,7 +53,7 @@
               "type": "array",
               "description": "A list of rules that describe dependencies that are not allowed. dependency-cruiser will emit a separate error (warning/ informational) messages for each violated rule.",
               "items": {
-                "$ref": "#/definitions/ForiddenRuleType"
+                "$ref": "#/definitions/ForbiddenRuleType"
               }
             },
             "allowed": {
@@ -173,6 +173,10 @@
                   "type": "boolean",
                   "description": "true if this dependency is dynamic, false in all other cases"
                 },
+                "exoticRequire": {
+                  "type": "string",
+                  "description": "If this dependency was defined by a require not named require (as defined in the exoticRequireStrings option): the string that was used"
+                },
                 "matchesDoNotFollow": {
                   "type": "boolean",
                   "description": "'true' if the file name of this module matches the doNotFollow regular expression"
@@ -224,7 +228,7 @@
         }
       }
     },
-    "ForiddenRuleType": {
+    "ForbiddenRuleType": {
       "type": "object",
       "required": ["from", "to"],
       "additionalProperties": false,
@@ -294,6 +298,14 @@
         "dynamic": {
           "type": "boolean",
           "description": "true if this dependency is dynamic, false in all other cases"
+        },
+        "exoticRequire": {
+          "type": "string",
+          "description": "A regular expression to match against any 'exotic' require strings"
+        },
+        "exoticRequireNot": {
+          "type": "string",
+          "description": "A regular expression to match against any 'exotic' require strings - when it should NOT be caught by the rule"
         },
         "moreThanOneDependencyType": {
           "type": "boolean",

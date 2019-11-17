@@ -1,13 +1,13 @@
 const expect = require("chai").expect;
 const validate = require("../../src/validate");
-const _readRuleSet = require("./readruleset.utl");
+const readRuleSet = require("./readruleset.utl");
 
 describe("validate/index dependency - generic tests", () => {
   it("is ok with the empty validation", () => {
     expect(
       validate.dependency(
         true,
-        _readRuleSet("./test/validate/fixtures/rules.empty.json"),
+        readRuleSet("./test/validate/fixtures/rules.empty.json"),
         { source: "koos koets" },
         { resolved: "robby van de kerkhof" }
       )
@@ -18,7 +18,7 @@ describe("validate/index dependency - generic tests", () => {
     expect(
       validate.dependency(
         true,
-        _readRuleSet("./test/validate/fixtures/rules.everything-allowed.json"),
+        readRuleSet("./test/validate/fixtures/rules.everything-allowed.json"),
         { source: "koos koets" },
         { resolved: "robby van de kerkhof" }
       )
@@ -29,7 +29,7 @@ describe("validate/index dependency - generic tests", () => {
     expect(
       validate.module(
         true,
-        _readRuleSet(
+        readRuleSet(
           "./test/validate/fixtures/rules.module-only.empty.allowed.json"
         ),
         { source: "koos koets" }
@@ -41,7 +41,7 @@ describe("validate/index dependency - generic tests", () => {
     expect(
       validate.dependency(
         true,
-        _readRuleSet(
+        readRuleSet(
           "./test/validate/fixtures/rules.impossible-to-match-allowed.json"
         ),
         { source: "koos koets" },
@@ -57,7 +57,7 @@ describe("validate/index dependency - generic tests", () => {
     expect(
       validate.dependency(
         true,
-        _readRuleSet(
+        readRuleSet(
           "./test/validate/fixtures/rules.impossible-to-match-error.allowed.json"
         ),
         { source: "koos koets" },
@@ -73,7 +73,7 @@ describe("validate/index dependency - generic tests", () => {
     expect(
       validate.dependency(
         true,
-        _readRuleSet("./test/validate/fixtures/rules.nothing-allowed.json"),
+        readRuleSet("./test/validate/fixtures/rules.nothing-allowed.json"),
         { source: "koos koets" },
         { resolved: "robby van de kerkhof" }
       )
@@ -87,7 +87,7 @@ describe("validate/index dependency - generic tests", () => {
     expect(
       validate.dependency(
         true,
-        _readRuleSet(
+        readRuleSet(
           "./test/validate/fixtures/rules.not-in-allowed-and-a-forbidden.json"
         ),
         { source: "something" },
@@ -110,7 +110,7 @@ describe("validate/index - specific tests", () => {
     expect(
       validate.dependency(
         true,
-        _readRuleSet(
+        readRuleSet(
           "./test/validate/fixtures/rules.node_modules-not-allowed.json"
         ),
         { source: "koos koets" },
@@ -123,7 +123,7 @@ describe("validate/index - specific tests", () => {
     expect(
       validate.dependency(
         true,
-        _readRuleSet(
+        readRuleSet(
           "./test/validate/fixtures/rules.node_modules-not-allowed.json"
         ),
         { source: "koos koets" },
@@ -139,7 +139,7 @@ describe("validate/index - specific tests", () => {
     expect(
       validate.dependency(
         true,
-        _readRuleSet("./test/validate/fixtures/rules.not-to-core.json"),
+        readRuleSet("./test/validate/fixtures/rules.not-to-core.json"),
         { source: "koos koets" },
         { resolved: "path", dependencyTypes: ["npm"] }
       )
@@ -150,7 +150,7 @@ describe("validate/index - specific tests", () => {
     expect(
       validate.dependency(
         true,
-        _readRuleSet("./test/validate/fixtures/rules.not-to-core.json"),
+        readRuleSet("./test/validate/fixtures/rules.not-to-core.json"),
         { source: "koos koets" },
         { resolved: "path", dependencyTypes: ["core"] }
       )
@@ -164,7 +164,7 @@ describe("validate/index - specific tests", () => {
     expect(
       validate.dependency(
         true,
-        _readRuleSet("./test/validate/fixtures/rules.not-to-core-fs-os.json"),
+        readRuleSet("./test/validate/fixtures/rules.not-to-core-fs-os.json"),
         { source: "koos koets" },
         { resolved: "path", dependencyTypes: ["core"] }
       )
@@ -175,7 +175,7 @@ describe("validate/index - specific tests", () => {
     expect(
       validate.dependency(
         true,
-        _readRuleSet("./test/validate/fixtures/rules.not-to-core-fs-os.json"),
+        readRuleSet("./test/validate/fixtures/rules.not-to-core-fs-os.json"),
         { source: "koos koets" },
         { resolved: "os", dependencyTypes: ["core"] }
       )
@@ -189,7 +189,7 @@ describe("validate/index - specific tests", () => {
     expect(
       validate.dependency(
         true,
-        _readRuleSet("./test/validate/fixtures/rules.not-to-unresolvable.json"),
+        readRuleSet("./test/validate/fixtures/rules.not-to-unresolvable.json"),
         { source: "koos koets" },
         { resolved: "diana charitee", couldNotResolve: false }
       )
@@ -200,7 +200,7 @@ describe("validate/index - specific tests", () => {
     expect(
       validate.dependency(
         true,
-        _readRuleSet("./test/validate/fixtures/rules.not-to-unresolvable.json"),
+        readRuleSet("./test/validate/fixtures/rules.not-to-unresolvable.json"),
         { source: "koos koets" },
         { resolved: "diana charitee", couldNotResolve: true }
       )
@@ -214,9 +214,7 @@ describe("validate/index - specific tests", () => {
     expect(
       validate.dependency(
         true,
-        _readRuleSet(
-          "./test/validate/fixtures/rules.only-to-core.allowed.json"
-        ),
+        readRuleSet("./test/validate/fixtures/rules.only-to-core.allowed.json"),
         { source: "koos koets" },
         { resolved: "os", dependencyTypes: ["core"] }
       )
@@ -227,9 +225,7 @@ describe("validate/index - specific tests", () => {
     expect(
       validate.dependency(
         true,
-        _readRuleSet(
-          "./test/validate/fixtures/rules.only-to-core.allowed.json"
-        ),
+        readRuleSet("./test/validate/fixtures/rules.only-to-core.allowed.json"),
         { source: "koos koets" },
         { resolved: "ger hekking", dependencyTypes: ["npm"] }
       )
@@ -243,7 +239,7 @@ describe("validate/index - specific tests", () => {
     expect(
       validate.dependency(
         true,
-        _readRuleSet(
+        readRuleSet(
           "./test/validate/fixtures/rules.only-to-core.forbidden.json"
         ),
         { source: "koos koets" },
@@ -256,7 +252,7 @@ describe("validate/index - specific tests", () => {
     expect(
       validate.dependency(
         true,
-        _readRuleSet(
+        readRuleSet(
           "./test/validate/fixtures/rules.only-to-core.forbidden.json"
         ),
         { source: "koos koets" },
@@ -272,7 +268,7 @@ describe("validate/index - specific tests", () => {
     expect(
       validate.dependency(
         true,
-        _readRuleSet(
+        readRuleSet(
           "./test/validate/fixtures/rules.not-to-sub-except-sub.json"
         ),
         { source: "./keek/op/de/sub/week.js" },
@@ -285,7 +281,7 @@ describe("validate/index - specific tests", () => {
     expect(
       validate.dependency(
         true,
-        _readRuleSet(
+        readRuleSet(
           "./test/validate/fixtures/rules.not-to-sub-except-sub.json"
         ),
         { source: "./doctor/clavan.js" },
@@ -298,7 +294,7 @@ describe("validate/index - specific tests", () => {
     expect(
       validate.dependency(
         true,
-        _readRuleSet(
+        readRuleSet(
           "./test/validate/fixtures/rules.not-to-sub-except-sub.json"
         ),
         { source: "./doctor/sub/clavan.js" },
@@ -311,7 +307,7 @@ describe("validate/index - specific tests", () => {
     expect(
       validate.dependency(
         true,
-        _readRuleSet(
+        readRuleSet(
           "./test/validate/fixtures/rules.not-to-sub-except-sub.json"
         ),
         { source: "./doctor/clavan.js" },
@@ -327,7 +323,7 @@ describe("validate/index - specific tests", () => {
     expect(
       validate.dependency(
         true,
-        _readRuleSet("./test/validate/fixtures/rules.not-to-not-sub.json"),
+        readRuleSet("./test/validate/fixtures/rules.not-to-not-sub.json"),
         { source: "./keek/op/de/sub/week.js" },
         { resolved: "./keek/op/de/sub/maand.js", coreModule: false }
       )
@@ -338,7 +334,7 @@ describe("validate/index - specific tests", () => {
     expect(
       validate.dependency(
         true,
-        _readRuleSet("./test/validate/fixtures/rules.not-to-not-sub.json"),
+        readRuleSet("./test/validate/fixtures/rules.not-to-not-sub.json"),
         { source: "./amber.js" },
         { resolved: "./jade.js", coreModule: false }
       )
@@ -352,7 +348,7 @@ describe("validate/index - specific tests", () => {
     expect(
       validate.dependency(
         true,
-        _readRuleSet("./test/validate/fixtures/rules.not-to-dev-dep.json"),
+        readRuleSet("./test/validate/fixtures/rules.not-to-dev-dep.json"),
         { source: "src/aap/zus/jet.js" },
         {
           module: "chai",
@@ -375,7 +371,7 @@ describe("validate/index - specific tests", () => {
     expect(
       validate.dependency(
         true,
-        _readRuleSet("./test/validate/fixtures/rules.not-to-dev-dep.json"),
+        readRuleSet("./test/validate/fixtures/rules.not-to-dev-dep.json"),
         { source: "src/aap/zus/jet.js" },
         {
           module: "jip",
@@ -390,7 +386,7 @@ describe("validate/index - specific tests", () => {
     expect(
       validate.dependency(
         true,
-        _readRuleSet(
+        readRuleSet(
           "./test/validate/fixtures/rules.no-duplicate-dep-types.json"
         ),
         { source: "src/aap/zus/jet.js" },
