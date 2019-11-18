@@ -36,6 +36,7 @@
    - [`dependencyTypes`](#dependencytypes)
    - [`dynamic`](#dynamic)
    - [`moreThanOneDependencyType`](#more-than-one-dependencytype-per-dependency-morethanonedependencytype)
+   - [`exoticRequire` and `exoticRequireNot`](#exoticrequire-and-exoticrequirenot)
 4. [The `options`](#the-options)
    - [`doNotFollow`: don't cruise modules adhering to this pattern any further](#donotfollow-dont-cruise-modules-adhering-to-this-pattern-any-further)
    - [`exclude`: exclude dependencies from being cruised](#exclude-exclude-dependencies-from-being-cruised)
@@ -626,7 +627,7 @@ This is a list of dependency types dependency-cruiser currently detects.
 | unknown         | it's unknown what kind of dependency type this is - probably because the module could not be resolved in the first place                                                 | "loodash"                 |
 | undetermined    | the dependency fell through all detection holes. This could happen with amd dependencies - which have a whole jurasic park of ways to define where to resolve modules to | "veloci!./raptor"         |
 
-#### `dynamic`
+### `dynamic`
 
 A boolean that tells you whether the dependency is a dynamic one (i.e.
 it uses the async ES import statement a la `import('othermodule').then(pMod => pMod.doStuff())`).
@@ -662,7 +663,7 @@ You can use this e.g. to restrict the usage of dynamic dependencies:
 }
 ```
 
-#### More than one dependencyType per dependency? `moreThanOneDependencyType`
+### More than one dependencyType per dependency? `moreThanOneDependencyType`
 
 With the flexible character of package.json it's totally possible to specify
 a package more than once - e.g. both in the `peerDependencies` and in the
@@ -686,6 +687,40 @@ When left out it doesn't matter how many dependency types a dependency has.
 
 (If you're more of an 'allowed' user: it matches the 0 and 1 cases when set to
 false).
+
+### `exoticRequire` and `exoticRequireNot`
+
+For exotic requires/ require wrappers you might want to have different
+rules a.c.t. normal requires. E.g.
+
+- When you use a require wrapper to include a dependency that might not be there
+  and handle it elegantly, it's not an error if the module-to-be-there doesn't
+  actually exist - or is e.g. in your optionalDependencies.
+- You might want to ban the use of remapped requires/ require wrappers in certain
+  areas (or altogether).
+
+```json
+{
+  "name": "not-to-optional-deps",
+  "severity": "error",
+  "from": {},
+  "to": {
+    "dependencyTypes": ["npm-optional"],
+    "exoticRequireNot": "^tryRequire$"
+  }
+}
+```
+
+```json
+{
+  "name": "ban-all-exotic-requires",
+  "severity": "error",
+  "from": {},
+  "to": {
+    "exoticRequire": ".+"
+  }
+}
+```
 
 ## The `options`
 
@@ -1110,7 +1145,7 @@ else because of a company wide standard to do so.
 
 In each of these cases you can still infer dependencies with the exoticRequireStrings
 option by adding an exoticRequireStrings array to the options in your
-dependency cruiser config. 
+dependency cruiser config.
 
 E.g.:
 
