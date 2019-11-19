@@ -41,6 +41,8 @@ function match(pFrom, pTo) {
         pTo.dependencyTypes.length > 1) &&
       matches.toLicense(pRule, pTo) &&
       matches.toLicenseNot(pRule, pTo) &&
+      matches.toExoticRequire(pRule, pTo) &&
+      matches.toExoticRequireNot(pRule, pTo) &&
       propertyEquals(pTo, pRule, "couldNotResolve") &&
       propertyEquals(pTo, pRule, "circular") &&
       propertyEquals(pTo, pRule, "dynamic")

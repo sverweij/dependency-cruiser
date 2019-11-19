@@ -1,87 +1,78 @@
 {
-    "modules": [
+  "modules": [
+    {
+      "dependencies": [],
+      "source": "test/main/fixtures/ts-precompilation-deps-on-cjs/also-used.ts",
+      "valid": true
+    },
+    {
+      "dependencies": [],
+      "source": "test/main/fixtures/ts-precompilation-deps-on-cjs/definitely-used.ts",
+      "valid": true
+    },
+    {
+      "dependencies": [],
+      "source": "test/main/fixtures/ts-precompilation-deps-on-cjs/imported-from-index-but-not-used.ts",
+      "valid": true
+    },
+    {
+      "dependencies": [
         {
-            "dependencies": [],
-            "source": "test/main/fixtures/ts-precompilation-deps-on-cjs/also-used.ts",
-            "valid": true
+          "coreModule": false,
+          "couldNotResolve": false,
+          "dependencyTypes": ["local"],
+          "dynamic": false,
+          "followable": true,
+          "matchesDoNotFollow": false,
+          "module": "./also-used",
+          "moduleSystem": "cjs",
+          "resolved": "test/main/fixtures/ts-precompilation-deps-on-cjs/also-used.ts",
+          "valid": true
         },
         {
-            "dependencies": [],
-            "source": "test/main/fixtures/ts-precompilation-deps-on-cjs/definitely-used.ts",
-            "valid": true
+          "coreModule": false,
+          "couldNotResolve": false,
+          "dependencyTypes": ["local"],
+          "dynamic": false,
+          "followable": true,
+          "matchesDoNotFollow": false,
+          "module": "./definitely-used",
+          "moduleSystem": "es6",
+          "resolved": "test/main/fixtures/ts-precompilation-deps-on-cjs/definitely-used.ts",
+          "valid": true
         },
         {
-            "dependencies": [],
-            "source": "test/main/fixtures/ts-precompilation-deps-on-cjs/imported-from-index-but-not-used.ts",
-            "valid": true
-        },
-        {
-            "dependencies": [
-                {
-                    "coreModule": false,
-                    "couldNotResolve": false,
-                    "dependencyTypes": [
-                        "local"
-                    ],
-                    "dynamic": false,
-                    "followable": true,
-                    "matchesDoNotFollow": false,
-                    "module": "./also-used",
-                    "moduleSystem": "cjs",
-                    "resolved": "test/main/fixtures/ts-precompilation-deps-on-cjs/also-used.ts",
-                    "valid": true
-                },
-                {
-                    "coreModule": false,
-                    "couldNotResolve": false,
-                    "dependencyTypes": [
-                        "local"
-                    ],
-                    "dynamic": false,
-                    "followable": true,
-                    "matchesDoNotFollow": false,
-                    "module": "./definitely-used",
-                    "moduleSystem": "es6",
-                    "resolved": "test/main/fixtures/ts-precompilation-deps-on-cjs/definitely-used.ts",
-                    "valid": true
-                },
-                {
-                    "coreModule": false,
-                    "couldNotResolve": false,
-                    "dependencyTypes": [
-                        "local"
-                    ],
-                    "dynamic": false,
-                    "followable": true,
-                    "matchesDoNotFollow": false,
-                    "module": "./imported-from-index-but-not-used",
-                    "moduleSystem": "es6",
-                    "resolved": "test/main/fixtures/ts-precompilation-deps-on-cjs/imported-from-index-but-not-used.ts",
-                    "valid": true
-                }
-            ],
-            "source": "test/main/fixtures/ts-precompilation-deps-on-cjs/index.ts",
-            "valid": true
+          "coreModule": false,
+          "couldNotResolve": false,
+          "dependencyTypes": ["local"],
+          "dynamic": false,
+          "followable": true,
+          "matchesDoNotFollow": false,
+          "module": "./imported-from-index-but-not-used",
+          "moduleSystem": "es6",
+          "resolved": "test/main/fixtures/ts-precompilation-deps-on-cjs/imported-from-index-but-not-used.ts",
+          "valid": true
         }
-    ],
-    "summary": {
-        "error": 0,
-        "info": 0,
-        "optionsUsed": {
-            "args": "test/main/fixtures/ts-precompilation-deps-on-cjs",
-            "externalModuleResolutionStrategy": "node_modules",
-            "moduleSystems": [
-                "amd",
-                "cjs",
-                "es6"
-            ],
-            "preserveSymlinks": false,
-            "tsPreCompilationDeps": true,
-            "combinedDependencies": false
-        },
-        "totalCruised": 4,
-        "totalDependenciesCruised": 3,
-        "violations": [],
-        "warn": 0
+      ],
+      "source": "test/main/fixtures/ts-precompilation-deps-on-cjs/index.ts",
+      "valid": true
     }
+  ],
+  "summary": {
+    "error": 0,
+    "info": 0,
+    "optionsUsed": {
+      "args": "test/main/fixtures/ts-precompilation-deps-on-cjs",
+      "externalModuleResolutionStrategy": "node_modules",
+      "moduleSystems": ["amd", "cjs", "es6"],
+      "preserveSymlinks": false,
+      "tsPreCompilationDeps": true,
+      "combinedDependencies": false,
+      "exoticRequireStrings": []
+    },
+    "totalCruised": 4,
+    "totalDependenciesCruised": 3,
+    "violations": [],
+    "warn": 0
+  }
 }

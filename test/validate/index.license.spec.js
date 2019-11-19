@@ -1,13 +1,13 @@
 const expect = require("chai").expect;
 const validate = require("../../src/validate");
-const _readRuleSet = require("./readruleset.utl");
+const readRuleSet = require("./readruleset.utl");
 
 describe("validate/index - license", () => {
   it("Skips dependencies that have no license attached", () => {
     expect(
       validate.dependency(
         true,
-        _readRuleSet("./test/validate/fixtures/rules.license.json"),
+        readRuleSet("./test/validate/fixtures/rules.license.json"),
         { source: "something" },
         { resolved: "src/aap/speeltuigen/autoband.ts" }
       )
@@ -18,7 +18,7 @@ describe("validate/index - license", () => {
     expect(
       validate.dependency(
         true,
-        _readRuleSet("./test/validate/fixtures/rules.license.json"),
+        readRuleSet("./test/validate/fixtures/rules.license.json"),
         { source: "something" },
         {
           resolved: "src/aap/speeltuigen/autoband.ts",
@@ -32,7 +32,7 @@ describe("validate/index - license", () => {
     expect(
       validate.dependency(
         true,
-        _readRuleSet("./test/validate/fixtures/rules.license.json"),
+        readRuleSet("./test/validate/fixtures/rules.license.json"),
         { source: "something" },
         {
           resolved: "src/aap/speeltuigen/autoband.ts",
@@ -51,7 +51,7 @@ describe("validate/index - licenseNot", () => {
     expect(
       validate.dependency(
         true,
-        _readRuleSet("./test/validate/fixtures/rules.licensenot.json"),
+        readRuleSet("./test/validate/fixtures/rules.licensenot.json"),
         { source: "something" },
         { resolved: "src/aap/speeltuigen/autoband.ts" }
       )
@@ -62,7 +62,7 @@ describe("validate/index - licenseNot", () => {
     expect(
       validate.dependency(
         true,
-        _readRuleSet("./test/validate/fixtures/rules.licensenot.json"),
+        readRuleSet("./test/validate/fixtures/rules.licensenot.json"),
         { source: "something" },
         {
           resolved: "src/aap/speeltuigen/autoband.ts",
@@ -76,7 +76,7 @@ describe("validate/index - licenseNot", () => {
     expect(
       validate.dependency(
         true,
-        _readRuleSet("./test/validate/fixtures/rules.licensenot.json"),
+        readRuleSet("./test/validate/fixtures/rules.licensenot.json"),
         { source: "something" },
         {
           resolved: "src/aap/speeltuigen/autoband.ts",

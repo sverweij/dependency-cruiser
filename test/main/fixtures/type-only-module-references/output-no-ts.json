@@ -15,6 +15,7 @@
     "totalDependenciesCruised": 0,
     "optionsUsed": {
       "combinedDependencies": false,
+      "exoticRequireStrings": [],
       "externalModuleResolutionStrategy": "node_modules",
       "moduleSystems": [
         "amd",

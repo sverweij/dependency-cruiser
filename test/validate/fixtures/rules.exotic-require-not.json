@@ -1,0 +1,9 @@
+{
+  "forbidden": [
+    {
+      "name": "only-use-as-exotic-require",
+      "from": {},
+      "to": { "exoticRequireNot": "^use$" }
+    }
+  ]
+}

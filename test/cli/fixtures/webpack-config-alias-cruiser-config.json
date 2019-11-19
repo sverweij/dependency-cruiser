@@ -74,6 +74,7 @@
             "outputType": "json",
             "tsPreCompilationDeps": false,
             "combinedDependencies": false,
+            "exoticRequireStrings": [],
             "preserveSymlinks": false,
             "webpackConfig": {
                 "fileName": "test/cli/fixtures/webpackconfig/aliassy/webpack.regularexport.config.js"

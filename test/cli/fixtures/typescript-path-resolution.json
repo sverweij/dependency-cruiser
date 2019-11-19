@@ -65,6 +65,7 @@
             "outputType": "json",
             "tsPreCompilationDeps": false,
             "combinedDependencies": false,
+            "exoticRequireStrings": [],
             "preserveSymlinks": false,
             "webpackConfig": {
                 "fileName": "test/cli/fixtures/typescriptconfig/cli-config-with-path/webpack.config.js"

@@ -9,12 +9,16 @@ function pushRequireCallsToDependencies(
   return pNode => {
     ["require"].concat(pExoticRequireStrings).forEach(pName => {
       if (estreeHelpers.isRequireIdentifier(pNode, pName)) {
+        const lExoticRequire =
+          pName === "require" ? {} : { exoticRequire: pName };
+
         if (estreeHelpers.firstArgumentIsAString(pNode.arguments)) {
           pNode.arguments[0].value.split("!").forEach(pString =>
             pDependencies.push({
               moduleName: pString,
               moduleSystem: pModuleSystem,
-              dynamic: false
+              dynamic: false,
+              ...lExoticRequire
             })
           );
         } else if (
@@ -23,7 +27,8 @@ function pushRequireCallsToDependencies(
           pDependencies.push({
             moduleName: pNode.arguments[0].quasis[0].value.cooked,
             moduleSystem: pModuleSystem,
-            dynamic: false
+            dynamic: false,
+            ...lExoticRequire
           });
         }
       }
