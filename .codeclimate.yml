@@ -2,7 +2,7 @@ version: "2"
 checks:
   method-lines:
     config:
-      threshold: 30
+      threshold: 32
 plugins:
   eslint:
     enabled: true
