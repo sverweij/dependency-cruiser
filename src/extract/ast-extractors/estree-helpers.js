@@ -28,11 +28,30 @@ function firstArgumentIsATemplateLiteral(pArgumentsNode) {
   );
 }
 
-function isRequireIdentifier(pNode, pName) {
+function isMemberCallExpression(pNode, pObjectName, pPropertyName) {
+  return (
+    pNode.type === "CallExpression" &&
+    pNode.callee.type === "MemberExpression" &&
+    pNode.callee.object.type === "Identifier" &&
+    pNode.callee.object.name === pObjectName &&
+    pNode.callee.property.type === "Identifier" &&
+    pNode.callee.property.name === pPropertyName
+  );
+}
+
+function isCalleeIdentifier(pNode, pName) {
   return (
     "Identifier" === _get(pNode, "callee.type") &&
     pName === _get(pNode, "callee.name")
   );
+}
+
+function isRequireOfSomeSort(pNode, pName) {
+  const lRequireStringElements = pName.split(".");
+
+  return lRequireStringElements.length > 1
+    ? isMemberCallExpression(pNode, ...lRequireStringElements)
+    : isCalleeIdentifier(pNode, pName);
 }
 
 function isLikelyAMDDefineOrRequire(pNode) {
@@ -57,7 +76,9 @@ module.exports = {
   firstArgumentIsATemplateLiteral,
   isStringLiteral,
   isPlaceholderlessTemplateLiteral,
-  isRequireIdentifier,
+  isMemberCallExpression,
+  isCalleeIdentifier,
+  isRequireOfSomeSort,
   isLikelyAMDDefineOrRequire,
   isLikelyAMDDefine
 };

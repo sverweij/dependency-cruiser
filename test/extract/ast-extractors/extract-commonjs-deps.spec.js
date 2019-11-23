@@ -47,6 +47,24 @@ describe("ast-extractors/extract-commonJS-deps", () => {
     ]);
   });
 
+  it("use an exotic combined require and specify it as exoticRequireString", () => {
+    let lDeps = [];
+
+    extractcommonJS(
+      "const x = window.require('./static-required-with-need')",
+      lDeps,
+      ["window.require"]
+    );
+    expect(lDeps).to.deep.equal([
+      {
+        moduleName: "./static-required-with-need",
+        moduleSystem: "cjs",
+        dynamic: false,
+        exoticRequire: "window.require"
+      }
+    ]);
+  });
+
   it("use an exotic require and don't specify it as exoticRequireString", () => {
     let lDeps = [];
 
