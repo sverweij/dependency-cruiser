@@ -188,6 +188,6 @@
     //    "env": {},
     //    "args": {}
     // }
-    "exoticRequireStrings": ["^tryRequire$"]
+    "exoticRequireStrings": ["tryRequire"]
   }
 }
