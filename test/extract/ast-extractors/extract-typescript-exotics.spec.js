@@ -27,6 +27,22 @@ describe("ast-extractors/extract-typescript - exotics", () => {
     ]);
   });
 
+  it("detects dependencies declared with member expression passed as exoticRequireStrings", () => {
+    expect(
+      extractTypescript(
+        "const yo = window.require('./required-with-window-require')",
+        ["window.require"]
+      )
+    ).to.deep.equal([
+      {
+        moduleName: "./required-with-window-require",
+        moduleSystem: "cjs",
+        dynamic: false,
+        exoticRequire: "window.require"
+      }
+    ]);
+  });
+
   it("detects dependencies declared with multiple function names passed as exoticRequireStrings", () => {
     expect(
       extractTypescript(

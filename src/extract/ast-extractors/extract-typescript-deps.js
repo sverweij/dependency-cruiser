@@ -105,13 +105,39 @@ function isRequireCallExpression(pASTNode) {
   );
 }
 
-function isExoticRequire(pASTNode, pString) {
+function isSingleExoticRequire(pASTNode, pString) {
   return (
     typescript.SyntaxKind[pASTNode.kind] === "CallExpression" &&
     pASTNode.expression &&
     pASTNode.expression.text === pString &&
     firstArgIsAString(pASTNode)
   );
+}
+
+/* eslint complexity:0 */
+function isCompositeExoticRequire(pASTNode, pObjectName, pPropertyName) {
+  return (
+    typescript.SyntaxKind[pASTNode.kind] === "CallExpression" &&
+    pASTNode.expression &&
+    typescript.SyntaxKind[pASTNode.expression.kind] ===
+      "PropertyAccessExpression" &&
+    pASTNode.expression.expression &&
+    typescript.SyntaxKind[pASTNode.expression.expression.kind] ===
+      "Identifier" &&
+    pASTNode.expression.expression.escapedText === pObjectName &&
+    pASTNode.expression.name &&
+    typescript.SyntaxKind[pASTNode.expression.name.kind] === "Identifier" &&
+    pASTNode.expression.name.escapedText === pPropertyName &&
+    firstArgIsAString(pASTNode)
+  );
+}
+
+function isExoticRequire(pASTNode, pString) {
+  const lRequireStringElements = pString.split(".");
+
+  return lRequireStringElements.length > 1
+    ? isCompositeExoticRequire(pASTNode, ...lRequireStringElements)
+    : isSingleExoticRequire(pASTNode, pString);
 }
 
 function isDynamicImportExpression(pASTNode) {
