@@ -1,38 +1,36 @@
 const walk = require("acorn-walk");
 const estreeHelpers = require("./estree-helpers");
 
+function pryStringsFromArguments(pArguments) {
+  let lRetval = [];
+
+  if (estreeHelpers.firstArgumentIsAString(pArguments)) {
+    lRetval = pArguments[0].value.split("!");
+  } else if (estreeHelpers.firstArgumentIsATemplateLiteral(pArguments)) {
+    lRetval = [pArguments[0].quasis[0].value.cooked];
+  }
+
+  return lRetval;
+}
+
 function pushRequireCallsToDependencies(
   pDependencies,
   pModuleSystem,
   pExoticRequireStrings
 ) {
   return pNode => {
-    ["require"].concat(pExoticRequireStrings).forEach(pName => {
-      if (estreeHelpers.isRequireIdentifier(pNode, pName)) {
-        const lExoticRequire =
-          pName === "require" ? {} : { exoticRequire: pName };
-
-        if (estreeHelpers.firstArgumentIsAString(pNode.arguments)) {
-          pNode.arguments[0].value.split("!").forEach(pString =>
-            pDependencies.push({
-              moduleName: pString,
-              moduleSystem: pModuleSystem,
-              dynamic: false,
-              ...lExoticRequire
-            })
-          );
-        } else if (
-          estreeHelpers.firstArgumentIsATemplateLiteral(pNode.arguments)
-        ) {
+    for (let pName of ["require"].concat(pExoticRequireStrings)) {
+      if (estreeHelpers.isRequireOfSomeSort(pNode, pName)) {
+        for (let pString of pryStringsFromArguments(pNode.arguments)) {
           pDependencies.push({
-            moduleName: pNode.arguments[0].quasis[0].value.cooked,
+            moduleName: pString,
             moduleSystem: pModuleSystem,
             dynamic: false,
-            ...lExoticRequire
+            ...(pName === "require" ? {} : { exoticRequire: pName })
           });
         }
       }
-    });
+    }
   };
 }
 
@@ -47,6 +45,8 @@ module.exports = (
   // require('./lalala').doFunkyStuff();
   // require('zoinks!./wappie')
   // require(`./withatemplateliteral`)
+  // as well as renamed requires/ require wrappers
+  // as passed in pExoticRequireStrings ("need", "window.require")
   walk.simple(
     pAST,
     {

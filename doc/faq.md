@@ -264,10 +264,11 @@ _teamcity_ reporters.
 
 ### Q: I'm using window.require or a require wrapper - how do I make sure dependencies I declared like that are included?
 
-**A**: Add a _exoticRequireStrings_ key in your configuration with the 
+**A**: From version 5.4.0 or higher you can add an _exoticRequireStrings_ key in
+your configuration with the wrapper(s) and/ or redefinitions of require:
 
 ```json
-"exoticRequireStrings": ["window.require"]
+"exoticRequireStrings": ["window.require", "need", "tryRequire"]
 ```
 
 ## Expanding dependency-cruiser
