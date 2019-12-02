@@ -9,7 +9,7 @@ describe("ast-extractors/extract-typescript - dynamic imports", () => {
       )
     ).to.deep.equal([
       {
-        moduleName: "judeljo",
+        module: "judeljo",
         moduleSystem: "es6",
         dynamic: true
       }
@@ -23,7 +23,7 @@ describe("ast-extractors/extract-typescript - dynamic imports", () => {
       )
     ).to.deep.equal([
       {
-        moduleName: "judeljo",
+        module: "judeljo",
         moduleSystem: "es6",
         dynamic: true
       }

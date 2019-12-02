@@ -11,7 +11,7 @@ function extractRegularAMDDependencies(pNode, pDependencies) {
           if (Boolean(el.value) && typeof el.value === "string") {
             el.value.split("!").forEach(pString =>
               pDependencies.push({
-                moduleName: pString,
+                module: pString,
                 moduleSystem: "amd",
                 dynamic: false
               })

@@ -5,13 +5,13 @@ function pushImportNodeValue(pDependencies) {
   return pNode => {
     if (estreeHelpers.isStringLiteral(pNode.source)) {
       pDependencies.push({
-        moduleName: pNode.source.value,
+        module: pNode.source.value,
         moduleSystem: "es6",
         dynamic: true
       });
     } else if (estreeHelpers.isPlaceholderlessTemplateLiteral(pNode.source)) {
       pDependencies.push({
-        moduleName: pNode.source.quasis[0].value.cooked,
+        module: pNode.source.quasis[0].value.cooked,
         moduleSystem: "es6",
         dynamic: true
       });
@@ -23,7 +23,7 @@ module.exports = (pAST, pDependencies) => {
   function pushSourceValue(pNode) {
     if (pNode.source && pNode.source.value) {
       pDependencies.push({
-        moduleName: pNode.source.value,
+        module: pNode.source.value,
         moduleSystem: "es6",
         dynamic: false
       });

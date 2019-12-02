@@ -24,12 +24,12 @@ describe("ast-extractors/extract-AMD-deps", () => {
     );
     expect(lDeps).to.deep.equal([
       {
-        moduleName: "./root_one",
+        module: "./root_one",
         moduleSystem: "amd",
         dynamic: false
       },
       {
-        moduleName: "./root_two",
+        module: "./root_two",
         moduleSystem: "amd",
         dynamic: false
       }
@@ -46,12 +46,12 @@ describe("ast-extractors/extract-AMD-deps", () => {
     extractAMD(lInput, lDeps);
     expect(lDeps).to.deep.equal([
       {
-        moduleName: "./one-with-require",
+        module: "./one-with-require",
         moduleSystem: "amd",
         dynamic: false
       },
       {
-        moduleName: "./two-with-require",
+        module: "./two-with-require",
         moduleSystem: "amd",
         dynamic: false
       }
@@ -68,13 +68,13 @@ describe("ast-extractors/extract-AMD-deps", () => {
     extractAMD(lInput, lDeps, ["want"]);
     expect(lDeps).to.deep.equal([
       {
-        moduleName: "./one-with-want",
+        module: "./one-with-want",
         moduleSystem: "amd",
         dynamic: false,
         exoticRequire: "want"
       },
       {
-        moduleName: "./two-with-want",
+        module: "./two-with-want",
         moduleSystem: "amd",
         dynamic: false,
         exoticRequire: "want"

@@ -17,7 +17,7 @@ const typescript = tryRequire(
  * Get all import and export statements from the top level AST node
  *
  * @param {import("typescript").Node} pAST - the (top-level in this case) AST node
- * @returns {{moduleName: string, moduleSystem: string}[]} - all import and export statements in the
+ * @returns {{module: string, moduleSystem: string}[]} - all import and export statements in the
  *                                  (top level) AST node
  */
 function extractImportsAndExports(pAST) {
@@ -29,7 +29,7 @@ function extractImportsAndExports(pAST) {
         Boolean(pStatement.moduleSpecifier)
     )
     .map(pStatement => ({
-      moduleName: pStatement.moduleSpecifier.text,
+      module: pStatement.moduleSpecifier.text,
       moduleSystem: "es6"
     }));
 }
@@ -38,7 +38,7 @@ function extractImportsAndExports(pAST) {
  * Get all import equals statements from the top level AST node
  *
  * @param {import("typescript").Node} pAST - the (top-level in this case) AST node
- * @returns {{moduleName: string, moduleSystem: string}[]} - all import equals statements in the
+ * @returns {{module: string, moduleSystem: string}[]} - all import equals statements in the
  *                                  (top level) AST node
  */
 function extractImportEquals(pAST) {
@@ -51,7 +51,7 @@ function extractImportEquals(pAST) {
         pStatement.moduleReference.expression.text
     )
     .map(pStatement => ({
-      moduleName: pStatement.moduleReference.expression.text,
+      module: pStatement.moduleReference.expression.text,
       moduleSystem: "cjs"
     }));
 }
@@ -61,23 +61,23 @@ function extractImportEquals(pAST) {
  * can come out of this as the resolution algorithm might differ
  *
  * @param {import("typescript").Node} pAST - typescript syntax tree
- * @returns {{moduleName: string, moduleSystem: string}[]} - 'tripple slash' dependencies
+ * @returns {{module: string, moduleSystem: string}[]} - 'tripple slash' dependencies
  */
 function extractTrippleSlashDirectives(pAST) {
   return pAST.referencedFiles
     .map(pReference => ({
-      moduleName: pReference.fileName,
+      module: pReference.fileName,
       moduleSystem: "tsd"
     }))
     .concat(
       pAST.typeReferenceDirectives.map(pReference => ({
-        moduleName: pReference.fileName,
+        module: pReference.fileName,
         moduleSystem: "tsd"
       }))
     )
     .concat(
       pAST.amdDependencies.map(pReference => ({
-        moduleName: pReference.path,
+        module: pReference.path,
         moduleSystem: "tsd"
       }))
     );
@@ -166,7 +166,7 @@ function walk(pResult, pExoticRequireStrings) {
     // require('a-string'), require(`a-template-literal`)
     if (isRequireCallExpression(pASTNode)) {
       pResult.push({
-        moduleName: pASTNode.arguments[0].text,
+        module: pASTNode.arguments[0].text,
         moduleSystem: "cjs"
       });
     }
@@ -175,7 +175,7 @@ function walk(pResult, pExoticRequireStrings) {
     pExoticRequireStrings.forEach(pExoticRequireString => {
       if (isExoticRequire(pASTNode, pExoticRequireString)) {
         pResult.push({
-          moduleName: pASTNode.arguments[0].text,
+          module: pASTNode.arguments[0].text,
           moduleSystem: "cjs",
           exoticRequire: pExoticRequireString
         });
@@ -185,7 +185,7 @@ function walk(pResult, pExoticRequireStrings) {
     // import('a-string'), import(`a-template-literal`)
     if (isDynamicImportExpression(pASTNode)) {
       pResult.push({
-        moduleName: pASTNode.arguments[0].text,
+        module: pASTNode.arguments[0].text,
         moduleSystem: "es6",
         dynamic: true
       });
@@ -195,7 +195,7 @@ function walk(pResult, pExoticRequireStrings) {
     // const atype: import(`./types`).T
     if (isTypeImport(pASTNode)) {
       pResult.push({
-        moduleName: pASTNode.argument.literal.text,
+        module: pASTNode.argument.literal.text,
         moduleSystem: "es6"
       });
     }
@@ -208,7 +208,7 @@ function walk(pResult, pExoticRequireStrings) {
  * a source file, like commonJS or dynamic imports
  *
  * @param {import("typescript").Node} pAST - typescript syntax tree
- * @returns {{moduleName: string, moduleSystem: string}[]} - all commonJS dependencies
+ * @returns {{module: string, moduleSystem: string}[]} - all commonJS dependencies
  */
 function extractNestedDependencies(pAST, pExoticRequireStrings) {
   let lResult = [];
@@ -221,7 +221,7 @@ function extractNestedDependencies(pAST, pExoticRequireStrings) {
 /**
  * returns all dependencies in the (top level) AST
  *
- * @type {(pTypeScriptAST: (import("typescript").Node), pExoticRequireStrings: string[]) => {moduleName: string, moduleSystem: string, dynamic: boolean}[]}
+ * @type {(pTypeScriptAST: (import("typescript").Node), pExoticRequireStrings: string[]) => {module: string, moduleSystem: string, dynamic: boolean}[]}
  */
 module.exports = (pTypeScriptAST, pExoticRequireStrings) =>
   Boolean(typescript)

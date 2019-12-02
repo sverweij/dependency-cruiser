@@ -9,13 +9,12 @@ const extractAMDDeps = require("./ast-extractors/extract-AMD-deps");
 const extractTypeScriptDeps = require("./ast-extractors/extract-typescript-deps");
 const getJSASTCached = require("./parse/toJavascriptAST").getASTCached;
 const toTypescriptAST = require("./parse/toTypescriptAST");
+const detectPreCompilationNess = require("./utl/detectPreCompilationNess");
 
-function extractFromTypeScriptAST(pDependencies, pOptions, pFileName) {
-  return pDependencies.concat(
-    extractTypeScriptDeps(
-      toTypescriptAST.getASTCached(path.join(pOptions.baseDir, pFileName)),
-      pOptions.exoticRequireStrings
-    )
+function extractFromTypeScriptAST(pOptions, pFileName) {
+  return extractTypeScriptDeps(
+    toTypescriptAST.getASTCached(path.join(pOptions.baseDir, pFileName)),
+    pOptions.exoticRequireStrings
   );
 }
 
@@ -52,23 +51,33 @@ function extractFromJavaScriptAST(
   if (pOptions.moduleSystems.indexOf("amd") > -1) {
     extractAMDDeps(lAST, pDependencies, pOptions.exoticRequireStrings);
   }
+
+  return pDependencies;
 }
 
 function extractDependencies(pOptions, pFileName, pTSConfig) {
   let lDependencies = [];
 
   if (shouldUseTSC(pOptions, pFileName)) {
-    lDependencies = extractFromTypeScriptAST(
-      lDependencies,
-      pOptions,
-      pFileName
-    ).filter(pDep =>
+    lDependencies = extractFromTypeScriptAST(pOptions, pFileName).filter(pDep =>
       pOptions.moduleSystems.some(
         pModuleSystem => pModuleSystem === pDep.moduleSystem
       )
     );
+
+    if (pOptions.tsPreCompilationDeps === "specify") {
+      lDependencies = detectPreCompilationNess(
+        lDependencies,
+        extractFromJavaScriptAST([], pOptions, pFileName, pTSConfig)
+      );
+    }
   } else {
-    extractFromJavaScriptAST(lDependencies, pOptions, pFileName, pTSConfig);
+    lDependencies = extractFromJavaScriptAST(
+      [],
+      pOptions,
+      pFileName,
+      pTSConfig
+    );
   }
 
   return lDependencies;
@@ -100,12 +109,7 @@ function addResolutionAttributes(pOptions, pFileName, pResolveOptions) {
 
     return {
       ...lResolved,
-      module: pDependency.moduleName,
-      moduleSystem: pDependency.moduleSystem,
-      dynamic: pDependency.dynamic,
-      ...(pDependency.exoticRequire
-        ? { exoticRequire: pDependency.exoticRequire }
-        : {}),
+      ...pDependency,
       followable: lResolved.followable && !lMatchesDoNotFollow,
       matchesDoNotFollow: lMatchesDoNotFollow
     };
@@ -117,7 +121,7 @@ function matchesPattern(pFullPathToFile, pPattern) {
 }
 
 function getDependencyUniqueKey(pDependency) {
-  return `${pDependency.moduleName} ${pDependency.moduleSystem}`;
+  return `${pDependency.module} ${pDependency.moduleSystem}`;
 }
 
 function compareDeps(pLeft, pRight) {

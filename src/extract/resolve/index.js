@@ -9,18 +9,18 @@ function resolveModule(pDependency, pBaseDir, pFileDir, pResolveOptions) {
   let lRetval = null;
 
   if (
-    isRelativeModuleName(pDependency.moduleName) ||
+    isRelativeModuleName(pDependency.module) ||
     ["cjs", "es6"].indexOf(pDependency.moduleSystem) > -1
   ) {
     lRetval = resolveCommonJS(
-      pDependency.moduleName,
+      pDependency.module,
       pBaseDir,
       pFileDir,
       pResolveOptions
     );
   } else {
     lRetval = resolveAMD(
-      pDependency.moduleName,
+      pDependency.module,
       pBaseDir,
       pFileDir,
       pResolveOptions
@@ -32,7 +32,7 @@ function resolveModule(pDependency, pBaseDir, pFileDir, pResolveOptions) {
 /**
  * resolves the module name of the pDependency to a file on disk.
  *
- * @param  {object} pDependency an object with a moduleName and the moduleSystem
+ * @param  {object} pDependency an object with a module and the moduleSystem
  *                              according to which this is a dependency
  * @param  {string} pBaseDir    the directory to consider as base (or 'root')
  *                              for resolved files.

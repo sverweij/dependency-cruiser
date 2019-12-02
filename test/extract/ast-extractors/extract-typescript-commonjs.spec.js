@@ -9,7 +9,7 @@ describe("ast-extractors/extract-typescript - regular commonjs require", () => {
       )
     ).to.deep.equal([
       {
-        moduleName: "./thing-that-uses-export-equals",
+        module: "./thing-that-uses-export-equals",
         moduleSystem: "cjs",
         dynamic: false
       }
@@ -25,17 +25,17 @@ describe("ast-extractors/extract-typescript - regular commonjs require", () => {
       )
     ).to.deep.equal([
       {
-        moduleName: "legit-one",
+        module: "legit-one",
         moduleSystem: "cjs",
         dynamic: false
       },
       {
-        moduleName: "legit-two",
+        module: "legit-two",
         moduleSystem: "cjs",
         dynamic: false
       },
       {
-        moduleName: "legit-three",
+        module: "legit-three",
         moduleSystem: "cjs",
         dynamic: false
       }
@@ -60,17 +60,17 @@ describe("ast-extractors/extract-typescript - regular commonjs require", () => {
       )
     ).to.deep.equal([
       {
-        moduleName: "midash",
+        module: "midash",
         moduleSystem: "cjs",
         dynamic: false
       },
       {
-        moduleName: "slodash",
+        module: "slodash",
         moduleSystem: "cjs",
         dynamic: false
       },
       {
-        moduleName: "hidash",
+        module: "hidash",
         moduleSystem: "cjs",
         dynamic: false
       }
@@ -82,7 +82,7 @@ describe("ast-extractors/extract-typescript - regular commonjs require", () => {
       extractTypescript("const lala = require(`thunderscore`)")
     ).to.deep.equal([
       {
-        moduleName: "thunderscore",
+        module: "thunderscore",
         moduleSystem: "cjs",
         dynamic: false
       }

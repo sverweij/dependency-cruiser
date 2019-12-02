@@ -23,7 +23,7 @@ function pushRequireCallsToDependencies(
       if (estreeHelpers.isRequireOfSomeSort(pNode, pName)) {
         for (let pString of pryStringsFromArguments(pNode.arguments)) {
           pDependencies.push({
-            moduleName: pString,
+            module: pString,
             moduleSystem: pModuleSystem,
             dynamic: false,
             ...(pName === "require" ? {} : { exoticRequire: pName })

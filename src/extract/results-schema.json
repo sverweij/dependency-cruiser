@@ -482,7 +482,10 @@
           "type": "string"
         },
         "tsPreCompilationDeps": {
-          "type": "boolean"
+          "oneOf": [
+            { "type": "boolean" },
+            { "type": "string", "enum": ["specify"] }
+          ]
         },
         "combinedDependencies": {
           "type": "boolean"

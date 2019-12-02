@@ -7,7 +7,7 @@ describe("ast-extractors/extract-typescript - triple slash directives", () => {
       extractTypescript('/// <reference path="./ts-thing" />')
     ).to.deep.equal([
       {
-        moduleName: "./ts-thing",
+        module: "./ts-thing",
         moduleSystem: "tsd",
         dynamic: false
       }
@@ -19,7 +19,7 @@ describe("ast-extractors/extract-typescript - triple slash directives", () => {
       extractTypescript('/// <reference types="./ts-thing-types" />')
     ).to.deep.equal([
       {
-        moduleName: "./ts-thing-types",
+        module: "./ts-thing-types",
         moduleSystem: "tsd",
         dynamic: false
       }
@@ -31,7 +31,7 @@ describe("ast-extractors/extract-typescript - triple slash directives", () => {
       extractTypescript('/// <amd-dependency path="./ts-thing-types" />')
     ).to.deep.equal([
       {
-        moduleName: "./ts-thing-types",
+        module: "./ts-thing-types",
         moduleSystem: "tsd",
         dynamic: false
       }
