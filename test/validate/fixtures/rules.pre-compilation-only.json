@@ -1,0 +1,11 @@
+{
+  "forbidden": [
+    {
+      "name": "precomp",
+      "from": {},
+      "to": {
+        "preCompilationOnly": true
+      }
+    }
+  ]
+}
