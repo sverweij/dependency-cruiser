@@ -26,12 +26,8 @@ function shouldUseTSC(pOptions, pFileName) {
   );
 }
 
-function extractFromJavaScriptAST(
-  pDependencies,
-  pOptions,
-  pFileName,
-  pTSConfig
-) {
+function extractFromJavaScriptAST(pOptions, pFileName, pTSConfig) {
+  let lDependencies = [];
   const lAST = getJSASTCached(
     path.join(pOptions.baseDir, pFileName),
     pTSConfig
@@ -40,19 +36,19 @@ function extractFromJavaScriptAST(
   if (pOptions.moduleSystems.indexOf("cjs") > -1) {
     extractCommonJSDeps(
       lAST,
-      pDependencies,
+      lDependencies,
       "cjs",
       pOptions.exoticRequireStrings
     );
   }
   if (pOptions.moduleSystems.indexOf("es6") > -1) {
-    extractES6Deps(lAST, pDependencies);
+    extractES6Deps(lAST, lDependencies);
   }
   if (pOptions.moduleSystems.indexOf("amd") > -1) {
-    extractAMDDeps(lAST, pDependencies, pOptions.exoticRequireStrings);
+    extractAMDDeps(lAST, lDependencies, pOptions.exoticRequireStrings);
   }
 
-  return pDependencies;
+  return lDependencies;
 }
 
 function extractDependencies(pOptions, pFileName, pTSConfig) {
@@ -68,16 +64,11 @@ function extractDependencies(pOptions, pFileName, pTSConfig) {
     if (pOptions.tsPreCompilationDeps === "specify") {
       lDependencies = detectPreCompilationNess(
         lDependencies,
-        extractFromJavaScriptAST([], pOptions, pFileName, pTSConfig)
+        extractFromJavaScriptAST(pOptions, pFileName, pTSConfig)
       );
     }
   } else {
-    lDependencies = extractFromJavaScriptAST(
-      [],
-      pOptions,
-      pFileName,
-      pTSConfig
-    );
+    lDependencies = extractFromJavaScriptAST(pOptions, pFileName, pTSConfig);
   }
 
   return lDependencies;
