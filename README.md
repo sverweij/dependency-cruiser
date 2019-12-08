@@ -120,7 +120,7 @@ You've come to the right place :-) :
   dependencies.
 
 ## Build status
-[![build status](https://gitlab.com/sverweij/dependency-cruiser/badges/master/build.svg)](https://gitlab.com/sverweij/dependency-cruiser/builds)
+[![GitHub Workflow Status](https://img.shields.io/github/workflow/status/sverweij/dependency-cruiser/linting%20%26%20test%20coverage%20-%20linux?label=actions&logo=github)](https://github.com/sverweij/dependency-cruiser/actions)
 [![Build status](https://ci.appveyor.com/api/projects/status/u18tbeujml0knk08/branch/master?svg=true)](https://ci.appveyor.com/project/sverweij/dependency-cruiser/branch/master)
 [![Build Status](https://travis-ci.org/sverweij/dependency-cruiser.svg?branch=master)](https://travis-ci.org/sverweij/dependency-cruiser)
 [![coverage](https://gitlab.com/sverweij/dependency-cruiser/badges/master/coverage.svg)](https://gitlab.com/sverweij/dependency-cruiser/builds)
