@@ -13,7 +13,7 @@ describe("ast-extractors/extract-ES6-deps", () => {
     extractES6("import('./dynamic').then(pModule => pModule.x);", lDeps);
     expect(lDeps).to.deep.equal([
       {
-        moduleName: "./dynamic",
+        module: "./dynamic",
         moduleSystem: "es6",
         dynamic: true
       }
@@ -26,7 +26,7 @@ describe("ast-extractors/extract-ES6-deps", () => {
     extractES6("import(`./dynamic`).then(pModule => pModule.x);", lDeps);
     expect(lDeps).to.deep.equal([
       {
-        moduleName: "./dynamic",
+        module: "./dynamic",
         moduleSystem: "es6",
         dynamic: true
       }
@@ -52,7 +52,7 @@ describe("ast-extractors/extract-ES6-deps", () => {
     extractES6(yieldImport, lDeps);
     expect(lDeps).to.deep.equal([
       {
-        moduleName: "http",
+        module: "http",
         moduleSystem: "es6",
         dynamic: true
       }

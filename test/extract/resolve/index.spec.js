@@ -17,7 +17,7 @@ describe("extract/resolve/index", () => {
     expect(
       resolve(
         {
-          moduleName: "./hots",
+          module: "./hots",
           moduleSystem: "es6"
         },
         path.join(__dirname, "fixtures"),
@@ -37,7 +37,7 @@ describe("extract/resolve/index", () => {
     expect(
       resolve(
         {
-          moduleName: "path",
+          module: "path",
           moduleSystem: "es6"
         },
         path.join(__dirname, "fixtures"),
@@ -57,7 +57,7 @@ describe("extract/resolve/index", () => {
     expect(
       resolve(
         {
-          moduleName: "./doesnotexist",
+          module: "./doesnotexist",
           moduleSystem: "es6"
         },
         path.join(__dirname, "fixtures"),
@@ -79,7 +79,7 @@ describe("extract/resolve/index", () => {
     expect(
       resolve(
         {
-          moduleName: "./something.json",
+          module: "./something.json",
           moduleSystem: "es6"
         },
         path.join(__dirname, "fixtures"),
@@ -99,7 +99,7 @@ describe("extract/resolve/index", () => {
     expect(
       resolve(
         {
-          moduleName: "./something.json",
+          module: "./something.json",
           moduleSystem: "es6"
         },
         path.join(__dirname, "fixtures"),
@@ -125,7 +125,7 @@ describe("extract/resolve/index", () => {
     expect(
       resolve(
         {
-          moduleName: "./something.scss",
+          module: "./something.scss",
           moduleSystem: "es6"
         },
         path.join(__dirname, "fixtures"),
@@ -151,7 +151,7 @@ describe("extract/resolve/index", () => {
     expect(
       resolve(
         {
-          moduleName: "hoepla/hoi",
+          module: "hoepla/hoi",
           moduleSystem: "es6"
         },
         path.join(__dirname, "fixtures"),
@@ -183,7 +183,7 @@ describe("extract/resolve/index", () => {
     expect(
       resolve(
         {
-          moduleName: "shared",
+          module: "shared",
           moduleSystem: "es6"
         },
         path.join(__dirname, "fixtures"),
@@ -217,7 +217,7 @@ describe("extract/resolve/index", () => {
     expect(
       resolve(
         {
-          moduleName: "shared",
+          module: "shared",
           moduleSystem: "es6"
         },
         path.join(__dirname, "fixtures"),
@@ -244,7 +244,7 @@ describe("extract/resolve/index", () => {
     expect(
       resolve(
         {
-          moduleName: "gewoon/wood/tree",
+          module: "gewoon/wood/tree",
           moduleSystem: "es6"
         },
         path.join(__dirname, "fixtures"),
@@ -271,7 +271,7 @@ describe("extract/resolve/index", () => {
     expect(
       resolve(
         {
-          moduleName: "daddayaddaya",
+          module: "daddayaddaya",
           moduleSystem: "es6"
         },
         path.join(__dirname, "fixtures"),
@@ -298,7 +298,7 @@ describe("extract/resolve/index", () => {
     expect(
       resolve(
         {
-          moduleName: "shared",
+          module: "shared",
           moduleSystem: "es6"
         },
         path.join(__dirname, "fixtures"),
@@ -323,7 +323,7 @@ describe("extract/resolve/index", () => {
     expect(
       resolve(
         {
-          moduleName: "./hots.js?blah",
+          module: "./hots.js?blah",
           moduleSystem: "es6"
         },
         path.join(__dirname, "fixtures"),

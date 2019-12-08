@@ -19,7 +19,7 @@ describe("ast-extractors/extract-typescript - exotics", () => {
       )
     ).to.deep.equal([
       {
-        moduleName: "./required-with-want",
+        module: "./required-with-want",
         moduleSystem: "cjs",
         dynamic: false,
         exoticRequire: "want"
@@ -35,7 +35,7 @@ describe("ast-extractors/extract-typescript - exotics", () => {
       )
     ).to.deep.equal([
       {
-        moduleName: "./required-with-window-require",
+        module: "./required-with-window-require",
         moduleSystem: "cjs",
         dynamic: false,
         exoticRequire: "window.require"
@@ -51,13 +51,13 @@ describe("ast-extractors/extract-typescript - exotics", () => {
       )
     ).to.deep.equal([
       {
-        moduleName: "./required-with-want",
+        module: "./required-with-want",
         moduleSystem: "cjs",
         dynamic: false,
         exoticRequire: "want"
       },
       {
-        moduleName: "./required-with-need",
+        module: "./required-with-need",
         moduleSystem: "cjs",
         dynamic: false,
         exoticRequire: "need"

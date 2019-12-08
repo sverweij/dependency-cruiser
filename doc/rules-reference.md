@@ -37,6 +37,7 @@
    - [`dynamic`](#dynamic)
    - [`moreThanOneDependencyType`](#more-than-one-dependencytype-per-dependency-morethanonedependencytype)
    - [`exoticRequire` and `exoticRequireNot`](#exoticrequire-and-exoticrequirenot)
+   - [`preCompilationOnly`](#precompilationonly)
 4. [The `options`](#the-options)
    - [`doNotFollow`: don't cruise modules adhering to this pattern any further](#donotfollow-dont-cruise-modules-adhering-to-this-pattern-any-further)
    - [`exclude`: exclude dependencies from being cruised](#exclude-exclude-dependencies-from-being-cruised)
@@ -368,7 +369,7 @@ only notice it when you have a larger code base (thousands of modules
 in your dependency graph), but it is something to
 keep in mind.
 
-To detect orphans guys you can add e.g. this snippet to your
+To detect orphan guys you can add e.g. this snippet to your
 .dependency-cruiser.json's `forbidden` section:
 
 ```json
@@ -722,6 +723,40 @@ rules a.c.t. normal requires. E.g.
 }
 ```
 
+### `preCompilationOnly`
+
+If you want to set restrictions on only dependencies that exist before
+compilation from typescript to javascript, you can use the `preCompilation`
+only attribute.
+
+E.g. to make sure to only import stuff from the react-native stuff that doesn't
+make it beyond the pre-compilation step:
+
+```json
+{
+  "forbidden": [
+    {
+      "name": "only-types-from-react-native",
+      "description": "make sure to only import stuff that's portable over platforms",
+      "severity": "error",
+      "from": {
+        "path": "^src/platform-independent-stuff"
+      },
+      "to": {
+        "path": "^src/lib/react-native-stuff",
+        "preCompilationOnly": false
+      }
+    }
+  ],
+  "options": {
+    "tsPreCompilationDeps": "specify"
+  }
+}
+```
+
+This attribute only works for typescript sources, and only when
+`tsPreCompilationDeps` option is set to `"specify"`.
+
 ## The `options`
 
 ### `doNotFollow`: don't cruise modules adhering to this pattern any further
@@ -898,8 +933,17 @@ dependency-cruiser supports:
 > command line option equivalent: `--ts-pre-compilation-deps`
 
 By default dependency-cruiser does not take dependencies between typescript
-modules that don't exist after compilation to javascript. Pass this command
-line switch to _do_ take them into account.
+modules that don't exist after compilation to javascript.
+
+Switch this option to `true` if you _do_ want to take them into account
+(as a bonus this will make cruising typescript code bases faster).
+
+If you want to define rules on whether dependencies exist only
+before compilation or also after (with [`preCompilationOnly`](#precompilationonly))
+you can pass the value `"specify"` to this option. Only do this if
+you really need it as it will impact cruise speed. You can only use the
+`"specify"` value within dependency-cruiser configurations (not from the
+command line).
 
 <details>
 <summary><b>Pre-compilation dependencies example: only importing a type</b></summary>

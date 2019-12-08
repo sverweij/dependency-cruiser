@@ -307,6 +307,10 @@
           "type": "string",
           "description": "A regular expression to match against any 'exotic' require strings - when it should NOT be caught by the rule"
         },
+        "preCompilationOnly": {
+          "type": "boolean",
+          "description": "true if this dependency only exists before compilation (like type only imports), false in all other cases. Only returned when the tsPreCompilationDeps is set to 'specify'."
+        },
         "moreThanOneDependencyType": {
           "type": "boolean",
           "description": "If true matches dependencies with more than one dependency type (e.g. defined in _both_ npm and npm-dev)"
@@ -482,7 +486,10 @@
           "type": "string"
         },
         "tsPreCompilationDeps": {
-          "type": "boolean"
+          "oneOf": [
+            { "type": "boolean" },
+            { "type": "string", "enum": ["specify"] }
+          ]
         },
         "combinedDependencies": {
           "type": "boolean"

@@ -132,8 +132,11 @@
           }
         },
         "tsPreCompilationDeps": {
-          "type": "boolean",
-          "description": "if true detect dependencies that only exist before typescript-to-javascript compilation."
+          "description": "if true detect dependencies that only exist before typescript-to-javascript compilation.",
+          "oneOf": [
+            { "type": "boolean" },
+            { "type": "string", "enum": ["specify"] }
+          ]
         },
         "externalModuleResolutionStrategy": {
           "type": "string",
@@ -329,6 +332,10 @@
         "exoticRequireNot": {
           "type": "string",
           "description": "A regular expression to match against any 'exotic' require strings - when it should NOT be caught by the rule"
+        },
+        "preCompilationOnly": {
+          "type": "boolean",
+          "description": "true if this dependency only exists before compilation (like type only imports), false in all other cases. Only returned when the tsPreCompilationDeps is set to 'specify'."
         },
         "dependencyTypes": {
           "type": "array",

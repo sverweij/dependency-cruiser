@@ -22,7 +22,7 @@ describe("ast-extractors/extract-commonJS-deps", () => {
     extractcommonJS("const x = require('./static')", lDeps);
     expect(lDeps).to.deep.equal([
       {
-        moduleName: "./static",
+        module: "./static",
         moduleSystem: "cjs",
         dynamic: false
       }
@@ -39,7 +39,7 @@ describe("ast-extractors/extract-commonJS-deps", () => {
     );
     expect(lDeps).to.deep.equal([
       {
-        moduleName: "./static-required-with-need",
+        module: "./static-required-with-need",
         moduleSystem: "cjs",
         dynamic: false,
         exoticRequire: "need"
@@ -57,7 +57,7 @@ describe("ast-extractors/extract-commonJS-deps", () => {
     );
     expect(lDeps).to.deep.equal([
       {
-        moduleName: "./static-required-with-need",
+        module: "./static-required-with-need",
         moduleSystem: "cjs",
         dynamic: false,
         exoticRequire: "window.require"
@@ -81,7 +81,7 @@ describe("ast-extractors/extract-commonJS-deps", () => {
     extractcommonJS("const x = require(`template-literal`)", lDeps);
     expect(lDeps).to.deep.equal([
       {
-        moduleName: "template-literal",
+        module: "template-literal",
         moduleSystem: "cjs",
         dynamic: false
       }

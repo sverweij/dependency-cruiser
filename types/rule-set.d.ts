@@ -54,6 +54,11 @@ export interface IToRestriction {
    */
   exoticRequireNot?: string;
   /**
+   * true if this dependency only exists before compilation (like type only imports),
+   * false in all other cases. Only returned when the tsPreCompilationDeps is set to 'specify'.
+   */
+  preCompilationOnly?: boolean;
+  /**
    * Whether or not to match modules of any of these types (leaving out matches any of them)
    */
   dependencyTypes?: DependencyType[];

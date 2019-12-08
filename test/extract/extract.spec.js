@@ -300,4 +300,47 @@ describe("extract/extract - include", () => {
       }
     ]);
   });
+
+  it("adds a preCompilationOnly attribute when tsPreCompilationDeps === 'specify'", () => {
+    const lOptions = normalize({ tsPreCompilationDeps: "specify" });
+    const lResolveOptions = normalizeResolveOptions(
+      { bustTheCache: true },
+      lOptions
+    );
+
+    expect(
+      extract(
+        "./test/extract/fixtures/specifyTsPreCompilationDeps/index.ts",
+        lOptions,
+        lResolveOptions
+      )
+    ).to.deep.equal([
+      {
+        coreModule: false,
+        couldNotResolve: false,
+        dependencyTypes: ["local"],
+        dynamic: false,
+        followable: true,
+        matchesDoNotFollow: false,
+        module: "./pre-compilation-only",
+        moduleSystem: "es6",
+        preCompilationOnly: true,
+        resolved:
+          "test/extract/fixtures/specifyTsPreCompilationDeps/pre-compilation-only.d.ts"
+      },
+      {
+        coreModule: false,
+        couldNotResolve: false,
+        dependencyTypes: ["local"],
+        dynamic: false,
+        followable: true,
+        matchesDoNotFollow: false,
+        module: "./real-deal",
+        moduleSystem: "es6",
+        preCompilationOnly: false,
+        resolved:
+          "test/extract/fixtures/specifyTsPreCompilationDeps/real-deal.ts"
+      }
+    ]);
+  });
 });

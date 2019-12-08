@@ -7,7 +7,7 @@ describe("ast-extractors/extract-typescript - regular imports", () => {
       extractTypescript("import './import-for-side-effects';")
     ).to.deep.equal([
       {
-        moduleName: "./import-for-side-effects",
+        module: "./import-for-side-effects",
         moduleSystem: "es6",
         dynamic: false
       }
@@ -19,7 +19,7 @@ describe("ast-extractors/extract-typescript - regular imports", () => {
       extractTypescript("import { SomeSingleExport } from './ts-thing';")
     ).to.deep.equal([
       {
-        moduleName: "./ts-thing",
+        module: "./ts-thing",
         moduleSystem: "es6",
         dynamic: false
       }
@@ -33,7 +33,7 @@ describe("ast-extractors/extract-typescript - regular imports", () => {
       )
     ).to.deep.equal([
       {
-        moduleName: "./ts-thing",
+        module: "./ts-thing",
         moduleSystem: "es6",
         dynamic: false
       }
@@ -47,7 +47,7 @@ describe("ast-extractors/extract-typescript - regular imports", () => {
       )
     ).to.deep.equal([
       {
-        moduleName: "./ts-thing",
+        module: "./ts-thing",
         moduleSystem: "es6",
         dynamic: false
       }
@@ -59,7 +59,7 @@ describe("ast-extractors/extract-typescript - regular imports", () => {
       extractTypescript("const tiepetjes: import('./types').T;")
     ).to.deep.equal([
       {
-        moduleName: "./types",
+        module: "./types",
         moduleSystem: "es6",
         dynamic: false
       }
@@ -71,7 +71,7 @@ describe("ast-extractors/extract-typescript - regular imports", () => {
       extractTypescript("const tiepetjes: import(`./types`).T;")
     ).to.deep.equal([
       {
-        moduleName: "./types",
+        module: "./types",
         moduleSystem: "es6",
         dynamic: false
       }
@@ -85,7 +85,7 @@ describe("ast-extractors/extract-typescript - regular imports", () => {
       )
     ).to.deep.equal([
       {
-        moduleName: "./vypes",
+        module: "./vypes",
         moduleSystem: "es6",
         dynamic: false
       }
@@ -99,7 +99,7 @@ describe("ast-extractors/extract-typescript - regular imports", () => {
       )
     ).to.deep.equal([
       {
-        moduleName: "./wypes",
+        module: "./wypes",
         moduleSystem: "es6",
         dynamic: false
       }

@@ -93,7 +93,7 @@ export interface ICruiseOptions {
    * if true detect dependencies that only exist before
    * typescript-to-javascript compilation.
    */
-  tsPreCompilationDeps?: boolean;
+  tsPreCompilationDeps?: boolean | "specify";
   /**
    * if true leave symlinks untouched, otherwise use the realpath.
    * Defaults to `false` (which is also nodejs's default behavior

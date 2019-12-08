@@ -237,7 +237,10 @@ module.exports = {
         /* prefix for links in html and svg output (e.g. https://github.com/you/yourrepo/blob/develop/) */
         // , prefix: ''
 
-        /* if true detect dependencies that only exist before typescript-to-javascript compilation */
+        /* false (the default): ignore dependencies that only exist before typescript-to-javascript compilation
+           true: also detect dependencies that only exist before typescript-to-javascript compilation 
+           "specify": for each dependency identify whether it only exists before compilation or also after
+         */
         {{#if tsPreCompilationDeps}}
         , tsPreCompilationDeps: true
         {{^}}

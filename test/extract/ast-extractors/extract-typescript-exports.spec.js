@@ -5,7 +5,7 @@ describe("ast-extractors/extract-typescript - re-exports", () => {
   it("extracts 're-export everything'", () => {
     expect(extractTypescript("export * from './ts-thing';")).to.deep.equal([
       {
-        moduleName: "./ts-thing",
+        module: "./ts-thing",
         moduleSystem: "es6",
         dynamic: false
       }
@@ -19,7 +19,7 @@ describe("ast-extractors/extract-typescript - re-exports", () => {
       )
     ).to.deep.equal([
       {
-        moduleName: "./ts-thing",
+        module: "./ts-thing",
         moduleSystem: "es6",
         dynamic: false
       }

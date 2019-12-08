@@ -43,6 +43,7 @@ function match(pFrom, pTo) {
       matches.toLicenseNot(pRule, pTo) &&
       matches.toExoticRequire(pRule, pTo) &&
       matches.toExoticRequireNot(pRule, pTo) &&
+      propertyEquals(pTo, pRule, "preCompilationOnly") &&
       propertyEquals(pTo, pRule, "couldNotResolve") &&
       propertyEquals(pTo, pRule, "circular") &&
       propertyEquals(pTo, pRule, "dynamic")
