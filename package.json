@@ -120,7 +120,7 @@
     "lodash": "4.17.15",
     "mnemonic-words": "1.1.0",
     "pnp-webpack-plugin": "1.5.0",
-    "regexp-tree": "0.1.16",
+    "regexp-tree": "0.1.17",
     "semver": "6.3.0",
     "semver-try-require": "3.0.0",
     "strip-json-comments": "3.0.1",
@@ -132,7 +132,7 @@
     "chai": "4.2.0",
     "chai-json-schema": "1.5.1",
     "coffeescript": "2.4.1",
-    "eslint": "6.7.1",
+    "eslint": "6.7.2",
     "eslint-config-prettier": "6.7.0",
     "eslint-plugin-import": "2.18.2",
     "eslint-plugin-mocha": "6.2.2",
@@ -150,9 +150,9 @@
     "symlink-dir": "3.1.1",
     "tslint": "5.20.1",
     "tslint-config-prettier": "1.18.0",
-    "typescript": "3.7.2",
+    "typescript": "3.7.3",
     "upem": "3.1.2",
-    "yarn": "1.19.2"
+    "yarn": "1.21.0"
   },
   "repository": {
     "type": "git",
