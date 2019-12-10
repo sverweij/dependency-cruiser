@@ -181,9 +181,10 @@ out of the box as well.
 
 **A**: No.
 
-For LiveScript, TypeScript and CoffeeScript dependency-cruiser will use the
-transpiler already in your project (or, if you installed dependency-cruiser
-globally - the transpilers available globally).
+For LiveScript, TypeScript, CoffeeScript and Vue Single File Components
+dependency-cruiser will use the transpiler already in your project (or,
+if you installed dependency-cruiser globally - the transpilers available
+globally).
 
 This has a few advantages over bundling the transpilers as dependencies:
 
