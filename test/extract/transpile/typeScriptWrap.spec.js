@@ -29,7 +29,7 @@ describe("typescript transpiler", () => {
 });
 
 describe("tsx transpiler (plain old typescript)", () => {
-  it("tells the jsx transpiler is available", () => {
+  it("tells the tsx transpiler is available", () => {
     expect(tsxWrap.isAvailable()).to.equal(true);
   });
 

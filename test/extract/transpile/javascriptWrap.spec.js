@@ -7,23 +7,13 @@ describe("jsx transpiler (the plain old javascript one)", () => {
     expect(wrap.isAvailable()).to.equal(true);
   });
 
-  it("transpiles jsx", () => {
+  it("'transpiles' jsx", () => {
     expect(
       wrap.transpile(
         fs.readFileSync("./test/extract/transpile/fixtures/jsx.jsx", "utf8")
       )
     ).to.equal(
       fs.readFileSync("./test/extract/transpile/fixtures/jsx.js", "utf8")
-    );
-  });
-
-  it("transpiles vue", () => {
-    expect(
-      wrap.transpile(
-        fs.readFileSync("./test/extract/transpile/fixtures/vue.vue", "utf8")
-      )
-    ).to.equal(
-      fs.readFileSync("./test/extract/transpile/fixtures/vue.js", "utf8")
     );
   });
 
