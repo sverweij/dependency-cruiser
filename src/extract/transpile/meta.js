@@ -6,6 +6,7 @@ const tsxWrap = require("./typeScriptWrap")(true);
 const liveScriptWrap = require("./liveScriptWrap");
 const coffeeWrap = require("./coffeeWrap")();
 const litCoffeeWrap = require("./coffeeWrap")(true);
+const vueWrap = require("./vueWrap");
 
 /*
   jsx - acorn_loose will handle this correctly when imports
@@ -22,7 +23,7 @@ const extension2wrapper = {
   ".js": javaScriptWrap,
   ".mjs": javaScriptWrap,
   ".jsx": javaScriptWrap,
-  ".vue": javaScriptWrap,
+  ".vue": vueWrap,
   ".ts": typeScriptWrap,
   ".tsx": tsxWrap,
   ".d.ts": typeScriptWrap,
@@ -39,7 +40,8 @@ const transpiler2wrapper = {
   "coffee-script": coffeeWrap,
   coffeescript: coffeeWrap,
   livescript: liveScriptWrap,
-  typescript: typeScriptWrap
+  typescript: typeScriptWrap,
+  "vue-template-compiler": vueWrap
 };
 
 /**

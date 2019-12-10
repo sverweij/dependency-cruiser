@@ -1,6 +1,6 @@
 {
   "name": "dependency-cruiser",
-  "version": "5.5.0",
+  "version": "5.6.0-beta-0",
   "description": "Validate and visualize dependencies. With your rules. JavaScript, TypeScript, CoffeeScript. ES6, CommonJS, AMD.",
   "keywords": [
     "static analysis",
@@ -152,6 +152,7 @@
     "tslint-config-prettier": "1.18.0",
     "typescript": "3.7.3",
     "upem": "3.1.2",
+    "vue-template-compiler": "2.6.10",
     "yarn": "1.21.0"
   },
   "repository": {
@@ -202,7 +203,8 @@
     "coffee-script": ">=1.0.0 <2.0.0",
     "coffeescript": ">=1.0.0 <3.0.0",
     "livescript": ">=1.0.0 <2.0.0",
-    "typescript": ">=2.0.0 <4.0.0"
+    "typescript": ">=2.0.0 <4.0.0",
+    "vue-template-compiler": ">=2.0.0 <3.0.0"
   },
   "husky": {
     "hooks": {

@@ -8,7 +8,7 @@
 
 ## Troubleshooting
 
-### Q: TypeScript, coffeescript or livescript dependencies don't show up. How can I fix that?
+### Q: TypeScript, coffeescript, livescript or Vue Single File Component (SFC) dependencies don't show up. How can I fix that?
 
 **A**: Install the compiler you use in the same spot dependency-cruiser is installed (or vv).
 
@@ -181,9 +181,10 @@ out of the box as well.
 
 **A**: No.
 
-For LiveScript, TypeScript and CoffeeScript dependency-cruiser will use the
-transpiler already in your project (or, if you installed dependency-cruiser
-globally - the transpilers available globally).
+For LiveScript, TypeScript, CoffeeScript and Vue Single File Components
+dependency-cruiser will use the transpiler already in your project (or,
+if you installed dependency-cruiser globally - the transpilers available
+globally).
 
 This has a few advantages over bundling the transpilers as dependencies:
 
