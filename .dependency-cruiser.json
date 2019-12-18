@@ -149,7 +149,7 @@
     // "doNotFollow": "node_modules",
 
     /* pattern specifying which files to exclude (regular expression) */
-    "exclude": "fixtures|test/integration",
+    "exclude": "mocks|fixtures|test/integration",
 
     /* list of module systems to cruise */
     // "moduleSystems": ["amd", "cjs", "es6", "tsd"],
