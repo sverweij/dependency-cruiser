@@ -74,7 +74,7 @@
       "comment": "This test depends on something in the test tree that is neither a utility, nor a mock nor a fixture.",
       "severity": "error",
       "from": { "path": "(^test/[^\\/]+/)[^\\.]+\\.spec\\.js" },
-      "to": { "path": "^test/[^\\/]+/.+", "pathNot": "utl|$1[^\\.]+\\.json$" }
+      "to": { "path": "^test/[^\\/]+/.+", "pathNot": "utl|$1.+\\.json$" }
     },
     {
       "name": "prefer-lodash-individuals",
