@@ -3,11 +3,11 @@
 const expect = require("chai").expect;
 const chalk = require("chalk");
 const render = require("../../../src/report/err/err-long");
-const okdeps = require("../fixtures/everything-fine.json");
-const deps = require("../fixtures/cjs-no-dependency-valid.json");
-const warndeps = require("../fixtures/err-only-warnings.json");
-const erradds = require("../fixtures/err-with-additional-information.json");
-const orphanerrs = require("../fixtures/orphan-deps.json");
+const okdeps = require("./mocks/everything-fine.json");
+const deps = require("./mocks/cjs-no-dependency-valid.json");
+const warndeps = require("./mocks/err-only-warnings.json");
+const erradds = require("./mocks/err-with-additional-information.json");
+const orphanerrs = require("./mocks/orphan-deps.json");
 
 describe("report/err-long", () => {
   let chalkLevel = chalk.level;

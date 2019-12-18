@@ -1,7 +1,7 @@
 const expect = require("chai").expect;
 const errHTML = require("../../../src/report/err-html");
-const everythingFineResult = require("../fixtures/everything-fine.json");
-const validationMoreThanOnce = require("../fixtures/violation-more-than-once.json");
+const everythingFineResult = require("./mocks/everything-fine.json");
+const validationMoreThanOnce = require("./mocks/violation-more-than-once.json");
 
 describe("report/err-html", () => {
   const lOkeliDokelyKey = "gummy bears";

@@ -1,36 +1,38 @@
 const fs = require("fs");
+const path = require("path");
 const expect = require("chai").expect;
-const deps = require("../../fixtures/cjs-no-dependency-valid.json");
-const unresolvableDeps = require("../../fixtures/es6-unresolvable-deps.json");
-const doNotFollowDeps = require("../../fixtures/do-not-follow-deps.json");
-const orphanDeps = require("../../fixtures/orphan-deps.json");
-const prefixUri = require("../../fixtures/prefix-uri.json");
-const prefixNonUri = require("../../fixtures/prefix-non-uri.json");
 const render = require("../../../../src/report/dot/moduleLevel");
+const deps = require("./mocks/cjs-no-dependency-valid.json");
+const orphanDeps = require("./mocks/orphan-deps.json");
+const unresolvableDeps = require("./mocks/es6-unresolvable-deps.json");
+const doNotFollowDeps = require("./mocks/do-not-follow-deps.json");
+const prefixUri = require("./mocks/prefix-uri.json");
+const prefixNonUri = require("./mocks/prefix-non-uri.json");
 const boringScheme = require("./boringModuleColorScheme.json");
 
+const mockPath = path.join(__dirname, "mocks");
 const clusterlessFixture = fs.readFileSync(
-  "test/report/fixtures/clusterless.dot",
+  path.join(mockPath, "clusterless.dot"),
   "utf8"
 );
 const unresolvableFixture = fs.readFileSync(
-  "test/report/fixtures/unresolvable.dot",
+  path.join(mockPath, "unresolvable.dot"),
   "utf8"
 );
 const doNotFollowFixture = fs.readFileSync(
-  "test/report/fixtures/donotfollow.dot",
+  path.join(mockPath, "donotfollow.dot"),
   "utf8"
 );
 const orphanFixture = fs.readFileSync(
-  "test/report/fixtures/orphan-deps.dot",
+  path.join(mockPath, "orphan-deps.dot"),
   "utf8"
 );
 const prefixUriFixture = fs.readFileSync(
-  "test/report/fixtures/prefix-uri.dot",
+  path.join(mockPath, "prefix-uri.dot"),
   "utf8"
 );
 const prefixNonUriFixture = fs.readFileSync(
-  "test/report/fixtures/prefix-non-uri.dot",
+  path.join(mockPath, "prefix-non-uri.dot"),
   "utf8"
 );
 

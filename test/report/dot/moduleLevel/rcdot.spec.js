@@ -1,16 +1,17 @@
 const fs = require("fs");
+const path = require("path");
 const expect = require("chai").expect;
 const RCScheme = require("../../../../src/report/dot/common/richModuleColorScheme.json");
 const renderDot = require("../../../../src/report/dot/moduleLevel");
-const deps = require("../../fixtures/richmodulecolor.json");
+const deps = require("./mocks/richmodulecolor.json");
 const boringScheme = require("./boringModuleColorScheme.json");
 
 const richColorFixture = fs.readFileSync(
-  "test/report/fixtures/richmodulecolor.dot",
+  path.join(__dirname, "mocks/richmodulecolor.dot"),
   "utf8"
 );
 const boringColorFixture = fs.readFileSync(
-  "test/report/fixtures/defaultmodulecolor.dot",
+  path.join(__dirname, "mocks/defaultmodulecolor.dot"),
   "utf8"
 );
 
