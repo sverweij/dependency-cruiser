@@ -46,7 +46,7 @@ function getRandomChar(pChar) {
  *
  * hello => tbkwd
  * randomString => ybmaecNtpmty
- * interestingStuff => __yhknuwxahjp-iblx
+ * __interesting-stuff => __uuhfiitcvoq-rudbk
  * pulp2slurp => jgyb3guyow
  *
  * @param {string} pString - any string
@@ -55,9 +55,8 @@ function getRandomChar(pChar) {
 module.exports = function getRandomString(pString) {
   let lRetval = "";
 
-  for (let i = 0; i < pString.length; i += 1) {
-    // eslint-disable-next-line security/detect-object-injection
-    lRetval += getRandomChar(pString[i]);
+  for (let lChar of pString) {
+    lRetval += getRandomChar(lChar);
   }
   return lRetval;
 };
