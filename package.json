@@ -116,7 +116,7 @@
     "glob": "7.1.6",
     "handlebars": "4.5.3",
     "indent-string": "4.0.0",
-    "inquirer": "7.0.0",
+    "inquirer": "7.0.1",
     "lodash": "4.17.15",
     "mnemonic-words": "1.1.0",
     "pnp-webpack-plugin": "1.5.0",
@@ -152,8 +152,16 @@
     "tslint-config-prettier": "1.18.0",
     "typescript": "3.7.3",
     "upem": "3.1.2",
-    "vue-template-compiler": "2.6.10",
-    "yarn": "1.21.0"
+    "vue-template-compiler": "2.6.11",
+    "yarn": "1.21.1"
+  },
+  "upem": {
+    "donotup": [
+      {
+        "package": "semver",
+        "because": "semver 7 doesn't support node 8 anymore, while nodejs and hence dependency-cruiser, still do."
+      }
+    ]
   },
   "repository": {
     "type": "git",
