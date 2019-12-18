@@ -25,7 +25,16 @@ function violations(pFirstViolation, pSecondViolation) {
   );
 }
 
+function dependenciesEqual(pLeftDependency) {
+  return pRightDependency =>
+    pLeftDependency.module === pRightDependency.module &&
+    pLeftDependency.moduleSystem === pRightDependency.moduleSystem &&
+    pLeftDependency.dynamic === pRightDependency.dynamic &&
+    pLeftDependency.exoticRequire === pRightDependency.exoticRequire;
+}
+
 module.exports = {
   severities,
-  violations
+  violations,
+  dependenciesEqual
 };
