@@ -6,7 +6,8 @@ module.exports = {
   $id: "https://dependency-cruiser.js.org/config-schema",
   title: "dependency-cruiser configuration",
   description:
-    "A set of properties describing what dependencies are forbidden and what dependencies are allowed + options on how to cruise through the code",
+    "A set of properties describing what dependencies are forbidden and what dependencies are " +
+    "allowed + options on how to cruise through the code",
   type: "object",
   additionalProperties: false,
   properties: {
@@ -19,7 +20,9 @@ module.exports = {
         {
           type: "array",
           description:
-            "A list of rules that describe dependencies that are allowed. dependency-cruiser will emit the warning message 'not-in-allowed' for each dependency that does not at least meet one of them.",
+            "A list of rules that describe dependencies that are allowed. dependency-cruiser will " +
+            "emit the warning message 'not-in-allowed' for each dependency that does not at least " +
+            "meet one of them.",
           items: {
             type: "string"
           }
@@ -27,7 +30,7 @@ module.exports = {
       ]
     },
     ...ruleSet.properties,
-    options: { ...options.options }
+    options: { $ref: "#/definitions/OptionsType" }
   },
   definitions: {
     ...ruleSet.definitions,

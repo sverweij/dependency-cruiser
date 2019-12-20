@@ -25,6 +25,33 @@ module.exports = {
     }
   },
   definitions: {
+    RuleSetType: {
+      type: "object",
+      additionalProperties: false,
+      properties: {
+        forbidden: {
+          type: "array",
+          description:
+            "A list of rules that describe dependencies that are not allowed. dependency-cruiser will emit a separate error (warning/ informational) messages for each violated rule.",
+          items: {
+            $ref: "#/definitions/ForbiddenRuleType"
+          }
+        },
+        allowed: {
+          type: "array",
+          description:
+            "A list of rules that describe dependencies that are allowed. dependency-cruiser will emit the warning message 'not-in-allowed' for each dependency that does not at least meet one of them.",
+          items: {
+            $ref: "#/definitions/AllowedRuleType"
+          }
+        },
+        allowedSeverity: {
+          $ref: "#/definitions/SeverityType",
+          description:
+            "Severity to use when a dependency is not in the 'allowed' set of rules. Defaults to 'warn'"
+        }
+      }
+    },
     AllowedRuleType: {
       oneOf: [
         {
