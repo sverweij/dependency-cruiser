@@ -73,11 +73,11 @@
     "depcruise:graph:fdp": "node ./bin/dependency-cruise.js --validate --include-only '^src' --output-type dot bin src | fdp -GK=0.1 -Gsplines=ortho -T svg > tmp_deps.svg",
     "depcruise:report": "node ./bin/dependency-cruise.js --output-type err-html --validate -- src bin test configs types > dependency-violations.html",
     "lint": "npm-run-all --parallel --aggregate-output lint:eslint lint:prettier:check lint:types",
-    "lint:eslint": "eslint bin/dependency-cruise.js src test configs",
-    "lint:eslint:fix": "eslint --fix bin src test configs",
+    "lint:eslint": "eslint bin/dependency-cruise.js src test configs utl",
+    "lint:eslint:fix": "eslint --fix bin src test configs utl",
     "lint:fix": "npm-run-all lint:eslint:fix lint:prettier lint:types:fix",
-    "lint:prettier": "prettier --write {src,configs}/\\*\\*/\\*.{js,json} bin/\\* !**/*.template.js types/\\*.d.ts test/\\*\\*/\\*.{spec,utl}.js",
-    "lint:prettier:check": "prettier --check {src,configs}/\\*\\*/\\*.{js,json} bin/\\* !**/*.template.js types/\\*.d.ts test/\\*\\*/\\*.{spec,utl}.js",
+    "lint:prettier": "prettier --write {utl,src,configs}/\\*\\*/\\*.{js,json} bin/\\* !**/*.template.js types/\\*.d.ts test/\\*\\*/\\*.{spec,utl}.js",
+    "lint:prettier:check": "prettier --check {utl,src,configs}/\\*\\*/\\*.{js,json} bin/\\* !**/*.template.js types/\\*.d.ts test/\\*\\*/\\*.{spec,utl}.js",
     "lint:types": "npm-run-all lint:types:tsc lint:types:tslint",
     "lint:types:tsc": "tsc --noEmit --strict --types --noUnusedLocals --noUnusedParameters types/dependency-cruiser.d.ts",
     "lint:types:tslint": "tslint types/dependency-cruiser.d.ts",
@@ -221,11 +221,11 @@
     }
   },
   "lint-staged": {
-    "{src,config}/**/*.js": [
+    "{utl,src,config}/**/*.js": [
       "eslint --fix",
       "git add"
     ],
-    "{src,config}/**/*.{js,json}": [
+    "{utl,src,config}/**/*.{js,json}": [
       "prettier --write",
       "git add"
     ],
