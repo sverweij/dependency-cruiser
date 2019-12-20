@@ -1,10 +1,10 @@
 const fs = require("fs");
 const path = require("path");
 const expect = require("chai").expect;
-const render = require("../../src/report/teamcity");
-const okdeps = require("./fixtures/teamcity/everything-fine.json");
-const moduleErrs = require("./fixtures/teamcity/module-errors.json");
-const circulars = require("./fixtures/teamcity/circular-deps.json");
+const render = require("../../../src/report/teamcity");
+const okdeps = require("./mocks/everything-fine.json");
+const moduleErrs = require("./mocks/module-errors.json");
+const circulars = require("./mocks/circular-deps.json");
 
 function removePerSessionAttributes(pString) {
   return pString.replace(/ flowId='[^']+' timestamp='[^']+'/g, "");
@@ -13,12 +13,7 @@ function removePerSessionAttributes(pString) {
 describe("report/teamcity", () => {
   it("says everything fine when everything is fine", () => {
     const lFixture = fs.readFileSync(
-      path.join(
-        __dirname,
-        "fixtures",
-        "teamcity",
-        "everything-fine-teamcity-format.txt"
-      ),
+      path.join(__dirname, "mocks", "everything-fine-teamcity-format.txt"),
       "utf8"
     );
     const lResult = render(okdeps);
@@ -29,12 +24,7 @@ describe("report/teamcity", () => {
 
   it("renders module only transgressions", () => {
     const lFixture = fs.readFileSync(
-      path.join(
-        __dirname,
-        "fixtures",
-        "teamcity",
-        "module-errors-teamcity-format.txt"
-      ),
+      path.join(__dirname, "mocks", "module-errors-teamcity-format.txt"),
       "utf8"
     );
     const lResult = render(moduleErrs);
@@ -46,12 +36,7 @@ describe("report/teamcity", () => {
 
   it("renders circular transgressions", () => {
     const lFixture = fs.readFileSync(
-      path.join(
-        __dirname,
-        "fixtures",
-        "teamcity",
-        "circular-deps-teamcity-format.txt"
-      ),
+      path.join(__dirname, "mocks", "circular-deps-teamcity-format.txt"),
       "utf8"
     );
     const lResult = render(circulars);

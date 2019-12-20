@@ -1,14 +1,14 @@
 const expect = require("chai").expect;
-const dependencyIsEqual = require("../../../src/extract/utl/dependencyIsEqual");
+const compare = require("../../../src/extract/utl/compare");
 
-describe("extract/utl/dependencyIsEqual", () => {
+describe("extract/utl/compare - dependencyEquals", () => {
   it("two empty dependencies are equal", () => {
-    expect(dependencyIsEqual({})({})).to.equal(true);
+    expect(compare.dependenciesEqual({})({})).to.equal(true);
   });
 
   it("same module name, same module system => equal", () => {
     expect(
-      dependencyIsEqual({ module: "foo", moduleSystem: "es6" })({
+      compare.dependenciesEqual({ module: "foo", moduleSystem: "es6" })({
         module: "foo",
         moduleSystem: "es6"
       })
@@ -17,7 +17,7 @@ describe("extract/utl/dependencyIsEqual", () => {
 
   it("same module name, same module system, dynamicmoduleness, exotic require => equal", () => {
     expect(
-      dependencyIsEqual({
+      compare.dependenciesEqual({
         module: "foo",
         moduleSystem: "cjs",
         dynamic: false,
@@ -33,7 +33,7 @@ describe("extract/utl/dependencyIsEqual", () => {
 
   it("same module name, different module system => neq", () => {
     expect(
-      dependencyIsEqual({
+      compare.dependenciesEqual({
         module: "foo",
         moduleSystem: "es6"
       })({
@@ -45,7 +45,7 @@ describe("extract/utl/dependencyIsEqual", () => {
 
   it("different module name, same module system => neq", () => {
     expect(
-      dependencyIsEqual({
+      compare.dependenciesEqual({
         module: "foo",
         moduleSystem: "es6"
       })({
@@ -57,7 +57,7 @@ describe("extract/utl/dependencyIsEqual", () => {
 
   it("same module name, same module system, not dynamically required => neq", () => {
     expect(
-      dependencyIsEqual({
+      compare.dependenciesEqual({
         module: "foo",
         moduleSystem: "es6",
         dynamic: true
@@ -70,7 +70,7 @@ describe("extract/utl/dependencyIsEqual", () => {
 
   it("same module name, same module system, not different exotic require => neq", () => {
     expect(
-      dependencyIsEqual({
+      compare.dependenciesEqual({
         module: "foo",
         moduleSystem: "es6",
         exoticRequire: "need"

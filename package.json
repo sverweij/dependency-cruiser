@@ -27,6 +27,14 @@
     }
   ],
   "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/sverweij/dependency-cruiser"
+  },
+  "bugs": {
+    "url": "https://github.com/sverweij/dependency-cruiser/issues"
+  },
+  "homepage": "https://github.com/sverweij/dependency-cruiser",
   "bin": {
     "dependency-cruiser": "bin/dependency-cruise.js",
     "dependency-cruise": "bin/dependency-cruise.js",
@@ -163,14 +171,6 @@
       }
     ]
   },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/sverweij/dependency-cruiser"
-  },
-  "bugs": {
-    "url": "https://github.com/sverweij/dependency-cruiser/issues"
-  },
-  "homepage": "https://github.com/sverweij/dependency-cruiser",
   "nyc": {
     "statements": 99.85,
     "branches": 99.7,

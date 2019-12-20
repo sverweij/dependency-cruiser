@@ -1,7 +1,7 @@
 const expect = require("chai").expect;
-const order = require("../../../src/extract/utl/order");
+const compare = require("../../../src/extract/utl/compare");
 
-describe("extract/utl/order - violations", () => {
+describe("extract/utl/compare - violations", () => {
   const lViolation = {
     from: "from",
     to: "to",
@@ -48,26 +48,26 @@ describe("extract/utl/order - violations", () => {
   };
 
   it("returns 0 for identical violations", () => {
-    expect(order.violations(lViolation, lViolation)).to.equal(0);
+    expect(compare.violations(lViolation, lViolation)).to.equal(0);
   });
 
   it("returns -1 when severity > the one compared against", () => {
-    expect(order.violations(lViolation, lLessSevereViolation)).to.equal(-1);
+    expect(compare.violations(lViolation, lLessSevereViolation)).to.equal(-1);
   });
 
   it("returns 1 when severity < the one compared against", () => {
-    expect(order.violations(lLessSevereViolation, lViolation)).to.equal(1);
+    expect(compare.violations(lLessSevereViolation, lViolation)).to.equal(1);
   });
 
   it("returns -1 when rule name < the one compared against", () => {
-    expect(order.violations(lViolation, lLaterNameViolation)).to.equal(-1);
+    expect(compare.violations(lViolation, lLaterNameViolation)).to.equal(-1);
   });
 
   it("returns -1 when rule 'from' < the one compared against", () => {
-    expect(order.violations(lViolation, lLaterFromViolation)).to.equal(-1);
+    expect(compare.violations(lViolation, lLaterFromViolation)).to.equal(-1);
   });
 
   it("returns -1 when rule 'to' < the one compared against", () => {
-    expect(order.violations(lViolation, lLaterToViolation)).to.equal(-1);
+    expect(compare.violations(lViolation, lLaterToViolation)).to.equal(-1);
   });
 });

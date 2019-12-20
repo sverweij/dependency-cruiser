@@ -1,12 +1,11 @@
 const expect = require("chai").expect;
 const transform = require("../../../src/report/utl/dependencyToIncidenceTransformer");
 
-const ONE_VIOLATION_DEPS_INPUT = require("../fixtures/one-violation.json")
+const ONE_VIOLATION_DEPS_INPUT = require("./mocks/one-violation.json").modules;
+const ONE_VIOLATION_DEPS_FIXTURE = require("./mocks/one-violation-incidences.json");
+const MORE_VIOLATIONS_DEPS_INPUT = require("./mocks/more-violations.json")
   .modules;
-const ONE_VIOLATION_DEPS_FIXTURE = require("../fixtures/one-violation-incidences.json");
-const MORE_VIOLATIONS_DEPS_INPUT = require("../fixtures/more-violations.json")
-  .modules;
-const MORE_VIOLATIONS_DEPS_FIXTURE = require("../fixtures/more-violations-incidences.json");
+const MORE_VIOLATIONS_DEPS_FIXTURE = require("./mocks/more-violations-incidences.json");
 
 describe("dependencyToIncidenceTransformer", () => {
   it("leaves an empty dependencies list alone", () => {

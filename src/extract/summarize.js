@@ -1,7 +1,7 @@
 const _flattenDeep = require("lodash/flattenDeep");
 const _get = require("lodash/get");
 const findRuleByName = require("../utl/findRuleByName");
-const order = require("./utl/order");
+const compare = require("./utl/compare");
 
 function cutNonTransgressions(pSourceEntry) {
   return {
@@ -89,7 +89,7 @@ function extractModuleViolations(pModules) {
 module.exports = (pModules, pRuleSet) => {
   const lViolations = extractDependencyViolations(pModules, pRuleSet)
     .concat(extractModuleViolations(pModules))
-    .sort(order.violations);
+    .sort(compare.violations);
 
   return {
     violations: lViolations,
