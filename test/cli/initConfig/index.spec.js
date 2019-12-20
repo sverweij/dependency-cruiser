@@ -3,7 +3,7 @@ const path = require("path");
 const chai = require("chai");
 const stripJSONComments = require("strip-json-comments");
 const initConfig = require("../../../src/cli/initConfig");
-const rulesSchema = require("../../../src/main/ruleSet/config-schema.json");
+const configurationSchema = require("../../../src/schema/configuration.schema.json");
 const deleteDammit = require("../deleteDammit.utl");
 
 const expect = chai.expect;
@@ -26,7 +26,7 @@ describe("cli/initConfig/index", () => {
         stripJSONComments(fs.readFileSync(RULES_FILE_JSON, "utf8"))
       );
 
-      expect(lResult).to.be.jsonSchema(rulesSchema);
+      expect(lResult).to.be.jsonSchema(configurationSchema);
       expect(lResult).to.not.haveOwnProperty("extends");
     } finally {
       deleteDammit(RULES_FILE_JSON);
@@ -45,7 +45,7 @@ describe("cli/initConfig/index", () => {
       /* eslint global-require:0, security/detect-non-literal-require:0, import/no-dynamic-require:0 */
       const lResult = require(configResultFileName);
 
-      expect(lResult).to.be.jsonSchema(rulesSchema);
+      expect(lResult).to.be.jsonSchema(configurationSchema);
       expect(lResult).to.haveOwnProperty("extends");
       expect(lResult.extends).to.equal(
         "dependency-cruiser/configs/recommended-strict"
@@ -68,7 +68,7 @@ describe("cli/initConfig/index", () => {
         stripJSONComments(fs.readFileSync(RULES_FILE_JSON, "utf8"))
       );
 
-      expect(lResult).to.be.jsonSchema(rulesSchema);
+      expect(lResult).to.be.jsonSchema(configurationSchema);
       expect(lResult).to.haveOwnProperty("extends");
       expect(lResult.extends).to.equal(
         "dependency-cruiser/configs/recommended-strict"

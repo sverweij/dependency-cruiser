@@ -1,4 +1,4 @@
-import { ICruiseOptions } from "./cruise-options";
+import { ICruiseOptions } from "./options";
 import { IFlattenedRuleSet } from "./rule-set";
 import { DependencyType, ModuleSystemType, SeverityType } from "./shared-types";
 

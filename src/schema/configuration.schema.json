@@ -62,7 +62,9 @@
                 "dependencyTypes": {
                   "type": "array",
                   "description": "an array of dependency types to include, but not follow further",
-                  "items": { "$ref": "#/definitions/DependencyType" }
+                  "items": {
+                    "$ref": "#/definitions/DependencyType"
+                  }
                 }
               }
             }
@@ -102,12 +104,7 @@
           "description": "The maximum cruise depth specified. 0 means no maximum specified"
         },
         "moduleSystems": {
-          "type": "array",
-          "description": "list of module systems to cruise. Defaults to [amd, cjs, es6]",
-          "items": {
-            "type": "string",
-            "enum": ["amd", "cjs", "es6", "tsd"]
-          }
+          "$ref": "#/definitions/ModuleSystemType"
         },
         "prefix": {
           "type": "string"
@@ -134,8 +131,13 @@
         "tsPreCompilationDeps": {
           "description": "if true detect dependencies that only exist before typescript-to-javascript compilation.",
           "oneOf": [
-            { "type": "boolean" },
-            { "type": "string", "enum": ["specify"] }
+            {
+              "type": "boolean"
+            },
+            {
+              "type": "string",
+              "enum": ["specify"]
+            }
           ]
         },
         "externalModuleResolutionStrategy": {
@@ -182,8 +184,12 @@
   "definitions": {
     "AllowedRuleType": {
       "oneOf": [
-        { "$ref": "#/definitions/RegularAllowedRuleType" },
-        { "$ref": "#/definitions/ReachabilityAllowedRuleType" }
+        {
+          "$ref": "#/definitions/RegularAllowedRuleType"
+        },
+        {
+          "$ref": "#/definitions/ReachabilityAllowedRuleType"
+        }
       ]
     },
     "RegularAllowedRuleType": {
@@ -220,8 +226,12 @@
     },
     "ForbiddenRuleType": {
       "oneOf": [
-        { "$ref": "#/definitions/RegularForbiddenRuleType" },
-        { "$ref": "#/definitions/ReachabilityForbiddenRuleType" }
+        {
+          "$ref": "#/definitions/RegularForbiddenRuleType"
+        },
+        {
+          "$ref": "#/definitions/ReachabilityForbiddenRuleType"
+        }
       ]
     },
     "RegularForbiddenRuleType": {
@@ -233,7 +243,9 @@
           "type": "string",
           "description": "A short name for the rule - will appear in reporters to enable customers to quickly identify a violated rule. Try to keep them short, eslint style. E.g. 'not-to-core' for a rule forbidding dependencies on core modules, or 'not-to-unresolvable' for one that prevents dependencies on modules that probably don't exist."
         },
-        "severity": { "$ref": "#/definitions/SeverityType" },
+        "severity": {
+          "$ref": "#/definitions/SeverityType"
+        },
         "comment": {
           "type": "string",
           "description": "You can use this field to document why the rule is there."
@@ -254,7 +266,9 @@
         "name": {
           "type": "string"
         },
-        "severity": { "$ref": "#/definitions/SeverityType" },
+        "severity": {
+          "$ref": "#/definitions/SeverityType"
+        },
         "comment": {
           "type": "string"
         },
@@ -340,7 +354,9 @@
         "dependencyTypes": {
           "type": "array",
           "description": "Whether or not to match modules of any of these types (leaving out matches any of them)",
-          "items": { "$ref": "#/definitions/DependencyType" }
+          "items": {
+            "$ref": "#/definitions/DependencyType"
+          }
         },
         "moreThanOneDependencyType": {
           "type": "boolean",
@@ -373,6 +389,14 @@
           "type": "boolean",
           "description": "Whether or not to match modules that aren't reachable from the from part of the rule."
         }
+      }
+    },
+    "ModuleSystemType": {
+      "type": "array",
+      "description": "List of module systems to cruise. Defaults to [amd, cjs, es6]",
+      "items": {
+        "type": "string",
+        "enum": ["amd", "cjs", "es6", "tsd"]
       }
     },
     "SeverityType": {
