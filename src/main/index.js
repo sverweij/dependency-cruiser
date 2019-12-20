@@ -1,6 +1,6 @@
 const Ajv = require("ajv");
 const extract = require("../extract");
-const ruleSchema = require("../extract/results-schema.json");
+const cruiseResultSchema = require("../schema/cruise-result.schema.json");
 const meta = require("../extract/transpile/meta");
 const report = require("../report");
 const normalizeFilesAndDirs = require("./filesAndDirs/normalize");
@@ -17,7 +17,7 @@ function format(pResult, pOutputType) {
 
   validateOptions.validateOutputType(pOutputType);
 
-  if (!ajv.validate(ruleSchema, pResult)) {
+  if (!ajv.validate(cruiseResultSchema, pResult)) {
     throw new Error(
       `The supplied dependency-cruiser result is not valid: ${ajv.errorsText()}.\n`
     );

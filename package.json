@@ -184,6 +184,7 @@
       "src/cli/initConfig/getUserInput.js",
       "coverage/**/*",
       "tmp*",
+      "utl/**/*.js",
       "docs/**/*",
       "doc/**/*"
     ],

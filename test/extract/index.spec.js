@@ -1,6 +1,6 @@
 const chai = require("chai");
 const extract = require("../../src/extract");
-const depSchema = require("../../src/extract/results-schema.json");
+const cruiseResultSchema = require("../../src/schema/cruise-result.schema.json");
 const normalize = require("../../src/main/options/normalize");
 const normalizeResolveOptions = require("../../src/main/resolveOptions/normalize");
 const cjsRecursiveFixtures = require("./fixtures/cjs-recursive.json");
@@ -31,7 +31,7 @@ function runRecursiveFixture(pFixture) {
         lResolveOptions
       );
 
-      expect(lResult).to.be.jsonSchema(depSchema);
+      expect(lResult).to.be.jsonSchema(cruiseResultSchema);
       expect(lResult.modules).to.deep.equal(pFixture.expected);
     });
   }

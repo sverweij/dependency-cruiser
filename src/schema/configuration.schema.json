@@ -2,7 +2,7 @@
   "$schema": "http://json-schema.org/draft-07/schema#",
   "$id": "https://dependency-cruiser.js.org/config-schema",
   "title": "dependency-cruiser configuration",
-  "description": "A set of properties describing what dependencies are forbidden and what dependencies are allowed.",
+  "description": "A set of properties describing what dependencies are forbidden and what dependencies are allowed + options on how to cruise through the code",
   "type": "object",
   "additionalProperties": false,
   "properties": {
@@ -104,7 +104,7 @@
           "description": "The maximum cruise depth specified. 0 means no maximum specified"
         },
         "moduleSystems": {
-          "$ref": "#/definitions/ModuleSystemType"
+          "$ref": "#/definitions/ModuleSystemsType"
         },
         "prefix": {
           "type": "string"
@@ -392,6 +392,10 @@
       }
     },
     "ModuleSystemType": {
+      "type": "string",
+      "enum": ["cjs", "amd", "es6", "tsd"]
+    },
+    "ModuleSystemsType": {
       "type": "array",
       "description": "List of module systems to cruise. Defaults to [amd, cjs, es6]",
       "items": {

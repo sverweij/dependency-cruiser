@@ -1,6 +1,6 @@
 const chai = require("chai");
 const extract = require("../../src/extract");
-const depSchema = require("../../src/extract/results-schema.json");
+const resultSchema = require("../../src/schema/cruise-result.schema.json");
 const normalize = require("../../src/main/options/normalize");
 const normalizeResolveOptions = require("../../src/main/resolveOptions/normalize");
 
@@ -31,7 +31,7 @@ describe("extract/index - Max depth", () => {
       expect(lResult.modules).to.deep.equal(
         require(`./fixtures/maxDepth${pDepth}.json`).modules
       );
-      expect(lResult).to.be.jsonSchema(depSchema);
+      expect(lResult).to.be.jsonSchema(resultSchema);
     })
   );
 });

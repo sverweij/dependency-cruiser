@@ -1,5 +1,9 @@
 module.exports = {
   ModuleSystemType: {
+    type: "string",
+    enum: ["cjs", "amd", "es6", "tsd"]
+  },
+  ModuleSystemsType: {
     type: "array",
     description:
       "List of module systems to cruise. Defaults to [amd, cjs, es6]",

@@ -7,7 +7,9 @@ GENERATED_SOURCES=src/cli/initConfig/config.json.template.js \
 	src/report/dot/moduleLevel/dot.template.js \
 	src/report/dot/folderLevel/ddot.template.js \
 	src/report/html/html.template.js \
-	src/report/err-html/err-html.template.js
+	src/report/err-html/err-html.template.js \
+	src/schema/configuration.schema.json \
+	src/schema/cruise-result.schema.json \
 
 .PHONY: help dev-build clean
 
@@ -29,7 +31,11 @@ help:
 
 # production rules
 src/%.template.js: src/%.template.hbs
-	./node_modules/.bin/handlebars --commonjs handlebars/runtime -f $@ $<
+	npx handlebars --commonjs handlebars/runtime -f $@ $<
+
+src/%.schema.json: utl/%.schema.js
+	$(NODE) ./utl/generate-schemas.utl.js
+	npx prettier --write ./src/schema/*.json
 
 # "phony" targets
 dev-build: $(GENERATED_SOURCES)

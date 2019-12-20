@@ -8,7 +8,7 @@ The output format contains two sections:
   how many violations it found, array of the actual violations and the rule set
   used in the cruise.
 
-A [json schema](../src/extract/results-schema.json) describes the output format
+A [json schema](../src/schema/cruise-result.schema.json) describes the output format
 attributes in painstaking detail. The schema is accurate and actual - each build
 unit tests assure the output format adheres to the schema.
 

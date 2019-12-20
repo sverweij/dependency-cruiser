@@ -17,7 +17,7 @@ function addShowTitle(pDependencyEntry) {
 /**
  * Returns the results of a cruise in an 'incidence matrix'
  *
- * @param {any} pResults - the output of a dependency-cruise adhering to ../../extract/results-schema.json
+ * @param {any} pResults - the output of a dependency-cruise adhering to ../../schema/cruise-result.schema.json
  * @returns {string} - incidence matrix in an html table with some simple bits and bobs to make
  *                     it easier to navigate.
  */

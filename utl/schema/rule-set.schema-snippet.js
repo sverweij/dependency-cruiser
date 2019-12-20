@@ -259,7 +259,7 @@ module.exports = {
             "Whether or not to match modules that aren't reachable from the from part of the rule."
         }
       }
-    }
-  },
-  ...sharedTypes
+    },
+    ...sharedTypes
+  }
 };
