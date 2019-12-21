@@ -11,7 +11,14 @@ module.exports = {
   type: "object",
   additionalProperties: false,
   properties: {
-    extends: {
+    ...ruleSet.properties,
+    options: { $ref: "#/definitions/OptionsType" },
+    extends: { $ref: "#/definitions/ExtendsType" }
+  },
+  definitions: {
+    ...ruleSet.definitions,
+    ...options.definitions,
+    ExtendsType: {
       description: "A configuration this configuration uses as a base",
       oneOf: [
         {
@@ -28,12 +35,6 @@ module.exports = {
           }
         }
       ]
-    },
-    ...ruleSet.properties,
-    options: { $ref: "#/definitions/OptionsType" }
-  },
-  definitions: {
-    ...ruleSet.definitions,
-    ...options.definitions
+    }
   }
 };

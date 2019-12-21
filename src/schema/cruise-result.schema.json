@@ -6,20 +6,191 @@
   "required": ["summary", "modules"],
   "additionalProperties": false,
   "properties": {
-    "summary": {
-      "$ref": "#/definitions/SummaryType"
-    },
     "modules": {
       "$ref": "#/definitions/ModulesType"
+    },
+    "summary": {
+      "$ref": "#/definitions/SummaryType"
     }
   },
   "definitions": {
-    "SeverityType": {
-      "type": "string",
-      "description": "How severe a violation of a rule is. The 'error' severity will make some reporters return a non-zero exit code, so if you want e.g. a build to stop when there's a rule violated: use that.",
-      "enum": ["error", "warn", "info", "ignore"]
+    "ModulesType": {
+      "type": "array",
+      "description": "A list of modules, with for each module the modules it depends upon",
+      "items": {
+        "$ref": "#/definitions/ModuleType"
+      }
+    },
+    "ModuleType": {
+      "type": "object",
+      "required": ["source", "dependencies", "valid"],
+      "additionalProperties": false,
+      "properties": {
+        "source": {
+          "type": "string",
+          "description": "The (resolved) file name of the module, e.g. 'src/main/index.js'"
+        },
+        "followable": {
+          "type": "boolean",
+          "description": "Whether or not this is a dependency that can be followed any further. This will be 'false' for for core modules, json, modules that could not be resolved to a file and modules that weren't followed because it matches the doNotFollow expression."
+        },
+        "matchesDoNotFollow": {
+          "type": "boolean",
+          "description": "'true' if the file name of this module matches the doNotFollow regular expression"
+        },
+        "coreModule": {
+          "type": "boolean",
+          "description": "Whether or not this is a node.js core module"
+        },
+        "couldNotResolve": {
+          "type": "boolean",
+          "description": "'true' if dependency-cruiser could not resolve the module name in the source code to a file name or core module. 'false' in all other cases."
+        },
+        "dependencyTypes": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/DependencyTypeType"
+          },
+          "description": "the type of inclusion - local, core, unknown (= we honestly don't know), undetermined (= we didn't bother determining it) or one of the npm dependencies defined in a package.jsom ('npm' for 'depenencies', 'npm-dev', 'npm-optional', 'npm-peer', 'npm-no-pkg' for development, optional, peer dependencies and dependencies in node_modules but not in package.json respectively)"
+        },
+        "license": {
+          "type": "string",
+          "description": "the license, if known (usually known for modules pulled from npm, not for local ones)"
+        },
+        "orphan": {
+          "type": "boolean",
+          "description": "'true' if this module does not have dependencies, and no module has it as a dependency"
+        },
+        "reachable": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ReachableType"
+          },
+          "description": "An array of objects that tell whether this module is 'reachable', and according to rule in which this reachability was defined"
+        },
+        "valid": {
+          "type": "boolean",
+          "description": "'true' if this module violated a rule; 'false' in all other cases. The violated rule will be in the 'rule' object at the same level."
+        },
+        "rules": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/RuleSummaryType"
+          },
+          "description": "an array of rules violated by this module - left out if the module is valid"
+        },
+        "dependencies": {
+          "$ref": "#/definitions/DependenciesType"
+        }
+      }
+    },
+    "ReachableType": {
+      "type": "object",
+      "required": ["value", "asDefinedInRule"],
+      "additionalProperties": false,
+      "properties": {
+        "value": {
+          "type": "boolean",
+          "description": "'true' if this module is reachable from any of the modules matched by the from part of a reachability-rule in 'asDefinedInRule', 'false' if not."
+        },
+        "asDefinedInRule": {
+          "type": "string",
+          "description": "The name of the rule where the reachability was defined"
+        }
+      }
+    },
+    "DependenciesType": {
+      "type": "array",
+      "items": {
+        "$ref": "#/definitions/DependencyType"
+      }
     },
     "DependencyType": {
+      "type": "object",
+      "required": [
+        "module",
+        "resolved",
+        "coreModule",
+        "dependencyTypes",
+        "followable",
+        "couldNotResolve",
+        "moduleSystem",
+        "valid",
+        "dynamic"
+      ],
+      "additionalProperties": false,
+      "properties": {
+        "module": {
+          "type": "string",
+          "description": "The name of the module as it appeared in the source code, e.g. './main'"
+        },
+        "resolved": {
+          "type": "string",
+          "description": "The (resolved) file name of the module, e.g. 'src/main//index.js'"
+        },
+        "coreModule": {
+          "type": "boolean",
+          "description": "Whether or not this is a node.js core module - deprecated in favor of dependencyType === core"
+        },
+        "dependencyTypes": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/DependencyTypeType"
+          },
+          "description": "the type of inclusion - local, core, unknown (= we honestly don't know), undetermined (= we didn't bother determining it) or one of the npm dependencies defined in a package.jsom ('npm' for 'depenencies', 'npm-dev', 'npm-optional', 'npm-peer', 'npm-no-pkg' for development, optional, peer dependencies and dependencies in node_modules but not in package.json respectively)"
+        },
+        "license": {
+          "type": "string",
+          "description": "the license, if known (usually known for modules pulled from npm, not for local ones)"
+        },
+        "followable": {
+          "type": "boolean",
+          "description": "Whether or not this is a dependency that can be followed any further. This will be 'false' for for core modules, json, modules that could not be resolved to a file and modules that weren't followed because it matches the doNotFollow expression."
+        },
+        "dynamic": {
+          "type": "boolean",
+          "description": "true if this dependency is dynamic, false in all other cases"
+        },
+        "exoticRequire": {
+          "type": "string",
+          "description": "If this dependency was defined by a require not named require (as defined in the exoticRequireStrings option): the string that was used"
+        },
+        "matchesDoNotFollow": {
+          "type": "boolean",
+          "description": "'true' if the file name of this module matches the doNotFollow regular expression"
+        },
+        "couldNotResolve": {
+          "type": "boolean",
+          "description": "'true' if dependency-cruiser could not resulve the module name in the source code to a file name or core module. 'false' in all other cases."
+        },
+        "circular": {
+          "type": "boolean",
+          "description": "'true' if following this dependency will ultimately return to the source, false in all other cases"
+        },
+        "cycle": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "description": "If following this dependency will ultimately return to the source (circular === true), this attribute will contain an (ordered) array of module names that shows (one of the) circular path(s)"
+        },
+        "moduleSystem": {
+          "$ref": "#/definitions/ModuleSystemType"
+        },
+        "valid": {
+          "type": "boolean",
+          "description": "'true' if this dependency violated a rule; 'false' in all other cases. The violated rule will be in the 'rule' object at the same level."
+        },
+        "rules": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/RuleSummaryType"
+          },
+          "description": "an array of rules violated by this dependency - left out if the dependency is valid"
+        }
+      }
+    },
+    "DependencyTypeType": {
       "type": "string",
       "enum": [
         "aliased",
@@ -38,114 +209,101 @@
         "unknown"
       ]
     },
-    "FromRestrictionType": {
+    "ModuleSystemType": {
+      "type": "string",
+      "enum": ["cjs", "es6", "amd", "tsd"]
+    },
+    "RuleSummaryType": {
       "type": "object",
-      "description": "Criteria an end of a dependency should match to be caught by this rule. Leave it empty if you want any module to be matched.",
+      "description": "If there was a rule violation (valid === false), this object contains the name of the rule and severity of violating it.",
+      "required": ["name", "severity"],
       "additionalProperties": false,
       "properties": {
-        "path": {
+        "name": {
           "type": "string",
-          "description": "A regular expression an end of a dependency should match to be catched by this rule."
+          "description": "The (short, eslint style) name of the violated rule. Typically something like 'no-core-punycode' or 'no-outside-deps'."
         },
-        "pathNot": {
-          "type": "string",
-          "description": "A regular expression an end of a dependency should NOT match to be catched by this rule."
-        },
-        "orphan": {
-          "type": "boolean",
-          "description": "Whether or not to match when the module is an orphan (= has no incoming or outgoing dependencies). When this property it is part of a rule, dependency-cruiser will ignore the 'to' part."
+        "severity": {
+          "$ref": "#/definitions/SeverityType"
         }
       }
     },
-    "ReachabilityFromRestrictionType": {
+    "SeverityType": {
+      "type": "string",
+      "description": "How severe a violation of a rule is. The 'error' severity will make some reporters return a non-zero exit code, so if you want e.g. a build to stop when there's a rule violated: use that.",
+      "enum": ["error", "warn", "info", "ignore"]
+    },
+    "SummaryType": {
       "type": "object",
-      "description": "Criteria an end of a dependency should match to be caught by this rule. Leave it empty if you want any module to be matched.",
+      "required": [
+        "violations",
+        "error",
+        "warn",
+        "info",
+        "totalCruised",
+        "optionsUsed"
+      ],
       "additionalProperties": false,
+      "description": "Data summarizing the found dependencies",
       "properties": {
-        "path": {
-          "type": "string",
-          "description": "A regular expression an end of a dependency should match to be catched by this rule."
+        "violations": {
+          "$ref": "#/definitions/ViolationsType"
         },
-        "pathNot": {
-          "type": "string",
-          "description": "A regular expression an end of a dependency should NOT match to be catched by this rule."
+        "error": {
+          "type": "number",
+          "description": "the number of errors in the dependencies"
+        },
+        "warn": {
+          "type": "number",
+          "description": "the number of warnings in the dependencies"
+        },
+        "info": {
+          "type": "number",
+          "description": "the number of informational level notices in the dependencies"
+        },
+        "totalCruised": {
+          "type": "number",
+          "description": "the number of modules cruised"
+        },
+        "totalDependenciesCruised": {
+          "type": "number",
+          "description": "the number of dependencies cruised"
+        },
+        "ruleSetUsed": {
+          "$ref": "#/definitions/RuleSetType"
+        },
+        "optionsUsed": {
+          "$ref": "#/definitions/OptionsUsedType"
         }
       }
     },
-    "ToRestrictionType": {
+    "ViolationsType": {
+      "type": "array",
+      "description": "A list of violations found in the dependencies. The dependencies themselves also contain this information, this summary is here for convenience.",
+      "items": {
+        "$ref": "#/definitions/ViolationType"
+      }
+    },
+    "ViolationType": {
       "type": "object",
-      "description": "Criteria the 'to' end of a dependency should match to be caught by this rule. Leave it empty if you want any module to be matched.",
+      "required": ["from", "to", "rule"],
       "additionalProperties": false,
       "properties": {
-        "path": {
-          "type": "string",
-          "description": "A regular expression an end of a dependency should match to be catched by this rule."
+        "from": {
+          "type": "string"
         },
-        "pathNot": {
-          "type": "string",
-          "description": "A regular expression an end of a dependency should NOT match to be catched by this rule."
+        "to": {
+          "type": "string"
         },
-        "couldNotResolve": {
-          "type": "boolean",
-          "description": "Whether or not to match modules dependency-cruiser could not resolve (and probably aren't on disk). For this one too: leave out if you don't care either way."
+        "rule": {
+          "$ref": "#/definitions/RuleSummaryType"
         },
-        "circular": {
-          "type": "boolean",
-          "description": "Whether or not to match when following to the to will ultimately end up in the from."
-        },
-        "dynamic": {
-          "type": "boolean",
-          "description": "Whether or not to match when the dependency is a dynamic one."
-        },
-        "exoticRequire": {
-          "type": "string",
-          "description": "A regular expression to match against any 'exotic' require strings"
-        },
-        "exoticRequireNot": {
-          "type": "string",
-          "description": "A regular expression to match against any 'exotic' require strings - when it should NOT be caught by the rule"
-        },
-        "preCompilationOnly": {
-          "type": "boolean",
-          "description": "true if this dependency only exists before compilation (like type only imports), false in all other cases. Only returned when the tsPreCompilationDeps is set to 'specify'."
-        },
-        "dependencyTypes": {
+        "cycle": {
           "type": "array",
-          "description": "Whether or not to match modules of any of these types (leaving out matches any of them)",
           "items": {
-            "$ref": "#/definitions/DependencyType"
-          }
-        },
-        "moreThanOneDependencyType": {
-          "type": "boolean",
-          "description": "If true matches dependencies with more than one dependency type (e.g. defined in _both_ npm and npm-dev)"
-        },
-        "license": {
-          "type": "string",
-          "description": "Whether or not to match modules that were released under one of the mentioned licenses. E.g. to flag GPL-1.0, GPL-2.0 licensed modules (e.g. because your app is not compatible with the GPL) use \"GPL\""
-        },
-        "licenseNot": {
-          "type": "string",
-          "description": "Whether or not to match modules that were NOT released under one of the mentioned licenses. E.g. to flag everyting non MIT use \"MIT\" here"
-        }
-      }
-    },
-    "ReachabilityToRestrictionType": {
-      "description": "Criteria the 'to' end of a dependency should match to be caught by this rule. Leave it empty if you want any module to be matched.",
-      "required": ["reachable"],
-      "additionalProperties": false,
-      "properties": {
-        "path": {
-          "type": "string",
-          "description": "A regular expression an end of a dependency should match to be catched by this rule."
-        },
-        "pathNot": {
-          "type": "string",
-          "description": "A regular expression an end of a dependency should NOT match to be catched by this rule."
-        },
-        "reachable": {
-          "type": "boolean",
-          "description": "Whether or not to match modules that aren't reachable from the from part of the rule."
+            "type": "string"
+          },
+          "description": "The circular path if the violation was about circularity"
         }
       }
     },
@@ -271,31 +429,116 @@
         }
       }
     },
-    "ModuleSystemType": {
-      "type": "string",
-      "enum": ["cjs", "es6", "amd", "tsd"]
-    },
-    "ModuleSystemsType": {
-      "type": "array",
-      "description": "List of module systems to cruise. Defaults to [amd, cjs, es6]",
-      "items": {
-        "$ref": "#/definitions/ModuleSystemType"
+    "FromRestrictionType": {
+      "type": "object",
+      "description": "Criteria an end of a dependency should match to be caught by this rule. Leave it empty if you want any module to be matched.",
+      "additionalProperties": false,
+      "properties": {
+        "path": {
+          "type": "string",
+          "description": "A regular expression an end of a dependency should match to be catched by this rule."
+        },
+        "pathNot": {
+          "type": "string",
+          "description": "A regular expression an end of a dependency should NOT match to be catched by this rule."
+        },
+        "orphan": {
+          "type": "boolean",
+          "description": "Whether or not to match when the module is an orphan (= has no incoming or outgoing dependencies). When this property it is part of a rule, dependency-cruiser will ignore the 'to' part."
+        }
       }
     },
-    "OutputType": {
-      "type": "string",
-      "enum": [
-        "json",
-        "html",
-        "dot",
-        "ddot",
-        "csv",
-        "err",
-        "err-long",
-        "err-html",
-        "teamcity",
-        "anon"
-      ]
+    "ReachabilityFromRestrictionType": {
+      "type": "object",
+      "description": "Criteria an end of a dependency should match to be caught by this rule. Leave it empty if you want any module to be matched.",
+      "additionalProperties": false,
+      "properties": {
+        "path": {
+          "type": "string",
+          "description": "A regular expression an end of a dependency should match to be catched by this rule."
+        },
+        "pathNot": {
+          "type": "string",
+          "description": "A regular expression an end of a dependency should NOT match to be catched by this rule."
+        }
+      }
+    },
+    "ToRestrictionType": {
+      "type": "object",
+      "description": "Criteria the 'to' end of a dependency should match to be caught by this rule. Leave it empty if you want any module to be matched.",
+      "additionalProperties": false,
+      "properties": {
+        "path": {
+          "type": "string",
+          "description": "A regular expression an end of a dependency should match to be catched by this rule."
+        },
+        "pathNot": {
+          "type": "string",
+          "description": "A regular expression an end of a dependency should NOT match to be catched by this rule."
+        },
+        "couldNotResolve": {
+          "type": "boolean",
+          "description": "Whether or not to match modules dependency-cruiser could not resolve (and probably aren't on disk). For this one too: leave out if you don't care either way."
+        },
+        "circular": {
+          "type": "boolean",
+          "description": "Whether or not to match when following to the to will ultimately end up in the from."
+        },
+        "dynamic": {
+          "type": "boolean",
+          "description": "Whether or not to match when the dependency is a dynamic one."
+        },
+        "exoticRequire": {
+          "type": "string",
+          "description": "A regular expression to match against any 'exotic' require strings"
+        },
+        "exoticRequireNot": {
+          "type": "string",
+          "description": "A regular expression to match against any 'exotic' require strings - when it should NOT be caught by the rule"
+        },
+        "preCompilationOnly": {
+          "type": "boolean",
+          "description": "true if this dependency only exists before compilation (like type only imports), false in all other cases. Only returned when the tsPreCompilationDeps is set to 'specify'."
+        },
+        "dependencyTypes": {
+          "type": "array",
+          "description": "Whether or not to match modules of any of these types (leaving out matches any of them)",
+          "items": {
+            "$ref": "#/definitions/DependencyTypeType"
+          }
+        },
+        "moreThanOneDependencyType": {
+          "type": "boolean",
+          "description": "If true matches dependencies with more than one dependency type (e.g. defined in _both_ npm and npm-dev)"
+        },
+        "license": {
+          "type": "string",
+          "description": "Whether or not to match modules that were released under one of the mentioned licenses. E.g. to flag GPL-1.0, GPL-2.0 licensed modules (e.g. because your app is not compatible with the GPL) use \"GPL\""
+        },
+        "licenseNot": {
+          "type": "string",
+          "description": "Whether or not to match modules that were NOT released under one of the mentioned licenses. E.g. to flag everyting non MIT use \"MIT\" here"
+        }
+      }
+    },
+    "ReachabilityToRestrictionType": {
+      "description": "Criteria the 'to' end of a dependency should match to be caught by this rule. Leave it empty if you want any module to be matched.",
+      "required": ["reachable"],
+      "additionalProperties": false,
+      "properties": {
+        "path": {
+          "type": "string",
+          "description": "A regular expression an end of a dependency should match to be catched by this rule."
+        },
+        "pathNot": {
+          "type": "string",
+          "description": "A regular expression an end of a dependency should NOT match to be catched by this rule."
+        },
+        "reachable": {
+          "type": "boolean",
+          "description": "Whether or not to match modules that aren't reachable from the from part of the rule."
+        }
+      }
     },
     "OptionsUsedType": {
       "type": "object",
@@ -315,7 +558,7 @@
               "type": "array",
               "description": "an array of dependency types to include, but not follow further",
               "items": {
-                "$ref": "#/definitions/DependencyType"
+                "$ref": "#/definitions/DependencyTypeType"
               }
             }
           }
@@ -435,264 +678,27 @@
         }
       }
     },
-    "SummaryType": {
-      "type": "object",
-      "required": [
-        "violations",
-        "error",
-        "warn",
-        "info",
-        "totalCruised",
-        "optionsUsed"
-      ],
-      "additionalProperties": false,
-      "description": "Data summarizing the found dependencies",
-      "properties": {
-        "violations": {
-          "$ref": "#/definitions/ViolationsType"
-        },
-        "error": {
-          "type": "number",
-          "description": "the number of errors in the dependencies"
-        },
-        "warn": {
-          "type": "number",
-          "description": "the number of warnings in the dependencies"
-        },
-        "info": {
-          "type": "number",
-          "description": "the number of informational level notices in the dependencies"
-        },
-        "totalCruised": {
-          "type": "number",
-          "description": "the number of modules cruised"
-        },
-        "totalDependenciesCruised": {
-          "type": "number",
-          "description": "the number of dependencies cruised"
-        },
-        "ruleSetUsed": {
-          "$ref": "#/definitions/RuleSetType"
-        },
-        "optionsUsed": {
-          "$ref": "#/definitions/OptionsUsedType"
-        }
-      }
-    },
-    "ViolationsType": {
+    "ModuleSystemsType": {
       "type": "array",
-      "description": "A list of violations found in the dependencies. The dependencies themselves also contain this information, this summary is here for convenience.",
+      "description": "List of module systems to cruise. Defaults to [amd, cjs, es6]",
       "items": {
-        "$ref": "#/definitions/ViolationType"
+        "$ref": "#/definitions/ModuleSystemType"
       }
     },
-    "ViolationType": {
-      "type": "object",
-      "required": ["from", "to", "rule"],
-      "additionalProperties": false,
-      "properties": {
-        "from": {
-          "type": "string"
-        },
-        "to": {
-          "type": "string"
-        },
-        "rule": {
-          "$ref": "#/definitions/RuleSummaryType"
-        },
-        "cycle": {
-          "type": "array",
-          "items": {
-            "type": "string"
-          },
-          "description": "The circular path if the violation was about circularity"
-        }
-      }
-    },
-    "RuleSummaryType": {
-      "type": "object",
-      "description": "If there was a rule violation (valid === false), this object contains the name of the rule and severity of violating it.",
-      "required": ["name", "severity"],
-      "additionalProperties": false,
-      "properties": {
-        "name": {
-          "type": "string",
-          "description": "The (short, eslint style) name of the violated rule. Typically something like 'no-core-punycode' or 'no-outside-deps'."
-        },
-        "severity": {
-          "$ref": "#/definitions/SeverityType"
-        }
-      }
-    },
-    "DependenciesType": {
-      "type": "array",
-      "items": {
-        "type": "object",
-        "required": [
-          "module",
-          "resolved",
-          "coreModule",
-          "dependencyTypes",
-          "followable",
-          "couldNotResolve",
-          "moduleSystem",
-          "valid",
-          "dynamic"
-        ],
-        "additionalProperties": false,
-        "properties": {
-          "module": {
-            "type": "string",
-            "description": "The name of the module as it appeared in the source code, e.g. './main'"
-          },
-          "resolved": {
-            "type": "string",
-            "description": "The (resolved) file name of the module, e.g. 'src/main//index.js'"
-          },
-          "coreModule": {
-            "type": "boolean",
-            "description": "Whether or not this is a node.js core module - deprecated in favor of dependencyType === core"
-          },
-          "dependencyTypes": {
-            "type": "array",
-            "items": {
-              "$ref": "#/definitions/DependencyType"
-            },
-            "description": "the type of inclusion - local, core, unknown (= we honestly don't know), undetermined (= we didn't bother determining it) or one of the npm dependencies defined in a package.jsom ('npm' for 'depenencies', 'npm-dev', 'npm-optional', 'npm-peer', 'npm-no-pkg' for development, optional, peer dependencies and dependencies in node_modules but not in package.json respectively)"
-          },
-          "license": {
-            "type": "string",
-            "description": "the license, if known (usually known for modules pulled from npm, not for local ones)"
-          },
-          "followable": {
-            "type": "boolean",
-            "description": "Whether or not this is a dependency that can be followed any further. This will be 'false' for for core modules, json, modules that could not be resolved to a file and modules that weren't followed because it matches the doNotFollow expression."
-          },
-          "dynamic": {
-            "type": "boolean",
-            "description": "true if this dependency is dynamic, false in all other cases"
-          },
-          "exoticRequire": {
-            "type": "string",
-            "description": "If this dependency was defined by a require not named require (as defined in the exoticRequireStrings option): the string that was used"
-          },
-          "matchesDoNotFollow": {
-            "type": "boolean",
-            "description": "'true' if the file name of this module matches the doNotFollow regular expression"
-          },
-          "couldNotResolve": {
-            "type": "boolean",
-            "description": "'true' if dependency-cruiser could not resulve the module name in the source code to a file name or core module. 'false' in all other cases."
-          },
-          "circular": {
-            "type": "boolean",
-            "description": "'true' if following this dependency will ultimately return to the source, false in all other cases"
-          },
-          "cycle": {
-            "type": "array",
-            "items": {
-              "type": "string"
-            },
-            "description": "If following this dependency will ultimately return to the source (circular === true), this attribute will contain an (ordered) array of module names that shows (one of the) circular path(s)"
-          },
-          "moduleSystem": {
-            "$ref": "#/definitions/ModuleSystemType"
-          },
-          "valid": {
-            "type": "boolean",
-            "description": "'true' if this dependency violated a rule; 'false' in all other cases. The violated rule will be in the 'rule' object at the same level."
-          },
-          "rules": {
-            "type": "array",
-            "items": {
-              "$ref": "#/definitions/RuleSummaryType"
-            },
-            "description": "an array of rules violated by this dependency - left out if the dependency is valid"
-          }
-        }
-      }
-    },
-    "ModulesType": {
-      "type": "array",
-      "description": "A list of modules, with for each module the modules it depends upon",
-      "items": {
-        "type": "object",
-        "required": ["source", "dependencies", "valid"],
-        "additionalProperties": false,
-        "properties": {
-          "source": {
-            "type": "string",
-            "description": "The (resolved) file name of the module, e.g. 'src/main/index.js'"
-          },
-          "followable": {
-            "type": "boolean",
-            "description": "Whether or not this is a dependency that can be followed any further. This will be 'false' for for core modules, json, modules that could not be resolved to a file and modules that weren't followed because it matches the doNotFollow expression."
-          },
-          "matchesDoNotFollow": {
-            "type": "boolean",
-            "description": "'true' if the file name of this module matches the doNotFollow regular expression"
-          },
-          "coreModule": {
-            "type": "boolean",
-            "description": "Whether or not this is a node.js core module"
-          },
-          "couldNotResolve": {
-            "type": "boolean",
-            "description": "'true' if dependency-cruiser could not resolve the module name in the source code to a file name or core module. 'false' in all other cases."
-          },
-          "dependencyTypes": {
-            "type": "array",
-            "items": {
-              "$ref": "#/definitions/DependencyType"
-            },
-            "description": "the type of inclusion - local, core, unknown (= we honestly don't know), undetermined (= we didn't bother determining it) or one of the npm dependencies defined in a package.jsom ('npm' for 'depenencies', 'npm-dev', 'npm-optional', 'npm-peer', 'npm-no-pkg' for development, optional, peer dependencies and dependencies in node_modules but not in package.json respectively)"
-          },
-          "license": {
-            "type": "string",
-            "description": "the license, if known (usually known for modules pulled from npm, not for local ones)"
-          },
-          "orphan": {
-            "type": "boolean",
-            "description": "'true' if this module does not have dependencies, and no module has it as a dependency"
-          },
-          "reachable": {
-            "type": "array",
-            "items": {
-              "$ref": "#/definitions/ReachableType"
-            },
-            "description": "An array of objects that tell whether this module is 'reachable', and according to rule in which this reachability was defined"
-          },
-          "valid": {
-            "type": "boolean",
-            "description": "'true' if this module violated a rule; 'false' in all other cases. The violated rule will be in the 'rule' object at the same level."
-          },
-          "rules": {
-            "type": "array",
-            "items": {
-              "$ref": "#/definitions/RuleSummaryType"
-            },
-            "description": "an array of rules violated by this module - left out if the module is valid"
-          },
-          "dependencies": {
-            "$ref": "#/definitions/DependenciesType"
-          }
-        }
-      }
-    },
-    "ReachableType": {
-      "type": "object",
-      "required": ["value", "asDefinedInRule"],
-      "additionalProperties": false,
-      "properties": {
-        "value": {
-          "type": "boolean",
-          "description": "'true' if this module is reachable from any of the modules matched by the from part of a reachability-rule in 'asDefinedInRule', 'false' if not."
-        },
-        "asDefinedInRule": {
-          "type": "string",
-          "description": "The name of the rule where the reachability was defined"
-        }
-      }
+    "OutputType": {
+      "type": "string",
+      "enum": [
+        "json",
+        "html",
+        "dot",
+        "ddot",
+        "csv",
+        "err",
+        "err-long",
+        "err-html",
+        "teamcity",
+        "anon"
+      ]
     }
   }
 }

@@ -5,9 +5,6 @@ const outputType = require("./output-type");
 
 module.exports = {
   definitions: {
-    ...moduleSystemsType.definitions,
-    ...dependencyType.definitions,
-    ...outputType.definitions,
     OptionsUsedType: {
       type: "object",
       description:
@@ -49,7 +46,7 @@ module.exports = {
               type: "array",
               description:
                 "an array of dependency types to include, but not follow further",
-              items: { $ref: "#/definitions/DependencyType" }
+              items: { $ref: "#/definitions/DependencyTypeType" }
             }
           }
         },
@@ -84,6 +81,9 @@ module.exports = {
           }
         }
       }
-    }
+    },
+    ...moduleSystemsType.definitions,
+    ...dependencyType.definitions,
+    ...outputType.definitions
   }
 };

@@ -1,6 +1,6 @@
 module.exports = {
   definitions: {
-    DependencyType: {
+    DependencyTypeType: {
       type: "string",
       enum: [
         "aliased",

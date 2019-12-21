@@ -3,8 +3,6 @@ const moduleSystemsType = require("./module-systems-type");
 
 module.exports = {
   definitions: {
-    ...moduleSystemsType.definitions,
-    ...dependencyType.definitions,
     OptionsType: {
       type: "object",
       description: "Runtime configuration options",
@@ -33,7 +31,7 @@ module.exports = {
                   description:
                     "an array of dependency types to include, but not follow further",
                   items: {
-                    $ref: "#/definitions/DependencyType"
+                    $ref: "#/definitions/DependencyTypeType"
                   }
                 }
               }
@@ -69,7 +67,8 @@ module.exports = {
         includeOnly: {
           type: "string",
           description:
-            "a regular expression for modules to cruise; anything outside it will be skipped"
+            "a regular expression for modules to cruise; anything outside it will " +
+            "be skipped"
         },
         maxDepth: {
           type: "number",
@@ -85,29 +84,36 @@ module.exports = {
         preserveSymlinks: {
           type: "boolean",
           description:
-            "if true leave symlinks untouched, otherwise use the realpath. Defaults to `false` (which is also nodejs's default behavior since version 6)"
+            "if true leave symlinks untouched, otherwise use the realpath. Defaults " +
+            "to `false` (which is also nodejs's default behavior since version 6)"
         },
         combinedDependencies: {
           type: "boolean",
           description:
-            "if true combines the package.jsons found from the module up to the base folder the cruise is initiated from. Useful for how (some) mono-repos manage dependencies & dependency definitions. Defaults to `false`."
+            "if true combines the package.jsons found from the module up to the base " +
+            "folder the cruise is initiated from. Useful for how (some) mono-repos " +
+            "manage dependencies & dependency definitions. Defaults to `false`."
         },
         tsConfig: {
           type: "object",
           additionalProperties: false,
           description:
-            "Typescript project file ('tsconfig.json') to use for (1) compilation and (2) resolution (e.g. with the paths property)",
+            "Typescript project file ('tsconfig.json') to use for (1) compilation " +
+            "and (2) resolution (e.g. with the paths property)",
           properties: {
             fileName: {
               description:
-                "The typescript project file to use. The fileName is relative to dependency-cruiser's current working directory. When not provided defaults to './tsconfig.json'.",
+                "The typescript project file to use. The fileName is relative to " +
+                "dependency-cruiser's current working directory. When not provided " +
+                "defaults to './tsconfig.json'.",
               type: "string"
             }
           }
         },
         tsPreCompilationDeps: {
           description:
-            "if true detect dependencies that only exist before typescript-to-javascript compilation.",
+            "if true detect dependencies that only exist before typescript-to-javascript " +
+            "compilation.",
           oneOf: [
             {
               type: "boolean"
@@ -133,7 +139,9 @@ module.exports = {
             fileName: {
               type: "string",
               description:
-                "The webpack conf file to use (typically something like 'webpack.conf.js'). The fileName is relative to dependency-cruiser's current working directory. When not provided defaults to './webpack.conf.js'."
+                "The webpack conf file to use (typically something like 'webpack.conf.js'). " +
+                "The fileName is relative to dependency-cruiser's current working " +
+                "directory. When not provided defaults to './webpack.conf.js'."
             },
             env: {
               description:
@@ -150,19 +158,25 @@ module.exports = {
             arguments: {
               type: "object",
               description:
-                "Arguments to pass if your config file returns a function. E.g. {mode: 'production'} if you want to use webpack 4's 'mode' feature"
+                "Arguments to pass if your config file returns a function. E.g. " +
+                "{mode: 'production'} if you want to use webpack 4's 'mode' feature"
             }
           }
         },
         exoticRequireStrings: {
           type: "array",
           description:
-            "List of strings you have in use in addition to cjs/ es6 requires & imports to declare module dependencies. Use this e.g. if you've redeclared require (`const want = require`), use a require-wrapper (like semver-try-require) or use window.require as a hack to workaround something",
+            "List of strings you have in use in addition to cjs/ es6 requires & " +
+            "imports to declare module dependencies. Use this e.g. if you've redeclared " +
+            "require (`const want = require`), use a require-wrapper (like semver-try-require) " +
+            "or use window.require as a hack to workaround something",
           items: {
             type: "string"
           }
         }
       }
-    }
+    },
+    ...moduleSystemsType.definitions,
+    ...dependencyType.definitions
   }
 };

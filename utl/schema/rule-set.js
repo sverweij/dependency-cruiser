@@ -8,7 +8,9 @@ const RULE_SET_TYPE_PROPERTIES = {
     forbidden: {
       type: "array",
       description:
-        "A list of rules that describe dependencies that are not allowed. dependency-cruiser will emit a separate error (warning/ informational) messages for each violated rule.",
+        "A list of rules that describe dependencies that are not allowed. dependency-cruiser " +
+        "will emit a separate error (warning/ informational) messages for each violated " +
+        "rule.",
       items: {
         $ref: "#/definitions/ForbiddenRuleType"
       }
@@ -16,7 +18,9 @@ const RULE_SET_TYPE_PROPERTIES = {
     allowed: {
       type: "array",
       description:
-        "A list of rules that describe dependencies that are allowed. dependency-cruiser will emit the warning message 'not-in-allowed' for each dependency that does not at least meet one of them.",
+        "A list of rules that describe dependencies that are allowed. dependency-cruiser " +
+        "will emit the warning message 'not-in-allowed' for each dependency that " +
+        "does not at least meet one of them.",
       items: {
         $ref: "#/definitions/AllowedRuleType"
       }
@@ -24,7 +28,8 @@ const RULE_SET_TYPE_PROPERTIES = {
     allowedSeverity: {
       $ref: "#/definitions/SeverityType",
       description:
-        "Severity to use when a dependency is not in the 'allowed' set of rules. Defaults to 'warn'"
+        "Severity to use when a dependency is not in the 'allowed' set of rules. " +
+        "Defaults to 'warn'"
     }
   }
 };
@@ -32,8 +37,6 @@ const RULE_SET_TYPE_PROPERTIES = {
 module.exports = {
   ...RULE_SET_TYPE_PROPERTIES,
   definitions: {
-    ...severityType.definitions,
-    ...restrictions.definitions,
     RuleSetType: RULE_SET_TYPE_PROPERTIES,
     AllowedRuleType: {
       oneOf: [
@@ -95,7 +98,11 @@ module.exports = {
         name: {
           type: "string",
           description:
-            "A short name for the rule - will appear in reporters to enable customers to quickly identify a violated rule. Try to keep them short, eslint style. E.g. 'not-to-core' for a rule forbidding dependencies on core modules, or 'not-to-unresolvable' for one that prevents dependencies on modules that probably don't exist."
+            "A short name for the rule - will appear in reporters to enable customers " +
+            "to quickly identify a violated rule. Try to keep them short, eslint " +
+            "style. E.g. 'not-to-core' for a rule forbidding dependencies on core " +
+            "modules, or 'not-to-unresolvable' for one that prevents dependencies " +
+            "on modules that probably don't exist."
         },
         severity: {
           $ref: "#/definitions/SeverityType"
@@ -134,6 +141,8 @@ module.exports = {
           $ref: "#/definitions/ReachabilityToRestrictionType"
         }
       }
-    }
+    },
+    ...restrictions.definitions,
+    ...severityType.definitions
   }
 };

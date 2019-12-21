@@ -3,8 +3,6 @@ const optionsUsed = require("./options-used");
 
 module.exports = {
   definitions: {
-    ...ruleSet.definitions,
-    ...optionsUsed.definitions,
     SummaryType: {
       type: "object",
       required: [
@@ -47,7 +45,8 @@ module.exports = {
     ViolationsType: {
       type: "array",
       description:
-        "A list of violations found in the dependencies. The dependencies themselves also contain this information, this summary is here for convenience.",
+        "A list of violations found in the dependencies. The dependencies themselves " +
+        "also contain this information, this summary is here for convenience.",
       items: { $ref: "#/definitions/ViolationType" }
     },
     ViolationType: {
@@ -69,6 +68,8 @@ module.exports = {
             "The circular path if the violation was about circularity"
         }
       }
-    }
+    },
+    ...ruleSet.definitions,
+    ...optionsUsed.definitions
   }
 };

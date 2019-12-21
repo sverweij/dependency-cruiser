@@ -9,11 +9,11 @@ module.exports = {
   required: ["summary", "modules"],
   additionalProperties: false,
   properties: {
-    summary: { $ref: "#/definitions/SummaryType" },
-    modules: { $ref: "#/definitions/ModulesType" }
+    modules: { $ref: "#/definitions/ModulesType" },
+    summary: { $ref: "#/definitions/SummaryType" }
   },
   definitions: {
-    ...summary.definitions,
-    ...modules.definitions
+    ...modules.definitions,
+    ...summary.definitions
   }
 };
