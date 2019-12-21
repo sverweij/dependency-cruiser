@@ -36,6 +36,8 @@ src/%.template.js: src/%.template.hbs
 src/%.schema.json: utl/%.schema.js
 	$(NODE) ./utl/generate-schemas.utl.js
 	npx prettier --write ./src/schema/*.json
+	node bin/dependency-cruise.js --validate --output-type dot utl/schema | dot -Grankdir=TD -Gsplines=ortho -T svg > utl/overview.svg
+	node bin/dependency-cruise.js --validate --output-type dot utl/schema | dot -Gdpi=192 -Grankdir=TD -Gsplines=ortho -T png | pngquant - > utl/overview.png
 
 # "phony" targets
 dev-build: $(GENERATED_SOURCES)
