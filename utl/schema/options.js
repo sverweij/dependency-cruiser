@@ -1,5 +1,7 @@
 const dependencyType = require("./dependency-type");
 const moduleSystemsType = require("./module-systems-type");
+const compoundExclude = require("./compound-exclude-type");
+const compoundDoNotFollowType = require("./compound-donot-follow-type");
 
 module.exports = {
   definitions: {
@@ -15,27 +17,7 @@ module.exports = {
               description:
                 "a regular expression for modules to include, but not follow further"
             },
-            {
-              type: "object",
-              description:
-                "Criteria for modules to include, but not to follow further",
-              additionalProperties: false,
-              properties: {
-                path: {
-                  type: "string",
-                  description:
-                    "a regular expression for modules to include, but not follow further"
-                },
-                dependencyTypes: {
-                  type: "array",
-                  description:
-                    "an array of dependency types to include, but not follow further",
-                  items: {
-                    $ref: "#/definitions/DependencyTypeType"
-                  }
-                }
-              }
-            }
+            { $ref: "#/definitions/CompoundDoNotFollowType" }
           ]
         },
         exclude: {
@@ -45,23 +27,7 @@ module.exports = {
               description:
                 "a regular expression for modules to exclude from being cruised"
             },
-            {
-              type: "object",
-              description: "Criteria for dependencies to exclude",
-              additionalProperties: false,
-              properties: {
-                path: {
-                  type: "string",
-                  description:
-                    "a regular expression for modules to exclude from being cruised"
-                },
-                dynamic: {
-                  type: "boolean",
-                  description:
-                    "a boolean indicating whether or not to exclude dynamic dependencies"
-                }
-              }
-            }
+            { $ref: "#/definitions/CompoundExcludeType" }
           ]
         },
         includeOnly: {
@@ -177,6 +143,8 @@ module.exports = {
       }
     },
     ...moduleSystemsType.definitions,
-    ...dependencyType.definitions
+    ...dependencyType.definitions,
+    ...compoundExclude.definitions,
+    ...compoundDoNotFollowType.definitions
   }
 };

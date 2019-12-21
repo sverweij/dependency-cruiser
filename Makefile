@@ -11,7 +11,9 @@ GENERATED_SOURCES=src/cli/initConfig/config.json.template.js \
 	src/schema/configuration.schema.json \
 	src/schema/cruise-result.schema.json
 
-SCHEMA_SOURCES=utl/schema/dependencies.js \
+SCHEMA_SOURCES=utl/schema/compound-exclude-type.js \
+	utl/schema/compound-donot-follow-type.js \
+	utl/schema/dependencies.js \
 	utl/schema/dependency-type.js \
 	utl/schema/module-system-type.js \
 	utl/schema/module-systems-type.js \

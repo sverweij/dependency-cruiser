@@ -2,6 +2,8 @@ const options = require("./options");
 const dependencyType = require("./dependency-type");
 const moduleSystemsType = require("./module-systems-type");
 const outputType = require("./output-type");
+const compoundExcludeType = require("./compound-exclude-type");
+const compoundDoNotFollowType = require("./compound-donot-follow-type");
 
 module.exports = {
   definitions: {
@@ -28,62 +30,22 @@ module.exports = {
           type: "string",
           description: "File the output was written to ('-' for stdout)"
         },
+        // does not occur in the input schema
         outputType: { $ref: "#/definitions/OutputType" },
         // doNotFollow can be either a string or an object in the input options -
         // in the output it's always an object
         doNotFollow: {
-          type: "object",
-          description:
-            "Criteria for modules to include, but not to follow further",
-          additionalProperties: false,
-          properties: {
-            path: {
-              type: "string",
-              description:
-                "a regular expression for modules to include, but not follow further"
-            },
-            dependencyTypes: {
-              type: "array",
-              description:
-                "an array of dependency types to include, but not follow further",
-              items: { $ref: "#/definitions/DependencyTypeType" }
-            }
-          }
+          $ref: "#/definitions/CompoundDoNotFollowType"
         },
         // exclude can be either a string or an object in the input options -
         // in the output it's always an object
-        exclude: {
-          type: "object",
-          description: "Criteria for dependencies to exclude",
-          additionalProperties: false,
-          properties: {
-            path: {
-              type: "string",
-              description:
-                "a regular expression for modules to exclude from being cruised"
-            },
-            dynamic: {
-              type: "boolean",
-              description:
-                "a boolean indicating whether or not to exclude dynamic dependencies"
-            }
-          }
-        },
-        // tsConfig can be either a string or an object in the input options -
-        // in the output it's always an object
-        tsConfig: {
-          type: "object",
-          additionalProperties: false,
-          properties: {
-            fileName: {
-              type: "string"
-            }
-          }
-        }
+        exclude: { $ref: "#/definitions/CompoundExcludeType" }
       }
     },
     ...moduleSystemsType.definitions,
     ...dependencyType.definitions,
-    ...outputType.definitions
+    ...outputType.definitions,
+    ...compoundExcludeType.definitions,
+    ...compoundDoNotFollowType.definitions
   }
 };
