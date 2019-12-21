@@ -1,7 +1,10 @@
-const sharedTypes = require("./shared-types.schema-snippet");
+const dependencyType = require("./dependency-type");
+const moduleSystemsType = require("./module-systems-type");
 
 module.exports = {
   definitions: {
+    ...moduleSystemsType.definitions,
+    ...dependencyType.definitions,
     OptionsType: {
       type: "object",
       description: "Runtime configuration options",
@@ -160,7 +163,6 @@ module.exports = {
           }
         }
       }
-    },
-    ...sharedTypes
+    }
   }
 };

@@ -1,7 +1,13 @@
-const options = require("./options.schema-snippet");
+const options = require("./options");
+const dependencyType = require("./dependency-type");
+const moduleSystemsType = require("./module-systems-type");
+const outputType = require("./output-type");
 
 module.exports = {
   definitions: {
+    ...moduleSystemsType.definitions,
+    ...dependencyType.definitions,
+    ...outputType.definitions,
     OptionsUsedType: {
       type: "object",
       description:

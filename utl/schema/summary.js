@@ -1,5 +1,5 @@
-const ruleSet = require("./rule-set.schema-snippet");
-const optionsUsed = require("./options-used.schema-snippet");
+const ruleSet = require("./rule-set");
+const optionsUsed = require("./options-used");
 
 module.exports = {
   definitions: {
@@ -69,21 +69,6 @@ module.exports = {
             "The circular path if the violation was about circularity"
         }
       }
-    },
-    OutputType: {
-      type: "string",
-      enum: [
-        "json",
-        "html",
-        "dot",
-        "ddot",
-        "csv",
-        "err",
-        "err-long",
-        "err-html",
-        "teamcity",
-        "anon"
-      ]
     }
   }
 };

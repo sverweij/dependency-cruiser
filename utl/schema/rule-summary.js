@@ -1,8 +1,8 @@
-const sharedTypes = require("./shared-types.schema-snippet");
+const severityType = require("./severity-type");
 
 module.exports = {
   definitions: {
-    ...sharedTypes,
+    ...severityType.definitions,
     RuleSummaryType: {
       type: "object",
       description:

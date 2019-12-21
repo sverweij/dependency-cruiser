@@ -1,5 +1,5 @@
-const sharedTypes = require("./shared-types.schema-snippet");
-const restrictions = require("./restrictions.schema-snippet");
+const restrictions = require("./restrictions");
+const severityType = require("./severity-type");
 
 const RULE_SET_TYPE_PROPERTIES = {
   type: "object",
@@ -32,7 +32,7 @@ const RULE_SET_TYPE_PROPERTIES = {
 module.exports = {
   ...RULE_SET_TYPE_PROPERTIES,
   definitions: {
-    ...sharedTypes,
+    ...severityType.definitions,
     ...restrictions.definitions,
     RuleSetType: RULE_SET_TYPE_PROPERTIES,
     AllowedRuleType: {

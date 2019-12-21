@@ -44,18 +44,6 @@
     }
   },
   "definitions": {
-    "ModuleSystemType": {
-      "type": "string",
-      "enum": ["cjs", "amd", "es6", "tsd"]
-    },
-    "ModuleSystemsType": {
-      "type": "array",
-      "description": "List of module systems to cruise. Defaults to [amd, cjs, es6]",
-      "items": {
-        "type": "string",
-        "enum": ["amd", "cjs", "es6", "tsd"]
-      }
-    },
     "SeverityType": {
       "type": "string",
       "description": "How severe a violation of a rule is. The 'error' severity will make some reporters return a non-zero exit code, so if you want e.g. a build to stop when there's a rule violated: use that.",
@@ -311,6 +299,17 @@
         "to": {
           "$ref": "#/definitions/ReachabilityToRestrictionType"
         }
+      }
+    },
+    "ModuleSystemType": {
+      "type": "string",
+      "enum": ["cjs", "es6", "amd", "tsd"]
+    },
+    "ModuleSystemsType": {
+      "type": "array",
+      "description": "List of module systems to cruise. Defaults to [amd, cjs, es6]",
+      "items": {
+        "$ref": "#/definitions/ModuleSystemType"
       }
     },
     "OptionsType": {

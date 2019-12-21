@@ -1,4 +1,4 @@
-const sharedTypes = require("./shared-types.schema-snippet");
+const dependencyType = require("./dependency-type");
 
 const BASE_RESTRICTION = {
   path: {
@@ -15,7 +15,7 @@ const BASE_RESTRICTION = {
 
 module.exports = {
   definitions: {
-    ...sharedTypes,
+    ...dependencyType.definitions,
     FromRestrictionType: {
       type: "object",
       description:

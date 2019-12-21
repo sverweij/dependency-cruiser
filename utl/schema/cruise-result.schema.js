@@ -1,5 +1,5 @@
-const summary = require("./summary.schema-snippet");
-const modules = require("./modules.schema-snippet");
+const summary = require("./summary");
+const modules = require("./modules");
 
 module.exports = {
   $schema: "http://json-schema.org/draft-07/schema#",

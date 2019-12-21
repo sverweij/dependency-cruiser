@@ -1,9 +1,11 @@
-const sharedTypes = require("./shared-types.schema-snippet");
-const ruleSummary = require("./rule-summary.schema-snippet");
+const dependencyType = require("./dependency-type");
+const moduleSystemType = require("./module-system-type");
+const ruleSummary = require("./rule-summary");
 
 module.exports = {
   definitions: {
-    ...sharedTypes,
+    ...dependencyType.definitions,
+    ...moduleSystemType.definitions,
     ...ruleSummary.definitions,
     DependenciesType: {
       type: "array",

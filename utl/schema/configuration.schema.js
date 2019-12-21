@@ -1,5 +1,5 @@
-const ruleSet = require("./rule-set.schema-snippet");
-const options = require("./options.schema-snippet");
+const ruleSet = require("./rule-set");
+const options = require("./options");
 
 module.exports = {
   $schema: "http://json-schema.org/draft-07/schema#",
