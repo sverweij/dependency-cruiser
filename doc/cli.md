@@ -185,7 +185,7 @@ no violations - and a non-zero exit code when there's errors.
 #### json
 
 This emits the internal representation of a cruise as json. It's the input format for
-[depcruise-fmt](#depcruise-fmt), and is useful for debugging. If you ever
+[depcruise-fmt](#depcruise-fmt), and is useful for debugging.
 
 See [output-format](output-format.md) for more information
 
