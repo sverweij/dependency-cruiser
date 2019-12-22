@@ -9,27 +9,19 @@
     "forbidden": {
       "type": "array",
       "description": "A list of rules that describe dependencies that are not allowed. dependency-cruiser will emit a separate error (warning/ informational) messages for each violated rule.",
-      "items": {
-        "$ref": "#/definitions/ForbiddenRuleType"
-      }
+      "items": { "$ref": "#/definitions/ForbiddenRuleType" }
     },
     "allowed": {
       "type": "array",
       "description": "A list of rules that describe dependencies that are allowed. dependency-cruiser will emit the warning message 'not-in-allowed' for each dependency that does not at least meet one of them.",
-      "items": {
-        "$ref": "#/definitions/AllowedRuleType"
-      }
+      "items": { "$ref": "#/definitions/AllowedRuleType" }
     },
     "allowedSeverity": {
       "$ref": "#/definitions/SeverityType",
       "description": "Severity to use when a dependency is not in the 'allowed' set of rules. Defaults to 'warn'"
     },
-    "options": {
-      "$ref": "#/definitions/OptionsType"
-    },
-    "extends": {
-      "$ref": "#/definitions/ExtendsType"
-    }
+    "options": { "$ref": "#/definitions/OptionsType" },
+    "extends": { "$ref": "#/definitions/ExtendsType" }
   },
   "definitions": {
     "RuleSetType": {
@@ -39,16 +31,12 @@
         "forbidden": {
           "type": "array",
           "description": "A list of rules that describe dependencies that are not allowed. dependency-cruiser will emit a separate error (warning/ informational) messages for each violated rule.",
-          "items": {
-            "$ref": "#/definitions/ForbiddenRuleType"
-          }
+          "items": { "$ref": "#/definitions/ForbiddenRuleType" }
         },
         "allowed": {
           "type": "array",
           "description": "A list of rules that describe dependencies that are allowed. dependency-cruiser will emit the warning message 'not-in-allowed' for each dependency that does not at least meet one of them.",
-          "items": {
-            "$ref": "#/definitions/AllowedRuleType"
-          }
+          "items": { "$ref": "#/definitions/AllowedRuleType" }
         },
         "allowedSeverity": {
           "$ref": "#/definitions/SeverityType",
@@ -58,12 +46,8 @@
     },
     "AllowedRuleType": {
       "oneOf": [
-        {
-          "$ref": "#/definitions/RegularAllowedRuleType"
-        },
-        {
-          "$ref": "#/definitions/ReachabilityAllowedRuleType"
-        }
+        { "$ref": "#/definitions/RegularAllowedRuleType" },
+        { "$ref": "#/definitions/ReachabilityAllowedRuleType" }
       ]
     },
     "RegularAllowedRuleType": {
@@ -71,15 +55,9 @@
       "required": ["from", "to"],
       "additionalProperties": false,
       "properties": {
-        "comment": {
-          "type": "string"
-        },
-        "from": {
-          "$ref": "#/definitions/FromRestrictionType"
-        },
-        "to": {
-          "$ref": "#/definitions/ToRestrictionType"
-        }
+        "comment": { "type": "string" },
+        "from": { "$ref": "#/definitions/FromRestrictionType" },
+        "to": { "$ref": "#/definitions/ToRestrictionType" }
       }
     },
     "ReachabilityAllowedRuleType": {
@@ -87,25 +65,15 @@
       "required": ["from", "to"],
       "additionalProperties": false,
       "properties": {
-        "comment": {
-          "type": "string"
-        },
-        "from": {
-          "$ref": "#/definitions/ReachabilityFromRestrictionType"
-        },
-        "to": {
-          "$ref": "#/definitions/ReachabilityToRestrictionType"
-        }
+        "comment": { "type": "string" },
+        "from": { "$ref": "#/definitions/ReachabilityFromRestrictionType" },
+        "to": { "$ref": "#/definitions/ReachabilityToRestrictionType" }
       }
     },
     "ForbiddenRuleType": {
       "oneOf": [
-        {
-          "$ref": "#/definitions/RegularForbiddenRuleType"
-        },
-        {
-          "$ref": "#/definitions/ReachabilityForbiddenRuleType"
-        }
+        { "$ref": "#/definitions/RegularForbiddenRuleType" },
+        { "$ref": "#/definitions/ReachabilityForbiddenRuleType" }
       ]
     },
     "RegularForbiddenRuleType": {
@@ -117,19 +85,13 @@
           "type": "string",
           "description": "A short name for the rule - will appear in reporters to enable customers to quickly identify a violated rule. Try to keep them short, eslint style. E.g. 'not-to-core' for a rule forbidding dependencies on core modules, or 'not-to-unresolvable' for one that prevents dependencies on modules that probably don't exist."
         },
-        "severity": {
-          "$ref": "#/definitions/SeverityType"
-        },
+        "severity": { "$ref": "#/definitions/SeverityType" },
         "comment": {
           "type": "string",
           "description": "You can use this field to document why the rule is there."
         },
-        "from": {
-          "$ref": "#/definitions/FromRestrictionType"
-        },
-        "to": {
-          "$ref": "#/definitions/ToRestrictionType"
-        }
+        "from": { "$ref": "#/definitions/FromRestrictionType" },
+        "to": { "$ref": "#/definitions/ToRestrictionType" }
       }
     },
     "ReachabilityForbiddenRuleType": {
@@ -137,21 +99,11 @@
       "required": ["from", "to"],
       "additionalProperties": false,
       "properties": {
-        "name": {
-          "type": "string"
-        },
-        "severity": {
-          "$ref": "#/definitions/SeverityType"
-        },
-        "comment": {
-          "type": "string"
-        },
-        "from": {
-          "$ref": "#/definitions/ReachabilityFromRestrictionType"
-        },
-        "to": {
-          "$ref": "#/definitions/ReachabilityToRestrictionType"
-        }
+        "name": { "type": "string" },
+        "severity": { "$ref": "#/definitions/SeverityType" },
+        "comment": { "type": "string" },
+        "from": { "$ref": "#/definitions/ReachabilityFromRestrictionType" },
+        "to": { "$ref": "#/definitions/ReachabilityToRestrictionType" }
       }
     },
     "FromRestrictionType": {
@@ -228,9 +180,7 @@
         "dependencyTypes": {
           "type": "array",
           "description": "Whether or not to match modules of any of these types (leaving out matches any of them)",
-          "items": {
-            "$ref": "#/definitions/DependencyTypeType"
-          }
+          "items": { "$ref": "#/definitions/DependencyTypeType" }
         },
         "moreThanOneDependencyType": {
           "type": "boolean",
@@ -300,9 +250,7 @@
               "type": "string",
               "description": "a regular expression for modules to include, but not follow further"
             },
-            {
-              "$ref": "#/definitions/CompoundDoNotFollowType"
-            }
+            { "$ref": "#/definitions/CompoundDoNotFollowType" }
           ]
         },
         "exclude": {
@@ -311,9 +259,7 @@
               "type": "string",
               "description": "a regular expression for modules to exclude from being cruised"
             },
-            {
-              "$ref": "#/definitions/CompoundExcludeType"
-            }
+            { "$ref": "#/definitions/CompoundExcludeType" }
           ]
         },
         "includeOnly": {
@@ -326,12 +272,8 @@
           "maximum": 99,
           "description": "The maximum cruise depth specified. 0 means no maximum specified"
         },
-        "moduleSystems": {
-          "$ref": "#/definitions/ModuleSystemsType"
-        },
-        "prefix": {
-          "type": "string"
-        },
+        "moduleSystems": { "$ref": "#/definitions/ModuleSystemsType" },
+        "prefix": { "type": "string" },
         "preserveSymlinks": {
           "type": "boolean",
           "description": "if true leave symlinks untouched, otherwise use the realpath. Defaults to `false` (which is also nodejs's default behavior since version 6)"
@@ -354,13 +296,8 @@
         "tsPreCompilationDeps": {
           "description": "if true detect dependencies that only exist before typescript-to-javascript compilation.",
           "oneOf": [
-            {
-              "type": "boolean"
-            },
-            {
-              "type": "string",
-              "enum": ["specify"]
-            }
+            { "type": "boolean" },
+            { "type": "string", "enum": ["specify"] }
           ]
         },
         "externalModuleResolutionStrategy": {
@@ -379,14 +316,7 @@
             },
             "env": {
               "description": "Environment to pass if your config file returns a function",
-              "oneOf": [
-                {
-                  "type": "object"
-                },
-                {
-                  "type": "string"
-                }
-              ]
+              "oneOf": [{ "type": "object" }, { "type": "string" }]
             },
             "arguments": {
               "type": "object",
@@ -397,9 +327,7 @@
         "exoticRequireStrings": {
           "type": "array",
           "description": "List of strings you have in use in addition to cjs/ es6 requires & imports to declare module dependencies. Use this e.g. if you've redeclared require (`const want = require`), use a require-wrapper (like semver-try-require) or use window.require as a hack to workaround something",
-          "items": {
-            "type": "string"
-          }
+          "items": { "type": "string" }
         }
       }
     },
@@ -410,9 +338,7 @@
     "ModuleSystemsType": {
       "type": "array",
       "description": "List of module systems to cruise. Defaults to [amd, cjs, es6]",
-      "items": {
-        "$ref": "#/definitions/ModuleSystemType"
-      }
+      "items": { "$ref": "#/definitions/ModuleSystemType" }
     },
     "CompoundExcludeType": {
       "type": "object",
@@ -441,24 +367,18 @@
         "dependencyTypes": {
           "type": "array",
           "description": "an array of dependency types to include, but not follow further",
-          "items": {
-            "$ref": "#/definitions/DependencyTypeType"
-          }
+          "items": { "$ref": "#/definitions/DependencyTypeType" }
         }
       }
     },
     "ExtendsType": {
       "description": "A configuration this configuration uses as a base",
       "oneOf": [
-        {
-          "type": "string"
-        },
+        { "type": "string" },
         {
           "type": "array",
           "description": "A list of rules that describe dependencies that are allowed. dependency-cruiser will emit the warning message 'not-in-allowed' for each dependency that does not at least meet one of them.",
-          "items": {
-            "type": "string"
-          }
+          "items": { "type": "string" }
         }
       ]
     }

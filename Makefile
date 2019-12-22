@@ -51,7 +51,6 @@ src/%.template.js: src/%.template.hbs
 
 src/%.schema.json: utl/%.schema.js $(SCHEMA_SOURCES)
 	$(NODE) ./utl/generate-schemas.utl.js
-	npx prettier --write ./src/schema/*.json
 
 # "phony" targets
 dev-build: $(GENERATED_SOURCES)
