@@ -21,6 +21,7 @@ SCHEMA_SOURCES=utl/schema/compound-exclude-type.js \
 	utl/schema/options-used.js \
 	utl/schema/options.js \
 	utl/schema/output-type.js \
+	utl/schema/reporter-options.js \
 	utl/schema/restrictions.js \
 	utl/schema/rule-set.js \
 	utl/schema/rule-summary.js \

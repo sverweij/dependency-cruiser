@@ -8,7 +8,7 @@ const unresolvableDeps = require("./mocks/es6-unresolvable-deps.json");
 const doNotFollowDeps = require("./mocks/do-not-follow-deps.json");
 const prefixUri = require("./mocks/prefix-uri.json");
 const prefixNonUri = require("./mocks/prefix-non-uri.json");
-const boringScheme = require("./boringModuleColorScheme.json");
+const boringScheme = require("./boringTheme.json");
 
 const mockPath = path.join(__dirname, "mocks");
 const clusterlessFixture = fs.readFileSync(
@@ -23,8 +23,16 @@ const doNotFollowFixture = fs.readFileSync(
   path.join(mockPath, "donotfollow.dot"),
   "utf8"
 );
+const doNotFollowFixtureBoring = fs.readFileSync(
+  path.join(mockPath, "donotfollow-boring.dot"),
+  "utf8"
+);
 const orphanFixture = fs.readFileSync(
   path.join(mockPath, "orphan-deps.dot"),
+  "utf8"
+);
+const orphanFixtureBoring = fs.readFileSync(
+  path.join(mockPath, "orphan-deps-boring.dot"),
   "utf8"
 );
 const prefixUriFixture = fs.readFileSync(
@@ -47,16 +55,24 @@ describe("report/dot/moduleLevel reporter", () => {
     );
   });
 
-  it("renders a dot - matchesDoNotFollow rendered as folders", () => {
+  it("renders a dot - boringScheme matchesDoNotFollow NOT rendered as folders", () => {
     expect(render(doNotFollowDeps, boringScheme).output).to.deep.equal(
-      doNotFollowFixture
+      doNotFollowFixtureBoring
     );
   });
 
-  it("renders a dot - renders modules with module level transgression with a severity deduced color", () => {
+  it("renders a dot - default color scheme matchesDoNotFollow rendered as folders", () => {
+    expect(render(doNotFollowDeps).output).to.deep.equal(doNotFollowFixture);
+  });
+
+  it("renders a dot - boringScheme renders modules with module level transgression with NO severity deduced colors", () => {
     expect(render(orphanDeps, boringScheme).output).to.deep.equal(
-      orphanFixture
+      orphanFixtureBoring
     );
+  });
+
+  it("renders a dot - default color schme renders modules with module level transgression with severity deduced colors", () => {
+    expect(render(orphanDeps).output).to.deep.equal(orphanFixture);
   });
 
   it("renders a dot - uri prefix get concatenated", () => {

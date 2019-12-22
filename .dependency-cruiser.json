@@ -102,7 +102,10 @@
       "severity": "error",
       "comment": "In production code do not depend on external ('npm') modules not declared in your package.json's dependencies - otherwise a production only install (i.e. 'npm ci') will break. If this rule triggers on something that's only used during development, adapt the 'from' of the rule in the dependency-cruiser configuration.",
       "from": { "path": "^(bin|src)" },
-      "to": { "dependencyTypes": ["npm-dev"], "exoticRequireNot": "^tryRequire$" }
+      "to": {
+        "dependencyTypes": ["npm-dev"],
+        "exoticRequireNot": "^tryRequire$"
+      }
     },
     {
       "name": "optional-deps-used",
@@ -187,7 +190,36 @@
     //    "fileName": "./webpack.conf.js",
     //    "env": {},
     //    "args": {}
-    // }
-    "exoticRequireStrings": ["tryRequire"]
+    // },
+    "exoticRequireStrings": ["tryRequire"],
+    "reporterOptions": {
+      "dot": {
+        "theme": {
+          "replace": false,
+          "graph": {
+            "splines": "ortho"
+          },
+          "modules": [
+            {
+              "criteria": { "source": "\\.schema\\.js$" },
+              "attributes": {
+                "color": "darkgreen",
+                "fillcolor": "darkgreen",
+                "fontcolor": "#ffffcc"
+              }
+            },
+            {
+              "criteria": { "source": "\\-type\\.js$" },
+              "attributes": {
+                "fillcolor": "white",
+                "fontcolor": "darkgrey",
+                "color": "darkgrey",
+                "shape": "underline"
+              }
+            }
+          ]
+        }
+      }
+    }
   }
 }

@@ -1,18 +1,39 @@
 const path = require("path").posix;
 const Handlebars = require("handlebars/runtime");
 const _get = require("lodash/get");
-const coloring = require("../common/coloring");
+const theming = require("../common/theming");
 const folderify = require("../common/folderify");
 const compareOnSource = require("../common/compareOnSource");
 
 // eslint-disable-next-line import/no-unassigned-import
 require("./dot.template");
 
-function colorize(pColoringScheme) {
+function attributizeObject(pObject) {
+  return (
+    Object.keys(pObject)
+      // eslint-disable-next-line security/detect-object-injection
+      .map(pKey => `${pKey}="${pObject[pKey]}"`)
+      .join(" ")
+  );
+}
+
+function addThemeAttributes(pTheme) {
   return pModule => ({
     ...pModule,
-    dependencies: pModule.dependencies.map(coloring.determineDependencyColor),
-    ...coloring.determineModuleColors(pModule, pColoringScheme)
+    dependencies: pModule.dependencies
+      .map(pDependency => ({
+        ...pDependency,
+        themeAttrs: attributizeObject(
+          theming.determineAttributes(pDependency, pTheme.dependencies)
+        )
+      }))
+      .map(pDependency => ({
+        ...pDependency,
+        hasExtraAttributes: Boolean(pDependency.rule || pDependency.themeAttrs)
+      })),
+    themeAttrs: attributizeObject(
+      theming.determineAttributes(pModule, pTheme.modules)
+    )
   });
 }
 
@@ -59,17 +80,22 @@ function addURL(pInput) {
       pModule,
       pModule.coreModule || pModule.couldNotResolve
         ? {}
-        : { url: concatenateify(lPrefix, pModule.source) }
+        : { URL: concatenateify(lPrefix, pModule.source) }
     );
 }
 
-function report(pResults, pColoringScheme) {
+function report(pResults, pTheme) {
+  const lTheme = theming.normalizeTheme(pTheme);
+
   return Handlebars.templates["dot.template.hbs"]({
-    things: pResults.modules
+    graphAttrs: attributizeObject(lTheme.graph || {}),
+    nodeAttrs: attributizeObject(lTheme.node || {}),
+    edgeAttrs: attributizeObject(lTheme.edge || {}),
+    modules: pResults.modules
       .sort(compareOnSource)
       .map(extractFirstTransgression)
       .map(folderify)
-      .map(colorize(pColoringScheme))
+      .map(addThemeAttributes(lTheme))
       .map(addURL(pResults))
   });
 }
@@ -78,12 +104,15 @@ function report(pResults, pColoringScheme) {
  * Returns the results of a cruise as a directed graph in the dot language.
  *
  * @param {any} pResults - the output of a dependency-cruise adhering to ../../../schema/cruise-result.schema.json
- * @param {any} pColoringScheme - a mapping of source properties to a color, fillcolor and fontcolor
- *                              - see ../comon/richModuleCOlorScheme.json for an example
+ * @param {any} pTheme - a mapping of source properties to a attributes (like
+ *                      color, shape) - see ../comon/richTheme.json for an example
  * @returns {object} - output: a dot program
  *                     exitCode: 0
  */
-module.exports = (pResults, pColoringScheme) => ({
-  output: report(pResults, pColoringScheme),
+module.exports = (
+  pResults,
+  pTheme = _get(pResults, "summary.optionsUsed.reporterOptions.dot.theme")
+) => ({
+  output: report(pResults, pTheme),
   exitCode: 0
 });

@@ -1,0 +1,247 @@
+{
+  "modules": [
+    {
+      "source": "src/aap/noot/mies/zus.js",
+      "dependencies": [
+        {
+          "resolved": "src/aap/noot/mies/wim.json",
+          "coreModule": false,
+          "followable": false,
+          "couldNotResolve": false,
+          "dependencyTypes": ["local"],
+          "module": "./wim.json",
+          "moduleSystem": "cjs",
+          "dynamic": false,
+          "matchesDoNotFollow": false,
+          "valid": true,
+          "cycle": []
+        }
+      ],
+      "valid": true
+    },
+    {
+      "source": "src/aap/noot/mies/wim.json",
+      "followable": false,
+      "coreModule": false,
+      "couldNotResolve": false,
+      "matchesDoNotFollow": false,
+      "dependencyTypes": ["local"],
+      "dependencies": [],
+      "valid": true
+    },
+    {
+      "source": "src/aap/noot/mies/jet.js",
+      "dependencies": [],
+      "valid": true
+    },
+    {
+      "source": "src/aap/noot/mies/teun.js",
+      "dependencies": [],
+      "valid": true
+    },
+    {
+      "source": "src/aap/noot/vuur/gijs.js",
+      "dependencies": [],
+      "valid": true
+    },
+    {
+      "source": "src/aap/noot/vuur/lam.js",
+      "dependencies": [],
+      "valid": true
+    },
+    {
+      "source": "src/aap/noot/vuur/kees.template.js",
+      "dependencies": [],
+      "valid": true
+    },
+    {
+      "source": "src/aap/noot/vuur/index.js",
+      "dependencies": [
+        {
+          "resolved": "src/aap/noot/mies/zus.js",
+          "coreModule": false,
+          "followable": true,
+          "couldNotResolve": false,
+          "dependencyTypes": ["local"],
+          "module": "../mies/zus",
+          "moduleSystem": "cjs",
+          "dynamic": false,
+          "matchesDoNotFollow": false,
+          "valid": true,
+          "cycle": []
+        },
+        {
+          "resolved": "src/aap/noot/mies/jet.js",
+          "coreModule": false,
+          "followable": true,
+          "couldNotResolve": false,
+          "dependencyTypes": ["local"],
+          "module": "../mies/jet",
+          "moduleSystem": "cjs",
+          "dynamic": false,
+          "matchesDoNotFollow": false,
+          "valid": true,
+          "cycle": []
+        },
+        {
+          "resolved": "src/aap/noot/mies/teun.js",
+          "coreModule": false,
+          "followable": true,
+          "couldNotResolve": false,
+          "dependencyTypes": ["local"],
+          "module": "../mies/teun",
+          "moduleSystem": "cjs",
+          "dynamic": false,
+          "matchesDoNotFollow": false,
+          "valid": true,
+          "cycle": []
+        },
+        {
+          "resolved": "src/aap/noot/vuur/gijs.js",
+          "coreModule": false,
+          "followable": true,
+          "couldNotResolve": false,
+          "dependencyTypes": ["local"],
+          "module": "./gijs",
+          "moduleSystem": "cjs",
+          "dynamic": false,
+          "matchesDoNotFollow": false,
+          "valid": true,
+          "cycle": []
+        },
+        {
+          "resolved": "src/aap/noot/vuur/lam.js",
+          "coreModule": false,
+          "followable": true,
+          "couldNotResolve": false,
+          "dependencyTypes": ["local"],
+          "module": "./lam",
+          "moduleSystem": "cjs",
+          "dynamic": false,
+          "matchesDoNotFollow": false,
+          "valid": true,
+          "cycle": []
+        },
+        {
+          "resolved": "src/aap/noot/vuur/kees.template.js",
+          "coreModule": false,
+          "followable": true,
+          "couldNotResolve": false,
+          "dependencyTypes": ["local"],
+          "module": "./kees.template",
+          "moduleSystem": "cjs",
+          "dynamic": false,
+          "matchesDoNotFollow": false,
+          "valid": true,
+          "cycle": []
+        }
+      ],
+      "valid": true
+    },
+    {
+      "source": "src/aap/noot/bok/noot.template.js",
+      "dependencies": [],
+      "valid": true
+    },
+    {
+      "source": "src/aap/noot/bok/index.js",
+      "dependencies": [
+        {
+          "resolved": "src/aap/noot/mies/zus.js",
+          "coreModule": false,
+          "followable": true,
+          "couldNotResolve": false,
+          "dependencyTypes": ["local"],
+          "module": "../mies/zus",
+          "moduleSystem": "cjs",
+          "dynamic": false,
+          "matchesDoNotFollow": false,
+          "valid": true,
+          "cycle": []
+        },
+        {
+          "resolved": "src/aap/noot/mies/jet.js",
+          "coreModule": false,
+          "followable": true,
+          "couldNotResolve": false,
+          "dependencyTypes": ["local"],
+          "module": "../mies/jet",
+          "moduleSystem": "cjs",
+          "dynamic": false,
+          "matchesDoNotFollow": false,
+          "valid": true,
+          "cycle": []
+        },
+        {
+          "resolved": "src/aap/noot/mies/teun.js",
+          "coreModule": false,
+          "followable": true,
+          "couldNotResolve": false,
+          "dependencyTypes": ["local"],
+          "module": "../mies/teun",
+          "moduleSystem": "cjs",
+          "dynamic": false,
+          "matchesDoNotFollow": false,
+          "valid": true,
+          "cycle": []
+        },
+        {
+          "resolved": "src/aap/noot/bok/noot.template.js",
+          "coreModule": false,
+          "followable": true,
+          "couldNotResolve": false,
+          "dependencyTypes": ["local"],
+          "module": "./noot.template",
+          "moduleSystem": "cjs",
+          "dynamic": false,
+          "matchesDoNotFollow": false,
+          "valid": true,
+          "cycle": []
+        }
+      ],
+      "valid": true
+    }
+  ],
+  "summary": {
+    "violations": [],
+    "error": 0,
+    "warn": 0,
+    "info": 0,
+    "totalCruised": 10,
+    "totalDependenciesCruised": 11,
+    "optionsUsed": {
+      "combinedDependencies": false,
+      "externalModuleResolutionStrategy": "node_modules",
+      "includeOnly": "^src/report/dot",
+      "moduleSystems": ["amd", "cjs", "es6"],
+      "outputTo": "-",
+      "outputType": "json",
+      "preserveSymlinks": false,
+      "tsPreCompilationDeps": false,
+      "args": "src/report/dot",
+      "reporterOptions": {
+        "anon": {
+          "wordlist": [
+            "aap",
+            "noot",
+            "mies",
+            "wim",
+            "zus",
+            "jet",
+            "teun",
+            "vuur",
+            "gijs",
+            "lam",
+            "kees",
+            "bok",
+            "weide",
+            "does",
+            "hok",
+            "duif",
+            "schapen"
+          ]
+        }
+      }
+    }
+  }
+}

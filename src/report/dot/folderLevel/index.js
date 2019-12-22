@@ -1,6 +1,6 @@
 const path = require("path").posix;
 const Handlebars = require("handlebars/runtime");
-const coloring = require("../common/coloring");
+const theming = require("../common/theming");
 const folderify = require("../common/folderify");
 const compareOnSource = require("../common/compareOnSource");
 const consolidateModules = require("./consolidateModules");
@@ -9,10 +9,16 @@ const consolidateModuleDependencies = require("./consolidateModuleDependencies")
 // eslint-disable-next-line import/no-unassigned-import
 require("./ddot.template");
 
-function colorize(pModule) {
+function themeify(pModule) {
   return {
     ...pModule,
-    dependencies: pModule.dependencies.map(coloring.determineDependencyColor)
+    dependencies: pModule.dependencies.map(pDependency => ({
+      ...pDependency,
+      ...theming.determineAttributes(
+        pDependency,
+        theming.normalizeTheme({}).dependencies
+      )
+    }))
   };
 }
 function extractRelevantTransgressions(pModule) {
@@ -47,7 +53,7 @@ function report(pResults) {
       .sort(compareOnSource)
       .map(extractRelevantTransgressions)
       .map(folderify)
-      .map(colorize)
+      .map(themeify)
   });
 }
 

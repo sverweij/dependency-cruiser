@@ -1,3 +1,4 @@
+import { IReporterOptions } from "./reporter-options";
 import { IFlattenedRuleSet } from "./rule-set";
 import { DependencyType, ModuleSystemType, OutputType } from "./shared-types";
 
@@ -131,6 +132,10 @@ export interface ICruiseOptions {
    * Defaults to `[]`
    */
   exoticRequireStrings?: string[];
+  /**
+   * Options to tweak the output of reporters
+   */
+  reporterOptions?: IReporterOptions;
   /**
    * (API only) when set to `true` forces the extraction module to
    * detect circular dependencies even when there is no rule in the rule

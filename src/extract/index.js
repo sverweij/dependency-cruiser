@@ -27,7 +27,8 @@ const SHAREABLE_OPTIONS = [
   "rulesFile",
   "tsPreCompilationDeps",
   "webpackConfig",
-  "exoticRequireStrings"
+  "exoticRequireStrings",
+  "reporterOptions"
 ];
 
 /* eslint max-params:0 */

@@ -227,9 +227,24 @@ so it's easier to compare than the two json's):
 <details>
 <summary>How does the obfuscation work?</summary>
 
-- It uses a small corpus of short words to replace non-common path elements
+- It uses the list of words you pass in `options.reporterOptions.anon.wordlist`
+  to replace non-common path elements
   with (`src/search/dragonfly-algorithm.js` -> `src/animal/announce.js`,
   `src/search/dragonfly-algorithm.spec.js` -> `src/animal/announce.spec.js`).
+- (You can use any array of strings here - a good one is Sindre Sorhus' 
+  [mnemonic-words](https://www.npmjs.com/package/mnemonic-words), which
+  you can simply require into the option if you're using javascript as
+  the config file format):
+  ```javascript
+  ...
+  options: {
+    reporterOptions:
+      anon: {
+        wordlist: require('mnemonic-words')
+      }
+  }
+  ...
+  ```
 - It will retain name similarties (like the `announce.js`/ `announce.spec.js` above).
 - When there's more path elements in your dependency graph than in the corpus
   the algorithm falls back to random strings that have the same length and pattern
@@ -241,7 +256,8 @@ so it's easier to compare than the two json's):
 - The algorithm obfuscates _within_ node_modules is obfuscated as well, so
   it won't become apparent from the dependency graph which ones your app
   uses either.
-  </details>
+
+</details>
 
 ### `--config`/ `--validate`
 

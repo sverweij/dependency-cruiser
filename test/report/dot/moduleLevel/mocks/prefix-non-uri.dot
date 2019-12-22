@@ -1,18 +1,8 @@
 strict digraph "dependency-cruiser output"{
-    ordering=out
-    rankdir=LR
-    splines=true
-    overlap=false
-    nodesep=0.16
-    ranksep=0.18
-    fontname="Helvetica-bold"
-    fontsize=9
-    style="rounded,bold,filled"
-    fillcolor="#ffffff"
-    compound=true
-    node [shape=box style="rounded, filled" fillcolor="#ffffcc" height=0.2 fontname=Helvetica fontsize=9]
-    edge [color="#00000033" penwidth=2.0 arrowhead=normal fontname=Helvetica fontsize=9]
+    
+    
+    
 
-    "remi.js" [label="remi.js" color="red" fontcolor="red" tooltip="no-orphans" URL="ladida/remi.js"]
+    "remi.js" [label="remi.js" tooltip="no-orphans" URL="ladida/remi.js" ]
 
 }
