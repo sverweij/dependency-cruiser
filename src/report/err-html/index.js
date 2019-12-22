@@ -45,7 +45,7 @@ function report(pResults) {
 /**
  * Returns the results of a cruise in an 'incidence matrix'
  *
- * @param {any} pResults - the output of a dependency-cruise adhering to ../../extract/results-schema.json
+ * @param {any} pResults - the output of a dependency-cruise adhering to ../../schema/cruise-result.schema.json
  * @returns {object} - output: an html program showing the summary & the violations (if any)
  *                     exitCode: 0
  */

@@ -1,7 +1,7 @@
 const Ajv = require("ajv");
 const safeRegex = require("../../utl/safe-regex");
 const validateOptions = require("../options/validate");
-const ruleSchema = require("./config-schema.json");
+const configurationSchema = require("../../schema/configuration.schema.json");
 
 const ajv = new Ajv();
 
@@ -55,7 +55,7 @@ function checkRuleSafety(pRule) {
  * Throws an Error in all other cases.
  *
  * Validations:
- * - the ruleset adheres to the [config json schema](config-schema.json)
+ * - the ruleset adheres to the [config json schema](../../schema/configuration.schema.json)
  * - any regular expression in the rule set is 'safe' (~= won't be too slow)
  *
  * @param  {object} pConfiguration The configuration to validate
@@ -64,7 +64,7 @@ function checkRuleSafety(pRule) {
  *                                 a message
  */
 module.exports = pConfiguration => {
-  validateAgainstSchema(ruleSchema, pConfiguration);
+  validateAgainstSchema(configurationSchema, pConfiguration);
   (pConfiguration.allowed || []).forEach(checkRuleSafety);
   (pConfiguration.forbidden || []).forEach(checkRuleSafety);
   if (pConfiguration.hasOwnProperty("options")) {

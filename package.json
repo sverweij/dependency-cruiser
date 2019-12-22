@@ -1,6 +1,6 @@
 {
   "name": "dependency-cruiser",
-  "version": "6.0.0",
+  "version": "6.0.1-beta-1",
   "description": "Validate and visualize dependencies. With your rules. JavaScript, TypeScript, CoffeeScript. ES6, CommonJS, AMD.",
   "keywords": [
     "static analysis",
@@ -62,22 +62,24 @@
     "build:clean": "make clean",
     "check": "npm-run-all build lint depcruise test:cover",
     "check:full": "npm-run-all check test:glob test:integration",
-    "depcruise": "node ./bin/dependency-cruise.js --validate -- src bin test configs types",
-    "depcruise:explain": "node ./bin/dependency-cruise.js --output-type err-long --validate -- src bin test configs types",
+    "depcruise": "node ./bin/dependency-cruise.js --validate -- src bin test configs types utl",
+    "depcruise:explain": "node ./bin/dependency-cruise.js --output-type err-long --validate -- src bin test configs types utl",
     "depcruise:graph:dir": "node ./bin/dependency-cruise.js --validate --include-only '(^src|^[^/]+(js|json)$)' --output-type ddot bin src | dot -T png > tmp_deps.png",
-    "depcruise:graph:doc": "npm-run-all depcruise:graph:doc:dot depcruise:graph:doc:html depcruise:graph:doc:png",
+    "depcruise:graph:doc": "npm-run-all depcruise:graph:doc:dot depcruise:graph:doc:html depcruise:graph:doc:png depcruise:graph:doc:schema depcruise:graph:doc:types",
     "depcruise:graph:doc:dot": "node ./bin/dependency-cruise.js --validate --include-only '^(src|bin)' --output-type dot bin src --output-to tmp_graph_deps.dot",
     "depcruise:graph:doc:html": "cat tmp_graph_deps.dot | dot -T svg -Gsplines=ortho | cat docs/assets/depcruise-graph-head.snippet.html - docs/assets/depcruise-graph-foot.snippet.html > docs/dependency-cruiser-dependency-graph.html",
     "depcruise:graph:doc:png": "cat tmp_graph_deps.dot | dot -Gdpi=192 -Gsplines=ortho -T png | pngquant - > doc/real-world-samples/dependency-cruiser-without-node_modules.png",
-    "depcruise:graph:osage": "node ./bin/dependency-cruise.js --validate --include-only '(^src|^[^/]+(js|json)$)' --output-type dot bin src | osage -Gpack=16 -GpackMode=array2 -T svg > tmp_deps.svg",
-    "depcruise:graph:fdp": "node ./bin/dependency-cruise.js --validate --include-only '^src' --output-type dot bin src | fdp -GK=0.1 -Gsplines=ortho -T svg > tmp_deps.svg",
+    "depcruise:graph:doc:schema": "cd utl/schema && node ../../bin/dependency-cruise.js --validate ../../.dependency-cruiser.json --output-type dot . | dot -Gsplines=ortho -T svg > ../overview.svg && cd -",
+    "depcruise:graph:doc:types": "cd types && node ../bin/dependency-cruise.js --ts-pre-compilation-deps --validate ../.dependency-cruiser.json --output-type dot . | dot -Gsplines=ortho -T svg > overview.svg && cd -",
+    "depcruise:graph:osage": "node ./bin/dependency-cruise.js --validate --include-only '(^src|^[^/]+(js|json)$)' --output-type dot bin src | osage -Gpack=32 -GpackMode=array2 -T svg > tmp_deps.svg",
+    "depcruise:graph:fdp": "node ./bin/dependency-cruise.js --validate --include-only '^src' --output-type dot bin src | fdp -GK=0.1 -Gsplines=true -T svg > tmp_deps.svg",
     "depcruise:report": "node ./bin/dependency-cruise.js --output-type err-html --validate -- src bin test configs types > dependency-violations.html",
     "lint": "npm-run-all --parallel --aggregate-output lint:eslint lint:prettier:check lint:types",
-    "lint:eslint": "eslint bin/dependency-cruise.js src test configs",
-    "lint:eslint:fix": "eslint --fix bin src test configs",
+    "lint:eslint": "eslint bin/dependency-cruise.js src test configs utl",
+    "lint:eslint:fix": "eslint --fix bin src test configs utl",
     "lint:fix": "npm-run-all lint:eslint:fix lint:prettier lint:types:fix",
-    "lint:prettier": "prettier --write {src,configs}/\\*\\*/\\*.{js,json} bin/\\* !**/*.template.js types/\\*.d.ts test/\\*\\*/\\*.{spec,utl}.js",
-    "lint:prettier:check": "prettier --check {src,configs}/\\*\\*/\\*.{js,json} bin/\\* !**/*.template.js types/\\*.d.ts test/\\*\\*/\\*.{spec,utl}.js",
+    "lint:prettier": "prettier --write {utl,src,configs}/\\*\\*/\\*.{js,json} bin/\\* !**/*.template.js types/\\*.d.ts test/\\*\\*/\\*.{spec,utl}.js",
+    "lint:prettier:check": "prettier --check {utl,src,configs}/\\*\\*/\\*.{js,json} bin/\\* !**/*.template.js types/\\*.d.ts test/\\*\\*/\\*.{spec,utl}.js",
     "lint:types": "npm-run-all lint:types:tsc lint:types:tslint",
     "lint:types:tsc": "tsc --noEmit --strict --types --noUnusedLocals --noUnusedParameters types/dependency-cruiser.d.ts",
     "lint:types:tslint": "tslint types/dependency-cruiser.d.ts",
@@ -184,6 +186,7 @@
       "src/cli/initConfig/getUserInput.js",
       "coverage/**/*",
       "tmp*",
+      "utl/**/*.js",
       "docs/**/*",
       "doc/**/*"
     ],
@@ -220,11 +223,11 @@
     }
   },
   "lint-staged": {
-    "{src,config}/**/*.js": [
+    "{utl,src,config}/**/*.js": [
       "eslint --fix",
       "git add"
     ],
-    "{src,config}/**/*.{js,json}": [
+    "{utl,src,config}/**/*.{js,json}": [
       "prettier --write",
       "git add"
     ],

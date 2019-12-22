@@ -1,6 +1,6 @@
 const chai = require("chai");
 const main = require("../../src/main");
-const depSchema = require("../../src/extract/results-schema.json");
+const cruiseResultSchema = require("../../src/schema/cruise-result.schema.json");
 const esOut = require("./fixtures/dynamic-imports/es/output.json");
 const tsOut = require("./fixtures/dynamic-imports/typescript/output.json");
 const tsOutpre = require("./fixtures/dynamic-imports/typescript/output-pre-compilation-deps.json");
@@ -52,7 +52,7 @@ describe("main.cruise - dynamic imports", () => {
     );
 
     expect(lResult.output).to.deep.equal(esOut);
-    expect(lResult.output).to.be.jsonSchema(depSchema);
+    expect(lResult.output).to.be.jsonSchema(cruiseResultSchema);
   });
 
   it("detects dynamic dependencies in typescript", () => {
@@ -87,7 +87,7 @@ describe("main.cruise - dynamic imports", () => {
     );
 
     expect(lResult.output).to.deep.equal(tsOut);
-    expect(lResult.output).to.be.jsonSchema(depSchema);
+    expect(lResult.output).to.be.jsonSchema(cruiseResultSchema);
   });
 
   it("detects dynamic dependencies in typescript when using tsPreCompilationDeps", () => {
@@ -123,6 +123,6 @@ describe("main.cruise - dynamic imports", () => {
     );
 
     expect(lResult.output).to.deep.equal(tsOutpre);
-    expect(lResult.output).to.be.jsonSchema(depSchema);
+    expect(lResult.output).to.be.jsonSchema(cruiseResultSchema);
   });
 });

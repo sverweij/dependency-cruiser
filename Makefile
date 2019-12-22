@@ -7,7 +7,25 @@ GENERATED_SOURCES=src/cli/initConfig/config.json.template.js \
 	src/report/dot/moduleLevel/dot.template.js \
 	src/report/dot/folderLevel/ddot.template.js \
 	src/report/html/html.template.js \
-	src/report/err-html/err-html.template.js
+	src/report/err-html/err-html.template.js \
+	src/schema/configuration.schema.json \
+	src/schema/cruise-result.schema.json
+
+SCHEMA_SOURCES=utl/schema/compound-exclude-type.js \
+	utl/schema/compound-donot-follow-type.js \
+	utl/schema/dependencies.js \
+	utl/schema/dependency-type.js \
+	utl/schema/module-system-type.js \
+	utl/schema/module-systems-type.js \
+	utl/schema/modules.js \
+	utl/schema/options-used.js \
+	utl/schema/options.js \
+	utl/schema/output-type.js \
+	utl/schema/restrictions.js \
+	utl/schema/rule-set.js \
+	utl/schema/rule-summary.js \
+	utl/schema/severity-type.js \
+	utl/schema/summary.js
 
 .PHONY: help dev-build clean
 
@@ -29,16 +47,13 @@ help:
 
 # production rules
 src/%.template.js: src/%.template.hbs
-	./node_modules/.bin/handlebars --commonjs handlebars/runtime -f $@ $<
+	npx handlebars --commonjs handlebars/runtime -f $@ $<
+
+src/%.schema.json: utl/%.schema.js $(SCHEMA_SOURCES)
+	$(NODE) ./utl/generate-schemas.utl.js
 
 # "phony" targets
 dev-build: $(GENERATED_SOURCES)
-
-profile:
-	$(NODE) --prof src/cli.js -f - test
-	@echo "output will be in a file called 'isolate-xxxx-v8.log'"
-	@echo "- translate to readable output with:"
-	@echo "    node --prof-process isolate-xxxx-v8.log | more"
 
 clean:
 	$(RM) $(GENERATED_SOURCES)

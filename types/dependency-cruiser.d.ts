@@ -1,8 +1,9 @@
-import { ICruiseOptions } from "./cruise-options";
 import { ICruiseResult } from "./cruise-result";
+import { ICruiseOptions } from "./options";
 import { OutputType } from "./shared-types";
 export * from "./rule-set";
-export * from "./cruise-options";
+export * from "./options";
+export * from "./configuration";
 export * from "./shared-types";
 export * from "./cruise-result";
 

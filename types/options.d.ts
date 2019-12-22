@@ -3,19 +3,6 @@ import { DependencyType, ModuleSystemType, OutputType } from "./shared-types";
 
 export type ExternalModuleResolutionStrategyType = "node_modules" | "yarn-pnp";
 
-export interface IRuleSetType extends IFlattenedRuleSet {
-  /**
-   * A (node require resolvable) file path to a dependency-cruiser config
-   * that serves as the base for this one...
-   * ... or an array of these
-   */
-  extends?: string | string[];
-  /**
-   * Runtime configuration options
-   */
-  options?: ICruiseOptions;
-}
-
 export interface IDoNotFollowType {
   /**
    * a regular expression for modules to include, but not follow further
@@ -46,11 +33,17 @@ export interface ICruiseOptions {
    */
   validate?: boolean;
   /**
-   * An object containing the rules to validate against. The rules
-   * should adhere to the
-   * [ruleset schema](https://github.com/sverweij/dependency-cruiser/blob/develop/src/main/ruleSet/jsonschema.json)
+   * An object containing the rules to validate against.
+   *
+   * This ain't in none of the json schemas, but is used internally _instead_
+   * of the rule set defined on global configuration level. Judo
+   * (a.o. flattening out extended rule sets) done in ../src/cli/normalizeOptions.js
    */
-  ruleSet?: IRuleSetType;
+  ruleSet?: IFlattenedRuleSet;
+  /**
+   * The (root) configuration file the cruise options came from.
+   */
+  rulesFile?: string;
   /**
    * regular expression describing which dependencies the function
    * should cruise, but not resolve or follow any further
@@ -83,6 +76,19 @@ export interface ICruiseOptions {
    * out the function will return a javascript object as dependencies
    */
   outputType?: OutputType;
+  /**
+   * Where the output of the cruise is to be sent to. '-' (the default)
+   * denotes stdout.
+   *
+   * Echoed in the result schema, but not used internally otherwise.
+   */
+  outputTo?: string;
+  /**
+   * The arguments used on the command line
+   *
+   * Echoed in the result schema, but not used internally otherwise.
+   */
+  args?: string;
   /**
    * a string to insert before links (in dot/ svg output) so with
    * cruising local dependencies it is possible to point to sources

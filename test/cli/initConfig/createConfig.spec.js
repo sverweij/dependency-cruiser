@@ -3,7 +3,7 @@ const path = require("path");
 const chai = require("chai");
 const stripJSONComments = require("strip-json-comments");
 const createConfigFile = require("../../../src/cli/initConfig/createConfigFile");
-const rulesSchema = require("../../../src/main/ruleSet/config-schema.json");
+const configurationSchema = require("../../../src/schema/configuration.schema.json");
 const deleteDammit = require("../deleteDammit.utl");
 
 const expect = chai.expect;
@@ -29,7 +29,7 @@ describe("cli/initConfig/createConfig", () => {
         stripJSONComments(fs.readFileSync(RULES_FILE_JSON, "utf8"))
       );
 
-      expect(lResult).to.be.jsonSchema(rulesSchema);
+      expect(lResult).to.be.jsonSchema(configurationSchema);
       expect(lResult).to.not.haveOwnProperty("extends");
     } finally {
       deleteDammit(RULES_FILE_JSON);
@@ -48,7 +48,7 @@ describe("cli/initConfig/createConfig", () => {
         stripJSONComments(fs.readFileSync(RULES_FILE_JSON, "utf8"))
       );
 
-      expect(lResult).to.be.jsonSchema(rulesSchema);
+      expect(lResult).to.be.jsonSchema(configurationSchema);
       expect(lResult).to.haveOwnProperty("extends");
       expect(lResult.extends).to.equal(
         "@my/cool/company/configs/depcruise-preset"
@@ -71,7 +71,7 @@ describe("cli/initConfig/createConfig", () => {
         stripJSONComments(fs.readFileSync(RULES_FILE_JSON, "utf8"))
       );
 
-      expect(lResult).to.be.jsonSchema(rulesSchema);
+      expect(lResult).to.be.jsonSchema(configurationSchema);
       expect(lResult).to.haveOwnProperty("options");
       expect(lResult.options.webpackConfig).to.deep.equal({
         fileName: "./webpack.conf.js"
@@ -94,7 +94,7 @@ describe("cli/initConfig/createConfig", () => {
         stripJSONComments(fs.readFileSync(RULES_FILE_JSON, "utf8"))
       );
 
-      expect(lResult).to.be.jsonSchema(rulesSchema);
+      expect(lResult).to.be.jsonSchema(configurationSchema);
       expect(lResult).to.haveOwnProperty("options");
       expect(lResult.options.tsConfig).to.deep.equal({
         fileName: "./tsconfig.json"
@@ -115,7 +115,7 @@ describe("cli/initConfig/createConfig", () => {
         stripJSONComments(fs.readFileSync(RULES_FILE_JSON, "utf8"))
       );
 
-      expect(lResult).to.be.jsonSchema(rulesSchema);
+      expect(lResult).to.be.jsonSchema(configurationSchema);
       expect(lResult).to.haveOwnProperty("extends");
       expect(lResult.extends).to.equal(
         "dependency-cruiser/configs/recommended-warn-only"
@@ -142,7 +142,7 @@ describe("cli/initConfig/createConfig", () => {
         stripJSONComments(fs.readFileSync(RULES_FILE_JSON, "utf8"))
       );
 
-      expect(lResult).to.be.jsonSchema(rulesSchema);
+      expect(lResult).to.be.jsonSchema(configurationSchema);
       expect(lResult).to.haveOwnProperty("options");
       expect(lResult.options.externalModuleResolutionStrategy).to.equal(
         "yarn-pnp"
@@ -170,7 +170,7 @@ describe("cli/initConfig/createConfig", () => {
       /* eslint global-require:0, security/detect-non-literal-require:0, import/no-dynamic-require:0 */
       const lResult = require(configResultFileName);
 
-      expect(lResult).to.be.jsonSchema(rulesSchema);
+      expect(lResult).to.be.jsonSchema(configurationSchema);
       expect(lResult).to.not.haveOwnProperty("extends");
     } finally {
       Reflect.deleteProperty(
@@ -197,7 +197,7 @@ describe("cli/initConfig/createConfig", () => {
       /* eslint global-require:0, security/detect-non-literal-require:0, import/no-dynamic-require:0 */
       const lResult = require(configResultFileName);
 
-      expect(lResult).to.be.jsonSchema(rulesSchema);
+      expect(lResult).to.be.jsonSchema(configurationSchema);
       expect(lResult).to.haveOwnProperty("forbidden");
       expect(lResult.extends).to.equal(
         "@my/cool/company/configs/depcruise-preset"
@@ -226,7 +226,7 @@ describe("cli/initConfig/createConfig", () => {
       /* eslint global-require:0, security/detect-non-literal-require:0, import/no-dynamic-require:0 */
       const lResult = require(configResultFileName);
 
-      expect(lResult).to.be.jsonSchema(rulesSchema);
+      expect(lResult).to.be.jsonSchema(configurationSchema);
       expect(lResult).to.haveOwnProperty("options");
       expect(lResult.options.webpackConfig).to.deep.equal({
         fileName: "./webpack.prod.js"
@@ -255,7 +255,7 @@ describe("cli/initConfig/createConfig", () => {
       /* eslint global-require:0, security/detect-non-literal-require:0, import/no-dynamic-require:0 */
       const lResult = require(configResultFileName);
 
-      expect(lResult).to.be.jsonSchema(rulesSchema);
+      expect(lResult).to.be.jsonSchema(configurationSchema);
       expect(lResult).to.haveOwnProperty("options");
       expect(lResult.options.tsConfig).to.deep.equal({
         fileName: "./tsconfig.json"
@@ -284,7 +284,7 @@ describe("cli/initConfig/createConfig", () => {
       /* eslint global-require:0, security/detect-non-literal-require:0, import/no-dynamic-require:0 */
       const lResult = require(configResultFileName);
 
-      expect(lResult).to.be.jsonSchema(rulesSchema);
+      expect(lResult).to.be.jsonSchema(configurationSchema);
       expect(lResult).to.haveOwnProperty("options");
       expect(lResult.options.externalModuleResolutionStrategy).to.equal(
         "yarn-pnp"

@@ -77,7 +77,7 @@ function report(pResults, pColoringScheme) {
 /**
  * Returns the results of a cruise as a directed graph in the dot language.
  *
- * @param {any} pResults - the output of a dependency-cruise adhering to ../../../extract/results-schema.json
+ * @param {any} pResults - the output of a dependency-cruise adhering to ../../../schema/cruise-result.schema.json
  * @param {any} pColoringScheme - a mapping of source properties to a color, fillcolor and fontcolor
  *                              - see ../comon/richModuleCOlorScheme.json for an example
  * @returns {object} - output: a dot program

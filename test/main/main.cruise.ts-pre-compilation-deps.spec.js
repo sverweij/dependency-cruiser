@@ -1,6 +1,6 @@
 const chai = require("chai");
 const main = require("../../src/main");
-const depSchema = require("../../src/extract/results-schema.json");
+const cruiseResultSchema = require("../../src/schema/cruise-result.schema.json");
 const tsPreCompFixtureCJS = require("./fixtures/ts-precomp-cjs.json");
 const tsPreCompFixtureES = require("./fixtures/ts-precomp-es.json");
 const tsNoPrecompFixtureCJS = require("./fixtures/ts-no-precomp-cjs.json");
@@ -30,7 +30,7 @@ describe("main.cruise - tsPreCompilationDeps", () => {
     );
 
     expect(lResult.output).to.deep.equal(tsPreCompFixtureCJS);
-    expect(lResult.output).to.be.jsonSchema(depSchema);
+    expect(lResult.output).to.be.jsonSchema(cruiseResultSchema);
   });
   it("ts-pre-compilation-deps: on, target ES", () => {
     const lResult = main.cruise(
@@ -51,7 +51,7 @@ describe("main.cruise - tsPreCompilationDeps", () => {
     );
 
     expect(lResult.output).to.deep.equal(tsPreCompFixtureES);
-    expect(lResult.output).to.be.jsonSchema(depSchema);
+    expect(lResult.output).to.be.jsonSchema(cruiseResultSchema);
   });
   it("ts-pre-compilation-deps: off, target CJS", () => {
     const lResult = main.cruise(
@@ -72,7 +72,7 @@ describe("main.cruise - tsPreCompilationDeps", () => {
     );
 
     expect(lResult.output).to.deep.equal(tsNoPrecompFixtureCJS);
-    expect(lResult.output).to.be.jsonSchema(depSchema);
+    expect(lResult.output).to.be.jsonSchema(cruiseResultSchema);
   });
   it("ts-pre-compilation-deps: off, target ES", () => {
     const lResult = main.cruise(
@@ -93,6 +93,6 @@ describe("main.cruise - tsPreCompilationDeps", () => {
     );
 
     expect(lResult.output).to.deep.equal(tsNoPrecompFixtureES);
-    expect(lResult.output).to.be.jsonSchema(depSchema);
+    expect(lResult.output).to.be.jsonSchema(cruiseResultSchema);
   });
 });

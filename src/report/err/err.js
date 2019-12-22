@@ -105,7 +105,7 @@ function report(pResults, pLong) {
  * - for each violation a message stating the violation name and the to and from
  * - a summary with total number of errors and warnings found, and the total number of files cruised
  *
- * @param {any} pResults - the output of a dependency-cruise adhering to ../extract/results-schema.json
+ * @param {any} pResults - the output of a dependency-cruise adhering to ../schema/cruise-result.schema.json
  * @param {boolean} pLong - whether or not to include an explanation (/ comment) which each violation
  * @returns {object} - output: eslint like output
  *                     exitCode: the number of errors found

@@ -1,6 +1,6 @@
 const chai = require("chai");
 const extract = require("../../src/extract");
-const depSchema = require("../../src/extract/results-schema.json");
+const cruiseResultSchema = require("../../src/schema/cruise-result.schema.json");
 const normalize = require("../../src/main/options/normalize");
 const normalizeRuleSet = require("../../src/main/ruleSet/normalize");
 const normalizeResolveOptions = require("../../src/main/resolveOptions/normalize");
@@ -40,7 +40,7 @@ describe("extract/index - reachable", () => {
       lResolveOptions
     );
 
-    expect(lResult).to.be.jsonSchema(depSchema);
+    expect(lResult).to.be.jsonSchema(cruiseResultSchema);
   });
 });
 /* eslint global-require: 0*/

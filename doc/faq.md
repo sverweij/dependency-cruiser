@@ -281,7 +281,7 @@ your configuration with the wrapper(s) and/ or redefinitions of require:
 - In `src/report`:
   - add a module that exports a default function that
     - takes a dependency cruiser output object
-      ([json schema](../src/extract/results-schema.json))
+      ([json schema](../src/schema/cruise-result.schema.json))
     - returns an object with
       - output: the output you want the cli to emit
       - exitCode: the exit code you want the cli to return when

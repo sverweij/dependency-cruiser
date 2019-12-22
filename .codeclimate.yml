@@ -28,5 +28,6 @@ exclude_patterns:
   - "docs/"
   - "test/"
   - "types/"
+  - "utl/"
   - "**/node_modules/"
   - "src/report/**/*.template.js"

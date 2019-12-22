@@ -1,6 +1,6 @@
 const chai = require("chai");
 const main = require("../../src/main");
-const depSchema = require("../../src/extract/results-schema.json");
+const cruiseResultSchema = require("../../src/schema/cruise-result.schema.json");
 const output = require("./fixtures/type-only-module-references/output.json");
 const outputNoTS = require("./fixtures/type-only-module-references/output-no-ts.json");
 
@@ -31,7 +31,7 @@ describe("main.cruise - type only module references", () => {
     );
 
     expect(lResult.output).to.deep.equal(output);
-    expect(lResult.output).to.be.jsonSchema(depSchema);
+    expect(lResult.output).to.be.jsonSchema(cruiseResultSchema);
   });
 
   it("don't find it when not looking for pre-compilation deps", () => {
@@ -46,6 +46,6 @@ describe("main.cruise - type only module references", () => {
     );
 
     expect(lResult.output).to.deep.equal(outputNoTS);
-    expect(lResult.output).to.be.jsonSchema(depSchema);
+    expect(lResult.output).to.be.jsonSchema(cruiseResultSchema);
   });
 });
