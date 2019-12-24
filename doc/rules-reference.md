@@ -1197,8 +1197,10 @@ Most representational aspects of the 'dot' reporter are customizable:
   `graph`, `node` and `edge`.
 - Conditional - only affecting modules (or dependencies) that meet the criteria
   you specify with `modules` and `dependencies`.
-  - You can use any module attribute as a criterium for modules, and any
-    dependency attribute for dependencies.
+  - You can use any
+    [module attribute](https://github.com/sverweij/dependency-cruiser/blob/develop/types/cruise-result.d.ts#L16)
+    and any [dependency attribute](https://github.com/sverweij/dependency-cruiser/blob/develop/types/cruise-result.d.ts#L73)
+    for dependencies.
   - For attributes you can use anything GraphViz dot can understand as an attribute
     (see their [attributes](https://graphviz.gitlab.io/_pages/doc/info/attrs.html)
     documentation for a complete overview).
@@ -1213,60 +1215,141 @@ ships with - [defaultTheme.json](../src/report/dot/common/defaultTheme.json).
 
 ##### Some examples
 
-To give all modules that have a file name ending in `utl.js` a 3d box shape
-and fill it with the color "silver":
+As a base, take this part of dependency-cruisers code:
 
-```json
-{
-  "options": {
-    "reporterOptions": {
-      "theme": {
-        "modules": [
-          {
-            "criteria": { "source": "\\.utl\\.js$" },
-            "attributes": { "shape": "box3d", "fillcolor": "silver" }
-          }
-        ]
-      }
-    }
+<details>
+<summary>base.config.js</summary>
+
+```javascript
+module.exports = {
+  options: {
+    includeOnly: "^src/main",
+    exclude: "/filesAndDirs/"
   }
-}
+};
 ```
 
-To shift the dependency graph from a vertical orientation to a horizontal one, set
-the global graph attribute `rankdir` to `TD` (top down):
+</details>
 
-```json
-{
-  "options": {
-    "reporterOptions": {
-      "dot": {
-        "theme": {
-          "graph": { "rankdir": "TD" }
+![base](assets/theming/base.svg)
+
+The default template, with tweaks to get an 'engineering' like look (and all
+file names ending on `.json` a cylindrical look with a soft gradient):
+
+<details>
+<summary>engineering.config.js</summary>
+
+```javascript
+module.exports = {
+  extends: "./base.config.js",
+  options: {
+    reporterOptions: {
+      dot: {
+        theme: {
+          replace: false,
+          graph: {
+            bgcolor: "dodgerblue",
+            color: "white",
+            fontcolor: "white",
+            fillcolor: "transparent",
+            splines: "ortho"
+          },
+          node: {
+            color: "white",
+            fillcolor: "#ffffff33",
+            fontcolor: "white"
+          },
+          edge: {
+            arrowhead: "vee",
+            arrowsize: "0.5",
+            penwidth: "1.0",
+            color: "white",
+            fontcolor: "white"
+          },
+          modules: [
+            {
+              criteria: { source: "\\.json$" },
+              attributes: {
+                shape: "cylinder",
+                fillcolor: "#ffffff33:#ffffff88"
+              }
+            },
+            {
+              criteria: { coreModule: true },
+              attributes: {
+                color: "white",
+                fillcolor: "#ffffff33",
+                fontcolor: "white"
+              }
+            }
+          ],
+          dependencies: [
+            {
+              criteria: { resolved: "\\.json$" },
+              attributes: { arrowhead: "obox" }
+            }
+          ]
         }
       }
     }
   }
-}
+};
 ```
+
+</details>
+
+![engineering](assets/theming/engineering.svg)
+
+To shift the dependency graph from a horizontal orientation to a vertical one, set
+the global graph attribute `rankdir` to `TD` (top down):
+
+<details>
+<summary>vertical.config.js</summary>
+
+```javascript
+module.exports = {
+  extends: "./base.config.js",
+  options: {
+    reporterOptions: {
+      dot: {
+        theme: {
+          graph: { rankdir: "TD" }
+        }
+      }
+    }
+  }
+};
+```
+
+</details>
+
+![vertical](assets/theming/vertical.svg)
 
 To get output without any attributes and no conditional coloring you can order
 the default theme to be replaced by flipping the `replace` attribute to `true`.
 
-```json
-{
-  "options": {
-    "reporterOptions": {
-      "dot": {
-        "theme": {
-          "replace": "true"
-          // your theme attributes go here
+<details>
+<summary>bare</summary>
+<!-- bin/dependency-cruise.js -Tdot -v doc/assets/theming/bare.config.js src/main | dot -Tsvg > doc/assets/theming/bare.svg-->
+
+```javascript
+module.exports = {
+  extends: "./base.config.js",
+  options: {
+    reporterOptions: {
+      dot: {
+        theme: {
+          replace: true
         }
       }
     }
   }
-}
+};
 ```
+
+</details>
+
+![bare](assets/theming/bare.svg)
 
 ### Some more esoteric options
 
