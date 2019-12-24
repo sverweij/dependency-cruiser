@@ -19,11 +19,6 @@
 <polygon fill="none" stroke="black" points="16,-16 16,-326 430,-326 430,-16 16,-16"/>
 <text text-anchor="middle" x="223" y="-310.8" font-family="Times,serif" font-size="14.00">main</text>
 </g>
-<g id="clust3" class="cluster">
-<title>cluster_src/main/options</title>
-<polygon fill="none" stroke="black" points="24,-24 24,-170 258,-170 258,-24 24,-24"/>
-<text text-anchor="middle" x="141" y="-154.8" font-family="Times,serif" font-size="14.00">options</text>
-</g>
 <g id="clust4" class="cluster">
 <title>cluster_src/main/resolveOptions</title>
 <polygon fill="none" stroke="black" points="56,-178 56,-252 180,-252 180,-178 56,-178"/>
@@ -33,6 +28,11 @@
 <title>cluster_src/main/ruleSet</title>
 <polygon fill="none" stroke="black" points="188,-178 188,-252 422,-252 422,-178 188,-178"/>
 <text text-anchor="middle" x="305" y="-236.8" font-family="Times,serif" font-size="14.00">ruleSet</text>
+</g>
+<g id="clust3" class="cluster">
+<title>cluster_src/main/options</title>
+<polygon fill="none" stroke="black" points="24,-24 24,-170 258,-170 258,-24 24,-24"/>
+<text text-anchor="middle" x="141" y="-154.8" font-family="Times,serif" font-size="14.00">options</text>
 </g>
 <!-- src/main/index.js -->
 <g id="node1" class="node">
