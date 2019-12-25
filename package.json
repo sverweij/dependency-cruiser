@@ -64,7 +64,7 @@
     "check:full": "npm-run-all check test:glob test:integration",
     "depcruise": "node ./bin/dependency-cruise.js --validate -- src bin test configs types utl",
     "depcruise:explain": "node ./bin/dependency-cruise.js --output-type err-long --validate -- src bin test configs types utl",
-    "depcruise:graph:dir": "node ./bin/dependency-cruise.js --validate --include-only '(^src|^[^/]+(js|json)$)' --output-type ddot bin src | dot -T png > tmp_deps.png",
+    "depcruise:graph:dir": "node ./bin/dependency-cruise.js --validate --include-only '^src' --output-type ddot bin src | dot -T png > tmp_deps.png",
     "depcruise:graph:doc": "npm-run-all depcruise:graph:doc:dot depcruise:graph:doc:schema depcruise:graph:doc:types --parallel depcruise:graph:doc:html depcruise:graph:doc:png depcruise:graph:doc:theming:*",
     "depcruise:graph:doc:dot": "node ./bin/dependency-cruise.js --validate --include-only '^(src|bin)' --output-type dot bin src --output-to tmp_graph_deps.dot",
     "depcruise:graph:doc:html": "dot -T svg < tmp_graph_deps.dot | node utl/embed-svg-in-html.utl.js > docs/dependency-cruiser-dependency-graph.html",

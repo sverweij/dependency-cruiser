@@ -11,9 +11,8 @@ strict digraph "dependency-cruiser output"{
     fillcolor="#ffffff"
     compound=true
     node [shape=folder style="rounded, filled" fillcolor="#ffffcc" height=0.2 fontname=Helvetica fontsize=9]
-    edge [color="#00000033" penwidth=2.0 arrowhead=normal fontname=Helvetica fontsize=9]
+    edge [color="#00000033" penwidth=2.0 arrowsize=0.6 arrowhead=normal fontname=Helvetica fontsize=9]
 
     "tmp" [label="tmp" tooltip="no-orphans" ]
-
     "tmp" -> "tmp"
 }

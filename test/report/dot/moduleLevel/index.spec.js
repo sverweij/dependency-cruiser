@@ -1,14 +1,16 @@
 const fs = require("fs");
 const path = require("path");
 const expect = require("chai").expect;
+const defaultTheme = require("../../../../src/report/dot/common/defaultTheme.json");
 const render = require("../../../../src/report/dot/moduleLevel");
-const deps = require("./mocks/cjs-no-dependency-valid.json");
+const clusterless = require("./mocks/clusterless.json");
+const bunchOfModules = require("./mocks/bunch-of-modules.json");
 const orphanDeps = require("./mocks/orphan-deps.json");
 const unresolvableDeps = require("./mocks/es6-unresolvable-deps.json");
 const doNotFollowDeps = require("./mocks/do-not-follow-deps.json");
 const prefixUri = require("./mocks/prefix-uri.json");
 const prefixNonUri = require("./mocks/prefix-non-uri.json");
-const boringScheme = require("./boringTheme.json");
+const boringTheme = require("./boringTheme.json");
 
 const mockPath = path.join(__dirname, "mocks");
 const clusterlessFixture = fs.readFileSync(
@@ -16,15 +18,15 @@ const clusterlessFixture = fs.readFileSync(
   "utf8"
 );
 const unresolvableFixture = fs.readFileSync(
-  path.join(mockPath, "unresolvable.dot"),
+  path.join(mockPath, "es6-unresolvable-deps.dot"),
   "utf8"
 );
 const doNotFollowFixture = fs.readFileSync(
-  path.join(mockPath, "donotfollow.dot"),
+  path.join(mockPath, "do-not-follow.dot"),
   "utf8"
 );
 const doNotFollowFixtureBoring = fs.readFileSync(
-  path.join(mockPath, "donotfollow-boring.dot"),
+  path.join(mockPath, "do-not-follow-boring.dot"),
   "utf8"
 );
 const orphanFixture = fs.readFileSync(
@@ -43,20 +45,30 @@ const prefixNonUriFixture = fs.readFileSync(
   path.join(mockPath, "prefix-non-uri.dot"),
   "utf8"
 );
+const defaultColorFixture = fs.readFileSync(
+  path.join(__dirname, "mocks/bunch-of-modules.dot"),
+  "utf8"
+);
+const boringColorFixture = fs.readFileSync(
+  path.join(__dirname, "mocks/bunch-of-modules-boring.dot"),
+  "utf8"
+);
 
 describe("report/dot/moduleLevel reporter", () => {
   it("renders a dot - modules in the root don't come in a cluster", () => {
-    expect(render(deps, boringScheme).output).to.deep.equal(clusterlessFixture);
+    expect(render(clusterless, boringTheme).output).to.deep.equal(
+      clusterlessFixture
+    );
   });
 
   it("renders a dot - unresolvable in a sub folder (either existing or not) get labeled as unresolvable", () => {
-    expect(render(unresolvableDeps, boringScheme).output).to.deep.equal(
+    expect(render(unresolvableDeps, boringTheme).output).to.deep.equal(
       unresolvableFixture
     );
   });
 
   it("renders a dot - boringScheme matchesDoNotFollow NOT rendered as folders", () => {
-    expect(render(doNotFollowDeps, boringScheme).output).to.deep.equal(
+    expect(render(doNotFollowDeps, boringTheme).output).to.deep.equal(
       doNotFollowFixtureBoring
     );
   });
@@ -66,7 +78,7 @@ describe("report/dot/moduleLevel reporter", () => {
   });
 
   it("renders a dot - boringScheme renders modules with module level transgression with NO severity deduced colors", () => {
-    expect(render(orphanDeps, boringScheme).output).to.deep.equal(
+    expect(render(orphanDeps, boringTheme).output).to.deep.equal(
       orphanFixtureBoring
     );
   });
@@ -76,14 +88,28 @@ describe("report/dot/moduleLevel reporter", () => {
   });
 
   it("renders a dot - uri prefix get concatenated", () => {
-    expect(render(prefixUri, boringScheme).output).to.deep.equal(
+    expect(render(prefixUri, boringTheme).output).to.deep.equal(
       prefixUriFixture
     );
   });
 
   it("renders a dot - non-uri prefixes get path.posix.joined", () => {
-    expect(render(prefixNonUri, boringScheme).output).to.deep.equal(
+    expect(render(prefixNonUri, boringTheme).output).to.deep.equal(
       prefixNonUriFixture
+    );
+  });
+
+  it("richly colors modules when passed the default theme", () => {
+    expect(render(bunchOfModules, defaultTheme).output).to.deep.equal(
+      defaultColorFixture
+    );
+  });
+  it("richly colors modules when passed no theme", () => {
+    expect(render(bunchOfModules).output).to.deep.equal(defaultColorFixture);
+  });
+  it("colors boringly when passed the boring color scheme", () => {
+    expect(render(bunchOfModules, boringTheme).output).to.deep.equal(
+      boringColorFixture
     );
   });
 });

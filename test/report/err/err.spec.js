@@ -5,7 +5,6 @@ const render = require("../../../src/report/err/err");
 const okdeps = require("./mocks/everything-fine.json");
 const deps = require("./mocks/cjs-no-dependency-valid.json");
 const warndeps = require("./mocks/err-only-warnings.json");
-const erradds = require("./mocks/err-with-additional-information.json");
 const orphanerrs = require("./mocks/orphan-deps.json");
 const circularerrs = require("./mocks/circular-deps.json");
 
@@ -61,10 +60,5 @@ describe("report/err", () => {
       "      src/some/folder/loop-a.js →\n      src/some/folder/loop-b.js →\n      src/some/folder/nested/center.js"
     );
     expect(lResult.exitCode).to.equal(3);
-  });
-  it("renders addtional information", () => {
-    const lResult = render(erradds);
-
-    expect(lResult.output).to.contain("aap -> noot -> mies -> aap");
   });
 });

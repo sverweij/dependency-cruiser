@@ -118,6 +118,10 @@
       "attributes": { "fontcolor": "red", "color": "red" }
     },
     {
+      "criteria": { "circular": true },
+      "attributes": { "arrowhead": "normalnoneodot" }
+    },
+    {
       "criteria": { "coreModule": true },
       "attributes": { "style": "dashed", "penwidth": "1.0" }
     },

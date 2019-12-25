@@ -17,7 +17,7 @@ function attributizeObject(pObject) {
   );
 }
 
-function addThemeAttributes(pTheme) {
+function themeify(pTheme) {
   return pModule => ({
     ...pModule,
     dependencies: pModule.dependencies
@@ -95,7 +95,7 @@ function report(pResults, pTheme) {
       .sort(compareOnSource)
       .map(extractFirstTransgression)
       .map(folderify)
-      .map(addThemeAttributes(lTheme))
+      .map(themeify(lTheme))
       .map(addURL(pResults))
   });
 }

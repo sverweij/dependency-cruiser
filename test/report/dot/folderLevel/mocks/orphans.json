@@ -1,92 +1,87 @@
 {
-    "modules": [
+  "modules": [
+    {
+      "source": "tmp/index.js",
+      "dependencies": [
         {
-            "source": "tmp/index.js",
-            "dependencies": [
-                {
-                    "resolved": "tmp/non-orphan.js",
-                    "coreModule": false,
-                    "followable": true,
-                    "couldNotResolve": false,
-                    "dependencyTypes": [
-                        "local"
-                    ],
-                    "module": "./non-orphan",
-                    "moduleSystem": "cjs",
-                    "matchesDoNotFollow": false,
-                    "circular": false,
-                    "valid": true
-                }
-            ],
-            "valid": true
-        },
-        {
-            "source": "tmp/non-orphan.js",
-            "dependencies": [],
-            "valid": true
-        },
-        {
-            "source": "tmp/orphan.js",
-            "dependencies": [],
-            "orphan": true,
-            "valid": false,
-            "rules": [
-                {
-                    "severity": "error",
-                    "name": "no-orphans"
-                }
-            ]
-        },
-        {
-            "source": "tmp/remi.js",
-            "dependencies": [],
-            "orphan": true,
-            "valid": false,
-            "rules": [
-                {
-                    "severity": "error",
-                    "name": "no-orphans"
-                }
-            ]
+          "resolved": "tmp/non-orphan.js",
+          "coreModule": false,
+          "followable": true,
+          "couldNotResolve": false,
+          "dependencyTypes": ["local"],
+          "module": "./non-orphan",
+          "moduleSystem": "cjs",
+          "matchesDoNotFollow": false,
+          "circular": false,
+          "dynamic": false,
+          "valid": true
         }
-    ],
-    "summary": {
-        "violations": [
-            {
-                "from": "tmp/orphan.js",
-                "to": "tmp/orphan.js",
-                "rule": {
-                    "severity": "error",
-                    "name": "no-orphans"
-                }
-            },
-            {
-                "from": "tmp/remi.js",
-                "to": "tmp/remi.js",
-                "rule": {
-                    "severity": "error",
-                    "name": "no-orphans"
-                }
-            }
-        ],
-        "error": 2,
-        "warn": 0,
-        "info": 0,
-        "totalCruised": 4,
-        "optionsUsed": {
-            "rulesFile": ".dependency-cruiser.json",
-            "outputTo": "-",
-            "doNotFollow": "node_modules",
-            "exclude": "fixtures",
-            "moduleSystems": [
-                "amd",
-                "cjs",
-                "es6"
-            ],
-            "outputType": "json",
-            "prefix": "https://github.com/sverweij/dependency-cruiser/blob/develop/",
-            "tsPreCompilationDeps": false,
-            "preserveSymlinks": false
+      ],
+      "valid": true
+    },
+    {
+      "source": "tmp/non-orphan.js",
+      "dependencies": [],
+      "valid": true
+    },
+    {
+      "source": "tmp/orphan.js",
+      "dependencies": [],
+      "orphan": true,
+      "valid": false,
+      "rules": [
+        {
+          "severity": "error",
+          "name": "no-orphans"
         }
+      ]
+    },
+    {
+      "source": "tmp/remi.js",
+      "dependencies": [],
+      "orphan": true,
+      "valid": false,
+      "rules": [
+        {
+          "severity": "error",
+          "name": "no-orphans"
+        }
+      ]
     }
+  ],
+  "summary": {
+    "violations": [
+      {
+        "from": "tmp/orphan.js",
+        "to": "tmp/orphan.js",
+        "rule": {
+          "severity": "error",
+          "name": "no-orphans"
+        }
+      },
+      {
+        "from": "tmp/remi.js",
+        "to": "tmp/remi.js",
+        "rule": {
+          "severity": "error",
+          "name": "no-orphans"
+        }
+      }
+    ],
+    "error": 2,
+    "warn": 0,
+    "info": 0,
+    "totalCruised": 4,
+    "optionsUsed": {
+      "rulesFile": ".dependency-cruiser.json",
+      "outputTo": "-",
+      "doNotFollow": { "path": "node_modules" },
+      "exclude": { "path": "fixtures" },
+      "moduleSystems": ["amd", "cjs", "es6"],
+      "outputType": "json",
+      "prefix": "https://github.com/sverweij/dependency-cruiser/blob/develop/",
+      "tsPreCompilationDeps": false,
+      "preserveSymlinks": false
+    }
+  }
 }

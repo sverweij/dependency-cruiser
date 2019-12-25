@@ -13,7 +13,7 @@ require("./csv.template");
  */
 module.exports = pResults => ({
   output: Handlebars.templates["csv.template.hbs"]({
-    things: dependencyToIncidenceTransformer(pResults.modules)
+    modules: dependencyToIncidenceTransformer(pResults.modules)
   }),
   exitCode: 0
 });

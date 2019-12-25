@@ -48,7 +48,7 @@ function squashToDir(pModules) {
 
 function report(pResults) {
   return Handlebars.templates["ddot.template.hbs"]({
-    things: consolidateModules(squashToDir(pResults.modules))
+    modules: consolidateModules(squashToDir(pResults.modules))
       .map(consolidateModuleDependencies)
       .sort(compareOnSource)
       .map(extractRelevantTransgressions)

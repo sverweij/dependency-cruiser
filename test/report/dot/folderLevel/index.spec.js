@@ -12,11 +12,11 @@ const consolidatedDot = fs.readFileSync(
   "utf8"
 );
 const consolidatedOrphansDot = fs.readFileSync(
-  path.join(mockFolder, "consolidated-orphans.dot"),
+  path.join(mockFolder, "orphans.dot"),
   "utf8"
 );
 const consolidatedRxJs = fs.readFileSync(
-  path.join(mockFolder, "consolidated-rxjs.dot"),
+  path.join(mockFolder, "rxjs.dot"),
   "utf8"
 );
 
