@@ -1,14 +1,11 @@
-const fs = require("fs");
 const path = require("path");
 const chai = require("chai");
-const stripJSONComments = require("strip-json-comments");
 const initConfig = require("../../../src/cli/initConfig");
 const configurationSchema = require("../../../src/schema/configuration.schema.json");
 const deleteDammit = require("../deleteDammit.utl");
 
 const expect = chai.expect;
 
-const RULES_FILE_JSON = ".dependency-cruiser.json";
 const RULES_FILE_JS = ".dependency-cruiser.js";
 
 describe("cli/initConfig/index", () => {
@@ -18,22 +15,7 @@ describe("cli/initConfig/index", () => {
     process.chdir(WORKINGDIR);
   });
 
-  it("init 'oneshot' creates a self-contained json rules file", () => {
-    process.chdir("test/cli/fixtures/init-config/no-config-files-exist");
-    try {
-      initConfig("oneshot");
-      const lResult = JSON.parse(
-        stripJSONComments(fs.readFileSync(RULES_FILE_JSON, "utf8"))
-      );
-
-      expect(lResult).to.be.jsonSchema(configurationSchema);
-      expect(lResult).to.not.haveOwnProperty("extends");
-    } finally {
-      deleteDammit(RULES_FILE_JSON);
-    }
-  });
-
-  it("init js creates a preset based js rules file", () => {
+  it("init called with a string !== 'preset' creates a self-contained js rules file", () => {
     process.chdir("test/cli/fixtures/init-config/no-config-files-exist");
     const configResultFileName = `./${path.join(
       "../fixtures/init-config/no-config-files-exist",
@@ -41,8 +23,29 @@ describe("cli/initConfig/index", () => {
     )}`;
 
     try {
-      initConfig("js");
-      /* eslint global-require:0, security/detect-non-literal-require:0, import/no-dynamic-require:0 */
+      initConfig("notyes");
+      const lResult = require(configResultFileName);
+
+      expect(lResult).to.be.jsonSchema(configurationSchema);
+      expect(lResult).to.not.haveOwnProperty("extends");
+    } finally {
+      Reflect.deleteProperty(
+        require.cache,
+        require.resolve(configResultFileName)
+      );
+      deleteDammit(RULES_FILE_JS);
+    }
+  });
+
+  it("init preset creates a preset based js rules file", () => {
+    process.chdir("test/cli/fixtures/init-config/no-config-files-exist");
+    const configResultFileName = `./${path.join(
+      "../fixtures/init-config/no-config-files-exist",
+      RULES_FILE_JS
+    )}`;
+
+    try {
+      initConfig("preset");
       const lResult = require(configResultFileName);
 
       expect(lResult).to.be.jsonSchema(configurationSchema);
@@ -59,39 +62,27 @@ describe("cli/initConfig/index", () => {
     }
   });
 
-  it("init json creates a preset based json rules file", () => {
+  it("init yes creates a self-contained js rules file", () => {
     process.chdir("test/cli/fixtures/init-config/no-config-files-exist");
+    const configResultFileName = `./${path.join(
+      "../fixtures/init-config/no-config-files-exist",
+      RULES_FILE_JS
+    )}`;
 
     try {
-      initConfig("json");
-      const lResult = JSON.parse(
-        stripJSONComments(fs.readFileSync(RULES_FILE_JSON, "utf8"))
-      );
+      initConfig("yes");
+      const lResult = require(configResultFileName);
 
       expect(lResult).to.be.jsonSchema(configurationSchema);
-      expect(lResult).to.haveOwnProperty("extends");
-      expect(lResult.extends).to.equal(
-        "dependency-cruiser/configs/recommended-strict"
-      );
+      expect(lResult).to.not.haveOwnProperty("extends");
     } finally {
-      deleteDammit(RULES_FILE_JSON);
+      Reflect.deleteProperty(
+        require.cache,
+        require.resolve(configResultFileName)
+      );
+      deleteDammit(RULES_FILE_JS);
     }
   });
-
-  // it("init on user input", () => {
-  //     process.chdir('test/cli/fixtures/init-config/no-config-files-exist');
-  //     try {
-  //         initConfig(true);
-  //         const lResult = JSON.parse(
-  //             stripJSONComments(
-  //                 fs.readFileSync(RULES_FILE_JSON, "utf8")
-  //             )
-  //         );
-  //
-  //         expect(lResult).to.be.jsonSchema(rulesSchema);
-  //         expect(lResult).to.not.haveOwnProperty("extends");
-  //     } finally {
-  //         deleteDammit(RULES_FILE_JSON);
-  //     }
-  // });
 });
+/* muffle eslint for we're doing the funky require shizzle consciously here */
+/* eslint global-require:0, security/detect-non-literal-require:0, import/no-dynamic-require:0 */
