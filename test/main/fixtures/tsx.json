@@ -1,73 +1,72 @@
 {
-    "modules": [
+  "modules": [
+    {
+      "source": "test/main/fixtures/tsx/index.ts",
+      "valid": true,
+      "orphan": false,
+      "dependencies": [
         {
-            "source": "test/main/fixtures/tsx/index.ts",
-            "valid": true,
-            "dependencies": [
-                {
-                    "resolved": "test/main/fixtures/tsx/sub/render.tsx",
-                    "coreModule": false,
-                    "followable": true,
-                    "matchesDoNotFollow": false,
-                    "couldNotResolve": false,
-                    "dependencyTypes": [
-                        "local"
-                    ],
-                    "dynamic": false,
-                    "module": "./sub/render",
-                    "moduleSystem": "es6",
-                    "valid": true
-                }
-            ]
-        },
-        {
-            "source": "test/main/fixtures/tsx/sub/render.tsx",
-            "valid": true,
-            "dependencies": [
-                {
-                    "resolved": "react-dom",
-                    "coreModule": false,
-                    "followable": false,
-                    "matchesDoNotFollow": false,
-                    "couldNotResolve": true,
-                    "dependencyTypes": [
-                        "unknown"
-                    ],
-                    "dynamic": false,
-                    "module": "react-dom",
-                    "moduleSystem": "es6",
-                    "valid": true
-                }
-            ]
-        },
-        {
-            "source": "react-dom",
-            "followable": false,
-            "matchesDoNotFollow": false,
-            "coreModule": false,
-            "couldNotResolve": true,
-            "dependencyTypes": [
-                "unknown"
-            ],
-            "valid": true,
-            "dependencies": []
+          "resolved": "test/main/fixtures/tsx/sub/render.tsx",
+          "coreModule": false,
+          "followable": true,
+          "matchesDoNotFollow": false,
+          "couldNotResolve": false,
+          "dependencyTypes": ["local"],
+          "dynamic": false,
+          "circular": false,
+          "module": "./sub/render",
+          "moduleSystem": "es6",
+          "valid": true
         }
-    ],
-    "summary": {
-        "violations": [],
-        "error": 0,
-        "warn": 0,
-        "info": 0,
-        "totalCruised": 3,
-        "totalDependenciesCruised": 2,
-        "optionsUsed": {
-            "args": "test/main/fixtures/tsx",
-            "moduleSystems": ["amd", "cjs", "es6"],
-            "tsPreCompilationDeps": false,
-            "preserveSymlinks": false,
-            "combinedDependencies": false,
-            "exoticRequireStrings": [],
-            "externalModuleResolutionStrategy": "node_modules"
+      ]
+    },
+    {
+      "source": "test/main/fixtures/tsx/sub/render.tsx",
+      "valid": true,
+      "orphan": false,
+      "dependencies": [
+        {
+          "resolved": "react-dom",
+          "coreModule": false,
+          "followable": false,
+          "matchesDoNotFollow": false,
+          "couldNotResolve": true,
+          "dependencyTypes": ["unknown"],
+          "dynamic": false,
+          "circular": false,
+          "module": "react-dom",
+          "moduleSystem": "es6",
+          "valid": true
         }
+      ]
+    },
+    {
+      "source": "react-dom",
+      "followable": false,
+      "matchesDoNotFollow": false,
+      "coreModule": false,
+      "couldNotResolve": true,
+      "dependencyTypes": ["unknown"],
+      "valid": true,
+      "orphan": false,
+      "dependencies": []
     }
+  ],
+  "summary": {
+    "violations": [],
+    "error": 0,
+    "warn": 0,
+    "info": 0,
+    "totalCruised": 3,
+    "totalDependenciesCruised": 2,
+    "optionsUsed": {
+      "args": "test/main/fixtures/tsx",
+      "moduleSystems": ["amd", "cjs", "es6"],
+      "tsPreCompilationDeps": false,
+      "preserveSymlinks": false,
+      "combinedDependencies": false,
+      "exoticRequireStrings": [],
+      "externalModuleResolutionStrategy": "node_modules"
+    }
+  }
 }

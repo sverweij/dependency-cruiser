@@ -198,8 +198,8 @@ module.exports = (pFileDirArray, pOptions, pResolveOptions, pTSConfig) => {
     pModule => pModule.source
   ).map(pModule => filterExcludedDependencies(pModule, pOptions.exclude));
 
-  lModules = deriveCirculars(lModules, pOptions);
-  lModules = deriveOrphans(lModules, pOptions);
+  lModules = deriveCirculars(lModules);
+  lModules = deriveOrphans(lModules);
   lModules = deriveReachable(lModules, pOptions.ruleSet);
 
   lModules = addValidations(lModules, pOptions.validate, pOptions.ruleSet);

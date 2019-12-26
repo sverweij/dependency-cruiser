@@ -2,6 +2,7 @@
  "modules": [
   {
    "source": "./test/extract/fixtures/cache-busting/index.ts",
+   "orphan": false,
    "dependencies": [
     {
      "resolved": "test/extract/fixtures/cache-busting/local.js",
@@ -12,6 +13,7 @@
       "local"
      ],
      "dynamic": false,
+     "circular": false,
      "module": "./local",
      "moduleSystem": "cjs",
      "matchesDoNotFollow": false,
@@ -26,6 +28,7 @@
       "npm"
      ],
      "dynamic": false,
+     "circular": false,
      "module": "different-in-other-tree",
      "moduleSystem": "es6",
      "matchesDoNotFollow": true,
@@ -40,6 +43,7 @@
       "core"
      ],
      "dynamic": false,
+     "circular": false,
      "module": "path",
      "moduleSystem": "es6",
      "matchesDoNotFollow": false,
@@ -56,6 +60,7 @@
   },
   {
    "source": "test/extract/fixtures/cache-busting/node_modules/different-in-other-tree/index-a.js",
+   "orphan": false,
    "followable": false,
    "coreModule": false,
    "couldNotResolve": false,
@@ -68,6 +73,7 @@
   },
   {
    "source": "path",
+   "orphan": false,
    "followable": false,
    "coreModule": true,
    "couldNotResolve": false,
@@ -80,6 +86,7 @@
   },
   {
    "source": "test/extract/fixtures/cache-busting/local.js",
+   "orphan": false,
    "dependencies": [],
    "valid": true
   }

@@ -1,133 +1,125 @@
 {
-    "modules": [
+  "modules": [
+    {
+      "source": "./test/extract/fixtures/donotfollow/index.js",
+      "orphan": false,
+      "dependencies": [
         {
-            "source": "./test/extract/fixtures/donotfollow/index.js",
-            "dependencies": [
-                {
-                    "resolved": "test/extract/fixtures/donotfollow/dofollowstuffinhere/index.js",
-                    "coreModule": false,
-                    "followable": true,
-                    "couldNotResolve": false,
-                    "dependencyTypes": [
-                        "local"
-                    ],
-                    "dynamic": false,
-                    "module": "./dofollowstuffinhere",
-                    "moduleSystem": "cjs",
-                    "matchesDoNotFollow": false,
-                    "valid": true
-                },
-                {
-                    "resolved": "test/extract/fixtures/donotfollow/donotfollowonceinthisfolder/index.js",
-                    "coreModule": false,
-                    "followable": false,
-                    "couldNotResolve": false,
-                    "dependencyTypes": [
-                        "local"
-                    ],
-                    "dynamic": false,
-                    "module": "./donotfollowonceinthisfolder",
-                    "moduleSystem": "cjs",
-                    "matchesDoNotFollow": true,
-                    "valid": true
-                },
-                {
-                    "resolved": "test/extract/fixtures/donotfollow/donotfollowonceinthisfolder/meta.js",
-                    "coreModule": false,
-                    "followable": false,
-                    "couldNotResolve": false,
-                    "dependencyTypes": [
-                        "local"
-                    ],
-                    "dynamic": false,
-                    "module": "./donotfollowonceinthisfolder/meta",
-                    "moduleSystem": "cjs",
-                    "matchesDoNotFollow": true,
-                    "valid": true
-                }
-            ],
-            "valid": true
+          "resolved": "test/extract/fixtures/donotfollow/dofollowstuffinhere/index.js",
+          "coreModule": false,
+          "followable": true,
+          "couldNotResolve": false,
+          "dependencyTypes": ["local"],
+          "dynamic": false,
+          "circular": false,
+          "module": "./dofollowstuffinhere",
+          "moduleSystem": "cjs",
+          "matchesDoNotFollow": false,
+          "valid": true
         },
         {
-            "source": "test/extract/fixtures/donotfollow/donotfollowonceinthisfolder/index.js",
-            "followable": false,
-            "coreModule": false,
-            "couldNotResolve": false,
-            "matchesDoNotFollow": true,
-            "dependencyTypes": [
-                "local"
-            ],
-            "dependencies": [],
-            "valid": true
+          "resolved": "test/extract/fixtures/donotfollow/donotfollowonceinthisfolder/index.js",
+          "coreModule": false,
+          "followable": false,
+          "couldNotResolve": false,
+          "dependencyTypes": ["local"],
+          "dynamic": false,
+          "circular": false,
+          "module": "./donotfollowonceinthisfolder",
+          "moduleSystem": "cjs",
+          "matchesDoNotFollow": true,
+          "valid": true
         },
         {
-            "source": "test/extract/fixtures/donotfollow/donotfollowonceinthisfolder/meta.js",
-            "followable": false,
-            "coreModule": false,
-            "couldNotResolve": false,
-            "matchesDoNotFollow": true,
-            "dependencyTypes": [
-                "local"
-            ],
-            "dependencies": [],
-            "valid": true
-        },
-        {
-            "source": "test/extract/fixtures/donotfollow/dofollowstuffinhere/index.js",
-            "dependencies": [
-                {
-                    "resolved": "test/extract/fixtures/donotfollow/donotfollowonceinthisfolder/meta.js",
-                    "coreModule": false,
-                    "followable": false,
-                    "couldNotResolve": false,
-                    "dependencyTypes": [
-                        "local"
-                    ],
-                    "dynamic": false,
-                    "module": "../donotfollowonceinthisfolder/meta",
-                    "moduleSystem": "cjs",
-                    "matchesDoNotFollow": true,
-                    "valid": true
-                },
-                {
-                    "resolved": "test/extract/fixtures/donotfollow/dofollowstuffinhere/callfromlocal.js",
-                    "coreModule": false,
-                    "followable": true,
-                    "couldNotResolve": false,
-                    "dependencyTypes": [
-                        "local"
-                    ],
-                    "dynamic": false,
-                    "module": "./callfromlocal",
-                    "moduleSystem": "cjs",
-                    "matchesDoNotFollow": false,
-                    "valid": true
-                }
-            ],
-            "valid": true
-        },
-        {
-            "source": "test/extract/fixtures/donotfollow/dofollowstuffinhere/callfromlocal.js",
-            "dependencies": [],
-            "valid": true
+          "resolved": "test/extract/fixtures/donotfollow/donotfollowonceinthisfolder/meta.js",
+          "coreModule": false,
+          "followable": false,
+          "couldNotResolve": false,
+          "dependencyTypes": ["local"],
+          "dynamic": false,
+          "circular": false,
+          "module": "./donotfollowonceinthisfolder/meta",
+          "moduleSystem": "cjs",
+          "matchesDoNotFollow": true,
+          "valid": true
         }
-    ],
-    "summary": {
-        "violations": [],
-        "error": 0,
-        "warn": 0,
-        "info": 0,
-        "totalCruised": 5,
-        "optionsUsed": {
-            "doNotFollow": {
-                "path": "donotfollowonceinthisfolder"
-            },
-            "moduleSystems": [
-                "amd",
-                "cjs",
-                "es6"
-            ],
-            "outputType": "json"
+      ],
+      "valid": true
+    },
+    {
+      "source": "test/extract/fixtures/donotfollow/donotfollowonceinthisfolder/index.js",
+      "followable": false,
+      "coreModule": false,
+      "couldNotResolve": false,
+      "matchesDoNotFollow": true,
+      "dependencyTypes": ["local"],
+      "orphan": false,
+      "dependencies": [],
+      "valid": true
+    },
+    {
+      "source": "test/extract/fixtures/donotfollow/donotfollowonceinthisfolder/meta.js",
+      "followable": false,
+      "coreModule": false,
+      "couldNotResolve": false,
+      "matchesDoNotFollow": true,
+      "dependencyTypes": ["local"],
+      "orphan": false,
+      "dependencies": [],
+      "valid": true
+    },
+    {
+      "source": "test/extract/fixtures/donotfollow/dofollowstuffinhere/index.js",
+      "orphan": false,
+      "dependencies": [
+        {
+          "resolved": "test/extract/fixtures/donotfollow/donotfollowonceinthisfolder/meta.js",
+          "coreModule": false,
+          "followable": false,
+          "couldNotResolve": false,
+          "dependencyTypes": ["local"],
+          "dynamic": false,
+          "circular": false,
+          "module": "../donotfollowonceinthisfolder/meta",
+          "moduleSystem": "cjs",
+          "matchesDoNotFollow": true,
+          "valid": true
+        },
+        {
+          "resolved": "test/extract/fixtures/donotfollow/dofollowstuffinhere/callfromlocal.js",
+          "coreModule": false,
+          "followable": true,
+          "couldNotResolve": false,
+          "dependencyTypes": ["local"],
+          "dynamic": false,
+          "circular": false,
+          "module": "./callfromlocal",
+          "moduleSystem": "cjs",
+          "matchesDoNotFollow": false,
+          "valid": true
         }
+      ],
+      "valid": true
+    },
+    {
+      "source": "test/extract/fixtures/donotfollow/dofollowstuffinhere/callfromlocal.js",
+      "orphan": false,
+      "dependencies": [],
+      "valid": true
     }
+  ],
+  "summary": {
+    "violations": [],
+    "error": 0,
+    "warn": 0,
+    "info": 0,
+    "totalCruised": 5,
+    "optionsUsed": {
+      "doNotFollow": {
+        "path": "donotfollowonceinthisfolder"
+      },
+      "moduleSystems": ["amd", "cjs", "es6"],
+      "outputType": "json"
+    }
+  }
 }

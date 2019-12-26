@@ -1,61 +1,61 @@
 [
-    {
-        "title": "can detect bundled dependencies",
-        "input": {
-            "fileName": "index.js",
-            "options": {
-                "moduleSystems": ["cjs"],
-                "baseDir": "test/extract/fixtures/bundled-dependencies"
-            }
-        },
-        "expected": [
-            {
-                "source": "index.js",
-                "dependencies": [
-                    {
-                        "resolved": "node_modules/idontgetbundled/index.js",
-                        "coreModule": false,
-                        "followable": true,
-                        "matchesDoNotFollow": false,
-                        "couldNotResolve": false,
-                        "dependencyTypes": [
-                            "npm"
-                        ],
-                        "dynamic": false,
-                        "license": "MIT",
-                        "module": "idontgetbundled",
-                        "moduleSystem": "cjs",
-                        "valid": true
-                    },
-                    {
-                        "resolved": "node_modules/igetbundled/index.js",
-                        "coreModule": false,
-                        "followable": true,
-                        "matchesDoNotFollow": false,
-                        "couldNotResolve": false,
-                        "dependencyTypes": [
-                            "npm",
-                            "npm-bundled"
-                        ],
-                        "dynamic": false,
-                        "license": "MIT",
-                        "module": "igetbundled",
-                        "moduleSystem": "cjs",
-                        "valid": true
-                    }
-                ],
-                "valid": true
-            },
-            {
-                "source": "node_modules/idontgetbundled/index.js",
-                "dependencies": [],
-                "valid": true
-            },
-            {
-                "source": "node_modules/igetbundled/index.js",
-                "dependencies": [],
-                "valid": true
-            }
-        ]
-    }
+  {
+    "title": "can detect bundled dependencies",
+    "input": {
+      "fileName": "index.js",
+      "options": {
+        "moduleSystems": ["cjs"],
+        "baseDir": "test/extract/fixtures/bundled-dependencies"
+      }
+    },
+    "expected": [
+      {
+        "source": "index.js",
+        "orphan": false,
+        "dependencies": [
+          {
+            "resolved": "node_modules/idontgetbundled/index.js",
+            "coreModule": false,
+            "followable": true,
+            "matchesDoNotFollow": false,
+            "couldNotResolve": false,
+            "dependencyTypes": ["npm"],
+            "dynamic": false,
+            "circular": false,
+            "license": "MIT",
+            "module": "idontgetbundled",
+            "moduleSystem": "cjs",
+            "valid": true
+          },
+          {
+            "resolved": "node_modules/igetbundled/index.js",
+            "coreModule": false,
+            "followable": true,
+            "matchesDoNotFollow": false,
+            "couldNotResolve": false,
+            "dependencyTypes": ["npm", "npm-bundled"],
+            "dynamic": false,
+            "circular": false,
+            "license": "MIT",
+            "module": "igetbundled",
+            "moduleSystem": "cjs",
+            "valid": true
+          }
+        ],
+        "valid": true
+      },
+      {
+        "source": "node_modules/idontgetbundled/index.js",
+        "orphan": false,
+        "dependencies": [],
+        "valid": true
+      },
+      {
+        "source": "node_modules/igetbundled/index.js",
+        "orphan": false,
+        "dependencies": [],
+        "valid": true
+      }
+    ]
+  }
 ]

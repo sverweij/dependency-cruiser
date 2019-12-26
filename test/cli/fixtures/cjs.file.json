@@ -1,313 +1,288 @@
 {
-    "modules": [
+  "modules": [
+    {
+      "source": "test/cli/fixtures/cjs/root_one.js",
+      "orphan": false,
+      "dependencies": [
         {
-            "source": "test/cli/fixtures/cjs/root_one.js",
-            "dependencies": [
-                {
-                    "resolved": "test/cli/fixtures/cjs/one_only_one.js",
-                    "coreModule": false,
-                    "followable": true,
-                    "couldNotResolve": false,
-                    "dependencyTypes": [
-                        "local"
-                    ],
-                    "dynamic": false,
-                    "module": "./one_only_one",
-                    "moduleSystem": "cjs",
-                    "matchesDoNotFollow": false,
-                    "circular": false,
-                    "valid": true
-                },
-                {
-                    "resolved": "test/cli/fixtures/cjs/one_only_two.js",
-                    "coreModule": false,
-                    "followable": true,
-                    "couldNotResolve": false,
-                    "dependencyTypes": [
-                        "local"
-                    ],
-                    "dynamic": false,
-                    "module": "./one_only_two",
-                    "moduleSystem": "cjs",
-                    "matchesDoNotFollow": false,
-                    "circular": false,
-                    "valid": true
-                },
-                {
-                    "resolved": "test/cli/fixtures/cjs/shared.js",
-                    "coreModule": false,
-                    "followable": true,
-                    "couldNotResolve": false,
-                    "dependencyTypes": [
-                        "local"
-                    ],
-                    "dynamic": false,
-                    "module": "./shared",
-                    "moduleSystem": "cjs",
-                    "matchesDoNotFollow": false,
-                    "circular": false,
-                    "valid": true
-                },
-                {
-                    "resolved": "test/cli/fixtures/cjs/sub/dir.js",
-                    "coreModule": false,
-                    "followable": true,
-                    "couldNotResolve": false,
-                    "dependencyTypes": [
-                        "local"
-                    ],
-                    "dynamic": false,
-                    "module": "./sub/dir",
-                    "moduleSystem": "cjs",
-                    "matchesDoNotFollow": false,
-                    "circular": false,
-                    "valid": true
-                },
-                {
-                    "resolved": "fs",
-                    "coreModule": true,
-                    "followable": false,
-                    "couldNotResolve": false,
-                    "dependencyTypes": [
-                        "core"
-                    ],
-                    "dynamic": false,
-                    "module": "fs",
-                    "moduleSystem": "cjs",
-                    "matchesDoNotFollow": false,
-                    "circular": false,
-                    "valid": true
-                },
-                {
-                    "resolved": "test/cli/fixtures/cjs/node_modules/somemodule/src/somemodule.js",
-                    "coreModule": false,
-                    "followable": true,
-                    "couldNotResolve": false,
-                    "dependencyTypes": [
-                        "npm-no-pkg"
-                    ],
-                    "dynamic": false,
-                    "module": "somemodule",
-                    "moduleSystem": "cjs",
-                    "matchesDoNotFollow": false,
-                    "circular": false,
-                    "valid": true
-                }
-            ],
-            "valid": true
+          "resolved": "test/cli/fixtures/cjs/one_only_one.js",
+          "coreModule": false,
+          "followable": true,
+          "couldNotResolve": false,
+          "dependencyTypes": ["local"],
+          "dynamic": false,
+          "module": "./one_only_one",
+          "moduleSystem": "cjs",
+          "matchesDoNotFollow": false,
+          "circular": false,
+          "valid": true
         },
         {
-            "source": "fs",
-            "followable": false,
-            "coreModule": true,
-            "couldNotResolve": false,
-            "matchesDoNotFollow": false,
-            "dependencyTypes": [
-                "core"
-            ],
-            "dependencies": [],
-            "valid": true
+          "resolved": "test/cli/fixtures/cjs/one_only_two.js",
+          "coreModule": false,
+          "followable": true,
+          "couldNotResolve": false,
+          "dependencyTypes": ["local"],
+          "dynamic": false,
+          "module": "./one_only_two",
+          "moduleSystem": "cjs",
+          "matchesDoNotFollow": false,
+          "circular": false,
+          "valid": true
         },
         {
-            "source": "test/cli/fixtures/cjs/one_only_one.js",
-            "dependencies": [
-                {
-                    "resolved": "path",
-                    "coreModule": true,
-                    "followable": false,
-                    "couldNotResolve": false,
-                    "dependencyTypes": [
-                        "core"
-                    ],
-                    "dynamic": false,
-                    "module": "path",
-                    "moduleSystem": "cjs",
-                    "matchesDoNotFollow": false,
-                    "circular": false,
-                    "valid": true
-                }
-            ],
-            "valid": true
+          "resolved": "test/cli/fixtures/cjs/shared.js",
+          "coreModule": false,
+          "followable": true,
+          "couldNotResolve": false,
+          "dependencyTypes": ["local"],
+          "dynamic": false,
+          "module": "./shared",
+          "moduleSystem": "cjs",
+          "matchesDoNotFollow": false,
+          "circular": false,
+          "valid": true
         },
         {
-            "source": "path",
-            "followable": false,
-            "coreModule": true,
-            "couldNotResolve": false,
-            "matchesDoNotFollow": false,
-            "dependencyTypes": [
-                "core"
-            ],
-            "dependencies": [],
-            "valid": true
+          "resolved": "test/cli/fixtures/cjs/sub/dir.js",
+          "coreModule": false,
+          "followable": true,
+          "couldNotResolve": false,
+          "dependencyTypes": ["local"],
+          "dynamic": false,
+          "module": "./sub/dir",
+          "moduleSystem": "cjs",
+          "matchesDoNotFollow": false,
+          "circular": false,
+          "valid": true
         },
         {
-            "source": "test/cli/fixtures/cjs/one_only_two.js",
-            "dependencies": [
-                {
-                    "resolved": "path",
-                    "coreModule": true,
-                    "followable": false,
-                    "couldNotResolve": false,
-                    "dependencyTypes": [
-                        "core"
-                    ],
-                    "dynamic": false,
-                    "module": "path",
-                    "moduleSystem": "cjs",
-                    "matchesDoNotFollow": false,
-                    "circular": false,
-                    "valid": true
-                }
-            ],
-            "valid": true
+          "resolved": "fs",
+          "coreModule": true,
+          "followable": false,
+          "couldNotResolve": false,
+          "dependencyTypes": ["core"],
+          "dynamic": false,
+          "module": "fs",
+          "moduleSystem": "cjs",
+          "matchesDoNotFollow": false,
+          "circular": false,
+          "valid": true
         },
         {
-            "source": "test/cli/fixtures/cjs/shared.js",
-            "dependencies": [
-                {
-                    "resolved": "path",
-                    "coreModule": true,
-                    "followable": false,
-                    "couldNotResolve": false,
-                    "dependencyTypes": [
-                        "core"
-                    ],
-                    "dynamic": false,
-                    "module": "path",
-                    "moduleSystem": "cjs",
-                    "matchesDoNotFollow": false,
-                    "circular": false,
-                    "valid": true
-                }
-            ],
-            "valid": true
-        },
-        {
-            "source": "test/cli/fixtures/cjs/sub/dir.js",
-            "dependencies": [
-                {
-                    "resolved": "test/cli/fixtures/cjs/sub/depindir.js",
-                    "coreModule": false,
-                    "followable": true,
-                    "couldNotResolve": false,
-                    "dependencyTypes": [
-                        "local"
-                    ],
-                    "dynamic": false,
-                    "module": "./depindir",
-                    "moduleSystem": "cjs",
-                    "matchesDoNotFollow": false,
-                    "circular": false,
-                    "valid": true
-                },
-                {
-                    "resolved": "path",
-                    "coreModule": true,
-                    "followable": false,
-                    "couldNotResolve": false,
-                    "dependencyTypes": [
-                        "core"
-                    ],
-                    "dynamic": false,
-                    "module": "path",
-                    "moduleSystem": "cjs",
-                    "matchesDoNotFollow": false,
-                    "circular": false,
-                    "valid": true
-                }
-            ],
-            "valid": true
-        },
-        {
-            "source": "test/cli/fixtures/cjs/sub/depindir.js",
-            "dependencies": [
-                {
-                    "resolved": "path",
-                    "coreModule": true,
-                    "followable": false,
-                    "couldNotResolve": false,
-                    "dependencyTypes": [
-                        "core"
-                    ],
-                    "dynamic": false,
-                    "module": "path",
-                    "moduleSystem": "cjs",
-                    "matchesDoNotFollow": false,
-                    "circular": false,
-                    "valid": true
-                }
-            ],
-            "valid": true
-        },
-        {
-            "source": "test/cli/fixtures/cjs/node_modules/somemodule/src/somemodule.js",
-            "dependencies": [
-                {
-                    "resolved": "test/cli/fixtures/cjs/node_modules/somemodule/src/moar-javascript.js",
-                    "coreModule": false,
-                    "followable": true,
-                    "couldNotResolve": false,
-                    "dependencyTypes": [
-                        "local"
-                    ],
-                    "dynamic": false,
-                    "module": "./moar-javascript",
-                    "moduleSystem": "cjs",
-                    "matchesDoNotFollow": false,
-                    "circular": false,
-                    "valid": true
-                },
-                {
-                    "resolved": "test/cli/fixtures/cjs/node_modules/somemodule/node_modules/someothermodule/main.js",
-                    "coreModule": false,
-                    "followable": true,
-                    "couldNotResolve": false,
-                    "dependencyTypes": [
-                        "npm-no-pkg"
-                    ],
-                    "dynamic": false,
-                    "module": "someothermodule",
-                    "moduleSystem": "cjs",
-                    "matchesDoNotFollow": false,
-                    "circular": false,
-                    "valid": true
-                }
-            ],
-            "valid": true
-        },
-        {
-            "source": "test/cli/fixtures/cjs/node_modules/somemodule/src/moar-javascript.js",
-            "dependencies": [],
-            "valid": true
-        },
-        {
-            "source": "test/cli/fixtures/cjs/node_modules/somemodule/node_modules/someothermodule/main.js",
-            "dependencies": [],
-            "valid": true
+          "resolved": "test/cli/fixtures/cjs/node_modules/somemodule/src/somemodule.js",
+          "coreModule": false,
+          "followable": true,
+          "couldNotResolve": false,
+          "dependencyTypes": ["npm-no-pkg"],
+          "dynamic": false,
+          "module": "somemodule",
+          "moduleSystem": "cjs",
+          "matchesDoNotFollow": false,
+          "circular": false,
+          "valid": true
         }
-    ],
-    "summary": {
-        "violations": [],
-        "error": 0,
-        "warn": 0,
-        "info": 0,
-        "totalCruised": 11,
-        "totalDependenciesCruised": 14,
-        "optionsUsed": {
-            "args": "test/cli/fixtures/cjs/root_one.js",
-            "outputTo": "test/cli/output/cjs.file.json",
-            "moduleSystems": [
-                "amd",
-                "cjs",
-                "es6"
-            ],
-            "outputType": "json",
-            "tsPreCompilationDeps": false,
-            "preserveSymlinks": false,
-            "combinedDependencies": false,
-            "exoticRequireStrings": [],
-            "externalModuleResolutionStrategy": "node_modules"
+      ],
+      "valid": true
+    },
+    {
+      "source": "fs",
+      "followable": false,
+      "coreModule": true,
+      "couldNotResolve": false,
+      "matchesDoNotFollow": false,
+      "dependencyTypes": ["core"],
+      "orphan": false,
+      "dependencies": [],
+      "valid": true
+    },
+    {
+      "source": "test/cli/fixtures/cjs/one_only_one.js",
+      "orphan": false,
+      "dependencies": [
+        {
+          "resolved": "path",
+          "coreModule": true,
+          "followable": false,
+          "couldNotResolve": false,
+          "dependencyTypes": ["core"],
+          "dynamic": false,
+          "module": "path",
+          "moduleSystem": "cjs",
+          "matchesDoNotFollow": false,
+          "circular": false,
+          "valid": true
         }
+      ],
+      "valid": true
+    },
+    {
+      "source": "path",
+      "followable": false,
+      "coreModule": true,
+      "couldNotResolve": false,
+      "matchesDoNotFollow": false,
+      "dependencyTypes": ["core"],
+      "orphan": false,
+      "dependencies": [],
+      "valid": true
+    },
+    {
+      "source": "test/cli/fixtures/cjs/one_only_two.js",
+      "orphan": false,
+      "dependencies": [
+        {
+          "resolved": "path",
+          "coreModule": true,
+          "followable": false,
+          "couldNotResolve": false,
+          "dependencyTypes": ["core"],
+          "dynamic": false,
+          "module": "path",
+          "moduleSystem": "cjs",
+          "matchesDoNotFollow": false,
+          "circular": false,
+          "valid": true
+        }
+      ],
+      "valid": true
+    },
+    {
+      "source": "test/cli/fixtures/cjs/shared.js",
+      "orphan": false,
+      "dependencies": [
+        {
+          "resolved": "path",
+          "coreModule": true,
+          "followable": false,
+          "couldNotResolve": false,
+          "dependencyTypes": ["core"],
+          "dynamic": false,
+          "module": "path",
+          "moduleSystem": "cjs",
+          "matchesDoNotFollow": false,
+          "circular": false,
+          "valid": true
+        }
+      ],
+      "valid": true
+    },
+    {
+      "source": "test/cli/fixtures/cjs/sub/dir.js",
+      "orphan": false,
+      "dependencies": [
+        {
+          "resolved": "test/cli/fixtures/cjs/sub/depindir.js",
+          "coreModule": false,
+          "followable": true,
+          "couldNotResolve": false,
+          "dependencyTypes": ["local"],
+          "dynamic": false,
+          "module": "./depindir",
+          "moduleSystem": "cjs",
+          "matchesDoNotFollow": false,
+          "circular": false,
+          "valid": true
+        },
+        {
+          "resolved": "path",
+          "coreModule": true,
+          "followable": false,
+          "couldNotResolve": false,
+          "dependencyTypes": ["core"],
+          "dynamic": false,
+          "module": "path",
+          "moduleSystem": "cjs",
+          "matchesDoNotFollow": false,
+          "circular": false,
+          "valid": true
+        }
+      ],
+      "valid": true
+    },
+    {
+      "source": "test/cli/fixtures/cjs/sub/depindir.js",
+      "orphan": false,
+      "dependencies": [
+        {
+          "resolved": "path",
+          "coreModule": true,
+          "followable": false,
+          "couldNotResolve": false,
+          "dependencyTypes": ["core"],
+          "dynamic": false,
+          "module": "path",
+          "moduleSystem": "cjs",
+          "matchesDoNotFollow": false,
+          "circular": false,
+          "valid": true
+        }
+      ],
+      "valid": true
+    },
+    {
+      "source": "test/cli/fixtures/cjs/node_modules/somemodule/src/somemodule.js",
+      "orphan": false,
+      "dependencies": [
+        {
+          "resolved": "test/cli/fixtures/cjs/node_modules/somemodule/src/moar-javascript.js",
+          "coreModule": false,
+          "followable": true,
+          "couldNotResolve": false,
+          "dependencyTypes": ["local"],
+          "dynamic": false,
+          "module": "./moar-javascript",
+          "moduleSystem": "cjs",
+          "matchesDoNotFollow": false,
+          "circular": false,
+          "valid": true
+        },
+        {
+          "resolved": "test/cli/fixtures/cjs/node_modules/somemodule/node_modules/someothermodule/main.js",
+          "coreModule": false,
+          "followable": true,
+          "couldNotResolve": false,
+          "dependencyTypes": ["npm-no-pkg"],
+          "dynamic": false,
+          "module": "someothermodule",
+          "moduleSystem": "cjs",
+          "matchesDoNotFollow": false,
+          "circular": false,
+          "valid": true
+        }
+      ],
+      "valid": true
+    },
+    {
+      "source": "test/cli/fixtures/cjs/node_modules/somemodule/src/moar-javascript.js",
+      "orphan": false,
+      "dependencies": [],
+      "valid": true
+    },
+    {
+      "source": "test/cli/fixtures/cjs/node_modules/somemodule/node_modules/someothermodule/main.js",
+      "orphan": false,
+      "dependencies": [],
+      "valid": true
     }
+  ],
+  "summary": {
+    "violations": [],
+    "error": 0,
+    "warn": 0,
+    "info": 0,
+    "totalCruised": 11,
+    "totalDependenciesCruised": 14,
+    "optionsUsed": {
+      "args": "test/cli/fixtures/cjs/root_one.js",
+      "outputTo": "test/cli/output/cjs.file.json",
+      "moduleSystems": ["amd", "cjs", "es6"],
+      "outputType": "json",
+      "tsPreCompilationDeps": false,
+      "preserveSymlinks": false,
+      "combinedDependencies": false,
+      "exoticRequireStrings": [],
+      "externalModuleResolutionStrategy": "node_modules"
+    }
+  }
 }

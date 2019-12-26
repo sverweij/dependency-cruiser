@@ -1,27 +1,32 @@
 {
   "modules": [
     {
+      "orphan": false,
       "dependencies": [],
       "source": "test/main/fixtures/ts-precompilation-deps-off-cjs/also-used.ts",
       "valid": true
     },
     {
+      "orphan": false,
       "dependencies": [],
       "source": "test/main/fixtures/ts-precompilation-deps-off-cjs/definitely-used.ts",
       "valid": true
     },
     {
-      "dependencies": [],
+      "orphan": true,
+      "dependencies": [], 
       "source": "test/main/fixtures/ts-precompilation-deps-off-cjs/imported-from-index-but-not-used.ts",
       "valid": true
     },
     {
+      "orphan": false,
       "dependencies": [
         {
           "coreModule": false,
           "couldNotResolve": false,
           "dependencyTypes": ["local"],
           "dynamic": false,
+          "circular": false,
           "followable": true,
           "matchesDoNotFollow": false,
           "module": "./also-used",
@@ -34,6 +39,7 @@
           "couldNotResolve": false,
           "dependencyTypes": ["local"],
           "dynamic": false,
+          "circular": false,
           "followable": true,
           "matchesDoNotFollow": false,
           "module": "./definitely-used",
