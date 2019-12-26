@@ -4,17 +4,11 @@ const $package = require("../../../package.json");
 const { fileExists } = require("./helpers");
 
 /* eslint import/no-unassigned-import: 0 */
-require("./config.json.template");
 require("./config.js.template");
 
-function getFileName(pInitOptions) {
-  return `.dependency-cruiser${pInitOptions.configFormat}`;
-}
+const DEFAULT_CONFIG_FILE_NAME = `.dependency-cruiser.js`;
 
 function buildConfig(pInitOptions) {
-  if (pInitOptions.configFormat === ".json") {
-    return Handlebars.templates["config.json.template.hbs"](pInitOptions);
-  }
   return Handlebars.templates["config.js.template.hbs"](pInitOptions);
 }
 
@@ -36,7 +30,6 @@ function normalizeInitOptions(pInitOptions) {
   let lRetval = {
     version: $package.version,
     date: new Date().toJSON(),
-    configFormat: ".json",
     configType: "self-contained",
     ...pInitOptions
   };
@@ -58,7 +51,6 @@ function normalizeInitOptions(pInitOptions) {
  *
  * @returns {void}  Nothing
  * @param  {any}    pInitOptions Options that influence the shape of the
- *                  configFormat - file format to use either ".json" or ".js"
  *                  configType   - "self-contained" or "preset"
  *                  preset       -
  * @throws {Error}  An error object with the root cause of the problem
@@ -70,8 +62,5 @@ function normalizeInitOptions(pInitOptions) {
 module.exports = pInitOptions => {
   const lNormalizedInitOptions = normalizeInitOptions(pInitOptions);
 
-  writeTheThing(
-    getFileName(lNormalizedInitOptions),
-    buildConfig(lNormalizedInitOptions)
-  );
+  writeTheThing(DEFAULT_CONFIG_FILE_NAME, buildConfig(lNormalizedInitOptions));
 };

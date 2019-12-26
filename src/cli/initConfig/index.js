@@ -6,8 +6,7 @@ const { pnpIsEnabled, fileExists } = require("./helpers");
 const TYPESCRIPT_CONFIG = `./${$defaults.TYPESCRIPT_CONFIG}`;
 const WEBPACK_CONFIG = `./${$defaults.WEBPACK_CONFIG}`;
 const ONESHOT_CONFIGS = {
-  json: {
-    configFormat: ".json",
+  preset: {
     configType: "preset",
     preset: "dependency-cruiser/configs/recommended-strict",
     useTsConfig: fileExists(TYPESCRIPT_CONFIG),
@@ -16,10 +15,7 @@ const ONESHOT_CONFIGS = {
     useWebpackConfig: fileExists(WEBPACK_CONFIG),
     webpackConfig: WEBPACK_CONFIG
   },
-  js: {
-    configFormat: ".js",
-    configType: "preset",
-    preset: "dependency-cruiser/configs/recommended-strict",
+  yes: {
     useTsConfig: fileExists(TYPESCRIPT_CONFIG),
     tsconfig: TYPESCRIPT_CONFIG,
     useYarnPnP: pnpIsEnabled(),
@@ -37,7 +33,7 @@ module.exports = pInit => {
         process.stderr.write(`\n  ERROR: ${pError.message}\n`);
       });
   } else {
-    /* eslint security/detect-object-injection:0 */
+    // eslint-disable-next-line security/detect-object-injection
     createConfigFile(ONESHOT_CONFIGS[pInit] || {});
   }
 };

@@ -7,21 +7,6 @@ const WEBPACK_CONFIG = `./${$defaults.WEBPACK_CONFIG}`;
 
 const INQUIRER_QUESTIONS = [
   {
-    name: "configFormat",
-    type: "list",
-    message: "What format do you want your config file to be in?",
-    choices: [
-      {
-        name: "JSON",
-        value: ".json"
-      },
-      {
-        name: "JavaScript",
-        value: ".js"
-      }
-    ]
-  },
-  {
     name: "configType",
     type: "list",
     message: "Do you want to use a preset or a self-contained configuration?",
