@@ -13,8 +13,8 @@
 .nyc_output
 coverage
 jsdoc
-platoreports
 dependency-violations.html
+.cache
 
 # node and npm
 /node_modules/
