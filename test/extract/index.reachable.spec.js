@@ -10,7 +10,7 @@ const expect = chai.expect;
 chai.use(require("chai-json-schema"));
 
 describe("extract/index - reachable", () => {
-  it(`returns output complying to the results-schema when having reachability rules in`, () => {
+  it(`returns output complying to the cruise-result schema when having reachability rules in`, () => {
     const lOptions = normalize({
       validate: true,
       ruleSet: normalizeRuleSet({

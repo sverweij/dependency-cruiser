@@ -1,32 +1,38 @@
 {
-    "modules": [
+  "modules": [
+    {
+      "source": "test/cli/fixtures/unresolvable-in-sub/refers-to-a-do-not-follow-module.js",
+      "valid": true,
+      "dependencies": [
         {
-            "source": "test/cli/fixtures/unresolvable-in-sub/refers-to-a-do-not-follow-module.js",
-            "dependencies": [
-                {
-                    "resolved": "dontFollowThis",
-                    "coreModule": false,
-                    "followable": false,
-                    "couldNotResolve": false,
-                    "module": "dontFollowThis",
-                    "moduleSystem": "es6",
-                    "valid": true
-                }
-            ]
-        },
-        {
-            "source": "dontFollowThis",
-            "matchesDoNotFollow": true,
-            "dependencies": []
+          "resolved": "dontFollowThis",
+          "coreModule": false,
+          "followable": false,
+          "couldNotResolve": false,
+          "module": "dontFollowThis",
+          "moduleSystem": "es6",
+          "dependencyTypes": [],
+          "dynamic": false,
+          "valid": true
         }
-    ],
-    "summary": {
-        "violations": [],
-        "err": 481,
-        "warn": 30,
-        "info": 0,
-        "optionsUsed": {
-            "prefix": "STUFFCOMINGBEFORE"
-        }
+      ]
+    },
+    {
+      "source": "dontFollowThis",
+      "matchesDoNotFollow": true,
+      "valid": true,
+      "dependencies": []
     }
+  ],
+  "summary": {
+    "violations": [],
+    "error": 481,
+    "warn": 30,
+    "info": 0,
+    "totalCruised": 1,
+    "totalDependenciesCruised": 1,
+    "optionsUsed": {
+      "prefix": "STUFFCOMINGBEFORE"
+    }
+  }
 }

@@ -4,6 +4,7 @@ const moduleSystemsType = require("./module-systems-type");
 const outputType = require("./output-type");
 const compoundExcludeType = require("./compound-exclude-type");
 const compoundDoNotFollowType = require("./compound-donot-follow-type");
+const reporterOptions = require("./reporter-options");
 
 module.exports = {
   definitions: {
@@ -46,6 +47,7 @@ module.exports = {
     ...dependencyType.definitions,
     ...outputType.definitions,
     ...compoundExcludeType.definitions,
-    ...compoundDoNotFollowType.definitions
+    ...compoundDoNotFollowType.definitions,
+    ...reporterOptions.definitions
   }
 };

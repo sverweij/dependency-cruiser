@@ -102,7 +102,10 @@
       "severity": "error",
       "comment": "In production code do not depend on external ('npm') modules not declared in your package.json's dependencies - otherwise a production only install (i.e. 'npm ci') will break. If this rule triggers on something that's only used during development, adapt the 'from' of the rule in the dependency-cruiser configuration.",
       "from": { "path": "^(bin|src)" },
-      "to": { "dependencyTypes": ["npm-dev"], "exoticRequireNot": "^tryRequire$" }
+      "to": {
+        "dependencyTypes": ["npm-dev"],
+        "exoticRequireNot": "^tryRequire$"
+      }
     },
     {
       "name": "optional-deps-used",
@@ -187,7 +190,106 @@
     //    "fileName": "./webpack.conf.js",
     //    "env": {},
     //    "args": {}
-    // }
-    "exoticRequireStrings": ["tryRequire"]
+    // },
+    "exoticRequireStrings": ["tryRequire"],
+    "reporterOptions": {
+      "dot": {
+        "theme": {
+          "replace": false,
+          "graph": {
+            "splines": "ortho"
+          },
+          "modules": [
+            {
+              "criteria": { "source": "^src/cli" },
+              "attributes": { "fillcolor": "#ccccff" }
+            },
+            {
+              "criteria": { "source": "^src/report" },
+              "attributes": { "fillcolor": "#ffccff" }
+            },
+            {
+              "criteria": { "source": "^src/extract" },
+              "attributes": { "fillcolor": "#ccffcc" }
+            },
+            {
+              "criteria": { "source": "^src/validate" },
+              "attributes": { "fillcolor": "#ccccff" }
+            },
+            {
+              "criteria": { "source": "^src/main" },
+              "attributes": { "fillcolor": "#ffcccc" }
+            },
+            {
+              "criteria": { "source": "^src/utl" },
+              "attributes": { "fillcolor": "#cccccc" }
+            },
+            {
+              "criteria": { "source": "\\.schema\\.js$" },
+              "attributes": {
+                "color": "darkgreen",
+                "fillcolor": "darkgreen",
+                "fontcolor": "#ffffcc"
+              }
+            },
+            {
+              "criteria": { "source": "\\.template\\.js$" },
+              "attributes": { "style": "filled" }
+            },
+            {
+              "criteria": { "source": "\\-type\\.js$" },
+              "attributes": {
+                "fillcolor": "white",
+                "fontcolor": "darkgrey",
+                "color": "darkgrey",
+                "shape": "underline"
+              }
+            }
+          ],
+          "dependencies": [
+            {
+              "criteria": { "rules[0].severity": "error" },
+              "attributes": { "fontcolor": "red", "color": "red" }
+            },
+            {
+              "criteria": { "rules[0].severity": "warn" },
+              "attributes": { "fontcolor": "orange", "color": "orange" }
+            },
+            {
+              "criteria": { "rules[0].severity": "info" },
+              "attributes": { "fontcolor": "blue", "color": "blue" }
+            },
+            {
+              "criteria": { "valid": false },
+              "attributes": { "fontcolor": "red", "color": "red" }
+            },
+            {
+              "criteria": { "resolved": "^src/cli" },
+              "attributes": { "color": "#5555ff77" }
+            },
+            {
+              "criteria": { "resolved": "^src/report" },
+              "attributes": { "color": "#ff55ff77" }
+            },
+            {
+              "criteria": { "resolved": "^src/extract" },
+              "attributes": { "color": "#55ff5577" }
+            },
+            {
+              "criteria": { "resolved": "^src/validate" },
+              "attributes": { "color": "#5555ff77" }
+            },
+            {
+              "criteria": { "resolved": "^src/main" },
+              "attributes": { "color": "#ff555577" }
+            },
+            {
+              "criteria": { "resolved": "^src/utl" },
+              "attributes": { "color": "#aaaaaa77" }
+            }
+          ]
+        }
+      }
+    }
   }
 }

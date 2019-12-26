@@ -1,4 +1,5 @@
 const _clone = require("lodash/clone");
+const _get = require("lodash/get");
 const anonymizePath = require("./anonymizePath");
 
 function mapCycles(pPathArray, pWordList) {
@@ -43,6 +44,13 @@ function anonymize(pResults, pWordList) {
   return lResults;
 }
 
+function sanitizeWordList(pWordList) {
+  return pWordList
+    .map(pString => pString.replace(/[^a-zA-Z-]/g, "_"))
+    .filter(pString => pString.match(/^[a-zA-Z-_]+$/g))
+    .filter(pString => !pString.match(anonymizePath.WHITELIST_RE));
+}
+
 /**
  * Returns the results of a cruise in JSON with all module names
  * anonymized
@@ -58,11 +66,25 @@ function anonymize(pResults, pWordList) {
  * so if the word list is precious to you - pass a clone)
  *
  * @param {any} pResults - the output of a dependency-cruise adhering to ../schema/cruise-result.schema.json
- * @param {string[]} pWordList - list of words to use as replacement strings
+ * @param {string[]} pWordList - list of words to use as replacement strings. If
+ *                               not passed the reporter uses the string passed
+ *                               in the options (reporterOptions.anon.wordlist)
+ *                               or - if that doesn't exist - the empty array
  * @returns {object} - output: the results in JSON format (hence adhering to the same json schema)
  *                     exitCode: 0
  */
-module.exports = (pResults, pWordList) => ({
-  output: JSON.stringify(anonymize(pResults, pWordList), null, "  "),
+module.exports = (
+  pResults,
+  pWordList = _get(
+    pResults,
+    "summary.optionsUsed.reporterOptions.anon.wordlist",
+    []
+  )
+) => ({
+  output: JSON.stringify(
+    anonymize(pResults, sanitizeWordList(pWordList)),
+    null,
+    "  "
+  ),
   exitCode: 0
 });

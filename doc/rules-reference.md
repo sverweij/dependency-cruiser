@@ -49,6 +49,7 @@
    - [`tsConfig`: use a typscript configuration file ('project')](#tsconfig-use-a-typescript-configuration-file-project)
    - [Yarn Plug'n'Play support - `externalModuleResolutionStrategy`](#yarn-plugnplay-support---externalmoduleresolutionstrategy)
    - [`webackConfig`: use (the resolution options of) a webpack configuration](#webpackconfig-use-the-resolution-options-of-a-webpack-configuration)
+   - [`reporterOptions`](#reporteroptions)
    - [Some more esoteric options](#some-more-esoteric-options)
 5. [Configurations in javascript](#configurations-in-javascript)
 
@@ -1134,14 +1135,230 @@ you can provide the parameters like so:
 - For more information check out the the [webpack resolve](https://webpack.js.org/configuration/resolve/)
   documentation.
 
+### reporterOptions
+
+In the `reporterOptions` attribute you can pass things to reporters to influence
+their behavior - for reporters that support this.
+
+#### anon
+
+The anonymous reporter has a `wordlist` option to pass it a list of words to use
+to replace path elements with before it starts to generate random names. If you
+use the anonymous report a lot it can be beneficial to use a list of words so the
+output is repeatable (and easier to read).
+
+```json
+{
+  "options": {
+    "reporterOptions": {
+      "anon": {
+        "wordlist": [
+          "foo",
+          "bar",
+          "baz",
+          "qux",
+          "grault",
+          "garply",
+          "waldo",
+          "fred"
+        ]
+      }
+    }
+  }
+}
+```
+
+You're likely to need a _lot_ of words to cover all your path elements if you
+want to prevent random names as much as possible. There's word lists in the wild
+that work exceptionally well - in the past I have used Sindre Sorhus'
+[mnemonic-words](https://www.npmjs.com/package/mnemonic-words) list
+for this. If you use javascript as the configuration file format you can
+simply require it:
+
+```javascript
+const mnemonicWords = require('mnemonic-words');
+
+module.exports = {
+  // ...
+  options: {
+    reporterOptions:
+      anon: {
+        wordlist: mnemonicWords
+      }
+  }
+}
+```
+
+#### dot
+
+Most representational aspects of the 'dot' reporter are customizable:
+
+- On a global level, affecting all rendered modules and dependencies with
+  `graph`, `node` and `edge`.
+- Conditional - only affecting modules (or dependencies) that meet the criteria
+  you specify with `modules` and `dependencies`.
+  - You can use any
+    [module attribute](https://github.com/sverweij/dependency-cruiser/blob/develop/types/cruise-result.d.ts#L16)
+    and any [dependency attribute](https://github.com/sverweij/dependency-cruiser/blob/develop/types/cruise-result.d.ts#L73)
+    for dependencies.
+  - For attributes you can use anything GraphViz dot can understand as an attribute
+    (see their [attributes](https://graphviz.gitlab.io/_pages/doc/info/attrs.html)
+    documentation for a complete overview).
+
+The criteria are evaluated top to bottom:
+
+- Criteria higher up get precedence over the ones lower down.
+- Criteria in the configuration file take precedence over the default ones.
+
+For an extensive example you can have a look at the default theme dependency-cruiser
+ships with - [defaultTheme.json](../src/report/dot/common/defaultTheme.json).
+
+##### Some examples
+
+As a base, take this part of dependency-cruisers code:
+
+<details>
+<summary>base.config.js</summary>
+
+```javascript
+module.exports = {
+  options: {
+    includeOnly: "^src/main",
+    exclude: "/filesAndDirs/"
+  }
+};
+```
+
+</details>
+
+![base](assets/theming/base.svg)
+
+The default template, with tweaks to get an 'engineering' like look (and all
+file names ending on `.json` a cylindrical look with a soft gradient):
+
+<details>
+<summary>engineering.config.js</summary>
+
+```javascript
+module.exports = {
+  extends: "./base.config.js",
+  options: {
+    reporterOptions: {
+      dot: {
+        theme: {
+          replace: false,
+          graph: {
+            bgcolor: "dodgerblue",
+            color: "white",
+            fontcolor: "white",
+            fillcolor: "transparent",
+            splines: "ortho"
+          },
+          node: {
+            color: "white",
+            fillcolor: "#ffffff33",
+            fontcolor: "white"
+          },
+          edge: {
+            arrowhead: "vee",
+            arrowsize: "0.5",
+            penwidth: "1.0",
+            color: "white",
+            fontcolor: "white"
+          },
+          modules: [
+            {
+              criteria: { source: "\\.json$" },
+              attributes: {
+                shape: "cylinder",
+                fillcolor: "#ffffff33:#ffffff88"
+              }
+            },
+            {
+              criteria: { coreModule: true },
+              attributes: {
+                color: "white",
+                fillcolor: "#ffffff33",
+                fontcolor: "white"
+              }
+            }
+          ],
+          dependencies: [
+            {
+              criteria: { resolved: "\\.json$" },
+              attributes: { arrowhead: "obox" }
+            }
+          ]
+        }
+      }
+    }
+  }
+};
+```
+
+</details>
+
+![engineering](assets/theming/engineering.svg)
+
+To shift the dependency graph from a horizontal orientation to a vertical one, set
+the global graph attribute `rankdir` to `TD` (top down):
+
+<details>
+<summary>vertical.config.js</summary>
+
+```javascript
+module.exports = {
+  extends: "./base.config.js",
+  options: {
+    reporterOptions: {
+      dot: {
+        theme: {
+          graph: { rankdir: "TD" }
+        }
+      }
+    }
+  }
+};
+```
+
+</details>
+
+![vertical](assets/theming/vertical.svg)
+
+To get output without any attributes and no conditional coloring you can order
+the default theme to be replaced by flipping the `replace` attribute to `true`.
+
+<details>
+<summary>bare</summary>
+<!-- bin/dependency-cruise.js -Tdot -v doc/assets/theming/bare.config.js src/main | dot -Tsvg > doc/assets/theming/bare.svg-->
+
+```javascript
+module.exports = {
+  extends: "./base.config.js",
+  options: {
+    reporterOptions: {
+      dot: {
+        theme: {
+          replace: true
+        }
+      }
+    }
+  }
+};
+```
+
+</details>
+
+![bare](assets/theming/bare.svg)
+
 ### Some more esoteric options
 
 #### preserveSymlinks
 
 > command line option equivalent: `--preserve-symlinks`
 
-Whether to leave symlinks as is or resolve them to their realpath. This option defaults
-to `false` (which is also nodejs' default behavior since release 6).
+Whether to leave symlinks as is or resolve them to their realpath. This option
+defaults to `false` (which is also nodejs' default behavior since release 6).
 
 #### mono repo behavior - combinedDependencies
 

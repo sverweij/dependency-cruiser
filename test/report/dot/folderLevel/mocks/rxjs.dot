@@ -11,29 +11,9 @@ strict digraph "dependency-cruiser output"{
     fillcolor="#ffffff"
     compound=true
     node [shape=folder style="rounded, filled" fillcolor="#ffffcc" height=0.2 fontname=Helvetica fontsize=9]
-    edge [color="#00000033" penwidth=2.0 arrowhead=normal fontname=Helvetica fontsize=9]
+    edge [color="#00000033" penwidth=2.0 arrowsize=0.6 arrowhead=normal fontname=Helvetica fontsize=9]
 
     "compat" [label="compat" ]
-    subgraph "cluster_compat" {label="compat" "compat" [label="." width="0.5"] subgraph "cluster_compat/add" {label="add" "compat/add" [label="." width="0.5"] "compat/add/observable" [label="observable" ] } }
-    subgraph "cluster_compat" {label="compat" "compat" [label="." width="0.5"] subgraph "cluster_compat/add" {label="add" "compat/add" [label="." width="0.5"] subgraph "cluster_compat/add/observable" {label="observable" "compat/add/observable" [label="." width="0.5"] "compat/add/observable/dom" [label="dom" ] } } }
-    subgraph "cluster_compat" {label="compat" "compat" [label="." width="0.5"] subgraph "cluster_compat/add" {label="add" "compat/add" [label="." width="0.5"] "compat/add/operator" [label="operator" ] } }
-    subgraph "cluster_compat" {label="compat" "compat" [label="." width="0.5"] "compat/operator" [label="operator" ] }
-    subgraph "cluster_dist" {label="dist" "dist" [label="." width="0.5"] "dist/package" [label="package" ] }
-    "src" [label="src" ]
-    subgraph "cluster_src" {label="src" "src" [label="." width="0.5"] "src/ajax" [label="ajax" ] }
-    subgraph "cluster_src" {label="src" "src" [label="." width="0.5"] "src/internal" [label="internal" ] }
-    subgraph "cluster_src" {label="src" "src" [label="." width="0.5"] "src/internal-compatibility" [label="internal-compatibility" ] }
-    subgraph "cluster_src" {label="src" "src" [label="." width="0.5"] subgraph "cluster_src/internal" {label="internal" "src/internal" [label="." width="0.5"] "src/internal/observable" [label="observable" ] } }
-    subgraph "cluster_src" {label="src" "src" [label="." width="0.5"] subgraph "cluster_src/internal" {label="internal" "src/internal" [label="." width="0.5"] subgraph "cluster_src/internal/observable" {label="observable" "src/internal/observable" [label="." width="0.5"] "src/internal/observable/dom" [label="dom" ] } } }
-    subgraph "cluster_src" {label="src" "src" [label="." width="0.5"] subgraph "cluster_src/internal" {label="internal" "src/internal" [label="." width="0.5"] "src/internal/operators" [label="operators" ] } }
-    subgraph "cluster_src" {label="src" "src" [label="." width="0.5"] subgraph "cluster_src/internal" {label="internal" "src/internal" [label="." width="0.5"] "src/internal/scheduler" [label="scheduler" ] } }
-    subgraph "cluster_src" {label="src" "src" [label="." width="0.5"] subgraph "cluster_src/internal" {label="internal" "src/internal" [label="." width="0.5"] "src/internal/symbol" [label="symbol" ] } }
-    subgraph "cluster_src" {label="src" "src" [label="." width="0.5"] subgraph "cluster_src/internal" {label="internal" "src/internal" [label="." width="0.5"] "src/internal/testing" [label="testing" ] } }
-    subgraph "cluster_src" {label="src" "src" [label="." width="0.5"] subgraph "cluster_src/internal" {label="internal" "src/internal" [label="." width="0.5"] "src/internal/util" [label="util" ] } }
-    subgraph "cluster_src" {label="src" "src" [label="." width="0.5"] "src/operators" [label="operators" ] }
-    subgraph "cluster_src" {label="src" "src" [label="." width="0.5"] "src/testing" [label="testing" ] }
-    subgraph "cluster_src" {label="src" "src" [label="." width="0.5"] "src/webSocket" [label="webSocket" ] }
-
     "compat" -> "compat"
     "compat" -> "compat/add/observable"
     "compat" -> "compat/add/observable/dom"
@@ -43,16 +23,22 @@ strict digraph "dependency-cruiser output"{
     "compat" -> "src/internal-compatibility"
     "compat" -> "src/operators"
     "compat" -> "src/testing"
+    subgraph "cluster_compat" {label="compat" "compat" [label="." width="0.5"] subgraph "cluster_compat/add" {label="add" "compat/add" [label="." width="0.5"] "compat/add/observable" [label="observable" ] } }
     "compat/add/observable" -> "src"
+    subgraph "cluster_compat" {label="compat" "compat" [label="." width="0.5"] subgraph "cluster_compat/add" {label="add" "compat/add" [label="." width="0.5"] subgraph "cluster_compat/add/observable" {label="observable" "compat/add/observable" [label="." width="0.5"] "compat/add/observable/dom" [label="dom" ] } } }
     "compat/add/observable/dom" -> "src"
     "compat/add/observable/dom" -> "src/ajax"
     "compat/add/observable/dom" -> "src/webSocket"
+    subgraph "cluster_compat" {label="compat" "compat" [label="." width="0.5"] subgraph "cluster_compat/add" {label="add" "compat/add" [label="." width="0.5"] "compat/add/operator" [label="operator" ] } }
     "compat/add/operator" -> "compat/operator"
     "compat/add/operator" -> "src"
+    subgraph "cluster_compat" {label="compat" "compat" [label="." width="0.5"] "compat/operator" [label="operator" ] }
     "compat/operator" -> "src/operators"
     "compat/operator" -> "src"
     "compat/operator" -> "src/internal-compatibility"
+    subgraph "cluster_dist" {label="dist" "dist" [label="." width="0.5"] "dist/package" [label="package" ] }
     "dist/package" -> "compat"
+    "src" [label="src" ]
     "src" -> "src/internal"
     "src" -> "src/internal/observable/dom"
     "src" -> "dist/package"
@@ -61,7 +47,9 @@ strict digraph "dependency-cruiser output"{
     "src" -> "src/internal/scheduler"
     "src" -> "src/internal/symbol"
     "src" -> "src/internal/util"
+    subgraph "cluster_src" {label="src" "src" [label="." width="0.5"] "src/ajax" [label="ajax" ] }
     "src/ajax" -> "src/internal/observable/dom"
+    subgraph "cluster_src" {label="src" "src" [label="." width="0.5"] "src/internal" [label="internal" ] }
     "src/internal" -> "src/internal/symbol"
     "src/internal" -> "src/internal"
     "src/internal" -> "src/internal/util"
@@ -78,38 +66,49 @@ strict digraph "dependency-cruiser output"{
     "src/internal" -> "src/operators"
     "src/internal" -> "src/testing"
     "src/internal" -> "src/webSocket"
+    subgraph "cluster_src" {label="src" "src" [label="." width="0.5"] "src/internal-compatibility" [label="internal-compatibility" ] }
     "src/internal-compatibility" -> "src/internal"
     "src/internal-compatibility" -> "src/internal/observable"
     "src/internal-compatibility" -> "src/internal/observable/dom"
     "src/internal-compatibility" -> "src/internal/operators"
     "src/internal-compatibility" -> "src/internal/symbol"
     "src/internal-compatibility" -> "src/internal/util"
+    subgraph "cluster_src" {label="src" "src" [label="." width="0.5"] subgraph "cluster_src/internal" {label="internal" "src/internal" [label="." width="0.5"] "src/internal/observable" [label="observable" ] } }
     "src/internal/observable" -> "src/internal"
     "src/internal/observable" -> "src/internal/util"
     "src/internal/observable" -> "src/internal/observable"
     "src/internal/observable" -> "src/internal/operators"
     "src/internal/observable" -> "src/internal/symbol"
     "src/internal/observable" -> "src/internal/scheduler"
+    subgraph "cluster_src" {label="src" "src" [label="." width="0.5"] subgraph "cluster_src/internal" {label="internal" "src/internal" [label="." width="0.5"] subgraph "cluster_src/internal/observable" {label="observable" "src/internal/observable" [label="." width="0.5"] "src/internal/observable/dom" [label="dom" ] } } }
     "src/internal/observable/dom" -> "src/internal"
     "src/internal/observable/dom" -> "src/internal/operators"
     "src/internal/observable/dom" -> "src/internal/util"
     "src/internal/observable/dom" -> "src/internal/observable/dom"
+    subgraph "cluster_src" {label="src" "src" [label="." width="0.5"] subgraph "cluster_src/internal" {label="internal" "src/internal" [label="." width="0.5"] "src/internal/operators" [label="operators" ] } }
     "src/internal/operators" -> "src/internal"
     "src/internal/operators" -> "src/internal/operators"
     "src/internal/operators" -> "src/internal/util"
     "src/internal/operators" -> "src/internal/observable"
     "src/internal/operators" -> "src/internal/scheduler"
+    subgraph "cluster_src" {label="src" "src" [label="." width="0.5"] subgraph "cluster_src/internal" {label="internal" "src/internal" [label="." width="0.5"] "src/internal/scheduler" [label="scheduler" ] } }
     "src/internal/scheduler" -> "src/internal/scheduler"
     "src/internal/scheduler" -> "src/internal"
     "src/internal/scheduler" -> "src/internal/util"
+    subgraph "cluster_src" {label="src" "src" [label="." width="0.5"] subgraph "cluster_src/internal" {label="internal" "src/internal" [label="." width="0.5"] "src/internal/symbol" [label="symbol" ] } }
+    subgraph "cluster_src" {label="src" "src" [label="." width="0.5"] subgraph "cluster_src/internal" {label="internal" "src/internal" [label="." width="0.5"] "src/internal/testing" [label="testing" ] } }
     "src/internal/testing" -> "src/internal"
     "src/internal/testing" -> "src/internal/scheduler"
     "src/internal/testing" -> "src/internal/testing"
     "src/internal/testing" -> "src/internal/util"
+    subgraph "cluster_src" {label="src" "src" [label="." width="0.5"] subgraph "cluster_src/internal" {label="internal" "src/internal" [label="." width="0.5"] "src/internal/util" [label="util" ] } }
     "src/internal/util" -> "src/internal"
     "src/internal/util" -> "src/internal/util"
     "src/internal/util" -> "src/internal/symbol"
+    subgraph "cluster_src" {label="src" "src" [label="." width="0.5"] "src/operators" [label="operators" ] }
     "src/operators" -> "src/internal/operators"
+    subgraph "cluster_src" {label="src" "src" [label="." width="0.5"] "src/testing" [label="testing" ] }
     "src/testing" -> "src/internal/testing"
+    subgraph "cluster_src" {label="src" "src" [label="." width="0.5"] "src/webSocket" [label="webSocket" ] }
     "src/webSocket" -> "src/internal/observable/dom"
 }

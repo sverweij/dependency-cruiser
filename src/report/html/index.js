@@ -23,7 +23,9 @@ function addShowTitle(pDependencyEntry) {
  */
 function report(pResults) {
   return Handlebars.templates["html.template.hbs"]({
-    things: dependencyToIncidenceTransformer(pResults.modules).map(addShowTitle)
+    modules: dependencyToIncidenceTransformer(pResults.modules).map(
+      addShowTitle
+    )
   });
 }
 

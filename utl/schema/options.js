@@ -2,6 +2,7 @@ const dependencyType = require("./dependency-type");
 const moduleSystemsType = require("./module-systems-type");
 const compoundExclude = require("./compound-exclude-type");
 const compoundDoNotFollowType = require("./compound-donot-follow-type");
+const reporterOptions = require("./reporter-options");
 
 module.exports = {
   definitions: {
@@ -139,12 +140,14 @@ module.exports = {
           items: {
             type: "string"
           }
-        }
+        },
+        reporterOptions: { $ref: "#/definitions/ReporterOptionsType" }
       }
     },
     ...moduleSystemsType.definitions,
     ...dependencyType.definitions,
     ...compoundExclude.definitions,
-    ...compoundDoNotFollowType.definitions
+    ...compoundDoNotFollowType.definitions,
+    ...reporterOptions.definitions
   }
 };

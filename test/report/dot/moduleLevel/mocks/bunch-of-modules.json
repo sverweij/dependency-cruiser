@@ -1,0 +1,68 @@
+{
+  "modules": [
+    {
+      "source": "src/coffee.coffee",
+      "dependencies": [],
+      "valid": true
+    },
+    {
+      "source": "src/javascript.js",
+      "dependencies": [],
+      "valid": true
+    },
+    {
+      "source": "src/json.json",
+      "dependencies": [],
+      "valid": true
+    },
+    {
+      "source": "src/litcoffee.litcoffee",
+      "dependencies": [],
+      "valid": true
+    },
+    {
+      "source": "src/litcoffeemarkdown.coffee.md",
+      "dependencies": [],
+      "valid": true
+    },
+    {
+      "source": "src/reactthing.cjsx",
+      "dependencies": [],
+      "valid": true
+    },
+    {
+      "source": "src/reactthing.csx",
+      "dependencies": [],
+      "valid": true
+    },
+    {
+      "source": "src/reactthing.jsx",
+      "dependencies": [],
+      "valid": true
+    },
+    {
+      "source": "src/reactthing.tsx",
+      "dependencies": [],
+      "valid": true
+    },
+    {
+      "source": "src/typescript.ts",
+      "dependencies": [],
+      "valid": true
+    }
+  ],
+  "summary": {
+    "violations": [],
+    "error": 0,
+    "warn": 0,
+    "info": 0,
+    "totalCruised": 10,
+    "optionsUsed": {
+      "outputTo": "richmodulecolor.json",
+      "moduleSystems": ["amd", "cjs", "es6"],
+      "outputType": "json",
+      "tsPreCompilationDeps": false,
+      "preserveSymlinks": false
+    }
+  }
+}
