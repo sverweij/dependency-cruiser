@@ -2,6 +2,7 @@
   "modules": [
     {
       "source": "src/use-maybe.ts",
+      "orphan": true,
       "dependencies": [],
       "valid": true
     }
@@ -17,11 +18,7 @@
       "combinedDependencies": false,
       "exoticRequireStrings": [],
       "externalModuleResolutionStrategy": "node_modules",
-      "moduleSystems": [
-        "amd",
-        "cjs",
-        "es6"
-      ],
+      "moduleSystems": ["amd", "cjs", "es6"],
       "preserveSymlinks": false,
       "tsPreCompilationDeps": false,
       "args": "src"

@@ -1,17 +1,4 @@
-const _get = require("lodash/get");
 const getCycle = require("./getCycle");
-
-function circularityDetectionNecessary(pOptions) {
-  if (pOptions.forceCircular) {
-    return true;
-  }
-  if (pOptions.validate) {
-    return _get(pOptions, "ruleSet.forbidden", []).some(pRule =>
-      pRule.to.hasOwnProperty("circular")
-    );
-  }
-  return false;
-}
 
 function addCircularityCheckToDependency(pToDep, pGraph, pFrom) {
   const lCycle = getCycle(pGraph, pFrom, pToDep.resolved);
@@ -31,7 +18,7 @@ function addCircularityCheckToDependency(pToDep, pGraph, pFrom) {
 }
 
 /**
- * Runs through all dependencies, for each of them determines
+ * Runs through all dependencies of all pModules, for each of them determines
  * whether it's (part of a) circular (relationship) and returns the
  * dependencies with that added.
  *
@@ -40,18 +27,10 @@ function addCircularityCheckToDependency(pToDep, pGraph, pFrom) {
  *                                of them added whether or not it is
  *                                part of
  */
-function addCircularityCheckToGraph(pModules) {
-  return pModules.map(pModule => ({
+module.exports = pModules =>
+  pModules.map(pModule => ({
     ...pModule,
     dependencies: pModule.dependencies.map(pToDep =>
       addCircularityCheckToDependency(pToDep, pModules, pModule.source)
     )
   }));
-}
-
-module.exports = (pModules, pOptions) => {
-  if (circularityDetectionNecessary(pOptions)) {
-    return addCircularityCheckToGraph(pModules);
-  }
-  return pModules;
-};

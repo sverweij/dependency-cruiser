@@ -1,161 +1,148 @@
 {
-    "modules": [
+  "modules": [
+    {
+      "source": "test/cli/fixtures/cjs/sub/depindir.js",
+      "orphan": false,
+      "dependencies": [
         {
-            "source": "test/cli/fixtures/cjs/sub/depindir.js",
-            "dependencies": [
-                {
-                    "resolved": "path",
-                    "coreModule": true,
-                    "followable": false,
-                    "couldNotResolve": false,
-                    "dependencyTypes": [
-                        "core"
-                    ],
-                    "dynamic": false,
-                    "module": "path",
-                    "moduleSystem": "cjs",
-                    "matchesDoNotFollow": false,
-                    "circular": false,
-                    "valid": true
-                }
-            ],
-            "valid": true
-        },
-        {
-            "source": "path",
-            "followable": false,
-            "coreModule": true,
-            "couldNotResolve": false,
-            "matchesDoNotFollow": false,
-            "dependencyTypes": [
-                "core"
-            ],
-            "dependencies": [],
-            "valid": true
-        },
-        {
-            "source": "test/cli/fixtures/cjs/sub/dir.js",
-            "dependencies": [
-                {
-                    "resolved": "test/cli/fixtures/cjs/sub/depindir.js",
-                    "coreModule": false,
-                    "followable": true,
-                    "couldNotResolve": false,
-                    "dependencyTypes": [
-                        "local"
-                    ],
-                    "dynamic": false,
-                    "module": "./depindir",
-                    "moduleSystem": "cjs",
-                    "matchesDoNotFollow": false,
-                    "circular": false,
-                    "valid": true
-                },
-                {
-                    "resolved": "path",
-                    "coreModule": true,
-                    "followable": false,
-                    "couldNotResolve": false,
-                    "dependencyTypes": [
-                        "core"
-                    ],
-                    "dynamic": false,
-                    "module": "path",
-                    "moduleSystem": "cjs",
-                    "matchesDoNotFollow": false,
-                    "circular": false,
-                    "valid": true
-                }
-            ],
-            "valid": true
-        },
-        {
-            "source": "test/cli/fixtures/duplicate-subs/sub/more-in-sub.js",
-            "dependencies": [],
-            "valid": true
-        },
-        {
-            "source": "test/cli/fixtures/unresolvable-in-sub/refers-to-an-unresolvable-module.js",
-            "dependencies": [
-                {
-                    "resolved": "./not-at-home",
-                    "coreModule": false,
-                    "followable": false,
-                    "couldNotResolve": true,
-                    "dependencyTypes": [
-                        "unknown"
-                    ],
-                    "dynamic": false,
-                    "module": "./not-at-home",
-                    "moduleSystem": "es6",
-                    "matchesDoNotFollow": false,
-                    "circular": false,
-                    "valid": true
-                },
-                {
-                    "resolved": "./this/path/does/not/exist",
-                    "coreModule": false,
-                    "followable": false,
-                    "couldNotResolve": true,
-                    "dependencyTypes": [
-                        "unknown"
-                    ],
-                    "dynamic": false,
-                    "module": "./this/path/does/not/exist",
-                    "moduleSystem": "es6",
-                    "matchesDoNotFollow": false,
-                    "circular": false,
-                    "valid": true
-                }
-            ],
-            "valid": true
-        },
-        {
-            "source": "./not-at-home",
-            "followable": false,
-            "coreModule": false,
-            "couldNotResolve": true,
-            "matchesDoNotFollow": false,
-            "dependencyTypes": [
-                "unknown"
-            ],
-            "dependencies": [],
-            "valid": true
-        },
-        {
-            "source": "./this/path/does/not/exist",
-            "followable": false,
-            "coreModule": false,
-            "couldNotResolve": true,
-            "matchesDoNotFollow": false,
-            "dependencyTypes": [
-                "unknown"
-            ],
-            "dependencies": [],
-            "valid": true
+          "resolved": "path",
+          "coreModule": true,
+          "followable": false,
+          "couldNotResolve": false,
+          "dependencyTypes": ["core"],
+          "dynamic": false,
+          "module": "path",
+          "moduleSystem": "cjs",
+          "matchesDoNotFollow": false,
+          "circular": false,
+          "valid": true
         }
-    ],
-    "summary": {
-        "violations": [],
-        "error": 0,
-        "warn": 0,
-        "info": 0,
-        "totalCruised": 7,
-        "totalDependenciesCruised": 5,
-        "optionsUsed": {
-            "args": "test/cli/fixtures/cjs/sub test/cli/fixtures/duplicate-subs/sub/more-in-sub.js test/cli/fixtures/unresolvable-in-sub",
-            "outputTo": "test/cli/output/multiple-in-one-go.json",
-            "moduleSystems": [
-                "amd",
-                "cjs",
-                "es6"
-            ],
-            "outputType": "json",
-            "tsPreCompilationDeps": false,
-            "combinedDependencies": false,
-            "exoticRequireStrings": [],
-            "preserveSymlinks": false,
-            "externalModuleResolutionStrategy": "node_modules"
+      ],
+      "valid": true
+    },
+    {
+      "source": "path",
+      "followable": false,
+      "coreModule": true,
+      "couldNotResolve": false,
+      "matchesDoNotFollow": false,
+      "dependencyTypes": ["core"],
+      "orphan": false,
+      "dependencies": [],
+      "valid": true
+    },
+    {
+      "source": "test/cli/fixtures/cjs/sub/dir.js",
+      "orphan": false,
+      "dependencies": [
+        {
+          "resolved": "test/cli/fixtures/cjs/sub/depindir.js",
+          "coreModule": false,
+          "followable": true,
+          "couldNotResolve": false,
+          "dependencyTypes": ["local"],
+          "dynamic": false,
+          "module": "./depindir",
+          "moduleSystem": "cjs",
+          "matchesDoNotFollow": false,
+          "circular": false,
+          "valid": true
+        },
+        {
+          "resolved": "path",
+          "coreModule": true,
+          "followable": false,
+          "couldNotResolve": false,
+          "dependencyTypes": ["core"],
+          "dynamic": false,
+          "module": "path",
+          "moduleSystem": "cjs",
+          "matchesDoNotFollow": false,
+          "circular": false,
+          "valid": true
         }
+      ],
+      "valid": true
+    },
+    {
+      "source": "test/cli/fixtures/duplicate-subs/sub/more-in-sub.js",
+      "orphan": true,
+      "dependencies": [],
+      "valid": true
+    },
+    {
+      "source": "test/cli/fixtures/unresolvable-in-sub/refers-to-an-unresolvable-module.js",
+      "orphan": false,
+      "dependencies": [
+        {
+          "resolved": "./not-at-home",
+          "coreModule": false,
+          "followable": false,
+          "couldNotResolve": true,
+          "dependencyTypes": ["unknown"],
+          "dynamic": false,
+          "module": "./not-at-home",
+          "moduleSystem": "es6",
+          "matchesDoNotFollow": false,
+          "circular": false,
+          "valid": true
+        },
+        {
+          "resolved": "./this/path/does/not/exist",
+          "coreModule": false,
+          "followable": false,
+          "couldNotResolve": true,
+          "dependencyTypes": ["unknown"],
+          "dynamic": false,
+          "module": "./this/path/does/not/exist",
+          "moduleSystem": "es6",
+          "matchesDoNotFollow": false,
+          "circular": false,
+          "valid": true
+        }
+      ],
+      "valid": true
+    },
+    {
+      "source": "./not-at-home",
+      "followable": false,
+      "coreModule": false,
+      "couldNotResolve": true,
+      "matchesDoNotFollow": false,
+      "dependencyTypes": ["unknown"],
+      "orphan": false,
+      "dependencies": [],
+      "valid": true
+    },
+    {
+      "source": "./this/path/does/not/exist",
+      "followable": false,
+      "coreModule": false,
+      "couldNotResolve": true,
+      "matchesDoNotFollow": false,
+      "dependencyTypes": ["unknown"],
+      "orphan": false,
+      "dependencies": [],
+      "valid": true
     }
+  ],
+  "summary": {
+    "violations": [],
+    "error": 0,
+    "warn": 0,
+    "info": 0,
+    "totalCruised": 7,
+    "totalDependenciesCruised": 5,
+    "optionsUsed": {
+      "args": "test/cli/fixtures/cjs/sub test/cli/fixtures/duplicate-subs/sub/more-in-sub.js test/cli/fixtures/unresolvable-in-sub",
+      "outputTo": "test/cli/output/multiple-in-one-go.json",
+      "moduleSystems": ["amd", "cjs", "es6"],
+      "outputType": "json",
+      "tsPreCompilationDeps": false,
+      "combinedDependencies": false,
+      "exoticRequireStrings": [],
+      "preserveSymlinks": false,
+      "externalModuleResolutionStrategy": "node_modules"
+    }
+  }
 }

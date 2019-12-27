@@ -1,81 +1,80 @@
 [
-    {
-        "title": "vue",
-        "input": {
-            "fileName": "test/extract/fixtures/vue/main.js"
-        },
-        "expected": [
-            {
-                "source": "test/extract/fixtures/vue/main.js",
-                "dependencies": [
-                    {
-                        "resolved": "test/extract/fixtures/vue/App.vue",
-                        "coreModule": false,
-                        "followable": true,
-                        "couldNotResolve": false,
-                        "dependencyTypes": [
-                            "local"
-                        ],
-                        "dynamic": false,
-                        "module": "./App.vue",
-                        "moduleSystem": "es6",
-                        "matchesDoNotFollow": false,
-                        "valid": true
-                    },
-                    {
-                        "resolved": "vue",
-                        "coreModule": false,
-                        "followable": false,
-                        "couldNotResolve": true,
-                        "dependencyTypes": [
-                            "unknown"
-                        ],
-                        "dynamic": false,
-                        "module": "vue",
-                        "moduleSystem": "es6",
-                        "matchesDoNotFollow": false,
-                        "valid": true
-                    }
-                ],
-                "valid": true
-            },
-            {
-                "source": "vue",
-                "followable": false,
-                "coreModule": false,
-                "couldNotResolve": true,
-                "matchesDoNotFollow": false,
-                "dependencyTypes": [
-                    "unknown"
-                ],
-                "dependencies": [],
-                "valid": true
-            },
-            {
-                "source": "test/extract/fixtures/vue/App.vue",
-                "dependencies": [
-                    {
-                        "resolved": "test/extract/fixtures/vue/components/HelloWorld.vue",
-                        "coreModule": false,
-                        "followable": true,
-                        "couldNotResolve": false,
-                        "dependencyTypes": [
-                            "local"
-                        ],
-                        "dynamic": false,
-                        "module": "./components/HelloWorld.vue",
-                        "moduleSystem": "es6",
-                        "matchesDoNotFollow": false,
-                        "valid": true
-                    }
-                ],
-                "valid": true
-            },
-            {
-                "source": "test/extract/fixtures/vue/components/HelloWorld.vue",
-                "dependencies": [],
-                "valid": true
-            }
-        ]
-    }
+  {
+    "title": "vue",
+    "input": {
+      "fileName": "test/extract/fixtures/vue/main.js"
+    },
+    "expected": [
+      {
+        "source": "test/extract/fixtures/vue/main.js",
+        "orphan": false,
+        "dependencies": [
+          {
+            "resolved": "test/extract/fixtures/vue/App.vue",
+            "coreModule": false,
+            "followable": true,
+            "couldNotResolve": false,
+            "dependencyTypes": ["local"],
+            "dynamic": false,
+            "circular": false,
+            "module": "./App.vue",
+            "moduleSystem": "es6",
+            "matchesDoNotFollow": false,
+            "valid": true
+          },
+          {
+            "resolved": "vue",
+            "coreModule": false,
+            "followable": false,
+            "couldNotResolve": true,
+            "dependencyTypes": ["unknown"],
+            "dynamic": false,
+            "circular": false,
+            "module": "vue",
+            "moduleSystem": "es6",
+            "matchesDoNotFollow": false,
+            "valid": true
+          }
+        ],
+        "valid": true
+      },
+      {
+        "source": "vue",
+        "followable": false,
+        "coreModule": false,
+        "couldNotResolve": true,
+        "matchesDoNotFollow": false,
+        "dependencyTypes": ["unknown"],
+        "orphan": false,
+        "dependencies": [],
+        "valid": true
+      },
+      {
+        "source": "test/extract/fixtures/vue/App.vue",
+        "orphan": false,
+        "dependencies": [
+          {
+            "resolved": "test/extract/fixtures/vue/components/HelloWorld.vue",
+            "coreModule": false,
+            "followable": true,
+            "couldNotResolve": false,
+            "dependencyTypes": ["local"],
+            "dynamic": false,
+            "circular": false,
+            "module": "./components/HelloWorld.vue",
+            "moduleSystem": "es6",
+            "matchesDoNotFollow": false,
+            "valid": true
+          }
+        ],
+        "valid": true
+      },
+      {
+        "source": "test/extract/fixtures/vue/components/HelloWorld.vue",
+        "orphan": false,
+        "dependencies": [],
+        "valid": true
+      }
+    ]
+  }
 ]

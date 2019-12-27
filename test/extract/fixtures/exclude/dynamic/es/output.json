@@ -2,18 +2,18 @@
   "modules": [
     {
       "source": "test/extract/fixtures/exclude/dynamic/es/src/circular.js",
+      "orphan": false,
       "dependencies": [
         {
           "resolved": "test/extract/fixtures/exclude/dynamic/es/src/index.js",
           "coreModule": false,
           "followable": true,
           "couldNotResolve": false,
-          "dependencyTypes": [
-            "local"
-          ],
+          "dependencyTypes": ["local"],
           "module": "./index",
           "moduleSystem": "es6",
           "dynamic": false,
+          "circular": false,
           "matchesDoNotFollow": false,
           "valid": true
         }
@@ -22,18 +22,18 @@
     },
     {
       "source": "test/extract/fixtures/exclude/dynamic/es/src/index.js",
+      "orphan": false,
       "dependencies": [
         {
           "resolved": "test/extract/fixtures/exclude/dynamic/es/src/dynamic-to-circular.js",
           "coreModule": false,
           "followable": true,
           "couldNotResolve": false,
-          "dependencyTypes": [
-            "local"
-          ],
+          "dependencyTypes": ["local"],
           "module": "./dynamic-to-circular",
           "moduleSystem": "es6",
           "dynamic": false,
+          "circular": false,
           "matchesDoNotFollow": false,
           "valid": true
         }
@@ -42,6 +42,7 @@
     },
     {
       "source": "test/extract/fixtures/exclude/dynamic/es/src/dynamic-to-circular.js",
+      "orphan": false,
       "dependencies": [],
       "valid": true
     }
@@ -58,11 +59,7 @@
         "dynamic": true
       },
       "externalModuleResolutionStrategy": "node_modules",
-      "moduleSystems": [
-        "amd",
-        "cjs",
-        "es6"
-      ],
+      "moduleSystems": ["amd", "cjs", "es6"],
       "preserveSymlinks": false,
       "tsPreCompilationDeps": false,
       "args": "./test/extract/fixtures/exclude/dynamic/es/src"

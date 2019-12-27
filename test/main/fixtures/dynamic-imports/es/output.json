@@ -2,6 +2,7 @@
   "modules": [
     {
       "source": "src/circular.js",
+      "orphan": false,
       "dependencies": [
         {
           "resolved": "src/index.js",
@@ -32,6 +33,7 @@
     },
     {
       "source": "src/index.js",
+      "orphan": false,
       "dependencies": [
         {
           "resolved": "src/dynamic-to-circular.js",
@@ -62,6 +64,7 @@
     },
     {
       "source": "src/dynamic-to-circular.js",
+      "orphan": false,
       "dependencies": [
         {
           "resolved": "src/circular.js",

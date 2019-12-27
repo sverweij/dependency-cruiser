@@ -19,8 +19,7 @@ const testPairs = [
     dirOrFile: "test/cli/fixtures/{{moduleType}}",
     options: {
       outputTo: path.join(OUT_DIR, "{{moduleType}}.dir.json"),
-      outputType: "json",
-      forceCircular: true
+      outputType: "json"
     },
     expect: "{{moduleType}}.dir.json",
     cleanup: true
@@ -31,8 +30,7 @@ const testPairs = [
     dirOrFile: "test/cli/fixtures/{{moduleType}}",
     options: {
       outputTo: path.join(OUT_DIR, "{{moduleType}}.dir.json"),
-      outputType: "json",
-      forceCircular: true
+      outputType: "json"
     },
     expect: "{{moduleType}}.dir.json",
     cleanup: true
@@ -43,8 +41,7 @@ const testPairs = [
     dirOrFile: "test/cli/fixtures/{{moduleType}}/root_one.js",
     options: {
       outputTo: path.join(OUT_DIR, "{{moduleType}}.file.json"),
-      outputType: "json",
-      forceCircular: true
+      outputType: "json"
     },
     expect: "{{moduleType}}.file.json",
     cleanup: true
@@ -56,7 +53,6 @@ const testPairs = [
     options: {
       outputTo: path.join(OUT_DIR, "{{moduleType}}.dir.filtered.json"),
       outputType: "json",
-      forceCircular: true,
       exclude: "node_modules"
     },
     expect: "{{moduleType}}.dir.filtered.json",
@@ -68,7 +64,6 @@ const testPairs = [
     options: {
       outputTo: path.join(OUT_DIR, "{{moduleType}}.dir.filtered.html"),
       outputType: "html",
-      forceCircular: true,
       validate: "test/cli/fixtures/rules.sub-not-allowed.json",
       exclude: "node_modules"
     },
@@ -82,7 +77,6 @@ const testPairs = [
       outputTo: path.join(OUT_DIR, "{{moduleType}}.dir.filtered.dot"),
       validate: "test/cli/fixtures/rules.sub-not-allowed.json",
       outputType: "dot",
-      forceCircular: true,
       exclude: "node_modules"
     },
     expect: "{{moduleType}}.dir.filtered.dot",
@@ -94,7 +88,6 @@ const testPairs = [
     options: {
       outputTo: path.join(OUT_DIR, "duplicate-subs.dot"),
       outputType: "dot",
-      forceCircular: true,
       exclude: "node_modules"
     },
     expect: "duplicate-subs.dot",
@@ -206,8 +199,7 @@ describe("cli/index", () => {
         ],
         {
           outputTo: lOutputTo,
-          outputType: "json",
-          forceCircular: true
+          outputType: "json"
         }
       );
 
@@ -268,8 +260,7 @@ describe("cli/index", () => {
         lCapturedStderr += pText;
       });
       const lExitCode = processCLI(["this-doesnot-exist"], {
-        outputTo: path.join(OUT_DIR, "cjs.dir.wontmarch.json"),
-        forceCircular: true
+        outputTo: path.join(OUT_DIR, "cjs.dir.wontmarch.json")
       });
 
       unhookInterceptStdOut();

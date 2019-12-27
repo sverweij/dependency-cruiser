@@ -136,20 +136,4 @@ export interface ICruiseOptions {
    * Options to tweak the output of reporters
    */
   reporterOptions?: IReporterOptions;
-  /**
-   * (API only) when set to `true` forces the extraction module to
-   * detect circular dependencies even when there is no rule in the rule
-   * set that requires it.
-   *
-   * Defaults to `false`
-   */
-  forceCircularCheck?: boolean;
-  /**
-   * (API only) when set to `true` forces the extraction module to
-   * detect orphan modules even when there is no rule in the rule
-   * set that requires it
-   *
-   * Defaults to `false`
-   */
-  forceOrphanCheck?: boolean;
 }

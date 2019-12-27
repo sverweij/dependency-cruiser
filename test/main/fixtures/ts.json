@@ -1,144 +1,142 @@
 {
-    "modules": [
+  "modules": [
+    {
+      "source": "test/main/fixtures/ts/index.ts",
+      "valid": true,
+      "orphan": false,
+      "dependencies": [
         {
-            "source": "test/main/fixtures/ts/index.ts",
-            "valid": true,
-            "dependencies": [
-                {
-                    "resolved": "test/main/fixtures/ts/javascriptThing.js",
-                    "coreModule": false,
-                    "followable": true,
-                    "matchesDoNotFollow": false,
-                    "couldNotResolve": false,
-                    "dependencyTypes": [
-                        "local"
-                    ],
-                    "dynamic": false,
-                    "module": "./javascriptThing",
-                    "moduleSystem": "es6",
-                    "valid": true
-                },
-                {
-                    "resolved": "test/main/fixtures/ts/sub/index.ts",
-                    "coreModule": false,
-                    "followable": true,
-                    "matchesDoNotFollow": false,
-                    "couldNotResolve": false,
-                    "dependencyTypes": [
-                        "local"
-                    ],
-                    "dynamic": false,
-                    "module": "./sub",
-                    "moduleSystem": "es6",
-                    "valid": true
-                },
-                {
-                    "resolved": "test/main/fixtures/ts/sub/kaching.ts",
-                    "coreModule": false,
-                    "followable": true,
-                    "matchesDoNotFollow": false,
-                    "couldNotResolve": false,
-                    "dependencyTypes": [
-                        "local"
-                    ],
-                    "dynamic": false,
-                    "module": "./sub/kaching",
-                    "moduleSystem": "es6",
-                    "valid": true
-                },
-                {
-                    "resolved": "test/main/fixtures/ts/sub/willBeReExported.ts",
-                    "coreModule": false,
-                    "followable": true,
-                    "matchesDoNotFollow": false,
-                    "couldNotResolve": false,
-                    "dependencyTypes": [
-                        "local"
-                    ],
-                    "dynamic": false,
-                    "module": "./sub/willBeReExported",
-                    "moduleSystem": "es6",
-                    "valid": true
-                },
-                {
-                    "resolved": "path",
-                    "coreModule": true,
-                    "followable": false,
-                    "matchesDoNotFollow": false,
-                    "couldNotResolve": false,
-                    "dependencyTypes": [
-                        "core"
-                    ],
-                    "dynamic": false,
-                    "module": "path",
-                    "moduleSystem": "es6",
-                    "valid": true
-                }
-            ]
+          "resolved": "test/main/fixtures/ts/javascriptThing.js",
+          "coreModule": false,
+          "followable": true,
+          "matchesDoNotFollow": false,
+          "couldNotResolve": false,
+          "dependencyTypes": ["local"],
+          "dynamic": false,
+          "circular": false,
+          "module": "./javascriptThing",
+          "moduleSystem": "es6",
+          "valid": true
         },
         {
-            "source": "path",
-            "followable": false,
-            "matchesDoNotFollow": false,
-            "coreModule": true,
-            "couldNotResolve": false,
-            "dependencyTypes": [
-                "core"
-            ],
-            "valid": true,
-            "dependencies": []
+          "resolved": "test/main/fixtures/ts/sub/index.ts",
+          "coreModule": false,
+          "followable": true,
+          "matchesDoNotFollow": false,
+          "couldNotResolve": false,
+          "dependencyTypes": ["local"],
+          "dynamic": false,
+          "circular": false,
+          "module": "./sub",
+          "moduleSystem": "es6",
+          "valid": true
         },
         {
-            "source": "test/main/fixtures/ts/javascriptThing.js",
-            "valid": true,
-            "dependencies": []
+          "resolved": "test/main/fixtures/ts/sub/kaching.ts",
+          "coreModule": false,
+          "followable": true,
+          "matchesDoNotFollow": false,
+          "couldNotResolve": false,
+          "dependencyTypes": ["local"],
+          "dynamic": false,
+          "circular": false,
+          "module": "./sub/kaching",
+          "moduleSystem": "es6",
+          "valid": true
         },
         {
-            "source": "test/main/fixtures/ts/sub/index.ts",
-            "valid": true,
-            "dependencies": [
-                {
-                    "resolved": "test/main/fixtures/ts/sub/willBeReExported.ts",
-                    "coreModule": false,
-                    "followable": true,
-                    "matchesDoNotFollow": false,
-                    "couldNotResolve": false,
-                    "dependencyTypes": [
-                        "local"
-                    ],
-                    "dynamic": false,
-                    "module": "./willBeReExported",
-                    "moduleSystem": "es6",
-                    "valid": true
-                }
-            ]
+          "resolved": "test/main/fixtures/ts/sub/willBeReExported.ts",
+          "coreModule": false,
+          "followable": true,
+          "matchesDoNotFollow": false,
+          "couldNotResolve": false,
+          "dependencyTypes": ["local"],
+          "dynamic": false,
+          "circular": false,
+          "module": "./sub/willBeReExported",
+          "moduleSystem": "es6",
+          "valid": true
         },
         {
-            "source": "test/main/fixtures/ts/sub/willBeReExported.ts",
-            "valid": true,
-            "dependencies": []
-        },
-        {
-            "source": "test/main/fixtures/ts/sub/kaching.ts",
-            "valid": true,
-            "dependencies": []
+          "resolved": "path",
+          "coreModule": true,
+          "followable": false,
+          "matchesDoNotFollow": false,
+          "couldNotResolve": false,
+          "dependencyTypes": ["core"],
+          "dynamic": false,
+          "circular": false,
+          "module": "path",
+          "moduleSystem": "es6",
+          "valid": true
         }
-    ],
-    "summary": {
-        "violations": [],
-        "error": 0,
-        "warn": 0,
-        "info": 0,
-        "totalCruised": 6,
-        "totalDependenciesCruised": 6,
-        "optionsUsed":{
-            "args": "test/main/fixtures/ts",
-            "moduleSystems": ["amd", "cjs", "es6"],
-            "tsPreCompilationDeps": false,
-            "preserveSymlinks": false,
-            "combinedDependencies": false,
-            "exoticRequireStrings": [],
-            "externalModuleResolutionStrategy": "node_modules"
+      ]
+    },
+    {
+      "source": "path",
+      "followable": false,
+      "matchesDoNotFollow": false,
+      "coreModule": true,
+      "couldNotResolve": false,
+      "dependencyTypes": ["core"],
+      "valid": true,
+      "orphan": false,
+      "dependencies": []
+    },
+    {
+      "source": "test/main/fixtures/ts/javascriptThing.js",
+      "valid": true,
+      "orphan": false,
+      "dependencies": []
+    },
+    {
+      "source": "test/main/fixtures/ts/sub/index.ts",
+      "valid": true,
+      "orphan": false,
+      "dependencies": [
+        {
+          "resolved": "test/main/fixtures/ts/sub/willBeReExported.ts",
+          "coreModule": false,
+          "followable": true,
+          "matchesDoNotFollow": false,
+          "couldNotResolve": false,
+          "dependencyTypes": ["local"],
+          "dynamic": false,
+          "circular": false,
+          "module": "./willBeReExported",
+          "moduleSystem": "es6",
+          "valid": true
         }
+      ]
+    },
+    {
+      "source": "test/main/fixtures/ts/sub/willBeReExported.ts",
+      "valid": true,
+      "orphan": false,
+      "dependencies": []
+    },
+    {
+      "source": "test/main/fixtures/ts/sub/kaching.ts",
+      "valid": true,
+      "orphan": false,
+      "dependencies": []
     }
+  ],
+  "summary": {
+    "violations": [],
+    "error": 0,
+    "warn": 0,
+    "info": 0,
+    "totalCruised": 6,
+    "totalDependenciesCruised": 6,
+    "optionsUsed": {
+      "args": "test/main/fixtures/ts",
+      "moduleSystems": ["amd", "cjs", "es6"],
+      "tsPreCompilationDeps": false,
+      "preserveSymlinks": false,
+      "combinedDependencies": false,
+      "exoticRequireStrings": [],
+      "externalModuleResolutionStrategy": "node_modules"
+    }
+  }
 }

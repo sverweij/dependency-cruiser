@@ -1,85 +1,80 @@
 {
-    "modules": [
+  "modules": [
+    {
+      "source": "test/cli/fixtures/webpackconfig/aliassy/src/configspullen/index.js",
+      "orphan": false,
+      "dependencies": [],
+      "valid": true
+    },
+    {
+      "source": "test/cli/fixtures/webpackconfig/aliassy/src/index.js",
+      "orphan": false,
+      "dependencies": [
         {
-            "source": "test/cli/fixtures/webpackconfig/aliassy/src/configspullen/index.js",
-            "dependencies": [],
-            "valid": true
+          "resolved": "test/cli/fixtures/webpackconfig/aliassy/src/configspullen/index.js",
+          "coreModule": false,
+          "followable": true,
+          "couldNotResolve": false,
+          "dependencyTypes": ["aliased"],
+          "dynamic": false,
+          "circular": false,
+          "module": "configSpullenAlias",
+          "moduleSystem": "cjs",
+          "matchesDoNotFollow": false,
+          "valid": true
         },
         {
-            "source": "test/cli/fixtures/webpackconfig/aliassy/src/index.js",
-            "dependencies": [
-                {
-                    "resolved": "test/cli/fixtures/webpackconfig/aliassy/src/configspullen/index.js",
-                    "coreModule": false,
-                    "followable": true,
-                    "couldNotResolve": false,
-                    "dependencyTypes": [
-                        "aliased"
-                    ],
-                    "dynamic": false,
-                    "module": "configSpullenAlias",
-                    "moduleSystem": "cjs",
-                    "matchesDoNotFollow": false,
-                    "valid": true
-                },
-                {
-                    "resolved": "test/cli/fixtures/webpackconfig/aliassy/src/configspullen/someconfig.json",
-                    "coreModule": false,
-                    "followable": false,
-                    "couldNotResolve": false,
-                    "dependencyTypes": [
-                        "aliased"
-                    ],
-                    "dynamic": false,
-                    "module": "configSpullenAlias/someconfig.json",
-                    "moduleSystem": "cjs",
-                    "matchesDoNotFollow": false,
-                    "valid": true
-                }
-            ],
-            "valid": true
-        },
-        {
-            "source": "test/cli/fixtures/webpackconfig/aliassy/src/configspullen/someconfig.json",
-            "followable": false,
-            "coreModule": false,
-            "couldNotResolve": false,
-            "matchesDoNotFollow": false,
-            "dependencyTypes": [
-                "aliased"
-            ],
-            "dependencies": [],
-            "valid": true
+          "resolved": "test/cli/fixtures/webpackconfig/aliassy/src/configspullen/someconfig.json",
+          "coreModule": false,
+          "followable": false,
+          "couldNotResolve": false,
+          "dependencyTypes": ["aliased"],
+          "dynamic": false,
+          "circular": false,
+          "module": "configSpullenAlias/someconfig.json",
+          "moduleSystem": "cjs",
+          "matchesDoNotFollow": false,
+          "valid": true
         }
-    ],
-    "summary": {
-        "violations": [],
-        "error": 0,
-        "warn": 0,
-        "info": 0,
-        "totalCruised": 3,
-        "totalDependenciesCruised": 2,
-        "ruleSetUsed": {
-            "forbidden": []
-        },
-        "optionsUsed": {
-            "args": "test/cli/fixtures/webpackconfig/aliassy/src",
-            "rulesFile": "test/cli/fixtures/webpackconfig/aliassy/dependency-cruiser-json-with-webpack-config.json",
-            "outputTo": "test/cli/output/webpack-config-alias-cruiser-config.json",
-            "moduleSystems": [
-                "amd",
-                "cjs",
-                "es6"
-            ],
-            "outputType": "json",
-            "tsPreCompilationDeps": false,
-            "combinedDependencies": false,
-            "exoticRequireStrings": [],
-            "preserveSymlinks": false,
-            "webpackConfig": {
-                "fileName": "test/cli/fixtures/webpackconfig/aliassy/webpack.regularexport.config.js"
-            },
-            "externalModuleResolutionStrategy": "node_modules"
-        }
+      ],
+      "valid": true
+    },
+    {
+      "source": "test/cli/fixtures/webpackconfig/aliassy/src/configspullen/someconfig.json",
+      "followable": false,
+      "coreModule": false,
+      "couldNotResolve": false,
+      "matchesDoNotFollow": false,
+      "dependencyTypes": ["aliased"],
+      "orphan": false,
+      "dependencies": [],
+      "valid": true
     }
+  ],
+  "summary": {
+    "violations": [],
+    "error": 0,
+    "warn": 0,
+    "info": 0,
+    "totalCruised": 3,
+    "totalDependenciesCruised": 2,
+    "ruleSetUsed": {
+      "forbidden": []
+    },
+    "optionsUsed": {
+      "args": "test/cli/fixtures/webpackconfig/aliassy/src",
+      "rulesFile": "test/cli/fixtures/webpackconfig/aliassy/dependency-cruiser-json-with-webpack-config.json",
+      "outputTo": "test/cli/output/webpack-config-alias-cruiser-config.json",
+      "moduleSystems": ["amd", "cjs", "es6"],
+      "outputType": "json",
+      "tsPreCompilationDeps": false,
+      "combinedDependencies": false,
+      "exoticRequireStrings": [],
+      "preserveSymlinks": false,
+      "webpackConfig": {
+        "fileName": "test/cli/fixtures/webpackconfig/aliassy/webpack.regularexport.config.js"
+      },
+      "externalModuleResolutionStrategy": "node_modules"
+    }
+  }
 }

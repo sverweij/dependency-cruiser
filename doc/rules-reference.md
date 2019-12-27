@@ -402,11 +402,6 @@ To detect orphan guys you can add e.g. this snippet to your
   part of a rule, the `to` part won't make sense. This is why
   dependency-cruiser will ignore the `to` part of these rules.
 - For similar reasons `orphan` is not allowed in the `to` part of rules.
-- (_for API users only_) to prevent dependency-cruiser from
-  needlessly running the orphan detection algorithm, it only runs it
-  when there's an orphan rule in the rule set. If you want to have
-  the detection in without a rule set or without an orphan rule,
-  pass `forceOrphanCheck: true` as part of the `pOptions` parameter.
 
 ### `reachable` - detecting dead wood
 
