@@ -1,16 +1,16 @@
 const fs = require("fs");
 const path = require("path");
 const expect = require("chai").expect;
-const render = require("../../../src/report/html");
+const render = require("../../../src/report/csv");
 const deps = require("./mocks/cjs-no-dependency-valid.json");
 
 const elFixture = fs.readFileSync(
-  path.join(__dirname, "mocks", "cjs-no-dependency-valid.html"),
+  path.join(__dirname, "mocks", "cjs-no-dependency-valid.csv"),
   "utf8"
 );
 
-describe("report/html reporter", () => {
-  it("renders html - modules in the root don't come in a cluster; and one module could not be resolved", () => {
+describe("report/csv reporter", () => {
+  it("renders csv", () => {
     const lRetval = render(deps);
 
     expect(lRetval.output).to.deep.equal(elFixture);

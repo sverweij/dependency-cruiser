@@ -1,0 +1,263 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <title>dependency-cruiser output</title>
+        <style media="screen">
+            html {
+                font-family: sans-serif;
+                font-size: 10pt;
+            }
+            table, td.controls {
+                transition-duration: 0.4s;
+            }
+            table, th, td{
+                border: solid black 1px;
+                border-collapse: collapse;
+                font-size: inherit;
+            }
+            th{
+                text-align:start;
+                vertical-align: bottom;
+                max-width: 1em;
+                max-height: 30em;
+                height: 20em;
+                font-weight: normal;
+                white-space: nowrap;
+                overflow: hidden;
+            }
+            th div {
+                transform: rotateZ(-90deg);
+                transform-origin: 0.5em;
+                text-align: start;
+                height: 1em;
+                width: 30em;
+                white-space: nowrap;
+                overflow: hidden;
+                text-overflow: ellipsis;
+            }
+            td {
+                text-align: center;
+            }
+            td.first-cell {
+                text-align: left;
+                white-space: nowrap;
+                overflow: hidden;
+                text-overflow: ellipsis;
+            }
+            td.top-left {
+                border-top: solid 1px transparent;
+                border-left: solid 1px transparent;
+            }
+            td.top-right {
+                border-top: solid 1px transparent;
+                border-right: solid 1px transparent;
+            }
+            td.bottom-left {
+                border-bottom: solid 1px transparent;
+                border-left: solid 1px transparent;
+            }
+            td.bottom-right {
+                border-bottom: solid 1px transparent;
+                border-right: solid 1px transparent;
+            }
+            tbody tr:hover {
+                background-color: lightgrey;
+            }
+            #table-rotated:target {
+                transform: rotateZ(45deg);
+                transform-origin: bottom left;
+            }
+            #table-rotated:target #unrotate {
+                opacity: 1;
+            }
+            #table-rotated:target #rotate {
+                opacity: 0;
+            }
+            #unrotate {
+                opacity: 0;
+            }
+            #rotate {
+                opacity: 1;
+            }
+            .controls {
+                opacity: 0.2;
+                vertical-align: bottom;
+                padding: 0.5em;
+            }
+            .controls:hover {
+                opacity: 1;
+            }
+            .controls a {
+                font-style: normal;
+                text-decoration: none;
+                background-color: #eee;
+                padding: 0.2em 0.5em 0.2em 0.5em;
+            }
+            .cell-core-module {
+                color: grey;
+                font-style: italic;
+            }
+            .cell-unresolvable-module {
+                color: red;
+                font-style: italic;
+            }
+            .cell-true {
+                background-color: black;
+                opacity: 0.5;
+            }
+            .cell-false {
+                background-color: white;
+                opacity: 0.5;
+            }
+            .cell-error {
+                background-color: red;
+                opacity: 0.5;
+            }
+            .cell-warn {
+                background-color: orange;
+                opacity: 0.5;
+            }
+            .cell-info {
+                background-color: blue;
+                opacity: 0.5;
+            }
+        </style>
+    </head>
+    <body>
+        <table id="table-rotated">
+            <thead>
+                <tr>
+                    <td class="controls top-left">
+                        <a id="rotate" href="#table-rotated">rotate</a>
+                        <a id="unrotate" href="#">rotate back</a>
+                    </td>
+                    <th><div>node_modules/somemodule/node_modules/someothermodule/main.js</div></th><th><div>node_modules/somemodule/src/moar-javascript.js</div></th><th><div>node_modules/somemodule/src/somemodule.js</div></th><th><div>one_only_one.js</div></th><th><div>one_only_two.js</div></th><th><div>root_one.js</div></th><th><div>root_two.js</div></th><th><div class="cell-unresolvable-module">shared.js</div></th><th><div>somedata.json</div></th><th><div>sub/depindir.js</div></th><th><div>sub/dir.js</div></th><th><div>two_only_one.js</div></th><th><div class="cell-core-module">fs</div></th><th><div class="cell-core-module">http</div></th><th><div class="cell-core-module">path</div></th>
+                    <td class="top-right"></td>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td class="first-cell">node_modules/somemodule/node_modules/someothermodule/main.js</td>
+                    <td class="cell cell-false"></td><td class="cell cell-false"></td><td class="cell cell-false"></td><td class="cell cell-false"></td><td class="cell cell-false"></td><td class="cell cell-false"></td><td class="cell cell-false"></td><td class="cell cell-false"></td><td class="cell cell-false"></td><td class="cell cell-false"></td><td class="cell cell-false"></td><td class="cell cell-false"></td><td class="cell cell-false"></td><td class="cell cell-false"></td><td class="cell cell-false"></td>
+                    <td class="first-cell">node_modules/somemodule/node_modules/someothermodule/main.js</td>
+                </tr>
+                <tr>
+                    <td class="first-cell">node_modules/somemodule/src/moar-javascript.js</td>
+                    <td class="cell cell-false"></td><td class="cell cell-false"></td><td class="cell cell-false"></td><td class="cell cell-false"></td><td class="cell cell-false"></td><td class="cell cell-false"></td><td class="cell cell-false"></td><td class="cell cell-false"></td><td class="cell cell-false"></td><td class="cell cell-false"></td><td class="cell cell-false"></td><td class="cell cell-false"></td><td class="cell cell-false"></td><td class="cell cell-false"></td><td class="cell cell-false"></td>
+                    <td class="first-cell">node_modules/somemodule/src/moar-javascript.js</td>
+                </tr>
+                <tr>
+                    <td class="first-cell">node_modules/somemodule/src/somemodule.js</td>
+                    <td class="cell cell-warn" title="unnamed:
+        node_modules/somemodule/src/somemodule.js ->
+        node_modules/somemodule/node_modules/someothermodule/main.js"></td><td class="cell cell-warn" title="unnamed:
+        node_modules/somemodule/src/somemodule.js ->
+        node_modules/somemodule/src/moar-javascript.js"></td><td class="cell cell-false"></td><td class="cell cell-false"></td><td class="cell cell-false"></td><td class="cell cell-false"></td><td class="cell cell-false"></td><td class="cell cell-false"></td><td class="cell cell-false"></td><td class="cell cell-false"></td><td class="cell cell-false"></td><td class="cell cell-false"></td><td class="cell cell-false"></td><td class="cell cell-false"></td><td class="cell cell-false"></td>
+                    <td class="first-cell">node_modules/somemodule/src/somemodule.js</td>
+                </tr>
+                <tr>
+                    <td class="first-cell">one_only_one.js</td>
+                    <td class="cell cell-false"></td><td class="cell cell-false"></td><td class="cell cell-false"></td><td class="cell cell-false"></td><td class="cell cell-false"></td><td class="cell cell-false"></td><td class="cell cell-false"></td><td class="cell cell-false"></td><td class="cell cell-false"></td><td class="cell cell-false"></td><td class="cell cell-false"></td><td class="cell cell-false"></td><td class="cell cell-false"></td><td class="cell cell-false"></td><td class="cell cell-warn" title="unnamed:
+        one_only_one.js ->
+        path"></td>
+                    <td class="first-cell">one_only_one.js</td>
+                </tr>
+                <tr>
+                    <td class="first-cell">one_only_two.js</td>
+                    <td class="cell cell-false"></td><td class="cell cell-false"></td><td class="cell cell-false"></td><td class="cell cell-false"></td><td class="cell cell-false"></td><td class="cell cell-false"></td><td class="cell cell-false"></td><td class="cell cell-false"></td><td class="cell cell-false"></td><td class="cell cell-false"></td><td class="cell cell-false"></td><td class="cell cell-false"></td><td class="cell cell-false"></td><td class="cell cell-false"></td><td class="cell cell-warn" title="unnamed:
+        one_only_two.js ->
+        path"></td>
+                    <td class="first-cell">one_only_two.js</td>
+                </tr>
+                <tr>
+                    <td class="first-cell">root_one.js</td>
+                    <td class="cell cell-false"></td><td class="cell cell-false"></td><td class="cell cell-warn" title="unnamed:
+        root_one.js ->
+        node_modules/somemodule/src/somemodule.js"></td><td class="cell cell-warn" title="unnamed:
+        root_one.js ->
+        one_only_one.js"></td><td class="cell cell-warn" title="unnamed:
+        root_one.js ->
+        one_only_two.js"></td><td class="cell cell-false"></td><td class="cell cell-false"></td><td class="cell cell-warn" title="unnamed:
+        root_one.js ->
+        shared.js"></td><td class="cell cell-false"></td><td class="cell cell-false"></td><td class="cell cell-warn" title="unnamed:
+        root_one.js ->
+        sub/dir.js"></td><td class="cell cell-false"></td><td class="cell cell-warn" title="unnamed:
+        root_one.js ->
+        fs"></td><td class="cell cell-false"></td><td class="cell cell-false"></td>
+                    <td class="first-cell">root_one.js</td>
+                </tr>
+                <tr>
+                    <td class="first-cell">root_two.js</td>
+                    <td class="cell cell-false"></td><td class="cell cell-false"></td><td class="cell cell-false"></td><td class="cell cell-false"></td><td class="cell cell-false"></td><td class="cell cell-false"></td><td class="cell cell-false"></td><td class="cell cell-warn" title="unnamed:
+        root_two.js ->
+        shared.js"></td><td class="cell cell-warn" title="unnamed:
+        root_two.js ->
+        somedata.json"></td><td class="cell cell-false"></td><td class="cell cell-false"></td><td class="cell cell-warn" title="unnamed:
+        root_two.js ->
+        two_only_one.js"></td><td class="cell cell-false"></td><td class="cell cell-warn" title="unnamed:
+        root_two.js ->
+        http"></td><td class="cell cell-false"></td>
+                    <td class="first-cell">root_two.js</td>
+                </tr>
+                <tr>
+                    <td class="first-cell cell-unresolvable-module">shared.js</td>
+                    <td class="cell cell-false"></td><td class="cell cell-false"></td><td class="cell cell-false"></td><td class="cell cell-false"></td><td class="cell cell-false"></td><td class="cell cell-false"></td><td class="cell cell-false"></td><td class="cell cell-false"></td><td class="cell cell-false"></td><td class="cell cell-false"></td><td class="cell cell-false"></td><td class="cell cell-false"></td><td class="cell cell-false"></td><td class="cell cell-false"></td><td class="cell cell-warn" title="unnamed:
+        shared.js ->
+        path"></td>
+                    <td class="first-cell cell-unresolvable-module">shared.js</td>
+                </tr>
+                <tr>
+                    <td class="first-cell">somedata.json</td>
+                    <td class="cell cell-false"></td><td class="cell cell-false"></td><td class="cell cell-false"></td><td class="cell cell-false"></td><td class="cell cell-false"></td><td class="cell cell-false"></td><td class="cell cell-false"></td><td class="cell cell-false"></td><td class="cell cell-false"></td><td class="cell cell-false"></td><td class="cell cell-false"></td><td class="cell cell-false"></td><td class="cell cell-false"></td><td class="cell cell-false"></td><td class="cell cell-false"></td>
+                    <td class="first-cell">somedata.json</td>
+                </tr>
+                <tr>
+                    <td class="first-cell">sub/depindir.js</td>
+                    <td class="cell cell-false"></td><td class="cell cell-false"></td><td class="cell cell-false"></td><td class="cell cell-false"></td><td class="cell cell-false"></td><td class="cell cell-false"></td><td class="cell cell-false"></td><td class="cell cell-false"></td><td class="cell cell-false"></td><td class="cell cell-false"></td><td class="cell cell-false"></td><td class="cell cell-false"></td><td class="cell cell-false"></td><td class="cell cell-false"></td><td class="cell cell-warn" title="unnamed:
+        sub/depindir.js ->
+        path"></td>
+                    <td class="first-cell">sub/depindir.js</td>
+                </tr>
+                <tr>
+                    <td class="first-cell">sub/dir.js</td>
+                    <td class="cell cell-false"></td><td class="cell cell-false"></td><td class="cell cell-false"></td><td class="cell cell-false"></td><td class="cell cell-false"></td><td class="cell cell-false"></td><td class="cell cell-false"></td><td class="cell cell-false"></td><td class="cell cell-false"></td><td class="cell cell-warn" title="unnamed:
+        sub/dir.js ->
+        sub/depindir.js"></td><td class="cell cell-false"></td><td class="cell cell-false"></td><td class="cell cell-false"></td><td class="cell cell-false"></td><td class="cell cell-warn" title="unnamed:
+        sub/dir.js ->
+        path"></td>
+                    <td class="first-cell">sub/dir.js</td>
+                </tr>
+                <tr>
+                    <td class="first-cell">two_only_one.js</td>
+                    <td class="cell cell-false"></td><td class="cell cell-false"></td><td class="cell cell-false"></td><td class="cell cell-false"></td><td class="cell cell-false"></td><td class="cell cell-false"></td><td class="cell cell-false"></td><td class="cell cell-false"></td><td class="cell cell-false"></td><td class="cell cell-false"></td><td class="cell cell-warn" title="unnamed:
+        two_only_one.js ->
+        sub/dir.js"></td><td class="cell cell-false"></td><td class="cell cell-false"></td><td class="cell cell-false"></td><td class="cell cell-false"></td>
+                    <td class="first-cell">two_only_one.js</td>
+                </tr>
+                <tr>
+                    <td class="first-cell cell-core-module">fs</td>
+                    <td class="cell cell-false"></td><td class="cell cell-false"></td><td class="cell cell-false"></td><td class="cell cell-false"></td><td class="cell cell-false"></td><td class="cell cell-false"></td><td class="cell cell-false"></td><td class="cell cell-false"></td><td class="cell cell-false"></td><td class="cell cell-false"></td><td class="cell cell-false"></td><td class="cell cell-false"></td><td class="cell cell-false"></td><td class="cell cell-false"></td><td class="cell cell-false"></td>
+                    <td class="first-cell cell-core-module">fs</td>
+                </tr>
+                <tr>
+                    <td class="first-cell cell-core-module">http</td>
+                    <td class="cell cell-false"></td><td class="cell cell-false"></td><td class="cell cell-false"></td><td class="cell cell-false"></td><td class="cell cell-false"></td><td class="cell cell-false"></td><td class="cell cell-false"></td><td class="cell cell-false"></td><td class="cell cell-false"></td><td class="cell cell-false"></td><td class="cell cell-false"></td><td class="cell cell-false"></td><td class="cell cell-false"></td><td class="cell cell-false"></td><td class="cell cell-false"></td>
+                    <td class="first-cell cell-core-module">http</td>
+                </tr>
+                <tr>
+                    <td class="first-cell cell-core-module">path</td>
+                    <td class="cell cell-false"></td><td class="cell cell-false"></td><td class="cell cell-false"></td><td class="cell cell-false"></td><td class="cell cell-false"></td><td class="cell cell-false"></td><td class="cell cell-false"></td><td class="cell cell-false"></td><td class="cell cell-false"></td><td class="cell cell-false"></td><td class="cell cell-false"></td><td class="cell cell-false"></td><td class="cell cell-false"></td><td class="cell cell-false"></td><td class="cell cell-false"></td>
+                    <td class="first-cell cell-core-module">path</td>
+                </tr>
+            </tbody>
+            <tfoot>
+                <tr>
+                    <td class="bottom-left"></td>
+                    <th><div>node_modules/somemodule/node_modules/someothermodule/main.js</div></th><th><div>node_modules/somemodule/src/moar-javascript.js</div></th><th><div>node_modules/somemodule/src/somemodule.js</div></th><th><div>one_only_one.js</div></th><th><div>one_only_two.js</div></th><th><div>root_one.js</div></th><th><div>root_two.js</div></th><th><div class="cell-unresolvable-module">shared.js</div></th><th><div>somedata.json</div></th><th><div>sub/depindir.js</div></th><th><div>sub/dir.js</div></th><th><div>two_only_one.js</div></th><th><div class="cell-core-module">fs</div></th><th><div class="cell-core-module">http</div></th><th><div class="cell-core-module">path</div></th>
+                    <td class="bottom-right"></td>
+                </tr>
+            </tfoot>
+        </table>
+    </body>
+</html>

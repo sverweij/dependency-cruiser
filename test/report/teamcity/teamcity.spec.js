@@ -29,7 +29,9 @@ describe("report/teamcity", () => {
     );
     const lResult = render(moduleErrs);
 
-    expect(removePerSessionAttributes(lResult.output)).to.equal(lFixture);
+    expect(removePerSessionAttributes(lResult.output)).to.equal(
+      removePerSessionAttributes(lFixture)
+    );
     // eslint-disable-next-line no-magic-numbers
     expect(lResult.exitCode).to.equal(5);
   });
