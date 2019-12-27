@@ -26,7 +26,9 @@ function pushRequireCallsToDependencies(
             module: pString,
             moduleSystem: pModuleSystem,
             dynamic: false,
-            ...(pName === "require" ? {} : { exoticRequire: pName })
+            ...(pName === "require"
+              ? { exoticallyRequired: false }
+              : { exoticallyRequired: true, exoticRequire: pName })
           });
         }
       }

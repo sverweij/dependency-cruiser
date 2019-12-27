@@ -1,28 +1,26 @@
 [
-    {
-        "resolved": "test/extract/fixtures/cjs-bangs/dependency.js",
-        "coreModule": false,
-        "dependencyTypes": [
-            "local"
-        ],
-        "dynamic": false,
-        "followable": true,
-        "matchesDoNotFollow": false,
-        "couldNotResolve": false,
-        "module": "./dependency",
-        "moduleSystem": "cjs"
-    },
-    {
-        "resolved": "ieeeeeeeee",
-        "coreModule": false,
-        "dependencyTypes": [
-            "unknown"
-        ],
-        "dynamic": false,
-        "followable": false,
-        "couldNotResolve": true,
-        "matchesDoNotFollow": false,
-        "module": "ieeeeeeeee",
-        "moduleSystem": "cjs"
-    }
+  {
+    "resolved": "test/extract/fixtures/cjs-bangs/dependency.js",
+    "coreModule": false,
+    "dependencyTypes": ["local"],
+    "dynamic": false,
+    "followable": true,
+    "exoticallyRequired": false,
+    "matchesDoNotFollow": false,
+    "couldNotResolve": false,
+    "module": "./dependency",
+    "moduleSystem": "cjs"
+  },
+  {
+    "resolved": "ieeeeeeeee",
+    "coreModule": false,
+    "dependencyTypes": ["unknown"],
+    "dynamic": false,
+    "followable": false,
+    "exoticallyRequired": false,
+    "couldNotResolve": true,
+    "matchesDoNotFollow": false,
+    "module": "ieeeeeeeee",
+    "moduleSystem": "cjs"
+  }
 ]

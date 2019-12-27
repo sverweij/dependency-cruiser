@@ -8,7 +8,7 @@ const expect = chai.expect;
 
 chai.use(require("chai-json-schema"));
 
-describe("extract/index - Max depth", () => {
+describe("extract/index - max depth", () => {
   /* eslint no-magic-numbers:0 */
   [0, 1, 2, 4].forEach(pDepth =>
     it(`returns the correct graph when max-depth === ${pDepth}`, () => {

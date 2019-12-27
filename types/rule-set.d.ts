@@ -46,6 +46,10 @@ export interface IToRestriction {
    */
   dynamic?: boolean;
   /**
+   * Whether or not to match when the dependency is exotically required
+   */
+  exoticallyRequired?: boolean;
+  /**
    * A regular expression to match against any 'exotic' require strings
    */
   exoticRequire?: string;

@@ -3,10 +3,11 @@
   "forbidden": [
     {
       "name": "not-to-unresolvable",
+      "comment": "This module tried to depend on something that can't be resolved to disk. Revise yer code",
       "from": {},
       "to": {
         "couldNotResolve": true,
-        "exoticRequireNot": "^tryRequire$"
+        "exoticallyRequired": false
       }
     },
     {
@@ -41,7 +42,7 @@
       },
       "to": {
         "pathNot": "$1|^node_modules|^(path|fs|module|package.json)$|^src/(utl|validate)",
-        "exoticRequireNot": "^tryRequire$"
+        "exoticallyRequired": false
       }
     },
     {
@@ -104,7 +105,17 @@
       "from": { "path": "^(bin|src)" },
       "to": {
         "dependencyTypes": ["npm-dev"],
-        "exoticRequireNot": "^tryRequire$"
+        "exoticallyRequired": false
+      }
+    },
+    {
+      "name": "only-try-require-exotic",
+      "severity": "error",
+      "comment": "The only 'exotic' require allowed is tryRequire",
+      "from": {},
+      "to": {
+        "exoticRequireNot": "^tryRequire$",
+        "exoticallyRequired": true
       }
     },
     {

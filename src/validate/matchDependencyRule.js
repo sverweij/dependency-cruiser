@@ -46,7 +46,8 @@ function match(pFrom, pTo) {
       propertyEquals(pTo, pRule, "preCompilationOnly") &&
       propertyEquals(pTo, pRule, "couldNotResolve") &&
       propertyEquals(pTo, pRule, "circular") &&
-      propertyEquals(pTo, pRule, "dynamic")
+      propertyEquals(pTo, pRule, "dynamic") &&
+      propertyEquals(pTo, pRule, "exoticallyRequired")
     );
   };
 }

@@ -4,7 +4,7 @@ const fs = require("fs");
 const path = require("path").posix;
 const expect = require("chai").expect;
 const intercept = require("intercept-stdout");
-const processCLI = require("../../src/cli");
+const cli = require("../../src/cli");
 const asserthelpers = require("../utl/asserthelpers.utl");
 const deleteDammit = require("./deleteDammit.utl");
 
@@ -160,7 +160,7 @@ function setModuleType(pTestPairs, pModuleType) {
 function runFileBasedTests(pModuleType) {
   setModuleType(testPairs, pModuleType).forEach(pPair => {
     it(pPair.description, () => {
-      const lExitCode = processCLI([pPair.dirOrFile], pPair.options);
+      const lExitCode = cli([pPair.dirOrFile], pPair.options);
 
       expect(lExitCode).to.equal(pPair.expectExitCode);
       if (pPair.options.outputType === "json") {
@@ -191,7 +191,7 @@ describe("cli/index", () => {
     it("dependency-cruises multiple files and folders in one go", () => {
       const lOutputFileName = "multiple-in-one-go.json";
       const lOutputTo = path.join(OUT_DIR, lOutputFileName);
-      const lExitCode = processCLI(
+      const lExitCode = cli(
         [
           "test/cli/fixtures/cjs/sub",
           "test/cli/fixtures/duplicate-subs/sub/more-in-sub.js",
@@ -213,7 +213,7 @@ describe("cli/index", () => {
     it("returns 0 even if there's transgressions when outputType !== 'err' ", () => {
       const lOutputFileName = "transgression-count.json";
       const lOutputTo = path.join(OUT_DIR, lOutputFileName);
-      const lExitCode = processCLI(["test/cli/fixtures/cjs"], {
+      const lExitCode = cli(["test/cli/fixtures/cjs"], {
         outputTo: lOutputTo,
         outputType: "json",
         validate: "test/cli/fixtures/rules.sub-not-allowed-error.json"
@@ -226,7 +226,7 @@ describe("cli/index", () => {
     it("returns the number of transgressions if outputType === 'err' ", () => {
       const lOutputFileName = "transgression-count.json";
       const lOutputTo = path.join(OUT_DIR, lOutputFileName);
-      const lExitCode = processCLI(["test/cli/fixtures/cjs"], {
+      const lExitCode = cli(["test/cli/fixtures/cjs"], {
         outputTo: lOutputTo,
         outputType: "err",
         validate: "test/cli/fixtures/rules.sub-not-allowed-error.json"
@@ -241,7 +241,7 @@ describe("cli/index", () => {
       const unhookIntercept = intercept(pText => {
         lCapturedStdout += pText;
       });
-      const lExitCode = processCLI(null, { info: true });
+      const lExitCode = cli(null, { info: true });
 
       unhookIntercept();
 
@@ -259,7 +259,7 @@ describe("cli/index", () => {
       const unhookInterceptStdErr = intercept(pText => {
         lCapturedStderr += pText;
       });
-      const lExitCode = processCLI(["this-doesnot-exist"], {
+      const lExitCode = cli(["this-doesnot-exist"], {
         outputTo: path.join(OUT_DIR, "cjs.dir.wontmarch.json")
       });
 
@@ -280,7 +280,7 @@ describe("cli/index", () => {
       const unhookInterceptStdErr = intercept(pText => {
         lCapturedStderr += pText;
       });
-      const lExitCode = processCLI(["test/cli/fixtures"], {
+      const lExitCode = cli(["test/cli/fixtures"], {
         outputTo: path.join(OUT_DIR, "file/you/cant/write/to")
       });
 
@@ -304,7 +304,7 @@ describe("cli/index", () => {
       const unhookInterceptStdErr = intercept(pText => {
         lCapturedStderr += pText;
       });
-      const lExitCode = processCLI(["test/cli/fixtures"]);
+      const lExitCode = cli(["test/cli/fixtures"]);
 
       unhookInterceptStdOut();
       unhookInterceptStdErr();
@@ -329,7 +329,7 @@ describe("cli/index", () => {
       });
 
       deleteDammit(lValidationFileName);
-      const lExitCode = processCLI(["test/cli/fixtures"], {
+      const lExitCode = cli(["test/cli/fixtures"], {
         init: "js"
       });
 
@@ -349,15 +349,12 @@ describe("cli/index", () => {
     it("dependency-cruise with a --webpack-config with an object export will respect the resolve stuff in there", () => {
       const lOutputFileName = "webpack-config-alias.json";
       const lOutputTo = path.join(OUT_DIR, lOutputFileName);
-      const lExitCode = processCLI(
-        ["test/cli/fixtures/webpackconfig/aliassy/src"],
-        {
-          outputTo: lOutputTo,
-          outputType: "json",
-          webpackConfig:
-            "test/cli/fixtures/webpackconfig/aliassy/webpack.regularexport.config.js"
-        }
-      );
+      const lExitCode = cli(["test/cli/fixtures/webpackconfig/aliassy/src"], {
+        outputTo: lOutputTo,
+        outputType: "json",
+        webpackConfig:
+          "test/cli/fixtures/webpackconfig/aliassy/webpack.regularexport.config.js"
+      });
 
       expect(lExitCode).to.equal(0);
       asserthelpers.assertJSONFileEqual(
@@ -369,15 +366,12 @@ describe("cli/index", () => {
     it("dependency-cruise with a .dependency-cruiser config with a webpackConfig section will respect that config", () => {
       const lOutputFileName = "webpack-config-alias-cruiser-config.json";
       const lOutputTo = path.join(OUT_DIR, lOutputFileName);
-      const lExitCode = processCLI(
-        ["test/cli/fixtures/webpackconfig/aliassy/src"],
-        {
-          outputTo: lOutputTo,
-          outputType: "json",
-          validate:
-            "test/cli/fixtures/webpackconfig/aliassy/dependency-cruiser-json-with-webpack-config.json"
-        }
-      );
+      const lExitCode = cli(["test/cli/fixtures/webpackconfig/aliassy/src"], {
+        outputTo: lOutputTo,
+        outputType: "json",
+        validate:
+          "test/cli/fixtures/webpackconfig/aliassy/dependency-cruiser-json-with-webpack-config.json"
+      });
 
       expect(lExitCode).to.equal(0);
       asserthelpers.assertJSONFileEqual(
@@ -390,7 +384,7 @@ describe("cli/index", () => {
   it("dependency-cruise with a --ts-config will respect the configuration in there (working dynamic imports)", () => {
     const lOutputFileName = "dynamic-import-ok.json";
     const lOutputTo = path.join(OUT_DIR, lOutputFileName);
-    const lExitCode = processCLI(
+    const lExitCode = cli(
       [
         "test/cli/fixtures/typescriptconfig/cli-dynamic-imports/import_dynamically.ts"
       ],
@@ -412,7 +406,7 @@ describe("cli/index", () => {
   it("dependency-cruise with a --ts-config will respect the configuration in there", () => {
     const lOutputFileName = "dynamic-import-nok.json";
     const lOutputTo = path.join(OUT_DIR, lOutputFileName);
-    const lExitCode = processCLI(
+    const lExitCode = cli(
       [
         "test/cli/fixtures/typescriptconfig/cli-dynamic-imports/import_dynamically2.ts"
       ],
@@ -435,7 +429,7 @@ describe("cli/index", () => {
     const lOutputFileName = "typescript-path-resolution.json";
     const lOutputTo = path.join(OUT_DIR, lOutputFileName);
 
-    const lExitCode = processCLI(
+    const lExitCode = cli(
       ["test/cli/fixtures/typescriptconfig/cli-config-with-path/src"],
       {
         outputTo: lOutputTo,

@@ -8,6 +8,7 @@
           "resolved": "test/extract/fixtures/exclude/path/es/src/index.js",
           "coreModule": false,
           "followable": true,
+          "exoticallyRequired": false,
           "couldNotResolve": false,
           "dependencyTypes": ["local"],
           "module": "./index",

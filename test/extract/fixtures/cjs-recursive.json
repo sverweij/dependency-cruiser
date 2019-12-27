@@ -32,6 +32,7 @@
             "dynamic": false,
             "circular": false,
             "followable": true,
+            "exoticallyRequired": false,
             "matchesDoNotFollow": false,
             "couldNotResolve": false,
             "valid": true
@@ -45,6 +46,7 @@
             "dynamic": false,
             "circular": false,
             "followable": false,
+            "exoticallyRequired": false,
             "matchesDoNotFollow": false,
             "couldNotResolve": false,
             "valid": true
@@ -58,6 +60,7 @@
             "dynamic": false,
             "circular": false,
             "followable": true,
+            "exoticallyRequired": false,
             "matchesDoNotFollow": false,
             "couldNotResolve": false,
             "valid": true
@@ -71,6 +74,7 @@
             "dynamic": false,
             "circular": false,
             "followable": false,
+            "exoticallyRequired": false,
             "matchesDoNotFollow": false,
             "couldNotResolve": false,
             "valid": true
@@ -113,6 +117,7 @@
             "dynamic": false,
             "circular": false,
             "followable": false,
+            "exoticallyRequired": false,
             "matchesDoNotFollow": false,
             "couldNotResolve": false,
             "valid": true
@@ -144,6 +149,7 @@
             "dynamic": false,
             "circular": false,
             "followable": true,
+            "exoticallyRequired": false,
             "matchesDoNotFollow": false,
             "couldNotResolve": false,
             "valid": true
@@ -164,6 +170,7 @@
             "dynamic": false,
             "circular": false,
             "followable": true,
+            "exoticallyRequired": false,
             "matchesDoNotFollow": false,
             "couldNotResolve": false,
             "valid": true
@@ -177,6 +184,7 @@
             "dynamic": false,
             "circular": false,
             "followable": false,
+            "exoticallyRequired": false,
             "matchesDoNotFollow": false,
             "couldNotResolve": false,
             "valid": true
@@ -197,6 +205,7 @@
             "dynamic": false,
             "circular": false,
             "followable": false,
+            "exoticallyRequired": false,
             "matchesDoNotFollow": false,
             "couldNotResolve": false,
             "valid": true
@@ -228,6 +237,7 @@
             "dynamic": false,
             "circular": false,
             "followable": true,
+            "exoticallyRequired": false,
             "matchesDoNotFollow": false,
             "couldNotResolve": false,
             "valid": true
@@ -241,6 +251,7 @@
             "dynamic": false,
             "circular": false,
             "followable": true,
+            "exoticallyRequired": false,
             "matchesDoNotFollow": false,
             "couldNotResolve": false,
             "valid": true
@@ -254,6 +265,7 @@
             "dynamic": false,
             "circular": false,
             "followable": true,
+            "exoticallyRequired": false,
             "matchesDoNotFollow": false,
             "couldNotResolve": false,
             "valid": true
@@ -267,6 +279,7 @@
             "dynamic": false,
             "circular": false,
             "followable": true,
+            "exoticallyRequired": false,
             "matchesDoNotFollow": false,
             "couldNotResolve": false,
             "valid": true
@@ -280,6 +293,7 @@
             "dynamic": false,
             "circular": false,
             "followable": false,
+            "exoticallyRequired": false,
             "matchesDoNotFollow": false,
             "couldNotResolve": false,
             "valid": true
@@ -311,6 +325,7 @@
             "dynamic": false,
             "circular": false,
             "followable": false,
+            "exoticallyRequired": false,
             "matchesDoNotFollow": false,
             "couldNotResolve": false,
             "valid": true
@@ -342,6 +357,7 @@
             "dynamic": false,
             "circular": false,
             "followable": false,
+            "exoticallyRequired": false,
             "matchesDoNotFollow": false,
             "couldNotResolve": false,
             "valid": true
@@ -362,6 +378,7 @@
             "dynamic": false,
             "circular": false,
             "followable": false,
+            "exoticallyRequired": false,
             "matchesDoNotFollow": false,
             "couldNotResolve": false,
             "valid": true
@@ -382,6 +399,7 @@
             "dynamic": false,
             "circular": false,
             "followable": true,
+            "exoticallyRequired": false,
             "matchesDoNotFollow": false,
             "couldNotResolve": false,
             "valid": true
@@ -395,6 +413,7 @@
             "dynamic": false,
             "circular": false,
             "followable": false,
+            "exoticallyRequired": false,
             "matchesDoNotFollow": false,
             "couldNotResolve": false,
             "valid": true
@@ -415,6 +434,7 @@
             "dynamic": false,
             "circular": false,
             "followable": false,
+            "exoticallyRequired": false,
             "matchesDoNotFollow": false,
             "couldNotResolve": false,
             "valid": true
@@ -455,6 +475,7 @@
             "dependencyTypes": ["local"],
             "dynamic": false,
             "followable": true,
+            "exoticallyRequired": false,
             "matchesDoNotFollow": false,
             "couldNotResolve": false,
             "valid": true,
@@ -468,6 +489,7 @@
             "dependencyTypes": ["local"],
             "dynamic": false,
             "followable": true,
+            "exoticallyRequired": false,
             "matchesDoNotFollow": false,
             "couldNotResolve": false,
             "valid": false,
@@ -505,6 +527,7 @@
             "dynamic": false,
             "circular": false,
             "followable": true,
+            "exoticallyRequired": false,
             "matchesDoNotFollow": false,
             "couldNotResolve": false,
             "valid": false,
@@ -543,6 +566,7 @@
             "dependencyTypes": ["local"],
             "dynamic": false,
             "followable": true,
+            "exoticallyRequired": false,
             "matchesDoNotFollow": false,
             "couldNotResolve": false,
             "valid": true,
@@ -563,6 +587,7 @@
             "dependencyTypes": ["local"],
             "dynamic": false,
             "followable": true,
+            "exoticallyRequired": false,
             "matchesDoNotFollow": false,
             "couldNotResolve": false,
             "valid": true,
@@ -589,6 +614,7 @@
             "dependencyTypes": ["local"],
             "dynamic": false,
             "followable": true,
+            "exoticallyRequired": false,
             "matchesDoNotFollow": false,
             "couldNotResolve": false,
             "valid": true,
@@ -614,6 +640,7 @@
             "dependencyTypes": ["local"],
             "dynamic": false,
             "followable": true,
+            "exoticallyRequired": false,
             "matchesDoNotFollow": false,
             "couldNotResolve": false,
             "valid": true,

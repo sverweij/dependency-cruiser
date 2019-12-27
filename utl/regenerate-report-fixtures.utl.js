@@ -6,7 +6,7 @@ const renderTeamcity = require("../src/report/teamcity");
 const renderHTML = require("../src/report/html");
 const renderCSV = require("../src/report/csv");
 
-function thingify(pInputFileName, pOutputFileName, pFunction) {
+function transformJSONtoFile(pInputFileName, pOutputFileName, pFunction) {
   fs.writeFileSync(
     pOutputFileName,
     pFunction(JSON.parse(fs.readFileSync(pInputFileName, "utf8"))).output,
@@ -14,7 +14,7 @@ function thingify(pInputFileName, pOutputFileName, pFunction) {
   );
 }
 
-function regenerateFixtures(pDir, pFunction, pTargetExtension) {
+function regenerateReportFixtures(pDir, pFunction, pTargetExtension) {
   fs.readdirSync(pDir)
     .filter(pFileName => pFileName.endsWith(".json"))
     .map(pFileName => ({
@@ -25,7 +25,7 @@ function regenerateFixtures(pDir, pFunction, pTargetExtension) {
       )
     }))
     .forEach(pPair => {
-      thingify(pPair.inputFileName, pPair.outputFileName, pFunction);
+      transformJSONtoFile(pPair.inputFileName, pPair.outputFileName, pFunction);
     });
 }
 
@@ -59,9 +59,17 @@ const TEAMCITY_MOCK_DIR = path.join(
 const HTML_MOCK_DIR = path.join(__dirname, "../test/report/html/mocks/");
 const CSV_MOCK_DIR = path.join(__dirname, "../test/report/csv/mocks/");
 
-regenerateFixtures(DDOT_MOCK_DIR, renderDdot, ".dot");
-regenerateFixtures(DOT_MOCK_DIR, renderBareThemeDot, ".dot");
-regenerateFixtures(DOT_MOCK_DIR, renderDefaultThemeDot, "-default-theme.dot");
-regenerateFixtures(TEAMCITY_MOCK_DIR, renderTeamcity, "-teamcity-format.txt");
-regenerateFixtures(HTML_MOCK_DIR, renderHTML, ".html");
-regenerateFixtures(CSV_MOCK_DIR, renderCSV, ".csv");
+regenerateReportFixtures(DDOT_MOCK_DIR, renderDdot, ".dot");
+regenerateReportFixtures(DOT_MOCK_DIR, renderBareThemeDot, ".dot");
+regenerateReportFixtures(
+  DOT_MOCK_DIR,
+  renderDefaultThemeDot,
+  "-default-theme.dot"
+);
+regenerateReportFixtures(
+  TEAMCITY_MOCK_DIR,
+  renderTeamcity,
+  "-teamcity-format.txt"
+);
+regenerateReportFixtures(HTML_MOCK_DIR, renderHTML, ".html");
+regenerateReportFixtures(CSV_MOCK_DIR, renderCSV, ".csv");

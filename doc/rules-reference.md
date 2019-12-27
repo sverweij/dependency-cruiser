@@ -38,7 +38,7 @@
    - [`dependencyTypes`](#dependencytypes)
    - [`dynamic`](#dynamic)
    - [`moreThanOneDependencyType`](#more-than-one-dependencytype-per-dependency-morethanonedependencytype)
-   - [`exoticRequire` and `exoticRequireNot`](#exoticrequire-and-exoticrequirenot)
+   - [`exoticRequire` and `exoticRequireNot`](#exoticallyrequired-exoticrequire-and-exoticrequirenot)
    - [`preCompilationOnly`](#precompilationonly)
 4. [The `options`](#the-options)
    - [`doNotFollow`: don't cruise modules adhering to this pattern any further](#donotfollow-dont-cruise-modules-adhering-to-this-pattern-any-further)
@@ -687,7 +687,7 @@ When left out it doesn't matter how many dependency types a dependency has.
 (If you're more of an 'allowed' user: it matches the 0 and 1 cases when set to
 false).
 
-### `exoticRequire` and `exoticRequireNot`
+### `exoticallyRequired`, `exoticRequire` and `exoticRequireNot`
 
 For exotic requires/ require wrappers you might want to have different
 rules a.c.t. normal requires. E.g.
@@ -695,8 +695,8 @@ rules a.c.t. normal requires. E.g.
 - When you use a require wrapper to include a dependency that might not be there
   and handle it elegantly, it's not an error if the module-to-be-there doesn't
   actually exist - or is e.g. in your optionalDependencies.
-- You might want to ban the use of remapped requires/ require wrappers in certain
-  areas (or altogether).
+- You might want to only allow the use of certain dependencies through an
+  exotic require:
 
 ```json
 {
@@ -705,10 +705,12 @@ rules a.c.t. normal requires. E.g.
   "from": {},
   "to": {
     "dependencyTypes": ["npm-optional"],
-    "exoticRequireNot": "^tryRequire$"
+    "exoticallyRequired": false
   }
 }
 ```
+
+- ... or ban exotic requires altogether:
 
 ```json
 {
@@ -716,7 +718,22 @@ rules a.c.t. normal requires. E.g.
   "severity": "error",
   "from": {},
   "to": {
-    "exoticRequire": ".+"
+    "exoticallyRequired": true
+  }
+}
+```
+
+- Or allow only one specific:
+
+```json
+{
+  "name": "only-window-require-exotic",
+  "severity": "error",
+  "comment": "The only 'exotic' require allowed is window.require",
+  "from": {},
+  "to": {
+    "exoticRequireNot": "^window\\.require$",
+    "exoticallyRequired": true
   }
 }
 ```

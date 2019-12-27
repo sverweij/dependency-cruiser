@@ -6,8 +6,20 @@ const cjsThingThing = require('./cjs-thing').thing;
 const wappie = require('zoinks!./wappie');
 ```
 These all land up post compile time => can be handled by acorn/
-the javascript ASt.
+the javascript AST.
 
+In commonjs and AMD it's possible to either _rename_ or _wrap_ your require
+functions either to hack around a particular issue (e.g. force require cache
+to not be used, require modules that might not be there without having to
+try catch, you're using the require keyword for something else) or just for
+the lulz:
+
+```javascript
+const tryRequire = require('semver-try-require');
+const need = require;
+const whoadash = need('whoadash');
+const dunnoItBeThere = tryRequire('nodash');
+```
 
 Export equals imports are specific for typescript:
 ```typescript
@@ -32,8 +44,6 @@ import('aju').then(aju => aju.paraplu());
 Same shortcoming as the import `yadda = require('aju')` thing when
 downcompiling - and likewise supported when ts-precompilation-deps
 are _on_.
-
-
 
 Regular (es6 style) imports need to be handled by surfing the typescript AST,
 as the typescript compiler output won't contain references to types

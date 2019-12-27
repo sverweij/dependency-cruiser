@@ -1,147 +1,134 @@
 {
- "modules": [
-  {
-   "source": "./test/extract/fixtures/cache-busting/index.ts",
-   "orphan": false,
-   "dependencies": [
+  "modules": [
     {
-     "resolved": "test/extract/fixtures/cache-busting/local.js",
-     "coreModule": false,
-     "followable": true,
-     "couldNotResolve": false,
-     "dependencyTypes": [
-      "local"
-     ],
-     "dynamic": false,
-     "circular": false,
-     "module": "./local",
-     "moduleSystem": "cjs",
-     "matchesDoNotFollow": false,
-     "valid": true
+      "source": "./test/extract/fixtures/cache-busting/index.ts",
+      "orphan": false,
+      "dependencies": [
+        {
+          "resolved": "test/extract/fixtures/cache-busting/local.js",
+          "coreModule": false,
+          "followable": true,
+          "exoticallyRequired": false,
+          "couldNotResolve": false,
+          "dependencyTypes": ["local"],
+          "dynamic": false,
+          "circular": false,
+          "module": "./local",
+          "moduleSystem": "cjs",
+          "matchesDoNotFollow": false,
+          "valid": true
+        },
+        {
+          "resolved": "test/extract/fixtures/cache-busting/node_modules/different-in-other-tree/index-a.js",
+          "coreModule": false,
+          "followable": false,
+          "exoticallyRequired": false,
+          "couldNotResolve": false,
+          "dependencyTypes": ["npm"],
+          "dynamic": false,
+          "circular": false,
+          "module": "different-in-other-tree",
+          "moduleSystem": "es6",
+          "matchesDoNotFollow": true,
+          "valid": true
+        },
+        {
+          "resolved": "path",
+          "coreModule": true,
+          "followable": false,
+          "exoticallyRequired": false,
+          "couldNotResolve": false,
+          "dependencyTypes": ["core"],
+          "dynamic": false,
+          "circular": false,
+          "module": "path",
+          "moduleSystem": "es6",
+          "matchesDoNotFollow": false,
+          "valid": false,
+          "rules": [
+            {
+              "severity": "error",
+              "name": "burp-on-core"
+            }
+          ]
+        }
+      ],
+      "valid": true
     },
     {
-     "resolved": "test/extract/fixtures/cache-busting/node_modules/different-in-other-tree/index-a.js",
-     "coreModule": false,
-     "followable": false,
-     "couldNotResolve": false,
-     "dependencyTypes": [
-      "npm"
-     ],
-     "dynamic": false,
-     "circular": false,
-     "module": "different-in-other-tree",
-     "moduleSystem": "es6",
-     "matchesDoNotFollow": true,
-     "valid": true
+      "source": "test/extract/fixtures/cache-busting/node_modules/different-in-other-tree/index-a.js",
+      "orphan": false,
+      "followable": false,
+      "coreModule": false,
+      "couldNotResolve": false,
+      "matchesDoNotFollow": true,
+      "dependencyTypes": ["npm"],
+      "dependencies": [],
+      "valid": true
     },
     {
-     "resolved": "path",
-     "coreModule": true,
-     "followable": false,
-     "couldNotResolve": false,
-     "dependencyTypes": [
-      "core"
-     ],
-     "dynamic": false,
-     "circular": false,
-     "module": "path",
-     "moduleSystem": "es6",
-     "matchesDoNotFollow": false,
-     "valid": false,
-     "rules": [
-      {
-       "severity": "error",
-       "name": "burp-on-core"
-      }
-     ]
+      "source": "path",
+      "orphan": false,
+      "followable": false,
+      "coreModule": true,
+      "couldNotResolve": false,
+      "matchesDoNotFollow": false,
+      "dependencyTypes": ["core"],
+      "dependencies": [],
+      "valid": true
+    },
+    {
+      "source": "test/extract/fixtures/cache-busting/local.js",
+      "orphan": false,
+      "dependencies": [],
+      "valid": true
     }
-   ],
-   "valid": true
-  },
-  {
-   "source": "test/extract/fixtures/cache-busting/node_modules/different-in-other-tree/index-a.js",
-   "orphan": false,
-   "followable": false,
-   "coreModule": false,
-   "couldNotResolve": false,
-   "matchesDoNotFollow": true,
-   "dependencyTypes": [
-    "npm"
-   ],
-   "dependencies": [],
-   "valid": true
-  },
-  {
-   "source": "path",
-   "orphan": false,
-   "followable": false,
-   "coreModule": true,
-   "couldNotResolve": false,
-   "matchesDoNotFollow": false,
-   "dependencyTypes": [
-    "core"
-   ],
-   "dependencies": [],
-   "valid": true
-  },
-  {
-   "source": "test/extract/fixtures/cache-busting/local.js",
-   "orphan": false,
-   "dependencies": [],
-   "valid": true
-  }
- ],
- "summary": {
-  "violations": [
-   {
-    "from": "./test/extract/fixtures/cache-busting/index.ts",
-    "to": "path",
-    "rule": {
-     "severity": "error",
-     "name": "burp-on-core"
-    }
-   }
   ],
-  "error": 1,
-  "warn": 0,
-  "info": 0,
-  "totalCruised": 4,
-  "totalDependenciesCruised": 3,
-  "optionsUsed": {
-   "args": "./test/extract/fixtures/cache-busting/index.ts",
-   "combinedDependencies": false,
-   "exoticRequireStrings": [],
-   "doNotFollow": {
-    "dependencyTypes": [
-     "npm",
-     "npm-dev",
-     "npm-optional",
-     "npm-peer",
-     "npm-bundled"
-    ]
-   },
-   "externalModuleResolutionStrategy": "node_modules",
-   "moduleSystems": [
-    "amd",
-    "cjs",
-    "es6"
-   ],
-   "preserveSymlinks": false,
-   "tsPreCompilationDeps": true
-  },
-  "ruleSetUsed": {
-   "forbidden": [
-    {
-     "name": "burp-on-core",
-     "severity": "error",
-     "from": {},
-     "to": {
-      "dependencyTypes": [
-       "core"
+  "summary": {
+    "violations": [
+      {
+        "from": "./test/extract/fixtures/cache-busting/index.ts",
+        "to": "path",
+        "rule": {
+          "severity": "error",
+          "name": "burp-on-core"
+        }
+      }
+    ],
+    "error": 1,
+    "warn": 0,
+    "info": 0,
+    "totalCruised": 4,
+    "totalDependenciesCruised": 3,
+    "optionsUsed": {
+      "args": "./test/extract/fixtures/cache-busting/index.ts",
+      "combinedDependencies": false,
+      "exoticRequireStrings": [],
+      "doNotFollow": {
+        "dependencyTypes": [
+          "npm",
+          "npm-dev",
+          "npm-optional",
+          "npm-peer",
+          "npm-bundled"
+        ]
+      },
+      "externalModuleResolutionStrategy": "node_modules",
+      "moduleSystems": ["amd", "cjs", "es6"],
+      "preserveSymlinks": false,
+      "tsPreCompilationDeps": true
+    },
+    "ruleSetUsed": {
+      "forbidden": [
+        {
+          "name": "burp-on-core",
+          "severity": "error",
+          "from": {},
+          "to": {
+            "dependencyTypes": ["core"]
+          }
+        }
       ]
-     }
     }
-   ]
   }
- }
 }

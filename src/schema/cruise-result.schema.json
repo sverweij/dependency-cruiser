@@ -133,9 +133,13 @@
           "type": "boolean",
           "description": "true if this dependency is dynamic, false in all other cases"
         },
+        "exoticallyRequired": {
+          "type": "boolean",
+          "description": "true if the dependency was defined by a require function not named'require' - false in all other cases"
+        },
         "exoticRequire": {
           "type": "string",
-          "description": "If this dependency was defined by a require not named require (as defined in the exoticRequireStrings option): the string that was used"
+          "description": "If this dependency was defined by a require not named 'require' (as defined in the exoticRequireStrings option): the string that was used"
         },
         "matchesDoNotFollow": {
           "type": "boolean",
@@ -405,6 +409,10 @@
         "dynamic": {
           "type": "boolean",
           "description": "Whether or not to match when the dependency is a dynamic one."
+        },
+        "exoticallyRequired": {
+          "type": "boolean",
+          "description": "Whether or not to match when the dependency is exotically required."
         },
         "exoticRequire": {
           "type": "string",

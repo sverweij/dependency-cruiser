@@ -15,7 +15,8 @@ describe("ast-extractors/extract-ES6-deps", () => {
       {
         module: "./dynamic",
         moduleSystem: "es6",
-        dynamic: true
+        dynamic: true,
+        exoticallyRequired: false
       }
     ]);
   });
@@ -28,7 +29,8 @@ describe("ast-extractors/extract-ES6-deps", () => {
       {
         module: "./dynamic",
         moduleSystem: "es6",
-        dynamic: true
+        dynamic: true,
+        exoticallyRequired: false
       }
     ]);
   });
@@ -54,7 +56,8 @@ describe("ast-extractors/extract-ES6-deps", () => {
       {
         module: "http",
         moduleSystem: "es6",
-        dynamic: true
+        dynamic: true,
+        exoticallyRequired: false
       }
     ]);
   });

@@ -69,10 +69,16 @@ module.exports = {
           description:
             "true if this dependency is dynamic, false in all other cases"
         },
+        exoticallyRequired: {
+          type: "boolean",
+          description:
+            "true if the dependency was defined by a require function not named" +
+            "'require' - false in all other cases"
+        },
         exoticRequire: {
           type: "string",
           description:
-            "If this dependency was defined by a require not named require (as " +
+            "If this dependency was defined by a require not named 'require' (as " +
             "defined in the exoticRequireStrings option): the string that was used"
         },
         matchesDoNotFollow: {

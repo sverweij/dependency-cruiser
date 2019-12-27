@@ -11,7 +11,8 @@ describe("ast-extractors/extract-typescript - regular commonjs require", () => {
       {
         module: "./thing-that-uses-export-equals",
         moduleSystem: "cjs",
-        dynamic: false
+        dynamic: false,
+        exoticallyRequired: false
       }
     ]);
   });
@@ -27,17 +28,20 @@ describe("ast-extractors/extract-typescript - regular commonjs require", () => {
       {
         module: "legit-one",
         moduleSystem: "cjs",
-        dynamic: false
+        dynamic: false,
+        exoticallyRequired: false
       },
       {
         module: "legit-two",
         moduleSystem: "cjs",
-        dynamic: false
+        dynamic: false,
+        exoticallyRequired: false
       },
       {
         module: "legit-three",
         moduleSystem: "cjs",
-        dynamic: false
+        dynamic: false,
+        exoticallyRequired: false
       }
     ]);
   });
@@ -62,17 +66,20 @@ describe("ast-extractors/extract-typescript - regular commonjs require", () => {
       {
         module: "midash",
         moduleSystem: "cjs",
-        dynamic: false
+        dynamic: false,
+        exoticallyRequired: false
       },
       {
         module: "slodash",
         moduleSystem: "cjs",
-        dynamic: false
+        dynamic: false,
+        exoticallyRequired: false
       },
       {
         module: "hidash",
         moduleSystem: "cjs",
-        dynamic: false
+        dynamic: false,
+        exoticallyRequired: false
       }
     ]);
   });
@@ -84,7 +91,8 @@ describe("ast-extractors/extract-typescript - regular commonjs require", () => {
       {
         module: "thunderscore",
         moduleSystem: "cjs",
-        dynamic: false
+        dynamic: false,
+        exoticallyRequired: false
       }
     ]);
   });

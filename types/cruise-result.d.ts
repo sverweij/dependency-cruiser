@@ -105,6 +105,11 @@ export interface IDependency {
    */
   dynamic: boolean;
   /**
+   * true if the dependency was defined by a require not named 'require'
+   * false in all other cases
+   */
+  exoticallyRequired: boolean;
+  /**
    * If this dependency was defined by a require not named require (as defined in the
    * exoticRequireStrings option): the string that was used
    */

@@ -2,25 +2,27 @@
   "modules": [
     {
       "source": "test/cli/fixtures/webpackconfig/aliassy/src/configspullen/index.js",
-      "orphan": false,
       "dependencies": [],
+      "orphan": false,
       "valid": true
     },
     {
       "source": "test/cli/fixtures/webpackconfig/aliassy/src/index.js",
-      "orphan": false,
       "dependencies": [
         {
           "resolved": "test/cli/fixtures/webpackconfig/aliassy/src/configspullen/index.js",
           "coreModule": false,
           "followable": true,
           "couldNotResolve": false,
-          "dependencyTypes": ["aliased"],
-          "dynamic": false,
-          "circular": false,
+          "dependencyTypes": [
+            "aliased"
+          ],
           "module": "configSpullenAlias",
           "moduleSystem": "cjs",
+          "dynamic": false,
+          "exoticallyRequired": false,
           "matchesDoNotFollow": false,
+          "circular": false,
           "valid": true
         },
         {
@@ -28,15 +30,19 @@
           "coreModule": false,
           "followable": false,
           "couldNotResolve": false,
-          "dependencyTypes": ["aliased"],
-          "dynamic": false,
-          "circular": false,
+          "dependencyTypes": [
+            "aliased"
+          ],
           "module": "configSpullenAlias/someconfig.json",
           "moduleSystem": "cjs",
+          "dynamic": false,
+          "exoticallyRequired": false,
           "matchesDoNotFollow": false,
+          "circular": false,
           "valid": true
         }
       ],
+      "orphan": false,
       "valid": true
     },
     {
@@ -45,9 +51,11 @@
       "coreModule": false,
       "couldNotResolve": false,
       "matchesDoNotFollow": false,
-      "dependencyTypes": ["aliased"],
-      "orphan": false,
+      "dependencyTypes": [
+        "aliased"
+      ],
       "dependencies": [],
+      "orphan": false,
       "valid": true
     }
   ],
@@ -58,20 +66,24 @@
     "info": 0,
     "totalCruised": 3,
     "totalDependenciesCruised": 2,
-    "ruleSetUsed": {},
     "optionsUsed": {
-      "args": "test/cli/fixtures/webpackconfig/aliassy/src",
-      "outputTo": "test/cli/output/webpack-config-alias.json",
-      "moduleSystems": ["amd", "cjs", "es6"],
-      "outputType": "json",
-      "tsPreCompilationDeps": false,
       "combinedDependencies": false,
-      "exoticRequireStrings": [],
+      "externalModuleResolutionStrategy": "node_modules",
+      "moduleSystems": [
+        "amd",
+        "cjs",
+        "es6"
+      ],
+      "outputTo": "test/cli/output/webpack-config-alias.json",
+      "outputType": "json",
       "preserveSymlinks": false,
+      "tsPreCompilationDeps": false,
       "webpackConfig": {
         "fileName": "test/cli/fixtures/webpackconfig/aliassy/webpack.regularexport.config.js"
       },
-      "externalModuleResolutionStrategy": "node_modules"
-    }
+      "exoticRequireStrings": [],
+      "args": "test/cli/fixtures/webpackconfig/aliassy/src"
+    },
+    "ruleSetUsed": {}
   }
 }

@@ -24,7 +24,8 @@ describe("ast-extractors/extract-commonJS-deps", () => {
       {
         module: "./static",
         moduleSystem: "cjs",
-        dynamic: false
+        dynamic: false,
+        exoticallyRequired: false
       }
     ]);
   });
@@ -42,7 +43,8 @@ describe("ast-extractors/extract-commonJS-deps", () => {
         module: "./static-required-with-need",
         moduleSystem: "cjs",
         dynamic: false,
-        exoticRequire: "need"
+        exoticRequire: "need",
+        exoticallyRequired: true
       }
     ]);
   });
@@ -60,7 +62,8 @@ describe("ast-extractors/extract-commonJS-deps", () => {
         module: "./static-required-with-need",
         moduleSystem: "cjs",
         dynamic: false,
-        exoticRequire: "window.require"
+        exoticRequire: "window.require",
+        exoticallyRequired: true
       }
     ]);
   });
@@ -83,7 +86,8 @@ describe("ast-extractors/extract-commonJS-deps", () => {
       {
         module: "template-literal",
         moduleSystem: "cjs",
-        dynamic: false
+        dynamic: false,
+        exoticallyRequired: false
       }
     ]);
   });
