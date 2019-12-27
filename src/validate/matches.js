@@ -83,6 +83,7 @@ function toExoticRequire(pRule, pDependency) {
 function toExoticRequireNot(pRule, pDependency) {
   return (
     !pRule.to.exoticRequireNot ||
+    !pDependency.exoticRequire ||
     (pDependency.exoticRequire &&
       !pDependency.exoticRequire.match(pRule.to.exoticRequireNot))
   );

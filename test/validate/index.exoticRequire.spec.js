@@ -41,7 +41,7 @@ describe("validate/index - exoticRequire", () => {
 });
 
 describe("validate/index - exoticRequireNot", () => {
-  it("does not flag dependencies that are required with a regular require or import", () => {
+  it("flags dependencies that are required with a regular require or import", () => {
     expect(
       validate.dependency(
         true,
@@ -49,7 +49,10 @@ describe("validate/index - exoticRequireNot", () => {
         { source: "something" },
         { resolved: "src/aap/speeltuigen/autoband.ts" }
       )
-    ).to.deep.equal({ valid: true });
+    ).to.deep.equal({
+      valid: false,
+      rules: [{ name: "only-use-as-exotic-require", severity: "warn" }]
+    });
   });
 
   it("does not flag dependencies that are required with a sanctioned exotic require", () => {
