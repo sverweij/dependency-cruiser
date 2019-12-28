@@ -86,18 +86,24 @@ transpiled javascript.)
 
 ### dependency cruiser
 
-Dependency cruiser used on itself. node_modules left out to keep it concise.
+Dependency cruiser used on itself. node_modules left out to keep it concise. A 
+small [custom theme](rules-reference-md#dot) colors the various main parts
+(extract, validate, report) and the dependencies to them. Click for a slightly
+more interactive version.
 
 [<img width="2156" alt="dependency cruiser's dependency graph" src="real-world-samples/dependency-cruiser-without-node_modules.png">](https://sverweij.github.io/dependency-cruiser/dependency-cruiser-dependency-graph.html)
 
 ### state machine cat
 
-[sverweij/state-machine-cat](https://github.com/sverweij/state-machine-cat) - an interpreter for writing nice state diagrams.
+[sverweij/state-machine-cat](https://github.com/sverweij/state-machine-cat) - an
+interpreter for writing nice state diagrams. Click for a slightly
+more interactive version.
 
-[<img width="1177" alt="state-machine-cat without external dependencies" src="real-world-samples/state-machine-cat-without-external-deps.png">](https://state-machine-cat.js.org/dependency-cruiser-graph.html)cd ..
-
+[![state-machine-cat without external dependencies](https://state-machine-cat.js.org/dependency-cruiser-graph.svg)](https://state-machine-cat.js.org/dependency-cruiser-graph.html)
 ### mscgen.js
 
-[mscgenjs/mscgenjs-core](https://github.com/mscgenjs/mscgenjs-core) - an interpreter library for turning text (in MscGen or two other DSLs) into sequence charts.
+[mscgenjs/mscgenjs-core](https://github.com/mscgenjs/mscgenjs-core) - an
+interpreter library for turning text (in MscGen or two other DSLs) into sequence
+charts. Click for a slightly more interactive version.
 
-[![mscgen.js](real-world-samples/mscgenjs-core-without-external-deps.png)](https://mscgenjs.github.io/mscgenjs-core/dependencygraph.html)
+[![mscgen.js](https://mscgenjs.github.io/mscgenjs-core/dependencygraph.svg)](https://mscgenjs.github.io/mscgenjs-core/dependencygraph.html)
