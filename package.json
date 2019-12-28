@@ -82,7 +82,7 @@
     "lint:eslint": "eslint bin/dependency-cruise.js src test configs utl --cache --cache-location .cache/eslint/",
     "lint:eslint:fix": "eslint --fix bin src test configs utl --cache --cache-location .cache/eslint/",
     "lint:fix": "npm-run-all lint:eslint:fix lint:prettier lint:types:fix",
-    "lint:prettier": "prettier --write {utl,src,configs}/\\*\\*/\\*.{js,json} bin/\\* !**/*.template.js types/\\*.d.ts test/\\*\\*/\\*.{spec,utl}.js",
+    "lint:prettier": "prettier --loglevel warn --write {utl,src,configs}/\\*\\*/\\*.{js,json} bin/\\* !**/*.template.js types/\\*.d.ts test/\\*\\*/\\*.{spec,utl}.js",
     "lint:prettier:check": "prettier --check {utl,src,configs}/\\*\\*/\\*.{js,json} bin/\\* !**/*.template.js types/\\*.d.ts test/\\*\\*/\\*.{spec,utl}.js",
     "lint:types": "npm-run-all lint:types:tsc lint:types:tslint",
     "lint:types:tsc": "tsc --noEmit --strict --types --noUnusedLocals --noUnusedParameters types/dependency-cruiser.d.ts",

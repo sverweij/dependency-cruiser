@@ -84,7 +84,13 @@ though, so dependency-cruiser has a few options to get you sorted:
 
 The `--include-only`, `exclude`, `--do-not-follow` (and for more extreme measures
 `--max-depth`) command line options and their configuration file equivalents
-provide various ways to
+provide various ways to reduce the number of modules and dependencies in the
+dot output. E.g. to focus on stuff _within_ src only and not show any test and
+mock files, you'd do something like this:
+
+```sh
+depcruise --include-only "^src/" --exclude "mocks\\.ts$|\\.spec\\.ts$" --output-type dot | dot -T svg > dependency-graph.svg
+```
 
 #### Bonus: separate config for your graph
 
@@ -120,7 +126,7 @@ module.exports = {
 Run with
 
 ```sh
-dependency-cruiser --config .dependency-cruiser-graph.js --output-type dot src | dot -T svg >
+dependency-cruiser --config .dependency-cruiser-graph.js --output-type dot src | dot -T svg > dependency-graph.svg
 ```
 
 #### Folder level dependency graph
@@ -135,15 +141,37 @@ dependency-cruiser --config .dependency-cruiser.js --output-type ddot -- src | d
 #### Make dot render orthogonal edges instead of splines
 
 Some of the examples you see in the documentation have orthogonal edges, instead
-of splines. Sometimes this will improve legibility quite a bit. To achive that pass
-`-Gsplines=ortho` to dot, e.g. in a complete incantation:
+of splines. Sometimes this will improve legibility quite a bit. To achieve that
+either pass `-Gsplines=ortho` to dot, e.g. in a complete incantation:
 
 ```sh
 depcruise --config .dependency-cruiser-graph.js --output-type dot -- src | dot -Gsplines=ortho -T svg > dependency-graph-with-orthogonal-edges.svg
 ```
 
-The reason it's not the default for the dot reporter output is that it isn't guaranteed
-to render a graph, so YMMV.
+... or put it permanently in your dependency-cruiser configuration in the dot
+reporter options:
+
+```js
+module.exports = {
+  // ... your rules and/ or the configuration it extends ...
+  options: {
+    // ... your other options ...
+    reporterOptions: {
+      dot: {
+        theme: {
+          graph: {
+            splines: "ortho"
+          }
+        }
+      }
+    }
+  }
+};
+
+```
+
+The reason it's not the default for the dot reporter output is GraphViz won't 
+always be able to render a graph with orthogonal edges, so YMMV.
 
 ### Q: TypeScript dynamic imports show up as "✖" . What's up there?
 
@@ -173,9 +201,12 @@ necessary compilers at its disposal.
 **A**: jsx and its TypeScript and coffeescript variants work
 out of the box as well.
 
-### Q: Does this work with vue as well?
+### Q: Does this work with Vue as well?
 
 **A**: Yes.
+
+For `.vue` single file components it uses the `vue-template-compiler`
+- which will be in your module dependencies if you're developing with Vue).
 
 ### Q: Does this mean dependency-cruiser installs transpilers for all these languages?
 
@@ -224,7 +255,9 @@ ecmascript) might come later.
 **A**: Yes; in both TypeScript and javascript - but only with static string arguments
 or template expressions that don't contain no placeholders (see the next question).
 This should cover most of the use cases for dynamic
-imports that leverage asynchronous module loading (like [webpack code splitting](https://webpack.js.org/guides/code-splitting/#dynamic-imports)), though.
+imports that leverage asynchronous module loading (like 
+[webpack code splitting](https://webpack.js.org/guides/code-splitting/#dynamic-imports)),
+though.
 
 ### Q: Does dependency-cruiser handle variable or expression requires and imports?
 
@@ -239,8 +272,8 @@ only and doing that well.
 
 ### Q: Does it work with my monorepo?
 
-**A**: Absolutely. For every cruised module the closest `package.json` file is used to determine
-if a package was declared as dependency.
+**A**: Absolutely. For every cruised module the closest `package.json` file is
+used to determine if a package was declared as dependency.
 
 ### Q: Does dependency-cruiser work with Yarn Plug'n'Play?
 
@@ -254,6 +287,9 @@ _externalModuleResolutionStrategy_ key:
 "externalModuleResolutionStrategy": "yarn-pnp"
 ```
 
+> If you use `depcruise --init` to create your configuration file, it will detect
+> your use of yarn-pnp from the package.json and put it in the config for you.
+
 > For earlier versions (up to 4.6.1) you did have to pass a webpack config that
 > that had the pnp resolver plugin configured.
 
@@ -261,7 +297,7 @@ _externalModuleResolutionStrategy_ key:
 
 **A**: Upgrade to version 5.2.0 or higher - from that version on dependency-cruiser
 emits the circular path in the _err_, _err-long_, _err-html_ and
-_teamcity_ reporters.
+_teamcity_ reporters (he _dot_ and _ddot_ reporters already did before).
 
 ### Q: I'm using window.require or a require wrapper - how do I make sure dependencies I declared like that are included?
 

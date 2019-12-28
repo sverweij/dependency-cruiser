@@ -265,23 +265,23 @@
             },
             {
               "criteria": { "resolved": "^src/cli" },
-              "attributes": { "color": "#5555ff77" }
+              "attributes": { "color": "#0000ff77" }
             },
             {
               "criteria": { "resolved": "^src/report" },
-              "attributes": { "color": "#ff55ff77" }
+              "attributes": { "color": "#ff00ff77" }
             },
             {
               "criteria": { "resolved": "^src/extract" },
-              "attributes": { "color": "#55ff5577" }
+              "attributes": { "color": "#00770077" }
             },
             {
               "criteria": { "resolved": "^src/validate" },
-              "attributes": { "color": "#5555ff77" }
+              "attributes": { "color": "#0000ff77" }
             },
             {
               "criteria": { "resolved": "^src/main" },
-              "attributes": { "color": "#ff555577" }
+              "attributes": { "color": "#77000077" }
             },
             {
               "criteria": { "resolved": "^src/utl" },

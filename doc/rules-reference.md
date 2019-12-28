@@ -5,14 +5,16 @@
 - This is a small reference guide to the elements you can use to write rules
   for dependency-cruiser. If you want a step-by-step introduction check the
   [rules _tutorial_](./rules-tutorial.md).
-- There is a [json schema](../src/main/ruleSet/config-schema.json)
+- There is a [json schema](../src/main/schema/configuration.schema.json)
   that describes the output format. Dependency-cruiser
   checks rule sets against it.
 - Some examples:
   - dependency-cruiser's [own configuration](../.dependency-cruiser.json)
-  - the configuration [State Machine cat](https://state-machine-cat.js.org) uses [for validation](https://github.com/sverweij/state-machine-cat/blob/develop/config/dependency-cruiser.js) and the one it uses [for generating a visual graph](https://github.com/sverweij/state-machine-cat/blob/develop/config/dependency-cruiser-graph.js).
-  - [mscgen.js](https://mscgen.js.org)'s [.dependency-cruiser.json](https://github.com/mscgenjs/mscgenjs-core/blob/develop/.dependency-cruiser.json)
-- Tip: run `depcruise --init` to create a .dependency-cruiser.json (or .js) with
+  - the configuration [State Machine cat](https://state-machine-cat.js.org) uses
+    [for validation](https://github.com/sverweij/state-machine-cat/blob/develop/config/dependency-cruiser.js)
+    and the one it uses [for generating a visual graph](https://github.com/sverweij/state-machine-cat/blob/develop/config/dependency-cruiser-graph.js).
+  - [mscgen.js](https://mscgen.js.org)'s [.dependency-cruiser.js](https://github.com/mscgenjs/mscgenjs-core/blob/develop/.dependency-cruiser.js)
+- Tip: run `depcruise --init` to create a .dependency-cruiser.js with
   some rules that make sense in most projects.
 
 ## Contents

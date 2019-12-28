@@ -10,4 +10,4 @@ In the making.
 - docs (not the s - this folder) is the website. 
 
 Why the confusing names? _docs_ is just what github uses by default for
-github pages ¯\_(ツ)_/¯
+github pages `¯\_(ツ)_/¯`
