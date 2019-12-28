@@ -2,7 +2,6 @@
 NODE=node
 RM=rm -f
 GENERATED_SOURCES=src/cli/initConfig/config.js.template.js \
-	src/report/csv/csv.template.js \
 	src/report/dot/moduleLevel/dot.template.js \
 	src/report/dot/folderLevel/ddot.template.js \
 	src/report/html/html.template.js \
