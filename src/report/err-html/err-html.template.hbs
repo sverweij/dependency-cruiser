@@ -145,7 +145,7 @@
                         <th>explanation</th>
                     </tr>
                 </thead>
-                {{#each summary.agggregateViolations}}
+                {{#summary.agggregateViolations}}
                 <tr {{#if unviolated}}class="unviolated"{{/if}}>
                     <td>{{#if unviolated}}<span class="ok">&check;</span>{{else}}<span class="{{severity}}">&cross;</span>{{/if}}</td>
                     <td class={{#if unviolated}}"{{ok}}"{{else}}"{{severity}}"{{/if}}>{{severity}}</td>
@@ -153,7 +153,7 @@
                     <td><strong>{{count}}</strong></td>
                     <td>{{comment}}</td>
                 </tr>
-                {{/each}}
+                {{/summary.agggregateViolations}}
                 <tr>
                     <td colspan="5" class="controls">
                         <div id="show-unviolated">
@@ -179,7 +179,7 @@
                 </tr>
             </thead>
             <tbody>
-                {{#each summary.violations}}
+                {{#summary.violations}}
                 <tr>
                     <td class="{{rule.severity}}">{{rule.severity}}</td>
                     <td class="nowrap"><a href="#{{rule.name}}" class="noiseless">{{rule.name}}</a></td>
@@ -187,7 +187,7 @@
                     <td>{{{to}}}</td>
                     
                 </tr>
-                {{/each}}
+                {{/summary.violations}}
             </tbody>
         </table>
         {{else}}

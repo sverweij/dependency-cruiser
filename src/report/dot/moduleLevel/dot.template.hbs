@@ -3,18 +3,18 @@ strict digraph "dependency-cruiser output"{
     {{#if nodeAttrs}}node [{{{nodeAttrs}}}]{{/if}}
     {{#if edgeAttrs}}edge [{{{edgeAttrs}}}]{{/if}}
 
-{{#each modules}}
+{{#modules}}
     {{#if folder}}
     {{#each path}}subgraph "cluster_{{{aggregateSnippet}}}" {label="{{{snippet}}}" {{/each~}}
         "{{{source}}}" [label="{{{label}}}" {{#if rule}}tooltip="{{{rule.name}}}" {{/if}}{{#if URL}}URL="{{{URL}}}" {{/if}}{{#if themeAttrs}}{{{themeAttrs}}}{{/if}}]{{#each path}} }{{/each}}
     {{else}}
     "{{{source}}}" [label="{{{label}}}" {{#if rule}}tooltip="{{{rule.name}}}" {{/if}}{{#if URL}}URL="{{{URL}}}" {{/if}}{{#if themeAttrs}}{{{themeAttrs}}}{{/if}}]
     {{/if}}
-{{/each}}
+{{/modules}}
 
-{{#each modules}}
-    {{#each dependencies}}
+{{#modules}}
+    {{#dependencies}}
     "{{{../source}}}" -> "{{{resolved}}}"{{#if hasExtraAttributes}} [{{#if rule.name}}xlabel="{{{rule.name}}}" tooltip="{{{rule.name}}}" {{/if}}{{#if themeAttrs}}{{{themeAttrs}}}{{/if}}]{{/if}}
-    {{/each}}
-{{/each}}
+    {{/dependencies}}
+{{/modules}}
 }

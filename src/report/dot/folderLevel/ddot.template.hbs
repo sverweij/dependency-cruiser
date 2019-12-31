@@ -13,18 +13,18 @@ strict digraph "dependency-cruiser output"{
     node [shape=folder style="rounded, filled" fillcolor="#ffffcc" height=0.2 fontname=Helvetica fontsize=9]
     edge [color="#00000033" penwidth=2.0 arrowsize=0.6 arrowhead=normal fontname=Helvetica fontsize=9]
 
-{{#each modules}}
+{{#modules}}
     {{#if folder}}
     {{#each path}}subgraph "cluster_{{{aggregateSnippet}}}" {label="{{{snippet}}}" "{{{aggregateSnippet}}}" [label="." width="0.5"{{!--shape=point style=invis width="0"--}}] {{/each~}}
         "{{{source}}}" [label="{{{label}}}" {{#if color}}color="{{{color}}}" {{/if}}{{#if fontcolor}}fontcolor="{{{fontcolor}}}" {{/if}}{{#if fillcolor}}fillcolor="{{{fillcolor}}}" {{/if}}{{#if matchesDoNotFollow}}shape="folder" {{/if}}{{#if rule}}tooltip="{{{rule.name}}}" {{/if}}{{~#if url}}URL="{{{url}}}"{{/if~}}]{{#each path}} }{{/each}}
     {{else}}
     "{{{source}}}" [label="{{{label}}}" {{#if color}}color="{{{color}}}" {{/if}}{{#if fontcolor}}fontcolor="{{{fontcolor}}}" {{/if}}{{#if fillcolor}}fillcolor="{{{fillcolor}}}" {{/if}}{{#if matchesDoNotFollow}}shape="folder" {{/if}}{{#if rule}}tooltip="{{{rule.name}}}" {{/if}}{{~#if url}}URL="{{{url}}}"{{/if~}}]
     {{/if}}
-    {{#each dependencies}}
+    {{#dependencies}}
     "{{{../source}}}" -> "{{{resolved}}}"
     {{~#if valid~}}
         {{#if coreModule}} [color="grey" penwidth=1.0]{{~/if}}
     {{~else}} [color="{{{color}}}" penwidth="2.0" tooltip="{{{rule.name}}}" fontcolor="{{{color}}}" xlabel="{{{rule.name}}}"]{{~/if}}
-    {{/each}}
-{{/each}}
+    {{/dependencies}}
+{{/modules}}
 }
