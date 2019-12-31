@@ -2,7 +2,7 @@ const _clone = require("lodash/clone");
 const _get = require("lodash/get");
 const anonymizePath = require("./anonymizePath");
 
-function mapCycles(pPathArray, pWordList) {
+function anonymizeCycles(pPathArray, pWordList) {
   return (pPathArray || []).map(pPath => anonymizePath(pPath, pWordList));
 }
 
@@ -11,7 +11,7 @@ function anonymizeDependencies(pDependencies, pWordList) {
     ...pDependency,
     resolved: anonymizePath(pDependency.resolved, pWordList),
     module: anonymizePath(pDependency.module, pWordList),
-    cycle: mapCycles(pDependency.cycle, pWordList)
+    cycle: anonymizeCycles(pDependency.cycle, pWordList)
   }));
 }
 
@@ -28,7 +28,7 @@ function anonymizeViolations(pViolations, pWordList) {
     ...pViolation,
     from: anonymizePath(pViolation.from, pWordList),
     to: anonymizePath(pViolation.to, pWordList),
-    cycle: mapCycles(pViolation.cycle, pWordList)
+    cycle: anonymizeCycles(pViolation.cycle, pWordList)
   }));
 }
 

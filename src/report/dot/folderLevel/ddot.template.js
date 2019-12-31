@@ -1,9 +1,11 @@
 var Handlebars = require("handlebars/runtime");  var template = Handlebars.template, templates = Handlebars.templates = Handlebars.templates || {};
 templates['ddot.template.hbs'] = template({"1":function(container,depth0,helpers,partials,data,blockParams,depths) {
-    var stack1, alias1=depth0 != null ? depth0 : (container.nullContext || {});
-
-  return ((stack1 = helpers["if"].call(alias1,(depth0 != null ? depth0.folder : depth0),{"name":"if","hash":{},"fn":container.program(2, data, 0, blockParams, depths),"inverse":container.program(19, data, 0, blockParams, depths),"data":data,"loc":{"start":{"line":17,"column":4},"end":{"line":22,"column":11}}})) != null ? stack1 : "")
-    + ((stack1 = helpers.each.call(alias1,(depth0 != null ? depth0.dependencies : depth0),{"name":"each","hash":{},"fn":container.program(21, data, 0, blockParams, depths),"inverse":container.noop,"data":data,"loc":{"start":{"line":23,"column":4},"end":{"line":28,"column":13}}})) != null ? stack1 : "");
+    var stack1, helper, options, alias1=depth0 != null ? depth0 : (container.nullContext || {}), buffer = 
+  ((stack1 = helpers["if"].call(alias1,(depth0 != null ? depth0.folder : depth0),{"name":"if","hash":{},"fn":container.program(2, data, 0, blockParams, depths),"inverse":container.program(19, data, 0, blockParams, depths),"data":data,"loc":{"start":{"line":17,"column":4},"end":{"line":22,"column":11}}})) != null ? stack1 : "");
+  stack1 = ((helper = (helper = helpers.dependencies || (depth0 != null ? depth0.dependencies : depth0)) != null ? helper : container.hooks.helperMissing),(options={"name":"dependencies","hash":{},"fn":container.program(21, data, 0, blockParams, depths),"inverse":container.noop,"data":data,"loc":{"start":{"line":23,"column":4},"end":{"line":28,"column":21}}}),(typeof helper === "function" ? helper.call(alias1,options) : helper));
+  if (!helpers.dependencies) { stack1 = container.hooks.blockHelperMissing.call(depth0,stack1,options)}
+  if (stack1 != null) { buffer += stack1; }
+  return buffer;
 },"2":function(container,depth0,helpers,partials,data) {
     var stack1, helper, alias1=depth0 != null ? depth0 : (container.nullContext || {}), alias2=container.hooks.helperMissing, alias3="function";
 
@@ -111,9 +113,10 @@ templates['ddot.template.hbs'] = template({"1":function(container,depth0,helpers
     + ((stack1 = alias4(((stack1 = (depth0 != null ? depth0.rule : depth0)) != null ? stack1.name : stack1), depth0)) != null ? stack1 : "")
     + "\"]";
 },"compiler":[8,">= 4.3.0"],"main":function(container,depth0,helpers,partials,data,blockParams,depths) {
-    var stack1;
-
-  return "strict digraph \"dependency-cruiser output\"{\n    ordering=out\n    rankdir=LR\n    splines=true\n    overlap=true\n    nodesep=0.16\n    ranksep=0.18\n    fontname=\"Helvetica-bold\"\n    fontsize=9\n    style=\"rounded,bold,filled\"\n    fillcolor=\"#ffffff\"\n    compound=true\n    node [shape=folder style=\"rounded, filled\" fillcolor=\"#ffffcc\" height=0.2 fontname=Helvetica fontsize=9]\n    edge [color=\"#00000033\" penwidth=2.0 arrowsize=0.6 arrowhead=normal fontname=Helvetica fontsize=9]\n\n"
-    + ((stack1 = helpers.each.call(depth0 != null ? depth0 : (container.nullContext || {}),(depth0 != null ? depth0.modules : depth0),{"name":"each","hash":{},"fn":container.program(1, data, 0, blockParams, depths),"inverse":container.noop,"data":data,"loc":{"start":{"line":16,"column":0},"end":{"line":29,"column":9}}})) != null ? stack1 : "")
-    + "}\n";
+    var stack1, helper, options, buffer = 
+  "strict digraph \"dependency-cruiser output\"{\n    ordering=out\n    rankdir=LR\n    splines=true\n    overlap=true\n    nodesep=0.16\n    ranksep=0.18\n    fontname=\"Helvetica-bold\"\n    fontsize=9\n    style=\"rounded,bold,filled\"\n    fillcolor=\"#ffffff\"\n    compound=true\n    node [shape=folder style=\"rounded, filled\" fillcolor=\"#ffffcc\" height=0.2 fontname=Helvetica fontsize=9]\n    edge [color=\"#00000033\" penwidth=2.0 arrowsize=0.6 arrowhead=normal fontname=Helvetica fontsize=9]\n\n";
+  stack1 = ((helper = (helper = helpers.modules || (depth0 != null ? depth0.modules : depth0)) != null ? helper : container.hooks.helperMissing),(options={"name":"modules","hash":{},"fn":container.program(1, data, 0, blockParams, depths),"inverse":container.noop,"data":data,"loc":{"start":{"line":16,"column":0},"end":{"line":29,"column":12}}}),(typeof helper === "function" ? helper.call(depth0 != null ? depth0 : (container.nullContext || {}),options) : helper));
+  if (!helpers.modules) { stack1 = container.hooks.blockHelperMissing.call(depth0,stack1,options)}
+  if (stack1 != null) { buffer += stack1; }
+  return buffer + "}\n";
 },"useData":true,"useDepths":true});

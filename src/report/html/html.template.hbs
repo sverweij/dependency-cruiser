@@ -132,25 +132,25 @@
                         <a id="rotate" href="#table-rotated">rotate</a>
                         <a id="unrotate" href="#">rotate back</a>
                     </td>
-                    {{#each modules}}<th><div{{#if coreModule}} class="cell-core-module"{{else}}{{#if couldNotResolve}} class="cell-unresolvable-module"{{/if}}{{/if}}>{{source}}</div></th>{{/each}}
+                    {{#modules}}<th><div{{#if coreModule}} class="cell-core-module"{{else}}{{#if couldNotResolve}} class="cell-unresolvable-module"{{/if}}{{/if}}>{{source}}</div></th>{{/modules}}
                     <td class="top-right"></td>
                 </tr>
             </thead>
             <tbody>
-                {{#each modules}}
+                {{#modules}}
                 <tr>
                     <td class="first-cell{{#if coreModule}} cell-core-module{{else}}{{#if couldNotResolve}} cell-unresolvable-module{{/if}}{{/if}}">{{source}}</td>
-                    {{#each incidences}}<td class="cell cell-{{incidence}}"{{#if hasRelation}} title="{{# if rule}}{{rule}}:
+                    {{#incidences}}<td class="cell cell-{{incidence}}"{{#if hasRelation}} title="{{# if rule}}{{rule}}:
         {{/if}}{{../source}} ->
-        {{to}}"{{/if}}></td>{{/each}}
+        {{to}}"{{/if}}></td>{{/incidences}}
                     <td class="first-cell{{#if coreModule}} cell-core-module{{else}}{{#if couldNotResolve}} cell-unresolvable-module{{/if}}{{/if}}">{{source}}</td>
                 </tr>
-                {{/each}}
+                {{/modules}}
             </tbody>
             <tfoot>
                 <tr>
                     <td class="bottom-left"></td>
-                    {{#each modules}}<th><div{{#if coreModule}} class="cell-core-module"{{else}}{{#if couldNotResolve}} class="cell-unresolvable-module"{{/if}}{{/if}}>{{source}}</div></th>{{/each}}
+                    {{#modules}}<th><div{{#if coreModule}} class="cell-core-module"{{else}}{{#if couldNotResolve}} class="cell-unresolvable-module"{{/if}}{{/if}}>{{source}}</div></th>{{/modules}}
                     <td class="bottom-right"></td>
                 </tr>
             </tfoot>
