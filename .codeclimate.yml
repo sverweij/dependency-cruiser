@@ -3,16 +3,9 @@ checks:
   method-lines:
     config:
       threshold: 32
-plugins:
-  eslint:
-    enabled: true
-    channel: "eslint-6"
-    config:
-      config: .eslintrc.json
-    checks:
-      # compat is not a codeclimeate supported eslint plugin
-      compat/compat:
-        enabled: false
+# removed the eslint plugin. The eslint ecosystem moves faster
+# than what codeclimate can keep upt with - and we're running
+# eslint on other ci platforms anyway now.
 exclude_patterns:
   - ".github/"
   - "configs/"
