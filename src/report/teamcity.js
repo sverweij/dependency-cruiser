@@ -79,8 +79,9 @@ function reportViolations(pViolations) {
  * - for each violated rule in the passed results: an `inspectionType` with the name and comment of that rule
  * - for each violation in the passed results: an `inspection` with the violated rule name and the tos and froms
  *
- * @param {any} pResults - the output of a dependency-cruise adhering to ../schema/cruise-result.schema.json
- * @returns {string} - a '\n' separated string of TeamCity service messages
+ * @param {ICruiseResult} pResults - the output of a dependency-cruise adhering to ../schema/cruise-result.schema.json
+ * @returns {IReporterOutput} - .output: a '\n' separated string of TeamCity service messages
+ *                              .exitCode: the number of errors found
  */
 module.exports = pResults => {
   // this is the documented way to get tsm to emit strings

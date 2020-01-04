@@ -65,13 +65,13 @@ function sanitizeWordList(pWordList) {
  * (note: the algorith _removes_ elements from pWordList to prevent duplicates,
  * so if the word list is precious to you - pass a clone)
  *
- * @param {any} pResults - the output of a dependency-cruise adhering to ../schema/cruise-result.schema.json
+ * @param {ICruiseResult} pResults - the output of a dependency-cruise adhering to ../schema/cruise-result.schema.json
  * @param {string[]} pWordList - list of words to use as replacement strings. If
  *                               not passed the reporter uses the string passed
  *                               in the options (reporterOptions.anon.wordlist)
  *                               or - if that doesn't exist - the empty array
- * @returns {object} - output: the results in JSON format (hence adhering to the same json schema)
- *                     exitCode: 0
+ * @returns {IReporterOutput} - output: the results in JSON format (hence adhering to the same json schema)
+ *                              exitCode: 0
  */
 module.exports = (
   pResults,

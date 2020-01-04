@@ -1,8 +1,8 @@
 /* eslint-disable no-magic-numbers */
-
+const curryRight = require("lodash/curryRight");
 const expect = require("chai").expect;
 const chalk = require("chalk");
-const render = require("../../../src/report/err/err-long");
+const render = curryRight(require("../../../src/report/err"))({ long: true });
 const okdeps = require("./mocks/everything-fine.json");
 const deps = require("./mocks/cjs-no-dependency-valid.json");
 const warndeps = require("./mocks/err-only-warnings.json");

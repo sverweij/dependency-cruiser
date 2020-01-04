@@ -7,8 +7,8 @@ require("./csv.template");
 /**
  * Returns the results of a cruise in an 'incidence matrix'
  *
- * @param {any} pResults - the output of a dependency-cruise adhering to ../../schema/cruise-result.schema.json
- * @returns {object} - output: incidence matrix in csv format
+ * @param {ICruiseResult} pResults - the output of a dependency-cruise adhering to ../../schema/cruise-result.schema.json
+ * @returns {IReporterOutput} - output: incidence matrix in csv format
  *                     exitCode: 0
  */
 module.exports = pResults => ({
