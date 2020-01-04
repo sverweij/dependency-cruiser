@@ -1,26 +1,26 @@
-const csv = require("../report/csv");
-const html = require("../report/html");
-const ddot = require("../report/dot/folderLevel");
-const dot = require("../report/dot/moduleLevel");
-const json = require("../report/json");
+const anon = require("./anon");
+const csv = require("./csv");
+const ddot = require("./dot/folderLevel");
+const dot = require("./dot/moduleLevel");
+const errHtml = require("./err-html");
 const errLong = require("./err/err-long");
 const err = require("./err/err-short");
-const errHtml = require("./err-html");
+const html = require("./html");
 const identity = require("./identity");
+const json = require("./json");
 const teamcity = require("./teamcity");
-const anon = require("./anonymous");
 
 const TYPE2REPORTER = {
-  json,
-  html,
+  anon,
+  csv,
   dot,
   ddot,
-  csv,
-  err,
-  "err-long": errLong,
   "err-html": errHtml,
-  teamcity,
-  anon
+  "err-long": errLong,
+  err,
+  html,
+  json,
+  teamcity
 };
 
 function getReporter(pOutputType) {

@@ -1,7 +1,7 @@
 const expect = require("chai").expect;
-const anonymizePath = require("../../../src/report/anonymous/anonymizePathElement");
+const anonymizePath = require("../../../src/report/anon/anonymizePathElement");
 
-describe("report/anonymous/anonymizePathElement - uncached", () => {
+describe("report/anon/anonymizePathElement - uncached", () => {
   it("'' => ''", () => {
     expect(anonymizePath("", [], /^$/, false)).to.equal("");
   });
@@ -37,7 +37,7 @@ describe("report/anonymous/anonymizePathElement - uncached", () => {
   });
 });
 
-describe("report/anonymous/anonymizePathElement - cached", () => {
+describe("report/anon/anonymizePathElement - cached", () => {
   it("subsequent calls with the same string yield the same result", () => {
     const lFirstResult = anonymizePath("yudelyo");
 
