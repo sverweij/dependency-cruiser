@@ -103,11 +103,11 @@ function report(pResults, pTheme) {
 /**
  * Returns the results of a cruise as a directed graph in the dot language.
  *
- * @param {any} pResults - the output of a dependency-cruise adhering to ../../../schema/cruise-result.schema.json
- * @param {any} pTheme - a mapping of source properties to a attributes (like
+ * @param {ICruiseResult} pResults - the output of a dependency-cruise adhering to ../../../schema/cruise-result.schema.json
+ * @param {IDotTheme} pTheme - a mapping of source properties to a attributes (like
  *                      color, shape) - see ../comon/richTheme.json for an example
- * @returns {object} - output: a dot program
- *                     exitCode: 0
+ * @returns {IReporterOutput} - .output: the directed graph
+ *                              .exitCode: 0
  */
 module.exports = (
   pResults,

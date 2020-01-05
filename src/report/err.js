@@ -3,7 +3,7 @@ const figures = require("figures");
 const indentString = require("indent-string");
 const wrapAnsi = require("wrap-ansi");
 const _get = require("lodash/get");
-const findRuleByName = require("../../utl/findRuleByName");
+const findRuleByName = require("../utl/findRuleByName");
 
 const SEVERITY2CHALK = {
   error: chalk.red,
@@ -100,19 +100,19 @@ function report(pResults, pLong) {
 }
 
 /**
- * Returns the results of a cruise in a text only format, reminiscent of how eslint prints
- * to stdout:
+ * Returns the results of a cruise in a text only format, reminiscent of how eslint
+ * prints to stdout:
  * - for each violation a message stating the violation name and the to and from
- * - a summary with total number of errors and warnings found, and the total number of files cruised
- *
- * @param {any} pResults - the output of a dependency-cruise adhering to ../schema/cruise-result.schema.json
- * @param {boolean} pLong - whether or not to include an explanation (/ comment) which each violation
- * @returns {object} - output: eslint like output
- *                     exitCode: the number of errors found
+ * - a summary with total number of errors and warnings found, and the total
+ *   number of files cruised
+ * @param {ICruiseResult} pResults -
+ * @param {any} pOptions - An object with options;
+ *                         {boolean} long - whether or not to include an explanation
+ *                                          (/ comment) which each violation
+ * @returns {IReporterOutput} - output: the formatted text in a string
+ *                              exitCode: the number of errors found
  */
-module.exports = (pResults, pLong = false) => ({
-  output: report(pResults, pLong),
+module.exports = (pResults, pOptions) => ({
+  output: report(pResults, (pOptions || {}).long),
   exitCode: pResults.summary.error
 });
-
-/* eslint max-len: 0 */

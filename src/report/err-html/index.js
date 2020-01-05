@@ -45,9 +45,9 @@ function report(pResults) {
 /**
  * Returns the results of a cruise in an 'incidence matrix'
  *
- * @param {any} pResults - the output of a dependency-cruise adhering to ../../schema/cruise-result.schema.json
- * @returns {object} - output: an html program showing the summary & the violations (if any)
- *                     exitCode: 0
+ * @param {ICruiseResult} pResults - the output of a dependency-cruise adhering to ../../schema/cruise-result.schema.json
+ * @returns {IReporterOutput} - output: an html program showing the summary & the violations (if any)
+ *                              exitCode: 0
  */
 module.exports = pResults => ({
   output: report(pResults),

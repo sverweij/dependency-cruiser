@@ -61,8 +61,9 @@ function report(pResults) {
  * Returns the results of a cruise as a directed graph in the dot language. The dependencies
  * are collapsed to folder level, though
  *
- * @param {any} pResults - the output of a dependency-cruise adhering to ../../.../schema/cruise-result.schema.json
- * @returns {string} - a dot program
+ * @param {ICruiseResult} pResults - the output of a dependency-cruise adhering to ../../.../schema/cruise-result.schema.json
+ * @returns {IReporterOutput} - .output: the dot program
+ *                              .exitCode: 0
  */
 module.exports = pResults => ({
   output: report(pResults),
