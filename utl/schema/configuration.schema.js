@@ -2,9 +2,9 @@ const ruleSet = require("./rule-set");
 const options = require("./options");
 
 module.exports = {
-  $schema: "http://json-schema.org/draft-07/schema#",
-  $id: "https://dependency-cruiser.js.org/config-schema",
   title: "dependency-cruiser configuration",
+  $schema: "http://json-schema.org/draft-07/schema#",
+  $id: "https://dependency-cruiser.js.org/schema/configuration.schema.json",
   description:
     "A set of properties describing what dependencies are forbidden and what dependencies are " +
     "allowed + options on how to cruise through the code",
