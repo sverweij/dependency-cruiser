@@ -1,85 +1,88 @@
 {
   "modules": [
     {
-      "orphan": false,
-      "dependencies": [],
       "source": "test/main/fixtures/ts-precompilation-deps-on-cjs/also-used.ts",
+      "dependencies": [],
+      "orphan": false,
       "valid": true
     },
     {
-      "orphan": false,
-      "dependencies": [],
       "source": "test/main/fixtures/ts-precompilation-deps-on-cjs/definitely-used.ts",
-      "valid": true
-    },
-    {
-      "orphan": false,
       "dependencies": [],
-      "source": "test/main/fixtures/ts-precompilation-deps-on-cjs/imported-from-index-but-not-used.ts",
+      "orphan": false,
       "valid": true
     },
     {
+      "source": "test/main/fixtures/ts-precompilation-deps-on-cjs/imported-from-index-but-not-used.ts",
+      "dependencies": [],
       "orphan": false,
+      "valid": true
+    },
+    {
+      "source": "test/main/fixtures/ts-precompilation-deps-on-cjs/index.ts",
       "dependencies": [
         {
+          "resolved": "test/main/fixtures/ts-precompilation-deps-on-cjs/also-used.ts",
           "coreModule": false,
+          "followable": true,
           "couldNotResolve": false,
           "dependencyTypes": ["local"],
           "dynamic": false,
-          "circular": false,
-          "followable": true,
-          "matchesDoNotFollow": false,
           "module": "./also-used",
           "moduleSystem": "cjs",
-          "resolved": "test/main/fixtures/ts-precompilation-deps-on-cjs/also-used.ts",
+          "exoticallyRequired": false,
+          "matchesDoNotFollow": false,
+          "circular": false,
           "valid": true
         },
         {
+          "resolved": "test/main/fixtures/ts-precompilation-deps-on-cjs/definitely-used.ts",
           "coreModule": false,
+          "followable": true,
           "couldNotResolve": false,
           "dependencyTypes": ["local"],
           "dynamic": false,
-          "circular": false,
-          "followable": true,
-          "matchesDoNotFollow": false,
           "module": "./definitely-used",
           "moduleSystem": "es6",
-          "resolved": "test/main/fixtures/ts-precompilation-deps-on-cjs/definitely-used.ts",
+          "exoticallyRequired": false,
+          "matchesDoNotFollow": false,
+          "circular": false,
           "valid": true
         },
         {
+          "resolved": "test/main/fixtures/ts-precompilation-deps-on-cjs/imported-from-index-but-not-used.ts",
           "coreModule": false,
+          "followable": true,
           "couldNotResolve": false,
           "dependencyTypes": ["local"],
           "dynamic": false,
-          "circular": false,
-          "followable": true,
-          "matchesDoNotFollow": false,
           "module": "./imported-from-index-but-not-used",
           "moduleSystem": "es6",
-          "resolved": "test/main/fixtures/ts-precompilation-deps-on-cjs/imported-from-index-but-not-used.ts",
+          "exoticallyRequired": false,
+          "matchesDoNotFollow": false,
+          "circular": false,
           "valid": true
         }
       ],
-      "source": "test/main/fixtures/ts-precompilation-deps-on-cjs/index.ts",
+      "orphan": false,
       "valid": true
     }
   ],
   "summary": {
+    "violations": [],
     "error": 0,
+    "warn": 0,
     "info": 0,
+    "totalCruised": 4,
+    "totalDependenciesCruised": 3,
     "optionsUsed": {
-      "args": "test/main/fixtures/ts-precompilation-deps-on-cjs",
+      "combinedDependencies": false,
       "externalModuleResolutionStrategy": "node_modules",
       "moduleSystems": ["amd", "cjs", "es6"],
       "preserveSymlinks": false,
       "tsPreCompilationDeps": true,
-      "combinedDependencies": false,
-      "exoticRequireStrings": []
-    },
-    "totalCruised": 4,
-    "totalDependenciesCruised": 3,
-    "violations": [],
-    "warn": 0
+      "exoticRequireStrings": [],
+      "args": "test/main/fixtures/ts-precompilation-deps-on-cjs"
+    }
   }
 }

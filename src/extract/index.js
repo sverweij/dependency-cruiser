@@ -27,6 +27,7 @@ const SHAREABLE_OPTIONS = [
   "rulesFile",
   "tsPreCompilationDeps",
   "webpackConfig",
+  "exoticallyRequired",
   "exoticRequireStrings",
   "reporterOptions"
 ];

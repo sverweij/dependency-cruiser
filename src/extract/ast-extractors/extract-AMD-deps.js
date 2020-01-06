@@ -13,7 +13,8 @@ function extractRegularAMDDependencies(pNode, pDependencies) {
               pDependencies.push({
                 module: pString,
                 moduleSystem: "amd",
-                dynamic: false
+                dynamic: false,
+                exoticallyRequired: false
               })
             );
           }

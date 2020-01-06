@@ -2,8 +2,8 @@
   "modules": [
     {
       "source": "src/use-maybe.ts",
-      "orphan": true,
       "dependencies": [],
+      "orphan": true,
       "valid": true
     }
   ],
@@ -16,11 +16,11 @@
     "totalDependenciesCruised": 0,
     "optionsUsed": {
       "combinedDependencies": false,
-      "exoticRequireStrings": [],
       "externalModuleResolutionStrategy": "node_modules",
       "moduleSystems": ["amd", "cjs", "es6"],
       "preserveSymlinks": false,
       "tsPreCompilationDeps": false,
+      "exoticRequireStrings": [],
       "args": "src"
     }
   }

@@ -2,7 +2,6 @@
   "modules": [
     {
       "source": "src/circular.js",
-      "orphan": false,
       "dependencies": [
         {
           "resolved": "src/index.js",
@@ -13,6 +12,7 @@
           "module": "./index",
           "moduleSystem": "es6",
           "dynamic": false,
+          "exoticallyRequired": false,
           "matchesDoNotFollow": false,
           "circular": true,
           "cycle": [
@@ -21,19 +21,14 @@
             "src/circular.js"
           ],
           "valid": false,
-          "rules": [
-            {
-              "severity": "info",
-              "name": "no-circular"
-            }
-          ]
+          "rules": [{ "severity": "info", "name": "no-circular" }]
         }
       ],
+      "orphan": false,
       "valid": true
     },
     {
       "source": "src/index.js",
-      "orphan": false,
       "dependencies": [
         {
           "resolved": "src/dynamic-to-circular.js",
@@ -44,6 +39,7 @@
           "module": "./dynamic-to-circular",
           "moduleSystem": "es6",
           "dynamic": false,
+          "exoticallyRequired": false,
           "matchesDoNotFollow": false,
           "circular": true,
           "cycle": [
@@ -52,19 +48,14 @@
             "src/index.js"
           ],
           "valid": false,
-          "rules": [
-            {
-              "severity": "info",
-              "name": "no-circular"
-            }
-          ]
+          "rules": [{ "severity": "info", "name": "no-circular" }]
         }
       ],
+      "orphan": false,
       "valid": true
     },
     {
       "source": "src/dynamic-to-circular.js",
-      "orphan": false,
       "dependencies": [
         {
           "resolved": "src/circular.js",
@@ -75,6 +66,7 @@
           "module": "./circular",
           "moduleSystem": "es6",
           "dynamic": true,
+          "exoticallyRequired": false,
           "matchesDoNotFollow": false,
           "circular": true,
           "cycle": [
@@ -83,14 +75,10 @@
             "src/dynamic-to-circular.js"
           ],
           "valid": false,
-          "rules": [
-            {
-              "severity": "warn",
-              "name": "no-dynamic"
-            }
-          ]
+          "rules": [{ "severity": "warn", "name": "no-dynamic" }]
         }
       ],
+      "orphan": false,
       "valid": true
     }
   ],
@@ -99,32 +87,22 @@
       {
         "from": "src/dynamic-to-circular.js",
         "to": "src/circular.js",
-        "rule": {
-          "severity": "warn",
-          "name": "no-dynamic"
-        }
+        "rule": { "severity": "warn", "name": "no-dynamic" }
       },
       {
         "from": "src/circular.js",
         "to": "src/index.js",
-        "rule": {
-          "severity": "info",
-          "name": "no-circular"
-        },
+        "rule": { "severity": "info", "name": "no-circular" },
         "cycle": [
           "src/index.js",
           "src/dynamic-to-circular.js",
           "src/circular.js"
         ]
       },
-
       {
         "from": "src/index.js",
         "to": "src/dynamic-to-circular.js",
-        "rule": {
-          "severity": "info",
-          "name": "no-circular"
-        },
+        "rule": { "severity": "info", "name": "no-circular" },
         "cycle": [
           "src/dynamic-to-circular.js",
           "src/circular.js",
@@ -138,13 +116,13 @@
     "totalCruised": 3,
     "totalDependenciesCruised": 3,
     "optionsUsed": {
-      "args": "src",
       "combinedDependencies": false,
-      "exoticRequireStrings": [],
       "externalModuleResolutionStrategy": "node_modules",
       "moduleSystems": ["amd", "cjs", "es6"],
       "preserveSymlinks": false,
-      "tsPreCompilationDeps": false
+      "tsPreCompilationDeps": false,
+      "exoticRequireStrings": [],
+      "args": "src"
     },
     "ruleSetUsed": {
       "forbidden": [
@@ -152,18 +130,13 @@
           "name": "no-circular",
           "severity": "info",
           "from": {},
-          "to": {
-            "dynamic": false,
-            "circular": true
-          }
+          "to": { "dynamic": false, "circular": true }
         },
         {
           "name": "no-dynamic",
           "severity": "warn",
           "from": {},
-          "to": {
-            "dynamic": true
-          }
+          "to": { "dynamic": true }
         }
       ]
     }

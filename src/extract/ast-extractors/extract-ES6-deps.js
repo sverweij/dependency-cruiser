@@ -7,13 +7,15 @@ function pushImportNodeValue(pDependencies) {
       pDependencies.push({
         module: pNode.source.value,
         moduleSystem: "es6",
-        dynamic: true
+        dynamic: true,
+        exoticallyRequired: false
       });
     } else if (estreeHelpers.isPlaceholderlessTemplateLiteral(pNode.source)) {
       pDependencies.push({
         module: pNode.source.quasis[0].value.cooked,
         moduleSystem: "es6",
-        dynamic: true
+        dynamic: true,
+        exoticallyRequired: false
       });
     }
   };
@@ -25,7 +27,8 @@ module.exports = (pAST, pDependencies) => {
       pDependencies.push({
         module: pNode.source.value,
         moduleSystem: "es6",
-        dynamic: false
+        dynamic: false,
+        exoticallyRequired: false
       });
     }
   }

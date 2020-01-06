@@ -2,174 +2,181 @@
   "modules": [
     {
       "source": "test/main/fixtures/jsx/index.js",
-      "valid": true,
-      "orphan": false,
       "dependencies": [
         {
           "resolved": "test/main/fixtures/jsx/jsx.jsx",
           "coreModule": false,
           "followable": true,
-          "matchesDoNotFollow": false,
           "couldNotResolve": false,
           "dependencyTypes": ["local"],
-          "dynamic": false,
-          "circular": false,
           "module": "./jsx",
           "moduleSystem": "cjs",
+          "dynamic": false,
+          "exoticallyRequired": false,
+          "matchesDoNotFollow": false,
+          "circular": false,
           "valid": true
         }
-      ]
+      ],
+      "orphan": false,
+      "valid": true
     },
     {
       "source": "test/main/fixtures/jsx/jsx.jsx",
-      "valid": true,
-      "orphan": false,
       "dependencies": [
         {
           "resolved": "components/pay-method-choice",
           "coreModule": false,
           "followable": false,
-          "matchesDoNotFollow": false,
           "couldNotResolve": true,
           "dependencyTypes": ["unknown"],
-          "dynamic": false,
-          "circular": false,
           "module": "components/pay-method-choice",
           "moduleSystem": "es6",
+          "dynamic": false,
+          "exoticallyRequired": false,
+          "matchesDoNotFollow": false,
+          "circular": false,
           "valid": true
         },
         {
           "resolved": "components/product-detail",
           "coreModule": false,
           "followable": false,
-          "matchesDoNotFollow": false,
           "couldNotResolve": true,
           "dependencyTypes": ["unknown"],
-          "dynamic": false,
-          "circular": false,
           "module": "components/product-detail",
           "moduleSystem": "es6",
+          "dynamic": false,
+          "exoticallyRequired": false,
+          "matchesDoNotFollow": false,
+          "circular": false,
           "valid": true
         },
         {
           "resolved": "products",
           "coreModule": false,
           "followable": false,
-          "matchesDoNotFollow": false,
           "couldNotResolve": true,
           "dependencyTypes": ["unknown"],
-          "dynamic": false,
-          "circular": false,
           "module": "products",
           "moduleSystem": "es6",
+          "dynamic": false,
+          "exoticallyRequired": false,
+          "matchesDoNotFollow": false,
+          "circular": false,
           "valid": true
         },
         {
           "resolved": "react",
           "coreModule": false,
           "followable": false,
-          "matchesDoNotFollow": false,
           "couldNotResolve": true,
           "dependencyTypes": ["unknown"],
-          "dynamic": false,
-          "circular": false,
           "module": "react",
           "moduleSystem": "es6",
+          "dynamic": false,
+          "exoticallyRequired": false,
+          "matchesDoNotFollow": false,
+          "circular": false,
           "valid": true
         },
         {
           "resolved": "tracking",
           "coreModule": false,
           "followable": false,
-          "matchesDoNotFollow": false,
           "couldNotResolve": true,
           "dependencyTypes": ["unknown"],
-          "dynamic": false,
-          "circular": false,
           "module": "tracking",
           "moduleSystem": "es6",
+          "dynamic": false,
+          "exoticallyRequired": false,
+          "matchesDoNotFollow": false,
+          "circular": false,
           "valid": true
         },
         {
           "resolved": "utils",
           "coreModule": false,
           "followable": false,
-          "matchesDoNotFollow": false,
           "couldNotResolve": true,
           "dependencyTypes": ["unknown"],
-          "dynamic": false,
-          "circular": false,
           "module": "utils",
           "moduleSystem": "es6",
+          "dynamic": false,
+          "exoticallyRequired": false,
+          "matchesDoNotFollow": false,
+          "circular": false,
           "valid": true
         }
-      ]
+      ],
+      "orphan": false,
+      "valid": true
     },
     {
       "source": "components/pay-method-choice",
       "followable": false,
-      "matchesDoNotFollow": false,
       "coreModule": false,
       "couldNotResolve": true,
+      "matchesDoNotFollow": false,
       "dependencyTypes": ["unknown"],
-      "valid": true,
+      "dependencies": [],
       "orphan": false,
-      "dependencies": []
+      "valid": true
     },
     {
       "source": "components/product-detail",
       "followable": false,
-      "matchesDoNotFollow": false,
       "coreModule": false,
       "couldNotResolve": true,
+      "matchesDoNotFollow": false,
       "dependencyTypes": ["unknown"],
-      "valid": true,
+      "dependencies": [],
       "orphan": false,
-      "dependencies": []
+      "valid": true
     },
     {
       "source": "products",
       "followable": false,
-      "matchesDoNotFollow": false,
       "coreModule": false,
       "couldNotResolve": true,
+      "matchesDoNotFollow": false,
       "dependencyTypes": ["unknown"],
-      "valid": true,
+      "dependencies": [],
       "orphan": false,
-      "dependencies": []
+      "valid": true
     },
     {
       "source": "react",
       "followable": false,
-      "matchesDoNotFollow": false,
       "coreModule": false,
       "couldNotResolve": true,
+      "matchesDoNotFollow": false,
       "dependencyTypes": ["unknown"],
-      "valid": true,
+      "dependencies": [],
       "orphan": false,
-      "dependencies": []
+      "valid": true
     },
     {
       "source": "tracking",
       "followable": false,
-      "matchesDoNotFollow": false,
       "coreModule": false,
       "couldNotResolve": true,
+      "matchesDoNotFollow": false,
       "dependencyTypes": ["unknown"],
-      "valid": true,
+      "dependencies": [],
       "orphan": false,
-      "dependencies": []
+      "valid": true
     },
     {
       "source": "utils",
       "followable": false,
-      "matchesDoNotFollow": false,
       "coreModule": false,
       "couldNotResolve": true,
+      "matchesDoNotFollow": false,
       "dependencyTypes": ["unknown"],
-      "valid": true,
+      "dependencies": [],
       "orphan": false,
-      "dependencies": []
+      "valid": true
     }
   ],
   "summary": {
@@ -180,13 +187,13 @@
     "totalCruised": 8,
     "totalDependenciesCruised": 7,
     "optionsUsed": {
-      "args": "test/main/fixtures/jsx",
-      "moduleSystems": ["amd", "cjs", "es6"],
-      "tsPreCompilationDeps": false,
-      "preserveSymlinks": false,
       "combinedDependencies": false,
+      "externalModuleResolutionStrategy": "node_modules",
+      "moduleSystems": ["amd", "cjs", "es6"],
+      "preserveSymlinks": false,
+      "tsPreCompilationDeps": false,
       "exoticRequireStrings": [],
-      "externalModuleResolutionStrategy": "node_modules"
+      "args": "test/main/fixtures/jsx"
     }
   }
 }

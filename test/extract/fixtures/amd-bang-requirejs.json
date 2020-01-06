@@ -1,106 +1,98 @@
 [
-    {
-        "resolved": "../../../node_modules/commander/index",
-        "coreModule": false,
-        "dependencyTypes": [
-            "unknown"
-        ],
-        "dynamic": false,
-        "followable": false,
-        "matchesDoNotFollow": false,
-        "couldNotResolve": true,
-        "module": "../../../node_modules/commander/index",
-        "moduleSystem": "amd"
-    },
-    {
-        "resolved": "test/extract/fixtures/amd-bangs/excitingpolyfill.js",
-        "coreModule": false,
-        "dependencyTypes": [
-            "local"
-        ],
-        "dynamic": false,
-        "followable": true,
-        "matchesDoNotFollow": false,
-        "couldNotResolve": false,
-        "module": "./excitingpolyfill.js",
-        "moduleSystem": "amd"
-    },
-    {
-        "resolved": "./one_only_one",
-        "coreModule": false,
-        "dependencyTypes": [
-            "unknown"
-        ],
-        "dynamic": false,
-        "followable": false,
-        "matchesDoNotFollow": false,
-        "couldNotResolve": true,
-        "module": "./one_only_one",
-        "moduleSystem": "amd"
-    },
-    {
-        "resolved": "./shared",
-        "coreModule": false,
-        "dependencyTypes": [
-            "unknown"
-        ],
-        "dynamic": false,
-        "followable": false,
-        "matchesDoNotFollow": false,
-        "couldNotResolve": true,
-        "module": "./shared",
-        "moduleSystem": "amd"
-    },
-    {
-        "resolved": "./somedata.json'",
-        "coreModule": false,
-        "dependencyTypes": [
-            "unknown"
-        ],
-        "dynamic": false,
-        "followable": false,
-        "matchesDoNotFollow": false,
-        "couldNotResolve": true,
-        "module": "./somedata.json'",
-        "moduleSystem": "amd"
-    },
-    {
-        "resolved": "./sub/dir",
-        "coreModule": false,
-        "dependencyTypes": [
-            "unknown"
-        ],
-        "dynamic": false,
-        "followable": false,
-        "matchesDoNotFollow": false,
-        "couldNotResolve": true,
-        "module": "./sub/dir",
-        "moduleSystem": "amd"
-    },
-    {
-        "resolved": "fs",
-        "coreModule": true,
-        "dependencyTypes": [
-            "core"
-        ],
-        "dynamic": false,
-        "followable": false,
-        "matchesDoNotFollow": false,
-        "couldNotResolve": false,
-        "module": "fs",
-        "moduleSystem": "amd"
-    },
-    {
-        "resolved": "json",
-        "coreModule": false,
-        "dependencyTypes": [
-            "unknown"
-        ],
-        "dynamic": false,
-        "followable": false,
-        "matchesDoNotFollow": false,
-        "couldNotResolve": true,
-        "module": "json",
-        "moduleSystem": "amd"
-    }
+  {
+    "resolved": "../../../node_modules/commander/index",
+    "coreModule": false,
+    "dependencyTypes": ["unknown"],
+    "dynamic": false,
+    "followable": false,
+    "exoticallyRequired": false,
+    "matchesDoNotFollow": false,
+    "couldNotResolve": true,
+    "module": "../../../node_modules/commander/index",
+    "moduleSystem": "amd"
+  },
+  {
+    "resolved": "test/extract/fixtures/amd-bangs/excitingpolyfill.js",
+    "coreModule": false,
+    "dependencyTypes": ["local"],
+    "dynamic": false,
+    "followable": true,
+    "exoticallyRequired": false,
+    "matchesDoNotFollow": false,
+    "couldNotResolve": false,
+    "module": "./excitingpolyfill.js",
+    "moduleSystem": "amd"
+  },
+  {
+    "resolved": "./one_only_one",
+    "coreModule": false,
+    "dependencyTypes": ["unknown"],
+    "dynamic": false,
+    "followable": false,
+    "exoticallyRequired": false,
+    "matchesDoNotFollow": false,
+    "couldNotResolve": true,
+    "module": "./one_only_one",
+    "moduleSystem": "amd"
+  },
+  {
+    "resolved": "./shared",
+    "coreModule": false,
+    "dependencyTypes": ["unknown"],
+    "dynamic": false,
+    "followable": false,
+    "exoticallyRequired": false,
+    "matchesDoNotFollow": false,
+    "couldNotResolve": true,
+    "module": "./shared",
+    "moduleSystem": "amd"
+  },
+  {
+    "resolved": "./somedata.json'",
+    "coreModule": false,
+    "dependencyTypes": ["unknown"],
+    "dynamic": false,
+    "followable": false,
+    "exoticallyRequired": false,
+    "matchesDoNotFollow": false,
+    "couldNotResolve": true,
+    "module": "./somedata.json'",
+    "moduleSystem": "amd"
+  },
+  {
+    "resolved": "./sub/dir",
+    "coreModule": false,
+    "dependencyTypes": ["unknown"],
+    "dynamic": false,
+    "followable": false,
+    "exoticallyRequired": false,
+    "matchesDoNotFollow": false,
+    "couldNotResolve": true,
+    "module": "./sub/dir",
+    "moduleSystem": "amd"
+  },
+  {
+    "resolved": "fs",
+    "coreModule": true,
+    "dependencyTypes": ["core"],
+    "dynamic": false,
+    "followable": false,
+    "exoticallyRequired": false,
+    "matchesDoNotFollow": false,
+    "couldNotResolve": false,
+    "module": "fs",
+    "moduleSystem": "amd"
+  },
+  {
+    "resolved": "json",
+    "coreModule": false,
+    "dependencyTypes": ["unknown"],
+    "dynamic": false,
+    "followable": false,
+    "exoticallyRequired": false,
+    "matchesDoNotFollow": false,
+    "couldNotResolve": true,
+    "module": "json",
+    "moduleSystem": "amd"
+  }
 ]

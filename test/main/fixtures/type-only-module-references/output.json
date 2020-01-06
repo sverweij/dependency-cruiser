@@ -2,7 +2,6 @@
   "modules": [
     {
       "source": "src/use-maybe.ts",
-      "orphan": false,
       "dependencies": [
         {
           "resolved": "node_modules/@types/graphql/tsutils/Maybe.d.ts",
@@ -11,20 +10,22 @@
           "couldNotResolve": false,
           "dependencyTypes": ["npm-no-pkg"],
           "license": "MIT",
+          "dynamic": false,
           "module": "graphql/tsutils/Maybe",
           "moduleSystem": "es6",
-          "dynamic": false,
-          "circular": false,
+          "exoticallyRequired": false,
           "matchesDoNotFollow": false,
+          "circular": false,
           "valid": true
         }
       ],
+      "orphan": false,
       "valid": true
     },
     {
       "source": "node_modules/@types/graphql/tsutils/Maybe.d.ts",
-      "orphan": false,
       "dependencies": [],
+      "orphan": false,
       "valid": true
     }
   ],
@@ -37,11 +38,11 @@
     "totalDependenciesCruised": 1,
     "optionsUsed": {
       "combinedDependencies": false,
-      "exoticRequireStrings": [],
       "externalModuleResolutionStrategy": "node_modules",
       "moduleSystems": ["amd", "cjs", "es6"],
       "preserveSymlinks": false,
       "tsPreCompilationDeps": true,
+      "exoticRequireStrings": [],
       "args": "src"
     }
   }

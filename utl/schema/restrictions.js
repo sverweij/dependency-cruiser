@@ -70,6 +70,11 @@ module.exports = {
           description:
             "Whether or not to match when the dependency is a dynamic one."
         },
+        exoticallyRequired: {
+          type: "boolean",
+          description:
+            "Whether or not to match when the dependency is exotically required."
+        },
         exoticRequire: {
           type: "string",
           description:

@@ -2,28 +2,31 @@
   "modules": [
     {
       "source": "test/cli/fixtures/typescriptconfig/cli-dynamic-imports/import_dynamically.ts",
-      "orphan": false,
       "dependencies": [
         {
           "resolved": "test/cli/fixtures/typescriptconfig/cli-dynamic-imports/import_this.ts",
           "coreModule": false,
           "followable": true,
           "couldNotResolve": false,
-          "dependencyTypes": ["local"],
-          "dynamic": false,
-          "circular": false,
+          "dependencyTypes": [
+            "local"
+          ],
           "module": "./import_this",
           "moduleSystem": "cjs",
+          "dynamic": false,
+          "exoticallyRequired": false,
           "matchesDoNotFollow": false,
+          "circular": false,
           "valid": true
         }
       ],
+      "orphan": false,
       "valid": true
     },
     {
       "source": "test/cli/fixtures/typescriptconfig/cli-dynamic-imports/import_this.ts",
-      "orphan": false,
       "dependencies": [],
+      "orphan": false,
       "valid": true
     }
   ],
@@ -34,17 +37,21 @@
     "info": 0,
     "totalCruised": 2,
     "totalDependenciesCruised": 1,
-    "ruleSetUsed": {},
     "optionsUsed": {
-      "args": "test/cli/fixtures/typescriptconfig/cli-dynamic-imports/import_dynamically.ts",
-      "outputTo": "test/cli/output/dynamic-import-ok.json",
-      "moduleSystems": ["amd", "cjs", "es6"],
-      "outputType": "json",
-      "tsPreCompilationDeps": false,
       "combinedDependencies": false,
-      "exoticRequireStrings": [],
+      "externalModuleResolutionStrategy": "node_modules",
+      "moduleSystems": [
+        "amd",
+        "cjs",
+        "es6"
+      ],
+      "outputTo": "test/cli/output/dynamic-import-ok.json",
+      "outputType": "json",
       "preserveSymlinks": false,
-      "externalModuleResolutionStrategy": "node_modules"
-    }
+      "tsPreCompilationDeps": false,
+      "exoticRequireStrings": [],
+      "args": "test/cli/fixtures/typescriptconfig/cli-dynamic-imports/import_dynamically.ts"
+    },
+    "ruleSetUsed": {}
   }
 }

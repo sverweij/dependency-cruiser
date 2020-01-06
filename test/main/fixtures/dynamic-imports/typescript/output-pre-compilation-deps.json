@@ -2,7 +2,6 @@
   "modules": [
     {
       "source": "src/circular.ts",
-      "orphan": false,
       "dependencies": [
         {
           "resolved": "src/index.ts",
@@ -10,9 +9,10 @@
           "followable": true,
           "couldNotResolve": false,
           "dependencyTypes": ["local"],
+          "dynamic": false,
           "module": "./index",
           "moduleSystem": "es6",
-          "dynamic": false,
+          "exoticallyRequired": false,
           "matchesDoNotFollow": false,
           "circular": true,
           "cycle": [
@@ -21,19 +21,14 @@
             "src/circular.ts"
           ],
           "valid": false,
-          "rules": [
-            {
-              "severity": "info",
-              "name": "no-circular"
-            }
-          ]
+          "rules": [{ "severity": "info", "name": "no-circular" }]
         }
       ],
+      "orphan": false,
       "valid": true
     },
     {
       "source": "src/index.ts",
-      "orphan": false,
       "dependencies": [
         {
           "resolved": "src/dynamic-to-circular.ts",
@@ -41,9 +36,10 @@
           "followable": true,
           "couldNotResolve": false,
           "dependencyTypes": ["local"],
+          "dynamic": false,
           "module": "./dynamic-to-circular",
           "moduleSystem": "es6",
-          "dynamic": false,
+          "exoticallyRequired": false,
           "matchesDoNotFollow": false,
           "circular": true,
           "cycle": [
@@ -52,19 +48,14 @@
             "src/index.ts"
           ],
           "valid": false,
-          "rules": [
-            {
-              "severity": "info",
-              "name": "no-circular"
-            }
-          ]
+          "rules": [{ "severity": "info", "name": "no-circular" }]
         }
       ],
+      "orphan": false,
       "valid": true
     },
     {
       "source": "src/dynamic-to-circular.ts",
-      "orphan": false,
       "dependencies": [
         {
           "resolved": "src/circular.ts",
@@ -72,9 +63,10 @@
           "followable": true,
           "couldNotResolve": false,
           "dependencyTypes": ["local"],
+          "dynamic": true,
           "module": "./circular",
           "moduleSystem": "es6",
-          "dynamic": true,
+          "exoticallyRequired": false,
           "matchesDoNotFollow": false,
           "circular": true,
           "cycle": [
@@ -83,14 +75,10 @@
             "src/dynamic-to-circular.ts"
           ],
           "valid": false,
-          "rules": [
-            {
-              "severity": "warn",
-              "name": "no-dynamic"
-            }
-          ]
+          "rules": [{ "severity": "warn", "name": "no-dynamic" }]
         }
       ],
+      "orphan": false,
       "valid": true
     }
   ],
@@ -99,18 +87,12 @@
       {
         "from": "src/dynamic-to-circular.ts",
         "to": "src/circular.ts",
-        "rule": {
-          "severity": "warn",
-          "name": "no-dynamic"
-        }
+        "rule": { "severity": "warn", "name": "no-dynamic" }
       },
       {
         "from": "src/circular.ts",
         "to": "src/index.ts",
-        "rule": {
-          "severity": "info",
-          "name": "no-circular"
-        },
+        "rule": { "severity": "info", "name": "no-circular" },
         "cycle": [
           "src/index.ts",
           "src/dynamic-to-circular.ts",
@@ -120,10 +102,7 @@
       {
         "from": "src/index.ts",
         "to": "src/dynamic-to-circular.ts",
-        "rule": {
-          "severity": "info",
-          "name": "no-circular"
-        },
+        "rule": { "severity": "info", "name": "no-circular" },
         "cycle": [
           "src/dynamic-to-circular.ts",
           "src/circular.ts",
@@ -137,13 +116,13 @@
     "totalCruised": 3,
     "totalDependenciesCruised": 3,
     "optionsUsed": {
-      "args": "src",
       "combinedDependencies": false,
-      "exoticRequireStrings": [],
       "externalModuleResolutionStrategy": "node_modules",
       "moduleSystems": ["amd", "cjs", "es6"],
       "preserveSymlinks": false,
-      "tsPreCompilationDeps": true
+      "tsPreCompilationDeps": true,
+      "exoticRequireStrings": [],
+      "args": "src"
     },
     "ruleSetUsed": {
       "forbidden": [
@@ -151,18 +130,13 @@
           "name": "no-circular",
           "severity": "info",
           "from": {},
-          "to": {
-            "dynamic": false,
-            "circular": true
-          }
+          "to": { "dynamic": false, "circular": true }
         },
         {
           "name": "no-dynamic",
           "severity": "warn",
           "from": {},
-          "to": {
-            "dynamic": true
-          }
+          "to": { "dynamic": true }
         }
       ]
     }

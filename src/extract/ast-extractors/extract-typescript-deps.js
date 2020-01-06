@@ -30,7 +30,8 @@ function extractImportsAndExports(pAST) {
     )
     .map(pStatement => ({
       module: pStatement.moduleSpecifier.text,
-      moduleSystem: "es6"
+      moduleSystem: "es6",
+      exoticallyRequired: false
     }));
 }
 
@@ -52,7 +53,8 @@ function extractImportEquals(pAST) {
     )
     .map(pStatement => ({
       module: pStatement.moduleReference.expression.text,
-      moduleSystem: "cjs"
+      moduleSystem: "cjs",
+      exoticallyRequired: false
     }));
 }
 
@@ -67,18 +69,21 @@ function extractTrippleSlashDirectives(pAST) {
   return pAST.referencedFiles
     .map(pReference => ({
       module: pReference.fileName,
-      moduleSystem: "tsd"
+      moduleSystem: "tsd",
+      exoticallyRequired: false
     }))
     .concat(
       pAST.typeReferenceDirectives.map(pReference => ({
         module: pReference.fileName,
-        moduleSystem: "tsd"
+        moduleSystem: "tsd",
+        exoticallyRequired: false
       }))
     )
     .concat(
       pAST.amdDependencies.map(pReference => ({
         module: pReference.path,
-        moduleSystem: "tsd"
+        moduleSystem: "tsd",
+        exoticallyRequired: false
       }))
     );
 }
@@ -167,7 +172,8 @@ function walk(pResult, pExoticRequireStrings) {
     if (isRequireCallExpression(pASTNode)) {
       pResult.push({
         module: pASTNode.arguments[0].text,
-        moduleSystem: "cjs"
+        moduleSystem: "cjs",
+        exoticallyRequired: false
       });
     }
 
@@ -177,6 +183,7 @@ function walk(pResult, pExoticRequireStrings) {
         pResult.push({
           module: pASTNode.arguments[0].text,
           moduleSystem: "cjs",
+          exoticallyRequired: true,
           exoticRequire: pExoticRequireString
         });
       }
@@ -187,7 +194,8 @@ function walk(pResult, pExoticRequireStrings) {
       pResult.push({
         module: pASTNode.arguments[0].text,
         moduleSystem: "es6",
-        dynamic: true
+        dynamic: true,
+        exoticallyRequired: false
       });
     }
 
@@ -196,7 +204,8 @@ function walk(pResult, pExoticRequireStrings) {
     if (isTypeImport(pASTNode)) {
       pResult.push({
         module: pASTNode.argument.literal.text,
-        moduleSystem: "es6"
+        moduleSystem: "es6",
+        exoticallyRequired: false
       });
     }
     typescript.forEachChild(pASTNode, walk(pResult, pExoticRequireStrings));

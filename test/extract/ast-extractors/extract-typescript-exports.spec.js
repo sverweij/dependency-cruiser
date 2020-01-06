@@ -7,7 +7,8 @@ describe("ast-extractors/extract-typescript - re-exports", () => {
       {
         module: "./ts-thing",
         moduleSystem: "es6",
-        dynamic: false
+        dynamic: false,
+        exoticallyRequired: false
       }
     ]);
   });
@@ -21,7 +22,8 @@ describe("ast-extractors/extract-typescript - re-exports", () => {
       {
         module: "./ts-thing",
         moduleSystem: "es6",
-        dynamic: false
+        dynamic: false,
+        exoticallyRequired: false
       }
     ]);
   });

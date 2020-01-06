@@ -2,6 +2,40 @@ const expect = require("chai").expect;
 const validate = require("../../src/validate");
 const readRuleSet = require("./readruleset.utl");
 
+describe("validate/index - exoticallyRequired", () => {
+  it("does not flag dependencies that are required with a regular require or import", () => {
+    expect(
+      validate.dependency(
+        true,
+        readRuleSet("./test/validate/fixtures/rules.exotically-required.json"),
+        { source: "something" },
+        {
+          resolved: "src/aap/speeltuigen/autoband.ts",
+          exoticallyRequired: false
+        }
+      )
+    ).to.deep.equal({ valid: true });
+  });
+
+  it("does flag dependencies that are required with any exotic require", () => {
+    expect(
+      validate.dependency(
+        true,
+        readRuleSet("./test/validate/fixtures/rules.exotically-required.json"),
+        { source: "something" },
+        {
+          resolved: "src/aap/speeltuigen/autoband.ts",
+          exoticRequire: "notUse",
+          exoticallyRequired: true
+        }
+      )
+    ).to.deep.equal({
+      rules: [{ name: "no-exotic-requires-period", severity: "warn" }],
+      valid: false
+    });
+  });
+});
+
 describe("validate/index - exoticRequire", () => {
   it("does not flag dependencies that are required with a regular require or import", () => {
     expect(

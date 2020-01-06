@@ -11,7 +11,8 @@ describe("ast-extractors/extract-typescript - dynamic imports", () => {
       {
         module: "judeljo",
         moduleSystem: "es6",
-        dynamic: true
+        dynamic: true,
+        exoticallyRequired: false
       }
     ]);
   });
@@ -25,7 +26,8 @@ describe("ast-extractors/extract-typescript - dynamic imports", () => {
       {
         module: "judeljo",
         moduleSystem: "es6",
-        dynamic: true
+        dynamic: true,
+        exoticallyRequired: false
       }
     ]);
   });
