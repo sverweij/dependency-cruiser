@@ -12,7 +12,7 @@
       }
       return results;
     })()}
-    {(rating % 1 !== 0 ? <Star className="halfStar" /> : void 0)}
+    {rating % 1 !== 0 ? <Star className="halfStar" /> : void 0}
     {(function() {
       var i, ref, ref1, results;
       results = [];
