@@ -13,5 +13,4 @@ strict digraph "dependency-cruiser output"{
     subgraph "cluster_src" {label="src" "src/reactthing.jsx" [label="reactthing.jsx" URL="src/reactthing.jsx" ] }
     subgraph "cluster_src" {label="src" "src/reactthing.tsx" [label="reactthing.tsx" URL="src/reactthing.tsx" ] }
     subgraph "cluster_src" {label="src" "src/typescript.ts" [label="typescript.ts" URL="src/typescript.ts" ] }
-
 }

@@ -4,5 +4,4 @@ strict digraph "dependency-cruiser output"{
     edge [arrowhead="normal" arrowsize="0.6" penwidth="2.0" color="#00000033" fontname="Helvetica" fontsize="9"]
 
     "remi.js" [label="remi.js" tooltip="no-orphans" URL="testprefix://ladida/remi.js" fillcolor="#ccffcc" fontcolor="red" color="red"]
-
 }

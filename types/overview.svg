@@ -19,9 +19,9 @@
 </g>
 </g>
 <!-- options.d.ts -->
-<g id="node4" class="node">
+<g id="node2" class="node">
 <title>options.d.ts</title>
-<g id="a_node4"><a xlink:href="https://github.com/sverweij/dependency-cruiser/blob/develop/options.d.ts" xlink:title="options.d.ts">
+<g id="a_node2"><a xlink:href="https://github.com/sverweij/dependency-cruiser/blob/develop/options.d.ts" xlink:title="options.d.ts">
 <path fill="#ddfeff" stroke="black" d="M278.48,-98C278.48,-98 227.75,-98 227.75,-98 224.92,-98 222.09,-95.17 222.09,-92.33 222.09,-92.33 222.09,-86.67 222.09,-86.67 222.09,-83.83 224.92,-81 227.75,-81 227.75,-81 278.48,-81 278.48,-81 281.31,-81 284.14,-83.83 284.14,-86.67 284.14,-86.67 284.14,-92.33 284.14,-92.33 284.14,-95.17 281.31,-98 278.48,-98"/>
 <text text-anchor="middle" x="253.11" y="-86.8" font-family="Helvetica,sans-Serif" font-size="9.00">options.d.ts</text>
 </a>
@@ -34,9 +34,9 @@
 <polygon fill="#000000" fill-opacity="0.200000" stroke="#000000" stroke-width="2" stroke-opacity="0.200000" points="230.6,-74.8 232.7,-80.81 234.8,-74.81 230.6,-74.8"/>
 </g>
 <!-- rule&#45;set.d.ts -->
-<g id="node6" class="node">
+<g id="node3" class="node">
 <title>rule&#45;set.d.ts</title>
-<g id="a_node6"><a xlink:href="https://github.com/sverweij/dependency-cruiser/blob/develop/rule-set.d.ts" xlink:title="rule&#45;set.d.ts">
+<g id="a_node3"><a xlink:href="https://github.com/sverweij/dependency-cruiser/blob/develop/rule-set.d.ts" xlink:title="rule&#45;set.d.ts">
 <path fill="#ddfeff" stroke="black" d="M371.25,-71C371.25,-71 319.55,-71 319.55,-71 316.71,-71 313.88,-68.17 313.88,-65.33 313.88,-65.33 313.88,-59.67 313.88,-59.67 313.88,-56.83 316.71,-54 319.55,-54 319.55,-54 371.25,-54 371.25,-54 374.08,-54 376.92,-56.83 376.92,-59.67 376.92,-59.67 376.92,-65.33 376.92,-65.33 376.92,-68.17 374.08,-71 371.25,-71"/>
 <text text-anchor="middle" x="345.4" y="-59.8" font-family="Helvetica,sans-Serif" font-size="9.00">rule&#45;set.d.ts</text>
 </a>
@@ -48,10 +48,52 @@
 <path fill="none" stroke="#000000" stroke-width="2" stroke-opacity="0.200000" d="M209.15,-60.5C209.15,-60.5 307.72,-60.5 307.72,-60.5"/>
 <polygon fill="#000000" fill-opacity="0.200000" stroke="#000000" stroke-width="2" stroke-opacity="0.200000" points="307.72,-62.6 313.72,-60.5 307.72,-58.4 307.72,-62.6"/>
 </g>
+<!-- options.d.ts&#45;&gt;rule&#45;set.d.ts -->
+<g id="edge12" class="edge">
+<title>options.d.ts&#45;&gt;rule&#45;set.d.ts</title>
+<path fill="none" stroke="#000000" stroke-width="2" stroke-opacity="0.200000" d="M274.7,-80.87C274.7,-73.47 274.7,-64 274.7,-64 274.7,-64 307.77,-64 307.77,-64"/>
+<polygon fill="#000000" fill-opacity="0.200000" stroke="#000000" stroke-width="2" stroke-opacity="0.200000" points="307.77,-66.1 313.77,-64 307.77,-61.9 307.77,-66.1"/>
+</g>
+<!-- shared&#45;types.d.ts -->
+<g id="node5" class="node">
+<title>shared&#45;types.d.ts</title>
+<g id="a_node5"><a xlink:href="https://github.com/sverweij/dependency-cruiser/blob/develop/shared-types.d.ts" xlink:title="shared&#45;types.d.ts">
+<path fill="#ddfeff" stroke="black" d="M486.05,-30C486.05,-30 412.32,-30 412.32,-30 409.48,-30 406.65,-27.17 406.65,-24.33 406.65,-24.33 406.65,-18.67 406.65,-18.67 406.65,-15.83 409.48,-13 412.32,-13 412.32,-13 486.05,-13 486.05,-13 488.88,-13 491.72,-15.83 491.72,-18.67 491.72,-18.67 491.72,-24.33 491.72,-24.33 491.72,-27.17 488.88,-30 486.05,-30"/>
+<text text-anchor="middle" x="449.18" y="-18.8" font-family="Helvetica,sans-Serif" font-size="9.00">shared&#45;types.d.ts</text>
+</a>
+</g>
+</g>
+<!-- options.d.ts&#45;&gt;shared&#45;types.d.ts -->
+<g id="edge13" class="edge">
+<title>options.d.ts&#45;&gt;shared&#45;types.d.ts</title>
+<path fill="none" stroke="#000000" stroke-width="2" stroke-opacity="0.200000" d="M263.7,-80.74C263.7,-62.58 263.7,-22.5 263.7,-22.5 263.7,-22.5 400.63,-22.5 400.63,-22.5"/>
+<polygon fill="#000000" fill-opacity="0.200000" stroke="#000000" stroke-width="2" stroke-opacity="0.200000" points="400.63,-24.6 406.63,-22.5 400.63,-20.4 400.63,-24.6"/>
+</g>
+<!-- reporter&#45;options.d.ts -->
+<g id="node7" class="node">
+<title>reporter&#45;options.d.ts</title>
+<g id="a_node7"><a xlink:href="https://github.com/sverweij/dependency-cruiser/blob/develop/reporter-options.d.ts" xlink:title="reporter&#45;options.d.ts">
+<path fill="#ddfeff" stroke="black" d="M387.77,-100C387.77,-100 303.03,-100 303.03,-100 300.19,-100 297.36,-97.17 297.36,-94.33 297.36,-94.33 297.36,-88.67 297.36,-88.67 297.36,-85.83 300.19,-83 303.03,-83 303.03,-83 387.77,-83 387.77,-83 390.6,-83 393.44,-85.83 393.44,-88.67 393.44,-88.67 393.44,-94.33 393.44,-94.33 393.44,-97.17 390.6,-100 387.77,-100"/>
+<text text-anchor="middle" x="345.4" y="-88.8" font-family="Helvetica,sans-Serif" font-size="9.00">reporter&#45;options.d.ts</text>
+</a>
+</g>
+</g>
+<!-- options.d.ts&#45;&gt;reporter&#45;options.d.ts -->
+<g id="edge11" class="edge">
+<title>options.d.ts&#45;&gt;reporter&#45;options.d.ts</title>
+<path fill="none" stroke="#000000" stroke-width="2" stroke-opacity="0.200000" d="M284.36,-90.5C284.36,-90.5 291.3,-90.5 291.3,-90.5"/>
+<polygon fill="#000000" fill-opacity="0.200000" stroke="#000000" stroke-width="2" stroke-opacity="0.200000" points="291.3,-92.6 297.3,-90.5 291.3,-88.4 291.3,-92.6"/>
+</g>
+<!-- rule&#45;set.d.ts&#45;&gt;shared&#45;types.d.ts -->
+<g id="edge14" class="edge">
+<title>rule&#45;set.d.ts&#45;&gt;shared&#45;types.d.ts</title>
+<path fill="none" stroke="#000000" stroke-width="2" stroke-opacity="0.200000" d="M361.7,-53.86C361.7,-42.86 361.7,-25.25 361.7,-25.25 361.7,-25.25 400.47,-25.25 400.47,-25.25"/>
+<polygon fill="#000000" fill-opacity="0.200000" stroke="#000000" stroke-width="2" stroke-opacity="0.200000" points="400.47,-27.35 406.47,-25.25 400.47,-23.15 400.47,-27.35"/>
+</g>
 <!-- cruise&#45;result.d.ts -->
-<g id="node2" class="node">
+<g id="node4" class="node">
 <title>cruise&#45;result.d.ts</title>
-<g id="a_node2"><a xlink:href="https://github.com/sverweij/dependency-cruiser/blob/develop/cruise-result.d.ts" xlink:title="cruise&#45;result.d.ts">
+<g id="a_node4"><a xlink:href="https://github.com/sverweij/dependency-cruiser/blob/develop/cruise-result.d.ts" xlink:title="cruise&#45;result.d.ts">
 <path fill="#ddfeff" stroke="black" d="M202.18,-45C202.18,-45 131.48,-45 131.48,-45 128.64,-45 125.81,-42.17 125.81,-39.33 125.81,-39.33 125.81,-33.67 125.81,-33.67 125.81,-30.83 128.64,-28 131.48,-28 131.48,-28 202.18,-28 202.18,-28 205.02,-28 207.85,-30.83 207.85,-33.67 207.85,-33.67 207.85,-39.33 207.85,-39.33 207.85,-42.17 205.02,-45 202.18,-45"/>
 <text text-anchor="middle" x="166.83" y="-33.8" font-family="Helvetica,sans-Serif" font-size="9.00">cruise&#45;result.d.ts</text>
 </a>
@@ -69,15 +111,6 @@
 <path fill="none" stroke="#000000" stroke-width="2" stroke-opacity="0.200000" d="M207.93,-35C256.18,-35 329.7,-35 329.7,-35 329.7,-35 329.7,-47.8 329.7,-47.8"/>
 <polygon fill="#000000" fill-opacity="0.200000" stroke="#000000" stroke-width="2" stroke-opacity="0.200000" points="327.6,-47.8 329.7,-53.8 331.8,-47.8 327.6,-47.8"/>
 </g>
-<!-- shared&#45;types.d.ts -->
-<g id="node7" class="node">
-<title>shared&#45;types.d.ts</title>
-<g id="a_node7"><a xlink:href="https://github.com/sverweij/dependency-cruiser/blob/develop/shared-types.d.ts" xlink:title="shared&#45;types.d.ts">
-<path fill="#ddfeff" stroke="black" d="M486.05,-30C486.05,-30 412.32,-30 412.32,-30 409.48,-30 406.65,-27.17 406.65,-24.33 406.65,-24.33 406.65,-18.67 406.65,-18.67 406.65,-15.83 409.48,-13 412.32,-13 412.32,-13 486.05,-13 486.05,-13 488.88,-13 491.72,-15.83 491.72,-18.67 491.72,-18.67 491.72,-24.33 491.72,-24.33 491.72,-27.17 488.88,-30 486.05,-30"/>
-<text text-anchor="middle" x="449.18" y="-18.8" font-family="Helvetica,sans-Serif" font-size="9.00">shared&#45;types.d.ts</text>
-</a>
-</g>
-</g>
 <!-- cruise&#45;result.d.ts&#45;&gt;shared&#45;types.d.ts -->
 <g id="edge5" class="edge">
 <title>cruise&#45;result.d.ts&#45;&gt;shared&#45;types.d.ts</title>
@@ -85,9 +118,9 @@
 <polygon fill="#000000" fill-opacity="0.200000" stroke="#000000" stroke-width="2" stroke-opacity="0.200000" points="400.53,-21.85 406.53,-19.75 400.53,-17.65 400.53,-21.85"/>
 </g>
 <!-- dependency&#45;cruiser.d.ts -->
-<g id="node3" class="node">
+<g id="node6" class="node">
 <title>dependency&#45;cruiser.d.ts</title>
-<g id="a_node3"><a xlink:href="https://github.com/sverweij/dependency-cruiser/blob/develop/dependency-cruiser.d.ts" xlink:title="dependency&#45;cruiser.d.ts">
+<g id="a_node6"><a xlink:href="https://github.com/sverweij/dependency-cruiser/blob/develop/dependency-cruiser.d.ts" xlink:title="dependency&#45;cruiser.d.ts">
 <path fill="#ddfeff" stroke="black" d="M105.67,-17C105.67,-17 5.89,-17 5.89,-17 3.05,-17 0.22,-14.17 0.22,-11.33 0.22,-11.33 0.22,-5.67 0.22,-5.67 0.22,-2.83 3.05,0 5.89,0 5.89,0 105.67,0 105.67,0 108.51,0 111.34,-2.83 111.34,-5.67 111.34,-5.67 111.34,-11.33 111.34,-11.33 111.34,-14.17 108.51,-17 105.67,-17"/>
 <text text-anchor="middle" x="55.78" y="-5.8" font-family="Helvetica,sans-Serif" font-size="9.00">dependency&#45;cruiser.d.ts</text>
 </a>
@@ -98,12 +131,6 @@
 <title>dependency&#45;cruiser.d.ts&#45;&gt;configuration.d.ts</title>
 <path fill="none" stroke="#000000" stroke-width="2" stroke-opacity="0.200000" d="M56.7,-17.41C56.7,-33.44 56.7,-65.5 56.7,-65.5 56.7,-65.5 118.57,-65.5 118.57,-65.5"/>
 <polygon fill="#000000" fill-opacity="0.200000" stroke="#000000" stroke-width="2" stroke-opacity="0.200000" points="118.57,-67.6 124.57,-65.5 118.57,-63.4 118.57,-67.6"/>
-</g>
-<!-- dependency&#45;cruiser.d.ts&#45;&gt;cruise&#45;result.d.ts -->
-<g id="edge7" class="edge">
-<title>dependency&#45;cruiser.d.ts&#45;&gt;cruise&#45;result.d.ts</title>
-<path fill="none" stroke="#000000" stroke-width="2" stroke-opacity="0.200000" d="M111.66,-10.4C144.92,-10.4 180.7,-10.4 180.7,-10.4 180.7,-10.4 180.7,-21.95 180.7,-21.95"/>
-<polygon fill="#000000" fill-opacity="0.200000" stroke="#000000" stroke-width="2" stroke-opacity="0.200000" points="178.6,-21.95 180.7,-27.95 182.8,-21.95 178.6,-21.95"/>
 </g>
 <!-- dependency&#45;cruiser.d.ts&#45;&gt;options.d.ts -->
 <g id="edge8" class="edge">
@@ -117,44 +144,17 @@
 <path fill="none" stroke="#000000" stroke-width="2" stroke-opacity="0.200000" d="M111.68,-5.2C195.93,-5.2 345.7,-5.2 345.7,-5.2 345.7,-5.2 345.7,-47.55 345.7,-47.55"/>
 <polygon fill="#000000" fill-opacity="0.200000" stroke="#000000" stroke-width="2" stroke-opacity="0.200000" points="343.6,-47.55 345.7,-53.55 347.8,-47.55 343.6,-47.55"/>
 </g>
+<!-- dependency&#45;cruiser.d.ts&#45;&gt;cruise&#45;result.d.ts -->
+<g id="edge7" class="edge">
+<title>dependency&#45;cruiser.d.ts&#45;&gt;cruise&#45;result.d.ts</title>
+<path fill="none" stroke="#000000" stroke-width="2" stroke-opacity="0.200000" d="M111.66,-10.4C144.92,-10.4 180.7,-10.4 180.7,-10.4 180.7,-10.4 180.7,-21.95 180.7,-21.95"/>
+<polygon fill="#000000" fill-opacity="0.200000" stroke="#000000" stroke-width="2" stroke-opacity="0.200000" points="178.6,-21.95 180.7,-27.95 182.8,-21.95 178.6,-21.95"/>
+</g>
 <!-- dependency&#45;cruiser.d.ts&#45;&gt;shared&#45;types.d.ts -->
 <g id="edge10" class="edge">
 <title>dependency&#45;cruiser.d.ts&#45;&gt;shared&#45;types.d.ts</title>
 <path fill="none" stroke="#000000" stroke-width="2" stroke-opacity="0.200000" d="M111.38,-2.6C219.97,-2.6 449.7,-2.6 449.7,-2.6 449.7,-2.6 449.7,-6.93 449.7,-6.93"/>
 <polygon fill="#000000" fill-opacity="0.200000" stroke="#000000" stroke-width="2" stroke-opacity="0.200000" points="447.6,-6.93 449.7,-12.93 451.8,-6.93 447.6,-6.93"/>
-</g>
-<!-- reporter&#45;options.d.ts -->
-<g id="node5" class="node">
-<title>reporter&#45;options.d.ts</title>
-<g id="a_node5"><a xlink:href="https://github.com/sverweij/dependency-cruiser/blob/develop/reporter-options.d.ts" xlink:title="reporter&#45;options.d.ts">
-<path fill="#ddfeff" stroke="black" d="M387.77,-100C387.77,-100 303.03,-100 303.03,-100 300.19,-100 297.36,-97.17 297.36,-94.33 297.36,-94.33 297.36,-88.67 297.36,-88.67 297.36,-85.83 300.19,-83 303.03,-83 303.03,-83 387.77,-83 387.77,-83 390.6,-83 393.44,-85.83 393.44,-88.67 393.44,-88.67 393.44,-94.33 393.44,-94.33 393.44,-97.17 390.6,-100 387.77,-100"/>
-<text text-anchor="middle" x="345.4" y="-88.8" font-family="Helvetica,sans-Serif" font-size="9.00">reporter&#45;options.d.ts</text>
-</a>
-</g>
-</g>
-<!-- options.d.ts&#45;&gt;reporter&#45;options.d.ts -->
-<g id="edge11" class="edge">
-<title>options.d.ts&#45;&gt;reporter&#45;options.d.ts</title>
-<path fill="none" stroke="#000000" stroke-width="2" stroke-opacity="0.200000" d="M284.36,-90.5C284.36,-90.5 291.3,-90.5 291.3,-90.5"/>
-<polygon fill="#000000" fill-opacity="0.200000" stroke="#000000" stroke-width="2" stroke-opacity="0.200000" points="291.3,-92.6 297.3,-90.5 291.3,-88.4 291.3,-92.6"/>
-</g>
-<!-- options.d.ts&#45;&gt;rule&#45;set.d.ts -->
-<g id="edge12" class="edge">
-<title>options.d.ts&#45;&gt;rule&#45;set.d.ts</title>
-<path fill="none" stroke="#000000" stroke-width="2" stroke-opacity="0.200000" d="M274.7,-80.87C274.7,-73.47 274.7,-64 274.7,-64 274.7,-64 307.77,-64 307.77,-64"/>
-<polygon fill="#000000" fill-opacity="0.200000" stroke="#000000" stroke-width="2" stroke-opacity="0.200000" points="307.77,-66.1 313.77,-64 307.77,-61.9 307.77,-66.1"/>
-</g>
-<!-- options.d.ts&#45;&gt;shared&#45;types.d.ts -->
-<g id="edge13" class="edge">
-<title>options.d.ts&#45;&gt;shared&#45;types.d.ts</title>
-<path fill="none" stroke="#000000" stroke-width="2" stroke-opacity="0.200000" d="M263.7,-80.74C263.7,-62.58 263.7,-22.5 263.7,-22.5 263.7,-22.5 400.63,-22.5 400.63,-22.5"/>
-<polygon fill="#000000" fill-opacity="0.200000" stroke="#000000" stroke-width="2" stroke-opacity="0.200000" points="400.63,-24.6 406.63,-22.5 400.63,-20.4 400.63,-24.6"/>
-</g>
-<!-- rule&#45;set.d.ts&#45;&gt;shared&#45;types.d.ts -->
-<g id="edge14" class="edge">
-<title>rule&#45;set.d.ts&#45;&gt;shared&#45;types.d.ts</title>
-<path fill="none" stroke="#000000" stroke-width="2" stroke-opacity="0.200000" d="M361.7,-53.86C361.7,-42.86 361.7,-25.25 361.7,-25.25 361.7,-25.25 400.47,-25.25 400.47,-25.25"/>
-<polygon fill="#000000" fill-opacity="0.200000" stroke="#000000" stroke-width="2" stroke-opacity="0.200000" points="400.47,-27.35 406.47,-25.25 400.47,-23.15 400.47,-27.35"/>
 </g>
 </g>
 </svg>

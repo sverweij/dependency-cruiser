@@ -1,121 +1,101 @@
 strict digraph "dependency-cruiser output"{
-    ordering=out
-    rankdir=LR
-    splines=true
-    overlap=true
-    nodesep=0.16
-    ranksep=0.18
-    fontname="Helvetica-bold"
-    fontsize=9
-    style="rounded,bold,filled"
-    fillcolor="#ffffff"
-    compound=true
-    node [shape=folder style="rounded, filled" fillcolor="#ffffcc" height=0.2 fontname=Helvetica fontsize=9]
-    edge [color="#00000033" penwidth=2.0 arrowsize=0.6 arrowhead=normal fontname=Helvetica fontsize=9]
+    ordering="out" rankdir="LR" splines="true" overlap="false" nodesep="0.16" ranksep="0.18" fontname="Helvetica-bold" fontsize="9" style="rounded,bold,filled" fillcolor="#ffffff" compound="true"
+    node [shape="box" style="rounded, filled" height="0.2" color="black" fillcolor="#ffffcc" fontcolor="black" fontname="Helvetica" fontsize="9"]
+    edge [arrowhead="normal" arrowsize="0.6" penwidth="2.0" color="#00000033" fontname="Helvetica" fontsize="9"]
 
-    "." [label="." ]
+    "." [label="." color="grey" fontcolor="grey"]
     "bin" [label="bin" ]
     "bin" -> "."
     "bin" -> "src/cli"
-    "bin" -> "node_modules/commander"
-    "bin" -> "node_modules/semver"
-    subgraph "cluster_node_modules" {label="node_modules" "node_modules" [label="." width="0.5"] subgraph "cluster_node_modules/acorn-loose" {label="acorn-loose" "node_modules/acorn-loose" [label="." width="0.5"] "node_modules/acorn-loose/dist" [label="dist" shape="folder" ] } }
-    subgraph "cluster_node_modules" {label="node_modules" "node_modules" [label="." width="0.5"] subgraph "cluster_node_modules/acorn-walk" {label="acorn-walk" "node_modules/acorn-walk" [label="." width="0.5"] "node_modules/acorn-walk/dist" [label="dist" shape="folder" ] } }
-    subgraph "cluster_node_modules" {label="node_modules" "node_modules" [label="." width="0.5"] subgraph "cluster_node_modules/acorn" {label="acorn" "node_modules/acorn" [label="." width="0.5"] "node_modules/acorn/dist" [label="dist" shape="folder" ] } }
-    subgraph "cluster_node_modules" {label="node_modules" "node_modules" [label="." width="0.5"] subgraph "cluster_node_modules/ajv" {label="ajv" "node_modules/ajv" [label="." width="0.5"] "node_modules/ajv/lib" [label="lib" shape="folder" ] } }
-    subgraph "cluster_node_modules" {label="node_modules" "node_modules" [label="." width="0.5"] subgraph "cluster_node_modules/awesome-typescript-loader" {label="awesome-typescript-loader" "node_modules/awesome-typescript-loader" [label="." width="0.5"] "node_modules/awesome-typescript-loader/dist" [label="dist" shape="folder" ] } }
-    subgraph "cluster_node_modules" {label="node_modules" "node_modules" [label="." width="0.5"] "node_modules/chalk" [label="chalk" shape="folder" ] }
-    subgraph "cluster_node_modules" {label="node_modules" "node_modules" [label="." width="0.5"] "node_modules/commander" [label="commander" shape="folder" ] }
-    subgraph "cluster_node_modules" {label="node_modules" "node_modules" [label="." width="0.5"] subgraph "cluster_node_modules/enhanced-resolve" {label="enhanced-resolve" "node_modules/enhanced-resolve" [label="." width="0.5"] "node_modules/enhanced-resolve/lib" [label="lib" shape="folder" ] } }
-    subgraph "cluster_node_modules" {label="node_modules" "node_modules" [label="." width="0.5"] "node_modules/figures" [label="figures" shape="folder" ] }
-    subgraph "cluster_node_modules" {label="node_modules" "node_modules" [label="." width="0.5"] "node_modules/glob" [label="glob" shape="folder" ] }
-    subgraph "cluster_node_modules" {label="node_modules" "node_modules" [label="." width="0.5"] "node_modules/handlebars" [label="handlebars" shape="folder" ] }
-    subgraph "cluster_node_modules" {label="node_modules" "node_modules" [label="." width="0.5"] subgraph "cluster_node_modules/inquirer" {label="inquirer" "node_modules/inquirer" [label="." width="0.5"] "node_modules/inquirer/lib" [label="lib" shape="folder" ] } }
-    subgraph "cluster_node_modules" {label="node_modules" "node_modules" [label="." width="0.5"] "node_modules/lodash" [label="lodash" shape="folder" ] }
-    subgraph "cluster_node_modules" {label="node_modules" "node_modules" [label="." width="0.5"] "node_modules/resolve" [label="resolve" shape="folder" ] }
-    subgraph "cluster_node_modules" {label="node_modules" "node_modules" [label="." width="0.5"] "node_modules/safe-regex" [label="safe-regex" shape="folder" ] }
-    subgraph "cluster_node_modules" {label="node_modules" "node_modules" [label="." width="0.5"] "node_modules/semver" [label="semver" shape="folder" ] }
-    subgraph "cluster_node_modules" {label="node_modules" "node_modules" [label="." width="0.5"] subgraph "cluster_node_modules/semver-try-require" {label="semver-try-require" "node_modules/semver-try-require" [label="." width="0.5"] "node_modules/semver-try-require/src" [label="src" shape="folder" ] } }
-    subgraph "cluster_node_modules" {label="node_modules" "node_modules" [label="." width="0.5"] "node_modules/strip-json-comments" [label="strip-json-comments" shape="folder" ] }
-    subgraph "cluster_src" {label="src" "src" [label="." width="0.5"] "src/cli" [label="cli" ] }
+    "bin" -> "node_modules/commander" [style="dashed" penwidth="1.0"]
+    "bin" -> "node_modules/semver" [style="dashed" penwidth="1.0"]
+    subgraph "cluster_node_modules" {label="node_modules" "node_modules" [width="0.05" shape="point" style="invis"] subgraph "cluster_node_modules/acorn-loose" {label="acorn-loose" "node_modules/acorn-loose" [width="0.05" shape="point" style="invis"] "node_modules/acorn-loose/dist" [label="dist" shape="folder" fillcolor="#c40b0a1a" fontcolor="#c40b0a"] } }
+    subgraph "cluster_node_modules" {label="node_modules" "node_modules" [width="0.05" shape="point" style="invis"] subgraph "cluster_node_modules/acorn-walk" {label="acorn-walk" "node_modules/acorn-walk" [width="0.05" shape="point" style="invis"] "node_modules/acorn-walk/dist" [label="dist" shape="folder" fillcolor="#c40b0a1a" fontcolor="#c40b0a"] } }
+    subgraph "cluster_node_modules" {label="node_modules" "node_modules" [width="0.05" shape="point" style="invis"] subgraph "cluster_node_modules/acorn" {label="acorn" "node_modules/acorn" [width="0.05" shape="point" style="invis"] "node_modules/acorn/dist" [label="dist" shape="folder" fillcolor="#c40b0a1a" fontcolor="#c40b0a"] } }
+    subgraph "cluster_node_modules" {label="node_modules" "node_modules" [width="0.05" shape="point" style="invis"] subgraph "cluster_node_modules/ajv" {label="ajv" "node_modules/ajv" [width="0.05" shape="point" style="invis"] "node_modules/ajv/lib" [label="lib" shape="folder" fillcolor="#c40b0a1a" fontcolor="#c40b0a"] } }
+    subgraph "cluster_node_modules" {label="node_modules" "node_modules" [width="0.05" shape="point" style="invis"] subgraph "cluster_node_modules/awesome-typescript-loader" {label="awesome-typescript-loader" "node_modules/awesome-typescript-loader" [width="0.05" shape="point" style="invis"] "node_modules/awesome-typescript-loader/dist" [label="dist" shape="folder" fillcolor="#c40b0a1a" fontcolor="#c40b0a"] } }
+    subgraph "cluster_node_modules" {label="node_modules" "node_modules" [width="0.05" shape="point" style="invis"] "node_modules/chalk" [label="chalk" shape="folder" fillcolor="#c40b0a1a" fontcolor="#c40b0a"] }
+    subgraph "cluster_node_modules" {label="node_modules" "node_modules" [width="0.05" shape="point" style="invis"] "node_modules/commander" [label="commander" shape="folder" fillcolor="#c40b0a1a" fontcolor="#c40b0a"] }
+    subgraph "cluster_node_modules" {label="node_modules" "node_modules" [width="0.05" shape="point" style="invis"] subgraph "cluster_node_modules/enhanced-resolve" {label="enhanced-resolve" "node_modules/enhanced-resolve" [width="0.05" shape="point" style="invis"] "node_modules/enhanced-resolve/lib" [label="lib" shape="folder" fillcolor="#c40b0a1a" fontcolor="#c40b0a"] } }
+    subgraph "cluster_node_modules" {label="node_modules" "node_modules" [width="0.05" shape="point" style="invis"] "node_modules/figures" [label="figures" shape="folder" fillcolor="#c40b0a1a" fontcolor="#c40b0a"] }
+    subgraph "cluster_node_modules" {label="node_modules" "node_modules" [width="0.05" shape="point" style="invis"] "node_modules/glob" [label="glob" shape="folder" fillcolor="#c40b0a1a" fontcolor="#c40b0a"] }
+    subgraph "cluster_node_modules" {label="node_modules" "node_modules" [width="0.05" shape="point" style="invis"] "node_modules/handlebars" [label="handlebars" shape="folder" fillcolor="#c40b0a1a" fontcolor="#c40b0a"] }
+    subgraph "cluster_node_modules" {label="node_modules" "node_modules" [width="0.05" shape="point" style="invis"] subgraph "cluster_node_modules/inquirer" {label="inquirer" "node_modules/inquirer" [width="0.05" shape="point" style="invis"] "node_modules/inquirer/lib" [label="lib" shape="folder" fillcolor="#c40b0a1a" fontcolor="#c40b0a"] } }
+    subgraph "cluster_node_modules" {label="node_modules" "node_modules" [width="0.05" shape="point" style="invis"] "node_modules/lodash" [label="lodash" shape="folder" fillcolor="#c40b0a1a" fontcolor="#c40b0a"] }
+    subgraph "cluster_node_modules" {label="node_modules" "node_modules" [width="0.05" shape="point" style="invis"] "node_modules/resolve" [label="resolve" shape="folder" fillcolor="#c40b0a1a" fontcolor="#c40b0a"] }
+    subgraph "cluster_node_modules" {label="node_modules" "node_modules" [width="0.05" shape="point" style="invis"] "node_modules/safe-regex" [label="safe-regex" shape="folder" fillcolor="#c40b0a1a" fontcolor="#c40b0a"] }
+    subgraph "cluster_node_modules" {label="node_modules" "node_modules" [width="0.05" shape="point" style="invis"] "node_modules/semver" [label="semver" shape="folder" fillcolor="#c40b0a1a" fontcolor="#c40b0a"] }
+    subgraph "cluster_node_modules" {label="node_modules" "node_modules" [width="0.05" shape="point" style="invis"] subgraph "cluster_node_modules/semver-try-require" {label="semver-try-require" "node_modules/semver-try-require" [width="0.05" shape="point" style="invis"] "node_modules/semver-try-require/src" [label="src" shape="folder" fillcolor="#c40b0a1a" fontcolor="#c40b0a"] } }
+    subgraph "cluster_node_modules" {label="node_modules" "node_modules" [width="0.05" shape="point" style="invis"] "node_modules/strip-json-comments" [label="strip-json-comments" shape="folder" fillcolor="#c40b0a1a" fontcolor="#c40b0a"] }
+    subgraph "cluster_src" {label="src" "src" [width="0.05" shape="point" style="invis"] "src/cli" [label="cli" ] }
     "src/cli" -> "src/main"
-    "src/cli" -> "src/cli"
     "src/cli" -> "src/cli/initConfig"
     "src/cli" -> "src/cli/utl"
-    "src/cli" -> "node_modules/glob"
-    "src/cli" -> "node_modules/lodash"
-    "src/cli" -> "node_modules/chalk"
-    "src/cli" -> "node_modules/figures"
+    "src/cli" -> "node_modules/glob" [style="dashed" penwidth="1.0"]
+    "src/cli" -> "node_modules/lodash" [style="dashed" penwidth="1.0"]
+    "src/cli" -> "node_modules/chalk" [style="dashed" penwidth="1.0"]
+    "src/cli" -> "node_modules/figures" [style="dashed" penwidth="1.0"]
     "src/cli" -> "src/cli/compileConfig"
-    "src/cli" -> "." [color="grey" penwidth=1.0]
-    "src/cli" -> "node_modules/semver-try-require/src"
-    subgraph "cluster_src" {label="src" "src" [label="." width="0.5"] subgraph "cluster_src/cli" {label="cli" "src/cli" [label="." width="0.5"] "src/cli/compileConfig" [label="compileConfig" ] } }
-    "src/cli/compileConfig" -> "src/extract/resolve" [color="orange" penwidth="2.0" tooltip="cli-to-main-only-warn" fontcolor="orange" xlabel="cli-to-main-only-warn"]
-    "src/cli/compileConfig" -> "src/cli/compileConfig"
-    "src/cli/compileConfig" -> "." [color="grey" penwidth=1.0]
-    "src/cli/compileConfig" -> "node_modules/lodash"
-    "src/cli/compileConfig" -> "node_modules/strip-json-comments"
-    subgraph "cluster_src" {label="src" "src" [label="." width="0.5"] subgraph "cluster_src/cli" {label="cli" "src/cli" [label="." width="0.5"] "src/cli/initConfig" [label="initConfig" ] } }
-    "src/cli/initConfig" -> "src/cli/initConfig"
-    "src/cli/initConfig" -> "." [color="grey" penwidth=1.0]
-    "src/cli/initConfig" -> "node_modules/handlebars"
-    "src/cli/initConfig" -> "node_modules/inquirer/lib"
-    subgraph "cluster_src" {label="src" "src" [label="." width="0.5"] subgraph "cluster_src/cli" {label="cli" "src/cli" [label="." width="0.5"] "src/cli/utl" [label="utl" ] } }
-    "src/cli/utl" -> "." [color="grey" penwidth=1.0]
-    subgraph "cluster_src" {label="src" "src" [label="." width="0.5"] "src/extract" [label="extract" ] }
-    "src/extract" -> "src/extract"
+    "src/cli" -> "." [style="dashed" penwidth="1.0"]
+    "src/cli" -> "node_modules/semver-try-require/src" [style="dashed" penwidth="1.0"]
+    subgraph "cluster_src" {label="src" "src" [width="0.05" shape="point" style="invis"] subgraph "cluster_src/cli" {label="cli" "src/cli" [width="0.05" shape="point" style="invis"] "src/cli/compileConfig" [label="compileConfig" ] } }
+    "src/cli/compileConfig" -> "src/extract/resolve" [xlabel="cli-to-main-only-warn" tooltip="cli-to-main-only-warn" fontcolor="orange" color="orange"]
+    "src/cli/compileConfig" -> "." [style="dashed" penwidth="1.0"]
+    "src/cli/compileConfig" -> "node_modules/lodash" [style="dashed" penwidth="1.0"]
+    "src/cli/compileConfig" -> "node_modules/strip-json-comments" [style="dashed" penwidth="1.0"]
+    subgraph "cluster_src" {label="src" "src" [width="0.05" shape="point" style="invis"] subgraph "cluster_src/cli" {label="cli" "src/cli" [width="0.05" shape="point" style="invis"] "src/cli/initConfig" [label="initConfig" ] } }
+    "src/cli/initConfig" -> "." [style="dashed" penwidth="1.0"]
+    "src/cli/initConfig" -> "node_modules/handlebars" [style="dashed" penwidth="1.0"]
+    "src/cli/initConfig" -> "node_modules/inquirer/lib" [style="dashed" penwidth="1.0"]
+    subgraph "cluster_src" {label="src" "src" [width="0.05" shape="point" style="invis"] subgraph "cluster_src/cli" {label="cli" "src/cli" [width="0.05" shape="point" style="invis"] "src/cli/utl" [label="utl" ] } }
+    "src/cli/utl" -> "." [style="dashed" penwidth="1.0"]
+    subgraph "cluster_src" {label="src" "src" [width="0.05" shape="point" style="invis"] "src/extract" [label="extract" ] }
     "src/extract" -> "src/extract/derive/circular"
     "src/extract" -> "src/extract/derive/orphan"
     "src/extract" -> "src/extract/utl"
-    "src/extract" -> "node_modules/lodash" [color="blue" penwidth="2.0" tooltip="prefer-lodash-individuals" fontcolor="blue" xlabel="prefer-lodash-individuals"]
+    "src/extract" -> "node_modules/lodash" [xlabel="prefer-lodash-individuals" tooltip="prefer-lodash-individuals" style="dashed" penwidth="1.0" fontcolor="blue" color="blue"]
     "src/extract" -> "src/validate"
     "src/extract" -> "src/extract/ast-extractors"
     "src/extract" -> "src/extract/parse"
     "src/extract" -> "src/extract/resolve"
-    "src/extract" -> "." [color="grey" penwidth=1.0]
+    "src/extract" -> "." [style="dashed" penwidth="1.0"]
     "src/extract" -> "src/extract/transpile"
-    "src/extract" -> "node_modules/glob"
-    subgraph "cluster_src" {label="src" "src" [label="." width="0.5"] subgraph "cluster_src/extract" {label="extract" "src/extract" [label="." width="0.5"] "src/extract/ast-extractors" [label="ast-extractors" ] } }
-    "src/extract/ast-extractors" -> "src/extract/ast-extractors"
-    "src/extract/ast-extractors" -> "node_modules/acorn-walk/dist"
+    "src/extract" -> "node_modules/glob" [style="dashed" penwidth="1.0"]
+    subgraph "cluster_src" {label="src" "src" [width="0.05" shape="point" style="invis"] subgraph "cluster_src/extract" {label="extract" "src/extract" [width="0.05" shape="point" style="invis"] "src/extract/ast-extractors" [label="ast-extractors" ] } }
+    "src/extract/ast-extractors" -> "node_modules/acorn-walk/dist" [style="dashed" penwidth="1.0"]
     "src/extract/ast-extractors" -> "."
-    "src/extract/ast-extractors" -> "node_modules/semver-try-require/src"
-    subgraph "cluster_src" {label="src" "src" [label="." width="0.5"] subgraph "cluster_src/extract" {label="extract" "src/extract" [label="." width="0.5"] subgraph "cluster_src/extract/derive" {label="derive" "src/extract/derive" [label="." width="0.5"] "src/extract/derive/circular" [label="circular" ] } } }
-    "src/extract/derive/circular" -> "src/extract/derive/circular"
-    "src/extract/derive/circular" -> "node_modules/lodash"
-    subgraph "cluster_src" {label="src" "src" [label="." width="0.5"] subgraph "cluster_src/extract" {label="extract" "src/extract" [label="." width="0.5"] subgraph "cluster_src/extract/derive" {label="derive" "src/extract/derive" [label="." width="0.5"] "src/extract/derive/orphan" [label="orphan" ] } } }
-    "src/extract/derive/orphan" -> "src/extract/derive/orphan"
-    "src/extract/derive/orphan" -> "node_modules/lodash"
-    subgraph "cluster_src" {label="src" "src" [label="." width="0.5"] subgraph "cluster_src/extract" {label="extract" "src/extract" [label="." width="0.5"] "src/extract/parse" [label="parse" ] } }
+    "src/extract/ast-extractors" -> "node_modules/semver-try-require/src" [style="dashed" penwidth="1.0"]
+    subgraph "cluster_src" {label="src" "src" [width="0.05" shape="point" style="invis"] subgraph "cluster_src/extract" {label="extract" "src/extract" [width="0.05" shape="point" style="invis"] subgraph "cluster_src/extract/derive" {label="derive" "src/extract/derive" [width="0.05" shape="point" style="invis"] "src/extract/derive/circular" [label="circular" ] } } }
+    "src/extract/derive/circular" -> "node_modules/lodash" [style="dashed" penwidth="1.0"]
+    subgraph "cluster_src" {label="src" "src" [width="0.05" shape="point" style="invis"] subgraph "cluster_src/extract" {label="extract" "src/extract" [width="0.05" shape="point" style="invis"] subgraph "cluster_src/extract/derive" {label="derive" "src/extract/derive" [width="0.05" shape="point" style="invis"] "src/extract/derive/orphan" [label="orphan" ] } } }
+    "src/extract/derive/orphan" -> "node_modules/lodash" [style="dashed" penwidth="1.0"]
+    subgraph "cluster_src" {label="src" "src" [width="0.05" shape="point" style="invis"] subgraph "cluster_src/extract" {label="extract" "src/extract" [width="0.05" shape="point" style="invis"] "src/extract/parse" [label="parse" ] } }
     "src/extract/parse" -> "src/extract/transpile"
     "src/extract/parse" -> "src/extract/utl"
-    "src/extract/parse" -> "node_modules/acorn/dist"
-    "src/extract/parse" -> "node_modules/acorn-loose/dist"
-    "src/extract/parse" -> "." [color="grey" penwidth=1.0]
-    "src/extract/parse" -> "node_modules/lodash"
-    "src/extract/parse" -> "node_modules/semver-try-require/src"
-    subgraph "cluster_src" {label="src" "src" [label="." width="0.5"] subgraph "cluster_src/extract" {label="extract" "src/extract" [label="." width="0.5"] "src/extract/resolve" [label="resolve" ] } }
+    "src/extract/parse" -> "node_modules/acorn/dist" [style="dashed" penwidth="1.0"]
+    "src/extract/parse" -> "node_modules/acorn-loose/dist" [style="dashed" penwidth="1.0"]
+    "src/extract/parse" -> "." [style="dashed" penwidth="1.0"]
+    "src/extract/parse" -> "node_modules/lodash" [style="dashed" penwidth="1.0"]
+    "src/extract/parse" -> "node_modules/semver-try-require/src" [style="dashed" penwidth="1.0"]
+    subgraph "cluster_src" {label="src" "src" [width="0.05" shape="point" style="invis"] subgraph "cluster_src/extract" {label="extract" "src/extract" [width="0.05" shape="point" style="invis"] "src/extract/resolve" [label="resolve" ] } }
     "src/extract/resolve" -> "src/extract/utl"
-    "src/extract/resolve" -> "src/extract/resolve"
-    "src/extract/resolve" -> "." [color="grey" penwidth=1.0]
+    "src/extract/resolve" -> "." [style="dashed" penwidth="1.0"]
     "src/extract/resolve" -> "src/extract/resolve/readPackageDeps"
-    "src/extract/resolve" -> "node_modules/lodash"
-    "src/extract/resolve" -> "node_modules/resolve"
-    "src/extract/resolve" -> "node_modules/enhanced-resolve/lib"
+    "src/extract/resolve" -> "node_modules/lodash" [style="dashed" penwidth="1.0"]
+    "src/extract/resolve" -> "node_modules/resolve" [style="dashed" penwidth="1.0"]
+    "src/extract/resolve" -> "node_modules/enhanced-resolve/lib" [style="dashed" penwidth="1.0"]
     "src/extract/resolve" -> "src/extract/transpile"
-    "src/extract/resolve" -> "node_modules/awesome-typescript-loader/dist"
-    subgraph "cluster_src" {label="src" "src" [label="." width="0.5"] subgraph "cluster_src/extract" {label="extract" "src/extract" [label="." width="0.5"] subgraph "cluster_src/extract/resolve" {label="resolve" "src/extract/resolve" [label="." width="0.5"] "src/extract/resolve/readPackageDeps" [label="readPackageDeps" ] } } }
-    "src/extract/resolve/readPackageDeps" -> "src/extract/resolve/readPackageDeps"
-    "src/extract/resolve/readPackageDeps" -> "." [color="grey" penwidth=1.0]
-    "src/extract/resolve/readPackageDeps" -> "node_modules/lodash"
-    subgraph "cluster_src" {label="src" "src" [label="." width="0.5"] subgraph "cluster_src/extract" {label="extract" "src/extract" [label="." width="0.5"] "src/extract/transpile" [label="transpile" ] } }
-    "src/extract/transpile" -> "src/extract/transpile"
+    "src/extract/resolve" -> "node_modules/awesome-typescript-loader/dist" [style="dashed" penwidth="1.0"]
+    subgraph "cluster_src" {label="src" "src" [width="0.05" shape="point" style="invis"] subgraph "cluster_src/extract" {label="extract" "src/extract" [width="0.05" shape="point" style="invis"] subgraph "cluster_src/extract/resolve" {label="resolve" "src/extract/resolve" [width="0.05" shape="point" style="invis"] "src/extract/resolve/readPackageDeps" [label="readPackageDeps" ] } } }
+    "src/extract/resolve/readPackageDeps" -> "." [style="dashed" penwidth="1.0"]
+    "src/extract/resolve/readPackageDeps" -> "node_modules/lodash" [style="dashed" penwidth="1.0"]
+    subgraph "cluster_src" {label="src" "src" [width="0.05" shape="point" style="invis"] subgraph "cluster_src/extract" {label="extract" "src/extract" [width="0.05" shape="point" style="invis"] "src/extract/transpile" [label="transpile" ] } }
     "src/extract/transpile" -> "."
-    "src/extract/transpile" -> "node_modules/semver-try-require/src"
-    "src/extract/transpile" -> "node_modules/lodash"
-    subgraph "cluster_src" {label="src" "src" [label="." width="0.5"] subgraph "cluster_src/extract" {label="extract" "src/extract" [label="." width="0.5"] "src/extract/utl" [label="utl" ] } }
-    "src/extract/utl" -> "." [color="grey" penwidth=1.0]
-    subgraph "cluster_src" {label="src" "src" [label="." width="0.5"] "src/main" [label="main" ] }
+    "src/extract/transpile" -> "node_modules/semver-try-require/src" [style="dashed" penwidth="1.0"]
+    "src/extract/transpile" -> "node_modules/lodash" [style="dashed" penwidth="1.0"]
+    subgraph "cluster_src" {label="src" "src" [width="0.05" shape="point" style="invis"] subgraph "cluster_src/extract" {label="extract" "src/extract" [width="0.05" shape="point" style="invis"] "src/extract/utl" [label="utl" ] } }
+    "src/extract/utl" -> "." [style="dashed" penwidth="1.0"]
+    subgraph "cluster_src" {label="src" "src" [width="0.05" shape="point" style="invis"] "src/main" [label="main" ] }
     "src/main" -> "src/extract"
     "src/main" -> "src/extract/transpile"
     "src/main" -> "src/report/csv"
@@ -125,36 +105,29 @@ strict digraph "dependency-cruiser output"{
     "src/main" -> "src/report/html"
     "src/main" -> "src/main/options"
     "src/main" -> "src/main/ruleSet"
-    subgraph "cluster_src" {label="src" "src" [label="." width="0.5"] subgraph "cluster_src/main" {label="main" "src/main" [label="." width="0.5"] "src/main/options" [label="options" ] } }
-    "src/main/options" -> "src/main/options"
-    "src/main/options" -> "node_modules/safe-regex"
-    subgraph "cluster_src" {label="src" "src" [label="." width="0.5"] subgraph "cluster_src/main" {label="main" "src/main" [label="." width="0.5"] "src/main/ruleSet" [label="ruleSet" ] } }
+    subgraph "cluster_src" {label="src" "src" [width="0.05" shape="point" style="invis"] subgraph "cluster_src/main" {label="main" "src/main" [width="0.05" shape="point" style="invis"] "src/main/options" [label="options" ] } }
+    "src/main/options" -> "node_modules/safe-regex" [style="dashed" penwidth="1.0"]
+    subgraph "cluster_src" {label="src" "src" [width="0.05" shape="point" style="invis"] subgraph "cluster_src/main" {label="main" "src/main" [width="0.05" shape="point" style="invis"] "src/main/ruleSet" [label="ruleSet" ] } }
     "src/main/ruleSet" -> "src/main/options"
-    "src/main/ruleSet" -> "src/main/ruleSet"
-    "src/main/ruleSet" -> "node_modules/ajv/lib"
-    "src/main/ruleSet" -> "node_modules/safe-regex"
-    subgraph "cluster_src" {label="src" "src" [label="." width="0.5"] "src/report" [label="report" ] }
-    "src/report" -> "node_modules/chalk"
-    "src/report" -> "node_modules/figures"
-    subgraph "cluster_src" {label="src" "src" [label="." width="0.5"] subgraph "cluster_src/report" {label="report" "src/report" [label="." width="0.5"] "src/report/csv" [label="csv" ] } }
+    "src/main/ruleSet" -> "node_modules/ajv/lib" [style="dashed" penwidth="1.0"]
+    "src/main/ruleSet" -> "node_modules/safe-regex" [style="dashed" penwidth="1.0"]
+    subgraph "cluster_src" {label="src" "src" [width="0.05" shape="point" style="invis"] "src/report" [label="report" ] }
+    "src/report" -> "node_modules/chalk" [style="dashed" penwidth="1.0"]
+    "src/report" -> "node_modules/figures" [style="dashed" penwidth="1.0"]
+    subgraph "cluster_src" {label="src" "src" [width="0.05" shape="point" style="invis"] subgraph "cluster_src/report" {label="report" "src/report" [width="0.05" shape="point" style="invis"] "src/report/csv" [label="csv" ] } }
     "src/report/csv" -> "src/report"
-    "src/report/csv" -> "src/report/csv"
-    "src/report/csv" -> "node_modules/handlebars"
-    subgraph "cluster_src" {label="src" "src" [label="." width="0.5"] subgraph "cluster_src/report" {label="report" "src/report" [label="." width="0.5"] "src/report/ddot" [label="ddot" ] } }
+    "src/report/csv" -> "node_modules/handlebars" [style="dashed" penwidth="1.0"]
+    subgraph "cluster_src" {label="src" "src" [width="0.05" shape="point" style="invis"] subgraph "cluster_src/report" {label="report" "src/report" [width="0.05" shape="point" style="invis"] "src/report/ddot" [label="ddot" ] } }
     "src/report/ddot" -> "src/report/dot"
-    "src/report/ddot" -> "src/report/ddot"
-    "src/report/ddot" -> "node_modules/handlebars"
-    "src/report/ddot" -> "node_modules/lodash"
-    "src/report/ddot" -> "." [color="grey" penwidth=1.0]
-    subgraph "cluster_src" {label="src" "src" [label="." width="0.5"] subgraph "cluster_src/report" {label="report" "src/report" [label="." width="0.5"] "src/report/dot" [label="dot" ] } }
-    "src/report/dot" -> "src/report/dot"
-    "src/report/dot" -> "node_modules/lodash"
-    "src/report/dot" -> "node_modules/handlebars"
-    "src/report/dot" -> "." [color="grey" penwidth=1.0]
-    subgraph "cluster_src" {label="src" "src" [label="." width="0.5"] subgraph "cluster_src/report" {label="report" "src/report" [label="." width="0.5"] "src/report/html" [label="html" ] } }
+    "src/report/ddot" -> "node_modules/handlebars" [style="dashed" penwidth="1.0"]
+    "src/report/ddot" -> "node_modules/lodash" [style="dashed" penwidth="1.0"]
+    "src/report/ddot" -> "." [style="dashed" penwidth="1.0"]
+    subgraph "cluster_src" {label="src" "src" [width="0.05" shape="point" style="invis"] subgraph "cluster_src/report" {label="report" "src/report" [width="0.05" shape="point" style="invis"] "src/report/dot" [label="dot" ] } }
+    "src/report/dot" -> "node_modules/lodash" [style="dashed" penwidth="1.0"]
+    "src/report/dot" -> "node_modules/handlebars" [style="dashed" penwidth="1.0"]
+    "src/report/dot" -> "." [style="dashed" penwidth="1.0"]
+    subgraph "cluster_src" {label="src" "src" [width="0.05" shape="point" style="invis"] subgraph "cluster_src/report" {label="report" "src/report" [width="0.05" shape="point" style="invis"] "src/report/html" [label="html" ] } }
     "src/report/html" -> "src/report"
-    "src/report/html" -> "src/report/html"
-    "src/report/html" -> "node_modules/handlebars"
-    subgraph "cluster_src" {label="src" "src" [label="." width="0.5"] "src/validate" [label="validate" ] }
-    "src/validate" -> "src/validate"
+    "src/report/html" -> "node_modules/handlebars" [style="dashed" penwidth="1.0"]
+    subgraph "cluster_src" {label="src" "src" [width="0.05" shape="point" style="invis"] "src/validate" [label="validate" ] }
 }
