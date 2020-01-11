@@ -122,8 +122,8 @@ dependency-cruise -x "^node_modules" -T dot src | dot -T svg > dependencygraph.s
 > ##### ddot - summarize on folder level
 >
 > Since version 4.13.0 there's an _experimental_ `ddot` reporter that summarizes
-> modules on folder level. It works fine, but its output is a tad more ugly
-> than I'd like so there'll be tweaks to spruce it up in the future.
+> modules on folder level. In version 6.3.0 its presentation changed a bit to be
+> closer to the regular dot one, a.o. growing the capability to customize colors.
 
 #### err-html
 

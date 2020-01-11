@@ -1,8 +1,8 @@
 const curryRight = require("lodash/curryRight");
 const anon = require("./anon");
 const csv = require("./csv");
-const ddot = require("./dot/folderLevel");
-const dot = require("./dot/moduleLevel");
+const dot = require("./dot")("module");
+const ddot = require("./dot")("folder");
 const errHtml = require("./err-html");
 const errLong = curryRight(require("./err"))({ long: true });
 const err = require("./err");

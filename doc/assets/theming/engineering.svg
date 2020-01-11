@@ -44,9 +44,9 @@
 </g>
 </g>
 <!-- src/main/options/normalize.js -->
-<g id="node3" class="node">
+<g id="node2" class="node">
 <title>src/main/options/normalize.js</title>
-<g id="a_node3"><a xlink:href="src/main/options/normalize.js" xlink:title="normalize.js">
+<g id="a_node2"><a xlink:href="src/main/options/normalize.js" xlink:title="normalize.js">
 <path fill="#ffffff" fill-opacity="0.200000" stroke="white" d="M273.37,-49.5C273.37,-49.5 220.67,-49.5 220.67,-49.5 217.84,-49.5 215.01,-46.67 215.01,-43.83 215.01,-43.83 215.01,-38.17 215.01,-38.17 215.01,-35.33 217.84,-32.5 220.67,-32.5 220.67,-32.5 273.37,-32.5 273.37,-32.5 276.2,-32.5 279.04,-35.33 279.04,-38.17 279.04,-38.17 279.04,-43.83 279.04,-43.83 279.04,-46.67 276.2,-49.5 273.37,-49.5"/>
 <text text-anchor="middle" x="247.02" y="-38.3" font-family="Helvetica,sans-Serif" font-size="9.00" fill="white">normalize.js</text>
 </a>
@@ -59,9 +59,9 @@
 <polygon fill="white" stroke="white" points="214.75,-41 209.75,-43.25 212.25,-41 209.75,-41 209.75,-41 209.75,-41 212.25,-41 209.75,-38.75 214.75,-41 214.75,-41"/>
 </g>
 <!-- src/main/options/validate.js -->
-<g id="node4" class="node">
+<g id="node3" class="node">
 <title>src/main/options/validate.js</title>
-<g id="a_node4"><a xlink:href="src/main/options/validate.js" xlink:title="validate.js">
+<g id="a_node3"><a xlink:href="src/main/options/validate.js" xlink:title="validate.js">
 <path fill="#ffffff" fill-opacity="0.200000" stroke="white" d="M269.38,-78.5C269.38,-78.5 224.67,-78.5 224.67,-78.5 221.83,-78.5 219,-75.67 219,-72.83 219,-72.83 219,-67.17 219,-67.17 219,-64.33 221.83,-61.5 224.67,-61.5 224.67,-61.5 269.38,-61.5 269.38,-61.5 272.21,-61.5 275.04,-64.33 275.04,-67.17 275.04,-67.17 275.04,-72.83 275.04,-72.83 275.04,-75.67 272.21,-78.5 269.38,-78.5"/>
 <text text-anchor="middle" x="247.02" y="-67.3" font-family="Helvetica,sans-Serif" font-size="9.00" fill="white">validate.js</text>
 </a>
@@ -74,9 +74,9 @@
 <polygon fill="white" stroke="white" points="238.56,-78.54 240.81,-83.54 238.56,-81.04 238.56,-83.54 238.56,-83.54 238.56,-83.54 238.56,-81.04 236.31,-83.54 238.56,-78.54 238.56,-78.54"/>
 </g>
 <!-- src/main/resolveOptions/normalize.js -->
-<g id="node5" class="node">
+<g id="node4" class="node">
 <title>src/main/resolveOptions/normalize.js</title>
-<g id="a_node5"><a xlink:href="src/main/resolveOptions/normalize.js" xlink:title="normalize.js">
+<g id="a_node4"><a xlink:href="src/main/resolveOptions/normalize.js" xlink:title="normalize.js">
 <path fill="#ffffff" fill-opacity="0.200000" stroke="white" d="M168.36,-73.5C168.36,-73.5 115.66,-73.5 115.66,-73.5 112.83,-73.5 109.99,-70.67 109.99,-67.83 109.99,-67.83 109.99,-62.17 109.99,-62.17 109.99,-59.33 112.83,-56.5 115.66,-56.5 115.66,-56.5 168.36,-56.5 168.36,-56.5 171.19,-56.5 174.02,-59.33 174.02,-62.17 174.02,-62.17 174.02,-67.83 174.02,-67.83 174.02,-70.67 171.19,-73.5 168.36,-73.5"/>
 <text text-anchor="middle" x="142.01" y="-62.3" font-family="Helvetica,sans-Serif" font-size="9.00" fill="white">normalize.js</text>
 </a>
@@ -89,9 +89,9 @@
 <polygon fill="white" stroke="white" points="109.92,-65 104.92,-67.25 107.42,-65 104.92,-65 104.92,-65 104.92,-65 107.42,-65 104.92,-62.75 109.92,-65 109.92,-65"/>
 </g>
 <!-- src/main/ruleSet/normalize.js -->
-<g id="node6" class="node">
+<g id="node5" class="node">
 <title>src/main/ruleSet/normalize.js</title>
-<g id="a_node6"><a xlink:href="src/main/ruleSet/normalize.js" xlink:title="normalize.js">
+<g id="a_node5"><a xlink:href="src/main/ruleSet/normalize.js" xlink:title="normalize.js">
 <path fill="#ffffff" fill-opacity="0.200000" stroke="white" d="M168.36,-161.5C168.36,-161.5 115.66,-161.5 115.66,-161.5 112.83,-161.5 109.99,-158.67 109.99,-155.83 109.99,-155.83 109.99,-150.17 109.99,-150.17 109.99,-147.33 112.83,-144.5 115.66,-144.5 115.66,-144.5 168.36,-144.5 168.36,-144.5 171.19,-144.5 174.02,-147.33 174.02,-150.17 174.02,-150.17 174.02,-155.83 174.02,-155.83 174.02,-158.67 171.19,-161.5 168.36,-161.5"/>
 <text text-anchor="middle" x="142.01" y="-150.3" font-family="Helvetica,sans-Serif" font-size="9.00" fill="white">normalize.js</text>
 </a>
@@ -104,9 +104,9 @@
 <polygon fill="white" stroke="white" points="109.82,-153 104.82,-155.25 107.32,-153 104.82,-153 104.82,-153 104.82,-153 107.32,-153 104.82,-150.75 109.82,-153 109.82,-153"/>
 </g>
 <!-- src/main/ruleSet/validate.js -->
-<g id="node7" class="node">
+<g id="node6" class="node">
 <title>src/main/ruleSet/validate.js</title>
-<g id="a_node7"><a xlink:href="src/main/ruleSet/validate.js" xlink:title="validate.js">
+<g id="a_node6"><a xlink:href="src/main/ruleSet/validate.js" xlink:title="validate.js">
 <path fill="#ffffff" fill-opacity="0.200000" stroke="white" d="M164.36,-132.5C164.36,-132.5 119.65,-132.5 119.65,-132.5 116.82,-132.5 113.99,-129.67 113.99,-126.83 113.99,-126.83 113.99,-121.17 113.99,-121.17 113.99,-118.33 116.82,-115.5 119.65,-115.5 119.65,-115.5 164.36,-115.5 164.36,-115.5 167.19,-115.5 170.03,-118.33 170.03,-121.17 170.03,-121.17 170.03,-126.83 170.03,-126.83 170.03,-129.67 167.19,-132.5 164.36,-132.5"/>
 <text text-anchor="middle" x="142.01" y="-121.3" font-family="Helvetica,sans-Serif" font-size="9.00" fill="white">validate.js</text>
 </a>
@@ -119,9 +119,9 @@
 <polygon fill="white" stroke="white" points="113.89,-124 108.89,-126.25 111.39,-124 108.89,-124 108.89,-124 108.89,-124 111.39,-124 108.89,-121.75 113.89,-124 113.89,-124"/>
 </g>
 <!-- src/main/options/defaults.json -->
-<g id="node2" class="node">
+<g id="node7" class="node">
 <title>src/main/options/defaults.json</title>
-<g id="a_node2"><a xlink:href="src/main/options/defaults.json" xlink:title="defaults.json">
+<g id="a_node7"><a xlink:href="src/main/options/defaults.json" xlink:title="defaults.json">
 <defs>
 <linearGradient id="l_0" gradientUnits="userSpaceOnUse" x1="292.26" y1="-44" x2="358.33" y2="-44" >
 <stop offset="0" style="stop-color:#ffffff;stop-opacity:0.200000;"/>
