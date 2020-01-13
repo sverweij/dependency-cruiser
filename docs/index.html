@@ -1,106 +1,221 @@
 <!DOCTYPE html>
 <html>
-    <head>
-        <meta http-equiv="Content-Type" content="text/html;charset=utf-8">
-        <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-        <meta name="viewport" content="width=device-width, initial-scale=1">
-        <title>dependency-cruiser</title>
-        <script type="application/ld+json">
-        {
-          "@context" : "http://schema.org",
-          "@type" : "Article",
-          "name" : "dependency-cruiser",
-          "author" : {
-            "@type" : "Person",
-            "name" : "Sander Verweij"
-          }
+  <head>
+    <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>dependency-cruiser</title>
+    <meta name="title" content="dependency-cruiser" />
+    <meta
+      name="description"
+      content="Validate and visualize dependencies. With your rules. JavaScript. TypeScript. CoffeeScript. ES6, CommonJS, AMD."
+    />
+    <meta property="og:type" content="website" />
+    <meta
+      property="og:url"
+      content="https://sverweij.github.io/dependency-cruiser/"
+    />
+    <meta property="og:title" content="dependency-cruiser" />
+    <meta
+      property="og:description"
+      content="Validate and visualize dependencies. With your rules. JavaScript. TypeScript. CoffeeScript. ES6, CommonJS, AMD."
+    />
+    <meta
+      property="og:image"
+      content="https://sverweij.github.io/dependency-cruiser/assets/dependency-cruiser-social-sharing-image.png"
+    />
+    <meta property="twitter:card" content="summary_large_image" />
+    <meta
+      property="twitter:url"
+      content="https://sverweij.github.io/dependency-cruiser/"
+    />
+    <meta property="twitter:title" content="dependency-cruiser" />
+    <meta
+      property="twitter:description"
+      content="Validate and visualize dependencies. With your rules. JavaScript. TypeScript. CoffeeScript. ES6, CommonJS, AMD."
+    />
+    <meta
+      property="twitter:image"
+      content="https://sverweij.github.io/dependency-cruiser/assets/dependency-cruiser-social-sharing-image.png"
+    />
+    <script type="application/ld+json">
+      {
+        "@context": "http://schema.org",
+        "@type": "Article",
+        "name": "dependency-cruiser",
+        "author": {
+          "@type": "Person",
+          "name": "Sander Verweij"
         }
-        </script>
-        <style type="text/css">
-        * { transition: all ease 0.3s } /*cough* errm *cough*/
-        body{font-family: sans-serif; margin:40px auto;max-width:650px;line-height:1.6;font-size:18px;color:#444;padding:0 10px}h1,h2,h3{line-height:1.2}
-        a, a:visited{color:inherit;text-decoration: none;border-bottom: 1px solid lightgray}
-        a:hover{border-bottom: 1px solid currentColor}
-        svg{fill:currentColor}
-        .p--right{text-align:right}
-        .p__svg--inline{vertical-align:top;width:1.2em;height:1.2em}
-        .h1__img--inline{vertical-align:middle;border-radius:2em;height:2em;width:2em;background-color:currentColor}
-        .h2__svg--inline{vertical-align:middle;height:1em;width:1em}
-        footer{border-top:solid grey 1px;font-size:small}
-        p:target{ transition:1s ease-in;background-color:#eee}
-        pre{margin-left:1em;padding:.2em 1em .2em 1em;background-color:#444;color:white}
-        </style>
-        <script>
-          (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
-          (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
-          m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
-          })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+      }
+    </script>
+    <style type="text/css">
+      * {
+        transition: all ease 0.3s;
+      } /*cough* errm *cough*/
+      body {
+        font-family: sans-serif;
+        margin: 40px auto;
+        max-width: 650px;
+        line-height: 1.6;
+        font-size: 18px;
+        color: #444;
+        padding: 0 10px;
+      }
+      h1,
+      h2,
+      h3 {
+        line-height: 1.2;
+      }
+      a,
+      a:visited {
+        color: inherit;
+        text-decoration: none;
+        border-bottom: 1px solid lightgray;
+      }
+      a:hover {
+        border-bottom: 1px solid currentColor;
+      }
+      svg {
+        fill: currentColor;
+      }
+      .p--right {
+        text-align: right;
+      }
+      .p__svg--inline {
+        vertical-align: top;
+        width: 1.2em;
+        height: 1.2em;
+      }
+      .h1__img--inline {
+        vertical-align: middle;
+        border-radius: 2em;
+        height: 2em;
+        width: 2em;
+        background-color: currentColor;
+      }
+      .h2__svg--inline {
+        vertical-align: middle;
+        height: 1em;
+        width: 1em;
+      }
+      footer {
+        border-top: solid grey 1px;
+        font-size: small;
+      }
+      p:target {
+        transition: 1s ease-in;
+        background-color: #eee;
+      }
+      pre {
+        margin-left: 1em;
+        padding: 0.2em 1em 0.2em 1em;
+        background-color: #444;
+        color: white;
+      }
+    </style>
+    <script>
+      (function(i, s, o, g, r, a, m) {
+        i["GoogleAnalyticsObject"] = r;
+        (i[r] =
+          i[r] ||
+          function() {
+            (i[r].q = i[r].q || []).push(arguments);
+          }),
+          (i[r].l = 1 * new Date());
+        (a = s.createElement(o)), (m = s.getElementsByTagName(o)[0]);
+        a.async = 1;
+        a.src = g;
+        m.parentNode.insertBefore(a, m);
+      })(
+        window,
+        document,
+        "script",
+        "https://www.google-analytics.com/analytics.js",
+        "ga"
+      );
 
-          ga('create', 'UA-92990402-1', 'auto');
-          ga('send', 'pageview');
-        </script>
-        <script>
-            function attachEventHandler (pQuerySelector, pEvent, pFunction) {
-                var lNodes = document.querySelectorAll(pQuerySelector);
-                for (var i = 0; i < lNodes.length; i++){
-                    lNodes[i].addEventListener(pEvent, pFunction, false);
-                }
-            }
-            attachEventHandler("a[href]", "click", function(e){
-                var lTarget = "unknown";
+      ga("create", "UA-92990402-1", "auto");
+      ga("send", "pageview");
+    </script>
+    <script>
+      function attachEventHandler(pQuerySelector, pEvent, pFunction) {
+        var lNodes = document.querySelectorAll(pQuerySelector);
+        for (var i = 0; i < lNodes.length; i++) {
+          lNodes[i].addEventListener(pEvent, pFunction, false);
+        }
+      }
+      attachEventHandler("a[href]", "click", function(e) {
+        var lTarget = "unknown";
 
-                if (e.currentTarget && e.currentTarget.href){
-                    lTarget = e.currentTarget.href;
-                }
-                ga('send', 'event', 'link', lTarget);
-            });
-        </script>
-    </head>
-    <body>
-        <h1>Dependency-cruiser</h1>
+        if (e.currentTarget && e.currentTarget.href) {
+          lTarget = e.currentTarget.href;
+        }
+        ga("send", "event", "link", lTarget);
+      });
+    </script>
+  </head>
+  <body>
+    <h1>Dependency-cruiser</h1>
 
-        <h2>We're on a mission</h2>
-        <p>
-            to give you insight in the dependencies within
-            your JavaScript, TypeScript and other alt-js projects. 
-        </p>
-        <p>
-            To help you find the weird ones. 
-        </p>
-        <p>
-            To root out the unwanted ones.
-        </p>
-        <p>
-            So your awesome project will be more awesomer.
-        </p>
-        <h2>With this site</h2>
-        <p>
-            we will poke around in your brain's pleasure center so you will
-        </p>
-        <pre>npm i --save-dev dependency-cruiser</pre>
-        <p>
-            The site is not done yet, though.
-        </p>
+    <h2>We're on a mission</h2>
+    <p>
+      to give you insight in the dependencies within your JavaScript, TypeScript
+      and other alt-js projects.
+    </p>
+    <p>
+      To help you find the weird ones.
+    </p>
+    <p>
+      To root out the unwanted ones.
+    </p>
+    <p>
+      So your awesome project will be more awesomer.
+    </p>
+    <h2>With this site</h2>
+    <p>
+      we will poke around in your brain's pleasure center so you will
+    </p>
+    <pre>npm i --save-dev dependency-cruiser</pre>
+    <p>
+      The site is not done yet, though.
+    </p>
 
-        <h2>To do more</h2>
-        <ul>
-            <li>read all about it on
-            <a href="https://github.com/sverweij/dependency-cruiser">
-                dependency-cruiser's github page
-            </a> or
-            </li>
-            <li>
-                ... graphically explore <a href="./dependency-cruiser-dependency-graph.html">dependency-cruiser's dependency graph</a> and source code or
-            </li>
-            <li>
-                ... <code>npm install dependency-cruiser</code>.
-            </li>
-        </ul>
-        <p class="p--right">
-            Made with
-            <svg class="p__svg--inline" alt="rock" viewBox="0 0 25 25" style="fill:#fb7;stroke:currentColor"><rect x="8.9" y="10.5" rx="1.3" ry="1.5" width="3.2" height="6.7"/><rect x="12.2" y="10.5" rx="1.3" ry="1.5" width="3.1" height="6.7"/><path d="M13.4 19.2C13.2 17.2 15.2 16.5 16.2 16.5"/><rect x="15.5" y="2.5" rx="1.4" ry="1.5" width="3.1" height="13.7"/><path d="M17.1 17.1L11.3 17.1C10.6 17.1 10 16.3 10 15.6 10 14.8 10.6 14.1 11.3 14.1L18 14.1C18.8 14.1 19.5 14.7 19.5 15.5 19.5 16.3 19.5 16.8 19.5 18.9 19.5 20.9 18 22.5 16.2 22.5L8.8 22.5C7 22.5 5.5 20.9 5.5 18.9L5.5 18.1 5.5 6C5.5 5.2 6.1 4.6 6.9 4.6L7 4.6C7.8 4.6 8.5 5.2 8.5 6L8.5 15C8.5 16.2 9.9 15.9 9.9 15.9M14.6 20.1C14.4 18.7 15.2 17.1 16.8 17.1"/></svg>
-            in Holland.
-        </p>
-
-    </body>
+    <h2>To do more</h2>
+    <ul>
+      <li>
+        read all about it on
+        <a href="https://github.com/sverweij/dependency-cruiser">
+          dependency-cruiser's github page
+        </a>
+        or
+      </li>
+      <li>
+        ... graphically explore
+        <a href="./dependency-cruiser-dependency-graph.html"
+          >dependency-cruiser's dependency graph</a
+        >
+        and source code or
+      </li>
+      <li>... <code>npm install dependency-cruiser</code>.</li>
+    </ul>
+    <p class="p--right">
+      Made with
+      <svg
+        class="p__svg--inline"
+        alt="rock"
+        viewBox="0 0 25 25"
+        style="fill:#fb7;stroke:currentColor"
+      >
+        <rect x="8.9" y="10.5" rx="1.3" ry="1.5" width="3.2" height="6.7" />
+        <rect x="12.2" y="10.5" rx="1.3" ry="1.5" width="3.1" height="6.7" />
+        <path d="M13.4 19.2C13.2 17.2 15.2 16.5 16.2 16.5" />
+        <rect x="15.5" y="2.5" rx="1.4" ry="1.5" width="3.1" height="13.7" />
+        <path
+          d="M17.1 17.1L11.3 17.1C10.6 17.1 10 16.3 10 15.6 10 14.8 10.6 14.1 11.3 14.1L18 14.1C18.8 14.1 19.5 14.7 19.5 15.5 19.5 16.3 19.5 16.8 19.5 18.9 19.5 20.9 18 22.5 16.2 22.5L8.8 22.5C7 22.5 5.5 20.9 5.5 18.9L5.5 18.1 5.5 6C5.5 5.2 6.1 4.6 6.9 4.6L7 4.6C7.8 4.6 8.5 5.2 8.5 6L8.5 15C8.5 16.2 9.9 15.9 9.9 15.9M14.6 20.1C14.4 18.7 15.2 17.1 16.8 17.1"
+        />
+      </svg>
+      in Holland.
+    </p>
+  </body>
 </html>
