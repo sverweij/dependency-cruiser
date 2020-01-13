@@ -640,7 +640,7 @@ You can use this e.g. to restrict the usage of dynamic dependencies:
       "name": "no-non-dynamic-dependencies",
       "severity": "error",
       "from": {},
-      "to": { "dynamic": "true" }
+      "to": { "dynamic": true }
     }
   ]
 }
@@ -656,7 +656,7 @@ You can use this e.g. to restrict the usage of dynamic dependencies:
       "comment": "only dynamically depend on 'otherside' modules",
       "severity": "error",
       "from": {},
-      "to": { "path": "@theotherside/", "dynamic": "false" }
+      "to": { "path": "@theotherside/", "dynamic": false }
     }
   ]
 }
