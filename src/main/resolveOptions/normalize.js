@@ -61,7 +61,7 @@ function compileResolveOptions(pResolveOptions, pTSConfig) {
   if (pResolveOptions.tsConfig && _has(pTSConfig, "options.baseUrl")) {
     lResolveOptions.plugins = pushPlugin(
       lResolveOptions.plugins,
-      new TsConfigPathsPlugin({ configFile: pResolveOptions.tsConfig })
+      new TsConfigPathsPlugin({ configFile: pResolveOptions.tsConfig, extensions: [".ts", ".tsx", ".d.ts"] })
     );
   }
 
