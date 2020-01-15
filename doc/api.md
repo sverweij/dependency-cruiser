@@ -44,7 +44,7 @@ cruise the src folder, excluding all dependencies to node_modules from being
 followed, and having a GraphViz dot script returned, you'd do this:
 
 ```javascript
-const depcruise = require('dependency-cruiser');
+const depcruise = require('dependency-cruiser').cruise;
 
 const dependenciesInAGraphVizDotScript = depcruise(
     ["src"]
