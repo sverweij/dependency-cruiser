@@ -61,7 +61,17 @@ function compileResolveOptions(pResolveOptions, pTSConfig) {
   if (pResolveOptions.tsConfig && _has(pTSConfig, "options.baseUrl")) {
     lResolveOptions.plugins = pushPlugin(
       lResolveOptions.plugins,
-      new TsConfigPathsPlugin({ configFile: pResolveOptions.tsConfig, extensions: [".ts", ".tsx", ".d.ts"] })
+      new TsConfigPathsPlugin({
+        configFile: pResolveOptions.tsConfig,
+        // different from the typescript compiler, tsConfigPathsPlugin
+        // only has .ts and .tsx as default extension to scan given
+        // an import/ require/ export argument.
+        // Added .js, .jsx and .d.ts before .ts and .tsx to mirror
+        // the typescript compiler's behavior
+        // Should probably be fixed upstream, but put in here until
+        // that happens.
+        extensions: [".js", ".json", ".jsx", ".d.ts", ".ts", ".tsx"]
+      })
     );
   }
 
