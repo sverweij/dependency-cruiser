@@ -11,6 +11,13 @@ const TSCONFIG = path.join(
   "tsconfig.json"
 );
 const PARSED_TSCONFIG = parseTSConfig(TSCONFIG);
+const TSCONFIG_RESOLUTIONS = path.join(
+  __dirname,
+  "fixtures",
+  "ts-config-with-path-correct-resolution-prio",
+  "tsconfig.json"
+);
+const PARSED_TSCONFIG_RESOLUTIONS = parseTSConfig(TSCONFIG);
 
 describe("extract/resolve/index", () => {
   it("resolves a local dependency to a file on disk", () => {
@@ -291,6 +298,70 @@ describe("extract/resolve/index", () => {
       dependencyTypes: ["aliased"],
       followable: true,
       resolved: "ts-config-with-path/src/typos/daddayaddaya.ts"
+    });
+  });
+
+  it("for aliasses resolves in the same fashion as the typescript compiler - dts-vs-ts", () => {
+    expect(
+      resolve(
+        {
+          module: "things/dts-before-ts",
+          moduleSystem: "es6"
+        },
+        path.join(__dirname, "fixtures"),
+        path.join(
+          __dirname,
+          "fixtures",
+          "ts-config-with-path-correct-resolution-prio"
+        ),
+        normalizeResolveOptions(
+          {
+            tsConfig: TSCONFIG_RESOLUTIONS,
+            bustTheCache: true
+          },
+          {},
+          PARSED_TSCONFIG_RESOLUTIONS
+        )
+      )
+    ).to.deep.equal({
+      coreModule: false,
+      couldNotResolve: false,
+      dependencyTypes: ["aliased"],
+      followable: true,
+      resolved:
+        "ts-config-with-path-correct-resolution-prio/src/aliassed/dts-before-ts.d.ts"
+    });
+  });
+
+  it("for aliasses resolves in the same fashion as the typescript compiler - js-vs-ts", () => {
+    expect(
+      resolve(
+        {
+          module: "things/js-before-ts",
+          moduleSystem: "es6"
+        },
+        path.join(__dirname, "fixtures"),
+        path.join(
+          __dirname,
+          "fixtures",
+          "ts-config-with-path-correct-resolution-prio"
+        ),
+        normalizeResolveOptions(
+          {
+            tsConfig: TSCONFIG_RESOLUTIONS,
+            bustTheCache: true
+          },
+          {},
+          PARSED_TSCONFIG_RESOLUTIONS
+        )
+      )
+    ).to.deep.equal({
+      coreModule: false,
+      couldNotResolve: false,
+      dependencyTypes: ["aliased"],
+      followable: true,
+      resolved:
+        "ts-config-with-path-correct-resolution-prio/src/aliassed/js-before-ts.js"
     });
   });
 
