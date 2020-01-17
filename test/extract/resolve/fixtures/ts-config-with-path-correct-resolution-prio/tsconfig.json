@@ -11,9 +11,7 @@
     /* Module Resolution Options */
     "baseUrl": "./src",
     "paths": {
-      "*": ["./typos/*"],
-      "gewoon/*": ["./common/*"],
-      "shared": ["./shared"]
+      "things/*": ["./aliassed/*"],
     },
     "esModuleInterop": true
   }
