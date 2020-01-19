@@ -329,7 +329,7 @@ describe("extract/resolve/index", () => {
       dependencyTypes: ["aliased"],
       followable: true,
       resolved:
-        "ts-config-with-path-correct-resolution-prio/src/aliassed/dts-before-ts.d.ts"
+        "ts-config-with-path-correct-resolution-prio/src/aliassed/dts-before-ts.ts"
     });
   });
 
