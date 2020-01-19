@@ -18,6 +18,7 @@ function initFollowableExtensions(pResolveOptions) {
   // will result in false positives.
   const KNOWN_UNFOLLOWABLES = [
     ".json",
+    ".node",
     ".css",
     ".sass",
     ".scss",

@@ -63,14 +63,12 @@ function compileResolveOptions(pResolveOptions, pTSConfig) {
       lResolveOptions.plugins,
       new TsConfigPathsPlugin({
         configFile: pResolveOptions.tsConfig,
-        // different from the typescript compiler, tsConfigPathsPlugin
-        // only has .ts and .tsx as default extension to scan given
-        // an import/ require/ export argument.
-        // Added .js, .jsx and .d.ts before .ts and .tsx to mirror
-        // the typescript compiler's behavior
-        // Should probably be fixed upstream, but put in here until
-        // that happens.
-        extensions: [".js", ".json", ".jsx", ".d.ts", ".ts", ".tsx"]
+        // TsConfigPathsPlugin doesn't (can't) read enhanced-resolve's
+        // list of extensions, and the default it uses for extensions
+        // so we do it ourselves - either with the extensions passed
+        // or with the supported ones.
+        extensions:
+          pResolveOptions.extensions || DEFAULT_RESOLVE_OPTIONS.extensions
       })
     );
   }
