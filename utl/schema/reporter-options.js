@@ -6,6 +6,7 @@ module.exports = {
       additionalProperties: false,
       properties: {
         anon: { $ref: "#/definitions/AnonReporterOptionsType" },
+        archi: { $ref: "#/definitions/ArchiReporterOptionsType" },
         dot: { $ref: "#/definitions/DotReporterOptionsType" }
       }
     },
@@ -26,6 +27,19 @@ module.exports = {
           items: {
             type: "string"
           }
+        }
+      }
+    },
+    ArchiReporterOptionsType: {
+      type: "object",
+      description:
+        "Options to tweak the output of customized dot/ architecture reporter",
+      additionalProperties: false,
+      properties: {
+        collapsePattern: {
+          type: "string",
+          description:
+            'Regular expressions to collapse to (e.g. "^node_modules/[^/]+|^src/[^/]+"'
         }
       }
     },

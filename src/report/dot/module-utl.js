@@ -88,11 +88,53 @@ function compareOnSource(pModuleOne, pModuleTwo) {
   return pModuleOne.source > pModuleTwo.source ? 1 : -1;
 }
 
+function stripSelfTransitions(pModule) {
+  return {
+    ...pModule,
+    dependencies: pModule.dependencies.filter(
+      pDependency => pModule.source !== pDependency.resolved
+    )
+  };
+}
+
+/**
+ * Sort of smartly concatenate the given prefix and source:
+ *
+ * if it's an uri pattern (e.g. https://yadda, file://snorkel/bla)
+ * simply concat.
+ *
+ * in all other cases path.posix.join the two
+ *
+ * @param {string} pPrefix - prefix
+ * @param {string} pSource - filename
+ * @return {string} prefix and filename concatenated
+ */
+function smartURIConcat(pPrefix, pSource) {
+  if (pPrefix.match(/^[a-z]+:\/\//)) {
+    return `${pPrefix}${pSource}`;
+  } else {
+    return path.join(pPrefix, pSource);
+  }
+}
+
+function addURL(pPrefix) {
+  return pModule =>
+    Object.assign(
+      {},
+      pModule,
+      pModule.coreModule || pModule.couldNotResolve
+        ? {}
+        : { URL: smartURIConcat(pPrefix, pModule.source) }
+    );
+}
+
 module.exports = {
   compareOnSource,
   folderify,
   applyTheme,
   extractFirstTransgression,
   extractRelevantTransgressions,
-  attributizeObject
+  attributizeObject,
+  stripSelfTransitions,
+  addURL
 };

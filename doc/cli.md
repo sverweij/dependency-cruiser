@@ -119,11 +119,38 @@ with _GraphViz dot_ (`-T` is the short form of `--output-type`:)
 dependency-cruise -x "^node_modules" -T dot src | dot -T svg > dependencygraph.svg
 ```
 
-> ##### ddot - summarize on folder level
->
-> Since version 4.13.0 there's an _experimental_ `ddot` reporter that summarizes
-> modules on folder level. In version 6.3.0 its presentation changed a bit to be
-> closer to the regular dot one, a.o. growing the capability to customize colors.
+You can customize the look of these graphs. See the 
+[dot section in the rules reference](./rules-reference.md#dot) for details.
+
+#### ddot - summarize on folder level
+
+> This reporter is _experimental_. It's likely to stay, but the way you configure
+> it or how its output looks might change without major version bumping.
+
+The `ddot` reporter is a variant on the `dot` output. It summarizes modules on
+folder level. You can customize it just as you can the dot reporter output.
+
+#### archi/ cdot
+
+> This reporter is _experimental_. It's likely to stay, but the way you configure
+> it or how its output looks might change without major version bumping.
+
+The archi is a variant on the `dot` output. The archi reporter 
+can summarize (or 'collapse') dependencies to folders of your own choosing. 
+Great if you want to have a high level overview of your app's dependencies.
+
+By default it collapses to one folder below folders named _node_modules_, _packages_,
+_src_, _lib_ and _test_, but you can pass your own patterns as well in the
+`options.reporterOptions.archi` section of your dependency-cruiser configuration.
+
+See the [archi section in the rules reference](./rules-reference.md#archi) for
+details.
+
+<details>
+<summary>Sample output</summary>
+
+</details>
+
 
 #### err-html
 

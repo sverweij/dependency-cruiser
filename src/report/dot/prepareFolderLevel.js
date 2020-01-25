@@ -1,4 +1,5 @@
 const path = require("path").posix;
+const _get = require("lodash/get");
 const moduleUtl = require("./module-utl");
 const consolidateModules = require("./consolidateModules");
 const consolidateModuleDependencies = require("./consolidateModuleDependencies");
@@ -18,21 +19,13 @@ function squashToDir(pModules) {
   }));
 }
 
-function stripSelfTransitions(pModule) {
-  return {
-    ...pModule,
-    dependencies: pModule.dependencies.filter(
-      pDependency => pModule.source !== pDependency.resolved
-    )
-  };
-}
-
 module.exports = (pResults, pTheme) => {
   return consolidateModules(squashToDir(pResults.modules))
     .map(consolidateModuleDependencies)
     .sort(moduleUtl.compareOnSource)
     .map(moduleUtl.extractRelevantTransgressions)
     .map(moduleUtl.folderify)
-    .map(stripSelfTransitions)
-    .map(moduleUtl.applyTheme(pTheme));
+    .map(moduleUtl.stripSelfTransitions)
+    .map(moduleUtl.applyTheme(pTheme))
+    .map(moduleUtl.addURL(_get(pResults, "summary.optionsUsed.prefix", "")));
 };

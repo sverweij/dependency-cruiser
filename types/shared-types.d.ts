@@ -6,6 +6,7 @@ export type OutputType =
   | "json"
   | "html"
   | "dot"
+  | "cdot"
   | "ddot"
   | "csv"
   | "err"

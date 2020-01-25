@@ -1,5 +1,6 @@
 const fs = require("fs");
 const path = require("path");
+const renderCdot = require("../src/report/dot")("custom");
 const renderDdot = require("../src/report/dot")("folder");
 const renderDot = require("../src/report/dot")("module");
 const renderTeamcity = require("../src/report/teamcity");
@@ -44,6 +45,10 @@ function renderDefaultThemeDot(pResultObject) {
   return renderDot(pResultObject, {});
 }
 
+const CDOT_MOCK_DIR = path.join(
+  __dirname,
+  "../test/report/dot/customLevel/mocks/"
+);
 const DDOT_MOCK_DIR = path.join(
   __dirname,
   "../test/report/dot/folderLevel/mocks/"
@@ -60,6 +65,7 @@ const HTML_MOCK_DIR = path.join(__dirname, "../test/report/html/mocks/");
 const CSV_MOCK_DIR = path.join(__dirname, "../test/report/csv/mocks/");
 
 regenerateReportFixtures(DDOT_MOCK_DIR, renderDdot, ".dot");
+regenerateReportFixtures(CDOT_MOCK_DIR, renderCdot, ".dot");
 regenerateReportFixtures(DOT_MOCK_DIR, renderBareThemeDot, ".dot");
 regenerateReportFixtures(
   DOT_MOCK_DIR,

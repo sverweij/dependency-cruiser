@@ -7,6 +7,8 @@ module.exports = {
         "html",
         "dot",
         "ddot",
+        "cdot",
+        "archi",
         "csv",
         "err",
         "err-long",

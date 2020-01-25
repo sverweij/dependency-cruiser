@@ -3,6 +3,7 @@ const anon = require("./anon");
 const csv = require("./csv");
 const dot = require("./dot")("module");
 const ddot = require("./dot")("folder");
+const cdot = require("./dot")("custom");
 const errHtml = require("./err-html");
 const errLong = curryRight(require("./err"))({ long: true });
 const err = require("./err");
@@ -16,6 +17,8 @@ const TYPE2REPORTER = {
   csv,
   dot,
   ddot,
+  cdot,
+  archi: cdot,
   "err-html": errHtml,
   "err-long": errLong,
   err,

@@ -1,11 +1,15 @@
 const _clone = require("lodash/clone");
 const _reject = require("lodash/reject");
+const _uniqBy = require("lodash/uniqBy");
 
 function mergeModule(pLeftModule, pRightModule) {
   return {
     ...pLeftModule,
     ...pRightModule,
-    dependencies: pLeftModule.dependencies.concat(pRightModule.dependencies),
+    dependencies: _uniqBy(
+      pLeftModule.dependencies.concat(pRightModule.dependencies),
+      pDependency => pDependency.resolved
+    ),
     valid: pLeftModule.valid && pRightModule.valid
   };
 }

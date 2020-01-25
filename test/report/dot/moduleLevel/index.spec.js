@@ -3,6 +3,7 @@ const path = require("path");
 const expect = require("chai").expect;
 const defaultTheme = require("../../../../src/report/dot/defaultTheme.json");
 const render = require("../../../../src/report/dot")("module");
+const defaultRender = require("../../../../src/report/dot")();
 const clusterless = require("./mocks/clusterless.json");
 const bunchOfModules = require("./mocks/bunch-of-modules.json");
 const orphanDeps = require("./mocks/orphan-deps.json");
@@ -104,11 +105,17 @@ describe("report/dot/moduleLevel reporter", () => {
       defaultColorFixture
     );
   });
+
   it("richly colors modules when passed no theme", () => {
     expect(render(bunchOfModules).output).to.deep.equal(defaultColorFixture);
   });
   it("colors boringly when passed a bare theme", () => {
     expect(render(bunchOfModules, bareTheme).output).to.deep.equal(
+      bareColorFixture
+    );
+  });
+  it("Also renders on module level when the reporter granularity isn't specified", () => {
+    expect(defaultRender(bunchOfModules, bareTheme).output).to.deep.equal(
       bareColorFixture
     );
   });

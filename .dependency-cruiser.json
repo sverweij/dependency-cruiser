@@ -204,6 +204,9 @@
     // },
     "exoticRequireStrings": ["tryRequire"],
     "reporterOptions": {
+      "archi": {
+        "collapsePattern": "^(node_modules|src|test)/[^/]+|^bin/"
+      },
       "dot": {
         "theme": {
           "replace": false,
