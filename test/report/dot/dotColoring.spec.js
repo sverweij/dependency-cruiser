@@ -1,7 +1,7 @@
 const expect = require("chai").expect;
 const theming = require("../../../src/report/dot/theming");
 
-describe("report/dot/common/theming - determineModuleColors - default theme", () => {
+describe("report/dot/theming - determineModuleColors - default theme", () => {
   it("empty module => no colors", () => {
     expect(
       theming.determineAttributes({}, theming.normalizeTheme({}).module)

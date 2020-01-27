@@ -7,7 +7,8 @@ module.exports = {
       properties: {
         anon: { $ref: "#/definitions/AnonReporterOptionsType" },
         archi: { $ref: "#/definitions/ArchiReporterOptionsType" },
-        dot: { $ref: "#/definitions/DotReporterOptionsType" }
+        dot: { $ref: "#/definitions/DotReporterOptionsType" },
+        ddot: { $ref: "#/definitions/DotReporterOptionsType" }
       }
     },
     AnonReporterOptionsType: {
@@ -39,8 +40,9 @@ module.exports = {
         collapsePattern: {
           type: "string",
           description:
-            'Regular expressions to collapse to (e.g. "^node_modules/[^/]+|^src/[^/]+"'
-        }
+            'Regular expressions to collapse to (e.g. "^node_modules/[^/]+|^src/[^/]+")'
+        },
+        theme: { $ref: "#/definitions/DotThemeType" }
       }
     },
     DotReporterOptionsType: {

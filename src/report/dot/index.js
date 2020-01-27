@@ -32,6 +32,22 @@ function report(pResults, pTheme, pGranularity, pCollapsePatterns) {
   });
 }
 
+const GRANULARITY2THEMEORIGN = {
+  module: "summary.optionsUsed.reporterOptions.dot.theme",
+  folder: "summary.optionsUsed.reporterOptions.ddot.theme",
+  custom: "summary.optionsUsed.reporterOptions.archi.theme"
+};
+
+function pryThemeFromResults(pGranularity, pResults) {
+  const lFallbackTheme = _get(
+    pResults,
+    "summary.optionsUsed.reporterOptions.dot.theme"
+  );
+
+  // eslint-disable-next-line security/detect-object-injection
+  return _get(pResults, GRANULARITY2THEMEORIGN[pGranularity], lFallbackTheme);
+}
+
 /**
  * Returns the results of a cruise as a directed graph in the dot language.
  *
@@ -48,13 +64,17 @@ function report(pResults, pTheme, pGranularity, pCollapsePatterns) {
  */
 module.exports = pGranularity => (
   pResults,
-  pTheme = _get(pResults, "summary.optionsUsed.reporterOptions.dot.theme"),
+  pTheme,
   pCollapsePatterns = _get(
     pResults,
     "summary.optionsUsed.reporterOptions.archi.collapsePattern",
     "^(node_modules|packages|src|lib|test|spec)/[^/]+"
   )
-) => ({
-  output: report(pResults, pTheme, pGranularity, pCollapsePatterns),
-  exitCode: 0
-});
+) => {
+  const lTheme = pTheme || pryThemeFromResults(pGranularity, pResults);
+
+  return {
+    output: report(pResults, lTheme, pGranularity, pCollapsePatterns),
+    exitCode: 0
+  };
+};

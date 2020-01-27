@@ -4,10 +4,10 @@ const moduleUtl = require("./module-utl");
 const consolidateModules = require("./consolidateModules");
 const consolidateModuleDependencies = require("./consolidateModuleDependencies");
 
-function shortendep(pDep) {
+function squashDependencyToDir(pDependency) {
   return {
-    ...pDep,
-    resolved: path.dirname(pDep.resolved)
+    ...pDependency,
+    resolved: path.dirname(pDependency.resolved)
   };
 }
 
@@ -15,7 +15,7 @@ function squashToDir(pModules) {
   return pModules.map(pModule => ({
     ...pModule,
     source: path.dirname(pModule.source),
-    dependencies: pModule.dependencies.map(shortendep)
+    dependencies: pModule.dependencies.map(squashDependencyToDir)
   }));
 }
 

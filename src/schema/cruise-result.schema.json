@@ -614,7 +614,8 @@
       "properties": {
         "anon": { "$ref": "#/definitions/AnonReporterOptionsType" },
         "archi": { "$ref": "#/definitions/ArchiReporterOptionsType" },
-        "dot": { "$ref": "#/definitions/DotReporterOptionsType" }
+        "dot": { "$ref": "#/definitions/DotReporterOptionsType" },
+        "ddot": { "$ref": "#/definitions/DotReporterOptionsType" }
       }
     },
     "AnonReporterOptionsType": {
@@ -636,8 +637,9 @@
       "properties": {
         "collapsePattern": {
           "type": "string",
-          "description": "Regular expressions to collapse to (e.g. \"^node_modules/[^/]+|^src/[^/]+\""
-        }
+          "description": "Regular expressions to collapse to (e.g. \"^node_modules/[^/]+|^src/[^/]+\")"
+        },
+        "theme": { "$ref": "#/definitions/DotThemeType" }
       }
     },
     "DotReporterOptionsType": {
