@@ -1365,6 +1365,27 @@ module.exports = {
 
 ![bare](assets/theming/bare.svg)
 
+#### archi
+
+The 'customizable dot' (`cdot`) or 'archi' reporter exists to make high level
+dependency overviews. Out of the box it recognizes structures that summarize
+to folders directly under _packages_, _src_, _lib_, and _node_modules_. You can
+adapt this behavior by passing a collapsePattern to the archi reporterOptions
+in your dependency-cruiser configurations e.g. like so:
+
+
+```javascript
+module.exports = {
+  options: {
+    reporterOptions: {
+      archi: {
+        collapsePattern: "^src/[^/]+|bin"
+      }
+    }
+  }
+};
+```
+
 ### Some more esoteric options
 
 #### preserveSymlinks

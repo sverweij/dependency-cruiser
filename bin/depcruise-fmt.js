@@ -30,7 +30,7 @@ try {
     )
     .option(
       "-T, --output-type <type>",
-      `output type - err|err-long|err-html|dot|ddot|json
+      `output type - err|err-long|err-html|dot|ddot|archi|json
                          `,
       "err"
     )

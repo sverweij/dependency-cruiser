@@ -52,7 +52,7 @@ try {
     )
     .option(
       "-T, --output-type <type>",
-      `output type - err|err-long|err-html|dot|json
+      `output type - err|err-long|err-html|dot|ddot|archi|json
                               (default: err)`
     )
     .option(

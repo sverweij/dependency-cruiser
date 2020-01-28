@@ -2,6 +2,7 @@
     "modules": [
         {
             "source": "test/cli/fixtures/unresolvable-in-sub/refers-to-an-unresolvable-module.js",
+            "valid": true,
             "dependencies": [
                 {
                     "resolved": "./not-at-home",
@@ -25,6 +26,7 @@
         },
         {
             "source": "./not-at-home",
+            "valid": true,
             "followable": false,
             "coreModule": false,
             "couldNotResolve": true,
@@ -32,6 +34,7 @@
         },
         {
             "source": "./this/path/does/not/exist",
+            "valid": true,
             "followable": false,
             "coreModule": false,
             "couldNotResolve": true,

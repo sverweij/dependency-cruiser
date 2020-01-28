@@ -3,5 +3,5 @@ strict digraph "dependency-cruiser output"{
     node [shape="box" style="rounded, filled" height="0.2" color="black" fillcolor="#ffffcc" fontcolor="black" fontname="Helvetica" fontsize="9"]
     edge [arrowhead="normal" arrowsize="0.6" penwidth="2.0" color="#00000033" fontname="Helvetica" fontsize="9"]
 
-    "tmp" [label="tmp" tooltip="no-orphans" fillcolor="#ccffcc" fontcolor="red" color="red"]
+    "tmp" [label="tmp" tooltip="no-orphans" URL="https://github.com/sverweij/dependency-cruiser/blob/develop/tmp" fillcolor="#ccffcc" fontcolor="red" color="red"]
 }

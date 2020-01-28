@@ -5,7 +5,7 @@ const path = require("path").posix;
 const expect = require("chai").expect;
 const intercept = require("intercept-stdout");
 const cli = require("../../src/cli");
-const asserthelpers = require("../utl/asserthelpers.utl");
+const asserthelpers = require("./asserthelpers.utl");
 const deleteDammit = require("./deleteDammit.utl");
 
 const OUT_DIR = "./test/cli/output";

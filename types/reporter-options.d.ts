@@ -4,9 +4,17 @@ export interface IReporterOptions {
    */
   anon?: IAnonReporterOptions;
   /**
+   * Options to tweak the output of the archi/ cdot reporter
+   */
+  archi?: IArchiReporterOptions;
+  /**
    * Options to tweak the output of the dot reporter
    */
   dot?: IDotReporterOptions;
+  /**
+   * Options to tweak the output of the dot reporter
+   */
+  ddot?: IDotReporterOptions;
 }
 
 export interface IAnonReporterOptions {
@@ -64,4 +72,15 @@ export interface IDotTheme {
 export interface IDotThemeEntry {
   criteria: any;
   attributes: any;
+}
+
+export interface IArchiReporterOptions {
+  /**
+   * Regular expressions to collapse to (e.g. "^node_modules/[^/]+|^src/[^/]+")
+   */
+  collapsePattern?: string;
+  /**
+   * A bunch of criteria to (conditionally) theme the dot output
+   */
+  theme?: IDotTheme;
 }
