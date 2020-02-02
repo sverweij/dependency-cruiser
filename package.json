@@ -69,7 +69,7 @@
     "depcruise:graph:doc:json": "node ./bin/dependency-cruise.js --validate --include-only '^(src|bin)' --output-type json bin src --output-to tmp_graph_deps.json",
     "depcruise:graph:doc:html": "./bin/depcruise-fmt.js -T dot -f - tmp_graph_deps.json | dot -T svg | node utl/embed-svg-in-html.utl.js > docs/dependency-cruiser-dependency-graph.html",
     "depcruise:graph:doc:html-archi": "./bin/depcruise-fmt.js -T archi -f - tmp_graph_deps.json | dot -T svg -Grankdir=TD | node utl/embed-svg-in-html.utl.js > docs/dependency-cruiser-archi-graph.html",
-    "depcruise:graph:doc:html-dir": "./bin/depcruise-fmt.js -T ddot -f - tmp_graph_deps.json | dot -T svg | node utl/embed-svg-in-html.utl.js > docs/dependency-cruiser-dir-graph.html",
+    "depcruise:graph:doc:html-dir": "./bin/depcruise-fmt.js -T ddot -f - tmp_graph_deps.json | dot -T svg -Grankdir=TD | node utl/embed-svg-in-html.utl.js > docs/dependency-cruiser-dir-graph.html",
     "depcruise:graph:doc:svg": "./bin/depcruise-fmt.js -T dot -f - tmp_graph_deps.json | dot -T svg > doc/real-world-samples/dependency-cruiser-without-node_modules.svg",
     "depcruise:graph:doc:svg-archi": "./bin/depcruise-fmt.js -T archi -f - tmp_graph_deps.json | dot -Grankdir=TD -T svg > doc/real-world-samples/dependency-cruiser-archi-graph.svg",
     "depcruise:graph:doc:svg-dir": "./bin/depcruise-fmt.js -T ddot -f - tmp_graph_deps.json | dot -Grankdir=TD -T svg > doc/real-world-samples/dependency-cruiser-dir-graph.svg",
