@@ -2,6 +2,7 @@ const _clone = require("lodash/clone");
 const _get = require("lodash/get");
 const _reject = require("lodash/reject");
 const _uniqBy = require("lodash/uniqBy");
+const compareRules = require("./compareRules");
 
 function mergeDependency(pLeftDependency, pRightDependency) {
   return {
@@ -12,7 +13,9 @@ function mergeDependency(pLeftDependency, pRightDependency) {
         pRightDependency.dependendencyTypes
       )
     ),
-    rules: pLeftDependency.rules.concat(_get(pRightDependency, "rules", [])),
+    rules: pLeftDependency.rules
+      .concat(_get(pRightDependency, "rules", []))
+      .sort(compareRules),
     valid: pLeftDependency.valid && pRightDependency.valid
   };
 }
