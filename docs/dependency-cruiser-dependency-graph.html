@@ -1,34 +1,45 @@
 <!DOCTYPE html>
 <html lang="en" dir="ltr">
-    <head>
-        <meta charset="utf-8">
-        <title>dependency-cruiser dependency-graph</title>
-        <style>
-            .edge:active path, .edge:hover path{
-                stroke:fuchsia;
-                stroke-width:3;
-                stroke-opacity:1;
-            }
-            .edge:active polygon, .edge:hover polygon  {
-                stroke:fuchsia;
-                stroke-width:3;
-                fill:fuchsia;
-                stroke-opacity:1;
-                fill-opacity:1;
-            }
-            .edge:active text, .edge:hover text{
-                fill:fuchsia;
-            }
-            .cluster path {
-               stroke-width:3;
-               fill: white;
-            }
-            .cluster:active path, .cluster:hover path {
-                fill: #ffff0011;
-            }
-        </style>
-    </head>
-    <body>
+  <head>
+    <meta charset="utf-8" />
+    <title>dependency-cruiser dependency-graph</title>
+    <style>
+      .node:active path,
+      .node:hover path,
+      .node:active polygon,
+      .node:hover polygon {
+        stroke: fuchsia;
+        stroke-width: 2;
+      }
+      .edge:active path,
+      .edge:hover path {
+        stroke: fuchsia;
+        stroke-width: 3;
+        stroke-opacity: 1;
+      }
+      .edge:active polygon,
+      .edge:hover polygon {
+        stroke: fuchsia;
+        stroke-width: 3;
+        fill: fuchsia;
+        stroke-opacity: 1;
+        fill-opacity: 1;
+      }
+      .edge:active text,
+      .edge:hover text {
+        fill: fuchsia;
+      }
+      .cluster path {
+        stroke-width: 3;
+        fill: white;
+      }
+      .cluster:active path,
+      .cluster:hover path {
+        fill: #ffff0011;
+      }
+    </style>
+  </head>
+  <body>
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN"
  "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
@@ -49,61 +60,6 @@
 <title>cluster_src</title>
 <path fill="#ffffff" stroke="black" stroke-width="2" d="M145.05,-8C145.05,-8 1858.16,-8 1858.16,-8 1864.16,-8 1870.16,-14 1870.16,-20 1870.16,-20 1870.16,-2118 1870.16,-2118 1870.16,-2124 1864.16,-2130 1858.16,-2130 1858.16,-2130 145.05,-2130 145.05,-2130 139.05,-2130 133.05,-2124 133.05,-2118 133.05,-2118 133.05,-20 133.05,-20 133.05,-14 139.05,-8 145.05,-8"/>
 <text text-anchor="middle" x="1001.6" y="-2118.8" font-family="Helvetica,sans-Serif" font-weight="bold" font-size="9.00">src</text>
-</g>
-<g id="clust7" class="cluster">
-<title>cluster_src/extract</title>
-<path fill="#ffffff" stroke="black" stroke-width="2" d="M635.56,-706C635.56,-706 1850.16,-706 1850.16,-706 1856.16,-706 1862.16,-712 1862.16,-718 1862.16,-718 1862.16,-1426 1862.16,-1426 1862.16,-1432 1856.16,-1438 1850.16,-1438 1850.16,-1438 635.56,-1438 635.56,-1438 629.56,-1438 623.56,-1432 623.56,-1426 623.56,-1426 623.56,-718 623.56,-718 623.56,-712 629.56,-706 635.56,-706"/>
-<text text-anchor="middle" x="1242.86" y="-1426.8" font-family="Helvetica,sans-Serif" font-weight="bold" font-size="9.00">extract</text>
-</g>
-<g id="clust8" class="cluster">
-<title>cluster_src/extract/ast&#45;extractors</title>
-<path fill="#ffffff" stroke="black" stroke-width="2" d="M879.63,-1085C879.63,-1085 1265.59,-1085 1265.59,-1085 1271.59,-1085 1277.59,-1091 1277.59,-1097 1277.59,-1097 1277.59,-1167 1277.59,-1167 1277.59,-1173 1271.59,-1179 1265.59,-1179 1265.59,-1179 879.63,-1179 879.63,-1179 873.63,-1179 867.63,-1173 867.63,-1167 867.63,-1167 867.63,-1097 867.63,-1097 867.63,-1091 873.63,-1085 879.63,-1085"/>
-<text text-anchor="middle" x="1072.61" y="-1167.8" font-family="Helvetica,sans-Serif" font-weight="bold" font-size="9.00">ast&#45;extractors</text>
-</g>
-<g id="clust9" class="cluster">
-<title>cluster_src/extract/derive</title>
-<path fill="#ffffff" stroke="black" stroke-width="2" d="M760.35,-1187C760.35,-1187 974.92,-1187 974.92,-1187 980.92,-1187 986.92,-1193 986.92,-1199 986.92,-1199 986.92,-1377 986.92,-1377 986.92,-1383 980.92,-1389 974.92,-1389 974.92,-1389 760.35,-1389 760.35,-1389 754.35,-1389 748.35,-1383 748.35,-1377 748.35,-1377 748.35,-1199 748.35,-1199 748.35,-1193 754.35,-1187 760.35,-1187"/>
-<text text-anchor="middle" x="867.63" y="-1377.8" font-family="Helvetica,sans-Serif" font-weight="bold" font-size="9.00">derive</text>
-</g>
-<g id="clust10" class="cluster">
-<title>cluster_src/extract/derive/circular</title>
-<path fill="#ffffff" stroke="black" stroke-width="2" d="M768.35,-1313C768.35,-1313 959.66,-1313 959.66,-1313 965.66,-1313 971.66,-1319 971.66,-1325 971.66,-1325 971.66,-1352 971.66,-1352 971.66,-1358 965.66,-1364 959.66,-1364 959.66,-1364 768.35,-1364 768.35,-1364 762.35,-1364 756.35,-1358 756.35,-1352 756.35,-1352 756.35,-1325 756.35,-1325 756.35,-1319 762.35,-1313 768.35,-1313"/>
-<text text-anchor="middle" x="864.01" y="-1352.8" font-family="Helvetica,sans-Serif" font-weight="bold" font-size="9.00">circular</text>
-</g>
-<g id="clust11" class="cluster">
-<title>cluster_src/extract/derive/orphan</title>
-<path fill="#ffffff" stroke="black" stroke-width="2" d="M768.35,-1254C768.35,-1254 960.41,-1254 960.41,-1254 966.41,-1254 972.41,-1260 972.41,-1266 972.41,-1266 972.41,-1293 972.41,-1293 972.41,-1299 966.41,-1305 960.41,-1305 960.41,-1305 768.35,-1305 768.35,-1305 762.35,-1305 756.35,-1299 756.35,-1293 756.35,-1293 756.35,-1266 756.35,-1266 756.35,-1260 762.35,-1254 768.35,-1254"/>
-<text text-anchor="middle" x="864.38" y="-1293.8" font-family="Helvetica,sans-Serif" font-weight="bold" font-size="9.00">orphan</text>
-</g>
-<g id="clust12" class="cluster">
-<title>cluster_src/extract/derive/reachable</title>
-<path fill="#ffffff" stroke="black" stroke-width="2" d="M768.35,-1195C768.35,-1195 966.92,-1195 966.92,-1195 972.92,-1195 978.92,-1201 978.92,-1207 978.92,-1207 978.92,-1234 978.92,-1234 978.92,-1240 972.92,-1246 966.92,-1246 966.92,-1246 768.35,-1246 768.35,-1246 762.35,-1246 756.35,-1240 756.35,-1234 756.35,-1234 756.35,-1207 756.35,-1207 756.35,-1201 762.35,-1195 768.35,-1195"/>
-<text text-anchor="middle" x="867.63" y="-1234.8" font-family="Helvetica,sans-Serif" font-weight="bold" font-size="9.00">reachable</text>
-</g>
-<g id="clust13" class="cluster">
-<title>cluster_src/extract/parse</title>
-<path fill="#ffffff" stroke="black" stroke-width="2" d="M892.63,-977C892.63,-977 974.66,-977 974.66,-977 980.66,-977 986.66,-983 986.66,-989 986.66,-989 986.66,-1045 986.66,-1045 986.66,-1051 980.66,-1057 974.66,-1057 974.66,-1057 892.63,-1057 892.63,-1057 886.63,-1057 880.63,-1051 880.63,-1045 880.63,-1045 880.63,-989 880.63,-989 880.63,-983 886.63,-977 892.63,-977"/>
-<text text-anchor="middle" x="933.65" y="-1045.8" font-family="Helvetica,sans-Serif" font-weight="bold" font-size="9.00">parse</text>
-</g>
-<g id="clust14" class="cluster">
-<title>cluster_src/extract/resolve</title>
-<path fill="#ffffff" stroke="black" stroke-width="2" d="M910.65,-744C910.65,-744 1613.59,-744 1613.59,-744 1619.59,-744 1625.59,-750 1625.59,-756 1625.59,-756 1625.59,-957 1625.59,-957 1625.59,-963 1619.59,-969 1613.59,-969 1613.59,-969 910.65,-969 910.65,-969 904.65,-969 898.65,-963 898.65,-957 898.65,-957 898.65,-756 898.65,-756 898.65,-750 904.65,-744 910.65,-744"/>
-<text text-anchor="middle" x="1262.12" y="-957.8" font-family="Helvetica,sans-Serif" font-weight="bold" font-size="9.00">resolve</text>
-</g>
-<g id="clust15" class="cluster">
-<title>cluster_src/extract/resolve/readPackageDeps</title>
-<path fill="#ffffff" stroke="black" stroke-width="2" d="M1205.33,-752C1205.33,-752 1449.27,-752 1449.27,-752 1455.27,-752 1461.27,-758 1461.27,-764 1461.27,-764 1461.27,-791 1461.27,-791 1461.27,-797 1455.27,-803 1449.27,-803 1449.27,-803 1205.33,-803 1205.33,-803 1199.33,-803 1193.33,-797 1193.33,-791 1193.33,-791 1193.33,-764 1193.33,-764 1193.33,-758 1199.33,-752 1205.33,-752"/>
-<text text-anchor="middle" x="1327.3" y="-791.8" font-family="Helvetica,sans-Serif" font-weight="bold" font-size="9.00">readPackageDeps</text>
-</g>
-<g id="clust16" class="cluster">
-<title>cluster_src/extract/transpile</title>
-<path fill="#ffffff" stroke="black" stroke-width="2" d="M1042.93,-1246C1042.93,-1246 1447.44,-1246 1447.44,-1246 1453.44,-1246 1459.44,-1252 1459.44,-1258 1459.44,-1258 1459.44,-1401 1459.44,-1401 1459.44,-1407 1453.44,-1413 1447.44,-1413 1447.44,-1413 1042.93,-1413 1042.93,-1413 1036.93,-1413 1030.93,-1407 1030.93,-1401 1030.93,-1401 1030.93,-1258 1030.93,-1258 1030.93,-1252 1036.93,-1246 1042.93,-1246"/>
-<text text-anchor="middle" x="1245.18" y="-1401.8" font-family="Helvetica,sans-Serif" font-weight="bold" font-size="9.00">transpile</text>
-</g>
-<g id="clust17" class="cluster">
-<title>cluster_src/extract/utl</title>
-<path fill="#ffffff" stroke="black" stroke-width="2" d="M1645.59,-907C1645.59,-907 1842.16,-907 1842.16,-907 1848.16,-907 1854.16,-913 1854.16,-919 1854.16,-919 1854.16,-1033 1854.16,-1033 1854.16,-1039 1848.16,-1045 1842.16,-1045 1842.16,-1045 1645.59,-1045 1645.59,-1045 1639.59,-1045 1633.59,-1039 1633.59,-1033 1633.59,-1033 1633.59,-919 1633.59,-919 1633.59,-913 1639.59,-907 1645.59,-907"/>
-<text text-anchor="middle" x="1743.87" y="-1033.8" font-family="Helvetica,sans-Serif" font-weight="bold" font-size="9.00">utl</text>
 </g>
 <g id="clust18" class="cluster">
 <title>cluster_src/main</title>
@@ -165,26 +121,6 @@
 <path fill="#ffffff" stroke="black" stroke-width="2" d="M1147.2,-550C1147.2,-550 1309.46,-550 1309.46,-550 1315.46,-550 1321.46,-556 1321.46,-562 1321.46,-562 1321.46,-589 1321.46,-589 1321.46,-595 1315.46,-601 1309.46,-601 1309.46,-601 1147.2,-601 1147.2,-601 1141.2,-601 1135.2,-595 1135.2,-589 1135.2,-589 1135.2,-562 1135.2,-562 1135.2,-556 1141.2,-550 1147.2,-550"/>
 <text text-anchor="middle" x="1228.33" y="-589.8" font-family="Helvetica,sans-Serif" font-weight="bold" font-size="9.00">utl</text>
 </g>
-<g id="clust3" class="cluster">
-<title>cluster_src/cli</title>
-<path fill="#ffffff" stroke="black" stroke-width="2" d="M153.05,-1821C153.05,-1821 703.07,-1821 703.07,-1821 709.07,-1821 715.07,-1827 715.07,-1833 715.07,-1833 715.07,-2093 715.07,-2093 715.07,-2099 709.07,-2105 703.07,-2105 703.07,-2105 153.05,-2105 153.05,-2105 147.05,-2105 141.05,-2099 141.05,-2093 141.05,-2093 141.05,-1833 141.05,-1833 141.05,-1827 147.05,-1821 153.05,-1821"/>
-<text text-anchor="middle" x="428.06" y="-2093.8" font-family="Helvetica,sans-Serif" font-weight="bold" font-size="9.00">cli</text>
-</g>
-<g id="clust5" class="cluster">
-<title>cluster_src/cli/initConfig</title>
-<path fill="#ffffff" stroke="black" stroke-width="2" d="M279.45,-1985C279.45,-1985 583.05,-1985 583.05,-1985 589.05,-1985 595.05,-1991 595.05,-1997 595.05,-1997 595.05,-2068 595.05,-2068 595.05,-2074 589.05,-2080 583.05,-2080 583.05,-2080 279.45,-2080 279.45,-2080 273.45,-2080 267.45,-2074 267.45,-2068 267.45,-2068 267.45,-1997 267.45,-1997 267.45,-1991 273.45,-1985 279.45,-1985"/>
-<text text-anchor="middle" x="431.25" y="-2068.8" font-family="Helvetica,sans-Serif" font-weight="bold" font-size="9.00">initConfig</text>
-</g>
-<g id="clust6" class="cluster">
-<title>cluster_src/cli/utl</title>
-<path fill="#ffffff" stroke="black" stroke-width="2" d="M370.47,-1832C370.47,-1832 472.01,-1832 472.01,-1832 478.01,-1832 484.01,-1838 484.01,-1844 484.01,-1844 484.01,-1929 484.01,-1929 484.01,-1935 478.01,-1941 472.01,-1941 472.01,-1941 370.47,-1941 370.47,-1941 364.47,-1941 358.47,-1935 358.47,-1929 358.47,-1929 358.47,-1844 358.47,-1844 358.47,-1838 364.47,-1832 370.47,-1832"/>
-<text text-anchor="middle" x="421.24" y="-1929.8" font-family="Helvetica,sans-Serif" font-weight="bold" font-size="9.00">utl</text>
-</g>
-<g id="clust4" class="cluster">
-<title>cluster_src/cli/compileConfig</title>
-<path fill="#ffffff" stroke="black" stroke-width="2" d="M516.53,-1829C516.53,-1829 695.07,-1829 695.07,-1829 701.07,-1829 707.07,-1835 707.07,-1841 707.07,-1841 707.07,-1897 707.07,-1897 707.07,-1903 701.07,-1909 695.07,-1909 695.07,-1909 516.53,-1909 516.53,-1909 510.53,-1909 504.53,-1903 504.53,-1897 504.53,-1897 504.53,-1841 504.53,-1841 504.53,-1835 510.53,-1829 516.53,-1829"/>
-<text text-anchor="middle" x="605.8" y="-1897.8" font-family="Helvetica,sans-Serif" font-weight="bold" font-size="9.00">compileConfig</text>
-</g>
 <g id="clust30" class="cluster">
 <title>cluster_src/schema</title>
 <path fill="#ffffff" stroke="black" stroke-width="2" d="M735.07,-1470C735.07,-1470 847.63,-1470 847.63,-1470 853.63,-1470 859.63,-1476 859.63,-1482 859.63,-1482 859.63,-1538 859.63,-1538 859.63,-1544 853.63,-1550 847.63,-1550 847.63,-1550 735.07,-1550 735.07,-1550 729.07,-1550 723.07,-1544 723.07,-1538 723.07,-1538 723.07,-1482 723.07,-1482 723.07,-1476 729.07,-1470 735.07,-1470"/>
@@ -199,6 +135,81 @@
 <title>cluster_src/validate</title>
 <path fill="#ffffff" stroke="black" stroke-width="2" d="M910.65,-26C910.65,-26 1273.35,-26 1273.35,-26 1279.35,-26 1285.35,-32 1285.35,-38 1285.35,-38 1285.35,-94 1285.35,-94 1285.35,-100 1279.35,-106 1273.35,-106 1273.35,-106 910.65,-106 910.65,-106 904.65,-106 898.65,-100 898.65,-94 898.65,-94 898.65,-38 898.65,-38 898.65,-32 904.65,-26 910.65,-26"/>
 <text text-anchor="middle" x="1092" y="-94.8" font-family="Helvetica,sans-Serif" font-weight="bold" font-size="9.00">validate</text>
+</g>
+<g id="clust3" class="cluster">
+<title>cluster_src/cli</title>
+<path fill="#ffffff" stroke="black" stroke-width="2" d="M153.05,-1821C153.05,-1821 703.07,-1821 703.07,-1821 709.07,-1821 715.07,-1827 715.07,-1833 715.07,-1833 715.07,-2093 715.07,-2093 715.07,-2099 709.07,-2105 703.07,-2105 703.07,-2105 153.05,-2105 153.05,-2105 147.05,-2105 141.05,-2099 141.05,-2093 141.05,-2093 141.05,-1833 141.05,-1833 141.05,-1827 147.05,-1821 153.05,-1821"/>
+<text text-anchor="middle" x="428.06" y="-2093.8" font-family="Helvetica,sans-Serif" font-weight="bold" font-size="9.00">cli</text>
+</g>
+<g id="clust4" class="cluster">
+<title>cluster_src/cli/compileConfig</title>
+<path fill="#ffffff" stroke="black" stroke-width="2" d="M516.53,-1829C516.53,-1829 695.07,-1829 695.07,-1829 701.07,-1829 707.07,-1835 707.07,-1841 707.07,-1841 707.07,-1897 707.07,-1897 707.07,-1903 701.07,-1909 695.07,-1909 695.07,-1909 516.53,-1909 516.53,-1909 510.53,-1909 504.53,-1903 504.53,-1897 504.53,-1897 504.53,-1841 504.53,-1841 504.53,-1835 510.53,-1829 516.53,-1829"/>
+<text text-anchor="middle" x="605.8" y="-1897.8" font-family="Helvetica,sans-Serif" font-weight="bold" font-size="9.00">compileConfig</text>
+</g>
+<g id="clust5" class="cluster">
+<title>cluster_src/cli/initConfig</title>
+<path fill="#ffffff" stroke="black" stroke-width="2" d="M279.45,-1985C279.45,-1985 583.05,-1985 583.05,-1985 589.05,-1985 595.05,-1991 595.05,-1997 595.05,-1997 595.05,-2068 595.05,-2068 595.05,-2074 589.05,-2080 583.05,-2080 583.05,-2080 279.45,-2080 279.45,-2080 273.45,-2080 267.45,-2074 267.45,-2068 267.45,-2068 267.45,-1997 267.45,-1997 267.45,-1991 273.45,-1985 279.45,-1985"/>
+<text text-anchor="middle" x="431.25" y="-2068.8" font-family="Helvetica,sans-Serif" font-weight="bold" font-size="9.00">initConfig</text>
+</g>
+<g id="clust6" class="cluster">
+<title>cluster_src/cli/utl</title>
+<path fill="#ffffff" stroke="black" stroke-width="2" d="M370.47,-1832C370.47,-1832 472.01,-1832 472.01,-1832 478.01,-1832 484.01,-1838 484.01,-1844 484.01,-1844 484.01,-1929 484.01,-1929 484.01,-1935 478.01,-1941 472.01,-1941 472.01,-1941 370.47,-1941 370.47,-1941 364.47,-1941 358.47,-1935 358.47,-1929 358.47,-1929 358.47,-1844 358.47,-1844 358.47,-1838 364.47,-1832 370.47,-1832"/>
+<text text-anchor="middle" x="421.24" y="-1929.8" font-family="Helvetica,sans-Serif" font-weight="bold" font-size="9.00">utl</text>
+</g>
+<g id="clust7" class="cluster">
+<title>cluster_src/extract</title>
+<path fill="#ffffff" stroke="black" stroke-width="2" d="M635.56,-706C635.56,-706 1850.16,-706 1850.16,-706 1856.16,-706 1862.16,-712 1862.16,-718 1862.16,-718 1862.16,-1426 1862.16,-1426 1862.16,-1432 1856.16,-1438 1850.16,-1438 1850.16,-1438 635.56,-1438 635.56,-1438 629.56,-1438 623.56,-1432 623.56,-1426 623.56,-1426 623.56,-718 623.56,-718 623.56,-712 629.56,-706 635.56,-706"/>
+<text text-anchor="middle" x="1242.86" y="-1426.8" font-family="Helvetica,sans-Serif" font-weight="bold" font-size="9.00">extract</text>
+</g>
+<g id="clust13" class="cluster">
+<title>cluster_src/extract/parse</title>
+<path fill="#ffffff" stroke="black" stroke-width="2" d="M892.63,-977C892.63,-977 974.66,-977 974.66,-977 980.66,-977 986.66,-983 986.66,-989 986.66,-989 986.66,-1045 986.66,-1045 986.66,-1051 980.66,-1057 974.66,-1057 974.66,-1057 892.63,-1057 892.63,-1057 886.63,-1057 880.63,-1051 880.63,-1045 880.63,-1045 880.63,-989 880.63,-989 880.63,-983 886.63,-977 892.63,-977"/>
+<text text-anchor="middle" x="933.65" y="-1045.8" font-family="Helvetica,sans-Serif" font-weight="bold" font-size="9.00">parse</text>
+</g>
+<g id="clust14" class="cluster">
+<title>cluster_src/extract/resolve</title>
+<path fill="#ffffff" stroke="black" stroke-width="2" d="M910.65,-744C910.65,-744 1613.59,-744 1613.59,-744 1619.59,-744 1625.59,-750 1625.59,-756 1625.59,-756 1625.59,-957 1625.59,-957 1625.59,-963 1619.59,-969 1613.59,-969 1613.59,-969 910.65,-969 910.65,-969 904.65,-969 898.65,-963 898.65,-957 898.65,-957 898.65,-756 898.65,-756 898.65,-750 904.65,-744 910.65,-744"/>
+<text text-anchor="middle" x="1262.12" y="-957.8" font-family="Helvetica,sans-Serif" font-weight="bold" font-size="9.00">resolve</text>
+</g>
+<g id="clust15" class="cluster">
+<title>cluster_src/extract/resolve/readPackageDeps</title>
+<path fill="#ffffff" stroke="black" stroke-width="2" d="M1205.33,-752C1205.33,-752 1449.27,-752 1449.27,-752 1455.27,-752 1461.27,-758 1461.27,-764 1461.27,-764 1461.27,-791 1461.27,-791 1461.27,-797 1455.27,-803 1449.27,-803 1449.27,-803 1205.33,-803 1205.33,-803 1199.33,-803 1193.33,-797 1193.33,-791 1193.33,-791 1193.33,-764 1193.33,-764 1193.33,-758 1199.33,-752 1205.33,-752"/>
+<text text-anchor="middle" x="1327.3" y="-791.8" font-family="Helvetica,sans-Serif" font-weight="bold" font-size="9.00">readPackageDeps</text>
+</g>
+<g id="clust16" class="cluster">
+<title>cluster_src/extract/transpile</title>
+<path fill="#ffffff" stroke="black" stroke-width="2" d="M1042.93,-1246C1042.93,-1246 1447.44,-1246 1447.44,-1246 1453.44,-1246 1459.44,-1252 1459.44,-1258 1459.44,-1258 1459.44,-1401 1459.44,-1401 1459.44,-1407 1453.44,-1413 1447.44,-1413 1447.44,-1413 1042.93,-1413 1042.93,-1413 1036.93,-1413 1030.93,-1407 1030.93,-1401 1030.93,-1401 1030.93,-1258 1030.93,-1258 1030.93,-1252 1036.93,-1246 1042.93,-1246"/>
+<text text-anchor="middle" x="1245.18" y="-1401.8" font-family="Helvetica,sans-Serif" font-weight="bold" font-size="9.00">transpile</text>
+</g>
+<g id="clust17" class="cluster">
+<title>cluster_src/extract/utl</title>
+<path fill="#ffffff" stroke="black" stroke-width="2" d="M1645.59,-907C1645.59,-907 1842.16,-907 1842.16,-907 1848.16,-907 1854.16,-913 1854.16,-919 1854.16,-919 1854.16,-1033 1854.16,-1033 1854.16,-1039 1848.16,-1045 1842.16,-1045 1842.16,-1045 1645.59,-1045 1645.59,-1045 1639.59,-1045 1633.59,-1039 1633.59,-1033 1633.59,-1033 1633.59,-919 1633.59,-919 1633.59,-913 1639.59,-907 1645.59,-907"/>
+<text text-anchor="middle" x="1743.87" y="-1033.8" font-family="Helvetica,sans-Serif" font-weight="bold" font-size="9.00">utl</text>
+</g>
+<g id="clust8" class="cluster">
+<title>cluster_src/extract/ast&#45;extractors</title>
+<path fill="#ffffff" stroke="black" stroke-width="2" d="M879.63,-1085C879.63,-1085 1265.59,-1085 1265.59,-1085 1271.59,-1085 1277.59,-1091 1277.59,-1097 1277.59,-1097 1277.59,-1167 1277.59,-1167 1277.59,-1173 1271.59,-1179 1265.59,-1179 1265.59,-1179 879.63,-1179 879.63,-1179 873.63,-1179 867.63,-1173 867.63,-1167 867.63,-1167 867.63,-1097 867.63,-1097 867.63,-1091 873.63,-1085 879.63,-1085"/>
+<text text-anchor="middle" x="1072.61" y="-1167.8" font-family="Helvetica,sans-Serif" font-weight="bold" font-size="9.00">ast&#45;extractors</text>
+</g>
+<g id="clust9" class="cluster">
+<title>cluster_src/extract/derive</title>
+<path fill="#ffffff" stroke="black" stroke-width="2" d="M760.35,-1187C760.35,-1187 974.92,-1187 974.92,-1187 980.92,-1187 986.92,-1193 986.92,-1199 986.92,-1199 986.92,-1377 986.92,-1377 986.92,-1383 980.92,-1389 974.92,-1389 974.92,-1389 760.35,-1389 760.35,-1389 754.35,-1389 748.35,-1383 748.35,-1377 748.35,-1377 748.35,-1199 748.35,-1199 748.35,-1193 754.35,-1187 760.35,-1187"/>
+<text text-anchor="middle" x="867.63" y="-1377.8" font-family="Helvetica,sans-Serif" font-weight="bold" font-size="9.00">derive</text>
+</g>
+<g id="clust10" class="cluster">
+<title>cluster_src/extract/derive/circular</title>
+<path fill="#ffffff" stroke="black" stroke-width="2" d="M768.35,-1313C768.35,-1313 959.66,-1313 959.66,-1313 965.66,-1313 971.66,-1319 971.66,-1325 971.66,-1325 971.66,-1352 971.66,-1352 971.66,-1358 965.66,-1364 959.66,-1364 959.66,-1364 768.35,-1364 768.35,-1364 762.35,-1364 756.35,-1358 756.35,-1352 756.35,-1352 756.35,-1325 756.35,-1325 756.35,-1319 762.35,-1313 768.35,-1313"/>
+<text text-anchor="middle" x="864.01" y="-1352.8" font-family="Helvetica,sans-Serif" font-weight="bold" font-size="9.00">circular</text>
+</g>
+<g id="clust11" class="cluster">
+<title>cluster_src/extract/derive/orphan</title>
+<path fill="#ffffff" stroke="black" stroke-width="2" d="M768.35,-1254C768.35,-1254 960.41,-1254 960.41,-1254 966.41,-1254 972.41,-1260 972.41,-1266 972.41,-1266 972.41,-1293 972.41,-1293 972.41,-1299 966.41,-1305 960.41,-1305 960.41,-1305 768.35,-1305 768.35,-1305 762.35,-1305 756.35,-1299 756.35,-1293 756.35,-1293 756.35,-1266 756.35,-1266 756.35,-1260 762.35,-1254 768.35,-1254"/>
+<text text-anchor="middle" x="864.38" y="-1293.8" font-family="Helvetica,sans-Serif" font-weight="bold" font-size="9.00">orphan</text>
+</g>
+<g id="clust12" class="cluster">
+<title>cluster_src/extract/derive/reachable</title>
+<path fill="#ffffff" stroke="black" stroke-width="2" d="M768.35,-1195C768.35,-1195 966.92,-1195 966.92,-1195 972.92,-1195 978.92,-1201 978.92,-1207 978.92,-1207 978.92,-1234 978.92,-1234 978.92,-1240 972.92,-1246 966.92,-1246 966.92,-1246 768.35,-1246 768.35,-1246 762.35,-1246 756.35,-1240 756.35,-1234 756.35,-1234 756.35,-1207 756.35,-1207 756.35,-1201 762.35,-1195 768.35,-1195"/>
+<text text-anchor="middle" x="867.63" y="-1234.8" font-family="Helvetica,sans-Serif" font-weight="bold" font-size="9.00">reachable</text>
 </g>
 <!-- bin/depcruise&#45;fmt.js -->
 <g id="node1" class="node">
@@ -814,31 +825,31 @@
 <polygon fill="#0000ff" fill-opacity="0.466667" stroke="#0000ff" stroke-width="2" stroke-opacity="0.466667" points="900.37,-74.1 906.37,-72 900.37,-69.9 900.37,-74.1"/>
 </g>
 <!-- src/validate/matchDependencyRule.js -->
-<g id="node105" class="node">
+<g id="node106" class="node">
 <title>src/validate/matchDependencyRule.js</title>
-<g id="a_node105"><a xlink:href="https://github.com/sverweij/dependency-cruiser/blob/develop/src/validate/matchDependencyRule.js" xlink:title="matchDependencyRule.js">
+<g id="a_node106"><a xlink:href="https://github.com/sverweij/dependency-cruiser/blob/develop/src/validate/matchDependencyRule.js" xlink:title="matchDependencyRule.js">
 <path fill="#ccccff" stroke="black" d="M1119.32,-51.5C1119.32,-51.5 1012.54,-51.5 1012.54,-51.5 1009.71,-51.5 1006.88,-48.67 1006.88,-45.83 1006.88,-45.83 1006.88,-40.17 1006.88,-40.17 1006.88,-37.33 1009.71,-34.5 1012.54,-34.5 1012.54,-34.5 1119.32,-34.5 1119.32,-34.5 1122.15,-34.5 1124.99,-37.33 1124.99,-40.17 1124.99,-40.17 1124.99,-45.83 1124.99,-45.83 1124.99,-48.67 1122.15,-51.5 1119.32,-51.5"/>
 <text text-anchor="middle" x="1065.93" y="-40.3" font-family="Helvetica,sans-Serif" font-size="9.00">matchDependencyRule.js</text>
 </a>
 </g>
 </g>
 <!-- src/validate/index.js&#45;&gt;src/validate/matchDependencyRule.js -->
-<g id="edge154" class="edge">
+<g id="edge156" class="edge">
 <title>src/validate/index.js&#45;&gt;src/validate/matchDependencyRule.js</title>
 <path fill="none" stroke="#0000ff" stroke-width="2" stroke-opacity="0.466667" d="M961.01,-69.17C984.01,-69.17 1013.16,-69.17 1013.16,-69.17 1013.16,-69.17 1013.16,-57.57 1013.16,-57.57"/>
 <polygon fill="#0000ff" fill-opacity="0.466667" stroke="#0000ff" stroke-width="2" stroke-opacity="0.466667" points="1015.26,-57.57 1013.16,-51.57 1011.06,-57.57 1015.26,-57.57"/>
 </g>
 <!-- src/validate/matchModuleRule.js -->
-<g id="node106" class="node">
+<g id="node107" class="node">
 <title>src/validate/matchModuleRule.js</title>
-<g id="a_node106"><a xlink:href="https://github.com/sverweij/dependency-cruiser/blob/develop/src/validate/matchModuleRule.js" xlink:title="matchModuleRule.js">
+<g id="a_node107"><a xlink:href="https://github.com/sverweij/dependency-cruiser/blob/develop/src/validate/matchModuleRule.js" xlink:title="matchModuleRule.js">
 <path fill="#ccccff" stroke="black" d="M1108.8,-80.5C1108.8,-80.5 1023.06,-80.5 1023.06,-80.5 1020.23,-80.5 1017.39,-77.67 1017.39,-74.83 1017.39,-74.83 1017.39,-69.17 1017.39,-69.17 1017.39,-66.33 1020.23,-63.5 1023.06,-63.5 1023.06,-63.5 1108.8,-63.5 1108.8,-63.5 1111.64,-63.5 1114.47,-66.33 1114.47,-69.17 1114.47,-69.17 1114.47,-74.83 1114.47,-74.83 1114.47,-77.67 1111.64,-80.5 1108.8,-80.5"/>
 <text text-anchor="middle" x="1065.93" y="-69.3" font-family="Helvetica,sans-Serif" font-size="9.00">matchModuleRule.js</text>
 </a>
 </g>
 </g>
 <!-- src/validate/index.js&#45;&gt;src/validate/matchModuleRule.js -->
-<g id="edge155" class="edge">
+<g id="edge157" class="edge">
 <title>src/validate/index.js&#45;&gt;src/validate/matchModuleRule.js</title>
 <path fill="none" stroke="#0000ff" stroke-width="2" stroke-opacity="0.466667" d="M960.74,-74.83C960.74,-74.83 1011.21,-74.83 1011.21,-74.83"/>
 <polygon fill="#0000ff" fill-opacity="0.466667" stroke="#0000ff" stroke-width="2" stroke-opacity="0.466667" points="1011.21,-76.93 1017.21,-74.83 1011.21,-72.73 1011.21,-76.93"/>
@@ -1542,8 +1553,8 @@
 <!-- src/extract/resolve/determineDependencyTypes.js&#45;&gt;src/extract/resolve/isRelativeModuleName.js -->
 <g id="edge71" class="edge">
 <title>src/extract/resolve/determineDependencyTypes.js&#45;&gt;src/extract/resolve/isRelativeModuleName.js</title>
-<path fill="none" stroke="#007700" stroke-width="2" stroke-opacity="0.466667" d="M1297.99,-851.83C1381.45,-851.83 1510.16,-851.83 1510.16,-851.83 1510.16,-851.83 1510.16,-913.26 1510.16,-913.26"/>
-<polygon fill="#007700" fill-opacity="0.466667" stroke="#007700" stroke-width="2" stroke-opacity="0.466667" points="1508.06,-913.26 1510.16,-919.26 1512.26,-913.26 1508.06,-913.26"/>
+<path fill="none" stroke="#007700" stroke-width="2" stroke-opacity="0.466667" d="M1298.11,-851.83C1381.28,-851.83 1509.16,-851.83 1509.16,-851.83 1509.16,-851.83 1509.16,-913.26 1509.16,-913.26"/>
+<polygon fill="#007700" fill-opacity="0.466667" stroke="#007700" stroke-width="2" stroke-opacity="0.466667" points="1507.06,-913.26 1509.16,-919.26 1511.26,-913.26 1507.06,-913.26"/>
 </g>
 <!-- src/extract/resolve/resolve&#45;commonJS.js&#45;&gt;src/extract/resolve/resolve.js -->
 <g id="edge91" class="edge">
@@ -1618,7 +1629,7 @@
 </g>
 </g>
 <!-- src/report/index.js&#45;&gt;src/report/anon/index.js -->
-<g id="edge145" class="edge">
+<g id="edge147" class="edge">
 <title>src/report/index.js&#45;&gt;src/report/anon/index.js</title>
 <path fill="none" stroke="#ff00ff" stroke-width="2" stroke-opacity="0.466667" d="M925.16,-538.17C925.16,-481.84 925.16,-175 925.16,-175 925.16,-175 1032.79,-175 1032.79,-175"/>
 <polygon fill="#ff00ff" fill-opacity="0.466667" stroke="#ff00ff" stroke-width="2" stroke-opacity="0.466667" points="1032.79,-177.1 1038.79,-175 1032.79,-172.9 1032.79,-177.1"/>
@@ -1633,112 +1644,112 @@
 </g>
 </g>
 <!-- src/report/index.js&#45;&gt;src/report/csv/index.js -->
-<g id="edge146" class="edge">
+<g id="edge148" class="edge">
 <title>src/report/index.js&#45;&gt;src/report/csv/index.js</title>
 <path fill="none" stroke="#ff00ff" stroke-width="2" stroke-opacity="0.466667" d="M934.16,-538.3C934.16,-487.75 934.16,-234 934.16,-234 934.16,-234 1032.63,-234 1032.63,-234"/>
 <polygon fill="#ff00ff" fill-opacity="0.466667" stroke="#ff00ff" stroke-width="2" stroke-opacity="0.466667" points="1032.63,-236.1 1038.63,-234 1032.63,-231.9 1032.63,-236.1"/>
 </g>
 <!-- src/report/dot/index.js -->
-<g id="node90" class="node">
+<g id="node91" class="node">
 <title>src/report/dot/index.js</title>
-<g id="a_node90"><a xlink:href="https://github.com/sverweij/dependency-cruiser/blob/develop/src/report/dot/index.js" xlink:title="index.js">
+<g id="a_node91"><a xlink:href="https://github.com/sverweij/dependency-cruiser/blob/develop/src/report/dot/index.js" xlink:title="index.js">
 <path fill="#ffccff" stroke="black" d="M1087.27,-358.5C1087.27,-358.5 1044.6,-358.5 1044.6,-358.5 1041.77,-358.5 1038.93,-355.67 1038.93,-352.83 1038.93,-352.83 1038.93,-347.17 1038.93,-347.17 1038.93,-344.33 1041.77,-341.5 1044.6,-341.5 1044.6,-341.5 1087.27,-341.5 1087.27,-341.5 1090.1,-341.5 1092.93,-344.33 1092.93,-347.17 1092.93,-347.17 1092.93,-352.83 1092.93,-352.83 1092.93,-355.67 1090.1,-358.5 1087.27,-358.5"/>
 <text text-anchor="middle" x="1065.93" y="-347.3" font-family="Helvetica,sans-Serif" font-size="9.00">index.js</text>
 </a>
 </g>
 </g>
 <!-- src/report/index.js&#45;&gt;src/report/dot/index.js -->
-<g id="edge147" class="edge">
+<g id="edge149" class="edge">
 <title>src/report/index.js&#45;&gt;src/report/dot/index.js</title>
 <path fill="none" stroke="#ff00ff" stroke-width="2" stroke-opacity="0.466667" d="M943.16,-538.28C943.16,-500.16 943.16,-350 943.16,-350 943.16,-350 1032.68,-350 1032.68,-350"/>
 <polygon fill="#ff00ff" fill-opacity="0.466667" stroke="#ff00ff" stroke-width="2" stroke-opacity="0.466667" points="1032.68,-352.1 1038.68,-350 1032.68,-347.9 1032.68,-352.1"/>
 </g>
 <!-- src/report/err&#45;html/index.js -->
-<g id="node97" class="node">
+<g id="node98" class="node">
 <title>src/report/err&#45;html/index.js</title>
-<g id="a_node97"><a xlink:href="https://github.com/sverweij/dependency-cruiser/blob/develop/src/report/err-html/index.js" xlink:title="index.js">
+<g id="a_node98"><a xlink:href="https://github.com/sverweij/dependency-cruiser/blob/develop/src/report/err-html/index.js" xlink:title="index.js">
 <path fill="#ffccff" stroke="black" d="M1087.27,-504.5C1087.27,-504.5 1044.6,-504.5 1044.6,-504.5 1041.77,-504.5 1038.93,-501.67 1038.93,-498.83 1038.93,-498.83 1038.93,-493.17 1038.93,-493.17 1038.93,-490.33 1041.77,-487.5 1044.6,-487.5 1044.6,-487.5 1087.27,-487.5 1087.27,-487.5 1090.1,-487.5 1092.93,-490.33 1092.93,-493.17 1092.93,-493.17 1092.93,-498.83 1092.93,-498.83 1092.93,-501.67 1090.1,-504.5 1087.27,-504.5"/>
 <text text-anchor="middle" x="1065.93" y="-493.3" font-family="Helvetica,sans-Serif" font-size="9.00">index.js</text>
 </a>
 </g>
 </g>
 <!-- src/report/index.js&#45;&gt;src/report/err&#45;html/index.js -->
-<g id="edge149" class="edge">
+<g id="edge151" class="edge">
 <title>src/report/index.js&#45;&gt;src/report/err&#45;html/index.js</title>
 <path fill="none" stroke="#ff00ff" stroke-width="2" stroke-opacity="0.466667" d="M952.16,-538.12C952.16,-523.5 952.16,-496 952.16,-496 952.16,-496 1032.68,-496 1032.68,-496"/>
 <polygon fill="#ff00ff" fill-opacity="0.466667" stroke="#ff00ff" stroke-width="2" stroke-opacity="0.466667" points="1032.68,-498.1 1038.68,-496 1032.68,-493.9 1032.68,-498.1"/>
 </g>
 <!-- src/report/err.js -->
-<g id="node99" class="node">
+<g id="node100" class="node">
 <title>src/report/err.js</title>
-<g id="a_node99"><a xlink:href="https://github.com/sverweij/dependency-cruiser/blob/develop/src/report/err.js" xlink:title="err.js">
+<g id="a_node100"><a xlink:href="https://github.com/sverweij/dependency-cruiser/blob/develop/src/report/err.js" xlink:title="err.js">
 <path fill="#ffccff" stroke="black" d="M1087.27,-149.5C1087.27,-149.5 1044.6,-149.5 1044.6,-149.5 1041.77,-149.5 1038.93,-146.67 1038.93,-143.83 1038.93,-143.83 1038.93,-138.17 1038.93,-138.17 1038.93,-135.33 1041.77,-132.5 1044.6,-132.5 1044.6,-132.5 1087.27,-132.5 1087.27,-132.5 1090.1,-132.5 1092.93,-135.33 1092.93,-138.17 1092.93,-138.17 1092.93,-143.83 1092.93,-143.83 1092.93,-146.67 1090.1,-149.5 1087.27,-149.5"/>
 <text text-anchor="middle" x="1065.93" y="-138.3" font-family="Helvetica,sans-Serif" font-size="9.00">err.js</text>
 </a>
 </g>
 </g>
 <!-- src/report/index.js&#45;&gt;src/report/err.js -->
-<g id="edge148" class="edge">
+<g id="edge150" class="edge">
 <title>src/report/index.js&#45;&gt;src/report/err.js</title>
 <path fill="none" stroke="#ff00ff" stroke-width="2" stroke-opacity="0.466667" d="M916.16,-538.14C916.16,-478.77 916.16,-141 916.16,-141 916.16,-141 1032.81,-141 1032.81,-141"/>
 <polygon fill="#ff00ff" fill-opacity="0.466667" stroke="#ff00ff" stroke-width="2" stroke-opacity="0.466667" points="1032.81,-143.1 1038.81,-141 1032.81,-138.9 1032.81,-143.1"/>
 </g>
 <!-- src/report/html/index.js -->
-<g id="node101" class="node">
+<g id="node102" class="node">
 <title>src/report/html/index.js</title>
-<g id="a_node101"><a xlink:href="https://github.com/sverweij/dependency-cruiser/blob/develop/src/report/html/index.js" xlink:title="index.js">
+<g id="a_node102"><a xlink:href="https://github.com/sverweij/dependency-cruiser/blob/develop/src/report/html/index.js" xlink:title="index.js">
 <path fill="#ffccff" stroke="black" d="M1087.27,-647.5C1087.27,-647.5 1044.6,-647.5 1044.6,-647.5 1041.77,-647.5 1038.93,-644.67 1038.93,-641.83 1038.93,-641.83 1038.93,-636.17 1038.93,-636.17 1038.93,-633.33 1041.77,-630.5 1044.6,-630.5 1044.6,-630.5 1087.27,-630.5 1087.27,-630.5 1090.1,-630.5 1092.93,-633.33 1092.93,-636.17 1092.93,-636.17 1092.93,-641.83 1092.93,-641.83 1092.93,-644.67 1090.1,-647.5 1087.27,-647.5"/>
 <text text-anchor="middle" x="1065.93" y="-636.3" font-family="Helvetica,sans-Serif" font-size="9.00">index.js</text>
 </a>
 </g>
 </g>
 <!-- src/report/index.js&#45;&gt;src/report/html/index.js -->
-<g id="edge150" class="edge">
+<g id="edge152" class="edge">
 <title>src/report/index.js&#45;&gt;src/report/html/index.js</title>
 <path fill="none" stroke="#ff00ff" stroke-width="2" stroke-opacity="0.466667" d="M916.16,-555.82C916.16,-578.85 916.16,-639 916.16,-639 916.16,-639 1032.81,-639 1032.81,-639"/>
 <polygon fill="#ff00ff" fill-opacity="0.466667" stroke="#ff00ff" stroke-width="2" stroke-opacity="0.466667" points="1032.81,-641.1 1038.81,-639 1032.81,-636.9 1032.81,-641.1"/>
 </g>
 <!-- src/report/identity.js -->
-<g id="node102" class="node">
+<g id="node103" class="node">
 <title>src/report/identity.js</title>
-<g id="a_node102"><a xlink:href="https://github.com/sverweij/dependency-cruiser/blob/develop/src/report/identity.js" xlink:title="identity.js">
+<g id="a_node103"><a xlink:href="https://github.com/sverweij/dependency-cruiser/blob/develop/src/report/identity.js" xlink:title="identity.js">
 <path fill="#ffccff" stroke="black" d="M1087.27,-584.5C1087.27,-584.5 1044.6,-584.5 1044.6,-584.5 1041.77,-584.5 1038.93,-581.67 1038.93,-578.83 1038.93,-578.83 1038.93,-573.17 1038.93,-573.17 1038.93,-570.33 1041.77,-567.5 1044.6,-567.5 1044.6,-567.5 1087.27,-567.5 1087.27,-567.5 1090.1,-567.5 1092.93,-570.33 1092.93,-573.17 1092.93,-573.17 1092.93,-578.83 1092.93,-578.83 1092.93,-581.67 1090.1,-584.5 1087.27,-584.5"/>
 <text text-anchor="middle" x="1065.93" y="-573.3" font-family="Helvetica,sans-Serif" font-size="9.00">identity.js</text>
 </a>
 </g>
 </g>
 <!-- src/report/index.js&#45;&gt;src/report/identity.js -->
-<g id="edge151" class="edge">
+<g id="edge153" class="edge">
 <title>src/report/index.js&#45;&gt;src/report/identity.js</title>
 <path fill="none" stroke="#ff00ff" stroke-width="2" stroke-opacity="0.466667" d="M952.16,-555.54C952.16,-564.1 952.16,-576 952.16,-576 952.16,-576 1032.68,-576 1032.68,-576"/>
 <polygon fill="#ff00ff" fill-opacity="0.466667" stroke="#ff00ff" stroke-width="2" stroke-opacity="0.466667" points="1032.68,-578.1 1038.68,-576 1032.68,-573.9 1032.68,-578.1"/>
 </g>
 <!-- src/report/json.js -->
-<g id="node103" class="node">
+<g id="node104" class="node">
 <title>src/report/json.js</title>
-<g id="a_node103"><a xlink:href="https://github.com/sverweij/dependency-cruiser/blob/develop/src/report/json.js" xlink:title="json.js">
+<g id="a_node104"><a xlink:href="https://github.com/sverweij/dependency-cruiser/blob/develop/src/report/json.js" xlink:title="json.js">
 <path fill="#ffccff" stroke="black" d="M1087.27,-613.5C1087.27,-613.5 1044.6,-613.5 1044.6,-613.5 1041.77,-613.5 1038.93,-610.67 1038.93,-607.83 1038.93,-607.83 1038.93,-602.17 1038.93,-602.17 1038.93,-599.33 1041.77,-596.5 1044.6,-596.5 1044.6,-596.5 1087.27,-596.5 1087.27,-596.5 1090.1,-596.5 1092.93,-599.33 1092.93,-602.17 1092.93,-602.17 1092.93,-607.83 1092.93,-607.83 1092.93,-610.67 1090.1,-613.5 1087.27,-613.5"/>
 <text text-anchor="middle" x="1065.93" y="-602.3" font-family="Helvetica,sans-Serif" font-size="9.00">json.js</text>
 </a>
 </g>
 </g>
 <!-- src/report/index.js&#45;&gt;src/report/json.js -->
-<g id="edge152" class="edge">
+<g id="edge154" class="edge">
 <title>src/report/index.js&#45;&gt;src/report/json.js</title>
 <path fill="none" stroke="#ff00ff" stroke-width="2" stroke-opacity="0.466667" d="M934.16,-555.56C934.16,-571.69 934.16,-605 934.16,-605 934.16,-605 1032.63,-605 1032.63,-605"/>
 <polygon fill="#ff00ff" fill-opacity="0.466667" stroke="#ff00ff" stroke-width="2" stroke-opacity="0.466667" points="1032.63,-607.1 1038.63,-605 1032.63,-602.9 1032.63,-607.1"/>
 </g>
 <!-- src/report/teamcity.js -->
-<g id="node104" class="node">
+<g id="node105" class="node">
 <title>src/report/teamcity.js</title>
-<g id="a_node104"><a xlink:href="https://github.com/sverweij/dependency-cruiser/blob/develop/src/report/teamcity.js" xlink:title="teamcity.js">
+<g id="a_node105"><a xlink:href="https://github.com/sverweij/dependency-cruiser/blob/develop/src/report/teamcity.js" xlink:title="teamcity.js">
 <path fill="#ffccff" stroke="black" d="M1089.11,-555.5C1089.11,-555.5 1042.75,-555.5 1042.75,-555.5 1039.92,-555.5 1037.09,-552.67 1037.09,-549.83 1037.09,-549.83 1037.09,-544.17 1037.09,-544.17 1037.09,-541.33 1039.92,-538.5 1042.75,-538.5 1042.75,-538.5 1089.11,-538.5 1089.11,-538.5 1091.94,-538.5 1094.78,-541.33 1094.78,-544.17 1094.78,-544.17 1094.78,-549.83 1094.78,-549.83 1094.78,-552.67 1091.94,-555.5 1089.11,-555.5"/>
 <text text-anchor="middle" x="1065.93" y="-544.3" font-family="Helvetica,sans-Serif" font-size="9.00">teamcity.js</text>
 </a>
 </g>
 </g>
 <!-- src/report/index.js&#45;&gt;src/report/teamcity.js -->
-<g id="edge153" class="edge">
+<g id="edge155" class="edge">
 <title>src/report/index.js&#45;&gt;src/report/teamcity.js</title>
 <path fill="none" stroke="#ff00ff" stroke-width="2" stroke-opacity="0.466667" d="M960.74,-547C960.74,-547 1031.05,-547 1031.05,-547"/>
 <polygon fill="#ff00ff" fill-opacity="0.466667" stroke="#ff00ff" stroke-width="2" stroke-opacity="0.466667" points="1031.05,-549.1 1037.05,-547 1031.05,-544.9 1031.05,-549.1"/>
@@ -1860,283 +1871,304 @@
 <path fill="none" stroke="#ff00ff" stroke-width="2" stroke-opacity="0.466667" d="M1093.4,-236.83C1120.9,-236.83 1159.16,-236.83 1159.16,-236.83 1159.16,-236.83 1159.16,-552.17 1159.16,-552.17"/>
 <polygon fill="#ff00ff" fill-opacity="0.466667" stroke="#ff00ff" stroke-width="2" stroke-opacity="0.466667" points="1157.06,-552.17 1159.16,-558.17 1161.26,-552.17 1157.06,-552.17"/>
 </g>
-<!-- src/report/dot/consolidateModuleDependencies.js -->
+<!-- src/report/dot/compareRules.js -->
 <g id="node86" class="node">
-<title>src/report/dot/consolidateModuleDependencies.js</title>
-<g id="a_node86"><a xlink:href="https://github.com/sverweij/dependency-cruiser/blob/develop/src/report/dot/consolidateModuleDependencies.js" xlink:title="consolidateModuleDependencies.js">
-<path fill="#ffccff" stroke="black" d="M1481.18,-408.5C1481.18,-408.5 1335.33,-408.5 1335.33,-408.5 1332.5,-408.5 1329.66,-405.67 1329.66,-402.83 1329.66,-402.83 1329.66,-397.17 1329.66,-397.17 1329.66,-394.33 1332.5,-391.5 1335.33,-391.5 1335.33,-391.5 1481.18,-391.5 1481.18,-391.5 1484.01,-391.5 1486.85,-394.33 1486.85,-397.17 1486.85,-397.17 1486.85,-402.83 1486.85,-402.83 1486.85,-405.67 1484.01,-408.5 1481.18,-408.5"/>
-<text text-anchor="middle" x="1408.26" y="-397.3" font-family="Helvetica,sans-Serif" font-size="9.00">consolidateModuleDependencies.js</text>
+<title>src/report/dot/compareRules.js</title>
+<g id="a_node86"><a xlink:href="https://github.com/sverweij/dependency-cruiser/blob/develop/src/report/dot/compareRules.js" xlink:title="compareRules.js">
+<path fill="#ffccff" stroke="black" d="M1594.68,-386.5C1594.68,-386.5 1522.96,-386.5 1522.96,-386.5 1520.13,-386.5 1517.3,-383.67 1517.3,-380.83 1517.3,-380.83 1517.3,-375.17 1517.3,-375.17 1517.3,-372.33 1520.13,-369.5 1522.96,-369.5 1522.96,-369.5 1594.68,-369.5 1594.68,-369.5 1597.51,-369.5 1600.35,-372.33 1600.35,-375.17 1600.35,-375.17 1600.35,-380.83 1600.35,-380.83 1600.35,-383.67 1597.51,-386.5 1594.68,-386.5"/>
+<text text-anchor="middle" x="1558.82" y="-375.3" font-family="Helvetica,sans-Serif" font-size="9.00">compareRules.js</text>
 </a>
 </g>
 </g>
-<!-- src/report/dot/consolidateModules.js -->
+<!-- src/report/dot/consolidateModuleDependencies.js -->
 <g id="node87" class="node">
+<title>src/report/dot/consolidateModuleDependencies.js</title>
+<g id="a_node87"><a xlink:href="https://github.com/sverweij/dependency-cruiser/blob/develop/src/report/dot/consolidateModuleDependencies.js" xlink:title="consolidateModuleDependencies.js">
+<path fill="#ffccff" stroke="black" d="M1481.18,-401.5C1481.18,-401.5 1335.33,-401.5 1335.33,-401.5 1332.5,-401.5 1329.66,-398.67 1329.66,-395.83 1329.66,-395.83 1329.66,-390.17 1329.66,-390.17 1329.66,-387.33 1332.5,-384.5 1335.33,-384.5 1335.33,-384.5 1481.18,-384.5 1481.18,-384.5 1484.01,-384.5 1486.85,-387.33 1486.85,-390.17 1486.85,-390.17 1486.85,-395.83 1486.85,-395.83 1486.85,-398.67 1484.01,-401.5 1481.18,-401.5"/>
+<text text-anchor="middle" x="1408.26" y="-390.3" font-family="Helvetica,sans-Serif" font-size="9.00">consolidateModuleDependencies.js</text>
+</a>
+</g>
+</g>
+<!-- src/report/dot/consolidateModuleDependencies.js&#45;&gt;src/report/dot/compareRules.js -->
+<g id="edge125" class="edge">
+<title>src/report/dot/consolidateModuleDependencies.js&#45;&gt;src/report/dot/compareRules.js</title>
+<path fill="none" stroke="#ff00ff" stroke-width="2" stroke-opacity="0.466667" d="M1486.88,-394C1508.03,-394 1525.16,-394 1525.16,-394 1525.16,-394 1525.16,-392.75 1525.16,-392.75"/>
+<polygon fill="#ff00ff" fill-opacity="0.466667" stroke="#ff00ff" stroke-width="2" stroke-opacity="0.466667" points="1527.26,-392.75 1525.16,-386.75 1523.06,-392.75 1527.26,-392.75"/>
+</g>
+<!-- src/report/dot/consolidateModules.js -->
+<g id="node88" class="node">
 <title>src/report/dot/consolidateModules.js</title>
-<g id="a_node87"><a xlink:href="https://github.com/sverweij/dependency-cruiser/blob/develop/src/report/dot/consolidateModules.js" xlink:title="consolidateModules.js">
+<g id="a_node88"><a xlink:href="https://github.com/sverweij/dependency-cruiser/blob/develop/src/report/dot/consolidateModules.js" xlink:title="consolidateModules.js">
 <path fill="#ffccff" stroke="black" d="M1454.64,-372.5C1454.64,-372.5 1361.87,-372.5 1361.87,-372.5 1359.04,-372.5 1356.2,-369.67 1356.2,-366.83 1356.2,-366.83 1356.2,-361.17 1356.2,-361.17 1356.2,-358.33 1359.04,-355.5 1361.87,-355.5 1361.87,-355.5 1454.64,-355.5 1454.64,-355.5 1457.47,-355.5 1460.31,-358.33 1460.31,-361.17 1460.31,-361.17 1460.31,-366.83 1460.31,-366.83 1460.31,-369.67 1457.47,-372.5 1454.64,-372.5"/>
 <text text-anchor="middle" x="1408.26" y="-361.3" font-family="Helvetica,sans-Serif" font-size="9.00">consolidateModules.js</text>
 </a>
 </g>
 </g>
+<!-- src/report/dot/consolidateModules.js&#45;&gt;src/report/dot/compareRules.js -->
+<g id="edge126" class="edge">
+<title>src/report/dot/consolidateModules.js&#45;&gt;src/report/dot/compareRules.js</title>
+<path fill="none" stroke="#ff00ff" stroke-width="2" stroke-opacity="0.466667" d="M1460.55,-362.5C1491.68,-362.5 1525.16,-362.5 1525.16,-362.5 1525.16,-362.5 1525.16,-363.17 1525.16,-363.17"/>
+<polygon fill="#ff00ff" fill-opacity="0.466667" stroke="#ff00ff" stroke-width="2" stroke-opacity="0.466667" points="1523.06,-363.16 1525.16,-369.16 1527.26,-363.16 1523.06,-363.16"/>
+</g>
 <!-- src/report/dot/defaultTheme.json -->
-<g id="node88" class="node">
+<g id="node89" class="node">
 <title>src/report/dot/defaultTheme.json</title>
-<g id="a_node88"><a xlink:href="https://github.com/sverweij/dependency-cruiser/blob/develop/src/report/dot/defaultTheme.json" xlink:title="defaultTheme.json">
+<g id="a_node89"><a xlink:href="https://github.com/sverweij/dependency-cruiser/blob/develop/src/report/dot/defaultTheme.json" xlink:title="defaultTheme.json">
 <path fill="#ffccff" stroke="black" d="M1746.74,-315.5C1746.74,-315.5 1667.99,-315.5 1667.99,-315.5 1665.16,-315.5 1662.32,-312.67 1662.32,-309.83 1662.32,-309.83 1662.32,-304.17 1662.32,-304.17 1662.32,-301.33 1665.16,-298.5 1667.99,-298.5 1667.99,-298.5 1746.74,-298.5 1746.74,-298.5 1749.58,-298.5 1752.41,-301.33 1752.41,-304.17 1752.41,-304.17 1752.41,-309.83 1752.41,-309.83 1752.41,-312.67 1749.58,-315.5 1746.74,-315.5"/>
 <text text-anchor="middle" x="1707.37" y="-304.3" font-family="Helvetica,sans-Serif" font-size="9.00">defaultTheme.json</text>
 </a>
 </g>
 </g>
 <!-- src/report/dot/dot.template.js -->
-<g id="node89" class="node">
+<g id="node90" class="node">
 <title>src/report/dot/dot.template.js</title>
-<g id="a_node89"><a xlink:href="https://github.com/sverweij/dependency-cruiser/blob/develop/src/report/dot/dot.template.js" xlink:title="dot.template.js">
+<g id="a_node90"><a xlink:href="https://github.com/sverweij/dependency-cruiser/blob/develop/src/report/dot/dot.template.js" xlink:title="dot.template.js">
 <polygon fill="#ffccff" stroke="black" points="1265.36,-387.5 1191.3,-387.5 1191.3,-370.5 1265.36,-370.5 1265.36,-387.5"/>
 <text text-anchor="middle" x="1228.33" y="-376.3" font-family="Helvetica,sans-Serif" font-size="9.00">dot.template.js</text>
 </a>
 </g>
 </g>
 <!-- src/report/dot/index.js&#45;&gt;src/report/dot/dot.template.js -->
-<g id="edge125" class="edge">
+<g id="edge127" class="edge">
 <title>src/report/dot/index.js&#45;&gt;src/report/dot/dot.template.js</title>
 <path fill="none" stroke="#ff00ff" stroke-width="2" stroke-opacity="0.466667" d="M1075.16,-358.54C1075.16,-367.1 1075.16,-379 1075.16,-379 1075.16,-379 1185.25,-379 1185.25,-379"/>
 <polygon fill="#ff00ff" fill-opacity="0.466667" stroke="#ff00ff" stroke-width="2" stroke-opacity="0.466667" points="1185.25,-381.1 1191.25,-379 1185.25,-376.9 1185.25,-381.1"/>
 </g>
 <!-- src/report/dot/module&#45;utl.js -->
-<g id="node91" class="node">
+<g id="node92" class="node">
 <title>src/report/dot/module&#45;utl.js</title>
-<g id="a_node91"><a xlink:href="https://github.com/sverweij/dependency-cruiser/blob/develop/src/report/dot/module-utl.js" xlink:title="module&#45;utl.js">
+<g id="a_node92"><a xlink:href="https://github.com/sverweij/dependency-cruiser/blob/develop/src/report/dot/module-utl.js" xlink:title="module&#45;utl.js">
 <path fill="#ffccff" stroke="black" d="M1436.11,-329.5C1436.11,-329.5 1380.4,-329.5 1380.4,-329.5 1377.57,-329.5 1374.73,-326.67 1374.73,-323.83 1374.73,-323.83 1374.73,-318.17 1374.73,-318.17 1374.73,-315.33 1377.57,-312.5 1380.4,-312.5 1380.4,-312.5 1436.11,-312.5 1436.11,-312.5 1438.94,-312.5 1441.78,-315.33 1441.78,-318.17 1441.78,-318.17 1441.78,-323.83 1441.78,-323.83 1441.78,-326.67 1438.94,-329.5 1436.11,-329.5"/>
 <text text-anchor="middle" x="1408.26" y="-318.3" font-family="Helvetica,sans-Serif" font-size="9.00">module&#45;utl.js</text>
 </a>
 </g>
 </g>
 <!-- src/report/dot/index.js&#45;&gt;src/report/dot/module&#45;utl.js -->
-<g id="edge126" class="edge">
+<g id="edge128" class="edge">
 <title>src/report/dot/index.js&#45;&gt;src/report/dot/module&#45;utl.js</title>
 <path fill="none" stroke="#ff00ff" stroke-width="2" stroke-opacity="0.466667" d="M1066.16,-341.4C1066.16,-338.28 1066.16,-335.5 1066.16,-335.5 1066.16,-335.5 1397.16,-335.5 1397.16,-335.5 1397.16,-335.5 1397.16,-334.91 1397.16,-334.91"/>
 <polygon fill="#ff00ff" fill-opacity="0.466667" stroke="#ff00ff" stroke-width="2" stroke-opacity="0.466667" points="1399.26,-335.6 1397.16,-329.6 1395.06,-335.6 1399.26,-335.6"/>
 </g>
 <!-- src/report/dot/prepareCustomLevel.js -->
-<g id="node92" class="node">
+<g id="node93" class="node">
 <title>src/report/dot/prepareCustomLevel.js</title>
-<g id="a_node92"><a xlink:href="https://github.com/sverweij/dependency-cruiser/blob/develop/src/report/dot/prepareCustomLevel.js" xlink:title="prepareCustomLevel.js">
+<g id="a_node93"><a xlink:href="https://github.com/sverweij/dependency-cruiser/blob/develop/src/report/dot/prepareCustomLevel.js" xlink:title="prepareCustomLevel.js">
 <path fill="#ffccff" stroke="black" d="M1276.71,-416.5C1276.71,-416.5 1179.95,-416.5 1179.95,-416.5 1177.12,-416.5 1174.28,-413.67 1174.28,-410.83 1174.28,-410.83 1174.28,-405.17 1174.28,-405.17 1174.28,-402.33 1177.12,-399.5 1179.95,-399.5 1179.95,-399.5 1276.71,-399.5 1276.71,-399.5 1279.54,-399.5 1282.37,-402.33 1282.37,-405.17 1282.37,-405.17 1282.37,-410.83 1282.37,-410.83 1282.37,-413.67 1279.54,-416.5 1276.71,-416.5"/>
 <text text-anchor="middle" x="1228.33" y="-405.3" font-family="Helvetica,sans-Serif" font-size="9.00">prepareCustomLevel.js</text>
 </a>
 </g>
 </g>
 <!-- src/report/dot/index.js&#45;&gt;src/report/dot/prepareCustomLevel.js -->
-<g id="edge127" class="edge">
+<g id="edge129" class="edge">
 <title>src/report/dot/index.js&#45;&gt;src/report/dot/prepareCustomLevel.js</title>
 <path fill="none" stroke="#ff00ff" stroke-width="2" stroke-opacity="0.466667" d="M1057.16,-358.56C1057.16,-374.69 1057.16,-408 1057.16,-408 1057.16,-408 1168.17,-408 1168.17,-408"/>
 <polygon fill="#ff00ff" fill-opacity="0.466667" stroke="#ff00ff" stroke-width="2" stroke-opacity="0.466667" points="1168.17,-410.1 1174.17,-408 1168.17,-405.9 1168.17,-410.1"/>
 </g>
 <!-- src/report/dot/prepareFolderLevel.js -->
-<g id="node93" class="node">
+<g id="node94" class="node">
 <title>src/report/dot/prepareFolderLevel.js</title>
-<g id="a_node93"><a xlink:href="https://github.com/sverweij/dependency-cruiser/blob/develop/src/report/dot/prepareFolderLevel.js" xlink:title="prepareFolderLevel.js">
+<g id="a_node94"><a xlink:href="https://github.com/sverweij/dependency-cruiser/blob/develop/src/report/dot/prepareFolderLevel.js" xlink:title="prepareFolderLevel.js">
 <path fill="#ffccff" stroke="black" d="M1274.21,-358.5C1274.21,-358.5 1182.45,-358.5 1182.45,-358.5 1179.62,-358.5 1176.78,-355.67 1176.78,-352.83 1176.78,-352.83 1176.78,-347.17 1176.78,-347.17 1176.78,-344.33 1179.62,-341.5 1182.45,-341.5 1182.45,-341.5 1274.21,-341.5 1274.21,-341.5 1277.04,-341.5 1279.88,-344.33 1279.88,-347.17 1279.88,-347.17 1279.88,-352.83 1279.88,-352.83 1279.88,-355.67 1277.04,-358.5 1274.21,-358.5"/>
 <text text-anchor="middle" x="1228.33" y="-347.3" font-family="Helvetica,sans-Serif" font-size="9.00">prepareFolderLevel.js</text>
 </a>
 </g>
 </g>
 <!-- src/report/dot/index.js&#45;&gt;src/report/dot/prepareFolderLevel.js -->
-<g id="edge128" class="edge">
+<g id="edge130" class="edge">
 <title>src/report/dot/index.js&#45;&gt;src/report/dot/prepareFolderLevel.js</title>
 <path fill="none" stroke="#ff00ff" stroke-width="2" stroke-opacity="0.466667" d="M1093.11,-350C1093.11,-350 1170.74,-350 1170.74,-350"/>
 <polygon fill="#ff00ff" fill-opacity="0.466667" stroke="#ff00ff" stroke-width="2" stroke-opacity="0.466667" points="1170.74,-352.1 1176.74,-350 1170.74,-347.9 1170.74,-352.1"/>
 </g>
 <!-- src/report/dot/prepareModuleLevel.js -->
-<g id="node94" class="node">
+<g id="node95" class="node">
 <title>src/report/dot/prepareModuleLevel.js</title>
-<g id="a_node94"><a xlink:href="https://github.com/sverweij/dependency-cruiser/blob/develop/src/report/dot/prepareModuleLevel.js" xlink:title="prepareModuleLevel.js">
+<g id="a_node95"><a xlink:href="https://github.com/sverweij/dependency-cruiser/blob/develop/src/report/dot/prepareModuleLevel.js" xlink:title="prepareModuleLevel.js">
 <path fill="#ffccff" stroke="black" d="M1276.22,-329.5C1276.22,-329.5 1180.44,-329.5 1180.44,-329.5 1177.61,-329.5 1174.77,-326.67 1174.77,-323.83 1174.77,-323.83 1174.77,-318.17 1174.77,-318.17 1174.77,-315.33 1177.61,-312.5 1180.44,-312.5 1180.44,-312.5 1276.22,-312.5 1276.22,-312.5 1279.05,-312.5 1281.88,-315.33 1281.88,-318.17 1281.88,-318.17 1281.88,-323.83 1281.88,-323.83 1281.88,-326.67 1279.05,-329.5 1276.22,-329.5"/>
 <text text-anchor="middle" x="1228.33" y="-318.3" font-family="Helvetica,sans-Serif" font-size="9.00">prepareModuleLevel.js</text>
 </a>
 </g>
 </g>
 <!-- src/report/dot/index.js&#45;&gt;src/report/dot/prepareModuleLevel.js -->
-<g id="edge129" class="edge">
+<g id="edge131" class="edge">
 <title>src/report/dot/index.js&#45;&gt;src/report/dot/prepareModuleLevel.js</title>
 <path fill="none" stroke="#ff00ff" stroke-width="2" stroke-opacity="0.466667" d="M1080.16,-341.46C1080.16,-332.9 1080.16,-321 1080.16,-321 1080.16,-321 1168.42,-321 1168.42,-321"/>
 <polygon fill="#ff00ff" fill-opacity="0.466667" stroke="#ff00ff" stroke-width="2" stroke-opacity="0.466667" points="1168.42,-323.1 1174.42,-321 1168.42,-318.9 1168.42,-323.1"/>
 </g>
 <!-- src/report/dot/theming.js -->
-<g id="node95" class="node">
+<g id="node96" class="node">
 <title>src/report/dot/theming.js</title>
-<g id="a_node95"><a xlink:href="https://github.com/sverweij/dependency-cruiser/blob/develop/src/report/dot/theming.js" xlink:title="theming.js">
+<g id="a_node96"><a xlink:href="https://github.com/sverweij/dependency-cruiser/blob/develop/src/report/dot/theming.js" xlink:title="theming.js">
 <path fill="#ffccff" stroke="black" d="M1581.67,-315.5C1581.67,-315.5 1535.97,-315.5 1535.97,-315.5 1533.14,-315.5 1530.3,-312.67 1530.3,-309.83 1530.3,-309.83 1530.3,-304.17 1530.3,-304.17 1530.3,-301.33 1533.14,-298.5 1535.97,-298.5 1535.97,-298.5 1581.67,-298.5 1581.67,-298.5 1584.51,-298.5 1587.34,-301.33 1587.34,-304.17 1587.34,-304.17 1587.34,-309.83 1587.34,-309.83 1587.34,-312.67 1584.51,-315.5 1581.67,-315.5"/>
 <text text-anchor="middle" x="1558.82" y="-304.3" font-family="Helvetica,sans-Serif" font-size="9.00">theming.js</text>
 </a>
 </g>
 </g>
 <!-- src/report/dot/index.js&#45;&gt;src/report/dot/theming.js -->
-<g id="edge130" class="edge">
+<g id="edge132" class="edge">
 <title>src/report/dot/index.js&#45;&gt;src/report/dot/theming.js</title>
 <path fill="none" stroke="#ff00ff" stroke-width="2" stroke-opacity="0.466667" d="M1053.16,-341.42C1053.16,-328.49 1053.16,-305.5 1053.16,-305.5 1053.16,-305.5 1524.19,-305.5 1524.19,-305.5"/>
 <polygon fill="#ff00ff" fill-opacity="0.466667" stroke="#ff00ff" stroke-width="2" stroke-opacity="0.466667" points="1524.19,-307.6 1530.19,-305.5 1524.19,-303.4 1524.19,-307.6"/>
 </g>
 <!-- src/report/dot/module&#45;utl.js&#45;&gt;src/report/dot/theming.js -->
-<g id="edge131" class="edge">
+<g id="edge133" class="edge">
 <title>src/report/dot/module&#45;utl.js&#45;&gt;src/report/dot/theming.js</title>
 <path fill="none" stroke="#ff00ff" stroke-width="2" stroke-opacity="0.466667" d="M1442.12,-322.5C1486.61,-322.5 1559.16,-322.5 1559.16,-322.5 1559.16,-322.5 1559.16,-321.83 1559.16,-321.83"/>
 <polygon fill="#ff00ff" fill-opacity="0.466667" stroke="#ff00ff" stroke-width="2" stroke-opacity="0.466667" points="1561.26,-321.84 1559.16,-315.84 1557.06,-321.84 1561.26,-321.84"/>
 </g>
 <!-- src/report/dot/prepareCustomLevel.js&#45;&gt;src/report/dot/consolidateModuleDependencies.js -->
-<g id="edge132" class="edge">
+<g id="edge134" class="edge">
 <title>src/report/dot/prepareCustomLevel.js&#45;&gt;src/report/dot/consolidateModuleDependencies.js</title>
-<path fill="none" stroke="#ff00ff" stroke-width="2" stroke-opacity="0.466667" d="M1282.8,-405.5C1282.8,-405.5 1323.41,-405.5 1323.41,-405.5"/>
-<polygon fill="#ff00ff" fill-opacity="0.466667" stroke="#ff00ff" stroke-width="2" stroke-opacity="0.466667" points="1323.41,-407.6 1329.41,-405.5 1323.41,-403.4 1323.41,-407.6"/>
+<path fill="none" stroke="#ff00ff" stroke-width="2" stroke-opacity="0.466667" d="M1277.16,-399.46C1277.16,-397.26 1277.16,-395.5 1277.16,-395.5 1277.16,-395.5 1323.35,-395.5 1323.35,-395.5"/>
+<polygon fill="#ff00ff" fill-opacity="0.466667" stroke="#ff00ff" stroke-width="2" stroke-opacity="0.466667" points="1323.35,-397.6 1329.35,-395.5 1323.35,-393.4 1323.35,-397.6"/>
 </g>
 <!-- src/report/dot/prepareCustomLevel.js&#45;&gt;src/report/dot/consolidateModules.js -->
-<g id="edge133" class="edge">
+<g id="edge135" class="edge">
 <title>src/report/dot/prepareCustomLevel.js&#45;&gt;src/report/dot/consolidateModules.js</title>
-<path fill="none" stroke="#ff00ff" stroke-width="2" stroke-opacity="0.466667" d="M1277.16,-399.2C1277.16,-387.02 1277.16,-366.5 1277.16,-366.5 1277.16,-366.5 1350.07,-366.5 1350.07,-366.5"/>
-<polygon fill="#ff00ff" fill-opacity="0.466667" stroke="#ff00ff" stroke-width="2" stroke-opacity="0.466667" points="1350.07,-368.6 1356.07,-366.5 1350.06,-364.4 1350.07,-368.6"/>
+<path fill="none" stroke="#ff00ff" stroke-width="2" stroke-opacity="0.466667" d="M1274.16,-399.2C1274.16,-387.02 1274.16,-366.5 1274.16,-366.5 1274.16,-366.5 1350.03,-366.5 1350.03,-366.5"/>
+<polygon fill="#ff00ff" fill-opacity="0.466667" stroke="#ff00ff" stroke-width="2" stroke-opacity="0.466667" points="1350.03,-368.6 1356.03,-366.5 1350.03,-364.4 1350.03,-368.6"/>
 </g>
 <!-- src/report/dot/prepareCustomLevel.js&#45;&gt;src/report/dot/module&#45;utl.js -->
-<g id="edge134" class="edge">
+<g id="edge136" class="edge">
 <title>src/report/dot/prepareCustomLevel.js&#45;&gt;src/report/dot/module&#45;utl.js</title>
-<path fill="none" stroke="#ff00ff" stroke-width="2" stroke-opacity="0.466667" d="M1282.66,-402.5C1291.67,-402.5 1298.16,-402.5 1298.16,-402.5 1298.16,-402.5 1298.16,-323.83 1298.16,-323.83 1298.16,-323.83 1368.62,-323.83 1368.62,-323.83"/>
+<path fill="none" stroke="#ff00ff" stroke-width="2" stroke-opacity="0.466667" d="M1282.66,-409C1291.67,-409 1298.16,-409 1298.16,-409 1298.16,-409 1298.16,-323.83 1298.16,-323.83 1298.16,-323.83 1368.62,-323.83 1368.62,-323.83"/>
 <polygon fill="#ff00ff" fill-opacity="0.466667" stroke="#ff00ff" stroke-width="2" stroke-opacity="0.466667" points="1368.62,-325.93 1374.62,-323.83 1368.62,-321.73 1368.62,-325.93"/>
 </g>
 <!-- src/report/dot/prepareFolderLevel.js&#45;&gt;src/report/dot/consolidateModuleDependencies.js -->
-<g id="edge135" class="edge">
+<g id="edge137" class="edge">
 <title>src/report/dot/prepareFolderLevel.js&#45;&gt;src/report/dot/consolidateModuleDependencies.js</title>
-<path fill="none" stroke="#ff00ff" stroke-width="2" stroke-opacity="0.466667" d="M1270.16,-358.77C1270.16,-371.99 1270.16,-395.5 1270.16,-395.5 1270.16,-395.5 1323.52,-395.5 1323.52,-395.5"/>
-<polygon fill="#ff00ff" fill-opacity="0.466667" stroke="#ff00ff" stroke-width="2" stroke-opacity="0.466667" points="1323.52,-397.6 1329.52,-395.5 1323.52,-393.4 1323.52,-397.6"/>
+<path fill="none" stroke="#ff00ff" stroke-width="2" stroke-opacity="0.466667" d="M1269.16,-358.8C1269.16,-370.98 1269.16,-391.5 1269.16,-391.5 1269.16,-391.5 1323.36,-391.5 1323.36,-391.5"/>
+<polygon fill="#ff00ff" fill-opacity="0.466667" stroke="#ff00ff" stroke-width="2" stroke-opacity="0.466667" points="1323.36,-393.6 1329.36,-391.5 1323.36,-389.4 1323.36,-393.6"/>
 </g>
 <!-- src/report/dot/prepareFolderLevel.js&#45;&gt;src/report/dot/consolidateModules.js -->
-<g id="edge136" class="edge">
+<g id="edge138" class="edge">
 <title>src/report/dot/prepareFolderLevel.js&#45;&gt;src/report/dot/consolidateModules.js</title>
-<path fill="none" stroke="#ff00ff" stroke-width="2" stroke-opacity="0.466667" d="M1273.16,-358.54C1273.16,-360.74 1273.16,-362.5 1273.16,-362.5 1273.16,-362.5 1350.02,-362.5 1350.02,-362.5"/>
-<polygon fill="#ff00ff" fill-opacity="0.466667" stroke="#ff00ff" stroke-width="2" stroke-opacity="0.466667" points="1350.02,-364.6 1356.02,-362.5 1350.02,-360.4 1350.02,-364.6"/>
+<path fill="none" stroke="#ff00ff" stroke-width="2" stroke-opacity="0.466667" d="M1272.16,-358.54C1272.16,-360.74 1272.16,-362.5 1272.16,-362.5 1272.16,-362.5 1350.03,-362.5 1350.03,-362.5"/>
+<polygon fill="#ff00ff" fill-opacity="0.466667" stroke="#ff00ff" stroke-width="2" stroke-opacity="0.466667" points="1350.03,-364.6 1356.03,-362.5 1350.03,-360.4 1350.03,-364.6"/>
 </g>
 <!-- src/report/dot/prepareFolderLevel.js&#45;&gt;src/report/dot/module&#45;utl.js -->
-<g id="edge137" class="edge">
+<g id="edge139" class="edge">
 <title>src/report/dot/prepareFolderLevel.js&#45;&gt;src/report/dot/module&#45;utl.js</title>
 <path fill="none" stroke="#ff00ff" stroke-width="2" stroke-opacity="0.466667" d="M1279.99,-348.5C1336.8,-348.5 1420.16,-348.5 1420.16,-348.5 1420.16,-348.5 1420.16,-335.7 1420.16,-335.7"/>
 <polygon fill="#ff00ff" fill-opacity="0.466667" stroke="#ff00ff" stroke-width="2" stroke-opacity="0.466667" points="1422.26,-335.7 1420.16,-329.7 1418.06,-335.7 1422.26,-335.7"/>
 </g>
 <!-- src/report/dot/prepareModuleLevel.js&#45;&gt;src/report/dot/module&#45;utl.js -->
-<g id="edge138" class="edge">
+<g id="edge140" class="edge">
 <title>src/report/dot/prepareModuleLevel.js&#45;&gt;src/report/dot/module&#45;utl.js</title>
 <path fill="none" stroke="#ff00ff" stroke-width="2" stroke-opacity="0.466667" d="M1282.31,-318.17C1282.31,-318.17 1368.69,-318.17 1368.69,-318.17"/>
 <polygon fill="#ff00ff" fill-opacity="0.466667" stroke="#ff00ff" stroke-width="2" stroke-opacity="0.466667" points="1368.69,-320.27 1374.69,-318.17 1368.69,-316.07 1368.69,-320.27"/>
 </g>
 <!-- src/report/dot/theming.js&#45;&gt;src/report/dot/defaultTheme.json -->
-<g id="edge139" class="edge">
+<g id="edge141" class="edge">
 <title>src/report/dot/theming.js&#45;&gt;src/report/dot/defaultTheme.json</title>
 <path fill="none" stroke="#ff00ff" stroke-width="2" stroke-opacity="0.466667" d="M1587.46,-307C1587.46,-307 1656.15,-307 1656.15,-307"/>
 <polygon fill="#ff00ff" fill-opacity="0.466667" stroke="#ff00ff" stroke-width="2" stroke-opacity="0.466667" points="1656.15,-309.1 1662.15,-307 1656.15,-304.9 1656.15,-309.1"/>
 </g>
 <!-- src/report/err&#45;html/err&#45;html.template.js -->
-<g id="node96" class="node">
+<g id="node97" class="node">
 <title>src/report/err&#45;html/err&#45;html.template.js</title>
-<g id="a_node96"><a xlink:href="https://github.com/sverweij/dependency-cruiser/blob/develop/src/report/err-html/err-html.template.js" xlink:title="err&#45;html.template.js">
+<g id="a_node97"><a xlink:href="https://github.com/sverweij/dependency-cruiser/blob/develop/src/report/err-html/err-html.template.js" xlink:title="err&#45;html.template.js">
 <polygon fill="#ffccff" stroke="black" points="1274.85,-475.5 1181.81,-475.5 1181.81,-458.5 1274.85,-458.5 1274.85,-475.5"/>
 <text text-anchor="middle" x="1228.33" y="-464.3" font-family="Helvetica,sans-Serif" font-size="9.00">err&#45;html.template.js</text>
 </a>
 </g>
 </g>
 <!-- src/report/err&#45;html/index.js&#45;&gt;src/report/err&#45;html/err&#45;html.template.js -->
-<g id="edge140" class="edge">
+<g id="edge142" class="edge">
 <title>src/report/err&#45;html/index.js&#45;&gt;src/report/err&#45;html/err&#45;html.template.js</title>
 <path fill="none" stroke="#ff00ff" stroke-width="2" stroke-opacity="0.466667" d="M1093.01,-493.17C1130.1,-493.17 1192.16,-493.17 1192.16,-493.17 1192.16,-493.17 1192.16,-481.57 1192.16,-481.57"/>
 <polygon fill="#ff00ff" fill-opacity="0.466667" stroke="#ff00ff" stroke-width="2" stroke-opacity="0.466667" points="1194.26,-481.57 1192.16,-475.57 1190.06,-481.57 1194.26,-481.57"/>
 </g>
 <!-- src/report/err&#45;html/utl.js -->
-<g id="node98" class="node">
+<g id="node99" class="node">
 <title>src/report/err&#45;html/utl.js</title>
-<g id="a_node98"><a xlink:href="https://github.com/sverweij/dependency-cruiser/blob/develop/src/report/err-html/utl.js" xlink:title="utl.js">
+<g id="a_node99"><a xlink:href="https://github.com/sverweij/dependency-cruiser/blob/develop/src/report/err-html/utl.js" xlink:title="utl.js">
 <path fill="#ffccff" stroke="black" d="M1249.66,-504.5C1249.66,-504.5 1207,-504.5 1207,-504.5 1204.16,-504.5 1201.33,-501.67 1201.33,-498.83 1201.33,-498.83 1201.33,-493.17 1201.33,-493.17 1201.33,-490.33 1204.16,-487.5 1207,-487.5 1207,-487.5 1249.66,-487.5 1249.66,-487.5 1252.5,-487.5 1255.33,-490.33 1255.33,-493.17 1255.33,-493.17 1255.33,-498.83 1255.33,-498.83 1255.33,-501.67 1252.5,-504.5 1249.66,-504.5"/>
 <text text-anchor="middle" x="1228.33" y="-493.3" font-family="Helvetica,sans-Serif" font-size="9.00">utl.js</text>
 </a>
 </g>
 </g>
 <!-- src/report/err&#45;html/index.js&#45;&gt;src/report/err&#45;html/utl.js -->
-<g id="edge141" class="edge">
+<g id="edge143" class="edge">
 <title>src/report/err&#45;html/index.js&#45;&gt;src/report/err&#45;html/utl.js</title>
 <path fill="none" stroke="#ff00ff" stroke-width="2" stroke-opacity="0.466667" d="M1093.11,-498.83C1093.11,-498.83 1195.06,-498.83 1195.06,-498.83"/>
 <polygon fill="#ff00ff" fill-opacity="0.466667" stroke="#ff00ff" stroke-width="2" stroke-opacity="0.466667" points="1195.06,-500.93 1201.06,-498.83 1195.06,-496.73 1195.06,-500.93"/>
 </g>
 <!-- src/report/err.js&#45;&gt;src/utl/findRuleByName.js -->
-<g id="edge142" class="edge">
+<g id="edge144" class="edge">
 <title>src/report/err.js&#45;&gt;src/utl/findRuleByName.js</title>
 <path fill="none" stroke="#aaaaaa" stroke-width="2" stroke-opacity="0.466667" d="M1066.16,-132.11C1066.16,-116.82 1066.16,-87.17 1066.16,-87.17 1066.16,-87.17 1356.12,-87.17 1356.12,-87.17"/>
 <polygon fill="#aaaaaa" fill-opacity="0.466667" stroke="#aaaaaa" stroke-width="2" stroke-opacity="0.466667" points="1356.12,-89.27 1362.12,-87.17 1356.12,-85.07 1356.12,-89.27"/>
 </g>
 <!-- src/report/html/html.template.js -->
-<g id="node100" class="node">
+<g id="node101" class="node">
 <title>src/report/html/html.template.js</title>
-<g id="a_node100"><a xlink:href="https://github.com/sverweij/dependency-cruiser/blob/develop/src/report/html/html.template.js" xlink:title="html.template.js">
+<g id="a_node101"><a xlink:href="https://github.com/sverweij/dependency-cruiser/blob/develop/src/report/html/html.template.js" xlink:title="html.template.js">
 <polygon fill="#ffccff" stroke="black" points="1267.85,-647.5 1188.81,-647.5 1188.81,-630.5 1267.85,-630.5 1267.85,-647.5"/>
 <text text-anchor="middle" x="1228.33" y="-636.3" font-family="Helvetica,sans-Serif" font-size="9.00">html.template.js</text>
 </a>
 </g>
 </g>
 <!-- src/report/html/index.js&#45;&gt;src/report/utl/dependencyToIncidenceTransformer.js -->
-<g id="edge143" class="edge">
+<g id="edge145" class="edge">
 <title>src/report/html/index.js&#45;&gt;src/report/utl/dependencyToIncidenceTransformer.js</title>
 <path fill="none" stroke="#ff00ff" stroke-width="2" stroke-opacity="0.466667" d="M1093.37,-636.17C1118.28,-636.17 1151.16,-636.17 1151.16,-636.17 1151.16,-636.17 1151.16,-581.76 1151.16,-581.76"/>
 <polygon fill="#ff00ff" fill-opacity="0.466667" stroke="#ff00ff" stroke-width="2" stroke-opacity="0.466667" points="1153.26,-581.76 1151.16,-575.76 1149.06,-581.76 1153.26,-581.76"/>
 </g>
 <!-- src/report/html/index.js&#45;&gt;src/report/html/html.template.js -->
-<g id="edge144" class="edge">
+<g id="edge146" class="edge">
 <title>src/report/html/index.js&#45;&gt;src/report/html/html.template.js</title>
 <path fill="none" stroke="#ff00ff" stroke-width="2" stroke-opacity="0.466667" d="M1093.11,-641.83C1093.11,-641.83 1182.57,-641.83 1182.57,-641.83"/>
 <polygon fill="#ff00ff" fill-opacity="0.466667" stroke="#ff00ff" stroke-width="2" stroke-opacity="0.466667" points="1182.57,-643.93 1188.57,-641.83 1182.57,-639.73 1182.57,-643.93"/>
 </g>
 <!-- src/validate/isModuleOnlyRule.js -->
-<g id="node107" class="node">
+<g id="node108" class="node">
 <title>src/validate/isModuleOnlyRule.js</title>
-<g id="a_node107"><a xlink:href="https://github.com/sverweij/dependency-cruiser/blob/develop/src/validate/isModuleOnlyRule.js" xlink:title="isModuleOnlyRule.js">
+<g id="a_node108"><a xlink:href="https://github.com/sverweij/dependency-cruiser/blob/develop/src/validate/isModuleOnlyRule.js" xlink:title="isModuleOnlyRule.js">
 <path fill="#ccccff" stroke="black" d="M1271.69,-51.5C1271.69,-51.5 1184.96,-51.5 1184.96,-51.5 1182.13,-51.5 1179.3,-48.67 1179.3,-45.83 1179.3,-45.83 1179.3,-40.17 1179.3,-40.17 1179.3,-37.33 1182.13,-34.5 1184.96,-34.5 1184.96,-34.5 1271.69,-34.5 1271.69,-34.5 1274.53,-34.5 1277.36,-37.33 1277.36,-40.17 1277.36,-40.17 1277.36,-45.83 1277.36,-45.83 1277.36,-48.67 1274.53,-51.5 1271.69,-51.5"/>
 <text text-anchor="middle" x="1228.33" y="-40.3" font-family="Helvetica,sans-Serif" font-size="9.00">isModuleOnlyRule.js</text>
 </a>
 </g>
 </g>
 <!-- src/validate/matchDependencyRule.js&#45;&gt;src/validate/isModuleOnlyRule.js -->
-<g id="edge156" class="edge">
+<g id="edge158" class="edge">
 <title>src/validate/matchDependencyRule.js&#45;&gt;src/validate/isModuleOnlyRule.js</title>
 <path fill="none" stroke="#0000ff" stroke-width="2" stroke-opacity="0.466667" d="M1125.02,-43C1125.02,-43 1173.16,-43 1173.16,-43"/>
 <polygon fill="#0000ff" fill-opacity="0.466667" stroke="#0000ff" stroke-width="2" stroke-opacity="0.466667" points="1173.16,-45.1 1179.16,-43 1173.16,-40.9 1173.16,-45.1"/>
 </g>
 <!-- src/validate/matches.js -->
-<g id="node108" class="node">
+<g id="node109" class="node">
 <title>src/validate/matches.js</title>
-<g id="a_node108"><a xlink:href="https://github.com/sverweij/dependency-cruiser/blob/develop/src/validate/matches.js" xlink:title="matches.js">
+<g id="a_node109"><a xlink:href="https://github.com/sverweij/dependency-cruiser/blob/develop/src/validate/matches.js" xlink:title="matches.js">
 <path fill="#ccccff" stroke="black" d="M1252.18,-80.5C1252.18,-80.5 1204.48,-80.5 1204.48,-80.5 1201.65,-80.5 1198.82,-77.67 1198.82,-74.83 1198.82,-74.83 1198.82,-69.17 1198.82,-69.17 1198.82,-66.33 1201.65,-63.5 1204.48,-63.5 1204.48,-63.5 1252.18,-63.5 1252.18,-63.5 1255.01,-63.5 1257.84,-66.33 1257.84,-69.17 1257.84,-69.17 1257.84,-74.83 1257.84,-74.83 1257.84,-77.67 1255.01,-80.5 1252.18,-80.5"/>
 <text text-anchor="middle" x="1228.33" y="-69.3" font-family="Helvetica,sans-Serif" font-size="9.00">matches.js</text>
 </a>
 </g>
 </g>
 <!-- src/validate/matchDependencyRule.js&#45;&gt;src/validate/matches.js -->
-<g id="edge157" class="edge">
+<g id="edge159" class="edge">
 <title>src/validate/matchDependencyRule.js&#45;&gt;src/validate/matches.js</title>
 <path fill="none" stroke="#0000ff" stroke-width="2" stroke-opacity="0.466667" d="M1123.16,-51.66C1123.16,-58.79 1123.16,-67.75 1123.16,-67.75 1123.16,-67.75 1192.75,-67.75 1192.75,-67.75"/>
 <polygon fill="#0000ff" fill-opacity="0.466667" stroke="#0000ff" stroke-width="2" stroke-opacity="0.466667" points="1192.75,-69.85 1198.75,-67.75 1192.75,-65.65 1192.75,-69.85"/>
 </g>
 <!-- src/validate/matchModuleRule.js&#45;&gt;src/validate/isModuleOnlyRule.js -->
-<g id="edge158" class="edge">
+<g id="edge160" class="edge">
 <title>src/validate/matchModuleRule.js&#45;&gt;src/validate/isModuleOnlyRule.js</title>
 <path fill="none" stroke="#0000ff" stroke-width="2" stroke-opacity="0.466667" d="M1114.73,-72C1150.25,-72 1192.16,-72 1192.16,-72 1192.16,-72 1192.16,-57.54 1192.16,-57.54"/>
 <polygon fill="#0000ff" fill-opacity="0.466667" stroke="#0000ff" stroke-width="2" stroke-opacity="0.466667" points="1194.26,-57.54 1192.16,-51.54 1190.06,-57.54 1194.26,-57.54"/>
 </g>
 <!-- src/validate/matchModuleRule.js&#45;&gt;src/validate/matches.js -->
-<g id="edge159" class="edge">
+<g id="edge161" class="edge">
 <title>src/validate/matchModuleRule.js&#45;&gt;src/validate/matches.js</title>
 <path fill="none" stroke="#0000ff" stroke-width="2" stroke-opacity="0.466667" d="M1114.66,-76.25C1114.66,-76.25 1192.51,-76.25 1192.51,-76.25"/>
 <polygon fill="#0000ff" fill-opacity="0.466667" stroke="#0000ff" stroke-width="2" stroke-opacity="0.466667" points="1192.51,-78.35 1198.51,-76.25 1192.51,-74.15 1192.51,-78.35"/>
 </g>
 <!-- src/validate/matches.js&#45;&gt;src/utl/arrayUtil.js -->
-<g id="edge160" class="edge">
+<g id="edge162" class="edge">
 <title>src/validate/matches.js&#45;&gt;src/utl/arrayUtil.js</title>
 <path fill="none" stroke="#aaaaaa" stroke-width="2" stroke-opacity="0.466667" d="M1258.19,-68.5C1309.55,-68.5 1409.16,-68.5 1409.16,-68.5 1409.16,-68.5 1409.16,-67.83 1409.16,-67.83"/>
 <polygon fill="#aaaaaa" fill-opacity="0.466667" stroke="#aaaaaa" stroke-width="2" stroke-opacity="0.466667" points="1411.26,-67.84 1409.16,-61.84 1407.06,-67.84 1411.26,-67.84"/>
 </g>
 </g>
 </svg>
-    </body>
+  </body>
 </html>
