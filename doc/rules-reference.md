@@ -41,9 +41,9 @@
    - [`exoticRequire` and `exoticRequireNot`](#exoticallyrequired-exoticrequire-and-exoticrequirenot)
    - [`preCompilationOnly`](#precompilationonly)
 4. [The `options`](#the-options)
-   - [`doNotFollow`: don't cruise modules adhering to this pattern any further](#donotfollow-dont-cruise-modules-adhering-to-this-pattern-any-further)
-   - [`exclude`: exclude dependencies from being cruised](#exclude-exclude-dependencies-from-being-cruised)
+   - [`doNotFollow`: don't cruise modules any further](#donotfollow-dont-cruise-modules-any-further)
    - [`includeOnly`: only include modules satisfying a pattern](#includeonly-only-include-modules-satisfying-a-pattern)
+   - [`exclude`: exclude dependencies from being cruised](#exclude-exclude-dependencies-from-being-cruised)
    - [`maxDepth`](#maxdepth)
    - [`prefix`: prefix links in reports](#prefix-prefix-links-in-reports)
    - [`moduleSystems`](#modulesystems)
@@ -774,7 +774,7 @@ This attribute only works for typescript sources, and only when
 
 ## The `options`
 
-### `doNotFollow`: don't cruise modules adhering to this pattern any further
+### `doNotFollow`: don't cruise modules any further
 
 > command line option equivalent: `--do-not-follow` (string values passed to 'path' only)
 
@@ -785,7 +785,9 @@ use with this is "node_modules":
 
 ```json
     "options": {
+      "doNotFollow": {
         "path": "node_modules"
+      }
     }
 ```
 
@@ -814,6 +816,27 @@ to follow external dependencies, in stead of specifying the "node_modules" path:
     }
 ```
 
+### `includeOnly`: only include modules satisfying a pattern
+
+> command line option equivalent: `--include-only`
+
+In the `includeOnly` option you can pass a regular expression of all file paths
+dependency-cruiser should include in a cruise. It will discard all files
+not matching the `includeOnly` pattern.
+
+This can be handy if you want to make an overview of only your internal application
+structure. E.g. to only take modules into account that are in the `src` tree (and
+exclude all node_modules, core modules and modules otherwise outside it):
+
+```sh
+"options": {
+    "includeOnly": "^src/"
+}
+```
+
+If you specify both an include and an exclude (see below), dependency-cruiser takes
+them _both_ into account.
+
 ### `exclude`: exclude dependencies from being cruised
 
 > command line option equivalent: `--exclude` (string values passed to 'path' only)
@@ -823,22 +846,22 @@ validated), you can exclude them by passing a regular expression to the
 `exclude`. E.g. to exclude `node_modules` from being scanned altogether:
 
 ```json
-   "options": {
-        "exclude": {
-            "path": "node_modules"
-        }
-    }
+"options": {
+  "exclude": {
+    "path": "node_modules"
+  }
+}
 ```
 
 Because it's regular expressions, you can do more interesting stuff here as well. To exclude
 all modules with a file path starting with coverage, test or node_modules, you could do this:
 
 ```json
-   "options": {
-        "exclude": {
-            "path": "^(coverage|test|node_modules)"
-        }
-    }
+"options": {
+  "exclude": {
+    "path": "^(coverage|test|node_modules)"
+  }
+}
 ```
 
 #### Other 'exclude' attributes
@@ -848,34 +871,14 @@ at either end of them. To exclude all dependencies that result of an (ecmascript
 dynamic import from being included in a cruise, you can use the `dynamic` attibute:
 
 ```json
-    "options": {
-        "exclude": {
-            "dynamic": true
-        }
-    }
-```
-
-> Other attributes might come in future releases
-
-### `includeOnly`: only include modules satisfying a pattern
-
-> command line option equivalent: `--include-only`
-
-In the `includeOnly` option you can pass a regular expression of all file paths
-dependency-cruiser should include in a cruise. It will discard all files
-not matching the `includeOnly` pattern.
-
-E.g. to only take modules into account that are in the `src` tree (and exclude all
-node_modules, core modules and modules otherwise outside it):
-
-```sh
 "options": {
-    "includeOnly": "^src/"
+  "exclude": {
+    "dynamic": true
+  }
 }
 ```
 
-If you specify both an exclude and an include, dependency-cruiser takes them
-_both_ into account.
+> Other attributes might come in future releases
 
 ### `maxDepth`
 
@@ -884,6 +887,10 @@ _both_ into account.
 Only cruise the specified depth, counting from the specified root-module(s). This
 command is mostly useful in combination with visualisation output like _dot_ to
 keep the generated output to a manageable size.
+
+> If you use this to get a high level overview of your dependendencies, be sure
+> to check out the [archi](#archi) reporter. That's more flexible, while still
+> taking into account all your rules and dependencies
 
 This will cruise the dependencies of each file directly in the src folder, up
 to a depth of 1:
@@ -1373,18 +1380,37 @@ to folders directly under _packages_, _src_, _lib_, and _node_modules_. You can
 adapt this behavior by passing a collapsePattern to the archi reporterOptions
 in your dependency-cruiser configurations e.g. like so:
 
-
 ```javascript
 module.exports = {
   options: {
     reporterOptions: {
       archi: {
-        collapsePattern: "^src/[^/]+|bin"
+        collapsePattern: "^(src/[^/]+|bin)"
       }
     }
   }
 };
 ```
+
+It also accepts the same `theme` option `dot` does. If you don't specify a theme,
+it'll use the one specified for `dot` or the default one if that one isn't
+specified either).
+
+With the above collapsePattern and a fallback to a custom dot scheme, the archi
+report for dependency-cruiser looks like this:
+
+![high level overview](real-world-samples/dependency-cruiser-archi-graph.svg)
+
+#### ddot
+
+The directory (`ddot`) reporter aggregates your dependencies on folder level. Just
+like the archi one, it accepts a `theme` option, with the same fallback to
+the theme specified for `dot` or to the default one.
+
+E.g. with a custom scheme the internals dependencies on folder level for 
+dependency-cruiser itself look like this:
+
+![folder level overview](real-world-samples/dependency-cruiser-dir-graph.svg)
 
 ### Some more esoteric options
 
