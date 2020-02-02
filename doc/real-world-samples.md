@@ -86,12 +86,23 @@ transpiled javascript.)
 
 ### dependency cruiser
 
-Dependency cruiser used on itself. node_modules left out to keep it concise. A
-small [custom theme](rules-reference.md#dot) in its [configuration](../.dependency-cruiser.json#L196)
+Dependency cruiser used on itself, focusing on internal dependencies only, on three
+levels of abstraction - high level, folder and modules. A small
+[custom theme](rules-reference.md#dot) in its [configuration](../.dependency-cruiser.json#L196)
 colors the various main parts (extract, validate, report) and the dependencies to
-them. Click for a slightly more interactive version.
+them. Click for slightly more interactive versions.
 
-[<img width="2156" alt="dependency cruiser's dependency graph" src="real-world-samples/dependency-cruiser-without-node_modules.png">](https://sverweij.github.io/dependency-cruiser/dependency-cruiser-dependency-graph.html)
+#### high level overview ('archi')
+
+[![dependency cruiser's dependency graph aggregated to its main parts](./real-world-samples/dependency-cruiser-archi-graph.svg)](https://sverweij.github.io/dependency-cruiser/dependency-cruiser-archi-graph.html)
+
+#### folder level overview ('ddot')
+
+[![dependency cruiser's dependency graph aggregated to folders](./real-world-samples/dependency-cruiser-dir-graph.svg)](https://sverweij.github.io/dependency-cruiser/dependency-cruiser-dir-graph.html)
+
+#### detailed overview ('dot')
+
+[![dependency cruiser's dependency graph](real-world-samples/dependency-cruiser-without-node_modules.svg)](https://sverweij.github.io/dependency-cruiser/dependency-cruiser-dependency-graph.html)
 
 ### state machine cat
 

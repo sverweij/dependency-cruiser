@@ -76,9 +76,41 @@ To ensure it _does_ detect them:
 ### Q: The graph dependency-cruiser generates is humoungous, and I can't follow the lines very well what can I do?
 
 **A**: Usually you don't need to see _all_ modules and dependencies that make up
-your app at the same time. It can e.g. be helpfull to make separate graphs for
+your app at the same time - showing your monorepo with 5000 modules and 20000
+dependencies in one picture will not give you much information. There's a few
+strategies and options that can help
+
+It can e.g. be helpfull to make separate graphs for
 each of the `packages` in your monorepo. That won't solve all readability issues,
-though, so dependency-cruiser has a few options to get you sorted:
+though, so dependency-cruiser has a few options to get you sorted.
+
+#### High level dependency graph ('archi' reporter)
+
+If you just want to get an overview of how the main components of your application
+are connected, you can aggregate dependencies to a higher level.
+
+```sh
+dependency-cruiser --config .dependency-cruiser.js --output-type archi -- src | dot -T svg > high-level-dependency-graph.svg
+```
+
+By default the _archi_ reporter aggregates to the level just below `packages` (for
+mono repos), `src`, `lib` and a few other often occuring paths. You can tweak this
+to your own app's structure with a [collapsePattern](rules-reference.md#archi)).
+
+An example of how this can look: [dependency-cruiser's high level dependency graph](https://sverweij.github.io/dependency-cruiser/dependency-cruiser-archi-graph.html)
+Compare that to [dependency-cruiser's internal module graph](https://sverweij.github.io/dependency-cruiser/dependency-cruiser-dependency-graph.html)
+with ~100 modules to appreciate the difference)
+
+#### Folder level dependency graph ('ddot' reporter)
+
+For a birds-eye view, you can use the `ddot` reporter that summarizes dependencies
+on a folder level:
+
+```sh
+dependency-cruiser --config .dependency-cruiser.js --output-type ddot -- src | dot -T svg > folder-level-dependency-graph.svg
+```
+
+See an example of how this can look: [dependency-cruiser's folder level dependency graph](https://sverweij.github.io/dependency-cruiser/dependency-cruiser-dir-graph.html)
 
 #### Filtering
 
@@ -100,26 +132,26 @@ validation, e.g. like so:
 
 ```js
 module.exports = {
-    // The 'extends' ensures things configured for your validation also apply
-    // to the graph you generate as well.
-    extends: "./.dependency-cruiser.js",
-    options: {
-        includeOnly: "^src/",
-        exclude: "node_modules|\\.spec\\.ts$|\\.mock\\.ts$",
-        doNotFollow: {
-            "path": "^src/report"
-            // these are the dependencyTypes dependency-cruiser's
-            // generated config does not follow by default
-            dependencyTypes: [
-                "npm",
-                "npm-dev",
-                "npm-optional",
-                "npm-peer",
-                "npm-bundled",
-                "npm-no-pkg"
-            ]
-        }
+  // The 'extends' ensures things configured for your validation also apply
+  // to the graph you generate as well.
+  extends: "./.dependency-cruiser.js",
+  options: {
+    includeOnly: "^src/",
+    exclude: "node_modules|\\.spec\\.ts$|\\.mock\\.ts$",
+    doNotFollow: {
+      "path": "^src/report"
+      // these are the dependencyTypes dependency-cruiser's
+      // generated config does not follow by default
+      dependencyTypes: [
+          "npm",
+          "npm-dev",
+          "npm-optional",
+          "npm-peer",
+          "npm-bundled",
+          "npm-no-pkg"
+      ]
     }
+  }
 }
 ```
 
@@ -127,15 +159,6 @@ Run with
 
 ```sh
 dependency-cruiser --config .dependency-cruiser-graph.js --output-type dot src | dot -T svg > dependency-graph.svg
-```
-
-#### Folder level dependency graph
-
-For a birds-eye view, you can use the `ddot` reporter that summarizes dependencies
-on a folder level:
-
-```sh
-dependency-cruiser --config .dependency-cruiser.js --output-type ddot -- src | dot -T svg > folder-level-dependency-graph.svg
 ```
 
 #### Make dot render orthogonal edges instead of splines
@@ -167,10 +190,9 @@ module.exports = {
     }
   }
 };
-
 ```
 
-The reason it's not the default for the dot reporter output is GraphViz won't 
+The reason it's not the default for the dot reporter output is GraphViz won't
 always be able to render a graph with orthogonal edges, so YMMV.
 
 ### Q: TypeScript dynamic imports show up as "✖" . What's up there?
@@ -206,6 +228,7 @@ out of the box as well.
 **A**: Yes.
 
 For `.vue` single file components it uses the `vue-template-compiler`
+
 - which will be in your module dependencies if you're developing with Vue).
 
 ### Q: Does this mean dependency-cruiser installs transpilers for all these languages?
@@ -255,7 +278,7 @@ ecmascript) might come later.
 **A**: Yes; in both TypeScript and javascript - but only with static string arguments
 or template expressions that don't contain no placeholders (see the next question).
 This should cover most of the use cases for dynamic
-imports that leverage asynchronous module loading (like 
+imports that leverage asynchronous module loading (like
 [webpack code splitting](https://webpack.js.org/guides/code-splitting/#dynamic-imports)),
 though.
 
