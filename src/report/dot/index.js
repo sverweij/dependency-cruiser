@@ -22,7 +22,7 @@ function report(pResults, pTheme, pGranularity, pCollapsePatterns) {
     graphAttrs: moduleUtl.attributizeObject(lTheme.graph || {}),
     nodeAttrs: moduleUtl.attributizeObject(lTheme.node || {}),
     edgeAttrs: moduleUtl.attributizeObject(lTheme.edge || {}),
-    clustersHaveOwnNode: ["folder", "custom"].includes(pGranularity),
+    clustersHaveOwnNode: "folder" === pGranularity,
     // eslint-disable-next-line security/detect-object-injection
     modules: (GRANULARITY2FUNCTION[pGranularity] || prepareModuleLevel)(
       pResults,
