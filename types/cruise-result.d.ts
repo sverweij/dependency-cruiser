@@ -15,6 +15,16 @@ export interface ICruiseResult {
 
 export interface IModule {
   /**
+   * The (resolved) file name of the module, e.g. 'src/main/index.js'
+   */
+  source: string;
+  /**
+   * 'true' if this module violated a rule; 'false' in all other cases. The violated rule will
+   * be in the 'rule' object at the same level.
+   */
+  valid: boolean;
+  dependencies: IDependency[];
+  /**
    * Whether or not this is a node.js core module
    */
   coreModule?: boolean;
@@ -23,7 +33,6 @@ export interface IModule {
    * file name or core module. 'false' in all other cases.
    */
   couldNotResolve?: boolean;
-  dependencies: IDependency[];
   /**
    * the type of inclusion - local, core, unknown (= we honestly don't know), undetermined (=
    * we didn't bother determining it) or one of the npm dependencies defined in a package.jsom
@@ -60,14 +69,12 @@ export interface IModule {
    */
   rules?: IRuleSummary[];
   /**
-   * The (resolved) file name of the module, e.g. 'src/main/index.js'
+   * true if the module was 'consolidated'. Consolidating implies the
+   * entity a Module represents might be several modules at the same time.
+   * This attribute is set by tools that consolidate modules for reporting
+   * purposes - it will not be present after a regular cruise.
    */
-  source: string;
-  /**
-   * 'true' if this module violated a rule; 'false' in all other cases. The violated rule will
-   * be in the 'rule' object at the same level.
-   */
-  valid: boolean;
+  consolidated?: boolean;
 }
 
 export interface IDependency {

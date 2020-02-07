@@ -19,11 +19,6 @@
 <path fill="#ffffff" stroke="black" stroke-width="2" d="M28,-16C28,-16 362.56,-16 362.56,-16 368.56,-16 374.56,-22 374.56,-28 374.56,-28 374.56,-200 374.56,-200 374.56,-206 368.56,-212 362.56,-212 362.56,-212 28,-212 28,-212 22,-212 16,-206 16,-200 16,-200 16,-28 16,-28 16,-22 22,-16 28,-16"/>
 <text text-anchor="middle" x="195.28" y="-200.8" font-family="Helvetica,sans-Serif" font-weight="bold" font-size="9.00">main</text>
 </g>
-<g id="clust3" class="cluster">
-<title>cluster_src/main/options</title>
-<path fill="#ffffff" stroke="black" stroke-width="2" d="M219.01,-24C219.01,-24 354.56,-24 354.56,-24 360.56,-24 366.56,-30 366.56,-36 366.56,-36 366.56,-92 366.56,-92 366.56,-98 360.56,-104 354.56,-104 354.56,-104 219.01,-104 219.01,-104 213.01,-104 207.01,-98 207.01,-92 207.01,-92 207.01,-36 207.01,-36 207.01,-30 213.01,-24 219.01,-24"/>
-<text text-anchor="middle" x="286.79" y="-92.8" font-family="Helvetica,sans-Serif" font-weight="bold" font-size="9.00">options</text>
-</g>
 <g id="clust4" class="cluster">
 <title>cluster_src/main/resolveOptions</title>
 <path fill="#ffffff" stroke="black" stroke-width="2" d="M114,-48C114,-48 171.01,-48 171.01,-48 177.01,-48 183.01,-54 183.01,-60 183.01,-60 183.01,-87 183.01,-87 183.01,-93 177.01,-99 171.01,-99 171.01,-99 114,-99 114,-99 108,-99 102,-93 102,-87 102,-87 102,-60 102,-60 102,-54 108,-48 114,-48"/>
@@ -33,6 +28,11 @@
 <title>cluster_src/main/ruleSet</title>
 <path fill="#ffffff" stroke="black" stroke-width="2" d="M114,-107C114,-107 170.01,-107 170.01,-107 176.01,-107 182.01,-113 182.01,-119 182.01,-119 182.01,-175 182.01,-175 182.01,-181 176.01,-187 170.01,-187 170.01,-187 114,-187 114,-187 108,-187 102,-181 102,-175 102,-175 102,-119 102,-119 102,-113 108,-107 114,-107"/>
 <text text-anchor="middle" x="142.01" y="-175.8" font-family="Helvetica,sans-Serif" font-weight="bold" font-size="9.00">ruleSet</text>
+</g>
+<g id="clust3" class="cluster">
+<title>cluster_src/main/options</title>
+<path fill="#ffffff" stroke="black" stroke-width="2" d="M219.01,-24C219.01,-24 354.56,-24 354.56,-24 360.56,-24 366.56,-30 366.56,-36 366.56,-36 366.56,-92 366.56,-92 366.56,-98 360.56,-104 354.56,-104 354.56,-104 219.01,-104 219.01,-104 213.01,-104 207.01,-98 207.01,-92 207.01,-92 207.01,-36 207.01,-36 207.01,-30 213.01,-24 219.01,-24"/>
+<text text-anchor="middle" x="286.79" y="-92.8" font-family="Helvetica,sans-Serif" font-weight="bold" font-size="9.00">options</text>
 </g>
 <!-- src/main/index.js -->
 <g id="node1" class="node">

@@ -20,6 +20,13 @@ module.exports = {
           description:
             "The (resolved) file name of the module, e.g. 'src/main/index.js'"
         },
+        valid: {
+          type: "boolean",
+          description:
+            "'true' if this module violated a rule; 'false' in all other cases. " +
+            "The violated rule will be in the 'rule' object at the same level."
+        },
+        dependencies: { $ref: "#/definitions/DependenciesType" },
         followable: {
           type: "boolean",
           description:
@@ -75,12 +82,6 @@ module.exports = {
             "An array of objects that tell whether this module is 'reachable', " +
             "and according to rule in which this reachability was defined"
         },
-        valid: {
-          type: "boolean",
-          description:
-            "'true' if this module violated a rule; 'false' in all other cases. " +
-            "The violated rule will be in the 'rule' object at the same level."
-        },
         rules: {
           type: "array",
           items: { $ref: "#/definitions/RuleSummaryType" },
@@ -88,7 +89,14 @@ module.exports = {
             "an array of rules violated by this module - left out if the module " +
             "is valid"
         },
-        dependencies: { $ref: "#/definitions/DependenciesType" }
+        consolidated: {
+          type: "boolean",
+          description:
+            "true if the module was 'consolidated'. Consolidating implies the " +
+            "entity a Module represents might be several modules at the same time. " +
+            "This attribute is set by tools that consolidate modules for reporting " +
+            "purposes - it will not be present after a regular cruise."
+        }
       }
     },
     ReachableType: {

@@ -15,6 +15,7 @@ function squashToDir(pModules) {
   return pModules.map(pModule => ({
     ...pModule,
     source: path.dirname(pModule.source),
+    consolidated: true,
     dependencies: pModule.dependencies.map(squashDependencyToDir)
   }));
 }
@@ -23,7 +24,7 @@ module.exports = (pResults, pTheme) => {
   return consolidateModules(squashToDir(pResults.modules))
     .map(consolidateModuleDependencies)
     .sort(moduleUtl.compareOnSource)
-    .map(moduleUtl.extractRelevantTransgressions)
+    .map(moduleUtl.extractFirstTransgression)
     .map(moduleUtl.folderify)
     .map(moduleUtl.stripSelfTransitions)
     .map(moduleUtl.applyTheme(pTheme))

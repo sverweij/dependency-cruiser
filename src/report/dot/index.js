@@ -3,11 +3,14 @@ const _get = require("lodash/get");
 const theming = require("./theming");
 const moduleUtl = require("./module-utl");
 const prepareFolderLevel = require("./prepareFolderLevel");
-const prepareModuleLevel = require("./prepareModuleLevel");
 const prepareCustomLevel = require("./prepareCustomLevel");
 
 // eslint-disable-next-line import/no-unassigned-import
 require("./dot.template");
+
+function prepareModuleLevel(pResults, pTheme) {
+  return prepareCustomLevel(pResults, pTheme, null);
+}
 
 const GRANULARITY2FUNCTION = {
   module: prepareModuleLevel,
@@ -24,7 +27,7 @@ function report(pResults, pTheme, pGranularity, pCollapsePatterns) {
     edgeAttrs: moduleUtl.attributizeObject(lTheme.edge || {}),
     clustersHaveOwnNode: "folder" === pGranularity,
     // eslint-disable-next-line security/detect-object-injection
-    modules: (GRANULARITY2FUNCTION[pGranularity] || prepareModuleLevel)(
+    modules: (GRANULARITY2FUNCTION[pGranularity] || prepareCustomLevel)(
       pResults,
       lTheme,
       pCollapsePatterns
@@ -32,7 +35,7 @@ function report(pResults, pTheme, pGranularity, pCollapsePatterns) {
   });
 }
 
-const GRANULARITY2THEMEORIGN = {
+const GRANULARITY2THEMEORIGIN = {
   module: "summary.optionsUsed.reporterOptions.dot.theme",
   folder: "summary.optionsUsed.reporterOptions.ddot.theme",
   custom: "summary.optionsUsed.reporterOptions.archi.theme"
@@ -45,7 +48,7 @@ function pryThemeFromResults(pGranularity, pResults) {
   );
 
   // eslint-disable-next-line security/detect-object-injection
-  return _get(pResults, GRANULARITY2THEMEORIGN[pGranularity], lFallbackTheme);
+  return _get(pResults, GRANULARITY2THEMEORIGIN[pGranularity], lFallbackTheme);
 }
 
 /**

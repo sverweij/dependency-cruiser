@@ -24,16 +24,6 @@ function extractFirstTransgression(pModule) {
   };
 }
 
-function extractRelevantTransgressions(pModule) {
-  return {
-    ...(pModule.rules ? { ...pModule, rule: pModule.rules[0] } : pModule),
-    dependencies: pModule.dependencies.map(pDependency => ({
-      ...pDependency,
-      rule: pDependency.rules[0]
-    }))
-  };
-}
-
 function applyTheme(pTheme) {
   return pModule => ({
     ...pModule,
@@ -133,7 +123,6 @@ module.exports = {
   folderify,
   applyTheme,
   extractFirstTransgression,
-  extractRelevantTransgressions,
   attributizeObject,
   stripSelfTransitions,
   addURL
