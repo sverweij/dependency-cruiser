@@ -15,7 +15,9 @@ function mergeModule(pLeftModule, pRightModule) {
     rules: pLeftModule.rules
       .concat(_get(pRightModule, "rules", []))
       .sort(compareRules),
-    valid: pLeftModule.valid && pRightModule.valid
+    valid: pLeftModule.valid && pRightModule.valid,
+    consolidated:
+      Boolean(pLeftModule.consolidated) || Boolean(pRightModule.consolidated)
   };
 }
 

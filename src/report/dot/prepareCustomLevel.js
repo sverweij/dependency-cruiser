@@ -19,6 +19,9 @@ function squashToPattern(pModules, pCollapsePattern) {
     return {
       ...pModule,
       source: lCollapseMatch ? lCollapseMatch[0] : pModule.source,
+      consolidated: lCollapseMatch
+        ? lCollapseMatch[0] !== pModule.source
+        : false,
       dependencies: pModule.dependencies.map(pDependency =>
         squashDependencyToPattern(pDependency, pCollapsePattern)
       )
@@ -27,10 +30,14 @@ function squashToPattern(pModules, pCollapsePattern) {
 }
 
 module.exports = (pResults, pTheme, pCollapsePattern) => {
-  return consolidateModules(squashToPattern(pResults.modules, pCollapsePattern))
-    .map(consolidateModuleDependencies)
+  return (pCollapsePattern
+    ? consolidateModules(
+        squashToPattern(pResults.modules, pCollapsePattern)
+      ).map(consolidateModuleDependencies)
+    : pResults.modules
+  )
     .sort(moduleUtl.compareOnSource)
-    .map(moduleUtl.extractRelevantTransgressions)
+    .map(moduleUtl.extractFirstTransgression)
     .map(moduleUtl.folderify)
     .map(moduleUtl.stripSelfTransitions)
     .map(moduleUtl.applyTheme(pTheme))

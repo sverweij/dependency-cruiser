@@ -2,15 +2,15 @@ const expect = require("chai").expect;
 const moduleUtl = require("../../../src/report/dot/module-utl");
 
 describe("report/dot/module-utl", () => {
-  it("extractRelevantTransgressions - keeps as is when there's no transgressions", () => {
+  it("extractFirstTransgression - keeps as is when there's no transgressions", () => {
     expect(
-      moduleUtl.extractRelevantTransgressions({ dependencies: [] })
+      moduleUtl.extractFirstTransgression({ dependencies: [] })
     ).to.deep.equal({ dependencies: [] });
   });
 
-  it("extractRelevantTransgressions - adds the first module rule if there's at least one", () => {
+  it("extractFirstTransgression - adds the first module rule if there's at least one", () => {
     expect(
-      moduleUtl.extractRelevantTransgressions({
+      moduleUtl.extractFirstTransgression({
         dependencies: [],
         rules: [
           { name: "error-thing", severity: "error" },
@@ -27,9 +27,9 @@ describe("report/dot/module-utl", () => {
     });
   });
 
-  it("extractRelevantTransgressions - adds the first dependency rule if there's at least one", () => {
+  it("extractFirstTransgression - adds the first dependency rule if there's at least one", () => {
     expect(
-      moduleUtl.extractRelevantTransgressions({
+      moduleUtl.extractFirstTransgression({
         dependencies: [
           {
             rules: [

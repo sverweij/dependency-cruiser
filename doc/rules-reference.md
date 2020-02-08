@@ -1394,12 +1394,35 @@ module.exports = {
 
 It also accepts the same `theme` option `dot` does. If you don't specify a theme,
 it'll use the one specified for `dot` or the default one if that one isn't
-specified either).
+specified either.
 
-With the above collapsePattern and a fallback to a custom dot scheme, the archi
-report for dependency-cruiser looks like this:
+With the above collapsePattern and a custom dot scheme, the archi report for
+dependency-cruiser looks like this:
 
 ![high level overview](real-world-samples/dependency-cruiser-archi-graph.svg)
+
+> Modules collapsed in this fashion get the special attribute `consolidated`
+> so they're easy to distinguish in a.o. themes. The default theme makes them a
+> `box3d` shape (as you can see above) but if you want to use other attributes
+> you can use the power of the theme mechanism to use your own e.g.
+> 
+> ```javascript
+> // ...
+> reporterOptions: {
+>  archi: {
+>    // ...
+>    theme: {
+>      modules: [
+>        {
+>          criteria: { collapsed: true },
+>          attributes: { shape: "tab" }
+>       }
+>     ]
+>   }
+> }
+> // ...
+>
+> ```
 
 #### ddot
 
@@ -1407,7 +1430,7 @@ The directory (`ddot`) reporter aggregates your dependencies on folder level. Ju
 like the archi one, it accepts a `theme` option, with the same fallback to
 the theme specified for `dot` or to the default one.
 
-E.g. with a custom scheme the internals dependencies on folder level for 
+E.g. with a custom scheme the internals dependencies on folder level for
 dependency-cruiser itself look like this:
 
 ![folder level overview](real-world-samples/dependency-cruiser-dir-graph.svg)

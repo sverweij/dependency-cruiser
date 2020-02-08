@@ -32,6 +32,10 @@
   },
   "modules": [
     {
+      "criteria": { "consolidated": true },
+      "attributes": { "shape": "box3d" }
+    },
+    {
       "criteria": { "rules[0].severity": "error" },
       "attributes": { "fontcolor": "red", "color": "red" }
     },
