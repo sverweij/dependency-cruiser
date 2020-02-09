@@ -1161,55 +1161,6 @@ you can provide the parameters like so:
 In the `reporterOptions` attribute you can pass things to reporters to influence
 their behavior - for reporters that support this.
 
-#### anon
-
-The anonymous reporter has a `wordlist` option to pass it a list of words to use
-to replace path elements with before it starts to generate random names. If you
-use the anonymous report a lot it can be beneficial to use a list of words so the
-output is repeatable (and easier to read).
-
-```json
-{
-  "options": {
-    "reporterOptions": {
-      "anon": {
-        "wordlist": [
-          "foo",
-          "bar",
-          "baz",
-          "qux",
-          "grault",
-          "garply",
-          "waldo",
-          "fred"
-        ]
-      }
-    }
-  }
-}
-```
-
-You're likely to need a _lot_ of words to cover all your path elements if you
-want to prevent random names as much as possible. There's word lists in the wild
-that work exceptionally well - in the past I have used Sindre Sorhus'
-[mnemonic-words](https://www.npmjs.com/package/mnemonic-words) list
-for this. If you use javascript as the configuration file format you can
-simply require it:
-
-```javascript
-const mnemonicWords = require('mnemonic-words');
-
-module.exports = {
-  // ...
-  options: {
-    reporterOptions:
-      anon: {
-        wordlist: mnemonicWords
-      }
-  }
-}
-```
-
 #### dot
 
 Most representational aspects of the 'dot' reporter are customizable:
@@ -1372,6 +1323,9 @@ module.exports = {
 
 ![bare](assets/theming/bare.svg)
 
+The dot reporter also supports the `collapsePattern` option originally created
+for the [archi](#archi) reporter.
+
 #### archi
 
 The 'customizable dot' (`cdot`) or 'archi' reporter exists to make high level
@@ -1434,6 +1388,55 @@ E.g. with a custom scheme the internals dependencies on folder level for
 dependency-cruiser itself look like this:
 
 ![folder level overview](real-world-samples/dependency-cruiser-dir-graph.svg)
+
+#### anon
+
+The anonymous reporter has a `wordlist` option to pass it a list of words to use
+to replace path elements with before it starts to generate random names. If you
+use the anonymous report a lot it can be beneficial to use a list of words so the
+output is repeatable (and easier to read).
+
+```json
+{
+  "options": {
+    "reporterOptions": {
+      "anon": {
+        "wordlist": [
+          "foo",
+          "bar",
+          "baz",
+          "qux",
+          "grault",
+          "garply",
+          "waldo",
+          "fred"
+        ]
+      }
+    }
+  }
+}
+```
+
+You're likely to need a _lot_ of words to cover all your path elements if you
+want to prevent random names as much as possible. There's word lists in the wild
+that work exceptionally well - in the past I have used Sindre Sorhus'
+[mnemonic-words](https://www.npmjs.com/package/mnemonic-words) list
+for this. If you use javascript as the configuration file format you can
+simply require it:
+
+```javascript
+const mnemonicWords = require('mnemonic-words');
+
+module.exports = {
+  // ...
+  options: {
+    reporterOptions:
+      anon: {
+        wordlist: mnemonicWords
+      }
+  }
+}
+```
 
 ### Some more esoteric options
 

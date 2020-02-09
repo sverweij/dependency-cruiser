@@ -50,6 +50,12 @@ module.exports = {
       description: "Options to tweak the output of the anonymous reporter",
       additionalProperties: false,
       properties: {
+        collapsePattern: {
+          type: "string",
+          description:
+            'Regular expressions to collapse to. For the "dot" reporter defaults ' +
+            'to null, but "node_modules/[^/]+" is recommended for most use cases.'
+        },
         theme: { $ref: "#/definitions/DotThemeType" }
       }
     },
