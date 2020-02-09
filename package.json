@@ -129,12 +129,12 @@
     "acorn-walk": "7.0.0",
     "ajv": "6.11.0",
     "chalk": "3.0.0",
-    "commander": "4.1.0",
+    "commander": "4.1.1",
     "enhanced-resolve": "4.1.1",
     "figures": "3.1.0",
     "get-stream": "5.1.0",
     "glob": "7.1.6",
-    "handlebars": "4.7.2",
+    "handlebars": "4.7.3",
     "indent-string": "4.0.0",
     "inquirer": "7.0.4",
     "lodash": "4.17.15",
@@ -172,7 +172,7 @@
     "typescript": "3.7.5",
     "upem": "3.1.2",
     "vue-template-compiler": "2.6.11",
-    "yarn": "1.21.1"
+    "yarn": "1.22.0"
   },
   "upem": {
     "donotup": [
