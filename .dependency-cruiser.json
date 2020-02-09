@@ -251,6 +251,10 @@
               "attributes": { "style": "filled" }
             },
             {
+              "criteria": { "source": "\\.json$" },
+              "attributes": { "shape": "cylinder" }
+            },
+            {
               "criteria": { "source": "\\-type\\.js$" },
               "attributes": {
                 "fillcolor": "white",
