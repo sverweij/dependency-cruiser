@@ -1,6 +1,6 @@
 {
   "name": "dependency-cruiser",
-  "version": "7.1.0",
+  "version": "7.2.0-beta-1",
   "description": "Validate and visualize dependencies. With your rules. JavaScript, TypeScript, CoffeeScript. ES6, CommonJS, AMD.",
   "keywords": [
     "static analysis",
@@ -64,7 +64,6 @@
     "check:full": "npm-run-all check test:glob test:integration",
     "depcruise": "node ./bin/dependency-cruise.js --validate -- src bin test configs types utl",
     "depcruise:explain": "node ./bin/dependency-cruise.js --output-type err-long --validate -- src bin test configs types utl",
-    "depcruise:graph:dir": "node ./bin/dependency-cruise.js --validate --include-only '^(src|bin)' --output-type ddot bin src | dot -T svg > tmp_deps.svg",
     "depcruise:graph:doc": "npm-run-all depcruise:graph:doc:json depcruise:graph:doc:schema depcruise:graph:doc:types --parallel depcruise:graph:doc:html depcruise:graph:doc:html* depcruise:graph:doc:svg* depcruise:graph:doc:theming:*",
     "depcruise:graph:doc:json": "node ./bin/dependency-cruise.js --validate --include-only '^(src|bin)' --output-type json bin src --output-to tmp_graph_deps.json",
     "depcruise:graph:doc:html": "./bin/depcruise-fmt.js -T dot -f - tmp_graph_deps.json | dot -T svg | node utl/embed-svg-in-html.utl.js > docs/dependency-cruiser-dependency-graph.html",

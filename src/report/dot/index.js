@@ -8,8 +8,16 @@ const prepareCustomLevel = require("./prepareCustomLevel");
 // eslint-disable-next-line import/no-unassigned-import
 require("./dot.template");
 
-function prepareModuleLevel(pResults, pTheme) {
-  return prepareCustomLevel(pResults, pTheme, null);
+function prepareModuleLevel(
+  pResults,
+  pTheme,
+  pCollapsePattern = _get(
+    pResults,
+    "summary.optionsUsed.reporterOptions.dot.collapsePattern",
+    null
+  )
+) {
+  return prepareCustomLevel(pResults, pTheme, pCollapsePattern);
 }
 
 const GRANULARITY2FUNCTION = {
@@ -18,7 +26,7 @@ const GRANULARITY2FUNCTION = {
   custom: prepareCustomLevel
 };
 
-function report(pResults, pTheme, pGranularity, pCollapsePatterns) {
+function report(pResults, pTheme, pGranularity, pCollapsePattern) {
   const lTheme = theming.normalizeTheme(pTheme);
 
   return Handlebars.templates["dot.template.hbs"]({
@@ -30,7 +38,7 @@ function report(pResults, pTheme, pGranularity, pCollapsePatterns) {
     modules: (GRANULARITY2FUNCTION[pGranularity] || prepareCustomLevel)(
       pResults,
       lTheme,
-      pCollapsePatterns
+      pCollapsePattern
     )
   });
 }
@@ -65,19 +73,11 @@ function pryThemeFromResults(pGranularity, pResults) {
  * @returns {IReporterOutput} - .output: the directed graph
  *                              .exitCode: 0
  */
-module.exports = pGranularity => (
-  pResults,
-  pTheme,
-  pCollapsePatterns = _get(
-    pResults,
-    "summary.optionsUsed.reporterOptions.archi.collapsePattern",
-    "^(node_modules|packages|src|lib|test|spec)/[^/]+"
-  )
-) => {
+module.exports = pGranularity => (pResults, pTheme, pCollapsePattern) => {
   const lTheme = pTheme || pryThemeFromResults(pGranularity, pResults);
 
   return {
-    output: report(pResults, lTheme, pGranularity, pCollapsePatterns),
+    output: report(pResults, lTheme, pGranularity, pCollapsePattern),
     exitCode: 0
   };
 };

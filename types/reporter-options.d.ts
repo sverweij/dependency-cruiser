@@ -32,6 +32,11 @@ export interface IAnonReporterOptions {
 
 export interface IDotReporterOptions {
   /**
+   * Regular expressions to collapse to. For the "dot" reporter defaults
+   * to null, but "node_modules/[^/]+" is recommended for most use cases.
+   */
+  collapsePattern?: string;
+  /**
    * A bunch of criteria to (conditionally) theme the dot output
    */
   theme?: IDotTheme;
