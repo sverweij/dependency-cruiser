@@ -18,9 +18,6 @@ function compareSeverities(pRightSeverity, pLeftSeverity) {
   );
 }
 
-module.exports = function compareRules(pLeftRule, pRightRule) {
-  return (
-    compareSeverities(pLeftRule.severity, pRightRule.severity) ||
-    pLeftRule.name.localeCompare(pRightRule.name)
-  );
-};
+module.exports = (pLeftRule, pRightRule) =>
+  compareSeverities(pLeftRule.severity, pRightRule.severity) ||
+  pLeftRule.name.localeCompare(pRightRule.name);

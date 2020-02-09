@@ -1,5 +1,5 @@
 const expect = require("chai").expect;
-const compareRules = require("../../../src/report/dot/compareRules");
+const compareRules = require("../../../src/report/utl/compareRules");
 
 describe("report/dot/compareRules", () => {
   it("samesies yield 0", () => {

@@ -25,7 +25,8 @@ function mergeModules(pSourceString, pModules) {
   return pModules
     .filter(pModule => pModule.source === pSourceString)
     .reduce(
-      (pAllModules, pCurrentModule) => mergeModule(pAllModules, pCurrentModule),
+      (pMergedModule, pCurrentModule) =>
+        mergeModule(pMergedModule, pCurrentModule),
       {
         dependencies: [],
         rules: [],
