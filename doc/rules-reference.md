@@ -5,7 +5,7 @@
 - This is a small reference guide to the elements you can use to write rules
   for dependency-cruiser. If you want a step-by-step introduction check the
   [rules _tutorial_](./rules-tutorial.md).
-- There is a [json schema](../src/main/schema/configuration.schema.json)
+- There is a [json schema](../src/schema/configuration.schema.json)
   that describes the output format. Dependency-cruiser
   checks rule sets against it.
 - Some examples:
@@ -470,8 +470,6 @@ With this rule enabled, the unreachable rules jump out immediately. Both in the 
 - You can set up multiple rules with a `reachable` attribute in the `to` section. If you do so,
   make sure you give a `name` to each rule. It's not only the only way dependency-cruiser can keep
   reachable rules apart - it will be for you as well :-).
-- The operation to calculate the reachability of modules can be quite resource intensive, especially
-  if you dependency-graph is wide and deep.
 - Different from other rules, rules with a `reachable` attribute can only have
   - `path` and `pathNot` in the `from` part of the rule
   - `path` and `pathNot` alongside the `reachable` in the `to` part of the rule  
@@ -500,10 +498,6 @@ section:
 A boolean indicating whether or not to match module dependencies that end up
 where you started (a.k.a. circular dependencies). Leaving this out => you don't
 care either way.
-
-Detecting circular dependencies is heavy work. Especially on larger code bases
-(thousands of files in one dependency graph) you might notice an impact on
-the performance when you add a rule that checks for circular dependencies.
 
 For example, adding this rule to the "forbiddden" section in your
 .dependency-cruiser.json will issue a warning for each dependency that ends
@@ -1359,7 +1353,7 @@ dependency-cruiser looks like this:
 > so they're easy to distinguish in a.o. themes. The default theme makes them a
 > `box3d` shape (as you can see above) but if you want to use other attributes
 > you can use the power of the theme mechanism to use your own e.g.
-> 
+>
 > ```javascript
 > // ...
 > reporterOptions: {
