@@ -38,7 +38,7 @@ jobs:
     - name: forbidden dependency checks in a yarn pnp environment
       run: |
         node --version
-        npm run test:integration
+        npm run test:yarn-pnp
       shell: bash
       env:
         CI: true

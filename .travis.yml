@@ -24,7 +24,7 @@ script:
   - npm run test:cover
   - npm run lint
   - npm run test:load:short
-  - npm run test:integration
+  - npm run test:yarn-pnp
 
 after_script:
   - ./cc-test-reporter after-build --exit-code $TRAVIS_TEST_RESULT
