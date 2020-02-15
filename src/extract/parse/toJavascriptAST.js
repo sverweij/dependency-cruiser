@@ -9,13 +9,6 @@ function getASTFromSource(pSource, pExtension, pTSConfig) {
   const lJavaScriptSource = transpile(pExtension, pSource, pTSConfig);
 
   try {
-    // console.log(
-    //   JSON.stringify(
-    //     acorn.parse(lJavaScriptSource, { sourceType: "module", ecmaVersion: 11 }),
-    //     null,
-    //     "  "
-    //   )
-    // );
     // ecmaVersion 11 necessary for acorn to understand dynamic imports
     // default ecmaVersion for acorn 7 is still 10.
     return acorn.parse(lJavaScriptSource, {
