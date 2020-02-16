@@ -104,7 +104,10 @@ describe("cli/initConfig/createConfig", () => {
     )}`;
 
     try {
-      createConfigFile({ webpackConfig: "./webpack.prod.js" });
+      createConfigFile({
+        useWebpackConfig: true,
+        webpackConfig: "./webpack.prod.js"
+      });
       /* eslint global-require:0, security/detect-non-literal-require:0, import/no-dynamic-require:0 */
       const lResult = require(configResultFileName);
 
@@ -131,6 +134,7 @@ describe("cli/initConfig/createConfig", () => {
 
     try {
       createConfigFile({
+        useTsConfig: true,
         tsConfig: "./tsconfig.json"
       });
       /* eslint global-require:0, security/detect-non-literal-require:0, import/no-dynamic-require:0 */

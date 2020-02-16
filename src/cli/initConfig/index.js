@@ -11,6 +11,7 @@ const ONESHOT_CONFIGS = {
     preset: "dependency-cruiser/configs/recommended-strict",
     useTsConfig: fileExists(TYPESCRIPT_CONFIG),
     tsconfig: TYPESCRIPT_CONFIG,
+    tsPreCompilationDeps: fileExists(TYPESCRIPT_CONFIG),
     useYarnPnP: pnpIsEnabled(),
     useWebpackConfig: fileExists(WEBPACK_CONFIG),
     webpackConfig: WEBPACK_CONFIG
@@ -18,6 +19,7 @@ const ONESHOT_CONFIGS = {
   yes: {
     useTsConfig: fileExists(TYPESCRIPT_CONFIG),
     tsconfig: TYPESCRIPT_CONFIG,
+    tsPreCompilationDeps: fileExists(TYPESCRIPT_CONFIG),
     useYarnPnP: pnpIsEnabled(),
     useWebpackConfig: fileExists(WEBPACK_CONFIG),
     webpackConfig: WEBPACK_CONFIG
