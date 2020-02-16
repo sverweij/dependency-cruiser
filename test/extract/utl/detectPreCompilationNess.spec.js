@@ -32,7 +32,7 @@ describe("extract/utl/detectPreCompilationNess", () => {
         [{ module: "foo", moduleSystem: "cjs" }]
       )
     ).to.deep.equal([
-      { module: "foo", moduleSystem: "es6", preCompilationOnly: true }
+      { module: "foo", moduleSystem: "es6", preCompilationOnly: false }
     ]);
   });
 

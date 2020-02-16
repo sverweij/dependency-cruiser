@@ -31,7 +31,7 @@ describe("extract/utl/compare - dependencyEquals", () => {
     ).to.equal(true);
   });
 
-  it("same module name, different module system => neq", () => {
+  it("same module name, different module system => eq", () => {
     expect(
       compare.dependenciesEqual({
         module: "foo",
@@ -40,7 +40,7 @@ describe("extract/utl/compare - dependencyEquals", () => {
         module: "foo",
         moduleSystem: "cjs"
       })
-    ).to.equal(false);
+    ).to.equal(true);
   });
 
   it("different module name, same module system => neq", () => {
