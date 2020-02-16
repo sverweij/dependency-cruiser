@@ -126,6 +126,10 @@
       "attributes": { "arrowhead": "normalnoneodot" }
     },
     {
+      "criteria": { "preCompilationOnly": true },
+      "attributes": { "arrowhead": "onormal", "penwidth": "1.0" }
+    },
+    {
       "criteria": { "coreModule": true },
       "attributes": { "style": "dashed", "penwidth": "1.0" }
     },
