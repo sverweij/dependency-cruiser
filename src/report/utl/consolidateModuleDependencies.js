@@ -8,10 +8,8 @@ function mergeDependency(pLeftDependency, pRightDependency) {
   return {
     ...pLeftDependency,
     ...pRightDependency,
-    dependendencyTypes: _uniqBy(
-      pLeftDependency.dependendencyTypes.concat(
-        pRightDependency.dependendencyTypes
-      )
+    dependencyTypes: _uniqBy(
+      pLeftDependency.dependencyTypes.concat(pRightDependency.dependencyTypes)
     ),
     rules: pLeftDependency.rules
       .concat(_get(pRightDependency, "rules", []))
@@ -27,7 +25,7 @@ function mergeDependencies(pResolvedName, pDependencies) {
       (pAllDependencies, pCurrentDependency) =>
         mergeDependency(pAllDependencies, pCurrentDependency),
       {
-        dependendencyTypes: [],
+        dependencyTypes: [],
         rules: [],
         valid: true
       }
