@@ -33,4 +33,17 @@ describe("ast-extractors/extract-typescript - re-exports", () => {
       extractTypescript("export { ReExport as RenamedReExport };")
     ).to.deep.equal([]);
   });
+
+  it("extracts re-export under a different name (typescript 3.8+, ecmascript 2020)", () => {
+    expect(
+      extractTypescript("export * as woehahaha from './damodule'")
+    ).to.deep.equal([
+      {
+        module: "./damodule",
+        moduleSystem: "es6",
+        dynamic: false,
+        exoticallyRequired: false
+      }
+    ]);
+  });
 });
