@@ -75,6 +75,59 @@ describe("cli/initConfig/index", () => {
 
       expect(lResult).to.be.jsonSchema(configurationSchema);
       expect(lResult).to.not.haveOwnProperty("extends");
+      expect(lResult.options).to.not.haveOwnProperty("tsConfig");
+    } finally {
+      Reflect.deleteProperty(
+        require.cache,
+        require.resolve(configResultFileName)
+      );
+      deleteDammit(RULES_FILE_JS);
+    }
+  });
+
+  it("init yes in a ts project creates a self-contained js rules file with typescript things flipped to yes", () => {
+    process.chdir("test/cli/fixtures/init-config/ts-config-exists");
+    const configResultFileName = `./${path.join(
+      "../fixtures/init-config/ts-config-exists",
+      RULES_FILE_JS
+    )}`;
+
+    try {
+      initConfig("yes");
+      const lResult = require(configResultFileName);
+
+      expect(lResult).to.be.jsonSchema(configurationSchema);
+      expect(lResult).to.not.haveOwnProperty("extends");
+      expect(lResult.options).to.haveOwnProperty("tsConfig");
+      expect(lResult.options.tsConfig).to.deep.equal({
+        fileName: "./tsconfig.json"
+      });
+    } finally {
+      Reflect.deleteProperty(
+        require.cache,
+        require.resolve(configResultFileName)
+      );
+      deleteDammit(RULES_FILE_JS);
+    }
+  });
+
+  it("init yes in a webpack project creates a self-contained js rules file with webpack things flipped to yes", () => {
+    process.chdir("test/cli/fixtures/init-config/webpack-config-exists");
+    const configResultFileName = `./${path.join(
+      "../fixtures/init-config/webpack-config-exists",
+      RULES_FILE_JS
+    )}`;
+
+    try {
+      initConfig("yes");
+      const lResult = require(configResultFileName);
+
+      expect(lResult).to.be.jsonSchema(configurationSchema);
+      expect(lResult).to.not.haveOwnProperty("extends");
+      expect(lResult.options).to.haveOwnProperty("webpackConfig");
+      expect(lResult.options.webpackConfig).to.deep.equal({
+        fileName: "./webpack.config.js"
+      });
     } finally {
       Reflect.deleteProperty(
         require.cache,
