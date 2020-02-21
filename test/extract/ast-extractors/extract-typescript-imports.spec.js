@@ -127,4 +127,17 @@ describe("ast-extractors/extract-typescript - regular imports", () => {
       extractTypescript("import protocol = ts.server.protocol")
     ).to.deep.equal([]);
   });
+
+  it("extracts type imports (typescript 3.8+)", () => {
+    expect(
+      extractTypescript("import type { SomeType } from './some-module'")
+    ).to.deep.equal([
+      {
+        module: "./some-module",
+        moduleSystem: "es6",
+        dynamic: false,
+        exoticallyRequired: false
+      }
+    ]);
+  });
 });
