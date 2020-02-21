@@ -5,26 +5,32 @@ const { pnpIsEnabled, fileExists } = require("./helpers");
 
 const TYPESCRIPT_CONFIG = `./${$defaults.TYPESCRIPT_CONFIG}`;
 const WEBPACK_CONFIG = `./${$defaults.WEBPACK_CONFIG}`;
-const ONESHOT_CONFIGS = {
-  preset: {
-    configType: "preset",
-    preset: "dependency-cruiser/configs/recommended-strict",
-    useTsConfig: fileExists(TYPESCRIPT_CONFIG),
-    tsconfig: TYPESCRIPT_CONFIG,
-    tsPreCompilationDeps: fileExists(TYPESCRIPT_CONFIG),
-    useYarnPnP: pnpIsEnabled(),
-    useWebpackConfig: fileExists(WEBPACK_CONFIG),
-    webpackConfig: WEBPACK_CONFIG
-  },
-  yes: {
-    useTsConfig: fileExists(TYPESCRIPT_CONFIG),
-    tsconfig: TYPESCRIPT_CONFIG,
-    tsPreCompilationDeps: fileExists(TYPESCRIPT_CONFIG),
-    useYarnPnP: pnpIsEnabled(),
-    useWebpackConfig: fileExists(WEBPACK_CONFIG),
-    webpackConfig: WEBPACK_CONFIG
-  }
-};
+
+function getOneshotConfig(pInit) {
+  const ONESHOT_CONFIGS = {
+    preset: {
+      configType: "preset",
+      preset: "dependency-cruiser/configs/recommended-strict",
+      useTsConfig: fileExists(TYPESCRIPT_CONFIG),
+      tsConfig: TYPESCRIPT_CONFIG,
+      tsPreCompilationDeps: fileExists(TYPESCRIPT_CONFIG),
+      useYarnPnP: pnpIsEnabled(),
+      useWebpackConfig: fileExists(WEBPACK_CONFIG),
+      webpackConfig: WEBPACK_CONFIG
+    },
+    yes: {
+      useTsConfig: fileExists(TYPESCRIPT_CONFIG),
+      tsConfig: TYPESCRIPT_CONFIG,
+      tsPreCompilationDeps: fileExists(TYPESCRIPT_CONFIG),
+      useYarnPnP: pnpIsEnabled(),
+      useWebpackConfig: fileExists(WEBPACK_CONFIG),
+      webpackConfig: WEBPACK_CONFIG
+    }
+  };
+
+  // eslint-disable-next-line security/detect-object-injection
+  return ONESHOT_CONFIGS[pInit] || {};
+}
 
 module.exports = pInit => {
   /* istanbul ignore if */
@@ -35,7 +41,6 @@ module.exports = pInit => {
         process.stderr.write(`\n  ERROR: ${pError.message}\n`);
       });
   } else {
-    // eslint-disable-next-line security/detect-object-injection
-    createConfigFile(ONESHOT_CONFIGS[pInit] || {});
+    createConfigFile(getOneshotConfig(pInit));
   }
 };
