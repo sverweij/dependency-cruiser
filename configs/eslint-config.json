@@ -205,7 +205,7 @@
 
     // mocha
     "mocha/handle-done-callback": "error", // - enforces handling of callbacks for async tests
-    "mocha/max-top-level-suites": ["warn", { "limit": "10" }], // limit the number of top-level suites in a single file
+    "mocha/max-top-level-suites": ["warn", { "limit": 10 }], // limit the number of top-level suites in a single file
     "mocha/no-exclusive-tests": "error", // disallow exclusive mocha tests
     "mocha/no-global-tests": "error", // disallow global tests
     "mocha/no-hooks": "off", // disallow hooks
