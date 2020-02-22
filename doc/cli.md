@@ -35,9 +35,9 @@ available in dependency-cruiser configurations.
 1. [`--webpack-config`: use (the resolution options of) a webpack configuration`](#--webpack-config-use-the-resolution-options-of-a-webpack-configuration)
 1. [`--preserve-symlinks`](#--preserve-symlinks)
 
-### [depcruise-fmt](#depcruise-fmt)
+### Standalone formatting of dependency graphs: [depcruise-fmt](#depcruise-fmt)
 
-### [depcruise-wrap-stream-in-html](#depcruise-wrap-stream-in-html)
+### Make GraphViz output more interactive: [depcruise-wrap-stream-in-html](#depcruise-wrap-stream-in-html)
 
 ## Command line only options
 
