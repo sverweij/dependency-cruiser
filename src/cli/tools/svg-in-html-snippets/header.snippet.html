@@ -1,36 +1,40 @@
 <!DOCTYPE html>
 <html lang="en" dir="ltr">
   <head>
-    <meta charset="utf-8">
+    <meta charset="utf-8" />
     <title>dependency graph</title>
     <style>
-      .node:active path, .node:hover path {
-        stroke:fuchsia;
-        stroke-width:2;
+      .node:active path,
+      .node:hover path,
+      .node:active polygon,
+      .node:hover polygon {
+        stroke: fuchsia;
+        stroke-width: 2;
       }
-      /* .node:active text, .node:hover text {
-        fill:fuchsia;
-      } */
-      .edge:active path, .edge:hover path{
-        stroke:fuchsia;
-        stroke-width:3;
-        stroke-opacity:1;
+      .edge:active path,
+      .edge:hover path {
+        stroke: fuchsia;
+        stroke-width: 3;
+        stroke-opacity: 1;
       }
-      .edge:active polygon, .edge:hover polygon  {
-        stroke:fuchsia;
-        stroke-width:3;
-        fill:fuchsia;
-        stroke-opacity:1;
-        fill-opacity:1;
+      .edge:active polygon,
+      .edge:hover polygon {
+        stroke: fuchsia;
+        stroke-width: 3;
+        fill: fuchsia;
+        stroke-opacity: 1;
+        fill-opacity: 1;
       }
-      .edge:active text, .edge:hover text{
-        fill:fuchsia;
+      .edge:active text,
+      .edge:hover text {
+        fill: fuchsia;
       }
       .cluster path {
-         stroke-width:3;
-         fill: white;
+        stroke-width: 3;
+        fill: white;
       }
-      .cluster:active path, .cluster:hover path {
+      .cluster:active path,
+      .cluster:hover path {
         fill: #ffff0011;
       }
     </style>
