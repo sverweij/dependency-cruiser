@@ -1,6 +1,6 @@
 {
   "name": "dependency-cruiser",
-  "version": "7.2.0",
+  "version": "7.3.0-beta-3",
   "description": "Validate and visualize dependencies. With your rules. JavaScript, TypeScript, CoffeeScript. ES6, CommonJS, AMD.",
   "keywords": [
     "static analysis",
@@ -39,7 +39,8 @@
     "dependency-cruiser": "bin/dependency-cruise.js",
     "dependency-cruise": "bin/dependency-cruise.js",
     "depcruise": "bin/dependency-cruise.js",
-    "depcruise-fmt": "bin/depcruise-fmt.js"
+    "depcruise-fmt": "bin/depcruise-fmt.js",
+    "depcruise-wrap-stream-in-html": "bin/wrap-stream-in-html.js"
   },
   "main": "src/main/index.js",
   "types": "types/dependency-cruiser.d.ts",
@@ -66,15 +67,15 @@
     "depcruise:explain": "node ./bin/dependency-cruise.js --output-type err-long --validate -- src bin test configs types utl",
     "depcruise:graph:doc": "npm-run-all depcruise:graph:doc:json depcruise:graph:doc:schema depcruise:graph:doc:types --parallel depcruise:graph:doc:html depcruise:graph:doc:html* depcruise:graph:doc:svg* depcruise:graph:doc:theming:*",
     "depcruise:graph:doc:json": "node ./bin/dependency-cruise.js --validate --include-only '^(src|bin)' --output-type json bin src --output-to tmp_graph_deps.json",
-    "depcruise:graph:doc:html": "./bin/depcruise-fmt.js -T dot -f - tmp_graph_deps.json | dot -T svg | node utl/embed-svg-in-html.utl.js > docs/dependency-cruiser-dependency-graph.html",
-    "depcruise:graph:doc:html-archi": "./bin/depcruise-fmt.js -T archi -f - tmp_graph_deps.json | dot -T svg -Grankdir=TD | node utl/embed-svg-in-html.utl.js > docs/dependency-cruiser-archi-graph.html",
-    "depcruise:graph:doc:html-dir": "./bin/depcruise-fmt.js -T ddot -f - tmp_graph_deps.json | dot -T svg -Grankdir=TD | node utl/embed-svg-in-html.utl.js > docs/dependency-cruiser-dir-graph.html",
+    "depcruise:graph:doc:html": "./bin/depcruise-fmt.js -T dot -f - tmp_graph_deps.json | dot -T svg | node bin/wrap-stream-in-html.js > docs/dependency-cruiser-dependency-graph.html",
+    "depcruise:graph:doc:html-archi": "./bin/depcruise-fmt.js -T archi -f - tmp_graph_deps.json | dot -T svg -Grankdir=TD | node bin/wrap-stream-in-html.js > docs/dependency-cruiser-archi-graph.html",
+    "depcruise:graph:doc:html-dir": "./bin/depcruise-fmt.js -T ddot -f - tmp_graph_deps.json | dot -T svg -Grankdir=TD | node bin/wrap-stream-in-html.js > docs/dependency-cruiser-dir-graph.html",
     "depcruise:graph:doc:svg": "./bin/depcruise-fmt.js -T dot -f - tmp_graph_deps.json | dot -T svg > doc/real-world-samples/dependency-cruiser-without-node_modules.svg",
     "depcruise:graph:doc:svg-archi": "./bin/depcruise-fmt.js -T archi -f - tmp_graph_deps.json | dot -Grankdir=TD -T svg > doc/real-world-samples/dependency-cruiser-archi-graph.svg",
     "depcruise:graph:doc:svg-dir": "./bin/depcruise-fmt.js -T ddot -f - tmp_graph_deps.json | dot -Grankdir=TD -T svg > doc/real-world-samples/dependency-cruiser-dir-graph.svg",
     "depcruise:graph:doc:schema": "npm-run-all depcruise:graph:doc:schema:svg depcruise:graph:doc:schema:html",
     "depcruise:graph:doc:schema:svg": "cd utl/schema && node ../../bin/dependency-cruise.js --validate ../../.dependency-cruiser.json --prefix https://github.com/sverweij/dependency-cruiser/blob/develop/utl/schema/ --output-type dot . | dot -Gsplines=true -T svg > ../overview.svg && cd -",
-    "depcruise:graph:doc:schema:html": "node utl/embed-svg-in-html.utl.js < utl/overview.svg > docs/schema-overview.html",
+    "depcruise:graph:doc:schema:html": "node ./bin/wrap-stream-in-html.js < utl/overview.svg > docs/schema-overview.html",
     "depcruise:graph:doc:theming:bare": " bin/dependency-cruise.js -Tdot -v doc/assets/theming/bare.config.js src/main | dot -Tsvg > doc/assets/theming/bare.svg",
     "depcruise:graph:doc:theming:base": " bin/dependency-cruise.js -Tdot -v doc/assets/theming/base.config.js src/main | dot -Tsvg > doc/assets/theming/base.svg",
     "depcruise:graph:doc:theming:engineering": " bin/dependency-cruise.js -Tdot -v doc/assets/theming/engineering.config.js src/main | dot -Tsvg > doc/assets/theming/engineering.svg",

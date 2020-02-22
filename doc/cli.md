@@ -35,7 +35,9 @@ available in dependency-cruiser configurations.
 1. [`--webpack-config`: use (the resolution options of) a webpack configuration`](#--webpack-config-use-the-resolution-options-of-a-webpack-configuration)
 1. [`--preserve-symlinks`](#--preserve-symlinks)
 
-### [depcruise-fmt](#depcruise-fmt)
+### Standalone formatting of dependency graphs: [depcruise-fmt](#depcruise-fmt)
+
+### Make GraphViz output more interactive: [depcruise-wrap-stream-in-html](#depcruise-wrap-stream-in-html)
 
 ## Command line only options
 
@@ -119,7 +121,7 @@ with _GraphViz dot_ (`-T` is the short form of `--output-type`:)
 dependency-cruise -x "^node_modules" -T dot src | dot -T svg > dependencygraph.svg
 ```
 
-You can customize the look of these graphs. See the 
+You can customize the look of these graphs. See the
 [dot section in the rules reference](./rules-reference.md#dot) for details.
 
 #### ddot - summarize on folder level
@@ -135,8 +137,8 @@ folder level. You can customize it just as you can the dot reporter output.
 > This reporter is _experimental_. It's likely to stay, but the way you configure
 > it or how its output looks might change without major version bumping.
 
-The archi is a variant on the `dot` output. The archi reporter 
-can summarize (or 'collapse') dependencies to folders of your own choosing. 
+The archi is a variant on the `dot` output. The archi reporter
+can summarize (or 'collapse') dependencies to folders of your own choosing.
 Great if you want to have a high level overview of your app's dependencies.
 
 By default it collapses to one folder below folders named _node_modules_, _packages_,
@@ -150,7 +152,6 @@ details.
 <summary>Sample output</summary>
 
 </details>
-
 
 #### err-html
 
@@ -258,7 +259,7 @@ so it's easier to compare than the two json's):
   to replace non-common path elements
   with (`src/search/dragonfly-algorithm.js` -> `src/animal/announce.js`,
   `src/search/dragonfly-algorithm.spec.js` -> `src/animal/announce.spec.js`).
-- (You can use any array of strings here - a good one is Sindre Sorhus' 
+- (You can use any array of strings here - a good one is Sindre Sorhus'
   [mnemonic-words](https://www.npmjs.com/package/mnemonic-words), which
   you can simply require into the option if you're using javascript as
   the config file format):
@@ -590,6 +591,27 @@ Options:
                             (default: "err")
   -h, --help                output usage information
 ```
+
+## depcruise-wrap-stream-in-html
+
+With `depcruise-wrap-stream-in-html` you can wrap the graphical output of
+graphviz dot into html that is geared to make the graph easier to use. It a.o.
+adds highlight-on-hover.
+
+Typical use:
+
+```sh
+depcruise -v -T dot src | dot -T svg | depcruise-wrap-stream-in-html > dependency-graph.html
+```
+
+This works for all dot-based reporters, including `archi` and `ddot`
+
+Some examples:
+
+- [Dependency-cruiser's own dependency graph](https://sverweij.github.io/dependency-cruiser/dependency-cruiser-dependency-graph.html)
+- [yarn v2's high level dependency graph](https://sverweij.github.io/dependency-cruiser/assets/berry-high-level-depencencies.html)
+  (`archi` reporter)
+- [state-machine-cat's dependency graph](https://state-machine-cat.js.org/dependency-cruiser-graph.html)
 
 ## Daphne's dependencies - a gentle introduction
 
