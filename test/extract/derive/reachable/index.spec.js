@@ -1,5 +1,5 @@
 const expect = require("chai").expect;
-const normalize = require("../../../../src/main/ruleSet/normalize");
+const normalize = require("../../../../src/main/rule-set/normalize");
 const addReachability = require("../../../../src/extract/derive/reachable/index");
 
 const gGraph = [

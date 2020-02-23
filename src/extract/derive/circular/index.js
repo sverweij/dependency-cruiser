@@ -1,4 +1,4 @@
-const getCycle = require("./getCycle");
+const getCycle = require("./get-cycle");
 
 function addCircularityCheckToDependency(pToDep, pGraph, pFrom) {
   const lCycle = getCycle(pGraph, pFrom, pToDep.resolved);

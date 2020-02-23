@@ -1,6 +1,6 @@
 const _clone = require("lodash/clone");
 const _get = require("lodash/get");
-const anonymizePath = require("./anonymizePath");
+const anonymizePath = require("./anonymize-path");
 
 function anonymizeCycles(pPathArray, pWordList) {
   return (pPathArray || []).map(pPath => anonymizePath(pPath, pWordList));

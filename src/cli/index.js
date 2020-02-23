@@ -1,13 +1,13 @@
 const glob = require("glob");
 const _get = require("lodash/get");
 const main = require("../main");
-const parseTSConfig = require("./parseTSConfig");
-const getResolveConfig = require("./getResolveConfig");
-const validateFileExistence = require("./utl/validateFileExistence");
-const normalizeOptions = require("./normalizeOptions");
-const initConfig = require("./initConfig");
+const parseTSConfig = require("./parse-ts-config");
+const getResolveConfig = require("./get-resolve-config");
+const validateFileExistence = require("./utl/validate-file-existence");
+const normalizeOptions = require("./normalize-options");
+const initConfig = require("./init-config");
 const io = require("./utl/io");
-const formatMetaInfo = require("./formatMetaInfo");
+const formatMetaInfo = require("./format-meta-info");
 
 function extractResolveOptions(pOptions) {
   let lResolveOptions = {};
@@ -73,8 +73,8 @@ module.exports = (pFileDirArray, pOptions) => {
     } else {
       lExitCode = runCruise(pFileDirArray, pOptions);
     }
-  } catch (e) {
-    process.stderr.write(`\n  ERROR: ${e.message}\n`);
+  } catch (pError) {
+    process.stderr.write(`\n  ERROR: ${pError.message}\n`);
     lExitCode = 1;
   }
   return lExitCode;

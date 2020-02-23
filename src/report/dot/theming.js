@@ -1,5 +1,5 @@
 const _get = require("lodash/get");
-const DEFAULT_THEME = require("./defaultTheme.json");
+const DEFAULT_THEME = require("./default-theme.json");
 
 function matchesRE(pValue, pRE) {
   const lMatchResult = pValue.match && pValue.match(pRE);

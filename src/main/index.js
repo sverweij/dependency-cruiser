@@ -3,12 +3,12 @@ const extract = require("../extract");
 const cruiseResultSchema = require("../schema/cruise-result.schema.json");
 const meta = require("../extract/transpile/meta");
 const report = require("../report");
-const normalizeFilesAndDirs = require("./filesAndDirs/normalize");
-const validateRuleSet = require("./ruleSet/validate");
-const normalizeRuleSet = require("./ruleSet/normalize");
+const normalizeFilesAndDirs = require("./files-and-dirs/normalize");
+const validateRuleSet = require("./rule-set/validate");
+const normalizeRuleSet = require("./rule-set/normalize");
 const validateOptions = require("./options/validate");
 const normalizeOptions = require("./options/normalize");
-const normalizeResolveOptions = require("./resolveOptions/normalize");
+const normalizeResolveOptions = require("./resolve-options/normalize");
 
 // see [api.md](../../doc/api.md) and/ or the
 // [type definition](../../types/depencency-cruiser.d.ts) for details

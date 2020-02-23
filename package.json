@@ -157,6 +157,7 @@
     "eslint-plugin-mocha": "6.3.0",
     "eslint-plugin-node": "11.0.0",
     "eslint-plugin-security": "1.4.0",
+    "eslint-plugin-unicorn": "15.0.1",
     "husky": "3.1.0",
     "intercept-stdout": "0.1.2",
     "lint-staged": "9.5.0",
@@ -187,6 +188,10 @@
       {
         "package": "lint-staged",
         "because": "lint-staged 10 doesn't support node 8 anymore while dependency-cruiser still does."
+      },
+      {
+        "package": "eslint-plugin-unicorn",
+        "because": "eslint-plugin-unicorn 16 doesn't support node 8 anymore while dependency-cruiser still does."
       }
     ]
   },
@@ -200,7 +205,7 @@
       "configs/**/*",
       "test/**/*",
       "src/**/*.template.js",
-      "src/cli/initConfig/getUserInput.js",
+      "src/cli/init-config/get-user-input.js",
       "coverage/**/*",
       "tmp*",
       "utl/**/*",

@@ -1,6 +1,6 @@
 const fs = require("fs");
-const normalizeRuleSet = require("../../src/main/ruleSet/normalize");
-const validateRuleSet = require("../../src/main/ruleSet/validate");
+const normalizeRuleSet = require("../../src/main/rule-set/normalize");
+const validateRuleSet = require("../../src/main/rule-set/validate");
 
 module.exports = pFileName =>
   normalizeRuleSet(

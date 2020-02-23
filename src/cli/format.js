@@ -1,7 +1,7 @@
 const getStream = require("get-stream");
 const main = require("../main");
-const validateFileExistence = require("./utl/validateFileExistence");
-const normalizeOptions = require("./normalizeOptions");
+const validateFileExistence = require("./utl/validate-file-existence");
+const normalizeOptions = require("./normalize-options");
 const io = require("./utl/io");
 
 module.exports = async (pResultFile, pOptions) => {

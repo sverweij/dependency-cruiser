@@ -70,7 +70,7 @@ export interface IReporterOutput {
  *                        API will not take any 'extends' keys there into account, so
  *                        before calling make sure to flatten them out if you want them
  *                        used (the dependency-cruiser cli does this
- *                        [here](../src/cli/parseTSConfig.js))
+ *                        [here](../src/cli/parse-ts-config.js))
  */
 export function cruise(
   pFileDirArray: string[],

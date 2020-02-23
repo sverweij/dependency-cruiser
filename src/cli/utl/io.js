@@ -8,8 +8,8 @@ function writeToFile(pOutputTo, pDependencyString) {
       encoding: "utf8",
       flag: "w"
     });
-  } catch (e) {
-    throw Error(`Writing to '${pOutputTo}' didn't work. ${e}`);
+  } catch (pError) {
+    throw new Error(`Writing to '${pOutputTo}' didn't work. ${pError}`);
   }
 }
 
@@ -32,6 +32,7 @@ function writeToStdOut(pString, pBufferSize) {
 
   /* eslint no-plusplus: 0 */
   for (i = 0; i < lNumberOfChunks; i++) {
+    // eslint-disable-next-line unicorn/prefer-string-slice
     process.stdout.write(pString.substr(i * pBufferSize, pBufferSize), "utf8");
   }
 }

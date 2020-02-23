@@ -1,6 +1,6 @@
 const expect = require("chai").expect;
-const extractAMDDeps = require("../../../src/extract/ast-extractors/extract-AMD-deps");
-const getASTFromSource = require("../../../src/extract/parse/toJavascriptAST")
+const extractAMDDeps = require("../../../src/extract/ast-extractors/extract-amd-deps");
+const getASTFromSource = require("../../../src/extract/parse/to-javascript-ast")
   .getASTFromSource;
 
 const extractAMD = (

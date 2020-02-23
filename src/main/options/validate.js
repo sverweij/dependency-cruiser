@@ -12,7 +12,7 @@ function validateSystems(pModuleSystems) {
         Boolean(pModuleSystem.match(MODULE_SYSTEM_LIST_RE))
       )
     ) {
-      throw Error(
+      throw new Error(
         `Invalid module system list: '${pModuleSystems.join(", ")}'\n`
       );
     }
@@ -21,7 +21,7 @@ function validateSystems(pModuleSystems) {
 
 function validateRegExpSafety(pPattern) {
   if (Boolean(pPattern) && !safeRegex(pPattern)) {
-    throw Error(
+    throw new Error(
       `The pattern '${pPattern}' will probably run very slowly - cowardly refusing to run.\n`
     );
   }
@@ -32,13 +32,13 @@ function validateOutputType(pOutputType) {
     Boolean(pOutputType) &&
     !report.getAvailableReporters().includes(pOutputType)
   ) {
-    throw Error(`'${pOutputType}' is not a valid output type.\n`);
+    throw new Error(`'${pOutputType}' is not a valid output type.\n`);
   }
 }
 
 function validateMaxDepth(pDepth) {
   if (Boolean(pDepth) && !pDepth.toString().match(VALID_DEPTH_RE)) {
-    throw Error(
+    throw new Error(
       `'${pDepth}' is not a valid depth - use an integer between 0 and 99`
     );
   }

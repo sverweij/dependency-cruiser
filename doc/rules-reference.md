@@ -1177,7 +1177,7 @@ The criteria are evaluated top to bottom:
 - Criteria in the configuration file take precedence over the default ones.
 
 For an extensive example you can have a look at the default theme dependency-cruiser
-ships with - [defaultTheme.json](../src/report/dot/defaultTheme.json).
+ships with - [default-theme.json](../src/report/dot/default-theme.json).
 
 ##### Some examples
 

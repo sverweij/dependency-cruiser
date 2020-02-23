@@ -1,4 +1,4 @@
-const isOrphan = require("./isOrphan");
+const isOrphan = require("./is-orphan");
 
 module.exports = pModules =>
   pModules.map(pNode => ({

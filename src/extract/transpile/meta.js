@@ -1,12 +1,12 @@
 const supportedTranspilers = require("../../../package.json")
   .supportedTranspilers;
-const javaScriptWrap = require("./javaScriptWrap");
-const typeScriptWrap = require("./typeScriptWrap")();
-const tsxWrap = require("./typeScriptWrap")(true);
-const liveScriptWrap = require("./liveScriptWrap");
-const coffeeWrap = require("./coffeeWrap")();
-const litCoffeeWrap = require("./coffeeWrap")(true);
-const vueWrap = require("./vueWrap");
+const javaScriptWrap = require("./javascript-wrap");
+const typeScriptWrap = require("./typescript-wrap")();
+const tsxWrap = require("./typescript-wrap")(true);
+const liveScriptWrap = require("./livescript-wrap");
+const coffeeWrap = require("./coffeescript-wrap")();
+const litCoffeeWrap = require("./coffeescript-wrap")(true);
+const vueWrap = require("./vue-template-wrap");
 
 /*
   jsx - acorn_loose will handle this correctly when imports
@@ -16,7 +16,7 @@ const vueWrap = require("./vueWrap");
         edge cases but are either much harder to implement or
         likely to fail in basic use cases.
 
-        See ./jsxImplementationRationale.md for an implementation
+        See ./jsx-implementation-rationale.md for an implementation
         rationale on jsx ...
  */
 const extension2wrapper = {

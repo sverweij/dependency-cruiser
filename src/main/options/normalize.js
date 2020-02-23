@@ -1,7 +1,7 @@
 const defaults = require("./defaults.json");
 
 function uniq(pArray) {
-  return Array.from(new Set(pArray));
+  return [...new Set(pArray)];
 }
 
 function normalizeFilterOption(pFilterOption) {
