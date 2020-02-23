@@ -16,10 +16,19 @@
       "severity": "error",
       "from": {
         "path": "(^src/cli/)",
-        "pathNot": "^(src/cli/compileConfig/index\\.js)$"
+        "pathNot": "^(src/cli/compile-config/index\\.js)$"
       },
       "to": {
         "pathNot": "^src/main/|^node_modules|^fs$|^path$|$1|^package.json$"
+      }
+    },
+    {
+      "name": "cli-to-main-only-warn",
+      "comment": "This cli module depends on something not in the public interface - which means it either doesn't belong in cli, or the main public interface needs to be expanded (this warn-only rule is a temporary exception for the compileConfig depending on the resolver).",
+      "severity": "warn",
+      "from": { "path": "^(src/cli/compile-config/index\\.js)$" },
+      "to": {
+        "pathNot": "$1|^src/(cli|main)|^node_modules|^(fs|path|package.json)$"
       }
     },
     {
@@ -46,15 +55,6 @@
       }
     },
     {
-      "name": "cli-to-main-only-warn",
-      "comment": "This cli module depends on something not in the public interface - which means it either doesn't belong in cli, or the main public interface needs to be expanded (this warn-only rule is a temporary exception for the compileConfig depending on the resolver).",
-      "severity": "warn",
-      "from": { "path": "^(src/cli/compileConfig/index\\.js)$" },
-      "to": {
-        "pathNot": "$1|^src/(cli|main)|^node_modules|^(fs|path|package.json)$"
-      }
-    },
-    {
       "name": "bin-to-cli-only",
       "comment": "This module in the bin/ folder depends on something not in the cli interface. This means it either contains code that doesn't belong in bin/, or the thing it depends upon should be put in the cli interface. ",
       "severity": "error",
@@ -66,7 +66,7 @@
       "comment": "This module depends on a the node 'fs' module, and it resides in a spot where that is not allowed.",
       "severity": "error",
       "from": {
-        "pathNot": "^src/(extract/parse|extract/resolve|extract/gatherInitialSources\\.js|cli)|^test|^utl"
+        "pathNot": "^src/(extract/parse|extract/resolve|extract/gather-initial-sources\\.js|cli)|^test|^utl"
       },
       "to": { "path": "^fs$" }
     },

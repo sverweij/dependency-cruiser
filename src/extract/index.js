@@ -2,15 +2,15 @@ const _get = require("lodash/get");
 const _uniqBy = require("lodash/uniqBy");
 const _spread = require("lodash/spread");
 const _concat = require("lodash/concat");
-const pathToPosix = require("./utl/pathToPosix");
-const extract = require("./extract");
+const pathToPosix = require("./utl/path-to-posix");
+const getDependencies = require("./get-dependencies");
 const deriveCirculars = require("./derive/circular");
 const deriveOrphans = require("./derive/orphan");
 const deriveReachable = require("./derive/reachable");
-const gather = require("./gatherInitialSources");
+const gatherInitialSources = require("./gather-initial-sources");
 const summarize = require("./summarize");
-const addValidations = require("./addValidations");
-const clearCaches = require("./clearCaches");
+const addValidations = require("./add-validations");
+const clearCaches = require("./clear-caches");
 
 const SHAREABLE_OPTIONS = [
   "combinedDependencies",
@@ -44,7 +44,7 @@ function extractRecursive(
   pVisited.add(pFileName);
   const lDependencies =
     pOptions.maxDepth <= 0 || pDepth < pOptions.maxDepth
-      ? extract(pFileName, pOptions, pResolveOptions, pTSConfig)
+      ? getDependencies(pFileName, pOptions, pResolveOptions, pTSConfig)
       : [];
 
   return lDependencies
@@ -83,22 +83,25 @@ function extractFileDirArray(
   let lVisited = new Set();
 
   return _spread(_concat)(
-    gather(pFileDirArray, pOptions).reduce((pDependencies, pFilename) => {
-      if (!lVisited.has(pFilename)) {
-        lVisited.add(pFilename);
-        return pDependencies.concat(
-          extractRecursive(
-            pFilename,
-            pOptions,
-            lVisited,
-            0,
-            pResolveOptions,
-            pTSConfig
-          )
-        );
-      }
-      return pDependencies;
-    }, [])
+    gatherInitialSources(pFileDirArray, pOptions).reduce(
+      (pDependencies, pFilename) => {
+        if (!lVisited.has(pFilename)) {
+          lVisited.add(pFilename);
+          return pDependencies.concat(
+            extractRecursive(
+              pFilename,
+              pOptions,
+              lVisited,
+              0,
+              pResolveOptions,
+              pTSConfig
+            )
+          );
+        }
+        return pDependencies;
+      },
+      []
+    )
   );
 }
 

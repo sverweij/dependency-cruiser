@@ -1,6 +1,6 @@
 const _flattenDeep = require("lodash/flattenDeep");
 const _get = require("lodash/get");
-const findRuleByName = require("../utl/findRuleByName");
+const findRuleByName = require("../utl/find-rule-by-name");
 const compare = require("./utl/compare");
 
 function cutNonTransgressions(pSourceEntry) {

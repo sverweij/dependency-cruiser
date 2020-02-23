@@ -6,7 +6,7 @@ const expect = require("chai").expect;
 const intercept = require("intercept-stdout");
 const cli = require("../../src/cli");
 const asserthelpers = require("./asserthelpers.utl");
-const deleteDammit = require("./deleteDammit.utl");
+const deleteDammit = require("./delete-dammit.utl");
 
 const OUT_DIR = "./test/cli/output";
 const FIX_DIR = "./test/cli/fixtures";
@@ -114,7 +114,7 @@ function resetOutputDir() {
       try {
         fs.unlinkSync(pPair.options.outputTo.replace("{{moduleType}}", "cjs"));
         fs.unlinkSync(pPair.options.outputTo.replace("{{moduleType}}", "amd"));
-      } catch (e) {
+      } catch (pError) {
         // process.stderr.write(typeof e);
       }
     });

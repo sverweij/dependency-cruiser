@@ -1,5 +1,5 @@
 #!/usr/bin/env node
-const validateNodeEnv = require("../src/cli/validateNodeEnv");
+const validateNodeEnv = require("../src/cli/validate-node-env");
 
 function formatError(pError) {
   process.stderr.write(pError.message);
@@ -42,6 +42,6 @@ try {
   } else {
     program.help();
   }
-} catch (e) {
-  formatError(e);
+} catch (pError) {
+  formatError(pError);
 }

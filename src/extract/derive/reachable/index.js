@@ -1,6 +1,6 @@
 const _clone = require("lodash/clone");
 const _get = require("lodash/get");
-const isReachable = require("./isReachable");
+const isReachable = require("./is-reachable");
 
 function getReachableRules(pRuleSet) {
   return _get(pRuleSet, "forbidden", [])

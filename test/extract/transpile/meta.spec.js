@@ -1,7 +1,7 @@
 const expect = require("chai").expect;
 const meta = require("../../../src/extract/transpile/meta");
-const jsWrap = require("../../../src/extract/transpile/javaScriptWrap");
-const lsWrap = require("../../../src/extract/transpile/liveScriptWrap");
+const jsWrap = require("../../../src/extract/transpile/javascript-wrap");
+const lsWrap = require("../../../src/extract/transpile/livescript-wrap");
 
 describe("transpiler meta", () => {
   it("tells which extensions can be scanned", () => {

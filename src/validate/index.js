@@ -1,5 +1,5 @@
-const matchModuleRule = require("./matchModuleRule");
-const matchDependencyRule = require("./matchDependencyRule");
+const matchModuleRule = require("./match-module-rule");
+const matchDependencyRule = require("./match-dependency-rule");
 
 function compareSeverity(pFirst, pSecond) {
   const SEVERITY2INT = {

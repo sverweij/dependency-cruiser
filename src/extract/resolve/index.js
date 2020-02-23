@@ -1,16 +1,16 @@
 const fs = require("fs");
 const path = require("path");
-const pathToPosix = require("../utl/pathToPosix");
-const isRelativeModuleName = require("./isRelativeModuleName");
-const resolveAMD = require("./resolve-AMD");
-const resolveCommonJS = require("./resolve-commonJS");
+const pathToPosix = require("../utl/path-to-posix");
+const isRelativeModuleName = require("./is-relative-module-name");
+const resolveAMD = require("./resolve-amd");
+const resolveCommonJS = require("./resolve-cjs");
 
 function resolveModule(pDependency, pBaseDir, pFileDir, pResolveOptions) {
   let lRetval = null;
 
   if (
     isRelativeModuleName(pDependency.module) ||
-    ["cjs", "es6"].indexOf(pDependency.moduleSystem) > -1
+    ["cjs", "es6"].includes(pDependency.moduleSystem)
   ) {
     lRetval = resolveCommonJS(
       pDependency.module,
@@ -83,7 +83,7 @@ module.exports = (pDependency, pBaseDir, pFileDir, pResolveOptions) => {
           fs.realpathSync(path.resolve(pBaseDir, lResolvedModule.resolved))
         )
       );
-    } catch (e) {
+    } catch (pError) {
       lResolvedModule.couldNotResolve = true;
     }
   }

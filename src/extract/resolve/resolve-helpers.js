@@ -1,4 +1,4 @@
-const localNpmHelpers = require("./localNpmHelpers");
+const localNpmHelpers = require("./local-npm-helpers");
 
 module.exports = {
   addLicenseAttribute(pModuleName, pBaseDir, pResolveOptions) {

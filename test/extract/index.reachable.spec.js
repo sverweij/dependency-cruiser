@@ -2,8 +2,8 @@ const chai = require("chai");
 const extract = require("../../src/extract");
 const cruiseResultSchema = require("../../src/schema/cruise-result.schema.json");
 const normalize = require("../../src/main/options/normalize");
-const normalizeRuleSet = require("../../src/main/ruleSet/normalize");
-const normalizeResolveOptions = require("../../src/main/resolveOptions/normalize");
+const normalizeRuleSet = require("../../src/main/rule-set/normalize");
+const normalizeResolveOptions = require("../../src/main/resolve-options/normalize");
 
 const expect = chai.expect;
 

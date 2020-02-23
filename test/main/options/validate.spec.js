@@ -108,13 +108,13 @@ describe("main/options/validate", () => {
     }).to.not.throw();
   });
 
-  it("passes when --validate is passed a safe regex in ruleSet.exclude", () => {
+  it("passes when --validate is passed a safe regex in rule-set.exclude", () => {
     expect(() => {
       validateOptions({ ruleSet: { options: { exclude: "([A-Za-z]+)" } } });
     }).to.not.throw();
   });
 
-  it("throws when --validate is passed an unsafe regex in ruleSet.exclude", () => {
+  it("throws when --validate is passed an unsafe regex in rule-set.exclude", () => {
     expect(() => {
       validateOptions({ ruleSet: { options: { exclude: "(.*)+" } } });
     }).to.throw(
@@ -122,7 +122,7 @@ describe("main/options/validate", () => {
     );
   });
 
-  it("command line options trump those passed in --validate ruleSet", () => {
+  it("command line options trump those passed in --validate rule-set", () => {
     const lOptions = validateOptions({
       exclude: "from the commandline",
       ruleSet: { options: { exclude: "from the ruleset" } }
@@ -131,7 +131,7 @@ describe("main/options/validate", () => {
     expect(lOptions.exclude).to.equal("from the commandline");
   });
 
-  it("options passed in --validate ruleSet drip down to the proper options", () => {
+  it("options passed in --validate rule-set drip down to the proper options", () => {
     const lOptions = validateOptions({
       doNotFollow: "from the commandline",
       ruleSet: { options: { exclude: "from the ruleset" } }

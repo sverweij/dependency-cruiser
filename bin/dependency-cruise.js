@@ -1,5 +1,5 @@
 #!/usr/bin/env node
-const validateNodeEnv = require("../src/cli/validateNodeEnv");
+const validateNodeEnv = require("../src/cli/validate-node-env");
 
 try {
   validateNodeEnv();
@@ -90,7 +90,7 @@ try {
   } else {
     program.help();
   }
-} catch (e) {
-  process.stderr.write(e.message);
+} catch (pError) {
+  process.stderr.write(pError.message);
   process.exitCode = 1;
 }

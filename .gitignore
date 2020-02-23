@@ -8,6 +8,7 @@
 .project
 .settings/*
 .vscode
+.idea
 
 # metrics results
 .nyc_output

@@ -2,8 +2,8 @@ const Handlebars = require("handlebars/runtime");
 const _get = require("lodash/get");
 const theming = require("./theming");
 const moduleUtl = require("./module-utl");
-const prepareFolderLevel = require("./prepareFolderLevel");
-const prepareCustomLevel = require("./prepareCustomLevel");
+const prepareFolderLevel = require("./prepare-folder-level");
+const prepareCustomLevel = require("./prepare-custom-level");
 
 // eslint-disable-next-line import/no-unassigned-import
 require("./dot.template");
