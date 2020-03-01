@@ -6,7 +6,7 @@ The output format contains two sections:
   the sources they directly depend upon
 - `summary` - a summary with meta information like how many sources got visited,
   how many violations it found, array of the actual violations and the rule set
-  used in the cruise.
+  and other options used in the cruise.
 
 A [json schema](../src/schema/cruise-result.schema.json) describes the output format
 attributes in painstaking detail. The schema is accurate and actual - each build

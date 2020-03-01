@@ -734,7 +734,7 @@ rules a.c.t. normal requires. E.g.
 
 ### `preCompilationOnly`
 
-If you want to set restrictions on only dependencies that exist before
+If you want to set restrictions on dependencies that only exist before
 compilation from typescript to javascript, you can use the `preCompilation`
 only attribute.
 
