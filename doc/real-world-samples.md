@@ -15,11 +15,58 @@ For coloring strings in the terminal. A typical _Sorhus style_ micro module that
 
 <img width="704" alt="chalk" src="real-world-samples/chalk.png">
 
-### Bluebird
+### Yarn 2 ('berry')
 
-[petkaantonov/bluebird](https://github.com/petkaantonov/bluebird) - promise library
+[yarnpkg/berry](https://github.com/yarnpkg/berry) - package manager.
 
-![bluebird](real-world-samples/bluebird.png)
+When your app becomes big, dependency graphs on module level will become
+impractical. Dependency-cruiser can consolidate modules (+ their dependencies)
+and color them. Consolidation works out of the box for many repositories,
+but can be [configured](./rules-reference.md#archi) to your [own liking](./rules-reference.md#reporteroptions).
+
+Here's the resulting get high level dependency graph for berry:
+
+[![berry](real-world-samples/berry-high-level-dependencies.svg)](https://sverweij.github.io/dependency-cruiser/assets/berry-high-level-dependencies.html)
+
+
+<details>
+<summary>howto</summary>
+
+To get the above graph we used [berry-dependency-cruiser-config.js](real-world-samples/berry-dependency-cruiser-config.js). To generate it yourself do this in the root of the berry repo:
+
+- `yarn` (with yarn v2 :-)) 
+- `yarn add -D dependency-cruiser`
+- copy `berry-dependency-cruiser-config.js` to the root of the repo
+- add this script to package.json (so don't use the globally installed depcruise
+  or even the locally installed one - yarn's pnp resolution won't work otherwise:)
+  ```
+  "depcruise:archi": "depcruise --config berry-dependency-cruiser-config.js --output-type archi packages | dot -T svg > berry-high-level-dependencies.svg",
+  ```
+- run `yarn depcruise:archi`
+</details>
+
+
+### react
+
+[facebook/react](https://github.com/facebook/react) - "a JavaScript library for building user interfaces".
+
+Also high level:
+
+[![react](real-world-samples/react-high-level-dependencies.svg)](https://sverweij.github.io/dependency-cruiser/assets/react-high-level-dependencies.html)
+
+<details>
+<summary>howto</summary>
+
+To get the above graph we used [react-dependency-cruiser-config.js](real-world-samples/react-dependency-cruiser-config.js). To generate it yourself do this in the root of the react repo:
+
+- `yarn` 
+- Either use the globally installed dependency cruiser or `yarn add -D dependency-cruiser`
+- copy `react-dependency-cruiser-config.js` to the root of the repo
+- run this:
+  ```
+  depcruise --config react-dependency-cruiser-config.js -T archi packages/*/{*.js,src} | dot -T svg | tee react-high-level-dependencies.svg | depcruise-wrap-stream-in-html > react-high-level-dependencies.html
+  ```
+</details>
 
 ### Safe-regex
 
