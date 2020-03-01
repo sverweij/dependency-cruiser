@@ -14,11 +14,6 @@
 <path fill="#ffffff" stroke="black" stroke-width="2" d="M20,-8C20,-8 970,-8 970,-8 976,-8 982,-14 982,-20 982,-20 982,-345.9 982,-345.9 982,-351.9 976,-357.9 970,-357.9 970,-357.9 20,-357.9 20,-357.9 14,-357.9 8,-351.9 8,-345.9 8,-345.9 8,-20 8,-20 8,-14 14,-8 20,-8"/>
 <text text-anchor="middle" x="495" y="-346.7" font-family="Helvetica,sans-Serif" font-weight="bold" font-size="9.00">src</text>
 </g>
-<g id="clust2" class="cluster">
-<title>cluster_src/cli</title>
-<path fill="#ffffff" stroke="black" stroke-width="2" d="M426,-239.6C426,-239.6 624,-239.6 624,-239.6 630,-239.6 636,-245.6 636,-251.6 636,-251.6 636,-320.9 636,-320.9 636,-326.9 630,-332.9 624,-332.9 624,-332.9 426,-332.9 426,-332.9 420,-332.9 414,-326.9 414,-320.9 414,-320.9 414,-251.6 414,-251.6 414,-245.6 420,-239.6 426,-239.6"/>
-<text text-anchor="middle" x="525" y="-321.7" font-family="Helvetica,sans-Serif" font-weight="bold" font-size="9.00">cli</text>
-</g>
 <g id="clust3" class="cluster">
 <title>cluster_src/extract</title>
 <path fill="#ffffff" stroke="black" stroke-width="2" d="M446,-79C446,-79 962,-79 962,-79 968,-79 974,-85 974,-91 974,-91 974,-219.6 974,-219.6 974,-225.6 968,-231.6 962,-231.6 962,-231.6 446,-231.6 446,-231.6 440,-231.6 434,-225.6 434,-219.6 434,-219.6 434,-91 434,-91 434,-85 440,-79 446,-79"/>
@@ -43,6 +38,11 @@
 <title>cluster_src/report</title>
 <path fill="#ffffff" stroke="black" stroke-width="2" d="M28,-16C28,-16 338,-16 338,-16 344,-16 350,-22 350,-28 350,-28 350,-118.3 350,-118.3 350,-124.3 344,-130.3 338,-130.3 338,-130.3 28,-130.3 28,-130.3 22,-130.3 16,-124.3 16,-118.3 16,-118.3 16,-28 16,-28 16,-22 22,-16 28,-16"/>
 <text text-anchor="middle" x="183" y="-119.1" font-family="Helvetica,sans-Serif" font-weight="bold" font-size="9.00">report</text>
+</g>
+<g id="clust2" class="cluster">
+<title>cluster_src/cli</title>
+<path fill="#ffffff" stroke="black" stroke-width="2" d="M426,-239.6C426,-239.6 624,-239.6 624,-239.6 630,-239.6 636,-245.6 636,-251.6 636,-251.6 636,-320.9 636,-320.9 636,-326.9 630,-332.9 624,-332.9 624,-332.9 426,-332.9 426,-332.9 420,-332.9 414,-326.9 414,-320.9 414,-320.9 414,-251.6 414,-251.6 414,-245.6 420,-239.6 426,-239.6"/>
+<text text-anchor="middle" x="525" y="-321.7" font-family="Helvetica,sans-Serif" font-weight="bold" font-size="9.00">cli</text>
 </g>
 <!-- bin -->
 <g id="node1" class="node">

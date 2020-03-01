@@ -29,15 +29,15 @@
 <path fill="#ffffff" stroke="black" stroke-width="2" d="M220.01,-67C220.01,-67 355.56,-67 355.56,-67 361.56,-67 367.56,-73 367.56,-79 367.56,-79 367.56,-135 367.56,-135 367.56,-141 361.56,-147 355.56,-147 355.56,-147 220.01,-147 220.01,-147 214.01,-147 208.01,-141 208.01,-135 208.01,-135 208.01,-79 208.01,-79 208.01,-73 214.01,-67 220.01,-67"/>
 <text text-anchor="middle" x="287.79" y="-135.8" font-family="Helvetica,sans-Serif" font-weight="bold" font-size="9.00">options</text>
 </g>
-<g id="clust5" class="cluster">
-<title>cluster_src/main/resolve&#45;options</title>
-<path fill="#ffffff" stroke="black" stroke-width="2" d="M114,-107C114,-107 172.01,-107 172.01,-107 178.01,-107 184.01,-113 184.01,-119 184.01,-119 184.01,-146 184.01,-146 184.01,-152 178.01,-158 172.01,-158 172.01,-158 114,-158 114,-158 108,-158 102,-152 102,-146 102,-146 102,-119 102,-119 102,-113 108,-107 114,-107"/>
-<text text-anchor="middle" x="143.01" y="-146.8" font-family="Helvetica,sans-Serif" font-weight="bold" font-size="9.00">resolve&#45;options</text>
-</g>
 <g id="clust6" class="cluster">
 <title>cluster_src/main/rule&#45;set</title>
 <path fill="#ffffff" stroke="black" stroke-width="2" d="M115,-166C115,-166 171.01,-166 171.01,-166 177.01,-166 183.01,-172 183.01,-178 183.01,-178 183.01,-234 183.01,-234 183.01,-240 177.01,-246 171.01,-246 171.01,-246 115,-246 115,-246 109,-246 103,-240 103,-234 103,-234 103,-178 103,-178 103,-172 109,-166 115,-166"/>
 <text text-anchor="middle" x="143.01" y="-234.8" font-family="Helvetica,sans-Serif" font-weight="bold" font-size="9.00">rule&#45;set</text>
+</g>
+<g id="clust5" class="cluster">
+<title>cluster_src/main/resolve&#45;options</title>
+<path fill="#ffffff" stroke="black" stroke-width="2" d="M114,-107C114,-107 172.01,-107 172.01,-107 178.01,-107 184.01,-113 184.01,-119 184.01,-119 184.01,-146 184.01,-146 184.01,-152 178.01,-158 172.01,-158 172.01,-158 114,-158 114,-158 108,-158 102,-152 102,-146 102,-146 102,-119 102,-119 102,-113 108,-107 114,-107"/>
+<text text-anchor="middle" x="143.01" y="-146.8" font-family="Helvetica,sans-Serif" font-weight="bold" font-size="9.00">resolve&#45;options</text>
 </g>
 <!-- src/main/files&#45;and&#45;dirs/normalize.js -->
 <g id="node1" class="node">
