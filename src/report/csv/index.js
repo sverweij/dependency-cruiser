@@ -1,8 +1,24 @@
-const Handlebars = require("handlebars/runtime");
 const dependencyToIncidenceTransformer = require("../utl/dependency-to-incidence-transformer");
 
-// eslint-disable-next-line import/no-unassigned-import
-require("./csv.template");
+function renderHeader(pModules) {
+  return pModules.map(pModule => `"${pModule.source}"`).join(",");
+}
+
+function mapIncidences(pIncidences) {
+  return pIncidences.map(pIncidence => `"${pIncidence.incidence}"`).join(",");
+}
+
+function renderBody(pModules) {
+  return pModules.reduce(
+    (pAll, pModule) =>
+      `${pAll}\n"${pModule.source}",${mapIncidences(pModule.incidences)},""`,
+    ""
+  );
+}
+
+function render(pModules) {
+  return `"",${renderHeader(pModules)},""${renderBody(pModules)}\n`;
+}
 
 /**
  * Returns the results of a cruise in an 'incidence matrix'
@@ -12,8 +28,6 @@ require("./csv.template");
  *                     exitCode: 0
  */
 module.exports = pResults => ({
-  output: Handlebars.templates["csv.template.hbs"]({
-    modules: dependencyToIncidenceTransformer(pResults.modules)
-  }),
+  output: render(dependencyToIncidenceTransformer(pResults.modules)),
   exitCode: 0
 });
