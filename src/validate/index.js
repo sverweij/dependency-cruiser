@@ -45,7 +45,7 @@ function validateAgainstForbiddenRules(pRuleSet, pMatchModule, pFrom, pTo) {
 }
 
 function validateAgainstRules(pRuleSet, pFrom, pTo, pMatchModule) {
-  let lRetval = { valid: true };
+  let lReturnValue = { valid: true };
 
   const lFoundRuleViolations = validateAgainstAllowedRules(
     pRuleSet,
@@ -56,11 +56,11 @@ function validateAgainstRules(pRuleSet, pFrom, pTo, pMatchModule) {
     .concat(validateAgainstForbiddenRules(pRuleSet, pMatchModule, pFrom, pTo))
     .sort(compareSeverity);
 
-  lRetval.valid = lFoundRuleViolations.length === 0;
-  if (!lRetval.valid) {
-    lRetval.rules = lFoundRuleViolations;
+  lReturnValue.valid = lFoundRuleViolations.length === 0;
+  if (!lReturnValue.valid) {
+    lReturnValue.rules = lFoundRuleViolations;
   }
-  return lRetval;
+  return lReturnValue;
 }
 
 /**

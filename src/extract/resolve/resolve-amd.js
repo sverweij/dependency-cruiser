@@ -17,7 +17,12 @@ const fileExists = memoize(pFile => {
   return true;
 });
 
-module.exports = (pModuleName, pBaseDir, pFileDir, pResolveOptions) => {
+module.exports = (
+  pModuleName,
+  pBaseDirectory,
+  pFileDirectory,
+  pResolveOptions
+) => {
   // lookups:
   // - [x] could be relative in the end (implemented)
   // - [ ] require.config kerfuffle (command line, html, file, ...)
@@ -25,9 +30,12 @@ module.exports = (pModuleName, pBaseDir, pFileDir, pResolveOptions) => {
   // - [ ] or https://github.com/jaredhanson/amd-resolve ?
   // - [x] funky plugins (json!wappie, ./screeching-cat!sabertooth) -> fixed in 'extract'
   const lProbablePath = pathToPosix(
-    path.relative(pBaseDir, path.join(pFileDir, `${pModuleName}.js`))
+    path.relative(
+      pBaseDirectory,
+      path.join(pFileDirectory, `${pModuleName}.js`)
+    )
   );
-  let lRetval = {
+  let lReturnValue = {
     resolved: fileExists(lProbablePath) ? lProbablePath : pModuleName,
     coreModule: Boolean(isCore(pModuleName)),
     followable: fileExists(lProbablePath),
@@ -36,15 +44,19 @@ module.exports = (pModuleName, pBaseDir, pFileDir, pResolveOptions) => {
 
   // we might want to use resolve options instead of {} here
   return {
-    ...lRetval,
-    ...resolveHelpers.addLicenseAttribute(pModuleName, pBaseDir, {}),
+    ...lReturnValue,
+    ...resolveHelpers.addLicenseAttribute(pModuleName, pBaseDirectory, {}),
     dependencyTypes: determineDependencyTypes(
-      lRetval,
+      lReturnValue,
       pModuleName,
-      readPackageDeps(pFileDir, pBaseDir, pResolveOptions.combinedDependencies),
-      pFileDir,
+      readPackageDeps(
+        pFileDirectory,
+        pBaseDirectory,
+        pResolveOptions.combinedDependencies
+      ),
+      pFileDirectory,
       pResolveOptions,
-      pBaseDir
+      pBaseDirectory
     )
   };
 };

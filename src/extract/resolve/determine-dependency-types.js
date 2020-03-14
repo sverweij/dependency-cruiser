@@ -10,21 +10,21 @@ const npm2depType = {
   peerDependencies: "npm-peer"
 };
 
-function determineNpmDependencyTypes(pModuleName, pPackageDeps) {
-  let lRetval = ["npm-unknown"];
+function determineNpmDependencyTypes(pModuleName, pPackageDependencies) {
+  let lReturnValue = ["npm-unknown"];
 
-  if (Boolean(pPackageDeps)) {
-    lRetval = Object.keys(pPackageDeps)
+  if (Boolean(pPackageDependencies)) {
+    lReturnValue = Object.keys(pPackageDependencies)
       .filter(
         pKey =>
           pKey.includes("ependencies") &&
-          pPackageDeps[pKey].hasOwnProperty(pModuleName)
+          pPackageDependencies[pKey].hasOwnProperty(pModuleName)
       )
       .map(pKey => npm2depType[pKey] || "npm-no-pkg");
-    lRetval = lRetval.length === 0 ? ["npm-no-pkg"] : lRetval;
+    lReturnValue = lReturnValue.length === 0 ? ["npm-no-pkg"] : lReturnValue;
   }
 
-  return lRetval;
+  return lReturnValue;
 }
 
 /*
@@ -32,26 +32,26 @@ function determineNpmDependencyTypes(pModuleName, pPackageDeps) {
  * an array, and not an object, hence needs different treatment
  */
 function dependencyIsBundled(pModule, pPackageDeps) {
-  let lRetval = false;
+  let lReturnValue = false;
 
   if (Boolean(pPackageDeps)) {
     const lBundledDependencies =
       pPackageDeps.bundledDependencies || pPackageDeps.bundleDependencies;
 
     if (lBundledDependencies) {
-      lRetval = lBundledDependencies.some(pDep => pDep === pModule);
+      lReturnValue = lBundledDependencies.some(pDep => pDep === pModule);
     }
   }
-  return lRetval;
+  return lReturnValue;
 }
 
 function determineNodeModuleDependencyTypes(
   pModuleName,
   pPackageDeps,
-  pFileDir,
+  pFileDirectory,
   pResolveOptions
 ) {
-  let lRetval = determineNpmDependencyTypes(
+  let lReturnValue = determineNpmDependencyTypes(
     localNpmHelpers.getPackageRoot(pModuleName),
     pPackageDeps
   );
@@ -59,16 +59,16 @@ function determineNodeModuleDependencyTypes(
   if (
     localNpmHelpers.dependencyIsDeprecated(
       pModuleName,
-      pFileDir,
+      pFileDirectory,
       pResolveOptions
     )
   ) {
-    lRetval.push("deprecated");
+    lReturnValue.push("deprecated");
   }
   if (dependencyIsBundled(pModuleName, pPackageDeps)) {
-    lRetval.push("npm-bundled");
+    lReturnValue.push("npm-bundled");
   }
-  return lRetval;
+  return lReturnValue;
 }
 
 function isNodeModule(pDependency) {
@@ -79,25 +79,29 @@ function determineModuleDependencyTypes(
   pDependency,
   pModuleName,
   pPackageDeps,
-  pFileDir,
+  pFileDirectory,
   pResolveOptions
 ) {
-  let lRetval = [];
+  let lReturnValue = [];
 
   if (isNodeModule(pDependency)) {
-    lRetval = determineNodeModuleDependencyTypes(
+    lReturnValue = determineNodeModuleDependencyTypes(
       pModuleName,
       pPackageDeps,
-      pFileDir,
+      pFileDirectory,
       pResolveOptions
     );
   } else {
-    lRetval = ["localmodule"];
+    lReturnValue = ["localmodule"];
   }
-  return lRetval;
+  return lReturnValue;
 }
 
-function isModule(pDependency, pModules = ["node_modules"], pBaseDir = ".") {
+function isModule(
+  pDependency,
+  pModules = ["node_modules"],
+  pBaseDirectory = "."
+) {
   return pModules.some(
     // pModules can contain relative paths, but also absolute ones.
     // WebPack treats these differently:
@@ -109,7 +113,9 @@ function isModule(pDependency, pModules = ["node_modules"], pBaseDir = ".") {
     // reference: https://webpack.js.org/configuration/resolve/#resolve-modules
     pModule => {
       if (path.isAbsolute(pModule)) {
-        return path.resolve(pBaseDir, pDependency.resolved).startsWith(pModule);
+        return path
+          .resolve(pBaseDirectory, pDependency.resolved)
+          .startsWith(pModule);
       }
       return pDependency.resolved.includes(pModule);
     }
@@ -148,9 +154,9 @@ function isAliassy(pModuleName, pDependency, pResolveOptions) {
  * @param {any} pDependency the dependency object with all information found hitherto
  * @param {string} pModuleName the module name as found in the source
  * @param {any} pPackageDeps a package.json, in object format
- * @param {string} pFileDir the directory relative to which to resolve (only used for npm deps here)
+ * @param {string} pFileDirectory the directory relative to which to resolve (only used for npm deps here)
  * @param {any} pResolveOptions an enhanced resolve 'resolve' key
- * @param {string} pBaseDir the base directory dependency cruise is run on
+ * @param {string} pBaseDirectory the base directory dependency cruise is run on
  *
  * @return {string[]} an array of dependency types for the dependency
  */
@@ -158,38 +164,38 @@ module.exports = (
   pDependency,
   pModuleName,
   pPackageDeps,
-  pFileDir,
+  pFileDirectory,
   pResolveOptions,
-  pBaseDir
+  pBaseDirectory
 ) => {
-  let lRetval = ["undetermined"];
+  let lReturnValue = ["undetermined"];
 
   pResolveOptions = pResolveOptions || {};
 
   if (pDependency.couldNotResolve) {
-    lRetval = ["unknown"];
+    lReturnValue = ["unknown"];
   } else if (isCore(pModuleName)) {
     // this 'isCore' business seems duplicate (it's already in
     // the passed object as `coreModule`- determined by the resolve-AMD or
     // resolve-commonJS module). I want to deprecate the `coreModule`
     // attribute in favor of this one and determining it here will make
     // live easier in the future
-    lRetval = ["core"];
+    lReturnValue = ["core"];
   } else if (isRelativeModuleName(pModuleName)) {
-    lRetval = ["local"];
-  } else if (isModule(pDependency, pResolveOptions.modules, pBaseDir)) {
-    lRetval = determineModuleDependencyTypes(
+    lReturnValue = ["local"];
+  } else if (isModule(pDependency, pResolveOptions.modules, pBaseDirectory)) {
+    lReturnValue = determineModuleDependencyTypes(
       pDependency,
       pModuleName,
       pPackageDeps,
-      pFileDir,
+      pFileDirectory,
       pResolveOptions
     );
   } else if (isAliassy(pModuleName, pDependency, pResolveOptions)) {
-    lRetval = ["aliased"];
+    lReturnValue = ["aliased"];
   }
 
-  return lRetval;
+  return lReturnValue;
 };
 
 /* eslint security/detect-object-injection: 0*/

@@ -88,7 +88,7 @@ function extractTrippleSlashDirectives(pAST) {
     );
 }
 
-function firstArgIsAString(pASTNode) {
+function firstArgumentIsAString(pASTNode) {
   const lFirstArgument = pASTNode.arguments[0];
 
   return (
@@ -106,7 +106,7 @@ function isRequireCallExpression(pASTNode) {
     pASTNode.expression &&
     typescript.SyntaxKind[pASTNode.expression.originalKeywordKind] ===
       "RequireKeyword" &&
-    firstArgIsAString(pASTNode)
+    firstArgumentIsAString(pASTNode)
   );
 }
 
@@ -115,7 +115,7 @@ function isSingleExoticRequire(pASTNode, pString) {
     typescript.SyntaxKind[pASTNode.kind] === "CallExpression" &&
     pASTNode.expression &&
     pASTNode.expression.text === pString &&
-    firstArgIsAString(pASTNode)
+    firstArgumentIsAString(pASTNode)
   );
 }
 
@@ -133,7 +133,7 @@ function isCompositeExoticRequire(pASTNode, pObjectName, pPropertyName) {
     pASTNode.expression.name &&
     typescript.SyntaxKind[pASTNode.expression.name.kind] === "Identifier" &&
     pASTNode.expression.name.escapedText === pPropertyName &&
-    firstArgIsAString(pASTNode)
+    firstArgumentIsAString(pASTNode)
   );
 }
 
@@ -150,7 +150,7 @@ function isDynamicImportExpression(pASTNode) {
     typescript.SyntaxKind[pASTNode.kind] === "CallExpression" &&
     pASTNode.expression &&
     typescript.SyntaxKind[pASTNode.expression.kind] === "ImportKeyword" &&
-    firstArgIsAString(pASTNode)
+    firstArgumentIsAString(pASTNode)
   );
 }
 

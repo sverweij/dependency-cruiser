@@ -9,15 +9,15 @@ const expect = chai.expect;
 
 chai.use(require("chai-json-schema"));
 
-const gWorkingDir = process.cwd();
+const WORKING_DIRECTORY = process.cwd();
 
 describe("main.cruise - dynamic imports", () => {
   beforeEach("reset current wd", () => {
-    process.chdir(gWorkingDir);
+    process.chdir(WORKING_DIRECTORY);
   });
 
   afterEach("reset current wd", () => {
-    process.chdir(gWorkingDir);
+    process.chdir(WORKING_DIRECTORY);
   });
 
   it("detects dynamic dependencies in es", () => {

@@ -1,17 +1,17 @@
 const localNpmHelpers = require("./local-npm-helpers");
 
 module.exports = {
-  addLicenseAttribute(pModuleName, pBaseDir, pResolveOptions) {
-    let lRetval = {};
+  addLicenseAttribute(pModuleName, pBaseDirectory, pResolveOptions) {
+    let lReturnValue = {};
     const lLicense = localNpmHelpers.getLicense(
       pModuleName,
-      pBaseDir,
+      pBaseDirectory,
       pResolveOptions
     );
 
     if (Boolean(lLicense)) {
-      lRetval.license = lLicense;
+      lReturnValue.license = lLicense;
     }
-    return lRetval;
+    return lReturnValue;
   }
 };

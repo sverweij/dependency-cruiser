@@ -5,7 +5,7 @@ GENERATED_SOURCES=src/cli/init-config/config.js.template.js \
 	src/report/csv/csv.template.js \
 	src/report/dot/dot.template.js \
 	src/report/html/html.template.js \
-	src/report/err-html/err-html.template.js \
+	src/report/error-html/error-html.template.js \
 	src/schema/configuration.schema.json \
 	src/schema/cruise-result.schema.json
 

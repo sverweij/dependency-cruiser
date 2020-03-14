@@ -2,14 +2,14 @@
 const curryRight = require("lodash/curryRight");
 const expect = require("chai").expect;
 const chalk = require("chalk");
-const render = curryRight(require("../../../src/report/err"))({ long: true });
+const render = curryRight(require("../../../src/report/error"))({ long: true });
 const okdeps = require("./mocks/everything-fine.json");
 const deps = require("./mocks/cjs-no-dependency-valid.json");
 const warndeps = require("./mocks/err-only-warnings.json");
 const erradds = require("./mocks/err-with-additional-information.json");
 const orphanerrs = require("./mocks/orphan-deps.json");
 
-describe("report/err-long", () => {
+describe("report/error-long", () => {
   let chalkLevel = chalk.level;
 
   before("disable chalk coloring", () => {

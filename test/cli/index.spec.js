@@ -107,7 +107,7 @@ const testPairs = [
   }
 ];
 
-function resetOutputDir() {
+function resetOutputDirectory() {
   testPairs
     .filter(pPair => pPair.cleanup)
     .forEach(pPair => {
@@ -130,7 +130,7 @@ function resetOutputDir() {
 
 function setModuleType(pTestPairs, pModuleType) {
   return pTestPairs.map(pTestPair => {
-    let lRetval = {
+    let lReturnValue = {
       description: pTestPair.description.replace(
         /{{moduleType}}/g,
         pModuleType
@@ -141,19 +141,19 @@ function setModuleType(pTestPairs, pModuleType) {
       cleanup: pTestPair.cleanup
     };
 
-    lRetval.options = Object.assign({}, pTestPair.options);
-    lRetval.options.outputTo = pTestPair.options.outputTo.replace(
+    lReturnValue.options = Object.assign({}, pTestPair.options);
+    lReturnValue.options.outputTo = pTestPair.options.outputTo.replace(
       /{{moduleType}}/g,
       pModuleType
     );
     if (Boolean(pTestPair.options.moduleSystems)) {
-      lRetval.options.moduleSystems = pTestPair.options.moduleSystems.replace(
+      lReturnValue.options.moduleSystems = pTestPair.options.moduleSystems.replace(
         /{{moduleType}}/g,
         pModuleType
       );
     }
 
-    return lRetval;
+    return lReturnValue;
   });
 }
 
@@ -180,11 +180,11 @@ function runFileBasedTests(pModuleType) {
 /* eslint mocha/no-hooks-for-single-case: off */
 describe("cli/index", () => {
   before("set up", () => {
-    resetOutputDir();
+    resetOutputDirectory();
   });
 
   after("tear down", () => {
-    resetOutputDir();
+    resetOutputDirectory();
   });
 
   describe("specials", () => {
@@ -210,7 +210,7 @@ describe("cli/index", () => {
       );
     });
 
-    it("returns 0 even if there's transgressions when outputType !== 'err' ", () => {
+    it("returns 0 even if there's transgressions when outputType !== 'error' ", () => {
       const lOutputFileName = "transgression-count.json";
       const lOutputTo = path.join(OUT_DIR, lOutputFileName);
       const lExitCode = cli(["test/cli/fixtures/cjs"], {
@@ -223,7 +223,7 @@ describe("cli/index", () => {
       expect(lExitCode).to.equal(lExpectedTransgressions);
     });
 
-    it("returns the number of transgressions if outputType === 'err' ", () => {
+    it("returns the number of transgressions if outputType === 'error' ", () => {
       const lOutputFileName = "transgression-count.json";
       const lOutputTo = path.join(OUT_DIR, lOutputFileName);
       const lExitCode = cli(["test/cli/fixtures/cjs"], {
@@ -256,7 +256,7 @@ describe("cli/index", () => {
       const unhookInterceptStdOut = intercept(() => {
         // This space intentionally left empty
       });
-      const unhookInterceptStdErr = intercept(pText => {
+      const unhookInterceptStdError = intercept(pText => {
         lCapturedStderr += pText;
       });
       const lExitCode = cli(["this-doesnot-exist"], {
@@ -264,7 +264,7 @@ describe("cli/index", () => {
       });
 
       unhookInterceptStdOut();
-      unhookInterceptStdErr();
+      unhookInterceptStdError();
 
       expect(lExitCode).to.equal(1);
       return expect(lCapturedStderr).to.contain(
@@ -277,7 +277,7 @@ describe("cli/index", () => {
       const unhookInterceptStdOut = intercept(() => {
         // This space intentionally left empty
       });
-      const unhookInterceptStdErr = intercept(pText => {
+      const unhookInterceptStdError = intercept(pText => {
         lCapturedStderr += pText;
       });
       const lExitCode = cli(["test/cli/fixtures"], {
@@ -285,7 +285,7 @@ describe("cli/index", () => {
       });
 
       unhookInterceptStdOut();
-      unhookInterceptStdErr();
+      unhookInterceptStdError();
       intercept(pText => {
         lCapturedStderr += pText;
       })();
@@ -301,13 +301,13 @@ describe("cli/index", () => {
       const unhookInterceptStdOut = intercept(() => {
         // This space intentionally left empty
       });
-      const unhookInterceptStdErr = intercept(pText => {
+      const unhookInterceptStdError = intercept(pText => {
         lCapturedStderr += pText;
       });
       const lExitCode = cli(["test/cli/fixtures"]);
 
       unhookInterceptStdOut();
-      unhookInterceptStdErr();
+      unhookInterceptStdError();
       intercept(pText => {
         lCapturedStderr += pText;
       })();
@@ -324,7 +324,7 @@ describe("cli/index", () => {
       const unhookInterceptStdOut = intercept(pText => {
         lCapturedStdout += pText;
       });
-      const unhookInterceptStdErr = intercept(() => {
+      const unhookInterceptStdError = intercept(() => {
         // This space intentionally left empty
       });
 
@@ -334,7 +334,7 @@ describe("cli/index", () => {
       });
 
       unhookInterceptStdOut();
-      unhookInterceptStdErr();
+      unhookInterceptStdError();
       intercept(pText => {
         lCapturedStdout += pText;
       })();

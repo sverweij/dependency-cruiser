@@ -29,22 +29,22 @@ function writeTheThing(pFileName, pConfig) {
 }
 
 function normalizeInitOptions(pInitOptions) {
-  let lRetval = {
+  let lReturnValue = {
     version: $package.version,
     date: new Date().toJSON(),
     configType: "self-contained",
     ...pInitOptions
   };
 
-  if (lRetval.configType === "preset" && !lRetval.preset) {
-    lRetval.preset = "dependency-cruiser/configs/recommended-warn-only";
+  if (lReturnValue.configType === "preset" && !lReturnValue.preset) {
+    lReturnValue.preset = "dependency-cruiser/configs/recommended-warn-only";
   }
 
-  if (lRetval.useYarnPnP) {
-    lRetval.externalModuleResolutionStrategy = "yarn-pnp";
+  if (lReturnValue.useYarnPnP) {
+    lReturnValue.externalModuleResolutionStrategy = "yarn-pnp";
   }
 
-  return lRetval;
+  return lReturnValue;
 }
 
 /**

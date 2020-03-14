@@ -5,28 +5,33 @@ const isRelativeModuleName = require("./is-relative-module-name");
 const resolveAMD = require("./resolve-amd");
 const resolveCommonJS = require("./resolve-cjs");
 
-function resolveModule(pDependency, pBaseDir, pFileDir, pResolveOptions) {
-  let lRetval = null;
+function resolveModule(
+  pDependency,
+  pBaseDirectory,
+  pFileDirectory,
+  pResolveOptions
+) {
+  let lReturnValue = null;
 
   if (
     isRelativeModuleName(pDependency.module) ||
     ["cjs", "es6"].includes(pDependency.moduleSystem)
   ) {
-    lRetval = resolveCommonJS(
+    lReturnValue = resolveCommonJS(
       pDependency.module,
-      pBaseDir,
-      pFileDir,
+      pBaseDirectory,
+      pFileDirectory,
       pResolveOptions
     );
   } else {
-    lRetval = resolveAMD(
+    lReturnValue = resolveAMD(
       pDependency.module,
-      pBaseDir,
-      pFileDir,
+      pBaseDirectory,
+      pFileDirectory,
       pResolveOptions
     );
   }
-  return lRetval;
+  return lReturnValue;
 }
 
 /**
@@ -34,9 +39,9 @@ function resolveModule(pDependency, pBaseDir, pFileDir, pResolveOptions) {
  *
  * @param  {object} pDependency an object with a module and the moduleSystem
  *                              according to which this is a dependency
- * @param  {string} pBaseDir    the directory to consider as base (or 'root')
+ * @param  {string} pBaseDirectory    the directory to consider as base (or 'root')
  *                              for resolved files.
- * @param  {string} pFileDir    the directory of the file the dependency was
+ * @param  {string} pFileDirectory    the directory of the file the dependency was
  *                              detected in
  * @param  {object} pResolveOptions an object with options to pass to the resolver
  *                              see https://github.com/webpack/enhanced-resolve#resolver-options
@@ -63,11 +68,16 @@ function resolveModule(pDependency, pBaseDir, pFileDir, pResolveOptions) {
  *                              - dependencyTypes: an array of dependencyTypes
  *
  */
-module.exports = (pDependency, pBaseDir, pFileDir, pResolveOptions) => {
+module.exports = (
+  pDependency,
+  pBaseDirectory,
+  pFileDirectory,
+  pResolveOptions
+) => {
   let lResolvedModule = resolveModule(
     pDependency,
-    pBaseDir,
-    pFileDir,
+    pBaseDirectory,
+    pFileDirectory,
     pResolveOptions
   );
 
@@ -79,8 +89,10 @@ module.exports = (pDependency, pBaseDir, pFileDir, pResolveOptions) => {
     try {
       lResolvedModule.resolved = pathToPosix(
         path.relative(
-          pBaseDir,
-          fs.realpathSync(path.resolve(pBaseDir, lResolvedModule.resolved))
+          pBaseDirectory,
+          fs.realpathSync(
+            path.resolve(pBaseDirectory, lResolvedModule.resolved)
+          )
         )
       );
     } catch (pError) {

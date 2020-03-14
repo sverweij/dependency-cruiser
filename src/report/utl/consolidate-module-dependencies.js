@@ -34,16 +34,18 @@ function mergeDependencies(pResolvedName, pDependencies) {
 
 function consolidateDependencies(pDependencies) {
   let lDependencies = _clone(pDependencies);
-  let lRetval = [];
+  let lReturnValue = [];
 
   while (lDependencies.length > 0) {
-    lRetval.push(mergeDependencies(lDependencies[0].resolved, lDependencies));
+    lReturnValue.push(
+      mergeDependencies(lDependencies[0].resolved, lDependencies)
+    );
     lDependencies = _reject(lDependencies, {
       resolved: lDependencies[0].resolved
     });
   }
 
-  return lRetval;
+  return lReturnValue;
 }
 
 module.exports = pModule => ({

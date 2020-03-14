@@ -11,7 +11,7 @@ const _memoize = require("lodash/memoize");
  * @returns {boolean} - the result
  */
 function isReachable(pGraph, pFrom, pTo, pVisited = new Set()) {
-  let lRetval = false;
+  let lReturnValue = false;
   const lNode = pGraph.find(pNode => pNode.source === pFrom);
 
   pVisited.add(pFrom);
@@ -27,15 +27,15 @@ function isReachable(pGraph, pFrom, pTo, pVisited = new Set()) {
         pDirectDependency => pDirectDependency === pTo
       )
     ) {
-      lRetval = true;
+      lReturnValue = true;
     } else {
-      lRetval = lDirectUnvisitedDependencies.some(pDirectDependency =>
+      lReturnValue = lDirectUnvisitedDependencies.some(pDirectDependency =>
         // eslint-disable-next-line no-use-before-define
         isReachableMemoized(pGraph, pDirectDependency, pTo, pVisited)
       );
     }
   }
-  return lRetval;
+  return lReturnValue;
 }
 
 const isReachableMemoized = _memoize(

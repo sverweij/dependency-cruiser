@@ -8,12 +8,12 @@ const defaults = require("./defaults.json");
 
 function getOptionValue(pDefault) {
   return pValue => {
-    let lRetval = pDefault;
+    let lReturnValue = pDefault;
 
     if (typeof pValue === "string") {
-      lRetval = pValue;
+      lReturnValue = pValue;
     }
-    return lRetval;
+    return lReturnValue;
   };
 }
 
@@ -55,40 +55,40 @@ function fileExists(pFileName) {
 }
 
 function validateAndGetCustomRulesFileName(pValidate) {
-  let lRetval = "";
+  let lReturnValue = "";
 
   if (fileExists(pValidate)) {
-    lRetval = pValidate;
+    lReturnValue = pValidate;
   } else {
     throw new Error(
       `Can't open '${pValidate}' for reading. Does it exist?` +
         ` (You can create a dependency-cruiser configuration file with depcruise --init .)\n`
     );
   }
-  return lRetval;
+  return lReturnValue;
 }
 
 function validateAndGetDefaultRulesFileName() {
-  let lRetval = defaults.RULES_FILE_NAME_SEARCH_ARRAY.find(fileExists);
+  let lReturnValue = defaults.RULES_FILE_NAME_SEARCH_ARRAY.find(fileExists);
 
-  if (typeof lRetval === "undefined") {
-    throw new Error(
+  if (typeof lReturnValue === "undefined") {
+    throw new TypeError(
       `Can't open '${defaults.RULES_FILE_NAME}' for reading. Does it exist?\n`
     );
   }
-  return lRetval;
+  return lReturnValue;
 }
 
 function validateAndNormalizeRulesFileName(pValidate) {
-  let lRetval = "";
+  let lReturnValue = "";
 
   if (typeof pValidate === "string") {
-    lRetval = validateAndGetCustomRulesFileName(pValidate);
+    lReturnValue = validateAndGetCustomRulesFileName(pValidate);
   } else {
-    lRetval = validateAndGetDefaultRulesFileName();
+    lReturnValue = validateAndGetDefaultRulesFileName();
   }
 
-  return lRetval;
+  return lReturnValue;
 }
 
 /**

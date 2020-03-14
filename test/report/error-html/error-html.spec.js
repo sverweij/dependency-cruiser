@@ -1,14 +1,15 @@
+// eslint-disable-next-line unicorn/prevent-abbreviations
 const expect = require("chai").expect;
-const errHTML = require("../../../src/report/err-html");
+const errorHTML = require("../../../src/report/error-html");
 const everythingFineResult = require("./mocks/everything-fine.json");
 const validationMoreThanOnce = require("./mocks/violation-more-than-once.json");
 
-describe("report/err-html", () => {
+describe("report/error-html", () => {
   const lOkeliDokelyKey = "gummy bears";
   const lOkeliDokelyHeader = "No violations found";
 
   it("happy day no errors", () => {
-    const lResult = errHTML(everythingFineResult);
+    const lResult = errorHTML(everythingFineResult);
 
     expect(lResult.output).to.contain(lOkeliDokelyKey);
     expect(lResult.output).to.contain(lOkeliDokelyHeader);
@@ -16,7 +17,7 @@ describe("report/err-html", () => {
   });
 
   it("report with errors", () => {
-    const lReport = errHTML(validationMoreThanOnce);
+    const lReport = errorHTML(validationMoreThanOnce);
 
     expect(lReport.output).to.not.contain(lOkeliDokelyKey);
     expect(lReport.output).to.not.contain(lOkeliDokelyHeader);

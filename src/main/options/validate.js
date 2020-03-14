@@ -54,7 +54,7 @@ function validatePathsSafety(pFilterOption) {
 }
 
 function validate(pOptions) {
-  let lRetval = {};
+  let lReturnValue = {};
 
   if (Boolean(pOptions)) {
     // neccessary because can slip through the cracks when passed as a cli parameter
@@ -72,11 +72,11 @@ function validate(pOptions) {
     validateMaxDepth(pOptions.maxDepth);
 
     if (_get(pOptions, "ruleSet.options")) {
-      lRetval = validate(pOptions.ruleSet.options);
+      lReturnValue = validate(pOptions.ruleSet.options);
     }
-    return { ...lRetval, ...pOptions };
+    return { ...lReturnValue, ...pOptions };
   }
-  return lRetval;
+  return lReturnValue;
 }
 
 module.exports = validate;

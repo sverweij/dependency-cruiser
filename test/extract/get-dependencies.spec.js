@@ -42,13 +42,13 @@ function runFixture(pFixture) {
 }
 
 /* eslint-disable mocha/no-top-level-hooks */
-before(cb => {
+before(pCallback => {
   symlinkDir(
     path.join(__dirname, "fixtures", "symlinkTarget"),
     symlinkDirectory
   ).then(
-    () => cb(),
-    err => cb(err)
+    () => pCallback(),
+    pError => pCallback(pError)
   );
 });
 

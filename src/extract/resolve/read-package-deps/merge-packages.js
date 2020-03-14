@@ -3,13 +3,13 @@ const _get = require("lodash/get");
 const _clone = require("lodash/clone");
 
 function normalizePackageKeys(pPackage) {
-  let lRetval = pPackage;
+  let lReturnValue = pPackage;
 
   if (pPackage.bundleDependencies) {
     pPackage.bundledDependencies = _clone(pPackage.bundleDependencies);
     Reflect.deleteProperty(pPackage, "bundleDependencies");
   }
-  return lRetval;
+  return lReturnValue;
 }
 
 function mergeDependencyKey(pClosestDependencyKey, pFurtherDependencyKey) {

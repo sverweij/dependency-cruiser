@@ -26,22 +26,24 @@ function determineAttributes(pModuleOrDependency, pAttributeCriteria) {
 }
 
 function normalizeTheme(pTheme) {
-  let lRetval = DEFAULT_THEME;
+  let lReturnValue = DEFAULT_THEME;
 
   if (pTheme) {
     if (pTheme.replace) {
-      lRetval = pTheme;
+      lReturnValue = pTheme;
     } else {
-      lRetval.graph = { ...DEFAULT_THEME.graph, ...pTheme.graph };
-      lRetval.node = { ...DEFAULT_THEME.node, ...pTheme.node };
-      lRetval.edge = { ...DEFAULT_THEME.edge, ...pTheme.edge };
-      lRetval.modules = (pTheme.modules || []).concat(DEFAULT_THEME.modules);
-      lRetval.dependencies = (pTheme.dependencies || []).concat(
+      lReturnValue.graph = { ...DEFAULT_THEME.graph, ...pTheme.graph };
+      lReturnValue.node = { ...DEFAULT_THEME.node, ...pTheme.node };
+      lReturnValue.edge = { ...DEFAULT_THEME.edge, ...pTheme.edge };
+      lReturnValue.modules = (pTheme.modules || []).concat(
+        DEFAULT_THEME.modules
+      );
+      lReturnValue.dependencies = (pTheme.dependencies || []).concat(
         DEFAULT_THEME.dependencies
       );
     }
   }
-  return lRetval;
+  return lReturnValue;
 }
 
 module.exports = {

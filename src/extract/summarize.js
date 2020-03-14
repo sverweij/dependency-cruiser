@@ -49,7 +49,7 @@ function extractDependencyViolations(pModules, pRuleSet) {
       .map(pModule =>
         pModule.dependencies.map(pDep =>
           pDep.rules.map(pRule => {
-            let lRetval = {
+            let lReturnValue = {
               from: pModule.source,
               to: pDep.resolved,
               rule: pRule
@@ -59,13 +59,13 @@ function extractDependencyViolations(pModules, pRuleSet) {
               pDep.cycle &&
               _get(findRuleByName(pRuleSet, pRule.name), "to.circular")
             ) {
-              lRetval = {
-                ...lRetval,
+              lReturnValue = {
+                ...lReturnValue,
                 cycle: pDep.cycle
               };
             }
 
-            return lRetval;
+            return lReturnValue;
           })
         )
       )

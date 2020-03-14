@@ -8,7 +8,7 @@ const {
 } = require("./utl");
 
 // eslint-disable-next-line import/no-unassigned-import
-require("./err-html.template");
+require("./error-html.template");
 
 function aggregateViolations(pViolations, pRuleSetUsed) {
   const lViolationCounts = pViolations.reduce((pAll, pCurrentViolation) => {
@@ -31,7 +31,7 @@ function aggregateViolations(pViolations, pRuleSetUsed) {
 }
 
 function report(pResults) {
-  return Handlebars.templates["err-html.template.hbs"]({
+  return Handlebars.templates["error-html.template.hbs"]({
     summary: {
       ...formatSummaryForReport(pResults.summary),
       agggregateViolations: aggregateViolations(
