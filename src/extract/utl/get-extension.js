@@ -11,10 +11,10 @@ const path = require("path");
  * @return {string}          extension
  */
 module.exports = pFileName => {
-  let lRetval = path.extname(pFileName);
+  let lReturnValue = path.extname(pFileName);
 
-  if (lRetval === ".md") {
-    return pFileName.endsWith(".coffee.md") ? ".coffee.md" : lRetval;
+  if (lReturnValue === ".md") {
+    return pFileName.endsWith(".coffee.md") ? ".coffee.md" : lReturnValue;
   }
-  return lRetval;
+  return lReturnValue;
 };

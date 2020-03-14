@@ -5,23 +5,26 @@ const readConfig = require("./read-config");
 const mergeConfigs = require("./merge-configs");
 
 /* eslint no-use-before-define: 0 */
-function processExtends(pRetval, pAlreadyVisited, pBaseDir) {
-  if (typeof pRetval.extends === "string") {
-    pRetval = mergeConfigs(
-      pRetval,
-      compileConfig(pRetval.extends, pAlreadyVisited, pBaseDir)
+function processExtends(pReturnValue, pAlreadyVisited, pBaseDirectory) {
+  if (typeof pReturnValue.extends === "string") {
+    pReturnValue = mergeConfigs(
+      pReturnValue,
+      compileConfig(pReturnValue.extends, pAlreadyVisited, pBaseDirectory)
     );
   }
 
-  if (Array.isArray(pRetval.extends)) {
-    pRetval = pRetval.extends.reduce(
+  if (Array.isArray(pReturnValue.extends)) {
+    pReturnValue = pReturnValue.extends.reduce(
       (pAll, pExtends) =>
-        mergeConfigs(pAll, compileConfig(pExtends, pAlreadyVisited, pBaseDir)),
-      pRetval
+        mergeConfigs(
+          pAll,
+          compileConfig(pExtends, pAlreadyVisited, pBaseDirectory)
+        ),
+      pReturnValue
     );
   }
-  Reflect.deleteProperty(pRetval, "extends");
-  return pRetval;
+  Reflect.deleteProperty(pReturnValue, "extends");
+  return pReturnValue;
 }
 
 function getRunningProcessResolutionStrategy() {
@@ -37,11 +40,11 @@ function getRunningProcessResolutionStrategy() {
 function compileConfig(
   pConfigFileName,
   pAlreadyVisited = new Set(),
-  pBaseDir = process.cwd()
+  pBaseDirectory = process.cwd()
 ) {
   const lResolvedFileName = resolve(
     pConfigFileName,
-    pBaseDir,
+    pBaseDirectory,
     normalizeResolveOptions(
       {
         extensions: [".js", ".json"]
@@ -52,7 +55,7 @@ function compileConfig(
     ),
     "cli"
   );
-  const lBaseDir = path.dirname(lResolvedFileName);
+  const lBaseDirectory = path.dirname(lResolvedFileName);
 
   if (pAlreadyVisited.has(lResolvedFileName)) {
     throw new Error(
@@ -63,13 +66,17 @@ function compileConfig(
   }
   pAlreadyVisited.add(lResolvedFileName);
 
-  let lRetval = readConfig(lResolvedFileName, pBaseDir);
+  let lReturnValue = readConfig(lResolvedFileName, pBaseDirectory);
 
-  if (lRetval.hasOwnProperty("extends")) {
-    lRetval = processExtends(lRetval, pAlreadyVisited, lBaseDir);
+  if (lReturnValue.hasOwnProperty("extends")) {
+    lReturnValue = processExtends(
+      lReturnValue,
+      pAlreadyVisited,
+      lBaseDirectory
+    );
   }
 
-  return lRetval;
+  return lReturnValue;
 }
 
 module.exports = compileConfig;

@@ -11,17 +11,22 @@ function matchesPattern(pFullPathToFile, pPattern) {
   return RegExp(pPattern, "g").test(pFullPathToFile);
 }
 
-function gatherScannableFilesFromDir(pDirName, pOptions) {
+function gatherScannableFilesFromDirectory(pDirectoryName, pOptions) {
   return fs
-    .readdirSync(pDirName)
+    .readdirSync(pDirectoryName)
     .reduce((pSum, pFileName) => {
-      if (fs.statSync(path.join(pDirName, pFileName)).isDirectory()) {
+      if (fs.statSync(path.join(pDirectoryName, pFileName)).isDirectory()) {
         return pSum.concat(
-          gatherScannableFilesFromDir(path.join(pDirName, pFileName), pOptions)
+          gatherScannableFilesFromDirectory(
+            path.join(pDirectoryName, pFileName),
+            pOptions
+          )
         );
       }
-      if (SUPPORTED_EXTENSIONS.some(pExt => pFileName.endsWith(pExt))) {
-        return pSum.concat(path.join(pDirName, pFileName));
+      if (
+        SUPPORTED_EXTENSIONS.some(pExtension => pFileName.endsWith(pExtension))
+      ) {
+        return pSum.concat(path.join(pDirectoryName, pFileName));
       }
       return pSum;
     }, [])
@@ -47,7 +52,7 @@ function gatherScannableFilesFromDir(pDirName, pOptions) {
  * Files and directories are assumed to be either absolute, or relative to the
  * current working directory.
  *
- * @param  {array} pFileDirArray an array of strings, representing globs and/ or
+ * @param  {array} pFileAndDirectoryArray an array of strings, representing globs and/ or
  *                               paths to files or directories to be gathered
  * @param  {object} pOptions     (optional) object with attributes
  *                               - exclude - regexp of what to exclude
@@ -55,17 +60,17 @@ function gatherScannableFilesFromDir(pDirName, pOptions) {
  * @return {array}               an array of strings, representing paths to
  *                               files to be gathered.
  */
-module.exports = (pFileDirArray, pOptions) => {
+module.exports = (pFileAndDirectoryArray, pOptions) => {
   const lOptions = { baseDir: process.cwd(), ...pOptions };
 
-  return pFileDirArray
+  return pFileAndDirectoryArray
     .reduce(
       (pAll, pThis) => pAll.concat(glob.sync(pThis, { cwd: lOptions.baseDir })),
       []
     )
     .reduce((pAll, pThis) => {
       if (fs.statSync(path.join(lOptions.baseDir, pThis)).isDirectory()) {
-        return pAll.concat(gatherScannableFilesFromDir(pThis, lOptions));
+        return pAll.concat(gatherScannableFilesFromDirectory(pThis, lOptions));
       } else {
         return pAll.concat(pThis);
       }

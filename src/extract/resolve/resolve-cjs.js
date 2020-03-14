@@ -8,55 +8,75 @@ const resolve = require("./resolve");
 const isFollowable = require("./is-followable");
 
 function addResolutionAttributes(
-  pBaseDir,
+  pBaseDirectory,
   pModuleName,
-  pFileDir,
+  pFileDirectory,
   pResolveOptions
 ) {
-  let lRetval = {};
+  let lReturnValue = {};
 
   if (isCore(pModuleName)) {
-    lRetval.coreModule = true;
+    lReturnValue.coreModule = true;
   } else {
     try {
-      lRetval.resolved = pathToPosix(
-        path.relative(pBaseDir, resolve(pModuleName, pFileDir, pResolveOptions))
+      lReturnValue.resolved = pathToPosix(
+        path.relative(
+          pBaseDirectory,
+          resolve(pModuleName, pFileDirectory, pResolveOptions)
+        )
       );
-      lRetval.followable = isFollowable(lRetval.resolved, pResolveOptions);
+      lReturnValue.followable = isFollowable(
+        lReturnValue.resolved,
+        pResolveOptions
+      );
     } catch (pError) {
-      lRetval.couldNotResolve = true;
+      lReturnValue.couldNotResolve = true;
     }
   }
-  return lRetval;
+  return lReturnValue;
 }
 
 /*
  * resolves both CommonJS and ES6
  */
-module.exports = (pModuleName, pBaseDir, pFileDir, pResolveOptions) => {
-  let lRetval = {
+module.exports = (
+  pModuleName,
+  pBaseDirectory,
+  pFileDirectory,
+  pResolveOptions
+) => {
+  let lReturnValue = {
     resolved: pModuleName,
     coreModule: false,
     followable: false,
     couldNotResolve: false,
     dependencyTypes: ["undetermined"],
-    ...addResolutionAttributes(pBaseDir, pModuleName, pFileDir, pResolveOptions)
+    ...addResolutionAttributes(
+      pBaseDirectory,
+      pModuleName,
+      pFileDirectory,
+      pResolveOptions
+    )
   };
 
   return {
-    ...lRetval,
+    ...lReturnValue,
     ...resolveHelpers.addLicenseAttribute(
       pModuleName,
-      pBaseDir,
+      pBaseDirectory,
       pResolveOptions
     ),
     dependencyTypes: determineDependencyTypes(
-      lRetval,
+      lReturnValue,
       pModuleName,
-      readPackageDeps(pFileDir, pBaseDir, pResolveOptions.combinedDependencies),
-      pFileDir,
+      readPackageDeps(
+        pFileDirectory,
+        pBaseDirectory,
+        pResolveOptions.combinedDependencies
+      ),
+      pFileDirectory,
       pResolveOptions,
-      pBaseDir
+      pBaseDirectory
     )
   };
 };

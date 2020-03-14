@@ -58,84 +58,84 @@ function getPackageRoot(pModule) {
 
 /**
  * returns the contents of the package.json of the given pModule as it would
- * resolve from pBaseDir
+ * resolve from pBaseDirectory
  *
  * e.g. to get the package.json of `lodash` that is required bya
  * `src/report/something.js` use `getPackageJSON('lodash', 'src/report/');`
  *
- * The pBaseDir parameter is necessary because dependency-cruiser/ this module
+ * The pBaseDirectory parameter is necessary because dependency-cruiser/ this module
  * will have a different base dir, and will hence resolve either to the
  * wrong package or not to a package at all.
  *
  * @param  {string} pModule  The module to get the package.json of
- * @param  {string} pBaseDir The base dir. Defaults to '.'
+ * @param  {string} pBaseDirectory The base dir. Defaults to '.'
  * @param  {any} pResolveOptions options for the resolver
  * @return {object}          The package.json as a javascript object, or
  *                           null if either module or package.json could
  *                           not be found
  */
-function bareGetPackageJson(pModule, pBaseDir, pResolveOptions) {
-  let lRetval = null;
+function bareGetPackageJson(pModule, pBaseDirectory, pResolveOptions) {
+  let lReturnValue = null;
 
   try {
     let lPackageJsonFilename = resolve(
       path.join(getPackageRoot(pModule), "package.json"),
-      pBaseDir ? pBaseDir : ".",
+      pBaseDirectory ? pBaseDirectory : ".",
       pResolveOptions
     );
 
-    lRetval = JSON.parse(fs.readFileSync(lPackageJsonFilename, "utf8"));
+    lReturnValue = JSON.parse(fs.readFileSync(lPackageJsonFilename, "utf8"));
   } catch (pError) {
     // left empty on purpose
   }
-  return lRetval;
+  return lReturnValue;
 }
 
 const getPackageJson = _memoize(
   bareGetPackageJson,
-  (pModule, pBaseDir) => `${pBaseDir}|${pModule}`
+  (pModule, pBaseDirectory) => `${pBaseDirectory}|${pModule}`
 );
 
 /**
- * Tells whether the pModule as resolved to pBaseDir is deprecated
+ * Tells whether the pModule as resolved to pBaseDirectory is deprecated
  *
  * @param  {string} pModule  The module to get the deprecation status of
- * @param  {string} pBaseDir The base dir. Defaults to '.'
+ * @param  {string} pBaseDirectory The base dir. Defaults to '.'
  * @param  {any} pResolveOptions options for the resolver
  * @return {boolean}         true if deprecated, false in all other cases
  */
-function dependencyIsDeprecated(pModule, pBaseDir, pResolveOptions) {
-  let lRetval = false;
-  let lPackageJson = getPackageJson(pModule, pBaseDir, pResolveOptions);
+function dependencyIsDeprecated(pModule, pBaseDirectory, pResolveOptions) {
+  let lReturnValue = false;
+  let lPackageJson = getPackageJson(pModule, pBaseDirectory, pResolveOptions);
 
   if (Boolean(lPackageJson)) {
-    lRetval =
+    lReturnValue =
       lPackageJson.hasOwnProperty("deprecated") && lPackageJson.deprecated;
   }
-  return lRetval;
+  return lReturnValue;
 }
 
 /**
- * Returns the license of pModule as resolved to pBaseDir - if any
+ * Returns the license of pModule as resolved to pBaseDirectory - if any
  *
  * @param  {string} pModule  The module to get the deprecation status of
- * @param  {string} pBaseDir The base dir. Defaults to '.'
+ * @param  {string} pBaseDirectory The base dir. Defaults to '.'
  * @param  {any} pResolveOptions options for the resolver
  * @return {string}          The module's license string, or '' in case
  *                           there is no package.json or no license field
  */
-function getLicense(pModule, pBaseDir, pResolveOptions) {
-  let lRetval = "";
-  let lPackageJson = getPackageJson(pModule, pBaseDir, pResolveOptions);
+function getLicense(pModule, pBaseDirectory, pResolveOptions) {
+  let lReturnValue = "";
+  let lPackageJson = getPackageJson(pModule, pBaseDirectory, pResolveOptions);
 
   if (
     Boolean(lPackageJson) &&
     lPackageJson.hasOwnProperty("license") &&
     typeof lPackageJson.license === "string"
   ) {
-    lRetval = lPackageJson.license;
+    lReturnValue = lPackageJson.license;
   }
-  return lRetval;
+  return lReturnValue;
 }
 
 function clearCache() {

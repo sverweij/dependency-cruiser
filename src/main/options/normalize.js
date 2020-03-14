@@ -16,17 +16,19 @@ function normalizeFilterOption(pFilterOption) {
 }
 
 module.exports = pOptions => {
-  let lRetval = {
+  let lReturnValue = {
     baseDir: process.cwd(),
     ...defaults,
     ...pOptions
   };
 
-  lRetval.maxDepth = parseInt(lRetval.maxDepth, 10);
-  lRetval.moduleSystems = uniq(lRetval.moduleSystems.sort());
-  lRetval.doNotFollow = normalizeFilterOption(lRetval.doNotFollow);
-  lRetval.exclude = normalizeFilterOption(lRetval.exclude);
-  lRetval.exoticRequireStrings = uniq(lRetval.exoticRequireStrings.sort());
+  lReturnValue.maxDepth = parseInt(lReturnValue.maxDepth, 10);
+  lReturnValue.moduleSystems = uniq(lReturnValue.moduleSystems.sort());
+  lReturnValue.doNotFollow = normalizeFilterOption(lReturnValue.doNotFollow);
+  lReturnValue.exclude = normalizeFilterOption(lReturnValue.exclude);
+  lReturnValue.exoticRequireStrings = uniq(
+    lReturnValue.exoticRequireStrings.sort()
+  );
 
-  return lRetval;
+  return lReturnValue;
 };

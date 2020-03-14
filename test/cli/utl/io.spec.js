@@ -5,6 +5,17 @@ const stream = require("stream");
 const expect = require("chai").expect;
 const getInStream = require("../../../src/cli/utl/io").getInStream;
 
+function removeDammit(pFileName) {
+  try {
+    fs.unlinkSync(pFileName);
+  } catch (pError) {
+    // probably files didn't exist in the first place
+    // so ignore the exception
+  } finally {
+    // explicitly ignore finally as well
+  }
+}
+
 describe("cli/utl/io", () => {
   const OUTFILE = path.join(
     __dirname,
@@ -13,17 +24,6 @@ describe("cli/utl/io", () => {
       .toString()
       .slice("0.".length)}.json`
   );
-
-  function removeDammit(pFileName) {
-    try {
-      fs.unlinkSync(pFileName);
-    } catch (pError) {
-      // probably files didn't exist in the first place
-      // so ignore the exception
-    } finally {
-      // explicitly ignore finally as well
-    }
-  }
 
   before("set up", () => {
     fs.writeFileSync(OUTFILE, "{}", "utf8");

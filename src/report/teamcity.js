@@ -31,20 +31,20 @@ function reportForbiddenRules(pForbiddenRules, pViolations) {
 }
 
 function reportAllowedRule(pAllowedRule, pViolations) {
-  let lRetval = [];
+  let lReturnValue = [];
 
   if (
     pAllowedRule.length > 0 &&
     pViolations.some(pViolation => pViolation.rule.name === "not-in-allowed")
   ) {
-    lRetval = tsm.inspectionType({
+    lReturnValue = tsm.inspectionType({
       id: "not-in-allowed",
       name: "not-in-allowed",
       description: "dependency is not in the 'allowed' set of rules",
       category: CATEGORY
     });
   }
-  return lRetval;
+  return lReturnValue;
 }
 
 function reportViolatedRules(pRuleSetUsed, pViolations) {

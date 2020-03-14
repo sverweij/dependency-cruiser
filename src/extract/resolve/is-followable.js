@@ -4,7 +4,7 @@ let gFollowableExtensions = new Set();
 let gFollowableExtensionsInitialized = false;
 
 function initFollowableExtensions(pResolveOptions) {
-  let lRetval = new Set(pResolveOptions.extensions);
+  let lReturnValue = new Set(pResolveOptions.extensions);
 
   // we could include things like pictures, movies, html, xml
   // etc in KNOWN_UNFOLLOWABLES as well. Typically in
@@ -27,9 +27,9 @@ function initFollowableExtensions(pResolveOptions) {
   ];
 
   KNOWN_UNFOLLOWABLES.forEach(pUnfollowable => {
-    lRetval.delete(pUnfollowable);
+    lReturnValue.delete(pUnfollowable);
   });
-  return lRetval;
+  return lReturnValue;
 }
 
 function init(pResolveOptions) {

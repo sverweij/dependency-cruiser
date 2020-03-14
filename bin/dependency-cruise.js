@@ -1,8 +1,8 @@
 #!/usr/bin/env node
-const validateNodeEnv = require("../src/cli/validate-node-env");
+const validateNodeEnvironment = require("../src/cli/validate-node-environment");
 
 try {
-  validateNodeEnv();
+  validateNodeEnvironment();
 
   // importing things only after the validateNodeEnv check so we can show an understandable
   // error. Otherwise, on unsupported platforms we would show a stack trace, which is

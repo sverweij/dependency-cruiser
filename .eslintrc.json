@@ -1,6 +1,9 @@
 {
   "root": true,
-  "extends": ["./configs/eslint-config.json", "eslint-config-prettier"],
+  "extends": ["moving-meadow"],
+  "rules": {
+    "security/detect-non-literal-fs-filename": "off"
+  },
   "overrides": [
     {
       "files": ["test/**/*.js"],

@@ -1,7 +1,7 @@
 const semver = require("semver");
 const $package = require("../../package.json");
 
-module.exports = function validateNodeEnv(pNodeVersion) {
+module.exports = function validateNodeEnvironment(pNodeVersion) {
   // not using default parameter here because the check should run
   // run on node 4 as well
   const lNodeVersion = pNodeVersion || process.versions.node;

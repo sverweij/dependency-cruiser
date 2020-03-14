@@ -22,24 +22,24 @@ const consolidatedRxJs = fs.readFileSync(
 
 describe("report/dot/custom-level reporter", () => {
   it("consolidates to custome levels", () => {
-    const lRetval = render(deps);
+    const lReturnValue = render(deps);
 
-    expect(lRetval.output).to.deep.equal(consolidatedDot);
-    expect(lRetval.exitCode).to.equal(0);
+    expect(lReturnValue.output).to.deep.equal(consolidatedDot);
+    expect(lReturnValue.exitCode).to.equal(0);
   });
 
   it("consolidates module only transgressions correctly", () => {
-    const lRetval = render(orphans);
+    const lReturnValue = render(orphans);
 
-    expect(lRetval.output).to.deep.equal(consolidatedOrphansDot);
-    expect(lRetval.exitCode).to.equal(0);
+    expect(lReturnValue.output).to.deep.equal(consolidatedOrphansDot);
+    expect(lReturnValue.exitCode).to.equal(0);
   });
 
   it("consolidates a slightly larger code base in a timely fashion", () => {
-    const lRetval = render(rxjs);
+    const lReturnValue = render(rxjs);
 
-    expect(lRetval.output).to.deep.equal(consolidatedRxJs);
-    expect(lRetval.exitCode).to.equal(0);
+    expect(lReturnValue.output).to.deep.equal(consolidatedRxJs);
+    expect(lReturnValue.exitCode).to.equal(0);
   });
 });
 

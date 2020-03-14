@@ -37,7 +37,7 @@ describe("main.format - format", () => {
     );
   });
 
-  it("returns an err reporter formatted report when presented with a legal result", () => {
+  it("returns an error reporter formatted report when presented with a legal result", () => {
     expect(main.format(MINIMAL_RESULT, "err").output).to.contain(
       "no dependency violations found (0 modules, 0 dependencies cruised)"
     );

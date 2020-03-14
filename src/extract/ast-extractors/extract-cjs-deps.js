@@ -2,15 +2,15 @@ const walk = require("acorn-walk");
 const estreeHelpers = require("./estree-helpers");
 
 function pryStringsFromArguments(pArguments) {
-  let lRetval = [];
+  let lReturnValue = [];
 
   if (estreeHelpers.firstArgumentIsAString(pArguments)) {
-    lRetval = pArguments[0].value.split("!");
+    lReturnValue = pArguments[0].value.split("!");
   } else if (estreeHelpers.firstArgumentIsATemplateLiteral(pArguments)) {
-    lRetval = [pArguments[0].quasis[0].value.cooked];
+    lReturnValue = [pArguments[0].quasis[0].value.cooked];
   }
 
-  return lRetval;
+  return lReturnValue;
 }
 
 function pushRequireCallsToDependencies(

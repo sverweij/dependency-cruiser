@@ -8,15 +8,15 @@ const expect = chai.expect;
 
 chai.use(require("chai-json-schema"));
 
-const gWorkingDir = process.cwd();
+const WORKING_DIRECTORY = process.cwd();
 
 describe("main.cruise - type only module references", () => {
   beforeEach("reset current wd", () => {
-    process.chdir(gWorkingDir);
+    process.chdir(WORKING_DIRECTORY);
   });
 
   afterEach("reset current wd", () => {
-    process.chdir(gWorkingDir);
+    process.chdir(WORKING_DIRECTORY);
   });
 
   it("finds something that's only in node_modules/@types", () => {

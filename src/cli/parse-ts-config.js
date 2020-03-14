@@ -10,13 +10,13 @@ const typescript = tryRequire(
 
 const formatDiagnosticsHost = {
   getCanonicalFileName(pFileName) {
-    let lRetval = pFileName.toLowerCase();
+    let lReturnValue = pFileName.toLowerCase();
 
     /* istanbul ignore next - depends on the platform which branch is taken */
     if (_get(typescript, "sys.useCaseSensitiveFileNames", false)) {
-      lRetval = pFileName;
+      lReturnValue = pFileName;
     }
-    return lRetval;
+    return lReturnValue;
   },
   getCurrentDirectory() {
     return process.cwd();
@@ -27,7 +27,7 @@ const formatDiagnosticsHost = {
 };
 
 module.exports = function parseConfig(pTSConfigFileName) {
-  let lRetval = {};
+  let lReturnValue = {};
 
   /* istanbul ignore else */
   if (typescript) {
@@ -37,11 +37,11 @@ module.exports = function parseConfig(pTSConfigFileName) {
     );
 
     if (typeof lConfig.error !== "undefined") {
-      throw new Error(
+      throw new TypeError(
         typescript.formatDiagnostics([lConfig.error], formatDiagnosticsHost)
       );
     }
-    lRetval = typescript.parseJsonConfigFileContent(
+    lReturnValue = typescript.parseJsonConfigFileContent(
       lConfig.config,
       typescript.sys,
       path.dirname(pTSConfigFileName),
@@ -49,14 +49,14 @@ module.exports = function parseConfig(pTSConfigFileName) {
       pTSConfigFileName
     );
 
-    if (lRetval.errors.length !== 0) {
+    if (lReturnValue.errors.length !== 0) {
       throw new Error(
-        typescript.formatDiagnostics(lRetval.errors, formatDiagnosticsHost)
+        typescript.formatDiagnostics(lReturnValue.errors, formatDiagnosticsHost)
       );
     }
     // lRetval.fileNames; // all files included in the project
     // lRetval.options; // CompilerOptions
   }
 
-  return lRetval;
+  return lReturnValue;
 };

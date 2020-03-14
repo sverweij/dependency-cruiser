@@ -53,10 +53,10 @@ function getRandomChar(pChar) {
  * @return {string} - a random string with above specs
  */
 module.exports = function getRandomString(pString) {
-  let lRetval = "";
+  let lReturnValue = "";
 
   for (let lChar of pString) {
-    lRetval += getRandomChar(lChar);
+    lReturnValue += getRandomChar(lChar);
   }
-  return lRetval;
+  return lReturnValue;
 };

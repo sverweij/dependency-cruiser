@@ -15,16 +15,18 @@ function propertyEquals(pTo, pRule, pProperty) {
    matches.
 */
 function extractGroups(pRule, pActualPath) {
-  let lRetval = [];
+  let lReturnValue = [];
 
   if (Boolean(pRule.path)) {
     let lMatchResult = pActualPath.match(pRule.path);
 
     if (Boolean(lMatchResult) && lMatchResult.length > 1) {
-      lRetval = lMatchResult.filter(pResult => typeof pResult === "string");
+      lReturnValue = lMatchResult.filter(
+        pResult => typeof pResult === "string"
+      );
     }
   }
-  return lRetval;
+  return lReturnValue;
 }
 
 function match(pFrom, pTo) {

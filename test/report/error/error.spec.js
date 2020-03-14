@@ -1,14 +1,14 @@
 /* eslint-disable no-magic-numbers */
 const expect = require("chai").expect;
 const chalk = require("chalk");
-const render = require("../../../src/report/err");
+const render = require("../../../src/report/error");
 const okdeps = require("./mocks/everything-fine.json");
 const deps = require("./mocks/cjs-no-dependency-valid.json");
 const warndeps = require("./mocks/err-only-warnings.json");
 const orphanerrs = require("./mocks/orphan-deps.json");
 const circularerrs = require("./mocks/circular-deps.json");
 
-describe("report/err", () => {
+describe("report/error", () => {
   let chalkLevel = chalk.level;
 
   before("disable chalk coloring", () => {

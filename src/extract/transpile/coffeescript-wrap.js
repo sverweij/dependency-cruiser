@@ -7,19 +7,19 @@ const $package = require("../../../package.json");
  * As long as that is happening: first try coffeescript, then coffee-script.
  */
 function getCoffeeScriptModule() {
-  let lRetval = tryRequire(
+  let lReturnValue = tryRequire(
     "coffeescript",
     $package.supportedTranspilers.coffeescript
   );
 
   /* istanbul ignore if*/
-  if (lRetval === false) {
-    lRetval = tryRequire(
+  if (lReturnValue === false) {
+    lReturnValue = tryRequire(
       "coffee-script",
       $package.supportedTranspilers["coffee-script"]
     );
   }
-  return lRetval;
+  return lReturnValue;
 }
 
 const coffeeScript = getCoffeeScriptModule();

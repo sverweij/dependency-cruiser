@@ -48,13 +48,15 @@ function extractRecursive(
       : [];
 
   return lDependencies
-    .filter(pDep => pDep.followable && !pDep.matchesDoNotFollow)
+    .filter(
+      pDependency => pDependency.followable && !pDependency.matchesDoNotFollow
+    )
     .reduce(
-      (pAll, pDep) => {
-        if (!pVisited.has(pDep.resolved)) {
+      (pAll, pDependency) => {
+        if (!pVisited.has(pDependency.resolved)) {
           return pAll.concat(
             extractRecursive(
-              pDep.resolved,
+              pDependency.resolved,
               pOptions,
               pVisited,
               pDepth + 1,
@@ -74,8 +76,8 @@ function extractRecursive(
     );
 }
 
-function extractFileDirArray(
-  pFileDirArray,
+function extractFileDirectoryArray(
+  pFileDirectoryArray,
   pOptions,
   pResolveOptions,
   pTSConfig
@@ -83,7 +85,7 @@ function extractFileDirArray(
   let lVisited = new Set();
 
   return _spread(_concat)(
-    gatherInitialSources(pFileDirArray, pOptions).reduce(
+    gatherInitialSources(pFileDirectoryArray, pOptions).reduce(
       (pDependencies, pFilename) => {
         if (!lVisited.has(pFilename)) {
           lVisited.add(pFilename);
@@ -156,11 +158,11 @@ function makeOptionsPresentable(pOptions) {
     }, {});
 }
 
-function summarizeOptions(pFileDirArray, pOptions) {
+function summarizeOptions(pFileDirectoryArray, pOptions) {
   return {
     optionsUsed: {
       ...makeOptionsPresentable(pOptions),
-      args: pFileDirArray.map(pathToPosix).join(" ")
+      args: pFileDirectoryArray.map(pathToPosix).join(" ")
     }
   };
 }
@@ -178,7 +180,7 @@ function addRuleSetUsed(pOptions) {
 }
 
 function filterExcludedDependencies(pModule, pExclude) {
-  // no need to do the 'path' thing as that was addressed in extractFileDirArray already
+  // no need to do the 'path' thing as that was addressed in extractFileDirectoryArray already
   return {
     ...pModule,
     dependencies: pModule.dependencies.filter(
@@ -189,12 +191,17 @@ function filterExcludedDependencies(pModule, pExclude) {
   };
 }
 
-module.exports = (pFileDirArray, pOptions, pResolveOptions, pTSConfig) => {
+module.exports = (
+  pFileDirectoryArray,
+  pOptions,
+  pResolveOptions,
+  pTSConfig
+) => {
   clearCaches();
 
   let lModules = _uniqBy(
-    extractFileDirArray(
-      pFileDirArray,
+    extractFileDirectoryArray(
+      pFileDirectoryArray,
       pOptions,
       pResolveOptions,
       pTSConfig
@@ -212,7 +219,7 @@ module.exports = (pFileDirArray, pOptions, pResolveOptions, pTSConfig) => {
     modules: lModules,
     summary: Object.assign(
       summarize(lModules, pOptions.ruleSet),
-      summarizeOptions(pFileDirArray, pOptions),
+      summarizeOptions(pFileDirectoryArray, pOptions),
       pOptions.ruleSet ? { ruleSetUsed: addRuleSetUsed(pOptions) } : {}
     )
   };

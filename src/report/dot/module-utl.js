@@ -59,11 +59,11 @@ function aggregate(pPathSnippet, pCounter, pPathArray) {
 
 function folderify(pModule) {
   let lAdditions = {};
-  let lDirName = path.dirname(pModule.source);
+  let lDirectoryName = path.dirname(pModule.source);
 
-  if (lDirName !== ".") {
-    lAdditions.folder = lDirName;
-    lAdditions.path = lDirName.split(path.sep).map(aggregate);
+  if (lDirectoryName !== ".") {
+    lAdditions.folder = lDirectoryName;
+    lAdditions.path = lDirectoryName.split(path.sep).map(aggregate);
   }
 
   lAdditions.label = path.basename(pModule.source);

@@ -2,19 +2,19 @@ const getCycle = require("./get-cycle");
 
 function addCircularityCheckToDependency(pToDep, pGraph, pFrom) {
   const lCycle = getCycle(pGraph, pFrom, pToDep.resolved);
-  let lRetval = {
+  let lReturnValue = {
     ...pToDep,
     circular: lCycle.length > 0
   };
 
-  if (lRetval.circular) {
-    lRetval = {
-      ...lRetval,
+  if (lReturnValue.circular) {
+    lReturnValue = {
+      ...lReturnValue,
       cycle: lCycle
     };
   }
 
-  return lRetval;
+  return lReturnValue;
 }
 
 /**

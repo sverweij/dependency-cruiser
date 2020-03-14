@@ -1,7 +1,13 @@
 const expect = require("chai").expect;
-const utl = require("../../../src/report/err-html/utl");
+const utl = require("../../../src/report/error-html/utl");
 
-describe("report/err-html/utl", () => {
+function summaryHasMinimalAttributes(pResult) {
+  expect(pResult).to.haveOwnProperty("depcruiseVersion");
+  expect(pResult).to.haveOwnProperty("runDate");
+  expect(pResult).to.haveOwnProperty("violations");
+}
+
+describe("report/error-html/utl", () => {
   it("getFormattedAllowedRule - no allowed rule available returns empty array", () => {
     expect(utl.getFormattedAllowedRule({})).to.deep.equal([]);
   });
@@ -91,12 +97,6 @@ describe("report/err-html/utl", () => {
       unviolated: false
     });
   });
-
-  function summaryHasMinimalAttributes(pResult) {
-    expect(pResult).to.haveOwnProperty("depcruiseVersion");
-    expect(pResult).to.haveOwnProperty("runDate");
-    expect(pResult).to.haveOwnProperty("violations");
-  }
 
   it("formatSummaryForReport - empty", () => {
     const lResult = utl.formatSummaryForReport({});

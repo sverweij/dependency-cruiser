@@ -5,25 +5,25 @@ function pryConfigFromTheConfig(
   pEnvironment,
   pArguments
 ) {
-  let lRetval = pWebpackConfigModule;
+  let lReturnValue = pWebpackConfigModule;
 
   if (typeof pWebpackConfigModule === "function") {
-    lRetval = pWebpackConfigModule(pEnvironment, pArguments);
+    lReturnValue = pWebpackConfigModule(pEnvironment, pArguments);
   }
 
   if (Array.isArray(pWebpackConfigModule)) {
-    lRetval = pryConfigFromTheConfig(
+    lReturnValue = pryConfigFromTheConfig(
       pWebpackConfigModule[0],
       pEnvironment,
       pArguments
     );
   }
 
-  return lRetval;
+  return lReturnValue;
 }
 
 module.exports = (pWebpackConfigFilename, pEnvironment, pArguments) => {
-  let lRetval = {};
+  let lReturnValue = {};
 
   try {
     /* eslint global-require:0, security/detect-non-literal-require:0, import/no-dynamic-require:0 */
@@ -35,7 +35,7 @@ module.exports = (pWebpackConfigFilename, pEnvironment, pArguments) => {
     );
 
     if (lWebpackConfig.resolve) {
-      lRetval = lWebpackConfig.resolve;
+      lReturnValue = lWebpackConfig.resolve;
     }
   } catch (pError) {
     throw new Error(
@@ -44,5 +44,5 @@ module.exports = (pWebpackConfigFilename, pEnvironment, pArguments) => {
     );
   }
 
-  return lRetval;
+  return lReturnValue;
 };

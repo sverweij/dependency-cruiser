@@ -37,11 +37,11 @@ function mergeModules(pSourceString, pModules) {
 
 module.exports = pModules => {
   let lModules = _clone(pModules);
-  let lRetval = [];
+  let lReturnValue = [];
 
   while (lModules.length > 0) {
-    lRetval.push(mergeModules(lModules[0].source, lModules));
+    lReturnValue.push(mergeModules(lModules[0].source, lModules));
     lModules = _reject(lModules, { source: lModules[0].source });
   }
-  return lRetval;
+  return lReturnValue;
 };

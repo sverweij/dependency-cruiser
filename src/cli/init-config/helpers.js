@@ -15,17 +15,17 @@ function fileExists(pFile) {
 }
 
 function pnpIsEnabled() {
-  let lRetval = false;
+  let lReturnValue = false;
 
   try {
     const lPackageFileText = fs.readFileSync("./package.json", "utf8");
     const lPackageJSON = JSON.parse(lPackageFileText);
 
-    lRetval = _get(lPackageJSON, "installConfig.pnp", lRetval);
+    lReturnValue = _get(lPackageJSON, "installConfig.pnp", lReturnValue);
   } catch (pError) {
     // silently ignore - we'll return false anyway then
   }
-  return lRetval;
+  return lReturnValue;
 }
 
 module.exports = {

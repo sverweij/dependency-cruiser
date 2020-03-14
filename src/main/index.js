@@ -3,7 +3,7 @@ const extract = require("../extract");
 const cruiseResultSchema = require("../schema/cruise-result.schema.json");
 const meta = require("../extract/transpile/meta");
 const report = require("../report");
-const normalizeFilesAndDirs = require("./files-and-dirs/normalize");
+const normalizeFilesAndDirectories = require("./files-and-dirs/normalize");
 const validateRuleSet = require("./rule-set/validate");
 const normalizeRuleSet = require("./rule-set/normalize");
 const validateOptions = require("./options/validate");
@@ -27,7 +27,7 @@ function format(pResult, pOutputType) {
 
 // see [api.md](../../doc/api.md) and/ or the
 // [type definition](../../types/depencency-cruiser.d.ts) for details
-function cruise(pFileDirArray, pOptions, pResolveOptions, pTSConfig) {
+function cruise(pFileAndDirectoryArray, pOptions, pResolveOptions, pTSConfig) {
   pOptions = normalizeOptions(validateOptions(pOptions));
 
   if (Boolean(pOptions.ruleSet)) {
@@ -35,7 +35,7 @@ function cruise(pFileDirArray, pOptions, pResolveOptions, pTSConfig) {
   }
 
   const lExtractionResult = extract(
-    normalizeFilesAndDirs(pFileDirArray),
+    normalizeFilesAndDirectories(pFileAndDirectoryArray),
     pOptions,
     normalizeResolveOptions(pResolveOptions, pOptions, pTSConfig),
     pTSConfig

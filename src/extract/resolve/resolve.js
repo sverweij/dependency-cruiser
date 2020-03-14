@@ -1,6 +1,6 @@
 const enhancedResolve = require("enhanced-resolve");
 const pathToPosix = require("../utl/path-to-posix");
-const stripQueryParams = require("../utl/strip-query-params");
+const stripQueryParameters = require("../utl/strip-query-parameters");
 
 let gResolver = null;
 let gInitialized = {};
@@ -23,7 +23,7 @@ function init(pResolveOptions, pCachingContext) {
  * Resolves the given module to a path to a file on disk.
  *
  * @param {string} pModuleName The module name to resolve (e.g. 'slodash', './myModule')
- * @param {string} pFileDir The directory from which to resolve the module
+ * @param {string} pFileDirectory The directory from which to resolve the module
  * @param {any} pResolveOptions Options to pass to enhanced resolve
  * @param {any} pCachingContext - caching
  *
@@ -31,17 +31,17 @@ function init(pResolveOptions, pCachingContext) {
  */
 function resolve(
   pModuleName,
-  pFileDir,
+  pFileDirectory,
   pResolveOptions,
   pCachingContext = "cruise"
 ) {
   init(pResolveOptions, pCachingContext);
 
-  return stripQueryParams(
+  return stripQueryParameters(
     gResolver.resolveSync(
       {},
       // lookupStartPath
-      pathToPosix(pFileDir),
+      pathToPosix(pFileDirectory),
       // request
       pModuleName
     )

@@ -28,7 +28,7 @@ function extractResolveOptions(pOptions) {
 }
 
 function extractTSConfigOptions(pOptions) {
-  let lRetval = {};
+  let lReturnValue = {};
   const lTSConfigFileName = _get(
     pOptions,
     "ruleSet.options.tsConfig.fileName",
@@ -36,21 +36,21 @@ function extractTSConfigOptions(pOptions) {
   );
 
   if (lTSConfigFileName) {
-    lRetval = parseTSConfig(lTSConfigFileName);
+    lReturnValue = parseTSConfig(lTSConfigFileName);
   }
 
-  return lRetval;
+  return lReturnValue;
 }
 
-function runCruise(pFileDirArray, pOptions) {
-  pFileDirArray
-    .filter(pFileOrDir => !glob.hasMagic(pFileOrDir))
+function runCruise(pFileDirectoryArray, pOptions) {
+  pFileDirectoryArray
+    .filter(pFileOrDirectory => !glob.hasMagic(pFileOrDirectory))
     .forEach(validateFileExistence);
 
   pOptions = normalizeOptions(pOptions);
 
   const lReportingResult = main.cruise(
-    pFileDirArray,
+    pFileDirectoryArray,
     pOptions,
     extractResolveOptions(pOptions),
     extractTSConfigOptions(pOptions)
@@ -61,7 +61,7 @@ function runCruise(pFileDirArray, pOptions) {
   return lReportingResult.exitCode;
 }
 
-module.exports = (pFileDirArray, pOptions) => {
+module.exports = (pFileDirectoryArray, pOptions) => {
   pOptions = pOptions || {};
   let lExitCode = 0;
 
@@ -71,7 +71,7 @@ module.exports = (pFileDirArray, pOptions) => {
     } else if (pOptions.init) {
       initConfig(pOptions.init);
     } else {
-      lExitCode = runCruise(pFileDirArray, pOptions);
+      lExitCode = runCruise(pFileDirectoryArray, pOptions);
     }
   } catch (pError) {
     process.stderr.write(`\n  ERROR: ${pError.message}\n`);

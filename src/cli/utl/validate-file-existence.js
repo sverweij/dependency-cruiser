@@ -1,9 +1,11 @@
 const fs = require("fs");
 
-module.exports = pDirOrFile => {
+module.exports = pDirectoryOrFile => {
   try {
-    fs.accessSync(pDirOrFile, fs.R_OK);
+    fs.accessSync(pDirectoryOrFile, fs.R_OK);
   } catch (pError) {
-    throw new Error(`Can't open '${pDirOrFile}' for reading. Does it exist?\n`);
+    throw new Error(
+      `Can't open '${pDirectoryOrFile}' for reading. Does it exist?\n`
+    );
   }
 };

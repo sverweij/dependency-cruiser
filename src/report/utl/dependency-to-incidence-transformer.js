@@ -1,7 +1,8 @@
-function compareOnSource(pOne, pTwo) {
-  const deriveSortKey = pModule =>
-    `${pModule.coreModule ? "1" : "0"}-${pModule.source}`;
+function deriveSortKey(pModule) {
+  return `${pModule.coreModule ? "1" : "0"}-${pModule.source}`;
+}
 
+function compareOnSource(pOne, pTwo) {
   return deriveSortKey(pOne) > deriveSortKey(pTwo) ? 1 : -1;
 }
 

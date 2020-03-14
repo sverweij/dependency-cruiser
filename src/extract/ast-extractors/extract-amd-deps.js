@@ -5,11 +5,11 @@ const estreeHelpers = require("./estree-helpers");
 function extractRegularAMDDependencies(pNode, pDependencies) {
   if (estreeHelpers.isLikelyAMDDefineOrRequire(pNode)) {
     pNode.expression.arguments
-      .filter(pArg => pArg.type === "ArrayExpression")
-      .forEach(arg =>
-        arg.elements.forEach(el => {
-          if (Boolean(el.value) && typeof el.value === "string") {
-            el.value.split("!").forEach(pString =>
+      .filter(pArgument => pArgument.type === "ArrayExpression")
+      .forEach(pArgument =>
+        pArgument.elements.forEach(pElement => {
+          if (Boolean(pElement.value) && typeof pElement.value === "string") {
+            pElement.value.split("!").forEach(pString =>
               pDependencies.push({
                 module: pString,
                 moduleSystem: "amd",
@@ -27,13 +27,13 @@ function extractCommonJSWrappers(pNode, pDependencies, pExoticRequireStrings) {
   if (estreeHelpers.isLikelyAMDDefine(pNode)) {
     pNode.expression.arguments
       .filter(
-        pArg =>
-          pArg.type === "FunctionExpression" &&
-          pArg.params.some(
-            pParam =>
-              pParam.name === "require" ||
+        pArgument =>
+          pArgument.type === "FunctionExpression" &&
+          pArgument.params.some(
+            pParameter =>
+              pParameter.name === "require" ||
               pExoticRequireStrings.some(
-                pExoticRequireString => pExoticRequireString === pParam.name
+                pExoticRequireString => pExoticRequireString === pParameter.name
               )
           )
       )
