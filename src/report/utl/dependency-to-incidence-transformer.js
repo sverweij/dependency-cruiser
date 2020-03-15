@@ -8,19 +8,21 @@ function compareOnSource(pOne, pTwo) {
 
 function determineIncidenceType(pFromListEntry) {
   return pModule => {
-    let lDep = pModule.dependencies.find(
-      pDep => pDep.resolved === pFromListEntry.source
+    let lDependency = pModule.dependencies.find(
+      pDependency => pDependency.resolved === pFromListEntry.source
     );
 
-    if (lDep) {
-      return lDep.valid
+    if (lDependency) {
+      return lDependency.valid
         ? {
             incidence: "true"
           }
         : {
-            incidence: lDep.rules[0].severity,
-            rule: `${lDep.rules[0].name}${
-              lDep.rules.length > 1 ? ` (+${lDep.rules.length - 1} others)` : ""
+            incidence: lDependency.rules[0].severity,
+            rule: `${lDependency.rules[0].name}${
+              lDependency.rules.length > 1
+                ? ` (+${lDependency.rules.length - 1} others)`
+                : ""
             }`
           };
     }
@@ -40,6 +42,8 @@ function addIncidences(pFromList) {
     }))
   });
 }
+/*
 
+*/
 module.exports = pFromList =>
   pFromList.sort(compareOnSource).map(addIncidences(pFromList));
