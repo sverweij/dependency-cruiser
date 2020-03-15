@@ -19,7 +19,7 @@ const vueWrap = require("./vue-template-wrap");
         See ./jsx-implementation-rationale.md for an implementation
         rationale on jsx ...
  */
-const extension2wrapper = {
+const EXTENSION2WRAPPER = {
   ".js": javaScriptWrap,
   ".mjs": javaScriptWrap,
   ".jsx": javaScriptWrap,
@@ -35,7 +35,7 @@ const extension2wrapper = {
   ".cjsx": coffeeWrap
 };
 
-const transpiler2wrapper = {
+const TRANSPILER2WRAPPER = {
   javascript: javaScriptWrap,
   "coffee-script": coffeeWrap,
   coffeescript: coffeeWrap,
@@ -54,7 +54,7 @@ const transpiler2wrapper = {
  * @returns {module} the module
  */
 module.exports.getWrapper = pExtension =>
-  extension2wrapper[pExtension] || javaScriptWrap;
+  EXTENSION2WRAPPER[pExtension] || javaScriptWrap;
 
 /**
  * all supported extensions and whether or not it is supported
@@ -62,9 +62,9 @@ module.exports.getWrapper = pExtension =>
  *
  * @type {array}
  */
-module.exports.allExtensions = Object.keys(extension2wrapper).map(pKey => ({
+module.exports.allExtensions = Object.keys(EXTENSION2WRAPPER).map(pKey => ({
   extension: pKey,
-  available: extension2wrapper[pKey].isAvailable()
+  available: EXTENSION2WRAPPER[pKey].isAvailable()
 }));
 
 /**
@@ -74,8 +74,8 @@ module.exports.allExtensions = Object.keys(extension2wrapper).map(pKey => ({
  * @type {array}
  */
 module.exports.scannableExtensions = Object.keys(
-  extension2wrapper
-).filter(pKey => extension2wrapper[pKey].isAvailable());
+  EXTENSION2WRAPPER
+).filter(pKey => EXTENSION2WRAPPER[pKey].isAvailable());
 
 /**
  * returns an array of supported transpilers, whith for each transpiler:
@@ -88,7 +88,7 @@ module.exports.getAvailableTranspilers = () =>
   Object.keys(supportedTranspilers).map(pTranspiler => ({
     name: pTranspiler,
     version: supportedTranspilers[pTranspiler],
-    available: transpiler2wrapper[pTranspiler].isAvailable()
+    available: TRANSPILER2WRAPPER[pTranspiler].isAvailable()
   }));
 
 /* eslint security/detect-object-injection : 0*/

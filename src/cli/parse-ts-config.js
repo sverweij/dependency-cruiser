@@ -8,7 +8,7 @@ const typescript = tryRequire(
   _get($package, "supportedTranspilers.typescript", null)
 );
 
-const formatDiagnosticsHost = {
+const FORMAT_DIAGNOSTICS_HOST = {
   getCanonicalFileName(pFileName) {
     let lReturnValue = pFileName.toLowerCase();
 
@@ -38,7 +38,7 @@ module.exports = function parseConfig(pTSConfigFileName) {
 
     if (typeof lConfig.error !== "undefined") {
       throw new TypeError(
-        typescript.formatDiagnostics([lConfig.error], formatDiagnosticsHost)
+        typescript.formatDiagnostics([lConfig.error], FORMAT_DIAGNOSTICS_HOST)
       );
     }
     lReturnValue = typescript.parseJsonConfigFileContent(
@@ -51,7 +51,10 @@ module.exports = function parseConfig(pTSConfigFileName) {
 
     if (lReturnValue.errors.length !== 0) {
       throw new Error(
-        typescript.formatDiagnostics(lReturnValue.errors, formatDiagnosticsHost)
+        typescript.formatDiagnostics(
+          lReturnValue.errors,
+          FORMAT_DIAGNOSTICS_HOST
+        )
       );
     }
     // lRetval.fileNames; // all files included in the project

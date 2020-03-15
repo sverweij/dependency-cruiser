@@ -3,7 +3,7 @@ const isCore = require("./is-core");
 const isRelativeModuleName = require("./is-relative-module-name");
 const localNpmHelpers = require("./local-npm-helpers");
 
-const npm2depType = {
+const NPM2DEP_TYPE = {
   dependencies: "npm",
   devDependencies: "npm-dev",
   optionalDependencies: "npm-optional",
@@ -20,7 +20,7 @@ function determineNpmDependencyTypes(pModuleName, pPackageDependencies) {
           pKey.includes("ependencies") &&
           pPackageDependencies[pKey].hasOwnProperty(pModuleName)
       )
-      .map(pKey => npm2depType[pKey] || "npm-no-pkg");
+      .map(pKey => NPM2DEP_TYPE[pKey] || "npm-no-pkg");
     lReturnValue = lReturnValue.length === 0 ? ["npm-no-pkg"] : lReturnValue;
   }
 

@@ -12,7 +12,7 @@ const OUT_DIR = "./test/cli/output";
 const FIX_DIR = "./test/cli/fixtures";
 
 /* eslint max-len:0*/
-const testPairs = [
+const TEST_PAIRS = [
   {
     description:
       "dependency-cruise -f test/output/{{moduleType}}.dir.json test/cli/fixtures/{{moduleType}}",
@@ -108,16 +108,14 @@ const testPairs = [
 ];
 
 function resetOutputDirectory() {
-  testPairs
-    .filter(pPair => pPair.cleanup)
-    .forEach(pPair => {
-      try {
-        fs.unlinkSync(pPair.options.outputTo.replace("{{moduleType}}", "cjs"));
-        fs.unlinkSync(pPair.options.outputTo.replace("{{moduleType}}", "amd"));
-      } catch (pError) {
-        // process.stderr.write(typeof e);
-      }
-    });
+  TEST_PAIRS.filter(pPair => pPair.cleanup).forEach(pPair => {
+    try {
+      fs.unlinkSync(pPair.options.outputTo.replace("{{moduleType}}", "cjs"));
+      fs.unlinkSync(pPair.options.outputTo.replace("{{moduleType}}", "amd"));
+    } catch (pError) {
+      // process.stderr.write(typeof e);
+    }
+  });
 
   deleteDammit(path.join(OUT_DIR, "multiple-in-one-go.json"));
   deleteDammit(path.join(OUT_DIR, "transgression-count.json"));
@@ -158,7 +156,7 @@ function setModuleType(pTestPairs, pModuleType) {
 }
 
 function runFileBasedTests(pModuleType) {
-  setModuleType(testPairs, pModuleType).forEach(pPair => {
+  setModuleType(TEST_PAIRS, pModuleType).forEach(pPair => {
     it(pPair.description, () => {
       const lExitCode = cli([pPair.dirOrFile], pPair.options);
 

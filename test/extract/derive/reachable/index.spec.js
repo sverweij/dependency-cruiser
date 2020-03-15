@@ -2,7 +2,7 @@ const expect = require("chai").expect;
 const normalize = require("../../../../src/main/rule-set/normalize");
 const addReachability = require("../../../../src/extract/derive/reachable/index");
 
-const gGraph = [
+const GRAPH = [
   {
     source: "./src/index.js",
     dependencies: [
@@ -28,7 +28,7 @@ const gGraph = [
   }
 ];
 
-const gAnotatedGraphForHajoo = [
+const ANOTATED_GRAPH_FOR_HAJOO = [
   {
     source: "./src/index.js",
     reachable: [
@@ -78,7 +78,7 @@ describe("extract/derive/reachable/index - reachability detection", () => {
   });
 
   it("returns the input graph when passed an empty rule set", () => {
-    expect(addReachability(gGraph, normalize({}))).to.deep.equal(gGraph);
+    expect(addReachability(GRAPH, normalize({}))).to.deep.equal(GRAPH);
   });
 
   it('returns the reachability annotated graph when a rule set with forbidden "reachable" in it', () => {
@@ -92,8 +92,8 @@ describe("extract/derive/reachable/index - reachability detection", () => {
     };
 
     expect(
-      addReachability(gGraph, normalize(lForbiddenReachabilityRuleSetHajoo))
-    ).to.deep.equal(gAnotatedGraphForHajoo);
+      addReachability(GRAPH, normalize(lForbiddenReachabilityRuleSetHajoo))
+    ).to.deep.equal(ANOTATED_GRAPH_FOR_HAJOO);
   });
 
   it('returns the reachability annotated graph when a rule set with allowed "reachable" in it', () => {
@@ -150,7 +150,7 @@ describe("extract/derive/reachable/index - reachability detection", () => {
     ];
 
     expect(
-      addReachability(gGraph, normalize(lForbiddenReachabilityRuleSetHajoo))
+      addReachability(GRAPH, normalize(lForbiddenReachabilityRuleSetHajoo))
     ).to.deep.equal(lAnotatedGraphForHajooAllowed);
   });
 
@@ -166,8 +166,8 @@ describe("extract/derive/reachable/index - reachability detection", () => {
     };
 
     expect(
-      addReachability(gGraph, normalize(lForbiddenReachabilityRuleSetHajoo))
-    ).to.deep.equal(gAnotatedGraphForHajoo);
+      addReachability(GRAPH, normalize(lForbiddenReachabilityRuleSetHajoo))
+    ).to.deep.equal(ANOTATED_GRAPH_FOR_HAJOO);
   });
 
   it('returns the reachability annotated graph when with forbidden "reachable" in it that has a pathNot', () => {
@@ -218,7 +218,7 @@ describe("extract/derive/reachable/index - reachability detection", () => {
     ];
 
     expect(
-      addReachability(gGraph, normalize(lForbiddenReachabilityRuleSetHajoo))
+      addReachability(GRAPH, normalize(lForbiddenReachabilityRuleSetHajoo))
     ).to.deep.equal(lAnotatedGraphForHajooNoIntermediate);
   });
 
@@ -264,7 +264,7 @@ describe("extract/derive/reachable/index - reachability detection", () => {
     ];
 
     expect(
-      addReachability(gGraph, normalize(lForbiddenReachabilityRuleSetHajoo))
+      addReachability(GRAPH, normalize(lForbiddenReachabilityRuleSetHajoo))
     ).to.deep.equal(lAnotatedGraphForHajooNoIntermediate);
   });
 
