@@ -11,6 +11,7 @@ const html = require("./html");
 const identity = require("./identity");
 const json = require("./json");
 const teamcity = require("./teamcity");
+const text = require("./text");
 
 const TYPE2REPORTER = {
   anon,
@@ -24,7 +25,8 @@ const TYPE2REPORTER = {
   err: error,
   html,
   json,
-  teamcity
+  teamcity,
+  text
 };
 
 /**

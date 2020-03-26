@@ -1,0 +1,226 @@
+{
+  "modules": [
+    {
+      "source": "src/report/dot/dot.template.js",
+      "dependencies": [],
+      "orphan": false,
+      "valid": true
+    },
+    {
+      "source": "src/report/dot/index.js",
+      "dependencies": [
+        {
+          "resolved": "src/report/dot/dot.template.js",
+          "coreModule": false,
+          "followable": true,
+          "couldNotResolve": false,
+          "dependencyTypes": [
+            "local"
+          ],
+          "module": "./dot.template",
+          "moduleSystem": "cjs",
+          "dynamic": false,
+          "exoticallyRequired": false,
+          "matchesDoNotFollow": false,
+          "circular": false,
+          "valid": true
+        },
+        {
+          "resolved": "src/report/dot/module-utl.js",
+          "coreModule": false,
+          "followable": true,
+          "couldNotResolve": false,
+          "dependencyTypes": [
+            "local"
+          ],
+          "module": "./module-utl",
+          "moduleSystem": "cjs",
+          "dynamic": false,
+          "exoticallyRequired": false,
+          "matchesDoNotFollow": false,
+          "circular": false,
+          "valid": true
+        },
+        {
+          "resolved": "src/report/dot/prepare-custom-level.js",
+          "coreModule": false,
+          "followable": true,
+          "couldNotResolve": false,
+          "dependencyTypes": [
+            "local"
+          ],
+          "module": "./prepare-custom-level",
+          "moduleSystem": "cjs",
+          "dynamic": false,
+          "exoticallyRequired": false,
+          "matchesDoNotFollow": false,
+          "circular": false,
+          "valid": true
+        },
+        {
+          "resolved": "src/report/dot/prepare-folder-level.js",
+          "coreModule": false,
+          "followable": true,
+          "couldNotResolve": false,
+          "dependencyTypes": [
+            "local"
+          ],
+          "module": "./prepare-folder-level",
+          "moduleSystem": "cjs",
+          "dynamic": false,
+          "exoticallyRequired": false,
+          "matchesDoNotFollow": false,
+          "circular": false,
+          "valid": true
+        },
+        {
+          "resolved": "src/report/dot/theming.js",
+          "coreModule": false,
+          "followable": true,
+          "couldNotResolve": false,
+          "dependencyTypes": [
+            "local"
+          ],
+          "module": "./theming",
+          "moduleSystem": "cjs",
+          "dynamic": false,
+          "exoticallyRequired": false,
+          "matchesDoNotFollow": false,
+          "circular": false,
+          "valid": true
+        }
+      ],
+      "orphan": false,
+      "valid": true
+    },
+    {
+      "source": "src/report/dot/module-utl.js",
+      "dependencies": [
+        {
+          "resolved": "src/report/dot/theming.js",
+          "coreModule": false,
+          "followable": true,
+          "couldNotResolve": false,
+          "dependencyTypes": [
+            "local"
+          ],
+          "module": "./theming",
+          "moduleSystem": "cjs",
+          "dynamic": false,
+          "exoticallyRequired": false,
+          "matchesDoNotFollow": false,
+          "circular": false,
+          "valid": true
+        }
+      ],
+      "orphan": false,
+      "valid": true
+    },
+    {
+      "source": "src/report/dot/theming.js",
+      "dependencies": [
+        {
+          "resolved": "src/report/dot/default-theme.json",
+          "coreModule": false,
+          "followable": false,
+          "couldNotResolve": false,
+          "dependencyTypes": [
+            "local"
+          ],
+          "module": "./default-theme.json",
+          "moduleSystem": "cjs",
+          "dynamic": false,
+          "exoticallyRequired": false,
+          "matchesDoNotFollow": false,
+          "circular": false,
+          "valid": true
+        }
+      ],
+      "orphan": false,
+      "valid": true
+    },
+    {
+      "source": "src/report/dot/default-theme.json",
+      "followable": false,
+      "coreModule": false,
+      "couldNotResolve": false,
+      "matchesDoNotFollow": false,
+      "dependencyTypes": [
+        "local"
+      ],
+      "dependencies": [],
+      "orphan": false,
+      "valid": true
+    },
+    {
+      "source": "src/report/dot/prepare-custom-level.js",
+      "dependencies": [
+        {
+          "resolved": "src/report/dot/module-utl.js",
+          "coreModule": false,
+          "followable": true,
+          "couldNotResolve": false,
+          "dependencyTypes": [
+            "local"
+          ],
+          "module": "./module-utl",
+          "moduleSystem": "cjs",
+          "dynamic": false,
+          "exoticallyRequired": false,
+          "matchesDoNotFollow": false,
+          "circular": false,
+          "valid": true
+        }
+      ],
+      "orphan": false,
+      "valid": true
+    },
+    {
+      "source": "src/report/dot/prepare-folder-level.js",
+      "dependencies": [
+        {
+          "resolved": "src/report/dot/module-utl.js",
+          "coreModule": false,
+          "followable": true,
+          "couldNotResolve": false,
+          "dependencyTypes": [
+            "local"
+          ],
+          "module": "./module-utl",
+          "moduleSystem": "cjs",
+          "dynamic": false,
+          "exoticallyRequired": false,
+          "matchesDoNotFollow": false,
+          "circular": false,
+          "valid": true
+        }
+      ],
+      "orphan": false,
+      "valid": true
+    }
+  ],
+  "summary": {
+    "violations": [],
+    "error": 0,
+    "warn": 0,
+    "info": 0,
+    "totalCruised": 7,
+    "totalDependenciesCruised": 9,
+    "optionsUsed": {
+      "combinedDependencies": false,
+      "externalModuleResolutionStrategy": "node_modules",
+      "includeOnly": "src/report/dot",
+      "moduleSystems": [
+        "amd",
+        "cjs",
+        "es6"
+      ],
+      "outputTo": "-",
+      "outputType": "json",
+      "preserveSymlinks": false,
+      "tsPreCompilationDeps": false,
+      "exoticRequireStrings": [],
+      "args": "src/report/dot"
+    }
+  }
+}
