@@ -577,7 +577,8 @@
         "err-long",
         "err-html",
         "teamcity",
-        "anon"
+        "anon",
+        "text"
       ]
     },
     "CompoundExcludeType": {

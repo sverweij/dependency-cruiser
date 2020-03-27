@@ -151,6 +151,8 @@ details.
 <details>
 <summary>Sample output</summary>
 
+![high level dependency graph of react](./real-world-samples/react-high-level-dependencies.svg)
+
 </details>
 
 #### err-html
@@ -209,6 +211,83 @@ dependency-cruise -v -T teamcity  -- src
 
 Just like the `err` reporter the teamcity reporter has an empty output when there's
 no violations - and a non-zero exit code when there's errors.
+
+#### text
+
+This reporter makes a straight, flat dump of all dependencies found in a cruise.
+Useful for grepping.
+
+```sh
+dependency-cruise -T text --include-only src/report src/report
+```
+
+<details>
+<summary>output</summary>
+
+```
+src/report/anon/anonymize-path-element.js → src/report/anon/random-string.js
+src/report/anon/anonymize-path.js → src/report/anon/anonymize-path-element.js
+src/report/anon/index.js → src/report/anon/anonymize-path.js
+src/report/csv/index.js → src/report/utl/dependency-to-incidence-transformer.js
+src/report/dot/index.js → src/report/dot/dot.template.js
+src/report/dot/index.js → src/report/dot/module-utl.js
+src/report/dot/index.js → src/report/dot/prepare-custom-level.js
+src/report/dot/index.js → src/report/dot/prepare-folder-level.js
+src/report/dot/index.js → src/report/dot/theming.js
+src/report/dot/module-utl.js → src/report/dot/theming.js
+src/report/dot/theming.js → src/report/dot/default-theme.json
+src/report/dot/prepare-custom-level.js → src/report/utl/consolidate-to-pattern.js
+src/report/dot/prepare-custom-level.js → src/report/dot/module-utl.js
+src/report/utl/consolidate-to-pattern.js → src/report/utl/consolidate-module-dependencies.js
+src/report/utl/consolidate-to-pattern.js → src/report/utl/consolidate-modules.js
+src/report/utl/consolidate-module-dependencies.js → src/report/utl/compare-rules.js
+src/report/utl/consolidate-modules.js → src/report/utl/compare-rules.js
+src/report/dot/prepare-folder-level.js → src/report/utl/consolidate-to-folder.js
+src/report/dot/prepare-folder-level.js → src/report/dot/module-utl.js
+src/report/utl/consolidate-to-folder.js → src/report/utl/consolidate-module-dependencies.js
+src/report/utl/consolidate-to-folder.js → src/report/utl/consolidate-modules.js
+src/report/error-html/index.js → src/report/error-html/error-html.template.js
+src/report/error-html/index.js → src/report/error-html/utl.js
+src/report/html/index.js → src/report/utl/dependency-to-incidence-transformer.js
+src/report/html/index.js → src/report/html/html.template.js
+src/report/index.js → src/report/anon/index.js
+src/report/index.js → src/report/csv/index.js
+src/report/index.js → src/report/dot/index.js
+src/report/index.js → src/report/error.js
+src/report/index.js → src/report/error-html/index.js
+src/report/index.js → src/report/html/index.js
+src/report/index.js → src/report/identity.js
+src/report/index.js → src/report/json.js
+src/report/index.js → src/report/teamcity.js
+src/report/index.js → src/report/text.js
+```
+
+</details>
+
+... or to find everything connected to the `meta` module, in combination with 
+`grep`:
+
+```sh
+dependency-cruise -v -T text src | grep transpile/meta.js
+```
+
+<details>
+<summary>output</summary>
+
+```
+src/main/resolve-options/normalize.js → src/extract/transpile/meta.js
+src/extract/transpile/meta.js → package.json
+src/extract/transpile/meta.js → src/extract/transpile/coffeescript-wrap.js
+src/extract/transpile/meta.js → src/extract/transpile/javascript-wrap.js
+src/extract/transpile/meta.js → src/extract/transpile/livescript-wrap.js
+src/extract/transpile/meta.js → src/extract/transpile/typescript-wrap.js
+src/extract/transpile/meta.js → src/extract/transpile/vue-template-wrap.js
+src/main/index.js → src/extract/transpile/meta.js
+src/extract/transpile/index.js → src/extract/transpile/meta.js
+src/extract/gather-initial-sources.js → src/extract/transpile/meta.js
+```
+
+</details>
 
 #### json
 
