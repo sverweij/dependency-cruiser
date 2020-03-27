@@ -14,7 +14,8 @@ module.exports = {
         "err-long",
         "err-html",
         "teamcity",
-        "anon"
+        "anon",
+        "text"
       ]
     }
   }
