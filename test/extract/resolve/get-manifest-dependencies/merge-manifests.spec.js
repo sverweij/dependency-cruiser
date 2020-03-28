@@ -1,5 +1,5 @@
 const expect = require("chai").expect;
-const mergePackages = require("../../../../src/extract/resolve/read-package-deps/merge-packages");
+const mergePackages = require("../../../../src/extract/resolve/get-manifest-dependencies/merge-manifests");
 
 const INPUT = {
   description: "testington",
@@ -58,7 +58,7 @@ const FIXTURE_MERGED = {
   bundledDependencies: ["nodash", "slodash", "furtherdash"]
 };
 
-describe("extract/resolve/read-package-deps/mergePackages", () => {
+describe("extract/resolve/get-manifest-dependencies/merge-manifests", () => {
   it("merging empty packages yields {}", () => {
     expect(mergePackages({}, {})).to.deep.equal({});
   });

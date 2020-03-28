@@ -1,9 +1,13 @@
 const isModuleOnlyRule = require("./is-module-only-rule");
-const matches = require("./matches");
+const matchers = require("./matchers");
 
 function propertyEquals(pTo, pRule, pProperty) {
+  // ignore security/detect-object-injection because:
+  // - we only use it from within the module with two fixed values
+  // - the propertyEquals function is not exposed externaly
   return pRule.to.hasOwnProperty(pProperty)
-    ? pTo[pProperty] === pRule.to[pProperty]
+    ? // eslint-disable-next-line security/detect-object-injection
+      pTo[pProperty] === pRule.to[pProperty]
     : true;
 }
 
@@ -30,21 +34,22 @@ function extractGroups(pRule, pActualPath) {
 }
 
 function match(pFrom, pTo) {
+  // eslint-disable-next-line complexity
   return pRule => {
     const lGroups = extractGroups(pRule.from, pFrom.source);
 
     return (
-      matches.fromPath(pRule, pFrom) &&
-      matches.fromPathNot(pRule, pFrom) &&
-      matches.toDependencyPath(pRule, pTo, lGroups) &&
-      matches.toDependencyPathNot(pRule, pTo, lGroups) &&
-      matches.toDependencyTypes(pRule, pTo) &&
+      matchers.fromPath(pRule, pFrom) &&
+      matchers.fromPathNot(pRule, pFrom) &&
+      matchers.toPath(pRule, pTo, lGroups) &&
+      matchers.toPathNot(pRule, pTo, lGroups) &&
+      matchers.toDependencyTypes(pRule, pTo) &&
       (!pRule.to.hasOwnProperty("moreThanOneDependencyType") ||
         pTo.dependencyTypes.length > 1) &&
-      matches.toLicense(pRule, pTo) &&
-      matches.toLicenseNot(pRule, pTo) &&
-      matches.toExoticRequire(pRule, pTo) &&
-      matches.toExoticRequireNot(pRule, pTo) &&
+      matchers.toLicense(pRule, pTo) &&
+      matchers.toLicenseNot(pRule, pTo) &&
+      matchers.toExoticRequire(pRule, pTo) &&
+      matchers.toExoticRequireNot(pRule, pTo) &&
       propertyEquals(pTo, pRule, "preCompilationOnly") &&
       propertyEquals(pTo, pRule, "couldNotResolve") &&
       propertyEquals(pTo, pRule, "circular") &&
@@ -59,9 +64,3 @@ module.exports = {
   match,
   isInteresting
 };
-
-/* ignore security/detect-object-injection because:
-   - we only use it from within the module with two fixed values
-   - the propertyEquals function is not exposed externaly
- */
-/* eslint security/detect-object-injection: 0, complexity: 0 */

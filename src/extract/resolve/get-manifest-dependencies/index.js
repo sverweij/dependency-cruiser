@@ -1,12 +1,12 @@
 const path = require("path");
 const fs = require("fs");
 const _memoize = require("lodash/memoize");
-const mergePackages = require("./merge-packages");
+const mergePackages = require("./merge-manifests");
 
 /**
- * return the contents of the package.json closest to the passed
- * folder (or null if there's no such package.json/ that package.json
- * is invalid).
+ * return the contents of the package manifest ('package.json' closest to
+ * the passed folder (or null if there's no such package.json/ that
+ * package.json is invalid).
  *
  * This behavior is consistent with node's lookup mechanism
  *
@@ -16,7 +16,7 @@ const mergePackages = require("./merge-packages");
  *               object or null if the package.json could not be
  *               found or is invalid
  */
-const readPackageDeps = _memoize(pFileDirectory => {
+const getManifest = _memoize(pFileDirectory => {
   let lReturnValue = null;
 
   try {
@@ -36,7 +36,7 @@ const readPackageDeps = _memoize(pFileDirectory => {
 
     if (lNextDirectory !== pFileDirectory) {
       // not yet reached root directory
-      lReturnValue = readPackageDeps(lNextDirectory);
+      lReturnValue = getManifest(lNextDirectory);
     }
   }
   return lReturnValue;
@@ -84,7 +84,7 @@ function getIntermediatePaths(pFileDirectory, pBaseDirectory) {
 // to the _.memoize. This is deliberate - the pBaseDirectory will typically
 // be the same for each call in a typical cruise, so the lodash'
 // default memoize resolver (the first param) will suffice.
-const readPackageDepsCombined = _memoize((pFileDirectory, pBaseDirectory) => {
+const getCombinedManifests = _memoize((pFileDirectory, pBaseDirectory) => {
   // The way this is called, this shouldn't happen. If it is, there's
   // something gone terribly awry
   if (
@@ -111,9 +111,9 @@ const readPackageDepsCombined = _memoize((pFileDirectory, pBaseDirectory) => {
 
 /**
  * return
- * - the contents of the package.json closest to the passed folder
- *   (see read-package-deps above)  when pCombinedDependencies === false
- * - the 'combined' contents of all package.jsons between the passed folder
+ * - the contents of the package manifest ('package.json') closest to the passed
+ *   folder (see read-package-deps above) when pCombinedDependencies === false
+ * - the 'combined' contents of all manifests between the passed folder
  *   and the 'root' folder (the folder the cruise was run from) in
  *   all other cases
  * @param  {string}  pFileDirectory              the folder relative to which to find
@@ -131,12 +131,12 @@ module.exports = (
   pCombinedDependencies = false
 ) => {
   if (pCombinedDependencies) {
-    return readPackageDepsCombined(pFileDirectory, pBaseDirectory);
+    return getCombinedManifests(pFileDirectory, pBaseDirectory);
   } else {
-    return readPackageDeps(pFileDirectory);
+    return getManifest(pFileDirectory);
   }
 };
 module.exports.clearCache = () => {
-  readPackageDepsCombined.cache.clear();
-  readPackageDeps.cache.clear();
+  getCombinedManifests.cache.clear();
+  getManifest.cache.clear();
 };

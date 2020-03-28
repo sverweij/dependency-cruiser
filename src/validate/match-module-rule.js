@@ -1,5 +1,5 @@
 const isModuleOnlyRule = require("./is-module-only-rule");
-const matches = require("./matches");
+const matchers = require("./matchers");
 
 function matchesOrphanRule(pRule, pModule) {
   let lReturnValue = true;
@@ -8,8 +8,8 @@ function matchesOrphanRule(pRule, pModule) {
     if (pModule.hasOwnProperty("orphan")) {
       lReturnValue =
         pModule.orphan === pRule.from.orphan &&
-        matches.fromPath(pRule, pModule) &&
-        matches.fromPathNot(pRule, pModule);
+        matchers.fromPath(pRule, pModule) &&
+        matchers.fromPathNot(pRule, pModule);
     } else {
       lReturnValue = !pRule.from.orphan;
     }
@@ -29,8 +29,8 @@ function matchesReachableRule(pRule, pModule) {
             pReachable.asDefinedInRule === (pRule.name || "not-in-allowed") &&
             pRule.to.reachable === pReachable.value
         ) &&
-        matches.toModulePath(pRule, pModule) &&
-        matches.toModulePathNot(pRule, pModule);
+        matchers.toModulePath(pRule, pModule) &&
+        matchers.toModulePathNot(pRule, pModule);
     }
   }
   return lReturnValue;

@@ -7,20 +7,20 @@ function toFlatModuleDependencies(pModule) {
   }));
 }
 
-function toFlatDependencies(pResults) {
-  return pResults.modules.reduce(
+function toFlatDependencies(pModules) {
+  return pModules.reduce(
     (pAll, pModule) => pAll.concat(toFlatModuleDependencies(pModule)),
     []
   );
 }
 
-function stringit(pFlatDependency) {
+function stringify(pFlatDependency) {
   return `${pFlatDependency.from} ${figures.arrowRight} ${pFlatDependency.to}`;
 }
 
 function report(pResults) {
-  return toFlatDependencies(pResults).reduce(
-    (pAll, pDependency) => pAll.concat(stringit(pDependency)).concat("\n"),
+  return toFlatDependencies(pResults.modules).reduce(
+    (pAll, pDependency) => pAll.concat(stringify(pDependency)).concat("\n"),
     ""
   );
 }

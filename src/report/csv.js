@@ -1,4 +1,4 @@
-const dependencyToIncidenceTransformer = require("../utl/dependency-to-incidence-transformer");
+const dependencyToIncidenceTransformer = require("./utl/dependency-to-incidence-transformer");
 
 function renderHeader(pModules) {
   return pModules.map(pModule => `"${pModule.source}"`).join(",");
@@ -16,7 +16,7 @@ function renderBody(pModules) {
   );
 }
 
-function render(pModules) {
+function report(pModules) {
   return `"",${renderHeader(pModules)},""${renderBody(pModules)}\n`;
 }
 
@@ -28,6 +28,6 @@ function render(pModules) {
  *                     exitCode: 0
  */
 module.exports = pResults => ({
-  output: render(dependencyToIncidenceTransformer(pResults.modules)),
+  output: report(dependencyToIncidenceTransformer(pResults.modules)),
   exitCode: 0
 });
