@@ -2,12 +2,12 @@ const _uniq = require("lodash/uniq");
 const _get = require("lodash/get");
 const _clone = require("lodash/clone");
 
-function normalizePackageKeys(pPackage) {
-  let lReturnValue = pPackage;
+function normalizeManifestKeys(pManifest) {
+  let lReturnValue = pManifest;
 
-  if (pPackage.bundleDependencies) {
-    pPackage.bundledDependencies = _clone(pPackage.bundleDependencies);
-    Reflect.deleteProperty(pPackage, "bundleDependencies");
+  if (pManifest.bundleDependencies) {
+    pManifest.bundledDependencies = _clone(pManifest.bundleDependencies);
+    Reflect.deleteProperty(pManifest, "bundleDependencies");
   }
   return lReturnValue;
 }
@@ -31,7 +31,7 @@ function getDependencyKeys(pPackage) {
   return Object.keys(pPackage).filter(isDependencyKey);
 }
 
-function getJointDependencyKeys(pClosestPackage, pFurtherPackage) {
+function getJointUniqueDependencyKeys(pClosestPackage, pFurtherPackage) {
   return _uniq(
     getDependencyKeys(pClosestPackage).concat(
       getDependencyKeys(pFurtherPackage)
@@ -49,27 +49,27 @@ function getJointDependencyKeys(pClosestPackage, pFurtherPackage) {
  * bundle, peer and regular dependencies are included.
  *
  * (This function exists for mono repos that use 'collective' dependencies)
- * @param  {any} pClosestPackage the contents of the package.json closer to the
+ * @param  {any} pClosestManifest the contents of the package.json closer to the
  *                               source being perused (e.g. ./packages/sub/package.json)
- * @param  {any} pFurtherPackage the contents of a package.json further away
+ * @param  {any} pFurtherManifest the contents of a package.json further away
  *                               (e.g. ./package.json)
- * @return {any}                 the dependency-keys of
+ * @return {any}                 the combined dependency-keys within those manifests
  */
-module.exports = (pClosestPackage, pFurtherPackage) =>
-  getJointDependencyKeys(
-    normalizePackageKeys(pClosestPackage),
-    normalizePackageKeys(pFurtherPackage)
+module.exports = (pClosestManifest, pFurtherManifest) =>
+  getJointUniqueDependencyKeys(
+    normalizeManifestKeys(pClosestManifest),
+    normalizeManifestKeys(pFurtherManifest)
   )
     .map(pKey => ({
       key: pKey,
       value: pKey.startsWith("bundle")
         ? mergeDependencyArray(
-            _get(pClosestPackage, pKey, []),
-            _get(pFurtherPackage, pKey, [])
+            _get(pClosestManifest, pKey, []),
+            _get(pFurtherManifest, pKey, [])
           )
         : mergeDependencyKey(
-            _get(pClosestPackage, pKey, {}),
-            _get(pFurtherPackage, pKey, {})
+            _get(pClosestManifest, pKey, {}),
+            _get(pFurtherManifest, pKey, {})
           )
     }))
     .reduce((pJoinedObject, pJoinedKey) => {

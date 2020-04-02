@@ -799,7 +799,7 @@ to follow external dependencies, in stead of specifying the "node_modules" path:
     "options": {
         "doNotFollow": {
             // "path": "node_modules",
-            dependencyTypes: [
+            "dependencyTypes": [
                 "npm",
                 "npm-dev",
                 "npm-optional",

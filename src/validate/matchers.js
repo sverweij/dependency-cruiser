@@ -26,7 +26,7 @@ function _toPath(pRule, pString, pGroups = []) {
   );
 }
 
-function toDependencyPath(pRule, pDependency, pGroups) {
+function toPath(pRule, pDependency, pGroups) {
   return _toPath(pRule, pDependency.resolved, pGroups);
 }
 
@@ -43,7 +43,7 @@ function _toPathNot(pRule, pString, pGroups = []) {
   );
 }
 
-function toDependencyPathNot(pRule, pDependency, pGroups) {
+function toPathNot(pRule, pDependency, pGroups) {
   return _toPathNot(pRule, pDependency.resolved, pGroups);
 }
 
@@ -92,9 +92,9 @@ module.exports = {
   _replaceGroupPlaceholders,
   fromPath,
   fromPathNot,
-  toDependencyPath,
+  toPath,
   toModulePath,
-  toDependencyPathNot,
+  toPathNot,
   toModulePathNot,
   toDependencyTypes,
   toLicense,
