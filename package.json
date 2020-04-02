@@ -130,7 +130,7 @@
     "figures": "3.2.0",
     "get-stream": "5.1.0",
     "glob": "7.1.6",
-    "handlebars": "4.7.3",
+    "handlebars": "4.7.4",
     "indent-string": "4.0.0",
     "inquirer": "7.1.0",
     "lodash": "4.17.15",
@@ -151,7 +151,7 @@
     "eslint-config-moving-meadow": "1.2.0",
     "eslint-config-prettier": "6.10.1",
     "eslint-plugin-budapestian": "1.2.0",
-    "eslint-plugin-import": "2.20.1",
+    "eslint-plugin-import": "2.20.2",
     "eslint-plugin-mocha": "6.3.0",
     "eslint-plugin-node": "11.1.0",
     "eslint-plugin-security": "1.4.0",
@@ -166,7 +166,7 @@
     "prettier": "1.19.1",
     "shx": "0.3.2",
     "symlink-dir": "3.1.2",
-    "tslint": "6.1.0",
+    "tslint": "6.1.1",
     "tslint-config-prettier": "1.18.0",
     "typescript": "3.8.3",
     "upem": "3.1.2",
@@ -175,6 +175,10 @@
   },
   "upem": {
     "donotup": [
+      {
+        "package": "chalk",
+        "because": "chalk 4 doesn't support node 8 anymore while dependency-cruiser still does."
+      },
       {
         "package": "eslint-plugin-unicorn",
         "because": "eslint-plugin-unicorn 16 doesn't support node 8 anymore while dependency-cruiser still does."
