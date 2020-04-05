@@ -1,12 +1,14 @@
 const $defaults = require("../defaults.json");
-const createConfigFile = require("./create-config-file");
+const normalizeInitOptions = require("./normalize-init-options");
+const buildConfig = require("./build-config");
+const writeConfig = require("./write-config");
 const getUserInput = require("./get-user-input");
 const { pnpIsEnabled, fileExists } = require("./helpers");
 
 const TYPESCRIPT_CONFIG = `./${$defaults.TYPESCRIPT_CONFIG}`;
 const WEBPACK_CONFIG = `./${$defaults.WEBPACK_CONFIG}`;
 
-function getOneshotConfig(pInit) {
+function getOneshotConfig(pOneShotConfigId) {
   const ONESHOT_CONFIGS = {
     preset: {
       configType: "preset",
@@ -29,18 +31,20 @@ function getOneshotConfig(pInit) {
   };
 
   // eslint-disable-next-line security/detect-object-injection
-  return ONESHOT_CONFIGS[pInit] || {};
+  return ONESHOT_CONFIGS[pOneShotConfigId] || {};
 }
 
 module.exports = pInit => {
   /* istanbul ignore if */
   if (pInit === true) {
     getUserInput()
-      .then(createConfigFile)
+      .then(normalizeInitOptions)
+      .then(buildConfig)
+      .then(writeConfig)
       .catch(pError => {
         process.stderr.write(`\n  ERROR: ${pError.message}\n`);
       });
   } else {
-    createConfigFile(getOneshotConfig(pInit));
+    writeConfig(buildConfig(normalizeInitOptions(getOneshotConfig(pInit))));
   }
 };

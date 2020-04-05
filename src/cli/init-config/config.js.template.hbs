@@ -109,7 +109,7 @@ module.exports = {
     {
       name: 'no-duplicate-dep-types',
       comment:
-        "Likley this module depends on an external ('npm') package that occurs more than once " +
+        "Likeley this module depends on an external ('npm') package that occurs more than once " +
         "in your package.json i.e. bot as a devDependencies and in dependencies. This will cause " +
         "maintenance problems later on.",
       severity: 'warn',
@@ -121,6 +121,7 @@ module.exports = {
 
     /* rules you might want to tweak for your specific situation: */
 {{/if}}
+    {{#hastestsOutsideSource}}
     {
       name: 'not-to-test',
       comment: 
@@ -129,12 +130,13 @@ module.exports = {
         "or there's something in the test folder that isn't a test.",
       severity: 'error',
       from: {
-        pathNot: '^(test|spec)'
+        pathNot: '{{testLocationRE}}'
       },
       to: {
-        path: '^(test|spec)'
+        path: '{{testLocationRE}}'
       }
     },
+    {{/hastestsOutsideSource}}
     {
       name: 'not-to-spec',
       comment:
@@ -157,7 +159,7 @@ module.exports = {
         'section of your package.json. If this module is development only - add it to the ' +
         'from.pathNot re of the not-to-dev-dep rule in the dependency-cruiser configuration',
       from: {
-        path: '^(src|app|lib)',
+        path: '{{sourceLocationRE}}',
         pathNot: '\\.spec\\.(js|ts|ls|coffee|litcoffee|coffee\\.md)$'
       },
       to: {
@@ -374,7 +376,7 @@ module.exports = {
           dependency graph reporter (`archi`) you probably want to tweak
           this collapsePattern to your situation.
         */
-        collapsePattern: '^(node_modules|packages|src|lib|app|test|spec)/[^/]+',
+        collapsePattern: '^(node_modules|packages|src|lib|app|bin|test(s?)|spec(s?))/[^/]+',
         
         /* Options to tweak the appearance of your graph.See
            https://github.com/sverweij/dependency-cruiser/blob/master/doc/rules-reference.md#dot

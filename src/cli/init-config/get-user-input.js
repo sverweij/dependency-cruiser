@@ -1,6 +1,13 @@
 const inquirer = require("inquirer");
 const $defaults = require("../defaults.json");
-const { fileExists, pnpIsEnabled } = require("./helpers");
+const {
+  fileExists,
+  isLikelyMonoRepo,
+  pnpIsEnabled,
+  getSourceFolderCandidates,
+  getTestFolderCandidates,
+  validateLocation
+} = require("./helpers");
 
 const TYPESCRIPT_CONFIG = `./${$defaults.TYPESCRIPT_CONFIG}`;
 const WEBPACK_CONFIG = `./${$defaults.WEBPACK_CONFIG}`;
@@ -28,6 +35,22 @@ const INQUIRER_QUESTIONS = [
     ],
     default: "dependency-cruiser/configs/recommended-warn-only",
     when: pAnswers => pAnswers.configType === "preset"
+  },
+  {
+    name: "sourceLocation",
+    type: "input",
+    message: "Where do your source files live?",
+    default: getSourceFolderCandidates(),
+    validate: pThisAnswer => validateLocation(pThisAnswer),
+    when: () => !isLikelyMonoRepo()
+  },
+  {
+    name: "testLocation",
+    type: "input",
+    message: "Where do your test files live?",
+    default: getTestFolderCandidates(),
+    validate: pThisAnswer => validateLocation(pThisAnswer),
+    when: () => !isLikelyMonoRepo()
   },
   {
     name: "useYarnPnP",
@@ -58,7 +81,7 @@ const INQUIRER_QUESTIONS = [
     type: "confirm",
     message:
       "Also regard TypeScript dependencies that exist only before compilation?",
-    when: () => fileExists(TYPESCRIPT_CONFIG)
+    when: pAnswers => fileExists(TYPESCRIPT_CONFIG) && pAnswers.useTsConfig
   },
   {
     name: "useWebpackConfig",
