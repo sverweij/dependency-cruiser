@@ -12,7 +12,7 @@ export interface IDoNotFollowType {
   /**
    * an array of dependency types to include, but not follow further
    */
-  dependencyTypes?: DependencyType;
+  dependencyTypes?: DependencyType[];
 }
 
 export interface IExcludeType {
