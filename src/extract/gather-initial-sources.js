@@ -11,6 +11,17 @@ function matchesPattern(pFullPathToFile, pPattern) {
   return RegExp(pPattern, "g").test(pFullPathToFile);
 }
 
+function keepNonExcluded(pFullPathToFile, pOptions) {
+  return (
+    (!_get(pOptions, "exclude.path") ||
+      !matchesPattern(pathToPosix(pFullPathToFile), pOptions.exclude.path)) &&
+    (!pOptions.includeOnly ||
+      matchesPattern(pathToPosix(pFullPathToFile), pOptions.includeOnly)) &&
+    (!_get(pOptions, "doNotFollow.path") ||
+      !matchesPattern(pathToPosix(pFullPathToFile), pOptions.doNotFollow.path))
+  );
+}
+
 function gatherScannableFilesFromDirectory(pDirectoryName, pOptions) {
   return fs
     .readdirSync(pDirectoryName)
@@ -30,21 +41,7 @@ function gatherScannableFilesFromDirectory(pDirectoryName, pOptions) {
       }
       return pSum;
     }, [])
-    .filter(
-      pFullPathToFile =>
-        (!_get(pOptions, "exclude.path") ||
-          !matchesPattern(
-            pathToPosix(pFullPathToFile),
-            pOptions.exclude.path
-          )) &&
-        (!pOptions.includeOnly ||
-          matchesPattern(pathToPosix(pFullPathToFile), pOptions.includeOnly)) &&
-        (!_get(pOptions, "doNotFollow.path") ||
-          !matchesPattern(
-            pathToPosix(pFullPathToFile),
-            pOptions.doNotFollow.path
-          ))
-    );
+    .filter(pFullPathToFile => keepNonExcluded(pFullPathToFile, pOptions));
 }
 
 /**
