@@ -35,13 +35,15 @@ function gatherScannableFilesFromDirectory(pDirectoryName, pOptions) {
         );
       }
       if (
-        SUPPORTED_EXTENSIONS.some(pExtension => pFileName.endsWith(pExtension))
+        SUPPORTED_EXTENSIONS.some((pExtension) =>
+          pFileName.endsWith(pExtension)
+        )
       ) {
         return pSum.concat(path.join(pDirectoryName, pFileName));
       }
       return pSum;
     }, [])
-    .filter(pFullPathToFile => keepNonExcluded(pFullPathToFile, pOptions));
+    .filter((pFullPathToFile) => keepNonExcluded(pFullPathToFile, pOptions));
 }
 
 /**
