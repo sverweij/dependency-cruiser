@@ -153,11 +153,11 @@ module.exports = {
       // but at least temporarily don't let it break our build
       // by setting the severity to "warn" here
       name: "no-deprecated-core",
-      severity: "warn"
+      severity: "warn",
       // no need to specify the from and to, because they're already
       // defined in 'recommended'
-    }
-  ]
+    },
+  ],
 };
 ```
 
@@ -810,6 +810,16 @@ to follow external dependencies, in stead of specifying the "node_modules" path:
     }
 ```
 
+> #### How `doNotFollow` influences what gets cruised
+>
+> <!-- this is correct but copy CBB => TODO-->
+>
+> If files in the arguments to dependency-cruiser match the doNotFollow regular
+> expression (e.g. `depcruise --do-not-follow node_modules -T text src test node_modules`),
+> dependency-cruiser will exclude them in the first pass and only visit them when
+> they're used in (so in the example above only if `src` or `test` uses something
+> from `node_modules`).
+
 ### `includeOnly`: only include modules satisfying a pattern
 
 > command line option equivalent: `--include-only`
@@ -1190,8 +1200,8 @@ As a base, take this part of dependency-cruisers code:
 module.exports = {
   options: {
     includeOnly: "^src/main",
-    exclude: "/filesAndDirs/"
-  }
+    exclude: "/filesAndDirs/",
+  },
 };
 ```
 
@@ -1218,47 +1228,47 @@ module.exports = {
             color: "white",
             fontcolor: "white",
             fillcolor: "transparent",
-            splines: "ortho"
+            splines: "ortho",
           },
           node: {
             color: "white",
             fillcolor: "#ffffff33",
-            fontcolor: "white"
+            fontcolor: "white",
           },
           edge: {
             arrowhead: "vee",
             arrowsize: "0.5",
             penwidth: "1.0",
             color: "white",
-            fontcolor: "white"
+            fontcolor: "white",
           },
           modules: [
             {
               criteria: { source: "\\.json$" },
               attributes: {
                 shape: "cylinder",
-                fillcolor: "#ffffff33:#ffffff88"
-              }
+                fillcolor: "#ffffff33:#ffffff88",
+              },
             },
             {
               criteria: { coreModule: true },
               attributes: {
                 color: "white",
                 fillcolor: "#ffffff33",
-                fontcolor: "white"
-              }
-            }
+                fontcolor: "white",
+              },
+            },
           ],
           dependencies: [
             {
               criteria: { resolved: "\\.json$" },
-              attributes: { arrowhead: "obox" }
-            }
-          ]
-        }
-      }
-    }
-  }
+              attributes: { arrowhead: "obox" },
+            },
+          ],
+        },
+      },
+    },
+  },
 };
 ```
 
@@ -1279,11 +1289,11 @@ module.exports = {
     reporterOptions: {
       dot: {
         theme: {
-          graph: { rankdir: "TD" }
-        }
-      }
-    }
-  }
+          graph: { rankdir: "TD" },
+        },
+      },
+    },
+  },
 };
 ```
 
@@ -1305,11 +1315,11 @@ module.exports = {
     reporterOptions: {
       dot: {
         theme: {
-          replace: true
-        }
-      }
-    }
-  }
+          replace: true,
+        },
+      },
+    },
+  },
 };
 ```
 
@@ -1333,10 +1343,10 @@ module.exports = {
   options: {
     reporterOptions: {
       archi: {
-        collapsePattern: "^(src/[^/]+|bin)"
-      }
-    }
-  }
+        collapsePattern: "^(src/[^/]+|bin)",
+      },
+    },
+  },
 };
 ```
 
@@ -1514,8 +1524,8 @@ module.exports = {
   forbidden: [subNotAllowed, noInterComponents],
   options: {
     tsConfig: {
-      fileName: "./tsconfig.json"
-    }
-  }
+      fileName: "./tsconfig.json",
+    },
+  },
 };
 ```
