@@ -38,7 +38,12 @@ function gatherScannableFilesFromDirectory(pDirectoryName, pOptions) {
             pOptions.exclude.path
           )) &&
         (!pOptions.includeOnly ||
-          matchesPattern(pathToPosix(pFullPathToFile), pOptions.includeOnly))
+          matchesPattern(pathToPosix(pFullPathToFile), pOptions.includeOnly)) &&
+        (!_get(pOptions, "doNotFollow.path") ||
+          !matchesPattern(
+            pathToPosix(pFullPathToFile),
+            pOptions.doNotFollow.path
+          ))
     );
 }
 
