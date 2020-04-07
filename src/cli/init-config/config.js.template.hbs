@@ -121,7 +121,7 @@ module.exports = {
 
     /* rules you might want to tweak for your specific situation: */
 {{/if}}
-    {{#hastestsOutsideSource}}
+    {{#hasTestsOutsideSource}}
     {
       name: 'not-to-test',
       comment: 
@@ -136,7 +136,7 @@ module.exports = {
         path: '{{testLocationRE}}'
       }
     },
-    {{/hastestsOutsideSource}}
+    {{/hasTestsOutsideSource}}
     {
       name: 'not-to-spec',
       comment:
