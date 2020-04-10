@@ -1,11 +1,13 @@
 const intersects = require("../utl/array-util").intersects;
 
 function fromPath(pRule, pModule) {
-  return !pRule.from.path || pModule.source.match(pRule.from.path);
+  return Boolean(!pRule.from.path || pModule.source.match(pRule.from.path));
 }
 
 function fromPathNot(pRule, pModule) {
-  return !pRule.from.pathNot || !pModule.source.match(pRule.from.pathNot);
+  return Boolean(
+    !pRule.from.pathNot || !pModule.source.match(pRule.from.pathNot)
+  );
 }
 
 function _replaceGroupPlaceholders(pString, pExtractedGroups) {
@@ -18,11 +20,11 @@ function _replaceGroupPlaceholders(pString, pExtractedGroups) {
 }
 
 function _toPath(pRule, pString, pGroups = []) {
-  return (
+  return Boolean(
     !pRule.to.path ||
-    (pGroups.length > 0
-      ? pString.match(_replaceGroupPlaceholders(pRule.to.path, pGroups))
-      : pString.match(pRule.to.path))
+      (pGroups.length > 0
+        ? pString.match(_replaceGroupPlaceholders(pRule.to.path, pGroups))
+        : pString.match(pRule.to.path))
   );
 }
 
@@ -52,39 +54,39 @@ function toModulePathNot(pRule, pModule, pGroups) {
 }
 
 function toDependencyTypes(pRule, pDependency) {
-  return (
+  return Boolean(
     !pRule.to.dependencyTypes ||
-    intersects(pDependency.dependencyTypes, pRule.to.dependencyTypes)
+      intersects(pDependency.dependencyTypes, pRule.to.dependencyTypes)
   );
 }
 
 function toLicense(pRule, pDependency) {
-  return (
+  return Boolean(
     !pRule.to.license ||
-    (pDependency.license && pDependency.license.match(pRule.to.license))
+      (pDependency.license && pDependency.license.match(pRule.to.license))
   );
 }
 
 function toLicenseNot(pRule, pDependency) {
-  return (
+  return Boolean(
     !pRule.to.licenseNot ||
-    (pDependency.license && !pDependency.license.match(pRule.to.licenseNot))
+      (pDependency.license && !pDependency.license.match(pRule.to.licenseNot))
   );
 }
 
 function toExoticRequire(pRule, pDependency) {
-  return (
+  return Boolean(
     !pRule.to.exoticRequire ||
-    (pDependency.exoticRequire &&
-      pDependency.exoticRequire.match(pRule.to.exoticRequire))
+      (pDependency.exoticRequire &&
+        pDependency.exoticRequire.match(pRule.to.exoticRequire))
   );
 }
 
 function toExoticRequireNot(pRule, pDependency) {
-  return (
+  return Boolean(
     !pRule.to.exoticRequireNot ||
-    (pDependency.exoticRequire &&
-      !pDependency.exoticRequire.match(pRule.to.exoticRequireNot))
+      (pDependency.exoticRequire &&
+        !pDependency.exoticRequire.match(pRule.to.exoticRequireNot))
   );
 }
 
