@@ -3,8 +3,8 @@ const matchers = require("./matchers");
 
 function matchesOrphanRule(pRule, pModule) {
   return (
-    pRule.from.hasOwnProperty("orphan") &&
-    pModule.hasOwnProperty("orphan") &&
+    Object.prototype.hasOwnProperty.call(pRule.from, "orphan") &&
+    Object.prototype.hasOwnProperty.call(pModule, "orphan") &&
     pModule.orphan === pRule.from.orphan &&
     matchers.fromPath(pRule, pModule) &&
     matchers.fromPathNot(pRule, pModule)
@@ -13,8 +13,8 @@ function matchesOrphanRule(pRule, pModule) {
 
 function matchesReachableRule(pRule, pModule) {
   return (
-    pRule.to.hasOwnProperty("reachable") &&
-    pModule.hasOwnProperty("reachable") &&
+    Object.prototype.hasOwnProperty.call(pRule.to, "reachable") &&
+    Object.prototype.hasOwnProperty.call(pModule, "reachable") &&
     pModule.reachable.some(
       pReachable =>
         pReachable.asDefinedInRule === (pRule.name || "not-in-allowed") &&
