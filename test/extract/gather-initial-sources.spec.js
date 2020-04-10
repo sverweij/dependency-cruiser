@@ -181,6 +181,23 @@ describe("extract/gatherInitialSources", () => {
     ]);
   });
 
+  it("filters out the stuff in the doNotFollow pattern", () => {
+    expect(
+      gather(["test/extract/fixtures/gather-globbing/**/src"], {
+        doNotFollow: { path: "/deep/ly/" }
+      }).map(pathToPosix)
+    ).to.deep.equal([
+      "test/extract/fixtures/gather-globbing/packages/baldr/src/bow.js",
+      "test/extract/fixtures/gather-globbing/packages/baldr/src/index.js",
+      "test/extract/fixtures/gather-globbing/packages/baldr/src/typo.ts",
+      "test/extract/fixtures/gather-globbing/packages/loki/src/fake/nothing.to.see.here.ts",
+      "test/extract/fixtures/gather-globbing/packages/loki/src/index.spec.ts",
+      "test/extract/fixtures/gather-globbing/packages/loki/src/index.ts",
+      "test/extract/fixtures/gather-globbing/packages/odin/src/deep/ly.js",
+      "test/extract/fixtures/gather-globbing/packages/odin/src/deep/ly.spec.js"
+    ]);
+  });
+
   it("only gathers stuff in the includeOnly pattern", () => {
     expect(
       gather(["test/extract/fixtures/gather-globbing/packages"], {
@@ -194,32 +211,4 @@ describe("extract/gatherInitialSources", () => {
       "test/extract/fixtures/gather-globbing/packages/loki/src/index.ts"
     ]);
   });
-
-  /*
-    it("using the same file twice as input has the same result as using it once", () => {
-        expect(
-            gather([
-                "test/extract/fixtures/ts/index.ts",
-                "test/extract/fixtures/ts/index.ts"
-            ]).map(p2p)
-        ).to.deep.equal(
-            gather([
-                "test/extract/fixtures/ts/index.ts"
-            ])
-        );
-    });
-
-    it("using the same folder twice as input has the same result as using it once", () => {
-        expect(
-            gather([
-                "test/extract/fixtures/ts",
-                "test/extract/fixtures/ts"
-            ]).map(p2p)
-        ).to.deep.equal(
-            gather([
-                "test/extract/fixtures/ts"
-            ])
-        );
-    });
-    */
 });

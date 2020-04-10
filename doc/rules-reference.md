@@ -153,11 +153,11 @@ module.exports = {
       // but at least temporarily don't let it break our build
       // by setting the severity to "warn" here
       name: "no-deprecated-core",
-      severity: "warn"
+      severity: "warn",
       // no need to specify the from and to, because they're already
       // defined in 'recommended'
-    }
-  ]
+    },
+  ],
 };
 ```
 
@@ -789,7 +789,7 @@ use with this is "node_modules":
 
 > It's not possible to use this on the command line
 
-`--do-not-follow` to specify a regular expression
+It is possible to specify a regular expression
 for files that dependency-cruiser should cruise, but not follow any further.
 In the options section you can restrict what gets cruised by specifying
 [dependency types](#dependencytypes). So if e.g. you don't want dependency-cruiser
@@ -810,6 +810,28 @@ to follow external dependencies, in stead of specifying the "node_modules" path:
     }
 ```
 
+> #### How `doNotFollow` influences what gets cruised
+>
+> There's a few steps dependency-cruiser takes when you fire it of:
+>
+> 1. gather all files specified as an argument, filtering out the stuff in `exclude`
+>    and `doNotFollow` and that which is not in `includeOnly`.
+> 2. starting from the gathered files: crawl all dependencies it can find. Crawling
+>    stops when a module matches `doNotFollow` rule or a modules' dependency matches
+>    either `exclude` or does not match `includeOnly`.
+> 3. apply any rules over the result & report it.
+>
+> So in the first step `doNotFollow` behaves itself exactly like `exclude` would.
+> Only in the second step it allows files matching its pattern to be visited
+> (but not followed any further).
+>
+> This means dependency-cruise _will_ encounter files matching `doNotFollow`
+> but only when they are dependencies of other modules. This a.o. prevents unexpected
+> behavior where specifying node modules as `doNotFollow` pattern would still
+> traverse all node_modules when the node_modules were part of the arguments
+> e.g. in `depcruise --do-not-follow node_modules --validate -- src test node_modules`
+> or, more subtly with `depcruise --don-not-follow node_modules -- validate -- .`.
+
 ### `includeOnly`: only include modules satisfying a pattern
 
 > command line option equivalent: `--include-only`
@@ -828,7 +850,7 @@ exclude all node_modules, core modules and modules otherwise outside it):
 }
 ```
 
-If you specify both an include and an exclude (see below), dependency-cruiser takes
+If you specify both an includeOnly and an exclude (see below), dependency-cruiser takes
 them _both_ into account.
 
 ### `exclude`: exclude dependencies from being cruised
@@ -1190,8 +1212,8 @@ As a base, take this part of dependency-cruisers code:
 module.exports = {
   options: {
     includeOnly: "^src/main",
-    exclude: "/filesAndDirs/"
-  }
+    exclude: "/filesAndDirs/",
+  },
 };
 ```
 
@@ -1218,47 +1240,47 @@ module.exports = {
             color: "white",
             fontcolor: "white",
             fillcolor: "transparent",
-            splines: "ortho"
+            splines: "ortho",
           },
           node: {
             color: "white",
             fillcolor: "#ffffff33",
-            fontcolor: "white"
+            fontcolor: "white",
           },
           edge: {
             arrowhead: "vee",
             arrowsize: "0.5",
             penwidth: "1.0",
             color: "white",
-            fontcolor: "white"
+            fontcolor: "white",
           },
           modules: [
             {
               criteria: { source: "\\.json$" },
               attributes: {
                 shape: "cylinder",
-                fillcolor: "#ffffff33:#ffffff88"
-              }
+                fillcolor: "#ffffff33:#ffffff88",
+              },
             },
             {
               criteria: { coreModule: true },
               attributes: {
                 color: "white",
                 fillcolor: "#ffffff33",
-                fontcolor: "white"
-              }
-            }
+                fontcolor: "white",
+              },
+            },
           ],
           dependencies: [
             {
               criteria: { resolved: "\\.json$" },
-              attributes: { arrowhead: "obox" }
-            }
-          ]
-        }
-      }
-    }
-  }
+              attributes: { arrowhead: "obox" },
+            },
+          ],
+        },
+      },
+    },
+  },
 };
 ```
 
@@ -1279,11 +1301,11 @@ module.exports = {
     reporterOptions: {
       dot: {
         theme: {
-          graph: { rankdir: "TD" }
-        }
-      }
-    }
-  }
+          graph: { rankdir: "TD" },
+        },
+      },
+    },
+  },
 };
 ```
 
@@ -1305,11 +1327,11 @@ module.exports = {
     reporterOptions: {
       dot: {
         theme: {
-          replace: true
-        }
-      }
-    }
-  }
+          replace: true,
+        },
+      },
+    },
+  },
 };
 ```
 
@@ -1333,10 +1355,10 @@ module.exports = {
   options: {
     reporterOptions: {
       archi: {
-        collapsePattern: "^(src/[^/]+|bin)"
-      }
-    }
-  }
+        collapsePattern: "^(src/[^/]+|bin)",
+      },
+    },
+  },
 };
 ```
 
@@ -1514,8 +1536,8 @@ module.exports = {
   forbidden: [subNotAllowed, noInterComponents],
   options: {
     tsConfig: {
-      fileName: "./tsconfig.json"
-    }
-  }
+      fileName: "./tsconfig.json",
+    },
+  },
 };
 ```
