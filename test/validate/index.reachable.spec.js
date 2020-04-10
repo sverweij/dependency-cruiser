@@ -2,22 +2,32 @@ const expect = require("chai").expect;
 const validate = require("../../src/validate");
 const readRuleSet = require("./readruleset.utl");
 
-describe("validate/index - reachable", () => {
-  it("Skips modules that have no reachable attribute", () => {
+describe("validate/index - reachable (in forbidden set)", () => {
+  it("Skips modules that have no reachable attribute (reachable false)", () => {
     expect(
       validate.module(
         true,
-        readRuleSet("./test/validate/fixtures/rules.reachable.json"),
+        readRuleSet("./test/validate/fixtures/rules.reachable-false.json"),
         { source: "something" }
       )
     ).to.deep.equal({ valid: true });
   });
 
-  it("Triggers on modules that have a reachable attribute (non-matching)", () => {
+  it("Skips modules that have no reachable attribute (reachable true)", () => {
     expect(
       validate.module(
         true,
-        readRuleSet("./test/validate/fixtures/rules.reachable.json"),
+        readRuleSet("./test/validate/fixtures/rules.reachable-true.json"),
+        { source: "something" }
+      )
+    ).to.deep.equal({ valid: true });
+  });
+
+  it("Triggers on modules that have a reachable attribute (non-matching, reachable false)", () => {
+    expect(
+      validate.module(
+        true,
+        readRuleSet("./test/validate/fixtures/rules.reachable-false.json"),
         {
           source: "something",
           reachable: [{ asDefinedInRule: "no-unreachable", value: true }]
@@ -26,11 +36,24 @@ describe("validate/index - reachable", () => {
     ).to.deep.equal({ valid: true });
   });
 
-  it("Triggers on modules that have a reachable attribute", () => {
+  it("Triggers on modules that have a reachable attribute (non-matching, reachable true)", () => {
     expect(
       validate.module(
         true,
-        readRuleSet("./test/validate/fixtures/rules.reachable.json"),
+        readRuleSet("./test/validate/fixtures/rules.reachable-true.json"),
+        {
+          source: "something",
+          reachable: [{ asDefinedInRule: "no-unreachable", value: true }]
+        }
+      )
+    ).to.deep.equal({ valid: true });
+  });
+
+  it("Triggers on modules that have a reachable attribute (reachable false)", () => {
+    expect(
+      validate.module(
+        true,
+        readRuleSet("./test/validate/fixtures/rules.reachable-false.json"),
         {
           source: "something",
           reachable: [{ asDefinedInRule: "no-unreachable", value: false }]
@@ -47,11 +70,32 @@ describe("validate/index - reachable", () => {
     });
   });
 
-  it("Triggers on modules that have a reachable attribute (with a path)", () => {
+  it("Triggers on modules that have a reachable attribute (reachable true)", () => {
     expect(
       validate.module(
         true,
-        readRuleSet("./test/validate/fixtures/rules.reachable.path.json"),
+        readRuleSet("./test/validate/fixtures/rules.reachable-true.json"),
+        {
+          source: "something",
+          reachable: [{ asDefinedInRule: "no-reachable", value: true }]
+        }
+      )
+    ).to.deep.equal({
+      valid: false,
+      rules: [
+        {
+          name: "no-reachable",
+          severity: "warn"
+        }
+      ]
+    });
+  });
+
+  it("Triggers on modules that have a reachable attribute (with a path, reachable false)", () => {
+    expect(
+      validate.module(
+        true,
+        readRuleSet("./test/validate/fixtures/rules.reachable-false.path.json"),
         {
           source: "something",
           reachable: [{ asDefinedInRule: "no-unreachable", value: false }]
@@ -68,11 +112,34 @@ describe("validate/index - reachable", () => {
     });
   });
 
-  it("Triggers on modules that have a reachable attribute (with a pathNot)", () => {
+  it("Triggers on modules that have a reachable attribute (with a path, reachable true)", () => {
     expect(
       validate.module(
         true,
-        readRuleSet("./test/validate/fixtures/rules.reachable.pathnot.json"),
+        readRuleSet("./test/validate/fixtures/rules.reachable-true.path.json"),
+        {
+          source: "something",
+          reachable: [{ asDefinedInRule: "no-reachable", value: true }]
+        }
+      )
+    ).to.deep.equal({
+      valid: false,
+      rules: [
+        {
+          name: "no-reachable",
+          severity: "warn"
+        }
+      ]
+    });
+  });
+
+  it("Triggers on modules that have a reachable attribute (with a pathNot, reachable false)", () => {
+    expect(
+      validate.module(
+        true,
+        readRuleSet(
+          "./test/validate/fixtures/rules.reachable-false.pathnot.json"
+        ),
         {
           source: "something",
           reachable: [{ asDefinedInRule: "no-unreachable", value: false }]
@@ -81,27 +148,60 @@ describe("validate/index - reachable", () => {
     ).to.deep.equal({ valid: true });
   });
 
-  it("Skips modules that have no reachable attribute ('allowed' rule set)", () => {
+  it("Triggers on modules that have a reachable attribute (with a pathNot, reachable true)", () => {
+    expect(
+      validate.module(
+        true,
+        readRuleSet(
+          "./test/validate/fixtures/rules.reachable-true.pathnot.json"
+        ),
+        {
+          source: "something",
+          reachable: [{ asDefinedInRule: "no-reachable", value: true }]
+        }
+      )
+    ).to.deep.equal({ valid: true });
+  });
+});
+describe("validate/index - reachable (in allowed set)", () => {
+  it("Triggers on modules that have no reachable attribute ('allowed' rule set)", () => {
     expect(
       validate.module(
         true,
         readRuleSet("./test/validate/fixtures/rules.reachable.allowed.json"),
-        { source: "something" }
+        {
+          source: "something"
+        }
       )
-    ).to.deep.equal({ valid: true });
+    ).to.deep.equal({
+      valid: false,
+      rules: [
+        {
+          name: "not-in-allowed",
+          severity: "warn"
+        }
+      ]
+    });
   });
 
-  it("Triggers on modules that have a reachable attribute (match - 'allowed' rule set)", () => {
+  it("Skips on modules that have a reachable attribute (match - 'allowed' rule set)", () => {
     expect(
       validate.module(
         true,
         readRuleSet("./test/validate/fixtures/rules.reachable.allowed.json"),
         {
           source: "something",
-          reachable: [{ value: true, asDefinedInRule: "not-in-allowed" }]
+          reachable: [
+            {
+              value: true,
+              asDefinedInRule: "not-in-allowed"
+            }
+          ]
         }
       )
-    ).to.deep.equal({ valid: true });
+    ).to.deep.equal({
+      valid: true
+    });
   });
 
   it("Triggers on modules that have a reachable attribute (no match - 'allowed' rule set)", () => {
@@ -111,7 +211,12 @@ describe("validate/index - reachable", () => {
         readRuleSet("./test/validate/fixtures/rules.reachable.allowed.json"),
         {
           source: "something",
-          reachable: [{ value: false, asDefinedInRule: "not-in-allowed" }]
+          reachable: [
+            {
+              value: false,
+              asDefinedInRule: "not-in-allowed"
+            }
+          ]
         }
       )
     ).to.deep.equal({

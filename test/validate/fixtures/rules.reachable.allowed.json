@@ -1,8 +1,8 @@
 {
-    "allowed": [
-        {
-            "from": {"path": "src/index\\.js"},
-            "to": {"reachable":true}
-        }
-    ]
+  "allowed": [
+    {
+      "from": { "path": "^src/main/index\\.js" },
+      "to": { "reachable": true }
+    }
+  ]
 }

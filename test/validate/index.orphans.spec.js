@@ -18,11 +18,19 @@ describe("validate/index - orphans", () => {
       validate.module(
         true,
         readRuleSet("./test/validate/fixtures/rules.orphan.json"),
-        { source: "something", orphan: true }
+        {
+          source: "something",
+          orphan: true
+        }
       )
     ).to.deep.equal({
       valid: false,
-      rules: [{ name: "no-orphans", severity: "warn" }]
+      rules: [
+        {
+          name: "no-orphans",
+          severity: "warn"
+        }
+      ]
     });
   });
 
@@ -31,11 +39,19 @@ describe("validate/index - orphans", () => {
       validate.module(
         true,
         readRuleSet("./test/validate/fixtures/rules.orphan.allowed.json"),
-        { source: "something", orphan: true }
+        {
+          source: "something",
+          orphan: true
+        }
       )
     ).to.deep.equal({
       valid: false,
-      rules: [{ name: "not-in-allowed", severity: "warn" }]
+      rules: [
+        {
+          name: "not-in-allowed",
+          severity: "warn"
+        }
+      ]
     });
   });
 
@@ -44,7 +60,10 @@ describe("validate/index - orphans", () => {
       validate.module(
         true,
         readRuleSet("./test/validate/fixtures/rules.orphan.allowed.json"),
-        { source: "something", orphan: false }
+        {
+          source: "something",
+          orphan: false
+        }
       )
     ).to.deep.equal({ valid: true });
   });
@@ -54,7 +73,10 @@ describe("validate/index - orphans", () => {
       validate.module(
         true,
         readRuleSet("./test/validate/fixtures/rules.orphan.path.json"),
-        { source: "something", orphan: true }
+        {
+          source: "something",
+          orphan: true
+        }
       )
     ).to.deep.equal({ valid: true });
   });
@@ -64,11 +86,19 @@ describe("validate/index - orphans", () => {
       validate.module(
         true,
         readRuleSet("./test/validate/fixtures/rules.orphan.path.json"),
-        { source: "noorphansallowedhere/blah/something.ts", orphan: true }
+        {
+          source: "noorphansallowedhere/blah/something.ts",
+          orphan: true
+        }
       )
     ).to.deep.equal({
       valid: false,
-      rules: [{ name: "no-orphans", severity: "error" }]
+      rules: [
+        {
+          name: "no-orphans",
+          severity: "error"
+        }
+      ]
     });
   });
 
@@ -77,7 +107,10 @@ describe("validate/index - orphans", () => {
       validate.module(
         true,
         readRuleSet("./test/validate/fixtures/rules.orphan.pathnot.json"),
-        { source: "orphansallowedhere/something", orphan: true }
+        {
+          source: "orphansallowedhere/something",
+          orphan: true
+        }
       )
     ).to.deep.equal({ valid: true });
   });
@@ -87,11 +120,19 @@ describe("validate/index - orphans", () => {
       validate.module(
         true,
         readRuleSet("./test/validate/fixtures/rules.orphan.pathnot.json"),
-        { source: "blah/something.ts", orphan: true }
+        {
+          source: "blah/something.ts",
+          orphan: true
+        }
       )
     ).to.deep.equal({
       valid: false,
-      rules: [{ name: "no-orphans", severity: "warn" }]
+      rules: [
+        {
+          name: "no-orphans",
+          severity: "warn"
+        }
+      ]
     });
   });
 
@@ -100,7 +141,10 @@ describe("validate/index - orphans", () => {
       validate.dependency(
         true,
         readRuleSet("./test/validate/fixtures/rules.orphan.path.json"),
-        { source: "noorphansallowedhere/something.ts", orphan: true },
+        {
+          source: "noorphansallowedhere/something.ts",
+          orphan: true
+        },
         {}
       )
     ).to.deep.equal({ valid: true });
