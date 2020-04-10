@@ -789,7 +789,7 @@ use with this is "node_modules":
 
 > It's not possible to use this on the command line
 
-`--do-not-follow` to specify a regular expression
+It is possible to specify a regular expression
 for files that dependency-cruiser should cruise, but not follow any further.
 In the options section you can restrict what gets cruised by specifying
 [dependency types](#dependencytypes). So if e.g. you don't want dependency-cruiser
@@ -812,13 +812,25 @@ to follow external dependencies, in stead of specifying the "node_modules" path:
 
 > #### How `doNotFollow` influences what gets cruised
 >
-> <!-- this is correct but copy CBB => TODO-->
+> There's a few steps dependency-cruiser takes when you fire it of:
 >
-> If files in the arguments to dependency-cruiser match the doNotFollow regular
-> expression (e.g. `depcruise --do-not-follow node_modules -T text src test node_modules`),
-> dependency-cruiser will exclude them in the first pass and only visit them when
-> they're used in (so in the example above only if `src` or `test` uses something
-> from `node_modules`).
+> 1. gather all files specified as an argument, filtering out the stuff in `exclude`
+>    and `doNotFollow` and that which is not in `includeOnly`.
+> 2. starting from the gathered files: crawl all dependencies it can find. Crawling
+>    stops when a module matches `doNotFollow` rule or a modules' dependency matches
+>    either `exclude` or does not match `includeOnly`.
+> 3. apply any rules over the result & report it.
+>
+> So in the first step `doNotFollow` behaves itself exactly like `exclude` would.
+> Only in the second step it allows files matching its pattern to be visited
+> (but not followed any further).
+>
+> This means dependency-cruise _will_ encounter files matching `doNotFollow`
+> but only when they are dependencies of other modules. This a.o. prevents unexpected
+> behavior where specifying node modules as `doNotFollow` pattern would still
+> traverse all node_modules when the node_modules were part of the arguments
+> e.g. in `depcruise --do-not-follow node_modules --validate -- src test node_modules`
+> or, more subtly with `depcruise --don-not-follow node_modules -- validate -- .`.
 
 ### `includeOnly`: only include modules satisfying a pattern
 
@@ -838,7 +850,7 @@ exclude all node_modules, core modules and modules otherwise outside it):
 }
 ```
 
-If you specify both an include and an exclude (see below), dependency-cruiser takes
+If you specify both an includeOnly and an exclude (see below), dependency-cruiser takes
 them _both_ into account.
 
 ### `exclude`: exclude dependencies from being cruised

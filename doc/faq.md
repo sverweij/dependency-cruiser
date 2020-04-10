@@ -183,12 +183,12 @@ module.exports = {
       dot: {
         theme: {
           graph: {
-            splines: "ortho"
-          }
-        }
-      }
-    }
-  }
+            splines: "ortho",
+          },
+        },
+      },
+    },
+  },
 };
 ```
 
