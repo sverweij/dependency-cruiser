@@ -6,6 +6,28 @@ const _clone = require("lodash/clone");
 const compileConfig = require("./compile-config");
 const defaults = require("./defaults.json");
 
+const KNOWN_CLI_OPTIONS = [
+  "baseDir",
+  "config",
+  "doNotFollow",
+  "exclude",
+  "help",
+  "includeOnly",
+  "info",
+  "init",
+  "maxDepth",
+  "moduleSystems",
+  "outputTo",
+  "outputType",
+  "prefix",
+  "preserveSymlinks",
+  "tsPreCompilationDeps",
+  "tsConfig",
+  "validate",
+  "version",
+  "webpackConfig"
+];
+
 function getOptionValue(pDefault) {
   return pValue => {
     let lReturnValue = pDefault;
@@ -15,6 +37,27 @@ function getOptionValue(pDefault) {
     }
     return lReturnValue;
   };
+}
+
+function isKnownCLIOption(pCandidateString) {
+  return KNOWN_CLI_OPTIONS.some(pString => pString === pCandidateString);
+}
+
+/**
+ * Remove all attributes from the input object (which'd typically be
+ * originating from commander) that are not functional dependency-cruiser
+ * options so a clean object can be passed through to the main function
+ *
+ * @param {any} pOptions - an options object e.g. as output from commander
+ * @returns {ICruiseOptions} - an options object that only contains stuff we care about
+ */
+function ejectNonCLIOptions(pOptions) {
+  return Object.keys(pOptions)
+    .filter(isKnownCLIOption)
+    .reduce((pAll, pKey) => {
+      pAll[pKey] = pOptions[pKey];
+      return pAll;
+    }, {});
 }
 
 function normalizeConfigFile(pOptions, pConfigWrapperName, pDefault) {
@@ -95,50 +138,50 @@ function validateAndNormalizeRulesFileName(pValidate) {
  * returns the pOptions, so that the returned value contains a
  * valid value for each possible option
  *
- * @param  {object} pOptions [description]
+ * @param  {object} pOptionsAsPassedFromCommander [description]
  * @return {object}          [description]
  */
-module.exports = pOptions => {
-  pOptions = {
+module.exports = pOptionsAsPassedFromCommander => {
+  let lOptions = {
     outputTo: defaults.OUTPUT_TO,
     outputType: defaults.OUTPUT_TYPE,
-    ...pOptions
+    ...ejectNonCLIOptions(pOptionsAsPassedFromCommander)
   };
 
-  if (pOptions.hasOwnProperty("moduleSystems")) {
-    pOptions.moduleSystems = pOptions.moduleSystems
+  if (lOptions.hasOwnProperty("moduleSystems")) {
+    lOptions.moduleSystems = lOptions.moduleSystems
       .split(",")
       .map(pString => pString.trim());
   }
 
-  if (pOptions.hasOwnProperty("config")) {
-    pOptions.validate = pOptions.config;
+  if (lOptions.hasOwnProperty("config")) {
+    lOptions.validate = lOptions.config;
   }
 
-  if (pOptions.hasOwnProperty("validate")) {
-    pOptions.rulesFile = validateAndNormalizeRulesFileName(pOptions.validate);
-    pOptions.ruleSet = compileConfig(
-      path.isAbsolute(pOptions.rulesFile)
-        ? pOptions.rulesFile
-        : `./${pOptions.rulesFile}`
+  if (lOptions.hasOwnProperty("validate")) {
+    lOptions.rulesFile = validateAndNormalizeRulesFileName(lOptions.validate);
+    lOptions.ruleSet = compileConfig(
+      path.isAbsolute(lOptions.rulesFile)
+        ? lOptions.rulesFile
+        : `./${lOptions.rulesFile}`
     );
-    pOptions.validate = true;
+    lOptions.validate = true;
   }
 
-  pOptions = normalizeConfigFile(
-    pOptions,
+  lOptions = normalizeConfigFile(
+    lOptions,
     "webpackConfig",
     defaults.WEBPACK_CONFIG
   );
-  pOptions = normalizeConfigFile(
-    pOptions,
+  lOptions = normalizeConfigFile(
+    lOptions,
     "tsConfig",
     defaults.TYPESCRIPT_CONFIG
   );
 
-  pOptions.validate = pOptions.hasOwnProperty("validate");
+  lOptions.validate = lOptions.hasOwnProperty("validate");
 
-  return pOptions;
+  return lOptions;
 };
 
 module.exports.determineRulesFileName = getOptionValue(
