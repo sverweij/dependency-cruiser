@@ -130,6 +130,12 @@ You've come to the right place :-) :
   collaborated on [acorn](https://github.com/ternjs/acorn) -
   the excellent JavaScript parser dependency-cruiser uses to infer
   dependencies.
+- [Katerina Limpitsouni](https://twitter.com/ninaLimpi) of [unDraw](https://undraw.co/)
+  for the ollie in dependency-cruiser's
+  [social media image](https://repository-images.githubusercontent.com/74299372/239ed080-370b-11ea-8fe7-140cf7b90a33).
+- All members of the open source community who have been kind enough to raise issues,
+  ask questions and make pull requests to get dependency-cruiser to be a better
+  tool.
 
 ## Build status
 
