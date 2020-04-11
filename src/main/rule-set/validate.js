@@ -13,8 +13,8 @@ function validateAgainstSchema(pSchema, pConfiguration) {
 
 function hasPath(pObject, pSection, pCondition) {
   return (
-    pObject.hasOwnProperty(pSection) &&
-    pObject[pSection].hasOwnProperty(pCondition)
+    Object.prototype.hasOwnProperty.call(pObject, pSection) &&
+    Object.prototype.hasOwnProperty.call(pObject[pSection], pCondition)
   );
 }
 
@@ -67,7 +67,7 @@ module.exports = pConfiguration => {
   validateAgainstSchema(configurationSchema, pConfiguration);
   (pConfiguration.allowed || []).forEach(checkRuleSafety);
   (pConfiguration.forbidden || []).forEach(checkRuleSafety);
-  if (pConfiguration.hasOwnProperty("options")) {
+  if (Object.prototype.hasOwnProperty.call(pConfiguration, "options")) {
     validateOptions(pConfiguration.options);
   }
   return pConfiguration;

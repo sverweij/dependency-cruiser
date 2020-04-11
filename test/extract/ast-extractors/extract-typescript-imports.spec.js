@@ -117,6 +117,7 @@ describe("ast-extractors/extract-typescript - regular imports", () => {
   it("leaves type imports with template literals with placeholders alone", () => {
     expect(
       // typescript/lib/protocol.d.ts has this thing
+      // eslint-disable-next-line no-template-curly-in-string
       extractTypescript("const tiepetjes: import(`./types/${lalala()}`).T;")
     ).to.deep.equal([]);
   });

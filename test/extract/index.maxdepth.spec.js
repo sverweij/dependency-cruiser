@@ -35,4 +35,4 @@ describe("extract/index - max depth", () => {
     })
   );
 });
-/* eslint global-require: 0*/
+/* eslint node/global-require: 0*/

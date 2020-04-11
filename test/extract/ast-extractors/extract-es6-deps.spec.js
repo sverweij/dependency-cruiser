@@ -39,6 +39,7 @@ describe("ast-extractors/extract-ES6-deps", () => {
     let lDeps = [];
 
     extractES6(
+      // eslint-disable-next-line no-template-curly-in-string
       "import(`./dynamic/${enhop}`).then(pModule => pModule.x);",
       lDeps
     );

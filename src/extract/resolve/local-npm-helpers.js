@@ -110,7 +110,8 @@ function dependencyIsDeprecated(pModule, pBaseDirectory, pResolveOptions) {
 
   if (Boolean(lPackageJson)) {
     lReturnValue =
-      lPackageJson.hasOwnProperty("deprecated") && lPackageJson.deprecated;
+      Object.prototype.hasOwnProperty.call(lPackageJson, "deprecated") &&
+      lPackageJson.deprecated;
   }
   return lReturnValue;
 }
@@ -130,7 +131,7 @@ function getLicense(pModule, pBaseDirectory, pResolveOptions) {
 
   if (
     Boolean(lPackageJson) &&
-    lPackageJson.hasOwnProperty("license") &&
+    Object.prototype.hasOwnProperty.call(lPackageJson, "license") &&
     typeof lPackageJson.license === "string"
   ) {
     lReturnValue = lPackageJson.license;

@@ -30,7 +30,9 @@ module.exports = function normalizeInitOptions(pInitOptions) {
   if (lReturnValue.useYarnPnP) {
     lReturnValue.externalModuleResolutionStrategy = "yarn-pnp";
   }
-  if (!lReturnValue.hasOwnProperty("hasTestsOutsideSource")) {
+  if (
+    !Object.prototype.hasOwnProperty.call(lReturnValue, "hasTestsOutsideSource")
+  ) {
     lReturnValue.hasTestsOutsideSource = !hasTestsWithinSource(
       lReturnValue.testLocation,
       lReturnValue.sourceLocation

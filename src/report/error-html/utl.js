@@ -4,7 +4,7 @@ const version = require("../../../package.json").version;
 function getFormattedAllowedRule(pRuleSetUsed) {
   const lAllowed = _get(pRuleSetUsed, "allowed", []);
   const lCommentedRule = lAllowed.find(pRule =>
-    pRule.hasOwnProperty("comment")
+    Object.prototype.hasOwnProperty.call(pRule, "comment")
   );
   const lComment = lCommentedRule ? lCommentedRule.comment : "-";
 

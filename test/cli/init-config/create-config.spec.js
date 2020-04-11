@@ -146,4 +146,4 @@ describe("cli/init-config/build-config", () => {
 });
 
 /* yep - doing some interesting things with requires here. Muffle eslint for this: */
-/* eslint global-require:0, security/detect-non-literal-require:0, import/no-dynamic-require:0 */
+/* eslint node/global-require:0, security/detect-non-literal-require:0, import/no-dynamic-require:0 */

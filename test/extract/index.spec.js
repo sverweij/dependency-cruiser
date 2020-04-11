@@ -52,4 +52,4 @@ describe("extract/index - vue - ", () =>
 describe("extract/index - CoffeeScript recursive - ", () =>
   coffeeRecursiveFixtures.forEach(runRecursiveFixture));
 
-/* eslint global-require: 0*/
+/* eslint node/global-require: 0*/

@@ -4,7 +4,8 @@
  */
 function isModuleOnlyRule(pRule) {
   return (
-    pRule.from.hasOwnProperty("orphan") || pRule.to.hasOwnProperty("reachable")
+    Object.prototype.hasOwnProperty.call(pRule.from, "orphan") ||
+    Object.prototype.hasOwnProperty.call(pRule.to, "reachable")
   );
 }
 

@@ -5,7 +5,7 @@ function propertyEquals(pTo, pRule, pProperty) {
   // ignore security/detect-object-injection because:
   // - we only use it from within the module with two fixed values
   // - the propertyEquals function is not exposed externaly
-  return pRule.to.hasOwnProperty(pProperty)
+  return Object.prototype.hasOwnProperty.call(pRule.to, pProperty)
     ? // eslint-disable-next-line security/detect-object-injection
       pTo[pProperty] === pRule.to[pProperty]
     : true;
@@ -44,7 +44,10 @@ function match(pFrom, pTo) {
       matchers.toPath(pRule, pTo, lGroups) &&
       matchers.toPathNot(pRule, pTo, lGroups) &&
       matchers.toDependencyTypes(pRule, pTo) &&
-      (!pRule.to.hasOwnProperty("moreThanOneDependencyType") ||
+      (!Object.prototype.hasOwnProperty.call(
+        pRule.to,
+        "moreThanOneDependencyType"
+      ) ||
         pTo.dependencyTypes.length > 1) &&
       matchers.toLicense(pRule, pTo) &&
       matchers.toLicenseNot(pRule, pTo) &&

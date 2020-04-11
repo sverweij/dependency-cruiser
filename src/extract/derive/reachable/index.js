@@ -4,10 +4,12 @@ const isReachable = require("./is-reachable");
 
 function getReachableRules(pRuleSet) {
   return _get(pRuleSet, "forbidden", [])
-    .filter(pRule => pRule.to.hasOwnProperty("reachable"))
+    .filter(pRule =>
+      Object.prototype.hasOwnProperty.call(pRule.to, "reachable")
+    )
     .concat(
       _get(pRuleSet, "allowed", []).filter(pRule =>
-        pRule.to.hasOwnProperty("reachable")
+        Object.prototype.hasOwnProperty.call(pRule.to, "reachable")
       )
     );
 }
@@ -47,21 +49,18 @@ function mergeReachableProperties(pModule, pRule, pIsReachable) {
 function addReachableToGraph(pGraph, pReachableRule) {
   return pGraph.filter(onlyModulesInRuleFrom(pReachableRule)).reduce(
     (pReturnGraph, pFromModule) =>
-      pReturnGraph.map(pToModule =>
-        Object.assign(
-          {},
-          pToModule,
-          isModuleInRuleTo(pReachableRule, pToModule)
-            ? {
-                reachable: mergeReachableProperties(
-                  pToModule,
-                  pReachableRule,
-                  isReachable(pGraph, pFromModule.source, pToModule.source)
-                )
-              }
-            : {}
-        )
-      ),
+      pReturnGraph.map(pToModule => ({
+        ...pToModule,
+        ...(isModuleInRuleTo(pReachableRule, pToModule)
+          ? {
+              reachable: mergeReachableProperties(
+                pToModule,
+                pReachableRule,
+                isReachable(pGraph, pFromModule.source, pToModule.source)
+              )
+            }
+          : {})
+      })),
     _clone(pGraph)
   );
 }

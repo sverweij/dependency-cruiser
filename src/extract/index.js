@@ -141,7 +141,9 @@ function complete(pAll, pFromListItem) {
 
 function makeOptionsPresentable(pOptions) {
   return SHAREABLE_OPTIONS.filter(
-    pOption => pOptions.hasOwnProperty(pOption) && pOptions[pOption] !== 0
+    pOption =>
+      Object.prototype.hasOwnProperty.call(pOptions, pOption) &&
+      pOptions[pOption] !== 0
   )
     .filter(
       pOption =>
@@ -185,7 +187,7 @@ function filterExcludedDependencies(pModule, pExclude) {
     ...pModule,
     dependencies: pModule.dependencies.filter(
       pDependency =>
-        !pExclude.hasOwnProperty("dynamic") ||
+        !Object.prototype.hasOwnProperty.call(pExclude, "dynamic") ||
         pExclude.dynamic !== pDependency.dynamic
     )
   };

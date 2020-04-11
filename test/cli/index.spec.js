@@ -139,7 +139,7 @@ function setModuleType(pTestPairs, pModuleType) {
       cleanup: pTestPair.cleanup
     };
 
-    lReturnValue.options = Object.assign({}, pTestPair.options);
+    lReturnValue.options = { ...pTestPair.options };
     lReturnValue.options.outputTo = pTestPair.options.outputTo.replace(
       /{{moduleType}}/g,
       pModuleType

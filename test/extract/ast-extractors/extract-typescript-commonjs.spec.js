@@ -107,6 +107,7 @@ describe("ast-extractors/extract-typescript - regular commonjs require", () => {
 
   it("ignores regular require with a template literal with placeholders", () => {
     expect(
+      // eslint-disable-next-line no-template-curly-in-string
       extractTypescript("const lala = require(`shwoooop/${blabla}`)")
     ).to.deep.equal([]);
   });

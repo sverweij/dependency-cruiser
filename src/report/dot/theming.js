@@ -10,7 +10,8 @@ function matchesRE(pValue, pRE) {
 function moduleMatchesCriteria(pSchemeEntry, pModule) {
   return Object.keys(pSchemeEntry.criteria).every(
     pKey =>
-      (_get(pModule, pKey) || pModule.hasOwnProperty(pKey)) &&
+      (_get(pModule, pKey) ||
+        Object.prototype.hasOwnProperty.call(pModule, pKey)) &&
       (_get(pModule, pKey) === _get(pSchemeEntry.criteria, pKey) ||
         matchesRE(_get(pModule, pKey), _get(pSchemeEntry.criteria, pKey)))
   );

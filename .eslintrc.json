@@ -9,6 +9,10 @@
       "files": ["test/**/*.js"],
       "env": {
         "mocha": true
+      },
+      "rules": {
+        "max-lines": "off",
+        "max-lines-per-function": "off"
       }
     }
   ]

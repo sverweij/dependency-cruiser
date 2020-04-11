@@ -26,7 +26,7 @@ module.exports = (pWebpackConfigFilename, pEnvironment, pArguments) => {
   let lReturnValue = {};
 
   try {
-    /* eslint global-require:0, security/detect-non-literal-require:0, import/no-dynamic-require:0 */
+    /* eslint node/global-require:0, security/detect-non-literal-require:0, import/no-dynamic-require:0 */
     const lWebpackConfigModule = require(makeAbsolute(pWebpackConfigFilename));
     const lWebpackConfig = pryConfigFromTheConfig(
       lWebpackConfigModule,

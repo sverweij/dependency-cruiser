@@ -108,14 +108,12 @@ function smartURIConcat(pPrefix, pSource) {
 }
 
 function addURL(pPrefix) {
-  return pModule =>
-    Object.assign(
-      {},
-      pModule,
-      pModule.coreModule || pModule.couldNotResolve
-        ? {}
-        : { URL: smartURIConcat(pPrefix, pModule.source) }
-    );
+  return pModule => ({
+    ...pModule,
+    ...(pModule.coreModule || pModule.couldNotResolve
+      ? {}
+      : { URL: smartURIConcat(pPrefix, pModule.source) })
+  });
 }
 
 module.exports = {

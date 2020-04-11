@@ -35,6 +35,7 @@ describe("ast-extractors/extract-typescript - dynamic imports", () => {
   it("ignores dynamic import statements with a template that has placeholders", () => {
     expect(
       extractTypescript(
+        // eslint-disable-next-line no-template-curly-in-string
         "import(`judeljo/${vlap}`).then(judeljo => { judeljo.hochik() }"
       )
     ).to.deep.equal([]);

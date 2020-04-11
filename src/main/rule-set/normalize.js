@@ -32,7 +32,7 @@ function normalizeRule(pRule) {
  * @return {object}          [description]
  */
 module.exports = pRuleSet => {
-  if (pRuleSet.hasOwnProperty("allowed")) {
+  if (Object.prototype.hasOwnProperty.call(pRuleSet, "allowed")) {
     pRuleSet.allowedSeverity = normalizeSeverity(pRuleSet.allowedSeverity);
     if (pRuleSet.allowedSeverity === "ignore") {
       Reflect.deleteProperty(pRuleSet, "allowed");
@@ -40,7 +40,7 @@ module.exports = pRuleSet => {
     }
   }
 
-  if (pRuleSet.hasOwnProperty("forbidden")) {
+  if (Object.prototype.hasOwnProperty.call(pRuleSet, "forbidden")) {
     pRuleSet.forbidden = pRuleSet.forbidden
       .map(normalizeRule)
       .filter(pRule => pRule.severity !== "ignore");

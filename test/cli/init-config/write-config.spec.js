@@ -31,7 +31,7 @@ describe("cli/init-config/write-config", () => {
         }`,
         CUSTOM_CONFIG_FILE_NAME
       );
-      // eslint-disable-next-line global-require,import/no-dynamic-require,security/detect-non-literal-require
+      // eslint-disable-next-line node/global-require,import/no-dynamic-require,security/detect-non-literal-require
       const lResult = require(lConfigResultFileName);
 
       expect(lResult).to.haveOwnProperty("aap");
