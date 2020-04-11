@@ -68,7 +68,7 @@ function compileConfig(
 
   let lReturnValue = readConfig(lResolvedFileName, pBaseDirectory);
 
-  if (lReturnValue.hasOwnProperty("extends")) {
+  if (Object.prototype.hasOwnProperty.call(lReturnValue, "extends")) {
     lReturnValue = processExtends(
       lReturnValue,
       pAlreadyVisited,

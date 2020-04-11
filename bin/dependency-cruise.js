@@ -7,7 +7,7 @@ try {
   // importing things only after the validateNodeEnv check so we can show an understandable
   // error. Otherwise, on unsupported platforms we would show a stack trace, which is
   // not so nice
-  /* eslint-disable global-require */
+  /* eslint-disable node/global-require */
   const program = require("commander");
   const $package = require("../package.json");
   const cli = require("../src/cli");

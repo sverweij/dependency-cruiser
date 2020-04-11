@@ -18,7 +18,10 @@ function determineNpmDependencyTypes(pModuleName, pPackageDependencies) {
       .filter(
         pKey =>
           pKey.includes("ependencies") &&
-          pPackageDependencies[pKey].hasOwnProperty(pModuleName)
+          Object.prototype.hasOwnProperty.call(
+            pPackageDependencies[pKey],
+            pModuleName
+          )
       )
       .map(pKey => NPM2DEP_TYPE[pKey] || "npm-no-pkg");
     lReturnValue = lReturnValue.length === 0 ? ["npm-no-pkg"] : lReturnValue;

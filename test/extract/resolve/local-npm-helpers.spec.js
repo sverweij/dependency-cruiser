@@ -31,7 +31,8 @@ describe("extract/resolve/localNpmHelpers.getPackageJson", () => {
     let lPackageJson = localNpmHelpers.getPackageJson("chai", ".", {});
 
     expect(lPackageJson).to.be.not.null;
-    expect(lPackageJson.hasOwnProperty("name")).to.be.true;
+    expect(Object.prototype.hasOwnProperty.call(lPackageJson, "name")).to.be
+      .true;
     expect(lPackageJson.name).to.equal("chai");
   });
 
@@ -43,7 +44,8 @@ describe("extract/resolve/localNpmHelpers.getPackageJson", () => {
     );
 
     expect(lPackageJson).to.be.not.null;
-    expect(lPackageJson.hasOwnProperty("name")).to.be.true;
+    expect(Object.prototype.hasOwnProperty.call(lPackageJson, "name")).to.be
+      .true;
     expect(lPackageJson.name).to.equal(
       "deprecated-at-the-start-for-test-purposes"
     );

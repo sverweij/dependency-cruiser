@@ -43,4 +43,4 @@ describe("extract/index - reachable", () => {
     expect(lResult).to.be.jsonSchema(cruiseResultSchema);
   });
 });
-/* eslint global-require: 0*/
+/* eslint node/global-require: 0*/

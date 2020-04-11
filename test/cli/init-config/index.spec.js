@@ -138,4 +138,4 @@ describe("cli/init-config/index", () => {
   });
 });
 /* muffle eslint for we're doing the funky require shizzle consciously here */
-/* eslint global-require:0, security/detect-non-literal-require:0, import/no-dynamic-require:0 */
+/* eslint node/global-require:0, security/detect-non-literal-require:0, import/no-dynamic-require:0 */

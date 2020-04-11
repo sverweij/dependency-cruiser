@@ -1,4 +1,4 @@
-/* eslint-disable global-require */
+/* eslint-disable node/global-require */
 const fs = require("fs");
 const chai = require("chai");
 const extract = require("../../src/extract");

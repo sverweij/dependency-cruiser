@@ -63,7 +63,7 @@ function ejectNonCLIOptions(pOptions) {
 function normalizeConfigFile(pOptions, pConfigWrapperName, pDefault) {
   let lOptions = _clone(pOptions);
 
-  if (lOptions.hasOwnProperty(pConfigWrapperName)) {
+  if (Object.prototype.hasOwnProperty.call(lOptions, pConfigWrapperName)) {
     _set(
       lOptions,
       `ruleSet.options.${pConfigWrapperName}.fileName`,
@@ -148,17 +148,17 @@ module.exports = pOptionsAsPassedFromCommander => {
     ...ejectNonCLIOptions(pOptionsAsPassedFromCommander)
   };
 
-  if (lOptions.hasOwnProperty("moduleSystems")) {
+  if (Object.prototype.hasOwnProperty.call(lOptions, "moduleSystems")) {
     lOptions.moduleSystems = lOptions.moduleSystems
       .split(",")
       .map(pString => pString.trim());
   }
 
-  if (lOptions.hasOwnProperty("config")) {
+  if (Object.prototype.hasOwnProperty.call(lOptions, "config")) {
     lOptions.validate = lOptions.config;
   }
 
-  if (lOptions.hasOwnProperty("validate")) {
+  if (Object.prototype.hasOwnProperty.call(lOptions, "validate")) {
     lOptions.rulesFile = validateAndNormalizeRulesFileName(lOptions.validate);
     lOptions.ruleSet = compileConfig(
       path.isAbsolute(lOptions.rulesFile)
@@ -179,7 +179,10 @@ module.exports = pOptionsAsPassedFromCommander => {
     defaults.TYPESCRIPT_CONFIG
   );
 
-  lOptions.validate = lOptions.hasOwnProperty("validate");
+  lOptions.validate = Object.prototype.hasOwnProperty.call(
+    lOptions,
+    "validate"
+  );
 
   return lOptions;
 };

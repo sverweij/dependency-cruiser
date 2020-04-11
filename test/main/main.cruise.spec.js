@@ -1,3 +1,4 @@
+const path = require("path").posix;
 const chai = require("chai");
 const main = require("../../src/main");
 const cruiseResultSchema = require("../../src/schema/cruise-result.schema.json");
@@ -19,7 +20,7 @@ describe("main.cruise", () => {
   });
   it("Returns an object when no options are passed (absolute path)", () => {
     const lResult = main.cruise(
-      [`${__dirname}/fixtures/ts`],
+      [path.join(__dirname, "fixtures", "ts")],
       {},
       { bustTheCache: true }
     );

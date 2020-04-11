@@ -28,9 +28,9 @@ describe("main/files-and-dirs", () => {
 
   it("Normalizes absolute paths to paths relative to the current working dir keeping globs in tact", () => {
     expect(
-      normalizeFilesAndDirectories([`${__dirname}/**/*.{js,ts}`]).map(
-        path.win32.normalize
-      )
+      normalizeFilesAndDirectories([
+        path.posix.join(__dirname, "**", "*.{js,ts}")
+      ]).map(path.win32.normalize)
     ).to.deep.equal(["test\\main\\files-and-dirs\\**\\*.{js,ts}"]);
   });
 
