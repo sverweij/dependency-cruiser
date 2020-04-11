@@ -2,10 +2,12 @@ const inquirer = require("inquirer");
 const $defaults = require("../defaults.json");
 const {
   fileExists,
-  isLikelyMonoRepo,
-  pnpIsEnabled,
   getSourceFolderCandidates,
   getTestFolderCandidates,
+  hasTestsWithinSource,
+  isLikelyMonoRepo,
+  pnpIsEnabled,
+  toSourceLocationArray,
   validateLocation
 } = require("./helpers");
 
@@ -45,12 +47,24 @@ const INQUIRER_QUESTIONS = [
     when: () => !isLikelyMonoRepo()
   },
   {
+    name: "hasTestsOutsideSource",
+    type: "confirm",
+    message: "Do your test files live in a separate folder?",
+    default: pAnswers => {
+      return !hasTestsWithinSource(
+        getTestFolderCandidates(),
+        toSourceLocationArray(pAnswers.sourceLocation)
+      );
+    },
+    when: () => !isLikelyMonoRepo()
+  },
+  {
     name: "testLocation",
     type: "input",
     message: "Where do your test files live?",
     default: getTestFolderCandidates(),
     validate: pThisAnswer => validateLocation(pThisAnswer),
-    when: () => !isLikelyMonoRepo()
+    when: pAnswers => pAnswers.hasTestsOutsideSource && !isLikelyMonoRepo()
   },
   {
     name: "useYarnPnP",

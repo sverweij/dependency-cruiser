@@ -60,6 +60,40 @@ describe("cli/init-config/build-config", () => {
     );
   });
 
+  it("generates a valid config - tests live with their sources", () => {
+    process.chdir("test/cli/fixtures/init-config/no-config-files-exist");
+
+    const lResult = eval(
+      createConfigNormalized({
+        configType: "preset",
+        hasTestsOutsideSource: false
+      })
+    );
+
+    expect(lResult).to.be.jsonSchema(configurationSchema);
+    expect(lResult).to.haveOwnProperty("forbidden");
+    expect(
+      lResult.forbidden.some(pRule => pRule.name === "not-to-test")
+    ).to.equal(false);
+  });
+
+  it("generates a valid config - tests live separately", () => {
+    process.chdir("test/cli/fixtures/init-config/no-config-files-exist");
+
+    const lResult = eval(
+      createConfigNormalized({
+        configType: "preset",
+        hasTestsOutsideSource: true
+      })
+    );
+
+    expect(lResult).to.be.jsonSchema(configurationSchema);
+    expect(lResult).to.haveOwnProperty("forbidden");
+    expect(
+      lResult.forbidden.some(pRule => pRule.name === "not-to-test")
+    ).to.equal(true);
+  });
+
   it("generates a valid config - webpackConfig", () => {
     process.chdir("test/cli/fixtures/init-config/no-config-files-exist");
 

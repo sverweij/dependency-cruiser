@@ -6,13 +6,23 @@ const {
   hasTestsWithinSource
 } = require("./helpers");
 
-module.exports = function normalizeInitOptions(pInitOptions) {
-  let lReturnValue = {
+function populate(pInitOptions) {
+  return {
     version: $dependencyCruiserManifest.version,
     date: new Date().toJSON(),
     configType: "self-contained",
-    ...pInitOptions
+    ...pInitOptions,
+    sourceLocation: toSourceLocationArray(
+      pInitOptions.sourceLocation || getSourceFolderCandidates()
+    ),
+    testLocation: toSourceLocationArray(
+      pInitOptions.testLocation || getTestFolderCandidates()
+    )
   };
+}
+
+module.exports = function normalizeInitOptions(pInitOptions) {
+  let lReturnValue = populate(pInitOptions);
 
   if (lReturnValue.configType === "preset" && !lReturnValue.preset) {
     lReturnValue.preset = "dependency-cruiser/configs/recommended-warn-only";
@@ -20,16 +30,11 @@ module.exports = function normalizeInitOptions(pInitOptions) {
   if (lReturnValue.useYarnPnP) {
     lReturnValue.externalModuleResolutionStrategy = "yarn-pnp";
   }
-  lReturnValue.sourceLocation = toSourceLocationArray(
-    lReturnValue.sourceLocation || getSourceFolderCandidates()
-  );
-  lReturnValue.testLocation = toSourceLocationArray(
-    lReturnValue.testLocation || getTestFolderCandidates()
-  );
-  lReturnValue.hastestsOutsideSource = !hasTestsWithinSource(
-    lReturnValue.testLocation,
-    lReturnValue.sourceLocation
-  );
-
+  if (!lReturnValue.hasOwnProperty("hasTestsOutsideSource")) {
+    lReturnValue.hasTestsOutsideSource = !hasTestsWithinSource(
+      lReturnValue.testLocation,
+      lReturnValue.sourceLocation
+    );
+  }
   return lReturnValue;
 };
