@@ -25,15 +25,34 @@ function matchesReachableRule(pRule, pModule) {
   );
 }
 
+function matchesReachesRule(pRule, pModule) {
+  const lReturnValue =
+    Object.prototype.hasOwnProperty.call(pRule.to, "reachable") &&
+    Object.prototype.hasOwnProperty.call(pModule, "reaches") &&
+    pModule.reaches.some(
+      pReaches =>
+        pReaches.asDefinedInRule === (pRule.name || "not-in-allowed") &&
+        pReaches.modules.some(
+          pReachesModule =>
+            matchers.toModulePath(pRule, pReachesModule) &&
+            matchers.toModulePathNot(pRule, pReachesModule)
+        )
+    );
+  return lReturnValue;
+}
+
 function match(pModule) {
   return pRule =>
-    matchesOrphanRule(pRule, pModule) || matchesReachableRule(pRule, pModule);
+    matchesOrphanRule(pRule, pModule) ||
+    matchesReachableRule(pRule, pModule) ||
+    matchesReachesRule(pRule, pModule);
 }
 const isInteresting = pRule => isModuleOnlyRule(pRule);
 
 module.exports = {
   matchesOrphanRule,
   matchesReachableRule,
+  matchesReachesRule,
   match,
   isInteresting
 };
