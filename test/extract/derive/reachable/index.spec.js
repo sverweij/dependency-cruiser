@@ -28,6 +28,38 @@ const GRAPH = [
   }
 ];
 
+const GRAPH_TWO = [
+  {
+    source: "./src/index.js",
+    dependencies: [
+      {
+        resolved: "./src/intermediate.js"
+      },
+      {
+        resolved: "./src/hajee.js"
+      }
+    ]
+  },
+  {
+    source: "./src/intermediate.js",
+    dependencies: [
+      {
+        resolved: "./src/index.js"
+      },
+      {
+        resolved: "./src/hajoo.js"
+      }
+    ]
+  },
+  {
+    source: "./src/hajoo.js",
+    dependencies: []
+  },
+  {
+    source: "./src/hajee.js",
+    dependencies: []
+  }
+];
 const ANOTATED_GRAPH_FOR_HAJOO = [
   {
     source: "./src/index.js",
@@ -96,38 +128,37 @@ describe("extract/derive/reachable/index - reachability detection", () => {
     ).to.deep.equal(ANOTATED_GRAPH_FOR_HAJOO);
   });
 
-  it('returns the reachability annotated graph when a rule set with allowed "reachable" in it', () => {
+  it('returns the reachability annotated graph when a rule set with allowed "reachable" in it (with a rule name)', () => {
     const lForbiddenReachabilityRuleSetHajoo = {
       allowed: [
         {
-          from: { path: "src/hajoo\\.js" },
-          to: { reachable: true }
+          name: "hajoo-not-reachable-from-src",
+          from: { path: "src/[^.]+\\.js" },
+          to: { path: "./src/hajoo\\.js$", reachable: true }
         }
       ]
     };
     const lAnotatedGraphForHajooAllowed = [
       {
         source: "./src/index.js",
-        reachable: [
-          {
-            asDefinedInRule: "not-in-allowed",
-            value: false
-          }
-        ],
         dependencies: [
           {
             resolved: "./src/intermediate.js"
+          }
+        ],
+        reaches: [
+          {
+            asDefinedInRule: "hajoo-not-reachable-from-src",
+            modules: [
+              {
+                source: "./src/hajoo.js"
+              }
+            ]
           }
         ]
       },
       {
         source: "./src/intermediate.js",
-        reachable: [
-          {
-            asDefinedInRule: "not-in-allowed",
-            value: false
-          }
-        ],
         dependencies: [
           {
             resolved: "./src/index.js"
@@ -135,22 +166,180 @@ describe("extract/derive/reachable/index - reachability detection", () => {
           {
             resolved: "./src/hajoo.js"
           }
+        ],
+        reaches: [
+          {
+            asDefinedInRule: "hajoo-not-reachable-from-src",
+            modules: [
+              {
+                source: "./src/hajoo.js"
+              }
+            ]
+          }
         ]
       },
       {
         source: "./src/hajoo.js",
+        dependencies: [],
         reachable: [
           {
-            asDefinedInRule: "not-in-allowed",
-            value: true
+            value: true,
+            asDefinedInRule: "hajoo-not-reachable-from-src"
           }
-        ],
-        dependencies: []
+        ]
       }
     ];
-
     expect(
       addReachability(GRAPH, normalize(lForbiddenReachabilityRuleSetHajoo))
+    ).to.deep.equal(lAnotatedGraphForHajooAllowed);
+  });
+
+  it('returns the reachability annotated graph when a rule set with allowed "reachable" in it (without a rule name)', () => {
+    const lForbiddenReachabilityRuleSetHajoo = {
+      allowed: [
+        {
+          from: { path: "src/[^.]+\\.js" },
+          to: { path: "./src/hajoo\\.js$", reachable: true }
+        }
+      ]
+    };
+    const lAnotatedGraphForHajooAllowed = [
+      {
+        source: "./src/index.js",
+        dependencies: [
+          {
+            resolved: "./src/intermediate.js"
+          }
+        ],
+        reaches: [
+          {
+            asDefinedInRule: "not-in-allowed",
+            modules: [
+              {
+                source: "./src/hajoo.js"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        source: "./src/intermediate.js",
+        dependencies: [
+          {
+            resolved: "./src/index.js"
+          },
+          {
+            resolved: "./src/hajoo.js"
+          }
+        ],
+        reaches: [
+          {
+            asDefinedInRule: "not-in-allowed",
+            modules: [
+              {
+                source: "./src/hajoo.js"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        source: "./src/hajoo.js",
+        dependencies: [],
+        reachable: [
+          {
+            value: true,
+            asDefinedInRule: "not-in-allowed"
+          }
+        ]
+      }
+    ];
+    expect(
+      addReachability(GRAPH, normalize(lForbiddenReachabilityRuleSetHajoo))
+    ).to.deep.equal(lAnotatedGraphForHajooAllowed);
+  });
+
+  it('returns the reachability annotated graph when a rule set with allowed "reachable" in it (without a rule name - multiple matches)', () => {
+    const lForbiddenReachabilityRuleSetHajoo = {
+      allowed: [
+        {
+          from: { path: "src/[^.]+\\.js" },
+          to: { path: "./src/haj[^.]+\\.js$", reachable: true }
+        }
+      ]
+    };
+    const lAnotatedGraphForHajooAllowed = [
+      {
+        source: "./src/index.js",
+        dependencies: [
+          {
+            resolved: "./src/intermediate.js"
+          },
+          {
+            resolved: "./src/hajee.js"
+          }
+        ],
+        reaches: [
+          {
+            asDefinedInRule: "not-in-allowed",
+            modules: [
+              {
+                source: "./src/hajoo.js"
+              },
+              {
+                source: "./src/hajee.js"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        source: "./src/intermediate.js",
+        dependencies: [
+          {
+            resolved: "./src/index.js"
+          },
+          {
+            resolved: "./src/hajoo.js"
+          }
+        ],
+        reaches: [
+          {
+            asDefinedInRule: "not-in-allowed",
+            modules: [
+              {
+                source: "./src/hajoo.js"
+              },
+              {
+                source: "./src/hajee.js"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        source: "./src/hajoo.js",
+        dependencies: [],
+        reachable: [
+          {
+            value: true,
+            asDefinedInRule: "not-in-allowed"
+          }
+        ]
+      },
+      {
+        source: "./src/hajee.js",
+        dependencies: [],
+        reachable: [
+          {
+            value: true,
+            asDefinedInRule: "not-in-allowed"
+          }
+        ]
+      }
+    ];
+    expect(
+      addReachability(GRAPH_TWO, normalize(lForbiddenReachabilityRuleSetHajoo))
     ).to.deep.equal(lAnotatedGraphForHajooAllowed);
   });
 
