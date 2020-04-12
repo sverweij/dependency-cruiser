@@ -1,3 +1,6 @@
+/* eslint-disable security/detect-object-injection */
+/* eslint-disable complexity */
+/* eslint-disable max-lines-per-function */
 const _clone = require("lodash/clone");
 const _get = require("lodash/get");
 const isReachable = require("./is-reachable");
@@ -14,27 +17,26 @@ function getReachableRules(pRuleSet) {
     );
 }
 
-function onlyModulesInRuleFrom(pRule) {
+function isModuleInRuleFrom(pRule) {
   return pModule =>
     (!pRule.from.path || pModule.source.match(pRule.from.path)) &&
     (!pRule.from.pathNot || !pModule.source.match(pRule.from.pathNot));
 }
 
-function isModuleInRuleTo(pRule, pModule) {
-  return (
+function isModuleInRuleTo(pRule) {
+  return pModule =>
     (!pRule.to.path || pModule.source.match(pRule.to.path)) &&
-    (!pRule.to.pathNot || !pModule.source.match(pRule.to.pathNot))
-  );
+    (!pRule.to.pathNot || !pModule.source.match(pRule.to.pathNot));
 }
 
+// eslint-disable-next-line complexity
 function mergeReachableProperties(pModule, pRule, pIsReachable) {
   const lReachables = pModule.reachable || [];
   const lIndexExistingReachable = lReachables.findIndex(
-    pReachable => pReachable.asDefinedInRule === pRule.name
+    pReachable => pReachable.asDefinedInRule === pRule.name || "not-in-allowed"
   );
 
   if (lIndexExistingReachable > -1) {
-    /* eslint-disable security/detect-object-injection */
     lReachables[lIndexExistingReachable].value =
       lReachables[lIndexExistingReachable].value || pIsReachable;
     return lReachables;
@@ -46,23 +48,68 @@ function mergeReachableProperties(pModule, pRule, pIsReachable) {
   }
 }
 
-function addReachableToGraph(pGraph, pReachableRule) {
-  return pGraph.filter(onlyModulesInRuleFrom(pReachableRule)).reduce(
-    (pReturnGraph, pFromModule) =>
-      pReturnGraph.map(pToModule => ({
-        ...pToModule,
-        ...(isModuleInRuleTo(pReachableRule, pToModule)
-          ? {
-              reachable: mergeReachableProperties(
-                pToModule,
-                pReachableRule,
-                isReachable(pGraph, pFromModule.source, pToModule.source)
-              )
-            }
-          : {})
-      })),
-    _clone(pGraph)
+function mergeReachesProperties(pFromModule, pToModule, pRule) {
+  const lReaches = pFromModule.reaches || [];
+  const lIndexExistingReachable = lReaches.findIndex(
+    pReachable => pReachable.asDefinedInRule === pRule.name || "not-in-allowed"
   );
+
+  if (lIndexExistingReachable > -1) {
+    lReaches[lIndexExistingReachable].modules = (
+      lReaches[lIndexExistingReachable].modules ||
+      // eslint-disable-next-line no-inline-comments
+      /* istanbul ignore next: 'modules' is a mandatory attribute so shouldn't
+       * happen it doesn't exist, but defensive default here nonetheless
+       */
+
+      []
+    ).concat({
+      source: pToModule.source
+    });
+    return lReaches;
+  } else {
+    return lReaches.concat({
+      asDefinedInRule: pRule.name || "not-in-allowed",
+      modules: [{ source: pToModule.source }]
+    });
+  }
+}
+
+function addReachableToGraph(pGraph, pReachableRule) {
+  const lFromModules = pGraph.filter(isModuleInRuleFrom(pReachableRule));
+  const lToModules = pGraph.filter(isModuleInRuleTo(pReachableRule));
+
+  return pGraph.map(pModule => {
+    let lReturnValue = _clone(pModule);
+
+    if (
+      pReachableRule.to.reachable === true &&
+      isModuleInRuleFrom(pReachableRule)(lReturnValue)
+    ) {
+      for (const lToModule of lToModules) {
+        if (
+          lReturnValue.source !== lToModule.source &&
+          isReachable(pGraph, pModule.source, lToModule.source)
+        ) {
+          lReturnValue.reaches = mergeReachesProperties(
+            lReturnValue,
+            lToModule,
+            pReachableRule
+          );
+        }
+      }
+    }
+    if (isModuleInRuleTo(pReachableRule)(lReturnValue)) {
+      for (const lFromModule of lFromModules) {
+        lReturnValue.reachable = mergeReachableProperties(
+          lReturnValue,
+          pReachableRule,
+          isReachable(pGraph, lFromModule.source, pModule.source)
+        );
+      }
+    }
+    return lReturnValue;
+  });
 }
 
 module.exports = (pGraph, pRuleSet) => {

@@ -65,6 +65,11 @@ export interface IModule {
    */
   reachable?: IReachable[];
   /**
+   * An array of objects that tell which other modules it reaches,
+   * and that falls within the definition of the passed rule.
+   */
+  reaches?: IReaches[];
+  /**
    * an array of rules violated by this module - left out if the module is valid
    */
   rules?: IRuleSummary[];
@@ -186,6 +191,24 @@ export interface IReachable {
    * reachability-rule in 'asDefinedInRule', 'false' if not.
    */
   value: boolean;
+}
+
+export interface IReachesModule {
+  /**
+   * The (resolved) file name of the module, e.g. 'src/main/index.js'
+   */
+  source: string;
+}
+
+export interface IReaches {
+  /**
+   * The name of the rule where the reachability was defined
+   */
+  asDefinedInRule: string;
+  /**
+   * An array of modules that is (transitively) reachable from this module.
+   */
+  modules: IReachesModule[];
 }
 
 /**

@@ -23,7 +23,25 @@ function extractMetaData(pViolations) {
     }
   );
 }
+function doTheRuleDinges(pRule, pModule, pDependency, pRuleSet) {
+  let lReturnValue = {
+    from: pModule.source,
+    to: pDependency.resolved,
+    rule: pRule
+  };
 
+  if (
+    pDependency.cycle &&
+    _get(findRuleByName(pRuleSet, pRule.name), "to.circular")
+  ) {
+    lReturnValue = {
+      ...lReturnValue,
+      cycle: pDependency.cycle
+    };
+  }
+
+  return lReturnValue;
+}
 /**
  * Takes an array of dependencies, and extracts the violations from it.
  *
@@ -47,26 +65,10 @@ function extractDependencyViolations(pModules, pRuleSet) {
       .map(cutNonTransgressions)
       .filter(pModule => pModule.dependencies.length > 0)
       .map(pModule =>
-        pModule.dependencies.map(pDep =>
-          pDep.rules.map(pRule => {
-            let lReturnValue = {
-              from: pModule.source,
-              to: pDep.resolved,
-              rule: pRule
-            };
-
-            if (
-              pDep.cycle &&
-              _get(findRuleByName(pRuleSet, pRule.name), "to.circular")
-            ) {
-              lReturnValue = {
-                ...lReturnValue,
-                cycle: pDep.cycle
-              };
-            }
-
-            return lReturnValue;
-          })
+        pModule.dependencies.map(pDependency =>
+          pDependency.rules.map(pRule =>
+            doTheRuleDinges(pRule, pModule, pDependency, pRuleSet)
+          )
         )
       )
   );
