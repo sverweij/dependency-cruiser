@@ -70,6 +70,70 @@ describe("extract/summarize - summarize extraction", () => {
     });
   });
 
+  it("single source - one module level violation ('reaches')", () => {
+    const lResult = summarize(
+      [
+        {
+          source: "violation.js",
+          dependencies: [
+            {
+              resolved: "via.js"
+            }
+          ],
+          reaches: [
+            {
+              asDefinedInRule: "a-rule",
+              modules: [
+                {
+                  source: "dont-touch-this.js"
+                },
+                {
+                  source: "mc-hammer.js"
+                }
+              ]
+            }
+          ],
+          valid: false,
+          rules: [
+            {
+              name: "a-rule",
+              severity: "warn"
+            }
+          ]
+        }
+      ],
+      { forbidden: [{ name: "a-rule", from: {}, to: { reachable: true } }] }
+    );
+
+    expect(lResult).to.deep.equal({
+      violations: [
+        {
+          from: "violation.js",
+          to: "dont-touch-this.js",
+          rule: {
+            name: "a-rule",
+            severity: "warn"
+          },
+          via: ["transitively"]
+        },
+        {
+          from: "violation.js",
+          to: "mc-hammer.js",
+          rule: {
+            name: "a-rule",
+            severity: "warn"
+          },
+          via: ["transitively"]
+        }
+      ],
+      info: 0,
+      warn: 2,
+      error: 0,
+      totalDependenciesCruised: 1,
+      totalCruised: 1
+    });
+  });
+
   it("two dependent sources - no violations", () => {
     const lResult = summarize([
       {

@@ -64,8 +64,13 @@ module.exports = {
         cycle: {
           type: "array",
           items: { type: "string" },
+          description: "The circular path if the violation is about circularity"
+        },
+        via: {
+          type: "array",
+          items: { type: "string" },
           description:
-            "The circular path if the violation was about circularity"
+            "The path from the from to the to if the violation is transitive"
         }
       }
     },
