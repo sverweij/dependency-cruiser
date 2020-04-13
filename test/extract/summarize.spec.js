@@ -85,10 +85,12 @@ describe("extract/summarize - summarize extraction", () => {
               asDefinedInRule: "a-rule",
               modules: [
                 {
-                  source: "dont-touch-this.js"
+                  source: "dont-touch-this.js",
+                  via: ["via", "romana"]
                 },
                 {
-                  source: "mc-hammer.js"
+                  source: "mc-hammer.js",
+                  via: ["directly"]
                 }
               ]
             }
@@ -114,7 +116,7 @@ describe("extract/summarize - summarize extraction", () => {
             name: "a-rule",
             severity: "warn"
           },
-          via: ["(via via)"]
+          via: ["via", "romana"]
         },
         {
           from: "violation.js",
@@ -123,7 +125,7 @@ describe("extract/summarize - summarize extraction", () => {
             name: "a-rule",
             severity: "warn"
           },
-          via: ["(via via)"]
+          via: ["directly"]
         }
       ],
       info: 0,

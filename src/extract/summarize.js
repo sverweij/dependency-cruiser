@@ -90,16 +90,19 @@ function toModuleViolationSummary(pRule, pModule, pRuleSet) {
       .reduce(
         (pAll, pReachable) =>
           pAll.concat(
-            pReachable.modules.map(pReachableModule => pReachableModule.source)
+            pReachable.modules.map(pReachableModule => ({
+              to: pReachableModule.source,
+              via: pReachableModule.via
+            }))
           ),
         []
       )
       // TODO: in the via add the path from from to to
-      .map(pTo => ({
+      .map(pToModule => ({
         from: pModule.source,
-        to: pTo,
+        to: pToModule.to,
         rule: pRule,
-        via: ["(via via)"]
+        via: pToModule.via
       }));
   }
 

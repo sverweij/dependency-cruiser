@@ -1,9 +1,9 @@
 /* eslint-disable security/detect-object-injection */
 /* eslint-disable complexity */
-/* eslint-disable max-lines-per-function */
+
 const _clone = require("lodash/clone");
 const _get = require("lodash/get");
-const isReachable = require("./is-reachable");
+const getPath = require("./get-path");
 
 function getReachableRules(pRuleSet) {
   return _get(pRuleSet, "forbidden", [])
@@ -30,28 +30,31 @@ function isModuleInRuleTo(pRule) {
 }
 
 // eslint-disable-next-line complexity
-function mergeReachableProperties(pModule, pRule, pIsReachable) {
+function mergeReachableProperties(pModule, pRule, pPath) {
   const lReachables = pModule.reachable || [];
   const lIndexExistingReachable = lReachables.findIndex(
-    pReachable => pReachable.asDefinedInRule === pRule.name || "not-in-allowed"
+    pReachable =>
+      pReachable.asDefinedInRule === (pRule.name || "not-in-allowed")
   );
+  const lIsReachable = pPath.length > 1;
 
   if (lIndexExistingReachable > -1) {
     lReachables[lIndexExistingReachable].value =
-      lReachables[lIndexExistingReachable].value || pIsReachable;
+      lReachables[lIndexExistingReachable].value || lIsReachable;
     return lReachables;
   } else {
     return lReachables.concat({
-      value: pIsReachable,
+      value: lIsReachable,
       asDefinedInRule: pRule.name || "not-in-allowed"
     });
   }
 }
 
-function mergeReachesProperties(pFromModule, pToModule, pRule) {
+function mergeReachesProperties(pFromModule, pToModule, pRule, pPath) {
   const lReaches = pFromModule.reaches || [];
   const lIndexExistingReachable = lReaches.findIndex(
-    pReachable => pReachable.asDefinedInRule === pRule.name || "not-in-allowed"
+    pReachable =>
+      pReachable.asDefinedInRule === (pRule.name || "not-in-allowed")
   );
 
   if (lIndexExistingReachable > -1) {
@@ -64,21 +67,20 @@ function mergeReachesProperties(pFromModule, pToModule, pRule) {
 
       []
     ).concat({
-      source: pToModule.source
+      source: pToModule.source,
+      via: pPath
     });
     return lReaches;
   } else {
     return lReaches.concat({
       asDefinedInRule: pRule.name || "not-in-allowed",
-      modules: [{ source: pToModule.source }]
+      modules: [{ source: pToModule.source, via: pPath }]
     });
   }
 }
 
+// TODO function is a bit on the big side - time to split it
 function addReachableToGraph(pGraph, pReachableRule) {
-  const lFromModules = pGraph.filter(isModuleInRuleFrom(pReachableRule));
-  const lToModules = pGraph.filter(isModuleInRuleTo(pReachableRule));
-
   return pGraph.map(pModule => {
     let lReturnValue = _clone(pModule);
 
@@ -86,27 +88,31 @@ function addReachableToGraph(pGraph, pReachableRule) {
       pReachableRule.to.reachable === true &&
       isModuleInRuleFrom(pReachableRule)(lReturnValue)
     ) {
-      for (const lToModule of lToModules) {
-        if (
-          lReturnValue.source !== lToModule.source &&
-          isReachable(pGraph, pModule.source, lToModule.source)
-        ) {
-          lReturnValue.reaches = mergeReachesProperties(
-            lReturnValue,
-            lToModule,
-            pReachableRule
-          );
+      pGraph.filter(isModuleInRuleTo(pReachableRule)).forEach(pToModule => {
+        if (lReturnValue.source !== pToModule.source) {
+          const lPath = getPath(pGraph, pModule.source, pToModule.source);
+
+          if (lPath.length > 0) {
+            lReturnValue.reaches = mergeReachesProperties(
+              lReturnValue,
+              pToModule,
+              pReachableRule,
+              lPath
+            );
+          }
         }
-      }
+      });
     }
     if (isModuleInRuleTo(pReachableRule)(lReturnValue)) {
-      for (const lFromModule of lFromModules) {
-        lReturnValue.reachable = mergeReachableProperties(
-          lReturnValue,
-          pReachableRule,
-          isReachable(pGraph, lFromModule.source, pModule.source)
-        );
-      }
+      pGraph
+        .filter(isModuleInRuleFrom(pReachableRule))
+        .forEach(pLFromModule => {
+          lReturnValue.reachable = mergeReachableProperties(
+            lReturnValue,
+            pReachableRule,
+            getPath(pGraph, pLFromModule.source, pModule.source)
+          );
+        });
     }
     return lReturnValue;
   });

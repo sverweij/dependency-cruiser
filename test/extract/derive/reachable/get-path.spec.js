@@ -1,16 +1,16 @@
 const expect = require("chai").expect;
-const isReachable = require("../../../../src/extract/derive/reachable/is-reachable");
+const getPath = require("../../../../src/extract/derive/reachable/get-path");
 
-describe("extract/derive/reachable/isReachable - reachability detection", () => {
+describe("extract/derive/reachable/getGraph - reachability detection", () => {
   beforeEach(() => {
-    isReachable.clearCache();
+    // getPath.clearCache();
   });
 
   it("does not explode when passed an empty graph", () => {
-    expect(isReachable([], "./src/index.js", "./src/hajoo.js")).to.equal(false);
+    expect(getPath([], "./src/index.js", "./src/hajoo.js")).to.deep.equal([]);
   });
 
-  it("returns false when from is a lonely module", () => {
+  it("returns [] when from is a lonely module", () => {
     const lGraph = [
       {
         source: "./src/index.js",
@@ -18,12 +18,12 @@ describe("extract/derive/reachable/isReachable - reachability detection", () => 
       }
     ];
 
-    expect(isReachable(lGraph, "./src/index.js", "./src/hajoo.js")).to.equal(
-      false
+    expect(getPath(lGraph, "./src/index.js", "./src/hajoo.js")).to.deep.equal(
+      []
     );
   });
 
-  it("returns true when from is a direct dependency of from", () => {
+  it("returns [from, to] when from is a direct dependency of from", () => {
     const lGraph = [
       {
         source: "./src/index.js",
@@ -35,12 +35,13 @@ describe("extract/derive/reachable/isReachable - reachability detection", () => 
       }
     ];
 
-    expect(isReachable(lGraph, "./src/index.js", "./src/hajoo.js")).to.equal(
-      true
-    );
+    expect(getPath(lGraph, "./src/index.js", "./src/hajoo.js")).to.deep.equal([
+      "./src/index.js",
+      "./src/hajoo.js"
+    ]);
   });
 
-  it("returns true when to == from", () => {
+  it("returns [] when to == from", () => {
     const lGraph = [
       {
         source: "./src/index.js",
@@ -52,12 +53,12 @@ describe("extract/derive/reachable/isReachable - reachability detection", () => 
       }
     ];
 
-    expect(isReachable(lGraph, "./src/index.js", "./src/index.js")).to.equal(
-      true
+    expect(getPath(lGraph, "./src/index.js", "./src/index.js")).to.deep.equal(
+      []
     );
   });
 
-  it("returns false when to is a not in dependencies of from", () => {
+  it("returns [] when to is not in dependencies of from", () => {
     const lGraph = [
       {
         source: "./src/index.js",
@@ -69,8 +70,8 @@ describe("extract/derive/reachable/isReachable - reachability detection", () => 
       }
     ];
 
-    expect(isReachable(lGraph, "./src/index.js", "./src/hajoo.js")).to.equal(
-      false
+    expect(getPath(lGraph, "./src/index.js", "./src/hajoo.js")).to.deep.equal(
+      []
     );
   });
 
@@ -94,9 +95,11 @@ describe("extract/derive/reachable/isReachable - reachability detection", () => 
       }
     ];
 
-    expect(isReachable(lGraph, "./src/index.js", "./src/hajoo.js")).to.equal(
-      true
-    );
+    expect(getPath(lGraph, "./src/index.js", "./src/hajoo.js")).to.deep.equal([
+      "./src/index.js",
+      "./src/intermediate.js",
+      "./src/hajoo.js"
+    ]);
   });
 
   it("doesn't get dizzy when a dep is circular (did not find to)", () => {
@@ -119,8 +122,8 @@ describe("extract/derive/reachable/isReachable - reachability detection", () => 
       }
     ];
 
-    expect(isReachable(lGraph, "./src/index.js", "./src/hajoo.js")).to.equal(
-      false
+    expect(getPath(lGraph, "./src/index.js", "./src/hajoo.js")).to.deep.equal(
+      []
     );
   });
 
@@ -151,8 +154,10 @@ describe("extract/derive/reachable/isReachable - reachability detection", () => 
       }
     ];
 
-    expect(isReachable(lGraph, "./src/index.js", "./src/hajoo.js")).to.equal(
-      true
-    );
+    expect(getPath(lGraph, "./src/index.js", "./src/hajoo.js")).to.deep.equal([
+      "./src/index.js",
+      "./src/intermediate.js",
+      "./src/hajoo.js"
+    ]);
   });
 });
