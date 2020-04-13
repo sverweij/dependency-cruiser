@@ -15,6 +15,7 @@ function matchesReachableRule(pRule, pModule) {
   return (
     Object.prototype.hasOwnProperty.call(pRule.to, "reachable") &&
     Object.prototype.hasOwnProperty.call(pModule, "reachable") &&
+    // pRule.to.reachable === false &&
     pModule.reachable.some(
       pReachable =>
         pReachable.asDefinedInRule === (pRule.name || "not-in-allowed") &&
@@ -26,9 +27,10 @@ function matchesReachableRule(pRule, pModule) {
 }
 
 function matchesReachesRule(pRule, pModule) {
-  const lReturnValue =
+  return (
     Object.prototype.hasOwnProperty.call(pRule.to, "reachable") &&
     Object.prototype.hasOwnProperty.call(pModule, "reaches") &&
+    // pRule.to.reachable === true &&
     pModule.reaches.some(
       pReaches =>
         pReaches.asDefinedInRule === (pRule.name || "not-in-allowed") &&
@@ -37,8 +39,8 @@ function matchesReachesRule(pRule, pModule) {
             matchers.toModulePath(pRule, pReachesModule) &&
             matchers.toModulePathNot(pRule, pReachesModule)
         )
-    );
-  return lReturnValue;
+    )
+  );
 }
 
 function match(pModule) {

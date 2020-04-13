@@ -295,7 +295,12 @@
         "cycle": {
           "type": "array",
           "items": { "type": "string" },
-          "description": "The circular path if the violation was about circularity"
+          "description": "The circular path if the violation is about circularity"
+        },
+        "via": {
+          "type": "array",
+          "items": { "type": "string" },
+          "description": "The path from the from to the to if the violation is transitive"
         }
       }
     },

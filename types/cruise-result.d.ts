@@ -311,7 +311,11 @@ export interface IViolation {
    */
   to: string;
   /**
-   * The circular path if the violation was about circularity
+   * The circular path if the violation is about circularity
    */
   cycle?: string[];
+  /**
+   * The path from the from to the to if the violation is transitive
+   */
+  via?: string[];
 }
