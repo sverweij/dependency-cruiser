@@ -33,7 +33,7 @@ function regenerateReportFixtures(pDirectory, pFunction, pTargetExtension) {
 function renderBareThemeDot(pResultObject) {
   const lBareTheme = JSON.parse(
     fs.readFileSync(
-      path.join(__dirname, "../test/report/dot/moduleLevel/bareTheme.json")
+      path.join(__dirname, "../test/report/dot/module-level/bare-theme.json")
     )
   );
 
@@ -47,15 +47,15 @@ function renderDefaultThemeDot(pResultObject) {
 
 const CDOT_MOCK_DIR = path.join(
   __dirname,
-  "../test/report/dot/customLevel/mocks/"
+  "../test/report/dot/custom-level/mocks/"
 );
 const DDOT_MOCK_DIR = path.join(
   __dirname,
-  "../test/report/dot/folderLevel/mocks/"
+  "../test/report/dot/folder-level/mocks/"
 );
 const DOT_MOCK_DIR = path.join(
   __dirname,
-  "../test/report/dot/moduleLevel/mocks/"
+  "../test/report/dot/module-level/mocks/"
 );
 const TEAMCITY_MOCK_DIR = path.join(
   __dirname,

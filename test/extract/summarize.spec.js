@@ -114,7 +114,7 @@ describe("extract/summarize - summarize extraction", () => {
             name: "a-rule",
             severity: "warn"
           },
-          via: ["transitively"]
+          via: ["(via via)"]
         },
         {
           from: "violation.js",
@@ -123,7 +123,7 @@ describe("extract/summarize - summarize extraction", () => {
             name: "a-rule",
             severity: "warn"
           },
-          via: ["transitively"]
+          via: ["(via via)"]
         }
       ],
       info: 0,

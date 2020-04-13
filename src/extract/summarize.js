@@ -99,7 +99,7 @@ function toModuleViolationSummary(pRule, pModule, pRuleSet) {
         from: pModule.source,
         to: pTo,
         rule: pRule,
-        via: ["transitively"]
+        via: ["(via via)"]
       }));
   }
 

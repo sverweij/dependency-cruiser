@@ -20,14 +20,19 @@ function wrapAndIndent(pString, pIndent = DEFAULT_INDENT) {
   return indentString(wrapAnsi(pString, MAX_WIDTH), pIndent);
 }
 
+function renderExtraPathInformation(pExtra) {
+  return "\n".concat(
+    wrapAndIndent(pExtra.join(` ${figures.arrowRight} \n`), CYCLIC_PATH_INDENT)
+  );
+}
 function determineTo(pViolation) {
   if (pViolation.cycle) {
-    return "\n".concat(
-      wrapAndIndent(
-        pViolation.cycle.join(` ${figures.arrowRight} \n`),
-        CYCLIC_PATH_INDENT
-      )
-    );
+    return renderExtraPathInformation(pViolation.cycle);
+  }
+  if (pViolation.via) {
+    return `${chalk.bold(pViolation.to)}${renderExtraPathInformation(
+      pViolation.via
+    )}`;
   }
   return `${chalk.bold(pViolation.to)}`;
 }

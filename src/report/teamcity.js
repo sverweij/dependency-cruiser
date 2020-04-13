@@ -55,7 +55,13 @@ function reportViolatedRules(pRuleSetUsed, pViolations) {
 }
 
 function determineTo(pViolation) {
-  return pViolation.cycle ? pViolation.cycle.join(" -> ") : pViolation.to;
+  if (pViolation.cycle) {
+    return pViolation.cycle.join(" -> ");
+  }
+  if (pViolation.via) {
+    return `${pViolation.to} ${pViolation.via.join(" -> ")}`;
+  }
+  return pViolation.to;
 }
 
 function bakeViolationMessage(pViolation) {
