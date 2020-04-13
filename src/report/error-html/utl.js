@@ -33,6 +33,9 @@ function determineTo(pViolation) {
   if (pViolation.cycle) {
     return pViolation.cycle.join(" &rightarrow;<br/>");
   }
+  if (pViolation.via) {
+    return `${pViolation.to}<br/>${pViolation.via.join(" &rightarrow;<br/>")}`;
+  }
   return pViolation.from === pViolation.to ? "" : pViolation.to;
 }
 

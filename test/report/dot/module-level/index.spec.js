@@ -11,7 +11,7 @@ const unresolvableDeps = require("./mocks/es6-unresolvable-deps.json");
 const doNotFollowDeps = require("./mocks/do-not-follow-deps.json");
 const prefixUri = require("./mocks/prefix-uri.json");
 const prefixNonUri = require("./mocks/prefix-non-uri.json");
-const bareTheme = require("./bareTheme.json");
+const bareTheme = require("./bare-theme.json");
 
 const mockPath = path.join(__dirname, "mocks");
 const clusterlessFixture = fs.readFileSync(

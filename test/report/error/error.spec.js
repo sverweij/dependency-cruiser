@@ -7,6 +7,7 @@ const dependencies = require("./mocks/cjs-no-dependency-valid.json");
 const onlywarningdependencies = require("./mocks/err-only-warnings.json");
 const orphanerrs = require("./mocks/orphan-deps.json");
 const circularerrs = require("./mocks/circular-deps.json");
+const viaerrs = require("./mocks/via-deps.json");
 
 describe("report/error", () => {
   let chalkLevel = chalk.level;
@@ -60,5 +61,17 @@ describe("report/error", () => {
       "      src/some/folder/loop-a.js →\n      src/some/folder/loop-b.js →\n      src/some/folder/nested/center.js"
     );
     expect(lResult.exitCode).to.equal(3);
+  });
+  it("renders via violations as vias", () => {
+    const lResult = render(viaerrs);
+
+    expect(lResult.output).to.contain(
+      "error some-via-rule: src/extract/index.js → src/utl/find-rule-by-name.js\n"
+    );
+    expect(lResult.output).to.contain(
+      "error some-via-rule: src/extract/index.js → src/utl/array-util.js\n"
+    );
+    expect(lResult.output).to.contain("      (via via)");
+    expect(lResult.exitCode).to.equal(4);
   });
 });
