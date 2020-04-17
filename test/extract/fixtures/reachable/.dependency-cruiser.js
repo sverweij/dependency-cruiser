@@ -34,7 +34,7 @@ module.exports = {
         /* pattern specifying which files to exclude (regular expression) */
         // , exclude : ''
 
-        /* pattern specifying which files to include (regular expression) 
+        /* pattern specifying which files to include (regular expression)
            dependency-cruiser will skip everything not matching this pattern
         */
         // , includeOnly : ''
@@ -57,7 +57,7 @@ module.exports = {
         /* if true leave symlinks untouched, otherwise use the realpath */
         // , preserveSymlinks: false
 
-        /* Typescript project file ('tsconfig.json') to use for
+        /* TypeScript project file ('tsconfig.json') to use for
            (1) compilation and
            (2) resolution (e.g. with the paths property)
 

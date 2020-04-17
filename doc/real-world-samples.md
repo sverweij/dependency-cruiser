@@ -86,7 +86,7 @@ To get the above graph we used [react-dependency-cruiser-config.js](real-world-s
 
 ![yargs](real-world-samples/yargs.png)
 
-## Typescript
+## TypeScript
 
 It is possible to use dependency-cruiser to infer dependencies of typescript
 projects.
@@ -112,22 +112,22 @@ tslint's 'barrel' `index.ts` modules:
 
 In the same vein dependency-cruiser directly supports CoffeeScript.
 
-In the `src` folder of the coffeescript repo run this:
+In the `src` folder of the CoffeeScript repo run this:
 
 ```sh
 depcruise -x node_modules -T dot . | dot -T png > coffee-script-coffee-without-node_modules.png
 ```
 
-### coffeescript
+### CoffeeScript
 
 [jashkenas/coffeescript](https://github.com/jashkenas/coffeescript) - the
-coffeescript transpiler:
+CoffeeScript transpiler:
 
 ![coffee-script](real-world-samples/coffee-script-coffee-without-node_modules.png)
 
 (You see one module flagged as _unresolvable_ - this is the parser code
-that the coffeescript build script generates jison into the folder with
-transpiled javascript.)
+that the CoffeeScript build script generates jison into the folder with
+transpiled JavaScript.)
 
 ## My own projects
 

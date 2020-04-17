@@ -65,12 +65,12 @@ module.exports = {
           type: "object",
           additionalProperties: false,
           description:
-            "Typescript project file ('tsconfig.json') to use for (1) compilation " +
+            "TypeScript project file ('tsconfig.json') to use for (1) compilation " +
             "and (2) resolution (e.g. with the paths property)",
           properties: {
             fileName: {
               description:
-                "The typescript project file to use. The fileName is relative to " +
+                "The TypeScript project file to use. The fileName is relative to " +
                 "dependency-cruiser's current working directory. When not provided " +
                 "defaults to './tsconfig.json'.",
               type: "string"

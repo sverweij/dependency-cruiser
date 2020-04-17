@@ -735,7 +735,7 @@ rules a.c.t. normal requires. E.g.
 ### `preCompilationOnly`
 
 If you want to set restrictions on dependencies that only exist before
-compilation from typescript to javascript, you can use the `preCompilation`
+compilation from TypeScript to JavaScript, you can use the `preCompilation`
 only attribute.
 
 E.g. to make sure to only import stuff from the react-native stuff that doesn't
@@ -793,7 +793,7 @@ It is possible to specify a regular expression
 for files that dependency-cruiser should cruise, but not follow any further.
 In the options section you can restrict what gets cruised by specifying
 [dependency types](#dependencytypes). So if e.g. you don't want dependency-cruiser
-to follow external dependencies, in stead of specifying the "node_modules" path:
+to follow external dependencies, instead of specifying the "node_modules" path:
 
 ```json
     "options": {
@@ -883,8 +883,8 @@ all modules with a file path starting with coverage, test or node_modules, you c
 #### Other 'exclude' attributes
 
 It's also possible to exclude dependencies on other properties than the (resolved) paths
-at either end of them. To exclude all dependencies that result of an (ecmascript)
-dynamic import from being included in a cruise, you can use the `dynamic` attibute:
+at either end of them. To exclude all dependencies that result of an (ECMAScript)
+dynamic import from being included in a cruise, you can use the `dynamic` attribute:
 
 ```json
 "options": {
@@ -904,7 +904,7 @@ Only cruise the specified depth, counting from the specified root-module(s). Thi
 command is mostly useful in combination with visualisation output like _dot_ to
 keep the generated output to a manageable size.
 
-> If you use this to get a high level overview of your dependendencies, be sure
+> If you use this to get a high level overview of your dependencies, be sure
 > to check out the [archi](#archi) reporter. That's more flexible, while still
 > taking into account all your rules and dependencies
 

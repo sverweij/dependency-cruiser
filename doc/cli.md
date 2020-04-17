@@ -63,13 +63,13 @@ depcruise --output-type dot src test lib index.ts
 #### passing globs as parameters
 
 dependency-cruiser uses [node-glob](https://github.com/isaacs/node-glob) to
-make sure globs work the same accross platforms. It cannot prevent the
+make sure globs work the same across platforms. It cannot prevent the
 environment from expanding globs before it can process it, however.
 
 As each environment interprets globs slightly differently, a pattern
 like `packages/**/src/**/*.js` will yield different results.
 
-To make sure glob expansion works _exactly_ the same accross
+To make sure glob expansion works _exactly_ the same across
 platforms slap some quotes around them, so it's not the environment
 (/ shell) expanding the glob, but dependency-cruiser itself:
 
@@ -157,7 +157,7 @@ details.
 
 #### err-html
 
-Generates an stand alone html report with:
+Generates a stand-alone html report with:
 
 - a summary with files & dependencies cruised and the number of errors and warnings found
 - all rules, ordered by the number of violations (unviolated ones are hidden by default)
@@ -352,7 +352,7 @@ so it's easier to compare than the two json's):
   }
   ...
   ```
-- It will retain name similarties (like the `announce.js`/ `announce.spec.js` above).
+- It will retain name similarities (like the `announce.js`/ `announce.spec.js` above).
 - When there's more path elements in your dependency graph than in the corpus
   the algorithm falls back to random strings that have the same length and pattern
   as the original one (`secretService-record.ts` -> `fnwarqVboiuvq-pugnmh.ts`).
@@ -617,7 +617,7 @@ section in the rules reference for details.
 
 With a webpack config you can drastically alter how module names resolve to
 files on disk, a.o. with aliases. If you want dependency-cruiser to take that
-into account (you probaly do), you can pass the webpack config here.
+into account (you probably do), you can pass the webpack config here.
 
 However, just like with tsconfigs, you probably want to put this in a configuration
 file - see the [webpackConfig](./rules-reference.md#webpackconfig-use-the-resolution-options-of-a-webpack-configuration)

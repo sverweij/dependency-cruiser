@@ -105,7 +105,7 @@ module.exports = {
         /* if true leave symlinks untouched, otherwise use the realpath */
         // , preserveSymlinks: false
 
-        /* Typescript project file ('tsconfig.json') to use for
+        /* TypeScript project file ('tsconfig.json') to use for
            (1) compilation and
            (2) resolution (e.g. with the paths property)
 

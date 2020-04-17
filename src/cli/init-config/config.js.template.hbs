@@ -124,7 +124,7 @@ module.exports = {
     {{#hasTestsOutsideSource}}
     {
       name: 'not-to-test',
-      comment: 
+      comment:
         "This module depends on code within a folder that should only contain tests. As tests don't " +
         "implement functionality this is odd. Either you're writing a test outside the test folder " +
         "or there's something in the test folder that isn't a test.",
@@ -171,7 +171,7 @@ module.exports = {
     {
       name: 'optional-deps-used',
       severity: 'info',
-      comment: 
+      comment:
         "This module depends on an npm package that is declared as an optional dependency " +
         "in your package.json. As this makes sense in limited situations only, it's flagged here. " +
         "If you're using an optional dependency here by design - add an exception to your" +
@@ -185,7 +185,7 @@ module.exports = {
     },
     {
       name: 'peer-deps-used',
-      comment: 
+      comment:
         "This module depends on an npm package that is declared as a peer dependency " +
         "in your package.json. This makes sense if your package is e.g. a plugin, but in " +
         "other cases - maybe not so much. If the use of a peer dependency is intentional " +
@@ -218,7 +218,7 @@ module.exports = {
       ]
     },
 
-    /* conditions specifying which dependencies to exclude 
+    /* conditions specifying which dependencies to exclude
        - path: a regular expression to match
        - dynamic: a boolean indicating whether to ignore dynamic (true) or static (false) dependencies.
           leave out if you want to exclude neither (recommended!)
@@ -228,7 +228,7 @@ module.exports = {
     //   dynamic: true
     // },
 
-    /* pattern specifying which files to include (regular expression) 
+    /* pattern specifying which files to include (regular expression)
        dependency-cruiser will skip everything not matching this pattern
     */
     // includeOnly : '',
@@ -258,7 +258,7 @@ module.exports = {
     /* if true leave symlinks untouched, otherwise use the realpath */
     // preserveSymlinks: false,
 
-    /* Typescript project file ('tsconfig.json') to use for
+    /* TypeScript project file ('tsconfig.json') to use for
        (1) compilation and
        (2) resolution (e.g. with the paths property)
 
@@ -278,7 +278,7 @@ module.exports = {
 
     /* Webpack configuration to use to get resolve options from.
 
-       The (optional) fileName attribute specifies which file to take (relative 
+       The (optional) fileName attribute specifies which file to take (relative
        to dependency-cruiser's current working directory. When not provided defaults
        to './webpack.conf.js'.
 
@@ -322,7 +322,7 @@ module.exports = {
            the external modules, but not the innards your app depends upon.
          */
         collapsePattern: 'node_modules/[^/]+',
-        
+
         /* Options to tweak the appearance of your graph.See
            https://github.com/sverweij/dependency-cruiser/blob/master/doc/rules-reference.md#dot
            for details and some examples. If you don't specify a theme
@@ -377,7 +377,7 @@ module.exports = {
           this collapsePattern to your situation.
         */
         collapsePattern: '^(node_modules|packages|src|lib|app|bin|test(s?)|spec(s?))/[^/]+',
-        
+
         /* Options to tweak the appearance of your graph.See
            https://github.com/sverweij/dependency-cruiser/blob/master/doc/rules-reference.md#dot
            for details and some examples. If you don't specify a theme
