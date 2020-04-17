@@ -2,7 +2,7 @@
 
 The typical use for dependency-cruiser is on the command line. However, you
 might want to use it programmatically. For this, dependency-cruiser has an
-API (that follows the same semver rythm as the cli).
+API (that follows the same semver rhythm as the cli).
 
 ### Basic use
 

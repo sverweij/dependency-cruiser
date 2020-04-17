@@ -8,19 +8,19 @@
 
 ## Troubleshooting
 
-### Q: TypeScript, coffeescript, livescript or Vue Single File Component (SFC) dependencies don't show up. How can I fix that?
+### Q: TypeScript, CoffeeScript, LiveScript or Vue Single File Component (SFC) dependencies don't show up. How can I fix that?
 
 **A**: Install the compiler you use in the same spot dependency-cruiser is installed (or vv).
 
 Dependency-cruiser doesn't come shipped with the necessary transpilers to
-handle these languages. In stead it uses what is already available in the
+handle these languages. Instead, it uses what is already available in the
 environment (see [below](#q-does-this-mean-dependency-cruiser-installs-transpilers-for-all-these-languages)).
 You can check if the transpilers are available to dependency-cruiser by
 running `depcruise --info`.
 
 When it turns out they aren't yet:
 
-- if you're runnning dependency-cruiser as a global install, install
+- if you're running dependency-cruiser as a global install, install
   the necessary transpilers globally as well.
 - if you're running dependency-cruiser as a local (development-)
   dependency, install the necessary transpilers there.
@@ -35,9 +35,9 @@ dependency-cruiser configuration (`.dependency-cruiser.json` or
 `.dependency-cruiser.js`) or use `--ts-pre-compilation-deps` on the
 command line.
 
-By default dependency-cruiser only takes post-compilation dependencies into
+By default, dependency-cruiser only takes post-compilation dependencies into
 account; dependencies between TypeScript modules that exist after compilation
-to javascript. Two types of dependencies do not fall into this category
+to JavaScript. Two types of dependencies do not fall into this category
 
 - imports that aren't used (yet)
 - imports of types only
@@ -53,12 +53,12 @@ for details and examples.
 
 ### Q: Some TypeScript dependencies _still_ don't show up (`/// tripple slash directives`)
 
-**_A_**: By default dependency-cruiser ignores TypeScript's tripple slash directives.
+**_A_**: By default dependency-cruiser ignores TypeScript's triple slash directives.
 To ensure it _does_ detect them:
 
-- Switch TypesScript pre-compilation dependencies on (see previous question)
+- Switch TypeScript pre-compilation dependencies on (see previous question)
 - Do one of the following
-  - if you have a dependency-cruiser configuration file, add the tripple slash directive
+  - if you have a dependency-cruiser configuration file, add the triple slash directive
     module system to the array of module systems e.g.
     ```json
      "moduleSystems": ["amd", "cjs", "es6", "tsd"]
@@ -73,14 +73,14 @@ To ensure it _does_ detect them:
 > It'd be a breaking change, though so for now you'll have to be
 > explicit with these.
 
-### Q: The graph dependency-cruiser generates is humoungous, and I can't follow the lines very well what can I do?
+### Q: The graph dependency-cruiser generates is humongous, and I can't follow the lines very well what can I do?
 
 **A**: Usually you don't need to see _all_ modules and dependencies that make up
 your app at the same time - showing your monorepo with 5000 modules and 20000
 dependencies in one picture will not give you much information. There's a few
 strategies and options that can help
 
-It can e.g. be helpfull to make separate graphs for
+It can e.g. be helpful to make separate graphs for
 each of the `packages` in your monorepo. That won't solve all readability issues,
 though, so dependency-cruiser has a few options to get you sorted.
 
@@ -94,7 +94,7 @@ dependency-cruiser --config .dependency-cruiser.js --output-type archi -- src | 
 ```
 
 By default the _archi_ reporter aggregates to the level just below `packages` (for
-mono repos), `src`, `lib` and a few other often occuring paths. You can tweak this
+mono repos), `src`, `lib` and a few other often occurring paths. You can tweak this
 to your own app's structure with a [collapsePattern](rules-reference.md#archi)).
 
 An example of how this can look: [dependency-cruiser's high level dependency graph](https://sverweij.github.io/dependency-cruiser/dependency-cruiser-archi-graph.html)
@@ -127,7 +127,7 @@ depcruise --include-only "^src/" --exclude "mocks\\.ts$|\\.spec\\.ts$" --output-
 #### Bonus: separate config for your graph
 
 Instead of tweaking command line parameters each time with these filtering options,
-you can make a seperate configuration file that extends the one you use for
+you can make a separate configuration file that extends the one you use for
 validation, e.g. like so:
 
 ```js
@@ -197,8 +197,8 @@ always be able to render a graph with orthogonal edges, so YMMV.
 
 ### Q: TypeScript dynamic imports show up as "✖" . What's up there?
 
-**A**: You're using a version of depedendency-cruiser < 4.17.0. Dynamic imports,
-both in TypeScript and Javascript are supported as of version 4.17.0 -
+**A**: You're using a version of dependency-cruiser < 4.17.0. Dynamic imports,
+both in TypeScript and JavaScript are supported as of version 4.17.0 -
 and ✖'s in the output should be a thing of the past.
 
 > Before dependency-cruiser@4.17.0 this instruction was in place:
@@ -220,7 +220,7 @@ necessary compilers at its disposal.
 
 ### Q: I'm developing in React and use jsx/ tsx/ csx/ cjsx. How do I get that to work?
 
-**A**: jsx and its TypeScript and coffeescript variants work
+**A**: jsx and its TypeScript and CoffeeScript variants work
 out of the box as well.
 
 ### Q: Does this work with Vue as well?
@@ -271,12 +271,12 @@ config file formats:
     first element in the array)
 
 Support for other formats (promise exports, TypeScript, fancier
-ecmascript) might come later.
+ECMAScript) might come later.
 
 ### Q: Does dependency-cruiser detect [dynamic imports](https://github.com/tc39/proposal-dynamic-import)?
 
-**A**: Yes; in both TypeScript and javascript - but only with static string arguments
-or template expressions that don't contain no placeholders (see the next question).
+**A**: Yes; in both TypeScript and JavaScript - but only with static string arguments
+or template expressions that don't contain placeholders (see the next question).
 This should cover most of the use cases for dynamic
 imports that leverage asynchronous module loading (like
 [webpack code splitting](https://webpack.js.org/guides/code-splitting/#dynamic-imports)),
@@ -289,8 +289,8 @@ though.
 If you have imports with variables (`require(someVariable)`,
 `import(someOtherVariable).then((pMod) => {...})`) or expressions
 (`require(funkyBoolean ? 'lodash' : 'underscore'))`
-in your code dependency-cruiser won't be able to determinewhat dependencies
-they're about. For now dependency-cruiser focusses on doing static analysis
+in your code dependency-cruiser won't be able to determine what dependencies
+they're about. For now dependency-cruiser focuses on doing static analysis
 only and doing that well.
 
 ### Q: Does it work with my monorepo?
@@ -347,7 +347,7 @@ your configuration with the wrapper(s) and/ or redefinitions of require:
         the report is done
 - In `report/index.js`
   - require that module and
-  - add a key to the to the `TYPE2REPORTER` object with that module as value
+  - add a key to the `TYPE2REPORTER` object with that module as value
 - In `bin/dependency-cruise`
   - add it to the documentation of the -T option
 - In `test/report` add unit tests that prove your reporter does what it

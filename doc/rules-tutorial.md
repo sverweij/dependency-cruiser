@@ -107,7 +107,7 @@ Yep. Don't you just _love_ those 1500 npm packages you drag in and rely on for
 your website to run :grimace: .
 
 Luckily you know `kpttraag`, the author of `yudelyo` - you submit a PR and wait.
-In the mean time you don't want to have the build break until `kpttraag` has
+In the meantime you don't want to have the build break until `kpttraag` has
 found the time to merge your PR.
 
 You realize there might be more npm packages using http too, so ...
