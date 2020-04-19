@@ -1,5 +1,4 @@
 /* eslint-disable security/detect-object-injection */
-/* eslint-disable complexity */
 
 const _clone = require("lodash/clone");
 const _get = require("lodash/get");
@@ -29,12 +28,10 @@ function isModuleInRuleTo(pRule) {
     (!pRule.to.pathNot || !pModule.source.match(pRule.to.pathNot));
 }
 
-// eslint-disable-next-line complexity
 function mergeReachableProperties(pModule, pRule, pPath) {
   const lReachables = pModule.reachable || [];
   const lIndexExistingReachable = lReachables.findIndex(
-    pReachable =>
-      pReachable.asDefinedInRule === (pRule.name || "not-in-allowed")
+    pReachable => pReachable.asDefinedInRule === pRule.name
   );
   const lIsReachable = pPath.length > 1;
 
@@ -45,7 +42,7 @@ function mergeReachableProperties(pModule, pRule, pPath) {
   } else {
     return lReachables.concat({
       value: lIsReachable,
-      asDefinedInRule: pRule.name || "not-in-allowed"
+      asDefinedInRule: pRule.name
     });
   }
 }
@@ -53,8 +50,7 @@ function mergeReachableProperties(pModule, pRule, pPath) {
 function mergeReachesProperties(pFromModule, pToModule, pRule, pPath) {
   const lReaches = pFromModule.reaches || [];
   const lIndexExistingReachable = lReaches.findIndex(
-    pReachable =>
-      pReachable.asDefinedInRule === (pRule.name || "not-in-allowed")
+    pReachable => pReachable.asDefinedInRule === pRule.name
   );
 
   if (lIndexExistingReachable > -1) {
@@ -73,7 +69,7 @@ function mergeReachesProperties(pFromModule, pToModule, pRule, pPath) {
     return lReaches;
   } else {
     return lReaches.concat({
-      asDefinedInRule: pRule.name || "not-in-allowed",
+      asDefinedInRule: pRule.name,
       modules: [{ source: pToModule.source, via: pPath }]
     });
   }
@@ -103,7 +99,10 @@ function addReachableToGraph(pGraph, pReachableRule) {
         }
       });
     }
-    if (isModuleInRuleTo(pReachableRule)(lReturnValue)) {
+    if (
+      // pReachableRule.to.reachable === false &&
+      isModuleInRuleTo(pReachableRule)(lReturnValue)
+    ) {
       pGraph
         .filter(isModuleInRuleFrom(pReachableRule))
         .forEach(pLFromModule => {

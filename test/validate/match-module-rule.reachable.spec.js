@@ -19,7 +19,8 @@ const ANY_REACHABLE_WITH_PATH = {
   from: {},
   to: { reachable: true, path: "^src" }
 };
-const ANY_UNREACHABLE_NAMELESS = {
+const ANY_UNREACHABLE_IN_ALLOWED_SET = {
+  name: "not-in-allowed",
   from: {},
   to: { reachable: false }
 };
@@ -61,14 +62,14 @@ describe("validate/match-module-rule - reachable", () => {
   });
   it("nameless rule with reachable attribute does not match unreachables according to other rule name", () => {
     expect(
-      matchesReachableRule(ANY_UNREACHABLE_NAMELESS, {
+      matchesReachableRule(ANY_UNREACHABLE_IN_ALLOWED_SET, {
         reachable: [{ value: false, asDefinedInRule: "other-rule-name" }]
       })
     ).to.equal(false);
   });
   it("nameless rule with reachable attribute matchs unreachables according to not-in-allowed", () => {
     expect(
-      matchesReachableRule(ANY_UNREACHABLE_NAMELESS, {
+      matchesReachableRule(ANY_UNREACHABLE_IN_ALLOWED_SET, {
         reachable: [{ value: false, asDefinedInRule: "not-in-allowed" }]
       })
     ).to.equal(true);

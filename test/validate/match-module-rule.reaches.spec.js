@@ -7,7 +7,8 @@ const ANY_REACHABLE = {
   from: {},
   to: { reachable: true }
 };
-const ANY_REACHABLE_NAMELESS = {
+const ANY_REACHES_IN_ALLOWED = {
+  name: "not-in-allowed",
   from: {},
   to: { reachable: true }
 };
@@ -42,7 +43,7 @@ describe("validate/match-module-rule - reaches", () => {
   });
   it("rule without reachable attribute matches modules with a reaches (explicit, nameless rule)", () => {
     expect(
-      matchesReachesRule(ANY_REACHABLE_NAMELESS, {
+      matchesReachesRule(ANY_REACHES_IN_ALLOWED, {
         reaches: [
           {
             modules: [{ source: "src/hoppetee.js" }],

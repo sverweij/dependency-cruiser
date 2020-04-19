@@ -97,7 +97,6 @@ function toModuleViolationSummary(pRule, pModule, pRuleSet) {
           ),
         []
       )
-      // TODO: in the via add the path from from to to
       .map(pToModule => ({
         from: pModule.source,
         to: pToModule.to,

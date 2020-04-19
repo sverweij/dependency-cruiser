@@ -136,7 +136,6 @@ describe("extract/derive/reachable/index - reachability detection", () => {
     const lForbiddenReachabilityRuleSetHajoo = {
       allowed: [
         {
-          name: "hajoo-not-reachable-from-src",
           from: { path: "src/[^.]+\\.js" },
           to: { path: "./src/hajoo\\.js$", reachable: true }
         }
@@ -152,7 +151,7 @@ describe("extract/derive/reachable/index - reachability detection", () => {
         ],
         reaches: [
           {
-            asDefinedInRule: "hajoo-not-reachable-from-src",
+            asDefinedInRule: "not-in-allowed",
             modules: [
               {
                 source: "./src/hajoo.js",
@@ -178,7 +177,7 @@ describe("extract/derive/reachable/index - reachability detection", () => {
         ],
         reaches: [
           {
-            asDefinedInRule: "hajoo-not-reachable-from-src",
+            asDefinedInRule: "not-in-allowed",
             modules: [
               {
                 source: "./src/hajoo.js",
@@ -194,7 +193,7 @@ describe("extract/derive/reachable/index - reachability detection", () => {
         reachable: [
           {
             value: true,
-            asDefinedInRule: "hajoo-not-reachable-from-src"
+            asDefinedInRule: "not-in-allowed"
           }
         ]
       }

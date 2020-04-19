@@ -18,7 +18,7 @@ function matchesReachableRule(pRule, pModule) {
     // pRule.to.reachable === false &&
     pModule.reachable.some(
       pReachable =>
-        pReachable.asDefinedInRule === (pRule.name || "not-in-allowed") &&
+        pReachable.asDefinedInRule === pRule.name &&
         pReachable.value === pRule.to.reachable
     ) &&
     matchers.toModulePath(pRule, pModule) &&
@@ -33,7 +33,7 @@ function matchesReachesRule(pRule, pModule) {
     // pRule.to.reachable === true &&
     pModule.reaches.some(
       pReaches =>
-        pReaches.asDefinedInRule === (pRule.name || "not-in-allowed") &&
+        pReaches.asDefinedInRule === pRule.name &&
         pReaches.modules.some(
           pReachesModule =>
             matchers.toModulePath(pRule, pReachesModule) &&
