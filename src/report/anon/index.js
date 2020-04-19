@@ -15,22 +15,49 @@ function anonymizeDependencies(pDependencies, pWordList) {
   }));
 }
 
-function anonymizeModules(pModules, pWordList) {
-  return pModules.map(pModule => ({
+function anonymizeReachesModule(pWordList) {
+  return pModule => ({
     ...pModule,
-    dependencies: anonymizeDependencies(pModule.dependencies, pWordList),
-    source: anonymizePath(pModule.source, pWordList)
+    source: anonymizePath(pModule.source, pWordList),
+    via: anonymizePathArray(pModule.via, pWordList)
+  });
+}
+
+function anonymizeReaches(pReachesArray, pWordList) {
+  return pReachesArray.map(pReaches => ({
+    ...pReaches,
+    modules: pReaches.modules.map(anonymizeReachesModule(pWordList))
   }));
 }
 
+function anonymizeModules(pModules, pWordList) {
+  return pModules.map(pModule => {
+    const lReturnValue = {
+      ...pModule,
+      dependencies: anonymizeDependencies(pModule.dependencies, pWordList),
+      source: anonymizePath(pModule.source, pWordList)
+    };
+    if (pModule.reaches) {
+      lReturnValue.reaches = anonymizeReaches(pModule.reaches, pWordList);
+    }
+
+    return lReturnValue;
+  });
+}
+
 function anonymizeViolations(pViolations, pWordList) {
-  return pViolations.map(pViolation => ({
-    ...pViolation,
-    from: anonymizePath(pViolation.from, pWordList),
-    to: anonymizePath(pViolation.to, pWordList),
-    cycle: anonymizePathArray(pViolation.cycle, pWordList),
-    via: anonymizePathArray(pViolation.via, pWordList)
-  }));
+  return pViolations.map(pViolation => {
+    const lReturnValue = {
+      ...pViolation,
+      from: anonymizePath(pViolation.from, pWordList),
+      to: anonymizePath(pViolation.to, pWordList),
+      cycle: anonymizePathArray(pViolation.cycle, pWordList)
+    };
+    if (pViolation.via) {
+      lReturnValue.via = anonymizePathArray(pViolation.via, pWordList);
+    }
+    return lReturnValue;
+  });
 }
 
 function anonymize(pResults, pWordList) {
