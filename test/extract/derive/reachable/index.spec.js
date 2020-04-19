@@ -795,8 +795,7 @@ describe("extract/derive/reachable/index - reachability detection", () => {
     };
     const lResultGraph = [
       {
-        source: "./src/index.js",
-        reachable: [{ value: true, asDefinedInRule: "dont-touch-index" }]
+        source: "./src/index.js"
       },
       {
         source: "./src/intermediate.js",
@@ -827,8 +826,7 @@ describe("extract/derive/reachable/index - reachability detection", () => {
       },
       {
         source: "./src/hajoo.js",
-        dependencies: [],
-        reachable: [{ value: true, asDefinedInRule: "dont-touch-hajoo" }]
+        dependencies: []
       },
       {
         source: "./test/index.spec.js",

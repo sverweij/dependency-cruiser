@@ -75,15 +75,30 @@ function mergeReachesProperties(pFromModule, pToModule, pRule, pPath) {
   }
 }
 
-// TODO function is a bit on the big side - time to split it
+/**
+ * TODO: explainez cette fonctionalité!
+ */
+
+function shouldAddReaches(pRule, pModule) {
+  return (
+    (pRule.to.reachable === true || pRule.name === "not-in-allowed") &&
+    isModuleInRuleFrom(pRule)(pModule)
+  );
+}
+
+function shouldAddReachable(pRule, pModule) {
+  return (
+    (pRule.to.reachable === false || pRule.name === "not-in-allowed") &&
+    isModuleInRuleTo(pRule)(pModule)
+  );
+}
+
+// TODO function is a bit on the big side - time to split
 function addReachableToGraph(pGraph, pReachableRule) {
   return pGraph.map(pModule => {
     let lReturnValue = _clone(pModule);
 
-    if (
-      pReachableRule.to.reachable === true &&
-      isModuleInRuleFrom(pReachableRule)(lReturnValue)
-    ) {
+    if (shouldAddReaches(pReachableRule, lReturnValue)) {
       pGraph.filter(isModuleInRuleTo(pReachableRule)).forEach(pToModule => {
         if (lReturnValue.source !== pToModule.source) {
           const lPath = getPath(pGraph, pModule.source, pToModule.source);
@@ -99,10 +114,7 @@ function addReachableToGraph(pGraph, pReachableRule) {
         }
       });
     }
-    if (
-      // pReachableRule.to.reachable === false &&
-      isModuleInRuleTo(pReachableRule)(lReturnValue)
-    ) {
+    if (shouldAddReachable(pReachableRule, lReturnValue)) {
       pGraph
         .filter(isModuleInRuleFrom(pReachableRule))
         .forEach(pLFromModule => {

@@ -15,7 +15,6 @@ function matchesReachableRule(pRule, pModule) {
   return (
     Object.prototype.hasOwnProperty.call(pRule.to, "reachable") &&
     Object.prototype.hasOwnProperty.call(pModule, "reachable") &&
-    // pRule.to.reachable === false &&
     pModule.reachable.some(
       pReachable =>
         pReachable.asDefinedInRule === pRule.name &&
@@ -30,7 +29,6 @@ function matchesReachesRule(pRule, pModule) {
   return (
     Object.prototype.hasOwnProperty.call(pRule.to, "reachable") &&
     Object.prototype.hasOwnProperty.call(pModule, "reaches") &&
-    // pRule.to.reachable === true &&
     pModule.reaches.some(
       pReaches =>
         pReaches.asDefinedInRule === pRule.name &&
