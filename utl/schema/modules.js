@@ -133,11 +133,17 @@ module.exports = {
           type: "array",
           items: {
             type: "object",
-            required: ["source"],
+            required: ["source", "via"],
             additionalProperties: false,
             properties: {
               source: {
                 type: "string"
+              },
+              via: {
+                type: "array",
+                description:
+                  "The path along wich the 'to' module is reachable from this one.",
+                items: { type: "string" }
               }
             }
           },

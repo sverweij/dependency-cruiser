@@ -198,6 +198,10 @@ export interface IReachesModule {
    * The (resolved) file name of the module, e.g. 'src/main/index.js'
    */
   source: string;
+  /**
+   * The path along wich the 'to' module is reachable from this one.
+   */
+  via: string[];
 }
 
 export interface IReaches {

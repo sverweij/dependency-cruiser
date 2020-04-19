@@ -2,6 +2,7 @@ const _get = require("lodash/get");
 const _uniqBy = require("lodash/uniqBy");
 const _spread = require("lodash/spread");
 const _concat = require("lodash/concat");
+const _clone = require("lodash/clone");
 const pathToPosix = require("./utl/path-to-posix");
 const getDependencies = require("./get-dependencies");
 const deriveCirculars = require("./derive/circular");
@@ -169,6 +170,15 @@ function summarizeOptions(pFileDirectoryArray, pOptions) {
   };
 }
 
+// the fixed name for allowed rules served a purpose during the extraction
+// process - but it's not necessary to reflect it in the output.
+function removeNames(pRule) {
+  const lReturnValue = _clone(pRule);
+
+  Reflect.deleteProperty(lReturnValue, "name");
+  return lReturnValue;
+}
+
 function addRuleSetUsed(pOptions) {
   const lForbidden = _get(pOptions, "ruleSet.forbidden");
   const lAllowed = _get(pOptions, "ruleSet.allowed");
@@ -176,7 +186,7 @@ function addRuleSetUsed(pOptions) {
 
   return Object.assign(
     lForbidden ? { forbidden: lForbidden } : {},
-    lAllowed ? { allowed: lAllowed } : {},
+    lAllowed ? { allowed: lAllowed.map(removeNames) } : {},
     lAllowedSeverity ? { allowedSeverity: lAllowedSeverity } : {}
   );
 }

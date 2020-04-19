@@ -361,8 +361,7 @@
       "allowed": [
         {
           "from": {},
-          "to": {},
-          "name": "not-in-allowed"
+          "to": {}
         },
         {
           "from": {
@@ -371,8 +370,7 @@
           "to": {
             "path": "^src",
             "reachable": false
-          },
-          "name": "not-in-allowed"
+          }
         }
       ],
       "allowedSeverity": "info"

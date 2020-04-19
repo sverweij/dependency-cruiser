@@ -44,9 +44,7 @@
           "coreModule": false,
           "followable": true,
           "couldNotResolve": false,
-          "dependencyTypes": [
-            "local"
-          ],
+          "dependencyTypes": ["local"],
           "module": "../utl/array-util",
           "moduleSystem": "cjs",
           "dynamic": false,
@@ -85,9 +83,7 @@
           "coreModule": false,
           "followable": true,
           "couldNotResolve": false,
-          "dependencyTypes": [
-            "local"
-          ],
+          "dependencyTypes": ["local"],
           "module": "./add-validations",
           "moduleSystem": "cjs",
           "dynamic": false,
@@ -101,9 +97,7 @@
           "coreModule": false,
           "followable": true,
           "couldNotResolve": false,
-          "dependencyTypes": [
-            "local"
-          ],
+          "dependencyTypes": ["local"],
           "module": "./clear-caches",
           "moduleSystem": "cjs",
           "dynamic": false,
@@ -117,9 +111,7 @@
           "coreModule": false,
           "followable": true,
           "couldNotResolve": false,
-          "dependencyTypes": [
-            "local"
-          ],
+          "dependencyTypes": ["local"],
           "module": "./gather-initial-sources",
           "moduleSystem": "cjs",
           "dynamic": false,
@@ -133,9 +125,7 @@
           "coreModule": false,
           "followable": true,
           "couldNotResolve": false,
-          "dependencyTypes": [
-            "local"
-          ],
+          "dependencyTypes": ["local"],
           "module": "./get-dependencies",
           "moduleSystem": "cjs",
           "dynamic": false,
@@ -149,9 +139,7 @@
           "coreModule": false,
           "followable": true,
           "couldNotResolve": false,
-          "dependencyTypes": [
-            "local"
-          ],
+          "dependencyTypes": ["local"],
           "module": "./summarize",
           "moduleSystem": "cjs",
           "dynamic": false,
@@ -205,9 +193,7 @@
           "coreModule": false,
           "followable": true,
           "couldNotResolve": false,
-          "dependencyTypes": [
-            "local"
-          ],
+          "dependencyTypes": ["local"],
           "module": "../utl/find-rule-by-name",
           "moduleSystem": "cjs",
           "dynamic": false,
@@ -344,11 +330,7 @@
       },
       "externalModuleResolutionStrategy": "node_modules",
       "includeOnly": "^src/(utl|extract/[^.]+\\.js$)",
-      "moduleSystems": [
-        "amd",
-        "cjs",
-        "es6"
-      ],
+      "moduleSystems": ["amd", "cjs", "es6"],
       "outputTo": "-",
       "outputType": "json",
       "preserveSymlinks": false,
@@ -374,8 +356,7 @@
       "allowed": [
         {
           "from": {},
-          "to": {},
-          "name": "not-in-allowed"
+          "to": {}
         },
         {
           "from": {
@@ -384,8 +365,7 @@
           "to": {
             "path": "^src",
             "reachable": false
-          },
-          "name": "not-in-allowed"
+          }
         }
       ],
       "allowedSeverity": "info"
