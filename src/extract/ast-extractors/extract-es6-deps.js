@@ -2,20 +2,20 @@ const walk = require("acorn-walk");
 const estreeHelpers = require("./estree-helpers");
 
 function pushImportNodeValue(pDependencies) {
-  return pNode => {
+  return (pNode) => {
     if (estreeHelpers.isStringLiteral(pNode.source)) {
       pDependencies.push({
         module: pNode.source.value,
         moduleSystem: "es6",
         dynamic: true,
-        exoticallyRequired: false
+        exoticallyRequired: false,
       });
     } else if (estreeHelpers.isPlaceholderlessTemplateLiteral(pNode.source)) {
       pDependencies.push({
         module: pNode.source.quasis[0].value.cooked,
         moduleSystem: "es6",
         dynamic: true,
-        exoticallyRequired: false
+        exoticallyRequired: false,
       });
     }
   };
@@ -28,7 +28,7 @@ module.exports = (pAST, pDependencies) => {
         module: pNode.source.value,
         moduleSystem: "es6",
         dynamic: false,
-        exoticallyRequired: false
+        exoticallyRequired: false,
       });
     }
   }
@@ -39,7 +39,7 @@ module.exports = (pAST, pDependencies) => {
       ImportDeclaration: pushSourceValue,
       ImportExpression: pushImportNodeValue(pDependencies),
       ExportAllDeclaration: pushSourceValue,
-      ExportNamedDeclaration: pushSourceValue
+      ExportNamedDeclaration: pushSourceValue,
     },
     // see https://github.com/acornjs/acorn/issues/746
     walk.base

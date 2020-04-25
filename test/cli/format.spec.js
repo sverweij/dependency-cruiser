@@ -11,7 +11,7 @@ describe("cli/format", () => {
     deleteDammit(lOutFile);
 
     await format(path.join(__dirname, "fixtures", "empty.json"), {
-      outputTo: lOutFile
+      outputTo: lOutFile,
     });
 
     expect(fs.readFileSync(lOutFile, "utf8")).to.contain(

@@ -13,5 +13,5 @@ module.exports = {
       lReturnValue.license = lLicense;
     }
     return lReturnValue;
-  }
+  },
 };

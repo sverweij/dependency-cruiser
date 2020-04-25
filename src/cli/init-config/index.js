@@ -18,7 +18,7 @@ function getOneshotConfig(pOneShotConfigId) {
       tsPreCompilationDeps: fileExists(TYPESCRIPT_CONFIG),
       useYarnPnP: pnpIsEnabled(),
       useWebpackConfig: fileExists(WEBPACK_CONFIG),
-      webpackConfig: WEBPACK_CONFIG
+      webpackConfig: WEBPACK_CONFIG,
     },
     yes: {
       useTsConfig: fileExists(TYPESCRIPT_CONFIG),
@@ -26,22 +26,22 @@ function getOneshotConfig(pOneShotConfigId) {
       tsPreCompilationDeps: fileExists(TYPESCRIPT_CONFIG),
       useYarnPnP: pnpIsEnabled(),
       useWebpackConfig: fileExists(WEBPACK_CONFIG),
-      webpackConfig: WEBPACK_CONFIG
-    }
+      webpackConfig: WEBPACK_CONFIG,
+    },
   };
 
   // eslint-disable-next-line security/detect-object-injection
   return ONESHOT_CONFIGS[pOneShotConfigId] || {};
 }
 
-module.exports = pInit => {
+module.exports = (pInit) => {
   /* istanbul ignore if */
   if (pInit === true) {
     getUserInput()
       .then(normalizeInitOptions)
       .then(buildConfig)
       .then(writeConfig)
-      .catch(pError => {
+      .catch((pError) => {
         process.stderr.write(`\n  ERROR: ${pError.message}\n`);
       });
   } else {

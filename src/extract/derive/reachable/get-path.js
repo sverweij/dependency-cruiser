@@ -1,17 +1,17 @@
 // eslint-ignore complexity - TODO: simplify(?)
 function getPath(pGraph, pFrom, pTo, pVisited = new Set()) {
   let lReturnValue = [];
-  const lFromNode = pGraph.find(pNode => pNode.source === pFrom);
+  const lFromNode = pGraph.find((pNode) => pNode.source === pFrom);
 
   pVisited.add(pFrom);
 
   if (lFromNode) {
     const lDirectUnvisitedDependencies = lFromNode.dependencies
-      .filter(pDependency => !pVisited.has(pDependency.resolved))
-      .map(pDependency => pDependency.resolved);
+      .filter((pDependency) => !pVisited.has(pDependency.resolved))
+      .map((pDependency) => pDependency.resolved);
     if (
       lDirectUnvisitedDependencies.some(
-        pDirectDependency => pDirectDependency === pTo
+        (pDirectDependency) => pDirectDependency === pTo
       )
     ) {
       lReturnValue = [pFrom, pTo];

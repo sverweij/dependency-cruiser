@@ -25,13 +25,13 @@ describe("extract/gatherInitialSources", () => {
       gather(
         [
           "test/extract/fixtures/cjs/root_one.js",
-          "test/extract/fixtures/ts/index.ts"
+          "test/extract/fixtures/ts/index.ts",
         ],
         EMPTYOPTIONS
       ).map(pathToPosix)
     ).to.deep.equal([
       "test/extract/fixtures/cjs/root_one.js",
-      "test/extract/fixtures/ts/index.ts"
+      "test/extract/fixtures/ts/index.ts",
     ]);
   });
 
@@ -43,7 +43,7 @@ describe("extract/gatherInitialSources", () => {
       "test/extract/fixtures/ts/javascriptThing.js",
       "test/extract/fixtures/ts/sub/index.ts",
       "test/extract/fixtures/ts/sub/kaching.ts",
-      "test/extract/fixtures/ts/sub/willBeReExported.ts"
+      "test/extract/fixtures/ts/sub/willBeReExported.ts",
     ]);
   });
 
@@ -63,7 +63,7 @@ describe("extract/gatherInitialSources", () => {
       "test/extract/fixtures/coffee/javascriptThing.js",
       "test/extract/fixtures/coffee/sub/index.coffee",
       "test/extract/fixtures/coffee/sub/kaching.litcoffee",
-      "test/extract/fixtures/coffee/sub/willBeReExported.coffee.md"
+      "test/extract/fixtures/coffee/sub/willBeReExported.coffee.md",
     ]);
   });
 
@@ -73,7 +73,7 @@ describe("extract/gatherInitialSources", () => {
         [
           "test/extract/fixtures/ts",
           "test/extract/fixtures/es6/imports-and-exports.js",
-          "test/extract/fixtures/coffee"
+          "test/extract/fixtures/coffee",
         ],
         EMPTYOPTIONS
       ).map(pathToPosix)
@@ -88,7 +88,7 @@ describe("extract/gatherInitialSources", () => {
       "test/extract/fixtures/coffee/javascriptThing.js",
       "test/extract/fixtures/coffee/sub/index.coffee",
       "test/extract/fixtures/coffee/sub/kaching.litcoffee",
-      "test/extract/fixtures/coffee/sub/willBeReExported.coffee.md"
+      "test/extract/fixtures/coffee/sub/willBeReExported.coffee.md",
     ]);
   });
 
@@ -98,7 +98,7 @@ describe("extract/gatherInitialSources", () => {
         [
           "test/extract/fixtures/ts",
           "test/extract/fixtures/es6/imports-and-exports.js",
-          "test/extract/fixtures/coffee"
+          "test/extract/fixtures/coffee",
         ],
         { exclude: { path: "dex" } }
       ).map(pathToPosix)
@@ -109,21 +109,21 @@ describe("extract/gatherInitialSources", () => {
       "test/extract/fixtures/es6/imports-and-exports.js",
       "test/extract/fixtures/coffee/javascriptThing.js",
       "test/extract/fixtures/coffee/sub/kaching.litcoffee",
-      "test/extract/fixtures/coffee/sub/willBeReExported.coffee.md"
+      "test/extract/fixtures/coffee/sub/willBeReExported.coffee.md",
     ]);
   });
 
   it("filters the 'excluded' pattern from the collection - regexp", () => {
     expect(
       gather(["test/extract/fixtures/ts"], {
-        exclude: { path: "^[a-z]+$" }
+        exclude: { path: "^[a-z]+$" },
       }).map(pathToPosix)
     ).to.deep.equal([
       "test/extract/fixtures/ts/index.ts",
       "test/extract/fixtures/ts/javascriptThing.js",
       "test/extract/fixtures/ts/sub/index.ts",
       "test/extract/fixtures/ts/sub/kaching.ts",
-      "test/extract/fixtures/ts/sub/willBeReExported.ts"
+      "test/extract/fixtures/ts/sub/willBeReExported.ts",
     ]);
   });
 
@@ -144,7 +144,7 @@ describe("extract/gatherInitialSources", () => {
       "test/extract/fixtures/gather-globbing/packages/odin/src/deep/ly.spec.js",
       "test/extract/fixtures/gather-globbing/packages/odin/src/deep/ly/index.js",
       "test/extract/fixtures/gather-globbing/packages/odin/src/deep/ly/nested.js",
-      "test/extract/fixtures/gather-globbing/packages/odin/test/index.spec.js"
+      "test/extract/fixtures/gather-globbing/packages/odin/test/index.spec.js",
     ]);
   });
 
@@ -160,14 +160,14 @@ describe("extract/gatherInitialSources", () => {
       "test/extract/fixtures/gather-globbing/packages/odin/src/deep/ly.js",
       "test/extract/fixtures/gather-globbing/packages/odin/src/deep/ly.spec.js",
       "test/extract/fixtures/gather-globbing/packages/odin/src/deep/ly/index.js",
-      "test/extract/fixtures/gather-globbing/packages/odin/src/deep/ly/nested.js"
+      "test/extract/fixtures/gather-globbing/packages/odin/src/deep/ly/nested.js",
     ]);
   });
 
   it("filters out the stuff in the exclude pattern", () => {
     expect(
       gather(["test/extract/fixtures/gather-globbing/**/src"], {
-        exclude: { path: "/deep/ly/" }
+        exclude: { path: "/deep/ly/" },
       }).map(pathToPosix)
     ).to.deep.equal([
       "test/extract/fixtures/gather-globbing/packages/baldr/src/bow.js",
@@ -177,14 +177,14 @@ describe("extract/gatherInitialSources", () => {
       "test/extract/fixtures/gather-globbing/packages/loki/src/index.spec.ts",
       "test/extract/fixtures/gather-globbing/packages/loki/src/index.ts",
       "test/extract/fixtures/gather-globbing/packages/odin/src/deep/ly.js",
-      "test/extract/fixtures/gather-globbing/packages/odin/src/deep/ly.spec.js"
+      "test/extract/fixtures/gather-globbing/packages/odin/src/deep/ly.spec.js",
     ]);
   });
 
   it("filters out the stuff in the doNotFollow pattern", () => {
     expect(
       gather(["test/extract/fixtures/gather-globbing/**/src"], {
-        doNotFollow: { path: "/deep/ly/" }
+        doNotFollow: { path: "/deep/ly/" },
       }).map(pathToPosix)
     ).to.deep.equal([
       "test/extract/fixtures/gather-globbing/packages/baldr/src/bow.js",
@@ -194,21 +194,21 @@ describe("extract/gatherInitialSources", () => {
       "test/extract/fixtures/gather-globbing/packages/loki/src/index.spec.ts",
       "test/extract/fixtures/gather-globbing/packages/loki/src/index.ts",
       "test/extract/fixtures/gather-globbing/packages/odin/src/deep/ly.js",
-      "test/extract/fixtures/gather-globbing/packages/odin/src/deep/ly.spec.js"
+      "test/extract/fixtures/gather-globbing/packages/odin/src/deep/ly.spec.js",
     ]);
   });
 
   it("only gathers stuff in the includeOnly pattern", () => {
     expect(
       gather(["test/extract/fixtures/gather-globbing/packages"], {
-        includeOnly: "/loki/"
+        includeOnly: "/loki/",
       }).map(pathToPosix)
     ).to.deep.equal([
       "test/extract/fixtures/gather-globbing/packages/loki/index.ts",
       "test/extract/fixtures/gather-globbing/packages/loki/script/hots.js",
       "test/extract/fixtures/gather-globbing/packages/loki/src/fake/nothing.to.see.here.ts",
       "test/extract/fixtures/gather-globbing/packages/loki/src/index.spec.ts",
-      "test/extract/fixtures/gather-globbing/packages/loki/src/index.ts"
+      "test/extract/fixtures/gather-globbing/packages/loki/src/index.ts",
     ]);
   });
 });

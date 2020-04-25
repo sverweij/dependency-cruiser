@@ -6,24 +6,24 @@ const getPath = require("./get-path");
 
 function getReachableRules(pRuleSet) {
   return _get(pRuleSet, "forbidden", [])
-    .filter(pRule =>
+    .filter((pRule) =>
       Object.prototype.hasOwnProperty.call(pRule.to, "reachable")
     )
     .concat(
-      _get(pRuleSet, "allowed", []).filter(pRule =>
+      _get(pRuleSet, "allowed", []).filter((pRule) =>
         Object.prototype.hasOwnProperty.call(pRule.to, "reachable")
       )
     );
 }
 
 function isModuleInRuleFrom(pRule) {
-  return pModule =>
+  return (pModule) =>
     (!pRule.from.path || pModule.source.match(pRule.from.path)) &&
     (!pRule.from.pathNot || !pModule.source.match(pRule.from.pathNot));
 }
 
 function isModuleInRuleTo(pRule) {
-  return pModule =>
+  return (pModule) =>
     (!pRule.to.path || pModule.source.match(pRule.to.path)) &&
     (!pRule.to.pathNot || !pModule.source.match(pRule.to.pathNot));
 }
@@ -31,7 +31,7 @@ function isModuleInRuleTo(pRule) {
 function mergeReachableProperties(pModule, pRule, pPath) {
   const lReachables = pModule.reachable || [];
   const lIndexExistingReachable = lReachables.findIndex(
-    pReachable => pReachable.asDefinedInRule === pRule.name
+    (pReachable) => pReachable.asDefinedInRule === pRule.name
   );
   const lIsReachable = pPath.length > 1;
 
@@ -42,7 +42,7 @@ function mergeReachableProperties(pModule, pRule, pPath) {
   } else {
     return lReachables.concat({
       value: lIsReachable,
-      asDefinedInRule: pRule.name
+      asDefinedInRule: pRule.name,
     });
   }
 }
@@ -50,7 +50,7 @@ function mergeReachableProperties(pModule, pRule, pPath) {
 function mergeReachesProperties(pFromModule, pToModule, pRule, pPath) {
   const lReaches = pFromModule.reaches || [];
   const lIndexExistingReachable = lReaches.findIndex(
-    pReachable => pReachable.asDefinedInRule === pRule.name
+    (pReachable) => pReachable.asDefinedInRule === pRule.name
   );
 
   if (lIndexExistingReachable > -1) {
@@ -64,13 +64,13 @@ function mergeReachesProperties(pFromModule, pToModule, pRule, pPath) {
       []
     ).concat({
       source: pToModule.source,
-      via: pPath
+      via: pPath,
     });
     return lReaches;
   } else {
     return lReaches.concat({
       asDefinedInRule: pRule.name,
-      modules: [{ source: pToModule.source, via: pPath }]
+      modules: [{ source: pToModule.source, via: pPath }],
     });
   }
 }
@@ -95,11 +95,11 @@ function shouldAddReachable(pRule, pModule) {
 
 // TODO function is a bit on the big side - time to split
 function addReachableToGraph(pGraph, pReachableRule) {
-  return pGraph.map(pModule => {
+  return pGraph.map((pModule) => {
     let lReturnValue = _clone(pModule);
 
     if (shouldAddReaches(pReachableRule, lReturnValue)) {
-      pGraph.filter(isModuleInRuleTo(pReachableRule)).forEach(pToModule => {
+      pGraph.filter(isModuleInRuleTo(pReachableRule)).forEach((pToModule) => {
         if (lReturnValue.source !== pToModule.source) {
           const lPath = getPath(pGraph, pModule.source, pToModule.source);
 
@@ -115,15 +115,17 @@ function addReachableToGraph(pGraph, pReachableRule) {
       });
     }
     if (shouldAddReachable(pReachableRule, lReturnValue)) {
-      pGraph.filter(isModuleInRuleFrom(pReachableRule)).forEach(pFromModule => {
-        if (lReturnValue.source !== pFromModule.source) {
-          lReturnValue.reachable = mergeReachableProperties(
-            lReturnValue,
-            pReachableRule,
-            getPath(pGraph, pFromModule.source, pModule.source)
-          );
-        }
-      });
+      pGraph
+        .filter(isModuleInRuleFrom(pReachableRule))
+        .forEach((pFromModule) => {
+          if (lReturnValue.source !== pFromModule.source) {
+            lReturnValue.reachable = mergeReachableProperties(
+              lReturnValue,
+              pReachableRule,
+              getPath(pGraph, pFromModule.source, pModule.source)
+            );
+          }
+        });
     }
     return lReturnValue;
   });

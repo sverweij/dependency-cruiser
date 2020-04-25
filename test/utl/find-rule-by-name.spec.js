@@ -4,7 +4,7 @@ const findRuleByName = require("../../src/utl/find-rule-by-name");
 
 describe("report/utl/findRuleByName", () => {
   const lRuleSet = {
-    forbidden: [{ name: "a-rule", severity: "warn", from: {}, to: {} }]
+    forbidden: [{ name: "a-rule", severity: "warn", from: {}, to: {} }],
   };
 
   it("returns undefined for null rule set/ null rule name", () => {
@@ -29,7 +29,7 @@ describe("report/utl/findRuleByName", () => {
       name: "a-rule",
       severity: "warn",
       from: {},
-      to: {}
+      to: {},
     });
   });
 });

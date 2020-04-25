@@ -8,15 +8,15 @@ module.exports = {
         path: {
           type: "string",
           description:
-            "a regular expression for modules to include, but not follow further"
+            "a regular expression for modules to include, but not follow further",
         },
         dependencyTypes: {
           type: "array",
           description:
             "an array of dependency types to include, but not follow further",
-          items: { $ref: "#/definitions/DependencyTypeType" }
-        }
-      }
-    }
-  }
+          items: { $ref: "#/definitions/DependencyTypeType" },
+        },
+      },
+    },
+  },
 };

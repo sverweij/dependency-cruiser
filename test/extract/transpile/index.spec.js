@@ -52,11 +52,11 @@ describe("transpiler", () => {
     const lTranspilerOptions = {
       baseUrl: "src",
       paths: {
-        "@core/*": ["core/*"]
+        "@core/*": ["core/*"],
       },
       rootDirs: ["shared", "hello"],
       typeRoots: ["../../types"],
-      types: ["foo", "bar", "baz"]
+      types: ["foo", "bar", "baz"],
     };
 
     expect(

@@ -14,5 +14,5 @@ module.exports = {
     ).to.deep.equal(
       JSON.parse(fs.readFileSync(pExpectedFileName, { encoding: "utf8" }))
     );
-  }
+  },
 };

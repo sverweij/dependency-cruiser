@@ -5,7 +5,7 @@ function attributizeObject(pObject) {
   return (
     Object.keys(pObject)
       // eslint-disable-next-line security/detect-object-injection
-      .map(pKey => `${pKey}="${pObject[pKey]}"`)
+      .map((pKey) => `${pKey}="${pObject[pKey]}"`)
       .join(" ")
   );
 }
@@ -13,34 +13,34 @@ function attributizeObject(pObject) {
 function extractFirstTransgression(pModule) {
   return {
     ...(pModule.rules ? { ...pModule, rule: pModule.rules[0] } : pModule),
-    dependencies: pModule.dependencies.map(pDependency =>
+    dependencies: pModule.dependencies.map((pDependency) =>
       pDependency.rules
         ? {
             ...pDependency,
-            rule: pDependency.rules[0]
+            rule: pDependency.rules[0],
           }
         : pDependency
-    )
+    ),
   };
 }
 
 function applyTheme(pTheme) {
-  return pModule => ({
+  return (pModule) => ({
     ...pModule,
     dependencies: pModule.dependencies
-      .map(pDependency => ({
+      .map((pDependency) => ({
         ...pDependency,
         themeAttrs: attributizeObject(
           theming.determineAttributes(pDependency, pTheme.dependencies)
-        )
+        ),
       }))
-      .map(pDependency => ({
+      .map((pDependency) => ({
         ...pDependency,
-        hasExtraAttributes: Boolean(pDependency.rule || pDependency.themeAttrs)
+        hasExtraAttributes: Boolean(pDependency.rule || pDependency.themeAttrs),
       })),
     themeAttrs: attributizeObject(
       theming.determineAttributes(pModule, pTheme.modules)
-    )
+    ),
   });
 }
 
@@ -53,7 +53,7 @@ function aggregate(pPathSnippet, pCounter, pPathArray) {
     snippet: pPathSnippet,
     aggregateSnippet: `${pPathArray
       .slice(0, pCounter)
-      .reduce(toFullPath, "")}${pPathSnippet}`
+      .reduce(toFullPath, "")}${pPathSnippet}`,
   };
 }
 
@@ -70,7 +70,7 @@ function folderify(pModule) {
 
   return {
     ...pModule,
-    ...lAdditions
+    ...lAdditions,
   };
 }
 
@@ -82,8 +82,8 @@ function stripSelfTransitions(pModule) {
   return {
     ...pModule,
     dependencies: pModule.dependencies.filter(
-      pDependency => pModule.source !== pDependency.resolved
-    )
+      (pDependency) => pModule.source !== pDependency.resolved
+    ),
   };
 }
 
@@ -108,11 +108,11 @@ function smartURIConcat(pPrefix, pSource) {
 }
 
 function addURL(pPrefix) {
-  return pModule => ({
+  return (pModule) => ({
     ...pModule,
     ...(pModule.coreModule || pModule.couldNotResolve
       ? {}
-      : { URL: smartURIConcat(pPrefix, pModule.source) })
+      : { URL: smartURIConcat(pPrefix, pModule.source) }),
   });
 }
 
@@ -123,5 +123,5 @@ module.exports = {
   extractFirstTransgression,
   attributizeObject,
   stripSelfTransitions,
-  addURL
+  addURL,
 };

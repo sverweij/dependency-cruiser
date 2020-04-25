@@ -12,8 +12,8 @@ const MINIMAL_RESULT = {
     info: 0,
     totalCruised: 0,
     totalDependenciesCruised: 0,
-    optionsUsed: {}
-  }
+    optionsUsed: {},
+  },
 };
 
 describe("main.format - format", () => {

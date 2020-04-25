@@ -3,7 +3,7 @@ const version = require("../../../package.json").version;
 
 function getFormattedAllowedRule(pRuleSetUsed) {
   const lAllowed = _get(pRuleSetUsed, "allowed", []);
-  const lCommentedRule = lAllowed.find(pRule =>
+  const lCommentedRule = lAllowed.find((pRule) =>
     Object.prototype.hasOwnProperty.call(pRule, "comment")
   );
   const lComment = lCommentedRule ? lCommentedRule.comment : "-";
@@ -12,7 +12,7 @@ function getFormattedAllowedRule(pRuleSetUsed) {
     ? {
         name: "not-in-allowed",
         comment: lComment,
-        severity: _get(pRuleSetUsed, "allowedSeverity", "warn")
+        severity: _get(pRuleSetUsed, "allowedSeverity", "warn"),
       }
     : [];
 }
@@ -25,7 +25,7 @@ function mergeCountIntoRule(pRule, pViolationCounts) {
   return {
     ...pRule,
     count: lCount,
-    unviolated: lCount <= 0
+    unviolated: lCount <= 0,
   };
 }
 
@@ -44,10 +44,10 @@ function formatSummaryForReport(pSummary) {
     ...pSummary,
     depcruiseVersion: `dependency-cruiser@${version}`,
     runDate: new Date().toISOString(),
-    violations: (pSummary.violations || []).map(pViolation => ({
+    violations: (pSummary.violations || []).map((pViolation) => ({
       ...pViolation,
-      to: determineTo(pViolation)
-    }))
+      to: determineTo(pViolation),
+    })),
   };
 }
 
@@ -55,5 +55,5 @@ module.exports = {
   getFormattedAllowedRule,
   mergeCountIntoRule,
   formatSummaryForReport,
-  determineTo
+  determineTo,
 };

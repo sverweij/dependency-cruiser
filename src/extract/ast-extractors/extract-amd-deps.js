@@ -5,16 +5,16 @@ const estreeHelpers = require("./estree-helpers");
 function extractRegularAMDDependencies(pNode, pDependencies) {
   if (estreeHelpers.isLikelyAMDDefineOrRequire(pNode)) {
     pNode.expression.arguments
-      .filter(pArgument => pArgument.type === "ArrayExpression")
-      .forEach(pArgument =>
-        pArgument.elements.forEach(pElement => {
+      .filter((pArgument) => pArgument.type === "ArrayExpression")
+      .forEach((pArgument) =>
+        pArgument.elements.forEach((pElement) => {
           if (Boolean(pElement.value) && typeof pElement.value === "string") {
-            pElement.value.split("!").forEach(pString =>
+            pElement.value.split("!").forEach((pString) =>
               pDependencies.push({
                 module: pString,
                 moduleSystem: "amd",
                 dynamic: false,
-                exoticallyRequired: false
+                exoticallyRequired: false,
               })
             );
           }
@@ -27,17 +27,18 @@ function extractCommonJSWrappers(pNode, pDependencies, pExoticRequireStrings) {
   if (estreeHelpers.isLikelyAMDDefine(pNode)) {
     pNode.expression.arguments
       .filter(
-        pArgument =>
+        (pArgument) =>
           pArgument.type === "FunctionExpression" &&
           pArgument.params.some(
-            pParameter =>
+            (pParameter) =>
               pParameter.name === "require" ||
               pExoticRequireStrings.some(
-                pExoticRequireString => pExoticRequireString === pParameter.name
+                (pExoticRequireString) =>
+                  pExoticRequireString === pParameter.name
               )
           )
       )
-      .forEach(pFunction =>
+      .forEach((pFunction) =>
         extractCommonJSDependencies(
           pFunction.body,
           pDependencies,
@@ -52,7 +53,7 @@ module.exports = (pAST, pDependencies, pExoticRequireStrings) => {
   walk.simple(
     pAST,
     {
-      ExpressionStatement: pNode => {
+      ExpressionStatement: (pNode) => {
         // module as a function (define(Array, function))
         // module with a name (define(string, Array, function))
         // 'root' require module (require(Array, function)
@@ -64,7 +65,7 @@ module.exports = (pAST, pDependencies, pExoticRequireStrings) => {
         // Won't work if someone decides to name the first parameter of
         // the function passed to the define something else from "require"
         extractCommonJSWrappers(pNode, pDependencies, pExoticRequireStrings);
-      }
+      },
     },
     // see https://github.com/acornjs/acorn/issues/746
     walk.base

@@ -33,20 +33,20 @@ describe("main.cruise - dynamic imports", () => {
               from: {},
               to: {
                 dynamic: false,
-                circular: true
-              }
+                circular: true,
+              },
             },
             {
               name: "no-dynamic",
               severity: "warn",
               from: {},
               to: {
-                dynamic: true
-              }
-            }
-          ]
+                dynamic: true,
+              },
+            },
+          ],
         },
-        validate: true
+        validate: true,
       },
       { bustTheCache: true }
     );
@@ -68,20 +68,20 @@ describe("main.cruise - dynamic imports", () => {
               from: {},
               to: {
                 dynamic: false,
-                circular: true
-              }
+                circular: true,
+              },
             },
             {
               name: "no-dynamic",
               severity: "warn",
               from: {},
               to: {
-                dynamic: true
-              }
-            }
-          ]
+                dynamic: true,
+              },
+            },
+          ],
         },
-        validate: true
+        validate: true,
       },
       { bustTheCache: true }
     );
@@ -103,21 +103,21 @@ describe("main.cruise - dynamic imports", () => {
               from: {},
               to: {
                 dynamic: false,
-                circular: true
-              }
+                circular: true,
+              },
             },
             {
               name: "no-dynamic",
               severity: "warn",
               from: {},
               to: {
-                dynamic: true
-              }
-            }
-          ]
+                dynamic: true,
+              },
+            },
+          ],
         },
         validate: true,
-        tsPreCompilationDeps: true
+        tsPreCompilationDeps: true,
       },
       { bustTheCache: true }
     );

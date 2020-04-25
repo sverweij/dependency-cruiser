@@ -44,7 +44,7 @@ function extractTSConfigOptions(pOptions) {
 
 function runCruise(pFileDirectoryArray, pOptions) {
   pFileDirectoryArray
-    .filter(pFileOrDirectory => !glob.hasMagic(pFileOrDirectory))
+    .filter((pFileOrDirectory) => !glob.hasMagic(pFileOrDirectory))
     .forEach(validateFileExistence);
 
   pOptions = normalizeOptions(pOptions);

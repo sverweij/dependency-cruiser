@@ -19,10 +19,10 @@ const TEST_PAIRS = [
     dirOrFile: "test/cli/fixtures/{{moduleType}}",
     options: {
       outputTo: path.join(OUT_DIR, "{{moduleType}}.dir.json"),
-      outputType: "json"
+      outputType: "json",
     },
     expect: "{{moduleType}}.dir.json",
-    cleanup: true
+    cleanup: true,
   },
   {
     description:
@@ -30,10 +30,10 @@ const TEST_PAIRS = [
     dirOrFile: "test/cli/fixtures/{{moduleType}}",
     options: {
       outputTo: path.join(OUT_DIR, "{{moduleType}}.dir.json"),
-      outputType: "json"
+      outputType: "json",
     },
     expect: "{{moduleType}}.dir.json",
-    cleanup: true
+    cleanup: true,
   },
   {
     description:
@@ -41,10 +41,10 @@ const TEST_PAIRS = [
     dirOrFile: "test/cli/fixtures/{{moduleType}}/root_one.js",
     options: {
       outputTo: path.join(OUT_DIR, "{{moduleType}}.file.json"),
-      outputType: "json"
+      outputType: "json",
     },
     expect: "{{moduleType}}.file.json",
-    cleanup: true
+    cleanup: true,
   },
   {
     description:
@@ -53,10 +53,10 @@ const TEST_PAIRS = [
     options: {
       outputTo: path.join(OUT_DIR, "{{moduleType}}.dir.filtered.json"),
       outputType: "json",
-      exclude: "node_modules"
+      exclude: "node_modules",
     },
     expect: "{{moduleType}}.dir.filtered.json",
-    cleanup: true
+    cleanup: true,
   },
   {
     description: "html",
@@ -65,10 +65,10 @@ const TEST_PAIRS = [
       outputTo: path.join(OUT_DIR, "{{moduleType}}.dir.filtered.html"),
       outputType: "html",
       validate: "test/cli/fixtures/rules.sub-not-allowed.json",
-      exclude: "node_modules"
+      exclude: "node_modules",
     },
     expect: "{{moduleType}}.dir.filtered.html",
-    cleanup: true
+    cleanup: true,
   },
   {
     description: "dot",
@@ -77,10 +77,10 @@ const TEST_PAIRS = [
       outputTo: path.join(OUT_DIR, "{{moduleType}}.dir.filtered.dot"),
       validate: "test/cli/fixtures/rules.sub-not-allowed.json",
       outputType: "dot",
-      exclude: "node_modules"
+      exclude: "node_modules",
     },
     expect: "{{moduleType}}.dir.filtered.dot",
-    cleanup: true
+    cleanup: true,
   },
   {
     description: "dot - duplicate subs",
@@ -88,10 +88,10 @@ const TEST_PAIRS = [
     options: {
       outputTo: path.join(OUT_DIR, "duplicate-subs.dot"),
       outputType: "dot",
-      exclude: "node_modules"
+      exclude: "node_modules",
     },
     expect: "duplicate-subs.dot",
-    cleanup: true
+    cleanup: true,
   },
   {
     description: "csv",
@@ -100,15 +100,15 @@ const TEST_PAIRS = [
       outputTo: path.join(OUT_DIR, "{{moduleType}}.dir.filtered.csv"),
       outputType: "csv",
       validate: "test/cli/fixtures/rules.sub-not-allowed.json",
-      exclude: "node_modules"
+      exclude: "node_modules",
     },
     expect: "{{moduleType}}.dir.filtered.csv",
-    cleanup: true
-  }
+    cleanup: true,
+  },
 ];
 
 function resetOutputDirectory() {
-  TEST_PAIRS.filter(pPair => pPair.cleanup).forEach(pPair => {
+  TEST_PAIRS.filter((pPair) => pPair.cleanup).forEach((pPair) => {
     try {
       fs.unlinkSync(pPair.options.outputTo.replace("{{moduleType}}", "cjs"));
       fs.unlinkSync(pPair.options.outputTo.replace("{{moduleType}}", "amd"));
@@ -127,7 +127,7 @@ function resetOutputDirectory() {
 }
 
 function setModuleType(pTestPairs, pModuleType) {
-  return pTestPairs.map(pTestPair => {
+  return pTestPairs.map((pTestPair) => {
     let lReturnValue = {
       description: pTestPair.description.replace(
         /{{moduleType}}/g,
@@ -136,7 +136,7 @@ function setModuleType(pTestPairs, pModuleType) {
       dirOrFile: pTestPair.dirOrFile.replace(/{{moduleType}}/g, pModuleType),
       expect: pTestPair.expect.replace(/{{moduleType}}/g, pModuleType),
       expectExitCode: pTestPair.expectExitCode || 0,
-      cleanup: pTestPair.cleanup
+      cleanup: pTestPair.cleanup,
     };
 
     lReturnValue.options = { ...pTestPair.options };
@@ -156,7 +156,7 @@ function setModuleType(pTestPairs, pModuleType) {
 }
 
 function runFileBasedTests(pModuleType) {
-  setModuleType(TEST_PAIRS, pModuleType).forEach(pPair => {
+  setModuleType(TEST_PAIRS, pModuleType).forEach((pPair) => {
     it(pPair.description, () => {
       const lExitCode = cli([pPair.dirOrFile], pPair.options);
 
@@ -193,11 +193,11 @@ describe("cli/index", () => {
         [
           "test/cli/fixtures/cjs/sub",
           "test/cli/fixtures/duplicate-subs/sub/more-in-sub.js",
-          "test/cli/fixtures/unresolvable-in-sub"
+          "test/cli/fixtures/unresolvable-in-sub",
         ],
         {
           outputTo: lOutputTo,
-          outputType: "json"
+          outputType: "json",
         }
       );
 
@@ -214,7 +214,7 @@ describe("cli/index", () => {
       const lExitCode = cli(["test/cli/fixtures/cjs"], {
         outputTo: lOutputTo,
         outputType: "json",
-        validate: "test/cli/fixtures/rules.sub-not-allowed-error.json"
+        validate: "test/cli/fixtures/rules.sub-not-allowed-error.json",
       });
       const lExpectedTransgressions = 0;
 
@@ -227,7 +227,7 @@ describe("cli/index", () => {
       const lExitCode = cli(["test/cli/fixtures/cjs"], {
         outputTo: lOutputTo,
         outputType: "err",
-        validate: "test/cli/fixtures/rules.sub-not-allowed-error.json"
+        validate: "test/cli/fixtures/rules.sub-not-allowed-error.json",
       });
       const lExpectedTransgressions = 3;
 
@@ -236,7 +236,7 @@ describe("cli/index", () => {
 
     it("dependency-cruise -i shows meta info about the current environment", () => {
       let lCapturedStdout = "";
-      const unhookIntercept = intercept(pText => {
+      const unhookIntercept = intercept((pText) => {
         lCapturedStdout += pText;
       });
       const lExitCode = cli(null, { info: true });
@@ -254,11 +254,11 @@ describe("cli/index", () => {
       const unhookInterceptStdOut = intercept(() => {
         // This space intentionally left empty
       });
-      const unhookInterceptStdError = intercept(pText => {
+      const unhookInterceptStdError = intercept((pText) => {
         lCapturedStderr += pText;
       });
       const lExitCode = cli(["this-doesnot-exist"], {
-        outputTo: path.join(OUT_DIR, "cjs.dir.wontmarch.json")
+        outputTo: path.join(OUT_DIR, "cjs.dir.wontmarch.json"),
       });
 
       unhookInterceptStdOut();
@@ -275,16 +275,16 @@ describe("cli/index", () => {
       const unhookInterceptStdOut = intercept(() => {
         // This space intentionally left empty
       });
-      const unhookInterceptStdError = intercept(pText => {
+      const unhookInterceptStdError = intercept((pText) => {
         lCapturedStderr += pText;
       });
       const lExitCode = cli(["test/cli/fixtures"], {
-        outputTo: path.join(OUT_DIR, "file/you/cant/write/to")
+        outputTo: path.join(OUT_DIR, "file/you/cant/write/to"),
       });
 
       unhookInterceptStdOut();
       unhookInterceptStdError();
-      intercept(pText => {
+      intercept((pText) => {
         lCapturedStderr += pText;
       })();
 
@@ -299,14 +299,14 @@ describe("cli/index", () => {
       const unhookInterceptStdOut = intercept(() => {
         // This space intentionally left empty
       });
-      const unhookInterceptStdError = intercept(pText => {
+      const unhookInterceptStdError = intercept((pText) => {
         lCapturedStderr += pText;
       });
       const lExitCode = cli(["test/cli/fixtures"]);
 
       unhookInterceptStdOut();
       unhookInterceptStdError();
-      intercept(pText => {
+      intercept((pText) => {
         lCapturedStderr += pText;
       })();
 
@@ -319,7 +319,7 @@ describe("cli/index", () => {
     it("dependency-cruise --init will generate a rules file and tells that back on stdout", () => {
       let lCapturedStdout = "";
       const lValidationFileName = ".dependency-cruiser.js";
-      const unhookInterceptStdOut = intercept(pText => {
+      const unhookInterceptStdOut = intercept((pText) => {
         lCapturedStdout += pText;
       });
       const unhookInterceptStdError = intercept(() => {
@@ -328,12 +328,12 @@ describe("cli/index", () => {
 
       deleteDammit(lValidationFileName);
       const lExitCode = cli(["test/cli/fixtures"], {
-        init: "js"
+        init: "js",
       });
 
       unhookInterceptStdOut();
       unhookInterceptStdError();
-      intercept(pText => {
+      intercept((pText) => {
         lCapturedStdout += pText;
       })();
 
@@ -351,7 +351,7 @@ describe("cli/index", () => {
         outputTo: lOutputTo,
         outputType: "json",
         webpackConfig:
-          "test/cli/fixtures/webpackconfig/aliassy/webpack.regularexport.config.js"
+          "test/cli/fixtures/webpackconfig/aliassy/webpack.regularexport.config.js",
       });
 
       expect(lExitCode).to.equal(0);
@@ -368,7 +368,7 @@ describe("cli/index", () => {
         outputTo: lOutputTo,
         outputType: "json",
         validate:
-          "test/cli/fixtures/webpackconfig/aliassy/dependency-cruiser-json-with-webpack-config.json"
+          "test/cli/fixtures/webpackconfig/aliassy/dependency-cruiser-json-with-webpack-config.json",
       });
 
       expect(lExitCode).to.equal(0);
@@ -384,13 +384,13 @@ describe("cli/index", () => {
     const lOutputTo = path.join(OUT_DIR, lOutputFileName);
     const lExitCode = cli(
       [
-        "test/cli/fixtures/typescriptconfig/cli-dynamic-imports/import_dynamically.ts"
+        "test/cli/fixtures/typescriptconfig/cli-dynamic-imports/import_dynamically.ts",
       ],
       {
         outputTo: lOutputTo,
         outputType: "json",
         tsConfig:
-          "test/cli/fixtures/typescriptconfig/cli-dynamic-imports/tsconfig.compile_dynamic_imports.json"
+          "test/cli/fixtures/typescriptconfig/cli-dynamic-imports/tsconfig.compile_dynamic_imports.json",
       }
     );
 
@@ -406,13 +406,13 @@ describe("cli/index", () => {
     const lOutputTo = path.join(OUT_DIR, lOutputFileName);
     const lExitCode = cli(
       [
-        "test/cli/fixtures/typescriptconfig/cli-dynamic-imports/import_dynamically2.ts"
+        "test/cli/fixtures/typescriptconfig/cli-dynamic-imports/import_dynamically2.ts",
       ],
       {
         outputTo: lOutputTo,
         outputType: "json",
         tsConfig:
-          "test/cli/fixtures/typescriptconfig/cli-dynamic-imports/tsconfig.error_on_compile_dynamic_imports.json"
+          "test/cli/fixtures/typescriptconfig/cli-dynamic-imports/tsconfig.error_on_compile_dynamic_imports.json",
       }
     );
 
@@ -435,7 +435,7 @@ describe("cli/index", () => {
         tsConfig:
           "test/cli/fixtures/typescriptconfig/cli-config-with-path/tsconfig.json",
         webpackConfig:
-          "test/cli/fixtures/typescriptconfig/cli-config-with-path/webpack.config.js"
+          "test/cli/fixtures/typescriptconfig/cli-config-with-path/webpack.config.js",
       }
     );
 

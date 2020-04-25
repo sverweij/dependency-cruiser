@@ -7,6 +7,6 @@ module.exports = {
   from: {},
   to: {
     dependencyTypes: ["core"],
-    path: "^(punycode|domain|constants|sys|_linklist|_stream_wrap)$"
-  }
+    path: "^(punycode|domain|constants|sys|_linklist|_stream_wrap)$",
+  },
 };

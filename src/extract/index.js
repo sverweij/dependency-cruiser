@@ -30,7 +30,7 @@ const SHAREABLE_OPTIONS = [
   "webpackConfig",
   "exoticallyRequired",
   "exoticRequireStrings",
-  "reporterOptions"
+  "reporterOptions",
 ];
 
 /* eslint max-params:0 */
@@ -50,7 +50,7 @@ function extractRecursive(
 
   return lDependencies
     .filter(
-      pDependency => pDependency.followable && !pDependency.matchesDoNotFollow
+      (pDependency) => pDependency.followable && !pDependency.matchesDoNotFollow
     )
     .reduce(
       (pAll, pDependency) => {
@@ -71,8 +71,8 @@ function extractRecursive(
       [
         {
           source: pathToPosix(pFileName),
-          dependencies: lDependencies
-        }
+          dependencies: lDependencies,
+        },
       ]
     );
 }
@@ -113,9 +113,9 @@ function isNotFollowable(pToDependency) {
 }
 
 function notInFromListAlready(pFromList) {
-  return pToListItem =>
+  return (pToListItem) =>
     !pFromList.some(
-      pFromListItem => pFromListItem.source === pToListItem.resolved
+      (pFromListItem) => pFromListItem.source === pToListItem.resolved
     );
 }
 
@@ -127,32 +127,34 @@ function toDependencyToSource(pToListItem) {
     couldNotResolve: pToListItem.couldNotResolve,
     matchesDoNotFollow: pToListItem.matchesDoNotFollow,
     dependencyTypes: pToListItem.dependencyTypes,
-    dependencies: []
+    dependencies: [],
   };
 }
 
 function complete(pAll, pFromListItem) {
-  return pAll.concat(pFromListItem).concat(
-    pFromListItem.dependencies
-      .filter(isNotFollowable)
-      .filter(notInFromListAlready(pAll))
-      .map(toDependencyToSource)
-  );
+  return pAll
+    .concat(pFromListItem)
+    .concat(
+      pFromListItem.dependencies
+        .filter(isNotFollowable)
+        .filter(notInFromListAlready(pAll))
+        .map(toDependencyToSource)
+    );
 }
 
 function makeOptionsPresentable(pOptions) {
   return SHAREABLE_OPTIONS.filter(
-    pOption =>
+    (pOption) =>
       Object.prototype.hasOwnProperty.call(pOptions, pOption) &&
       pOptions[pOption] !== 0
   )
     .filter(
-      pOption =>
+      (pOption) =>
         pOption !== "doNotFollow" ||
         Object.keys(pOptions.doNotFollow).length > 0
     )
     .filter(
-      pOption =>
+      (pOption) =>
         pOption !== "exclude" || Object.keys(pOptions.exclude).length > 0
     )
     .reduce((pAll, pOption) => {
@@ -165,8 +167,8 @@ function summarizeOptions(pFileDirectoryArray, pOptions) {
   return {
     optionsUsed: {
       ...makeOptionsPresentable(pOptions),
-      args: pFileDirectoryArray.map(pathToPosix).join(" ")
-    }
+      args: pFileDirectoryArray.map(pathToPosix).join(" "),
+    },
   };
 }
 
@@ -196,10 +198,10 @@ function filterExcludedDependencies(pModule, pExclude) {
   return {
     ...pModule,
     dependencies: pModule.dependencies.filter(
-      pDependency =>
+      (pDependency) =>
         !Object.prototype.hasOwnProperty.call(pExclude, "dynamic") ||
         pExclude.dynamic !== pDependency.dynamic
-    )
+    ),
   };
 }
 
@@ -218,8 +220,8 @@ module.exports = (
       pResolveOptions,
       pTSConfig
     ).reduce(complete, []),
-    pModule => pModule.source
-  ).map(pModule => filterExcludedDependencies(pModule, pOptions.exclude));
+    (pModule) => pModule.source
+  ).map((pModule) => filterExcludedDependencies(pModule, pOptions.exclude));
 
   lModules = deriveCirculars(lModules);
   lModules = deriveOrphans(lModules);
@@ -233,7 +235,7 @@ module.exports = (
       summarize(lModules, pOptions.ruleSet),
       summarizeOptions(pFileDirectoryArray, pOptions),
       pOptions.ruleSet ? { ruleSetUsed: addRuleSetUsed(pOptions) } : {}
-    )
+    ),
   };
 };
 

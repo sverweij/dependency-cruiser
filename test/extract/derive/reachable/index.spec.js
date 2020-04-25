@@ -8,25 +8,25 @@ const GRAPH = [
     source: "./src/index.js",
     dependencies: [
       {
-        resolved: "./src/intermediate.js"
-      }
-    ]
+        resolved: "./src/intermediate.js",
+      },
+    ],
   },
   {
     source: "./src/intermediate.js",
     dependencies: [
       {
-        resolved: "./src/index.js"
+        resolved: "./src/index.js",
       },
       {
-        resolved: "./src/hajoo.js"
-      }
-    ]
+        resolved: "./src/hajoo.js",
+      },
+    ],
   },
   {
     source: "./src/hajoo.js",
-    dependencies: []
-  }
+    dependencies: [],
+  },
 ];
 
 const GRAPH_TWO = [
@@ -34,32 +34,32 @@ const GRAPH_TWO = [
     source: "./src/index.js",
     dependencies: [
       {
-        resolved: "./src/intermediate.js"
+        resolved: "./src/intermediate.js",
       },
       {
-        resolved: "./src/hajee.js"
-      }
-    ]
+        resolved: "./src/hajee.js",
+      },
+    ],
   },
   {
     source: "./src/intermediate.js",
     dependencies: [
       {
-        resolved: "./src/index.js"
+        resolved: "./src/index.js",
       },
       {
-        resolved: "./src/hajoo.js"
-      }
-    ]
+        resolved: "./src/hajoo.js",
+      },
+    ],
   },
   {
     source: "./src/hajoo.js",
-    dependencies: []
+    dependencies: [],
   },
   {
     source: "./src/hajee.js",
-    dependencies: []
-  }
+    dependencies: [],
+  },
 ];
 const ANOTATED_GRAPH_FOR_HAJOO = [
   {
@@ -67,36 +67,36 @@ const ANOTATED_GRAPH_FOR_HAJOO = [
     reachable: [
       {
         asDefinedInRule: "unnamed",
-        value: false
-      }
+        value: false,
+      },
     ],
     dependencies: [
       {
-        resolved: "./src/intermediate.js"
-      }
-    ]
+        resolved: "./src/intermediate.js",
+      },
+    ],
   },
   {
     source: "./src/intermediate.js",
     reachable: [
       {
         asDefinedInRule: "unnamed",
-        value: false
-      }
+        value: false,
+      },
     ],
     dependencies: [
       {
-        resolved: "./src/index.js"
+        resolved: "./src/index.js",
       },
       {
-        resolved: "./src/hajoo.js"
-      }
-    ]
+        resolved: "./src/hajoo.js",
+      },
+    ],
   },
   {
     source: "./src/hajoo.js",
-    dependencies: []
-  }
+    dependencies: [],
+  },
 ];
 
 describe("extract/derive/reachable/index - reachability detection", () => {
@@ -116,9 +116,9 @@ describe("extract/derive/reachable/index - reachability detection", () => {
       forbidden: [
         {
           from: { path: "src/hajoo\\.js" },
-          to: { reachable: false }
-        }
-      ]
+          to: { reachable: false },
+        },
+      ],
     };
 
     expect(
@@ -131,17 +131,17 @@ describe("extract/derive/reachable/index - reachability detection", () => {
       allowed: [
         {
           from: { path: "src/[^.]+\\.js" },
-          to: { path: "./src/hajoo\\.js$", reachable: true }
-        }
-      ]
+          to: { path: "./src/hajoo\\.js$", reachable: true },
+        },
+      ],
     };
     const lAnotatedGraphForHajooAllowed = [
       {
         source: "./src/index.js",
         dependencies: [
           {
-            resolved: "./src/intermediate.js"
-          }
+            resolved: "./src/intermediate.js",
+          },
         ],
         reaches: [
           {
@@ -152,22 +152,22 @@ describe("extract/derive/reachable/index - reachability detection", () => {
                 via: [
                   "./src/index.js",
                   "./src/intermediate.js",
-                  "./src/hajoo.js"
-                ]
-              }
-            ]
-          }
-        ]
+                  "./src/hajoo.js",
+                ],
+              },
+            ],
+          },
+        ],
       },
       {
         source: "./src/intermediate.js",
         dependencies: [
           {
-            resolved: "./src/index.js"
+            resolved: "./src/index.js",
           },
           {
-            resolved: "./src/hajoo.js"
-          }
+            resolved: "./src/hajoo.js",
+          },
         ],
         reaches: [
           {
@@ -175,11 +175,11 @@ describe("extract/derive/reachable/index - reachability detection", () => {
             modules: [
               {
                 source: "./src/hajoo.js",
-                via: ["./src/intermediate.js", "./src/hajoo.js"]
-              }
-            ]
-          }
-        ]
+                via: ["./src/intermediate.js", "./src/hajoo.js"],
+              },
+            ],
+          },
+        ],
       },
       {
         source: "./src/hajoo.js",
@@ -187,10 +187,10 @@ describe("extract/derive/reachable/index - reachability detection", () => {
         reachable: [
           {
             value: true,
-            asDefinedInRule: "not-in-allowed"
-          }
-        ]
-      }
+            asDefinedInRule: "not-in-allowed",
+          },
+        ],
+      },
     ];
     expect(
       addReachability(GRAPH, normalize(lForbiddenReachabilityRuleSetHajoo))
@@ -202,17 +202,17 @@ describe("extract/derive/reachable/index - reachability detection", () => {
       allowed: [
         {
           from: { path: "src/[^.]+\\.js" },
-          to: { path: "./src/hajoo\\.js$", reachable: true }
-        }
-      ]
+          to: { path: "./src/hajoo\\.js$", reachable: true },
+        },
+      ],
     };
     const lAnotatedGraphForHajooAllowed = [
       {
         source: "./src/index.js",
         dependencies: [
           {
-            resolved: "./src/intermediate.js"
-          }
+            resolved: "./src/intermediate.js",
+          },
         ],
         reaches: [
           {
@@ -223,22 +223,22 @@ describe("extract/derive/reachable/index - reachability detection", () => {
                 via: [
                   "./src/index.js",
                   "./src/intermediate.js",
-                  "./src/hajoo.js"
-                ]
-              }
-            ]
-          }
-        ]
+                  "./src/hajoo.js",
+                ],
+              },
+            ],
+          },
+        ],
       },
       {
         source: "./src/intermediate.js",
         dependencies: [
           {
-            resolved: "./src/index.js"
+            resolved: "./src/index.js",
           },
           {
-            resolved: "./src/hajoo.js"
-          }
+            resolved: "./src/hajoo.js",
+          },
         ],
         reaches: [
           {
@@ -246,11 +246,11 @@ describe("extract/derive/reachable/index - reachability detection", () => {
             modules: [
               {
                 source: "./src/hajoo.js",
-                via: ["./src/intermediate.js", "./src/hajoo.js"]
-              }
-            ]
-          }
-        ]
+                via: ["./src/intermediate.js", "./src/hajoo.js"],
+              },
+            ],
+          },
+        ],
       },
       {
         source: "./src/hajoo.js",
@@ -258,10 +258,10 @@ describe("extract/derive/reachable/index - reachability detection", () => {
         reachable: [
           {
             value: true,
-            asDefinedInRule: "not-in-allowed"
-          }
-        ]
-      }
+            asDefinedInRule: "not-in-allowed",
+          },
+        ],
+      },
     ];
     expect(
       addReachability(GRAPH, normalize(lForbiddenReachabilityRuleSetHajoo))
@@ -273,20 +273,20 @@ describe("extract/derive/reachable/index - reachability detection", () => {
       allowed: [
         {
           from: { path: "src/[^.]+\\.js" },
-          to: { path: "./src/haj[^.]+\\.js$", reachable: true }
-        }
-      ]
+          to: { path: "./src/haj[^.]+\\.js$", reachable: true },
+        },
+      ],
     };
     const lAnotatedGraphForHajooAllowed = [
       {
         source: "./src/index.js",
         dependencies: [
           {
-            resolved: "./src/intermediate.js"
+            resolved: "./src/intermediate.js",
           },
           {
-            resolved: "./src/hajee.js"
-          }
+            resolved: "./src/hajee.js",
+          },
         ],
         reaches: [
           {
@@ -297,26 +297,26 @@ describe("extract/derive/reachable/index - reachability detection", () => {
                 via: [
                   "./src/index.js",
                   "./src/intermediate.js",
-                  "./src/hajoo.js"
-                ]
+                  "./src/hajoo.js",
+                ],
               },
               {
                 source: "./src/hajee.js",
-                via: ["./src/index.js", "./src/hajee.js"]
-              }
-            ]
-          }
-        ]
+                via: ["./src/index.js", "./src/hajee.js"],
+              },
+            ],
+          },
+        ],
       },
       {
         source: "./src/intermediate.js",
         dependencies: [
           {
-            resolved: "./src/index.js"
+            resolved: "./src/index.js",
           },
           {
-            resolved: "./src/hajoo.js"
-          }
+            resolved: "./src/hajoo.js",
+          },
         ],
         reaches: [
           {
@@ -324,19 +324,19 @@ describe("extract/derive/reachable/index - reachability detection", () => {
             modules: [
               {
                 source: "./src/hajoo.js",
-                via: ["./src/intermediate.js", "./src/hajoo.js"]
+                via: ["./src/intermediate.js", "./src/hajoo.js"],
               },
               {
                 source: "./src/hajee.js",
                 via: [
                   "./src/intermediate.js",
                   "./src/index.js",
-                  "./src/hajee.js"
-                ]
-              }
-            ]
-          }
-        ]
+                  "./src/hajee.js",
+                ],
+              },
+            ],
+          },
+        ],
       },
       {
         source: "./src/hajoo.js",
@@ -344,9 +344,9 @@ describe("extract/derive/reachable/index - reachability detection", () => {
         reachable: [
           {
             value: true,
-            asDefinedInRule: "not-in-allowed"
-          }
-        ]
+            asDefinedInRule: "not-in-allowed",
+          },
+        ],
       },
       {
         source: "./src/hajee.js",
@@ -354,10 +354,10 @@ describe("extract/derive/reachable/index - reachability detection", () => {
         reachable: [
           {
             value: true,
-            asDefinedInRule: "not-in-allowed"
-          }
-        ]
-      }
+            asDefinedInRule: "not-in-allowed",
+          },
+        ],
+      },
     ];
     expect(
       addReachability(GRAPH_TWO, normalize(lForbiddenReachabilityRuleSetHajoo))
@@ -370,9 +370,9 @@ describe("extract/derive/reachable/index - reachability detection", () => {
       forbidden: [
         {
           from: { pathNot: "intermediate|index" },
-          to: { reachable: false }
-        }
-      ]
+          to: { reachable: false },
+        },
+      ],
     };
 
     expect(
@@ -385,9 +385,9 @@ describe("extract/derive/reachable/index - reachability detection", () => {
       forbidden: [
         {
           from: { path: "src/hajoo\\.js" },
-          to: { pathNot: "intermediate", reachable: false }
-        }
-      ]
+          to: { pathNot: "intermediate", reachable: false },
+        },
+      ],
     };
     const lAnotatedGraphForHajooNoIntermediate = [
       {
@@ -395,30 +395,30 @@ describe("extract/derive/reachable/index - reachability detection", () => {
         reachable: [
           {
             asDefinedInRule: "unnamed",
-            value: false
-          }
+            value: false,
+          },
         ],
         dependencies: [
           {
-            resolved: "./src/intermediate.js"
-          }
-        ]
+            resolved: "./src/intermediate.js",
+          },
+        ],
       },
       {
         source: "./src/intermediate.js",
         dependencies: [
           {
-            resolved: "./src/index.js"
+            resolved: "./src/index.js",
           },
           {
-            resolved: "./src/hajoo.js"
-          }
-        ]
+            resolved: "./src/hajoo.js",
+          },
+        ],
       },
       {
         source: "./src/hajoo.js",
-        dependencies: []
-      }
+        dependencies: [],
+      },
     ];
 
     expect(
@@ -431,40 +431,40 @@ describe("extract/derive/reachable/index - reachability detection", () => {
       forbidden: [
         {
           from: { path: "src/hajoo\\.js" },
-          to: { path: "intermediate", reachable: false }
-        }
-      ]
+          to: { path: "intermediate", reachable: false },
+        },
+      ],
     };
     const lAnotatedGraphForHajooNoIntermediate = [
       {
         source: "./src/index.js",
         dependencies: [
           {
-            resolved: "./src/intermediate.js"
-          }
-        ]
+            resolved: "./src/intermediate.js",
+          },
+        ],
       },
       {
         source: "./src/intermediate.js",
         reachable: [
           {
             asDefinedInRule: "unnamed",
-            value: false
-          }
+            value: false,
+          },
         ],
         dependencies: [
           {
-            resolved: "./src/index.js"
+            resolved: "./src/index.js",
           },
           {
-            resolved: "./src/hajoo.js"
-          }
-        ]
+            resolved: "./src/hajoo.js",
+          },
+        ],
       },
       {
         source: "./src/hajoo.js",
-        dependencies: []
-      }
+        dependencies: [],
+      },
     ];
 
     expect(
@@ -478,55 +478,55 @@ describe("extract/derive/reachable/index - reachability detection", () => {
         source: "./src/index.js",
         dependencies: [
           {
-            resolved: "./src/intermediate.js"
-          }
-        ]
+            resolved: "./src/intermediate.js",
+          },
+        ],
       },
       {
         source: "./src/intermediate.js",
         dependencies: [
           {
-            resolved: "./src/index.js"
+            resolved: "./src/index.js",
           },
           {
-            resolved: "./src/hajoo.js"
-          }
-        ]
+            resolved: "./src/hajoo.js",
+          },
+        ],
       },
       {
         source: "./src/hajoo.js",
-        dependencies: []
+        dependencies: [],
       },
       {
         source: "./test/hajoo.spec.js",
         dependencies: [
           {
-            resolved: "./src/hajoo.js"
-          }
-        ]
+            resolved: "./src/hajoo.js",
+          },
+        ],
       },
       {
         source: "./test/index.spec.js",
         dependencies: [
           {
-            resolved: "./src/index.js"
-          }
-        ]
-      }
+            resolved: "./src/index.js",
+          },
+        ],
+      },
     ];
     const lPoorMansTestCoverageRule = {
       forbidden: [
         {
           name: "not-unreachable-by-test",
           from: {
-            path: "\\.spec\\.js$"
+            path: "\\.spec\\.js$",
           },
           to: {
             path: "src",
-            reachable: false
-          }
-        }
-      ]
+            reachable: false,
+          },
+        },
+      ],
     };
     const lResultGraph = [
       {
@@ -534,58 +534,58 @@ describe("extract/derive/reachable/index - reachability detection", () => {
         reachable: [
           {
             asDefinedInRule: "not-unreachable-by-test",
-            value: true
-          }
+            value: true,
+          },
         ],
         dependencies: [
           {
-            resolved: "./src/intermediate.js"
-          }
-        ]
+            resolved: "./src/intermediate.js",
+          },
+        ],
       },
       {
         source: "./src/intermediate.js",
         reachable: [
           {
             asDefinedInRule: "not-unreachable-by-test",
-            value: true
-          }
+            value: true,
+          },
         ],
         dependencies: [
           {
-            resolved: "./src/index.js"
+            resolved: "./src/index.js",
           },
           {
-            resolved: "./src/hajoo.js"
-          }
-        ]
+            resolved: "./src/hajoo.js",
+          },
+        ],
       },
       {
         source: "./src/hajoo.js",
         reachable: [
           {
             asDefinedInRule: "not-unreachable-by-test",
-            value: true
-          }
+            value: true,
+          },
         ],
-        dependencies: []
+        dependencies: [],
       },
       {
         source: "./test/hajoo.spec.js",
         dependencies: [
           {
-            resolved: "./src/hajoo.js"
-          }
-        ]
+            resolved: "./src/hajoo.js",
+          },
+        ],
       },
       {
         source: "./test/index.spec.js",
         dependencies: [
           {
-            resolved: "./src/index.js"
-          }
-        ]
-      }
+            resolved: "./src/index.js",
+          },
+        ],
+      },
     ];
 
     expect(
@@ -599,65 +599,65 @@ describe("extract/derive/reachable/index - reachability detection", () => {
         source: "./src/index.js",
         dependencies: [
           {
-            resolved: "./src/intermediate.js"
-          }
-        ]
+            resolved: "./src/intermediate.js",
+          },
+        ],
       },
       {
         source: "./src/intermediate.js",
         dependencies: [
           {
-            resolved: "./src/index.js"
+            resolved: "./src/index.js",
           },
           {
-            resolved: "./src/hajoo.js"
-          }
-        ]
+            resolved: "./src/hajoo.js",
+          },
+        ],
       },
       {
         source: "./src/hajoo.js",
-        dependencies: []
+        dependencies: [],
       },
       {
         source: "./test/hajoo.spec.js",
         dependencies: [
           {
-            resolved: "./src/hajoo.js"
-          }
-        ]
+            resolved: "./src/hajoo.js",
+          },
+        ],
       },
       {
         source: "./test/index.spec.js",
         dependencies: [
           {
-            resolved: "./src/index.js"
-          }
-        ]
-      }
+            resolved: "./src/index.js",
+          },
+        ],
+      },
     ];
     const lTwoDifferentRules = {
       forbidden: [
         {
           name: "not-unreachable-by-test",
           from: {
-            path: "\\.spec\\.js$"
+            path: "\\.spec\\.js$",
           },
           to: {
             path: "src",
-            reachable: false
-          }
+            reachable: false,
+          },
         },
         {
           name: "not-reachable-from-index",
           from: {
-            path: "\\./src/index\\.js$"
+            path: "\\./src/index\\.js$",
           },
           to: {
             path: "\\./src/hajoo\\.js$",
-            reachable: false
-          }
-        }
-      ]
+            reachable: false,
+          },
+        },
+      ],
     };
     const lResultGraph = [
       {
@@ -665,62 +665,62 @@ describe("extract/derive/reachable/index - reachability detection", () => {
         reachable: [
           {
             asDefinedInRule: "not-unreachable-by-test",
-            value: true
-          }
+            value: true,
+          },
         ],
         dependencies: [
           {
-            resolved: "./src/intermediate.js"
-          }
-        ]
+            resolved: "./src/intermediate.js",
+          },
+        ],
       },
       {
         source: "./src/intermediate.js",
         reachable: [
           {
             asDefinedInRule: "not-unreachable-by-test",
-            value: true
-          }
+            value: true,
+          },
         ],
         dependencies: [
           {
-            resolved: "./src/index.js"
+            resolved: "./src/index.js",
           },
           {
-            resolved: "./src/hajoo.js"
-          }
-        ]
+            resolved: "./src/hajoo.js",
+          },
+        ],
       },
       {
         source: "./src/hajoo.js",
         reachable: [
           {
             asDefinedInRule: "not-unreachable-by-test",
-            value: true
+            value: true,
           },
           {
             asDefinedInRule: "not-reachable-from-index",
-            value: true
-          }
+            value: true,
+          },
         ],
-        dependencies: []
+        dependencies: [],
       },
       {
         source: "./test/hajoo.spec.js",
         dependencies: [
           {
-            resolved: "./src/hajoo.js"
-          }
-        ]
+            resolved: "./src/hajoo.js",
+          },
+        ],
       },
       {
         source: "./test/index.spec.js",
         dependencies: [
           {
-            resolved: "./src/index.js"
-          }
-        ]
-      }
+            resolved: "./src/index.js",
+          },
+        ],
+      },
     ];
 
     expect(
@@ -731,65 +731,65 @@ describe("extract/derive/reachable/index - reachability detection", () => {
   it("leaves reaches on the same object, but from the another rule alone", () => {
     const lSourceGraph = [
       {
-        source: "./src/index.js"
+        source: "./src/index.js",
       },
       {
         source: "./src/intermediate.js",
         dependencies: [
           {
-            resolved: "./src/index.js"
+            resolved: "./src/index.js",
           },
           {
-            resolved: "./src/hajoo.js"
-          }
-        ]
+            resolved: "./src/hajoo.js",
+          },
+        ],
       },
       {
         source: "./src/hajoo.js",
-        dependencies: []
+        dependencies: [],
       },
       {
         source: "./test/index.spec.js",
         dependencies: [
           {
-            resolved: "./src/index.js"
-          }
-        ]
-      }
+            resolved: "./src/index.js",
+          },
+        ],
+      },
     ];
     const lTwoDifferentRules = {
       forbidden: [
         {
           name: "dont-touch-index",
           from: {
-            path: "intermediate\\.js$"
+            path: "intermediate\\.js$",
           },
           to: {
             path: "\\./src/index\\.js$",
-            reachable: true
-          }
+            reachable: true,
+          },
         },
         {
           name: "dont-touch-hajoo",
           from: {
-            path: "intermediate\\.js$"
+            path: "intermediate\\.js$",
           },
           to: {
             path: "\\./src/hajoo\\.js$",
-            reachable: true
-          }
-        }
-      ]
+            reachable: true,
+          },
+        },
+      ],
     };
     const lResultGraph = [
       {
-        source: "./src/index.js"
+        source: "./src/index.js",
       },
       {
         source: "./src/intermediate.js",
         dependencies: [
           { resolved: "./src/index.js" },
-          { resolved: "./src/hajoo.js" }
+          { resolved: "./src/hajoo.js" },
         ],
         reaches: [
           {
@@ -797,29 +797,29 @@ describe("extract/derive/reachable/index - reachability detection", () => {
             modules: [
               {
                 source: "./src/index.js",
-                via: ["./src/intermediate.js", "./src/index.js"]
-              }
-            ]
+                via: ["./src/intermediate.js", "./src/index.js"],
+              },
+            ],
           },
           {
             asDefinedInRule: "dont-touch-hajoo",
             modules: [
               {
                 source: "./src/hajoo.js",
-                via: ["./src/intermediate.js", "./src/hajoo.js"]
-              }
-            ]
-          }
-        ]
+                via: ["./src/intermediate.js", "./src/hajoo.js"],
+              },
+            ],
+          },
+        ],
       },
       {
         source: "./src/hajoo.js",
-        dependencies: []
+        dependencies: [],
       },
       {
         source: "./test/index.spec.js",
-        dependencies: [{ resolved: "./src/index.js" }]
-      }
+        dependencies: [{ resolved: "./src/index.js" }],
+      },
     ];
     expect(
       addReachability(lSourceGraph, normalize(lTwoDifferentRules))

@@ -16,16 +16,16 @@ describe("main.cruise - tsPreCompilationDeps", () => {
       ["test/main/fixtures/ts-precompilation-deps-on-cjs"],
       {
         tsConfig: {
-          fileName: "test/main/fixtures/tsconfig.targetcjs.json"
+          fileName: "test/main/fixtures/tsconfig.targetcjs.json",
         },
-        tsPreCompilationDeps: true
+        tsPreCompilationDeps: true,
       },
       { bustTheCache: true },
       {
         options: {
           baseUrl: ".",
-          module: "commonjs"
-        }
+          module: "commonjs",
+        },
       }
     );
 
@@ -37,16 +37,16 @@ describe("main.cruise - tsPreCompilationDeps", () => {
       ["test/main/fixtures/ts-precompilation-deps-on-es"],
       {
         tsConfig: {
-          fileName: "test/main/fixtures/tsconfig.targetes.json"
+          fileName: "test/main/fixtures/tsconfig.targetes.json",
         },
-        tsPreCompilationDeps: true
+        tsPreCompilationDeps: true,
       },
       { bustTheCache: true },
       {
         options: {
           baseUrl: ".",
-          module: "es6"
-        }
+          module: "es6",
+        },
       }
     );
 
@@ -58,16 +58,16 @@ describe("main.cruise - tsPreCompilationDeps", () => {
       ["test/main/fixtures/ts-precompilation-deps-off-cjs"],
       {
         tsConfig: {
-          fileName: "test/main/fixtures/tsconfig.targetcjs.json"
+          fileName: "test/main/fixtures/tsconfig.targetcjs.json",
         },
-        tsPreCompilationDeps: false
+        tsPreCompilationDeps: false,
       },
       { bustTheCache: true },
       {
         options: {
           baseUrl: ".",
-          module: "commonjs"
-        }
+          module: "commonjs",
+        },
       }
     );
 
@@ -79,16 +79,16 @@ describe("main.cruise - tsPreCompilationDeps", () => {
       ["test/main/fixtures/ts-precompilation-deps-off-es"],
       {
         tsConfig: {
-          fileName: "test/main/fixtures/tsconfig.targetes.json"
+          fileName: "test/main/fixtures/tsconfig.targetes.json",
         },
-        tsPreCompilationDeps: false
+        tsPreCompilationDeps: false,
       },
       { bustTheCache: true },
       {
         options: {
           baseUrl: ".",
-          module: "es6"
-        }
+          module: "es6",
+        },
       }
     );
 

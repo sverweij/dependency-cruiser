@@ -18,7 +18,7 @@ function pushRequireCallsToDependencies(
   pModuleSystem,
   pExoticRequireStrings
 ) {
-  return pNode => {
+  return (pNode) => {
     for (let pName of ["require"].concat(pExoticRequireStrings)) {
       if (estreeHelpers.isRequireOfSomeSort(pNode, pName)) {
         for (let pString of pryStringsFromArguments(pNode.arguments)) {
@@ -28,7 +28,7 @@ function pushRequireCallsToDependencies(
             dynamic: false,
             ...(pName === "require"
               ? { exoticallyRequired: false }
-              : { exoticallyRequired: true, exoticRequire: pName })
+              : { exoticallyRequired: true, exoticRequire: pName }),
           });
         }
       }
@@ -56,7 +56,7 @@ module.exports = (
         pDependencies,
         pModuleSystem,
         pExoticRequireStrings
-      )
+      ),
     },
     // see https://github.com/acornjs/acorn/issues/746
     walk.base

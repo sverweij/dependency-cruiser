@@ -10,7 +10,7 @@ describe("extract/utl/compare - dependencyEquals", () => {
     expect(
       compare.dependenciesEqual({ module: "foo", moduleSystem: "es6" })({
         module: "foo",
-        moduleSystem: "es6"
+        moduleSystem: "es6",
       })
     ).to.equal(true);
   });
@@ -21,12 +21,12 @@ describe("extract/utl/compare - dependencyEquals", () => {
         module: "foo",
         moduleSystem: "cjs",
         dynamic: false,
-        exoticRequire: "need"
+        exoticRequire: "need",
       })({
         module: "foo",
         moduleSystem: "cjs",
         dynamic: false,
-        exoticRequire: "need"
+        exoticRequire: "need",
       })
     ).to.equal(true);
   });
@@ -35,10 +35,10 @@ describe("extract/utl/compare - dependencyEquals", () => {
     expect(
       compare.dependenciesEqual({
         module: "foo",
-        moduleSystem: "es6"
+        moduleSystem: "es6",
       })({
         module: "foo",
-        moduleSystem: "cjs"
+        moduleSystem: "cjs",
       })
     ).to.equal(true);
   });
@@ -47,10 +47,10 @@ describe("extract/utl/compare - dependencyEquals", () => {
     expect(
       compare.dependenciesEqual({
         module: "foo",
-        moduleSystem: "es6"
+        moduleSystem: "es6",
       })({
         module: "bar",
-        moduleSystem: "es6"
+        moduleSystem: "es6",
       })
     ).to.equal(false);
   });
@@ -60,10 +60,10 @@ describe("extract/utl/compare - dependencyEquals", () => {
       compare.dependenciesEqual({
         module: "foo",
         moduleSystem: "es6",
-        dynamic: true
+        dynamic: true,
       })({
         module: "foo",
-        moduleSystem: "es6"
+        moduleSystem: "es6",
       })
     ).to.equal(false);
   });
@@ -73,10 +73,10 @@ describe("extract/utl/compare - dependencyEquals", () => {
       compare.dependenciesEqual({
         module: "foo",
         moduleSystem: "es6",
-        exoticRequire: "need"
+        exoticRequire: "need",
       })({
         module: "foo",
-        moduleSystem: "es6"
+        moduleSystem: "es6",
       })
     ).to.equal(false);
   });

@@ -12,12 +12,12 @@ describe("extract/index - do not follow", () => {
   it("do not follow - doNotFollow.path", () => {
     const lOptions = normalize({
       doNotFollow: {
-        path: "donotfollowonceinthisfolder"
-      }
+        path: "donotfollowonceinthisfolder",
+      },
     });
     const lResolveOptions = normalizeResolveOptions(
       {
-        bustTheCache: true
+        bustTheCache: true,
       },
       lOptions
     );
@@ -36,12 +36,12 @@ describe("extract/index - do not follow", () => {
   it("do not follow - doNotFollow.dependencyTypes", () => {
     const lOptions = normalize({
       doNotFollow: {
-        dependencyTypes: ["npm-no-pkg"]
-      }
+        dependencyTypes: ["npm-no-pkg"],
+      },
     });
     const lResolveOptions = normalizeResolveOptions(
       {
-        bustTheCache: true
+        bustTheCache: true,
       },
       lOptions
     );

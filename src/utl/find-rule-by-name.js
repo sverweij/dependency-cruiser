@@ -12,6 +12,6 @@ const _get = require("lodash/get");
  */
 module.exports = function findRuleByName(pRuleSet, pName) {
   return _get(pRuleSet, "forbidden", []).find(
-    pForbiddenRule => pForbiddenRule.name === pName
+    (pForbiddenRule) => pForbiddenRule.name === pName
   );
 };

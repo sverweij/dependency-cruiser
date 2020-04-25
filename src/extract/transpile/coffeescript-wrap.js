@@ -24,13 +24,13 @@ function getCoffeeScriptModule() {
 
 const coffeeScript = getCoffeeScriptModule();
 
-module.exports = pLiterate => ({
+module.exports = (pLiterate) => ({
   isAvailable: () => coffeeScript !== false,
-  transpile: pSource => {
+  transpile: (pSource) => {
     const lOptions = pLiterate ? { literate: true } : {};
 
     return coffeeScript.compile(pSource, lOptions);
-  }
+  },
 });
 
 /* eslint import/order: off */

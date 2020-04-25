@@ -1,6 +1,6 @@
 const fs = require("fs");
 
-module.exports = pDirectoryOrFile => {
+module.exports = (pDirectoryOrFile) => {
   try {
     fs.accessSync(pDirectoryOrFile, fs.R_OK);
   } catch (pError) {

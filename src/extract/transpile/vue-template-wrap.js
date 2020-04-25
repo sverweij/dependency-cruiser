@@ -8,6 +8,6 @@ const vueTemplateCompiler = tryRequire(
 module.exports = {
   isAvailable: () => vueTemplateCompiler !== false,
 
-  transpile: pSource =>
-    _get(vueTemplateCompiler.parseComponent(pSource), "script.content", "")
+  transpile: (pSource) =>
+    _get(vueTemplateCompiler.parseComponent(pSource), "script.content", ""),
 };

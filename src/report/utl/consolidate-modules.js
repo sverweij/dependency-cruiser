@@ -10,32 +10,32 @@ function mergeModule(pLeftModule, pRightModule) {
     ...pRightModule,
     dependencies: _uniqBy(
       pLeftModule.dependencies.concat(pRightModule.dependencies),
-      pDependency => pDependency.resolved
+      (pDependency) => pDependency.resolved
     ),
     rules: pLeftModule.rules
       .concat(_get(pRightModule, "rules", []))
       .sort(compareRules),
     valid: pLeftModule.valid && pRightModule.valid,
     consolidated:
-      Boolean(pLeftModule.consolidated) || Boolean(pRightModule.consolidated)
+      Boolean(pLeftModule.consolidated) || Boolean(pRightModule.consolidated),
   };
 }
 
 function mergeModules(pSourceString, pModules) {
   return pModules
-    .filter(pModule => pModule.source === pSourceString)
+    .filter((pModule) => pModule.source === pSourceString)
     .reduce(
       (pMergedModule, pCurrentModule) =>
         mergeModule(pMergedModule, pCurrentModule),
       {
         dependencies: [],
         rules: [],
-        valid: true
+        valid: true,
       }
     );
 }
 
-module.exports = pModules => {
+module.exports = (pModules) => {
   let lModules = _clone(pModules);
   let lReturnValue = [];
 

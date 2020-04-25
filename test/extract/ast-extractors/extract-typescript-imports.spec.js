@@ -10,8 +10,8 @@ describe("ast-extractors/extract-typescript - regular imports", () => {
         module: "./import-for-side-effects",
         moduleSystem: "es6",
         dynamic: false,
-        exoticallyRequired: false
-      }
+        exoticallyRequired: false,
+      },
     ]);
   });
 
@@ -23,8 +23,8 @@ describe("ast-extractors/extract-typescript - regular imports", () => {
         module: "./ts-thing",
         moduleSystem: "es6",
         dynamic: false,
-        exoticallyRequired: false
-      }
+        exoticallyRequired: false,
+      },
     ]);
   });
 
@@ -38,8 +38,8 @@ describe("ast-extractors/extract-typescript - regular imports", () => {
         module: "./ts-thing",
         moduleSystem: "es6",
         dynamic: false,
-        exoticallyRequired: false
-      }
+        exoticallyRequired: false,
+      },
     ]);
   });
 
@@ -53,8 +53,8 @@ describe("ast-extractors/extract-typescript - regular imports", () => {
         module: "./ts-thing",
         moduleSystem: "es6",
         dynamic: false,
-        exoticallyRequired: false
-      }
+        exoticallyRequired: false,
+      },
     ]);
   });
 
@@ -66,8 +66,8 @@ describe("ast-extractors/extract-typescript - regular imports", () => {
         module: "./types",
         moduleSystem: "es6",
         dynamic: false,
-        exoticallyRequired: false
-      }
+        exoticallyRequired: false,
+      },
     ]);
   });
 
@@ -79,8 +79,8 @@ describe("ast-extractors/extract-typescript - regular imports", () => {
         module: "./types",
         moduleSystem: "es6",
         dynamic: false,
-        exoticallyRequired: false
-      }
+        exoticallyRequired: false,
+      },
     ]);
   });
 
@@ -94,8 +94,8 @@ describe("ast-extractors/extract-typescript - regular imports", () => {
         module: "./vypes",
         moduleSystem: "es6",
         dynamic: false,
-        exoticallyRequired: false
-      }
+        exoticallyRequired: false,
+      },
     ]);
   });
 
@@ -109,8 +109,8 @@ describe("ast-extractors/extract-typescript - regular imports", () => {
         module: "./wypes",
         moduleSystem: "es6",
         dynamic: false,
-        exoticallyRequired: false
-      }
+        exoticallyRequired: false,
+      },
     ]);
   });
 
@@ -137,8 +137,8 @@ describe("ast-extractors/extract-typescript - regular imports", () => {
         module: "./some-module",
         moduleSystem: "es6",
         dynamic: false,
-        exoticallyRequired: false
-      }
+        exoticallyRequired: false,
+      },
     ]);
   });
 });

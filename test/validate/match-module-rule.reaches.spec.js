@@ -5,12 +5,12 @@ const EMPTY_RULE = { from: {}, to: {} };
 const ANY_REACHABLE = {
   name: "no-unreachable",
   from: {},
-  to: { reachable: true }
+  to: { reachable: true },
 };
 const ANY_REACHES_IN_ALLOWED = {
   name: "not-in-allowed",
   from: {},
-  to: { reachable: true }
+  to: { reachable: true },
 };
 
 describe("validate/match-module-rule - reaches", () => {
@@ -23,9 +23,9 @@ describe("validate/match-module-rule - reaches", () => {
         reaches: [
           {
             modules: [{ source: "src/hoppetee.js" }],
-            asDefinedInRule: "no-unreachable"
-          }
-        ]
+            asDefinedInRule: "no-unreachable",
+          },
+        ],
       })
     ).to.equal(false);
   });
@@ -35,9 +35,9 @@ describe("validate/match-module-rule - reaches", () => {
         reaches: [
           {
             modules: [{ source: "src/hoppetee.js" }],
-            asDefinedInRule: "no-unreachable"
-          }
-        ]
+            asDefinedInRule: "no-unreachable",
+          },
+        ],
       })
     ).to.equal(true);
   });
@@ -47,9 +47,9 @@ describe("validate/match-module-rule - reaches", () => {
         reaches: [
           {
             modules: [{ source: "src/hoppetee.js" }],
-            asDefinedInRule: "not-in-allowed"
-          }
-        ]
+            asDefinedInRule: "not-in-allowed",
+          },
+        ],
       })
     ).to.equal(true);
   });

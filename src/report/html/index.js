@@ -7,10 +7,10 @@ require("./html.template");
 function addShowTitle(pDependencyEntry) {
   return {
     ...pDependencyEntry,
-    incidences: pDependencyEntry.incidences.map(pIncidence => ({
+    incidences: pDependencyEntry.incidences.map((pIncidence) => ({
       ...pIncidence,
-      hasRelation: pIncidence.incidence !== "false"
-    }))
+      hasRelation: pIncidence.incidence !== "false",
+    })),
   };
 }
 
@@ -26,11 +26,11 @@ function report(pResults) {
   return Handlebars.templates["html.template.hbs"]({
     modules: dependencyToIncidenceTransformer(pResults.modules).map(
       addShowTitle
-    )
+    ),
   });
 }
 
-module.exports = pResults => ({
+module.exports = (pResults) => ({
   output: report(pResults),
-  exitCode: 0
+  exitCode: 0,
 });

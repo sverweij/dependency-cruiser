@@ -21,7 +21,7 @@ function runRecursiveFixture(pFixture) {
       const lOptions = normalize(pFixture.input.options);
       const lResolveOptions = normalizeResolveOptions(
         {
-          bustTheCache: true
+          bustTheCache: true,
         },
         lOptions
       );

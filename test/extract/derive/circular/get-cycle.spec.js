@@ -17,17 +17,17 @@ describe("extract/derive/circular/getCycle", () => {
     expect(getCycle(inputGraphs.Q_R_S_Q, "q", "r")).to.deep.equal([
       "r",
       "s",
-      "q"
+      "q",
     ]);
     expect(getCycle(inputGraphs.Q_R_S_Q, "r", "s")).to.deep.equal([
       "s",
       "q",
-      "r"
+      "r",
     ]);
     expect(getCycle(inputGraphs.Q_R_S_Q, "s", "q")).to.deep.equal([
       "q",
       "r",
-      "s"
+      "s",
     ]);
   });
   it("does not get confused because another circular (t -> u -> t, t -> v)", () => {
@@ -38,32 +38,32 @@ describe("extract/derive/circular/getCycle", () => {
     expect(getCycle(inputGraphs.TWO_CIRCLES, "a", "b")).to.deep.equal([
       "b",
       "c",
-      "a"
+      "a",
     ]);
     expect(getCycle(inputGraphs.TWO_CIRCLES, "b", "c")).to.deep.equal([
       "c",
       "a",
-      "b"
+      "b",
     ]);
     expect(getCycle(inputGraphs.TWO_CIRCLES, "c", "a")).to.deep.equal([
       "a",
       "b",
-      "c"
+      "c",
     ]);
     expect(getCycle(inputGraphs.TWO_CIRCLES, "a", "d")).to.deep.equal([
       "d",
       "e",
-      "a"
+      "a",
     ]);
     expect(getCycle(inputGraphs.TWO_CIRCLES, "d", "e")).to.deep.equal([
       "e",
       "a",
-      "d"
+      "d",
     ]);
     expect(getCycle(inputGraphs.TWO_CIRCLES, "e", "a")).to.deep.equal([
       "a",
       "d",
-      "e"
+      "e",
     ]);
   });
   it("it goes to a circle but isn't in it itself (z -> a -> b -> c -> a)", () => {

@@ -19,12 +19,12 @@ describe("report/error-html/utl", () => {
   it("getFormattedAllowedRule - one rule with no comment, no severity returns default comment & severity", () => {
     expect(
       utl.getFormattedAllowedRule({
-        allowed: [{ from: {}, to: {} }]
+        allowed: [{ from: {}, to: {} }],
       })
     ).to.deep.equal({
       name: "not-in-allowed",
       severity: "warn",
-      comment: "-"
+      comment: "-",
     });
   });
 
@@ -34,27 +34,27 @@ describe("report/error-html/utl", () => {
         allowed: [
           {
             from: {
-              path: "^(test|src)"
+              path: "^(test|src)",
             },
             to: {
-              path: "^src"
-            }
+              path: "^src",
+            },
           },
           {
             comment: "this is a comment",
             from: {
-              path: "^bin"
+              path: "^bin",
             },
             to: {
-              path: "^src/cli"
-            }
-          }
-        ]
+              path: "^src/cli",
+            },
+          },
+        ],
       })
     ).to.deep.equal({
       name: "not-in-allowed",
       severity: "warn",
-      comment: "this is a comment"
+      comment: "this is a comment",
     });
   });
 
@@ -64,19 +64,19 @@ describe("report/error-html/utl", () => {
         allowed: [
           {
             from: {
-              path: "^(test|src)"
+              path: "^(test|src)",
             },
             to: {
-              path: "^src"
-            }
-          }
+              path: "^src",
+            },
+          },
         ],
-        allowedSeverity: "info"
+        allowedSeverity: "info",
       })
     ).to.deep.equal({
       name: "not-in-allowed",
       severity: "info",
-      comment: "-"
+      comment: "-",
     });
   });
 
@@ -84,7 +84,7 @@ describe("report/error-html/utl", () => {
     expect(utl.mergeCountIntoRule({ name: "blah" }, {})).to.deep.equal({
       name: "blah",
       count: 0,
-      unviolated: true
+      unviolated: true,
     });
   });
 
@@ -94,7 +94,7 @@ describe("report/error-html/utl", () => {
     ).to.deep.equal({
       name: "blah",
       count: 69,
-      unviolated: false
+      unviolated: false,
     });
   });
 
@@ -110,17 +110,17 @@ describe("report/error-html/utl", () => {
       violations: [
         {
           from: "aap",
-          to: "noot"
-        }
-      ]
+          to: "noot",
+        },
+      ],
     });
 
     summaryHasMinimalAttributes(lResult);
     expect(lResult.violations).to.deep.equal([
       {
         from: "aap",
-        to: "noot"
-      }
+        to: "noot",
+      },
     ]);
   });
 
@@ -129,17 +129,17 @@ describe("report/error-html/utl", () => {
       violations: [
         {
           from: "aap",
-          to: "aap"
-        }
-      ]
+          to: "aap",
+        },
+      ],
     });
 
     summaryHasMinimalAttributes(lResult);
     expect(lResult.violations).to.deep.equal([
       {
         from: "aap",
-        to: ""
-      }
+        to: "",
+      },
     ]);
   });
 
@@ -147,7 +147,7 @@ describe("report/error-html/utl", () => {
     const lInputViolation = {
       cycle: ["thing/a", "b", "thingy/bingy/c", "a"],
       from: "a",
-      to: "thing/a"
+      to: "thing/a",
     };
 
     const lExpectation =
@@ -160,7 +160,7 @@ describe("report/error-html/utl", () => {
     const lInputViolation = {
       via: ["thing/a", "b", "thingy/bingy/c", "a"],
       from: "a",
-      to: "thing/a"
+      to: "thing/a",
     };
 
     const lExpectation =
@@ -172,7 +172,7 @@ describe("report/error-html/utl", () => {
   it("determineTo - dependency violation", () => {
     const lInputViolation = {
       from: "a",
-      to: "thing/a"
+      to: "thing/a",
     };
 
     const lExpectation = "thing/a";
@@ -183,7 +183,7 @@ describe("report/error-html/utl", () => {
   it("determineTo - module violation", () => {
     const lInputViolation = {
       from: "a",
-      to: "a"
+      to: "a",
     };
 
     const lExpectation = "";

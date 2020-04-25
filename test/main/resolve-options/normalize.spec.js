@@ -53,7 +53,7 @@ describe("main/resolve-options/normalize", () => {
     const lNormalizedOptions = normalizeResolveOptions(
       {},
       normalizeOptions({
-        ruleSet: { options: { tsConfig: { fileName: TEST_TSCONFIG } } }
+        ruleSet: { options: { tsConfig: { fileName: TEST_TSCONFIG } } },
       }),
       TSCONFIG_CONTENTS
     );
@@ -74,7 +74,7 @@ describe("main/resolve-options/normalize", () => {
     const lNormalizedOptions = normalizeResolveOptions(
       {},
       normalizeOptions({
-        ruleSet: { options: { tsConfig: { fileName: TEST_TSCONFIG } } }
+        ruleSet: { options: { tsConfig: { fileName: TEST_TSCONFIG } } },
       }),
       TSCONFIG_CONTENTS_WITH_BASEURL
     );
@@ -96,7 +96,7 @@ describe("main/resolve-options/normalize", () => {
       {},
       normalizeOptions({
         ruleSet: { options: { tsConfig: { fileName: TEST_TSCONFIG } } },
-        externalModuleResolutionStrategy: "yarn-pnp"
+        externalModuleResolutionStrategy: "yarn-pnp",
       }),
       TSCONFIG_CONTENTS_WITH_BASEURL
     );

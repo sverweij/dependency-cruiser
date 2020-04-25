@@ -26,7 +26,7 @@ const TYPE2REPORTER = {
   html,
   json,
   teamcity,
-  text
+  text,
 };
 
 /**
@@ -54,5 +54,5 @@ function getAvailableReporters() {
 
 module.exports = {
   getAvailableReporters,
-  getReporter
+  getReporter,
 };

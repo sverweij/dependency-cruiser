@@ -16,8 +16,8 @@ module.exports = {
         "npm-peer",
         "npm-unknown",
         "undetermined",
-        "unknown"
-      ]
-    }
-  }
+        "unknown",
+      ],
+    },
+  },
 };

@@ -14,8 +14,8 @@ describe("extract/derive/reachable/getGraph - reachability detection", () => {
     const lGraph = [
       {
         source: "./src/index.js",
-        dependencies: []
-      }
+        dependencies: [],
+      },
     ];
 
     expect(getPath(lGraph, "./src/index.js", "./src/hajoo.js")).to.deep.equal(
@@ -29,15 +29,15 @@ describe("extract/derive/reachable/getGraph - reachability detection", () => {
         source: "./src/index.js",
         dependencies: [
           {
-            resolved: "./src/hajoo.js"
-          }
-        ]
-      }
+            resolved: "./src/hajoo.js",
+          },
+        ],
+      },
     ];
 
     expect(getPath(lGraph, "./src/index.js", "./src/hajoo.js")).to.deep.equal([
       "./src/index.js",
-      "./src/hajoo.js"
+      "./src/hajoo.js",
     ]);
   });
 
@@ -47,10 +47,10 @@ describe("extract/derive/reachable/getGraph - reachability detection", () => {
         source: "./src/index.js",
         dependencies: [
           {
-            resolved: "./src/hajoo.js"
-          }
-        ]
-      }
+            resolved: "./src/hajoo.js",
+          },
+        ],
+      },
     ];
 
     expect(getPath(lGraph, "./src/index.js", "./src/index.js")).to.deep.equal(
@@ -64,10 +64,10 @@ describe("extract/derive/reachable/getGraph - reachability detection", () => {
         source: "./src/index.js",
         dependencies: [
           {
-            resolved: "./src/noooo.js"
-          }
-        ]
-      }
+            resolved: "./src/noooo.js",
+          },
+        ],
+      },
     ];
 
     expect(getPath(lGraph, "./src/index.js", "./src/hajoo.js")).to.deep.equal(
@@ -81,24 +81,24 @@ describe("extract/derive/reachable/getGraph - reachability detection", () => {
         source: "./src/index.js",
         dependencies: [
           {
-            resolved: "./src/intermediate.js"
-          }
-        ]
+            resolved: "./src/intermediate.js",
+          },
+        ],
       },
       {
         source: "./src/intermediate.js",
         dependencies: [
           {
-            resolved: "./src/hajoo.js"
-          }
-        ]
-      }
+            resolved: "./src/hajoo.js",
+          },
+        ],
+      },
     ];
 
     expect(getPath(lGraph, "./src/index.js", "./src/hajoo.js")).to.deep.equal([
       "./src/index.js",
       "./src/intermediate.js",
-      "./src/hajoo.js"
+      "./src/hajoo.js",
     ]);
   });
 
@@ -108,18 +108,18 @@ describe("extract/derive/reachable/getGraph - reachability detection", () => {
         source: "./src/index.js",
         dependencies: [
           {
-            resolved: "./src/intermediate.js"
-          }
-        ]
+            resolved: "./src/intermediate.js",
+          },
+        ],
       },
       {
         source: "./src/intermediate.js",
         dependencies: [
           {
-            resolved: "./src/index.js"
-          }
-        ]
-      }
+            resolved: "./src/index.js",
+          },
+        ],
+      },
     ];
 
     expect(getPath(lGraph, "./src/index.js", "./src/hajoo.js")).to.deep.equal(
@@ -133,31 +133,31 @@ describe("extract/derive/reachable/getGraph - reachability detection", () => {
         source: "./src/index.js",
         dependencies: [
           {
-            resolved: "./src/intermediate.js"
-          }
-        ]
+            resolved: "./src/intermediate.js",
+          },
+        ],
       },
       {
         source: "./src/intermediate.js",
         dependencies: [
           {
-            resolved: "./src/index.js"
+            resolved: "./src/index.js",
           },
           {
-            resolved: "./src/hajoo.js"
-          }
-        ]
+            resolved: "./src/hajoo.js",
+          },
+        ],
       },
       {
         source: "./src/hajoo.js",
-        dependencies: []
-      }
+        dependencies: [],
+      },
     ];
 
     expect(getPath(lGraph, "./src/index.js", "./src/hajoo.js")).to.deep.equal([
       "./src/index.js",
       "./src/intermediate.js",
-      "./src/hajoo.js"
+      "./src/hajoo.js",
     ]);
   });
 });

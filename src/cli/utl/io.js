@@ -6,7 +6,7 @@ function writeToFile(pOutputTo, pDependencyString) {
   try {
     fs.writeFileSync(pOutputTo, pDependencyString, {
       encoding: "utf8",
-      flag: "w"
+      flag: "w",
     });
   } catch (pError) {
     throw new Error(`Writing to '${pOutputTo}' didn't work. ${pError}`);
@@ -54,5 +54,5 @@ function getInStream(pInputFrom) {
 
 module.exports = {
   write,
-  getInStream
+  getInStream,
 };

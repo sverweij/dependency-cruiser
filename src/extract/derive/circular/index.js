@@ -4,13 +4,13 @@ function addCircularityCheckToDependency(pToDep, pGraph, pFrom) {
   const lCycle = getCycle(pGraph, pFrom, pToDep.resolved);
   let lReturnValue = {
     ...pToDep,
-    circular: lCycle.length > 0
+    circular: lCycle.length > 0,
   };
 
   if (lReturnValue.circular) {
     lReturnValue = {
       ...lReturnValue,
-      cycle: lCycle
+      cycle: lCycle,
     };
   }
 
@@ -27,10 +27,10 @@ function addCircularityCheckToDependency(pToDep, pGraph, pFrom) {
  *                                of them added whether or not it is
  *                                part of
  */
-module.exports = pModules =>
-  pModules.map(pModule => ({
+module.exports = (pModules) =>
+  pModules.map((pModule) => ({
     ...pModule,
-    dependencies: pModule.dependencies.map(pToDep =>
+    dependencies: pModule.dependencies.map((pToDep) =>
       addCircularityCheckToDependency(pToDep, pModules, pModule.source)
-    )
+    ),
   }));

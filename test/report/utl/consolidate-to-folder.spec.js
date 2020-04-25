@@ -8,8 +8,8 @@ describe("report/utl/consolidateToFolder", () => {
         source: "some/folder/thing.js",
         rules: [],
         valid: true,
-        dependencies: []
-      }
+        dependencies: [],
+      },
     ];
     const lOutput = [
       {
@@ -17,8 +17,8 @@ describe("report/utl/consolidateToFolder", () => {
         rules: [],
         valid: true,
         consolidated: true,
-        dependencies: []
-      }
+        dependencies: [],
+      },
     ];
 
     expect(consolidateToFolder(lInput)).to.deep.equal(lOutput);
@@ -30,8 +30,8 @@ describe("report/utl/consolidateToFolder", () => {
         source: "thing.js",
         rules: [],
         valid: true,
-        dependencies: []
-      }
+        dependencies: [],
+      },
     ];
     const lOutput = [
       {
@@ -39,8 +39,8 @@ describe("report/utl/consolidateToFolder", () => {
         rules: [],
         valid: true,
         consolidated: true,
-        dependencies: []
-      }
+        dependencies: [],
+      },
     ];
 
     expect(consolidateToFolder(lInput)).to.deep.equal(lOutput);
@@ -57,16 +57,16 @@ describe("report/utl/consolidateToFolder", () => {
             resolved: "some/folder/bla.js",
             rules: [],
             valid: true,
-            dependencyTypes: ["cjs"]
-          }
-        ]
+            dependencyTypes: ["cjs"],
+          },
+        ],
       },
       {
         source: "some/folder/bla.js",
         rules: [],
         valid: true,
-        dependencies: []
-      }
+        dependencies: [],
+      },
     ];
     const lOutput = [
       {
@@ -79,17 +79,17 @@ describe("report/utl/consolidateToFolder", () => {
             resolved: "some/folder",
             rules: [],
             valid: true,
-            dependencyTypes: ["cjs"]
-          }
-        ]
+            dependencyTypes: ["cjs"],
+          },
+        ],
       },
       {
         source: "some/folder",
         rules: [],
         valid: true,
         consolidated: true,
-        dependencies: []
-      }
+        dependencies: [],
+      },
     ];
 
     expect(consolidateToFolder(lInput)).to.deep.equal(lOutput);

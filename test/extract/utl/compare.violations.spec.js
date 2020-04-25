@@ -7,8 +7,8 @@ describe("extract/utl/compare - violations", () => {
     to: "to",
     rule: {
       name: "cool-rule",
-      severity: "error"
-    }
+      severity: "error",
+    },
   };
 
   const lLessSevereViolation = {
@@ -16,8 +16,8 @@ describe("extract/utl/compare - violations", () => {
     to: "to",
     rule: {
       name: "cool-rule",
-      severity: "info"
-    }
+      severity: "info",
+    },
   };
 
   const lLaterNameViolation = {
@@ -25,8 +25,8 @@ describe("extract/utl/compare - violations", () => {
     to: "to",
     rule: {
       name: "drool-rule",
-      severity: "error"
-    }
+      severity: "error",
+    },
   };
 
   const lLaterToViolation = {
@@ -34,8 +34,8 @@ describe("extract/utl/compare - violations", () => {
     to: "tox",
     rule: {
       name: "cool-rule",
-      severity: "error"
-    }
+      severity: "error",
+    },
   };
 
   const lLaterFromViolation = {
@@ -43,8 +43,8 @@ describe("extract/utl/compare - violations", () => {
     to: "to",
     rule: {
       name: "cool-rule",
-      severity: "error"
-    }
+      severity: "error",
+    },
   };
 
   it("returns 0 for identical violations", () => {

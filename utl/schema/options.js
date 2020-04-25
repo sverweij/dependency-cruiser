@@ -16,50 +16,50 @@ module.exports = {
             {
               type: "string",
               description:
-                "a regular expression for modules to include, but not follow further"
+                "a regular expression for modules to include, but not follow further",
             },
-            { $ref: "#/definitions/CompoundDoNotFollowType" }
-          ]
+            { $ref: "#/definitions/CompoundDoNotFollowType" },
+          ],
         },
         exclude: {
           oneOf: [
             {
               type: "string",
               description:
-                "a regular expression for modules to exclude from being cruised"
+                "a regular expression for modules to exclude from being cruised",
             },
-            { $ref: "#/definitions/CompoundExcludeType" }
-          ]
+            { $ref: "#/definitions/CompoundExcludeType" },
+          ],
         },
         includeOnly: {
           type: "string",
           description:
             "a regular expression for modules to cruise; anything outside it will " +
-            "be skipped"
+            "be skipped",
         },
         maxDepth: {
           type: "number",
           minimum: 0,
           maximum: 99,
           description:
-            "The maximum cruise depth specified. 0 means no maximum specified"
+            "The maximum cruise depth specified. 0 means no maximum specified",
         },
         moduleSystems: { $ref: "#/definitions/ModuleSystemsType" },
         prefix: {
-          type: "string"
+          type: "string",
         },
         preserveSymlinks: {
           type: "boolean",
           description:
             "if true leave symlinks untouched, otherwise use the realpath. Defaults " +
-            "to `false` (which is also nodejs's default behavior since version 6)"
+            "to `false` (which is also nodejs's default behavior since version 6)",
         },
         combinedDependencies: {
           type: "boolean",
           description:
             "if true combines the package.jsons found from the module up to the base " +
             "folder the cruise is initiated from. Useful for how (some) mono-repos " +
-            "manage dependencies & dependency definitions. Defaults to `false`."
+            "manage dependencies & dependency definitions. Defaults to `false`.",
         },
         tsConfig: {
           type: "object",
@@ -73,9 +73,9 @@ module.exports = {
                 "The TypeScript project file to use. The fileName is relative to " +
                 "dependency-cruiser's current working directory. When not provided " +
                 "defaults to './tsconfig.json'.",
-              type: "string"
-            }
-          }
+              type: "string",
+            },
+          },
         },
         tsPreCompilationDeps: {
           description:
@@ -83,19 +83,19 @@ module.exports = {
             "compilation.",
           oneOf: [
             {
-              type: "boolean"
+              type: "boolean",
             },
             {
               type: "string",
-              enum: ["specify"]
-            }
-          ]
+              enum: ["specify"],
+            },
+          ],
         },
         externalModuleResolutionStrategy: {
           type: "string",
           description:
             "What external module resolution strategy to use. Defaults to 'node_modules'",
-          enum: ["node_modules", "yarn-pnp"]
+          enum: ["node_modules", "yarn-pnp"],
         },
         webpackConfig: {
           type: "object",
@@ -108,27 +108,27 @@ module.exports = {
               description:
                 "The webpack conf file to use (typically something like 'webpack.conf.js'). " +
                 "The fileName is relative to dependency-cruiser's current working " +
-                "directory. When not provided defaults to './webpack.conf.js'."
+                "directory. When not provided defaults to './webpack.conf.js'.",
             },
             env: {
               description:
                 "Environment to pass if your config file returns a function",
               oneOf: [
                 {
-                  type: "object"
+                  type: "object",
                 },
                 {
-                  type: "string"
-                }
-              ]
+                  type: "string",
+                },
+              ],
             },
             arguments: {
               type: "object",
               description:
                 "Arguments to pass if your config file returns a function. E.g. " +
-                "{mode: 'production'} if you want to use webpack 4's 'mode' feature"
-            }
-          }
+                "{mode: 'production'} if you want to use webpack 4's 'mode' feature",
+            },
+          },
         },
         exoticRequireStrings: {
           type: "array",
@@ -138,16 +138,16 @@ module.exports = {
             "require (`const want = require`), use a require-wrapper (like semver-try-require) " +
             "or use window.require as a hack to workaround something",
           items: {
-            type: "string"
-          }
+            type: "string",
+          },
         },
-        reporterOptions: { $ref: "#/definitions/ReporterOptionsType" }
-      }
+        reporterOptions: { $ref: "#/definitions/ReporterOptionsType" },
+      },
     },
     ...moduleSystemsType.definitions,
     ...dependencyType.definitions,
     ...compoundExclude.definitions,
     ...compoundDoNotFollowType.definitions,
-    ...reporterOptions.definitions
-  }
+    ...reporterOptions.definitions,
+  },
 };

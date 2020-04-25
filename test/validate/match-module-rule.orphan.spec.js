@@ -26,7 +26,7 @@ describe("validate/match-module-rule - orphan", () => {
     expect(
       matchesOrphanRule(ORPHAN_IN_PATH, {
         orphan: true,
-        source: "test/lalal.spec.ts"
+        source: "test/lalal.spec.ts",
       })
     ).to.equal(false);
   });
@@ -34,7 +34,7 @@ describe("validate/match-module-rule - orphan", () => {
     expect(
       matchesOrphanRule(ORPHAN_IN_PATH, {
         orphan: true,
-        source: "src/lalal.ts"
+        source: "src/lalal.ts",
       })
     ).to.equal(true);
   });
@@ -42,7 +42,7 @@ describe("validate/match-module-rule - orphan", () => {
     expect(
       matchesOrphanRule(ORPHAN_IN_PATH_NOT, {
         orphan: true,
-        source: "test/lalal.spec.ts"
+        source: "test/lalal.spec.ts",
       })
     ).to.equal(true);
   });
@@ -50,7 +50,7 @@ describe("validate/match-module-rule - orphan", () => {
     expect(
       matchesOrphanRule(ORPHAN_IN_PATH_NOT, {
         orphan: true,
-        source: "src/lalal.ts"
+        source: "src/lalal.ts",
       })
     ).to.equal(false);
   });

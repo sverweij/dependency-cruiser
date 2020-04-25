@@ -12,12 +12,12 @@ describe("extract/index - exclude", () => {
   it("exclude - exclude.path", () => {
     const lOptions = normalize({
       exclude: {
-        path: "dynamic-to-circular"
-      }
+        path: "dynamic-to-circular",
+      },
     });
     const lResolveOptions = normalizeResolveOptions(
       {
-        bustTheCache: true
+        bustTheCache: true,
       },
       lOptions
     );
@@ -36,12 +36,12 @@ describe("extract/index - exclude", () => {
   it("exclude - exclude.dynamic", () => {
     const lOptions = normalize({
       exclude: {
-        dynamic: true
-      }
+        dynamic: true,
+      },
     });
     const lResolveOptions = normalizeResolveOptions(
       {
-        bustTheCache: true
+        bustTheCache: true,
       },
       lOptions
     );

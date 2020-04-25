@@ -21,12 +21,12 @@ describe("extract/derive/orphan/index - orphan detection", () => {
           forbidden: [
             {
               from: {
-                orphan: true
+                orphan: true,
               },
-              to: {}
-            }
-          ]
-        }
+              to: {},
+            },
+          ],
+        },
       })
     ).to.deep.equal(ONE_MODULE_AFTER_PROCESSING);
   });

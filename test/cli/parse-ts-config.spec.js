@@ -38,7 +38,7 @@ describe("cli/parseTSConfig - flatten typescript config - simple config scenario
       configFilePath: path.join(
         DIRNAME,
         "./fixtures/typescriptconfig/tsconfig.empty.json"
-      )
+      ),
     });
   });
 
@@ -54,7 +54,7 @@ describe("cli/parseTSConfig - flatten typescript config - simple config scenario
       configFilePath: path.join(
         DIRNAME,
         "./fixtures/typescriptconfig/tsconfig.withcomments.json"
-      )
+      ),
     });
   });
 
@@ -74,7 +74,7 @@ describe("cli/parseTSConfig - flatten typescript config - simple config scenario
       esModuleInterop: true,
       module: 1,
       strict: true,
-      target: 1
+      target: 1,
     });
   });
 });
@@ -116,7 +116,7 @@ describe("cli/parseTSConfig - flatten typescript config - 'extend' config scenar
       configFilePath: path.join(
         DIRNAME,
         "./fixtures/typescriptconfig/tsconfig.simpleextends.json"
-      )
+      ),
     });
   });
 
@@ -151,7 +151,7 @@ describe("cli/parseTSConfig - flatten typescript config - 'extend' config scenar
       validatedExcludeSpecs: ["only in the extends"],
       // overridden by extends:
       validatedIncludeSpecs: ["override from extends here"],
-      wildcardDirectories: lWildCardDirectories
+      wildcardDirectories: lWildCardDirectories,
     });
 
     // from base:
@@ -183,8 +183,8 @@ describe("cli/parseTSConfig - flatten typescript config - 'extend' config scenar
       rootDirs: [
         path.join(DIRNAME, "fixtures/typescriptconfig/foo"),
         path.join(DIRNAME, "fixtures/typescriptconfig/bar"),
-        path.join(DIRNAME, "fixtures/typescriptconfig/baz")
-      ]
+        path.join(DIRNAME, "fixtures/typescriptconfig/baz"),
+      ],
     });
   });
 
@@ -203,12 +203,12 @@ describe("cli/parseTSConfig - flatten typescript config - 'extend' config scenar
       ),
       lib: [
         // "dom.iterable",
-        "lib.dom.iterable.d.ts"
+        "lib.dom.iterable.d.ts",
         // I'd expected these from base as well as per the specification, but
         // apparently the typescript TSConfig parser chooses to override instead of extend ...
         // "es2016.array.include",
         // "dom"
-      ]
+      ],
     });
   });
 });

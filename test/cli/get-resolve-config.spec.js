@@ -37,8 +37,8 @@ describe("cli/getResolveConfig", () => {
     ).to.deep.equal({
       alias: {
         config: "src/config",
-        magic$: "src/merlin/browserify/magic"
-      }
+        magic$: "src/merlin/browserify/magic",
+      },
     });
   });
 
@@ -54,8 +54,8 @@ describe("cli/getResolveConfig", () => {
     ).to.deep.equal({
       alias: {
         config: "src/config",
-        magic$: "src/merlin/browserify/magic"
-      }
+        magic$: "src/merlin/browserify/magic",
+      },
     });
   });
 
@@ -71,8 +71,8 @@ describe("cli/getResolveConfig", () => {
     ).to.deep.equal({
       alias: {
         config: "src/dev-config",
-        magic$: "src/merlin/browserify/hipsterlib"
-      }
+        magic$: "src/merlin/browserify/hipsterlib",
+      },
     });
   });
 
@@ -86,9 +86,9 @@ describe("cli/getResolveConfig", () => {
       )
     ).to.deep.equal({
       alias: {
-        configSpullenAlias: "./configspullen"
+        configSpullenAlias: "./configspullen",
       },
-      bustTheCache: true
+      bustTheCache: true,
     });
   });
 
@@ -102,9 +102,9 @@ describe("cli/getResolveConfig", () => {
       )
     ).to.deep.equal({
       alias: {
-        configSpullenAlias: "./configspullen"
+        configSpullenAlias: "./configspullen",
       },
-      bustTheCache: true
+      bustTheCache: true,
     });
   });
 
@@ -118,9 +118,9 @@ describe("cli/getResolveConfig", () => {
       )
     ).to.deep.equal({
       alias: {
-        configSpullenAlias: "./configspullen"
+        configSpullenAlias: "./configspullen",
       },
-      bustTheCache: true
+      bustTheCache: true,
     });
   });
 });

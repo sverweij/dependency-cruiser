@@ -2,17 +2,17 @@ const consolidateModules = require("./consolidate-modules");
 const consolidateModuleDependencies = require("./consolidate-module-dependencies");
 
 function squashDependencyToPattern(pCollapsePattern) {
-  return pDependency => {
+  return (pDependency) => {
     const lCollapseMatch = pDependency.resolved.match(pCollapsePattern);
 
     return {
       ...pDependency,
-      resolved: lCollapseMatch ? lCollapseMatch[0] : pDependency.resolved
+      resolved: lCollapseMatch ? lCollapseMatch[0] : pDependency.resolved,
     };
   };
 }
 function squashModuleToPattern(pCollapsePattern) {
-  return pModule => {
+  return (pModule) => {
     const lCollapseMatch = pModule.source.match(pCollapsePattern);
 
     return {
@@ -23,7 +23,7 @@ function squashModuleToPattern(pCollapsePattern) {
         : false,
       dependencies: pModule.dependencies.map(
         squashDependencyToPattern(pCollapsePattern)
-      )
+      ),
     };
   };
 }

@@ -47,10 +47,10 @@ function compileConfig(
     pBaseDirectory,
     normalizeResolveOptions(
       {
-        extensions: [".js", ".json"]
+        extensions: [".js", ".json"],
       },
       {
-        externalModuleResolutionStrategy: getRunningProcessResolutionStrategy()
+        externalModuleResolutionStrategy: getRunningProcessResolutionStrategy(),
       }
     ),
     "cli"

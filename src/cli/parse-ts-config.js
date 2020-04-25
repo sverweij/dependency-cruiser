@@ -23,7 +23,7 @@ const FORMAT_DIAGNOSTICS_HOST = {
   },
   getNewLine() {
     return "\n";
-  }
+  },
 };
 
 module.exports = function parseConfig(pTSConfigFileName) {

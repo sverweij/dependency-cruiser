@@ -10,8 +10,8 @@ describe("ast-extractors/extract-typescript - triple slash directives", () => {
         module: "./ts-thing",
         moduleSystem: "tsd",
         dynamic: false,
-        exoticallyRequired: false
-      }
+        exoticallyRequired: false,
+      },
     ]);
   });
 
@@ -23,8 +23,8 @@ describe("ast-extractors/extract-typescript - triple slash directives", () => {
         module: "./ts-thing-types",
         moduleSystem: "tsd",
         dynamic: false,
-        exoticallyRequired: false
-      }
+        exoticallyRequired: false,
+      },
     ]);
   });
 
@@ -36,8 +36,8 @@ describe("ast-extractors/extract-typescript - triple slash directives", () => {
         module: "./ts-thing-types",
         moduleSystem: "tsd",
         dynamic: false,
-        exoticallyRequired: false
-      }
+        exoticallyRequired: false,
+      },
     ]);
   });
 });

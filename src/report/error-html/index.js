@@ -4,7 +4,7 @@ const _get = require("lodash/get");
 const {
   getFormattedAllowedRule,
   mergeCountIntoRule,
-  formatSummaryForReport
+  formatSummaryForReport,
 } = require("./utl");
 
 // eslint-disable-next-line import/no-unassigned-import
@@ -22,7 +22,7 @@ function aggregateViolations(pViolations, pRuleSetUsed) {
 
   return _get(pRuleSetUsed, "forbidden", [])
     .concat(getFormattedAllowedRule(pRuleSetUsed))
-    .map(pRule => mergeCountIntoRule(pRule, lViolationCounts))
+    .map((pRule) => mergeCountIntoRule(pRule, lViolationCounts))
     .sort(
       (pFirst, pSecond) =>
         Math.sign(pSecond.count - pFirst.count) ||
@@ -37,8 +37,8 @@ function report(pResults) {
       agggregateViolations: aggregateViolations(
         pResults.summary.violations,
         pResults.summary.ruleSetUsed
-      )
-    }
+      ),
+    },
   });
 }
 
@@ -49,7 +49,7 @@ function report(pResults) {
  * @returns {IReporterOutput} - output: an html program showing the summary & the violations (if any)
  *                              exitCode: 0
  */
-module.exports = pResults => ({
+module.exports = (pResults) => ({
   output: report(pResults),
-  exitCode: 0
+  exitCode: 0,
 });

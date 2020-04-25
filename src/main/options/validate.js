@@ -8,7 +8,7 @@ const VALID_DEPTH_RE = /^[0-9]{1,2}$/g;
 function validateSystems(pModuleSystems) {
   if (Boolean(pModuleSystems) && Array.isArray(pModuleSystems)) {
     if (
-      !pModuleSystems.every(pModuleSystem =>
+      !pModuleSystems.every((pModuleSystem) =>
         Boolean(pModuleSystem.match(MODULE_SYSTEM_LIST_RE))
       )
     ) {

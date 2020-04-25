@@ -55,9 +55,12 @@ function extractDependencies(pOptions, pFileName, pTSConfig) {
   let lDependencies = [];
 
   if (shouldUseTSC(pOptions, pFileName)) {
-    lDependencies = extractFromTypeScriptAST(pOptions, pFileName).filter(pDep =>
+    lDependencies = extractFromTypeScriptAST(
+      pOptions,
+      pFileName
+    ).filter((pDep) =>
       pOptions.moduleSystems.some(
-        pModuleSystem => pModuleSystem === pDep.moduleSystem
+        (pModuleSystem) => pModuleSystem === pDep.moduleSystem
       )
     );
 
@@ -86,7 +89,7 @@ function matchesDoNotFollow(pResolved, pDoNotFollow) {
 }
 
 function addResolutionAttributes(pOptions, pFileName, pResolveOptions) {
-  return pDependency => {
+  return (pDependency) => {
     const lResolved = resolve(
       pDependency,
       pOptions.baseDir,
@@ -102,7 +105,7 @@ function addResolutionAttributes(pOptions, pFileName, pResolveOptions) {
       ...lResolved,
       ...pDependency,
       followable: lResolved.followable && !lMatchesDoNotFollow,
-      matchesDoNotFollow: lMatchesDoNotFollow
+      matchesDoNotFollow: lMatchesDoNotFollow,
     };
   };
 }
@@ -159,7 +162,7 @@ module.exports = (pFileName, pOptions, pResolveOptions, pTSConfig) => {
       .sort(compareDeps)
       .map(addResolutionAttributes(pOptions, pFileName, pResolveOptions))
       .filter(
-        pDep =>
+        (pDep) =>
           (!_get(pOptions, "exclude.path") ||
             !matchesPattern(pDep.resolved, pOptions.exclude.path)) &&
           (!pOptions.includeOnly ||

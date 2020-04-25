@@ -18,7 +18,7 @@ function normalizeRule(pRule) {
   return {
     ...pRule,
     severity: normalizeSeverity(pRule.severity),
-    name: normalizeName(pRule.name)
+    name: normalizeName(pRule.name),
   };
 }
 
@@ -31,16 +31,16 @@ function normalizeRule(pRule) {
  * @param  {object} pRuleSet [description]
  * @return {object}          [description]
  */
-module.exports = pRuleSet => {
+module.exports = (pRuleSet) => {
   if (Object.prototype.hasOwnProperty.call(pRuleSet, "allowed")) {
     pRuleSet.allowedSeverity = normalizeSeverity(pRuleSet.allowedSeverity);
     if (pRuleSet.allowedSeverity === "ignore") {
       Reflect.deleteProperty(pRuleSet, "allowed");
       Reflect.deleteProperty(pRuleSet, "allowedSeverity");
     } else {
-      pRuleSet.allowed = pRuleSet.allowed.map(pRule => ({
+      pRuleSet.allowed = pRuleSet.allowed.map((pRule) => ({
         ...pRule,
-        name: "not-in-allowed"
+        name: "not-in-allowed",
       }));
     }
   }
@@ -48,7 +48,7 @@ module.exports = pRuleSet => {
   if (Object.prototype.hasOwnProperty.call(pRuleSet, "forbidden")) {
     pRuleSet.forbidden = pRuleSet.forbidden
       .map(normalizeRule)
-      .filter(pRule => pRule.severity !== "ignore");
+      .filter((pRule) => pRule.severity !== "ignore");
   }
 
   return pRuleSet;

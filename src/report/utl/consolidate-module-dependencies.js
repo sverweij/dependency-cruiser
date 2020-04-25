@@ -14,20 +14,20 @@ function mergeDependency(pLeftDependency, pRightDependency) {
     rules: pLeftDependency.rules
       .concat(_get(pRightDependency, "rules", []))
       .sort(compareRules),
-    valid: pLeftDependency.valid && pRightDependency.valid
+    valid: pLeftDependency.valid && pRightDependency.valid,
   };
 }
 
 function mergeDependencies(pResolvedName, pDependencies) {
   return pDependencies
-    .filter(pDependency => pDependency.resolved === pResolvedName)
+    .filter((pDependency) => pDependency.resolved === pResolvedName)
     .reduce(
       (pAllDependencies, pCurrentDependency) =>
         mergeDependency(pAllDependencies, pCurrentDependency),
       {
         dependencyTypes: [],
         rules: [],
-        valid: true
+        valid: true,
       }
     );
 }
@@ -41,14 +41,14 @@ function consolidateDependencies(pDependencies) {
       mergeDependencies(lDependencies[0].resolved, lDependencies)
     );
     lDependencies = _reject(lDependencies, {
-      resolved: lDependencies[0].resolved
+      resolved: lDependencies[0].resolved,
     });
   }
 
   return lReturnValue;
 }
 
-module.exports = pModule => ({
+module.exports = (pModule) => ({
   ...pModule,
-  dependencies: consolidateDependencies(pModule.dependencies)
+  dependencies: consolidateDependencies(pModule.dependencies),
 });

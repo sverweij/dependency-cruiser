@@ -48,5 +48,5 @@ module.exports = {
   cruise,
   format,
   allExtensions: meta.allExtensions,
-  getAvailableTranspilers: meta.getAvailableTranspilers
+  getAvailableTranspilers: meta.getAvailableTranspilers,
 };

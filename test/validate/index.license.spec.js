@@ -22,7 +22,7 @@ describe("validate/index - license", () => {
         { source: "something" },
         {
           resolved: "src/aap/speeltuigen/autoband.ts",
-          license: "Monkey-PL"
+          license: "Monkey-PL",
         }
       )
     ).to.deep.equal({ valid: true });
@@ -36,12 +36,12 @@ describe("validate/index - license", () => {
         { source: "something" },
         {
           resolved: "src/aap/speeltuigen/autoband.ts",
-          license: "SomePL-3.1"
+          license: "SomePL-3.1",
         }
       )
     ).to.deep.equal({
       valid: false,
-      rules: [{ name: "no-somepl-license", severity: "warn" }]
+      rules: [{ name: "no-somepl-license", severity: "warn" }],
     });
   });
 });
@@ -66,7 +66,7 @@ describe("validate/index - licenseNot", () => {
         { source: "something" },
         {
           resolved: "src/aap/speeltuigen/autoband.ts",
-          license: "SomePL-3.1"
+          license: "SomePL-3.1",
         }
       )
     ).to.deep.equal({ valid: true });
@@ -80,12 +80,12 @@ describe("validate/index - licenseNot", () => {
         { source: "something" },
         {
           resolved: "src/aap/speeltuigen/autoband.ts",
-          license: "Monkey-PL"
+          license: "Monkey-PL",
         }
       )
     ).to.deep.equal({
       valid: false,
-      rules: [{ name: "only-somepl-license", severity: "warn" }]
+      rules: [{ name: "only-somepl-license", severity: "warn" }],
     });
   });
 });

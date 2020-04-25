@@ -1,4 +1,4 @@
 module.exports = {
   isAvailable: () => true,
-  transpile: pSource => pSource
+  transpile: (pSource) => pSource,
 };

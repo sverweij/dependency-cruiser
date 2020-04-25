@@ -17,15 +17,15 @@ function transformJSONtoFile(pInputFileName, pOutputFileName, pFunction) {
 
 function regenerateReportFixtures(pDirectory, pFunction, pTargetExtension) {
   fs.readdirSync(pDirectory)
-    .filter(pFileName => pFileName.endsWith(".json"))
-    .map(pFileName => ({
+    .filter((pFileName) => pFileName.endsWith(".json"))
+    .map((pFileName) => ({
       inputFileName: path.join(pDirectory, pFileName),
       outputFileName: path.join(
         pDirectory,
         pFileName.replace(/\.json$/g, pTargetExtension)
-      )
+      ),
     }))
-    .forEach(pPair => {
+    .forEach((pPair) => {
       transformJSONtoFile(pPair.inputFileName, pPair.outputFileName, pFunction);
     });
 }

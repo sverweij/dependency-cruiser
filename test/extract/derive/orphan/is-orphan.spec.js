@@ -25,9 +25,9 @@ describe("extract/derive/orphan/isOrphan", () => {
               dependencyTypes: ["local"],
               module: "./snak.js",
               moduleSystem: "cjs",
-              matchesDoNotFollow: false
-            }
-          ]
+              matchesDoNotFollow: false,
+            },
+          ],
         },
         TWO_MODULES_FIXTURE
       )
@@ -39,7 +39,7 @@ describe("extract/derive/orphan/isOrphan", () => {
       isOrphan(
         {
           source: "snak.js",
-          dependencies: []
+          dependencies: [],
         },
         TWO_MODULES_FIXTURE
       )

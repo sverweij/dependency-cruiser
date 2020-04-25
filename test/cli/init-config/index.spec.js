@@ -100,7 +100,7 @@ describe("cli/init-config/index", () => {
       expect(lResult).to.not.haveOwnProperty("extends");
       expect(lResult.options).to.haveOwnProperty("tsConfig");
       expect(lResult.options.tsConfig).to.deep.equal({
-        fileName: "./tsconfig.json"
+        fileName: "./tsconfig.json",
       });
     } finally {
       Reflect.deleteProperty(
@@ -126,7 +126,7 @@ describe("cli/init-config/index", () => {
       expect(lResult).to.not.haveOwnProperty("extends");
       expect(lResult.options).to.haveOwnProperty("webpackConfig");
       expect(lResult.options.webpackConfig).to.deep.equal({
-        fileName: "./webpack.config.js"
+        fileName: "./webpack.config.js",
       });
     } finally {
       Reflect.deleteProperty(

@@ -25,7 +25,7 @@ describe("main.cruise - type only module references", () => {
     const lResult = main.cruise(
       ["src"],
       {
-        tsPreCompilationDeps: true
+        tsPreCompilationDeps: true,
       },
       { bustTheCache: true }
     );
@@ -40,7 +40,7 @@ describe("main.cruise - type only module references", () => {
     const lResult = main.cruise(
       ["src"],
       {
-        tsPreCompilationDeps: false
+        tsPreCompilationDeps: false,
       },
       { bustTheCache: true }
     );

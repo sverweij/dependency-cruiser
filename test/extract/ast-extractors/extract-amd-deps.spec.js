@@ -27,14 +27,14 @@ describe("ast-extractors/extract-AMD-deps", () => {
         module: "./root_one",
         moduleSystem: "amd",
         dynamic: false,
-        exoticallyRequired: false
+        exoticallyRequired: false,
       },
       {
         module: "./root_two",
         moduleSystem: "amd",
         dynamic: false,
-        exoticallyRequired: false
-      }
+        exoticallyRequired: false,
+      },
     ]);
   });
 
@@ -51,14 +51,14 @@ describe("ast-extractors/extract-AMD-deps", () => {
         module: "./one-with-require",
         moduleSystem: "amd",
         dynamic: false,
-        exoticallyRequired: false
+        exoticallyRequired: false,
       },
       {
         module: "./two-with-require",
         moduleSystem: "amd",
         dynamic: false,
-        exoticallyRequired: false
-      }
+        exoticallyRequired: false,
+      },
     ]);
   });
 
@@ -76,15 +76,15 @@ describe("ast-extractors/extract-AMD-deps", () => {
         moduleSystem: "amd",
         dynamic: false,
         exoticRequire: "want",
-        exoticallyRequired: true
+        exoticallyRequired: true,
       },
       {
         module: "./two-with-want",
         moduleSystem: "amd",
         dynamic: false,
         exoticRequire: "want",
-        exoticallyRequired: true
-      }
+        exoticallyRequired: true,
+      },
     ]);
   });
 });

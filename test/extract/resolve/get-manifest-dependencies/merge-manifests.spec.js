@@ -4,58 +4,58 @@ const mergePackages = require("../../../../src/extract/resolve/get-manifest-depe
 const INPUT = {
   description: "testington",
   dependencies: {
-    slodash: "0.4.2"
+    slodash: "0.4.2",
   },
   optionalDependencies: {
     hidash: "1.2.3",
-    midash: "4.3.2"
+    midash: "4.3.2",
   },
   devDependencies: {
-    nodash: "6.6.6"
+    nodash: "6.6.6",
   },
-  bundledDependencies: ["nodash", "slodash"]
+  bundledDependencies: ["nodash", "slodash"],
 };
 const FIXTURE = {
   dependencies: {
-    slodash: "0.4.2"
+    slodash: "0.4.2",
   },
   optionalDependencies: {
     hidash: "1.2.3",
-    midash: "4.3.2"
+    midash: "4.3.2",
   },
   devDependencies: {
-    nodash: "6.6.6"
+    nodash: "6.6.6",
   },
-  bundledDependencies: ["nodash", "slodash"]
+  bundledDependencies: ["nodash", "slodash"],
 };
 
 const INPUT_FURTHER = {
   peerDependencies: {
-    peerdash: "8.8.8"
+    peerdash: "8.8.8",
   },
   dependencies: {
     slodash: "1.2.3",
-    furtherdash: "0.6.9"
+    furtherdash: "0.6.9",
   },
-  bundledDependencies: ["furtherdash", "slodash"]
+  bundledDependencies: ["furtherdash", "slodash"],
 };
 
 const FIXTURE_MERGED = {
   dependencies: {
     slodash: "0.4.2",
-    furtherdash: "0.6.9"
+    furtherdash: "0.6.9",
   },
   optionalDependencies: {
     hidash: "1.2.3",
-    midash: "4.3.2"
+    midash: "4.3.2",
   },
   devDependencies: {
-    nodash: "6.6.6"
+    nodash: "6.6.6",
   },
   peerDependencies: {
-    peerdash: "8.8.8"
+    peerdash: "8.8.8",
   },
-  bundledDependencies: ["nodash", "slodash", "furtherdash"]
+  bundledDependencies: ["nodash", "slodash", "furtherdash"],
 };
 
 describe("extract/resolve/get-manifest-dependencies/merge-manifests", () => {
@@ -83,14 +83,14 @@ describe("extract/resolve/get-manifest-dependencies/merge-manifests", () => {
     expect(
       mergePackages(
         {
-          bundleDependencies: ["foo", "bar"]
+          bundleDependencies: ["foo", "bar"],
         },
         {
-          bundledDependencies: ["bar", "baz", "qux"]
+          bundledDependencies: ["bar", "baz", "qux"],
         }
       )
     ).to.deep.equal({
-      bundledDependencies: ["foo", "bar", "baz", "qux"]
+      bundledDependencies: ["foo", "bar", "baz", "qux"],
     });
   });
 });

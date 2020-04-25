@@ -14,11 +14,11 @@ module.exports = {
           type: "string",
           description:
             "The (short, eslint style) name of the violated rule. Typically something " +
-            "like 'no-core-punycode' or 'no-outside-deps'."
+            "like 'no-core-punycode' or 'no-outside-deps'.",
         },
-        severity: { $ref: "#/definitions/SeverityType" }
-      }
+        severity: { $ref: "#/definitions/SeverityType" },
+      },
     },
-    ...severityType.definitions
-  }
+    ...severityType.definitions,
+  },
 };

@@ -25,7 +25,7 @@ describe("extract/resolve/index", () => {
       resolve(
         {
           module: "./hots",
-          moduleSystem: "es6"
+          moduleSystem: "es6",
         },
         path.join(__dirname, "fixtures"),
         path.join(__dirname, "fixtures", "resolve"),
@@ -36,7 +36,7 @@ describe("extract/resolve/index", () => {
       couldNotResolve: false,
       dependencyTypes: ["local"],
       followable: true,
-      resolved: "resolve/hots.js"
+      resolved: "resolve/hots.js",
     });
   });
 
@@ -45,7 +45,7 @@ describe("extract/resolve/index", () => {
       resolve(
         {
           module: "path",
-          moduleSystem: "es6"
+          moduleSystem: "es6",
         },
         path.join(__dirname, "fixtures"),
         path.join(__dirname, "fixtures", "resolve"),
@@ -56,7 +56,7 @@ describe("extract/resolve/index", () => {
       couldNotResolve: false,
       dependencyTypes: ["core"],
       followable: false,
-      resolved: "path"
+      resolved: "path",
     });
   });
 
@@ -65,12 +65,12 @@ describe("extract/resolve/index", () => {
       resolve(
         {
           module: "./doesnotexist",
-          moduleSystem: "es6"
+          moduleSystem: "es6",
         },
         path.join(__dirname, "fixtures"),
         path.join(__dirname, "fixtures", "followability"),
         {
-          bustTheCache: true
+          bustTheCache: true,
         }
       )
     ).to.deep.equal({
@@ -78,7 +78,7 @@ describe("extract/resolve/index", () => {
       couldNotResolve: true,
       dependencyTypes: ["unknown"],
       followable: false,
-      resolved: "./doesnotexist"
+      resolved: "./doesnotexist",
     });
   });
 
@@ -87,7 +87,7 @@ describe("extract/resolve/index", () => {
       resolve(
         {
           module: "./something.json",
-          moduleSystem: "es6"
+          moduleSystem: "es6",
         },
         path.join(__dirname, "fixtures"),
         path.join(__dirname, "fixtures", "followability"),
@@ -98,7 +98,7 @@ describe("extract/resolve/index", () => {
       couldNotResolve: false,
       dependencyTypes: ["local"],
       followable: false,
-      resolved: "followability/something.json"
+      resolved: "followability/something.json",
     });
   });
 
@@ -107,14 +107,14 @@ describe("extract/resolve/index", () => {
       resolve(
         {
           module: "./something.json",
-          moduleSystem: "es6"
+          moduleSystem: "es6",
         },
         path.join(__dirname, "fixtures"),
         path.join(__dirname, "fixtures", "followability"),
         normalizeResolveOptions(
           {
             extensions: [".js", ".json"],
-            bustTheCache: true
+            bustTheCache: true,
           },
           {}
         )
@@ -124,7 +124,7 @@ describe("extract/resolve/index", () => {
       couldNotResolve: false,
       dependencyTypes: ["local"],
       followable: false,
-      resolved: "followability/something.json"
+      resolved: "followability/something.json",
     });
   });
 
@@ -133,14 +133,14 @@ describe("extract/resolve/index", () => {
       resolve(
         {
           module: "./something.scss",
-          moduleSystem: "es6"
+          moduleSystem: "es6",
         },
         path.join(__dirname, "fixtures"),
         path.join(__dirname, "fixtures", "followability"),
         normalizeResolveOptions(
           {
             extensions: [".js", ".json", ".scss"],
-            bustTheCache: true
+            bustTheCache: true,
           },
           {}
         )
@@ -150,7 +150,7 @@ describe("extract/resolve/index", () => {
       couldNotResolve: false,
       dependencyTypes: ["local"],
       followable: false,
-      resolved: "followability/something.scss"
+      resolved: "followability/something.scss",
     });
   });
 
@@ -159,7 +159,7 @@ describe("extract/resolve/index", () => {
       resolve(
         {
           module: "hoepla/hoi",
-          moduleSystem: "es6"
+          moduleSystem: "es6",
         },
         path.join(__dirname, "fixtures"),
         path.join(__dirname, "fixtures", "resolve"),
@@ -170,9 +170,9 @@ describe("extract/resolve/index", () => {
                 __dirname,
                 "fixtures",
                 "i-got-aliased-to-hoepla"
-              )
+              ),
             },
-            bustTheCache: true
+            bustTheCache: true,
           },
           {}
         )
@@ -182,7 +182,7 @@ describe("extract/resolve/index", () => {
       couldNotResolve: false,
       dependencyTypes: ["aliased"],
       followable: true,
-      resolved: "i-got-aliased-to-hoepla/hoi/index.js"
+      resolved: "i-got-aliased-to-hoepla/hoi/index.js",
     });
   });
 
@@ -191,7 +191,7 @@ describe("extract/resolve/index", () => {
       resolve(
         {
           module: "shared",
-          moduleSystem: "es6"
+          moduleSystem: "es6",
         },
         path.join(__dirname, "fixtures"),
         path.join(__dirname, "fixtures", "resolve"),
@@ -204,9 +204,9 @@ describe("extract/resolve/index", () => {
                 "fixtures",
                 "localmodulesfix",
                 "localmoduleshere"
-              )
+              ),
             ],
-            bustTheCache: true
+            bustTheCache: true,
           },
           {}
         )
@@ -216,7 +216,7 @@ describe("extract/resolve/index", () => {
       couldNotResolve: false,
       dependencyTypes: ["localmodule"],
       followable: true,
-      resolved: "localmodulesfix/localmoduleshere/shared/index.js"
+      resolved: "localmodulesfix/localmoduleshere/shared/index.js",
     });
   });
 
@@ -225,14 +225,14 @@ describe("extract/resolve/index", () => {
       resolve(
         {
           module: "shared",
-          moduleSystem: "es6"
+          moduleSystem: "es6",
         },
         path.join(__dirname, "fixtures"),
         path.join(__dirname, "fixtures", "ts-config-with-path"),
         normalizeResolveOptions(
           {
             tsConfig: TSCONFIG,
-            bustTheCache: true
+            bustTheCache: true,
           },
           {},
           PARSED_TSCONFIG
@@ -243,7 +243,7 @@ describe("extract/resolve/index", () => {
       couldNotResolve: false,
       dependencyTypes: ["aliased"],
       followable: true,
-      resolved: "ts-config-with-path/src/shared/index.ts"
+      resolved: "ts-config-with-path/src/shared/index.ts",
     });
   });
 
@@ -252,14 +252,14 @@ describe("extract/resolve/index", () => {
       resolve(
         {
           module: "gewoon/wood/tree",
-          moduleSystem: "es6"
+          moduleSystem: "es6",
         },
         path.join(__dirname, "fixtures"),
         path.join(__dirname, "fixtures", "ts-config-with-path"),
         normalizeResolveOptions(
           {
             tsConfig: TSCONFIG,
-            bustTheCache: true
+            bustTheCache: true,
           },
           {},
           PARSED_TSCONFIG
@@ -270,7 +270,7 @@ describe("extract/resolve/index", () => {
       couldNotResolve: false,
       dependencyTypes: ["aliased"],
       followable: true,
-      resolved: "ts-config-with-path/src/common/wood/tree.ts"
+      resolved: "ts-config-with-path/src/common/wood/tree.ts",
     });
   });
 
@@ -279,14 +279,14 @@ describe("extract/resolve/index", () => {
       resolve(
         {
           module: "daddayaddaya",
-          moduleSystem: "es6"
+          moduleSystem: "es6",
         },
         path.join(__dirname, "fixtures"),
         path.join(__dirname, "fixtures", "ts-config-with-path"),
         normalizeResolveOptions(
           {
             tsConfig: TSCONFIG,
-            bustTheCache: true
+            bustTheCache: true,
           },
           {},
           PARSED_TSCONFIG
@@ -297,7 +297,7 @@ describe("extract/resolve/index", () => {
       couldNotResolve: false,
       dependencyTypes: ["aliased"],
       followable: true,
-      resolved: "ts-config-with-path/src/typos/daddayaddaya.ts"
+      resolved: "ts-config-with-path/src/typos/daddayaddaya.ts",
     });
   });
 
@@ -306,7 +306,7 @@ describe("extract/resolve/index", () => {
       resolve(
         {
           module: "things/dts-before-ts",
-          moduleSystem: "es6"
+          moduleSystem: "es6",
         },
         path.join(__dirname, "fixtures"),
         path.join(
@@ -317,7 +317,7 @@ describe("extract/resolve/index", () => {
         normalizeResolveOptions(
           {
             tsConfig: TSCONFIG_RESOLUTIONS,
-            bustTheCache: true
+            bustTheCache: true,
           },
           {},
           PARSED_TSCONFIG_RESOLUTIONS
@@ -329,7 +329,7 @@ describe("extract/resolve/index", () => {
       dependencyTypes: ["aliased"],
       followable: true,
       resolved:
-        "ts-config-with-path-correct-resolution-prio/src/aliassed/dts-before-ts.ts"
+        "ts-config-with-path-correct-resolution-prio/src/aliassed/dts-before-ts.ts",
     });
   });
 
@@ -338,7 +338,7 @@ describe("extract/resolve/index", () => {
       resolve(
         {
           module: "things/js-before-ts",
-          moduleSystem: "es6"
+          moduleSystem: "es6",
         },
         path.join(__dirname, "fixtures"),
         path.join(
@@ -349,7 +349,7 @@ describe("extract/resolve/index", () => {
         normalizeResolveOptions(
           {
             tsConfig: TSCONFIG_RESOLUTIONS,
-            bustTheCache: true
+            bustTheCache: true,
           },
           {},
           PARSED_TSCONFIG_RESOLUTIONS
@@ -361,7 +361,7 @@ describe("extract/resolve/index", () => {
       dependencyTypes: ["aliased"],
       followable: true,
       resolved:
-        "ts-config-with-path-correct-resolution-prio/src/aliassed/js-before-ts.js"
+        "ts-config-with-path-correct-resolution-prio/src/aliassed/js-before-ts.js",
     });
   });
 
@@ -370,13 +370,13 @@ describe("extract/resolve/index", () => {
       resolve(
         {
           module: "shared",
-          moduleSystem: "es6"
+          moduleSystem: "es6",
         },
         path.join(__dirname, "fixtures"),
         path.join(__dirname, "fixtures", "ts-config-with-path"),
         normalizeResolveOptions(
           {
-            bustTheCache: true
+            bustTheCache: true,
           },
           {}
         )
@@ -386,7 +386,7 @@ describe("extract/resolve/index", () => {
       couldNotResolve: true,
       dependencyTypes: ["unknown"],
       followable: false,
-      resolved: "shared"
+      resolved: "shared",
     });
   });
 
@@ -395,7 +395,7 @@ describe("extract/resolve/index", () => {
       resolve(
         {
           module: "./hots.js?blah",
-          moduleSystem: "es6"
+          moduleSystem: "es6",
         },
         path.join(__dirname, "fixtures"),
         path.join(__dirname, "fixtures", "resolve"),
@@ -406,7 +406,7 @@ describe("extract/resolve/index", () => {
       couldNotResolve: false,
       dependencyTypes: ["local"],
       followable: true,
-      resolved: "resolve/hots.js"
+      resolved: "resolve/hots.js",
     });
   });
 });

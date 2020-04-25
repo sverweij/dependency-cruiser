@@ -34,7 +34,7 @@ const META_SYNTACTIC_VARIABLES = [
   "wibble",
   "wobble",
   "wubble",
-  "flob"
+  "flob",
 ];
 
 describe("report/anonymous", () => {

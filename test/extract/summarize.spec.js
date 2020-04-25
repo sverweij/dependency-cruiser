@@ -13,7 +13,7 @@ describe("extract/summarize - summarize extraction", () => {
       warn: 0,
       error: 0,
       totalDependenciesCruised: 0,
-      totalCruised: 0
+      totalCruised: 0,
     });
   });
 
@@ -22,8 +22,8 @@ describe("extract/summarize - summarize extraction", () => {
       {
         source: "violationless.js",
         dependencies: [],
-        valid: true
-      }
+        valid: true,
+      },
     ]);
 
     expect(lResult).to.deep.equal({
@@ -32,7 +32,7 @@ describe("extract/summarize - summarize extraction", () => {
       warn: 0,
       error: 0,
       totalDependenciesCruised: 0,
-      totalCruised: 1
+      totalCruised: 1,
     });
   });
 
@@ -45,10 +45,10 @@ describe("extract/summarize - summarize extraction", () => {
         rules: [
           {
             name: "a-rule",
-            severity: "warn"
-          }
-        ]
-      }
+            severity: "warn",
+          },
+        ],
+      },
     ]);
 
     expect(lResult).to.deep.equal({
@@ -58,15 +58,15 @@ describe("extract/summarize - summarize extraction", () => {
           to: "violation.js",
           rule: {
             name: "a-rule",
-            severity: "warn"
-          }
-        }
+            severity: "warn",
+          },
+        },
       ],
       info: 0,
       warn: 1,
       error: 0,
       totalDependenciesCruised: 0,
-      totalCruised: 1
+      totalCruised: 1,
     });
   });
 
@@ -77,8 +77,8 @@ describe("extract/summarize - summarize extraction", () => {
           source: "violation.js",
           dependencies: [
             {
-              resolved: "via.js"
-            }
+              resolved: "via.js",
+            },
           ],
           reaches: [
             {
@@ -86,23 +86,23 @@ describe("extract/summarize - summarize extraction", () => {
               modules: [
                 {
                   source: "dont-touch-this.js",
-                  via: ["via", "romana"]
+                  via: ["via", "romana"],
                 },
                 {
                   source: "mc-hammer.js",
-                  via: ["directly"]
-                }
-              ]
-            }
+                  via: ["directly"],
+                },
+              ],
+            },
           ],
           valid: false,
           rules: [
             {
               name: "a-rule",
-              severity: "warn"
-            }
-          ]
-        }
+              severity: "warn",
+            },
+          ],
+        },
       ],
       { forbidden: [{ name: "a-rule", from: {}, to: { reachable: true } }] }
     );
@@ -114,25 +114,25 @@ describe("extract/summarize - summarize extraction", () => {
           to: "dont-touch-this.js",
           rule: {
             name: "a-rule",
-            severity: "warn"
+            severity: "warn",
           },
-          via: ["via", "romana"]
+          via: ["via", "romana"],
         },
         {
           from: "violation.js",
           to: "mc-hammer.js",
           rule: {
             name: "a-rule",
-            severity: "warn"
+            severity: "warn",
           },
-          via: ["directly"]
-        }
+          via: ["directly"],
+        },
       ],
       info: 0,
       warn: 2,
       error: 0,
       totalDependenciesCruised: 1,
-      totalCruised: 1
+      totalCruised: 1,
     });
   });
 
@@ -151,10 +151,10 @@ describe("extract/summarize - summarize extraction", () => {
             followable: false,
             matchesDoNotFollow: false,
             couldNotResolve: true,
-            valid: true
-          }
+            valid: true,
+          },
         ],
-        valid: true
+        valid: true,
       },
       {
         source: "bolderdash",
@@ -164,8 +164,8 @@ describe("extract/summarize - summarize extraction", () => {
         couldNotResolve: true,
         dependencyTypes: ["unknown"],
         dependencies: [],
-        valid: true
-      }
+        valid: true,
+      },
     ]);
 
     expect(lResult).to.deep.equal({
@@ -174,7 +174,7 @@ describe("extract/summarize - summarize extraction", () => {
       warn: 0,
       error: 0,
       totalDependenciesCruised: 1,
-      totalCruised: 2
+      totalCruised: 2,
     });
   });
 
@@ -197,18 +197,18 @@ describe("extract/summarize - summarize extraction", () => {
             rules: [
               {
                 name: "a-dependency-rule",
-                severity: "error"
-              }
-            ]
-          }
+                severity: "error",
+              },
+            ],
+          },
         ],
         valid: false,
         rules: [
           {
             name: "a-module-rule",
-            severity: "info"
-          }
-        ]
+            severity: "info",
+          },
+        ],
       },
       {
         source: "bolderdash",
@@ -218,8 +218,8 @@ describe("extract/summarize - summarize extraction", () => {
         couldNotResolve: true,
         dependencyTypes: ["unknown"],
         dependencies: [],
-        valid: true
-      }
+        valid: true,
+      },
     ]);
 
     // also: sorted on from, to
@@ -230,23 +230,23 @@ describe("extract/summarize - summarize extraction", () => {
           to: "bolderdash",
           rule: {
             name: "a-dependency-rule",
-            severity: "error"
-          }
+            severity: "error",
+          },
         },
         {
           from: "violation.js",
           to: "violation.js",
           rule: {
             name: "a-module-rule",
-            severity: "info"
-          }
-        }
+            severity: "info",
+          },
+        },
       ],
       info: 1,
       warn: 0,
       error: 1,
       totalDependenciesCruised: 1,
-      totalCruised: 2
+      totalCruised: 2,
     });
   });
 });

@@ -5,7 +5,7 @@ function compareSeverity(pFirst, pSecond) {
   const SEVERITY2INT = {
     error: 1,
     warn: 2,
-    info: 3
+    info: 3,
   };
 
   return SEVERITY2INT[pFirst.severity] - SEVERITY2INT[pSecond.severity];
@@ -25,7 +25,7 @@ function validateAgainstAllowedRules(pRuleSet, pMatchModule, pFrom, pTo) {
     ) {
       lFoundRuleViolations.push({
         severity: pRuleSet.allowedSeverity,
-        name: "not-in-allowed"
+        name: "not-in-allowed",
       });
     }
   }
@@ -38,9 +38,9 @@ function validateAgainstForbiddenRules(pRuleSet, pMatchModule, pFrom, pTo) {
   return pRuleSet.forbidden
     .filter(pMatchModule.isInteresting)
     .filter(pMatchModule.match(pFrom, pTo))
-    .map(pMatchedRule => ({
+    .map((pMatchedRule) => ({
       severity: pMatchedRule.severity,
-      name: pMatchedRule.name
+      name: pMatchedRule.name,
     }));
 }
 
@@ -96,5 +96,5 @@ module.exports = {
       return { valid: true };
     }
     return validateAgainstRules(pRuleSet, pFrom, pTo, matchDependencyRule);
-  }
+  },
 };

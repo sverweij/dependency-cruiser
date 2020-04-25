@@ -35,7 +35,7 @@ describe("extract/resolve/get-manifest-dependencies - classic strategy", () => {
       readPackageDeps(path.join(FIXTUREDIR, "minimal-package-json"))
     ).to.deep.equal({
       name: "the-absolute-bare-minimum-package-json",
-      version: "481.0.0"
+      version: "481.0.0",
     });
   });
 
@@ -74,8 +74,8 @@ describe("extract/resolve/get-manifest-dependencies - combined dependencies stra
     );
     expect(readPackageDeps(process.cwd(), process.cwd(), true)).to.deep.equal({
       dependencies: {
-        modash: "11.11.11"
-      }
+        modash: "11.11.11",
+      },
     });
   });
 
@@ -93,13 +93,13 @@ describe("extract/resolve/get-manifest-dependencies - combined dependencies stra
       dependencies: {
         "base-only": "1.0.0",
         "base-and-subthing": "1.2.3-subthing",
-        "subthing-only": "11.11.11"
+        "subthing-only": "11.11.11",
       },
       devDependencies: {
         esdoorn: "4.2.1",
-        snorkel: "1.2.1"
+        snorkel: "1.2.1",
       },
-      bundledDependencies: ["subthing-only", "base-and-subthing", "base-only"]
+      bundledDependencies: ["subthing-only", "base-and-subthing", "base-only"],
     });
   });
 
@@ -123,13 +123,13 @@ describe("extract/resolve/get-manifest-dependencies - combined dependencies stra
       dependencies: {
         "base-only": "1.0.0",
         "base-and-subthing": "1.2.3-subthing",
-        "subthing-only": "11.11.11"
+        "subthing-only": "11.11.11",
       },
       devDependencies: {
         esdoorn: "4.2.1",
-        snorkel: "1.2.1"
+        snorkel: "1.2.1",
       },
-      bundledDependencies: ["subthing-only", "base-and-subthing", "base-only"]
+      bundledDependencies: ["subthing-only", "base-and-subthing", "base-only"],
     });
   });
 

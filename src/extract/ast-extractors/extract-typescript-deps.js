@@ -23,15 +23,15 @@ const typescript = tryRequire(
 function extractImportsAndExports(pAST) {
   return pAST.statements
     .filter(
-      pStatement =>
+      (pStatement) =>
         (typescript.SyntaxKind[pStatement.kind] === "ImportDeclaration" ||
           typescript.SyntaxKind[pStatement.kind] === "ExportDeclaration") &&
         Boolean(pStatement.moduleSpecifier)
     )
-    .map(pStatement => ({
+    .map((pStatement) => ({
       module: pStatement.moduleSpecifier.text,
       moduleSystem: "es6",
-      exoticallyRequired: false
+      exoticallyRequired: false,
     }));
 }
 
@@ -45,16 +45,16 @@ function extractImportsAndExports(pAST) {
 function extractImportEquals(pAST) {
   return pAST.statements
     .filter(
-      pStatement =>
+      (pStatement) =>
         typescript.SyntaxKind[pStatement.kind] === "ImportEqualsDeclaration" &&
         pStatement.moduleReference &&
         pStatement.moduleReference.expression &&
         pStatement.moduleReference.expression.text
     )
-    .map(pStatement => ({
+    .map((pStatement) => ({
       module: pStatement.moduleReference.expression.text,
       moduleSystem: "cjs",
-      exoticallyRequired: false
+      exoticallyRequired: false,
     }));
 }
 
@@ -67,23 +67,23 @@ function extractImportEquals(pAST) {
  */
 function extractTrippleSlashDirectives(pAST) {
   return pAST.referencedFiles
-    .map(pReference => ({
+    .map((pReference) => ({
       module: pReference.fileName,
       moduleSystem: "tsd",
-      exoticallyRequired: false
+      exoticallyRequired: false,
     }))
     .concat(
-      pAST.typeReferenceDirectives.map(pReference => ({
+      pAST.typeReferenceDirectives.map((pReference) => ({
         module: pReference.fileName,
         moduleSystem: "tsd",
-        exoticallyRequired: false
+        exoticallyRequired: false,
       }))
     )
     .concat(
-      pAST.amdDependencies.map(pReference => ({
+      pAST.amdDependencies.map((pReference) => ({
         module: pReference.path,
         moduleSystem: "tsd",
-        exoticallyRequired: false
+        exoticallyRequired: false,
       }))
     );
 }
@@ -167,24 +167,24 @@ function isTypeImport(pASTNode) {
   );
 }
 function walk(pResult, pExoticRequireStrings) {
-  return pASTNode => {
+  return (pASTNode) => {
     // require('a-string'), require(`a-template-literal`)
     if (isRequireCallExpression(pASTNode)) {
       pResult.push({
         module: pASTNode.arguments[0].text,
         moduleSystem: "cjs",
-        exoticallyRequired: false
+        exoticallyRequired: false,
       });
     }
 
     // const want = require; {lalala} = want('yudelyo'), window.require('elektron')
-    pExoticRequireStrings.forEach(pExoticRequireString => {
+    pExoticRequireStrings.forEach((pExoticRequireString) => {
       if (isExoticRequire(pASTNode, pExoticRequireString)) {
         pResult.push({
           module: pASTNode.arguments[0].text,
           moduleSystem: "cjs",
           exoticallyRequired: true,
-          exoticRequire: pExoticRequireString
+          exoticRequire: pExoticRequireString,
         });
       }
     });
@@ -195,7 +195,7 @@ function walk(pResult, pExoticRequireStrings) {
         module: pASTNode.arguments[0].text,
         moduleSystem: "es6",
         dynamic: true,
-        exoticallyRequired: false
+        exoticallyRequired: false,
       });
     }
 
@@ -205,7 +205,7 @@ function walk(pResult, pExoticRequireStrings) {
       pResult.push({
         module: pASTNode.argument.literal.text,
         moduleSystem: "es6",
-        exoticallyRequired: false
+        exoticallyRequired: false,
       });
     }
     typescript.forEachChild(pASTNode, walk(pResult, pExoticRequireStrings));
@@ -240,5 +240,5 @@ module.exports = (pTypeScriptAST, pExoticRequireStrings) =>
         .concat(
           extractNestedDependencies(pTypeScriptAST, pExoticRequireStrings)
         )
-        .map(pModule => ({ dynamic: false, ...pModule }))
+        .map((pModule) => ({ dynamic: false, ...pModule }))
     : [];
