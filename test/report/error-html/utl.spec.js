@@ -156,6 +156,19 @@ describe("report/error-html/utl", () => {
     expect(utl.determineTo(lInputViolation)).to.deep.equal(lExpectation);
   });
 
+  it("determineTo - via violation", () => {
+    const lInputViolation = {
+      via: ["thing/a", "b", "thingy/bingy/c", "a"],
+      from: "a",
+      to: "thing/a"
+    };
+
+    const lExpectation =
+      "thing/a<br/>thing/a &rightarrow;<br/>b &rightarrow;<br/>thingy/bingy/c &rightarrow;<br/>a";
+
+    expect(utl.determineTo(lInputViolation)).to.deep.equal(lExpectation);
+  });
+
   it("determineTo - dependency violation", () => {
     const lInputViolation = {
       from: "a",

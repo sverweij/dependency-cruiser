@@ -31,7 +31,7 @@
    - [`pathNot`](#pathnot)
    - [path specials](#path-specials)
    - [`orphan`](#orphans)
-   - [`reachable`](#reachable---detecting-dead-wood)
+   - [`reachable`](#reachable---detecting-dead-wood-and-transient-dependencies)
    - [`couldNotResolve`](#couldnotresolve)
    - [`circular`](#circular)
    - [`license` and `licenseNot`](#license-and-licensenot)
@@ -405,11 +405,16 @@ To detect orphan guys you can add e.g. this snippet to your
   dependency-cruiser will ignore the `to` part of these rules.
 - For similar reasons `orphan` is not allowed in the `to` part of rules.
 
-### `reachable` - detecting dead wood
+### `reachable` - detecting dead wood and transient dependencies
 
 `reachable` is a boolean indicating whether or not modules matching the `to` part
 of the rule are _reachable_ (either directly or via other moduels) from modules
-matching the `from` part of the rule. This can be useful for detecting dead wood.
+matching the `from` part of the rule. This can be useful for two use cases:
+
+- [detect dead wood](#detect-dead-wood-with-reachable)
+- [prevent modules from being reached via via](#prevent-modules-from-being-reached-via-via-with-reachable)
+
+#### detect dead wood with `reachable`
 
 For instance, in this dependency-graph several modules are not reachable from
 the root `index.js`. If `index.js` is the only (legal) entry to this package,
@@ -464,6 +469,31 @@ With this rule enabled, the unreachable rules jump out immediately. Both in the 
 ... and in the output of the `dot` one:
 
 <img width="533" alt="dependencies unreachable from src/index.js - reachable rule on" src="assets/reachable-deps-rule-on.png">
+
+#### Prevent modules from being reached via via with `reachable`
+
+You can use the same `reachable` attribute to find transient dependencies (fancy
+way to say _via via_). Let's say you have a bunch of javascript files that define
+static schema's. It's ok if they import stuff, but they should _never_ touch
+database implementation code (which happens to live in `src/lib/database`).
+
+With a rule like this in the `forbidden` section you can make sure that never
+happens:
+
+```json
+{
+  "name": "implementation-not-reachable-from-info-ts",
+  "comment": "Don't allow importing database implementation files for schema declaration files",
+  "severity": "error",
+  "from": {
+    "path": "\\.schema\\.ts$",
+  },
+  "to": {
+    "path": "^src/libs/database/",
+    "reachable": true,
+  },
+};
+```
 
 #### Usage notes
 

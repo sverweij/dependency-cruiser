@@ -6,7 +6,9 @@ const compare = require("./utl/compare");
 function cutNonTransgressions(pSourceEntry) {
   return {
     source: pSourceEntry.source,
-    dependencies: pSourceEntry.dependencies.filter(pDep => pDep.valid === false)
+    dependencies: pSourceEntry.dependencies.filter(
+      pDependency => pDependency.valid === false
+    )
   };
 }
 
@@ -22,6 +24,25 @@ function extractMetaData(pViolations) {
       info: 0
     }
   );
+}
+function toDependencyViolationSummary(pRule, pModule, pDependency, pRuleSet) {
+  let lReturnValue = {
+    from: pModule.source,
+    to: pDependency.resolved,
+    rule: pRule
+  };
+
+  if (
+    pDependency.cycle &&
+    _get(findRuleByName(pRuleSet, pRule.name), "to.circular")
+  ) {
+    lReturnValue = {
+      ...lReturnValue,
+      cycle: pDependency.cycle
+    };
+  }
+
+  return lReturnValue;
 }
 
 /**
@@ -47,48 +68,67 @@ function extractDependencyViolations(pModules, pRuleSet) {
       .map(cutNonTransgressions)
       .filter(pModule => pModule.dependencies.length > 0)
       .map(pModule =>
-        pModule.dependencies.map(pDep =>
-          pDep.rules.map(pRule => {
-            let lReturnValue = {
-              from: pModule.source,
-              to: pDep.resolved,
-              rule: pRule
-            };
-
-            if (
-              pDep.cycle &&
-              _get(findRuleByName(pRuleSet, pRule.name), "to.circular")
-            ) {
-              lReturnValue = {
-                ...lReturnValue,
-                cycle: pDep.cycle
-              };
-            }
-
-            return lReturnValue;
-          })
+        pModule.dependencies.map(pDependency =>
+          pDependency.rules.map(pRule =>
+            toDependencyViolationSummary(pRule, pModule, pDependency, pRuleSet)
+          )
         )
       )
   );
 }
 
-function extractModuleViolations(pModules) {
-  return _flattenDeep(
-    pModules
-      .filter(pModule => pModule.valid === false)
-      .map(pModule =>
-        pModule.rules.map(pRule => ({
-          from: pModule.source,
-          to: pModule.source,
-          rule: pRule
-        }))
+function toModuleViolationSummary(pRule, pModule, pRuleSet) {
+  let lReturnValue = [
+    { from: pModule.source, to: pModule.source, rule: pRule }
+  ];
+  if (
+    pModule.reaches &&
+    _get(findRuleByName(pRuleSet, pRule.name), "to.reachable")
+  ) {
+    lReturnValue = pModule.reaches
+      .filter(pReachable => pReachable.asDefinedInRule === pRule.name)
+      .reduce(
+        (pAll, pReachable) =>
+          pAll.concat(
+            pReachable.modules.map(pReachableModule => ({
+              to: pReachableModule.source,
+              via: pReachableModule.via
+            }))
+          ),
+        []
       )
-  );
+      .map(pToModule => ({
+        from: pModule.source,
+        to: pToModule.to,
+        rule: pRule,
+        via: pToModule.via
+      }));
+  }
+
+  return lReturnValue;
+}
+
+function extractModuleViolations(pModules, pRuleSet) {
+  return pModules
+    .filter(pModule => pModule.valid === false)
+    .reduce(
+      (pAllModules, pModule) =>
+        pAllModules.concat(
+          pModule.rules.reduce(
+            (pAllRules, pRule) =>
+              pAllRules.concat(
+                toModuleViolationSummary(pRule, pModule, pRuleSet)
+              ),
+            []
+          )
+        ),
+      []
+    );
 }
 
 module.exports = (pModules, pRuleSet) => {
   const lViolations = extractDependencyViolations(pModules, pRuleSet)
-    .concat(extractModuleViolations(pModules))
+    .concat(extractModuleViolations(pModules, pRuleSet))
     .sort(compare.violations);
 
   return {
@@ -101,3 +141,5 @@ module.exports = (pModules, pRuleSet) => {
     )
   };
 };
+
+module.exports.extractModuleViolations = extractModuleViolations;

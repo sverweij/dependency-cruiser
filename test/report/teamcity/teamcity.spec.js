@@ -5,6 +5,7 @@ const render = require("../../../src/report/teamcity");
 const okdeps = require("./mocks/everything-fine.json");
 const moduleErrs = require("./mocks/module-errors.json");
 const circulars = require("./mocks/circular-deps.json");
+const vias = require("./mocks/via-deps.json");
 
 function removePerSessionAttributes(pString) {
   return pString.replace(/ flowId='[^']+' timestamp='[^']+'/g, "");
@@ -48,5 +49,19 @@ describe("report/teamcity", () => {
     );
     // eslint-disable-next-line no-magic-numbers
     expect(lResult.exitCode).to.equal(3);
+  });
+
+  it("renders via transgressions", () => {
+    const lFixture = fs.readFileSync(
+      path.join(__dirname, "mocks", "via-deps-teamcity-format.txt"),
+      "utf8"
+    );
+    const lResult = render(vias);
+
+    expect(removePerSessionAttributes(lResult.output)).to.equal(
+      removePerSessionAttributes(lFixture)
+    );
+    // eslint-disable-next-line no-magic-numbers
+    expect(lResult.exitCode).to.equal(4);
   });
 });

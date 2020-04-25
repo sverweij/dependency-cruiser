@@ -6,7 +6,7 @@ describe("main/rule-set/normalize", () => {
     expect(normalize({})).to.deep.equal({});
   });
 
-  it("allowed: adds allowedSeverity when it wasn't filled out; does not add severity/ name to the rule", () => {
+  it("allowed: adds allowedSeverity when it wasn't filled out; adds the 'not-in-allowed' name to the rule", () => {
     expect(
       normalize({
         allowed: [
@@ -19,6 +19,7 @@ describe("main/rule-set/normalize", () => {
     ).to.deep.equal({
       allowed: [
         {
+          name: "not-in-allowed",
           from: ".+",
           to: ".+"
         }
@@ -27,7 +28,7 @@ describe("main/rule-set/normalize", () => {
     });
   });
 
-  it("allowed: leaves allowedSeverity alone when it wasn't filled; doesn't add severity/ name to the rule", () => {
+  it("allowed: leaves allowedSeverity alone when it wasn't filled; doesn't add severity, but does add name 'not-in-allowed' to the rule", () => {
     expect(
       normalize({
         allowed: [
@@ -41,6 +42,7 @@ describe("main/rule-set/normalize", () => {
     ).to.deep.equal({
       allowed: [
         {
+          name: "not-in-allowed",
           from: ".+",
           to: ".+"
         }

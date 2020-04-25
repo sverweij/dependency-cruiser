@@ -2,7 +2,7 @@ const _clone = require("lodash/clone");
 const _get = require("lodash/get");
 const anonymizePath = require("./anonymize-path");
 
-function anonymizeCycles(pPathArray, pWordList) {
+function anonymizePathArray(pPathArray, pWordList) {
   return (pPathArray || []).map(pPath => anonymizePath(pPath, pWordList));
 }
 
@@ -11,25 +11,53 @@ function anonymizeDependencies(pDependencies, pWordList) {
     ...pDependency,
     resolved: anonymizePath(pDependency.resolved, pWordList),
     module: anonymizePath(pDependency.module, pWordList),
-    cycle: anonymizeCycles(pDependency.cycle, pWordList)
+    cycle: anonymizePathArray(pDependency.cycle, pWordList)
+  }));
+}
+
+function anonymizeReachesModule(pWordList) {
+  return pModule => ({
+    ...pModule,
+    source: anonymizePath(pModule.source, pWordList),
+    via: anonymizePathArray(pModule.via, pWordList)
+  });
+}
+
+function anonymizeReaches(pReachesArray, pWordList) {
+  return pReachesArray.map(pReaches => ({
+    ...pReaches,
+    modules: pReaches.modules.map(anonymizeReachesModule(pWordList))
   }));
 }
 
 function anonymizeModules(pModules, pWordList) {
-  return pModules.map(pModule => ({
-    ...pModule,
-    dependencies: anonymizeDependencies(pModule.dependencies, pWordList),
-    source: anonymizePath(pModule.source, pWordList)
-  }));
+  return pModules.map(pModule => {
+    const lReturnValue = {
+      ...pModule,
+      dependencies: anonymizeDependencies(pModule.dependencies, pWordList),
+      source: anonymizePath(pModule.source, pWordList)
+    };
+    if (pModule.reaches) {
+      lReturnValue.reaches = anonymizeReaches(pModule.reaches, pWordList);
+    }
+
+    return lReturnValue;
+  });
 }
 
 function anonymizeViolations(pViolations, pWordList) {
-  return pViolations.map(pViolation => ({
-    ...pViolation,
-    from: anonymizePath(pViolation.from, pWordList),
-    to: anonymizePath(pViolation.to, pWordList),
-    cycle: anonymizeCycles(pViolation.cycle, pWordList)
-  }));
+  return pViolations.map(pViolation => {
+    const lReturnValue = {
+      ...pViolation,
+      from: anonymizePath(pViolation.from, pWordList),
+      to: anonymizePath(pViolation.to, pWordList),
+      cycle: anonymizePathArray(pViolation.cycle, pWordList)
+    };
+    if (pViolation.via) {
+      lReturnValue.via = anonymizePathArray(pViolation.via, pWordList);
+    }
+    return lReturnValue;
+  });
 }
 
 function anonymize(pResults, pWordList) {

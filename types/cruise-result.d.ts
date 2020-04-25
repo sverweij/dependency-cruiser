@@ -65,6 +65,11 @@ export interface IModule {
    */
   reachable?: IReachable[];
   /**
+   * An array of objects that tell which other modules it reaches,
+   * and that falls within the definition of the passed rule.
+   */
+  reaches?: IReaches[];
+  /**
    * an array of rules violated by this module - left out if the module is valid
    */
   rules?: IRuleSummary[];
@@ -188,6 +193,28 @@ export interface IReachable {
   value: boolean;
 }
 
+export interface IReachesModule {
+  /**
+   * The (resolved) file name of the module, e.g. 'src/main/index.js'
+   */
+  source: string;
+  /**
+   * The path along wich the 'to' module is reachable from this one.
+   */
+  via: string[];
+}
+
+export interface IReaches {
+  /**
+   * The name of the rule where the reachability was defined
+   */
+  asDefinedInRule: string;
+  /**
+   * An array of modules that is (transitively) reachable from this module.
+   */
+  modules: IReachesModule[];
+}
+
 /**
  * Data summarizing the found dependencies
  */
@@ -288,7 +315,11 @@ export interface IViolation {
    */
   to: string;
   /**
-   * The circular path if the violation was about circularity
+   * The circular path if the violation is about circularity
    */
   cycle?: string[];
+  /**
+   * The path from the from to the to if the violation is transitive
+   */
+  via?: string[];
 }

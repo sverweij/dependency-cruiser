@@ -82,6 +82,13 @@ module.exports = {
             "An array of objects that tell whether this module is 'reachable', " +
             "and according to rule in which this reachability was defined"
         },
+        reaches: {
+          type: "array",
+          items: { $ref: "#/definitions/ReachesType" },
+          description:
+            "An array of objects that tell which other modules it reaches, " +
+            "and that falls within the definition of the passed rule."
+        },
         rules: {
           type: "array",
           items: { $ref: "#/definitions/RuleSummaryType" },
@@ -114,6 +121,39 @@ module.exports = {
         asDefinedInRule: {
           type: "string",
           description: "The name of the rule where the reachability was defined"
+        }
+      }
+    },
+    ReachesType: {
+      type: "object",
+      required: ["modules", "asDefinedInRule"],
+      additionalProperties: false,
+      properties: {
+        modules: {
+          type: "array",
+          items: {
+            type: "object",
+            required: ["source", "via"],
+            additionalProperties: false,
+            properties: {
+              source: {
+                type: "string"
+              },
+              via: {
+                type: "array",
+                description:
+                  "The path along wich the 'to' module is reachable from this one.",
+                items: { type: "string" }
+              }
+            }
+          },
+          description:
+            "An array of modules that is (transitively) reachable from this module."
+        },
+        asDefinedInRule: {
+          type: "string",
+          description:
+            "The name of the rule within which the reachability is restricted"
         }
       }
     },

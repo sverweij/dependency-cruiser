@@ -37,6 +37,11 @@ module.exports = pRuleSet => {
     if (pRuleSet.allowedSeverity === "ignore") {
       Reflect.deleteProperty(pRuleSet, "allowed");
       Reflect.deleteProperty(pRuleSet, "allowedSeverity");
+    } else {
+      pRuleSet.allowed = pRuleSet.allowed.map(pRule => ({
+        ...pRule,
+        name: "not-in-allowed"
+      }));
     }
   }
 
