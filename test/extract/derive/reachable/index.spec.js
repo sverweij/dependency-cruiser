@@ -95,12 +95,6 @@ const ANOTATED_GRAPH_FOR_HAJOO = [
   },
   {
     source: "./src/hajoo.js",
-    reachable: [
-      {
-        asDefinedInRule: "unnamed",
-        value: false
-      }
-    ],
     dependencies: []
   }
 ];
@@ -423,12 +417,6 @@ describe("extract/derive/reachable/index - reachability detection", () => {
       },
       {
         source: "./src/hajoo.js",
-        reachable: [
-          {
-            asDefinedInRule: "unnamed",
-            value: false
-          }
-        ],
         dependencies: []
       }
     ];

@@ -115,15 +115,15 @@ function addReachableToGraph(pGraph, pReachableRule) {
       });
     }
     if (shouldAddReachable(pReachableRule, lReturnValue)) {
-      pGraph
-        .filter(isModuleInRuleFrom(pReachableRule))
-        .forEach(pLFromModule => {
+      pGraph.filter(isModuleInRuleFrom(pReachableRule)).forEach(pFromModule => {
+        if (lReturnValue.source !== pFromModule.source) {
           lReturnValue.reachable = mergeReachableProperties(
             lReturnValue,
             pReachableRule,
-            getPath(pGraph, pLFromModule.source, pModule.source)
+            getPath(pGraph, pFromModule.source, pModule.source)
           );
-        });
+        }
+      });
     }
     return lReturnValue;
   });
