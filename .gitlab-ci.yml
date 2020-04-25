@@ -4,13 +4,13 @@ cache:
   paths:
     - node_modules
 
-test_async_node_13:
-  image: node:13
+test_async_node_14:
+  image: node:14
   script:
     - npm install
     - npm run lint
     - npm run depcruise
-    # - npm run test:integration # yarn(1) pnp doesn't work on node 13 yet
+    - npm run test:yarn-pnp
     - npm run test:cover
   except:
     - tags
@@ -19,7 +19,7 @@ test_async_node_12:
   image: node:12
   script:
     - npm install
-    - npm run test:integration
+    - npm run test:yarn-pnp
     - npm run test:cover
   except:
     - tags
@@ -28,16 +28,7 @@ test_async_node_10:
   image: node:10
   script:
     - npm install
-    - npm run test:integration
-    - npm run test:cover
-  except:
-    - tags
-
-test_async_node_8:
-  image: node:8
-  script:
-    - npm install
-    - npm run test:integration
+    - npm run test:yarn-pnp
     - npm run test:cover
   except:
     - tags

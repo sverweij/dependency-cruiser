@@ -2,43 +2,42 @@ name: yarn pnp integration test
 
 on:
   push:
-      branches:
+    branches:
       - master
       - develop
   pull_request:
 
 jobs:
   integration:
-
     strategy:
       fail-fast: false
       matrix:
-        node-version: 
+        node-version:
           - 12.x
-          - 13.x
+          - 14.x
         platform:
           - ubuntu-latest
 
     runs-on: ${{matrix.platform}}
 
     steps:
-    - name: checkout
-      uses: actions/checkout@v1
-    - name: set up node ${{matrix.node-version}}@${{matrix.platform}}
-      uses: actions/setup-node@v1
-      with:
-        node-version: ${{matrix.node-version}}
-    - name: install
-      run: |
-        node --version
-        npm install
-      shell: bash
-      env:
-        CI: true
-    - name: forbidden dependency checks in a yarn pnp environment
-      run: |
-        node --version
-        npm run test:yarn-pnp
-      shell: bash
-      env:
-        CI: true
+      - name: checkout
+        uses: actions/checkout@v1
+      - name: set up node ${{matrix.node-version}}@${{matrix.platform}}
+        uses: actions/setup-node@v1
+        with:
+          node-version: ${{matrix.node-version}}
+      - name: install
+        run: |
+          node --version
+          npm install
+        shell: bash
+        env:
+          CI: true
+      - name: forbidden dependency checks in a yarn pnp environment
+        run: |
+          node --version
+          npm run test:yarn-pnp
+        shell: bash
+        env:
+          CI: true
