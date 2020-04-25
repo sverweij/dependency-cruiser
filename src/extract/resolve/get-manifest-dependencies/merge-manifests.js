@@ -15,7 +15,7 @@ function normalizeManifestKeys(pManifest) {
 function mergeDependencyKey(pClosestDependencyKey, pFurtherDependencyKey) {
   return {
     ...pFurtherDependencyKey,
-    ...pClosestDependencyKey
+    ...pClosestDependencyKey,
   };
 }
 
@@ -60,7 +60,7 @@ module.exports = (pClosestManifest, pFurtherManifest) =>
     normalizeManifestKeys(pClosestManifest),
     normalizeManifestKeys(pFurtherManifest)
   )
-    .map(pKey => ({
+    .map((pKey) => ({
       key: pKey,
       value: pKey.startsWith("bundle")
         ? mergeDependencyArray(
@@ -70,7 +70,7 @@ module.exports = (pClosestManifest, pFurtherManifest) =>
         : mergeDependencyKey(
             _get(pClosestManifest, pKey, {}),
             _get(pFurtherManifest, pKey, {})
-          )
+          ),
     }))
     .reduce((pJoinedObject, pJoinedKey) => {
       pJoinedObject[pJoinedKey.key] = pJoinedKey.value;

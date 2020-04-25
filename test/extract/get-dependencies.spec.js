@@ -42,13 +42,13 @@ function runFixture(pFixture) {
 }
 
 /* eslint-disable mocha/no-top-level-hooks */
-before(pCallback => {
+before((pCallback) => {
   symlinkDir(
     path.join(__dirname, "fixtures", "symlinkTarget"),
     symlinkDirectory
   ).then(
     () => pCallback(),
-    pError => pCallback(pError)
+    (pError) => pCallback(pError)
   );
 });
 
@@ -191,7 +191,7 @@ describe("extract/getDependencies - even when require gets non-string arguments,
 describe("extract/getDependencies - include", () => {
   it("returns no dependencies when the includeOnly pattern is erroneous", () => {
     const lOptions = normalize({
-      includeOnly: "will-not-match-dependencies-for-this-file"
+      includeOnly: "will-not-match-dependencies-for-this-file",
     });
     const lResolveOptions = normalizeResolveOptions(
       { bustTheCache: true },
@@ -231,8 +231,8 @@ describe("extract/getDependencies - include", () => {
         matchesDoNotFollow: false,
         module: "./bla",
         moduleSystem: "cjs",
-        resolved: "test/extract/fixtures/include/src/bla.js"
-      }
+        resolved: "test/extract/fixtures/include/src/bla.js",
+      },
     ]);
   });
 
@@ -260,7 +260,7 @@ describe("extract/getDependencies - include", () => {
         matchesDoNotFollow: false,
         module: "../di",
         moduleSystem: "cjs",
-        resolved: "test/extract/fixtures/include/di.js"
+        resolved: "test/extract/fixtures/include/di.js",
       },
       {
         coreModule: false,
@@ -272,8 +272,8 @@ describe("extract/getDependencies - include", () => {
         matchesDoNotFollow: false,
         module: "./bla",
         moduleSystem: "cjs",
-        resolved: "test/extract/fixtures/include/src/bla.js"
-      }
+        resolved: "test/extract/fixtures/include/src/bla.js",
+      },
     ]);
   });
 
@@ -302,8 +302,8 @@ describe("extract/getDependencies - include", () => {
         module: "./required-with-need",
         moduleSystem: "cjs",
         exoticRequire: "need",
-        resolved: "test/extract/fixtures/exotic-require/required-with-need.js"
-      }
+        resolved: "test/extract/fixtures/exotic-require/required-with-need.js",
+      },
     ]);
   });
 
@@ -333,7 +333,7 @@ describe("extract/getDependencies - include", () => {
         moduleSystem: "es6",
         preCompilationOnly: true,
         resolved:
-          "test/extract/fixtures/specifyTsPreCompilationDeps/pre-compilation-only.d.ts"
+          "test/extract/fixtures/specifyTsPreCompilationDeps/pre-compilation-only.d.ts",
       },
       {
         coreModule: false,
@@ -347,8 +347,8 @@ describe("extract/getDependencies - include", () => {
         moduleSystem: "es6",
         preCompilationOnly: false,
         resolved:
-          "test/extract/fixtures/specifyTsPreCompilationDeps/real-deal.ts"
-      }
+          "test/extract/fixtures/specifyTsPreCompilationDeps/real-deal.ts",
+      },
     ]);
   });
 });

@@ -26,20 +26,20 @@
 function getCycle(pGraph, pInitialSource, pCurrentSource, pVisited) {
   pVisited = pVisited || new Set();
 
-  const lCurrentNode = pGraph.find(pNode => pNode.source === pCurrentSource);
+  const lCurrentNode = pGraph.find((pNode) => pNode.source === pCurrentSource);
   const lDependencies = lCurrentNode.dependencies.filter(
-    pDependency => !pVisited.has(pDependency.resolved)
+    (pDependency) => !pVisited.has(pDependency.resolved)
   );
 
   const lMatch = lDependencies.find(
-    pDependency => pDependency.resolved === pInitialSource
+    (pDependency) => pDependency.resolved === pInitialSource
   );
 
   if (lMatch) {
     return [pCurrentSource, lMatch.resolved];
   }
   return lDependencies.reduce((pAll, pDependency) => {
-    if (!pAll.some(pNodeName => pNodeName === pCurrentSource)) {
+    if (!pAll.some((pNodeName) => pNodeName === pCurrentSource)) {
       const lCycle = getCycle(
         pGraph,
         pInitialSource,
@@ -49,7 +49,7 @@ function getCycle(pGraph, pInitialSource, pCurrentSource, pVisited) {
 
       if (
         lCycle.length > 0 &&
-        !lCycle.some(pNodeName => pNodeName === pCurrentSource)
+        !lCycle.some((pNodeName) => pNodeName === pCurrentSource)
       ) {
         return pAll.concat(pCurrentSource).concat(lCycle);
       }

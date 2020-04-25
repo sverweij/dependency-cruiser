@@ -8,7 +8,7 @@ const findRuleByName = require("../utl/find-rule-by-name");
 const SEVERITY2CHALK = {
   error: chalk.red,
   warn: chalk.yellow,
-  info: chalk.cyan
+  info: chalk.cyan,
 };
 const DEFAULT_INDENT = 4;
 const CYCLIC_PATH_INDENT = 6;
@@ -77,15 +77,15 @@ function formatSummary(pSummary) {
 
 function addExplanation(pRuleSet, pLong) {
   return pLong
-    ? pViolation => ({
+    ? (pViolation) => ({
         ...pViolation,
         comment: _get(
           findRuleByName(pRuleSet, pViolation.rule.name),
           "comment",
           "-"
-        )
+        ),
       })
-    : pViolation => pViolation;
+    : (pViolation) => pViolation;
 }
 
 function report(pResults, pLong) {
@@ -119,5 +119,5 @@ function report(pResults, pLong) {
  */
 module.exports = (pResults, pOptions) => ({
   output: report(pResults, (pOptions || {}).long),
-  exitCode: pResults.summary.error
+  exitCode: pResults.summary.error,
 });

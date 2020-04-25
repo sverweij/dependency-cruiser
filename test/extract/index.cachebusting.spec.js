@@ -17,10 +17,10 @@ describe("extract/index - cache busting", () => {
             severity: "error",
             from: {},
             to: {
-              dependencyTypes: ["core"]
-            }
-          }
-        ]
+              dependencyTypes: ["core"],
+            },
+          },
+        ],
       },
       validate: true,
       tsPreCompilationDeps: true,
@@ -30,9 +30,9 @@ describe("extract/index - cache busting", () => {
           "npm-dev",
           "npm-optional",
           "npm-peer",
-          "npm-bundled"
-        ]
-      }
+          "npm-bundled",
+        ],
+      },
     });
     const lResolveOptions = normalizeResolveOptions({}, lOptions);
     const lFirstResultFixture = require("./fixtures/cache-busting-first-tree.json");

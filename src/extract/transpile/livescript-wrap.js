@@ -8,7 +8,7 @@ const livescript = tryRequire(
 module.exports = {
   isAvailable: () => livescript !== false,
 
-  transpile: pSource => livescript.compile(pSource)
+  transpile: (pSource) => livescript.compile(pSource),
 };
 
 /* eslint import/order: off */

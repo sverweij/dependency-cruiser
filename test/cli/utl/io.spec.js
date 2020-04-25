@@ -20,9 +20,7 @@ describe("cli/utl/io", () => {
   const OUTFILE = path.join(
     __dirname,
     "output",
-    `tmp_hello_${Math.random()
-      .toString()
-      .slice("0.".length)}.json`
+    `tmp_hello_${Math.random().toString().slice("0.".length)}.json`
   );
 
   before("set up", () => {

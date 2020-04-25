@@ -16,7 +16,7 @@ const mergePackages = require("./merge-manifests");
  *               object or null if the package.json could not be
  *               found or is invalid
  */
-const getManifest = _memoize(pFileDirectory => {
+const getManifest = _memoize((pFileDirectory) => {
   let lReturnValue = null;
 
   try {

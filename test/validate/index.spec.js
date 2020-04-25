@@ -49,7 +49,7 @@ describe("validate/index dependency - generic tests", () => {
       )
     ).to.deep.equal({
       valid: false,
-      rules: [{ severity: "warn", name: "not-in-allowed" }]
+      rules: [{ severity: "warn", name: "not-in-allowed" }],
     });
   });
 
@@ -65,7 +65,7 @@ describe("validate/index dependency - generic tests", () => {
       )
     ).to.deep.equal({
       valid: false,
-      rules: [{ severity: "error", name: "not-in-allowed" }]
+      rules: [{ severity: "error", name: "not-in-allowed" }],
     });
   });
 
@@ -79,7 +79,7 @@ describe("validate/index dependency - generic tests", () => {
       )
     ).to.deep.equal({
       valid: false,
-      rules: [{ severity: "warn", name: "unnamed" }]
+      rules: [{ severity: "warn", name: "unnamed" }],
     });
   });
 
@@ -92,15 +92,15 @@ describe("validate/index dependency - generic tests", () => {
         ),
         { source: "something" },
         {
-          resolved: "src/some/thing/else.js"
+          resolved: "src/some/thing/else.js",
         }
       )
     ).to.deep.equal({
       valid: false,
       rules: [
         { name: "everything-is-forbidden", severity: "error" },
-        { name: "not-in-allowed", severity: "info" }
-      ]
+        { name: "not-in-allowed", severity: "info" },
+      ],
     });
   });
 });
@@ -131,7 +131,7 @@ describe("validate/index - specific tests", () => {
       )
     ).to.deep.equal({
       valid: false,
-      rules: [{ severity: "warn", name: "unnamed" }]
+      rules: [{ severity: "warn", name: "unnamed" }],
     });
   });
 
@@ -156,7 +156,7 @@ describe("validate/index - specific tests", () => {
       )
     ).to.deep.equal({
       valid: false,
-      rules: [{ severity: "error", name: "not-to-core" }]
+      rules: [{ severity: "error", name: "not-to-core" }],
     });
   });
 
@@ -181,7 +181,7 @@ describe("validate/index - specific tests", () => {
       )
     ).to.deep.equal({
       valid: false,
-      rules: [{ severity: "error", name: "not-to-core-fs-os" }]
+      rules: [{ severity: "error", name: "not-to-core-fs-os" }],
     });
   });
 
@@ -206,7 +206,7 @@ describe("validate/index - specific tests", () => {
       )
     ).to.deep.equal({
       valid: false,
-      rules: [{ severity: "error", name: "not-to-unresolvable" }]
+      rules: [{ severity: "error", name: "not-to-unresolvable" }],
     });
   });
 
@@ -231,7 +231,7 @@ describe("validate/index - specific tests", () => {
       )
     ).to.deep.equal({
       valid: false,
-      rules: [{ severity: "warn", name: "not-in-allowed" }]
+      rules: [{ severity: "warn", name: "not-in-allowed" }],
     });
   });
 
@@ -260,7 +260,7 @@ describe("validate/index - specific tests", () => {
       )
     ).to.deep.equal({
       valid: false,
-      rules: [{ severity: "error", name: "only-to-core" }]
+      rules: [{ severity: "error", name: "only-to-core" }],
     });
   });
 
@@ -315,7 +315,7 @@ describe("validate/index - specific tests", () => {
       )
     ).to.deep.equal({
       valid: false,
-      rules: [{ severity: "error", name: "not-to-sub-except-sub" }]
+      rules: [{ severity: "error", name: "not-to-sub-except-sub" }],
     });
   });
 
@@ -340,7 +340,7 @@ describe("validate/index - specific tests", () => {
       )
     ).to.deep.equal({
       valid: false,
-      rules: [{ severity: "error", name: "not-to-not-sub" }]
+      rules: [{ severity: "error", name: "not-to-not-sub" }],
     });
   });
 
@@ -353,7 +353,7 @@ describe("validate/index - specific tests", () => {
         {
           module: "chai",
           resolved: "node_modules/chai/index.js",
-          dependencyTypes: ["npm-dev"]
+          dependencyTypes: ["npm-dev"],
         }
       )
     ).to.deep.equal({
@@ -361,9 +361,9 @@ describe("validate/index - specific tests", () => {
       rules: [
         {
           name: "not-to-dev-dep",
-          severity: "error"
-        }
-      ]
+          severity: "error",
+        },
+      ],
     });
   });
 
@@ -376,7 +376,7 @@ describe("validate/index - specific tests", () => {
         {
           module: "jip",
           resolved: "node_modules/jip/janneke.js",
-          dependencyTypes: ["npm"]
+          dependencyTypes: ["npm"],
         }
       )
     ).to.deep.equal({ valid: true });
@@ -393,7 +393,7 @@ describe("validate/index - specific tests", () => {
         {
           module: "chai",
           resolved: "node_modules/chai/index.js",
-          dependencyTypes: ["npm", "npm-dev"]
+          dependencyTypes: ["npm", "npm-dev"],
         }
       )
     ).to.deep.equal({
@@ -401,9 +401,9 @@ describe("validate/index - specific tests", () => {
       rules: [
         {
           name: "no-duplicate-dep-types",
-          severity: "warn"
-        }
-      ]
+          severity: "warn",
+        },
+      ],
     });
   });
 });

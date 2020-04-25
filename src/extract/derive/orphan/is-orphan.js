@@ -1,7 +1,7 @@
 function hasDependency(pResolvedName) {
-  return pNode =>
+  return (pNode) =>
     pNode.dependencies.some(
-      pToDependency => pToDependency.resolved === pResolvedName
+      (pToDependency) => pToDependency.resolved === pResolvedName
     );
 }
 

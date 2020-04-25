@@ -36,4 +36,4 @@ async function wrap(pHeaderFileName, pFooterFileName, pStream) {
   return `${lHeader}${await getStream(pStream)}${lFooter}`;
 }
 
-module.exports = pStream => wrap(HEADER_FILE, FOOTER_FILE, pStream);
+module.exports = (pStream) => wrap(HEADER_FILE, FOOTER_FILE, pStream);

@@ -7,7 +7,7 @@ const NPM2DEP_TYPE = {
   dependencies: "npm",
   devDependencies: "npm-dev",
   optionalDependencies: "npm-optional",
-  peerDependencies: "npm-peer"
+  peerDependencies: "npm-peer",
 };
 
 function determineNpmDependencyTypes(pModuleName, pPackageDependencies) {
@@ -16,14 +16,14 @@ function determineNpmDependencyTypes(pModuleName, pPackageDependencies) {
   if (Boolean(pPackageDependencies)) {
     lReturnValue = Object.keys(pPackageDependencies)
       .filter(
-        pKey =>
+        (pKey) =>
           pKey.includes("ependencies") &&
           Object.prototype.hasOwnProperty.call(
             pPackageDependencies[pKey],
             pModuleName
           )
       )
-      .map(pKey => NPM2DEP_TYPE[pKey] || "npm-no-pkg");
+      .map((pKey) => NPM2DEP_TYPE[pKey] || "npm-no-pkg");
     lReturnValue = lReturnValue.length === 0 ? ["npm-no-pkg"] : lReturnValue;
   }
 
@@ -42,7 +42,7 @@ function dependencyIsBundled(pModule, pPackageDeps) {
       pPackageDeps.bundledDependencies || pPackageDeps.bundleDependencies;
 
     if (lBundledDependencies) {
-      lReturnValue = lBundledDependencies.some(pDep => pDep === pModule);
+      lReturnValue = lBundledDependencies.some((pDep) => pDep === pModule);
     }
   }
   return lReturnValue;
@@ -114,7 +114,7 @@ function isModule(
     // turtles all the way down)
     // hence we'll have to test for them in different fashion as well.
     // reference: https://webpack.js.org/configuration/resolve/#resolve-modules
-    pModule => {
+    (pModule) => {
       if (path.isAbsolute(pModule)) {
         return path
           .resolve(pBaseDirectory, pDependency.resolved)
@@ -126,7 +126,7 @@ function isModule(
 }
 
 function isAliased(pModuleName, pAliasObject) {
-  return Object.keys(pAliasObject || {}).some(pAliasLHS =>
+  return Object.keys(pAliasObject || {}).some((pAliasLHS) =>
     pModuleName.startsWith(pAliasLHS)
   );
 }

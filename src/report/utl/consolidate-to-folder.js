@@ -5,7 +5,7 @@ const consolidateModuleDependencies = require("./consolidate-module-dependencies
 function squashDependencyToDirectory(pDependency) {
   return {
     ...pDependency,
-    resolved: path.dirname(pDependency.resolved)
+    resolved: path.dirname(pDependency.resolved),
   };
 }
 function squashModuleToDirectory(pModule) {
@@ -13,11 +13,11 @@ function squashModuleToDirectory(pModule) {
     ...pModule,
     source: path.dirname(pModule.source),
     consolidated: true,
-    dependencies: pModule.dependencies.map(squashDependencyToDirectory)
+    dependencies: pModule.dependencies.map(squashDependencyToDirectory),
   };
 }
 
-module.exports = pModules =>
+module.exports = (pModules) =>
   consolidateModules(pModules.map(squashModuleToDirectory)).map(
     consolidateModuleDependencies
   );

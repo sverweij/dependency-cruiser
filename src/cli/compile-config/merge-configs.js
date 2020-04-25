@@ -5,11 +5,11 @@ const _isEqual = require("lodash/isEqual");
 
 function extendNamedRule(pExtendedRule, pForbiddenArrayBase) {
   return pForbiddenArrayBase
-    .filter(pBaseRule => pBaseRule.name === pExtendedRule.name)
+    .filter((pBaseRule) => pBaseRule.name === pExtendedRule.name)
     .reduce(
       (pAll, pBaseRule) => ({
         ...pBaseRule,
-        ...pAll
+        ...pAll,
       }),
       pExtendedRule
     );
@@ -34,13 +34,13 @@ function mergeForbidden(pForbiddenArrayExtended, pForbiddenArrayBase) {
   let lAnonymousRules = _uniqWith(
     pForbiddenArrayExtended
       .concat(pForbiddenArrayBase)
-      .filter(pRule => !pRule.name),
+      .filter((pRule) => !pRule.name),
     _isEqual
   );
 
   let lNamedRules = pForbiddenArrayExtended
-    .filter(pRule => pRule.name)
-    .map(pNamedRule => extendNamedRule(pNamedRule, pForbiddenArrayBase));
+    .filter((pRule) => pRule.name)
+    .map((pNamedRule) => extendNamedRule(pNamedRule, pForbiddenArrayBase));
 
   // merge named rules based on unique name
   lNamedRules = _uniqBy(
@@ -50,8 +50,8 @@ function mergeForbidden(pForbiddenArrayExtended, pForbiddenArrayBase) {
 
     // the other concats (anonymous, allowed) don't need it
     // but have it to be consistent with this
-    lNamedRules.concat(pForbiddenArrayBase).filter(pRule => pRule.name),
-    pRule => pRule.name
+    lNamedRules.concat(pForbiddenArrayBase).filter((pRule) => pRule.name),
+    (pRule) => pRule.name
   );
 
   return lNamedRules.concat(lAnonymousRules);
@@ -120,5 +120,5 @@ module.exports = (pConfigExtended, pConfigBase) => ({
   options: mergeOptions(
     _get(pConfigExtended, "options", {}),
     _get(pConfigBase, "options", {})
-  )
+  ),
 });

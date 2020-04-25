@@ -12,7 +12,7 @@ function init(pResolveOptions, pCachingContext) {
     gResolver = enhancedResolve.ResolverFactory.createResolver({
       ...pResolveOptions,
       // we're doing that ourselves for now
-      symlinks: false
+      symlinks: false,
     });
     /* eslint security/detect-object-injection:0 */
     gInitialized[pCachingContext] = true;

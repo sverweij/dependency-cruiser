@@ -30,7 +30,7 @@ describe("validate/index - reachable (in forbidden set)", () => {
         readRuleSet("./test/validate/fixtures/rules.reachable-false.json"),
         {
           source: "something",
-          reachable: [{ asDefinedInRule: "no-unreachable", value: true }]
+          reachable: [{ asDefinedInRule: "no-unreachable", value: true }],
         }
       )
     ).to.deep.equal({ valid: true });
@@ -43,7 +43,7 @@ describe("validate/index - reachable (in forbidden set)", () => {
         readRuleSet("./test/validate/fixtures/rules.reachable-true.json"),
         {
           source: "something",
-          reachable: [{ asDefinedInRule: "no-unreachable", value: true }]
+          reachable: [{ asDefinedInRule: "no-unreachable", value: true }],
         }
       )
     ).to.deep.equal({ valid: true });
@@ -56,7 +56,7 @@ describe("validate/index - reachable (in forbidden set)", () => {
         readRuleSet("./test/validate/fixtures/rules.reachable-false.json"),
         {
           source: "something",
-          reachable: [{ asDefinedInRule: "no-unreachable", value: false }]
+          reachable: [{ asDefinedInRule: "no-unreachable", value: false }],
         }
       )
     ).to.deep.equal({
@@ -64,9 +64,9 @@ describe("validate/index - reachable (in forbidden set)", () => {
       rules: [
         {
           name: "no-unreachable",
-          severity: "warn"
-        }
-      ]
+          severity: "warn",
+        },
+      ],
     });
   });
 
@@ -77,7 +77,7 @@ describe("validate/index - reachable (in forbidden set)", () => {
         readRuleSet("./test/validate/fixtures/rules.reachable-true.json"),
         {
           source: "something",
-          reachable: [{ asDefinedInRule: "no-reachable", value: true }]
+          reachable: [{ asDefinedInRule: "no-reachable", value: true }],
         }
       )
     ).to.deep.equal({
@@ -85,9 +85,9 @@ describe("validate/index - reachable (in forbidden set)", () => {
       rules: [
         {
           name: "no-reachable",
-          severity: "warn"
-        }
-      ]
+          severity: "warn",
+        },
+      ],
     });
   });
 
@@ -98,7 +98,7 @@ describe("validate/index - reachable (in forbidden set)", () => {
         readRuleSet("./test/validate/fixtures/rules.reachable-false.path.json"),
         {
           source: "something",
-          reachable: [{ asDefinedInRule: "no-unreachable", value: false }]
+          reachable: [{ asDefinedInRule: "no-unreachable", value: false }],
         }
       )
     ).to.deep.equal({
@@ -106,9 +106,9 @@ describe("validate/index - reachable (in forbidden set)", () => {
       rules: [
         {
           name: "no-unreachable",
-          severity: "warn"
-        }
-      ]
+          severity: "warn",
+        },
+      ],
     });
   });
 
@@ -119,7 +119,7 @@ describe("validate/index - reachable (in forbidden set)", () => {
         readRuleSet("./test/validate/fixtures/rules.reachable-true.path.json"),
         {
           source: "something",
-          reachable: [{ asDefinedInRule: "no-reachable", value: true }]
+          reachable: [{ asDefinedInRule: "no-reachable", value: true }],
         }
       )
     ).to.deep.equal({
@@ -127,9 +127,9 @@ describe("validate/index - reachable (in forbidden set)", () => {
       rules: [
         {
           name: "no-reachable",
-          severity: "warn"
-        }
-      ]
+          severity: "warn",
+        },
+      ],
     });
   });
 
@@ -142,7 +142,7 @@ describe("validate/index - reachable (in forbidden set)", () => {
         ),
         {
           source: "something",
-          reachable: [{ asDefinedInRule: "no-unreachable", value: false }]
+          reachable: [{ asDefinedInRule: "no-unreachable", value: false }],
         }
       )
     ).to.deep.equal({ valid: true });
@@ -157,7 +157,7 @@ describe("validate/index - reachable (in forbidden set)", () => {
         ),
         {
           source: "something",
-          reachable: [{ asDefinedInRule: "no-reachable", value: true }]
+          reachable: [{ asDefinedInRule: "no-reachable", value: true }],
         }
       )
     ).to.deep.equal({ valid: true });
@@ -170,7 +170,7 @@ describe("validate/index - reachable (in allowed set)", () => {
         true,
         readRuleSet("./test/validate/fixtures/rules.reachable.allowed.json"),
         {
-          source: "something"
+          source: "something",
         }
       )
     ).to.deep.equal({
@@ -178,9 +178,9 @@ describe("validate/index - reachable (in allowed set)", () => {
       rules: [
         {
           name: "not-in-allowed",
-          severity: "warn"
-        }
-      ]
+          severity: "warn",
+        },
+      ],
     });
   });
 
@@ -194,13 +194,13 @@ describe("validate/index - reachable (in allowed set)", () => {
           reachable: [
             {
               value: true,
-              asDefinedInRule: "not-in-allowed"
-            }
-          ]
+              asDefinedInRule: "not-in-allowed",
+            },
+          ],
         }
       )
     ).to.deep.equal({
-      valid: true
+      valid: true,
     });
   });
 
@@ -214,9 +214,9 @@ describe("validate/index - reachable (in allowed set)", () => {
           reachable: [
             {
               value: false,
-              asDefinedInRule: "not-in-allowed"
-            }
-          ]
+              asDefinedInRule: "not-in-allowed",
+            },
+          ],
         }
       )
     ).to.deep.equal({
@@ -224,9 +224,9 @@ describe("validate/index - reachable (in allowed set)", () => {
       rules: [
         {
           name: "not-in-allowed",
-          severity: "warn"
-        }
-      ]
+          severity: "warn",
+        },
+      ],
     });
   });
 });

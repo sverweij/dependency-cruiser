@@ -18,7 +18,7 @@ function barfTheJSON(pTargetFileName, pResult) {
     path.join(MAIN_FIXTURE_DIR, pTargetFileName),
     prettier.format(JSON.stringify(pResult.output), { parser: "json" }),
     {
-      encoding: "utf8"
+      encoding: "utf8",
     }
   );
 }
@@ -38,7 +38,7 @@ barfTheJSON(
   main.cruise(
     ["test/main/fixtures/jsx"],
     {
-      ruleSet: {}
+      ruleSet: {},
     },
     { bustTheCache: true }
   )
@@ -51,16 +51,16 @@ barfTheJSON(
     ["test/main/fixtures/ts-precompilation-deps-on-cjs"],
     {
       tsConfig: {
-        fileName: "test/main/fixtures/tsconfig.targetcjs.json"
+        fileName: "test/main/fixtures/tsconfig.targetcjs.json",
       },
-      tsPreCompilationDeps: true
+      tsPreCompilationDeps: true,
     },
     { bustTheCache: true },
     {
       options: {
         baseUrl: ".",
-        module: "commonjs"
-      }
+        module: "commonjs",
+      },
     }
   )
 );
@@ -71,16 +71,16 @@ barfTheJSON(
     ["test/main/fixtures/ts-precompilation-deps-off-cjs"],
     {
       tsConfig: {
-        fileName: "test/main/fixtures/tsconfig.targetcjs.json"
+        fileName: "test/main/fixtures/tsconfig.targetcjs.json",
       },
-      tsPreCompilationDeps: false
+      tsPreCompilationDeps: false,
     },
     { bustTheCache: true },
     {
       options: {
         baseUrl: ".",
-        module: "commonjs"
-      }
+        module: "commonjs",
+      },
     }
   )
 );
@@ -91,16 +91,16 @@ barfTheJSON(
     ["test/main/fixtures/ts-precompilation-deps-on-es"],
     {
       tsConfig: {
-        fileName: "test/main/fixtures/tsconfig.targetes.json"
+        fileName: "test/main/fixtures/tsconfig.targetes.json",
       },
-      tsPreCompilationDeps: true
+      tsPreCompilationDeps: true,
     },
     { bustTheCache: true },
     {
       options: {
         baseUrl: ".",
-        module: "es6"
-      }
+        module: "es6",
+      },
     }
   )
 );
@@ -111,16 +111,16 @@ barfTheJSON(
     ["test/main/fixtures/ts-precompilation-deps-off-es"],
     {
       tsConfig: {
-        fileName: "test/main/fixtures/tsconfig.targetes.json"
+        fileName: "test/main/fixtures/tsconfig.targetes.json",
       },
-      tsPreCompilationDeps: false
+      tsPreCompilationDeps: false,
     },
     { bustTheCache: true },
     {
       options: {
         baseUrl: ".",
-        module: "es6"
-      }
+        module: "es6",
+      },
     }
   )
 );
@@ -135,20 +135,20 @@ const DYNAMIC_IMPORTS_RULE_SET = {
         from: {},
         to: {
           dynamic: false,
-          circular: true
-        }
+          circular: true,
+        },
       },
       {
         name: "no-dynamic",
         severity: "warn",
         from: {},
         to: {
-          dynamic: true
-        }
-      }
-    ]
+          dynamic: true,
+        },
+      },
+    ],
   },
-  validate: true
+  validate: true,
 };
 
 process.chdir("test/main/fixtures/dynamic-imports/es");

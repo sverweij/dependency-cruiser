@@ -102,5 +102,5 @@ module.exports = {
   toLicense,
   toLicenseNot,
   toExoticRequire,
-  toExoticRequireNot
+  toExoticRequireNot,
 };

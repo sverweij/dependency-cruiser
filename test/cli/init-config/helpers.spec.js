@@ -5,7 +5,7 @@ const {
   pnpIsEnabled,
   isLikelyMonoRepo,
   hasTestsWithinSource,
-  validateLocation
+  validateLocation,
 } = require("../../../src/cli/init-config/helpers");
 
 describe("cli/init-config/helpers - pnpIsEnabled", () => {
@@ -121,7 +121,7 @@ describe("cli/init-config/helpers - getFolderCandidates", () => {
     const lRealFolders = ["src", "lib", "node_modules"];
 
     expect(getFolderCandidates(lCandidates)(lRealFolders)).to.deep.equal([
-      "src"
+      "src",
     ]);
   });
 });

@@ -27,7 +27,7 @@ const DEFAULT_RESOLVE_OPTIONS = {
   // - an explicit inclusion of node_modules/@types to the spots
   //   to look for modules (in addition to "node_modules" which
   //   is the default for enhanced-resolve)
-  modules: ["node_modules", "node_modules/@types"]
+  modules: ["node_modules", "node_modules/@types"],
 };
 
 const NON_OVERRIDABLE_RESOLVE_OPTIONS = {
@@ -42,7 +42,7 @@ const NON_OVERRIDABLE_RESOLVE_OPTIONS = {
   ),
   // our code depends on sync behavior, so having this
   // overriden is not an option
-  useSyncFileSystemCalls: true
+  useSyncFileSystemCalls: true,
 };
 
 function pushPlugin(pPlugins, pPluginToPush) {
@@ -68,7 +68,7 @@ function compileResolveOptions(pResolveOptions, pTSConfig) {
         // so we do it ourselves - either with the extensions passed
         // or with the supported ones.
         extensions:
-          pResolveOptions.extensions || DEFAULT_RESOLVE_OPTIONS.extensions
+          pResolveOptions.extensions || DEFAULT_RESOLVE_OPTIONS.extensions,
       })
     );
   }
@@ -84,7 +84,7 @@ function compileResolveOptions(pResolveOptions, pTSConfig) {
     ...DEFAULT_RESOLVE_OPTIONS,
     ...lResolveOptions,
     ...pResolveOptions,
-    ...NON_OVERRIDABLE_RESOLVE_OPTIONS
+    ...NON_OVERRIDABLE_RESOLVE_OPTIONS,
   };
 }
 
@@ -108,7 +108,7 @@ module.exports = (pResolveOptions, pOptions, pTSConfig) =>
       externalModuleResolutionStrategy:
         pOptions.externalModuleResolutionStrategy,
       combinedDependencies: pOptions.combinedDependencies,
-      ...(pResolveOptions || {})
+      ...(pResolveOptions || {}),
     },
     pTSConfig || {}
   );

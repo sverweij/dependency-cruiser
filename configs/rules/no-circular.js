@@ -7,6 +7,6 @@ module.exports = {
   severity: "error",
   from: {},
   to: {
-    circular: true
-  }
+    circular: true,
+  },
 };

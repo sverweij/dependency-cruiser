@@ -18,19 +18,19 @@ describe("extract/index - reachable", () => {
           {
             name: "no-unreachable-from-root",
             from: {
-              path: "src/index.js$"
+              path: "src/index.js$",
             },
             to: {
               path: "src",
-              reachable: false
-            }
-          }
-        ]
-      })
+              reachable: false,
+            },
+          },
+        ],
+      }),
     });
     const lResolveOptions = normalizeResolveOptions(
       {
-        bustTheCache: true
+        bustTheCache: true,
       },
       lOptions
     );

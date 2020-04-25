@@ -32,7 +32,7 @@ const EXTENSION2WRAPPER = {
   ".litcoffee": litCoffeeWrap,
   ".coffee.md": litCoffeeWrap,
   ".csx": coffeeWrap,
-  ".cjsx": coffeeWrap
+  ".cjsx": coffeeWrap,
 };
 
 const TRANSPILER2WRAPPER = {
@@ -41,7 +41,7 @@ const TRANSPILER2WRAPPER = {
   coffeescript: coffeeWrap,
   livescript: liveScriptWrap,
   typescript: typeScriptWrap,
-  "vue-template-compiler": vueWrap
+  "vue-template-compiler": vueWrap,
 };
 
 /**
@@ -53,7 +53,7 @@ const TRANSPILER2WRAPPER = {
  * @param {string}  pExtension the extension (e.g. ".ts", ".js", ".litcoffee")
  * @returns {module} the module
  */
-module.exports.getWrapper = pExtension =>
+module.exports.getWrapper = (pExtension) =>
   EXTENSION2WRAPPER[pExtension] || javaScriptWrap;
 
 /**
@@ -62,9 +62,9 @@ module.exports.getWrapper = pExtension =>
  *
  * @type {array}
  */
-module.exports.allExtensions = Object.keys(EXTENSION2WRAPPER).map(pKey => ({
+module.exports.allExtensions = Object.keys(EXTENSION2WRAPPER).map((pKey) => ({
   extension: pKey,
-  available: EXTENSION2WRAPPER[pKey].isAvailable()
+  available: EXTENSION2WRAPPER[pKey].isAvailable(),
 }));
 
 /**
@@ -75,7 +75,7 @@ module.exports.allExtensions = Object.keys(EXTENSION2WRAPPER).map(pKey => ({
  */
 module.exports.scannableExtensions = Object.keys(
   EXTENSION2WRAPPER
-).filter(pKey => EXTENSION2WRAPPER[pKey].isAvailable());
+).filter((pKey) => EXTENSION2WRAPPER[pKey].isAvailable());
 
 /**
  * returns an array of supported transpilers, whith for each transpiler:
@@ -85,10 +85,10 @@ module.exports.scannableExtensions = Object.keys(
  * @returns {array} an array of supported transpilers
  */
 module.exports.getAvailableTranspilers = () =>
-  Object.keys(supportedTranspilers).map(pTranspiler => ({
+  Object.keys(supportedTranspilers).map((pTranspiler) => ({
     name: pTranspiler,
     version: supportedTranspilers[pTranspiler],
-    available: TRANSPILER2WRAPPER[pTranspiler].isAvailable()
+    available: TRANSPILER2WRAPPER[pTranspiler].isAvailable(),
   }));
 
 /* eslint security/detect-object-injection : 0*/

@@ -26,7 +26,7 @@ describe("main.cruise - reachable integration", () => {
         ["src"],
         normalizeOptions({
           config: "forbidden-dead-wood-and-isolation.js",
-          outputType: "json"
+          outputType: "json",
         })
       ).output
     );
@@ -36,30 +36,30 @@ describe("main.cruise - reachable integration", () => {
         to: "src/db/admin.js",
         rule: {
           severity: "warn",
-          name: "no-db-access-from-schemas"
+          name: "no-db-access-from-schemas",
         },
         via: [
           "src/schema-declarations/naughty.info.js",
           "src/utilities/plumbing.js",
-          "src/db/admin.js"
-        ]
+          "src/db/admin.js",
+        ],
       },
       {
         from: "src/utilities/insula.js",
         to: "src/utilities/insula.js",
         rule: {
           severity: "info",
-          name: "no-unreachable-from-root"
-        }
+          name: "no-unreachable-from-root",
+        },
       },
       {
         from: "src/utilities/pen.js",
         to: "src/utilities/pen.js",
         rule: {
           severity: "info",
-          name: "no-unreachable-from-root"
-        }
-      }
+          name: "no-unreachable-from-root",
+        },
+      },
     ]);
     expect(lResult).to.be.jsonSchema(cruiseResultSchema);
   });
@@ -71,7 +71,7 @@ describe("main.cruise - reachable integration", () => {
         ["src"],
         normalizeOptions({
           config: "allowed-dead-wood.js",
-          outputType: "json"
+          outputType: "json",
         })
       ).output
     );
@@ -82,17 +82,17 @@ describe("main.cruise - reachable integration", () => {
         to: "src/utilities/insula.js",
         rule: {
           severity: "info",
-          name: "not-in-allowed"
-        }
+          name: "not-in-allowed",
+        },
       },
       {
         from: "src/utilities/pen.js",
         to: "src/utilities/pen.js",
         rule: {
           severity: "info",
-          name: "not-in-allowed"
-        }
-      }
+          name: "not-in-allowed",
+        },
+      },
     ]);
     expect(lResult).to.be.jsonSchema(cruiseResultSchema);
   });
@@ -103,7 +103,7 @@ describe("main.cruise - reachable integration", () => {
         ["src"],
         normalizeOptions({
           config: "allowed-isolation.js",
-          outputType: "json"
+          outputType: "json",
         })
       ).output
     );
@@ -114,9 +114,9 @@ describe("main.cruise - reachable integration", () => {
         to: "src/db/admin.js",
         rule: {
           severity: "info",
-          name: "not-in-allowed"
-        }
-      }
+          name: "not-in-allowed",
+        },
+      },
     ]);
     expect(lResult).to.be.jsonSchema(cruiseResultSchema);
   });

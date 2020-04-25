@@ -25,11 +25,11 @@ const KNOWN_CLI_OPTIONS = [
   "tsConfig",
   "validate",
   "version",
-  "webpackConfig"
+  "webpackConfig",
 ];
 
 function getOptionValue(pDefault) {
-  return pValue => {
+  return (pValue) => {
     let lReturnValue = pDefault;
 
     if (typeof pValue === "string") {
@@ -40,7 +40,7 @@ function getOptionValue(pDefault) {
 }
 
 function isKnownCLIOption(pCandidateString) {
-  return KNOWN_CLI_OPTIONS.some(pString => pString === pCandidateString);
+  return KNOWN_CLI_OPTIONS.some((pString) => pString === pCandidateString);
 }
 
 /**
@@ -141,17 +141,17 @@ function validateAndNormalizeRulesFileName(pValidate) {
  * @param  {object} pOptionsAsPassedFromCommander [description]
  * @return {object}          [description]
  */
-module.exports = pOptionsAsPassedFromCommander => {
+module.exports = (pOptionsAsPassedFromCommander) => {
   let lOptions = {
     outputTo: defaults.OUTPUT_TO,
     outputType: defaults.OUTPUT_TYPE,
-    ...ejectNonCLIOptions(pOptionsAsPassedFromCommander)
+    ...ejectNonCLIOptions(pOptionsAsPassedFromCommander),
   };
 
   if (Object.prototype.hasOwnProperty.call(lOptions, "moduleSystems")) {
     lOptions.moduleSystems = lOptions.moduleSystems
       .split(",")
-      .map(pString => pString.trim());
+      .map((pString) => pString.trim());
   }
 
   if (Object.prototype.hasOwnProperty.call(lOptions, "config")) {

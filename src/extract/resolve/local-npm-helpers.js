@@ -4,7 +4,7 @@ const _memoize = require("lodash/memoize");
 const resolve = require("./resolve");
 const isRelativeModuleName = require("./is-relative-module-name");
 
-const isScoped = pModule => pModule.startsWith("@");
+const isScoped = (pModule) => pModule.startsWith("@");
 
 /**
  * Returns the 'root' of the package - the spot where we can probably find
@@ -148,5 +148,5 @@ module.exports = {
   getPackageJson,
   dependencyIsDeprecated,
   getLicense,
-  clearCache
+  clearCache,
 };

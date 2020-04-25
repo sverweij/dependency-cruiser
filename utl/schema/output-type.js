@@ -15,8 +15,8 @@ module.exports = {
         "err-html",
         "teamcity",
         "anon",
-        "text"
-      ]
-    }
-  }
+        "text",
+      ],
+    },
+  },
 };

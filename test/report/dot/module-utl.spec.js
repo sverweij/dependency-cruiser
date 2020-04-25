@@ -14,16 +14,16 @@ describe("report/dot/module-utl", () => {
         dependencies: [],
         rules: [
           { name: "error-thing", severity: "error" },
-          { name: "warn-thing", severity: "warn" }
-        ]
+          { name: "warn-thing", severity: "warn" },
+        ],
       })
     ).to.deep.equal({
       dependencies: [],
       rule: { name: "error-thing", severity: "error" },
       rules: [
         { name: "error-thing", severity: "error" },
-        { name: "warn-thing", severity: "warn" }
-      ]
+        { name: "warn-thing", severity: "warn" },
+      ],
     });
   });
 
@@ -34,10 +34,10 @@ describe("report/dot/module-utl", () => {
           {
             rules: [
               { name: "error-thing", severity: "error" },
-              { name: "warn-thing", severity: "warn" }
-            ]
-          }
-        ]
+              { name: "warn-thing", severity: "warn" },
+            ],
+          },
+        ],
       })
     ).to.deep.equal({
       dependencies: [
@@ -45,10 +45,10 @@ describe("report/dot/module-utl", () => {
           rule: { name: "error-thing", severity: "error" },
           rules: [
             { name: "error-thing", severity: "error" },
-            { name: "warn-thing", severity: "warn" }
-          ]
-        }
-      ]
+            { name: "warn-thing", severity: "warn" },
+          ],
+        },
+      ],
     });
   });
 });

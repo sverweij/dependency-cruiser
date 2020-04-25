@@ -1,6 +1,6 @@
 const fs = require("fs");
 
-module.exports = pFileName => {
+module.exports = (pFileName) => {
   try {
     fs.unlinkSync(pFileName);
   } catch (pError) {

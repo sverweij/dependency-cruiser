@@ -32,12 +32,12 @@ function checkRuleSafety(pRule) {
     { section: "from", condition: "pathNot" },
     { section: "to", condition: "pathNot" },
     { section: "to", condition: "license" },
-    { section: "to", condition: "licenseNot" }
+    { section: "to", condition: "licenseNot" },
   ];
 
   if (
     REGEX_CONDITIONS.some(
-      pCondition => !safeRule(pRule, pCondition.section, pCondition.condition)
+      (pCondition) => !safeRule(pRule, pCondition.section, pCondition.condition)
     )
   ) {
     throw new Error(
@@ -63,7 +63,7 @@ function checkRuleSafety(pRule) {
  * @throws {Error}                 An error with the reason for the error as
  *                                 a message
  */
-module.exports = pConfiguration => {
+module.exports = (pConfiguration) => {
   validateAgainstSchema(configurationSchema, pConfiguration);
   (pConfiguration.allowed || []).forEach(checkRuleSafety);
   (pConfiguration.forbidden || []).forEach(checkRuleSafety);

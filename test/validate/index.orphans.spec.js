@@ -20,7 +20,7 @@ describe("validate/index - orphans", () => {
         readRuleSet("./test/validate/fixtures/rules.orphan.json"),
         {
           source: "something",
-          orphan: true
+          orphan: true,
         }
       )
     ).to.deep.equal({
@@ -28,9 +28,9 @@ describe("validate/index - orphans", () => {
       rules: [
         {
           name: "no-orphans",
-          severity: "warn"
-        }
-      ]
+          severity: "warn",
+        },
+      ],
     });
   });
 
@@ -41,7 +41,7 @@ describe("validate/index - orphans", () => {
         readRuleSet("./test/validate/fixtures/rules.orphan.allowed.json"),
         {
           source: "something",
-          orphan: true
+          orphan: true,
         }
       )
     ).to.deep.equal({
@@ -49,9 +49,9 @@ describe("validate/index - orphans", () => {
       rules: [
         {
           name: "not-in-allowed",
-          severity: "warn"
-        }
-      ]
+          severity: "warn",
+        },
+      ],
     });
   });
 
@@ -62,7 +62,7 @@ describe("validate/index - orphans", () => {
         readRuleSet("./test/validate/fixtures/rules.orphan.allowed.json"),
         {
           source: "something",
-          orphan: false
+          orphan: false,
         }
       )
     ).to.deep.equal({ valid: true });
@@ -75,7 +75,7 @@ describe("validate/index - orphans", () => {
         readRuleSet("./test/validate/fixtures/rules.orphan.path.json"),
         {
           source: "something",
-          orphan: true
+          orphan: true,
         }
       )
     ).to.deep.equal({ valid: true });
@@ -88,7 +88,7 @@ describe("validate/index - orphans", () => {
         readRuleSet("./test/validate/fixtures/rules.orphan.path.json"),
         {
           source: "noorphansallowedhere/blah/something.ts",
-          orphan: true
+          orphan: true,
         }
       )
     ).to.deep.equal({
@@ -96,9 +96,9 @@ describe("validate/index - orphans", () => {
       rules: [
         {
           name: "no-orphans",
-          severity: "error"
-        }
-      ]
+          severity: "error",
+        },
+      ],
     });
   });
 
@@ -109,7 +109,7 @@ describe("validate/index - orphans", () => {
         readRuleSet("./test/validate/fixtures/rules.orphan.pathnot.json"),
         {
           source: "orphansallowedhere/something",
-          orphan: true
+          orphan: true,
         }
       )
     ).to.deep.equal({ valid: true });
@@ -122,7 +122,7 @@ describe("validate/index - orphans", () => {
         readRuleSet("./test/validate/fixtures/rules.orphan.pathnot.json"),
         {
           source: "blah/something.ts",
-          orphan: true
+          orphan: true,
         }
       )
     ).to.deep.equal({
@@ -130,9 +130,9 @@ describe("validate/index - orphans", () => {
       rules: [
         {
           name: "no-orphans",
-          severity: "warn"
-        }
-      ]
+          severity: "warn",
+        },
+      ],
     });
   });
 
@@ -143,7 +143,7 @@ describe("validate/index - orphans", () => {
         readRuleSet("./test/validate/fixtures/rules.orphan.path.json"),
         {
           source: "noorphansallowedhere/something.ts",
-          orphan: true
+          orphan: true,
         },
         {}
       )

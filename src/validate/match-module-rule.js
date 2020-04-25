@@ -16,7 +16,7 @@ function matchesReachableRule(pRule, pModule) {
     Object.prototype.hasOwnProperty.call(pRule.to, "reachable") &&
     Object.prototype.hasOwnProperty.call(pModule, "reachable") &&
     pModule.reachable.some(
-      pReachable =>
+      (pReachable) =>
         pReachable.asDefinedInRule === pRule.name &&
         pReachable.value === pRule.to.reachable
     ) &&
@@ -30,10 +30,10 @@ function matchesReachesRule(pRule, pModule) {
     Object.prototype.hasOwnProperty.call(pRule.to, "reachable") &&
     Object.prototype.hasOwnProperty.call(pModule, "reaches") &&
     pModule.reaches.some(
-      pReaches =>
+      (pReaches) =>
         pReaches.asDefinedInRule === pRule.name &&
         pReaches.modules.some(
-          pReachesModule =>
+          (pReachesModule) =>
             matchers.toModulePath(pRule, pReachesModule) &&
             matchers.toModulePathNot(pRule, pReachesModule)
         )
@@ -42,17 +42,17 @@ function matchesReachesRule(pRule, pModule) {
 }
 
 function match(pModule) {
-  return pRule =>
+  return (pRule) =>
     matchesOrphanRule(pRule, pModule) ||
     matchesReachableRule(pRule, pModule) ||
     matchesReachesRule(pRule, pModule);
 }
-const isInteresting = pRule => isModuleOnlyRule(pRule);
+const isInteresting = (pRule) => isModuleOnlyRule(pRule);
 
 module.exports = {
   matchesOrphanRule,
   matchesReachableRule,
   matchesReachesRule,
   match,
-  isInteresting
+  isInteresting,
 };

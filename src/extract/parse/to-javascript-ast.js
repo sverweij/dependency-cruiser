@@ -13,7 +13,7 @@ function getASTFromSource(pSource, pExtension, pTSConfig) {
     // default ecmaVersion for acorn 7 is still 10.
     return acorn.parse(lJavaScriptSource, {
       sourceType: "module",
-      ecmaVersion: 11
+      ecmaVersion: 11,
     });
   } catch (pError) {
     return acornLoose.parse(lJavaScriptSource, { sourceType: "module" });
@@ -61,5 +61,5 @@ module.exports = {
    */
   getASTCached,
 
-  clearCache
+  clearCache,
 };

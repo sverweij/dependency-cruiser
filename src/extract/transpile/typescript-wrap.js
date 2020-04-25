@@ -15,16 +15,16 @@ function getCompilerOptions(pTsx, pTSConfig = {}) {
   return {
     target: "es2015",
     ...lCompilerOptions,
-    ..._get(pTSConfig, "options", {})
+    ..._get(pTSConfig, "options", {}),
   };
 }
 
-module.exports = pTsx => ({
+module.exports = (pTsx) => ({
   isAvailable: () => typescript !== false,
 
   transpile: (pSource, pTSConfig) =>
     typescript.transpileModule(pSource, {
       ...pTSConfig,
-      compilerOptions: getCompilerOptions(pTsx, pTSConfig)
-    }).outputText
+      compilerOptions: getCompilerOptions(pTsx, pTSConfig),
+    }).outputText,
 });

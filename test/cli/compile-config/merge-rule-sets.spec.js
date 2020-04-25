@@ -7,7 +7,7 @@ describe("cli/mergeRuleSets - general", () => {
       allowed: [],
       allowedSeverity: "warn",
       forbidden: [],
-      options: {}
+      options: {},
     });
   });
 });
@@ -20,7 +20,7 @@ describe("cli/mergeRuleSets - forbidden", () => {
       allowed: [],
       allowedSeverity: "warn",
       forbidden: [{ from: "src", to: "test" }],
-      options: {}
+      options: {},
     });
   });
 
@@ -34,7 +34,7 @@ describe("cli/mergeRuleSets - forbidden", () => {
       allowed: [],
       allowedSeverity: "warn",
       forbidden: [{ from: "src", to: "test" }],
-      options: {}
+      options: {},
     });
   });
 
@@ -45,7 +45,7 @@ describe("cli/mergeRuleSets - forbidden", () => {
       allowed: [],
       allowedSeverity: "warn",
       forbidden: [{ from: "src", to: "test" }],
-      options: {}
+      options: {},
     });
   });
 
@@ -60,9 +60,9 @@ describe("cli/mergeRuleSets - forbidden", () => {
       allowedSeverity: "warn",
       forbidden: [
         { from: "bin", to: "test" },
-        { from: "src", to: "test" }
+        { from: "src", to: "test" },
       ],
-      options: {}
+      options: {},
     });
   });
 
@@ -76,7 +76,7 @@ describe("cli/mergeRuleSets - forbidden", () => {
       allowed: [],
       allowedSeverity: "warn",
       forbidden: [{ name: "already-in-base", from: "bin", to: "test" }],
-      options: {}
+      options: {},
     });
   });
 
@@ -88,9 +88,9 @@ describe("cli/mergeRuleSets - forbidden", () => {
             {
               name: "already-in-base",
               from: { path: "bin" },
-              to: { path: "test" }
-            }
-          ]
+              to: { path: "test" },
+            },
+          ],
         },
         {
           forbidden: [
@@ -98,9 +98,9 @@ describe("cli/mergeRuleSets - forbidden", () => {
               name: "already-in-base",
               severity: "error",
               from: { path: "src" },
-              to: { path: "test" }
-            }
-          ]
+              to: { path: "test" },
+            },
+          ],
         }
       )
     ).to.deep.equal({
@@ -111,10 +111,10 @@ describe("cli/mergeRuleSets - forbidden", () => {
           name: "already-in-base",
           severity: "error",
           from: { path: "bin" },
-          to: { path: "test" }
-        }
+          to: { path: "test" },
+        },
       ],
-      options: {}
+      options: {},
     });
   });
 
@@ -127,18 +127,18 @@ describe("cli/mergeRuleSets - forbidden", () => {
               name: "already-in-base",
               severity: "info",
               from: { path: "bin" },
-              to: { path: "test" }
-            }
-          ]
+              to: { path: "test" },
+            },
+          ],
         },
         {
           forbidden: [
             {
               name: "already-in-base",
               from: { path: "src" },
-              to: { path: "test" }
-            }
-          ]
+              to: { path: "test" },
+            },
+          ],
         }
       )
     ).to.deep.equal({
@@ -149,10 +149,10 @@ describe("cli/mergeRuleSets - forbidden", () => {
           name: "already-in-base",
           severity: "info",
           from: { path: "bin" },
-          to: { path: "test" }
-        }
+          to: { path: "test" },
+        },
       ],
-      options: {}
+      options: {},
     });
   });
 
@@ -165,9 +165,9 @@ describe("cli/mergeRuleSets - forbidden", () => {
             {
               name: "already-in-base",
               from: { path: "src" },
-              to: { path: "test" }
-            }
-          ]
+              to: { path: "test" },
+            },
+          ],
         }
       )
     ).to.deep.equal({
@@ -178,10 +178,10 @@ describe("cli/mergeRuleSets - forbidden", () => {
           name: "already-in-base",
           severity: "info",
           from: { path: "src" },
-          to: { path: "test" }
-        }
+          to: { path: "test" },
+        },
       ],
-      options: {}
+      options: {},
     });
   });
 
@@ -196,9 +196,9 @@ describe("cli/mergeRuleSets - forbidden", () => {
       allowedSeverity: "warn",
       forbidden: [
         { name: "not-in-base", from: "bin", to: "test" },
-        { name: "already-in-base", from: "src", to: "test" }
+        { name: "already-in-base", from: "src", to: "test" },
       ],
-      options: {}
+      options: {},
     });
   });
 });
@@ -210,7 +210,7 @@ describe("cli/mergeRuleSets - allowed", () => {
         allowed: [{ from: "test", to: "src" }],
         allowedSeverity: "warn",
         forbidden: [],
-        options: {}
+        options: {},
       }
     );
   });
@@ -225,7 +225,7 @@ describe("cli/mergeRuleSets - allowed", () => {
       allowed: [{ from: "test", to: "src" }],
       allowedSeverity: "warn",
       forbidden: [],
-      options: {}
+      options: {},
     });
   });
 
@@ -235,7 +235,7 @@ describe("cli/mergeRuleSets - allowed", () => {
         allowed: [{ from: "test", to: "src" }],
         allowedSeverity: "warn",
         forbidden: [],
-        options: {}
+        options: {},
       }
     );
   });
@@ -249,11 +249,11 @@ describe("cli/mergeRuleSets - allowed", () => {
     ).to.deep.equal({
       allowed: [
         { from: "bin", to: "test" },
-        { from: "src", to: "test" }
+        { from: "src", to: "test" },
       ],
       allowedSeverity: "warn",
       forbidden: [],
-      options: {}
+      options: {},
     });
   });
 });
@@ -264,7 +264,7 @@ describe("cli/mergeRuleSets - allowedSeverity", () => {
       allowed: [],
       allowedSeverity: "warn",
       forbidden: [],
-      options: {}
+      options: {},
     });
   });
 
@@ -273,7 +273,7 @@ describe("cli/mergeRuleSets - allowedSeverity", () => {
       allowed: [],
       allowedSeverity: "error",
       forbidden: [],
-      options: {}
+      options: {},
     });
   });
 
@@ -282,7 +282,7 @@ describe("cli/mergeRuleSets - allowedSeverity", () => {
       allowed: [],
       allowedSeverity: "error",
       forbidden: [],
-      options: {}
+      options: {},
     });
   });
 
@@ -293,7 +293,7 @@ describe("cli/mergeRuleSets - allowedSeverity", () => {
       allowed: [],
       allowedSeverity: "info",
       forbidden: [],
-      options: {}
+      options: {},
     });
   });
 });
@@ -305,8 +305,8 @@ describe("cli/mergeRuleSets - options", () => {
         {
           options: {
             doNotFollow: "node_modules",
-            tsConfig: { fileName: "./tsConfig.json" }
-          }
+            tsConfig: { fileName: "./tsConfig.json" },
+          },
         },
         {}
       )
@@ -317,9 +317,9 @@ describe("cli/mergeRuleSets - options", () => {
       options: {
         doNotFollow: "node_modules",
         tsConfig: {
-          fileName: "./tsConfig.json"
-        }
-      }
+          fileName: "./tsConfig.json",
+        },
+      },
     });
   });
 
@@ -330,8 +330,8 @@ describe("cli/mergeRuleSets - options", () => {
         {
           options: {
             doNotFollow: "node_modules",
-            tsConfig: { fileName: "./tsConfig.json" }
-          }
+            tsConfig: { fileName: "./tsConfig.json" },
+          },
         }
       )
     ).to.deep.equal({
@@ -341,9 +341,9 @@ describe("cli/mergeRuleSets - options", () => {
       options: {
         doNotFollow: "node_modules",
         tsConfig: {
-          fileName: "./tsConfig.json"
-        }
-      }
+          fileName: "./tsConfig.json",
+        },
+      },
     });
   });
 
@@ -354,8 +354,8 @@ describe("cli/mergeRuleSets - options", () => {
         {
           options: {
             doNotFollow: "node_modules",
-            tsConfig: { fileName: "./tsConfig.json" }
-          }
+            tsConfig: { fileName: "./tsConfig.json" },
+          },
         }
       )
     ).to.deep.equal({
@@ -364,8 +364,8 @@ describe("cli/mergeRuleSets - options", () => {
       forbidden: [],
       options: {
         doNotFollow: "node_modules",
-        tsConfig: {}
-      }
+        tsConfig: {},
+      },
     });
   });
 });

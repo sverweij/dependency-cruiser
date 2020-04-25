@@ -7,8 +7,8 @@ function cutNonTransgressions(pSourceEntry) {
   return {
     source: pSourceEntry.source,
     dependencies: pSourceEntry.dependencies.filter(
-      pDependency => pDependency.valid === false
-    )
+      (pDependency) => pDependency.valid === false
+    ),
   };
 }
 
@@ -21,7 +21,7 @@ function extractMetaData(pViolations) {
     {
       error: 0,
       warn: 0,
-      info: 0
+      info: 0,
     }
   );
 }
@@ -29,7 +29,7 @@ function toDependencyViolationSummary(pRule, pModule, pDependency, pRuleSet) {
   let lReturnValue = {
     from: pModule.source,
     to: pDependency.resolved,
-    rule: pRule
+    rule: pRule,
   };
 
   if (
@@ -38,7 +38,7 @@ function toDependencyViolationSummary(pRule, pModule, pDependency, pRuleSet) {
   ) {
     lReturnValue = {
       ...lReturnValue,
-      cycle: pDependency.cycle
+      cycle: pDependency.cycle,
     };
   }
 
@@ -66,10 +66,10 @@ function extractDependencyViolations(pModules, pRuleSet) {
   return _flattenDeep(
     pModules
       .map(cutNonTransgressions)
-      .filter(pModule => pModule.dependencies.length > 0)
-      .map(pModule =>
-        pModule.dependencies.map(pDependency =>
-          pDependency.rules.map(pRule =>
+      .filter((pModule) => pModule.dependencies.length > 0)
+      .map((pModule) =>
+        pModule.dependencies.map((pDependency) =>
+          pDependency.rules.map((pRule) =>
             toDependencyViolationSummary(pRule, pModule, pDependency, pRuleSet)
           )
         )
@@ -79,29 +79,29 @@ function extractDependencyViolations(pModules, pRuleSet) {
 
 function toModuleViolationSummary(pRule, pModule, pRuleSet) {
   let lReturnValue = [
-    { from: pModule.source, to: pModule.source, rule: pRule }
+    { from: pModule.source, to: pModule.source, rule: pRule },
   ];
   if (
     pModule.reaches &&
     _get(findRuleByName(pRuleSet, pRule.name), "to.reachable")
   ) {
     lReturnValue = pModule.reaches
-      .filter(pReachable => pReachable.asDefinedInRule === pRule.name)
+      .filter((pReachable) => pReachable.asDefinedInRule === pRule.name)
       .reduce(
         (pAll, pReachable) =>
           pAll.concat(
-            pReachable.modules.map(pReachableModule => ({
+            pReachable.modules.map((pReachableModule) => ({
               to: pReachableModule.source,
-              via: pReachableModule.via
+              via: pReachableModule.via,
             }))
           ),
         []
       )
-      .map(pToModule => ({
+      .map((pToModule) => ({
         from: pModule.source,
         to: pToModule.to,
         rule: pRule,
-        via: pToModule.via
+        via: pToModule.via,
       }));
   }
 
@@ -110,7 +110,7 @@ function toModuleViolationSummary(pRule, pModule, pRuleSet) {
 
 function extractModuleViolations(pModules, pRuleSet) {
   return pModules
-    .filter(pModule => pModule.valid === false)
+    .filter((pModule) => pModule.valid === false)
     .reduce(
       (pAllModules, pModule) =>
         pAllModules.concat(
@@ -138,7 +138,7 @@ module.exports = (pModules, pRuleSet) => {
     totalDependenciesCruised: pModules.reduce(
       (pAll, pModule) => pAll + pModule.dependencies.length,
       0
-    )
+    ),
   };
 };
 

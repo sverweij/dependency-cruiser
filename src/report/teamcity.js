@@ -5,7 +5,7 @@ const CATEGORY = "dependency-cruiser";
 const SEVERITY2TEAMCITY_SEVERITY = {
   error: "ERROR",
   warn: "WARNING",
-  info: "INFO"
+  info: "INFO",
 };
 
 function severity2teamcitySeverity(pSeverity) {
@@ -15,17 +15,17 @@ function severity2teamcitySeverity(pSeverity) {
 
 function reportForbiddenRules(pForbiddenRules, pViolations) {
   return pForbiddenRules
-    .filter(pForbiddenRule =>
+    .filter((pForbiddenRule) =>
       pViolations.some(
-        pViolation => pForbiddenRule.name === pViolation.rule.name
+        (pViolation) => pForbiddenRule.name === pViolation.rule.name
       )
     )
-    .map(pForbiddenRule =>
+    .map((pForbiddenRule) =>
       tsm.inspectionType({
         id: pForbiddenRule.name,
         name: pForbiddenRule.name,
         description: pForbiddenRule.comment || pForbiddenRule.name,
-        category: CATEGORY
+        category: CATEGORY,
       })
     );
 }
@@ -35,13 +35,13 @@ function reportAllowedRule(pAllowedRule, pViolations) {
 
   if (
     pAllowedRule.length > 0 &&
-    pViolations.some(pViolation => pViolation.rule.name === "not-in-allowed")
+    pViolations.some((pViolation) => pViolation.rule.name === "not-in-allowed")
   ) {
     lReturnValue = tsm.inspectionType({
       id: "not-in-allowed",
       name: "not-in-allowed",
       description: "dependency is not in the 'allowed' set of rules",
-      category: CATEGORY
+      category: CATEGORY,
     });
   }
   return lReturnValue;
@@ -70,12 +70,12 @@ function bakeViolationMessage(pViolation) {
     : `${pViolation.from} -> ${determineTo(pViolation)}`;
 }
 function reportViolations(pViolations) {
-  return pViolations.map(pViolation =>
+  return pViolations.map((pViolation) =>
     tsm.inspection({
       typeId: pViolation.rule.name,
       message: bakeViolationMessage(pViolation),
       file: pViolation.from,
-      SEVERITY: severity2teamcitySeverity(pViolation.rule.severity)
+      SEVERITY: severity2teamcitySeverity(pViolation.rule.severity),
     })
   );
 }
@@ -89,7 +89,7 @@ function reportViolations(pViolations) {
  * @returns {IReporterOutput} - .output: a '\n' separated string of TeamCity service messages
  *                              .exitCode: the number of errors found
  */
-module.exports = pResults => {
+module.exports = (pResults) => {
   // this is the documented way to get tsm to emit strings
   // Alternatively we could've used the 'low level API', which
   // involves creating new `Message`s and stringifying those.
@@ -105,6 +105,6 @@ module.exports = pResults => {
     output: reportViolatedRules(lRuleSet, lViolations)
       .concat(reportViolations(lViolations))
       .reduce((pAll, pCurrent) => `${pAll}${pCurrent}\n`, ""),
-    exitCode: pResults.summary.error
+    exitCode: pResults.summary.error,
   };
 };

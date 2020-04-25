@@ -36,9 +36,9 @@ describe("cli/compile-config", () => {
         {
           name: "rule-from-the-base",
           from: {},
-          to: {}
-        }
-      ]
+          to: {},
+        },
+      ],
     });
   });
 
@@ -70,18 +70,18 @@ describe("cli/compile-config", () => {
       allowed: [
         {
           from: {
-            path: "src"
+            path: "src",
           },
           to: {
-            path: "src"
-          }
-        }
+            path: "src",
+          },
+        },
       ],
       allowedSeverity: "warn",
       forbidden: [],
       options: {
-        doNotFollow: "node_modules"
-      }
+        doNotFollow: "node_modules",
+      },
     });
   });
 

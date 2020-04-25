@@ -26,7 +26,7 @@ module.exports = function anonymizePath(
 ) {
   return pPath
     .split("/")
-    .map(pPathElement =>
+    .map((pPathElement) =>
       anonymizePathElement(pPathElement, pWordList, pWhiteListRE)
     )
     .join("/");

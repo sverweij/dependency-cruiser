@@ -8,6 +8,6 @@ module.exports = {
     "version. Fix it by adding the package to the dependencies in your package.json.",
   from: {},
   to: {
-    dependencyTypes: ["npm-no-pkg", "npm-unknown"]
-  }
+    dependencyTypes: ["npm-no-pkg", "npm-unknown"],
+  },
 };

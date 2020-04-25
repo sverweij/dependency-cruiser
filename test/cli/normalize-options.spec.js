@@ -13,7 +13,7 @@ describe("cli/normalizeOptions", () => {
     expect(normalizeOptions({})).to.deep.equal({
       outputTo: "-",
       outputType: "err",
-      validate: false
+      validate: false,
     });
   });
 
@@ -22,14 +22,14 @@ describe("cli/normalizeOptions", () => {
       outputTo: "-",
       outputType: "err",
       moduleSystems: ["cjs", "es6"],
-      validate: false
+      validate: false,
     });
   });
 
   it("trims module system strings", () => {
     expect(
       normalizeOptions({
-        moduleSystems: " amd,cjs ,  es6 "
+        moduleSystems: " amd,cjs ,  es6 ",
       }).moduleSystems
     ).to.deep.equal(["amd", "cjs", "es6"]);
   });
@@ -42,7 +42,7 @@ describe("cli/normalizeOptions", () => {
       rulesFile: ".dependency-cruiser.json",
       ruleSet: {},
       config: true,
-      validate: true
+      validate: true,
     });
   });
 
@@ -56,7 +56,7 @@ describe("cli/normalizeOptions", () => {
       rulesFile: ".dependency-cruiser.json",
       ruleSet: {},
       config: ".dependency-cruiser.json",
-      validate: true
+      validate: true,
     });
   });
 
@@ -76,7 +76,7 @@ describe("cli/normalizeOptions", () => {
       outputType: "err",
       rulesFile: ".dependency-cruiser.js",
       ruleSet: {},
-      validate: true
+      validate: true,
     });
   });
 
@@ -87,7 +87,7 @@ describe("cli/normalizeOptions", () => {
       outputType: "err",
       rulesFile: ".dependency-cruiser.json",
       ruleSet: {},
-      validate: true
+      validate: true,
     });
   });
 
@@ -98,7 +98,7 @@ describe("cli/normalizeOptions", () => {
       outputType: "err",
       rulesFile: ".dependency-cruiser.json",
       ruleSet: {},
-      validate: true
+      validate: true,
     });
   });
 
@@ -118,14 +118,14 @@ describe("cli/normalizeOptions", () => {
       outputType: "err",
       rulesFile: "./test/cli/fixtures/rules.empty.json",
       ruleSet: {},
-      validate: true
+      validate: true,
     });
   });
 
   it("a rules file with comments gets the comments stripped out & parsed", () => {
     expect(
       normalizeOptions({
-        validate: "./test/cli/fixtures/rules.withcomments.json"
+        validate: "./test/cli/fixtures/rules.withcomments.json",
       })
     ).to.deep.equal({
       outputTo: "-",
@@ -138,19 +138,19 @@ describe("cli/normalizeOptions", () => {
             severity: "warn",
             from: {},
             to: {
-              path: "sub"
-            }
-          }
-        ]
+              path: "sub",
+            },
+          },
+        ],
       },
-      validate: true
+      validate: true,
     });
   });
 
   it("accepts and interprets a javascript rule file (relative path)", () => {
     expect(
       normalizeOptions({
-        validate: "./test/cli/fixtures/rules.withcomments.js"
+        validate: "./test/cli/fixtures/rules.withcomments.js",
       })
     ).to.deep.equal({
       outputTo: "-",
@@ -163,12 +163,12 @@ describe("cli/normalizeOptions", () => {
             severity: "warn",
             from: {},
             to: {
-              path: "sub"
-            }
-          }
-        ]
+              path: "sub",
+            },
+          },
+        ],
       },
-      validate: true
+      validate: true,
     });
   });
 
@@ -189,19 +189,19 @@ describe("cli/normalizeOptions", () => {
             severity: "warn",
             from: {},
             to: {
-              path: "sub"
-            }
-          }
-        ]
+              path: "sub",
+            },
+          },
+        ],
       },
-      validate: true
+      validate: true,
     });
   });
 
   it("defaults tsConfig.fileName to 'tsconfig.json' if it wasn't specified", () => {
     expect(
       normalizeOptions({
-        validate: "./test/cli/fixtures/rules.tsConfigNoFileName.json"
+        validate: "./test/cli/fixtures/rules.tsConfigNoFileName.json",
       })
     ).to.deep.equal({
       outputTo: "-",
@@ -210,17 +210,17 @@ describe("cli/normalizeOptions", () => {
       ruleSet: {
         options: {
           tsConfig: {
-            fileName: "tsconfig.json"
-          }
-        }
+            fileName: "tsconfig.json",
+          },
+        },
       },
-      validate: true
+      validate: true,
     });
   });
   it("defaults webpackConfig.fileName to 'tsconfig.json' if it wasn't specified", () => {
     expect(
       normalizeOptions({
-        validate: "./test/cli/fixtures/rules.webpackConfigNoFileName.json"
+        validate: "./test/cli/fixtures/rules.webpackConfigNoFileName.json",
       })
     ).to.deep.equal({
       outputTo: "-",
@@ -229,11 +229,11 @@ describe("cli/normalizeOptions", () => {
       ruleSet: {
         options: {
           webpackConfig: {
-            fileName: "webpack.config.js"
-          }
-        }
+            fileName: "webpack.config.js",
+          },
+        },
       },
-      validate: true
+      validate: true,
     });
   });
 });

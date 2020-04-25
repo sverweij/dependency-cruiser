@@ -7,7 +7,7 @@ const isCore = require("./is-core");
 const readPackageDeps = require("./get-manifest-dependencies");
 const resolveHelpers = require("./resolve-helpers");
 
-const fileExists = memoize(pFile => {
+const fileExists = memoize((pFile) => {
   try {
     fs.accessSync(pFile, fs.R_OK);
   } catch (pError) {
@@ -39,7 +39,8 @@ module.exports = (
     resolved: fileExists(lProbablePath) ? lProbablePath : pModuleName,
     coreModule: Boolean(isCore(pModuleName)),
     followable: fileExists(lProbablePath),
-    couldNotResolve: !Boolean(isCore(pModuleName)) && !fileExists(lProbablePath)
+    couldNotResolve:
+      !Boolean(isCore(pModuleName)) && !fileExists(lProbablePath),
   };
 
   // we might want to use resolve options instead of {} here
@@ -57,7 +58,7 @@ module.exports = (
       pFileDirectory,
       pResolveOptions,
       pBaseDirectory
-    )
+    ),
   };
 };
 

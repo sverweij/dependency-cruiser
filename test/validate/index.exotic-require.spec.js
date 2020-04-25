@@ -11,7 +11,7 @@ describe("validate/index - exoticallyRequired", () => {
         { source: "something" },
         {
           resolved: "src/aap/speeltuigen/autoband.ts",
-          exoticallyRequired: false
+          exoticallyRequired: false,
         }
       )
     ).to.deep.equal({ valid: true });
@@ -26,12 +26,12 @@ describe("validate/index - exoticallyRequired", () => {
         {
           resolved: "src/aap/speeltuigen/autoband.ts",
           exoticRequire: "notUse",
-          exoticallyRequired: true
+          exoticallyRequired: true,
         }
       )
     ).to.deep.equal({
       rules: [{ name: "no-exotic-requires-period", severity: "warn" }],
-      valid: false
+      valid: false,
     });
   });
 });
@@ -69,7 +69,7 @@ describe("validate/index - exoticRequire", () => {
       )
     ).to.deep.equal({
       valid: false,
-      rules: [{ name: "no-use-as-exotic-require", severity: "warn" }]
+      rules: [{ name: "no-use-as-exotic-require", severity: "warn" }],
     });
   });
 });
@@ -94,7 +94,7 @@ describe("validate/index - exoticRequireNot", () => {
         { source: "something" },
         {
           resolved: "src/aap/speeltuigen/autoband.ts",
-          exoticRequire: "use"
+          exoticRequire: "use",
         }
       )
     ).to.deep.equal({ valid: true });
@@ -108,12 +108,12 @@ describe("validate/index - exoticRequireNot", () => {
         { source: "something" },
         {
           resolved: "src/aap/speeltuigen/autoband.ts",
-          exoticRequire: "notuse"
+          exoticRequire: "notuse",
         }
       )
     ).to.deep.equal({
       valid: false,
-      rules: [{ name: "only-use-as-exotic-require", severity: "warn" }]
+      rules: [{ name: "only-use-as-exotic-require", severity: "warn" }],
     });
   });
 });

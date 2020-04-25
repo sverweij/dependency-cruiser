@@ -12,19 +12,19 @@ describe("main/rule-set/normalize", () => {
         allowed: [
           {
             from: ".+",
-            to: ".+"
-          }
-        ]
+            to: ".+",
+          },
+        ],
       })
     ).to.deep.equal({
       allowed: [
         {
           name: "not-in-allowed",
           from: ".+",
-          to: ".+"
-        }
+          to: ".+",
+        },
       ],
-      allowedSeverity: "warn"
+      allowedSeverity: "warn",
     });
   });
 
@@ -34,20 +34,20 @@ describe("main/rule-set/normalize", () => {
         allowed: [
           {
             from: ".+",
-            to: ".+"
-          }
+            to: ".+",
+          },
         ],
-        allowedSeverity: "error"
+        allowedSeverity: "error",
       })
     ).to.deep.equal({
       allowed: [
         {
           name: "not-in-allowed",
           from: ".+",
-          to: ".+"
-        }
+          to: ".+",
+        },
       ],
-      allowedSeverity: "error"
+      allowedSeverity: "error",
     });
   });
 
@@ -59,9 +59,9 @@ describe("main/rule-set/normalize", () => {
             from: ".+",
             to: ".+",
             severity: "unrecognized",
-            name: "all-ok"
-          }
-        ]
+            name: "all-ok",
+          },
+        ],
       })
     ).to.deep.equal({
       forbidden: [
@@ -69,9 +69,9 @@ describe("main/rule-set/normalize", () => {
           from: ".+",
           to: ".+",
           severity: "warn",
-          name: "all-ok"
-        }
-      ]
+          name: "all-ok",
+        },
+      ],
     });
   });
 
@@ -83,9 +83,9 @@ describe("main/rule-set/normalize", () => {
             from: ".+",
             to: ".+",
             severity: "error",
-            name: "all-ok"
-          }
-        ]
+            name: "all-ok",
+          },
+        ],
       })
     ).to.deep.equal({
       forbidden: [
@@ -93,9 +93,9 @@ describe("main/rule-set/normalize", () => {
           from: ".+",
           to: ".+",
           severity: "error",
-          name: "all-ok"
-        }
-      ]
+          name: "all-ok",
+        },
+      ],
     });
   });
 
@@ -108,9 +108,9 @@ describe("main/rule-set/normalize", () => {
             to: ".+",
             severity: "error",
             name: "all-ok",
-            comment: "this comment is kept"
-          }
-        ]
+            comment: "this comment is kept",
+          },
+        ],
       })
     ).to.deep.equal({
       forbidden: [
@@ -119,9 +119,9 @@ describe("main/rule-set/normalize", () => {
           to: ".+",
           severity: "error",
           name: "all-ok",
-          comment: "this comment is kept"
-        }
-      ]
+          comment: "this comment is kept",
+        },
+      ],
     });
   });
 
@@ -134,12 +134,12 @@ describe("main/rule-set/normalize", () => {
             to: ".+",
             severity: "ignore",
             name: "all-ok",
-            comment: "this comment is kept"
-          }
-        ]
+            comment: "this comment is kept",
+          },
+        ],
       })
     ).to.deep.equal({
-      forbidden: []
+      forbidden: [],
     });
   });
 
@@ -149,10 +149,10 @@ describe("main/rule-set/normalize", () => {
         allowed: [
           {
             from: ".+",
-            to: ".+"
-          }
+            to: ".+",
+          },
         ],
-        allowedSeverity: "ignore"
+        allowedSeverity: "ignore",
       })
     ).to.deep.equal({});
   });

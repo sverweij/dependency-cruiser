@@ -8,8 +8,8 @@ module.exports = {
         anon: { $ref: "#/definitions/AnonReporterOptionsType" },
         archi: { $ref: "#/definitions/ArchiReporterOptionsType" },
         dot: { $ref: "#/definitions/DotReporterOptionsType" },
-        ddot: { $ref: "#/definitions/DotReporterOptionsType" }
-      }
+        ddot: { $ref: "#/definitions/DotReporterOptionsType" },
+      },
     },
     AnonReporterOptionsType: {
       type: "object",
@@ -26,10 +26,10 @@ module.exports = {
             "by default. " +
             "Read more in https://github.com/sverweij/dependency-cruiser/blob/develop/doc/cli.md#anon---obfuscated-json",
           items: {
-            type: "string"
-          }
-        }
-      }
+            type: "string",
+          },
+        },
+      },
     },
     ArchiReporterOptionsType: {
       type: "object",
@@ -40,10 +40,10 @@ module.exports = {
         collapsePattern: {
           type: "string",
           description:
-            'Regular expressions to collapse to (e.g. "^node_modules/[^/]+|^src/[^/]+")'
+            'Regular expressions to collapse to (e.g. "^node_modules/[^/]+|^src/[^/]+")',
         },
-        theme: { $ref: "#/definitions/DotThemeType" }
-      }
+        theme: { $ref: "#/definitions/DotThemeType" },
+      },
     },
     DotReporterOptionsType: {
       type: "object",
@@ -54,10 +54,10 @@ module.exports = {
           type: "string",
           description:
             'Regular expressions to collapse to. For the "dot" reporter defaults ' +
-            'to null, but "node_modules/[^/]+" is recommended for most use cases.'
+            'to null, but "node_modules/[^/]+" is recommended for most use cases.',
         },
-        theme: { $ref: "#/definitions/DotThemeType" }
-      }
+        theme: { $ref: "#/definitions/DotThemeType" },
+      },
     },
     DotThemeType: {
       type: "object",
@@ -68,51 +68,51 @@ module.exports = {
           type: "boolean",
           description:
             "If passed with the value 'true', the passed theme replaces the default " +
-            "one. In all other cases it extends the default theme."
+            "one. In all other cases it extends the default theme.",
         },
         graph: {
           description: "Name- value pairs of GraphViz dot (global) attributes.",
-          type: "object"
+          type: "object",
         },
         node: {
           description: "Name- value pairs of GraphViz dot node attributes.",
-          type: "object"
+          type: "object",
         },
         edge: {
           description: "Name- value pairs of GraphViz dot edge attributes.",
-          type: "object"
+          type: "object",
         },
         modules: {
           description:
             "List of criteria and attributes to apply for modules when the criteria are " +
             "met. Conditions can use any module attribute. Attributes can be any " +
             "that are valid in GraphViz dot nodes.",
-          $ref: "#/definitions/DotThemeArrayType"
+          $ref: "#/definitions/DotThemeArrayType",
         },
         dependencies: {
           description:
             "List of criteria and attributes to apply for dependencies when the criteria are " +
             "met. Conditions can use any dependency attribute. Attributes can be any " +
             "that are valid in GraphViz dot edges.",
-          $ref: "#/definitions/DotThemeArrayType"
-        }
-      }
+          $ref: "#/definitions/DotThemeArrayType",
+        },
+      },
     },
     DotThemeArrayType: {
       type: "array",
-      items: { $ref: "#/definitions/DotThemeEntryType" }
+      items: { $ref: "#/definitions/DotThemeEntryType" },
     },
     DotThemeEntryType: {
       type: "object",
       additionalProperties: false,
       properties: {
         criteria: {
-          type: "object"
+          type: "object",
         },
         attributes: {
-          type: "object"
-        }
-      }
-    }
-  }
+          type: "object",
+        },
+      },
+    },
+  },
 };

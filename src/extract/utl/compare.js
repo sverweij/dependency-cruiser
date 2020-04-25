@@ -3,7 +3,7 @@ function severity2number(pSeverity) {
     error: 1,
     warn: 2,
     info: 3,
-    ignore: 4
+    ignore: 4,
   };
 
   // eslint-disable-next-line security/detect-object-injection
@@ -33,7 +33,7 @@ function dependenciesEqual(pLeftDependency) {
   // javascript it can be es6, but also cjs (depends on the `module` setting
   // in your tsconfig). In the latter case, we're still looking at the same
   // dependency even though the module systems differ.
-  return pRightDependency =>
+  return (pRightDependency) =>
     pLeftDependency.module === pRightDependency.module &&
     pLeftDependency.dynamic === pRightDependency.dynamic &&
     pLeftDependency.exoticRequire === pRightDependency.exoticRequire;
@@ -42,5 +42,5 @@ function dependenciesEqual(pLeftDependency) {
 module.exports = {
   severities,
   violations,
-  dependenciesEqual
+  dependenciesEqual,
 };

@@ -10,10 +10,10 @@ module.exports = {
   additionalProperties: false,
   properties: {
     modules: { $ref: "#/definitions/ModulesType" },
-    summary: { $ref: "#/definitions/SummaryType" }
+    summary: { $ref: "#/definitions/SummaryType" },
   },
   definitions: {
     ...modules.definitions,
-    ...summary.definitions
-  }
+    ...summary.definitions,
+  },
 };

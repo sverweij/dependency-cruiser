@@ -60,5 +60,5 @@ module.exports = {
    */
   getASTCached,
 
-  clearCache
+  clearCache,
 };

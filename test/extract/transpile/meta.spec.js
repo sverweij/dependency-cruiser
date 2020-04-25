@@ -17,7 +17,7 @@ describe("transpiler meta", () => {
       ".litcoffee",
       ".coffee.md",
       ".csx",
-      ".cjsx"
+      ".cjsx",
     ]);
   });
 
@@ -34,28 +34,28 @@ describe("transpiler meta", () => {
       {
         name: "coffee-script",
         version: ">=1.0.0 <2.0.0",
-        available: true
+        available: true,
       },
       {
         name: "coffeescript",
         version: ">=1.0.0 <3.0.0",
-        available: true
+        available: true,
       },
       {
         name: "livescript",
         version: ">=1.0.0 <2.0.0",
-        available: false
+        available: false,
       },
       {
         name: "typescript",
         version: ">=2.0.0 <4.0.0",
-        available: true
+        available: true,
       },
       {
         name: "vue-template-compiler",
         version: ">=2.0.0 <3.0.0",
-        available: true
-      }
+        available: true,
+      },
     ]);
   });
 });

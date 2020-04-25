@@ -2,58 +2,56 @@ name: test coverage - windows
 
 on:
   push:
-      branches:
+    branches:
       - master
       - develop
   pull_request:
 
 jobs:
-
   check:
-
     strategy:
       fail-fast: false
       matrix:
-        node-version: 
-          - 12.x
+        node-version:
+          - 14.x
         platform:
           - windows-latest
 
     runs-on: ${{matrix.platform}}
 
     steps:
-    - name: checkout
-      uses: actions/checkout@v1
-    - name: cache node modules for ${{matrix.node-version}}@${{matrix.platform}}
-      uses: actions/cache@v1
-      with:
-        path: node_modules
-        key: ${{matrix.node-version}}@${{matrix.platform}}-build-${{hashFiles('package.json')}}
-        restore-keys: |
-          ${{matrix.node-version}}@${{matrix.platform}}-build-
-    - name: set up node ${{matrix.node-version}}@${{matrix.platform}}
-      uses: actions/setup-node@v1
-      with:
-        node-version: ${{matrix.node-version}}
-    - name: install & build
-      run: |
-        node --version
-        npm install
-        npm run build
-      shell: bash
-      env:
-        CI: true
-    - name: forbidden dependency check
-      run: |
-        node --version
-        npm run depcruise
-      shell: bash
-      env:
-        CI: true
-    - name: test coverage
-      run: |
-        node --version
-        npm run test:cover
-      shell: bash
-      env:
-        CI: true
+      - name: checkout
+        uses: actions/checkout@v1
+      - name: cache node modules for ${{matrix.node-version}}@${{matrix.platform}}
+        uses: actions/cache@v1
+        with:
+          path: node_modules
+          key: ${{matrix.node-version}}@${{matrix.platform}}-build-${{hashFiles('package.json')}}
+          restore-keys: |
+            ${{matrix.node-version}}@${{matrix.platform}}-build-
+      - name: set up node ${{matrix.node-version}}@${{matrix.platform}}
+        uses: actions/setup-node@v1
+        with:
+          node-version: ${{matrix.node-version}}
+      - name: install & build
+        run: |
+          node --version
+          npm install
+          npm run build
+        shell: bash
+        env:
+          CI: true
+      - name: forbidden dependency check
+        run: |
+          node --version
+          npm run depcruise
+        shell: bash
+        env:
+          CI: true
+      - name: test coverage
+        run: |
+          node --version
+          npm run test:cover
+        shell: bash
+        env:
+          CI: true

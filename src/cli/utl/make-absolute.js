@@ -1,6 +1,6 @@
 const path = require("path");
 
-module.exports = pFilename => {
+module.exports = (pFilename) => {
   let lReturnValue = pFilename;
 
   if (!path.isAbsolute(pFilename)) {

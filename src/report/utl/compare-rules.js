@@ -5,7 +5,7 @@ function severity2number(pSeverity) {
     error: 1,
     warn: 2,
     info: 3,
-    ignore: 4
+    ignore: 4,
   };
 
   // eslint-disable-next-line security/detect-object-injection

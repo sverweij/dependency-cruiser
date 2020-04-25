@@ -23,10 +23,10 @@ function initFollowableExtensions(pResolveOptions) {
     ".sass",
     ".scss",
     ".stylus",
-    ".less"
+    ".less",
   ];
 
-  KNOWN_UNFOLLOWABLES.forEach(pUnfollowable => {
+  KNOWN_UNFOLLOWABLES.forEach((pUnfollowable) => {
     lReturnValue.delete(pUnfollowable);
   });
   return lReturnValue;

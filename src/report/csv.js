@@ -1,11 +1,11 @@
 const dependencyToIncidenceTransformer = require("./utl/dependency-to-incidence-transformer");
 
 function renderHeader(pModules) {
-  return pModules.map(pModule => `"${pModule.source}"`).join(",");
+  return pModules.map((pModule) => `"${pModule.source}"`).join(",");
 }
 
 function mapIncidences(pIncidences) {
-  return pIncidences.map(pIncidence => `"${pIncidence.incidence}"`).join(",");
+  return pIncidences.map((pIncidence) => `"${pIncidence.incidence}"`).join(",");
 }
 
 function renderBody(pModules) {
@@ -27,7 +27,7 @@ function report(pModules) {
  * @returns {IReporterOutput} - output: incidence matrix in csv format
  *                     exitCode: 0
  */
-module.exports = pResults => ({
+module.exports = (pResults) => ({
   output: report(dependencyToIncidenceTransformer(pResults.modules)),
-  exitCode: 0
+  exitCode: 0,
 });

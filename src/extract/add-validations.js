@@ -13,11 +13,11 @@ const validate = require("../validate");
  *                                part of
  */
 module.exports = (pModules, pValidate, pRuleSet) =>
-  pModules.map(pModule => ({
+  pModules.map((pModule) => ({
     ...pModule,
     ...validate.module(pValidate, pRuleSet, pModule),
-    dependencies: pModule.dependencies.map(pDependency => ({
+    dependencies: pModule.dependencies.map((pDependency) => ({
       ...pDependency,
-      ...validate.dependency(pValidate, pRuleSet, pModule, pDependency)
-    }))
+      ...validate.dependency(pValidate, pRuleSet, pModule, pDependency),
+    })),
   }));

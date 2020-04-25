@@ -21,7 +21,7 @@ module.exports = function buildConfig(pNormalizedInitOptions) {
       sourceLocationRE: folderNameArrayToRE(
         pNormalizedInitOptions.sourceLocation
       ),
-      testLocationRE: folderNameArrayToRE(pNormalizedInitOptions.testLocation)
-    }
+      testLocationRE: folderNameArrayToRE(pNormalizedInitOptions.testLocation),
+    },
   });
 };

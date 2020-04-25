@@ -7,7 +7,7 @@ module.exports = {
   severity: "warn",
   from: {
     orphan: true,
-    pathNot: "\\.d\\.ts$"
+    pathNot: "\\.d\\.ts$",
   },
-  to: {}
+  to: {},
 };

@@ -8,8 +8,8 @@ describe("ast-extractors/extract-typescript - re-exports", () => {
         module: "./ts-thing",
         moduleSystem: "es6",
         dynamic: false,
-        exoticallyRequired: false
-      }
+        exoticallyRequired: false,
+      },
     ]);
   });
 
@@ -23,8 +23,8 @@ describe("ast-extractors/extract-typescript - re-exports", () => {
         module: "./ts-thing",
         moduleSystem: "es6",
         dynamic: false,
-        exoticallyRequired: false
-      }
+        exoticallyRequired: false,
+      },
     ]);
   });
 
@@ -42,8 +42,8 @@ describe("ast-extractors/extract-typescript - re-exports", () => {
         module: "./damodule",
         moduleSystem: "es6",
         dynamic: false,
-        exoticallyRequired: false
-      }
+        exoticallyRequired: false,
+      },
     ]);
   });
 });

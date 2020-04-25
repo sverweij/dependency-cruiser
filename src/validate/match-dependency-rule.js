@@ -26,7 +26,7 @@ function extractGroups(pRule, pActualPath) {
 
     if (Boolean(lMatchResult) && lMatchResult.length > 1) {
       lReturnValue = lMatchResult.filter(
-        pResult => typeof pResult === "string"
+        (pResult) => typeof pResult === "string"
       );
     }
   }
@@ -35,7 +35,7 @@ function extractGroups(pRule, pActualPath) {
 
 function match(pFrom, pTo) {
   // eslint-disable-next-line complexity
-  return pRule => {
+  return (pRule) => {
     const lGroups = extractGroups(pRule.from, pFrom.source);
 
     return (
@@ -61,9 +61,9 @@ function match(pFrom, pTo) {
     );
   };
 }
-const isInteresting = pRule => !isModuleOnlyRule(pRule);
+const isInteresting = (pRule) => !isModuleOnlyRule(pRule);
 
 module.exports = {
   match,
-  isInteresting
+  isInteresting,
 };

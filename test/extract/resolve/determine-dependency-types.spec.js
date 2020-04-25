@@ -8,7 +8,7 @@ describe("extract/resolve/determineDependencyTypes - determine dependencyTypes",
       determine(
         {
           couldNotResolve: false,
-          resolved: "src/bla/localthing"
+          resolved: "src/bla/localthing",
         },
         "./localthing"
       )
@@ -20,7 +20,7 @@ describe("extract/resolve/determineDependencyTypes - determine dependencyTypes",
       determine(
         {
           couldNotResolve: false,
-          resolved: "fs"
+          resolved: "fs",
         },
         "fs"
       )
@@ -32,7 +32,7 @@ describe("extract/resolve/determineDependencyTypes - determine dependencyTypes",
       determine(
         {
           couldNotResolve: true,
-          resolved: "unresolvable-thing"
+          resolved: "unresolvable-thing",
         },
         "unresolvable-thing"
       )
@@ -44,7 +44,7 @@ describe("extract/resolve/determineDependencyTypes - determine dependencyTypes",
       determine(
         {
           couldNotResolve: false,
-          resolved: "node_modules/cool-module/main/index/js"
+          resolved: "node_modules/cool-module/main/index/js",
         },
         "cool-module"
       )
@@ -57,7 +57,7 @@ describe("extract/resolve/determineDependencyTypes - determine dependencyTypes",
         {
           module: "cool-module",
           couldNotResolve: false,
-          resolved: "node_modules/cool-module/main/index.js"
+          resolved: "node_modules/cool-module/main/index.js",
         },
         "cool-module",
         {}
@@ -71,13 +71,13 @@ describe("extract/resolve/determineDependencyTypes - determine dependencyTypes",
         {
           module: "cool-module",
           couldNotResolve: false,
-          resolved: "node_modules/cool-module/main/index.js"
+          resolved: "node_modules/cool-module/main/index.js",
         },
         "cool-module",
         {
           dependencies: {
-            "cool-module": "1.2.3"
-          }
+            "cool-module": "1.2.3",
+          },
         }
       )
     ).to.deep.equal(["npm"]);
@@ -88,13 +88,13 @@ describe("extract/resolve/determineDependencyTypes - determine dependencyTypes",
       determine(
         {
           couldNotResolve: false,
-          resolved: "node_modules/cool-module/main/index.js"
+          resolved: "node_modules/cool-module/main/index.js",
         },
         "cool-module",
         {
           devDependencies: {
-            "cool-module": "1.2.3"
-          }
+            "cool-module": "1.2.3",
+          },
         }
       )
     ).to.deep.equal(["npm-dev"]);
@@ -105,16 +105,16 @@ describe("extract/resolve/determineDependencyTypes - determine dependencyTypes",
       determine(
         {
           couldNotResolve: false,
-          resolved: "node_modules/cool-module/main/index.js"
+          resolved: "node_modules/cool-module/main/index.js",
         },
         "cool-module",
         {
           dependencies: {
-            "cool-module": "1.2.3"
+            "cool-module": "1.2.3",
           },
           devDependencies: {
-            "cool-module": "1.2.3"
-          }
+            "cool-module": "1.2.3",
+          },
         }
       )
     ).to.deep.equal(["npm", "npm-dev"]);
@@ -125,16 +125,16 @@ describe("extract/resolve/determineDependencyTypes - determine dependencyTypes",
       determine(
         {
           couldNotResolve: false,
-          resolved: "node_modules/cool-module/wappie.js"
+          resolved: "node_modules/cool-module/wappie.js",
         },
         "cool-module/wappie",
         {
           dependencies: {
-            "cool-module": "1.2.3"
+            "cool-module": "1.2.3",
           },
           devDependencies: {
-            "cool-module/wappie": "1.2.3"
-          }
+            "cool-module/wappie": "1.2.3",
+          },
         }
       )
     ).to.deep.equal(["npm"]);
@@ -145,13 +145,13 @@ describe("extract/resolve/determineDependencyTypes - determine dependencyTypes",
       determine(
         {
           couldNotResolve: false,
-          resolved: "node_modules/cool-module/main/index.js"
+          resolved: "node_modules/cool-module/main/index.js",
         },
         "cool-module",
         {
           vagueDependencies: {
-            "cool-module": "1.2.3"
-          }
+            "cool-module": "1.2.3",
+          },
         }
       )
     ).to.deep.equal(["npm-no-pkg"]);
@@ -162,15 +162,15 @@ describe("extract/resolve/determineDependencyTypes - determine dependencyTypes",
       determine(
         {
           couldNotResolve: false,
-          resolved: "src/wappie.js"
+          resolved: "src/wappie.js",
         },
         "@wappie",
         {},
         ".",
         {
           alias: {
-            "@": "src"
-          }
+            "@": "src",
+          },
         }
       )
     ).to.deep.equal(["aliased"]);
@@ -181,13 +181,13 @@ describe("extract/resolve/determineDependencyTypes - determine dependencyTypes",
       determine(
         {
           couldNotResolve: false,
-          resolved: "wappie.js"
+          resolved: "wappie.js",
         },
         "cool-module",
         {
           cerebralDependencies: {
-            "cool-module": "1.2.3"
-          }
+            "cool-module": "1.2.3",
+          },
         }
       )
     ).to.deep.equal(["undetermined"]);
@@ -198,13 +198,13 @@ describe("extract/resolve/determineDependencyTypes - determine dependencyTypes",
       determine(
         {
           couldNotResolve: false,
-          resolved: "src/bla/somethinglocal.ts"
+          resolved: "src/bla/somethinglocal.ts",
         },
         "bla/somethinglocal",
         {},
         "whatever",
         {
-          modules: ["node_modules", "src"]
+          modules: ["node_modules", "src"],
         }
       )
     ).to.deep.equal(["localmodule"]);
@@ -215,7 +215,7 @@ describe("extract/resolve/determineDependencyTypes - determine dependencyTypes",
       determine(
         {
           couldNotResolve: false,
-          resolved: "src/bla/somethinglocal.ts"
+          resolved: "src/bla/somethinglocal.ts",
         },
         "bla/somethinglocal",
         {},
@@ -223,8 +223,8 @@ describe("extract/resolve/determineDependencyTypes - determine dependencyTypes",
         {
           modules: [
             "node_modules",
-            path.resolve(__dirname, "socrates", "hemlock", "src")
-          ]
+            path.resolve(__dirname, "socrates", "hemlock", "src"),
+          ],
         },
         path.resolve(__dirname, "socrates", "hemlock", "src", "bla")
       )
@@ -236,13 +236,13 @@ describe("extract/resolve/determineDependencyTypes - determine dependencyTypes",
       determine(
         {
           couldNotResolve: false,
-          resolved: "test/bla/localthing.spec.js"
+          resolved: "test/bla/localthing.spec.js",
         },
         "test/bla/localthing.spec",
         {},
         "whatever",
         {
-          modules: ["node_modules", "src"]
+          modules: ["node_modules", "src"],
         }
       )
     ).to.deep.equal(["undetermined"]);

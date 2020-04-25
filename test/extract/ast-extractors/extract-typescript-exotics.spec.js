@@ -23,8 +23,8 @@ describe("ast-extractors/extract-typescript - exotics", () => {
         moduleSystem: "cjs",
         dynamic: false,
         exoticRequire: "want",
-        exoticallyRequired: true
-      }
+        exoticallyRequired: true,
+      },
     ]);
   });
 
@@ -40,8 +40,8 @@ describe("ast-extractors/extract-typescript - exotics", () => {
         moduleSystem: "cjs",
         dynamic: false,
         exoticRequire: "window.require",
-        exoticallyRequired: true
-      }
+        exoticallyRequired: true,
+      },
     ]);
   });
 
@@ -57,15 +57,15 @@ describe("ast-extractors/extract-typescript - exotics", () => {
         moduleSystem: "cjs",
         dynamic: false,
         exoticRequire: "want",
-        exoticallyRequired: true
+        exoticallyRequired: true,
       },
       {
         module: "./required-with-need",
         moduleSystem: "cjs",
         dynamic: false,
         exoticRequire: "need",
-        exoticallyRequired: true
-      }
+        exoticallyRequired: true,
+      },
     ]);
   });
 });

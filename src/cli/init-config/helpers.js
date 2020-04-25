@@ -42,19 +42,19 @@ function pnpIsEnabled() {
 function getFolderNames(pFolderName) {
   return fs
     .readdirSync(pFolderName, "utf8")
-    .filter(pFileName => fs.statSync(pFileName).isDirectory());
+    .filter((pFileName) => fs.statSync(pFileName).isDirectory());
 }
 
 function isLikelyMonoRepo(pFolderNames = getFolderNames(".")) {
-  return pFolderNames.some(pFolderName => pFolderName === "packages");
+  return pFolderNames.some((pFolderName) => pFolderName === "packages");
 }
 
 function hasTestsWithinSource(pTestLocations, pSourceLocations) {
   return (
     pTestLocations.length === 0 ||
-    pTestLocations.every(pTestLocation =>
+    pTestLocations.every((pTestLocation) =>
       pSourceLocations.some(
-        pSourceLocation => pSourceLocation === pTestLocation
+        (pSourceLocation) => pSourceLocation === pTestLocation
       )
     )
   );
@@ -67,9 +67,9 @@ function getFolderCandidates(pCandidateFolderArray) {
       // version 8.1.1. That way we won't break backwards compatibility
       return pCandidateFolderArray;
     }
-    return pFolderNames.filter(pFolderName =>
+    return pFolderNames.filter((pFolderName) =>
       pCandidateFolderArray.some(
-        pCandidateFolder => pCandidateFolder === pFolderName
+        (pCandidateFolder) => pCandidateFolder === pFolderName
       )
     );
   };
@@ -81,7 +81,7 @@ function folderNameArrayToRE(pArrayOfStrings) {
 
 function toSourceLocationArray(pLocations) {
   if (!Array.isArray(pLocations)) {
-    return pLocations.split(",").map(pFolder => pFolder.trim());
+    return pLocations.split(",").map((pFolder) => pFolder.trim());
   }
   return pLocations;
 }
@@ -113,5 +113,5 @@ module.exports = {
   hasTestsWithinSource,
   getFolderCandidates,
   getSourceFolderCandidates: getFolderCandidates(LIKELY_SOURCE_FOLDERS),
-  getTestFolderCandidates: getFolderCandidates(LIKELY_TEST_FOLDERS)
+  getTestFolderCandidates: getFolderCandidates(LIKELY_TEST_FOLDERS),
 };

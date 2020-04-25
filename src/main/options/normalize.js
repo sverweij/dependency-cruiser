@@ -9,17 +9,17 @@ function normalizeFilterOption(pFilterOption) {
 
   if (typeof lFilterOption === "string") {
     return {
-      path: lFilterOption
+      path: lFilterOption,
     };
   }
   return lFilterOption;
 }
 
-module.exports = pOptions => {
+module.exports = (pOptions) => {
   let lReturnValue = {
     baseDir: process.cwd(),
     ...defaults,
-    ...pOptions
+    ...pOptions,
   };
 
   lReturnValue.maxDepth = parseInt(lReturnValue.maxDepth, 10);

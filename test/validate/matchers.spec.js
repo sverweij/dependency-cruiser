@@ -24,7 +24,7 @@ describe("validate/matches", () => {
     expect(
       matchers._replaceGroupPlaceholders("$1/aap|noot", [
         "whole/result/part",
-        "part"
+        "part",
       ])
     ).to.equal("part/aap|noot");
   });
@@ -33,7 +33,7 @@ describe("validate/matches", () => {
     expect(
       matchers._replaceGroupPlaceholders("$1|$1/[^/]+/|noot", [
         "whole/result/part",
-        "part"
+        "part",
       ])
     ).to.equal("part|part/[^/]+/|noot");
   });
@@ -43,7 +43,7 @@ describe("validate/matches", () => {
       matchers._replaceGroupPlaceholders("$1|$2", [
         "start/thing/part",
         "start",
-        "part"
+        "part",
       ])
     ).to.equal("start|part");
   });

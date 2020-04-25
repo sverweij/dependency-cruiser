@@ -1,9 +1,9 @@
 const figures = require("figures");
 
 function toFlatModuleDependencies(pModule) {
-  return pModule.dependencies.map(pDependency => ({
+  return pModule.dependencies.map((pDependency) => ({
     from: pModule.source,
-    to: pDependency.resolved
+    to: pDependency.resolved,
   }));
 }
 
@@ -35,7 +35,7 @@ function report(pResults) {
  * @returns {IReporterOutput} - output: the formatted text in a string
  *                              exitCode: the number of errors found
  */
-module.exports = pResults => ({
+module.exports = (pResults) => ({
   output: report(pResults),
-  exitCode: 0
+  exitCode: 0,
 });

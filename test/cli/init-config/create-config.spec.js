@@ -9,7 +9,7 @@ const expect = chai.expect;
 
 chai.use(require("chai-json-schema"));
 
-const createConfigNormalized = pInitOptions =>
+const createConfigNormalized = (pInitOptions) =>
   buildConfig(normalizeInitOptions(pInitOptions));
 
 describe("cli/init-config/build-config", () => {
@@ -23,7 +23,7 @@ describe("cli/init-config/build-config", () => {
     process.chdir("test/cli/fixtures/init-config/no-config-files-exist");
     const lResult = eval(
       createConfigNormalized({
-        configType: "preset"
+        configType: "preset",
       })
     );
 
@@ -49,7 +49,7 @@ describe("cli/init-config/build-config", () => {
     const lResult = eval(
       createConfigNormalized({
         configType: "preset",
-        preset: "@my/cool/company/configs/depcruise-preset"
+        preset: "@my/cool/company/configs/depcruise-preset",
       })
     );
 
@@ -66,14 +66,14 @@ describe("cli/init-config/build-config", () => {
     const lResult = eval(
       createConfigNormalized({
         configType: "preset",
-        hasTestsOutsideSource: false
+        hasTestsOutsideSource: false,
       })
     );
 
     expect(lResult).to.be.jsonSchema(configurationSchema);
     expect(lResult).to.haveOwnProperty("forbidden");
     expect(
-      lResult.forbidden.some(pRule => pRule.name === "not-to-test")
+      lResult.forbidden.some((pRule) => pRule.name === "not-to-test")
     ).to.equal(false);
   });
 
@@ -83,14 +83,14 @@ describe("cli/init-config/build-config", () => {
     const lResult = eval(
       createConfigNormalized({
         configType: "preset",
-        hasTestsOutsideSource: true
+        hasTestsOutsideSource: true,
       })
     );
 
     expect(lResult).to.be.jsonSchema(configurationSchema);
     expect(lResult).to.haveOwnProperty("forbidden");
     expect(
-      lResult.forbidden.some(pRule => pRule.name === "not-to-test")
+      lResult.forbidden.some((pRule) => pRule.name === "not-to-test")
     ).to.equal(true);
   });
 
@@ -100,14 +100,14 @@ describe("cli/init-config/build-config", () => {
     const lResult = eval(
       createConfigNormalized({
         useWebpackConfig: true,
-        webpackConfig: "./webpack.prod.js"
+        webpackConfig: "./webpack.prod.js",
       })
     );
 
     expect(lResult).to.be.jsonSchema(configurationSchema);
     expect(lResult).to.haveOwnProperty("options");
     expect(lResult.options.webpackConfig).to.deep.equal({
-      fileName: "./webpack.prod.js"
+      fileName: "./webpack.prod.js",
     });
   });
 
@@ -117,14 +117,14 @@ describe("cli/init-config/build-config", () => {
     const lResult = eval(
       createConfigNormalized({
         useTsConfig: true,
-        tsConfig: "./tsconfig.json"
+        tsConfig: "./tsconfig.json",
       })
     );
 
     expect(lResult).to.be.jsonSchema(configurationSchema);
     expect(lResult).to.haveOwnProperty("options");
     expect(lResult.options.tsConfig).to.deep.equal({
-      fileName: "./tsconfig.json"
+      fileName: "./tsconfig.json",
     });
   });
 
@@ -133,7 +133,7 @@ describe("cli/init-config/build-config", () => {
 
     const lResult = eval(
       createConfigNormalized({
-        useYarnPnP: true
+        useYarnPnP: true,
       })
     );
 

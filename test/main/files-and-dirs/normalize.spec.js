@@ -10,13 +10,13 @@ describe("main/files-and-dirs", () => {
   it("Keeps relative paths as is", () => {
     expect(normalizeFilesAndDirectories(["./src", "./test"])).to.deep.equal([
       "./src",
-      "./test"
+      "./test",
     ]);
   });
 
   it("Keeps relative paths as is - keeping globs in tact", () => {
     expect(normalizeFilesAndDirectories(["{src,test}/**/*.js"])).to.deep.equal([
-      "{src,test}/**/*.js"
+      "{src,test}/**/*.js",
     ]);
   });
 
@@ -29,7 +29,7 @@ describe("main/files-and-dirs", () => {
   it("Normalizes absolute paths to paths relative to the current working dir keeping globs in tact", () => {
     expect(
       normalizeFilesAndDirectories([
-        path.posix.join(__dirname, "**", "*.{js,ts}")
+        path.posix.join(__dirname, "**", "*.{js,ts}"),
       ]).map(path.win32.normalize)
     ).to.deep.equal(["test\\main\\files-and-dirs\\**\\*.{js,ts}"]);
   });

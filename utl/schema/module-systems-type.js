@@ -7,7 +7,7 @@ module.exports = {
       type: "array",
       description:
         "List of module systems to cruise. Defaults to [amd, cjs, es6]",
-      items: { $ref: "#/definitions/ModuleSystemType" }
-    }
-  }
+      items: { $ref: "#/definitions/ModuleSystemType" },
+    },
+  },
 };

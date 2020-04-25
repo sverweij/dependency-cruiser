@@ -3,7 +3,7 @@ const { toSourceLocationArray } = require("./helpers");
 const {
   getSourceFolderCandidates,
   getTestFolderCandidates,
-  hasTestsWithinSource
+  hasTestsWithinSource,
 } = require("./helpers");
 
 function populate(pInitOptions) {
@@ -17,7 +17,7 @@ function populate(pInitOptions) {
     ),
     testLocation: toSourceLocationArray(
       pInitOptions.testLocation || getTestFolderCandidates()
-    )
+    ),
   };
 }
 

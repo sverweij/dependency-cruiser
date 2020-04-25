@@ -8,14 +8,14 @@ module.exports = {
         path: {
           type: "string",
           description:
-            "a regular expression for modules to exclude from being cruised"
+            "a regular expression for modules to exclude from being cruised",
         },
         dynamic: {
           type: "boolean",
           description:
-            "a boolean indicating whether or not to exclude dynamic dependencies"
-        }
-      }
-    }
-  }
+            "a boolean indicating whether or not to exclude dynamic dependencies",
+        },
+      },
+    },
+  },
 };

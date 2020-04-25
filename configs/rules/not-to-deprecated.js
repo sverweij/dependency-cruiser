@@ -7,6 +7,6 @@ module.exports = {
   severity: "warn",
   from: {},
   to: {
-    dependencyTypes: ["deprecated"]
-  }
+    dependencyTypes: ["deprecated"],
+  },
 };

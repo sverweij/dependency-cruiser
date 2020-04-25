@@ -10,6 +10,6 @@ module.exports = {
   severity: "warn",
   from: {},
   to: {
-    moreThanOneDependencyType: true
-  }
+    moreThanOneDependencyType: true,
+  },
 };

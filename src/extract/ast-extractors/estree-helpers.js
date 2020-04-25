@@ -80,5 +80,5 @@ module.exports = {
   isCalleeIdentifier,
   isRequireOfSomeSort,
   isLikelyAMDDefineOrRequire,
-  isLikelyAMDDefine
+  isLikelyAMDDefine,
 };

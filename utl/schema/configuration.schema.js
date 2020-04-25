@@ -13,7 +13,7 @@ module.exports = {
   properties: {
     ...ruleSet.properties,
     options: { $ref: "#/definitions/OptionsType" },
-    extends: { $ref: "#/definitions/ExtendsType" }
+    extends: { $ref: "#/definitions/ExtendsType" },
   },
   definitions: {
     ...ruleSet.definitions,
@@ -22,7 +22,7 @@ module.exports = {
       description: "A configuration this configuration uses as a base",
       oneOf: [
         {
-          type: "string"
+          type: "string",
         },
         {
           type: "array",
@@ -31,10 +31,10 @@ module.exports = {
             "emit the warning message 'not-in-allowed' for each dependency that does not at least " +
             "meet one of them.",
           items: {
-            type: "string"
-          }
-        }
-      ]
-    }
-  }
+            type: "string",
+          },
+        },
+      ],
+    },
+  },
 };

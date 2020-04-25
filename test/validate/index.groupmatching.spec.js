@@ -16,9 +16,9 @@ describe("validate/index group matching - path group matched in a pathnot", () =
       rules: [
         {
           name: "group-to-pathnot",
-          severity: "warn"
-        }
-      ]
+          severity: "warn",
+        },
+      ],
     });
   });
 
@@ -81,9 +81,9 @@ describe("validate/index group matching - second path group matched in a pathnot
       rules: [
         {
           name: "group-two-to-pathnot",
-          severity: "warn"
-        }
-      ]
+          severity: "warn",
+        },
+      ],
     });
   });
 

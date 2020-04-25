@@ -23,7 +23,7 @@ function prepareModuleLevel(
 const GRANULARITY2FUNCTION = {
   module: prepareModuleLevel,
   folder: prepareFolderLevel,
-  custom: prepareCustomLevel
+  custom: prepareCustomLevel,
 };
 
 function report(pResults, pTheme, pGranularity, pCollapsePattern) {
@@ -39,14 +39,14 @@ function report(pResults, pTheme, pGranularity, pCollapsePattern) {
       pResults,
       lTheme,
       pCollapsePattern
-    )
+    ),
   });
 }
 
 const GRANULARITY2THEMEORIGIN = {
   module: "summary.optionsUsed.reporterOptions.dot.theme",
   folder: "summary.optionsUsed.reporterOptions.ddot.theme",
-  custom: "summary.optionsUsed.reporterOptions.archi.theme"
+  custom: "summary.optionsUsed.reporterOptions.archi.theme",
 };
 
 function pryThemeFromResults(pGranularity, pResults) {
@@ -73,11 +73,11 @@ function pryThemeFromResults(pGranularity, pResults) {
  * @returns {IReporterOutput} - .output: the directed graph
  *                              .exitCode: 0
  */
-module.exports = pGranularity => (pResults, pTheme, pCollapsePattern) => {
+module.exports = (pGranularity) => (pResults, pTheme, pCollapsePattern) => {
   const lTheme = pTheme || pryThemeFromResults(pGranularity, pResults);
 
   return {
     output: report(pResults, lTheme, pGranularity, pCollapsePattern),
-    exitCode: 0
+    exitCode: 0,
   };
 };

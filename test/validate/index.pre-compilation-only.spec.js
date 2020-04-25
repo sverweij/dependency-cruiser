@@ -24,7 +24,7 @@ describe("validate/index - preCompilationOnly", () => {
       )
     ).to.deep.equal({
       rules: [{ name: "precomp", severity: "warn" }],
-      valid: false
+      valid: false,
     });
   });
 });

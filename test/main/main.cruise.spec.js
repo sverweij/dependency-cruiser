@@ -52,7 +52,7 @@ describe("main.cruise", () => {
     const lResult = main.cruise(
       ["test/main/fixtures/jsx"],
       {
-        ruleSet: {}
+        ruleSet: {},
       },
       { bustTheCache: true }
     );

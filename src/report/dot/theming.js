@@ -9,7 +9,7 @@ function matchesRE(pValue, pRE) {
 
 function moduleMatchesCriteria(pSchemeEntry, pModule) {
   return Object.keys(pSchemeEntry.criteria).every(
-    pKey =>
+    (pKey) =>
       (_get(pModule, pKey) ||
         Object.prototype.hasOwnProperty.call(pModule, pKey)) &&
       (_get(pModule, pKey) === _get(pSchemeEntry.criteria, pKey) ||
@@ -19,10 +19,10 @@ function moduleMatchesCriteria(pSchemeEntry, pModule) {
 
 function determineAttributes(pModuleOrDependency, pAttributeCriteria) {
   return (pAttributeCriteria || [])
-    .filter(pSchemeEntry =>
+    .filter((pSchemeEntry) =>
       moduleMatchesCriteria(pSchemeEntry, pModuleOrDependency)
     )
-    .map(pSchemeEntry => pSchemeEntry.attributes)
+    .map((pSchemeEntry) => pSchemeEntry.attributes)
     .reduce((pAll, pCurrent) => ({ ...pCurrent, ...pAll }), {});
 }
 
@@ -49,5 +49,5 @@ function normalizeTheme(pTheme) {
 
 module.exports = {
   normalizeTheme,
-  determineAttributes
+  determineAttributes,
 };

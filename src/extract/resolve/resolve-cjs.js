@@ -56,7 +56,7 @@ module.exports = (
       pModuleName,
       pFileDirectory,
       pResolveOptions
-    )
+    ),
   };
 
   return {
@@ -77,6 +77,6 @@ module.exports = (
       pFileDirectory,
       pResolveOptions,
       pBaseDirectory
-    )
+    ),
   };
 };

@@ -14,7 +14,7 @@ module.exports = {
     noDuplicateDependencyTypes,
     noNonPackageJson,
     notToDeprecated,
-    notToUnresolvable
+    notToUnresolvable,
   ],
   options: {
     doNotFollow: {
@@ -25,8 +25,8 @@ module.exports = {
         "npm-optional",
         "npm-peer",
         "npm-bundled",
-        "npm-no-pkg"
-      ]
-    }
-  }
+        "npm-no-pkg",
+      ],
+    },
+  },
 };

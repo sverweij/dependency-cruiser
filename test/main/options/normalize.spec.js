@@ -5,7 +5,7 @@ describe("main/options/normalize", () => {
   it("ensures maxDepth is an int when passed an int", () => {
     expect(
       normalizeOptions({
-        maxDepth: 42
+        maxDepth: 42,
       }).maxDepth
     ).to.equal(42);
   });
@@ -13,7 +13,7 @@ describe("main/options/normalize", () => {
   it("ensures maxDepth is an int when passed a string", () => {
     expect(
       normalizeOptions({
-        maxDepth: "42"
+        maxDepth: "42",
       }).maxDepth
     ).to.equal(42);
   });
@@ -21,10 +21,10 @@ describe("main/options/normalize", () => {
   it("makes doNotFollow strings into an object", () => {
     expect(
       normalizeOptions({
-        doNotFollow: "42"
+        doNotFollow: "42",
       }).doNotFollow
     ).to.deep.equal({
-      path: "42"
+      path: "42",
     });
   });
 });

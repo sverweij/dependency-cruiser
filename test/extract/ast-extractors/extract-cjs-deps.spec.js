@@ -25,8 +25,8 @@ describe("ast-extractors/extract-cjs-deps", () => {
         module: "./static",
         moduleSystem: "cjs",
         dynamic: false,
-        exoticallyRequired: false
-      }
+        exoticallyRequired: false,
+      },
     ]);
   });
 
@@ -44,8 +44,8 @@ describe("ast-extractors/extract-cjs-deps", () => {
         moduleSystem: "cjs",
         dynamic: false,
         exoticRequire: "need",
-        exoticallyRequired: true
-      }
+        exoticallyRequired: true,
+      },
     ]);
   });
 
@@ -63,8 +63,8 @@ describe("ast-extractors/extract-cjs-deps", () => {
         moduleSystem: "cjs",
         dynamic: false,
         exoticRequire: "window.require",
-        exoticallyRequired: true
-      }
+        exoticallyRequired: true,
+      },
     ]);
   });
 
@@ -87,8 +87,8 @@ describe("ast-extractors/extract-cjs-deps", () => {
         module: "template-literal",
         moduleSystem: "cjs",
         dynamic: false,
-        exoticallyRequired: false
-      }
+        exoticallyRequired: false,
+      },
     ]);
   });
 

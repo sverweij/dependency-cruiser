@@ -51,7 +51,7 @@ describe("cli/init-config/write-config", () => {
 
     fs.writeFileSync(RULES_FILE_JS, "module.exports = {}", {
       encoding: "utf8",
-      flag: "w"
+      flag: "w",
     });
     try {
       writeConfig(`{

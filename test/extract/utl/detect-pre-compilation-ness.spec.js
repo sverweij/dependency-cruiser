@@ -10,7 +10,7 @@ describe("extract/utl/detectPreCompilationNess", () => {
     expect(
       detectPrecompilationNess([{ module: "foo", moduleSystem: "es6" }], [])
     ).to.deep.equal([
-      { module: "foo", moduleSystem: "es6", preCompilationOnly: true }
+      { module: "foo", moduleSystem: "es6", preCompilationOnly: true },
     ]);
   });
 
@@ -21,7 +21,7 @@ describe("extract/utl/detectPreCompilationNess", () => {
         [{ module: "foo", moduleSystem: "es6" }]
       )
     ).to.deep.equal([
-      { module: "foo", moduleSystem: "es6", preCompilationOnly: false }
+      { module: "foo", moduleSystem: "es6", preCompilationOnly: false },
     ]);
   });
 
@@ -32,7 +32,7 @@ describe("extract/utl/detectPreCompilationNess", () => {
         [{ module: "foo", moduleSystem: "cjs" }]
       )
     ).to.deep.equal([
-      { module: "foo", moduleSystem: "es6", preCompilationOnly: false }
+      { module: "foo", moduleSystem: "es6", preCompilationOnly: false },
     ]);
   });
 

@@ -4,7 +4,7 @@ checks:
     config:
       threshold: 32
 # removed the eslint plugin. The eslint ecosystem moves faster
-# than what codeclimate can keep upt with - and we're running
+# than what codeclimate can keep up with - and we're running
 # eslint on other ci platforms anyway now.
 exclude_patterns:
   - ".github/"
