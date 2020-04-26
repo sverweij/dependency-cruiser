@@ -48,7 +48,7 @@ try {
     )
     .option(
       "-M, --module-systems <items>",
-      `list of module systems (default: amd,cjs,es6)`
+      `list of module systems (default: amd,cjs,es6,tsd)`
     )
     .option(
       "-T, --output-type <type>",

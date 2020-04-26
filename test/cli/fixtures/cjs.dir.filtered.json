@@ -381,7 +381,8 @@
       "moduleSystems": [
         "amd",
         "cjs",
-        "es6"
+        "es6",
+        "tsd"
       ],
       "outputTo": "test/cli/output/cjs.dir.filtered.json",
       "outputType": "json",
