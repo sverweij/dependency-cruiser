@@ -43,7 +43,8 @@
       "moduleSystems": [
         "amd",
         "cjs",
-        "es6"
+        "es6",
+        "tsd"
       ],
       "outputTo": "test/cli/output/dynamic-import-nok.json",
       "outputType": "json",

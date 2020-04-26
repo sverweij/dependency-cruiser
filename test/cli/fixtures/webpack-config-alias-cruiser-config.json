@@ -72,7 +72,8 @@
       "moduleSystems": [
         "amd",
         "cjs",
-        "es6"
+        "es6",
+        "tsd"
       ],
       "outputTo": "test/cli/output/webpack-config-alias-cruiser-config.json",
       "outputType": "json",

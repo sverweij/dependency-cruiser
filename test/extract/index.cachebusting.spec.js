@@ -24,6 +24,7 @@ describe("extract/index - cache busting", () => {
       },
       validate: true,
       tsPreCompilationDeps: true,
+      moduleSystems: ["amd", "cjs", "es6"],
       doNotFollow: {
         dependencyTypes: [
           "npm",

@@ -17,7 +17,7 @@
     "optionsUsed": {
       "combinedDependencies": false,
       "externalModuleResolutionStrategy": "node_modules",
-      "moduleSystems": ["amd", "cjs", "es6"],
+      "moduleSystems": ["amd", "cjs", "es6", "tsd"],
       "preserveSymlinks": false,
       "tsPreCompilationDeps": false,
       "exoticRequireStrings": [],
