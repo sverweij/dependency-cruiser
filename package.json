@@ -155,17 +155,17 @@
     "eslint-plugin-mocha": "6.3.0",
     "eslint-plugin-node": "11.1.0",
     "eslint-plugin-security": "1.4.0",
-    "eslint-plugin-unicorn": "18.0.1",
+    "eslint-plugin-unicorn": "19.0.1",
     "husky": "4.2.5",
     "intercept-stdout": "0.1.2",
     "lint-staged": "10.1.7",
-    "mocha": "7.1.1",
+    "mocha": "7.1.2",
     "normalize-newline": "3.0.0",
     "npm-run-all": "4.1.5",
     "nyc": "15.0.1",
     "prettier": "2.0.5",
     "shx": "0.3.2",
-    "symlink-dir": "3.1.2",
+    "symlink-dir": "4.0.1",
     "tslint": "6.1.1",
     "tslint-config-prettier": "1.18.0",
     "typescript": "3.8.3",
@@ -224,27 +224,22 @@
   },
   "lint-staged": {
     "{utl,src,config}/**/*.js": [
-      "eslint --fix",
-      "git add"
+      "eslint --fix"
     ],
     "{utl,src,config}/**/*.{js,json}": [
-      "prettier --write",
-      "git add"
+      "prettier --write"
     ],
     "bin/*": [
       "eslint --fix",
-      "prettier --write",
-      "git add"
+      "prettier --write"
     ],
     "test/**/*.{utl,spec}.js": [
       "eslint --fix",
-      "prettier --write",
-      "git add"
+      "prettier --write"
     ],
     "*.d.ts": [
       "tslint --fix",
-      "prettier --write --ignore-path .prettierignore",
-      "git add"
+      "prettier --write --ignore-path .prettierignore"
     ]
   }
 }
