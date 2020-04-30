@@ -23,7 +23,6 @@ const EXTENSION2WRAPPER = {
   ".js": javaScriptWrap,
   ".mjs": javaScriptWrap,
   ".jsx": javaScriptWrap,
-  ".vue": vueWrap,
   ".ts": typeScriptWrap,
   ".tsx": tsxWrap,
   ".d.ts": typeScriptWrap,
@@ -33,6 +32,7 @@ const EXTENSION2WRAPPER = {
   ".coffee.md": litCoffeeWrap,
   ".csx": coffeeWrap,
   ".cjsx": coffeeWrap,
+  ".vue": vueWrap,
 };
 
 const TRANSPILER2WRAPPER = {

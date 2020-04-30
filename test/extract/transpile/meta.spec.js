@@ -9,7 +9,6 @@ describe("transpiler meta", () => {
       ".js",
       ".mjs",
       ".jsx",
-      ".vue",
       ".ts",
       ".tsx",
       ".d.ts",
@@ -18,6 +17,7 @@ describe("transpiler meta", () => {
       ".coffee.md",
       ".csx",
       ".cjsx",
+      ".vue",
     ]);
   });
 
