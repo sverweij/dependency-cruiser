@@ -37,6 +37,10 @@
           "type": "boolean",
           "description": "'true' if the file name of this module matches the doNotFollow regular expression"
         },
+        "matchesFocus": {
+          "type": "boolean",
+          "description": "'true' if the file name of this module matches the focus regular expression"
+        },
         "coreModule": {
           "type": "boolean",
           "description": "Whether or not this is a node.js core module"
@@ -516,6 +520,10 @@
         "includeOnly": {
           "type": "string",
           "description": "a regular expression for modules to cruise; anything outside it will be skipped"
+        },
+        "focus": {
+          "type": "string",
+          "description": "same as includeOnly, but also include all modules that are either direct dependencies or direct dependents"
         },
         "maxDepth": {
           "type": "number",

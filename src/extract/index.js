@@ -3,6 +3,7 @@ const _uniqBy = require("lodash/uniqBy");
 const _spread = require("lodash/spread");
 const _concat = require("lodash/concat");
 const _clone = require("lodash/clone");
+const addFocus = require("./add-focus");
 const pathToPosix = require("./utl/path-to-posix");
 const getDependencies = require("./get-dependencies");
 const deriveCirculars = require("./derive/circular");
@@ -18,6 +19,7 @@ const SHAREABLE_OPTIONS = [
   "doNotFollow",
   "exclude",
   "externalModuleResolutionStrategy",
+  "focus",
   "includeOnly",
   "maxDepth",
   "moduleSystems",
@@ -227,6 +229,7 @@ module.exports = (
   lModules = deriveOrphans(lModules);
   lModules = deriveReachable(lModules, pOptions.ruleSet);
 
+  lModules = addFocus(lModules, pOptions.focus);
   lModules = addValidations(lModules, pOptions.validate, pOptions.ruleSet);
 
   return {

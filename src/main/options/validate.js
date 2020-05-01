@@ -64,6 +64,7 @@ function validate(pOptions) {
     validatePathsSafety(pOptions.doNotFollow);
     validatePathsSafety(pOptions.exclude);
     validateRegExpSafety(pOptions.includeOnly);
+    validateRegExpSafety(pOptions.focus);
 
     // necessary because not in the config schema
     validateOutputType(pOptions.outputType);

@@ -63,6 +63,11 @@ export interface ICruiseOptions {
    */
   includeOnly?: string;
   /**
+   * same as includeOnly, but also include all modules that are either
+   * direct dependencies or direct dependents
+   */
+  focus?: string;
+  /**
    * the maximum depth to cruise; 0 <= n <= 99
    * (default: 0, which means 'infinite depth')
    */

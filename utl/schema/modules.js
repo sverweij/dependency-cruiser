@@ -41,6 +41,11 @@ module.exports = {
             "'true' if the file name of this module matches the doNotFollow regular " +
             "expression",
         },
+        matchesFocus: {
+          type: "boolean",
+          description:
+            "'true' if the file name of this module matches the focus regular expression",
+        },
         coreModule: {
           type: "boolean",
           description: "Whether or not this is a node.js core module",
