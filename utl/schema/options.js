@@ -37,6 +37,12 @@ module.exports = {
             "a regular expression for modules to cruise; anything outside it will " +
             "be skipped",
         },
+        focus: {
+          type: "string",
+          description:
+            "same as includeOnly, but also include all modules that are either " +
+            "direct dependencies or direct dependents",
+        },
         maxDepth: {
           type: "number",
           minimum: 0,
