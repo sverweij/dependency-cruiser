@@ -117,7 +117,9 @@
     "update-dependencies": "npm-run-all upem:update upem:install build:clean build lint:fix depcruise test:cover",
     "upem:install": "npm install",
     "upem:update": "npm outdated --json | upem",
-    "version": "npm-run-all build depcruise:graph:doc scm:stage"
+    "version": "npm-run-all build depcruise:graph:doc scm:stage",
+    "snyk-protect": "snyk protect",
+    "prepublish": "npm run snyk-protect"
   },
   "dependencies": {
     "acorn": "7.1.1",
@@ -141,7 +143,8 @@
     "strip-json-comments": "3.1.0",
     "teamcity-service-messages": "0.1.11",
     "tsconfig-paths-webpack-plugin": "3.2.0",
-    "wrap-ansi": "7.0.0"
+    "wrap-ansi": "7.0.0",
+    "snyk": "^1.316.1"
   },
   "devDependencies": {
     "chai": "4.2.0",
@@ -241,5 +244,6 @@
       "tslint --fix",
       "prettier --write --ignore-path .prettierignore"
     ]
-  }
+  },
+  "snyk": true
 }
