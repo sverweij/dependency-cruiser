@@ -1,0 +1,16 @@
+{
+  "options": {
+    "includeOnly": "^src/",
+    "focus": "^src/main/",
+    "reporterOptions": {
+      "dot": {
+        "collapsePattern": "^node_modules/[^/]+/",
+        "theme": {
+          "graph": {
+            "splines": "ortho"
+          }
+        }
+      }
+    }
+  }
+}

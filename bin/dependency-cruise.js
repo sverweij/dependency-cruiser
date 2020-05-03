@@ -43,8 +43,8 @@ try {
     .option("--include-only <regex>", "only include modules matching the regex")
     .option(
       "--focus <regex>",
-      `like --include-only, but also include direct dependencies
-                              and dependents`
+      `only output modules matching the regex,
+                              + their direct neighbours`
     )
     .option(
       "-d, --max-depth <n>",

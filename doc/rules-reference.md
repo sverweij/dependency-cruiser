@@ -43,6 +43,7 @@
 4. [The `options`](#the-options)
    - [`doNotFollow`: don't cruise modules any further](#donotfollow-dont-cruise-modules-any-further)
    - [`includeOnly`: only include modules satisfying a pattern](#includeonly-only-include-modules-satisfying-a-pattern)
+   - [`focus`: show modules matching a pattern - with their direct neighbours](#focus-show-modules-matching-a-pattern---with-their-direct-neighbours)
    - [`exclude`: exclude dependencies from being cruised](#exclude-exclude-dependencies-from-being-cruised)
    - [`maxDepth`](#maxdepth)
    - [`prefix`: prefix links in reports](#prefix-prefix-links-in-reports)
@@ -874,14 +875,119 @@ This can be handy if you want to make an overview of only your internal applicat
 structure. E.g. to only take modules into account that are in the `src` tree (and
 exclude all node_modules, core modules and modules otherwise outside it):
 
-```sh
+```json
 "options": {
-    "includeOnly": "^src/"
+  "includeOnly": "^src/"
 }
 ```
 
 If you specify both an includeOnly and an exclude (see below), dependency-cruiser takes
 them _both_ into account.
+
+### `focus`: show modules matching a pattern - with their direct neighbours
+
+> command line option equivalent: `--focus`
+
+Just like the `includeOnly` option, `focus` takes a regular expressions you want
+dependency-cruiser to show in its output. In addition dependency-cruiser will
+include all neighbours of those modules; direct dependencies and direct
+dependents.
+
+This can be useful if you just want to focus on one part of your application and
+how it interacts with the outside world.
+
+#### basic use
+
+Add a `focus` attribute in your options section. You will typically want to use
+this option in conjunction with one of the other filtering options, like
+_doNotFollow_ or _includeOnly_ as that will speed up the rendition quite
+a lot.
+
+> _doNotFollow_, _includeOnly_ and _exclude_ can run before dependency-cruiser
+> does any statical analysis, so dependency-cruiser applies as early on in the
+> process as it can so it can prevent having to read files from disk (which is
+> expensive).
+>
+> It can only determine the modules in focus and their neighbours after applying
+> statical analysis, though, as only then it knows what the relationships
+> between the modules are.
+
+Example configuration:
+
+```json
+{
+  "options": {
+    "includeOnly": "^src/",
+    "focus": "^src/main/"
+  }
+}
+```
+
+<details>
+<summary>sample command line invocation and graphical output</summary>
+
+```sh
+depcruise -c focus.config.json -T dot | dot -T svg > focus.svg
+```
+
+![focus](assets/filtering/focus.svg)
+
+</details>
+
+#### snazzy-up graphics with the 'matchesFocus' attribute
+
+When dependency-cruiser applies focus on modules, it provides each module with
+a `matchesFocus` attribute, which is either `true` for modules in focus or
+`false` for the neighbors. You can use this attribute e.g. in your dot theme.
+
+<details>
+<summary>sample dot theme that uses matchesFocus + graphical output</summary>
+
+```json
+{
+  "options": {
+    "includeOnly": "^src/",
+    "focus": "^src/main/",
+    "reporterOptions": {
+      "dot": {
+        "collapsePattern": "^node_modules/[^/]+/",
+        "theme": {
+          "graph": {
+            "splines": "ortho"
+          },
+          "modules": [
+            {
+              "criteria": { "matchesFocus": true },
+              "attributes": {
+                "fillcolor": "lime"
+              }
+            },
+            {
+              "criteria": { "matchesFocus": false },
+              "attributes": {
+                "fillcolor": "lightgray",
+                "fontcolor": "gray"
+              }
+            }
+          ]
+        }
+      }
+    }
+  }
+}
+```
+
+When run...
+
+```sh
+depcruise -c snazzy-focus.config.json -T dot | dot -T svg > snazzy-focus.svg
+```
+
+...it'll look something like this:
+
+![snazzy focus](assets/filtering/snazzy-focus.svg)
+
+</details>
 
 ### `exclude`: exclude dependencies from being cruised
 
@@ -1108,7 +1214,7 @@ if you have a hierarchy of configs, you just need to pass the relevant one.
 Sample
 
 ```json
-  "options": {
+"options": {
   "tsConfig": {
     "fileName": "tsconfig.json"
   }

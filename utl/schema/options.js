@@ -40,8 +40,9 @@ module.exports = {
         focus: {
           type: "string",
           description:
-            "same as includeOnly, but also include all modules that are either " +
-            "direct dependencies or direct dependents",
+            "dependency-cruiser will include modules matching this regular expression " +
+            "in its output, as well as their neighbours (direct dependencies and " +
+            "dependents)",
         },
         maxDepth: {
           type: "number",

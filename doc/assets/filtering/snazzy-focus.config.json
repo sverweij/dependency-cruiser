@@ -1,0 +1,31 @@
+{
+  "options": {
+    "includeOnly": "^src/",
+    "focus": "^src/main/",
+    "reporterOptions": {
+      "dot": {
+        "collapsePattern": "^node_modules/[^/]+/",
+        "theme": {
+          "graph": {
+            "splines": "ortho"
+          },
+          "modules": [
+            {
+              "criteria": { "matchesFocus": true },
+              "attributes": {
+                "fillcolor": "lime"
+              }
+            },
+            {
+              "criteria": { "matchesFocus": false },
+              "attributes": {
+                "fillcolor": "lightgray",
+                "fontcolor": "gray"
+              }
+            }
+          ]
+        }
+      }
+    }
+  }
+}
