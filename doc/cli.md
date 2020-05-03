@@ -27,6 +27,7 @@ available in dependency-cruiser configurations.
 1. [`--do-not-follow`: don't cruise modules adhering to this pattern any further](#--do-not-follow-dont-cruise-modules-adhering-to-this-pattern-any-further)
 1. [`--exclude`: exclude dependencies from being cruised](#--exclude-exclude-dependencies-from-being-cruised)
 1. [`--include-only`: only include modules satisfying a pattern](#--include-only-only-include-modules-satisfying-a-pattern)
+1. [`--focus`: show modules and their direct neighbours](#--focus-focus-on-some-modules-and-their-direct-neighbours)
 1. [`--max-depth`](#--max-depth)
 1. [`--prefix` prefixing links](#--prefix-prefixing-links)
 1. [`--module-systems`](#--module-systems)
@@ -264,7 +265,7 @@ src/report/index.js → src/report/text.js
 
 </details>
 
-... or to find everything connected to the `meta` module, in combination with 
+... or to find everything connected to the `meta` module, in combination with
 `grep`:
 
 ```sh
@@ -560,6 +561,21 @@ dependency-cruise --include-only "^src" -T dot src | dot -T svg > internal-depen
 
 See [includeOnly](./rules-reference.md#includeonly-only-include-modules-satisfying-a-pattern) in the rules reference
 for more details.
+
+### `--focus`: focus on some modules and their direct neighbours
+
+You can use this e.g. to inspect one module or folder and see what the direct
+dependencies are and which modules are direct dependents.
+
+Takes a regular expression in the same fashion `--include-only`, `--exclude` and
+`--do-not-follow` do.
+
+```sh
+dependency-cruise --include-only "^src" --focus "^src/main" -T dot src | dot -T svg > focus-on-main-dir-graph.svg
+```
+
+See [focus](./rules-reference.md#show-modules-matching-a-pattern---with-their-direct-neighbours)
+in the rules reference for more details.
 
 ### `--max-depth`
 

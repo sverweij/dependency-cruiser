@@ -42,7 +42,7 @@ function getCalledModules(pModules, pPattern, pFocusModules) {
     .map((pModule) => ({ ...pModule, matchesFocus: false, dependencies: [] }));
 }
 
-module.exports = function focus(pModules, pPattern) {
+module.exports = function addFocus(pModules, pPattern) {
   if (pPattern) {
     const lFocusModules = getFocusModules(pModules, pPattern);
 
