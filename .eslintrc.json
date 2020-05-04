@@ -2,7 +2,8 @@
   "root": true,
   "extends": ["moving-meadow"],
   "rules": {
-    "security/detect-non-literal-fs-filename": "off"
+    "security/detect-non-literal-fs-filename": "off",
+    "unicorn/no-null": "off"
   },
   "overrides": [
     {

@@ -22,7 +22,7 @@ module.exports = (pOptions) => {
     ...pOptions,
   };
 
-  lReturnValue.maxDepth = parseInt(lReturnValue.maxDepth, 10);
+  lReturnValue.maxDepth = Number.parseInt(lReturnValue.maxDepth, 10);
   lReturnValue.moduleSystems = uniq(lReturnValue.moduleSystems.sort());
   lReturnValue.doNotFollow = normalizeFilterOption(lReturnValue.doNotFollow);
   lReturnValue.exclude = normalizeFilterOption(lReturnValue.exclude);
