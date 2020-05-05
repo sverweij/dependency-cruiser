@@ -19,11 +19,6 @@
 <path fill="#ffffff" stroke="black" stroke-width="2" d="M28,-16C28,-16 363.56,-16 363.56,-16 369.56,-16 375.56,-22 375.56,-28 375.56,-28 375.56,-259 375.56,-259 375.56,-265 369.56,-271 363.56,-271 363.56,-271 28,-271 28,-271 22,-271 16,-265 16,-259 16,-259 16,-28 16,-28 16,-22 22,-16 28,-16"/>
 <text text-anchor="middle" x="195.78" y="-259.8" font-family="Helvetica,sans-Serif" font-weight="bold" font-size="9.00">main</text>
 </g>
-<g id="clust3" class="cluster">
-<title>cluster_src/main/files&#45;and&#45;dirs</title>
-<path fill="#ffffff" stroke="black" stroke-width="2" d="M115,-24C115,-24 171.01,-24 171.01,-24 177.01,-24 183.01,-30 183.01,-36 183.01,-36 183.01,-63 183.01,-63 183.01,-69 177.01,-75 171.01,-75 171.01,-75 115,-75 115,-75 109,-75 103,-69 103,-63 103,-63 103,-36 103,-36 103,-30 109,-24 115,-24"/>
-<text text-anchor="middle" x="143.01" y="-63.8" font-family="Helvetica,sans-Serif" font-weight="bold" font-size="9.00">files&#45;and&#45;dirs</text>
-</g>
 <g id="clust4" class="cluster">
 <title>cluster_src/main/options</title>
 <path fill="#ffffff" stroke="black" stroke-width="2" d="M220.01,-67C220.01,-67 355.56,-67 355.56,-67 361.56,-67 367.56,-73 367.56,-79 367.56,-79 367.56,-135 367.56,-135 367.56,-141 361.56,-147 355.56,-147 355.56,-147 220.01,-147 220.01,-147 214.01,-147 208.01,-141 208.01,-135 208.01,-135 208.01,-79 208.01,-79 208.01,-73 214.01,-67 220.01,-67"/>
@@ -38,6 +33,11 @@
 <title>cluster_src/main/rule&#45;set</title>
 <path fill="#ffffff" stroke="black" stroke-width="2" d="M115,-166C115,-166 171.01,-166 171.01,-166 177.01,-166 183.01,-172 183.01,-178 183.01,-178 183.01,-234 183.01,-234 183.01,-240 177.01,-246 171.01,-246 171.01,-246 115,-246 115,-246 109,-246 103,-240 103,-234 103,-234 103,-178 103,-178 103,-172 109,-166 115,-166"/>
 <text text-anchor="middle" x="143.01" y="-234.8" font-family="Helvetica,sans-Serif" font-weight="bold" font-size="9.00">rule&#45;set</text>
+</g>
+<g id="clust3" class="cluster">
+<title>cluster_src/main/files&#45;and&#45;dirs</title>
+<path fill="#ffffff" stroke="black" stroke-width="2" d="M115,-24C115,-24 171.01,-24 171.01,-24 177.01,-24 183.01,-30 183.01,-36 183.01,-36 183.01,-63 183.01,-63 183.01,-69 177.01,-75 171.01,-75 171.01,-75 115,-75 115,-75 109,-75 103,-69 103,-63 103,-63 103,-36 103,-36 103,-30 109,-24 115,-24"/>
+<text text-anchor="middle" x="143.01" y="-63.8" font-family="Helvetica,sans-Serif" font-weight="bold" font-size="9.00">files&#45;and&#45;dirs</text>
 </g>
 <!-- src/main/files&#45;and&#45;dirs/normalize.js -->
 <g id="node1" class="node">
