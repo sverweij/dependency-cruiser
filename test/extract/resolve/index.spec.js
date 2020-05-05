@@ -154,6 +154,31 @@ describe("extract/resolve/index", () => {
     });
   });
 
+  it("resolves to ts before it considers vue", () => {
+    expect(
+      resolve(
+        {
+          module: "./x",
+          moduleSystem: "es6",
+        },
+        path.join(__dirname, "fixtures"),
+        path.join(__dirname, "fixtures", "vue-last"),
+        normalizeResolveOptions(
+          {
+            bustTheCache: true,
+          },
+          {}
+        )
+      )
+    ).to.deep.equal({
+      coreModule: false,
+      couldNotResolve: false,
+      dependencyTypes: ["local"],
+      followable: true,
+      resolved: "vue-last/x.ts",
+    });
+  });
+
   it("considers passed (webpack) aliases", () => {
     expect(
       resolve(
