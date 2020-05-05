@@ -34,11 +34,23 @@ try {
                          `,
       "err"
     )
+    .option(
+      "-e, --exit-code",
+      `exit with a non-zero exit code when the input json
+                          contains error level dependency violations. Works for
+                          err, err-long and teamcity output types`
+    )
     .arguments("<dependency-cruiser-json>")
     .parse(process.argv);
 
   if (program.args[0]) {
-    format(program.args[0], program).catch(formatError);
+    format(program.args[0], program)
+      .then((pExitCode) => {
+        if (program.exitCode) {
+          process.exitCode = pExitCode;
+        }
+      })
+      .catch(formatError);
   } else {
     program.help();
   }

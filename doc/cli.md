@@ -264,7 +264,7 @@ src/report/index.js → src/report/text.js
 
 </details>
 
-... or to find everything connected to the `meta` module, in combination with 
+... or to find everything connected to the `meta` module, in combination with
 `grep`:
 
 ```sh
@@ -659,16 +659,31 @@ depcruise-fmt -T err-html -f violation-report.html cruise_result.json
 depcruise-fmt -T dot cruise_result.json | dot -T svg > dependency-graph.svg
 ```
 
+If you want to see non-zero exit codes when there's error level dependency
+violations, you can use the `--exit-code` (short: `-e`). This only works for
+the output types that support non-zero exit codes (_err_, _err-long_ and
+_teamcity_). Example for the default output type (_err_):
+
+```sh
+depcruise-fmt -e cruise_result.json
+```
+
 ```
 Usage: depcruise-fmt [options] <dependency-cruiser-json>
+
+Format dependency-cruiser output json.
+Details: https://github.com/sverweij/dependency-cruiser
 
 Options:
   -V, --version             output the version number
   -f, --output-to <file>    file to write output to; - for stdout
                             (default: "-")
-  -T, --output-type <type>  output type - err|err-long|err-html|dot|ddot|json
+  -T, --output-type <type>  output type - err|err-long|err-html|dot|ddot|archi|json
                             (default: "err")
-  -h, --help                output usage information
+  -e, --exit-code           exit with a non-zero exit code when the input json
+                            contains error level dependency violations. Works for
+                            err, err-long and teamcity output types
+  -h, --help                display help for command
 ```
 
 ## depcruise-wrap-stream-in-html
