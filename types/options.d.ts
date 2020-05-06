@@ -27,6 +27,23 @@ export interface IExcludeType {
   dynamic?: boolean;
 }
 
+export interface IIncludeOnlyType {
+  /**
+   * regular expression describing which dependencies the function
+   * should cruise - anything not matching this will be skipped
+   */
+  path?: string;
+}
+
+export interface IFocusType {
+  /**
+   * dependency-cruiser will include modules matching this regular expression
+   * in its output, as well as their neighbours (direct dependencies and
+   * dependents)
+   */
+  path?: string;
+}
+
 export interface ICruiseOptions {
   /**
    * if true, will attempt to validate with the rules in ruleSet.
@@ -61,13 +78,13 @@ export interface ICruiseOptions {
    * regular expression describing which dependencies the function
    * should cruise - anything not matching this will be skipped
    */
-  includeOnly?: string;
+  includeOnly?: string | IIncludeOnlyType;
   /**
    * dependency-cruiser will include modules matching this regular expression
    * in its output, as well as their neighbours (direct dependencies and
    * dependents)
    */
-  focus?: string;
+  focus?: string | IFocusType;
   /**
    * the maximum depth to cruise; 0 <= n <= 99
    * (default: 0, which means 'infinite depth')

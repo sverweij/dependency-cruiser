@@ -27,6 +27,15 @@ describe("main/options/normalize", () => {
       path: "42",
     });
   });
+  it("makes focus strings into an object", () => {
+    expect(
+      normalizeOptions({
+        focus: "42",
+      }).focus
+    ).to.deep.equal({
+      path: "42",
+    });
+  });
 });
 
 /* eslint no-magic-numbers: 0*/

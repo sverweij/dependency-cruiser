@@ -15,10 +15,10 @@ function keepNonExcluded(pFullPathToFile, pOptions) {
         pathToPosix(pFullPathToFile),
         pOptions.exclude.path
       )) &&
-    (!pOptions.includeOnly ||
+    (!_get(pOptions, "includeOnly.path") ||
       filenameMatchesPattern(
         pathToPosix(pFullPathToFile),
-        pOptions.includeOnly
+        pOptions.includeOnly.path
       )) &&
     (!_get(pOptions, "doNotFollow.path") ||
       !filenameMatchesPattern(

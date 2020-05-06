@@ -1,7 +1,9 @@
 const dependencyType = require("./dependency-type");
 const moduleSystemsType = require("./module-systems-type");
-const compoundExclude = require("./compound-exclude-type");
+const compoundExcludeType = require("./compound-exclude-type");
 const compoundDoNotFollowType = require("./compound-donot-follow-type");
+const compoundIncludeOnlyType = require("./compound-include-only-type");
+const compoundFocusType = require("./compound-focus-type");
 const reporterOptions = require("./reporter-options");
 
 module.exports = {
@@ -32,17 +34,27 @@ module.exports = {
           ],
         },
         includeOnly: {
-          type: "string",
-          description:
-            "a regular expression for modules to cruise; anything outside it will " +
-            "be skipped",
+          oneOf: [
+            {
+              type: "string",
+              description:
+                "a regular expression for modules to cruise; anything outside it will " +
+                "be skipped",
+            },
+            { $ref: "#/definitions/CompoundIncludeOnlyType" },
+          ],
         },
         focus: {
-          type: "string",
-          description:
-            "dependency-cruiser will include modules matching this regular expression " +
-            "in its output, as well as their neighbours (direct dependencies and " +
-            "dependents)",
+          oneOf: [
+            {
+              type: "string",
+              description:
+                "dependency-cruiser will include modules matching this regular expression " +
+                "in its output, as well as their neighbours (direct dependencies and " +
+                "dependents)",
+            },
+            { $ref: "#/definitions/CompoundFocusType" },
+          ],
         },
         maxDepth: {
           type: "number",
@@ -153,8 +165,10 @@ module.exports = {
     },
     ...moduleSystemsType.definitions,
     ...dependencyType.definitions,
-    ...compoundExclude.definitions,
+    ...compoundExcludeType.definitions,
     ...compoundDoNotFollowType.definitions,
+    ...compoundIncludeOnlyType.definitions,
+    ...compoundFocusType.definitions,
     ...reporterOptions.definitions,
   },
 };

@@ -165,10 +165,19 @@ function makeOptionsPresentable(pOptions) {
     }, {});
 }
 
+function makeIncludOnlyBackwardsCompatible(pOptions) {
+  return pOptions.includeOnly
+    ? {
+        ...pOptions,
+        includeOnly: _get(pOptions, "includeOnly.path"),
+      }
+    : pOptions;
+}
+
 function summarizeOptions(pFileDirectoryArray, pOptions) {
   return {
     optionsUsed: {
-      ...makeOptionsPresentable(pOptions),
+      ...makeOptionsPresentable(makeIncludOnlyBackwardsCompatible(pOptions)),
       args: pFileDirectoryArray.map(pathToPosix).join(" "),
     },
   };
@@ -229,7 +238,7 @@ module.exports = (
   lModules = deriveOrphans(lModules);
   lModules = deriveReachable(lModules, pOptions.ruleSet);
 
-  lModules = addFocus(lModules, pOptions.focus);
+  lModules = addFocus(lModules, _get(pOptions, "focus.path"));
   lModules = addValidations(lModules, pOptions.validate, pOptions.ruleSet);
 
   return {
