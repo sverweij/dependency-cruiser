@@ -11,15 +11,15 @@ function getCallingModules(pModules, pPattern) {
     .filter(
       (pModule) =>
         !filenameMatchesPattern(pModule.source, pPattern) &&
-        pModule.dependencies.some((pDependency) =>
-          filenameMatchesPattern(pDependency.resolved, pPattern)
+        pModule.dependencies.some(({ resolved }) =>
+          filenameMatchesPattern(resolved, pPattern)
         )
     )
     .map((pModule) => ({
       ...pModule,
       matchesFocus: false,
-      dependencies: pModule.dependencies.filter((pDependency) =>
-        filenameMatchesPattern(pDependency.resolved, pPattern)
+      dependencies: pModule.dependencies.filter(({ resolved }) =>
+        filenameMatchesPattern(resolved, pPattern)
       ),
     }));
 }
