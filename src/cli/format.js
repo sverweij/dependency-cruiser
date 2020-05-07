@@ -20,4 +20,5 @@ module.exports = async (pResultFile, pOptions) => {
   );
 
   io.write(lOptions.outputTo, lReportingResult.output);
+  return lReportingResult.exitCode;
 };
