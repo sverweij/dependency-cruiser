@@ -1,7 +1,7 @@
-const ruleSet = require("./rule-set");
-const optionsUsed = require("./options-used");
+import optionsUsed from "./options-used.mjs";
+import ruleSet from "./rule-set.mjs";
 
-module.exports = {
+export default {
   definitions: {
     SummaryType: {
       type: "object",

@@ -15,6 +15,15 @@
         "max-lines": "off",
         "max-lines-per-function": "off"
       }
+    },
+    {
+      "files": ["utl/**/*.mjs"],
+      "parserOptions": {
+        "ecmaVersion": 2020
+      },
+      "rules": {
+        "node/no-unsupported-features/es-syntax": "off"
+      }
     }
   ]
 }

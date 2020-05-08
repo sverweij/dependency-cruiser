@@ -1,9 +1,11 @@
-const fs = require("fs");
-const path = require("path");
-const prettier = require("prettier");
+/* eslint-disable sort-imports */
+import fs from "fs";
+import path from "path";
+import prettier from "prettier";
+import configurationSchema from "./schema/configuration.schema.mjs";
+import cruiseResultSchema from "./schema/cruise-result.schema.mjs";
 
-const configurationSchema = require("./schema/configuration.schema.js");
-const cruiseResultSchema = require("./schema/cruise-result.schema.js");
+const __dirname = path.dirname(new URL(import.meta.url).pathname);
 
 function jsonTheSchema(pJSONSchemaObject, pOutputFileName) {
   fs.writeFileSync(

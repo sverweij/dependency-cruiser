@@ -1,7 +1,7 @@
-const ruleSet = require("./rule-set");
-const options = require("./options");
+import options from "./options.mjs";
+import ruleSet from "./rule-set.mjs";
 
-module.exports = {
+export default {
   title: "dependency-cruiser configuration",
   $schema: "http://json-schema.org/draft-07/schema#",
   $id: "https://dependency-cruiser.js.org/schema/configuration.schema.json",

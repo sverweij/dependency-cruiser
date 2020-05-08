@@ -1,4 +1,4 @@
-const dependencyType = require("./dependency-type");
+import dependencyType from "./dependency-type.mjs";
 
 const BASE_RESTRICTION = {
   path: {
@@ -15,7 +15,7 @@ const BASE_RESTRICTION = {
   },
 };
 
-module.exports = {
+export default {
   definitions: {
     FromRestrictionType: {
       type: "object",

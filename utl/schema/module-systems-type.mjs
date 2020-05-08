@@ -1,6 +1,6 @@
-const moduleSystemType = require("./module-system-type");
+import moduleSystemType from "./module-system-type.mjs";
 
-module.exports = {
+export default {
   definitions: {
     ...moduleSystemType.definitions,
     ModuleSystemsType: {
