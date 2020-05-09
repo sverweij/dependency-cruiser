@@ -1,8 +1,8 @@
-const dependencyType = require("./dependency-type");
-const moduleSystemType = require("./module-system-type");
-const ruleSummary = require("./rule-summary");
+import dependencyType from "./dependency-type.mjs";
+import moduleSystemType from "./module-system-type.mjs";
+import ruleSummary from "./rule-summary.mjs";
 
-module.exports = {
+export default {
   definitions: {
     DependenciesType: {
       type: "array",

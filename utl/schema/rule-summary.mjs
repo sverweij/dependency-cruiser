@@ -1,6 +1,6 @@
-const severityType = require("./severity-type");
+import severityType from "./severity-type.mjs";
 
-module.exports = {
+export default {
   definitions: {
     RuleSummaryType: {
       type: "object",

@@ -239,7 +239,7 @@
               "attributes": { "fillcolor": "#cccccc" }
             },
             {
-              "criteria": { "source": "\\.schema\\.js$" },
+              "criteria": { "source": "\\.schema\\.mjs$" },
               "attributes": {
                 "color": "darkgreen",
                 "fillcolor": "darkgreen",
@@ -255,7 +255,7 @@
               "attributes": { "shape": "cylinder" }
             },
             {
-              "criteria": { "source": "\\-type\\.js$" },
+              "criteria": { "source": "\\-type\\.mjs$" },
               "attributes": {
                 "fillcolor": "white",
                 "fontcolor": "darkgrey",

@@ -1,12 +1,12 @@
-const dependencyType = require("./dependency-type");
-const moduleSystemsType = require("./module-systems-type");
-const compoundExcludeType = require("./compound-exclude-type");
-const compoundDoNotFollowType = require("./compound-donot-follow-type");
-const compoundIncludeOnlyType = require("./compound-include-only-type");
-const compoundFocusType = require("./compound-focus-type");
-const reporterOptions = require("./reporter-options");
+import compoundDoNotFollowType from "./compound-donot-follow-type.mjs";
+import compoundExcludeType from "./compound-exclude-type.mjs";
+import compoundFocusType from "./compound-focus-type.mjs";
+import compoundIncludeOnlyType from "./compound-include-only-type.mjs";
+import dependencyType from "./dependency-type.mjs";
+import moduleSystemsType from "./module-systems-type.mjs";
+import reporterOptions from "./reporter-options.mjs";
 
-module.exports = {
+export default {
   definitions: {
     OptionsType: {
       type: "object",
