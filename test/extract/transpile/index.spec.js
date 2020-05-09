@@ -1,6 +1,7 @@
 const fs = require("fs");
 const path = require("path");
 const expect = require("chai").expect;
+const prettier = require("prettier");
 const normalizeNewline = require("normalize-newline");
 const transpile = require("../../../src/extract/transpile");
 
@@ -26,9 +27,12 @@ describe("transpiler", () => {
       ),
       "utf8"
     );
-
-    expect(normalizeNewline(transpile(".ts", lInputFixture))).to.equal(
-      normalizeNewline(lTranspiledFixture)
+    expect(
+      normalizeNewline(
+        prettier.format(transpile(".ts", lInputFixture), { parser: "babel" })
+      )
+    ).to.equal(
+      normalizeNewline(prettier.format(lTranspiledFixture, { parser: "babel" }))
     );
   });
 
@@ -60,7 +64,13 @@ describe("transpiler", () => {
     };
 
     expect(
-      normalizeNewline(transpile(".ts", lInputFixture, lTranspilerOptions))
-    ).to.equal(normalizeNewline(lTranspiledFixture));
+      normalizeNewline(
+        prettier.format(transpile(".ts", lInputFixture, lTranspilerOptions), {
+          parser: "babel",
+        })
+      )
+    ).to.equal(
+      normalizeNewline(prettier.format(lTranspiledFixture, { parser: "babel" }))
+    );
   });
 });

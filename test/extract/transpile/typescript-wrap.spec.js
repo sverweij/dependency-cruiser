@@ -1,6 +1,7 @@
 const fs = require("fs");
 const expect = require("chai").expect;
 const normalizeNewline = require("normalize-newline");
+const prettier = require("prettier");
 const wrap = require("../../../src/extract/transpile/typescript-wrap")();
 const tsxWrap = require("../../../src/extract/transpile/typescript-wrap")(true);
 
@@ -12,11 +13,14 @@ describe("typescript transpiler", () => {
   it("transpiles typescript", () => {
     expect(
       normalizeNewline(
-        wrap.transpile(
-          fs.readFileSync(
-            "./test/extract/transpile/fixtures/typescriptscript.ts",
-            "utf8"
-          )
+        prettier.format(
+          wrap.transpile(
+            fs.readFileSync(
+              "./test/extract/transpile/fixtures/typescriptscript.ts",
+              "utf8"
+            )
+          ),
+          { parser: "babel" }
         )
       )
     ).to.equal(
