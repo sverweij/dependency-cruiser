@@ -42,6 +42,11 @@ try {
     .option("-x, --exclude <regex>", "exclude all modules matching the regex")
     .option("--include-only <regex>", "only include modules matching the regex")
     .option(
+      "--focus <regex>",
+      `only output modules matching the regex,
+                              + their direct neighbours`
+    )
+    .option(
       "-d, --max-depth <n>",
       `the maximum depth to cruise; 0 <= n <= 99
                               (default: 0, which means 'infinite depth')`

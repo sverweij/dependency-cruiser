@@ -56,6 +56,10 @@ export interface IModule {
    */
   matchesDoNotFollow?: boolean;
   /**
+   * 'true' if the file name of this module matches the focus regular expression
+   */
+  matchesFocus?: boolean;
+  /**
    * 'true' if this module does not have dependencies, and no module has it as a dependency
    */
   orphan?: boolean;

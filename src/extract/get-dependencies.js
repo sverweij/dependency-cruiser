@@ -165,8 +165,8 @@ module.exports = (pFileName, pOptions, pResolveOptions, pTSConfig) => {
         (pDep) =>
           (!_get(pOptions, "exclude.path") ||
             !matchesPattern(pDep.resolved, pOptions.exclude.path)) &&
-          (!pOptions.includeOnly ||
-            matchesPattern(pDep.resolved, pOptions.includeOnly))
+          (!_get(pOptions, "includeOnly.path") ||
+            matchesPattern(pDep.resolved, pOptions.includeOnly.path))
       );
   } catch (pError) {
     throw new Error(

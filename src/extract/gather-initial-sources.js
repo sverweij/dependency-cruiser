@@ -4,21 +4,27 @@ const glob = require("glob");
 const _get = require("lodash/get");
 const transpileMeta = require("./transpile/meta");
 const pathToPosix = require("./utl/path-to-posix");
+const filenameMatchesPattern = require("./utl/filename-matches-pattern");
 
 const SUPPORTED_EXTENSIONS = transpileMeta.scannableExtensions;
-
-function matchesPattern(pFullPathToFile, pPattern) {
-  return RegExp(pPattern, "g").test(pFullPathToFile);
-}
 
 function keepNonExcluded(pFullPathToFile, pOptions) {
   return (
     (!_get(pOptions, "exclude.path") ||
-      !matchesPattern(pathToPosix(pFullPathToFile), pOptions.exclude.path)) &&
-    (!pOptions.includeOnly ||
-      matchesPattern(pathToPosix(pFullPathToFile), pOptions.includeOnly)) &&
+      !filenameMatchesPattern(
+        pathToPosix(pFullPathToFile),
+        pOptions.exclude.path
+      )) &&
+    (!_get(pOptions, "includeOnly.path") ||
+      filenameMatchesPattern(
+        pathToPosix(pFullPathToFile),
+        pOptions.includeOnly.path
+      )) &&
     (!_get(pOptions, "doNotFollow.path") ||
-      !matchesPattern(pathToPosix(pFullPathToFile), pOptions.doNotFollow.path))
+      !filenameMatchesPattern(
+        pathToPosix(pFullPathToFile),
+        pOptions.doNotFollow.path
+      ))
   );
 }
 

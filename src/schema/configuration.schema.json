@@ -267,8 +267,22 @@
           ]
         },
         "includeOnly": {
-          "type": "string",
-          "description": "a regular expression for modules to cruise; anything outside it will be skipped"
+          "oneOf": [
+            {
+              "type": "string",
+              "description": "a regular expression for modules to cruise; anything outside it will be skipped"
+            },
+            { "$ref": "#/definitions/CompoundIncludeOnlyType" }
+          ]
+        },
+        "focus": {
+          "oneOf": [
+            {
+              "type": "string",
+              "description": "dependency-cruiser will include modules matching this regular expression in its output, as well as their neighbours (direct dependencies and dependents)"
+            },
+            { "$ref": "#/definitions/CompoundFocusType" }
+          ]
         },
         "maxDepth": {
           "type": "number",
@@ -373,6 +387,28 @@
           "type": "array",
           "description": "an array of dependency types to include, but not follow further",
           "items": { "$ref": "#/definitions/DependencyTypeType" }
+        }
+      }
+    },
+    "CompoundIncludeOnlyType": {
+      "type": "object",
+      "description": "Criteria for modules to only include",
+      "additionalProperties": false,
+      "properties": {
+        "path": {
+          "type": "string",
+          "description": "dependency-cruiser will include modules matching this regular expression in its output, as well as their neighbours (direct dependencies and dependents)"
+        }
+      }
+    },
+    "CompoundFocusType": {
+      "type": "object",
+      "description": "Criteria for modules to 'focus' on",
+      "additionalProperties": false,
+      "properties": {
+        "path": {
+          "type": "string",
+          "description": "dependency-cruiser will include modules matching this regular expression in its output, as well as their neighbours (direct dependencies and dependents)"
         }
       }
     },

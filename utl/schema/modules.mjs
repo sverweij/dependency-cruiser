@@ -1,8 +1,8 @@
-const dependencies = require("./dependencies");
-const ruleSummary = require("./rule-summary");
-const dependencyType = require("./dependency-type");
+import dependencies from "./dependencies.mjs";
+import dependencyType from "./dependency-type.mjs";
+import ruleSummary from "./rule-summary.mjs";
 
-module.exports = {
+export default {
   definitions: {
     ModulesType: {
       type: "array",
@@ -40,6 +40,11 @@ module.exports = {
           description:
             "'true' if the file name of this module matches the doNotFollow regular " +
             "expression",
+        },
+        matchesFocus: {
+          type: "boolean",
+          description:
+            "'true' if the file name of this module matches the focus regular expression",
         },
         coreModule: {
           type: "boolean",

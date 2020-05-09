@@ -3,6 +3,7 @@ const _uniqBy = require("lodash/uniqBy");
 const _spread = require("lodash/spread");
 const _concat = require("lodash/concat");
 const _clone = require("lodash/clone");
+const addFocus = require("./add-focus");
 const pathToPosix = require("./utl/path-to-posix");
 const getDependencies = require("./get-dependencies");
 const deriveCirculars = require("./derive/circular");
@@ -18,6 +19,7 @@ const SHAREABLE_OPTIONS = [
   "doNotFollow",
   "exclude",
   "externalModuleResolutionStrategy",
+  "focus",
   "includeOnly",
   "maxDepth",
   "moduleSystems",
@@ -163,10 +165,19 @@ function makeOptionsPresentable(pOptions) {
     }, {});
 }
 
+function makeIncludOnlyBackwardsCompatible(pOptions) {
+  return pOptions.includeOnly
+    ? {
+        ...pOptions,
+        includeOnly: _get(pOptions, "includeOnly.path"),
+      }
+    : pOptions;
+}
+
 function summarizeOptions(pFileDirectoryArray, pOptions) {
   return {
     optionsUsed: {
-      ...makeOptionsPresentable(pOptions),
+      ...makeOptionsPresentable(makeIncludOnlyBackwardsCompatible(pOptions)),
       args: pFileDirectoryArray.map(pathToPosix).join(" "),
     },
   };
@@ -227,6 +238,7 @@ module.exports = (
   lModules = deriveOrphans(lModules);
   lModules = deriveReachable(lModules, pOptions.ruleSet);
 
+  lModules = addFocus(lModules, _get(pOptions, "focus.path"));
   lModules = addValidations(lModules, pOptions.validate, pOptions.ruleSet);
 
   return {

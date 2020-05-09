@@ -1,5 +1,5 @@
-const restrictions = require("./restrictions");
-const severityType = require("./severity-type");
+import restrictions from "./restrictions.mjs";
+import severityType from "./severity-type.mjs";
 
 const RULE_SET_TYPE_PROPERTIES = {
   type: "object",
@@ -34,7 +34,7 @@ const RULE_SET_TYPE_PROPERTIES = {
   },
 };
 
-module.exports = {
+export default {
   ...RULE_SET_TYPE_PROPERTIES,
   definitions: {
     RuleSetType: RULE_SET_TYPE_PROPERTIES,

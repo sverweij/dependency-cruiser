@@ -26,6 +26,12 @@ module.exports = (pOptions) => {
   lReturnValue.moduleSystems = uniq(lReturnValue.moduleSystems.sort());
   lReturnValue.doNotFollow = normalizeFilterOption(lReturnValue.doNotFollow);
   lReturnValue.exclude = normalizeFilterOption(lReturnValue.exclude);
+  if (lReturnValue.includeOnly) {
+    lReturnValue.includeOnly = normalizeFilterOption(lReturnValue.includeOnly);
+  }
+  if (lReturnValue.focus) {
+    lReturnValue.focus = normalizeFilterOption(lReturnValue.focus);
+  }
   lReturnValue.exoticRequireStrings = uniq(
     lReturnValue.exoticRequireStrings.sort()
   );

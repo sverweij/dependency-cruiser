@@ -1,12 +1,14 @@
-const options = require("./options");
-const dependencyType = require("./dependency-type");
-const moduleSystemsType = require("./module-systems-type");
-const outputType = require("./output-type");
-const compoundExcludeType = require("./compound-exclude-type");
-const compoundDoNotFollowType = require("./compound-donot-follow-type");
-const reporterOptions = require("./reporter-options");
+import compoundDoNotFollowType from "./compound-donot-follow-type.mjs";
+import compoundExcludeType from "./compound-exclude-type.mjs";
+import compoundFocusType from "./compound-focus-type.mjs";
+import compoundIncludeOnlyType from "./compound-include-only-type.mjs";
+import dependencyType from "./dependency-type.mjs";
+import moduleSystemsType from "./module-systems-type.mjs";
+import options from "./options.mjs";
+import outputType from "./output-type.mjs";
+import reporterOptions from "./reporter-options.mjs";
 
-module.exports = {
+export default {
   definitions: {
     OptionsUsedType: {
       type: "object",
@@ -41,6 +43,14 @@ module.exports = {
         // exclude can be either a string or an object in the input options -
         // in the output it's always an object
         exclude: { $ref: "#/definitions/CompoundExcludeType" },
+        // includeOnly can be either a string or an object in the input options -
+        // in the output it can be too for backwards compatibility reasons.
+        // This is different from the other filter options, and it will
+        // be aligned to the other filter options in the next major version
+        /* includeOnly: { $ref: "#/definitions/CompoundIncludeOnlyType" }, */
+        // focus can be either a string or an object in the input options -
+        // in the output it's always an object
+        focus: { $ref: "#/definitions/CompoundFocusType" },
       },
     },
     ...moduleSystemsType.definitions,
@@ -48,6 +58,8 @@ module.exports = {
     ...outputType.definitions,
     ...compoundExcludeType.definitions,
     ...compoundDoNotFollowType.definitions,
+    ...compoundIncludeOnlyType.definitions,
+    ...compoundFocusType.definitions,
     ...reporterOptions.definitions,
   },
 };

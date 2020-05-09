@@ -11,6 +11,7 @@ const KNOWN_CLI_OPTIONS = [
   "config",
   "doNotFollow",
   "exclude",
+  "focus",
   "help",
   "includeOnly",
   "info",

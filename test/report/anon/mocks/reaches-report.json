@@ -329,7 +329,7 @@
         "path": "^src/extract/[^/]+/[^.]+\\.js$"
       },
       "externalModuleResolutionStrategy": "node_modules",
-      "includeOnly": "^src/(utl|extract/[^.]+\\.js$)",
+      "includeOnly": { "path": "^src/(utl|extract/[^.]+\\.js$)" },
       "moduleSystems": ["amd", "cjs", "es6"],
       "outputTo": "-",
       "outputType": "json",

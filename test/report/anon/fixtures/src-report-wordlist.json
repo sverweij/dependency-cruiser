@@ -212,7 +212,7 @@
     "optionsUsed": {
       "combinedDependencies": false,
       "externalModuleResolutionStrategy": "node_modules",
-      "includeOnly": "^src/report/dot",
+      "includeOnly": { "path": "^src/report/dot" },
       "moduleSystems": ["amd", "cjs", "es6"],
       "outputTo": "-",
       "outputType": "json",

@@ -1,7 +1,7 @@
-const summary = require("./summary");
-const modules = require("./modules");
+import modules from "./modules.mjs";
+import summary from "./summary.mjs";
 
-module.exports = {
+export default {
   title: "dependency-cruiser output format",
   $schema: "http://json-schema.org/draft-07/schema#",
   $id: "https://dependency-cruiser.js.org/schema/cruise-result.schema.json",
