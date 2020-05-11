@@ -39,7 +39,7 @@ describe("extract/resolve/localNpmHelpers.getPackageJson", () => {
   it("returns a package.json when there is one ('local' node_modules)", () => {
     let lPackageJson = localNpmHelpers.getPackageJson(
       "deprecated-at-the-start-for-test-purposes",
-      "./test/extract/fixtures/deprecated-node-module/",
+      "./test/main/fixtures/cruise-reporterless/deprecated-node-module/",
       {}
     );
 

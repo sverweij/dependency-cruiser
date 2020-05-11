@@ -2,7 +2,7 @@ const _clone = require("lodash/clone");
 const _get = require("lodash/get");
 const _reject = require("lodash/reject");
 const _uniqBy = require("lodash/uniqBy");
-const compareRules = require("./compare-rules");
+const compare = require("../../utl/compare");
 
 function mergeModule(pLeftModule, pRightModule) {
   return {
@@ -14,7 +14,7 @@ function mergeModule(pLeftModule, pRightModule) {
     ),
     rules: pLeftModule.rules
       .concat(_get(pRightModule, "rules", []))
-      .sort(compareRules),
+      .sort(compare.rules),
     valid: pLeftModule.valid && pRightModule.valid,
     consolidated:
       Boolean(pLeftModule.consolidated) || Boolean(pRightModule.consolidated),

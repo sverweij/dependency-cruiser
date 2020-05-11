@@ -1,6 +1,5 @@
 const chai = require("chai");
 const extract = require("../../src/extract");
-const cruiseResultSchema = require("../../src/schema/cruise-result.schema.json");
 const normalize = require("../../src/main/options/normalize");
 const normalizeResolveOptions = require("../../src/main/resolve-options/normalize");
 
@@ -27,10 +26,7 @@ describe("extract/index - do not follow", () => {
       lResolveOptions
     );
 
-    expect(lResult.modules).to.deep.equal(
-      require("./fixtures/donotfollow.json").modules
-    );
-    expect(lResult).to.be.jsonSchema(cruiseResultSchema);
+    expect(lResult).to.deep.equal(require("./fixtures/donotfollow.json"));
   });
 
   it("do not follow - doNotFollow.dependencyTypes", () => {
@@ -51,10 +47,9 @@ describe("extract/index - do not follow", () => {
       lResolveOptions
     );
 
-    expect(lResult.modules).to.deep.equal(
-      require("./fixtures/donotfollow-dependency-types.json").modules
+    expect(lResult).to.deep.equal(
+      require("./fixtures/donotfollow-dependency-types.json")
     );
-    expect(lResult).to.be.jsonSchema(cruiseResultSchema);
   });
 });
 

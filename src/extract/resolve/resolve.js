@@ -1,5 +1,5 @@
 const enhancedResolve = require("enhanced-resolve");
-const pathToPosix = require("../utl/path-to-posix");
+const pathToPosix = require("../../utl/path-to-posix");
 const stripQueryParameters = require("../utl/strip-query-parameters");
 
 let gResolver = null;

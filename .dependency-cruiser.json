@@ -43,14 +43,14 @@
       }
     },
     {
-      "name": "extract-to-validate-only",
-      "comment": "This extraction module depends on something outside extraction that is not a utility or validation. Which is odd, given the goal of the extraction step.",
+      "name": "extract-to-utl-only",
+      "comment": "This extraction module depends on something outside extraction that is not a utility. Which is odd, given the goal of the extraction step.",
       "severity": "error",
       "from": {
         "path": "(^src/extract/)"
       },
       "to": {
-        "pathNot": "$1|^node_modules|^(path|fs|module|package.json)$|^src/(utl|validate)",
+        "pathNot": "$1|^node_modules|^(path|fs|module|package.json)$|^src/utl",
         "exoticallyRequired": false
       }
     },
@@ -227,6 +227,10 @@
               "attributes": { "fillcolor": "#ccffcc" }
             },
             {
+              "criteria": { "source": "^src/enrich" },
+              "attributes": { "fillcolor": "#77eeaa" }
+            },
+            {
               "criteria": { "source": "^src/validate" },
               "attributes": { "fillcolor": "#ccccff" }
             },
@@ -292,6 +296,10 @@
             {
               "criteria": { "resolved": "^src/extract" },
               "attributes": { "color": "#00770077" }
+            },
+            {
+              "criteria": { "resolved": "^src/enrich" },
+              "attributes": { "color": "#00776677" }
             },
             {
               "criteria": { "resolved": "^src/validate" },

@@ -5,11 +5,11 @@ import prettier from "prettier";
 import configurationSchema from "./schema/configuration.schema.mjs";
 import cruiseResultSchema from "./schema/cruise-result.schema.mjs";
 
-const __dirname = path.dirname(new URL(import.meta.url).pathname);
+const DIRNAME = path.dirname(new URL(import.meta.url).pathname);
 
 function jsonTheSchema(pJSONSchemaObject, pOutputFileName) {
   fs.writeFileSync(
-    path.join(__dirname, "..", "src", "schema", pOutputFileName),
+    path.normalize(path.join(DIRNAME, "..", "src", "schema", pOutputFileName)),
     prettier.format(JSON.stringify(pJSONSchemaObject), { parser: "json" }),
     "utf8"
   );

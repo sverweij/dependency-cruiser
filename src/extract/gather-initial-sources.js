@@ -2,9 +2,9 @@ const fs = require("fs");
 const path = require("path");
 const glob = require("glob");
 const _get = require("lodash/get");
+const filenameMatchesPattern = require("../utl/filename-matches-pattern");
+const pathToPosix = require("../utl/path-to-posix");
 const transpileMeta = require("./transpile/meta");
-const pathToPosix = require("./utl/path-to-posix");
-const filenameMatchesPattern = require("./utl/filename-matches-pattern");
 
 const SUPPORTED_EXTENSIONS = transpileMeta.scannableExtensions;
 

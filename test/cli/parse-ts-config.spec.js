@@ -1,7 +1,7 @@
 const path = require("path").posix;
 const expect = require("chai").expect;
 const parseTSConfig = require("../../src/cli/parse-ts-config");
-const pathToPosix = require("../../src/extract/utl/path-to-posix");
+const pathToPosix = require("../../src/utl/path-to-posix");
 
 const DIRNAME = pathToPosix(__dirname);
 
