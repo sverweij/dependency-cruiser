@@ -1,6 +1,6 @@
 const fs = require("fs");
 const path = require("path");
-const pathToPosix = require("../utl/path-to-posix");
+const pathToPosix = require("../../utl/path-to-posix");
 const isRelativeModuleName = require("./is-relative-module-name");
 const resolveAMD = require("./resolve-amd");
 const resolveCommonJS = require("./resolve-cjs");

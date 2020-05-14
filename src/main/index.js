@@ -1,5 +1,6 @@
 const Ajv = require("ajv");
 const extract = require("../extract");
+const enrich = require("../enrich");
 const cruiseResultSchema = require("../schema/cruise-result.schema.json");
 const meta = require("../extract/transpile/meta");
 const report = require("../report");
@@ -33,15 +34,21 @@ function cruise(pFileAndDirectoryArray, pOptions, pResolveOptions, pTSConfig) {
   if (Boolean(pOptions.ruleSet)) {
     pOptions.ruleSet = normalizeRuleSet(validateRuleSet(pOptions.ruleSet));
   }
-
-  const lExtractionResult = extract(
-    normalizeFilesAndDirectories(pFileAndDirectoryArray),
+  const lNormalizedFileAndDirectoryArray = normalizeFilesAndDirectories(
+    pFileAndDirectoryArray
+  );
+  const lCruiseResult = enrich(
+    extract(
+      lNormalizedFileAndDirectoryArray,
+      pOptions,
+      normalizeResolveOptions(pResolveOptions, pOptions, pTSConfig),
+      pTSConfig
+    ),
     pOptions,
-    normalizeResolveOptions(pResolveOptions, pOptions, pTSConfig),
-    pTSConfig
+    lNormalizedFileAndDirectoryArray
   );
 
-  return report.getReporter(pOptions.outputType)(lExtractionResult);
+  return report.getReporter(pOptions.outputType)(lCruiseResult);
 }
 
 module.exports = {

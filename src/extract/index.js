@@ -1,39 +1,10 @@
-const _get = require("lodash/get");
 const _uniqBy = require("lodash/uniqBy");
 const _spread = require("lodash/spread");
 const _concat = require("lodash/concat");
-const _clone = require("lodash/clone");
-const addFocus = require("./add-focus");
-const pathToPosix = require("./utl/path-to-posix");
+const pathToPosix = require("../utl/path-to-posix");
 const getDependencies = require("./get-dependencies");
-const deriveCirculars = require("./derive/circular");
-const deriveOrphans = require("./derive/orphan");
-const deriveReachable = require("./derive/reachable");
 const gatherInitialSources = require("./gather-initial-sources");
-const summarize = require("./summarize");
-const addValidations = require("./add-validations");
 const clearCaches = require("./clear-caches");
-
-const SHAREABLE_OPTIONS = [
-  "combinedDependencies",
-  "doNotFollow",
-  "exclude",
-  "externalModuleResolutionStrategy",
-  "focus",
-  "includeOnly",
-  "maxDepth",
-  "moduleSystems",
-  "outputTo",
-  "outputType",
-  "prefix",
-  "preserveSymlinks",
-  "rulesFile",
-  "tsPreCompilationDeps",
-  "webpackConfig",
-  "exoticallyRequired",
-  "exoticRequireStrings",
-  "reporterOptions",
-];
 
 /* eslint max-params:0 */
 function extractRecursive(
@@ -144,67 +115,7 @@ function complete(pAll, pFromListItem) {
     );
 }
 
-function makeOptionsPresentable(pOptions) {
-  return SHAREABLE_OPTIONS.filter(
-    (pOption) =>
-      Object.prototype.hasOwnProperty.call(pOptions, pOption) &&
-      pOptions[pOption] !== 0
-  )
-    .filter(
-      (pOption) =>
-        pOption !== "doNotFollow" ||
-        Object.keys(pOptions.doNotFollow).length > 0
-    )
-    .filter(
-      (pOption) =>
-        pOption !== "exclude" || Object.keys(pOptions.exclude).length > 0
-    )
-    .reduce((pAll, pOption) => {
-      pAll[pOption] = pOptions[pOption];
-      return pAll;
-    }, {});
-}
-
-function makeIncludOnlyBackwardsCompatible(pOptions) {
-  return pOptions.includeOnly
-    ? {
-        ...pOptions,
-        includeOnly: _get(pOptions, "includeOnly.path"),
-      }
-    : pOptions;
-}
-
-function summarizeOptions(pFileDirectoryArray, pOptions) {
-  return {
-    optionsUsed: {
-      ...makeOptionsPresentable(makeIncludOnlyBackwardsCompatible(pOptions)),
-      args: pFileDirectoryArray.map(pathToPosix).join(" "),
-    },
-  };
-}
-
-// the fixed name for allowed rules served a purpose during the extraction
-// process - but it's not necessary to reflect it in the output.
-function removeNames(pRule) {
-  const lReturnValue = _clone(pRule);
-
-  Reflect.deleteProperty(lReturnValue, "name");
-  return lReturnValue;
-}
-
-function addRuleSetUsed(pOptions) {
-  const lForbidden = _get(pOptions, "ruleSet.forbidden");
-  const lAllowed = _get(pOptions, "ruleSet.allowed");
-  const lAllowedSeverity = _get(pOptions, "ruleSet.allowedSeverity");
-
-  return Object.assign(
-    lForbidden ? { forbidden: lForbidden } : {},
-    lAllowed ? { allowed: lAllowed.map(removeNames) } : {},
-    lAllowedSeverity ? { allowedSeverity: lAllowedSeverity } : {}
-  );
-}
-
-function filterExcludedDependencies(pModule, pExclude) {
+function filterExcludedDynamicDependencies(pModule, pExclude) {
   // no need to do the 'path' thing as that was addressed in extractFileDirectoryArray already
   return {
     ...pModule,
@@ -224,7 +135,7 @@ module.exports = (
 ) => {
   clearCaches();
 
-  let lModules = _uniqBy(
+  return _uniqBy(
     extractFileDirectoryArray(
       pFileDirectoryArray,
       pOptions,
@@ -232,23 +143,7 @@ module.exports = (
       pTSConfig
     ).reduce(complete, []),
     (pModule) => pModule.source
-  ).map((pModule) => filterExcludedDependencies(pModule, pOptions.exclude));
-
-  lModules = deriveCirculars(lModules);
-  lModules = deriveOrphans(lModules);
-  lModules = deriveReachable(lModules, pOptions.ruleSet);
-
-  lModules = addFocus(lModules, _get(pOptions, "focus.path"));
-  lModules = addValidations(lModules, pOptions.validate, pOptions.ruleSet);
-
-  return {
-    modules: lModules,
-    summary: Object.assign(
-      summarize(lModules, pOptions.ruleSet),
-      summarizeOptions(pFileDirectoryArray, pOptions),
-      pOptions.ruleSet ? { ruleSetUsed: addRuleSetUsed(pOptions) } : {}
-    ),
-  };
+  ).map((pModule) =>
+    filterExcludedDynamicDependencies(pModule, pOptions.exclude)
+  );
 };
-
-/* eslint security/detect-object-injection: 0 */

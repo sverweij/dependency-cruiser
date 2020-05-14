@@ -1,6 +1,5 @@
 const chai = require("chai");
 const extract = require("../../src/extract");
-const cruiseResultSchema = require("../../src/schema/cruise-result.schema.json");
 const normalize = require("../../src/main/options/normalize");
 const normalizeResolveOptions = require("../../src/main/resolve-options/normalize");
 
@@ -27,10 +26,9 @@ describe("extract/index - exclude", () => {
       lResolveOptions
     );
 
-    expect(lResult.modules).to.deep.equal(
-      require("./fixtures/exclude/path/es/output.json").modules
+    expect(lResult).to.deep.equal(
+      require("./fixtures/exclude/path/es/output.json")
     );
-    expect(lResult).to.be.jsonSchema(cruiseResultSchema);
   });
 
   it("exclude - exclude.dynamic", () => {
@@ -51,10 +49,9 @@ describe("extract/index - exclude", () => {
       lResolveOptions
     );
 
-    expect(lResult.modules).to.deep.equal(
-      require("./fixtures/exclude/dynamic/es/output.json").modules
+    expect(lResult).to.deep.equal(
+      require("./fixtures/exclude/dynamic/es/output.json")
     );
-    expect(lResult).to.be.jsonSchema(cruiseResultSchema);
   });
 });
 

@@ -26,8 +26,8 @@ const GRANULARITY2FUNCTION = {
   custom: prepareCustomLevel,
 };
 
-function report(pResults, pTheme, pGranularity, pCollapsePattern) {
-  const lTheme = theming.normalizeTheme(pTheme);
+function report(pResults, pGranularity, { theme, collapsePattern }) {
+  const lTheme = theming.normalizeTheme(theme);
 
   return Handlebars.templates["dot.template.hbs"]({
     graphAttrs: moduleUtl.attributizeObject(lTheme.graph || {}),
@@ -38,25 +38,41 @@ function report(pResults, pTheme, pGranularity, pCollapsePattern) {
     modules: (GRANULARITY2FUNCTION[pGranularity] || prepareCustomLevel)(
       pResults,
       lTheme,
-      pCollapsePattern
+      collapsePattern
     ),
   });
 }
 
-const GRANULARITY2THEMEORIGIN = {
-  module: "summary.optionsUsed.reporterOptions.dot.theme",
-  folder: "summary.optionsUsed.reporterOptions.ddot.theme",
-  custom: "summary.optionsUsed.reporterOptions.archi.theme",
+const GRANULARITY2REPORTER_OPTIONS = {
+  module: "summary.optionsUsed.reporterOptions.dot",
+  folder: "summary.optionsUsed.reporterOptions.ddot",
+  custom: "summary.optionsUsed.reporterOptions.archi",
 };
+
+function pryReporterOptionsFromResults(pGranularity, pResults) {
+  const lFallbackReporterOptions = _get(
+    pResults,
+    "summary.optionsUsed.reporterOptions.dot"
+  );
+
+  return _get(
+    pResults,
+    // eslint-disable-next-line security/detect-object-injection
+    GRANULARITY2REPORTER_OPTIONS[pGranularity],
+    lFallbackReporterOptions
+  );
+}
 
 function pryThemeFromResults(pGranularity, pResults) {
   const lFallbackTheme = _get(
     pResults,
     "summary.optionsUsed.reporterOptions.dot.theme"
   );
-
-  // eslint-disable-next-line security/detect-object-injection
-  return _get(pResults, GRANULARITY2THEMEORIGIN[pGranularity], lFallbackTheme);
+  return _get(
+    pryReporterOptionsFromResults(pGranularity, pResults),
+    "theme",
+    lFallbackTheme
+  );
 }
 
 /**
@@ -77,7 +93,10 @@ module.exports = (pGranularity) => (pResults, pTheme, pCollapsePattern) => {
   const lTheme = pTheme || pryThemeFromResults(pGranularity, pResults);
 
   return {
-    output: report(pResults, lTheme, pGranularity, pCollapsePattern),
+    output: report(pResults, pGranularity, {
+      theme: lTheme,
+      collapsePattern: pCollapsePattern,
+    }),
     exitCode: 0,
   };
 };

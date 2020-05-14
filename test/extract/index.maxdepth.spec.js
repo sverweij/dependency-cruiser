@@ -1,6 +1,5 @@
 const chai = require("chai");
 const extract = require("../../src/extract");
-const resultSchema = require("../../src/schema/cruise-result.schema.json");
 const normalize = require("../../src/main/options/normalize");
 const normalizeResolveOptions = require("../../src/main/resolve-options/normalize");
 
@@ -28,10 +27,10 @@ describe("extract/index - max depth", () => {
       );
       /* eslint import/no-dynamic-require:0, security/detect-non-literal-require:0 */
 
-      expect(lResult.modules).to.deep.equal(
-        require(`./fixtures/maxDepth${pDepth}.json`).modules
+      expect(lResult).to.deep.equal(
+        require(`./fixtures/maxDepth${pDepth}.json`)
       );
-      expect(lResult).to.be.jsonSchema(resultSchema);
+      // expect(lResult).to.be.jsonSchema(resultSchema);
     })
   );
 });
