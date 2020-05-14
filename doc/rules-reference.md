@@ -1248,6 +1248,9 @@ depcruise --ts-config tsconfig.prod.json --validate -- src
 - dependency-cruiser currently only looks at the `compilerOptions` key
   in the tsconfig.json and not at other keys (e.g. `files`, `include` and
   `exclude`).
+- If you happen to use a [`jsconfig.json`](https://code.visualstudio.com/docs/languages/jsconfig)
+  you can pass that as well as the syntax of the `compilaerOptions` key
+  is the same for both.
 
 ### Yarn Plug'n'Play support - `externalModuleResolutionStrategy`
 

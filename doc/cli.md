@@ -629,6 +629,10 @@ want to do this in a configuration file - see
 [tsConfig](./rules-reference.md#tsconfig-use-a-typescript-configuration-file-project)
 section in the rules reference for details.
 
+> If you happen to use a [`jsconfig.json`](https://code.visualstudio.com/docs/languages/jsconfig)
+> you can pass that as well - the syntax for tsconfig.json and jsconfig.json
+> is identical for all practical purposes.
+
 ### `--webpack-config`: use (the resolution options of) a webpack configuration
 
 With a webpack config you can drastically alter how module names resolve to
