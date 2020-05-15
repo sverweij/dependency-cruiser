@@ -1,48 +1,14 @@
 import { IReporterOptions } from "./reporter-options";
 import { IFlattenedRuleSet } from "./rule-set";
-import { DependencyType, ModuleSystemType, OutputType } from "./shared-types";
+import { ModuleSystemType, OutputType } from "./shared-types";
+import {
+  IDoNotFollowType,
+  IExcludeType,
+  IFocusType,
+  IIncludeOnlyType,
+} from "./filter-types";
 
 export type ExternalModuleResolutionStrategyType = "node_modules" | "yarn-pnp";
-
-export interface IDoNotFollowType {
-  /**
-   * a regular expression for modules to include, but not follow further
-   */
-  path?: string;
-  /**
-   * an array of dependency types to include, but not follow further
-   */
-  dependencyTypes?: DependencyType[];
-}
-
-export interface IExcludeType {
-  /**
-   * a regular expression for modules to exclude
-   */
-  path?: string;
-  /**
-   * a boolean indicating whether or not to exclude dynamic dependencies
-   * leave out to match both
-   */
-  dynamic?: boolean;
-}
-
-export interface IIncludeOnlyType {
-  /**
-   * regular expression describing which dependencies the function
-   * should cruise - anything not matching this will be skipped
-   */
-  path?: string;
-}
-
-export interface IFocusType {
-  /**
-   * dependency-cruiser will include modules matching this regular expression
-   * in its output, as well as their neighbours (direct dependencies and
-   * dependents)
-   */
-  path?: string;
-}
 
 export interface ICruiseOptions {
   /**

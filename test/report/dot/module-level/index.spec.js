@@ -6,6 +6,7 @@ const render = require("../../../../src/report/dot")("module");
 const defaultRender = require("../../../../src/report/dot")();
 const clusterless = require("./mocks/clusterless.json");
 const bunchOfModules = require("./mocks/bunch-of-modules.json");
+const focusMeModules = require("./mocks/dependency-cruiser-2020-01-25-focus-me.json");
 const orphanDeps = require("./mocks/orphan-deps.json");
 const unresolvableDeps = require("./mocks/es6-unresolvable-deps.json");
 const doNotFollowDeps = require("./mocks/do-not-follow-deps.json");
@@ -52,6 +53,10 @@ const defaultColorFixture = fs.readFileSync(
 );
 const bareColorFixture = fs.readFileSync(
   path.join(__dirname, "mocks/bunch-of-modules.dot"),
+  "utf8"
+);
+const focusMeModulesFixture = fs.readFileSync(
+  path.join(mockPath, "dependency-cruiser-2020-01-25-focus-me.dot"),
   "utf8"
 );
 
@@ -109,14 +114,22 @@ describe("report/dot/module-level reporter", () => {
   it("richly colors modules when passed no theme", () => {
     expect(render(bunchOfModules).output).to.deep.equal(defaultColorFixture);
   });
+
   it("colors boringly when passed a bare theme", () => {
     expect(render(bunchOfModules, bareTheme).output).to.deep.equal(
       bareColorFixture
     );
   });
+
   it("Also renders on module level when the reporter granularity isn't specified", () => {
     expect(defaultRender(bunchOfModules, bareTheme).output).to.deep.equal(
       bareColorFixture
+    );
+  });
+
+  it("applies filter when passed", () => {
+    expect(render(focusMeModules, bareTheme).output).to.deep.equal(
+      focusMeModulesFixture
     );
   });
 });

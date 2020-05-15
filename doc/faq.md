@@ -3,7 +3,7 @@
 - [Troubleshooting](#troubleshooting)
 - [Features](#features)
 - [Expanding dependency-cruiser](#expanding-dependency-cruiser)
-- [Roadmap](#roadmap)
+- [Road map](#roadmap)
 - [Contact](#contact)
 
 ## Troubleshooting
@@ -103,7 +103,7 @@ with ~100 modules to appreciate the difference)
 
 #### Folder level dependency graph ('ddot' reporter)
 
-For a birds-eye view, you can use the `ddot` reporter that summarizes dependencies
+For a birds-eye view, you can use the `ddot` reporter that summarises dependencies
 on a folder level:
 
 ```sh
@@ -261,7 +261,7 @@ your dependencies. This includes any `alias` you might have in there.
 Currently dependency-cruiser supports a reasonable subset of webpack
 config file formats:
 
-- nodejs parsable javascript only
+- nodejs parsable JavaScript only
 - webpack 4 compatible and up (although earlier ones _might_ work
   there's no guarantee)
 - exporting either:
@@ -325,7 +325,7 @@ _teamcity_ reporters (he _dot_ and _ddot_ reporters already did before).
 ### Q: I'm using window.require or a require wrapper - how do I make sure dependencies I declared like that are included?
 
 **A**: From version 5.4.0 or higher you can add an _exoticRequireStrings_ key in
-your configuration with the wrapper(s) and/ or redefinitions of require:
+your configuration with the wrapper(s) and/ or re-definitions of require:
 
 ```json
 "exoticRequireStrings": ["window.require", "need", "tryRequire"]
@@ -353,12 +353,12 @@ your configuration with the wrapper(s) and/ or redefinitions of require:
 - In `test/report` add unit tests that prove your reporter does what it
   intends.
 
-### Q: How do I add support for my favorite alt-js language?
+### Q: How do I add support for my favourite alt-js language?
 
 **A**: Ask me nicely or make a PR.
 
 Dependency-cruiser already supports TypeScript, CoffeeScript and LiveScript. If
-there's another language (that transpiles to javascript) you'd like to see
+there's another language (that transpiles to JavaScript) you'd like to see
 support for, let me know.
 
 Recipe for PR's to add an alt-js language:
@@ -371,7 +371,7 @@ Recipe for PR's to add an alt-js language:
     correctly later on).
 - In `src/transpile`
   - add a `yourLanguageWrap.js` that invokes the transpiler transforming
-    your language into javascript (preferably ES6 or better, but lower versions
+    your language into JavaScript (preferably ES6 or better, but lower versions
     should work as well). [`typeScriptWrap.js`](../src/extract/transpile/typeScriptWrap.js)
     as an example on how to do this.
   - in [`meta.js`](../src/extract/transpile/meta.js)
@@ -380,7 +380,7 @@ Recipe for PR's to add an alt-js language:
       language.
 - In `test/extract/transpile` add unit tests for `yourLanguageWrap`
 
-## Roadmap
+## Road map
 
 [Here](https://github.com/sverweij/dependency-cruiser/projects/1)
 

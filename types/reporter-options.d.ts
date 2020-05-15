@@ -1,3 +1,10 @@
+import {
+  IExcludeType,
+  IIncludeOnlyType,
+  IDoNotFollowType,
+  IFocusType,
+} from "./filter-types";
+
 export interface IReporterOptions {
   /**
    * Options to tweak the output of the anonymous reporter
@@ -6,7 +13,7 @@ export interface IReporterOptions {
   /**
    * Options to tweak the output of the archi/ cdot reporter
    */
-  archi?: IArchiReporterOptions;
+  archi?: IDotReporterOptions;
   /**
    * Options to tweak the output of the dot reporter
    */
@@ -15,6 +22,12 @@ export interface IReporterOptions {
    * Options to tweak the output of the dot reporter
    */
   ddot?: IDotReporterOptions;
+}
+
+export interface IReporterFiltersType {
+  exclude: IExcludeType;
+  includeOnly: IIncludeOnlyType;
+  focus: IFocusType;
 }
 
 export interface IAnonReporterOptions {
@@ -36,6 +49,12 @@ export interface IDotReporterOptions {
    * to null, but "node_modules/[^/]+" is recommended for most use cases.
    */
   collapsePattern?: string;
+  /**
+   * filters to apply to the reporter before rendering it (e.g. to leave
+   * out details from the graphical output that are not relevant for the
+   * goal of the report)
+   */
+  filters?: IReporterFiltersType;
   /**
    * A bunch of criteria to (conditionally) theme the dot output
    */
@@ -77,15 +96,4 @@ export interface IDotTheme {
 export interface IDotThemeEntry {
   criteria: any;
   attributes: any;
-}
-
-export interface IArchiReporterOptions {
-  /**
-   * Regular expressions to collapse to (e.g. "^node_modules/[^/]+|^src/[^/]+")
-   */
-  collapsePattern?: string;
-  /**
-   * A bunch of criteria to (conditionally) theme the dot output
-   */
-  theme?: IDotTheme;
 }

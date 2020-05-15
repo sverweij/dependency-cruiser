@@ -1,5 +1,5 @@
 const expect = require("chai").expect;
-const addFocus = require("../../src/enrich/add-focus");
+const addFocus = require("../../src/utl/add-focus");
 const $input = require("./fixtures/focus/dependency-cruiser-only-src.json");
 const $focus = require("./fixtures/focus/dependency-cruiser-focus-on-main.json");
 

@@ -41,7 +41,7 @@ There's a few things you notice:
 
 - dependency-cruiser generates _warnings_. This is the default, but maybe you
   want to stop the build. You'd need _errors_.
-- The rule has no name. For this one rule - no probs. If there's more rules it
+- The rule has no name. For this one rule - no problem. If there's more rules it
   might be handy for your future self (and your co-workers) to reference the
   rule.
 - The rule matches a little too much for your taste.
@@ -110,7 +110,7 @@ Luckily you know `kpttraag`, the author of `yudelyo` - you submit a PR and wait.
 In the meantime you don't want to have the build break until `kpttraag` has
 found the time to merge your PR.
 
-You realize there might be more npm packages using http too, so ...
+You realise there might be more npm packages using http too, so ...
 
 - You change the `not-to-core-http` to only generate errors for paths _outside_
   node_modules.
@@ -139,12 +139,12 @@ You realize there might be more npm packages using http too, so ...
 }
 ```
 
-_warn_ node_mods-not-to-http: **node_modules/yudelyo/index.js** → **http**  
+_warn_ node_mods-not-to-http: **node_modules/yudelyo/index.js** → **http**    
 _error_ not-to-core-http: **src/secure/index.ts** → **http**
 
 ## {} over { "path": ".+" }
 
 Functionally, `"from": {}` and `"from": { "path": ".+" }` are the same. The way
-depencency-cruiser is wired today, however, makes the former faster than the
+dependency-cruiser is wired today, however, makes the former faster than the
 latter. So - unless you have CPU cycles to spare - use the former one
 (`"from": {}`).

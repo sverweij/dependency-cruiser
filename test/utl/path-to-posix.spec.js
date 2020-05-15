@@ -26,7 +26,7 @@ describe("utl/pathToPosix on win32", () => {
   });
 });
 
-describe("extract/utl/pathToPosix  on posix", () => {
+describe("utl/pathToPosix  on posix", () => {
   it('leaves win32 style paths alone: ""', () => {
     expect(pathToPosix("", path.posix)).to.equal("");
   });

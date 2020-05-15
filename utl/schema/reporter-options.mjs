@@ -1,3 +1,7 @@
+import compoundExcludeType from "./compound-exclude-type.mjs";
+import compoundFocusType from "./compound-focus-type.mjs";
+import compoundIncludeOnlyType from "./compound-include-only-type.mjs";
+
 export default {
   definitions: {
     ReporterOptionsType: {
@@ -6,7 +10,7 @@ export default {
       additionalProperties: false,
       properties: {
         anon: { $ref: "#/definitions/AnonReporterOptionsType" },
-        archi: { $ref: "#/definitions/ArchiReporterOptionsType" },
+        archi: { $ref: "#/definitions/DotReporterOptionsType" },
         dot: { $ref: "#/definitions/DotReporterOptionsType" },
         ddot: { $ref: "#/definitions/DotReporterOptionsType" },
       },
@@ -31,23 +35,9 @@ export default {
         },
       },
     },
-    ArchiReporterOptionsType: {
-      type: "object",
-      description:
-        "Options to tweak the output of customized dot/ architecture reporter",
-      additionalProperties: false,
-      properties: {
-        collapsePattern: {
-          type: "string",
-          description:
-            'Regular expressions to collapse to (e.g. "^node_modules/[^/]+|^src/[^/]+")',
-        },
-        theme: { $ref: "#/definitions/DotThemeType" },
-      },
-    },
     DotReporterOptionsType: {
       type: "object",
-      description: "Options to tweak the output of the anonymous reporter",
+      description: "Options to tweak the output of the dot reporters",
       additionalProperties: false,
       properties: {
         collapsePattern: {
@@ -56,6 +46,7 @@ export default {
             'Regular expressions to collapse to. For the "dot" reporter defaults ' +
             'to null, but "node_modules/[^/]+" is recommended for most use cases.',
         },
+        filters: { $ref: "#/definitions/ReporterFiltersType" },
         theme: { $ref: "#/definitions/DotThemeType" },
       },
     },
@@ -114,5 +105,21 @@ export default {
         },
       },
     },
+    ReporterFiltersType: {
+      type: "object",
+      description:
+        "filters to apply to the reporter before rendering it (e.g. to leave " +
+        "out details from the graphical output that are not relevant for the " +
+        "goal of the report)",
+      additionalProperties: false,
+      properties: {
+        exclude: { $ref: "#/definitions/CompoundExcludeType" },
+        includeOnly: { $ref: "#/definitions/CompoundIncludeOnlyType" },
+        focus: { $ref: "#/definitions/CompoundFocusType" },
+      },
+    },
+    ...compoundExcludeType.definitions,
+    ...compoundIncludeOnlyType.definitions,
+    ...compoundFocusType.definitions,
   },
 };
