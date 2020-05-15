@@ -1,8 +1,8 @@
 const _get = require("lodash/get");
+const addFocus = require("../../src/utl/add-focus");
 const deriveCirculars = require("./derive/circular");
 const deriveOrphans = require("./derive/orphan");
 const deriveReachable = require("./derive/reachable");
-const addFocus = require("./add-focus");
 const addValidations = require("./add-validations");
 
 module.exports = function enrichModules(pModules, pOptions) {

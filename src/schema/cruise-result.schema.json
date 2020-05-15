@@ -688,7 +688,7 @@
       "additionalProperties": false,
       "properties": {
         "anon": { "$ref": "#/definitions/AnonReporterOptionsType" },
-        "archi": { "$ref": "#/definitions/ArchiReporterOptionsType" },
+        "archi": { "$ref": "#/definitions/DotReporterOptionsType" },
         "dot": { "$ref": "#/definitions/DotReporterOptionsType" },
         "ddot": { "$ref": "#/definitions/DotReporterOptionsType" }
       }
@@ -705,27 +705,16 @@
         }
       }
     },
-    "ArchiReporterOptionsType": {
-      "type": "object",
-      "description": "Options to tweak the output of customized dot/ architecture reporter",
-      "additionalProperties": false,
-      "properties": {
-        "collapsePattern": {
-          "type": "string",
-          "description": "Regular expressions to collapse to (e.g. \"^node_modules/[^/]+|^src/[^/]+\")"
-        },
-        "theme": { "$ref": "#/definitions/DotThemeType" }
-      }
-    },
     "DotReporterOptionsType": {
       "type": "object",
-      "description": "Options to tweak the output of the anonymous reporter",
+      "description": "Options to tweak the output of the dot reporters",
       "additionalProperties": false,
       "properties": {
         "collapsePattern": {
           "type": "string",
           "description": "Regular expressions to collapse to. For the \"dot\" reporter defaults to null, but \"node_modules/[^/]+\" is recommended for most use cases."
         },
+        "filters": { "$ref": "#/definitions/ReporterFiltersType" },
         "theme": { "$ref": "#/definitions/DotThemeType" }
       }
     },
@@ -770,6 +759,16 @@
       "properties": {
         "criteria": { "type": "object" },
         "attributes": { "type": "object" }
+      }
+    },
+    "ReporterFiltersType": {
+      "type": "object",
+      "description": "filters to apply to the reporter before rendering it (e.g. to leave out details from the graphical output that are not relevant for the goal of the report)",
+      "additionalProperties": false,
+      "properties": {
+        "exclude": { "$ref": "#/definitions/CompoundExcludeType" },
+        "includeOnly": { "$ref": "#/definitions/CompoundIncludeOnlyType" },
+        "focus": { "$ref": "#/definitions/CompoundFocusType" }
       }
     }
   }

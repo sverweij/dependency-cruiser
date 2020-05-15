@@ -3,6 +3,7 @@
 *.swo
 *.swp
 **tmp**
+*.bak
 
 # ide garbage
 .project
