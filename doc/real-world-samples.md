@@ -11,7 +11,7 @@
 ### Chalk
 
 [chalk/chalk](https://github.com/chalk/chalk) -
-For coloring strings in the terminal. A typical _Sorhus style_ micro module that uses other micro modules to accomplish its goals.
+For colouring strings in the terminal. A typical _Sorhus style_ micro module that uses other micro modules to accomplish its goals.
 
 <img width="704" alt="chalk" src="real-world-samples/chalk.png">
 
@@ -21,7 +21,7 @@ For coloring strings in the terminal. A typical _Sorhus style_ micro module that
 
 When your app becomes big, dependency graphs on module level will become
 impractical. Dependency-cruiser can consolidate modules (+ their dependencies)
-and color them. Consolidation works out of the box for many repositories,
+and colour them. Consolidation works out of the box for many repositories,
 but can be [configured](./rules-reference.md#archi) to your [own liking](./rules-reference.md#reporteroptions).
 
 Here's the resulting get high level dependency graph for berry:
@@ -136,7 +136,7 @@ transpiled JavaScript.)
 Dependency cruiser used on itself, focusing on internal dependencies only, on three
 levels of abstraction - high level, folder and modules. A small
 [custom theme](rules-reference.md#dot) in its [configuration](../.dependency-cruiser.json#L196)
-colors the various main parts (extract, validate, report) and the dependencies to
+colours the various main parts (extract, validate, report) and the dependencies to
 them. Click for slightly more interactive versions.
 
 #### high level overview ('archi')

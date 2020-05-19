@@ -2,7 +2,7 @@
 const expect = require("chai").expect;
 const findRuleByName = require("../../src/utl/find-rule-by-name");
 
-describe("report/utl/findRuleByName", () => {
+describe("utl/findRuleByName", () => {
   const lRuleSet = {
     forbidden: [{ name: "a-rule", severity: "warn", from: {}, to: {} }],
   };

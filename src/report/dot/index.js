@@ -1,5 +1,6 @@
 const Handlebars = require("handlebars/runtime");
 const _get = require("lodash/get");
+const filterbank = require("../../utl/filterbank");
 const theming = require("./theming");
 const moduleUtl = require("./module-utl");
 const prepareFolderLevel = require("./prepare-folder-level");
@@ -26,8 +27,14 @@ const GRANULARITY2FUNCTION = {
   custom: prepareCustomLevel,
 };
 
-function report(pResults, pGranularity, { theme, collapsePattern }) {
+function report(pResults, pGranularity, { theme, collapsePattern, filters }) {
   const lTheme = theming.normalizeTheme(theme);
+  const lResults = filters
+    ? {
+        ...pResults,
+        modules: filterbank.applyFilters(pResults.modules, filters),
+      }
+    : pResults;
 
   return Handlebars.templates["dot.template.hbs"]({
     graphAttrs: moduleUtl.attributizeObject(lTheme.graph || {}),
@@ -36,7 +43,7 @@ function report(pResults, pGranularity, { theme, collapsePattern }) {
     clustersHaveOwnNode: "folder" === pGranularity,
     // eslint-disable-next-line security/detect-object-injection
     modules: (GRANULARITY2FUNCTION[pGranularity] || prepareCustomLevel)(
-      pResults,
+      lResults,
       lTheme,
       collapsePattern
     ),
@@ -75,6 +82,18 @@ function pryThemeFromResults(pGranularity, pResults) {
   );
 }
 
+function pryFiltersFromResults(pGranularity, pResults) {
+  const lFallbackFilters = _get(
+    pResults,
+    "summary.optionsUsed.reporterOptions.dot.filters"
+  );
+  return _get(
+    pryReporterOptionsFromResults(pGranularity, pResults),
+    "filters",
+    lFallbackFilters
+  );
+}
+
 /**
  * Returns the results of a cruise as a directed graph in the dot language.
  *
@@ -89,13 +108,20 @@ function pryThemeFromResults(pGranularity, pResults) {
  * @returns {IReporterOutput} - .output: the directed graph
  *                              .exitCode: 0
  */
-module.exports = (pGranularity) => (pResults, pTheme, pCollapsePattern) => {
+module.exports = (pGranularity) => (
+  pResults,
+  pTheme,
+  pCollapsePattern,
+  pFilters
+) => {
   const lTheme = pTheme || pryThemeFromResults(pGranularity, pResults);
+  const lFilters = pFilters || pryFiltersFromResults(pGranularity, pResults);
 
   return {
     output: report(pResults, pGranularity, {
       theme: lTheme,
       collapsePattern: pCollapsePattern,
+      filters: lFilters,
     }),
     exitCode: 0,
   };

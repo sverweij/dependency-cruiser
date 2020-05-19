@@ -122,16 +122,16 @@ with _GraphViz dot_ (`-T` is the short form of `--output-type`:)
 dependency-cruise -x "^node_modules" -T dot src | dot -T svg > dependencygraph.svg
 ```
 
-You can customize the look of these graphs. See the
+You can customise the look of these graphs. See the
 [dot section in the rules reference](./rules-reference.md#dot) for details.
 
-#### ddot - summarize on folder level
+#### ddot - summarise on folder level
 
 > This reporter is _experimental_. It's likely to stay, but the way you configure
 > it or how its output looks might change without major version bumping.
 
-The `ddot` reporter is a variant on the `dot` output. It summarizes modules on
-folder level. You can customize it just as you can the dot reporter output.
+The `ddot` reporter is a variant on the `dot` output. It summarises modules on
+folder level. You can customise it just as you can the dot reporter output.
 
 #### archi/ cdot
 
@@ -139,7 +139,7 @@ folder level. You can customize it just as you can the dot reporter output.
 > it or how its output looks might change without major version bumping.
 
 The archi is a variant on the `dot` output. The archi reporter
-can summarize (or 'collapse') dependencies to folders of your own choosing.
+can summarise (or 'collapse') dependencies to folders of your own choosing.
 Great if you want to have a high level overview of your app's dependencies.
 
 By default it collapses to one folder below folders named _node_modules_, _packages_,
@@ -182,7 +182,7 @@ dependency-cruise -T html -f dependencies.html src
 
 If you supply `csv` it will write the dependency matrix to a comma
 separated file - so you can import it into a spreadsheet program
-and analyze from there.
+and analyse from there.
 
 #### teamcity
 
@@ -210,7 +210,7 @@ dependency-cruise -v -T teamcity  -- src
 
 </details>
 
-Just like the `err` reporter the teamcity reporter has an empty output when there's
+Just like the `err` reporter the TeamCity reporter has an empty output when there's
 no violations - and a non-zero exit code when there's errors.
 
 #### text
@@ -341,7 +341,7 @@ so it's easier to compare than the two json's):
   `src/search/dragonfly-algorithm.spec.js` -> `src/animal/announce.spec.js`).
 - (You can use any array of strings here - a good one is Sindre Sorhus'
   [mnemonic-words](https://www.npmjs.com/package/mnemonic-words), which
-  you can simply require into the option if you're using javascript as
+  you can simply require into the option if you're using JavaScript as
   the config file format):
   ```javascript
   ...
@@ -450,7 +450,7 @@ preset):</summary>
 | `not-to-unresolvable`    | flags dependencies that can't be resolved                                                                        |
 | `no-duplicate-dep-types` | flags dependencies that occur more than once in package.json                                                     |
 | `not-to-test`            | Don't allow dependencies from outside test folders to test folders                                               |
-| `not-to-spec`            | Don't allow dependencies to (typescript/ javascript/ coffeescript) spec files                                    |
+| `not-to-spec`            | Don't allow dependencies to (typescript/ JavaScript/ CoffeeScript) spec files                                    |
 | `not-to-dev-dep`         | Don't allow dependencies from src/app/lib to a development only package                                          |
 | `optional-deps-used`     | Inform about the use of 'optional' dependencies (so you can ensure their imports a are sufficiently managed)     |
 | `peer-deps-used`         | Warn about the use of a peer dependency (they might be OK for you, but it's not typical you have them).          |
@@ -613,7 +613,7 @@ See [moduleSystems](./rules-reference.md#modulesystems) in the rules reference
 ### `--ts-pre-compilation-deps` (typescript only)
 
 By default dependency-cruiser does not take dependencies between typescript
-modules that don't exist after compilation to javascript. Pass this command
+modules that don't exist after compilation to JavaScript. Pass this command
 line switch to do take them into account.
 
 For details see [tsPreCompilationDeps](./rules-reference.md#tsprecompilationdeps) in the
@@ -682,7 +682,7 @@ depcruise-fmt -T dot cruise_result.json | dot -T svg > dependency-graph.svg
 If you want to see non-zero exit codes when there's error level dependency
 violations, you can use the `--exit-code` (short: `-e`). This only works for
 the output types that support non-zero exit codes (_err_, _err-long_ and
-_teamcity_). Example for the default output type (_err_):
+_TeamCity_). Example for the default output type (_err_):
 
 ```sh
 depcruise-fmt -e cruise_result.json
@@ -709,7 +709,7 @@ Options:
 ## depcruise-wrap-stream-in-html
 
 With `depcruise-wrap-stream-in-html` you can wrap the graphical output of
-graphviz dot into html that is geared to make the graph easier to use. It a.o.
+GraphViz dot into html that is geared to make the graph easier to use. It a.o.
 adds highlight-on-hover.
 
 Typical use:
