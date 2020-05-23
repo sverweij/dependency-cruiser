@@ -9,16 +9,21 @@ const clearCaches = require("./clear-caches");
 /* eslint max-params:0 */
 function extractRecursive(
   pFileName,
-  pOptions,
+  pCruiseOptions,
   pVisited,
   pDepth,
   pResolveOptions,
-  pTSConfig
+  pTranspileOptions
 ) {
   pVisited.add(pFileName);
   const lDependencies =
-    pOptions.maxDepth <= 0 || pDepth < pOptions.maxDepth
-      ? getDependencies(pFileName, pOptions, pResolveOptions, pTSConfig)
+    pCruiseOptions.maxDepth <= 0 || pDepth < pCruiseOptions.maxDepth
+      ? getDependencies(
+          pFileName,
+          pCruiseOptions,
+          pResolveOptions,
+          pTranspileOptions
+        )
       : [];
 
   return lDependencies
@@ -31,11 +36,11 @@ function extractRecursive(
           return pAll.concat(
             extractRecursive(
               pDependency.resolved,
-              pOptions,
+              pCruiseOptions,
               pVisited,
               pDepth + 1,
               pResolveOptions,
-              pTSConfig
+              pTranspileOptions
             )
           );
         }
@@ -52,25 +57,25 @@ function extractRecursive(
 
 function extractFileDirectoryArray(
   pFileDirectoryArray,
-  pOptions,
+  pCruiseOptions,
   pResolveOptions,
-  pTSConfig
+  pTranspileOptions
 ) {
   let lVisited = new Set();
 
   return _spread(_concat)(
-    gatherInitialSources(pFileDirectoryArray, pOptions).reduce(
+    gatherInitialSources(pFileDirectoryArray, pCruiseOptions).reduce(
       (pDependencies, pFilename) => {
         if (!lVisited.has(pFilename)) {
           lVisited.add(pFilename);
           return pDependencies.concat(
             extractRecursive(
               pFilename,
-              pOptions,
+              pCruiseOptions,
               lVisited,
               0,
               pResolveOptions,
-              pTSConfig
+              pTranspileOptions
             )
           );
         }
@@ -129,21 +134,21 @@ function filterExcludedDynamicDependencies(pModule, pExclude) {
 
 module.exports = (
   pFileDirectoryArray,
-  pOptions,
+  pCruiseOptions,
   pResolveOptions,
-  pTSConfig
+  pTranspileOptions
 ) => {
   clearCaches();
 
   return _uniqBy(
     extractFileDirectoryArray(
       pFileDirectoryArray,
-      pOptions,
+      pCruiseOptions,
       pResolveOptions,
-      pTSConfig
+      pTranspileOptions
     ).reduce(complete, []),
     (pModule) => pModule.source
   ).map((pModule) =>
-    filterExcludedDynamicDependencies(pModule, pOptions.exclude)
+    filterExcludedDynamicDependencies(pModule, pCruiseOptions.exclude)
   );
 };

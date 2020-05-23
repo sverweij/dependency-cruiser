@@ -587,6 +587,17 @@
             }
           }
         },
+        "babelConfig": {
+          "type": "object",
+          "additionalProperties": false,
+          "description": "Babel configuration (e.g. '.babelrc.json') to use.",
+          "properties": {
+            "fileName": {
+              "description": "The Babel configuration file to use. The fileName is relative to dependency-cruiser's current working directory. When not provided defaults to './.babelrc.json'. Dependency-cruiser currently supports only the json variant. Support for (js|cjs|mjs) variants and configuration in package.json might follow in future releases.",
+              "type": "string"
+            }
+          }
+        },
         "exoticRequireStrings": {
           "type": "array",
           "description": "List of strings you have in use in addition to cjs/ es6 requires & imports to declare module dependencies. Use this e.g. if you've redeclared require (`const want = require`), use a require-wrapper (like semver-try-require) or use window.require as a hack to workaround something",

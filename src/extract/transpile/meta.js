@@ -1,3 +1,4 @@
+const _get = require("lodash/get");
 const supportedTranspilers = require("../../../package.json")
   .supportedTranspilers;
 const javaScriptWrap = require("./javascript-wrap");
@@ -7,6 +8,7 @@ const liveScriptWrap = require("./livescript-wrap");
 const coffeeWrap = require("./coffeescript-wrap")();
 const litCoffeeWrap = require("./coffeescript-wrap")(true);
 const vueWrap = require("./vue-template-wrap");
+const babelWrap = require("./babel-wrap");
 
 /*
   jsx - acorn_loose will handle this correctly when imports
@@ -21,6 +23,7 @@ const vueWrap = require("./vue-template-wrap");
  */
 const EXTENSION2WRAPPER = {
   ".js": javaScriptWrap,
+  ".cjs": javaScriptWrap,
   ".mjs": javaScriptWrap,
   ".jsx": javaScriptWrap,
   ".ts": typeScriptWrap,
@@ -36,6 +39,7 @@ const EXTENSION2WRAPPER = {
 };
 
 const TRANSPILER2WRAPPER = {
+  babel: babelWrap,
   javascript: javaScriptWrap,
   "coffee-script": coffeeWrap,
   coffeescript: coffeeWrap,
@@ -44,8 +48,23 @@ const TRANSPILER2WRAPPER = {
   "vue-template-compiler": vueWrap,
 };
 
+const BABELEABLE_EXTENSIONS = [
+  ".js",
+  ".cjs",
+  ".mjs",
+  ".jsx",
+  ".ts",
+  ".tsx",
+  ".d.ts",
+];
+
 /**
- * returns the wrapper module configured for the extension pExtension.
+ * returns the babel wrapper if there's a babelConfig in the transpiler
+ * options for babeleable extensions (javascript and typescript - currently
+ * not configurable)
+ *
+ * returns the wrapper module configured for the extension pExtension if
+ * not.
  *
  * returns the javascript wrapper if there's no wrapper module configured
  * for the extension.
@@ -53,8 +72,15 @@ const TRANSPILER2WRAPPER = {
  * @param {string}  pExtension the extension (e.g. ".ts", ".js", ".litcoffee")
  * @returns {module} the module
  */
-module.exports.getWrapper = (pExtension) =>
-  EXTENSION2WRAPPER[pExtension] || javaScriptWrap;
+module.exports.getWrapper = (pExtension, pTranspilerOptions) => {
+  if (
+    Object.keys(_get(pTranspilerOptions, "babelConfig", {})).length > 0 &&
+    BABELEABLE_EXTENSIONS.includes(pExtension)
+  ) {
+    return babelWrap;
+  }
+  return EXTENSION2WRAPPER[pExtension] || javaScriptWrap;
+};
 
 /**
  * all supported extensions and whether or not it is supported

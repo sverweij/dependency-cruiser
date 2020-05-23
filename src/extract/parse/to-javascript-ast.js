@@ -5,8 +5,8 @@ const _memoize = require("lodash/memoize");
 const transpile = require("../transpile");
 const getExtension = require("../utl/get-extension");
 
-function getASTFromSource(pSource, pExtension, pTSConfig) {
-  const lJavaScriptSource = transpile(pExtension, pSource, pTSConfig);
+function getASTFromSource(pSource, pExtension, pTranspileOptions) {
+  const lJavaScriptSource = transpile(pExtension, pSource, pTranspileOptions);
 
   try {
     // ecmaVersion 11 necessary for acorn to understand dynamic imports
@@ -27,21 +27,22 @@ function getASTFromSource(pSource, pExtension, pTSConfig) {
  *
  * If parsing fails we fall back to acorn's 'loose' parser
  *
- * @param {string} pFileName path to the file to be parsed
- * @param {any} pTSConfig    (optional) (flattened) typescript config object
- * @returns {object}         the abstract syntax tree
+ * @param {string} pFileName      path to the file to be parsed
+ * @param {any} pTranspileOptions options for the transpiler(s) - a tsconfig or
+ *                                a babel config
+ * @returns {object}              the abstract syntax tree
  */
-function getAST(pFileName, pTSConfig) {
+function getAST(pFileName, pTranspileOptions) {
   return getASTFromSource(
     fs.readFileSync(pFileName, "utf8"),
     getExtension(pFileName),
-    pTSConfig
+    pTranspileOptions
   );
 }
 
 const getASTCached = _memoize(
   getAST,
-  (pFileName, pTSConfig) => `${pFileName}|${pTSConfig}`
+  (pFileName, pTranspileOptions) => `${pFileName}|${pTranspileOptions}`
 );
 
 function clearCache() {

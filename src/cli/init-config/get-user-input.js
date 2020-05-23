@@ -2,17 +2,20 @@ const inquirer = require("inquirer");
 const $defaults = require("../defaults.json");
 const {
   fileExists,
+  getFirstExistingFileName,
   getSourceFolderCandidates,
   getTestFolderCandidates,
   hasTestsWithinSource,
   isLikelyMonoRepo,
   pnpIsEnabled,
   toSourceLocationArray,
+  validateFileExistence,
   validateLocation,
 } = require("./helpers");
 
 const TYPESCRIPT_CONFIG = `./${$defaults.TYPESCRIPT_CONFIG}`;
 const WEBPACK_CONFIG = `./${$defaults.WEBPACK_CONFIG}`;
+const BABEL_CONFIG_NAME_SEARCH_ARRAY = $defaults.BABEL_CONFIG_NAME_SEARCH_ARRAY;
 
 const INQUIRER_QUESTIONS = [
   {
@@ -43,7 +46,7 @@ const INQUIRER_QUESTIONS = [
     type: "input",
     message: "Where do your source files live?",
     default: getSourceFolderCandidates(),
-    validate: (pThisAnswer) => validateLocation(pThisAnswer),
+    validate: validateLocation,
     when: () => !isLikelyMonoRepo(),
   },
   {
@@ -63,7 +66,7 @@ const INQUIRER_QUESTIONS = [
     type: "input",
     message: "Where do your test files live?",
     default: getTestFolderCandidates(),
-    validate: (pThisAnswer) => validateLocation(pThisAnswer),
+    validate: validateLocation,
     when: (pAnswers) => pAnswers.hasTestsOutsideSource && !isLikelyMonoRepo(),
   },
   {
@@ -83,11 +86,9 @@ const INQUIRER_QUESTIONS = [
   {
     name: "tsConfig",
     type: "input",
-    message: "Full path to 'tsconfig.json':",
+    message: "Full path to your 'tsconfig.json':",
     default: TYPESCRIPT_CONFIG,
-    validate: (pInput) =>
-      fileExists(pInput) ||
-      `hmm, '${pInput}' doesn't seem to exist - try again?`,
+    validate: validateFileExistence,
     when: (pAnswers) => pAnswers.useTsConfig,
   },
   {
@@ -96,6 +97,21 @@ const INQUIRER_QUESTIONS = [
     message:
       "Also regard TypeScript dependencies that exist only before compilation?",
     when: (pAnswers) => fileExists(TYPESCRIPT_CONFIG) && pAnswers.useTsConfig,
+  },
+  {
+    name: "useBabelConfig",
+    type: "confirm",
+    message: "Looks like you're using Babel. Use a babel config?",
+    default: true,
+    when: () => getFirstExistingFileName(BABEL_CONFIG_NAME_SEARCH_ARRAY),
+  },
+  {
+    name: "babelConfig",
+    type: "input",
+    message: "Full path to your babel config:",
+    default: getFirstExistingFileName(BABEL_CONFIG_NAME_SEARCH_ARRAY),
+    validate: validateFileExistence,
+    when: (pAnswers) => pAnswers.useBabelConfig,
   },
   {
     name: "useWebpackConfig",
@@ -107,11 +123,9 @@ const INQUIRER_QUESTIONS = [
   {
     name: "webpackConfig",
     type: "input",
-    message: "Full path to webpack config:",
+    message: "Full path to your webpack config:",
     default: WEBPACK_CONFIG,
-    validate: (pInput) =>
-      fileExists(pInput) ||
-      `hmm, '${pInput}' doesn't seem to exist - try again?`,
+    validate: validateFileExistence,
     when: (pAnswers) => pAnswers.useWebpackConfig,
   },
 ];

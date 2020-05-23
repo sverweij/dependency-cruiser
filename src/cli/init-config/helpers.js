@@ -28,6 +28,10 @@ function fileExists(pFile) {
   return true;
 }
 
+function getFirstExistingFileName(pFileNameArray) {
+  return pFileNameArray.find(fileExists);
+}
+
 function pnpIsEnabled() {
   let lReturnValue = false;
 
@@ -86,6 +90,13 @@ function toSourceLocationArray(pLocations) {
   return pLocations;
 }
 
+function validateFileExistence(pInput) {
+  return (
+    fileExists(pInput) ||
+    `hmm, '${pInput}' doesn't seem to exist - could you try again?`
+  );
+}
+
 function validateLocation(pLocations) {
   for (const lLocation of toSourceLocationArray(pLocations)) {
     try {
@@ -106,8 +117,10 @@ module.exports = {
   folderNameArrayToRE,
   readManifest,
   fileExists,
+  getFirstExistingFileName,
   pnpIsEnabled,
   toSourceLocationArray,
+  validateFileExistence,
   validateLocation,
   isLikelyMonoRepo,
   hasTestsWithinSource,
