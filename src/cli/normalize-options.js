@@ -24,6 +24,7 @@ const KNOWN_CLI_OPTIONS = [
   "preserveSymlinks",
   "tsPreCompilationDeps",
   "tsConfig",
+  "babelConfig",
   "validate",
   "version",
   "webpackConfig",
@@ -178,6 +179,11 @@ module.exports = (pOptionsAsPassedFromCommander) => {
     lOptions,
     "tsConfig",
     defaults.TYPESCRIPT_CONFIG
+  );
+  lOptions = normalizeConfigFile(
+    lOptions,
+    "babelConfig",
+    defaults.BABEL_CONFIG
   );
 
   lOptions.validate = Object.prototype.hasOwnProperty.call(

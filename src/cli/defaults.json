@@ -6,6 +6,7 @@
   ],
   "WEBPACK_CONFIG": "webpack.config.js",
   "TYPESCRIPT_CONFIG": "tsconfig.json",
+  "BABEL_CONFIG": ".babelrc.json",
   "OUTPUT_TYPE": "err",
   "OUTPUT_TO": "-"
 }

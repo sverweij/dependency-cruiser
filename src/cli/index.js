@@ -2,6 +2,7 @@ const glob = require("glob");
 const _get = require("lodash/get");
 const main = require("../main");
 const parseTSConfig = require("./parse-ts-config");
+const parseBabelConfig = require("./parse-babel-config");
 const getResolveConfig = require("./get-resolve-config");
 const validateFileExistence = require("./utl/validate-file-existence");
 const normalizeOptions = require("./normalize-options");
@@ -9,10 +10,10 @@ const initConfig = require("./init-config");
 const io = require("./utl/io");
 const formatMetaInfo = require("./format-meta-info");
 
-function extractResolveOptions(pOptions) {
+function extractResolveOptions(pCruiseOptions) {
   let lResolveOptions = {};
   const lWebPackConfigFileName = _get(
-    pOptions,
+    pCruiseOptions,
     "ruleSet.options.webpackConfig.fileName",
     null
   );
@@ -20,17 +21,17 @@ function extractResolveOptions(pOptions) {
   if (lWebPackConfigFileName) {
     lResolveOptions = getResolveConfig(
       lWebPackConfigFileName,
-      _get(pOptions, "ruleSet.options.webpackConfig.env", null),
-      _get(pOptions, "ruleSet.options.webpackConfig.arguments", null)
+      _get(pCruiseOptions, "ruleSet.options.webpackConfig.env", null),
+      _get(pCruiseOptions, "ruleSet.options.webpackConfig.arguments", null)
     );
   }
   return lResolveOptions;
 }
 
-function extractTSConfigOptions(pOptions) {
+function extractTSConfigOptions(pCruiseOptions) {
   let lReturnValue = {};
   const lTSConfigFileName = _get(
-    pOptions,
+    pCruiseOptions,
     "ruleSet.options.tsConfig.fileName",
     null
   );
@@ -42,36 +43,54 @@ function extractTSConfigOptions(pOptions) {
   return lReturnValue;
 }
 
-function runCruise(pFileDirectoryArray, pOptions) {
+function extractBabelConfigOptions(pCruiseOptions) {
+  let lReturnValue = {};
+  const lBabelConfigFileName = _get(
+    pCruiseOptions,
+    "ruleSet.options.babelConfig.fileName",
+    null
+  );
+
+  if (lBabelConfigFileName) {
+    lReturnValue = parseBabelConfig(lBabelConfigFileName);
+  }
+
+  return lReturnValue;
+}
+
+function runCruise(pFileDirectoryArray, pCruiseOptions) {
   pFileDirectoryArray
     .filter((pFileOrDirectory) => !glob.hasMagic(pFileOrDirectory))
     .forEach(validateFileExistence);
 
-  pOptions = normalizeOptions(pOptions);
+  pCruiseOptions = normalizeOptions(pCruiseOptions);
 
-  const lReportingResult = main.cruise(
+  const lReportingResult = main.futureCruise(
     pFileDirectoryArray,
-    pOptions,
-    extractResolveOptions(pOptions),
-    extractTSConfigOptions(pOptions)
+    pCruiseOptions,
+    extractResolveOptions(pCruiseOptions),
+    {
+      tsConfig: extractTSConfigOptions(pCruiseOptions),
+      babelConfig: extractBabelConfigOptions(pCruiseOptions),
+    }
   );
 
-  io.write(pOptions.outputTo, lReportingResult.output);
+  io.write(pCruiseOptions.outputTo, lReportingResult.output);
 
   return lReportingResult.exitCode;
 }
 
-module.exports = (pFileDirectoryArray, pOptions) => {
-  pOptions = pOptions || {};
+module.exports = (pFileDirectoryArray, pCruiseOptions) => {
+  pCruiseOptions = pCruiseOptions || {};
   let lExitCode = 0;
 
   try {
-    if (pOptions.info === true) {
+    if (pCruiseOptions.info === true) {
       process.stdout.write(formatMetaInfo());
-    } else if (pOptions.init) {
-      initConfig(pOptions.init);
+    } else if (pCruiseOptions.init) {
+      initConfig(pCruiseOptions.init);
     } else {
-      lExitCode = runCruise(pFileDirectoryArray, pOptions);
+      lExitCode = runCruise(pFileDirectoryArray, pCruiseOptions);
     }
   } catch (pError) {
     process.stderr.write(`\n  ERROR: ${pError.message}\n`);

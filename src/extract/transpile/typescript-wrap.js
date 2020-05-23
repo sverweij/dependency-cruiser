@@ -5,7 +5,7 @@ const typescript = tryRequire(
   require("../../../package.json").supportedTranspilers.typescript
 );
 
-function getCompilerOptions(pTsx, pTSConfig = {}) {
+function getCompilerOptions(pTsx, pTSConfig) {
   let lCompilerOptions = {};
 
   if (pTsx) {
@@ -22,9 +22,12 @@ function getCompilerOptions(pTsx, pTSConfig = {}) {
 module.exports = (pTsx) => ({
   isAvailable: () => typescript !== false,
 
-  transpile: (pSource, pTSConfig) =>
+  transpile: (pSource, pTranspileOptions = {}) =>
     typescript.transpileModule(pSource, {
-      ...pTSConfig,
-      compilerOptions: getCompilerOptions(pTsx, pTSConfig),
+      ...(pTranspileOptions.tsConfig || {}),
+      compilerOptions: getCompilerOptions(
+        pTsx,
+        pTranspileOptions.tsConfig || {}
+      ),
     }).outputText,
 });

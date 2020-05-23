@@ -271,14 +271,25 @@ export interface IOptions extends ICruiseOptions {
    * The rules file used to validate the dependencies (if any)
    */
   rulesFile?: string;
+  /**
+   * The TypeScript configuration file used (if any)
+   */
   tsConfig?: ITsConfig;
   /**
    * The webpack configuration options used for the cruise
    */
   webpackConfig?: IWebpackConfig;
+  /**
+   * The Babel configuration file used (if any)
+   */
+  babelConfig?: IBabelConfig;
 }
 
 export interface ITsConfig {
+  fileName?: string;
+}
+
+export interface IBabelConfig {
   fileName?: string;
 }
 

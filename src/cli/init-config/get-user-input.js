@@ -13,6 +13,7 @@ const {
 
 const TYPESCRIPT_CONFIG = `./${$defaults.TYPESCRIPT_CONFIG}`;
 const WEBPACK_CONFIG = `./${$defaults.WEBPACK_CONFIG}`;
+const BABEL_CONFIG = `./${$defaults.BABEL_CONFIG}`;
 
 const INQUIRER_QUESTIONS = [
   {
@@ -89,6 +90,23 @@ const INQUIRER_QUESTIONS = [
       fileExists(pInput) ||
       `hmm, '${pInput}' doesn't seem to exist - try again?`,
     when: (pAnswers) => pAnswers.useTsConfig,
+  },
+  {
+    name: "useBabelConfig",
+    type: "confirm",
+    message: "Looks like you're using Babel. Use a '.babelrc.json'?",
+    default: true,
+    when: () => fileExists(BABEL_CONFIG),
+  },
+  {
+    name: "babelConfig",
+    type: "input",
+    message: "Full path to '.babelrc.json':",
+    default: BABEL_CONFIG,
+    validate: (pInput) =>
+      fileExists(pInput) ||
+      `hmm, '${pInput}' doesn't seem to exist - try again?`,
+    when: (pAnswers) => pAnswers.useBabelConfig,
   },
   {
     name: "tsPreCompilationDeps",

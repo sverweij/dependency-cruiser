@@ -10,5 +10,3 @@ module.exports = {
 
   transpile: (pSource) => livescript.compile(pSource),
 };
-
-/* eslint import/order: off */

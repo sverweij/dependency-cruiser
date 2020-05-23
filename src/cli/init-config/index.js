@@ -7,6 +7,7 @@ const { pnpIsEnabled, fileExists } = require("./helpers");
 
 const TYPESCRIPT_CONFIG = `./${$defaults.TYPESCRIPT_CONFIG}`;
 const WEBPACK_CONFIG = `./${$defaults.WEBPACK_CONFIG}`;
+const BABEL_CONFIG = `./${$defaults.BABEL_CONFIG}`;
 
 function getOneshotConfig(pOneShotConfigId) {
   const ONESHOT_CONFIGS = {
@@ -19,6 +20,8 @@ function getOneshotConfig(pOneShotConfigId) {
       useYarnPnP: pnpIsEnabled(),
       useWebpackConfig: fileExists(WEBPACK_CONFIG),
       webpackConfig: WEBPACK_CONFIG,
+      useBabelConfig: fileExists(BABEL_CONFIG),
+      babelConfig: BABEL_CONFIG,
     },
     yes: {
       useTsConfig: fileExists(TYPESCRIPT_CONFIG),
@@ -27,6 +30,8 @@ function getOneshotConfig(pOneShotConfigId) {
       useYarnPnP: pnpIsEnabled(),
       useWebpackConfig: fileExists(WEBPACK_CONFIG),
       webpackConfig: WEBPACK_CONFIG,
+      useBabelConfig: fileExists(BABEL_CONFIG),
+      babelConfig: BABEL_CONFIG,
     },
   };
 
