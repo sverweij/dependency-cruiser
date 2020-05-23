@@ -26,11 +26,11 @@ function shouldUseTSC(pOptions, pFileName) {
   );
 }
 
-function extractFromJavaScriptAST(pOptions, pFileName, pTSConfig) {
+function extractFromJavaScriptAST(pOptions, pFileName, pTranspileOptions) {
   let lDependencies = [];
   const lAST = toJavascriptAST.getASTCached(
     path.join(pOptions.baseDir, pFileName),
-    pTSConfig
+    pTranspileOptions
   );
 
   if (pOptions.moduleSystems.includes("cjs")) {
@@ -51,27 +51,31 @@ function extractFromJavaScriptAST(pOptions, pFileName, pTSConfig) {
   return lDependencies;
 }
 
-function extractDependencies(pOptions, pFileName, pTSConfig) {
+function extractDependencies(pCruiseOptions, pFileName, pTranspileOptions) {
   let lDependencies = [];
 
-  if (shouldUseTSC(pOptions, pFileName)) {
+  if (shouldUseTSC(pCruiseOptions, pFileName)) {
     lDependencies = extractFromTypeScriptAST(
-      pOptions,
+      pCruiseOptions,
       pFileName
     ).filter((pDep) =>
-      pOptions.moduleSystems.some(
+      pCruiseOptions.moduleSystems.some(
         (pModuleSystem) => pModuleSystem === pDep.moduleSystem
       )
     );
 
-    if (pOptions.tsPreCompilationDeps === "specify") {
+    if (pCruiseOptions.tsPreCompilationDeps === "specify") {
       lDependencies = detectPreCompilationNess(
         lDependencies,
-        extractFromJavaScriptAST(pOptions, pFileName, pTSConfig)
+        extractFromJavaScriptAST(pCruiseOptions, pFileName, pTranspileOptions)
       );
     }
   } else {
-    lDependencies = extractFromJavaScriptAST(pOptions, pFileName, pTSConfig);
+    lDependencies = extractFromJavaScriptAST(
+      pCruiseOptions,
+      pFileName,
+      pTranspileOptions
+    );
   }
 
   return lDependencies;
@@ -136,7 +140,7 @@ function compareDeps(pLeft, pRight) {
  *
  *
  * @param  {string} pFileName path to the file
- * @param  {object} pOptions  an object with one or more of these properties:
+ * @param  {object} pCruiseOptions  an object with one or more of these properties:
  *                            - baseDir         - the directory to consider as the
  *                                                base for all files
  *                                                Default: the current working directory
@@ -148,25 +152,30 @@ function compareDeps(pLeft, pRight) {
  *                                                (e.g. "(node_modules)"). Default: none
  *                            - preserveSymlinks - don't resolve symlinks.
  * @param {object} pResolveOptions an object with webpack 'enhanced-resolve' options
- * @param  {any} pTSConfig       an object with tsconfig ('typescript project') options
+ * @param  {any} pTranspileOptions       an object with tsconfig ('typescript project') options
  *                               ('flattened' so there's no need for file access on any
  *                               'extends' option in there)
  * @return {array}           an array of dependency objects (see above)
  */
-module.exports = (pFileName, pOptions, pResolveOptions, pTSConfig) => {
+module.exports = (
+  pFileName,
+  pCruiseOptions,
+  pResolveOptions,
+  pTranspileOptions
+) => {
   try {
     return _uniqBy(
-      extractDependencies(pOptions, pFileName, pTSConfig),
+      extractDependencies(pCruiseOptions, pFileName, pTranspileOptions),
       getDependencyUniqueKey
     )
       .sort(compareDeps)
-      .map(addResolutionAttributes(pOptions, pFileName, pResolveOptions))
+      .map(addResolutionAttributes(pCruiseOptions, pFileName, pResolveOptions))
       .filter(
         (pDep) =>
-          (!_get(pOptions, "exclude.path") ||
-            !matchesPattern(pDep.resolved, pOptions.exclude.path)) &&
-          (!_get(pOptions, "includeOnly.path") ||
-            matchesPattern(pDep.resolved, pOptions.includeOnly.path))
+          (!_get(pCruiseOptions, "exclude.path") ||
+            !matchesPattern(pDep.resolved, pCruiseOptions.exclude.path)) &&
+          (!_get(pCruiseOptions, "includeOnly.path") ||
+            matchesPattern(pDep.resolved, pCruiseOptions.includeOnly.path))
       );
   } catch (pError) {
     throw new Error(

@@ -26,13 +26,18 @@ function format(pResult, pOutputType) {
   return report.getReporter(pOutputType)(pResult);
 }
 
-// see [api.md](../../doc/api.md) and/ or the
-// [type definition](../../types/depencency-cruiser.d.ts) for details
-function cruise(pFileAndDirectoryArray, pOptions, pResolveOptions, pTSConfig) {
-  pOptions = normalizeOptions(validateOptions(pOptions));
+function futureCruise(
+  pFileAndDirectoryArray,
+  pCruiseOptions,
+  pResolveOptions,
+  pTranspileOptions
+) {
+  pCruiseOptions = normalizeOptions(validateOptions(pCruiseOptions));
 
-  if (Boolean(pOptions.ruleSet)) {
-    pOptions.ruleSet = normalizeRuleSet(validateRuleSet(pOptions.ruleSet));
+  if (Boolean(pCruiseOptions.ruleSet)) {
+    pCruiseOptions.ruleSet = normalizeRuleSet(
+      validateRuleSet(pCruiseOptions.ruleSet)
+    );
   }
   const lNormalizedFileAndDirectoryArray = normalizeFilesAndDirectories(
     pFileAndDirectoryArray
@@ -40,19 +45,32 @@ function cruise(pFileAndDirectoryArray, pOptions, pResolveOptions, pTSConfig) {
   const lCruiseResult = enrich(
     extract(
       lNormalizedFileAndDirectoryArray,
-      pOptions,
-      normalizeResolveOptions(pResolveOptions, pOptions, pTSConfig),
-      pTSConfig
+      pCruiseOptions,
+      normalizeResolveOptions(
+        pResolveOptions,
+        pCruiseOptions,
+        pTranspileOptions.tsConfig
+      ),
+      pTranspileOptions
     ),
-    pOptions,
+    pCruiseOptions,
     lNormalizedFileAndDirectoryArray
   );
 
-  return report.getReporter(pOptions.outputType)(lCruiseResult);
+  return report.getReporter(pCruiseOptions.outputType)(lCruiseResult);
+}
+
+// see [api.md](../../doc/api.md) and/ or the
+// [type definition](../../types/depencency-cruiser.d.ts) for details
+function cruise(pFileAndDirectoryArray, pOptions, pResolveOptions, pTSConfig) {
+  return futureCruise(pFileAndDirectoryArray, pOptions, pResolveOptions, {
+    tsConfig: pTSConfig,
+  });
 }
 
 module.exports = {
   cruise,
+  futureCruise,
   format,
   allExtensions: meta.allExtensions,
   getAvailableTranspilers: meta.getAvailableTranspilers,

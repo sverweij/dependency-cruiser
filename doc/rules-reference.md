@@ -50,6 +50,7 @@
    - [`moduleSystems`](#modulesystems)
    - [`tsPreCompilationDeps`](#tsprecompilationdeps)
    - [`tsConfig`: use a TypeScript configuration file ('project')](#tsconfig-use-a-typescript-configuration-file-project)
+   - [`babelConfig`: use a babel configuration file](#babelconfig-use-a-babel-configuration-file)
    - [Yarn Plug'n'Play support - `externalModuleResolutionStrategy`](#yarn-plugnplay-support---externalmoduleresolutionstrategy)
    - [`webackConfig`: use (the resolution options of) a webpack configuration](#webpackconfig-use-the-resolution-options-of-a-webpack-configuration)
    - [`reporterOptions`](#reporteroptions)
@@ -1252,6 +1253,48 @@ depcruise --ts-config tsconfig.prod.json --validate -- src
 - If you happen to use a [`jsconfig.json`](https://code.visualstudio.com/docs/languages/jsconfig)
   you can pass that as well as the syntax of the `compilaerOptions` key
   is the same for both.
+
+### `babelConfig`: use a babel configuration file
+
+> there is no command line equivalent for this at the moment
+
+If you're using [babel](https://babeljs.io) you can tell dependency-cruiser so
+by telling it where your babel config lives, like this:
+
+```json
+"options": {
+  "babelConfig": {
+    "fileName": ".babelrc.json"
+  }
+}
+```
+
+That way dependency-cruiser will use the babel compiler for its transpilation
+steps, so if you're using features that are not TC39 stage 4 yet dependency-cruiser
+will happily analyze these source files for you.
+
+#### Usage notes
+
+- In its current state dependency-cruiser will assume that all JavaScript and
+  TypeScript sources it parses need to go through the babel compiler (regardless
+  of the extension). This will cover the majority of the use cases for babel,
+  but [raise an issue](https://github.com/sverweij/dependency-cruiser/issues/new?template=feature-request.md&title=Feature+request%3A+use+babel+only+for+specific+extensions?)
+  if you need this to be configurable.
+- Only json (/ json5) configurations in a separate file. .js, .mjs, .cjs, or
+  configurations in package.json might be added when there's a demand for it.
+- Auto detection in [--init](cli.md#--init) looks at some of the likely suspects
+  for babel configs - _babelrc_, _.babelrc.json5_, _babel.config.json_ and
+  _babel.config.json5_.
+- The feature currently works with babel versions >=7.0.0
+- Babel support is currently a :warning: experimental feature. This means it
+  is thoroughly tested, works well as far as we could determine. It also means
+  dependency-cruiser won't get a major version bump for little changes that
+  for regular features might be considered breaking (think of more precise
+  module system determination).
+- The current implementation of babel support is robust, but can be more
+  efficient (it's on the [roadmap](https://github.com/sverweij/dependency-cruiser/projects/1#card-39192574),
+  but as it's not entirely trivial it may take some time. The implementation
+  will be feature switched to guarantee stability).
 
 ### Yarn Plug'n'Play support - `externalModuleResolutionStrategy`
 

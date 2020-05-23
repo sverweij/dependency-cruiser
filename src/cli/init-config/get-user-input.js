@@ -2,6 +2,7 @@ const inquirer = require("inquirer");
 const $defaults = require("../defaults.json");
 const {
   fileExists,
+  getFirstExistingFileName,
   getSourceFolderCandidates,
   getTestFolderCandidates,
   hasTestsWithinSource,
@@ -13,6 +14,7 @@ const {
 
 const TYPESCRIPT_CONFIG = `./${$defaults.TYPESCRIPT_CONFIG}`;
 const WEBPACK_CONFIG = `./${$defaults.WEBPACK_CONFIG}`;
+const BABEL_CONFIG_NAME_SEARCH_ARRAY = $defaults.BABEL_CONFIG_NAME_SEARCH_ARRAY;
 
 const INQUIRER_QUESTIONS = [
   {
@@ -89,6 +91,23 @@ const INQUIRER_QUESTIONS = [
       fileExists(pInput) ||
       `hmm, '${pInput}' doesn't seem to exist - try again?`,
     when: (pAnswers) => pAnswers.useTsConfig,
+  },
+  {
+    name: "useBabelConfig",
+    type: "confirm",
+    message: "Looks like you're using Babel. Use a babel config?",
+    default: true,
+    when: () => getFirstExistingFileName(BABEL_CONFIG_NAME_SEARCH_ARRAY),
+  },
+  {
+    name: "babelConfig",
+    type: "input",
+    message: "Full path to '.babelrc.json':",
+    default: getFirstExistingFileName(BABEL_CONFIG_NAME_SEARCH_ARRAY),
+    validate: (pInput) =>
+      fileExists(pInput) ||
+      `hmm, '${pInput}' doesn't seem to exist - try again?`,
+    when: (pAnswers) => pAnswers.useBabelConfig,
   },
   {
     name: "tsPreCompilationDeps",

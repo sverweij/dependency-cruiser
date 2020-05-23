@@ -28,6 +28,10 @@ function fileExists(pFile) {
   return true;
 }
 
+function getFirstExistingFileName(pFileNameArray) {
+  return pFileNameArray.find(fileExists);
+}
+
 function pnpIsEnabled() {
   let lReturnValue = false;
 
@@ -106,6 +110,7 @@ module.exports = {
   folderNameArrayToRE,
   readManifest,
   fileExists,
+  getFirstExistingFileName,
   pnpIsEnabled,
   toSourceLocationArray,
   validateLocation,
