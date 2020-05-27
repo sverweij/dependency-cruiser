@@ -766,8 +766,8 @@ rules a.c.t. normal requires. E.g.
 ### `preCompilationOnly`
 
 If you want to set restrictions on dependencies that only exist before
-compilation from TypeScript to JavaScript, you can use the `preCompilation`
-only attribute.
+compilation from TypeScript to JavaScript, you can use the (boolean)
+`preCompilation` only attribute.
 
 E.g. to make sure to only import stuff from the react-native stuff that doesn't
 make it beyond the pre-compilation step:
@@ -794,8 +794,8 @@ make it beyond the pre-compilation step:
 }
 ```
 
-This attribute only works for typescript sources, and only when
-`tsPreCompilationDeps` option is set to `"specify"`.
+:warning: This attribute only works for TypeScript sources, and only when
+[`tsPreCompilationDeps`](#tsprecompilationdeps) option is set to `"specify"`.
 
 ## The `options`
 
@@ -1121,7 +1121,7 @@ you really need it as it will impact cruise speed. You can only use the
 command line).
 
 <details>
-<summary><b>Pare-compilation dependencies example: only importing a type</b></summary>
+<summary><b>Pre-compilation dependencies example: only importing a type</b></summary>
 As the JavaScript doesn't really know about types, dependencies on
 types only exist before, but not after compile time.
 
@@ -1162,7 +1162,7 @@ dependency-on-a-type-only from `b.ts` to `a.ts`:
 </details>
 
 <details>
-<summary><b>Pare-compilation dependencies example: import without use</b></summary>
+<summary><b>Pre-compilation dependencies example: import without use</b></summary>
 
 Similarly, if you import something, but don't use it, the dependency
 only exists before compilation. Take for example these two
@@ -1321,14 +1321,11 @@ their behaviour - for reporters that support this.
 
 ##### filtering
 
-- done at the reporting step
-- hence _after_
-- exists to be able to run validation & graphs in sorta one go
-
 The level of detail you want to see in a visual representation can differ
-(quite a bit) from the detail you need for validation. This is the reason the
-and reporters exist, which collapse modules and their dependencies to either
-folders ([_ddot_](#ddot)), or to a level you specify ([_archi_](#archi)).
+(quite a bit) from the detail you need for validation. This is the reason
+other graphical reporters exist as well, which collapse modules and their
+dependencies to either folders ([_ddot_](#ddot)), or to a level you specify
+([_archi_](#archi)).
 
 With _filters_ you can prune the dependency tree the _dot_ reporter shows. It
 works _on top_ of the cruise-level filters (_includeOnly_, _exclude_, _focus_
@@ -1549,10 +1546,24 @@ module.exports = {
 
 ##### summarising (`collapsePattern`)
 
-TODO
-
 The dot reporter also supports the `collapsePattern` option originally created
-for the [archi](#archi) reporter.
+for the [archi](#archi) reporter, which summarizes modules matching the pattern
+to one node in the output. For the `dot` reporter the default is to not summarize
+anything, but you can make it do so anyway. A good candidate is the `node_modules`
+folder (provided you want that in your graph)
+
+```javascript
+module.exports = {
+  options: {
+    reporterOptions: {
+      dot: {
+        // collapse onto folders one step below node_modules:
+        collapsePattern: "^(node_modules/[^/]+)",
+      },
+    },
+  },
+};
+```
 
 #### archi
 

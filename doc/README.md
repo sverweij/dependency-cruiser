@@ -1,6 +1,6 @@
 ### Dependency graph
 
-The picture below is adetailed dependency graph of dependency-cruiser, without
+The picture below is a detailed dependency graph of dependency-cruiser, without
 external dependencies. Click on it to go to a slightly more interactive version
 that allows you to navigate the source by clicking the nodes.
 

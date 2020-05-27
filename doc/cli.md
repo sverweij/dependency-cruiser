@@ -360,7 +360,7 @@ so it's easier to compare than the two json's):
 - The algorithm considers some patterns to be 'common'. It leaves those
   alone to retain some readability. 'Common' patterns include `src`, `test`,
   `node_modules`, `.`, `index` etc. You can find the full regexp in
-  [anonymizePath.js](../src/report/anonymous/anonymizePath.js#4).
+  [anonymize-path.js](../src/report/anon/anonymize-path.js#3).
 - The algorithm obfuscates _within_ node_modules is obfuscated as well, so
   it won't become apparent from the dependency graph which ones your app
   uses either.

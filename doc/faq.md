@@ -53,25 +53,13 @@ for details and examples.
 
 ### Q: Some TypeScript dependencies _still_ don't show up (`/// tripple slash directives`)
 
-**_A_**: By default dependency-cruiser ignores TypeScript's triple slash directives.
-To ensure it _does_ detect them:
+**_A_**: You're using a version <9.0.0. From version 9.0.0 on tripple slash
+directives are recognized without the need for additional configuration. Easiest
+is to upgrade to version 9.0.0 or higher.
 
-- Switch TypeScript pre-compilation dependencies on (see previous question)
-- Do one of the following
-  - if you have a dependency-cruiser configuration file, add the triple slash directive
-    module system to the array of module systems e.g.
-    ```json
-     "moduleSystems": ["amd", "cjs", "es6", "tsd"]
-    ```
-  - pass `tsd` with the `--module-systems` on the command line e.g.
-    ```
-    depcruise -T dot --module-systems amd,cjs,es6,tsd
-    ```
-
-> It might be more intuitive to do have these directives detected by default, so
-> in a future (major) version of dependency-cruiser, this might be happening.
-> It'd be a breaking change, though so for now you'll have to be
-> explicit with these.
+> In older versions you needed to add the "tsd" (_tripple slash directive_)
+> module system to the `moduleSystems` array in your dependency-cruiser
+> configuration - or pass it on the command line (with `--module-systems cjs,ejs,tsd`).
 
 ### Q: The graph dependency-cruiser generates is humongous, and I can't follow the lines very well what can I do?
 
@@ -114,52 +102,48 @@ See an example of how this can look: [dependency-cruiser's folder level dependen
 
 #### Filtering
 
-The `--include-only`, `exclude`, `--do-not-follow` (and for more extreme measures
-`--max-depth`) command line options and their configuration file equivalents
-provide various ways to reduce the number of modules and dependencies in the
-dot output. E.g. to focus on stuff _within_ src only and not show any test and
-mock files, you'd do something like this:
+The `--include-only`, `exclude`, `--do-not-follow`, `--focus` (and for more
+extreme measures `--max-depth`) command line options and their configuration
+file equivalents provide various ways to reduce the number of modules and
+dependencies in the dot output. E.g. to focus on stuff _within_ src only and not
+show any test and mock files, you'd do something like this:
 
 ```sh
 depcruise --include-only "^src/" --exclude "mocks\\.ts$|\\.spec\\.ts$" --output-type dot | dot -T svg > dependency-graph.svg
 ```
 
-#### Bonus: separate config for your graph
+#### Bonus: report level filtering
 
-Instead of tweaking command line parameters each time with these filtering options,
-you can make a separate configuration file that extends the one you use for
-validation, e.g. like so:
+If you want to apply a different filter for your graph as for your validations
+(because the detail you need for your graph is lower, for instance), you have
+two options:
 
-```js
-module.exports = {
-  // The 'extends' ensures things configured for your validation also apply
-  // to the graph you generate as well.
-  extends: "./.dependency-cruiser.js",
-  options: {
-    includeOnly: "^src/",
-    exclude: "node_modules|\\.spec\\.ts$|\\.mock\\.ts$",
-    doNotFollow: {
-      "path": "^src/report"
-      // these are the dependencyTypes dependency-cruiser's
-      // generated config does not follow by default
-      dependencyTypes: [
-          "npm",
-          "npm-dev",
-          "npm-optional",
-          "npm-peer",
-          "npm-bundled",
-          "npm-no-pkg"
-      ]
+1. Create a configuration separate from your validation configuration,
+   dedicated to the generation of graphs.
+2. In your overall configuration add filters at reporter level. Read more
+   about that in [report level filtering](rules-reference.md#filtering),
+   which also explains how you can use depcruise-fmt to get a free performance
+   level-up. Here's an example that only shows modules in the `src` tree:
+
+```json5
+{
+  "options": {
+    // global filtering: when encountering node_modules record it
+    // but don't follow it any further
+    "doNotFollow": "node_modules",
+    "reporterOptions": {
+      "dot": {
+        // filtering specific for the dot (graphical) reporter:
+        // only show modules in the src tree
+        "filters": {
+          "includeOnly": { "path": "^src" }
+        }
     }
   }
 }
 ```
 
-Run with
-
-```sh
-dependency-cruiser --config .dependency-cruiser-graph.js --output-type dot src | dot -T svg > dependency-graph.svg
-```
+You can do this with the _includeOnly_, _exclude_ and _focus_ filters
 
 #### Make dot render orthogonal edges instead of splines
 
