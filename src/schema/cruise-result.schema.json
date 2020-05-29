@@ -133,15 +133,17 @@
     "DependencyType": {
       "type": "object",
       "required": [
-        "module",
-        "resolved",
+        "circular",
         "coreModule",
-        "dependencyTypes",
-        "followable",
         "couldNotResolve",
+        "dependencyTypes",
+        "exoticallyRequired",
+        "dynamic",
+        "followable",
+        "module",
         "moduleSystem",
-        "valid",
-        "dynamic"
+        "resolved",
+        "valid"
       ],
       "additionalProperties": false,
       "properties": {
