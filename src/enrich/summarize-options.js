@@ -16,7 +16,9 @@ const SHAREABLE_OPTIONS = [
   "preserveSymlinks",
   "rulesFile",
   "tsPreCompilationDeps",
+  // "tsConfig", TODO enableify
   "webpackConfig",
+  "babelConfig",
   "exoticallyRequired",
   "exoticRequireStrings",
   "reporterOptions",

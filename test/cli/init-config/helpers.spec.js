@@ -1,10 +1,13 @@
+/* eslint-disable no-unused-expressions */
 const expect = require("chai").expect;
 const {
+  getFirstExistingFileName,
   getFolderCandidates,
   folderNameArrayToRE,
   pnpIsEnabled,
   isLikelyMonoRepo,
   hasTestsWithinSource,
+  validateFileExistence,
   validateLocation,
 } = require("../../../src/cli/init-config/helpers");
 
@@ -136,6 +139,68 @@ describe("cli/init-config/helpers - folderNameArrayToRE", () => {
     expect(folderNameArrayToRE(["bin", "src", "lib"])).to.equal(
       "^(bin|src|lib)"
     );
+  });
+});
+
+describe("cli/init-config/helpers - getFirstExistingFileName", () => {
+  const WORKING_DIR = process.cwd();
+  const FIXTURES_DIR =
+    "test/cli/init-config/fixtures/get-first-existing-file-name";
+
+  beforeEach("set up", () => {
+    process.chdir(FIXTURES_DIR);
+  });
+
+  afterEach("tear down", () => {
+    process.chdir(WORKING_DIR);
+  });
+
+  it("returns undefined when presented with an empty array", () => {
+    expect(getFirstExistingFileName([])).to.be.undefined;
+  });
+
+  it("returns undefined when presented with an array of non-existing files", () => {
+    expect(getFirstExistingFileName(["nope", "neither"])).to.be.undefined;
+  });
+
+  it("returns the first existing file in an array ", () => {
+    expect(
+      getFirstExistingFileName([
+        "nope",
+        "neither",
+        "this-file-exists",
+        "this-file-exists-as-well",
+      ])
+    ).to.equal("this-file-exists");
+  });
+});
+
+describe("cli/init-config/helpers - validateFileExistence", () => {
+  const WORKING_DIR = process.cwd();
+  const FIXTURES_DIR = "test/cli/init-config/fixtures/validate-file-existence";
+
+  beforeEach("set up", () => {
+    process.chdir(FIXTURES_DIR);
+  });
+
+  afterEach("tear down", () => {
+    process.chdir(WORKING_DIR);
+  });
+
+  it("returns an error message when presented with an empty string", () => {
+    expect(validateFileExistence("")).to.equal(
+      `hmm, '' doesn't seem to exist - could you try again?`
+    );
+  });
+
+  it("returns an error message when presented with a name of a non existing file", () => {
+    expect(validateFileExistence("nope-does-not-exist")).to.equal(
+      `hmm, 'nope-does-not-exist' doesn't seem to exist - could you try again?`
+    );
+  });
+
+  it("returns true when presented with the name of a file that does exist", () => {
+    expect(validateFileExistence("i-have-bytes-therefore-i-exist")).to.be.true;
   });
 });
 

@@ -149,6 +149,22 @@ export default {
             },
           },
         },
+        babelConfig: {
+          type: "object",
+          additionalProperties: false,
+          description: "Babel configuration (e.g. '.babelrc.json') to use.",
+          properties: {
+            fileName: {
+              description:
+                "The Babel configuration file to use. The fileName is relative to " +
+                "dependency-cruiser's current working directory. When not provided " +
+                "defaults to './.babelrc.json'. Dependency-cruiser currently supports " +
+                "only the json variant. Support for (js|cjs|mjs) variants and " +
+                "configuration in package.json might follow in future releases.",
+              type: "string",
+            },
+          },
+        },
         exoticRequireStrings: {
           type: "array",
           description:

@@ -3,10 +3,15 @@ const normalizeInitOptions = require("./normalize-init-options");
 const buildConfig = require("./build-config");
 const writeConfig = require("./write-config");
 const getUserInput = require("./get-user-input");
-const { pnpIsEnabled, fileExists } = require("./helpers");
+const {
+  pnpIsEnabled,
+  fileExists,
+  getFirstExistingFileName,
+} = require("./helpers");
 
 const TYPESCRIPT_CONFIG = `./${$defaults.TYPESCRIPT_CONFIG}`;
 const WEBPACK_CONFIG = `./${$defaults.WEBPACK_CONFIG}`;
+const BABEL_CONFIG_NAME_SEARCH_ARRAY = $defaults.BABEL_CONFIG_NAME_SEARCH_ARRAY;
 
 function getOneshotConfig(pOneShotConfigId) {
   const ONESHOT_CONFIGS = {
@@ -19,6 +24,10 @@ function getOneshotConfig(pOneShotConfigId) {
       useYarnPnP: pnpIsEnabled(),
       useWebpackConfig: fileExists(WEBPACK_CONFIG),
       webpackConfig: WEBPACK_CONFIG,
+      useBabelConfig: Boolean(
+        getFirstExistingFileName(BABEL_CONFIG_NAME_SEARCH_ARRAY)
+      ),
+      babelConfig: getFirstExistingFileName(BABEL_CONFIG_NAME_SEARCH_ARRAY),
     },
     yes: {
       useTsConfig: fileExists(TYPESCRIPT_CONFIG),
@@ -27,6 +36,10 @@ function getOneshotConfig(pOneShotConfigId) {
       useYarnPnP: pnpIsEnabled(),
       useWebpackConfig: fileExists(WEBPACK_CONFIG),
       webpackConfig: WEBPACK_CONFIG,
+      useBabelConfig: Boolean(
+        getFirstExistingFileName(BABEL_CONFIG_NAME_SEARCH_ARRAY)
+      ),
+      babelConfig: getFirstExistingFileName(BABEL_CONFIG_NAME_SEARCH_ARRAY),
     },
   };
 

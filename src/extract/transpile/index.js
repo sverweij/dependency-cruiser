@@ -13,18 +13,17 @@ const meta = require("./meta");
  *
  * @param  {string} pExtension    extension of the file to transpile
  * @param  {string} pSource       the contents of the file to transpile
- * @param  {any} pTSConfig (optional) object with options influencing
- *                                the underlying transpiler behavior. Currently
- *                                only passed to the typescript transpiler
+ * @param  {any} pTranspilerOptions (optional) object with options influencing
+ *                                the underlying transpiler behavior.
  * @return {string}               the transpiled version of the file (or the file
  *                                itself when the function could not find a
  *                                transpiler matching pExtension
  */
-module.exports = (pExtension, pSource, pTSConfig) => {
-  const lWrapper = meta.getWrapper(pExtension);
+module.exports = (pExtension, pSource, pTranspilerOptions) => {
+  const lWrapper = meta.getWrapper(pExtension, pTranspilerOptions);
 
   if (lWrapper.isAvailable()) {
-    return lWrapper.transpile(pSource, pTSConfig);
+    return lWrapper.transpile(pSource, pTranspilerOptions);
   } else {
     return pSource;
   }

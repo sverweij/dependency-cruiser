@@ -124,6 +124,7 @@ function resetOutputDirectory() {
   deleteDammit(path.join(OUT_DIR, "dynamic-import-ok.json"));
   deleteDammit(path.join(OUT_DIR, "dynamic-import-nok.json"));
   deleteDammit(path.join(OUT_DIR, "typescript-path-resolution.json"));
+  deleteDammit(path.join(OUT_DIR, "run-through-babel.json"));
 }
 
 function setModuleType(pTestPairs, pModuleType) {
@@ -436,6 +437,28 @@ describe("cli/index", () => {
           "test/cli/fixtures/typescriptconfig/cli-config-with-path/tsconfig.json",
         webpackConfig:
           "test/cli/fixtures/typescriptconfig/cli-config-with-path/webpack.config.js",
+      }
+    );
+
+    expect(lExitCode).to.equal(0);
+    asserthelpers.assertJSONFileEqual(
+      lOutputTo,
+      path.join(FIX_DIR, lOutputFileName)
+    );
+  });
+
+  it("dependency-cruise with a babelConfig will respect the configuration in there", () => {
+    const lOutputFileName = "run-through-babel.json";
+    const lOutputTo = path.join(OUT_DIR, lOutputFileName);
+
+    const lExitCode = cli(
+      ["test/cli/fixtures/babelconfig/run-through-babel/src"],
+      {
+        outputTo: lOutputTo,
+        outputType: "json",
+        babelConfig: "test/cli/fixtures/babelconfig/babelrc.valid.json",
+        webpackConfig:
+          "test/cli/fixtures/babelconfig/run-through-babel/webpack-cache-bust.config.js",
       }
     );
 

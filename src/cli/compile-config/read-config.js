@@ -1,6 +1,6 @@
 const fs = require("fs");
 const path = require("path");
-const stripJSONComments = require("strip-json-comments");
+const json5 = require("json5");
 
 module.exports = (pConfigFileName) => {
   if ([".js", ""].includes(path.extname(pConfigFileName))) {
@@ -8,7 +8,5 @@ module.exports = (pConfigFileName) => {
     return require(pConfigFileName);
   }
 
-  return JSON.parse(
-    stripJSONComments(fs.readFileSync(pConfigFileName, "utf8"))
-  );
+  return json5.parse(fs.readFileSync(pConfigFileName, "utf8"));
 };
