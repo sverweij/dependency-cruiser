@@ -11,15 +11,17 @@ export default {
     DependencyType: {
       type: "object",
       required: [
-        "module",
-        "resolved",
+        "circular",
         "coreModule",
-        "dependencyTypes",
-        "followable",
         "couldNotResolve",
-        "moduleSystem",
-        "valid",
+        "dependencyTypes",
+        "exoticallyRequired",
         "dynamic",
+        "followable",
+        "module",
+        "moduleSystem",
+        "resolved",
+        "valid",
       ],
       additionalProperties: false,
       properties: {

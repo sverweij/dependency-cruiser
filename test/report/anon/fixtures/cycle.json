@@ -8,18 +8,14 @@
           "coreModule": false,
           "followable": true,
           "couldNotResolve": false,
-          "dependencyTypes": [
-            "local"
-          ],
+          "dependencyTypes": ["local"],
           "module": "./foo",
           "moduleSystem": "cjs",
           "dynamic": false,
           "matchesDoNotFollow": false,
           "circular": true,
-          "cycle": [
-            "src/foo.js",
-            "src/bar.js"
-          ],
+          "cycle": ["src/foo.js", "src/bar.js"],
+          "exoticallyRequired": false,
           "valid": false,
           "rules": [
             {
@@ -40,18 +36,14 @@
           "coreModule": false,
           "followable": true,
           "couldNotResolve": false,
-          "dependencyTypes": [
-            "local"
-          ],
+          "dependencyTypes": ["local"],
           "module": "./bar",
           "moduleSystem": "cjs",
           "dynamic": false,
           "matchesDoNotFollow": false,
           "circular": true,
-          "cycle": [
-            "src/bar.js",
-            "src/foo.js"
-          ],
+          "cycle": ["src/bar.js", "src/foo.js"],
+          "exoticallyRequired": false,
           "valid": false,
           "rules": [
             {
@@ -86,10 +78,7 @@
           "severity": "warn",
           "name": "no-circular"
         },
-        "cycle": [
-          "src/foo.js",
-          "src/bar.js"
-        ]
+        "cycle": ["src/foo.js", "src/bar.js"]
       },
       {
         "from": "src/foo.js",
@@ -98,10 +87,7 @@
           "severity": "warn",
           "name": "no-circular"
         },
-        "cycle": [
-          "src/bar.js",
-          "src/foo.js"
-        ]
+        "cycle": ["src/bar.js", "src/foo.js"]
       },
       {
         "from": "src/baz.js",
@@ -131,11 +117,7 @@
         ]
       },
       "externalModuleResolutionStrategy": "node_modules",
-      "moduleSystems": [
-        "amd",
-        "cjs",
-        "es6"
-      ],
+      "moduleSystems": ["amd", "cjs", "es6"],
       "outputTo": "-",
       "outputType": "json",
       "preserveSymlinks": false,

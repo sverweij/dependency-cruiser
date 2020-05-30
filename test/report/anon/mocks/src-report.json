@@ -13,7 +13,10 @@
           "moduleSystem": "cjs",
           "dynamic": false,
           "matchesDoNotFollow": false,
-          "valid": true
+          "valid": true,
+          "circular": false,
+          "cycle": [],
+          "exoticallyRequired": false
         }
       ],
       "valid": true
@@ -66,6 +69,9 @@
           "moduleSystem": "cjs",
           "dynamic": false,
           "matchesDoNotFollow": false,
+          "circular": false,
+          "cycle": [],
+          "exoticallyRequired": false,
           "valid": true
         },
         {
@@ -78,6 +84,9 @@
           "moduleSystem": "cjs",
           "dynamic": false,
           "matchesDoNotFollow": false,
+          "circular": false,
+          "cycle": [],
+          "exoticallyRequired": false,
           "valid": true
         },
         {
@@ -90,6 +99,9 @@
           "moduleSystem": "cjs",
           "dynamic": false,
           "matchesDoNotFollow": false,
+          "circular": false,
+          "cycle": [],
+          "exoticallyRequired": false,
           "valid": true
         },
         {
@@ -102,6 +114,9 @@
           "moduleSystem": "cjs",
           "dynamic": false,
           "matchesDoNotFollow": false,
+          "circular": false,
+          "cycle": [],
+          "exoticallyRequired": false,
           "valid": true
         },
         {
@@ -114,6 +129,9 @@
           "moduleSystem": "cjs",
           "dynamic": false,
           "matchesDoNotFollow": false,
+          "circular": false,
+          "cycle": [],
+          "exoticallyRequired": false,
           "valid": true
         },
         {
@@ -126,6 +144,9 @@
           "moduleSystem": "cjs",
           "dynamic": false,
           "matchesDoNotFollow": false,
+          "circular": false,
+          "cycle": [],
+          "exoticallyRequired": false,
           "valid": true
         }
       ],
@@ -149,6 +170,9 @@
           "moduleSystem": "cjs",
           "dynamic": false,
           "matchesDoNotFollow": false,
+          "circular": false,
+          "cycle": [],
+          "exoticallyRequired": false,
           "valid": true
         },
         {
@@ -161,6 +185,9 @@
           "moduleSystem": "cjs",
           "dynamic": false,
           "matchesDoNotFollow": false,
+          "circular": false,
+          "cycle": [],
+          "exoticallyRequired": false,
           "valid": true
         },
         {
@@ -173,6 +200,9 @@
           "moduleSystem": "cjs",
           "dynamic": false,
           "matchesDoNotFollow": false,
+          "circular": false,
+          "cycle": [],
+          "exoticallyRequired": false,
           "valid": true
         },
         {
@@ -185,6 +215,9 @@
           "moduleSystem": "cjs",
           "dynamic": false,
           "matchesDoNotFollow": false,
+          "circular": false,
+          "cycle": [],
+          "exoticallyRequired": false,
           "valid": true
         }
       ],

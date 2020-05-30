@@ -37,7 +37,7 @@ const META_SYNTACTIC_VARIABLES = [
   "flob",
 ];
 
-describe("report/anonymous", () => {
+describe("report/anon", () => {
   beforeEach(() => {
     anonymizePathElement.clearCache();
   });

@@ -91,7 +91,7 @@ export interface IDependency {
    * 'true' if following this dependency will ultimately return to the source, false in all
    * other cases
    */
-  circular?: boolean;
+  circular: boolean;
   /**
    * Whether or not this is a node.js core module - deprecated in favor of dependencyType ===
    * core

@@ -8,18 +8,14 @@
           "coreModule": false,
           "followable": true,
           "couldNotResolve": false,
-          "dependencyTypes": [
-            "local"
-          ],
+          "dependencyTypes": ["local"],
           "module": "./yo",
           "moduleSystem": "cjs",
           "dynamic": false,
           "matchesDoNotFollow": false,
           "circular": true,
-          "cycle": [
-            "src/yo.js",
-            "src/entrypoint.js"
-          ],
+          "cycle": ["src/yo.js", "src/entrypoint.js"],
+          "exoticallyRequired": false,
           "valid": false,
           "rules": [
             {
@@ -40,18 +36,14 @@
           "coreModule": false,
           "followable": true,
           "couldNotResolve": false,
-          "dependencyTypes": [
-            "local"
-          ],
+          "dependencyTypes": ["local"],
           "module": "./entrypoint",
           "moduleSystem": "cjs",
           "dynamic": false,
           "matchesDoNotFollow": false,
           "circular": true,
-          "cycle": [
-            "src/entrypoint.js",
-            "src/yo.js"
-          ],
+          "cycle": ["src/entrypoint.js", "src/yo.js"],
+          "exoticallyRequired": false,
           "valid": false,
           "rules": [
             {
@@ -86,10 +78,7 @@
           "severity": "warn",
           "name": "no-circular"
         },
-        "cycle": [
-          "src/yo.js",
-          "src/entrypoint.js"
-        ]
+        "cycle": ["src/yo.js", "src/entrypoint.js"]
       },
       {
         "from": "src/yo.js",
@@ -98,10 +87,7 @@
           "severity": "warn",
           "name": "no-circular"
         },
-        "cycle": [
-          "src/entrypoint.js",
-          "src/yo.js"
-        ]
+        "cycle": ["src/entrypoint.js", "src/yo.js"]
       },
       {
         "from": "src/remi.js",
@@ -130,11 +116,7 @@
         ]
       },
       "externalModuleResolutionStrategy": "node_modules",
-      "moduleSystems": [
-        "amd",
-        "cjs",
-        "es6"
-      ],
+      "moduleSystems": ["amd", "cjs", "es6"],
       "outputTo": "-",
       "outputType": "json",
       "preserveSymlinks": false,

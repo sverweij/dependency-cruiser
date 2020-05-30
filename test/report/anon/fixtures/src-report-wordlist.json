@@ -14,7 +14,9 @@
           "dynamic": false,
           "matchesDoNotFollow": false,
           "valid": true,
-          "cycle": []
+          "circular": false,
+          "cycle": [],
+          "exoticallyRequired": false
         }
       ],
       "valid": true
@@ -68,7 +70,9 @@
           "dynamic": false,
           "matchesDoNotFollow": false,
           "valid": true,
-          "cycle": []
+          "circular": false,
+          "cycle": [],
+          "exoticallyRequired": false
         },
         {
           "resolved": "src/aap/noot/mies/jet.js",
@@ -81,7 +85,9 @@
           "dynamic": false,
           "matchesDoNotFollow": false,
           "valid": true,
-          "cycle": []
+          "circular": false,
+          "cycle": [],
+          "exoticallyRequired": false
         },
         {
           "resolved": "src/aap/noot/mies/teun.js",
@@ -94,7 +100,9 @@
           "dynamic": false,
           "matchesDoNotFollow": false,
           "valid": true,
-          "cycle": []
+          "circular": false,
+          "cycle": [],
+          "exoticallyRequired": false
         },
         {
           "resolved": "src/aap/noot/vuur/gijs.js",
@@ -107,7 +115,9 @@
           "dynamic": false,
           "matchesDoNotFollow": false,
           "valid": true,
-          "cycle": []
+          "circular": false,
+          "cycle": [],
+          "exoticallyRequired": false
         },
         {
           "resolved": "src/aap/noot/vuur/lam.js",
@@ -120,7 +130,9 @@
           "dynamic": false,
           "matchesDoNotFollow": false,
           "valid": true,
-          "cycle": []
+          "circular": false,
+          "cycle": [],
+          "exoticallyRequired": false
         },
         {
           "resolved": "src/aap/noot/vuur/kees.template.js",
@@ -133,7 +145,9 @@
           "dynamic": false,
           "matchesDoNotFollow": false,
           "valid": true,
-          "cycle": []
+          "circular": false,
+          "cycle": [],
+          "exoticallyRequired": false
         }
       ],
       "valid": true
@@ -157,7 +171,9 @@
           "dynamic": false,
           "matchesDoNotFollow": false,
           "valid": true,
-          "cycle": []
+          "circular": false,
+          "cycle": [],
+          "exoticallyRequired": false
         },
         {
           "resolved": "src/aap/noot/mies/jet.js",
@@ -170,7 +186,9 @@
           "dynamic": false,
           "matchesDoNotFollow": false,
           "valid": true,
-          "cycle": []
+          "circular": false,
+          "cycle": [],
+          "exoticallyRequired": false
         },
         {
           "resolved": "src/aap/noot/mies/teun.js",
@@ -183,7 +201,9 @@
           "dynamic": false,
           "matchesDoNotFollow": false,
           "valid": true,
-          "cycle": []
+          "circular": false,
+          "cycle": [],
+          "exoticallyRequired": false
         },
         {
           "resolved": "src/aap/noot/bok/noot.template.js",
@@ -196,7 +216,9 @@
           "dynamic": false,
           "matchesDoNotFollow": false,
           "valid": true,
-          "cycle": []
+          "circular": false,
+          "cycle": [],
+          "exoticallyRequired": false
         }
       ],
       "valid": true

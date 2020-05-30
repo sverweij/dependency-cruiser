@@ -27,4 +27,15 @@ describe("validate/index - preCompilationOnly", () => {
       valid: false,
     });
   });
+
+  it("Unknown whether stuff that only exists before compilation - okeleedokelee", () => {
+    expect(
+      validate.dependency(
+        true,
+        readRuleSet("./test/validate/fixtures/rules.pre-compilation-only.json"),
+        { source: "something" },
+        { resolved: "types.d.ts" }
+      )
+    ).to.deep.equal({ valid: true });
+  });
 });

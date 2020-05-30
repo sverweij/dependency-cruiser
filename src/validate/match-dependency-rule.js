@@ -53,7 +53,11 @@ function match(pFrom, pTo) {
       matchers.toLicenseNot(pRule, pTo) &&
       matchers.toExoticRequire(pRule, pTo) &&
       matchers.toExoticRequireNot(pRule, pTo) &&
+      // preCompilationOnly is not a mandatory attribute, but if the attribute
+      // is in the rule but not in the dependency there won't be a match
+      // anyway, so we can use the default propertyEquals method regardless
       propertyEquals(pTo, pRule, "preCompilationOnly") &&
+      // couldNotResolve, circular, dynamic and exoticallyRequired are
       propertyEquals(pTo, pRule, "couldNotResolve") &&
       propertyEquals(pTo, pRule, "circular") &&
       propertyEquals(pTo, pRule, "dynamic") &&
