@@ -146,7 +146,7 @@ module.exports = {
       severity: 'error',
       from: {},
       to: {
-        path: '\\.spec\\.(js|ts|ls|coffee|litcoffee|coffee\\.md)$'
+        path: '\\.spec\\.(js|mjs|cjs|ts|ls|coffee|litcoffee|coffee\\.md)$'
       }
     },
     {
@@ -160,7 +160,7 @@ module.exports = {
         'from.pathNot re of the not-to-dev-dep rule in the dependency-cruiser configuration',
       from: {
         path: '{{sourceLocationRE}}',
-        pathNot: '\\.spec\\.(js|ts|ls|coffee|litcoffee|coffee\\.md)$'
+        pathNot: '\\.spec\\.(js|mjs|cjs|ts|ls|coffee|litcoffee|coffee\\.md)$'
       },
       to: {
         dependencyTypes: [
@@ -317,8 +317,8 @@ module.exports = {
       fileName: '{{babelConfig}}'
     },
     {{^}}
-    // "babelConfig": {
-    //   "fileName": "./.babelrc.json"
+    // babelConfig: {
+    //   fileName: './.babelrc.json'
     // },
     {{/if}}
     
@@ -353,7 +353,7 @@ module.exports = {
         */
         // theme: {
         //   graph: {
-        //     /* use splines: 'ortho' for straight lines. Be aware though
+        //     /* use splines: "ortho" for straight lines. Be aware though
         //       graphviz might take a long time calculating ortho(gonal)
         //       routings.
         //    */

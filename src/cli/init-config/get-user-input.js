@@ -19,29 +19,6 @@ const BABEL_CONFIG_NAME_SEARCH_ARRAY = $defaults.BABEL_CONFIG_NAME_SEARCH_ARRAY;
 
 const INQUIRER_QUESTIONS = [
   {
-    name: "configType",
-    type: "list",
-    message: "Do you want to use a preset or a self-contained configuration?",
-    choices: ["self-contained", "preset"],
-  },
-  {
-    name: "preset",
-    type: "list",
-    message: "Pick a preset",
-    choices: [
-      {
-        name: "recommended, warn only (good starter choice)",
-        value: "dependency-cruiser/configs/recommended-warn-only",
-      },
-      {
-        name: "recommended, strict",
-        value: "dependency-cruiser/configs/recommended-strict",
-      },
-    ],
-    default: "dependency-cruiser/configs/recommended-warn-only",
-    when: (pAnswers) => pAnswers.configType === "preset",
-  },
-  {
     name: "sourceLocation",
     type: "input",
     message: "Where do your source files live?",

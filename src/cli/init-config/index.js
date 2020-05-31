@@ -14,33 +14,25 @@ const WEBPACK_CONFIG = `./${$defaults.WEBPACK_CONFIG}`;
 const BABEL_CONFIG_NAME_SEARCH_ARRAY = $defaults.BABEL_CONFIG_NAME_SEARCH_ARRAY;
 
 function getOneshotConfig(pOneShotConfigId) {
+  const BASE_CONFIG = {
+    useTsConfig: fileExists(TYPESCRIPT_CONFIG),
+    tsConfig: TYPESCRIPT_CONFIG,
+    tsPreCompilationDeps: fileExists(TYPESCRIPT_CONFIG),
+    useYarnPnP: pnpIsEnabled(),
+    useWebpackConfig: fileExists(WEBPACK_CONFIG),
+    webpackConfig: WEBPACK_CONFIG,
+    useBabelConfig: Boolean(
+      getFirstExistingFileName(BABEL_CONFIG_NAME_SEARCH_ARRAY)
+    ),
+    babelConfig: getFirstExistingFileName(BABEL_CONFIG_NAME_SEARCH_ARRAY),
+  };
   const ONESHOT_CONFIGS = {
     preset: {
       configType: "preset",
       preset: "dependency-cruiser/configs/recommended-strict",
-      useTsConfig: fileExists(TYPESCRIPT_CONFIG),
-      tsConfig: TYPESCRIPT_CONFIG,
-      tsPreCompilationDeps: fileExists(TYPESCRIPT_CONFIG),
-      useYarnPnP: pnpIsEnabled(),
-      useWebpackConfig: fileExists(WEBPACK_CONFIG),
-      webpackConfig: WEBPACK_CONFIG,
-      useBabelConfig: Boolean(
-        getFirstExistingFileName(BABEL_CONFIG_NAME_SEARCH_ARRAY)
-      ),
-      babelConfig: getFirstExistingFileName(BABEL_CONFIG_NAME_SEARCH_ARRAY),
+      ...BASE_CONFIG,
     },
-    yes: {
-      useTsConfig: fileExists(TYPESCRIPT_CONFIG),
-      tsConfig: TYPESCRIPT_CONFIG,
-      tsPreCompilationDeps: fileExists(TYPESCRIPT_CONFIG),
-      useYarnPnP: pnpIsEnabled(),
-      useWebpackConfig: fileExists(WEBPACK_CONFIG),
-      webpackConfig: WEBPACK_CONFIG,
-      useBabelConfig: Boolean(
-        getFirstExistingFileName(BABEL_CONFIG_NAME_SEARCH_ARRAY)
-      ),
-      babelConfig: getFirstExistingFileName(BABEL_CONFIG_NAME_SEARCH_ARRAY),
-    },
+    yes: BASE_CONFIG,
   };
 
   // eslint-disable-next-line security/detect-object-injection
