@@ -1,10 +1,10 @@
 const $dependencyCruiserManifest = require("../../../package.json");
-const { toSourceLocationArray } = require("./helpers");
 const {
   getSourceFolderCandidates,
   getTestFolderCandidates,
   hasTestsWithinSource,
-} = require("./helpers");
+  toSourceLocationArray,
+} = require("./environment-helpers");
 
 function populate(pInitOptions) {
   return {

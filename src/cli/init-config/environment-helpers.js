@@ -15,6 +15,7 @@ const LIKELY_TEST_FOLDERS = ["test", "spec", "tests", "specs", "bdd"];
 function readManifest(pManifestFileName = "./package.json") {
   return JSON.parse(fs.readFileSync(pManifestFileName, "utf8"));
 }
+
 /*
   We could have used utl.fileExists - but that one is cached.
   Not typically what we want for this util.
@@ -90,38 +91,13 @@ function toSourceLocationArray(pLocations) {
   return pLocations;
 }
 
-function validateFileExistence(pInput) {
-  return (
-    fileExists(pInput) ||
-    `hmm, '${pInput}' doesn't seem to exist - could you try again?`
-  );
-}
-
-function validateLocation(pLocations) {
-  for (const lLocation of toSourceLocationArray(pLocations)) {
-    try {
-      if (!fs.statSync(lLocation).isDirectory()) {
-        return `'${lLocation}' doesn't seem to be a folder - please try again`;
-      }
-    } catch (pError) {
-      return `'${lLocation}' doesn't seem to exist - please try again`;
-    }
-  }
-
-  return true;
-}
-
 module.exports = {
-  LIKELY_SOURCE_FOLDERS,
-  LIKELY_TEST_FOLDERS,
   folderNameArrayToRE,
   readManifest,
   fileExists,
   getFirstExistingFileName,
   pnpIsEnabled,
   toSourceLocationArray,
-  validateFileExistence,
-  validateLocation,
   isLikelyMonoRepo,
   hasTestsWithinSource,
   getFolderCandidates,

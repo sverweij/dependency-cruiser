@@ -7,11 +7,13 @@ const {
   pnpIsEnabled,
   fileExists,
   getFirstExistingFileName,
-} = require("./helpers");
+} = require("./environment-helpers");
+const { writeRunScriptsToManifest } = require("./add-run-scripts-to-manifest");
 
 const TYPESCRIPT_CONFIG = `./${$defaults.TYPESCRIPT_CONFIG}`;
 const WEBPACK_CONFIG = `./${$defaults.WEBPACK_CONFIG}`;
 const BABEL_CONFIG_NAME_SEARCH_ARRAY = $defaults.BABEL_CONFIG_NAME_SEARCH_ARRAY;
+const PACKAGE_MANIFEST = `./${$defaults.PACKAGE_MANIFEST}`;
 
 function getOneshotConfig(pOneShotConfigId) {
   const BASE_CONFIG = {
@@ -33,10 +35,21 @@ function getOneshotConfig(pOneShotConfigId) {
       ...BASE_CONFIG,
     },
     yes: BASE_CONFIG,
+    "experimental-scripts": {
+      updateManifest: fileExists(PACKAGE_MANIFEST),
+      ...BASE_CONFIG,
+    },
   };
 
   // eslint-disable-next-line security/detect-object-injection
   return ONESHOT_CONFIGS[pOneShotConfigId] || {};
+}
+
+function manifestIsUpdateable(pNormalizedInitConfig) {
+  return (
+    pNormalizedInitConfig.updateManifest &&
+    pNormalizedInitConfig.sourceLocation.length > 0
+  );
 }
 
 module.exports = (pInit) => {
@@ -50,6 +63,11 @@ module.exports = (pInit) => {
         process.stderr.write(`\n  ERROR: ${pError.message}\n`);
       });
   } else {
-    writeConfig(buildConfig(normalizeInitOptions(getOneshotConfig(pInit))));
+    const lNormalizedInitConfig = normalizeInitOptions(getOneshotConfig(pInit));
+
+    writeConfig(buildConfig(lNormalizedInitConfig));
+    if (manifestIsUpdateable(lNormalizedInitConfig)) {
+      writeRunScriptsToManifest(lNormalizedInitConfig);
+    }
   }
 };

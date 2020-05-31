@@ -1,3 +1,4 @@
+const fs = require("fs");
 const path = require("path");
 const chai = require("chai");
 const initConfig = require("../../../src/cli/init-config");
@@ -134,6 +135,34 @@ describe("cli/init-config/index", () => {
         require.resolve(configResultFileName)
       );
       deleteDammit(RULES_FILE_JS);
+    }
+  });
+
+  it("init experimental-scripts creates a .dependency-cruiser config + updates package.json with scripts", () => {
+    process.chdir("test/cli/init-config/fixtures/update-manifest");
+
+    const configResultFileName = `./${path.join(
+      "fixtures/update-manifest",
+      RULES_FILE_JS
+    )}`;
+    const $package = "package.json";
+    fs.writeFileSync($package, "{}");
+
+    try {
+      initConfig("experimental-scripts");
+      const lResult = require(configResultFileName);
+
+      expect(lResult).to.be.jsonSchema(configurationSchema);
+      expect(JSON.parse(fs.readFileSync($package, "utf8"))).to.haveOwnProperty(
+        "scripts"
+      );
+    } finally {
+      Reflect.deleteProperty(
+        require.cache,
+        require.resolve(configResultFileName)
+      );
+      deleteDammit(RULES_FILE_JS);
+      deleteDammit($package);
     }
   });
 });

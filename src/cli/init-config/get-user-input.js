@@ -9,9 +9,11 @@ const {
   isLikelyMonoRepo,
   pnpIsEnabled,
   toSourceLocationArray,
+} = require("./environment-helpers");
+const {
   validateFileExistence,
   validateLocation,
-} = require("./helpers");
+} = require("./inquirer-validators");
 
 const TYPESCRIPT_CONFIG = `./${$defaults.TYPESCRIPT_CONFIG}`;
 const WEBPACK_CONFIG = `./${$defaults.WEBPACK_CONFIG}`;

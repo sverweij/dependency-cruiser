@@ -1,5 +1,7 @@
 const fs = require("fs");
-const { fileExists } = require("./helpers");
+const figures = require("figures");
+const chalk = require("chalk");
+const { fileExists } = require("./environment-helpers");
 
 const DEFAULT_CONFIG_FILE_NAME = `.dependency-cruiser.js`;
 
@@ -24,7 +26,11 @@ module.exports = function writeConfig(
   } else {
     try {
       fs.writeFileSync(pFileName, pConfig);
-      process.stdout.write(`\n  Successfully created '${pFileName}'\n\n`);
+      process.stdout.write(
+        `\n  ${chalk.green(
+          figures.tick
+        )} Successfully created '${pFileName}'\n\n`
+      );
     } catch (pError) {
       /* istanbul ignore next  */
       throw new Error(
