@@ -7,11 +7,9 @@ const {
   pnpIsEnabled,
   isLikelyMonoRepo,
   hasTestsWithinSource,
-  validateFileExistence,
-  validateLocation,
-} = require("../../../src/cli/init-config/helpers");
+} = require("../../../src/cli/init-config/environment-helpers");
 
-describe("cli/init-config/helpers - pnpIsEnabled", () => {
+describe("cli/init-config/environment-helpers - pnpIsEnabled", () => {
   const WORKINGDIR = process.cwd();
 
   afterEach("tear down", () => {
@@ -61,7 +59,7 @@ describe("cli/init-config/helpers - pnpIsEnabled", () => {
   });
 });
 
-describe("cli/init-config/helpers - isLikelyMonoRepo", () => {
+describe("cli/init-config/environment-helpers - isLikelyMonoRepo", () => {
   it("declares the current folder to be not a mono repo", () => {
     expect(isLikelyMonoRepo()).to.equal(false);
   });
@@ -78,7 +76,7 @@ describe("cli/init-config/helpers - isLikelyMonoRepo", () => {
   });
 });
 
-describe("cli/init-config/helpers - hasTestsWithinSource", () => {
+describe("cli/init-config/environment-helpers - hasTestsWithinSource", () => {
   it("When there's no sign of a separate test directory - tests are in the source", () => {
     expect(hasTestsWithinSource([])).to.equal(true);
   });
@@ -109,7 +107,7 @@ describe("cli/init-config/helpers - hasTestsWithinSource", () => {
   });
 });
 
-describe("cli/init-config/helpers - getFolderCandidates", () => {
+describe("cli/init-config/environment-helpers - getFolderCandidates", () => {
   it("returns candidates verbatim when it's likely a mono repo", () => {
     const lCandidates = ["src", "bin"];
     const lRealFolders = ["packages", "src", "lib", "node_modules"];
@@ -128,7 +126,7 @@ describe("cli/init-config/helpers - getFolderCandidates", () => {
     ]);
   });
 });
-describe("cli/init-config/helpers - folderNameArrayToRE", () => {
+describe("cli/init-config/environment-helpers - folderNameArrayToRE", () => {
   it("transforms an array of folder names into a regex string - empty", () => {
     expect(folderNameArrayToRE([])).to.equal("^()");
   });
@@ -142,7 +140,7 @@ describe("cli/init-config/helpers - folderNameArrayToRE", () => {
   });
 });
 
-describe("cli/init-config/helpers - getFirstExistingFileName", () => {
+describe("cli/init-config/environment-helpers - getFirstExistingFileName", () => {
   const WORKING_DIR = process.cwd();
   const FIXTURES_DIR =
     "test/cli/init-config/fixtures/get-first-existing-file-name";
@@ -172,93 +170,5 @@ describe("cli/init-config/helpers - getFirstExistingFileName", () => {
         "this-file-exists-as-well",
       ])
     ).to.equal("this-file-exists");
-  });
-});
-
-describe("cli/init-config/helpers - validateFileExistence", () => {
-  const WORKING_DIR = process.cwd();
-  const FIXTURES_DIR = "test/cli/init-config/fixtures/validate-file-existence";
-
-  beforeEach("set up", () => {
-    process.chdir(FIXTURES_DIR);
-  });
-
-  afterEach("tear down", () => {
-    process.chdir(WORKING_DIR);
-  });
-
-  it("returns an error message when presented with an empty string", () => {
-    expect(validateFileExistence("")).to.equal(
-      `hmm, '' doesn't seem to exist - could you try again?`
-    );
-  });
-
-  it("returns an error message when presented with a name of a non existing file", () => {
-    expect(validateFileExistence("nope-does-not-exist")).to.equal(
-      `hmm, 'nope-does-not-exist' doesn't seem to exist - could you try again?`
-    );
-  });
-
-  it("returns true when presented with the name of a file that does exist", () => {
-    expect(validateFileExistence("i-have-bytes-therefore-i-exist")).to.be.true;
-  });
-});
-
-describe("cli/init-config/helpers - validateLocation", () => {
-  const WORKING_DIR = process.cwd();
-  const FIXTURES_DIR = "test/cli/fixtures/init-config/validate-location";
-
-  afterEach("tear down", () => {
-    process.chdir(WORKING_DIR);
-  });
-
-  it("returns an error message when provided with an empty string", () => {
-    expect(validateLocation("")).to.equal(
-      "'' doesn't seem to exist - please try again"
-    );
-  });
-
-  it("returns an error message when provided with a non-existing folder name", () => {
-    process.chdir(FIXTURES_DIR);
-    expect(validateLocation("non-existing-folder")).to.equal(
-      "'non-existing-folder' doesn't seem to exist - please try again"
-    );
-  });
-
-  it("returns an error message when provided with a name of a file that is not a folder", () => {
-    process.chdir(FIXTURES_DIR);
-    expect(validateLocation("existing-file")).to.equal(
-      "'existing-file' doesn't seem to be a folder - please try again"
-    );
-  });
-
-  it("returns true when provided with an existing folder", () => {
-    process.chdir(FIXTURES_DIR);
-    expect(validateLocation("existing-folder")).to.equal(true);
-  });
-
-  it("returns true when provided with a c.s.l. of existing folders", () => {
-    process.chdir(FIXTURES_DIR);
-    expect(
-      validateLocation("existing-folder, another-existing-folder")
-    ).to.equal(true);
-  });
-
-  it("returns an error message when provided with a c.s.l. of existing + non-existing folders", () => {
-    process.chdir(FIXTURES_DIR);
-    expect(
-      validateLocation(
-        "existing-folder, non-existing-folder, another-existing-folder"
-      )
-    ).to.equal(
-      "'non-existing-folder' doesn't seem to exist - please try again"
-    );
-  });
-
-  it("returns true when provided with an array of existing folders", () => {
-    process.chdir(FIXTURES_DIR);
-    expect(
-      validateLocation(["existing-folder", "another-existing-folder"])
-    ).to.equal(true);
   });
 });

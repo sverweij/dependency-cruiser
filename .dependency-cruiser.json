@@ -19,7 +19,7 @@
         "pathNot": "^(src/cli/compile-config/index\\.js)$"
       },
       "to": {
-        "pathNot": "^src/main/|^node_modules|^fs$|^path$|$1|^package.json$"
+        "pathNot": "^src/(main|utl)/|^node_modules|^fs$|^path$|$1|^package.json$"
       }
     },
     {

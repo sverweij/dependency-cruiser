@@ -1,24 +1,17 @@
 const chalk = require("chalk");
 const figures = require("figures");
-const indentString = require("indent-string");
-const wrapAnsi = require("wrap-ansi");
+
 const _get = require("lodash/get");
 const findRuleByName = require("../utl/find-rule-by-name");
+const wrapAndIndent = require("../utl/wrap-and-indent");
 
 const SEVERITY2CHALK = {
   error: chalk.red,
   warn: chalk.yellow,
   info: chalk.cyan,
 };
-const DEFAULT_INDENT = 4;
+
 const CYCLIC_PATH_INDENT = 6;
-
-function wrapAndIndent(pString, pIndent = DEFAULT_INDENT) {
-  const DOGMATIC_MAX_CONSOLE_WIDTH = 78;
-  const MAX_WIDTH = DOGMATIC_MAX_CONSOLE_WIDTH - pIndent;
-
-  return indentString(wrapAnsi(pString, MAX_WIDTH), pIndent);
-}
 
 function renderExtraPathInformation(pExtra) {
   return "\n".concat(

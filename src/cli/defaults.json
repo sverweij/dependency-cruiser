@@ -14,6 +14,7 @@
     "babel.config.json",
     "babel.config.json5"
   ],
+  "PACKAGE_MANIFEST": "package.json",
   "OUTPUT_TYPE": "err",
   "OUTPUT_TO": "-"
 }
