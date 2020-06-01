@@ -3,6 +3,7 @@ const _get = require("lodash/get");
 
 const LIKELY_SOURCE_FOLDERS = ["src", "lib", "app", "bin"];
 const LIKELY_TEST_FOLDERS = ["test", "spec", "tests", "specs", "bdd"];
+const LIKELY_PACKAGES_FOLDERS = ["packages"];
 
 /**
  * Read the package manifest ('package.json') and return it as a javascript object
@@ -51,31 +52,22 @@ function getFolderNames(pFolderName) {
 }
 
 function isLikelyMonoRepo(pFolderNames = getFolderNames(".")) {
-  return pFolderNames.some((pFolderName) => pFolderName === "packages");
+  return pFolderNames.includes("packages");
 }
 
 function hasTestsWithinSource(pTestLocations, pSourceLocations) {
   return (
     pTestLocations.length === 0 ||
     pTestLocations.every((pTestLocation) =>
-      pSourceLocations.some(
-        (pSourceLocation) => pSourceLocation === pTestLocation
-      )
+      pSourceLocations.includes(pTestLocation)
     )
   );
 }
 
 function getFolderCandidates(pCandidateFolderArray) {
   return (pFolderNames = getFolderNames(".")) => {
-    if (isLikelyMonoRepo(pFolderNames)) {
-      // when it's likely a monorepo return what we used to return until
-      // version 8.1.1. That way we won't break backwards compatibility
-      return pCandidateFolderArray;
-    }
     return pFolderNames.filter((pFolderName) =>
-      pCandidateFolderArray.some(
-        (pCandidateFolder) => pCandidateFolder === pFolderName
-      )
+      pCandidateFolderArray.includes(pFolderName)
     );
   };
 }
@@ -103,4 +95,5 @@ module.exports = {
   getFolderCandidates,
   getSourceFolderCandidates: getFolderCandidates(LIKELY_SOURCE_FOLDERS),
   getTestFolderCandidates: getFolderCandidates(LIKELY_TEST_FOLDERS),
+  getMonoRepoPackagesCandidates: getFolderCandidates(LIKELY_PACKAGES_FOLDERS),
 };

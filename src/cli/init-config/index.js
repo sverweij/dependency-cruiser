@@ -4,6 +4,7 @@ const buildConfig = require("./build-config");
 const writeConfig = require("./write-config");
 const getUserInput = require("./get-user-input");
 const {
+  isLikelyMonoRepo,
   pnpIsEnabled,
   fileExists,
   getFirstExistingFileName,
@@ -17,6 +18,7 @@ const PACKAGE_MANIFEST = `./${$defaults.PACKAGE_MANIFEST}`;
 
 function getOneshotConfig(pOneShotConfigId) {
   const BASE_CONFIG = {
+    isMonoRepo: isLikelyMonoRepo(),
     useTsConfig: fileExists(TYPESCRIPT_CONFIG),
     tsConfig: TYPESCRIPT_CONFIG,
     tsPreCompilationDeps: fileExists(TYPESCRIPT_CONFIG),
