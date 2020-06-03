@@ -50,7 +50,7 @@ The easy way to get you started:
 depcruise --init
 ```
 
-This will create a `.dependency-cruiser.json` with some rules that make sense
+This will create a `.dependency-cruiser.js` with some rules that make sense
 in most projects (detecting **circular dependencies**, dependencies
 **missing** in package.json, **orphans**, production code relying on
 dev- or optionalDependencies, ...).
