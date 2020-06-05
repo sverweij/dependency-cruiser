@@ -5,6 +5,7 @@ const {
   getFirstExistingFileName,
   getSourceFolderCandidates,
   getTestFolderCandidates,
+  getMonoRepoPackagesCandidates,
   hasTestsWithinSource,
   isLikelyMonoRepo,
   pnpIsEnabled,
@@ -21,12 +22,27 @@ const BABEL_CONFIG_NAME_SEARCH_ARRAY = $defaults.BABEL_CONFIG_NAME_SEARCH_ARRAY;
 
 const INQUIRER_QUESTIONS = [
   {
+    name: "isMonoRepo",
+    type: "confirm",
+    message: "This looks like a mono repo. Is that correct?",
+    default: isLikelyMonoRepo(),
+    when: () => isLikelyMonoRepo(),
+  },
+  {
+    name: "sourceLocation",
+    type: "input",
+    message: "Mono repo it is! Where do your packages live?",
+    default: getMonoRepoPackagesCandidates(),
+    validate: validateLocation,
+    when: (pAnswers) => pAnswers.isMonoRepo,
+  },
+  {
     name: "sourceLocation",
     type: "input",
     message: "Where do your source files live?",
     default: getSourceFolderCandidates(),
     validate: validateLocation,
-    when: () => !isLikelyMonoRepo(),
+    when: (pAnswers) => !pAnswers.isMonoRepo,
   },
   {
     name: "hasTestsOutsideSource",
@@ -38,7 +54,7 @@ const INQUIRER_QUESTIONS = [
         toSourceLocationArray(pAnswers.sourceLocation)
       );
     },
-    when: () => !isLikelyMonoRepo(),
+    when: (pAnswers) => !pAnswers.isMonoRepo,
   },
   {
     name: "testLocation",
@@ -46,8 +62,9 @@ const INQUIRER_QUESTIONS = [
     message: "Where do your test files live?",
     default: getTestFolderCandidates(),
     validate: validateLocation,
-    when: (pAnswers) => pAnswers.hasTestsOutsideSource && !isLikelyMonoRepo(),
+    when: (pAnswers) => pAnswers.hasTestsOutsideSource && !pAnswers.isMonoRepo,
   },
+
   {
     name: "useYarnPnP",
     type: "confirm",

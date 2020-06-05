@@ -108,16 +108,7 @@ describe("cli/init-config/environment-helpers - hasTestsWithinSource", () => {
 });
 
 describe("cli/init-config/environment-helpers - getFolderCandidates", () => {
-  it("returns candidates verbatim when it's likely a mono repo", () => {
-    const lCandidates = ["src", "bin"];
-    const lRealFolders = ["packages", "src", "lib", "node_modules"];
-
-    expect(getFolderCandidates(lCandidates)(lRealFolders)).to.deep.equal(
-      lCandidates
-    );
-  });
-
-  it("returns only existing folders when it's not a monorepo", () => {
+  it("returns only existing folders", () => {
     const lCandidates = ["src", "bin"];
     const lRealFolders = ["src", "lib", "node_modules"];
 

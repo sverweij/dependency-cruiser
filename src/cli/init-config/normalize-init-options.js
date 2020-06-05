@@ -15,9 +15,11 @@ function populate(pInitOptions) {
     sourceLocation: toSourceLocationArray(
       pInitOptions.sourceLocation || getSourceFolderCandidates()
     ),
-    testLocation: toSourceLocationArray(
-      pInitOptions.testLocation || getTestFolderCandidates()
-    ),
+    testLocation: pInitOptions.isMonoRepo
+      ? []
+      : toSourceLocationArray(
+          pInitOptions.testLocation || getTestFolderCandidates()
+        ),
   };
 }
 
@@ -33,10 +35,12 @@ module.exports = function normalizeInitOptions(pInitOptions) {
   if (
     !Object.prototype.hasOwnProperty.call(lReturnValue, "hasTestsOutsideSource")
   ) {
-    lReturnValue.hasTestsOutsideSource = !hasTestsWithinSource(
-      lReturnValue.testLocation,
-      lReturnValue.sourceLocation
-    );
+    lReturnValue.hasTestsOutsideSource =
+      !pInitOptions.isMonoRepo &&
+      !hasTestsWithinSource(
+        lReturnValue.testLocation,
+        lReturnValue.sourceLocation
+      );
   }
   return lReturnValue;
 };
