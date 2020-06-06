@@ -19,6 +19,7 @@ const PACKAGE_MANIFEST = `./${$defaults.PACKAGE_MANIFEST}`;
 function getOneshotConfig(pOneShotConfigId) {
   const BASE_CONFIG = {
     isMonoRepo: isLikelyMonoRepo(),
+    combinedDependencies: false,
     useTsConfig: fileExists(TYPESCRIPT_CONFIG),
     tsConfig: TYPESCRIPT_CONFIG,
     tsPreCompilationDeps: fileExists(TYPESCRIPT_CONFIG),

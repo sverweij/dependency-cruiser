@@ -37,6 +37,14 @@ const INQUIRER_QUESTIONS = [
     when: (pAnswers) => pAnswers.isMonoRepo,
   },
   {
+    name: "combinedDependencies",
+    type: "confirm",
+    message:
+      "Do your packages use dependencies declared in the root of your repo?",
+    default: false,
+    when: (pAnswers) => pAnswers.isMonoRepo,
+  },
+  {
     name: "sourceLocation",
     type: "input",
     message: "Where do your source files live?",
