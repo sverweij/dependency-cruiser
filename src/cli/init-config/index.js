@@ -7,29 +7,29 @@ const {
   isLikelyMonoRepo,
   pnpIsEnabled,
   fileExists,
-  getFirstExistingFileName,
+  hasBabelConfigCandidates,
+  getBabelConfigCandidates,
+  hasWebpackConfigCandidates,
+  getWebpackConfigCandidates,
+  hasTSConfigCandidates,
+  getTSConfigCandidates,
 } = require("./environment-helpers");
 const { writeRunScriptsToManifest } = require("./add-run-scripts-to-manifest");
 
-const TYPESCRIPT_CONFIG = `./${$defaults.TYPESCRIPT_CONFIG}`;
-const WEBPACK_CONFIG = `./${$defaults.WEBPACK_CONFIG}`;
-const BABEL_CONFIG_NAME_SEARCH_ARRAY = $defaults.BABEL_CONFIG_NAME_SEARCH_ARRAY;
 const PACKAGE_MANIFEST = `./${$defaults.PACKAGE_MANIFEST}`;
 
 function getOneshotConfig(pOneShotConfigId) {
   const BASE_CONFIG = {
     isMonoRepo: isLikelyMonoRepo(),
     combinedDependencies: false,
-    useTsConfig: fileExists(TYPESCRIPT_CONFIG),
-    tsConfig: TYPESCRIPT_CONFIG,
-    tsPreCompilationDeps: fileExists(TYPESCRIPT_CONFIG),
+    useTsConfig: hasTSConfigCandidates(),
+    tsConfig: getTSConfigCandidates().shift(),
+    tsPreCompilationDeps: hasTSConfigCandidates(),
     useYarnPnP: pnpIsEnabled(),
-    useWebpackConfig: fileExists(WEBPACK_CONFIG),
-    webpackConfig: WEBPACK_CONFIG,
-    useBabelConfig: Boolean(
-      getFirstExistingFileName(BABEL_CONFIG_NAME_SEARCH_ARRAY)
-    ),
-    babelConfig: getFirstExistingFileName(BABEL_CONFIG_NAME_SEARCH_ARRAY),
+    useWebpackConfig: hasWebpackConfigCandidates(),
+    webpackConfig: getWebpackConfigCandidates().shift(),
+    useBabelConfig: hasBabelConfigCandidates(),
+    babelConfig: getBabelConfigCandidates().shift(),
   };
   const ONESHOT_CONFIGS = {
     preset: {

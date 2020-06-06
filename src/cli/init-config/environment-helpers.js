@@ -4,6 +4,9 @@ const _get = require("lodash/get");
 const LIKELY_SOURCE_FOLDERS = ["src", "lib", "app", "bin"];
 const LIKELY_TEST_FOLDERS = ["test", "spec", "tests", "specs", "bdd"];
 const LIKELY_PACKAGES_FOLDERS = ["packages"];
+const TSCONFIG_CANDIDATE_PATTERN = /.*[tj]sconfig.*\.json$/gi;
+const WEBPACK_CANDIDATE_PATTERN = /.*webpack.*\.c?js(on)?$/gi;
+const BABEL_CONFIG_CANDIDATE_PATTERN = /^\.babelrc$|.*babel.*\.json/gi;
 
 /**
  * Read the package manifest ('package.json') and return it as a javascript object
@@ -30,10 +33,6 @@ function fileExists(pFile) {
   return true;
 }
 
-function getFirstExistingFileName(pFileNameArray) {
-  return pFileNameArray.find(fileExists);
-}
-
 function pnpIsEnabled() {
   let lReturnValue = false;
 
@@ -49,6 +48,15 @@ function getFolderNames(pFolderName) {
   return fs
     .readdirSync(pFolderName, "utf8")
     .filter((pFileName) => fs.statSync(pFileName).isDirectory());
+}
+
+function getMatchingFileNames(pPattern, pFolderName = ".") {
+  return fs
+    .readdirSync(pFolderName, "utf8")
+    .filter(
+      (pFileName) =>
+        fs.statSync(pFileName).isFile() && pFileName.match(pPattern)
+    );
 }
 
 function isLikelyMonoRepo(pFolderNames = getFolderNames(".")) {
@@ -83,17 +91,42 @@ function toSourceLocationArray(pLocations) {
   return pLocations;
 }
 
+const getBabelConfigCandidates = () =>
+  getMatchingFileNames(BABEL_CONFIG_CANDIDATE_PATTERN);
+const hasBabelConfigCandidates = () => getBabelConfigCandidates().length > 0;
+
+const getTSConfigCandidates = () =>
+  getMatchingFileNames(TSCONFIG_CANDIDATE_PATTERN);
+const hasTSConfigCandidates = () => getTSConfigCandidates().length > 0;
+
+const getWebpackConfigCandidates = () =>
+  getMatchingFileNames(WEBPACK_CANDIDATE_PATTERN);
+const hasWebpackConfigCandidates = () =>
+  getWebpackConfigCandidates().length > 0;
+
+const getSourceFolderCandidates = getFolderCandidates(LIKELY_SOURCE_FOLDERS);
+const getTestFolderCandidates = getFolderCandidates(LIKELY_TEST_FOLDERS);
+
+const getMonoRepoPackagesCandidates = getFolderCandidates(
+  LIKELY_PACKAGES_FOLDERS
+);
+
 module.exports = {
   folderNameArrayToRE,
   readManifest,
   fileExists,
-  getFirstExistingFileName,
   pnpIsEnabled,
   toSourceLocationArray,
   isLikelyMonoRepo,
   hasTestsWithinSource,
   getFolderCandidates,
-  getSourceFolderCandidates: getFolderCandidates(LIKELY_SOURCE_FOLDERS),
-  getTestFolderCandidates: getFolderCandidates(LIKELY_TEST_FOLDERS),
-  getMonoRepoPackagesCandidates: getFolderCandidates(LIKELY_PACKAGES_FOLDERS),
+  getBabelConfigCandidates,
+  hasBabelConfigCandidates,
+  getWebpackConfigCandidates,
+  hasWebpackConfigCandidates,
+  getTSConfigCandidates,
+  hasTSConfigCandidates,
+  getSourceFolderCandidates,
+  getTestFolderCandidates,
+  getMonoRepoPackagesCandidates,
 };

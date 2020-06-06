@@ -1251,7 +1251,7 @@ depcruise --ts-config tsconfig.prod.json --validate -- src
   in the tsconfig.json and not at other keys (e.g. `files`, `include` and
   `exclude`).
 - If you happen to use a [`jsconfig.json`](https://code.visualstudio.com/docs/languages/jsconfig)
-  you can pass that as well as the syntax of the `compilaerOptions` key
+  you can pass that as well as the syntax of the `compilerOptions` key
   is the same for both.
 
 ### `babelConfig`: use a babel configuration file
@@ -1264,7 +1264,7 @@ by telling it where your babel config lives, like this:
 ```json
 "options": {
   "babelConfig": {
-    "fileName": ".babelrc.json"
+    "fileName": ".babelrc"
   }
 }
 ```
@@ -1283,8 +1283,8 @@ will happily analyze these source files for you.
 - Only json (/ json5) configurations in a separate file. .js, .mjs, .cjs, or
   configurations in package.json might be added when there's a demand for it.
 - Auto detection in [--init](cli.md#--init) looks at some of the likely suspects
-  for babel configs - _.babelrc_, _.babelrc.json5_, _babel.config.json_ and
-  _babel.config.json5_.
+  for babel configs - _.babelrc_, _.babelrc.json_, _babel.config.json_ and any
+  other file with _babel_ in the name and ending on _json_ or _json5_.
 - The feature currently works with babel versions >=7.0.0
 - Babel support is currently a :warning: experimental feature. This means it
   is thoroughly tested, works well as far as we could determine. It also means

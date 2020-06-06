@@ -1,7 +1,6 @@
 /* eslint-disable no-unused-expressions */
 const expect = require("chai").expect;
 const {
-  getFirstExistingFileName,
   getFolderCandidates,
   folderNameArrayToRE,
   pnpIsEnabled,
@@ -128,38 +127,5 @@ describe("cli/init-config/environment-helpers - folderNameArrayToRE", () => {
     expect(folderNameArrayToRE(["bin", "src", "lib"])).to.equal(
       "^(bin|src|lib)"
     );
-  });
-});
-
-describe("cli/init-config/environment-helpers - getFirstExistingFileName", () => {
-  const WORKING_DIR = process.cwd();
-  const FIXTURES_DIR =
-    "test/cli/init-config/fixtures/get-first-existing-file-name";
-
-  beforeEach("set up", () => {
-    process.chdir(FIXTURES_DIR);
-  });
-
-  afterEach("tear down", () => {
-    process.chdir(WORKING_DIR);
-  });
-
-  it("returns undefined when presented with an empty array", () => {
-    expect(getFirstExistingFileName([])).to.be.undefined;
-  });
-
-  it("returns undefined when presented with an array of non-existing files", () => {
-    expect(getFirstExistingFileName(["nope", "neither"])).to.be.undefined;
-  });
-
-  it("returns the first existing file in an array ", () => {
-    expect(
-      getFirstExistingFileName([
-        "nope",
-        "neither",
-        "this-file-exists",
-        "this-file-exists-as-well",
-      ])
-    ).to.equal("this-file-exists");
   });
 });

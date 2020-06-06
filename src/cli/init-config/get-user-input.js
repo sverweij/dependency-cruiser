@@ -1,24 +1,20 @@
 const inquirer = require("inquirer");
-const $defaults = require("../defaults.json");
 const {
-  fileExists,
-  getFirstExistingFileName,
   getSourceFolderCandidates,
   getTestFolderCandidates,
+  hasBabelConfigCandidates,
+  getBabelConfigCandidates,
+  hasTSConfigCandidates,
+  getTSConfigCandidates,
+  hasWebpackConfigCandidates,
+  getWebpackConfigCandidates,
   getMonoRepoPackagesCandidates,
   hasTestsWithinSource,
   isLikelyMonoRepo,
   pnpIsEnabled,
   toSourceLocationArray,
 } = require("./environment-helpers");
-const {
-  validateFileExistence,
-  validateLocation,
-} = require("./inquirer-validators");
-
-const TYPESCRIPT_CONFIG = `./${$defaults.TYPESCRIPT_CONFIG}`;
-const WEBPACK_CONFIG = `./${$defaults.WEBPACK_CONFIG}`;
-const BABEL_CONFIG_NAME_SEARCH_ARRAY = $defaults.BABEL_CONFIG_NAME_SEARCH_ARRAY;
+const { validateLocation } = require("./inquirer-validators");
 
 const INQUIRER_QUESTIONS = [
   {
@@ -85,14 +81,13 @@ const INQUIRER_QUESTIONS = [
     type: "confirm",
     message: "Looks like you're using TypeScript. Use a 'tsconfig.json'?",
     default: true,
-    when: () => fileExists(TYPESCRIPT_CONFIG),
+    when: hasTSConfigCandidates,
   },
   {
     name: "tsConfig",
-    type: "input",
+    type: "list",
     message: "Full path to your 'tsconfig.json':",
-    default: TYPESCRIPT_CONFIG,
-    validate: validateFileExistence,
+    choices: getTSConfigCandidates(),
     when: (pAnswers) => pAnswers.useTsConfig,
   },
   {
@@ -100,21 +95,20 @@ const INQUIRER_QUESTIONS = [
     type: "confirm",
     message:
       "Also regard TypeScript dependencies that exist only before compilation?",
-    when: (pAnswers) => fileExists(TYPESCRIPT_CONFIG) && pAnswers.useTsConfig,
+    when: (pAnswers) => pAnswers.useTsConfig,
   },
   {
     name: "useBabelConfig",
     type: "confirm",
     message: "Looks like you're using Babel. Use a babel config?",
     default: true,
-    when: () => getFirstExistingFileName(BABEL_CONFIG_NAME_SEARCH_ARRAY),
+    when: hasBabelConfigCandidates,
   },
   {
     name: "babelConfig",
-    type: "input",
+    type: "list",
     message: "Full path to your babel config:",
-    default: getFirstExistingFileName(BABEL_CONFIG_NAME_SEARCH_ARRAY),
-    validate: validateFileExistence,
+    choices: getBabelConfigCandidates(),
     when: (pAnswers) => pAnswers.useBabelConfig,
   },
   {
@@ -122,14 +116,13 @@ const INQUIRER_QUESTIONS = [
     type: "confirm",
     message: "Looks like you're using webpack - specify a webpack config?",
     default: true,
-    when: () => fileExists(WEBPACK_CONFIG),
+    when: hasWebpackConfigCandidates,
   },
   {
     name: "webpackConfig",
-    type: "input",
+    type: "list",
     message: "Full path to your webpack config:",
-    default: WEBPACK_CONFIG,
-    validate: validateFileExistence,
+    choices: getWebpackConfigCandidates(),
     when: (pAnswers) => pAnswers.useWebpackConfig,
   },
 ];
