@@ -27,6 +27,7 @@ describe("transpiler", () => {
       ),
       "utf8"
     );
+
     expect(
       normalizeNewline(
         prettier.format(transpile(".ts", lInputFixture), { parser: "babel" })
@@ -62,7 +63,6 @@ describe("transpiler", () => {
       typeRoots: ["../../types"],
       types: ["foo", "bar", "baz"],
     };
-
     expect(
       normalizeNewline(
         prettier.format(transpile(".ts", lInputFixture, lTranspilerOptions), {
@@ -70,7 +70,11 @@ describe("transpiler", () => {
         })
       )
     ).to.equal(
-      normalizeNewline(prettier.format(lTranspiledFixture, { parser: "babel" }))
+      normalizeNewline(
+        prettier.format(lTranspiledFixture, {
+          parser: "babel",
+        })
+      )
     );
   });
 });
