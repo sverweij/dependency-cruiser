@@ -6,14 +6,7 @@
   ],
   "WEBPACK_CONFIG": "webpack.config.js",
   "TYPESCRIPT_CONFIG": "tsconfig.json",
-  "BABEL_CONFIG": ".babelrc.json",
-  "BABEL_CONFIG_NAME_SEARCH_ARRAY": [
-    ".babelrc.json",
-    ".babelrc",
-    ".babelrc.json5",
-    "babel.config.json",
-    "babel.config.json5"
-  ],
+  "BABEL_CONFIG": ".babelrc",
   "PACKAGE_MANIFEST": "package.json",
   "OUTPUT_TYPE": "err",
   "OUTPUT_TO": "-"
