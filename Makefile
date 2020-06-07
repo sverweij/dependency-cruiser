@@ -8,22 +8,22 @@ GENERATED_SOURCES=src/cli/init-config/config.js.template.js \
 	src/schema/configuration.schema.json \
 	src/schema/cruise-result.schema.json
 
-SCHEMA_SOURCES=utl/schema/compound-exclude-type.mjs \
-	utl/schema/compound-donot-follow-type.mjs \
-	utl/schema/dependencies.mjs \
-	utl/schema/dependency-type.mjs \
-	utl/schema/module-system-type.mjs \
-	utl/schema/module-systems-type.mjs \
-	utl/schema/modules.mjs \
-	utl/schema/options-used.mjs \
-	utl/schema/options.mjs \
-	utl/schema/output-type.mjs \
-	utl/schema/reporter-options.mjs \
-	utl/schema/restrictions.mjs \
-	utl/schema/rule-set.mjs \
-	utl/schema/rule-summary.mjs \
-	utl/schema/severity-type.mjs \
-	utl/schema/summary.mjs
+SCHEMA_SOURCES=tools/schema/compound-exclude-type.mjs \
+	tools/schema/compound-donot-follow-type.mjs \
+	tools/schema/dependencies.mjs \
+	tools/schema/dependency-type.mjs \
+	tools/schema/module-system-type.mjs \
+	tools/schema/module-systems-type.mjs \
+	tools/schema/modules.mjs \
+	tools/schema/options-used.mjs \
+	tools/schema/options.mjs \
+	tools/schema/output-type.mjs \
+	tools/schema/reporter-options.mjs \
+	tools/schema/restrictions.mjs \
+	tools/schema/rule-set.mjs \
+	tools/schema/rule-summary.mjs \
+	tools/schema/severity-type.mjs \
+	tools/schema/summary.mjs
 
 .PHONY: help dev-build clean
 
@@ -47,8 +47,8 @@ help:
 src/%.template.js: src/%.template.hbs
 	npx handlebars --commonjs handlebars/runtime -f $@ $<
 
-src/%.schema.json: utl/%.schema.mjs $(SCHEMA_SOURCES)
-	$(NODE) --experimental-modules ./utl/generate-schemas.utl.mjs $@
+src/%.schema.json: tools/%.schema.mjs $(SCHEMA_SOURCES)
+	$(NODE) --experimental-modules ./tools/generate-schemas.utl.mjs $@
 
 # "phony" targets
 dev-build: $(GENERATED_SOURCES)

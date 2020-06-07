@@ -66,7 +66,7 @@
       "comment": "This module depends on a the node 'fs' module, and it resides in a spot where that is not allowed.",
       "severity": "error",
       "from": {
-        "pathNot": "^src/(extract/parse|extract/resolve|extract/gather-initial-sources\\.js|cli)|^test|^utl"
+        "pathNot": "^src/(extract/parse|extract/resolve|extract/gather-initial-sources\\.js|cli)|^test|^tools"
       },
       "to": { "path": "^fs$" }
     },

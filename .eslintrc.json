@@ -17,7 +17,7 @@
       }
     },
     {
-      "files": ["utl/**/*.mjs"],
+      "files": ["tools/**/*.mjs"],
       "parserOptions": {
         "ecmaVersion": 2020
       },
