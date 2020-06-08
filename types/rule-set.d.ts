@@ -56,11 +56,11 @@ export interface IToRestriction {
   /**
    * A regular expression to match against any 'exotic' require strings
    */
-  exoticRequire?: string;
+  exoticRequire?: string | string[];
   /**
    * A regular expression to match against any 'exotic' require strings - when it should NOT be caught by the rule
    */
-  exoticRequireNot?: string;
+  exoticRequireNot?: string | string[];
   /**
    * true if this dependency only exists before compilation (like type only imports),
    * false in all other cases. Only returned when the tsPreCompilationDeps is set to 'specify'.
@@ -80,12 +80,12 @@ export interface IToRestriction {
    * licenses. E.g. to flag GPL-1.0, GPL-2.0 licensed modules (e.g. because your app
    * is not compatible with the GPL) use "GPL"
    */
-  license?: string;
+  license?: string | string[];
   /**
    * Whether or not to match modules that were NOT released under one of the mentioned
    * licenses. E.g. to flag everyting non MIT use "MIT" here
    */
-  licenseNot?: string;
+  licenseNot?: string | string[];
 }
 
 export interface IReachabilityFromRestrictionType {

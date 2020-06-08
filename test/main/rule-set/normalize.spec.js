@@ -226,4 +226,96 @@ describe("main/rule-set/normalize", () => {
       allowedSeverity: "warn",
     });
   });
+
+  it("normalizes arrays of re's in licenses to regular regular expressions", () => {
+    expect(
+      normalize({
+        forbidden: [
+          {
+            name: "license-thing",
+            severity: "warn",
+            from: {},
+            to: {
+              licenseNot: ["MIT", "ISC", "Apache-2\\.0"],
+            },
+          },
+        ],
+        allowed: [
+          {
+            from: {},
+            to: {
+              license: ["MIT", "ISC", "Apache-2\\.0"],
+            },
+          },
+        ],
+      })
+    ).to.deep.equal({
+      forbidden: [
+        {
+          name: "license-thing",
+          severity: "warn",
+          from: {},
+          to: {
+            licenseNot: "MIT|ISC|Apache-2\\.0",
+          },
+        },
+      ],
+      allowed: [
+        {
+          name: "not-in-allowed",
+          from: {},
+          to: {
+            license: "MIT|ISC|Apache-2\\.0",
+          },
+        },
+      ],
+      allowedSeverity: "warn",
+    });
+  });
+
+  it("normalizes arrays of re's in exoticRequires to regular regular expressions", () => {
+    expect(
+      normalize({
+        forbidden: [
+          {
+            name: "exotic-require-thing",
+            severity: "warn",
+            from: {},
+            to: {
+              exoticRequireNot: ["want", "need", "mustHave"],
+            },
+          },
+        ],
+        allowed: [
+          {
+            from: {},
+            to: {
+              exoticRequire: ["want", "need", "mustHave"],
+            },
+          },
+        ],
+      })
+    ).to.deep.equal({
+      forbidden: [
+        {
+          name: "exotic-require-thing",
+          severity: "warn",
+          from: {},
+          to: {
+            exoticRequireNot: "want|need|mustHave",
+          },
+        },
+      ],
+      allowed: [
+        {
+          name: "not-in-allowed",
+          from: {},
+          to: {
+            exoticRequire: "want|need|mustHave",
+          },
+        },
+      ],
+      allowedSeverity: "warn",
+    });
+  });
 });

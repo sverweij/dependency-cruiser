@@ -1,3 +1,4 @@
+/* eslint-disable security/detect-object-injection */
 const VALID_SEVERITIES = /^(error|warn|info|ignore)$/;
 const DEFAULT_SEVERITY = "warn";
 const DEFAULT_RULE = "unnamed";
@@ -16,12 +17,19 @@ function normalizeName(pRule) {
 
 function normalizePaths(pDependencyEnd) {
   let lDependencyEnd = pDependencyEnd;
+  const lArrayOrStringProperties = [
+    "path",
+    "pathNot",
+    "license",
+    "licenseNot",
+    "exoticRequire",
+    "exoticRequireNot",
+  ];
 
-  if (Array.isArray(lDependencyEnd.path)) {
-    lDependencyEnd.path = lDependencyEnd.path.join("|");
-  }
-  if (Array.isArray(lDependencyEnd.pathNot)) {
-    lDependencyEnd.pathNot = lDependencyEnd.pathNot.join("|");
+  for (const lProperty of lArrayOrStringProperties) {
+    if (Array.isArray(lDependencyEnd[lProperty])) {
+      lDependencyEnd[lProperty] = lDependencyEnd[lProperty].join("|");
+    }
   }
   return lDependencyEnd;
 }

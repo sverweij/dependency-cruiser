@@ -608,7 +608,7 @@ APL in the "license" attribute of its package.json (e.g.
 [SPDX](https://spdx.org) compatible expressions like `GPL-3.0`, `APL-1.0` and
 `MIT OR GPL-3.0` but also on non SPDX compatible)
 
-To only allow licenses from an approved list (e.g. a whitelist provided by your
+To only allow licenses from an approved list (e.g. a greenlist provided by your
 legal department):
 
 ```json
@@ -616,9 +616,12 @@ legal department):
   "name": "only-licenses-approved-by-legal",
   "severity": "warn",
   "from": {},
-  "to": { "licenseNot": "MIT|ISC" }
+  "to": { "licenseNot": ["MIT", " ISC"] }
 }
 ```
+
+> Just with _path_ and _pathNot_ you can pass an array of regular expressions
+> as well if you think that's more legible.
 
 Note: dependency-cruiser can help out a bit here, but you remain responsible
 for managing your own legal stuff. To re-iterate what is in the
