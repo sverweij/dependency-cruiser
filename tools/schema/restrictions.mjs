@@ -2,16 +2,36 @@ import dependencyType from "./dependency-type.mjs";
 
 const BASE_RESTRICTION = {
   path: {
-    type: "string",
     description:
-      "A regular expression an end of a dependency should match to be catched by " +
-      "this rule.",
+      "A regular expression or an array of regular expressions an end of a " +
+      "dependency should match to be caught by this rule.",
+    oneOf: [
+      {
+        type: "string",
+      },
+      {
+        type: "array",
+        items: {
+          type: "string",
+        },
+      },
+    ],
   },
   pathNot: {
-    type: "string",
     description:
-      "A regular expression an end of a dependency should NOT match to be catched " +
-      "by this rule.",
+      "A regular expression or an array of regular expressions an end of a " +
+      "dependency should NOT match to be caught by this rule.",
+    oneOf: [
+      {
+        type: "string",
+      },
+      {
+        type: "array",
+        items: {
+          type: "string",
+        },
+      },
+    ],
   },
 };
 

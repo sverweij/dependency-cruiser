@@ -19,7 +19,14 @@
         "pathNot": "^(src/cli/compile-config/index\\.js)$"
       },
       "to": {
-        "pathNot": "^src/(main|utl)/|^node_modules|^fs$|^path$|$1|^package.json$"
+        "pathNot": [
+          "^src/(main|utl)/",
+          "^node_modules",
+          "^fs$",
+          "^path$",
+          "$1",
+          "^package.json$"
+        ]
       }
     },
     {
@@ -28,7 +35,12 @@
       "severity": "warn",
       "from": { "path": "^(src/cli/compile-config/index\\.js)$" },
       "to": {
-        "pathNot": "$1|^src/(cli|main)|^node_modules|^(fs|path|package.json)$"
+        "pathNot": [
+          "$1",
+          "^src/(cli|main)",
+          "^node_modules",
+          "^(fs|path|package.json)$"
+        ]
       }
     },
     {
@@ -39,7 +51,7 @@
         "path": "(^src/report/)"
       },
       "to": {
-        "pathNot": "$1|^node_modules|^(path|package.json)$|^src/utl"
+        "pathNot": ["$1", "^node_modules", "^(path|package.json)$", "^src/utl"]
       }
     },
     {
@@ -50,7 +62,12 @@
         "path": "(^src/extract/)"
       },
       "to": {
-        "pathNot": "$1|^node_modules|^(path|fs|module|package.json)$|^src/utl",
+        "pathNot": [
+          "$1",
+          "^node_modules",
+          "^(path|fs|module|package.json)$",
+          "^src/utl"
+        ],
         "exoticallyRequired": false
       }
     },
@@ -59,14 +76,18 @@
       "comment": "This module in the bin/ folder depends on something not in the cli interface. This means it either contains code that doesn't belong in bin/, or the thing it depends upon should be put in the cli interface. ",
       "severity": "error",
       "from": { "path": "(^bin/)" },
-      "to": { "pathNot": "^src/cli|^node_modules|^package.json$" }
+      "to": { "pathNot": ["^src/cli", "^node_modules", "^package.json$"] }
     },
     {
       "name": "restrict-fs-access",
       "comment": "This module depends on a the node 'fs' module, and it resides in a spot where that is not allowed.",
       "severity": "error",
       "from": {
-        "pathNot": "^src/(extract/parse|extract/resolve|extract/gather-initial-sources\\.js|cli)|^test|^tools"
+        "pathNot": [
+          "^src/(extract/parse|extract/resolve|extract/gather-initial-sources\\.js|cli)",
+          "^test",
+          "^tools"
+        ]
       },
       "to": { "path": "^fs$" }
     },
@@ -75,7 +96,7 @@
       "comment": "This test depends on something in the test tree that is neither a utility, nor a mock nor a fixture.",
       "severity": "error",
       "from": { "path": "(^test/[^\\/]+/)[^\\.]+\\.spec\\.js" },
-      "to": { "path": "^test/[^\\/]+/.+", "pathNot": "utl|$1.+\\.json$" }
+      "to": { "path": "^test/[^\\/]+/.+", "pathNot": ["utl", "$1.+\\.json$"] }
     },
     {
       "name": "prefer-lodash-individuals",

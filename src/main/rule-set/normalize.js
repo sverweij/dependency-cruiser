@@ -14,11 +14,25 @@ function normalizeName(pRule) {
   return pRule ? pRule : DEFAULT_RULE;
 }
 
+function normalizePaths(pDependencyEnd) {
+  let lDependencyEnd = pDependencyEnd;
+
+  if (Array.isArray(lDependencyEnd.path)) {
+    lDependencyEnd.path = lDependencyEnd.path.join("|");
+  }
+  if (Array.isArray(lDependencyEnd.pathNot)) {
+    lDependencyEnd.pathNot = lDependencyEnd.pathNot.join("|");
+  }
+  return lDependencyEnd;
+}
+
 function normalizeRule(pRule) {
   return {
     ...pRule,
     severity: normalizeSeverity(pRule.severity),
     name: normalizeName(pRule.name),
+    from: normalizePaths(pRule.from),
+    to: normalizePaths(pRule.to),
   };
 }
 
@@ -41,6 +55,8 @@ module.exports = (pRuleSet) => {
       pRuleSet.allowed = pRuleSet.allowed.map((pRule) => ({
         ...pRule,
         name: "not-in-allowed",
+        from: normalizePaths(pRule.from),
+        to: normalizePaths(pRule.to),
       }));
     }
   }

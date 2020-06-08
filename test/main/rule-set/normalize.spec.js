@@ -156,4 +156,74 @@ describe("main/rule-set/normalize", () => {
       })
     ).to.deep.equal({});
   });
+
+  it("normalizes arrays of re's in paths to regular regular expressions (forbidden)", () => {
+    expect(
+      normalize({
+        forbidden: [
+          {
+            name: "regularize-regular",
+            severity: "warn",
+            from: {
+              path: ["src", "bin"],
+              pathNot: ["src/exceptions", "bin/aural"],
+            },
+            to: {
+              path: ["super/exclusive", "donot/gohere", "norhere"],
+              pathNot: ["super/exclusive/this-is-ok-though\\.js", "snorhere"],
+            },
+          },
+        ],
+      })
+    ).to.deep.equal({
+      forbidden: [
+        {
+          name: "regularize-regular",
+          severity: "warn",
+          from: {
+            path: "src|bin",
+            pathNot: "src/exceptions|bin/aural",
+          },
+          to: {
+            path: "super/exclusive|donot/gohere|norhere",
+            pathNot: "super/exclusive/this-is-ok-though\\.js|snorhere",
+          },
+        },
+      ],
+    });
+  });
+
+  it("normalizes arrays of re's in paths to regular regular expressions (allowed)", () => {
+    expect(
+      normalize({
+        allowed: [
+          {
+            from: {
+              path: ["src", "bin"],
+              pathNot: ["src/exceptions", "bin/aural"],
+            },
+            to: {
+              path: ["super/exclusive", "donot/gohere", "norhere"],
+              pathNot: ["super/exclusive/this-is-ok-though\\.js", "snorhere"],
+            },
+          },
+        ],
+      })
+    ).to.deep.equal({
+      allowed: [
+        {
+          name: "not-in-allowed",
+          from: {
+            path: "src|bin",
+            pathNot: "src/exceptions|bin/aural",
+          },
+          to: {
+            path: "super/exclusive|donot/gohere|norhere",
+            pathNot: "super/exclusive/this-is-ok-though\\.js|snorhere",
+          },
+        },
+      ],
+      allowedSeverity: "warn",
+    });
+  });
 });
