@@ -361,6 +361,46 @@ group matching:
 ... which makes sure dependency-cruiser does not match stuff in the from folder
 currently being matched.
 
+#### Using an array of regular expressions
+
+When your regular expressions grow bigger, you might want to express them
+as an array of regular expressions instead of just one regular expression to
+improve legibility.
+
+<details>
+<summary>example ...</summary>
+
+```javascript
+{
+  from: {
+    path: "(^src/report/)"
+  },
+  to: {
+    pathNot: "$1|^node_modules|^(path|package.json)$|^src/utl"
+  }
+}
+```
+
+```javascript
+{
+  from: {
+    path: "(^src/report/)"
+  },
+  to: {
+      pathNot: [
+        "$1",
+        "^node_modules",
+        "^(path|package.json)$",
+        "^src/utl"
+      ]
+  }
+}
+```
+
+![focus](assets/filtering/focus.svg)
+
+</details>
+
 ### orphans
 
 A Boolean indicating whether or not to match modules that have no incoming
