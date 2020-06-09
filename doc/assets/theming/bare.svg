@@ -26,8 +26,8 @@
 </g>
 <g id="clust4" class="cluster">
 <title>cluster_src/main/options</title>
-<polygon fill="none" stroke="black" points="98,-24 98,-171 335,-171 335,-24 98,-24"/>
-<text text-anchor="middle" x="216.5" y="-155.8" font-family="Times,serif" font-size="14.00">options</text>
+<polygon fill="none" stroke="black" points="96,-24 96,-171 333,-171 333,-24 96,-24"/>
+<text text-anchor="middle" x="214.5" y="-155.8" font-family="Times,serif" font-size="14.00">options</text>
 </g>
 <g id="clust5" class="cluster">
 <title>cluster_src/main/resolve&#45;options</title>
@@ -38,6 +38,11 @@
 <title>cluster_src/main/rule&#45;set</title>
 <polygon fill="none" stroke="black" points="326,-179 326,-254 563,-254 563,-179 326,-179"/>
 <text text-anchor="middle" x="444.5" y="-238.8" font-family="Times,serif" font-size="14.00">rule&#45;set</text>
+</g>
+<g id="clust7" class="cluster">
+<title>cluster_src/main/utl</title>
+<polygon fill="none" stroke="black" points="341,-96 341,-171 563,-171 563,-96 341,-96"/>
+<text text-anchor="middle" x="452" y="-155.8" font-family="Times,serif" font-size="14.00">utl</text>
 </g>
 <!-- src/main/files&#45;and&#45;dirs/normalize.js -->
 <g id="node1" class="node">
@@ -67,31 +72,31 @@
 <g id="node3" class="node">
 <title>src/main/options/normalize.js</title>
 <g id="a_node3"><a xlink:href="src/main/options/normalize.js" xlink:title="normalize.js">
-<ellipse fill="none" stroke="black" cx="161" cy="-122" rx="54.69" ry="18"/>
-<text text-anchor="middle" x="161" y="-118.3" font-family="Times,serif" font-size="14.00">normalize.js</text>
+<ellipse fill="none" stroke="black" cx="159" cy="-122" rx="54.69" ry="18"/>
+<text text-anchor="middle" x="159" y="-118.3" font-family="Times,serif" font-size="14.00">normalize.js</text>
 </a>
 </g>
 </g>
 <!-- src/main/index.js&#45;&gt;src/main/options/normalize.js -->
 <g id="edge2" class="edge">
 <title>src/main/index.js&#45;&gt;src/main/options/normalize.js</title>
-<path fill="none" stroke="black" d="M190.1,-267.33C184.63,-263.82 179.5,-259.42 176,-254 155.83,-222.81 155.2,-178.52 157.45,-150.28"/>
-<polygon fill="black" stroke="black" points="160.94,-150.59 158.42,-140.3 153.97,-149.92 160.94,-150.59"/>
+<path fill="none" stroke="black" d="M190.16,-267.29C184.68,-263.78 179.54,-259.39 176,-254 155.56,-222.9 154.2,-178.59 155.95,-150.32"/>
+<polygon fill="black" stroke="black" points="159.44,-150.57 156.74,-140.33 152.46,-150.02 159.44,-150.57"/>
 </g>
 <!-- src/main/options/validate.js -->
 <g id="node4" class="node">
 <title>src/main/options/validate.js</title>
 <g id="a_node4"><a xlink:href="src/main/options/validate.js" xlink:title="validate.js">
-<ellipse fill="none" stroke="black" cx="280" cy="-122" rx="46.59" ry="18"/>
-<text text-anchor="middle" x="280" y="-118.3" font-family="Times,serif" font-size="14.00">validate.js</text>
+<ellipse fill="none" stroke="black" cx="278" cy="-122" rx="46.59" ry="18"/>
+<text text-anchor="middle" x="278" y="-118.3" font-family="Times,serif" font-size="14.00">validate.js</text>
 </a>
 </g>
 </g>
 <!-- src/main/index.js&#45;&gt;src/main/options/validate.js -->
 <g id="edge3" class="edge">
 <title>src/main/index.js&#45;&gt;src/main/options/validate.js</title>
-<path fill="none" stroke="black" d="M196.39,-265.11C192.99,-261.9 189.96,-258.17 188,-254 173.86,-223.81 167.07,-204.94 188,-179 198.57,-165.91 209.96,-178.55 225,-171 237.21,-164.87 248.89,-155.39 258.32,-146.47"/>
-<polygon fill="black" stroke="black" points="261.03,-148.71 265.68,-139.19 256.11,-143.74 261.03,-148.71"/>
+<path fill="none" stroke="black" d="M196.39,-265.11C192.99,-261.9 189.96,-258.17 188,-254 173.86,-223.81 167.22,-205.06 188,-179 197.95,-166.52 208.78,-178.24 223,-171 235.18,-164.8 246.85,-155.31 256.29,-146.4"/>
+<polygon fill="black" stroke="black" points="258.99,-148.65 263.65,-139.13 254.07,-143.66 258.99,-148.65"/>
 </g>
 <!-- src/main/resolve&#45;options/normalize.js -->
 <g id="node5" class="node">
@@ -142,22 +147,37 @@
 <g id="node8" class="node">
 <title>src/main/options/defaults.json</title>
 <g id="a_node8"><a xlink:href="src/main/options/defaults.json" xlink:title="defaults.json">
-<ellipse fill="none" stroke="black" cx="162" cy="-50" rx="55.79" ry="18"/>
-<text text-anchor="middle" x="162" y="-46.3" font-family="Times,serif" font-size="14.00">defaults.json</text>
+<ellipse fill="none" stroke="black" cx="160" cy="-50" rx="55.79" ry="18"/>
+<text text-anchor="middle" x="160" y="-46.3" font-family="Times,serif" font-size="14.00">defaults.json</text>
 </a>
 </g>
 </g>
 <!-- src/main/options/normalize.js&#45;&gt;src/main/options/defaults.json -->
 <g id="edge7" class="edge">
 <title>src/main/options/normalize.js&#45;&gt;src/main/options/defaults.json</title>
-<path fill="none" stroke="black" d="M161.25,-103.7C161.36,-95.98 161.49,-86.71 161.61,-78.11"/>
-<polygon fill="black" stroke="black" points="165.11,-78.15 161.76,-68.1 158.11,-78.05 165.11,-78.15"/>
+<path fill="none" stroke="black" d="M159.25,-103.7C159.36,-95.98 159.49,-86.71 159.61,-78.11"/>
+<polygon fill="black" stroke="black" points="163.11,-78.15 159.76,-68.1 156.11,-78.05 163.11,-78.15"/>
+</g>
+<!-- src/main/utl/normalize&#45;re&#45;properties.js -->
+<g id="node9" class="node">
+<title>src/main/utl/normalize&#45;re&#45;properties.js</title>
+<g id="a_node9"><a xlink:href="src/main/utl/normalize-re-properties.js" xlink:title="normalize&#45;re&#45;properties.js">
+<ellipse fill="none" stroke="black" cx="452" cy="-122" rx="102.88" ry="18"/>
+<text text-anchor="middle" x="452" y="-118.3" font-family="Times,serif" font-size="14.00">normalize&#45;re&#45;properties.js</text>
+</a>
+</g>
+</g>
+<!-- src/main/rule&#45;set/normalize.js&#45;&gt;src/main/utl/normalize&#45;re&#45;properties.js -->
+<g id="edge8" class="edge">
+<title>src/main/rule&#45;set/normalize.js&#45;&gt;src/main/utl/normalize&#45;re&#45;properties.js</title>
+<path fill="none" stroke="black" d="M490.05,-187.22C483.47,-176.1 474.71,-161.32 467.25,-148.73"/>
+<polygon fill="black" stroke="black" points="470.21,-146.86 462.1,-140.04 464.19,-150.43 470.21,-146.86"/>
 </g>
 <!-- src/main/rule&#45;set/validate.js&#45;&gt;src/main/options/validate.js -->
-<g id="edge8" class="edge">
+<g id="edge9" class="edge">
 <title>src/main/rule&#45;set/validate.js&#45;&gt;src/main/options/validate.js</title>
-<path fill="none" stroke="black" d="M361.53,-188.38C346.16,-176.06 324.53,-158.71 307.41,-144.98"/>
-<polygon fill="black" stroke="black" points="309.4,-142.1 299.41,-138.57 305.03,-147.56 309.4,-142.1"/>
+<path fill="none" stroke="black" d="M360.28,-188.72C352.88,-183.2 344.52,-176.88 337,-171 326.35,-162.68 314.79,-153.34 304.74,-145.13"/>
+<polygon fill="black" stroke="black" points="306.66,-142.18 296.71,-138.54 302.22,-147.59 306.66,-142.18"/>
 </g>
 </g>
 </svg>
