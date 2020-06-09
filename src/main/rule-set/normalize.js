@@ -1,3 +1,5 @@
+const normalizeREProperties = require("../utl/normalize-re-properties");
+
 const VALID_SEVERITIES = /^(error|warn|info|ignore)$/;
 const DEFAULT_SEVERITY = "warn";
 const DEFAULT_RULE = "unnamed";
@@ -10,8 +12,8 @@ function normalizeSeverity(pSeverity) {
     : DEFAULT_SEVERITY;
 }
 
-function normalizeName(pRule) {
-  return pRule ? pRule : DEFAULT_RULE;
+function normalizeName(pRuleName) {
+  return pRuleName ? pRuleName : DEFAULT_RULE;
 }
 
 function normalizeRule(pRule) {
@@ -19,6 +21,8 @@ function normalizeRule(pRule) {
     ...pRule,
     severity: normalizeSeverity(pRule.severity),
     name: normalizeName(pRule.name),
+    from: normalizeREProperties(pRule.from),
+    to: normalizeREProperties(pRule.to),
   };
 }
 
@@ -41,6 +45,8 @@ module.exports = (pRuleSet) => {
       pRuleSet.allowed = pRuleSet.allowed.map((pRule) => ({
         ...pRule,
         name: "not-in-allowed",
+        from: normalizeREProperties(pRule.from),
+        to: normalizeREProperties(pRule.to),
       }));
     }
   }

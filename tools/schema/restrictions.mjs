@@ -2,16 +2,36 @@ import dependencyType from "./dependency-type.mjs";
 
 const BASE_RESTRICTION = {
   path: {
-    type: "string",
     description:
-      "A regular expression an end of a dependency should match to be catched by " +
-      "this rule.",
+      "A regular expression or an array of regular expressions an end of a " +
+      "dependency should match to be caught by this rule.",
+    oneOf: [
+      {
+        type: "string",
+      },
+      {
+        type: "array",
+        items: {
+          type: "string",
+        },
+      },
+    ],
   },
   pathNot: {
-    type: "string",
     description:
-      "A regular expression an end of a dependency should NOT match to be catched " +
-      "by this rule.",
+      "A regular expression or an array of regular expressions an end of a " +
+      "dependency should NOT match to be caught by this rule.",
+    oneOf: [
+      {
+        type: "string",
+      },
+      {
+        type: "array",
+        items: {
+          type: "string",
+        },
+      },
+    ],
   },
 };
 
@@ -76,15 +96,35 @@ export default {
             "Whether or not to match when the dependency is exotically required.",
         },
         exoticRequire: {
-          type: "string",
           description:
             "A regular expression to match against any 'exotic' require strings",
+          oneOf: [
+            {
+              type: "string",
+            },
+            {
+              type: "array",
+              items: {
+                type: "string",
+              },
+            },
+          ],
         },
         exoticRequireNot: {
-          type: "string",
           description:
             "A regular expression to match against any 'exotic' require strings - " +
             "when it should NOT be caught by the rule",
+          oneOf: [
+            {
+              type: "string",
+            },
+            {
+              type: "array",
+              items: {
+                type: "string",
+              },
+            },
+          ],
         },
         preCompilationOnly: {
           type: "boolean",
@@ -109,17 +149,37 @@ export default {
             "defined in _both_ npm and npm-dev)",
         },
         license: {
-          type: "string",
           description:
             "Whether or not to match modules that were released under one of the " +
             "mentioned licenses. E.g. to flag GPL-1.0, GPL-2.0 licensed modules " +
             '(e.g. because your app is not compatible with the GPL) use "GPL"',
+          oneOf: [
+            {
+              type: "string",
+            },
+            {
+              type: "array",
+              items: {
+                type: "string",
+              },
+            },
+          ],
         },
         licenseNot: {
-          type: "string",
           description:
             "Whether or not to match modules that were NOT released under one of " +
             'the mentioned licenses. E.g. to flag everyting non MIT use "MIT" here',
+          oneOf: [
+            {
+              type: "string",
+            },
+            {
+              type: "array",
+              items: {
+                type: "string",
+              },
+            },
+          ],
         },
       },
     },

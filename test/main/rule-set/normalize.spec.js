@@ -156,4 +156,166 @@ describe("main/rule-set/normalize", () => {
       })
     ).to.deep.equal({});
   });
+
+  it("normalizes arrays of re's in paths to regular regular expressions (forbidden)", () => {
+    expect(
+      normalize({
+        forbidden: [
+          {
+            name: "regularize-regular",
+            severity: "warn",
+            from: {
+              path: ["src", "bin"],
+              pathNot: ["src/exceptions", "bin/aural"],
+            },
+            to: {
+              path: ["super/exclusive", "donot/gohere", "norhere"],
+              pathNot: ["super/exclusive/this-is-ok-though\\.js", "snorhere"],
+            },
+          },
+        ],
+      })
+    ).to.deep.equal({
+      forbidden: [
+        {
+          name: "regularize-regular",
+          severity: "warn",
+          from: {
+            path: "src|bin",
+            pathNot: "src/exceptions|bin/aural",
+          },
+          to: {
+            path: "super/exclusive|donot/gohere|norhere",
+            pathNot: "super/exclusive/this-is-ok-though\\.js|snorhere",
+          },
+        },
+      ],
+    });
+  });
+
+  it("normalizes arrays of re's in paths to regular regular expressions (allowed)", () => {
+    expect(
+      normalize({
+        allowed: [
+          {
+            from: {
+              path: ["src", "bin"],
+              pathNot: ["src/exceptions", "bin/aural"],
+            },
+            to: {
+              path: ["super/exclusive", "donot/gohere", "norhere"],
+              pathNot: ["super/exclusive/this-is-ok-though\\.js", "snorhere"],
+            },
+          },
+        ],
+      })
+    ).to.deep.equal({
+      allowed: [
+        {
+          name: "not-in-allowed",
+          from: {
+            path: "src|bin",
+            pathNot: "src/exceptions|bin/aural",
+          },
+          to: {
+            path: "super/exclusive|donot/gohere|norhere",
+            pathNot: "super/exclusive/this-is-ok-though\\.js|snorhere",
+          },
+        },
+      ],
+      allowedSeverity: "warn",
+    });
+  });
+
+  it("normalizes arrays of re's in licenses to regular regular expressions", () => {
+    expect(
+      normalize({
+        forbidden: [
+          {
+            name: "license-thing",
+            severity: "warn",
+            from: {},
+            to: {
+              licenseNot: ["MIT", "ISC", "Apache-2\\.0"],
+            },
+          },
+        ],
+        allowed: [
+          {
+            from: {},
+            to: {
+              license: ["MIT", "ISC", "Apache-2\\.0"],
+            },
+          },
+        ],
+      })
+    ).to.deep.equal({
+      forbidden: [
+        {
+          name: "license-thing",
+          severity: "warn",
+          from: {},
+          to: {
+            licenseNot: "MIT|ISC|Apache-2\\.0",
+          },
+        },
+      ],
+      allowed: [
+        {
+          name: "not-in-allowed",
+          from: {},
+          to: {
+            license: "MIT|ISC|Apache-2\\.0",
+          },
+        },
+      ],
+      allowedSeverity: "warn",
+    });
+  });
+
+  it("normalizes arrays of re's in exoticRequires to regular regular expressions", () => {
+    expect(
+      normalize({
+        forbidden: [
+          {
+            name: "exotic-require-thing",
+            severity: "warn",
+            from: {},
+            to: {
+              exoticRequireNot: ["want", "need", "mustHave"],
+            },
+          },
+        ],
+        allowed: [
+          {
+            from: {},
+            to: {
+              exoticRequire: ["want", "need", "mustHave"],
+            },
+          },
+        ],
+      })
+    ).to.deep.equal({
+      forbidden: [
+        {
+          name: "exotic-require-thing",
+          severity: "warn",
+          from: {},
+          to: {
+            exoticRequireNot: "want|need|mustHave",
+          },
+        },
+      ],
+      allowed: [
+        {
+          name: "not-in-allowed",
+          from: {},
+          to: {
+            exoticRequire: "want|need|mustHave",
+          },
+        },
+      ],
+      allowedSeverity: "warn",
+    });
+  });
 });

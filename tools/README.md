@@ -12,7 +12,7 @@ for ease of maintenance).
 To generate the schemas from their sources run:
 
 ```sh
-node utl/generate-schemas.utl.js
+node tools/generate-schemas.utl.mjs
 ```
 
 > The build and version lifecycle scripts take care of this automatically, so

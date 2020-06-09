@@ -2,13 +2,15 @@ import { DependencyType, SeverityType } from "./shared-types";
 
 export interface IFromRestriction {
   /**
-   * A regular expression an end of a dependency should match to be catched by this rule.
+   * A regular expression or an array of regular expressions an end of a
+   * dependency should match to be caught by this rule.
    */
-  path?: string;
+  path?: string | string[];
   /**
-   * A regular expression an end of a dependency should NOT match to be catched by this rule.
+   * A regular expression or an array of regular expressions an end of a
+   * dependency should NOT match to be caught by this rule.
    */
-  pathNot?: string;
+  pathNot?: string | string[];
   /**
    * Whether or not to match when the module is an orphan (= has no incoming or outgoing
    * dependencies). When this property it is part of a rule, dependency-cruiser will
@@ -19,13 +21,15 @@ export interface IFromRestriction {
 
 export interface IToRestriction {
   /**
-   * A regular expression an end of a dependency should match to be catched by this rule.
+   * A regular expression or an array of regular expressions an end of a
+   * dependency should match to be caught by this rule.
    */
-  path?: string;
+  path?: string | string[];
   /**
-   * A regular expression an end of a dependency should NOT match to be catched by this rule.
+   * A regular expression or an array of regular expressions an end of a
+   * dependency should NOT match to be caught by this rule.
    */
-  pathNot?: string;
+  pathNot?: string | string[];
   /**
    * Whether or not to match modules dependency-cruiser could not resolve (and probably
    * aren't on disk). For this one too: leave out if you don't care either way.
@@ -52,11 +56,11 @@ export interface IToRestriction {
   /**
    * A regular expression to match against any 'exotic' require strings
    */
-  exoticRequire?: string;
+  exoticRequire?: string | string[];
   /**
    * A regular expression to match against any 'exotic' require strings - when it should NOT be caught by the rule
    */
-  exoticRequireNot?: string;
+  exoticRequireNot?: string | string[];
   /**
    * true if this dependency only exists before compilation (like type only imports),
    * false in all other cases. Only returned when the tsPreCompilationDeps is set to 'specify'.
@@ -76,34 +80,38 @@ export interface IToRestriction {
    * licenses. E.g. to flag GPL-1.0, GPL-2.0 licensed modules (e.g. because your app
    * is not compatible with the GPL) use "GPL"
    */
-  license?: string;
+  license?: string | string[];
   /**
    * Whether or not to match modules that were NOT released under one of the mentioned
    * licenses. E.g. to flag everyting non MIT use "MIT" here
    */
-  licenseNot?: string;
+  licenseNot?: string | string[];
 }
 
 export interface IReachabilityFromRestrictionType {
   /**
-   * A regular expression an end of a dependency should match to be catched by this rule.
+   * A regular expression or an array of regular expressions an end of a
+   * dependency should match to be caught by this rule.
    */
-  path?: string;
+  path?: string | string[];
   /**
-   * A regular expression an end of a dependency should NOT match to be catched by this rule.
+   * A regular expression or an array of regular expressions an end of a
+   * dependency should NOT match to be caught by this rule.
    */
-  pathNot?: string;
+  pathNot?: string | string[];
 }
 
 export interface IReachabilityToRestrictionType {
   /**
-   * A regular expression an end of a dependency should match to be catched by this rule.
+   * A regular expression or an array of regular expressions an end of a
+   * dependency should match to be caught by this rule.
    */
-  path?: string;
+  path?: string | string[];
   /**
-   * A regular expression an end of a dependency should NOT match to be catched by this rule.
+   * A regular expression or an array of regular expressions an end of a
+   * dependency should NOT match to be caught by this rule.
    */
-  pathNot?: string;
+  pathNot?: string | string[];
   /**
    * Whether or not to match modules that aren't reachable from the from part of the rule.
    */
