@@ -1,3 +1,4 @@
+import REAsStringsType from "./re-as-strings-type.mjs";
 import compoundDoNotFollowType from "./compound-donot-follow-type.mjs";
 import compoundExcludeType from "./compound-exclude-type.mjs";
 import compoundFocusType from "./compound-focus-type.mjs";
@@ -17,9 +18,7 @@ export default {
           description:
             "a regular expression for modules to include, but not follow further",
           oneOf: [
-            {
-              type: "string",
-            },
+            { $ref: "#/definitions/REAsStringsType" },
             { $ref: "#/definitions/CompoundDoNotFollowType" },
           ],
         },
@@ -27,9 +26,7 @@ export default {
           description:
             "a regular expression for modules to exclude from being cruised",
           oneOf: [
-            {
-              type: "string",
-            },
+            { $ref: "#/definitions/REAsStringsType" },
             { $ref: "#/definitions/CompoundExcludeType" },
           ],
         },
@@ -38,9 +35,7 @@ export default {
             "a regular expression for modules to cruise; anything outside it will " +
             "be skipped",
           oneOf: [
-            {
-              type: "string",
-            },
+            { $ref: "#/definitions/REAsStringsType" },
             { $ref: "#/definitions/CompoundIncludeOnlyType" },
           ],
         },
@@ -50,9 +45,7 @@ export default {
             "in its output, as well as their neighbours (direct dependencies and " +
             "dependents)",
           oneOf: [
-            {
-              type: "string",
-            },
+            { $ref: "#/definitions/REAsStringsType" },
             { $ref: "#/definitions/CompoundFocusType" },
           ],
         },
@@ -186,5 +179,6 @@ export default {
     ...compoundIncludeOnlyType.definitions,
     ...compoundFocusType.definitions,
     ...reporterOptions.definitions,
+    ...REAsStringsType.definitions,
   },
 };

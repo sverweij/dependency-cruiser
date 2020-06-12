@@ -34,23 +34,23 @@ export interface ICruiseOptions {
    *
    * ... or conditions that describe what dependencies not to follow
    */
-  doNotFollow?: string | IDoNotFollowType;
+  doNotFollow?: string | string[] | IDoNotFollowType;
   /**
    * regular expression describing which dependencies the function
    * should not cruise
    */
-  exclude?: string | IExcludeType;
+  exclude?: string | string[] | IExcludeType;
   /**
    * regular expression describing which dependencies the function
    * should cruise - anything not matching this will be skipped
    */
-  includeOnly?: string | IIncludeOnlyType;
+  includeOnly?: string | string[] | IIncludeOnlyType;
   /**
    * dependency-cruiser will include modules matching this regular expression
    * in its output, as well as their neighbours (direct dependencies and
    * dependents)
    */
-  focus?: string | IFocusType;
+  focus?: string | string[] | IFocusType;
   /**
    * the maximum depth to cruise; 0 <= n <= 99
    * (default: 0, which means 'infinite depth')

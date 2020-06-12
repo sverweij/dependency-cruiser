@@ -43,7 +43,7 @@ export interface IDotReporterOptions {
    * Regular expressions to collapse to. For the "dot" reporter defaults
    * to null, but "node_modules/[^/]+" is recommended for most use cases.
    */
-  collapsePattern?: string;
+  collapsePattern?: string | string[];
   /**
    * filters to apply to the reporter before rendering it (e.g. to leave
    * out details from the graphical output that are not relevant for the
