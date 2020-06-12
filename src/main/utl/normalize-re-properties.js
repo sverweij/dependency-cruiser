@@ -10,15 +10,15 @@ const RE_PROPERTIES = [
 ];
 
 module.exports = function normalizeREProperties(
-  pDependencyEnd,
+  pPropertyContainer,
   pREProperties = RE_PROPERTIES
 ) {
-  let lDependencyEnd = pDependencyEnd;
+  let lPropertyContainer = pPropertyContainer;
 
   for (const lProperty of pREProperties) {
-    if (Array.isArray(lDependencyEnd[lProperty])) {
-      lDependencyEnd[lProperty] = lDependencyEnd[lProperty].join("|");
+    if (Array.isArray(lPropertyContainer[lProperty])) {
+      lPropertyContainer[lProperty] = lPropertyContainer[lProperty].join("|");
     }
   }
-  return lDependencyEnd;
+  return lPropertyContainer;
 };

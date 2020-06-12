@@ -1,3 +1,4 @@
+const normalizeREProperties = require("../utl/normalize-re-properties");
 const defaults = require("./defaults.json");
 
 function uniq(pArray) {
@@ -5,14 +6,14 @@ function uniq(pArray) {
 }
 
 function normalizeFilterOption(pFilterOption) {
-  const lFilterOption = pFilterOption || {};
+  let lReturnValue = pFilterOption || {};
 
-  if (typeof lFilterOption === "string") {
-    return {
-      path: lFilterOption,
+  if (typeof lReturnValue === "string" || Array.isArray(lReturnValue)) {
+    lReturnValue = {
+      path: lReturnValue,
     };
   }
-  return lFilterOption;
+  return normalizeREProperties(lReturnValue, ["path"]);
 }
 
 module.exports = (pOptions) => {

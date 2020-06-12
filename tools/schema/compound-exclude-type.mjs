@@ -1,3 +1,5 @@
+import REAsStringsType from "./re-as-strings-type.mjs";
+
 export default {
   definitions: {
     CompoundExcludeType: {
@@ -6,9 +8,9 @@ export default {
       additionalProperties: false,
       properties: {
         path: {
-          type: "string",
           description:
             "a regular expression for modules to exclude from being cruised",
+          $ref: "#/definitions/REAsStringsType",
         },
         dynamic: {
           type: "boolean",
@@ -16,6 +18,7 @@ export default {
             "a boolean indicating whether or not to exclude dynamic dependencies",
         },
       },
+      ...REAsStringsType.definitions,
     },
   },
 };

@@ -36,6 +36,26 @@ describe("main/options/normalize", () => {
       path: "42",
     });
   });
+
+  it("makes exclude arrays into an object with a string", () => {
+    expect(
+      normalizeOptions({
+        exclude: ["^aap", "^noot", "mies$"],
+      }).exclude
+    ).to.deep.equal({
+      path: "^aap|^noot|mies$",
+    });
+  });
+
+  it("makes exclude object with an array for path into an exclude path with a string for path", () => {
+    expect(
+      normalizeOptions({
+        exclude: { path: ["^aap", "^noot", "mies$"] },
+      }).exclude
+    ).to.deep.equal({
+      path: "^aap|^noot|mies$",
+    });
+  });
 });
 
 /* eslint no-magic-numbers: 0*/

@@ -4,7 +4,7 @@ export interface IDoNotFollowType {
   /**
    * a regular expression for modules to include, but not follow further
    */
-  path?: string;
+  path?: string | string[];
   /**
    * an array of dependency types to include, but not follow further
    */
@@ -15,7 +15,7 @@ export interface IExcludeType {
   /**
    * a regular expression for modules to exclude
    */
-  path?: string;
+  path?: string | string[];
   /**
    * a boolean indicating whether or not to exclude dynamic dependencies
    * leave out to match both
@@ -28,7 +28,7 @@ export interface IIncludeOnlyType {
    * regular expression describing which dependencies the function
    * should cruise - anything not matching this will be skipped
    */
-  path?: string;
+  path?: string | string[];
 }
 
 export interface IFocusType {
@@ -37,5 +37,5 @@ export interface IFocusType {
    * in its output, as well as their neighbours (direct dependencies and
    * dependents)
    */
-  path?: string;
+  path?: string | string[];
 }

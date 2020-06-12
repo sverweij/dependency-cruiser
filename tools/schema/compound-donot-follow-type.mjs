@@ -1,3 +1,5 @@
+import REAsStringsType from "./re-as-strings-type.mjs";
+
 export default {
   definitions: {
     CompoundDoNotFollowType: {
@@ -6,9 +8,9 @@ export default {
       additionalProperties: false,
       properties: {
         path: {
-          type: "string",
           description:
             "a regular expression for modules to include, but not follow further",
+          $ref: "#/definitions/REAsStringsType",
         },
         dependencyTypes: {
           type: "array",
@@ -18,5 +20,6 @@ export default {
         },
       },
     },
+    ...REAsStringsType.definitions,
   },
 };

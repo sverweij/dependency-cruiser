@@ -406,17 +406,11 @@
       "properties": {
         "path": {
           "description": "A regular expression or an array of regular expressions an end of a dependency should match to be caught by this rule.",
-          "oneOf": [
-            { "type": "string" },
-            { "type": "array", "items": { "type": "string" } }
-          ]
+          "$ref": "#/definitions/REAsStringsType"
         },
         "pathNot": {
           "description": "A regular expression or an array of regular expressions an end of a dependency should NOT match to be caught by this rule.",
-          "oneOf": [
-            { "type": "string" },
-            { "type": "array", "items": { "type": "string" } }
-          ]
+          "$ref": "#/definitions/REAsStringsType"
         },
         "orphan": {
           "type": "boolean",
@@ -431,17 +425,11 @@
       "properties": {
         "path": {
           "description": "A regular expression or an array of regular expressions an end of a dependency should match to be caught by this rule.",
-          "oneOf": [
-            { "type": "string" },
-            { "type": "array", "items": { "type": "string" } }
-          ]
+          "$ref": "#/definitions/REAsStringsType"
         },
         "pathNot": {
           "description": "A regular expression or an array of regular expressions an end of a dependency should NOT match to be caught by this rule.",
-          "oneOf": [
-            { "type": "string" },
-            { "type": "array", "items": { "type": "string" } }
-          ]
+          "$ref": "#/definitions/REAsStringsType"
         }
       }
     },
@@ -452,17 +440,11 @@
       "properties": {
         "path": {
           "description": "A regular expression or an array of regular expressions an end of a dependency should match to be caught by this rule.",
-          "oneOf": [
-            { "type": "string" },
-            { "type": "array", "items": { "type": "string" } }
-          ]
+          "$ref": "#/definitions/REAsStringsType"
         },
         "pathNot": {
           "description": "A regular expression or an array of regular expressions an end of a dependency should NOT match to be caught by this rule.",
-          "oneOf": [
-            { "type": "string" },
-            { "type": "array", "items": { "type": "string" } }
-          ]
+          "$ref": "#/definitions/REAsStringsType"
         },
         "couldNotResolve": {
           "type": "boolean",
@@ -482,17 +464,11 @@
         },
         "exoticRequire": {
           "description": "A regular expression to match against any 'exotic' require strings",
-          "oneOf": [
-            { "type": "string" },
-            { "type": "array", "items": { "type": "string" } }
-          ]
+          "$ref": "#/definitions/REAsStringsType"
         },
         "exoticRequireNot": {
           "description": "A regular expression to match against any 'exotic' require strings - when it should NOT be caught by the rule",
-          "oneOf": [
-            { "type": "string" },
-            { "type": "array", "items": { "type": "string" } }
-          ]
+          "$ref": "#/definitions/REAsStringsType"
         },
         "preCompilationOnly": {
           "type": "boolean",
@@ -509,17 +485,11 @@
         },
         "license": {
           "description": "Whether or not to match modules that were released under one of the mentioned licenses. E.g. to flag GPL-1.0, GPL-2.0 licensed modules (e.g. because your app is not compatible with the GPL) use \"GPL\"",
-          "oneOf": [
-            { "type": "string" },
-            { "type": "array", "items": { "type": "string" } }
-          ]
+          "$ref": "#/definitions/REAsStringsType"
         },
         "licenseNot": {
           "description": "Whether or not to match modules that were NOT released under one of the mentioned licenses. E.g. to flag everyting non MIT use \"MIT\" here",
-          "oneOf": [
-            { "type": "string" },
-            { "type": "array", "items": { "type": "string" } }
-          ]
+          "$ref": "#/definitions/REAsStringsType"
         }
       }
     },
@@ -530,23 +500,23 @@
       "properties": {
         "path": {
           "description": "A regular expression or an array of regular expressions an end of a dependency should match to be caught by this rule.",
-          "oneOf": [
-            { "type": "string" },
-            { "type": "array", "items": { "type": "string" } }
-          ]
+          "$ref": "#/definitions/REAsStringsType"
         },
         "pathNot": {
           "description": "A regular expression or an array of regular expressions an end of a dependency should NOT match to be caught by this rule.",
-          "oneOf": [
-            { "type": "string" },
-            { "type": "array", "items": { "type": "string" } }
-          ]
+          "$ref": "#/definitions/REAsStringsType"
         },
         "reachable": {
           "type": "boolean",
           "description": "Whether or not to match modules that aren't reachable from the from part of the rule."
         }
       }
+    },
+    "REAsStringsType": {
+      "oneOf": [
+        { "type": "string" },
+        { "type": "array", "items": { "type": "string" } }
+      ]
     },
     "OptionsUsedType": {
       "type": "object",
@@ -558,7 +528,7 @@
         "includeOnly": {
           "description": "a regular expression for modules to cruise; anything outside it will be skipped",
           "oneOf": [
-            { "type": "string" },
+            { "$ref": "#/definitions/REAsStringsType" },
             { "$ref": "#/definitions/CompoundIncludeOnlyType" }
           ]
         },
@@ -682,13 +652,19 @@
       "additionalProperties": false,
       "properties": {
         "path": {
-          "type": "string",
-          "description": "a regular expression for modules to exclude from being cruised"
+          "description": "a regular expression for modules to exclude from being cruised",
+          "$ref": "#/definitions/REAsStringsType"
         },
         "dynamic": {
           "type": "boolean",
           "description": "a boolean indicating whether or not to exclude dynamic dependencies"
         }
+      },
+      "REAsStringsType": {
+        "oneOf": [
+          { "type": "string" },
+          { "type": "array", "items": { "type": "string" } }
+        ]
       }
     },
     "CompoundDoNotFollowType": {
@@ -697,8 +673,8 @@
       "additionalProperties": false,
       "properties": {
         "path": {
-          "type": "string",
-          "description": "a regular expression for modules to include, but not follow further"
+          "description": "a regular expression for modules to include, but not follow further",
+          "$ref": "#/definitions/REAsStringsType"
         },
         "dependencyTypes": {
           "type": "array",
@@ -713,9 +689,15 @@
       "additionalProperties": false,
       "properties": {
         "path": {
-          "type": "string",
-          "description": "dependency-cruiser will include modules matching this regular expression in its output, as well as their neighbours (direct dependencies and dependents)"
+          "description": "dependency-cruiser will include modules matching this regular expression in its output, as well as their neighbours (direct dependencies and dependents)",
+          "$ref": "#/definitions/REAsStringsType"
         }
+      },
+      "REAsStringsType": {
+        "oneOf": [
+          { "type": "string" },
+          { "type": "array", "items": { "type": "string" } }
+        ]
       }
     },
     "CompoundFocusType": {
@@ -724,9 +706,15 @@
       "additionalProperties": false,
       "properties": {
         "path": {
-          "type": "string",
-          "description": "dependency-cruiser will include modules matching this regular expression in its output, as well as their neighbours (direct dependencies and dependents)"
+          "description": "dependency-cruiser will include modules matching this regular expression in its output, as well as their neighbours (direct dependencies and dependents)",
+          "$ref": "#/definitions/REAsStringsType"
         }
+      },
+      "REAsStringsType": {
+        "oneOf": [
+          { "type": "string" },
+          { "type": "array", "items": { "type": "string" } }
+        ]
       }
     },
     "ReporterOptionsType": {

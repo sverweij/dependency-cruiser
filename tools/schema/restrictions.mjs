@@ -1,3 +1,4 @@
+import REAsStringsType from "./re-as-strings-type.mjs";
 import dependencyType from "./dependency-type.mjs";
 
 const BASE_RESTRICTION = {
@@ -5,33 +6,13 @@ const BASE_RESTRICTION = {
     description:
       "A regular expression or an array of regular expressions an end of a " +
       "dependency should match to be caught by this rule.",
-    oneOf: [
-      {
-        type: "string",
-      },
-      {
-        type: "array",
-        items: {
-          type: "string",
-        },
-      },
-    ],
+    $ref: "#/definitions/REAsStringsType",
   },
   pathNot: {
     description:
       "A regular expression or an array of regular expressions an end of a " +
       "dependency should NOT match to be caught by this rule.",
-    oneOf: [
-      {
-        type: "string",
-      },
-      {
-        type: "array",
-        items: {
-          type: "string",
-        },
-      },
-    ],
+    $ref: "#/definitions/REAsStringsType",
   },
 };
 
@@ -98,33 +79,13 @@ export default {
         exoticRequire: {
           description:
             "A regular expression to match against any 'exotic' require strings",
-          oneOf: [
-            {
-              type: "string",
-            },
-            {
-              type: "array",
-              items: {
-                type: "string",
-              },
-            },
-          ],
+          $ref: "#/definitions/REAsStringsType",
         },
         exoticRequireNot: {
           description:
             "A regular expression to match against any 'exotic' require strings - " +
             "when it should NOT be caught by the rule",
-          oneOf: [
-            {
-              type: "string",
-            },
-            {
-              type: "array",
-              items: {
-                type: "string",
-              },
-            },
-          ],
+          $ref: "#/definitions/REAsStringsType",
         },
         preCompilationOnly: {
           type: "boolean",
@@ -153,33 +114,13 @@ export default {
             "Whether or not to match modules that were released under one of the " +
             "mentioned licenses. E.g. to flag GPL-1.0, GPL-2.0 licensed modules " +
             '(e.g. because your app is not compatible with the GPL) use "GPL"',
-          oneOf: [
-            {
-              type: "string",
-            },
-            {
-              type: "array",
-              items: {
-                type: "string",
-              },
-            },
-          ],
+          $ref: "#/definitions/REAsStringsType",
         },
         licenseNot: {
           description:
             "Whether or not to match modules that were NOT released under one of " +
             'the mentioned licenses. E.g. to flag everyting non MIT use "MIT" here',
-          oneOf: [
-            {
-              type: "string",
-            },
-            {
-              type: "array",
-              items: {
-                type: "string",
-              },
-            },
-          ],
+          $ref: "#/definitions/REAsStringsType",
         },
       },
     },
@@ -200,5 +141,6 @@ export default {
       },
     },
     ...dependencyType.definitions,
+    ...REAsStringsType.definitions,
   },
 };
