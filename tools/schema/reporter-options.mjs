@@ -1,3 +1,4 @@
+import REAsStringsType from "./re-as-strings-type.mjs";
 import compoundExcludeType from "./compound-exclude-type.mjs";
 import compoundFocusType from "./compound-focus-type.mjs";
 import compoundIncludeOnlyType from "./compound-include-only-type.mjs";
@@ -41,10 +42,10 @@ export default {
       additionalProperties: false,
       properties: {
         collapsePattern: {
-          type: "string",
           description:
             'Regular expressions to collapse to. For the "dot" reporter defaults ' +
             'to null, but "node_modules/[^/]+" is recommended for most use cases.',
+          $ref: "#/definitions/REAsStringsType",
         },
         filters: { $ref: "#/definitions/ReporterFiltersType" },
         theme: { $ref: "#/definitions/DotThemeType" },
@@ -121,5 +122,6 @@ export default {
     ...compoundExcludeType.definitions,
     ...compoundIncludeOnlyType.definitions,
     ...compoundFocusType.definitions,
+    ...REAsStringsType.definitions,
   },
 };

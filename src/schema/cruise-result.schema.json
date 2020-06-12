@@ -746,8 +746,8 @@
       "additionalProperties": false,
       "properties": {
         "collapsePattern": {
-          "type": "string",
-          "description": "Regular expressions to collapse to. For the \"dot\" reporter defaults to null, but \"node_modules/[^/]+\" is recommended for most use cases."
+          "description": "Regular expressions to collapse to. For the \"dot\" reporter defaults to null, but \"node_modules/[^/]+\" is recommended for most use cases.",
+          "$ref": "#/definitions/REAsStringsType"
         },
         "filters": { "$ref": "#/definitions/ReporterFiltersType" },
         "theme": { "$ref": "#/definitions/DotThemeType" }

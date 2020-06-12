@@ -56,6 +56,42 @@ describe("main/options/normalize", () => {
       path: "^aap|^noot|mies$",
     });
   });
+
+  it("de-arrayify's archi reporter options' collapsePattern", () => {
+    expect(
+      normalizeOptions({
+        reporterOptions: {
+          archi: {
+            collapsePattern: ["^src/[^/]+", "^node_modules/[^/]+", "^bin/"],
+          },
+        },
+      }).reporterOptions
+    ).to.deep.equal({
+      archi: {
+        collapsePattern: "^src/[^/]+|^node_modules/[^/]+|^bin/",
+      },
+    });
+  });
+
+  it("de-arrayify's dot reporter options' filters", () => {
+    expect(
+      normalizeOptions({
+        reporterOptions: {
+          dot: {
+            filters: {
+              includeOnly: {
+                path: ["^src", "^test", "^bin"],
+              },
+            },
+          },
+        },
+      }).reporterOptions
+    ).to.deep.equal({
+      dot: {
+        filters: { includeOnly: { path: "^src|^test|^bin" } },
+      },
+    });
+  });
 });
 
 /* eslint no-magic-numbers: 0*/

@@ -1470,7 +1470,9 @@ and _doNotFollow_) and only for the reporter you configured it for.
 > you want the same pruning for all visualisations.
 
 The filters the _reporterOptions.dot.filters_ support are _includeOnly_,
-_exclude_ and _focus_. Currently they only support the path attribute.
+_exclude_ and _focus_. Currently they only support the path attribute (which,
+just like the ones on top cruise level accepts either a regular-expression-as-a-string
+or an array of them).
 
 Example:
 
@@ -1698,6 +1700,10 @@ module.exports = {
   },
 };
 ```
+
+The _collapsePattern_ also accepts an array of regular-expressions-in-a-string
+to be consistent with how other regular expressions in the configuration file
+are handled.
 
 #### archi
 
