@@ -226,7 +226,7 @@
     "exoticRequireStrings": ["tryRequire"],
     "reporterOptions": {
       "archi": {
-        "collapsePattern": "^(node_modules|src|test)/[^/]+|^bin/"
+        "collapsePattern": ["^(node_modules|src|test)/[^/]+", "^bin/"]
       },
       "dot": {
         "filters": {

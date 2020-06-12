@@ -16,6 +16,25 @@ function normalizeFilterOption(pFilterOption) {
   return normalizeREProperties(lReturnValue, ["path"]);
 }
 
+function normalizeReporterOptions(pReporterOptions) {
+  const lNormalizeableOptions = [
+    "archi.collapsePattern",
+    "archi.filters.includeOnly.path",
+    "archi.filters.focus.path",
+    "archi.filters.exclude.path",
+    "dot.collapsePattern",
+    "dot.filters.includeOnly.path",
+    "dot.filters.focus",
+    "dot.filters.exclude.path",
+    "ddot.collapsePattern",
+    "ddot.filters.includeOnly.path",
+    "ddot.filters.focus.path",
+    "ddot.filters.exclude.path",
+  ];
+
+  return normalizeREProperties(pReporterOptions, lNormalizeableOptions);
+}
+
 module.exports = (pOptions) => {
   let lReturnValue = {
     baseDir: process.cwd(),
@@ -36,6 +55,11 @@ module.exports = (pOptions) => {
   lReturnValue.exoticRequireStrings = uniq(
     lReturnValue.exoticRequireStrings.sort()
   );
+  if (lReturnValue.reporterOptions) {
+    lReturnValue.reporterOptions = normalizeReporterOptions(
+      lReturnValue.reporterOptions
+    );
+  }
 
   return lReturnValue;
 };
