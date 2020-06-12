@@ -1701,6 +1701,10 @@ module.exports = {
 };
 ```
 
+The _collapsePattern_ also accepts an array of regular-expressions-in-a-string
+to be consistent with how other regular expressions in the configuration file
+are handled.
+
 #### archi
 
 The 'customizable dot' (`cdot`) or 'archi' reporter exists to make high level
