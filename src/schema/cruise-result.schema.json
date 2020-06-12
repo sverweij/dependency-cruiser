@@ -556,11 +556,9 @@
         "doNotFollow": { "$ref": "#/definitions/CompoundDoNotFollowType" },
         "exclude": { "$ref": "#/definitions/CompoundExcludeType" },
         "includeOnly": {
+          "description": "a regular expression for modules to cruise; anything outside it will be skipped",
           "oneOf": [
-            {
-              "type": "string",
-              "description": "a regular expression for modules to cruise; anything outside it will be skipped"
-            },
+            { "type": "string" },
             { "$ref": "#/definitions/CompoundIncludeOnlyType" }
           ]
         },

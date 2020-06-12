@@ -285,38 +285,30 @@
       "additionalProperties": false,
       "properties": {
         "doNotFollow": {
+          "description": "a regular expression for modules to include, but not follow further",
           "oneOf": [
-            {
-              "type": "string",
-              "description": "a regular expression for modules to include, but not follow further"
-            },
+            { "type": "string" },
             { "$ref": "#/definitions/CompoundDoNotFollowType" }
           ]
         },
         "exclude": {
+          "description": "a regular expression for modules to exclude from being cruised",
           "oneOf": [
-            {
-              "type": "string",
-              "description": "a regular expression for modules to exclude from being cruised"
-            },
+            { "type": "string" },
             { "$ref": "#/definitions/CompoundExcludeType" }
           ]
         },
         "includeOnly": {
+          "description": "a regular expression for modules to cruise; anything outside it will be skipped",
           "oneOf": [
-            {
-              "type": "string",
-              "description": "a regular expression for modules to cruise; anything outside it will be skipped"
-            },
+            { "type": "string" },
             { "$ref": "#/definitions/CompoundIncludeOnlyType" }
           ]
         },
         "focus": {
+          "description": "dependency-cruiser will include modules matching this regular expression in its output, as well as their neighbours (direct dependencies and dependents)",
           "oneOf": [
-            {
-              "type": "string",
-              "description": "dependency-cruiser will include modules matching this regular expression in its output, as well as their neighbours (direct dependencies and dependents)"
-            },
+            { "type": "string" },
             { "$ref": "#/definitions/CompoundFocusType" }
           ]
         },
@@ -549,14 +541,10 @@
       }
     },
     "ExtendsType": {
-      "description": "A configuration this configuration uses as a base",
+      "description": "A configuration (or an array of configurations) this configuration uses as a base",
       "oneOf": [
         { "type": "string" },
-        {
-          "type": "array",
-          "description": "A list of rules that describe dependencies that are allowed. dependency-cruiser will emit the warning message 'not-in-allowed' for each dependency that does not at least meet one of them.",
-          "items": { "type": "string" }
-        }
+        { "type": "array", "items": { "type": "string" } }
       ]
     }
   }

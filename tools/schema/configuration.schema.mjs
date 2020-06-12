@@ -19,17 +19,15 @@ export default {
     ...ruleSet.definitions,
     ...options.definitions,
     ExtendsType: {
-      description: "A configuration this configuration uses as a base",
+      description:
+        "A configuration (or an array of configurations) this configuration uses as " +
+        "a base",
       oneOf: [
         {
           type: "string",
         },
         {
           type: "array",
-          description:
-            "A list of rules that describe dependencies that are allowed. dependency-cruiser will " +
-            "emit the warning message 'not-in-allowed' for each dependency that does not at least " +
-            "meet one of them.",
           items: {
             type: "string",
           },

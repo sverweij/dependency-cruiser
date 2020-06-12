@@ -14,44 +14,44 @@ export default {
       additionalProperties: false,
       properties: {
         doNotFollow: {
+          description:
+            "a regular expression for modules to include, but not follow further",
           oneOf: [
             {
               type: "string",
-              description:
-                "a regular expression for modules to include, but not follow further",
             },
             { $ref: "#/definitions/CompoundDoNotFollowType" },
           ],
         },
         exclude: {
+          description:
+            "a regular expression for modules to exclude from being cruised",
           oneOf: [
             {
               type: "string",
-              description:
-                "a regular expression for modules to exclude from being cruised",
             },
             { $ref: "#/definitions/CompoundExcludeType" },
           ],
         },
         includeOnly: {
+          description:
+            "a regular expression for modules to cruise; anything outside it will " +
+            "be skipped",
           oneOf: [
             {
               type: "string",
-              description:
-                "a regular expression for modules to cruise; anything outside it will " +
-                "be skipped",
             },
             { $ref: "#/definitions/CompoundIncludeOnlyType" },
           ],
         },
         focus: {
+          description:
+            "dependency-cruiser will include modules matching this regular expression " +
+            "in its output, as well as their neighbours (direct dependencies and " +
+            "dependents)",
           oneOf: [
             {
               type: "string",
-              description:
-                "dependency-cruiser will include modules matching this regular expression " +
-                "in its output, as well as their neighbours (direct dependencies and " +
-                "dependents)",
             },
             { $ref: "#/definitions/CompoundFocusType" },
           ],
