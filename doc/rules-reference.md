@@ -843,6 +843,54 @@ make it beyond the pre-compilation step:
 
 ## The `options`
 
+### Filter options: _doNotFollow_, _includeOnly_, _focus_ and _exclude_
+
+Dependency-cruiser sports some filters that enable you to leave out certain
+parts of dependency-trees you're not particularly interested in. They work
+from the command line (as --do-not-follow, --include-only, --focus and --exclude
+respectively) but you can also specify them in the configuration file.
+
+On the command line you can pass a single regular expression for each of them.
+The filters will use that to match against the (resolved) paths of modules
+in your dependency tree.
+
+The configuration file gives a little bit more flexibility. Apart from the path
+you can specify additional properties, and pass an array of regular expressions
+(which in some instances will enhance legibility).
+
+You can pass the path in one of three ways:
+
+As a single regular expression:
+
+```javascript
+options: {
+  includeOnly: {
+    path: "^bin|^src|^test|^packages";
+  }
+}
+```
+
+As an array of regular expressions:
+
+```javascript
+options: {
+  includeOnly: {
+    path: ["^bin", "^src", "^test", "^packages"];
+  }
+}
+```
+
+Or in shorthand:
+
+```javascript
+options: {
+  includeOnly: ["^bin", "^src", "^test", "^packages"];
+}
+```
+
+The next sections contain details on what each filter does and what extra
+attributes you can pass.
+
 ### `doNotFollow`: don't cruise modules any further
 
 > command line option equivalent: `--do-not-follow` (string values passed to 'path' only)
