@@ -38,6 +38,19 @@ describe("cli/init-config/environment-helpers - getBabelConfigCandidates", () =>
       "tower-of-babel.config.json5",
     ]);
   });
+  it("Returns all babel config variants present in a folder (including package.json if that contains a babel key)", () => {
+    process.chdir(
+      "test/cli/init-config/fixtures/get-matching-filenames-babel-manifest"
+    );
+    expect(getBabelConfigCandidates()).to.deep.equal([
+      "package.json",
+      ".babelrc",
+      ".babelrc.json",
+      "babel.blabla-config.json",
+      "babel.config.json",
+      "tower-of-babel.config.json5",
+    ]);
+  });
 });
 
 describe("cli/init-config/environment-helpers - hasBabelConfigCandidates", () => {
