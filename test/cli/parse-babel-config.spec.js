@@ -2,6 +2,17 @@ const path = require("path").posix;
 const expect = require("chai").expect;
 const parseBabelConfig = require("../../src/cli/parse-babel-config");
 
+const DEFAULT_EMPTY_BABEL_OPTIONS_OBJECT = {
+  babelrc: false,
+  configFile: false,
+  passPerPreset: false,
+  envName: "development",
+  cwd: process.cwd(),
+  root: process.cwd(),
+  plugins: [],
+  presets: [],
+};
+
 describe("cli/parseBabelConfig", () => {
   it("throws when no config file name is passed", () => {
     expect(() => {
@@ -34,20 +45,30 @@ describe("cli/parseBabelConfig", () => {
     }).to.throw();
   });
 
-  it("returns an default options object when an empty config file is passed", () => {
+  it("returns a default options object when an empty config file is passed", () => {
     expect(
       parseBabelConfig(
         path.join(__dirname, "./fixtures/babelconfig/babelrc.empty.json")
       )
-    ).to.deep.equal({
-      babelrc: false,
-      configFile: false,
-      passPerPreset: false,
-      envName: "development",
-      cwd: process.cwd(),
-      root: process.cwd(),
-      plugins: [],
-      presets: [],
-    });
+    ).to.deep.equal(DEFAULT_EMPTY_BABEL_OPTIONS_OBJECT);
+  });
+
+  it("reads the 'babel' key when a package.json is passed", () => {
+    expect(
+      parseBabelConfig(
+        path.join(__dirname, "./fixtures/babelconfig/package.json")
+      ).plugins.length
+    ).to.equal(1);
+  });
+
+  it("returns an empty (/ default) options object when package.json without a babel key is passed", () => {
+    expect(
+      parseBabelConfig(
+        path.join(
+          __dirname,
+          "./fixtures/babelconfig/no-babel-config-in-this-package.json"
+        )
+      )
+    ).to.deep.equal(DEFAULT_EMPTY_BABEL_OPTIONS_OBJECT);
   });
 });
