@@ -1378,9 +1378,10 @@ babelConfig - dependency-cruiser will sort it out for you.
   your package.json.
   .js, .mjs, .cjs, or configurations might be added when there's a demand for it.
 - Auto detection in [--init](cli.md#--init) looks at some of the likely suspects
-  for babel configs - _.babelrc_, _.babelrc.json_, _babel.config.json_ and any
-  other file with _babel_ in the name and ending on _json_ or _json5_.
-- The feature currently works with babel versions >=7.0.0
+  for babel configs - _package.json_ (only if it contains a _babel_ key),
+  _.babelrc_, _.babelrc.json_, _babel.config.json_ and any other file with _babel_
+  in the name that ends on _json_ or _json5_. - The feature currently works with
+  babel versions >=7.0.0
 - Babel support is currently a :warning: experimental feature. This means it
   is thoroughly tested, works well as far as we could determine. It also means
   dependency-cruiser won't get a major version bump for little changes that
