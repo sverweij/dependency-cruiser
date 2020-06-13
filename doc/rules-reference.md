@@ -1374,10 +1374,12 @@ babelConfig - dependency-cruiser will sort it out for you.
   of the extension). This will cover the majority of the use cases for babel,
   but [raise an issue](https://github.com/sverweij/dependency-cruiser/issues/new?template=feature-request.md&title=Feature+request%3A+use+babel+only+for+specific+extensions?)
   if you need this to be configurable.
-- Only json (/ json5) configurations, either in a separate file or as a key in
-  your package.json.
-  .js, .mjs, .cjs, or configurations might be added when there's a demand for it.
-- Auto detection in [--init](cli.md#--init) looks at some of the likely suspects
+- Dependency-cruiser can process json (/ json5) configurations, either in a
+  separate file or as a key in your package.json. It can also process .js and
+  .cjs configurations, as long as they're commonjs modules and export a simple
+  javascript object. JavaScript configurations that export a function, and/ or
+  that are es modules might be supported in a later stage.
+- Auto detection in [--init](clies.md#--init) looks at some of the likely suspects
   for babel configs - _package.json_ (only if it contains a _babel_ key),
   _.babelrc_, _.babelrc.json_, _babel.config.json_ and any other file with _babel_
   in the name that ends on _json_ or _json5_. - The feature currently works with

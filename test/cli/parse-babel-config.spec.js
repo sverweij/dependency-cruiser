@@ -34,7 +34,7 @@ describe("cli/parseBabelConfig", () => {
     }).to.throw();
   });
 
-  it("throws when a config file is passed constains a non-babel option", () => {
+  it("throws when a config file is passed contains a non-babel option", () => {
     expect(() => {
       parseBabelConfig(
         path.join(
@@ -67,6 +67,28 @@ describe("cli/parseBabelConfig", () => {
         path.join(
           __dirname,
           "./fixtures/babelconfig/no-babel-config-in-this-package.json"
+        )
+      )
+    ).to.deep.equal(DEFAULT_EMPTY_BABEL_OPTIONS_OBJECT);
+  });
+
+  it("returns a babel config when a javascript file with a regular object export is passed", () => {
+    expect(
+      parseBabelConfig(
+        path.join(
+          __dirname,
+          "./fixtures/babelconfig-js/babel.object-export.config.js"
+        )
+      ).plugins.length
+    ).to.equal(1);
+  });
+
+  it("returns a babel config when a javascript file with a function export is passed", () => {
+    expect(
+      parseBabelConfig(
+        path.join(
+          __dirname,
+          "./fixtures/babelconfig-js/babel.function-export.config.js"
         )
       )
     ).to.deep.equal(DEFAULT_EMPTY_BABEL_OPTIONS_OBJECT);
