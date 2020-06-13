@@ -1364,6 +1364,9 @@ That way dependency-cruiser will use the babel compiler for its transpilation
 steps, so if you're using features that are not TC39 stage 4 yet dependency-cruiser
 will happily analyze these source files for you.
 
+If you just use a `babel` key in your package.json pass `package.json` as the
+babelConfig - dependency-cruiser will sort it out for you.
+
 #### Usage notes
 
 - In its current state dependency-cruiser will assume that all JavaScript and
@@ -1371,8 +1374,9 @@ will happily analyze these source files for you.
   of the extension). This will cover the majority of the use cases for babel,
   but [raise an issue](https://github.com/sverweij/dependency-cruiser/issues/new?template=feature-request.md&title=Feature+request%3A+use+babel+only+for+specific+extensions?)
   if you need this to be configurable.
-- Only json (/ json5) configurations in a separate file. .js, .mjs, .cjs, or
-  configurations in package.json might be added when there's a demand for it.
+- Only json (/ json5) configurations, either in a separate file or as a key in
+  your package.json.
+  .js, .mjs, .cjs, or configurations might be added when there's a demand for it.
 - Auto detection in [--init](cli.md#--init) looks at some of the likely suspects
   for babel configs - _.babelrc_, _.babelrc.json_, _babel.config.json_ and any
   other file with _babel_ in the name and ending on _json_ or _json5_.
