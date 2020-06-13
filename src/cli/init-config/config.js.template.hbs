@@ -50,8 +50,12 @@ module.exports = {
       severity: 'warn',
       from: {
         orphan: true,
-        pathNot:
-          '(^|/)\\.[^/]+\\.(js|cjs|mjs|ts|json)$|\\.d\\.ts$|(^|/)tsconfig\\.json$|(^|/)(babel|webpack)\\.config\\.(js|cjs|mjs|ts|json)$'
+        pathNot: [
+          '(^|/)\\.[^/]+\\.(js|cjs|mjs|ts|json)$', // dot files
+          '\\.d\\.ts$',                            // TypeScript declaration files
+          '(^|/)tsconfig\\.json$',                 // TypeScript config
+          '(^|/)(babel|webpack)\\.config\\.(js|cjs|mjs|ts|json)$' // other configs
+        ]
       },
       to: {},
     },
