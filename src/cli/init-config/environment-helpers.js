@@ -44,6 +44,20 @@ function pnpIsEnabled() {
   return lReturnValue;
 }
 
+function babelIsConfiguredInManifest() {
+  let lReturnValue = false;
+
+  try {
+    lReturnValue = Object.prototype.hasOwnProperty.call(
+      readManifest(),
+      "babel"
+    );
+  } catch (pError) {
+    // silently ignore - we'll return false anyway then
+  }
+  return lReturnValue;
+}
+
 function getFolderNames(pFolderName) {
   return fs
     .readdirSync(pFolderName, "utf8")
@@ -91,8 +105,14 @@ function toSourceLocationArray(pLocations) {
   return pLocations;
 }
 
+function getManifestFilesWithABabelConfig() {
+  return babelIsConfiguredInManifest() ? ["package.json"] : [];
+}
+
 const getBabelConfigCandidates = () =>
-  getMatchingFileNames(BABEL_CONFIG_CANDIDATE_PATTERN);
+  getManifestFilesWithABabelConfig().concat(
+    getMatchingFileNames(BABEL_CONFIG_CANDIDATE_PATTERN)
+  );
 const hasBabelConfigCandidates = () => getBabelConfigCandidates().length > 0;
 
 const getTSConfigCandidates = () =>
