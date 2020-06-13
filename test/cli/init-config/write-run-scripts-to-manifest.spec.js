@@ -2,9 +2,9 @@ const expect = require("chai").expect;
 const {
   addRunScriptsToManifest,
   compileRunScripts,
-} = require("../../../src/cli/init-config/add-run-scripts-to-manifest");
+} = require("../../../src/cli/init-config/write-run-scripts-to-manifest");
 
-describe("cli/init-config/add-run-scripts-to-manifest - logic", () => {
+describe("cli/init-config/write-run-scripts-to-manifest - logic", () => {
   it("no manifest and no scripts retain the empty manifest with a scripts section", () => {
     expect(addRunScriptsToManifest()).to.deep.equal({ scripts: {} });
   });
@@ -52,7 +52,7 @@ describe("cli/init-config/add-run-scripts-to-manifest - logic", () => {
   });
 });
 
-describe("cli/init-config/add-run-scripts-to-manifest - compile run script", () => {
+describe("cli/init-config/write-run-scripts-to-manifest - compile run script", () => {
   it("no sourcelocation no extra scripts (no init options object)", () => {
     expect(compileRunScripts()).to.deep.equal({});
   });

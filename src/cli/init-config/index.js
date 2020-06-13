@@ -14,7 +14,9 @@ const {
   hasTSConfigCandidates,
   getTSConfigCandidates,
 } = require("./environment-helpers");
-const { writeRunScriptsToManifest } = require("./add-run-scripts-to-manifest");
+const {
+  writeRunScriptsToManifest,
+} = require("./write-run-scripts-to-manifest");
 
 const PACKAGE_MANIFEST = `./${$defaults.PACKAGE_MANIFEST}`;
 
