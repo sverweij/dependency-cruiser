@@ -9,31 +9,69 @@ const tryRequire = require("semver-try-require");
 const $package = require("../../package.json");
 const makeAbsolute = require("./utl/make-absolute");
 
-const JAVASCRIPT_EXTENSIONS = [".js", ".cjs"];
-
-function getConfig(pBabelConfigFileName) {
+function getCommonJSConfig(pBabelConfigFileName) {
   let lReturnValue = {};
 
-  if (JAVASCRIPT_EXTENSIONS.includes(path.extname(pBabelConfigFileName))) {
+  try {
     lReturnValue = require(makeAbsolute(pBabelConfigFileName));
-
-    if (typeof lReturnValue === "function") {
-      // Function format configs not supported yet. Will need calling the
-      // function with a bunch of params (lReturnValue = lReturnValue(APIPAPI))
-      // TODO: should we pass this in silence or throw?
-      //   +silence: there's nothing wrong (we can detect)
-      //   +throw: at least it's clear we don't support it
-      lReturnValue = {};
-    }
-  } else {
-    lReturnValue = json5.parse(fs.readFileSync(pBabelConfigFileName, "utf8"));
-
-    if (pBabelConfigFileName.endsWith("package.json")) {
-      lReturnValue = _get(lReturnValue, "babel", {});
-    }
+  } catch (pError) {
+    throw new Error(
+      `Encountered an error while parsing babel config '${pBabelConfigFileName}':` +
+        `\n\n          ${pError}` +
+        "\n\n         At this time dependency-cruiser only supports babel configurations\n" +
+        "         in either commonjs or json5.\n"
+    );
   }
 
+  if (typeof lReturnValue === "function") {
+    // Function format configs not supported yet. Will need calling the
+    // function with a bunch of params (lReturnValue = lReturnValue(APIPAPI))
+    throw new TypeError(
+      `The babel config '${pBabelConfigFileName}' returns a function. At this time\n` +
+        `         dependency-cruiser doesn't support that yet.`
+    );
+  }
   return lReturnValue;
+}
+
+function getJSON5Config(pBabelConfigFileName) {
+  let lReturnValue = {};
+
+  try {
+    lReturnValue = json5.parse(fs.readFileSync(pBabelConfigFileName, "utf8"));
+  } catch (pError) {
+    throw new Error(
+      `Encountered an error while parsing the babel config '${pBabelConfigFileName}':` +
+        `\n\n          ${pError}\n`
+    );
+  }
+
+  if (pBabelConfigFileName.endsWith("package.json")) {
+    lReturnValue = _get(lReturnValue, "babel", {});
+  }
+  return lReturnValue;
+}
+
+function getConfig(pBabelConfigFileName) {
+  const EXTENSION_TO_PARSE_FN = {
+    ".js": getCommonJSConfig,
+    ".cjs": getCommonJSConfig,
+    "": getJSON5Config,
+    ".json": getJSON5Config,
+    ".json5": getJSON5Config,
+  };
+  const lExtension = path.extname(pBabelConfigFileName);
+
+  if (
+    !Object.prototype.hasOwnProperty.call(EXTENSION_TO_PARSE_FN, lExtension)
+  ) {
+    throw new Error(
+      `The babel config '${pBabelConfigFileName}' is in a format ('${lExtension}')\n` +
+        "         dependency-cruiser doesn't support yet.\n"
+    );
+  }
+  // eslint-disable-next-line security/detect-object-injection
+  return EXTENSION_TO_PARSE_FN[lExtension](pBabelConfigFileName);
 }
 
 module.exports = function parseBabelConfig(pBabelConfigFileName) {

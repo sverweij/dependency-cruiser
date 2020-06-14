@@ -223,6 +223,9 @@
     //    "env": {},
     //    "args": {}
     // },
+    // "babelConfig": {
+    //   "fileName": "./babel.config.json"
+    // },
     "exoticRequireStrings": ["tryRequire"],
     "reporterOptions": {
       "archi": {

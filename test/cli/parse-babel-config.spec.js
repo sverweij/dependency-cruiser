@@ -83,14 +83,36 @@ describe("cli/parseBabelConfig", () => {
     ).to.equal(1);
   });
 
-  it("returns a babel config when a javascript file with a function export is passed", () => {
-    expect(
+  it("throws when a javascript file with a function export is passed", () => {
+    expect(() => {
       parseBabelConfig(
         path.join(
           __dirname,
           "./fixtures/babelconfig-js/babel.function-export.config.js"
         )
-      )
-    ).to.deep.equal(DEFAULT_EMPTY_BABEL_OPTIONS_OBJECT);
+      );
+    }).to.throw();
+  });
+
+  it("throws when a config with an unsupported extension is passed", () => {
+    expect(() => {
+      parseBabelConfig(
+        path.join(
+          __dirname,
+          "./fixtures/babelconfig-js/babel.config.wildly-unsupported-extension"
+        )
+      );
+    }).to.throw();
+  });
+
+  it("throws when an es module is passed", () => {
+    expect(() => {
+      parseBabelConfig(
+        path.join(
+          __dirname,
+          "./fixtures/babelconfig-js/babel.es-module.config.js"
+        )
+      );
+    }).to.throw();
   });
 });
