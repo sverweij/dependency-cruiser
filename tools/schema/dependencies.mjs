@@ -96,6 +96,14 @@ export default {
             "the source code to a file name or core module. 'false' in all other " +
             "cases.",
         },
+        preCompilationOnly: {
+          type: "boolean",
+          description:
+            "'true' if the dependency between this dependency and its parent only " +
+            "exists before compilation takes place. 'false in all other cases. " +
+            "Dependency-cruiser will only specify this attribute for TypeScript and " +
+            "then only when the option 'tsPreCompilationDeps' has the value 'specify'.",
+        },
         circular: {
           type: "boolean",
           description:

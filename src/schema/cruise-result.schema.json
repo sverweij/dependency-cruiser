@@ -192,6 +192,10 @@
           "type": "boolean",
           "description": "'true' if dependency-cruiser could not resulve the module name in the source code to a file name or core module. 'false' in all other cases."
         },
+        "preCompilationOnly": {
+          "type": "boolean",
+          "description": "'true' if the dependency between this dependency and its parent only exists before compilation takes place. 'false in all other cases. Dependency-cruiser will only specify this attribute for TypeScript and then only when the option 'tsPreCompilationDeps' has the value 'specify'."
+        },
         "circular": {
           "type": "boolean",
           "description": "'true' if following this dependency will ultimately return to the source, false in all other cases"
