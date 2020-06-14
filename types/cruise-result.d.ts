@@ -103,6 +103,13 @@ export interface IDependency {
    */
   couldNotResolve: boolean;
   /**
+   * 'true' if the dependency between this dependency and its parent only
+   * exists before compilation takes place. 'false in all other cases.
+   * Dependency-cruiser will only specify this attribute for TypeScript and
+   * then only when the option 'tsPreCompilationDeps' has the value 'specify'.
+   */
+  preCompilationOnly?: boolean;
+  /**
    * If following this dependency will ultimately return to the source (circular === true),
    * this attribute will contain an (ordered) array of module names that shows (one of) the
    * circular path(s)
