@@ -65,7 +65,7 @@ describe("cli/normalizeOptions", () => {
     try {
       normalizeOptions({ validate: true });
     } catch (pError) {
-      expect(pError.message).to.include(".dependency-cruiser.json'");
+      expect(pError.message).to.include("'.dependency-cruiser.js(on)'");
     }
   });
 

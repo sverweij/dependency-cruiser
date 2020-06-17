@@ -118,7 +118,7 @@ function validateAndGetDefaultRulesFileName() {
 
   if (typeof lReturnValue === "undefined") {
     throw new TypeError(
-      `Can't open '${defaults.RULES_FILE_NAME}' for reading. Does it exist?\n`
+      `Can't open '${defaults.DEFAULT_CONFIG_FILE_NAME}(on)' for reading. Does it exist?\n`
     );
   }
   return lReturnValue;
@@ -195,5 +195,5 @@ module.exports = (pOptionsAsPassedFromCommander) => {
 };
 
 module.exports.determineRulesFileName = getOptionValue(
-  defaults.RULES_FILE_NAME
+  defaults.OLD_DEFAULT_RULES_FILE_NAME
 );
