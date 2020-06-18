@@ -165,6 +165,36 @@ describe("cli/init-config/index", () => {
       deleteDammit($package);
     }
   });
+
+  it("init experimental-scripts updates package.json with scripts, and leaves an existing dc config alone", () => {
+    process.chdir(
+      "test/cli/init-config/fixtures/update-manifest-dc-config-exists"
+    );
+
+    const configResultFileName = `./${path.join(
+      "fixtures/update-manifest-dc-config-exists",
+      RULES_FILE_JS
+    )}`;
+    const $package = "package.json";
+    fs.writeFileSync($package, "{}");
+
+    try {
+      initConfig("experimental-scripts");
+      const lResult = require(configResultFileName);
+
+      expect(lResult).to.be.jsonSchema(configurationSchema);
+      expect(lResult).to.deep.equal({});
+      expect(JSON.parse(fs.readFileSync($package, "utf8"))).to.haveOwnProperty(
+        "scripts"
+      );
+    } finally {
+      Reflect.deleteProperty(
+        require.cache,
+        require.resolve(configResultFileName)
+      );
+      deleteDammit($package);
+    }
+  });
 });
 /* muffle eslint for we're doing the funky require shizzle consciously here */
 /* eslint node/global-require:0, security/detect-non-literal-require:0, import/no-dynamic-require:0 */

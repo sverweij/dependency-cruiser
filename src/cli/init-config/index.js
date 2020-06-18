@@ -47,7 +47,7 @@ function getOneshotConfig(pOneShotConfigId) {
   };
 
   // eslint-disable-next-line security/detect-object-injection
-  return ONESHOT_CONFIGS[pOneShotConfigId] || {};
+  return ONESHOT_CONFIGS[pOneShotConfigId] || BASE_CONFIG;
 }
 
 function manifestIsUpdateable(pNormalizedInitConfig) {
@@ -69,8 +69,10 @@ module.exports = (pInit) => {
       });
   } else {
     const lNormalizedInitConfig = normalizeInitOptions(getOneshotConfig(pInit));
+    if (!fileExists($defaults.DEFAULT_CONFIG_FILE_NAME)) {
+      writeConfig(buildConfig(lNormalizedInitConfig));
+    }
 
-    writeConfig(buildConfig(lNormalizedInitConfig));
     if (manifestIsUpdateable(lNormalizedInitConfig)) {
       writeRunScriptsToManifest(lNormalizedInitConfig);
     }
