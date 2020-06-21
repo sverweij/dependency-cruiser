@@ -18,28 +18,25 @@ try {
   const format = require("../src/cli/format");
 
   program
-    .version($package.version)
     .description(
       "Format dependency-cruiser output json.\nDetails: https://github.com/sverweij/dependency-cruiser"
     )
     .option(
       "-f, --output-to <file>",
-      `file to write output to; - for stdout
-                         `,
+      "file to write output to; - for stdout",
       "-"
     )
     .option(
       "-T, --output-type <type>",
-      `output type - err|err-long|err-html|dot|ddot|archi|json
-                         `,
+      "output type; e.g. err, err-html, dot, ddot, archi or json",
       "err"
     )
     .option(
       "-e, --exit-code",
-      `exit with a non-zero exit code when the input json
-                          contains error level dependency violations. Works for
-                          err, err-long and teamcity output types`
+      "exit with a non-zero exit code when the input json contains error level " +
+        "dependency violations. Works for err, err-long and teamcity output types"
     )
+    .version($package.version)
     .arguments("<dependency-cruiser-json>")
     .parse(process.argv);
 

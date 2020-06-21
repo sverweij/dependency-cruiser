@@ -17,10 +17,15 @@ function removeDammit(pFileName) {
 }
 
 describe("cli/utl/io", () => {
+  const NR_OF_NUMBERS = 17;
   const OUTFILE = path.join(
     __dirname,
     "output",
-    `tmp_hello_${Math.random().toString().slice("0.".length)}.json`
+    `tmp_hello_${Math.random()
+      .toString()
+      .split(".")
+      .pop()
+      .padEnd(NR_OF_NUMBERS, "0")}.json`
   );
 
   before("set up", () => {

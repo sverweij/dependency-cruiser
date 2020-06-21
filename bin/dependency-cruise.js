@@ -13,80 +13,68 @@ try {
   const cli = require("../src/cli");
 
   program
-    .version($package.version)
     .description(
       "Validate and visualize dependencies.\nDetails: https://github.com/sverweij/dependency-cruiser"
     )
     .option(
-      "-i, --info",
-      `shows what languages and extensions
-                              dependency-cruiser supports`
+      "--init [oneshot]",
+      "set up dependency-cruiser for use in your environment (<<< recommended!)"
     )
     .option(
       "-c, --config [file]",
-      `read rules and options from [file]
-                              (default: .dependency-cruiser.json)`
-    )
-    .option("-v, --validate [file]", `alias for --config`)
-    .option(
-      "-f, --output-to <file>",
-      `file to write output to; - for stdout
-                             `,
-      "-"
-    )
-    .option(
-      "-X, --do-not-follow <regex>",
-      `include modules matching the regex,
-                              but don't follow them any further`
-    )
-    .option("-x, --exclude <regex>", "exclude all modules matching the regex")
-    .option("--include-only <regex>", "only include modules matching the regex")
-    .option(
-      "--focus <regex>",
-      `only output modules matching the regex,
-                              + their direct neighbours`
-    )
-    .option(
-      "-d, --max-depth <n>",
-      `the maximum depth to cruise; 0 <= n <= 99
-                              (default: 0, which means 'infinite depth')`
-    )
-    .option(
-      "-M, --module-systems <items>",
-      `list of module systems (default: amd,cjs,es6,tsd)`
+      "read rules and options from [file] (e.g. .dependency-cruiser.js)"
     )
     .option(
       "-T, --output-type <type>",
-      `output type - err|err-long|err-html|dot|ddot|archi|json
-                              (default: err)`
+      "output type; e.g. err, err-html, dot, ddot, archi or json\n(default: err)"
     )
     .option(
-      "-P, --prefix <prefix>",
-      `prefix to use for links in the dot, err and
-                              err-html reporters`
+      "-f, --output-to <file>",
+      "file to write output to; - for stdout",
+      "-"
     )
-    .option("--preserve-symlinks", `leave symlinks unchanged (off by default)`)
+    .option("--include-only <regex>", "only include modules matching the regex")
     .option(
-      "--ts-pre-compilation-deps",
-      `detect dependencies that only exist before
-                              typescript-to-javascript compilation
-                              (off by default)`
+      "--focus <regex>",
+      "only include modules matching the regex + their direct neighbours"
+    )
+    .option("-x, --exclude <regex>", "exclude all modules matching the regex")
+    .option(
+      "-X, --do-not-follow <regex>",
+      "include modules matching the regex, but don't follow their dependencies"
     )
     .option(
       "--ts-config [file]",
-      `use a typescript configuration ('project')
-                              (default: tsconfig.json)`
+      "use a typescript configuration (e.g. tsconfig.json)"
     )
     .option(
       "--webpack-config [file]",
-      `use a webpack configuration
-                              (default: webpack.config.js)`
+      "use a webpack configuration (e.g. webpack.config.js)"
     )
     .option(
-      "--init [oneshot]",
-      `write a .dependency-cruiser config with basic
-                              validations to the current folder.`
+      "--ts-pre-compilation-deps",
+      "detect dependencies that only exist before typescript-to-javascript " +
+        "compilation (off by default)"
     )
+    .option(
+      "-d, --max-depth <n>",
+      "limit cruise depth; 0 <= n <= 99 (default: 0 - no limit)"
+    )
+    .option(
+      "-M, --module-systems <items>",
+      "list of module systems (default: amd, cjs, es6, tsd)"
+    )
+    .option(
+      "-P, --prefix <prefix>",
+      "prefix to use for links in the dot and err-html reporters"
+    )
+    .option("--preserve-symlinks", `leave symlinks unchanged (off by default)`)
+    .option("-v, --validate [file]", `alias for --config`)
+    .option(
+      "-i, --info",
+      "shows what languages and extensions dependency-cruiser supports"
+    )
+    .version($package.version)
     .arguments("<files-or-directories>")
     .parse(process.argv);
 
