@@ -695,14 +695,14 @@ Format dependency-cruiser output json.
 Details: https://github.com/sverweij/dependency-cruiser
 
 Options:
-  -V, --version             output the version number
-  -f, --output-to <file>    file to write output to; - for stdout
-                            (default: "-")
-  -T, --output-type <type>  output type - err|err-long|err-html|dot|ddot|archi|json
-                            (default: "err")
+  -f, --output-to <file>    file to write output to; - for stdout (default:
+                            "-")
+  -T, --output-type <type>  output type; e.g. err, err-html, dot, ddot, archi
+                            or json (default: "err")
   -e, --exit-code           exit with a non-zero exit code when the input json
-                            contains error level dependency violations. Works for
-                            err, err-long and teamcity output types
+                            contains error level dependency violations. Works
+                            for err, err-long and teamcity output types
+  -V, --version             output the version number
   -h, --help                display help for command
 ```
 

@@ -34,9 +34,7 @@ depcruise --include-only "^src" --output-type dot src | dot -T svg > dependencyg
 ```
 
 - You can read more about what you can do with `--include-only` and other command line
-  options in the
-  [command line interface](./doc/cli.md)
-  documentation.
+  options in the [command line interface](./doc/cli.md) documentation.
 - _[Real world samples](./doc/real-world-samples.md)_
   contains dependency cruises of some of the most used projects on npm.
 
@@ -50,9 +48,9 @@ The easy way to get you started:
 depcruise --init
 ```
 
-This will create a `.dependency-cruiser.js` with some rules that make sense
-in most projects (detecting **circular dependencies**, dependencies
-**missing** in package.json, **orphans**, production code relying on
+This will ask you some questions and create a `.dependency-cruiser.js` with some
+rules that make sense in most projects (detecting **circular dependencies**,
+dependencies **missing** in package.json, **orphans**, production code relying on
 dev- or optionalDependencies, ...).
 
 Start adding your rules by tweaking that file.
@@ -81,7 +79,7 @@ Sample rule:
 #### Report them
 
 ```sh
-depcruise --validate .dependency-cruiser.json src
+depcruise --config .dependency-cruiser.json src
 ```
 
 This will validate against your rules and shows any violations in an eslint-like format:
