@@ -1,10 +1,10 @@
 const fs = require("fs");
 const path = require("path");
 const expect = require("chai").expect;
-const render = require("../../../../src/report/dot")("folder");
 const deps = require("./mocks/dependency-cruiser-2019-01-14.json");
 const orphans = require("./mocks/orphans.json");
 const rxjs = require("./mocks/rxjs.json");
+const render = require("~/src/report/dot")("folder");
 
 const mockFolder = path.join(__dirname, "mocks");
 const consolidatedDot = fs.readFileSync(

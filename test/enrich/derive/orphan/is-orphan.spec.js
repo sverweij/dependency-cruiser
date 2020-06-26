@@ -1,8 +1,8 @@
 const expect = require("chai").expect;
-const isOrphan = require("../../../../src/enrich/derive/orphan/is-orphan");
 
 const ONE_MODULE_FIXTURE = require("./fixtures/oneModule.json");
 const TWO_MODULES_FIXTURE = require("./fixtures/twoModule.json");
+const isOrphan = require("~/src/enrich/derive/orphan/is-orphan");
 
 describe("enrich/derive/orphan/isOrphan", () => {
   it("flags a single module dependency graph as orphan", () => {

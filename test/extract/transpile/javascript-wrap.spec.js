@@ -1,6 +1,6 @@
 const fs = require("fs");
 const expect = require("chai").expect;
-const wrap = require("../../../src/extract/transpile/javascript-wrap");
+const wrap = require("~/src/extract/transpile/javascript-wrap");
 
 describe("jsx transpiler (the plain old javascript one)", () => {
   it("tells the jsx transpiler is available", () => {

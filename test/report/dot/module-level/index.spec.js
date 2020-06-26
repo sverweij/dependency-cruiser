@@ -1,9 +1,6 @@
 const fs = require("fs");
 const path = require("path");
 const expect = require("chai").expect;
-const defaultTheme = require("../../../../src/report/dot/default-theme.json");
-const render = require("../../../../src/report/dot")("module");
-const defaultRender = require("../../../../src/report/dot")();
 const clusterless = require("./mocks/clusterless.json");
 const bunchOfModules = require("./mocks/bunch-of-modules.json");
 const focusMeModules = require("./mocks/dependency-cruiser-2020-01-25-focus-me.json");
@@ -13,6 +10,9 @@ const doNotFollowDeps = require("./mocks/do-not-follow-deps.json");
 const prefixUri = require("./mocks/prefix-uri.json");
 const prefixNonUri = require("./mocks/prefix-non-uri.json");
 const bareTheme = require("./bare-theme.json");
+const defaultRender = require("~/src/report/dot")();
+const render = require("~/src/report/dot")("module");
+const defaultTheme = require("~/src/report/dot/default-theme.json");
 
 const mockPath = path.join(__dirname, "mocks");
 const clusterlessFixture = fs.readFileSync(

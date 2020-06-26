@@ -1,5 +1,5 @@
 const chai = require("chai");
-const summarize = require("../../src/enrich/summarize-modules");
+const summarize = require("~/src/enrich/summarize-modules");
 
 const expect = chai.expect;
 

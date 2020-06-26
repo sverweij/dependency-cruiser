@@ -1,8 +1,8 @@
 const fs = require("fs");
 const path = require("path");
 const expect = require("chai").expect;
-const format = require("../../src/cli/format");
 const deleteDammit = require("./delete-dammit.utl");
+const format = require("~/src/cli/format");
 
 describe("cli/format", () => {
   it("formats a cruise result and writes it to file", async () => {

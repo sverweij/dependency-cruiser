@@ -1,10 +1,8 @@
 const fs = require("fs");
 const expect = require("chai").expect;
 const normalizeNewline = require("normalize-newline");
-const wrap = require("../../../src/extract/transpile/coffeescript-wrap")();
-const litWrap = require("../../../src/extract/transpile/coffeescript-wrap")(
-  true
-);
+const wrap = require("~/src/extract/transpile/coffeescript-wrap")();
+const litWrap = require("~/src/extract/transpile/coffeescript-wrap")(true);
 
 describe("coffeescript transpiler", () => {
   it("tells the coffeescript transpiler is available", () => {

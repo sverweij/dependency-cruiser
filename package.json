@@ -141,6 +141,7 @@
     "wrap-ansi": "7.0.0"
   },
   "devDependencies": {
+    "~": "file:.",
     "@babel/core": "7.10.3",
     "@babel/plugin-transform-modules-commonjs": "7.10.1",
     "chai": "4.2.0",

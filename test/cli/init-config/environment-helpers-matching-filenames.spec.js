@@ -7,7 +7,7 @@ const {
   getTSConfigCandidates,
   hasWebpackConfigCandidates,
   getWebpackConfigCandidates,
-} = require("../../../src/cli/init-config/environment-helpers");
+} = require("~/src/cli/init-config/environment-helpers");
 
 describe("cli/init-config/environment-helpers - getBabelConfigCandidates", () => {
   const WORKINGDIR = process.cwd();

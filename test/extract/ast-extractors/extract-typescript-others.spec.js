@@ -1,7 +1,7 @@
 const fs = require("fs");
 const path = require("path");
 const expect = require("chai").expect;
-const extractTypescriptFromAST = require("../../../src/extract/ast-extractors/extract-typescript-deps");
+const extractTypescriptFromAST = require("~/src/extract/ast-extractors/extract-typescript-deps");
 
 describe("ast-extractors/extract-typescript - others", () => {
   // see issue #167 - union types on tsc 2.8 and before don't deliver/

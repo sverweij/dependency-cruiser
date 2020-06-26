@@ -1,5 +1,5 @@
 const expect = require("chai").expect;
-const compare = require("../../src/utl/compare");
+const compare = require("~/src/utl/compare");
 
 describe("utl/compare - severities", () => {
   it("returns 0 for identical severities", () => {

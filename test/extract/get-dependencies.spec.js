@@ -2,9 +2,6 @@ const path = require("path");
 const fs = require("fs");
 const symlinkDir = require("symlink-dir");
 const expect = require("chai").expect;
-const getDependencies = require("../../src/extract/get-dependencies");
-const normalize = require("../../src/main/options/normalize");
-const normalizeResolveOptions = require("../../src/main/resolve-options/normalize");
 const cjsFixtures = require("./fixtures/cjs.json");
 const es6Fixtures = require("./fixtures/es6.json");
 const amdFixtures = require("./fixtures/amd.json");
@@ -14,6 +11,9 @@ const coffeeFixtures = require("./fixtures/coffee.json");
 const cjsBang = require("./fixtures/cjs-bang.json");
 const amdBangRequirejs = require("./fixtures/amd-bang-requirejs.json");
 const amdBangCJSWrapper = require("./fixtures/amd-bang-CJSWrapper.json");
+const normalizeResolveOptions = require("~/src/main/resolve-options/normalize");
+const normalize = require("~/src/main/options/normalize");
+const getDependencies = require("~/src/extract/get-dependencies");
 
 let symlinkDirectory = path.join(__dirname, "fixtures", "symlinked");
 

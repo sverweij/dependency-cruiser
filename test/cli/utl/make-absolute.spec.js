@@ -1,6 +1,6 @@
 const path = require("path");
 const expect = require("chai").expect;
-const makeAbsolute = require("../../../src/cli/utl/make-absolute");
+const makeAbsolute = require("~/src/cli/utl/make-absolute");
 
 describe("cli/utl/makeAbsolute", () => {
   it("leaves absolute path names alone", () => {

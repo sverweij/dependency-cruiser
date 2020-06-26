@@ -1,10 +1,10 @@
 const chai = require("chai");
-const main = require("../../src/main");
-const cruiseResultSchema = require("../../src/schema/cruise-result.schema.json");
 const tsPreCompFixtureCJS = require("./fixtures/ts-precomp-cjs.json");
 const tsPreCompFixtureES = require("./fixtures/ts-precomp-es.json");
 const tsNoPrecompFixtureCJS = require("./fixtures/ts-no-precomp-cjs.json");
 const tsNoPrecompFixtureES = require("./fixtures/ts-no-precomp-es.json");
+const cruiseResultSchema = require("~/src/schema/cruise-result.schema.json");
+const main = require("~/src/main");
 
 const expect = chai.expect;
 

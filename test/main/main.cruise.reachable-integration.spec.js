@@ -1,8 +1,8 @@
 const path = require("path");
 const chai = require("chai");
-const main = require("../../src/main");
-const normalizeOptions = require("../../src/cli/normalize-options");
-const cruiseResultSchema = require("../../src/schema/cruise-result.schema.json");
+const main = require("~/src/main");
+const normalizeOptions = require("~/src/cli/normalize-options");
+const cruiseResultSchema = require("~/src/schema/cruise-result.schema.json");
 
 const expect = chai.expect;
 

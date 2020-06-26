@@ -1,5 +1,5 @@
 const expect = require("chai").expect;
-const localNpmHelpers = require("../../../src/extract/resolve/local-npm-helpers");
+const localNpmHelpers = require("~/src/extract/resolve/local-npm-helpers");
 
 describe("extract/resolve/localNpmHelpers.getPackageJson", () => {
   it("returns null if the module does not exist", () => {

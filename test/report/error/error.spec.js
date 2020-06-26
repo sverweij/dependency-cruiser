@@ -1,13 +1,13 @@
 /* eslint-disable no-magic-numbers */
 const expect = require("chai").expect;
 const chalk = require("chalk");
-const render = require("../../../src/report/error");
 const okdeps = require("./mocks/everything-fine.json");
 const dependencies = require("./mocks/cjs-no-dependency-valid.json");
 const onlywarningdependencies = require("./mocks/err-only-warnings.json");
 const orphanerrs = require("./mocks/orphan-deps.json");
 const circularerrs = require("./mocks/circular-deps.json");
 const viaerrs = require("./mocks/via-deps.json");
+const render = require("~/src/report/error");
 
 describe("report/error", () => {
   let chalkLevel = chalk.level;

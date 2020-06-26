@@ -1,5 +1,5 @@
 const expect = require("chai").expect;
-const mergePackages = require("../../../../src/extract/resolve/get-manifest-dependencies/merge-manifests");
+const mergePackages = require("~/src/extract/resolve/get-manifest-dependencies/merge-manifests");
 
 const INPUT = {
   description: "testington",

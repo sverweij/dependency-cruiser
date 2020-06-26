@@ -1,6 +1,6 @@
 const expect = require("chai").expect;
-const anonymizePath = require("../../../src/report/anon/anonymize-path");
-const anonymizePathElement = require("../../../src/report/anon/anonymize-path-element");
+const anonymizePath = require("~/src/report/anon/anonymize-path");
+const anonymizePathElement = require("~/src/report/anon/anonymize-path-element");
 
 describe("report/anon/anonymizePath", () => {
   beforeEach(() => {

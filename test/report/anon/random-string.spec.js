@@ -1,5 +1,5 @@
 const expect = require("chai").expect;
-const randomString = require("../../../src/report/anon/random-string");
+const randomString = require("~/src/report/anon/random-string");
 
 describe("report/anon/randomString", () => {
   it("returns the empty string when passed the empty string", () => {

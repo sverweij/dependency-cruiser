@@ -1,7 +1,7 @@
 const path = require("path");
 const expect = require("chai").expect;
-const readPackageDeps = require("../../../../src/extract/resolve/get-manifest-dependencies");
 const rootPackageJson = require("../../../../package.json");
+const readPackageDeps = require("~/src/extract/resolve/get-manifest-dependencies");
 
 const FIXTUREDIR = "test/extract/resolve/fixtures";
 const WORKINGDIR = process.cwd();

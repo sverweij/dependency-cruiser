@@ -1,7 +1,7 @@
 const expect = require("chai").expect;
-const gather = require("../../src/extract/gather-initial-sources");
-const p2p = require("../../src/utl/path-to-posix");
-const normalize = require("../../src/main/options/normalize");
+const gather = require("~/src/extract/gather-initial-sources");
+const p2p = require("~/src/utl/path-to-posix");
+const normalize = require("~/src/main/options/normalize");
 
 // make the import pathToPosix the correct function profile
 // (1 parameter exactly) for use in map

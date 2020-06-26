@@ -6,7 +6,7 @@ const {
   pnpIsEnabled,
   isLikelyMonoRepo,
   hasTestsWithinSource,
-} = require("../../../src/cli/init-config/environment-helpers");
+} = require("~/src/cli/init-config/environment-helpers");
 
 describe("cli/init-config/environment-helpers - pnpIsEnabled", () => {
   const WORKINGDIR = process.cwd();

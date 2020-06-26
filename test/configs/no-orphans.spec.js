@@ -1,6 +1,6 @@
 const chai = require("chai");
 const noOrphansRule = require("../../configs/rules/no-orphans");
-const matchModuleRule = require("../../src/validate/match-module-rule");
+const matchModuleRule = require("~/src/validate/match-module-rule");
 
 const expect = chai.expect;
 

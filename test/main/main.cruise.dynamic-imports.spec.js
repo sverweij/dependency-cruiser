@@ -1,9 +1,9 @@
 const chai = require("chai");
-const main = require("../../src/main");
-const cruiseResultSchema = require("../../src/schema/cruise-result.schema.json");
 const esOut = require("./fixtures/dynamic-imports/es/output.json");
 const tsOut = require("./fixtures/dynamic-imports/typescript/output.json");
 const tsOutpre = require("./fixtures/dynamic-imports/typescript/output-pre-compilation-deps.json");
+const cruiseResultSchema = require("~/src/schema/cruise-result.schema.json");
+const main = require("~/src/main");
 
 const expect = chai.expect;
 

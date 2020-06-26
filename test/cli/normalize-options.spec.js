@@ -1,6 +1,6 @@
 const path = require("path");
 const expect = require("chai").expect;
-const normalizeOptions = require("../../src/cli/normalize-options");
+const normalizeOptions = require("~/src/cli/normalize-options");
 
 describe("cli/normalizeOptions", () => {
   const WORKINGDIR = process.cwd();

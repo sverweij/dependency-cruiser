@@ -1,5 +1,5 @@
 const chai = require("chai");
-const normalizeREProperties = require("../../../src/main/utl/normalize-re-properties");
+const normalizeREProperties = require("~/src/main/utl/normalize-re-properties");
 
 const expect = chai.expect;
 

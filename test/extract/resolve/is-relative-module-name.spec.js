@@ -1,5 +1,5 @@
 const expect = require("chai").expect;
-const isRelativeModuleName = require("../../../src/extract/resolve/is-relative-module-name");
+const isRelativeModuleName = require("~/src/extract/resolve/is-relative-module-name");
 
 describe("extract/resolve/isRelativeModuleName", () => {
   it("throws an error when passed nothing", () => {

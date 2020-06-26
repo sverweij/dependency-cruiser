@@ -1,8 +1,8 @@
 const fs = require("fs");
 const path = require("path");
 const chai = require("chai");
-const writeConfig = require("../../../src/cli/init-config/write-config");
 const deleteDammit = require("../delete-dammit.utl");
+const writeConfig = require("~/src/cli/init-config/write-config");
 
 const RULES_FILE_JS = ".dependency-cruiser.js";
 const expect = chai.expect;

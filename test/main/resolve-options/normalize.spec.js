@@ -1,7 +1,7 @@
 const path = require("path");
 const expect = require("chai").expect;
-const normalizeOptions = require("../../../src/main/options/normalize");
-const normalizeResolveOptions = require("../../../src/main/resolve-options/normalize");
+const normalizeOptions = require("~/src/main/options/normalize");
+const normalizeResolveOptions = require("~/src/main/resolve-options/normalize");
 
 describe("main/resolve-options/normalize", () => {
   const DEFAULT_NO_OF_RESOLVE_OPTIONS = 8;

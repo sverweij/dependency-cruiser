@@ -1,7 +1,7 @@
 const expect = require("chai").expect;
-const normalize = require("../../../../src/main/rule-set/normalize");
-const addReachability = require("../../../../src/enrich/derive/reachable/index");
-const clearCaches = require("../../../../src/extract/clear-caches");
+const normalize = require("~/src/main/rule-set/normalize");
+const addReachability = require("~/src/enrich/derive/reachable/index");
+const clearCaches = require("~/src/extract/clear-caches");
 
 const GRAPH = [
   {

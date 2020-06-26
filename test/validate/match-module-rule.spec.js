@@ -1,5 +1,5 @@
 const expect = require("chai").expect;
-const { match } = require("../../src/validate/match-module-rule");
+const { match } = require("~/src/validate/match-module-rule");
 
 const EMPTY_RULE = { from: {}, to: {} };
 const ORPHAN_RULE = { from: { orphan: true }, to: {} };

@@ -1,5 +1,5 @@
 const expect = require("chai").expect;
-const detectPrecompilationNess = require("../../../src/extract/utl/detect-pre-compilation-ness");
+const detectPrecompilationNess = require("~/src/extract/utl/detect-pre-compilation-ness");
 
 describe("extract/utl/detectPreCompilationNess", () => {
   it("empty dependency lists yield an empty one", () => {

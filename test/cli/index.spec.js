@@ -4,9 +4,9 @@ const fs = require("fs");
 const path = require("path").posix;
 const expect = require("chai").expect;
 const intercept = require("intercept-stdout");
-const cli = require("../../src/cli");
 const asserthelpers = require("./asserthelpers.utl");
 const deleteDammit = require("./delete-dammit.utl");
+const cli = require("~/src/cli");
 
 const OUT_DIR = "./test/cli/output";
 const FIX_DIR = "./test/cli/fixtures";

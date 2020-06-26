@@ -1,5 +1,5 @@
 const expect = require("chai").expect;
-const matchers = require("../../src/validate/matchers");
+const matchers = require("~/src/validate/matchers");
 
 describe("validate/matches", () => {
   it("_replaceGroupPlaceholders - leaves re alone if passed empty match result", () => {

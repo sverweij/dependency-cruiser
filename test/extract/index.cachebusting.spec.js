@@ -1,9 +1,9 @@
 /* eslint-disable node/global-require */
 const fs = require("fs");
 const chai = require("chai");
-const extract = require("../../src/extract");
-const normalize = require("../../src/main/options/normalize");
-const normalizeResolveOptions = require("../../src/main/resolve-options/normalize");
+const extract = require("~/src/extract");
+const normalize = require("~/src/main/options/normalize");
+const normalizeResolveOptions = require("~/src/main/resolve-options/normalize");
 
 const expect = chai.expect;
 

@@ -1,5 +1,5 @@
 const expect = require("chai").expect;
-const utl = require("../../../src/report/error-html/utl");
+const utl = require("~/src/report/error-html/utl");
 
 function summaryHasMinimalAttributes(pResult) {
   expect(pResult).to.haveOwnProperty("depcruiseVersion");

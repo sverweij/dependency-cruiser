@@ -1,5 +1,5 @@
 const expect = require("chai").expect;
-const validateNodeEnvironment = require("../../src/cli/validate-node-environment");
+const validateNodeEnvironment = require("~/src/cli/validate-node-environment");
 
 describe("cli/validateNodeEnv", () => {
   it("throws when an older and unsupported node version is passed", () => {

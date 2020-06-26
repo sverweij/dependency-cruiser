@@ -2,7 +2,7 @@ const expect = require("chai").expect;
 const {
   addRunScriptsToManifest,
   compileRunScripts,
-} = require("../../../src/cli/init-config/write-run-scripts-to-manifest");
+} = require("~/src/cli/init-config/write-run-scripts-to-manifest");
 
 describe("cli/init-config/write-run-scripts-to-manifest - logic", () => {
   it("no manifest and no scripts retain the empty manifest with a scripts section", () => {

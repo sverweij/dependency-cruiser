@@ -1,5 +1,5 @@
 const expect = require("chai").expect;
-const validateOptions = require("../../../src/main/options/validate");
+const validateOptions = require("~/src/main/options/validate");
 
 describe("main/options/validate", () => {
   it("throws when a invalid module system is passed ", () => {
