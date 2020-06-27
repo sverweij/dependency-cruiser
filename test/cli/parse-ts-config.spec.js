@@ -151,6 +151,9 @@ describe("cli/parseTSConfig - flatten typescript config - 'extend' config scenar
       validatedExcludeSpecs: ["only in the extends"],
       // overridden by extends:
       validatedIncludeSpecs: ["override from extends here"],
+      // the beta of the v4 TypeScript compiler seems to lowercase the
+      // wildcard directories so /Users/johngalt/... becomes /users/johngalt
+      // so once that's out of beta we'll probably have to toLocaleLowerCase it
       wildcardDirectories: lWildCardDirectories,
     });
 
