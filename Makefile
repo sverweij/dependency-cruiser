@@ -27,22 +27,6 @@ SCHEMA_SOURCES=tools/schema/compound-exclude-type.mjs \
 
 .PHONY: help dev-build clean
 
-help:
-	@echo
-	@echo " -------------------------------------------------------- "
-	@echo "| More information and other targets: open the Makefile  |"
-	@echo " -------------------------------------------------------- "
-	@echo
-	@echo "Useful targets:"
-	@echo
-	@echo "dev-build. If necessary this ..."
-	@echo "- ... recompiles the handlebar templates"
-	@echo
-	@echo "clean. Removes all generated sources."
-	@echo
-	@echo "uses to infer whether re-compilation is necessary."
-	@echo
-
 # production rules
 src/%.template.js: src/%.template.hbs
 	npx handlebars --commonjs handlebars/runtime -f $@ $<
@@ -55,3 +39,18 @@ dev-build: $(GENERATED_SOURCES)
 
 clean:
 	$(RM) $(GENERATED_SOURCES)
+
+help:
+	@echo
+	@echo " -------------------------------------------------------- "
+	@echo "| More information and other targets: open the Makefile  |"
+	@echo " -------------------------------------------------------- "
+	@echo
+	@echo "Useful targets:"
+	@echo
+	@echo "dev-build. If necessary this ..."
+	@echo "  - ... recompiles the handlebar templates"
+	@echo "  - ... re-generates the json schema"
+	@echo
+	@echo "clean. Removes all generated sources."
+	@echo
