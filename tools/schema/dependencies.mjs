@@ -33,7 +33,7 @@ export default {
         resolved: {
           type: "string",
           description:
-            "The (resolved) file name of the module, e.g. 'src/main//index.js'",
+            "The (resolved) file name of the module, e.g. 'src/main/index.js'",
         },
         coreModule: {
           type: "boolean",
@@ -116,7 +116,7 @@ export default {
           description:
             "If following this dependency will ultimately return to the source " +
             "(circular === true), this attribute will contain an (ordered) array " +
-            "of module names that shows (one of the) circular path(s)",
+            "of module names that shows (one of) the circular path(s)",
         },
         moduleSystem: { $ref: "#/definitions/ModuleSystemType" },
         valid: {
