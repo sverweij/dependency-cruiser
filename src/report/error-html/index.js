@@ -21,6 +21,7 @@ function aggregateViolations(pViolations, pRuleSetUsed) {
   }, {});
 
   return _get(pRuleSetUsed, "forbidden", [])
+    .concat(_get(pRuleSetUsed, "required", []))
     .concat(getFormattedAllowedRule(pRuleSetUsed))
     .map((pRule) => mergeCountIntoRule(pRule, lViolationCounts))
     .sort(

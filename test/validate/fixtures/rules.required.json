@@ -1,0 +1,14 @@
+{
+  "required": [
+    {
+      "name": "thou-shalt-inherit-from-base",
+      "module": {
+        "path": ".+-controller\\.ts$",
+        "pathNot": "random-trials"
+      },
+      "to": {
+        "path": "src/base-controller/index\\.ts$"
+      }
+    }
+  ]
+}

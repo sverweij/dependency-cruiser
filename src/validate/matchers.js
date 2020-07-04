@@ -10,6 +10,16 @@ function fromPathNot(pRule, pModule) {
   );
 }
 
+function modulePath(pRule, pModule) {
+  return Boolean(!pRule.module.path || pModule.source.match(pRule.module.path));
+}
+
+function modulePathNot(pRule, pModule) {
+  return Boolean(
+    !pRule.module.pathNot || !pModule.source.match(pRule.module.pathNot)
+  );
+}
+
 function _replaceGroupPlaceholders(pString, pExtractedGroups) {
   return pExtractedGroups.reduce(
     (pAll, pThis, pIndex) =>
@@ -96,6 +106,8 @@ module.exports = {
   fromPathNot,
   toPath,
   toModulePath,
+  modulePath,
+  modulePathNot,
   toPathNot,
   toModulePathNot,
   toDependencyTypes,
