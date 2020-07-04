@@ -14,10 +14,12 @@ module.exports = function addRuleSetUsed(pOptions) {
   const lForbidden = _get(pOptions, "ruleSet.forbidden");
   const lAllowed = _get(pOptions, "ruleSet.allowed");
   const lAllowedSeverity = _get(pOptions, "ruleSet.allowedSeverity");
+  const lRequired = _get(pOptions, "ruleSet.required");
 
   return Object.assign(
     lForbidden ? { forbidden: lForbidden } : {},
     lAllowed ? { allowed: lAllowed.map(removeNames) } : {},
-    lAllowedSeverity ? { allowedSeverity: lAllowedSeverity } : {}
+    lAllowedSeverity ? { allowedSeverity: lAllowedSeverity } : {},
+    lRequired ? { required: lRequired } : {}
   );
 };

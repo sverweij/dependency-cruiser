@@ -1,3 +1,4 @@
+/* eslint-disable unicorn/no-useless-undefined */
 const { expect } = require("chai");
 const $input = require("./fixtures/focus/dependency-cruiser-only-src.json");
 const $focus = require("./fixtures/focus/dependency-cruiser-focus-on-main.json");

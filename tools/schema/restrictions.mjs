@@ -140,6 +140,27 @@ export default {
         },
       },
     },
+    RequiredFromRestrictionType: {
+      description: "TODO lorem ipsum",
+      required: [],
+      additionalProperties: false,
+      properties: {
+        ...BASE_RESTRICTION,
+      },
+    },
+    RequiredToRestrictionType: {
+      description: "TODO lorem ipsum",
+      required: [],
+      additionalProperties: false,
+      properties: {
+        path: {
+          description:
+            "A regular expression or an array of regular expressions an end of a " +
+            "dependency should match to be caught by this rule.",
+          $ref: "#/definitions/REAsStringsType",
+        },
+      },
+    },
     ...dependencyType.definitions,
     ...REAsStringsType.definitions,
   },

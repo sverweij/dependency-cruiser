@@ -1,5 +1,6 @@
 const matchModuleRule = require("./match-module-rule");
 const matchDependencyRule = require("./match-dependency-rule");
+const matchers = require("./matchers");
 
 function compareSeverity(pFirst, pSecond) {
   const SEVERITY2INT = {
@@ -44,6 +45,39 @@ function validateAgainstForbiddenRules(pRuleSet, pMatchModule, pFrom, pTo) {
     }));
 }
 
+function violatesRequiredRule(pRule, pModule) {
+  let lReturnValue = false;
+
+  if (
+    matchers.fromPath(pRule, pModule) &&
+    matchers.fromPathNot(pRule, pModule)
+  ) {
+    lReturnValue = !pModule.dependencies.some((pDependency) =>
+      matchers.toPath(pRule, pDependency)
+    );
+  }
+  return lReturnValue;
+}
+
+function validateAgainstRequiredRules(pRuleSet, pMatchModule, pModule) {
+  let lFoundRequiredRuleViolations = [];
+
+  // TODO: that module comparison is not super elegant
+  if (
+    Object.prototype.hasOwnProperty.call(pRuleSet, "required") &&
+    pMatchModule === matchModuleRule
+  ) {
+    lFoundRequiredRuleViolations = pRuleSet.required
+      .filter((pRule) => violatesRequiredRule(pRule, pModule))
+      // TODO: normalize severity and name upfront
+      .map((pMatchedRule) => ({
+        severity: pMatchedRule.severity,
+        name: pMatchedRule.name,
+      }));
+  }
+  return lFoundRequiredRuleViolations;
+}
+
 function validateAgainstRules(pRuleSet, pFrom, pTo, pMatchModule) {
   let lReturnValue = { valid: true };
 
@@ -54,6 +88,7 @@ function validateAgainstRules(pRuleSet, pFrom, pTo, pMatchModule) {
     pTo
   )
     .concat(validateAgainstForbiddenRules(pRuleSet, pMatchModule, pFrom, pTo))
+    .concat(validateAgainstRequiredRules(pRuleSet, pMatchModule, pFrom))
     .sort(compareSeverity);
 
   lReturnValue.valid = lFoundRuleViolations.length === 0;
