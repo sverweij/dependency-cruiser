@@ -1,18 +1,19 @@
 {
-    "allowed": [],
-    "allowedSeverity": "warn",
-    "forbidden": [{
-        "name": "no-circular",
-        "severity": "ignore",
-        "from": {},
-        "to": { "circular": true }
-    },{
-        "name": "only-in-extending",
-        "severity": "info",
-        "from": { "pathNot": "^test" },
-        "to": { "path": "^test" }
-    }],
-    "options": {
-        "doNotFollow": "node_modules"
+  "forbidden": [
+    {
+      "name": "no-circular",
+      "severity": "ignore",
+      "from": {},
+      "to": { "circular": true }
+    },
+    {
+      "name": "only-in-extending",
+      "severity": "info",
+      "from": { "pathNot": "^test" },
+      "to": { "path": "^test" }
     }
+  ],
+  "options": {
+    "doNotFollow": "node_modules"
+  }
 }

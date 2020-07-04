@@ -222,6 +222,58 @@ export interface IReachabilityForbiddenRuleType {
   to: IReachabilityToRestrictionType;
 }
 
+export interface IRequiredRuleType {
+  /**
+   * A short name for the rule - will appear in reporters to enable customers to
+   * quickly identify a violated rule. Try to keep them short, eslint style.
+   * E.g. 'not-to-core' for a rule forbidding dependencies on core modules, or
+   * 'not-to-unresolvable' for one that prevents dependencies on modules that
+   * probably don't exist.
+   */
+  name?: string;
+  /**
+   * How severe a violation of the rule is. The 'error' severity will make some
+   * reporters return a non-zero exit code, so if you want e.g. a build to stop
+   * when there's a rule violated: use that.
+   */
+  severity?: SeverityType;
+  /**
+   * You can use this field to document why the rule is there.
+   */
+  comment?: string;
+  /**
+   * Criteria to select the module(s) this restriction should apply to
+   */
+  module: IRequiredModuleRestrictionType;
+  /**
+   * Criteria at least one dependency of each matching module must
+   * adhere to.
+   */
+  to: IRequiredToRestrictionType;
+}
+
+export interface IRequiredModuleRestrictionType {
+  /**
+   * A regular expression or an array of regular expressions that select
+   * the modules this required rule should apply to.
+   */
+  path?: string | string[];
+  /**
+   * A regular expression or an array of regular expressions that select
+   * the modules this required rule should not apply to (you can use this
+   * to make exceptions on the `path` attribute)
+   */
+  pathNot?: string | string[];
+}
+
+export interface IRequiredToRestrictionType {
+  /**
+   * A regular expression or an array of regular expressions at least
+   * one of the dependencies of the module should adhere to.
+   */
+  path?: string | string[];
+}
+
 export interface IFlattenedRuleSet {
   /**
    * A list of rules that describe dependencies that are not allowed.
@@ -240,4 +292,12 @@ export interface IFlattenedRuleSet {
    * Defaults to 'warn'
    */
   allowedSeverity?: SeverityType;
+  /**
+   * A list of rules that describe what dependencies modules _must_ have.
+   * E.g.
+   * - every controller needs to (directly) depend on a base controller.
+   * - each source file should be the dependency of a spec file with the same
+   *   base name
+   */
+  required?: IRequiredRuleType[];
 }

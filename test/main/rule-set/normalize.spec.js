@@ -11,8 +11,8 @@ describe("main/rule-set/normalize", () => {
       normalize({
         allowed: [
           {
-            from: ".+",
-            to: ".+",
+            from: { path: ".+" },
+            to: { path: ".+" },
           },
         ],
       })
@@ -20,8 +20,8 @@ describe("main/rule-set/normalize", () => {
       allowed: [
         {
           name: "not-in-allowed",
-          from: ".+",
-          to: ".+",
+          from: { path: ".+" },
+          to: { path: ".+" },
         },
       ],
       allowedSeverity: "warn",
@@ -33,8 +33,8 @@ describe("main/rule-set/normalize", () => {
       normalize({
         allowed: [
           {
-            from: ".+",
-            to: ".+",
+            from: { path: ".+" },
+            to: { path: ".+" },
           },
         ],
         allowedSeverity: "error",
@@ -43,8 +43,8 @@ describe("main/rule-set/normalize", () => {
       allowed: [
         {
           name: "not-in-allowed",
-          from: ".+",
-          to: ".+",
+          from: { path: ".+" },
+          to: { path: ".+" },
         },
       ],
       allowedSeverity: "error",
@@ -56,8 +56,8 @@ describe("main/rule-set/normalize", () => {
       normalize({
         forbidden: [
           {
-            from: ".+",
-            to: ".+",
+            from: { path: ".+" },
+            to: { path: ".+" },
             severity: "unrecognized",
             name: "all-ok",
           },
@@ -66,8 +66,8 @@ describe("main/rule-set/normalize", () => {
     ).to.deep.equal({
       forbidden: [
         {
-          from: ".+",
-          to: ".+",
+          from: { path: ".+" },
+          to: { path: ".+" },
           severity: "warn",
           name: "all-ok",
         },
@@ -80,8 +80,8 @@ describe("main/rule-set/normalize", () => {
       normalize({
         forbidden: [
           {
-            from: ".+",
-            to: ".+",
+            from: { path: ".+" },
+            to: { path: ".+" },
             severity: "error",
             name: "all-ok",
           },
@@ -90,8 +90,8 @@ describe("main/rule-set/normalize", () => {
     ).to.deep.equal({
       forbidden: [
         {
-          from: ".+",
-          to: ".+",
+          from: { path: ".+" },
+          to: { path: ".+" },
           severity: "error",
           name: "all-ok",
         },
@@ -104,8 +104,8 @@ describe("main/rule-set/normalize", () => {
       normalize({
         forbidden: [
           {
-            from: ".+",
-            to: ".+",
+            from: { path: ".+" },
+            to: { path: ".+" },
             severity: "error",
             name: "all-ok",
             comment: "this comment is kept",
@@ -115,8 +115,8 @@ describe("main/rule-set/normalize", () => {
     ).to.deep.equal({
       forbidden: [
         {
-          from: ".+",
-          to: ".+",
+          from: { path: ".+" },
+          to: { path: ".+" },
           severity: "error",
           name: "all-ok",
           comment: "this comment is kept",
@@ -130,8 +130,8 @@ describe("main/rule-set/normalize", () => {
       normalize({
         forbidden: [
           {
-            from: ".+",
-            to: ".+",
+            from: { path: ".+" },
+            to: { path: ".+" },
             severity: "ignore",
             name: "all-ok",
             comment: "this comment is kept",
@@ -143,13 +143,31 @@ describe("main/rule-set/normalize", () => {
     });
   });
 
+  it("filters out required rules with severity 'ignore'", () => {
+    expect(
+      normalize({
+        required: [
+          {
+            from: { path: ".+" },
+            to: { path: ".+" },
+            severity: "ignore",
+            name: "all-ok",
+            comment: "this comment is kept",
+          },
+        ],
+      })
+    ).to.deep.equal({
+      required: [],
+    });
+  });
+
   it("removes the allowed rules & allowedSeverity when allowedSeverity === 'ignore'", () => {
     expect(
       normalize({
         allowed: [
           {
-            from: ".+",
-            to: ".+",
+            from: { path: ".+" },
+            to: { path: ".+" },
           },
         ],
         allowedSeverity: "ignore",
@@ -187,6 +205,40 @@ describe("main/rule-set/normalize", () => {
           to: {
             path: "super/exclusive|donot/gohere|norhere",
             pathNot: "super/exclusive/this-is-ok-though\\.js|snorhere",
+          },
+        },
+      ],
+    });
+  });
+
+  it("normalizes arrays of re's in paths to regular regular expressions (required)", () => {
+    expect(
+      normalize({
+        required: [
+          {
+            name: "regularize-regular",
+            severity: "warn",
+            from: {
+              path: ["src", "bin"],
+              pathNot: ["src/exceptions", "bin/aural"],
+            },
+            to: {
+              path: ["super/exclusive", "donot/gohere", "norhere"],
+            },
+          },
+        ],
+      })
+    ).to.deep.equal({
+      required: [
+        {
+          name: "regularize-regular",
+          severity: "warn",
+          from: {
+            path: "src|bin",
+            pathNot: "src/exceptions|bin/aural",
+          },
+          to: {
+            path: "super/exclusive|donot/gohere|norhere",
           },
         },
       ],

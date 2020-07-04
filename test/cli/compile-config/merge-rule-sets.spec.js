@@ -4,9 +4,6 @@ const merge = require("../../../src/cli/compile-config/merge-configs");
 describe("cli/mergeRuleSets - general", () => {
   it("two empty rule sets yield an empty rule set with named attributes", () => {
     expect(merge({}, {})).to.deep.equal({
-      allowed: [],
-      allowedSeverity: "warn",
-      forbidden: [],
       options: {},
     });
   });
@@ -17,8 +14,6 @@ describe("cli/mergeRuleSets - forbidden", () => {
     expect(
       merge({ forbidden: [{ from: "src", to: "test" }] }, {})
     ).to.deep.equal({
-      allowed: [],
-      allowedSeverity: "warn",
       forbidden: [{ from: "src", to: "test" }],
       options: {},
     });
@@ -31,8 +26,6 @@ describe("cli/mergeRuleSets - forbidden", () => {
         { forbidden: [{ from: "src", to: "test" }] }
       )
     ).to.deep.equal({
-      allowed: [],
-      allowedSeverity: "warn",
       forbidden: [{ from: "src", to: "test" }],
       options: {},
     });
@@ -42,8 +35,6 @@ describe("cli/mergeRuleSets - forbidden", () => {
     expect(
       merge({}, { forbidden: [{ from: "src", to: "test" }] })
     ).to.deep.equal({
-      allowed: [],
-      allowedSeverity: "warn",
       forbidden: [{ from: "src", to: "test" }],
       options: {},
     });
@@ -56,8 +47,6 @@ describe("cli/mergeRuleSets - forbidden", () => {
         { forbidden: [{ from: "src", to: "test" }] }
       )
     ).to.deep.equal({
-      allowed: [],
-      allowedSeverity: "warn",
       forbidden: [
         { from: "bin", to: "test" },
         { from: "src", to: "test" },
@@ -73,8 +62,6 @@ describe("cli/mergeRuleSets - forbidden", () => {
         { forbidden: [{ name: "already-in-base", from: "src", to: "test" }] }
       )
     ).to.deep.equal({
-      allowed: [],
-      allowedSeverity: "warn",
       forbidden: [{ name: "already-in-base", from: "bin", to: "test" }],
       options: {},
     });
@@ -104,8 +91,6 @@ describe("cli/mergeRuleSets - forbidden", () => {
         }
       )
     ).to.deep.equal({
-      allowed: [],
-      allowedSeverity: "warn",
       forbidden: [
         {
           name: "already-in-base",
@@ -142,8 +127,6 @@ describe("cli/mergeRuleSets - forbidden", () => {
         }
       )
     ).to.deep.equal({
-      allowed: [],
-      allowedSeverity: "warn",
       forbidden: [
         {
           name: "already-in-base",
@@ -171,8 +154,6 @@ describe("cli/mergeRuleSets - forbidden", () => {
         }
       )
     ).to.deep.equal({
-      allowed: [],
-      allowedSeverity: "warn",
       forbidden: [
         {
           name: "already-in-base",
@@ -192,8 +173,6 @@ describe("cli/mergeRuleSets - forbidden", () => {
         { forbidden: [{ name: "already-in-base", from: "src", to: "test" }] }
       )
     ).to.deep.equal({
-      allowed: [],
-      allowedSeverity: "warn",
       forbidden: [
         { name: "not-in-base", from: "bin", to: "test" },
         { name: "already-in-base", from: "src", to: "test" },
@@ -209,7 +188,6 @@ describe("cli/mergeRuleSets - allowed", () => {
       {
         allowed: [{ from: "test", to: "src" }],
         allowedSeverity: "warn",
-        forbidden: [],
         options: {},
       }
     );
@@ -224,7 +202,6 @@ describe("cli/mergeRuleSets - allowed", () => {
     ).to.deep.equal({
       allowed: [{ from: "test", to: "src" }],
       allowedSeverity: "warn",
-      forbidden: [],
       options: {},
     });
   });
@@ -234,7 +211,6 @@ describe("cli/mergeRuleSets - allowed", () => {
       {
         allowed: [{ from: "test", to: "src" }],
         allowedSeverity: "warn",
-        forbidden: [],
         options: {},
       }
     );
@@ -247,52 +223,52 @@ describe("cli/mergeRuleSets - allowed", () => {
         { allowed: [{ from: "src", to: "test" }] }
       )
     ).to.deep.equal({
+      allowedSeverity: "warn",
       allowed: [
         { from: "bin", to: "test" },
         { from: "src", to: "test" },
       ],
-      allowedSeverity: "warn",
-      forbidden: [],
       options: {},
     });
   });
 });
 
 describe("cli/mergeRuleSets - allowedSeverity", () => {
-  it("extending empty allowed yields allowedSeverity warn", () => {
-    expect(merge({}, {})).to.deep.equal({
-      allowed: [],
-      allowedSeverity: "warn",
-      forbidden: [],
+  it("extending empty set with only an allowedSeverity error yields no allowedSeverity", () => {
+    expect(merge({ allowedSeverity: "error" }, {})).to.deep.equal({
       options: {},
     });
   });
 
-  it("extending empty set with allowedSeverity error yields allowedSeverity error", () => {
-    expect(merge({ allowedSeverity: "error" }, {})).to.deep.equal({
-      allowed: [],
+  it("extending empty set with allowed + allowedSeverity error yields allowedSeverity error", () => {
+    expect(
+      merge({}, { allowed: [{ from: {}, to: {} }], allowedSeverity: "error" })
+    ).to.deep.equal({
+      allowed: [{ from: {}, to: {} }],
       allowedSeverity: "error",
-      forbidden: [],
       options: {},
     });
   });
 
   it("extending allowedSeverity error with nothing yields allowedSeverity error", () => {
-    expect(merge({}, { allowedSeverity: "error" })).to.deep.equal({
-      allowed: [],
+    expect(
+      merge({ allowed: [{ from: {}, to: {} }], allowedSeverity: "error" }, {})
+    ).to.deep.equal({
+      allowed: [{ from: {}, to: {} }],
       allowedSeverity: "error",
-      forbidden: [],
       options: {},
     });
   });
 
   it("extending allowedSeverity error with info yields allowedSeverity info", () => {
     expect(
-      merge({ allowedSeverity: "info" }, { allowedSeverity: "error" })
+      merge(
+        { allowedSeverity: "info" },
+        { allowed: [{ from: {}, to: {} }], allowedSeverity: "error" }
+      )
     ).to.deep.equal({
-      allowed: [],
+      allowed: [{ from: {}, to: {} }],
       allowedSeverity: "info",
-      forbidden: [],
       options: {},
     });
   });
@@ -311,9 +287,6 @@ describe("cli/mergeRuleSets - options", () => {
         {}
       )
     ).to.deep.equal({
-      allowed: [],
-      allowedSeverity: "warn",
-      forbidden: [],
       options: {
         doNotFollow: "node_modules",
         tsConfig: {
@@ -335,9 +308,6 @@ describe("cli/mergeRuleSets - options", () => {
         }
       )
     ).to.deep.equal({
-      allowed: [],
-      allowedSeverity: "warn",
-      forbidden: [],
       options: {
         doNotFollow: "node_modules",
         tsConfig: {
@@ -359,9 +329,6 @@ describe("cli/mergeRuleSets - options", () => {
         }
       )
     ).to.deep.equal({
-      allowed: [],
-      allowedSeverity: "warn",
-      forbidden: [],
       options: {
         doNotFollow: "node_modules",
         tsConfig: {},

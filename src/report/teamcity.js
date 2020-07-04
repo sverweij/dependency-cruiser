@@ -13,18 +13,16 @@ function severity2teamcitySeverity(pSeverity) {
   return SEVERITY2TEAMCITY_SEVERITY[pSeverity];
 }
 
-function reportForbiddenRules(pForbiddenRules, pViolations) {
-  return pForbiddenRules
-    .filter((pForbiddenRule) =>
-      pViolations.some(
-        (pViolation) => pForbiddenRule.name === pViolation.rule.name
-      )
+function reportRules(pRules, pViolations) {
+  return pRules
+    .filter((pRule) =>
+      pViolations.some((pViolation) => pRule.name === pViolation.rule.name)
     )
-    .map((pForbiddenRule) =>
+    .map((pRule) =>
       tsm.inspectionType({
-        id: pForbiddenRule.name,
-        name: pForbiddenRule.name,
-        description: pForbiddenRule.comment || pForbiddenRule.name,
+        id: pRule.name,
+        name: pRule.name,
+        description: pRule.comment || pRule.name,
         category: CATEGORY,
       })
     );
@@ -48,10 +46,9 @@ function reportAllowedRule(pAllowedRule, pViolations) {
 }
 
 function reportViolatedRules(pRuleSetUsed, pViolations) {
-  return reportForbiddenRules(
-    _get(pRuleSetUsed, "forbidden", []),
-    pViolations
-  ).concat(reportAllowedRule(_get(pRuleSetUsed, "allowed", []), pViolations));
+  return reportRules(_get(pRuleSetUsed, "forbidden", []), pViolations)
+    .concat(reportAllowedRule(_get(pRuleSetUsed, "allowed", []), pViolations))
+    .concat(reportRules(_get(pRuleSetUsed, "required", []), pViolations));
 }
 
 function determineTo(pViolation) {
