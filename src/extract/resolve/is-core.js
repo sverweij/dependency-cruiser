@@ -1,4 +1,4 @@
-const builtinModules = require("module").builtinModules;
+const { builtinModules } = require("module");
 
 module.exports = (pModuleName) =>
   builtinModules.some((pBuiltinModule) => pBuiltinModule === pModuleName);

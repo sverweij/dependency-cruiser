@@ -1,6 +1,6 @@
 const fs = require("fs");
 const path = require("path");
-const expect = require("chai").expect;
+const { expect } = require("chai");
 const clusterless = require("./mocks/clusterless.json");
 const bunchOfModules = require("./mocks/bunch-of-modules.json");
 const focusMeModules = require("./mocks/dependency-cruiser-2020-01-25-focus-me.json");

@@ -1,4 +1,4 @@
-const expect = require("chai").expect;
+const { expect } = require("chai");
 const validateFileExistence = require("~/src/cli/utl/validate-file-existence");
 
 describe("cli/utl/validateFileExistence", () => {

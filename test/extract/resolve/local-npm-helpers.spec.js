@@ -1,4 +1,4 @@
-const expect = require("chai").expect;
+const { expect } = require("chai");
 const localNpmHelpers = require("~/src/extract/resolve/local-npm-helpers");
 
 describe("extract/resolve/localNpmHelpers.getPackageJson", () => {

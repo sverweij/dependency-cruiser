@@ -1,4 +1,4 @@
-const expect = require("chai").expect;
+const { expect } = require("chai");
 const inputGraphs = require("./inputgraphs.json");
 const getCycle = require("~/src/enrich/derive/circular/get-cycle");
 

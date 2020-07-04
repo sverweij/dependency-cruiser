@@ -1,4 +1,4 @@
-const expect = require("chai").expect;
+const { expect } = require("chai");
 const gather = require("~/src/extract/gather-initial-sources");
 const p2p = require("~/src/utl/path-to-posix");
 const normalize = require("~/src/main/options/normalize");

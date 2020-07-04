@@ -1,4 +1,4 @@
-const expect = require("chai").expect;
+const { expect } = require("chai");
 const normalize = require("~/src/main/rule-set/normalize");
 
 describe("main/rule-set/normalize", () => {

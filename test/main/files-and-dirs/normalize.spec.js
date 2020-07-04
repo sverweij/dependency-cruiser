@@ -1,5 +1,5 @@
 const path = require("path");
-const expect = require("chai").expect;
+const { expect } = require("chai");
 const normalizeFilesAndDirectories = require("~/src/main/files-and-dirs/normalize");
 
 describe("main/files-and-dirs", () => {

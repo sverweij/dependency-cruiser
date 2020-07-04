@@ -1,7 +1,7 @@
 const path = require("path");
 const _get = require("lodash/get");
 const _uniqBy = require("lodash/uniqBy");
-const intersects = require("../utl/array-util").intersects;
+const { intersects } = require("../utl/array-util");
 const resolve = require("./resolve");
 const extractES6Deps = require("./ast-extractors/extract-es6-deps");
 const extractCommonJSDeps = require("./ast-extractors/extract-cjs-deps");

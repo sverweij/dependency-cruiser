@@ -2,8 +2,8 @@
 const path = require("path");
 const fs = require("fs");
 const stream = require("stream");
-const expect = require("chai").expect;
-const getInStream = require("~/src/cli/utl/io").getInStream;
+const { expect } = require("chai");
+const { getInStream } = require("~/src/cli/utl/io");
 
 function removeDammit(pFileName) {
   try {

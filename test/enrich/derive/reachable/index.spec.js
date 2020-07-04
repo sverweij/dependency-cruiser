@@ -1,4 +1,4 @@
-const expect = require("chai").expect;
+const { expect } = require("chai");
 const normalize = require("~/src/main/rule-set/normalize");
 const addReachability = require("~/src/enrich/derive/reachable/index");
 const clearCaches = require("~/src/extract/clear-caches");

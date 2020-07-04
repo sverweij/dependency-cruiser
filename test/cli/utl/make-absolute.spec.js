@@ -1,5 +1,5 @@
 const path = require("path");
-const expect = require("chai").expect;
+const { expect } = require("chai");
 const makeAbsolute = require("~/src/cli/utl/make-absolute");
 
 describe("cli/utl/makeAbsolute", () => {

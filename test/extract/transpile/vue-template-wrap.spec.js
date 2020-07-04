@@ -1,6 +1,6 @@
 const fs = require("fs");
 const path = require("path");
-const expect = require("chai").expect;
+const { expect } = require("chai");
 const normalizeNewline = require("normalize-newline");
 const wrap = require("~/src/extract/transpile/vue-template-wrap");
 

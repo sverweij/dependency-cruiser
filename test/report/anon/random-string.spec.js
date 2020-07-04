@@ -1,4 +1,4 @@
-const expect = require("chai").expect;
+const { expect } = require("chai");
 const randomString = require("~/src/report/anon/random-string");
 
 describe("report/anon/randomString", () => {

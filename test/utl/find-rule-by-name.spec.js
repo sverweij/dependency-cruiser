@@ -1,5 +1,5 @@
 /* eslint-disable no-unused-expressions */
-const expect = require("chai").expect;
+const { expect } = require("chai");
 const findRuleByName = require("~/src/utl/find-rule-by-name");
 
 describe("utl/findRuleByName", () => {

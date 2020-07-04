@@ -1,6 +1,6 @@
 const fs = require("fs");
 const path = require("path");
-const expect = require("chai").expect;
+const { expect } = require("chai");
 const okdeps = require("./mocks/everything-fine.json");
 const moduleErrs = require("./mocks/module-errors.json");
 const circulars = require("./mocks/circular-deps.json");

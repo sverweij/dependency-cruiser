@@ -1,6 +1,6 @@
 /* eslint-disable no-magic-numbers */
 const curryRight = require("lodash/curryRight");
-const expect = require("chai").expect;
+const { expect } = require("chai");
 const chalk = require("chalk");
 const okdeps = require("./mocks/everything-fine.json");
 const deps = require("./mocks/cjs-no-dependency-valid.json");

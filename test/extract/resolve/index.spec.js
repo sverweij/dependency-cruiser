@@ -1,5 +1,5 @@
 const path = require("path");
-const expect = require("chai").expect;
+const { expect } = require("chai");
 const parseTSConfig = require("~/src/cli/parse-ts-config");
 const resolve = require("~/src/extract/resolve");
 const normalizeResolveOptions = require("~/src/main/resolve-options/normalize");

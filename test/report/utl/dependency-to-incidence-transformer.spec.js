@@ -1,4 +1,4 @@
-const expect = require("chai").expect;
+const { expect } = require("chai");
 
 const ONE_VIOLATION_DEPS_INPUT = require("./mocks/one-violation.json").modules;
 const ONE_VIOLATION_DEPS_FIXTURE = require("./mocks/one-violation-incidences.json");

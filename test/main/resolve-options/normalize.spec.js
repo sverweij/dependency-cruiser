@@ -1,5 +1,5 @@
 const path = require("path");
-const expect = require("chai").expect;
+const { expect } = require("chai");
 const normalizeOptions = require("~/src/main/options/normalize");
 const normalizeResolveOptions = require("~/src/main/resolve-options/normalize");
 

@@ -1,4 +1,4 @@
-const intersects = require("../utl/array-util").intersects;
+const { intersects } = require("../utl/array-util");
 
 function fromPath(pRule, pModule) {
   return Boolean(!pRule.from.path || pModule.source.match(pRule.from.path));

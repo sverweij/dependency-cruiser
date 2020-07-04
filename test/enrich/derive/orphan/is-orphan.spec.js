@@ -1,4 +1,4 @@
-const expect = require("chai").expect;
+const { expect } = require("chai");
 
 const ONE_MODULE_FIXTURE = require("./fixtures/oneModule.json");
 const TWO_MODULES_FIXTURE = require("./fixtures/twoModule.json");

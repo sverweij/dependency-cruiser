@@ -1,4 +1,4 @@
-const expect = require("chai").expect;
+const { expect } = require("chai");
 const extractTypescript = require("./extract-typescript.utl");
 
 describe("ast-extractors/extract-typescript - dynamic imports", () => {

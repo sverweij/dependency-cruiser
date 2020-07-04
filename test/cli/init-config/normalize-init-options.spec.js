@@ -1,5 +1,5 @@
 /* eslint-disable no-unused-expressions */
-const expect = require("chai").expect;
+const { expect } = require("chai");
 const normalizeInitOptions = require("~/src/cli/init-config/normalize-init-options");
 
 describe("cli/init-config/normalize-init-options", () => {

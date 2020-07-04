@@ -1,4 +1,4 @@
-const expect = require("chai").expect;
+const { expect } = require("chai");
 const readRuleSet = require("./readruleset.utl");
 const validate = require("~/src/validate");
 

@@ -1,4 +1,4 @@
-const expect = require("chai").expect;
+const { expect } = require("chai");
 const matchers = require("~/src/validate/matchers");
 
 describe("validate/matches", () => {

@@ -1,4 +1,4 @@
-const expect = require("chai").expect;
+const { expect } = require("chai");
 const isRelativeModuleName = require("~/src/extract/resolve/is-relative-module-name");
 
 describe("extract/resolve/isRelativeModuleName", () => {

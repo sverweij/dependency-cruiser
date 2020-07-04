@@ -1,5 +1,5 @@
 const path = require("path").posix;
-const expect = require("chai").expect;
+const { expect } = require("chai");
 const parseBabelConfig = require("~/src/cli/parse-babel-config");
 
 const DEFAULT_EMPTY_BABEL_OPTIONS_OBJECT = {

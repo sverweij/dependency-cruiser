@@ -1,4 +1,4 @@
-const expect = require("chai").expect;
+const { expect } = require("chai");
 const validateOptions = require("~/src/main/options/validate");
 
 describe("main/options/validate", () => {

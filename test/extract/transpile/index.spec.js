@@ -1,6 +1,6 @@
 const fs = require("fs");
 const path = require("path");
-const expect = require("chai").expect;
+const { expect } = require("chai");
 const prettier = require("prettier");
 const normalizeNewline = require("normalize-newline");
 const transpile = require("~/src/extract/transpile");

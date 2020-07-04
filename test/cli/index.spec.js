@@ -2,7 +2,7 @@ const fs = require("fs");
 // path.posix instead of path because otherwise on win32 the resulting
 // outputTo would contain \\ instead of / which for this unit test doesn't matter
 const path = require("path").posix;
-const expect = require("chai").expect;
+const { expect } = require("chai");
 const intercept = require("intercept-stdout");
 const asserthelpers = require("./asserthelpers.utl");
 const deleteDammit = require("./delete-dammit.utl");

@@ -1,4 +1,4 @@
-const expect = require("chai").expect;
+const { expect } = require("chai");
 const compare = require("~/src/extract/utl/compare");
 
 describe("extract/utl/compare - dependencyEquals", () => {

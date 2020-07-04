@@ -1,5 +1,5 @@
 const fs = require("fs");
-const expect = require("chai").expect;
+const { expect } = require("chai");
 const normalizeNewline = require("normalize-newline");
 const prettier = require("prettier");
 const wrap = require("~/src/extract/transpile/typescript-wrap")();

@@ -1,4 +1,4 @@
-const expect = require("chai").expect;
+const { expect } = require("chai");
 const detectPrecompilationNess = require("~/src/extract/utl/detect-pre-compilation-ness");
 
 describe("extract/utl/detectPreCompilationNess", () => {

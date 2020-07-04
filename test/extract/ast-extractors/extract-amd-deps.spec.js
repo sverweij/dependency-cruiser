@@ -1,4 +1,4 @@
-const expect = require("chai").expect;
+const { expect } = require("chai");
 const extractAMDDeps = require("~/src/extract/ast-extractors/extract-amd-deps");
 const getASTFromSource = require("~/src/extract/parse/to-javascript-ast")
   .getASTFromSource;

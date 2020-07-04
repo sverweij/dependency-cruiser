@@ -1,7 +1,7 @@
 const path = require("path");
 const fs = require("fs");
 const symlinkDir = require("symlink-dir");
-const expect = require("chai").expect;
+const { expect } = require("chai");
 const cjsFixtures = require("./fixtures/cjs.json");
 const es6Fixtures = require("./fixtures/es6.json");
 const amdFixtures = require("./fixtures/amd.json");

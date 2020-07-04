@@ -1,4 +1,4 @@
-const expect = require("chai").expect;
+const { expect } = require("chai");
 const theming = require("~/src/report/dot/theming");
 
 describe("report/dot/theming - determineModuleColors - default theme", () => {

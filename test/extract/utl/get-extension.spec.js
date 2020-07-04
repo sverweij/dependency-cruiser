@@ -1,4 +1,4 @@
-const expect = require("chai").expect;
+const { expect } = require("chai");
 const getExtension = require("~/src/extract/utl/get-extension");
 
 describe("extract/utl/getExtension", () => {

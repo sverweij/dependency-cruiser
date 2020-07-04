@@ -1,5 +1,5 @@
 const fs = require("fs");
-const expect = require("chai").expect;
+const { expect } = require("chai");
 const validate = require("~/src/main/rule-set/validate");
 
 function shouldBarfWithMessage(pRulesFile, pMessage) {

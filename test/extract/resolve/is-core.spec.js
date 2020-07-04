@@ -1,5 +1,5 @@
 /* eslint-disable no-unused-expressions */
-const expect = require("chai").expect;
+const { expect } = require("chai");
 const isCore = require("~/src/extract/resolve/is-core");
 
 describe("extract/resolve/isCore", () => {

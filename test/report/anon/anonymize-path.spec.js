@@ -1,4 +1,4 @@
-const expect = require("chai").expect;
+const { expect } = require("chai");
 const anonymizePath = require("~/src/report/anon/anonymize-path");
 const anonymizePathElement = require("~/src/report/anon/anonymize-path-element");
 

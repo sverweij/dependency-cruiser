@@ -1,5 +1,5 @@
 const path = require("path");
-const expect = require("chai").expect;
+const { expect } = require("chai");
 const compileConfig = require("../../../src/cli/compile-config");
 const fixture = require("./mocks/rules.sub-not-allowed-error.json");
 const mergedFixture = require("./mocks/extends/merged.json");

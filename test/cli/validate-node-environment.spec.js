@@ -1,4 +1,4 @@
-const expect = require("chai").expect;
+const { expect } = require("chai");
 const validateNodeEnvironment = require("~/src/cli/validate-node-environment");
 
 describe("cli/validateNodeEnv", () => {

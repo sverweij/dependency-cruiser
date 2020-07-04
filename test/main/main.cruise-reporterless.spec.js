@@ -6,10 +6,10 @@ const amdFixtures = require("./fixtures/cruise-reporterless/amd.json");
 const typeScriptFixtures = require("./fixtures/cruise-reporterless/typescript.json");
 const vueFixtures = require("./fixtures/cruise-reporterless/vue.json");
 const coffeeFixtures = require("./fixtures/cruise-reporterless/coffee.json");
-const cruise = require("~/src/main").cruise;
+const { cruise } = require("~/src/main");
 const cruiseResultSchema = require("~/src/schema/cruise-result.schema.json");
 
-const expect = chai.expect;
+const { expect } = chai;
 
 chai.use(require("chai-json-schema"));
 

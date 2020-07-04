@@ -1,4 +1,4 @@
-const expect = require("chai").expect;
+const { expect } = require("chai");
 const consolidateToPattern = require("~/src/report/utl/consolidate-to-pattern");
 
 describe("report/utl/consolidateToPattern", () => {

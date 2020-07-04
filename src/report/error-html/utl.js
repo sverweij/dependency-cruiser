@@ -1,5 +1,5 @@
 const _get = require("lodash/get");
-const version = require("../../../package.json").version;
+const { version } = require("../../../package.json");
 
 function getFormattedAllowedRule(pRuleSetUsed) {
   const lAllowed = _get(pRuleSetUsed, "allowed", []);

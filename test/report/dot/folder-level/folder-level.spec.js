@@ -1,6 +1,6 @@
 const fs = require("fs");
 const path = require("path");
-const expect = require("chai").expect;
+const { expect } = require("chai");
 const deps = require("./mocks/dependency-cruiser-2019-01-14.json");
 const orphans = require("./mocks/orphans.json");
 const rxjs = require("./mocks/rxjs.json");

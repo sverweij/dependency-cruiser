@@ -1,4 +1,4 @@
-const expect = require("chai").expect;
+const { expect } = require("chai");
 const meta = require("~/src/cli/format-meta-info");
 
 describe("cli/formatMetaInfo - transpiler formatted meta information", () => {

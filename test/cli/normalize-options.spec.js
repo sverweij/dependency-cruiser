@@ -1,5 +1,5 @@
 const path = require("path");
-const expect = require("chai").expect;
+const { expect } = require("chai");
 const normalizeOptions = require("~/src/cli/normalize-options");
 
 describe("cli/normalizeOptions", () => {

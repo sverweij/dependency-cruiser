@@ -1,4 +1,4 @@
-const expect = require("chai").expect;
+const { expect } = require("chai");
 const getPath = require("~/src/enrich/derive/reachable/get-path");
 
 describe("enrich/derive/reachable/getGraph - reachability detection", () => {

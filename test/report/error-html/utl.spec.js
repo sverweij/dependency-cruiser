@@ -1,4 +1,4 @@
-const expect = require("chai").expect;
+const { expect } = require("chai");
 const utl = require("~/src/report/error-html/utl");
 
 function summaryHasMinimalAttributes(pResult) {

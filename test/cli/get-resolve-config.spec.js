@@ -1,5 +1,5 @@
 const path = require("path");
-const expect = require("chai").expect;
+const { expect } = require("chai");
 const getResolveConfig = require("~/src/cli/get-resolve-config");
 
 describe("cli/getResolveConfig", () => {

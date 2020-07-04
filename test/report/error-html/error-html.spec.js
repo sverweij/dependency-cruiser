@@ -1,5 +1,5 @@
 // eslint-disable-next-line unicorn/prevent-abbreviations
-const expect = require("chai").expect;
+const { expect } = require("chai");
 const everythingFineResult = require("./mocks/everything-fine.json");
 const validationMoreThanOnce = require("./mocks/violation-more-than-once.json");
 const errorHTML = require("~/src/report/error-html");

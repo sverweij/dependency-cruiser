@@ -1,4 +1,4 @@
-const expect = require("chai").expect;
+const { expect } = require("chai");
 const stripQueryParameters = require("~/src/extract/utl/strip-query-parameters");
 
 describe("extract/utl/stripQueryParams", () => {

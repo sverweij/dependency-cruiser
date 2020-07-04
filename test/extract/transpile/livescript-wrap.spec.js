@@ -1,4 +1,4 @@
-const expect = require("chai").expect;
+const { expect } = require("chai");
 const wrap = require("~/src/extract/transpile/livescript-wrap");
 
 describe("livescript transpiler", () => {

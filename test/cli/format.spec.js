@@ -1,6 +1,6 @@
 const fs = require("fs");
 const path = require("path");
-const expect = require("chai").expect;
+const { expect } = require("chai");
 const deleteDammit = require("./delete-dammit.utl");
 const format = require("~/src/cli/format");
 

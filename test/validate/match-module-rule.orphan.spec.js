@@ -1,4 +1,4 @@
-const expect = require("chai").expect;
+const { expect } = require("chai");
 const { matchesOrphanRule } = require("~/src/validate/match-module-rule");
 
 const EMPTY_RULE = { from: {}, to: {} };

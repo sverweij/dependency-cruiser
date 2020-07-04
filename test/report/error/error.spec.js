@@ -1,5 +1,5 @@
 /* eslint-disable no-magic-numbers */
-const expect = require("chai").expect;
+const { expect } = require("chai");
 const chalk = require("chalk");
 const okdeps = require("./mocks/everything-fine.json");
 const dependencies = require("./mocks/cjs-no-dependency-valid.json");

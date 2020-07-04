@@ -1,4 +1,4 @@
-const expect = require("chai").expect;
+const { expect } = require("chai");
 const merge = require("../../../src/cli/compile-config/merge-configs");
 
 describe("cli/mergeRuleSets - general", () => {

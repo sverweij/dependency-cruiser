@@ -1,5 +1,5 @@
 const path = require("path");
-const expect = require("chai").expect;
+const { expect } = require("chai");
 const pathToPosix = require("~/src/utl/path-to-posix");
 
 describe("utl/pathToPosix on win32", () => {
