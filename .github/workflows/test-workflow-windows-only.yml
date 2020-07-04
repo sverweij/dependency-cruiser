@@ -33,9 +33,13 @@ jobs:
         uses: actions/setup-node@v1
         with:
           node-version: ${{matrix.node-version}}
+      # the rimraf node_modules appears to be necessary as there's a wyrd
+      # renaming thing occurring on windows with npm:
+      # npm ERR! enoent ENOENT: no such file or directory, rename 'd:\a\dependency-cruiser\dependency-cruiser\node_modules\.staging\rxjs-76baa905' -> 'd:\a\dependency-cruiser\dependency-cruiser\node_modules\inquirer\node_modules\rxjs'
       - name: install & build
         run: |
           node --version
+          rm -rf node_modules 
           npm install
           npm run build
         shell: bash

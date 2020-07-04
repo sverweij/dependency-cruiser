@@ -38,6 +38,7 @@ jobs:
       - name: install & build
         run: |
           node --version
+          rm -rf node_modules 
           npm install
           npm run build
         shell: bash
