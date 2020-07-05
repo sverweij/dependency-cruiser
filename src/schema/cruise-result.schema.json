@@ -554,7 +554,7 @@
       "additionalProperties": false,
       "properties": {
         "path": {
-          "description": "A regular expression or an array of regular expressions an end of a dependency should match to be caught by this rule.",
+          "description": "Criteria at least one dependency of each matching module mustadhere to.",
           "$ref": "#/definitions/REAsStringsType"
         }
       }
