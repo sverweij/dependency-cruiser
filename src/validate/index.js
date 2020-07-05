@@ -45,11 +45,12 @@ function validateAgainstForbiddenRules(pRuleSet, pMatchModule, pFrom, pTo) {
     }));
 }
 
-function validateAgainstRequiredRules(pRuleSet, pModule) {
+function validateAgainstRequiredRules(pRuleSet, pModule, pMatchModule) {
   let lFoundRequiredRuleViolations = [];
 
   if (Object.prototype.hasOwnProperty.call(pRuleSet, "required")) {
     lFoundRequiredRuleViolations = pRuleSet.required
+      .filter(pMatchModule.isInteresting)
       .filter((pRule) => violatesRequiredRule(pRule, pModule))
       .map((pMatchedRule) => ({
         severity: pMatchedRule.severity,
@@ -69,7 +70,7 @@ function validateAgainstRules(pRuleSet, pFrom, pTo, pMatchModule) {
     pTo
   )
     .concat(validateAgainstForbiddenRules(pRuleSet, pMatchModule, pFrom, pTo))
-    .concat(validateAgainstRequiredRules(pRuleSet, pFrom))
+    .concat(validateAgainstRequiredRules(pRuleSet, pFrom, pMatchModule))
     .sort(compareSeverity);
 
   lReturnValue.valid = lFoundRuleViolations.length === 0;
