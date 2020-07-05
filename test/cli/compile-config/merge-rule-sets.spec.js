@@ -274,6 +274,34 @@ describe("cli/mergeRuleSets - allowedSeverity", () => {
   });
 });
 
+describe("cli/mergeRuleSets - required", () => {
+  it("extending an existing named rule - the extended wins", () => {
+    expect(
+      merge(
+        { required: [{ name: "already-in-base", from: "bin", to: "test" }] },
+        { required: [{ name: "already-in-base", from: "src", to: "test" }] }
+      )
+    ).to.deep.equal({
+      required: [{ name: "already-in-base", from: "bin", to: "test" }],
+      options: {},
+    });
+  });
+
+  it("merging two disjunct required rule sets", () => {
+    expect(
+      merge(
+        { required: [{ name: "only-in-base", from: "bin", to: "test" }] },
+        { required: [{ name: "only-in-extends", from: "src", to: "test" }] }
+      )
+    ).to.deep.equal({
+      required: [
+        { name: "only-in-base", from: "bin", to: "test" },
+        { name: "only-in-extends", from: "src", to: "test" },
+      ],
+      options: {},
+    });
+  });
+});
 describe("cli/mergeRuleSets - options", () => {
   it("extending empty options with some options yield those options", () => {
     expect(
