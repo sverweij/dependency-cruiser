@@ -31,6 +31,18 @@ const RULE_SET_TYPE_PROPERTIES = {
         "Severity to use when a dependency is not in the 'allowed' set of rules. " +
         "Defaults to 'warn'",
     },
+    required: {
+      type: "array",
+      despcription:
+        "A list of rules that describe what dependencies modules _must_ have. " +
+        "E.g." +
+        " - every controller needs to (directly) depend on a base controller." +
+        " - each source file should be the dependency of a spec file with the same " +
+        "   base name",
+      items: {
+        $ref: "#/definitions/RequiredRuleType",
+      },
+    },
   },
 };
 
@@ -139,6 +151,28 @@ export default {
         },
         to: {
           $ref: "#/definitions/ReachabilityToRestrictionType",
+        },
+      },
+    },
+    RequiredRuleType: {
+      type: "object",
+      required: ["module", "to"],
+      additionalProperties: false,
+      properties: {
+        name: {
+          type: "string",
+        },
+        severity: {
+          $ref: "#/definitions/SeverityType",
+        },
+        comment: {
+          type: "string",
+        },
+        module: {
+          $ref: "#/definitions/RequiredModuleRestrictionType",
+        },
+        to: {
+          $ref: "#/definitions/RequiredToRestrictionType",
         },
       },
     },

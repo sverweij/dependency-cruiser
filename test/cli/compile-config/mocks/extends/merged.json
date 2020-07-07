@@ -1,13 +1,13 @@
 {
-    "allowed": [],
-    "allowedSeverity": "warn",
-    "forbidden": [{
-        "name": "no-circular",
-        "severity": "error",
-        "from": {},
-        "to": { "circular": true }
-    }],
-    "options": {
-        "doNotFollow": "node_modules"
+  "forbidden": [
+    {
+      "name": "no-circular",
+      "severity": "error",
+      "from": {},
+      "to": { "circular": true }
     }
+  ],
+  "options": {
+    "doNotFollow": "node_modules"
+  }
 }

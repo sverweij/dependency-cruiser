@@ -3,6 +3,7 @@ const path = require("path");
 const { expect } = require("chai");
 const okdeps = require("./mocks/everything-fine.json");
 const moduleErrs = require("./mocks/module-errors.json");
+const requiredErrs = require("./mocks/required-errors.json");
 const circulars = require("./mocks/circular-deps.json");
 const vias = require("./mocks/via-deps.json");
 const render = require("~/src/report/teamcity");
@@ -29,6 +30,20 @@ describe("report/teamcity", () => {
       "utf8"
     );
     const lResult = render(moduleErrs);
+
+    expect(removePerSessionAttributes(lResult.output)).to.equal(
+      removePerSessionAttributes(lFixture)
+    );
+    // eslint-disable-next-line no-magic-numbers
+    expect(lResult.exitCode).to.equal(5);
+  });
+
+  it("renders 'required' violations", () => {
+    const lFixture = fs.readFileSync(
+      path.join(__dirname, "mocks", "required-errors-teamcity-format.txt"),
+      "utf8"
+    );
+    const lResult = render(requiredErrs);
 
     expect(removePerSessionAttributes(lResult.output)).to.equal(
       removePerSessionAttributes(lFixture)

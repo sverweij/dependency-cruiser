@@ -20,6 +20,11 @@
       "$ref": "#/definitions/SeverityType",
       "description": "Severity to use when a dependency is not in the 'allowed' set of rules. Defaults to 'warn'"
     },
+    "required": {
+      "type": "array",
+      "despcription": "A list of rules that describe what dependencies modules _must_ have. E.g. - every controller needs to (directly) depend on a base controller. - each source file should be the dependency of a spec file with the same    base name",
+      "items": { "$ref": "#/definitions/RequiredRuleType" }
+    },
     "options": { "$ref": "#/definitions/OptionsType" },
     "extends": { "$ref": "#/definitions/ExtendsType" }
   },
@@ -41,6 +46,11 @@
         "allowedSeverity": {
           "$ref": "#/definitions/SeverityType",
           "description": "Severity to use when a dependency is not in the 'allowed' set of rules. Defaults to 'warn'"
+        },
+        "required": {
+          "type": "array",
+          "despcription": "A list of rules that describe what dependencies modules _must_ have. E.g. - every controller needs to (directly) depend on a base controller. - each source file should be the dependency of a spec file with the same    base name",
+          "items": { "$ref": "#/definitions/RequiredRuleType" }
         }
       }
     },
@@ -104,6 +114,18 @@
         "comment": { "type": "string" },
         "from": { "$ref": "#/definitions/ReachabilityFromRestrictionType" },
         "to": { "$ref": "#/definitions/ReachabilityToRestrictionType" }
+      }
+    },
+    "RequiredRuleType": {
+      "type": "object",
+      "required": ["module", "to"],
+      "additionalProperties": false,
+      "properties": {
+        "name": { "type": "string" },
+        "severity": { "$ref": "#/definitions/SeverityType" },
+        "comment": { "type": "string" },
+        "module": { "$ref": "#/definitions/RequiredModuleRestrictionType" },
+        "to": { "$ref": "#/definitions/RequiredToRestrictionType" }
       }
     },
     "FromRestrictionType": {
@@ -216,6 +238,32 @@
         "reachable": {
           "type": "boolean",
           "description": "Whether or not to match modules that aren't reachable from the from part of the rule."
+        }
+      }
+    },
+    "RequiredModuleRestrictionType": {
+      "description": "Criteria to select the module(s) this restriction should apply to",
+      "required": [],
+      "additionalProperties": false,
+      "properties": {
+        "path": {
+          "description": "A regular expression or an array of regular expressions an end of a dependency should match to be caught by this rule.",
+          "$ref": "#/definitions/REAsStringsType"
+        },
+        "pathNot": {
+          "description": "A regular expression or an array of regular expressions an end of a dependency should NOT match to be caught by this rule.",
+          "$ref": "#/definitions/REAsStringsType"
+        }
+      }
+    },
+    "RequiredToRestrictionType": {
+      "description": "Criteria for modules the associated module must depend on.",
+      "required": [],
+      "additionalProperties": false,
+      "properties": {
+        "path": {
+          "description": "Criteria at least one dependency of each matching module mustadhere to.",
+          "$ref": "#/definitions/REAsStringsType"
         }
       }
     },

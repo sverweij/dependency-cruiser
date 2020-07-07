@@ -78,7 +78,6 @@ describe("cli/compile-config", () => {
         },
       ],
       allowedSeverity: "warn",
-      forbidden: [],
       options: {
         doNotFollow: "node_modules",
       },

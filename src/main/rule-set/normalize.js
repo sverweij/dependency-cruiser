@@ -23,6 +23,7 @@ function normalizeRule(pRule) {
     name: normalizeName(pRule.name),
     from: normalizeREProperties(pRule.from),
     to: normalizeREProperties(pRule.to),
+    ...(pRule.module ? { module: normalizeREProperties(pRule.module) } : {}),
   };
 }
 
@@ -53,6 +54,12 @@ module.exports = (pRuleSet) => {
 
   if (Object.prototype.hasOwnProperty.call(pRuleSet, "forbidden")) {
     pRuleSet.forbidden = pRuleSet.forbidden
+      .map(normalizeRule)
+      .filter((pRule) => pRule.severity !== "ignore");
+  }
+
+  if (Object.prototype.hasOwnProperty.call(pRuleSet, "required")) {
+    pRuleSet.required = pRuleSet.required
       .map(normalizeRule)
       .filter((pRule) => pRule.severity !== "ignore");
   }

@@ -140,6 +140,28 @@ export default {
         },
       },
     },
+    RequiredModuleRestrictionType: {
+      description:
+        "Criteria to select the module(s) this restriction should apply to",
+      required: [],
+      additionalProperties: false,
+      properties: {
+        ...BASE_RESTRICTION,
+      },
+    },
+    RequiredToRestrictionType: {
+      description: "Criteria for modules the associated module must depend on.",
+      required: [],
+      additionalProperties: false,
+      properties: {
+        path: {
+          description:
+            "Criteria at least one dependency of each matching module must" +
+            "adhere to.",
+          $ref: "#/definitions/REAsStringsType",
+        },
+      },
+    },
     ...dependencyType.definitions,
     ...REAsStringsType.definitions,
   },

@@ -23,6 +23,7 @@
    - [`forbidden`](#forbidden)
    - [`allowed`](#allowed)
    - [`allowedSeverity`](#allowedSeverity)
+   - [`required`](#required)
    - [`extends`](#extends)
    - [`options`](#options)
 2. [The structure of an individual rule](#the-structure-of-an-individual-rule)
@@ -61,12 +62,14 @@
 
 The typical dependency-cruiser config is json file (although you can use JavaScript -
 see [below](#configurations-in-javascript))). The three most important sections
-are `forbidden`, `allowed` and `options`, so a skeleton config could look something like this:
+are `forbidden`, `allowed`, `required` and `options`, so a skeleton config could
+look something like this:
 
 ```json
 {
   "forbidden": [],
   "allowed": [],
+  "required": [],
   "options": {}
 }
 ```
@@ -91,6 +94,37 @@ default, but you can override it with `allowedSeverity`
 The severity to use in reports when a dependency is not in the `allowed`
 list of rules. It takes the same values as other `severity` fields and
 also defaults to `warn`.
+
+### `required`
+
+A list of rules that describe what dependencies modules _must_ have, like 'every
+controller _must depend on_ the base controller'.
+
+'Required' rules have slightly different semantics from the `forbidden` and
+`allowed` types. There's a mandatory `module` attribute that specifies which
+modules the rule applies to and the `to` describes what dependencies that module
+should exactly have.
+
+```javascript
+{
+  required: [
+    {
+      name: "controllers-inherit-from-base",
+      comment:
+        "Each controller should inherit from the framework's base controller",
+      module: {
+        // every module that matches the pattern specified in path & pathNot ...
+        path: "-controller\\.js$",
+        pathNot: "framework/base-controller\\.js$",
+      },
+      to: {
+        // ... must depend at least once on the framework's base controller
+        path: "^src/framework/base-controller\\.js$",
+      },
+    },
+  ];
+}
+```
 
 ### `extends`
 
@@ -170,9 +204,8 @@ Options that influence what is cruised, and how it is cruised. See
 
 ## The structure of an individual rule
 
-An individual rule consists at least of a `from` and a `to`
-attribute that contain one or more conditions that trigger the rule, so
-a minimal rule will look like this:
+A rule consists at least of a `from` and a `to` attribute that contain one or
+more conditions that trigger the rule, so a minimal rule will look like this:
 
 ```json
 {

@@ -29,7 +29,7 @@ describe("cli/validateNodeEnv", () => {
   it("doesn't throw when an undefined node version is passed (assuming test is run on a supported platform)", () => {
     expect(() => {
       // eslint-disable-next-line no-undefined
-      validateNodeEnvironment(undefined);
+      validateNodeEnvironment();
     }).to.not.throw();
   });
 
