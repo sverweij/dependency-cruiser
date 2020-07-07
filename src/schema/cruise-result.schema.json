@@ -341,7 +341,7 @@
         },
         "required": {
           "type": "array",
-          "despcription": "",
+          "despcription": "A list of rules that describe what dependencies modules _must_ have. E.g. - every controller needs to (directly) depend on a base controller. - each source file should be the dependency of a spec file with the same    base name",
           "items": { "$ref": "#/definitions/RequiredRuleType" }
         }
       }
@@ -554,7 +554,7 @@
       "additionalProperties": false,
       "properties": {
         "path": {
-          "description": "A regular expression or an array of regular expressions an end of a dependency should match to be caught by this rule.",
+          "description": "Criteria at least one dependency of each matching module mustadhere to.",
           "$ref": "#/definitions/REAsStringsType"
         }
       }

@@ -33,7 +33,12 @@ const RULE_SET_TYPE_PROPERTIES = {
     },
     required: {
       type: "array",
-      despcription: "",
+      despcription:
+        "A list of rules that describe what dependencies modules _must_ have. " +
+        "E.g." +
+        " - every controller needs to (directly) depend on a base controller." +
+        " - each source file should be the dependency of a spec file with the same " +
+        "   base name",
       items: {
         $ref: "#/definitions/RequiredRuleType",
       },
