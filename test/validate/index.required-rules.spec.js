@@ -49,6 +49,28 @@ describe("validate/index - required rules", () => {
     });
   });
 
+  it("'required' violations don't get flagged as dependency transgressions", () => {
+    expect(
+      validate.dependency(
+        true,
+        readRuleSet("./test/validate/fixtures/rules.required.json"),
+        {
+          source: "grub-controller.ts",
+          dependencies: [
+            {
+              resolved: "src/not-the-base-controller.ts",
+            },
+            {
+              resolved: "src/not-the-base-controller-either.ts",
+            },
+          ],
+        }
+      )
+    ).to.deep.equal({
+      valid: true,
+    });
+  });
+
   it("modules matching the module criteria with matching dependencies are okeliedokelie", () => {
     expect(
       validate.module(
