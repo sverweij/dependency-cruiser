@@ -123,7 +123,7 @@
     "ajv": "6.12.3",
     "chalk": "4.1.0",
     "commander": "5.1.0",
-    "enhanced-resolve": "4.2.0",
+    "enhanced-resolve": "webpack/enhanced-resolve#c1a3f78377c8d81563237be423995506405f4b87",
     "figures": "3.2.0",
     "get-stream": "5.1.0",
     "glob": "7.1.6",

@@ -84,7 +84,7 @@
       "severity": "error",
       "from": {
         "pathNot": [
-          "^src/(extract/parse|extract/resolve|extract/gather-initial-sources\\.js|cli)",
+          "^src/(main/resolve-options/normalize\\.js|extract/parse|extract/resolve|extract/gather-initial-sources\\.js|cli)",
           "^test",
           "^tools"
         ]
