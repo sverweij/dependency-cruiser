@@ -1,18 +1,30 @@
 const { expect } = require("chai");
+const clearCaches = require("~/src/extract/clear-caches");
 const localNpmHelpers = require("~/src/extract/resolve/local-npm-helpers");
+const normalizeResolveOptions = require("~/src/main/resolve-options/normalize");
+const normalizeOptions = require("~/src/main/options/normalize");
 
+const BASIC_RESOLVE_OPTIONS = normalizeResolveOptions({}, normalizeOptions({}));
 describe("extract/resolve/localNpmHelpers.getPackageJson", () => {
+  beforeEach(() => {
+    clearCaches();
+  });
   it("returns null if the module does not exist", () => {
-    expect(localNpmHelpers.getPackageJson("./module-does-not-exist", ".", {}))
-      .to.be.null;
+    expect(
+      localNpmHelpers.getPackageJson(
+        "./module-does-not-exist",
+        process.cwd(),
+        BASIC_RESOLVE_OPTIONS
+      )
+    ).to.be.null;
   });
 
   it("returns null if there's no package.json for the module (no basePath specified)", () => {
     expect(
       localNpmHelpers.getPackageJson(
         "test/extract/fixtures/deprecated-node-module/require-something-deprecated",
-        ".",
-        {}
+        process.cwd(),
+        BASIC_RESOLVE_OPTIONS
       )
     ).to.be.null;
   });
@@ -22,13 +34,20 @@ describe("extract/resolve/localNpmHelpers.getPackageJson", () => {
       localNpmHelpers.getPackageJson(
         "./require-something-deprecated",
         "./fixtures/deprecated-node-module/",
-        {}
+        BASIC_RESOLVE_OPTIONS
       )
     ).to.be.null;
   });
 
-  it("returns a package.json when there is one", () => {
-    let lPackageJson = localNpmHelpers.getPackageJson("chai", ".", {});
+  it("returns a package.json when there is one (root)", () => {
+    let lPackageJson = localNpmHelpers.getPackageJson(
+      "chai",
+      // TODO: workaround for what looks like a defect in enhanced-resolve@beta;
+      //       "." as context doesn't work anymore, so passing process.cwd()
+      //       in stead.
+      process.cwd(),
+      BASIC_RESOLVE_OPTIONS
+    );
 
     expect(lPackageJson).to.be.not.null;
     expect(Object.prototype.hasOwnProperty.call(lPackageJson, "name")).to.be
@@ -40,7 +59,7 @@ describe("extract/resolve/localNpmHelpers.getPackageJson", () => {
     let lPackageJson = localNpmHelpers.getPackageJson(
       "deprecated-at-the-start-for-test-purposes",
       "./test/main/fixtures/cruise-reporterless/deprecated-node-module/",
-      {}
+      BASIC_RESOLVE_OPTIONS
     );
 
     expect(lPackageJson).to.be.not.null;

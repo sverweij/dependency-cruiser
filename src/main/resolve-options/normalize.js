@@ -1,3 +1,4 @@
+const fs = require("fs");
 const _get = require("lodash/get");
 const _has = require("lodash/has");
 const enhancedResolve = require("enhanced-resolve");
@@ -5,7 +6,7 @@ const PnpWebpackPlugin = require("pnp-webpack-plugin");
 const TsConfigPathsPlugin = require("tsconfig-paths-webpack-plugin");
 const transpileMeta = require("../../extract/transpile/meta");
 
-const CACHE_DURATION = 4000;
+const CACHE_DURATION = 1000;
 const DEFAULT_RESOLVE_OPTIONS = {
   // for later: check semantics of enhanced-resolve symlinks and
   // node's preserveSymlinks. They seem to be
@@ -36,10 +37,7 @@ const NON_OVERRIDABLE_RESOLVE_OPTIONS = {
   // file systems it's not sure we can use sync system calls
   // Also: passing a non-cached filesystem makes performance
   // worse.
-  fileSystem: new enhancedResolve.CachedInputFileSystem(
-    new enhancedResolve.NodeJsInputFileSystem(),
-    CACHE_DURATION
-  ),
+  fileSystem: new enhancedResolve.CachedInputFileSystem(fs, CACHE_DURATION),
   // our code depends on sync behavior, so having this
   // overriden is not an option
   useSyncFileSystemCalls: true,

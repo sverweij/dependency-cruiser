@@ -5,7 +5,7 @@ const readPackageDeps = require("./resolve/get-manifest-dependencies");
 const resolveAMD = require("./resolve/resolve-amd");
 const resolve = require("./resolve/resolve");
 
-module.exports = () => {
+module.exports = function clearCaches() {
   toTypescriptAST.clearCache();
   toJavascriptAST.clearCache();
   localNpmHelpers.clearCache();
