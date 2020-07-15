@@ -1922,6 +1922,42 @@ E.g.:
 }
 ```
 
+#### enhancedResolveOptions
+
+> Likely you will not need to use these.
+
+Under the hood dependency-cruiser uses webpack's
+[enhanced-resolve](https://github.com/webpack/enhanced-resolve).
+to resolve dependencies to disk. You can influence how dependency-cruiser uses
+it directly by passing resolver options in a
+[webpack config](#webpackconfig-use-the-resolution-options-of-a-webpack-configuration)
+for most things. The only exception is the way enhanced-resolve accesses
+the file system - the amount of which we want to have a slightly tighter control
+over as with the wrong settings a lot can go wrong. There's one thing you
+might still want the ability to change though, in a limited number of
+circumstances and that is the time enhanced resolve's files systems retains
+resolutions in memory.
+
+With `cacheDuration` you can tweak the number of milliseconds
+[enhanced-resolve](https://github.com/webpack/enhanced-resolve)'s cached
+file system should use for cache duration. Typicially you won't have to touch
+this - the default works well for repos up to 5000 modules/ 20000 dependencies,
+and likely for numbers above as well. If you experience memory problems on a
+(humongous) repository you can use the cacheDuration attribute to tame
+enhanced-resolve's memory usage by lowering the cache duration trading off against
+some (for values over 1000ms) or significant (for values below 500ms) performance.
+Dependency-cruiser currently uses 1000ms, and in the past has used 4000ms - both
+with good results.
+
+```json
+"options": {
+  "enhancedResolveOptions": {
+    "cachedInputFileSystem": {
+      "cacheDuration": 1000
+    }
+  }
+```
+
 ## Configurations in JavaScript
 
 From version 4.7.0 you can pass a JavaScript module to `--validate`.

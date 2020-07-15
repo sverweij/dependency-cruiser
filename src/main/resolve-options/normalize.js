@@ -1,3 +1,4 @@
+const fs = require("fs");
 const _get = require("lodash/get");
 const _has = require("lodash/has");
 const enhancedResolve = require("enhanced-resolve");
@@ -5,7 +6,7 @@ const PnpWebpackPlugin = require("pnp-webpack-plugin");
 const TsConfigPathsPlugin = require("tsconfig-paths-webpack-plugin");
 const transpileMeta = require("../../extract/transpile/meta");
 
-const CACHE_DURATION = 4000;
+const DEFAULT_CACHE_DURATION = 1000;
 const DEFAULT_RESOLVE_OPTIONS = {
   // for later: check semantics of enhanced-resolve symlinks and
   // node's preserveSymlinks. They seem to be
@@ -30,26 +31,25 @@ const DEFAULT_RESOLVE_OPTIONS = {
   modules: ["node_modules", "node_modules/@types"],
 };
 
-const NON_OVERRIDABLE_RESOLVE_OPTIONS = {
-  // This should cover most of the bases of dependency-cruiser's
-  // uses. Not overridable for now because for other
-  // file systems it's not sure we can use sync system calls
-  // Also: passing a non-cached filesystem makes performance
-  // worse.
-  fileSystem: new enhancedResolve.CachedInputFileSystem(
-    new enhancedResolve.NodeJsInputFileSystem(),
-    CACHE_DURATION
-  ),
-  // our code depends on sync behavior, so having this
-  // overriden is not an option
-  useSyncFileSystemCalls: true,
-};
+function getNonOverridableResolveOptions(pCacheDuration) {
+  return {
+    // This should cover most of the bases of dependency-cruiser's
+    // uses. Not overridable for now because for other
+    // file systems it's not sure we can use sync system calls
+    // Also: passing a non-cached filesystem makes performance
+    // worse.
+    fileSystem: new enhancedResolve.CachedInputFileSystem(fs, pCacheDuration),
+    // our code depends on sync behavior, so having this
+    // overriden is not an option
+    useSyncFileSystemCalls: true,
+  };
+}
 
 function pushPlugin(pPlugins, pPluginToPush) {
   return (pPlugins || []).concat(pPluginToPush);
 }
 
-function compileResolveOptions(pResolveOptions, pTSConfig) {
+function compileResolveOptions(pResolveOptions, pTSConfig, pCacheDuration) {
   let lResolveOptions = {};
 
   // TsConfigPathsPlugin requires a baseUrl to be present in the
@@ -84,7 +84,7 @@ function compileResolveOptions(pResolveOptions, pTSConfig) {
     ...DEFAULT_RESOLVE_OPTIONS,
     ...lResolveOptions,
     ...pResolveOptions,
-    ...NON_OVERRIDABLE_RESOLVE_OPTIONS,
+    ...getNonOverridableResolveOptions(pCacheDuration),
   };
 }
 
@@ -92,23 +92,28 @@ module.exports = (pResolveOptions, pOptions, pTSConfig) =>
   compileResolveOptions(
     {
       /*
-            for later: check semantics of enhanced-resolve symlinks and
-            node's preserveSymlinks. They seem to be
-            symlink === !preserveSymlinks - but using it that way
-            breaks backwards compatibility
-        */
+        for later: check semantics of enhanced-resolve symlinks and
+        node's preserveSymlinks. They seem to be
+        symlink === !preserveSymlinks - but using it that way
+        breaks backwards compatibility
+      */
       symlinks: pOptions.preserveSymlinks,
       tsConfig: _get(pOptions, "ruleSet.options.tsConfig.fileName", null),
 
       /* squirel the externalModuleResolutionStrategy and combinedDependencies
-            thing into the resolve options
-            - they're not for enhanced resolve, but they are for what we consider
-            resolve options ...
-        */
+         thing into the resolve options
+         - they're not for enhanced resolve, but they are for what we consider
+         resolve options ...
+       */
       externalModuleResolutionStrategy:
         pOptions.externalModuleResolutionStrategy,
       combinedDependencies: pOptions.combinedDependencies,
       ...(pResolveOptions || {}),
     },
-    pTSConfig || {}
+    pTSConfig || {},
+    _get(
+      pOptions,
+      "enhancedResolveOptions.cachedInputFileSystem.cacheDuration",
+      DEFAULT_CACHE_DURATION
+    )
   );

@@ -50,7 +50,7 @@ export default {
           ],
         },
         maxDepth: {
-          type: "number",
+          type: "integer",
           minimum: 0,
           maximum: 99,
           description:
@@ -139,6 +139,38 @@ export default {
               description:
                 "Arguments to pass if your config file returns a function. E.g. " +
                 "{mode: 'production'} if you want to use webpack 4's 'mode' feature",
+            },
+          },
+        },
+        enhancedResolveOptions: {
+          type: "object",
+          additionalProperties: false,
+          description:
+            "Options used in module resolution that for dependency-cruiser's " +
+            "use cannot go in a webpack config.",
+          properties: {
+            cachedInputFileSystem: {
+              type: "object",
+              additionalProperties: false,
+              properties: {
+                cacheDuration: {
+                  type: "integer",
+                  minimum: 0,
+                  // half an hour cache duration should suffice methinks
+                  maximum: 1800000,
+                  description:
+                    "The number of milliseconds [enhanced-resolve](webpack/enhanced-resolve)'s " +
+                    "cached file system should use for cache duration. Typicially you won't " +
+                    "have to touch this - the default works well for repos up to 5000 modules/ " +
+                    "20000 dependencies, and likely for numbers above as well. " +
+                    "If you experience memory problems on a (humongous) repository you can " +
+                    "use the cacheDuration attribute to tame enhanced-resolve's memory " +
+                    "usage by lowering the cache duration trading off against some (for " +
+                    "values over 1000ms) or significant (for values below 500ms) performance. " +
+                    "Dependency-cruiser currently uses 1000ms, and in the past has " +
+                    "used 4000ms - both with good results.",
+                },
+              },
             },
           },
         },
