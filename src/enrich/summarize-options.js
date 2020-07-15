@@ -22,6 +22,7 @@ const SHAREABLE_OPTIONS = [
   "exoticallyRequired",
   "exoticRequireStrings",
   "reporterOptions",
+  "enhancedResolveOptions",
 ];
 
 function makeOptionsPresentable(pOptions) {

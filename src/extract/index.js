@@ -140,7 +140,7 @@ module.exports = (
 ) => {
   clearCaches();
 
-  return _uniqBy(
+  const lReturnValue = _uniqBy(
     extractFileDirectoryArray(
       pFileDirectoryArray,
       pCruiseOptions,
@@ -151,4 +151,7 @@ module.exports = (
   ).map((pModule) =>
     filterExcludedDynamicDependencies(pModule, pCruiseOptions.exclude)
   );
+  pResolveOptions.fileSystem.purge();
+  clearCaches();
+  return lReturnValue;
 };

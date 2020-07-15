@@ -125,4 +125,28 @@ export interface ICruiseOptions {
    * Options to tweak the output of reporters
    */
   reporterOptions?: IReporterOptions;
+
+  /**
+   * Options used in module resolution that for dependency-cruiser's
+   * use cannot go in a webpack config.
+   */
+  enhancedResolveOptions?: {
+    cachedInputFileSystem?: {
+      /**
+       * The number of milliseconds [enhanced-resolve](webpack/enhanced-resolve)'s
+       * cached file system should use for cache duration. Typicially you won't
+       * have to touch this - the default works well for repos up to 5000 modules/
+       * 20000 dependencies, and likely for numbers above as well.
+       *
+       * If you experience memory problems on a (humongous) repository you can
+       * use the cacheDuration attribute to tame enhanced-resolve's memory
+       * usage by lowering the cache duration trading off against some (for
+       * values over 1000ms) or significant (for values below 500ms) performance.
+       *
+       * Dependency-cruiser currently uses 1000ms, and in the past has
+       * used 4000ms - both with good results.
+       */
+      cacheDuration: number;
+    };
+  };
 }
