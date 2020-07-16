@@ -7,7 +7,6 @@ node_js:
 
 before_install:
   - wget https://github.com/sharkdp/hyperfine/releases/download/v1.5.0/hyperfine_1.5.0_amd64.deb
-  - sudo dpkg -i hyperfine_1.5.0_amd64.deb
 
 install:
   - npm install
@@ -23,7 +22,6 @@ script:
   - npm run test:glob
   - npm run test:cover
   - npm run lint
-  - npm run test:load:short
   - npm run test:yarn-pnp
 
 after_script:
