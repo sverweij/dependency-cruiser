@@ -6,7 +6,6 @@ describe("validate/index dependency - generic tests", () => {
   it("is ok with the empty validation", () => {
     expect(
       validate.dependency(
-        true,
         readRuleSet("./test/validate/fixtures/rules.empty.json"),
         { source: "koos koets" },
         { resolved: "robby van de kerkhof" }
@@ -17,7 +16,6 @@ describe("validate/index dependency - generic tests", () => {
   it("is ok with the 'everything allowed' validation", () => {
     expect(
       validate.dependency(
-        true,
         readRuleSet("./test/validate/fixtures/rules.everything-allowed.json"),
         { source: "koos koets" },
         { resolved: "robby van de kerkhof" }
@@ -28,7 +26,6 @@ describe("validate/index dependency - generic tests", () => {
   it("is ok with the 'everything allowed' validation - even when there's a module only rule in 'forbidden'", () => {
     expect(
       validate.module(
-        true,
         readRuleSet(
           "./test/validate/fixtures/rules.module-only.empty.allowed.json"
         ),
@@ -40,7 +37,6 @@ describe("validate/index dependency - generic tests", () => {
   it("is ok with the 'impossible to match allowed' validation", () => {
     expect(
       validate.dependency(
-        true,
         readRuleSet(
           "./test/validate/fixtures/rules.impossible-to-match-allowed.json"
         ),
@@ -56,7 +52,6 @@ describe("validate/index dependency - generic tests", () => {
   it("is ok with the 'impossible to match allowed' validation - errors when configured so", () => {
     expect(
       validate.dependency(
-        true,
         readRuleSet(
           "./test/validate/fixtures/rules.impossible-to-match-error.allowed.json"
         ),
@@ -72,7 +67,6 @@ describe("validate/index dependency - generic tests", () => {
   it("is ok with the 'nothing allowed' validation", () => {
     expect(
       validate.dependency(
-        true,
         readRuleSet("./test/validate/fixtures/rules.nothing-allowed.json"),
         { source: "koos koets" },
         { resolved: "robby van de kerkhof" }
@@ -86,7 +80,6 @@ describe("validate/index dependency - generic tests", () => {
   it("if there's more than one violated rule, both are returned", () => {
     expect(
       validate.dependency(
-        true,
         readRuleSet(
           "./test/validate/fixtures/rules.not-in-allowed-and-a-forbidden.json"
         ),
@@ -109,7 +102,6 @@ describe("validate/index - specific tests", () => {
   it("node_modules inhibition - ok", () => {
     expect(
       validate.dependency(
-        true,
         readRuleSet(
           "./test/validate/fixtures/rules.node_modules-not-allowed.json"
         ),
@@ -122,7 +114,6 @@ describe("validate/index - specific tests", () => {
   it("node_modules inhibition - violation", () => {
     expect(
       validate.dependency(
-        true,
         readRuleSet(
           "./test/validate/fixtures/rules.node_modules-not-allowed.json"
         ),
@@ -138,7 +129,6 @@ describe("validate/index - specific tests", () => {
   it("not to core - ok", () => {
     expect(
       validate.dependency(
-        true,
         readRuleSet("./test/validate/fixtures/rules.not-to-core.json"),
         { source: "koos koets" },
         { resolved: "path", dependencyTypes: ["npm"] }
@@ -149,7 +139,6 @@ describe("validate/index - specific tests", () => {
   it("not to core - violation", () => {
     expect(
       validate.dependency(
-        true,
         readRuleSet("./test/validate/fixtures/rules.not-to-core.json"),
         { source: "koos koets" },
         { resolved: "path", dependencyTypes: ["core"] }
@@ -163,7 +152,6 @@ describe("validate/index - specific tests", () => {
   it("not to core fs os - ok", () => {
     expect(
       validate.dependency(
-        true,
         readRuleSet("./test/validate/fixtures/rules.not-to-core-fs-os.json"),
         { source: "koos koets" },
         { resolved: "path", dependencyTypes: ["core"] }
@@ -174,7 +162,6 @@ describe("validate/index - specific tests", () => {
   it("not to core fs os - violation", () => {
     expect(
       validate.dependency(
-        true,
         readRuleSet("./test/validate/fixtures/rules.not-to-core-fs-os.json"),
         { source: "koos koets" },
         { resolved: "os", dependencyTypes: ["core"] }
@@ -188,7 +175,6 @@ describe("validate/index - specific tests", () => {
   it("not to unresolvable - ok", () => {
     expect(
       validate.dependency(
-        true,
         readRuleSet("./test/validate/fixtures/rules.not-to-unresolvable.json"),
         { source: "koos koets" },
         { resolved: "diana charitee", couldNotResolve: false }
@@ -199,7 +185,6 @@ describe("validate/index - specific tests", () => {
   it("not to unresolvable - violation", () => {
     expect(
       validate.dependency(
-        true,
         readRuleSet("./test/validate/fixtures/rules.not-to-unresolvable.json"),
         { source: "koos koets" },
         { resolved: "diana charitee", couldNotResolve: true }
@@ -213,7 +198,6 @@ describe("validate/index - specific tests", () => {
   it("only to core - via 'allowed' - ok", () => {
     expect(
       validate.dependency(
-        true,
         readRuleSet("./test/validate/fixtures/rules.only-to-core.allowed.json"),
         { source: "koos koets" },
         { resolved: "os", dependencyTypes: ["core"] }
@@ -224,7 +208,6 @@ describe("validate/index - specific tests", () => {
   it("only to core - via 'allowed' - violation", () => {
     expect(
       validate.dependency(
-        true,
         readRuleSet("./test/validate/fixtures/rules.only-to-core.allowed.json"),
         { source: "koos koets" },
         { resolved: "ger hekking", dependencyTypes: ["npm"] }
@@ -238,7 +221,6 @@ describe("validate/index - specific tests", () => {
   it("only to core - via 'forbidden' - ok", () => {
     expect(
       validate.dependency(
-        true,
         readRuleSet(
           "./test/validate/fixtures/rules.only-to-core.forbidden.json"
         ),
@@ -251,7 +233,6 @@ describe("validate/index - specific tests", () => {
   it("only to core - via 'forbidden' - violation", () => {
     expect(
       validate.dependency(
-        true,
         readRuleSet(
           "./test/validate/fixtures/rules.only-to-core.forbidden.json"
         ),
@@ -267,7 +248,6 @@ describe("validate/index - specific tests", () => {
   it("not to sub except sub itself - ok - sub to sub", () => {
     expect(
       validate.dependency(
-        true,
         readRuleSet(
           "./test/validate/fixtures/rules.not-to-sub-except-sub.json"
         ),
@@ -280,7 +260,6 @@ describe("validate/index - specific tests", () => {
   it("not to sub except sub itself - ok - not sub to not sub", () => {
     expect(
       validate.dependency(
-        true,
         readRuleSet(
           "./test/validate/fixtures/rules.not-to-sub-except-sub.json"
         ),
@@ -293,7 +272,6 @@ describe("validate/index - specific tests", () => {
   it("not to sub except sub itself - ok - sub to not sub", () => {
     expect(
       validate.dependency(
-        true,
         readRuleSet(
           "./test/validate/fixtures/rules.not-to-sub-except-sub.json"
         ),
@@ -306,7 +284,6 @@ describe("validate/index - specific tests", () => {
   it("not to sub except sub itself  - violation - not sub to sub", () => {
     expect(
       validate.dependency(
-        true,
         readRuleSet(
           "./test/validate/fixtures/rules.not-to-sub-except-sub.json"
         ),
@@ -322,7 +299,6 @@ describe("validate/index - specific tests", () => {
   it("not to not sub (=> everything must go to 'sub')- ok - sub to sub", () => {
     expect(
       validate.dependency(
-        true,
         readRuleSet("./test/validate/fixtures/rules.not-to-not-sub.json"),
         { source: "./keek/op/de/sub/week.js" },
         { resolved: "./keek/op/de/sub/maand.js", coreModule: false }
@@ -333,7 +309,6 @@ describe("validate/index - specific tests", () => {
   it("not to not sub (=> everything must go to 'sub')- violation - not sub to not sub", () => {
     expect(
       validate.dependency(
-        true,
         readRuleSet("./test/validate/fixtures/rules.not-to-not-sub.json"),
         { source: "./amber.js" },
         { resolved: "./jade.js", coreModule: false }
@@ -347,7 +322,6 @@ describe("validate/index - specific tests", () => {
   it("not-to-dev-dep disallows relations to develop dependencies", () => {
     expect(
       validate.dependency(
-        true,
         readRuleSet("./test/validate/fixtures/rules.not-to-dev-dep.json"),
         { source: "src/aap/zus/jet.js" },
         {
@@ -370,7 +344,6 @@ describe("validate/index - specific tests", () => {
   it("not-to-dev-dep does allow relations to regular dependencies", () => {
     expect(
       validate.dependency(
-        true,
         readRuleSet("./test/validate/fixtures/rules.not-to-dev-dep.json"),
         { source: "src/aap/zus/jet.js" },
         {
@@ -385,7 +358,6 @@ describe("validate/index - specific tests", () => {
   it(`no relations with modules of > 1 dep type (e.g. specified 2x in package.json)`, () => {
     expect(
       validate.dependency(
-        true,
         readRuleSet(
           "./test/validate/fixtures/rules.no-duplicate-dep-types.json"
         ),

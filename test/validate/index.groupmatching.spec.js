@@ -6,7 +6,6 @@ describe("validate/index group matching - path group matched in a pathnot", () =
   it("group-to-pathnot - Disallows dependencies between peer folders", () => {
     expect(
       validate.dependency(
-        true,
         readRuleSet("./test/validate/fixtures/rules.group-to-pathnot.json"),
         { source: "src/aap/chimpansee.ts" },
         { resolved: "src/noot/pinda.ts" }
@@ -25,7 +24,6 @@ describe("validate/index group matching - path group matched in a pathnot", () =
   it("group-to-pathnot - Allows dependencies within to peer folder 'shared'", () => {
     expect(
       validate.dependency(
-        true,
         readRuleSet("./test/validate/fixtures/rules.group-to-pathnot.json"),
         { source: "src/aap/chimpansee.ts" },
         { resolved: "src/shared/bananas.ts" }
@@ -36,7 +34,6 @@ describe("validate/index group matching - path group matched in a pathnot", () =
   it("group-to-pathnot - Allows dependencies within own folder", () => {
     expect(
       validate.dependency(
-        true,
         readRuleSet("./test/validate/fixtures/rules.group-to-pathnot.json"),
         { source: "src/aap/chimpansee.ts" },
         { resolved: "src/aap/oerangoetang.ts" }
@@ -47,7 +44,6 @@ describe("validate/index group matching - path group matched in a pathnot", () =
   it("group-to-pathnot - Allows dependencies to sub folders of own folder", () => {
     expect(
       validate.dependency(
-        true,
         readRuleSet("./test/validate/fixtures/rules.group-to-pathnot.json"),
         { source: "src/aap/chimpansee.ts" },
         { resolved: "src/aap/speeltuigen/autoband.ts" }
@@ -58,7 +54,6 @@ describe("validate/index group matching - path group matched in a pathnot", () =
   it("group-to-pathnot - Allows peer dependencies between sub folders of own folder", () => {
     expect(
       validate.dependency(
-        true,
         readRuleSet("./test/validate/fixtures/rules.group-to-pathnot.json"),
         { source: "src/aap/rekwisieten/touw.ts" },
         { resolved: "src/aap/speeltuigen/autoband.ts" }
@@ -71,7 +66,6 @@ describe("validate/index group matching - second path group matched in a pathnot
   it("group-two-to-pathnot - Disallows dependencies between peer folders", () => {
     expect(
       validate.dependency(
-        true,
         readRuleSet("./test/validate/fixtures/rules.group-two-to-pathnot.json"),
         { source: "src/aap/chimpansee.ts" },
         { resolved: "src/noot/pinda.ts" }
@@ -90,7 +84,6 @@ describe("validate/index group matching - second path group matched in a pathnot
   it("group-two-to-pathnot - Allows dependencies within to peer folder 'shared'", () => {
     expect(
       validate.dependency(
-        true,
         readRuleSet("./test/validate/fixtures/rules.group-two-to-pathnot.json"),
         { source: "src/aap/chimpansee.ts" },
         { resolved: "src/shared/bananas.ts" }
@@ -101,7 +94,6 @@ describe("validate/index group matching - second path group matched in a pathnot
   it("group-two-to-pathnot - Allows dependencies within own folder", () => {
     expect(
       validate.dependency(
-        true,
         readRuleSet("./test/validate/fixtures/rules.group-two-to-pathnot.json"),
         { source: "src/aap/chimpansee.ts" },
         { resolved: "src/aap/oerangoetang.ts" }
@@ -112,7 +104,6 @@ describe("validate/index group matching - second path group matched in a pathnot
   it("group-two-to-pathnot - Allows dependencies to sub folders of own folder", () => {
     expect(
       validate.dependency(
-        true,
         readRuleSet("./test/validate/fixtures/rules.group-two-to-pathnot.json"),
         { source: "src/aap/chimpansee.ts" },
         { resolved: "src/aap/speeltuigen/autoband.ts" }
@@ -123,7 +114,6 @@ describe("validate/index group matching - second path group matched in a pathnot
   it("group-two-to-pathnot - Allows peer dependencies between sub folders of own folder", () => {
     expect(
       validate.dependency(
-        true,
         readRuleSet("./test/validate/fixtures/rules.group-two-to-pathnot.json"),
         { source: "src/aap/rekwisieten/touw.ts" },
         { resolved: "src/aap/speeltuigen/autoband.ts" }

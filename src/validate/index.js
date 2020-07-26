@@ -84,7 +84,6 @@ function validateAgainstRules(pRuleSet, pFrom, pTo, pMatchModule) {
  * If pValidate equals true, validates the pFrom and pTo
  * dependency pair against the given ruleset pRuleSet
  *
- * @param  {Boolean} pValidate whether or not to validate at all
  * @param  {object} pRuleSet  a ruleset (adhering to
  *                            [the ruleset schema](jsonschema.json))
  * @param  {object} pFrom     The from part of the dependency
@@ -102,16 +101,8 @@ function validateAgainstRules(pRuleSet, pFrom, pTo, pMatchModule) {
  *                                  the ruleset
  */
 module.exports = {
-  module: (pValidate, pRuleSet, pModule) => {
-    if (!pValidate) {
-      return { valid: true };
-    }
-    return validateAgainstRules(pRuleSet, pModule, {}, matchModuleRule);
-  },
-  dependency: (pValidate, pRuleSet, pFrom, pTo) => {
-    if (!pValidate) {
-      return { valid: true };
-    }
-    return validateAgainstRules(pRuleSet, pFrom, pTo, matchDependencyRule);
-  },
+  module: (pRuleSet, pModule) =>
+    validateAgainstRules(pRuleSet, pModule, {}, matchModuleRule),
+  dependency: (pRuleSet, pFrom, pTo) =>
+    validateAgainstRules(pRuleSet, pFrom, pTo, matchDependencyRule),
 };
