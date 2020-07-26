@@ -84,11 +84,13 @@ function validateAgainstRules(pRuleSet, pFrom, pTo, pMatchModule) {
  * If pValidate equals true, validates the pFrom and pTo
  * dependency pair against the given ruleset pRuleSet
  *
- * @param  {object} pRuleSet  a ruleset (adhering to
- *                            [the ruleset schema](jsonschema.json))
- * @param  {object} pFrom     The from part of the dependency
- * @param  {object} pTo       The 'to' part of the dependency
- * @return {object}           an object with as attributes:
+ * @param  {import("../../types/rule-set").IFlattenedRuleSet} pRuleSet
+ *    a ruleset (adhering to  [the ruleset schema](jsonschema.json))
+ * @param  {import("../../types/cruise-result").IModule} pFrom
+ *    The from part of the dependency
+ * @param  {import("../../types/cruise-result").IModule} pTo
+ *    The 'to' part of the dependency
+ * @return {any}           an object with as attributes:
  *                            - valid: (boolean) true if the relation
  *                              between pTo and pFalse is valid (as far as the
  *                              given ruleset is concerend). false in all other

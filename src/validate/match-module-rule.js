@@ -4,7 +4,6 @@ const matchers = require("./matchers");
 function matchesOrphanRule(pRule, pModule) {
   return (
     Object.prototype.hasOwnProperty.call(pRule.from, "orphan") &&
-    Object.prototype.hasOwnProperty.call(pModule, "orphan") &&
     pModule.orphan === pRule.from.orphan &&
     matchers.fromPath(pRule, pModule) &&
     matchers.fromPathNot(pRule, pModule)
