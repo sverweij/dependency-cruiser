@@ -10,6 +10,11 @@ module.exports = function enrichModules(pModules, pOptions) {
   lModules = deriveOrphans(lModules);
   lModules = deriveReachable(lModules, pOptions.ruleSet);
   lModules = addFocus(lModules, _get(pOptions, "focus"));
-  lModules = addValidations(lModules, pOptions.validate, pOptions.ruleSet);
+
+  // when validate === false we might want to skip the addValidations.
+  // We don't at this time, however, as "valid" is a mandatory
+  // attribute (to simplify reporter logic)
+  lModules = addValidations(lModules, pOptions.ruleSet, pOptions.validate);
+
   return lModules;
 };
