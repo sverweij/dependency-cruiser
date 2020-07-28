@@ -18,8 +18,16 @@ const TSCONFIG_RESOLUTIONS = path.join(
   "tsconfig.json"
 );
 const PARSED_TSCONFIG_RESOLUTIONS = parseTSConfig(TSCONFIG);
+const WORKING_DIRECTORY = process.cwd();
 
 describe("extract/resolve/index", () => {
+  beforeEach("reset current wd", () => {
+    process.chdir(WORKING_DIRECTORY);
+  });
+
+  afterEach("reset current wd", () => {
+    process.chdir(WORKING_DIRECTORY);
+  });
   it("resolves a local dependency to a file on disk", () => {
     expect(
       resolve(
@@ -432,6 +440,55 @@ describe("extract/resolve/index", () => {
       dependencyTypes: ["local"],
       followable: true,
       resolved: "resolve/hots.js",
+    });
+  });
+
+  it("by default does not look at 'exports' fields in package.json", () => {
+    process.chdir("test/extract/resolve/fixtures/package-json-with-exports");
+    expect(
+      resolve(
+        {
+          module: "export-testinga/conditionalExports",
+          moduleSystem: "cjs",
+        },
+        process.cwd(),
+        process.cwd(),
+        normalizeResolveOptions({ bustTheCache: true }, {})
+      )
+    ).to.deep.equal({
+      coreModule: false,
+      couldNotResolve: true,
+      dependencyTypes: ["unknown"],
+      followable: false,
+      resolved: "export-testinga/conditionalExports",
+    });
+  });
+
+  it("looks at the 'exports' fields in package.json when enhanced-resolve is instructed to", () => {
+    process.chdir("test/extract/resolve/fixtures/package-json-with-exports");
+    expect(
+      resolve(
+        {
+          module: "export-testinga/conditionalExports",
+          moduleSystem: "cjs",
+        },
+        process.cwd(),
+        process.cwd(),
+        normalizeResolveOptions(
+          {
+            bustTheCache: true,
+            exportsFields: ["exports"],
+            conditionNames: ["require"],
+          },
+          {}
+        )
+      )
+    ).to.deep.equal({
+      coreModule: false,
+      couldNotResolve: false,
+      dependencyTypes: ["npm-no-pkg"],
+      followable: true,
+      resolved: "node_modules/export-testinga/feature.cjs",
     });
   });
 });
