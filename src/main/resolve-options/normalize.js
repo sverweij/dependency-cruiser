@@ -29,6 +29,12 @@ const DEFAULT_RESOLVE_OPTIONS = {
   //   to look for modules (in addition to "node_modules" which
   //   is the default for enhanced-resolve)
   modules: ["node_modules", "node_modules/@types"],
+  // this overrides the default exports fields enhanced-resolve uses
+  // (being ["exports"]) to keep backwards compatibility between enhanced-resolve
+  // 4 and 5 (4 didn't heed them at all and the empty array has the same
+  // effect).
+  // Also see https://github.com/sverweij/dependency-cruiser/issues/338
+  exportsFields: [],
 };
 
 function getNonOverridableResolveOptions(pCacheDuration) {
