@@ -17,12 +17,12 @@ const fileExists = memoize((pFile) => {
   return true;
 });
 
-module.exports = (
+module.exports = function resolveAMD(
   pModuleName,
   pBaseDirectory,
   pFileDirectory,
   pResolveOptions
-) => {
+) {
   // lookups:
   // - [x] could be relative in the end (implemented)
   // - [ ] require.config kerfuffle (command line, html, file, ...)

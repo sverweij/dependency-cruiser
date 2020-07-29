@@ -55,8 +55,8 @@ function getJointUniqueDependencyKeys(pClosestPackage, pFurtherPackage) {
  *                               (e.g. ./package.json)
  * @return {any}                 the combined dependency-keys within those manifests
  */
-module.exports = (pClosestManifest, pFurtherManifest) =>
-  getJointUniqueDependencyKeys(
+module.exports = function mergeManifests(pClosestManifest, pFurtherManifest) {
+  return getJointUniqueDependencyKeys(
     normalizeManifestKeys(pClosestManifest),
     normalizeManifestKeys(pFurtherManifest)
   )
@@ -76,3 +76,4 @@ module.exports = (pClosestManifest, pFurtherManifest) =>
       pJoinedObject[pJoinedKey.key] = pJoinedKey.value;
       return pJoinedObject;
     }, {});
+};

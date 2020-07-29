@@ -68,12 +68,12 @@ function resolveModule(
  *                              - dependencyTypes: an array of dependencyTypes
  *
  */
-module.exports = (
+module.exports = function resolve(
   pDependency,
   pBaseDirectory,
   pFileDirectory,
   pResolveOptions
-) => {
+) {
   let lResolvedModule = resolveModule(
     pDependency,
     pBaseDirectory,

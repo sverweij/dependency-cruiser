@@ -39,9 +39,7 @@ function init(pResolveOptions) {
   }
 }
 
-function isFollowable(pResolvedFilename, pResolveOptions) {
+module.exports = function isFollowable(pResolvedFilename, pResolveOptions) {
   init(pResolveOptions);
   return gFollowableExtensions.has(getExtension(pResolvedFilename));
-}
-
-module.exports = isFollowable;
+};

@@ -125,11 +125,11 @@ const getCombinedManifests = _memoize((pFileDirectory, pBaseDirectory) => {
  *                                         object or null if a package.json could not be
  *                                        found or is invalid
  */
-module.exports = (
+module.exports = function getManifestDependencies(
   pFileDirectory,
   pBaseDirectory,
   pCombinedDependencies = false
-) => {
+) {
   if (pCombinedDependencies) {
     return getCombinedManifests(pFileDirectory, pBaseDirectory);
   } else {

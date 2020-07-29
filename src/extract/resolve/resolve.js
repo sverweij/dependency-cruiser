@@ -11,7 +11,11 @@ function init(pResolveOptions, pCachingContext) {
     pResolveOptions.fileSystem.purge();
     gResolver = enhancedResolve.ResolverFactory.createResolver({
       ...pResolveOptions,
-      // we're doing that ourselves for now
+      // we're doing that ourselves for now. We can't set this in
+      // 'normalize' because we actively use resolveOptions.symlinks
+      // with our own symlink resolution thing, so we need to override
+      // it here locally so even when it is passed as true we skip
+      // ehr's capabilities in this and still do it ourselves.
       symlinks: false,
     });
     /* eslint security/detect-object-injection:0 */

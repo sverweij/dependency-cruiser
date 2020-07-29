@@ -39,12 +39,12 @@ function addResolutionAttributes(
 /*
  * resolves both CommonJS and ES6
  */
-module.exports = (
+module.exports = function resolveCommonJS(
   pModuleName,
   pBaseDirectory,
   pFileDirectory,
   pResolveOptions
-) => {
+) {
   let lReturnValue = {
     resolved: pModuleName,
     coreModule: false,

@@ -1,4 +1,5 @@
 const { builtinModules } = require("module");
 
-module.exports = (pModuleName) =>
-  builtinModules.some((pBuiltinModule) => pBuiltinModule === pModuleName);
+module.exports = function isCore(pModuleName) {
+  return builtinModules.includes(pModuleName);
+};

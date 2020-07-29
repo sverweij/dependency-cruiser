@@ -163,14 +163,14 @@ function isAliassy(pModuleName, pDependency, pResolveOptions) {
  *
  * @return {string[]} an array of dependency types for the dependency
  */
-module.exports = (
+module.exports = function determineDependencyTypes(
   pDependency,
   pModuleName,
   pPackageDeps,
   pFileDirectory,
   pResolveOptions,
   pBaseDirectory
-) => {
+) {
   let lReturnValue = ["undetermined"];
 
   pResolveOptions = pResolveOptions || {};

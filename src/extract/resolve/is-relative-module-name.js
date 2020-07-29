@@ -1,5 +1,8 @@
-module.exports = (pString) =>
-  pString.startsWith("./") ||
-  pString.startsWith("../") ||
-  pString === "." ||
-  pString === "..";
+module.exports = function isRelativeModuleName(pString) {
+  return (
+    pString.startsWith("./") ||
+    pString.startsWith("../") ||
+    pString === "." ||
+    pString === ".."
+  );
+};
