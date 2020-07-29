@@ -5,6 +5,10 @@ const normalizeResolveOptions = require("~/src/main/resolve-options/normalize");
 const normalizeOptions = require("~/src/main/options/normalize");
 
 const BASIC_RESOLVE_OPTIONS = normalizeResolveOptions({}, normalizeOptions({}));
+const RESOLVE_OPTIONS_HEEDING_EXPORTS = normalizeResolveOptions(
+  { exportsFields: ["exports"], conditionNames: ["require", "imports"] },
+  normalizeOptions({})
+);
 describe("extract/resolve/localNpmHelpers.getPackageJson", () => {
   beforeEach(() => {
     clearCaches();
@@ -42,9 +46,6 @@ describe("extract/resolve/localNpmHelpers.getPackageJson", () => {
   it("returns a package.json when there is one (root)", () => {
     let lPackageJson = localNpmHelpers.getPackageJson(
       "chai",
-      // TODO: workaround for what looks like a defect in enhanced-resolve@beta;
-      //       "." as context doesn't work anymore, so passing process.cwd()
-      //       in stead.
       process.cwd(),
       BASIC_RESOLVE_OPTIONS
     );
@@ -68,6 +69,19 @@ describe("extract/resolve/localNpmHelpers.getPackageJson", () => {
     expect(lPackageJson.name).to.equal(
       "deprecated-at-the-start-for-test-purposes"
     );
+  });
+
+  it("returns a package.json even when it's not specified in the node modules exports and the regular resolver is supposed to heed those exports", () => {
+    let lPackageJson = localNpmHelpers.getPackageJson(
+      "testinga-two",
+      "./test/extract/resolve/fixtures/unreadable-package-json-because-not-exported",
+      RESOLVE_OPTIONS_HEEDING_EXPORTS
+    );
+
+    expect(lPackageJson).to.be.not.null;
+    expect(Object.prototype.hasOwnProperty.call(lPackageJson, "name")).to.be
+      .true;
+    expect(lPackageJson.description).to.equal("testinga 2");
   });
 });
 

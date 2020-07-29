@@ -2,14 +2,16 @@ const enhancedResolve = require("enhanced-resolve");
 const pathToPosix = require("../../utl/path-to-posix");
 const stripQueryParameters = require("../utl/strip-query-parameters");
 
-let gResolver = null;
+let gResolvers = {};
 let gInitialized = {};
 
 function init(pResolveOptions, pCachingContext) {
   if (!gInitialized[pCachingContext] || pResolveOptions.bustTheCache) {
     // assuming the cached file system here
     pResolveOptions.fileSystem.purge();
-    gResolver = enhancedResolve.ResolverFactory.createResolver({
+    gResolvers[
+      pCachingContext
+    ] = enhancedResolve.ResolverFactory.createResolver({
       ...pResolveOptions,
       // we're doing that ourselves for now. We can't set this in
       // 'normalize' because we actively use resolveOptions.symlinks
@@ -42,7 +44,7 @@ function resolve(
   init(pResolveOptions, pCachingContext);
 
   return stripQueryParameters(
-    gResolver.resolveSync(
+    gResolvers[pCachingContext].resolveSync(
       {},
       // lookupStartPath
       pathToPosix(pFileDirectory),
@@ -55,4 +57,5 @@ function resolve(
 module.exports = resolve;
 module.exports.clearCache = () => {
   gInitialized = {};
+  gResolvers = {};
 };

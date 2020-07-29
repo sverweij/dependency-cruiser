@@ -80,8 +80,20 @@ function bareGetPackageJson(pModule, pBaseDirectory, pResolveOptions) {
   try {
     let lPackageJsonFilename = resolve(
       path.join(getPackageRoot(pModule), "package.json"),
-      pBaseDirectory ? pBaseDirectory : ".",
-      pResolveOptions
+      pBaseDirectory ? pBaseDirectory : process.cwd(),
+      {
+        ...pResolveOptions,
+        // if a module has exports fields _and_ does not expose package.json
+        // in those exports, enhanced-resolve (nor node!) will not be able to
+        // resolve the package.json if it actually heeds those exports fields.
+        // We can instruct enhanced-resolve to ignore them, however, by passing
+        // it the empty array for exports fields (overriding anything in
+        // the pResvolveOptions)
+        exportsFields: [],
+      },
+      // we need a separate caching context so as not to **** up the regular
+      // cruise, which might actually want to utilize the exportsFields.
+      "manifest-resolution"
     );
 
     lReturnValue = JSON.parse(fs.readFileSync(lPackageJsonFilename, "utf8"));
