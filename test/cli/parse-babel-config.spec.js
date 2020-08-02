@@ -4,6 +4,7 @@ const parseBabelConfig = require("~/src/cli/parse-babel-config");
 
 const DEFAULT_EMPTY_BABEL_OPTIONS_OBJECT = {
   babelrc: false,
+  cloneInputAst: true,
   configFile: false,
   passPerPreset: false,
   envName: "development",

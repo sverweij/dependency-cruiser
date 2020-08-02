@@ -1,4 +1,4 @@
-import { IExcludeType, IIncludeOnlyType, IFocusType } from "./filter-types";
+import { IExcludeType, IFocusType, IIncludeOnlyType } from "./filter-types";
 
 export interface IReporterOptions {
   /**
