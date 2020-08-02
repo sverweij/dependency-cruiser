@@ -9,11 +9,7 @@ function getPath(pGraph, pFrom, pTo, pVisited = new Set()) {
     const lDirectUnvisitedDependencies = lFromNode.dependencies
       .filter((pDependency) => !pVisited.has(pDependency.resolved))
       .map((pDependency) => pDependency.resolved);
-    if (
-      lDirectUnvisitedDependencies.some(
-        (pDirectDependency) => pDirectDependency === pTo
-      )
-    ) {
+    if (lDirectUnvisitedDependencies.includes(pTo)) {
       lReturnValue = [pFrom, pTo];
     } else {
       for (const lFrom of lDirectUnvisitedDependencies) {

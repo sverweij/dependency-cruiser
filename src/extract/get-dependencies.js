@@ -59,9 +59,7 @@ function extractDependencies(pCruiseOptions, pFileName, pTranspileOptions) {
       pCruiseOptions,
       pFileName
     ).filter((pDep) =>
-      pCruiseOptions.moduleSystems.some(
-        (pModuleSystem) => pModuleSystem === pDep.moduleSystem
-      )
+      pCruiseOptions.moduleSystems.includes(pDep.moduleSystem)
     );
 
     if (pCruiseOptions.tsPreCompilationDeps === "specify") {

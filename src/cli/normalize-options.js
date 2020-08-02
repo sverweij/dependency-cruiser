@@ -42,7 +42,7 @@ function getOptionValue(pDefault) {
 }
 
 function isKnownCLIOption(pCandidateString) {
-  return KNOWN_CLI_OPTIONS.some((pString) => pString === pCandidateString);
+  return KNOWN_CLI_OPTIONS.includes(pCandidateString);
 }
 
 /**

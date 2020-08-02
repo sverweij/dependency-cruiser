@@ -47,7 +47,7 @@ export default {
           description:
             "the type of inclusion - local, core, unknown (= we honestly don't " +
             "know), undetermined (= we didn't bother determining it) or one of " +
-            "the npm dependencies defined in a package.jsom ('npm' for 'depenencies', " +
+            "the npm dependencies defined in a package.jsom ('npm' for 'dependencies', " +
             "'npm-dev', 'npm-optional', 'npm-peer', 'npm-no-pkg' for development, " +
             "optional, peer dependencies and dependencies in node_modules but not " +
             "in package.json respectively)",

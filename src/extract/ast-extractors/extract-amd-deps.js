@@ -32,10 +32,7 @@ function extractCommonJSWrappers(pNode, pDependencies, pExoticRequireStrings) {
           pArgument.params.some(
             (pParameter) =>
               pParameter.name === "require" ||
-              pExoticRequireStrings.some(
-                (pExoticRequireString) =>
-                  pExoticRequireString === pParameter.name
-              )
+              pExoticRequireStrings.includes(pParameter.name)
           )
       )
       .forEach((pFunction) =>

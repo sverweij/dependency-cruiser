@@ -2,9 +2,8 @@
  * exist:
  * - it saves CPU cycles to the effect of being ~30% faster than with the
  *   checks
- * - lToNode: is guaranteed to be there by the extract/ complete in index.js
- * - lToNode.dependencies is a mandatory attribute (as per json schema)
- * - pToToNode.resolved is a mandatory attribute (as per json schema)
+ * - .dependencies is a mandatory attribute (as per json schema)
+ * - .resolved is a mandatory attribute (as per json schema)
  */
 
 /**
@@ -39,7 +38,7 @@ function getCycle(pGraph, pInitialSource, pCurrentSource, pVisited) {
     return [pCurrentSource, lMatch.resolved];
   }
   return lDependencies.reduce((pAll, pDependency) => {
-    if (!pAll.some((pNodeName) => pNodeName === pCurrentSource)) {
+    if (!pAll.includes(pCurrentSource)) {
       const lCycle = getCycle(
         pGraph,
         pInitialSource,
@@ -47,10 +46,7 @@ function getCycle(pGraph, pInitialSource, pCurrentSource, pVisited) {
         pVisited.add(pDependency.resolved)
       );
 
-      if (
-        lCycle.length > 0 &&
-        !lCycle.some((pNodeName) => pNodeName === pCurrentSource)
-      ) {
+      if (lCycle.length > 0 && !lCycle.includes(pCurrentSource)) {
         return pAll.concat(pCurrentSource).concat(lCycle);
       }
     }

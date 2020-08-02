@@ -42,7 +42,7 @@ function dependencyIsBundled(pModule, pPackageDeps) {
       pPackageDeps.bundledDependencies || pPackageDeps.bundleDependencies;
 
     if (lBundledDependencies) {
-      lReturnValue = lBundledDependencies.some((pDep) => pDep === pModule);
+      lReturnValue = lBundledDependencies.includes(pModule);
     }
   }
   return lReturnValue;

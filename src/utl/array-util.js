@@ -6,9 +6,7 @@
  * @return {boolean} true if there's at least one element in pLeftArray also in pRightArray
  */
 function intersects(pLeftArray, pRightArray) {
-  return pLeftArray.some((pLeftItem) =>
-    pRightArray.some((pRightItem) => pLeftItem === pRightItem)
-  );
+  return pLeftArray.some((pLeftItem) => pRightArray.includes(pLeftItem));
 }
 
 module.exports = {
