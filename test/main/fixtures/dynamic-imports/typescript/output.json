@@ -98,21 +98,11 @@
           "src/dynamic-to-circular.ts",
           "src/circular.ts"
         ]
-      },
-      {
-        "from": "src/index.ts",
-        "to": "src/dynamic-to-circular.ts",
-        "rule": { "severity": "info", "name": "no-circular" },
-        "cycle": [
-          "src/dynamic-to-circular.ts",
-          "src/circular.ts",
-          "src/index.ts"
-        ]
       }
     ],
     "error": 0,
     "warn": 1,
-    "info": 2,
+    "info": 1,
     "totalCruised": 3,
     "totalDependenciesCruised": 3,
     "optionsUsed": {
