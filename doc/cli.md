@@ -123,7 +123,9 @@ dependency-cruise -x "^node_modules" -T dot src | dot -T svg > dependencygraph.s
 ```
 
 You can customise the look of these graphs. See the
-[dot section in the rules reference](./rules-reference.md#dot) for details.
+[dot section in the rules reference](./rules-reference.md#dot) for details. You
+can also use [`depcruise-wrap-stream-in-html`](#depcruise-wrap-stream-in-html) to
+make the graphs more interactive.
 
 #### ddot - summarise on folder level
 
