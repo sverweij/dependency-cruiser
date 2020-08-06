@@ -6,21 +6,27 @@
     <style>
       .node:active path,
       .node:hover path,
+      .node.current path,
       .node:active polygon,
-      .node:hover polygon {
+      .node:hover polygon,
+      .node.current polygon
+       {
         stroke: fuchsia;
         stroke-width: 2;
       }
       .edge:active path,
       .edge:hover path,
+      .edge.current path,
       .edge:active ellipse,
-      .edge:hover ellipse {
+      .edge:hover ellipse,
+      .edge.current ellipse {
         stroke: fuchsia;
         stroke-width: 3;
         stroke-opacity: 1;
       }
       .edge:active polygon,
-      .edge:hover polygon {
+      .edge:hover polygon,
+      .edge.current polygon {
         stroke: fuchsia;
         stroke-width: 3;
         fill: fuchsia;
