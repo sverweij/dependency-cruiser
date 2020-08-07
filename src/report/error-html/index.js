@@ -31,16 +31,23 @@ function aggregateViolations(pViolations, pRuleSetUsed) {
     );
 }
 
-function report(pResults) {
-  return Handlebars.templates["error-html.template.hbs"]({
+function massageSummaryIntoSomethingUsable(pResults) {
+  const lSummary = formatSummaryForReport(pResults.summary);
+  return {
     summary: {
-      ...formatSummaryForReport(pResults.summary),
+      ...lSummary,
       agggregateViolations: aggregateViolations(
-        pResults.summary.violations,
-        pResults.summary.ruleSetUsed
+        lSummary.violations,
+        lSummary.ruleSetUsed
       ),
     },
-  });
+  };
+}
+
+function report(pResults) {
+  return Handlebars.templates["error-html.template.hbs"](
+    massageSummaryIntoSomethingUsable(pResults)
+  );
 }
 
 /**

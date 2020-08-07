@@ -98,21 +98,11 @@
           "src/dynamic-to-circular.js",
           "src/circular.js"
         ]
-      },
-      {
-        "from": "src/index.js",
-        "to": "src/dynamic-to-circular.js",
-        "rule": { "severity": "info", "name": "no-circular" },
-        "cycle": [
-          "src/dynamic-to-circular.js",
-          "src/circular.js",
-          "src/index.js"
-        ]
       }
     ],
     "error": 0,
     "warn": 1,
-    "info": 2,
+    "info": 1,
     "totalCruised": 3,
     "totalDependenciesCruised": 3,
     "optionsUsed": {
