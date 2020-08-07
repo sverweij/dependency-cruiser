@@ -14,6 +14,31 @@
 <path fill="#ffffff" stroke="black" stroke-width="2" d="M20,-8C20,-8 617,-8 617,-8 623,-8 629,-14 629,-20 629,-20 629,-510 629,-510 629,-516 623,-522 617,-522 617,-522 20,-522 20,-522 14,-522 8,-516 8,-510 8,-510 8,-20 8,-20 8,-14 14,-8 20,-8"/>
 <text text-anchor="middle" x="318.5" y="-510.8" font-family="Helvetica,sans-Serif" font-weight="bold" font-size="9.00">src</text>
 </g>
+<g id="clust2" class="cluster">
+<title>cluster_src/cli</title>
+<path fill="#ffffff" stroke="black" stroke-width="2" d="M28,-114C28,-114 112,-114 112,-114 118,-114 124,-120 124,-126 124,-126 124,-274 124,-274 124,-280 118,-286 112,-286 112,-286 28,-286 28,-286 22,-286 16,-280 16,-274 16,-274 16,-126 16,-126 16,-120 22,-114 28,-114"/>
+<text text-anchor="middle" x="70" y="-274.8" font-family="Helvetica,sans-Serif" font-weight="bold" font-size="9.00">cli</text>
+</g>
+<g id="clust3" class="cluster">
+<title>cluster_src/cli/compile&#45;config</title>
+<path fill="#ffffff" stroke="black" stroke-width="2" d="M42,-122C42,-122 98,-122 98,-122 104,-122 110,-128 110,-134 110,-134 110,-162 110,-162 110,-168 104,-174 98,-174 98,-174 42,-174 42,-174 36,-174 30,-168 30,-162 30,-162 30,-134 30,-134 30,-128 36,-122 42,-122"/>
+<text text-anchor="middle" x="70" y="-162.8" font-family="Helvetica,sans-Serif" font-weight="bold" font-size="9.00">compile&#45;config</text>
+</g>
+<g id="clust4" class="cluster">
+<title>cluster_src/enrich</title>
+<path fill="#ffffff" stroke="black" stroke-width="2" d="M238,-284C238,-284 284,-284 284,-284 290,-284 296,-290 296,-296 296,-296 296,-324 296,-324 296,-330 290,-336 284,-336 284,-336 238,-336 238,-336 232,-336 226,-330 226,-324 226,-324 226,-296 226,-296 226,-290 232,-284 238,-284"/>
+<text text-anchor="middle" x="261" y="-324.8" font-family="Helvetica,sans-Serif" font-weight="bold" font-size="9.00">enrich</text>
+</g>
+<g id="clust5" class="cluster">
+<title>cluster_src/extract</title>
+<path fill="#ffffff" stroke="black" stroke-width="2" d="M366,-374C366,-374 428,-374 428,-374 434,-374 440,-380 440,-386 440,-386 440,-474 440,-474 440,-480 434,-486 428,-486 428,-486 366,-486 366,-486 360,-486 354,-480 354,-474 354,-474 354,-386 354,-386 354,-380 360,-374 366,-374"/>
+<text text-anchor="middle" x="397" y="-474.8" font-family="Helvetica,sans-Serif" font-weight="bold" font-size="9.00">extract</text>
+</g>
+<g id="clust6" class="cluster">
+<title>cluster_src/extract/transpile</title>
+<path fill="#ffffff" stroke="black" stroke-width="2" d="M374,-382C374,-382 420,-382 420,-382 426,-382 432,-388 432,-394 432,-394 432,-422 432,-422 432,-428 426,-434 420,-434 420,-434 374,-434 374,-434 368,-434 362,-428 362,-422 362,-422 362,-394 362,-394 362,-388 368,-382 374,-382"/>
+<text text-anchor="middle" x="397" y="-422.8" font-family="Helvetica,sans-Serif" font-weight="bold" font-size="9.00">transpile</text>
+</g>
 <g id="clust7" class="cluster">
 <title>cluster_src/main</title>
 <path fill="#ffffff" stroke="black" stroke-width="2" d="M146,-16C146,-16 609,-16 609,-16 615,-16 621,-22 621,-28 621,-28 621,-264 621,-264 621,-270 615,-276 609,-276 609,-276 146,-276 146,-276 140,-276 134,-270 134,-264 134,-264 134,-28 134,-28 134,-22 140,-16 146,-16"/>
@@ -53,31 +78,6 @@
 <title>cluster_src/schema</title>
 <path fill="#ffffff" stroke="black" stroke-width="2" d="M339,-284C339,-284 455,-284 455,-284 461,-284 467,-290 467,-296 467,-296 467,-354 467,-354 467,-360 461,-366 455,-366 455,-366 339,-366 339,-366 333,-366 327,-360 327,-354 327,-354 327,-296 327,-296 327,-290 333,-284 339,-284"/>
 <text text-anchor="middle" x="397" y="-354.8" font-family="Helvetica,sans-Serif" font-weight="bold" font-size="9.00">schema</text>
-</g>
-<g id="clust2" class="cluster">
-<title>cluster_src/cli</title>
-<path fill="#ffffff" stroke="black" stroke-width="2" d="M28,-114C28,-114 112,-114 112,-114 118,-114 124,-120 124,-126 124,-126 124,-274 124,-274 124,-280 118,-286 112,-286 112,-286 28,-286 28,-286 22,-286 16,-280 16,-274 16,-274 16,-126 16,-126 16,-120 22,-114 28,-114"/>
-<text text-anchor="middle" x="70" y="-274.8" font-family="Helvetica,sans-Serif" font-weight="bold" font-size="9.00">cli</text>
-</g>
-<g id="clust3" class="cluster">
-<title>cluster_src/cli/compile&#45;config</title>
-<path fill="#ffffff" stroke="black" stroke-width="2" d="M42,-122C42,-122 98,-122 98,-122 104,-122 110,-128 110,-134 110,-134 110,-162 110,-162 110,-168 104,-174 98,-174 98,-174 42,-174 42,-174 36,-174 30,-168 30,-162 30,-162 30,-134 30,-134 30,-128 36,-122 42,-122"/>
-<text text-anchor="middle" x="70" y="-162.8" font-family="Helvetica,sans-Serif" font-weight="bold" font-size="9.00">compile&#45;config</text>
-</g>
-<g id="clust4" class="cluster">
-<title>cluster_src/enrich</title>
-<path fill="#ffffff" stroke="black" stroke-width="2" d="M238,-284C238,-284 284,-284 284,-284 290,-284 296,-290 296,-296 296,-296 296,-324 296,-324 296,-330 290,-336 284,-336 284,-336 238,-336 238,-336 232,-336 226,-330 226,-324 226,-324 226,-296 226,-296 226,-290 232,-284 238,-284"/>
-<text text-anchor="middle" x="261" y="-324.8" font-family="Helvetica,sans-Serif" font-weight="bold" font-size="9.00">enrich</text>
-</g>
-<g id="clust5" class="cluster">
-<title>cluster_src/extract</title>
-<path fill="#ffffff" stroke="black" stroke-width="2" d="M366,-374C366,-374 428,-374 428,-374 434,-374 440,-380 440,-386 440,-386 440,-474 440,-474 440,-480 434,-486 428,-486 428,-486 366,-486 366,-486 360,-486 354,-480 354,-474 354,-474 354,-386 354,-386 354,-380 360,-374 366,-374"/>
-<text text-anchor="middle" x="397" y="-474.8" font-family="Helvetica,sans-Serif" font-weight="bold" font-size="9.00">extract</text>
-</g>
-<g id="clust6" class="cluster">
-<title>cluster_src/extract/transpile</title>
-<path fill="#ffffff" stroke="black" stroke-width="2" d="M374,-382C374,-382 420,-382 420,-382 426,-382 432,-388 432,-394 432,-394 432,-422 432,-422 432,-428 426,-434 420,-434 420,-434 374,-434 374,-434 368,-434 362,-428 362,-422 362,-422 362,-394 362,-394 362,-388 368,-382 374,-382"/>
-<text text-anchor="middle" x="397" y="-422.8" font-family="Helvetica,sans-Serif" font-weight="bold" font-size="9.00">transpile</text>
 </g>
 <!-- src/cli/compile&#45;config/index.js -->
 <g id="node1" class="node">
