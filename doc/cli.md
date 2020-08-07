@@ -714,6 +714,8 @@ With `depcruise-wrap-stream-in-html` you can wrap the graphical output of
 GraphViz dot into html that is geared to make the graph easier to use. It a.o.
 adds highlight-on-hover.
 
+<img width="799" alt="highlight on hover" src="assets/highlight-on-hover.png">
+
 Typical use:
 
 ```sh
