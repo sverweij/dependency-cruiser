@@ -12,7 +12,7 @@
 <!-- compound&#45;donot&#45;follow&#45;type.mjs -->
 <g id="node1" class="node">
 <title>compound&#45;donot&#45;follow&#45;type.mjs</title>
-<g id="a_node1"><a xlink:href="https://github.com/sverweij/dependency-cruiser/blob/develop/utl/schema/compound-donot-follow-type.mjs" xlink:title="compound&#45;donot&#45;follow&#45;type.mjs">
+<g id="a_node1"><a xlink:href="https://github.com/sverweij/dependency-cruiser/blob/develop/tools/schema/compound-donot-follow-type.mjs" xlink:title="compound&#45;donot&#45;follow&#45;type.mjs">
 <polygon fill="white" stroke="transparent" points="623,-292 473,-292 473,-274 623,-274 623,-292"/>
 <polyline fill="none" stroke="black" points="473,-274 623,-274 "/>
 <text text-anchor="middle" x="548" y="-280.8" font-family="Helvetica,sans-Serif" font-size="9.00">compound&#45;donot&#45;follow&#45;type.mjs</text>
@@ -22,7 +22,7 @@
 <!-- re&#45;as&#45;strings&#45;type.mjs -->
 <g id="node2" class="node">
 <title>re&#45;as&#45;strings&#45;type.mjs</title>
-<g id="a_node2"><a xlink:href="https://github.com/sverweij/dependency-cruiser/blob/develop/utl/schema/re-as-strings-type.mjs" xlink:title="re&#45;as&#45;strings&#45;type.mjs">
+<g id="a_node2"><a xlink:href="https://github.com/sverweij/dependency-cruiser/blob/develop/tools/schema/re-as-strings-type.mjs" xlink:title="re&#45;as&#45;strings&#45;type.mjs">
 <polygon fill="white" stroke="transparent" points="905,-108 801,-108 801,-90 905,-90 905,-108"/>
 <polyline fill="none" stroke="black" points="801,-90 905,-90 "/>
 <text text-anchor="middle" x="853" y="-96.8" font-family="Helvetica,sans-Serif" font-size="9.00">re&#45;as&#45;strings&#45;type.mjs</text>
@@ -38,7 +38,7 @@
 <!-- compound&#45;exclude&#45;type.mjs -->
 <g id="node3" class="node">
 <title>compound&#45;exclude&#45;type.mjs</title>
-<g id="a_node3"><a xlink:href="https://github.com/sverweij/dependency-cruiser/blob/develop/utl/schema/compound-exclude-type.mjs" xlink:title="compound&#45;exclude&#45;type.mjs">
+<g id="a_node3"><a xlink:href="https://github.com/sverweij/dependency-cruiser/blob/develop/tools/schema/compound-exclude-type.mjs" xlink:title="compound&#45;exclude&#45;type.mjs">
 <polygon fill="white" stroke="transparent" points="778,-202 646,-202 646,-184 778,-184 778,-202"/>
 <polyline fill="none" stroke="black" points="646,-184 778,-184 "/>
 <text text-anchor="middle" x="712" y="-190.8" font-family="Helvetica,sans-Serif" font-size="9.00">compound&#45;exclude&#45;type.mjs</text>
@@ -54,7 +54,7 @@
 <!-- compound&#45;focus&#45;type.mjs -->
 <g id="node4" class="node">
 <title>compound&#45;focus&#45;type.mjs</title>
-<g id="a_node4"><a xlink:href="https://github.com/sverweij/dependency-cruiser/blob/develop/utl/schema/compound-focus-type.mjs" xlink:title="compound&#45;focus&#45;type.mjs">
+<g id="a_node4"><a xlink:href="https://github.com/sverweij/dependency-cruiser/blob/develop/tools/schema/compound-focus-type.mjs" xlink:title="compound&#45;focus&#45;type.mjs">
 <polygon fill="white" stroke="transparent" points="773,-108 651,-108 651,-90 773,-90 773,-108"/>
 <polyline fill="none" stroke="black" points="651,-90 773,-90 "/>
 <text text-anchor="middle" x="712" y="-96.8" font-family="Helvetica,sans-Serif" font-size="9.00">compound&#45;focus&#45;type.mjs</text>
@@ -70,7 +70,7 @@
 <!-- compound&#45;include&#45;only&#45;type.mjs -->
 <g id="node5" class="node">
 <title>compound&#45;include&#45;only&#45;type.mjs</title>
-<g id="a_node5"><a xlink:href="https://github.com/sverweij/dependency-cruiser/blob/develop/utl/schema/compound-include-only-type.mjs" xlink:title="compound&#45;include&#45;only&#45;type.mjs">
+<g id="a_node5"><a xlink:href="https://github.com/sverweij/dependency-cruiser/blob/develop/tools/schema/compound-include-only-type.mjs" xlink:title="compound&#45;include&#45;only&#45;type.mjs">
 <polygon fill="white" stroke="transparent" points="787,-69 637,-69 637,-51 787,-51 787,-69"/>
 <polyline fill="none" stroke="black" points="637,-51 787,-51 "/>
 <text text-anchor="middle" x="712" y="-57.8" font-family="Helvetica,sans-Serif" font-size="9.00">compound&#45;include&#45;only&#45;type.mjs</text>
@@ -86,7 +86,7 @@
 <!-- configuration.schema.mjs -->
 <g id="node6" class="node">
 <title>configuration.schema.mjs</title>
-<g id="a_node6"><a xlink:href="https://github.com/sverweij/dependency-cruiser/blob/develop/utl/schema/configuration.schema.mjs" xlink:title="configuration.schema.mjs">
+<g id="a_node6"><a xlink:href="https://github.com/sverweij/dependency-cruiser/blob/develop/tools/schema/configuration.schema.mjs" xlink:title="configuration.schema.mjs">
 <path fill="darkgreen" stroke="darkgreen" d="M247,-86C247,-86 138,-86 138,-86 135,-86 132,-83 132,-80 132,-80 132,-74 132,-74 132,-71 135,-68 138,-68 138,-68 247,-68 247,-68 250,-68 253,-71 253,-74 253,-74 253,-80 253,-80 253,-83 250,-86 247,-86"/>
 <text text-anchor="middle" x="192.5" y="-74.8" font-family="Helvetica,sans-Serif" font-size="9.00" fill="#ffffcc">configuration.schema.mjs</text>
 </a>
@@ -95,7 +95,7 @@
 <!-- options.mjs -->
 <g id="node7" class="node">
 <title>options.mjs</title>
-<g id="a_node7"><a xlink:href="https://github.com/sverweij/dependency-cruiser/blob/develop/utl/schema/options.mjs" xlink:title="options.mjs">
+<g id="a_node7"><a xlink:href="https://github.com/sverweij/dependency-cruiser/blob/develop/tools/schema/options.mjs" xlink:title="options.mjs">
 <path fill="#ffffcc" stroke="black" d="M438.5,-109C438.5,-109 387.5,-109 387.5,-109 384.5,-109 381.5,-106 381.5,-103 381.5,-103 381.5,-97 381.5,-97 381.5,-94 384.5,-91 387.5,-91 387.5,-91 438.5,-91 438.5,-91 441.5,-91 444.5,-94 444.5,-97 444.5,-97 444.5,-103 444.5,-103 444.5,-106 441.5,-109 438.5,-109"/>
 <text text-anchor="middle" x="413" y="-97.8" font-family="Helvetica,sans-Serif" font-size="9.00">options.mjs</text>
 </a>
@@ -110,7 +110,7 @@
 <!-- rule&#45;set.mjs -->
 <g id="node8" class="node">
 <title>rule&#45;set.mjs</title>
-<g id="a_node8"><a xlink:href="https://github.com/sverweij/dependency-cruiser/blob/develop/utl/schema/rule-set.mjs" xlink:title="rule&#45;set.mjs">
+<g id="a_node8"><a xlink:href="https://github.com/sverweij/dependency-cruiser/blob/develop/tools/schema/rule-set.mjs" xlink:title="rule&#45;set.mjs">
 <path fill="#ffffcc" stroke="black" d="M336,-55C336,-55 284,-55 284,-55 281,-55 278,-52 278,-49 278,-49 278,-43 278,-43 278,-40 281,-37 284,-37 284,-37 336,-37 336,-37 339,-37 342,-40 342,-43 342,-43 342,-49 342,-49 342,-52 339,-55 336,-55"/>
 <text text-anchor="middle" x="310" y="-43.8" font-family="Helvetica,sans-Serif" font-size="9.00">rule&#45;set.mjs</text>
 </a>
@@ -155,7 +155,7 @@
 <!-- dependency&#45;type.mjs -->
 <g id="node13" class="node">
 <title>dependency&#45;type.mjs</title>
-<g id="a_node13"><a xlink:href="https://github.com/sverweij/dependency-cruiser/blob/develop/utl/schema/dependency-type.mjs" xlink:title="dependency&#45;type.mjs">
+<g id="a_node13"><a xlink:href="https://github.com/sverweij/dependency-cruiser/blob/develop/tools/schema/dependency-type.mjs" xlink:title="dependency&#45;type.mjs">
 <polygon fill="white" stroke="transparent" points="600,-386 496,-386 496,-368 600,-368 600,-386"/>
 <polyline fill="none" stroke="black" points="496,-368 600,-368 "/>
 <text text-anchor="middle" x="548" y="-374.8" font-family="Helvetica,sans-Serif" font-size="9.00">dependency&#45;type.mjs</text>
@@ -171,7 +171,7 @@
 <!-- module&#45;systems&#45;type.mjs -->
 <g id="node16" class="node">
 <title>module&#45;systems&#45;type.mjs</title>
-<g id="a_node16"><a xlink:href="https://github.com/sverweij/dependency-cruiser/blob/develop/utl/schema/module-systems-type.mjs" xlink:title="module&#45;systems&#45;type.mjs">
+<g id="a_node16"><a xlink:href="https://github.com/sverweij/dependency-cruiser/blob/develop/tools/schema/module-systems-type.mjs" xlink:title="module&#45;systems&#45;type.mjs">
 <polygon fill="white" stroke="transparent" points="608,-200 488,-200 488,-182 608,-182 608,-200"/>
 <polyline fill="none" stroke="black" points="488,-182 608,-182 "/>
 <text text-anchor="middle" x="548" y="-188.8" font-family="Helvetica,sans-Serif" font-size="9.00">module&#45;systems&#45;type.mjs</text>
@@ -187,7 +187,7 @@
 <!-- reporter&#45;options.mjs -->
 <g id="node19" class="node">
 <title>reporter&#45;options.mjs</title>
-<g id="a_node19"><a xlink:href="https://github.com/sverweij/dependency-cruiser/blob/develop/utl/schema/reporter-options.mjs" xlink:title="reporter&#45;options.mjs">
+<g id="a_node19"><a xlink:href="https://github.com/sverweij/dependency-cruiser/blob/develop/tools/schema/reporter-options.mjs" xlink:title="reporter&#45;options.mjs">
 <path fill="#ffffcc" stroke="black" d="M591,-18C591,-18 505,-18 505,-18 502,-18 499,-15 499,-12 499,-12 499,-6 499,-6 499,-3 502,0 505,0 505,0 591,0 591,0 594,0 597,-3 597,-6 597,-6 597,-12 597,-12 597,-15 594,-18 591,-18"/>
 <text text-anchor="middle" x="548" y="-6.8" font-family="Helvetica,sans-Serif" font-size="9.00">reporter&#45;options.mjs</text>
 </a>
@@ -202,7 +202,7 @@
 <!-- restrictions.mjs -->
 <g id="node20" class="node">
 <title>restrictions.mjs</title>
-<g id="a_node20"><a xlink:href="https://github.com/sverweij/dependency-cruiser/blob/develop/utl/schema/restrictions.mjs" xlink:title="restrictions.mjs">
+<g id="a_node20"><a xlink:href="https://github.com/sverweij/dependency-cruiser/blob/develop/tools/schema/restrictions.mjs" xlink:title="restrictions.mjs">
 <path fill="#ffffcc" stroke="black" d="M445.5,-47C445.5,-47 380.5,-47 380.5,-47 377.5,-47 374.5,-44 374.5,-41 374.5,-41 374.5,-35 374.5,-35 374.5,-32 377.5,-29 380.5,-29 380.5,-29 445.5,-29 445.5,-29 448.5,-29 451.5,-32 451.5,-35 451.5,-35 451.5,-41 451.5,-41 451.5,-44 448.5,-47 445.5,-47"/>
 <text text-anchor="middle" x="413" y="-35.8" font-family="Helvetica,sans-Serif" font-size="9.00">restrictions.mjs</text>
 </a>
@@ -217,7 +217,7 @@
 <!-- severity&#45;type.mjs -->
 <g id="node21" class="node">
 <title>severity&#45;type.mjs</title>
-<g id="a_node21"><a xlink:href="https://github.com/sverweij/dependency-cruiser/blob/develop/utl/schema/severity-type.mjs" xlink:title="severity&#45;type.mjs">
+<g id="a_node21"><a xlink:href="https://github.com/sverweij/dependency-cruiser/blob/develop/tools/schema/severity-type.mjs" xlink:title="severity&#45;type.mjs">
 <polygon fill="white" stroke="transparent" points="754.5,-170 669.5,-170 669.5,-152 754.5,-152 754.5,-170"/>
 <polyline fill="none" stroke="black" points="669.5,-152 754.5,-152 "/>
 <text text-anchor="middle" x="712" y="-158.8" font-family="Helvetica,sans-Serif" font-size="9.00">severity&#45;type.mjs</text>
@@ -233,7 +233,7 @@
 <!-- cruise&#45;result.schema.mjs -->
 <g id="node9" class="node">
 <title>cruise&#45;result.schema.mjs</title>
-<g id="a_node9"><a xlink:href="https://github.com/sverweij/dependency-cruiser/blob/develop/utl/schema/cruise-result.schema.mjs" xlink:title="cruise&#45;result.schema.mjs">
+<g id="a_node9"><a xlink:href="https://github.com/sverweij/dependency-cruiser/blob/develop/tools/schema/cruise-result.schema.mjs" xlink:title="cruise&#45;result.schema.mjs">
 <path fill="darkgreen" stroke="darkgreen" d="M112,-246C112,-246 6,-246 6,-246 3,-246 0,-243 0,-240 0,-240 0,-234 0,-234 0,-231 3,-228 6,-228 6,-228 112,-228 112,-228 115,-228 118,-231 118,-234 118,-234 118,-240 118,-240 118,-243 115,-246 112,-246"/>
 <text text-anchor="middle" x="59" y="-234.8" font-family="Helvetica,sans-Serif" font-size="9.00" fill="#ffffcc">cruise&#45;result.schema.mjs</text>
 </a>
@@ -242,7 +242,7 @@
 <!-- modules.mjs -->
 <g id="node10" class="node">
 <title>modules.mjs</title>
-<g id="a_node10"><a xlink:href="https://github.com/sverweij/dependency-cruiser/blob/develop/utl/schema/modules.mjs" xlink:title="modules.mjs">
+<g id="a_node10"><a xlink:href="https://github.com/sverweij/dependency-cruiser/blob/develop/tools/schema/modules.mjs" xlink:title="modules.mjs">
 <path fill="#ffffcc" stroke="black" d="M338,-367C338,-367 282,-367 282,-367 279,-367 276,-364 276,-361 276,-361 276,-355 276,-355 276,-352 279,-349 282,-349 282,-349 338,-349 338,-349 341,-349 344,-352 344,-355 344,-355 344,-361 344,-361 344,-364 341,-367 338,-367"/>
 <text text-anchor="middle" x="310" y="-355.8" font-family="Helvetica,sans-Serif" font-size="9.00">modules.mjs</text>
 </a>
@@ -257,7 +257,7 @@
 <!-- summary.mjs -->
 <g id="node11" class="node">
 <title>summary.mjs</title>
-<g id="a_node11"><a xlink:href="https://github.com/sverweij/dependency-cruiser/blob/develop/utl/schema/summary.mjs" xlink:title="summary.mjs">
+<g id="a_node11"><a xlink:href="https://github.com/sverweij/dependency-cruiser/blob/develop/tools/schema/summary.mjs" xlink:title="summary.mjs">
 <path fill="#ffffcc" stroke="black" d="M222,-201C222,-201 163,-201 163,-201 160,-201 157,-198 157,-195 157,-195 157,-189 157,-189 157,-186 160,-183 163,-183 163,-183 222,-183 222,-183 225,-183 228,-186 228,-189 228,-189 228,-195 228,-195 228,-198 225,-201 222,-201"/>
 <text text-anchor="middle" x="192.5" y="-189.8" font-family="Helvetica,sans-Serif" font-size="9.00">summary.mjs</text>
 </a>
@@ -272,7 +272,7 @@
 <!-- dependencies.mjs -->
 <g id="node12" class="node">
 <title>dependencies.mjs</title>
-<g id="a_node12"><a xlink:href="https://github.com/sverweij/dependency-cruiser/blob/develop/utl/schema/dependencies.mjs" xlink:title="dependencies.mjs">
+<g id="a_node12"><a xlink:href="https://github.com/sverweij/dependency-cruiser/blob/develop/tools/schema/dependencies.mjs" xlink:title="dependencies.mjs">
 <path fill="#ffffcc" stroke="black" d="M453,-413C453,-413 373,-413 373,-413 370,-413 367,-410 367,-407 367,-407 367,-401 367,-401 367,-398 370,-395 373,-395 373,-395 453,-395 453,-395 456,-395 459,-398 459,-401 459,-401 459,-407 459,-407 459,-410 456,-413 453,-413"/>
 <text text-anchor="middle" x="413" y="-401.8" font-family="Helvetica,sans-Serif" font-size="9.00">dependencies.mjs</text>
 </a>
@@ -293,7 +293,7 @@
 <!-- rule&#45;summary.mjs -->
 <g id="node15" class="node">
 <title>rule&#45;summary.mjs</title>
-<g id="a_node15"><a xlink:href="https://github.com/sverweij/dependency-cruiser/blob/develop/utl/schema/rule-summary.mjs" xlink:title="rule&#45;summary.mjs">
+<g id="a_node15"><a xlink:href="https://github.com/sverweij/dependency-cruiser/blob/develop/tools/schema/rule-summary.mjs" xlink:title="rule&#45;summary.mjs">
 <path fill="#ffffcc" stroke="black" d="M586.5,-324C586.5,-324 509.5,-324 509.5,-324 506.5,-324 503.5,-321 503.5,-318 503.5,-318 503.5,-312 503.5,-312 503.5,-309 506.5,-306 509.5,-306 509.5,-306 586.5,-306 586.5,-306 589.5,-306 592.5,-309 592.5,-312 592.5,-312 592.5,-318 592.5,-318 592.5,-321 589.5,-324 586.5,-324"/>
 <text text-anchor="middle" x="548" y="-312.8" font-family="Helvetica,sans-Serif" font-size="9.00">rule&#45;summary.mjs</text>
 </a>
@@ -314,7 +314,7 @@
 <!-- options&#45;used.mjs -->
 <g id="node17" class="node">
 <title>options&#45;used.mjs</title>
-<g id="a_node17"><a xlink:href="https://github.com/sverweij/dependency-cruiser/blob/develop/utl/schema/options-used.mjs" xlink:title="options&#45;used.mjs">
+<g id="a_node17"><a xlink:href="https://github.com/sverweij/dependency-cruiser/blob/develop/tools/schema/options-used.mjs" xlink:title="options&#45;used.mjs">
 <path fill="#ffffcc" stroke="black" d="M347,-201C347,-201 273,-201 273,-201 270,-201 267,-198 267,-195 267,-195 267,-189 267,-189 267,-186 270,-183 273,-183 273,-183 347,-183 347,-183 350,-183 353,-186 353,-189 353,-189 353,-195 353,-195 353,-198 350,-201 347,-201"/>
 <text text-anchor="middle" x="310" y="-189.8" font-family="Helvetica,sans-Serif" font-size="9.00">options&#45;used.mjs</text>
 </a>
@@ -335,7 +335,7 @@
 <!-- module&#45;system&#45;type.mjs -->
 <g id="node14" class="node">
 <title>module&#45;system&#45;type.mjs</title>
-<g id="a_node14"><a xlink:href="https://github.com/sverweij/dependency-cruiser/blob/develop/utl/schema/module-system-type.mjs" xlink:title="module&#45;system&#45;type.mjs">
+<g id="a_node14"><a xlink:href="https://github.com/sverweij/dependency-cruiser/blob/develop/tools/schema/module-system-type.mjs" xlink:title="module&#45;system&#45;type.mjs">
 <polygon fill="white" stroke="transparent" points="770,-324 654,-324 654,-306 770,-306 770,-324"/>
 <polyline fill="none" stroke="black" points="654,-306 770,-306 "/>
 <text text-anchor="middle" x="712" y="-312.8" font-family="Helvetica,sans-Serif" font-size="9.00">module&#45;system&#45;type.mjs</text>
@@ -411,7 +411,7 @@
 <!-- output&#45;type.mjs -->
 <g id="node18" class="node">
 <title>output&#45;type.mjs</title>
-<g id="a_node18"><a xlink:href="https://github.com/sverweij/dependency-cruiser/blob/develop/utl/schema/output-type.mjs" xlink:title="output&#45;type.mjs">
+<g id="a_node18"><a xlink:href="https://github.com/sverweij/dependency-cruiser/blob/develop/tools/schema/output-type.mjs" xlink:title="output&#45;type.mjs">
 <polygon fill="white" stroke="transparent" points="452.5,-201 373.5,-201 373.5,-183 452.5,-183 452.5,-201"/>
 <polyline fill="none" stroke="black" points="373.5,-183 452.5,-183 "/>
 <text text-anchor="middle" x="413" y="-189.8" font-family="Helvetica,sans-Serif" font-size="9.00">output&#45;type.mjs</text>
