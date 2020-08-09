@@ -290,7 +290,10 @@
             },
             {
               "criteria": { "rules[0].severity": "warn" },
-              "attributes": { "fontcolor": "orange", "color": "orange" }
+              "attributes": {
+                "fontcolor": "orange",
+                "color": "orange"
+              }
             },
             {
               "criteria": { "rules[0].severity": "info" },
@@ -331,6 +334,8 @@
           ]
         }
       }
-    }
+    },
+    // "_experimental_this_will_change": "cli-feedback"
+    "_experimental_this_will_change": "performance-log"
   }
 }
