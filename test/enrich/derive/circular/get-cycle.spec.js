@@ -1,8 +1,16 @@
 const { expect } = require("chai");
 const inputGraphs = require("./inputgraphs.json");
 const getCycle = require("~/src/enrich/derive/circular/get-cycle");
+const clearCaches = require("~/src/enrich/clear-caches");
 
 describe("enrich/derive/circular/getCycle", () => {
+  beforeEach("set up", () => {
+    clearCaches();
+  });
+  afterEach("tear down", () => {
+    clearCaches();
+  });
+
   it("leaves non circular dependencies alone", () => {
     expect(getCycle(inputGraphs.A_B, "a", "b")).to.deep.equal([]);
   });

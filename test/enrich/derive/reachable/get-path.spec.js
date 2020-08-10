@@ -1,9 +1,13 @@
 const { expect } = require("chai");
 const getPath = require("~/src/enrich/derive/reachable/get-path");
+const clearCaches = require("~/src/enrich/clear-caches");
 
 describe("enrich/derive/reachable/getGraph - reachability detection", () => {
-  beforeEach(() => {
-    // getPath.clearCache();
+  beforeEach("set up", () => {
+    clearCaches();
+  });
+  afterEach("tear down", () => {
+    clearCaches();
   });
 
   it("does not explode when passed an empty graph", () => {

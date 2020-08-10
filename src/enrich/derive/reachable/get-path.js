@@ -1,7 +1,9 @@
+const findNodeByName = require("../find-module-by-name");
+
 // eslint-ignore complexity - TODO: simplify(?)
 function getPath(pGraph, pFrom, pTo, pVisited = new Set()) {
   let lReturnValue = [];
-  const lFromNode = pGraph.find((pNode) => pNode.source === pFrom);
+  const lFromNode = findNodeByName(pGraph, pFrom);
 
   pVisited.add(pFrom);
 
