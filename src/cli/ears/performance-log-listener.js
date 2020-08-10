@@ -1,5 +1,5 @@
 const chalk = require("chalk");
-const bus = require("../../main/bus");
+const bus = require("../../utl/bus");
 
 const MS_PER_SECOND = 1000;
 const DECIMAL_BASE = 10;

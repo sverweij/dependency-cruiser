@@ -1,6 +1,6 @@
 const chalk = require("chalk");
 const figures = require("figures");
-const bus = require("../../main/bus");
+const bus = require("../../utl/bus");
 
 module.exports = function setUpCliFeedbackListener() {
   const lStream = process.stderr;
