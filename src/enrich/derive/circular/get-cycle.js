@@ -1,4 +1,4 @@
-const findNodeByName = require("../find-module-by-name");
+const findModuleByName = require("../find-module-by-name");
 /* about the absence of checks whether attributes/ objects actually
  * exist:
  * - it saves CPU cycles to the effect of being ~30% faster than with the
@@ -25,7 +25,7 @@ const findNodeByName = require("../find-module-by-name");
 function getCycle(pGraph, pInitialSource, pCurrentSource, pVisited) {
   pVisited = pVisited || new Set();
 
-  const lCurrentNode = findNodeByName(pGraph, pCurrentSource);
+  const lCurrentNode = findModuleByName(pGraph, pCurrentSource);
   const lDependencies = lCurrentNode.dependencies.filter(
     (pDependency) => !pVisited.has(pDependency.resolved)
   );
