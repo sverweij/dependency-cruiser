@@ -204,7 +204,7 @@ export default {
         reporterOptions: { $ref: "#/definitions/ReporterOptionsType" },
         _experimental_this_will_change: {
           type: "string",
-          enum: ["cli-feedback", "performance-log"],
+          enum: ["cli-feedback", "performance-log", "none"],
           description:
             "When executing dependency-cruiser emits 'start', 'progess' and 'end' events on " +
             "a bus. You can use these e.g. to show progress in any UI (e.g. the cli) attach " +
