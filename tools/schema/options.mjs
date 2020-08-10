@@ -167,8 +167,8 @@ export default {
                     "use the cacheDuration attribute to tame enhanced-resolve's memory " +
                     "usage by lowering the cache duration trading off against some (for " +
                     "values over 1000ms) or significant (for values below 500ms) performance. " +
-                    "Dependency-cruiser currently uses 1000ms, and in the past has " +
-                    "used 4000ms - both with good results.",
+                    "Dependency-cruiser currently uses 4000ms, and in the past has " +
+                    "used 1000ms - both with good results.",
                 },
               },
             },
@@ -202,6 +202,17 @@ export default {
           },
         },
         reporterOptions: { $ref: "#/definitions/ReporterOptionsType" },
+        _experimental_this_will_change: {
+          type: "string",
+          enum: ["cli-feedback", "performance-log", "none"],
+          description:
+            "When executing dependency-cruiser emits 'start', 'progess' and 'end' events on " +
+            "a bus. You can use these e.g. to show progress in any UI (e.g. the cli) attach " +
+            "loggers etc. We're still figuring out how to do expose this (if at all), so the " +
+            "listener feature is highly experimental and use in any environment outside " +
+            "playgrounds is discouraged. For now it's only possible to use one of the " +
+            "baked-in listeners.",
+        },
       },
     },
     ...moduleSystemsType.definitions,

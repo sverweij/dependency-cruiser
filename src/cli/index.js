@@ -1,6 +1,7 @@
 const glob = require("glob");
 const _get = require("lodash/get");
 const main = require("../main");
+const bus = require("../utl/bus");
 const parseTSConfig = require("./parse-ts-config");
 const parseBabelConfig = require("./parse-babel-config");
 const getResolveConfig = require("./get-resolve-config");
@@ -9,6 +10,8 @@ const normalizeOptions = require("./normalize-options");
 const initConfig = require("./init-config");
 const io = require("./utl/io");
 const formatMetaInfo = require("./format-meta-info");
+const setUpCliFeedbackListener = require("./ears/cli-feedback-listener");
+const setUpPerformanceLogListener = require("./ears/performance-log-listener");
 
 function extractResolveOptions(pCruiseOptions) {
   let lResolveOptions = {};
@@ -58,6 +61,22 @@ function extractBabelConfigOptions(pCruiseOptions) {
   return lReturnValue;
 }
 
+function setUpListener(pCruiseOptions) {
+  const STRING2LISTENER = {
+    "cli-feedback": setUpCliFeedbackListener,
+    "performance-log": setUpPerformanceLogListener,
+  };
+  const lListenerID = _get(
+    pCruiseOptions,
+    "ruleSet.options._experimental_this_will_change"
+  );
+  const lListenerFunction = _get(STRING2LISTENER, lListenerID);
+  /* istanbul ignore next */
+  if (Boolean(lListenerFunction)) {
+    lListenerFunction();
+  }
+}
+
 function runCruise(pFileDirectoryArray, pCruiseOptions) {
   pFileDirectoryArray
     .filter((pFileOrDirectory) => !glob.hasMagic(pFileOrDirectory))
@@ -65,6 +84,9 @@ function runCruise(pFileDirectoryArray, pCruiseOptions) {
 
   pCruiseOptions = normalizeOptions(pCruiseOptions);
 
+  setUpListener(pCruiseOptions);
+
+  bus.emit("start");
   const lReportingResult = main.futureCruise(
     pFileDirectoryArray,
     pCruiseOptions,
@@ -75,7 +97,10 @@ function runCruise(pFileDirectoryArray, pCruiseOptions) {
     }
   );
 
+  bus.emit("progress", "cli: writing results ...");
+  bus.emit("write-start");
   io.write(pCruiseOptions.outputTo, lReportingResult.output);
+  bus.emit("end");
 
   return lReportingResult.exitCode;
 }
@@ -93,8 +118,10 @@ module.exports = (pFileDirectoryArray, pCruiseOptions) => {
       lExitCode = runCruise(pFileDirectoryArray, pCruiseOptions);
     }
   } catch (pError) {
+    bus.emit("end", "error");
     process.stderr.write(`\n  ERROR: ${pError.message}\n`);
     lExitCode = 1;
   }
+
   return lExitCode;
 };
