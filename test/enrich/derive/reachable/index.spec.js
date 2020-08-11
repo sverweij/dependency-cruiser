@@ -1,7 +1,8 @@
 const { expect } = require("chai");
 const normalize = require("~/src/main/rule-set/normalize");
 const addReachability = require("~/src/enrich/derive/reachable/index");
-const clearCaches = require("~/src/extract/clear-caches");
+const clearExtractCaches = require("~/src/extract/clear-caches");
+const clearEnrichCaches = require("~/src/enrich/clear-caches");
 
 const GRAPH = [
   {
@@ -101,7 +102,8 @@ const ANOTATED_GRAPH_FOR_HAJOO = [
 
 describe("enrich/derive/reachable/index - reachability detection", () => {
   beforeEach(() => {
-    clearCaches();
+    clearExtractCaches();
+    clearEnrichCaches();
   });
   it("does not explode when passed an empty graph & an empty rule set", () => {
     expect(addReachability([], normalize({}))).to.deep.equal([]);

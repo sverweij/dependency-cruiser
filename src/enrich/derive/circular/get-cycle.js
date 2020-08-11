@@ -1,3 +1,4 @@
+const findModuleByName = require("../find-module-by-name");
 /* about the absence of checks whether attributes/ objects actually
  * exist:
  * - it saves CPU cycles to the effect of being ~30% faster than with the
@@ -8,9 +9,9 @@
 
 /**
  * Returns the first non-zero length path from pInitialSource to pInitialSource
- * Returns the empty array if there is none such path
+ * Returns the empty array if there is no such path
  *
- * @param  {object} pGraph      The graph in which to test this condition
+ * @param  {any} pGraph      The graph in which to test this condition
  * @param  {string} pInitialSource The 'source' attribute of the node to be tested
  *                              (source uniquely identifying a node)
  * @param  {string} pCurrentSource   The 'source' attribute of the 'to' node to
@@ -19,21 +20,18 @@
  *                              attribute - there's no need to pass it when
  *                              calling it; it's used by the algorithm to
  *                              determine the stop condition)
- * @return {string[]}            see description above
+ * @return {string[]}           see description above
  */
-
 function getCycle(pGraph, pInitialSource, pCurrentSource, pVisited) {
   pVisited = pVisited || new Set();
 
-  const lCurrentNode = pGraph.find((pNode) => pNode.source === pCurrentSource);
+  const lCurrentNode = findModuleByName(pGraph, pCurrentSource);
   const lDependencies = lCurrentNode.dependencies.filter(
     (pDependency) => !pVisited.has(pDependency.resolved)
   );
-
   const lMatch = lDependencies.find(
     (pDependency) => pDependency.resolved === pInitialSource
   );
-
   if (lMatch) {
     return [pCurrentSource, lMatch.resolved];
   }
