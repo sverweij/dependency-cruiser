@@ -20,7 +20,7 @@ function compileRunScripts(pInitOptions) {
       depcruise: `depcruise ${lSourceLocations} ${lTestLocations} -v`,
       "depcruise:graph": `depcruise ${lSourceLocations} --include-only '${lSourceLocationRE}' -v -T dot | dot -T svg | depcruise-wrap-stream-in-html > dependency-graph.html`,
       "depcruise:graph-archi": `depcruise ${lSourceLocations} --include-only '${lSourceLocationRE}' -v -T archi | dot -T svg | depcruise-wrap-stream-in-html > high-level-dependency-graph.html`,
-      "depcruise:html": `depcruise ${lSourceLocations} ${lTestLocations} -v -T err-html > dependency-violation-report.html`,
+      "depcruise:html": `depcruise ${lSourceLocations} ${lTestLocations} -v -T err-html -f dependency-violation-report.html`,
     };
   }
 
@@ -77,7 +77,7 @@ function getSuccessMessage(pDestinationManifestFileName) {
     )}` +
     `\n\n    ${chalk.green(figures.play)} npm run depcruise:html` +
     `\n${wrapAndIndent(
-      "validates against the rules in .dependency-cruiser.json and writes it to 'dependendency-violation-report.html' with a friendly layout",
+      "validates against the rules in .dependency-cruiser.js and writes it to 'dependendency-violation-report.html' with a friendly layout",
       EXPLANATION_INDENT
     )}` +
     `\n\n    ${chalk.green(figures.play)} npm run depcruise:graph` +
