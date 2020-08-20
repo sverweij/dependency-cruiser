@@ -100,6 +100,44 @@ describe("extract/resolve/determineDependencyTypes - determine dependencyTypes",
     ).to.deep.equal(["npm-dev"]);
   });
 
+  it("sorts node_modules into 'npm-dev' when they're in the supplied package devDependencies with an @types scope", () => {
+    expect(
+      determine(
+        {
+          couldNotResolve: false,
+          resolved: "node_modules/@types/my-totally-weird-types/index.d.ts",
+        },
+        "my-totally-weird-types",
+        {
+          devDependencies: {
+            "@types/my-totally-weird-types": "1.2.3",
+          },
+        }
+      )
+    ).to.deep.equal(["npm-dev"]);
+  });
+
+  it("sorts node_modules into 'npm-no-pkg' when they're in the supplied package devDependencies with an @types scope, but the resolve modules don't include 'node_modules/@types'", () => {
+    expect(
+      determine(
+        {
+          couldNotResolve: false,
+          resolved: "node_modules/@types/my-totally-weird-types/index.d.ts",
+        },
+        "my-totally-weird-types",
+        {
+          devDependencies: {
+            "@types/my-totally-weird-types": "1.2.3",
+          },
+        },
+        "whatever",
+        {
+          modules: ["node_modules"],
+        }
+      )
+    ).to.deep.equal(["npm-no-pkg"]);
+  });
+
   it("sorts node_modules into 'npm' and 'npm-dev' when they're both the deps and the devDeps", () => {
     expect(
       determine(

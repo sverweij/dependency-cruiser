@@ -3,6 +3,27 @@ const isCore = require("./is-core");
 const isRelativeModuleName = require("./is-relative-module-name");
 const localNpmHelpers = require("./local-npm-helpers");
 
+function toPackagePaths(pExternalModuleResolvePaths) {
+  return (
+    pExternalModuleResolvePaths || ["node_modules", "node_modules/@types"]
+  ).map((pResolveModule) => pResolveModule.replace(/^node_modules(\/)?/, ""));
+}
+
+function dependencyKeyHasModuleName(
+  pPackageDependencies,
+  pExternalModuleResolvePaths,
+  pModuleName
+) {
+  return (pKey) =>
+    pKey.includes("ependencies") &&
+    pExternalModuleResolvePaths.some((pResolvePath) =>
+      Object.prototype.hasOwnProperty.call(
+        pPackageDependencies[pKey],
+        path.posix.join(pResolvePath, pModuleName)
+      )
+    );
+}
+
 const NPM2DEP_TYPE = {
   dependencies: "npm",
   devDependencies: "npm-dev",
@@ -10,18 +31,22 @@ const NPM2DEP_TYPE = {
   peerDependencies: "npm-peer",
 };
 
-function determineNpmDependencyTypes(pModuleName, pPackageDependencies) {
+function determineNpmDependencyTypes(
+  pModuleName,
+  pPackageDependencies,
+  pExternalModuleResolvePaths
+) {
   let lReturnValue = ["npm-unknown"];
+  let lExternalModuleResolvePaths = toPackagePaths(pExternalModuleResolvePaths);
 
   if (Boolean(pPackageDependencies)) {
     lReturnValue = Object.keys(pPackageDependencies)
       .filter(
-        (pKey) =>
-          pKey.includes("ependencies") &&
-          Object.prototype.hasOwnProperty.call(
-            pPackageDependencies[pKey],
-            pModuleName
-          )
+        dependencyKeyHasModuleName(
+          pPackageDependencies,
+          lExternalModuleResolvePaths,
+          pModuleName
+        )
       )
       .map((pKey) => NPM2DEP_TYPE[pKey] || "npm-no-pkg");
     lReturnValue = lReturnValue.length === 0 ? ["npm-no-pkg"] : lReturnValue;
@@ -56,7 +81,8 @@ function determineNodeModuleDependencyTypes(
 ) {
   let lReturnValue = determineNpmDependencyTypes(
     localNpmHelpers.getPackageRoot(pModuleName),
-    pPackageDeps
+    pPackageDeps,
+    pResolveOptions.modules
   );
 
   if (
