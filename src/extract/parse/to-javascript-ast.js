@@ -10,13 +10,16 @@ function getASTFromSource(pSource, pExtension, pTranspileOptions) {
 
   try {
     // ecmaVersion 11 necessary for acorn to understand dynamic imports
-    // default ecmaVersion for acorn 7 is still 10.
+    // explicitly passing ecmaVersion is recommended from acorn 8
     return acorn.parse(lJavaScriptSource, {
       sourceType: "module",
       ecmaVersion: 11,
     });
   } catch (pError) {
-    return acornLoose.parse(lJavaScriptSource, { sourceType: "module" });
+    return acornLoose.parse(lJavaScriptSource, {
+      sourceType: "module",
+      ecmaVersion: 11,
+    });
   }
 }
 

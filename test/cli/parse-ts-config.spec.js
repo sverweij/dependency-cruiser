@@ -130,10 +130,10 @@ describe("cli/parseTSConfig - flatten typescript config - 'extend' config scenar
     const lWildCardDirectories = {};
 
     lWildCardDirectories[
-      path.join(
-        DIRNAME,
-        "./fixtures/typescriptconfig/override from extends here"
-      )
+      // from TypeScript 4 the key name is lower case ¯\_(ツ)_/¯
+      path
+        .join(DIRNAME, "./fixtures/typescriptconfig/override from extends here")
+        .toLowerCase()
     ] = 1;
 
     /* eslint no-undefined:0 */
@@ -149,11 +149,11 @@ describe("cli/parseTSConfig - flatten typescript config - 'extend' config scenar
       includeSpecs: ["override from extends here"],
       // only in the extends:
       validatedExcludeSpecs: ["only in the extends"],
+      // spontaneously inserted as of typescript 4
+      validatedFilesSpec: ["./dummysrc.ts"],
       // overridden by extends:
       validatedIncludeSpecs: ["override from extends here"],
-      // the beta of the v4 TypeScript compiler seems to lowercase the
-      // wildcard directories so /Users/johngalt/... becomes /users/johngalt
-      // so once that's out of beta we'll probably have to toLocaleLowerCase it
+
       wildcardDirectories: lWildCardDirectories,
     });
 
