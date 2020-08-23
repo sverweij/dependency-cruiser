@@ -674,10 +674,16 @@
           "items": { "type": "string" }
         },
         "reporterOptions": { "$ref": "#/definitions/ReporterOptionsType" },
-        "_experimental_this_will_change": {
-          "type": "string",
-          "enum": ["cli-feedback", "performance-log", "none"],
-          "description": "When executing dependency-cruiser emits 'start', 'progess' and 'end' events on a bus. You can use these e.g. to show progress in any UI (e.g. the cli) attach loggers etc. We're still figuring out how to do expose this (if at all), so the listener feature is highly experimental and use in any environment outside playgrounds is discouraged. For now it's only possible to use one of the baked-in listeners."
+        "progress": {
+          "type": "object",
+          "additionalProperties": false,
+          "description": "When executing dependency-cruiser emits 'start', 'progress' and 'end' events on a bus. You can use these e.g. to show progress in any UI (e.g. the cli) attach loggers etc. We're still figuring out how to do expose this (if at all), so the listener feature is highly experimental and use in any environment outside playgrounds is discouraged. For now it's only possible to use one of the baked-in listeners.",
+          "properties": {
+            "type": {
+              "type": "string",
+              "enum": ["cli-feedback", "performance-log", "none"]
+            }
+          }
         },
         "args": {
           "type": "string",

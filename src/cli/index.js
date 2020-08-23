@@ -66,10 +66,7 @@ function setUpListener(pCruiseOptions) {
     "cli-feedback": setUpCliFeedbackListener,
     "performance-log": setUpPerformanceLogListener,
   };
-  const lListenerID = _get(
-    pCruiseOptions,
-    "ruleSet.options._experimental_this_will_change"
-  );
+  const lListenerID = _get(pCruiseOptions, "ruleSet.options.progress.type");
   const lListenerFunction = _get(STRING2LISTENER, lListenerID);
   /* istanbul ignore next */
   if (Boolean(lListenerFunction)) {
@@ -97,7 +94,7 @@ function runCruise(pFileDirectoryArray, pCruiseOptions) {
     }
   );
 
-  bus.emit("progress", "cli: writing results ...");
+  bus.emit("progress", "cli: writing results");
   bus.emit("write-start");
   io.write(pCruiseOptions.outputTo, lReportingResult.output);
   bus.emit("end");

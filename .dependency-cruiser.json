@@ -335,8 +335,10 @@
         }
       }
     },
-    // "_experimental_this_will_change": "cli-feedback"
-    "_experimental_this_will_change": "performance-log"
-    // "_experimental_this_will_change": "none"
+    // "progress" is an experimental feature. Works but names & structures
+    // could change without notice
+    // "progress": { "type": "cli-feedback" }
+    "progress": { "type": "performance-log" }
+    // "progress": {"type": "none"}
   }
 }
