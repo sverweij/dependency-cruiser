@@ -146,9 +146,9 @@ same algorithm node uses, which means a.o.
 - `allowed` rules  
   Dependency-cruiser concatenates `allowed` rules from the extends, and de-duplicates
   them.
-- `forbidden` rules  
-  For `forbidden` rules it uses the same approach, except when the rules
-  have a name, in which case the rule with the same name in the current file
+- `forbidden` and `required` rules  
+  For `forbidden` and `required` rules it uses the same approach, except when the
+  rules have a name, in which case the rule with the same name in the current file
   gets merged into the one from extends, where attributes from the current file
   win.
   This allows you to override only one attribute, e.g. the severity
@@ -1412,7 +1412,7 @@ babelConfig - dependency-cruiser will sort it out for you.
   .cjs configurations, as long as they're commonjs modules and export a simple
   javascript object. JavaScript configurations that export a function, and/ or
   that are es modules might be supported in a later stage.
-- Auto detection in [--init](clies.md#--init) looks at some of the likely suspects
+- Auto detection in [--init](cli.md#--init) looks at some of the likely suspects
   for babel configs - _package.json_ (only if it contains a _babel_ key),
   _.babelrc_, _.babelrc.json_, _babel.config.json_ and any other file with _babel_
   in the name that ends on _json_ or _json5_. - The feature currently works with

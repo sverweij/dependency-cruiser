@@ -94,7 +94,7 @@ readme) or in a table.
   documentation.
 - dependency-cruiser uses itself to check on itself in its own build process;
   see the `decpruise` script in the
-  [package.json](https://github.com/sverweij/dependency-cruiser/blob/master/package.json#L12)
+  [package.json](https://github.com/sverweij/dependency-cruiser/blob/master/package.json#L64)
 
 ## I want to know more!
 
