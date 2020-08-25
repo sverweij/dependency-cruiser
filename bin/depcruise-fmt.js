@@ -32,10 +32,14 @@ try {
       "err"
     )
     .option(
-      "-e, --exit-code",
-      "exit with a non-zero exit code when the input json contains error level " +
-        "dependency violations. Works for err, err-long and teamcity output types"
+      "-I, --include-only <regex>",
+      "only include modules matching the regex"
     )
+    .option(
+      "-F, --focus <regex>",
+      "only include modules matching the regex + their direct neighbours"
+    )
+    .option("-x, --exclude <regex>", "exclude all modules matching the regex")
     .version($package.version)
     .arguments("<dependency-cruiser-json>")
     .parse(process.argv);

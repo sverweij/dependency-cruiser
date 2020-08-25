@@ -127,7 +127,7 @@ function extractModuleViolations(pModules, pRuleSet) {
     );
 }
 
-module.exports = (pModules, pRuleSet) => {
+module.exports = function summarizeModules(pModules, pRuleSet) {
   const lViolations = deDuplicateViolations(
     extractDependencyViolations(pModules, pRuleSet).concat(
       extractModuleViolations(pModules, pRuleSet)

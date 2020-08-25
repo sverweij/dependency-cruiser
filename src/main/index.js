@@ -1,10 +1,13 @@
 const Ajv = require("ajv");
+const _get = require("lodash/get");
 const extract = require("../extract");
 const enrich = require("../enrich");
+const summarizeModules = require("../enrich/summarize-modules");
 const cruiseResultSchema = require("../schema/cruise-result.schema.json");
 const meta = require("../extract/transpile/meta");
 const report = require("../report");
 const bus = require("../utl/bus");
+const filterbank = require("../utl/filterbank");
 const normalizeFilesAndDirectories = require("./files-and-dirs/normalize");
 const validateRuleSet = require("./rule-set/validate");
 const normalizeRuleSet = require("./rule-set/normalize");
@@ -14,17 +17,29 @@ const normalizeResolveOptions = require("./resolve-options/normalize");
 
 // see [api.md](../../doc/api.md) and/ or the
 // [type definition](../../types/depencency-cruiser.d.ts) for details
-function format(pResult, pOutputType) {
+function format(pResult, pFormatOptions = {}) {
   const ajv = new Ajv();
-
-  validateOptions.validateOutputType(pOutputType);
+  const lFormatOptions = normalizeOptions.normalizeFormatOptions(
+    pFormatOptions
+  );
+  validateOptions.validateFormatOptions(lFormatOptions);
 
   if (!ajv.validate(cruiseResultSchema, pResult)) {
     throw new Error(
       `The supplied dependency-cruiser result is not valid: ${ajv.errorsText()}.\n`
     );
   }
-  return report.getReporter(pOutputType)(pResult);
+
+  const lModules = filterbank.applyFilters(pResult.modules, lFormatOptions);
+
+  return report.getReporter(pFormatOptions.outputType)({
+    ...pResult,
+    summary: {
+      ...pResult.summary,
+      ...summarizeModules(lModules, _get(pResult, "summary.ruleSetUsed", {})),
+    },
+    modules: lModules,
+  });
 }
 
 function futureCruise(
