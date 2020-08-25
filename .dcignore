@@ -1,0 +1,3 @@
+doc/**/*
+src/**/*.template.js
+test/**/fixtures
