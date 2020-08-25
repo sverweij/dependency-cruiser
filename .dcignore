@@ -1,0 +1,2 @@
+test/**/fixtures
+src/**/*.template.js
