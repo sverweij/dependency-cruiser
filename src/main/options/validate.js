@@ -82,4 +82,11 @@ function validate(pOptions) {
 
 module.exports = validate;
 
-module.exports.validateOutputType = validateOutputType;
+module.exports.validateFormatOptions = function validateFormatOptions(
+  pFormatOptions
+) {
+  validatePathsSafety(pFormatOptions.exclude);
+  validatePathsSafety(pFormatOptions.focus);
+  validatePathsSafety(pFormatOptions.includeOnly);
+  validateOutputType(pFormatOptions.outputType);
+};

@@ -32,6 +32,15 @@ try {
       "err"
     )
     .option(
+      "-I, --include-only <regex>",
+      "only include modules matching the regex"
+    )
+    .option(
+      "-F, --focus <regex>",
+      "only include modules matching the regex + their direct neighbours"
+    )
+    .option("-x, --exclude <regex>", "exclude all modules matching the regex")
+    .option(
       "-e, --exit-code",
       "exit with a non-zero exit code when the input json contains error level " +
         "dependency violations. Works for err, err-long and teamcity output types"
