@@ -1558,6 +1558,16 @@ depcruise-fmt -T archi results.json | dot -T svg > high-level-graph.svg
 depcruise-fmt -e -T err results.json
 ```
 
+> Note: as of version 9.12.0 depcruise-fmt has [filters](cli.md#depcruise-fmt)
+> as command line options that have the same effect, work on all reporters and might
+> give you more flexibility.
+
+> ```sh
+> depcruise-fmt -T dot results.json --include-only "^packages/search" | dot -T svg > search.svg
+> depcruise-fmt -T dot results.json --include-only "^packages/ancillaries" | dot -T svg > ancillaries.svg
+> depcruise-fmt -T dot results.json --include-only "^packages/checkout" | dot -T svg > checkout.svg
+> ```
+
 ##### theming
 
 Most representational aspects of the 'dot' reporter are customizable:

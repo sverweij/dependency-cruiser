@@ -681,6 +681,21 @@ depcruise-fmt -T err-html -f violation-report.html cruise_result.json
 depcruise-fmt -T dot cruise_result.json | dot -T svg > dependency-graph.svg
 ```
 
+You can also use the filters --focus, --include-only and --exclude to peruse
+parts of the dependency-graph. This could be useful for chopping up humoungous
+graphs efficiently, or to quickly find the uses of a module.
+
+```sh
+depcruise -v -T json src -f cruise_result.json
+depcruise-fmt -T dot --focus "^src/main" cruise_result.json | dot -T svg > main.svg
+depcruise-fmt -T dot --focus "^src/juggle" cruise_result.json | dot -T svg > juggle.svg
+depcruise-fmt -T dot --include-only "^src/the-law" cruise_result.json | dot -T svg > the-law.svg
+
+## or to find dependencies going into or departing from the spelunkme module
+## and emitting them to stdout:
+depcruise-fmt -T text --focus "^src/main/spelunkme\\.ts$" cruise_result.json
+```
+
 If you want to see non-zero exit codes when there's error level dependency
 violations, you can use the `--exit-code` (short: `-e`). This only works for
 the output types that support non-zero exit codes (_err_, _err-long_ and
@@ -697,15 +712,16 @@ Format dependency-cruiser output json.
 Details: https://github.com/sverweij/dependency-cruiser
 
 Options:
-  -f, --output-to <file>    file to write output to; - for stdout (default:
-                            "-")
-  -T, --output-type <type>  output type; e.g. err, err-html, dot, ddot, archi
-                            or json (default: "err")
-  -e, --exit-code           exit with a non-zero exit code when the input json
-                            contains error level dependency violations. Works
-                            for err, err-long and teamcity output types
-  -V, --version             output the version number
-  -h, --help                display help for command
+  -f, --output-to <file>      file to write output to; - for stdout (default:
+                              "-")
+  -T, --output-type <type>    output type; e.g. err, err-html, dot, ddot, archi
+                              or json (default: "err")
+  -I, --include-only <regex>  only include modules matching the regex
+  -F, --focus <regex>         only include modules matching the regex + their
+                              direct neighbours
+  -x, --exclude <regex>       exclude all modules matching the regex
+  -V, --version               output the version number
+  -h, --help                  display help for command
 ```
 
 ## depcruise-wrap-stream-in-html

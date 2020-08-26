@@ -19,7 +19,7 @@ const MINIMAL_RESULT = {
 describe("main.format - format", () => {
   it("barfs when it gets an invalid output type", () => {
     expect(() => {
-      main.format({}, "not-a-valid-reporter");
+      main.format({}, { outputType: "not-a-valid-reporter" });
     }).to.throw("'not-a-valid-reporter' is not a valid output type.");
   });
 
@@ -38,14 +38,16 @@ describe("main.format - format", () => {
   });
 
   it("returns an error reporter formatted report when presented with a legal result", () => {
-    expect(main.format(MINIMAL_RESULT, "err").output).to.contain(
+    expect(
+      main.format(MINIMAL_RESULT, { outputType: "err" }).output
+    ).to.contain(
       "no dependency violations found (0 modules, 0 dependencies cruised)"
     );
   });
 
   it("returns an json reporter formatted report when presented with a legal result", () => {
     expect(
-      JSON.parse(main.format(MINIMAL_RESULT, "json").output)
+      JSON.parse(main.format(MINIMAL_RESULT, { outputType: "json" }).output)
     ).to.deep.equal(MINIMAL_RESULT);
   });
 });

@@ -33,9 +33,12 @@ try {
       "file to write output to; - for stdout",
       "-"
     )
-    .option("--include-only <regex>", "only include modules matching the regex")
     .option(
-      "--focus <regex>",
+      "-I, --include-only <regex>",
+      "only include modules matching the regex"
+    )
+    .option(
+      "-F, --focus <regex>",
       "only include modules matching the regex + their direct neighbours"
     )
     .option("-x, --exclude <regex>", "exclude all modules matching the regex")

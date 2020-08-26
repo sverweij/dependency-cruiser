@@ -14,10 +14,7 @@ module.exports = async (pResultFile, pOptions) => {
 
   const lResult = await getStream(io.getInStream(pResultFile));
 
-  const lReportingResult = main.format(
-    JSON.parse(lResult),
-    lOptions.outputType
-  );
+  const lReportingResult = main.format(JSON.parse(lResult), lOptions);
 
   io.write(lOptions.outputTo, lReportingResult.output);
   return lReportingResult.exitCode;
