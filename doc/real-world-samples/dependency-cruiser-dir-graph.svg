@@ -14,16 +14,6 @@
 <path fill="#ffffff" stroke="black" stroke-width="2" d="M20,-8C20,-8 1282,-8 1282,-8 1288,-8 1294,-14 1294,-20 1294,-20 1294,-384.2 1294,-384.2 1294,-390.2 1288,-396.2 1282,-396.2 1282,-396.2 20,-396.2 20,-396.2 14,-396.2 8,-390.2 8,-384.2 8,-384.2 8,-20 8,-20 8,-14 14,-8 20,-8"/>
 <text text-anchor="middle" x="651" y="-385" font-family="Helvetica,sans-Serif" font-weight="bold" font-size="9.00">src</text>
 </g>
-<g id="clust2" class="cluster">
-<title>cluster_src/cli</title>
-<path fill="#ffffff" stroke="black" stroke-width="2" d="M40,-258.2C40,-258.2 397,-258.2 397,-258.2 403,-258.2 409,-264.2 409,-270.2 409,-270.2 409,-358.2 409,-358.2 409,-364.2 403,-370.2 397,-370.2 397,-370.2 40,-370.2 40,-370.2 34,-370.2 28,-364.2 28,-358.2 28,-358.2 28,-270.2 28,-270.2 28,-264.2 34,-258.2 40,-258.2"/>
-<text text-anchor="middle" x="218.5" y="-359" font-family="Helvetica,sans-Serif" font-weight="bold" font-size="9.00">cli</text>
-</g>
-<g id="clust3" class="cluster">
-<title>cluster_src/cli/ears</title>
-<path fill="#ffffff" stroke="black" stroke-width="2" d="M178,-266.2C178,-266.2 303,-266.2 303,-266.2 309,-266.2 315,-272.2 315,-278.2 315,-278.2 315,-306.2 315,-306.2 315,-312.2 309,-318.2 303,-318.2 303,-318.2 178,-318.2 178,-318.2 172,-318.2 166,-312.2 166,-306.2 166,-306.2 166,-278.2 166,-278.2 166,-272.2 172,-266.2 178,-266.2"/>
-<text text-anchor="middle" x="240.5" y="-307" font-family="Helvetica,sans-Serif" font-weight="bold" font-size="9.00">ears</text>
-</g>
 <g id="clust4" class="cluster">
 <title>cluster_src/enrich</title>
 <path fill="#ffffff" stroke="black" stroke-width="2" d="M1070,-16C1070,-16 1274,-16 1274,-16 1280,-16 1286,-22 1286,-28 1286,-28 1286,-148.6 1286,-148.6 1286,-154.6 1280,-160.6 1274,-160.6 1274,-160.6 1070,-160.6 1070,-160.6 1064,-160.6 1058,-154.6 1058,-148.6 1058,-148.6 1058,-28 1058,-28 1058,-22 1064,-16 1070,-16"/>
@@ -53,6 +43,16 @@
 <title>cluster_src/report</title>
 <path fill="#ffffff" stroke="black" stroke-width="2" d="M706,-16.8C706,-16.8 966,-16.8 966,-16.8 972,-16.8 978,-22.8 978,-28.8 978,-28.8 978,-148.6 978,-148.6 978,-154.6 972,-160.6 966,-160.6 966,-160.6 706,-160.6 706,-160.6 700,-160.6 694,-154.6 694,-148.6 694,-148.6 694,-28.8 694,-28.8 694,-22.8 700,-16.8 706,-16.8"/>
 <text text-anchor="middle" x="836" y="-149.4" font-family="Helvetica,sans-Serif" font-weight="bold" font-size="9.00">report</text>
+</g>
+<g id="clust2" class="cluster">
+<title>cluster_src/cli</title>
+<path fill="#ffffff" stroke="black" stroke-width="2" d="M40,-258.2C40,-258.2 397,-258.2 397,-258.2 403,-258.2 409,-264.2 409,-270.2 409,-270.2 409,-358.2 409,-358.2 409,-364.2 403,-370.2 397,-370.2 397,-370.2 40,-370.2 40,-370.2 34,-370.2 28,-364.2 28,-358.2 28,-358.2 28,-270.2 28,-270.2 28,-264.2 34,-258.2 40,-258.2"/>
+<text text-anchor="middle" x="218.5" y="-359" font-family="Helvetica,sans-Serif" font-weight="bold" font-size="9.00">cli</text>
+</g>
+<g id="clust3" class="cluster">
+<title>cluster_src/cli/ears</title>
+<path fill="#ffffff" stroke="black" stroke-width="2" d="M178,-266.2C178,-266.2 303,-266.2 303,-266.2 309,-266.2 315,-272.2 315,-278.2 315,-278.2 315,-306.2 315,-306.2 315,-312.2 309,-318.2 303,-318.2 303,-318.2 178,-318.2 178,-318.2 172,-318.2 166,-312.2 166,-306.2 166,-306.2 166,-278.2 166,-278.2 166,-272.2 172,-266.2 178,-266.2"/>
+<text text-anchor="middle" x="240.5" y="-307" font-family="Helvetica,sans-Serif" font-weight="bold" font-size="9.00">ears</text>
 </g>
 <!-- bin -->
 <g id="node1" class="node">
