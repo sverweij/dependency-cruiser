@@ -681,9 +681,9 @@ depcruise-fmt -T err-html -f violation-report.html cruise_result.json
 depcruise-fmt -T dot cruise_result.json | dot -T svg > dependency-graph.svg
 ```
 
-You can also use the filters --focus, --include-only and --exclude to peruse
+You can also use the filters `--focus`, `--include-only` and `--exclude` to peruse
 parts of the dependency-graph. This could be useful for chopping up humoungous
-graphs efficiently, or to quickly find the uses of a module.
+graphs efficiently, or to quickly find the uses of a module:
 
 ```sh
 depcruise -v -T json src -f cruise_result.json
@@ -743,7 +743,7 @@ This works for all dot-based reporters, including `archi` and `ddot`
 Some examples:
 
 - [Dependency-cruiser's own dependency graph](https://sverweij.github.io/dependency-cruiser/dependency-cruiser-dependency-graph.html)
-- [yarn v2's high level dependency graph](https://sverweij.github.io/dependency-cruiser/assets/berry-high-level-depencencies.html)
+- [yarn v2's high level dependency graph](https://sverweij.github.io/dependency-cruiser/assets/berry-high-level-dependencies.html)
   (`archi` reporter)
 - [state-machine-cat's dependency graph](https://state-machine-cat.js.org/dependency-cruiser-graph.html)
 
