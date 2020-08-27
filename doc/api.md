@@ -55,7 +55,7 @@ const dependenciesInAGraphVizDotScript = depcruise(
 ).output;
 ```
 
-Apart from all the ones mentioned in the [options section](rules-reference.md#the-options) of the [rules reference](rules-reference.md), you can use these options:
+Apart from all the ones mentioned in the [options reference](options-reference.md), you can use these options:
 
 | option     | meaning                                                                                                                                            |
 | ---------- | -------------------------------------------------------------------------------------------------------------------------------------------------- |
