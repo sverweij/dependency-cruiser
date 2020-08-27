@@ -27,7 +27,7 @@ describe("report/anon/randomString", () => {
   });
 
   it("returns a number when passed a number", () => {
-    expect(randomString("1")).to.match(/[0-9]/);
+    expect(randomString("1")).to.match(/\d/);
   });
 
   it("returns a lower case ascii character when passed a single character", () => {

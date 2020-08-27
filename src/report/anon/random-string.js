@@ -16,7 +16,7 @@ function isUpperCase(pChar) {
 }
 
 function classifyChar(pChar) {
-  if (/[0-9]/.test(pChar)) return NUMBER;
+  if (/\d/.test(pChar)) return NUMBER;
   if (isSeparator(pChar)) return SEPARATOR;
   if (isUpperCase(pChar)) return UPPERCASE;
   return NOTHING_SPECIAL;
