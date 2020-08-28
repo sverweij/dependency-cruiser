@@ -115,8 +115,8 @@ module.exports = (pFileDirectoryArray, pCruiseOptions) => {
       lExitCode = runCruise(pFileDirectoryArray, pCruiseOptions);
     }
   } catch (pError) {
-    bus.emit("end", "error");
     process.stderr.write(`\n  ERROR: ${pError.message}\n`);
+    bus.emit("end");
     lExitCode = 1;
   }
 
