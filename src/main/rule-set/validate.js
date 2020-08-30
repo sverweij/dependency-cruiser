@@ -8,7 +8,9 @@ const ajv = new Ajv();
 
 function validateAgainstSchema(pSchema, pConfiguration) {
   if (!ajv.validate(pSchema, pConfiguration)) {
-    throw new Error(`The rules file is not valid: ${ajv.errorsText()}.\n`);
+    throw new Error(
+      `The supplied configuration is not valid: ${ajv.errorsText()}.\n`
+    );
   }
 }
 

@@ -236,6 +236,35 @@ describe("cli/normalizeOptions", () => {
       validate: true,
     });
   });
+
+  it("collapse: normalizes a single digit for collapse to a folder depth regex", () => {
+    expect(normalizeOptions({ collapse: "2" }, ["collapse"])).to.deep.equal({
+      outputTo: "-",
+      outputType: "err",
+      validate: false,
+      collapse: "^[^/]+/[^/]+/",
+    });
+  });
+
+  it("collapse: leaves a non-single digits alone", () => {
+    expect(normalizeOptions({ collapse: "22" }, ["collapse"])).to.deep.equal({
+      outputTo: "-",
+      outputType: "err",
+      validate: false,
+      collapse: "22",
+    });
+  });
+
+  it("collapse: leaves a normal string/ regex like alone", () => {
+    expect(
+      normalizeOptions({ collapse: "^packages/[^/]+" }, ["collapse"])
+    ).to.deep.equal({
+      outputTo: "-",
+      outputType: "err",
+      validate: false,
+      collapse: "^packages/[^/]+",
+    });
+  });
 });
 
 describe("cli/normalizeOptions.determineRulesFileName", () => {

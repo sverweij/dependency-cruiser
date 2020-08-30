@@ -1,5 +1,5 @@
 const { expect } = require("chai");
-const consolidateToPattern = require("~/src/report/utl/consolidate-to-pattern");
+const consolidateToPattern = require("~/src/utl/consolidate-to-pattern");
 
 describe("report/utl/consolidateToPattern", () => {
   it("no pattern => no squashing", () => {

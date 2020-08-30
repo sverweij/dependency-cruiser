@@ -1,5 +1,6 @@
 const Ajv = require("ajv");
 const _get = require("lodash/get");
+const _has = require("lodash/has");
 const extract = require("../extract");
 const enrich = require("../enrich");
 const summarizeModules = require("../enrich/summarize-modules");
@@ -8,6 +9,9 @@ const meta = require("../extract/transpile/meta");
 const report = require("../report");
 const bus = require("../utl/bus");
 const filterbank = require("../utl/filterbank");
+const consolidateToPattern = require("../utl/consolidate-to-pattern");
+const compare = require("../utl/compare");
+const stripSelfTransitions = require("../utl/strip-self-transitions");
 const normalizeFilesAndDirectories = require("./files-and-dirs/normalize");
 const validateRuleSet = require("./rule-set/validate");
 const normalizeRuleSet = require("./rule-set/normalize");
@@ -15,31 +19,48 @@ const validateOptions = require("./options/validate");
 const normalizeOptions = require("./options/normalize");
 const normalizeResolveOptions = require("./resolve-options/normalize");
 
-// see [api.md](../../doc/api.md) and/ or the
-// [type definition](../../types/depencency-cruiser.d.ts) for details
-function format(pResult, pFormatOptions = {}) {
-  const ajv = new Ajv();
-  const lFormatOptions = normalizeOptions.normalizeFormatOptions(
-    pFormatOptions
-  );
-  validateOptions.validateFormatOptions(lFormatOptions);
+function reSummarizeResults(pResult, pFormatOptions) {
+  let lModules = filterbank.applyFilters(pResult.modules, pFormatOptions);
 
-  if (!ajv.validate(cruiseResultSchema, pResult)) {
-    throw new Error(
-      `The supplied dependency-cruiser result is not valid: ${ajv.errorsText()}.\n`
-    );
+  if (_has(pFormatOptions, "collapse")) {
+    lModules = consolidateToPattern(lModules, pFormatOptions.collapse)
+      .sort(compare.modules)
+      .map(stripSelfTransitions);
   }
 
-  const lModules = filterbank.applyFilters(pResult.modules, lFormatOptions);
-
-  return report.getReporter(pFormatOptions.outputType)({
+  return {
     ...pResult,
     summary: {
       ...pResult.summary,
       ...summarizeModules(lModules, _get(pResult, "summary.ruleSetUsed", {})),
     },
     modules: lModules,
-  });
+  };
+}
+
+function validateResultAgainstSchema(pResult) {
+  const ajv = new Ajv();
+
+  if (!ajv.validate(cruiseResultSchema, pResult)) {
+    throw new Error(
+      `The supplied dependency-cruiser result is not valid: ${ajv.errorsText()}.\n`
+    );
+  }
+}
+
+// see [api.md](../../doc/api.md) and/ or the
+// [type definition](../../types/depencency-cruiser.d.ts) for details
+function format(pResult, pFormatOptions = {}) {
+  const lFormatOptions = normalizeOptions.normalizeFormatOptions(
+    pFormatOptions
+  );
+  validateOptions.validateFormatOptions(lFormatOptions);
+
+  validateResultAgainstSchema(pResult);
+
+  const lReportFn = report.getReporter(lFormatOptions.outputType);
+
+  return lReportFn(reSummarizeResults(pResult, lFormatOptions));
 }
 
 function futureCruise(

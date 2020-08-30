@@ -2,11 +2,12 @@ const fs = require("fs");
 const path = require("path");
 const _set = require("lodash/set");
 const _get = require("lodash/get");
+const _has = require("lodash/has");
 const _clone = require("lodash/clone");
 const compileConfig = require("./compile-config");
 const defaults = require("./defaults.json");
 
-const KNOWN_CLI_OPTIONS = [
+const KNOWN_DEPCRUISE_OPTIONS = [
   "baseDir",
   "config",
   "doNotFollow",
@@ -41,8 +42,8 @@ function getOptionValue(pDefault) {
   };
 }
 
-function isKnownCLIOption(pCandidateString) {
-  return KNOWN_CLI_OPTIONS.includes(pCandidateString);
+function isKnownCLIOption(pKnownOptions) {
+  return (pCandidateString) => pKnownOptions.includes(pCandidateString);
 }
 
 /**
@@ -53,9 +54,9 @@ function isKnownCLIOption(pCandidateString) {
  * @param {any} pOptions - an options object e.g. as output from commander
  * @returns {ICruiseOptions} - an options object that only contains stuff we care about
  */
-function ejectNonCLIOptions(pOptions) {
+function ejectNonCLIOptions(pOptions, pKnownOptions) {
   return Object.keys(pOptions)
-    .filter(isKnownCLIOption)
+    .filter(isKnownCLIOption(pKnownOptions))
     .reduce((pAll, pKey) => {
       pAll[pKey] = pOptions[pKey];
       return pAll;
@@ -65,7 +66,7 @@ function ejectNonCLIOptions(pOptions) {
 function normalizeConfigFile(pOptions, pConfigWrapperName, pDefault) {
   let lOptions = _clone(pOptions);
 
-  if (Object.prototype.hasOwnProperty.call(lOptions, pConfigWrapperName)) {
+  if (_has(lOptions, pConfigWrapperName)) {
     _set(
       lOptions,
       `ruleSet.options.${pConfigWrapperName}.fileName`,
@@ -136,6 +137,15 @@ function validateAndNormalizeRulesFileName(pValidate) {
   return lReturnValue;
 }
 
+function normalizeCollapse(pCollapse) {
+  let lReturnValue = pCollapse;
+
+  if (pCollapse.match(/^\d$/)) {
+    lReturnValue = `^${"[^/]+/".repeat(pCollapse)}`;
+  }
+  return lReturnValue;
+}
+
 /**
  * returns the pOptions, so that the returned value contains a
  * valid value for each possible option
@@ -143,24 +153,32 @@ function validateAndNormalizeRulesFileName(pValidate) {
  * @param  {object} pOptionsAsPassedFromCommander [description]
  * @return {object}          [description]
  */
-module.exports = (pOptionsAsPassedFromCommander) => {
+// eslint-disable-next-line max-lines-per-function
+module.exports = (
+  pOptionsAsPassedFromCommander,
+  pKnownOptions = KNOWN_DEPCRUISE_OPTIONS
+) => {
   let lOptions = {
     outputTo: defaults.OUTPUT_TO,
     outputType: defaults.OUTPUT_TYPE,
-    ...ejectNonCLIOptions(pOptionsAsPassedFromCommander),
+    ...ejectNonCLIOptions(pOptionsAsPassedFromCommander, pKnownOptions),
   };
 
-  if (Object.prototype.hasOwnProperty.call(lOptions, "moduleSystems")) {
+  if (_has(lOptions, "moduleSystems")) {
     lOptions.moduleSystems = lOptions.moduleSystems
       .split(",")
       .map((pString) => pString.trim());
   }
 
-  if (Object.prototype.hasOwnProperty.call(lOptions, "config")) {
+  if (_has(lOptions, "config")) {
     lOptions.validate = lOptions.config;
   }
 
-  if (Object.prototype.hasOwnProperty.call(lOptions, "validate")) {
+  if (_has(lOptions, "collapse")) {
+    lOptions.collapse = normalizeCollapse(lOptions.collapse);
+  }
+
+  if (_has(lOptions, "validate")) {
     lOptions.rulesFile = validateAndNormalizeRulesFileName(lOptions.validate);
     lOptions.ruleSet = compileConfig(
       path.isAbsolute(lOptions.rulesFile)
@@ -186,10 +204,7 @@ module.exports = (pOptionsAsPassedFromCommander) => {
     defaults.BABEL_CONFIG
   );
 
-  lOptions.validate = Object.prototype.hasOwnProperty.call(
-    lOptions,
-    "validate"
-  );
+  lOptions.validate = _has(lOptions, "validate");
 
   return lOptions;
 };

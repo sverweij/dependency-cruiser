@@ -237,7 +237,6 @@
         "collapsePattern": ["^(node_modules|src|test)/[^/]+", "^bin/"]
       },
       "dot": {
-        "collapsePattern": ["^node_modules/[^/]+"],
         "filters": {
           "includeOnly": { "path": "^(src|bin)" }
         },

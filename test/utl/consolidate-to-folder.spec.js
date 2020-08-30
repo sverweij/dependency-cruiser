@@ -1,5 +1,5 @@
 const { expect } = require("chai");
-const consolidateToFolder = require("~/src/report/utl/consolidate-to-folder");
+const consolidateToFolder = require("~/src/utl/consolidate-to-folder");
 
 describe("report/utl/consolidateToFolder", () => {
   it("source gets squashed to its folder", () => {
