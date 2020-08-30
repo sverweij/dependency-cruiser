@@ -1,6 +1,6 @@
 const Handlebars = require("handlebars/runtime");
 const _get = require("lodash/get");
-const filterbank = require("../../utl/filterbank");
+const filterbank = require("../../graph-utl/filterbank");
 const theming = require("./theming");
 const moduleUtl = require("./module-utl");
 const prepareFolderLevel = require("./prepare-folder-level");
@@ -9,20 +9,8 @@ const prepareCustomLevel = require("./prepare-custom-level");
 // eslint-disable-next-line import/no-unassigned-import
 require("./dot.template");
 
-function prepareModuleLevel(
-  pResults,
-  pTheme,
-  pCollapsePattern = _get(
-    pResults,
-    "summary.optionsUsed.reporterOptions.dot.collapsePattern",
-    null
-  )
-) {
-  return prepareCustomLevel(pResults, pTheme, pCollapsePattern);
-}
-
 const GRANULARITY2FUNCTION = {
-  module: prepareModuleLevel,
+  module: prepareCustomLevel,
   folder: prepareFolderLevel,
   custom: prepareCustomLevel,
 };
@@ -94,6 +82,40 @@ function pryFiltersFromResults(pGranularity, pResults) {
   );
 }
 
+function getCollapseFallbackPattern(pGranularity) {
+  if (pGranularity === "custom") {
+    return "^(node_modules|packages|src|lib|app|test|spec)/[^/]+";
+  }
+  return null;
+}
+
+function pryCollapsePatternFromResults(pGranularity, pResults) {
+  return _get(
+    pryReporterOptionsFromResults(pGranularity, pResults),
+    "collapsePattern",
+    getCollapseFallbackPattern(pGranularity)
+  );
+}
+
+function normalizeDotReporterOptions(
+  pDotReporterOptions,
+  pGranularity,
+  pResults
+) {
+  let lDotReporterOptions = pDotReporterOptions || {};
+
+  return {
+    theme:
+      lDotReporterOptions.theme || pryThemeFromResults(pGranularity, pResults),
+    collapsePattern:
+      lDotReporterOptions.collapsePattern ||
+      pryCollapsePatternFromResults(pGranularity, pResults),
+    filters:
+      lDotReporterOptions.filters ||
+      pryFiltersFromResults(pGranularity, pResults),
+    ...lDotReporterOptions,
+  };
+}
 /**
  * Returns the results of a cruise as a directed graph in the dot language.
  *
@@ -108,21 +130,15 @@ function pryFiltersFromResults(pGranularity, pResults) {
  * @returns {IReporterOutput} - .output: the directed graph
  *                              .exitCode: 0
  */
-module.exports = (pGranularity) => (
-  pResults,
-  pTheme,
-  pCollapsePattern,
-  pFilters
-) => {
-  const lTheme = pTheme || pryThemeFromResults(pGranularity, pResults);
-  const lFilters = pFilters || pryFiltersFromResults(pGranularity, pResults);
+module.exports = (pGranularity) => (pResults, pDotReporterOptions) => {
+  const lDotReporterOptions = normalizeDotReporterOptions(
+    pDotReporterOptions,
+    pGranularity,
+    pResults
+  );
 
   return {
-    output: report(pResults, pGranularity, {
-      theme: lTheme,
-      collapsePattern: pCollapsePattern,
-      filters: lFilters,
-    }),
+    output: report(pResults, pGranularity, lDotReporterOptions),
     exitCode: 0,
   };
 };

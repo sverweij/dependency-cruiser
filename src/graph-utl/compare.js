@@ -32,8 +32,13 @@ function rules(pLeftRule, pRightRule) {
   );
 }
 
+function modules(pLeftModule, pRightModule) {
+  return pLeftModule.source > pRightModule.source ? 1 : -1;
+}
+
 module.exports = {
+  modules,
+  rules,
   severities,
   violations,
-  rules,
 };

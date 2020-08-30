@@ -51,7 +51,13 @@
         "path": "(^src/report/)"
       },
       "to": {
-        "pathNot": ["$1", "^node_modules", "^(path|package.json)$", "^src/utl"]
+        "pathNot": [
+          "$1",
+          "^node_modules",
+          "^(path|package.json)$",
+          "^src/graph-utl",
+          "^src/utl"
+        ]
       }
     },
     {
@@ -66,6 +72,7 @@
           "$1",
           "^node_modules",
           "^(path|fs|module|package.json)$",
+          "^src/graph-utl",
           "^src/utl"
         ],
         "exoticallyRequired": false
@@ -237,7 +244,6 @@
         "collapsePattern": ["^(node_modules|src|test)/[^/]+", "^bin/"]
       },
       "dot": {
-        "collapsePattern": ["^node_modules/[^/]+"],
         "filters": {
           "includeOnly": { "path": "^(src|bin)" }
         },
@@ -274,6 +280,10 @@
             {
               "criteria": { "source": "^src/utl" },
               "attributes": { "fillcolor": "#cccccc" }
+            },
+            {
+              "criteria": { "source": "^src/graph-utl" },
+              "attributes": { "fillcolor": "#ffcccc" }
             },
             {
               "criteria": { "source": "\\.template\\.js$" },
@@ -331,6 +341,10 @@
             {
               "criteria": { "resolved": "^src/utl" },
               "attributes": { "color": "#aaaaaa77" }
+            },
+            {
+              "criteria": { "resolved": "^src/graph-utl" },
+              "attributes": { "color": "#77000077" }
             }
           ]
         }

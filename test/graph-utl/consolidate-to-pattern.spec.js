@@ -1,5 +1,5 @@
 const { expect } = require("chai");
-const consolidateToPattern = require("~/src/report/utl/consolidate-to-pattern");
+const consolidateToPattern = require("~/src/graph-utl/consolidate-to-pattern");
 
 describe("report/utl/consolidateToPattern", () => {
   it("no pattern => no squashing", () => {
@@ -140,5 +140,82 @@ describe("report/utl/consolidateToPattern", () => {
     ];
 
     expect(consolidateToPattern(lInput, "[^/]+/[^/]+")).to.deep.equal(lOutput);
+  });
+
+  it("reconsolidation with the same pattern yields the same result", () => {
+    const lInput = [
+      {
+        source: "thing.js",
+        rules: [],
+        valid: true,
+        dependencies: [
+          {
+            resolved: "some/folder/bla.js",
+            rules: [],
+            valid: true,
+            dependencyTypes: ["cjs"],
+          },
+          {
+            resolved: "bla.js",
+            rules: [],
+            valid: true,
+            dependencyTypes: ["cjs"],
+          },
+        ],
+      },
+      {
+        source: "some/folder/bla.js",
+        rules: [],
+        valid: true,
+        dependencies: [],
+      },
+      {
+        source: "bla.js",
+        rules: [],
+        valid: true,
+        dependencies: [],
+      },
+    ];
+    const lOutput = [
+      {
+        source: "thing.js",
+        rules: [],
+        valid: true,
+        consolidated: false,
+        dependencies: [
+          {
+            resolved: "some/folder",
+            rules: [],
+            valid: true,
+            dependencyTypes: ["cjs"],
+          },
+          {
+            resolved: "bla.js",
+            rules: [],
+            valid: true,
+            dependencyTypes: ["cjs"],
+          },
+        ],
+      },
+      {
+        source: "some/folder",
+        rules: [],
+        valid: true,
+        consolidated: true,
+        dependencies: [],
+      },
+      {
+        source: "bla.js",
+        rules: [],
+        valid: true,
+        consolidated: false,
+        dependencies: [],
+      },
+    ];
+
+    const lConsolidated = consolidateToPattern(lInput, "[^/]+/[^/]+");
+    expect(consolidateToPattern(lConsolidated, "[^/]+/[^/]+")).to.deep.equal(
+      lOutput
+    );
   });
 });

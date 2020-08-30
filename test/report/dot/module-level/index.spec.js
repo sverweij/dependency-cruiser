@@ -62,19 +62,19 @@ const focusMeModulesFixture = fs.readFileSync(
 
 describe("report/dot/module-level reporter", () => {
   it("renders a dot - modules in the root don't come in a cluster", () => {
-    expect(render(clusterless, bareTheme).output).to.deep.equal(
+    expect(render(clusterless, { theme: bareTheme }).output).to.deep.equal(
       clusterlessFixture
     );
   });
 
   it("renders a dot - unresolvable in a sub folder (either existing or not) get labeled as unresolvable", () => {
-    expect(render(unresolvableDeps, bareTheme).output).to.deep.equal(
+    expect(render(unresolvableDeps, { theme: bareTheme }).output).to.deep.equal(
       unresolvableFixture
     );
   });
 
   it("renders a dot - bare theme matchesDoNotFollow NOT rendered as folders", () => {
-    expect(render(doNotFollowDeps, bareTheme).output).to.deep.equal(
+    expect(render(doNotFollowDeps, { theme: bareTheme }).output).to.deep.equal(
       doNotFollowFixture
     );
   });
@@ -86,7 +86,7 @@ describe("report/dot/module-level reporter", () => {
   });
 
   it("renders a dot - bare theme renders modules with module level transgression with NO severity deduced colors", () => {
-    expect(render(orphanDeps, bareTheme).output).to.deep.equal(
+    expect(render(orphanDeps, { theme: bareTheme }).output).to.deep.equal(
       orphanFixtureBoring
     );
   });
@@ -96,19 +96,21 @@ describe("report/dot/module-level reporter", () => {
   });
 
   it("renders a dot - uri prefix get concatenated", () => {
-    expect(render(prefixUri, bareTheme).output).to.deep.equal(prefixUriFixture);
+    expect(render(prefixUri, { theme: bareTheme }).output).to.deep.equal(
+      prefixUriFixture
+    );
   });
 
   it("renders a dot - non-uri prefixes get path.posix.joined", () => {
-    expect(render(prefixNonUri, bareTheme).output).to.deep.equal(
+    expect(render(prefixNonUri, { theme: bareTheme }).output).to.deep.equal(
       prefixNonUriFixture
     );
   });
 
   it("richly colors modules when passed the default theme", () => {
-    expect(render(bunchOfModules, defaultTheme).output).to.deep.equal(
-      defaultColorFixture
-    );
+    expect(
+      render(bunchOfModules, { theme: defaultTheme }).output
+    ).to.deep.equal(defaultColorFixture);
   });
 
   it("richly colors modules when passed no theme", () => {
@@ -116,19 +118,19 @@ describe("report/dot/module-level reporter", () => {
   });
 
   it("colors boringly when passed a bare theme", () => {
-    expect(render(bunchOfModules, bareTheme).output).to.deep.equal(
+    expect(render(bunchOfModules, { theme: bareTheme }).output).to.deep.equal(
       bareColorFixture
     );
   });
 
   it("Also renders on module level when the reporter granularity isn't specified", () => {
-    expect(defaultRender(bunchOfModules, bareTheme).output).to.deep.equal(
-      bareColorFixture
-    );
+    expect(
+      defaultRender(bunchOfModules, { theme: bareTheme }).output
+    ).to.deep.equal(bareColorFixture);
   });
 
   it("applies filter when passed", () => {
-    expect(render(focusMeModules, bareTheme).output).to.deep.equal(
+    expect(render(focusMeModules, { theme: bareTheme }).output).to.deep.equal(
       focusMeModulesFixture
     );
   });

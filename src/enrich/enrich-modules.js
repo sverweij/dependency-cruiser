@@ -1,6 +1,6 @@
 const _get = require("lodash/get");
 const bus = require("../utl/bus");
-const addFocus = require("../../src/utl/add-focus");
+const addFocus = require("../../src/graph-utl/add-focus");
 const deriveCirculars = require("./derive/circular");
 const deriveOrphans = require("./derive/orphan");
 const deriveReachable = require("./derive/reachable");
