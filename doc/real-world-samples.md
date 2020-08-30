@@ -22,19 +22,19 @@ For colouring strings in the terminal. A typical _Sorhus style_ micro module tha
 When your app becomes big, dependency graphs on module level will become
 impractical. Dependency-cruiser can consolidate modules (+ their dependencies)
 and colour them. Consolidation works out of the box for many repositories,
-but can be [configured](./rules-reference.md#archi) to your [own liking](./rules-reference.md#reporteroptions).
+but can be [configured](./options-reference.md#summarising-collapsepattern-dot-and-archi-reporters)
+to your [own liking](./options-reference.md#reporteroptions).
 
 Here's the resulting get high level dependency graph for berry:
 
 [![berry](real-world-samples/berry-high-level-dependencies.svg)](https://sverweij.github.io/dependency-cruiser/assets/berry-high-level-dependencies.html)
-
 
 <details>
 <summary>howto</summary>
 
 To get the above graph we used [berry-dependency-cruiser-config.js](real-world-samples/berry-dependency-cruiser-config.js). To generate it yourself do this in the root of the berry repo:
 
-- `yarn` (with yarn v2 :-)) 
+- `yarn` (with yarn v2 :-))
 - `yarn add -D dependency-cruiser`
 - copy `berry-dependency-cruiser-config.js` to the root of the repo
 - add this script to package.json (so don't use the globally installed depcruise
@@ -44,7 +44,6 @@ To get the above graph we used [berry-dependency-cruiser-config.js](real-world-s
   ```
 - run `yarn depcruise:archi`
 </details>
-
 
 ### react
 
@@ -59,14 +58,14 @@ Also high level:
 
 To get the above graph we used [react-dependency-cruiser-config.js](real-world-samples/react-dependency-cruiser-config.js). To generate it yourself do this in the root of the react repo:
 
-- `yarn` 
+- `yarn`
 - Either use the globally installed dependency cruiser or `yarn add -D dependency-cruiser`
 - copy `react-dependency-cruiser-config.js` to the root of the repo
 - run this:
   ```
   depcruise --config react-dependency-cruiser-config.js -T archi packages/*/{*.js,src} | dot -T svg | tee react-high-level-dependencies.svg | depcruise-wrap-stream-in-html > react-high-level-dependencies.html
   ```
-</details>
+  </details>
 
 ### Safe-regex
 
@@ -135,7 +134,7 @@ transpiled JavaScript.)
 
 Dependency cruiser used on itself, focusing on internal dependencies only, on three
 levels of abstraction - high level, folder and modules. A small
-[custom theme](rules-reference.md#dot) in its [configuration](../.dependency-cruiser.json#L196)
+[custom theme](options-reference.md#theme-dot-ddot-and-archi-reporters) in its [configuration](../.dependency-cruiser.json#L243)
 colours the various main parts (extract, validate, report) and the dependencies to
 them. Click for slightly more interactive versions.
 

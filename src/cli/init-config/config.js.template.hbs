@@ -249,7 +249,10 @@ module.exports = {
     /* list of module systems to cruise */
     // moduleSystems: ['amd', 'cjs', 'es6', 'tsd'],
 
-    /* prefix for links in html and svg output (e.g. https://github.com/you/yourrepo/blob/develop/) */
+    /* prefix for links in html and svg output (e.g. 'https://github.com/you/yourrepo/blob/develop/'
+       to open it on your online repo or `vscode://file/${process.cwd()}/` to 
+       open it in visual studio code),
+     */
     // prefix: '',
 
     /* false (the default): ignore dependencies that only exist before typescript-to-javascript compilation
@@ -358,7 +361,7 @@ module.exports = {
         collapsePattern: 'node_modules/[^/]+',
 
         /* Options to tweak the appearance of your graph.See
-           https://github.com/sverweij/dependency-cruiser/blob/master/doc/rules-reference.md#dot
+           https://github.com/sverweij/dependency-cruiser/blob/master/doc/options-reference.md#reporteroptions
            for details and some examples. If you don't specify a theme
            don't worry - dependency-cruiser will fall back to the default one.
         */
@@ -413,7 +416,7 @@ module.exports = {
         collapsePattern: '^(node_modules|packages|src|lib|app|bin|test(s?)|spec(s?))/[^/]+',
 
         /* Options to tweak the appearance of your graph.See
-           https://github.com/sverweij/dependency-cruiser/blob/master/doc/rules-reference.md#dot
+           https://github.com/sverweij/dependency-cruiser/blob/master/doc/options-reference.md#reporteroptions
            for details and some examples. If you don't specify a theme
            for 'archi' dependency-cruiser will use the one specified in the
            dot section (see above), if any, and otherwise use the default one.

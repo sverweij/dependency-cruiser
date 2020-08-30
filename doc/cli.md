@@ -123,8 +123,10 @@ dependency-cruise -x "^node_modules" -T dot src | dot -T svg > dependencygraph.s
 ```
 
 You can customise the look of these graphs. See the
-[dot section in the rules reference](./rules-reference.md#dot) for details. You
-can also use [`depcruise-wrap-stream-in-html`](#depcruise-wrap-stream-in-html) to
+[theming](./options-reference.md#theme-dot-ddot-and-archi-reporters) and
+[summarising](./options-reference.md#summarising-collapsepattern-dot-and-archi-reporters)
+sections in the options reference for details. You can also use
+[`depcruise-wrap-stream-in-html`](#depcruise-wrap-stream-in-html) to
 make the graphs more interactive.
 
 #### ddot - summarise on folder level
@@ -133,7 +135,9 @@ make the graphs more interactive.
 > it or how its output looks might change without major version bumping.
 
 The `ddot` reporter is a variant on the `dot` output. It summarises modules on
-folder level. You can customise it just as you can the dot reporter output.
+folder level. You can customise it with [themes](./options-reference.md#theme-dot-ddot-and-archi-reporters)
+and [filters](./options-reference.md#filtering-dot-ddot-and-archi-reporters)
+just like you can the dot reporter output.
 
 #### archi/ cdot
 
@@ -148,8 +152,8 @@ By default it collapses to one folder below folders named _node_modules_, _packa
 _src_, _lib_ and _test_, but you can pass your own patterns as well in the
 `options.reporterOptions.archi` section of your dependency-cruiser configuration.
 
-See the [archi section in the rules reference](./rules-reference.md#archi) for
-details.
+See the [summarising section in the options reference](./options-reference.md#summarising-collapsepattern-dot-and-archi-reporters)
+for details.
 
 <details>
 <summary>Sample output</summary>
@@ -424,8 +428,8 @@ default) and 'info') with them that will appear in some reporters:
 ```
 
 For more information about writing rules see the [tutorial](rules-tutorial.md) and the
-[rules-reference](rules-reference.md). The rules-reference also describes all the
-[options](rules-reference.md#the-options).
+[rules-reference](rules-reference.md). For options check out the
+[options reference](options-reference.md).
 
 For an easy set up of both use [--init](#--init)
 
@@ -525,15 +529,15 @@ If you _do_ want to see certain modules in your reports, but are not interested
 in these modules' dependencies, you'd pass the regular expression for those
 modules to the `--do-not-follow` (short: `-X`) option. A typical pattern you'd
 use with this is "node_modules" (but be sure to check out the possibilities you
-have with the [`doNotFollow` option](#./rules-reference.md#donotfollow-dont-cruise-modules-adhering-to-this-pattern-any-further))
+have with the [`doNotFollow` option](#./options-reference.md#donotfollow-dont-cruise-modules-any-further))
 
 ```sh
 dependency-cruise -X "^node_modules" -T html -f deps-with-unfollowed-node_modules.html src
 ```
 
 Details and more ways to limit dependency-cruiser from following things: check out
-the [doNotFollow](./rules-reference.md#donotfollow-dont-cruise-modules-adhering-to-this-pattern-any-further)
-option in the rules reference.
+the [doNotFollow](./options-reference.md#donotfollow-dont-cruise-modules-any-further)
+option in the options reference.
 
 ### `--exclude`: exclude dependencies from being cruised
 
@@ -549,8 +553,8 @@ dependency-cruise -x "node_modules" -T html -f deps-without-node_modules.html sr
 dependency-cruise -x "^(coverage|test|node_modules)" -T html -f deps-without-stuffs.html src
 ```
 
-See the [exclude](./rules-reference.md#exclude-exclude-dependencies-from-being-cruised) option
-in the rules reference for details.
+See the [exclude](./options-reference.md#exclude-exclude-dependencies-from-being-cruised) option
+in the options reference for details.
 
 ### `--include-only`: only include modules satisfying a pattern
 
@@ -561,8 +565,8 @@ node_modules, core modules and modules otherwise outside it):
 dependency-cruise --include-only "^src" -T dot src | dot -T svg > internal-dependency-graph.svg
 ```
 
-See [includeOnly](./rules-reference.md#includeonly-only-include-modules-satisfying-a-pattern) in the rules reference
-for more details.
+See [includeOnly](./options-reference.md#includeonly-only-include-modules-satisfying-a-pattern)
+in the options reference for more details.
 
 ### `--focus`: focus on some modules and their direct neighbours
 
@@ -576,20 +580,30 @@ Takes a regular expression in the same fashion `--include-only`, `--exclude` and
 dependency-cruise --include-only "^src" --focus "^src/main" -T dot src | dot -T svg > focus-on-main-dir-graph.svg
 ```
 
-See [focus](./rules-reference.md#show-modules-matching-a-pattern---with-their-direct-neighbours)
-in the rules reference for more details.
+See [focus](./options-reference.md#show-modules-matching-a-pattern---with-their-direct-neighbours)
+in the options reference for more details.
 
 ### `--max-depth`
 
 Only cruise the specified depth, counting from the specified root-module(s). This
-command is mostly useful in combination with visualisation output like _dot_ to
+command was mostly useful in combination with visualisation output like _dot_ to
 keep the generated output to a manageable size.
+
+These days better options exist that servethe same goal and give better looking
+and more accurate results:
+
+- use filters like --include-only and --focus to only show a relevant part of your graph
+- use a [collapsePattern](./options-reference#summarising-collapsepattern-dot-and-archi-reporters)
+  in conjunction with your dot reporter to hide details you don't want to see
+  right now
+- use the `archi` reporter that produces a high level dependency-graph based on
+  heuristics.
 
 ```sh
 dependency-cruise --max-depth 2 -T dot src/main/index.ts | dot -T svg > depth-limited-dependency-graph.svg
 ```
 
-See [maxDepth](./rules-reference.md#maxdepth)
+See [maxDepth](./options-reference.md#maxdepth)
 
 > This will only be effective when you pass one file as an argument.
 
@@ -602,15 +616,15 @@ e.g. an on line repository.
 dependency-cruise --prefix "https://github.com/you/yourrepo/tree/master/" -T dot src | dot -T svg > dependency-graph-with-links-to-gh.svg
 ```
 
-See [prefix](./rules-reference.md#prefix-prefix-links-in-reports) in the rules reference
-for details.
+See [prefix](./options-reference.md#prefix-prefix-links-in-reports) in the options
+reference for details.
 
 ### `--module-systems`
 
 Here you can pass a list of module systems dependency-cruiser should use
 to detect dependencies. It defaults to `amd, cjs, es6`.
 
-See [moduleSystems](./rules-reference.md#modulesystems) in the rules reference
+See [moduleSystems](./options-reference.md#modulesystems) in the options reference.
 
 ### `--ts-pre-compilation-deps` (typescript only)
 
@@ -618,8 +632,8 @@ By default dependency-cruiser does not take dependencies between typescript
 modules that don't exist after compilation to JavaScript. Pass this command
 line switch to do take them into account.
 
-For details see [tsPreCompilationDeps](./rules-reference.md#tsprecompilationdeps) in the
-rules reference.
+For details see [tsPreCompilationDeps](./options-reference.md#tsprecompilationdeps) in the
+options reference.
 
 ### `--ts-config`: use a typescript configuration file ('project')
 
@@ -628,8 +642,8 @@ in your tsconfig.json into account- can pass it with this option.
 
 Although it's possible to pass it as a command line option, you typically
 want to do this in a configuration file - see
-[tsConfig](./rules-reference.md#tsconfig-use-a-typescript-configuration-file-project)
-section in the rules reference for details.
+[tsConfig](./options-reference.md#tsconfig-use-a-typescript-configuration-file-project)
+section in the options reference for details.
 
 > If you happen to use a [`jsconfig.json`](https://code.visualstudio.com/docs/languages/jsconfig)
 > you can pass that as well - the syntax for tsconfig.json and jsconfig.json
@@ -642,15 +656,15 @@ files on disk, a.o. with aliases. If you want dependency-cruiser to take that
 into account (you probably do), you can pass the webpack config here.
 
 However, just like with tsconfigs, you probably want to put this in a configuration
-file - see the [webpackConfig](./rules-reference.md#webpackconfig-use-the-resolution-options-of-a-webpack-configuration)
-section in the rules reference.
+file - see the [webpackConfig](./options-reference.md#webpackconfig-use-the-resolution-options-of-a-webpack-configuration)
+section in the options reference.
 
 ### `--preserve-symlinks`
 
 Whether to leave symlinks as is or resolve them to their realpath. This option defaults
 to `false` (which is also nodejs' default behavior since release 6).
 
-You'll typically want to set this in the configuration file with the [preserveSymlinks](./rules-reference.md#preservesymlinks)
+You'll typically want to set this in the configuration file with the [preserveSymlinks](./options-reference.md#preservesymlinks)
 option.
 
 ## depcruise-fmt

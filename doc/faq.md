@@ -83,7 +83,7 @@ dependency-cruiser --config .dependency-cruiser.js --output-type archi -- src | 
 
 By default the _archi_ reporter aggregates to the level just below `packages` (for
 mono repos), `src`, `lib` and a few other often occurring paths. You can tweak this
-to your own app's structure with a [collapsePattern](rules-reference.md#archi)).
+to your own app's structure with a [collapsePattern](options-reference.md#summarising-collapsepattern-dot-and-archi-reporters)).
 
 An example of how this can look: [dependency-cruiser's high level dependency graph](https://sverweij.github.io/dependency-cruiser/dependency-cruiser-archi-graph.html)
 Compare that to [dependency-cruiser's internal module graph](https://sverweij.github.io/dependency-cruiser/dependency-cruiser-dependency-graph.html)
@@ -121,7 +121,7 @@ two options:
 1. Create a configuration separate from your validation configuration,
    dedicated to the generation of graphs.
 2. In your overall configuration add filters at reporter level. Read more
-   about that in [report level filtering](rules-reference.md#filtering),
+   about that in [report level filtering](options-reference.md#filtering-dot-ddot-and-archi-reporters),
    which also explains how you can use depcruise-fmt to get a free performance
    level-up. Here's an example that only shows modules in the `src` tree:
 
