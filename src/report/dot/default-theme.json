@@ -135,7 +135,7 @@
     },
     {
       "criteria": { "dependencyTypes[0]": "npm" },
-      "attributes": { "style": "dashed", "penwidth": "1.0" }
+      "attributes": { "penwidth": "1.0" }
     }
   ]
 }

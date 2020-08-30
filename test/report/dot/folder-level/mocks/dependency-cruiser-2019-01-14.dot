@@ -7,8 +7,8 @@ strict digraph "dependency-cruiser output"{
     "bin" [label="bin" URL="https://github.com/sverweij/dependency-cruiser/blob/develop/bin" shape="box3d"]
     "bin" -> "."
     "bin" -> "src/cli"
-    "bin" -> "node_modules/commander" [style="dashed" penwidth="1.0"]
-    "bin" -> "node_modules/semver" [style="dashed" penwidth="1.0"]
+    "bin" -> "node_modules/commander" [penwidth="1.0"]
+    "bin" -> "node_modules/semver" [penwidth="1.0"]
     subgraph "cluster_node_modules" {label="node_modules" "node_modules" [width="0.05" shape="point" style="invis"] subgraph "cluster_node_modules/acorn-loose" {label="acorn-loose" "node_modules/acorn-loose" [width="0.05" shape="point" style="invis"] "node_modules/acorn-loose/dist" [label="dist" URL="https://github.com/sverweij/dependency-cruiser/blob/develop/node_modules/acorn-loose/dist" shape="box3d" fillcolor="#c40b0a1a" fontcolor="#c40b0a"] } }
     subgraph "cluster_node_modules" {label="node_modules" "node_modules" [width="0.05" shape="point" style="invis"] subgraph "cluster_node_modules/acorn-walk" {label="acorn-walk" "node_modules/acorn-walk" [width="0.05" shape="point" style="invis"] "node_modules/acorn-walk/dist" [label="dist" URL="https://github.com/sverweij/dependency-cruiser/blob/develop/node_modules/acorn-walk/dist" shape="box3d" fillcolor="#c40b0a1a" fontcolor="#c40b0a"] } }
     subgraph "cluster_node_modules" {label="node_modules" "node_modules" [width="0.05" shape="point" style="invis"] subgraph "cluster_node_modules/acorn" {label="acorn" "node_modules/acorn" [width="0.05" shape="point" style="invis"] "node_modules/acorn/dist" [label="dist" URL="https://github.com/sverweij/dependency-cruiser/blob/develop/node_modules/acorn/dist" shape="box3d" fillcolor="#c40b0a1a" fontcolor="#c40b0a"] } }
@@ -31,68 +31,68 @@ strict digraph "dependency-cruiser output"{
     "src/cli" -> "src/main"
     "src/cli" -> "src/cli/initConfig"
     "src/cli" -> "src/cli/utl"
-    "src/cli" -> "node_modules/glob" [style="dashed" penwidth="1.0"]
-    "src/cli" -> "node_modules/lodash" [style="dashed" penwidth="1.0"]
-    "src/cli" -> "node_modules/chalk" [style="dashed" penwidth="1.0"]
-    "src/cli" -> "node_modules/figures" [style="dashed" penwidth="1.0"]
+    "src/cli" -> "node_modules/glob" [penwidth="1.0"]
+    "src/cli" -> "node_modules/lodash" [penwidth="1.0"]
+    "src/cli" -> "node_modules/chalk" [penwidth="1.0"]
+    "src/cli" -> "node_modules/figures" [penwidth="1.0"]
     "src/cli" -> "src/cli/compileConfig"
     "src/cli" -> "." [style="dashed" penwidth="1.0"]
-    "src/cli" -> "node_modules/semver-try-require/src" [style="dashed" penwidth="1.0"]
+    "src/cli" -> "node_modules/semver-try-require/src" [penwidth="1.0"]
     subgraph "cluster_src" {label="src" "src" [width="0.05" shape="point" style="invis"] subgraph "cluster_src/cli" {label="cli" "src/cli" [width="0.05" shape="point" style="invis"] "src/cli/compileConfig" [label="compileConfig" URL="https://github.com/sverweij/dependency-cruiser/blob/develop/src/cli/compileConfig" shape="box3d"] } }
     "src/cli/compileConfig" -> "src/extract/resolve" [xlabel="cli-to-main-only-warn" tooltip="cli-to-main-only-warn" fontcolor="orange" color="orange"]
     "src/cli/compileConfig" -> "." [style="dashed" penwidth="1.0"]
-    "src/cli/compileConfig" -> "node_modules/lodash" [style="dashed" penwidth="1.0"]
-    "src/cli/compileConfig" -> "node_modules/strip-json-comments" [style="dashed" penwidth="1.0"]
+    "src/cli/compileConfig" -> "node_modules/lodash" [penwidth="1.0"]
+    "src/cli/compileConfig" -> "node_modules/strip-json-comments" [penwidth="1.0"]
     subgraph "cluster_src" {label="src" "src" [width="0.05" shape="point" style="invis"] subgraph "cluster_src/cli" {label="cli" "src/cli" [width="0.05" shape="point" style="invis"] "src/cli/initConfig" [label="initConfig" URL="https://github.com/sverweij/dependency-cruiser/blob/develop/src/cli/initConfig" shape="box3d"] } }
     "src/cli/initConfig" -> "."
-    "src/cli/initConfig" -> "node_modules/handlebars" [style="dashed" penwidth="1.0"]
-    "src/cli/initConfig" -> "node_modules/inquirer/lib" [style="dashed" penwidth="1.0"]
+    "src/cli/initConfig" -> "node_modules/handlebars" [penwidth="1.0"]
+    "src/cli/initConfig" -> "node_modules/inquirer/lib" [penwidth="1.0"]
     subgraph "cluster_src" {label="src" "src" [width="0.05" shape="point" style="invis"] subgraph "cluster_src/cli" {label="cli" "src/cli" [width="0.05" shape="point" style="invis"] "src/cli/utl" [label="utl" URL="https://github.com/sverweij/dependency-cruiser/blob/develop/src/cli/utl" shape="box3d"] } }
     "src/cli/utl" -> "." [style="dashed" penwidth="1.0"]
     subgraph "cluster_src" {label="src" "src" [width="0.05" shape="point" style="invis"] "src/extract" [label="extract" URL="https://github.com/sverweij/dependency-cruiser/blob/develop/src/extract" shape="box3d"] }
     "src/extract" -> "src/extract/derive/circular"
     "src/extract" -> "src/extract/derive/orphan"
     "src/extract" -> "src/extract/utl"
-    "src/extract" -> "node_modules/lodash" [xlabel="prefer-lodash-individuals" tooltip="prefer-lodash-individuals" style="dashed" penwidth="1.0" fontcolor="blue" color="blue"]
+    "src/extract" -> "node_modules/lodash" [xlabel="prefer-lodash-individuals" tooltip="prefer-lodash-individuals" penwidth="1.0" fontcolor="blue" color="blue"]
     "src/extract" -> "src/validate"
     "src/extract" -> "src/extract/ast-extractors"
     "src/extract" -> "src/extract/parse"
     "src/extract" -> "src/extract/resolve"
     "src/extract" -> "." [style="dashed" penwidth="1.0"]
     "src/extract" -> "src/extract/transpile"
-    "src/extract" -> "node_modules/glob" [style="dashed" penwidth="1.0"]
+    "src/extract" -> "node_modules/glob" [penwidth="1.0"]
     subgraph "cluster_src" {label="src" "src" [width="0.05" shape="point" style="invis"] subgraph "cluster_src/extract" {label="extract" "src/extract" [width="0.05" shape="point" style="invis"] "src/extract/ast-extractors" [label="ast-extractors" URL="https://github.com/sverweij/dependency-cruiser/blob/develop/src/extract/ast-extractors" shape="box3d"] } }
-    "src/extract/ast-extractors" -> "node_modules/acorn-walk/dist" [style="dashed" penwidth="1.0"]
+    "src/extract/ast-extractors" -> "node_modules/acorn-walk/dist" [penwidth="1.0"]
     "src/extract/ast-extractors" -> "."
-    "src/extract/ast-extractors" -> "node_modules/semver-try-require/src" [style="dashed" penwidth="1.0"]
+    "src/extract/ast-extractors" -> "node_modules/semver-try-require/src" [penwidth="1.0"]
     subgraph "cluster_src" {label="src" "src" [width="0.05" shape="point" style="invis"] subgraph "cluster_src/extract" {label="extract" "src/extract" [width="0.05" shape="point" style="invis"] subgraph "cluster_src/extract/derive" {label="derive" "src/extract/derive" [width="0.05" shape="point" style="invis"] "src/extract/derive/circular" [label="circular" URL="https://github.com/sverweij/dependency-cruiser/blob/develop/src/extract/derive/circular" shape="box3d"] } } }
-    "src/extract/derive/circular" -> "node_modules/lodash" [style="dashed" penwidth="1.0"]
+    "src/extract/derive/circular" -> "node_modules/lodash" [penwidth="1.0"]
     subgraph "cluster_src" {label="src" "src" [width="0.05" shape="point" style="invis"] subgraph "cluster_src/extract" {label="extract" "src/extract" [width="0.05" shape="point" style="invis"] subgraph "cluster_src/extract/derive" {label="derive" "src/extract/derive" [width="0.05" shape="point" style="invis"] "src/extract/derive/orphan" [label="orphan" URL="https://github.com/sverweij/dependency-cruiser/blob/develop/src/extract/derive/orphan" shape="box3d"] } } }
-    "src/extract/derive/orphan" -> "node_modules/lodash" [style="dashed" penwidth="1.0"]
+    "src/extract/derive/orphan" -> "node_modules/lodash" [penwidth="1.0"]
     subgraph "cluster_src" {label="src" "src" [width="0.05" shape="point" style="invis"] subgraph "cluster_src/extract" {label="extract" "src/extract" [width="0.05" shape="point" style="invis"] "src/extract/parse" [label="parse" URL="https://github.com/sverweij/dependency-cruiser/blob/develop/src/extract/parse" shape="box3d"] } }
     "src/extract/parse" -> "src/extract/transpile"
     "src/extract/parse" -> "src/extract/utl"
-    "src/extract/parse" -> "node_modules/acorn/dist" [style="dashed" penwidth="1.0"]
-    "src/extract/parse" -> "node_modules/acorn-loose/dist" [style="dashed" penwidth="1.0"]
+    "src/extract/parse" -> "node_modules/acorn/dist" [penwidth="1.0"]
+    "src/extract/parse" -> "node_modules/acorn-loose/dist" [penwidth="1.0"]
     "src/extract/parse" -> "." [style="dashed" penwidth="1.0"]
-    "src/extract/parse" -> "node_modules/lodash" [style="dashed" penwidth="1.0"]
-    "src/extract/parse" -> "node_modules/semver-try-require/src" [style="dashed" penwidth="1.0"]
+    "src/extract/parse" -> "node_modules/lodash" [penwidth="1.0"]
+    "src/extract/parse" -> "node_modules/semver-try-require/src" [penwidth="1.0"]
     subgraph "cluster_src" {label="src" "src" [width="0.05" shape="point" style="invis"] subgraph "cluster_src/extract" {label="extract" "src/extract" [width="0.05" shape="point" style="invis"] "src/extract/resolve" [label="resolve" URL="https://github.com/sverweij/dependency-cruiser/blob/develop/src/extract/resolve" shape="box3d"] } }
     "src/extract/resolve" -> "src/extract/utl"
     "src/extract/resolve" -> "." [style="dashed" penwidth="1.0"]
     "src/extract/resolve" -> "src/extract/resolve/readPackageDeps"
-    "src/extract/resolve" -> "node_modules/lodash" [style="dashed" penwidth="1.0"]
-    "src/extract/resolve" -> "node_modules/resolve" [style="dashed" penwidth="1.0"]
-    "src/extract/resolve" -> "node_modules/enhanced-resolve/lib" [style="dashed" penwidth="1.0"]
+    "src/extract/resolve" -> "node_modules/lodash" [penwidth="1.0"]
+    "src/extract/resolve" -> "node_modules/resolve" [penwidth="1.0"]
+    "src/extract/resolve" -> "node_modules/enhanced-resolve/lib" [penwidth="1.0"]
     "src/extract/resolve" -> "src/extract/transpile"
-    "src/extract/resolve" -> "node_modules/awesome-typescript-loader/dist" [style="dashed" penwidth="1.0"]
+    "src/extract/resolve" -> "node_modules/awesome-typescript-loader/dist" [penwidth="1.0"]
     subgraph "cluster_src" {label="src" "src" [width="0.05" shape="point" style="invis"] subgraph "cluster_src/extract" {label="extract" "src/extract" [width="0.05" shape="point" style="invis"] subgraph "cluster_src/extract/resolve" {label="resolve" "src/extract/resolve" [width="0.05" shape="point" style="invis"] "src/extract/resolve/readPackageDeps" [label="readPackageDeps" URL="https://github.com/sverweij/dependency-cruiser/blob/develop/src/extract/resolve/readPackageDeps" shape="box3d"] } } }
     "src/extract/resolve/readPackageDeps" -> "." [style="dashed" penwidth="1.0"]
-    "src/extract/resolve/readPackageDeps" -> "node_modules/lodash" [style="dashed" penwidth="1.0"]
+    "src/extract/resolve/readPackageDeps" -> "node_modules/lodash" [penwidth="1.0"]
     subgraph "cluster_src" {label="src" "src" [width="0.05" shape="point" style="invis"] subgraph "cluster_src/extract" {label="extract" "src/extract" [width="0.05" shape="point" style="invis"] "src/extract/transpile" [label="transpile" URL="https://github.com/sverweij/dependency-cruiser/blob/develop/src/extract/transpile" shape="box3d"] } }
     "src/extract/transpile" -> "."
-    "src/extract/transpile" -> "node_modules/semver-try-require/src" [style="dashed" penwidth="1.0"]
-    "src/extract/transpile" -> "node_modules/lodash" [style="dashed" penwidth="1.0"]
+    "src/extract/transpile" -> "node_modules/semver-try-require/src" [penwidth="1.0"]
+    "src/extract/transpile" -> "node_modules/lodash" [penwidth="1.0"]
     subgraph "cluster_src" {label="src" "src" [width="0.05" shape="point" style="invis"] subgraph "cluster_src/extract" {label="extract" "src/extract" [width="0.05" shape="point" style="invis"] "src/extract/utl" [label="utl" URL="https://github.com/sverweij/dependency-cruiser/blob/develop/src/extract/utl" shape="box3d"] } }
     "src/extract/utl" -> "." [style="dashed" penwidth="1.0"]
     subgraph "cluster_src" {label="src" "src" [width="0.05" shape="point" style="invis"] "src/main" [label="main" URL="https://github.com/sverweij/dependency-cruiser/blob/develop/src/main" shape="box3d"] }
@@ -106,28 +106,28 @@ strict digraph "dependency-cruiser output"{
     "src/main" -> "src/main/options"
     "src/main" -> "src/main/ruleSet"
     subgraph "cluster_src" {label="src" "src" [width="0.05" shape="point" style="invis"] subgraph "cluster_src/main" {label="main" "src/main" [width="0.05" shape="point" style="invis"] "src/main/options" [label="options" URL="https://github.com/sverweij/dependency-cruiser/blob/develop/src/main/options" shape="box3d"] } }
-    "src/main/options" -> "node_modules/safe-regex" [style="dashed" penwidth="1.0"]
+    "src/main/options" -> "node_modules/safe-regex" [penwidth="1.0"]
     subgraph "cluster_src" {label="src" "src" [width="0.05" shape="point" style="invis"] subgraph "cluster_src/main" {label="main" "src/main" [width="0.05" shape="point" style="invis"] "src/main/ruleSet" [label="ruleSet" URL="https://github.com/sverweij/dependency-cruiser/blob/develop/src/main/ruleSet" shape="box3d"] } }
     "src/main/ruleSet" -> "src/main/options"
-    "src/main/ruleSet" -> "node_modules/ajv/lib" [style="dashed" penwidth="1.0"]
-    "src/main/ruleSet" -> "node_modules/safe-regex" [style="dashed" penwidth="1.0"]
+    "src/main/ruleSet" -> "node_modules/ajv/lib" [penwidth="1.0"]
+    "src/main/ruleSet" -> "node_modules/safe-regex" [penwidth="1.0"]
     subgraph "cluster_src" {label="src" "src" [width="0.05" shape="point" style="invis"] "src/report" [label="report" URL="https://github.com/sverweij/dependency-cruiser/blob/develop/src/report" shape="box3d"] }
-    "src/report" -> "node_modules/chalk" [style="dashed" penwidth="1.0"]
-    "src/report" -> "node_modules/figures" [style="dashed" penwidth="1.0"]
+    "src/report" -> "node_modules/chalk" [penwidth="1.0"]
+    "src/report" -> "node_modules/figures" [penwidth="1.0"]
     subgraph "cluster_src" {label="src" "src" [width="0.05" shape="point" style="invis"] subgraph "cluster_src/report" {label="report" "src/report" [width="0.05" shape="point" style="invis"] "src/report/csv" [label="csv" URL="https://github.com/sverweij/dependency-cruiser/blob/develop/src/report/csv" shape="box3d"] } }
     "src/report/csv" -> "src/report"
-    "src/report/csv" -> "node_modules/handlebars" [style="dashed" penwidth="1.0"]
+    "src/report/csv" -> "node_modules/handlebars" [penwidth="1.0"]
     subgraph "cluster_src" {label="src" "src" [width="0.05" shape="point" style="invis"] subgraph "cluster_src/report" {label="report" "src/report" [width="0.05" shape="point" style="invis"] "src/report/ddot" [label="ddot" URL="https://github.com/sverweij/dependency-cruiser/blob/develop/src/report/ddot" shape="box3d"] } }
     "src/report/ddot" -> "src/report/dot"
-    "src/report/ddot" -> "node_modules/handlebars" [style="dashed" penwidth="1.0"]
-    "src/report/ddot" -> "node_modules/lodash" [style="dashed" penwidth="1.0"]
+    "src/report/ddot" -> "node_modules/handlebars" [penwidth="1.0"]
+    "src/report/ddot" -> "node_modules/lodash" [penwidth="1.0"]
     "src/report/ddot" -> "." [style="dashed" penwidth="1.0"]
     subgraph "cluster_src" {label="src" "src" [width="0.05" shape="point" style="invis"] subgraph "cluster_src/report" {label="report" "src/report" [width="0.05" shape="point" style="invis"] "src/report/dot" [label="dot" URL="https://github.com/sverweij/dependency-cruiser/blob/develop/src/report/dot" shape="box3d"] } }
-    "src/report/dot" -> "node_modules/lodash" [style="dashed" penwidth="1.0"]
-    "src/report/dot" -> "node_modules/handlebars" [style="dashed" penwidth="1.0"]
+    "src/report/dot" -> "node_modules/lodash" [penwidth="1.0"]
+    "src/report/dot" -> "node_modules/handlebars" [penwidth="1.0"]
     "src/report/dot" -> "." [style="dashed" penwidth="1.0"]
     subgraph "cluster_src" {label="src" "src" [width="0.05" shape="point" style="invis"] subgraph "cluster_src/report" {label="report" "src/report" [width="0.05" shape="point" style="invis"] "src/report/html" [label="html" URL="https://github.com/sverweij/dependency-cruiser/blob/develop/src/report/html" shape="box3d"] } }
     "src/report/html" -> "src/report"
-    "src/report/html" -> "node_modules/handlebars" [style="dashed" penwidth="1.0"]
+    "src/report/html" -> "node_modules/handlebars" [penwidth="1.0"]
     subgraph "cluster_src" {label="src" "src" [width="0.05" shape="point" style="invis"] "src/validate" [label="validate" URL="https://github.com/sverweij/dependency-cruiser/blob/develop/src/validate" shape="box3d"] }
 }
