@@ -1,6 +1,7 @@
 const _uniqBy = require("lodash/uniqBy");
 const _spread = require("lodash/spread");
 const _concat = require("lodash/concat");
+const _has = require("lodash/has");
 const pathToPosix = require("../utl/path-to-posix");
 const getDependencies = require("./get-dependencies");
 const gatherInitialSources = require("./gather-initial-sources");
@@ -126,8 +127,7 @@ function filterExcludedDynamicDependencies(pModule, pExclude) {
     ...pModule,
     dependencies: pModule.dependencies.filter(
       (pDependency) =>
-        !Object.prototype.hasOwnProperty.call(pExclude, "dynamic") ||
-        pExclude.dynamic !== pDependency.dynamic
+        !_has(pExclude, "dynamic") || pExclude.dynamic !== pDependency.dynamic
     ),
   };
 }

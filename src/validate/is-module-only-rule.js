@@ -1,13 +1,15 @@
+const _has = require("lodash/has");
+
 /**
  * @param {any} pRule a dependency-cruiser rule
  * @returns {boolean} whether or not the rule is 'module only'
  */
 function isModuleOnlyRule(pRule) {
   return (
-    Object.prototype.hasOwnProperty.call(pRule.from || {}, "orphan") ||
+    _has(pRule.from || {}, "orphan") ||
     // note: the to might become optional for required rules
-    Object.prototype.hasOwnProperty.call(pRule.to, "reachable") ||
-    Object.prototype.hasOwnProperty.call(pRule, "module")
+    _has(pRule.to, "reachable") ||
+    _has(pRule, "module")
   );
 }
 

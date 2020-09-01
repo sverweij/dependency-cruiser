@@ -1,3 +1,4 @@
+const _has = require("lodash/has");
 const $dependencyCruiserManifest = require("../../../package.json");
 const {
   getSourceFolderCandidates,
@@ -32,9 +33,7 @@ module.exports = function normalizeInitOptions(pInitOptions) {
   if (lReturnValue.useYarnPnP) {
     lReturnValue.externalModuleResolutionStrategy = "yarn-pnp";
   }
-  if (
-    !Object.prototype.hasOwnProperty.call(lReturnValue, "hasTestsOutsideSource")
-  ) {
+  if (!_has(lReturnValue, "hasTestsOutsideSource")) {
     lReturnValue.hasTestsOutsideSource =
       !pInitOptions.isMonoRepo &&
       !hasTestsWithinSource(

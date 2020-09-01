@@ -1,3 +1,4 @@
+const _has = require("lodash/has");
 const normalizeREProperties = require("../utl/normalize-re-properties");
 
 const VALID_SEVERITIES = /^(error|warn|info|ignore)$/;
@@ -37,7 +38,7 @@ function normalizeRule(pRule) {
  * @return {object}          [description]
  */
 module.exports = (pRuleSet) => {
-  if (Object.prototype.hasOwnProperty.call(pRuleSet, "allowed")) {
+  if (_has(pRuleSet, "allowed")) {
     pRuleSet.allowedSeverity = normalizeSeverity(pRuleSet.allowedSeverity);
     if (pRuleSet.allowedSeverity === "ignore") {
       Reflect.deleteProperty(pRuleSet, "allowed");
@@ -52,13 +53,13 @@ module.exports = (pRuleSet) => {
     }
   }
 
-  if (Object.prototype.hasOwnProperty.call(pRuleSet, "forbidden")) {
+  if (_has(pRuleSet, "forbidden")) {
     pRuleSet.forbidden = pRuleSet.forbidden
       .map(normalizeRule)
       .filter((pRule) => pRule.severity !== "ignore");
   }
 
-  if (Object.prototype.hasOwnProperty.call(pRuleSet, "required")) {
+  if (_has(pRuleSet, "required")) {
     pRuleSet.required = pRuleSet.required
       .map(normalizeRule)
       .filter((pRule) => pRule.severity !== "ignore");

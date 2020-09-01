@@ -2,16 +2,15 @@
 
 const _clone = require("lodash/clone");
 const _get = require("lodash/get");
+const _has = require("lodash/has");
 const getPath = require("./get-path");
 
 function getReachableRules(pRuleSet) {
   return _get(pRuleSet, "forbidden", [])
-    .filter((pRule) =>
-      Object.prototype.hasOwnProperty.call(pRule.to, "reachable")
-    )
+    .filter((pRule) => _has(pRule.to, "reachable"))
     .concat(
       _get(pRuleSet, "allowed", []).filter((pRule) =>
-        Object.prototype.hasOwnProperty.call(pRule.to, "reachable")
+        _has(pRule.to, "reachable")
       )
     );
 }

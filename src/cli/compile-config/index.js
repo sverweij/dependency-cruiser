@@ -1,4 +1,5 @@
 const path = require("path");
+const _has = require("lodash/has");
 const resolve = require("../../extract/resolve/resolve");
 const normalizeResolveOptions = require("../../main/resolve-options/normalize");
 const readConfig = require("./read-config");
@@ -68,7 +69,7 @@ function compileConfig(
 
   let lReturnValue = readConfig(lResolvedFileName, pBaseDirectory);
 
-  if (Object.prototype.hasOwnProperty.call(lReturnValue, "extends")) {
+  if (_has(lReturnValue, "extends")) {
     lReturnValue = processExtends(
       lReturnValue,
       pAlreadyVisited,
