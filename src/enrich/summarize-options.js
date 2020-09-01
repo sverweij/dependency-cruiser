@@ -1,4 +1,5 @@
 const _get = require("lodash/get");
+const _has = require("lodash/has");
 const pathToPosix = require("../utl/path-to-posix");
 
 const SHAREABLE_OPTIONS = [
@@ -27,9 +28,7 @@ const SHAREABLE_OPTIONS = [
 
 function makeOptionsPresentable(pOptions) {
   return SHAREABLE_OPTIONS.filter(
-    (pOption) =>
-      Object.prototype.hasOwnProperty.call(pOptions, pOption) &&
-      pOptions[pOption] !== 0
+    (pOption) => _has(pOptions, pOption) && pOptions[pOption] !== 0
   )
     .filter(
       (pOption) =>

@@ -1,4 +1,5 @@
 const path = require("path");
+const _has = require("lodash/has");
 const isCore = require("./is-core");
 const isRelativeModuleName = require("./is-relative-module-name");
 const localNpmHelpers = require("./local-npm-helpers");
@@ -17,7 +18,7 @@ function dependencyKeyHasModuleName(
   return (pKey) =>
     pKey.includes("ependencies") &&
     pExternalModuleResolvePaths.some((pResolvePath) =>
-      Object.prototype.hasOwnProperty.call(
+      _has(
         pPackageDependencies[pKey],
         path.posix.join(pResolvePath, pModuleName)
       )

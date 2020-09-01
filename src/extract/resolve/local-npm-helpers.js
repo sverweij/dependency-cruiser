@@ -1,6 +1,7 @@
 const fs = require("fs");
 const path = require("path");
 const _memoize = require("lodash/memoize");
+const _has = require("lodash/has");
 const resolve = require("./resolve");
 const isRelativeModuleName = require("./is-relative-module-name");
 
@@ -121,9 +122,7 @@ function dependencyIsDeprecated(pModule, pBaseDirectory, pResolveOptions) {
   let lPackageJson = getPackageJson(pModule, pBaseDirectory, pResolveOptions);
 
   if (Boolean(lPackageJson)) {
-    lReturnValue =
-      Object.prototype.hasOwnProperty.call(lPackageJson, "deprecated") &&
-      lPackageJson.deprecated;
+    lReturnValue = _has(lPackageJson, "deprecated") && lPackageJson.deprecated;
   }
   return lReturnValue;
 }
@@ -143,7 +142,7 @@ function getLicense(pModule, pBaseDirectory, pResolveOptions) {
 
   if (
     Boolean(lPackageJson) &&
-    Object.prototype.hasOwnProperty.call(lPackageJson, "license") &&
+    _has(lPackageJson, "license") &&
     typeof lPackageJson.license === "string"
   ) {
     lReturnValue = lPackageJson.license;

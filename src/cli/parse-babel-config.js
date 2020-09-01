@@ -5,6 +5,7 @@ const fs = require("fs");
 const path = require("path");
 const json5 = require("json5");
 const _get = require("lodash/get");
+const _has = require("lodash/has");
 const tryRequire = require("semver-try-require");
 const $package = require("../../package.json");
 const makeAbsolute = require("./utl/make-absolute");
@@ -62,9 +63,7 @@ function getConfig(pBabelConfigFileName) {
   };
   const lExtension = path.extname(pBabelConfigFileName);
 
-  if (
-    !Object.prototype.hasOwnProperty.call(EXTENSION_TO_PARSE_FN, lExtension)
-  ) {
+  if (!_has(EXTENSION_TO_PARSE_FN, lExtension)) {
     throw new Error(
       `The babel config '${pBabelConfigFileName}' is in a format ('${lExtension}')\n` +
         "         dependency-cruiser doesn't support yet.\n"

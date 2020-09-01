@@ -1,4 +1,5 @@
 const _get = require("lodash/get");
+const _has = require("lodash/has");
 const DEFAULT_THEME = require("./default-theme.json");
 
 function matchesRE(pValue, pRE) {
@@ -10,8 +11,7 @@ function matchesRE(pValue, pRE) {
 function moduleMatchesCriteria(pSchemeEntry, pModule) {
   return Object.keys(pSchemeEntry.criteria).every(
     (pKey) =>
-      (_get(pModule, pKey) ||
-        Object.prototype.hasOwnProperty.call(pModule, pKey)) &&
+      (_get(pModule, pKey) || _has(pModule, pKey)) &&
       (_get(pModule, pKey) === _get(pSchemeEntry.criteria, pKey) ||
         matchesRE(_get(pModule, pKey), _get(pSchemeEntry.criteria, pKey)))
   );

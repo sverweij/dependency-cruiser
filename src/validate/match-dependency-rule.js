@@ -1,3 +1,4 @@
+const _has = require("lodash/has");
 const isModuleOnlyRule = require("./is-module-only-rule");
 const matchers = require("./matchers");
 const { extractGroups } = require("./utl");
@@ -6,7 +7,7 @@ function propertyEquals(pTo, pRule, pProperty) {
   // ignore security/detect-object-injection because:
   // - we only use it from within the module with two fixed values
   // - the propertyEquals function is not exposed externaly
-  return Object.prototype.hasOwnProperty.call(pRule.to, pProperty)
+  return _has(pRule.to, pProperty)
     ? // eslint-disable-next-line security/detect-object-injection
       pTo[pProperty] === pRule.to[pProperty]
     : true;
@@ -23,10 +24,7 @@ function match(pFrom, pTo) {
       matchers.toPath(pRule, pTo, lGroups) &&
       matchers.toPathNot(pRule, pTo, lGroups) &&
       matchers.toDependencyTypes(pRule, pTo) &&
-      (!Object.prototype.hasOwnProperty.call(
-        pRule.to,
-        "moreThanOneDependencyType"
-      ) ||
+      (!_has(pRule.to, "moreThanOneDependencyType") ||
         pTo.dependencyTypes.length > 1) &&
       matchers.toLicense(pRule, pTo) &&
       matchers.toLicenseNot(pRule, pTo) &&

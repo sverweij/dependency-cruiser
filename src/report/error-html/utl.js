@@ -1,11 +1,10 @@
 const _get = require("lodash/get");
+const _has = require("lodash/has");
 const { version } = require("../../../package.json");
 
 function getFormattedAllowedRule(pRuleSetUsed) {
   const lAllowed = _get(pRuleSetUsed, "allowed", []);
-  const lCommentedRule = lAllowed.find((pRule) =>
-    Object.prototype.hasOwnProperty.call(pRule, "comment")
-  );
+  const lCommentedRule = lAllowed.find((pRule) => _has(pRule, "comment"));
   const lComment = lCommentedRule ? lCommentedRule.comment : "-";
 
   return lAllowed.length > 0

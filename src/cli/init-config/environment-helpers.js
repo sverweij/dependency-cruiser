@@ -1,5 +1,6 @@
 const fs = require("fs");
 const _get = require("lodash/get");
+const _has = require("lodash/has");
 
 const LIKELY_SOURCE_FOLDERS = ["src", "lib", "app", "bin"];
 const LIKELY_TEST_FOLDERS = ["test", "spec", "tests", "specs", "bdd"];
@@ -48,10 +49,7 @@ function babelIsConfiguredInManifest() {
   let lReturnValue = false;
 
   try {
-    lReturnValue = Object.prototype.hasOwnProperty.call(
-      readManifest(),
-      "babel"
-    );
+    lReturnValue = _has(readManifest(), "babel");
   } catch (pError) {
     // silently ignore - we'll return false anyway then
   }

@@ -1,9 +1,10 @@
+const _has = require("lodash/has");
 const isModuleOnlyRule = require("./is-module-only-rule");
 const matchers = require("./matchers");
 
 function matchesOrphanRule(pRule, pModule) {
   return (
-    Object.prototype.hasOwnProperty.call(pRule.from, "orphan") &&
+    _has(pRule.from, "orphan") &&
     pModule.orphan === pRule.from.orphan &&
     matchers.fromPath(pRule, pModule) &&
     matchers.fromPathNot(pRule, pModule)
@@ -12,8 +13,8 @@ function matchesOrphanRule(pRule, pModule) {
 
 function matchesReachableRule(pRule, pModule) {
   return (
-    Object.prototype.hasOwnProperty.call(pRule.to, "reachable") &&
-    Object.prototype.hasOwnProperty.call(pModule, "reachable") &&
+    _has(pRule.to, "reachable") &&
+    _has(pModule, "reachable") &&
     pModule.reachable.some(
       (pReachable) =>
         pReachable.asDefinedInRule === pRule.name &&
@@ -26,8 +27,8 @@ function matchesReachableRule(pRule, pModule) {
 
 function matchesReachesRule(pRule, pModule) {
   return (
-    Object.prototype.hasOwnProperty.call(pRule.to, "reachable") &&
-    Object.prototype.hasOwnProperty.call(pModule, "reaches") &&
+    _has(pRule.to, "reachable") &&
+    _has(pModule, "reaches") &&
     pModule.reaches.some(
       (pReaches) =>
         pReaches.asDefinedInRule === pRule.name &&

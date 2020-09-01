@@ -1,4 +1,5 @@
 const { expect } = require("chai");
+const _has = require("lodash/has");
 const clearCaches = require("~/src/extract/clear-caches");
 const localNpmHelpers = require("~/src/extract/resolve/local-npm-helpers");
 const normalizeResolveOptions = require("~/src/main/resolve-options/normalize");
@@ -51,8 +52,7 @@ describe("extract/resolve/localNpmHelpers.getPackageJson", () => {
     );
 
     expect(lPackageJson).to.be.not.null;
-    expect(Object.prototype.hasOwnProperty.call(lPackageJson, "name")).to.be
-      .true;
+    expect(_has(lPackageJson, "name")).to.be.true;
     expect(lPackageJson.name).to.equal("chai");
   });
 
@@ -64,8 +64,7 @@ describe("extract/resolve/localNpmHelpers.getPackageJson", () => {
     );
 
     expect(lPackageJson).to.be.not.null;
-    expect(Object.prototype.hasOwnProperty.call(lPackageJson, "name")).to.be
-      .true;
+    expect(_has(lPackageJson, "name")).to.be.true;
     expect(lPackageJson.name).to.equal(
       "deprecated-at-the-start-for-test-purposes"
     );
@@ -79,8 +78,7 @@ describe("extract/resolve/localNpmHelpers.getPackageJson", () => {
     );
 
     expect(lPackageJson).to.be.not.null;
-    expect(Object.prototype.hasOwnProperty.call(lPackageJson, "name")).to.be
-      .true;
+    expect(_has(lPackageJson, "name")).to.be.true;
     expect(lPackageJson.description).to.equal("testinga 2");
   });
 });
