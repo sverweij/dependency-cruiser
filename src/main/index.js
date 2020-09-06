@@ -58,9 +58,12 @@ function format(pResult, pFormatOptions = {}) {
 
   const lReportFn = report.getReporter(lFormatOptions.outputType);
 
-  return lReportFn(reSummarizeResults(pResult, lFormatOptions), {
-    collapsePattern: lFormatOptions.collapse,
-  });
+  return lReportFn(
+    reSummarizeResults(pResult, lFormatOptions),
+    _has(lFormatOptions, "collapse")
+      ? { collapsePattern: lFormatOptions.collapse }
+      : {}
+  );
 }
 
 function futureCruise(
