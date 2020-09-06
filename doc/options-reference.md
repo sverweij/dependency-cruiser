@@ -1111,7 +1111,7 @@ E.g. to set the cache duration to 1337ms, you can use this:
     // ...
     "enhancedResolveOptions": {
       "cachedInputFileSystem": {
-        "cacheDuration": 1000
+        "cacheDuration": 1337
       }
     }
     // ...
