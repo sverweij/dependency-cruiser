@@ -18,7 +18,7 @@ describe("main/rule-set/validate - regular", () => {
   it("barfs on an invalid rules file", () => {
     shouldBarfWithMessage(
       "./test/validate/fixtures/rules.not-a-valid-rulesfile.json",
-      "The rules file is not valid: data should NOT have additional properties."
+      "The supplied configuration is not valid: data should NOT have additional properties."
     );
   });
 
@@ -53,7 +53,7 @@ describe("main/rule-set/validate - regular", () => {
   it("bails out on non-strings in the 'extends' attribute (number)", () => {
     shouldBarfWithMessage(
       "./test/validate/fixtures/extends/extending.as.number.json",
-      "The rules file is not valid: data.extends should be string, data.extends should be " +
+      "The supplied configuration is not valid: data.extends should be string, data.extends should be " +
         "array, data.extends should match exactly one schema in oneOf."
     );
   });

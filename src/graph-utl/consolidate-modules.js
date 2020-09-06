@@ -2,7 +2,7 @@ const _clone = require("lodash/clone");
 const _get = require("lodash/get");
 const _reject = require("lodash/reject");
 const _uniqBy = require("lodash/uniqBy");
-const compare = require("../../utl/compare");
+const compare = require("./compare");
 
 function mergeModule(pLeftModule, pRightModule) {
   return {

@@ -41,6 +41,12 @@ try {
     )
     .option("-x, --exclude <regex>", "exclude all modules matching the regex")
     .option(
+      "-S, --collapse <regex>",
+      "collapse the modules to the regex pattern E.g. ^packages/[^/]+/ collapses to " +
+        "modules/ folders directly under your packages folder. Or pass a single " +
+        "digit (e.g. 2) to collapse to a folder depth."
+    )
+    .option(
       "-e, --exit-code",
       "exit with a non-zero exit code when the input json contains error level " +
         "dependency violations. Works for err, err-long and teamcity output types"

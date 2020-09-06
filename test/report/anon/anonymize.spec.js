@@ -43,7 +43,9 @@ describe("report/anon", () => {
   });
 
   it("anonymizes a result tree with the passed word list", () => {
-    const lResult = anonymize(sourceReport, _clone(META_SYNTACTIC_VARIABLES));
+    const lResult = anonymize(sourceReport, {
+      wordlist: _clone(META_SYNTACTIC_VARIABLES),
+    });
     const lOutput = JSON.parse(lResult.output);
 
     expect(lOutput).to.deep.equal(fixtureReport);
@@ -61,7 +63,9 @@ describe("report/anon", () => {
   });
 
   it("anonymizes a result tree with (violated) rules", () => {
-    const lResult = anonymize(sourceCycle, _clone(META_SYNTACTIC_VARIABLES));
+    const lResult = anonymize(sourceCycle, {
+      wordlist: _clone(META_SYNTACTIC_VARIABLES),
+    });
     const lOutput = JSON.parse(lResult.output);
 
     expect(lOutput).to.deep.equal(fixtureCycle);
@@ -69,7 +73,9 @@ describe("report/anon", () => {
     expect(lResult.exitCode).to.equal(0);
   });
   it("anonymizes a result tree with (violated) reaches rules", () => {
-    const lResult = anonymize(reachesReport, _clone(META_SYNTACTIC_VARIABLES));
+    const lResult = anonymize(reachesReport, {
+      wordlist: _clone(META_SYNTACTIC_VARIABLES),
+    });
     const lOutput = JSON.parse(lResult.output);
 
     expect(lOutput).to.deep.equal(fixtureReachesReport);

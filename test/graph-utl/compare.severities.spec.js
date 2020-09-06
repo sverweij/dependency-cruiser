@@ -1,5 +1,5 @@
 const { expect } = require("chai");
-const compare = require("~/src/utl/compare");
+const compare = require("~/src/graph-utl/compare");
 
 describe("utl/compare - severities", () => {
   it("returns 0 for identical severities", () => {

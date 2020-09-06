@@ -1,5 +1,6 @@
 const _clone = require("lodash/clone");
 const _get = require("lodash/get");
+const _has = require("lodash/has");
 const anonymizePath = require("./anonymize-path");
 
 function anonymizePathArray(pPathArray, pWordList) {
@@ -94,25 +95,28 @@ function sanitizeWordList(pWordList) {
  * so if the word list is precious to you - pass a clone)
  *
  * @param {ICruiseResult} pResults - the output of a dependency-cruise adhering to ../schema/cruise-result.schema.json
- * @param {string[]} pWordList - list of words to use as replacement strings. If
+ * @param {wordlist: String[]} wordlist - list of words to use as replacement strings. If
  *                               not passed the reporter uses the string passed
  *                               in the options (reporterOptions.anon.wordlist)
  *                               or - if that doesn't exist - the empty array
  * @returns {IReporterOutput} - output: the results in JSON format (hence adhering to the same json schema)
  *                              exitCode: 0
  */
-module.exports = (
-  pResults,
-  pWordList = _get(
-    pResults,
-    "summary.optionsUsed.reporterOptions.anon.wordlist",
-    []
-  )
-) => ({
-  output: JSON.stringify(
-    anonymize(pResults, sanitizeWordList(pWordList)),
-    null,
-    "  "
-  ),
-  exitCode: 0,
-});
+module.exports = function reportAnonymous(pResults, pAnonymousReporterOptions) {
+  let lAnonymousReporterOptions = pAnonymousReporterOptions || {};
+  if (!_has(lAnonymousReporterOptions, "wordlist")) {
+    lAnonymousReporterOptions.wordlist = _get(
+      pResults,
+      "summary.optionsUsed.reporterOptions.anon.wordlist",
+      []
+    );
+  }
+  return {
+    output: JSON.stringify(
+      anonymize(pResults, sanitizeWordList(lAnonymousReporterOptions.wordlist)),
+      null,
+      "  "
+    ),
+    exitCode: 0,
+  };
+};

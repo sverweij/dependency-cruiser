@@ -88,5 +88,6 @@ module.exports.validateFormatOptions = function validateFormatOptions(
   validatePathsSafety(pFormatOptions.exclude);
   validatePathsSafety(pFormatOptions.focus);
   validatePathsSafety(pFormatOptions.includeOnly);
+  validateRegExpSafety(pFormatOptions.collapse);
   validateOutputType(pFormatOptions.outputType);
 };

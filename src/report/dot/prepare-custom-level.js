@@ -1,24 +1,18 @@
 const _get = require("lodash/get");
-const consolidateToPattern = require("../utl/consolidate-to-pattern");
+const consolidateToPattern = require("../../graph-utl/consolidate-to-pattern");
+const compare = require("../../graph-utl/compare");
+const stripSelfTransitions = require("../../graph-utl/strip-self-transitions");
 const moduleUtl = require("./module-utl");
 
-module.exports = (
-  pResults,
-  pTheme,
-  pCollapsePattern = _get(
-    pResults,
-    "summary.optionsUsed.reporterOptions.archi.collapsePattern",
-    "^(node_modules|packages|src|lib|app|test|spec)/[^/]+"
-  )
-) => {
+module.exports = (pResults, pTheme, pCollapsePattern) => {
   return (pCollapsePattern
     ? consolidateToPattern(pResults.modules, pCollapsePattern)
     : pResults.modules
   )
-    .sort(moduleUtl.compareOnSource)
+    .sort(compare.modules)
     .map(moduleUtl.extractFirstTransgression)
     .map(moduleUtl.folderify)
-    .map(moduleUtl.stripSelfTransitions)
+    .map(stripSelfTransitions)
     .map(moduleUtl.applyTheme(pTheme))
     .map(moduleUtl.addURL(_get(pResults, "summary.optionsUsed.prefix", "")));
 };

@@ -11,6 +11,20 @@ function squashDependencyToPattern(pCollapsePattern) {
     };
   };
 }
+
+function determineConsolidatedness(pConsolidated, pCollapseMatch, pSource) {
+  let lReturnValue = false;
+
+  // if it was  already established it's consolidated (e.g. from an earlier
+  // consolidation step) there's no need to recalc
+  if (pConsolidated === true) {
+    lReturnValue = true;
+  } else {
+    lReturnValue = pCollapseMatch ? pCollapseMatch[0] !== pSource : false;
+  }
+  return lReturnValue;
+}
+
 function squashModuleToPattern(pCollapsePattern) {
   return (pModule) => {
     const lCollapseMatch = pModule.source.match(pCollapsePattern);
@@ -18,9 +32,11 @@ function squashModuleToPattern(pCollapsePattern) {
     return {
       ...pModule,
       source: lCollapseMatch ? lCollapseMatch[0] : pModule.source,
-      consolidated: lCollapseMatch
-        ? lCollapseMatch[0] !== pModule.source
-        : false,
+      consolidated: determineConsolidatedness(
+        pModule.consolidated,
+        lCollapseMatch,
+        pModule.source
+      ),
       dependencies: pModule.dependencies.map(
         squashDependencyToPattern(pCollapsePattern)
       ),
@@ -28,7 +44,8 @@ function squashModuleToPattern(pCollapsePattern) {
   };
 }
 
-module.exports = (pModules, pCollapsePattern) =>
-  consolidateModules(pModules.map(squashModuleToPattern(pCollapsePattern))).map(
-    consolidateModuleDependencies
-  );
+module.exports = function consolidateToPattern(pModules, pCollapsePattern) {
+  return consolidateModules(
+    pModules.map(squashModuleToPattern(pCollapsePattern))
+  ).map(consolidateModuleDependencies);
+};

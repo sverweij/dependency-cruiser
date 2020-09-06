@@ -695,6 +695,8 @@ depcruise-fmt -T err-html -f violation-report.html cruise_result.json
 depcruise-fmt -T dot cruise_result.json | dot -T svg > dependency-graph.svg
 ```
 
+### filters
+
 You can also use the filters `--focus`, `--include-only` and `--exclude` to peruse
 parts of the dependency-graph. This could be useful for chopping up humoungous
 graphs efficiently, or to quickly find the uses of a module:
@@ -710,6 +712,47 @@ depcruise-fmt -T dot --include-only "^src/the-law" cruise_result.json | dot -T s
 depcruise-fmt -T text --focus "^src/main/spelunkme\\.ts$" cruise_result.json
 ```
 
+### collapse/ summarize
+
+If you feel the need for reporting on a higher level (e.g. on packages in a
+mono repo, or the main folders in `src`) you can use the `--collapse` option. It
+takes either a single digit or a regular expression.
+
+#### --collapse: single digit
+
+The most typical use for collapsing is to limit the folder depth. It is possible
+to do this with regular expressions (see below, and in the
+[options reference](./options-reference.md#reporteroptions)). As this case occurs
+a lot you can pass
+
+```sh
+depcruise-fmt cruise_result.json --collapse 2 -T dot | dot -T svg > collapsed.svg
+```
+
+> Under water depcruise-fmt translates the single digit into a regular expression
+> again. For `2` e.g. it generates `/^[^/]+\/[^/]+\/|node_modules/[^/]+/`
+
+### --collapse: regular expression
+
+If you need more flexibility, you can also pass a regular expression to --collapse.
+E.g. to only collapse stuff under `node_modules` and `lib` (but not under e.g.
+`test` and `src`) you can pass this:
+
+```sh
+depcruise-fmt cruise_result.json --collapse "^(node_modules|lib)/[^/]+" -T dot | dot -T svg > collapsed.svg
+```
+
+`--collapse` works the same as the [dot/ archi specific collapsePattern option](#summarising-collapsepattern-dot-and-archi-reporters),
+except this works on not only the dot and archi reporters, but on all of them. This
+means you can not only use it to make graphical output look better, but also
+to show simple textual output of relations between high level components e.g.
+
+```sh
+depcruise-fmt cruise_result.json --collapse "^packages/[^/]+" -T text
+```
+
+### getting non-zero exit codes
+
 If you want to see non-zero exit codes when there's error level dependency
 violations, you can use the `--exit-code` (short: `-e`). This only works for
 the output types that support non-zero exit codes (_err_, _err-long_ and
@@ -718,6 +761,8 @@ _TeamCity_). Example for the default output type (_err_):
 ```sh
 depcruise-fmt -e cruise_result.json
 ```
+
+### What --help will tell you
 
 ```
 Usage: depcruise-fmt [options] <dependency-cruiser-json>
@@ -734,6 +779,14 @@ Options:
   -F, --focus <regex>         only include modules matching the regex + their
                               direct neighbours
   -x, --exclude <regex>       exclude all modules matching the regex
+  -S, --collapse <regex>      collapse the modules to the regex pattern E.g.
+                              ^packages/[^/]+/ collapses to modules/ folders
+                              directly under your packages folder. Or pass a
+                              single digit (e.g. 2) to collapse to a folder
+                              depth.
+  -e, --exit-code             exit with a non-zero exit code when the input
+                              json contains error level dependency violations.
+                              Works for err, err-long and teamcity output types
   -V, --version               output the version number
   -h, --help                  display help for command
 ```

@@ -1,4 +1,6 @@
+/* eslint-disable no-magic-numbers */
 const chai = require("chai");
+const cruiseResult = require("./fixtures/cruise-results-dc-2020-08-30-src-cli.json");
 const main = require("~/src/main");
 
 const expect = chai.expect;
@@ -49,5 +51,24 @@ describe("main.format - format", () => {
     expect(
       JSON.parse(main.format(MINIMAL_RESULT, { outputType: "json" }).output)
     ).to.deep.equal(MINIMAL_RESULT);
+  });
+
+  it("returns a collapsed version of the report when passed a collapse option", () => {
+    const lCollapsedResult = main.format(cruiseResult, {
+      collapse: "^[^/]+/[^/]+/",
+    }).output;
+
+    expect(lCollapsedResult.summary.violations).to.deep.equal([
+      {
+        from: "src/cli/",
+        to: "src/extract/",
+        rule: {
+          severity: "warn",
+          name: "cli-to-main-only-warn",
+        },
+      },
+    ]);
+    expect(lCollapsedResult.summary.totalCruised).to.equal(19);
+    expect(lCollapsedResult.summary.totalDependenciesCruised).to.equal(18);
   });
 });

@@ -4,8 +4,20 @@ const validateFileExistence = require("./utl/validate-file-existence");
 const normalizeOptions = require("./normalize-options");
 const io = require("./utl/io");
 
+const KNOWN_FMT_OPTIONS = [
+  "collapse",
+  "doNotFollow",
+  "exclude",
+  "focus",
+  "help",
+  "includeOnly",
+  "outputTo",
+  "outputType",
+  "version",
+];
+
 module.exports = async (pResultFile, pOptions) => {
-  const lOptions = normalizeOptions(pOptions);
+  const lOptions = normalizeOptions(pOptions, KNOWN_FMT_OPTIONS);
 
   /* istanbul ignore else */
   if (pResultFile !== "-") {

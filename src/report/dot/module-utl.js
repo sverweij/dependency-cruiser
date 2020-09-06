@@ -74,19 +74,6 @@ function folderify(pModule) {
   };
 }
 
-function compareOnSource(pModuleOne, pModuleTwo) {
-  return pModuleOne.source > pModuleTwo.source ? 1 : -1;
-}
-
-function stripSelfTransitions(pModule) {
-  return {
-    ...pModule,
-    dependencies: pModule.dependencies.filter(
-      (pDependency) => pModule.source !== pDependency.resolved
-    ),
-  };
-}
-
 /**
  * Sort of smartly concatenate the given prefix and source:
  *
@@ -117,11 +104,9 @@ function addURL(pPrefix) {
 }
 
 module.exports = {
-  compareOnSource,
   folderify,
   applyTheme,
   extractFirstTransgression,
   attributizeObject,
-  stripSelfTransitions,
   addURL,
 };
