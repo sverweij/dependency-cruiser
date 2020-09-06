@@ -529,7 +529,7 @@ nodes.forEach(function (n) {
   var title = n.querySelector('title');
   var titleText = title && title.textContent;
   if (titleText) {
-    nodeMap[titleText] = n;
+    nodeMap[titleText.trim()] = n;
   }
 });
 /** @type {{[key: string]: SVGGElement[]}} */
@@ -539,7 +539,8 @@ edges.forEach(function (e) {
   var title = e.querySelector('title');
   var titleText = title && title.textContent;
   if (titleText) {
-    var nodeNames = titleText.split('->');
+    titleText = titleText.trim();
+    var nodeNames = titleText.split(/\s*->\s*/);
     edgeMap[titleText] = [nodeMap[nodeNames[0]], nodeMap[nodeNames[1]]];
     (edgeMap[nodeNames[0]] || (edgeMap[nodeNames[0]] = [])).push(e);
     (edgeMap[nodeNames[1]] || (edgeMap[nodeNames[1]] = [])).push(e);
@@ -559,6 +560,9 @@ function onmouseover(ev) {
   /** @type {SVGTitleElement} */
   var title = nodeOrEdge && nodeOrEdge.querySelector('title');
   var titleText = title && title.textContent;
+  if (titleText) {
+    titleText = titleText.trim();
+  }
   if (current === titleText) {
     return;
   }
