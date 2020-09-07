@@ -115,9 +115,9 @@
     "version": "npm-run-all build depcruise:graph:doc scm:stage"
   },
   "dependencies": {
-    "acorn": "7.4.0",
-    "acorn-loose": "7.1.0",
-    "acorn-walk": "7.2.0",
+    "acorn": "8.0.1",
+    "acorn-loose": "8.0.0",
+    "acorn-walk": "8.0.0",
     "ajv": "6.12.4",
     "chalk": "4.1.0",
     "commander": "6.1.0",
@@ -141,8 +141,8 @@
   "devDependencies": {
     "@babel/core": "7.11.6",
     "@babel/plugin-transform-modules-commonjs": "7.10.4",
-    "@typescript-eslint/eslint-plugin": "4.0.1",
-    "@typescript-eslint/parser": "4.0.1",
+    "@typescript-eslint/eslint-plugin": "4.1.0",
+    "@typescript-eslint/parser": "4.1.0",
     "chai": "4.2.0",
     "chai-json-schema": "1.5.1",
     "coffeescript": "2.5.1",
@@ -155,7 +155,7 @@
     "eslint-plugin-node": "11.1.0",
     "eslint-plugin-security": "1.4.0",
     "eslint-plugin-unicorn": "21.0.0",
-    "husky": "4.2.5",
+    "husky": "4.3.0",
     "intercept-stdout": "0.1.2",
     "lint-staged": "10.3.0",
     "mocha": "8.1.3",
@@ -176,18 +176,6 @@
       {
         "package": "enhanced-resolve",
         "because": "we're running with enhanced-resolve version 5, which is faster, uses less memory - but also still is in beta"
-      },
-      {
-        "package": "acorn",
-        "because": "acorn-jsx is (officially) not yet compatible with acorn 8, and on install npm/ yarn generate a disconcerting warning about it. This donotup can be removed once PR 116 on acorn-jsx is released"
-      },
-      {
-        "package": "acorn-loose",
-        "because": "see acorn"
-      },
-      {
-        "package": "acorn-walk",
-        "because": "see acorn"
       }
     ]
   },
