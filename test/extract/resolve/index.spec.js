@@ -1,3 +1,4 @@
+/* eslint-disable max-statements */
 const path = require("path");
 const { expect } = require("chai");
 const parseTSConfig = require("~/src/cli/parse-ts-config");
@@ -489,6 +490,88 @@ describe("extract/resolve/index", () => {
       dependencyTypes: ["npm-no-pkg"],
       followable: true,
       resolved: "node_modules/export-testinga/feature.cjs",
+    });
+  });
+
+  it("Resolves the .ts even when the import includes a (non-existing) .js with explicit extension", () => {
+    process.chdir(
+      "test/extract/resolve/fixtures/resolve-to-ts-even-when-imported-as-js"
+    );
+    expect(
+      resolve(
+        {
+          module: "./i-am-secretly-typescript.js",
+          moduleSystem: "es6",
+        },
+        process.cwd(),
+        process.cwd(),
+        normalizeResolveOptions(
+          {
+            bustTheCache: true,
+          },
+          {}
+        )
+      )
+    ).to.deep.equal({
+      coreModule: false,
+      couldNotResolve: false,
+      dependencyTypes: ["local"],
+      followable: true,
+      resolved: "i-am-secretly-typescript.ts",
+    });
+  });
+
+  it("Does NOT resolve the .ts when the import includes a (non-existing) .cjs with explicit extension", () => {
+    process.chdir(
+      "test/extract/resolve/fixtures/resolve-to-ts-even-when-imported-as-js"
+    );
+    expect(
+      resolve(
+        {
+          module: "./i-am-secretly-typescript.cjs",
+          moduleSystem: "es6",
+        },
+        process.cwd(),
+        process.cwd(),
+        normalizeResolveOptions(
+          {
+            bustTheCache: true,
+          },
+          {}
+        )
+      )
+    ).to.deep.equal({
+      coreModule: false,
+      couldNotResolve: true,
+      dependencyTypes: ["unknown"],
+      followable: false,
+      resolved: "./i-am-secretly-typescript.cjs",
+    });
+  });
+
+  it("Does NOT resolve to something non-typescriptish when the import includes a (non-existing) .js with explicit extension", () => {
+    process.chdir("test/extract/resolve/fixtures/donot-resolve-to-non-ts");
+    expect(
+      resolve(
+        {
+          module: "./there-is-a-cjs-variant-of-me-but-you-will-not-find-it.js",
+          moduleSystem: "es6",
+        },
+        process.cwd(),
+        process.cwd(),
+        normalizeResolveOptions(
+          {
+            bustTheCache: true,
+          },
+          {}
+        )
+      )
+    ).to.deep.equal({
+      coreModule: false,
+      couldNotResolve: true,
+      dependencyTypes: ["unknown"],
+      followable: false,
+      resolved: "./there-is-a-cjs-variant-of-me-but-you-will-not-find-it.js",
     });
   });
 });

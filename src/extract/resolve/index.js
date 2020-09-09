@@ -34,6 +34,67 @@ function resolveModule(
   return lReturnValue;
 }
 
+function canBeResolvedToTsVariant(pModuleName) {
+  return [".js", ".jsx"].some(
+    (pExtension) => path.extname(pModuleName) === pExtension
+  );
+}
+
+function isTypeScriptishExtension(pModuleName) {
+  return [".ts", ".tsx"].some(
+    (pExtension) => path.extname(pModuleName) === pExtension
+  );
+}
+
+function resolveWithRetry(
+  pDependency,
+  pBaseDirectory,
+  pFileDirectory,
+  pResolveOptions
+) {
+  let lReturnValue = resolveModule(
+    pDependency,
+    pBaseDirectory,
+    pFileDirectory,
+    pResolveOptions
+  );
+
+  // when we feed the typescript compiler an import with an explicit .js(x) extension
+  // and the .js(x) file does not exist, it tries files with the .ts, .tsx or
+  // .d.ts extensions (this a.o. means ./hello.jsx can resolve to ./hello.ts and
+  // ./wut.js to ./wut.tsx).
+  //
+  // This behavior is very specific:
+  // - tsc only (doesn't work in ts-node for instance)
+  // - _only_ for the .js and .jsx extensions
+  //
+  // Hence also this oddly specific looking check & retry.
+  //
+  // This should eventually probably land in either enhanced_resolve or in a
+  // plugin/ extension for it (tsconfig-paths-webpack-plugin?)
+  if (
+    lReturnValue.couldNotResolve &&
+    canBeResolvedToTsVariant(pDependency.module)
+  ) {
+    const lModuleWithOutExtension = pDependency.module.replace(
+      /\.js(x)?$/g,
+      ""
+    );
+
+    const lReturnValueCandidate = resolveModule(
+      { ...pDependency, module: lModuleWithOutExtension },
+      pBaseDirectory,
+      pFileDirectory,
+      pResolveOptions
+    );
+
+    if (isTypeScriptishExtension(lReturnValueCandidate.resolved)) {
+      lReturnValue = lReturnValueCandidate;
+    }
+  }
+  return lReturnValue;
+}
+
 /**
  * resolves the module name of the pDependency to a file on disk.
  *
@@ -74,7 +135,7 @@ module.exports = function resolve(
   pFileDirectory,
   pResolveOptions
 ) {
-  let lResolvedModule = resolveModule(
+  let lResolvedModule = resolveWithRetry(
     pDependency,
     pBaseDirectory,
     pFileDirectory,
