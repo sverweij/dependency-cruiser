@@ -1,9 +1,17 @@
+/* eslint-disable complexity */
+/* eslint-disable max-lines-per-function */
 const fs = require("fs");
 const path = require("path");
 const pathToPosix = require("../../utl/path-to-posix");
 const isRelativeModuleName = require("./is-relative-module-name");
 const resolveAMD = require("./resolve-amd");
 const resolveCommonJS = require("./resolve-cjs");
+
+function hasExplicitExtension(pModule, pResolveExtensions) {
+  return (pResolveExtensions || []).some((pExtension) =>
+    pModule.endsWith(pExtension)
+  );
+}
 
 function resolveModule(
   pDependency,
@@ -26,6 +34,38 @@ function resolveModule(
   } else {
     lReturnValue = resolveAMD(
       pDependency.module,
+      pBaseDirectory,
+      pFileDirectory,
+      pResolveOptions
+    );
+  }
+  return lReturnValue;
+}
+
+function resolveWithRetry(
+  pDependency,
+  pBaseDirectory,
+  pFileDirectory,
+  pResolveOptions
+) {
+  let lReturnValue = resolveModule(
+    pDependency,
+    pBaseDirectory,
+    pFileDirectory,
+    pResolveOptions
+  );
+
+  if (
+    lReturnValue.couldNotResolve &&
+    hasExplicitExtension(pDependency.module, pResolveOptions.extensions)
+  ) {
+    const lModuleWithoutExtension = pDependency.module.replace(
+      /\.[a-z]+$/g,
+      ""
+    );
+
+    lReturnValue = resolveModule(
+      { ...pDependency, module: lModuleWithoutExtension },
       pBaseDirectory,
       pFileDirectory,
       pResolveOptions
@@ -74,7 +114,7 @@ module.exports = function resolve(
   pFileDirectory,
   pResolveOptions
 ) {
-  let lResolvedModule = resolveModule(
+  let lResolvedModule = resolveWithRetry(
     pDependency,
     pBaseDirectory,
     pFileDirectory,

@@ -491,4 +491,32 @@ describe("extract/resolve/index", () => {
       resolved: "node_modules/export-testinga/feature.cjs",
     });
   });
+
+  it("Resolves the .ts even if the import includes a (non-existing) .js with explicit extension", () => {
+    process.chdir(
+      "test/extract/resolve/fixtures/resolve-to-ts-even-when-imported-as-js"
+    );
+    expect(
+      resolve(
+        {
+          module: "./i-am-secretly-typescript.js",
+          moduleSystem: "es6",
+        },
+        process.cwd(),
+        process.cwd(),
+        normalizeResolveOptions(
+          {
+            bustTheCache: true,
+          },
+          {}
+        )
+      )
+    ).to.deep.equal({
+      coreModule: false,
+      couldNotResolve: false,
+      dependencyTypes: ["local"],
+      followable: true,
+      resolved: "i-am-secretly-typescript.ts",
+    });
+  });
 });
