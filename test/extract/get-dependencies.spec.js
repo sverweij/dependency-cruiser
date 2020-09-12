@@ -12,7 +12,7 @@ const cjsBang = require("./fixtures/cjs-bang.json");
 const amdBangRequirejs = require("./fixtures/amd-bang-requirejs.json");
 const amdBangCJSWrapper = require("./fixtures/amd-bang-CJSWrapper.json");
 const normalizeResolveOptions = require("~/src/main/resolve-options/normalize");
-const normalize = require("~/src/main/options/normalize");
+const { normalizeCruiseOptions } = require("~/src/main/options/normalize");
 const getDependencies = require("~/src/extract/get-dependencies");
 
 let symlinkDirectory = path.join(__dirname, "fixtures", "symlinked");
@@ -34,8 +34,11 @@ function runFixture(pFixture) {
     expect(
       getDependencies(
         pFixture.input.fileName,
-        normalize(lOptions),
-        normalizeResolveOptions({ bustTheCache: true }, normalize(lOptions))
+        normalizeCruiseOptions(lOptions),
+        normalizeResolveOptions(
+          { bustTheCache: true },
+          normalizeCruiseOptions(lOptions)
+        )
       )
     ).to.deep.equal(pFixture.expected);
   });
@@ -64,7 +67,7 @@ describe("extract/getDependencies - CommonJS - ", () =>
   cjsFixtures.forEach(runFixture));
 describe("extract/getDependencies - CommonJS - with bangs", () => {
   it("splits bang!./blabla into bang and ./blabla", () => {
-    const lOptions = normalize({ moduleSystems: ["cjs"] });
+    const lOptions = normalizeCruiseOptions({ moduleSystems: ["cjs"] });
     const lResolveOptions = normalizeResolveOptions(
       { bustTheCache: true },
       lOptions
@@ -86,7 +89,7 @@ describe("extract/getDependencies - AMD - ", () =>
   amdFixtures.forEach(runFixture));
 describe("extract/getDependencies - AMD - with bangs", () => {
   it("splits bang!./blabla into bang and ./blabla - regular requirejs", () => {
-    const lOptions = normalize({ moduleSystems: ["amd"] });
+    const lOptions = normalizeCruiseOptions({ moduleSystems: ["amd"] });
     const lResolveOptions = normalizeResolveOptions(
       { bustTheCache: true },
       lOptions
@@ -102,7 +105,7 @@ describe("extract/getDependencies - AMD - with bangs", () => {
   });
 
   it("splits bang!./blabla into bang and ./blabla - CommonJS wrapper", () => {
-    const lOptions = normalize({ moduleSystems: ["amd"] });
+    const lOptions = normalizeCruiseOptions({ moduleSystems: ["amd"] });
     const lResolveOptions = normalizeResolveOptions(
       { bustTheCache: true },
       lOptions
@@ -125,7 +128,7 @@ describe("extract/getDependencies - CoffeeScript - ", () =>
 
 describe("extract/getDependencies - Error scenarios - ", () => {
   it("Does not raise an exception on syntax errors (because we're on the loose parser)", () => {
-    const lOptions = normalize({});
+    const lOptions = normalizeCruiseOptions({});
     const lResolveOptions = normalizeResolveOptions(
       { bustTheCache: true },
       lOptions
@@ -143,7 +146,7 @@ describe("extract/getDependencies - Error scenarios - ", () => {
   });
   it("Raises an exception on non-existing files", () => {
     expect(() => {
-      getDependencies("non-existing-file.md", normalize({}), {});
+      getDependencies("non-existing-file.md", normalizeCruiseOptions({}), {});
     }).to.throw(
       "Extracting dependencies ran afoul of...\n\n  ENOENT: no such file or directory, open "
     );
@@ -151,7 +154,7 @@ describe("extract/getDependencies - Error scenarios - ", () => {
 });
 
 describe("extract/getDependencies - even when require gets non-string arguments, extract doesn't break", () => {
-  const lOptions = normalize({});
+  const lOptions = normalizeCruiseOptions({});
   const lResolveOptions = normalizeResolveOptions(
     { bustTheCache: true },
     lOptions
@@ -181,7 +184,7 @@ describe("extract/getDependencies - even when require gets non-string arguments,
     expect(
       getDependencies(
         "./test/extract/fixtures/cjs-require-non-strings/require-an-iife.js",
-        normalize({}),
+        normalizeCruiseOptions({}),
         {}
       ).length
     ).to.equal(1);
@@ -190,7 +193,7 @@ describe("extract/getDependencies - even when require gets non-string arguments,
 
 describe("extract/getDependencies - include", () => {
   it("returns no dependencies when the includeOnly pattern is erroneous", () => {
-    const lOptions = normalize({
+    const lOptions = normalizeCruiseOptions({
       includeOnly: "will-not-match-dependencies-for-this-file",
     });
     const lResolveOptions = normalizeResolveOptions(
@@ -208,7 +211,7 @@ describe("extract/getDependencies - include", () => {
   });
 
   it('only includes dependencies matching the passed "includeOnly" (1)', () => {
-    const lOptions = normalize({ includeOnly: "/src/" });
+    const lOptions = normalizeCruiseOptions({ includeOnly: "/src/" });
     const lResolveOptions = normalizeResolveOptions(
       { bustTheCache: true },
       lOptions
@@ -237,7 +240,7 @@ describe("extract/getDependencies - include", () => {
   });
 
   it('only includes dependencies matching the passed "includeOnly" (2)', () => {
-    const lOptions = normalize({ includeOnly: "include" });
+    const lOptions = normalizeCruiseOptions({ includeOnly: "include" });
     const lResolveOptions = normalizeResolveOptions(
       { bustTheCache: true },
       lOptions
@@ -278,7 +281,7 @@ describe("extract/getDependencies - include", () => {
   });
 
   it("annotates the exotic require", () => {
-    const lOptions = normalize({ exoticRequireStrings: ["need"] });
+    const lOptions = normalizeCruiseOptions({ exoticRequireStrings: ["need"] });
     const lResolveOptions = normalizeResolveOptions(
       { bustTheCache: true },
       lOptions
@@ -308,7 +311,9 @@ describe("extract/getDependencies - include", () => {
   });
 
   it("adds a preCompilationOnly attribute when tsPreCompilationDeps === 'specify'", () => {
-    const lOptions = normalize({ tsPreCompilationDeps: "specify" });
+    const lOptions = normalizeCruiseOptions({
+      tsPreCompilationDeps: "specify",
+    });
     const lResolveOptions = normalizeResolveOptions(
       { bustTheCache: true },
       lOptions

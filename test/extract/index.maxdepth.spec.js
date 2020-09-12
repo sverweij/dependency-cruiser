@@ -1,6 +1,6 @@
 const chai = require("chai");
 const extract = require("~/src/extract");
-const normalize = require("~/src/main/options/normalize");
+const { normalizeCruiseOptions } = require("~/src/main/options/normalize");
 const normalizeResolveOptions = require("~/src/main/resolve-options/normalize");
 
 const expect = chai.expect;
@@ -11,7 +11,7 @@ describe("extract/index - max depth", () => {
   /* eslint no-magic-numbers:0 */
   [0, 1, 2, 4].forEach((pDepth) =>
     it(`returns the correct graph when max-depth === ${pDepth}`, () => {
-      const lOptions = normalize({
+      const lOptions = normalizeCruiseOptions({
         maxDepth: pDepth,
       });
       const lResolveOptions = normalizeResolveOptions(

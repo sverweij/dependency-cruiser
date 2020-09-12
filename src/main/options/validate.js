@@ -53,7 +53,7 @@ function validatePathsSafety(pFilterOption) {
   validateRegExpSafety(_get(pFilterOption, "pathNot", ""));
 }
 
-function validate(pOptions) {
+function validateCruiseOptions(pOptions) {
   let lReturnValue = {};
 
   if (Boolean(pOptions)) {
@@ -65,6 +65,7 @@ function validate(pOptions) {
     validatePathsSafety(pOptions.exclude);
     validateRegExpSafety(pOptions.includeOnly);
     validateRegExpSafety(pOptions.focus);
+    validateRegExpSafety(pOptions.collapse);
 
     // necessary because not in the config schema
     validateOutputType(pOptions.outputType);
@@ -73,21 +74,22 @@ function validate(pOptions) {
     validateMaxDepth(pOptions.maxDepth);
 
     if (_get(pOptions, "ruleSet.options")) {
-      lReturnValue = validate(pOptions.ruleSet.options);
+      lReturnValue = validateCruiseOptions(pOptions.ruleSet.options);
     }
     return { ...lReturnValue, ...pOptions };
   }
   return lReturnValue;
 }
 
-module.exports = validate;
-
-module.exports.validateFormatOptions = function validateFormatOptions(
-  pFormatOptions
-) {
+function validateFormatOptions(pFormatOptions) {
   validatePathsSafety(pFormatOptions.exclude);
   validatePathsSafety(pFormatOptions.focus);
   validatePathsSafety(pFormatOptions.includeOnly);
   validateRegExpSafety(pFormatOptions.collapse);
   validateOutputType(pFormatOptions.outputType);
+}
+
+module.exports = {
+  validateCruiseOptions,
+  validateFormatOptions,
 };

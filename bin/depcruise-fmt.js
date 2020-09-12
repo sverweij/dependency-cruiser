@@ -42,9 +42,9 @@ try {
     .option("-x, --exclude <regex>", "exclude all modules matching the regex")
     .option(
       "-S, --collapse <regex>",
-      "collapse the modules to the regex pattern E.g. ^packages/[^/]+/ collapses to " +
-        "modules/ folders directly under your packages folder. Or pass a single " +
-        "digit (e.g. 2) to collapse to a folder depth."
+      "collapse a to a folder depth by passing a single digit (e.g. 2). Or pass a " +
+        "regex to collapse to a pattern E.g. ^packages/[^/]+/ would collapse to " +
+        "modules/ folders directly under your packages folder. "
     )
     .option(
       "-e, --exit-code",

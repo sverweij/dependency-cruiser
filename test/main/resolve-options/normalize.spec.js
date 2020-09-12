@@ -1,6 +1,6 @@
 const path = require("path");
 const { expect } = require("chai");
-const normalizeOptions = require("~/src/main/options/normalize");
+const { normalizeCruiseOptions } = require("~/src/main/options/normalize");
 const normalizeResolveOptions = require("~/src/main/resolve-options/normalize");
 
 describe("main/resolve-options/normalize", () => {
@@ -17,7 +17,7 @@ describe("main/resolve-options/normalize", () => {
   it("comes with a set of defaults when passed with no options at all", () => {
     const lNormalizedOptions = normalizeResolveOptions(
       {},
-      normalizeOptions({})
+      normalizeCruiseOptions({})
     );
 
     expect(Object.keys(lNormalizedOptions).length).to.equal(
@@ -34,7 +34,7 @@ describe("main/resolve-options/normalize", () => {
   it("adds the pnp plugin to the resolver plugins for externalModuleResolutionStrategy yarn-pnp", () => {
     const lNormalizedOptions = normalizeResolveOptions(
       {},
-      normalizeOptions({ externalModuleResolutionStrategy: "yarn-pnp" })
+      normalizeCruiseOptions({ externalModuleResolutionStrategy: "yarn-pnp" })
     );
 
     expect(Object.keys(lNormalizedOptions).length).to.equal(
@@ -52,7 +52,7 @@ describe("main/resolve-options/normalize", () => {
   it("does not add the typescript paths plugin to the plugins if a tsConfig is specified without a baseUrl", () => {
     const lNormalizedOptions = normalizeResolveOptions(
       {},
-      normalizeOptions({
+      normalizeCruiseOptions({
         ruleSet: { options: { tsConfig: { fileName: TEST_TSCONFIG } } },
       }),
       TSCONFIG_CONTENTS
@@ -73,7 +73,7 @@ describe("main/resolve-options/normalize", () => {
   it("adds the typescript paths plugin to the plugins if a tsConfig is specified with a baseUrl", () => {
     const lNormalizedOptions = normalizeResolveOptions(
       {},
-      normalizeOptions({
+      normalizeCruiseOptions({
         ruleSet: { options: { tsConfig: { fileName: TEST_TSCONFIG } } },
       }),
       TSCONFIG_CONTENTS_WITH_BASEURL
@@ -94,7 +94,7 @@ describe("main/resolve-options/normalize", () => {
   it("adds the typescript plugin and pnp plugins if a tsConfig and pnp resolution strategy are specified", () => {
     const lNormalizedOptions = normalizeResolveOptions(
       {},
-      normalizeOptions({
+      normalizeCruiseOptions({
         ruleSet: { options: { tsConfig: { fileName: TEST_TSCONFIG } } },
         externalModuleResolutionStrategy: "yarn-pnp",
       }),

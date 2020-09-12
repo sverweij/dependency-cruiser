@@ -1,4 +1,6 @@
 /* eslint-disable security/detect-object-injection */
+const _clone = require("lodash/clone");
+const _has = require("lodash/has");
 const normalizeREProperties = require("../utl/normalize-re-properties");
 const defaults = require("./defaults.json");
 
@@ -49,7 +51,22 @@ function normalizeFilterOptions(pOptions, pFilterOptionKeys) {
   return lReturnValue;
 }
 
-module.exports = function normalizeCruiseOptions(pOptions) {
+function normalizeCollapse(pCollapse) {
+  let lReturnValue = pCollapse;
+  const ONE_OR_MORE_NON_SLASHES = "[^/]+";
+  const FOLDER_PATTERN = `${ONE_OR_MORE_NON_SLASHES}/`;
+  const FOLDER_BELOW_NODE_MODULES = `node_modules/${ONE_OR_MORE_NON_SLASHES}`;
+  const SINGLE_DIGIT_RE = /^\d$/;
+
+  if (typeof pCollapse === "number" || pCollapse.match(SINGLE_DIGIT_RE)) {
+    lReturnValue = `${FOLDER_BELOW_NODE_MODULES}|^${FOLDER_PATTERN.repeat(
+      Number.parseInt(pCollapse, 10)
+    )}`;
+  }
+  return lReturnValue;
+}
+
+function normalizeCruiseOptions(pOptions) {
   let lReturnValue = {
     baseDir: process.cwd(),
     ...defaults,
@@ -58,6 +75,9 @@ module.exports = function normalizeCruiseOptions(pOptions) {
 
   lReturnValue.maxDepth = Number.parseInt(lReturnValue.maxDepth, 10);
   lReturnValue.moduleSystems = uniq(lReturnValue.moduleSystems.sort());
+  if (_has(lReturnValue, "collapse")) {
+    lReturnValue.collapse = normalizeCollapse(lReturnValue.collapse);
+  }
   // TODO: further down the execution path code still relies on .doNotFollow
   //       and .exclude existing. We should treat them the same as the
   //       other two filters (so either make all exist always or only
@@ -65,6 +85,7 @@ module.exports = function normalizeCruiseOptions(pOptions) {
   lReturnValue.doNotFollow = normalizeFilterOption(lReturnValue.doNotFollow);
   lReturnValue.exclude = normalizeFilterOption(lReturnValue.exclude);
   lReturnValue = normalizeFilterOptions(lReturnValue, ["focus", "includeOnly"]);
+
   lReturnValue.exoticRequireStrings = uniq(
     lReturnValue.exoticRequireStrings.sort()
   );
@@ -75,14 +96,22 @@ module.exports = function normalizeCruiseOptions(pOptions) {
   }
 
   return lReturnValue;
-};
+}
 
-module.exports.normalizeFormatOptions = function normalizeFormatOptions(
-  pFormatOptions
-) {
-  return normalizeFilterOptions(pFormatOptions, [
+function normalizeFormatOptions(pFormatOptions) {
+  const lFormatOptions = _clone(pFormatOptions);
+
+  if (_has(lFormatOptions, "collapse")) {
+    lFormatOptions.collapse = normalizeCollapse(lFormatOptions.collapse);
+  }
+  return normalizeFilterOptions(lFormatOptions, [
     "exclude",
     "focus",
     "includeOnly",
   ]);
+}
+
+module.exports = {
+  normalizeCruiseOptions,
+  normalizeFormatOptions,
 };

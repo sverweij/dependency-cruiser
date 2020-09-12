@@ -1,6 +1,6 @@
 const chai = require("chai");
 const extract = require("~/src/extract");
-const normalize = require("~/src/main/options/normalize");
+const { normalizeCruiseOptions } = require("~/src/main/options/normalize");
 const normalizeResolveOptions = require("~/src/main/resolve-options/normalize");
 
 const expect = chai.expect;
@@ -9,7 +9,7 @@ chai.use(require("chai-json-schema"));
 
 describe("extract/index - do not follow", () => {
   it("do not follow - doNotFollow.path", () => {
-    const lOptions = normalize({
+    const lOptions = normalizeCruiseOptions({
       doNotFollow: {
         path: "donotfollowonceinthisfolder",
       },
@@ -30,7 +30,7 @@ describe("extract/index - do not follow", () => {
   });
 
   it("do not follow - doNotFollow.dependencyTypes", () => {
-    const lOptions = normalize({
+    const lOptions = normalizeCruiseOptions({
       doNotFollow: {
         dependencyTypes: ["npm-no-pkg"],
       },

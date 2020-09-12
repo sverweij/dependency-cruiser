@@ -1,4 +1,5 @@
 const path = require("path").posix;
+const fs = require("fs");
 const chai = require("chai");
 const tsFixture = require("./fixtures/ts.json");
 const tsxFixture = require("./fixtures/tsx.json");
@@ -58,6 +59,26 @@ describe("main.cruise", () => {
     );
 
     expect(lResult.output).to.deep.equal(jsxAsObjectFixture);
+    expect(lResult.output).to.be.jsonSchema(cruiseResultSchema);
+  });
+  it("Collapses to a pattern when a collapse pattern is passed", () => {
+    const lResult = main.cruise(
+      ["test/main/fixtures/collapse-after-cruise"],
+      {
+        ruleSet: {},
+        collapse: "^test/main/fixtures/collapse-after-cruise/src/[^/]+",
+      },
+      { bustTheCache: true }
+    );
+
+    expect(lResult.output).to.deep.equal(
+      JSON.parse(
+        fs.readFileSync(
+          "test/main/fixtures/collapse-after-cruise/expected-result.json",
+          "utf8"
+        )
+      )
+    );
     expect(lResult.output).to.be.jsonSchema(cruiseResultSchema);
   });
 });
