@@ -1,10 +1,10 @@
 const { expect } = require("chai");
-const normalizeOptions = require("~/src/main/options/normalize");
+const { normalizeCruiseOptions } = require("~/src/main/options/normalize");
 
-describe("main/options/normalize", () => {
+describe("main/options/normalize - cruise options", () => {
   it("ensures maxDepth is an int when passed an int", () => {
     expect(
-      normalizeOptions({
+      normalizeCruiseOptions({
         maxDepth: 42,
       }).maxDepth
     ).to.equal(42);
@@ -12,7 +12,7 @@ describe("main/options/normalize", () => {
 
   it("ensures maxDepth is an int when passed a string", () => {
     expect(
-      normalizeOptions({
+      normalizeCruiseOptions({
         maxDepth: "42",
       }).maxDepth
     ).to.equal(42);
@@ -20,7 +20,7 @@ describe("main/options/normalize", () => {
 
   it("makes doNotFollow strings into an object", () => {
     expect(
-      normalizeOptions({
+      normalizeCruiseOptions({
         doNotFollow: "42",
       }).doNotFollow
     ).to.deep.equal({
@@ -29,7 +29,7 @@ describe("main/options/normalize", () => {
   });
   it("makes focus strings into an object", () => {
     expect(
-      normalizeOptions({
+      normalizeCruiseOptions({
         focus: "42",
       }).focus
     ).to.deep.equal({
@@ -39,7 +39,7 @@ describe("main/options/normalize", () => {
 
   it("makes exclude arrays into an object with a string", () => {
     expect(
-      normalizeOptions({
+      normalizeCruiseOptions({
         exclude: ["^aap", "^noot", "mies$"],
       }).exclude
     ).to.deep.equal({
@@ -49,7 +49,7 @@ describe("main/options/normalize", () => {
 
   it("makes exclude object with an array for path into an exclude path with a string for path", () => {
     expect(
-      normalizeOptions({
+      normalizeCruiseOptions({
         exclude: { path: ["^aap", "^noot", "mies$"] },
       }).exclude
     ).to.deep.equal({
@@ -59,7 +59,7 @@ describe("main/options/normalize", () => {
 
   it("de-arrayify's archi reporter options' collapsePattern", () => {
     expect(
-      normalizeOptions({
+      normalizeCruiseOptions({
         reporterOptions: {
           archi: {
             collapsePattern: ["^src/[^/]+", "^node_modules/[^/]+", "^bin/"],
@@ -75,7 +75,7 @@ describe("main/options/normalize", () => {
 
   it("de-arrayify's dot reporter options' filters", () => {
     expect(
-      normalizeOptions({
+      normalizeCruiseOptions({
         reporterOptions: {
           dot: {
             filters: {
@@ -90,6 +90,34 @@ describe("main/options/normalize", () => {
       dot: {
         filters: { includeOnly: { path: "^src|^test|^bin" } },
       },
+    });
+  });
+
+  it("collapse: normalizes a single digit for collapse to a folder depth regex", () => {
+    expect(normalizeCruiseOptions({ collapse: 2 }, ["collapse"])).to.contain({
+      collapse: "node_modules/[^/]+|^[^/]+/[^/]+/",
+    });
+  });
+
+  it("collapse: normalizes a single digit for collapse to a folder depth regex (digit in a string)", () => {
+    expect(normalizeCruiseOptions({ collapse: "2" }, ["collapse"])).to.contain({
+      collapse: "node_modules/[^/]+|^[^/]+/[^/]+/",
+    });
+  });
+
+  it("collapse: leaves non-single digits alone", () => {
+    expect(normalizeCruiseOptions({ collapse: "22" }, ["collapse"])).to.contain(
+      {
+        collapse: "22",
+      }
+    );
+  });
+
+  it("collapse: leaves a normal string/ regex like alone", () => {
+    expect(
+      normalizeCruiseOptions({ collapse: "^packages/[^/]+" }, ["collapse"])
+    ).to.contain({
+      collapse: "^packages/[^/]+",
     });
   });
 });

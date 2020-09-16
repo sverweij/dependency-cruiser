@@ -15,8 +15,14 @@ const stripSelfTransitions = require("../graph-utl/strip-self-transitions");
 const normalizeFilesAndDirectories = require("./files-and-dirs/normalize");
 const validateRuleSet = require("./rule-set/validate");
 const normalizeRuleSet = require("./rule-set/normalize");
-const validateOptions = require("./options/validate");
-const normalizeOptions = require("./options/normalize");
+const {
+  validateCruiseOptions,
+  validateFormatOptions,
+} = require("./options/validate");
+const {
+  normalizeCruiseOptions,
+  normalizeFormatOptions,
+} = require("./options/normalize");
 const normalizeResolveOptions = require("./resolve-options/normalize");
 
 function reSummarizeResults(pResult, pFormatOptions) {
@@ -48,22 +54,26 @@ function validateResultAgainstSchema(pResult) {
   }
 }
 
-function format(pResult, pFormatOptions = {}) {
-  const lFormatOptions = normalizeOptions.normalizeFormatOptions(
-    pFormatOptions
+function reportWithReSummarization(pResult, pFormatOptions) {
+  const lReportFn = report.getReporter(pFormatOptions.outputType);
+
+  return lReportFn(
+    reSummarizeResults(pResult, pFormatOptions),
+    // passing format options here so reporters that read collapse patterns
+    // from the result take the one passed in the format options instead
+    _has(pFormatOptions, "collapse")
+      ? { collapsePattern: pFormatOptions.collapse }
+      : {}
   );
-  validateOptions.validateFormatOptions(lFormatOptions);
+}
+
+function format(pResult, pFormatOptions = {}) {
+  const lFormatOptions = normalizeFormatOptions(pFormatOptions);
+  validateFormatOptions(lFormatOptions);
 
   validateResultAgainstSchema(pResult);
 
-  const lReportFn = report.getReporter(lFormatOptions.outputType);
-
-  return lReportFn(
-    reSummarizeResults(pResult, lFormatOptions),
-    _has(lFormatOptions, "collapse")
-      ? { collapsePattern: lFormatOptions.collapse }
-      : {}
-  );
+  return reportWithReSummarization(pResult, lFormatOptions);
 }
 
 function futureCruise(
@@ -73,7 +83,9 @@ function futureCruise(
   pTranspileOptions
 ) {
   bus.emit("progress", "parsing options");
-  pCruiseOptions = normalizeOptions(validateOptions(pCruiseOptions));
+  pCruiseOptions = normalizeCruiseOptions(
+    validateCruiseOptions(pCruiseOptions)
+  );
 
   if (Boolean(pCruiseOptions.ruleSet)) {
     bus.emit("progress", "parsing rule set");
@@ -110,7 +122,7 @@ function futureCruise(
   );
 
   bus.emit("progress", "reporting");
-  return report.getReporter(pCruiseOptions.outputType)(lCruiseResult);
+  return reportWithReSummarization(lCruiseResult, pCruiseOptions);
 }
 
 // see [api.md](../../doc/api.md) and/ or the

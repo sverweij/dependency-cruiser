@@ -1,7 +1,7 @@
 const { expect } = require("chai");
 const gather = require("~/src/extract/gather-initial-sources");
 const p2p = require("~/src/utl/path-to-posix");
-const normalize = require("~/src/main/options/normalize");
+const { normalizeCruiseOptions } = require("~/src/main/options/normalize");
 
 // make the import pathToPosix the correct function profile
 // (1 parameter exactly) for use in map
@@ -9,7 +9,7 @@ function pathToPosix(pPath) {
   return p2p(pPath);
 }
 
-const EMPTYOPTIONS = normalize({});
+const EMPTYOPTIONS = normalizeCruiseOptions({});
 
 describe("extract/gatherInitialSources", () => {
   it("one file stays one file", () => {

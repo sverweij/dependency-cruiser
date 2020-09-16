@@ -49,12 +49,27 @@ export default {
             { $ref: "#/definitions/CompoundFocusType" },
           ],
         },
+        collapse: {
+          description:
+            "Collapse a to a folder depth by passing a single digit (e.g. 2). " +
+            "When passed a regex collapses to that pattern " +
+            "E.g. ^packages/[^/]+/ would collapse to modules/ folders directly " +
+            "under your packages folder.",
+          oneOf: [
+            { type: "string" },
+            { type: "integer", minimum: 1, maximum: 9 },
+          ],
+        },
         maxDepth: {
           type: "integer",
           minimum: 0,
           maximum: 99,
           description:
-            "The maximum cruise depth specified. 0 means no maximum specified",
+            "The maximum cruise depth specified. 0 means no maximum specified. While " +
+            "it might look attractive to regulate the size of the output, this is " +
+            "not the best option to do so. Filters (exclude, includeOnly, " +
+            "focus), the dot and archi reporter's collapsePattern and the collapse " +
+            "options offer better, more reliable and more understandable results.",
         },
         moduleSystems: { $ref: "#/definitions/ModuleSystemsType" },
         prefix: {

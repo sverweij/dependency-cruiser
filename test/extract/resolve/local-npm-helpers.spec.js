@@ -3,12 +3,15 @@ const _has = require("lodash/has");
 const clearCaches = require("~/src/extract/clear-caches");
 const localNpmHelpers = require("~/src/extract/resolve/local-npm-helpers");
 const normalizeResolveOptions = require("~/src/main/resolve-options/normalize");
-const normalizeOptions = require("~/src/main/options/normalize");
+const { normalizeCruiseOptions } = require("~/src/main/options/normalize");
 
-const BASIC_RESOLVE_OPTIONS = normalizeResolveOptions({}, normalizeOptions({}));
+const BASIC_RESOLVE_OPTIONS = normalizeResolveOptions(
+  {},
+  normalizeCruiseOptions({})
+);
 const RESOLVE_OPTIONS_HEEDING_EXPORTS = normalizeResolveOptions(
   { exportsFields: ["exports"], conditionNames: ["require", "imports"] },
-  normalizeOptions({})
+  normalizeCruiseOptions({})
 );
 describe("extract/resolve/localNpmHelpers.getPackageJson", () => {
   beforeEach(() => {

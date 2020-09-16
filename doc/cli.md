@@ -27,7 +27,8 @@ available in dependency-cruiser configurations.
 1. [`--do-not-follow`: don't cruise modules adhering to this pattern any further](#--do-not-follow-dont-cruise-modules-adhering-to-this-pattern-any-further)
 1. [`--exclude`: exclude dependencies from being cruised](#--exclude-exclude-dependencies-from-being-cruised)
 1. [`--include-only`: only include modules satisfying a pattern](#--include-only-only-include-modules-satisfying-a-pattern)
-1. [`--focus`: show modules and their direct neighbours](#--focus-focus-on-some-modules-and-their-direct-neighbours)
+1. [`--focus`: show modules and their direct neighbours](#--focus-show-modules-and-their-direct-neighbours)
+1. [`--collapse`: summarize to folder depth or pattern](#--collapse-summarize-to-folder-depth-or-pattern)
 1. [`--max-depth`](#--max-depth)
 1. [`--prefix` prefixing links](#--prefix-prefixing-links)
 1. [`--module-systems`](#--module-systems)
@@ -568,7 +569,7 @@ dependency-cruise --include-only "^src" -T dot src | dot -T svg > internal-depen
 See [includeOnly](./options-reference.md#includeonly-only-include-modules-satisfying-a-pattern)
 in the options reference for more details.
 
-### `--focus`: focus on some modules and their direct neighbours
+### `--focus`: show modules and their direct neighbours
 
 You can use this e.g. to inspect one module or folder and see what the direct
 dependencies are and which modules are direct dependents.
@@ -583,19 +584,59 @@ dependency-cruise --include-only "^src" --focus "^src/main" -T dot src | dot -T 
 See [focus](./options-reference.md#show-modules-matching-a-pattern---with-their-direct-neighbours)
 in the options reference for more details.
 
+### `--collapse`: summarize to folder depth or pattern
+
+If you feel the need for reporting on a higher level (e.g. on packages in a
+mono repo, or the main folders in `src`) you can use the `--collapse` option. It
+takes either a single digit or a regular expression.
+
+#### --collapse: single digit
+
+The most typical use for collapsing is to limit the folder depth. It is possible
+to do this with regular expressions (see below, and in the
+[options reference](./options-reference.md#reporteroptions)). As this case occurs
+a lot you can pass
+
+```sh
+depcruise src --include-only ^src --collapse 2 -T dot | dot -T svg > collapsed.svg
+```
+
+> Under water dependency-cruiser translates the single digit into a regular
+> expression again. For `2` e.g. it generates `/node_modules/[^/]+|^[^/]+\/[^/]+\//`
+
+### --collapse: regular expression
+
+If you need more flexibility, you can also pass a regular expression to --collapse.
+E.g. to only collapse stuff under `node_modules` and `lib` (but not under e.g.
+`test` and `src`) you can pass this:
+
+```sh
+depcruise src --do-not-follow node_modules --collapse "^(node_modules|lib)/[^/]+" -T dot | dot -T svg > collapsed.svg
+```
+
+`--collapse` works the same as the [dot/ archi specific collapsePattern option](#summarising-collapsepattern-dot-and-archi-reporters),
+except it works for all reports instead of for only the dot and archi reporters.
+This means you can not only use it to make graphical output look better, but also
+to show simple textual output of relations between high level components e.g.
+
+```sh
+depcruise packages --include-only ^packages --collapse "^packages/[^/]+" -T text
+```
+
 ### `--max-depth`
 
 Only cruise the specified depth, counting from the specified root-module(s). This
 command was mostly useful in combination with visualisation output like _dot_ to
 keep the generated output to a manageable size.
 
-These days better options exist that servethe same goal and give better looking
-and more accurate results:
+You probably don't want to use these as today better options exist that serve the
+same goal and give better looking and more accurate results. E.g.:
 
-- use filters like --include-only and --focus to only show a relevant part of your graph
+- use the [`--collapse`](#--collapse-summarize-to-folder-depth-or-pattern) option
 - use a [collapsePattern](./options-reference#summarising-collapsepattern-dot-and-archi-reporters)
   in conjunction with your dot reporter to hide details you don't want to see
   right now
+- use filters like --include-only and --focus to only show a relevant part of your graph
 - use the `archi` reporter that produces a high level dependency-graph based on
   heuristics.
 
@@ -714,42 +755,8 @@ depcruise-fmt -T text --focus "^src/main/spelunkme\\.ts$" cruise_result.json
 
 ### collapse/ summarize
 
-If you feel the need for reporting on a higher level (e.g. on packages in a
-mono repo, or the main folders in `src`) you can use the `--collapse` option. It
-takes either a single digit or a regular expression.
-
-#### --collapse: single digit
-
-The most typical use for collapsing is to limit the folder depth. It is possible
-to do this with regular expressions (see below, and in the
-[options reference](./options-reference.md#reporteroptions)). As this case occurs
-a lot you can pass
-
-```sh
-depcruise-fmt cruise_result.json --collapse 2 -T dot | dot -T svg > collapsed.svg
-```
-
-> Under water depcruise-fmt translates the single digit into a regular expression
-> again. For `2` e.g. it generates `/^[^/]+\/[^/]+\/|node_modules/[^/]+/`
-
-### --collapse: regular expression
-
-If you need more flexibility, you can also pass a regular expression to --collapse.
-E.g. to only collapse stuff under `node_modules` and `lib` (but not under e.g.
-`test` and `src`) you can pass this:
-
-```sh
-depcruise-fmt cruise_result.json --collapse "^(node_modules|lib)/[^/]+" -T dot | dot -T svg > collapsed.svg
-```
-
-`--collapse` works the same as the [dot/ archi specific collapsePattern option](#summarising-collapsepattern-dot-and-archi-reporters),
-except this works on not only the dot and archi reporters, but on all of them. This
-means you can not only use it to make graphical output look better, but also
-to show simple textual output of relations between high level components e.g.
-
-```sh
-depcruise-fmt cruise_result.json --collapse "^packages/[^/]+" -T text
-```
+Summarize or collapse to either a folder depth or (if you're feeling fancy) a regular
+expression. It works the same as the regular depcruise command's [`--collapse`](#--collapse-summarize-to-folder-depth-or-pattern) option.
 
 ### getting non-zero exit codes
 

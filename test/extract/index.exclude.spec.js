@@ -1,6 +1,6 @@
 const chai = require("chai");
 const extract = require("~/src/extract");
-const normalize = require("~/src/main/options/normalize");
+const { normalizeCruiseOptions } = require("~/src/main/options/normalize");
 const normalizeResolveOptions = require("~/src/main/resolve-options/normalize");
 
 const expect = chai.expect;
@@ -9,7 +9,7 @@ chai.use(require("chai-json-schema"));
 
 describe("extract/index - exclude", () => {
   it("exclude - exclude.path", () => {
-    const lOptions = normalize({
+    const lOptions = normalizeCruiseOptions({
       exclude: {
         path: "dynamic-to-circular",
       },
@@ -32,7 +32,7 @@ describe("extract/index - exclude", () => {
   });
 
   it("exclude - exclude.dynamic", () => {
-    const lOptions = normalize({
+    const lOptions = normalizeCruiseOptions({
       exclude: {
         dynamic: true,
       },

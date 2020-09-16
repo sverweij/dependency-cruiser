@@ -60,8 +60,15 @@ try {
         "compilation (off by default)"
     )
     .option(
+      "-S, --collapse <regex>",
+      "collapse a to a folder depth by passing a single digit (e.g. 2). When passed a " +
+        "regex collapses to that pattern E.g. ^packages/[^/]+/ would collapse to " +
+        "modules/ folders directly under your packages folder. "
+    )
+    .option(
       "-d, --max-depth <n>",
-      "limit cruise depth; 0 <= n <= 99 (default: 0 - no limit)"
+      "You probably want to use --collapse instead of --max-depth. " +
+        "(max-depth would limit the cruise depth; 0 <= n <= 99 (default: 0 - no limit))."
     )
     .option(
       "-M, --module-systems <items>",

@@ -1,7 +1,7 @@
 const Ajv = require("ajv");
 const safeRegex = require("safe-regex");
 const _has = require("lodash/has");
-const validateOptions = require("../options/validate");
+const { validateCruiseOptions } = require("../options/validate");
 const configurationSchema = require("../../schema/configuration.schema.json");
 
 const ajv = new Ajv();
@@ -68,7 +68,7 @@ module.exports = (pConfiguration) => {
   (pConfiguration.allowed || []).forEach(checkRuleSafety);
   (pConfiguration.forbidden || []).forEach(checkRuleSafety);
   if (_has(pConfiguration, "options")) {
-    validateOptions(pConfiguration.options);
+    validateCruiseOptions(pConfiguration.options);
   }
   return pConfiguration;
 };

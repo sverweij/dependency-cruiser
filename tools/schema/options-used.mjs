@@ -51,6 +51,11 @@ export default {
         // focus can be either a string or an object in the input options -
         // in the output it's always an object
         focus: { $ref: "#/definitions/CompoundFocusType" },
+        // can be input as either a digit or a string, but for internal processing
+        // and output always translated to a string containing a regex
+        collapse: {
+          type: "string",
+        },
       },
     },
     ...moduleSystemsType.definitions,

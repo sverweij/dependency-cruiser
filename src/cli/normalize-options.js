@@ -9,6 +9,7 @@ const defaults = require("./defaults.json");
 
 const KNOWN_DEPCRUISE_OPTIONS = [
   "baseDir",
+  "collapse",
   "config",
   "doNotFollow",
   "exclude",
@@ -137,21 +138,6 @@ function validateAndNormalizeRulesFileName(pValidate) {
   return lReturnValue;
 }
 
-function normalizeCollapse(pCollapse) {
-  let lReturnValue = pCollapse;
-  const ONE_OR_MORE_NON_SLASHES = "[^/]+";
-  const FOLDER_PATTERN = `${ONE_OR_MORE_NON_SLASHES}/`;
-  const FOLDER_BELOW_NODE_MODULES = `node_modules/${ONE_OR_MORE_NON_SLASHES}`;
-  const SINGLE_DIGIT_RE = /^\d$/;
-
-  if (pCollapse.match(SINGLE_DIGIT_RE)) {
-    lReturnValue = `^${FOLDER_PATTERN.repeat(
-      Number.parseInt(pCollapse, 10)
-    )}|${FOLDER_BELOW_NODE_MODULES}`;
-  }
-  return lReturnValue;
-}
-
 /**
  * returns the pOptions, so that the returned value contains a
  * valid value for each possible option
@@ -159,7 +145,6 @@ function normalizeCollapse(pCollapse) {
  * @param  {object} pOptionsAsPassedFromCommander [description]
  * @return {object}          [description]
  */
-// eslint-disable-next-line max-lines-per-function
 module.exports = (
   pOptionsAsPassedFromCommander,
   pKnownOptions = KNOWN_DEPCRUISE_OPTIONS
@@ -178,10 +163,6 @@ module.exports = (
 
   if (_has(lOptions, "config")) {
     lOptions.validate = lOptions.config;
-  }
-
-  if (_has(lOptions, "collapse")) {
-    lOptions.collapse = normalizeCollapse(lOptions.collapse);
   }
 
   if (_has(lOptions, "validate")) {

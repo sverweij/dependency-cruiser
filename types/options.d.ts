@@ -52,8 +52,22 @@ export interface ICruiseOptions {
    */
   focus?: string | string[] | IFocusType;
   /**
+   * collapse a to a folder depth by passing a single digit (e.g. 2).
+   * When passed a regex collapse to that pattern
+   *
+   * E.g. ^packages/[^/]+/ would collapse to modules/ folders directly under
+   * your packages folder.
+   */
+  collapse?: string | number;
+  /**
    * the maximum depth to cruise; 0 <= n <= 99
    * (default: 0, which means 'infinite depth')
+   * While it might look attractive to regulate the size of the output, this is
+   * not the best option to do so.
+   *
+   * Filters (exclude, includeOnly, focus), the dot and archi reporter's collapsePattern
+   * and the collapse options offer better, more reliable and more
+   * understandable results.
    */
   maxDepth?: number;
   /**

@@ -307,6 +307,13 @@ dynamic import from being included in a cruise, you can use the `dynamic` attrib
 
 > Other attributes might come in future releases
 
+### `collapse`: summarize to folder depth or pattern
+
+> :shell: command line option equivalent `--collapse`
+
+As this is an option that is probably typically used from the command line it's
+described primarily [over there](cli.md#--collapse-summarize-to-folder-depth-or-pattern).
+
 ### `maxDepth`
 
 > :shell: command line option equivalent: `--max-depth`
@@ -317,7 +324,8 @@ keep the generated output to a manageable size.
 
 > :bulb: If you use this to get a high level overview of your dependencies, be sure
 > to check out the [archi](#archi) reporter. That's more flexible, while still
-> taking into account all your rules and dependencies
+> taking into account all your rules and dependencies. You can also consider the
+> [collapse](#collapse-summarize-to-folder-depth-or-pattern) option for this.
 
 This will cruise the dependencies of each file directly in the src folder, up
 to a depth of 1:
@@ -328,15 +336,15 @@ to a depth of 1:
 ...
 ```
 
-<img width="237" alt="max depth = 1" src="real-world-samples/dependency-cruiser-max-depth-1.png">
+<img width="237" alt="max depth = 1" src="real-world-samples/dependency-cruiser-max-depth-1.svg">
 
 With `"maxDepth": 2` it'll look like this:
 
-<img width="390" alt="max depth = 2" src="real-world-samples/dependency-cruiser-max-depth-2.png">
+<img width="390" alt="max depth = 2" src="real-world-samples/dependency-cruiser-max-depth-2.svg">
 
 And with `"maxDepth": 3` like this:
 
-<img width="623" alt="dependency-cruiser cruised with max depth 3" src="real-world-samples/dependency-cruiser-max-depth-3.png">
+<img width="623" alt="dependency-cruiser cruised with max depth 3" src="real-world-samples/dependency-cruiser-max-depth-3.svg">
 
 > :bulb: The `maxDepth` option is there to help with visualising. If your goal is to _validate_
 > this option is best left alone as you'll miss a dependency or two otherwise.
