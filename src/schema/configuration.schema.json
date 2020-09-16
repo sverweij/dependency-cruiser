@@ -331,7 +331,7 @@
           ]
         },
         "collapse": {
-          "description": "collapse a to a folder depth by passing a single digit (e.g. 2). When passed a regex collapses to that pattern E.g. ^packages/[^/]+/ would collapse to modules/ folders directly under your packages folder.",
+          "description": "Collapse a to a folder depth by passing a single digit (e.g. 2). When passed a regex collapses to that pattern E.g. ^packages/[^/]+/ would collapse to modules/ folders directly under your packages folder.",
           "oneOf": [
             { "type": "string" },
             { "type": "integer", "minimum": 1, "maximum": 9 }
