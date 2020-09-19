@@ -1,12 +1,12 @@
 const fs = require("fs");
 const path = require("path");
 const pathToPosix = require("../../utl/path-to-posix");
-const isRelativeModuleName = require("./is-relative-module-name");
+const { isRelativeModuleName } = require("./module-classifiers");
 const resolveAMD = require("./resolve-amd");
 const resolveCommonJS = require("./resolve-cjs");
 
 function resolveModule(
-  pDependency,
+  pModule,
   pBaseDirectory,
   pFileDirectory,
   pResolveOptions
@@ -14,18 +14,18 @@ function resolveModule(
   let lReturnValue = null;
 
   if (
-    isRelativeModuleName(pDependency.module) ||
-    ["cjs", "es6"].includes(pDependency.moduleSystem)
+    isRelativeModuleName(pModule.module) ||
+    ["cjs", "es6"].includes(pModule.moduleSystem)
   ) {
     lReturnValue = resolveCommonJS(
-      pDependency.module,
+      pModule.module,
       pBaseDirectory,
       pFileDirectory,
       pResolveOptions
     );
   } else {
     lReturnValue = resolveAMD(
-      pDependency.module,
+      pModule.module,
       pBaseDirectory,
       pFileDirectory,
       pResolveOptions
@@ -47,13 +47,13 @@ function isTypeScriptishExtension(pModuleName) {
 }
 
 function resolveWithRetry(
-  pDependency,
+  pModule,
   pBaseDirectory,
   pFileDirectory,
   pResolveOptions
 ) {
   let lReturnValue = resolveModule(
-    pDependency,
+    pModule,
     pBaseDirectory,
     pFileDirectory,
     pResolveOptions
@@ -74,15 +74,12 @@ function resolveWithRetry(
   // plugin/ extension for it (tsconfig-paths-webpack-plugin?)
   if (
     lReturnValue.couldNotResolve &&
-    canBeResolvedToTsVariant(pDependency.module)
+    canBeResolvedToTsVariant(pModule.module)
   ) {
-    const lModuleWithOutExtension = pDependency.module.replace(
-      /\.js(x)?$/g,
-      ""
-    );
+    const lModuleWithOutExtension = pModule.module.replace(/\.js(x)?$/g, "");
 
     const lReturnValueCandidate = resolveModule(
-      { ...pDependency, module: lModuleWithOutExtension },
+      { ...pModule, module: lModuleWithOutExtension },
       pBaseDirectory,
       pFileDirectory,
       pResolveOptions
@@ -98,7 +95,7 @@ function resolveWithRetry(
 /**
  * resolves the module name of the pDependency to a file on disk.
  *
- * @param  {object} pDependency an object with a module and the moduleSystem
+ * @param  {object} pModule an object with a module and the moduleSystem
  *                              according to which this is a dependency
  * @param  {string} pBaseDirectory    the directory to consider as base (or 'root')
  *                              for resolved files.
@@ -130,13 +127,13 @@ function resolveWithRetry(
  *
  */
 module.exports = function resolve(
-  pDependency,
+  pModule,
   pBaseDirectory,
   pFileDirectory,
   pResolveOptions
 ) {
   let lResolvedModule = resolveWithRetry(
-    pDependency,
+    pModule,
     pBaseDirectory,
     pFileDirectory,
     pResolveOptions

@@ -16,7 +16,7 @@ const mergePackages = require("./merge-manifests");
  *               object or null if the package.json could not be
  *               found or is invalid
  */
-const getManifest = _memoize((pFileDirectory) => {
+const getSingleManifest = _memoize((pFileDirectory) => {
   let lReturnValue = null;
 
   try {
@@ -36,7 +36,7 @@ const getManifest = _memoize((pFileDirectory) => {
 
     if (lNextDirectory !== pFileDirectory) {
       // not yet reached root directory
-      lReturnValue = getManifest(lNextDirectory);
+      lReturnValue = getSingleManifest(lNextDirectory);
     }
   }
   return lReturnValue;
@@ -125,7 +125,7 @@ const getCombinedManifests = _memoize((pFileDirectory, pBaseDirectory) => {
  *                                         object or null if a package.json could not be
  *                                        found or is invalid
  */
-module.exports = function getManifestDependencies(
+module.exports = function getManifest(
   pFileDirectory,
   pBaseDirectory,
   pCombinedDependencies = false
@@ -133,10 +133,10 @@ module.exports = function getManifestDependencies(
   if (pCombinedDependencies) {
     return getCombinedManifests(pFileDirectory, pBaseDirectory);
   } else {
-    return getManifest(pFileDirectory);
+    return getSingleManifest(pFileDirectory);
   }
 };
 module.exports.clearCache = () => {
   getCombinedManifests.cache.clear();
-  getManifest.cache.clear();
+  getSingleManifest.cache.clear();
 };

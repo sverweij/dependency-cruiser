@@ -1,7 +1,11 @@
 const path = require("path");
 const _has = require("lodash/has");
-const isCore = require("./is-core");
-const isRelativeModuleName = require("./is-relative-module-name");
+const {
+  isRelativeModuleName,
+  isCore,
+  isExternalModule,
+  isAliassy,
+} = require("./module-classifiers");
 const localNpmHelpers = require("./local-npm-helpers");
 
 function toPackagePaths(pExternalModuleResolvePaths) {
@@ -32,7 +36,7 @@ const NPM2DEP_TYPE = {
   peerDependencies: "npm-peer",
 };
 
-function determineNpmDependencyTypes(
+function determineManifestDependencyTypes(
   pModuleName,
   pPackageDependencies,
   pExternalModuleResolvePaths
@@ -80,7 +84,7 @@ function determineNodeModuleDependencyTypes(
   pFileDirectory,
   pResolveOptions
 ) {
-  let lReturnValue = determineNpmDependencyTypes(
+  let lReturnValue = determineManifestDependencyTypes(
     localNpmHelpers.getPackageRoot(pModuleName),
     pPackageDeps,
     pResolveOptions.modules
@@ -101,20 +105,19 @@ function determineNodeModuleDependencyTypes(
   return lReturnValue;
 }
 
-function isNodeModule(pDependency) {
-  return pDependency.resolved.includes("node_modules");
-}
-
-function determineModuleDependencyTypes(
+function determineExternalModuleDependencyTypes(
   pDependency,
   pModuleName,
   pPackageDeps,
   pFileDirectory,
-  pResolveOptions
+  pResolveOptions,
+  pBaseDirectory
 ) {
   let lReturnValue = [];
 
-  if (isNodeModule(pDependency)) {
+  if (
+    isExternalModule(pDependency.resolved, ["node_modules"], pBaseDirectory)
+  ) {
     lReturnValue = determineNodeModuleDependencyTypes(
       pModuleName,
       pPackageDeps,
@@ -127,63 +130,12 @@ function determineModuleDependencyTypes(
   return lReturnValue;
 }
 
-function isModule(
-  pDependency,
-  pModules = ["node_modules"],
-  pBaseDirectory = "."
-) {
-  return pModules.some(
-    // pModules can contain relative paths, but also absolute ones.
-    // WebPack treats these differently:
-    // - absolute paths only match that exact path
-    // - relative paths get a node lookup treatment so "turtle" matches
-    //   "turtle", "../turtle", "../../turtle", "../../../turtle" (.. =>
-    // turtles all the way down)
-    // hence we'll have to test for them in different fashion as well.
-    // reference: https://webpack.js.org/configuration/resolve/#resolve-modules
-    (pModule) => {
-      if (path.isAbsolute(pModule)) {
-        return path
-          .resolve(pBaseDirectory, pDependency.resolved)
-          .startsWith(pModule);
-      }
-      return pDependency.resolved.includes(pModule);
-    }
-  );
-}
-
-function isAliased(pModuleName, pAliasObject) {
-  return Object.keys(pAliasObject || {}).some((pAliasLHS) =>
-    pModuleName.startsWith(pAliasLHS)
-  );
-}
-
-function isLikelyTSAliased(pModuleName, pResolved, pTsConfig) {
-  return (
-    pTsConfig &&
-    !isRelativeModuleName(pModuleName) &&
-    pResolved &&
-    !pResolved.includes("node_modules")
-  );
-}
-
-function isAliassy(pModuleName, pDependency, pResolveOptions) {
-  return (
-    isAliased(pModuleName, pResolveOptions.alias) ||
-    isLikelyTSAliased(
-      pModuleName,
-      pDependency.resolved,
-      pResolveOptions.tsConfig
-    )
-  );
-}
-
 /* eslint max-params:0, complexity:0 */
 /**
  *
  * @param {any} pDependency the dependency object with all information found hitherto
  * @param {string} pModuleName the module name as found in the source
- * @param {any} pPackageDeps a package.json, in object format
+ * @param {any} pManifest a package.json, in object format
  * @param {string} pFileDirectory the directory relative to which to resolve (only used for npm deps here)
  * @param {any} pResolveOptions an enhanced resolve 'resolve' key
  * @param {string} pBaseDirectory the base directory dependency cruise is run on
@@ -191,9 +143,9 @@ function isAliassy(pModuleName, pDependency, pResolveOptions) {
  * @return {string[]} an array of dependency types for the dependency
  */
 module.exports = function determineDependencyTypes(
-  pDependency,
+  pModule,
   pModuleName,
-  pPackageDeps,
+  pManifest,
   pFileDirectory,
   pResolveOptions,
   pBaseDirectory
@@ -202,7 +154,7 @@ module.exports = function determineDependencyTypes(
 
   pResolveOptions = pResolveOptions || {};
 
-  if (pDependency.couldNotResolve) {
+  if (pModule.couldNotResolve) {
     lReturnValue = ["unknown"];
   } else if (isCore(pModuleName)) {
     // this 'isCore' business seems duplicate (it's already in
@@ -213,15 +165,18 @@ module.exports = function determineDependencyTypes(
     lReturnValue = ["core"];
   } else if (isRelativeModuleName(pModuleName)) {
     lReturnValue = ["local"];
-  } else if (isModule(pDependency, pResolveOptions.modules, pBaseDirectory)) {
-    lReturnValue = determineModuleDependencyTypes(
-      pDependency,
+  } else if (
+    isExternalModule(pModule.resolved, pResolveOptions.modules, pBaseDirectory)
+  ) {
+    lReturnValue = determineExternalModuleDependencyTypes(
+      pModule,
       pModuleName,
-      pPackageDeps,
+      pManifest,
       pFileDirectory,
-      pResolveOptions
+      pResolveOptions,
+      pBaseDirectory
     );
-  } else if (isAliassy(pModuleName, pDependency, pResolveOptions)) {
+  } else if (isAliassy(pModuleName, pModule.resolved, pResolveOptions)) {
     lReturnValue = ["aliased"];
   }
 

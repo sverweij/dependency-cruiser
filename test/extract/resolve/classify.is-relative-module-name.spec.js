@@ -1,7 +1,9 @@
 const { expect } = require("chai");
-const isRelativeModuleName = require("~/src/extract/resolve/is-relative-module-name");
+const {
+  isRelativeModuleName,
+} = require("~/src/extract/resolve/module-classifiers");
 
-describe("extract/resolve/isRelativeModuleName", () => {
+describe("extract/resolve/module-classifiers - isRelativeModuleName", () => {
   it("throws an error when passed nothing", () => {
     expect(() => {
       isRelativeModuleName();

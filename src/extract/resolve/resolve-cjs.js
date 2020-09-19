@@ -1,11 +1,10 @@
 const path = require("path");
 const pathToPosix = require("../../utl/path-to-posix");
 const determineDependencyTypes = require("./determine-dependency-types");
-const isCore = require("./is-core");
-const readPackageDeps = require("./get-manifest-dependencies");
+const { isCore, isFollowable } = require("./module-classifiers");
+const getManifest = require("./get-manifest");
 const resolveHelpers = require("./resolve-helpers");
 const resolve = require("./resolve");
-const isFollowable = require("./is-followable");
 
 function addResolutionAttributes(
   pBaseDirectory,
@@ -69,7 +68,7 @@ module.exports = function resolveCommonJS(
     dependencyTypes: determineDependencyTypes(
       lReturnValue,
       pModuleName,
-      readPackageDeps(
+      getManifest(
         pFileDirectory,
         pBaseDirectory,
         pResolveOptions.combinedDependencies
