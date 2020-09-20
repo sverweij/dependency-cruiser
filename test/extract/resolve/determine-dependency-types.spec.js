@@ -1,11 +1,11 @@
 const path = require("path");
 const { expect } = require("chai");
-const determine = require("~/src/extract/resolve/determine-dependency-types");
+const determineDependencyTypes = require("~/src/extract/resolve/determine-dependency-types");
 
 describe("extract/resolve/determineDependencyTypes - determine dependencyTypes", () => {
   it("sorts local dependencies into 'local'", () => {
     expect(
-      determine(
+      determineDependencyTypes(
         {
           couldNotResolve: false,
           resolved: "src/bla/localthing",
@@ -17,7 +17,7 @@ describe("extract/resolve/determineDependencyTypes - determine dependencyTypes",
 
   it("sorts core modules into 'core'", () => {
     expect(
-      determine(
+      determineDependencyTypes(
         {
           couldNotResolve: false,
           resolved: "fs",
@@ -29,7 +29,7 @@ describe("extract/resolve/determineDependencyTypes - determine dependencyTypes",
 
   it("sorts unresolvable modules into 'unknown'", () => {
     expect(
-      determine(
+      determineDependencyTypes(
         {
           couldNotResolve: true,
           resolved: "unresolvable-thing",
@@ -41,7 +41,7 @@ describe("extract/resolve/determineDependencyTypes - determine dependencyTypes",
 
   it("sorts node_modules into 'npm-unknown' when no package dependencies were supplied", () => {
     expect(
-      determine(
+      determineDependencyTypes(
         {
           couldNotResolve: false,
           resolved: "node_modules/cool-module/main/index/js",
@@ -53,7 +53,7 @@ describe("extract/resolve/determineDependencyTypes - determine dependencyTypes",
 
   it("sorts node_modules into 'npm-no-pkg' when they're not in the supplied package dependencies", () => {
     expect(
-      determine(
+      determineDependencyTypes(
         {
           module: "cool-module",
           couldNotResolve: false,
@@ -67,7 +67,7 @@ describe("extract/resolve/determineDependencyTypes - determine dependencyTypes",
 
   it("sorts node_modules into 'npm' when they're in the supplied package dependencies", () => {
     expect(
-      determine(
+      determineDependencyTypes(
         {
           module: "cool-module",
           couldNotResolve: false,
@@ -85,7 +85,7 @@ describe("extract/resolve/determineDependencyTypes - determine dependencyTypes",
 
   it("sorts node_modules into 'npm-dev' when they're in the supplied package devDependencies", () => {
     expect(
-      determine(
+      determineDependencyTypes(
         {
           couldNotResolve: false,
           resolved: "node_modules/cool-module/main/index.js",
@@ -102,7 +102,7 @@ describe("extract/resolve/determineDependencyTypes - determine dependencyTypes",
 
   it("sorts node_modules into 'npm-dev' when they're in the supplied package devDependencies with an @types scope", () => {
     expect(
-      determine(
+      determineDependencyTypes(
         {
           couldNotResolve: false,
           resolved: "node_modules/@types/my-totally-weird-types/index.d.ts",
@@ -117,9 +117,29 @@ describe("extract/resolve/determineDependencyTypes - determine dependencyTypes",
     ).to.deep.equal(["npm-dev"]);
   });
 
+  // it("Only picks the 'npm' dependency-type when it's in the manifest as a regular dependency and a devDependencies @types dependency ", () => {
+  //   expect(
+  //     determineDependencyTypes(
+  //       {
+  //         couldNotResolve: false,
+  //         resolved: "node_modules/snodash/index.js",
+  //       },
+  //       "snodash",
+  //       {
+  //         dependencies: {
+  //           snodash: "1.2.3",
+  //         },
+  //         devDependencies: {
+  //           "@types/snodash": "1.2.3",
+  //         },
+  //       }
+  //     )
+  //   ).to.deep.equal(["npm"]);
+  // });
+
   it("sorts node_modules into 'npm-no-pkg' when they're in the supplied package devDependencies with an @types scope, but the resolve modules don't include 'node_modules/@types'", () => {
     expect(
-      determine(
+      determineDependencyTypes(
         {
           couldNotResolve: false,
           resolved: "node_modules/@types/my-totally-weird-types/index.d.ts",
@@ -140,7 +160,7 @@ describe("extract/resolve/determineDependencyTypes - determine dependencyTypes",
 
   it("sorts node_modules into 'npm' and 'npm-dev' when they're both the deps and the devDeps", () => {
     expect(
-      determine(
+      determineDependencyTypes(
         {
           couldNotResolve: false,
           resolved: "node_modules/cool-module/main/index.js",
@@ -160,7 +180,7 @@ describe("extract/resolve/determineDependencyTypes - determine dependencyTypes",
 
   it("only sorts up to the first / ", () => {
     expect(
-      determine(
+      determineDependencyTypes(
         {
           couldNotResolve: false,
           resolved: "node_modules/cool-module/wappie.js",
@@ -180,7 +200,7 @@ describe("extract/resolve/determineDependencyTypes - determine dependencyTypes",
 
   it("sorts node_modules into 'npm-no-pkg' when they're in a weird *Dependencies in the package.json", () => {
     expect(
-      determine(
+      determineDependencyTypes(
         {
           couldNotResolve: false,
           resolved: "node_modules/cool-module/main/index.js",
@@ -197,7 +217,7 @@ describe("extract/resolve/determineDependencyTypes - determine dependencyTypes",
 
   it("classifies aliased modules as aliased", () => {
     expect(
-      determine(
+      determineDependencyTypes(
         {
           couldNotResolve: false,
           resolved: "src/wappie.js",
@@ -216,7 +236,7 @@ describe("extract/resolve/determineDependencyTypes - determine dependencyTypes",
 
   it("has a fallback for weirdistan situations", () => {
     expect(
-      determine(
+      determineDependencyTypes(
         {
           couldNotResolve: false,
           resolved: "wappie.js",
@@ -233,7 +253,7 @@ describe("extract/resolve/determineDependencyTypes - determine dependencyTypes",
 
   it("classifies local, non-node_modules modules as localmodule", () => {
     expect(
-      determine(
+      determineDependencyTypes(
         {
           couldNotResolve: false,
           resolved: "src/bla/somethinglocal.ts",
@@ -250,7 +270,7 @@ describe("extract/resolve/determineDependencyTypes - determine dependencyTypes",
 
   it("classifies local, non-node_modules modules with an absolute path as localmodule (posix & win32 paths)", () => {
     expect(
-      determine(
+      determineDependencyTypes(
         {
           couldNotResolve: false,
           resolved: "src/bla/somethinglocal.ts",
@@ -271,7 +291,7 @@ describe("extract/resolve/determineDependencyTypes - determine dependencyTypes",
 
   it("classifies local, non-node_modules non-modules as undetermined", () => {
     expect(
-      determine(
+      determineDependencyTypes(
         {
           couldNotResolve: false,
           resolved: "test/bla/localthing.spec.js",

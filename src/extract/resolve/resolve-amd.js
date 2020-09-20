@@ -3,8 +3,8 @@ const path = require("path");
 const memoize = require("lodash/memoize");
 const pathToPosix = require("../../utl/path-to-posix");
 const determineDependencyTypes = require("./determine-dependency-types");
-const isCore = require("./is-core");
-const readPackageDeps = require("./get-manifest-dependencies");
+const { isCore } = require("./module-classifiers");
+const getManifest = require("./get-manifest");
 const resolveHelpers = require("./resolve-helpers");
 
 const fileExists = memoize((pFile) => {
@@ -50,7 +50,7 @@ module.exports = function resolveAMD(
     dependencyTypes: determineDependencyTypes(
       lReturnValue,
       pModuleName,
-      readPackageDeps(
+      getManifest(
         pFileDirectory,
         pBaseDirectory,
         pResolveOptions.combinedDependencies
