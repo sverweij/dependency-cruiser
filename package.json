@@ -121,7 +121,7 @@
     "ajv": "6.12.5",
     "chalk": "4.1.0",
     "commander": "6.1.0",
-    "enhanced-resolve": "5.0.0-beta.12",
+    "enhanced-resolve": "5.0.0",
     "figures": "3.2.0",
     "get-stream": "6.0.0",
     "glob": "7.1.6",
@@ -154,7 +154,7 @@
     "eslint-plugin-mocha": "8.0.0",
     "eslint-plugin-node": "11.1.0",
     "eslint-plugin-security": "1.4.0",
-    "eslint-plugin-unicorn": "21.0.0",
+    "eslint-plugin-unicorn": "22.0.0",
     "husky": "4.3.0",
     "intercept-stdout": "0.1.2",
     "lint-staged": "10.4.0",
@@ -165,19 +165,11 @@
     "prettier": "2.1.2",
     "shx": "0.3.2",
     "symlink-dir": "4.1.0",
-    "typescript": "4.0.2",
+    "typescript": "4.0.3",
     "upem": "4.0.1",
     "vue-template-compiler": "2.6.12",
     "yarn": "1.22.5",
     "~": "file:."
-  },
-  "upem": {
-    "donotup": [
-      {
-        "package": "enhanced-resolve",
-        "because": "we're running with enhanced-resolve version 5, which is faster, uses less memory - but also still is in beta"
-      }
-    ]
   },
   "nyc": {
     "statements": 99.85,
