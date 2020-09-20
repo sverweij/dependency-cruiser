@@ -8,25 +8,14 @@ const {
 } = require("./module-classifiers");
 const localNpmHelpers = require("./local-npm-helpers");
 
-function toPackagePaths(pExternalModuleResolvePaths) {
-  return (
-    pExternalModuleResolvePaths || ["node_modules", "node_modules/@types"]
-  ).map((pResolveModule) => pResolveModule.replace(/^node_modules(\/)?/, ""));
-}
-
 function dependencyKeyHasModuleName(
   pPackageDependencies,
-  pExternalModuleResolvePaths,
-  pModuleName
+  pModuleName,
+  pPrefix
 ) {
   return (pKey) =>
     pKey.includes("ependencies") &&
-    pExternalModuleResolvePaths.some((pResolvePath) =>
-      _has(
-        pPackageDependencies[pKey],
-        path.posix.join(pResolvePath, pModuleName)
-      )
-    );
+    _has(pPackageDependencies[pKey], path.posix.join(pPrefix, pModuleName));
 }
 
 const NPM2DEP_TYPE = {
@@ -36,24 +25,48 @@ const NPM2DEP_TYPE = {
   peerDependencies: "npm-peer",
 };
 
+function findModuleInPackageDependencies(
+  pPackageDependencies,
+  pModuleName,
+  pPrefix
+) {
+  return Object.keys(pPackageDependencies)
+    .filter(
+      dependencyKeyHasModuleName(pPackageDependencies, pModuleName, pPrefix)
+    )
+    .map((pKey) => NPM2DEP_TYPE[pKey] || "npm-no-pkg");
+}
+
+function needToLookAtTypesToo(pResolverModulePaths) {
+  return (
+    pResolverModulePaths || ["node_modules", "node_modules/@types"]
+  ).some((pPath) => pPath.includes("@types"));
+}
+
 function determineManifestDependencyTypes(
   pModuleName,
   pPackageDependencies,
-  pExternalModuleResolvePaths
+  pResolverModulePaths
 ) {
   let lReturnValue = ["npm-unknown"];
-  let lExternalModuleResolvePaths = toPackagePaths(pExternalModuleResolvePaths);
 
   if (Boolean(pPackageDependencies)) {
-    lReturnValue = Object.keys(pPackageDependencies)
-      .filter(
-        dependencyKeyHasModuleName(
-          pPackageDependencies,
-          lExternalModuleResolvePaths,
-          pModuleName
-        )
-      )
-      .map((pKey) => NPM2DEP_TYPE[pKey] || "npm-no-pkg");
+    lReturnValue = findModuleInPackageDependencies(
+      pPackageDependencies,
+      pModuleName,
+      ""
+    );
+
+    if (
+      lReturnValue.length === 0 &&
+      needToLookAtTypesToo(pResolverModulePaths)
+    ) {
+      lReturnValue = findModuleInPackageDependencies(
+        pPackageDependencies,
+        pModuleName,
+        "@types"
+      );
+    }
     lReturnValue = lReturnValue.length === 0 ? ["npm-no-pkg"] : lReturnValue;
   }
 
