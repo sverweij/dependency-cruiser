@@ -66,6 +66,10 @@ try {
         "modules/ folders directly under your packages folder. "
     )
     .option(
+      "-p, --progress [type]",
+      "show progress while dependency-cruiser is busy. Possible values: cli-feedback, performance-log, none"
+    )
+    .option(
       "-d, --max-depth <n>",
       "You probably want to use --collapse instead of --max-depth. " +
         "(max-depth would limit the cruise depth; 0 <= n <= 99 (default: 0 - no limit))."

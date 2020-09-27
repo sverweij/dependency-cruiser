@@ -94,7 +94,6 @@ function normalizeCruiseOptions(pOptions) {
       lReturnValue.reporterOptions
     );
   }
-
   return lReturnValue;
 }
 

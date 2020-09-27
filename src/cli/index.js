@@ -10,8 +10,8 @@ const normalizeOptions = require("./normalize-options");
 const initConfig = require("./init-config");
 const io = require("./utl/io");
 const formatMetaInfo = require("./format-meta-info");
-const setUpCliFeedbackListener = require("./ears/cli-feedback-listener");
-const setUpPerformanceLogListener = require("./ears/performance-log-listener");
+const setUpCliFeedbackListener = require("./listeners/cli-feedback");
+const setUpPerformanceLogListener = require("./listeners/performance-log");
 
 function extractResolveOptions(pCruiseOptions) {
   let lResolveOptions = {};
@@ -66,11 +66,15 @@ function setUpListener(pCruiseOptions) {
     "cli-feedback": setUpCliFeedbackListener,
     "performance-log": setUpPerformanceLogListener,
   };
-  const lListenerID = _get(pCruiseOptions, "ruleSet.options.progress.type");
+  const lListenerID = _get(
+    pCruiseOptions,
+    "progress",
+    _get(pCruiseOptions, "ruleSet.options.progress.type")
+  );
   const lListenerFunction = _get(STRING2LISTENER, lListenerID);
   /* istanbul ignore next */
   if (Boolean(lListenerFunction)) {
-    lListenerFunction();
+    lListenerFunction(bus);
   }
 }
 
@@ -79,24 +83,24 @@ function runCruise(pFileDirectoryArray, pCruiseOptions) {
     .filter((pFileOrDirectory) => !glob.hasMagic(pFileOrDirectory))
     .forEach(validateFileExistence);
 
-  pCruiseOptions = normalizeOptions(pCruiseOptions);
+  const lCruiseOptions = normalizeOptions(pCruiseOptions);
 
-  setUpListener(pCruiseOptions);
+  setUpListener(lCruiseOptions);
 
   bus.emit("start");
   const lReportingResult = main.futureCruise(
     pFileDirectoryArray,
-    pCruiseOptions,
-    extractResolveOptions(pCruiseOptions),
+    lCruiseOptions,
+    extractResolveOptions(lCruiseOptions),
     {
-      tsConfig: extractTSConfigOptions(pCruiseOptions),
-      babelConfig: extractBabelConfigOptions(pCruiseOptions),
+      tsConfig: extractTSConfigOptions(lCruiseOptions),
+      babelConfig: extractBabelConfigOptions(lCruiseOptions),
     }
   );
 
   bus.emit("progress", "cli: writing results");
   bus.emit("write-start");
-  io.write(pCruiseOptions.outputTo, lReportingResult.output);
+  io.write(lCruiseOptions.outputTo, lReportingResult.output);
   bus.emit("end");
 
   return lReportingResult.exitCode;

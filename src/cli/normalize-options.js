@@ -8,6 +8,7 @@ const compileConfig = require("./compile-config");
 const defaults = require("./defaults.json");
 
 const KNOWN_DEPCRUISE_OPTIONS = [
+  "babelConfig",
   "baseDir",
   "collapse",
   "config",
@@ -24,9 +25,9 @@ const KNOWN_DEPCRUISE_OPTIONS = [
   "outputType",
   "prefix",
   "preserveSymlinks",
+  "progress",
   "tsPreCompilationDeps",
   "tsConfig",
-  "babelConfig",
   "validate",
   "version",
   "webpackConfig",
@@ -138,6 +139,35 @@ function validateAndNormalizeRulesFileName(pValidate) {
   return lReturnValue;
 }
 
+function normalizeValidationOptions(pOptions) {
+  if (_has(pOptions, "validate")) {
+    const rulesFile = validateAndNormalizeRulesFileName(pOptions.validate);
+    return {
+      rulesFile,
+      ruleSet: compileConfig(
+        path.isAbsolute(rulesFile) ? rulesFile : `./${rulesFile}`
+      ),
+      validate: true,
+    };
+  } else {
+    return {
+      validate: false,
+    };
+  }
+}
+
+function normalizeProgress(pOptions) {
+  let lProgress = null;
+
+  if (_has(pOptions, "progress")) {
+    lProgress = _get(pOptions, "progress");
+    if (lProgress === true) {
+      lProgress = "cli-feedback";
+    }
+  }
+  return lProgress ? { progress: lProgress } : {};
+}
+
 /**
  * returns the pOptions, so that the returned value contains a
  * valid value for each possible option
@@ -165,15 +195,8 @@ module.exports = (
     lOptions.validate = lOptions.config;
   }
 
-  if (_has(lOptions, "validate")) {
-    lOptions.rulesFile = validateAndNormalizeRulesFileName(lOptions.validate);
-    lOptions.ruleSet = compileConfig(
-      path.isAbsolute(lOptions.rulesFile)
-        ? lOptions.rulesFile
-        : `./${lOptions.rulesFile}`
-    );
-    lOptions.validate = true;
-  }
+  lOptions = { ...lOptions, ...normalizeValidationOptions(lOptions) };
+  lOptions = { ...lOptions, ...normalizeProgress(lOptions) };
 
   lOptions = normalizeConfigFile(
     lOptions,
@@ -190,8 +213,6 @@ module.exports = (
     "babelConfig",
     defaults.BABEL_CONFIG
   );
-
-  lOptions.validate = _has(lOptions, "validate");
 
   return lOptions;
 };

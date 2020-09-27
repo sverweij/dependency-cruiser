@@ -1,4 +1,5 @@
 const _get = require("lodash/get");
+const _has = require("lodash/has");
 const safeRegex = require("safe-regex");
 const report = require("../../report");
 
@@ -73,7 +74,7 @@ function validateCruiseOptions(pOptions) {
     // neccessary because not found a way to do this properly in JSON schema
     validateMaxDepth(pOptions.maxDepth);
 
-    if (_get(pOptions, "ruleSet.options")) {
+    if (_has(pOptions, "ruleSet.options")) {
       lReturnValue = validateCruiseOptions(pOptions.ruleSet.options);
     }
     return { ...lReturnValue, ...pOptions };

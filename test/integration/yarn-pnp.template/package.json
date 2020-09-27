@@ -5,8 +5,9 @@
   "main": "src/index.js",
   "scripts": {
     "dependency-cruise": "depcruise -v -- src",
-    "dependency-cruise:json": "depcruise -T json -v -- src > dependencygraph.json",
+    "dependency-cruise:json": "depcruise -T json -v --progress -- src > dependencygraph.json",
     "dependency-cruise:svg": "depcruise -T dot -v -- src | dot -T svg > dependencygraph.svg",
+    "dependency-cruise:version": "depcruise --version",
     "run-the-fake-code": "yarn node ./src/index",
     "test": "yarn node ./test/index.js"
   },
