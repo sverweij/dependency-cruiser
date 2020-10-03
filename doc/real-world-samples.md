@@ -40,7 +40,7 @@ To get the above graph we used [berry-dependency-cruiser-config.js](real-world-s
 - add this script to package.json (so don't use the globally installed depcruise
   or even the locally installed one - yarn's pnp resolution won't work otherwise:)
   ```
-  "depcruise:archi": "depcruise --config berry-dependency-cruiser-config.js --output-type archi packages | dot -T svg > berry-high-level-dependencies.svg",
+  "depcruise:archi": "depcruise --config berry-dependency-cruiser-config.js --output-type archi packages | dot -T svg | tee berry-high-level-dependencies.svg | depcruise-wrap-stream-in-html > berry-high-level-dependencies.html",
   ```
 - run `yarn depcruise:archi`
 </details>
