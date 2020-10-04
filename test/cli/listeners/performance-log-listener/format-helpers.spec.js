@@ -4,11 +4,11 @@ const {
   formatTime,
   formatMemory,
   formatPerfLine,
-} = require("~/src/cli/ears/performance-log-listener/format-helpers");
+} = require("~/src/cli/listeners/performance-log/format-helpers");
 
 const expect = chai.expect;
 
-describe("cli/ears/performance-log-listener/format-helpers - formatTime", () => {
+describe("cli/listeners/performance-log/format-helpers - formatTime", () => {
   it("converts to ms, leftpads & adds the unit at the end", () => {
     expect(formatTime(14.88041018)).to.equal("  14880ms");
   });
@@ -34,7 +34,7 @@ describe("cli/ears/performance-log-listener/format-helpers - formatTime", () => 
   });
 });
 
-describe("cli/ears/performance-log-listener/format-helpers - formatMemory", () => {
+describe("cli/listeners/performance-log/format-helpers - formatMemory", () => {
   it("converts to Mb, leftpads & adds the unit at the end", () => {
     expect(formatMemory(4033856)).to.equal("      4Mb");
   });

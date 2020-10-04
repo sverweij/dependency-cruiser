@@ -25,11 +25,12 @@ available in dependency-cruiser configurations.
 ### Options also available in dependency-cruiser configurations
 
 1. [`--do-not-follow`: don't cruise modules adhering to this pattern any further](#--do-not-follow-dont-cruise-modules-adhering-to-this-pattern-any-further)
-1. [`--exclude`: exclude dependencies from being cruised](#--exclude-exclude-dependencies-from-being-cruised)
 1. [`--include-only`: only include modules satisfying a pattern](#--include-only-only-include-modules-satisfying-a-pattern)
 1. [`--focus`: show modules and their direct neighbours](#--focus-show-modules-and-their-direct-neighbours)
 1. [`--collapse`: summarize to folder depth or pattern](#--collapse-summarize-to-folder-depth-or-pattern)
+1. [`--exclude`: exclude dependencies from being cruised](#--exclude-exclude-dependencies-from-being-cruised)
 1. [`--max-depth`](#--max-depth)
+1. [`--progress`: get feedback on what dependency-cruiser is doing while it's running](#--progress-get-feedbakc-on-what-dependency-cruiser-is-doing-while-its-running)
 1. [`--prefix` prefixing links](#--prefix-prefixing-links)
 1. [`--module-systems`](#--module-systems)
 1. [`--ts-pre-compilation-deps` (typescript only)](#--ts-pre-compilation-deps-typescript-only)
@@ -540,23 +541,6 @@ Details and more ways to limit dependency-cruiser from following things: check o
 the [doNotFollow](./options-reference.md#donotfollow-dont-cruise-modules-any-further)
 option in the options reference.
 
-### `--exclude`: exclude dependencies from being cruised
-
-If you don't want to see certain modules in your report (or not have them
-validated), you can exclude them by passing a regular expression to the
-`--exclude` (short: `-x`) option. Two examples:
-
-```sh
-dependency-cruise -x "node_modules" -T html -f deps-without-node_modules.html src
-```
-
-```sh
-dependency-cruise -x "^(coverage|test|node_modules)" -T html -f deps-without-stuffs.html src
-```
-
-See the [exclude](./options-reference.md#exclude-exclude-dependencies-from-being-cruised) option
-in the options reference for details.
-
 ### `--include-only`: only include modules satisfying a pattern
 
 E.g. to only take modules into account that are in the `src` tree (and exclude all
@@ -623,6 +607,23 @@ to show simple textual output of relations between high level components e.g.
 depcruise packages --include-only ^packages --collapse "^packages/[^/]+" -T text
 ```
 
+### `--exclude`: exclude dependencies from being cruised
+
+If you don't want to see certain modules in your report (or not have them
+validated), you can exclude them by passing a regular expression to the
+`--exclude` (short: `-x`) option. Two examples:
+
+```sh
+dependency-cruise -x "node_modules" -T html -f deps-without-node_modules.html src
+```
+
+```sh
+dependency-cruise -x "^(coverage|test|node_modules)" -T html -f deps-without-stuffs.html src
+```
+
+See the [exclude](./options-reference.md#exclude-exclude-dependencies-from-being-cruised) option
+in the options reference for details.
+
 ### `--max-depth`
 
 Only cruise the specified depth, counting from the specified root-module(s). This
@@ -647,6 +648,65 @@ dependency-cruise --max-depth 2 -T dot src/main/index.ts | dot -T svg > depth-li
 See [maxDepth](./options-reference.md#maxdepth)
 
 > This will only be effective when you pass one file as an argument.
+
+### `--progress`: get feedback on what dependency-cruiser is doing while it's running
+
+If the number of files dependency-cruiser needs to analyse is large, it can be
+busy for awhile. To get an impression of what dependency-cruiser is doing you
+can pass the `--progress` option.
+
+#### cli-feedback (the default when you pass --progress without an option)
+
+Gives a one-line summary of what dependency-cruiser is currently doing
+(e.g. parsing input, reading files, analyzing them, making a report about them).
+When dependency-cruiser is done it erases that feedback again so it doesn't
+clutter your logs. It also writes to stderr, so you can still safely redirect
+without the progress messages ending up in your output.
+
+<details>
+<summary>Typical output</summary>
+
+```
+▶ reading files ...
+```
+
+</details>
+
+#### performance-log
+
+Writes a detailed overview of the time and memory each step in dependency-cruiser's
+processing takes to stderr. The main purpose is to get a quick high-level overview
+of what dependency-cruiser is spending its time (and memory) on, so the results
+stay in view when dependency-cruiser is done.
+
+<details>
+<summary>Typical output</summary>
+
+```
+  elapsed heapTotal  heapUsed after step...
+    712ms      72Mb      46Mb start of node process
+      2ms      72Mb      46Mb parsing options
+    100ms      73Mb      56Mb parsing rule set
+      0ms      73Mb      56Mb making sense of files and directories
+      0ms      73Mb      56Mb determining how to resolve
+   1874ms     158Mb     138Mb reading files
+      0ms     158Mb     138Mb analyzing
+     17ms     161Mb     131Mb analyzing: cycles
+      3ms     161Mb     132Mb analyzing: orphans
+    161ms     163Mb     140Mb analyzing: reachables
+      0ms     163Mb     140Mb analyzing: add focus (if any)
+     51ms     163Mb     135Mb analyzing: validations
+      2ms     163Mb     135Mb reporting
+      0ms     163Mb     135Mb really done (2924ms)
+```
+
+</details>
+
+#### none (the default when you don't pass --progress )
+
+Make sure dependency-cruiser doesn't print any feedback. Usefull if you want to
+override the progress option configured in a configuration file (currently
+an undocumented feature that is subject to change).
 
 ### `--prefix` prefixing links
 

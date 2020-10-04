@@ -2,6 +2,7 @@ const path = require("path");
 const { expect } = require("chai");
 const normalizeOptions = require("~/src/cli/normalize-options");
 
+// eslint-disable max-statements
 describe("cli/normalizeOptions", () => {
   const WORKINGDIR = process.cwd();
 
@@ -234,6 +235,17 @@ describe("cli/normalizeOptions", () => {
         },
       },
       validate: true,
+    });
+  });
+  it("progress without parameter defaults to cli-feedback", () => {
+    expect(normalizeOptions({ progress: true })).to.contain({
+      progress: "cli-feedback",
+    });
+  });
+
+  it("progress with parameter none ends up as progress: none", () => {
+    expect(normalizeOptions({ progress: "performance-log" })).to.contain({
+      progress: "performance-log",
     });
   });
 });
