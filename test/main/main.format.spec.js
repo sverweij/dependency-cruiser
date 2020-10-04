@@ -71,4 +71,23 @@ describe("main.format - format", () => {
     expect(lCollapsedResult.summary.totalCruised).to.equal(19);
     expect(lCollapsedResult.summary.totalDependenciesCruised).to.equal(18);
   });
+
+  it("returns string with error explanations when asked for the err-long report", () => {
+    const lErrorLongResult = main.format(cruiseResult, {
+      outputType: "err-long",
+    }).output;
+    expect(lErrorLongResult).to.contain("cli-to-main-only-warn:");
+    expect(lErrorLongResult).to.contain(
+      "This cli module depends on something not in the public interface"
+    );
+  });
+  it("returns string without error explanations when asked for the err report", () => {
+    const lErrorResult = main.format(cruiseResult, {
+      outputType: "err",
+    }).output;
+    expect(lErrorResult).to.contain("cli-to-main-only-warn:");
+    expect(lErrorResult).to.not.contain(
+      "This cli module depends on something not in the public interface"
+    );
+  });
 });
