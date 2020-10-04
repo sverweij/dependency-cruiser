@@ -1,12 +1,11 @@
-const curryRight = require("lodash/curryRight");
 const anon = require("./anon");
 const csv = require("./csv");
 const dot = require("./dot")("module");
 const ddot = require("./dot")("folder");
 const cdot = require("./dot")("custom");
 const errorHtml = require("./error-html");
-const errorLong = curryRight(require("./error"))({ long: true });
 const error = require("./error");
+const errorLong = require("./error-long");
 const html = require("./html");
 const identity = require("./identity");
 const json = require("./json");
