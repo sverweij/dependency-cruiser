@@ -191,7 +191,12 @@
     // "doNotFollow": "node_modules",
 
     /* pattern specifying which files to exclude (regular expression) */
-    "exclude": ["mocks", "fixtures", "test/integration"],
+    "exclude": [
+      "mocks",
+      "fixtures",
+      "test/integration",
+      "src/cli/tools/svg-in-html-snippets/script.snippet.js"
+    ],
 
     /* list of module systems to cruise */
     // "moduleSystems": ["amd", "cjs", "es6", "tsd"],

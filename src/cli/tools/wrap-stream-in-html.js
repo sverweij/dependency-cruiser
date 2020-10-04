@@ -7,6 +7,11 @@ const HEADER_FILE = path.join(
   "svg-in-html-snippets",
   "header.snippet.html"
 );
+const SCRIPT_FILE = path.join(
+  __dirname,
+  "svg-in-html-snippets",
+  "script.snippet.js"
+);
 const FOOTER_FILE = path.join(
   __dirname,
   "svg-in-html-snippets",
@@ -25,15 +30,25 @@ const FOOTER_FILE = path.join(
  * ... but portable over node platforms
  *
  * @param {string} pHeaderFileName header
+ * @param {string} pScriptFileName script
  * @param {string} pFooterFileName footer
  * @param {stream} pStream stream whose characters are to be slapped between header and footer
  * @returns {string} yadda
  */
-async function wrap(pHeaderFileName, pFooterFileName, pStream) {
+async function wrap(
+  pHeaderFileName,
+  pScriptFileName,
+  pFooterFileName,
+  pStream
+) {
   const lHeader = fs.readFileSync(pHeaderFileName, "utf8");
+  const lScript = fs.readFileSync(pScriptFileName, "utf8");
   const lFooter = fs.readFileSync(pFooterFileName, "utf8");
 
-  return `${lHeader}${await getStream(pStream)}${lFooter}`;
+  return `${lHeader}${await getStream(
+    pStream
+  )}<script>${lScript}</script>${lFooter}`;
 }
 
-module.exports = (pStream) => wrap(HEADER_FILE, FOOTER_FILE, pStream);
+module.exports = (pStream) =>
+  wrap(HEADER_FILE, SCRIPT_FILE, FOOTER_FILE, pStream);
