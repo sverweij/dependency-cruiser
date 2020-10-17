@@ -19,16 +19,16 @@ function pushRequireCallsToDependencies(
   pExoticRequireStrings
 ) {
   return (pNode) => {
-    for (let pName of ["require"].concat(pExoticRequireStrings)) {
-      if (estreeHelpers.isRequireOfSomeSort(pNode, pName)) {
-        for (let pString of pryStringsFromArguments(pNode.arguments)) {
+    for (let lName of ["require"].concat(pExoticRequireStrings)) {
+      if (estreeHelpers.isRequireOfSomeSort(pNode, lName)) {
+        for (let lString of pryStringsFromArguments(pNode.arguments)) {
           pDependencies.push({
-            module: pString,
+            module: lString,
             moduleSystem: pModuleSystem,
             dynamic: false,
-            ...(pName === "require"
+            ...(lName === "require"
               ? { exoticallyRequired: false }
-              : { exoticallyRequired: true, exoticRequire: pName }),
+              : { exoticallyRequired: true, exoticRequire: lName }),
           });
         }
       }

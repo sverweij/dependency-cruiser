@@ -7,10 +7,11 @@ const {
 
 describe("cli/init-config/inquirer-validators - validateFileExistence", () => {
   const WORKING_DIR = process.cwd();
-  const FIXTURES_DIR = "test/cli/init-config/fixtures/validate-file-existence";
+  const lFixturesDirectory =
+    "test/cli/init-config/fixtures/validate-file-existence";
 
   beforeEach("set up", () => {
-    process.chdir(FIXTURES_DIR);
+    process.chdir(lFixturesDirectory);
   });
 
   afterEach("tear down", () => {
@@ -36,7 +37,7 @@ describe("cli/init-config/inquirer-validators - validateFileExistence", () => {
 
 describe("cli/init-config/inquirer-validators - validateLocation", () => {
   const WORKING_DIR = process.cwd();
-  const FIXTURES_DIR = "test/cli/fixtures/init-config/validate-location";
+  const lFixturesDirectory = "test/cli/fixtures/init-config/validate-location";
 
   afterEach("tear down", () => {
     process.chdir(WORKING_DIR);
@@ -49,33 +50,33 @@ describe("cli/init-config/inquirer-validators - validateLocation", () => {
   });
 
   it("returns an error message when provided with a non-existing folder name", () => {
-    process.chdir(FIXTURES_DIR);
+    process.chdir(lFixturesDirectory);
     expect(validateLocation("non-existing-folder")).to.equal(
       "'non-existing-folder' doesn't seem to exist - please try again"
     );
   });
 
   it("returns an error message when provided with a name of a file that is not a folder", () => {
-    process.chdir(FIXTURES_DIR);
+    process.chdir(lFixturesDirectory);
     expect(validateLocation("existing-file")).to.equal(
       "'existing-file' doesn't seem to be a folder - please try again"
     );
   });
 
   it("returns true when provided with an existing folder", () => {
-    process.chdir(FIXTURES_DIR);
+    process.chdir(lFixturesDirectory);
     expect(validateLocation("existing-folder")).to.equal(true);
   });
 
   it("returns true when provided with a c.s.l. of existing folders", () => {
-    process.chdir(FIXTURES_DIR);
+    process.chdir(lFixturesDirectory);
     expect(
       validateLocation("existing-folder, another-existing-folder")
     ).to.equal(true);
   });
 
   it("returns an error message when provided with a c.s.l. of existing + non-existing folders", () => {
-    process.chdir(FIXTURES_DIR);
+    process.chdir(lFixturesDirectory);
     expect(
       validateLocation(
         "existing-folder, non-existing-folder, another-existing-folder"
@@ -86,7 +87,7 @@ describe("cli/init-config/inquirer-validators - validateLocation", () => {
   });
 
   it("returns true when provided with an array of existing folders", () => {
-    process.chdir(FIXTURES_DIR);
+    process.chdir(lFixturesDirectory);
     expect(
       validateLocation(["existing-folder", "another-existing-folder"])
     ).to.equal(true);

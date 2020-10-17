@@ -6,15 +6,15 @@ const {
 const normalizeResolveOptions = require("../../../src/main/resolve-options/normalize");
 
 describe("main/resolve-options/normalize", () => {
-  const DEFAULT_NO_OF_RESOLVE_OPTIONS = 9;
+  const lDefaultNoOfResolveOptions = 9;
   const TEST_TSCONFIG = path.join(
     __dirname,
     "..",
     "fixtures",
     "tsconfig.test.json"
   );
-  const TSCONFIG_CONTENTS = {};
-  const TSCONFIG_CONTENTS_WITH_BASEURL = { options: { baseUrl: "" } };
+  const lTsconfigContents = {};
+  const lTsconfigContents_WITH_BASEURL = { options: { baseUrl: "" } };
 
   it("comes with a set of defaults when passed with no options at all", () => {
     const lNormalizedOptions = normalizeResolveOptions(
@@ -23,7 +23,7 @@ describe("main/resolve-options/normalize", () => {
     );
 
     expect(Object.keys(lNormalizedOptions).length).to.equal(
-      DEFAULT_NO_OF_RESOLVE_OPTIONS
+      lDefaultNoOfResolveOptions
     );
     expect(lNormalizedOptions.symlinks).to.equal(false);
     expect(lNormalizedOptions.tsConfig).to.equal(null);
@@ -40,7 +40,7 @@ describe("main/resolve-options/normalize", () => {
     );
 
     expect(Object.keys(lNormalizedOptions).length).to.equal(
-      DEFAULT_NO_OF_RESOLVE_OPTIONS + 1
+      lDefaultNoOfResolveOptions + 1
     );
     expect(lNormalizedOptions.symlinks).to.equal(false);
     expect(lNormalizedOptions.tsConfig).to.equal(null);
@@ -57,11 +57,11 @@ describe("main/resolve-options/normalize", () => {
       normalizeCruiseOptions({
         ruleSet: { options: { tsConfig: { fileName: TEST_TSCONFIG } } },
       }),
-      TSCONFIG_CONTENTS
+      lTsconfigContents
     );
 
     expect(Object.keys(lNormalizedOptions).length).to.equal(
-      DEFAULT_NO_OF_RESOLVE_OPTIONS
+      lDefaultNoOfResolveOptions
     );
     expect(lNormalizedOptions.symlinks).to.equal(false);
     expect(lNormalizedOptions.tsConfig).to.equal(TEST_TSCONFIG);
@@ -78,11 +78,11 @@ describe("main/resolve-options/normalize", () => {
       normalizeCruiseOptions({
         ruleSet: { options: { tsConfig: { fileName: TEST_TSCONFIG } } },
       }),
-      TSCONFIG_CONTENTS_WITH_BASEURL
+      lTsconfigContents_WITH_BASEURL
     );
 
     expect(Object.keys(lNormalizedOptions).length).to.equal(
-      DEFAULT_NO_OF_RESOLVE_OPTIONS + 1
+      lDefaultNoOfResolveOptions + 1
     );
     expect(lNormalizedOptions.symlinks).to.equal(false);
     expect(lNormalizedOptions.tsConfig).to.equal(TEST_TSCONFIG);
@@ -100,11 +100,11 @@ describe("main/resolve-options/normalize", () => {
         ruleSet: { options: { tsConfig: { fileName: TEST_TSCONFIG } } },
         externalModuleResolutionStrategy: "yarn-pnp",
       }),
-      TSCONFIG_CONTENTS_WITH_BASEURL
+      lTsconfigContents_WITH_BASEURL
     );
 
     expect(Object.keys(lNormalizedOptions).length).to.equal(
-      DEFAULT_NO_OF_RESOLVE_OPTIONS + 1
+      lDefaultNoOfResolveOptions + 1
     );
 
     /* eslint no-magic-numbers:0 */

@@ -17,7 +17,7 @@ function removeDammit(pFileName) {
 }
 
 describe("cli/utl/io", () => {
-  const NR_OF_NUMBERS = 17;
+  const lNrOfNumbers = 17;
   const OUTFILE = path.join(
     __dirname,
     "output",
@@ -25,7 +25,7 @@ describe("cli/utl/io", () => {
       .toString()
       .split(".")
       .pop()
-      .padEnd(NR_OF_NUMBERS, "0")}.json`
+      .padEnd(lNrOfNumbers, "0")}.json`
   );
 
   before("set up", () => {

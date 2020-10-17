@@ -49,7 +49,7 @@ module.exports = function parseConfig(pTSConfigFileName) {
       pTSConfigFileName
     );
 
-    if (lReturnValue.errors.length !== 0) {
+    if (lReturnValue.errors.length > 0) {
       throw new Error(
         typescript.formatDiagnostics(
           lReturnValue.errors,

@@ -26,7 +26,7 @@ function safeRule(pRule, pSection, pCondition) {
 }
 
 function checkRuleSafety(pRule) {
-  const REGEX_CONDITIONS = [
+  const lRegexConditions = [
     { section: "from", condition: "path" },
     { section: "to", condition: "path" },
     { section: "from", condition: "pathNot" },
@@ -36,7 +36,7 @@ function checkRuleSafety(pRule) {
   ];
 
   if (
-    REGEX_CONDITIONS.some(
+    lRegexConditions.some(
       (pCondition) => !safeRule(pRule, pCondition.section, pCondition.condition)
     )
   ) {

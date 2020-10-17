@@ -6,9 +6,9 @@ const UPPERCASE = 2;
 const NOTHING_SPECIAL = 3;
 
 function isSeparator(pChar) {
-  const SEPARATORS_RE = /[-_.]/;
+  const lSeparatorsRe = /[-_.]/;
 
-  return SEPARATORS_RE.test(pChar);
+  return lSeparatorsRe.test(pChar);
 }
 
 function isUpperCase(pChar) {
@@ -23,20 +23,20 @@ function classifyChar(pChar) {
 }
 
 function getRandomChar(pChar) {
-  const LOWER_CASE_CHARS = "abcdefghijklmnopqrstuvwxyz";
-  const MAX_DECIMAL_CHAR = 9;
+  const lLowerCaseChars = "abcdefghijklmnopqrstuvwxyz";
+  const lMaxDecimalChar = 9;
 
   switch (classifyChar(pChar)) {
     case SEPARATOR:
       return pChar;
     case NUMBER:
-      return _random(0, MAX_DECIMAL_CHAR);
+      return _random(0, lMaxDecimalChar);
     case UPPERCASE:
-      return LOWER_CASE_CHARS[
-        _random(0, LOWER_CASE_CHARS.length - 1)
+      return lLowerCaseChars[
+        _random(0, lLowerCaseChars.length - 1)
       ].toUpperCase();
     default:
-      return LOWER_CASE_CHARS[_random(0, LOWER_CASE_CHARS.length - 1)];
+      return lLowerCaseChars[_random(0, lLowerCaseChars.length - 1)];
   }
 }
 /**

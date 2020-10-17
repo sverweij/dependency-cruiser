@@ -55,7 +55,7 @@ function determineFollowableExtensions(pResolveOptions) {
   let lReturnValue = new Set(pResolveOptions.extensions);
 
   // we could include things like pictures, movies, html, xml
-  // etc in KNOWN_UNFOLLOWABLES as well. Typically in
+  // etc in lKnownUnfollowables as well. Typically in
   // javascript-like sources you don't import non-javascript
   // stuff without mentioning the extension (`import 'styles.scss`
   // is more clear than`import 'styles'` as you'd expect that
@@ -64,7 +64,7 @@ function determineFollowableExtensions(pResolveOptions) {
   // nonetheless - they can contain import statements and the
   // fallback javascript parser will happily parse them, which
   // will result in false positives.
-  const KNOWN_UNFOLLOWABLES = [
+  const lKnownUnfollowables = [
     ".json",
     ".node",
     ".css",
@@ -74,7 +74,7 @@ function determineFollowableExtensions(pResolveOptions) {
     ".less",
   ];
 
-  KNOWN_UNFOLLOWABLES.forEach((pUnfollowable) => {
+  lKnownUnfollowables.forEach((pUnfollowable) => {
     lReturnValue.delete(pUnfollowable);
   });
   return lReturnValue;

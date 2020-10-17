@@ -28,12 +28,15 @@ function writeToFile(pOutputTo, pDependencyString) {
  */
 function writeToStdOut(pString, pBufferSize = PIPE_BUFFER_SIZE) {
   const lNumberOfChunks = Math.ceil(pString.length / pBufferSize);
-  let i = 0;
+  let lIndex = 0;
 
   /* eslint no-plusplus: 0 */
-  for (i = 0; i < lNumberOfChunks; i++) {
+  for (lIndex = 0; lIndex < lNumberOfChunks; lIndex++) {
     // eslint-disable-next-line unicorn/prefer-string-slice
-    process.stdout.write(pString.substr(i * pBufferSize, pBufferSize), "utf8");
+    process.stdout.write(
+      pString.substr(lIndex * pBufferSize, pBufferSize),
+      "utf8"
+    );
   }
 }
 function write(pOutputTo, pContent) {

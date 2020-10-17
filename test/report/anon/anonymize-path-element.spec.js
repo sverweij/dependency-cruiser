@@ -11,11 +11,11 @@ describe("report/anon/anonymizePathElement - uncached", () => {
   });
 
   it("consecutive calls with a word list yield words from that list, until empty", () => {
-    const WORDLIST = ["aap", "noot"];
+    const lWordlist = ["aap", "noot"];
 
-    expect(anonymizePath("one", WORDLIST, /^$/, false)).to.equal("aap");
-    expect(anonymizePath("two", WORDLIST, /^$/, false)).to.equal("noot");
-    expect(anonymizePath("three", WORDLIST, /^$/, false)).to.match(/[a-z]{5}/);
+    expect(anonymizePath("one", lWordlist, /^$/, false)).to.equal("aap");
+    expect(anonymizePath("two", lWordlist, /^$/, false)).to.equal("noot");
+    expect(anonymizePath("three", lWordlist, /^$/, false)).to.match(/[a-z]{5}/);
   });
 
   it("returns the passed string when it matches the whitelist", () => {

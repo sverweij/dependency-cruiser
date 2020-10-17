@@ -54,7 +54,7 @@ function getJSON5Config(pBabelConfigFileName) {
 }
 
 function getConfig(pBabelConfigFileName) {
-  const EXTENSION_TO_PARSE_FN = {
+  const lExtensionToParseFunction = {
     ".js": getCommonJSConfig,
     ".cjs": getCommonJSConfig,
     "": getJSON5Config,
@@ -63,14 +63,14 @@ function getConfig(pBabelConfigFileName) {
   };
   const lExtension = path.extname(pBabelConfigFileName);
 
-  if (!_has(EXTENSION_TO_PARSE_FN, lExtension)) {
+  if (!_has(lExtensionToParseFunction, lExtension)) {
     throw new Error(
       `The babel config '${pBabelConfigFileName}' is in a format ('${lExtension}')\n` +
         "         dependency-cruiser doesn't support yet.\n"
     );
   }
   // eslint-disable-next-line security/detect-object-injection
-  return EXTENSION_TO_PARSE_FN[lExtension](pBabelConfigFileName);
+  return lExtensionToParseFunction[lExtension](pBabelConfigFileName);
 }
 
 module.exports = function parseBabelConfig(pBabelConfigFileName) {

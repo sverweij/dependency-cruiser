@@ -64,7 +64,7 @@ function addRunScriptsToManifest(pManifest, pAdditionalRunScripts) {
 }
 
 function getSuccessMessage(pDestinationManifestFileName) {
-  const EXPLANATION_INDENT = 6;
+  const lExplanationIndent = 6;
 
   return (
     `  ${chalk.green(
@@ -73,22 +73,22 @@ function getSuccessMessage(pDestinationManifestFileName) {
     `\n    ${chalk.green(figures.play)} npm run depcruise` +
     `\n${wrapAndIndent(
       "validates against the rules in .dependency-cruiser.json and writes the outcome to stdout",
-      EXPLANATION_INDENT
+      lExplanationIndent
     )}` +
     `\n\n    ${chalk.green(figures.play)} npm run depcruise:html` +
     `\n${wrapAndIndent(
       "validates against the rules in .dependency-cruiser.js and writes it to 'dependendency-violation-report.html' with a friendly layout",
-      EXPLANATION_INDENT
+      lExplanationIndent
     )}` +
     `\n\n    ${chalk.green(figures.play)} npm run depcruise:graph` +
     `\n${wrapAndIndent(
       "writes a detailed internal graph of your app to 'dependency-graph.html'",
-      EXPLANATION_INDENT
+      lExplanationIndent
     )}` +
     `\n\n    ${chalk.green(figures.play)} npm run depcruise:graph-archi` +
     `\n${wrapAndIndent(
       "writes a high-level internal graph of your app to 'high-level-dependency-graph.html'",
-      EXPLANATION_INDENT
+      lExplanationIndent
     )}` +
     `\n\n`
   );

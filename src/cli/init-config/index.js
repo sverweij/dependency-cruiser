@@ -21,7 +21,7 @@ const {
 const PACKAGE_MANIFEST = `./${$defaults.PACKAGE_MANIFEST}`;
 
 function getOneshotConfig(pOneShotConfigId) {
-  const BASE_CONFIG = {
+  const lBaseConfig = {
     isMonoRepo: isLikelyMonoRepo(),
     combinedDependencies: false,
     useTsConfig: hasTSConfigCandidates(),
@@ -33,21 +33,21 @@ function getOneshotConfig(pOneShotConfigId) {
     useBabelConfig: hasBabelConfigCandidates(),
     babelConfig: getBabelConfigCandidates().shift(),
   };
-  const ONESHOT_CONFIGS = {
+  const lOneshotConfigs = {
     preset: {
       configType: "preset",
       preset: "dependency-cruiser/configs/recommended-strict",
-      ...BASE_CONFIG,
+      ...lBaseConfig,
     },
-    yes: BASE_CONFIG,
+    yes: lBaseConfig,
     "experimental-scripts": {
       updateManifest: fileExists(PACKAGE_MANIFEST),
-      ...BASE_CONFIG,
+      ...lBaseConfig,
     },
   };
 
   // eslint-disable-next-line security/detect-object-injection
-  return ONESHOT_CONFIGS[pOneShotConfigId] || BASE_CONFIG;
+  return lOneshotConfigs[pOneShotConfigId] || lBaseConfig;
 }
 
 function manifestIsUpdateable(pNormalizedInitConfig) {

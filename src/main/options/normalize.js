@@ -41,10 +41,10 @@ function normalizeReporterOptions(pReporterOptions) {
 function normalizeFilterOptions(pOptions, pFilterOptionKeys) {
   let lReturnValue = { ...pOptions };
 
-  for (let pFilterOptionKey of pFilterOptionKeys) {
-    if (pOptions[pFilterOptionKey]) {
-      lReturnValue[pFilterOptionKey] = normalizeFilterOption(
-        lReturnValue[pFilterOptionKey]
+  for (let lFilterOptionKey of pFilterOptionKeys) {
+    if (pOptions[lFilterOptionKey]) {
+      lReturnValue[lFilterOptionKey] = normalizeFilterOption(
+        lReturnValue[lFilterOptionKey]
       );
     }
   }
@@ -53,12 +53,12 @@ function normalizeFilterOptions(pOptions, pFilterOptionKeys) {
 
 function normalizeCollapse(pCollapse) {
   let lReturnValue = pCollapse;
-  const ONE_OR_MORE_NON_SLASHES = "[^/]+";
-  const FOLDER_PATTERN = `${ONE_OR_MORE_NON_SLASHES}/`;
-  const FOLDER_BELOW_NODE_MODULES = `node_modules/${ONE_OR_MORE_NON_SLASHES}`;
-  const SINGLE_DIGIT_RE = /^\d$/;
+  const lOneOrMoreNonSlashes = "[^/]+";
+  const FOLDER_PATTERN = `${lOneOrMoreNonSlashes}/`;
+  const FOLDER_BELOW_NODE_MODULES = `node_modules/${lOneOrMoreNonSlashes}`;
+  const lSingleDigitRe = /^\d$/;
 
-  if (typeof pCollapse === "number" || pCollapse.match(SINGLE_DIGIT_RE)) {
+  if (typeof pCollapse === "number" || pCollapse.match(lSingleDigitRe)) {
     lReturnValue = `${FOLDER_BELOW_NODE_MODULES}|^${FOLDER_PATTERN.repeat(
       Number.parseInt(pCollapse, 10)
     )}`;

@@ -145,24 +145,25 @@ describe("cli/init-config/index", () => {
       "fixtures/update-manifest",
       RULES_FILE_JS
     )}`;
-    const $package = "package.json";
-    fs.writeFileSync($package, "{}");
+
+    const lManifestFilename = "package.json";
+    fs.writeFileSync(lManifestFilename, "{}");
 
     try {
       initConfig("experimental-scripts");
       const lResult = require(configResultFileName);
 
       expect(lResult).to.be.jsonSchema(configurationSchema);
-      expect(JSON.parse(fs.readFileSync($package, "utf8"))).to.haveOwnProperty(
-        "scripts"
-      );
+      expect(
+        JSON.parse(fs.readFileSync(lManifestFilename, "utf8"))
+      ).to.haveOwnProperty("scripts");
     } finally {
       Reflect.deleteProperty(
         require.cache,
         require.resolve(configResultFileName)
       );
       deleteDammit(RULES_FILE_JS);
-      deleteDammit($package);
+      deleteDammit(lManifestFilename);
     }
   });
 
@@ -175,8 +176,8 @@ describe("cli/init-config/index", () => {
       "fixtures/update-manifest-dc-config-exists",
       RULES_FILE_JS
     )}`;
-    const $package = "package.json";
-    fs.writeFileSync($package, "{}");
+    const lManifestFilename = "package.json";
+    fs.writeFileSync(lManifestFilename, "{}");
 
     try {
       initConfig("experimental-scripts");
@@ -184,15 +185,15 @@ describe("cli/init-config/index", () => {
 
       expect(lResult).to.be.jsonSchema(configurationSchema);
       expect(lResult).to.deep.equal({});
-      expect(JSON.parse(fs.readFileSync($package, "utf8"))).to.haveOwnProperty(
-        "scripts"
-      );
+      expect(
+        JSON.parse(fs.readFileSync(lManifestFilename, "utf8"))
+      ).to.haveOwnProperty("scripts");
     } finally {
       Reflect.deleteProperty(
         require.cache,
         require.resolve(configResultFileName)
       );
-      deleteDammit($package);
+      deleteDammit(lManifestFilename);
     }
   });
 });

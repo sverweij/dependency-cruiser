@@ -24,52 +24,52 @@ describe("cli/listeners/performance-log/handlers - getHeader", () => {
 });
 
 describe("cli/listeners/performance-log/handlers - getProgressLine", () => {
-  const STATE_MOCK = {
+  const lStateMock = {
     previousTime: process.uptime() - 10,
     previousMessage: "previous message",
   };
   it("when the level is > the max => empty string", () => {
-    expect(getProgressLine("message", STATE_MOCK, 30, MAX_LEVEL)).to.equal("");
+    expect(getProgressLine("message", lStateMock, 30, MAX_LEVEL)).to.equal("");
   });
   it("when the level === the max => non-empty string", () => {
-    expect(getProgressLine("message", STATE_MOCK, 20, MAX_LEVEL)).to.be.not
+    expect(getProgressLine("message", lStateMock, 20, MAX_LEVEL)).to.be.not
       .empty;
   });
   it("when the level is < the max => non-empty string", () => {
-    expect(getProgressLine("message", STATE_MOCK, 10, MAX_LEVEL)).to.be.not
+    expect(getProgressLine("message", lStateMock, 10, MAX_LEVEL)).to.be.not
       .empty;
   });
   it("message contains the previous message - state is updated", () => {
-    const lStateMock = {
+    const lUpdatableStateMock = {
       previousTime: process.uptime() - 10,
       previousMessage: "previous message",
     };
-    const lPreviousTime = lStateMock.previousMessage;
+    const lPreviousTime = lUpdatableStateMock.previousMessage;
 
-    expect(getProgressLine("next message", lStateMock, 10, MAX_LEVEL)).to.match(
-      /previous message/
-    );
-    expect(lStateMock.previousMessage).to.equal("next message");
-    expect(lStateMock.previousTime).to.not.equal(lPreviousTime);
+    expect(
+      getProgressLine("next message", lUpdatableStateMock, 10, MAX_LEVEL)
+    ).to.match(/previous message/);
+    expect(lUpdatableStateMock.previousMessage).to.equal("next message");
+    expect(lUpdatableStateMock.previousTime).to.not.equal(lPreviousTime);
   });
 });
 
 describe("cli/listeners/performance-log/handlers - getEndText", () => {
-  const STATE_MOCK = {
+  const lStateMock = {
     previousTime: process.uptime() - 10,
   };
   it("when the level is > the max => empty string", () => {
-    expect(getEndText(STATE_MOCK, 30, MAX_LEVEL)).to.equal("");
+    expect(getEndText(lStateMock, 30, MAX_LEVEL)).to.equal("");
   });
   it("when the level === the max => non-empty string", () => {
-    expect(getEndText(STATE_MOCK, 20, MAX_LEVEL)).to.be.not.empty;
+    expect(getEndText(lStateMock, 20, MAX_LEVEL)).to.be.not.empty;
   });
   it("when the level is < the max => non-empty string", () => {
-    expect(getEndText(STATE_MOCK, 10, MAX_LEVEL)).to.be.not.empty;
+    expect(getEndText(lStateMock, 10, MAX_LEVEL)).to.be.not.empty;
   });
 
   it("message contains an end time", () => {
-    expect(getEndText(STATE_MOCK, 10, MAX_LEVEL)).to.match(
+    expect(getEndText(lStateMock, 10, MAX_LEVEL)).to.match(
       /really done \([0-9]+ms\)\n$/g
     );
   });

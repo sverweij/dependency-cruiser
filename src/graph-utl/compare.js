@@ -1,5 +1,5 @@
 function severity2number(pSeverity) {
-  const SEVERITY2NUMBER = {
+  const lSeverity2Number = {
     error: 1,
     warn: 2,
     info: 3,
@@ -7,7 +7,7 @@ function severity2number(pSeverity) {
   };
 
   // eslint-disable-next-line security/detect-object-injection
-  return SEVERITY2NUMBER[pSeverity] || -1;
+  return lSeverity2Number[pSeverity] || -1;
 }
 
 function severities(pFirstSeverity, pSecondSeverity) {

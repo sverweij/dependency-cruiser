@@ -62,7 +62,7 @@ function extractBabelConfigOptions(pCruiseOptions) {
 }
 
 function setUpListener(pCruiseOptions) {
-  const STRING2LISTENER = {
+  const lString2Listener = {
     "cli-feedback": setUpCliFeedbackListener,
     "performance-log": setUpPerformanceLogListener,
   };
@@ -71,7 +71,7 @@ function setUpListener(pCruiseOptions) {
     "progress",
     _get(pCruiseOptions, "ruleSet.options.progress.type")
   );
-  const lListenerFunction = _get(STRING2LISTENER, lListenerID);
+  const lListenerFunction = _get(lString2Listener, lListenerID);
   /* istanbul ignore next */
   if (Boolean(lListenerFunction)) {
     lListenerFunction(bus);

@@ -4,13 +4,13 @@ const matchDependencyRule = require("./match-dependency-rule");
 const violatesRequiredRule = require("./violates-required-rule");
 
 function compareSeverity(pFirst, pSecond) {
-  const SEVERITY2INT = {
+  const lSeverity2Int = {
     error: 1,
     warn: 2,
     info: 3,
   };
 
-  return SEVERITY2INT[pFirst.severity] - SEVERITY2INT[pSecond.severity];
+  return lSeverity2Int[pFirst.severity] - lSeverity2Int[pSecond.severity];
 }
 
 function validateAgainstAllowedRules(pRuleSet, pMatchModule, pFrom, pTo) {

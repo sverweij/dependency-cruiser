@@ -15,21 +15,22 @@ describe("cli/init-config/write-config", () => {
   });
 
   it("writes if there's no file there yet", () => {
-    const EMPTY_DIR = "test/cli/fixtures/init-config/no-config-files-exist";
-    const CUSTOM_CONFIG_FILE_NAME = "depcruise.config.js";
+    const lEmptyDirectory =
+      "test/cli/fixtures/init-config/no-config-files-exist";
+    const lCustomConfigFileName = "depcruise.config.js";
     const lConfigResultFileName = `./${path.join(
       "../fixtures/init-config/no-config-files-exist",
-      CUSTOM_CONFIG_FILE_NAME
+      lCustomConfigFileName
     )}`;
 
-    process.chdir(EMPTY_DIR);
+    process.chdir(lEmptyDirectory);
     try {
       writeConfig(
         `module.exports = {
           aap: "noot mies",
           wim: { zus: "jet heide", does: "hok schapen" },
         }`,
-        CUSTOM_CONFIG_FILE_NAME
+        lCustomConfigFileName
       );
       // eslint-disable-next-line node/global-require,import/no-dynamic-require,security/detect-non-literal-require
       const lResult = require(lConfigResultFileName);
@@ -41,7 +42,7 @@ describe("cli/init-config/write-config", () => {
         require.cache,
         require.resolve(lConfigResultFileName)
       );
-      deleteDammit(CUSTOM_CONFIG_FILE_NAME);
+      deleteDammit(lCustomConfigFileName);
     }
   });
 

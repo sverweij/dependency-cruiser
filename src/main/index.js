@@ -55,9 +55,9 @@ function validateResultAgainstSchema(pResult) {
 }
 
 function reportWithReSummarization(pResult, pFormatOptions) {
-  const lReportFn = report.getReporter(pFormatOptions.outputType);
+  const lReportFunction = report.getReporter(pFormatOptions.outputType);
 
-  return lReportFn(
+  return lReportFunction(
     reSummarizeResults(pResult, pFormatOptions),
     // passing format options here so reporters that read collapse patterns
     // from the result take the one passed in the format options instead
