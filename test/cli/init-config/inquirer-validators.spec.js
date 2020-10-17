@@ -3,7 +3,7 @@ const { expect } = require("chai");
 const {
   validateFileExistence,
   validateLocation,
-} = require("~/src/cli/init-config/inquirer-validators");
+} = require("../../../src/cli/init-config/inquirer-validators");
 
 describe("cli/init-config/inquirer-validators - validateFileExistence", () => {
   const WORKING_DIR = process.cwd();

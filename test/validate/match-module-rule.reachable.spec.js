@@ -1,5 +1,7 @@
 const { expect } = require("chai");
-const { matchesReachableRule } = require("~/src/validate/match-module-rule");
+const {
+  matchesReachableRule,
+} = require("../../src/validate/match-module-rule");
 
 const EMPTY_RULE = { from: {}, to: {} };
 const ANY_UNREACHABLE = {

@@ -1,8 +1,8 @@
 // eslint-disable-next-line unicorn/prevent-abbreviations
 const { expect } = require("chai");
+const errorHTML = require("../../../src/report/error-html");
 const everythingFineResult = require("./mocks/everything-fine.json");
 const validationMoreThanOnce = require("./mocks/violation-more-than-once.json");
-const errorHTML = require("~/src/report/error-html");
 
 describe("report/error-html", () => {
   const lOkeliDokelyKey = "gummy bears";

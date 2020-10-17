@@ -1,6 +1,6 @@
 const { expect } = require("chai");
+const validate = require("../../src/validate");
 const readRuleSet = require("./readruleset.utl");
-const validate = require("~/src/validate");
 
 describe("validate/index - reachable (in forbidden set)", () => {
   it("Skips modules that have no reachable attribute (reachable false)", () => {

@@ -1,6 +1,6 @@
 /* eslint-disable no-unused-expressions */
 const { expect } = require("chai");
-const normalizeInitOptions = require("~/src/cli/init-config/normalize-init-options");
+const normalizeInitOptions = require("../../../src/cli/init-config/normalize-init-options");
 
 describe("cli/init-config/normalize-init-options", () => {
   it("If it's a mono repo, doesn't return a testLocation array", () => {

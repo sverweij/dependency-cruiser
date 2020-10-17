@@ -1,12 +1,12 @@
 const path = require("path").posix;
 const fs = require("fs");
 const chai = require("chai");
+const cruiseResultSchema = require("../../src/schema/cruise-result.schema.json");
+const main = require("../../src/main");
 const tsFixture = require("./fixtures/ts.json");
 const tsxFixture = require("./fixtures/tsx.json");
 const jsxFixture = require("./fixtures/jsx.json");
 const jsxAsObjectFixture = require("./fixtures/jsx-as-object.json");
-const cruiseResultSchema = require("~/src/schema/cruise-result.schema.json");
-const main = require("~/src/main");
 
 const expect = chai.expect;
 

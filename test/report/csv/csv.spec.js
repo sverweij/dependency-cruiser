@@ -1,8 +1,8 @@
 const fs = require("fs");
 const path = require("path");
 const { expect } = require("chai");
+const render = require("../../../src/report/csv");
 const deps = require("./mocks/cjs-no-dependency-valid.json");
-const render = require("~/src/report/csv");
 
 const elementFixture = fs.readFileSync(
   path.join(__dirname, "mocks", "cjs-no-dependency-valid.csv"),

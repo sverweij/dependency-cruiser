@@ -1,7 +1,7 @@
 const chai = require("chai");
-const extract = require("~/src/extract");
-const { normalizeCruiseOptions } = require("~/src/main/options/normalize");
-const normalizeResolveOptions = require("~/src/main/resolve-options/normalize");
+const extract = require("../../src/extract");
+const { normalizeCruiseOptions } = require("../../src/main/options/normalize");
+const normalizeResolveOptions = require("../../src/main/resolve-options/normalize");
 
 const expect = chai.expect;
 

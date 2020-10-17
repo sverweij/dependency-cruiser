@@ -1,5 +1,5 @@
 const { expect } = require("chai");
-const moduleUtl = require("~/src/report/dot/module-utl");
+const moduleUtl = require("../../../src/report/dot/module-utl");
 
 describe("report/dot/module-utl", () => {
   it("extractFirstTransgression - keeps as is when there's no transgressions", () => {

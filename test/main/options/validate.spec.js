@@ -1,5 +1,5 @@
 const { expect } = require("chai");
-const { validateCruiseOptions } = require("~/src/main/options/validate");
+const { validateCruiseOptions } = require("../../../src/main/options/validate");
 
 describe("main/options/validate", () => {
   it("throws when a invalid module system is passed ", () => {

@@ -1,5 +1,7 @@
 const { expect } = require("chai");
-const { normalizeFormatOptions } = require("~/src/main/options/normalize");
+const {
+  normalizeFormatOptions,
+} = require("../../../src/main/options/normalize");
 
 describe("main/options/normalize - format options", () => {
   it("makes focus strings into an object", () => {

@@ -1,6 +1,6 @@
 const { expect } = require("chai");
-const extractES6Deps = require("~/src/extract/ast-extractors/extract-es6-deps");
-const getASTFromSource = require("~/src/extract/parse/to-javascript-ast")
+const extractES6Deps = require("../../../src/extract/ast-extractors/extract-es6-deps");
+const getASTFromSource = require("../../../src/extract/parse/to-javascript-ast")
   .getASTFromSource;
 
 const extractES6 = (pJavaScriptSource, pDependencies) =>

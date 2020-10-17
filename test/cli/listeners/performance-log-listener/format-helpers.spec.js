@@ -4,7 +4,7 @@ const {
   formatTime,
   formatMemory,
   formatPerfLine,
-} = require("~/src/cli/listeners/performance-log/format-helpers");
+} = require("../../../../src/cli/listeners/performance-log/format-helpers");
 
 const expect = chai.expect;
 

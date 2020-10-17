@@ -1,5 +1,5 @@
 const { expect } = require("chai");
-const normalize = require("~/src/main/rule-set/normalize");
+const normalize = require("../../../src/main/rule-set/normalize");
 
 describe("main/rule-set/normalize", () => {
   it("leaves the empty ruleset alone", () => {

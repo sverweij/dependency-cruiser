@@ -1,5 +1,5 @@
 const { expect } = require("chai");
-const summarize = require("~/src/enrich/summarize");
+const summarize = require("../../src/enrich/summarize");
 
 describe("enrich/summarize", () => {
   it("doesn't add a rule set when there isn't one", () => {

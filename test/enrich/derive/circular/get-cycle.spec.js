@@ -1,7 +1,7 @@
 const { expect } = require("chai");
+const clearCaches = require("../../../../src/enrich/clear-caches");
+const getCycle = require("../../../../src/enrich/derive/circular/get-cycle");
 const inputGraphs = require("./inputgraphs.json");
-const getCycle = require("~/src/enrich/derive/circular/get-cycle");
-const clearCaches = require("~/src/enrich/clear-caches");
 
 describe("enrich/derive/circular/getCycle", () => {
   beforeEach("set up", () => {

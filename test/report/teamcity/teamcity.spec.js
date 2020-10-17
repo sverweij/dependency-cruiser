@@ -1,12 +1,12 @@
 const fs = require("fs");
 const path = require("path");
 const { expect } = require("chai");
+const render = require("../../../src/report/teamcity");
 const okdeps = require("./mocks/everything-fine.json");
 const moduleErrs = require("./mocks/module-errors.json");
 const requiredErrs = require("./mocks/required-errors.json");
 const circulars = require("./mocks/circular-deps.json");
 const vias = require("./mocks/via-deps.json");
-const render = require("~/src/report/teamcity");
 
 function removePerSessionAttributes(pString) {
   return pString.replace(/ flowId='[^']+' timestamp='[^']+'/g, "");

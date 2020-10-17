@@ -1,10 +1,10 @@
 const { expect } = require("chai");
 
+const orphan = require("../../../../src/enrich/derive/orphan");
 const ONE_MODULE_FIXTURE = require("./fixtures/oneModule.json");
 const ONE_MODULE_AFTER_PROCESSING = require("./fixtures/oneModule.afterprocessing.json");
 const TWO_MODULES_FIXTURE = require("./fixtures/twoModule.json");
 const TWO_MODULES_AFTER_PROCESSING = require("./fixtures/twoModule.afterprocessing.json");
-const orphan = require("~/src/enrich/derive/orphan");
 
 describe("enrich/derive/orphan/index - orphan detection", () => {
   it('attaches the "orphan" boolean to orphan modules by default', () => {

@@ -1,6 +1,6 @@
 const { expect } = require("chai");
+const validate = require("../../src/validate");
 const readRuleSet = require("./readruleset.utl");
-const validate = require("~/src/validate");
 
 describe("validate/index dependency - generic tests", () => {
   it("is ok with the empty validation", () => {

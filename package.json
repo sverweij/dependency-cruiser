@@ -169,8 +169,7 @@
     "typescript": "4.0.3",
     "upem": "4.0.1",
     "vue-template-compiler": "2.6.12",
-    "yarn": "1.22.10",
-    "~": "file:."
+    "yarn": "1.22.10"
   },
   "nyc": {
     "statements": 99.85,

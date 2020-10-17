@@ -1,6 +1,6 @@
 /* eslint-disable no-unused-expressions */
 const { expect } = require("chai");
-const { isCore } = require("~/src/extract/resolve/module-classifiers");
+const { isCore } = require("../../../src/extract/resolve/module-classifiers");
 
 describe("extract/resolve/module-classifiers - isCore", () => {
   it("returns false when passed nothing", () => {

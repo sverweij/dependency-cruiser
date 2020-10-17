@@ -1,9 +1,9 @@
 const { expect } = require("chai");
-const meta = require("~/src/extract/transpile/meta");
-const jsWrap = require("~/src/extract/transpile/javascript-wrap");
-const lsWrap = require("~/src/extract/transpile/livescript-wrap");
-const babelWrap = require("~/src/extract/transpile/babel-wrap");
-const vueTemplateWrap = require("~/src/extract/transpile/vue-template-wrap");
+const meta = require("../../../src/extract/transpile/meta");
+const jsWrap = require("../../../src/extract/transpile/javascript-wrap");
+const lsWrap = require("../../../src/extract/transpile/livescript-wrap");
+const babelWrap = require("../../../src/extract/transpile/babel-wrap");
+const vueTemplateWrap = require("../../../src/extract/transpile/vue-template-wrap");
 
 describe("extract/transpile/meta", () => {
   it("tells which extensions can be scanned", () => {

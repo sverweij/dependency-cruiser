@@ -2,8 +2,8 @@ const fs = require("fs");
 const path = require("path");
 const chai = require("chai");
 const deleteDammit = require("../delete-dammit.utl");
-const initConfig = require("~/src/cli/init-config");
-const configurationSchema = require("~/src/schema/configuration.schema.json");
+const initConfig = require("../../../src/cli/init-config");
+const configurationSchema = require("../../../src/schema/configuration.schema.json");
 
 const expect = chai.expect;
 

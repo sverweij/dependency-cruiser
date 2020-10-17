@@ -1,4 +1,6 @@
 const chai = require("chai");
+const { cruise } = require("../../src/main");
+const cruiseResultSchema = require("../../src/schema/cruise-result.schema.json");
 const commonjsFixtures = require("./fixtures/cruise-reporterless/commonjs.json");
 const deprecationFixtures = require("./fixtures/cruise-reporterless/deprecated-node-module.json");
 const bundledFixtures = require("./fixtures/cruise-reporterless/bundled-dependencies.json");
@@ -6,8 +8,6 @@ const amdFixtures = require("./fixtures/cruise-reporterless/amd.json");
 const typeScriptFixtures = require("./fixtures/cruise-reporterless/typescript.json");
 const vueFixtures = require("./fixtures/cruise-reporterless/vue.json");
 const coffeeFixtures = require("./fixtures/cruise-reporterless/coffee.json");
-const { cruise } = require("~/src/main");
-const cruiseResultSchema = require("~/src/schema/cruise-result.schema.json");
 
 const { expect } = chai;
 

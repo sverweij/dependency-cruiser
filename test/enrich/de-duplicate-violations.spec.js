@@ -1,5 +1,5 @@
 const { expect } = require("chai");
-const deDuplicateViolations = require("~/src/enrich/de-duplicate-violations");
+const deDuplicateViolations = require("../../src/enrich/de-duplicate-violations");
 
 describe("enrich/de-duplicate-violations", () => {
   it("no violations => no violations", () => {

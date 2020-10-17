@@ -1,8 +1,8 @@
 const { expect } = require("chai");
-const normalize = require("~/src/main/rule-set/normalize");
-const addReachability = require("~/src/enrich/derive/reachable/index");
-const clearExtractCaches = require("~/src/extract/clear-caches");
-const clearEnrichCaches = require("~/src/enrich/clear-caches");
+const normalize = require("../../../../src/main/rule-set/normalize");
+const addReachability = require("../../../../src/enrich/derive/reachable/index");
+const clearExtractCaches = require("../../../../src/extract/clear-caches");
+const clearEnrichCaches = require("../../../../src/enrich/clear-caches");
 
 const GRAPH = [
   {

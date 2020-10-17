@@ -1,6 +1,6 @@
 const path = require("path");
 const { expect } = require("chai");
-const getResolveConfig = require("~/src/cli/get-resolve-config");
+const getResolveConfig = require("../../src/cli/get-resolve-config");
 
 describe("cli/getResolveConfig", () => {
   it("throws whenno config file name is passed", () => {

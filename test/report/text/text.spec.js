@@ -1,8 +1,8 @@
 const fs = require("fs");
 const path = require("path");
 const { expect } = require("chai");
+const renderText = require("../../../src/report/text");
 const dependencies = require("./mocks/dependencies.json");
-const renderText = require("~/src/report/text");
 
 describe("report/text", () => {
   it("renders a bunch of dependencies", () => {

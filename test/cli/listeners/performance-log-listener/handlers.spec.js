@@ -5,7 +5,7 @@ const {
   getHeader,
   getProgressLine,
   getEndText,
-} = require("~/src/cli/listeners/performance-log/handlers");
+} = require("../../../../src/cli/listeners/performance-log/handlers");
 
 const expect = chai.expect;
 

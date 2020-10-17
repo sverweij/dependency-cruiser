@@ -1,9 +1,11 @@
 const { expect } = require("chai");
 const _has = require("lodash/has");
-const clearCaches = require("~/src/extract/clear-caches");
-const localNpmHelpers = require("~/src/extract/resolve/local-npm-helpers");
-const normalizeResolveOptions = require("~/src/main/resolve-options/normalize");
-const { normalizeCruiseOptions } = require("~/src/main/options/normalize");
+const clearCaches = require("../../../src/extract/clear-caches");
+const localNpmHelpers = require("../../../src/extract/resolve/local-npm-helpers");
+const normalizeResolveOptions = require("../../../src/main/resolve-options/normalize");
+const {
+  normalizeCruiseOptions,
+} = require("../../../src/main/options/normalize");
 
 const BASIC_RESOLVE_OPTIONS = normalizeResolveOptions(
   {},

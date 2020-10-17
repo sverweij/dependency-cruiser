@@ -1,6 +1,6 @@
 /* eslint-disable no-unused-expressions */
 const { expect } = require("chai");
-const findRuleByName = require("~/src/graph-utl/find-rule-by-name");
+const findRuleByName = require("../../src/graph-utl/find-rule-by-name");
 
 describe("utl/findRuleByName", () => {
   const lRuleSet = {

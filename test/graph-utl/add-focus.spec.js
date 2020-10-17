@@ -1,8 +1,8 @@
 /* eslint-disable unicorn/no-useless-undefined */
 const { expect } = require("chai");
+const addFocus = require("../../src/graph-utl/add-focus");
 const $input = require("./fixtures/focus/dependency-cruiser-only-src.json");
 const $focus = require("./fixtures/focus/dependency-cruiser-focus-on-main.json");
-const addFocus = require("~/src/graph-utl/add-focus");
 
 describe("enrich/add-focus", () => {
   it("returns the input modules when there's no pattern", () => {

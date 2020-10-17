@@ -1,6 +1,6 @@
 const { expect } = require("chai");
+const validate = require("../../src/validate");
 const readRuleSet = require("./readruleset.utl");
-const validate = require("~/src/validate");
 
 describe("validate/index - required rules", () => {
   it("modules not matching the module criteria from the required rule are okeliedokelie", () => {

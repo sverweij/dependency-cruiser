@@ -1,6 +1,6 @@
 const fs = require("fs");
 const chai = require("chai");
-const wrapStreamInHTML = require("~/src/cli/tools/wrap-stream-in-html");
+const wrapStreamInHTML = require("../../../src/cli/tools/wrap-stream-in-html");
 
 const expect = chai.expect;
 

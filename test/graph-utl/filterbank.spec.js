@@ -1,6 +1,6 @@
 /* eslint-disable no-unused-expressions */
 const { expect } = require("chai");
-const filterbank = require("~/src/graph-utl/filterbank");
+const filterbank = require("../../src/graph-utl/filterbank");
 
 const MODULES = [
   {

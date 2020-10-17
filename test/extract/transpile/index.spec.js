@@ -3,7 +3,7 @@ const path = require("path");
 const { expect } = require("chai");
 const prettier = require("prettier");
 const normalizeNewline = require("normalize-newline");
-const transpile = require("~/src/extract/transpile");
+const transpile = require("../../../src/extract/transpile");
 
 describe("transpiler", () => {
   it("As the 'livescript' transpiler is not available, returns the original source", () => {

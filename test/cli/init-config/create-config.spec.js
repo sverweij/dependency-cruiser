@@ -1,9 +1,9 @@
 /* eslint-disable security/detect-eval-with-expression, no-eval */
 
 const chai = require("chai");
-const buildConfig = require("~/src/cli/init-config/build-config");
-const normalizeInitOptions = require("~/src/cli/init-config/normalize-init-options");
-const configurationSchema = require("~/src/schema/configuration.schema.json");
+const buildConfig = require("../../../src/cli/init-config/build-config");
+const normalizeInitOptions = require("../../../src/cli/init-config/normalize-init-options");
+const configurationSchema = require("../../../src/schema/configuration.schema.json");
 
 const expect = chai.expect;
 

@@ -1,6 +1,6 @@
 const { expect } = require("chai");
+const validate = require("../../src/validate");
 const readRuleSet = require("./readruleset.utl");
-const validate = require("~/src/validate");
 
 describe("validate/index - orphans", () => {
   it("Skips modules that have no orphan attribute", () => {

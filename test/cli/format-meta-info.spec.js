@@ -1,5 +1,5 @@
 const { expect } = require("chai");
-const meta = require("~/src/cli/format-meta-info");
+const meta = require("../../src/cli/format-meta-info");
 
 describe("cli/formatMetaInfo - transpiler formatted meta information", () => {
   it("tells which extensions can be scanned", () => {

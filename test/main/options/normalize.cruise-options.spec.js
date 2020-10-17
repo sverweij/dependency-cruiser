@@ -1,5 +1,7 @@
 const { expect } = require("chai");
-const { normalizeCruiseOptions } = require("~/src/main/options/normalize");
+const {
+  normalizeCruiseOptions,
+} = require("../../../src/main/options/normalize");
 
 describe("main/options/normalize - cruise options", () => {
   it("ensures maxDepth is an int when passed an int", () => {

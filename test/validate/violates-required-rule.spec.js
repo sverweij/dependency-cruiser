@@ -1,5 +1,5 @@
 const { expect } = require("chai");
-const violatesRequiredRule = require("~/src/validate/violates-required-rule");
+const violatesRequiredRule = require("../../src/validate/violates-required-rule");
 
 const SIMPLE_RULE = {
   module: {

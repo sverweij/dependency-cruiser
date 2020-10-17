@@ -1,6 +1,6 @@
 const path = require("path");
 const { expect } = require("chai");
-const normalizeOptions = require("~/src/cli/normalize-options");
+const normalizeOptions = require("../../src/cli/normalize-options");
 
 // eslint-disable max-statements
 describe("cli/normalizeOptions", () => {

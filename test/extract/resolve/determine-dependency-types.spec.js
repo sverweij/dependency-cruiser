@@ -1,6 +1,6 @@
 const path = require("path");
 const { expect } = require("chai");
-const determineDependencyTypes = require("~/src/extract/resolve/determine-dependency-types");
+const determineDependencyTypes = require("../../../src/extract/resolve/determine-dependency-types");
 
 describe("extract/resolve/determineDependencyTypes - determine dependencyTypes", () => {
   it("sorts local dependencies into 'local'", () => {

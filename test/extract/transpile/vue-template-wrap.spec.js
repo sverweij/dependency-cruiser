@@ -2,7 +2,7 @@ const fs = require("fs");
 const path = require("path");
 const { expect } = require("chai");
 const normalizeNewline = require("normalize-newline");
-const wrap = require("~/src/extract/transpile/vue-template-wrap");
+const wrap = require("../../../src/extract/transpile/vue-template-wrap");
 
 describe("vue transpiler", () => {
   it("extracts the script content from a vue SFC", () => {

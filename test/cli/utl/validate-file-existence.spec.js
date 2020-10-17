@@ -1,5 +1,5 @@
 const { expect } = require("chai");
-const validateFileExistence = require("~/src/cli/utl/validate-file-existence");
+const validateFileExistence = require("../../../src/cli/utl/validate-file-existence");
 
 describe("cli/utl/validateFileExistence", () => {
   it("throws when the file or dir passed does not exists", () => {

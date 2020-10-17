@@ -1,5 +1,5 @@
 const { expect } = require("chai");
-const stripQueryParameters = require("~/src/extract/utl/strip-query-parameters");
+const stripQueryParameters = require("../../../src/extract/utl/strip-query-parameters");
 
 describe("extract/utl/stripQueryParams", () => {
   it("leaves the empty string alone", () => {

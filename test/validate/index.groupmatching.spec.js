@@ -1,6 +1,6 @@
 const { expect } = require("chai");
+const validate = require("../../src/validate");
 const readRuleSet = require("./readruleset.utl");
-const validate = require("~/src/validate");
 
 describe("validate/index group matching - path group matched in a pathnot", () => {
   it("group-to-pathnot - Disallows dependencies between peer folders", () => {

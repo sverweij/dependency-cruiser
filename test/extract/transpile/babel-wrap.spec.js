@@ -2,7 +2,7 @@ const fs = require("fs");
 const { expect } = require("chai");
 const normalizeNewline = require("normalize-newline");
 const prettier = require("prettier");
-const wrap = require("~/src/extract/transpile/babel-wrap");
+const wrap = require("../../../src/extract/transpile/babel-wrap");
 
 describe("extract/transpile/babel-wrap", () => {
   it("tells the babel transpiler is available", () => {

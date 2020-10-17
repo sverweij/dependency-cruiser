@@ -2,7 +2,7 @@
 const { expect } = require("chai");
 const {
   isExternalModule,
-} = require("~/src/extract/resolve/module-classifiers");
+} = require("../../../src/extract/resolve/module-classifiers");
 
 describe("extract/resolve/module-classifiers - isExternalModule", () => {
   it("returns false when passed nothing", () => {

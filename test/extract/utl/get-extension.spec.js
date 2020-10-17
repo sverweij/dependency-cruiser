@@ -1,5 +1,5 @@
 const { expect } = require("chai");
-const getExtension = require("~/src/extract/utl/get-extension");
+const getExtension = require("../../../src/extract/utl/get-extension");
 
 describe("extract/utl/getExtension", () => {
   it(".coffee.md classifies as .coffee.md", () => {

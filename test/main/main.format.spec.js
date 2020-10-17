@@ -1,7 +1,7 @@
 /* eslint-disable no-magic-numbers */
 const chai = require("chai");
+const main = require("../../src/main");
 const cruiseResult = require("./fixtures/cruise-results-dc-2020-08-30-src-cli.json");
-const main = require("~/src/main");
 
 const expect = chai.expect;
 

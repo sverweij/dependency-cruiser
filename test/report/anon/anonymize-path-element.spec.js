@@ -1,5 +1,5 @@
 const { expect } = require("chai");
-const anonymizePath = require("~/src/report/anon/anonymize-path-element");
+const anonymizePath = require("../../../src/report/anon/anonymize-path-element");
 
 describe("report/anon/anonymizePathElement - uncached", () => {
   it("'' => ''", () => {

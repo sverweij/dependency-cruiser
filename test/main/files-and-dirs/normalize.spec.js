@@ -1,6 +1,6 @@
 const path = require("path");
 const { expect } = require("chai");
-const normalizeFilesAndDirectories = require("~/src/main/files-and-dirs/normalize");
+const normalizeFilesAndDirectories = require("../../../src/main/files-and-dirs/normalize");
 
 describe("main/files-and-dirs", () => {
   it("Keeps an empty file dir array as is", () => {

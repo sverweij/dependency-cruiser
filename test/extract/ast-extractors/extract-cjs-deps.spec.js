@@ -1,6 +1,6 @@
 const { expect } = require("chai");
-const extractcommonJSDeps = require("~/src/extract/ast-extractors/extract-cjs-deps");
-const getASTFromSource = require("~/src/extract/parse/to-javascript-ast")
+const extractcommonJSDeps = require("../../../src/extract/ast-extractors/extract-cjs-deps");
+const getASTFromSource = require("../../../src/extract/parse/to-javascript-ast")
   .getASTFromSource;
 
 const extractcommonJS = (
