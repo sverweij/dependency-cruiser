@@ -19,11 +19,6 @@
 <path fill="#ffffff" stroke="black" stroke-width="2" d="M28,-16C28,-16 377,-16 377,-16 383,-16 389,-22 389,-28 389,-28 389,-228 389,-228 389,-234 383,-240 377,-240 377,-240 28,-240 28,-240 22,-240 16,-234 16,-228 16,-228 16,-28 16,-28 16,-22 22,-16 28,-16"/>
 <text text-anchor="middle" x="202.5" y="-228.8" font-family="Helvetica,sans-Serif" font-weight="bold" font-size="9.00">main</text>
 </g>
-<g id="clust3" class="cluster">
-<title>cluster_src/main/files&#45;and&#45;dirs</title>
-<path fill="#ffffff" stroke="black" stroke-width="2" d="M36,-136C36,-136 94,-136 94,-136 100,-136 106,-142 106,-148 106,-148 106,-176 106,-176 106,-182 100,-188 94,-188 94,-188 36,-188 36,-188 30,-188 24,-182 24,-176 24,-176 24,-148 24,-148 24,-142 30,-136 36,-136"/>
-<text text-anchor="middle" x="65" y="-176.8" font-family="Helvetica,sans-Serif" font-weight="bold" font-size="9.00">files&#45;and&#45;dirs</text>
-</g>
 <g id="clust4" class="cluster">
 <title>cluster_src/main/options</title>
 <path fill="#ffffff" stroke="black" stroke-width="2" d="M88,-24C88,-24 216,-24 216,-24 222,-24 228,-30 228,-36 228,-36 228,-116 228,-116 228,-122 222,-128 216,-128 216,-128 88,-128 88,-128 82,-128 76,-122 76,-116 76,-116 76,-36 76,-36 76,-30 82,-24 88,-24"/>
@@ -43,6 +38,11 @@
 <title>cluster_src/main/utl</title>
 <path fill="#ffffff" stroke="black" stroke-width="2" d="M252,-24C252,-24 366,-24 366,-24 372,-24 378,-30 378,-36 378,-36 378,-64 378,-64 378,-70 372,-76 366,-76 366,-76 252,-76 252,-76 246,-76 240,-70 240,-64 240,-64 240,-36 240,-36 240,-30 246,-24 252,-24"/>
 <text text-anchor="middle" x="309" y="-64.8" font-family="Helvetica,sans-Serif" font-weight="bold" font-size="9.00">utl</text>
+</g>
+<g id="clust3" class="cluster">
+<title>cluster_src/main/files&#45;and&#45;dirs</title>
+<path fill="#ffffff" stroke="black" stroke-width="2" d="M36,-136C36,-136 94,-136 94,-136 100,-136 106,-142 106,-148 106,-148 106,-176 106,-176 106,-182 100,-188 94,-188 94,-188 36,-188 36,-188 30,-188 24,-182 24,-176 24,-176 24,-148 24,-148 24,-142 30,-136 36,-136"/>
+<text text-anchor="middle" x="65" y="-176.8" font-family="Helvetica,sans-Serif" font-weight="bold" font-size="9.00">files&#45;and&#45;dirs</text>
 </g>
 <!-- src/main/files&#45;and&#45;dirs/normalize.js -->
 <g id="node1" class="node">
