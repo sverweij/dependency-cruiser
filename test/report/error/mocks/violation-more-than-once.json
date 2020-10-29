@@ -5292,7 +5292,29 @@
           "from": {},
           "to": {
             "dependencyTypes": ["core"],
-            "path": "^(punycode|domain|constants|sys|_linklist|_stream_wrap)$"
+            "path": [
+              "^(v8/tools/codemap)$",
+              "^(v8/tools/consarray)$",
+              "^(v8/tools/csvparser)$",
+              "^(v8/tools/logreader)$",
+              "^(v8/tools/profile_view)$",
+              "^(v8/tools/profile)$",
+              "^(v8/tools/SourceMap)$",
+              "^(v8/tools/splaytree)$",
+              "^(v8/tools/tickprocessor-driver)$",
+              "^(v8/tools/tickprocessor)$",
+              "^(node-inspect/lib/_inspect)$",
+              "^(node-inspect/lib/internal/inspect_client)$",
+              "^(node-inspect/lib/internal/inspect_repl)$",
+              "^(async_hooks)$",
+              "^(assert)$",
+              "^(punycode)$",
+              "^(domain)$",
+              "^(constants)$",
+              "^(sys)$",
+              "^(_linklist)$",
+              "^(_stream_wrap)$"
+            ]
           }
         },
         {
