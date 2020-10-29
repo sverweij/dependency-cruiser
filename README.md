@@ -79,7 +79,7 @@ Sample rule:
 #### Report them
 
 ```sh
-depcruise --config .dependency-cruiser.json src
+depcruise --config .dependency-cruiser.js src
 ```
 
 This will validate against your rules and shows any violations in an eslint-like format:

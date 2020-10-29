@@ -94,7 +94,8 @@ dependency-cruise --config my-depcruise-rules.json src
 This will:
 
 - ... print nothing and exit with code 0 if dependency-cruiser didn't
-  find any violations of the rules in .dependency-cruiser.json.
+  find any violations of the rules in the configuration file (e.g.
+  .dependency-cruiser.js or .dependency-cruiser.json).
 - ... print the violating dependencies if there is any. Moreover it
   will exit with exit code _number of violations with severity `error` found_
   in the same fashion linters and test tools do.

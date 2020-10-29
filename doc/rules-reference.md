@@ -433,7 +433,7 @@ in your dependency graph), but it is something to
 keep in mind.
 
 To detect orphan guys you can add e.g. this snippet to your
-.dependency-cruiser.json's `forbidden` section:
+.dependency-cruiser.js's `forbidden` section:
 
 ```json
 {
@@ -590,7 +590,7 @@ where you started (a.k.a. circular dependencies). Leaving this out => you don't
 care either way.
 
 For example, adding this rule to the "forbidden" section in your
-.dependency-cruiser.json will issue a warning for each dependency that ends
+.dependency-cruiser.js will issue a warning for each dependency that ends
 up at itself.
 
 ```json
@@ -663,7 +663,7 @@ and started using it in a production source.
 To save you from embarrassing moments like this, you can make rules with the
 `dependencyTypes` verb. E.g. to prevent you accidentally depend on a
 `devDependency` from anything in `src` add this to your
-.dependency-cruiser.json's "forbidden" section:
+.dependency-cruiser.js's "forbidden" section:
 
 ```json
 {
