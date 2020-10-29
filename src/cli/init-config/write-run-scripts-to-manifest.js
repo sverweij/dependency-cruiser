@@ -72,7 +72,7 @@ function getSuccessMessage(pDestinationManifestFileName) {
     )} Run scripts added to '${pDestinationManifestFileName}':` +
     `\n    ${chalk.green(figures.play)} npm run depcruise` +
     `\n${wrapAndIndent(
-      "validates against the rules in .dependency-cruiser.json and writes the outcome to stdout",
+      "validates against the rules in .dependency-cruiser.js and writes the outcome to stdout",
       lExplanationIndent
     )}` +
     `\n\n    ${chalk.green(figures.play)} npm run depcruise:html` +
