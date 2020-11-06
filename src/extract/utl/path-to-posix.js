@@ -2,7 +2,7 @@ const path = require("path");
 
 /**
  * On win32 platforms transform win32 type paths into posix paths
- * (leaves paths on posix platforms alone)ß
+ * (leaves paths on posix platforms alone)
  *
  * This function is just to make dependency-cruiser's internal
  * representation consistent. This is the reason it doesn't have
@@ -19,7 +19,7 @@ const path = require("path");
  *                              this module on posix platforms only; defaults to require('path'))
  * @return {string}             the transformed path
  */
-module.exports = (pFilePath, pPathModule) => {
+module.exports = function pathToPosix(pFilePath, pPathModule) {
   const lPathModule = pPathModule || path;
 
   if (lPathModule.sep !== path.posix.sep) {

@@ -1,7 +1,7 @@
 const fs = require("fs");
 const path = require("path");
 const memoize = require("lodash/memoize");
-const pathToPosix = require("../../utl/path-to-posix");
+const pathToPosix = require("../utl/path-to-posix");
 const determineDependencyTypes = require("./determine-dependency-types");
 const { isCore } = require("./module-classifiers");
 const getManifest = require("./get-manifest");
@@ -28,7 +28,7 @@ module.exports = function resolveAMD(
   // - [ ] require.config kerfuffle (command line, html, file, ...)
   // - [ ] maybe use mrjoelkemp/module-lookup-amd ?
   // - [ ] or https://github.com/jaredhanson/amd-resolve ?
-  // - [x] funky plugins (json!wappie, ./screeching-cat!sabertooth) -> fixed in 'extract'
+  // - [ ] funky plugins (json!wappie, ./screeching-cat!sabertooth)
   const lProbablePath = pathToPosix(
     path.relative(
       pBaseDirectory,

@@ -4,7 +4,7 @@ const glob = require("glob");
 const _get = require("lodash/get");
 const filenameMatchesPattern = require("../graph-utl/match-facade")
   .filenameMatchesPattern;
-const pathToPosix = require("../utl/path-to-posix");
+const pathToPosix = require("./utl/path-to-posix");
 const transpileMeta = require("./transpile/meta");
 
 const SUPPORTED_EXTENSIONS = transpileMeta.scannableExtensions;
@@ -12,20 +12,11 @@ const SUPPORTED_EXTENSIONS = transpileMeta.scannableExtensions;
 function keepNonExcluded(pFullPathToFile, pOptions) {
   return (
     (!_get(pOptions, "exclude.path") ||
-      !filenameMatchesPattern(
-        pathToPosix(pFullPathToFile),
-        pOptions.exclude.path
-      )) &&
+      !filenameMatchesPattern(pFullPathToFile, pOptions.exclude.path)) &&
     (!_get(pOptions, "includeOnly.path") ||
-      filenameMatchesPattern(
-        pathToPosix(pFullPathToFile),
-        pOptions.includeOnly.path
-      )) &&
+      filenameMatchesPattern(pFullPathToFile, pOptions.includeOnly.path)) &&
     (!_get(pOptions, "doNotFollow.path") ||
-      !filenameMatchesPattern(
-        pathToPosix(pFullPathToFile),
-        pOptions.doNotFollow.path
-      ))
+      !filenameMatchesPattern(pFullPathToFile, pOptions.doNotFollow.path))
   );
 }
 
@@ -50,6 +41,7 @@ function gatherScannableFilesFromDirectory(pDirectoryName, pOptions) {
       }
       return pSum;
     }, [])
+    .map((pFullPathToFile) => pathToPosix(pFullPathToFile))
     .filter((pFullPathToFile) => keepNonExcluded(pFullPathToFile, pOptions));
 }
 
@@ -76,14 +68,19 @@ module.exports = (pFileAndDirectoryArray, pOptions) => {
 
   return pFileAndDirectoryArray
     .reduce(
-      (pAll, pThis) => pAll.concat(glob.sync(pThis, { cwd: lOptions.baseDir })),
+      (pAll, pFileOrDirectory) =>
+        pAll.concat(glob.sync(pFileOrDirectory, { cwd: lOptions.baseDir })),
       []
     )
-    .reduce((pAll, pThis) => {
-      if (fs.statSync(path.join(lOptions.baseDir, pThis)).isDirectory()) {
-        return pAll.concat(gatherScannableFilesFromDirectory(pThis, lOptions));
+    .reduce((pAll, pFileOrDirectory) => {
+      if (
+        fs.statSync(path.join(lOptions.baseDir, pFileOrDirectory)).isDirectory()
+      ) {
+        return pAll.concat(
+          gatherScannableFilesFromDirectory(pFileOrDirectory, lOptions)
+        );
       } else {
-        return pAll.concat(pThis);
+        return pAll.concat(pathToPosix(pFileOrDirectory));
       }
     }, []);
 };

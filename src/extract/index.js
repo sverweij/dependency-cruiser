@@ -2,7 +2,6 @@ const _uniqBy = require("lodash/uniqBy");
 const _spread = require("lodash/spread");
 const _concat = require("lodash/concat");
 const _has = require("lodash/has");
-const pathToPosix = require("../utl/path-to-posix");
 const getDependencies = require("./get-dependencies");
 const gatherInitialSources = require("./gather-initial-sources");
 const clearCaches = require("./clear-caches");
@@ -49,7 +48,7 @@ function extractRecursive(
       },
       [
         {
-          source: pathToPosix(pFileName),
+          source: pFileName,
           dependencies: lDependencies,
         },
       ]
