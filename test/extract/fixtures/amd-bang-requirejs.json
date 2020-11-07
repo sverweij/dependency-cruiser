@@ -12,7 +12,7 @@
     "moduleSystem": "amd"
   },
   {
-    "resolved": "test/extract/fixtures/amd-bangs/excitingpolyfill.js",
+    "resolved": "test/extract/fixtures/amd-bangs/hurray.js",
     "coreModule": false,
     "dependencyTypes": ["local"],
     "dynamic": false,
@@ -20,7 +20,7 @@
     "exoticallyRequired": false,
     "matchesDoNotFollow": false,
     "couldNotResolve": false,
-    "module": "./excitingpolyfill.js",
+    "module": "./excitingpolyfill.js!./hurray",
     "moduleSystem": "amd"
   },
   {
@@ -48,30 +48,6 @@
     "moduleSystem": "amd"
   },
   {
-    "resolved": "./somedata.json'",
-    "coreModule": false,
-    "dependencyTypes": ["unknown"],
-    "dynamic": false,
-    "followable": false,
-    "exoticallyRequired": false,
-    "matchesDoNotFollow": false,
-    "couldNotResolve": true,
-    "module": "./somedata.json'",
-    "moduleSystem": "amd"
-  },
-  {
-    "resolved": "./sub/dir",
-    "coreModule": false,
-    "dependencyTypes": ["unknown"],
-    "dynamic": false,
-    "followable": false,
-    "exoticallyRequired": false,
-    "matchesDoNotFollow": false,
-    "couldNotResolve": true,
-    "module": "./sub/dir",
-    "moduleSystem": "amd"
-  },
-  {
     "resolved": "fs",
     "coreModule": true,
     "dependencyTypes": ["core"],
@@ -84,15 +60,27 @@
     "moduleSystem": "amd"
   },
   {
-    "resolved": "json",
+    "resolved": "test/extract/fixtures/amd-bangs/somedata.json",
     "coreModule": false,
-    "dependencyTypes": ["unknown"],
+    "dependencyTypes": ["local"],
     "dynamic": false,
     "followable": false,
     "exoticallyRequired": false,
     "matchesDoNotFollow": false,
-    "couldNotResolve": true,
-    "module": "json",
+    "couldNotResolve": false,
+    "module": "json!./somedata.json",
     "moduleSystem": "amd"
+  },
+  {
+    "coreModule": false,
+    "couldNotResolve": true,
+    "dependencyTypes": ["unknown"],
+    "dynamic": false,
+    "exoticallyRequired": false,
+    "followable": false,
+    "matchesDoNotFollow": false,
+    "module": "whuups!doesnotexist",
+    "moduleSystem": "amd",
+    "resolved": "doesnotexist"
   }
 ]

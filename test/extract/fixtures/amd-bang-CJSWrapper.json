@@ -1,17 +1,5 @@
 [
   {
-    "resolved": "test/extract/fixtures/amd-bangs/excitingpolyfill.js",
-    "coreModule": false,
-    "dependencyTypes": ["local"],
-    "dynamic": false,
-    "followable": true,
-    "exoticallyRequired": false,
-    "matchesDoNotFollow": false,
-    "couldNotResolve": false,
-    "module": "./excitingpolyfill",
-    "moduleSystem": "amd"
-  },
-  {
     "resolved": "test/extract/fixtures/amd-bangs/root_one.js",
     "coreModule": false,
     "dependencyTypes": ["local"],
@@ -20,7 +8,7 @@
     "exoticallyRequired": false,
     "matchesDoNotFollow": false,
     "couldNotResolve": false,
-    "module": "./root_one",
+    "module": "./excitingpolyfill!./root_one",
     "moduleSystem": "amd"
   },
   {
@@ -44,19 +32,7 @@
     "exoticallyRequired": false,
     "matchesDoNotFollow": false,
     "couldNotResolve": false,
-    "module": "./somedata.json",
-    "moduleSystem": "amd"
-  },
-  {
-    "resolved": "json",
-    "coreModule": false,
-    "dependencyTypes": ["unknown"],
-    "dynamic": false,
-    "followable": false,
-    "exoticallyRequired": false,
-    "matchesDoNotFollow": false,
-    "couldNotResolve": true,
-    "module": "json",
+    "module": "json!./somedata.json",
     "moduleSystem": "amd"
   }
 ]

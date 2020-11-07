@@ -9,14 +9,12 @@ function extractRegularAMDDependencies(pNode, pDependencies) {
       .forEach((pArgument) =>
         pArgument.elements.forEach((pElement) => {
           if (Boolean(pElement.value) && typeof pElement.value === "string") {
-            pElement.value.split("!").forEach((pString) =>
-              pDependencies.push({
-                module: pString,
-                moduleSystem: "amd",
-                dynamic: false,
-                exoticallyRequired: false,
-              })
-            );
+            pDependencies.push({
+              module: pElement.value,
+              moduleSystem: "amd",
+              dynamic: false,
+              exoticallyRequired: false,
+            });
           }
         })
       );

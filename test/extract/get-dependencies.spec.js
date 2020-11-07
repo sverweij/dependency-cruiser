@@ -11,7 +11,6 @@ const amdFixtures = require("./fixtures/amd.json");
 const tsFixtures = require("./fixtures/ts.json");
 const coffeeFixtures = require("./fixtures/coffee.json");
 
-const cjsBang = require("./fixtures/cjs-bang.json");
 const amdBangRequirejs = require("./fixtures/amd-bang-requirejs.json");
 const amdBangCJSWrapper = require("./fixtures/amd-bang-CJSWrapper.json");
 
@@ -66,7 +65,7 @@ after(() => {
 describe("extract/getDependencies - CommonJS - ", () =>
   cjsFixtures.forEach(runFixture));
 describe("extract/getDependencies - CommonJS - with bangs", () => {
-  it("splits bang!./blabla into bang and ./blabla", () => {
+  it("strips the inline loader prefix from the module name when resolving", () => {
     const lOptions = normalizeCruiseOptions({ moduleSystems: ["cjs"] });
     const lResolveOptions = normalizeResolveOptions(
       { bustTheCache: true },
@@ -79,7 +78,49 @@ describe("extract/getDependencies - CommonJS - with bangs", () => {
         lOptions,
         lResolveOptions
       )
-    ).to.deep.equal(cjsBang);
+    ).to.deep.equal([
+      {
+        resolved: "test/extract/fixtures/cjs-bangs/dependency.js",
+        coreModule: false,
+        dependencyTypes: ["local"],
+        dynamic: false,
+        followable: true,
+        exoticallyRequired: false,
+        matchesDoNotFollow: false,
+        couldNotResolve: false,
+        module: "ieeeeeeeee!./dependency",
+        moduleSystem: "cjs",
+      },
+    ]);
+  });
+
+  it("strips multiple inline loader prefixes from the module name when resolving", () => {
+    const lOptions = normalizeCruiseOptions({ moduleSystems: ["cjs"] });
+    const lResolveOptions = normalizeResolveOptions(
+      { bustTheCache: true },
+      lOptions
+    );
+
+    expect(
+      getDependencies(
+        "test/extract/fixtures/cjs-multi-bangs/index.js",
+        lOptions,
+        lResolveOptions
+      )
+    ).to.deep.equal([
+      {
+        resolved: "test/extract/fixtures/cjs-multi-bangs/dependency.js",
+        coreModule: false,
+        dependencyTypes: ["local"],
+        dynamic: false,
+        followable: true,
+        exoticallyRequired: false,
+        matchesDoNotFollow: false,
+        couldNotResolve: false,
+        module: "!!aap!noot!mies!./dependency",
+        moduleSystem: "cjs",
+      },
+    ]);
   });
 });
 
@@ -88,7 +129,7 @@ describe("extract/getDependencies - ES6 - ", () =>
 describe("extract/getDependencies - AMD - ", () =>
   amdFixtures.forEach(runFixture));
 describe("extract/getDependencies - AMD - with bangs", () => {
-  it("splits bang!./blabla into bang and ./blabla - regular requirejs", () => {
+  it("splits extracts the module part of the plugin + module - regular requirejs", () => {
     const lOptions = normalizeCruiseOptions({ moduleSystems: ["amd"] });
     const lResolveOptions = normalizeResolveOptions(
       { bustTheCache: true },

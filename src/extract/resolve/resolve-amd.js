@@ -17,8 +17,33 @@ const fileExists = memoize((pFile) => {
   return true;
 });
 
+function guessPath(pBaseDirectory, pFileDirectory, pStrippedModuleName) {
+  return pathToPosix(
+    path.relative(
+      pBaseDirectory,
+      path.join(pFileDirectory, pStrippedModuleName)
+    )
+  );
+}
+
+function guessLikelyPath(pBaseDirectory, pFileDirectory, pStrippedModuleName) {
+  let lReturnValue =
+    [".js", ""]
+      .map((pExtension) =>
+        guessPath(
+          pBaseDirectory,
+          pFileDirectory,
+          `${pStrippedModuleName}${pExtension}`
+        )
+      )
+      .find((pProbablePath) => fileExists(pProbablePath)) ||
+    pStrippedModuleName;
+
+  return lReturnValue;
+}
+
 module.exports = function resolveAMD(
-  pModuleName,
+  pRawModuleName,
   pBaseDirectory,
   pFileDirectory,
   pResolveOptions
@@ -28,28 +53,29 @@ module.exports = function resolveAMD(
   // - [ ] require.config kerfuffle (command line, html, file, ...)
   // - [ ] maybe use mrjoelkemp/module-lookup-amd ?
   // - [ ] or https://github.com/jaredhanson/amd-resolve ?
-  // - [ ] funky plugins (json!wappie, ./screeching-cat!sabertooth)
-  const lProbablePath = pathToPosix(
-    path.relative(
-      pBaseDirectory,
-      path.join(pFileDirectory, `${pModuleName}.js`)
-    )
+  // - [x] funky plugins (json!wappie, ./screeching-cat!sabertooth)
+  const lModuleName = resolveHelpers.stripToModuleName(pRawModuleName);
+  const lResolvedPath = guessLikelyPath(
+    pBaseDirectory,
+    pFileDirectory,
+    lModuleName
   );
+
   let lReturnValue = {
-    resolved: fileExists(lProbablePath) ? lProbablePath : pModuleName,
-    coreModule: Boolean(isCore(pModuleName)),
-    followable: fileExists(lProbablePath),
+    resolved: lResolvedPath,
+    coreModule: Boolean(isCore(pRawModuleName)),
+    followable: fileExists(lResolvedPath) && lResolvedPath.endsWith(".js"),
     couldNotResolve:
-      !Boolean(isCore(pModuleName)) && !fileExists(lProbablePath),
+      !Boolean(isCore(pRawModuleName)) && !fileExists(lResolvedPath),
   };
 
   // we might want to use resolve options instead of {} here
   return {
     ...lReturnValue,
-    ...resolveHelpers.addLicenseAttribute(pModuleName, pBaseDirectory, {}),
+    ...resolveHelpers.addLicenseAttribute(lModuleName, pBaseDirectory, {}),
     dependencyTypes: determineDependencyTypes(
       lReturnValue,
-      pModuleName,
+      lModuleName,
       getManifest(
         pFileDirectory,
         pBaseDirectory,
