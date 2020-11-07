@@ -14,16 +14,6 @@
 <path fill="#ffffff" stroke="black" stroke-width="2" d="M20,-8C20,-8 633,-8 633,-8 639,-8 645,-14 645,-20 645,-20 645,-714 645,-714 645,-720 639,-726 633,-726 633,-726 20,-726 20,-726 14,-726 8,-720 8,-714 8,-714 8,-20 8,-20 8,-14 14,-8 20,-8"/>
 <text text-anchor="middle" x="326.5" y="-714.8" font-family="Helvetica,sans-Serif" font-weight="bold" font-size="9.00">src</text>
 </g>
-<g id="clust2" class="cluster">
-<title>cluster_src/cli</title>
-<path fill="#ffffff" stroke="black" stroke-width="2" d="M28,-216C28,-216 112,-216 112,-216 118,-216 124,-222 124,-228 124,-228 124,-376 124,-376 124,-382 118,-388 112,-388 112,-388 28,-388 28,-388 22,-388 16,-382 16,-376 16,-376 16,-228 16,-228 16,-222 22,-216 28,-216"/>
-<text text-anchor="middle" x="70" y="-376.8" font-family="Helvetica,sans-Serif" font-weight="bold" font-size="9.00">cli</text>
-</g>
-<g id="clust3" class="cluster">
-<title>cluster_src/cli/compile&#45;config</title>
-<path fill="#ffffff" stroke="black" stroke-width="2" d="M42,-224C42,-224 98,-224 98,-224 104,-224 110,-230 110,-236 110,-236 110,-264 110,-264 110,-270 104,-276 98,-276 98,-276 42,-276 42,-276 36,-276 30,-270 30,-264 30,-264 30,-236 30,-236 30,-230 36,-224 42,-224"/>
-<text text-anchor="middle" x="70" y="-264.8" font-family="Helvetica,sans-Serif" font-weight="bold" font-size="9.00">compile&#45;config</text>
-</g>
 <g id="clust4" class="cluster">
 <title>cluster_src/enrich</title>
 <path fill="#ffffff" stroke="black" stroke-width="2" d="M219,-580C219,-580 320,-580 320,-580 326,-580 332,-586 332,-592 332,-592 332,-650 332,-650 332,-656 326,-662 320,-662 320,-662 219,-662 219,-662 213,-662 207,-656 207,-650 207,-650 207,-592 207,-592 207,-586 213,-580 219,-580"/>
@@ -88,6 +78,16 @@
 <title>cluster_src/utl</title>
 <path fill="#ffffff" stroke="black" stroke-width="2" d="M246.5,-520C246.5,-520 292.5,-520 292.5,-520 298.5,-520 304.5,-526 304.5,-532 304.5,-532 304.5,-560 304.5,-560 304.5,-566 298.5,-572 292.5,-572 292.5,-572 246.5,-572 246.5,-572 240.5,-572 234.5,-566 234.5,-560 234.5,-560 234.5,-532 234.5,-532 234.5,-526 240.5,-520 246.5,-520"/>
 <text text-anchor="middle" x="269.5" y="-560.8" font-family="Helvetica,sans-Serif" font-weight="bold" font-size="9.00">utl</text>
+</g>
+<g id="clust2" class="cluster">
+<title>cluster_src/cli</title>
+<path fill="#ffffff" stroke="black" stroke-width="2" d="M28,-216C28,-216 112,-216 112,-216 118,-216 124,-222 124,-228 124,-228 124,-376 124,-376 124,-382 118,-388 112,-388 112,-388 28,-388 28,-388 22,-388 16,-382 16,-376 16,-376 16,-228 16,-228 16,-222 22,-216 28,-216"/>
+<text text-anchor="middle" x="70" y="-376.8" font-family="Helvetica,sans-Serif" font-weight="bold" font-size="9.00">cli</text>
+</g>
+<g id="clust3" class="cluster">
+<title>cluster_src/cli/compile&#45;config</title>
+<path fill="#ffffff" stroke="black" stroke-width="2" d="M42,-224C42,-224 98,-224 98,-224 104,-224 110,-230 110,-236 110,-236 110,-264 110,-264 110,-270 104,-276 98,-276 98,-276 42,-276 42,-276 36,-276 30,-270 30,-264 30,-264 30,-236 30,-236 30,-230 36,-224 42,-224"/>
+<text text-anchor="middle" x="70" y="-264.8" font-family="Helvetica,sans-Serif" font-weight="bold" font-size="9.00">compile&#45;config</text>
 </g>
 <!-- src/cli/compile&#45;config/index.js -->
 <g id="node1" class="node">
