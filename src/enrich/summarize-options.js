@@ -1,6 +1,5 @@
 const _get = require("lodash/get");
 const _has = require("lodash/has");
-const pathToPosix = require("../utl/path-to-posix");
 
 const SHAREABLE_OPTIONS = [
   "combinedDependencies",
@@ -59,7 +58,7 @@ module.exports = function summarizeOptions(pFileDirectoryArray, pOptions) {
   return {
     optionsUsed: {
       ...makeOptionsPresentable(makeIncludOnlyBackwardsCompatible(pOptions)),
-      args: pFileDirectoryArray.map(pathToPosix).join(" "),
+      args: pFileDirectoryArray.join(" "),
     },
   };
 };

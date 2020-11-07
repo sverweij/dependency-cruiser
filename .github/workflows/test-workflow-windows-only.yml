@@ -22,24 +22,21 @@ jobs:
     steps:
       - name: checkout
         uses: actions/checkout@v1
-      # - name: cache node modules for ${{matrix.node-version}}@${{matrix.platform}}
-      #   uses: actions/cache@v1
-      #   with:
-      #     path: node_modules
-      #     key: ${{matrix.node-version}}@${{matrix.platform}}-build-${{hashFiles('package.json')}}
-      #     restore-keys: |
-      #       ${{matrix.node-version}}@${{matrix.platform}}-build-
+      - name: cache node modules for ${{matrix.node-version}}@${{matrix.platform}}
+        uses: actions/cache@v1
+        with:
+          path: node_modules
+          key: ${{matrix.node-version}}@${{matrix.platform}}-build-${{hashFiles('package.json')}}
+          restore-keys: |
+            ${{matrix.node-version}}@${{matrix.platform}}-build-
       - name: set up node ${{matrix.node-version}}@${{matrix.platform}}
         uses: actions/setup-node@v1
         with:
           node-version: ${{matrix.node-version}}
-      # the rimraf node_modules appears to be necessary as there's a wyrd
-      # renaming thing occurring on windows with npm:
-      # npm ERR! enoent ENOENT: no such file or directory, rename 'd:\a\dependency-cruiser\dependency-cruiser\node_modules\.staging\rxjs-76baa905' -> 'd:\a\dependency-cruiser\dependency-cruiser\node_modules\inquirer\node_modules\rxjs'
       - name: install & build
         run: |
           node --version
-          rm -rf node_modules
+          # rm -rf node_modules
           npm install
           npm run build
         shell: bash

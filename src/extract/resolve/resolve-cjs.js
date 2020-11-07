@@ -1,5 +1,5 @@
 const path = require("path");
-const pathToPosix = require("../../utl/path-to-posix");
+const pathToPosix = require("../utl/path-to-posix");
 const determineDependencyTypes = require("./determine-dependency-types");
 const { isCore, isFollowable } = require("./module-classifiers");
 const getManifest = require("./get-manifest");

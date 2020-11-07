@@ -1,6 +1,7 @@
 const path = require("path").posix;
 const fs = require("fs");
 const chai = require("chai");
+const pathToPosix = require("../../src/extract/utl/path-to-posix");
 const cruiseResultSchema = require("../../src/schema/cruise-result.schema.json");
 const main = require("../../src/main");
 const tsFixture = require("./fixtures/ts.json");
@@ -12,13 +13,22 @@ const expect = chai.expect;
 
 chai.use(require("chai-json-schema"));
 
+function pathPosixify(pOutput) {
+  const lReturnValue = { ...pOutput };
+  lReturnValue.summary.optionsUsed.args = pathToPosix(
+    lReturnValue.summary.optionsUsed.args
+  );
+  return lReturnValue;
+}
+
 describe("main.cruise", () => {
   it("Returns an object when no options are passed", () => {
     const lResult = main.cruise(["test/main/fixtures/ts"]);
 
-    expect(lResult.output).to.deep.equal(tsFixture);
+    expect(pathPosixify(lResult.output)).to.deep.equal(tsFixture);
     expect(lResult.output).to.be.jsonSchema(cruiseResultSchema);
   });
+
   it("Returns an object when no options are passed (absolute path)", () => {
     const lResult = main.cruise(
       [path.join(__dirname, "fixtures", "ts")],
@@ -26,9 +36,10 @@ describe("main.cruise", () => {
       { bustTheCache: true }
     );
 
-    expect(lResult.output).to.deep.equal(tsFixture);
+    expect(pathPosixify(lResult.output)).to.deep.equal(tsFixture);
     expect(lResult.output).to.be.jsonSchema(cruiseResultSchema);
   });
+
   it("Also processes tsx correctly", () => {
     const lResult = main.cruise(
       ["test/main/fixtures/tsx"],
@@ -36,7 +47,7 @@ describe("main.cruise", () => {
       { bustTheCache: true }
     );
 
-    expect(lResult.output).to.deep.equal(tsxFixture);
+    expect(pathPosixify(lResult.output)).to.deep.equal(tsxFixture);
     expect(lResult.output).to.be.jsonSchema(cruiseResultSchema);
   });
   it("And jsx", () => {
@@ -46,7 +57,7 @@ describe("main.cruise", () => {
       { bustTheCache: true }
     );
 
-    expect(lResult.output).to.deep.equal(jsxFixture);
+    expect(pathPosixify(lResult.output)).to.deep.equal(jsxFixture);
     expect(lResult.output).to.be.jsonSchema(cruiseResultSchema);
   });
   it("And rulesets in the form a an object instead of json", () => {
@@ -58,7 +69,7 @@ describe("main.cruise", () => {
       { bustTheCache: true }
     );
 
-    expect(lResult.output).to.deep.equal(jsxAsObjectFixture);
+    expect(pathPosixify(lResult.output)).to.deep.equal(jsxAsObjectFixture);
     expect(lResult.output).to.be.jsonSchema(cruiseResultSchema);
   });
   it("Collapses to a pattern when a collapse pattern is passed", () => {
@@ -71,7 +82,7 @@ describe("main.cruise", () => {
       { bustTheCache: true }
     );
 
-    expect(lResult.output).to.deep.equal(
+    expect(pathPosixify(lResult.output)).to.deep.equal(
       JSON.parse(
         fs.readFileSync(
           "test/main/fixtures/collapse-after-cruise/expected-result.json",
