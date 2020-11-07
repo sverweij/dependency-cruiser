@@ -1,17 +1,11 @@
-require(
-    ["fs",
-     "../../../node_modules/commander/index",
-     "./shared",
-     "./excitingpolyfill.js!./sub/dir",
-     "./one_only_one",
-     "json!./somedata.json'"
-    ],
-    function(fs,
-        cmdr,
-        shared,
-        subdir,
-        one_only_one,
-        three){
-    // do stuff
-    }
-);
+require([
+  "fs",
+  "../../../node_modules/commander/index",
+  "./shared",
+  "./excitingpolyfill.js!./hurray",
+  "./one_only_one",
+  "json!./somedata.json",
+  "whuups!doesnotexist",
+], function (fs, cmdr, shared, hurray, one_only_one, some_data, doesnotexist) {
+  // do stuff
+});
