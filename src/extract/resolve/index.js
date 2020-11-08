@@ -4,6 +4,7 @@ const pathToPosix = require("../utl/path-to-posix");
 const { isRelativeModuleName } = require("./module-classifiers");
 const resolveAMD = require("./resolve-amd");
 const resolveCommonJS = require("./resolve-cjs");
+const resolveHelpers = require("./resolve-helpers");
 
 function resolveModule(
   pModule,
@@ -13,8 +14,9 @@ function resolveModule(
 ) {
   let lReturnValue = null;
 
+  const lModuleName = resolveHelpers.stripToModuleName(pModule.module);
   if (
-    isRelativeModuleName(pModule.module) ||
+    isRelativeModuleName(lModuleName) ||
     ["cjs", "es6"].includes(pModule.moduleSystem)
   ) {
     lReturnValue = resolveCommonJS(
@@ -58,6 +60,7 @@ function resolveWithRetry(
     pFileDirectory,
     pResolveOptions
   );
+  const lModuleName = resolveHelpers.stripToModuleName(pModule.module);
 
   // when we feed the typescript compiler an import with an explicit .js(x) extension
   // and the .js(x) file does not exist, it tries files with the .ts, .tsx or
@@ -72,11 +75,8 @@ function resolveWithRetry(
   //
   // This should eventually probably land in either enhanced_resolve or in a
   // plugin/ extension for it (tsconfig-paths-webpack-plugin?)
-  if (
-    lReturnValue.couldNotResolve &&
-    canBeResolvedToTsVariant(pModule.module)
-  ) {
-    const lModuleWithOutExtension = pModule.module.replace(/\.js(x)?$/g, "");
+  if (lReturnValue.couldNotResolve && canBeResolvedToTsVariant(lModuleName)) {
+    const lModuleWithOutExtension = lModuleName.replace(/\.js(x)?$/g, "");
 
     const lReturnValueCandidate = resolveModule(
       { ...pModule, module: lModuleWithOutExtension },

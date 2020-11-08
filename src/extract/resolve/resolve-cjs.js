@@ -39,20 +39,22 @@ function addResolutionAttributes(
  * resolves both CommonJS and ES6
  */
 module.exports = function resolveCommonJS(
-  pModuleName,
+  pRawModuleName,
   pBaseDirectory,
   pFileDirectory,
   pResolveOptions
 ) {
+  const lModuleName = resolveHelpers.stripToModuleName(pRawModuleName);
+
   let lReturnValue = {
-    resolved: pModuleName,
+    resolved: lModuleName,
     coreModule: false,
     followable: false,
     couldNotResolve: false,
     dependencyTypes: ["undetermined"],
     ...addResolutionAttributes(
       pBaseDirectory,
-      pModuleName,
+      lModuleName,
       pFileDirectory,
       pResolveOptions
     ),
@@ -61,13 +63,13 @@ module.exports = function resolveCommonJS(
   return {
     ...lReturnValue,
     ...resolveHelpers.addLicenseAttribute(
-      pModuleName,
+      lModuleName,
       pBaseDirectory,
       pResolveOptions
     ),
     dependencyTypes: determineDependencyTypes(
       lReturnValue,
-      pModuleName,
+      lModuleName,
       getManifest(
         pFileDirectory,
         pBaseDirectory,

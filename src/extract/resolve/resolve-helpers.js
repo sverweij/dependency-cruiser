@@ -14,4 +14,7 @@ module.exports = {
     }
     return lReturnValue;
   },
+  stripToModuleName(pUnstrippedModuleName) {
+    return pUnstrippedModuleName.split("!").pop();
+  },
 };

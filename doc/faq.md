@@ -277,6 +277,14 @@ in your code dependency-cruiser won't be able to determine what dependencies
 they're about. For now dependency-cruiser focuses on doing static analysis
 only and doing that well.
 
+### Q: Does dependency-cruiser support [webpack inline loaders](https://webpack.js.org/concepts/loaders/#inline)?
+
+**A**: Yes, as of version 9.17.0 it does. No configuration necessary.
+
+### Q: Does dependency-cruiser support [require.js plugin notation](https://requirejs.org/docs/plugins.html)?
+
+**A**: Yes, as of version 9.17.0 it does. No configuration necessary.
+
 ### Q: Does it work with my monorepo?
 
 **A**: Absolutely. For every cruised module the closest `package.json` file is

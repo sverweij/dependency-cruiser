@@ -2,12 +2,12 @@ const walk = require("acorn-walk");
 const estreeHelpers = require("./estree-helpers");
 
 function pryStringsFromArguments(pArguments) {
-  let lReturnValue = [];
+  let lReturnValue = null;
 
   if (estreeHelpers.firstArgumentIsAString(pArguments)) {
-    lReturnValue = pArguments[0].value.split("!");
+    lReturnValue = pArguments[0].value;
   } else if (estreeHelpers.firstArgumentIsATemplateLiteral(pArguments)) {
-    lReturnValue = [pArguments[0].quasis[0].value.cooked];
+    lReturnValue = pArguments[0].quasis[0].value.cooked;
   }
 
   return lReturnValue;
@@ -21,9 +21,10 @@ function pushRequireCallsToDependencies(
   return (pNode) => {
     for (let lName of ["require"].concat(pExoticRequireStrings)) {
       if (estreeHelpers.isRequireOfSomeSort(pNode, lName)) {
-        for (let lString of pryStringsFromArguments(pNode.arguments)) {
+        const lModuleName = pryStringsFromArguments(pNode.arguments);
+        if (lModuleName) {
           pDependencies.push({
-            module: lString,
+            module: lModuleName,
             moduleSystem: pModuleSystem,
             dynamic: false,
             ...(lName === "require"
