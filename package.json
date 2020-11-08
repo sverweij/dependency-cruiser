@@ -45,9 +45,9 @@
   "main": "src/main/index.js",
   "types": "types/dependency-cruiser.d.ts",
   "files": [
-    "bin/",
+    "bin",
     "configs/**/*.js",
-    "src/",
+    "src",
     "!src/**/*.hbs",
     "!src/**/*.md",
     "!**/*.DS_Store",
