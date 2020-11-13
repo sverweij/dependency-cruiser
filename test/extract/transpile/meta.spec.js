@@ -21,6 +21,7 @@ describe("extract/transpile/meta", () => {
       ".csx",
       ".cjsx",
       ".vue",
+      ".svelte",
     ]);
   });
 
@@ -62,6 +63,14 @@ describe("extract/transpile/meta", () => {
     ).to.deep.equal(vueTemplateWrap);
   });
 
+  it("returns the 'svelte' wrapper for svelte even when the babel config is not empty", () => {
+    expect(
+      meta
+        .getWrapper(".svelte", { babelConfig: { babelrc: false } })
+        .transpile.toString()
+    ).to.contains("svelte");
+  });
+
   it("returns me the available transpilers", () => {
     expect(meta.getAvailableTranspilers()).to.deep.equal([
       {
@@ -92,6 +101,11 @@ describe("extract/transpile/meta", () => {
       {
         name: "vue-template-compiler",
         version: ">=2.0.0 <3.0.0",
+        available: true,
+      },
+      {
+        name: "svelte",
+        version: ">=3.0.0 <4.0.0",
         available: true,
       },
     ]);

@@ -1,0 +1,37 @@
+const tryRequire = require("semver-try-require");
+
+const svelte = tryRequire(
+  "svelte",
+  require("../../../package.json").supportedTranspilers.svelte
+);
+
+// eslint-disable-next-line import/order, node/no-unpublished-require
+const svelteCompile = svelte ? require('svelte/compiler') : false;
+
+module.exports = (pTsWrapper) => ({
+  isAvailable: () => pTsWrapper.isAvailable() && svelteCompile !== false,
+  transpile: async (pSource, pTranspileOptions = {}) => {
+    const optionallyCompileTsToJsInSvelte = await svelteCompile.preprocess(pSource, {
+      script: ({ content, attributes }) => {
+        if(attributes.lang !== 'ts' || !pTsWrapper.isAvailable()) {
+          return { code: content };
+        }
+        const compiledToTsFromJs = pTsWrapper.transpile(content, {
+          ...pTranspileOptions,
+          tsConfig: {
+            ...pTranspileOptions?.tsConfig,
+            options: {
+              ...pTranspileOptions?.tsConfig?.options,
+              importsNotUsedAsValues: "error",
+              jsx: "preserve",
+            },
+          },
+        });
+        return { code: compiledToTsFromJs }
+      }
+    });
+    const compiledSvelteCode = svelteCompile.compile(optionallyCompileTsToJsInSvelte.code);
+    // remove `import {...} from "svelte/internal";`
+    return compiledSvelteCode.js.code.replace(/import[\s\S]*"svelte\/internal";/, '');
+  },
+});

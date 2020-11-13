@@ -215,6 +215,14 @@ For `.vue` single file components it uses the `vue-template-compiler`
 
 - which will be in your module dependencies if you're developing with Vue).
 
+### Q: Does this work with Svelte as well?
+
+**A**: Yes.
+
+For `.svelte` single file components it uses the `svelte` (version 3.x)
+
+- which will be in your module dependencies if you're developing with Svelte).
+
 ### Q: Does this mean dependency-cruiser installs transpilers for all these languages?
 
 **A**: No.
