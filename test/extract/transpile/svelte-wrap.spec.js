@@ -1,5 +1,7 @@
+// eslint-disable-next-line node/no-unsupported-features/node-builtins
 const { promises: fsPromise } = require("fs");
 const { expect } = require("chai");
+const normalizeNewline = require("normalize-newline");
 const wrap = require("../../../src/extract/transpile/svelte-wrap")(
   require("../../../src/extract/transpile/typescript-wrap")(true)
 );
@@ -21,6 +23,6 @@ describe("svelte transpiler", () => {
       observedPromise,
       expectedPromise,
     ]);
-    expect(observed).to.equal(expected);
+    expect(normalizeNewline(observed)).to.equal(normalizeNewline(expected));
   });
 });
