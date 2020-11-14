@@ -211,7 +211,7 @@
     "types/**"
   ],
   "engines": {
-    "node": "^10.17||^12||>=13"
+    "node": "^10||^12||>=13"
   },
   "supportedTranspilers": {
     "babel": ">=7.0.0 <8.0.0",
