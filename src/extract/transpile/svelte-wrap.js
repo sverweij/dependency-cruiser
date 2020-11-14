@@ -9,7 +9,7 @@ const svelte = tryRequire(
 const svelteCompile = svelte ? require('svelte/compiler') : false;
 
 module.exports = (pTsWrapper) => ({
-  isAvailable: () => pTsWrapper.isAvailable() && svelteCompile !== false,
+  isAvailable: () => svelteCompile !== false,
   transpile: async (pSource, pTranspileOptions = {}) => {
     const optionallyCompileTsToJsInSvelte = await svelteCompile.preprocess(pSource, {
       script: ({ content, attributes }) => {
