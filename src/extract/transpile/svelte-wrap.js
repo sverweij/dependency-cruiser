@@ -1,4 +1,5 @@
 const tryRequire = require("semver-try-require");
+const _get = require("lodash/get");
 
 const svelte = tryRequire(
   "svelte",
@@ -6,32 +7,40 @@ const svelte = tryRequire(
 );
 
 // eslint-disable-next-line import/order, node/no-unpublished-require
-const svelteCompile = svelte ? require('svelte/compiler') : false;
+const svelteCompile = svelte ? require("svelte/compiler") : false;
 
 module.exports = (pTsWrapper) => ({
   isAvailable: () => svelteCompile !== false,
   transpile: async (pSource, pTranspileOptions = {}) => {
-    const optionallyCompileTsToJsInSvelte = await svelteCompile.preprocess(pSource, {
-      script: ({ content, attributes }) => {
-        if(attributes.lang !== 'ts' || !pTsWrapper.isAvailable()) {
-          return { code: content };
-        }
-        const compiledToTsFromJs = pTsWrapper.transpile(content, {
-          ...pTranspileOptions,
-          tsConfig: {
-            ...pTranspileOptions?.tsConfig,
-            options: {
-              ...pTranspileOptions?.tsConfig?.options,
-              importsNotUsedAsValues: "error",
-              jsx: "preserve",
+    const optionallyCompileTsToJsInSvelte = await svelteCompile.preprocess(
+      pSource,
+      {
+        script: ({ content, attributes }) => {
+          if (attributes.lang !== "ts" || !pTsWrapper.isAvailable()) {
+            return { code: content };
+          }
+          const compiledToTsFromJs = pTsWrapper.transpile(content, {
+            ...pTranspileOptions,
+            tsConfig: {
+              ..._get(pTranspileOptions, "tsConfig", {}),
+              options: {
+                ..._get(pTranspileOptions, "tsConfig.options", {}),
+                importsNotUsedAsValues: "error",
+                jsx: "preserve",
+              },
             },
-          },
-        });
-        return { code: compiledToTsFromJs }
+          });
+          return { code: compiledToTsFromJs };
+        },
       }
-    });
-    const compiledSvelteCode = svelteCompile.compile(optionallyCompileTsToJsInSvelte.code);
+    );
+    const compiledSvelteCode = svelteCompile.compile(
+      optionallyCompileTsToJsInSvelte.code
+    );
     // remove `import {...} from "svelte/internal";`
-    return compiledSvelteCode.js.code.replace(/import[\s\S]*"svelte\/internal";/, '');
+    return compiledSvelteCode.js.code.replace(
+      /import[\s\S]*"svelte\/internal";/,
+      ""
+    );
   },
 });
