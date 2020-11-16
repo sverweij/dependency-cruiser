@@ -1,5 +1,8 @@
 const walk = require("acorn-walk");
+const { extend } = require("acorn-jsx-walk");
 const estreeHelpers = require("./estree-helpers");
+
+extend(walk.base);
 
 function pushImportNodeValue(pDependencies) {
   return (pNode) => {

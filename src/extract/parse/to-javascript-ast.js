@@ -1,25 +1,34 @@
 const fs = require("fs");
 const acorn = require("acorn");
 const acornLoose = require("acorn-loose");
+const acornJsx = require("acorn-jsx");
 const _memoize = require("lodash/memoize");
 const transpile = require("../transpile");
 const getExtension = require("../utl/get-extension");
+
+const ACORN_OPTIONS = {
+  sourceType: "module",
+  ecmaVersion: 11,
+};
+
+const acornJsxParser = acorn.Parser.extend(acornJsx());
 
 function getASTFromSource(pSource, pExtension, pTranspileOptions) {
   const lJavaScriptSource = transpile(pExtension, pSource, pTranspileOptions);
 
   try {
+    if (pExtension === ".jsx") {
+      return acornJsxParser.parse(lJavaScriptSource, {
+        ...ACORN_OPTIONS,
+        allowNamespacedObjects: true,
+      });
+    }
+
     // ecmaVersion 11 necessary for acorn to understand dynamic imports
     // explicitly passing ecmaVersion is recommended from acorn 8
-    return acorn.parse(lJavaScriptSource, {
-      sourceType: "module",
-      ecmaVersion: 11,
-    });
+    return acorn.parse(lJavaScriptSource, ACORN_OPTIONS);
   } catch (pError) {
-    return acornLoose.parse(lJavaScriptSource, {
-      sourceType: "module",
-      ecmaVersion: 11,
-    });
+    return acornLoose.parse(lJavaScriptSource, ACORN_OPTIONS);
   }
 }
 

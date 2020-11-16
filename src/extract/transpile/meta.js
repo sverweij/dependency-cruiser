@@ -10,17 +10,6 @@ const litCoffeeWrap = require("./coffeescript-wrap")(true);
 const vueWrap = require("./vue-template-wrap");
 const babelWrap = require("./babel-wrap");
 
-/*
-  jsx - acorn_loose will handle this correctly when imports
-        etc are on top, which is the most likely use case.
-        Alternatives (making a jsxWrap with babel-core & a bunch
-        of plugins or using acorn-jsx) might be more correct in
-        edge cases but are either much harder to implement or
-        likely to fail in basic use cases.
-
-        See ./jsx-implementation-rationale.md for an implementation
-        rationale on jsx ...
- */
 const EXTENSION2WRAPPER = {
   ".js": javaScriptWrap,
   ".cjs": javaScriptWrap,

@@ -3,8 +3,11 @@ const extractES6Deps = require("../../../src/extract/ast-extractors/extract-es6-
 const getASTFromSource = require("../../../src/extract/parse/to-javascript-ast")
   .getASTFromSource;
 
-const extractES6 = (pJavaScriptSource, pDependencies) =>
-  extractES6Deps(getASTFromSource(pJavaScriptSource, "js"), pDependencies);
+const extractES6 = (pJavaScriptSource, pDependencies, pExtension = ".js") =>
+  extractES6Deps(
+    getASTFromSource(pJavaScriptSource, pExtension),
+    pDependencies
+  );
 
 describe("ast-extractors/extract-ES6-deps", () => {
   it("dynamic imports of strings", () => {
@@ -81,5 +84,70 @@ describe("ast-extractors/extract-ES6-deps", () => {
       lDeps
     );
     expect(lDeps).to.deep.equal([]);
+  });
+
+  it("doesn't get confused about import keywords in jsx components", () => {
+    let lDependencies = [];
+    const INPUT = `import React from 'react';
+
+    export const ReplicateIssueComponent = props => {
+      return (
+        <>
+        This usage of the word import doesn't get detected as dependency
+        </>
+      );
+    }`;
+
+    extractES6(INPUT, lDependencies, ".jsx");
+    expect(lDependencies).to.deep.equal([
+      {
+        module: "react",
+        moduleSystem: "es6",
+        dynamic: false,
+        exoticallyRequired: false,
+      },
+    ]);
+  });
+
+  it("does a.t.m. NOT handle certain ways of jsx notation correctly", () => {
+    let lDependencies = [];
+    const INPUT = `import React from 'react';
+
+export class ReplicateIssueComponent extends React.Component {
+  renderSomethingElse = () => {
+    return (
+      <>The word import here still triggers the not-to-unresolvable error</>
+    );
+  };
+
+  render = () => (
+    <>
+      {this.renderSomethingElse()}
+      This usage of the word import in this string does no longer trigger the
+      not-to-unresolvable error (at version 9.17.1-beta-1)
+    </>
+  );
+}`;
+    extractES6(INPUT, lDependencies, ".jsx");
+    expect(lDependencies).to.deep.equal([
+      {
+        module: "react",
+        moduleSystem: "es6",
+        dynamic: false,
+        exoticallyRequired: false,
+      },
+      {
+        module: "✖",
+        moduleSystem: "es6",
+        dynamic: false,
+        exoticallyRequired: false,
+      },
+      {
+        module: "✖",
+        moduleSystem: "es6",
+        dynamic: false,
+        exoticallyRequired: false,
+      },
+    ]);
   });
 });

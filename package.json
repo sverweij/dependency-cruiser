@@ -118,6 +118,8 @@
   },
   "dependencies": {
     "acorn": "8.0.4",
+    "acorn-jsx": "5.3.1",
+    "acorn-jsx-walk": "2.0.0",
     "acorn-loose": "8.0.1",
     "acorn-walk": "8.0.0",
     "ajv": "6.12.6",
