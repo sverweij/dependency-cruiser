@@ -6,8 +6,8 @@ const svelte = tryRequire(
   require("../../../package.json").supportedTranspilers.svelte
 );
 
-// eslint-disable-next-line import/order, node/no-unpublished-require
-const svelteCompile = svelte ? require("svelte/compiler") : false;
+// eslint-disable-next-line import/order, node/no-unpublished-require, node/global-require
+const svelteCompile = svelte && require("svelte/compiler");
 
 module.exports = (pTsWrapper) => ({
   isAvailable: () => svelteCompile !== false,
@@ -25,7 +25,7 @@ module.exports = (pTsWrapper) => ({
               ..._get(pTranspileOptions, "tsConfig", {}),
               options: {
                 ..._get(pTranspileOptions, "tsConfig.options", {}),
-                importsNotUsedAsValues: "error",
+                importsNotUsedAsValues: "preserve",
                 jsx: "preserve",
               },
             },
@@ -37,10 +37,6 @@ module.exports = (pTsWrapper) => ({
     const compiledSvelteCode = svelteCompile.compile(
       optionallyCompileTsToJsInSvelte.code
     );
-    // remove `import {...} from "svelte/internal";`
-    return compiledSvelteCode.js.code.replace(
-      /import[\s\S]*"svelte\/internal";/,
-      ""
-    );
+    return compiledSvelteCode.js.code;
   },
 });
