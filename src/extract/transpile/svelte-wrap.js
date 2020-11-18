@@ -1,13 +1,10 @@
 const tryRequire = require("semver-try-require");
 const _get = require("lodash/get");
 
-const svelte = tryRequire(
-  "svelte",
+const svelteCompile = tryRequire(
+  "svelte/compiler",
   require("../../../package.json").supportedTranspilers.svelte
 );
-
-// eslint-disable-next-line import/order, node/no-unpublished-require, node/global-require
-const svelteCompile = svelte && require("svelte/compiler");
 
 module.exports = (pTsWrapper) => ({
   isAvailable: () => svelteCompile !== false,
