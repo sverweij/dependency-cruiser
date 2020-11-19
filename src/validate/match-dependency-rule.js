@@ -13,6 +13,14 @@ function propertyEquals(pTo, pRule, pProperty) {
     : true;
 }
 
+function matchesMoreThanOneDependencyType(pRuleTo, pTo) {
+  if (_has(pRuleTo, "moreThanOneDependencyType")) {
+    return pRuleTo.moreThanOneDependencyType === pTo.dependencyTypes.length > 1;
+  }
+
+  return true;
+}
+
 function match(pFrom, pTo) {
   // eslint-disable-next-line complexity
   return (pRule) => {
@@ -24,8 +32,7 @@ function match(pFrom, pTo) {
       matchers.toPath(pRule, pTo, lGroups) &&
       matchers.toPathNot(pRule, pTo, lGroups) &&
       matchers.toDependencyTypes(pRule, pTo) &&
-      (!_has(pRule.to, "moreThanOneDependencyType") ||
-        pTo.dependencyTypes.length > 1) &&
+      matchesMoreThanOneDependencyType(pRule.to, pTo) &&
       matchers.toLicense(pRule, pTo) &&
       matchers.toLicenseNot(pRule, pTo) &&
       matchers.toExoticRequire(pRule, pTo) &&

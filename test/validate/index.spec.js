@@ -1,3 +1,4 @@
+/* eslint-disable max-statements */
 const { expect } = require("chai");
 const validate = require("../../src/validate");
 const readRuleSet = require("./readruleset.utl");
@@ -373,6 +374,30 @@ describe("validate/index - specific tests", () => {
       rules: [
         {
           name: "no-duplicate-dep-types",
+          severity: "warn",
+        },
+      ],
+    });
+  });
+
+  it(`relations with modules of > 1 dep type (e.g. specified in package.json as peer and as dev)`, () => {
+    expect(
+      validate.dependency(
+        readRuleSet(
+          "./test/validate/fixtures/rules.please-duplicate-dep-types.json"
+        ),
+        { source: "src/aap/zus/jet.js" },
+        {
+          module: "chai",
+          resolved: "node_modules/chai/index.js",
+          dependencyTypes: ["npm-peer"],
+        }
+      )
+    ).to.deep.equal({
+      valid: false,
+      rules: [
+        {
+          name: "please-duplicate-dep-types",
           severity: "warn",
         },
       ],
