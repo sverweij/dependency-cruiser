@@ -27,16 +27,15 @@ More react research:
     - do the various options have a common denominator (e.g. `babel-plugin-jsx` - maybe another one?)
   - `babel-plugin-transform-react-jsx` seems to be a reasonable common denominator. It just doesn't work on its own in most react project I've used it on.
 
-## Alternative: acorn with acorn-jsx (not chosen)
+## Alternative: acorn with acorn-jsx (chosen)
 
 - For this I introduced acorn-jsx in the extraction step. It's a relatively elegant solution; .js is correctly parsed without hitches, as is .jsx. In the latter case abstract syntax tree contains JSXxxx nodes. Also acorn-jsx is the 'official' jsx parser used by facebook. And babel. However ...
 - ... for extracting dependencies from the syntax tree I use the tree-walker included in acorn. This - understandably - chokes on the new-fangled JSXxxx nodes acorn-jsx uses. There's some solutions available for this
-  - use the `acorn-jsx-walk` package. It isn't updated for quite a long time, and doesn't seem to have a lot of traction (in downloads, stars or otherwise). It also uses quite a lot of dependencies (biggish) and the code base didn't seem as one I'd like to adopt.
+
+  - use the `acorn-jsx-walk` package. ~~It isn't updated for quite a long time, and doesn't seem to have a lot of traction (in downloads, stars or otherwise). It also uses quite a lot of dependencies (biggish) and the code base didn't seem as one I'd like to adopt.~~ _update 2020-11-16_: acorn-jsx-walk is dependency-less (now - or was it always?), and super straightforward, small piece code to boot, so it makes sense that it doesn't need a whole lot of updates => totally legit to pull in.
   - filter/ transform the parsed tree so it doesn't contain JSXxxx nodes anymore - I'm not interested in those anyway. My estimation is that this will be non-trivial to do right.
 
-**=> not a viable option for the short term**
-
-## Alternative: acorn_loose
+## Alternative: acorn_loose (not chosen)
 
 Observing
 
@@ -48,7 +47,7 @@ Observing
   - fast & stable
 - ... implementing & testing this is a doddle ...
 
-**=> acorn_loose it is for now** ; maybe later an elegant solution for one of the above (plugin? passing babelrc?)
+**this was used until dependency-cruiser 9.17.0** when it started using acorn-jsx + acorn-jsx-walk
 
 # Vue
 

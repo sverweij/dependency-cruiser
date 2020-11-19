@@ -205,7 +205,50 @@ necessary compilers at its disposal.
 ### Q: I'm developing in React and use jsx/ tsx/ csx/ cjsx. How do I get that to work?
 
 **A**: jsx and its TypeScript and CoffeeScript variants work
-out of the box as well.
+out of the box as well. For jsx there is a little caveat, though.
+
+### Q: I hear there is a little caveat with jsx. What is that?
+
+**A**: Under the hood dependency-cruiser currently uses `acorn` and `acorn-jsx`
+which (for at least some time) have been the official jsx transpilers and are
+still used by other tools (source: acorn-jsx github page). Some constructs in
+jsx it does not support however. In the lion's share of the cases you will not
+notice, and acorn will still pick out the correct dependencies (more nor
+less than are in the source code) because it will fall back on the acorn-loose
+parser, which will pick up the pieces. _except_, that is when you happen to use
+_import_, _export_ or _require_ in jsx fragments in one special flavor of jsx
+
+<details>
+<summary>Sample of jsx the default parser doesn't parse</summary>
+
+```jsx
+import React from "react";
+
+export class ReplicateIssueComponent extends React.Component {
+  renderSomethingElse = () => {
+    return (
+      <>The word import here results is picked up as an import statement.</>
+    );
+  };
+
+  render = () => (
+    <>
+      {this.renderSomethingElse()}
+      Here import is confused with an import statement as well.
+    </>
+  );
+}
+```
+
+</details>
+
+In [this comment](https://github.com/sverweij/dependency-cruiser/issues/395#issuecomment-730295987)
+on the orignal issue [@audunsol](https://github.com/audunsol) offers a few
+ways to work around the issue you might find helpful when you have similar
+jsx.
+
+(As a future feature dependency-cruiser will include ways to handle even these
+situations without workarounds).
 
 ### Q: Does this work with Vue as well?
 
