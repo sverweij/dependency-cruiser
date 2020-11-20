@@ -1,0 +1,17 @@
+name: "Mark or close stale issues"
+on:
+  schedule:
+    - cron: "15 2 * * *"
+
+jobs:
+  stale:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/stale@v3
+        with:
+          repo-token: ${{ secrets.GITHUB_TOKEN }}
+          days-before-stale: 7
+          days-before-close: 2
+          stale-issue-message: "This issue has been automatically marked as stale because it has not had recent activity. It will be closed if no further activity occurs."
+          stale-issue-label: "stale"
+          exempt-issue-labels: "bug,enhancement,good first issue,needs_fix_upstream,PR welcome,question"
