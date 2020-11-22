@@ -1,39 +1,22 @@
 const tryRequire = require("semver-try-require");
-const _get = require("lodash/get");
-
-const svelteCompile = tryRequire(
+const svelteCompiler = tryRequire(
   "svelte/compiler",
   require("../../../package.json").supportedTranspilers.svelte
 );
+const preProcess = require("./svelte-preprocess");
 
-module.exports = (pTsWrapper) => ({
-  isAvailable: () => svelteCompile !== false,
-  transpile: async (pSource, pTranspileOptions = {}) => {
-    const optionallyCompileTsToJsInSvelte = await svelteCompile.preprocess(
+function getTranspiler(pTranspilerWrapper) {
+  return (pSource, pTranspilerOptions) => {
+    const lPreProcessedSource = preProcess(
       pSource,
-      {
-        script: ({ content, attributes }) => {
-          if (attributes.lang !== "ts" || !pTsWrapper.isAvailable()) {
-            return { code: content };
-          }
-          const compiledToTsFromJs = pTsWrapper.transpile(content, {
-            ...pTranspileOptions,
-            tsConfig: {
-              ..._get(pTranspileOptions, "tsConfig", {}),
-              options: {
-                ..._get(pTranspileOptions, "tsConfig.options", {}),
-                importsNotUsedAsValues: "preserve",
-                jsx: "preserve",
-              },
-            },
-          });
-          return { code: compiledToTsFromJs };
-        },
-      }
+      pTranspilerWrapper,
+      pTranspilerOptions
     );
-    const compiledSvelteCode = svelteCompile.compile(
-      optionallyCompileTsToJsInSvelte.code
-    );
-    return compiledSvelteCode.js.code;
-  },
+    return svelteCompiler.compile(lPreProcessedSource).js.code;
+  };
+}
+
+module.exports = (pTranspilerWrapper) => ({
+  isAvailable: () => svelteCompiler !== false,
+  transpile: getTranspiler(pTranspilerWrapper),
 });

@@ -12,6 +12,20 @@ describe("transpiler", () => {
     );
   });
 
+  it("Returns svelte compiled down to js", () => {
+    const lInput = normalizeNewline(
+      fs.readFileSync(
+        path.join(__dirname, "fixtures", "svelte-ts.svelte"),
+        "utf-8"
+      )
+    );
+    const lExpectedOoutput = normalizeNewline(
+      fs.readFileSync(path.join(__dirname, "fixtures", "svelte.js"), "utf-8")
+    );
+
+    expect(transpile(".svelte", lInput)).to.equal(lExpectedOoutput);
+  });
+
   it("Does not confuse .ts for .tsx", () => {
     const lInputFixture = fs.readFileSync(
       path.join(
@@ -52,8 +66,7 @@ describe("transpiler", () => {
       ),
       "utf8"
     );
-    // extends
-    // references
+
     const lTranspilerOptions = {
       baseUrl: "src",
       paths: {
