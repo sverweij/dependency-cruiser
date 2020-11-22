@@ -16,11 +16,11 @@ describe("transpiler", () => {
     const lInput = normalizeNewline(
       fs.readFileSync(
         path.join(__dirname, "fixtures", "svelte-ts.svelte"),
-        "utf-8"
+        "utf8"
       )
     );
     const lExpectedOoutput = normalizeNewline(
-      fs.readFileSync(path.join(__dirname, "fixtures", "svelte.js"), "utf-8")
+      fs.readFileSync(path.join(__dirname, "fixtures", "svelte.js"), "utf8")
     );
 
     expect(transpile(".svelte", lInput)).to.equal(lExpectedOoutput);
