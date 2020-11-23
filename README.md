@@ -116,7 +116,7 @@ You've come to the right place :-) :
   - [Contact](./doc/faq.md#contact)
   - [Real world show cases](./doc/real-world-samples.md)
   - [TypeScript, CoffeeScript and LiveScript support](./doc/faq.md#features)
-  - [Support for .jsx, .tsx, .csx/ .cjsx and .vue](./doc/faq.md#q-im-developing-in-react-and-use-jsx-tsx-csx-cjsx-how-do-i-get-that-to-work)
+  - [Support for .jsx, .tsx, .csx/ .cjsx, .vue and .svelte](./doc/faq.md#q-im-developing-in-react-and-use-jsx-tsx-csx-cjsx-how-do-i-get-that-to-work)
   - [Webpack alias/ modules support](./doc/faq.md#q-does-this-work-with-webpack-configs-eg-alias-and-modules)
 
 ## License

@@ -9,6 +9,7 @@ const coffeeWrap = require("./coffeescript-wrap")();
 const litCoffeeWrap = require("./coffeescript-wrap")(true);
 const vueWrap = require("./vue-template-wrap");
 const babelWrap = require("./babel-wrap");
+const svelteWrap = require("./svelte-wrap")(typeScriptWrap);
 
 const EXTENSION2WRAPPER = {
   ".js": javaScriptWrap,
@@ -25,6 +26,7 @@ const EXTENSION2WRAPPER = {
   ".csx": coffeeWrap,
   ".cjsx": coffeeWrap,
   ".vue": vueWrap,
+  ".svelte": svelteWrap,
 };
 
 const TRANSPILER2WRAPPER = {
@@ -35,6 +37,7 @@ const TRANSPILER2WRAPPER = {
   livescript: liveScriptWrap,
   typescript: typeScriptWrap,
   "vue-template-compiler": vueWrap,
+  svelte: svelteWrap,
 };
 
 const BABELEABLE_EXTENSIONS = [

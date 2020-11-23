@@ -92,6 +92,10 @@
       "attributes": { "fillcolor": "#bbfeff" }
     },
     {
+      "criteria": { "source": "\\.svelte$" },
+      "attributes": { "fillcolor": "#febbff" }
+    },
+    {
       "criteria": { "source": "(\\.coffee|\\.litcoffee|\\.coffee\\.md)$" },
       "attributes": { "fillcolor": "#eeccaa" }
     },
