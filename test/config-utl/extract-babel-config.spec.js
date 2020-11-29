@@ -1,6 +1,6 @@
 const path = require("path").posix;
 const { expect } = require("chai");
-const parseBabelConfig = require("../../src/cli/parse-babel-config");
+const extractBabelConfig = require("../../src/config-utl/extract-babel-config");
 
 const DEFAULT_EMPTY_BABEL_OPTIONS_OBJECT = {
   babelrc: false,
@@ -14,22 +14,22 @@ const DEFAULT_EMPTY_BABEL_OPTIONS_OBJECT = {
   presets: [],
 };
 
-describe("cli/parseBabelConfig", () => {
+describe("config-utl/parseBabelConfig", () => {
   it("throws when no config file name is passed", () => {
     expect(() => {
-      parseBabelConfig();
+      extractBabelConfig();
     }).to.throw();
   });
 
   it("throws when a non-existing config file is passed", () => {
     expect(() => {
-      parseBabelConfig("config-does-not-exist");
+      extractBabelConfig("config-does-not-exist");
     }).to.throw();
   });
 
   it("throws when a config file is passed that does not contain valid json5", () => {
     expect(() => {
-      parseBabelConfig(
+      extractBabelConfig(
         path.join(__dirname, "./fixtures/babelconfig/babelrc.invalid.json")
       );
     }).to.throw();
@@ -37,7 +37,7 @@ describe("cli/parseBabelConfig", () => {
 
   it("throws when a config file is passed contains a non-babel option", () => {
     expect(() => {
-      parseBabelConfig(
+      extractBabelConfig(
         path.join(
           __dirname,
           "./fixtures/babelconfig/babelrc.not-a-babel-option.json"
@@ -48,7 +48,7 @@ describe("cli/parseBabelConfig", () => {
 
   it("returns a default options object when an empty config file is passed", () => {
     expect(
-      parseBabelConfig(
+      extractBabelConfig(
         path.join(__dirname, "./fixtures/babelconfig/babelrc.empty.json")
       )
     ).to.deep.equal(DEFAULT_EMPTY_BABEL_OPTIONS_OBJECT);
@@ -56,7 +56,7 @@ describe("cli/parseBabelConfig", () => {
 
   it("reads the 'babel' key when a package.json is passed", () => {
     expect(
-      parseBabelConfig(
+      extractBabelConfig(
         path.join(__dirname, "./fixtures/babelconfig/package.json")
       ).plugins.length
     ).to.equal(1);
@@ -64,7 +64,7 @@ describe("cli/parseBabelConfig", () => {
 
   it("returns an empty (/ default) options object when package.json without a babel key is passed", () => {
     expect(
-      parseBabelConfig(
+      extractBabelConfig(
         path.join(
           __dirname,
           "./fixtures/babelconfig/no-babel-config-in-this-package.json"
@@ -75,7 +75,7 @@ describe("cli/parseBabelConfig", () => {
 
   it("returns a babel config when a javascript file with a regular object export is passed", () => {
     expect(
-      parseBabelConfig(
+      extractBabelConfig(
         path.join(
           __dirname,
           "./fixtures/babelconfig-js/babel.object-export.config.js"
@@ -86,7 +86,7 @@ describe("cli/parseBabelConfig", () => {
 
   it("throws when a javascript file with a function export is passed", () => {
     expect(() => {
-      parseBabelConfig(
+      extractBabelConfig(
         path.join(
           __dirname,
           "./fixtures/babelconfig-js/babel.function-export.config.js"
@@ -97,7 +97,7 @@ describe("cli/parseBabelConfig", () => {
 
   it("throws when a config with an unsupported extension is passed", () => {
     expect(() => {
-      parseBabelConfig(
+      extractBabelConfig(
         path.join(
           __dirname,
           "./fixtures/babelconfig-js/babel.config.wildly-unsupported-extension"
@@ -108,7 +108,7 @@ describe("cli/parseBabelConfig", () => {
 
   it("throws when an es module is passed", () => {
     expect(() => {
-      parseBabelConfig(
+      extractBabelConfig(
         path.join(
           __dirname,
           "./fixtures/babelconfig-js/babel.es-module.config.js"

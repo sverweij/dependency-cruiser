@@ -8,7 +8,7 @@ const _get = require("lodash/get");
 const _has = require("lodash/has");
 const tryRequire = require("semver-try-require");
 const $package = require("../../package.json");
-const makeAbsolute = require("./utl/make-absolute");
+const makeAbsolute = require("./make-absolute");
 
 function getCommonJSConfig(pBabelConfigFileName) {
   let lReturnValue = {};
@@ -73,7 +73,19 @@ function getConfig(pBabelConfigFileName) {
   return lExtensionToParseFunction[lExtension](pBabelConfigFileName);
 }
 
-module.exports = function parseBabelConfig(pBabelConfigFileName) {
+/**
+ * Reads the file with name `pBabelConfigFileName` and returns its parsed
+ * contents as an object
+ *
+ * Silently fails if a supported @babel/core version can't be found
+ *
+ * @param {string} pBabelConfigFileName
+ * @return {any} babel config as an object
+ * @throws {Error} when the babel config has an unknown extension OR
+ *                 when the babel config is invalid OR
+ *                 when dependency-cruiser can't yet process it
+ */
+module.exports = function extractBabelConfig(pBabelConfigFileName) {
   let lReturnValue = {};
   const babel = tryRequire("@babel/core", $package.supportedTranspilers.babel);
 

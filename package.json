@@ -43,6 +43,23 @@
     "depcruise-wrap-stream-in-html": "bin/wrap-stream-in-html.js"
   },
   "main": "src/main/index.js",
+  "exports": {
+    ".": {
+      "default": "./src/main/index.js"
+    },
+    "./config-utl/extract-babel-config": {
+      "default": "./src/config-utl/extract-babel-config.js"
+    },
+    "./config-utl/extract-depcruise-config": {
+      "default": "./src/config-utl/extract-depcruise-config/index.js"
+    },
+    "./config-utl/extract-ts-config": {
+      "default": "./src/config-utl/extract-ts-config.js"
+    },
+    "./config-utl/extract-webpack-resolve-config": {
+      "default": "./src/config-utl/extract-webpack-resolve-config.js"
+    }
+  },
   "types": "types/dependency-cruiser.d.ts",
   "files": [
     "bin",
@@ -192,7 +209,8 @@
       "tmp*",
       "tools/**/*",
       "docs/**/*",
-      "doc/**/*"
+      "doc/**/*",
+      "webpack.conf.js"
     ],
     "reporter": [
       "text-summary",

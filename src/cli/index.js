@@ -2,9 +2,10 @@ const glob = require("glob");
 const _get = require("lodash/get");
 const main = require("../main");
 const bus = require("../utl/bus");
-const parseTSConfig = require("./parse-ts-config");
-const parseBabelConfig = require("./parse-babel-config");
-const getResolveConfig = require("./get-resolve-config");
+
+const extractTSConfig = require("../config-utl/extract-ts-config");
+const extractBabelConfig = require("../config-utl/extract-babel-config");
+const extractWebpackResolveConfig = require("../config-utl/extract-webpack-resolve-config");
 const validateFileExistence = require("./utl/validate-file-existence");
 const normalizeOptions = require("./normalize-options");
 const initConfig = require("./init-config");
@@ -22,7 +23,7 @@ function extractResolveOptions(pCruiseOptions) {
   );
 
   if (lWebPackConfigFileName) {
-    lResolveOptions = getResolveConfig(
+    lResolveOptions = extractWebpackResolveConfig(
       lWebPackConfigFileName,
       _get(pCruiseOptions, "ruleSet.options.webpackConfig.env", null),
       _get(pCruiseOptions, "ruleSet.options.webpackConfig.arguments", null)
@@ -40,7 +41,7 @@ function extractTSConfigOptions(pCruiseOptions) {
   );
 
   if (lTSConfigFileName) {
-    lReturnValue = parseTSConfig(lTSConfigFileName);
+    lReturnValue = extractTSConfig(lTSConfigFileName);
   }
 
   return lReturnValue;
@@ -55,7 +56,7 @@ function extractBabelConfigOptions(pCruiseOptions) {
   );
 
   if (lBabelConfigFileName) {
-    lReturnValue = parseBabelConfig(lBabelConfigFileName);
+    lReturnValue = extractBabelConfig(lBabelConfigFileName);
   }
 
   return lReturnValue;

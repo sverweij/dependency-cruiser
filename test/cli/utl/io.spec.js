@@ -17,16 +17,7 @@ function removeDammit(pFileName) {
 }
 
 describe("cli/utl/io", () => {
-  const lNrOfNumbers = 17;
-  const OUTFILE = path.join(
-    __dirname,
-    "output",
-    `tmp_hello_${Math.random()
-      .toString()
-      .split(".")
-      .pop()
-      .padEnd(lNrOfNumbers, "0")}.json`
-  );
+  const OUTFILE = path.join(__dirname, "output", `tmp_hello_cli_utl_io.json`);
 
   before("set up", () => {
     fs.writeFileSync(OUTFILE, "{}", "utf8");

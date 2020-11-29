@@ -1,7 +1,7 @@
 /* eslint-disable max-statements */
 const path = require("path");
 const { expect } = require("chai");
-const parseTSConfig = require("../../../src/cli/parse-ts-config");
+const extractTSConfig = require("../../../src/config-utl/extract-ts-config");
 const resolve = require("../../../src/extract/resolve");
 const normalizeResolveOptions = require("../../../src/main/resolve-options/normalize");
 
@@ -11,14 +11,14 @@ const TSCONFIG = path.join(
   "ts-config-with-path",
   "tsconfig.json"
 );
-const PARSED_TSCONFIG = parseTSConfig(TSCONFIG);
+const PARSED_TSCONFIG = extractTSConfig(TSCONFIG);
 const TSCONFIG_RESOLUTIONS = path.join(
   __dirname,
   "fixtures",
   "ts-config-with-path-correct-resolution-prio",
   "tsconfig.json"
 );
-const PARSED_TSCONFIG_RESOLUTIONS = parseTSConfig(TSCONFIG);
+const PARSED_TSCONFIG_RESOLUTIONS = extractTSConfig(TSCONFIG);
 const WORKING_DIRECTORY = process.cwd();
 
 describe("extract/resolve/index", () => {

@@ -1,26 +1,26 @@
 const path = require("path").posix;
 const { expect } = require("chai");
-const parseTSConfig = require("../../src/cli/parse-ts-config");
+const loadTSConfig = require("../../src/config-utl/extract-ts-config");
 const pathToPosix = require("../../src/extract/utl/path-to-posix");
 
 const DIRNAME = pathToPosix(__dirname);
 
-describe("cli/parseTSConfig - flatten typescript config - simple config scenarios", () => {
+describe("config-utl/parseTSConfig - flatten typescript config - simple config scenarios", () => {
   it("throws when no config file name is passed", () => {
     expect(() => {
-      parseTSConfig();
+      loadTSConfig();
     }).to.throw();
   });
 
   it("throws when a non-existing config file is passed", () => {
     expect(() => {
-      parseTSConfig("config-does-not-exist");
+      loadTSConfig("config-does-not-exist");
     }).to.throw();
   });
 
   it("throws when a config file is passed that does not contain valid json", () => {
     expect(() => {
-      parseTSConfig(
+      loadTSConfig(
         path.join(
           __dirname,
           "./fixtures/typescriptconfig/tsconfig.invalid.json"
@@ -31,7 +31,7 @@ describe("cli/parseTSConfig - flatten typescript config - simple config scenario
 
   it("returns an empty object when an empty config file is passed", () => {
     expect(
-      parseTSConfig(
+      loadTSConfig(
         path.join(__dirname, "./fixtures/typescriptconfig/tsconfig.empty.json")
       ).options
     ).to.deep.equal({
@@ -44,7 +44,7 @@ describe("cli/parseTSConfig - flatten typescript config - simple config scenario
 
   it("returns an empty object when an empty config file with comments is passed", () => {
     expect(
-      parseTSConfig(
+      loadTSConfig(
         path.join(
           __dirname,
           "./fixtures/typescriptconfig/tsconfig.withcomments.json"
@@ -60,7 +60,7 @@ describe("cli/parseTSConfig - flatten typescript config - simple config scenario
 
   it("returns an object with a bunch of options when when the default ('--init') config file is passed", () => {
     expect(
-      parseTSConfig(
+      loadTSConfig(
         path.join(
           __dirname,
           "./fixtures/typescriptconfig/tsconfig.asgeneratedbydefault.json"
@@ -82,7 +82,7 @@ describe("cli/parseTSConfig - flatten typescript config - simple config scenario
 describe("cli/parseTSConfig - flatten typescript config - 'extend' config scenarios", () => {
   it("throws when a config file is passed that contains a extends to a non-existing file", () => {
     expect(() => {
-      parseTSConfig(
+      loadTSConfig(
         path.join(
           __dirname,
           "./fixtures/typescriptconfig/tsconfig.extendsnonexisting.json"
@@ -93,7 +93,7 @@ describe("cli/parseTSConfig - flatten typescript config - 'extend' config scenar
 
   it("throws when a config file is passed that has a circular reference", () => {
     expect(() => {
-      parseTSConfig(
+      loadTSConfig(
         path.join(
           __dirname,
           "./fixtures/typescriptconfig/tsconfig.circular.json"
@@ -106,7 +106,7 @@ describe("cli/parseTSConfig - flatten typescript config - 'extend' config scenar
 
   it("returns an empty object (even no 'extend') when a config with an extend to an empty base is passed", () => {
     expect(
-      parseTSConfig(
+      loadTSConfig(
         path.join(
           __dirname,
           "./fixtures/typescriptconfig/tsconfig.simpleextends.json"
@@ -121,7 +121,7 @@ describe("cli/parseTSConfig - flatten typescript config - 'extend' config scenar
   });
 
   it("returns an object with properties from base, extends & overrides from extends - non-compilerOptions", () => {
-    const lParseResult = parseTSConfig(
+    const lParseResult = loadTSConfig(
       path.join(
         __dirname,
         "./fixtures/typescriptconfig/tsconfig.noncompileroptionsextends.json"
@@ -167,7 +167,7 @@ describe("cli/parseTSConfig - flatten typescript config - 'extend' config scenar
 
   it("returns an object with properties from base, extends & overrides from extends - compilerOptions", () => {
     expect(
-      parseTSConfig(
+      loadTSConfig(
         path.join(
           __dirname,
           "./fixtures/typescriptconfig/tsconfig.compileroptionsextends.json"
@@ -193,7 +193,7 @@ describe("cli/parseTSConfig - flatten typescript config - 'extend' config scenar
 
   it("returns an object with properties from base, extends compilerOptions.lib array", () => {
     expect(
-      parseTSConfig(
+      loadTSConfig(
         path.join(
           __dirname,
           "./fixtures/typescriptconfig/tsconfig.compileroptionsextendslib.json"

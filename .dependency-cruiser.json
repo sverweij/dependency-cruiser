@@ -15,31 +15,16 @@
       "comment": "This cli module depends on something not in the public interface - which means it either doesn't belong in cli, or the main public interface needs to be expanded.",
       "severity": "error",
       "from": {
-        "path": "(^src/cli/)",
-        "pathNot": "^(src/cli/compile-config/index\\.js)$"
+        "path": "(^src/cli/)"
       },
       "to": {
         "pathNot": [
-          "^src/(main|utl)/",
+          "^src/(main|utl|config-utl)/",
           "^node_modules",
           "^fs$",
           "^path$",
           "$1",
           "^package.json$"
-        ]
-      }
-    },
-    {
-      "name": "cli-to-main-only-warn",
-      "comment": "This cli module depends on something not in the public interface - which means it either doesn't belong in cli, or the main public interface needs to be expanded (this warn-only rule is a temporary exception for the compileConfig depending on the resolver).",
-      "severity": "warn",
-      "from": { "path": "^(src/cli/compile-config/index\\.js)$" },
-      "to": {
-        "pathNot": [
-          "$1",
-          "^src/(cli|main)",
-          "^node_modules",
-          "^(fs|path|package.json)$"
         ]
       }
     },
@@ -91,7 +76,7 @@
       "severity": "error",
       "from": {
         "pathNot": [
-          "^src/(main/resolve-options/normalize\\.js|extract/parse|extract/resolve|extract/gather-initial-sources\\.js|cli)",
+          "^src/(main/resolve-options/normalize\\.js|extract/parse|extract/resolve|extract/gather-initial-sources\\.js|config-utl|cli)",
           "^test",
           "^tools"
         ]
@@ -230,11 +215,11 @@
       your webpack config is a function and takes them (see webpack documentation
       for details)
     */
-    // "webpackConfig": {
-    //    "fileName": "./webpack.conf.js",
-    //    "env": {},
-    //    "args": {}
-    // },
+    "webpackConfig": {
+      "fileName": "./webpack.conf.js"
+      //    "env": {},
+      //    "args": {}
+    },
     // "babelConfig": {
     //   "fileName": "./babel.config.json"
     // },
@@ -261,6 +246,10 @@
             {
               "criteria": { "source": "^src/cli" },
               "attributes": { "fillcolor": "#ccccff" }
+            },
+            {
+              "criteria": { "source": "^src/config-utl" },
+              "attributes": { "fillcolor": "#99ffff" }
             },
             {
               "criteria": { "source": "^src/report" },
@@ -324,6 +313,10 @@
               "attributes": { "color": "#0000ff77" }
             },
             {
+              "criteria": { "resolved": "^src/config-utl" },
+              "attributes": { "color": "#22999977" }
+            },
+            {
               "criteria": { "resolved": "^src/report" },
               "attributes": { "color": "#ff00ff77" }
             },
@@ -355,8 +348,6 @@
         }
       }
     },
-    // "progress" is an experimental feature. Works but names & structures
-    // could change without notice
     // "progress": { "type": "cli-feedback" }
     "progress": { "type": "performance-log" }
     // "progress": {"type": "none"}
