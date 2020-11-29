@@ -1,9 +1,8 @@
 const fs = require("fs");
 const path = require("path");
 const { expect } = require("chai");
-const prettier = require("prettier");
-const normalizeNewline = require("normalize-newline");
 const transpile = require("../../../src/extract/transpile");
+const normalizeSource = require("../normalize-source.utl");
 
 describe("transpiler", () => {
   it("As the 'livescript' transpiler is not available, returns the original source", () => {
@@ -13,17 +12,17 @@ describe("transpiler", () => {
   });
 
   it("Returns svelte compiled down to js", () => {
-    const lInput = normalizeNewline(
-      fs.readFileSync(
-        path.join(__dirname, "fixtures", "svelte-ts.svelte"),
-        "utf8"
-      )
+    const lInput = fs.readFileSync(
+      path.join(__dirname, "fixtures", "svelte-ts.svelte"),
+      "utf8"
     );
-    const lExpectedOoutput = normalizeNewline(
+    const lExpectedOoutput = normalizeSource(
       fs.readFileSync(path.join(__dirname, "fixtures", "svelte.js"), "utf8")
     );
 
-    expect(transpile(".svelte", lInput)).to.equal(lExpectedOoutput);
+    expect(normalizeSource(transpile(".svelte", lInput))).to.equal(
+      lExpectedOoutput
+    );
   });
 
   it("Does not confuse .ts for .tsx", () => {
@@ -42,12 +41,8 @@ describe("transpiler", () => {
       "utf8"
     );
 
-    expect(
-      normalizeNewline(
-        prettier.format(transpile(".ts", lInputFixture), { parser: "babel" })
-      )
-    ).to.equal(
-      normalizeNewline(prettier.format(lTranspiledFixture, { parser: "babel" }))
+    expect(normalizeSource(transpile(".ts", lInputFixture))).to.equal(
+      normalizeSource(lTranspiledFixture)
     );
   });
 
@@ -77,17 +72,7 @@ describe("transpiler", () => {
       types: ["foo", "bar", "baz"],
     };
     expect(
-      normalizeNewline(
-        prettier.format(transpile(".ts", lInputFixture, lTranspilerOptions), {
-          parser: "babel",
-        })
-      )
-    ).to.equal(
-      normalizeNewline(
-        prettier.format(lTranspiledFixture, {
-          parser: "babel",
-        })
-      )
-    );
+      normalizeSource(transpile(".ts", lInputFixture, lTranspilerOptions))
+    ).to.equal(lTranspiledFixture);
   });
 });

@@ -1,7 +1,6 @@
 const fs = require("fs");
 const { expect } = require("chai");
-const normalizeNewline = require("normalize-newline");
-const prettier = require("prettier");
+const normalizeSource = require("../normalize-source.utl");
 const wrap = require("../../../src/extract/transpile/babel-wrap");
 
 describe("extract/transpile/babel-wrap", () => {
@@ -11,15 +10,12 @@ describe("extract/transpile/babel-wrap", () => {
 
   it("transpiles with babel when no babel options are passed", () => {
     expect(
-      normalizeNewline(
-        prettier.format(
-          wrap.transpile(
-            fs.readFileSync(
-              "./test/extract/transpile/fixtures/babel-in.js",
-              "utf8"
-            )
-          ),
-          { parser: "babel" }
+      normalizeSource(
+        wrap.transpile(
+          fs.readFileSync(
+            "./test/extract/transpile/fixtures/babel-in.js",
+            "utf8"
+          )
         )
       )
     ).to.equal(
@@ -41,10 +37,8 @@ describe("extract/transpile/babel-wrap", () => {
         plugins: ["@babel/plugin-transform-modules-commonjs"],
       },
     };
-    const lOutput = normalizeNewline(
-      prettier.format(wrap.transpile(lInputFileContents, lBabelOptions), {
-        parser: "babel",
-      })
+    const lOutput = normalizeSource(
+      wrap.transpile(lInputFileContents, lBabelOptions)
     );
     const lExpected = fs.readFileSync(
       "./test/extract/transpile/fixtures/babel-out-es-old.js",
