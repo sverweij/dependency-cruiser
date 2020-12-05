@@ -2,14 +2,18 @@ const busLogLevels = require("../../../utl/bus-log-levels");
 const { getHeader, getProgressLine, getEndText } = require("./handlers");
 
 function getHeaderWriter(pStream, pMaxLevel) {
-  return (_pMessage, pLevel = busLogLevels.SUMMARY) => {
-    pStream.write(getHeader(pLevel, pMaxLevel));
+  return (_pMessage, pOptions) => {
+    const lOptions = { level: busLogLevels.SUMMARY, ...(pOptions || {}) };
+
+    pStream.write(getHeader(lOptions.level, pMaxLevel));
   };
 }
 
 function getProgressWriter(pStream, pState, pMaxLevel) {
-  return (pMessage, pLevel = busLogLevels.SUMMARY) => {
-    pStream.write(getProgressLine(pMessage, pState, pLevel, pMaxLevel));
+  return (pMessage, pOptions) => {
+    const lOptions = { level: busLogLevels.SUMMARY, ...(pOptions || {}) };
+
+    pStream.write(getProgressLine(pMessage, pState, lOptions.level, pMaxLevel));
   };
 }
 
