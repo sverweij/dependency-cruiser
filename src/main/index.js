@@ -1,3 +1,4 @@
+/* eslint-disable no-magic-numbers */
 /* eslint-disable import/max-dependencies */
 const Ajv = require("ajv");
 const extract = require("../extract");
@@ -38,37 +39,42 @@ function format(pResult, pFormatOptions = {}) {
   return reportWrap(pResult, lFormatOptions);
 }
 
+const TOTAL_STEPS = 8;
+
+function c(pComplete, pTotal = TOTAL_STEPS) {
+  return { complete: pComplete / pTotal };
+}
 function futureCruise(
   pFileAndDirectoryArray,
   pCruiseOptions,
   pResolveOptions,
   pTranspileOptions
 ) {
-  bus.emit("progress", "parsing options");
+  bus.emit("progress", "parsing options", c(1));
   let lCruiseOptions = normalizeCruiseOptions(
     validateCruiseOptions(pCruiseOptions)
   );
 
   if (Boolean(lCruiseOptions.ruleSet)) {
-    bus.emit("progress", "parsing rule set");
+    bus.emit("progress", "parsing rule set", c(2));
     lCruiseOptions.ruleSet = normalizeRuleSet(
       validateRuleSet(lCruiseOptions.ruleSet)
     );
   }
 
-  bus.emit("progress", "making sense of files and directories");
+  bus.emit("progress", "making sense of files and directories", c(3));
   const lNormalizedFileAndDirectoryArray = normalizeFilesAndDirectories(
     pFileAndDirectoryArray
   );
 
-  bus.emit("progress", "determining how to resolve");
+  bus.emit("progress", "determining how to resolve", c(4));
   const lNormalizedResolveOptions = normalizeResolveOptions(
     pResolveOptions,
     lCruiseOptions,
     pTranspileOptions.tsConfig
   );
 
-  bus.emit("progress", "reading files");
+  bus.emit("progress", "reading files", c(5));
   const lExtractionResult = extract(
     lNormalizedFileAndDirectoryArray,
     lCruiseOptions,
@@ -76,14 +82,14 @@ function futureCruise(
     pTranspileOptions
   );
 
-  bus.emit("progress", "analyzing");
+  bus.emit("progress", "analyzing", c(6));
   const lCruiseResult = enrich(
     lExtractionResult,
     lCruiseOptions,
     lNormalizedFileAndDirectoryArray
   );
 
-  bus.emit("progress", "reporting");
+  bus.emit("progress", "reporting", c(7));
   return reportWrap(lCruiseResult, lCruiseOptions);
 }
 

@@ -8,19 +8,21 @@ const deriveReachable = require("./derive/reachable");
 const addValidations = require("./add-validations");
 
 module.exports = function enrichModules(pModules, pOptions) {
-  bus.emit("progress", "analyzing: cycles", busLogLevels.INFO);
+  bus.emit("progress", "analyzing: cycles", { level: busLogLevels.INFO });
   let lModules = deriveCirculars(pModules);
-  bus.emit("progress", "analyzing: orphans", busLogLevels.INFO);
+  bus.emit("progress", "analyzing: orphans", { level: busLogLevels.INFO });
   lModules = deriveOrphans(lModules);
-  bus.emit("progress", "analyzing: reachables", busLogLevels.INFO);
+  bus.emit("progress", "analyzing: reachables", { level: busLogLevels.INFO });
   lModules = deriveReachable(lModules, pOptions.ruleSet);
-  bus.emit("progress", "analyzing: add focus (if any)", busLogLevels.INFO);
+  bus.emit("progress", "analyzing: add focus (if any)", {
+    level: busLogLevels.INFO,
+  });
   lModules = addFocus(lModules, _get(pOptions, "focus"));
 
   // when validate === false we might want to skip the addValidations.
   // We don't at this time, however, as "valid" is a mandatory
   // attribute (to simplify reporter logic)
-  bus.emit("progress", "analyzing: validations", busLogLevels.INFO);
+  bus.emit("progress", "analyzing: validations", { level: busLogLevels.INFO });
   lModules = addValidations(lModules, pOptions.ruleSet, pOptions.validate);
 
   return lModules;
