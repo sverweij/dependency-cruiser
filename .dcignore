@@ -1,3 +1,4 @@
 doc/**/*
 src/**/*.template.js
 test/**/fixtures
+src/config-utl/extract-depcruise-config/index.js

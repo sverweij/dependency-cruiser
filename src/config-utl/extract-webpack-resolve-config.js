@@ -1,4 +1,4 @@
-const makeAbsolute = require("./utl/make-absolute");
+const makeAbsolute = require("./make-absolute");
 
 function pryConfigFromTheConfig(
   pWebpackConfigModule,
@@ -22,7 +22,24 @@ function pryConfigFromTheConfig(
   return lReturnValue;
 }
 
-module.exports = (pWebpackConfigFilename, pEnvironment, pArguments) => {
+/**
+ * Reads the file with name `pWebpackConfigFilename` and (applying the
+ * environment `pEnvironment` and the arguments `pArguments` (which can
+ * either be a string or a keys-values object)) returns the resolve config
+ * from it as an object.
+ *
+ * @param {string} pWebpackConfigFilename
+ * @param {string=} pEnvironment
+ * @param {string|any=} pArguments
+ * @return {any} webpack resolve config as an object
+ * @throws {Error} when the webpack config isn't usable (e.g. because it
+ *                 doesn't exist, or because it's invalid)
+ */
+module.exports = function extractWebpackResolveConfig(
+  pWebpackConfigFilename,
+  pEnvironment,
+  pArguments
+) {
   let lReturnValue = {};
 
   try {

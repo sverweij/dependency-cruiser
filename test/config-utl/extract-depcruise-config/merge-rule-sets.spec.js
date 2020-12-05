@@ -1,5 +1,5 @@
 const { expect } = require("chai");
-const merge = require("../../../src/cli/compile-config/merge-configs");
+const merge = require("../../../src/config-utl/extract-depcruise-config/merge-configs");
 
 describe("cli/mergeRuleSets - general", () => {
   it("two empty rule sets yield an empty rule set with named attributes", () => {

@@ -1,10 +1,10 @@
 {
   "modules": [
     {
-      "source": "test/cli/fixtures/babelconfig/run-through-babel/src/index.js",
+      "source": "test/cli/fixtures/run-through-babel/src/index.js",
       "dependencies": [
         {
-          "resolved": "test/cli/fixtures/babelconfig/run-through-babel/src/shared/index.js",
+          "resolved": "test/cli/fixtures/run-through-babel/src/shared/index.js",
           "coreModule": false,
           "followable": true,
           "couldNotResolve": false,
@@ -22,16 +22,16 @@
       "valid": true
     },
     {
-      "source": "test/cli/fixtures/babelconfig/run-through-babel/src/shared/index.js",
+      "source": "test/cli/fixtures/run-through-babel/src/shared/index.js",
       "dependencies": [],
       "orphan": false,
       "valid": true
     },
     {
-      "source": "test/cli/fixtures/babelconfig/run-through-babel/src/something/else.js",
+      "source": "test/cli/fixtures/run-through-babel/src/something/else.js",
       "dependencies": [
         {
-          "resolved": "test/cli/fixtures/babelconfig/run-through-babel/src/shared/index.js",
+          "resolved": "test/cli/fixtures/run-through-babel/src/shared/index.js",
           "coreModule": false,
           "followable": true,
           "couldNotResolve": false,
@@ -65,13 +65,13 @@
       "preserveSymlinks": false,
       "tsPreCompilationDeps": false,
       "webpackConfig": {
-        "fileName": "test/cli/fixtures/babelconfig/run-through-babel/webpack-cache-bust.config.js"
+        "fileName": "test/cli/fixtures/run-through-babel/webpack-cache-bust.config.js"
       },
       "babelConfig": {
-        "fileName": "test/cli/fixtures/babelconfig/babelrc.valid.json"
+        "fileName": "test/cli/fixtures/babelrc.valid.json"
       },
       "exoticRequireStrings": [],
-      "args": "test/cli/fixtures/babelconfig/run-through-babel/src"
+      "args": "test/cli/fixtures/run-through-babel/src"
     },
     "ruleSetUsed": {}
   }

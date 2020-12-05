@@ -2,57 +2,64 @@
 
 The typical use for dependency-cruiser is on the command line. However, you
 might want to use it programmatically. For this, dependency-cruiser has an
-API (that follows the same semver rhythm as the cli).
+API
 
-### Basic use
+## Versioning
 
-```javascript
-const depcruise = require("dependency-cruiser").cruise;
+The API follows the same (semantic) versioning rules and rythm as the API does
 
-let dependencies = depcruise(["src"]).output;
+function cruise(pFileAndDirectoryArray, pOptions, pResolveOptions, pTSConfig) {
+
+## Using the API - step by step
+
+### Hello dependencies!
+
+The most basic use for dependency cruiser is to retrieve the dependencies of
+and between modules in folder. Here's an example that cruises all files in
+the `src` folder and prints the dependencies to stdout:
+
+```typescript
+import { cruise, IReporterOutput } from "dependency-cruiser";
+
+const ARRAY_OF_FILES_AND_DIRS_TO_CRUISE: string[] = ["src"];
+try {
+    const cruiseResult: IReporterOutput = cruise(ARRAY_OF_FILES_AND_DIRS_TO_CRUISE);
+} catch(error)
+
+
+console.dir(cruiseResult.output, { depth: 10 });
 ```
 
-With no other parameters than this, it will return an javascript object with
-a shape like this:
+You might notice a few things when you do this
 
-```javascript
-{
-    output: {
-        modules: ... the modules with their dependencies
-        summary: {}
-    },
-    exitCode: 0
+- the function ruthlessly cruises _everything_ in `src` and whatever it uses,
+  recucrsively - even in your `node_modules`. This takes a long time and might
+  not give the information you actually seek. Dependency-cruiser has a bunch of
+  options to steer what it actually cruises;
+  [passing cruise options](#Passing cruise options) will get you sorted.
+- If you're using Babel, Webpack or TypeScript the results you get without
+  passing their respective configs might not be what you expect. You can tell
+  dependency-cruiser to [adapt to your environment](#Adapt to your environment),
+  though.
+
+### Passing cruise options
+
+```typescript
+import { cruise, IReporterOutput, ICruiseOptions } from "dependency-cruiser";
+
+const ARRAY_OF_FILES_AND_DIRS_TO_CRUISE: string[] = ["src"];
+const cruiseOptions: ICruiseOptions = {
+  includeOnly: "src",
+};
+try {
+  const cruiseResult: IReporterOutput = cruise(
+    ARRAY_OF_FILES_AND_DIRS_TO_CRUISE,
+    cruiseOptions
+  );
+  console.dir(cruiseResult.output, { depth: 10 });
+} catch (error) {
+  console.error(error);
 }
-
-```
-
-The object in the `output` attribute is in [dependency-cruiser's json output format](output-format.md).
-
-### Parameters
-
-#### Files and or folders to cruise
-
-The first parameter is an array of strings, each of which is a file, folder
-and/ or glob pattern to start the cruise with.
-
-#### Options
-
-The second parameter of the depcruise function is an object influencing the
-way the dependencies are cruised and how they're returned. For instance to
-cruise the src folder, excluding all dependencies to node_modules from being
-followed, and having a GraphViz dot script returned, you'd do this:
-
-```javascript
-const depcruise = require('dependency-cruiser').cruise;
-
-const dependenciesInAGraphVizDotScript = depcruise(
-    ["src"]
-    {
-        exclude       : "(node_modules)",
-        moduleSystems : ["cjs"],
-        outputType    : "dot"
-    }
-).output;
 ```
 
 Apart from all the ones mentioned in the [options reference](options-reference.md), you can use these options:
@@ -63,11 +70,58 @@ Apart from all the ones mentioned in the [options reference](options-reference.m
 | ruleSet    | An object containing the rules to validate against. The rules should adhere to the [configuration schema](../src/schema/configuration.schema.json) |
 | outputType | One of the output types mentioned in the [--output-format](cli.md#--output-type-specify-the-output-format) command line options                    |
 
-### Return value
+### Adapt to your environment
 
-An object with two attributes:
+```typescript
+import { cruise, IReporterOutput, ICruiseOptions } from "dependency-cruiser";
 
-| attribute | content                                                                                                                                                                                                                                                                 |
-| --------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| output    | the result of the cruise. The outputType you pass in the options determines how it will look. If you don't supply an outputType it will will contain a javascript object that adheres to dependency-cruiser's [result schema](../src/schema/cruise-result.schema.json). |
-| exitCode  | The exit code the command line (typically 0, but some reporters will return a non-zero value in here e.g. when errors were detected in the output)                                                                                                                      |
+const ARRAY_OF_FILES_AND_DIRS_TO_CRUISE: string[] = ["src"];
+const cruiseOptions: ICruiseOptions = {
+  includeOnly: "src",
+};
+const webpackResolveOptions = {
+  exportsFields: ["exports"],
+  conditionNames: ["require"],
+};
+
+try {
+  const cruiseResult: IReporterOutput = cruise(
+    ARRAY_OF_FILES_AND_DIRS_TO_CRUISE,
+    cruiseOptions,
+    webpackResolveOptions
+  );
+  console.dir(cruiseResult.output, { depth: 10 });
+} catch (error) {
+  console.error(error);
+}
+```
+
+### Utility functions
+
+```typescript
+import { cruise, ICruiseOptions, IReporterOutput } from ".";
+import extractDepcruiseConfig from "./src/config-utl/extract-depcruise-config";
+import extractTSConfig from "./src/config-utl/extract-ts-config";
+import extractWebpackResolveConfig from "./src/config-utl/extract-webpack-resolve-config";
+
+try {
+  const ARRAY_OF_FILES_AND_DIRS_TO_CRUISE = ["src"];
+
+  const depcruiseConfig: ICruiseOptions = extractDepcruiseConfig(
+    "./.dependency-cruiser.js"
+  );
+  const webpackResolveConfig = extractWebpackResolveConfig("./webpack.conf.js");
+  const tsConfig = extractTSConfig("./tsconfig.json");
+
+  const cruiseResult: IReporterOutput = cruise(
+    ARRAY_OF_FILES_AND_DIRS_TO_CRUISE,
+    depcruiseConfig,
+    webpackResolveConfig,
+    tsConfig
+  );
+
+  console.dir(cruiseResult.output, { depth: 10 });
+} catch (error) {
+  console.error(error);
+}
+```

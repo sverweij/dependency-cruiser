@@ -26,7 +26,18 @@ const FORMAT_DIAGNOSTICS_HOST = {
   },
 };
 
-module.exports = function parseConfig(pTSConfigFileName) {
+/**
+ * Reads the file with name `pTSConfigFileName` and returns its parsed
+ * contents as an object
+ *
+ * Silently fails if a supported version of the typescript compiler isn't available
+ *
+ * @param {string} pTSConfigFileName
+ * @return {any} tsconfig as an object
+ * @throws {Error} when the tsconfig is invalid/ jas errors
+ * @throws {TypeError} when the tsconfig is unreadable
+ */
+module.exports = function extractTSConfig(pTSConfigFileName) {
   let lReturnValue = {};
 
   /* istanbul ignore else */

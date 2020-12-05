@@ -4,7 +4,7 @@ const _set = require("lodash/set");
 const _get = require("lodash/get");
 const _has = require("lodash/has");
 const _clone = require("lodash/clone");
-const compileConfig = require("./compile-config");
+const loadConfig = require("../config-utl/extract-depcruise-config");
 const defaults = require("./defaults.json");
 
 const KNOWN_DEPCRUISE_OPTIONS = [
@@ -144,7 +144,7 @@ function normalizeValidationOptions(pOptions) {
     const rulesFile = validateAndNormalizeRulesFileName(pOptions.validate);
     return {
       rulesFile,
-      ruleSet: compileConfig(
+      ruleSet: loadConfig(
         path.isAbsolute(rulesFile) ? rulesFile : `./${rulesFile}`
       ),
       validate: true,
@@ -175,10 +175,10 @@ function normalizeProgress(pOptions) {
  * @param  {object} pOptionsAsPassedFromCommander [description]
  * @return {object}          [description]
  */
-module.exports = (
+module.exports = function normalizeOptions(
   pOptionsAsPassedFromCommander,
   pKnownOptions = KNOWN_DEPCRUISE_OPTIONS
-) => {
+) {
   let lOptions = {
     outputTo: defaults.OUTPUT_TO,
     outputType: defaults.OUTPUT_TYPE,

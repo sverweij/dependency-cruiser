@@ -1,0 +1,43 @@
+/* eslint-disable node/no-missing-require */
+/* eslint-disable node/global-require */
+const { expect } = require("chai");
+const semver = require("semver");
+
+/*
+ * 'exports' in package.json only work from node 12 (or probably 11, but we
+ * don't support node 11)
+ */
+if (semver.satisfies(process.versions.node, ">=12")) {
+  describe("api (node 12 and up)", () => {
+    it("exposes dependency-cruiser main with some functions", () => {
+      const dependencyCruiser = require("dependency-cruiser");
+      expect(typeof dependencyCruiser).to.equal("object");
+      expect(typeof dependencyCruiser.cruise).to.equal("function");
+      expect(typeof dependencyCruiser.format).to.equal("function");
+      expect(Array.isArray(dependencyCruiser.allExtensions)).to.equal(true);
+      expect(typeof dependencyCruiser.getAvailableTranspilers).to.equal(
+        "function"
+      );
+    });
+
+    it("exposes an extract-babel-config function", () => {
+      const extractBabelConfig = require("dependency-cruiser/config-utl/extract-babel-config");
+      expect(typeof extractBabelConfig).to.equal("function");
+    });
+
+    it("exposes an extract-depcruise-config function", () => {
+      const extractDepcruiseConfig = require("dependency-cruiser/config-utl/extract-depcruise-config");
+      expect(typeof extractDepcruiseConfig).to.equal("function");
+    });
+
+    it("exposes an extract-ts-config function", () => {
+      const extractTsConfig = require("dependency-cruiser/config-utl/extract-ts-config");
+      expect(typeof extractTsConfig).to.equal("function");
+    });
+
+    it("exposes an extract-webpack-resolve-config function", () => {
+      const extractWebpackResolveConfig = require("dependency-cruiser/config-utl/extract-webpack-resolve-config");
+      expect(typeof extractWebpackResolveConfig).to.equal("function");
+    });
+  });
+}

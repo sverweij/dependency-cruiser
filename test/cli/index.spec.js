@@ -451,16 +451,13 @@ describe("cli/index", () => {
     const lOutputFileName = "run-through-babel.json";
     const lOutputTo = path.join(OUT_DIR, lOutputFileName);
 
-    const lExitCode = cli(
-      ["test/cli/fixtures/babelconfig/run-through-babel/src"],
-      {
-        outputTo: lOutputTo,
-        outputType: "json",
-        babelConfig: "test/cli/fixtures/babelconfig/babelrc.valid.json",
-        webpackConfig:
-          "test/cli/fixtures/babelconfig/run-through-babel/webpack-cache-bust.config.js",
-      }
-    );
+    const lExitCode = cli(["test/cli/fixtures/run-through-babel/src"], {
+      outputTo: lOutputTo,
+      outputType: "json",
+      babelConfig: "test/cli/fixtures/babelrc.valid.json",
+      webpackConfig:
+        "test/cli/fixtures/run-through-babel/webpack-cache-bust.config.js",
+    });
 
     expect(lExitCode).to.equal(0);
     asserthelpers.assertJSONFileEqual(

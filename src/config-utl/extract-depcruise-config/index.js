@@ -10,7 +10,11 @@ function processExtends(pReturnValue, pAlreadyVisited, pBaseDirectory) {
   if (typeof pReturnValue.extends === "string") {
     pReturnValue = mergeConfigs(
       pReturnValue,
-      compileConfig(pReturnValue.extends, pAlreadyVisited, pBaseDirectory)
+      extractDepcruiseConfig(
+        pReturnValue.extends,
+        pAlreadyVisited,
+        pBaseDirectory
+      )
     );
   }
 
@@ -19,7 +23,7 @@ function processExtends(pReturnValue, pAlreadyVisited, pBaseDirectory) {
       (pAll, pExtends) =>
         mergeConfigs(
           pAll,
-          compileConfig(pExtends, pAlreadyVisited, pBaseDirectory)
+          extractDepcruiseConfig(pExtends, pAlreadyVisited, pBaseDirectory)
         ),
       pReturnValue
     );
@@ -38,7 +42,24 @@ function getRunningProcessResolutionStrategy() {
   return "yarn-pnp";
 }
 
-function compileConfig(
+/**
+ * Reads the file with name `pConfigFileName` returns the parsed cruise
+ * options.
+ *
+ * You can safely ignore the optional parameters. Simply this should work (given
+ * `.dependency-cruiser.js` exists and contains a valid dependency-cruiser config)
+ *
+ * ```javascript
+ * const depcruiseConfig = extractDepcruiseConfig("./.dependency-cruiser.js")
+ * ```
+ *
+ * @param {string} pConfigFileName
+ * @param {Set?} pAlreadyVisited
+ * @param {string?} pBaseDirectory
+ * @return {import('../../../types/options').ICruiseOptions} dependency-cruiser options
+ * @throws {Error} when the config is not valid (/ does not exist/ isn't readable)
+ */
+function extractDepcruiseConfig(
   pConfigFileName,
   pAlreadyVisited = new Set(),
   pBaseDirectory = process.cwd()
@@ -80,4 +101,4 @@ function compileConfig(
   return lReturnValue;
 }
 
-module.exports = compileConfig;
+module.exports = extractDepcruiseConfig;
