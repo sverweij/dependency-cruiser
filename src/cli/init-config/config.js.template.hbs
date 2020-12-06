@@ -374,7 +374,33 @@ module.exports = {
        a hack.
     */
     // exoticRequireStrings: [],
-    // exoticRequireStrings: [],
+    /* options to pass on to enhanced-resolve, the package dependency-cruiser
+       uses to resolve module references to disk. You can set most of these
+       options in a webpack.conf.js - this section is here for those
+       projects that don't have a separate webpack config file.
+
+       Note: settings in webpack.conf.js override the ones specified here.
+     */
+    enhancedResolveOptions:{
+      /* List of strings to consider as 'exports' fields in package.json. Use
+         ['exports'] when you use packages that use such a field and your environment
+         supports it (e.g. node ^12.19 || >=14.7 or recent versions of webpack).
+
+        If you have an `exportsFields` attribute in your webpack config, that one
+         will have precedence over the one specified here.
+      */ 
+      exportsFields: ["exports"],
+      /* List of conditions to check for in the exports field. e.g. use ['imports']
+         if you're only interested in exposed es6 modules, ['require'] for commonjs,
+         or all conditions at once `(['import', 'require', 'node', 'default']`)
+         if anything goes for you. Only works when the 'exportsFields' array is
+         non-empty.
+
+        If you have an 'conditionNames' attribute in your webpack config, that one will
+        have precedence over the one specified here.
+      */
+      conditionNames: ["import", "require", "node", "default"]
+    },
     reporterOptions: {
       dot: {
         /* pattern of modules that can be consolidated in the detailed

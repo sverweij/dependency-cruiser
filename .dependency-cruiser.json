@@ -1,4 +1,5 @@
 {
+  "$schema": "./src/schema/configuration.schema.json",
   "extends": "./configs/recommended-strict",
   "forbidden": [
     {
@@ -223,11 +224,10 @@
     // "babelConfig": {
     //   "fileName": "./babel.config.json"
     // },
-    // "enhancedResolveOptions": {
-    //   "cachedInputFileSystem": {
-    //     "cacheDuration": 1800000
-    //   }
-    // },
+    "enhancedResolveOptions": {
+      "exportsFields": ["exports"],
+      "conditionNames": ["require"]
+    },
     "exoticRequireStrings": ["tryRequire"],
     "reporterOptions": {
       "archi": {

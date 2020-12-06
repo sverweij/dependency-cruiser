@@ -145,6 +145,37 @@ export interface ICruiseOptions {
    * use cannot go in a webpack config.
    */
   enhancedResolveOptions?: {
+    /**
+     * "List of strings to consider as 'exports' fields in package.json. Use
+     * `['exports']` when you use packages that use such a field and your environment
+     * supports it (e.g. node ^12.19 || >=14.7 or recent versions of webpack).
+     */
+    exportsFields?: string[];
+    /**
+     * List of conditions to check for in the exports field. e.g. use `['imports']`
+     * if you're only interested in exposed es6 modules, `['require']` for commonjs,
+     * or all conditions at once (`['import', 'require', 'node', 'default']`)
+     * if anything goes for you. Only works when the 'exportsFields' array is non-empty
+     */
+    conditionNames?: string[];
+    /**
+     * List of extensions to scan for when resolving. Typically you want to leave
+     * this alone as dependency-cruiser figures out what extensions to scan based
+     * on
+     * 1. what is available in your environment,
+     * 2. in the order your environment (nodejs, typescript) applies the resolution itself.
+     *
+     * However if you want it to scan less you can specify so with the extensions
+     * attribute. E.g. when you're 100% sure you _only_ have typescript & json
+     * and nothing else you can pass `['.ts', '.json']` - which can lead to performance
+     * gains on systems with slow i/o (like ms-windows), especially when your
+     * tsconfig contains paths/ aliasses.
+     */
+    extension?: string[];
+    /**
+     * Options to pass to the resolver (webpack's 'enhanced resolve') regarding
+     * caching.
+     */
     cachedInputFileSystem?: {
       /**
        * The number of milliseconds [enhanced-resolve](webpack/enhanced-resolve)'s
