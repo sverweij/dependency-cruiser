@@ -98,6 +98,10 @@ try {
 
 ### Utility functions
 
+> Exposition of `extract-xxx` functions is _experimental_. It also will only
+> work on node ^12.19 || >=14.7 as those are versions that support the `exports`
+> entry points feature in package.json.
+
 ```typescript
 import { cruise, ICruiseOptions, IReporterOutput } from ".";
 import extractDepcruiseConfig from "./src/config-utl/extract-depcruise-config";

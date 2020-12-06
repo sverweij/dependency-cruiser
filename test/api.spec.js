@@ -4,11 +4,10 @@ const { expect } = require("chai");
 const semver = require("semver");
 
 /*
- * 'exports' in package.json only work from node 12 (or probably 11, but we
- * don't support node 11)
+ * 'exports' in package.json only work in some of the latest node versions.
  */
-if (semver.satisfies(process.versions.node, ">=12")) {
-  describe("api (node 12 and up)", () => {
+if (semver.satisfies(process.versions.node, "^12.19 || >=14.7")) {
+  describe("api (on node ^12.19 || >= 14.7)", () => {
     it("exposes dependency-cruiser main with some functions", () => {
       const dependencyCruiser = require("dependency-cruiser");
       expect(typeof dependencyCruiser).to.equal("object");
