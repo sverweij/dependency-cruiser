@@ -215,11 +215,11 @@
       your webpack config is a function and takes them (see webpack documentation
       for details)
     */
-    "webpackConfig": {
-      "fileName": "./webpack.conf.js"
-      //    "env": {},
-      //    "args": {}
-    },
+    // "webpackConfig": {
+    // "fileName": "./webpack.conf.js"
+    //    "env": {},
+    //    "args": {}
+    // },
     // "babelConfig": {
     //   "fileName": "./babel.config.json"
     // },
