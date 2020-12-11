@@ -24,7 +24,13 @@ function gatherScannableFilesFromDirectory(pDirectoryName, pOptions) {
   return fs
     .readdirSync(pDirectoryName)
     .reduce((pSum, pFileName) => {
-      if (fs.statSync(path.join(pDirectoryName, pFileName)).isDirectory()) {
+      let lStat = {};
+      try {
+        lStat = fs.statSync(path.join(pDirectoryName, pFileName));
+      } catch (pError) {
+        return pSum;
+      }
+      if (lStat.isDirectory()) {
         return pSum.concat(
           gatherScannableFilesFromDirectory(
             path.join(pDirectoryName, pFileName),
