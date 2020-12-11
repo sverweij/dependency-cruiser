@@ -1,3 +1,4 @@
+const fs = require("fs");
 const chai = require("chai");
 const extract = require("../../src/extract");
 const { normalizeCruiseOptions } = require("../../src/main/options/normalize");
@@ -52,6 +53,32 @@ describe("extract/index - exclude", () => {
     expect(lResult).to.deep.equal(
       require("./fixtures/exclude/dynamic/es/output.json")
     );
+  });
+
+  it("exclude - invalid", () => {
+    const lOptions = normalizeCruiseOptions({
+      exclude: {
+        path: "index.js",
+      },
+    });
+    const lResolveOptions = normalizeResolveOptions(
+      {
+        bustTheCache: true,
+      },
+      lOptions
+    );
+    expect(
+      fs
+        .lstatSync("./test/extract/fixtures/exclude/invalid/index.js")
+        .isSymbolicLink()
+    ).to.equal(true);
+    const lResult = extract(
+      ["./test/extract/fixtures/exclude/invalid"],
+      lOptions,
+      lResolveOptions
+    );
+
+    expect(lResult).to.deep.equal([]);
   });
 });
 

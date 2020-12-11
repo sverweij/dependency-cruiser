@@ -11,8 +11,13 @@ const SUPPORTED_EXTENSIONS = transpileMeta.scannableExtensions;
 
 function keepNonExcluded(pFullPathToFile, pOptions) {
   return (
-    (!_get(pOptions, "exclude.path") ||
-      !filenameMatchesPattern(pFullPathToFile, pOptions.exclude.path)) &&
+    !_get(pOptions, "exclude.path") ||
+    !filenameMatchesPattern(pFullPathToFile, pOptions.exclude.path)
+  );
+}
+
+function keepAccepted(pFullPathToFile, pOptions) {
+  return (
     (!_get(pOptions, "includeOnly.path") ||
       filenameMatchesPattern(pFullPathToFile, pOptions.includeOnly.path)) &&
     (!_get(pOptions, "doNotFollow.path") ||
@@ -23,26 +28,24 @@ function keepNonExcluded(pFullPathToFile, pOptions) {
 function gatherScannableFilesFromDirectory(pDirectoryName, pOptions) {
   return fs
     .readdirSync(pDirectoryName)
-    .reduce((pSum, pFileName) => {
-      if (fs.statSync(path.join(pDirectoryName, pFileName)).isDirectory()) {
+    .map((pFileName) => pathToPosix(path.join(pDirectoryName, pFileName)))
+    .filter((pFullPathToFile) => keepNonExcluded(pFullPathToFile, pOptions))
+    .reduce((pSum, pFullPathToFile) => {
+      if (fs.statSync(pFullPathToFile).isDirectory()) {
         return pSum.concat(
-          gatherScannableFilesFromDirectory(
-            path.join(pDirectoryName, pFileName),
-            pOptions
-          )
+          gatherScannableFilesFromDirectory(pFullPathToFile, pOptions)
         );
       }
       if (
         SUPPORTED_EXTENSIONS.some((pExtension) =>
-          pFileName.endsWith(pExtension)
+          pFullPathToFile.endsWith(pExtension)
         )
       ) {
-        return pSum.concat(path.join(pDirectoryName, pFileName));
+        return pSum.concat(pFullPathToFile);
       }
       return pSum;
     }, [])
-    .map((pFullPathToFile) => pathToPosix(pFullPathToFile))
-    .filter((pFullPathToFile) => keepNonExcluded(pFullPathToFile, pOptions));
+    .filter((pFullPathToFile) => keepAccepted(pFullPathToFile, pOptions));
 }
 
 /**
