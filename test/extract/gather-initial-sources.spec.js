@@ -1,3 +1,4 @@
+const fs = require("fs");
 const { expect } = require("chai");
 const gather = require("../../src/extract/gather-initial-sources");
 const p2p = require("../../src/extract/utl/path-to-posix");
@@ -210,5 +211,14 @@ describe("extract/gatherInitialSources", () => {
       "test/extract/fixtures/gather-globbing/packages/loki/src/index.spec.ts",
       "test/extract/fixtures/gather-globbing/packages/loki/src/index.ts",
     ]);
+  });
+
+  it("filters invalid symlinks", () => {
+    expect(
+      fs
+        .lstatSync("./test/extract/fixtures/invalid-symlink/index.js")
+        .isSymbolicLink()
+    ).to.equal(true);
+    expect(gather(["test/extract/fixtures/invalid-symlink"])).to.deep.equal([]);
   });
 });
