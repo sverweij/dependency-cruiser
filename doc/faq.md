@@ -269,6 +269,9 @@ For `.svelte` single file components it uses the `svelte` (version 3.x)
   If it turns out to be too noisy, you can configure Dependency-cruiser
   to ignore it (either in the config file or with a command-line param)
 
+As of dependency-cruiser 9.21.0 any configuration generated with `depcruise --init`
+includes this.
+
 ### Q: Does this mean dependency-cruiser installs transpilers for all these languages?
 
 **A**: No.
@@ -375,6 +378,20 @@ your configuration with the wrapper(s) and/ or re-definitions of require:
 
 ```json
 "exoticRequireStrings": ["window.require", "need", "tryRequire"]
+```
+
+### Q: Can I get code completion for .dependency-cruiser.js?
+
+**A**: Yes.
+
+You can get code completion & suggestions in editors that support these things
+by typing the module.exports with a comment like so:
+
+```javascript
+/** @type {import('dependency-cruiser').IConfiguration} */
+module.exports = {
+  // ... your rules & options
+};
 ```
 
 ## Expanding dependency-cruiser

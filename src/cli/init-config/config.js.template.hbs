@@ -1,3 +1,4 @@
+/** @type {import('dependency-cruiser').IConfiguration} */
 module.exports = {
 {{#if preset}}
   'extends': '{{preset}}',
@@ -372,6 +373,7 @@ module.exports = {
        redeclared require, use a require-wrapper or use window.require as
        a hack.
     */
+    // exoticRequireStrings: [],
     // exoticRequireStrings: [],
     reporterOptions: {
       dot: {

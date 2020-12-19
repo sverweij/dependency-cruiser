@@ -1,7 +1,7 @@
 import { ICruiseOptions } from "./options";
 import { IFlattenedRuleSet } from "./rule-set";
 
-export interface IRuleSetType extends IFlattenedRuleSet {
+export interface IConfiguration extends IFlattenedRuleSet {
   /**
    * A (node require resolvable) file path to a dependency-cruiser config
    * that serves as the base for this one...
@@ -13,3 +13,9 @@ export interface IRuleSetType extends IFlattenedRuleSet {
    */
   options?: ICruiseOptions;
 }
+
+// for backwards compatibility:
+/**
+ * @deprecated use IConfiguration instead
+ */
+export type IRuleSetType = IConfiguration;
