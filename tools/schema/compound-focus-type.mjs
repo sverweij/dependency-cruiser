@@ -15,7 +15,7 @@ export default {
           $ref: "#/definitions/REAsStringsType",
         },
       },
-      ...REAsStringsType.definitions,
     },
+    ...REAsStringsType.definitions,
   },
 };

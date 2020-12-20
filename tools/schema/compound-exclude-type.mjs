@@ -18,7 +18,7 @@ export default {
             "a boolean indicating whether or not to exclude dynamic dependencies",
         },
       },
-      ...REAsStringsType.definitions,
     },
+    ...REAsStringsType.definitions,
   },
 };

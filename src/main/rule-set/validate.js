@@ -1,4 +1,4 @@
-const Ajv = require("ajv");
+const Ajv = require("ajv").default;
 const safeRegex = require("safe-regex");
 const _has = require("lodash/has");
 const { validateCruiseOptions } = require("../options/validate");

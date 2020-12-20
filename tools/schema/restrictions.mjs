@@ -129,6 +129,7 @@ export default {
         "Criteria the 'to' end of a dependency should match to be caught by this " +
         "rule. Leave it empty if you want any module to be matched.",
       required: ["reachable"],
+      type: "object",
       additionalProperties: false,
       properties: {
         ...BASE_RESTRICTION,
@@ -144,6 +145,7 @@ export default {
       description:
         "Criteria to select the module(s) this restriction should apply to",
       required: [],
+      type: "object",
       additionalProperties: false,
       properties: {
         ...BASE_RESTRICTION,
@@ -152,6 +154,7 @@ export default {
     RequiredToRestrictionType: {
       description: "Criteria for modules the associated module must depend on.",
       required: [],
+      type: "object",
       additionalProperties: false,
       properties: {
         path: {

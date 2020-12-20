@@ -53,8 +53,8 @@ describe("main/rule-set/validate - regular", () => {
   it("bails out on non-strings in the 'extends' attribute (number)", () => {
     shouldBarfWithMessage(
       "./test/validate/fixtures/extends/extending.as.number.json",
-      "The supplied configuration is not valid: data.extends should be string, data.extends should be " +
-        "array, data.extends should match exactly one schema in oneOf."
+      "The supplied configuration is not valid: data/extends should be string, data/extends should be " +
+        "array, data/extends should match exactly one schema in oneOf."
     );
   });
 });

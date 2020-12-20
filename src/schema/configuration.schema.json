@@ -23,7 +23,7 @@
     },
     "required": {
       "type": "array",
-      "despcription": "A list of rules that describe what dependencies modules _must_ have. E.g. - every controller needs to (directly) depend on a base controller. - each source file should be the dependency of a spec file with the same    base name",
+      "description": "A list of rules that describe what dependencies modules _must_ have. E.g. - every controller needs to (directly) depend on a base controller. - each source file should be the dependency of a spec file with the same    base name",
       "items": { "$ref": "#/definitions/RequiredRuleType" }
     },
     "options": { "$ref": "#/definitions/OptionsType" },
@@ -50,7 +50,7 @@
         },
         "required": {
           "type": "array",
-          "despcription": "A list of rules that describe what dependencies modules _must_ have. E.g. - every controller needs to (directly) depend on a base controller. - each source file should be the dependency of a spec file with the same    base name",
+          "description": "A list of rules that describe what dependencies modules _must_ have. E.g. - every controller needs to (directly) depend on a base controller. - each source file should be the dependency of a spec file with the same    base name",
           "items": { "$ref": "#/definitions/RequiredRuleType" }
         }
       }
@@ -226,6 +226,7 @@
     "ReachabilityToRestrictionType": {
       "description": "Criteria the 'to' end of a dependency should match to be caught by this rule. Leave it empty if you want any module to be matched.",
       "required": ["reachable"],
+      "type": "object",
       "additionalProperties": false,
       "properties": {
         "path": {
@@ -245,6 +246,7 @@
     "RequiredModuleRestrictionType": {
       "description": "Criteria to select the module(s) this restriction should apply to",
       "required": [],
+      "type": "object",
       "additionalProperties": false,
       "properties": {
         "path": {
@@ -260,6 +262,7 @@
     "RequiredToRestrictionType": {
       "description": "Criteria for modules the associated module must depend on.",
       "required": [],
+      "type": "object",
       "additionalProperties": false,
       "properties": {
         "path": {
@@ -483,12 +486,6 @@
           "type": "boolean",
           "description": "a boolean indicating whether or not to exclude dynamic dependencies"
         }
-      },
-      "REAsStringsType": {
-        "oneOf": [
-          { "type": "string" },
-          { "type": "array", "items": { "type": "string" } }
-        ]
       }
     },
     "CompoundDoNotFollowType": {
@@ -516,12 +513,6 @@
           "description": "dependency-cruiser will include modules matching this regular expression in its output, as well as their neighbours (direct dependencies and dependents)",
           "$ref": "#/definitions/REAsStringsType"
         }
-      },
-      "REAsStringsType": {
-        "oneOf": [
-          { "type": "string" },
-          { "type": "array", "items": { "type": "string" } }
-        ]
       }
     },
     "CompoundFocusType": {
@@ -533,12 +524,6 @@
           "description": "dependency-cruiser will include modules matching this regular expression in its output, as well as their neighbours (direct dependencies and dependents)",
           "$ref": "#/definitions/REAsStringsType"
         }
-      },
-      "REAsStringsType": {
-        "oneOf": [
-          { "type": "string" },
-          { "type": "array", "items": { "type": "string" } }
-        ]
       }
     },
     "ReporterOptionsType": {

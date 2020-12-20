@@ -33,7 +33,7 @@ const RULE_SET_TYPE_PROPERTIES = {
     },
     required: {
       type: "array",
-      despcription:
+      description:
         "A list of rules that describe what dependencies modules _must_ have. " +
         "E.g." +
         " - every controller needs to (directly) depend on a base controller." +
