@@ -1,6 +1,7 @@
 const fs = require("fs");
 const _get = require("lodash/get");
 const _has = require("lodash/has");
+const _omit = require("lodash/omit");
 const enhancedResolve = require("enhanced-resolve");
 const PnpWebpackPlugin = require("pnp-webpack-plugin");
 const TsConfigPathsPlugin = require("tsconfig-paths-webpack-plugin");
@@ -55,7 +56,11 @@ function pushPlugin(pPlugins, pPluginToPush) {
   return (pPlugins || []).concat(pPluginToPush);
 }
 
-function compileResolveOptions(pResolveOptions, pTSConfig, pCacheDuration) {
+function compileResolveOptions(
+  pResolveOptions,
+  pTSConfig,
+  pResolveOptionsFromDCConfig
+) {
   let lResolveOptions = {};
 
   // TsConfigPathsPlugin requires a baseUrl to be present in the
@@ -89,8 +94,15 @@ function compileResolveOptions(pResolveOptions, pTSConfig, pCacheDuration) {
   return {
     ...DEFAULT_RESOLVE_OPTIONS,
     ...lResolveOptions,
+    ..._omit(pResolveOptionsFromDCConfig, "cachedInputFileSystem"),
     ...pResolveOptions,
-    ...getNonOverridableResolveOptions(pCacheDuration),
+    ...getNonOverridableResolveOptions(
+      _get(
+        pResolveOptionsFromDCConfig,
+        "cachedInputFileSystem.cacheDuration",
+        DEFAULT_CACHE_DURATION
+      )
+    ),
   };
 }
 
@@ -117,9 +129,5 @@ module.exports = (pResolveOptions, pOptions, pTSConfig) =>
       ...(pResolveOptions || {}),
     },
     pTSConfig || {},
-    _get(
-      pOptions,
-      "enhancedResolveOptions.cachedInputFileSystem.cacheDuration",
-      DEFAULT_CACHE_DURATION
-    )
+    _get(pOptions, "enhancedResolveOptions", {})
   );

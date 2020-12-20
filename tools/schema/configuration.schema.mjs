@@ -11,6 +11,9 @@ export default {
   type: "object",
   additionalProperties: false,
   properties: {
+    $schema: {
+      type: "string",
+    },
     ...ruleSet.properties,
     options: { $ref: "#/definitions/OptionsType" },
     extends: { $ref: "#/definitions/ExtendsType" },

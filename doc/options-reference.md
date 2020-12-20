@@ -1086,17 +1086,55 @@ E.g.:
 
 ### enhancedResolveOptions
 
-> Likely you will not need to use these.
-
 Under the hood dependency-cruiser uses webpack's
 [enhanced-resolve](https://github.com/webpack/enhanced-resolve).
 to resolve dependencies to disk. You can influence how dependency-cruiser uses
 it directly by passing resolver options in a
 [webpack config](#webpackconfig-use-the-resolution-options-of-a-webpack-configuration)
-for most things. The only exception is the way enhanced-resolve accesses
-the file system - the amount of which we want to have a slightly tighter control
-over as with the wrong settings a lot can go wrong. There's one thing you
-might still want the ability to change though, in a limited number of
+for most things. If you do need to influence how dependency-cruiser does
+its resolution, but don't (want to) have a webpack config, you can use the
+`enhancedResolveOptions` section to set them.
+
+#### `exportsFields`
+
+List of strings to consider as 'exports' fields in package.json. Use ['exports']
+when you use packages that use such a field and your environment supports it
+(e.g. node ^12.19 || >=14.7 or recent versions of webpack).
+
+If you have an `exportsFields` attribute in your webpack config, that one will
+have precedence over the one specified here.
+
+#### `conditionNames`
+
+List of conditions to check for in the exports field. e.g. use `['imports']` if
+you're only interested in exposed es6 modules, `['require']` for commonjs, or all
+conditions at once `(['import', 'require', 'node', 'default']`) if anything goes
+for you. Only works when the 'exportsFields' array is non-empty.
+
+If you have an `conditionNames` attribute in your webpack config, that one will
+have precedence over the one specified here.
+
+#### `extensions`
+
+List of extensions to scan for when resolving. Typically you want to leave this
+alone as dependency-cruiser figures out what extensions to scan based on
+
+1. what is available in your environment
+2. in the order your environment (nodejs, typescript) applies the resolution itself.
+
+However, if you want it to scan less you can specify so with the extensions
+attribute. E.g. when you're 100% sure you _only_ have typescript & json and
+nothing else you can pass `['.ts', '.json']` - which can lead to performance gains
+on systems with slow i/o (like ms-windows), especially when your tsconfig
+contains paths/ aliasses.
+
+#### cachedInputFileSystem - `cacheDuration`
+
+> Likely you will not need to use this
+
+We want to have a slightly tighter control over the way enhanced-resolve
+accesses the file system as with the wrong settings a lot can go wrong. There's
+one thing you might still want the ability to change though, in a limited number of
 circumstances and that is the time enhanced resolve's files systems retains
 resolutions in memory.
 
@@ -1129,3 +1167,5 @@ E.g. to set the cache duration to 1337ms, you can use this:
 ```
 
 The cache duration is limited from 0ms (~ don't use a cache) to 1800000ms (0.5h).
+
+The cacheDuration used here overrides any that might be set in webpack configs.
