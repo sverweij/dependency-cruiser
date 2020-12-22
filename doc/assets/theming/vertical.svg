@@ -19,11 +19,6 @@
 <path fill="#ffffff" stroke="black" stroke-width="2" d="M28,-16C28,-16 463,-16 463,-16 469,-16 475,-22 475,-28 475,-28 475,-228 475,-228 475,-234 469,-240 463,-240 463,-240 28,-240 28,-240 22,-240 16,-234 16,-228 16,-228 16,-28 16,-28 16,-22 22,-16 28,-16"/>
 <text text-anchor="middle" x="245.5" y="-228.8" font-family="Helvetica,sans-Serif" font-weight="bold" font-size="9.00">main</text>
 </g>
-<g id="clust7" class="cluster">
-<title>cluster_src/main/utl</title>
-<path fill="#ffffff" stroke="black" stroke-width="2" d="M312,-24C312,-24 426,-24 426,-24 432,-24 438,-30 438,-36 438,-36 438,-64 438,-64 438,-70 432,-76 426,-76 426,-76 312,-76 312,-76 306,-76 300,-70 300,-64 300,-64 300,-36 300,-36 300,-30 306,-24 312,-24"/>
-<text text-anchor="middle" x="369" y="-64.8" font-family="Helvetica,sans-Serif" font-weight="bold" font-size="9.00">utl</text>
-</g>
 <g id="clust3" class="cluster">
 <title>cluster_src/main/files&#45;and&#45;dirs</title>
 <path fill="#ffffff" stroke="black" stroke-width="2" d="M36,-136C36,-136 94,-136 94,-136 100,-136 106,-142 106,-148 106,-148 106,-176 106,-176 106,-182 100,-188 94,-188 94,-188 36,-188 36,-188 30,-188 24,-182 24,-176 24,-176 24,-148 24,-148 24,-142 30,-136 36,-136"/>
@@ -43,6 +38,11 @@
 <title>cluster_src/main/rule&#45;set</title>
 <path fill="#ffffff" stroke="black" stroke-width="2" d="M327,-136C327,-136 455,-136 455,-136 461,-136 467,-142 467,-148 467,-148 467,-176 467,-176 467,-182 461,-188 455,-188 455,-188 327,-188 327,-188 321,-188 315,-182 315,-176 315,-176 315,-148 315,-148 315,-142 321,-136 327,-136"/>
 <text text-anchor="middle" x="391" y="-176.8" font-family="Helvetica,sans-Serif" font-weight="bold" font-size="9.00">rule&#45;set</text>
+</g>
+<g id="clust7" class="cluster">
+<title>cluster_src/main/utl</title>
+<path fill="#ffffff" stroke="black" stroke-width="2" d="M312,-24C312,-24 426,-24 426,-24 432,-24 438,-30 438,-36 438,-36 438,-64 438,-64 438,-70 432,-76 426,-76 426,-76 312,-76 312,-76 306,-76 300,-70 300,-64 300,-64 300,-36 300,-36 300,-30 306,-24 312,-24"/>
+<text text-anchor="middle" x="369" y="-64.8" font-family="Helvetica,sans-Serif" font-weight="bold" font-size="9.00">utl</text>
 </g>
 <!-- src/main/files&#45;and&#45;dirs/normalize.js -->
 <g id="node1" class="node">
