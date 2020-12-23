@@ -381,7 +381,7 @@ module.exports = {
 
        Note: settings in webpack.conf.js override the ones specified here.
      */
-    enhancedResolveOptions:{
+    enhancedResolveOptions: {
       /* List of strings to consider as 'exports' fields in package.json. Use
          ['exports'] when you use packages that use such a field and your environment
          supports it (e.g. node ^12.19 || >=14.7 or recent versions of webpack).
@@ -396,7 +396,7 @@ module.exports = {
          if anything goes for you. Only works when the 'exportsFields' array is
          non-empty.
 
-        If you have an 'conditionNames' attribute in your webpack config, that one will
+        If you have a 'conditionNames' attribute in your webpack config, that one will
         have precedence over the one specified here.
       */
       conditionNames: ["import", "require", "node", "default"]
