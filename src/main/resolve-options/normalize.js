@@ -106,8 +106,12 @@ function compileResolveOptions(
   };
 }
 
-module.exports = (pResolveOptions, pOptions, pTSConfig) =>
-  compileResolveOptions(
+module.exports = function normalizeResolveOptions(
+  pResolveOptions,
+  pOptions,
+  pTSConfig
+) {
+  return compileResolveOptions(
     {
       /*
         for later: check semantics of enhanced-resolve symlinks and
@@ -131,3 +135,4 @@ module.exports = (pResolveOptions, pOptions, pTSConfig) =>
     pTSConfig || {},
     _get(pOptions, "enhancedResolveOptions", {})
   );
+};

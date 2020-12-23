@@ -18,7 +18,7 @@ module.exports = {
   ],
   options: {
     doNotFollow: {
-      // path: "node_modules",
+      path: "node_modules",
       dependencyTypes: [
         "npm",
         "npm-dev",

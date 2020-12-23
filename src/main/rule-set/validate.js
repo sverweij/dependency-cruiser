@@ -58,12 +58,12 @@ function checkRuleSafety(pRule) {
  * - the ruleset adheres to the [config json schema](../../schema/configuration.schema.json)
  * - any regular expression in the rule set is 'safe' (~= won't be too slow)
  *
- * @param  {object} pConfiguration The configuration to validate
- * @return {object}                The configuration as passed
+ * @param  {any} pConfiguration The configuration to validate
+ * @return {import("../../../types/configuration").IConfiguration}  The configuration as passed
  * @throws {Error}                 An error with the reason for the error as
  *                                 a message
  */
-module.exports = (pConfiguration) => {
+module.exports = function validateConfiguration(pConfiguration) {
   validateAgainstSchema(configurationSchema, pConfiguration);
   (pConfiguration.allowed || []).forEach(checkRuleSafety);
   (pConfiguration.forbidden || []).forEach(checkRuleSafety);
@@ -75,3 +75,4 @@ module.exports = (pConfiguration) => {
 
 /* think we can ignore object injection here because it's not a public function */
 /* eslint security/detect-object-injection: 0 */
+// file deepcode ignore valid-jsdoc: seems deepcode's jsdoc parser can't handle type imports yet

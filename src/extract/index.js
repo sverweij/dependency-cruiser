@@ -1,7 +1,6 @@
-const _uniqBy = require("lodash/uniqBy");
-const _spread = require("lodash/spread");
-const _concat = require("lodash/concat");
 const _has = require("lodash/has");
+const bus = require("../utl/bus");
+const busLogLevels = require("../utl/bus-log-levels");
 const getDependencies = require("./get-dependencies");
 const gatherInitialSources = require("./gather-initial-sources");
 const clearCaches = require("./clear-caches");
@@ -63,27 +62,33 @@ function extractFileDirectoryArray(
 ) {
   let lVisited = new Set();
 
-  return _spread(_concat)(
-    gatherInitialSources(pFileDirectoryArray, pCruiseOptions).reduce(
-      (pDependencies, pFilename) => {
-        if (!lVisited.has(pFilename)) {
-          lVisited.add(pFilename);
-          return pDependencies.concat(
-            extractRecursive(
-              pFilename,
-              pCruiseOptions,
-              lVisited,
-              0,
-              pResolveOptions,
-              pTranspileOptions
-            )
-          );
-        }
-        return pDependencies;
-      },
-      []
-    )
+  bus.emit("progress", "reading files: gathering initial sources", {
+    level: busLogLevels.INFO,
+  });
+  const lInitialSources = gatherInitialSources(
+    pFileDirectoryArray,
+    pCruiseOptions
   );
+
+  bus.emit("progress", "reading files: visiting dependencies", {
+    level: busLogLevels.INFO,
+  });
+  return lInitialSources.reduce((pDependencies, pFilename) => {
+    if (!lVisited.has(pFilename)) {
+      lVisited.add(pFilename);
+      return pDependencies.concat(
+        extractRecursive(
+          pFilename,
+          pCruiseOptions,
+          lVisited,
+          0,
+          pResolveOptions,
+          pTranspileOptions
+        )
+      );
+    }
+    return pDependencies;
+  }, []);
 }
 
 function isNotFollowable(pToDependency) {
@@ -131,25 +136,24 @@ function filterExcludedDynamicDependencies(pModule, pExclude) {
   };
 }
 
-module.exports = (
+module.exports = function extract(
   pFileDirectoryArray,
   pCruiseOptions,
   pResolveOptions,
   pTranspileOptions
-) => {
+) {
   clearCaches();
 
-  const lReturnValue = _uniqBy(
-    extractFileDirectoryArray(
-      pFileDirectoryArray,
-      pCruiseOptions,
-      pResolveOptions,
-      pTranspileOptions
-    ).reduce(complete, []),
-    (pModule) => pModule.source
-  ).map((pModule) =>
-    filterExcludedDynamicDependencies(pModule, pCruiseOptions.exclude)
-  );
+  const lReturnValue = extractFileDirectoryArray(
+    pFileDirectoryArray,
+    pCruiseOptions,
+    pResolveOptions,
+    pTranspileOptions
+  )
+    .reduce(complete, [])
+    .map((pModule) =>
+      filterExcludedDynamicDependencies(pModule, pCruiseOptions.exclude)
+    );
   pResolveOptions.fileSystem.purge();
   clearCaches();
   return lReturnValue;
