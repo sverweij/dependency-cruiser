@@ -10,7 +10,7 @@ const path = require("path");
  * @param {string} pFileName path to the file to be parsed
  * @return {string}          extension
  */
-module.exports = (pFileName) => {
+module.exports = function getExtensions(pFileName) {
   let lReturnValue = path.extname(pFileName);
 
   if (lReturnValue === ".md") {

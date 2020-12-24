@@ -26,7 +26,8 @@ function formatExtensions(pExtensions) {
   );
 }
 
-module.exports = () => `
+module.exports = function formatMetaInfo() {
+  return `
   Supported:
 
     If you need a supported, but not enabled transpiler ('${chalk.red(
@@ -42,5 +43,6 @@ ${formatTranspilers()}
 
 ${formatExtensions(main.allExtensions)}
 `;
+};
 
 /* eslint security/detect-object-injection : 0 */

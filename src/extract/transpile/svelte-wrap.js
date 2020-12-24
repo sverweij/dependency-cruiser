@@ -16,7 +16,9 @@ function getTranspiler(pTranspilerWrapper) {
   };
 }
 
-module.exports = (pTranspilerWrapper) => ({
-  isAvailable: () => svelteCompiler !== false,
-  transpile: getTranspiler(pTranspilerWrapper),
-});
+module.exports = function svelteWrap(pTranspilerWrapper) {
+  return {
+    isAvailable: () => svelteCompiler !== false,
+    transpile: getTranspiler(pTranspilerWrapper),
+  };
+};

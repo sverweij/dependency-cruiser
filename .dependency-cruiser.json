@@ -226,7 +226,8 @@
     // },
     "enhancedResolveOptions": {
       "exportsFields": ["exports"],
-      "conditionNames": ["require"]
+      "conditionNames": ["require"],
+      "extensions": [".js", ".ts", ".d.ts"]
     },
     "exoticRequireStrings": ["tryRequire"],
     "reporterOptions": {

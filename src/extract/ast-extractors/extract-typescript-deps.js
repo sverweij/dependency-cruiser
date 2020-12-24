@@ -232,8 +232,11 @@ function extractNestedDependencies(pAST, pExoticRequireStrings) {
  *
  * @type {(pTypeScriptAST: (import("typescript").Node), pExoticRequireStrings: string[]) => {module: string, moduleSystem: string, dynamic: boolean}[]}
  */
-module.exports = (pTypeScriptAST, pExoticRequireStrings) =>
-  Boolean(typescript)
+module.exports = function extractTypeScriptDependencies(
+  pTypeScriptAST,
+  pExoticRequireStrings
+) {
+  return Boolean(typescript)
     ? extractImportsAndExports(pTypeScriptAST)
         .concat(extractImportEquals(pTypeScriptAST))
         .concat(extractTrippleSlashDirectives(pTypeScriptAST))
@@ -242,3 +245,4 @@ module.exports = (pTypeScriptAST, pExoticRequireStrings) =>
         )
         .map((pModule) => ({ dynamic: false, ...pModule }))
     : [];
+};

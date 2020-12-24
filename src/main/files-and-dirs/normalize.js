@@ -9,5 +9,8 @@ function relativize(pFileDirectory) {
     : pFileDirectory;
 }
 
-module.exports = (pFileAndDirectoryArray) =>
-  pFileAndDirectoryArray.map(relativize);
+module.exports = function normalizeFileAndDirectoryArray(
+  pFileAndDirectoryArray
+) {
+  return pFileAndDirectoryArray.map(relativize);
+};

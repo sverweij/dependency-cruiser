@@ -37,7 +37,7 @@ function normalizeRule(pRule) {
  * @param  {object} pRuleSet [description]
  * @return {object}          [description]
  */
-module.exports = (pRuleSet) => {
+module.exports = function normalizeRuleSet(pRuleSet) {
   if (_has(pRuleSet, "allowed")) {
     pRuleSet.allowedSeverity = normalizeSeverity(pRuleSet.allowedSeverity);
     if (pRuleSet.allowedSeverity === "ignore") {

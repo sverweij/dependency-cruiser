@@ -37,12 +37,12 @@ function pushRequireCallsToDependencies(
   };
 }
 
-module.exports = (
+module.exports = function extractCommonJSDependencies(
   pAST,
   pDependencies,
   pModuleSystem,
   pExoticRequireStrings
-) => {
+) {
   // var/const lalala = require('./lalala');
   // require('./lalala');
   // require('./lalala').doFunkyStuff();

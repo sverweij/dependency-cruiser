@@ -107,7 +107,7 @@ function runCruise(pFileDirectoryArray, pCruiseOptions) {
   return lReportingResult.exitCode;
 }
 
-module.exports = (pFileDirectoryArray, pCruiseOptions) => {
+module.exports = function executeCli(pFileDirectoryArray, pCruiseOptions) {
   pCruiseOptions = pCruiseOptions || {};
   let lExitCode = 0;
 

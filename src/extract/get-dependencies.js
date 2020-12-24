@@ -91,7 +91,7 @@ function matchesDoNotFollow(pResolved, pDoNotFollow) {
 }
 
 function addResolutionAttributes(pOptions, pFileName, pResolveOptions) {
-  return (pDependency) => {
+  return function addAttributes(pDependency) {
     const lResolved = resolve(
       pDependency,
       pOptions.baseDir,
@@ -155,12 +155,12 @@ function compareDeps(pLeft, pRight) {
  *                               'extends' option in there)
  * @return {array}           an array of dependency objects (see above)
  */
-module.exports = (
+module.exports = function getDependencies(
   pFileName,
   pCruiseOptions,
   pResolveOptions,
   pTranspileOptions
-) => {
+) {
   try {
     return _uniqBy(
       extractDependencies(pCruiseOptions, pFileName, pTranspileOptions),
