@@ -24,7 +24,7 @@ function pushImportNodeValue(pDependencies) {
   };
 }
 
-module.exports = (pAST, pDependencies) => {
+module.exports = function extractES6Dependencies(pAST, pDependencies) {
   function pushSourceValue(pNode) {
     if (pNode.source && pNode.source.value) {
       pDependencies.push({

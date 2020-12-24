@@ -44,7 +44,11 @@ function extractCommonJSWrappers(pNode, pDependencies, pExoticRequireStrings) {
   }
 }
 
-module.exports = (pAST, pDependencies, pExoticRequireStrings) => {
+module.exports = function extractAMDDependencies(
+  pAST,
+  pDependencies,
+  pExoticRequireStrings
+) {
   walk.simple(
     pAST,
     {

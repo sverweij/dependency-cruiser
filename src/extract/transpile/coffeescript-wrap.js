@@ -24,11 +24,13 @@ function getCoffeeScriptModule() {
 
 const coffeeScript = getCoffeeScriptModule();
 
-module.exports = (pLiterate) => ({
-  isAvailable: () => coffeeScript !== false,
-  transpile: (pSource) => {
-    const lOptions = pLiterate ? { literate: true } : {};
+module.exports = function coffeeScriptWrap(pLiterate) {
+  return {
+    isAvailable: () => coffeeScript !== false,
+    transpile: (pSource) => {
+      const lOptions = pLiterate ? { literate: true } : {};
 
-    return coffeeScript.compile(pSource, lOptions);
-  },
-});
+      return coffeeScript.compile(pSource, lOptions);
+    },
+  };
+};

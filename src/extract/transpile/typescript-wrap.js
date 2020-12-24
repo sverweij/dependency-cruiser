@@ -19,15 +19,17 @@ function getCompilerOptions(pTsx, pTSConfig) {
   };
 }
 
-module.exports = (pTsx) => ({
-  isAvailable: () => typescript !== false,
+module.exports = function typescriptWrap(pTsx) {
+  return {
+    isAvailable: () => typescript !== false,
 
-  transpile: (pSource, pTranspileOptions = {}) =>
-    typescript.transpileModule(pSource, {
-      ...(pTranspileOptions.tsConfig || {}),
-      compilerOptions: getCompilerOptions(
-        pTsx,
-        pTranspileOptions.tsConfig || {}
-      ),
-    }).outputText,
-});
+    transpile: (pSource, pTranspileOptions = {}) =>
+      typescript.transpileModule(pSource, {
+        ...(pTranspileOptions.tsConfig || {}),
+        compilerOptions: getCompilerOptions(
+          pTsx,
+          pTranspileOptions.tsConfig || {}
+        ),
+      }).outputText,
+  };
+};
