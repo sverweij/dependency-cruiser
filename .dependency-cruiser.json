@@ -185,7 +185,7 @@
     ],
 
     /* list of module systems to cruise */
-    // "moduleSystems": ["amd", "cjs", "es6", "tsd"],
+    "moduleSystems": ["cjs", "es6"],
 
     /* prefix for links in html and svg output (e.g. https://github.com/you/yourrepo/blob/develop/) */
     "prefix": "https://github.com/sverweij/dependency-cruiser/blob/develop/",
@@ -227,7 +227,22 @@
     "enhancedResolveOptions": {
       "exportsFields": ["exports"],
       "conditionNames": ["require"],
-      "extensions": [".js", ".ts", ".d.ts"]
+      "extensions": [
+        ".js",
+        // ".cjs",
+        // ".mjs",
+        // ".jsx",
+        // ".ts",
+        // ".tsx",
+        ".d.ts"
+        // ".coffee",
+        // ".litcoffee",
+        // "cofee.md",
+        // ".csx",
+        // ".cjsx",
+        // ".vue",
+        // ".svelte"
+      ]
     },
     "exoticRequireStrings": ["tryRequire"],
     "reporterOptions": {

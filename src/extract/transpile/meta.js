@@ -1,6 +1,5 @@
 const _get = require("lodash/get");
-const supportedTranspilers = require("../../../package.json")
-  .supportedTranspilers;
+const { supportedTranspilers } = require("../../../package.json");
 const javaScriptWrap = require("./javascript-wrap");
 const typeScriptWrap = require("./typescript-wrap")();
 const tsxWrap = require("./typescript-wrap")(true);
@@ -78,7 +77,7 @@ module.exports.getWrapper = (pExtension, pTranspilerOptions) => {
  * all supported extensions and whether or not it is supported
  * in the current environment
  *
- * @type {array}
+ * @type {string[]}
  */
 module.exports.allExtensions = Object.keys(EXTENSION2WRAPPER).map((pKey) => ({
   extension: pKey,
@@ -89,7 +88,7 @@ module.exports.allExtensions = Object.keys(EXTENSION2WRAPPER).map((pKey) => ({
  * an array of extensions that are 'scannable' (have a valid transpiler
  * available for) in the current environemnt.
  *
- * @type {array}
+ * @type {string[]}
  */
 module.exports.scannableExtensions = Object.keys(
   EXTENSION2WRAPPER
@@ -100,7 +99,7 @@ module.exports.scannableExtensions = Object.keys(
  * - the version (range) supported
  * - whether or not it is available in the current environment
  *
- * @returns {array} an array of supported transpilers
+ * @return {any[]} an array of supported transpilers
  */
 module.exports.getAvailableTranspilers = () =>
   Object.keys(supportedTranspilers).map((pTranspiler) => ({
