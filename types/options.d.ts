@@ -9,6 +9,11 @@ import {
 } from "./filter-types";
 
 export type ExternalModuleResolutionStrategyType = "node_modules" | "yarn-pnp";
+export type ProgressType =
+  | /** yo with the banjo*/
+  "cli-feedback" /** mean with the mandoline */
+  | "performance-log"
+  | "none";
 
 export interface ICruiseOptions {
   /**
@@ -171,7 +176,7 @@ export interface ICruiseOptions {
      * gains on systems with slow i/o (like ms-windows), especially when your
      * tsconfig contains paths/ aliasses.
      */
-    extension?: string[];
+    extensions?: string[];
     /**
      * Options to pass to the resolver (webpack's 'enhanced resolve') regarding
      * caching.
@@ -193,5 +198,18 @@ export interface ICruiseOptions {
        */
       cacheDuration: number;
     };
+  };
+  /**
+   * Whether or not to show progress feedback when the command line
+   * app is running.
+   */
+  progress?: {
+    /**
+     * The type of progress to show; `none` to not show anything at all;
+     * `cli-feedback` to show a progress bar on stderr that disappears when
+     * processing is done or `performance-log` to print timings and memory usage
+     * of each major step to stderr.
+     */
+    type: ProgressType;
   };
 }
