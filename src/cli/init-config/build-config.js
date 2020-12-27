@@ -1,6 +1,6 @@
 const Handlebars = require("handlebars/runtime");
 
-const { folderNameArrayToRE } = require("./environment-helpers");
+const { folderNameArrayToRE } = require("./utl");
 
 /* eslint import/no-unassigned-import: 0 */
 require("./config.js.template");

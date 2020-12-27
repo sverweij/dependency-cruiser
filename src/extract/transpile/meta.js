@@ -99,7 +99,7 @@ module.exports.scannableExtensions = Object.keys(
  * - the version (range) supported
  * - whether or not it is available in the current environment
  *
- * @return {any[]} an array of supported transpilers
+ * @return {IAvailableTranspiler[]} an array of supported transpilers
  */
 module.exports.getAvailableTranspilers = () =>
   Object.keys(supportedTranspilers).map((pTranspiler) => ({

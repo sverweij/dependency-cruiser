@@ -7,6 +7,11 @@ const {
   toSourceLocationArray,
 } = require("./environment-helpers");
 
+/**
+ *
+ * @param {import("../../../types/init-config").IPartialInitConfig} pInitOptions
+ * @return {import("../../../types/init-config").IPartialInitConfig}
+ */
 function populate(pInitOptions) {
   return {
     version: $dependencyCruiserManifest.version,
@@ -24,6 +29,11 @@ function populate(pInitOptions) {
   };
 }
 
+/**
+ *
+ * @param {import("../../../types/init-config").IPartialInitConfig} pInitOptions
+ * @return {import("../../../types/init-config").IInitConfig}
+ */
 module.exports = function normalizeInitOptions(pInitOptions) {
   let lReturnValue = populate(pInitOptions);
 

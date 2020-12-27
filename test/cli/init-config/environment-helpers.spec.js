@@ -2,7 +2,6 @@
 const { expect } = require("chai");
 const {
   getFolderCandidates,
-  folderNameArrayToRE,
   pnpIsEnabled,
   isLikelyMonoRepo,
   hasTestsWithinSource,
@@ -114,18 +113,5 @@ describe("cli/init-config/environment-helpers - getFolderCandidates", () => {
     expect(getFolderCandidates(lCandidates)(lRealFolders)).to.deep.equal([
       "src",
     ]);
-  });
-});
-describe("cli/init-config/environment-helpers - folderNameArrayToRE", () => {
-  it("transforms an array of folder names into a regex string - empty", () => {
-    expect(folderNameArrayToRE([])).to.equal("^()");
-  });
-  it("transforms an array of folder names into a regex string - one entry", () => {
-    expect(folderNameArrayToRE(["src"])).to.equal("^(src)");
-  });
-  it("transforms an array of folder names into a regex string - more than one entry", () => {
-    expect(folderNameArrayToRE(["bin", "src", "lib"])).to.equal(
-      "^(bin|src|lib)"
-    );
   });
 });

@@ -1,8 +1,9 @@
 const fs = require("fs");
+const path = require("path");
 const _get = require("lodash/get");
 const _has = require("lodash/has");
 
-const LIKELY_SOURCE_FOLDERS = ["src", "lib", "app", "bin"];
+const LIKELY_SOURCE_FOLDERS = ["src", "lib", "app", "bin", "sources"];
 const LIKELY_TEST_FOLDERS = ["test", "spec", "tests", "specs", "bdd"];
 const LIKELY_PACKAGES_FOLDERS = ["packages"];
 const TSCONFIG_CANDIDATE_PATTERN = /.*[tj]sconfig.*\.json$/gi;
@@ -59,7 +60,9 @@ function babelIsConfiguredInManifest() {
 function getFolderNames(pFolderName) {
   return fs
     .readdirSync(pFolderName, "utf8")
-    .filter((pFileName) => fs.statSync(pFileName).isDirectory());
+    .filter((pFileName) =>
+      fs.statSync(path.join(pFolderName, pFileName)).isDirectory()
+    );
 }
 
 function getMatchingFileNames(pPattern, pFolderName = ".") {
@@ -67,7 +70,8 @@ function getMatchingFileNames(pPattern, pFolderName = ".") {
     .readdirSync(pFolderName, "utf8")
     .filter(
       (pFileName) =>
-        fs.statSync(pFileName).isFile() && pFileName.match(pPattern)
+        fs.statSync(path.join(pFolderName, pFileName)).isFile() &&
+        pFileName.match(pPattern)
     );
 }
 
@@ -92,10 +96,6 @@ function getFolderCandidates(pCandidateFolderArray) {
   };
 }
 
-function folderNameArrayToRE(pArrayOfStrings) {
-  return `^(${pArrayOfStrings.join("|")})`;
-}
-
 function toSourceLocationArray(pLocations) {
   if (!Array.isArray(pLocations)) {
     return pLocations.split(",").map((pFolder) => pFolder.trim());
@@ -113,9 +113,10 @@ const getBabelConfigCandidates = () =>
   );
 const hasBabelConfigCandidates = () => getBabelConfigCandidates().length > 0;
 
-const getTSConfigCandidates = () =>
-  getMatchingFileNames(TSCONFIG_CANDIDATE_PATTERN);
-const hasTSConfigCandidates = () => getTSConfigCandidates().length > 0;
+const getTSConfigCandidates = (pFolderName = ".") =>
+  getMatchingFileNames(TSCONFIG_CANDIDATE_PATTERN, pFolderName);
+const hasTSConfigCandidates = (pFolderName = ".") =>
+  getTSConfigCandidates(pFolderName).length > 0;
 
 const getWebpackConfigCandidates = () =>
   getMatchingFileNames(WEBPACK_CANDIDATE_PATTERN);
@@ -130,7 +131,6 @@ const getMonoRepoPackagesCandidates = getFolderCandidates(
 );
 
 module.exports = {
-  folderNameArrayToRE,
   readManifest,
   fileExists,
   pnpIsEnabled,

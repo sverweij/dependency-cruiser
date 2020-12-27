@@ -126,5 +126,9 @@ const INQUIRER_QUESTIONS = [
     when: (pAnswers) => pAnswers.useWebpackConfig,
   },
 ];
-
-module.exports = () => inquirer.prompt(INQUIRER_QUESTIONS);
+/**
+ * @return {Promise<import("../../../types/init-config").IPartialInitConfig>}
+ */
+module.exports = function getUserInput() {
+  return inquirer.prompt(INQUIRER_QUESTIONS);
+};

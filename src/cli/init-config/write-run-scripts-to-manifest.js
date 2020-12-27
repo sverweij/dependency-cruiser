@@ -4,10 +4,16 @@ const figures = require("figures");
 const chalk = require("chalk");
 const wrapAndIndent = require("../../utl/wrap-and-indent");
 const $defaults = require("../defaults.json");
-const { readManifest, folderNameArrayToRE } = require("./environment-helpers");
+const { readManifest } = require("./environment-helpers");
+const { folderNameArrayToRE } = require("./utl");
 
 const PACKAGE_MANIFEST = `./${$defaults.PACKAGE_MANIFEST}`;
 
+/**
+ *
+ * @param {import("../../../types/init-config").IInitConfig} pInitOptions
+ * @return {any} an bunch of key value pairs that can be plonked into a `scripts` attribute in a package.json
+ */
 function compileRunScripts(pInitOptions) {
   let lReturnValue = {};
 
@@ -17,10 +23,11 @@ function compileRunScripts(pInitOptions) {
     const lTestLocations = (pInitOptions.testLocation || []).join(" ");
 
     lReturnValue = {
-      depcruise: `depcruise ${lSourceLocations} ${lTestLocations} -v`,
-      "depcruise:graph": `depcruise ${lSourceLocations} --include-only '${lSourceLocationRE}' -v -T dot | dot -T svg | depcruise-wrap-stream-in-html > dependency-graph.html`,
-      "depcruise:graph-archi": `depcruise ${lSourceLocations} --include-only '${lSourceLocationRE}' -v -T archi | dot -T svg | depcruise-wrap-stream-in-html > high-level-dependency-graph.html`,
-      "depcruise:html": `depcruise ${lSourceLocations} ${lTestLocations} -v -T err-html -f dependency-violation-report.html`,
+      depcruise: `depcruise ${lSourceLocations} ${lTestLocations} --config`,
+      "depcruise:graph": `depcruise ${lSourceLocations} --include-only '${lSourceLocationRE}' --config --output-type dot | dot -T svg | depcruise-wrap-stream-in-html > dependency-graph.html`,
+      "depcruise:graph:dev": `depcruise ${lSourceLocations} --include-only '${lSourceLocationRE}' --prefix vscode://file/$(pwd)/ --config --output-type dot | dot -T svg | depcruise-wrap-stream-in-html | browser`,
+      "depcruise:graph-archi": `depcruise ${lSourceLocations} --include-only '${lSourceLocationRE}' --config --output-type archi | dot -T svg | depcruise-wrap-stream-in-html > high-level-dependency-graph.html`,
+      "depcruise:html": `depcruise ${lSourceLocations} ${lTestLocations} --config --output-type err-html --output-to dependency-violation-report.html`,
     };
   }
 
@@ -31,10 +38,10 @@ function compileRunScripts(pInitOptions) {
  * Return the scripts in pAdditionalRunScripts that don't yet exist in
  * pExistingRunScripts
  *
- * @param {object} pAdditionalRunScripts
- * @param {object} pExistingRunScripts
+ * @param {any} pAdditionalRunScripts
+ * @param {any} pExistingRunScripts
  *
- * @return {object} the scripts in pAdditionalRunScripts that don't yet exist in
+ * @return {any} the scripts in pAdditionalRunScripts that don't yet exist in
  * pExistingRunScripts
  */
 function filterNewScriptEntries(pExistingRunScripts, pAdditionalRunScripts) {

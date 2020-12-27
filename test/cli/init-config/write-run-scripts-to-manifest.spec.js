@@ -64,6 +64,7 @@ describe("cli/init-config/write-run-scripts-to-manifest - compile run script", (
     expect(Object.keys(lRunScripts)).to.deep.equal([
       "depcruise",
       "depcruise:graph",
+      "depcruise:graph:dev",
       "depcruise:graph-archi",
       "depcruise:html",
     ]);

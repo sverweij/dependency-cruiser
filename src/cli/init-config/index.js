@@ -20,7 +20,15 @@ const {
 
 const PACKAGE_MANIFEST = `./${$defaults.PACKAGE_MANIFEST}`;
 
+/**
+ * Create a initialization configuration based on guessed defaults
+ * (e.g. a tsconfig exists => use it and assume typescript is used)
+ *
+ * @param {import("../../../types/init-config").OneShotConfigIDType} pOneShotConfigId
+ * @return {import("../../../types/init-config").IPartialInitConfig} an initialization configuration
+ */
 function getOneshotConfig(pOneShotConfigId) {
+  /** @type {"../../../types/init-config").IPartialInitConfig} */
   const lBaseConfig = {
     isMonoRepo: isLikelyMonoRepo(),
     combinedDependencies: false,
@@ -50,6 +58,10 @@ function getOneshotConfig(pOneShotConfigId) {
   return lOneshotConfigs[pOneShotConfigId] || lBaseConfig;
 }
 
+/**
+ *
+ * @param {import("../../../types/init-config").IInitConfig} pNormalizedInitConfig
+ */
 function manifestIsUpdateable(pNormalizedInitConfig) {
   return (
     pNormalizedInitConfig.updateManifest &&

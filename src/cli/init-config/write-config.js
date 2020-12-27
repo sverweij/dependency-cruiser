@@ -8,7 +8,7 @@ const { fileExists } = require("./environment-helpers");
  * Write a .dependency-cruiser config to the current directory
  *
  * @returns {void}  Nothing
- * @param  {any}    pConfig - dependency-cruiser configuration
+ * @param  {string} pConfig - dependency-cruiser configuration
  * @param  {string} pFileName - name of the file to write to
  * @throws {Error}  An error object with the root cause of the problem
  *                  as a description:
