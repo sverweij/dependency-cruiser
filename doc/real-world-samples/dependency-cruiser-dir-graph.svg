@@ -14,6 +14,21 @@
 <path fill="#ffffff" stroke="black" stroke-width="2" d="M20,-8C20,-8 1444,-8 1444,-8 1450,-8 1456,-14 1456,-20 1456,-20 1456,-319.8 1456,-319.8 1456,-325.8 1450,-331.8 1444,-331.8 1444,-331.8 20,-331.8 20,-331.8 14,-331.8 8,-325.8 8,-319.8 8,-319.8 8,-20 8,-20 8,-14 14,-8 20,-8"/>
 <text text-anchor="middle" x="732" y="-320.6" font-family="Helvetica,sans-Serif" font-weight="bold" font-size="9.00">src</text>
 </g>
+<g id="clust2" class="cluster">
+<title>cluster_src/cli</title>
+<path fill="#ffffff" stroke="black" stroke-width="2" d="M326,-193.8C326,-193.8 638,-193.8 638,-193.8 644,-193.8 650,-199.8 650,-205.8 650,-205.8 650,-293.8 650,-293.8 650,-299.8 644,-305.8 638,-305.8 638,-305.8 326,-305.8 326,-305.8 320,-305.8 314,-299.8 314,-293.8 314,-293.8 314,-205.8 314,-205.8 314,-199.8 320,-193.8 326,-193.8"/>
+<text text-anchor="middle" x="482" y="-294.6" font-family="Helvetica,sans-Serif" font-weight="bold" font-size="9.00">cli</text>
+</g>
+<g id="clust3" class="cluster">
+<title>cluster_src/cli/listeners</title>
+<path fill="#ffffff" stroke="black" stroke-width="2" d="M396,-201.8C396,-201.8 566,-201.8 566,-201.8 572,-201.8 578,-207.8 578,-213.8 578,-213.8 578,-241.8 578,-241.8 578,-247.8 572,-253.8 566,-253.8 566,-253.8 396,-253.8 396,-253.8 390,-253.8 384,-247.8 384,-241.8 384,-241.8 384,-213.8 384,-213.8 384,-207.8 390,-201.8 396,-201.8"/>
+<text text-anchor="middle" x="481" y="-242.6" font-family="Helvetica,sans-Serif" font-weight="bold" font-size="9.00">listeners</text>
+</g>
+<g id="clust4" class="cluster">
+<title>cluster_src/config&#45;utl</title>
+<path fill="#ffffff" stroke="black" stroke-width="2" d="M1124,-201.8C1124,-201.8 1247,-201.8 1247,-201.8 1253,-201.8 1259,-207.8 1259,-213.8 1259,-213.8 1259,-241.8 1259,-241.8 1259,-247.8 1253,-253.8 1247,-253.8 1247,-253.8 1124,-253.8 1124,-253.8 1118,-253.8 1112,-247.8 1112,-241.8 1112,-241.8 1112,-213.8 1112,-213.8 1112,-207.8 1118,-201.8 1124,-201.8"/>
+<text text-anchor="middle" x="1185.5" y="-242.6" font-family="Helvetica,sans-Serif" font-weight="bold" font-size="9.00">config&#45;utl</text>
+</g>
 <g id="clust5" class="cluster">
 <title>cluster_src/enrich</title>
 <path fill="#ffffff" stroke="black" stroke-width="2" d="M476,-57.2C476,-57.2 750,-57.2 750,-57.2 756,-57.2 762,-63.2 762,-69.2 762,-69.2 762,-173.8 762,-173.8 762,-179.8 756,-185.8 750,-185.8 750,-185.8 476,-185.8 476,-185.8 470,-185.8 464,-179.8 464,-173.8 464,-173.8 464,-69.2 464,-69.2 464,-63.2 470,-57.2 476,-57.2"/>
@@ -33,21 +48,6 @@
 <title>cluster_src/extract/resolve</title>
 <path fill="#ffffff" stroke="black" stroke-width="2" d="M1368,-58C1368,-58 1428,-58 1428,-58 1434,-58 1440,-64 1440,-70 1440,-70 1440,-121.8 1440,-121.8 1440,-127.8 1434,-133.8 1428,-133.8 1428,-133.8 1368,-133.8 1368,-133.8 1362,-133.8 1356,-127.8 1356,-121.8 1356,-121.8 1356,-70 1356,-70 1356,-64 1362,-58 1368,-58"/>
 <text text-anchor="middle" x="1398" y="-122.6" font-family="Helvetica,sans-Serif" font-weight="bold" font-size="9.00">resolve</text>
-</g>
-<g id="clust4" class="cluster">
-<title>cluster_src/config&#45;utl</title>
-<path fill="#ffffff" stroke="black" stroke-width="2" d="M1124,-201.8C1124,-201.8 1247,-201.8 1247,-201.8 1253,-201.8 1259,-207.8 1259,-213.8 1259,-213.8 1259,-241.8 1259,-241.8 1259,-247.8 1253,-253.8 1247,-253.8 1247,-253.8 1124,-253.8 1124,-253.8 1118,-253.8 1112,-247.8 1112,-241.8 1112,-241.8 1112,-213.8 1112,-213.8 1112,-207.8 1118,-201.8 1124,-201.8"/>
-<text text-anchor="middle" x="1185.5" y="-242.6" font-family="Helvetica,sans-Serif" font-weight="bold" font-size="9.00">config&#45;utl</text>
-</g>
-<g id="clust2" class="cluster">
-<title>cluster_src/cli</title>
-<path fill="#ffffff" stroke="black" stroke-width="2" d="M326,-193.8C326,-193.8 638,-193.8 638,-193.8 644,-193.8 650,-199.8 650,-205.8 650,-205.8 650,-293.8 650,-293.8 650,-299.8 644,-305.8 638,-305.8 638,-305.8 326,-305.8 326,-305.8 320,-305.8 314,-299.8 314,-293.8 314,-293.8 314,-205.8 314,-205.8 314,-199.8 320,-193.8 326,-193.8"/>
-<text text-anchor="middle" x="482" y="-294.6" font-family="Helvetica,sans-Serif" font-weight="bold" font-size="9.00">cli</text>
-</g>
-<g id="clust3" class="cluster">
-<title>cluster_src/cli/listeners</title>
-<path fill="#ffffff" stroke="black" stroke-width="2" d="M396,-201.8C396,-201.8 566,-201.8 566,-201.8 572,-201.8 578,-207.8 578,-213.8 578,-213.8 578,-241.8 578,-241.8 578,-247.8 572,-253.8 566,-253.8 566,-253.8 396,-253.8 396,-253.8 390,-253.8 384,-247.8 384,-241.8 384,-241.8 384,-213.8 384,-213.8 384,-207.8 390,-201.8 396,-201.8"/>
-<text text-anchor="middle" x="481" y="-242.6" font-family="Helvetica,sans-Serif" font-weight="bold" font-size="9.00">listeners</text>
 </g>
 <g id="clust9" class="cluster">
 <title>cluster_src/main</title>
