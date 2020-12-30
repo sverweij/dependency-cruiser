@@ -35,7 +35,7 @@ function runFixture(pFixture) {
         pFixture.input.fileName,
         normalizeCruiseOptions(lOptions),
         normalizeResolveOptions(
-          { bustTheCache: true },
+          { bustTheCache: true, resolveLicenses: true },
           normalizeCruiseOptions(lOptions)
         )
       )

@@ -1,6 +1,6 @@
 const _flattenDeep = require("lodash/flattenDeep");
 const _get = require("lodash/get");
-const findRuleByName = require("../../graph-utl/find-rule-by-name");
+const { findRuleByName } = require("../../graph-utl/rule-set");
 const compare = require("../../graph-utl/compare");
 const deDuplicateViolations = require("./de-duplicate-violations");
 

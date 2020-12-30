@@ -69,10 +69,13 @@ module.exports = function resolveAMD(
       !Boolean(isCore(pRawModuleName)) && !fileExists(lResolvedPath),
   };
 
-  // we might want to use resolve options instead of {} here
   return {
     ...lReturnValue,
-    ...resolveHelpers.addLicenseAttribute(lModuleName, pBaseDirectory, {}),
+    ...resolveHelpers.addLicenseAttribute(
+      lModuleName,
+      pBaseDirectory,
+      pResolveOptions
+    ),
     dependencyTypes: determineDependencyTypes(
       lReturnValue,
       lModuleName,

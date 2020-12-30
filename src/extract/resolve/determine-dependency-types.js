@@ -104,6 +104,7 @@ function determineNodeModuleDependencyTypes(
   );
 
   if (
+    pResolveOptions.resolveDeprecations &&
     localNpmHelpers.dependencyIsDeprecated(
       pModuleName,
       pFileDirectory,
