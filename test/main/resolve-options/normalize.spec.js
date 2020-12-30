@@ -6,7 +6,7 @@ const {
 const normalizeResolveOptions = require("../../../src/main/resolve-options/normalize");
 
 describe("main/resolve-options/normalize", () => {
-  const lDefaultNoOfResolveOptions = 9;
+  const lDefaultNoOfResolveOptions = 11;
   const TEST_TSCONFIG = path.join(
     __dirname,
     "..",

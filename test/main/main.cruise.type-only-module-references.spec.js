@@ -27,7 +27,7 @@ describe("main.cruise - type only module references", () => {
       {
         tsPreCompilationDeps: true,
       },
-      { bustTheCache: true }
+      { bustTheCache: true, resolveLicenses: true }
     );
 
     expect(lResult.output).to.deep.equal(output);

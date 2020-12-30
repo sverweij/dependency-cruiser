@@ -2,7 +2,7 @@ const chalk = require("chalk");
 const figures = require("figures");
 
 const _get = require("lodash/get");
-const findRuleByName = require("../graph-utl/find-rule-by-name");
+const { findRuleByName } = require("../graph-utl/rule-set");
 const wrapAndIndent = require("../utl/wrap-and-indent");
 
 const SEVERITY2CHALK = {

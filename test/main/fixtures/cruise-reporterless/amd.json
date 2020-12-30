@@ -21,7 +21,8 @@
             "exoticallyRequired": false,
             "matchesDoNotFollow": false,
             "couldNotResolve": true,
-            "valid": true
+            "valid": true,
+            "license": "MIT"
           },
           {
             "module": "other-module-in-the-config",

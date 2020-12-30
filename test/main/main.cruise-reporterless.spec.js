@@ -18,6 +18,8 @@ function runRecursiveFixture(pFixture) {
     it(pFixture.title, () => {
       let lResult = cruise([pFixture.input.fileName], pFixture.input.options, {
         bustTheCache: true,
+        resolveLicenses: true,
+        resolveDeprecations: true,
       }).output;
 
       expect(lResult).to.be.jsonSchema(cruiseResultSchema);

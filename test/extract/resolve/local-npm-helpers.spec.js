@@ -195,4 +195,17 @@ describe("extract/resolve/localNpmHelpers.getLicense", () => {
     ).to.equal("GPL-3.0");
   });
 });
+
+describe("extract/resolve/localNpmHelpers.dependencyIsDeprecated", () => {
+  it("returns false if the module does not exist", () => {
+    expect(
+      localNpmHelpers.dependencyIsDeprecated(
+        "this-module-does-not-exist",
+        ".",
+        {}
+      )
+    ).to.equal(false);
+  });
+});
+
 /* eslint no-unused-expressions: 0 */

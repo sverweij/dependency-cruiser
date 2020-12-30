@@ -6,6 +6,10 @@ const enhancedResolve = require("enhanced-resolve");
 const PnpWebpackPlugin = require("pnp-webpack-plugin");
 const TsConfigPathsPlugin = require("tsconfig-paths-webpack-plugin");
 const transpileMeta = require("../../extract/transpile/meta");
+const {
+  ruleSetHasLicenseRule,
+  ruleSetHasDeprecationRule,
+} = require("../../graph-utl/rule-set");
 
 const DEFAULT_CACHE_DURATION = 4000;
 const DEFAULT_RESOLVE_OPTIONS = {
@@ -111,6 +115,7 @@ module.exports = function normalizeResolveOptions(
   pOptions,
   pTSConfig
 ) {
+  const lRuleSet = _get(pOptions, "ruleSet", {});
   return compileResolveOptions(
     {
       /*
@@ -130,6 +135,8 @@ module.exports = function normalizeResolveOptions(
       externalModuleResolutionStrategy:
         pOptions.externalModuleResolutionStrategy,
       combinedDependencies: pOptions.combinedDependencies,
+      resolveLicenses: ruleSetHasLicenseRule(lRuleSet),
+      resolveDeprecations: ruleSetHasDeprecationRule(lRuleSet),
       ...(pResolveOptions || {}),
     },
     pTSConfig || {},

@@ -128,7 +128,7 @@ function dependencyIsDeprecated(pModule, pBaseDirectory, pResolveOptions) {
 /**
  * Returns the license of pModule as resolved to pBaseDirectory - if any
  *
- * @param  {string} pModule  The module to get the deprecation status of
+ * @param  {string} pModule  The module to get the license of
  * @param  {string} pBaseDirectory The base dir. Defaults to '.'
  * @param  {any} pResolveOptions options for the resolver
  * @return {string}          The module's license string, or '' in case

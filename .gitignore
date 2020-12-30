@@ -17,6 +17,8 @@ coverage
 jsdoc
 dependency-violations.html
 .cache
+*.cpuprofile
+*.heapprofile
 
 # node and npm
 /node_modules/
