@@ -3,7 +3,11 @@ const path = require("path");
 const _memoize = require("lodash/memoize");
 const _has = require("lodash/has");
 const resolve = require("./resolve");
-const { isScoped, isRelativeModuleName } = require("./module-classifiers");
+const {
+  isScoped,
+  isRelativeModuleName,
+  isCore,
+} = require("./module-classifiers");
 
 /**
  * Returns the 'root' of the package - the spot where we can probably find
@@ -75,29 +79,30 @@ function getPackageRoot(pModule) {
  */
 function bareGetPackageJson(pModule, pBaseDirectory, pResolveOptions) {
   let lReturnValue = null;
+  if (!isRelativeModuleName(pModule) && !isCore(pModule)) {
+    try {
+      let lPackageJsonFilename = resolve(
+        path.join(getPackageRoot(pModule), "package.json"),
+        pBaseDirectory ? pBaseDirectory : process.cwd(),
+        {
+          ...pResolveOptions,
+          // if a module has exports fields _and_ does not expose package.json
+          // in those exports, enhanced-resolve (nor node!) will not be able to
+          // resolve the package.json if it actually heeds those exports fields.
+          // We can instruct enhanced-resolve to ignore them, however, by passing
+          // it the empty array for exports fields (overriding anything in
+          // the pResvolveOptions)
+          exportsFields: [],
+        },
+        // we need a separate caching context so as not to **** up the regular
+        // cruise, which might actually want to utilize the exportsFields.
+        "manifest-resolution"
+      );
 
-  try {
-    let lPackageJsonFilename = resolve(
-      path.join(getPackageRoot(pModule), "package.json"),
-      pBaseDirectory ? pBaseDirectory : process.cwd(),
-      {
-        ...pResolveOptions,
-        // if a module has exports fields _and_ does not expose package.json
-        // in those exports, enhanced-resolve (nor node!) will not be able to
-        // resolve the package.json if it actually heeds those exports fields.
-        // We can instruct enhanced-resolve to ignore them, however, by passing
-        // it the empty array for exports fields (overriding anything in
-        // the pResvolveOptions)
-        exportsFields: [],
-      },
-      // we need a separate caching context so as not to **** up the regular
-      // cruise, which might actually want to utilize the exportsFields.
-      "manifest-resolution"
-    );
-
-    lReturnValue = JSON.parse(fs.readFileSync(lPackageJsonFilename, "utf8"));
-  } catch (pError) {
-    // left empty on purpose
+      lReturnValue = JSON.parse(fs.readFileSync(lPackageJsonFilename, "utf8"));
+    } catch (pError) {
+      // left empty on purpose
+    }
   }
   return lReturnValue;
 }
