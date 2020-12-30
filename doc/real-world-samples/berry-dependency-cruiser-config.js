@@ -1,3 +1,4 @@
+/** @type {import('dependency-cruiser').IConfiguration} */
 module.exports = {
   options: {
     doNotFollow: {
@@ -7,8 +8,8 @@ module.exports = {
         "npm-optional",
         "npm-peer",
         "npm-bundled",
-        "npm-no-pkg"
-      ]
+        "npm-no-pkg",
+      ],
     },
 
     includeOnly: "^packages",
@@ -19,13 +20,15 @@ module.exports = {
     tsPreCompilationDeps: false,
 
     tsConfig: {
-      fileName: "./tsconfig.json"
+      fileName: "./tsconfig.json",
     },
 
     /* How to resolve external modules - use "yarn-pnp" if you're using yarn's Plug'n'Play.
        otherwise leave it out (or set to the default, which is 'node_modules')
     */
     externalModuleResolutionStrategy: "yarn-pnp",
+
+    progress: { type: "performance-log" },
 
     reporterOptions: {
       archi: {
@@ -34,29 +37,29 @@ module.exports = {
           modules: [
             {
               criteria: { source: "plugin-" },
-              attributes: { fillcolor: "#ffccff" }
+              attributes: { fillcolor: "#ffccff" },
             },
             {
               criteria: { source: "yarnpkg-" },
-              attributes: { fillcolor: "#ccffcc" }
+              attributes: { fillcolor: "#ccffcc" },
             },
             {
               criteria: {},
-              attributes: { fillcolor: "#ccccff" }
-            }
+              attributes: { fillcolor: "#ccccff" },
+            },
           ],
           dependencies: [
             {
               criteria: { resolved: "plugin-" },
-              attributes: { color: "#ff00ff77" }
+              attributes: { color: "#ff00ff77" },
             },
             {
               criteria: { resolved: "yarnpkg-" },
-              attributes: { color: "#00770077" }
-            }
-          ]
-        }
-      }
-    }
-  }
+              attributes: { color: "#00770077" },
+            },
+          ],
+        },
+      },
+    },
+  },
 };

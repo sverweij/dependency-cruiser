@@ -40,6 +40,7 @@ To get the above graph we used [berry-dependency-cruiser-config.js](real-world-s
 - add this script to package.json (so don't use the globally installed depcruise
   or even the locally installed one - yarn's pnp resolution won't work otherwise:)
   ```
+  "dc": "depcruise --version && depcruise --config berry-dependency-cruiser-config.js --output-type err packages",
   "depcruise:archi": "depcruise --config berry-dependency-cruiser-config.js --output-type archi packages | dot -T svg | tee berry-high-level-dependencies.svg | depcruise-wrap-stream-in-html > berry-high-level-dependencies.html",
   ```
 - run `yarn depcruise:archi`
@@ -59,13 +60,15 @@ Also high level:
 To get the above graph we used [react-dependency-cruiser-config.js](real-world-samples/react-dependency-cruiser-config.js). To generate it yourself do this in the root of the react repo:
 
 - `yarn`
-- Either use the globally installed dependency cruiser or `yarn add -D dependency-cruiser`
+- `yarn add -D -W dependency-cruiser`
 - copy `react-dependency-cruiser-config.js` to the root of the repo
-- run this:
+- Add these run-scripts to the package.json:
   ```
-  depcruise --config react-dependency-cruiser-config.js -T archi packages/*/{*.js,src} | dot -T svg | tee react-high-level-dependencies.svg | depcruise-wrap-stream-in-html > react-high-level-dependencies.html
+  "dc": "depcruise --version && depcruise --config react-dependency-cruiser-config.js -T err packages/*/{*.js,src}",
+  "depcruise:archi": "depcruise --config react-dependency-cruiser-config.js -T archi packages/*/{*.js,src} | dot -T svg | tee react-high-level-dependencies.svg | depcruise-wrap-stream-in-html > react-high-level-dependencies.html
   ```
-  </details>
+- `yarn depcruise:archi`
+</details>
 
 ### Safe-regex
 

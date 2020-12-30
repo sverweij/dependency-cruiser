@@ -1,17 +1,19 @@
+/* eslint-disable strict */
+/** @type {import('dependency-cruiser').IConfiguration} */
 module.exports = {
   forbidden: [
     /* rules from the 'recommended' preset: */
-    {
-      name: "no-circular",
-      severity: "warn",
-      comment:
-        "This dependency is part of a circular relationship. You might want to revise " +
-        "your solution (i.e. use dependency inversion, make sure the modules have a single responsibility) ",
-      from: {},
-      to: {
-        circular: true,
-      },
-    },
+    // {
+    //   name: 'no-circular',
+    //   severity: 'warn',
+    //   comment:
+    //     'This dependency is part of a circular relationship. You might want to revise ' +
+    //     'your solution (i.e. use dependency inversion, make sure the modules have a single responsibility) ',
+    //   from: {},
+    //   to: {
+    //     circular: true,
+    //   },
+    // },
     // {
     //   name: 'no-orphans',
     //   severity: 'info',
@@ -34,7 +36,7 @@ module.exports = {
       from: {},
       to: {
         dependencyTypes: ["core"],
-        "path": [
+        path: [
           "^(v8/tools/codemap)$",
           "^(v8/tools/consarray)$",
           "^(v8/tools/csvparser)$",
@@ -55,7 +57,7 @@ module.exports = {
           "^(constants)$",
           "^(sys)$",
           "^(_linklist)$",
-          "^(_stream_wrap)$"
+          "^(_stream_wrap)$",
         ],
       },
     },
@@ -246,6 +248,15 @@ module.exports = {
        a hack.
     */
     // , exoticRequireStrings: []
+    // theoretically there's more extensions than just .js (a quick scan learns
+    // the packages folder contains .ts, .d.ts, .ls(!) and .coffee). However,
+    // likely they either just exist in node_modules, or are of no consequence
+    // as when we provide these extensions as well the number of files & dependencies
+    // scanned does not go up.
+    enhancedResolveOptions: {
+      extensions: [".js"],
+    },
+    progress: { type: "performance-log" },
     reporterOptions: {
       dot: {
         /* pattern of modules that can be consolidated in the detailed
