@@ -93,12 +93,16 @@ function bareGetPackageJson(pModule, pBaseDirectory, pResolveOptions) {
           // it the empty array for exports fields (overriding anything in
           // the pResvolveOptions)
           exportsFields: [],
+          // we don't need to try any extensions; we already
+          // know it as we have passed the complete module name to resolve =>
+          // override whatever the default is with [""] ('use no extensions please')
+          extensions: [""],
         },
         // we need a separate caching context so as not to **** up the regular
-        // cruise, which might actually want to utilize the exportsFields.
+        // cruise, which might actually want to utilize the exportsFields
+        // and an array of extensions
         "manifest-resolution"
       );
-
       lReturnValue = JSON.parse(fs.readFileSync(lPackageJsonFilename, "utf8"));
     } catch (pError) {
       // left empty on purpose
