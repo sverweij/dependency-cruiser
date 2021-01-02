@@ -3,7 +3,6 @@ const _get = require("lodash/get");
 const _has = require("lodash/has");
 const _omit = require("lodash/omit");
 const enhancedResolve = require("enhanced-resolve");
-const PnpWebpackPlugin = require("pnp-webpack-plugin");
 const TsConfigPathsPlugin = require("tsconfig-paths-webpack-plugin");
 const transpileMeta = require("../../extract/transpile/meta");
 const {
@@ -88,13 +87,6 @@ function compileResolveOptions(
     );
   }
 
-  if (pResolveOptions.externalModuleResolutionStrategy === "yarn-pnp") {
-    lResolveOptions.plugins = pushPlugin(
-      lResolveOptions.plugins,
-      PnpWebpackPlugin
-    );
-  }
-
   return {
     ...DEFAULT_RESOLVE_OPTIONS,
     ...lResolveOptions,
@@ -132,8 +124,6 @@ module.exports = function normalizeResolveOptions(
          - they're not for enhanced resolve, but they are for what we consider
          resolve options ...
        */
-      externalModuleResolutionStrategy:
-        pOptions.externalModuleResolutionStrategy,
       combinedDependencies: pOptions.combinedDependencies,
       resolveLicenses: ruleSetHasLicenseRule(lRuleSet),
       resolveDeprecations: ruleSetHasDeprecationRule(lRuleSet),

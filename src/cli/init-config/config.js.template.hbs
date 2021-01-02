@@ -358,16 +358,7 @@ module.exports = {
     //   fileName: './.babelrc'
     // },
     {{/if}}
-    
 
-    /* How to resolve external modules - use "yarn-pnp" if you're using yarn's Plug'n'Play.
-       otherwise leave it out (or set to the default, which is 'node_modules')
-    */
-    {{#if externalModuleResolutionStrategy}}
-    externalModuleResolutionStrategy: '{{externalModuleResolutionStrategy}}',
-    {{^}}
-    // externalModuleResolutionStrategy: 'node_modules',
-    {{/if}}
     /* List of strings you have in use in addition to cjs/ es6 requires
        & imports to declare module dependencies. Use this e.g. if you've
        redeclared require, use a require-wrapper or use window.require as

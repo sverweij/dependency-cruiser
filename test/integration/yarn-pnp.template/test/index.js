@@ -1,6 +1,6 @@
 const fs = require('fs');
 
-function runTest(){
+function runTest() {
     let lReturnValue = {
         message: "reading and/ or parsing the result of the integration test failed",
         exitCode: 1
@@ -23,11 +23,6 @@ function runTest(){
 
         if (lDependencyGraph.summary.totalCruised !== 6) {
             lReturnValue.message = `should've cruised 6 modules, but it's ${lDependencyGraph.summary.totalCruised}`;
-            return lReturnValue;
-        }
-
-        if (lDependencyGraph.summary.optionsUsed.externalModuleResolutionStrategy !== "yarn-pnp") {
-            lReturnValue.message = "surprisingly, hasn't run with yarn pnp as resolution strategy";
             return lReturnValue;
         }
 
