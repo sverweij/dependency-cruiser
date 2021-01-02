@@ -16,10 +16,10 @@ function pryStringsFromArguments(pArguments) {
 function pushRequireCallsToDependencies(
   pDependencies,
   pModuleSystem,
-  pExoticRequireStrings
+  pRequireStrings
 ) {
   return (pNode) => {
-    for (let lName of ["require"].concat(pExoticRequireStrings)) {
+    for (let lName of pRequireStrings) {
       if (estreeHelpers.isRequireOfSomeSort(pNode, lName)) {
         const lModuleName = pryStringsFromArguments(pNode.arguments);
         if (lModuleName) {
@@ -50,13 +50,15 @@ module.exports = function extractCommonJSDependencies(
   // require(`./withatemplateliteral`)
   // as well as renamed requires/ require wrappers
   // as passed in pExoticRequireStrings ("need", "window.require")
+  const lRequireStrings = ["require"].concat(pExoticRequireStrings);
+
   walk.simple(
     pAST,
     {
       CallExpression: pushRequireCallsToDependencies(
         pDependencies,
         pModuleSystem,
-        pExoticRequireStrings
+        lRequireStrings
       ),
     },
     // see https://github.com/acornjs/acorn/issues/746

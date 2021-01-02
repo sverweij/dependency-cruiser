@@ -36,8 +36,7 @@ function guessLikelyPath(pBaseDirectory, pFileDirectory, pStrippedModuleName) {
           `${pStrippedModuleName}${pExtension}`
         )
       )
-      .find((pProbablePath) => fileExists(pProbablePath)) ||
-    pStrippedModuleName;
+      .find(fileExists) || pStrippedModuleName;
 
   return lReturnValue;
 }
