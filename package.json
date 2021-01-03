@@ -132,7 +132,7 @@
     "ajv": "7.0.3",
     "chalk": "4.1.0",
     "commander": "6.2.1",
-    "enhanced-resolve": "5.4.1",
+    "enhanced-resolve": "5.1.0",
     "figures": "3.2.0",
     "get-stream": "6.0.0",
     "glob": "7.1.6",
@@ -186,6 +186,10 @@
       {
         "package": "husky",
         "because": "https://github.com/typicode/husky/issues/822"
+      },
+      {
+        "package": "enhanced-resolve",
+        "because": "version 5.1.0 is dramatically faster than any later version"
       }
     ]
   },
