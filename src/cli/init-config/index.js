@@ -5,7 +5,6 @@ const writeConfig = require("./write-config");
 const getUserInput = require("./get-user-input");
 const {
   isLikelyMonoRepo,
-  pnpIsEnabled,
   fileExists,
   hasBabelConfigCandidates,
   getBabelConfigCandidates,
@@ -35,7 +34,6 @@ function getOneshotConfig(pOneShotConfigId) {
     useTsConfig: hasTSConfigCandidates(),
     tsConfig: getTSConfigCandidates().shift(),
     tsPreCompilationDeps: hasTSConfigCandidates(),
-    useYarnPnP: pnpIsEnabled(),
     useWebpackConfig: hasWebpackConfigCandidates(),
     webpackConfig: getWebpackConfigCandidates().shift(),
     useBabelConfig: hasBabelConfigCandidates(),

@@ -351,19 +351,9 @@ used to determine if a package was declared as dependency.
 
 **A**: Yes.
 
-From version 4.14.0 dependency-cruiser supports yarn pnp out of the box -
-just specify it in your dependency-cruiser configuration with the
-_externalModuleResolutionStrategy_ key:
-
-```json
-"externalModuleResolutionStrategy": "yarn-pnp"
-```
-
-> If you use `depcruise --init` to create your configuration file, it will detect
-> your use of yarn-pnp from the package.json and put it in the config for you.
-
-> For earlier versions (up to 4.6.1) you did have to pass a webpack config that
-> that had the pnp resolver plugin configured.
+From version 9.21.3 this works automatically. In earlier versions (from 4.14.0)
+you only needed to `yarn-pnp` into _externalModuleResolutionStrategy_ key in
+the config (--init took care of that), but that's not necessary anymore.
 
 ### Q: dependency-cruiser detected a circular dependency. How can I see (one of the) cycles that dependency-cruiser saw?
 

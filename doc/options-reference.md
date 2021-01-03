@@ -619,11 +619,13 @@ you can provide the parameters like so:
 
 > :shell: there is no command line equivalent for this
 
-If you're using yarn's Plug'n'Play to have external modules resolved and want
-dependency-cruiser to take that into account, set the
-`externalModuleResolutionStrategy` attribute to `yarn-pnp`. The default for this
-attribute is `node_modules` which is the default strategy in the node ecosystem
-as well.
+This options is _deprecated_ as per version 9.21.3; it's not necessary anymore
+as detection now happens automatically (_enhanced_resolve_ supports it out of
+the box.)
+
+> In versions before 9.21.3 you could set it to use yarn's Plug'n'Play to resolve
+> external modules; setting the `externalModuleResolutionStrategy` attribute to
+> `yarn-pnp` would get you set for that - the default was `node_modules`
 
 ### `prefix`: prefix links in reports
 

@@ -1,6 +1,5 @@
 const fs = require("fs");
 const path = require("path");
-const _get = require("lodash/get");
 const _has = require("lodash/has");
 
 const LIKELY_SOURCE_FOLDERS = ["src", "lib", "app", "bin", "sources"];
@@ -33,17 +32,6 @@ function fileExists(pFile) {
     return false;
   }
   return true;
-}
-
-function pnpIsEnabled() {
-  let lReturnValue = false;
-
-  try {
-    lReturnValue = _get(readManifest(), "installConfig.pnp", lReturnValue);
-  } catch (pError) {
-    // silently ignore - we'll return false anyway then
-  }
-  return lReturnValue;
 }
 
 function babelIsConfiguredInManifest() {
@@ -133,7 +121,6 @@ const getMonoRepoPackagesCandidates = getFolderCandidates(
 module.exports = {
   readManifest,
   fileExists,
-  pnpIsEnabled,
   toSourceLocationArray,
   isLikelyMonoRepo,
   hasTestsWithinSource,

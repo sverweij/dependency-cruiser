@@ -127,22 +127,6 @@ describe("cli/init-config/build-config", () => {
       fileName: "./tsconfig.json",
     });
   });
-
-  it("generates a valid config - useYarnPnP", () => {
-    process.chdir("test/cli/fixtures/init-config/no-config-files-exist");
-
-    const lResult = eval(
-      createConfigNormalized({
-        useYarnPnP: true,
-      })
-    );
-
-    expect(lResult).to.be.jsonSchema(configurationSchema);
-    expect(lResult).to.haveOwnProperty("options");
-    expect(lResult.options.externalModuleResolutionStrategy).to.equal(
-      "yarn-pnp"
-    );
-  });
 });
 
 /* yep - doing some interesting things with requires here. Muffle eslint for this: */

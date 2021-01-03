@@ -118,9 +118,9 @@ export interface ICruiseOptions {
   /**
    * The way to resolve external modules - either via node_modules
    * ('node_modules') or yarn plug and play ('yarn-pnp').
-   * Might later also include npm's tink (?)
    *
    * Defaults to 'node_modules'
+   * @deprecated now works automatically
    */
   externalModuleResolutionStrategy?: ExternalModuleResolutionStrategyType;
   /**

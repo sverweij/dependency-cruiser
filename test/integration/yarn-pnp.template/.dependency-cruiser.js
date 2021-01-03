@@ -131,11 +131,6 @@ module.exports = {
         //    , env: {}
         //    , args: {}
         // }
-
-        /* How to resolve external modules - use "yarn-pnp" if you're using yarn's Plug'n'Play.
-           otherwise leave it out (or set to the default, which is 'node_modules')
-        */
-        , externalModuleResolutionStrategy: 'yarn-pnp'
     }
 };
 // generated: dependency-cruiser@4.14.0-beta-4 on 2019-03-04T20:12:32.129Z

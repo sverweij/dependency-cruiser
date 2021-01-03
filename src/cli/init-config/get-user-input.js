@@ -11,7 +11,6 @@ const {
   getMonoRepoPackagesCandidates,
   hasTestsWithinSource,
   isLikelyMonoRepo,
-  pnpIsEnabled,
   toSourceLocationArray,
 } = require("./environment-helpers");
 const { validateLocation } = require("./inquirer-validators");
@@ -67,14 +66,6 @@ const INQUIRER_QUESTIONS = [
     default: getTestFolderCandidates(),
     validate: validateLocation,
     when: (pAnswers) => pAnswers.hasTestsOutsideSource && !pAnswers.isMonoRepo,
-  },
-
-  {
-    name: "useYarnPnP",
-    type: "confirm",
-    message: "You seem to be using yarn Plug'n'Play. Take that into account?",
-    default: true,
-    when: () => pnpIsEnabled(),
   },
   {
     name: "useTsConfig",

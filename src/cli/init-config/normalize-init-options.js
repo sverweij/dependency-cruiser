@@ -40,9 +40,6 @@ module.exports = function normalizeInitOptions(pInitOptions) {
   if (lReturnValue.configType === "preset" && !lReturnValue.preset) {
     lReturnValue.preset = "dependency-cruiser/configs/recommended-warn-only";
   }
-  if (lReturnValue.useYarnPnP) {
-    lReturnValue.externalModuleResolutionStrategy = "yarn-pnp";
-  }
   if (!_has(lReturnValue, "hasTestsOutsideSource")) {
     lReturnValue.hasTestsOutsideSource =
       !pInitOptions.isMonoRepo &&

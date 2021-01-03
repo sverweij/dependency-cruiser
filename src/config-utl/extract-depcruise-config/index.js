@@ -32,16 +32,6 @@ function processExtends(pReturnValue, pAlreadyVisited, pBaseDirectory) {
   return pReturnValue;
 }
 
-function getRunningProcessResolutionStrategy() {
-  // This should work, but doesn't:
-  // process.versions.pnp ? "yarn-pnp" : "node_modules";
-
-  // "yarn-pnp" works both for the pnp and for the node_modules strategies,
-  // and because it's only for the config it won't hamper performance
-  // (should typically be 0 - 2 calls for an entire run)
-  return "yarn-pnp";
-}
-
 /**
  * Reads the file with name `pConfigFileName` returns the parsed cruise
  * options.
@@ -71,9 +61,7 @@ function extractDepcruiseConfig(
       {
         extensions: [".js", ".json"],
       },
-      {
-        externalModuleResolutionStrategy: getRunningProcessResolutionStrategy(),
-      }
+      {}
     ),
     "cli"
   );

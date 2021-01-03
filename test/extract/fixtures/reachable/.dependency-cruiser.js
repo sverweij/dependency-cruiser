@@ -79,15 +79,10 @@ module.exports = {
           for details)
          */
         // , webpackConfig: {
-            // fileName: './webpack.config.js'
-            //, env: {}
-            //, args: {}
+        // fileName: './webpack.config.js'
+        //, env: {}
+        //, args: {}
         // }
-
-        /* How to resolve external modules - use "yarn-pnp" if you're using yarn's Plug'n'Play.
-           otherwise leave it out (or set to the default, which is 'node_modules')
-        */
-        // , externalModuleResolutionStrategy: 'node_modules'
     }
 };
 // generated: dependency-cruiser@4.21.0 on 2019-06-09T09:28:37.777Z

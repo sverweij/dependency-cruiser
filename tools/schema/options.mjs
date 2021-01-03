@@ -121,7 +121,8 @@ export default {
         externalModuleResolutionStrategy: {
           type: "string",
           description:
-            "What external module resolution strategy to use. Defaults to 'node_modules'",
+            "What external module resolution strategy to use. Defaults to 'node_modules' " +
+            "(not used anymore - module resolution strategy determination is automatic now)",
           enum: ["node_modules", "yarn-pnp"],
         },
         webpackConfig: {
