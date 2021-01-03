@@ -78,16 +78,11 @@ function normalizeConfigFile(pOptions, pConfigWrapperName, pDefault) {
     Reflect.deleteProperty(lOptions, pConfigWrapperName);
   }
 
-  if (_get(lOptions, `ruleSet.options.${pConfigWrapperName}`, null)) {
-    if (
-      !_get(lOptions, `ruleSet.options.${pConfigWrapperName}.fileName`, null)
-    ) {
-      _set(
-        lOptions,
-        `ruleSet.options.${pConfigWrapperName}.fileName`,
-        pDefault
-      );
-    }
+  if (
+    _get(lOptions, `ruleSet.options.${pConfigWrapperName}`, null) &&
+    !_get(lOptions, `ruleSet.options.${pConfigWrapperName}.fileName`, null)
+  ) {
+    _set(lOptions, `ruleSet.options.${pConfigWrapperName}.fileName`, pDefault);
   }
 
   return lOptions;
