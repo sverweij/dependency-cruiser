@@ -72,7 +72,7 @@ const INQUIRER_QUESTIONS = [
     type: "confirm",
     message: "Looks like you're using TypeScript. Use a 'tsconfig.json'?",
     default: true,
-    when: hasTSConfigCandidates,
+    when: () => hasTSConfigCandidates(),
   },
   {
     name: "tsConfig",
@@ -93,7 +93,7 @@ const INQUIRER_QUESTIONS = [
     type: "confirm",
     message: "Looks like you're using Babel. Use a babel config?",
     default: true,
-    when: hasBabelConfigCandidates,
+    when: () => hasBabelConfigCandidates(),
   },
   {
     name: "babelConfig",
@@ -107,7 +107,7 @@ const INQUIRER_QUESTIONS = [
     type: "confirm",
     message: "Looks like you're using webpack - specify a webpack config?",
     default: true,
-    when: hasWebpackConfigCandidates,
+    when: () => hasWebpackConfigCandidates(),
   },
   {
     name: "webpackConfig",
