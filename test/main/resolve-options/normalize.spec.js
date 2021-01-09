@@ -14,7 +14,12 @@ describe("main/resolve-options/normalize", () => {
     "tsconfig.test.json"
   );
   const lTsconfigContents = {};
-  const lTsconfigContents_WITH_BASEURL = { options: { baseUrl: "" } };
+  const lTsconfigContentsWithBaseURL = {
+    options: { baseUrl: "" },
+  };
+  const lTsconfigContentsWithBaseURLAndPaths = {
+    options: { baseUrl: "", paths: { "*": ["lalala/*"] } },
+  };
 
   it("comes with a set of defaults when passed with no options at all", () => {
     const lNormalizedOptions = normalizeResolveOptions(
@@ -54,13 +59,34 @@ describe("main/resolve-options/normalize", () => {
     expect(lNormalizedOptions.useSyncFileSystemCalls).to.equal(true);
   });
 
-  it("adds the typescript paths plugin to the plugins if a tsConfig is specified with a baseUrl", () => {
+  it("does not add the typescript paths plugin to the plugins if a tsConfig is specified with a baseUrl and no actual paths", () => {
     const lNormalizedOptions = normalizeResolveOptions(
       {},
       normalizeCruiseOptions({
         ruleSet: { options: { tsConfig: { fileName: TEST_TSCONFIG } } },
       }),
-      lTsconfigContents_WITH_BASEURL
+      lTsconfigContentsWithBaseURL
+    );
+
+    expect(Object.keys(lNormalizedOptions).length).to.equal(
+      lDefaultNoOfResolveOptions
+    );
+    expect(lNormalizedOptions.symlinks).to.equal(false);
+    expect(lNormalizedOptions.tsConfig).to.equal(TEST_TSCONFIG);
+    expect(lNormalizedOptions.combinedDependencies).to.equal(false);
+    expect(lNormalizedOptions).to.ownProperty("extensions");
+    expect(lNormalizedOptions).to.ownProperty("fileSystem");
+    expect((lNormalizedOptions.plugins || []).length).to.equal(0);
+    expect(lNormalizedOptions.useSyncFileSystemCalls).to.equal(true);
+  });
+
+  it("adds the typescript paths plugin to the plugins if a tsConfig is specified with a baseUrl and actual paths", () => {
+    const lNormalizedOptions = normalizeResolveOptions(
+      {},
+      normalizeCruiseOptions({
+        ruleSet: { options: { tsConfig: { fileName: TEST_TSCONFIG } } },
+      }),
+      lTsconfigContentsWithBaseURLAndPaths
     );
 
     expect(Object.keys(lNormalizedOptions).length).to.equal(

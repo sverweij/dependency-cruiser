@@ -3,7 +3,6 @@ const _get = require("lodash/get");
 const _has = require("lodash/has");
 const _omit = require("lodash/omit");
 const enhancedResolve = require("enhanced-resolve");
-const TsConfigPathsPlugin = require("tsconfig-paths-webpack-plugin");
 const transpileMeta = require("../../extract/transpile/meta");
 const {
   ruleSetHasLicenseRule,
@@ -59,6 +58,13 @@ function pushPlugin(pPlugins, pPluginToPush) {
   return (pPlugins || []).concat(pPluginToPush);
 }
 
+function hasTsConfigPaths(pTSConfig) {
+  return (
+    _has(pTSConfig, "options.baseUrl") &&
+    Object.keys(_get(pTSConfig, "options.paths", {})).length > 0
+  );
+}
+
 function compileResolveOptions(
   pResolveOptions,
   pTSConfig,
@@ -72,7 +78,14 @@ function compileResolveOptions(
   // dependency-cruiser disregarding the tsconfig). Hence:
   // only load TsConfigPathsPlugin when an options.baseUrl
   // exists
-  if (pResolveOptions.tsConfig && _has(pTSConfig, "options.baseUrl")) {
+  // Also: there's a performance impact of ~1 ms per resolve even when there
+  // are 0 paths in the tsconfig, so not loading it when not necessary
+  // will be a win.
+  // Also: requiring the plugin only when it's necessary will save some
+  // startup time (especially on a cold require cache)
+  if (pResolveOptions.tsConfig && hasTsConfigPaths(pTSConfig)) {
+    // eslint-disable-next-line node/global-require
+    const TsConfigPathsPlugin = require("tsconfig-paths-webpack-plugin");
     lResolveOptions.plugins = pushPlugin(
       lResolveOptions.plugins,
       new TsConfigPathsPlugin({
