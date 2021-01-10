@@ -14,6 +14,11 @@
 <path fill="#ffffff" stroke="black" stroke-width="2" d="M20,-8C20,-8 708,-8 708,-8 714,-8 720,-14 720,-20 720,-20 720,-920 720,-920 720,-926 714,-932 708,-932 708,-932 20,-932 20,-932 14,-932 8,-926 8,-920 8,-920 8,-20 8,-20 8,-14 14,-8 20,-8"/>
 <text text-anchor="middle" x="364" y="-920.8" font-family="Helvetica,sans-Serif" font-weight="bold" font-size="9.00">src</text>
 </g>
+<g id="clust18" class="cluster">
+<title>cluster_src/utl</title>
+<path fill="#ffffff" stroke="black" stroke-width="2" d="M328,-404C328,-404 374,-404 374,-404 380,-404 386,-410 386,-416 386,-416 386,-444 386,-444 386,-450 380,-456 374,-456 374,-456 328,-456 328,-456 322,-456 316,-450 316,-444 316,-444 316,-416 316,-416 316,-410 322,-404 328,-404"/>
+<text text-anchor="middle" x="351" y="-444.8" font-family="Helvetica,sans-Serif" font-weight="bold" font-size="9.00">utl</text>
+</g>
 <g id="clust2" class="cluster">
 <title>cluster_src/cli</title>
 <path fill="#ffffff" stroke="black" stroke-width="2" d="M28,-258C28,-258 112,-258 112,-258 118,-258 124,-264 124,-270 124,-270 124,-358 124,-358 124,-364 118,-370 112,-370 112,-370 28,-370 28,-370 22,-370 16,-364 16,-358 16,-358 16,-270 16,-270 16,-264 22,-258 28,-258"/>
@@ -93,11 +98,6 @@
 <title>cluster_src/schema</title>
 <path fill="#ffffff" stroke="black" stroke-width="2" d="M429.5,-824C429.5,-824 545.5,-824 545.5,-824 551.5,-824 557.5,-830 557.5,-836 557.5,-836 557.5,-894 557.5,-894 557.5,-900 551.5,-906 545.5,-906 545.5,-906 429.5,-906 429.5,-906 423.5,-906 417.5,-900 417.5,-894 417.5,-894 417.5,-836 417.5,-836 417.5,-830 423.5,-824 429.5,-824"/>
 <text text-anchor="middle" x="487.5" y="-894.8" font-family="Helvetica,sans-Serif" font-weight="bold" font-size="9.00">schema</text>
-</g>
-<g id="clust18" class="cluster">
-<title>cluster_src/utl</title>
-<path fill="#ffffff" stroke="black" stroke-width="2" d="M328,-404C328,-404 374,-404 374,-404 380,-404 386,-410 386,-416 386,-416 386,-444 386,-444 386,-450 380,-456 374,-456 374,-456 328,-456 328,-456 322,-456 316,-450 316,-444 316,-444 316,-416 316,-416 316,-410 322,-404 328,-404"/>
-<text text-anchor="middle" x="351" y="-444.8" font-family="Helvetica,sans-Serif" font-weight="bold" font-size="9.00">utl</text>
 </g>
 <!-- src/cli/format&#45;meta&#45;info.js -->
 <g id="node1" class="node">
