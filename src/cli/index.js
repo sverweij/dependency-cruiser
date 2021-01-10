@@ -8,7 +8,6 @@ const extractBabelConfig = require("../config-utl/extract-babel-config");
 const extractWebpackResolveConfig = require("../config-utl/extract-webpack-resolve-config");
 const validateFileExistence = require("./utl/validate-file-existence");
 const normalizeOptions = require("./normalize-options");
-const initConfig = require("./init-config");
 const io = require("./utl/io");
 const formatMetaInfo = require("./format-meta-info");
 const setUpCliFeedbackListener = require("./listeners/cli-feedback");
@@ -115,6 +114,11 @@ module.exports = function executeCli(pFileDirectoryArray, pCruiseOptions) {
     if (pCruiseOptions.info === true) {
       process.stdout.write(formatMetaInfo());
     } else if (pCruiseOptions.init) {
+      // requiring init-config takes ~100ms (most of it taken up by requiring
+      // inquirer, measured on a 2.6GHz quad core i7 with flash storage on
+      // macOS 10.15.7). Only requiring it when '--init' is necessary speeds up
+      // (the start-up) of cruises by that same amount.
+      const initConfig = require("./init-config");
       initConfig(pCruiseOptions.init);
     } else {
       lExitCode = runCruise(pFileDirectoryArray, pCruiseOptions);
