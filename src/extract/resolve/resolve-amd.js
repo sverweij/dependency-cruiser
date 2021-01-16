@@ -73,7 +73,8 @@ module.exports = function resolveAMD(
     ...resolveHelpers.addLicenseAttribute(
       lModuleName,
       pBaseDirectory,
-      pResolveOptions
+      pResolveOptions,
+      lReturnValue.resolved
     ),
     dependencyTypes: determineDependencyTypes(
       lReturnValue,

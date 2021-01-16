@@ -1,12 +1,25 @@
-const localNpmHelpers = require("./local-npm-helpers");
+const externalModuleHelpers = require("./external-module-helpers");
+const { isExternalModule } = require("./module-classifiers");
 
 module.exports = {
-  addLicenseAttribute(pModuleName, pBaseDirectory, pResolveOptions) {
+  addLicenseAttribute(
+    pModuleName,
+    pResolvedModuleName,
+    { baseDirectory, fileDirectory },
+    pResolveOptions
+  ) {
     let lReturnValue = {};
-    if (pResolveOptions.resolveLicenses) {
-      const lLicense = localNpmHelpers.getLicense(
+    if (
+      pResolveOptions.resolveLicenses &&
+      isExternalModule(
+        pResolvedModuleName,
+        pResolveOptions.modules,
+        baseDirectory
+      )
+    ) {
+      const lLicense = externalModuleHelpers.getLicense(
         pModuleName,
-        pBaseDirectory,
+        fileDirectory,
         pResolveOptions
       );
 

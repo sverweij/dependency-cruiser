@@ -6,7 +6,7 @@ const {
   isExternalModule,
   isAliassy,
 } = require("./module-classifiers");
-const localNpmHelpers = require("./local-npm-helpers");
+const externalModuleHelpers = require("./external-module-helpers");
 
 function dependencyKeyHasModuleName(
   pPackageDependencies,
@@ -98,14 +98,13 @@ function determineNodeModuleDependencyTypes(
   pResolveOptions
 ) {
   let lReturnValue = determineManifestDependencyTypes(
-    localNpmHelpers.getPackageRoot(pModuleName),
+    externalModuleHelpers.getPackageRoot(pModuleName),
     pPackageDeps,
     pResolveOptions.modules
   );
-
   if (
     pResolveOptions.resolveDeprecations &&
-    localNpmHelpers.dependencyIsDeprecated(
+    externalModuleHelpers.dependencyIsDeprecated(
       pModuleName,
       pFileDirectory,
       pResolveOptions
@@ -120,7 +119,7 @@ function determineNodeModuleDependencyTypes(
 }
 
 function determineExternalModuleDependencyTypes(
-  pDependency,
+  pModule,
   pModuleName,
   pPackageDeps,
   pFileDirectory,
@@ -129,9 +128,7 @@ function determineExternalModuleDependencyTypes(
 ) {
   let lReturnValue = [];
 
-  if (
-    isExternalModule(pDependency.resolved, ["node_modules"], pBaseDirectory)
-  ) {
+  if (isExternalModule(pModule.resolved, ["node_modules"], pBaseDirectory)) {
     lReturnValue = determineNodeModuleDependencyTypes(
       pModuleName,
       pPackageDeps,

@@ -22,7 +22,8 @@
             "circular": false,
             "module": "deprecated-at-the-start-for-test-purposes",
             "moduleSystem": "cjs",
-            "valid": true
+            "valid": true,
+            "license": "GPL"
           }
         ],
         "valid": true
