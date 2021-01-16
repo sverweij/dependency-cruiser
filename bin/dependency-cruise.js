@@ -92,8 +92,8 @@ try {
     .arguments("<files-or-directories>")
     .parse(process.argv);
 
-  if (Boolean(program.args[0]) || program.info || program.init) {
-    process.exitCode = cli(program.args, program);
+  if (Boolean(program.args[0]) || program.opts().info || program.opts().init) {
+    process.exitCode = cli(program.args, program.opts());
   } else {
     program.help();
   }

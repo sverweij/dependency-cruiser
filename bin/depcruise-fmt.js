@@ -56,7 +56,7 @@ try {
     .parse(process.argv);
 
   if (program.args[0]) {
-    format(program.args[0], program)
+    format(program.args[0], program.opts())
       .then((pExitCode) => {
         if (program.exitCode) {
           process.exitCode = pExitCode;
