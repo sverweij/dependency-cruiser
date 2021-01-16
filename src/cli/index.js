@@ -118,6 +118,7 @@ module.exports = function executeCli(pFileDirectoryArray, pCruiseOptions) {
       // inquirer, measured on a 2.6GHz quad core i7 with flash storage on
       // macOS 10.15.7). Only requiring it when '--init' is necessary speeds up
       // (the start-up) of cruises by that same amount.
+      // eslint-disable-next-line node/global-require
       const initConfig = require("./init-config");
       initConfig(pCruiseOptions.init);
     } else {

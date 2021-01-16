@@ -45,6 +45,11 @@ module.exports = function resolveCommonJS(
   pResolveOptions
 ) {
   const lModuleName = resolveHelpers.stripToModuleName(pRawModuleName);
+  const lManifest = getManifest(
+    pFileDirectory,
+    pBaseDirectory,
+    pResolveOptions.combinedDependencies
+  );
 
   let lReturnValue = {
     resolved: lModuleName,
@@ -65,16 +70,13 @@ module.exports = function resolveCommonJS(
     ...resolveHelpers.addLicenseAttribute(
       lModuleName,
       pBaseDirectory,
-      pResolveOptions
+      pResolveOptions,
+      lReturnValue.resolved
     ),
     dependencyTypes: determineDependencyTypes(
       lReturnValue,
       lModuleName,
-      getManifest(
-        pFileDirectory,
-        pBaseDirectory,
-        pResolveOptions.combinedDependencies
-      ),
+      lManifest,
       pFileDirectory,
       pResolveOptions,
       pBaseDirectory

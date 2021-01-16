@@ -6,7 +6,7 @@ const resolve = require("./resolve");
 const {
   isScoped,
   isRelativeModuleName,
-  isCore,
+  isExternalModule,
 } = require("./module-classifiers");
 
 /**
@@ -73,13 +73,24 @@ function getPackageRoot(pModule) {
  * @param  {string} pModule  The module to get the package.json of
  * @param  {string} pBaseDirectory The base dir. Defaults to '.'
  * @param  {any} pResolveOptions options for the resolver
- * @return {object}          The package.json as a javascript object, or
+ * @return {Record<string, any>} The package.json as a javascript object, or
  *                           null if either module or package.json could
  *                           not be found
  */
-function bareGetPackageJson(pModule, pBaseDirectory, pResolveOptions) {
+function bareGetPackageJson(
+  pModule,
+  pBaseDirectory,
+  pResolveOptions,
+  pResolvedModuleName
+) {
   let lReturnValue = null;
-  if (!isRelativeModuleName(pModule) && !isCore(pModule)) {
+  if (
+    isExternalModule(
+      pResolvedModuleName,
+      pResolveOptions.modules,
+      pBaseDirectory
+    )
+  ) {
     try {
       let lPackageJsonFilename = resolve(
         path.join(getPackageRoot(pModule), "package.json"),
@@ -113,7 +124,8 @@ function bareGetPackageJson(pModule, pBaseDirectory, pResolveOptions) {
 
 const getPackageJson = _memoize(
   bareGetPackageJson,
-  (pModule, pBaseDirectory) => `${pBaseDirectory}|${pModule}`
+  (_pModuleName, _pBaseDirectory, _pResolveOptions, pResolvedModuleName) =>
+    pResolvedModuleName
 );
 
 /**
@@ -124,9 +136,19 @@ const getPackageJson = _memoize(
  * @param  {any} pResolveOptions options for the resolver
  * @return {boolean}         true if deprecated, false in all other cases
  */
-function dependencyIsDeprecated(pModule, pBaseDirectory, pResolveOptions) {
+function dependencyIsDeprecated(
+  pModule,
+  pBaseDirectory,
+  pResolveOptions,
+  pResolvedModuleName
+) {
   let lReturnValue = false;
-  let lPackageJson = getPackageJson(pModule, pBaseDirectory, pResolveOptions);
+  let lPackageJson = getPackageJson(
+    pModule,
+    pBaseDirectory,
+    pResolveOptions,
+    pResolvedModuleName
+  );
 
   if (Boolean(lPackageJson)) {
     lReturnValue = _has(lPackageJson, "deprecated") && lPackageJson.deprecated;
@@ -143,9 +165,19 @@ function dependencyIsDeprecated(pModule, pBaseDirectory, pResolveOptions) {
  * @return {string}          The module's license string, or '' in case
  *                           there is no package.json or no license field
  */
-function getLicense(pModule, pBaseDirectory, pResolveOptions) {
+function getLicense(
+  pModule,
+  pBaseDirectory,
+  pResolveOptions,
+  pResolvedModuleName
+) {
   let lReturnValue = "";
-  let lPackageJson = getPackageJson(pModule, pBaseDirectory, pResolveOptions);
+  let lPackageJson = getPackageJson(
+    pModule,
+    pBaseDirectory,
+    pResolveOptions,
+    pResolvedModuleName
+  );
 
   if (
     Boolean(lPackageJson) &&
