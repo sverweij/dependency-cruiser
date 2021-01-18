@@ -1,5 +1,7 @@
 const path = require("path").posix;
+const omit = require("lodash/omit");
 const { expect } = require("chai");
+const pathToPosix = require("../../src/extract/utl/path-to-posix");
 const extractBabelConfig = require("../../src/config-utl/extract-babel-config");
 
 const DEFAULT_EMPTY_BABEL_OPTIONS_OBJECT = {
@@ -47,11 +49,16 @@ describe("config-utl/parseBabelConfig", () => {
   });
 
   it("returns a default options object when an empty config file is passed", () => {
-    expect(
-      extractBabelConfig(
-        path.join(__dirname, "./fixtures/babelconfig/babelrc.empty.json")
-      )
-    ).to.deep.equal(DEFAULT_EMPTY_BABEL_OPTIONS_OBJECT);
+    const lBabelConfig = extractBabelConfig(
+      path.join(__dirname, "./fixtures/babelconfig/babelrc.empty.json")
+    );
+    expect(lBabelConfig).to.have.property("filename");
+    expect(pathToPosix(lBabelConfig.filename)).to.contain(
+      "/fixtures/babelconfig/babelrc.empty.json"
+    );
+    expect(omit(lBabelConfig, "filename")).to.deep.equal(
+      DEFAULT_EMPTY_BABEL_OPTIONS_OBJECT
+    );
   });
 
   it("reads the 'babel' key when a package.json is passed", () => {
@@ -63,14 +70,19 @@ describe("config-utl/parseBabelConfig", () => {
   });
 
   it("returns an empty (/ default) options object when package.json without a babel key is passed", () => {
-    expect(
-      extractBabelConfig(
-        path.join(
-          __dirname,
-          "./fixtures/babelconfig/no-babel-config-in-this-package.json"
-        )
+    const lBabelConfig = extractBabelConfig(
+      path.join(
+        __dirname,
+        "./fixtures/babelconfig/no-babel-config-in-this-package.json"
       )
-    ).to.deep.equal(DEFAULT_EMPTY_BABEL_OPTIONS_OBJECT);
+    );
+    expect(lBabelConfig).to.have.property("filename");
+    expect(pathToPosix(lBabelConfig.filename)).to.contain(
+      "/fixtures/babelconfig/no-babel-config-in-this-package.json"
+    );
+    expect(omit(lBabelConfig, "filename")).to.deep.equal(
+      DEFAULT_EMPTY_BABEL_OPTIONS_OBJECT
+    );
   });
 
   it("returns a babel config when a javascript file with a regular object export is passed", () => {

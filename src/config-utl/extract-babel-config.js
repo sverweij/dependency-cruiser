@@ -91,7 +91,14 @@ module.exports = function extractBabelConfig(pBabelConfigFileName) {
 
   /* istanbul ignore else */
   if (babel) {
-    lReturnValue = babel.loadOptions(getConfig(pBabelConfigFileName));
+    const lConfig = {
+      ...getConfig(pBabelConfigFileName),
+      // under some circumstances babel really likes to have a filename to
+      // go with the config we pass it - so we pass it
+      filename: pBabelConfigFileName,
+    };
+
+    lReturnValue = babel.loadOptions(lConfig);
   }
 
   return lReturnValue;
