@@ -90,6 +90,7 @@ describe("extract/resolve/externalModuleHelpers.getPackageJson", () => {
 
 describe("extract/resolve/externalModuleHelpers.getPackageRoot", () => {
   it("returns undefined if called without parameters", () => {
+    //  deepcode ignore MissingArgument: we're testing exactly this behavior
     expect(typeof externalModuleHelpers.getPackageRoot()).to.equal("undefined");
   });
 
@@ -136,8 +137,7 @@ describe("extract/resolve/externalModuleHelpers.getLicense", () => {
       externalModuleHelpers.getLicense(
         "this-module-does-not-exist",
         ".",
-        BASIC_RESOLVE_OPTIONS,
-        "this-module-does-not-exist"
+        BASIC_RESOLVE_OPTIONS
       )
     ).to.equal("");
   });
@@ -147,8 +147,7 @@ describe("extract/resolve/externalModuleHelpers.getLicense", () => {
       externalModuleHelpers.getLicense(
         "./test/extract/resolve/fixtures/no-package-json",
         ".",
-        BASIC_RESOLVE_OPTIONS,
-        "index.js"
+        BASIC_RESOLVE_OPTIONS
       )
     ).to.equal("");
   });
@@ -158,8 +157,7 @@ describe("extract/resolve/externalModuleHelpers.getLicense", () => {
       externalModuleHelpers.getLicense(
         "no-license",
         "./test/extract/resolve/fixtures/licenses/",
-        BASIC_RESOLVE_OPTIONS,
-        "node_modules/no-license/index.js"
+        BASIC_RESOLVE_OPTIONS
       )
     ).to.equal("");
   });
@@ -169,8 +167,7 @@ describe("extract/resolve/externalModuleHelpers.getLicense", () => {
       externalModuleHelpers.getLicense(
         "boolean-license",
         "./test/extract/resolve/fixtures/licenses/",
-        BASIC_RESOLVE_OPTIONS,
-        "node_modules/boolean-license/index.js"
+        BASIC_RESOLVE_OPTIONS
       )
     ).to.equal("");
   });
@@ -180,8 +177,7 @@ describe("extract/resolve/externalModuleHelpers.getLicense", () => {
       externalModuleHelpers.getLicense(
         "object-license",
         "./test/extract/resolve/fixtures/licenses/",
-        BASIC_RESOLVE_OPTIONS,
-        "node_modules/object-license/index.js"
+        BASIC_RESOLVE_OPTIONS
       )
     ).to.equal("");
   });
@@ -191,8 +187,7 @@ describe("extract/resolve/externalModuleHelpers.getLicense", () => {
       externalModuleHelpers.getLicense(
         "array-licenses",
         "./test/extract/resolve/fixtures/licenses/",
-        BASIC_RESOLVE_OPTIONS,
-        "node_modules/array-licenses/index.js"
+        BASIC_RESOLVE_OPTIONS
       )
     ).to.equal("");
   });
@@ -202,8 +197,7 @@ describe("extract/resolve/externalModuleHelpers.getLicense", () => {
       externalModuleHelpers.getLicense(
         "GPL-license",
         "./test/extract/resolve/fixtures/licenses/",
-        BASIC_RESOLVE_OPTIONS,
-        "node_modules/GPL-license/index.js"
+        BASIC_RESOLVE_OPTIONS
       )
     ).to.equal("GPL-3.0");
   });
@@ -215,8 +209,7 @@ describe("extract/resolve/externalModuleHelpers.dependencyIsDeprecated", () => {
       externalModuleHelpers.dependencyIsDeprecated(
         "this-module-does-not-exist",
         ".",
-        BASIC_RESOLVE_OPTIONS,
-        "this-module-does-not-exist"
+        BASIC_RESOLVE_OPTIONS
       )
     ).to.equal(false);
   });
