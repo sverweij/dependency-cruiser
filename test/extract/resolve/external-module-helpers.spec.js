@@ -24,8 +24,7 @@ describe("extract/resolve/externalModuleHelpers.getPackageJson", () => {
       externalModuleHelpers.getPackageJson(
         "./module-does-not-exist",
         process.cwd(),
-        BASIC_RESOLVE_OPTIONS,
-        "./module-does-not-exist"
+        BASIC_RESOLVE_OPTIONS
       )
     ).to.be.null;
   });
@@ -35,8 +34,7 @@ describe("extract/resolve/externalModuleHelpers.getPackageJson", () => {
       externalModuleHelpers.getPackageJson(
         "test/extract/fixtures/deprecated-node-module/require-something-deprecated",
         process.cwd(),
-        BASIC_RESOLVE_OPTIONS,
-        "test/extract/fixtures/deprecated-node-module/require-something-deprecated"
+        BASIC_RESOLVE_OPTIONS
       )
     ).to.be.null;
   });
@@ -55,8 +53,7 @@ describe("extract/resolve/externalModuleHelpers.getPackageJson", () => {
     let lPackageJson = externalModuleHelpers.getPackageJson(
       "chai",
       process.cwd(),
-      BASIC_RESOLVE_OPTIONS,
-      "node_modules/chai/index.js"
+      BASIC_RESOLVE_OPTIONS
     );
 
     expect(lPackageJson).to.be.not.null;
@@ -68,8 +65,7 @@ describe("extract/resolve/externalModuleHelpers.getPackageJson", () => {
     let lPackageJson = externalModuleHelpers.getPackageJson(
       "deprecated-at-the-start-for-test-purposes",
       "./test/main/fixtures/cruise-reporterless/deprecated-node-module/",
-      BASIC_RESOLVE_OPTIONS,
-      "node_modules/deprecated-at-the-start-for-test-purposes/index.js"
+      BASIC_RESOLVE_OPTIONS
     );
 
     expect(lPackageJson).to.be.not.null;
@@ -83,8 +79,7 @@ describe("extract/resolve/externalModuleHelpers.getPackageJson", () => {
     let lPackageJson = externalModuleHelpers.getPackageJson(
       "testinga-two",
       "./test/extract/resolve/fixtures/unreadable-package-json-because-not-exported",
-      RESOLVE_OPTIONS_HEEDING_EXPORTS,
-      "node_modules/testinga-two"
+      RESOLVE_OPTIONS_HEEDING_EXPORTS
     );
 
     expect(lPackageJson).to.be.not.null;
