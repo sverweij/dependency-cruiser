@@ -3,11 +3,7 @@ const path = require("path");
 const _memoize = require("lodash/memoize");
 const _has = require("lodash/has");
 const resolve = require("./resolve");
-const {
-  isScoped,
-  isRelativeModuleName,
-  isCore,
-} = require("./module-classifiers");
+const { isScoped, isRelativeModuleName } = require("./module-classifiers");
 
 /**
  * Returns the 'root' of the package - the spot where we can probably find
@@ -70,63 +66,66 @@ function getPackageRoot(pModule) {
  * will have a different base dir, and will hence resolve either to the
  * wrong package or not to a package at all.
  *
- * @param  {string} pModule  The module to get the package.json of
- * @param  {string} pBaseDirectory The base dir. Defaults to '.'
+ * @param  {string} pModuleName  The name of the module to get the package.json of
+ * @param  {string} pFileDirectory The folder the module resides in. Defaults to the current working directory
  * @param  {any} pResolveOptions options for the resolver
- * @return {object}          The package.json as a javascript object, or
+ * @return {Record<string, any>} The package.json as a javascript object, or
  *                           null if either module or package.json could
  *                           not be found
  */
-function bareGetPackageJson(pModule, pBaseDirectory, pResolveOptions) {
+function bareGetPackageJson(pModuleName, pFileDirectory, pResolveOptions) {
   let lReturnValue = null;
-  if (!isRelativeModuleName(pModule) && !isCore(pModule)) {
-    try {
-      let lPackageJsonFilename = resolve(
-        path.join(getPackageRoot(pModule), "package.json"),
-        pBaseDirectory ? pBaseDirectory : process.cwd(),
-        {
-          ...pResolveOptions,
-          // if a module has exports fields _and_ does not expose package.json
-          // in those exports, enhanced-resolve (nor node!) will not be able to
-          // resolve the package.json if it actually heeds those exports fields.
-          // We can instruct enhanced-resolve to ignore them, however, by passing
-          // it the empty array for exports fields (overriding anything in
-          // the pResvolveOptions)
-          exportsFields: [],
-          // we don't need to try any extensions; we already
-          // know it as we have passed the complete module name to resolve =>
-          // override whatever the default is with [""] ('use no extensions please')
-          extensions: [""],
-        },
-        // we need a separate caching context so as not to **** up the regular
-        // cruise, which might actually want to utilize the exportsFields
-        // and an array of extensions
-        "manifest-resolution"
-      );
-      lReturnValue = JSON.parse(fs.readFileSync(lPackageJsonFilename, "utf8"));
-    } catch (pError) {
-      // left empty on purpose
-    }
+
+  try {
+    const lPackageJsonFilename = resolve(
+      path.join(getPackageRoot(pModuleName), "package.json"),
+      pFileDirectory ? pFileDirectory : process.cwd(),
+      {
+        ...pResolveOptions,
+        // if a module has exports fields _and_ does not expose package.json
+        // in those exports, enhanced-resolve (nor node!) will not be able to
+        // resolve the package.json if it actually heeds those exports fields.
+        // We can instruct enhanced-resolve to ignore them, however, by passing
+        // it the empty array for exports fields (overriding anything in
+        // the pResvolveOptions)
+        exportsFields: [],
+        // we don't need to try any extensions; we already
+        // know it as we have passed the complete module name to resolve =>
+        // override whatever the default is with [""] ('use no extensions please')
+        extensions: [""],
+      },
+      // we need a separate caching context so as not to **** up the regular
+      // cruise, which might actually want to utilize the exportsFields
+      // and an array of extensions
+      "manifest-resolution"
+    );
+    lReturnValue = JSON.parse(fs.readFileSync(lPackageJsonFilename, "utf8"));
+  } catch (pError) {
+    // left empty on purpose
   }
   return lReturnValue;
 }
 
 const getPackageJson = _memoize(
   bareGetPackageJson,
-  (pModule, pBaseDirectory) => `${pBaseDirectory}|${pModule}`
+  (pModuleName, pBaseDirectory) => `${pBaseDirectory}|${pModuleName}`
 );
 
 /**
  * Tells whether the pModule as resolved to pBaseDirectory is deprecated
  *
- * @param  {string} pModule  The module to get the deprecation status of
- * @param  {string} pBaseDirectory The base dir. Defaults to '.'
+ * @param  {string} pModuleName  The name of the module to get the deprecation status of
+ * @param  {string} pFileDirectory The folder the module resides in.
  * @param  {any} pResolveOptions options for the resolver
- * @return {boolean}         true if deprecated, false in all other cases
+ * @return {boolean}         true when deprecated, false in all other cases
  */
-function dependencyIsDeprecated(pModule, pBaseDirectory, pResolveOptions) {
+function dependencyIsDeprecated(pModuleName, pFileDirectory, pResolveOptions) {
   let lReturnValue = false;
-  let lPackageJson = getPackageJson(pModule, pBaseDirectory, pResolveOptions);
+  let lPackageJson = getPackageJson(
+    pModuleName,
+    pFileDirectory,
+    pResolveOptions
+  );
 
   if (Boolean(lPackageJson)) {
     lReturnValue = _has(lPackageJson, "deprecated") && lPackageJson.deprecated;
@@ -137,15 +136,19 @@ function dependencyIsDeprecated(pModule, pBaseDirectory, pResolveOptions) {
 /**
  * Returns the license of pModule as resolved to pBaseDirectory - if any
  *
- * @param  {string} pModule  The module to get the license of
- * @param  {string} pBaseDirectory The base dir. Defaults to '.'
+ * @param  {string} pModuleName  The name of the module to get the license of
+ * @param  {string} pFileDirectory The folder the module resides in.
  * @param  {any} pResolveOptions options for the resolver
  * @return {string}          The module's license string, or '' in case
  *                           there is no package.json or no license field
  */
-function getLicense(pModule, pBaseDirectory, pResolveOptions) {
+function getLicense(pModuleName, pFileDirectory, pResolveOptions) {
   let lReturnValue = "";
-  let lPackageJson = getPackageJson(pModule, pBaseDirectory, pResolveOptions);
+  let lPackageJson = getPackageJson(
+    pModuleName,
+    pFileDirectory,
+    pResolveOptions
+  );
 
   if (
     Boolean(lPackageJson) &&

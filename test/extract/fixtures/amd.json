@@ -209,7 +209,6 @@
         "coreModule": false,
         "dependencyTypes": ["unknown"],
         "dynamic": false,
-        "license": "MIT",
         "followable": false,
         "exoticallyRequired": false,
         "matchesDoNotFollow": false,
