@@ -42,7 +42,7 @@ function getASTFromSource(pSource, pExtension, pTranspileOptions) {
  * @param {string} pFileName      path to the file to be parsed
  * @param {any} pTranspileOptions options for the transpiler(s) - a tsconfig or
  *                                a babel config
- * @returns {object}              the abstract syntax tree
+ * @returns {any}              the abstract syntax tree
  */
 function getAST(pFileName, pTranspileOptions) {
   return getASTFromSource(
@@ -70,7 +70,8 @@ module.exports = {
    * return the result from a cache.
    *
    * @param {string} pFileName - the name of the file to compile
-   * @return {object} - a (typescript) AST
+   * @param {any} pTranspileOptions - options for the transpiler(s) - typically a tsconfig or a babel config
+   * @return {any} - a (typescript) AST
    */
   getASTCached,
 

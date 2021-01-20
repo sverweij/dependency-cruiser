@@ -10,11 +10,6 @@
 
     /* Module Resolution Options */
     "baseUrl": "./src",
-    "paths": {
-      "*": ["./typos/*"],
-      "gewoon/*": ["./common/*"],
-      "shared": ["./shared"]
-    },
     "esModuleInterop": true
   }
 }
