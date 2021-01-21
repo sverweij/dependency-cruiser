@@ -11,8 +11,7 @@ const meta = require("./meta");
  *      for supported versions of transpilers
  * @see [meta.js](meta.js) for the extension -> transpiler mapping
  *
- * @param  {string} pExtension    extension of the file to transpile
- * @param  {string} pSource       the contents of the file to transpile
+ * @param  {any} pFileRecord      Record with source code, an extension and a filename
  * @param  {any} pTranspilerOptions (optional) object with options influencing
  *                                the underlying transpiler behavior.
  * @return {string}               the transpiled version of the file (or the file
