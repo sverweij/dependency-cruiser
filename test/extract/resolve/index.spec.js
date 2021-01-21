@@ -335,6 +335,40 @@ describe("extract/resolve/index", () => {
     });
   });
 
+  it("considers a typescript config - no paths, no aliases, resolves relative to baseUrl", () => {
+    const TSCONFIG_NO_PATHS = path.join(
+      __dirname,
+      "fixtures",
+      "ts-config-with-path",
+      "tsconfig-no-paths.json"
+    );
+    const PARSED_TSCONFIG_NO_PATHS = extractTSConfig(TSCONFIG_NO_PATHS);
+    expect(
+      resolve(
+        {
+          module: "common/wood/tree",
+          moduleSystem: "es6",
+        },
+        path.join(__dirname, "fixtures"),
+        path.join(__dirname, "fixtures", "ts-config-with-path", "src", "typos"),
+        normalizeResolveOptions(
+          {
+            tsConfig: TSCONFIG_NO_PATHS,
+            bustTheCache: true,
+          },
+          {},
+          PARSED_TSCONFIG_NO_PATHS
+        )
+      )
+    ).to.deep.equal({
+      coreModule: false,
+      couldNotResolve: false,
+      dependencyTypes: ["aliased"],
+      followable: true,
+      resolved: "ts-config-with-path/src/common/wood/tree.ts",
+    });
+  });
+
   it("for aliasses resolves in the same fashion as the typescript compiler - dts-vs-ts", () => {
     expect(
       resolve(

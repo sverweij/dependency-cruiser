@@ -58,11 +58,8 @@ function pushPlugin(pPlugins, pPluginToPush) {
   return (pPlugins || []).concat(pPluginToPush);
 }
 
-function hasTsConfigPaths(pTSConfig) {
-  return (
-    _has(pTSConfig, "options.baseUrl") &&
-    Object.keys(_get(pTSConfig, "options.paths", {})).length > 0
-  );
+function isTsConfigPathsEligible(pTSConfig) {
+  return _has(pTSConfig, "options.baseUrl");
 }
 
 function compileResolveOptions(
@@ -83,7 +80,7 @@ function compileResolveOptions(
   // will be a win.
   // Also: requiring the plugin only when it's necessary will save some
   // startup time (especially on a cold require cache)
-  if (pResolveOptions.tsConfig && hasTsConfigPaths(pTSConfig)) {
+  if (pResolveOptions.tsConfig && isTsConfigPathsEligible(pTSConfig)) {
     // eslint-disable-next-line node/global-require
     const TsConfigPathsPlugin = require("tsconfig-paths-webpack-plugin");
     lResolveOptions.plugins = pushPlugin(

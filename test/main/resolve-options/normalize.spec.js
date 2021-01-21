@@ -14,9 +14,6 @@ describe("main/resolve-options/normalize", () => {
     "tsconfig.test.json"
   );
   const lTsconfigContents = {};
-  const lTsconfigContentsWithBaseURL = {
-    options: { baseUrl: "" },
-  };
   const lTsconfigContentsWithBaseURLAndPaths = {
     options: { baseUrl: "", paths: { "*": ["lalala/*"] } },
   };
@@ -45,27 +42,6 @@ describe("main/resolve-options/normalize", () => {
         ruleSet: { options: { tsConfig: { fileName: TEST_TSCONFIG } } },
       }),
       lTsconfigContents
-    );
-
-    expect(Object.keys(lNormalizedOptions).length).to.equal(
-      lDefaultNoOfResolveOptions
-    );
-    expect(lNormalizedOptions.symlinks).to.equal(false);
-    expect(lNormalizedOptions.tsConfig).to.equal(TEST_TSCONFIG);
-    expect(lNormalizedOptions.combinedDependencies).to.equal(false);
-    expect(lNormalizedOptions).to.ownProperty("extensions");
-    expect(lNormalizedOptions).to.ownProperty("fileSystem");
-    expect((lNormalizedOptions.plugins || []).length).to.equal(0);
-    expect(lNormalizedOptions.useSyncFileSystemCalls).to.equal(true);
-  });
-
-  it("does not add the typescript paths plugin to the plugins if a tsConfig is specified with a baseUrl and no actual paths", () => {
-    const lNormalizedOptions = normalizeResolveOptions(
-      {},
-      normalizeCruiseOptions({
-        ruleSet: { options: { tsConfig: { fileName: TEST_TSCONFIG } } },
-      }),
-      lTsconfigContentsWithBaseURL
     );
 
     expect(Object.keys(lNormalizedOptions).length).to.equal(
