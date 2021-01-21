@@ -38,7 +38,11 @@ describe("extract/transpile/babel-wrap", () => {
       },
     };
     const lOutput = normalizeSource(
-      wrap.transpile(lInputFileContents, lBabelOptions)
+      wrap.transpile(
+        lInputFileContents,
+        "/test/extract/transpile/fixtures/babel-in.js",
+        lBabelOptions
+      )
     );
     const lExpected = fs.readFileSync(
       "./test/extract/transpile/fixtures/babel-out-es-old.js",

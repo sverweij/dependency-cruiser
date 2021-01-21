@@ -9,7 +9,7 @@ const extractAMD = (
   pExoticRequireStrings = []
 ) =>
   extractAMDDeps(
-    getASTFromSource(pJavaScriptSource, "js"),
+    getASTFromSource({ source: pJavaScriptSource, extension: ".js" }),
     pDependencies,
     pExoticRequireStrings
   );

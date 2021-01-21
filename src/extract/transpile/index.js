@@ -19,12 +19,15 @@ const meta = require("./meta");
  *                                itself when the function could not find a
  *                                transpiler matching pExtension
  */
-module.exports = function transpile(pExtension, pSource, pTranspilerOptions) {
-  const lWrapper = meta.getWrapper(pExtension, pTranspilerOptions);
+module.exports = function transpile(
+  { extension, source, filename },
+  pTranspilerOptions
+) {
+  const lWrapper = meta.getWrapper(extension, pTranspilerOptions);
 
   if (lWrapper.isAvailable()) {
-    return lWrapper.transpile(pSource, pTranspilerOptions);
+    return lWrapper.transpile(source, filename, pTranspilerOptions);
   } else {
-    return pSource;
+    return source;
   }
 };

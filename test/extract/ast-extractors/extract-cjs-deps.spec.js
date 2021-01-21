@@ -9,7 +9,7 @@ const extractcommonJS = (
   pExoticRequireStrings = []
 ) =>
   extractcommonJSDeps(
-    getASTFromSource(pJavaScriptSource, "js"),
+    getASTFromSource({ source: pJavaScriptSource, extension: ".js" }),
     pDependencies,
     "cjs",
     pExoticRequireStrings

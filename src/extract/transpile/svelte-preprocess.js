@@ -53,6 +53,7 @@ function getSourceReplacer(pTranspiler, pTranspilerOptions) {
     if (lParsedAttributes.lang === "ts") {
       return `<script${lAttributes}>${pTranspiler(
         pSource,
+        "dummy-filename",
         composeTranspilerOptions(pTranspilerOptions)
       )}</script>`;
     } else {

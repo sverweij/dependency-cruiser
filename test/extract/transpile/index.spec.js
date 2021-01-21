@@ -6,9 +6,18 @@ const normalizeSource = require("../normalize-source.utl");
 
 describe("transpiler", () => {
   it("As the 'livescript' transpiler is not available, returns the original source", () => {
-    expect(transpile(".ls", "whatever the bever")).to.equal(
-      "whatever the bever"
-    );
+    expect(
+      transpile({ extension: ".ls", source: "whatever the bever" })
+    ).to.equal("whatever the bever");
+  });
+
+  it("As the 'bf-script' transpiler is not supported at all, returns the original source", () => {
+    expect(
+      transpile({
+        extension: ".bfs",
+        source: "'brane-fuchs-skrybd'|#$'nicht unterstutzt'|^^^",
+      })
+    ).to.equal("'brane-fuchs-skrybd'|#$'nicht unterstutzt'|^^^");
   });
 
   it("Returns svelte compiled down to js", () => {
@@ -20,9 +29,9 @@ describe("transpiler", () => {
       fs.readFileSync(path.join(__dirname, "fixtures", "svelte.js"), "utf8")
     );
 
-    expect(normalizeSource(transpile(".svelte", lInput))).to.equal(
-      lExpectedOoutput
-    );
+    expect(
+      normalizeSource(transpile({ extension: ".svelte", source: lInput }))
+    ).to.equal(lExpectedOoutput);
   });
 
   it("Does not confuse .ts for .tsx", () => {
@@ -41,9 +50,9 @@ describe("transpiler", () => {
       "utf8"
     );
 
-    expect(normalizeSource(transpile(".ts", lInputFixture))).to.equal(
-      normalizeSource(lTranspiledFixture)
-    );
+    expect(
+      normalizeSource(transpile({ extension: ".ts", source: lInputFixture }))
+    ).to.equal(normalizeSource(lTranspiledFixture));
   });
 
   it("Takes a tsconfig and takes that into account on transpilation", () => {
@@ -72,7 +81,12 @@ describe("transpiler", () => {
       types: ["foo", "bar", "baz"],
     };
     expect(
-      normalizeSource(transpile(".ts", lInputFixture, lTranspilerOptions))
+      normalizeSource(
+        transpile(
+          { extension: ".ts", source: lInputFixture },
+          lTranspilerOptions
+        )
+      )
     ).to.equal(lTranspiledFixture);
   });
 });

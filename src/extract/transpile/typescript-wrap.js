@@ -23,7 +23,7 @@ module.exports = function typescriptWrap(pTsx) {
   return {
     isAvailable: () => typescript !== false,
 
-    transpile: (pSource, pTranspileOptions = {}) =>
+    transpile: (pSource, _pFileName, pTranspileOptions = {}) =>
       typescript.transpileModule(pSource, {
         ...(pTranspileOptions.tsConfig || {}),
         compilerOptions: getCompilerOptions(
