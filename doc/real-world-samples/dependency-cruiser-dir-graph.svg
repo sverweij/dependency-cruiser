@@ -29,16 +29,6 @@
 <path fill="#ffffff" stroke="black" stroke-width="2" d="M763,-201.8C763,-201.8 886,-201.8 886,-201.8 892,-201.8 898,-207.8 898,-213.8 898,-213.8 898,-241.8 898,-241.8 898,-247.8 892,-253.8 886,-253.8 886,-253.8 763,-253.8 763,-253.8 757,-253.8 751,-247.8 751,-241.8 751,-241.8 751,-213.8 751,-213.8 751,-207.8 757,-201.8 763,-201.8"/>
 <text text-anchor="middle" x="824.5" y="-242.6" font-family="Helvetica,sans-Serif" font-weight="bold" font-size="9.00">config&#45;utl</text>
 </g>
-<g id="clust7" class="cluster">
-<title>cluster_src/extract</title>
-<path fill="#ffffff" stroke="black" stroke-width="2" d="M830,-50C830,-50 1094,-50 1094,-50 1100,-50 1106,-56 1106,-62 1106,-62 1106,-173.8 1106,-173.8 1106,-179.8 1100,-185.8 1094,-185.8 1094,-185.8 830,-185.8 830,-185.8 824,-185.8 818,-179.8 818,-173.8 818,-173.8 818,-62 818,-62 818,-56 824,-50 830,-50"/>
-<text text-anchor="middle" x="962" y="-174.6" font-family="Helvetica,sans-Serif" font-weight="bold" font-size="9.00">extract</text>
-</g>
-<g id="clust8" class="cluster">
-<title>cluster_src/extract/resolve</title>
-<path fill="#ffffff" stroke="black" stroke-width="2" d="M1026,-58C1026,-58 1086,-58 1086,-58 1092,-58 1098,-64 1098,-70 1098,-70 1098,-121.8 1098,-121.8 1098,-127.8 1092,-133.8 1086,-133.8 1086,-133.8 1026,-133.8 1026,-133.8 1020,-133.8 1014,-127.8 1014,-121.8 1014,-121.8 1014,-70 1014,-70 1014,-64 1020,-58 1026,-58"/>
-<text text-anchor="middle" x="1056" y="-122.6" font-family="Helvetica,sans-Serif" font-weight="bold" font-size="9.00">resolve</text>
-</g>
 <g id="clust5" class="cluster">
 <title>cluster_src/enrich</title>
 <path fill="#ffffff" stroke="black" stroke-width="2" d="M476,-57.2C476,-57.2 750,-57.2 750,-57.2 756,-57.2 762,-63.2 762,-69.2 762,-69.2 762,-173.8 762,-173.8 762,-179.8 756,-185.8 750,-185.8 750,-185.8 476,-185.8 476,-185.8 470,-185.8 464,-179.8 464,-173.8 464,-173.8 464,-69.2 464,-69.2 464,-63.2 470,-57.2 476,-57.2"/>
@@ -48,6 +38,16 @@
 <title>cluster_src/enrich/derive</title>
 <path fill="#ffffff" stroke="black" stroke-width="2" d="M490,-65.2C490,-65.2 672,-65.2 672,-65.2 678,-65.2 684,-71.2 684,-77.2 684,-77.2 684,-129 684,-129 684,-135 678,-141 672,-141 672,-141 490,-141 490,-141 484,-141 478,-135 478,-129 478,-129 478,-77.2 478,-77.2 478,-71.2 484,-65.2 490,-65.2"/>
 <text text-anchor="middle" x="581" y="-129.8" font-family="Helvetica,sans-Serif" font-weight="bold" font-size="9.00">derive</text>
+</g>
+<g id="clust7" class="cluster">
+<title>cluster_src/extract</title>
+<path fill="#ffffff" stroke="black" stroke-width="2" d="M830,-50C830,-50 1094,-50 1094,-50 1100,-50 1106,-56 1106,-62 1106,-62 1106,-173.8 1106,-173.8 1106,-179.8 1100,-185.8 1094,-185.8 1094,-185.8 830,-185.8 830,-185.8 824,-185.8 818,-179.8 818,-173.8 818,-173.8 818,-62 818,-62 818,-56 824,-50 830,-50"/>
+<text text-anchor="middle" x="962" y="-174.6" font-family="Helvetica,sans-Serif" font-weight="bold" font-size="9.00">extract</text>
+</g>
+<g id="clust8" class="cluster">
+<title>cluster_src/extract/resolve</title>
+<path fill="#ffffff" stroke="black" stroke-width="2" d="M1026,-58C1026,-58 1086,-58 1086,-58 1092,-58 1098,-64 1098,-70 1098,-70 1098,-121.8 1098,-121.8 1098,-127.8 1092,-133.8 1086,-133.8 1086,-133.8 1026,-133.8 1026,-133.8 1020,-133.8 1014,-127.8 1014,-121.8 1014,-121.8 1014,-70 1014,-70 1014,-64 1020,-58 1026,-58"/>
+<text text-anchor="middle" x="1056" y="-122.6" font-family="Helvetica,sans-Serif" font-weight="bold" font-size="9.00">resolve</text>
 </g>
 <g id="clust9" class="cluster">
 <title>cluster_src/main</title>
@@ -604,7 +604,7 @@
 <polygon fill="#aaaaaa" fill-opacity="0.466667" stroke="#aaaaaa" stroke-width="2" stroke-opacity="0.466667" points="384.22,-74.9 378.22,-77 384.22,-79.1 384.22,-74.9"/>
 </g>
 <!-- src/extract&#45;&gt;src/extract/resolve -->
-<g id="edge31" class="edge">
+<g id="edge30" class="edge">
 <title>src/extract&#45;&gt;src/extract/resolve</title>
 <path fill="none" stroke="#007700" stroke-width="2" stroke-opacity="0.466667" d="M909.03,-158C924.57,-158 1024,-158 1024,-158 1024,-158 1024,-114.23 1024,-114.23"/>
 <polygon fill="#007700" fill-opacity="0.466667" stroke="#007700" stroke-width="2" stroke-opacity="0.466667" points="1026.1,-114.23 1024,-108.23 1021.9,-114.23 1026.1,-114.23"/>
@@ -634,7 +634,7 @@
 <polygon fill="#007700" fill-opacity="0.466667" stroke="#007700" stroke-width="2" stroke-opacity="0.466667" points="900.31,-106.9 894.31,-109 900.31,-111.1 900.31,-106.9"/>
 </g>
 <!-- src/extract&#45;&gt;src/extract/resolve/get&#45;manifest -->
-<g id="edge30" class="edge">
+<g id="edge31" class="edge">
 <title>src/extract&#45;&gt;src/extract/resolve/get&#45;manifest</title>
 <path fill="none" stroke="#007700" stroke-width="2" stroke-opacity="0.466667" d="M906.4,-156.14C906.4,-153.78 906.4,-150 906.4,-150 906.4,-150 1057.65,-150 1057.65,-150 1057.65,-150 1057.65,-90.2 1057.65,-90.2"/>
 <polygon fill="#007700" fill-opacity="0.466667" stroke="#007700" stroke-width="2" stroke-opacity="0.466667" points="1059.75,-90.2 1057.65,-84.2 1055.55,-90.2 1059.75,-90.2"/>

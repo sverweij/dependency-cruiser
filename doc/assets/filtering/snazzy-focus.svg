@@ -14,6 +14,46 @@
 <path fill="#ffffff" stroke="black" stroke-width="2" d="M20,-8C20,-8 708,-8 708,-8 714,-8 720,-14 720,-20 720,-20 720,-920 720,-920 720,-926 714,-932 708,-932 708,-932 20,-932 20,-932 14,-932 8,-926 8,-920 8,-920 8,-20 8,-20 8,-14 14,-8 20,-8"/>
 <text text-anchor="middle" x="364" y="-920.8" font-family="Helvetica,sans-Serif" font-weight="bold" font-size="9.00">src</text>
 </g>
+<g id="clust2" class="cluster">
+<title>cluster_src/cli</title>
+<path fill="#ffffff" stroke="black" stroke-width="2" d="M28,-258C28,-258 112,-258 112,-258 118,-258 124,-264 124,-270 124,-270 124,-358 124,-358 124,-364 118,-370 112,-370 112,-370 28,-370 28,-370 22,-370 16,-364 16,-358 16,-358 16,-270 16,-270 16,-264 22,-258 28,-258"/>
+<text text-anchor="middle" x="70" y="-358.8" font-family="Helvetica,sans-Serif" font-weight="bold" font-size="9.00">cli</text>
+</g>
+<g id="clust3" class="cluster">
+<title>cluster_src/config&#45;utl</title>
+<path fill="#ffffff" stroke="black" stroke-width="2" d="M152,-16C152,-16 266,-16 266,-16 272,-16 278,-22 278,-28 278,-28 278,-90 278,-90 278,-96 272,-102 266,-102 266,-102 152,-102 152,-102 146,-102 140,-96 140,-90 140,-90 140,-28 140,-28 140,-22 146,-16 152,-16"/>
+<text text-anchor="middle" x="209" y="-90.8" font-family="Helvetica,sans-Serif" font-weight="bold" font-size="9.00">config&#45;utl</text>
+</g>
+<g id="clust4" class="cluster">
+<title>cluster_src/config&#45;utl/extract&#45;depcruise&#45;config</title>
+<path fill="#ffffff" stroke="black" stroke-width="2" d="M160,-24C160,-24 258,-24 258,-24 264,-24 270,-30 270,-36 270,-36 270,-64 270,-64 270,-70 264,-76 258,-76 258,-76 160,-76 160,-76 154,-76 148,-70 148,-64 148,-64 148,-36 148,-36 148,-30 154,-24 160,-24"/>
+<text text-anchor="middle" x="209" y="-64.8" font-family="Helvetica,sans-Serif" font-weight="bold" font-size="9.00">extract&#45;depcruise&#45;config</text>
+</g>
+<g id="clust5" class="cluster">
+<title>cluster_src/enrich</title>
+<path fill="#ffffff" stroke="black" stroke-width="2" d="M429,-584C429,-584 546,-584 546,-584 552,-584 558,-590 558,-596 558,-596 558,-684 558,-684 558,-690 552,-696 546,-696 546,-696 429,-696 429,-696 423,-696 417,-690 417,-684 417,-684 417,-596 417,-596 417,-590 423,-584 429,-584"/>
+<text text-anchor="middle" x="487.5" y="-684.8" font-family="Helvetica,sans-Serif" font-weight="bold" font-size="9.00">enrich</text>
+</g>
+<g id="clust6" class="cluster">
+<title>cluster_src/enrich/summarize</title>
+<path fill="#ffffff" stroke="black" stroke-width="2" d="M437,-592C437,-592 538,-592 538,-592 544,-592 550,-598 550,-604 550,-604 550,-632 550,-632 550,-638 544,-644 538,-644 538,-644 437,-644 437,-644 431,-644 425,-638 425,-632 425,-632 425,-604 425,-604 425,-598 431,-592 437,-592"/>
+<text text-anchor="middle" x="487.5" y="-632.8" font-family="Helvetica,sans-Serif" font-weight="bold" font-size="9.00">summarize</text>
+</g>
+<g id="clust7" class="cluster">
+<title>cluster_src/extract</title>
+<path fill="#ffffff" stroke="black" stroke-width="2" d="M456.5,-704C456.5,-704 518.5,-704 518.5,-704 524.5,-704 530.5,-710 530.5,-716 530.5,-716 530.5,-804 530.5,-804 530.5,-810 524.5,-816 518.5,-816 518.5,-816 456.5,-816 456.5,-816 450.5,-816 444.5,-810 444.5,-804 444.5,-804 444.5,-716 444.5,-716 444.5,-710 450.5,-704 456.5,-704"/>
+<text text-anchor="middle" x="487.5" y="-804.8" font-family="Helvetica,sans-Serif" font-weight="bold" font-size="9.00">extract</text>
+</g>
+<g id="clust8" class="cluster">
+<title>cluster_src/extract/transpile</title>
+<path fill="#ffffff" stroke="black" stroke-width="2" d="M464.5,-712C464.5,-712 510.5,-712 510.5,-712 516.5,-712 522.5,-718 522.5,-724 522.5,-724 522.5,-752 522.5,-752 522.5,-758 516.5,-764 510.5,-764 510.5,-764 464.5,-764 464.5,-764 458.5,-764 452.5,-758 452.5,-752 452.5,-752 452.5,-724 452.5,-724 452.5,-718 458.5,-712 464.5,-712"/>
+<text text-anchor="middle" x="487.5" y="-752.8" font-family="Helvetica,sans-Serif" font-weight="bold" font-size="9.00">transpile</text>
+</g>
+<g id="clust9" class="cluster">
+<title>cluster_src/graph&#45;utl</title>
+<path fill="#ffffff" stroke="black" stroke-width="2" d="M434,-404C434,-404 541,-404 541,-404 547,-404 553,-410 553,-416 553,-416 553,-564 553,-564 553,-570 547,-576 541,-576 541,-576 434,-576 434,-576 428,-576 422,-570 422,-564 422,-564 422,-416 422,-416 422,-410 428,-404 434,-404"/>
+<text text-anchor="middle" x="487.5" y="-564.8" font-family="Helvetica,sans-Serif" font-weight="bold" font-size="9.00">graph&#45;utl</text>
+</g>
 <g id="clust10" class="cluster">
 <title>cluster_src/main</title>
 <path fill="#ffffff" stroke="black" stroke-width="2" d="M186,-110C186,-110 700,-110 700,-110 706,-110 712,-116 712,-122 712,-122 712,-384 712,-384 712,-390 706,-396 700,-396 700,-396 186,-396 186,-396 180,-396 174,-390 174,-384 174,-384 174,-122 174,-122 174,-116 180,-110 186,-110"/>
@@ -58,46 +98,6 @@
 <title>cluster_src/utl</title>
 <path fill="#ffffff" stroke="black" stroke-width="2" d="M328,-404C328,-404 374,-404 374,-404 380,-404 386,-410 386,-416 386,-416 386,-444 386,-444 386,-450 380,-456 374,-456 374,-456 328,-456 328,-456 322,-456 316,-450 316,-444 316,-444 316,-416 316,-416 316,-410 322,-404 328,-404"/>
 <text text-anchor="middle" x="351" y="-444.8" font-family="Helvetica,sans-Serif" font-weight="bold" font-size="9.00">utl</text>
-</g>
-<g id="clust2" class="cluster">
-<title>cluster_src/cli</title>
-<path fill="#ffffff" stroke="black" stroke-width="2" d="M28,-258C28,-258 112,-258 112,-258 118,-258 124,-264 124,-270 124,-270 124,-358 124,-358 124,-364 118,-370 112,-370 112,-370 28,-370 28,-370 22,-370 16,-364 16,-358 16,-358 16,-270 16,-270 16,-264 22,-258 28,-258"/>
-<text text-anchor="middle" x="70" y="-358.8" font-family="Helvetica,sans-Serif" font-weight="bold" font-size="9.00">cli</text>
-</g>
-<g id="clust3" class="cluster">
-<title>cluster_src/config&#45;utl</title>
-<path fill="#ffffff" stroke="black" stroke-width="2" d="M152,-16C152,-16 266,-16 266,-16 272,-16 278,-22 278,-28 278,-28 278,-90 278,-90 278,-96 272,-102 266,-102 266,-102 152,-102 152,-102 146,-102 140,-96 140,-90 140,-90 140,-28 140,-28 140,-22 146,-16 152,-16"/>
-<text text-anchor="middle" x="209" y="-90.8" font-family="Helvetica,sans-Serif" font-weight="bold" font-size="9.00">config&#45;utl</text>
-</g>
-<g id="clust4" class="cluster">
-<title>cluster_src/config&#45;utl/extract&#45;depcruise&#45;config</title>
-<path fill="#ffffff" stroke="black" stroke-width="2" d="M160,-24C160,-24 258,-24 258,-24 264,-24 270,-30 270,-36 270,-36 270,-64 270,-64 270,-70 264,-76 258,-76 258,-76 160,-76 160,-76 154,-76 148,-70 148,-64 148,-64 148,-36 148,-36 148,-30 154,-24 160,-24"/>
-<text text-anchor="middle" x="209" y="-64.8" font-family="Helvetica,sans-Serif" font-weight="bold" font-size="9.00">extract&#45;depcruise&#45;config</text>
-</g>
-<g id="clust5" class="cluster">
-<title>cluster_src/enrich</title>
-<path fill="#ffffff" stroke="black" stroke-width="2" d="M429,-584C429,-584 546,-584 546,-584 552,-584 558,-590 558,-596 558,-596 558,-684 558,-684 558,-690 552,-696 546,-696 546,-696 429,-696 429,-696 423,-696 417,-690 417,-684 417,-684 417,-596 417,-596 417,-590 423,-584 429,-584"/>
-<text text-anchor="middle" x="487.5" y="-684.8" font-family="Helvetica,sans-Serif" font-weight="bold" font-size="9.00">enrich</text>
-</g>
-<g id="clust6" class="cluster">
-<title>cluster_src/enrich/summarize</title>
-<path fill="#ffffff" stroke="black" stroke-width="2" d="M437,-592C437,-592 538,-592 538,-592 544,-592 550,-598 550,-604 550,-604 550,-632 550,-632 550,-638 544,-644 538,-644 538,-644 437,-644 437,-644 431,-644 425,-638 425,-632 425,-632 425,-604 425,-604 425,-598 431,-592 437,-592"/>
-<text text-anchor="middle" x="487.5" y="-632.8" font-family="Helvetica,sans-Serif" font-weight="bold" font-size="9.00">summarize</text>
-</g>
-<g id="clust7" class="cluster">
-<title>cluster_src/extract</title>
-<path fill="#ffffff" stroke="black" stroke-width="2" d="M456.5,-704C456.5,-704 518.5,-704 518.5,-704 524.5,-704 530.5,-710 530.5,-716 530.5,-716 530.5,-804 530.5,-804 530.5,-810 524.5,-816 518.5,-816 518.5,-816 456.5,-816 456.5,-816 450.5,-816 444.5,-810 444.5,-804 444.5,-804 444.5,-716 444.5,-716 444.5,-710 450.5,-704 456.5,-704"/>
-<text text-anchor="middle" x="487.5" y="-804.8" font-family="Helvetica,sans-Serif" font-weight="bold" font-size="9.00">extract</text>
-</g>
-<g id="clust8" class="cluster">
-<title>cluster_src/extract/transpile</title>
-<path fill="#ffffff" stroke="black" stroke-width="2" d="M464.5,-712C464.5,-712 510.5,-712 510.5,-712 516.5,-712 522.5,-718 522.5,-724 522.5,-724 522.5,-752 522.5,-752 522.5,-758 516.5,-764 510.5,-764 510.5,-764 464.5,-764 464.5,-764 458.5,-764 452.5,-758 452.5,-752 452.5,-752 452.5,-724 452.5,-724 452.5,-718 458.5,-712 464.5,-712"/>
-<text text-anchor="middle" x="487.5" y="-752.8" font-family="Helvetica,sans-Serif" font-weight="bold" font-size="9.00">transpile</text>
-</g>
-<g id="clust9" class="cluster">
-<title>cluster_src/graph&#45;utl</title>
-<path fill="#ffffff" stroke="black" stroke-width="2" d="M434,-404C434,-404 541,-404 541,-404 547,-404 553,-410 553,-416 553,-416 553,-564 553,-564 553,-570 547,-576 541,-576 541,-576 434,-576 434,-576 428,-576 422,-570 422,-564 422,-564 422,-416 422,-416 422,-410 428,-404 434,-404"/>
-<text text-anchor="middle" x="487.5" y="-564.8" font-family="Helvetica,sans-Serif" font-weight="bold" font-size="9.00">graph&#45;utl</text>
 </g>
 <!-- src/cli/format&#45;meta&#45;info.js -->
 <g id="node1" class="node">
@@ -255,8 +255,8 @@
 <!-- src/main/index.js&#45;&gt;src/main/options/validate.js -->
 <g id="edge12" class="edge">
 <title>src/main/index.js&#45;&gt;src/main/options/validate.js</title>
-<path fill="none" stroke="#000000" stroke-width="2" stroke-opacity="0.200000" d="M236.02,-305C304.24,-305 478,-305 478,-305 478,-305 478,-180.19 478,-180.19"/>
-<polygon fill="#000000" fill-opacity="0.200000" stroke="#000000" stroke-width="2" stroke-opacity="0.200000" points="480.1,-180.19 478,-174.19 475.9,-180.19 480.1,-180.19"/>
+<path fill="none" stroke="#000000" stroke-width="2" stroke-opacity="0.200000" d="M236.01,-305C306.02,-305 488,-305 488,-305 488,-305 488,-180.19 488,-180.19"/>
+<polygon fill="#000000" fill-opacity="0.200000" stroke="#000000" stroke-width="2" stroke-opacity="0.200000" points="490.1,-180.19 488,-174.19 485.9,-180.19 490.1,-180.19"/>
 </g>
 <!-- src/main/report&#45;wrap.js -->
 <g id="node21" class="node">
@@ -351,8 +351,8 @@
 <!-- src/main/resolve&#45;options/normalize.js&#45;&gt;src/extract/transpile/meta.js -->
 <g id="edge26" class="edge">
 <title>src/main/resolve&#45;options/normalize.js&#45;&gt;src/extract/transpile/meta.js</title>
-<path fill="none" stroke="#000000" stroke-width="2" stroke-opacity="0.200000" d="M384.08,-278C392.39,-278 399,-278 399,-278 399,-278 399,-726 399,-726 399,-726 454.47,-726 454.47,-726"/>
-<polygon fill="#000000" fill-opacity="0.200000" stroke="#000000" stroke-width="2" stroke-opacity="0.200000" points="454.47,-728.1 460.47,-726 454.47,-723.9 454.47,-728.1"/>
+<path fill="none" stroke="#000000" stroke-width="2" stroke-opacity="0.200000" d="M384.43,-278C391.56,-278 397,-278 397,-278 397,-278 397,-726 397,-726 397,-726 454.35,-726 454.35,-726"/>
+<polygon fill="#000000" fill-opacity="0.200000" stroke="#000000" stroke-width="2" stroke-opacity="0.200000" points="454.35,-728.1 460.35,-726 454.35,-723.9 454.35,-728.1"/>
 </g>
 <!-- src/graph&#45;utl/rule&#45;set.js -->
 <g id="node14" class="node">
@@ -366,8 +366,8 @@
 <!-- src/main/resolve&#45;options/normalize.js&#45;&gt;src/graph&#45;utl/rule&#45;set.js -->
 <g id="edge27" class="edge">
 <title>src/main/resolve&#45;options/normalize.js&#45;&gt;src/graph&#45;utl/rule&#45;set.js</title>
-<path fill="none" stroke="#000000" stroke-width="2" stroke-opacity="0.200000" d="M384.29,-272C397.68,-272 410,-272 410,-272 410,-272 410,-541 410,-541 410,-541 453.08,-541 453.08,-541"/>
-<polygon fill="#000000" fill-opacity="0.200000" stroke="#000000" stroke-width="2" stroke-opacity="0.200000" points="453.08,-543.1 459.08,-541 453.08,-538.9 453.08,-543.1"/>
+<path fill="none" stroke="#000000" stroke-width="2" stroke-opacity="0.200000" d="M384.22,-272C396.28,-272 407,-272 407,-272 407,-272 407,-541 407,-541 407,-541 453.35,-541 453.35,-541"/>
+<polygon fill="#000000" fill-opacity="0.200000" stroke="#000000" stroke-width="2" stroke-opacity="0.200000" points="453.35,-543.1 459.35,-541 453.34,-538.9 453.35,-543.1"/>
 </g>
 <!-- src/enrich/summarize/summarize&#45;modules.js -->
 <g id="node8" class="node">
@@ -382,8 +382,8 @@
 <g id="node11" class="node">
 <title>src/graph&#45;utl/compare.js</title>
 <g id="a_node11"><a xlink:href="src/graph-utl/compare.js" xlink:title="compare.js">
-<path fill="lightgray" stroke="black" d="M512.5,-430C512.5,-430 462.5,-430 462.5,-430 459.5,-430 456.5,-427 456.5,-424 456.5,-424 456.5,-418 456.5,-418 456.5,-415 459.5,-412 462.5,-412 462.5,-412 512.5,-412 512.5,-412 515.5,-412 518.5,-415 518.5,-418 518.5,-418 518.5,-424 518.5,-424 518.5,-427 515.5,-430 512.5,-430"/>
-<text text-anchor="middle" x="487.5" y="-418.8" font-family="Helvetica,sans-Serif" font-size="9.00" fill="gray">compare.js</text>
+<path fill="lightgray" stroke="black" d="M512.5,-520C512.5,-520 462.5,-520 462.5,-520 459.5,-520 456.5,-517 456.5,-514 456.5,-514 456.5,-508 456.5,-508 456.5,-505 459.5,-502 462.5,-502 462.5,-502 512.5,-502 512.5,-502 515.5,-502 518.5,-505 518.5,-508 518.5,-508 518.5,-514 518.5,-514 518.5,-517 515.5,-520 512.5,-520"/>
+<text text-anchor="middle" x="487.5" y="-508.8" font-family="Helvetica,sans-Serif" font-size="9.00" fill="gray">compare.js</text>
 </a>
 </g>
 </g>
@@ -391,8 +391,8 @@
 <g id="node12" class="node">
 <title>src/graph&#45;utl/consolidate&#45;to&#45;pattern.js</title>
 <g id="a_node12"><a xlink:href="src/graph-utl/consolidate-to-pattern.js" xlink:title="consolidate&#45;to&#45;pattern.js">
-<path fill="lightgray" stroke="black" d="M539,-520C539,-520 436,-520 436,-520 433,-520 430,-517 430,-514 430,-514 430,-508 430,-508 430,-505 433,-502 436,-502 436,-502 539,-502 539,-502 542,-502 545,-505 545,-508 545,-508 545,-514 545,-514 545,-517 542,-520 539,-520"/>
-<text text-anchor="middle" x="487.5" y="-508.8" font-family="Helvetica,sans-Serif" font-size="9.00" fill="gray">consolidate&#45;to&#45;pattern.js</text>
+<path fill="lightgray" stroke="black" d="M539,-490C539,-490 436,-490 436,-490 433,-490 430,-487 430,-484 430,-484 430,-478 430,-478 430,-475 433,-472 436,-472 436,-472 539,-472 539,-472 542,-472 545,-475 545,-478 545,-478 545,-484 545,-484 545,-487 542,-490 539,-490"/>
+<text text-anchor="middle" x="487.5" y="-478.8" font-family="Helvetica,sans-Serif" font-size="9.00" fill="gray">consolidate&#45;to&#45;pattern.js</text>
 </a>
 </g>
 </g>
@@ -400,8 +400,8 @@
 <g id="node13" class="node">
 <title>src/graph&#45;utl/filterbank.js</title>
 <g id="a_node13"><a xlink:href="src/graph-utl/filterbank.js" xlink:title="filterbank.js">
-<path fill="lightgray" stroke="black" d="M513,-490C513,-490 462,-490 462,-490 459,-490 456,-487 456,-484 456,-484 456,-478 456,-478 456,-475 459,-472 462,-472 462,-472 513,-472 513,-472 516,-472 519,-475 519,-478 519,-478 519,-484 519,-484 519,-487 516,-490 513,-490"/>
-<text text-anchor="middle" x="487.5" y="-478.8" font-family="Helvetica,sans-Serif" font-size="9.00" fill="gray">filterbank.js</text>
+<path fill="lightgray" stroke="black" d="M513,-460C513,-460 462,-460 462,-460 459,-460 456,-457 456,-454 456,-454 456,-448 456,-448 456,-445 459,-442 462,-442 462,-442 513,-442 513,-442 516,-442 519,-445 519,-448 519,-448 519,-454 519,-454 519,-457 516,-460 513,-460"/>
+<text text-anchor="middle" x="487.5" y="-448.8" font-family="Helvetica,sans-Serif" font-size="9.00" fill="gray">filterbank.js</text>
 </a>
 </g>
 </g>
@@ -409,8 +409,8 @@
 <g id="node15" class="node">
 <title>src/graph&#45;utl/strip&#45;self&#45;transitions.js</title>
 <g id="a_node15"><a xlink:href="src/graph-utl/strip-self-transitions.js" xlink:title="strip&#45;self&#45;transitions.js">
-<path fill="lightgray" stroke="black" d="M534,-460C534,-460 441,-460 441,-460 438,-460 435,-457 435,-454 435,-454 435,-448 435,-448 435,-445 438,-442 441,-442 441,-442 534,-442 534,-442 537,-442 540,-445 540,-448 540,-448 540,-454 540,-454 540,-457 537,-460 534,-460"/>
-<text text-anchor="middle" x="487.5" y="-448.8" font-family="Helvetica,sans-Serif" font-size="9.00" fill="gray">strip&#45;self&#45;transitions.js</text>
+<path fill="lightgray" stroke="black" d="M534,-430C534,-430 441,-430 441,-430 438,-430 435,-427 435,-424 435,-424 435,-418 435,-418 435,-415 438,-412 441,-412 441,-412 534,-412 534,-412 537,-412 540,-415 540,-418 540,-418 540,-424 540,-424 540,-427 537,-430 534,-430"/>
+<text text-anchor="middle" x="487.5" y="-418.8" font-family="Helvetica,sans-Serif" font-size="9.00" fill="gray">strip&#45;self&#45;transitions.js</text>
 </a>
 </g>
 </g>
@@ -456,44 +456,44 @@
 <!-- src/main/options/validate.js&#45;&gt;src/report/index.js -->
 <g id="edge19" class="edge">
 <title>src/main/options/validate.js&#45;&gt;src/report/index.js</title>
-<path fill="none" stroke="#000000" stroke-width="2" stroke-opacity="0.200000" d="M516.76,-165C524.63,-165 531,-165 531,-165 531,-165 531,-421 531,-421 531,-421 601.95,-421 601.95,-421"/>
-<polygon fill="#000000" fill-opacity="0.200000" stroke="#000000" stroke-width="2" stroke-opacity="0.200000" points="601.95,-423.1 607.95,-421 601.95,-418.9 601.95,-423.1"/>
+<path fill="none" stroke="#000000" stroke-width="2" stroke-opacity="0.200000" d="M516.52,-165C537.44,-165 562,-165 562,-165 562,-165 562,-421 562,-421 562,-421 601.82,-421 601.82,-421"/>
+<polygon fill="#000000" fill-opacity="0.200000" stroke="#000000" stroke-width="2" stroke-opacity="0.200000" points="601.82,-423.1 607.82,-421 601.82,-418.9 601.82,-423.1"/>
 </g>
 <!-- src/main/report&#45;wrap.js&#45;&gt;src/enrich/summarize/summarize&#45;modules.js -->
 <g id="edge20" class="edge">
 <title>src/main/report&#45;wrap.js&#45;&gt;src/enrich/summarize/summarize&#45;modules.js</title>
-<path fill="none" stroke="#000000" stroke-width="2" stroke-opacity="0.200000" d="M387.52,-240.86C396.7,-240.86 404,-240.86 404,-240.86 404,-240.86 404,-609 404,-609 404,-609 426.74,-609 426.74,-609"/>
-<polygon fill="#000000" fill-opacity="0.200000" stroke="#000000" stroke-width="2" stroke-opacity="0.200000" points="426.74,-611.1 432.74,-609 426.74,-606.9 426.74,-611.1"/>
+<path fill="none" stroke="#000000" stroke-width="2" stroke-opacity="0.200000" d="M387.52,-243.14C395.7,-243.14 402,-243.14 402,-243.14 402,-243.14 402,-609 402,-609 402,-609 426.87,-609 426.87,-609"/>
+<polygon fill="#000000" fill-opacity="0.200000" stroke="#000000" stroke-width="2" stroke-opacity="0.200000" points="426.87,-611.1 432.87,-609 426.87,-606.9 426.87,-611.1"/>
 </g>
 <!-- src/main/report&#45;wrap.js&#45;&gt;src/graph&#45;utl/compare.js -->
 <g id="edge21" class="edge">
 <title>src/main/report&#45;wrap.js&#45;&gt;src/graph&#45;utl/compare.js</title>
-<path fill="none" stroke="#000000" stroke-width="2" stroke-opacity="0.200000" d="M387.72,-245.43C431.26,-245.43 498,-245.43 498,-245.43 498,-245.43 498,-405.56 498,-405.56"/>
-<polygon fill="#000000" fill-opacity="0.200000" stroke="#000000" stroke-width="2" stroke-opacity="0.200000" points="495.9,-405.56 498,-411.56 500.1,-405.56 495.9,-405.56"/>
+<path fill="none" stroke="#000000" stroke-width="2" stroke-opacity="0.200000" d="M387.54,-240.86C400.53,-240.86 412,-240.86 412,-240.86 412,-240.86 412,-511 412,-511 412,-511 450.36,-511 450.36,-511"/>
+<polygon fill="#000000" fill-opacity="0.200000" stroke="#000000" stroke-width="2" stroke-opacity="0.200000" points="450.36,-513.1 456.36,-511 450.36,-508.9 450.36,-513.1"/>
 </g>
 <!-- src/main/report&#45;wrap.js&#45;&gt;src/graph&#45;utl/consolidate&#45;to&#45;pattern.js -->
 <g id="edge22" class="edge">
 <title>src/main/report&#45;wrap.js&#45;&gt;src/graph&#45;utl/consolidate&#45;to&#45;pattern.js</title>
-<path fill="none" stroke="#000000" stroke-width="2" stroke-opacity="0.200000" d="M387.86,-238.57C402.08,-238.57 415,-238.57 415,-238.57 415,-238.57 415,-511 415,-511 415,-511 423.67,-511 423.67,-511"/>
-<polygon fill="#000000" fill-opacity="0.200000" stroke="#000000" stroke-width="2" stroke-opacity="0.200000" points="423.67,-513.1 429.67,-511 423.67,-508.9 423.67,-513.1"/>
+<path fill="none" stroke="#000000" stroke-width="2" stroke-opacity="0.200000" d="M387.68,-238.57C402.42,-238.57 416,-238.57 416,-238.57 416,-238.57 416,-481 416,-481 416,-481 423.79,-481 423.79,-481"/>
+<polygon fill="#000000" fill-opacity="0.200000" stroke="#000000" stroke-width="2" stroke-opacity="0.200000" points="423.79,-483.1 429.79,-481 423.79,-478.9 423.79,-483.1"/>
 </g>
 <!-- src/main/report&#45;wrap.js&#45;&gt;src/graph&#45;utl/filterbank.js -->
 <g id="edge23" class="edge">
 <title>src/main/report&#45;wrap.js&#45;&gt;src/graph&#45;utl/filterbank.js</title>
-<path fill="none" stroke="#000000" stroke-width="2" stroke-opacity="0.200000" d="M387.64,-236.29C404.58,-236.29 421,-236.29 421,-236.29 421,-236.29 421,-481 421,-481 421,-481 449.81,-481 449.81,-481"/>
-<polygon fill="#000000" fill-opacity="0.200000" stroke="#000000" stroke-width="2" stroke-opacity="0.200000" points="449.81,-483.1 455.81,-481 449.81,-478.9 449.81,-483.1"/>
+<path fill="none" stroke="#000000" stroke-width="2" stroke-opacity="0.200000" d="M387.64,-236.29C404.58,-236.29 421,-236.29 421,-236.29 421,-236.29 421,-451 421,-451 421,-451 449.81,-451 449.81,-451"/>
+<polygon fill="#000000" fill-opacity="0.200000" stroke="#000000" stroke-width="2" stroke-opacity="0.200000" points="449.81,-453.1 455.81,-451 449.81,-448.9 449.81,-453.1"/>
 </g>
 <!-- src/main/report&#45;wrap.js&#45;&gt;src/graph&#45;utl/strip&#45;self&#45;transitions.js -->
 <g id="edge24" class="edge">
 <title>src/main/report&#45;wrap.js&#45;&gt;src/graph&#45;utl/strip&#45;self&#45;transitions.js</title>
-<path fill="none" stroke="#000000" stroke-width="2" stroke-opacity="0.200000" d="M387.61,-247.71C414.01,-247.71 445,-247.71 445,-247.71 445,-247.71 445,-435.74 445,-435.74"/>
-<polygon fill="#000000" fill-opacity="0.200000" stroke="#000000" stroke-width="2" stroke-opacity="0.200000" points="442.9,-435.74 445,-441.74 447.1,-435.74 442.9,-435.74"/>
+<path fill="none" stroke="#000000" stroke-width="2" stroke-opacity="0.200000" d="M387.61,-247.71C414.01,-247.71 445,-247.71 445,-247.71 445,-247.71 445,-405.68 445,-405.68"/>
+<polygon fill="#000000" fill-opacity="0.200000" stroke="#000000" stroke-width="2" stroke-opacity="0.200000" points="442.9,-405.68 445,-411.68 447.1,-405.68 442.9,-405.68"/>
 </g>
 <!-- src/main/report&#45;wrap.js&#45;&gt;src/report/index.js -->
 <g id="edge25" class="edge">
 <title>src/main/report&#45;wrap.js&#45;&gt;src/report/index.js</title>
-<path fill="none" stroke="#000000" stroke-width="2" stroke-opacity="0.200000" d="M387.55,-243.14C464.25,-243.14 635,-243.14 635,-243.14 635,-243.14 635,-405.94 635,-405.94"/>
-<polygon fill="#000000" fill-opacity="0.200000" stroke="#000000" stroke-width="2" stroke-opacity="0.200000" points="632.9,-405.94 635,-411.94 637.1,-405.94 632.9,-405.94"/>
+<path fill="none" stroke="#000000" stroke-width="2" stroke-opacity="0.200000" d="M387.55,-245.43C464.25,-245.43 635,-245.43 635,-245.43 635,-245.43 635,-405.56 635,-405.56"/>
+<polygon fill="#000000" fill-opacity="0.200000" stroke="#000000" stroke-width="2" stroke-opacity="0.200000" points="632.9,-405.56 635,-411.56 637.1,-405.56 632.9,-405.56"/>
 </g>
 <!-- src/main/rule&#45;set/normalize.js&#45;&gt;src/main/utl/normalize&#45;re&#45;properties.js -->
 <g id="edge28" class="edge">
