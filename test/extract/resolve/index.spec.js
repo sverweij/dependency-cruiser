@@ -574,4 +574,56 @@ describe("extract/resolve/index", () => {
       resolved: "./there-is-a-cjs-variant-of-me-but-you-will-not-find-it.js",
     });
   });
+
+  it("should resolve js file which contains #", () => {
+    expect(
+      resolve(
+        {
+          module: "./hots",
+          moduleSystem: "es6",
+        },
+        path.join(__dirname, "fixtures"),
+        path.join(__dirname, "fixtures", "could-not-resolve"),
+        normalizeResolveOptions({}, {})
+      )
+    ).to.deep.equal({
+      coreModule: false,
+      couldNotResolve: false,
+      dependencyTypes: ["local"],
+      followable: true,
+      resolved: "could-not-resolve/hots.js",
+    });
+  });
+
+  it("should resolve ts file which contains #", () => {
+    const tsconfig = path.join(
+      __dirname,
+      "fixtures",
+      "could-not-resolve-ts-config-with-path",
+      "tsconfig.json"
+    );
+    const parsedConfig = extractTSConfig(tsconfig);
+    const result = resolve(
+      {
+        module: "./#a",
+        moduleSystem: "es6",
+      },
+      path.join(__dirname, "fixtures"),
+      path.join(
+        __dirname,
+        "fixtures",
+        "could-not-resolve-ts-config-with-path/src"
+      ),
+      normalizeResolveOptions(
+        {
+          tsConfig: tsconfig,
+          bustTheCache: true,
+        },
+        {},
+        parsedConfig
+      )
+    );
+    // TODO it should be resolve.
+    expect(result.couldNotResolve).to.equal(true);
+  });
 });

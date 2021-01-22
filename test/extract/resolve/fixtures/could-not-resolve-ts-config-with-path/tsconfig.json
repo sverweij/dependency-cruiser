@@ -1,0 +1,17 @@
+{
+  "compilerOptions": {
+    /* Basic Options */
+    "target": "ES2015",
+    "module": "commonjs",
+    "outDir": "./dist",
+
+    /* Strict Type-Checking Options */
+    "strict": true,
+
+    /* Module Resolution Options */
+    "baseUrl": "./src",
+    "paths": {
+    },
+    "esModuleInterop": true
+  }
+}
