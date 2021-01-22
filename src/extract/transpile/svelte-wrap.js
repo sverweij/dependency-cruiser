@@ -6,7 +6,7 @@ const svelteCompiler = tryRequire(
 const preProcess = require("./svelte-preprocess");
 
 function getTranspiler(pTranspilerWrapper) {
-  return (pSource, pTranspilerOptions) => {
+  return (pSource, _pFileName, pTranspilerOptions) => {
     const lPreProcessedSource = preProcess(
       pSource,
       pTranspilerWrapper,

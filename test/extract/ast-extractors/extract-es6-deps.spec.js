@@ -5,7 +5,7 @@ const getASTFromSource = require("../../../src/extract/parse/to-javascript-ast")
 
 const extractES6 = (pJavaScriptSource, pDependencies, pExtension = ".js") =>
   extractES6Deps(
-    getASTFromSource(pJavaScriptSource, pExtension),
+    getASTFromSource({ source: pJavaScriptSource, extension: pExtension }),
     pDependencies
   );
 

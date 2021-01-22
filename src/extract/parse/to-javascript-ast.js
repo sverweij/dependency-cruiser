@@ -13,11 +13,11 @@ const ACORN_OPTIONS = {
 
 const acornJsxParser = acorn.Parser.extend(acornJsx());
 
-function getASTFromSource(pSource, pExtension, pTranspileOptions) {
-  const lJavaScriptSource = transpile(pExtension, pSource, pTranspileOptions);
+function getASTFromSource(pFileRecord, pTranspileOptions) {
+  const lJavaScriptSource = transpile(pFileRecord, pTranspileOptions);
 
   try {
-    if (pExtension === ".jsx") {
+    if (pFileRecord.extension === ".jsx") {
       return acornJsxParser.parse(lJavaScriptSource, {
         ...ACORN_OPTIONS,
         allowNamespacedObjects: true,
@@ -46,8 +46,11 @@ function getASTFromSource(pSource, pExtension, pTranspileOptions) {
  */
 function getAST(pFileName, pTranspileOptions) {
   return getASTFromSource(
-    fs.readFileSync(pFileName, "utf8"),
-    getExtension(pFileName),
+    {
+      source: fs.readFileSync(pFileName, "utf8"),
+      extension: getExtension(pFileName),
+      filename: pFileName,
+    },
     pTranspileOptions
   );
 }
