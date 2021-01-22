@@ -96,6 +96,14 @@ describe("config-utl/parseBabelConfig", () => {
     ).to.equal(1);
   });
 
+  it("returns a babel config _including_ the array of plugins when a config with presets is passed", () => {
+    const lFoundConfig = extractBabelConfig(
+      path.join(__dirname, "./fixtures/babelconfig/babelrc.with-a-preset.json")
+    );
+    expect(lFoundConfig.presets.length).to.equal(1);
+    expect(lFoundConfig.presets).to.deep.equal(["@babel/preset-typescript"]);
+  });
+
   it("throws when a javascript file with a function export is passed", () => {
     expect(() => {
       extractBabelConfig(
