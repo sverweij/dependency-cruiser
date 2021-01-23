@@ -51,4 +51,13 @@ describe("report/dot/module-utl", () => {
       ],
     });
   });
+
+  it("flatLabel - returns the value of source as label", () => {
+    expect(
+      moduleUtl.flatLabel({ source: "aap/noot/mies/wim/zus.jet" })
+    ).to.deep.equal({
+      source: "aap/noot/mies/wim/zus.jet",
+      label: "<aap/noot/mies/wim/<BR/><B>zus.jet</B>>",
+    });
+  });
 });

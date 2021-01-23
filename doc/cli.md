@@ -165,6 +165,25 @@ for details.
 
 </details>
 
+#### flat/ fdot
+
+> Just like the archi/ ddot reporter, this one is _experimental_.
+
+Also a variant on the `dot` output. Where all other graphical reporters group
+modules into the folders they reside in, this shows all modules on the same
+level. It is still possible to apply a theme, though.
+
+<details>
+<summary>Sample output</summary>
+
+This flat graph of the report folder in dependency cruiser and all things it direct
+![flat graph of the report folder in dependency cruiser](./assets/flat-report-example.svg)
+
+As a comparison, this is the default dot report for the same folder(s)
+![default dot graph of the same folder](./assets/flat-report-counter-example.svg)
+
+</details>
+
 #### err-html
 
 Generates a stand-alone html report with:

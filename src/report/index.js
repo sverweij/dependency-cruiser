@@ -3,6 +3,7 @@ const csv = require("./csv");
 const dot = require("./dot")("module");
 const ddot = require("./dot")("folder");
 const cdot = require("./dot")("custom");
+const fdot = require("./dot")("flat");
 const errorHtml = require("./error-html");
 const error = require("./error");
 const errorLong = require("./error-long");
@@ -19,6 +20,8 @@ const TYPE2REPORTER = {
   ddot,
   cdot,
   archi: cdot,
+  fdot,
+  flat: fdot,
   "err-html": errorHtml,
   "err-long": errorLong,
   err: error,

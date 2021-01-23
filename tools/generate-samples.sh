@@ -9,3 +9,6 @@ node bin/dependency-cruise.js -Tdot -v "$ASSET_DIR/theming/vertical.config.js" s
 
 node bin/dependency-cruise.js -Tdot -v "$ASSET_DIR/filtering/focus.config.json" src | dot -Tsvg > "$ASSET_DIR/filtering/focus.svg"
 node bin/dependency-cruise.js -Tdot -v "$ASSET_DIR/filtering/snazzy-focus.config.json" src | dot -Tsvg > "$ASSET_DIR/filtering/snazzy-focus.svg"
+
+node bin/dependency-cruise.js -Tflat -v --progress none --include-only ^src src/report | fdp -Gsplines=ortho -Gdim=10 -Tsvg > "$ASSET_DIR/flat-report-example.svg"
+node bin/dependency-cruise.js -Tdot -v --progress none --include-only ^src src/report | dot -Gsplines=ortho -Tsvg > "$ASSET_DIR/flat-report-counter-example.svg"

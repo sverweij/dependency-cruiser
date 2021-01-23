@@ -5,6 +5,7 @@ const theming = require("./theming");
 const moduleUtl = require("./module-utl");
 const prepareFolderLevel = require("./prepare-folder-level");
 const prepareCustomLevel = require("./prepare-custom-level");
+const prepareFlatLevel = require("./prepare-flat-level");
 
 // eslint-disable-next-line import/no-unassigned-import
 require("./dot.template");
@@ -13,6 +14,7 @@ const GRANULARITY2FUNCTION = {
   module: prepareCustomLevel,
   folder: prepareFolderLevel,
   custom: prepareCustomLevel,
+  flat: prepareFlatLevel,
 };
 
 function report(pResults, pGranularity, { theme, collapsePattern, filters }) {
@@ -42,6 +44,7 @@ const GRANULARITY2REPORTER_OPTIONS = {
   module: "summary.optionsUsed.reporterOptions.dot",
   folder: "summary.optionsUsed.reporterOptions.ddot",
   custom: "summary.optionsUsed.reporterOptions.archi",
+  flat: "summary.optionsUsed.reporterOptions.flat",
 };
 
 function pryReporterOptionsFromResults(pGranularity, pResults) {
