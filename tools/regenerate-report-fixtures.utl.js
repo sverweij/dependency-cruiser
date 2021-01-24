@@ -2,6 +2,7 @@ const fs = require("fs");
 const path = require("path");
 const renderCdot = require("../src/report/dot")("custom");
 const renderDdot = require("../src/report/dot")("folder");
+const renderFdot = require("../src/report/dot")("flat");
 const renderDot = require("../src/report/dot")("module");
 const renderTeamcity = require("../src/report/teamcity");
 const renderHTML = require("../src/report/html");
@@ -36,13 +37,12 @@ function renderBareThemeDot(pResultObject) {
       path.join(__dirname, "../test/report/dot/module-level/bare-theme.json")
     )
   );
-
-  return renderDot(pResultObject, lBareTheme);
+  return renderDot(pResultObject, { theme: lBareTheme });
 }
 
 function renderDefaultThemeDot(pResultObject) {
   // empty theme with no overrides gets the default theme assigned
-  return renderDot(pResultObject, {});
+  return renderDot(pResultObject, { theme: {} });
 }
 
 const CDOT_MOCK_DIR = path.join(
@@ -52,6 +52,10 @@ const CDOT_MOCK_DIR = path.join(
 const DDOT_MOCK_DIR = path.join(
   __dirname,
   "../test/report/dot/folder-level/mocks/"
+);
+const FDOT_MOCK_DIR = path.join(
+  __dirname,
+  "../test/report/dot/flat-level/mocks/"
 );
 const DOT_MOCK_DIR = path.join(
   __dirname,
@@ -66,6 +70,7 @@ const CSV_MOCK_DIR = path.join(__dirname, "../test/report/csv/mocks/");
 
 regenerateReportFixtures(DDOT_MOCK_DIR, renderDdot, ".dot");
 regenerateReportFixtures(CDOT_MOCK_DIR, renderCdot, ".dot");
+regenerateReportFixtures(FDOT_MOCK_DIR, renderFdot, ".dot");
 regenerateReportFixtures(DOT_MOCK_DIR, renderBareThemeDot, ".dot");
 regenerateReportFixtures(
   DOT_MOCK_DIR,

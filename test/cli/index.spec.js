@@ -71,7 +71,7 @@ const TEST_PAIRS = [
     cleanup: true,
   },
   {
-    description: "dot",
+    description: "regular dot with default theme",
     dirOrFile: "test/cli/fixtures/{{moduleType}}",
     options: {
       outputTo: path.join(OUT_DIR, "{{moduleType}}.dir.filtered.dot"),

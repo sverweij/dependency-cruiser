@@ -9,6 +9,8 @@ export default {
         "ddot",
         "cdot",
         "archi",
+        "fdot",
+        "flat",
         "csv",
         "err",
         "err-long",

@@ -66,7 +66,7 @@ function folderify(pModule) {
     lAdditions.path = lDirectoryName.split(path.sep).map(aggregate);
   }
 
-  lAdditions.label = path.basename(pModule.source);
+  lAdditions.label = `"${path.basename(pModule.source)}"`;
 
   return {
     ...pModule,
@@ -103,10 +103,20 @@ function addURL(pPrefix) {
   });
 }
 
+function flatLabel(pModule) {
+  return {
+    ...pModule,
+    label: `<${path.dirname(pModule.source)}/<BR/><B>${path.basename(
+      pModule.source
+    )}</B>>`,
+  };
+}
+
 module.exports = {
   folderify,
   applyTheme,
   extractFirstTransgression,
   attributizeObject,
   addURL,
+  flatLabel,
 };

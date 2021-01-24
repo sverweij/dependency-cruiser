@@ -26,7 +26,7 @@ try {
     )
     .option(
       "-T, --output-type <type>",
-      "output type; e.g. err, err-html, dot, ddot, archi or json\n(default: err)"
+      "output type; e.g. err, err-html, dot, ddot, archi, flat or json\n(default: err)"
     )
     .option(
       "-f, --output-to <file>",
