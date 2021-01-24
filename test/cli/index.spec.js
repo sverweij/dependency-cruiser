@@ -124,7 +124,8 @@ function resetOutputDirectory() {
   deleteDammit(path.join(OUT_DIR, "dynamic-import-ok.json"));
   deleteDammit(path.join(OUT_DIR, "dynamic-import-nok.json"));
   deleteDammit(path.join(OUT_DIR, "typescript-path-resolution.json"));
-  deleteDammit(path.join(OUT_DIR, "run-through-babel.json"));
+  deleteDammit(path.join(OUT_DIR, "babel-es6-result.json"));
+  deleteDammit(path.join(OUT_DIR, "babel-ts-result.json"));
 }
 
 function setModuleType(pTestPairs, pModuleType) {
@@ -447,22 +448,39 @@ describe("cli/index", () => {
     );
   });
 
-  it("dependency-cruise with a babelConfig will respect the configuration in there", () => {
-    const lOutputFileName = "run-through-babel.json";
+  it("dependency-cruise with a babelConfig will use that (es6 edition)", () => {
+    const lOutputFileName = "babel-es6-result.json";
     const lOutputTo = path.join(OUT_DIR, lOutputFileName);
 
-    const lExitCode = cli(["test/cli/fixtures/run-through-babel/src"], {
+    const lExitCode = cli(["test/cli/fixtures/babel/es6/src"], {
       outputTo: lOutputTo,
       outputType: "json",
-      babelConfig: "test/cli/fixtures/babelrc.valid.json",
-      webpackConfig:
-        "test/cli/fixtures/run-through-babel/webpack-cache-bust.config.js",
+      babelConfig: "test/cli/fixtures/babel/es6/babelrc.valid.json",
+      webpackConfig: "test/cli/fixtures/babel/es6/webpack-cache-bust.config.js",
     });
 
     expect(lExitCode).to.equal(0);
     asserthelpers.assertJSONFileEqual(
       lOutputTo,
-      path.join(FIX_DIR, lOutputFileName)
+      path.join(FIX_DIR, "babel", lOutputFileName)
+    );
+  });
+
+  it("dependency-cruise with a babelConfig will use that (TypeScript edition)", () => {
+    const lOutputFileName = "babel-ts-result.json";
+    const lOutputTo = path.join(OUT_DIR, lOutputFileName);
+
+    const lExitCode = cli(["test/cli/fixtures/babel/ts/src"], {
+      outputTo: lOutputTo,
+      outputType: "json",
+      babelConfig: "test/cli/fixtures/babel/ts/babelrc.json",
+      webpackConfig: "test/cli/fixtures/babel/ts/webpack-cache-bust.config.js",
+    });
+
+    expect(lExitCode).to.equal(0);
+    asserthelpers.assertJSONFileEqual(
+      lOutputTo,
+      path.join(FIX_DIR, "babel", lOutputFileName)
     );
   });
 

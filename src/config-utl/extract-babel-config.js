@@ -93,12 +93,17 @@ module.exports = function extractBabelConfig(pBabelConfigFileName) {
   if (babel) {
     const lConfig = {
       ...getConfig(pBabelConfigFileName),
-      // under some circumstances babel really likes to have a filename to
-      // go with the config we pass it - so we pass it
+      // under some circumstances babel (and/ or its plugins) really likes to
+      // have a filename to go with the config - so we pass it
       filename: pBabelConfigFileName,
     };
-
-    lReturnValue = babel.loadOptions(lConfig);
+    lReturnValue = {
+      ...babel.loadOptions(lConfig),
+      // according to the babel documentation a config parsed & expanded through
+      // loadOptions can be passed to the parser. With some plugins/ presets
+      // this does not seem to be true anymore, though
+      ...(lConfig.presets ? { presets: lConfig.presets } : {}),
+    };
   }
 
   return lReturnValue;
