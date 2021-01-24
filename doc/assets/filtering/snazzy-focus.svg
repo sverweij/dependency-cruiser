@@ -14,21 +14,6 @@
 <path fill="#ffffff" stroke="black" stroke-width="2" d="M20,-8C20,-8 708,-8 708,-8 714,-8 720,-14 720,-20 720,-20 720,-920 720,-920 720,-926 714,-932 708,-932 708,-932 20,-932 20,-932 14,-932 8,-926 8,-920 8,-920 8,-20 8,-20 8,-14 14,-8 20,-8"/>
 <text text-anchor="middle" x="364" y="-920.8" font-family="Helvetica,sans-Serif" font-weight="bold" font-size="9.00">src</text>
 </g>
-<g id="clust16" class="cluster">
-<title>cluster_src/report</title>
-<path fill="#ffffff" stroke="black" stroke-width="2" d="M612,-404C612,-404 658,-404 658,-404 664,-404 670,-410 670,-416 670,-416 670,-444 670,-444 670,-450 664,-456 658,-456 658,-456 612,-456 612,-456 606,-456 600,-450 600,-444 600,-444 600,-416 600,-416 600,-410 606,-404 612,-404"/>
-<text text-anchor="middle" x="635" y="-444.8" font-family="Helvetica,sans-Serif" font-weight="bold" font-size="9.00">report</text>
-</g>
-<g id="clust17" class="cluster">
-<title>cluster_src/schema</title>
-<path fill="#ffffff" stroke="black" stroke-width="2" d="M429.5,-824C429.5,-824 545.5,-824 545.5,-824 551.5,-824 557.5,-830 557.5,-836 557.5,-836 557.5,-894 557.5,-894 557.5,-900 551.5,-906 545.5,-906 545.5,-906 429.5,-906 429.5,-906 423.5,-906 417.5,-900 417.5,-894 417.5,-894 417.5,-836 417.5,-836 417.5,-830 423.5,-824 429.5,-824"/>
-<text text-anchor="middle" x="487.5" y="-894.8" font-family="Helvetica,sans-Serif" font-weight="bold" font-size="9.00">schema</text>
-</g>
-<g id="clust18" class="cluster">
-<title>cluster_src/utl</title>
-<path fill="#ffffff" stroke="black" stroke-width="2" d="M328,-404C328,-404 374,-404 374,-404 380,-404 386,-410 386,-416 386,-416 386,-444 386,-444 386,-450 380,-456 374,-456 374,-456 328,-456 328,-456 322,-456 316,-450 316,-444 316,-444 316,-416 316,-416 316,-410 322,-404 328,-404"/>
-<text text-anchor="middle" x="351" y="-444.8" font-family="Helvetica,sans-Serif" font-weight="bold" font-size="9.00">utl</text>
-</g>
 <g id="clust2" class="cluster">
 <title>cluster_src/cli</title>
 <path fill="#ffffff" stroke="black" stroke-width="2" d="M28,-258C28,-258 112,-258 112,-258 118,-258 124,-264 124,-270 124,-270 124,-358 124,-358 124,-364 118,-370 112,-370 112,-370 28,-370 28,-370 22,-370 16,-364 16,-358 16,-358 16,-270 16,-270 16,-264 22,-258 28,-258"/>
@@ -74,6 +59,16 @@
 <path fill="#ffffff" stroke="black" stroke-width="2" d="M186,-110C186,-110 700,-110 700,-110 706,-110 712,-116 712,-122 712,-122 712,-384 712,-384 712,-390 706,-396 700,-396 700,-396 186,-396 186,-396 180,-396 174,-390 174,-384 174,-384 174,-122 174,-122 174,-116 180,-110 186,-110"/>
 <text text-anchor="middle" x="443" y="-384.8" font-family="Helvetica,sans-Serif" font-weight="bold" font-size="9.00">main</text>
 </g>
+<g id="clust11" class="cluster">
+<title>cluster_src/main/files&#45;and&#45;dirs</title>
+<path fill="#ffffff" stroke="black" stroke-width="2" d="M322,-318C322,-318 380,-318 380,-318 386,-318 392,-324 392,-330 392,-330 392,-358 392,-358 392,-364 386,-370 380,-370 380,-370 322,-370 322,-370 316,-370 310,-364 310,-358 310,-358 310,-330 310,-330 310,-324 316,-318 322,-318"/>
+<text text-anchor="middle" x="351" y="-358.8" font-family="Helvetica,sans-Serif" font-weight="bold" font-size="9.00">files&#45;and&#45;dirs</text>
+</g>
+<g id="clust12" class="cluster">
+<title>cluster_src/main/options</title>
+<path fill="#ffffff" stroke="black" stroke-width="2" d="M458.5,-118C458.5,-118 665,-118 665,-118 671,-118 677,-124 677,-130 677,-130 677,-188 677,-188 677,-194 671,-200 665,-200 665,-200 458.5,-200 458.5,-200 452.5,-200 446.5,-194 446.5,-188 446.5,-188 446.5,-130 446.5,-130 446.5,-124 452.5,-118 458.5,-118"/>
+<text text-anchor="middle" x="561.75" y="-188.8" font-family="Helvetica,sans-Serif" font-weight="bold" font-size="9.00">options</text>
+</g>
 <g id="clust13" class="cluster">
 <title>cluster_src/main/resolve&#45;options</title>
 <path fill="#ffffff" stroke="black" stroke-width="2" d="M322,-258C322,-258 381,-258 381,-258 387,-258 393,-264 393,-270 393,-270 393,-298 393,-298 393,-304 387,-310 381,-310 381,-310 322,-310 322,-310 316,-310 310,-304 310,-298 310,-298 310,-270 310,-270 310,-264 316,-258 322,-258"/>
@@ -89,15 +84,20 @@
 <path fill="#ffffff" stroke="black" stroke-width="2" d="M578,-208C578,-208 692,-208 692,-208 698,-208 704,-214 704,-220 704,-220 704,-248 704,-248 704,-254 698,-260 692,-260 692,-260 578,-260 578,-260 572,-260 566,-254 566,-248 566,-248 566,-220 566,-220 566,-214 572,-208 578,-208"/>
 <text text-anchor="middle" x="635" y="-248.8" font-family="Helvetica,sans-Serif" font-weight="bold" font-size="9.00">utl</text>
 </g>
-<g id="clust11" class="cluster">
-<title>cluster_src/main/files&#45;and&#45;dirs</title>
-<path fill="#ffffff" stroke="black" stroke-width="2" d="M322,-318C322,-318 380,-318 380,-318 386,-318 392,-324 392,-330 392,-330 392,-358 392,-358 392,-364 386,-370 380,-370 380,-370 322,-370 322,-370 316,-370 310,-364 310,-358 310,-358 310,-330 310,-330 310,-324 316,-318 322,-318"/>
-<text text-anchor="middle" x="351" y="-358.8" font-family="Helvetica,sans-Serif" font-weight="bold" font-size="9.00">files&#45;and&#45;dirs</text>
+<g id="clust16" class="cluster">
+<title>cluster_src/report</title>
+<path fill="#ffffff" stroke="black" stroke-width="2" d="M612,-404C612,-404 658,-404 658,-404 664,-404 670,-410 670,-416 670,-416 670,-444 670,-444 670,-450 664,-456 658,-456 658,-456 612,-456 612,-456 606,-456 600,-450 600,-444 600,-444 600,-416 600,-416 600,-410 606,-404 612,-404"/>
+<text text-anchor="middle" x="635" y="-444.8" font-family="Helvetica,sans-Serif" font-weight="bold" font-size="9.00">report</text>
 </g>
-<g id="clust12" class="cluster">
-<title>cluster_src/main/options</title>
-<path fill="#ffffff" stroke="black" stroke-width="2" d="M458.5,-118C458.5,-118 665,-118 665,-118 671,-118 677,-124 677,-130 677,-130 677,-188 677,-188 677,-194 671,-200 665,-200 665,-200 458.5,-200 458.5,-200 452.5,-200 446.5,-194 446.5,-188 446.5,-188 446.5,-130 446.5,-130 446.5,-124 452.5,-118 458.5,-118"/>
-<text text-anchor="middle" x="561.75" y="-188.8" font-family="Helvetica,sans-Serif" font-weight="bold" font-size="9.00">options</text>
+<g id="clust17" class="cluster">
+<title>cluster_src/schema</title>
+<path fill="#ffffff" stroke="black" stroke-width="2" d="M429.5,-824C429.5,-824 545.5,-824 545.5,-824 551.5,-824 557.5,-830 557.5,-836 557.5,-836 557.5,-894 557.5,-894 557.5,-900 551.5,-906 545.5,-906 545.5,-906 429.5,-906 429.5,-906 423.5,-906 417.5,-900 417.5,-894 417.5,-894 417.5,-836 417.5,-836 417.5,-830 423.5,-824 429.5,-824"/>
+<text text-anchor="middle" x="487.5" y="-894.8" font-family="Helvetica,sans-Serif" font-weight="bold" font-size="9.00">schema</text>
+</g>
+<g id="clust18" class="cluster">
+<title>cluster_src/utl</title>
+<path fill="#ffffff" stroke="black" stroke-width="2" d="M328,-404C328,-404 374,-404 374,-404 380,-404 386,-410 386,-416 386,-416 386,-444 386,-444 386,-450 380,-456 374,-456 374,-456 328,-456 328,-456 322,-456 316,-450 316,-444 316,-444 316,-416 316,-416 316,-410 322,-404 328,-404"/>
+<text text-anchor="middle" x="351" y="-444.8" font-family="Helvetica,sans-Serif" font-weight="bold" font-size="9.00">utl</text>
 </g>
 <!-- src/cli/format&#45;meta&#45;info.js -->
 <g id="node1" class="node">
