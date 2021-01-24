@@ -1,14 +1,16 @@
 {
   "modules": [
     {
-      "source": "test/cli/fixtures/run-through-babel/src/index.js",
+      "source": "test/cli/fixtures/babel/es6/src/index.js",
       "dependencies": [
         {
-          "resolved": "test/cli/fixtures/run-through-babel/src/shared/index.js",
+          "resolved": "test/cli/fixtures/babel/es6/src/shared/index.js",
           "coreModule": false,
           "followable": true,
           "couldNotResolve": false,
-          "dependencyTypes": ["local"],
+          "dependencyTypes": [
+            "local"
+          ],
           "module": "./shared",
           "moduleSystem": "cjs",
           "dynamic": false,
@@ -22,20 +24,22 @@
       "valid": true
     },
     {
-      "source": "test/cli/fixtures/run-through-babel/src/shared/index.js",
+      "source": "test/cli/fixtures/babel/es6/src/shared/index.js",
       "dependencies": [],
       "orphan": false,
       "valid": true
     },
     {
-      "source": "test/cli/fixtures/run-through-babel/src/something/else.js",
+      "source": "test/cli/fixtures/babel/es6/src/something/else.js",
       "dependencies": [
         {
-          "resolved": "test/cli/fixtures/run-through-babel/src/shared/index.js",
+          "resolved": "test/cli/fixtures/babel/es6/src/shared/index.js",
           "coreModule": false,
           "followable": true,
           "couldNotResolve": false,
-          "dependencyTypes": ["local"],
+          "dependencyTypes": [
+            "local"
+          ],
           "module": "../shared",
           "moduleSystem": "cjs",
           "dynamic": false,
@@ -59,19 +63,24 @@
     "optionsUsed": {
       "combinedDependencies": false,
       "externalModuleResolutionStrategy": "node_modules",
-      "moduleSystems": ["amd", "cjs", "es6", "tsd"],
-      "outputTo": "test/cli/output/run-through-babel.json",
+      "moduleSystems": [
+        "amd",
+        "cjs",
+        "es6",
+        "tsd"
+      ],
+      "outputTo": "test/cli/output/babel-es6-result.json",
       "outputType": "json",
       "preserveSymlinks": false,
       "tsPreCompilationDeps": false,
       "webpackConfig": {
-        "fileName": "test/cli/fixtures/run-through-babel/webpack-cache-bust.config.js"
+        "fileName": "test/cli/fixtures/babel/es6/webpack-cache-bust.config.js"
       },
       "babelConfig": {
-        "fileName": "test/cli/fixtures/babelrc.valid.json"
+        "fileName": "test/cli/fixtures/babel/es6/babelrc.valid.json"
       },
       "exoticRequireStrings": [],
-      "args": "test/cli/fixtures/run-through-babel/src"
+      "args": "test/cli/fixtures/babel/es6/src"
     },
     "ruleSetUsed": {}
   }
