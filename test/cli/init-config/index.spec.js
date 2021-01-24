@@ -7,6 +7,8 @@ const configurationSchema = require("../../../src/schema/configuration.schema.js
 
 const expect = chai.expect;
 
+chai.use(require("chai-json-schema"));
+
 const RULES_FILE_JS = ".dependency-cruiser.js";
 
 describe("cli/init-config/index", () => {
