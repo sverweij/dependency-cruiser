@@ -860,8 +860,8 @@ Details: https://github.com/sverweij/dependency-cruiser
 Options:
   -f, --output-to <file>      file to write output to; - for stdout (default:
                               "-")
-  -T, --output-type <type>    output type; e.g. err, err-html, dot, ddot, archi
-                              or json (default: "err")
+  -T, --output-type <type>    output type; e.g. err, err-html, dot, ddot, archi,
+                              flat or json (default: "err")
   -I, --include-only <regex>  only include modules matching the regex
   -F, --focus <regex>         only include modules matching the regex + their
                               direct neighbours
