@@ -14,6 +14,7 @@ export default {
         archi: { $ref: "#/definitions/DotReporterOptionsType" },
         dot: { $ref: "#/definitions/DotReporterOptionsType" },
         ddot: { $ref: "#/definitions/DotReporterOptionsType" },
+        flat: { $ref: "#/definitions/DotReporterOptionsType" },
       },
     },
     AnonReporterOptionsType: {

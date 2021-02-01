@@ -14,9 +14,13 @@ export interface IReporterOptions {
    */
   dot?: IDotReporterOptions;
   /**
-   * Options to tweak the output of the dot reporter
+   * Options to tweak the output of the ddot reporter
    */
   ddot?: IDotReporterOptions;
+  /**
+   * Options to tweak the output of the flat /fdot reporter
+   */
+  flat?: IDotReporterOptions;
 }
 
 export interface IReporterFiltersType {
