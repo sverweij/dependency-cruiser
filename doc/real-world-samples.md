@@ -157,9 +157,32 @@ them. Click for slightly more interactive versions.
 
 [sverweij/state-machine-cat](https://github.com/sverweij/state-machine-cat) - an
 interpreter for writing nice state diagrams. Click for a slightly
-more interactive version.
+more interactive version. As you can see this graph does not group modules
+from same folders into clusters. Instead it uses only colors for 'grouping'
+and notes the folder name in the nodes. It's what the ['flat'](https://github.com/sverweij/dependency-cruiser/blob/develop/doc/cli.md#flat-fdot) graph reporter
+does for you. See the howto foldout below to see how to reproduce it.
 
-[![state-machine-cat without external dependencies](https://state-machine-cat.js.org/dependency-cruiser-graph.svg)](https://state-machine-cat.js.org/dependency-cruiser-graph.html)
+(For this too: click for a slightly more interactive version)
+
+[![state-machine-cat without external dependencies](https://state-machine-cat.js.org/dependency-cruiser-graph-flat-dot.svg)](https://state-machine-cat.js.org/dependency-cruiser-graph-flat-dot.html)
+
+<details>
+<summary>howto</summary>
+
+```sh
+git clone git@github.com:sverweij/state-machine-cat.git
+cd state-machine-cat
+npm install
+npx depcruise src bin/smcat --progress \
+    --config config/dependency-cruiser-graph.js \
+    --output-type flat \
+  | dot -Tsvg \
+  | tee docs/dependency-cruiser-graph-flat-dot.svg \
+  | npx depcruise-wrap-stream-in-html \
+  > docs/dependency-cruiser-graph-flat-dot.html
+```
+
+</details>
 
 ### mscgen.js
 
