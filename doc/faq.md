@@ -61,6 +61,31 @@ is to upgrade to version 9.0.0 or higher.
 > module system to the `moduleSystems` array in your dependency-cruiser
 > configuration - or pass it on the command line (with `--module-systems cjs,ejs,tsd`).
 
+### Q: It looks like dependency-cruiser only detects the first of level dependencies - what is going on (TypeScript)?
+
+![picture illustrating seemingly on the first level of dependencies is found](assets/whoops-no-typescript-compiler.svg)
+
+**_A_**: The most likely cause is that dependency-cruiser can't find the TypeScript
+compiler at the same spot you installed it in - see [Q: TypeScript dependencies don't show up. How can I fix that?](#q-typescript-coffeescript-livescript-or-vue-single-file-component-sfc-dependencies-dont-show-up-how-can-i-fix-that)
+for a solution.
+
+> Background/ what's happening?
+>
+> The graph above is the result of a command like `depcruise src/index.ts -T dot | dot -T svg > deps.svg`.
+> As dependency-cruiser got _src/index.ts_ as an explicit argument, it'll scan it.
+> When no TypeScript compiler is available it'll fall back to the JavaScript one.
+> As TypeScript looks a lot like JavaScript, it will still find all direct dependencies.
+> However, when it tries to resolve those dependencies (e.g. _configuration_ in the
+> example above) it's going to check for extensions it can handle - which will
+> typically be ".js", ".json", etc. - but not ".ts". As it cannot find the modules
+> it marks them as unresolvable. This is also why the graph shows them with red
+> lines and text.
+>
+> Once dependency-cruiser _does_ have a TypeScript compiler available, it will find
+> a lot more dependencies with the same command:
+>
+> ![the same command, but now with a TypeScript compiler in the neighbourhood](assets/and-now-with-the-typescript-compiler.svg)
+
 ### Q: The graph dependency-cruiser generates is humongous, and I can't follow the lines very well what can I do?
 
 **A**: Usually you don't need to see _all_ modules and dependencies that make up
@@ -254,9 +279,9 @@ situations without workarounds).
 
 **A**: Yes.
 
-For `.vue` single file components it uses the `vue-template-compiler`
-
-- which will be in your module dependencies if you're developing with Vue).
+For `.vue` single file components it uses the `vue-template-compiler` (which will
+be in your module dependencies if you're developing with Vue - just make sure
+you install dependency-cruiser in the same spot).
 
 ### Q: Does this work with Svelte as well?
 
@@ -264,13 +289,10 @@ For `.vue` single file components it uses the `vue-template-compiler`
 
 For `.svelte` single file components it uses the `svelte` (version 3.x)
 
-- which will be in your module dependencies if you're developing with Svelte).
-- by default, all `.svelte` file will depend on `"svelte/internal"`.
-  If it turns out to be too noisy, you can configure Dependency-cruiser
-  to ignore it (either in the config file or with a command-line param)
-
-As of dependency-cruiser 9.21.0 any configuration generated with `depcruise --init`
-includes this.
+- which will be in your module dependencies if you're developing with Svelte.
+- because of how svelt works, all `.svelte` files depend on `"svelte/internal"`.
+  If that turns out to be too noisy, you can configure dependency-cruiser to
+  ignore it (either in the config file or with a command-line param)
 
 ### Q: Does this mean dependency-cruiser installs transpilers for all these languages?
 
