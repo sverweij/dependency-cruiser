@@ -1,3 +1,4 @@
+const _cloneDeep = require("lodash/cloneDeep");
 const _get = require("lodash/get");
 const _has = require("lodash/has");
 const DEFAULT_THEME = require("./default-theme.json");
@@ -27,7 +28,7 @@ function determineAttributes(pModuleOrDependency, pAttributeCriteria) {
 }
 
 function normalizeTheme(pTheme) {
-  let lReturnValue = DEFAULT_THEME;
+  let lReturnValue = _cloneDeep(DEFAULT_THEME);
 
   if (pTheme) {
     if (pTheme.replace) {
