@@ -27,7 +27,7 @@ function shouldNotBeExcluded(pFullPathToFile, pOptions) {
 
 function gatherScannableFilesFromDirectory(pDirectoryName, pOptions) {
   return fs
-    .readdirSync(pDirectoryName)
+    .readdirSync(path.join(pOptions.baseDir, pDirectoryName))
     .map((pFileName) => path.join(pDirectoryName, pFileName))
     .filter((pFullPathToFile) =>
       shouldNotBeExcluded(pathToPosix(pFullPathToFile), pOptions)
@@ -35,7 +35,7 @@ function gatherScannableFilesFromDirectory(pDirectoryName, pOptions) {
     .reduce((pSum, pFullPathToFile) => {
       let lStat = {};
       try {
-        lStat = fs.statSync(pFullPathToFile);
+        lStat = fs.statSync(path.join(pOptions.baseDir, pFullPathToFile));
       } catch (pError) {
         return pSum;
       }
