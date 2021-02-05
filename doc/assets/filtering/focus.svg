@@ -14,6 +14,21 @@
 <path fill="#ffffff" stroke="black" stroke-width="2" d="M20,-8C20,-8 708,-8 708,-8 714,-8 720,-14 720,-20 720,-20 720,-920 720,-920 720,-926 714,-932 708,-932 708,-932 20,-932 20,-932 14,-932 8,-926 8,-920 8,-920 8,-20 8,-20 8,-14 14,-8 20,-8"/>
 <text text-anchor="middle" x="364" y="-920.8" font-family="Helvetica,sans-Serif" font-weight="bold" font-size="9.00">src</text>
 </g>
+<g id="clust7" class="cluster">
+<title>cluster_src/extract</title>
+<path fill="#ffffff" stroke="black" stroke-width="2" d="M456.5,-704C456.5,-704 518.5,-704 518.5,-704 524.5,-704 530.5,-710 530.5,-716 530.5,-716 530.5,-804 530.5,-804 530.5,-810 524.5,-816 518.5,-816 518.5,-816 456.5,-816 456.5,-816 450.5,-816 444.5,-810 444.5,-804 444.5,-804 444.5,-716 444.5,-716 444.5,-710 450.5,-704 456.5,-704"/>
+<text text-anchor="middle" x="487.5" y="-804.8" font-family="Helvetica,sans-Serif" font-weight="bold" font-size="9.00">extract</text>
+</g>
+<g id="clust8" class="cluster">
+<title>cluster_src/extract/transpile</title>
+<path fill="#ffffff" stroke="black" stroke-width="2" d="M464.5,-712C464.5,-712 510.5,-712 510.5,-712 516.5,-712 522.5,-718 522.5,-724 522.5,-724 522.5,-752 522.5,-752 522.5,-758 516.5,-764 510.5,-764 510.5,-764 464.5,-764 464.5,-764 458.5,-764 452.5,-758 452.5,-752 452.5,-752 452.5,-724 452.5,-724 452.5,-718 458.5,-712 464.5,-712"/>
+<text text-anchor="middle" x="487.5" y="-752.8" font-family="Helvetica,sans-Serif" font-weight="bold" font-size="9.00">transpile</text>
+</g>
+<g id="clust9" class="cluster">
+<title>cluster_src/graph&#45;utl</title>
+<path fill="#ffffff" stroke="black" stroke-width="2" d="M434,-404C434,-404 541,-404 541,-404 547,-404 553,-410 553,-416 553,-416 553,-564 553,-564 553,-570 547,-576 541,-576 541,-576 434,-576 434,-576 428,-576 422,-570 422,-564 422,-564 422,-416 422,-416 422,-410 428,-404 434,-404"/>
+<text text-anchor="middle" x="487.5" y="-564.8" font-family="Helvetica,sans-Serif" font-weight="bold" font-size="9.00">graph&#45;utl</text>
+</g>
 <g id="clust2" class="cluster">
 <title>cluster_src/cli</title>
 <path fill="#ffffff" stroke="black" stroke-width="2" d="M28,-258C28,-258 112,-258 112,-258 118,-258 124,-264 124,-270 124,-270 124,-358 124,-358 124,-364 118,-370 112,-370 112,-370 28,-370 28,-370 22,-370 16,-364 16,-358 16,-358 16,-270 16,-270 16,-264 22,-258 28,-258"/>
@@ -38,21 +53,6 @@
 <title>cluster_src/enrich/summarize</title>
 <path fill="#ffffff" stroke="black" stroke-width="2" d="M437,-592C437,-592 538,-592 538,-592 544,-592 550,-598 550,-604 550,-604 550,-632 550,-632 550,-638 544,-644 538,-644 538,-644 437,-644 437,-644 431,-644 425,-638 425,-632 425,-632 425,-604 425,-604 425,-598 431,-592 437,-592"/>
 <text text-anchor="middle" x="487.5" y="-632.8" font-family="Helvetica,sans-Serif" font-weight="bold" font-size="9.00">summarize</text>
-</g>
-<g id="clust7" class="cluster">
-<title>cluster_src/extract</title>
-<path fill="#ffffff" stroke="black" stroke-width="2" d="M456.5,-704C456.5,-704 518.5,-704 518.5,-704 524.5,-704 530.5,-710 530.5,-716 530.5,-716 530.5,-804 530.5,-804 530.5,-810 524.5,-816 518.5,-816 518.5,-816 456.5,-816 456.5,-816 450.5,-816 444.5,-810 444.5,-804 444.5,-804 444.5,-716 444.5,-716 444.5,-710 450.5,-704 456.5,-704"/>
-<text text-anchor="middle" x="487.5" y="-804.8" font-family="Helvetica,sans-Serif" font-weight="bold" font-size="9.00">extract</text>
-</g>
-<g id="clust8" class="cluster">
-<title>cluster_src/extract/transpile</title>
-<path fill="#ffffff" stroke="black" stroke-width="2" d="M464.5,-712C464.5,-712 510.5,-712 510.5,-712 516.5,-712 522.5,-718 522.5,-724 522.5,-724 522.5,-752 522.5,-752 522.5,-758 516.5,-764 510.5,-764 510.5,-764 464.5,-764 464.5,-764 458.5,-764 452.5,-758 452.5,-752 452.5,-752 452.5,-724 452.5,-724 452.5,-718 458.5,-712 464.5,-712"/>
-<text text-anchor="middle" x="487.5" y="-752.8" font-family="Helvetica,sans-Serif" font-weight="bold" font-size="9.00">transpile</text>
-</g>
-<g id="clust9" class="cluster">
-<title>cluster_src/graph&#45;utl</title>
-<path fill="#ffffff" stroke="black" stroke-width="2" d="M434,-404C434,-404 541,-404 541,-404 547,-404 553,-410 553,-416 553,-416 553,-564 553,-564 553,-570 547,-576 541,-576 541,-576 434,-576 434,-576 428,-576 422,-570 422,-564 422,-564 422,-416 422,-416 422,-410 428,-404 434,-404"/>
-<text text-anchor="middle" x="487.5" y="-564.8" font-family="Helvetica,sans-Serif" font-weight="bold" font-size="9.00">graph&#45;utl</text>
 </g>
 <g id="clust10" class="cluster">
 <title>cluster_src/main</title>
