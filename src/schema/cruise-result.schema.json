@@ -705,6 +705,10 @@
             }
           }
         },
+        "baseDir": {
+          "type": "string",
+          "description": "The directory dependency-cruiser should run its cruise from. Defaults to the current working directory."
+        },
         "args": {
           "type": "string",
           "description": "arguments passed on the command line"

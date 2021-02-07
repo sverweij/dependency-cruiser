@@ -461,6 +461,10 @@
               "enum": ["cli-feedback", "performance-log", "none"]
             }
           }
+        },
+        "baseDir": {
+          "type": "string",
+          "description": "The directory dependency-cruiser should run its cruise from. Defaults to the current working directory."
         }
       }
     },

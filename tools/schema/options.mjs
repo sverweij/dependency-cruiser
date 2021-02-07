@@ -280,6 +280,12 @@ export default {
             },
           },
         },
+        baseDir: {
+          type: "string",
+          description:
+            "The directory dependency-cruiser should run its cruise from. Defaults to the current " +
+            "working directory.",
+        },
       },
     },
     ...moduleSystemsType.definitions,

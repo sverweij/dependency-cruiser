@@ -653,6 +653,13 @@ favourite editor. Here's an example for visual studio code:
 
 > :bulb: Make sure the prefix ends on a `/`.
 
+### `baseDir`: specify a directory to cruise from
+
+> :shell: there is no command line equivalent for this at the moment
+
+By default dependency-cruiser will take the current working directory to start
+a cruise from. If you want to alter that you can pass it in this attribute.
+
 ## reporterOptions
 
 In the `reporterOptions` attribute you can pass things to reporters to influence
