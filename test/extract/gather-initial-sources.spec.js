@@ -213,6 +213,24 @@ describe("extract/gatherInitialSources", () => {
     ]);
   });
 
+  it("heeds the baseDir", () => {
+    expect(
+      gather(
+        ["**/src/**/*.js"],
+        normalizeCruiseOptions({
+          baseDir: "test/extract/fixtures/gather-globbing",
+        })
+      ).map(pathToPosix)
+    ).to.deep.equal([
+      "packages/baldr/src/bow.js",
+      "packages/baldr/src/index.js",
+      "packages/odin/src/deep/ly.js",
+      "packages/odin/src/deep/ly.spec.js",
+      "packages/odin/src/deep/ly/index.js",
+      "packages/odin/src/deep/ly/nested.js",
+    ]);
+  });
+
   it("filters invalid symlinks", () => {
     expect(
       fs
