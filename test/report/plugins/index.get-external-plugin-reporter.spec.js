@@ -1,20 +1,20 @@
 /* eslint-disable node/global-require */
-const path = require("path");
+const path = require("path").posix;
 const { expect } = require("chai");
+const pathToPosix = require("../../../src/extract/utl/path-to-posix");
 const { getExternalPluginReporter } = require("../../../src/report/plugins");
 
-const FIXTURE_DIR = path.join(__dirname, "fixtures");
+const FIXTURE_DIR = pathToPosix(path.join(__dirname, "fixtures"));
 
 describe("report/plugins - getExternalPluginReporter", () => {
   it("throws when the plugin:reporter is not a valid plugin", () => {
     expect(() =>
       getExternalPluginReporter(
-        `plugin:${path.join(FIXTURE_DIR, "./invalid-no-exit-code-plugin")}`
+        `plugin:${path.join(FIXTURE_DIR, "invalid-no-exit-code-plugin")}`
       )
     ).to.throw(
       `${path.join(
-        __dirname,
-        "fixtures",
+        FIXTURE_DIR,
         "invalid-no-exit-code-plugin"
       )} is not a valid plugin`
     );
