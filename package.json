@@ -48,7 +48,8 @@
     "./config-utl/extract-babel-config": "./src/config-utl/extract-babel-config.js",
     "./config-utl/extract-depcruise-config": "./src/config-utl/extract-depcruise-config/index.js",
     "./config-utl/extract-ts-config": "./src/config-utl/extract-ts-config.js",
-    "./config-utl/extract-webpack-resolve-config": "./src/config-utl/extract-webpack-resolve-config.js"
+    "./config-utl/extract-webpack-resolve-config": "./src/config-utl/extract-webpack-resolve-config.js",
+    "./sample-reporter-plugin": "./configs/plugins/stats-reporter-plugin.js"
   },
   "types": "types/dependency-cruiser.d.ts",
   "files": [

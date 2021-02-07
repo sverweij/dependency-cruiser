@@ -12,6 +12,18 @@
       }
     },
     {
+      "name": "no-orphans",
+      "from": {
+        "orphan": true,
+        "pathNot": [
+          "(^|/)\\.[^/]+\\.(js|cjs|mjs|ts|json)$",
+          "\\.d\\.ts$|(^|/)tsconfig\\.json$",
+          "(^|/)(babel|webpack)\\.config\\.(js|cjs|mjs|ts|json)$",
+          "-reporter-plugin\\.js$"
+        ]
+      }
+    },
+    {
       "name": "cli-to-main-only",
       "comment": "This cli module depends on something not in the public interface - which means it either doesn't belong in cli, or the main public interface needs to be expanded.",
       "severity": "error",

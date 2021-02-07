@@ -410,7 +410,31 @@ module.exports = {
 
 ### Q: How do I add a new output format?
 
-**A**: Like so:
+**A**: There's two ways - as a plugin or directly in dependency-cruiser
+
+#### as a plugin
+
+- create a module that exports a function of this signature:
+  ```typescript
+  (pCruiseResult: ICruiseResult): IReporterOutput;
+  ```
+- pass the module as an output type, e.g. on the command line:
+  - `depcruise src --output-type plugin:my-awesome-plugin`
+  - dependency-cruiser should be able to find `my-awesome-plugin`. For
+    local modules this typically means you have to provide it the full path
+    path e.g. `depcruise src --output-type plugin:$(pwd)/path/to/my-awesome-plugin`
+- before executing the plugin dependency-cruiser checks whether the function
+  has the correct signature and whether it can handle minimal input.
+- plugin support is quite new (2021-02), so details like when
+  the plugin gets validated what prefix to use (currently: `plugin:` ) might
+  still change in the coming months.
+
+> See the basic [stats-reporter-plugin](../configs/plugins/stats-reporter-plugin.js)
+> for an example.
+
+#### directly in dependency-cruiser
+
+For reporters that should come shipped with dependency-cruiser do this:
 
 - In `src/report`:
   - add a module that exports a default function that

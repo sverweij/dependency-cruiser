@@ -31,7 +31,8 @@ function validateRegExpSafety(pPattern) {
 function validateOutputType(pOutputType) {
   if (
     Boolean(pOutputType) &&
-    !report.getAvailableReporters().includes(pOutputType)
+    !report.getAvailableReporters().includes(pOutputType) &&
+    !pOutputType.startsWith("plugin:")
   ) {
     throw new Error(`'${pOutputType}' is not a valid output type.\n`);
   }

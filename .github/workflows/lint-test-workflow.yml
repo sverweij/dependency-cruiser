@@ -71,6 +71,15 @@ jobs:
         run: |
           node --version
           npm run test:cover
+        if: matrix.node-version != '10.x'
+        shell: bash
+        env:
+          CI: true
+      - name: test only (for node 10)
+        run: |
+          node --version
+          npm run test
+        if: matrix.node-version == '10.x'
         shell: bash
         env:
           CI: true

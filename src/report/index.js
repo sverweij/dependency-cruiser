@@ -12,6 +12,7 @@ const identity = require("./identity");
 const json = require("./json");
 const teamcity = require("./teamcity");
 const text = require("./text");
+const { getExternalPluginReporter } = require("./plugins");
 
 const TYPE2REPORTER = {
   anon,
@@ -41,8 +42,12 @@ const TYPE2REPORTER = {
  *                       and returns an IReporterOutput
  */
 function getReporter(pOutputType) {
-  // eslint-disable-next-line security/detect-object-injection
-  return TYPE2REPORTER[pOutputType] || identity;
+  return (
+    // eslint-disable-next-line security/detect-object-injection
+    TYPE2REPORTER[pOutputType] ||
+    getExternalPluginReporter(pOutputType) ||
+    identity
+  );
 }
 
 /**

@@ -17,7 +17,8 @@ export type OutputType =
   | "err-html"
   | "teamcity"
   | "anon"
-  | "text";
+  | "text"
+  | string;
 
 export type SeverityType = "error" | "warn" | "info" | "ignore";
 
