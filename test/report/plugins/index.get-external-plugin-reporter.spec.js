@@ -1,25 +1,8 @@
-/* eslint-disable node/global-require */
-const path = require("path").posix;
+const semver = require("semver");
 const { expect } = require("chai");
-const pathToPosix = require("../../../src/extract/utl/path-to-posix");
 const { getExternalPluginReporter } = require("../../../src/report/plugins");
 
-const FIXTURE_DIR = pathToPosix(path.join(__dirname, "fixtures"));
-
 describe("report/plugins - getExternalPluginReporter", () => {
-  it("throws when the plugin:reporter is not a valid plugin", () => {
-    expect(() =>
-      getExternalPluginReporter(
-        `plugin:${path.join(FIXTURE_DIR, "invalid-no-exit-code-plugin")}`
-      )
-    ).to.throw(
-      `${path.join(
-        FIXTURE_DIR,
-        "invalid-no-exit-code-plugin"
-      )} is not a valid plugin`
-    );
-  });
-
   it("throws when the plugin:reporter does not exist", () => {
     expect(() =>
       getExternalPluginReporter(`plugin:this-plugin-does-not-exist`)
@@ -33,14 +16,24 @@ describe("report/plugins - getExternalPluginReporter", () => {
     expect(getExternalPluginReporter()).to.equal(false);
   });
 
-  it("returns the plugin module when it's valid and exists", () => {
-    expect(
-      getExternalPluginReporter(
-        `plugin:${path.join(FIXTURE_DIR, "./valid-non-functional-plugin")}`
-      )()
-    ).to.deep.equal({
-      output: "some string",
-      exitCode: 42,
+  if (semver.satisfies(process.versions.node, "^12.19 || >=14.7")) {
+    it("throws when the plugin:reporter is not a valid plugin", () => {
+      expect(() =>
+        getExternalPluginReporter(`plugin:dependency-cruiser`)
+      ).to.throw(`dependency-cruiser is not a valid plugin`);
     });
-  });
+
+    it("returns the plugin module when it's valid and exists", () => {
+      const lSampleReporter = getExternalPluginReporter(
+        "plugin:dependency-cruiser/sample-reporter-plugin"
+      );
+      const lResults = lSampleReporter({
+        modules: [],
+        summary: { totalCruised: 0 },
+      });
+      expect(lResults).to.haveOwnProperty("output");
+      expect(lResults).to.haveOwnProperty("exitCode");
+      expect(lResults.exitCode).to.equal(0);
+    });
+  }
 });
