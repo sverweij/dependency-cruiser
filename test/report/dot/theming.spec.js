@@ -1,3 +1,4 @@
+const _cloneDeep = require("lodash/cloneDeep");
 const { expect } = require("chai");
 const theming = require("../../../src/report/dot/theming");
 
@@ -33,5 +34,12 @@ describe("report/dot/theming - determineModuleColors - default theme", () => {
         theming.normalizeTheme({}).modules
       )
     ).to.deep.equal({ fillcolor: "#ffee44" });
+  });
+
+  it("normalizeTheme doesn't mutate the default theme", () => {
+    const lOriginalDefaultTheme = _cloneDeep(theming.normalizeTheme());
+
+    theming.normalizeTheme({ graph: { someAttribute: 1234 } });
+    expect(theming.normalizeTheme()).to.deep.equal(lOriginalDefaultTheme);
   });
 });
