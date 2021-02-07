@@ -25,10 +25,6 @@ function isValidPlugin(pPluginFunction) {
   return lReturnValue;
 }
 
-/**
- *
- * @param {string} pOutputType
- */
 function getPluginReporter(pOutputType) {
   let lReturnValue = false;
 
@@ -44,10 +40,6 @@ function getPluginReporter(pOutputType) {
   return lReturnValue;
 }
 
-/**
- *
- * @param {string} pOutputType
- */
 function getExternalPluginReporter(pOutputType) {
   const lPluginPatternRE = /^plugin:([^:]+)$/;
   const lPluginMatch = (pOutputType || "").match(lPluginPatternRE);

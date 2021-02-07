@@ -3,9 +3,11 @@ const P75 = 0.75;
 const DEFAULT_JSON_INDENT = 2;
 
 /**
+ * returns an object with some stats from the ICruiseResult pCruiseResult it
+ * got passed
  *
- * @param {import('../../types/dependency-cruiser').ICruiseResult} pCruiseResult
- * @return {string}
+ * @param {import('../../types/dependency-cruiser').ICruiseResult} pCruiseResult - a result from a cruise.
+ * @return {string} an object with some stats
  */
 function samplePluginReporter(pCruiseResult) {
   const lDependencyCounts = pCruiseResult.modules
@@ -38,7 +40,7 @@ function samplePluginReporter(pCruiseResult) {
  * @param {import('../../types/dependency-cruiser').ICruiseResult} pCruiseResult -
  *      the output of a dependency-cruise adhering to dependency-cruiser's
  *      cruise result schema
- * @returns {import('../../types/dependency-cruiser').IReporterOutput} -
+ * @return {import('../../types/dependency-cruiser').IReporterOutput} -
  *      output: some stats on modules and dependencies in json format
  *      exitCode: 0
  */
