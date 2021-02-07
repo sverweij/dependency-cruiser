@@ -59,15 +59,26 @@ Also high level:
 
 To get the above graph we used [react-dependency-cruiser-config.js](real-world-samples/react-dependency-cruiser-config.js). To generate it yourself do this in the root of the react repo:
 
-- `yarn`
-- `yarn add -D -W dependency-cruiser`
-- copy `react-dependency-cruiser-config.js` to the root of the repo
+- prepare
+
+```sh
+git clone git@github.com:facebook/react.git
+cd react
+yarn
+yarn add -D -W dependency-cruiser
+rm -f react-dependency-cruiser-config.js
+wget https://raw.githubusercontent.com/sverweij/dependency-cruiser/develop/doc/real-world-samples/react-dependency-cruiser-config.js
+```
+
 - Add these run-scripts to the package.json:
+
   ```
-  "dc": "depcruise --version && depcruise --config react-dependency-cruiser-config.js -T err packages/*/{*.js,src}",
-  "depcruise:archi": "depcruise --config react-dependency-cruiser-config.js -T archi packages/*/{*.js,src} | dot -T svg | tee react-high-level-dependencies.svg | depcruise-wrap-stream-in-html > react-high-level-dependencies.html
+    "dc": "depcruise --version && depcruise --config react-dependency-cruiser-config.js -T err packages/*/{*.js,src}",
+    "depcruise:archi": "depcruise --config react-dependency-cruiser-config.js -T archi packages/*/{*.js,src} | dot -T svg | tee react-high-level-dependencies.svg | depcruise-wrap-stream-in-html > react-high-level-dependencies.html
   ```
+
 - `yarn depcruise:archi`
+
 </details>
 
 ### Safe-regex
