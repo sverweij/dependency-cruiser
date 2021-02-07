@@ -99,6 +99,11 @@ export interface ICruiseOptions {
    */
   args?: string;
   /**
+   * The directory dependency-cruiser should run its cruise from. Defaults
+   * to the current working directory.
+   */
+  baseDir?: string;
+  /**
    * a string to insert before links (in dot/ svg output) so with
    * cruising local dependencies it is possible to point to sources
    * elsewhere (e.g. in an online repository)
