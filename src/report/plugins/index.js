@@ -41,7 +41,7 @@ function getPluginReporter(pOutputType) {
 }
 
 function getExternalPluginReporter(pOutputType) {
-  const lPluginPatternRE = /^plugin:([^:]+)$/;
+  const lPluginPatternRE = /^plugin:(.+)$/;
   const lPluginMatch = (pOutputType || "").match(lPluginPatternRE);
 
   if (Boolean(lPluginMatch)) {
