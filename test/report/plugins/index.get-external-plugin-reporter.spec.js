@@ -1,8 +1,31 @@
+const path = require("path");
 const semver = require("semver");
 const { expect } = require("chai");
 const { getExternalPluginReporter } = require("../../../src/report/plugins");
 
+const FIXTURE_DIRECTORY = path.join(__dirname, "fixtures");
+
 describe("report/plugins - getExternalPluginReporter", () => {
+  it("throws when the plugin:reporter is not a valid plugin (missing exit code)", () => {
+    const lNoExitCodePlugin = path.join(
+      FIXTURE_DIRECTORY,
+      "invalid-no-exit-code-plugin"
+    );
+    expect(() =>
+      getExternalPluginReporter(`plugin:${lNoExitCodePlugin}`)
+    ).to.throw(`${lNoExitCodePlugin} is not a valid plugin`);
+  });
+
+  it("throws when the plugin:reporter is not a valid plugin (missing output)", () => {
+    const lNoExitCodePlugin = path.join(
+      FIXTURE_DIRECTORY,
+      "invalid-no-output-plugin"
+    );
+    expect(() =>
+      getExternalPluginReporter(`plugin:${lNoExitCodePlugin}`)
+    ).to.throw(`${lNoExitCodePlugin} is not a valid plugin`);
+  });
+
   it("throws when the plugin:reporter does not exist", () => {
     expect(() =>
       getExternalPluginReporter(`plugin:this-plugin-does-not-exist`)
@@ -17,7 +40,7 @@ describe("report/plugins - getExternalPluginReporter", () => {
   });
 
   if (semver.satisfies(process.versions.node, "^12.19 || >=14.7")) {
-    it("throws when the plugin:reporter is not a valid plugin", () => {
+    it("throws when the plugin:reporter is not a valid plugin (package ref)", () => {
       expect(() =>
         getExternalPluginReporter(`plugin:dependency-cruiser`)
       ).to.throw(`dependency-cruiser is not a valid plugin`);
