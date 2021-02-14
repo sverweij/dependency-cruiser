@@ -1,6 +1,7 @@
 const _has = require("lodash/has");
 const isModuleOnlyRule = require("./is-module-only-rule");
 const matchers = require("./matchers");
+const { extractGroups } = require("./utl");
 
 function matchesOrphanRule(pRule, pModule) {
   return (
@@ -12,17 +13,22 @@ function matchesOrphanRule(pRule, pModule) {
 }
 
 function matchesReachableRule(pRule, pModule) {
-  return (
-    _has(pRule.to, "reachable") &&
-    _has(pModule, "reachable") &&
-    pModule.reachable.some(
+  if (_has(pRule.to, "reachable") && _has(pModule, "reachable")) {
+    const lReachableRecord = pModule.reachable.find(
       (pReachable) =>
         pReachable.asDefinedInRule === pRule.name &&
         pReachable.value === pRule.to.reachable
-    ) &&
-    matchers.toModulePath(pRule, pModule) &&
-    matchers.toModulePathNot(pRule, pModule)
-  );
+    );
+    if (Boolean(lReachableRecord)) {
+      const lGroups = extractGroups(pRule.from, lReachableRecord.matchedFrom);
+
+      return (
+        matchers.toModulePath(pRule, pModule, lGroups) &&
+        matchers.toModulePathNot(pRule, pModule, lGroups)
+      );
+    }
+  }
+  return false;
 }
 
 function matchesReachesRule(pRule, pModule) {
@@ -42,10 +48,13 @@ function matchesReachesRule(pRule, pModule) {
 }
 
 function match(pModule) {
-  return (pRule) =>
-    matchesOrphanRule(pRule, pModule) ||
-    matchesReachableRule(pRule, pModule) ||
-    matchesReachesRule(pRule, pModule);
+  return (pRule) => {
+    return (
+      matchesOrphanRule(pRule, pModule) ||
+      matchesReachableRule(pRule, pModule) ||
+      matchesReachesRule(pRule, pModule)
+    );
+  };
 }
 const isInteresting = (pRule) => isModuleOnlyRule(pRule);
 
