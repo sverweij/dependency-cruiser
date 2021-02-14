@@ -113,7 +113,7 @@ export default {
     },
     ReachableType: {
       type: "object",
-      required: ["value", "asDefinedInRule"],
+      required: ["value", "asDefinedInRule", "matchedFrom"],
       additionalProperties: false,
       properties: {
         value: {
@@ -127,6 +127,15 @@ export default {
           type: "string",
           description:
             "The name of the rule where the reachability was defined",
+        },
+        matchedFrom: {
+          type: "string",
+          description:
+            "The matchedFrom attribute shows what the 'from' module " +
+            "that causes the 'reachable' information to be what it is. " +
+            "Sometimes the 'asDefinedInRule' is not specific enough - e.g. when the " +
+            "from part can be many modules and/ or contains capturing groups used in the " +
+            "to part of the rule.",
         },
       },
     },

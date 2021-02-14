@@ -68,6 +68,7 @@ const ANOTATED_GRAPH_FOR_HAJOO = [
     reachable: [
       {
         asDefinedInRule: "unnamed",
+        matchedFrom: "./src/hajoo.js",
         value: false,
       },
     ],
@@ -82,6 +83,7 @@ const ANOTATED_GRAPH_FOR_HAJOO = [
     reachable: [
       {
         asDefinedInRule: "unnamed",
+        matchedFrom: "./src/hajoo.js",
         value: false,
       },
     ],
@@ -189,6 +191,7 @@ describe("enrich/derive/reachable/index - reachability detection", () => {
         reachable: [
           {
             value: true,
+            matchedFrom: "./src/index.js",
             asDefinedInRule: "not-in-allowed",
           },
         ],
@@ -260,6 +263,7 @@ describe("enrich/derive/reachable/index - reachability detection", () => {
         reachable: [
           {
             value: true,
+            matchedFrom: "./src/index.js",
             asDefinedInRule: "not-in-allowed",
           },
         ],
@@ -346,6 +350,7 @@ describe("enrich/derive/reachable/index - reachability detection", () => {
         reachable: [
           {
             value: true,
+            matchedFrom: "./src/index.js",
             asDefinedInRule: "not-in-allowed",
           },
         ],
@@ -356,6 +361,7 @@ describe("enrich/derive/reachable/index - reachability detection", () => {
         reachable: [
           {
             value: true,
+            matchedFrom: "./src/index.js",
             asDefinedInRule: "not-in-allowed",
           },
         ],
@@ -397,6 +403,7 @@ describe("enrich/derive/reachable/index - reachability detection", () => {
         reachable: [
           {
             asDefinedInRule: "unnamed",
+            matchedFrom: "./src/hajoo.js",
             value: false,
           },
         ],
@@ -451,6 +458,7 @@ describe("enrich/derive/reachable/index - reachability detection", () => {
         reachable: [
           {
             asDefinedInRule: "unnamed",
+            matchedFrom: "./src/hajoo.js",
             value: false,
           },
         ],
@@ -536,6 +544,7 @@ describe("enrich/derive/reachable/index - reachability detection", () => {
         reachable: [
           {
             asDefinedInRule: "not-unreachable-by-test",
+            matchedFrom: "./test/hajoo.spec.js",
             value: true,
           },
         ],
@@ -550,6 +559,7 @@ describe("enrich/derive/reachable/index - reachability detection", () => {
         reachable: [
           {
             asDefinedInRule: "not-unreachable-by-test",
+            matchedFrom: "./test/hajoo.spec.js",
             value: true,
           },
         ],
@@ -567,6 +577,7 @@ describe("enrich/derive/reachable/index - reachability detection", () => {
         reachable: [
           {
             asDefinedInRule: "not-unreachable-by-test",
+            matchedFrom: "./test/hajoo.spec.js",
             value: true,
           },
         ],
@@ -667,6 +678,7 @@ describe("enrich/derive/reachable/index - reachability detection", () => {
         reachable: [
           {
             asDefinedInRule: "not-unreachable-by-test",
+            matchedFrom: "./test/hajoo.spec.js",
             value: true,
           },
         ],
@@ -681,6 +693,7 @@ describe("enrich/derive/reachable/index - reachability detection", () => {
         reachable: [
           {
             asDefinedInRule: "not-unreachable-by-test",
+            matchedFrom: "./test/hajoo.spec.js",
             value: true,
           },
         ],
@@ -698,10 +711,12 @@ describe("enrich/derive/reachable/index - reachability detection", () => {
         reachable: [
           {
             asDefinedInRule: "not-unreachable-by-test",
+            matchedFrom: "./test/hajoo.spec.js",
             value: true,
           },
           {
             asDefinedInRule: "not-reachable-from-index",
+            matchedFrom: "./src/index.js",
             value: true,
           },
         ],
@@ -826,5 +841,199 @@ describe("enrich/derive/reachable/index - reachability detection", () => {
     expect(
       addReachability(lSourceGraph, normalize(lTwoDifferentRules))
     ).to.deep.equal(lResultGraph);
+  });
+
+  it("correctly processes capture groups", () => {
+    const lRuleSetWithCaptureGroup = {
+      forbidden: [
+        {
+          name: "with-a-capture-group",
+          from: {
+            path: "^src/([^/]+)/index\\.js$",
+          },
+          to: {
+            path: "^src/$1",
+            reachable: false,
+          },
+        },
+      ],
+    };
+    const lDependencyGraph = [
+      {
+        source: "src/foo/index.js",
+        dependencies: [{ resolved: "src/foo/quux/huey.js" }],
+      },
+      {
+        source: "src/foo/quux/huey.js",
+        dependencies: [{ resolved: "src/foo/quux/louie.js" }],
+      },
+      {
+        source: "src/foo/quux/louie.js",
+        dependencies: [{ resolved: "src/foo/quux/dewey.js" }],
+      },
+      {
+        source: "src/foo/quux/dewey.js",
+        dependencies: [],
+      },
+      {
+        source: "src/foo/quux/not-reachable-from-foo-index.js",
+        dependencies: [],
+      },
+      {
+        source: "src/bar/index.js",
+        dependencies: [{ resolved: "src/bar/ister.js" }],
+      },
+      {
+        source: "src/bar/ister.js",
+        dependencies: [
+          { resolved: "src/bar/stool.js" },
+          { resolved: "src/bar/iton.js" },
+        ],
+      },
+      {
+        source: "src/bar/stool.js",
+        dependencies: [],
+      },
+      {
+        source: "src/bar/iton.js",
+        dependencies: [],
+      },
+      {
+        source: "src/bar/none.js",
+        dependencies: [],
+      },
+      {
+        source: "src/baz/index.js",
+        dependencies: [],
+      },
+    ];
+    const lExpectedGraph = [
+      {
+        source: "src/foo/index.js",
+        dependencies: [
+          {
+            resolved: "src/foo/quux/huey.js",
+          },
+        ],
+      },
+      {
+        source: "src/foo/quux/huey.js",
+        dependencies: [
+          {
+            resolved: "src/foo/quux/louie.js",
+          },
+        ],
+        reachable: [
+          {
+            value: true,
+            asDefinedInRule: "with-a-capture-group",
+            matchedFrom: "src/foo/index.js",
+          },
+        ],
+      },
+      {
+        source: "src/foo/quux/louie.js",
+        dependencies: [
+          {
+            resolved: "src/foo/quux/dewey.js",
+          },
+        ],
+        reachable: [
+          {
+            value: true,
+            asDefinedInRule: "with-a-capture-group",
+            matchedFrom: "src/foo/index.js",
+          },
+        ],
+      },
+      {
+        source: "src/foo/quux/dewey.js",
+        dependencies: [],
+        reachable: [
+          {
+            value: true,
+            asDefinedInRule: "with-a-capture-group",
+            matchedFrom: "src/foo/index.js",
+          },
+        ],
+      },
+      {
+        source: "src/foo/quux/not-reachable-from-foo-index.js",
+        dependencies: [],
+        reachable: [
+          {
+            value: false,
+            asDefinedInRule: "with-a-capture-group",
+            matchedFrom: "src/foo/index.js",
+          },
+        ],
+      },
+      {
+        source: "src/bar/index.js",
+        dependencies: [
+          {
+            resolved: "src/bar/ister.js",
+          },
+        ],
+      },
+      {
+        source: "src/bar/ister.js",
+        dependencies: [
+          {
+            resolved: "src/bar/stool.js",
+          },
+          {
+            resolved: "src/bar/iton.js",
+          },
+        ],
+        reachable: [
+          {
+            value: true,
+            asDefinedInRule: "with-a-capture-group",
+            matchedFrom: "src/bar/index.js",
+          },
+        ],
+      },
+      {
+        source: "src/bar/stool.js",
+        dependencies: [],
+        reachable: [
+          {
+            value: true,
+            asDefinedInRule: "with-a-capture-group",
+            matchedFrom: "src/bar/index.js",
+          },
+        ],
+      },
+      {
+        source: "src/bar/iton.js",
+        dependencies: [],
+        reachable: [
+          {
+            value: true,
+            asDefinedInRule: "with-a-capture-group",
+            matchedFrom: "src/bar/index.js",
+          },
+        ],
+      },
+      {
+        source: "src/bar/none.js",
+        dependencies: [],
+        reachable: [
+          {
+            value: false,
+            asDefinedInRule: "with-a-capture-group",
+            matchedFrom: "src/bar/index.js",
+          },
+        ],
+      },
+      {
+        source: "src/baz/index.js",
+        dependencies: [],
+      },
+    ];
+    expect(
+      addReachability(lDependencyGraph, normalize(lRuleSetWithCaptureGroup))
+    ).to.deep.equal(lExpectedGraph);
   });
 });
