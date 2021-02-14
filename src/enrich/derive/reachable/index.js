@@ -75,7 +75,7 @@ function mergeReachesProperties(pFromModule, pToModule, pRule, pPath) {
 }
 
 /**
- * TODO: explainez cette fonctionalité!
+ * TODO: explain this dark magic
  */
 
 function shouldAddReaches(pRule, pModule) {
@@ -92,41 +92,60 @@ function shouldAddReachable(pRule, pModule) {
   );
 }
 
-// TODO function is a bit on the big side - time to split
-function addReachableToGraph(pGraph, pReachableRule) {
+function addReachesToModule(pModule, pGraph, pReachableRule) {
+  const lToModules = pGraph.filter(isModuleInRuleTo(pReachableRule));
+
+  for (let lToModule of lToModules) {
+    if (pModule.source !== lToModule.source) {
+      const lPath = getPath(pGraph, pModule.source, lToModule.source);
+
+      if (lPath.length > 0) {
+        pModule.reaches = mergeReachesProperties(
+          pModule,
+          lToModule,
+          pReachableRule,
+          lPath
+        );
+      }
+    }
+  }
+  return pModule;
+}
+
+function addReachableToModule(pModule, pGraph, pReachableRule) {
+  const lFromModules = pGraph.filter(isModuleInRuleFrom(pReachableRule));
+  let lFound = false;
+
+  for (let lFromModule of lFromModules) {
+    if (!lFound && pModule.source !== lFromModule.source) {
+      const lPath = getPath(pGraph, lFromModule.source, pModule.source);
+
+      lFound = lPath.length > 0;
+      pModule.reachable = mergeReachableProperties(
+        pModule,
+        pReachableRule,
+        lPath
+      );
+    }
+  }
+  return pModule;
+}
+
+function addReachabilityToGraph(pGraph, pReachableRule) {
   return pGraph.map((pModule) => {
-    let lReturnValue = _clone(pModule);
+    let lClonedModule = _clone(pModule);
 
-    if (shouldAddReaches(pReachableRule, lReturnValue)) {
-      pGraph.filter(isModuleInRuleTo(pReachableRule)).forEach((pToModule) => {
-        if (lReturnValue.source !== pToModule.source) {
-          const lPath = getPath(pGraph, pModule.source, pToModule.source);
-
-          if (lPath.length > 0) {
-            lReturnValue.reaches = mergeReachesProperties(
-              lReturnValue,
-              pToModule,
-              pReachableRule,
-              lPath
-            );
-          }
-        }
-      });
+    if (shouldAddReaches(pReachableRule, lClonedModule)) {
+      lClonedModule = addReachesToModule(lClonedModule, pGraph, pReachableRule);
     }
-    if (shouldAddReachable(pReachableRule, lReturnValue)) {
-      pGraph
-        .filter(isModuleInRuleFrom(pReachableRule))
-        .forEach((pFromModule) => {
-          if (lReturnValue.source !== pFromModule.source) {
-            lReturnValue.reachable = mergeReachableProperties(
-              lReturnValue,
-              pReachableRule,
-              getPath(pGraph, pFromModule.source, pModule.source)
-            );
-          }
-        });
+    if (shouldAddReachable(pReachableRule, lClonedModule)) {
+      lClonedModule = addReachableToModule(
+        lClonedModule,
+        pGraph,
+        pReachableRule
+      );
     }
-    return lReturnValue;
+    return lClonedModule;
   });
 }
 
@@ -134,7 +153,7 @@ module.exports = (pGraph, pRuleSet) => {
   const lReachableRules = pRuleSet ? getReachableRules(pRuleSet) : [];
 
   return lReachableRules.reduce(
-    (pReturnGraph, pRule) => addReachableToGraph(pReturnGraph, pRule),
+    (pReturnGraph, pRule) => addReachabilityToGraph(pReturnGraph, pRule),
     _clone(pGraph)
   );
 };
