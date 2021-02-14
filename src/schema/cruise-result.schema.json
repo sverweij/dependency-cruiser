@@ -98,7 +98,7 @@
         },
         "matchedFrom": {
           "type": "string",
-          "description": "Sometimes the 'asDefinedInRule' is not specific enough - e.g. when the from part can be many modules and/ or contains capturing groups used in the to part of the rule. The matchedFrom attribute shows what the 'from' module that causes the 'reachable' information to be what it is."
+          "description": "The matchedFrom attribute shows what the 'from' module that causes the 'reachable' information to be what it is. Sometimes the 'asDefinedInRule' is not specific enough - e.g. when the from part can be many modules and/ or contains capturing groups used in the to part of the rule."
         }
       }
     },
