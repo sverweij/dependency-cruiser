@@ -37,15 +37,11 @@ function resolveModule(
 }
 
 function canBeResolvedToTsVariant(pModuleName) {
-  return [".js", ".jsx"].some(
-    (pExtension) => path.extname(pModuleName) === pExtension
-  );
+  return [".js", ".jsx"].includes(path.extname(pModuleName));
 }
 
 function isTypeScriptishExtension(pModuleName) {
-  return [".ts", ".tsx"].some(
-    (pExtension) => path.extname(pModuleName) === pExtension
-  );
+  return [".ts", ".tsx"].includes(path.extname(pModuleName));
 }
 
 function resolveWithRetry(
