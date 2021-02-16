@@ -1,7 +1,7 @@
+const util = require("util");
 const _get = require("lodash/get");
 const _uniqBy = require("lodash/uniqBy");
 const _uniqWith = require("lodash/uniqWith");
-const _isEqual = require("lodash/isEqual");
 
 function extendNamedRule(pExtendedRule, pForbiddenArrayBase) {
   return pForbiddenArrayBase
@@ -33,7 +33,7 @@ function mergeRules(pRuleArrayExtended, pRuleArrayBase) {
   // merge anonymous on 100% equality
   let lAnonymousRules = _uniqWith(
     pRuleArrayExtended.concat(pRuleArrayBase).filter((pRule) => !pRule.name),
-    _isEqual
+    util.isDeepStrictEqual
   );
 
   let lNamedRules = pRuleArrayExtended
@@ -66,7 +66,10 @@ function mergeRules(pRuleArrayExtended, pRuleArrayBase) {
  * @return {Array} - the merged array
  */
 function mergeAllowedRules(pAllowedArrayExtended, pAllowedArrayBase) {
-  return _uniqWith(pAllowedArrayExtended.concat(pAllowedArrayBase), _isEqual);
+  return _uniqWith(
+    pAllowedArrayExtended.concat(pAllowedArrayBase),
+    util.isDeepStrictEqual
+  );
 }
 
 function mergeOptions(pOptionsExtended, pOptionsBase) {
