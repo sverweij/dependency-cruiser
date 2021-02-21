@@ -178,6 +178,17 @@
       "severity": "error",
       "from": { "path": "\\.spec\\.js$" },
       "to": { "path": "^src", "reachable": false }
+    },
+    {
+      "name": "not-reachable-from-folder-index",
+      "severity": "info",
+      "from": {
+        "path": "^src/([^/]+)/index\\.js$"
+      },
+      "to": {
+        "path": "^src/$1/",
+        "reachable": false
+      }
     }
   ],
   "options": {

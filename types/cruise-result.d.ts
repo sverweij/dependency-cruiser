@@ -198,6 +198,13 @@ export interface IReachable {
    */
   asDefinedInRule: string;
   /**
+   * The matchedFrom attribute shows what the 'from' module that causes the 'reachable'
+   * information to be what it is. Sometimes the 'asDefinedInRule' is not specific enough -
+   * e.g. when the from part can be many modules and/ or contains capturing groups used
+   * in the to part of the rule.
+   */
+  matchedFrom: string;
+  /**
    * 'true' if this module is reachable from any of the modules matched by the from part of a
    * reachability-rule in 'asDefinedInRule', 'false' if not.
    */

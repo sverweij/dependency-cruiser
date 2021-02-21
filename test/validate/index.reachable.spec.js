@@ -27,7 +27,13 @@ describe("validate/index - reachable (in forbidden set)", () => {
         readRuleSet("./test/validate/fixtures/rules.reachable-false.json"),
         {
           source: "something",
-          reachable: [{ asDefinedInRule: "no-unreachable", value: true }],
+          reachable: [
+            {
+              asDefinedInRule: "no-unreachable",
+              matchedFrom: "azazel",
+              value: true,
+            },
+          ],
         }
       )
     ).to.deep.equal({ valid: true });
@@ -39,7 +45,13 @@ describe("validate/index - reachable (in forbidden set)", () => {
         readRuleSet("./test/validate/fixtures/rules.reachable-true.json"),
         {
           source: "something",
-          reachable: [{ asDefinedInRule: "no-unreachable", value: true }],
+          reachable: [
+            {
+              asDefinedInRule: "no-unreachable",
+              matchedFrom: "azazel",
+              value: true,
+            },
+          ],
         }
       )
     ).to.deep.equal({ valid: true });
@@ -51,7 +63,13 @@ describe("validate/index - reachable (in forbidden set)", () => {
         readRuleSet("./test/validate/fixtures/rules.reachable-false.json"),
         {
           source: "something",
-          reachable: [{ asDefinedInRule: "no-unreachable", value: false }],
+          reachable: [
+            {
+              asDefinedInRule: "no-unreachable",
+              matchedFrom: "azazel",
+              value: false,
+            },
+          ],
         }
       )
     ).to.deep.equal({
@@ -71,7 +89,13 @@ describe("validate/index - reachable (in forbidden set)", () => {
         readRuleSet("./test/validate/fixtures/rules.reachable-true.json"),
         {
           source: "something",
-          reachable: [{ asDefinedInRule: "no-reachable", value: true }],
+          reachable: [
+            {
+              asDefinedInRule: "no-reachable",
+              matchedFrom: "azazel",
+              value: true,
+            },
+          ],
         }
       )
     ).to.deep.equal({
@@ -91,7 +115,13 @@ describe("validate/index - reachable (in forbidden set)", () => {
         readRuleSet("./test/validate/fixtures/rules.reachable-false.path.json"),
         {
           source: "something",
-          reachable: [{ asDefinedInRule: "no-unreachable", value: false }],
+          reachable: [
+            {
+              asDefinedInRule: "no-unreachable",
+              matchedFrom: "azazel",
+              value: false,
+            },
+          ],
         }
       )
     ).to.deep.equal({
@@ -111,7 +141,13 @@ describe("validate/index - reachable (in forbidden set)", () => {
         readRuleSet("./test/validate/fixtures/rules.reachable-true.path.json"),
         {
           source: "something",
-          reachable: [{ asDefinedInRule: "no-reachable", value: true }],
+          reachable: [
+            {
+              asDefinedInRule: "no-reachable",
+              matchedFrom: "azazel",
+              value: true,
+            },
+          ],
         }
       )
     ).to.deep.equal({
@@ -133,7 +169,13 @@ describe("validate/index - reachable (in forbidden set)", () => {
         ),
         {
           source: "something",
-          reachable: [{ asDefinedInRule: "no-unreachable", value: false }],
+          reachable: [
+            {
+              asDefinedInRule: "no-unreachable",
+              matchedFrom: "azazel",
+              value: false,
+            },
+          ],
         }
       )
     ).to.deep.equal({ valid: true });
@@ -147,7 +189,13 @@ describe("validate/index - reachable (in forbidden set)", () => {
         ),
         {
           source: "something",
-          reachable: [{ asDefinedInRule: "no-reachable", value: true }],
+          reachable: [
+            {
+              asDefinedInRule: "no-reachable",
+              matchedFrom: "azazel",
+              value: true,
+            },
+          ],
         }
       )
     ).to.deep.equal({ valid: true });
@@ -182,6 +230,7 @@ describe("validate/index - reachable (in allowed set)", () => {
           reachable: [
             {
               value: true,
+              matchedFrom: "azazel",
               asDefinedInRule: "not-in-allowed",
             },
           ],
@@ -211,6 +260,32 @@ describe("validate/index - reachable (in allowed set)", () => {
       rules: [
         {
           name: "not-in-allowed",
+          severity: "warn",
+        },
+      ],
+    });
+  });
+
+  it("Respects capturing groups", () => {
+    const lRuleSet = readRuleSet(
+      "./test/validate/fixtures/rules.reachable.capturing-group.json"
+    );
+    const lModule = {
+      source: "src/hoonk/not-reached.js",
+      reachable: [
+        {
+          value: false,
+          asDefinedInRule: "capt-group",
+          matchedFrom: "src/hoonk/index.js",
+        },
+      ],
+    };
+    const lValidationResult = validate.module(lRuleSet, lModule);
+    expect(lValidationResult).to.deep.equal({
+      valid: false,
+      rules: [
+        {
+          name: "capt-group",
           severity: "warn",
         },
       ],
