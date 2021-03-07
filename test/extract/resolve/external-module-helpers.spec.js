@@ -61,6 +61,18 @@ describe("extract/resolve/externalModuleHelpers.getPackageJson", () => {
     expect(lPackageJson.name).to.equal("chai");
   });
 
+  it("returns a package.json when there is one (root) - base dir defaults to current working dir", () => {
+    let lPackageJson = externalModuleHelpers.getPackageJson(
+      "chai",
+      null,
+      BASIC_RESOLVE_OPTIONS
+    );
+
+    expect(lPackageJson).to.be.not.null;
+    expect(_has(lPackageJson, "name")).to.be.true;
+    expect(lPackageJson.name).to.equal("chai");
+  });
+
   it("returns a package.json when there is one ('local' node_modules)", () => {
     let lPackageJson = externalModuleHelpers.getPackageJson(
       "deprecated-at-the-start-for-test-purposes",

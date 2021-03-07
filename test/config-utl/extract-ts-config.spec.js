@@ -58,7 +58,7 @@ describe("config-utl/parseTSConfig - flatten typescript config - simple config s
     });
   });
 
-  it("returns an object with a bunch of options when when the default ('--init') config file is passed", () => {
+  it("returns an object with a bunch of options when the default ('--init') config file is passed", () => {
     expect(
       loadTSConfig(
         path.join(
@@ -137,24 +137,33 @@ describe("cli/parseTSConfig - flatten typescript config - 'extend' config scenar
     ] = 1;
 
     /* eslint no-undefined:0 */
-    expect(lParseResult.configFileSpecs).to.deep.equal({
+    expect(lParseResult).to.deep.equal({
       // only in the base
-      filesSpecs: ["./dummysrc.ts"],
-      // as of typescript 3.1.2 there's no referenceSpecs anymore when
-      // it's in neither base nor extends
-      // "referencesSpecs": undefined,
-      // only in the extends:
-      excludeSpecs: ["only in the extends"],
-      // overridden by extends:
-      includeSpecs: ["override from extends here"],
-      // only in the extends:
-      validatedExcludeSpecs: ["only in the extends"],
-      // spontaneously inserted as of typescript 4
-      validatedFilesSpec: ["./dummysrc.ts"],
-      // overridden by extends:
-      validatedIncludeSpecs: ["override from extends here"],
-
+      // filesSpecs: ["./dummysrc.ts"],
+      options: {
+        configFilePath: path.join(
+          DIRNAME,
+          "fixtures/typescriptconfig/tsconfig.noncompileroptionsextends.json"
+        ),
+      },
+      fileNames: [
+        path.join(DIRNAME, "fixtures/typescriptconfig/dummysrc.ts"),
+        // "/Users/sander/prg/js/dependency-cruiser/test/config-utl/fixtures/typescriptconfig/dummysrc.ts",
+      ],
+      projectReferences: undefined,
+      // validatedIncludeSpecs: ["override from extends here"],
+      typeAcquisition: { enable: false, include: [], exclude: [] },
+      raw: {
+        extends: "./tsconfig.noncompileroptionsbase.json",
+        exclude: ["only in the extends"],
+        include: ["override from extends here"],
+        compileOnSave: false,
+        files: ["./dummysrc.ts"],
+      },
+      watchOptions: undefined,
+      errors: [],
       wildcardDirectories: lWildCardDirectories,
+      compileOnSave: false,
     });
 
     // from base:

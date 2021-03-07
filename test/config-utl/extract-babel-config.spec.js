@@ -14,6 +14,9 @@ const DEFAULT_EMPTY_BABEL_OPTIONS_OBJECT = {
   root: process.cwd(),
   plugins: [],
   presets: [],
+  assumptions: {},
+  browserslistConfigFile: false,
+  targets: {},
 };
 
 describe("config-utl/parseBabelConfig", () => {
