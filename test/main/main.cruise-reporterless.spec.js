@@ -16,11 +16,15 @@ chai.use(require("chai-json-schema"));
 function runRecursiveFixture(pFixture) {
   if (!Boolean(pFixture.ignore)) {
     it(pFixture.title, () => {
-      let lResult = cruise([pFixture.input.fileName], pFixture.input.options, {
-        bustTheCache: true,
-        resolveLicenses: true,
-        resolveDeprecations: true,
-      }).output;
+      let lResult = cruise(
+        [pFixture.input.fileName],
+        { ...pFixture.input.options, forceDeriveDependents: true },
+        {
+          bustTheCache: true,
+          resolveLicenses: true,
+          resolveDeprecations: true,
+        }
+      ).output;
 
       expect(lResult).to.be.jsonSchema(cruiseResultSchema);
       expect(lResult.modules).to.deep.equal(pFixture.expected);

@@ -44,18 +44,21 @@
             "valid": true
           }
         ],
+        "dependents": [],
         "valid": true
       },
       {
         "source": "node_modules/idontgetbundled/index.js",
         "orphan": false,
         "dependencies": [],
+        "dependents": ["index.js"],
         "valid": true
       },
       {
         "source": "node_modules/igetbundled/index.js",
         "orphan": false,
         "dependencies": [],
+        "dependents": ["index.js"],
         "valid": true
       }
     ]

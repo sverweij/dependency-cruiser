@@ -4,6 +4,7 @@ const busLogLevels = require("../utl/bus-log-levels");
 const addFocus = require("../../src/graph-utl/add-focus");
 const deriveCirculars = require("./derive/circular");
 const deriveOrphans = require("./derive/orphan");
+const addDependents = require("./derive/dependents");
 const deriveReachable = require("./derive/reachable");
 const addValidations = require("./add-validations");
 
@@ -12,6 +13,8 @@ module.exports = function enrichModules(pModules, pOptions) {
   let lModules = deriveCirculars(pModules);
   bus.emit("progress", "analyzing: orphans", { level: busLogLevels.INFO });
   lModules = deriveOrphans(lModules);
+  bus.emit("progress", "analyzing: dependents", { level: busLogLevels.INFO });
+  lModules = addDependents(lModules, pOptions);
   bus.emit("progress", "analyzing: reachables", { level: busLogLevels.INFO });
   lModules = deriveReachable(lModules, pOptions.ruleSet);
   bus.emit("progress", "analyzing: add focus (if any)", {

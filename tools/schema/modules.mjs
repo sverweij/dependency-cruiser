@@ -27,6 +27,14 @@ export default {
             "The violated rule will be in the 'rule' object at the same level.",
         },
         dependencies: { $ref: "#/definitions/DependenciesType" },
+        dependents: {
+          type: "array",
+          description: "list of modules depending on this module",
+          items: {
+            type: "string",
+            description: "the (resolved) name of the dependant",
+          },
+        },
         followable: {
           type: "boolean",
           description:

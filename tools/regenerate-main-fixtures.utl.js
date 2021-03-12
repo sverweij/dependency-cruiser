@@ -43,6 +43,17 @@ barfTheJSON(
     { bustTheCache: true }
   )
 );
+barfTheJSON(
+  "collapse-after-cruise/expected-result.json",
+  main.cruise(
+    ["test/main/fixtures/collapse-after-cruise"],
+    {
+      ruleSet: {},
+      collapse: "^test/main/fixtures/collapse-after-cruise/src/[^/]+",
+    },
+    { bustTheCache: true }
+  )
+);
 
 // main.cruise - tsPreCompilationDeps
 barfTheJSON(
@@ -181,7 +192,11 @@ process.chdir(WORKING_DIR);
 process.chdir("test/main/fixtures/type-only-module-references");
 barfTheJSON(
   "type-only-module-references/output.json",
-  main.cruise(["src"], { tsPreCompilationDeps: true }, { bustTheCache: true })
+  main.cruise(
+    ["src"],
+    { tsPreCompilationDeps: true },
+    { bustTheCache: true, resolveLicenses: true }
+  )
 );
 process.chdir(WORKING_DIR);
 

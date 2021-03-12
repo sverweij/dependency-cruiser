@@ -380,6 +380,10 @@
           "description": "What external module resolution strategy to use. Defaults to 'node_modules' (not used anymore - module resolution strategy determination is automatic now)",
           "enum": ["node_modules", "yarn-pnp"]
         },
+        "forceDeriveDependents": {
+          "type": "boolean",
+          "description": "When true includes denormalized dependents in the cruise-result, even though there's no rule in the rule set that requires them. Defaults to false."
+        },
         "webpackConfig": {
           "type": "object",
           "additionalProperties": false,

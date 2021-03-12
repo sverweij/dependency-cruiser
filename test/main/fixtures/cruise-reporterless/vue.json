@@ -38,6 +38,7 @@
             "valid": true
           }
         ],
+        "dependents": [],
         "valid": true
       },
       {
@@ -49,6 +50,7 @@
         "dependencyTypes": ["unknown"],
         "orphan": false,
         "dependencies": [],
+        "dependents": ["test/main/fixtures/cruise-reporterless/vue/main.js"],
         "valid": true
       },
       {
@@ -70,12 +72,14 @@
             "valid": true
           }
         ],
+        "dependents": ["test/main/fixtures/cruise-reporterless/vue/main.js"],
         "valid": true
       },
       {
         "source": "test/main/fixtures/cruise-reporterless/vue/components/HelloWorld.vue",
         "orphan": false,
         "dependencies": [],
+        "dependents": ["test/main/fixtures/cruise-reporterless/vue/App.vue"],
         "valid": true
       }
     ]
