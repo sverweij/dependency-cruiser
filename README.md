@@ -93,7 +93,7 @@ readme) or in a table.
   [command line interface](./doc/cli.md)
   documentation.
 - dependency-cruiser uses itself to check on itself in its own build process;
-  see the `decpruise` script in the
+  see the `depcruise` script in the
   [package.json](https://github.com/sverweij/dependency-cruiser/blob/master/package.json#L64)
 
 ## I want to know more!
