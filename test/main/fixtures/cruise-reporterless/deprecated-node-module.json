@@ -26,6 +26,7 @@
             "license": "GPL"
           }
         ],
+        "dependents": [],
         "valid": true
       },
       {
@@ -47,6 +48,9 @@
             "valid": true
           }
         ],
+        "dependents": [
+          "test/main/fixtures/cruise-reporterless/deprecated-node-module/require-something-deprecated.js"
+        ],
         "valid": true
       },
       {
@@ -58,6 +62,9 @@
         "dependencyTypes": ["local"],
         "orphan": false,
         "dependencies": [],
+        "dependents": [
+          "test/main/fixtures/cruise-reporterless/deprecated-node-module/node_modules/deprecated-at-the-start-for-test-purposes/index.js"
+        ],
         "valid": true
       }
     ]

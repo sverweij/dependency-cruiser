@@ -97,6 +97,7 @@
             "circular": false
           }
         ],
+        "dependents": [],
         "valid": true
       },
       {
@@ -108,6 +109,9 @@
         "dependencyTypes": ["core"],
         "orphan": false,
         "dependencies": [],
+        "dependents": [
+          "test/main/fixtures/cruise-reporterless/typescript/index.ts"
+        ],
         "valid": true
       },
       {
@@ -119,12 +123,18 @@
         "dependencyTypes": ["core"],
         "orphan": false,
         "dependencies": [],
+        "dependents": [
+          "test/main/fixtures/cruise-reporterless/typescript/index.ts"
+        ],
         "valid": true
       },
       {
         "source": "test/main/fixtures/cruise-reporterless/typescript/javascriptThing.js",
         "orphan": false,
         "dependencies": [],
+        "dependents": [
+          "test/main/fixtures/cruise-reporterless/typescript/index.ts"
+        ],
         "valid": true
       },
       {
@@ -146,18 +156,28 @@
             "circular": false
           }
         ],
+        "dependents": [
+          "test/main/fixtures/cruise-reporterless/typescript/index.ts"
+        ],
         "valid": true
       },
       {
         "source": "test/main/fixtures/cruise-reporterless/typescript/sub/willBeReExported.ts",
         "orphan": false,
         "dependencies": [],
+        "dependents": [
+          "test/main/fixtures/cruise-reporterless/typescript/index.ts",
+          "test/main/fixtures/cruise-reporterless/typescript/sub/index.ts"
+        ],
         "valid": true
       },
       {
         "source": "test/main/fixtures/cruise-reporterless/typescript/sub/kaching.ts",
         "orphan": false,
         "dependencies": [],
+        "dependents": [
+          "test/main/fixtures/cruise-reporterless/typescript/index.ts"
+        ],
         "valid": true
       }
     ]
@@ -194,6 +214,9 @@
             ]
           }
         ],
+        "dependents": [
+          "test/main/fixtures/cruise-reporterless/typescript-circular-with-types/B.ts"
+        ],
         "valid": true
       },
       {
@@ -218,6 +241,9 @@
               "test/main/fixtures/cruise-reporterless/typescript-circular-with-types/B.ts"
             ]
           }
+        ],
+        "dependents": [
+          "test/main/fixtures/cruise-reporterless/typescript-circular-with-types/A.ts"
         ],
         "valid": true
       }
@@ -265,6 +291,7 @@
             "valid": true
           }
         ],
+        "dependents": [],
         "valid": true
       },
       {
@@ -286,12 +313,19 @@
             "valid": true
           }
         ],
+        "dependents": [
+          "test/main/fixtures/cruise-reporterless/typescript-unused-dependencies/a.ts"
+        ],
         "valid": true
       },
       {
         "source": "test/main/fixtures/cruise-reporterless/typescript-unused-dependencies/c.ts",
         "orphan": false,
         "dependencies": [],
+        "dependents": [
+          "test/main/fixtures/cruise-reporterless/typescript-unused-dependencies/a.ts",
+          "test/main/fixtures/cruise-reporterless/typescript-unused-dependencies/b.ts"
+        ],
         "valid": true
       }
     ]
@@ -322,12 +356,16 @@
             "circular": false
           }
         ],
+        "dependents": [],
         "valid": true
       },
       {
         "source": "test/main/fixtures/cruise-reporterless/typescript-circular-with-types/B.ts",
         "orphan": false,
         "dependencies": [],
+        "dependents": [
+          "test/main/fixtures/cruise-reporterless/typescript-circular-with-types/A.ts"
+        ],
         "valid": true
       }
     ]
@@ -342,6 +380,7 @@
         "source": "test/main/fixtures/cruise-reporterless/typescript-unused-dependencies/a.ts",
         "orphan": true,
         "dependencies": [],
+        "dependents": [],
         "valid": true
       }
     ]

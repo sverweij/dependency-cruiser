@@ -9,6 +9,7 @@
         "source": "test/main/fixtures/cruise-reporterless/commonjs/empty.js",
         "orphan": true,
         "dependencies": [],
+        "dependents": [],
         "valid": true
       }
     ]
@@ -80,6 +81,7 @@
             "valid": true
           }
         ],
+        "dependents": [],
         "valid": true
       },
       {
@@ -91,6 +93,9 @@
         "dependencyTypes": ["local"],
         "orphan": false,
         "dependencies": [],
+        "dependents": [
+          "test/main/fixtures/cruise-reporterless/commonjs/root_two.js"
+        ],
         "valid": true
       },
       {
@@ -102,6 +107,9 @@
         "dependencyTypes": ["core"],
         "orphan": false,
         "dependencies": [],
+        "dependents": [
+          "test/main/fixtures/cruise-reporterless/commonjs/root_two.js"
+        ],
         "valid": true
       },
       {
@@ -123,6 +131,9 @@
             "valid": true
           }
         ],
+        "dependents": [
+          "test/main/fixtures/cruise-reporterless/commonjs/root_two.js"
+        ],
         "valid": true
       },
       {
@@ -134,6 +145,11 @@
         "dependencyTypes": ["core"],
         "orphan": false,
         "dependencies": [],
+        "dependents": [
+          "test/main/fixtures/cruise-reporterless/commonjs/shared.js",
+          "test/main/fixtures/cruise-reporterless/commonjs/sub/dir.js",
+          "test/main/fixtures/cruise-reporterless/commonjs/sub/depindir.js"
+        ],
         "valid": true
       },
       {
@@ -154,6 +170,9 @@
             "couldNotResolve": false,
             "valid": true
           }
+        ],
+        "dependents": [
+          "test/main/fixtures/cruise-reporterless/commonjs/root_two.js"
         ],
         "valid": true
       },
@@ -190,6 +209,9 @@
             "valid": true
           }
         ],
+        "dependents": [
+          "test/main/fixtures/cruise-reporterless/commonjs/two_only_one.js"
+        ],
         "valid": true
       },
       {
@@ -210,6 +232,9 @@
             "couldNotResolve": false,
             "valid": true
           }
+        ],
+        "dependents": [
+          "test/main/fixtures/cruise-reporterless/commonjs/sub/dir.js"
         ],
         "valid": true
       }
@@ -299,6 +324,7 @@
             "valid": true
           }
         ],
+        "dependents": [],
         "valid": true
       },
       {
@@ -310,6 +336,9 @@
         "dependencyTypes": ["core"],
         "orphan": false,
         "dependencies": [],
+        "dependents": [
+          "test/main/fixtures/cruise-reporterless/commonjs/root_one.js"
+        ],
         "valid": true
       },
       {
@@ -331,6 +360,9 @@
             "valid": true
           }
         ],
+        "dependents": [
+          "test/main/fixtures/cruise-reporterless/commonjs/root_one.js"
+        ],
         "valid": true
       },
       {
@@ -342,6 +374,13 @@
         "dependencyTypes": ["core"],
         "orphan": false,
         "dependencies": [],
+        "dependents": [
+          "test/main/fixtures/cruise-reporterless/commonjs/one_only_one.js",
+          "test/main/fixtures/cruise-reporterless/commonjs/one_only_two.js",
+          "test/main/fixtures/cruise-reporterless/commonjs/shared.js",
+          "test/main/fixtures/cruise-reporterless/commonjs/sub/dir.js",
+          "test/main/fixtures/cruise-reporterless/commonjs/sub/depindir.js"
+        ],
         "valid": true
       },
       {
@@ -363,6 +402,9 @@
             "valid": true
           }
         ],
+        "dependents": [
+          "test/main/fixtures/cruise-reporterless/commonjs/root_one.js"
+        ],
         "valid": true
       },
       {
@@ -383,6 +425,9 @@
             "couldNotResolve": false,
             "valid": true
           }
+        ],
+        "dependents": [
+          "test/main/fixtures/cruise-reporterless/commonjs/root_one.js"
         ],
         "valid": true
       },
@@ -419,6 +464,9 @@
             "valid": true
           }
         ],
+        "dependents": [
+          "test/main/fixtures/cruise-reporterless/commonjs/root_one.js"
+        ],
         "valid": true
       },
       {
@@ -439,6 +487,9 @@
             "couldNotResolve": false,
             "valid": true
           }
+        ],
+        "dependents": [
+          "test/main/fixtures/cruise-reporterless/commonjs/sub/dir.js"
         ],
         "valid": true
       }
@@ -514,6 +565,7 @@
             "valid": true
           }
         ],
+        "dependents": [],
         "valid": true
       },
       {
@@ -525,6 +577,7 @@
         "dependencyTypes": ["local"],
         "orphan": false,
         "dependencies": [],
+        "dependents": ["root_two.js"],
         "valid": true
       },
       {
@@ -536,6 +589,7 @@
         "dependencyTypes": ["core"],
         "orphan": false,
         "dependencies": [],
+        "dependents": ["root_two.js"],
         "valid": true
       },
       {
@@ -557,6 +611,7 @@
             "valid": true
           }
         ],
+        "dependents": ["root_two.js"],
         "valid": true
       },
       {
@@ -568,6 +623,7 @@
         "dependencyTypes": ["core"],
         "orphan": false,
         "dependencies": [],
+        "dependents": ["shared.js", "sub/dir.js", "sub/depindir.js"],
         "valid": true
       },
       {
@@ -589,6 +645,7 @@
             "valid": true
           }
         ],
+        "dependents": ["root_two.js"],
         "valid": true
       },
       {
@@ -624,6 +681,7 @@
             "valid": true
           }
         ],
+        "dependents": ["two_only_one.js"],
         "valid": true
       },
       {
@@ -645,6 +703,7 @@
             "valid": true
           }
         ],
+        "dependents": ["sub/dir.js"],
         "valid": true
       }
     ]
@@ -711,12 +770,18 @@
             ]
           }
         ],
+        "dependents": [
+          "test/main/fixtures/cruise-reporterless/commonjs/ralucric.js"
+        ],
         "valid": true
       },
       {
         "source": "test/main/fixtures/cruise-reporterless/commonjs/pointed-to-by-circular.js",
         "orphan": false,
         "dependencies": [],
+        "dependents": [
+          "test/main/fixtures/cruise-reporterless/commonjs/circular.js"
+        ],
         "valid": true
       },
       {
@@ -748,6 +813,9 @@
             ]
           }
         ],
+        "dependents": [
+          "test/main/fixtures/cruise-reporterless/commonjs/circular.js"
+        ],
         "valid": true
       }
     ]
@@ -777,6 +845,7 @@
             "circular": false
           }
         ],
+        "dependents": [],
         "orphan": false,
         "valid": true
       },
@@ -802,6 +871,10 @@
               "test/main/fixtures/cruise-reporterless/commonjs/circle-one.js"
             ]
           }
+        ],
+        "dependents": [
+          "test/main/fixtures/cruise-reporterless/commonjs/points-to-circle-one.js",
+          "test/main/fixtures/cruise-reporterless/commonjs/circle-three.js"
         ],
         "orphan": false,
         "valid": true
@@ -830,6 +903,9 @@
             ]
           }
         ],
+        "dependents": [
+          "test/main/fixtures/cruise-reporterless/commonjs/circle-one.js"
+        ],
         "valid": true
       },
       {
@@ -855,6 +931,9 @@
               "test/main/fixtures/cruise-reporterless/commonjs/circle-three.js"
             ]
           }
+        ],
+        "dependents": [
+          "test/main/fixtures/cruise-reporterless/commonjs/circle-two.js"
         ],
         "valid": true
       }

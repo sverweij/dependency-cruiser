@@ -129,6 +129,11 @@ export interface ICruiseOptions {
    */
   externalModuleResolutionStrategy?: ExternalModuleResolutionStrategyType;
   /**
+   * When true includes denormalized dependents in the cruise-result, even
+   * though there's no rule in the rule set that requires them. Defaults to false.
+   */
+  forceDeriveDependents?: boolean;
+  /**
    * if true combines the package.jsons found from the module up to the base
    * folder the cruise is initiated from. Useful for how (some) mono-repos
    * manage dependencies & dependency definitions.

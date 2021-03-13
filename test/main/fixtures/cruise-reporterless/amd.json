@@ -52,6 +52,7 @@
             "valid": true
           }
         ],
+        "dependents": [],
         "valid": true
       },
       {
@@ -63,6 +64,9 @@
         "dependencyTypes": ["unknown"],
         "orphan": false,
         "dependencies": [],
+        "dependents": [
+          "test/main/fixtures/cruise-reporterless/amd/requires-non-relative-module.js"
+        ],
         "valid": true
       },
       {
@@ -74,12 +78,18 @@
         "dependencyTypes": ["unknown"],
         "orphan": false,
         "dependencies": [],
+        "dependents": [
+          "test/main/fixtures/cruise-reporterless/amd/requires-non-relative-module.js"
+        ],
         "valid": true
       },
       {
         "source": "test/main/fixtures/cruise-reporterless/amd/sub/local-module-in-drag.js",
         "orphan": false,
         "dependencies": [],
+        "dependents": [
+          "test/main/fixtures/cruise-reporterless/amd/requires-non-relative-module.js"
+        ],
         "valid": true
       }
     ]

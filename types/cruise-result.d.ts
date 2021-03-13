@@ -23,7 +23,15 @@ export interface IModule {
    * be in the 'rule' object at the same level.
    */
   valid: boolean;
+  /**
+   * list of modules this module depends on
+   */
   dependencies: IDependency[];
+  /**
+   * list of modules that depend on this module (values are _resolved_ names of
+   * those modules)
+   */
+  dependents: string[];
   /**
    * Whether or not this is a node.js core module
    */

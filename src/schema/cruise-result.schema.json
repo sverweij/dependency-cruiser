@@ -29,6 +29,14 @@
           "description": "'true' if this module violated a rule; 'false' in all other cases. The violated rule will be in the 'rule' object at the same level."
         },
         "dependencies": { "$ref": "#/definitions/DependenciesType" },
+        "dependents": {
+          "type": "array",
+          "description": "list of modules depending on this module",
+          "items": {
+            "type": "string",
+            "description": "the (resolved) name of the dependant"
+          }
+        },
         "followable": {
           "type": "boolean",
           "description": "Whether or not this is a dependency that can be followed any further. This will be 'false' for for core modules, json, modules that could not be resolved to a file and modules that weren't followed because it matches the doNotFollow expression."
@@ -626,6 +634,10 @@
           "type": "string",
           "description": "What external module resolution strategy to use. Defaults to 'node_modules' (not used anymore - module resolution strategy determination is automatic now)",
           "enum": ["node_modules", "yarn-pnp"]
+        },
+        "forceDeriveDependents": {
+          "type": "boolean",
+          "description": "When true includes denormalized dependents in the cruise-result, even though there's no rule in the rule set that requires them. Defaults to false."
         },
         "webpackConfig": {
           "type": "object",

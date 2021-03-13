@@ -9,18 +9,14 @@
       "coreModule": false,
       "couldNotResolve": true,
       "matchesDoNotFollow": false,
-      "dependencyTypes": [
-        "unknown"
-      ],
+      "dependencyTypes": ["unknown"],
       "orphan": false,
       "consolidated": false
     },
     {
       "dependencies": [
         {
-          "dependencyTypes": [
-            "local"
-          ],
+          "dependencyTypes": ["local"],
           "rules": [],
           "valid": true,
           "resolved": "test/main/fixtures/collapse-after-cruise/src/input",
@@ -35,9 +31,7 @@
           "circular": false
         },
         {
-          "dependencyTypes": [
-            "local"
-          ],
+          "dependencyTypes": ["local"],
           "rules": [],
           "valid": true,
           "resolved": "test/main/fixtures/collapse-after-cruise/src/output",
@@ -52,9 +46,7 @@
           "circular": false
         },
         {
-          "dependencyTypes": [
-            "local"
-          ],
+          "dependencyTypes": ["local"],
           "rules": [],
           "valid": true,
           "resolved": "test/main/fixtures/collapse-after-cruise/src/post-processing",
@@ -69,9 +61,7 @@
           "circular": false
         },
         {
-          "dependencyTypes": [
-            "local"
-          ],
+          "dependencyTypes": ["local"],
           "rules": [],
           "valid": true,
           "resolved": "test/main/fixtures/collapse-after-cruise/src/pre-processing",
@@ -86,9 +76,7 @@
           "circular": false
         },
         {
-          "dependencyTypes": [
-            "unknown"
-          ],
+          "dependencyTypes": ["unknown"],
           "rules": [],
           "valid": true,
           "resolved": "./processing",
@@ -112,9 +100,7 @@
     {
       "dependencies": [
         {
-          "dependencyTypes": [
-            "local"
-          ],
+          "dependencyTypes": ["local"],
           "rules": [],
           "valid": true,
           "resolved": "test/main/fixtures/collapse-after-cruise/src/utl",
@@ -178,12 +164,7 @@
     "optionsUsed": {
       "combinedDependencies": false,
       "externalModuleResolutionStrategy": "node_modules",
-      "moduleSystems": [
-        "amd",
-        "cjs",
-        "es6",
-        "tsd"
-      ],
+      "moduleSystems": ["amd", "cjs", "es6", "tsd"],
       "preserveSymlinks": false,
       "tsPreCompilationDeps": false,
       "exoticRequireStrings": [],

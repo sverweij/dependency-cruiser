@@ -1,3 +1,4 @@
+/* eslint-disable max-lines */
 import REAsStringsType from "./re-as-strings-type.mjs";
 import compoundDoNotFollowType from "./compound-donot-follow-type.mjs";
 import compoundExcludeType from "./compound-exclude-type.mjs";
@@ -124,6 +125,12 @@ export default {
             "What external module resolution strategy to use. Defaults to 'node_modules' " +
             "(not used anymore - module resolution strategy determination is automatic now)",
           enum: ["node_modules", "yarn-pnp"],
+        },
+        forceDeriveDependents: {
+          type: "boolean",
+          description:
+            "When true includes denormalized dependents in the cruise-result, even " +
+            "though there's no rule in the rule set that requires them. Defaults to false.",
         },
         webpackConfig: {
           type: "object",

@@ -80,6 +80,7 @@
             "valid": true
           }
         ],
+        "dependents": [],
         "valid": true
       },
       {
@@ -91,12 +92,18 @@
         "dependencyTypes": ["core"],
         "orphan": false,
         "dependencies": [],
+        "dependents": [
+          "test/main/fixtures/cruise-reporterless/coffee/index.coffee"
+        ],
         "valid": true
       },
       {
         "source": "test/main/fixtures/cruise-reporterless/coffee/javascriptThing.js",
         "orphan": false,
         "dependencies": [],
+        "dependents": [
+          "test/main/fixtures/cruise-reporterless/coffee/index.coffee"
+        ],
         "valid": true
       },
       {
@@ -118,18 +125,28 @@
             "valid": true
           }
         ],
+        "dependents": [
+          "test/main/fixtures/cruise-reporterless/coffee/index.coffee"
+        ],
         "valid": true
       },
       {
         "source": "test/main/fixtures/cruise-reporterless/coffee/sub/willBeReExported.coffee.md",
         "orphan": false,
         "dependencies": [],
+        "dependents": [
+          "test/main/fixtures/cruise-reporterless/coffee/index.coffee",
+          "test/main/fixtures/cruise-reporterless/coffee/sub/index.coffee"
+        ],
         "valid": true
       },
       {
         "source": "test/main/fixtures/cruise-reporterless/coffee/sub/kaching.litcoffee",
         "orphan": false,
         "dependencies": [],
+        "dependents": [
+          "test/main/fixtures/cruise-reporterless/coffee/index.coffee"
+        ],
         "valid": true
       }
     ]

@@ -2,6 +2,33 @@ const MEDIAN = 0.5;
 const P75 = 0.75;
 const DEFAULT_JSON_INDENT = 2;
 
+function doMagic(pCruiseResult) {
+  let lReturnValue = {};
+
+  if (pCruiseResult.modules.some((pModule) => pModule.dependents)) {
+    const lDependentCounts = pCruiseResult.modules
+      .map((pModule) => pModule.dependents.length)
+      .sort();
+
+    lReturnValue = {
+      minDependentsPerModule: lDependentCounts[0] || 0,
+      maxDependentsPerModule:
+        lDependentCounts[Math.max(lDependentCounts.length - 1, 0)] || 0,
+      meanDependentsPerModule:
+        lDependentCounts.reduce((pAll, pCurrent) => pAll + pCurrent, 0) /
+        pCruiseResult.summary.totalCruised,
+      medianDependentsPerModule:
+        lDependentCounts[
+          Math.max(0, Math.floor(lDependentCounts.length * MEDIAN))
+        ],
+      p75DependentsPerModule:
+        lDependentCounts[
+          Math.max(0, Math.floor(lDependentCounts.length * P75))
+        ],
+    };
+  }
+  return lReturnValue;
+}
 /**
  * returns an object with some stats from the ICruiseResult pCruiseResult it
  * got passed
@@ -21,8 +48,8 @@ function samplePluginReporter(pCruiseResult) {
     maxDependenciesPerModule:
       lDependencyCounts[Math.max(lDependencyCounts.length - 1, 0)] || 0,
     meanDependenciesPerModule:
-      pCruiseResult.summary.totalCruised /
-      pCruiseResult.summary.totalDependenciesCruised,
+      pCruiseResult.summary.totalDependenciesCruised /
+      pCruiseResult.summary.totalCruised,
     medianDependenciesPerModule:
       lDependencyCounts[
         Math.max(0, Math.floor(lDependencyCounts.length * MEDIAN))
@@ -31,6 +58,7 @@ function samplePluginReporter(pCruiseResult) {
       lDependencyCounts[
         Math.max(0, Math.floor(lDependencyCounts.length * P75))
       ],
+    ...doMagic(pCruiseResult),
   };
 }
 
