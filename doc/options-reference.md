@@ -25,6 +25,7 @@
   - [mono repo behaviour - combinedDependencies](#mono-repo-behaviour---combinedDependencies)
   - [exotic ways to require modules - exoticRequireStrings](#exotic-ways-to-require-modules---exoticrequirestrings)
   - [enhancedResolveOptions](#enhancedresolveoptions)
+  - [forceDeriveDependents](#forcederivedependents)
 
 ## Filters
 
@@ -1178,3 +1179,9 @@ E.g. to set the cache duration to 1337ms, you can use this:
 The cache duration is limited from 0ms (~ don't use a cache) to 1800000ms (0.5h).
 
 The cacheDuration used here overrides any that might be set in webpack configs.
+
+### `forceDeriveDependents`
+
+Dependency-cruiser will automatically determine whether it needs to derive dependents.
+However, if you want to force them to be derived, you can switch this variable
+to `true`.

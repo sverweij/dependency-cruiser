@@ -9,8 +9,15 @@ const findModuleByName = _memoize(
   (_pGraph, pSource) => pSource
 );
 
-module.exports = findModuleByName;
+function isDependent(pResolvedName) {
+  return (pModule) =>
+    pModule.dependencies.some(
+      (pDependency) => pDependency.resolved === pResolvedName
+    );
+}
 
-module.exports.clearCache = () => {
+function clearCache() {
   findModuleByName.cache.clear();
-};
+}
+
+module.exports = { findModuleByName, clearCache, isDependent };

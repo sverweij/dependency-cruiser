@@ -1,121 +1,104 @@
-import { DependencyType, SeverityType } from "./shared-types";
+import { SeverityType } from "./shared-types";
+import {
+  IBaseRestrictionType,
+  IFromRestriction,
+  IToRestriction,
+  IReachabilityToRestrictionType,
+  IRequiredToRestrictionType,
+  IDependentsModuleRestrictionType,
+} from "./restrictions";
 
-export interface IFromRestriction {
+interface IBaseRuleType {
   /**
-   * A regular expression or an array of regular expressions an end of a
-   * dependency should match to be caught by this rule.
+   * A short name for the rule - will appear in reporters to enable customers to
+   * quickly identify a violated rule. Try to keep them short, eslint style.
+   * E.g. 'not-to-core' for a rule forbidding dependencies on core modules, or
+   * 'not-to-unresolvable' for one that prevents dependencies on modules that
+   * probably don't exist.
    */
-  path?: string | string[];
+  name?: string;
   /**
-   * A regular expression or an array of regular expressions an end of a
-   * dependency should NOT match to be caught by this rule.
+   * How severe a violation of the rule is. The 'error' severity will make some
+   * reporters return a non-zero exit code, so if you want e.g. a build to stop
+   * when there's a rule violated: use that.
    */
-  pathNot?: string | string[];
+  severity?: SeverityType;
   /**
-   * Whether or not to match when the module is an orphan (= has no incoming or outgoing
-   * dependencies). When this property it is part of a rule, dependency-cruiser will
-   * ignore the 'to' part.
+   * You can use this field to document why the rule is there.
    */
-  orphan?: boolean;
+  comment?: string;
 }
 
-export interface IToRestriction {
+export interface IRegularForbiddenRuleType extends IBaseRuleType {
   /**
-   * A regular expression or an array of regular expressions an end of a
-   * dependency should match to be caught by this rule.
+   * Criteria the 'from' end of a dependency should match to be caught by this
+   * rule. Leave it empty if you want any module to be matched.
    */
-  path?: string | string[];
+  from: IFromRestriction;
   /**
-   * A regular expression or an array of regular expressions an end of a
-   * dependency should NOT match to be caught by this rule.
+   * Criteria the 'to' end of a dependency should match to be caught by this
+   * rule. Leave it empty if you want any module to be matched.
    */
-  pathNot?: string | string[];
-  /**
-   * Whether or not to match modules dependency-cruiser could not resolve (and probably
-   * aren't on disk). For this one too: leave out if you don't care either way.
-   */
-  couldNotResolve?: boolean;
-  /**
-   * Whether or not to match when following to the to will ultimately end up in the from.
-   */
-  circular?: boolean;
-  /**
-   * If following this dependency will ultimately return to the source
-   * (circular === true), this attribute will contain an (ordered) array of module
-   * names that shows (one of the) circular path(s)
-   */
-  cycle?: string[];
-  /**
-   * Whether or not to match when the dependency is a dynamic one.
-   */
-  dynamic?: boolean;
-  /**
-   * Whether or not to match when the dependency is exotically required
-   */
-  exoticallyRequired?: boolean;
-  /**
-   * A regular expression to match against any 'exotic' require strings
-   */
-  exoticRequire?: string | string[];
-  /**
-   * A regular expression to match against any 'exotic' require strings - when it should NOT be caught by the rule
-   */
-  exoticRequireNot?: string | string[];
-  /**
-   * true if this dependency only exists before compilation (like type only imports),
-   * false in all other cases. Only returned when the tsPreCompilationDeps is set to 'specify'.
-   */
-  preCompilationOnly?: boolean;
-  /**
-   * Whether or not to match modules of any of these types (leaving out matches any of them)
-   */
-  dependencyTypes?: DependencyType[];
-  /**
-   * If true matches dependencies with more than one dependency type (e.g. defined in
-   * _both_ npm and npm-dev)
-   */
-  moreThanOneDependencyType?: boolean;
-  /**
-   * Whether or not to match modules that were released under one of the mentioned
-   * licenses. E.g. to flag GPL-1.0, GPL-2.0 licensed modules (e.g. because your app
-   * is not compatible with the GPL) use "GPL"
-   */
-  license?: string | string[];
-  /**
-   * Whether or not to match modules that were NOT released under one of the mentioned
-   * licenses. E.g. to flag everyting non MIT use "MIT" here
-   */
-  licenseNot?: string | string[];
+  to: IToRestriction;
 }
 
-export interface IReachabilityFromRestrictionType {
+export interface IReachabilityForbiddenRuleType extends IBaseRuleType {
   /**
-   * A regular expression or an array of regular expressions an end of a
-   * dependency should match to be caught by this rule.
+   * Criteria the 'from' end of a dependency should match to be caught by this
+   * rule. Leave it empty if you want any module to be matched.
    */
-  path?: string | string[];
+  from: IBaseRestrictionType;
   /**
-   * A regular expression or an array of regular expressions an end of a
-   * dependency should NOT match to be caught by this rule.
+   * Criteria the 'to' end of a dependency should match to be caught by this
+   * rule. Leave it empty if you want any module to be matched.
    */
-  pathNot?: string | string[];
+  to: IReachabilityToRestrictionType;
 }
 
-export interface IReachabilityToRestrictionType {
+export interface IDependentsForbiddenRuleType extends IBaseRuleType {
   /**
-   * A regular expression or an array of regular expressions an end of a
-   * dependency should match to be caught by this rule.
+   * Criteria to select the module(s) this restriction should apply to
    */
-  path?: string | string[];
+  module: IDependentsModuleRestrictionType;
   /**
-   * A regular expression or an array of regular expressions an end of a
-   * dependency should NOT match to be caught by this rule.
+   * Criteria at least one dependency of each matching module must
+   * adhere to.
    */
-  pathNot?: string | string[];
+  from: IBaseRestrictionType;
+}
+
+export interface IReachabilityAllowedRuleType {
   /**
-   * Whether or not to match modules that aren't reachable from the from part of the rule.
+   * You can use this field to document why the rule is there.
    */
-  reachable: boolean;
+  comment?: string;
+  /**
+   * Criteria the 'from' end of a dependency should match to be caught by this rule.
+   * Leave it empty if you want any module to be matched.
+   */
+  from: IBaseRestrictionType;
+  /**
+   * Criteria the 'to' end of a dependency should match to be caught by this rule.
+   * Leave it empty if you want any module to be matched.
+   */
+  to: IReachabilityToRestrictionType;
+}
+
+export type IForbiddenRuleType =
+  | IRegularForbiddenRuleType
+  | IReachabilityForbiddenRuleType
+  | IDependentsForbiddenRuleType;
+
+export interface IRequiredRuleType extends IBaseRuleType {
+  /**
+   * Criteria to select the module(s) this restriction should apply to
+   */
+  module: IBaseRestrictionType;
+  /**
+   * Criteria at least one dependency of each matching module must
+   * adhere to.
+   */
+  to: IRequiredToRestrictionType;
 }
 
 export type IAllowedRuleType =
@@ -137,141 +120,6 @@ export interface IRegularAllowedRuleType {
    * Leave it empty if you want any module to be matched.
    */
   to: IToRestriction;
-}
-
-export interface IReachabilityAllowedRuleType {
-  /**
-   * You can use this field to document why the rule is there.
-   */
-  comment?: string;
-  /**
-   * Criteria the 'from' end of a dependency should match to be caught by this rule.
-   * Leave it empty if you want any module to be matched.
-   */
-  from: IReachabilityFromRestrictionType;
-  /**
-   * Criteria the 'to' end of a dependency should match to be caught by this rule.
-   * Leave it empty if you want any module to be matched.
-   */
-  to: IReachabilityToRestrictionType;
-}
-
-export type IForbiddenRuleType =
-  | IRegularForbiddenRuleType
-  | IReachabilityForbiddenRuleType;
-
-export interface IRegularForbiddenRuleType {
-  /**
-   * A short name for the rule - will appear in reporters to enable customers to
-   * quickly identify a violated rule. Try to keep them short, eslint style.
-   * E.g. 'not-to-core' for a rule forbidding dependencies on core modules, or
-   * 'not-to-unresolvable' for one that prevents dependencies on modules that
-   * probably don't exist.
-   */
-  name?: string;
-  /**
-   * How severe a violation of the rule is. The 'error' severity will make some
-   * reporters return a non-zero exit code, so if you want e.g. a build to stop
-   * when there's a rule violated: use that.
-   */
-  severity?: SeverityType;
-  /**
-   * You can use this field to document why the rule is there.
-   */
-  comment?: string;
-  /**
-   * Criteria the 'from' end of a dependency should match to be caught by this
-   * rule. Leave it empty if you want any module to be matched.
-   */
-  from: IFromRestriction;
-  /**
-   * Criteria the 'to' end of a dependency should match to be caught by this
-   * rule. Leave it empty if you want any module to be matched.
-   */
-  to: IToRestriction;
-}
-
-export interface IReachabilityForbiddenRuleType {
-  /**
-   * A short name for the rule - will appear in reporters to enable customers to
-   * quickly identify a violated rule. Try to keep them short, eslint style.
-   * E.g. 'not-to-core' for a rule forbidding dependencies on core modules, or
-   * 'not-to-unresolvable' for one that prevents dependencies on modules that
-   * probably don't exist.
-   */
-  name?: string;
-  /**
-   * How severe a violation of the rule is. The 'error' severity will make some
-   * reporters return a non-zero exit code, so if you want e.g. a build to stop
-   * when there's a rule violated: use that.
-   */
-  severity?: SeverityType;
-  /**
-   * You can use this field to document why the rule is there.
-   */
-  comment?: string;
-  /**
-   * Criteria the 'from' end of a dependency should match to be caught by this
-   * rule. Leave it empty if you want any module to be matched.
-   */
-  from: IReachabilityFromRestrictionType;
-  /**
-   * Criteria the 'to' end of a dependency should match to be caught by this
-   * rule. Leave it empty if you want any module to be matched.
-   */
-  to: IReachabilityToRestrictionType;
-}
-
-export interface IRequiredRuleType {
-  /**
-   * A short name for the rule - will appear in reporters to enable customers to
-   * quickly identify a violated rule. Try to keep them short, eslint style.
-   * E.g. 'not-to-core' for a rule forbidding dependencies on core modules, or
-   * 'not-to-unresolvable' for one that prevents dependencies on modules that
-   * probably don't exist.
-   */
-  name?: string;
-  /**
-   * How severe a violation of the rule is. The 'error' severity will make some
-   * reporters return a non-zero exit code, so if you want e.g. a build to stop
-   * when there's a rule violated: use that.
-   */
-  severity?: SeverityType;
-  /**
-   * You can use this field to document why the rule is there.
-   */
-  comment?: string;
-  /**
-   * Criteria to select the module(s) this restriction should apply to
-   */
-  module: IRequiredModuleRestrictionType;
-  /**
-   * Criteria at least one dependency of each matching module must
-   * adhere to.
-   */
-  to: IRequiredToRestrictionType;
-}
-
-export interface IRequiredModuleRestrictionType {
-  /**
-   * A regular expression or an array of regular expressions that select
-   * the modules this required rule should apply to.
-   */
-  path?: string | string[];
-  /**
-   * A regular expression or an array of regular expressions that select
-   * the modules this required rule should not apply to (you can use this
-   * to make exceptions on the `path` attribute)
-   */
-  pathNot?: string | string[];
-}
-
-export interface IRequiredToRestrictionType {
-  /**
-   * A regular expression or an array of regular expressions at least
-   * one of the dependencies of the module should adhere to.
-   */
-  path?: string | string[];
 }
 
 export interface IFlattenedRuleSet {

@@ -34,7 +34,7 @@
           "description": "list of modules depending on this module",
           "items": {
             "type": "string",
-            "description": "the (resolved) name of the dependant"
+            "description": "the (resolved) name of the dependent"
           }
         },
         "followable": {
@@ -387,7 +387,8 @@
     "ForbiddenRuleType": {
       "oneOf": [
         { "$ref": "#/definitions/RegularForbiddenRuleType" },
-        { "$ref": "#/definitions/ReachabilityForbiddenRuleType" }
+        { "$ref": "#/definitions/ReachabilityForbiddenRuleType" },
+        { "$ref": "#/definitions/DependentsForbiddenRuleType" }
       ]
     },
     "RegularForbiddenRuleType": {
@@ -406,6 +407,18 @@
         },
         "from": { "$ref": "#/definitions/FromRestrictionType" },
         "to": { "$ref": "#/definitions/ToRestrictionType" }
+      }
+    },
+    "DependentsForbiddenRuleType": {
+      "type": "object",
+      "required": ["module", "from"],
+      "additionalProperties": false,
+      "properties": {
+        "name": { "type": "string" },
+        "severity": { "$ref": "#/definitions/SeverityType" },
+        "comment": { "type": "string" },
+        "module": { "$ref": "#/definitions/DependentsModuleRestrictionType" },
+        "from": { "$ref": "#/definitions/DependentsFromRestrictionType" }
       }
     },
     "ReachabilityForbiddenRuleType": {
@@ -522,6 +535,44 @@
         },
         "licenseNot": {
           "description": "Whether or not to match modules that were NOT released under one of the mentioned licenses. E.g. to flag everyting non MIT use \"MIT\" here",
+          "$ref": "#/definitions/REAsStringsType"
+        }
+      }
+    },
+    "DependentsModuleRestrictionType": {
+      "description": "Criteria to select the module(s) this restriction should apply to",
+      "required": [],
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "path": {
+          "description": "A regular expression or an array of regular expressions an end of a dependency should match to be caught by this rule.",
+          "$ref": "#/definitions/REAsStringsType"
+        },
+        "pathNot": {
+          "description": "A regular expression or an array of regular expressions an end of a dependency should NOT match to be caught by this rule.",
+          "$ref": "#/definitions/REAsStringsType"
+        },
+        "numberOfDependentsLessThan": {
+          "type": "integer",
+          "description": "Matches when the number of times the 'to' module is used falls below (<) this number. Caveat: only works in concert with path and pathNot restrictions in the from and to parts of the rule; other conditions will be ignored.(somewhat experimental; - syntax can change over time without a major bump)E.g. to flag modules that are used only once or not at all, use 2 here.",
+          "minimum": 0,
+          "maximum": 100
+        }
+      }
+    },
+    "DependentsFromRestrictionType": {
+      "description": "Criteria the dependents of the module should adehere to be caught by this rule rule. Leave it empty if you want any dependent to be matched.",
+      "required": [],
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "path": {
+          "description": "A regular expression or an array of regular expressions an end of a dependency should match to be caught by this rule.",
+          "$ref": "#/definitions/REAsStringsType"
+        },
+        "pathNot": {
+          "description": "A regular expression or an array of regular expressions an end of a dependency should NOT match to be caught by this rule.",
           "$ref": "#/definitions/REAsStringsType"
         }
       }

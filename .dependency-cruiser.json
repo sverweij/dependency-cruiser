@@ -181,6 +181,7 @@
     },
     {
       "name": "not-reachable-from-folder-index",
+      "comment": "(sample rule to demo reachable rules with capturing groups)",
       "severity": "info",
       "from": {
         "path": "^src/([^/]+)/index\\.js$"
@@ -189,6 +190,13 @@
         "path": "^src/$1/",
         "reachable": false
       }
+    },
+    {
+      "name": "utl-module-not-shared-enough",
+      "comment": "(sample rule to demo demo rules based on dependents)",
+      "severity": "info",
+      "from": { "path": "^src" },
+      "module": { "path": "^src/utl", "numberOfDependentsLessThan": 3 }
     }
   ],
   "options": {
@@ -387,8 +395,6 @@
         }
       }
     },
-    // "progress": { "type": "cli-feedback" }
     "progress": { "type": "performance-log" }
-    // "progress": {"type": "none"}
   }
 }

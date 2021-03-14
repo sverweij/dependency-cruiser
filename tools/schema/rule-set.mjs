@@ -100,6 +100,9 @@ export default {
         {
           $ref: "#/definitions/ReachabilityForbiddenRuleType",
         },
+        {
+          $ref: "#/definitions/DependentsForbiddenRuleType",
+        },
       ],
     },
     RegularForbiddenRuleType: {
@@ -129,6 +132,28 @@ export default {
         },
         to: {
           $ref: "#/definitions/ToRestrictionType",
+        },
+      },
+    },
+    DependentsForbiddenRuleType: {
+      type: "object",
+      required: ["module", "from"],
+      additionalProperties: false,
+      properties: {
+        name: {
+          type: "string",
+        },
+        severity: {
+          $ref: "#/definitions/SeverityType",
+        },
+        comment: {
+          type: "string",
+        },
+        module: {
+          $ref: "#/definitions/DependentsModuleRestrictionType",
+        },
+        from: {
+          $ref: "#/definitions/DependentsFromRestrictionType",
         },
       },
     },
