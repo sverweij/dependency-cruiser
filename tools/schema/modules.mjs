@@ -32,7 +32,7 @@ export default {
           description: "list of modules depending on this module",
           items: {
             type: "string",
-            description: "the (resolved) name of the dependant",
+            description: "the (resolved) name of the dependent",
           },
         },
         followable: {

@@ -1,5 +1,5 @@
-const findModuleByName = require("./derive/find-module-by-name");
+const utl = require("./derive/utl");
 
 module.exports = function clearCaches() {
-  findModuleByName.clearCache();
+  utl.clearCache();
 };

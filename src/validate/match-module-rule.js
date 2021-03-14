@@ -47,12 +47,37 @@ function matchesReachesRule(pRule, pModule) {
   );
 }
 
+function matchesDependentsRule(pRule, pModule) {
+  if (
+    _has(pModule, "dependents") &&
+    _has(pRule, "module.numberOfDependentsLessThan")
+  ) {
+    return (
+      // group matching seems like a nice idea, however, the 'from' part of the
+      // rule is going to match not one module (as with regular dependency rules)
+      // but a whole bunch of them, being the 'dependents'. So that match is going
+      // to produce not one result, but one per matching dependent. To get meaningful
+      // results we'd probably have to loop over these and or the
+      // matchers.toModulePath together.
+      matchers.modulePath(pRule, pModule) &&
+      matchers.modulePathNot(pRule, pModule) &&
+      pModule.dependents.filter(
+        (pDependent) =>
+          Boolean(!pRule.from.path || pDependent.match(pRule.from.path)) &&
+          Boolean(!pRule.from.pathNot || pDependent.match(pRule.from.pathNot))
+      ).length < pRule.module.numberOfDependentsLessThan
+    );
+  }
+  return false;
+}
+
 function match(pModule) {
   return (pRule) => {
     return (
       matchesOrphanRule(pRule, pModule) ||
       matchesReachableRule(pRule, pModule) ||
-      matchesReachesRule(pRule, pModule)
+      matchesReachesRule(pRule, pModule) ||
+      matchesDependentsRule(pRule, pModule)
     );
   };
 }
@@ -62,6 +87,7 @@ module.exports = {
   matchesOrphanRule,
   matchesReachableRule,
   matchesReachesRule,
+  matchesDependentsRule,
   match,
   isInteresting,
 };

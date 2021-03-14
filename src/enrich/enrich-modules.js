@@ -11,10 +11,10 @@ const addValidations = require("./add-validations");
 module.exports = function enrichModules(pModules, pOptions) {
   bus.emit("progress", "analyzing: cycles", { level: busLogLevels.INFO });
   let lModules = deriveCirculars(pModules);
-  bus.emit("progress", "analyzing: orphans", { level: busLogLevels.INFO });
-  lModules = deriveOrphans(lModules);
   bus.emit("progress", "analyzing: dependents", { level: busLogLevels.INFO });
   lModules = addDependents(lModules, pOptions);
+  bus.emit("progress", "analyzing: orphans", { level: busLogLevels.INFO });
+  lModules = deriveOrphans(lModules);
   bus.emit("progress", "analyzing: reachables", { level: busLogLevels.INFO });
   lModules = deriveReachable(lModules, pOptions.ruleSet);
   bus.emit("progress", "analyzing: add focus (if any)", {

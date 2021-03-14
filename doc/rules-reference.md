@@ -34,6 +34,7 @@
    - [`orphan`](#orphans)
    - [`reachable`](#reachable---detecting-dead-wood-and-transient-dependencies)
    - [`couldNotResolve`](#couldnotresolve)
+     [rules on dependents - `numberOfDependentsLessThan`](#rules-on-dependents---numberOfDependentsLessThan)
    - [`circular`](#circular)
    - [`license` and `licenseNot`](#license-and-licensenot)
    - [`dependencyTypes`](#dependencytypes)
@@ -422,7 +423,7 @@ improve legibility.
 ### orphans
 
 A Boolean indicating whether or not to match modules that have no incoming
-or outgoing dependencies. Orphans might need special attention because
+and no outgoing dependencies. Orphans might need special attention because
 they're unused leftovers from a refactoring. Or the start of some feature
 that never got finished but which was merged anyway. Leaving the `orphan`
 attribute out means you don't care about orphans in your code.
@@ -546,13 +547,13 @@ happens:
   "comment": "Don't allow importing database implementation files for schema declaration files",
   "severity": "error",
   "from": {
-    "path": "\\.schema\\.ts$",
+    "path": "\\.schema\\.ts$"
   },
   "to": {
     "path": "^src/libs/database/",
-    "reachable": true,
-  },
-};
+    "reachable": true
+  }
+}
 ```
 
 #### Usage notes
@@ -564,6 +565,48 @@ happens:
   - `path` and `pathNot` in the `from` part of the rule
   - `path` and `pathNot` alongside the `reachable` in the `to` part of the rule  
     (these limitations might get lifted somewhere in the future)
+
+### rules on dependents - `numberOfDependentsLessThan`
+
+Matches when the number of dependents of a module is less than the provided number.
+Useful to detect whether modules are 'shared' enough to your liking, or whether
+they're actually used in the first place.
+
+E.g. to flag modules in the `shared` folder that are only used from the
+`features` folder once (or not a all), you can use a rule like this in the
+`forbidden` section
+
+```javascript
+{
+  name: "no-unshared-in-shared",
+  from: {
+    path: "^features/"
+  },
+  module: {
+    path: "^shared/",
+    numberOfDependentsLessThan: 2
+  }
+}
+```
+
+#### Usage notes
+
+- Currently rules on dependents only work within the `forbidden` context.
+- In the `from` part `path` and `pathNot` attributes work, but none other.
+- Similarly the `to` part of the rule can (next to the `numberOfDependentsLessThan`
+  attribute) also only use `path` and `pathNot`.
+- You can't use group matching with this rule.
+  <details>
+  <summary>why?</summary>
+
+  Unlike regular dependency rules this rule will not match one module at a time,
+  but a whole bunch of them. With one match (i.e.
+  `src/coolstuff/ice.ts` and a a regular expression with a group (`/^src/(^[/]+)/`)
+  the `$1` variable can only mean one thing (`coolstuff`). With more than one
+  result (`src/coolstuff/ice.ts, src/hotstuff/pepper.ts`) there's also more than
+  one thing `$1` means - making use in e.g. `to.path` ambiguous.
+
+  </details>
 
 ### `couldNotResolve`
 

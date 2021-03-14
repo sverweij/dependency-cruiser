@@ -229,3 +229,70 @@ you can see it flags the `wind-controller.ts` in red. In the svg and html versio
 you'll see the name of the rule when you hover over it:
 
 ![some controllers - but with the must-inherit-from-base-controller rule applied](recipes/must-use/rules-applied.svg)
+
+### Is a utility module shared?
+
+Over time central utility modules will rise and fall in use. Some shops want to
+ensure there's a minimum number of modules that use those utility modules. With
+dependency-cruiser you can keep track of usage of utility modules and define
+rules on them.
+
+When you inspect these modules closely, you see the `icecream.ts` module
+is only used by `information.ts`, and `guitar.ts` isn't used at all.
+
+![a bunch of 'shared' modules](recipes/shared-or-not/before.svg)
+
+We can set up a rule that flags any module that is used from the `features` folder
+less than twice:
+
+```javascript
+forbidden: [
+  {
+    name: "no-unshared-utl",
+    from: {
+      path: "^features/",
+    },
+    module: {
+      path: "^common/",
+      numberOfDependentsLessThan: 2,
+    },
+  },
+];
+```
+
+In graphical form the result would look like this:
+
+![a bunch of 'shared' modules - but with the no-unshared-utl rule appled](recipes/shared-or-not/rules-applied.svg)
+
+### Is a module actually used?
+
+If you're using dependency-cruiser to validate dependencies, you might be familiar
+with the concept of [orphans](rules-reference.md#orphans) - modules that have
+no dependencies and no dependents.
+
+![two 'internal orphans' hiding in do-things](recipes/internal-orphans/before.svg)
+
+However, sometimes a module only has dependencies to an external module, e.g.
+node's native `path` module or to `lodash`. That module is not strictly an orphans,
+but for all intents and purposes share the same characteristics as orphans. To flag
+them we can add a rule that forbids the dependents of a module to drop below one -
+for example:
+
+```javascript
+forbidden: [
+  {
+    name: "no-internal-orphans",
+    from: {
+      path: "^do-things/",
+    },
+    module: {
+      path: "^do-things/",
+      numberOfDependentsLessThan: 1,
+    },
+  },
+];
+```
+
+And when we apply that rule to the example, we see them light up as errors:
+
+![two 'internal orphans' highlighted because of the rule above](recipes/internal-orphans/rules-applied.svg)
