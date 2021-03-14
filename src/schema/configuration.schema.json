@@ -220,6 +220,12 @@
         "licenseNot": {
           "description": "Whether or not to match modules that were NOT released under one of the mentioned licenses. E.g. to flag everyting non MIT use \"MIT\" here",
           "$ref": "#/definitions/REAsStringsType"
+        },
+        "numberOfDependentsLessThan": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 100,
+          "description": "TODO"
         }
       }
     },

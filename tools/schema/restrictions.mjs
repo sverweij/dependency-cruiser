@@ -122,6 +122,12 @@ export default {
             'the mentioned licenses. E.g. to flag everyting non MIT use "MIT" here',
           $ref: "#/definitions/REAsStringsType",
         },
+        numberOfDependentsLessThan: {
+          type: "integer",
+          minimum: 0,
+          maximum: 100,
+          description: "TODO",
+        },
       },
     },
     ReachabilityToRestrictionType: {

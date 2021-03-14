@@ -9,7 +9,8 @@ function isModuleOnlyRule(pRule) {
     _has(pRule.from || {}, "orphan") ||
     // note: the to might become optional for required rules
     _has(pRule.to, "reachable") ||
-    _has(pRule, "module")
+    _has(pRule, "module") ||
+    _has(pRule.to, "numberOfDependentsLessThan")
   );
 }
 

@@ -3,6 +3,17 @@
   "extends": "./configs/recommended-strict",
   "forbidden": [
     {
+      "name": "utl-module-not-shared-enough",
+      "severity": "info",
+      "from": {
+        "path": "^src"
+      },
+      "to": {
+        "path": "^src/utl",
+        "numberOfDependentsLessThan": 3
+      }
+    },
+    {
       "name": "not-to-unresolvable",
       "comment": "This module tried to depend on something that can't be resolved to disk. Revise yer code",
       "from": {},
@@ -390,5 +401,6 @@
     // "progress": { "type": "cli-feedback" }
     "progress": { "type": "performance-log" }
     // "progress": {"type": "none"}
+    // "forceDeriveDependents": true
   }
 }
