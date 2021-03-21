@@ -519,10 +519,10 @@
 <!-- src/utl/wrap&#45;and&#45;indent.js -->
 <g id="node30" class="node">
 <title>src/utl/wrap&#45;and&#45;indent.js</title>
-<g id="a_node30"><a xlink:href="https://github.com/sverweij/dependency-cruiser/blob/develop/src/utl/wrap-and-indent.js" xlink:title="src/utl/&lt;BR/&gt;&lt;B&gt;wrap&#45;and&#45;indent.js&lt;/B&gt;">
-<path fill="#cccccc" stroke="black" d="M629.22,-207.61C629.22,-207.61 551.56,-207.61 551.56,-207.61 547.22,-207.61 542.89,-203.28 542.89,-198.94 542.89,-198.94 542.89,-190.28 542.89,-190.28 542.89,-185.94 547.22,-181.61 551.56,-181.61 551.56,-181.61 629.22,-181.61 629.22,-181.61 633.56,-181.61 637.89,-185.94 637.89,-190.28 637.89,-190.28 637.89,-198.94 637.89,-198.94 637.89,-203.28 633.56,-207.61 629.22,-207.61"/>
-<text text-anchor="start" x="576.89" y="-197.41" font-family="Helvetica,sans-Serif" font-size="9.00">src/utl/</text>
-<text text-anchor="start" x="550.89" y="-188.41" font-family="Helvetica,sans-Serif" font-weight="bold" font-size="9.00">wrap&#45;and&#45;indent.js</text>
+<g id="a_node30"><a xlink:href="https://github.com/sverweij/dependency-cruiser/blob/develop/src/utl/wrap-and-indent.js" xlink:title="utl&#45;module&#45;not&#45;shared&#45;enough">
+<path fill="#cccccc" stroke="blue" d="M629.22,-207.61C629.22,-207.61 551.56,-207.61 551.56,-207.61 547.22,-207.61 542.89,-203.28 542.89,-198.94 542.89,-198.94 542.89,-190.28 542.89,-190.28 542.89,-185.94 547.22,-181.61 551.56,-181.61 551.56,-181.61 629.22,-181.61 629.22,-181.61 633.56,-181.61 637.89,-185.94 637.89,-190.28 637.89,-190.28 637.89,-198.94 637.89,-198.94 637.89,-203.28 633.56,-207.61 629.22,-207.61"/>
+<text text-anchor="start" x="576.89" y="-197.41" font-family="Helvetica,sans-Serif" font-size="9.00" fill="blue">src/utl/</text>
+<text text-anchor="start" x="550.89" y="-188.41" font-family="Helvetica,sans-Serif" font-weight="bold" font-size="9.00" fill="blue">wrap&#45;and&#45;indent.js</text>
 </a>
 </g>
 </g>

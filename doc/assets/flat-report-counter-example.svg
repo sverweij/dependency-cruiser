@@ -540,9 +540,9 @@
 <!-- src/utl/wrap&#45;and&#45;indent.js -->
 <g id="node30" class="node">
 <title>src/utl/wrap&#45;and&#45;indent.js</title>
-<g id="a_node30"><a xlink:href="https://github.com/sverweij/dependency-cruiser/blob/develop/src/utl/wrap-and-indent.js" xlink:title="wrap&#45;and&#45;indent.js">
-<path fill="#cccccc" stroke="black" d="M476,-740C476,-740 395,-740 395,-740 392,-740 389,-737 389,-734 389,-734 389,-728 389,-728 389,-725 392,-722 395,-722 395,-722 476,-722 476,-722 479,-722 482,-725 482,-728 482,-728 482,-734 482,-734 482,-737 479,-740 476,-740"/>
-<text text-anchor="middle" x="435.5" y="-728.8" font-family="Helvetica,sans-Serif" font-size="9.00">wrap&#45;and&#45;indent.js</text>
+<g id="a_node30"><a xlink:href="https://github.com/sverweij/dependency-cruiser/blob/develop/src/utl/wrap-and-indent.js" xlink:title="utl&#45;module&#45;not&#45;shared&#45;enough">
+<path fill="#cccccc" stroke="blue" d="M476,-740C476,-740 395,-740 395,-740 392,-740 389,-737 389,-734 389,-734 389,-728 389,-728 389,-725 392,-722 395,-722 395,-722 476,-722 476,-722 479,-722 482,-725 482,-728 482,-728 482,-734 482,-734 482,-737 479,-740 476,-740"/>
+<text text-anchor="middle" x="435.5" y="-728.8" font-family="Helvetica,sans-Serif" font-size="9.00" fill="blue">wrap&#45;and&#45;indent.js</text>
 </a>
 </g>
 </g>

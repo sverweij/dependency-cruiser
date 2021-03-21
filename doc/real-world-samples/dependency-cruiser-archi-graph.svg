@@ -83,12 +83,12 @@
 <!-- src/utl -->
 <g id="node5" class="node">
 <title>src/utl</title>
-<g id="a_node5"><a xlink:href="https://github.com/sverweij/dependency-cruiser/blob/develop/src/utl" xlink:title="utl">
-<polygon fill="#cccccc" stroke="black" points="282,-34 230,-34 228,-32 228,-16 280,-16 282,-18 282,-34"/>
-<polyline fill="none" stroke="black" points="280,-32 228,-32 "/>
-<polyline fill="none" stroke="black" points="280,-32 280,-16 "/>
-<polyline fill="none" stroke="black" points="280,-32 282,-34 "/>
-<text text-anchor="middle" x="255" y="-22.8" font-family="Helvetica,sans-Serif" font-size="9.00">utl</text>
+<g id="a_node5"><a xlink:href="https://github.com/sverweij/dependency-cruiser/blob/develop/src/utl" xlink:title="utl&#45;module&#45;not&#45;shared&#45;enough">
+<polygon fill="#cccccc" stroke="blue" points="282,-34 230,-34 228,-32 228,-16 280,-16 282,-18 282,-34"/>
+<polyline fill="none" stroke="blue" points="280,-32 228,-32 "/>
+<polyline fill="none" stroke="blue" points="280,-32 280,-16 "/>
+<polyline fill="none" stroke="blue" points="280,-32 282,-34 "/>
+<text text-anchor="middle" x="255" y="-22.8" font-family="Helvetica,sans-Serif" font-size="9.00" fill="blue">utl</text>
 </a>
 </g>
 </g>
