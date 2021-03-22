@@ -1,14 +1,14 @@
-function hasDependency(pResolvedName) {
-  return (pNode) =>
-    pNode.dependencies.some(
-      (pToDependency) => pToDependency.resolved === pResolvedName
-    );
-}
+const { isDependent } = require("../utl");
 
-module.exports = (pNode, pGraph) => {
-  if (pNode.dependencies.length > 0) {
+module.exports = (pModule, pGraph) => {
+  if (pModule.dependencies.length > 0) {
     return false;
   }
 
-  return !pGraph.some(hasDependency(pNode.source));
+  // when dependents already calculated take those
+  if (pModule.dependents) {
+    return pModule.dependents.length === 0;
+  }
+  // ... otherwise calculate them
+  return !pGraph.some(isDependent(pModule.source));
 };

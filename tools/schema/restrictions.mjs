@@ -124,6 +124,38 @@ export default {
         },
       },
     },
+    DependentsModuleRestrictionType: {
+      description:
+        "Criteria to select the module(s) this restriction should apply to",
+      required: [],
+      type: "object",
+      additionalProperties: false,
+      properties: {
+        ...BASE_RESTRICTION,
+        numberOfDependentsLessThan: {
+          type: "integer",
+          description:
+            "Matches when the number of times the 'to' module is used falls below (<) " +
+            "this number. Caveat: only works in concert with path and pathNot restrictions " +
+            "in the from and to parts of the rule; other conditions will be ignored." +
+            "(somewhat experimental; - syntax can change over time without a major bump)" +
+            "E.g. to flag modules that are used only once or not at all, use 2 here.",
+          minimum: 0,
+          maximum: 100,
+        },
+      },
+    },
+    DependentsFromRestrictionType: {
+      description:
+        "Criteria the dependents of the module should adehere to be caught by this rule " +
+        "rule. Leave it empty if you want any dependent to be matched.",
+      required: [],
+      type: "object",
+      additionalProperties: false,
+      properties: {
+        ...BASE_RESTRICTION,
+      },
+    },
     ReachabilityToRestrictionType: {
       description:
         "Criteria the 'to' end of a dependency should match to be caught by this " +
