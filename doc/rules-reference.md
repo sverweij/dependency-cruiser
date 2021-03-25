@@ -34,7 +34,8 @@
    - [`orphan`](#orphans)
    - [`reachable`](#reachable---detecting-dead-wood-and-transient-dependencies)
    - [`couldNotResolve`](#couldnotresolve)
-     [rules on dependents - `numberOfDependentsLessThan`](#rules-on-dependents---numberOfDependentsLessThan)
+   - [rules on dependents - `numberOfDependentsLessThan`](#rules-on-dependents---numberOfDependentsLessThan)
+   - [rules on dependents - `numberOfDependentsMoreThan`](#rules-on-dependents---numberOfDependentsMoreThan)
    - [`circular`](#circular)
    - [`license` and `licenseNot`](#license-and-licensenot)
    - [`dependencyTypes`](#dependencytypes)
@@ -607,6 +608,38 @@ E.g. to flag modules in the `shared` folder that are only used from the
   one thing `$1` means - making use in e.g. `to.path` ambiguous.
 
   </details>
+
+### rules on dependents - `numberOfDependentsMoreThan`
+
+Matches when the number of dependents of a module is more than the provided number.
+Useful to
+
+- detect whether modules are 'shared' enough to your liking, or whether
+  they're actually used in the first place, but you want or need to enforce that
+  in an allowed rule
+- put a maximum number on the number of dependents a module can have (not sure
+  it's like super useful or anything, it's just a side-effect of the previous
+  use)
+
+E.g. to flag modules in the `shared` folder that are only used from the
+`features` folder once (or not a all), you can use a rule like this in the
+`allowed` section
+
+```javascript
+{
+  name: "no-unshared-in-shared",
+  from: {
+    path: "^features/"
+  },
+  module: {
+    path: "^shared/",
+    numberOfDependentsMoreThan: 1
+  }
+}
+```
+
+The same usage notes and caveats apply as do for the numberOfDependentsLessThan
+attribute.
 
 ### `couldNotResolve`
 
