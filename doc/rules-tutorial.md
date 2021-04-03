@@ -273,8 +273,8 @@ no dependencies and no dependents.
 ![two 'internal orphans' hiding in do-things](recipes/internal-orphans/before.svg)
 
 However, sometimes a module only has dependencies to an external module, e.g.
-node's native `path` module or to `lodash`. That module is not strictly an orphans,
-but for all intents and purposes share the same characteristics as orphans. To flag
+node's native `path` module or to `lodash`. That module is not strictly an orphan,
+but for all intents and purposes has the same characteristics as orphans. To flag
 them we can add a rule that forbids the dependents of a module to drop below one -
 for example:
 
@@ -305,8 +305,9 @@ on it.
 
 #### Recipe 1: Use a list of exceptions
 
-One way to prevent this is to use a list of exceptions and use these in two rules;
-one to
+One way to prevent this is to create a list of exceptions and use that in two rules;
+one to throw errors on everything not in the exceptions, one to show warnings
+for those that are:
 
 ```javascript
 const KNOWN_DEPRECATED_THINGY_DEPENDENTS = [
