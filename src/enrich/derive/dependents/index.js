@@ -3,8 +3,10 @@ const getDependents = require("./get-dependents");
 
 function hasDependentsRule(pOptions) {
   // TODO: might want to enable this in required and allowed rules as well
-  return get(pOptions, "ruleSet.forbidden", []).some((pRule) =>
-    get(pRule, "module.numberOfDependentsLessThan")
+  return get(pOptions, "ruleSet.forbidden", []).some(
+    (pRule) =>
+      get(pRule, "module.numberOfDependentsLessThan") ||
+      get(pRule, "module.numberOfDependentsMoreThan")
   );
 }
 

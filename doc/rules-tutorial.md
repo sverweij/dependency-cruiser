@@ -296,3 +296,99 @@ forbidden: [
 And when we apply that rule to the example, we see them light up as errors:
 
 ![two 'internal orphans' highlighted because of the rule above](recipes/internal-orphans/rules-applied.svg)
+
+### No new dependents on deprecated modules
+
+When you deprecate modules you take for granted that it'll be used by existing
+dependents for some time. You typically want to prevent new dependents to arrive
+on it.
+
+#### Recipe 1: Use a list of exceptions
+
+One way to prevent this is to use a list of exceptions and use these in two rules;
+one to
+
+```javascript
+const KNOWN_DEPRECATED_THINGY_DEPENDENTS = [
+  "^src/features/search/caramba\\.ts$"
+  "^src/features/checkout/migusta\\.ts$"
+  "^src/features/landing/sacrebleu\\.ts$"
+  "^src/features/refund/donderju\\.ts$"
+];
+
+{
+  forbidden: [
+    // For anything pointing to deprecated-thingy that is not in the exceptions
+    // throw an error
+    {
+      name: "not-to-deprecated-thingy",
+      severity: "error"
+      from: {
+        pathNot: [
+          "^src/common"
+        ].concat(KNOWN_DEPRECATED_THINGY_DEPENDENTS)
+      },
+      to: {
+        path: "^src/common/deprecated-thingy",
+      }
+    },
+    // ... but emit a warning for known exceptions
+    {
+      name: "not-to-deprecated-thingy-known-exceptions",
+      severity: "warn"
+      from: {
+        path: KNOWN_DEPRECATED_THINGY_DEPENDENTS,
+        pathNot: [
+          "^src/common"
+        ]
+      },
+      to: {
+        path: "^src/common/deprecated-thingy",
+      }
+    }
+  ]
+}
+
+
+```
+
+#### Recipe 2: Use the numberOfDependentsMoreThan attribute
+
+Another way to do this, is to have the rule above, but without a list of exceptions,
+and to have another rule that ensures the number of dependents of the module
+doesn't raise above the current tally:
+
+```javascript
+forbidden: [
+    // For anything pointing to deprecated-thingy (both known and new)
+    // emit a warning
+    {
+    name: "not-to-deprecated-thingy",
+    severity: "warn"
+    from: {
+      pathNot: "^src/common"
+    },
+    to: {
+      path: "^src/common/deprecated-thingy",
+    }
+  },
+  // when the number of dependents for deprecated-thingy raises above 4
+  // flag an error
+  {
+    name: "no-more-dependents-on-deprecated",
+    severity: "error"
+    from: {
+      pathNot: "^src/common"
+    },
+    module: {
+      path: "^src/common/deprecated-thingy",
+      numberOfDependentsMoreThan: 4
+    }
+  },
+]
+//...
+```
+
+The benefit over the previous recipe is that it doesn't require administrating
+a list of exceptions. Drawback is that it isn't immediately clear which dependents
+are the new ones.

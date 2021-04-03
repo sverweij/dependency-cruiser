@@ -47,10 +47,25 @@ function matchesReachesRule(pRule, pModule) {
   );
 }
 
+function dependentsCountsMatch(pRule, pDependents) {
+  const lMatchingDependentsCount = pDependents.filter(
+    (pDependent) =>
+      Boolean(!pRule.from.path || pDependent.match(pRule.from.path)) &&
+      Boolean(!pRule.from.pathNot || pDependent.match(pRule.from.pathNot))
+  ).length;
+  return (
+    (!pRule.module.numberOfDependentsLessThan ||
+      lMatchingDependentsCount < pRule.module.numberOfDependentsLessThan) &&
+    (!pRule.module.numberOfDependentsMoreThan ||
+      lMatchingDependentsCount > pRule.module.numberOfDependentsMoreThan)
+  );
+}
+
 function matchesDependentsRule(pRule, pModule) {
   if (
-    _has(pModule, "dependents") &&
-    _has(pRule, "module.numberOfDependentsLessThan")
+    (_has(pModule, "dependents") &&
+      _has(pRule, "module.numberOfDependentsLessThan")) ||
+    _has(pRule, "module.numberOfDependentsMoreThan")
   ) {
     return (
       // group matching seems like a nice idea, however, the 'from' part of the
@@ -61,11 +76,7 @@ function matchesDependentsRule(pRule, pModule) {
       // matchers.toModulePath together.
       matchers.modulePath(pRule, pModule) &&
       matchers.modulePathNot(pRule, pModule) &&
-      pModule.dependents.filter(
-        (pDependent) =>
-          Boolean(!pRule.from.path || pDependent.match(pRule.from.path)) &&
-          Boolean(!pRule.from.pathNot || pDependent.match(pRule.from.pathNot))
-      ).length < pRule.module.numberOfDependentsLessThan
+      dependentsCountsMatch(pRule, pModule.dependents)
     );
   }
   return false;

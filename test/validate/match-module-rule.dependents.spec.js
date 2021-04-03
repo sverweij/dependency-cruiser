@@ -33,6 +33,28 @@ const MUST_BE_SHARED_BUT_NOT_FROM_SNACKBAR = {
     numberOfDependentsLessThan: 2,
   },
 };
+
+const CANNOT_BE_SHARED_MORE_THAN_THREE_TIMES = {
+  from: {
+    pathNot: "^src/snackbar",
+  },
+  module: {
+    path: "^src/utensils",
+    numberOfDependentsMoreThan: 3,
+  },
+};
+
+const USED_FROM_SNACKBAR_BETWEEN = {
+  from: {
+    pathNot: "^src/snackbar",
+  },
+  module: {
+    path: "^src/utensils",
+    numberOfDependentsMoreThan: 3,
+    numberOfDependentsLessThan: 5,
+  },
+};
+
 describe("validate/match-module-rule - dependents", () => {
   it("rule without dependents restriction doesn't flag (implicit)", () => {
     expect(matchesDependentsRule(EMPTY_RULE, {})).to.equal(false);
@@ -131,11 +153,64 @@ describe("validate/match-module-rule - dependents", () => {
       })
     ).to.equal(true);
   });
+
   it("must-share (>=2 dependents) with a from pathNot when there's 0 dependents from that from pathNot", () => {
     expect(
       matchesDependentsRule(MUST_BE_SHARED_BUT_NOT_FROM_SNACKBAR, {
         source: "src/utensils/frieten.ts",
         dependents: ["src/snackbar/kapsalon.ts", "src/snackbar/zijspan.ts"],
+      })
+    ).to.equal(false);
+  });
+
+  it("must not be used more than 3 times from snackbar - happy scenario", () => {
+    expect(
+      matchesDependentsRule(CANNOT_BE_SHARED_MORE_THAN_THREE_TIMES, {
+        source: "src/utensils/frieten.ts",
+        dependents: ["src/snackbar/kapsalon.ts", "src/snackbar/zijspan.ts"],
+      })
+    ).to.equal(false);
+  });
+
+  it("must not be used more than 3 times from snackbar - fail scenario", () => {
+    expect(
+      matchesDependentsRule(CANNOT_BE_SHARED_MORE_THAN_THREE_TIMES, {
+        source: "src/utensils/frieten.ts",
+        dependents: [
+          "src/snackbar/kapsalon.ts",
+          "src/snackbar/zijspan.ts",
+          "src/snackbar/dooierat.ts",
+          "src/snackbar/kipcorn.ts",
+        ],
+      })
+    ).to.equal(true);
+  });
+
+  it("combo breaker (3 < x < 5) - happy scenario", () => {
+    expect(
+      matchesDependentsRule(USED_FROM_SNACKBAR_BETWEEN, {
+        source: "src/utensils/frieten.ts",
+        dependents: [
+          "src/snackbar/kapsalon.ts",
+          "src/snackbar/zijspan.ts",
+          "src/snackbar/dooierat.ts",
+          "src/snackbar/kipcorn.ts",
+        ],
+      })
+    ).to.equal(true);
+  });
+
+  it("combo breaker (3 < x < 5) - fail scenario", () => {
+    expect(
+      matchesDependentsRule(USED_FROM_SNACKBAR_BETWEEN, {
+        source: "src/utensils/frieten.ts",
+        dependents: [
+          "src/snackbar/kapsalon.ts",
+          "src/snackbar/zijspan.ts",
+          "src/snackbar/dooierat.ts",
+          "src/snackbar/kipcorn.ts",
+          "src/snackbar/bereklauw.ts",
+        ],
       })
     ).to.equal(false);
   });
