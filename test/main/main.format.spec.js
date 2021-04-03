@@ -35,7 +35,7 @@ describe("main.format - format", () => {
     expect(() => {
       main.format({ valid: "JSON", not: "schema compliant though" });
     }).to.throw(
-      "The supplied dependency-cruiser result is not valid: data should have required property 'summary'"
+      "The supplied dependency-cruiser result is not valid: data must have required property 'summary'"
     );
   });
 

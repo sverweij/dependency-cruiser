@@ -12,6 +12,7 @@ const DEFAULT_EMPTY_BABEL_OPTIONS_OBJECT = {
   envName: "development",
   cwd: process.cwd(),
   root: process.cwd(),
+  rootMode: "root",
   plugins: [],
   presets: [],
   assumptions: {},
