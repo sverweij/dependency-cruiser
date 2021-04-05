@@ -253,8 +253,11 @@
     //    "args": {}
     // },
     // "babelConfig": {
-    //   "fileName": "./babel.config.json"
+    //   "fileName": "./.babelrc"
     // },
+    /* Experimental: the parser to use
+     */
+    "parser": "swc", // acorn, swc, tsc
     "enhancedResolveOptions": {
       "exportsFields": ["exports"],
       "conditionNames": ["require"],

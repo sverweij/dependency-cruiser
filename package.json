@@ -153,6 +153,7 @@
     "@babel/core": "7.13.14",
     "@babel/plugin-transform-modules-commonjs": "7.13.8",
     "@babel/preset-typescript": "7.13.0",
+    "@swc/core": "1.2.51",
     "@typescript-eslint/eslint-plugin": "4.20.0",
     "@typescript-eslint/parser": "4.20.0",
     "chai": "4.3.4",
@@ -245,9 +246,10 @@
     "coffee-script": ">=1.0.0 <2.0.0",
     "coffeescript": ">=1.0.0 <3.0.0",
     "livescript": ">=1.0.0 <2.0.0",
+    "svelte": ">=3.0.0 <4.0.0",
+    "swc": ">=1.0.0 <2.0.0",
     "typescript": ">=2.0.0 <5.0.0",
-    "vue-template-compiler": ">=2.0.0 <3.0.0",
-    "svelte": ">=3.0.0 <4.0.0"
+    "vue-template-compiler": ">=2.0.0 <3.0.0"
   },
   "husky": {
     "hooks": {

@@ -1,23 +1,23 @@
 const { expect } = require("chai");
-const extractTypescript = require("./extract-typescript.utl");
+const extractWithSwc = require("./extract-with-swc.utl");
 
-describe("ast-extractors/extract-typescript - regular imports", () => {
+describe("ast-extractors/extract-swc - regular imports", () => {
   it("extracts 'import for side effects only'", () => {
-    expect(
-      extractTypescript("import './import-for-side-effects';")
-    ).to.deep.equal([
-      {
-        module: "./import-for-side-effects",
-        moduleSystem: "es6",
-        dynamic: false,
-        exoticallyRequired: false,
-      },
-    ]);
+    expect(extractWithSwc("import './import-for-side-effects';")).to.deep.equal(
+      [
+        {
+          module: "./import-for-side-effects",
+          moduleSystem: "es6",
+          dynamic: false,
+          exoticallyRequired: false,
+        },
+      ]
+    );
   });
 
   it("extracts 'import some stuff only'", () => {
     expect(
-      extractTypescript("import { SomeSingleExport } from './ts-thing';")
+      extractWithSwc("import { SomeSingleExport } from './ts-thing';")
     ).to.deep.equal([
       {
         module: "./ts-thing",
@@ -30,7 +30,7 @@ describe("ast-extractors/extract-typescript - regular imports", () => {
 
   it("extracts 'import some stuff only and rename that'", () => {
     expect(
-      extractTypescript(
+      extractWithSwc(
         "import { SomeSingleExport as RenamedSingleExport } from './ts-thing';"
       )
     ).to.deep.equal([
@@ -45,7 +45,7 @@ describe("ast-extractors/extract-typescript - regular imports", () => {
 
   it("extracts 'import everything into a variable'", () => {
     expect(
-      extractTypescript(
+      extractWithSwc(
         "import * as entireTsOtherThingAsVariable from './ts-thing';"
       )
     ).to.deep.equal([

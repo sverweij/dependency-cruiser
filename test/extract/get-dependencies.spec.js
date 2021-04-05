@@ -16,8 +16,10 @@ const amdBangCJSWrapper = require("./fixtures/amd-bang-CJSWrapper.json");
 
 let symlinkDirectory = path.join(__dirname, "fixtures", "symlinked");
 
-function runFixture(pFixture) {
-  const lOptions = {};
+function runFixture(pFixture, pParser = "acorn") {
+  const lOptions = {
+    parser: pParser,
+  };
 
   if (pFixture.input.baseDir) {
     lOptions.baseDir = pFixture.input.baseDir;
@@ -29,7 +31,7 @@ function runFixture(pFixture) {
     lOptions.preserveSymlinks = pFixture.input.preserveSymlinks;
   }
 
-  it(pFixture.title, () => {
+  it(`${pFixture.title} (with '${pParser}' as parser)`, () => {
     expect(
       getDependencies(
         pFixture.input.fileName,
@@ -62,8 +64,10 @@ after(() => {
   }
 });
 
-describe("extract/getDependencies - CommonJS - ", () =>
-  cjsFixtures.forEach(runFixture));
+describe("extract/getDependencies - CommonJS - ", () => {
+  cjsFixtures.forEach((pFixture) => runFixture(pFixture, "acorn"));
+  cjsFixtures.forEach((pFixture) => runFixture(pFixture, "swc"));
+});
 describe("extract/getDependencies - CommonJS - with bangs", () => {
   it("strips the inline loader prefix from the module name when resolving", () => {
     const lOptions = normalizeCruiseOptions({ moduleSystems: ["cjs"] });
@@ -125,9 +129,9 @@ describe("extract/getDependencies - CommonJS - with bangs", () => {
 });
 
 describe("extract/getDependencies - ES6 - ", () =>
-  es6Fixtures.forEach(runFixture));
+  es6Fixtures.forEach((pFixture) => runFixture(pFixture)));
 describe("extract/getDependencies - AMD - ", () =>
-  amdFixtures.forEach(runFixture));
+  amdFixtures.forEach((pFixture) => runFixture(pFixture)));
 describe("extract/getDependencies - AMD - with bangs", () => {
   it("splits extracts the module part of the plugin + module - regular requirejs", () => {
     const lOptions = normalizeCruiseOptions({ moduleSystems: ["amd"] });
@@ -163,9 +167,9 @@ describe("extract/getDependencies - AMD - with bangs", () => {
 });
 
 describe("extract/getDependencies - TypeScript - ", () =>
-  tsFixtures.forEach(runFixture));
+  tsFixtures.forEach((pFixture) => runFixture(pFixture)));
 describe("extract/getDependencies - CoffeeScript - ", () =>
-  coffeeFixtures.forEach(runFixture));
+  coffeeFixtures.forEach((pFixture) => runFixture(pFixture)));
 
 describe("extract/getDependencies - Error scenarios - ", () => {
   it("Does not raise an exception on syntax errors (because we're on the loose parser)", () => {

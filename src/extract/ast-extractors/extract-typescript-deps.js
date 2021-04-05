@@ -17,7 +17,8 @@ const typescript = tryRequire(
  * Get all import and export statements from the top level AST node
  *
  * @param {import("typescript").Node} pAST - the (top-level in this case) AST node
- * @returns {{module: string, moduleSystem: string}[]} - all import and export statements in the
+ * @returns {{module: string, moduleSystem: string, exoticallyRequired: boolean}[]} -
+ *                                  all import and export statements in the
  *                                  (top level) AST node
  */
 function extractImportsAndExports(pAST) {
@@ -37,6 +38,10 @@ function extractImportsAndExports(pAST) {
 
 /**
  * Get all import equals statements from the top level AST node
+ *
+ * E.g. import thing = require('some-thing')
+ * Ignores import equals of variables (e.g. import protocol = ts.server.protocol
+ * which happens in typescript/lib/protocol.d.ts)
  *
  * @param {import("typescript").Node} pAST - the (top-level in this case) AST node
  * @returns {{module: string, moduleSystem: string}[]} - all import equals statements in the
@@ -228,7 +233,7 @@ function extractNestedDependencies(pAST, pExoticRequireStrings) {
 }
 
 /**
- * returns all dependencies in the (top level) AST
+ * returns all dependencies in the AST
  *
  * @type {(pTypeScriptAST: (import("typescript").Node), pExoticRequireStrings: string[]) => {module: string, moduleSystem: string, dynamic: boolean}[]}
  */

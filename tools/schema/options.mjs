@@ -258,6 +258,12 @@ export default {
             },
           },
         },
+        parser: {
+          type: "string",
+          description:
+            "overrides the parser dependency-cruiser will use - EXPERIMENTAL",
+          enum: ["acorn", "swc", "tsc"],
+        },
         exoticRequireStrings: {
           type: "array",
           description:
