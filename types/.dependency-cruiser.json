@@ -2,6 +2,7 @@
   "$schema": "../src/schema/configuration.schema.json",
   "extends": "../.dependency-cruiser.json",
   "options": {
+    "tsPreCompilationDeps": true,
     "reporterOptions": {
       "dot": { "theme": { "graph": { "splines": "ortho" } } }
     }

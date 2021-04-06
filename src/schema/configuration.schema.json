@@ -506,6 +506,11 @@
             }
           }
         },
+        "parser": {
+          "type": "string",
+          "description": "overrides the parser dependency-cruiser will use - EXPERIMENTAL",
+          "enum": ["acorn", "swc", "tsc"]
+        },
         "exoticRequireStrings": {
           "type": "array",
           "description": "List of strings you have in use in addition to cjs/ es6 requires & imports to declare module dependencies. Use this e.g. if you've redeclared require (`const want = require`), use a require-wrapper (like semver-try-require) or use window.require as a hack to workaround something",

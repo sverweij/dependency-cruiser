@@ -7,9 +7,18 @@ const extractES6Deps = require("./ast-extractors/extract-es6-deps");
 const extractCommonJSDeps = require("./ast-extractors/extract-cjs-deps");
 const extractAMDDeps = require("./ast-extractors/extract-amd-deps");
 const extractTypeScriptDeps = require("./ast-extractors/extract-typescript-deps");
+const extractSwcDeps = require("./ast-extractors/extract-swc-deps");
 const toJavascriptAST = require("./parse/to-javascript-ast");
 const toTypescriptAST = require("./parse/to-typescript-ast");
+const toSwcAST = require("./parse/to-swc-ast");
 const detectPreCompilationNess = require("./utl/detect-pre-compilation-ness");
+
+function extractFromSwcAST(pOptions, pFileName) {
+  return extractSwcDeps(
+    toSwcAST.getASTCached(path.join(pOptions.baseDir, pFileName)),
+    pOptions.exoticRequireStrings
+  );
+}
 
 function extractFromTypeScriptAST(pOptions, pFileName) {
   return extractTypeScriptDeps(
@@ -23,6 +32,16 @@ function shouldUseTSC(pOptions, pFileName) {
     toTypescriptAST.isAvailable() &&
     path.extname(pFileName).startsWith(".ts") &&
     pOptions.tsPreCompilationDeps
+  );
+}
+
+function isSwcAble(pFileName) {
+  return [".ts", ".js", ".mjs", ".cjs"].includes(path.extname(pFileName));
+}
+
+function shouldUseSwc(pOptions, pFileName) {
+  return (
+    pOptions.parser === "swc" && toSwcAST.isAvailable() && isSwcAble(pFileName)
   );
 }
 
@@ -53,8 +72,14 @@ function extractFromJavaScriptAST(pOptions, pFileName, pTranspileOptions) {
 
 function extractDependencies(pCruiseOptions, pFileName, pTranspileOptions) {
   let lDependencies = [];
-
-  if (shouldUseTSC(pCruiseOptions, pFileName)) {
+  if (shouldUseSwc(pCruiseOptions, pFileName)) {
+    lDependencies = extractFromSwcAST(
+      pCruiseOptions,
+      pFileName
+    ).filter((pDep) =>
+      pCruiseOptions.moduleSystems.includes(pDep.moduleSystem)
+    );
+  } else if (shouldUseTSC(pCruiseOptions, pFileName)) {
     lDependencies = extractFromTypeScriptAST(
       pCruiseOptions,
       pFileName

@@ -1,12 +1,10 @@
 const { expect } = require("chai");
-const extractTypescript = require("./extract-typescript.utl");
+const extractWithSwc = require("./extract-with-swc.utl");
 
-describe("ast-extractors/extract-typescript - dynamic imports", () => {
+describe("ast-extractors/extract-swc - dynamic imports", () => {
   it("correctly detects a dynamic import statement", () => {
     expect(
-      extractTypescript(
-        "import('judeljo').then(judeljo => { judeljo.hochik() })"
-      )
+      extractWithSwc("import('judeljo').then(judeljo => { judeljo.hochik() })")
     ).to.deep.equal([
       {
         module: "judeljo",
@@ -19,9 +17,7 @@ describe("ast-extractors/extract-typescript - dynamic imports", () => {
 
   it("correctly detects a dynamic import statement with a template that has no placeholders", () => {
     expect(
-      extractTypescript(
-        "import(`judeljo`).then(judeljo => { judeljo.hochik() })"
-      )
+      extractWithSwc("import(`judeljo`).then(judeljo => { judeljo.hochik() })")
     ).to.deep.equal([
       {
         module: "judeljo",
@@ -34,7 +30,7 @@ describe("ast-extractors/extract-typescript - dynamic imports", () => {
 
   it("ignores dynamic import statements with a template that has placeholders", () => {
     expect(
-      extractTypescript(
+      extractWithSwc(
         // eslint-disable-next-line no-template-curly-in-string
         "import(`judeljo/${vlap}`).then(judeljo => { judeljo.hochik() })"
       )
@@ -43,7 +39,7 @@ describe("ast-extractors/extract-typescript - dynamic imports", () => {
 
   it("ignores dynamic import statements with a non-string parameter", () => {
     expect(
-      extractTypescript(
+      extractWithSwc(
         "import(elaborateFunctionCall()).then(judeljo => { judeljo.hochik() })"
       )
     ).to.deep.equal([]);
@@ -51,7 +47,7 @@ describe("ast-extractors/extract-typescript - dynamic imports", () => {
 
   it("ignores dynamic import statements without a parameter", () => {
     expect(
-      extractTypescript(
+      extractWithSwc(
         "import(/* nothing */).then(judeljo => { judeljo.hochik() })"
       )
     ).to.deep.equal([]);

@@ -26,6 +26,7 @@
   - [exotic ways to require modules - exoticRequireStrings](#exotic-ways-to-require-modules---exoticrequirestrings)
   - [enhancedResolveOptions](#enhancedresolveoptions)
   - [forceDeriveDependents](#forcederivedependents)
+  - [parser](#parser)
 
 ## Filters
 
@@ -1185,3 +1186,11 @@ The cacheDuration used here overrides any that might be set in webpack configs.
 Dependency-cruiser will automatically determine whether it needs to derive dependents.
 However, if you want to force them to be derived, you can switch this variable
 to `true`.
+
+### `parser`
+
+This _EXPERIMENTAL_ feature enables you to specify whether to use the `acorn`
+parser dependency-cruiser uses by default or the faster and smaller (but slightly
+less) feature rich `swc` parser. This only works when `@core/swc` is installed
+in the same spot as dependency-cruiser is (it's not (yet?) bundled as a
+dependency).

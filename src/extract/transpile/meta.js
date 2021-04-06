@@ -1,5 +1,6 @@
 const _get = require("lodash/get");
 const { supportedTranspilers } = require("../../../package.json");
+const swc = require("../parse/to-swc-ast");
 const javaScriptWrap = require("./javascript-wrap");
 const typeScriptWrap = require("./typescript-wrap")();
 const tsxWrap = require("./typescript-wrap")(true);
@@ -34,9 +35,10 @@ const TRANSPILER2WRAPPER = {
   "coffee-script": coffeeWrap,
   coffeescript: coffeeWrap,
   livescript: liveScriptWrap,
+  svelte: svelteWrap,
+  swc,
   typescript: typeScriptWrap,
   "vue-template-compiler": vueWrap,
-  svelte: svelteWrap,
 };
 
 const BABELEABLE_EXTENSIONS = [
