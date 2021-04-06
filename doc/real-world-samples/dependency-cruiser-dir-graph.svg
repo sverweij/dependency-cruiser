@@ -100,7 +100,7 @@
 <!-- src/cli&#45;&gt;src/main -->
 <g id="edge3" class="edge">
 <title>src/cli&#45;&gt;src/main</title>
-<path fill="none" stroke="#770000" stroke-width="2" stroke-opacity="0.466667" d="M230.08,-315C213.55,-315 96,-315 96,-315 96,-315 96,-298 96,-298 96,-298 1288.9,-298 1288.9,-298 1288.9,-298 1288.9,-271.45 1288.9,-271.45"/>
+<path fill="none" stroke="#770000" stroke-width="2" stroke-opacity="0.466667" d="M233.83,-316C236.17,-316 239.9,-316 239.9,-316 239.9,-316 239.9,-298 239.9,-298 239.9,-298 1288.9,-298 1288.9,-298 1288.9,-298 1288.9,-271.45 1288.9,-271.45"/>
 <polygon fill="#770000" fill-opacity="0.466667" stroke="#770000" stroke-width="2" stroke-opacity="0.466667" points="1291,-271.45 1288.9,-265.45 1286.8,-271.45 1291,-271.45"/>
 </g>
 <!-- src/cli/utl -->
@@ -118,8 +118,8 @@
 <!-- src/cli&#45;&gt;src/cli/utl -->
 <g id="edge4" class="edge">
 <title>src/cli&#45;&gt;src/cli/utl</title>
-<path fill="none" stroke="#0000ff" stroke-width="2" stroke-opacity="0.466667" d="M230.87,-314C219.77,-314 131,-314 131,-314 131,-314 131,-278.84 131,-278.84"/>
-<polygon fill="#0000ff" fill-opacity="0.466667" stroke="#0000ff" stroke-width="2" stroke-opacity="0.466667" points="133.1,-278.84 131,-272.84 128.9,-278.84 133.1,-278.84"/>
+<path fill="none" stroke="#0000ff" stroke-width="2" stroke-opacity="0.466667" d="M230.25,-315C216.84,-315 131,-315 131,-315 131,-315 131,-279.03 131,-279.03"/>
+<polygon fill="#0000ff" fill-opacity="0.466667" stroke="#0000ff" stroke-width="2" stroke-opacity="0.466667" points="133.1,-279.03 131,-273.03 128.9,-279.03 133.1,-279.03"/>
 </g>
 <!-- src/config&#45;utl/extract&#45;depcruise&#45;config -->
 <g id="node7" class="node">
@@ -143,26 +143,26 @@
 <!-- src/cli&#45;&gt;src/config&#45;utl -->
 <g id="edge6" class="edge">
 <title>src/cli&#45;&gt;src/config&#45;utl</title>
-<path fill="none" stroke="#229999" stroke-width="2" stroke-opacity="0.466667" d="M233.83,-316C236.17,-316 239.9,-316 239.9,-316 239.9,-316 239.9,-289 239.9,-289 239.9,-289 579,-289 579,-289 579,-289 579,-271.59 579,-271.59"/>
+<path fill="none" stroke="#229999" stroke-width="2" stroke-opacity="0.466667" d="M232.9,-313.85C232.9,-307.94 232.9,-289 232.9,-289 232.9,-289 579,-289 579,-289 579,-289 579,-271.59 579,-271.59"/>
 <polygon fill="#229999" fill-opacity="0.466667" stroke="#229999" stroke-width="2" stroke-opacity="0.466667" points="581.1,-271.59 579,-265.59 576.9,-271.59 581.1,-271.59"/>
 </g>
 <!-- src/utl -->
 <g id="node9" class="node">
 <title>src/utl</title>
 <g id="a_node9"><a xlink:href="https://github.com/sverweij/dependency-cruiser/blob/develop/src/utl" xlink:title="utl&#45;module&#45;not&#45;shared&#45;enough">
-<polygon fill="#cccccc" stroke="blue" points="80,-73 28,-73 26,-71 26,-55 78,-55 80,-57 80,-73"/>
-<polyline fill="none" stroke="blue" points="78,-71 26,-71 "/>
-<polyline fill="none" stroke="blue" points="78,-71 78,-55 "/>
-<polyline fill="none" stroke="blue" points="78,-71 80,-73 "/>
-<text text-anchor="middle" x="53" y="-61.8" font-family="Helvetica,sans-Serif" font-size="9.00" fill="blue">utl</text>
+<polygon fill="#cccccc" stroke="blue" points="83,-73 31,-73 29,-71 29,-55 81,-55 83,-57 83,-73"/>
+<polyline fill="none" stroke="blue" points="81,-71 29,-71 "/>
+<polyline fill="none" stroke="blue" points="81,-71 81,-55 "/>
+<polyline fill="none" stroke="blue" points="81,-71 83,-73 "/>
+<text text-anchor="middle" x="56" y="-61.8" font-family="Helvetica,sans-Serif" font-size="9.00" fill="blue">utl</text>
 </a>
 </g>
 </g>
 <!-- src/cli&#45;&gt;src/utl -->
 <g id="edge7" class="edge">
 <title>src/cli&#45;&gt;src/utl</title>
-<path fill="none" stroke="#aaaaaa" stroke-width="2" stroke-opacity="0.466667" d="M233.12,-314C234.56,-314 236.85,-314 236.85,-314 236.85,-314 236.85,-311 236.85,-311 236.85,-311 31,-311 31,-311 31,-311 31,-79.08 31,-79.08"/>
-<polygon fill="#aaaaaa" fill-opacity="0.466667" stroke="#aaaaaa" stroke-width="2" stroke-opacity="0.466667" points="33.1,-79.08 31,-73.08 28.9,-79.08 33.1,-79.08"/>
+<path fill="none" stroke="#aaaaaa" stroke-width="2" stroke-opacity="0.466667" d="M233.12,-314C234.56,-314 236.85,-314 236.85,-314 236.85,-314 236.85,-311 236.85,-311 236.85,-311 32.5,-311 32.5,-311 32.5,-311 32.5,-79.08 32.5,-79.08"/>
+<polygon fill="#aaaaaa" fill-opacity="0.466667" stroke="#aaaaaa" stroke-width="2" stroke-opacity="0.466667" points="34.6,-79.08 32.5,-73.08 30.4,-79.08 34.6,-79.08"/>
 </g>
 <!-- src/cli/init&#45;config -->
 <g id="node10" class="node">
@@ -179,8 +179,8 @@
 <!-- src/cli&#45;&gt;src/cli/init&#45;config -->
 <g id="edge8" class="edge">
 <title>src/cli&#45;&gt;src/cli/init&#45;config</title>
-<path fill="none" stroke="#0000ff" stroke-width="2" stroke-opacity="0.466667" d="M231.4,-313.8C231.4,-311.84 231.4,-309 231.4,-309 231.4,-309 73.33,-309 73.33,-309 73.33,-309 73.33,-278.79 73.33,-278.79"/>
-<polygon fill="#0000ff" fill-opacity="0.466667" stroke="#0000ff" stroke-width="2" stroke-opacity="0.466667" points="75.43,-278.79 73.33,-272.79 71.23,-278.79 75.43,-278.79"/>
+<path fill="none" stroke="#0000ff" stroke-width="2" stroke-opacity="0.466667" d="M230.01,-316C210.53,-316 54.67,-316 54.67,-316 54.67,-316 54.67,-278.73 54.67,-278.73"/>
+<polygon fill="#0000ff" fill-opacity="0.466667" stroke="#0000ff" stroke-width="2" stroke-opacity="0.466667" points="56.77,-278.73 54.67,-272.73 52.57,-278.73 56.77,-278.73"/>
 </g>
 <!-- src/cli/listeners/cli&#45;feedback -->
 <g id="node11" class="node">
@@ -215,15 +215,15 @@
 <!-- src/cli&#45;&gt;src/cli/listeners/performance&#45;log -->
 <g id="edge10" class="edge">
 <title>src/cli&#45;&gt;src/cli/listeners/performance&#45;log</title>
-<path fill="none" stroke="#0000ff" stroke-width="2" stroke-opacity="0.466667" d="M232.6,-313.87C232.6,-313.87 232.6,-279.01 232.6,-279.01"/>
-<polygon fill="#0000ff" fill-opacity="0.466667" stroke="#0000ff" stroke-width="2" stroke-opacity="0.466667" points="234.7,-279.01 232.6,-273.01 230.5,-279.01 234.7,-279.01"/>
+<path fill="none" stroke="#0000ff" stroke-width="2" stroke-opacity="0.466667" d="M232,-313.37C232,-313.37 232,-278.72 232,-278.72"/>
+<polygon fill="#0000ff" fill-opacity="0.466667" stroke="#0000ff" stroke-width="2" stroke-opacity="0.466667" points="234.1,-278.72 232,-272.72 229.9,-278.72 234.1,-278.72"/>
 </g>
 <!-- src -->
 <!-- src/main&#45;&gt;src/utl -->
-<g id="edge48" class="edge">
+<g id="edge49" class="edge">
 <title>src/main&#45;&gt;src/utl</title>
-<path fill="none" stroke="#aaaaaa" stroke-width="2" stroke-opacity="0.466667" d="M1285.98,-264C1244.64,-264 583.2,-264 583.2,-264 583.2,-264 583.2,-65 583.2,-65 583.2,-65 86.02,-65 86.02,-65"/>
-<polygon fill="#aaaaaa" fill-opacity="0.466667" stroke="#aaaaaa" stroke-width="2" stroke-opacity="0.466667" points="86.02,-62.9 80.02,-65 86.02,-67.1 86.02,-62.9"/>
+<path fill="none" stroke="#aaaaaa" stroke-width="2" stroke-opacity="0.466667" d="M1285.98,-264C1244.64,-264 583.2,-264 583.2,-264 583.2,-264 583.2,-65 583.2,-65 583.2,-65 89.23,-65 89.23,-65"/>
+<polygon fill="#aaaaaa" fill-opacity="0.466667" stroke="#aaaaaa" stroke-width="2" stroke-opacity="0.466667" points="89.23,-62.9 83.23,-65 89.23,-67.1 89.23,-62.9"/>
 </g>
 <!-- src/main/resolve&#45;options -->
 <g id="node15" class="node">
@@ -238,17 +238,17 @@
 </g>
 </g>
 <!-- src/main&#45;&gt;src/main/resolve&#45;options -->
-<g id="edge51" class="edge">
+<g id="edge52" class="edge">
 <title>src/main&#45;&gt;src/main/resolve&#45;options</title>
 <path fill="none" stroke="#770000" stroke-width="2" stroke-opacity="0.466667" d="M1288.9,-261.85C1288.9,-261.85 1288.9,-218.01 1288.9,-218.01"/>
 <polygon fill="#770000" fill-opacity="0.466667" stroke="#770000" stroke-width="2" stroke-opacity="0.466667" points="1291,-218.01 1288.9,-212.01 1286.8,-218.01 1291,-218.01"/>
 </g>
 <!-- src/enrich -->
 <!-- src/main&#45;&gt;src/enrich -->
-<g id="edge44" class="edge">
+<g id="edge45" class="edge">
 <title>src/main&#45;&gt;src/enrich</title>
-<path fill="none" stroke="#007766" stroke-width="2" stroke-opacity="0.466667" d="M1287.1,-261.73C1287.1,-260.46 1287.1,-259 1287.1,-259 1287.1,-259 585.6,-259 585.6,-259 585.6,-259 585.6,-204 585.6,-204 585.6,-204 333.4,-204 333.4,-204"/>
-<polygon fill="#007766" fill-opacity="0.466667" stroke="#007766" stroke-width="2" stroke-opacity="0.466667" points="333.4,-201.9 327.4,-204 333.4,-206.1 333.4,-201.9"/>
+<path fill="none" stroke="#007766" stroke-width="2" stroke-opacity="0.466667" d="M1287.1,-261.8C1287.1,-260.9 1287.1,-260 1287.1,-260 1287.1,-260 571.35,-260 571.35,-260 571.35,-260 571.35,-204 571.35,-204 571.35,-204 333.57,-204 333.57,-204"/>
+<polygon fill="#007766" fill-opacity="0.466667" stroke="#007766" stroke-width="2" stroke-opacity="0.466667" points="333.57,-201.9 327.57,-204 333.57,-206.1 333.57,-201.9"/>
 </g>
 <!-- src/enrich/summarize -->
 <g id="node17" class="node">
@@ -263,10 +263,10 @@
 </g>
 </g>
 <!-- src/main&#45;&gt;src/enrich/summarize -->
-<g id="edge53" class="edge">
+<g id="edge54" class="edge">
 <title>src/main&#45;&gt;src/enrich/summarize</title>
-<path fill="none" stroke="#007766" stroke-width="2" stroke-opacity="0.466667" d="M1290.15,-264C1298.43,-264 1327.9,-264 1327.9,-264 1327.9,-264 1327.9,-233 1327.9,-233 1327.9,-233 122,-233 122,-233 122,-233 122,-165.91 122,-165.91"/>
-<polygon fill="#007766" fill-opacity="0.466667" stroke="#007766" stroke-width="2" stroke-opacity="0.466667" points="124.1,-165.91 122,-159.91 119.9,-165.91 124.1,-165.91"/>
+<path fill="none" stroke="#007766" stroke-width="2" stroke-opacity="0.466667" d="M1290.15,-264C1298.43,-264 1327.9,-264 1327.9,-264 1327.9,-264 1327.9,-226 1327.9,-226 1327.9,-226 122,-226 122,-226 122,-226 122,-166.02 122,-166.02"/>
+<polygon fill="#007766" fill-opacity="0.466667" stroke="#007766" stroke-width="2" stroke-opacity="0.466667" points="124.1,-166.02 122,-160.02 119.9,-166.02 124.1,-166.02"/>
 </g>
 <!-- src/graph&#45;utl -->
 <g id="node19" class="node">
@@ -281,14 +281,14 @@
 </g>
 </g>
 <!-- src/main&#45;&gt;src/graph&#45;utl -->
-<g id="edge54" class="edge">
+<g id="edge55" class="edge">
 <title>src/main&#45;&gt;src/graph&#45;utl</title>
-<path fill="none" stroke="#770000" stroke-width="2" stroke-opacity="0.466667" d="M1288,-261.8C1288,-259.84 1288,-257 1288,-257 1288,-257 890.33,-257 890.33,-257 890.33,-257 890.33,-48.06 890.33,-48.06"/>
-<polygon fill="#770000" fill-opacity="0.466667" stroke="#770000" stroke-width="2" stroke-opacity="0.466667" points="892.43,-48.06 890.33,-42.06 888.23,-48.06 892.43,-48.06"/>
+<path fill="none" stroke="#770000" stroke-width="2" stroke-opacity="0.466667" d="M1288,-261.58C1288,-259.97 1288,-258 1288,-258 1288,-258 890.33,-258 890.33,-258 890.33,-258 890.33,-48.1 890.33,-48.1"/>
+<polygon fill="#770000" fill-opacity="0.466667" stroke="#770000" stroke-width="2" stroke-opacity="0.466667" points="892.43,-48.1 890.33,-42.1 888.23,-48.1 892.43,-48.1"/>
 </g>
 <!-- src/extract -->
 <!-- src/main&#45;&gt;src/extract -->
-<g id="edge45" class="edge">
+<g id="edge46" class="edge">
 <title>src/main&#45;&gt;src/extract</title>
 <path fill="none" stroke="#007700" stroke-width="2" stroke-opacity="0.466667" d="M1288,-265.62C1288,-267.5 1288,-270 1288,-270 1288,-270 726.6,-270 726.6,-270 726.6,-270 726.6,-210.74 726.6,-210.74"/>
 <polygon fill="#007700" fill-opacity="0.466667" stroke="#007700" stroke-width="2" stroke-opacity="0.466667" points="728.7,-210.74 726.6,-204.74 724.5,-210.74 728.7,-210.74"/>
@@ -306,10 +306,10 @@
 </g>
 </g>
 <!-- src/main&#45;&gt;src/extract/transpile -->
-<g id="edge46" class="edge">
+<g id="edge47" class="edge">
 <title>src/main&#45;&gt;src/extract/transpile</title>
-<path fill="none" stroke="#007700" stroke-width="2" stroke-opacity="0.466667" d="M1286.03,-263C1245.73,-263 601,-263 601,-263 601,-263 601,-121.35 601,-121.35"/>
-<polygon fill="#007700" fill-opacity="0.466667" stroke="#007700" stroke-width="2" stroke-opacity="0.466667" points="603.1,-121.35 601,-115.35 598.9,-121.35 603.1,-121.35"/>
+<path fill="none" stroke="#007700" stroke-width="2" stroke-opacity="0.466667" d="M1286.02,-263C1245.64,-263 599.5,-263 599.5,-263 599.5,-263 599.5,-121.35 599.5,-121.35"/>
+<polygon fill="#007700" fill-opacity="0.466667" stroke="#007700" stroke-width="2" stroke-opacity="0.466667" points="601.6,-121.35 599.5,-115.35 597.4,-121.35 601.6,-121.35"/>
 </g>
 <!-- src/schema -->
 <g id="node31" class="node">
@@ -324,7 +324,7 @@
 </g>
 </g>
 <!-- src/main&#45;&gt;src/schema -->
-<g id="edge47" class="edge">
+<g id="edge48" class="edge">
 <title>src/main&#45;&gt;src/schema</title>
 <path fill="none" stroke="#000000" stroke-width="2" stroke-opacity="0.200000" d="M1287.1,-265.3C1287.1,-266.15 1287.1,-267 1287.1,-267 1287.1,-267 1129,-267 1129,-267 1129,-267 1129,-165.92 1129,-165.92"/>
 <polygon fill="#000000" fill-opacity="0.200000" stroke="#000000" stroke-width="2" stroke-opacity="0.200000" points="1131.1,-165.92 1129,-159.92 1126.9,-165.92 1131.1,-165.92"/>
@@ -342,7 +342,7 @@
 </g>
 </g>
 <!-- src/main&#45;&gt;src/main/files&#45;and&#45;dirs -->
-<g id="edge49" class="edge">
+<g id="edge50" class="edge">
 <title>src/main&#45;&gt;src/main/files&#45;and&#45;dirs</title>
 <path fill="none" stroke="#770000" stroke-width="2" stroke-opacity="0.466667" d="M1290.15,-263C1311.13,-263 1479,-263 1479,-263 1479,-263 1479,-217.94 1479,-217.94"/>
 <polygon fill="#770000" fill-opacity="0.466667" stroke="#770000" stroke-width="2" stroke-opacity="0.466667" points="1481.1,-217.94 1479,-211.94 1476.9,-217.94 1481.1,-217.94"/>
@@ -360,7 +360,7 @@
 </g>
 </g>
 <!-- src/main&#45;&gt;src/main/options -->
-<g id="edge50" class="edge">
+<g id="edge51" class="edge">
 <title>src/main&#45;&gt;src/main/options</title>
 <path fill="none" stroke="#770000" stroke-width="2" stroke-opacity="0.466667" d="M1287.08,-262C1283.97,-262 1274,-262 1274,-262 1274,-262 1274,-155 1274,-155 1274,-155 1391.66,-155 1391.66,-155"/>
 <polygon fill="#770000" fill-opacity="0.466667" stroke="#770000" stroke-width="2" stroke-opacity="0.466667" points="1391.66,-157.1 1397.66,-155 1391.66,-152.9 1391.66,-157.1"/>
@@ -378,14 +378,14 @@
 </g>
 </g>
 <!-- src/main&#45;&gt;src/main/rule&#45;set -->
-<g id="edge52" class="edge">
+<g id="edge53" class="edge">
 <title>src/main&#45;&gt;src/main/rule&#45;set</title>
 <path fill="none" stroke="#770000" stroke-width="2" stroke-opacity="0.466667" d="M1289.31,-262C1302.17,-262 1405,-262 1405,-262 1405,-262 1405,-218.05 1405,-218.05"/>
 <polygon fill="#770000" fill-opacity="0.466667" stroke="#770000" stroke-width="2" stroke-opacity="0.466667" points="1407.1,-218.05 1405,-212.05 1402.9,-218.05 1407.1,-218.05"/>
 </g>
 <!-- src/report -->
 <!-- src/main&#45;&gt;src/report -->
-<g id="edge55" class="edge">
+<g id="edge56" class="edge">
 <title>src/main&#45;&gt;src/report</title>
 <path fill="none" stroke="#ff00ff" stroke-width="2" stroke-opacity="0.466667" d="M1286.27,-263C1266.77,-263 1088.4,-263 1088.4,-263 1088.4,-263 1088.4,-113.76 1088.4,-113.76"/>
 <polygon fill="#ff00ff" fill-opacity="0.466667" stroke="#ff00ff" stroke-width="2" stroke-opacity="0.466667" points="1090.5,-113.76 1088.4,-107.76 1086.3,-113.76 1090.5,-113.76"/>
@@ -394,38 +394,38 @@
 <!-- src/config&#45;utl/extract&#45;depcruise&#45;config&#45;&gt;src/extract/resolve -->
 <g id="edge15" class="edge">
 <title>src/config&#45;utl/extract&#45;depcruise&#45;config&#45;&gt;src/extract/resolve</title>
-<path fill="none" stroke="#007700" stroke-width="2" stroke-opacity="0.466667" d="M544.5,-254.28C544.5,-223.64 544.5,-128 544.5,-128 544.5,-128 724.35,-128 724.35,-128 724.35,-128 724.35,-143.82 724.35,-143.82"/>
-<polygon fill="#007700" fill-opacity="0.466667" stroke="#007700" stroke-width="2" stroke-opacity="0.466667" points="722.25,-143.82 724.35,-149.82 726.45,-143.82 722.25,-143.82"/>
+<path fill="none" stroke="#007700" stroke-width="2" stroke-opacity="0.466667" d="M565.69,-256C627.28,-256 716.1,-256 716.1,-256 716.1,-256 716.1,-150 716.1,-150 716.1,-150 718.09,-150 718.09,-150"/>
+<polygon fill="#007700" fill-opacity="0.466667" stroke="#007700" stroke-width="2" stroke-opacity="0.466667" points="718.09,-152.1 724.09,-150 718.09,-147.9 718.09,-152.1"/>
 </g>
 <!-- src/config&#45;utl/extract&#45;depcruise&#45;config&#45;&gt;src/main/resolve&#45;options -->
 <g id="edge16" class="edge">
 <title>src/config&#45;utl/extract&#45;depcruise&#45;config&#45;&gt;src/main/resolve&#45;options</title>
-<path fill="none" stroke="#770000" stroke-width="2" stroke-opacity="0.466667" d="M555,-254.26C555,-238.91 555,-210 555,-210 555,-210 1279.9,-210 1279.9,-210"/>
+<path fill="none" stroke="#770000" stroke-width="2" stroke-opacity="0.466667" d="M549.75,-254.26C549.75,-238.91 549.75,-210 549.75,-210 549.75,-210 1279.9,-210 1279.9,-210"/>
 <polygon fill="#770000" fill-opacity="0.466667" stroke="#770000" stroke-width="2" stroke-opacity="0.466667" points="1279.9,-212.1 1285.9,-210 1279.9,-207.9 1279.9,-212.1"/>
 </g>
 <!-- src/cli/init&#45;config&#45;&gt;src/cli -->
 <g id="edge11" class="edge">
 <title>src/cli/init&#45;config&#45;&gt;src/cli</title>
-<path fill="none" stroke="#0000ff" stroke-width="2" stroke-opacity="0.466667" d="M54.67,-272.73C54.67,-287.74 54.67,-316 54.67,-316 54.67,-316 224.01,-316 224.01,-316"/>
-<polygon fill="#0000ff" fill-opacity="0.466667" stroke="#0000ff" stroke-width="2" stroke-opacity="0.466667" points="224.01,-318.1 230.01,-316 224.01,-313.9 224.01,-318.1"/>
+<path fill="none" stroke="#0000ff" stroke-width="2" stroke-opacity="0.466667" d="M73.33,-272.79C73.33,-286.05 73.33,-309 73.33,-309 73.33,-309 231.1,-309 231.1,-309 231.1,-309 231.1,-309.48 231.1,-309.48"/>
+<polygon fill="#0000ff" fill-opacity="0.466667" stroke="#0000ff" stroke-width="2" stroke-opacity="0.466667" points="229,-307.8 231.1,-313.8 233.2,-307.8 229,-307.8"/>
 </g>
 <!-- src/cli/init&#45;config&#45;&gt;src/utl -->
 <g id="edge12" class="edge">
 <title>src/cli/init&#45;config&#45;&gt;src/utl</title>
-<path fill="none" stroke="#aaaaaa" stroke-width="2" stroke-opacity="0.466667" d="M47,-254.5C47,-254.5 47,-79.15 47,-79.15"/>
-<polygon fill="#aaaaaa" fill-opacity="0.466667" stroke="#aaaaaa" stroke-width="2" stroke-opacity="0.466667" points="49.1,-79.15 47,-73.15 44.9,-79.15 49.1,-79.15"/>
+<path fill="none" stroke="#aaaaaa" stroke-width="2" stroke-opacity="0.466667" d="M47.75,-254.5C47.75,-254.5 47.75,-79.15 47.75,-79.15"/>
+<polygon fill="#aaaaaa" fill-opacity="0.466667" stroke="#aaaaaa" stroke-width="2" stroke-opacity="0.466667" points="49.85,-79.15 47.75,-73.15 45.65,-79.15 49.85,-79.15"/>
 </g>
 <!-- src/cli/listeners/cli&#45;feedback&#45;&gt;src/utl -->
 <g id="edge13" class="edge">
 <title>src/cli/listeners/cli&#45;feedback&#45;&gt;src/utl</title>
-<path fill="none" stroke="#aaaaaa" stroke-width="2" stroke-opacity="0.466667" d="M303,-254.58C303,-239.08 303,-209 303,-209 303,-209 58,-209 58,-209 58,-209 58,-79.07 58,-79.07"/>
-<polygon fill="#aaaaaa" fill-opacity="0.466667" stroke="#aaaaaa" stroke-width="2" stroke-opacity="0.466667" points="60.1,-79.07 58,-73.07 55.9,-79.07 60.1,-79.07"/>
+<path fill="none" stroke="#aaaaaa" stroke-width="2" stroke-opacity="0.466667" d="M297.33,-254.54C297.33,-247.89 297.33,-240 297.33,-240 297.33,-240 59.5,-240 59.5,-240 59.5,-240 59.5,-79.46 59.5,-79.46"/>
+<polygon fill="#aaaaaa" fill-opacity="0.466667" stroke="#aaaaaa" stroke-width="2" stroke-opacity="0.466667" points="61.6,-79.46 59.5,-73.46 57.4,-79.46 61.6,-79.46"/>
 </g>
 <!-- src/cli/listeners/performance&#45;log&#45;&gt;src/utl -->
 <g id="edge14" class="edge">
 <title>src/cli/listeners/performance&#45;log&#45;&gt;src/utl</title>
-<path fill="none" stroke="#aaaaaa" stroke-width="2" stroke-opacity="0.466667" d="M257.67,-254.52C257.67,-216.25 257.67,-70 257.67,-70 257.67,-70 86.18,-70 86.18,-70"/>
-<polygon fill="#aaaaaa" fill-opacity="0.466667" stroke="#aaaaaa" stroke-width="2" stroke-opacity="0.466667" points="86.18,-67.9 80.18,-70 86.18,-72.1 86.18,-67.9"/>
+<path fill="none" stroke="#aaaaaa" stroke-width="2" stroke-opacity="0.466667" d="M259.75,-254.52C259.75,-216.25 259.75,-70 259.75,-70 259.75,-70 89.06,-70 89.06,-70"/>
+<polygon fill="#aaaaaa" fill-opacity="0.466667" stroke="#aaaaaa" stroke-width="2" stroke-opacity="0.466667" points="89.06,-67.9 83.06,-70 89.06,-72.1 89.06,-67.9"/>
 </g>
 <!-- src/cli/listeners -->
 <!-- src/extract/resolve/get&#45;manifest -->
@@ -461,26 +461,26 @@
 <!-- src/extract/resolve&#45;&gt;src/extract/utl -->
 <g id="edge42" class="edge">
 <title>src/extract/resolve&#45;&gt;src/extract/utl</title>
-<path fill="none" stroke="#007700" stroke-width="2" stroke-opacity="0.466667" d="M724.22,-150C718.88,-150 703.33,-150 703.33,-150 703.33,-150 703.33,-121.33 703.33,-121.33"/>
-<polygon fill="#007700" fill-opacity="0.466667" stroke="#007700" stroke-width="2" stroke-opacity="0.466667" points="705.43,-121.33 703.33,-115.33 701.23,-121.33 705.43,-121.33"/>
+<path fill="none" stroke="#007700" stroke-width="2" stroke-opacity="0.466667" d="M724.35,-150.02C724.35,-144.07 724.35,-106 724.35,-106 724.35,-106 714.21,-106 714.21,-106"/>
+<polygon fill="#007700" fill-opacity="0.466667" stroke="#007700" stroke-width="2" stroke-opacity="0.466667" points="714.21,-103.9 708.21,-106 714.21,-108.1 714.21,-103.9"/>
 </g>
 <!-- src/main/resolve&#45;options&#45;&gt;src/graph&#45;utl -->
-<g id="edge59" class="edge">
+<g id="edge60" class="edge">
 <title>src/main/resolve&#45;options&#45;&gt;src/graph&#45;utl</title>
 <path fill="none" stroke="#770000" stroke-width="2" stroke-opacity="0.466667" d="M1285.91,-198C1179.1,-198 895.75,-198 895.75,-198 895.75,-198 895.75,-48.34 895.75,-48.34"/>
 <polygon fill="#770000" fill-opacity="0.466667" stroke="#770000" stroke-width="2" stroke-opacity="0.466667" points="897.85,-48.34 895.75,-42.34 893.65,-48.34 897.85,-48.34"/>
 </g>
 <!-- src/main/resolve&#45;options&#45;&gt;src/extract/transpile -->
-<g id="edge58" class="edge">
+<g id="edge59" class="edge">
 <title>src/main/resolve&#45;options&#45;&gt;src/extract/transpile</title>
-<path fill="none" stroke="#007700" stroke-width="2" stroke-opacity="0.466667" d="M1285.91,-199C1137.38,-199 627,-199 627,-199 627,-199 627,-121.26 627,-121.26"/>
-<polygon fill="#007700" fill-opacity="0.466667" stroke="#007700" stroke-width="2" stroke-opacity="0.466667" points="629.1,-121.26 627,-115.26 624.9,-121.26 629.1,-121.26"/>
+<path fill="none" stroke="#007700" stroke-width="2" stroke-opacity="0.466667" d="M1285.91,-199C1136.75,-199 622.5,-199 622.5,-199 622.5,-199 622.5,-121.26 622.5,-121.26"/>
+<polygon fill="#007700" fill-opacity="0.466667" stroke="#007700" stroke-width="2" stroke-opacity="0.466667" points="624.6,-121.26 622.5,-115.26 620.4,-121.26 624.6,-121.26"/>
 </g>
 <!-- src/enrich&#45;&gt;src/utl -->
 <g id="edge20" class="edge">
 <title>src/enrich&#45;&gt;src/utl</title>
-<path fill="none" stroke="#aaaaaa" stroke-width="2" stroke-opacity="0.466667" d="M325.4,-204.92C325.4,-206.35 325.4,-208 325.4,-208 325.4,-208 69,-208 69,-208 69,-208 69,-79.01 69,-79.01"/>
-<polygon fill="#aaaaaa" fill-opacity="0.466667" stroke="#aaaaaa" stroke-width="2" stroke-opacity="0.466667" points="71.1,-79.01 69,-73.01 66.9,-79.01 71.1,-79.01"/>
+<path fill="none" stroke="#aaaaaa" stroke-width="2" stroke-opacity="0.466667" d="M325.4,-204.92C325.4,-206.35 325.4,-208 325.4,-208 325.4,-208 71.25,-208 71.25,-208 71.25,-208 71.25,-79.01 71.25,-79.01"/>
+<polygon fill="#aaaaaa" fill-opacity="0.466667" stroke="#aaaaaa" stroke-width="2" stroke-opacity="0.466667" points="73.35,-79.01 71.25,-73.01 69.15,-79.01 73.35,-79.01"/>
 </g>
 <!-- src/enrich&#45;&gt;src/enrich/summarize -->
 <g id="edge17" class="edge">
@@ -492,14 +492,14 @@
 <!-- src/enrich&#45;&gt;src/enrich/derive -->
 <g id="edge18" class="edge">
 <title>src/enrich&#45;&gt;src/enrich/derive</title>
-<path fill="none" stroke="#007766" stroke-width="2" stroke-opacity="0.466667" d="M324.15,-202C313.63,-202 261.83,-202 261.83,-202 261.83,-202 261.83,-100 261.83,-100 261.83,-100 293.6,-100 293.6,-100 293.6,-100 293.6,-100.41 293.6,-100.41"/>
+<path fill="none" stroke="#007766" stroke-width="2" stroke-opacity="0.466667" d="M327.63,-202C337.79,-202 392,-202 392,-202 392,-202 392,-100 392,-100 392,-100 293.6,-100 293.6,-100 293.6,-100 293.6,-100.41 293.6,-100.41"/>
 <polygon fill="#007766" fill-opacity="0.466667" stroke="#007766" stroke-width="2" stroke-opacity="0.466667" points="291.5,-98.1 293.6,-104.1 295.7,-98.1 291.5,-98.1"/>
 </g>
 <!-- src/enrich&#45;&gt;src/graph&#45;utl -->
 <g id="edge19" class="edge">
 <title>src/enrich&#45;&gt;src/graph&#45;utl</title>
-<path fill="none" stroke="#770000" stroke-width="2" stroke-opacity="0.466667" d="M326.9,-200.93C326.9,-182.6 326.9,-36 326.9,-36 326.9,-36 851.7,-36 851.7,-36"/>
-<polygon fill="#770000" fill-opacity="0.466667" stroke="#770000" stroke-width="2" stroke-opacity="0.466667" points="851.7,-38.1 857.7,-36 851.7,-33.9 851.7,-38.1"/>
+<path fill="none" stroke="#770000" stroke-width="2" stroke-opacity="0.466667" d="M326,-200.93C326,-182.6 326,-36 326,-36 326,-36 851.66,-36 851.66,-36"/>
+<polygon fill="#770000" fill-opacity="0.466667" stroke="#770000" stroke-width="2" stroke-opacity="0.466667" points="851.66,-38.1 857.66,-36 851.66,-33.9 851.66,-38.1"/>
 </g>
 <!-- src/enrich/derive/circular -->
 <g id="node20" class="node">
@@ -516,8 +516,8 @@
 <!-- src/enrich&#45;&gt;src/enrich/derive/circular -->
 <g id="edge21" class="edge">
 <title>src/enrich&#45;&gt;src/enrich/derive/circular</title>
-<path fill="none" stroke="#007766" stroke-width="2" stroke-opacity="0.466667" d="M326,-200.53C326,-190.43 326,-150 326,-150 326,-150 325.43,-150 325.43,-150"/>
-<polygon fill="#007766" fill-opacity="0.466667" stroke="#007766" stroke-width="2" stroke-opacity="0.466667" points="326.25,-147.9 320.25,-150 326.25,-152.1 326.25,-147.9"/>
+<path fill="none" stroke="#007766" stroke-width="2" stroke-opacity="0.466667" d="M324.15,-202C319.67,-202 308.67,-202 308.67,-202 308.67,-202 308.67,-166.19 308.67,-166.19"/>
+<polygon fill="#007766" fill-opacity="0.466667" stroke="#007766" stroke-width="2" stroke-opacity="0.466667" points="310.77,-166.19 308.67,-160.19 306.57,-166.19 310.77,-166.19"/>
 </g>
 <!-- src/enrich/derive/dependents -->
 <g id="node21" class="node">
@@ -552,8 +552,8 @@
 <!-- src/enrich&#45;&gt;src/enrich/derive/orphan -->
 <g id="edge23" class="edge">
 <title>src/enrich&#45;&gt;src/enrich/derive/orphan</title>
-<path fill="none" stroke="#007766" stroke-width="2" stroke-opacity="0.466667" d="M326.05,-201C326.98,-201 342,-201 342,-201 342,-201 342,-166.01 342,-166.01"/>
-<polygon fill="#007766" fill-opacity="0.466667" stroke="#007766" stroke-width="2" stroke-opacity="0.466667" points="344.1,-166.01 342,-160.01 339.9,-166.01 344.1,-166.01"/>
+<path fill="none" stroke="#007766" stroke-width="2" stroke-opacity="0.466667" d="M326.9,-201.04C326.9,-191.88 326.9,-150 326.9,-150 326.9,-150 327.4,-150 327.4,-150"/>
+<polygon fill="#007766" fill-opacity="0.466667" stroke="#007766" stroke-width="2" stroke-opacity="0.466667" points="325.92,-152.1 331.92,-150 325.92,-147.9 325.92,-152.1"/>
 </g>
 <!-- src/enrich/derive/reachable -->
 <g id="node23" class="node">
@@ -628,16 +628,16 @@
 <polygon fill="#0000ff" fill-opacity="0.466667" stroke="#0000ff" stroke-width="2" stroke-opacity="0.466667" points="473.61,-113.1 479.61,-111 473.61,-108.9 473.61,-113.1"/>
 </g>
 <!-- src/validate&#45;&gt;src/utl -->
-<g id="edge73" class="edge">
+<g id="edge74" class="edge">
 <title>src/validate&#45;&gt;src/utl</title>
-<path fill="none" stroke="#aaaaaa" stroke-width="2" stroke-opacity="0.466667" d="M507,-96.95C507,-85.43 507,-67 507,-67 507,-67 86.04,-67 86.04,-67"/>
-<polygon fill="#aaaaaa" fill-opacity="0.466667" stroke="#aaaaaa" stroke-width="2" stroke-opacity="0.466667" points="86.04,-64.9 80.04,-67 86.04,-69.1 86.04,-64.9"/>
+<path fill="none" stroke="#aaaaaa" stroke-width="2" stroke-opacity="0.466667" d="M507,-96.95C507,-85.43 507,-67 507,-67 507,-67 89.2,-67 89.2,-67"/>
+<polygon fill="#aaaaaa" fill-opacity="0.466667" stroke="#aaaaaa" stroke-width="2" stroke-opacity="0.466667" points="89.2,-64.9 83.2,-67 89.2,-69.1 89.2,-64.9"/>
 </g>
 <!-- src/extract&#45;&gt;src/utl -->
 <g id="edge32" class="edge">
 <title>src/extract&#45;&gt;src/utl</title>
-<path fill="none" stroke="#aaaaaa" stroke-width="2" stroke-opacity="0.466667" d="M724.09,-203C721.21,-203 716.1,-203 716.1,-203 716.1,-203 716.1,-62 716.1,-62 716.1,-62 86.23,-62 86.23,-62"/>
-<polygon fill="#aaaaaa" fill-opacity="0.466667" stroke="#aaaaaa" stroke-width="2" stroke-opacity="0.466667" points="86.23,-59.9 80.23,-62 86.23,-64.1 86.23,-59.9"/>
+<path fill="none" stroke="#aaaaaa" stroke-width="2" stroke-opacity="0.466667" d="M724.02,-203C706.95,-203 585.6,-203 585.6,-203 585.6,-203 585.6,-62 585.6,-62 585.6,-62 89.36,-62 89.36,-62"/>
+<polygon fill="#aaaaaa" fill-opacity="0.466667" stroke="#aaaaaa" stroke-width="2" stroke-opacity="0.466667" points="89.36,-59.9 83.36,-62 89.36,-64.1 89.36,-59.9"/>
 </g>
 <!-- src/extract&#45;&gt;src/extract/resolve -->
 <g id="edge34" class="edge">
@@ -655,19 +655,19 @@
 <g id="node26" class="node">
 <title>src/extract/parse</title>
 <g id="a_node26"><a xlink:href="https://github.com/sverweij/dependency-cruiser/blob/develop/src/extract/parse" xlink:title="parse">
-<polygon fill="#ccffcc" stroke="black" points="694,-159.8 642,-159.8 640,-157.8 640,-141.8 692,-141.8 694,-143.8 694,-159.8"/>
-<polyline fill="none" stroke="black" points="692,-157.8 640,-157.8 "/>
-<polyline fill="none" stroke="black" points="692,-157.8 692,-141.8 "/>
-<polyline fill="none" stroke="black" points="692,-157.8 694,-159.8 "/>
-<text text-anchor="middle" x="667" y="-148.6" font-family="Helvetica,sans-Serif" font-size="9.00">parse</text>
+<polygon fill="#ccffcc" stroke="black" points="688,-159.8 636,-159.8 634,-157.8 634,-141.8 686,-141.8 688,-143.8 688,-159.8"/>
+<polyline fill="none" stroke="black" points="686,-157.8 634,-157.8 "/>
+<polyline fill="none" stroke="black" points="686,-157.8 686,-141.8 "/>
+<polyline fill="none" stroke="black" points="686,-157.8 688,-159.8 "/>
+<text text-anchor="middle" x="661" y="-148.6" font-family="Helvetica,sans-Serif" font-size="9.00">parse</text>
 </a>
 </g>
 </g>
 <!-- src/extract&#45;&gt;src/extract/parse -->
 <g id="edge33" class="edge">
 <title>src/extract&#45;&gt;src/extract/parse</title>
-<path fill="none" stroke="#007700" stroke-width="2" stroke-opacity="0.466667" d="M724.3,-202C714.62,-202 667,-202 667,-202 667,-202 667,-166.19 667,-166.19"/>
-<polygon fill="#007700" fill-opacity="0.466667" stroke="#007700" stroke-width="2" stroke-opacity="0.466667" points="669.1,-166.19 667,-160.19 664.9,-166.19 669.1,-166.19"/>
+<path fill="none" stroke="#007700" stroke-width="2" stroke-opacity="0.466667" d="M725.95,-201C723.98,-201 661,-201 661,-201 661,-201 661,-166.01 661,-166.01"/>
+<polygon fill="#007700" fill-opacity="0.466667" stroke="#007700" stroke-width="2" stroke-opacity="0.466667" points="663.1,-166.01 661,-160.01 658.9,-166.01 663.1,-166.01"/>
 </g>
 <!-- src/extract&#45;&gt;src/extract/resolve/get&#45;manifest -->
 <g id="edge35" class="edge">
@@ -678,14 +678,14 @@
 <!-- src/extract&#45;&gt;src/extract/transpile -->
 <g id="edge37" class="edge">
 <title>src/extract&#45;&gt;src/extract/transpile</title>
-<path fill="none" stroke="#007700" stroke-width="2" stroke-opacity="0.466667" d="M724.06,-202C709.18,-202 614,-202 614,-202 614,-202 614,-121.2 614,-121.2"/>
-<polygon fill="#007700" fill-opacity="0.466667" stroke="#007700" stroke-width="2" stroke-opacity="0.466667" points="616.1,-121.2 614,-115.2 611.9,-121.2 616.1,-121.2"/>
+<path fill="none" stroke="#007700" stroke-width="2" stroke-opacity="0.466667" d="M724.37,-202C710.4,-202 611,-202 611,-202 611,-202 611,-121.2 611,-121.2"/>
+<polygon fill="#007700" fill-opacity="0.466667" stroke="#007700" stroke-width="2" stroke-opacity="0.466667" points="613.1,-121.2 611,-115.2 608.9,-121.2 613.1,-121.2"/>
 </g>
 <!-- src/extract&#45;&gt;src/extract/utl -->
 <g id="edge38" class="edge">
 <title>src/extract&#45;&gt;src/extract/utl</title>
-<path fill="none" stroke="#007700" stroke-width="2" stroke-opacity="0.466667" d="M725.4,-204.66C725.4,-204.86 725.4,-205 725.4,-205 725.4,-205 698.67,-205 698.67,-205 698.67,-205 698.67,-121.14 698.67,-121.14"/>
-<polygon fill="#007700" fill-opacity="0.466667" stroke="#007700" stroke-width="2" stroke-opacity="0.466667" points="700.77,-121.14 698.67,-115.14 696.57,-121.14 700.77,-121.14"/>
+<path fill="none" stroke="#007700" stroke-width="2" stroke-opacity="0.466667" d="M725.4,-204.7C725.4,-205.39 725.4,-206 725.4,-206 725.4,-206 698,-206 698,-206 698,-206 698,-121.23 698,-121.23"/>
+<polygon fill="#007700" fill-opacity="0.466667" stroke="#007700" stroke-width="2" stroke-opacity="0.466667" points="700.1,-121.23 698,-115.23 695.9,-121.23 700.1,-121.23"/>
 </g>
 <!-- src/extract/ast&#45;extractors -->
 <g id="node30" class="node">
@@ -708,17 +708,23 @@
 <!-- src/extract/parse&#45;&gt;src/extract/transpile -->
 <g id="edge40" class="edge">
 <title>src/extract/parse&#45;&gt;src/extract/transpile</title>
-<path fill="none" stroke="#007700" stroke-width="2" stroke-opacity="0.466667" d="M648,-141.73C648,-128.64 648,-106 648,-106 648,-106 647.43,-106 647.43,-106"/>
-<polygon fill="#007700" fill-opacity="0.466667" stroke="#007700" stroke-width="2" stroke-opacity="0.466667" points="648.25,-103.9 642.25,-106 648.25,-108.1 648.25,-103.9"/>
+<path fill="none" stroke="#007700" stroke-width="2" stroke-opacity="0.466667" d="M639.33,-141.73C639.33,-141.73 639.33,-121.05 639.33,-121.05"/>
+<polygon fill="#007700" fill-opacity="0.466667" stroke="#007700" stroke-width="2" stroke-opacity="0.466667" points="641.43,-121.05 639.33,-115.05 637.23,-121.05 641.43,-121.05"/>
 </g>
 <!-- src/extract/parse&#45;&gt;src/extract/utl -->
 <g id="edge41" class="edge">
 <title>src/extract/parse&#45;&gt;src/extract/utl</title>
-<path fill="none" stroke="#007700" stroke-width="2" stroke-opacity="0.466667" d="M674,-141.73C674,-141.73 674,-121.05 674,-121.05"/>
-<polygon fill="#007700" fill-opacity="0.466667" stroke="#007700" stroke-width="2" stroke-opacity="0.466667" points="676.1,-121.05 674,-115.05 671.9,-121.05 676.1,-121.05"/>
+<path fill="none" stroke="#007700" stroke-width="2" stroke-opacity="0.466667" d="M671,-141.73C671,-141.73 671,-121.05 671,-121.05"/>
+<polygon fill="#007700" fill-opacity="0.466667" stroke="#007700" stroke-width="2" stroke-opacity="0.466667" points="673.1,-121.05 671,-115.05 668.9,-121.05 673.1,-121.05"/>
+</g>
+<!-- src/extract/transpile&#45;&gt;src/extract/parse -->
+<g id="edge44" class="edge">
+<title>src/extract/transpile&#45;&gt;src/extract/parse</title>
+<path fill="none" stroke="#007700" stroke-width="2" stroke-opacity="0.466667" d="M636.67,-115.07C636.67,-115.07 636.67,-135.75 636.67,-135.75"/>
+<polygon fill="#007700" fill-opacity="0.466667" stroke="#007700" stroke-width="2" stroke-opacity="0.466667" points="634.57,-135.75 636.67,-141.75 638.77,-135.75 634.57,-135.75"/>
 </g>
 <!-- src/main/options&#45;&gt;src/report -->
-<g id="edge57" class="edge">
+<g id="edge58" class="edge">
 <title>src/main/options&#45;&gt;src/report</title>
 <path fill="none" stroke="#ff00ff" stroke-width="2" stroke-opacity="0.466667" d="M1397.88,-146C1384.84,-146 1372,-146 1372,-146 1372,-146 1372,-106 1372,-106 1372,-106 1096.81,-106 1096.81,-106"/>
 <polygon fill="#ff00ff" fill-opacity="0.466667" stroke="#ff00ff" stroke-width="2" stroke-opacity="0.466667" points="1096.81,-103.9 1090.81,-106 1096.81,-108.1 1096.81,-103.9"/>
@@ -736,37 +742,37 @@
 </g>
 </g>
 <!-- src/main/options&#45;&gt;src/main/utl -->
-<g id="edge56" class="edge">
+<g id="edge57" class="edge">
 <title>src/main/options&#45;&gt;src/main/utl</title>
 <path fill="none" stroke="#770000" stroke-width="2" stroke-opacity="0.466667" d="M1415,-141.73C1415,-141.73 1415,-121.05 1415,-121.05"/>
 <polygon fill="#770000" fill-opacity="0.466667" stroke="#770000" stroke-width="2" stroke-opacity="0.466667" points="1417.1,-121.05 1415,-115.05 1412.9,-121.05 1417.1,-121.05"/>
 </g>
 <!-- src/main/rule&#45;set&#45;&gt;src/schema -->
-<g id="edge61" class="edge">
+<g id="edge62" class="edge">
 <title>src/main/rule&#45;set&#45;&gt;src/schema</title>
 <path fill="none" stroke="#000000" stroke-width="2" stroke-opacity="0.200000" d="M1384.67,-193.6C1384.67,-178.48 1384.67,-150 1384.67,-150 1384.67,-150 1162.36,-150 1162.36,-150"/>
 <polygon fill="#000000" fill-opacity="0.200000" stroke="#000000" stroke-width="2" stroke-opacity="0.200000" points="1162.36,-147.9 1156.36,-150 1162.36,-152.1 1162.36,-147.9"/>
 </g>
 <!-- src/main/rule&#45;set&#45;&gt;src/main/options -->
-<g id="edge62" class="edge">
+<g id="edge63" class="edge">
 <title>src/main/rule&#45;set&#45;&gt;src/main/options</title>
 <path fill="none" stroke="#770000" stroke-width="2" stroke-opacity="0.466667" d="M1415,-193.74C1415,-193.74 1415,-166.1 1415,-166.1"/>
 <polygon fill="#770000" fill-opacity="0.466667" stroke="#770000" stroke-width="2" stroke-opacity="0.466667" points="1417.1,-166.1 1415,-160.1 1412.9,-166.1 1417.1,-166.1"/>
 </g>
 <!-- src/main/rule&#45;set&#45;&gt;src/main/utl -->
-<g id="edge60" class="edge">
+<g id="edge61" class="edge">
 <title>src/main/rule&#45;set&#45;&gt;src/main/utl</title>
 <path fill="none" stroke="#770000" stroke-width="2" stroke-opacity="0.466667" d="M1391.33,-193.52C1391.33,-193.52 1391.33,-121.11 1391.33,-121.11"/>
 <polygon fill="#770000" fill-opacity="0.466667" stroke="#770000" stroke-width="2" stroke-opacity="0.466667" points="1393.43,-121.11 1391.33,-115.11 1389.23,-121.11 1393.43,-121.11"/>
 </g>
 <!-- src/report&#45;&gt;src/utl -->
-<g id="edge70" class="edge">
+<g id="edge71" class="edge">
 <title>src/report&#45;&gt;src/utl</title>
-<path fill="none" stroke="#aaaaaa" stroke-width="2" stroke-opacity="0.466667" d="M1087.1,-106C1068.54,-106 920,-106 920,-106 920,-106 920,-60 920,-60 920,-60 86.38,-60 86.38,-60"/>
-<polygon fill="#aaaaaa" fill-opacity="0.466667" stroke="#aaaaaa" stroke-width="2" stroke-opacity="0.466667" points="86.38,-57.9 80.38,-60 86.38,-62.1 86.38,-57.9"/>
+<path fill="none" stroke="#aaaaaa" stroke-width="2" stroke-opacity="0.466667" d="M1087.1,-106C1068.54,-106 920,-106 920,-106 920,-106 920,-60 920,-60 920,-60 89.28,-60 89.28,-60"/>
+<polygon fill="#aaaaaa" fill-opacity="0.466667" stroke="#aaaaaa" stroke-width="2" stroke-opacity="0.466667" points="89.28,-57.9 83.28,-60 89.28,-62.1 89.28,-57.9"/>
 </g>
 <!-- src/report&#45;&gt;src/graph&#45;utl -->
-<g id="edge69" class="edge">
+<g id="edge70" class="edge">
 <title>src/report&#45;&gt;src/graph&#45;utl</title>
 <path fill="none" stroke="#770000" stroke-width="2" stroke-opacity="0.466667" d="M1088.4,-104.1C1088.4,-102.34 1088.4,-100 1088.4,-100 1088.4,-100 901.17,-100 901.17,-100 901.17,-100 901.17,-48.04 901.17,-48.04"/>
 <polygon fill="#770000" fill-opacity="0.466667" stroke="#770000" stroke-width="2" stroke-opacity="0.466667" points="903.27,-48.04 901.17,-42.04 899.07,-48.04 903.27,-48.04"/>
@@ -784,7 +790,7 @@
 </g>
 </g>
 <!-- src/report&#45;&gt;src/report/anon -->
-<g id="edge63" class="edge">
+<g id="edge64" class="edge">
 <title>src/report&#45;&gt;src/report/anon</title>
 <path fill="none" stroke="#ff00ff" stroke-width="2" stroke-opacity="0.466667" d="M1091.06,-106C1108.81,-106 1235,-106 1235,-106 1235,-106 1235,-79.32 1235,-79.32"/>
 <polygon fill="#ff00ff" fill-opacity="0.466667" stroke="#ff00ff" stroke-width="2" stroke-opacity="0.466667" points="1237.1,-79.32 1235,-73.32 1232.9,-79.32 1237.1,-79.32"/>
@@ -802,7 +808,7 @@
 </g>
 </g>
 <!-- src/report&#45;&gt;src/report/dot -->
-<g id="edge64" class="edge">
+<g id="edge65" class="edge">
 <title>src/report&#45;&gt;src/report/dot</title>
 <path fill="none" stroke="#ff00ff" stroke-width="2" stroke-opacity="0.466667" d="M1087.11,-106C1070.82,-106 955,-106 955,-106 955,-106 955,-79.32 955,-79.32"/>
 <polygon fill="#ff00ff" fill-opacity="0.466667" stroke="#ff00ff" stroke-width="2" stroke-opacity="0.466667" points="957.1,-79.32 955,-73.32 952.9,-79.32 957.1,-79.32"/>
@@ -820,7 +826,7 @@
 </g>
 </g>
 <!-- src/report&#45;&gt;src/report/error&#45;html -->
-<g id="edge65" class="edge">
+<g id="edge66" class="edge">
 <title>src/report&#45;&gt;src/report/error&#45;html</title>
 <path fill="none" stroke="#ff00ff" stroke-width="2" stroke-opacity="0.466667" d="M1087.34,-105C1077.03,-105 1022,-105 1022,-105 1022,-105 1022,-79.1 1022,-79.1"/>
 <polygon fill="#ff00ff" fill-opacity="0.466667" stroke="#ff00ff" stroke-width="2" stroke-opacity="0.466667" points="1024.1,-79.1 1022,-73.1 1019.9,-79.1 1024.1,-79.1"/>
@@ -838,7 +844,7 @@
 </g>
 </g>
 <!-- src/report&#45;&gt;src/report/html -->
-<g id="edge66" class="edge">
+<g id="edge67" class="edge">
 <title>src/report&#45;&gt;src/report/html</title>
 <path fill="none" stroke="#ff00ff" stroke-width="2" stroke-opacity="0.466667" d="M1089.6,-104.2C1089.6,-104.2 1089.6,-79.11 1089.6,-79.11"/>
 <polygon fill="#ff00ff" fill-opacity="0.466667" stroke="#ff00ff" stroke-width="2" stroke-opacity="0.466667" points="1091.7,-79.11 1089.6,-73.11 1087.5,-79.11 1091.7,-79.11"/>
@@ -856,7 +862,7 @@
 </g>
 </g>
 <!-- src/report&#45;&gt;src/report/plugins -->
-<g id="edge67" class="edge">
+<g id="edge68" class="edge">
 <title>src/report&#45;&gt;src/report/plugins</title>
 <path fill="none" stroke="#ff00ff" stroke-width="2" stroke-opacity="0.466667" d="M1090.76,-105C1099.96,-105 1142,-105 1142,-105 1142,-105 1142,-79.1 1142,-79.1"/>
 <polygon fill="#ff00ff" fill-opacity="0.466667" stroke="#ff00ff" stroke-width="2" stroke-opacity="0.466667" points="1144.1,-79.1 1142,-73.1 1139.9,-79.1 1144.1,-79.1"/>
@@ -874,19 +880,19 @@
 </g>
 </g>
 <!-- src/report&#45;&gt;src/report/utl -->
-<g id="edge68" class="edge">
+<g id="edge69" class="edge">
 <title>src/report&#45;&gt;src/report/utl</title>
 <path fill="none" stroke="#ff00ff" stroke-width="2" stroke-opacity="0.466667" d="M1089.6,-108.03C1089.6,-109.42 1089.6,-111 1089.6,-111 1089.6,-111 1124,-111 1124,-111 1124,-111 1124,-48.25 1124,-48.25"/>
 <polygon fill="#ff00ff" fill-opacity="0.466667" stroke="#ff00ff" stroke-width="2" stroke-opacity="0.466667" points="1126.1,-48.25 1124,-42.25 1121.9,-48.25 1126.1,-48.25"/>
 </g>
 <!-- src/report/dot&#45;&gt;src/graph&#45;utl -->
-<g id="edge71" class="edge">
+<g id="edge72" class="edge">
 <title>src/report/dot&#45;&gt;src/graph&#45;utl</title>
 <path fill="none" stroke="#770000" stroke-width="2" stroke-opacity="0.466667" d="M927.96,-57C916.87,-57 906.58,-57 906.58,-57 906.58,-57 906.58,-48.21 906.58,-48.21"/>
 <polygon fill="#770000" fill-opacity="0.466667" stroke="#770000" stroke-width="2" stroke-opacity="0.466667" points="908.68,-48.21 906.58,-42.21 904.48,-48.21 908.68,-48.21"/>
 </g>
 <!-- src/report/html&#45;&gt;src/report/utl -->
-<g id="edge72" class="edge">
+<g id="edge73" class="edge">
 <title>src/report/html&#45;&gt;src/report/utl</title>
 <path fill="none" stroke="#ff00ff" stroke-width="2" stroke-opacity="0.466667" d="M1116.2,-64C1118.52,-64 1120,-64 1120,-64 1120,-64 1120,-48.13 1120,-48.13"/>
 <polygon fill="#ff00ff" fill-opacity="0.466667" stroke="#ff00ff" stroke-width="2" stroke-opacity="0.466667" points="1122.1,-48.13 1120,-42.13 1117.9,-48.13 1122.1,-48.13"/>
