@@ -2,7 +2,7 @@ const { expect } = require("chai");
 const extractWithSwc = require("./extract-with-swc.utl");
 
 describe("ast-extractors/extract-swc - type imports", () => {
-  // normal fail
+  // normal fail, but Visitor.visitTsTypeAnnotation doesn't seem to get called
   // it("extracts type imports in const declarations", () => {
   //   expect(
   //     extractWithSwc("const tiepetjes: import('./types').T;")
@@ -30,7 +30,7 @@ describe("ast-extractors/extract-swc - type imports", () => {
   //   ]);
   // });
 
-  // normal fail
+  // normal fail, but pNode in Visitor.visitTsTypeAnnotation(pNode) equals null
   // it("extracts type imports in parameter declarations", () => {
   //   expect(
   //     extractWithSwc(
@@ -46,21 +46,20 @@ describe("ast-extractors/extract-swc - type imports", () => {
   //   ]);
   // });
 
-  // normal fail
-  // it("extracts type imports in class members", () => {
-  //   expect(
-  //     extractWithSwc(
-  //       "class Klass{ private membert: import('./wypes').T; constructor() { membert = 'x'}}"
-  //     )
-  //   ).to.deep.equal([
-  //     {
-  //       module: "./wypes",
-  //       moduleSystem: "es6",
-  //       dynamic: false,
-  //       exoticallyRequired: false,
-  //     },
-  //   ]);
-  // });
+  it("extracts type imports in class members", () => {
+    expect(
+      extractWithSwc(
+        "class Klass{ private membert: import('./wypes').T; constructor() { membert = 'x'}}"
+      )
+    ).to.deep.equal([
+      {
+        module: "./wypes",
+        moduleSystem: "es6",
+        dynamic: false,
+        exoticallyRequired: false,
+      },
+    ]);
+  });
 
   // swc fails with: "Error: internal error: entered unreachable code: parse_lit should not be called"
   // it("leaves type imports with template literals with placeholders alone", () => {
