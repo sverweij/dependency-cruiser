@@ -91,6 +91,54 @@ if (VisitorModule) {
       this.lExoticRequireStrings = pExoticRequireStrings;
     }
 
+    pushImportExportSource(pNode) {
+      if (pNode.source) {
+        this.lResult.push({
+          module: pNode.source.value,
+          moduleSystem: "es6",
+          exoticallyRequired: false,
+        });
+      }
+    }
+    visitImportDeclaration(pNode) {
+      this.pushImportExportSource(pNode);
+      return super.visitImportDeclaration(pNode);
+    }
+
+    visitTsImportEqualsDeclaration(pNode) {
+      if (pNode.moduleRef.type === "TsExternalModuleReference") {
+        this.lResult.push({
+          module: pNode.moduleRef.expression.value,
+          moduleSystem: "cjs",
+          exoticallyRequired: false,
+        });
+      }
+      return super.visitTsImportEqualsDeclaration(pNode);
+    }
+
+    // note: super class contains a typo. This will eventually be corrected.
+    // To anticipate that (and to remain backward compatible when that happens)
+    // also include the same method, but with the correct spelling.
+    visitExportAllDeclration(pNode) {
+      this.pushImportExportSource(pNode);
+      return super.visitExportAllDeclration(pNode);
+    }
+
+    /* istanbul ignore next */
+    visitExportAllDeclaration(pNode) {
+      return this.visitExportAllDeclration(pNode);
+    }
+
+    // same spelling error as the above - same solution
+    visitExportNamedDeclration(pNode) {
+      this.pushImportExportSource(pNode);
+      return super.visitExportNamedDeclration(pNode);
+    }
+    /* istanbul ignore next */
+    visitExportNamedDeclaration(pNode) {
+      return this.visitExportNamedDeclration(pNode);
+    }
+
     visitCallExpression(pNode) {
       if (
         isInterestingCallExpression(this.lExoticRequireStrings, pNode) &&
@@ -121,6 +169,23 @@ if (VisitorModule) {
       // override so the 'visitTsType not implemented' error message
       // as defined in the super class doesn't appear
       return pNode;
+    }
+
+    visitTsTypeAnnotation(pNode) {
+      // as visitors for some shapes of type annotations aren't completely
+      // implemented yet (1.2.51) pNode can come in as null (also see
+      // comments in accompanying unit test)
+      if (
+        Boolean(pNode) &&
+        Boolean(pNode.typeAnnotation) &&
+        Boolean(pNode.typeAnnotation.argument)
+      )
+        this.lResult.push({
+          module: pNode.typeAnnotation.argument.value,
+          moduleSystem: "es6",
+          exoticallyRequired: false,
+        });
+      return super.visitTsTypeAnnotation(pNode);
     }
 
     getDependencies(pAST) {
