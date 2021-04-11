@@ -51,6 +51,20 @@ const BABELEABLE_EXTENSIONS = [
   ".d.ts",
 ];
 
+const EXTENSIONS_PER_PARSER = {
+  swc: [".js", ".cjs", ".mjs", ".jsx", ".ts", ".tsx", ".d.ts"],
+  // tsc: [".js", ".cjs", ".mjs", ".jsx", ".ts", ".tsx", ".d.ts"],
+  // acorn: [".js", ".cjs", ".mjs", ".jsx"],
+};
+
+function extensionIsAvailable(pExtension) {
+  return (
+    EXTENSION2WRAPPER[pExtension].isAvailable() ||
+    // should eventually also check whether swc is enabled as a parser?
+    (swc.isAvailable() && EXTENSIONS_PER_PARSER.swc.includes(pExtension))
+  );
+}
+
 /**
  * returns the babel wrapper if there's a babelConfig in the transpiler
  * options for babeleable extensions (javascript and typescript - currently
@@ -63,6 +77,7 @@ const BABELEABLE_EXTENSIONS = [
  * for the extension.
  *
  * @param {string}  pExtension the extension (e.g. ".ts", ".js", ".litcoffee")
+ * @param {any} pTranspilerOptions
  * @returns {module} the module
  */
 module.exports.getWrapper = (pExtension, pTranspilerOptions) => {
@@ -81,10 +96,12 @@ module.exports.getWrapper = (pExtension, pTranspilerOptions) => {
  *
  * @type {string[]}
  */
-module.exports.allExtensions = Object.keys(EXTENSION2WRAPPER).map((pKey) => ({
-  extension: pKey,
-  available: EXTENSION2WRAPPER[pKey].isAvailable(),
-}));
+module.exports.allExtensions = Object.keys(EXTENSION2WRAPPER).map(
+  (pExtension) => ({
+    extension: pExtension,
+    available: extensionIsAvailable(pExtension),
+  })
+);
 
 /**
  * an array of extensions that are 'scannable' (have a valid transpiler
@@ -92,9 +109,9 @@ module.exports.allExtensions = Object.keys(EXTENSION2WRAPPER).map((pKey) => ({
  *
  * @type {string[]}
  */
-module.exports.scannableExtensions = Object.keys(
-  EXTENSION2WRAPPER
-).filter((pKey) => EXTENSION2WRAPPER[pKey].isAvailable());
+module.exports.scannableExtensions = Object.keys(EXTENSION2WRAPPER).filter(
+  extensionIsAvailable
+);
 
 /**
  * returns an array of supported transpilers, whith for each transpiler:
