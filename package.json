@@ -125,12 +125,12 @@
     "version": "npm-run-all build depcruise:graph:doc scm:stage"
   },
   "dependencies": {
-    "acorn": "8.1.0",
+    "acorn": "8.1.1",
     "acorn-jsx": "5.3.1",
     "acorn-jsx-walk": "2.0.0",
     "acorn-loose": "8.0.2",
     "acorn-walk": "8.0.2",
-    "ajv": "8.0.5",
+    "ajv": "8.1.0",
     "chalk": "4.1.0",
     "commander": "7.2.0",
     "enhanced-resolve": "5.1.0",
@@ -150,16 +150,16 @@
     "wrap-ansi": "7.0.0"
   },
   "devDependencies": {
-    "@babel/core": "7.13.14",
+    "@babel/core": "7.13.15",
     "@babel/plugin-transform-modules-commonjs": "7.13.8",
     "@babel/preset-typescript": "7.13.0",
-    "@swc/core": "1.2.51",
-    "@typescript-eslint/eslint-plugin": "4.20.0",
-    "@typescript-eslint/parser": "4.20.0",
+    "@swc/core": "1.2.52",
+    "@typescript-eslint/eslint-plugin": "4.22.0",
+    "@typescript-eslint/parser": "4.22.0",
     "chai": "4.3.4",
     "chai-json-schema": "1.5.1",
     "coffeescript": "2.5.1",
-    "eslint": "7.23.0",
+    "eslint": "7.24.0",
     "eslint-config-moving-meadow": "2.0.9",
     "eslint-config-prettier": "8.1.0",
     "eslint-plugin-budapestian": "2.3.0",
@@ -178,8 +178,8 @@
     "prettier": "2.2.1",
     "shx": "0.3.3",
     "svelte": "3.37.0",
-    "symlink-dir": "4.1.0",
-    "typescript": "4.2.3",
+    "symlink-dir": "5.0.0",
+    "typescript": "4.2.4",
     "upem": "5.0.0",
     "vue-template-compiler": "2.6.12",
     "yarn": "1.22.10"
@@ -197,6 +197,10 @@
       {
         "package": "inquirer",
         "because": "version 8 dropped support for node 10, which we still have"
+      },
+      {
+        "package": "normalize-newline",
+        "because": "version 4 only exports ejs - and we use cjs and don't transpile"
       }
     ]
   },
