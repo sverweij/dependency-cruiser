@@ -178,7 +178,7 @@
     "prettier": "2.2.1",
     "shx": "0.3.3",
     "svelte": "3.37.0",
-    "symlink-dir": "5.0.0",
+    "symlink-dir": "4.2.0",
     "typescript": "4.2.4",
     "upem": "5.0.0",
     "vue-template-compiler": "2.6.12",
@@ -201,6 +201,10 @@
       {
         "package": "normalize-newline",
         "because": "version 4 only exports ejs - and we use cjs and don't transpile"
+      },
+      {
+        "package": "symlink-dir",
+        "because": "version 5 dropped support for node 10, which we still have"
       }
     ]
   },
