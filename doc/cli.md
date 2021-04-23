@@ -398,9 +398,9 @@ so it's easier to compare than the two json's):
 ### `--config`/ `--validate`
 
 Validates against a list of rules in a configuration file. This defaults to a file
-called `.dependency-cruiser.json` (/ `.dependency-cruiser.js`), but you can
-specify your own rules file, which can be in json format or a valid node
-module returning a rules object literal.
+called `.dependency-cruiser.js` (/ `.dependency-cruiser.cjs`/
+`.dependency-cruiser.json`), but you can specify your own rules file, which can
+be in json format or a valid node module returning a rules object literal.
 
 ```shell
 dependency-cruise -x node_modules --config my.rules.json src spec

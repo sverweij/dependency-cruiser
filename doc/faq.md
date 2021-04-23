@@ -220,6 +220,10 @@ and ✖'s in the output should be a thing of the past.
 > parameter and dependency-cruiser will attempt to resolve the dynamic imports -
 > which will work as long as you're not importing variables (or expressions).
 
+### Q: My package is pure ESM and I get "Must use import to load ES Module" when I run dependency-cruiser. How do I fix that?
+
+**A**: Rename your .dependency-cruiser.js to .dependency-cruiser.cjs
+
 ## Features
 
 ### Q: How do I enable TypeScript, CoffeeScript or LiveScript in dependency-cruiser?

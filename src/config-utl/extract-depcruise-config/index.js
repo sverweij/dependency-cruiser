@@ -59,7 +59,7 @@ function extractDepcruiseConfig(
     pBaseDirectory,
     normalizeResolveOptions(
       {
-        extensions: [".js", ".json"],
+        extensions: [".js", ".json", ".cjs"],
       },
       {}
     ),

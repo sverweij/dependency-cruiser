@@ -2,7 +2,8 @@
   "OLD_DEFAULT_RULES_FILE_NAME": ".dependency-cruiser.json",
   "RULES_FILE_NAME_SEARCH_ARRAY": [
     ".dependency-cruiser.json",
-    ".dependency-cruiser.js"
+    ".dependency-cruiser.js",
+    ".dependency-cruiser.cjs"
   ],
   "DEFAULT_CONFIG_FILE_NAME": ".dependency-cruiser.js",
   "WEBPACK_CONFIG": "webpack.config.js",
