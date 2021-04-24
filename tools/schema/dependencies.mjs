@@ -30,6 +30,23 @@ export default {
           description:
             "The name of the module as it appeared in the source code, e.g. './main'",
         },
+        protocol: {
+          type: "string",
+          enum: ["data:", "file:", "node:"],
+          description:
+            "If the module specification is an URI with a protocol in it (e.g. " +
+            "`import * as fs from 'node:fs'` or " +
+            "`import stuff from 'data:application/json,some-thing'`) - this attribute " +
+            "holds the protocol part (e.g. 'node:', 'data:', 'file:'). Also see " +
+            "https://nodejs.org/api/esm.html#esm_urls",
+        },
+        mimeType: {
+          type: "string",
+          description:
+            "If the module specification is an URI and contains a mime type, this " +
+            "attribute holds the mime type (e.g. in `import stuff from 'data:application/json,some-thing'` " +
+            "this would be data:application/json). Also see https://nodejs.org/api/esm.html#esm_urls",
+        },
         resolved: {
           type: "string",
           description:
