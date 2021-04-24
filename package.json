@@ -125,17 +125,17 @@
     "version": "npm-run-all build depcruise:graph:doc scm:stage"
   },
   "dependencies": {
-    "acorn": "8.1.1",
+    "acorn": "8.2.1",
     "acorn-jsx": "5.3.1",
     "acorn-jsx-walk": "2.0.0",
-    "acorn-loose": "8.0.2",
-    "acorn-walk": "8.0.2",
+    "acorn-loose": "8.1.0",
+    "acorn-walk": "8.1.0",
     "ajv": "8.1.0",
-    "chalk": "4.1.0",
+    "chalk": "4.1.1",
     "commander": "7.2.0",
     "enhanced-resolve": "5.1.0",
     "figures": "3.2.0",
-    "get-stream": "6.0.0",
+    "get-stream": "6.0.1",
     "glob": "7.1.6",
     "handlebars": "4.7.7",
     "indent-string": "4.0.0",
@@ -150,24 +150,24 @@
     "wrap-ansi": "7.0.0"
   },
   "devDependencies": {
-    "@babel/core": "7.13.15",
+    "@babel/core": "7.13.16",
     "@babel/plugin-transform-modules-commonjs": "7.13.8",
     "@babel/preset-typescript": "7.13.0",
-    "@swc/core": "1.2.52",
+    "@swc/core": "1.2.54",
     "@typescript-eslint/eslint-plugin": "4.22.0",
     "@typescript-eslint/parser": "4.22.0",
     "chai": "4.3.4",
     "chai-json-schema": "1.5.1",
     "coffeescript": "2.5.1",
-    "eslint": "7.24.0",
+    "eslint": "7.25.0",
     "eslint-config-moving-meadow": "2.0.9",
-    "eslint-config-prettier": "8.1.0",
+    "eslint-config-prettier": "8.3.0",
     "eslint-plugin-budapestian": "2.3.0",
     "eslint-plugin-import": "2.22.1",
     "eslint-plugin-mocha": "8.1.0",
     "eslint-plugin-node": "11.1.0",
     "eslint-plugin-security": "1.4.0",
-    "eslint-plugin-unicorn": "29.0.0",
+    "eslint-plugin-unicorn": "31.0.0",
     "husky": "4.3.0",
     "intercept-stdout": "0.1.2",
     "lint-staged": "10.5.4",
@@ -195,6 +195,10 @@
         "because": "version 5.1.0 is dramatically faster than any later version"
       },
       {
+        "package": "indent-string",
+        "because": "version 5 only exports ejs - and we use cjs and don't transpile"
+      },
+      {
         "package": "inquirer",
         "because": "version 8 dropped support for node 10, which we still have"
       },
@@ -205,6 +209,10 @@
       {
         "package": "symlink-dir",
         "because": "version 5 dropped support for node 10, which we still have"
+      },
+      {
+        "package": "wrap-ansi",
+        "because": "version 8 only exports ejs - and we use cjs and don't transpile"
       }
     ]
   },
