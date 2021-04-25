@@ -1,3 +1,5 @@
+// eslint-disable-next-line node/no-missing-import, import/no-unresolved
+// import { EOL } from "node:os"; // node 10 still barfs on this
 import { EOL } from "os";
 import getStream from "get-stream";
 

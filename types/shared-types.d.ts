@@ -38,3 +38,5 @@ export type DependencyType =
   | "npm-unknown"
   | "undetermined"
   | "unknown";
+
+export type ProtocolType = "data:" | "file:" | "node";

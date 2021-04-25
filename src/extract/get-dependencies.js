@@ -12,6 +12,7 @@ const toJavascriptAST = require("./parse/to-javascript-ast");
 const toTypescriptAST = require("./parse/to-typescript-ast");
 const toSwcAST = require("./parse/to-swc-ast");
 const detectPreCompilationNess = require("./utl/detect-pre-compilation-ness");
+const extractModuleAttributes = require("./utl/extract-module-attributes");
 
 function extractFromSwcAST(pOptions, pFileName) {
   return extractSwcDeps(
@@ -101,7 +102,10 @@ function extractDependencies(pCruiseOptions, pFileName, pTranspileOptions) {
     );
   }
 
-  return lDependencies;
+  return lDependencies.map((pDependency) => ({
+    ...pDependency,
+    ...extractModuleAttributes(pDependency.module),
+  }));
 }
 
 function matchesDoNotFollow(pResolved, pDoNotFollow) {
