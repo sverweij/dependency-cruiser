@@ -181,7 +181,7 @@
     "svelte": "3.38.1",
     "symlink-dir": "4.2.0",
     "typescript": "4.2.4",
-    "upem": "6.0.0",
+    "upem": "5.0.0",
     "vue-template-compiler": "2.6.12",
     "yarn": "1.22.10"
   },
@@ -214,6 +214,10 @@
       {
         "package": "wrap-ansi",
         "because": "version 8 only exports ejs - and we use cjs and don't transpile"
+      },
+      {
+        "package": "upem",
+        "because": "version 6 dropped support for node 10, which we still have"
       }
     ]
   },
