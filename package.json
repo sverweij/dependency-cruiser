@@ -125,12 +125,12 @@
     "version": "npm-run-all build depcruise:graph:doc scm:stage"
   },
   "dependencies": {
-    "acorn": "8.2.1",
+    "acorn": "8.2.2",
     "acorn-jsx": "5.3.1",
     "acorn-jsx-walk": "2.0.0",
     "acorn-loose": "8.1.0",
     "acorn-walk": "8.1.0",
-    "ajv": "8.1.0",
+    "ajv": "8.2.0",
     "chalk": "4.1.1",
     "commander": "7.2.0",
     "enhanced-resolve": "5.1.0",
@@ -150,8 +150,8 @@
     "wrap-ansi": "7.0.0"
   },
   "devDependencies": {
-    "@babel/core": "7.13.16",
-    "@babel/plugin-transform-modules-commonjs": "7.13.8",
+    "@babel/core": "7.14.0",
+    "@babel/plugin-transform-modules-commonjs": "7.14.0",
     "@babel/preset-typescript": "7.13.0",
     "@swc/core": "1.2.54",
     "@typescript-eslint/eslint-plugin": "4.22.0",
@@ -177,10 +177,10 @@
     "nyc": "15.1.0",
     "prettier": "2.2.1",
     "shx": "0.3.3",
-    "svelte": "3.37.0",
+    "svelte": "3.38.1",
     "symlink-dir": "4.2.0",
     "typescript": "4.2.4",
-    "upem": "5.0.0",
+    "upem": "6.0.0",
     "vue-template-compiler": "2.6.12",
     "yarn": "1.22.10"
   },
