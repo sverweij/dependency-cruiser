@@ -134,7 +134,7 @@
     "ajv": "8.2.0",
     "chalk": "4.1.1",
     "commander": "7.2.0",
-    "enhanced-resolve": "5.1.0",
+    "enhanced-resolve": "5.8.0",
     "figures": "3.2.0",
     "get-stream": "6.0.1",
     "glob": "7.1.6",

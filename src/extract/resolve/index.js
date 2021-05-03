@@ -145,7 +145,15 @@ module.exports = function resolve(
         path.relative(
           pBaseDirectory,
           fs.realpathSync(
-            path.resolve(pBaseDirectory, lResolvedModule.resolved)
+            path.resolve(
+              pBaseDirectory,
+              /* enhanced-resolve inserts a NULL character in front of any `#` 
+                 character. This wonky replace undoes that so the filename
+                 again corresponds with a real file on disk
+               */
+              // eslint-disable-next-line no-control-regex
+              lResolvedModule.resolved.replace(/\u0000#/g, "#")
+            )
           )
         )
       );
