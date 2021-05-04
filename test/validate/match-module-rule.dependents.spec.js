@@ -160,7 +160,7 @@ describe("validate/match-module-rule - dependents", () => {
         source: "src/utensils/frieten.ts",
         dependents: ["src/snackbar/kapsalon.ts", "src/snackbar/zijspan.ts"],
       })
-    ).to.equal(false);
+    ).to.equal(true);
   });
 
   it("must not be used more than 3 times from snackbar - happy scenario", () => {
@@ -183,7 +183,7 @@ describe("validate/match-module-rule - dependents", () => {
           "src/snackbar/kipcorn.ts",
         ],
       })
-    ).to.equal(true);
+    ).to.equal(false);
   });
 
   it("combo breaker (3 < x < 5) - happy scenario", () => {
@@ -197,7 +197,7 @@ describe("validate/match-module-rule - dependents", () => {
           "src/snackbar/kipcorn.ts",
         ],
       })
-    ).to.equal(true);
+    ).to.equal(false);
   });
 
   it("combo breaker (3 < x < 5) - fail scenario", () => {

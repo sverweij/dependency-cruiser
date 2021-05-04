@@ -51,7 +51,7 @@ function dependentsCountsMatch(pRule, pDependents) {
   const lMatchingDependentsCount = pDependents.filter(
     (pDependent) =>
       Boolean(!pRule.from.path || pDependent.match(pRule.from.path)) &&
-      Boolean(!pRule.from.pathNot || pDependent.match(pRule.from.pathNot))
+      Boolean(!pRule.from.pathNot || !pDependent.match(pRule.from.pathNot))
   ).length;
   return (
     (!pRule.module.numberOfDependentsLessThan ||
