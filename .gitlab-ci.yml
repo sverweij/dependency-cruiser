@@ -4,6 +4,17 @@ cache:
   paths:
     - node_modules
 
+test_async_node_16:
+  image: node:16
+  script:
+    - npm install
+    - npm run lint
+    - npm run depcruise
+    - npm run test:yarn-pnp
+    - npm run test:cover
+  except:
+    - tags
+
 test_async_node_14:
   image: node:14
   script:
@@ -23,18 +34,3 @@ test_async_node_12:
     - npm run test:cover
   except:
     - tags
-
-test_async_node_10:
-  image: node:10
-  script:
-    - npm install
-    - npm run test:yarn-pnp
-    - npm run test:cover
-  except:
-    - tags
-# publish:
-#  image: node:latest
-#  script:
-#    - echo 'npm publish'
-#  only:
-#    - tags

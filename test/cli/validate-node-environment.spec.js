@@ -41,7 +41,7 @@ describe("cli/validateNodeEnv", () => {
 
   it("doesn't throw when a supported node version is passed", () => {
     expect(() => {
-      validateNodeEnvironment("12.0.0");
+      validateNodeEnvironment("16.0.0");
     }).to.not.throw();
   });
 });

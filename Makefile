@@ -32,7 +32,7 @@ src/%.template.js: src/%.template.hbs
 	npx handlebars --commonjs handlebars/runtime -f $@ $<
 
 src/%.schema.json: tools/%.schema.mjs $(SCHEMA_SOURCES)
-	$(NODE) --experimental-modules ./tools/generate-schemas.utl.mjs $@
+	$(NODE) ./tools/generate-schemas.utl.mjs $@
 
 # "phony" targets
 dev-build: $(GENERATED_SOURCES)
