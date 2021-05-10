@@ -134,7 +134,7 @@
     "ajv": "8.3.0",
     "chalk": "4.1.1",
     "commander": "7.2.0",
-    "enhanced-resolve": "5.1.0",
+    "enhanced-resolve": "5.8.2",
     "figures": "3.2.0",
     "get-stream": "6.0.1",
     "glob": "7.1.7",
@@ -168,7 +168,7 @@
     "eslint-plugin-mocha": "8.1.0",
     "eslint-plugin-node": "11.1.0",
     "eslint-plugin-security": "1.4.0",
-    "eslint-plugin-unicorn": "32.0.0",
+    "eslint-plugin-unicorn": "32.0.1",
     "husky": "4.3.0",
     "intercept-stdout": "0.1.2",
     "lint-staged": "11.0.0",
@@ -188,10 +188,6 @@
   "upem": {
     "donotup": [
       {
-        "package": "enhanced-resolve",
-        "because": "version 5.1.0 is dramatically faster than any later version (until https://github.com/webpack/enhanced-resolve/pull/292 gets merged)"
-      },
-      {
         "package": "husky",
         "because": "https://github.com/typicode/husky/issues/822"
       },
@@ -202,6 +198,10 @@
       {
         "package": "normalize-newline",
         "because": "version 4 only exports ejs - and we use cjs and don't transpile"
+      },
+      {
+        "package": "prettier",
+        "because": "version 2.3.0 gives different results between local (macOS) and the ci (linux)"
       },
       {
         "package": "wrap-ansi",

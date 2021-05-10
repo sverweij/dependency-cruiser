@@ -54,6 +54,7 @@ jobs:
       - name: lint (run on one platform only)
         run: |
           node --version
+          npx prettier --version
           npm run lint
         if: matrix.platform == 'ubuntu-latest' && matrix.node-version == '16.x'
         shell: bash
