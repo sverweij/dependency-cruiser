@@ -608,4 +608,57 @@ describe("extract/resolve/index", () => {
       resolved: "./there-is-a-cjs-variant-of-me-but-you-will-not-find-it.js",
     });
   });
+
+  it("Correctly resolves file names with #'s in it (formerly an upstream issue in enhanced-resolve)", () => {
+    process.chdir("test/extract/resolve/fixtures/resolve-hashmarks");
+    expect(
+      resolve(
+        {
+          module: "./#/hashmark.js",
+          moduleSystem: "cjs",
+        },
+        process.cwd(),
+        process.cwd(),
+        normalizeResolveOptions(
+          {
+            bustTheCache: true,
+          },
+          {}
+        )
+      )
+    ).to.deep.equal({
+      coreModule: false,
+      couldNotResolve: false,
+      dependencyTypes: ["local"],
+      followable: true,
+      resolved: "#/hashmark.js",
+    });
+  });
+
+  it("Correctly resolves file names that _correctly_ use #'s (in the 'URL' fashion) in it (formerly an upstream issue in enhanced-resolve)", () => {
+    process.chdir("test/extract/resolve/fixtures/resolve-hashmarks");
+    expect(
+      resolve(
+        {
+          module: "./hashmark-after-this.js#this-is-extra",
+          moduleSystem: "cjs",
+        },
+        process.cwd(),
+        process.cwd(),
+        normalizeResolveOptions(
+          {
+            bustTheCache: true,
+          },
+          {}
+        )
+      )
+    ).to.deep.equal({
+      coreModule: false,
+      couldNotResolve: false,
+      dependencyTypes: ["local"],
+      // because the extion is '.js#this-is-extra' and not '.js'
+      followable: false,
+      resolved: "hashmark-after-this.js#this-is-extra",
+    });
+  });
 });
