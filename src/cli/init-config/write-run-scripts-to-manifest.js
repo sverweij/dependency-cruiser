@@ -92,6 +92,11 @@ function getSuccessMessage(pDestinationManifestFileName) {
       "writes a detailed internal graph of your app to 'dependency-graph.html'",
       lExplanationIndent
     )}` +
+    `\n\n    ${chalk.green(figures.play)} npm run depcruise:graph:dev` +
+    `\n${wrapAndIndent(
+      "opens a detailed internal graph of your app in your default browser (uses the 'browser' command line program)",
+      lExplanationIndent
+    )}` +
     `\n\n    ${chalk.green(figures.play)} npm run depcruise:graph-archi` +
     `\n${wrapAndIndent(
       "writes a high-level internal graph of your app to 'high-level-dependency-graph.html'",
