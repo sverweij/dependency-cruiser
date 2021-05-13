@@ -1,8 +1,10 @@
-const fs = require("fs");
-const path = require("path");
-const prettier = require("prettier");
-const main = require("../src/main");
+import { fileURLToPath } from "url";
+import fs from "node:fs";
+import path from "node:path";
+import prettier from "prettier";
+import main from "../src/main/index.js";
 
+const __dirname = fileURLToPath(new URL(".", import.meta.url));
 const WORKING_DIR = process.cwd();
 
 function barfTheJSON(pTargetFileName, pResult) {

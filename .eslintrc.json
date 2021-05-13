@@ -5,7 +5,9 @@
     "security/detect-non-literal-fs-filename": "off",
     "unicorn/no-null": "off",
     "unicorn/prefer-string-slice": "off",
-    "unicorn/prefer-spread": "off"
+    "unicorn/prefer-spread": "off",
+    "import/no-relative-parent-imports": "off",
+    "sort-imports": "off" // we're using a similar, but conflicting rule from import/ that is autofixables
   },
   "overrides": [
     {
