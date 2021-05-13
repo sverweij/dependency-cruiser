@@ -1,12 +1,17 @@
-const fs = require("fs");
-const path = require("path");
-const renderCdot = require("../src/report/dot")("custom");
-const renderDdot = require("../src/report/dot")("folder");
-const renderFdot = require("../src/report/dot")("flat");
-const renderDot = require("../src/report/dot")("module");
-const renderTeamcity = require("../src/report/teamcity");
-const renderHTML = require("../src/report/html");
-const renderCSV = require("../src/report/csv");
+import { fileURLToPath } from "url";
+import fs from "node:fs";
+import path from "node:path";
+import dot from "../src/report/dot/index.js";
+import renderTeamcity from "../src/report/teamcity.js";
+import renderHTML from "../src/report/html/index.js";
+import renderCSV from "../src/report/csv.js";
+
+const renderCdot = dot("custom");
+const renderDdot = dot("folder");
+const renderFdot = dot("flat");
+const renderDot = dot("module");
+
+const __dirname = fileURLToPath(new URL(".", import.meta.url));
 
 function transformJSONtoFile(pInputFileName, pOutputFileName, pFunction) {
   fs.writeFileSync(

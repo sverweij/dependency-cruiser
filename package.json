@@ -86,11 +86,11 @@
     "depcruise:graph:osage": "node ./bin/dependency-cruise.js bin src --config --output-type dot | osage -Gpack=32 -GpackMode=array2 -T svg > tmp_deps.svg",
     "depcruise:report": "node ./bin/dependency-cruise.js src bin test configs types --output-type err-html --config --output-to dependency-violations.html",
     "lint": "npm-run-all --parallel --aggregate-output lint:eslint lint:prettier:check lint:types",
-    "lint:eslint": "eslint bin/dependency-cruise.js src test configs tools/**/*.js tools/schema/**/*.mjs --cache --cache-location .cache/eslint/",
-    "lint:eslint:fix": "eslint --fix bin src test configs tools/**/*.js tools/schema/**/*.mjs --cache --cache-location .cache/eslint/",
+    "lint:eslint": "eslint bin/dependency-cruise.js src test configs tools/**/*.mjs --cache --cache-location .cache/eslint/",
+    "lint:eslint:fix": "eslint --fix bin src test configs  tools/**/*.mjs --cache --cache-location .cache/eslint/",
     "lint:fix": "npm-run-all lint:eslint:fix lint:prettier lint:types:fix",
-    "lint:prettier": "prettier --loglevel warn --write src/**/*.{js,json} {tools,configs}/**/*.js tools/**/*.mjs bin/* !**/*.template.js types/*.d.ts test/**/*.{spec,utl}.js",
-    "lint:prettier:check": "prettier --loglevel warn --check src/**/*.{js,json} {tools,configs}/**/*.js tools/**/*.mjs bin/* !**/*.template.js types/*.d.ts test/**/*.{spec,utl}.js",
+    "lint:prettier": "prettier --loglevel warn --write src/**/*.{js,json} configs/**/*.js tools/**/*.mjs bin/* !**/*.template.js types/*.d.ts test/**/*.{spec,utl}.js",
+    "lint:prettier:check": "prettier --loglevel warn --check src/**/*.{js,json} configs/**/*.js tools/**/*.mjs bin/* !**/*.template.js types/*.d.ts test/**/*.{spec,utl}.js",
     "lint:types": "npm-run-all lint:types:tsc lint:types:lint",
     "lint:types:tsc": "tsc --noEmit --strict --types --noUnusedLocals --noUnusedParameters types/dependency-cruiser.d.ts",
     "lint:types:lint": "eslint --no-ignore --config types/.eslintrc.json types/*.d.ts",
@@ -266,7 +266,7 @@
     }
   },
   "lint-staged": {
-    "{tools,src,config}/**/*.js": [
+    "{src,config}/**/*.js": [
       "eslint --fix"
     ],
     "{tools,src,config}/**/*.{mjs,js,json}": [

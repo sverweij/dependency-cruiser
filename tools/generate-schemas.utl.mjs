@@ -1,6 +1,4 @@
-// eslint-disable-next-line node/no-missing-import, import/no-unresolved
-// import fs from "node:fs"; // node 10 barfs on this
-import fs from "fs";
+import fs from "node:fs";
 import prettier from "prettier";
 
 function jsonTheSchema(pOutputFileName) {
