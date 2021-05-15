@@ -188,6 +188,9 @@ if (VisitorModule) {
       return super.visitTsTypeAnnotation(pNode);
     }
 
+    // as far as I can tell swc doesn't do tripple slash directives (yet?)
+    // visitTrippleSlashDirective(pNode)) {}
+
     getDependencies(pAST) {
       this.lResult = [];
       this.visitModule(pAST);
