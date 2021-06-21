@@ -58,7 +58,7 @@ try {
   if (program.args[0]) {
     format(program.args[0], program.opts())
       .then((pExitCode) => {
-        if (program.exitCode) {
+        if (program.opts().exitCode) {
           process.exitCode = pExitCode;
         }
       })
