@@ -9,7 +9,7 @@ function matchesRE(pValue, pRE) {
   return Boolean(lMatchResult) && lMatchResult.length > 0;
 }
 
-function moduleMatchesCriteria(pSchemeEntry, pModule) {
+function moduleOrDependencyMatchesCriteria(pSchemeEntry, pModule) {
   return Object.keys(pSchemeEntry.criteria).every(
     (pKey) =>
       (_get(pModule, pKey) || _has(pModule, pKey)) &&
@@ -21,7 +21,7 @@ function moduleMatchesCriteria(pSchemeEntry, pModule) {
 function determineAttributes(pModuleOrDependency, pAttributeCriteria) {
   return (pAttributeCriteria || [])
     .filter((pSchemeEntry) =>
-      moduleMatchesCriteria(pSchemeEntry, pModuleOrDependency)
+      moduleOrDependencyMatchesCriteria(pSchemeEntry, pModuleOrDependency)
     )
     .map((pSchemeEntry) => pSchemeEntry.attributes)
     .reduce((pAll, pCurrent) => ({ ...pCurrent, ...pAll }), {});
