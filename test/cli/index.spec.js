@@ -147,10 +147,8 @@ function setModuleType(pTestPairs, pModuleType) {
       pModuleType
     );
     if (Boolean(pTestPair.options.moduleSystems)) {
-      lReturnValue.options.moduleSystems = pTestPair.options.moduleSystems.replace(
-        /{{moduleType}}/g,
-        pModuleType
-      );
+      lReturnValue.options.moduleSystems =
+        pTestPair.options.moduleSystems.replace(/{{moduleType}}/g, pModuleType);
     }
 
     return lReturnValue;

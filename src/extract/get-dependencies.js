@@ -74,18 +74,12 @@ function extractFromJavaScriptAST(pOptions, pFileName, pTranspileOptions) {
 function extractDependencies(pCruiseOptions, pFileName, pTranspileOptions) {
   let lDependencies = [];
   if (shouldUseSwc(pCruiseOptions, pFileName)) {
-    lDependencies = extractFromSwcAST(
-      pCruiseOptions,
-      pFileName
-    ).filter((pDep) =>
-      pCruiseOptions.moduleSystems.includes(pDep.moduleSystem)
+    lDependencies = extractFromSwcAST(pCruiseOptions, pFileName).filter(
+      (pDep) => pCruiseOptions.moduleSystems.includes(pDep.moduleSystem)
     );
   } else if (shouldUseTSC(pCruiseOptions, pFileName)) {
-    lDependencies = extractFromTypeScriptAST(
-      pCruiseOptions,
-      pFileName
-    ).filter((pDep) =>
-      pCruiseOptions.moduleSystems.includes(pDep.moduleSystem)
+    lDependencies = extractFromTypeScriptAST(pCruiseOptions, pFileName).filter(
+      (pDep) => pCruiseOptions.moduleSystems.includes(pDep.moduleSystem)
     );
 
     if (pCruiseOptions.tsPreCompilationDeps === "specify") {
