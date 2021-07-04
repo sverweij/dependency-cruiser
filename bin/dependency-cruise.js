@@ -89,7 +89,7 @@ try {
       "shows what languages and extensions dependency-cruiser supports"
     )
     .version($package.version)
-    .arguments("<files-or-directories>")
+    .arguments("[files-or-directories]")
     .parse(process.argv);
 
   if (Boolean(program.args[0]) || program.opts().info || program.opts().init) {
