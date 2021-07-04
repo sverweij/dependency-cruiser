@@ -1,6 +1,5 @@
 const fs = require("fs");
 const path = require("path");
-const getStream = require("get-stream");
 
 const HEADER_FILE = path.join(
   __dirname,
@@ -29,26 +28,31 @@ const FOOTER_FILE = path.join(
  *
  * ... but portable over node platforms
  *
- * @param {string} pHeaderFileName header
- * @param {string} pScriptFileName script
- * @param {string} pFooterFileName footer
- * @param {stream} pStream stream whose characters are to be slapped between header and footer
- * @returns {string} yadda
+ * @param {readStream} pStream stream whose characters are to be slapped between header and footer
+ * @param {writeStream} pOutStream stream to write to
  */
-async function wrap(
-  pHeaderFileName,
-  pScriptFileName,
-  pFooterFileName,
-  pStream
-) {
-  const lHeader = fs.readFileSync(pHeaderFileName, "utf8");
-  const lScript = fs.readFileSync(pScriptFileName, "utf8");
-  const lFooter = fs.readFileSync(pFooterFileName, "utf8");
+function wrap(pInStream, pOutStream) {
+  const lHeader = fs.readFileSync(HEADER_FILE, "utf8");
+  const lScript = fs.readFileSync(SCRIPT_FILE, "utf8");
+  const lEnd = fs.readFileSync(FOOTER_FILE, "utf8");
+  const lFooter = `<script>${lScript}</script>${lEnd}`;
 
-  return `${lHeader}${await getStream(
-    pStream
-  )}<script>${lScript}</script>${lFooter}`;
+  pOutStream.write(lHeader);
+  pInStream
+    .on("end", () => {
+      pOutStream.write(lFooter);
+      pOutStream.end();
+    })
+    .on(
+      "error",
+      /* istanbul ignore next */
+      (pError) => {
+        process.stderr.write(`${pError}\n`);
+      }
+    )
+    .on("data", (pChunk) => {
+      pOutStream.write(pChunk);
+    });
 }
 
-module.exports = (pStream) =>
-  wrap(HEADER_FILE, SCRIPT_FILE, FOOTER_FILE, pStream);
+module.exports = (pInStream, pOutStream) => wrap(pInStream, pOutStream);
