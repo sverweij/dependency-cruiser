@@ -14,8 +14,8 @@ try {
   // not so nice
   /* eslint-disable node/global-require */
   const program = require("commander");
-  const $package = require("../package.json");
-  const format = require("../src/cli/format");
+  const { version } = require("../src/meta.js");
+  const format = require("../src/cli/format.js");
 
   program
     .description(
@@ -51,7 +51,7 @@ try {
       "exit with a non-zero exit code when the input json contains error level " +
         "dependency violations. Works for err, err-long and teamcity output types"
     )
-    .version($package.version)
+    .version(version)
     .arguments("<dependency-cruiser-json>")
     .parse(process.argv);
 

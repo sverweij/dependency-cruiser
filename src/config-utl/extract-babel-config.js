@@ -7,7 +7,7 @@ const json5 = require("json5");
 const _get = require("lodash/get");
 const _has = require("lodash/has");
 const tryRequire = require("semver-try-require");
-const $package = require("../../package.json");
+const { supportedTranspilers } = require("../../src/meta.js");
 const makeAbsolute = require("./make-absolute");
 
 function getCommonJSConfig(pBabelConfigFileName) {
@@ -87,7 +87,7 @@ function getConfig(pBabelConfigFileName) {
  */
 module.exports = function extractBabelConfig(pBabelConfigFileName) {
   let lReturnValue = {};
-  const babel = tryRequire("@babel/core", $package.supportedTranspilers.babel);
+  const babel = tryRequire("@babel/core", supportedTranspilers.babel);
 
   if (babel) {
     const lConfig = {

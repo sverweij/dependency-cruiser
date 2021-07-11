@@ -1,8 +1,7 @@
 const tryRequire = require("semver-try-require");
-const livescript = tryRequire(
-  "livescript",
-  require("../../../package.json").supportedTranspilers.livescript
-);
+const { supportedTranspilers } = require("../../../src/meta.js");
+
+const livescript = tryRequire("livescript", supportedTranspilers.livescript);
 
 /* c8 ignore start */
 module.exports = {

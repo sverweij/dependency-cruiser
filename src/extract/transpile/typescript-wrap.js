@@ -1,9 +1,8 @@
 const tryRequire = require("semver-try-require");
 const _get = require("lodash/get");
-const typescript = tryRequire(
-  "typescript",
-  require("../../../package.json").supportedTranspilers.typescript
-);
+const { supportedTranspilers } = require("../../../src/meta.js");
+
+const typescript = tryRequire("typescript", supportedTranspilers.typescript);
 
 function getCompilerOptions(pTsx, pTSConfig) {
   let lCompilerOptions = {};

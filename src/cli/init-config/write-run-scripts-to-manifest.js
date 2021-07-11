@@ -3,7 +3,7 @@ const fs = require("fs");
 const figures = require("figures");
 const chalk = require("chalk");
 const wrapAndIndent = require("../../utl/wrap-and-indent");
-const $defaults = require("../defaults.json");
+const $defaults = require("../defaults");
 const { readManifest } = require("./environment-helpers");
 const { folderNameArrayToRE } = require("./utl");
 

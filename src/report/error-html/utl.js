@@ -1,6 +1,6 @@
 const _get = require("lodash/get");
 const _has = require("lodash/has");
-const { version } = require("../../../package.json");
+const { version } = require("../../../src/meta.js");
 
 function getFormattedAllowedRule(pRuleSetUsed) {
   const lAllowed = _get(pRuleSetUsed, "allowed", []);

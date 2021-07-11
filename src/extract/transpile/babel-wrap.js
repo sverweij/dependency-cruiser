@@ -1,7 +1,7 @@
 const tryRequire = require("semver-try-require");
-const $package = require("../../../package.json");
+const { supportedTranspilers } = require("../../../src/meta.js");
 
-const babel = tryRequire("@babel/core", $package.supportedTranspilers.babel);
+const babel = tryRequire("@babel/core", supportedTranspilers.babel);
 
 module.exports = {
   isAvailable: () => babel !== false,

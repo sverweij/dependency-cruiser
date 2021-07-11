@@ -6,7 +6,8 @@ GENERATED_SOURCES=src/cli/init-config/config.js.template.js \
 	src/report/html/html.template.js \
 	src/report/error-html/error-html.template.js \
 	src/schema/configuration.schema.json \
-	src/schema/cruise-result.schema.json
+	src/schema/cruise-result.schema.json \
+	src/meta.js
 
 SCHEMA_SOURCES=tools/schema/compound-exclude-type.mjs \
 	tools/schema/compound-donot-follow-type.mjs \
@@ -33,6 +34,9 @@ src/%.template.js: src/%.template.hbs
 
 src/%.schema.json: tools/%.schema.mjs $(SCHEMA_SOURCES)
 	$(NODE) ./tools/generate-schemas.utl.mjs $@
+
+src/meta.js: package.json
+	$(NODE) ./tools/get-meta.mjs < $< > $@
 
 # "phony" targets
 dev-build: $(GENERATED_SOURCES)

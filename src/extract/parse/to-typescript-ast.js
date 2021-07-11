@@ -1,10 +1,9 @@
 const fs = require("fs");
 const tryRequire = require("semver-try-require");
 const _memoize = require("lodash/memoize");
-const typescript = tryRequire(
-  "typescript",
-  require("../../../package.json").supportedTranspilers.typescript
-);
+const { supportedTranspilers } = require("../../../src/meta.js");
+
+const typescript = tryRequire("typescript", supportedTranspilers.typescript);
 
 /**
  * Compiles pTypescriptSource into a (typescript) AST

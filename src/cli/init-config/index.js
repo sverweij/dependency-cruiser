@@ -1,4 +1,4 @@
-const $defaults = require("../defaults.json");
+const $defaults = require("../defaults");
 const normalizeInitOptions = require("./normalize-init-options");
 const buildConfig = require("./build-config");
 const writeConfig = require("./write-config");

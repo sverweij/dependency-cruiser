@@ -1,12 +1,9 @@
 const path = require("path");
 const tryRequire = require("semver-try-require");
 const _get = require("lodash/get");
-const $package = require("../../package.json");
+const { supportedTranspilers } = require("../../src/meta.js");
 
-const typescript = tryRequire(
-  "typescript",
-  _get($package, "supportedTranspilers.typescript", null)
-);
+const typescript = tryRequire("typescript", supportedTranspilers.typescript);
 
 const FORMAT_DIAGNOSTICS_HOST = {
   getCanonicalFileName(pFileName) {

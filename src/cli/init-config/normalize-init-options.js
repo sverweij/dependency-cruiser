@@ -1,5 +1,5 @@
 const _has = require("lodash/has");
-const $dependencyCruiserManifest = require("../../../package.json");
+const { version } = require("../../../src/meta.js");
 const {
   getSourceFolderCandidates,
   getTestFolderCandidates,
@@ -14,7 +14,7 @@ const {
  */
 function populate(pInitOptions) {
   return {
-    version: $dependencyCruiserManifest.version,
+    version,
     date: new Date().toJSON(),
     configType: "self-contained",
     ...pInitOptions,

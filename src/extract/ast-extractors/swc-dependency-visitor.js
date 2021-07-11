@@ -1,9 +1,8 @@
 const tryRequire = require("semver-try-require");
+const { supportedTranspilers } = require("../../../src/meta.js");
+
 /** @type {import('@swc/core/Visitor')} */
-const VisitorModule = tryRequire(
-  "@swc/core/Visitor",
-  require("../../../package.json").supportedTranspilers.swc
-);
+const VisitorModule = tryRequire("@swc/core/Visitor", supportedTranspilers.swc);
 
 const Visitor = VisitorModule.default;
 
