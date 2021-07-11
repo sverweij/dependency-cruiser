@@ -1,5 +1,5 @@
 const chai = require("chai");
-const cruiseResultSchema = require("../../src/schema/cruise-result.schema.json");
+const cruiseResultSchema = require("../../src/schema/cruise-result.schema.js");
 const main = require("../../src/main");
 const tsPreCompFixtureCJS = require("./fixtures/ts-precomp-cjs.json");
 const tsPreCompFixtureES = require("./fixtures/ts-precomp-es.json");

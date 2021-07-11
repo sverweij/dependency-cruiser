@@ -3,7 +3,7 @@ const path = require("path");
 const chai = require("chai");
 const deleteDammit = require("../delete-dammit.utl");
 const initConfig = require("../../../src/cli/init-config");
-const configurationSchema = require("../../../src/schema/configuration.schema.json");
+const configurationSchema = require("../../../src/schema/configuration.schema.js");
 
 const expect = chai.expect;
 

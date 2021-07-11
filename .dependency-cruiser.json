@@ -37,7 +37,7 @@
           "^fs$",
           "^path$",
           "$1",
-          "^package.json$"
+          "^src/meta.js$"
         ]
       }
     },
@@ -52,7 +52,8 @@
         "pathNot": [
           "$1",
           "^node_modules",
-          "^(path|package.json)$",
+          "^path$",
+          "^src/meta\\.js$",
           "^src/graph-utl",
           "^src/utl"
         ]
@@ -69,7 +70,8 @@
         "pathNot": [
           "$1",
           "^node_modules",
-          "^(path|fs|module|package.json)$",
+          "^(path|fs|module)$",
+          "^src/meta\\.js$",
           "^src/graph-utl",
           "^src/utl"
         ],
@@ -77,11 +79,19 @@
       }
     },
     {
+      "name": "not-to-json",
+      "comment": "We don't want to depende on .json modules as long as they're still impractical to work with in ecmascript modules",
+      "from": { "path": "^src/" },
+      "to": {
+        "path": "\\.json$"
+      }
+    },
+    {
       "name": "bin-to-cli-only",
       "comment": "This module in the bin/ folder depends on something not in the cli interface. This means it either contains code that doesn't belong in bin/, or the thing it depends upon should be put in the cli interface. ",
       "severity": "error",
       "from": { "path": "(^bin/)" },
-      "to": { "pathNot": ["^src/cli", "^node_modules", "^package.json$"] }
+      "to": { "pathNot": ["^src/cli", "^node_modules", "^src/meta\\.js$"] }
     },
     {
       "name": "restrict-fs-access",
@@ -175,7 +185,7 @@
     {
       "name": "not-unreachable-from-test",
       "comment": "This module in src is not reachable by any test. Please provide a test that covers this (poor man's test coverage - this task is better suited for a proper test coverage tool :-) )",
-      "severity": "error",
+      "severity": "warn",
       "from": { "path": "\\.spec\\.js$" },
       "to": { "path": "^src", "reachable": false }
     },
@@ -330,7 +340,9 @@
               "attributes": { "fillcolor": "#ffcccc" }
             },
             {
-              "criteria": { "source": "\\.template\\.js$" },
+              "criteria": {
+                "source": "^src/meta\\.js$|\\.template\\.js$|\\.schema\\.js$"
+              },
               "attributes": { "style": "filled" }
             },
             {

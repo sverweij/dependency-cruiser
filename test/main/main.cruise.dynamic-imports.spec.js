@@ -1,5 +1,5 @@
 const chai = require("chai");
-const cruiseResultSchema = require("../../src/schema/cruise-result.schema.json");
+const cruiseResultSchema = require("../../src/schema/cruise-result.schema.js");
 const main = require("../../src/main");
 const esOut = require("./fixtures/dynamic-imports/es/output.json");
 const tsOut = require("./fixtures/dynamic-imports/typescript/output.json");

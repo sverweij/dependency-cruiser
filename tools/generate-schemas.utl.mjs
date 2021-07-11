@@ -1,30 +1,65 @@
+/* eslint-disable security/detect-object-injection */
 import fs from "node:fs";
+import path from "node:path";
 import prettier from "prettier";
+import clone from "lodash/clone.js";
 
-function jsonTheSchema(pOutputFileName) {
+function stripAttribute(pObject, pAttribute) {
+  const lObject = clone(pObject);
+  delete lObject[pAttribute];
+
+  Object.keys(pObject).forEach((pKey) => {
+    if (typeof pObject[pKey] === "object") {
+      lObject[pKey] = stripAttribute(pObject[pKey], pAttribute);
+    }
+  });
+
+  return lObject;
+}
+
+function emitConsolidatedSchema(pOutputFileName) {
+  if (path.extname(pOutputFileName) === ".json") {
+    return (pJSONSchemaObject) => {
+      fs.writeFileSync(
+        pOutputFileName,
+        prettier.format(JSON.stringify(pJSONSchemaObject.default), {
+          parser: "json",
+        }),
+        "utf8"
+      );
+    };
+  }
   return (pJSONSchemaObject) => {
     fs.writeFileSync(
       pOutputFileName,
-      prettier.format(JSON.stringify(pJSONSchemaObject.default), {
-        parser: "json",
-      }),
+      prettier.format(
+        `/* generated - don't edit */
+  
+        module.exports = ${JSON.stringify(
+          stripAttribute(pJSONSchemaObject.default, "description")
+        )}`,
+        {
+          parser: "babel",
+        }
+      ),
       "utf8"
     );
   };
 }
 
 function getInputModuleName(pOutputFileName) {
-  return pOutputFileName.replace(
-    /[^/]+\/([^.]+)\.schema.json/g,
-    "./$1.schema.mjs"
-  );
+  const lRE =
+    path.extname(pOutputFileName) === ".json"
+      ? /[^/]+\/([^.]+)\.schema.json/g
+      : /[^/]+\/([^.]+)\.schema.js/g;
+  return pOutputFileName.replace(lRE, "./$1.schema.mjs");
 }
 
 if (process.argv.length === 3) {
   const lOutputFileName = process.argv.pop();
 
   import(getInputModuleName(lOutputFileName))
-    .then(jsonTheSchema(lOutputFileName))
+    .then(emitConsolidatedSchema(lOutputFileName))
     .catch((pError) => {
       process.exitCode = 2;
       process.stderr.write(`${pError}\n`);

@@ -1,7 +1,9 @@
 const tryRequire = require("semver-try-require");
+const { supportedTranspilers } = require("../../../src/meta.js");
+
 const svelteCompiler = tryRequire(
   "svelte/compiler",
-  require("../../../package.json").supportedTranspilers.svelte
+  supportedTranspilers.svelte
 );
 const preProcess = require("./svelte-preprocess");
 

@@ -1,5 +1,5 @@
 const semver = require("semver");
-const $package = require("../../package.json");
+const { engines } = require("../../src/meta.js");
 
 module.exports = function validateNodeEnvironment(pNodeVersion) {
   // not using default parameter here because the check should run
@@ -7,12 +7,12 @@ module.exports = function validateNodeEnvironment(pNodeVersion) {
   const lNodeVersion = pNodeVersion || process.versions.node;
   const VERSION_ERR = `\nERROR: Your node version (${lNodeVersion}) is not supported. dependency-cruiser
        follows the node.js release cycle and runs on these node versions:
-       ${$package.engines.node}
+       ${engines.node}
        See https://nodejs.org/en/about/releases/ for details.
 
 `;
 
-  if (!semver.satisfies(lNodeVersion, $package.engines.node)) {
+  if (!semver.satisfies(lNodeVersion, engines.node)) {
     throw new Error(VERSION_ERR);
   }
 };

@@ -3,7 +3,7 @@
 const chai = require("chai");
 const buildConfig = require("../../../src/cli/init-config/build-config");
 const normalizeInitOptions = require("../../../src/cli/init-config/normalize-init-options");
-const configurationSchema = require("../../../src/schema/configuration.schema.json");
+const configurationSchema = require("../../../src/schema/configuration.schema.js");
 
 const expect = chai.expect;
 

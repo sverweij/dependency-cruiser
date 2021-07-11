@@ -1,5 +1,5 @@
 const _get = require("lodash/get");
-const { supportedTranspilers } = require("../../../package.json");
+const { supportedTranspilers } = require("../../../src/meta.js");
 const swc = require("../parse/to-swc-ast");
 const javaScriptWrap = require("./javascript-wrap");
 const typeScriptWrap = require("./typescript-wrap")();

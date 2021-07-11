@@ -1,11 +1,8 @@
 /* eslint-disable valid-jsdoc, no-inline-comments */
 const tryRequire = require("semver-try-require");
-const $package = require("../../../package.json");
+const { supportedTranspilers } = require("../../../src/meta.js");
 
-const typescript = tryRequire(
-  "typescript",
-  $package.supportedTranspilers.typescript
-);
+const typescript = tryRequire("typescript", supportedTranspilers.typescript);
 
 /*
  * Both extractImport* assume the imports/ exports can only occur at
