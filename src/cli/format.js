@@ -19,7 +19,6 @@ const KNOWN_FMT_OPTIONS = [
 module.exports = async (pResultFile, pOptions) => {
   const lOptions = normalizeOptions(pOptions, KNOWN_FMT_OPTIONS);
 
-  /* istanbul ignore else */
   if (pResultFile !== "-") {
     validateFileExistence(pResultFile);
   }

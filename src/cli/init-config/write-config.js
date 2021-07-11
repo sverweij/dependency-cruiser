@@ -30,11 +30,12 @@ module.exports = function writeConfig(
           figures.tick
         )} Successfully created '${pFileName}'\n\n`
       );
+      /* c8 ignore start */
     } catch (pError) {
-      /* istanbul ignore next  */
       throw new Error(
         `ERROR: Writing to '${pFileName}' didn't work. ${pError}\n`
       );
     }
+    /* c8 ignore stop */
   }
 };

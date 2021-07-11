@@ -12,11 +12,11 @@ function pryStringsFromArguments(pArguments) {
 
   if (pArguments[0].expression.type === "StringLiteral") {
     lReturnValue = pArguments[0].expression.value;
-  }
-  // istanbul ignore else
-  else if (pArguments[0].expression.type === "TemplateLiteral") {
+  } else if (pArguments[0].expression.type === "TemplateLiteral") {
+    /* c8 ignore start */
     lReturnValue = pArguments[0].expression.quasis[0].cooked.value;
   }
+  /* c8 ignore stop */
 
   return lReturnValue;
 }
@@ -83,7 +83,6 @@ function isInterestingCallExpression(pExoticRequireStrings, pNode) {
     .concat(pExoticRequireStrings.filter((pString) => !pString.includes(".")))
     .includes(pNode.callee.value);
 }
-// istanbul ignore else
 if (VisitorModule) {
   module.exports = class SwcDependencyVisitor extends Visitor {
     constructor(pExoticRequireStrings) {
@@ -124,20 +123,22 @@ if (VisitorModule) {
       return super.visitExportAllDeclration(pNode);
     }
 
-    /* istanbul ignore next */
+    /* c8 ignore start */
     visitExportAllDeclaration(pNode) {
       return this.visitExportAllDeclration(pNode);
     }
+    /* c8 ignore stop */
 
     // same spelling error as the above - same solution
     visitExportNamedDeclration(pNode) {
       this.pushImportExportSource(pNode);
       return super.visitExportNamedDeclration(pNode);
     }
-    /* istanbul ignore next */
+    /* c8 ignore start */
     visitExportNamedDeclaration(pNode) {
       return this.visitExportNamedDeclration(pNode);
     }
+    /* c8 ignore stop */
 
     visitCallExpression(pNode) {
       if (
@@ -164,12 +165,13 @@ if (VisitorModule) {
 
       return super.visitCallExpression(pNode);
     }
-    // istanbul ignore next
+    /* c8 ignore start */
     visitTsType(pNode) {
       // override so the 'visitTsType not implemented' error message
       // as defined in the super class doesn't appear
       return pNode;
     }
+    /* c8 ignore stop */
 
     visitTsTypeAnnotation(pNode) {
       // as visitors for some shapes of type annotations aren't completely
@@ -197,6 +199,8 @@ if (VisitorModule) {
       return this.lResult;
     }
   };
+  /* c8 ignore start */
 } else {
   module.exports = {};
 }
+/* c8 ignore stop */

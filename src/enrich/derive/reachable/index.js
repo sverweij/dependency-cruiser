@@ -1,4 +1,4 @@
-/* eslint-disable security/detect-object-injection */
+/* eslint-disable security/detect-object-injection, no-inline-comments */
 
 const _clone = require("lodash/clone");
 const _get = require("lodash/get");
@@ -62,13 +62,7 @@ function mergeReachesProperties(pFromModule, pToModule, pRule, pPath) {
 
   if (lIndexExistingReachable > -1) {
     lReaches[lIndexExistingReachable].modules = (
-      lReaches[lIndexExistingReachable].modules ||
-      // eslint-disable-next-line no-inline-comments
-      /* istanbul ignore next: 'modules' is a mandatory attribute so shouldn't
-       * happen it doesn't exist, but defensive default here nonetheless
-       */
-
-      []
+      lReaches[lIndexExistingReachable].modules /* c8 ignore next */ || []
     ).concat({
       source: pToModule.source,
       via: pPath,

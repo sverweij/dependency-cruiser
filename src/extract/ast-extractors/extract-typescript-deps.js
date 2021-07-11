@@ -1,4 +1,4 @@
-/* eslint-disable valid-jsdoc */
+/* eslint-disable valid-jsdoc, no-inline-comments */
 const tryRequire = require("semver-try-require");
 const $package = require("../../../package.json");
 
@@ -249,5 +249,5 @@ module.exports = function extractTypeScriptDependencies(
           extractNestedDependencies(pTypeScriptAST, pExoticRequireStrings)
         )
         .map((pModule) => ({ dynamic: false, ...pModule }))
-    : [];
+    : /* c8 ignore next */ [];
 };

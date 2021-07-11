@@ -89,7 +89,6 @@ module.exports = function extractBabelConfig(pBabelConfigFileName) {
   let lReturnValue = {};
   const babel = tryRequire("@babel/core", $package.supportedTranspilers.babel);
 
-  /* istanbul ignore else */
   if (babel) {
     const lConfig = {
       ...getConfig(pBabelConfigFileName),

@@ -68,7 +68,7 @@ function manifestIsUpdateable(pNormalizedInitConfig) {
 }
 
 module.exports = (pInit) => {
-  /* istanbul ignore if */
+  /* c8 ignore start */
   if (pInit === true) {
     getUserInput()
       .then(normalizeInitOptions)
@@ -77,6 +77,7 @@ module.exports = (pInit) => {
       .catch((pError) => {
         process.stderr.write(`\n  ERROR: ${pError.message}\n`);
       });
+    /* c8 ignore stop */
   } else {
     const lNormalizedInitConfig = normalizeInitOptions(getOneshotConfig(pInit));
     if (!fileExists($defaults.DEFAULT_CONFIG_FILE_NAME)) {

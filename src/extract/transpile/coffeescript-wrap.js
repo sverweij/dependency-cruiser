@@ -12,13 +12,14 @@ function getCoffeeScriptModule() {
     $package.supportedTranspilers.coffeescript
   );
 
-  /* istanbul ignore if*/
+  /* c8 ignore start */
   if (lReturnValue === false) {
     lReturnValue = tryRequire(
       "coffee-script",
       $package.supportedTranspilers["coffee-script"]
     );
   }
+  /* c8 ignore stop */
   return lReturnValue;
 }
 

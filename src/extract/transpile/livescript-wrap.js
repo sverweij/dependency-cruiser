@@ -4,9 +4,10 @@ const livescript = tryRequire(
   require("../../../package.json").supportedTranspilers.livescript
 );
 
-/* istanbul ignore next */
+/* c8 ignore start */
 module.exports = {
   isAvailable: () => livescript !== false,
 
   transpile: (pSource) => livescript.compile(pSource),
 };
+/* c8 ignore stop */

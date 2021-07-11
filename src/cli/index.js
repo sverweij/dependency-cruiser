@@ -72,7 +72,7 @@ function setUpListener(pCruiseOptions) {
     _get(pCruiseOptions, "ruleSet.options.progress.type")
   );
   const lListenerFunction = _get(lString2Listener, lListenerID);
-  /* istanbul ignore next */
+  /* c8 ignore next 3 */
   if (Boolean(lListenerFunction)) {
     lListenerFunction(bus);
   }

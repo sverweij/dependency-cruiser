@@ -12,10 +12,12 @@ const FORMAT_DIAGNOSTICS_HOST = {
   getCanonicalFileName(pFileName) {
     let lReturnValue = pFileName.toLowerCase();
 
-    /* istanbul ignore next - depends on the platform which branch is taken */
+    // depends on the platform which branch is taken, hence the c8 ignore
+    /* c8 ignore start */
     if (_get(typescript, "sys.useCaseSensitiveFileNames", false)) {
       lReturnValue = pFileName;
     }
+    /* c8 ignore stop */
     return lReturnValue;
   },
   getCurrentDirectory() {
@@ -40,7 +42,6 @@ const FORMAT_DIAGNOSTICS_HOST = {
 module.exports = function extractTSConfig(pTSConfigFileName) {
   let lReturnValue = {};
 
-  /* istanbul ignore else */
   if (typescript) {
     const lConfig = typescript.readConfigFile(
       pTSConfigFileName,

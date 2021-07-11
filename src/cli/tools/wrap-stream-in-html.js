@@ -45,10 +45,11 @@ function wrap(pInStream, pOutStream) {
     })
     .on(
       "error",
-      /* istanbul ignore next */
+      /* c8 ignore start */
       (pError) => {
         process.stderr.write(`${pError}\n`);
       }
+      /* c8 ignore stop */
     )
     .on("data", (pChunk) => {
       pOutStream.write(pChunk);
