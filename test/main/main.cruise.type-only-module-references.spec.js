@@ -1,6 +1,6 @@
 const chai = require("chai");
 const main = require("../../src/main");
-const cruiseResultSchema = require("../../src/schema/cruise-result.schema.json");
+const cruiseResultSchema = require("../../src/schema/cruise-result.schema.js");
 const output = require("./fixtures/type-only-module-references/output.json");
 const outputNoTS = require("./fixtures/type-only-module-references/output-no-ts.json");
 

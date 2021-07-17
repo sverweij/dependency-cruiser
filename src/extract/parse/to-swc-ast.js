@@ -1,10 +1,9 @@
 const tryRequire = require("semver-try-require");
 const _memoize = require("lodash/memoize");
+const { supportedTranspilers } = require("../../../src/meta.js");
+
 /** @type {import('@swc/core')} */
-const swc = tryRequire(
-  "@swc/core",
-  require("../../../package.json").supportedTranspilers.swc
-);
+const swc = tryRequire("@swc/core", supportedTranspilers.swc);
 
 const SWC_PARSE_OPTIONS = {
   dynamicImport: true,

@@ -1,6 +1,6 @@
 const chai = require("chai");
 const { cruise } = require("../../src/main");
-const cruiseResultSchema = require("../../src/schema/cruise-result.schema.json");
+const cruiseResultSchema = require("../../src/schema/cruise-result.schema.js");
 const commonjsFixtures = require("./fixtures/cruise-reporterless/commonjs.json");
 const deprecationFixtures = require("./fixtures/cruise-reporterless/deprecated-node-module.json");
 const bundledFixtures = require("./fixtures/cruise-reporterless/bundled-dependencies.json");

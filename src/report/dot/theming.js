@@ -1,7 +1,7 @@
 const _cloneDeep = require("lodash/cloneDeep");
 const _get = require("lodash/get");
 const _has = require("lodash/has");
-const DEFAULT_THEME = require("./default-theme.json");
+const DEFAULT_THEME = require("./default-theme");
 
 function matchesRE(pValue, pRE) {
   const lMatchResult = pValue.match && pValue.match(pRE);

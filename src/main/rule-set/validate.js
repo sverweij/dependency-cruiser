@@ -2,7 +2,7 @@ const Ajv = require("ajv").default;
 const safeRegex = require("safe-regex");
 const _has = require("lodash/has");
 const { validateCruiseOptions } = require("../options/validate");
-const configurationSchema = require("../../schema/configuration.schema.json");
+const configurationSchema = require("../../schema/configuration.schema.js");
 
 const ajv = new Ajv();
 

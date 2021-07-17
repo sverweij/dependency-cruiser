@@ -1,5 +1,5 @@
 const tryRequire = require("semver-try-require");
-const $package = require("../../../package.json");
+const { supportedTranspilers } = require("../../../src/meta.js");
 
 /*
  * coffeescript's npm repo was renamed from coffee-script to coffeescript
@@ -9,14 +9,14 @@ const $package = require("../../../package.json");
 function getCoffeeScriptModule() {
   let lReturnValue = tryRequire(
     "coffeescript",
-    $package.supportedTranspilers.coffeescript
+    supportedTranspilers.coffeescript
   );
 
   /* c8 ignore start */
   if (lReturnValue === false) {
     lReturnValue = tryRequire(
       "coffee-script",
-      $package.supportedTranspilers["coffee-script"]
+      supportedTranspilers["coffee-script"]
     );
   }
   /* c8 ignore stop */

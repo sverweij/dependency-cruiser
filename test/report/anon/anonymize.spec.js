@@ -1,6 +1,6 @@
 const chai = require("chai");
 const _clone = require("lodash/clone");
-const cruiseResultSchema = require("../../../src/schema/cruise-result.schema.json");
+const cruiseResultSchema = require("../../../src/schema/cruise-result.schema.js");
 const anonymizePathElement = require("../../../src/report/anon/anonymize-path-element");
 const anonymize = require("../../../src/report/anon");
 const sourceReport = require("./mocks/src-report.json");

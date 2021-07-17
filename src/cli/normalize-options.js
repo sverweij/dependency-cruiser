@@ -5,7 +5,7 @@ const _get = require("lodash/get");
 const _has = require("lodash/has");
 const _clone = require("lodash/clone");
 const loadConfig = require("../config-utl/extract-depcruise-config");
-const defaults = require("./defaults.json");
+const defaults = require("./defaults");
 
 const KNOWN_DEPCRUISE_OPTIONS = [
   "babelConfig",

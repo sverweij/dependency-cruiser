@@ -1,1 +1,3 @@
 **/*.template.js
+**/*.schema.js
+**/*.schema.json

@@ -9,7 +9,7 @@ try {
   // not so nice
   /* eslint-disable node/global-require */
   const program = require("commander");
-  const $package = require("../package.json");
+  const { version } = require("../src/meta.js");
   const cli = require("../src/cli");
 
   program
@@ -88,7 +88,7 @@ try {
       "-i, --info",
       "shows what languages and extensions dependency-cruiser supports"
     )
-    .version($package.version)
+    .version(version)
     .arguments("[files-or-directories]")
     .parse(process.argv);
 

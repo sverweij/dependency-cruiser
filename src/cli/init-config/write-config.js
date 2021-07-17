@@ -1,7 +1,7 @@
 const fs = require("fs");
 const figures = require("figures");
 const chalk = require("chalk");
-const { DEFAULT_CONFIG_FILE_NAME } = require("../defaults.json");
+const { DEFAULT_CONFIG_FILE_NAME } = require("../defaults");
 const { fileExists } = require("./environment-helpers");
 
 /**
