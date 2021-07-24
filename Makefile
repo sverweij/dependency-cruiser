@@ -53,7 +53,7 @@ help:
 
 # production rules
 src/%.template.js: src/%.template.hbs
-	npx handlebars --commonjs handlebars/runtime -f $@ $<
+	npx handlebars --min --commonjs handlebars/runtime -f $@ $<
 
 src/%.schema.js: tools/%.schema.mjs $(SCHEMA_SOURCES) tools/generate-schemas.utl.mjs
 	$(NODE) ./tools/generate-schemas.utl.mjs $@
