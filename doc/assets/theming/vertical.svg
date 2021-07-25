@@ -158,20 +158,20 @@
 <path fill="none" stroke="#000000" stroke-width="2" stroke-opacity="0.200000" d="M206.21,-204.97C233.52,-204.98 276.25,-202.31 310,-188 321.44,-183.15 332.29,-174.21 340.1,-166.72"/>
 <polygon fill="#000000" fill-opacity="0.200000" stroke="#000000" stroke-width="2" stroke-opacity="0.200000" points="341.77,-168.01 344.54,-162.29 338.81,-165.03 341.77,-168.01"/>
 </g>
-<!-- src/main/options/defaults.json -->
+<!-- src/main/options/defaults.js -->
 <g id="node9" class="node">
-<title>src/main/options/defaults.json</title>
-<g id="a_node9"><a xlink:href="src/main/options/defaults.json" xlink:title="defaults.json">
-<path fill="#ffee44" stroke="black" d="M163,-50C163,-50 107,-50 107,-50 104,-50 101,-47 101,-44 101,-44 101,-38 101,-38 101,-35 104,-32 107,-32 107,-32 163,-32 163,-32 166,-32 169,-35 169,-38 169,-38 169,-44 169,-44 169,-47 166,-50 163,-50"/>
-<text text-anchor="middle" x="135" y="-38.8" font-family="Helvetica,sans-Serif" font-size="9.00">defaults.json</text>
+<title>src/main/options/defaults.js</title>
+<g id="a_node9"><a xlink:href="src/main/options/defaults.js" xlink:title="defaults.js">
+<path fill="#ffffcc" stroke="black" d="M157,-50C157,-50 111,-50 111,-50 108,-50 105,-47 105,-44 105,-44 105,-38 105,-38 105,-35 108,-32 111,-32 111,-32 157,-32 157,-32 160,-32 163,-35 163,-38 163,-38 163,-44 163,-44 163,-47 160,-50 157,-50"/>
+<text text-anchor="middle" x="134" y="-38.8" font-family="Helvetica,sans-Serif" font-size="9.00">defaults.js</text>
 </a>
 </g>
 </g>
-<!-- src/main/options/normalize.js&#45;&gt;src/main/options/defaults.json -->
+<!-- src/main/options/normalize.js&#45;&gt;src/main/options/defaults.js -->
 <g id="edge9" class="edge">
-<title>src/main/options/normalize.js&#45;&gt;src/main/options/defaults.json</title>
-<path fill="none" stroke="#000000" stroke-width="2" stroke-opacity="0.200000" d="M134.17,-83.74C134.32,-76.24 134.54,-65.02 134.72,-56.1"/>
-<polygon fill="#000000" fill-opacity="0.200000" stroke="#000000" stroke-width="2" stroke-opacity="0.200000" points="136.82,-56.14 134.84,-50.1 132.62,-56.06 136.82,-56.14"/>
+<title>src/main/options/normalize.js&#45;&gt;src/main/options/defaults.js</title>
+<path fill="none" stroke="#000000" stroke-width="2" stroke-opacity="0.200000" d="M134,-83.74C134,-76.24 134,-65.02 134,-56.1"/>
+<polygon fill="#000000" fill-opacity="0.200000" stroke="#000000" stroke-width="2" stroke-opacity="0.200000" points="136.1,-56.1 134,-50.1 131.9,-56.1 136.1,-56.1"/>
 </g>
 <!-- src/main/utl/normalize&#45;re&#45;properties.js -->
 <g id="node10" class="node">

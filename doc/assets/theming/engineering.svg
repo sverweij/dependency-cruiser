@@ -26,8 +26,8 @@
 </g>
 <g id="clust4" class="cluster">
 <title>cluster_src/main/options</title>
-<path fill="transparent" stroke="white" stroke-width="2" d="M221.5,-77C221.5,-77 390.5,-77 390.5,-77 396.5,-77 402.5,-83 402.5,-89 402.5,-89 402.5,-147 402.5,-147 402.5,-153 396.5,-159 390.5,-159 390.5,-159 221.5,-159 221.5,-159 215.5,-159 209.5,-153 209.5,-147 209.5,-147 209.5,-89 209.5,-89 209.5,-83 215.5,-77 221.5,-77"/>
-<text text-anchor="middle" x="306" y="-147.8" font-family="Helvetica,sans-Serif" font-weight="bold" font-size="9.00" fill="white">options</text>
+<path fill="transparent" stroke="white" stroke-width="2" d="M221.5,-77C221.5,-77 385.5,-77 385.5,-77 391.5,-77 397.5,-83 397.5,-89 397.5,-89 397.5,-147 397.5,-147 397.5,-153 391.5,-159 385.5,-159 385.5,-159 221.5,-159 221.5,-159 215.5,-159 209.5,-153 209.5,-147 209.5,-147 209.5,-89 209.5,-89 209.5,-83 215.5,-77 221.5,-77"/>
+<text text-anchor="middle" x="303.5" y="-147.8" font-family="Helvetica,sans-Serif" font-weight="bold" font-size="9.00" fill="white">options</text>
 </g>
 <g id="clust5" class="cluster">
 <title>cluster_src/main/resolve&#45;options</title>
@@ -65,8 +65,8 @@
 <!-- src/main/index.js&#45;&gt;src/main/files&#45;and&#45;dirs/normalize.js -->
 <g id="edge1" class="edge">
 <title>src/main/index.js&#45;&gt;src/main/files&#45;and&#45;dirs/normalize.js</title>
-<path fill="none" stroke="white" d="M42.5,-111.82C42.5,-90.81 42.5,-41 42.5,-41 42.5,-41 105.43,-41 105.43,-41"/>
-<polygon fill="white" stroke="white" points="110.43,-41 105.43,-43.25 107.93,-41 105.43,-41 105.43,-41 105.43,-41 107.93,-41 105.43,-38.75 110.43,-41 110.43,-41"/>
+<path fill="none" stroke="white" d="M37.5,-111.82C37.5,-90.81 37.5,-41 37.5,-41 37.5,-41 105.25,-41 105.25,-41"/>
+<polygon fill="white" stroke="white" points="110.25,-41 105.25,-43.25 107.75,-41 105.25,-41 105.25,-41 105.25,-41 107.75,-41 105.25,-38.75 110.25,-41 110.25,-41"/>
 </g>
 <!-- src/main/options/normalize.js -->
 <g id="node3" class="node">
@@ -80,8 +80,8 @@
 <!-- src/main/index.js&#45;&gt;src/main/options/normalize.js -->
 <g id="edge2" class="edge">
 <title>src/main/index.js&#45;&gt;src/main/options/normalize.js</title>
-<path fill="none" stroke="white" d="M60.5,-111.86C60.5,-104.03 60.5,-94 60.5,-94 60.5,-94 212.4,-94 212.4,-94"/>
-<polygon fill="white" stroke="white" points="217.4,-94 212.4,-96.25 214.9,-94 212.4,-94 212.4,-94 212.4,-94 214.9,-94 212.4,-91.75 217.4,-94 217.4,-94"/>
+<path fill="none" stroke="white" d="M51.5,-111.86C51.5,-104.03 51.5,-94 51.5,-94 51.5,-94 212.19,-94 212.19,-94"/>
+<polygon fill="white" stroke="white" points="217.19,-94 212.19,-96.25 214.69,-94 212.19,-94 212.19,-94 212.19,-94 214.69,-94 212.19,-91.75 217.19,-94 217.19,-94"/>
 </g>
 <!-- src/main/options/validate.js -->
 <g id="node4" class="node">
@@ -95,8 +95,8 @@
 <!-- src/main/index.js&#45;&gt;src/main/options/validate.js -->
 <g id="edge3" class="edge">
 <title>src/main/index.js&#45;&gt;src/main/options/validate.js</title>
-<path fill="none" stroke="white" d="M67.5,-130.25C67.5,-134.88 67.5,-139.5 67.5,-139.5 67.5,-139.5 241.5,-139.5 241.5,-139.5 241.5,-139.5 241.5,-138.2 241.5,-138.2"/>
-<polygon fill="white" stroke="white" points="241.5,-133.2 243.75,-138.2 241.5,-135.7 241.5,-138.2 241.5,-138.2 241.5,-138.2 241.5,-135.7 239.25,-138.2 241.5,-133.2 241.5,-133.2"/>
+<path fill="none" stroke="white" d="M64.5,-111.77C64.5,-109.4 64.5,-107.5 64.5,-107.5 64.5,-107.5 250.5,-107.5 250.5,-107.5 250.5,-107.5 250.5,-109.98 250.5,-109.98"/>
+<polygon fill="white" stroke="white" points="250.5,-114.98 248.25,-109.98 250.5,-112.48 250.5,-109.98 250.5,-109.98 250.5,-109.98 250.5,-112.48 252.75,-109.98 250.5,-114.98 250.5,-114.98"/>
 </g>
 <!-- src/main/report&#45;wrap.js -->
 <g id="node5" class="node">
@@ -125,8 +125,8 @@
 <!-- src/main/index.js&#45;&gt;src/main/resolve&#45;options/normalize.js -->
 <g id="edge5" class="edge">
 <title>src/main/index.js&#45;&gt;src/main/resolve&#45;options/normalize.js</title>
-<path fill="none" stroke="white" d="M56.5,-130.29C56.5,-140.36 56.5,-155 56.5,-155 56.5,-155 105.11,-155 105.11,-155"/>
-<polygon fill="white" stroke="white" points="110.11,-155 105.11,-157.25 107.61,-155 105.11,-155 105.11,-155 105.11,-155 107.61,-155 105.11,-152.75 110.11,-155 110.11,-155"/>
+<path fill="none" stroke="white" d="M64.5,-130.29C64.5,-140.36 64.5,-155 64.5,-155 64.5,-155 105.45,-155 105.45,-155"/>
+<polygon fill="white" stroke="white" points="110.45,-155 105.45,-157.25 107.95,-155 105.45,-155 105.45,-155 105.45,-155 107.95,-155 105.45,-152.75 110.45,-155 110.45,-155"/>
 </g>
 <!-- src/main/rule&#45;set/normalize.js -->
 <g id="node7" class="node">
@@ -140,8 +140,8 @@
 <!-- src/main/index.js&#45;&gt;src/main/rule&#45;set/normalize.js -->
 <g id="edge6" class="edge">
 <title>src/main/index.js&#45;&gt;src/main/rule&#45;set/normalize.js</title>
-<path fill="none" stroke="white" d="M35.5,-130.32C35.5,-159.16 35.5,-245 35.5,-245 35.5,-245 105.22,-245 105.22,-245"/>
-<polygon fill="white" stroke="white" points="110.22,-245 105.22,-247.25 107.72,-245 105.22,-245 105.22,-245 105.22,-245 107.72,-245 105.22,-242.75 110.22,-245 110.22,-245"/>
+<path fill="none" stroke="white" d="M37.5,-130.32C37.5,-159.16 37.5,-245 37.5,-245 37.5,-245 105.25,-245 105.25,-245"/>
+<polygon fill="white" stroke="white" points="110.25,-245 105.25,-247.25 107.75,-245 105.25,-245 105.25,-245 105.25,-245 107.75,-245 105.25,-242.75 110.25,-245 110.25,-245"/>
 </g>
 <!-- src/main/rule&#45;set/validate.js -->
 <g id="node8" class="node">
@@ -155,31 +155,23 @@
 <!-- src/main/index.js&#45;&gt;src/main/rule&#45;set/validate.js -->
 <g id="edge7" class="edge">
 <title>src/main/index.js&#45;&gt;src/main/rule&#45;set/validate.js</title>
-<path fill="none" stroke="white" d="M46.5,-130.01C46.5,-153.54 46.5,-215 46.5,-215 46.5,-215 109.4,-215 109.4,-215"/>
-<polygon fill="white" stroke="white" points="114.4,-215 109.4,-217.25 111.9,-215 109.4,-215 109.4,-215 109.4,-215 111.9,-215 109.4,-212.75 114.4,-215 114.4,-215"/>
+<path fill="none" stroke="white" d="M51.5,-130.01C51.5,-153.54 51.5,-215 51.5,-215 51.5,-215 109.39,-215 109.39,-215"/>
+<polygon fill="white" stroke="white" points="114.39,-215 109.39,-217.25 111.89,-215 109.39,-215 109.39,-215 109.39,-215 111.89,-215 109.39,-212.75 114.39,-215 114.39,-215"/>
 </g>
-<!-- src/main/options/defaults.json -->
+<!-- src/main/options/defaults.js -->
 <g id="node9" class="node">
-<title>src/main/options/defaults.json</title>
-<g id="a_node9"><a xlink:href="src/main/options/defaults.json" xlink:title="defaults.json">
-<defs>
-<linearGradient id="l_0" gradientUnits="userSpaceOnUse" x1="326.5" y1="-97" x2="394.5" y2="-97" >
-<stop offset="0" style="stop-color:#ffffff;stop-opacity:0.200000;"/>
-<stop offset="1" style="stop-color:#ffffff;stop-opacity:0.533333;"/>
-</linearGradient>
-</defs>
-<path fill="url(#l_0)" stroke="white" d="M394.5,-107.02C394.5,-108.25 379.26,-109.25 360.5,-109.25 341.74,-109.25 326.5,-108.25 326.5,-107.02 326.5,-107.02 326.5,-86.98 326.5,-86.98 326.5,-85.75 341.74,-84.75 360.5,-84.75 379.26,-84.75 394.5,-85.75 394.5,-86.98 394.5,-86.98 394.5,-107.02 394.5,-107.02"/>
-<path fill="none" stroke="white" d="M394.5,-107.02C394.5,-105.79 379.26,-104.8 360.5,-104.8 341.74,-104.8 326.5,-105.79 326.5,-107.02"/>
-<text text-anchor="middle" x="360.5" y="-94.8" font-family="Helvetica,sans-Serif" font-size="9.00" fill="white">defaults.json</text>
+<title>src/main/options/defaults.js</title>
+<g id="a_node9"><a xlink:href="src/main/options/defaults.js" xlink:title="defaults.js">
+<path fill="#ffffff" fill-opacity="0.200000" stroke="white" d="M383.5,-103C383.5,-103 337.5,-103 337.5,-103 334.5,-103 331.5,-100 331.5,-97 331.5,-97 331.5,-91 331.5,-91 331.5,-88 334.5,-85 337.5,-85 337.5,-85 383.5,-85 383.5,-85 386.5,-85 389.5,-88 389.5,-91 389.5,-91 389.5,-97 389.5,-97 389.5,-100 386.5,-103 383.5,-103"/>
+<text text-anchor="middle" x="360.5" y="-91.8" font-family="Helvetica,sans-Serif" font-size="9.00" fill="white">defaults.js</text>
 </a>
 </g>
 </g>
-<!-- src/main/options/normalize.js&#45;&gt;src/main/options/defaults.json -->
+<!-- src/main/options/normalize.js&#45;&gt;src/main/options/defaults.js -->
 <g id="edge9" class="edge">
-<title>src/main/options/normalize.js&#45;&gt;src/main/options/defaults.json</title>
-<path fill="none" stroke="white" d="M283.5,-91C283.5,-91 321.38,-91 321.38,-91"/>
-<polygon fill="none" stroke="white" points="326.38,-89 326.38,-93 322.38,-93 322.38,-89 326.38,-89"/>
-<polyline fill="none" stroke="white" points="322.38,-91 321.38,-91 "/>
+<title>src/main/options/normalize.js&#45;&gt;src/main/options/defaults.js</title>
+<path fill="none" stroke="white" d="M283.5,-91C283.5,-91 326.26,-91 326.26,-91"/>
+<polygon fill="white" stroke="white" points="331.26,-91 326.26,-93.25 328.76,-91 326.26,-91 326.26,-91 326.26,-91 328.76,-91 326.26,-88.75 331.26,-91 331.26,-91"/>
 </g>
 <!-- src/main/utl/normalize&#45;re&#45;properties.js -->
 <g id="node10" class="node">
@@ -193,8 +185,8 @@
 <!-- src/main/options/normalize.js&#45;&gt;src/main/utl/normalize&#45;re&#45;properties.js -->
 <g id="edge8" class="edge">
 <title>src/main/options/normalize.js&#45;&gt;src/main/utl/normalize&#45;re&#45;properties.js</title>
-<path fill="none" stroke="white" d="M283.84,-97C298.96,-97 313.5,-97 313.5,-97 313.5,-97 313.5,-204.83 313.5,-204.83"/>
-<polygon fill="white" stroke="white" points="313.5,-209.83 311.25,-204.83 313.5,-207.33 313.5,-204.83 313.5,-204.83 313.5,-204.83 313.5,-207.33 315.75,-204.83 313.5,-209.83 313.5,-209.83"/>
+<path fill="none" stroke="white" d="M283.76,-97C299.75,-97 315.5,-97 315.5,-97 315.5,-97 315.5,-204.83 315.5,-204.83"/>
+<polygon fill="white" stroke="white" points="315.5,-209.83 313.25,-204.83 315.5,-207.33 315.5,-204.83 315.5,-204.83 315.5,-204.83 315.5,-207.33 317.75,-204.83 315.5,-209.83 315.5,-209.83"/>
 </g>
 <!-- src/main/rule&#45;set/normalize.js&#45;&gt;src/main/utl/normalize&#45;re&#45;properties.js -->
 <g id="edge10" class="edge">
@@ -205,8 +197,8 @@
 <!-- src/main/rule&#45;set/validate.js&#45;&gt;src/main/options/validate.js -->
 <g id="edge11" class="edge">
 <title>src/main/rule&#45;set/validate.js&#45;&gt;src/main/options/validate.js</title>
-<path fill="none" stroke="white" d="M172.72,-217C207.38,-217 260.5,-217 260.5,-217 260.5,-217 260.5,-138.26 260.5,-138.26"/>
-<polygon fill="white" stroke="white" points="260.5,-133.26 262.75,-138.26 260.5,-135.76 260.5,-138.26 260.5,-138.26 260.5,-138.26 260.5,-135.76 258.25,-138.26 260.5,-133.26 260.5,-133.26"/>
+<path fill="none" stroke="white" d="M172.74,-217C204.42,-217 250.5,-217 250.5,-217 250.5,-217 250.5,-138.26 250.5,-138.26"/>
+<polygon fill="white" stroke="white" points="250.5,-133.26 252.75,-138.26 250.5,-135.76 250.5,-138.26 250.5,-138.26 250.5,-138.26 250.5,-135.76 248.25,-138.26 250.5,-133.26 250.5,-133.26"/>
 </g>
 </g>
 </svg>

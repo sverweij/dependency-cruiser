@@ -158,20 +158,20 @@
 <path fill="none" stroke="black" d="M298.09,-279.75C347.77,-276.38 431.68,-269.1 460,-257 473.55,-251.21 486.49,-241.35 496.79,-232.07"/>
 <polygon fill="black" stroke="black" points="499.24,-234.57 504.11,-225.16 494.43,-229.48 499.24,-234.57"/>
 </g>
-<!-- src/main/options/defaults.json -->
+<!-- src/main/options/defaults.js -->
 <g id="node9" class="node">
-<title>src/main/options/defaults.json</title>
-<g id="a_node9"><a xlink:href="src/main/options/defaults.json" xlink:title="defaults.json">
-<ellipse fill="none" stroke="black" cx="191" cy="-50" rx="55.79" ry="18"/>
-<text text-anchor="middle" x="191" y="-46.3" font-family="Times,serif" font-size="14.00">defaults.json</text>
+<title>src/main/options/defaults.js</title>
+<g id="a_node9"><a xlink:href="src/main/options/defaults.js" xlink:title="defaults.js">
+<ellipse fill="none" stroke="black" cx="190" cy="-50" rx="46.59" ry="18"/>
+<text text-anchor="middle" x="190" y="-46.3" font-family="Times,serif" font-size="14.00">defaults.js</text>
 </a>
 </g>
 </g>
-<!-- src/main/options/normalize.js&#45;&gt;src/main/options/defaults.json -->
+<!-- src/main/options/normalize.js&#45;&gt;src/main/options/defaults.js -->
 <g id="edge9" class="edge">
-<title>src/main/options/normalize.js&#45;&gt;src/main/options/defaults.json</title>
-<path fill="none" stroke="black" d="M190.24,-106.7C190.35,-98.25 190.49,-87.87 190.63,-78.37"/>
-<polygon fill="black" stroke="black" points="194.13,-78.22 190.76,-68.18 187.13,-78.13 194.13,-78.22"/>
+<title>src/main/options/normalize.js&#45;&gt;src/main/options/defaults.js</title>
+<path fill="none" stroke="black" d="M190,-106.7C190,-98.25 190,-87.87 190,-78.37"/>
+<polygon fill="black" stroke="black" points="193.5,-78.18 190,-68.18 186.5,-78.18 193.5,-78.18"/>
 </g>
 <!-- src/main/utl/normalize&#45;re&#45;properties.js -->
 <g id="node10" class="node">
