@@ -186,7 +186,7 @@
       "name": "not-unreachable-from-test",
       "comment": "This module in src is not reachable by any test. Please provide a test that covers this (poor man's test coverage - this task is better suited for a proper test coverage tool :-) )",
       "severity": "warn",
-      "from": { "path": "\\.spec\\.js$" },
+      "from": { "path": "\\.spec\\.m?js$" },
       "to": { "path": "^src", "reachable": false }
     },
     {

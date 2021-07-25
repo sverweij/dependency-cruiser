@@ -1,0 +1,48 @@
+import { readFileSync } from "node:fs";
+import { join } from "node:path";
+import { fileURLToPath } from "node:url";
+import { expect } from "chai";
+import { createRequireJSON } from "../../../backwards.utl.mjs";
+import dot from "../../../../src/report/dot/index.js";
+
+const render = dot("flat");
+const requireJSON = createRequireJSON(import.meta.url);
+
+const deps = requireJSON("./mocks/dependency-cruiser-2020-01-25.json");
+const orphans = requireJSON("./mocks/orphans.json");
+const rxjs = requireJSON("./mocks/rxjs.json");
+
+const __dirname = fileURLToPath(new URL(".", import.meta.url));
+
+const mockFolder = join(__dirname, "mocks");
+const flatDot = readFileSync(
+  join(mockFolder, "dependency-cruiser-2020-01-25.dot"),
+  "utf8"
+);
+const flatOrphansDot = readFileSync(join(mockFolder, "orphans.dot"), "utf8");
+const flatRxJs = readFileSync(join(mockFolder, "rxjs.dot"), "utf8");
+
+describe("report/dot/flat-level reporter", () => {
+  it("consolidates to flat levels", () => {
+    const lReturnValue = render(deps);
+
+    expect(lReturnValue.output).to.deep.equal(flatDot);
+    expect(lReturnValue.exitCode).to.equal(0);
+  });
+
+  it("consolidates module only transgressions correctly", () => {
+    const lReturnValue = render(orphans);
+
+    expect(lReturnValue.output).to.deep.equal(flatOrphansDot);
+    expect(lReturnValue.exitCode).to.equal(0);
+  });
+
+  it("consolidates a slightly larger code base in a timely fashion", () => {
+    const lReturnValue = render(rxjs);
+
+    expect(lReturnValue.output).to.deep.equal(flatRxJs);
+    expect(lReturnValue.exitCode).to.equal(0);
+  });
+});
+
+/* eslint max-len: 0 */

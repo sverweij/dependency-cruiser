@@ -3,7 +3,7 @@ import getStream from "get-stream";
 
 getStream(process.stdin).then((pJSONAsString) => {
   const $package = JSON.parse(pJSONAsString);
-  const woink = `/* generated - don't edit */
+  const lGeneratedSource = `/* generated - don't edit */
   
   module.exports = {
       version: "${$package.version}",
@@ -12,5 +12,5 @@ getStream(process.stdin).then((pJSONAsString) => {
       },
       supportedTranspilers: ${JSON.stringify($package.supportedTranspilers)}
       }`;
-  console.log(prettier.format(woink, { parser: "babel" }));
+  console.log(prettier.format(lGeneratedSource, { parser: "babel" }));
 });

@@ -11,7 +11,7 @@
   },
   "overrides": [
     {
-      "files": ["test/**/*.js"],
+      "files": ["test/**/*.{js,mjs,cjs}"],
       "env": {
         "mocha": true
       },
@@ -21,9 +21,9 @@
       }
     },
     {
-      "files": ["tools/**/*.mjs"],
+      "files": ["**/*.mjs"],
       "parserOptions": {
-        "ecmaVersion": 2020
+        "ecmaVersion": 2021
       },
       "rules": {
         "node/no-unsupported-features/es-syntax": "off"
