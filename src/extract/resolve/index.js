@@ -1,5 +1,7 @@
 const fs = require("fs");
 const path = require("path");
+const monkeyPatchedModule = require("module");
+const get = require("lodash/get");
 const pathToPosix = require("../utl/path-to-posix");
 const { isRelativeModuleName } = require("./module-classifiers");
 const resolveAMD = require("./resolve-amd");
@@ -42,6 +44,20 @@ function canBeResolvedToTsVariant(pModuleName) {
 
 function isTypeScriptishExtension(pModuleName) {
   return [".ts", ".tsx"].includes(path.extname(pModuleName));
+}
+function resolveYarnVirtual(pPath) {
+  const pnpAPI = get(monkeyPatchedModule, "findPnpApi", () => false)(pPath);
+
+  // the pnp api only works in plug'n play environemnts, and resolveVirtual
+  // only under yarn(berry). As we can't run a 'regular' nodejs environment
+  // and a yarn(berry) one at the same time, ignore in the test coverage and
+  // cover it in a separate integration test.
+  /* c8 ignore start */
+  if (pnpAPI && get(pnpAPI, "VERSIONS.resolveVirtual", 0) === 1) {
+    return pnpAPI.resolveVirtual(path.resolve(pPath)) || pPath;
+  }
+  /* c8 ignore stop */
+  return pPath;
 }
 
 function resolveWithRetry(
@@ -87,26 +103,16 @@ function resolveWithRetry(
   }
   return lReturnValue;
 }
-
 /**
  * resolves the module name of the pDependency to a file on disk.
  *
- * @param  {object} pModule an object with a module and the moduleSystem
+ * @param  {import("../../../types/cruise-result").IModule} pModule an object with a module and the moduleSystem
  *                              according to which this is a dependency
  * @param  {string} pBaseDirectory    the directory to consider as base (or 'root')
  *                              for resolved files.
  * @param  {string} pFileDirectory    the directory of the file the dependency was
  *                              detected in
- * @param  {object} pResolveOptions an object with options to pass to the resolver
- *                              see https://github.com/webpack/enhanced-resolve#resolver-options
- *                              for a complete list
- *                              (also supports the attribute `bustTheCache`. Without
- *                              that attribute (or with the value `false`) the resolver
- *                              is initialized only once per session. If the attribute
- *                              equals `true` the resolver is initialized on each call
- *                              (which is slower, but might is useful in some situations,
- *                              like in executing unit tests that verify if different
- *                              passed options yield different results))
+ * @param  {import(../../../types/resolve-options").IResolveOptions} pResolveOptions
  * @return {object}             an object with as attributes:
  *                              - resolved: a string representing the pDependency
  *                                  resolved to a file on disk (or the pDependency
@@ -145,14 +151,16 @@ module.exports = function resolve(
         path.relative(
           pBaseDirectory,
           fs.realpathSync(
-            path.resolve(
-              pBaseDirectory,
-              /* enhanced-resolve inserts a NULL character in front of any `#` 
-                 character. This wonky replace undoes that so the filename
-                 again corresponds with a real file on disk
-               */
-              // eslint-disable-next-line no-control-regex
-              lResolvedModule.resolved.replace(/\u0000#/g, "#")
+            resolveYarnVirtual(
+              path.resolve(
+                pBaseDirectory,
+                /* enhanced-resolve inserts a NULL character in front of any `#` 
+                   character. This wonky replace undoes that so the filename
+                   again corresponds with a real file on disk
+                 */
+                // eslint-disable-next-line no-control-regex
+                lResolvedModule.resolved.replace(/\u0000#/g, "#")
+              )
             )
           )
         )
