@@ -75,4 +75,3 @@ module.exports = function validateConfiguration(pConfiguration) {
 
 /* think we can ignore object injection here because it's not a public function */
 /* eslint security/detect-object-injection: 0 */
-// file deepcode ignore valid-jsdoc: seems deepcode's jsdoc parser can't handle type imports yet

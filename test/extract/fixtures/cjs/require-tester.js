@@ -1,9 +1,8 @@
-// file deepcode ignore UseStrictEquality: <comment the reason here>
 // you can find things like this in UMD and AMD wrappers
-var weHaveARequireAlready=typeof require=="function"&&require;
+var weHaveARequireAlready = typeof require == "function" && require;
 
-if (typeof require==="function") {
-    // do interesting stuff
-};
+if (typeof require === "function") {
+  // do interesting stuff
+}
 
-doStuff(typeof require==="function");
+doStuff(typeof require === "function");

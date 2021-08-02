@@ -1,4 +1,3 @@
-// file deepcode ignore no-any: the any's are for the format of ts & babel configs, which we don't want repeated or maintained here
 import { ICruiseResult } from "./cruise-result";
 import { ICruiseOptions } from "./options";
 import { OutputType } from "./shared-types";

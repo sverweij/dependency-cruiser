@@ -101,7 +101,6 @@ describe("extract/resolve/externalModuleHelpers.getPackageJson", () => {
 
 describe("extract/resolve/externalModuleHelpers.getPackageRoot", () => {
   it("returns undefined if called without parameters", () => {
-    //  deepcode ignore MissingArgument: we're testing exactly this behavior
     expect(typeof getPackageRoot()).to.equal("undefined");
   });
 

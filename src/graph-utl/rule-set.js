@@ -53,5 +53,3 @@ module.exports = {
   ruleSetHasLicenseRule,
   ruleSetHasDeprecationRule,
 };
-
-// file deepcode ignore valid-jsdoc: deepcode believes this isn't valid, but likely it just isn't privy on imports as types
