@@ -53,7 +53,7 @@ function getFolderNames(pFolderName) {
     );
 }
 
-function getMatchingFileNames(pPattern, pFolderName = ".") {
+function getMatchingFileNames(pPattern, pFolderName = process.cwd()) {
   return fs
     .readdirSync(pFolderName, "utf8")
     .filter(
@@ -63,7 +63,7 @@ function getMatchingFileNames(pPattern, pFolderName = ".") {
     );
 }
 
-function isLikelyMonoRepo(pFolderNames = getFolderNames(".")) {
+function isLikelyMonoRepo(pFolderNames = getFolderNames(process.cwd())) {
   return pFolderNames.includes("packages");
 }
 
@@ -77,7 +77,7 @@ function hasTestsWithinSource(pTestLocations, pSourceLocations) {
 }
 
 function getFolderCandidates(pCandidateFolderArray) {
-  return (pFolderNames = getFolderNames(".")) => {
+  return (pFolderNames = getFolderNames(process.cwd())) => {
     return pFolderNames.filter((pFolderName) =>
       pCandidateFolderArray.includes(pFolderName)
     );
@@ -101,9 +101,9 @@ const getBabelConfigCandidates = () =>
   );
 const hasBabelConfigCandidates = () => getBabelConfigCandidates().length > 0;
 
-const getTSConfigCandidates = (pFolderName = ".") =>
+const getTSConfigCandidates = (pFolderName = process.cwd()) =>
   getMatchingFileNames(TSCONFIG_CANDIDATE_PATTERN, pFolderName);
-const hasTSConfigCandidates = (pFolderName = ".") =>
+const hasTSConfigCandidates = (pFolderName = process.cwd()) =>
   getTSConfigCandidates(pFolderName).length > 0;
 
 const getWebpackConfigCandidates = () =>
