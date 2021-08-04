@@ -53,7 +53,7 @@ module.exports = function extractTSConfig(pTSConfigFileName) {
     lReturnValue = typescript.parseJsonConfigFileContent(
       lConfig.config,
       typescript.sys,
-      path.dirname(pTSConfigFileName),
+      path.dirname(path.resolve(pTSConfigFileName)),
       {},
       pTSConfigFileName
     );
