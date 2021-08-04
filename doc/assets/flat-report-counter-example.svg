@@ -24,11 +24,6 @@
 <path fill="#ffffff" stroke="black" stroke-width="2" d="M28,-16C28,-16 779.5,-16 779.5,-16 785.5,-16 791.5,-22 791.5,-28 791.5,-28 791.5,-724 791.5,-724 791.5,-730 785.5,-736 779.5,-736 779.5,-736 28,-736 28,-736 22,-736 16,-730 16,-724 16,-724 16,-28 16,-28 16,-22 22,-16 28,-16"/>
 <text text-anchor="middle" x="403.75" y="-724.8" font-family="Helvetica,sans-Serif" font-weight="bold" font-size="9.00">report</text>
 </g>
-<g id="clust4" class="cluster">
-<title>cluster_src/report/anon</title>
-<path fill="#ffffff" stroke="black" stroke-width="2" d="M101,-24C101,-24 634,-24 634,-24 640,-24 646,-30 646,-36 646,-36 646,-64 646,-64 646,-70 640,-76 634,-76 634,-76 101,-76 101,-76 95,-76 89,-70 89,-64 89,-64 89,-36 89,-36 89,-30 95,-24 101,-24"/>
-<text text-anchor="middle" x="367.5" y="-64.8" font-family="Helvetica,sans-Serif" font-weight="bold" font-size="9.00">anon</text>
-</g>
 <g id="clust5" class="cluster">
 <title>cluster_src/report/dot</title>
 <path fill="#ffffff" stroke="black" stroke-width="2" d="M101,-334C101,-334 771.5,-334 771.5,-334 777.5,-334 783.5,-340 783.5,-346 783.5,-346 783.5,-492 783.5,-492 783.5,-498 777.5,-504 771.5,-504 771.5,-504 101,-504 101,-504 95,-504 89,-498 89,-492 89,-492 89,-346 89,-346 89,-340 95,-334 101,-334"/>
@@ -43,6 +38,11 @@
 <title>cluster_src/report/html</title>
 <path fill="#ffffff" stroke="black" stroke-width="2" d="M101,-598C101,-598 300.5,-598 300.5,-598 306.5,-598 312.5,-604 312.5,-610 312.5,-610 312.5,-638 312.5,-638 312.5,-644 306.5,-650 300.5,-650 300.5,-650 101,-650 101,-650 95,-650 89,-644 89,-638 89,-638 89,-610 89,-610 89,-604 95,-598 101,-598"/>
 <text text-anchor="middle" x="200.75" y="-638.8" font-family="Helvetica,sans-Serif" font-weight="bold" font-size="9.00">html</text>
+</g>
+<g id="clust4" class="cluster">
+<title>cluster_src/report/anon</title>
+<path fill="#ffffff" stroke="black" stroke-width="2" d="M101,-24C101,-24 634,-24 634,-24 640,-24 646,-30 646,-36 646,-36 646,-64 646,-64 646,-70 640,-76 634,-76 634,-76 101,-76 101,-76 95,-76 89,-70 89,-64 89,-64 89,-36 89,-36 89,-30 95,-24 101,-24"/>
+<text text-anchor="middle" x="367.5" y="-64.8" font-family="Helvetica,sans-Serif" font-weight="bold" font-size="9.00">anon</text>
 </g>
 <g id="clust8" class="cluster">
 <title>cluster_src/report/plugins</title>
