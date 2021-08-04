@@ -1,8 +1,10 @@
 const fs = require("fs");
 const figures = require("figures");
 const chalk = require("chalk");
-const { DEFAULT_CONFIG_FILE_NAME } = require("../defaults");
-const { fileExists } = require("./environment-helpers");
+const {
+  fileExists,
+  getDefaultConfigFileName,
+} = require("./environment-helpers");
 
 /**
  * Write a .dependency-cruiser config to the current directory
@@ -18,7 +20,7 @@ const { fileExists } = require("./environment-helpers");
  */
 module.exports = function writeConfig(
   pConfig,
-  pFileName = DEFAULT_CONFIG_FILE_NAME
+  pFileName = getDefaultConfigFileName()
 ) {
   if (fileExists(pFileName)) {
     throw new Error(`A '${pFileName}' already exists here - leaving it be.\n`);

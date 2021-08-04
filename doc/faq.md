@@ -224,6 +224,8 @@ and ✖'s in the output should be a thing of the past.
 
 **A**: Rename your .dependency-cruiser.js to .dependency-cruiser.cjs
 
+> As of version 10.1.0 the `--init` generator automatically does this for you.
+
 ## Features
 
 ### Q: How do I enable TypeScript, CoffeeScript or LiveScript in dependency-cruiser?
@@ -409,6 +411,8 @@ module.exports = {
   // ... your rules & options
 };
 ```
+
+> Newer versions of the `--init` generator automatically do this for you.
 
 ## Expanding dependency-cruiser
 

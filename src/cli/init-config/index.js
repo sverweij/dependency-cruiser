@@ -12,6 +12,7 @@ const {
   getWebpackConfigCandidates,
   hasTSConfigCandidates,
   getTSConfigCandidates,
+  getDefaultConfigFileName,
 } = require("./environment-helpers");
 const {
   writeRunScriptsToManifest,
@@ -80,7 +81,7 @@ module.exports = (pInit) => {
     /* c8 ignore stop */
   } else {
     const lNormalizedInitConfig = normalizeInitOptions(getOneshotConfig(pInit));
-    if (!fileExists($defaults.DEFAULT_CONFIG_FILE_NAME)) {
+    if (!fileExists(getDefaultConfigFileName())) {
       writeConfig(buildConfig(lNormalizedInitConfig));
     }
 

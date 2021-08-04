@@ -1,6 +1,8 @@
 const fs = require("fs");
 const path = require("path");
 const _has = require("lodash/has");
+const _get = require("lodash/get");
+const { DEFAULT_CONFIG_FILE_NAME } = require("../defaults");
 
 const LIKELY_SOURCE_FOLDERS = ["src", "lib", "app", "bin", "sources"];
 const LIKELY_TEST_FOLDERS = ["test", "spec", "tests", "specs", "bdd"];
@@ -42,6 +44,18 @@ function babelIsConfiguredInManifest() {
   } catch (pError) {
     // silently ignore - we'll return false anyway then
   }
+  return lReturnValue;
+}
+
+function isTypeModule() {
+  let lReturnValue = false;
+
+  try {
+    lReturnValue = _get(readManifest(), "type", "commonjs") === "module";
+  } catch (pError) {
+    // silently ignore - we'll return false anyway then
+  }
+
   return lReturnValue;
 }
 
@@ -117,12 +131,16 @@ const getTestFolderCandidates = getFolderCandidates(LIKELY_TEST_FOLDERS);
 const getMonoRepoPackagesCandidates = getFolderCandidates(
   LIKELY_PACKAGES_FOLDERS
 );
+function getDefaultConfigFileName() {
+  return isTypeModule() ? ".dependency-cruiser.cjs" : DEFAULT_CONFIG_FILE_NAME;
+}
 
 module.exports = {
   readManifest,
   fileExists,
   toSourceLocationArray,
   isLikelyMonoRepo,
+  isTypeModule,
   hasTestsWithinSource,
   getFolderCandidates,
   getBabelConfigCandidates,
@@ -134,4 +152,5 @@ module.exports = {
   getSourceFolderCandidates,
   getTestFolderCandidates,
   getMonoRepoPackagesCandidates,
+  getDefaultConfigFileName,
 };

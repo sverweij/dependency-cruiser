@@ -180,3 +180,57 @@ describe("cli/init-config/environment-helpers - hasWebpackConfigCandidates", () 
     expect(helpers.hasWebpackConfigCandidates()).to.equal(false);
   });
 });
+
+describe("cli/init-config/environment-helpers - isTypeModule", () => {
+  const WORKINGDIR = process.cwd();
+  afterEach("tear down", () => {
+    process.chdir(WORKINGDIR);
+  });
+  it("Returns false when there is no manifest", () => {
+    process.chdir("test/cli/init-config/fixtures/is-type-module-empty");
+    expect(helpers.isTypeModule()).to.equal(false);
+  });
+  it("Returns false when there's no type in the manifest", () => {
+    process.chdir("test/cli/init-config/fixtures/is-type-module-not-present");
+    expect(helpers.isTypeModule()).to.equal(false);
+  });
+  it("Returns false when the type in the manifest equals commonjs", () => {
+    process.chdir("test/cli/init-config/fixtures/is-type-module-commonjs");
+    expect(helpers.isTypeModule()).to.equal(false);
+  });
+  it("Returns true when the type in the manifest equals module", () => {
+    process.chdir("test/cli/init-config/fixtures/is-type-module");
+    expect(helpers.isTypeModule()).to.equal(true);
+  });
+});
+
+describe("cli/init-config/environment-helpers - getDefaultConfigFileName", () => {
+  const WORKINGDIR = process.cwd();
+  afterEach("tear down", () => {
+    process.chdir(WORKINGDIR);
+  });
+  it("Returns false when there is no manifest", () => {
+    process.chdir("test/cli/init-config/fixtures/is-type-module-empty");
+    expect(helpers.getDefaultConfigFileName()).to.equal(
+      ".dependency-cruiser.js"
+    );
+  });
+  it("Returns false when there's no type in the manifest", () => {
+    process.chdir("test/cli/init-config/fixtures/is-type-module-not-present");
+    expect(helpers.getDefaultConfigFileName()).to.equal(
+      ".dependency-cruiser.js"
+    );
+  });
+  it("Returns false when the type in the manifest equals commonjs", () => {
+    process.chdir("test/cli/init-config/fixtures/is-type-module-commonjs");
+    expect(helpers.getDefaultConfigFileName()).to.equal(
+      ".dependency-cruiser.js"
+    );
+  });
+  it("Returns true when the type in the manifest equals module", () => {
+    process.chdir("test/cli/init-config/fixtures/is-type-module");
+    expect(helpers.getDefaultConfigFileName()).to.equal(
+      ".dependency-cruiser.cjs"
+    );
+  });
+});
