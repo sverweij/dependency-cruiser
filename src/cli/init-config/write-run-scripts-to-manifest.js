@@ -9,6 +9,50 @@ const { folderNameArrayToRE } = require("./utl");
 
 const PACKAGE_MANIFEST = `./${$defaults.PACKAGE_MANIFEST}`;
 
+const EXPERIMENTAL_SCRIPT_DOC = [
+  {
+    name: "depcruise",
+    headline: "npm run depcruise",
+    description:
+      "validates against the rules in .dependency-cruiser.js and writes the outcome to stdout",
+  },
+  {
+    name: "depcruise:html",
+    headline: "npm run depcruise:html",
+    description:
+      "validates against the rules in .dependency-cruiser.js and writes it to 'dependendency-violation-report.html' with a friendly layout",
+  },
+  {
+    name: "depcruise:graph",
+    headline: "npm run depcruise:graph",
+    description:
+      "writes a detailed internal graph of your app to 'dependency-graph.html'",
+  },
+  {
+    name: "depcruise:graph:dev",
+    headline: "npm run depcruise:graph:dev",
+    description:
+      "opens a detailed internal graph of your app in your default browser (uses the 'browser' command line program)",
+  },
+  {
+    name: "depcruise:graph:archi",
+    headline: "depcruise:graph:archi",
+    description:
+      "writes a high-level internal graph of your app to 'high-level-dependency-graph.html",
+  },
+  {
+    name: "depcruise:focus",
+    headline: "npm run depcruise:focus <regex>",
+    description:
+      "writes all dependencies to and from modules matching the given <regex> to stdout - in simple text",
+  },
+  // {
+  //   name: "depcruise:text",
+  //   headline: "",
+  //   description: "",
+  // },
+];
+
 /**
  *
  * @param {import("../../../types/init-config").IInitConfig} pInitOptions
@@ -27,7 +71,9 @@ function compileRunScripts(pInitOptions) {
       "depcruise:graph": `depcruise ${lSourceLocations} --include-only '${lSourceLocationRE}' --config --output-type dot | dot -T svg | depcruise-wrap-stream-in-html > dependency-graph.html`,
       "depcruise:graph:dev": `depcruise ${lSourceLocations} --include-only '${lSourceLocationRE}' --prefix vscode://file/$(pwd)/ --config --output-type dot | dot -T svg | depcruise-wrap-stream-in-html | browser`,
       "depcruise:graph-archi": `depcruise ${lSourceLocations} --include-only '${lSourceLocationRE}' --config --output-type archi | dot -T svg | depcruise-wrap-stream-in-html > high-level-dependency-graph.html`,
-      "depcruise:html": `depcruise ${lSourceLocations} ${lTestLocations} --config --output-type err-html --output-to dependency-violation-report.html`,
+      "depcruise:html": `depcruise ${lSourceLocations} ${lTestLocations} --progress --config --output-type err-html --output-to dependency-violation-report.html`,
+      "depcruise:text": `depcruise ${lSourceLocations} ${lTestLocations} --progress --config --output-type text`,
+      "depcruise:focus": `depcruise ${lSourceLocations} ${lTestLocations} --progress --config --output-type text --focus`,
     };
   }
 
@@ -73,37 +119,12 @@ function addRunScriptsToManifest(pManifest, pAdditionalRunScripts) {
 function getSuccessMessage(pDestinationManifestFileName) {
   const lExplanationIndent = 6;
 
-  return (
-    `  ${chalk.green(
-      figures.tick
-    )} Run scripts added to '${pDestinationManifestFileName}':` +
-    `\n    ${chalk.green(figures.play)} npm run depcruise` +
-    `\n${wrapAndIndent(
-      "validates against the rules in .dependency-cruiser.js and writes the outcome to stdout",
-      lExplanationIndent
-    )}` +
-    `\n\n    ${chalk.green(figures.play)} npm run depcruise:html` +
-    `\n${wrapAndIndent(
-      "validates against the rules in .dependency-cruiser.js and writes it to 'dependendency-violation-report.html' with a friendly layout",
-      lExplanationIndent
-    )}` +
-    `\n\n    ${chalk.green(figures.play)} npm run depcruise:graph` +
-    `\n${wrapAndIndent(
-      "writes a detailed internal graph of your app to 'dependency-graph.html'",
-      lExplanationIndent
-    )}` +
-    `\n\n    ${chalk.green(figures.play)} npm run depcruise:graph:dev` +
-    `\n${wrapAndIndent(
-      "opens a detailed internal graph of your app in your default browser (uses the 'browser' command line program)",
-      lExplanationIndent
-    )}` +
-    `\n\n    ${chalk.green(figures.play)} npm run depcruise:graph-archi` +
-    `\n${wrapAndIndent(
-      "writes a high-level internal graph of your app to 'high-level-dependency-graph.html'",
-      lExplanationIndent
-    )}` +
-    `\n\n`
-  );
+  return EXPERIMENTAL_SCRIPT_DOC.reduce((pAll, pScript) => {
+    return `${pAll}${
+      `\n    ${chalk.green(figures.play)} ${pScript.headline}` +
+      `\n${wrapAndIndent(`${pScript.description}`, lExplanationIndent)}\n\n`
+    }`;
+  }, `  ${chalk.green(figures.tick)} Run scripts added to '${pDestinationManifestFileName}':\n`);
 }
 
 module.exports = {
