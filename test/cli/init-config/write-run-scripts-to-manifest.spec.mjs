@@ -66,6 +66,8 @@ describe("cli/init-config/write-run-scripts-to-manifest - compile run script", (
       "depcruise:graph:dev",
       "depcruise:graph-archi",
       "depcruise:html",
+      "depcruise:text",
+      "depcruise:focus",
     ]);
   });
 });
