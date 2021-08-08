@@ -17,7 +17,7 @@ function resolveModule(
   const lModuleName = resolveHelpers.stripToModuleName(pModule.module);
   if (
     isRelativeModuleName(lModuleName) ||
-    ["cjs", "es6"].includes(pModule.moduleSystem)
+    ["cjs", "es6", "tsd"].includes(pModule.moduleSystem)
   ) {
     lReturnValue = resolveCommonJS(
       pModule.module,
