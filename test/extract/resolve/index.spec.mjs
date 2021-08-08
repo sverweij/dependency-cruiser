@@ -660,4 +660,56 @@ describe("extract/resolve/index", () => {
       resolved: "hashmark-after-this.js#this-is-extra",
     });
   });
+
+  it("resolves triple slash directives - local", () => {
+    process.chdir("test/extract/resolve/fixtures/triple-slash-directives");
+    expect(
+      resolve(
+        {
+          module: "./hello",
+          moduleSystem: "tsd",
+        },
+        process.cwd(),
+        process.cwd(),
+        normalizeResolveOptions(
+          {
+            bustTheCache: true,
+          },
+          {}
+        )
+      )
+    ).to.deep.equal({
+      coreModule: false,
+      couldNotResolve: false,
+      dependencyTypes: ["local"],
+      followable: true,
+      resolved: "hello.ts",
+    });
+  });
+
+  it("resolves triple slash directives - external", () => {
+    process.chdir("test/extract/resolve/fixtures/triple-slash-directives");
+    expect(
+      resolve(
+        {
+          module: "something",
+          moduleSystem: "tsd",
+        },
+        process.cwd(),
+        process.cwd(),
+        normalizeResolveOptions(
+          {
+            bustTheCache: true,
+          },
+          {}
+        )
+      )
+    ).to.deep.equal({
+      coreModule: false,
+      couldNotResolve: false,
+      dependencyTypes: ["npm"],
+      followable: true,
+      resolved: "node_modules/something/index.js",
+    });
+  });
 });

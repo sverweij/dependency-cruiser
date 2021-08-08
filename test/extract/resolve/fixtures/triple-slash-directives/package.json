@@ -1,0 +1,7 @@
+{
+  "name": "triple-slash-directives",
+  "version": "0.0.0",
+  "dependencies": {
+    "something": "4.8.1"
+  }
+}
