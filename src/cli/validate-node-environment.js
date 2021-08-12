@@ -1,4 +1,4 @@
-const semver = require("semver");
+const satisfies = require("semver/functions/satisfies.js");
 const { engines } = require("../../src/meta.js");
 
 module.exports = function validateNodeEnvironment(pNodeVersion) {
@@ -12,7 +12,7 @@ module.exports = function validateNodeEnvironment(pNodeVersion) {
 
 `;
 
-  if (!semver.satisfies(lNodeVersion, engines.node)) {
+  if (!satisfies(lNodeVersion, engines.node)) {
     throw new Error(VERSION_ERR);
   }
 };

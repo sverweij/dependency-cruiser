@@ -2,7 +2,7 @@
 // know about (local) module imports yet
 /* eslint-disable import/no-unresolved,node/no-missing-import */
 import { expect } from "chai";
-import semver from "semver";
+import satisfies from "semver/functions/satisfies.js";
 import dependencyCruiser from "dependency-cruiser";
 import extractBabelConfig from "dependency-cruiser/config-utl/extract-babel-config";
 import extractDepcruiseConfig from "dependency-cruiser/config-utl/extract-depcruise-config";
@@ -12,7 +12,7 @@ import extractWebpackResolveConfig from "dependency-cruiser/config-utl/extract-w
 /*
  * 'exports' in package.json only work in some of the latest node versions.
  */
-if (semver.satisfies(process.versions.node, "^12.19 || >=14.7")) {
+if (satisfies(process.versions.node, "^12.19 || >=14.7")) {
   describe("api from esm (on node ^12.19 || >= 14.7)", () => {
     it("exposes dependency-cruiser main with some functions", () => {
       expect(typeof dependencyCruiser).to.equal("object");
