@@ -34,6 +34,7 @@
         "pathNot": [
           "^src/(main|utl|config-utl)/",
           "^node_modules",
+          "^\\.yarn/cache",
           "^fs$",
           "^path$",
           "$1",
@@ -52,6 +53,7 @@
         "pathNot": [
           "$1",
           "^node_modules",
+          "^\\.yarn/cache",
           "^path$",
           "^src/meta\\.js$",
           "^src/graph-utl",
@@ -70,6 +72,7 @@
         "pathNot": [
           "$1",
           "^node_modules",
+          "^\\.yarn/cache",
           "^(path|fs|module)$",
           "^src/meta\\.js$",
           "^src/graph-utl",
@@ -91,7 +94,14 @@
       "comment": "This module in the bin/ folder depends on something not in the cli interface. This means it either contains code that doesn't belong in bin/, or the thing it depends upon should be put in the cli interface. ",
       "severity": "error",
       "from": { "path": "(^bin/)" },
-      "to": { "pathNot": ["^src/cli", "^node_modules", "^src/meta\\.js$"] }
+      "to": {
+        "pathNot": [
+          "^src/cli",
+          "^node_modules",
+          "^\\.yarn/cache",
+          "^src/meta\\.js$"
+        ]
+      }
     },
     {
       "name": "restrict-fs-access",
@@ -291,7 +301,7 @@
     "exoticRequireStrings": ["tryRequire"],
     "reporterOptions": {
       "archi": {
-        "collapsePattern": ["^(node_modules|src|test)/[^/]+", "^bin/"]
+        "collapsePattern": ["^(src|test)/[^/]+", "^bin/", "node_modules/[^/]+"]
       },
       "dot": {
         "filters": {
