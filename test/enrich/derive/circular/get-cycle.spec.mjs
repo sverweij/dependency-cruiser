@@ -77,9 +77,9 @@ describe("enrich/derive/circular/getCycle", () => {
     expect(getCycle(inputgraphs.TO_A_CIRCLE, "z", "a")).to.deep.equal([]);
   });
   it("it goes to a circle; isn't in it itself, but also to one where it is (z -> a -> b -> c -> a, c -> z)", () => {
-    expect(
-      getCycle(inputgraphs.TO_A_CIRCLE_AND_IN_IT, "z", "a")
-    ).to.deep.equal(["a", "b", "c", "z"]);
+    expect(getCycle(inputgraphs.TO_A_CIRCLE_AND_IN_IT, "z", "a")).to.deep.equal(
+      ["a", "b", "c", "z"]
+    );
   });
   it("just returns one cycle when querying a hub node", () => {
     expect(getCycle(inputgraphs.FLOWER, "a", "b")).to.deep.equal(["b", "a"]);

@@ -5,9 +5,10 @@ const stripSelfTransitions = require("../../graph-utl/strip-self-transitions");
 const moduleUtl = require("./module-utl");
 
 module.exports = (pResults, pTheme, pCollapsePattern) => {
-  return (pCollapsePattern
-    ? consolidateToPattern(pResults.modules, pCollapsePattern)
-    : pResults.modules
+  return (
+    pCollapsePattern
+      ? consolidateToPattern(pResults.modules, pCollapsePattern)
+      : pResults.modules
   )
     .sort(compare.modules)
     .map(moduleUtl.extractFirstTransgression)
