@@ -40,7 +40,7 @@ jobs:
           node --version
           rm -f .npmrc
           yarn set version berry
-          yarn
+          YARN_ENABLE_IMMUTABLE_INSTALLS=false yarn
         shell: bash
         env:
           CI: true
