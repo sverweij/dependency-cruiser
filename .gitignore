@@ -24,10 +24,15 @@ dependency-violations.html
 /node_modules/
 isolate-*-v8.log
 npm-debug.log
-yarn-error.log
 package-lock.json
-.pnp*
 dependency-cruiser-*.tgz
+
+# we're not actively on yarn but occasionally test stuff - shouldn't get committed accidentally
+.pnp*
+.yarn/
+.yarnrc.yml
+yarn-error.log
+yarn.lock
 
 # integration test intermediate files
 test/integration/*.testing-ground

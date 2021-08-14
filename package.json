@@ -208,6 +208,8 @@
     ]
   },
   "eslintIgnore": [
+    ".pnp.cjs",
+    ".yarn",
     "node_modules",
     "coverage",
     "tmp",
