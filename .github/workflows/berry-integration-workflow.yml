@@ -23,12 +23,14 @@ jobs:
       - name: checkout
         uses: actions/checkout@v1
       - name: cache external modules for ${{matrix.node-version}}@${{matrix.platform}}
-        uses: actions/cache@v1
+        uses: actions/cache@v2
         with:
-          path: .yarn/cache
+          path: |
+            .yarn
+            .yarnrc.yml
+            .pnp.js
+            yarn.lock
           key: ${{matrix.node-version}}@${{matrix.platform}}-build-${{hashFiles('package.json')}}
-          restore-keys: |
-            ${{matrix.node-version}}@${{matrix.platform}}-build-
       - name: set up node ${{matrix.node-version}}@${{matrix.platform}}
         uses: actions/setup-node@v1
         with:
@@ -36,6 +38,7 @@ jobs:
       - name: install & build
         run: |
           node --version
+          rm -f .npmrc
           yarn set version berry
           yarn
         shell: bash
