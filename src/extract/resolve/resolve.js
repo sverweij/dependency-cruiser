@@ -9,17 +9,16 @@ function init(pResolveOptions, pCachingContext) {
   if (!gInitialized[pCachingContext] || pResolveOptions.bustTheCache) {
     // assuming the cached file system here
     pResolveOptions.fileSystem.purge();
-    gResolvers[
-      pCachingContext
-    ] = enhancedResolve.ResolverFactory.createResolver({
-      ...pResolveOptions,
-      // we're doing that ourselves for now. We can't set this in
-      // 'normalize' because we actively use resolveOptions.symlinks
-      // with our own symlink resolution thing, so we need to override
-      // it here locally so even when it is passed as true we skip
-      // ehr's capabilities in this and still do it ourselves.
-      symlinks: false,
-    });
+    gResolvers[pCachingContext] =
+      enhancedResolve.ResolverFactory.createResolver({
+        ...pResolveOptions,
+        // we're doing that ourselves for now. We can't set this in
+        // 'normalize' because we actively use resolveOptions.symlinks
+        // with our own symlink resolution thing, so we need to override
+        // it here locally so even when it is passed as true we skip
+        // ehr's capabilities in this and still do it ourselves.
+        symlinks: false,
+      });
     /* eslint security/detect-object-injection:0 */
     gInitialized[pCachingContext] = true;
   }

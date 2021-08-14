@@ -38,9 +38,9 @@ function findModuleInPackageDependencies(
 }
 
 function needToLookAtTypesToo(pResolverModulePaths) {
-  return (
-    pResolverModulePaths || ["node_modules", "node_modules/@types"]
-  ).some((pPath) => pPath.includes("@types"));
+  return (pResolverModulePaths || ["node_modules", "node_modules/@types"]).some(
+    (pPath) => pPath.includes("@types")
+  );
 }
 
 function determineManifestDependencyTypes(

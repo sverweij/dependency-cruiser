@@ -109,9 +109,8 @@ module.exports.allExtensions = Object.keys(EXTENSION2WRAPPER).map(
  *
  * @type {string[]}
  */
-module.exports.scannableExtensions = Object.keys(EXTENSION2WRAPPER).filter(
-  extensionIsAvailable
-);
+module.exports.scannableExtensions =
+  Object.keys(EXTENSION2WRAPPER).filter(extensionIsAvailable);
 
 /**
  * returns an array of supported transpilers, whith for each transpiler:

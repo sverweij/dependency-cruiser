@@ -1,6 +1,7 @@
 const anonymizePathElement = require("./anonymize-path-element");
 
-const WHITELIST_RE = /^(|[.]+|~|bin|app|cli|src|configs?|components?|fixtures?|helpers?|i18n|index\.(jsx?|tsx?|vue|coffee|ls)|lib|_?_?mocks?_?_?|node_modules|packages?|package\.json|scripts?|services?|sources?|specs?|_?_?tests?_?_?|types?|uti?ls?)$/;
+const WHITELIST_RE =
+  /^(|[.]+|~|bin|app|cli|src|configs?|components?|fixtures?|helpers?|i18n|index\.(jsx?|tsx?|vue|coffee|ls)|lib|_?_?mocks?_?_?|node_modules|packages?|package\.json|scripts?|services?|sources?|specs?|_?_?tests?_?_?|types?|uti?ls?)$/;
 
 /**
  * Kind of smartly anonymizes paths, by

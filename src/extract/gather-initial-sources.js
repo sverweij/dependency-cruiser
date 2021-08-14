@@ -2,8 +2,8 @@ const fs = require("fs");
 const path = require("path");
 const glob = require("glob");
 const _get = require("lodash/get");
-const filenameMatchesPattern = require("../graph-utl/match-facade")
-  .filenameMatchesPattern;
+const filenameMatchesPattern =
+  require("../graph-utl/match-facade").filenameMatchesPattern;
 const pathToPosix = require("./utl/path-to-posix");
 const transpileMeta = require("./transpile/meta");
 
