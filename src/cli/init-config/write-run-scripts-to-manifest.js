@@ -70,7 +70,7 @@ function compileRunScripts(pInitOptions) {
       depcruise: `depcruise ${lSourceLocations} ${lTestLocations} --config`,
       "depcruise:graph": `depcruise ${lSourceLocations} --include-only '${lSourceLocationRE}' --config --output-type dot | dot -T svg | depcruise-wrap-stream-in-html > dependency-graph.html`,
       "depcruise:graph:dev": `depcruise ${lSourceLocations} --include-only '${lSourceLocationRE}' --prefix vscode://file/$(pwd)/ --config --output-type dot | dot -T svg | depcruise-wrap-stream-in-html | browser`,
-      "depcruise:graph-archi": `depcruise ${lSourceLocations} --include-only '${lSourceLocationRE}' --config --output-type archi | dot -T svg | depcruise-wrap-stream-in-html > high-level-dependency-graph.html`,
+      "depcruise:graph:archi": `depcruise ${lSourceLocations} --include-only '${lSourceLocationRE}' --config --output-type archi | dot -T svg | depcruise-wrap-stream-in-html > high-level-dependency-graph.html`,
       "depcruise:html": `depcruise ${lSourceLocations} ${lTestLocations} --progress --config --output-type err-html --output-to dependency-violation-report.html`,
       "depcruise:text": `depcruise ${lSourceLocations} ${lTestLocations} --progress --config --output-type text`,
       "depcruise:focus": `depcruise ${lSourceLocations} ${lTestLocations} --progress --config --output-type text --focus`,
