@@ -20,10 +20,16 @@ running `depcruise --info`.
 
 When it turns out they aren't yet:
 
+- if you're running dependency-cruiser as a local (development-)
+  dependency (**recommended!**), install the necessary transpilers there.
 - if you're running dependency-cruiser as a global install, install
   the necessary transpilers globally as well.
-- if you're running dependency-cruiser as a local (development-)
-  dependency, install the necessary transpilers there.
+- if you're running dependency-crusier with npx you can pass the necessary
+  compiler(s) with the `-p` option. E.g. to get a list of all incoming and
+  outgoing dependencies of a TypeScript file you could use this:
+  ```
+  npx -p typescript@4.3.5 -p dependency-cruiser@latest depcruise src -T text --focus src/main/index.ts
+  ```
 
 For some types of TypeScript dependencies you need to flip a switch,
 which is what the next question is about:
@@ -225,6 +231,13 @@ and ✖'s in the output should be a thing of the past.
 **A**: Rename your .dependency-cruiser.js to .dependency-cruiser.cjs
 
 > As of version 10.1.0 the `--init` generator automatically does this for you.
+
+### Q: Should I run dependency-cruiser as a global install, with npx or as as local development dependency?
+
+**A**: It's recommended to install dependency-cruiser as a local (development)
+dependency in your project, though. That way it will automatically use the same
+versions of compiler tooling as your project does, which will give the most
+reliable results.
 
 ## Features
 
