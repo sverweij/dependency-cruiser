@@ -77,7 +77,7 @@
     "depcruise:graph:doc": "npm-run-all depcruise:graph:doc:json --parallel depcruise:graph:doc:fmt-* depcruise:graph:doc:samples",
     "depcruise:graph:doc:json": "node ./bin/dependency-cruise.js bin src test --config --output-type json --output-to tmp_graph_deps.json --progress",
     "depcruise:graph:doc:fmt-detail": "./bin/depcruise-fmt.js -T dot -f - tmp_graph_deps.json | dot -T svg | tee doc/real-world-samples/dependency-cruiser-without-node_modules.svg | node bin/wrap-stream-in-html.js > docs/dependency-cruiser-dependency-graph.html",
-    "depcruise:graph:doc:fmt-archi": "./bin/depcruise-fmt.js -T archi -f - tmp_graph_deps.json | dot -T svg -Grankdir=TD | tee doc/real-world-samples/dependency-cruiser-archi-graph.svg | node bin/wrap-stream-in-html.js > docs/dependency-cruiser-archi-graph.html",
+    "depcruise:graph:doc:fmt-archi": "./bin/depcruise-fmt.js -T archi -f - tmp_graph_deps.json | dot -T svg -Gordering=in -Grankdir=TD | tee doc/real-world-samples/dependency-cruiser-archi-graph.svg | node bin/wrap-stream-in-html.js > docs/dependency-cruiser-archi-graph.html",
     "depcruise:graph:doc:fmt-dir": "./bin/depcruise-fmt.js -T ddot -f - tmp_graph_deps.json | dot -T svg -Grankdir=TD | tee doc/real-world-samples/dependency-cruiser-dir-graph.svg | node bin/wrap-stream-in-html.js > docs/dependency-cruiser-dir-graph.html",
     "depcruise:graph:doc:fmt-schema": "cd tools/schema && node ../../bin/dependency-cruise.js . --config --output-type dot | dot -T svg | tee ../overview.svg | node ../../bin/wrap-stream-in-html.js > ../../docs/schema-overview.html && cd -",
     "depcruise:graph:doc:fmt-types": "cd types && node ../bin/dependency-cruise.js . --ts-pre-compilation-deps --config --output-type dot | dot -T svg > overview.svg && cd -",
