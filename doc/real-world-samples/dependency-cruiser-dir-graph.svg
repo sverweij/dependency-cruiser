@@ -14,26 +14,6 @@
 <path fill="#ffffff" stroke="black" stroke-width="2" d="M20,-8C20,-8 1672,-8 1672,-8 1678,-8 1684,-14 1684,-20 1684,-20 1684,-319.8 1684,-319.8 1684,-325.8 1678,-331.8 1672,-331.8 1672,-331.8 20,-331.8 20,-331.8 14,-331.8 8,-325.8 8,-319.8 8,-319.8 8,-20 8,-20 8,-14 14,-8 20,-8"/>
 <text text-anchor="middle" x="846" y="-320.6" font-family="Helvetica,sans-Serif" font-weight="bold" font-size="9.00">src</text>
 </g>
-<g id="clust7" class="cluster">
-<title>cluster_src/extract</title>
-<path fill="#ffffff" stroke="black" stroke-width="2" d="M1358,-50C1358,-50 1640,-50 1640,-50 1646,-50 1652,-56 1652,-62 1652,-62 1652,-173.8 1652,-173.8 1652,-179.8 1646,-185.8 1640,-185.8 1640,-185.8 1358,-185.8 1358,-185.8 1352,-185.8 1346,-179.8 1346,-173.8 1346,-173.8 1346,-62 1346,-62 1346,-56 1352,-50 1358,-50"/>
-<text text-anchor="middle" x="1499" y="-174.6" font-family="Helvetica,sans-Serif" font-weight="bold" font-size="9.00">extract</text>
-</g>
-<g id="clust8" class="cluster">
-<title>cluster_src/extract/resolve</title>
-<path fill="#ffffff" stroke="black" stroke-width="2" d="M1494,-58C1494,-58 1552,-58 1552,-58 1558,-58 1564,-64 1564,-70 1564,-70 1564,-121.8 1564,-121.8 1564,-127.8 1558,-133.8 1552,-133.8 1552,-133.8 1494,-133.8 1494,-133.8 1488,-133.8 1482,-127.8 1482,-121.8 1482,-121.8 1482,-70 1482,-70 1482,-64 1488,-58 1494,-58"/>
-<text text-anchor="middle" x="1523" y="-122.6" font-family="Helvetica,sans-Serif" font-weight="bold" font-size="9.00">resolve</text>
-</g>
-<g id="clust9" class="cluster">
-<title>cluster_src/main</title>
-<path fill="#ffffff" stroke="black" stroke-width="2" d="M1096,-58C1096,-58 1326,-58 1326,-58 1332,-58 1338,-64 1338,-70 1338,-70 1338,-234.6 1338,-234.6 1338,-240.6 1332,-246.6 1326,-246.6 1326,-246.6 1096,-246.6 1096,-246.6 1090,-246.6 1084,-240.6 1084,-234.6 1084,-234.6 1084,-70 1084,-70 1084,-64 1090,-58 1096,-58"/>
-<text text-anchor="middle" x="1211" y="-235.4" font-family="Helvetica,sans-Serif" font-weight="bold" font-size="9.00">main</text>
-</g>
-<g id="clust10" class="cluster">
-<title>cluster_src/report</title>
-<path fill="#ffffff" stroke="black" stroke-width="2" d="M662,-16C662,-16 988,-16 988,-16 994,-16 1000,-22 1000,-28 1000,-28 1000,-121.8 1000,-121.8 1000,-127.8 994,-133.8 988,-133.8 988,-133.8 662,-133.8 662,-133.8 656,-133.8 650,-127.8 650,-121.8 650,-121.8 650,-28 650,-28 650,-22 656,-16 662,-16"/>
-<text text-anchor="middle" x="825" y="-122.6" font-family="Helvetica,sans-Serif" font-weight="bold" font-size="9.00">report</text>
-</g>
 <g id="clust2" class="cluster">
 <title>cluster_src/cli</title>
 <path fill="#ffffff" stroke="black" stroke-width="2" d="M28,-193.8C28,-193.8 337,-193.8 337,-193.8 343,-193.8 349,-199.8 349,-205.8 349,-205.8 349,-293.8 349,-293.8 349,-299.8 343,-305.8 337,-305.8 337,-305.8 28,-305.8 28,-305.8 22,-305.8 16,-299.8 16,-293.8 16,-293.8 16,-205.8 16,-205.8 16,-199.8 22,-193.8 28,-193.8"/>
@@ -58,6 +38,26 @@
 <title>cluster_src/enrich/derive</title>
 <path fill="#ffffff" stroke="black" stroke-width="2" d="M182,-65.2C182,-65.2 438,-65.2 438,-65.2 444,-65.2 450,-71.2 450,-77.2 450,-77.2 450,-129 450,-129 450,-135 444,-141 438,-141 438,-141 182,-141 182,-141 176,-141 170,-135 170,-129 170,-129 170,-77.2 170,-77.2 170,-71.2 176,-65.2 182,-65.2"/>
 <text text-anchor="middle" x="310" y="-129.8" font-family="Helvetica,sans-Serif" font-weight="bold" font-size="9.00">derive</text>
+</g>
+<g id="clust7" class="cluster">
+<title>cluster_src/extract</title>
+<path fill="#ffffff" stroke="black" stroke-width="2" d="M1358,-50C1358,-50 1640,-50 1640,-50 1646,-50 1652,-56 1652,-62 1652,-62 1652,-173.8 1652,-173.8 1652,-179.8 1646,-185.8 1640,-185.8 1640,-185.8 1358,-185.8 1358,-185.8 1352,-185.8 1346,-179.8 1346,-173.8 1346,-173.8 1346,-62 1346,-62 1346,-56 1352,-50 1358,-50"/>
+<text text-anchor="middle" x="1499" y="-174.6" font-family="Helvetica,sans-Serif" font-weight="bold" font-size="9.00">extract</text>
+</g>
+<g id="clust8" class="cluster">
+<title>cluster_src/extract/resolve</title>
+<path fill="#ffffff" stroke="black" stroke-width="2" d="M1494,-58C1494,-58 1552,-58 1552,-58 1558,-58 1564,-64 1564,-70 1564,-70 1564,-121.8 1564,-121.8 1564,-127.8 1558,-133.8 1552,-133.8 1552,-133.8 1494,-133.8 1494,-133.8 1488,-133.8 1482,-127.8 1482,-121.8 1482,-121.8 1482,-70 1482,-70 1482,-64 1488,-58 1494,-58"/>
+<text text-anchor="middle" x="1523" y="-122.6" font-family="Helvetica,sans-Serif" font-weight="bold" font-size="9.00">resolve</text>
+</g>
+<g id="clust9" class="cluster">
+<title>cluster_src/main</title>
+<path fill="#ffffff" stroke="black" stroke-width="2" d="M1096,-58C1096,-58 1326,-58 1326,-58 1332,-58 1338,-64 1338,-70 1338,-70 1338,-234.6 1338,-234.6 1338,-240.6 1332,-246.6 1326,-246.6 1326,-246.6 1096,-246.6 1096,-246.6 1090,-246.6 1084,-240.6 1084,-234.6 1084,-234.6 1084,-70 1084,-70 1084,-64 1090,-58 1096,-58"/>
+<text text-anchor="middle" x="1211" y="-235.4" font-family="Helvetica,sans-Serif" font-weight="bold" font-size="9.00">main</text>
+</g>
+<g id="clust10" class="cluster">
+<title>cluster_src/report</title>
+<path fill="#ffffff" stroke="black" stroke-width="2" d="M662,-16C662,-16 988,-16 988,-16 994,-16 1000,-22 1000,-28 1000,-28 1000,-121.8 1000,-121.8 1000,-127.8 994,-133.8 988,-133.8 988,-133.8 662,-133.8 662,-133.8 656,-133.8 650,-127.8 650,-121.8 650,-121.8 650,-28 650,-28 650,-22 656,-16 662,-16"/>
+<text text-anchor="middle" x="825" y="-122.6" font-family="Helvetica,sans-Serif" font-weight="bold" font-size="9.00">report</text>
 </g>
 <!-- bin -->
 <g id="node1" class="node">

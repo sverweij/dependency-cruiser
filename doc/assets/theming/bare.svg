@@ -19,16 +19,6 @@
 <polygon fill="none" stroke="black" points="16,-16 16,-332 716,-332 716,-16 16,-16"/>
 <text text-anchor="middle" x="366" y="-316.8" font-family="Times,serif" font-size="14.00">main</text>
 </g>
-<g id="clust3" class="cluster">
-<title>cluster_src/main/files&#45;and&#45;dirs</title>
-<polygon fill="none" stroke="black" points="24,-182 24,-257 150,-257 150,-182 24,-182"/>
-<text text-anchor="middle" x="87" y="-241.8" font-family="Times,serif" font-size="14.00">files&#45;and&#45;dirs</text>
-</g>
-<g id="clust4" class="cluster">
-<title>cluster_src/main/options</title>
-<polygon fill="none" stroke="black" points="127,-24 127,-174 367,-174 367,-24 127,-24"/>
-<text text-anchor="middle" x="247" y="-158.8" font-family="Times,serif" font-size="14.00">options</text>
-</g>
 <g id="clust5" class="cluster">
 <title>cluster_src/main/resolve&#45;options</title>
 <polygon fill="none" stroke="black" points="334,-182 334,-257 460,-257 460,-182 334,-182"/>
@@ -43,6 +33,16 @@
 <title>cluster_src/main/utl</title>
 <polygon fill="none" stroke="black" points="443,-24 443,-99 669,-99 669,-24 443,-24"/>
 <text text-anchor="middle" x="556" y="-83.8" font-family="Times,serif" font-size="14.00">utl</text>
+</g>
+<g id="clust4" class="cluster">
+<title>cluster_src/main/options</title>
+<polygon fill="none" stroke="black" points="127,-24 127,-174 367,-174 367,-24 127,-24"/>
+<text text-anchor="middle" x="247" y="-158.8" font-family="Times,serif" font-size="14.00">options</text>
+</g>
+<g id="clust3" class="cluster">
+<title>cluster_src/main/files&#45;and&#45;dirs</title>
+<polygon fill="none" stroke="black" points="24,-182 24,-257 150,-257 150,-182 24,-182"/>
+<text text-anchor="middle" x="87" y="-241.8" font-family="Times,serif" font-size="14.00">files&#45;and&#45;dirs</text>
 </g>
 <!-- src/main/files&#45;and&#45;dirs/normalize.js -->
 <g id="node1" class="node">
