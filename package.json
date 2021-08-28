@@ -137,28 +137,28 @@
     "chalk": "4.1.2",
     "commander": "8.1.0",
     "enhanced-resolve": "5.8.2",
-    "figures": "3.2.0",
-    "get-stream": "6.0.1",
+    "figures": "^3.2.0",
+    "get-stream": "^6.0.1",
     "glob": "7.1.7",
     "handlebars": "4.7.7",
-    "indent-string": "4.0.0",
+    "indent-string": "^4.0.0",
     "inquirer": "8.1.2",
     "json5": "2.2.0",
     "lodash": "4.17.21",
     "safe-regex": "2.1.1",
-    "semver": "7.3.5",
-    "semver-try-require": "5.0.1",
+    "semver": "^7.3.5",
+    "semver-try-require": "^5.0.1",
     "teamcity-service-messages": "0.1.11",
     "tsconfig-paths-webpack-plugin": "3.5.1",
-    "wrap-ansi": "7.0.0"
+    "wrap-ansi": "^7.0.0"
   },
   "devDependencies": {
     "@babel/core": "7.15.0",
     "@babel/plugin-transform-modules-commonjs": "7.15.0",
     "@babel/preset-typescript": "7.15.0",
-    "@swc/core": "1.2.80",
-    "@typescript-eslint/eslint-plugin": "4.29.2",
-    "@typescript-eslint/parser": "4.29.2",
+    "@swc/core": "1.2.83",
+    "@typescript-eslint/eslint-plugin": "4.29.3",
+    "@typescript-eslint/parser": "4.29.3",
     "c8": "7.8.0",
     "chai": "4.3.4",
     "chai-json-schema": "1.5.1",
@@ -167,42 +167,46 @@
     "eslint-config-moving-meadow": "2.0.9",
     "eslint-config-prettier": "8.3.0",
     "eslint-plugin-budapestian": "2.3.0",
-    "eslint-plugin-import": "2.24.1",
+    "eslint-plugin-import": "2.24.2",
     "eslint-plugin-mocha": "9.0.0",
     "eslint-plugin-node": "11.1.0",
     "eslint-plugin-security": "1.4.0",
     "eslint-plugin-unicorn": "35.0.0",
-    "husky": "4.3.0",
+    "husky": "^4.3.8",
     "intercept-stdout": "0.1.2",
     "lint-staged": "11.1.2",
-    "mocha": "9.1.0",
+    "mocha": "9.1.1",
     "normalize-newline": "4.1.0",
     "npm-run-all": "4.1.5",
     "prettier": "2.3.2",
     "shx": "0.3.3",
-    "svelte": "3.42.2",
+    "svelte": "3.42.4",
     "symlink-dir": "5.0.1",
-    "typescript": "4.3.5",
-    "upem": "6.0.0",
+    "typescript": "4.4.2",
+    "upem": "^7.0.0",
     "vue-template-compiler": "2.6.14",
     "yarn": "1.22.11"
   },
   "upem": {
-    "donotup": [
+    "policies": [
       {
         "package": "figures",
+        "policy": "wanted",
         "because": "version 4 only exports ejs - and we use cjs and don't transpile"
       },
       {
         "package": "husky",
+        "policy": "wanted",
         "because": "https://github.com/typicode/husky/issues/822"
       },
       {
         "package": "indent-string",
+        "policy": "wanted",
         "because": "version 5 only exports ejs - and we use cjs and don't transpile"
       },
       {
         "package": "wrap-ansi",
+        "policy": "wanted",
         "because": "version 8 only exports ejs - and we use cjs and don't transpile"
       }
     ]
