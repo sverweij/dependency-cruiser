@@ -24,6 +24,11 @@
 <path fill="transparent" stroke="white" stroke-width="2" d="M115.5,-24C115.5,-24 172.5,-24 172.5,-24 178.5,-24 184.5,-30 184.5,-36 184.5,-36 184.5,-64 184.5,-64 184.5,-70 178.5,-76 172.5,-76 172.5,-76 115.5,-76 115.5,-76 109.5,-76 103.5,-70 103.5,-64 103.5,-64 103.5,-36 103.5,-36 103.5,-30 109.5,-24 115.5,-24"/>
 <text text-anchor="middle" x="144" y="-64.8" font-family="Helvetica,sans-Serif" font-weight="bold" font-size="9.00" fill="white">files&#45;and&#45;dirs</text>
 </g>
+<g id="clust4" class="cluster">
+<title>cluster_src/main/options</title>
+<path fill="transparent" stroke="white" stroke-width="2" d="M222.5,-77C222.5,-77 383.5,-77 383.5,-77 389.5,-77 395.5,-83 395.5,-89 395.5,-89 395.5,-147 395.5,-147 395.5,-153 389.5,-159 383.5,-159 383.5,-159 222.5,-159 222.5,-159 216.5,-159 210.5,-153 210.5,-147 210.5,-147 210.5,-89 210.5,-89 210.5,-83 216.5,-77 222.5,-77"/>
+<text text-anchor="middle" x="303" y="-147.8" font-family="Helvetica,sans-Serif" font-weight="bold" font-size="9.00" fill="white">options</text>
+</g>
 <g id="clust5" class="cluster">
 <title>cluster_src/main/resolve&#45;options</title>
 <path fill="transparent" stroke="white" stroke-width="2" d="M114.5,-138C114.5,-138 174.5,-138 174.5,-138 180.5,-138 186.5,-144 186.5,-150 186.5,-150 186.5,-178 186.5,-178 186.5,-184 180.5,-190 174.5,-190 174.5,-190 114.5,-190 114.5,-190 108.5,-190 102.5,-184 102.5,-178 102.5,-178 102.5,-150 102.5,-150 102.5,-144 108.5,-138 114.5,-138"/>
@@ -38,11 +43,6 @@
 <title>cluster_src/main/utl</title>
 <path fill="transparent" stroke="white" stroke-width="2" d="M303.5,-202C303.5,-202 414.5,-202 414.5,-202 420.5,-202 426.5,-208 426.5,-214 426.5,-214 426.5,-242 426.5,-242 426.5,-248 420.5,-254 414.5,-254 414.5,-254 303.5,-254 303.5,-254 297.5,-254 291.5,-248 291.5,-242 291.5,-242 291.5,-214 291.5,-214 291.5,-208 297.5,-202 303.5,-202"/>
 <text text-anchor="middle" x="359" y="-242.8" font-family="Helvetica,sans-Serif" font-weight="bold" font-size="9.00" fill="white">utl</text>
-</g>
-<g id="clust4" class="cluster">
-<title>cluster_src/main/options</title>
-<path fill="transparent" stroke="white" stroke-width="2" d="M222.5,-77C222.5,-77 383.5,-77 383.5,-77 389.5,-77 395.5,-83 395.5,-89 395.5,-89 395.5,-147 395.5,-147 395.5,-153 389.5,-159 383.5,-159 383.5,-159 222.5,-159 222.5,-159 216.5,-159 210.5,-153 210.5,-147 210.5,-147 210.5,-89 210.5,-89 210.5,-83 216.5,-77 222.5,-77"/>
-<text text-anchor="middle" x="303" y="-147.8" font-family="Helvetica,sans-Serif" font-weight="bold" font-size="9.00" fill="white">options</text>
 </g>
 <!-- src/main/files&#45;and&#45;dirs/normalize.js -->
 <g id="node1" class="node">
