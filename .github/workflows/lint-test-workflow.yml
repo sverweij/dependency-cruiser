@@ -38,6 +38,7 @@ jobs:
       - name: install & build
         run: |
           node --version
+          npm install upem@6
           npm install
           npm run build
         shell: bash
