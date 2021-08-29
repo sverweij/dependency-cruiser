@@ -73,6 +73,7 @@ after(() => {
 describe("extract/getDependencies - CommonJS - ", () => {
   cjsFixtures.forEach((pFixture) => runFixture(pFixture, "acorn"));
   cjsFixtures.forEach((pFixture) => runFixture(pFixture, "swc"));
+  cjsFixtures.forEach((pFixture) => runFixture(pFixture, "tsc"));
 });
 describe("extract/getDependencies - CommonJS - with bangs", () => {
   it("strips the inline loader prefix from the module name when resolving", () => {
@@ -172,10 +173,14 @@ describe("extract/getDependencies - AMD - with bangs", () => {
   });
 });
 
-describe("extract/getDependencies - TypeScript - ", () =>
-  tsFixtures.forEach((pFixture) => runFixture(pFixture)));
-describe("extract/getDependencies - CoffeeScript - ", () =>
-  coffeeFixtures.forEach((pFixture) => runFixture(pFixture)));
+describe("extract/getDependencies - TypeScript - ", () => {
+  tsFixtures.forEach((pFixture) => runFixture(pFixture, "acorn"));
+  tsFixtures.forEach((pFixture) => runFixture(pFixture, "swc"));
+  tsFixtures.forEach((pFixture) => runFixture(pFixture, "tsc"));
+});
+describe("extract/getDependencies - CoffeeScript - ", () => {
+  coffeeFixtures.forEach((pFixture) => runFixture(pFixture));
+});
 
 describe("extract/getDependencies - Error scenarios - ", () => {
   it("Does not raise an exception on syntax errors (because we're on the loose parser)", () => {

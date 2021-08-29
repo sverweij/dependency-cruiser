@@ -1189,8 +1189,12 @@ to `true`.
 
 ### `parser`
 
-This _EXPERIMENTAL_ feature enables you to specify whether to use the `acorn`
-parser dependency-cruiser uses by default or the faster and smaller (but slightly
-less) feature rich `swc` parser. This only works when `@core/swc` is installed
-in the same spot as dependency-cruiser is (it's not (yet?) bundled as a
-dependency).
+With this _EXPERIMENTAL_ feature you can specify which parser you want to use
+as the primary parser: the `acorn` one, which handles all things javascript
+(commonjs, es-modules, jsx), or one of two parser that can in addition parse
+typescript; microsoft's `tsc` or the faster and smaller (but slightly less
+feature rich) `swc`.
+
+`swc` and `tsc` only work when the compilers (respectivley `@core/swc` and
+`typescript`) are installed in the same spot as dependency-cruiser is. They're
+not bundled with dependency-cruiser.
