@@ -28,21 +28,25 @@ function extractFromTypeScriptAST(pOptions, pFileName) {
   );
 }
 
-function shouldUseTSC(pOptions, pFileName) {
-  return (
-    toTypescriptAST.isAvailable() &&
-    path.extname(pFileName).startsWith(".ts") &&
-    pOptions.tsPreCompilationDeps
+function isTypeScriptCompatible(pFileName) {
+  return [".ts", ".tsx", ".js", ".mjs", ".cjs"].includes(
+    path.extname(pFileName)
   );
 }
 
-function isSwcAble(pFileName) {
-  return [".ts", ".js", ".mjs", ".cjs"].includes(path.extname(pFileName));
+function shouldUseTsc(pOptions, pFileName) {
+  return (
+    (pOptions.tsPreCompilationDeps || pOptions.parser === "tsc") &&
+    toTypescriptAST.isAvailable() &&
+    isTypeScriptCompatible(pFileName)
+  );
 }
 
 function shouldUseSwc(pOptions, pFileName) {
   return (
-    pOptions.parser === "swc" && toSwcAST.isAvailable() && isSwcAble(pFileName)
+    pOptions.parser === "swc" &&
+    toSwcAST.isAvailable() &&
+    isTypeScriptCompatible(pFileName)
   );
 }
 
@@ -73,11 +77,12 @@ function extractFromJavaScriptAST(pOptions, pFileName, pTranspileOptions) {
 
 function extractDependencies(pCruiseOptions, pFileName, pTranspileOptions) {
   let lDependencies = [];
+
   if (shouldUseSwc(pCruiseOptions, pFileName)) {
     lDependencies = extractFromSwcAST(pCruiseOptions, pFileName).filter(
       (pDep) => pCruiseOptions.moduleSystems.includes(pDep.moduleSystem)
     );
-  } else if (shouldUseTSC(pCruiseOptions, pFileName)) {
+  } else if (shouldUseTsc(pCruiseOptions, pFileName)) {
     lDependencies = extractFromTypeScriptAST(pCruiseOptions, pFileName).filter(
       (pDep) => pCruiseOptions.moduleSystems.includes(pDep.moduleSystem)
     );

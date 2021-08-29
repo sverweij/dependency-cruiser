@@ -30,7 +30,6 @@ function getASTFromSource(pTypescriptSource, pFileName) {
  * @return {object} - a (typescript) AST
  */
 function getAST(pFileName) {
-  // reading files is kind of the point, so disabled that check here...
   return getASTFromSource(fs.readFileSync(pFileName, "utf8"), pFileName);
 }
 
