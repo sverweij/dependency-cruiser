@@ -144,14 +144,14 @@ function determineExternalModuleDependencyTypes(
 /* eslint max-params:0, complexity:0 */
 /**
  *
- * @param {any} pDependency the dependency object with all information found hitherto
+ * @param {import("../../../types/cruise-result").IModule} pModule the dependency object with all information found hitherto
  * @param {string} pModuleName the module name as found in the source
  * @param {any} pManifest a package.json, in object format
  * @param {string} pFileDirectory the directory relative to which to resolve (only used for npm deps here)
  * @param {any} pResolveOptions an enhanced resolve 'resolve' key
  * @param {string} pBaseDirectory the base directory dependency cruise is run on
  *
- * @return {string[]} an array of dependency types for the dependency
+ * @return {import("../../../types/shared-types").DependencyType[]} an array of dependency types for the dependency
  */
 module.exports = function determineDependencyTypes(
   pModule,
@@ -161,8 +161,8 @@ module.exports = function determineDependencyTypes(
   pResolveOptions,
   pBaseDirectory
 ) {
+  /** @type {import("../../../types/shared-types").DependencyType[]}*/
   let lReturnValue = ["undetermined"];
-
   pResolveOptions = pResolveOptions || {};
 
   if (pModule.couldNotResolve) {
