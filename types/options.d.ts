@@ -115,6 +115,14 @@ export interface ICruiseOptions {
    */
   tsPreCompilationDeps?: boolean | "specify";
   /**
+   * List of extensions to scan _in addition_ to the extensions already
+   * covered by any available parser. Dependency-cruiser will consider files
+   * ending in these extensions but it will _not_ examine its content or
+   * derive any of their dependencies
+   * Sample value: [".jpg", ".png", ".json"]
+   */
+  extraExtensionsToScan?: string[];
+  /**
    * if true leave symlinks untouched, otherwise use the realpath.
    * Defaults to `false` (which is also nodejs's default behavior
    * since version 6)

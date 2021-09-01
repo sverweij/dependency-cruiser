@@ -119,6 +119,18 @@ export default {
             },
           ],
         },
+        extraExtensionsToScan: {
+          type: "array",
+          description:
+            "List of extensions to scan _in addition_ to the extensions already " +
+            "covered by any available parser. Dependency-cruiser will consider " +
+            "files ending in these extensions but it will _not_ examine its content " +
+            "or derive any of their dependencies " +
+            'Sample value: [".jpg", ".png", ".json"]',
+          items: {
+            type: "string",
+          },
+        },
         externalModuleResolutionStrategy: {
           type: "string",
           description:
