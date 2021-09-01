@@ -7,7 +7,16 @@ const filenameMatchesPattern =
 const pathToPosix = require("./utl/path-to-posix");
 const transpileMeta = require("./transpile/meta");
 
-const SUPPORTED_EXTENSIONS = transpileMeta.scannableExtensions;
+/**
+ *
+ * @param {import('../../types/options').ICruiseOptions} pOptions
+ * @returns {string[]}
+ */
+function getScannableExtensions(pOptions) {
+  return transpileMeta.scannableExtensions.concat(
+    _get(pOptions, "extraExtensionsToScan", [])
+  );
+}
 
 function shouldBeIncluded(pFullPathToFile, pOptions) {
   return (
@@ -25,6 +34,12 @@ function shouldNotBeExcluded(pFullPathToFile, pOptions) {
   );
 }
 
+/**
+ *
+ * @param {string} pDirectoryName
+ * @param  {import('../../types/options').ICruiseOptions} pOptions options that
+ * @returns {string[]}
+ */
 function gatherScannableFilesFromDirectory(pDirectoryName, pOptions) {
   return fs
     .readdirSync(path.join(pOptions.baseDir, pDirectoryName))
@@ -45,7 +60,7 @@ function gatherScannableFilesFromDirectory(pDirectoryName, pOptions) {
         );
       }
       if (
-        SUPPORTED_EXTENSIONS.some((pExtension) =>
+        getScannableExtensions(pOptions).some((pExtension) =>
           pFullPathToFile.endsWith(pExtension)
         )
       ) {
@@ -67,15 +82,19 @@ function gatherScannableFilesFromDirectory(pDirectoryName, pOptions) {
  * Files and directories are assumed to be either absolute, or relative to the
  * current working directory.
  *
- * @param  {array} pFileAndDirectoryArray an array of strings, representing globs and/ or
- *                               paths to files or directories to be gathered
- * @param  {object} pOptions     (optional) object with attributes
+ * @param  {string[]} pFileAndDirectoryArray globs and/ or paths to files or
+ *                               directories to be gathered
+ * @param  {import('../../types/options').ICruiseOptions} pOptions options that
+ *                               influence what needs to be gathered/ scanned
+ *                               notably useful attributes:
  *                               - exclude - regexp of what to exclude
- *                               - includeOnly - regexp what to exclude
- * @return {array}               an array of strings, representing paths to
- *                               files to be gathered.
+ *                               - includeOnly - regexp what to include
+ * @return {string[]}            paths to files to be gathered.
  */
-module.exports = (pFileAndDirectoryArray, pOptions) => {
+module.exports = function gatherInitialSources(
+  pFileAndDirectoryArray,
+  pOptions
+) {
   const lOptions = { baseDir: process.cwd(), ...pOptions };
 
   return pFileAndDirectoryArray
