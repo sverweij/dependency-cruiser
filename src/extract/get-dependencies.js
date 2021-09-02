@@ -75,30 +75,43 @@ function extractFromJavaScriptAST(pOptions, pFileName, pTranspileOptions) {
   return lDependencies;
 }
 
+/**
+ *
+ * @param {import('../../types/options').ICruiseOptions} pCruiseOptions
+ * @param {string} pFileName
+ * @param {any} pTranspileOptions
+ * @returns {Partial<import('../../types/cruise-result').IDependency[]>}
+ */
 function extractDependencies(pCruiseOptions, pFileName, pTranspileOptions) {
+  /** @type Partial<import('../../types/cruise-result').IDependency[]> */
   let lDependencies = [];
 
-  if (shouldUseSwc(pCruiseOptions, pFileName)) {
-    lDependencies = extractFromSwcAST(pCruiseOptions, pFileName).filter(
-      (pDep) => pCruiseOptions.moduleSystems.includes(pDep.moduleSystem)
-    );
-  } else if (shouldUseTsc(pCruiseOptions, pFileName)) {
-    lDependencies = extractFromTypeScriptAST(pCruiseOptions, pFileName).filter(
-      (pDep) => pCruiseOptions.moduleSystems.includes(pDep.moduleSystem)
-    );
+  if (!pCruiseOptions.extraExtensionsToScan.includes(path.extname(pFileName))) {
+    if (shouldUseSwc(pCruiseOptions, pFileName)) {
+      lDependencies = extractFromSwcAST(pCruiseOptions, pFileName).filter(
+        (pDep) => pCruiseOptions.moduleSystems.includes(pDep.moduleSystem)
+      );
+    } else if (shouldUseTsc(pCruiseOptions, pFileName)) {
+      lDependencies = extractFromTypeScriptAST(
+        pCruiseOptions,
+        pFileName
+      ).filter((pDep) =>
+        pCruiseOptions.moduleSystems.includes(pDep.moduleSystem)
+      );
 
-    if (pCruiseOptions.tsPreCompilationDeps === "specify") {
-      lDependencies = detectPreCompilationNess(
-        lDependencies,
-        extractFromJavaScriptAST(pCruiseOptions, pFileName, pTranspileOptions)
+      if (pCruiseOptions.tsPreCompilationDeps === "specify") {
+        lDependencies = detectPreCompilationNess(
+          lDependencies,
+          extractFromJavaScriptAST(pCruiseOptions, pFileName, pTranspileOptions)
+        );
+      }
+    } else {
+      lDependencies = extractFromJavaScriptAST(
+        pCruiseOptions,
+        pFileName,
+        pTranspileOptions
       );
     }
-  } else {
-    lDependencies = extractFromJavaScriptAST(
-      pCruiseOptions,
-      pFileName,
-      pTranspileOptions
-    );
   }
 
   return lDependencies.map((pDependency) => ({

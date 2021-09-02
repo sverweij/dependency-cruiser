@@ -14,7 +14,7 @@ const transpileMeta = require("./transpile/meta");
  */
 function getScannableExtensions(pOptions) {
   return transpileMeta.scannableExtensions.concat(
-    _get(pOptions, "extraExtensionsToScan", [])
+    pOptions.extraExtensionsToScan
   );
 }
 
