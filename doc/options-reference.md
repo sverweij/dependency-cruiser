@@ -24,6 +24,7 @@
   - [preserveSymlinks](#preservesymlinks)
   - [mono repo behaviour - combinedDependencies](#mono-repo-behaviour---combinedDependencies)
   - [exotic ways to require modules - exoticRequireStrings](#exotic-ways-to-require-modules---exoticrequirestrings)
+  - [extraExtensionsToScan](#extraextensionstoscan)
   - [enhancedResolveOptions](#enhancedresolveoptions)
   - [forceDeriveDependents](#forcederivedependents)
   - [parser](#parser)
@@ -1094,6 +1095,29 @@ E.g.:
   "exoticRequireStrings": ["want", "tryRequire", "window.require"]
 }
 ```
+
+### extraExtensionsToScan
+
+The first step dependency-cruiser takes is to scan files and folders matching
+the arguments you passed it for files it can parse - typically TypeScript or
+JavaScript sources. Only in a next step it considers other file types, like
+when you include a picture from a `.jsx`. This approach means dependency-cruiser
+only finds these file types when they're reachable from parseable file types.
+
+If you want to run orphan or reachability rules against these file types, however
+you might want include them in the first scan already. To do so you can pass
+their extensions in an `extraExtensionsToScan` array, like so:
+
+```json
+"options": {
+  "extraExtensionsToScan": [".json", ".jpg", ".webp", ".png"]
+}
+```
+
+> dependency-cruiser will take special care not to even _read_ these files as
+> it can't parse them anyway, and skipping them saves (sometimes a lot) of
+> time. This also means that if you put an extension in the extra extensions
+> to scan dependency-cruiser _could_ have had parsed it won't.
 
 ### enhancedResolveOptions
 
