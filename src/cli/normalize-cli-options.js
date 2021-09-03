@@ -7,7 +7,7 @@ const _clone = require("lodash/clone");
 const loadConfig = require("../config-utl/extract-depcruise-config");
 const defaults = require("./defaults");
 
-const KNOWN_DEPCRUISE_OPTIONS = [
+const KNOWN_DEPCRUISE_CLI_OPTIONS = [
   "babelConfig",
   "baseDir",
   "collapse",
@@ -16,6 +16,7 @@ const KNOWN_DEPCRUISE_OPTIONS = [
   "exclude",
   "focus",
   "help",
+  "ignoreKnown",
   "includeOnly",
   "info",
   "init",
@@ -53,20 +54,20 @@ function isKnownCLIOption(pKnownOptions) {
  * originating from commander) that are not functional dependency-cruiser
  * options so a clean object can be passed through to the main function
  *
- * @param {any} pOptions - an options object e.g. as output from commander
+ * @param {any} pCliOptions - an options object e.g. as output from commander
  * @returns {ICruiseOptions} - an options object that only contains stuff we care about
  */
-function ejectNonCLIOptions(pOptions, pKnownOptions) {
-  return Object.keys(pOptions)
-    .filter(isKnownCLIOption(pKnownOptions))
+function ejectNonCLIOptions(pCliOptions, pKnownCliOptions) {
+  return Object.keys(pCliOptions)
+    .filter(isKnownCLIOption(pKnownCliOptions))
     .reduce((pAll, pKey) => {
-      pAll[pKey] = pOptions[pKey];
+      pAll[pKey] = pCliOptions[pKey];
       return pAll;
     }, {});
 }
 
-function normalizeConfigFile(pOptions, pConfigWrapperName, pDefault) {
-  let lOptions = _clone(pOptions);
+function normalizeConfigFileName(pCliOptions, pConfigWrapperName, pDefault) {
+  let lOptions = _clone(pCliOptions);
 
   if (_has(lOptions, pConfigWrapperName)) {
     _set(
@@ -134,9 +135,37 @@ function validateAndNormalizeRulesFileName(pValidate) {
   return lReturnValue;
 }
 
-function normalizeValidationOptions(pOptions) {
-  if (_has(pOptions, "validate")) {
-    const rulesFile = validateAndNormalizeRulesFileName(pOptions.validate);
+function validateAndGetKnownViolationsFileName(pKnownViolations) {
+  const lKnownViolationsFileName =
+    typeof pKnownViolations === "string"
+      ? pKnownViolations
+      : defaults.DEFAULT_BASELINE_FILE_NAME;
+
+  if (fileExists(lKnownViolationsFileName)) {
+    return lKnownViolationsFileName;
+  } else {
+    throw new Error(
+      `Can't open '${lKnownViolationsFileName}' for reading. Does it exist?\n` +
+        `         (You can create a .dependency-cruiser-known-violations.json with --output-type baseline)\n`
+    );
+  }
+}
+
+function normalizeKnownViolationsOption(pCliOptions) {
+  if (_has(pCliOptions, "ignoreKnown")) {
+    const lReturnValue = {
+      knownViolationsFile: validateAndGetKnownViolationsFileName(
+        pCliOptions.ignoreKnown
+      ),
+    };
+    return lReturnValue;
+  }
+  return {};
+}
+
+function normalizeValidationOption(pCliOptions) {
+  if (_has(pCliOptions, "validate")) {
+    const rulesFile = validateAndNormalizeRulesFileName(pCliOptions.validate);
     return {
       rulesFile,
       ruleSet: loadConfig(
@@ -151,11 +180,11 @@ function normalizeValidationOptions(pOptions) {
   }
 }
 
-function normalizeProgress(pOptions) {
+function normalizeProgress(pCliOptions) {
   let lProgress = null;
 
-  if (_has(pOptions, "progress")) {
-    lProgress = _get(pOptions, "progress");
+  if (_has(pCliOptions, "progress")) {
+    lProgress = _get(pCliOptions, "progress");
     if (lProgress === true) {
       lProgress = "cli-feedback";
     }
@@ -164,20 +193,21 @@ function normalizeProgress(pOptions) {
 }
 
 /**
- * returns the pOptions, so that the returned value contains a
+ * returns the pOptionsAsPassedFromCommander, so that the returned value contains a
  * valid value for each possible option
  *
  * @param  {object} pOptionsAsPassedFromCommander [description]
+ * @param {any} pKnownCliOptions [description]
  * @return {object}          [description]
  */
 module.exports = function normalizeOptions(
   pOptionsAsPassedFromCommander,
-  pKnownOptions = KNOWN_DEPCRUISE_OPTIONS
+  pKnownCliOptions = KNOWN_DEPCRUISE_CLI_OPTIONS
 ) {
   let lOptions = {
     outputTo: defaults.OUTPUT_TO,
     outputType: defaults.OUTPUT_TYPE,
-    ...ejectNonCLIOptions(pOptionsAsPassedFromCommander, pKnownOptions),
+    ...ejectNonCLIOptions(pOptionsAsPassedFromCommander, pKnownCliOptions),
   };
 
   if (_has(lOptions, "moduleSystems")) {
@@ -190,20 +220,21 @@ module.exports = function normalizeOptions(
     lOptions.validate = lOptions.config;
   }
 
-  lOptions = { ...lOptions, ...normalizeValidationOptions(lOptions) };
+  lOptions = { ...lOptions, ...normalizeValidationOption(lOptions) };
   lOptions = { ...lOptions, ...normalizeProgress(lOptions) };
+  lOptions = { ...lOptions, ...normalizeKnownViolationsOption(lOptions) };
 
-  lOptions = normalizeConfigFile(
+  lOptions = normalizeConfigFileName(
     lOptions,
     "webpackConfig",
     defaults.WEBPACK_CONFIG
   );
-  lOptions = normalizeConfigFile(
+  lOptions = normalizeConfigFileName(
     lOptions,
     "tsConfig",
     defaults.TYPESCRIPT_CONFIG
   );
-  lOptions = normalizeConfigFile(
+  lOptions = normalizeConfigFileName(
     lOptions,
     "babelConfig",
     defaults.BABEL_CONFIG
