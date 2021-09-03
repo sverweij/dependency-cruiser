@@ -1,6 +1,6 @@
-import { lstatSync } from "fs";
+import { lstatSync } from "node:fs";
 import { expect } from "chai";
-import gather from "../../src/extract/gather-initial-sources.js";
+import gatherInitialSources from "../../src/extract/gather-initial-sources.js";
 import p2p from "../../src/extract/utl/path-to-posix.js";
 import normalize from "../../src/main/options/normalize.js";
 
@@ -15,15 +15,16 @@ const EMPTYOPTIONS = normalize.normalizeCruiseOptions({});
 describe("extract/gatherInitialSources", () => {
   it("one file stays one file", () => {
     expect(
-      gather(["test/extract/fixtures/cjs/root_one.js"], EMPTYOPTIONS).map(
-        pathToPosix
-      )
+      gatherInitialSources(
+        ["test/extract/fixtures/cjs/root_one.js"],
+        EMPTYOPTIONS
+      ).map(pathToPosix)
     ).to.deep.equal(["test/extract/fixtures/cjs/root_one.js"]);
   });
 
   it("two files from different folders", () => {
     expect(
-      gather(
+      gatherInitialSources(
         [
           "test/extract/fixtures/cjs/root_one.js",
           "test/extract/fixtures/ts/index.ts",
@@ -38,7 +39,9 @@ describe("extract/gatherInitialSources", () => {
 
   it("expands the scannable files in a folder", () => {
     expect(
-      gather(["test/extract/fixtures/ts"], EMPTYOPTIONS).map(pathToPosix)
+      gatherInitialSources(["test/extract/fixtures/ts"], EMPTYOPTIONS).map(
+        pathToPosix
+      )
     ).to.deep.equal([
       "test/extract/fixtures/ts/index.ts",
       "test/extract/fixtures/ts/javascriptThing.js",
@@ -50,7 +53,7 @@ describe("extract/gatherInitialSources", () => {
 
   it("expands and concats the scannable files in two folders", () => {
     expect(
-      gather(
+      gatherInitialSources(
         ["test/extract/fixtures/ts", "test/extract/fixtures/coffee"],
         EMPTYOPTIONS
       ).map(pathToPosix)
@@ -70,7 +73,7 @@ describe("extract/gatherInitialSources", () => {
 
   it("expands and concats the scannable files in two folders + a separate file", () => {
     expect(
-      gather(
+      gatherInitialSources(
         [
           "test/extract/fixtures/ts",
           "test/extract/fixtures/es6/imports-and-exports.js",
@@ -95,7 +98,7 @@ describe("extract/gatherInitialSources", () => {
 
   it("filters the 'excluded' pattern from the collection", () => {
     expect(
-      gather(
+      gatherInitialSources(
         [
           "test/extract/fixtures/ts",
           "test/extract/fixtures/es6/imports-and-exports.js",
@@ -116,7 +119,7 @@ describe("extract/gatherInitialSources", () => {
 
   it("filters the 'excluded' pattern from the collection - regexp", () => {
     expect(
-      gather(["test/extract/fixtures/ts"], {
+      gatherInitialSources(["test/extract/fixtures/ts"], {
         exclude: { path: "^[a-z]+$" },
       }).map(pathToPosix)
     ).to.deep.equal([
@@ -130,7 +133,7 @@ describe("extract/gatherInitialSources", () => {
 
   it("expands glob patterns (**/*.js)", () => {
     expect(
-      gather(
+      gatherInitialSources(
         ["test/extract/fixtures/gather-globbing/packages/**/*.js"],
         EMPTYOPTIONS
       ).map(pathToPosix)
@@ -151,7 +154,7 @@ describe("extract/gatherInitialSources", () => {
 
   it("expands glob patterns (**/src/**/*.js)", () => {
     expect(
-      gather(
+      gatherInitialSources(
         ["test/extract/fixtures/gather-globbing/**/src/**/*.js"],
         EMPTYOPTIONS
       ).map(pathToPosix)
@@ -167,7 +170,7 @@ describe("extract/gatherInitialSources", () => {
 
   it("filters out the stuff in the exclude pattern", () => {
     expect(
-      gather(["test/extract/fixtures/gather-globbing/**/src"], {
+      gatherInitialSources(["test/extract/fixtures/gather-globbing/**/src"], {
         exclude: { path: "/deep/ly/" },
       }).map(pathToPosix)
     ).to.deep.equal([
@@ -184,7 +187,7 @@ describe("extract/gatherInitialSources", () => {
 
   it("filters out the stuff in the doNotFollow pattern", () => {
     expect(
-      gather(["test/extract/fixtures/gather-globbing/**/src"], {
+      gatherInitialSources(["test/extract/fixtures/gather-globbing/**/src"], {
         doNotFollow: { path: "/deep/ly/" },
       }).map(pathToPosix)
     ).to.deep.equal([
@@ -201,7 +204,7 @@ describe("extract/gatherInitialSources", () => {
 
   it("only gathers stuff in the includeOnly pattern", () => {
     expect(
-      gather(["test/extract/fixtures/gather-globbing/packages"], {
+      gatherInitialSources(["test/extract/fixtures/gather-globbing/packages"], {
         includeOnly: { path: "/loki/" },
       }).map(pathToPosix)
     ).to.deep.equal([
@@ -213,9 +216,22 @@ describe("extract/gatherInitialSources", () => {
     ]);
   });
 
+  it("also gathers files with extensions in the extra extensions to scan array", () => {
+    expect(
+      gatherInitialSources(["test/extract/fixtures/extra-extensions"], {
+        extraExtensionsToScan: [".ratm", ".yolo"],
+      }).map(pathToPosix)
+    ).to.deep.equal([
+      "test/extract/fixtures/extra-extensions/gathered.ratm",
+      "test/extract/fixtures/extra-extensions/in-the-name-of.ratm",
+      "test/extract/fixtures/extra-extensions/innocent-javascript.js",
+      "test/extract/fixtures/extra-extensions/not-parsed-when-in-extra-extensions.yolo",
+    ]);
+  });
+
   it("heeds the baseDir", () => {
     expect(
-      gather(
+      gatherInitialSources(
         ["**/src/**/*.js"],
         normalize.normalizeCruiseOptions({
           baseDir: "test/extract/fixtures/gather-globbing",
@@ -237,6 +253,8 @@ describe("extract/gatherInitialSources", () => {
         "./test/extract/fixtures/invalid-symlink/index.js"
       ).isSymbolicLink()
     ).to.equal(true);
-    expect(gather(["test/extract/fixtures/invalid-symlink"])).to.deep.equal([]);
+    expect(
+      gatherInitialSources(["test/extract/fixtures/invalid-symlink"])
+    ).to.deep.equal([]);
   });
 });
