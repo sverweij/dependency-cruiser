@@ -12,6 +12,7 @@ const identity = require("./identity");
 const json = require("./json");
 const teamcity = require("./teamcity");
 const text = require("./text");
+const baseline = require("./baseline");
 const { getExternalPluginReporter } = require("./plugins");
 
 const TYPE2REPORTER = {
@@ -30,6 +31,7 @@ const TYPE2REPORTER = {
   json,
   teamcity,
   text,
+  baseline,
 };
 
 /**

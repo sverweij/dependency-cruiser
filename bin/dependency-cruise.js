@@ -47,6 +47,10 @@ try {
       "include modules matching the regex, but don't follow their dependencies"
     )
     .option(
+      "--ignore-known [file]",
+      "ignore known violations as saved in [file] (default: .dependency-cruiser-known-violations.json)"
+    )
+    .option(
       "--ts-config [file]",
       "use a typescript configuration (e.g. tsconfig.json)"
     )

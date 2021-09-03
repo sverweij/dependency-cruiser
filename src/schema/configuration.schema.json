@@ -391,6 +391,10 @@
             { "$ref": "#/definitions/CompoundFocusType" }
           ]
         },
+        "knownViolations": {
+          "description": "baseline of known validations. Typically you'd specify these in a file called .dependency-cruiser-known-violations.json (which you'd generate with the --outputType 'baseline') - and which is easy to keep up to date. In a pinch you can specify them here as well. The known violations in .dependency-cruiser-known-violations.json always take precedence.",
+          "$ref": "#/definitions/ViolationsType"
+        },
         "collapse": {
           "description": "Collapse a to a folder depth by passing a single digit (e.g. 2). When passed a regex collapses to that pattern E.g. ^packages/[^/]+/ would collapse to modules/ folders directly under your packages folder.",
           "oneOf": [
@@ -689,6 +693,44 @@
         "exclude": { "$ref": "#/definitions/CompoundExcludeType" },
         "includeOnly": { "$ref": "#/definitions/CompoundIncludeOnlyType" },
         "focus": { "$ref": "#/definitions/CompoundFocusType" }
+      }
+    },
+    "ViolationsType": {
+      "type": "array",
+      "description": "A list of violations found in the dependencies. The dependencies themselves also contain this information, this summary is here for convenience.",
+      "items": { "$ref": "#/definitions/ViolationType" }
+    },
+    "ViolationType": {
+      "type": "object",
+      "required": ["from", "to", "rule"],
+      "additionalProperties": false,
+      "properties": {
+        "from": { "type": "string" },
+        "to": { "type": "string" },
+        "rule": { "$ref": "#/definitions/RuleSummaryType" },
+        "cycle": {
+          "type": "array",
+          "items": { "type": "string" },
+          "description": "The circular path if the violation is about circularity"
+        },
+        "via": {
+          "type": "array",
+          "items": { "type": "string" },
+          "description": "The path from the from to the to if the violation is transitive"
+        }
+      }
+    },
+    "RuleSummaryType": {
+      "type": "object",
+      "description": "If there was a rule violation (valid === false), this object contains the name of the rule and severity of violating it.",
+      "required": ["name", "severity"],
+      "additionalProperties": false,
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "The (short, eslint style) name of the violated rule. Typically something like 'no-core-punycode' or 'no-outside-deps'."
+        },
+        "severity": { "$ref": "#/definitions/SeverityType" }
       }
     },
     "ExtendsType": {

@@ -128,6 +128,8 @@ function resetOutputDirectory() {
   deleteDammit(path.join(OUT_DIR, "typescript-path-resolution.json"));
   deleteDammit(path.join(OUT_DIR, "babel-es6-result.json"));
   deleteDammit(path.join(OUT_DIR, "babel-ts-result.json"));
+  deleteDammit(path.join(OUT_DIR, "known-errors-not-known.txt"));
+  deleteDammit(path.join(OUT_DIR, "known-errors-known.txt"));
 }
 
 function setModuleType(pTestPairs, pModuleType) {
@@ -464,6 +466,44 @@ describe("cli/index", () => {
       lOutputTo,
       path.join(FIX_DIR, "babel", lOutputFileName)
     );
+  });
+
+  it("dependency-cruise on a violation-ridden code base will return the errors", () => {
+    const lOutputFileName = "known-errors-not-known.txt";
+    const lOutputTo = path.join(OUT_DIR, lOutputFileName);
+
+    const lExitCode = cli(["test/cli/fixtures/known-violations/src"], {
+      outputTo: lOutputTo,
+      outputType: "err",
+      validate: "test/cli/fixtures/known-violations/config.js",
+    });
+    const lExpectedAmountOfErrors = 2;
+
+    expect(lExitCode).to.equal(lExpectedAmountOfErrors);
+
+    // assertJSONFileEqual(
+    //   lOutputTo,
+    //   path.join(FIX_DIR, "babel", lOutputFileName)
+    // );
+  });
+
+  it("dependency-cruise on a violation-ridden code base with known errors will only return unknown errors", () => {
+    const lOutputFileName = "known-errors-known.txt";
+    const lOutputTo = path.join(OUT_DIR, lOutputFileName);
+
+    const lExitCode = cli(["test/cli/fixtures/known-violations/src"], {
+      outputTo: lOutputTo,
+      outputType: "err",
+      validate: "test/cli/fixtures/known-violations/config.js",
+      ignoreKnown: "test/cli/fixtures/known-violations/known.json",
+    });
+
+    expect(lExitCode).to.equal(1);
+
+    // assertJSONFileEqual(
+    //   lOutputTo,
+    //   path.join(FIX_DIR, "babel", lOutputFileName)
+    // );
   });
 
   describe("file based tests - commonJS", () => {

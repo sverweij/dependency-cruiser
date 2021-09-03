@@ -1,7 +1,7 @@
 const getStream = require("get-stream");
 const main = require("../main");
 const validateFileExistence = require("./utl/validate-file-existence");
-const normalizeOptions = require("./normalize-options");
+const normalizeOptions = require("./normalize-cli-options");
 const io = require("./utl/io");
 
 const KNOWN_FMT_OPTIONS = [
