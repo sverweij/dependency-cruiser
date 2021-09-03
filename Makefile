@@ -5,8 +5,10 @@ GENERATED_SOURCES=src/cli/init-config/config.js.template.js \
 	src/report/dot/dot.template.js \
 	src/report/html/html.template.js \
 	src/report/error-html/error-html.template.js \
+	src/schema/baseline-violations.schema.js \
 	src/schema/configuration.schema.js \
 	src/schema/cruise-result.schema.js \
+	src/schema/baseline-violations.schema.json \
 	src/schema/configuration.schema.json \
 	src/schema/cruise-result.schema.json \
 	src/meta.js

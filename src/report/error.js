@@ -9,6 +9,7 @@ const SEVERITY2CHALK = {
   error: chalk.red,
   warn: chalk.yellow,
   info: chalk.cyan,
+  ignore: chalk.gray,
 };
 
 const CYCLIC_PATH_INDENT = 6;
@@ -82,7 +83,11 @@ function addExplanation(pRuleSet, pLong) {
 }
 
 function report(pResults, pLong) {
-  if (pResults.summary.violations.length === 0) {
+  const lNonIgnorableViolations = pResults.summary.violations.filter(
+    (pViolation) => pViolation.rule.severity !== "ignore"
+  );
+
+  if (lNonIgnorableViolations.length === 0) {
     return `\n${chalk.green(figures.tick)} no dependency violations found (${
       pResults.summary.totalCruised
     } modules, ${
@@ -90,7 +95,7 @@ function report(pResults, pLong) {
     } dependencies cruised)\n\n`;
   }
 
-  return pResults.summary.violations
+  return lNonIgnorableViolations
     .reverse()
     .map(addExplanation(pResults.summary.ruleSetUsed, pLong))
     .reduce((pAll, pThis) => `${pAll}  ${formatViolation(pThis)}\n`, "\n")

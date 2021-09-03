@@ -1,0 +1,50 @@
+[
+  {
+    "from": "src/schema/baseline-violations.schema.js",
+    "to": "src/schema/baseline-violations.schema.js",
+    "rule": {
+      "severity": "error",
+      "name": "not-unreachable-from-cli"
+    }
+  },
+  {
+    "from": "src/cli/format.js",
+    "to": "src/cli/format.js",
+    "rule": {
+      "severity": "info",
+      "name": "not-reachable-from-folder-index"
+    }
+  },
+  {
+    "from": "src/cli/tools/wrap-stream-in-html.js",
+    "to": "src/cli/tools/wrap-stream-in-html.js",
+    "rule": {
+      "severity": "info",
+      "name": "not-reachable-from-folder-index"
+    }
+  },
+  {
+    "from": "src/cli/validate-node-environment.js",
+    "to": "src/cli/validate-node-environment.js",
+    "rule": {
+      "severity": "info",
+      "name": "not-reachable-from-folder-index"
+    }
+  },
+  {
+    "from": "src/utl/array-util.js",
+    "to": "src/utl/array-util.js",
+    "rule": {
+      "severity": "info",
+      "name": "utl-module-not-shared-enough"
+    }
+  },
+  {
+    "from": "src/utl/wrap-and-indent.js",
+    "to": "src/utl/wrap-and-indent.js",
+    "rule": {
+      "severity": "info",
+      "name": "utl-module-not-shared-enough"
+    }
+  }
+]
