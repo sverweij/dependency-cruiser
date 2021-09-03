@@ -1,13 +1,17 @@
 const glob = require("glob");
 const _get = require("lodash/get");
+const _clone = require("lodash/clone");
+const _set = require("lodash/set");
+
 const main = require("../main");
 const bus = require("../utl/bus");
 
 const extractTSConfig = require("../config-utl/extract-ts-config");
 const extractBabelConfig = require("../config-utl/extract-babel-config");
 const extractWebpackResolveConfig = require("../config-utl/extract-webpack-resolve-config");
+const extractKnownViolations = require("../config-utl/extract-known-violations");
 const validateFileExistence = require("./utl/validate-file-existence");
-const normalizeOptions = require("./normalize-options");
+const normalizeCliOptions = require("./normalize-cli-options");
 const io = require("./utl/io");
 const formatMetaInfo = require("./format-meta-info");
 const setUpCliFeedbackListener = require("./listeners/cli-feedback");
@@ -29,6 +33,21 @@ function extractResolveOptions(pCruiseOptions) {
     );
   }
   return lResolveOptions;
+}
+
+function addKnownViolations(pCruiseOptions) {
+  if (pCruiseOptions.knownViolationsFile) {
+    const lKnownViolations = extractKnownViolations(
+      pCruiseOptions.knownViolationsFile
+    );
+
+    // Check against json schema is already done in src/main/options/validate
+    // so here we can just concentrate on the io
+    let lCruiseOptions = _clone(pCruiseOptions);
+    _set(lCruiseOptions, "ruleSet.options.knownViolations", lKnownViolations);
+    return lCruiseOptions;
+  }
+  return pCruiseOptions;
 }
 
 function extractTSConfigOptions(pCruiseOptions) {
@@ -83,7 +102,9 @@ function runCruise(pFileDirectoryArray, pCruiseOptions) {
     .filter((pFileOrDirectory) => !glob.hasMagic(pFileOrDirectory))
     .forEach(validateFileExistence);
 
-  const lCruiseOptions = normalizeOptions(pCruiseOptions);
+  const lCruiseOptions = addKnownViolations(
+    normalizeCliOptions(pCruiseOptions)
+  );
 
   setUpListener(lCruiseOptions);
 
@@ -106,6 +127,12 @@ function runCruise(pFileDirectoryArray, pCruiseOptions) {
   return lReportingResult.exitCode;
 }
 
+/**
+ *
+ * @param {string[]} pFileDirectoryArray
+ * @param {import("../../types/options").ICruiseOptions} pCruiseOptions
+ * @returns {number}
+ */
 module.exports = function executeCli(pFileDirectoryArray, pCruiseOptions) {
   pCruiseOptions = pCruiseOptions || {};
   let lExitCode = 0;

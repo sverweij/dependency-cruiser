@@ -1,5 +1,6 @@
 import optionsUsed from "./options-used.mjs";
 import ruleSet from "./rule-set.mjs";
+import violations from "./violations.mjs";
 
 export default {
   definitions: {
@@ -42,39 +43,7 @@ export default {
         optionsUsed: { $ref: "#/definitions/OptionsUsedType" },
       },
     },
-    ViolationsType: {
-      type: "array",
-      description:
-        "A list of violations found in the dependencies. The dependencies themselves " +
-        "also contain this information, this summary is here for convenience.",
-      items: { $ref: "#/definitions/ViolationType" },
-    },
-    ViolationType: {
-      type: "object",
-      required: ["from", "to", "rule"],
-      additionalProperties: false,
-      properties: {
-        from: {
-          type: "string",
-        },
-        to: {
-          type: "string",
-        },
-        rule: { $ref: "#/definitions/RuleSummaryType" },
-        cycle: {
-          type: "array",
-          items: { type: "string" },
-          description:
-            "The circular path if the violation is about circularity",
-        },
-        via: {
-          type: "array",
-          items: { type: "string" },
-          description:
-            "The path from the from to the to if the violation is transitive",
-        },
-      },
-    },
+    ...violations.definitions,
     ...ruleSet.definitions,
     ...optionsUsed.definitions,
   },

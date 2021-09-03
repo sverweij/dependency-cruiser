@@ -1,0 +1,50 @@
+[
+  {
+    "from": "src/cli/format.js",
+    "to": "src/cli/format.js",
+    "rule": {
+      "severity": "ignore",
+      "name": "not-reachable-from-folder-index"
+    }
+  },
+  {
+    "from": "src/cli/tools/wrap-stream-in-html.js",
+    "to": "src/cli/tools/wrap-stream-in-html.js",
+    "rule": {
+      "severity": "ignore",
+      "name": "not-reachable-from-folder-index"
+    }
+  },
+  {
+    "from": "src/cli/validate-node-environment.js",
+    "to": "src/cli/validate-node-environment.js",
+    "rule": {
+      "severity": "ignore",
+      "name": "not-reachable-from-folder-index"
+    }
+  },
+  {
+    "from": "src/enrich/soften-known-violations.js",
+    "to": "fs",
+    "rule": {
+      "severity": "ignore",
+      "name": "restrict-fs-access"
+    }
+  },
+  {
+    "from": "src/utl/array-util.js",
+    "to": "src/utl/array-util.js",
+    "rule": {
+      "severity": "ignore",
+      "name": "utl-module-not-shared-enough"
+    }
+  },
+  {
+    "from": "src/utl/wrap-and-indent.js",
+    "to": "src/utl/wrap-and-indent.js",
+    "rule": {
+      "severity": "ignore",
+      "name": "utl-module-not-shared-enough"
+    }
+  }
+]

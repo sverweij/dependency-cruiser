@@ -20,6 +20,7 @@ available in dependency-cruiser configurations.
 1. [`--config`/ `--validate`: use a configuration with rules and/or options](#--config---validate)
 1. [`--init`](#--init)
 1. [`--info`: show what alt-js are supported](#--info-showing-what-alt-js-are-supported)
+1. [`--ignore-known`: ignore known violations](#--ignore-known-ignore-known-violations)
 1. [`--help`/ no parameters: get help](#--help--no-parameters)
 
 ### Options also available in dependency-cruiser configurations
@@ -395,6 +396,11 @@ so it's easier to compare than the two json's):
 
 </details>
 
+#### baseline - generate known violations
+
+Generates a list of all current violations you can use as input for the
+[`--ignore-known`](#--ignore-known-ignore-known-violations) option.
+
 ### `--config`/ `--validate`
 
 Validates against a list of rules in a configuration file. This defaults to a file
@@ -529,9 +535,49 @@ Extensions:
 
 </details>
 
+### `--ignore-known`: ignore known violations
+
+> This feature was recently (september 2021) introduced. It is useful, well
+> tested, stable and it will stay. However, the file format and the ergonomics of
+> the command(s) to deal with known violations might still shift a bit _without_
+> dependency-cruiser getting a major version bump.
+
+With this option engaged dependency-cruiser will ignore known violations as saved
+in the file you pass it as a parameter. If you don't pass a filename dependency-cruiser
+will assume the known violations to live in a file called `.dependency-cruiser-known-violations.json`.
+
+You can generate a known violations file with the `baseline` reporter e.g. like so:
+
+```sh
+dependency-cruiser src --config --output-type baseline --output-to .dependency-cruiser-known-violations.json
+```
+
+#### How dependency-cruiser ignores known violations
+
+For all violations dependency-cruiser finds in the known violations file it will
+lower the severity to `ignore`. It depends on the reporter how these show up. E.g.
+the `err`/ `err-long` reporters will hide all ignored violations, but add a
+warning if there's violations ignored:
+
+```
+✔ no dependency violations found (454 modules, 1078 dependencies cruised)
+⚠ 20 known violations ignored. Run without --ignore-known to see them.
+```
+
+#### When is this useful?
+
+When you first deploy dependency-cruiser in a large code base chances are it will
+detect quite some violations - even when it only uses the default set of rules
+that comes with `--init`. It will not always possible to fix all the violations
+right away. This means that any run of dependency-cruiser will show violations
+you already decided to fix later - possibly burrying any new violations (which
+you probably want to avoid).
+
+With this option you can avoid that.
+
 ### `--help` / no parameters
 
-Running with no parameters gets you help.
+Running with no parameters or with `--help` gets you help.
 
 ## Options also available in dependency-cruiser configurations
 
@@ -861,7 +907,7 @@ Options:
   -f, --output-to <file>      file to write output to; - for stdout (default:
                               "-")
   -T, --output-type <type>    output type; e.g. err, err-html, dot, ddot, archi,
-                              flat or json (default: "err")
+                              flat, baseline or json (default: "err")
   -I, --include-only <regex>  only include modules matching the regex
   -F, --focus <regex>         only include modules matching the regex + their
                               direct neighbours
