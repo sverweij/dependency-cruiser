@@ -7,6 +7,7 @@ import moduleErrs from "./mocks/module-errors.mjs";
 import requiredErrs from "./mocks/required-errors.mjs";
 import circulars from "./mocks/circular-deps.mjs";
 import vias from "./mocks/via-deps.mjs";
+import unsupportedErrorLevels from "./mocks/unsupported-severity.mjs";
 
 function removePerSessionAttributes(pString) {
   return pString.replace(/ flowId='[^']+' timestamp='[^']+'/g, "");
@@ -69,5 +70,18 @@ describe("report/teamcity", () => {
     );
     // eslint-disable-next-line no-magic-numbers
     expect(lResult.exitCode).to.equal(4);
+  });
+
+  it("renders unsupported error levels (like 'ignore') as 'info'", () => {
+    const lFixture = readFixture(
+      "mocks/unsupported-severity-teamcity-format.txt"
+    );
+    const lResult = render(unsupportedErrorLevels);
+
+    expect(removePerSessionAttributes(lResult.output)).to.equal(
+      removePerSessionAttributes(lFixture)
+    );
+    // eslint-disable-next-line no-magic-numbers
+    expect(lResult.exitCode).to.equal(5);
   });
 });

@@ -129,10 +129,10 @@ function extractModuleViolations(pModules, pRuleSet) {
 
 module.exports = function summarizeModules(pModules, pRuleSet) {
   const lViolations = deDuplicateViolations(
-    extractDependencyViolations(pModules, pRuleSet).concat(
-      extractModuleViolations(pModules, pRuleSet)
-    )
-  ).sort(compare.violations);
+    extractDependencyViolations(pModules, pRuleSet)
+      .concat(extractModuleViolations(pModules, pRuleSet))
+      .sort(compare.violations)
+  );
 
   return {
     violations: lViolations,

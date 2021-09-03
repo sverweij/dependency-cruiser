@@ -7,6 +7,7 @@ import compoundIncludeOnlyType from "./compound-include-only-type.mjs";
 import dependencyType from "./dependency-type.mjs";
 import moduleSystemsType from "./module-systems-type.mjs";
 import reporterOptions from "./reporter-options.mjs";
+import violations from "./violations.mjs";
 
 export default {
   definitions: {
@@ -49,6 +50,15 @@ export default {
             { $ref: "#/definitions/REAsStringsType" },
             { $ref: "#/definitions/CompoundFocusType" },
           ],
+        },
+        knownViolations: {
+          description:
+            "baseline of known validations. Typically you'd specify these in a file called " +
+            ".dependency-cruiser-known-violations.json (which you'd generate with the --outputType " +
+            "'baseline') - and which is easy to keep up to date. In a pinch you can specify " +
+            "them here as well. The known violations in .dependency-cruiser-known-violations.json " +
+            "always take precedence.",
+          $ref: "#/definitions/ViolationsType",
         },
         collapse: {
           description:
@@ -321,5 +331,6 @@ export default {
     ...compoundFocusType.definitions,
     ...reporterOptions.definitions,
     ...REAsStringsType.definitions,
+    ...violations.definitions,
   },
 };

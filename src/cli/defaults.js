@@ -5,6 +5,7 @@ module.exports = {
     ".dependency-cruiser.js",
     ".dependency-cruiser.cjs",
   ],
+  DEFAULT_BASELINE_FILE_NAME: ".dependency-cruiser-known-violations.json",
   DEFAULT_CONFIG_FILE_NAME: ".dependency-cruiser.js",
   WEBPACK_CONFIG: "webpack.config.js",
   TYPESCRIPT_CONFIG: "tsconfig.json",

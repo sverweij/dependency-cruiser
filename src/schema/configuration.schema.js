@@ -268,6 +268,7 @@ module.exports = {
             { $ref: "#/definitions/CompoundFocusType" },
           ],
         },
+        knownViolations: { $ref: "#/definitions/ViolationsType" },
         collapse: {
           oneOf: [
             { type: "string" },
@@ -433,6 +434,31 @@ module.exports = {
         exclude: { $ref: "#/definitions/CompoundExcludeType" },
         includeOnly: { $ref: "#/definitions/CompoundIncludeOnlyType" },
         focus: { $ref: "#/definitions/CompoundFocusType" },
+      },
+    },
+    ViolationsType: {
+      type: "array",
+      items: { $ref: "#/definitions/ViolationType" },
+    },
+    ViolationType: {
+      type: "object",
+      required: ["from", "to", "rule"],
+      additionalProperties: false,
+      properties: {
+        from: { type: "string" },
+        to: { type: "string" },
+        rule: { $ref: "#/definitions/RuleSummaryType" },
+        cycle: { type: "array", items: { type: "string" } },
+        via: { type: "array", items: { type: "string" } },
+      },
+    },
+    RuleSummaryType: {
+      type: "object",
+      required: ["name", "severity"],
+      additionalProperties: false,
+      properties: {
+        name: { type: "string" },
+        severity: { $ref: "#/definitions/SeverityType" },
       },
     },
     ExtendsType: {
