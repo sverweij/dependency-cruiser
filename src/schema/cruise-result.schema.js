@@ -416,6 +416,7 @@ module.exports = {
         tsPreCompilationDeps: {
           oneOf: [{ type: "boolean" }, { type: "string", enum: ["specify"] }],
         },
+        extraExtensionsToScan: { type: "array", items: { type: "string" } },
         externalModuleResolutionStrategy: {
           type: "string",
           enum: ["node_modules", "yarn-pnp"],

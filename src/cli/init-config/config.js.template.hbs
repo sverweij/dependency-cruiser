@@ -287,6 +287,9 @@ module.exports = {
     {{^}}
     // tsPreCompilationDeps: false,
     {{/if}}
+    
+    /* list of extensions (typically non-parseable) to scan. Empty by default. */
+    // extraExtensionsToScan: [".json", ".jpg", ".png", ".svg", ".webp"],
 
     /* if true combines the package.jsons found from the module up to the base
        folder the cruise is initiated from. Useful for how (some) mono-repos

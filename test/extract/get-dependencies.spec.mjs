@@ -75,6 +75,7 @@ describe("extract/getDependencies - CommonJS - ", () => {
   cjsFixtures.forEach((pFixture) => runFixture(pFixture, "swc"));
   cjsFixtures.forEach((pFixture) => runFixture(pFixture, "tsc"));
 });
+
 describe("extract/getDependencies - CommonJS - with bangs", () => {
   it("strips the inline loader prefix from the module name when resolving", () => {
     const lOptions = normalizeCruiseOptions({ moduleSystems: ["cjs"] });
@@ -364,6 +365,24 @@ describe("extract/getDependencies - include", () => {
         resolved: "test/extract/fixtures/exotic-require/required-with-need.js",
       },
     ]);
+  });
+
+  it("does not parse files matching extensions in the extraExtensionsToScan array", () => {
+    const lOptions = normalizeCruiseOptions({
+      extraExtensionsToScan: [".bentknee", ".yolo"],
+    });
+    const lResolveOptions = normalizeResolveOptions(
+      { bustTheCache: true },
+      lOptions
+    );
+
+    expect(
+      getDependencies(
+        "./test/extract/fixtures/extra-extensions/not-parsed-when-in-extra-extensions.yolo",
+        lOptions,
+        lResolveOptions
+      )
+    ).to.deep.equal([]);
   });
 
   it("adds a preCompilationOnly attribute when tsPreCompilationDeps === 'specify'", () => {

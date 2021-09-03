@@ -66,7 +66,13 @@ function normalizeCollapse(pCollapse) {
   return lReturnValue;
 }
 
+/**
+ *
+ * @param {Partial <import('../../../types/options').ICruiseOptions>} pOptions
+ * @returns {import('../../../types/options').ICruiseOptions}
+ */
 function normalizeCruiseOptions(pOptions) {
+  /** @type {import('../../../types/options').ICruiseOptions} */
   let lReturnValue = {
     baseDir: process.cwd(),
     ...defaults,
@@ -84,6 +90,7 @@ function normalizeCruiseOptions(pOptions) {
   //       when they're actually defined)
   lReturnValue.doNotFollow = normalizeFilterOption(lReturnValue.doNotFollow);
   lReturnValue.exclude = normalizeFilterOption(lReturnValue.exclude);
+  lReturnValue.extraExtensionsToScan = lReturnValue.extraExtensionsToScan || [];
   lReturnValue = normalizeFilterOptions(lReturnValue, ["focus", "includeOnly"]);
 
   lReturnValue.exoticRequireStrings = uniq(

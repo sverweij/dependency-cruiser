@@ -244,6 +244,8 @@
     /* if true detect dependencies that only exist before typescript-to-javascript compilation */
     "tsPreCompilationDeps": true,
 
+    // "extraExtensionsToScan": [".json", ".jpg", ".png"],
+
     /* if true leave symlinks untouched, otherwise use the realpath */
     // "preserveSymlinks": false,
 
