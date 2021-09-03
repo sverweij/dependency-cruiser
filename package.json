@@ -72,6 +72,7 @@
     "check": "npm-run-all build lint depcruise test:cover",
     "check:full": "npm-run-all check test:glob test:yarn-pnp",
     "depcruise": "node ./bin/dependency-cruise.js src bin test configs types tools --config",
+    "depcruise:baseline": "node ./bin/dependency-cruise.js src bin test configs types tools --config --output-type baseline --progress --output-to .dependency-cruiser-known-violations.json",
     "depcruise:explain": "node ./bin/dependency-cruise.js src bin test configs types tools --output-type err-long --config --progress none",
     "depcruise:graph:dev": "node ./bin/dependency-cruise.js bin src --prefix vscode://file/$(pwd)/ --config --output-type dot --progress cli-feedback | dot -T svg | node ./bin/wrap-stream-in-html.js | browser",
     "depcruise:graph:doc": "npm-run-all depcruise:graph:doc:json --parallel depcruise:graph:doc:fmt-* depcruise:graph:doc:samples",

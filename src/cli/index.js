@@ -1,13 +1,20 @@
+const { readFileSync } = require("fs");
+const json5 = require("json5");
 const glob = require("glob");
 const _get = require("lodash/get");
+const _clone = require("lodash/clone");
+const _set = require("lodash/set");
+const defaults = require("../cli/defaults");
+
 const main = require("../main");
 const bus = require("../utl/bus");
 
 const extractTSConfig = require("../config-utl/extract-ts-config");
 const extractBabelConfig = require("../config-utl/extract-babel-config");
 const extractWebpackResolveConfig = require("../config-utl/extract-webpack-resolve-config");
+const makeAbsolute = require("../config-utl/make-absolute");
 const validateFileExistence = require("./utl/validate-file-existence");
-const normalizeOptions = require("./normalize-options");
+const normalizeOptions = require("./normalize-cli-options");
 const io = require("./utl/io");
 const formatMetaInfo = require("./format-meta-info");
 const setUpCliFeedbackListener = require("./listeners/cli-feedback");
@@ -29,6 +36,28 @@ function extractResolveOptions(pCruiseOptions) {
     );
   }
   return lResolveOptions;
+}
+
+function addKnownViolations(
+  pCruiseOptions,
+  pFileName = defaults.DEFAULT_BASELINE_FILE_NAME
+) {
+  try {
+    const lKnownViolations = json5.parse(
+      readFileSync(makeAbsolute(pFileName), "utf-8")
+    );
+    // Check against json schema is already done in src/main/options/validate
+    // so here we can just concentrate on the io
+    if (Boolean(lKnownViolations)) {
+      let lCruiseOptions = _clone(pCruiseOptions);
+      _set(lCruiseOptions, "ruleSet.options.knownViolations", lKnownViolations);
+      return lCruiseOptions;
+    }
+  } catch (pError) {
+    // doesn't matter - no known violations
+  }
+
+  return pCruiseOptions;
 }
 
 function extractTSConfigOptions(pCruiseOptions) {
@@ -83,7 +112,7 @@ function runCruise(pFileDirectoryArray, pCruiseOptions) {
     .filter((pFileOrDirectory) => !glob.hasMagic(pFileOrDirectory))
     .forEach(validateFileExistence);
 
-  const lCruiseOptions = normalizeOptions(pCruiseOptions);
+  const lCruiseOptions = addKnownViolations(normalizeOptions(pCruiseOptions));
 
   setUpListener(lCruiseOptions);
 

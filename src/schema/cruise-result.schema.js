@@ -402,6 +402,7 @@ module.exports = {
           ],
         },
         focus: { $ref: "#/definitions/CompoundFocusType" },
+        knownViolations: { $ref: "#/definitions/ViolationsType" },
         collapse: { type: "string" },
         maxDepth: { type: "integer", minimum: 0, maximum: 99 },
         moduleSystems: { $ref: "#/definitions/ModuleSystemsType" },

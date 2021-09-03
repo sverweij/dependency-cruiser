@@ -9,6 +9,7 @@ const SEVERITY2CHALK = {
   error: chalk.red,
   warn: chalk.yellow,
   info: chalk.cyan,
+  ignore: chalk.gray,
 };
 
 const CYCLIC_PATH_INDENT = 6;

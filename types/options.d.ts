@@ -7,6 +7,7 @@ import {
   IFocusType,
   IIncludeOnlyType,
 } from "./filter-types";
+import { IBaselineViolations } from "./baseline-violations";
 
 export type ExternalModuleResolutionStrategyType = "node_modules" | "yarn-pnp";
 export type ProgressType =
@@ -56,6 +57,14 @@ export interface ICruiseOptions {
    * dependents)
    */
   focus?: string | string[] | IFocusType;
+  /*
+   * baseline of known validations. Typically you'd specify these in a file called
+   * .dependency-cruiser-known-violations.json (which you'd generate with the --outputType
+   * 'baseline') - and which is easy to keep up to date. In a pinch you can specify
+   * them here as well. The known violations in .dependency-cruiser-known-violations.json
+   * always take precedence.
+   */
+  knownViolations?: IBaselineViolations;
   /**
    * collapse a to a folder depth by passing a single digit (e.g. 2).
    * When passed a regex collapse to that pattern

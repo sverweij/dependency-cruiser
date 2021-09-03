@@ -7,6 +7,7 @@ const deriveOrphans = require("./derive/orphan");
 const addDependents = require("./derive/dependents");
 const deriveReachable = require("./derive/reachable");
 const addValidations = require("./add-validations");
+const softenKnownViolations = require("./soften-known-violations");
 
 module.exports = function enrichModules(pModules, pOptions) {
   bus.emit("progress", "analyzing: cycles", { level: busLogLevels.INFO });
@@ -27,6 +28,8 @@ module.exports = function enrichModules(pModules, pOptions) {
   // attribute (to simplify reporter logic)
   bus.emit("progress", "analyzing: validations", { level: busLogLevels.INFO });
   lModules = addValidations(lModules, pOptions.ruleSet, pOptions.validate);
+
+  lModules = softenKnownViolations(lModules, pOptions.knownViolations);
 
   return lModules;
 };

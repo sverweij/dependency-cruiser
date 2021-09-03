@@ -1,6 +1,6 @@
 import { fileURLToPath } from "url";
 import { expect } from "chai";
-import normalizeOptions from "../../src/cli/normalize-options.js";
+import normalizeOptions from "../../src/cli/normalize-cli-options.js";
 
 // eslint-disable max-statements
 describe("cli/normalizeOptions", () => {

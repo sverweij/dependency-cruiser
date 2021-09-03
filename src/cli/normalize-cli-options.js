@@ -7,7 +7,7 @@ const _clone = require("lodash/clone");
 const loadConfig = require("../config-utl/extract-depcruise-config");
 const defaults = require("./defaults");
 
-const KNOWN_DEPCRUISE_OPTIONS = [
+const KNOWN_DEPCRUISE_CLI_OPTIONS = [
   "babelConfig",
   "baseDir",
   "collapse",
@@ -164,20 +164,21 @@ function normalizeProgress(pOptions) {
 }
 
 /**
- * returns the pOptions, so that the returned value contains a
+ * returns the pOptionsAsPassedFromCommander, so that the returned value contains a
  * valid value for each possible option
  *
  * @param  {object} pOptionsAsPassedFromCommander [description]
+ * @param {any} pKnownCliOptions [description]
  * @return {object}          [description]
  */
 module.exports = function normalizeOptions(
   pOptionsAsPassedFromCommander,
-  pKnownOptions = KNOWN_DEPCRUISE_OPTIONS
+  pKnownCliOptions = KNOWN_DEPCRUISE_CLI_OPTIONS
 ) {
   let lOptions = {
     outputTo: defaults.OUTPUT_TO,
     outputType: defaults.OUTPUT_TYPE,
-    ...ejectNonCLIOptions(pOptionsAsPassedFromCommander, pKnownOptions),
+    ...ejectNonCLIOptions(pOptionsAsPassedFromCommander, pKnownCliOptions),
   };
 
   if (_has(lOptions, "moduleSystems")) {
