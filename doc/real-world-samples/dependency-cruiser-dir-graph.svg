@@ -326,12 +326,12 @@
 <!-- src/schema -->
 <g id="node31" class="node">
 <title>src/schema</title>
-<g id="a_node31"><a xlink:href="https://github.com/sverweij/dependency-cruiser/blob/develop/src/schema" xlink:title="schema">
-<polygon fill="#ffffcc" stroke="black" points="1076,-115 1024,-115 1022,-113 1022,-97 1074,-97 1076,-99 1076,-115"/>
-<polyline fill="none" stroke="black" points="1074,-113 1022,-113 "/>
-<polyline fill="none" stroke="black" points="1074,-113 1074,-97 "/>
-<polyline fill="none" stroke="black" points="1074,-113 1076,-115 "/>
-<text text-anchor="middle" x="1049" y="-103.8" font-family="Helvetica,sans-Serif" font-size="9.00">schema</text>
+<g id="a_node31"><a xlink:href="https://github.com/sverweij/dependency-cruiser/blob/develop/src/schema" xlink:title="not&#45;unreachable&#45;from&#45;cli">
+<polygon fill="#ffffcc" stroke="red" points="1076,-115 1024,-115 1022,-113 1022,-97 1074,-97 1076,-99 1076,-115"/>
+<polyline fill="none" stroke="red" points="1074,-113 1022,-113 "/>
+<polyline fill="none" stroke="red" points="1074,-113 1074,-97 "/>
+<polyline fill="none" stroke="red" points="1074,-113 1076,-115 "/>
+<text text-anchor="middle" x="1049" y="-103.8" font-family="Helvetica,sans-Serif" font-size="9.00" fill="red">schema</text>
 </a>
 </g>
 </g>
