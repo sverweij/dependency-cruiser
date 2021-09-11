@@ -14,6 +14,16 @@
 <path fill="#ffffff" stroke="black" stroke-width="2" d="M20,-8C20,-8 1672,-8 1672,-8 1678,-8 1684,-14 1684,-20 1684,-20 1684,-319.8 1684,-319.8 1684,-325.8 1678,-331.8 1672,-331.8 1672,-331.8 20,-331.8 20,-331.8 14,-331.8 8,-325.8 8,-319.8 8,-319.8 8,-20 8,-20 8,-14 14,-8 20,-8"/>
 <text text-anchor="middle" x="846" y="-320.6" font-family="Helvetica,sans-Serif" font-weight="bold" font-size="9.00">src</text>
 </g>
+<g id="clust5" class="cluster">
+<title>cluster_src/enrich</title>
+<path fill="#ffffff" stroke="black" stroke-width="2" d="M174,-57.2C174,-57.2 526,-57.2 526,-57.2 532,-57.2 538,-63.2 538,-69.2 538,-69.2 538,-173.8 538,-173.8 538,-179.8 532,-185.8 526,-185.8 526,-185.8 174,-185.8 174,-185.8 168,-185.8 162,-179.8 162,-173.8 162,-173.8 162,-69.2 162,-69.2 162,-63.2 168,-57.2 174,-57.2"/>
+<text text-anchor="middle" x="350" y="-174.6" font-family="Helvetica,sans-Serif" font-weight="bold" font-size="9.00">enrich</text>
+</g>
+<g id="clust6" class="cluster">
+<title>cluster_src/enrich/derive</title>
+<path fill="#ffffff" stroke="black" stroke-width="2" d="M182,-65.2C182,-65.2 438,-65.2 438,-65.2 444,-65.2 450,-71.2 450,-77.2 450,-77.2 450,-129 450,-129 450,-135 444,-141 438,-141 438,-141 182,-141 182,-141 176,-141 170,-135 170,-129 170,-129 170,-77.2 170,-77.2 170,-71.2 176,-65.2 182,-65.2"/>
+<text text-anchor="middle" x="310" y="-129.8" font-family="Helvetica,sans-Serif" font-weight="bold" font-size="9.00">derive</text>
+</g>
 <g id="clust2" class="cluster">
 <title>cluster_src/cli</title>
 <path fill="#ffffff" stroke="black" stroke-width="2" d="M28,-193.8C28,-193.8 337,-193.8 337,-193.8 343,-193.8 349,-199.8 349,-205.8 349,-205.8 349,-293.8 349,-293.8 349,-299.8 343,-305.8 337,-305.8 337,-305.8 28,-305.8 28,-305.8 22,-305.8 16,-299.8 16,-293.8 16,-293.8 16,-205.8 16,-205.8 16,-199.8 22,-193.8 28,-193.8"/>
@@ -28,16 +38,6 @@
 <title>cluster_src/config&#45;utl</title>
 <path fill="#ffffff" stroke="black" stroke-width="2" d="M1358,-201.8C1358,-201.8 1479,-201.8 1479,-201.8 1485,-201.8 1491,-207.8 1491,-213.8 1491,-213.8 1491,-241.8 1491,-241.8 1491,-247.8 1485,-253.8 1479,-253.8 1479,-253.8 1358,-253.8 1358,-253.8 1352,-253.8 1346,-247.8 1346,-241.8 1346,-241.8 1346,-213.8 1346,-213.8 1346,-207.8 1352,-201.8 1358,-201.8"/>
 <text text-anchor="middle" x="1418.5" y="-242.6" font-family="Helvetica,sans-Serif" font-weight="bold" font-size="9.00">config&#45;utl</text>
-</g>
-<g id="clust5" class="cluster">
-<title>cluster_src/enrich</title>
-<path fill="#ffffff" stroke="black" stroke-width="2" d="M174,-57.2C174,-57.2 526,-57.2 526,-57.2 532,-57.2 538,-63.2 538,-69.2 538,-69.2 538,-173.8 538,-173.8 538,-179.8 532,-185.8 526,-185.8 526,-185.8 174,-185.8 174,-185.8 168,-185.8 162,-179.8 162,-173.8 162,-173.8 162,-69.2 162,-69.2 162,-63.2 168,-57.2 174,-57.2"/>
-<text text-anchor="middle" x="350" y="-174.6" font-family="Helvetica,sans-Serif" font-weight="bold" font-size="9.00">enrich</text>
-</g>
-<g id="clust6" class="cluster">
-<title>cluster_src/enrich/derive</title>
-<path fill="#ffffff" stroke="black" stroke-width="2" d="M182,-65.2C182,-65.2 438,-65.2 438,-65.2 444,-65.2 450,-71.2 450,-77.2 450,-77.2 450,-129 450,-129 450,-135 444,-141 438,-141 438,-141 182,-141 182,-141 176,-141 170,-135 170,-129 170,-129 170,-77.2 170,-77.2 170,-71.2 176,-65.2 182,-65.2"/>
-<text text-anchor="middle" x="310" y="-129.8" font-family="Helvetica,sans-Serif" font-weight="bold" font-size="9.00">derive</text>
 </g>
 <g id="clust7" class="cluster">
 <title>cluster_src/extract</title>
@@ -326,12 +326,12 @@
 <!-- src/schema -->
 <g id="node31" class="node">
 <title>src/schema</title>
-<g id="a_node31"><a xlink:href="https://github.com/sverweij/dependency-cruiser/blob/develop/src/schema" xlink:title="schema">
-<polygon fill="#ffffcc" stroke="black" points="1076,-115 1024,-115 1022,-113 1022,-97 1074,-97 1076,-99 1076,-115"/>
-<polyline fill="none" stroke="black" points="1074,-113 1022,-113 "/>
-<polyline fill="none" stroke="black" points="1074,-113 1074,-97 "/>
-<polyline fill="none" stroke="black" points="1074,-113 1076,-115 "/>
-<text text-anchor="middle" x="1049" y="-103.8" font-family="Helvetica,sans-Serif" font-size="9.00">schema</text>
+<g id="a_node31"><a xlink:href="https://github.com/sverweij/dependency-cruiser/blob/develop/src/schema" xlink:title="no&#45;orphans">
+<polygon fill="#ccffcc" stroke="red" points="1076,-115 1024,-115 1022,-113 1022,-97 1074,-97 1076,-99 1076,-115"/>
+<polyline fill="none" stroke="red" points="1074,-113 1022,-113 "/>
+<polyline fill="none" stroke="red" points="1074,-113 1074,-97 "/>
+<polyline fill="none" stroke="red" points="1074,-113 1076,-115 "/>
+<text text-anchor="middle" x="1049" y="-103.8" font-family="Helvetica,sans-Serif" font-size="9.00" fill="red">schema</text>
 </a>
 </g>
 </g>
