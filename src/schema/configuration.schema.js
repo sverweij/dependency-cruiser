@@ -234,6 +234,7 @@ module.exports = {
         "npm-unknown",
         "undetermined",
         "unknown",
+        "type-only",
       ],
     },
     REAsStringsType: {

@@ -308,4 +308,22 @@ describe("extract/resolve/determineDependencyTypes - determine dependencyTypes",
       )
     ).to.deep.equal(["undetermined"]);
   });
+
+  it("classifies a type only import as a type-only dependency", () => {
+    expect(
+      determineDependencyTypes(
+        {
+          typeOnly: true,
+          couldNotResolve: false,
+          resolved: "src/bla/something-local",
+        },
+        "./something-local",
+        {},
+        "whatever",
+        {
+          modules: ["node_modules", "src"],
+        }
+      )
+    ).to.deep.equal(["local", "type-only"]);
+  });
 });

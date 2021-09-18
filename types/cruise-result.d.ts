@@ -123,6 +123,13 @@ export interface IDependency {
    */
   preCompilationOnly?: boolean;
   /**
+   * 'true' when the module included the module explicitly as type only with the '
+   * type' keyword e.g. import type { IThingus } from 'thing' Dependency-cruiser
+   * will only specify this attribute for TypeScript and when the 'tsPreCompilationDeps'
+   * option has either the value true or 'specify'.
+   */
+  typeOnly?: boolean;
+  /**
    * If following this dependency will ultimately return to the source (circular === true),
    * this attribute will contain an (ordered) array of module names that shows (one of) the
    * circular path(s)

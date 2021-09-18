@@ -121,6 +121,14 @@ export default {
             "Dependency-cruiser will only specify this attribute for TypeScript and " +
             "then only when the option 'tsPreCompilationDeps' has the value 'specify'.",
         },
+        typeOnly: {
+          type: "boolean",
+          description:
+            "'true' when the module included the module explicitly as type only " +
+            "with the 'type' keyword e.g. import type { IThingus } from 'thing' " +
+            "Dependency-cruiser will only specify this attribute for TypeScript and " +
+            "when the 'tsPreCompilationDeps' option has either the value true or 'specify'.",
+        },
         circular: {
           type: "boolean",
           description:

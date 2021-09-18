@@ -217,6 +217,10 @@
           "type": "boolean",
           "description": "'true' if the dependency between this dependency and its parent only exists before compilation takes place. 'false in all other cases. Dependency-cruiser will only specify this attribute for TypeScript and then only when the option 'tsPreCompilationDeps' has the value 'specify'."
         },
+        "typeOnly": {
+          "type": "boolean",
+          "description": "'true' when the module included the module explicitly as type only with the 'type' keyword e.g. import type { IThingus } from 'thing' Dependency-cruiser will only specify this attribute for TypeScript and when the 'tsPreCompilationDeps' option has either the value true or 'specify'."
+        },
         "circular": {
           "type": "boolean",
           "description": "'true' if following this dependency will ultimately return to the source, false in all other cases"
@@ -254,7 +258,8 @@
         "npm-peer",
         "npm-unknown",
         "undetermined",
-        "unknown"
+        "unknown",
+        "type-only"
       ]
     },
     "ModuleSystemType": {

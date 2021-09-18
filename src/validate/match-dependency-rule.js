@@ -41,7 +41,7 @@ function match(pFrom, pTo) {
       // is in the rule but not in the dependency there won't be a match
       // anyway, so we can use the default propertyEquals method regardless
       propertyEquals(pTo, pRule, "preCompilationOnly") &&
-      // couldNotResolve, circular, dynamic and exoticallyRequired are
+      // couldNotResolve, circular, dynamic and exoticallyRequired _are_ mandatory
       propertyEquals(pTo, pRule, "couldNotResolve") &&
       propertyEquals(pTo, pRule, "circular") &&
       propertyEquals(pTo, pRule, "dynamic") &&

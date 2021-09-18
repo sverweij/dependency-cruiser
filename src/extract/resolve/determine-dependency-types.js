@@ -144,7 +144,7 @@ function determineExternalModuleDependencyTypes(
 /* eslint max-params:0, complexity:0 */
 /**
  *
- * @param {import("../../../types/cruise-result").IModule} pModule the dependency object with all information found hitherto
+ * @param {import("../../../types/cruise-result").IDependency} pDependency the dependency object with all information found hitherto
  * @param {string} pModuleName the module name as found in the source
  * @param {any} pManifest a package.json, in object format
  * @param {string} pFileDirectory the directory relative to which to resolve (only used for npm deps here)
@@ -154,7 +154,7 @@ function determineExternalModuleDependencyTypes(
  * @return {import("../../../types/shared-types").DependencyType[]} an array of dependency types for the dependency
  */
 module.exports = function determineDependencyTypes(
-  pModule,
+  pDependency,
   pModuleName,
   pManifest,
   pFileDirectory,
@@ -165,7 +165,7 @@ module.exports = function determineDependencyTypes(
   let lReturnValue = ["undetermined"];
   pResolveOptions = pResolveOptions || {};
 
-  if (pModule.couldNotResolve) {
+  if (pDependency.couldNotResolve) {
     lReturnValue = ["unknown"];
   } else if (isCore(pModuleName)) {
     // this 'isCore' business seems duplicate (it's already in
@@ -177,18 +177,26 @@ module.exports = function determineDependencyTypes(
   } else if (isRelativeModuleName(pModuleName)) {
     lReturnValue = ["local"];
   } else if (
-    isExternalModule(pModule.resolved, pResolveOptions.modules, pBaseDirectory)
+    isExternalModule(
+      pDependency.resolved,
+      pResolveOptions.modules,
+      pBaseDirectory
+    )
   ) {
     lReturnValue = determineExternalModuleDependencyTypes(
-      pModule,
+      pDependency,
       pModuleName,
       pManifest,
       pFileDirectory,
       pResolveOptions,
       pBaseDirectory
     );
-  } else if (isAliassy(pModuleName, pModule.resolved, pResolveOptions)) {
+  } else if (isAliassy(pModuleName, pDependency.resolved, pResolveOptions)) {
     lReturnValue = ["aliased"];
+  }
+
+  if (pDependency.typeOnly) {
+    lReturnValue.push("type-only");
   }
 
   return lReturnValue;
