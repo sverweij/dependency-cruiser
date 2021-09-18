@@ -1,29 +1,5 @@
 [
   {
-    "from": "src/schema/baseline-violations.schema.json",
-    "to": "src/schema/baseline-violations.schema.json",
-    "rule": {
-      "severity": "error",
-      "name": "no-orphans"
-    }
-  },
-  {
-    "from": "src/schema/configuration.schema.json",
-    "to": "src/schema/configuration.schema.json",
-    "rule": {
-      "severity": "error",
-      "name": "no-orphans"
-    }
-  },
-  {
-    "from": "src/schema/cruise-result.schema.json",
-    "to": "src/schema/cruise-result.schema.json",
-    "rule": {
-      "severity": "error",
-      "name": "no-orphans"
-    }
-  },
-  {
     "from": "test/extract/ast-extractors/typescript2.8-union-types-ast.json",
     "to": "test/extract/ast-extractors/typescript2.8-union-types-ast.json",
     "rule": {
@@ -69,54 +45,6 @@
     "rule": {
       "severity": "error",
       "name": "not-unreachable-from-cli"
-    }
-  },
-  {
-    "from": "src/schema/baseline-violations.schema.json",
-    "to": "src/schema/baseline-violations.schema.json",
-    "rule": {
-      "severity": "error",
-      "name": "not-unreachable-from-cli"
-    }
-  },
-  {
-    "from": "src/schema/configuration.schema.json",
-    "to": "src/schema/configuration.schema.json",
-    "rule": {
-      "severity": "error",
-      "name": "not-unreachable-from-cli"
-    }
-  },
-  {
-    "from": "src/schema/cruise-result.schema.json",
-    "to": "src/schema/cruise-result.schema.json",
-    "rule": {
-      "severity": "error",
-      "name": "not-unreachable-from-cli"
-    }
-  },
-  {
-    "from": "src/schema/baseline-violations.schema.json",
-    "to": "src/schema/baseline-violations.schema.json",
-    "rule": {
-      "severity": "warn",
-      "name": "not-unreachable-from-test"
-    }
-  },
-  {
-    "from": "src/schema/configuration.schema.json",
-    "to": "src/schema/configuration.schema.json",
-    "rule": {
-      "severity": "warn",
-      "name": "not-unreachable-from-test"
-    }
-  },
-  {
-    "from": "src/schema/cruise-result.schema.json",
-    "to": "src/schema/cruise-result.schema.json",
-    "rule": {
-      "severity": "warn",
-      "name": "not-unreachable-from-test"
     }
   },
   {
