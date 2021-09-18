@@ -113,5 +113,6 @@ module.exports = function gatherInitialSources(
       } else {
         return pAll.concat(pathToPosix(pFileOrDirectory));
       }
-    }, []);
+    }, [])
+    .sort();
 };

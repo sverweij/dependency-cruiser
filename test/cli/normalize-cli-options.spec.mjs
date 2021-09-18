@@ -1,6 +1,6 @@
 import { fileURLToPath } from "url";
 import { expect } from "chai";
-import normalizeOptions from "../../src/cli/normalize-options.js";
+import normalizeOptions from "../../src/cli/normalize-cli-options.js";
 
 // eslint-disable max-statements
 describe("cli/normalizeOptions", () => {
@@ -246,6 +246,45 @@ describe("cli/normalizeOptions", () => {
     expect(normalizeOptions({ progress: "performance-log" })).to.contain({
       progress: "performance-log",
     });
+  });
+});
+
+describe("cli/normalizeOptions - known violations", () => {
+  const WORKINGDIR = process.cwd();
+
+  afterEach(() => {
+    process.chdir(WORKINGDIR);
+  });
+
+  it("--ignore-known without params gets the default known-violations json", () => {
+    process.chdir("test/cli/fixtures/normalize-config/known-violations");
+    expect(normalizeOptions({ ignoreKnown: true })).to.deep.equal({
+      outputTo: "-",
+      outputType: "err",
+      knownViolationsFile: ".dependency-cruiser-known-violations.json",
+      ignoreKnown: true,
+      validate: false,
+    });
+  });
+
+  it("--ignore-known with params gets the mentioned known-violations", () => {
+    process.chdir("test/cli/fixtures/normalize-config/known-violations");
+    expect(
+      normalizeOptions({ ignoreKnown: "custom-known-violations.json" })
+    ).to.deep.equal({
+      outputTo: "-",
+      outputType: "err",
+      knownViolationsFile: "custom-known-violations.json",
+      ignoreKnown: "custom-known-violations.json",
+      validate: false,
+    });
+  });
+
+  it("--ignore-known with non-existing file as param throws", () => {
+    process.chdir("test/cli/fixtures/normalize-config/known-violations");
+    expect(() =>
+      normalizeOptions({ ignoreKnown: "this-file-does-not-exist" })
+    ).to.throw();
   });
 });
 

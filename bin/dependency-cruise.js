@@ -26,7 +26,7 @@ try {
     )
     .option(
       "-T, --output-type <type>",
-      "output type; e.g. err, err-html, dot, ddot, archi, flat or json\n(default: err)"
+      "output type; e.g. err, err-html, dot, ddot, archi, flat, baseline or json\n(default: err)"
     )
     .option(
       "-f, --output-to <file>",
@@ -45,6 +45,10 @@ try {
     .option(
       "-X, --do-not-follow <regex>",
       "include modules matching the regex, but don't follow their dependencies"
+    )
+    .option(
+      "--ignore-known [file]",
+      "ignore known violations as saved in [file] (default: .dependency-cruiser-known-violations.json)"
     )
     .option(
       "--ts-config [file]",

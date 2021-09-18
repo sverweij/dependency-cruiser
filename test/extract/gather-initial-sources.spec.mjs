@@ -58,16 +58,16 @@ describe("extract/gatherInitialSources", () => {
         EMPTYOPTIONS
       ).map(pathToPosix)
     ).to.deep.equal([
-      "test/extract/fixtures/ts/index.ts",
-      "test/extract/fixtures/ts/javascriptThing.js",
-      "test/extract/fixtures/ts/sub/index.ts",
-      "test/extract/fixtures/ts/sub/kaching.ts",
-      "test/extract/fixtures/ts/sub/willBeReExported.ts",
       "test/extract/fixtures/coffee/index.coffee",
       "test/extract/fixtures/coffee/javascriptThing.js",
       "test/extract/fixtures/coffee/sub/index.coffee",
       "test/extract/fixtures/coffee/sub/kaching.litcoffee",
       "test/extract/fixtures/coffee/sub/willBeReExported.coffee.md",
+      "test/extract/fixtures/ts/index.ts",
+      "test/extract/fixtures/ts/javascriptThing.js",
+      "test/extract/fixtures/ts/sub/index.ts",
+      "test/extract/fixtures/ts/sub/kaching.ts",
+      "test/extract/fixtures/ts/sub/willBeReExported.ts",
     ]);
   });
 
@@ -82,17 +82,17 @@ describe("extract/gatherInitialSources", () => {
         EMPTYOPTIONS
       ).map(pathToPosix)
     ).to.deep.equal([
-      "test/extract/fixtures/ts/index.ts",
-      "test/extract/fixtures/ts/javascriptThing.js",
-      "test/extract/fixtures/ts/sub/index.ts",
-      "test/extract/fixtures/ts/sub/kaching.ts",
-      "test/extract/fixtures/ts/sub/willBeReExported.ts",
-      "test/extract/fixtures/es6/imports-and-exports.js",
       "test/extract/fixtures/coffee/index.coffee",
       "test/extract/fixtures/coffee/javascriptThing.js",
       "test/extract/fixtures/coffee/sub/index.coffee",
       "test/extract/fixtures/coffee/sub/kaching.litcoffee",
       "test/extract/fixtures/coffee/sub/willBeReExported.coffee.md",
+      "test/extract/fixtures/es6/imports-and-exports.js",
+      "test/extract/fixtures/ts/index.ts",
+      "test/extract/fixtures/ts/javascriptThing.js",
+      "test/extract/fixtures/ts/sub/index.ts",
+      "test/extract/fixtures/ts/sub/kaching.ts",
+      "test/extract/fixtures/ts/sub/willBeReExported.ts",
     ]);
   });
 
@@ -107,13 +107,13 @@ describe("extract/gatherInitialSources", () => {
         { exclude: { path: "dex" } }
       ).map(pathToPosix)
     ).to.deep.equal([
-      "test/extract/fixtures/ts/javascriptThing.js",
-      "test/extract/fixtures/ts/sub/kaching.ts",
-      "test/extract/fixtures/ts/sub/willBeReExported.ts",
-      "test/extract/fixtures/es6/imports-and-exports.js",
       "test/extract/fixtures/coffee/javascriptThing.js",
       "test/extract/fixtures/coffee/sub/kaching.litcoffee",
       "test/extract/fixtures/coffee/sub/willBeReExported.coffee.md",
+      "test/extract/fixtures/es6/imports-and-exports.js",
+      "test/extract/fixtures/ts/javascriptThing.js",
+      "test/extract/fixtures/ts/sub/kaching.ts",
+      "test/extract/fixtures/ts/sub/willBeReExported.ts",
     ]);
   });
 

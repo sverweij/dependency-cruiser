@@ -10,7 +10,7 @@ const SEVERITY2TEAMCITY_SEVERITY = {
 
 function severity2teamcitySeverity(pSeverity) {
   // eslint-disable-next-line security/detect-object-injection
-  return SEVERITY2TEAMCITY_SEVERITY[pSeverity];
+  return SEVERITY2TEAMCITY_SEVERITY[pSeverity] || "INFO";
 }
 
 function reportRules(pRules, pViolations) {

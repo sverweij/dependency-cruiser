@@ -1,0 +1,18 @@
+[
+  {
+    "from": "src/schema/baseline-violations.schema.js",
+    "to": "src/schema/baseline-violations.schema.js",
+    "rule": {
+      "severity": "error",
+      "name": "not-unreachable-from-cli"
+    }
+  },
+  {
+    "from": "src/cli/format.js",
+    "to": "src/cli/format.js",
+    "rule": {
+      "severity": "info",
+      "name": "not-reachable-from-folder-index"
+    }
+  }
+]

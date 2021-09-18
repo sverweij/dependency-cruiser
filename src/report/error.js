@@ -9,6 +9,7 @@ const SEVERITY2CHALK = {
   error: chalk.red,
   warn: chalk.yellow,
   info: chalk.cyan,
+  ignore: chalk.gray,
 };
 
 const CYCLIC_PATH_INDENT = 6;
@@ -63,7 +64,7 @@ function formatSummary(pSummary) {
     pSummary
   )} dependency violations (${formatMeta(pSummary)}). ${
     pSummary.totalCruised
-  } modules, ${pSummary.totalDependenciesCruised} dependencies cruised.\n\n`;
+  } modules, ${pSummary.totalDependenciesCruised} dependencies cruised.\n`;
 
   return pSummary.error > 0 ? chalk.red(lMessage) : lMessage;
 }
@@ -81,20 +82,41 @@ function addExplanation(pRuleSet, pLong) {
     : (pViolation) => pViolation;
 }
 
+function formatIgnoreWarning(pViolations) {
+  const lIgnoredViolations = pViolations.filter(
+    (pViolation) => pViolation.rule.severity === "ignore"
+  );
+
+  if (lIgnoredViolations.length > 0) {
+    return chalk.yellow(
+      `${figures.warning} ${lIgnoredViolations.length} known violations ignored. Run without --ignore-known to see them.\n`
+    );
+  }
+  return "";
+}
+
 function report(pResults, pLong) {
-  if (pResults.summary.violations.length === 0) {
+  const lNonIgnorableViolations = pResults.summary.violations.filter(
+    (pViolation) => pViolation.rule.severity !== "ignore"
+  );
+
+  if (lNonIgnorableViolations.length === 0) {
     return `\n${chalk.green(figures.tick)} no dependency violations found (${
       pResults.summary.totalCruised
     } modules, ${
       pResults.summary.totalDependenciesCruised
-    } dependencies cruised)\n\n`;
+    } dependencies cruised)\n${formatIgnoreWarning(
+      pResults.summary.violations
+    )}\n\n`;
   }
 
-  return pResults.summary.violations
+  return lNonIgnorableViolations
     .reverse()
     .map(addExplanation(pResults.summary.ruleSetUsed, pLong))
     .reduce((pAll, pThis) => `${pAll}  ${formatViolation(pThis)}\n`, "\n")
-    .concat(formatSummary(pResults.summary));
+    .concat(formatSummary(pResults.summary))
+    .concat(formatIgnoreWarning(pResults.summary.violations))
+    .concat(`\n`);
 }
 
 /**
