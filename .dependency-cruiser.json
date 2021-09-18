@@ -17,7 +17,8 @@
         "orphan": true,
         "pathNot": [
           "(^|/)\\.[^/]+\\.(js|cjs|mjs|ts|json)$",
-          "\\.d\\.ts$|(^|/)tsconfig\\.json$",
+          "\\.d\\.ts$",
+          "(^|/)tsconfig\\.json$",
           "(^|/)(babel|webpack)\\.config\\.(js|cjs|mjs|ts|json)$",
           "-reporter-plugin\\.js$",
           "\\.schema\\.json$"
