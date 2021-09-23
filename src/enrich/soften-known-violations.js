@@ -1,5 +1,6 @@
 const bus = require("../utl/bus");
 const busLogLevels = require("../utl/bus-log-levels");
+const isSameViolation = require("./summarize/is-same-violation");
 
 function softenModuleViolation(
   pRule,
@@ -26,11 +27,8 @@ function softenDependencyViolation(
 ) {
   return {
     ...pViolationKey.rule,
-    severity: pKnownDependencyViolations.some(
-      (pKnownError) =>
-        pKnownError.from === pViolationKey.from &&
-        pKnownError.to === pViolationKey.to &&
-        pKnownError.rule.name === pViolationKey.rule.name
+    severity: pKnownDependencyViolations.some((pKnownError) =>
+      isSameViolation(pKnownError, pViolationKey)
     )
       ? pSoftenedSeverity
       : pViolationKey.rule.severity,
@@ -48,7 +46,12 @@ function softenDependencyViolations(
       ...pDependency,
       rules: pDependency.rules.map((pRule) =>
         softenDependencyViolation(
-          { rule: pRule, from: pModuleSource, to: pDependency.resolved },
+          {
+            rule: pRule,
+            from: pModuleSource,
+            to: pDependency.resolved,
+            cycle: pDependency.cycle,
+          },
           pKnownDependencyViolations,
           pSoftenedSeverity
         )

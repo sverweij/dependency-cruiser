@@ -1,8 +1,9 @@
 const _flattenDeep = require("lodash/flattenDeep");
 const _get = require("lodash/get");
+const _uniqWith = require("lodash/uniqWith");
 const { findRuleByName } = require("../../graph-utl/rule-set");
 const compare = require("../../graph-utl/compare");
-const deDuplicateViolations = require("./de-duplicate-violations");
+const isSameViolation = require("./is-same-violation");
 
 function cutNonTransgressions(pSourceEntry) {
   return {
@@ -129,10 +130,11 @@ function extractModuleViolations(pModules, pRuleSet) {
 }
 
 module.exports = function summarizeModules(pModules, pRuleSet) {
-  const lViolations = deDuplicateViolations(
+  const lViolations = _uniqWith(
     extractDependencyViolations(pModules, pRuleSet)
       .concat(extractModuleViolations(pModules, pRuleSet))
-      .sort(compare.violations)
+      .sort(compare.violations),
+    isSameViolation
   );
 
   return {
