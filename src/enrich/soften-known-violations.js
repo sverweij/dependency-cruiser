@@ -19,6 +19,25 @@ function softenModuleViolation(
   };
 }
 
+function knownErrorMatchesViolation(pKnownError, pViolationKey) {
+  if (pKnownError.rule.name === pViolationKey.rule.name) {
+    if (pViolationKey.cycle && pKnownError.cycle) {
+      return (
+        pKnownError.cycle.length === pViolationKey.cycle.length &&
+        pKnownError.cycle.every((pModule) =>
+          pViolationKey.cycle.includes(pModule)
+        )
+      );
+    } else {
+      return (
+        pKnownError.from === pViolationKey.from &&
+        pKnownError.to === pViolationKey.to
+      );
+    }
+  }
+  return false;
+}
+
 function softenDependencyViolation(
   pViolationKey,
   pKnownDependencyViolations,
@@ -26,11 +45,8 @@ function softenDependencyViolation(
 ) {
   return {
     ...pViolationKey.rule,
-    severity: pKnownDependencyViolations.some(
-      (pKnownError) =>
-        pKnownError.from === pViolationKey.from &&
-        pKnownError.to === pViolationKey.to &&
-        pKnownError.rule.name === pViolationKey.rule.name
+    severity: pKnownDependencyViolations.some((pKnownError) =>
+      knownErrorMatchesViolation(pKnownError, pViolationKey)
     )
       ? pSoftenedSeverity
       : pViolationKey.rule.severity,
@@ -48,7 +64,12 @@ function softenDependencyViolations(
       ...pDependency,
       rules: pDependency.rules.map((pRule) =>
         softenDependencyViolation(
-          { rule: pRule, from: pModuleSource, to: pDependency.resolved },
+          {
+            rule: pRule,
+            from: pModuleSource,
+            to: pDependency.resolved,
+            cycle: pDependency.cycle,
+          },
           pKnownDependencyViolations,
           pSoftenedSeverity
         )
