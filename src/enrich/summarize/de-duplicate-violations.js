@@ -1,16 +1,18 @@
-const _difference = require("lodash/difference");
 const _uniqWith = require("lodash/uniqWith");
 
 function violationIsEqual(pLeftViolation, pRightViolation) {
+  let lReturnValue = false;
   if (
     pLeftViolation.rule.name === pRightViolation.rule.name &&
     pLeftViolation.cycle
   ) {
-    return (
-      _difference(pLeftViolation.cycle, pRightViolation.cycle).length === 0
-    );
+    lReturnValue =
+      pLeftViolation.cycle.length === pRightViolation.cycle.length &&
+      pLeftViolation.cycle.every((pModuleName) =>
+        pRightViolation.cycle.includes(pModuleName)
+      );
   }
-  return false;
+  return lReturnValue;
 }
 
 module.exports = function deDuplicateViolations(pViolations) {

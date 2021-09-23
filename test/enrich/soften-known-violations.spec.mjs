@@ -108,6 +108,17 @@ describe("enrich/soften-known-violations - dependency violations", () => {
       },
     },
   ];
+  const lKnownCyclicViolations = [
+    {
+      from: "./cycle-1.js",
+      to: "./cycle-2.js",
+      rule: {
+        name: "no-cycles",
+        severity: "info",
+      },
+      cycle: ["./cycle-2.js", "./cycle-3.js", "./cycle-1.js"],
+    },
+  ];
 
   it("no violations => no violations", () => {
     expect(softenKnownViolations([], lKnownDependencyViolations)).to.deep.equal(
@@ -244,6 +255,103 @@ describe("enrich/soften-known-violations - dependency violations", () => {
 
     expect(
       softenKnownViolations(lModules, lKnownDependencyViolations, "warn")
+    ).to.deep.equal(lSoftenedModules);
+  });
+
+  it("invalid circular dependencies that are in known violations are softened (to the specified level)", () => {
+    /** @type import("../../types/cruise-result").IModule[] */
+    const lModules = [
+      {
+        source: "./cycle-1.js",
+        valid: true,
+        dependencies: [
+          {
+            resolved: "cycle-2.js",
+            module: "./cycle-2",
+            valid: false,
+            circular: true,
+            rules: [{ name: "no-cycles", severity: "error" }],
+            cycle: ["./cycle-2.js", "./cycle-3.js", "./cycle-1.js"],
+          },
+        ],
+      },
+      {
+        source: "./cycle-2.js",
+        valid: true,
+        dependencies: [
+          {
+            resolved: "cycle-3.js",
+            module: "./cycle-3",
+            valid: false,
+            circular: true,
+            rules: [{ name: "no-cycles", severity: "error" }],
+            cycle: ["./cycle-3.js", "./cycle-1.js", "./cycle-2.js"],
+          },
+        ],
+      },
+      {
+        source: "./cycle-3.js",
+        valid: true,
+        dependencies: [
+          {
+            resolved: "cycle-1.js",
+            module: "./cycle-1",
+            valid: false,
+            circular: true,
+            rules: [{ name: "no-cycles", severity: "error" }],
+            cycle: ["./cycle-1.js", "./cycle-2.js", "./cycle-3.js"],
+          },
+        ],
+      },
+    ];
+
+    const lSoftenedModules = [
+      {
+        source: "./cycle-1.js",
+        valid: true,
+        dependencies: [
+          {
+            resolved: "cycle-2.js",
+            module: "./cycle-2",
+            valid: false,
+            circular: true,
+            rules: [{ name: "no-cycles", severity: "info" }],
+            cycle: ["./cycle-2.js", "./cycle-3.js", "./cycle-1.js"],
+          },
+        ],
+      },
+      {
+        source: "./cycle-2.js",
+        valid: true,
+        dependencies: [
+          {
+            resolved: "cycle-3.js",
+            module: "./cycle-3",
+            valid: false,
+            circular: true,
+            rules: [{ name: "no-cycles", severity: "info" }],
+            cycle: ["./cycle-3.js", "./cycle-1.js", "./cycle-2.js"],
+          },
+        ],
+      },
+      {
+        source: "./cycle-3.js",
+        valid: true,
+        dependencies: [
+          {
+            resolved: "cycle-1.js",
+            module: "./cycle-1",
+            valid: false,
+            circular: true,
+            rules: [{ name: "no-cycles", severity: "info" }],
+            cycle: ["./cycle-1.js", "./cycle-2.js", "./cycle-3.js"],
+          },
+        ],
+      },
+    ];
+
+    expect(
+      softenKnownViolations(lModules, lKnownCyclicViolations, "info")
     ).to.deep.equal(lSoftenedModules);
   });
 });
