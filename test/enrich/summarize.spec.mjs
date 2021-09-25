@@ -2,6 +2,7 @@ import { expect } from "chai";
 import summarize from "../../src/enrich/summarize/index.js";
 import cycleStartsOnOne from "./mocks/cycle-starts-on-one.mjs";
 import cycleStartsOnTwo from "./mocks/cycle-starts-on-two.mjs";
+import cycleFest from "./mocks/cycle-fest.mjs";
 
 describe("enrich/summarize", () => {
   it("doesn't add a rule set when there isn't one", () => {
@@ -42,7 +43,7 @@ describe("enrich/summarize", () => {
         forbidden: [
           {
             name: "no-circular",
-            severity: "error",
+            severity: "warn",
             from: {},
             to: {
               circular: true,
@@ -55,5 +56,76 @@ describe("enrich/summarize", () => {
     const lResult2 = summarize(cycleStartsOnTwo, lOptions, ["src"]);
 
     expect(lResult1).to.deep.equal(lResult2);
+  });
+
+  it("summarizes all circular dependencies, even when there's more per thingus", () => {
+    const lOptions = {
+      ruleSet: {
+        forbidden: [
+          {
+            name: "no-circular",
+            severity: "warn",
+            from: {},
+            to: {
+              circular: true,
+            },
+          },
+        ],
+      },
+    };
+    const lExpected = {
+      violations: [
+        {
+          from: "src/brand.js",
+          to: "src/domain.js",
+          rule: {
+            severity: "warn",
+            name: "no-circular",
+          },
+          cycle: ["src/domain.js", "src/market.js", "src/brand.js"],
+        },
+        {
+          from: "src/brand.js",
+          to: "src/market.js",
+          rule: {
+            severity: "warn",
+            name: "no-circular",
+          },
+          cycle: ["src/market.js", "src/brand.js"],
+        },
+        {
+          from: "src/domain.js",
+          to: "src/market.js",
+          rule: {
+            severity: "warn",
+            name: "no-circular",
+          },
+          cycle: ["src/market.js", "src/domain.js"],
+        },
+      ],
+      error: 0,
+      warn: 3,
+      info: 0,
+      ignore: 0,
+      totalCruised: 3,
+      totalDependenciesCruised: 5,
+      optionsUsed: {
+        args: "src",
+      },
+      ruleSetUsed: {
+        forbidden: [
+          {
+            name: "no-circular",
+            severity: "warn",
+            from: {},
+            to: {
+              circular: true,
+            },
+          },
+        ],
+      },
+    };
+    const lResult = summarize(cycleFest, lOptions, ["src"]);
+    expect(lResult).to.deep.equal(lExpected);
   });
 });
