@@ -8,9 +8,7 @@
           "coreModule": false,
           "followable": true,
           "couldNotResolve": false,
-          "dependencyTypes": [
-            "local"
-          ],
+          "dependencyTypes": ["local"],
           "module": "./shared",
           "moduleSystem": "es6",
           "dynamic": false,
@@ -37,9 +35,7 @@
           "coreModule": false,
           "followable": true,
           "couldNotResolve": false,
-          "dependencyTypes": [
-            "local"
-          ],
+          "dependencyTypes": ["local"],
           "module": "../shared",
           "moduleSystem": "es6",
           "dynamic": false,
@@ -60,9 +56,7 @@
           "coreModule": false,
           "followable": false,
           "couldNotResolve": true,
-          "dependencyTypes": [
-            "unknown"
-          ],
+          "dependencyTypes": ["unknown"],
           "module": "react",
           "moduleSystem": "es6",
           "dynamic": false,
@@ -81,9 +75,7 @@
       "coreModule": false,
       "couldNotResolve": true,
       "matchesDoNotFollow": false,
-      "dependencyTypes": [
-        "unknown"
-      ],
+      "dependencyTypes": ["unknown"],
       "dependencies": [],
       "orphan": false,
       "valid": true
@@ -102,9 +94,7 @@
           "coreModule": false,
           "followable": true,
           "couldNotResolve": false,
-          "dependencyTypes": [
-            "local"
-          ],
+          "dependencyTypes": ["local"],
           "module": "./home",
           "moduleSystem": "es6",
           "dynamic": false,
@@ -118,9 +108,7 @@
           "coreModule": false,
           "followable": true,
           "couldNotResolve": false,
-          "dependencyTypes": [
-            "local"
-          ],
+          "dependencyTypes": ["local"],
           "module": "./routes-config",
           "moduleSystem": "es6",
           "dynamic": false,
@@ -134,9 +122,7 @@
           "coreModule": false,
           "followable": false,
           "couldNotResolve": true,
-          "dependencyTypes": [
-            "unknown"
-          ],
+          "dependencyTypes": ["unknown"],
           "module": "react",
           "moduleSystem": "es6",
           "dynamic": false,
@@ -150,9 +136,7 @@
           "coreModule": false,
           "followable": false,
           "couldNotResolve": true,
-          "dependencyTypes": [
-            "unknown"
-          ],
+          "dependencyTypes": ["unknown"],
           "module": "react-router-dom",
           "moduleSystem": "es6",
           "dynamic": false,
@@ -171,9 +155,7 @@
       "coreModule": false,
       "couldNotResolve": true,
       "matchesDoNotFollow": false,
-      "dependencyTypes": [
-        "unknown"
-      ],
+      "dependencyTypes": ["unknown"],
       "dependencies": [],
       "orphan": false,
       "valid": true
@@ -184,17 +166,13 @@
     "error": 0,
     "warn": 0,
     "info": 0,
+    "ignore": 0,
     "totalCruised": 8,
     "totalDependenciesCruised": 7,
     "optionsUsed": {
       "combinedDependencies": false,
       "externalModuleResolutionStrategy": "node_modules",
-      "moduleSystems": [
-        "amd",
-        "cjs",
-        "es6",
-        "tsd"
-      ],
+      "moduleSystems": ["amd", "cjs", "es6", "tsd"],
       "outputTo": "test/cli/output/babel-ts-result.json",
       "outputType": "json",
       "preserveSymlinks": false,

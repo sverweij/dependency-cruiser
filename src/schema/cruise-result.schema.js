@@ -172,6 +172,7 @@ module.exports = {
         error: { type: "number" },
         warn: { type: "number" },
         info: { type: "number" },
+        ignore: { type: "number" },
         totalCruised: { type: "number" },
         totalDependenciesCruised: { type: "number" },
         ruleSetUsed: { $ref: "#/definitions/RuleSetType" },

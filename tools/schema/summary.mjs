@@ -31,6 +31,10 @@ export default {
           description:
             "the number of informational level notices in the dependencies",
         },
+        ignore: {
+          type: "number",
+          description: "the number of ignored notices in the dependencies",
+        },
         totalCruised: {
           type: "number",
           description: "the number of modules cruised",

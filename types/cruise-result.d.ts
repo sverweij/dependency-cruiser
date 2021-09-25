@@ -272,6 +272,10 @@ export interface ISummary {
    */
   error: number;
   /**
+   * the number of ignored notices in the dependencies
+   */
+  ignore: number;
+  /**
    * the number of informational level notices in the dependencies
    */
   info: number;

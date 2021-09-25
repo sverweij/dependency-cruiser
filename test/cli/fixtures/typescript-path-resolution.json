@@ -8,9 +8,7 @@
           "coreModule": false,
           "followable": true,
           "couldNotResolve": false,
-          "dependencyTypes": [
-            "aliased"
-          ],
+          "dependencyTypes": ["aliased"],
           "module": "shared",
           "moduleSystem": "cjs",
           "dynamic": false,
@@ -37,9 +35,7 @@
           "coreModule": false,
           "followable": true,
           "couldNotResolve": false,
-          "dependencyTypes": [
-            "aliased"
-          ],
+          "dependencyTypes": ["aliased"],
           "module": "shared",
           "moduleSystem": "cjs",
           "dynamic": false,
@@ -58,17 +54,13 @@
     "error": 0,
     "warn": 0,
     "info": 0,
+    "ignore": 0,
     "totalCruised": 3,
     "totalDependenciesCruised": 2,
     "optionsUsed": {
       "combinedDependencies": false,
       "externalModuleResolutionStrategy": "node_modules",
-      "moduleSystems": [
-        "amd",
-        "cjs",
-        "es6",
-        "tsd"
-      ],
+      "moduleSystems": ["amd", "cjs", "es6", "tsd"],
       "outputTo": "test/cli/output/typescript-path-resolution.json",
       "outputType": "json",
       "preserveSymlinks": false,

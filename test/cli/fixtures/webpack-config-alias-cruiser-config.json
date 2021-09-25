@@ -14,9 +14,7 @@
           "coreModule": false,
           "followable": true,
           "couldNotResolve": false,
-          "dependencyTypes": [
-            "aliased"
-          ],
+          "dependencyTypes": ["aliased"],
           "module": "configSpullenAlias",
           "moduleSystem": "cjs",
           "dynamic": false,
@@ -30,9 +28,7 @@
           "coreModule": false,
           "followable": false,
           "couldNotResolve": false,
-          "dependencyTypes": [
-            "aliased"
-          ],
+          "dependencyTypes": ["aliased"],
           "module": "configSpullenAlias/someconfig.json",
           "moduleSystem": "cjs",
           "dynamic": false,
@@ -51,9 +47,7 @@
       "coreModule": false,
       "couldNotResolve": false,
       "matchesDoNotFollow": false,
-      "dependencyTypes": [
-        "aliased"
-      ],
+      "dependencyTypes": ["aliased"],
       "dependencies": [],
       "orphan": false,
       "valid": true
@@ -64,17 +58,13 @@
     "error": 0,
     "warn": 0,
     "info": 0,
+    "ignore": 0,
     "totalCruised": 3,
     "totalDependenciesCruised": 2,
     "optionsUsed": {
       "combinedDependencies": false,
       "externalModuleResolutionStrategy": "node_modules",
-      "moduleSystems": [
-        "amd",
-        "cjs",
-        "es6",
-        "tsd"
-      ],
+      "moduleSystems": ["amd", "cjs", "es6", "tsd"],
       "outputTo": "test/cli/output/webpack-config-alias-cruiser-config.json",
       "outputType": "json",
       "preserveSymlinks": false,

@@ -8,9 +8,7 @@
           "coreModule": true,
           "followable": false,
           "couldNotResolve": false,
-          "dependencyTypes": [
-            "core"
-          ],
+          "dependencyTypes": ["core"],
           "module": "path",
           "moduleSystem": "cjs",
           "dynamic": false,
@@ -29,9 +27,7 @@
       "coreModule": true,
       "couldNotResolve": false,
       "matchesDoNotFollow": false,
-      "dependencyTypes": [
-        "core"
-      ],
+      "dependencyTypes": ["core"],
       "dependencies": [],
       "orphan": false,
       "valid": true
@@ -44,9 +40,7 @@
           "coreModule": true,
           "followable": false,
           "couldNotResolve": false,
-          "dependencyTypes": [
-            "core"
-          ],
+          "dependencyTypes": ["core"],
           "module": "path",
           "moduleSystem": "cjs",
           "dynamic": false,
@@ -67,9 +61,7 @@
           "coreModule": false,
           "followable": true,
           "couldNotResolve": false,
-          "dependencyTypes": [
-            "local"
-          ],
+          "dependencyTypes": ["local"],
           "module": "./one_only_one",
           "moduleSystem": "cjs",
           "dynamic": false,
@@ -83,9 +75,7 @@
           "coreModule": false,
           "followable": true,
           "couldNotResolve": false,
-          "dependencyTypes": [
-            "local"
-          ],
+          "dependencyTypes": ["local"],
           "module": "./one_only_two",
           "moduleSystem": "cjs",
           "dynamic": false,
@@ -99,9 +89,7 @@
           "coreModule": false,
           "followable": true,
           "couldNotResolve": false,
-          "dependencyTypes": [
-            "local"
-          ],
+          "dependencyTypes": ["local"],
           "module": "./shared",
           "moduleSystem": "cjs",
           "dynamic": false,
@@ -115,9 +103,7 @@
           "coreModule": false,
           "followable": true,
           "couldNotResolve": false,
-          "dependencyTypes": [
-            "local"
-          ],
+          "dependencyTypes": ["local"],
           "module": "./sub/dir",
           "moduleSystem": "cjs",
           "dynamic": false,
@@ -131,9 +117,7 @@
           "coreModule": true,
           "followable": false,
           "couldNotResolve": false,
-          "dependencyTypes": [
-            "core"
-          ],
+          "dependencyTypes": ["core"],
           "module": "fs",
           "moduleSystem": "cjs",
           "dynamic": false,
@@ -152,9 +136,7 @@
       "coreModule": true,
       "couldNotResolve": false,
       "matchesDoNotFollow": false,
-      "dependencyTypes": [
-        "core"
-      ],
+      "dependencyTypes": ["core"],
       "dependencies": [],
       "orphan": false,
       "valid": true
@@ -167,9 +149,7 @@
           "coreModule": true,
           "followable": false,
           "couldNotResolve": false,
-          "dependencyTypes": [
-            "core"
-          ],
+          "dependencyTypes": ["core"],
           "module": "path",
           "moduleSystem": "cjs",
           "dynamic": false,
@@ -190,9 +170,7 @@
           "coreModule": false,
           "followable": true,
           "couldNotResolve": false,
-          "dependencyTypes": [
-            "local"
-          ],
+          "dependencyTypes": ["local"],
           "module": "./depindir",
           "moduleSystem": "cjs",
           "dynamic": false,
@@ -206,9 +184,7 @@
           "coreModule": true,
           "followable": false,
           "couldNotResolve": false,
-          "dependencyTypes": [
-            "core"
-          ],
+          "dependencyTypes": ["core"],
           "module": "path",
           "moduleSystem": "cjs",
           "dynamic": false,
@@ -229,9 +205,7 @@
           "coreModule": true,
           "followable": false,
           "couldNotResolve": false,
-          "dependencyTypes": [
-            "core"
-          ],
+          "dependencyTypes": ["core"],
           "module": "path",
           "moduleSystem": "cjs",
           "dynamic": false,
@@ -252,9 +226,7 @@
           "coreModule": false,
           "followable": true,
           "couldNotResolve": false,
-          "dependencyTypes": [
-            "local"
-          ],
+          "dependencyTypes": ["local"],
           "module": "./shared",
           "moduleSystem": "cjs",
           "dynamic": false,
@@ -268,9 +240,7 @@
           "coreModule": false,
           "followable": false,
           "couldNotResolve": false,
-          "dependencyTypes": [
-            "local"
-          ],
+          "dependencyTypes": ["local"],
           "module": "./somedata.json",
           "moduleSystem": "cjs",
           "dynamic": false,
@@ -284,9 +254,7 @@
           "coreModule": false,
           "followable": true,
           "couldNotResolve": false,
-          "dependencyTypes": [
-            "local"
-          ],
+          "dependencyTypes": ["local"],
           "module": "./two_only_one",
           "moduleSystem": "cjs",
           "dynamic": false,
@@ -300,9 +268,7 @@
           "coreModule": true,
           "followable": false,
           "couldNotResolve": false,
-          "dependencyTypes": [
-            "core"
-          ],
+          "dependencyTypes": ["core"],
           "module": "http",
           "moduleSystem": "cjs",
           "dynamic": false,
@@ -321,9 +287,7 @@
       "coreModule": false,
       "couldNotResolve": false,
       "matchesDoNotFollow": false,
-      "dependencyTypes": [
-        "local"
-      ],
+      "dependencyTypes": ["local"],
       "dependencies": [],
       "orphan": false,
       "valid": true
@@ -334,9 +298,7 @@
       "coreModule": true,
       "couldNotResolve": false,
       "matchesDoNotFollow": false,
-      "dependencyTypes": [
-        "core"
-      ],
+      "dependencyTypes": ["core"],
       "dependencies": [],
       "orphan": false,
       "valid": true
@@ -349,9 +311,7 @@
           "coreModule": false,
           "followable": true,
           "couldNotResolve": false,
-          "dependencyTypes": [
-            "local"
-          ],
+          "dependencyTypes": ["local"],
           "module": "./sub/dir",
           "moduleSystem": "cjs",
           "dynamic": false,
@@ -370,6 +330,7 @@
     "error": 0,
     "warn": 0,
     "info": 0,
+    "ignore": 0,
     "totalCruised": 12,
     "totalDependenciesCruised": 16,
     "optionsUsed": {
@@ -378,12 +339,7 @@
         "path": "node_modules"
       },
       "externalModuleResolutionStrategy": "node_modules",
-      "moduleSystems": [
-        "amd",
-        "cjs",
-        "es6",
-        "tsd"
-      ],
+      "moduleSystems": ["amd", "cjs", "es6", "tsd"],
       "outputTo": "test/cli/output/cjs.dir.filtered.json",
       "outputType": "json",
       "preserveSymlinks": false,

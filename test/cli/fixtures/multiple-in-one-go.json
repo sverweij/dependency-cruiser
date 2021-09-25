@@ -8,9 +8,7 @@
           "coreModule": true,
           "followable": false,
           "couldNotResolve": false,
-          "dependencyTypes": [
-            "core"
-          ],
+          "dependencyTypes": ["core"],
           "module": "path",
           "moduleSystem": "cjs",
           "dynamic": false,
@@ -29,9 +27,7 @@
       "coreModule": true,
       "couldNotResolve": false,
       "matchesDoNotFollow": false,
-      "dependencyTypes": [
-        "core"
-      ],
+      "dependencyTypes": ["core"],
       "dependencies": [],
       "orphan": false,
       "valid": true
@@ -44,9 +40,7 @@
           "coreModule": false,
           "followable": true,
           "couldNotResolve": false,
-          "dependencyTypes": [
-            "local"
-          ],
+          "dependencyTypes": ["local"],
           "module": "./depindir",
           "moduleSystem": "cjs",
           "dynamic": false,
@@ -60,9 +54,7 @@
           "coreModule": true,
           "followable": false,
           "couldNotResolve": false,
-          "dependencyTypes": [
-            "core"
-          ],
+          "dependencyTypes": ["core"],
           "module": "path",
           "moduleSystem": "cjs",
           "dynamic": false,
@@ -89,9 +81,7 @@
           "coreModule": false,
           "followable": false,
           "couldNotResolve": true,
-          "dependencyTypes": [
-            "unknown"
-          ],
+          "dependencyTypes": ["unknown"],
           "module": "./not-at-home",
           "moduleSystem": "es6",
           "dynamic": false,
@@ -105,9 +95,7 @@
           "coreModule": false,
           "followable": false,
           "couldNotResolve": true,
-          "dependencyTypes": [
-            "unknown"
-          ],
+          "dependencyTypes": ["unknown"],
           "module": "./this/path/does/not/exist",
           "moduleSystem": "es6",
           "dynamic": false,
@@ -126,9 +114,7 @@
       "coreModule": false,
       "couldNotResolve": true,
       "matchesDoNotFollow": false,
-      "dependencyTypes": [
-        "unknown"
-      ],
+      "dependencyTypes": ["unknown"],
       "dependencies": [],
       "orphan": false,
       "valid": true
@@ -139,9 +125,7 @@
       "coreModule": false,
       "couldNotResolve": true,
       "matchesDoNotFollow": false,
-      "dependencyTypes": [
-        "unknown"
-      ],
+      "dependencyTypes": ["unknown"],
       "dependencies": [],
       "orphan": false,
       "valid": true
@@ -152,17 +136,13 @@
     "error": 0,
     "warn": 0,
     "info": 0,
+    "ignore": 0,
     "totalCruised": 7,
     "totalDependenciesCruised": 5,
     "optionsUsed": {
       "combinedDependencies": false,
       "externalModuleResolutionStrategy": "node_modules",
-      "moduleSystems": [
-        "amd",
-        "cjs",
-        "es6",
-        "tsd"
-      ],
+      "moduleSystems": ["amd", "cjs", "es6", "tsd"],
       "outputTo": "test/cli/output/multiple-in-one-go.json",
       "outputType": "json",
       "preserveSymlinks": false,

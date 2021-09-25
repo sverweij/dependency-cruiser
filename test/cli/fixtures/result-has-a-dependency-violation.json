@@ -3971,6 +3971,7 @@
     "warn": 0,
     "error": 1,
     "info": 0,
+    "ignore": 0,
     "totalCruised": 116,
     "totalDependenciesCruised": 169,
     "optionsUsed": {

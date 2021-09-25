@@ -8,6 +8,7 @@ describe("enrich/summarize", () => {
     expect(summarize([], {}, [])).to.deep.equal({
       error: 0,
       info: 0,
+      ignore: 0,
       optionsUsed: {
         args: "",
       },
@@ -21,6 +22,7 @@ describe("enrich/summarize", () => {
     expect(summarize([], { ruleSet: { required: [] } }, [])).to.deep.equal({
       error: 0,
       info: 0,
+      ignore: 0,
       optionsUsed: {
         args: "",
       },
