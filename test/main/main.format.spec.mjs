@@ -15,6 +15,7 @@ const MINIMAL_RESULT = {
     error: 0,
     warn: 0,
     info: 0,
+    ignore: 0,
     totalCruised: 0,
     totalDependenciesCruised: 0,
     optionsUsed: {},

@@ -10,6 +10,7 @@ describe("enrich/summarize-modules - summarize extraction", () => {
       info: 0,
       warn: 0,
       error: 0,
+      ignore: 0,
       totalDependenciesCruised: 0,
       totalCruised: 0,
     });
@@ -29,6 +30,7 @@ describe("enrich/summarize-modules - summarize extraction", () => {
       info: 0,
       warn: 0,
       error: 0,
+      ignore: 0,
       totalDependenciesCruised: 0,
       totalCruised: 1,
     });
@@ -63,6 +65,7 @@ describe("enrich/summarize-modules - summarize extraction", () => {
       info: 0,
       warn: 1,
       error: 0,
+      ignore: 0,
       totalDependenciesCruised: 0,
       totalCruised: 1,
     });
@@ -129,6 +132,7 @@ describe("enrich/summarize-modules - summarize extraction", () => {
       info: 0,
       warn: 2,
       error: 0,
+      ignore: 0,
       totalDependenciesCruised: 1,
       totalCruised: 1,
     });
@@ -171,6 +175,7 @@ describe("enrich/summarize-modules - summarize extraction", () => {
       info: 0,
       warn: 0,
       error: 0,
+      ignore: 0,
       totalDependenciesCruised: 1,
       totalCruised: 2,
     });
@@ -243,6 +248,7 @@ describe("enrich/summarize-modules - summarize extraction", () => {
       info: 1,
       warn: 0,
       error: 1,
+      ignore: 0,
       totalDependenciesCruised: 1,
       totalCruised: 2,
     });
