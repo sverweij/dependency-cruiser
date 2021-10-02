@@ -14,6 +14,31 @@
 <path fill="#ffffff" stroke="black" stroke-width="2" d="M20,-8C20,-8 704,-8 704,-8 710,-8 716,-14 716,-20 716,-20 716,-920 716,-920 716,-926 710,-932 704,-932 704,-932 20,-932 20,-932 14,-932 8,-926 8,-920 8,-920 8,-20 8,-20 8,-14 14,-8 20,-8"/>
 <text text-anchor="middle" x="362" y="-920.8" font-family="Helvetica,sans-Serif" font-weight="bold" font-size="9.00">src</text>
 </g>
+<g id="clust2" class="cluster">
+<title>cluster_src/cli</title>
+<path fill="#ffffff" stroke="black" stroke-width="2" d="M28,-258C28,-258 112,-258 112,-258 118,-258 124,-264 124,-270 124,-270 124,-358 124,-358 124,-364 118,-370 112,-370 112,-370 28,-370 28,-370 22,-370 16,-364 16,-358 16,-358 16,-270 16,-270 16,-264 22,-258 28,-258"/>
+<text text-anchor="middle" x="70" y="-358.8" font-family="Helvetica,sans-Serif" font-weight="bold" font-size="9.00">cli</text>
+</g>
+<g id="clust3" class="cluster">
+<title>cluster_src/config&#45;utl</title>
+<path fill="#ffffff" stroke="black" stroke-width="2" d="M152,-16C152,-16 266,-16 266,-16 272,-16 278,-22 278,-28 278,-28 278,-90 278,-90 278,-96 272,-102 266,-102 266,-102 152,-102 152,-102 146,-102 140,-96 140,-90 140,-90 140,-28 140,-28 140,-22 146,-16 152,-16"/>
+<text text-anchor="middle" x="209" y="-90.8" font-family="Helvetica,sans-Serif" font-weight="bold" font-size="9.00">config&#45;utl</text>
+</g>
+<g id="clust4" class="cluster">
+<title>cluster_src/config&#45;utl/extract&#45;depcruise&#45;config</title>
+<path fill="#ffffff" stroke="black" stroke-width="2" d="M160,-24C160,-24 258,-24 258,-24 264,-24 270,-30 270,-36 270,-36 270,-64 270,-64 270,-70 264,-76 258,-76 258,-76 160,-76 160,-76 154,-76 148,-70 148,-64 148,-64 148,-36 148,-36 148,-30 154,-24 160,-24"/>
+<text text-anchor="middle" x="209" y="-64.8" font-family="Helvetica,sans-Serif" font-weight="bold" font-size="9.00">extract&#45;depcruise&#45;config</text>
+</g>
+<g id="clust5" class="cluster">
+<title>cluster_src/enrich</title>
+<path fill="#ffffff" stroke="black" stroke-width="2" d="M430,-584C430,-584 545,-584 545,-584 551,-584 557,-590 557,-596 557,-596 557,-684 557,-684 557,-690 551,-696 545,-696 545,-696 430,-696 430,-696 424,-696 418,-690 418,-684 418,-684 418,-596 418,-596 418,-590 424,-584 430,-584"/>
+<text text-anchor="middle" x="487.5" y="-684.8" font-family="Helvetica,sans-Serif" font-weight="bold" font-size="9.00">enrich</text>
+</g>
+<g id="clust6" class="cluster">
+<title>cluster_src/enrich/summarize</title>
+<path fill="#ffffff" stroke="black" stroke-width="2" d="M438,-592C438,-592 537,-592 537,-592 543,-592 549,-598 549,-604 549,-604 549,-632 549,-632 549,-638 543,-644 537,-644 537,-644 438,-644 438,-644 432,-644 426,-638 426,-632 426,-632 426,-604 426,-604 426,-598 432,-592 438,-592"/>
+<text text-anchor="middle" x="487.5" y="-632.8" font-family="Helvetica,sans-Serif" font-weight="bold" font-size="9.00">summarize</text>
+</g>
 <g id="clust7" class="cluster">
 <title>cluster_src/extract</title>
 <path fill="#ffffff" stroke="black" stroke-width="2" d="M456.5,-704C456.5,-704 518.5,-704 518.5,-704 524.5,-704 530.5,-710 530.5,-716 530.5,-716 530.5,-804 530.5,-804 530.5,-810 524.5,-816 518.5,-816 518.5,-816 456.5,-816 456.5,-816 450.5,-816 444.5,-810 444.5,-804 444.5,-804 444.5,-716 444.5,-716 444.5,-710 450.5,-704 456.5,-704"/>
@@ -73,31 +98,6 @@
 <title>cluster_src/utl</title>
 <path fill="#ffffff" stroke="black" stroke-width="2" d="M328.5,-404C328.5,-404 374.5,-404 374.5,-404 380.5,-404 386.5,-410 386.5,-416 386.5,-416 386.5,-444 386.5,-444 386.5,-450 380.5,-456 374.5,-456 374.5,-456 328.5,-456 328.5,-456 322.5,-456 316.5,-450 316.5,-444 316.5,-444 316.5,-416 316.5,-416 316.5,-410 322.5,-404 328.5,-404"/>
 <text text-anchor="middle" x="351.5" y="-444.8" font-family="Helvetica,sans-Serif" font-weight="bold" font-size="9.00">utl</text>
-</g>
-<g id="clust2" class="cluster">
-<title>cluster_src/cli</title>
-<path fill="#ffffff" stroke="black" stroke-width="2" d="M28,-258C28,-258 112,-258 112,-258 118,-258 124,-264 124,-270 124,-270 124,-358 124,-358 124,-364 118,-370 112,-370 112,-370 28,-370 28,-370 22,-370 16,-364 16,-358 16,-358 16,-270 16,-270 16,-264 22,-258 28,-258"/>
-<text text-anchor="middle" x="70" y="-358.8" font-family="Helvetica,sans-Serif" font-weight="bold" font-size="9.00">cli</text>
-</g>
-<g id="clust3" class="cluster">
-<title>cluster_src/config&#45;utl</title>
-<path fill="#ffffff" stroke="black" stroke-width="2" d="M152,-16C152,-16 266,-16 266,-16 272,-16 278,-22 278,-28 278,-28 278,-90 278,-90 278,-96 272,-102 266,-102 266,-102 152,-102 152,-102 146,-102 140,-96 140,-90 140,-90 140,-28 140,-28 140,-22 146,-16 152,-16"/>
-<text text-anchor="middle" x="209" y="-90.8" font-family="Helvetica,sans-Serif" font-weight="bold" font-size="9.00">config&#45;utl</text>
-</g>
-<g id="clust4" class="cluster">
-<title>cluster_src/config&#45;utl/extract&#45;depcruise&#45;config</title>
-<path fill="#ffffff" stroke="black" stroke-width="2" d="M160,-24C160,-24 258,-24 258,-24 264,-24 270,-30 270,-36 270,-36 270,-64 270,-64 270,-70 264,-76 258,-76 258,-76 160,-76 160,-76 154,-76 148,-70 148,-64 148,-64 148,-36 148,-36 148,-30 154,-24 160,-24"/>
-<text text-anchor="middle" x="209" y="-64.8" font-family="Helvetica,sans-Serif" font-weight="bold" font-size="9.00">extract&#45;depcruise&#45;config</text>
-</g>
-<g id="clust5" class="cluster">
-<title>cluster_src/enrich</title>
-<path fill="#ffffff" stroke="black" stroke-width="2" d="M430,-584C430,-584 545,-584 545,-584 551,-584 557,-590 557,-596 557,-596 557,-684 557,-684 557,-690 551,-696 545,-696 545,-696 430,-696 430,-696 424,-696 418,-690 418,-684 418,-684 418,-596 418,-596 418,-590 424,-584 430,-584"/>
-<text text-anchor="middle" x="487.5" y="-684.8" font-family="Helvetica,sans-Serif" font-weight="bold" font-size="9.00">enrich</text>
-</g>
-<g id="clust6" class="cluster">
-<title>cluster_src/enrich/summarize</title>
-<path fill="#ffffff" stroke="black" stroke-width="2" d="M438,-592C438,-592 537,-592 537,-592 543,-592 549,-598 549,-604 549,-604 549,-632 549,-632 549,-638 543,-644 537,-644 537,-644 438,-644 438,-644 432,-644 426,-638 426,-632 426,-632 426,-604 426,-604 426,-598 432,-592 438,-592"/>
-<text text-anchor="middle" x="487.5" y="-632.8" font-family="Helvetica,sans-Serif" font-weight="bold" font-size="9.00">summarize</text>
 </g>
 <!-- src/cli/format&#45;meta&#45;info.js -->
 <g id="node1" class="node">
