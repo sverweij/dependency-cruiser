@@ -1,9 +1,9 @@
 <!--- Provide a general summary of your changes in the Title above -->
 
 > Plan to do something drastic?  
-> Leave an [issue](https://github.com/sverweij/dependency-cruiser/issues/new) with a
+> Leave an [issue](https://github.com/sverweij/dependency-cruiser/issues/new/choose) with a
 > summary of the changes you propose + some context on why you'd want to
-> do that.
+> do that, so we can have a conversation before you start. This will save you time!
 
 ## Description
 
