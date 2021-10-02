@@ -316,8 +316,10 @@
         "collapsePattern": ["^(src|test)/[^/]+", "^bin/", "node_modules/[^/]+"]
       },
       "dot": {
+        "collapsePattern": ["^src/report/[^/]+"],
         "filters": {
-          "includeOnly": { "path": "^(src|bin)" }
+          "includeOnly": { "path": "^(src|bin)" },
+          "exclude": { "path": ["^src/meta\\.js$", "^src/utl/bus.+"] }
         },
         "theme": {
           "replace": false,

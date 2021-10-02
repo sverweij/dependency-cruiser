@@ -1,8 +1,8 @@
 const path = require("path");
+const { builtinModules } = require("module");
 const _has = require("lodash/has");
 const {
   isRelativeModuleName,
-  isCore,
   isExternalModule,
   isAliassy,
 } = require("./module-classifiers");
@@ -167,7 +167,7 @@ module.exports = function determineDependencyTypes(
 
   if (pDependency.couldNotResolve) {
     lReturnValue = ["unknown"];
-  } else if (isCore(pModuleName)) {
+  } else if (builtinModules.includes(pModuleName)) {
     // this 'isCore' business seems duplicate (it's already in
     // the passed object as `coreModule`- determined by the resolve-AMD or
     // resolve-commonJS module). I want to deprecate the `coreModule`
@@ -195,11 +195,7 @@ module.exports = function determineDependencyTypes(
     lReturnValue = ["aliased"];
   }
 
-  if (pDependency.typeOnly) {
-    lReturnValue.push("type-only");
-  }
-
-  return lReturnValue;
+  return lReturnValue.concat(pDependency.dependencyTypes || []);
 };
 
 /* eslint security/detect-object-injection: 0*/

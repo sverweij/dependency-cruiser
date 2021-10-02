@@ -313,7 +313,7 @@ describe("extract/resolve/determineDependencyTypes - determine dependencyTypes",
     expect(
       determineDependencyTypes(
         {
-          typeOnly: true,
+          dependencyTypes: ["type-only"],
           couldNotResolve: false,
           resolved: "src/bla/something-local",
         },
