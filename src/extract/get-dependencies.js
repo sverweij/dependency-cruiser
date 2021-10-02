@@ -162,8 +162,8 @@ function addResolutionAttributes(pOptions, pFileName, pResolveOptions) {
     );
 
     return {
-      ...lResolved,
       ...pDependency,
+      ...lResolved,
       followable: lResolved.followable && !lMatchesDoNotFollow,
       matchesDoNotFollow: lMatchesDoNotFollow,
     };
@@ -196,22 +196,12 @@ function compareDeps(pLeft, pRight) {
  *
  *
  * @param  {string} pFileName path to the file
- * @param  {object} pCruiseOptions  an object with one or more of these properties:
- *                            - baseDir         - the directory to consider as the
- *                                                base for all files
- *                                                Default: the current working directory
- *                            - moduleSystems   - an array of module systems to
- *                                                consider.
- *                                                Default: ["cjs", "es6", "amd"]
- *                            - exclude         - a regular expression string
- *                                                with a pattern of modules to exclude
- *                                                (e.g. "(node_modules)"). Default: none
- *                            - preserveSymlinks - don't resolve symlinks.
- * @param {object} pResolveOptions an object with webpack 'enhanced-resolve' options
+ * @param  {import("../../../types/dependency-cruiser").ICruiseOptions} pCruiseOptions cruise options
+ * @param {import("../../types/resolve-options").IResolveOptions} pResolveOptions  webpack 'enhanced-resolve' options
  * @param  {any} pTranspileOptions       an object with tsconfig ('typescript project') options
  *                               ('flattened' so there's no need for file access on any
  *                               'extends' option in there)
- * @return {array}           an array of dependency objects (see above)
+ * @return {import("../../types/dependency-cruiser").IDependency[]} an array of dependency objects (see above)
  */
 module.exports = function getDependencies(
   pFileName,

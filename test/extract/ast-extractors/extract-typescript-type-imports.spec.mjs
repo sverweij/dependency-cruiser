@@ -82,7 +82,7 @@ describe("ast-extractors/extract-typescript - type imports", () => {
         moduleSystem: "es6",
         dynamic: false,
         exoticallyRequired: false,
-        typeOnly: true,
+        dependencyTypes: ["type-only"],
       },
     ]);
   });
@@ -96,7 +96,7 @@ describe("ast-extractors/extract-typescript - type imports", () => {
         moduleSystem: "es6",
         dynamic: false,
         exoticallyRequired: false,
-        typeOnly: true,
+        dependencyTypes: ["type-only"],
       },
     ]);
   });
@@ -111,7 +111,7 @@ describe("ast-extractors/extract-typescript - type imports", () => {
         moduleSystem: "es6",
         dynamic: false,
         exoticallyRequired: false,
-        typeOnly: true,
+        dependencyTypes: ["type-only"],
       },
     ]);
   });

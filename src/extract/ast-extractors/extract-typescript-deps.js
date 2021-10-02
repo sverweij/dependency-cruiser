@@ -31,7 +31,7 @@ function extractImportsAndExports(pAST) {
       moduleSystem: "es6",
       exoticallyRequired: false,
       ...(pStatement.importClause && pStatement.importClause.isTypeOnly
-        ? { typeOnly: true }
+        ? { dependencyTypes: ["type-only"] }
         : {}),
     }));
 }

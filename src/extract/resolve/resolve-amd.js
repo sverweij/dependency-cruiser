@@ -1,11 +1,8 @@
 const fs = require("fs");
 const path = require("path");
+const { builtinModules } = require("module");
 const memoize = require("lodash/memoize");
 const pathToPosix = require("../utl/path-to-posix");
-const determineDependencyTypes = require("./determine-dependency-types");
-const { isCore } = require("./module-classifiers");
-const getManifest = require("./get-manifest");
-const resolveHelpers = require("./resolve-helpers");
 
 const fileExists = memoize((pFile) => {
   try {
@@ -27,7 +24,7 @@ function guessPath(pBaseDirectory, pFileDirectory, pStrippedModuleName) {
 }
 
 function guessLikelyPath(pBaseDirectory, pFileDirectory, pStrippedModuleName) {
-  let lReturnValue =
+  return (
     [".js", ""]
       .map((pExtension) =>
         guessPath(
@@ -36,16 +33,14 @@ function guessLikelyPath(pBaseDirectory, pFileDirectory, pStrippedModuleName) {
           `${pStrippedModuleName}${pExtension}`
         )
       )
-      .find(fileExists) || pStrippedModuleName;
-
-  return lReturnValue;
+      .find(fileExists) || pStrippedModuleName
+  );
 }
 
 module.exports = function resolveAMD(
-  pRawModuleName,
+  pStrippedModuleName,
   pBaseDirectory,
-  pFileDirectory,
-  pResolveOptions
+  pFileDirectory
 ) {
   // lookups:
   // - [x] could be relative in the end (implemented)
@@ -53,41 +48,19 @@ module.exports = function resolveAMD(
   // - [ ] maybe use mrjoelkemp/module-lookup-amd ?
   // - [ ] or https://github.com/jaredhanson/amd-resolve ?
   // - [x] funky plugins (json!wappie, ./screeching-cat!sabertooth)
-  const lModuleName = resolveHelpers.stripToModuleName(pRawModuleName);
   const lResolvedPath = guessLikelyPath(
     pBaseDirectory,
     pFileDirectory,
-    lModuleName
+    pStrippedModuleName
   );
 
-  let lReturnValue = {
+  return {
     resolved: lResolvedPath,
-    coreModule: Boolean(isCore(pRawModuleName)),
+    coreModule: builtinModules.includes(pStrippedModuleName),
     followable: fileExists(lResolvedPath) && lResolvedPath.endsWith(".js"),
     couldNotResolve:
-      !Boolean(isCore(pRawModuleName)) && !fileExists(lResolvedPath),
-  };
-
-  return {
-    ...lReturnValue,
-    ...resolveHelpers.addLicenseAttribute(
-      lModuleName,
-      pBaseDirectory,
-      pResolveOptions,
-      lReturnValue.resolved
-    ),
-    dependencyTypes: determineDependencyTypes(
-      lReturnValue,
-      lModuleName,
-      getManifest(
-        pFileDirectory,
-        pBaseDirectory,
-        pResolveOptions.combinedDependencies
-      ),
-      pFileDirectory,
-      pResolveOptions,
-      pBaseDirectory
-    ),
+      !builtinModules.includes(pStrippedModuleName) &&
+      !fileExists(lResolvedPath),
   };
 };
 
