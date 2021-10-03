@@ -1,0 +1,11 @@
+{
+  "forbidden": [
+    {
+      "from": {},
+      "to": {
+        "circular": true,
+        "via": "^tmp/ab\\.js$"
+      }
+    }
+  ]
+}

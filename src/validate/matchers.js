@@ -100,6 +100,22 @@ function toExoticRequireNot(pRule, pDependency) {
   );
 }
 
+function toViaNot(pRule, pDependency) {
+  return Boolean(
+    !pRule.to.viaNot ||
+      (pDependency.cycle &&
+        !pDependency.cycle.some((pVia) => pVia.match(pRule.to.viaNot)))
+  );
+}
+
+function toVia(pRule, pDependency) {
+  return Boolean(
+    !pRule.to.via ||
+      (pDependency.cycle &&
+        pDependency.cycle.some((pVia) => pVia.match(pRule.to.via)))
+  );
+}
+
 module.exports = {
   _replaceGroupPlaceholders,
   fromPath,
@@ -115,4 +131,6 @@ module.exports = {
   toLicenseNot,
   toExoticRequire,
   toExoticRequireNot,
+  toVia,
+  toViaNot,
 };

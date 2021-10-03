@@ -678,6 +678,55 @@ up at itself.
 }
 ```
 
+### `via` and `viaNot` - restricting what cycles to match
+
+Some codebases include a lot of circular dependencies, sometimes with a few 'knots'
+(typically barrel files) that partake in most of them. Fixing these cycles might
+take a spell, so you might want to (temporarily :-) ) exclude them from breaking
+the build. At the same time you might want to prevent any new violation going
+unnoticed because of this.
+
+One solution to this is to use dependency-cruiser's `ignore-known` mechanism, but
+for this specific case it's also possible to exclude everything passing through
+these knots from breaking the build, but still flagging any other cycle.
+
+In this example `app/javascript/tables/index.ts` and `app/javascript/tables/index.ts`
+are the known 'knots':
+
+```javascript
+// log an error for all circular dependencies except when they are via one of the
+// known 'knots'
+{
+  name: 'no-circular',
+  severity: 'error',
+  from: {
+  },
+  to: {
+    circular: true,
+    viaNot: [
+      '^app/javascript/tables/index.ts',
+      '^app/javascript/ui/index.tsx',
+    ]
+  }
+},
+
+// for circular dependencies that pass through one of the knots, still generate
+// a warning
+{
+  name: 'no-circular (exception for known barrels)',
+  severity: 'warn',
+  from: {
+  },
+  to: {
+    circular: true,
+    via: [
+      '^app/javascript/tables/index.ts',
+      '^app/javascript/ui/index.tsx',
+    ]
+  }
+}
+```
+
 ### `license` and `licenseNot`
 
 You can flag dependent modules that have licenses that are e.g. not

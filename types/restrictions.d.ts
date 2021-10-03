@@ -34,11 +34,18 @@ export interface IToRestriction extends IBaseRestrictionType {
    */
   circular?: boolean;
   /**
-   * If following this dependency will ultimately return to the source
-   * (circular === true), this attribute will contain an (ordered) array of module
-   * names that shows (one of the) circular path(s)
+   * For circular dependencies - whether or not to match cycles that include include modules
+   * with this regular expression. E.g. to allow all cycles, except when they go through one
+   * specific module. Typically to temporarily disallow some cycles with a lower severity -
+   * setting up a rule with a viaNot that ignores them.
    */
-  cycle?: string[];
+  via?: string | string[];
+  /**
+   * For circular dependencies - whether or not to match cycles that do NOT include modules
+   * with this regular expression. E.g. to disallow all cycles, except when they go through
+   * one specific module. Typically to temporarily allow some cycles until they're removed.
+   */
+  viaNot?: string | string[];
   /**
    * Whether or not to match when the dependency is a dynamic one.
    */
