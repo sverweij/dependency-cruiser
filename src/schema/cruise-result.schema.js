@@ -334,6 +334,8 @@ module.exports = {
         moreThanOneDependencyType: { type: "boolean" },
         license: { $ref: "#/definitions/REAsStringsType" },
         licenseNot: { $ref: "#/definitions/REAsStringsType" },
+        via: { $ref: "#/definitions/REAsStringsType" },
+        viaNot: { $ref: "#/definitions/REAsStringsType" },
       },
     },
     DependentsModuleRestrictionType: {

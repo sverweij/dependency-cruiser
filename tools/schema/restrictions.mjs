@@ -122,6 +122,23 @@ export default {
             'the mentioned licenses. E.g. to flag everyting non MIT use "MIT" here',
           $ref: "#/definitions/REAsStringsType",
         },
+        via: {
+          description:
+            "For circular dependencies - whether or not to match cycles that include " +
+            "include modules with this regular expression. E.g. to allow all cycles, " +
+            "except when they go through one specific module. Typically to temporarily " +
+            "disallow some cycles with a lower severity - setting up a rule with a viaNot " +
+            "that ignores them.",
+          $ref: "#/definitions/REAsStringsType",
+        },
+        viaNot: {
+          description:
+            "For circular dependencies - whether or not to match cycles that do NOT " +
+            "include modules with this regular expression. E.g. to disallow all cycles, " +
+            "except when they go through one specific module. Typically to temporarily " +
+            "allow some cycles until they're removed.",
+          $ref: "#/definitions/REAsStringsType",
+        },
       },
     },
     DependentsModuleRestrictionType: {
