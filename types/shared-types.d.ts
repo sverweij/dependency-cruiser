@@ -37,6 +37,7 @@ export type DependencyType =
   | "npm-peer"
   | "npm-unknown"
   | "undetermined"
-  | "unknown";
+  | "unknown"
+  | "type-only";
 
-export type ProtocolType = "data:" | "file:" | "node";
+export type ProtocolType = "data:" | "file:" | "node:";

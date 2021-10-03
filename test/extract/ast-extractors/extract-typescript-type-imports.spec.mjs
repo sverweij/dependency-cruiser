@@ -73,15 +73,45 @@ describe("ast-extractors/extract-typescript - type imports", () => {
     ).to.deep.equal([]);
   });
 
-  it("extracts type imports (typescript 3.8+)", () => {
+  it("extracts imports that explicitly state they only import a type - default import", () => {
     expect(
-      extractTypescript("import type { SomeType } from './some-module'")
+      extractTypescript("import type slork from './ts-typical';")
     ).to.deep.equal([
       {
-        module: "./some-module",
+        module: "./ts-typical",
         moduleSystem: "es6",
         dynamic: false,
         exoticallyRequired: false,
+        dependencyTypes: ["type-only"],
+      },
+    ]);
+  });
+
+  it("extracts imports that explicitly state they only import a type - just a part of the module", () => {
+    expect(
+      extractTypescript("import type {IZwabbernoot} from './ts-typical';")
+    ).to.deep.equal([
+      {
+        module: "./ts-typical",
+        moduleSystem: "es6",
+        dynamic: false,
+        exoticallyRequired: false,
+        dependencyTypes: ["type-only"],
+      },
+    ]);
+  });
+  it("extracts imports that explicitly state they only import a type - default import plus parts", () => {
+    expect(
+      extractTypescript(
+        "import type Robbedoes, {IZwabbernoot} from './ts-typical';"
+      )
+    ).to.deep.equal([
+      {
+        module: "./ts-typical",
+        moduleSystem: "es6",
+        dynamic: false,
+        exoticallyRequired: false,
+        dependencyTypes: ["type-only"],
       },
     ]);
   });

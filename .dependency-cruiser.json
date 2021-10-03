@@ -17,7 +17,8 @@
         "orphan": true,
         "pathNot": [
           "(^|/)\\.[^/]+\\.(js|cjs|mjs|ts|json)$",
-          "\\.d\\.ts$|(^|/)tsconfig\\.json$",
+          "\\.d\\.ts$",
+          "(^|/)tsconfig\\.json$",
           "(^|/)(babel|webpack)\\.config\\.(js|cjs|mjs|ts|json)$",
           "-reporter-plugin\\.js$",
           "\\.schema\\.json$"
@@ -315,8 +316,10 @@
         "collapsePattern": ["^(src|test)/[^/]+", "^bin/", "node_modules/[^/]+"]
       },
       "dot": {
+        "collapsePattern": ["^src/report/[^/]+"],
         "filters": {
-          "includeOnly": { "path": "^(src|bin)" }
+          "includeOnly": { "path": "^(src|bin)" },
+          "exclude": { "path": ["^src/meta\\.js$", "^src/utl/bus.+"] }
         },
         "theme": {
           "replace": false,

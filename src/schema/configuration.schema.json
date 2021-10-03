@@ -344,7 +344,8 @@
         "npm-peer",
         "npm-unknown",
         "undetermined",
-        "unknown"
+        "unknown",
+        "type-only"
       ]
     },
     "REAsStringsType": {
