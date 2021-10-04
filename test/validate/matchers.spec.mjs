@@ -1,7 +1,7 @@
 import { expect } from "chai";
 import matchers from "../../src/validate/matchers.js";
 
-describe("validate/matches", () => {
+describe("validate/matchers", () => {
   it("_replaceGroupPlaceholders - leaves re alone if passed empty match result", () => {
     expect(matchers._replaceGroupPlaceholders("$1/aap|noot", [])).to.equal(
       "$1/aap|noot"

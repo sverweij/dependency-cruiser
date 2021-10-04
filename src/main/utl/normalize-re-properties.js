@@ -10,6 +10,8 @@ const RE_PROPERTIES = [
   "licenseNot",
   "exoticRequire",
   "exoticRequireNot",
+  "via",
+  "viaNot",
 ];
 
 module.exports = function normalizeREProperties(
