@@ -82,14 +82,10 @@ function addExplanation(pRuleSet, pLong) {
     : (pViolation) => pViolation;
 }
 
-function formatIgnoreWarning(pViolations) {
-  const lIgnoredViolations = pViolations.filter(
-    (pViolation) => pViolation.rule.severity === "ignore"
-  );
-
-  if (lIgnoredViolations.length > 0) {
+function formatIgnoreWarning(pNumberOfIgnoredViolations) {
+  if (pNumberOfIgnoredViolations > 0) {
     return chalk.yellow(
-      `${figures.warning} ${lIgnoredViolations.length} known violations ignored. Run without --ignore-known to see them.\n`
+      `${figures.warning} ${pNumberOfIgnoredViolations} known violations ignored. Run without --ignore-known to see them.\n`
     );
   }
   return "";
@@ -106,7 +102,7 @@ function report(pResults, pLong) {
     } modules, ${
       pResults.summary.totalDependenciesCruised
     } dependencies cruised)\n${formatIgnoreWarning(
-      pResults.summary.violations
+      pResults.summary.ignore
     )}\n\n`;
   }
 
@@ -115,7 +111,7 @@ function report(pResults, pLong) {
     .map(addExplanation(pResults.summary.ruleSetUsed, pLong))
     .reduce((pAll, pThis) => `${pAll}  ${formatViolation(pThis)}\n`, "\n")
     .concat(formatSummary(pResults.summary))
-    .concat(formatIgnoreWarning(pResults.summary.violations))
+    .concat(formatIgnoreWarning(pResults.summary.ignore))
     .concat(`\n`);
 }
 

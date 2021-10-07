@@ -8,6 +8,8 @@ import onlywarningdependencies from "./mocks/err-only-warnings.mjs";
 import orphanerrs from "./mocks/orphan-deps.mjs";
 import circularerrs from "./mocks/circular-deps.mjs";
 import viaerrs from "./mocks/via-deps.mjs";
+import ignoredviolations from "./mocks/ignored-violations.mjs";
+import ignoredandrealviolations from "./mocks/ignored-and-real-violations.mjs";
 
 describe("report/error", () => {
   let chalkLevel = chalk.level;
@@ -73,5 +75,25 @@ describe("report/error", () => {
     );
     expect(lResult.output).to.contain("      (via via)");
     expect(lResult.exitCode).to.equal(4);
+  });
+  it("emits a warning when there's > 1 ignored violation and no other violations", () => {
+    const lResult = render(ignoredviolations);
+    expect(lResult.output).to.contain("no dependency violations found");
+    expect(lResult.output).to.contain(
+      "11 known violations ignored. Run without --ignore-known to see them."
+    );
+  });
+  it("emits a warning when there's > 1 ignored violation and at least one other violation", () => {
+    const lResult = render(ignoredandrealviolations);
+
+    expect(lResult.output).to.contain(
+      "warn no-orphans: test/extract/ast-extractors/typescript2.8-union-types-ast.json"
+    );
+    expect(lResult.output).to.contain(
+      "1 dependency violations (0 errors, 1 warnings)"
+    );
+    expect(lResult.output).to.contain(
+      "10 known violations ignored. Run without --ignore-known to see them."
+    );
   });
 });
