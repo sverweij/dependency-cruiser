@@ -29,15 +29,15 @@
 <path fill="transparent" stroke="white" stroke-width="2" d="M222.5,-77C222.5,-77 383.5,-77 383.5,-77 389.5,-77 395.5,-83 395.5,-89 395.5,-89 395.5,-147 395.5,-147 395.5,-153 389.5,-159 383.5,-159 383.5,-159 222.5,-159 222.5,-159 216.5,-159 210.5,-153 210.5,-147 210.5,-147 210.5,-89 210.5,-89 210.5,-83 216.5,-77 222.5,-77"/>
 <text text-anchor="middle" x="303" y="-147.8" font-family="Helvetica,sans-Serif" font-weight="bold" font-size="9.00" fill="white">options</text>
 </g>
-<g id="clust5" class="cluster">
-<title>cluster_src/main/resolve&#45;options</title>
-<path fill="transparent" stroke="white" stroke-width="2" d="M114.5,-138C114.5,-138 174.5,-138 174.5,-138 180.5,-138 186.5,-144 186.5,-150 186.5,-150 186.5,-178 186.5,-178 186.5,-184 180.5,-190 174.5,-190 174.5,-190 114.5,-190 114.5,-190 108.5,-190 102.5,-184 102.5,-178 102.5,-178 102.5,-150 102.5,-150 102.5,-144 108.5,-138 114.5,-138"/>
-<text text-anchor="middle" x="144.5" y="-178.8" font-family="Helvetica,sans-Serif" font-weight="bold" font-size="9.00" fill="white">resolve&#45;options</text>
-</g>
 <g id="clust6" class="cluster">
 <title>cluster_src/main/rule&#45;set</title>
 <path fill="transparent" stroke="white" stroke-width="2" d="M115.5,-198C115.5,-198 172.5,-198 172.5,-198 178.5,-198 184.5,-204 184.5,-210 184.5,-210 184.5,-268 184.5,-268 184.5,-274 178.5,-280 172.5,-280 172.5,-280 115.5,-280 115.5,-280 109.5,-280 103.5,-274 103.5,-268 103.5,-268 103.5,-210 103.5,-210 103.5,-204 109.5,-198 115.5,-198"/>
 <text text-anchor="middle" x="144" y="-268.8" font-family="Helvetica,sans-Serif" font-weight="bold" font-size="9.00" fill="white">rule&#45;set</text>
+</g>
+<g id="clust5" class="cluster">
+<title>cluster_src/main/resolve&#45;options</title>
+<path fill="transparent" stroke="white" stroke-width="2" d="M114.5,-138C114.5,-138 174.5,-138 174.5,-138 180.5,-138 186.5,-144 186.5,-150 186.5,-150 186.5,-178 186.5,-178 186.5,-184 180.5,-190 174.5,-190 174.5,-190 114.5,-190 114.5,-190 108.5,-190 102.5,-184 102.5,-178 102.5,-178 102.5,-150 102.5,-150 102.5,-144 108.5,-138 114.5,-138"/>
+<text text-anchor="middle" x="144.5" y="-178.8" font-family="Helvetica,sans-Serif" font-weight="bold" font-size="9.00" fill="white">resolve&#45;options</text>
 </g>
 <g id="clust7" class="cluster">
 <title>cluster_src/main/utl</title>
