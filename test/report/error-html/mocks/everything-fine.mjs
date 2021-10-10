@@ -263,6 +263,7 @@ export default {
     error: 0,
     warn: 0,
     info: 0,
+    ignore: 0,
     totalCruised: 11,
     optionsUsed: {
       outputTo: "test/cli/output/cjs.file.json",

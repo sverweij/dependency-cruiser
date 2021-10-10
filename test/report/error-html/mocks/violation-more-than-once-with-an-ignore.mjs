@@ -17,7 +17,7 @@ export default {
           valid: false,
           rules: [
             {
-              severity: "warn",
+              severity: "ignore",
               name: "cli-to-main-only-warn",
             },
           ],
@@ -1165,7 +1165,7 @@ export default {
           valid: false,
           rules: [
             {
-              severity: "info",
+              severity: "ignore",
               name: "prefer-lodash-individuals",
             },
           ],
@@ -5067,7 +5067,7 @@ export default {
         from: "src/cli/compileConfig/index.js",
         to: "src/extract/resolve/resolve.js",
         rule: {
-          severity: "warn",
+          severity: "ignore",
           name: "cli-to-main-only-warn",
         },
       },
@@ -5083,15 +5083,15 @@ export default {
         from: "src/extract/index.js",
         to: "node_modules/lodash/lodash.js",
         rule: {
-          severity: "info",
+          severity: "ignore",
           name: "prefer-lodash-individuals",
         },
       },
     ],
     error: 0,
-    warn: 1,
-    info: 2,
-    ignore: 0,
+    warn: 0,
+    info: 1,
+    ignore: 2,
     totalCruised: 127,
     totalDependenciesCruised: 259,
     optionsUsed: {
