@@ -81,19 +81,24 @@ describe("report/error-html/utl", () => {
   });
 
   it("mergeCountIntoRule - no violation", () => {
-    expect(utl.mergeCountIntoRule({ name: "blah" }, {})).to.deep.equal({
+    expect(utl.mergeCountsIntoRule({ name: "blah" }, {})).to.deep.equal({
       name: "blah",
       count: 0,
+      ignoredCount: 0,
       unviolated: true,
     });
   });
 
   it("mergeCountIntoRule - some violations", () => {
     expect(
-      utl.mergeCountIntoRule({ name: "blah" }, { blah: 69 })
+      utl.mergeCountsIntoRule(
+        { name: "blah" },
+        { blah: { count: 69, ignoredCount: 0 } }
+      )
     ).to.deep.equal({
       name: "blah",
       count: 69,
+      ignoredCount: 0,
       unviolated: false,
     });
   });

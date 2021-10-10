@@ -544,8 +544,8 @@ Extensions:
 > the command(s) to deal with known violations might still shift a bit _without_
 > dependency-cruiser getting a major version bump.
 >
-> The `err` and `err-long` reporters have been adapted to reflect the results of
-> this feature well. Other reporters to which it is relevant (e.g. `err-html`,
+> The `err`, `err-long` and `err-html` reporters have been adapted to reflect
+> the results of this feature well. Other reporters to which it is relevant (e.g.
 > all of the `dot` family, `html`, `teamcity`) will follow in releases after
 > dependency-cruiser v10.3.0.
 

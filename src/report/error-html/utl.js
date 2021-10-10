@@ -16,15 +16,16 @@ function getFormattedAllowedRule(pRuleSetUsed) {
     : [];
 }
 
-function mergeCountIntoRule(pRule, pViolationCounts) {
-  const lCount = pViolationCounts[pRule.name]
+function mergeCountsIntoRule(pRule, pViolationCounts) {
+  const lCounts = pViolationCounts[pRule.name]
     ? pViolationCounts[pRule.name]
-    : 0;
+    : { count: 0, ignoredCount: 0 };
 
   return {
     ...pRule,
-    count: lCount,
-    unviolated: lCount <= 0,
+    count: lCounts.count,
+    ignoredCount: lCounts.ignoredCount,
+    unviolated: lCounts.count <= 0,
   };
 }
 
@@ -52,7 +53,7 @@ function formatSummaryForReport(pSummary) {
 
 module.exports = {
   getFormattedAllowedRule,
-  mergeCountIntoRule,
+  mergeCountsIntoRule,
   formatSummaryForReport,
   determineTo,
 };
