@@ -8,6 +8,7 @@ const SHAREABLE_OPTIONS = [
   "externalModuleResolutionStrategy",
   "focus",
   "includeOnly",
+  "knownViolations",
   "maxDepth",
   "moduleSystems",
   "outputTo",
@@ -38,6 +39,10 @@ function makeOptionsPresentable(pOptions) {
     .filter(
       (pOption) =>
         pOption !== "exclude" || Object.keys(pOptions.exclude).length > 0
+    )
+    .filter(
+      (pOption) =>
+        pOption !== "knownViolations" || pOptions.knownViolations.length > 0
     )
     .reduce((pAll, pOption) => {
       pAll[pOption] = pOptions[pOption];
