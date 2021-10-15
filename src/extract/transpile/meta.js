@@ -39,6 +39,7 @@ const TRANSPILER2WRAPPER = {
   swc,
   typescript: typeScriptWrap,
   "vue-template-compiler": vueWrap,
+  "@vue/compiler-sfc": vueWrap,
 };
 
 const BABELEABLE_EXTENSIONS = [

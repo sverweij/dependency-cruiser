@@ -113,6 +113,11 @@ describe("extract/transpile/meta", () => {
         version: ">=2.0.0 <3.0.0",
         available: true,
       },
+      {
+        name: "@vue/compiler-sfc",
+        version: ">=3.0.0 <4.0.0",
+        available: true,
+      },
     ]);
   });
 });
