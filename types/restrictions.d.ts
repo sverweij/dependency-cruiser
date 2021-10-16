@@ -72,6 +72,11 @@ export interface IToRestriction extends IBaseRestrictionType {
    */
   dependencyTypes?: DependencyType[];
   /**
+   * Whether or not to match modules NOT of any of these types (leaving out
+   * matches none of them)"
+   */
+  dependencyTypesNot?: DependencyType[];
+  /**
    * If true matches dependencies with more than one dependency type (e.g. defined in
    * _both_ npm and npm-dev)
    */

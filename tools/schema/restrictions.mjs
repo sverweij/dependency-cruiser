@@ -103,6 +103,15 @@ export default {
             $ref: "#/definitions/DependencyTypeType",
           },
         },
+        dependencyTypesNot: {
+          type: "array",
+          description:
+            "Whether or not to match modules NOT of any of these types (leaving out " +
+            "matches none of them)",
+          items: {
+            $ref: "#/definitions/DependencyTypeType",
+          },
+        },
         moreThanOneDependencyType: {
           type: "boolean",
           description:

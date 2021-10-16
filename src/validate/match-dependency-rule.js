@@ -32,6 +32,7 @@ function match(pFrom, pTo) {
       matchers.toPath(pRule, pTo, lGroups) &&
       matchers.toPathNot(pRule, pTo, lGroups) &&
       matchers.toDependencyTypes(pRule, pTo) &&
+      matchers.toDependencyTypesNot(pRule, pTo) &&
       matchesMoreThanOneDependencyType(pRule.to, pTo) &&
       matchers.toLicense(pRule, pTo) &&
       matchers.toLicenseNot(pRule, pTo) &&

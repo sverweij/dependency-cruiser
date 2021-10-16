@@ -331,6 +331,10 @@ module.exports = {
           type: "array",
           items: { $ref: "#/definitions/DependencyTypeType" },
         },
+        dependencyTypesNot: {
+          type: "array",
+          items: { $ref: "#/definitions/DependencyTypeType" },
+        },
         moreThanOneDependencyType: { type: "boolean" },
         license: { $ref: "#/definitions/REAsStringsType" },
         licenseNot: { $ref: "#/definitions/REAsStringsType" },
