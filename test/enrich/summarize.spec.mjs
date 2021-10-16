@@ -128,4 +128,55 @@ describe("enrich/summarize", () => {
     const lResult = summarize(cycleFest, lOptions, ["src"]);
     expect(lResult).to.deep.equal(lExpected);
   });
+
+  it("includes known violations in the summary", () => {
+    const lKnownViolations = [
+      {
+        from: "src/schema/baseline-violations.schema.js",
+        to: "src/schema/baseline-violations.schema.js",
+        rule: {
+          severity: "error",
+          name: "not-unreachable-from-cli",
+        },
+      },
+      {
+        from: "src/cli/format.js",
+        to: "src/cli/format.js",
+        rule: {
+          severity: "info",
+          name: "not-reachable-from-folder-index",
+        },
+      },
+    ];
+    expect(
+      summarize([], { knownViolations: lKnownViolations }, [])
+    ).to.deep.equal({
+      error: 0,
+      info: 0,
+      ignore: 0,
+      optionsUsed: {
+        args: "",
+        knownViolations: lKnownViolations,
+      },
+      totalCruised: 0,
+      totalDependenciesCruised: 0,
+      violations: [],
+      warn: 0,
+    });
+  });
+
+  it("doesn't include known violations key when none exist", () => {
+    expect(summarize([], { knownViolations: [] }, [])).to.deep.equal({
+      error: 0,
+      info: 0,
+      ignore: 0,
+      optionsUsed: {
+        args: "",
+      },
+      totalCruised: 0,
+      totalDependenciesCruised: 0,
+      violations: [],
+      warn: 0,
+    });
+  });
 });
