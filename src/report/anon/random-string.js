@@ -1,4 +1,4 @@
-const _random = require("lodash/random");
+const random = require("lodash/random");
 
 const NUMBER = 0;
 const SEPARATOR = 1;
@@ -30,13 +30,13 @@ function getRandomChar(pChar) {
     case SEPARATOR:
       return pChar;
     case NUMBER:
-      return _random(0, lMaxDecimalChar);
+      return random(0, lMaxDecimalChar);
     case UPPERCASE:
       return lLowerCaseChars[
-        _random(0, lLowerCaseChars.length - 1)
+        random(0, lLowerCaseChars.length - 1)
       ].toUpperCase();
     default:
-      return lLowerCaseChars[_random(0, lLowerCaseChars.length - 1)];
+      return lLowerCaseChars[random(0, lLowerCaseChars.length - 1)];
   }
 }
 /**
@@ -53,10 +53,5 @@ function getRandomChar(pChar) {
  * @return {string} - a random string with above specs
  */
 module.exports = function getRandomString(pString) {
-  let lReturnValue = "";
-
-  for (let lChar of pString) {
-    lReturnValue += getRandomChar(lChar);
-  }
-  return lReturnValue;
+  return Array.from(pString).map(getRandomChar).join("");
 };

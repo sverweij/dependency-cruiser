@@ -1,7 +1,8 @@
 const anonymizePathElement = require("./anonymize-path-element");
 
 const WHITELIST_RE =
-  /^(|[.]+|~|bin|app|cli|src|configs?|components?|fixtures?|helpers?|i18n|index\.(jsx?|tsx?|vue|coffee|ls)|lib|_?_?mocks?_?_?|node_modules|packages?|package\.json|scripts?|services?|sources?|specs?|_?_?tests?_?_?|types?|uti?ls?)$/;
+  // eslint-disable-next-line security/detect-unsafe-regex, unicorn/no-unsafe-regex
+  /^(|[.]+|~|bin|apps?|cli|src|libs?|configs?|components?|fixtures?|helpers?|i18n|index\.(jsx?|tsx?|vue|coffee|ls)|_?_?mocks?_?_?|node_modules|packages?|package\.json|scripts?|services?|sources?|specs?|_?_?tests?_?_?|types?|uti?ls?)$/;
 
 /**
  * Kind of smartly anonymizes paths, by
