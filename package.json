@@ -159,9 +159,9 @@
     "@babel/core": "7.15.8",
     "@babel/plugin-transform-modules-commonjs": "7.15.4",
     "@babel/preset-typescript": "7.15.0",
-    "@swc/core": "1.2.95",
-    "@typescript-eslint/eslint-plugin": "4.33.0",
-    "@typescript-eslint/parser": "4.33.0",
+    "@swc/core": "1.2.98",
+    "@typescript-eslint/eslint-plugin": "5.0.0",
+    "@typescript-eslint/parser": "5.0.0",
     "c8": "7.10.0",
     "chai": "4.3.4",
     "chai-json-schema": "1.5.1",
@@ -170,32 +170,32 @@
     "eslint-config-moving-meadow": "2.0.9",
     "eslint-config-prettier": "8.3.0",
     "eslint-plugin-budapestian": "2.3.0",
-    "eslint-plugin-import": "2.24.2",
+    "eslint-plugin-import": "2.25.2",
     "eslint-plugin-mocha": "9.0.0",
     "eslint-plugin-node": "11.1.0",
     "eslint-plugin-security": "1.4.0",
-    "eslint-plugin-unicorn": "36.0.0",
+    "eslint-plugin-unicorn": "37.0.1",
     "husky": "^4.3.8",
     "intercept-stdout": "0.1.2",
-    "lint-staged": "11.2.2",
-    "mocha": "9.1.2",
+    "lint-staged": "11.2.3",
+    "mocha": "9.1.3",
     "normalize-newline": "4.1.0",
     "npm-run-all": "4.1.5",
     "prettier": "2.4.1",
     "shx": "0.3.3",
-    "svelte": "3.43.1",
+    "svelte": "3.43.2",
     "symlink-dir": "5.0.1",
-    "typescript": "4.4.3",
+    "typescript": "4.4.4",
     "upem": "^7.0.0",
     "vue-template-compiler": "2.6.14",
-    "yarn": "1.22.15"
+    "yarn": "1.22.17"
   },
   "upem": {
     "policies": [
       {
         "package": "eslint",
         "policy": "wanted",
-        "because": "some eslint plugins (typescript-eslint) are not compatible with eslint 8 yet "
+        "because": "some eslint plugins (eslint-plugin-budapestian) are not compatible with eslint 8 yet "
       },
       {
         "package": "figures",
