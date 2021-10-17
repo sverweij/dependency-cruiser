@@ -264,7 +264,7 @@
       "eslint --fix",
       "prettier --write"
     ],
-    "test/**/*.{utl,spec}.js": [
+    "test/**/*.{utl,spec}.{mjs,js}": [
       "eslint --fix",
       "prettier --write"
     ],
