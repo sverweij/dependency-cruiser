@@ -38,7 +38,7 @@
    - [rules on dependents - `numberOfDependentsMoreThan`](#rules-on-dependents---numberOfDependentsMoreThan)
    - [`circular`](#circular)
    - [`license` and `licenseNot`](#license-and-licensenot)
-   - [`dependencyTypes`](#dependencytypes)
+   - [`dependencyTypes` and `dependencyTypesNot`](#dependencytypes-and-dependencytypesnot)
    - [`dynamic`](#dynamic)
    - [`moreThanOneDependencyType`](#more-than-one-dependencytype-per-dependency-morethanonedependencytype)
    - [`exoticRequire` and `exoticRequireNot`](#exoticallyrequired-exoticrequire-and-exoticrequirenot)
@@ -778,7 +778,7 @@ for managing your own legal stuff. To re-iterate what is in the
 > OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 > SOFTWARE.
 
-### `dependencyTypes`
+### `dependencyTypes` and `dependencyTypesNot`
 
 You might have spent some time wondering why something works on your machine,
 but not on other's. Only to discover you _did_ install a dependency, but
@@ -786,7 +786,7 @@ _did not_ save it to package.json. Or you already had it in your devDependencies
 and started using it in a production source.
 
 To save you from embarrassing moments like this, you can make rules with the
-`dependencyTypes` verb. E.g. to prevent you accidentally depend on a
+`dependencyTypes` restrction. E.g. to prevent you accidentally depend on a
 `devDependency` from anything in `src` add this to your
 .dependency-cruiser.js's "forbidden" section:
 
@@ -814,8 +814,25 @@ Or to detect stuff you npm i'd without putting it in your package.json:
 }
 ```
 
-If you don't specify dependencyTypes in a rule, dependency-cruiser will ignore
-them in the evaluation of that rule.
+Likewise you can use the inverse `dependencyTypesNot` restriction. E.g. to ensure
+type-only imports (e.g. `import type { IYadda } from "./types"`) are used from
+`.d.ts` modules and/ or modules called `types.ts`:
+
+```json
+{
+  "name": "only-type-only",
+  "comment": "use explicit 'type' imports to import from type declaration modules",
+  "severity": "error",
+  "from": {},
+  "to": {
+    "path": ["types\\.ts$", "\\.d\\.ts$"],
+    "dependencyTypesNot": ["type-only"]
+  }
+}
+```
+
+If you don't specify dependencyTypes (or dependencyTypesNot) in a rule, dependency-cruiser
+will ignore them in the evaluation of that rule.
 
 #### OK - `unknown`, `npm-unknown`, `undetermined` - I'm officially weirded out - what's that about?
 
@@ -831,7 +848,7 @@ This is a list of dependency types dependency-cruiser currently detects.
 | npm-peer        | it's a module in package.json's `peerDependencies` - note: deprecated in npm 3                                                                                                | "thing-i-am-a-plugin-for" |
 | npm-bundled     | it's a module that occurs in package.json's `bundle(d)Dependencies` array                                                                                                     | "iwillgetbundled"         |
 | npm-no-pkg      | it's an npm module - but it's nowhere in your package.json                                                                                                                    | "forgetmenot"             |
-| npm-unknown     | it's an npm module - but there is no (parseable/ valid) package.json in your package                                                                                          |
+| npm-unknown     | it's an npm module - but there is no (parseable/ valid) package.json in your package                                                                                          |                           |
 | deprecated      | it's an npm module, but the version you're using or the module itself is officially deprecated                                                                                | "some-deprecated-package" |
 | core            | it's a core module                                                                                                                                                            | "fs"                      |
 | aliased         | it's a module that's linked through an aliased (webpack)                                                                                                                      | "~/hello.ts"              |

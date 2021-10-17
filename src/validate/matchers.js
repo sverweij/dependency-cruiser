@@ -70,6 +70,13 @@ function toDependencyTypes(pRule, pDependency) {
   );
 }
 
+function toDependencyTypesNot(pRule, pDependency) {
+  return Boolean(
+    !pRule.to.dependencyTypesNot ||
+      !intersects(pDependency.dependencyTypes, pRule.to.dependencyTypesNot)
+  );
+}
+
 function toLicense(pRule, pDependency) {
   return Boolean(
     !pRule.to.license ||
@@ -127,6 +134,7 @@ module.exports = {
   toPathNot,
   toModulePathNot,
   toDependencyTypes,
+  toDependencyTypesNot,
   toLicense,
   toLicenseNot,
   toExoticRequire,

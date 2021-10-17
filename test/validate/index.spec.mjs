@@ -206,6 +206,73 @@ describe("validate/index - specific tests", () => {
     ).to.deep.equal({ valid: true });
   });
 
+  it("only to core - with dependencyTypesNot in forbidden - ok", () => {
+    expect(
+      validate.dependency(
+        readRuleSet(
+          "./test/validate/fixtures/rules.only-to-core.allowed-with-forbidden.json"
+        ),
+        { source: "koos koets" },
+        { resolved: "os", dependencyTypes: ["core"] }
+      )
+    ).to.deep.equal({ valid: true });
+  });
+
+  it("only to core - with dependencyTypesNot in forbidden - nok", () => {
+    expect(
+      validate.dependency(
+        readRuleSet(
+          "./test/validate/fixtures/rules.only-to-core.allowed-with-forbidden.json"
+        ),
+        { source: "koos koets" },
+        { resolved: "robbie kerkhof", dependencyTypes: ["local"] }
+      )
+    ).to.deep.equal({
+      valid: false,
+      rules: [
+        {
+          name: "only-to-core",
+          severity: "error",
+        },
+      ],
+    });
+  });
+
+  it("only to type-only - with dependencyTypesNot in forbidden, multiple types - ok", () => {
+    expect(
+      validate.dependency(
+        readRuleSet(
+          "./test/validate/fixtures/rules.only-to-type-only.allowed-with-forbidden.json"
+        ),
+        { source: "src/koos-koets.ts" },
+        {
+          resolved: "src/robbie-kerkhof.ts",
+          dependencyTypes: ["type-only", "local"],
+        }
+      )
+    ).to.deep.equal({ valid: true });
+  });
+
+  it("only to type-only - with dependencyTypesNot in forbidden, multiple types - nok", () => {
+    expect(
+      validate.dependency(
+        readRuleSet(
+          "./test/validate/fixtures/rules.only-to-type-only.allowed-with-forbidden.json"
+        ),
+        { source: "src/koos-koets.ts" },
+        { resolved: "src/ger-hekking.ts", dependencyTypes: ["local"] }
+      )
+    ).to.deep.equal({
+      valid: false,
+      rules: [
+        {
+          name: "only-to-type-only",
+          severity: "error",
+        },
+      ],
+    });
+  });
+
   it("only to core - via 'allowed' - violation", () => {
     expect(
       validate.dependency(
