@@ -16,6 +16,7 @@ jobs:
           - 12.x
           - 14.x
           - 16.x
+          - 17.x
         platform:
           - ubuntu-latest
 
