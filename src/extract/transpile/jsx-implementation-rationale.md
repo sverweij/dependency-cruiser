@@ -60,6 +60,6 @@ seems to perform pretty ok, but a more elegant solution is welcome.
 
 ## Single File Components (SFC)
 
-For these we can use the vue-template-compiler - which seems to do a clean and consistent job -
+For these we can use the vue-template-compiler (Vue2) or @vue/compiler-sfc (Vue3) - which seems to do a clean and consistent job -
 it splits the _template_, _script_, _style_ etc parts in an object, and these can be parsed
 individually. Implementation in `vue-template-wrap.js`

@@ -298,9 +298,11 @@ situations without workarounds).
 
 **A**: Yes.
 
-For `.vue` single file components it uses the `vue-template-compiler` (which will
-be in your module dependencies if you're developing with Vue - just make sure
-you install dependency-cruiser in the same spot).
+For `.vue` single file components it uses _either_ the `vue-template-compiler` (Vue2) or `@vue/compiler-sfc` (Vue3).
+
+`vue-template-compiler` should be in your module dependencies already if you are developing with Vue2 - just make sure you install dependency-cruiser in the same place.
+
+`@vue/compiler-sfc` is [included by default in Vue 3 projects since version 3.2.13](https://github.com/vuejs/vue-next/tree/master/packages/compiler-sfc#vuecompiler-sfc). If you are using an older version of Vue 3, you may have to add `@vue/compiler-sfc` manually.
 
 ### Q: Does this work with Svelte as well?
 
