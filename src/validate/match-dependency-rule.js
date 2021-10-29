@@ -52,6 +52,7 @@ function match(pFrom, pTo) {
     );
   };
 }
+
 const isInteresting = (pRule) => !isModuleOnlyRule(pRule);
 
 module.exports = {

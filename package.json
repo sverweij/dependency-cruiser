@@ -138,7 +138,7 @@
     "acorn-walk": "8.2.0",
     "ajv": "8.6.3",
     "chalk": "4.1.2",
-    "commander": "8.2.0",
+    "commander": "8.3.0",
     "enhanced-resolve": "5.8.3",
     "figures": "^3.2.0",
     "get-stream": "^6.0.1",
@@ -159,9 +159,9 @@
     "@babel/core": "7.15.8",
     "@babel/plugin-transform-modules-commonjs": "7.15.4",
     "@babel/preset-typescript": "7.15.0",
-    "@swc/core": "1.2.98",
-    "@typescript-eslint/eslint-plugin": "5.0.0",
-    "@typescript-eslint/parser": "5.0.0",
+    "@swc/core": "1.2.105",
+    "@typescript-eslint/eslint-plugin": "5.2.0",
+    "@typescript-eslint/parser": "5.2.0",
     "@vue/compiler-sfc": "3.2.20",
     "c8": "7.10.0",
     "chai": "4.3.4",
@@ -178,14 +178,14 @@
     "eslint-plugin-unicorn": "37.0.1",
     "husky": "^4.3.8",
     "intercept-stdout": "0.1.2",
-    "lint-staged": "11.2.3",
+    "lint-staged": "11.2.6",
     "mocha": "9.1.3",
     "normalize-newline": "^3.0.0",
     "npm-run-all": "4.1.5",
     "prettier": "2.4.1",
     "proxyquire": "2.1.3",
     "shx": "0.3.3",
-    "svelte": "3.43.2",
+    "svelte": "3.44.0",
     "symlink-dir": "5.0.1",
     "typescript": "4.4.4",
     "upem": "^7.0.0",
@@ -198,6 +198,11 @@
         "package": "eslint",
         "policy": "wanted",
         "because": "some eslint plugins (eslint-plugin-budapestian) are not compatible with eslint 8 yet "
+      },
+      {
+        "package": "eslint-plugin-budapestian",
+        "policy": "pin",
+        "because": "eslint-plugin-budapestian 3.0.0 is a bit too enthousiastic flagging things it shouldn't - keeping at 2.3.0 for the time being"
       },
       {
         "package": "figures",
@@ -213,6 +218,11 @@
         "package": "indent-string",
         "policy": "wanted",
         "because": "version 5 only exports ejs - and we use cjs and don't transpile"
+      },
+      {
+        "package": "normalize-newline",
+        "policy": "wanted",
+        "because": "version 4 only exports ejs - and we use cjs and don't transpile (this only used in unit tests - but one of'em is a cjs one ...)"
       },
       {
         "package": "wrap-ansi",
