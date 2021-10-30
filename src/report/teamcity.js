@@ -45,10 +45,26 @@ function reportAllowedRule(pAllowedRule, pViolations) {
   return lReturnValue;
 }
 
-function reportViolatedRules(pRuleSetUsed, pViolations) {
+function reportIgnoredRules(pIgnoredCount) {
+  let lReturnValue = [];
+
+  if (pIgnoredCount > 0) {
+    lReturnValue = tsm.inspectionType({
+      id: "ignored-known-violations",
+      name: "ignored-known-violations",
+      description:
+        "some dependency violations were ignored; run without --ignore-known to see them",
+      category: CATEGORY,
+    });
+  }
+  return lReturnValue;
+}
+
+function reportViolatedRules(pRuleSetUsed, pViolations, pIgnoredCount) {
   return reportRules(_get(pRuleSetUsed, "forbidden", []), pViolations)
     .concat(reportAllowedRule(_get(pRuleSetUsed, "allowed", []), pViolations))
-    .concat(reportRules(_get(pRuleSetUsed, "required", []), pViolations));
+    .concat(reportRules(_get(pRuleSetUsed, "required", []), pViolations))
+    .concat(reportIgnoredRules(pIgnoredCount));
 }
 
 function determineTo(pViolation) {
@@ -66,15 +82,31 @@ function bakeViolationMessage(pViolation) {
     ? pViolation.from
     : `${pViolation.from} -> ${determineTo(pViolation)}`;
 }
-function reportViolations(pViolations) {
-  return pViolations.map((pViolation) =>
-    tsm.inspection({
-      typeId: pViolation.rule.name,
-      message: bakeViolationMessage(pViolation),
-      file: pViolation.from,
-      SEVERITY: severity2teamcitySeverity(pViolation.rule.severity),
-    })
-  );
+
+function reportIgnoredViolation(pIgnoredCount) {
+  let lReturnValue = [];
+
+  if (pIgnoredCount > 0) {
+    lReturnValue = tsm.inspection({
+      typeId: "ignored-known-violations",
+      message: `${pIgnoredCount} known violations ignored. Run without --ignore-known to see them.`,
+      SEVERITY: "WARNING",
+    });
+  }
+  return lReturnValue;
+}
+
+function reportViolations(pViolations, pIgnoredCount) {
+  return pViolations
+    .map((pViolation) =>
+      tsm.inspection({
+        typeId: pViolation.rule.name,
+        message: bakeViolationMessage(pViolation),
+        file: pViolation.from,
+        SEVERITY: severity2teamcitySeverity(pViolation.rule.severity),
+      })
+    )
+    .concat(reportIgnoredViolation(pIgnoredCount));
 }
 
 /**
@@ -96,11 +128,14 @@ module.exports = (pResults) => {
   tsm.stdout = false;
 
   const lRuleSet = _get(pResults, "summary.ruleSetUsed", []);
-  const lViolations = _get(pResults, "summary.violations", []);
+  const lViolations = _get(pResults, "summary.violations", []).filter(
+    (pViolation) => pViolation.rule.severity !== "ignore"
+  );
+  const lIgnoredCount = _get(pResults, "summary.ignore", 0);
 
   return {
-    output: reportViolatedRules(lRuleSet, lViolations)
-      .concat(reportViolations(lViolations))
+    output: reportViolatedRules(lRuleSet, lViolations, lIgnoredCount)
+      .concat(reportViolations(lViolations, lIgnoredCount))
       .reduce((pAll, pCurrent) => `${pAll}${pCurrent}\n`, ""),
     exitCode: pResults.summary.error,
   };
