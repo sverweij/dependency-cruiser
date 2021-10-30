@@ -18,7 +18,7 @@ export default {
           valid: false,
           rules: [
             {
-              severity: "ignore",
+              severity: "unsupported-severity",
               name: "not-to-dev-dep",
             },
           ],
@@ -166,7 +166,7 @@ export default {
         from: "src/asneeze.js",
         to: "node_modules/eslint/lib/api.js",
         rule: {
-          severity: "ignore",
+          severity: "unsupported-severity",
           name: "not-to-dev-dep",
         },
       },

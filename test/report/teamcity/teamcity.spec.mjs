@@ -8,6 +8,7 @@ import requiredErrs from "./mocks/required-errors.mjs";
 import circulars from "./mocks/circular-deps.mjs";
 import vias from "./mocks/via-deps.mjs";
 import unsupportedErrorLevels from "./mocks/unsupported-severity.mjs";
+import knownViolations from "./mocks/known-violations.mjs";
 
 function removePerSessionAttributes(pString) {
   return pString.replace(/ flowId='[^']+' timestamp='[^']+'/g, "");
@@ -83,5 +84,15 @@ describe("report/teamcity", () => {
     );
     // eslint-disable-next-line no-magic-numbers
     expect(lResult.exitCode).to.equal(5);
+  });
+
+  it("renders known errors in a single warning", () => {
+    const lFixture = readFixture("mocks/known-violations-teamcity-format.txt");
+    const lResult = render(knownViolations);
+
+    expect(removePerSessionAttributes(lResult.output)).to.equal(
+      removePerSessionAttributes(lFixture)
+    );
+    expect(lResult.exitCode).to.equal(0);
   });
 });

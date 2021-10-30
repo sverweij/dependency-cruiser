@@ -36,6 +36,35 @@ function regenerateReportFixtures(pDirectory, pFunction, pTargetExtension) {
     });
 }
 
+function transformMJStoFile(pInputFileName, pOutputFileName, pFunction) {
+  import(pInputFileName).then((pModule) => {
+    fs.writeFileSync(
+      pOutputFileName,
+      pFunction(pModule.default).output,
+      "utf8"
+    );
+  });
+}
+
+function regenerateReportFixturesFromMJS(
+  pDirectory,
+  pFunction,
+  pTargetExtension
+) {
+  fs.readdirSync(pDirectory)
+    .filter((pFileName) => pFileName.endsWith(".mjs"))
+    .map((pFileName) => ({
+      inputFileName: path.join(pDirectory, pFileName),
+      outputFileName: path.join(
+        pDirectory,
+        pFileName.replace(/\.mjs$/g, pTargetExtension)
+      ),
+    }))
+    .forEach((pPair) => {
+      transformMJStoFile(pPair.inputFileName, pPair.outputFileName, pFunction);
+    });
+}
+
 function renderBareThemeDot(pResultObject) {
   const lBareTheme = JSON.parse(
     fs.readFileSync(
@@ -82,7 +111,7 @@ regenerateReportFixtures(
   renderDefaultThemeDot,
   "-default-theme.dot"
 );
-regenerateReportFixtures(
+regenerateReportFixturesFromMJS(
   TEAMCITY_MOCK_DIR,
   renderTeamcity,
   "-teamcity-format.txt"
