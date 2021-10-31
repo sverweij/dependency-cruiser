@@ -1,14 +1,12 @@
 import { unlinkSync } from "node:fs";
 // path.posix instead of path because otherwise on win32 the resulting
 // outputTo would contain \\ instead of / which for this unit test doesn't matter
-import { posix } from "node:path";
+import { posix as path } from "node:path";
 import { expect } from "chai";
 import intercept from "intercept-stdout";
 import cli from "../../src/cli/index.js";
 import { assertFileEqual, assertJSONFileEqual } from "./asserthelpers.utl.mjs";
 import deleteDammit from "./delete-dammit.utl.cjs";
-
-const path = posix;
 
 const OUT_DIR = "./test/cli/output";
 const FIX_DIR = "./test/cli/fixtures";

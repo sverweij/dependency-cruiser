@@ -18,21 +18,21 @@ describe("cli/init-config/index", () => {
 
   it("init called with a string !== 'preset' creates a self-contained js rules file", () => {
     process.chdir("test/cli/fixtures/init-config/no-config-files-exist");
-    const configResultFileName = `./${path.join(
+    const lConfigResultFileName = `./${path.join(
       "../fixtures/init-config/no-config-files-exist",
       RULES_FILE_JS
     )}`;
 
     try {
       initConfig("notyes");
-      const lResult = require(configResultFileName);
+      const lResult = require(lConfigResultFileName);
 
       expect(lResult).to.be.jsonSchema(configurationSchema);
       expect(lResult).to.not.haveOwnProperty("extends");
     } finally {
       Reflect.deleteProperty(
         require.cache,
-        require.resolve(configResultFileName)
+        require.resolve(lConfigResultFileName)
       );
       deleteDammit(RULES_FILE_JS);
     }
@@ -40,14 +40,14 @@ describe("cli/init-config/index", () => {
 
   it("init preset creates a preset based js rules file", () => {
     process.chdir("test/cli/fixtures/init-config/no-config-files-exist");
-    const configResultFileName = `./${path.join(
+    const lConfigResultFileName = `./${path.join(
       "../fixtures/init-config/no-config-files-exist",
       RULES_FILE_JS
     )}`;
 
     try {
       initConfig("preset");
-      const lResult = require(configResultFileName);
+      const lResult = require(lConfigResultFileName);
 
       expect(lResult).to.be.jsonSchema(configurationSchema);
       expect(lResult).to.haveOwnProperty("extends");
@@ -57,7 +57,7 @@ describe("cli/init-config/index", () => {
     } finally {
       Reflect.deleteProperty(
         require.cache,
-        require.resolve(configResultFileName)
+        require.resolve(lConfigResultFileName)
       );
       deleteDammit(RULES_FILE_JS);
     }
@@ -65,14 +65,14 @@ describe("cli/init-config/index", () => {
 
   it("init yes creates a self-contained js rules file", () => {
     process.chdir("test/cli/fixtures/init-config/no-config-files-exist");
-    const configResultFileName = `./${path.join(
+    const lConfigResultFileName = `./${path.join(
       "../fixtures/init-config/no-config-files-exist",
       RULES_FILE_JS
     )}`;
 
     try {
       initConfig("yes");
-      const lResult = require(configResultFileName);
+      const lResult = require(lConfigResultFileName);
 
       expect(lResult).to.be.jsonSchema(configurationSchema);
       expect(lResult).to.not.haveOwnProperty("extends");
@@ -80,7 +80,7 @@ describe("cli/init-config/index", () => {
     } finally {
       Reflect.deleteProperty(
         require.cache,
-        require.resolve(configResultFileName)
+        require.resolve(lConfigResultFileName)
       );
       deleteDammit(RULES_FILE_JS);
     }
@@ -88,14 +88,14 @@ describe("cli/init-config/index", () => {
 
   it("init yes in a ts project creates a self-contained js rules file with typescript things flipped to yes", () => {
     process.chdir("test/cli/fixtures/init-config/ts-config-exists");
-    const configResultFileName = `./${path.join(
+    const lConfigResultFileName = `./${path.join(
       "../fixtures/init-config/ts-config-exists",
       RULES_FILE_JS
     )}`;
 
     try {
       initConfig("yes");
-      const lResult = require(configResultFileName);
+      const lResult = require(lConfigResultFileName);
 
       expect(lResult).to.be.jsonSchema(configurationSchema);
       expect(lResult).to.not.haveOwnProperty("extends");
@@ -106,7 +106,7 @@ describe("cli/init-config/index", () => {
     } finally {
       Reflect.deleteProperty(
         require.cache,
-        require.resolve(configResultFileName)
+        require.resolve(lConfigResultFileName)
       );
       deleteDammit(RULES_FILE_JS);
     }
@@ -114,14 +114,14 @@ describe("cli/init-config/index", () => {
 
   it("init yes in a webpack project creates a self-contained js rules file with webpack things flipped to yes", () => {
     process.chdir("test/cli/fixtures/init-config/webpack-config-exists");
-    const configResultFileName = `./${path.join(
+    const lConfigResultFileName = `./${path.join(
       "../fixtures/init-config/webpack-config-exists",
       RULES_FILE_JS
     )}`;
 
     try {
       initConfig("yes");
-      const lResult = require(configResultFileName);
+      const lResult = require(lConfigResultFileName);
 
       expect(lResult).to.be.jsonSchema(configurationSchema);
       expect(lResult).to.not.haveOwnProperty("extends");
@@ -132,7 +132,7 @@ describe("cli/init-config/index", () => {
     } finally {
       Reflect.deleteProperty(
         require.cache,
-        require.resolve(configResultFileName)
+        require.resolve(lConfigResultFileName)
       );
       deleteDammit(RULES_FILE_JS);
     }
@@ -141,7 +141,7 @@ describe("cli/init-config/index", () => {
   it("init experimental-scripts creates a .dependency-cruiser config + updates package.json with scripts", () => {
     process.chdir("test/cli/init-config/fixtures/update-manifest");
 
-    const configResultFileName = `./${path.join(
+    const lConfigResultFileName = `./${path.join(
       "fixtures/update-manifest",
       RULES_FILE_JS
     )}`;
@@ -151,7 +151,7 @@ describe("cli/init-config/index", () => {
 
     try {
       initConfig("experimental-scripts");
-      const lResult = require(configResultFileName);
+      const lResult = require(lConfigResultFileName);
 
       expect(lResult).to.be.jsonSchema(configurationSchema);
       expect(
@@ -160,7 +160,7 @@ describe("cli/init-config/index", () => {
     } finally {
       Reflect.deleteProperty(
         require.cache,
-        require.resolve(configResultFileName)
+        require.resolve(lConfigResultFileName)
       );
       deleteDammit(RULES_FILE_JS);
       deleteDammit(lManifestFilename);
@@ -172,7 +172,7 @@ describe("cli/init-config/index", () => {
       "test/cli/init-config/fixtures/update-manifest-dc-config-exists"
     );
 
-    const configResultFileName = `./${path.join(
+    const lConfigResultFileName = `./${path.join(
       "fixtures/update-manifest-dc-config-exists",
       RULES_FILE_JS
     )}`;
@@ -181,7 +181,7 @@ describe("cli/init-config/index", () => {
 
     try {
       initConfig("experimental-scripts");
-      const lResult = require(configResultFileName);
+      const lResult = require(lConfigResultFileName);
 
       expect(lResult).to.be.jsonSchema(configurationSchema);
       expect(lResult).to.deep.equal({});
@@ -191,7 +191,7 @@ describe("cli/init-config/index", () => {
     } finally {
       Reflect.deleteProperty(
         require.cache,
-        require.resolve(configResultFileName)
+        require.resolve(lConfigResultFileName)
       );
       deleteDammit(lManifestFilename);
     }

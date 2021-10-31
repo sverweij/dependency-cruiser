@@ -50,11 +50,11 @@ describe("ast-extractors/extract-ES6-deps", () => {
 
   it("yield a dynamic import yields an import", () => {
     let lDeps = [];
-    const yieldImport = `function* a() {
+    const lYieldImport = `function* a() {
             yield import('http');
         }`;
 
-    extractES6(yieldImport, lDeps);
+    extractES6(lYieldImport, lDeps);
     expect(lDeps).to.deep.equal([
       {
         module: "http",
@@ -87,7 +87,7 @@ describe("ast-extractors/extract-ES6-deps", () => {
 
   it("doesn't get confused about import keywords in jsx components", () => {
     let lDependencies = [];
-    const INPUT = `import React from 'react';
+    const lInput = `import React from 'react';
 
     export const ReplicateIssueComponent = props => {
       return (
@@ -97,7 +97,7 @@ describe("ast-extractors/extract-ES6-deps", () => {
       );
     }`;
 
-    extractES6(INPUT, lDependencies, ".jsx");
+    extractES6(lInput, lDependencies, ".jsx");
     expect(lDependencies).to.deep.equal([
       {
         module: "react",
@@ -110,7 +110,7 @@ describe("ast-extractors/extract-ES6-deps", () => {
 
   it("does a.t.m. NOT handle certain ways of jsx notation correctly", () => {
     let lDependencies = [];
-    const INPUT = `import React from 'react';
+    const lInput = `import React from 'react';
 
 export class ReplicateIssueComponent extends React.Component {
   renderSomethingElse = () => {
@@ -127,7 +127,7 @@ export class ReplicateIssueComponent extends React.Component {
     </>
   );
 }`;
-    extractES6(INPUT, lDependencies, ".jsx");
+    extractES6(lInput, lDependencies, ".jsx");
     expect(lDependencies).to.deep.equal([
       {
         module: "react",

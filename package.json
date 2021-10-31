@@ -170,7 +170,7 @@
     "eslint": "^7.32.0",
     "eslint-config-moving-meadow": "2.0.9",
     "eslint-config-prettier": "8.3.0",
-    "eslint-plugin-budapestian": "2.3.0",
+    "eslint-plugin-budapestian": "3.0.1",
     "eslint-plugin-import": "2.25.2",
     "eslint-plugin-mocha": "9.0.0",
     "eslint-plugin-node": "11.1.0",
@@ -198,11 +198,6 @@
         "package": "eslint",
         "policy": "wanted",
         "because": "some eslint plugins (eslint-plugin-budapestian) are not compatible with eslint 8 yet "
-      },
-      {
-        "package": "eslint-plugin-budapestian",
-        "policy": "pin",
-        "because": "eslint-plugin-budapestian 3.0.0 is a bit too enthousiastic flagging things it shouldn't - keeping at 2.3.0 for the time being"
       },
       {
         "package": "figures",

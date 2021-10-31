@@ -54,12 +54,12 @@ function normalizeFilterOptions(pOptions, pFilterOptionKeys) {
 function normalizeCollapse(pCollapse) {
   let lReturnValue = pCollapse;
   const lOneOrMoreNonSlashes = "[^/]+";
-  const FOLDER_PATTERN = `${lOneOrMoreNonSlashes}/`;
-  const FOLDER_BELOW_NODE_MODULES = `node_modules/${lOneOrMoreNonSlashes}`;
+  const lFolderPattern = `${lOneOrMoreNonSlashes}/`;
+  const lFolderBelowNodeModules = `node_modules/${lOneOrMoreNonSlashes}`;
   const lSingleDigitRe = /^\d$/;
 
   if (typeof pCollapse === "number" || pCollapse.match(lSingleDigitRe)) {
-    lReturnValue = `${FOLDER_BELOW_NODE_MODULES}|^${FOLDER_PATTERN.repeat(
+    lReturnValue = `${lFolderBelowNodeModules}|^${lFolderPattern.repeat(
       Number.parseInt(pCollapse, 10)
     )}`;
   }
