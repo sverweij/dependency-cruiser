@@ -4,32 +4,12 @@ cache:
   paths:
     - node_modules
 
-test_async_node_16:
-  image: node:16
+test_async_node:
+  image: node:latest
   script:
     - npm install
     - npm run lint
     - npm run depcruise
-    - npm run test:yarn-pnp
-    - npm run test:cover
-  except:
-    - tags
-
-test_async_node_14:
-  image: node:14
-  script:
-    - npm install
-    - npm run lint
-    - npm run depcruise
-    - npm run test:yarn-pnp
-    - npm run test:cover
-  except:
-    - tags
-
-test_async_node_12:
-  image: node:12
-  script:
-    - npm install
     - npm run test:yarn-pnp
     - npm run test:cover
   except:
