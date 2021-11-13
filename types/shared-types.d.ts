@@ -18,6 +18,7 @@ export type OutputType =
   | "teamcity"
   | "anon"
   | "text"
+  | "metrics"
   | string;
 
 export type SeverityType = "error" | "warn" | "info" | "ignore";

@@ -28,6 +28,7 @@ try {
       "-T, --output-type <type>",
       "output type; e.g. err, err-html, dot, ddot, archi, flat, baseline or json\n(default: err)"
     )
+    .option("-m, --metrics", "calculate stability metrics", false)
     .option(
       "-f, --output-to <file>",
       "file to write output to; - for stdout",

@@ -20,6 +20,7 @@ SCHEMA_SOURCES=tools/schema/compound-exclude-type.mjs \
 	tools/schema/module-system-type.mjs \
 	tools/schema/module-systems-type.mjs \
 	tools/schema/modules.mjs \
+	tools/schema/folders.mjs \
 	tools/schema/options-used.mjs \
 	tools/schema/options.mjs \
 	tools/schema/output-type.mjs \

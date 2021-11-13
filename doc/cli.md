@@ -19,6 +19,7 @@ available in dependency-cruiser configurations.
 1. [`--output-type`: specify the output format](#--output-type-specify-the-output-format)
 1. [`--config`/ `--validate`: use a configuration with rules and/or options](#--config---validate)
 1. [`--init`](#--init)
+1. [`--metrics`: calculate stability metrics](#--metrics)
 1. [`--info`: show what alt-js are supported](#--info-showing-what-alt-js-are-supported)
 1. [`--ignore-known`: ignore known violations](#--ignore-known-ignore-known-violations)
 1. [`--help`/ no parameters: get help](#--help--no-parameters)
@@ -463,6 +464,75 @@ For more information about writing rules see the [tutorial](rules-tutorial.md) a
 
 For an easy set up of both use [--init](#--init)
 
+#### metrics - generate a report with stability metrics for each folder
+
+Shows for each folder:
+
+| metric             | abbreviation | description                                                                                                               |
+| ------------------ | ------------ | ------------------------------------------------------------------------------------------------------------------------- |
+| number of modules  | N            |                                                                                                                           |
+| Afferent couplings | Ca           | The number of modules outside this folder that depend on this folder                                                      |
+| Efferent couplings | Ce           | The number of modules this folder depends on _outside_ the current folder                                                 |
+| Instability        | I            | Ce / (Ca + Ce) a number between 0 and 1 that indicates how 'stable' the folder with 0: wholy stable; and 1 wholy unstable |
+
+While 'instability' has a negative connotation it's also unavoidable in any
+meaningful system. It's the basis of Martin's variable component stability
+principle: 'the instability of a folder should be larger than the folders it
+depends on'. Only present when dependency-cruiser was asked to calculate it.
+
+<details>
+<summary>Typical output</summary>
+
+```
+folder                                      N    Ca    Ce  I
+--------------------------------------- ----- ----- -----  -----
+bin                                         4     0    10  1
+src/report/dot                              8     1     8  0.89
+src/report                                 29     2    11  0.85
+src/enrich                                 23     2    10  0.83
+src/cli/init-config                        10     1     5  0.83
+src/main                                   10     4    15  0.79
+src/extract                                40     4    15  0.79
+src/enrich/derive/reachable                 2     1     3  0.75
+src/cli                                    23     7    14  0.67
+src/extract/transpile                      10     4     8  0.67
+src/config-utl/extract-depcruise-config     3     1     2  0.67
+src/main/rule-set                           2     2     3  0.6
+src/enrich/derive/circular                  2     1     1  0.5
+src/enrich/derive/dependents                2     1     1  0.5
+src/enrich/derive/orphan                    2     1     1  0.5
+src/extract/resolve                        10     6     6  0.5
+src/report/error-html                       3     1     1  0.5
+src/report/html                             2     1     1  0.5
+src/main/resolve-options                    1     2     2  0.5
+src/cli/listeners                           4     2     2  0.5
+src/cli/listeners/cli-feedback              1     1     1  0.5
+src/cli/listeners/performance-log           3     1     1  0.5
+src/config-utl                              8     5     4  0.44
+src/enrich/summarize                        5     3     2  0.4
+src/main/options                            3     3     2  0.4
+src/extract/parse                           3     7     4  0.36
+src/extract/ast-extractors                  7     5     2  0.29
+src/enrich/derive                          13     6     2  0.25
+src/validate                                7     3     1  0.25
+src                                       161    10     0  0
+src/enrich/derive/folders                   4     1     0  0
+src/graph-utl                              10    18     0  0
+src/utl                                     4    14     0  0
+src/extract/utl                             6    10     0  0
+src/extract/resolve/get-manifest            2     2     0  0
+src/schema                                  6     2     0  0
+src/main/files-and-dirs                     1     1     0  0
+src/main/utl                                1     2     0  0
+src/report/anon                             4     1     0  0
+src/report/utl                              1     2     0  0
+src/report/plugins                          1     1     0  0
+src/cli/utl                                 2     4     0  0
+src/cli/tools                               1     1     0  0
+```
+
+</details>
+
 ### `--init`
 
 This asks some questions and - depending on the answers - creates a dependency-cruiser
@@ -493,6 +563,24 @@ preset):</summary>
 | `no-duplicate-dep-types` | Warn if a dependency occurs in your package.json more than once (technically: has more than one dependency type) |
 
 </details>
+
+### `--metrics`
+
+Makes dependency-cruiser calculate stability metrics (number of dependents,
+number of dependencies and 'instability' (`# dependencies/ (# dependencies + # dependents)`))
+for all folders. These metrics are adapted from _Agile software development:
+principles, patterns, and practices_ by Robert C Martin (ISBN 0-13-597444-5).
+
+Currently this output is only reflected in the `json` and the
+`metrics` reporter. Some other reporters will follow suit later.
+
+- These metrics substitute 'components' and 'classes' from that Martin's book
+  with 'folders' and 'modules'; the closest relatives, that work for the most
+  programming styles in JavaScript (and its derivative languages).
+- For output-type `metrics` this command line switch is implied, so there's no
+  need to specify it there.
+- Not on by default as it's relatively resource intensive (especially when
+  dependency-cruiser doesn't already derives dependents of folders.)
 
 ### `--info` showing what alt-js are supported
 

@@ -9,6 +9,7 @@ module.exports = {
   additionalProperties: false,
   properties: {
     modules: { $ref: "#/definitions/ModulesType" },
+    folders: { $ref: "#/definitions/FoldersType" },
     summary: { $ref: "#/definitions/SummaryType" },
   },
   definitions: {
@@ -158,6 +159,21 @@ module.exports = {
       },
     },
     SeverityType: { type: "string", enum: ["error", "warn", "info", "ignore"] },
+    FoldersType: { type: "array", items: { $ref: "#/definitions/FolderType" } },
+    FolderType: {
+      type: "object",
+      required: ["name", "moduleCount"],
+      additionalProperties: false,
+      properties: {
+        name: { type: "string" },
+        dependents: { type: "array", items: { type: "string" } },
+        dependencies: { type: "array", items: { type: "string" } },
+        moduleCount: { type: "number" },
+        afferentCouplings: { type: "number" },
+        efferentCouplings: { type: "number" },
+        instability: { type: "number" },
+      },
+    },
     SummaryType: {
       type: "object",
       required: [
@@ -510,6 +526,7 @@ module.exports = {
             "teamcity",
             "anon",
             "text",
+            "metrics",
           ],
         },
         { type: "string", pattern: "^plugin:[^:]+$" },

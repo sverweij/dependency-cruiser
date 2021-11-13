@@ -11,7 +11,12 @@ function hasDependentsRule(pOptions) {
 }
 
 function shouldAddDependents(pOptions) {
-  return Boolean(pOptions.forceDeriveDependents) || hasDependentsRule(pOptions);
+  return (
+    Boolean(pOptions.forceDeriveDependents) ||
+    Boolean(pOptions.metrics) ||
+    pOptions.outputType === "metrics" ||
+    hasDependentsRule(pOptions)
+  );
 }
 
 module.exports = function addDependents(pModules, pOptions) {
