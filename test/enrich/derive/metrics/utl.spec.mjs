@@ -3,9 +3,9 @@ import { expect } from "chai";
 import {
   getParentFolders,
   foldersObject2folderArray,
-} from "../../../../src/enrich/derive/folders/utl.js";
+} from "../../../../src/enrich/derive/metrics/utl.js";
 
-describe("enrich/derive/folders/utl - getParentFolders", () => {
+describe("enrich/derive/metrics/utl - getParentFolders", () => {
   it("for a parent-less folder just returns that folder", () => {
     expect(getParentFolders("src")).to.deep.equal(["src"]);
   });
@@ -18,7 +18,7 @@ describe("enrich/derive/folders/utl - getParentFolders", () => {
   });
 });
 
-describe("enrich/derive/folders/utl - foldersObject2folderArray", () => {
+describe("enrich/derive/metrics/utl - foldersObject2folderArray", () => {
   it("no folders in object => empty array", () => {
     expect(foldersObject2folderArray({})).to.deep.equal([]);
   });

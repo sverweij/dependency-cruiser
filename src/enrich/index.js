@@ -1,5 +1,5 @@
 const enrichModules = require("./enrich-modules");
-const deriveFolders = require("./derive/folders");
+const deriveFolderMetrics = require("./derive/metrics/folder.js");
 const summarize = require("./summarize");
 const clearCaches = require("./clear-caches");
 
@@ -10,7 +10,7 @@ module.exports = function enrich(pModules, pOptions, pFileAndDirectoryArray) {
   clearCaches();
   return {
     modules: lModules,
-    ...deriveFolders(lModules, pOptions),
+    ...deriveFolderMetrics(lModules, pOptions),
     summary: summarize(lModules, pOptions, pFileAndDirectoryArray),
   };
 };

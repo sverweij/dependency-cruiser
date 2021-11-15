@@ -1,8 +1,8 @@
 import { expect } from "chai";
 
-import getStabilityMetrics from "../../../../src/enrich/derive/folders/get-stability-metrics.js";
+import getStabilityMetrics from "../../../../src/enrich/derive/metrics/get-stability-metrics.js";
 
-describe("enrich/derive/folders/get-stability-metrics - folder stability metrics derivation", () => {
+describe("enrich/derive/metrics/get-stability-metrics - folder stability metrics derivation", () => {
   it("no modules no metrics", () => {
     expect(getStabilityMetrics([])).to.deep.equal([]);
   });

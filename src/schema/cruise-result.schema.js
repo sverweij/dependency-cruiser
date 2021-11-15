@@ -47,6 +47,7 @@ module.exports = {
           items: { $ref: "#/definitions/RuleSummaryType" },
         },
         consolidated: { type: "boolean" },
+        instability: { type: "number" },
       },
     },
     ReachableType: {

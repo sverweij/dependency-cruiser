@@ -3,9 +3,9 @@ import { expect } from "chai";
 import {
   getAfferentCouplings,
   getEfferentCouplings,
-} from "../../../../src/enrich/derive/folders/module-utl.js";
+} from "../../../../src/enrich/derive/metrics/module-utl.js";
 
-describe("enrich/derive/folders/module-utl - getAfferentCouplings", () => {
+describe("enrich/derive/metrics/module-utl - getAfferentCouplings", () => {
   it("no dependents => 0", () => {
     expect(
       getAfferentCouplings({ dependents: [] }, "src/whoopla").length
@@ -56,7 +56,7 @@ describe("enrich/derive/folders/module-utl - getAfferentCouplings", () => {
   });
 });
 
-describe("enrich/derive/folders/module-utl - getEfferentCouplings", () => {
+describe("enrich/derive/metrics/module-utl - getEfferentCouplings", () => {
   it("no dependencies => 0", () => {
     expect(
       getEfferentCouplings({ dependencies: [] }, "src/whoopla").length

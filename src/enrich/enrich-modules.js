@@ -8,6 +8,7 @@ const addDependents = require("./derive/dependents");
 const deriveReachable = require("./derive/reachable");
 const addValidations = require("./add-validations");
 const softenKnownViolations = require("./soften-known-violations");
+const deriveModuleMetrics = require("./derive/metrics/module");
 
 module.exports = function enrichModules(pModules, pOptions) {
   bus.emit("progress", "analyzing: cycles", { level: busLogLevels.INFO });
@@ -18,6 +19,10 @@ module.exports = function enrichModules(pModules, pOptions) {
   lModules = deriveOrphans(lModules);
   bus.emit("progress", "analyzing: reachables", { level: busLogLevels.INFO });
   lModules = deriveReachable(lModules, pOptions.ruleSet);
+  bus.emit("progress", "analyzing: calculating module metrics", {
+    level: busLogLevels.INFO,
+  });
+  lModules = deriveModuleMetrics(lModules, pOptions);
   bus.emit("progress", "analyzing: add focus (if any)", {
     level: busLogLevels.INFO,
   });

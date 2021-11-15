@@ -17,7 +17,12 @@ function foldersObject2folderArray(pObject) {
   }));
 }
 
+function shouldDeriveMetrics(pOptions) {
+  return pOptions.metrics || pOptions.outputType === "metrics";
+}
+
 module.exports = {
   getParentFolders,
   foldersObject2folderArray,
+  shouldDeriveMetrics,
 };
