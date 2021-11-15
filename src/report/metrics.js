@@ -6,6 +6,37 @@ const METRIC_WIDTH = 4;
 const INSTABILITY_DECIMALS = 2;
 const YADDUM = DECIMAL_BASE ** INSTABILITY_DECIMALS;
 
+function getHeader(pMaxNameWidth) {
+  return `${"folder".padEnd(pMaxNameWidth)} ${"N".padStart(
+    METRIC_WIDTH + 1
+  )} ${"Ca".padStart(METRIC_WIDTH + 1)} ${"Ce".padStart(
+    METRIC_WIDTH + 1
+  )}  ${"I".padEnd(METRIC_WIDTH + 1)}`;
+}
+
+function getDemarcationLine(pMaxNameWidth) {
+  return `${"-".repeat(pMaxNameWidth)} ${"-".repeat(
+    METRIC_WIDTH + 1
+  )} ${"-".repeat(METRIC_WIDTH + 1)} ${"-".repeat(
+    METRIC_WIDTH + 1
+  )}  ${"-".repeat(METRIC_WIDTH + 1)}`;
+}
+
+function getMetricsTable(pMetrics, pMaxNameWidth) {
+  return pMetrics.map((pMetric) => {
+    return `${pMetric.name.padEnd(pMaxNameWidth, " ")}  ${pMetric.moduleCount
+      .toString(DECIMAL_BASE)
+      .padStart(METRIC_WIDTH)}  ${pMetric.afferentCouplings
+      .toString(DECIMAL_BASE)
+      .padStart(METRIC_WIDTH)}  ${pMetric.efferentCouplings
+      .toString(DECIMAL_BASE)
+      .padStart(METRIC_WIDTH)}  ${(
+      Math.round(YADDUM * pMetric.instability) / YADDUM
+    )
+      .toString(DECIMAL_BASE)
+      .padEnd(METRIC_WIDTH)}`;
+  });
+}
 function transformMetricsToTable(pMetrics) {
   // TODO: should probably use a table module for this (i.e. text-table)
   // to simplify this code; but for this poc not having a dependency (so it's
@@ -15,40 +46,9 @@ function transformMetricsToTable(pMetrics) {
     .sort((pLeft, pRight) => pLeft - pRight)
     .pop();
 
-  return [
-    chalk.bold(
-      `${"folder".padEnd(lMaxNameWidth)} ${"N".padStart(
-        METRIC_WIDTH + 1
-      )} ${"Ca".padStart(METRIC_WIDTH + 1)} ${"Ce".padStart(
-        METRIC_WIDTH + 1
-      )}  ${"I".padEnd(METRIC_WIDTH + 1)}`
-    ),
-  ]
-    .concat(
-      `${"-".repeat(lMaxNameWidth)} ${"-".repeat(
-        METRIC_WIDTH + 1
-      )} ${"-".repeat(METRIC_WIDTH + 1)} ${"-".repeat(
-        METRIC_WIDTH + 1
-      )}  ${"-".repeat(METRIC_WIDTH + 1)}`
-    )
-    .concat(
-      pMetrics.map((pMetric) => {
-        return `${pMetric.name.padEnd(
-          lMaxNameWidth,
-          " "
-        )}  ${pMetric.moduleCount
-          .toString(DECIMAL_BASE)
-          .padStart(METRIC_WIDTH)}  ${pMetric.afferentCouplings
-          .toString(DECIMAL_BASE)
-          .padStart(METRIC_WIDTH)}  ${pMetric.efferentCouplings
-          .toString(DECIMAL_BASE)
-          .padStart(METRIC_WIDTH)}  ${(
-          Math.round(YADDUM * pMetric.instability) / YADDUM
-        )
-          .toString(DECIMAL_BASE)
-          .padEnd(METRIC_WIDTH)}`;
-      })
-    )
+  return [chalk.bold(getHeader(lMaxNameWidth))]
+    .concat(getDemarcationLine(lMaxNameWidth))
+    .concat(getMetricsTable(pMetrics, lMaxNameWidth))
     .join(os.EOL)
     .concat(os.EOL);
 }
