@@ -31,8 +31,8 @@ function getMetricsTable(pMetrics, pMaxNameWidth) {
       afferentCouplings,
       efferentCouplings,
       instability,
-    }) => {
-      return `${name.padEnd(pMaxNameWidth, " ")}  ${moduleCount
+    }) =>
+      `${name.padEnd(pMaxNameWidth, " ")}  ${moduleCount
         .toString(DECIMAL_BASE)
         .padStart(METRIC_WIDTH)}  ${afferentCouplings
         .toString(DECIMAL_BASE)
@@ -40,8 +40,7 @@ function getMetricsTable(pMetrics, pMaxNameWidth) {
         .toString(DECIMAL_BASE)
         .padStart(METRIC_WIDTH)}  ${(Math.round(YADDUM * instability) / YADDUM)
         .toString(DECIMAL_BASE)
-        .padEnd(METRIC_WIDTH)}`;
-    }
+        .padEnd(METRIC_WIDTH)}`
   );
 }
 
@@ -85,9 +84,12 @@ function transformMetricsToTable({ modules, folders }) {
 }
 
 /**
- * Metrics plugin - to test the waters. If we want to use metrics in other
- * reporters - or use e.g. the Ca/ Ce/ I in rules (e.g. to detect violations
- * of Uncle Bob's variable dependency principle)
+ * returns stability metrics of modules & folders in an ascii table
+ *
+ * Potential future features:
+ * - show/hide modules
+ * - custom sorting in addition to the Instability (e.g. on name)
+ * - additional output formats (csv?, html?)
  *
  * @param {import('../../types/dependency-cruiser').ICruiseResult} pCruiseResult -
  *      the output of a dependency-cruise adhering to dependency-cruiser's

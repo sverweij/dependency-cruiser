@@ -116,4 +116,27 @@ describe("enrich/derive/metrics/module - module stability metrics derivation", (
       },
     ]);
   });
+
+  it("doesn't emit an instability metric when we're asking for metrics on something we don't want to calc them on", () => {
+    expect(
+      deriveModuleMetrics(
+        [
+          {
+            source: "os",
+            coreModule: true,
+            dependencies: [],
+            dependents: ["een", "twee", "drie", "vier"],
+          },
+        ],
+        { metrics: true }
+      )
+    ).to.deep.equal([
+      {
+        source: "os",
+        coreModule: true,
+        dependencies: [],
+        dependents: ["een", "twee", "drie", "vier"],
+      },
+    ]);
+  });
 });
