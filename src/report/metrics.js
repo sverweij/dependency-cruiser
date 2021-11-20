@@ -5,9 +5,10 @@ const DECIMAL_BASE = 10;
 const METRIC_WIDTH = 4;
 const INSTABILITY_DECIMALS = 2;
 const YADDUM = DECIMAL_BASE ** INSTABILITY_DECIMALS;
+const COMPONENT_HEADER = "name";
 
 function getHeader(pMaxNameWidth) {
-  return `${"folder".padEnd(pMaxNameWidth)} ${"N".padStart(
+  return `${COMPONENT_HEADER.padEnd(pMaxNameWidth)} ${"N".padStart(
     METRIC_WIDTH + 1
   )} ${"Ca".padStart(METRIC_WIDTH + 1)} ${"Ce".padStart(
     METRIC_WIDTH + 1
@@ -37,18 +38,48 @@ function getMetricsTable(pMetrics, pMaxNameWidth) {
       .padEnd(METRIC_WIDTH)}`;
   });
 }
-function transformMetricsToTable(pMetrics) {
+
+function metricifyModule({ source, dependents, dependencies, instability }) {
+  return {
+    name: source,
+    moduleCount: 1,
+    afferentCouplings: dependents.length,
+    efferentCouplings: dependencies.length,
+    instability,
+  };
+}
+
+function metricsAreCalculable(pModule) {
+  return (
+    !pModule.coreModule &&
+    !pModule.couldNotResolve &&
+    !pModule.matchesDoNotFollow
+  );
+}
+
+function orderByInstability(pLeft, pRight) {
+  return pRight.instability - pLeft.instability;
+}
+function transformMetricsToTable({ modules, folders }) {
   // TODO: should probably use a table module for this (i.e. text-table)
-  // to simplify this code; but for this poc not having a dependency (so it's
-  // copy-n-pasteable from a gist) is more important
-  const lMaxNameWidth = pMetrics
-    .map((pMetric) => pMetric.name.length)
+  // to simplify this code
+  const lMaxNameWidth = folders
+    .map((pFolder) => pFolder.name.length)
+    .concat(modules.map((pModule) => pModule.source.length))
+    .concat(COMPONENT_HEADER.length)
     .sort((pLeft, pRight) => pLeft - pRight)
     .pop();
 
   return [chalk.bold(getHeader(lMaxNameWidth))]
     .concat(getDemarcationLine(lMaxNameWidth))
-    .concat(getMetricsTable(pMetrics, lMaxNameWidth))
+    .concat(
+      getMetricsTable(
+        folders
+          .concat(modules.filter(metricsAreCalculable).map(metricifyModule))
+          .sort(orderByInstability),
+        lMaxNameWidth
+      )
+    )
     .join(os.EOL)
     .concat(os.EOL);
 }
@@ -68,7 +99,7 @@ function transformMetricsToTable(pMetrics) {
 module.exports = (pCruiseResult) => {
   if (pCruiseResult.folders) {
     return {
-      output: transformMetricsToTable(pCruiseResult.folders),
+      output: transformMetricsToTable(pCruiseResult),
       exitCode: 0,
     };
   } else {
