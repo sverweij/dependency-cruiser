@@ -1,4 +1,4 @@
-const os = require("os");
+const { EOL } = require("os");
 const chalk = require("chalk");
 
 const DECIMAL_BASE = 10;
@@ -24,19 +24,25 @@ function getDemarcationLine(pMaxNameWidth) {
 }
 
 function getMetricsTable(pMetrics, pMaxNameWidth) {
-  return pMetrics.map((pMetric) => {
-    return `${pMetric.name.padEnd(pMaxNameWidth, " ")}  ${pMetric.moduleCount
-      .toString(DECIMAL_BASE)
-      .padStart(METRIC_WIDTH)}  ${pMetric.afferentCouplings
-      .toString(DECIMAL_BASE)
-      .padStart(METRIC_WIDTH)}  ${pMetric.efferentCouplings
-      .toString(DECIMAL_BASE)
-      .padStart(METRIC_WIDTH)}  ${(
-      Math.round(YADDUM * pMetric.instability) / YADDUM
-    )
-      .toString(DECIMAL_BASE)
-      .padEnd(METRIC_WIDTH)}`;
-  });
+  return pMetrics.map(
+    ({
+      name,
+      moduleCount,
+      afferentCouplings,
+      efferentCouplings,
+      instability,
+    }) => {
+      return `${name.padEnd(pMaxNameWidth, " ")}  ${moduleCount
+        .toString(DECIMAL_BASE)
+        .padStart(METRIC_WIDTH)}  ${afferentCouplings
+        .toString(DECIMAL_BASE)
+        .padStart(METRIC_WIDTH)}  ${efferentCouplings
+        .toString(DECIMAL_BASE)
+        .padStart(METRIC_WIDTH)}  ${(Math.round(YADDUM * instability) / YADDUM)
+        .toString(DECIMAL_BASE)
+        .padEnd(METRIC_WIDTH)}`;
+    }
+  );
 }
 
 function metricifyModule({ source, dependents, dependencies, instability }) {
@@ -50,22 +56,21 @@ function metricifyModule({ source, dependents, dependencies, instability }) {
 }
 
 function metricsAreCalculable(pModule) {
-  return (
-    !pModule.coreModule &&
-    !pModule.couldNotResolve &&
-    !pModule.matchesDoNotFollow
-  );
+  return Object.prototype.hasOwnProperty.call(pModule, "instability");
 }
 
 function orderByInstability(pLeft, pRight) {
   return pRight.instability - pLeft.instability;
 }
+
 function transformMetricsToTable({ modules, folders }) {
   // TODO: should probably use a table module for this (i.e. text-table)
   // to simplify this code
-  const lMaxNameWidth = folders
-    .map((pFolder) => pFolder.name.length)
-    .concat(modules.map((pModule) => pModule.source.length))
+  const lComponents = folders.concat(
+    modules.filter(metricsAreCalculable).map(metricifyModule)
+  );
+  const lMaxNameWidth = lComponents
+    .map(({ name }) => name.length)
     .concat(COMPONENT_HEADER.length)
     .sort((pLeft, pRight) => pLeft - pRight)
     .pop();
@@ -73,15 +78,10 @@ function transformMetricsToTable({ modules, folders }) {
   return [chalk.bold(getHeader(lMaxNameWidth))]
     .concat(getDemarcationLine(lMaxNameWidth))
     .concat(
-      getMetricsTable(
-        folders
-          .concat(modules.filter(metricsAreCalculable).map(metricifyModule))
-          .sort(orderByInstability),
-        lMaxNameWidth
-      )
+      getMetricsTable(lComponents.sort(orderByInstability), lMaxNameWidth)
     )
-    .join(os.EOL)
-    .concat(os.EOL);
+    .join(EOL)
+    .concat(EOL);
 }
 
 /**
@@ -105,8 +105,8 @@ module.exports = (pCruiseResult) => {
   } else {
     return {
       output:
-        `${os.EOL}ERROR: The cruise result didn't contain any metrics - re-running the cruise with${os.EOL}` +
-        `       the '--metrics' command line option should fix that.${os.EOL}${os.EOL}`,
+        `${EOL}ERROR: The cruise result didn't contain any metrics - re-running the cruise with${EOL}` +
+        `       the '--metrics' command line option should fix that.${EOL}${EOL}`,
       exitCode: 1,
     };
   }
