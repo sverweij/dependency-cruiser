@@ -1,3 +1,4 @@
+// const { findModuleByName, clearCache } = require("../utl");
 const { metricsAreCalculable } = require("./module-utl");
 const { shouldDeriveMetrics } = require("./utl");
 
@@ -13,6 +14,16 @@ module.exports = function deriveModuleMetrics(pModules, pOptions) {
           }
         : {}),
     }));
+    // clearCache();
+    // return lModules.map((pModule) => ({
+    //   ...pModule,
+    //   dependencies: pModule.dependencies.map((pDependency) => ({
+    //     ...pDependency,
+    //     instability:
+    //       (findModuleByName(lModules, pDependency.resolved) || {})
+    //         .instability || 0,
+    //   })),
+    // }));
   }
   return pModules;
 };

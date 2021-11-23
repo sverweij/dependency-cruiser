@@ -21,6 +21,10 @@ export interface IReporterOptions {
    * Options to tweak the output of the flat /fdot reporter
    */
   flat?: IDotReporterOptions;
+  /**
+   * Options to tweak the output of the metrics reporter
+   */
+  metrics?: IMetricsReporterOptions;
 }
 
 export interface IReporterFiltersType {
@@ -96,3 +100,16 @@ export interface IDotThemeEntry {
   criteria: any;
   attributes: any;
 }
+
+export interface IMetricsReporterOptions {
+  hideModules?: boolean;
+  hideFolders?: boolean;
+  oderBy?: MetricsOrderByType;
+}
+
+export type MetricsOrderByType =
+  | "instability"
+  | "moduleCount"
+  | "afferentCouplings"
+  | "efferentCouplings"
+  | "name";

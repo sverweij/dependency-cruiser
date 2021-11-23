@@ -28,13 +28,18 @@ function reSummarizeResults(pResult, pFormatOptions) {
 
 module.exports = function reportWrap(pResult, pFormatOptions) {
   const lReportFunction = report.getReporter(pFormatOptions.outputType);
+  const lReportOptions = _get(
+    pResult,
+    `summary.optionsUsed.reporterOptions.${pFormatOptions.outputType}`,
+    {}
+  );
 
   return lReportFunction(
     reSummarizeResults(pResult, pFormatOptions),
     // passing format options here so reporters that read collapse patterns
     // from the result take the one passed in the format options instead
     _has(pFormatOptions, "collapse")
-      ? { collapsePattern: pFormatOptions.collapse }
-      : {}
+      ? { ...lReportOptions, collapsePattern: pFormatOptions.collapse }
+      : lReportOptions
   );
 };

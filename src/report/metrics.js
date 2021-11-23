@@ -58,15 +58,27 @@ function metricsAreCalculable(pModule) {
   return Object.prototype.hasOwnProperty.call(pModule, "instability");
 }
 
-function orderByInstability(pLeft, pRight) {
-  return pRight.instability - pLeft.instability;
+function orderByNumber(pAttributeName) {
+  // eslint-disable-next-line security/detect-object-injection
+  return (pLeft, pRight) => pRight[pAttributeName] - pLeft[pAttributeName];
 }
 
-function transformMetricsToTable({ modules, folders }) {
+function orderByString(pAttributeName) {
+  return (pLeft, pRight) =>
+    // eslint-disable-next-line security/detect-object-injection
+    pLeft[pAttributeName].localeCompare(pRight[pAttributeName]);
+}
+
+function transformMetricsToTable(
+  { modules, folders },
+  { orderBy, hideFolders, hideModules }
+) {
   // TODO: should probably use a table module for this (i.e. text-table)
   // to simplify this code
-  const lComponents = folders.concat(
-    modules.filter(metricsAreCalculable).map(metricifyModule)
+  let lComponents = [];
+  lComponents = lComponents.concat(hideFolders ? [] : folders);
+  lComponents = lComponents.concat(
+    hideModules ? [] : modules.filter(metricsAreCalculable).map(metricifyModule)
   );
   const lMaxNameWidth = lComponents
     .map(({ name }) => name.length)
@@ -77,7 +89,12 @@ function transformMetricsToTable({ modules, folders }) {
   return [chalk.bold(getHeader(lMaxNameWidth))]
     .concat(getDemarcationLine(lMaxNameWidth))
     .concat(
-      getMetricsTable(lComponents.sort(orderByInstability), lMaxNameWidth)
+      getMetricsTable(
+        lComponents
+          .sort(orderByString("name"))
+          .sort(orderByNumber(orderBy || "instability")),
+        lMaxNameWidth
+      )
     )
     .join(EOL)
     .concat(EOL);
@@ -87,8 +104,6 @@ function transformMetricsToTable({ modules, folders }) {
  * returns stability metrics of modules & folders in an ascii table
  *
  * Potential future features:
- * - show/hide modules
- * - custom sorting in addition to the Instability (e.g. on name)
  * - additional output formats (csv?, html?)
  *
  * @param {import('../../types/dependency-cruiser').ICruiseResult} pCruiseResult -
@@ -98,10 +113,11 @@ function transformMetricsToTable({ modules, folders }) {
  *      output: some metrics on folders and dependencies
  *      exitCode: 0
  */
-module.exports = (pCruiseResult) => {
+module.exports = (pCruiseResult, pReporterOptions) => {
+  const lReporterOptions = pReporterOptions || {};
   if (pCruiseResult.folders) {
     return {
-      output: transformMetricsToTable(pCruiseResult),
+      output: transformMetricsToTable(pCruiseResult, lReporterOptions),
       exitCode: 0,
     };
   } else {
