@@ -433,6 +433,31 @@
             }
           ]
         }
+      },
+      "metrics": {
+        "orderBy": "instability",
+        "hideModules": true
+      },
+      "anon": {
+        "wordlist": [
+          "aap",
+          "noot",
+          "mies",
+          "wim",
+          "zus",
+          "jet",
+          "teun",
+          "vuur",
+          "gijs",
+          "lam",
+          "kees",
+          "bok",
+          "weide",
+          "does",
+          "hok",
+          "duif",
+          "schapen"
+        ]
       }
     },
     "progress": { "type": "performance-log" }
