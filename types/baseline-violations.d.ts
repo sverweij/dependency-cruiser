@@ -1,3 +1,3 @@
-import { IViolation } from "./cruise-result";
+import { IViolation } from "./violations";
 
 export type IBaselineViolations = IViolation[];

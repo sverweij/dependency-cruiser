@@ -10,6 +10,14 @@ describe("extract/utl/getExtension", () => {
     expect(getExtension("./aap/noot/mies.tes.md")).to.equal(".md");
   });
 
+  it("types.d.ts classifies as .d.ts", () => {
+    expect(getExtension("./types/types.d.ts")).to.equal(".d.ts");
+  });
+
+  it("any extension (e.g. .ts) classifies as that", () => {
+    expect(getExtension("./types/typed.ts")).to.equal(".ts");
+  });
+
   it("any extension (e.g. .js) classifies as that", () => {
     expect(getExtension("./aap/noot/mies.js")).to.equal(".js");
   });
