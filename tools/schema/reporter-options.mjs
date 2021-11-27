@@ -15,6 +15,7 @@ export default {
         dot: { $ref: "#/definitions/DotReporterOptionsType" },
         ddot: { $ref: "#/definitions/DotReporterOptionsType" },
         flat: { $ref: "#/definitions/DotReporterOptionsType" },
+        metrics: { $ref: "#/definitions/MetricsReporterOptionsType" },
       },
     },
     AnonReporterOptionsType: {
@@ -34,6 +35,36 @@ export default {
           items: {
             type: "string",
           },
+        },
+      },
+    },
+    MetricsReporterOptionsType: {
+      type: "object",
+      description: "Options to tweak the output of the metrics reporter",
+      additionalProperties: false,
+      properties: {
+        orderBy: {
+          type: "string",
+          enum: [
+            "instability",
+            "moduleCount",
+            "afferentCouplings",
+            "efferentCouplings",
+            "name",
+          ],
+          description:
+            "By what attribute (in addition to the names of the folders/ modules) " +
+            "to order the metrics by. Defaults to 'instability'.",
+        },
+        hideModules: {
+          type: "boolean",
+          description:
+            "When true hides module metrics from the report. Defaults to false",
+        },
+        hideFolders: {
+          type: "boolean",
+          description:
+            "When true hides folder metrics from the report. Defaults to false",
         },
       },
     },

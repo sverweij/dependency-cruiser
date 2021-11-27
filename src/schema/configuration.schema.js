@@ -394,12 +394,31 @@ module.exports = {
         dot: { $ref: "#/definitions/DotReporterOptionsType" },
         ddot: { $ref: "#/definitions/DotReporterOptionsType" },
         flat: { $ref: "#/definitions/DotReporterOptionsType" },
+        metrics: { $ref: "#/definitions/MetricsReporterOptionsType" },
       },
     },
     AnonReporterOptionsType: {
       type: "object",
       additionalProperties: false,
       properties: { wordlist: { type: "array", items: { type: "string" } } },
+    },
+    MetricsReporterOptionsType: {
+      type: "object",
+      additionalProperties: false,
+      properties: {
+        orderBy: {
+          type: "string",
+          enum: [
+            "instability",
+            "moduleCount",
+            "afferentCouplings",
+            "efferentCouplings",
+            "name",
+          ],
+        },
+        hideModules: { type: "boolean" },
+        hideFolders: { type: "boolean" },
+      },
     },
     DotReporterOptionsType: {
       type: "object",
