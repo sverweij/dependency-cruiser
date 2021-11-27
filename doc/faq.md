@@ -298,11 +298,16 @@ situations without workarounds).
 
 **A**: Yes.
 
-For `.vue` single file components it uses _either_ the `vue-template-compiler` (Vue2) or `@vue/compiler-sfc` (Vue3).
+For `.vue` single file components it uses _either_ the `vue-template-compiler`
+(Vue2) or `@vue/compiler-sfc` (Vue3).
 
-`vue-template-compiler` should be in your module dependencies already if you are developing with Vue2 - just make sure you install dependency-cruiser in the same place.
+`vue-template-compiler` should be in your module dependencies already if you are
+developing with Vue2 - just make sure you install dependency-cruiser in the same
+place.
 
-`@vue/compiler-sfc` is [included by default in Vue 3 projects since version 3.2.13](https://github.com/vuejs/vue-next/tree/master/packages/compiler-sfc#vuecompiler-sfc). If you are using an older version of Vue 3, you may have to add `@vue/compiler-sfc` manually.
+`@vue/compiler-sfc` is [included by default in Vue 3 projects since version 3.2.13](https://github.com/vuejs/vue-next/tree/master/packages/compiler-sfc#vuecompiler-sfc).
+If you are using an older version of Vue 3, you may have to add `@vue/compiler-sfc`
+manually.
 
 ### Q: Does this work with Svelte as well?
 
@@ -319,7 +324,7 @@ For `.svelte` single file components it uses the `svelte` (version 3.x)
 
 **A**: No.
 
-For LiveScript, TypeScript, CoffeeScript and Vue Single File Components
+For LiveScript, TypeScript, CoffeeScript, Svelte and Vue Single File Components
 dependency-cruiser will use the transpiler already in your project (or,
 if you installed dependency-cruiser globally - the transpilers available
 globally).
@@ -509,12 +514,12 @@ Recipe for PR's to add an alt-js language:
 ## Contact
 
 If you have an issue, suggestion - don't hesitate to create an
-[issue](https://github.com/sverweij/dependency-cruiser/issues/new).
+[issue](https://github.com/sverweij/dependency-cruiser/issues/new/choose).
 
 You're welcome to create a pull request - if it's something more complex it's
 probably wise to first create an issue or hit
-[@depcruise](https://twitter.com/depcruise) up on twitter.
+[@mcmeadow](https://twitter.com/mcmeadow) up on twitter.
 
 For things that don't fit an issue or pull request you're welcome to
-contact the [@depcruise](https://twitter.com/depcruise) twitter account as well
+contact the [@mcmeadow](https://twitter.com/mcmeadow) twitter account as well
 (checked at approximately daily intervals).
