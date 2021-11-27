@@ -5,16 +5,20 @@ const path = require("path");
  *
  * Just using path.extname would be fine for most cases,
  * except for coffeescript, where a markdown extension can
- * mean literate coffeescript.
+ * mean literate coffeescript, and for typescript where
+ * .d.ts and .ts are slightly different beasts
  *
  * @param {string} pFileName path to the file to be parsed
  * @return {string}          extension
  */
 module.exports = function getExtensions(pFileName) {
-  let lReturnValue = path.extname(pFileName);
-
-  if (lReturnValue === ".md") {
-    return pFileName.endsWith(".coffee.md") ? ".coffee.md" : lReturnValue;
+  if (pFileName.endsWith(".d.ts")) {
+    return ".d.ts";
   }
-  return lReturnValue;
+
+  if (pFileName.endsWith(".coffee.md")) {
+    return ".coffee.md";
+  }
+
+  return path.extname(pFileName);
 };

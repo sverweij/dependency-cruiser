@@ -1,11 +1,8 @@
 import { ICruiseOptions } from "./options";
 import { IFlattenedRuleSet } from "./rule-set";
-import {
-  DependencyType,
-  ModuleSystemType,
-  SeverityType,
-  ProtocolType,
-} from "./shared-types";
+import { DependencyType, ModuleSystemType, ProtocolType } from "./shared-types";
+import { IViolation } from "./violations";
+import { IRuleSummary } from "./rule-summary";
 
 export interface ICruiseResult {
   /**
@@ -226,27 +223,6 @@ export interface IDependency {
   valid: boolean;
 }
 
-/**
- * If there was a rule violation (valid === false), this object contains the name of the
- * rule and severity of violating it.
- */
-export interface IRuleSummary {
-  /**
-   * The (short, eslint style) name of the violated rule. Typically something like
-   * 'no-core-punycode' or 'no-outside-deps'.
-   */
-  name: string;
-  /**
-   * How severe a violation of a rule is. The 'error' severity will make some reporters return
-   * a non-zero exit code, so if you want e.g. a build to stop when there's a rule violated:
-   * use that. The absence of the 'ignore' severity here is by design; ignored rules don't
-   * show up in the output.
-   *
-   * Severity to use when a dependency is not in the 'allowed' set of rules. Defaults to 'warn'
-   */
-  severity: SeverityType;
-}
-
 export interface IReachable {
   /**
    * The name of the rule where the reachability was defined
@@ -389,29 +365,6 @@ export interface IWebpackConfig {
  */
 export type WebpackEnvType = { [key: string]: any } | string;
 
-export interface IViolation {
-  /**
-   * The violated rule
-   */
-  rule: IRuleSummary;
-  /**
-   * The from part of the dependency this violation is about
-   */
-  from: string;
-  /**
-   * The to part of the dependency this violation is about
-   */
-  to: string;
-  /**
-   * The circular path if the violation is about circularity
-   */
-  cycle?: string[];
-  /**
-   * The path from the from to the to if the violation is transitive
-   */
-  via?: string[];
-}
-
 export interface IFolder {
   /**
    * The name of the folder. FOlder names are normalized to posix (so
@@ -455,3 +408,6 @@ export interface IFolder {
    */
   instability?: number;
 }
+
+export * from "./violations";
+export * from "./rule-summary";
