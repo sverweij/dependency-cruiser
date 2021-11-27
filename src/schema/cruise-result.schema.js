@@ -9,6 +9,7 @@ module.exports = {
   additionalProperties: false,
   properties: {
     modules: { $ref: "#/definitions/ModulesType" },
+    folders: { $ref: "#/definitions/FoldersType" },
     summary: { $ref: "#/definitions/SummaryType" },
   },
   definitions: {
@@ -46,6 +47,7 @@ module.exports = {
           items: { $ref: "#/definitions/RuleSummaryType" },
         },
         consolidated: { type: "boolean" },
+        instability: { type: "number" },
       },
     },
     ReachableType: {
@@ -158,6 +160,21 @@ module.exports = {
       },
     },
     SeverityType: { type: "string", enum: ["error", "warn", "info", "ignore"] },
+    FoldersType: { type: "array", items: { $ref: "#/definitions/FolderType" } },
+    FolderType: {
+      type: "object",
+      required: ["name", "moduleCount"],
+      additionalProperties: false,
+      properties: {
+        name: { type: "string" },
+        dependents: { type: "array", items: { type: "string" } },
+        dependencies: { type: "array", items: { type: "string" } },
+        moduleCount: { type: "number" },
+        afferentCouplings: { type: "number" },
+        efferentCouplings: { type: "number" },
+        instability: { type: "number" },
+      },
+    },
     SummaryType: {
       type: "object",
       required: [
@@ -510,6 +527,7 @@ module.exports = {
             "teamcity",
             "anon",
             "text",
+            "metrics",
           ],
         },
         { type: "string", pattern: "^plugin:[^:]+$" },
@@ -553,12 +571,31 @@ module.exports = {
         dot: { $ref: "#/definitions/DotReporterOptionsType" },
         ddot: { $ref: "#/definitions/DotReporterOptionsType" },
         flat: { $ref: "#/definitions/DotReporterOptionsType" },
+        metrics: { $ref: "#/definitions/MetricsReporterOptionsType" },
       },
     },
     AnonReporterOptionsType: {
       type: "object",
       additionalProperties: false,
       properties: { wordlist: { type: "array", items: { type: "string" } } },
+    },
+    MetricsReporterOptionsType: {
+      type: "object",
+      additionalProperties: false,
+      properties: {
+        orderBy: {
+          type: "string",
+          enum: [
+            "instability",
+            "moduleCount",
+            "afferentCouplings",
+            "efferentCouplings",
+            "name",
+          ],
+        },
+        hideModules: { type: "boolean" },
+        hideFolders: { type: "boolean" },
+      },
     },
     DotReporterOptionsType: {
       type: "object",

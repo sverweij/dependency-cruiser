@@ -1,4 +1,5 @@
 import modules from "./modules.mjs";
+import folders from "./folders.mjs";
 import summary from "./summary.mjs";
 
 export default {
@@ -10,10 +11,12 @@ export default {
   additionalProperties: false,
   properties: {
     modules: { $ref: "#/definitions/ModulesType" },
+    folders: { $ref: "#/definitions/FoldersType" },
     summary: { $ref: "#/definitions/SummaryType" },
   },
   definitions: {
     ...modules.definitions,
+    ...folders.definitions,
     ...summary.definitions,
   },
 };

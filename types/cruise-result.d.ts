@@ -13,6 +13,15 @@ export interface ICruiseResult {
    */
   modules: IModule[];
   /**
+   * A list of folders, as derived from the detected modules, with for each
+   * "folder a bunch of metrics (adapted from 'Agile software development:
+   * "principles, patterns, and practices' by Robert C Martin (ISBN 0-13-597444-5).
+   * "Note: these metrics substitute 'components' and 'classes' from that book
+   * "with 'folders' and 'modules'; the closest relatives that work for the most
+   * "programming styles in JavaScript (and its derivative languages).
+   */
+  folders?: IFolder[];
+  /**
    * Data summarizing the found dependencies
    */
   summary: ISummary;
@@ -97,6 +106,15 @@ export interface IModule {
    * purposes - it will not be present after a regular cruise.
    */
   consolidated?: boolean;
+  /**
+   * "number of dependents/ (number of dependents + number of dependencies)
+   * A measure for how stable the module is; ranging between 0 (completely
+   * stable module) to 1 (completely instable module). Derived from Uncle
+   * Bob's instability metric - but applied to a single module instead of
+   * to a group of them. This attribute is only present when dependency-cruiser
+   * was asked to calculate metrics.
+   */
+  instability?: number;
 }
 
 export interface IDependency {
@@ -392,4 +410,48 @@ export interface IViolation {
    * The path from the from to the to if the violation is transitive
    */
   via?: string[];
+}
+
+export interface IFolder {
+  /**
+   * The name of the folder. FOlder names are normalized to posix (so
+   * separated by forward slashes e.g.: src/things/morethings)
+   */
+  name: string;
+  /**
+   * List of folders depending on this folder
+   */
+  dependents?: string[];
+  /**
+   * List of folders this folder depends upon
+   */
+  dependencies?: string[];
+  /**
+   * The total number of modules detected in this folder and its sub-folders
+   */
+  moduleCount: number;
+  /**
+   * The number of modules outside this folder that depend on modules
+   * within this folder. Only present when dependency-cruiser was
+   * "asked to calculate it.
+   */
+  afferentCouplings?: number;
+  /**
+   * The number of modules inside this folder that depend on modules
+   * outside this folder. Only present when dependency-cruiser was
+   * asked to calculate it.
+   */
+  efferentCouplings?: number;
+  /**
+   * efferentCouplings/ (afferentCouplings + efferentCouplings)
+   *
+   * A measure for how stable the folder is; ranging between 0
+   * (completely stable folder) to 1 (completely instable folder)
+   * Note that while 'instability' has a negative connotation it's also
+   * (unavoidable in any meaningful system. It's the basis of Martin's
+   * variable component stability principle: 'the instability of a folder
+   * should be larger than the folders it depends on'. Only present when
+   * dependency-cruiser was asked to calculate it.,
+   */
+  instability?: number;
 }

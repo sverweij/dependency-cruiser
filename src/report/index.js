@@ -13,6 +13,7 @@ const json = require("./json");
 const teamcity = require("./teamcity");
 const text = require("./text");
 const baseline = require("./baseline");
+const metrics = require("./metrics");
 const { getExternalPluginReporter } = require("./plugins");
 
 const TYPE2REPORTER = {
@@ -32,6 +33,7 @@ const TYPE2REPORTER = {
   teamcity,
   text,
   baseline,
+  metrics,
 };
 
 /**

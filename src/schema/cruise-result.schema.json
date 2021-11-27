@@ -7,6 +7,7 @@
   "additionalProperties": false,
   "properties": {
     "modules": { "$ref": "#/definitions/ModulesType" },
+    "folders": { "$ref": "#/definitions/FoldersType" },
     "summary": { "$ref": "#/definitions/SummaryType" }
   },
   "definitions": {
@@ -88,6 +89,10 @@
         "consolidated": {
           "type": "boolean",
           "description": "true if the module was 'consolidated'. Consolidating implies the entity a Module represents might be several modules at the same time. This attribute is set by tools that consolidate modules for reporting purposes - it will not be present after a regular cruise."
+        },
+        "instability": {
+          "type": "number",
+          "description": "number of dependents/ (number of dependents + number of dependencies)A measure for how stable the module is; ranging between 0 (completely stable module) to 1 (completely instable module). Derived from Uncle Bob's instability metric - but applied to a single module instead of to a group of them. This attribute is only present when dependency-cruiserwas asked to calculate metrics."
         }
       }
     },
@@ -283,6 +288,54 @@
       "type": "string",
       "description": "How severe a violation of a rule is. The 'error' severity will make some reporters return a non-zero exit code, so if you want e.g. a build to stop when there's a rule violated: use that.",
       "enum": ["error", "warn", "info", "ignore"]
+    },
+    "FoldersType": {
+      "type": "array",
+      "description": "A list of folders, as derived from the detected modules, with for each folder a bunch of metrics (adapted from 'Agile software development: principles, patterns, and practices' by Robert C Martin (ISBN 0-13-597444-5). Note: these metrics substitute 'components' and 'classes' from that book with 'folders' and 'modules'; the closest relatives that work for the most programming styles in JavaScript (and its derivative languages).",
+      "items": { "$ref": "#/definitions/FolderType" }
+    },
+    "FolderType": {
+      "type": "object",
+      "required": ["name", "moduleCount"],
+      "additionalProperties": false,
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "The name of the folder. Folder names are normalized to posix (so separated by forward slashes e.g.: src/things/morethings)"
+        },
+        "dependents": {
+          "type": "array",
+          "description": "list of folders depending on this folder",
+          "items": {
+            "type": "string",
+            "description": "the (resolved) name of the dependent"
+          }
+        },
+        "dependencies": {
+          "type": "array",
+          "description": "list of folders this module depends upon",
+          "items": {
+            "type": "string",
+            "description": "the (resolved) name of the dependency"
+          }
+        },
+        "moduleCount": {
+          "type": "number",
+          "description": "The total number of modules detected in this folder and its sub-folders"
+        },
+        "afferentCouplings": {
+          "type": "number",
+          "description": "The number of modules outside this folder that depend on modules within this folder. Only present when dependency-cruiser was asked to calculate it."
+        },
+        "efferentCouplings": {
+          "type": "number",
+          "description": "The number of modules inside this folder that depend on modules outside this folder. Only present when dependency-cruiser was asked to calculate it."
+        },
+        "instability": {
+          "type": "number",
+          "description": "efferentCouplings/ (afferentCouplings + efferentCouplings) A measure for how stable the folder is; ranging between 0 (completely stable folder) to 1 (completely instable folder) Note that while 'instability' has a negative connotation it's also unavoidable in any meaningful system. It's the basis of Martin's variable component stability principle: 'the instability of a folder should be larger than the folders it depends on'. Only present when dependency-cruiser was asked to calculate it."
+        }
+      }
     },
     "SummaryType": {
       "type": "object",
@@ -866,7 +919,8 @@
             "err-html",
             "teamcity",
             "anon",
-            "text"
+            "text",
+            "metrics"
           ]
         },
         { "type": "string", "pattern": "^plugin:[^:]+$" }
@@ -934,7 +988,8 @@
         "archi": { "$ref": "#/definitions/DotReporterOptionsType" },
         "dot": { "$ref": "#/definitions/DotReporterOptionsType" },
         "ddot": { "$ref": "#/definitions/DotReporterOptionsType" },
-        "flat": { "$ref": "#/definitions/DotReporterOptionsType" }
+        "flat": { "$ref": "#/definitions/DotReporterOptionsType" },
+        "metrics": { "$ref": "#/definitions/MetricsReporterOptionsType" }
       }
     },
     "AnonReporterOptionsType": {
@@ -946,6 +1001,32 @@
           "type": "array",
           "description": "List of words to use to replace path elements of file names in the output with so the output isn't directly traceable to its intended purpose.When the list is exhausted, the anon reporter will use random strings patterned after the original file name in stead. The list is empty by default. Read more in https://github.com/sverweij/dependency-cruiser/blob/develop/doc/cli.md#anon---obfuscated-json",
           "items": { "type": "string" }
+        }
+      }
+    },
+    "MetricsReporterOptionsType": {
+      "type": "object",
+      "description": "Options to tweak the output of the metrics reporter",
+      "additionalProperties": false,
+      "properties": {
+        "orderBy": {
+          "type": "string",
+          "enum": [
+            "instability",
+            "moduleCount",
+            "afferentCouplings",
+            "efferentCouplings",
+            "name"
+          ],
+          "description": "By what attribute (in addition to the names of the folders/ modules) to order the metrics by. Defaults to 'instability'."
+        },
+        "hideModules": {
+          "type": "boolean",
+          "description": "When true hides module metrics from the report. Defaults to false"
+        },
+        "hideFolders": {
+          "type": "boolean",
+          "description": "When true hides folder metrics from the report. Defaults to false"
         }
       }
     },

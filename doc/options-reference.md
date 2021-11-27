@@ -1031,6 +1031,36 @@ module.exports = {
 }
 ```
 
+### options for the _metrics_ reporter
+
+By default the metrics reporter emits instability metrics for all modules and
+folders, ordered by instability (descending). If you want to see less, or
+use a different sort order, you can tweak that with the metrics reporterOptions.
+
+- `hideModules`: switch to `true` if you only want to see instability metrics for
+  folders. Defaults to `false`.
+- `hideFolders`: switch to `true` if you only want to see instability metrics for
+  modules. Defaults to `false`.
+- `orderBy`: with this you can specify how the metrics reporter orders its output.
+  Defaults to `instability`.
+  Possible values `name`, `moduleCount`, `afferentCouplings`, `efferentCouplings`,
+  `instability`.
+
+```javascript
+module.exports = {
+  // ...
+  options: {
+    reporterOptions: {
+      metrics: {
+        hideModules: true, // hides the modules from the metrics reporter output
+        // hideFolders: true, // would hide folders from the metrics reporter output
+        orderBy: "name", // possible values: name, moduleCount, afferentCouplings, efferentCouplings, instability
+      },
+    },
+  },
+};
+```
+
 ## Esoteric options
 
 ### preserveSymlinks

@@ -19,6 +19,7 @@ available in dependency-cruiser configurations.
 1. [`--output-type`: specify the output format](#--output-type-specify-the-output-format)
 1. [`--config`/ `--validate`: use a configuration with rules and/or options](#--config---validate)
 1. [`--init`](#--init)
+1. [`--metrics`: calculate stability metrics](#--metrics)
 1. [`--info`: show what alt-js are supported](#--info-showing-what-alt-js-are-supported)
 1. [`--ignore-known`: ignore known violations](#--ignore-known-ignore-known-violations)
 1. [`--help`/ no parameters: get help](#--help--no-parameters)
@@ -463,6 +464,119 @@ For more information about writing rules see the [tutorial](rules-tutorial.md) a
 
 For an easy set up of both use [--init](#--init)
 
+#### metrics - generate a report with stability metrics for each folder
+
+Shows for each module and each folder:
+
+| metric             | abbreviation | description                                                                                                               |
+| ------------------ | ------------ | ------------------------------------------------------------------------------------------------------------------------- |
+| number of modules  | N            |                                                                                                                           |
+| Afferent couplings | Ca           | The number of modules outside this folder that depend on this folder ("coming in")                                        |
+| Efferent couplings | Ce           | The number of modules this folder depends on _outside_ the current folder ("going out")                                   |
+| Instability        | I            | Ce / (Ca + Ce) a number between 0 and 1 that indicates how 'stable' the folder with 0: wholy stable; and 1 wholy unstable |
+
+While the term 'instability' has a negative connotation it's also unavoidable
+in any meaningful system. It's the basis of Martin's variable component stability
+principle: 'the instability of a folder should be larger than the folders it
+depends on'.
+
+Only present when dependency-cruiser was asked to calculate it.
+
+<details>
+<summary>Typical output</summary>
+
+```
+name                                                      N    Ca    Ce  I
+----------------------------------------------------- ----- ----- -----  -----
+bin                                                       4     0    12  1
+src/validate                                              7     0     4  1
+bin/depcruise-baseline.js                                 1     0     4  1
+bin/depcruise-fmt.js                                      1     0     4  1
+bin/dependency-cruise.js                                  1     0     4  1
+src/validate/index.js                                     1     0     4  1
+src/extract                                              40     3    86  0.97
+src/extract/get-dependencies.js                           1     1    14  0.93
+src                                                      64     9   115  0.93
+src/extract/resolve/index.js                              1     1    11  0.92
+src/main                                                 10     3    25  0.89
+src/main/resolve-options                                  1     1     7  0.88
+src/extract/clear-caches.js                               1     1     7  0.88
+src/main/resolve-options/normalize.js                     1     1     7  0.88
+src/extract/transpile                                    10     4    27  0.87
+src/extract/resolve                                      10     5    30  0.86
+src/extract/transpile/vue-template-wrap.js                1     1     6  0.86
+src/extract/gather-initial-sources.js                     1     1     6  0.86
+src/extract/resolve/resolve-cjs.js                        1     1     5  0.83
+src/extract/index.js                                      1     1     4  0.8
+src/extract/parse/to-javascript-ast.js                    1     2     8  0.8
+src/extract/transpile/coffeescript-wrap.js                1     1     4  0.8
+src/extract/transpile/svelte-wrap.js                      1     1     4  0.8
+src/extract/transpile/typescript-wrap.js                  1     1     4  0.8
+src/extract/resolve/determine-dependency-types.js         1     1     4  0.8
+src/main/options/normalize.js                             1     1     4  0.8
+src/main/rule-set/validate.js                             1     1     4  0.8
+src/validate/match-dependency-rule.js                     1     1     4  0.8
+src/validate/match-module-rule.js                         1     1     4  0.8
+src/cli/index.js                                          1     2     7  0.78
+src/cli/normalize-cli-options.js                          1     2     7  0.78
+src/main/index.js                                         1     3    10  0.77
+src/cli                                                   6     6    18  0.75
+src/extract/resolve/get-manifest                          2     2     6  0.75
+src/main/rule-set                                         2     2     6  0.75
+src/extract/transpile/babel-wrap.js                       1     1     3  0.75
+src/extract/transpile/livescript-wrap.js                  1     1     3  0.75
+src/extract/resolve/get-manifest/merge-manifests.js       1     1     3  0.75
+src/extract/ast-extractors/extract-amd-deps.js            1     1     3  0.75
+src/extract/ast-extractors/extract-es6-deps.js            1     1     3  0.75
+src/extract/ast-extractors/swc-dependency-visitor.js      1     1     3  0.75
+src/extract/ast-extractors/extract-typescript-deps.js     1     1     3  0.75
+src/cli/format-meta-info.js                               1     1     3  0.75
+src/cli/format.js                                         1     1     3  0.75
+src/extract/transpile/meta.js                             1     4    10  0.71
+src/extract/parse/to-typescript-ast.js                    1     2     5  0.71
+src/extract/resolve/resolve-amd.js                        1     2     5  0.71
+src/extract/parse                                         3     7    17  0.71
+src/extract/ast-extractors                                7     5    11  0.69
+src/main/options                                          3     3     6  0.67
+src/extract/resolve/external-module-helpers.js            1     3     6  0.67
+src/extract/resolve/get-manifest/index.js                 1     2     4  0.67
+src/extract/resolve/resolve-helpers.js                    1     1     2  0.67
+src/main/report-wrap.js                                   1     1     2  0.67
+src/main/rule-set/normalize.js                            1     1     2  0.67
+src/validate/violates-required-rule.js                    1     1     2  0.67
+src/main/utl                                              1     2     3  0.6
+src/main/utl/normalize-re-properties.js                   1     2     3  0.6
+src/main/options/validate.js                              1     2     3  0.6
+src/extract/parse/to-swc-ast.js                           1     3     4  0.57
+src/main/files-and-dirs                                   1     1     1  0.5
+src/extract/transpile/index.js                            1     1     1  0.5
+src/extract/transpile/svelte-preprocess.js                1     1     1  0.5
+src/extract/resolve/resolve.js                            1     3     3  0.5
+src/extract/ast-extractors/extract-cjs-deps.js            1     2     2  0.5
+src/extract/ast-extractors/extract-swc-deps.js            1     1     1  0.5
+src/extract/utl/detect-pre-compilation-ness.js            1     1     1  0.5
+src/main/files-and-dirs/normalize.js                      1     1     1  0.5
+src/cli/validate-node-environment.js                      1     3     2  0.4
+src/extract/utl/get-extension.js                          1     2     1  0.33
+src/validate/is-module-only-rule.js                       1     2     1  0.33
+src/extract/resolve/module-classifiers.js                 1     5     2  0.29
+src/extract/ast-extractors/estree-helpers.js              1     3     1  0.25
+src/extract/utl                                           6    10     2  0.17
+src/extract/utl/path-to-posix.js                          1     5     1  0.17
+src/meta.js                                               1    15     0  0
+src/extract/transpile/javascript-wrap.js                  1     1     0  0
+src/extract/utl/strip-query-parameters.js                 1     1     0  0
+src/extract/utl/compare.js                                1     1     0  0
+src/extract/utl/extract-module-attributes.js              1     1     0  0
+src/main/options/defaults.js                              1     1     0  0
+src/cli/defaults.js                                       1     1     0  0
+bin/wrap-stream-in-html.js                                1     0     0  0
+src/validate/matchers.js                                  1     3     0  0
+src/validate/utl.js                                       1     3     0  0
+```
+
+</details>
+
 ### `--init`
 
 This asks some questions and - depending on the answers - creates a dependency-cruiser
@@ -493,6 +607,24 @@ preset):</summary>
 | `no-duplicate-dep-types` | Warn if a dependency occurs in your package.json more than once (technically: has more than one dependency type) |
 
 </details>
+
+### `--metrics`
+
+Makes dependency-cruiser calculate stability metrics (number of dependents,
+number of dependencies and 'instability' (`# dependencies/ (# dependencies + # dependents)`))
+for all folders. These metrics are adapted from _Agile software development:
+principles, patterns, and practices_ by Robert C Martin (ISBN 0-13-597444-5).
+
+Currently this output is only reflected in the `json` and the
+`metrics` reporter. Some other reporters will follow suit later.
+
+- These metrics substitute 'components' and 'classes' from that Martin's book
+  with 'folders' and 'modules'; the closest relatives, that work for the most
+  programming styles in JavaScript (and its derivative languages).
+- For output-type `metrics` this command line switch is implied, so there's no
+  need to specify it there.
+- Not on by default as it's relatively resource intensive (especially when
+  dependency-cruiser doesn't already derives dependents of folders.)
 
 ### `--info` showing what alt-js are supported
 
