@@ -21,15 +21,18 @@ function extractFromSwcAST(pOptions, pFileName) {
   );
 }
 
-function extractFromTypeScriptAST(pOptions, pFileName) {
+function extractFromTypeScriptAST(pOptions, pFileName, pTranspileOptions) {
   return extractTypeScriptDeps(
-    toTypescriptAST.getASTCached(path.join(pOptions.baseDir, pFileName)),
+    toTypescriptAST.getASTCached(
+      path.join(pOptions.baseDir, pFileName),
+      pTranspileOptions
+    ),
     pOptions.exoticRequireStrings
   );
 }
 
 function isTypeScriptCompatible(pFileName) {
-  return [".ts", ".tsx", ".js", ".mjs", ".cjs"].includes(
+  return [".ts", ".tsx", ".js", ".mjs", ".cjs", ".vue"].includes(
     path.extname(pFileName)
   );
 }
@@ -88,9 +91,11 @@ function extractWithTsc(
   pFileName,
   pTranspileOptions
 ) {
-  pDependencies = extractFromTypeScriptAST(pCruiseOptions, pFileName).filter(
-    (pDep) => pCruiseOptions.moduleSystems.includes(pDep.moduleSystem)
-  );
+  pDependencies = extractFromTypeScriptAST(
+    pCruiseOptions,
+    pFileName,
+    pTranspileOptions
+  ).filter((pDep) => pCruiseOptions.moduleSystems.includes(pDep.moduleSystem));
 
   if (pCruiseOptions.tsPreCompilationDeps === "specify") {
     pDependencies = detectPreCompilationNess(

@@ -3,6 +3,6 @@ import { getASTFromSource } from "../../../src/extract/parse/to-typescript-ast.j
 
 export default (pTypesScriptSource, pExoticRequireStrings = []) =>
   extractTypescript(
-    getASTFromSource(pTypesScriptSource),
+    getASTFromSource({ source: pTypesScriptSource }),
     pExoticRequireStrings
   );

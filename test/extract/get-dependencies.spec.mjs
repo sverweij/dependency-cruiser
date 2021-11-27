@@ -16,6 +16,7 @@ const es6Fixtures = requireJSON("./fixtures/es6.json");
 const amdFixtures = requireJSON("./fixtures/amd.json");
 const tsFixtures = requireJSON("./fixtures/ts.json");
 const coffeeFixtures = requireJSON("./fixtures/coffee.json");
+const vueFixtures = requireJSON("./fixtures/vue.json");
 
 const amdBangRequirejs = requireJSON("./fixtures/amd-bang-requirejs.json");
 const amdBangCJSWrapper = requireJSON("./fixtures/amd-bang-CJSWrapper.json");
@@ -178,6 +179,9 @@ describe("extract/getDependencies - TypeScript - ", () => {
   tsFixtures.forEach((pFixture) => runFixture(pFixture, "acorn"));
   tsFixtures.forEach((pFixture) => runFixture(pFixture, "swc"));
   tsFixtures.forEach((pFixture) => runFixture(pFixture, "tsc"));
+});
+describe("extract/getDependencies - Vue with TypeScript - ", () => {
+  vueFixtures.forEach((pFixture) => runFixture(pFixture, "tsc"));
 });
 describe("extract/getDependencies - CoffeeScript - ", () => {
   coffeeFixtures.forEach((pFixture) => runFixture(pFixture));
