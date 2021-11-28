@@ -119,7 +119,13 @@ if (VisitorModule) {
     // also include the same method, but with the correct spelling.
     visitExportAllDeclration(pNode) {
       this.pushImportExportSource(pNode);
-      return super.visitExportAllDeclration(pNode);
+      /* c8 ignore start */
+      if (super.visitExportAllDeclration) {
+        return super.visitExportAllDeclration(pNode);
+      } else {
+        /* c8 ignore stop */
+        return super.visitExportAllDeclaration(pNode);
+      }
     }
 
     /* c8 ignore start */
@@ -131,7 +137,13 @@ if (VisitorModule) {
     // same spelling error as the above - same solution
     visitExportNamedDeclration(pNode) {
       this.pushImportExportSource(pNode);
-      return super.visitExportNamedDeclration(pNode);
+      /* c8 ignore start */
+      if (super.visitExportNamedDeclration) {
+        return super.visitExportNamedDeclration(pNode);
+      } else {
+        /* c8 ignore stop */
+        return super.visitExportNamedDeclaration(pNode);
+      }
     }
     /* c8 ignore start */
     visitExportNamedDeclaration(pNode) {
