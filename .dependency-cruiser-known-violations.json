@@ -1,5 +1,18 @@
 [
   {
+    "from": "types/baseline-violations.d.ts",
+    "to": "types/cruise-result.d.ts",
+    "rule": {
+      "severity": "error",
+      "name": "no-circular"
+    },
+    "cycle": [
+      "types/cruise-result.d.ts",
+      "types/options.d.ts",
+      "types/baseline-violations.d.ts"
+    ]
+  },
+  {
     "from": "test/extract/ast-extractors/typescript2.8-union-types-ast.json",
     "to": "test/extract/ast-extractors/typescript2.8-union-types-ast.json",
     "rule": {
