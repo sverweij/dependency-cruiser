@@ -78,7 +78,8 @@ function softenKnownViolation(pModule, pKnownViolations, pSoftenedSeverity) {
           pRule,
           pModule.source,
           pKnownViolations.filter(
-            (pKnownError) => pKnownError.from === pKnownError.to
+            (pKnownError) =>
+              pKnownError.from === pKnownError.to && !pKnownError.cycle
           ),
           pSoftenedSeverity
         )
@@ -93,7 +94,8 @@ function softenKnownViolation(pModule, pKnownViolations, pSoftenedSeverity) {
         pDependency,
         pModule.source,
         pKnownViolations.filter(
-          (pKnownError) => pKnownError.from !== pKnownError.to
+          (pKnownError) =>
+            pKnownError.from !== pKnownError.to || pKnownError.cycle
         ),
         pSoftenedSeverity
       )
