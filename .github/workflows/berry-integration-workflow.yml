@@ -5,6 +5,7 @@ on:
     branches:
       - master
       - develop
+      - v10
   pull_request:
 
 jobs:
