@@ -3,5 +3,5 @@ strict digraph "dependency-cruiser output"{
     node [shape="box" style="rounded, filled" height="0.2" color="black" fillcolor="#ffffcc" fontcolor="black" fontname="Helvetica" fontsize="9"]
     edge [arrowhead="normal" arrowsize="0.6" penwidth="2.0" color="#00000033" fontname="Helvetica" fontsize="9"]
 
-    "remi.js" [label="remi.js" tooltip="no-orphans" URL="ladida/remi.js" fillcolor="#ccffcc" fontcolor="red" color="red"]
+    "remi.js" [label=<remi.js> tooltip="no-orphans" URL="ladida/remi.js" fillcolor="#ccffcc" fontcolor="red" color="red"]
 }

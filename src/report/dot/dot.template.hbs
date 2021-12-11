@@ -6,9 +6,9 @@ strict digraph "dependency-cruiser output"{
 {{#modules}}
     {{#if folder}}
     {{#each path}}subgraph "cluster_{{{aggregateSnippet}}}" {label="{{{snippet}}}" {{#if ../../clustersHaveOwnNode}}"{{{aggregateSnippet}}}" [width="0.05" shape="point" style="invis"] {{/if}}{{/each~}}
-        "{{{source}}}" [label={{{label}}} {{#if rule}}tooltip="{{{rule.name}}}" {{/if}}{{#if URL}}URL="{{{URL}}}" {{/if}}{{#if themeAttrs}}{{{themeAttrs}}}{{/if}}]{{#each path}} }{{/each}}
+        "{{{source}}}" [label={{{label}}} tooltip="{{{tooltip}}}" {{#if URL}}URL="{{{URL}}}" {{/if}}{{#if themeAttrs}}{{{themeAttrs}}}{{/if}}]{{#each path}} }{{/each}}
     {{else}}
-    "{{{source}}}" [label={{{label}}} {{#if rule}}tooltip="{{{rule.name}}}" {{/if}}{{#if URL}}URL="{{{URL}}}" {{/if}}{{#if themeAttrs}}{{{themeAttrs}}}{{/if}}]
+    "{{{source}}}" [label={{{label}}} tooltip="{{{tooltip}}}" {{#if URL}}URL="{{{URL}}}" {{/if}}{{#if themeAttrs}}{{{themeAttrs}}}{{/if}}]
     {{/if}}
     {{#dependencies}}
     "{{{../source}}}" -> "{{{resolved}}}"{{#if hasExtraAttributes}} [{{#if rule.name}}xlabel="{{{rule.name}}}" tooltip="{{{rule.name}}}" {{/if}}{{#if themeAttrs}}{{{themeAttrs}}}{{/if}}]{{/if}}

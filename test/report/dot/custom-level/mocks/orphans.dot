@@ -3,5 +3,5 @@ strict digraph "dependency-cruiser output"{
     
     
 
-    "tmp/" [label="tmp" tooltip="no-orphans" URL="https://github.com/sverweij/dependency-cruiser/blob/develop/tmp/" ]
+    "tmp/" [label=<tmp> tooltip="no-orphans" URL="https://github.com/sverweij/dependency-cruiser/blob/develop/tmp/" ]
 }

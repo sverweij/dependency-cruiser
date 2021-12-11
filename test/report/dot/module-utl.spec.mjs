@@ -21,7 +21,7 @@ describe("report/dot/module-utl", () => {
       })
     ).to.deep.equal({
       dependencies: [],
-      rule: { name: "error-thing", severity: "error" },
+      tooltip: "error-thing",
       rules: [
         { name: "error-thing", severity: "error" },
         { name: "warn-thing", severity: "warn" },
@@ -60,6 +60,21 @@ describe("report/dot/module-utl", () => {
     ).to.deep.equal({
       source: "aap/noot/mies/wim/zus.jet",
       label: "<aap/noot/mies/wim/<BR/><B>zus.jet</B>>",
+      tooltip: "zus.jet",
+    });
+  });
+
+  it("flatLabel - returns the value of source & instability metric as label when instability is known", () => {
+    expect(
+      moduleUtl.flatLabel({
+        source: "aap/noot/mies/wim/zus.jet",
+        instability: "0.481",
+      })
+    ).to.deep.equal({
+      source: "aap/noot/mies/wim/zus.jet",
+      label: `<aap/noot/mies/wim/<BR/><B>zus.jet</B> <FONT color="#808080" point-size="8">48</FONT>>`,
+      tooltip: "zus.jet",
+      instability: "0.481",
     });
   });
 });

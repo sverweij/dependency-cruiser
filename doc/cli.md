@@ -136,6 +136,10 @@ sections in the options reference for details. You can also use
 [`depcruise-wrap-stream-in-html`](#depcruise-wrap-stream-in-html) to
 make the graphs more interactive.
 
+When dependency-cruiser calculcated instability metrics (command line option
+[`--metrics`](#--metrics)), these will show up in the modules so it's easy to
+verify whether the _stable dependency principle_ holds.
+
 #### ddot - summarise on folder level
 
 > This reporter is _experimental_. It's likely to stay, but the way you configure
@@ -187,6 +191,9 @@ As a comparison, this is the default dot report for the same folder(s)
 ![default dot graph of the same folder](./assets/flat-report-counter-example.svg)
 
 </details>
+
+This too is a reporter that shows the modules' instability metrics when they
+have been calculated ([--metrics](#--metrics) command line switch).
 
 #### err-html
 
