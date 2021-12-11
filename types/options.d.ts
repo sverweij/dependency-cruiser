@@ -239,4 +239,9 @@ export interface ICruiseOptions {
      */
     type: ProgressType;
   };
+  /**
+   * When this flag is set to true, dependency-cruiser will calculate (stability) metrics
+   * for all modules and folders. Defaults to false.
+   */
+  metrics?: boolean;
 }

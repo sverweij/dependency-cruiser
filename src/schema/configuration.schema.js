@@ -348,6 +348,7 @@ module.exports = {
             },
           },
         },
+        metrics: { type: "boolean" },
         baseDir: { type: "string" },
       },
     },

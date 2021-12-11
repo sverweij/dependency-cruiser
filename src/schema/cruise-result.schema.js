@@ -496,6 +496,7 @@ module.exports = {
             },
           },
         },
+        metrics: { type: "boolean" },
         baseDir: { type: "string" },
         args: { type: "string" },
         rulesFile: { type: "string" },
