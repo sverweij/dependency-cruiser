@@ -10,19 +10,14 @@ function getParentFolders(pPath) {
   return lReturnValue.reverse();
 }
 
-function foldersObject2folderArray(pObject) {
+function object2Array(pObject) {
   return Object.keys(pObject).map((pKey) => ({
     name: pKey,
     ...pObject[pKey],
   }));
 }
 
-function shouldDeriveMetrics(pOptions) {
-  return pOptions.metrics || pOptions.outputType === "metrics";
-}
-
 module.exports = {
   getParentFolders,
-  foldersObject2folderArray,
-  shouldDeriveMetrics,
+  object2Array,
 };
