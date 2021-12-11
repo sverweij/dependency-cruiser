@@ -11,8 +11,8 @@ module.exports = (pResults, pTheme, pCollapsePattern) => {
       : pResults.modules
   )
     .sort(compare.modules)
-    .map(moduleUtl.extractFirstTransgression)
     .map(moduleUtl.folderify)
+    .map(moduleUtl.extractFirstTransgression)
     .map(stripSelfTransitions)
     .map(moduleUtl.applyTheme(pTheme))
     .map(moduleUtl.addURL(_get(pResults, "summary.optionsUsed.prefix", "")));

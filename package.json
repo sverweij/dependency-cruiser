@@ -76,7 +76,7 @@
     "depcruise:all": "node ./bin/dependency-cruise.js src bin test configs types tools --config",
     "depcruise:baseline": "node ./bin/depcruise-baseline.js src bin test configs types tools",
     "depcruise:explain": "node ./bin/dependency-cruise.js src bin test configs types tools --output-type err-long --config --progress none",
-    "depcruise:graph:dev": "node ./bin/dependency-cruise.js bin src --prefix vscode://file/$(pwd)/ --config --output-type dot --progress cli-feedback | dot -T svg | node ./bin/wrap-stream-in-html.js | browser",
+    "depcruise:graph:dev": "node ./bin/dependency-cruise.js bin src --metrics --prefix vscode://file/$(pwd)/ --config --output-type dot --progress cli-feedback | dot -T svg | node ./bin/wrap-stream-in-html.js | browser",
     "depcruise:graph:doc": "npm-run-all depcruise:graph:doc:json --parallel depcruise:graph:doc:fmt-* depcruise:graph:doc:samples",
     "depcruise:graph:doc:json": "node ./bin/dependency-cruise.js bin src test --config --output-type json --output-to tmp_graph_deps.json --progress",
     "depcruise:graph:doc:fmt-detail": "./bin/depcruise-fmt.js -T dot -f - tmp_graph_deps.json | dot -T svg | tee doc/real-world-samples/dependency-cruiser-without-node_modules.svg | node bin/wrap-stream-in-html.js > docs/dependency-cruiser-dependency-graph.html",
