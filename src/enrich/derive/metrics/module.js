@@ -1,9 +1,8 @@
 // const { findModuleByName, clearCache } = require("../utl");
 const { metricsAreCalculable } = require("./module-utl");
-const { shouldDeriveMetrics } = require("./utl");
 
 module.exports = function deriveModuleMetrics(pModules, pOptions) {
-  if (shouldDeriveMetrics(pOptions)) {
+  if (pOptions.metrics) {
     return pModules.map((pModule) => ({
       ...pModule,
       ...(metricsAreCalculable(pModule)
