@@ -1,5 +1,8 @@
 const path = require("path").posix;
+const _has = require("lodash/has");
 const theming = require("./theming");
+
+const PROTOCOL_PREFIX_RE = /^[a-z]+:\/\//;
 
 function attributizeObject(pObject) {
   return (
@@ -12,7 +15,9 @@ function attributizeObject(pObject) {
 
 function extractFirstTransgression(pModule) {
   return {
-    ...(pModule.rules ? { ...pModule, rule: pModule.rules[0] } : pModule),
+    ...(_has(pModule, "rules[0]")
+      ? { ...pModule, tooltip: pModule.rules[0].name }
+      : pModule),
     dependencies: pModule.dependencies.map((pDependency) =>
       pDependency.rules
         ? {
@@ -57,6 +62,18 @@ function aggregate(pPathSnippet, pCounter, pPathArray) {
   };
 }
 
+function makeInstabilityString(pModule) {
+  let lInstabilityString = "";
+
+  if (_has(pModule, "instability") && !pModule.consolidated) {
+    lInstabilityString = ` <FONT color="#808080" point-size="8">${Math.round(
+      // eslint-disable-next-line no-magic-numbers
+      100 * pModule.instability
+    )}</FONT>`;
+  }
+  return lInstabilityString;
+}
+
 function folderify(pModule) {
   let lAdditions = {};
   let lDirectoryName = path.dirname(pModule.source);
@@ -66,7 +83,10 @@ function folderify(pModule) {
     lAdditions.path = lDirectoryName.split(path.sep).map(aggregate);
   }
 
-  lAdditions.label = `"${path.basename(pModule.source)}"`;
+  lAdditions.label = `<${path.basename(pModule.source)}${makeInstabilityString(
+    pModule
+  )}>`;
+  lAdditions.tooltip = path.basename(pModule.source);
 
   return {
     ...pModule,
@@ -87,7 +107,7 @@ function folderify(pModule) {
  * @return {string} prefix and filename concatenated
  */
 function smartURIConcat(pPrefix, pSource) {
-  if (pPrefix.match(/^[a-z]+:\/\//)) {
+  if (pPrefix.match(PROTOCOL_PREFIX_RE)) {
     return `${pPrefix}${pSource}`;
   } else {
     return path.join(pPrefix, pSource);
@@ -103,12 +123,17 @@ function addURL(pPrefix) {
   });
 }
 
+function makeLabel(pModule) {
+  return `<${path.dirname(pModule.source)}/<BR/><B>${path.basename(
+    pModule.source
+  )}</B>${makeInstabilityString(pModule)}>`;
+}
+
 function flatLabel(pModule) {
   return {
     ...pModule,
-    label: `<${path.dirname(pModule.source)}/<BR/><B>${path.basename(
-      pModule.source
-    )}</B>>`,
+    label: makeLabel(pModule),
+    tooltip: path.basename(pModule.source),
   };
 }
 
