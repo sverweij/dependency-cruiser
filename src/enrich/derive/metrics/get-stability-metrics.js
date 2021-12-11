@@ -1,6 +1,6 @@
 /* eslint-disable security/detect-object-injection */
 const path = require("path").posix;
-const { foldersObject2folderArray, getParentFolders } = require("./utl");
+const { object2Array, getParentFolders } = require("./utl");
 const {
   getAfferentCouplings,
   getEfferentCouplings,
@@ -63,8 +63,8 @@ function getFolderLevelCouplings(pCouplingArray) {
 }
 
 function calculateFolderMetrics(pFolder) {
-  const lModuleDependents = foldersObject2folderArray(pFolder.dependents);
-  const lModuleDependencies = foldersObject2folderArray(pFolder.dependencies);
+  const lModuleDependents = object2Array(pFolder.dependents);
+  const lModuleDependencies = object2Array(pFolder.dependencies);
   const lAfferentCouplings = lModuleDependents.reduce(sumCounts, 0);
   const lEfferentCouplings = lModuleDependencies.reduce(sumCounts, 0);
 
@@ -83,7 +83,7 @@ function calculateFolderMetrics(pFolder) {
 }
 
 module.exports = function getStabilityMetrics(pModules) {
-  return foldersObject2folderArray(
+  return object2Array(
     pModules.filter(metricsAreCalculable).reduce((pAllFolders, pModule) => {
       getParentFolders(path.dirname(pModule.source)).forEach(
         (pParentDirectory) =>

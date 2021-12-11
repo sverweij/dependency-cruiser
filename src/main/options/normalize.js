@@ -101,6 +101,8 @@ function normalizeCruiseOptions(pOptions) {
       lReturnValue.reporterOptions
     );
   }
+  lReturnValue.metrics = pOptions.metrics || pOptions.outputType === "metrics";
+
   return lReturnValue;
 }
 

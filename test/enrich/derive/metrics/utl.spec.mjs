@@ -2,7 +2,7 @@ import { expect } from "chai";
 
 import {
   getParentFolders,
-  foldersObject2folderArray,
+  object2Array,
 } from "../../../../src/enrich/derive/metrics/utl.js";
 
 describe("enrich/derive/metrics/utl - getParentFolders", () => {
@@ -20,18 +20,16 @@ describe("enrich/derive/metrics/utl - getParentFolders", () => {
 
 describe("enrich/derive/metrics/utl - foldersObject2folderArray", () => {
   it("no folders in object => empty array", () => {
-    expect(foldersObject2folderArray({})).to.deep.equal([]);
+    expect(object2Array({})).to.deep.equal([]);
   });
 
   it("slaps keys into a name attribute in objects", () => {
-    expect(foldersObject2folderArray({ thename: {} })).to.deep.equal([
-      { name: "thename" },
-    ]);
+    expect(object2Array({ thename: {} })).to.deep.equal([{ name: "thename" }]);
   });
 
   it("slaps keys into a name attribute in objects (multiple)", () => {
     expect(
-      foldersObject2folderArray({
+      object2Array({
         "folder/one": {},
         "folder/two": { attribute: "yes" },
       })
