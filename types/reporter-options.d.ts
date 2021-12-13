@@ -59,6 +59,12 @@ export interface IDotReporterOptions {
    */
   filters?: IReporterFiltersType;
   /**
+   * When passed the value 'true', shows instability metrics in the
+   * output if dependency-cruiser calculated them. Doesn't show them
+   * in all other cases. Defaults to false",
+   */
+  showMetrics?: boolean;
+  /**
    * A bunch of criteria to (conditionally) theme the dot output
    */
   theme?: IDotTheme;
