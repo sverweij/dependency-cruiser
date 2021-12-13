@@ -17,7 +17,11 @@ const GRANULARITY2FUNCTION = {
   flat: prepareFlatLevel,
 };
 
-function report(pResults, pGranularity, { theme, collapsePattern, filters }) {
+function report(
+  pResults,
+  pGranularity,
+  { theme, collapsePattern, filters, showMetrics }
+) {
   const lTheme = theming.normalizeTheme(theme);
   const lResults = filters
     ? {
@@ -35,7 +39,8 @@ function report(pResults, pGranularity, { theme, collapsePattern, filters }) {
     modules: (GRANULARITY2FUNCTION[pGranularity] || prepareCustomLevel)(
       lResults,
       lTheme,
-      collapsePattern
+      collapsePattern,
+      showMetrics
     ),
   });
 }

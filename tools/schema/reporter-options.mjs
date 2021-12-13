@@ -80,6 +80,13 @@ export default {
           $ref: "#/definitions/REAsStringsType",
         },
         filters: { $ref: "#/definitions/ReporterFiltersType" },
+        showMetrics: {
+          description:
+            "When passed the value 'true', shows instability metrics in the " +
+            "output if dependency-cruiser calculated them. Doesn't show them " +
+            "in all other cases. Defaults to false",
+          type: "boolean",
+        },
         theme: { $ref: "#/definitions/DotThemeType" },
       },
     },

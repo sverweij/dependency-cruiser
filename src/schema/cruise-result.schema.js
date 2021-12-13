@@ -604,6 +604,7 @@ module.exports = {
       properties: {
         collapsePattern: { $ref: "#/definitions/REAsStringsType" },
         filters: { $ref: "#/definitions/ReporterFiltersType" },
+        showMetrics: { type: "boolean" },
         theme: { $ref: "#/definitions/DotThemeType" },
       },
     },
