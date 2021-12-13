@@ -982,6 +982,29 @@ depcruise-fmt -e -T err results.json
 > depcruise-fmt -T dot results.json --include-only "^packages/checkout" | dot -T svg > checkout.svg
 > ```
 
+### showMetrics - (`dot` and `flat` reporters)
+
+When you instructed dependency-cruiser to calculate metrics, with the showMetrics
+switch you can influence whether you want to show them in the graph or not (which
+is also the default).
+
+```javascript
+module.exports = {
+  options: {
+    reporterOptions: {
+      dot: {
+        showMetrics: true,
+      },
+    },
+  },
+};
+```
+
+This currently shows the instability metric next to the filename, e.g for the
+`dot` reporter like so:
+
+<img width="595" alt="sample that includes instability metrics" src="assets/with-metrics.png">
+
 ### wordlist - (`anon` reporter)
 
 The anonymous reporter has a `wordlist` option to pass it a list of words to use

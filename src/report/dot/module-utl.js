@@ -62,10 +62,10 @@ function aggregate(pPathSnippet, pCounter, pPathArray) {
   };
 }
 
-function makeInstabilityString(pModule) {
+function makeInstabilityString(pModule, pShowMetrics = false) {
   let lInstabilityString = "";
 
-  if (_has(pModule, "instability") && !pModule.consolidated) {
+  if (pShowMetrics && _has(pModule, "instability") && !pModule.consolidated) {
     lInstabilityString = ` <FONT color="#808080" point-size="8">${Math.round(
       // eslint-disable-next-line no-magic-numbers
       100 * pModule.instability
@@ -74,23 +74,25 @@ function makeInstabilityString(pModule) {
   return lInstabilityString;
 }
 
-function folderify(pModule) {
-  let lAdditions = {};
-  let lDirectoryName = path.dirname(pModule.source);
+function folderify(pShowMetrics) {
+  return (pModule) => {
+    let lAdditions = {};
+    let lDirectoryName = path.dirname(pModule.source);
 
-  if (lDirectoryName !== ".") {
-    lAdditions.folder = lDirectoryName;
-    lAdditions.path = lDirectoryName.split(path.sep).map(aggregate);
-  }
+    if (lDirectoryName !== ".") {
+      lAdditions.folder = lDirectoryName;
+      lAdditions.path = lDirectoryName.split(path.sep).map(aggregate);
+    }
 
-  lAdditions.label = `<${path.basename(pModule.source)}${makeInstabilityString(
-    pModule
-  )}>`;
-  lAdditions.tooltip = path.basename(pModule.source);
+    lAdditions.label = `<${path.basename(
+      pModule.source
+    )}${makeInstabilityString(pModule, pShowMetrics)}>`;
+    lAdditions.tooltip = path.basename(pModule.source);
 
-  return {
-    ...pModule,
-    ...lAdditions,
+    return {
+      ...pModule,
+      ...lAdditions,
+    };
   };
 }
 
@@ -123,20 +125,21 @@ function addURL(pPrefix) {
   });
 }
 
-function makeLabel(pModule) {
+function makeLabel(pModule, pShowMetrics) {
   return `<${path.dirname(pModule.source)}/<BR/><B>${path.basename(
     pModule.source
-  )}</B>${makeInstabilityString(pModule)}>`;
+  )}</B>${makeInstabilityString(pModule, pShowMetrics)}>`;
 }
 
-function flatLabel(pModule) {
-  return {
-    ...pModule,
-    label: makeLabel(pModule),
-    tooltip: path.basename(pModule.source),
+function flatLabel(pShowMetrics) {
+  return (pModule) => {
+    return {
+      ...pModule,
+      label: makeLabel(pModule, pShowMetrics),
+      tooltip: path.basename(pModule.source),
+    };
   };
 }
-
 module.exports = {
   folderify,
   applyTheme,

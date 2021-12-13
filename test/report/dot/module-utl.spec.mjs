@@ -56,7 +56,7 @@ describe("report/dot/module-utl", () => {
 
   it("flatLabel - returns the value of source as label", () => {
     expect(
-      moduleUtl.flatLabel({ source: "aap/noot/mies/wim/zus.jet" })
+      moduleUtl.flatLabel(true)({ source: "aap/noot/mies/wim/zus.jet" })
     ).to.deep.equal({
       source: "aap/noot/mies/wim/zus.jet",
       label: "<aap/noot/mies/wim/<BR/><B>zus.jet</B>>",
@@ -66,13 +66,27 @@ describe("report/dot/module-utl", () => {
 
   it("flatLabel - returns the value of source & instability metric as label when instability is known", () => {
     expect(
-      moduleUtl.flatLabel({
+      moduleUtl.flatLabel(true)({
         source: "aap/noot/mies/wim/zus.jet",
         instability: "0.481",
       })
     ).to.deep.equal({
       source: "aap/noot/mies/wim/zus.jet",
       label: `<aap/noot/mies/wim/<BR/><B>zus.jet</B> <FONT color="#808080" point-size="8">48</FONT>>`,
+      tooltip: "zus.jet",
+      instability: "0.481",
+    });
+  });
+
+  it("flatLabel - returns the value of source when instability is known, but showMetrics is false", () => {
+    expect(
+      moduleUtl.flatLabel(false)({
+        source: "aap/noot/mies/wim/zus.jet",
+        instability: "0.481",
+      })
+    ).to.deep.equal({
+      source: "aap/noot/mies/wim/zus.jet",
+      label: `<aap/noot/mies/wim/<BR/><B>zus.jet</B>>`,
       tooltip: "zus.jet",
       instability: "0.481",
     });
