@@ -43,6 +43,7 @@
    - [`moreThanOneDependencyType`](#more-than-one-dependencytype-per-dependency-morethanonedependencytype)
    - [`exoticRequire` and `exoticRequireNot`](#exoticallyrequired-exoticrequire-and-exoticrequirenot)
    - [`preCompilationOnly`](#precompilationonly)
+   - [`moreUnstable`](#moreunstable)
 4. [Configurations in JavaScript](#configurations-in-javascript)
 
 ## The structure of a dependency cruiser configuration
@@ -1001,6 +1002,52 @@ make it beyond the pre-compilation step:
 
 :warning: This attribute only works for TypeScript sources, and only when
 [`tsPreCompilationDeps`](#tsprecompilationdeps) option is set to `"specify"`.
+
+### `moreUnstable`
+
+When set to true moreUnstable matches for any dependency that has a higher
+Instability than the module that depends on it. When set to false it matches
+when the opposite is true; the dependency has an equal or lower Instability.
+
+This attribute is useful when you want to check against Robert C. Martin's
+stable dependencies principle: "depend in the direction of stability". Martin
+defines Instability as a function of the number of dependents and dependencies
+a component has: Instability = #dependencies/ (#dependents + #dependencies).
+
+E.g. a module with no dependencies and one or more dependents has a Instability
+of 0%; as stable as it can get. Conversely a module with no dependents, but
+a one or more dependencies is 100% Instable.
+
+Instability has a bit of an unusual connotation here - it's not 'bad' to be
+an 100% Instable module - it's just the nature of the module. A CLI or GUI
+component typically only depends on other modules and is 100% Instable. This is
+not a bad thing
+
+Another way to look at Instability is how hard it is to change a module without
+consequences to other modules. Changing a 0% Instable module will typically have
+consequences for all its dependents. Making changes to a 100% Instable module
+will have consequences for itself only.
+
+To enforce/ find all modules that violate the stable dependencies principle
+(SDP) you can include a rule like this in the _forbidden_ section
+
+```javascript
+module.exports = {
+  forbidden: [
+    {
+      name: "SDP",
+      description:
+        "This module violates the 'stable dependencies' principle; it depends " +
+        "on a module that is likely to be more prone to changes than it is " +
+        "itself. Consider refactoring.",
+      from: {},
+      to: {
+        moreUnstable: true,
+      },
+    },
+  ],
+};
+```
 
 ## Configurations in JavaScript
 

@@ -1,0 +1,12 @@
+{
+  "forbidden": [
+    {
+      "name": "SDP",
+      "severity": "info",
+      "from": {},
+      "to": {
+        "moreUnstable": true
+      }
+    }
+  ]
+}

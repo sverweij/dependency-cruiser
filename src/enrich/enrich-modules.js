@@ -19,7 +19,7 @@ module.exports = function enrichModules(pModules, pOptions) {
   lModules = deriveOrphans(lModules);
   bus.emit("progress", "analyzing: reachables", { level: busLogLevels.INFO });
   lModules = deriveReachable(lModules, pOptions.ruleSet);
-  bus.emit("progress", "analyzing: calculating module metrics", {
+  bus.emit("progress", "analyzing: module metrics", {
     level: busLogLevels.INFO,
   });
   lModules = deriveModuleMetrics(lModules, pOptions);
