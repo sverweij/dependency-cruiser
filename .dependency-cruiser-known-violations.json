@@ -360,54 +360,6 @@
     }
   },
   {
-    "from": "test/extract/ast-extractors/extract-typescript.utl.mjs",
-    "to": "src/extract/ast-extractors/extract-typescript-deps.js",
-    "rule": {
-      "severity": "info",
-      "name": "SDP"
-    }
-  },
-  {
-    "from": "test/extract/ast-extractors/extract-typescript.utl.mjs",
-    "to": "src/extract/parse/to-typescript-ast.js",
-    "rule": {
-      "severity": "info",
-      "name": "SDP"
-    }
-  },
-  {
-    "from": "test/extract/ast-extractors/extract-with-swc.utl.mjs",
-    "to": "src/extract/ast-extractors/extract-swc-deps.js",
-    "rule": {
-      "severity": "info",
-      "name": "SDP"
-    }
-  },
-  {
-    "from": "test/extract/ast-extractors/extract-with-swc.utl.mjs",
-    "to": "src/extract/parse/to-swc-ast.js",
-    "rule": {
-      "severity": "info",
-      "name": "SDP"
-    }
-  },
-  {
-    "from": "test/validate/readruleset.utl.mjs",
-    "to": "src/main/rule-set/normalize.js",
-    "rule": {
-      "severity": "info",
-      "name": "SDP"
-    }
-  },
-  {
-    "from": "test/validate/readruleset.utl.mjs",
-    "to": "src/main/rule-set/validate.js",
-    "rule": {
-      "severity": "info",
-      "name": "SDP"
-    }
-  },
-  {
     "from": "tools/schema/rule-set.mjs",
     "to": "tools/schema/restrictions.mjs",
     "rule": {
