@@ -168,6 +168,7 @@ module.exports = {
         licenseNot: { $ref: "#/definitions/REAsStringsType" },
         via: { $ref: "#/definitions/REAsStringsType" },
         viaNot: { $ref: "#/definitions/REAsStringsType" },
+        moreUnstable: { type: "boolean" },
       },
     },
     DependentsModuleRestrictionType: {

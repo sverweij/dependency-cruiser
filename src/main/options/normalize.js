@@ -66,6 +66,32 @@ function normalizeCollapse(pCollapse) {
   return lReturnValue;
 }
 
+function hasMetricsRule(pRule) {
+  return _has(pRule, "to.moreUnstable");
+}
+
+function ruleSetHasMetricsRule(pRuleSet) {
+  const lRuleSet = pRuleSet || {};
+  return (
+    (lRuleSet.forbidden || []).some(hasMetricsRule) ||
+    (lRuleSet.allowed || []).some(hasMetricsRule)
+  );
+}
+
+/**
+ * Determines whether (instability) metrics should be calculated
+ *
+ * @param {import('../../../types/options').ICruiseOptions pOptions
+ * @returns Boolean
+ */
+function shouldCalculateMetrics(pOptions) {
+  return (
+    pOptions.metrics ||
+    pOptions.outputType === "metrics" ||
+    ruleSetHasMetricsRule(pOptions.ruleSet)
+  );
+}
+
 /**
  *
  * @param {Partial <import('../../../types/options').ICruiseOptions>} pOptions
@@ -101,7 +127,7 @@ function normalizeCruiseOptions(pOptions) {
       lReturnValue.reporterOptions
     );
   }
-  lReturnValue.metrics = pOptions.metrics || pOptions.outputType === "metrics";
+  lReturnValue.metrics = shouldCalculateMetrics(pOptions);
 
   return lReturnValue;
 }

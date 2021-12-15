@@ -40,6 +40,7 @@ function match(pFrom, pTo) {
       matchers.toExoticRequireNot(pRule, pTo) &&
       matchers.toVia(pRule, pTo) &&
       matchers.toViaNot(pRule, pTo) &&
+      matchers.toIsMoreUnstable(pRule, pFrom, pTo) &&
       // preCompilationOnly is not a mandatory attribute, but if the attribute
       // is in the rule but not in the dependency there won't be a match
       // anyway, so we can use the default propertyEquals method regardless
