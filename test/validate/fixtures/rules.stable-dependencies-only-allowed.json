@@ -1,0 +1,11 @@
+{
+  "allowedSeverity": "info",
+  "allowed": [
+    {
+      "from": {},
+      "to": {
+        "moreUnstable": false
+      }
+    }
+  ]
+}

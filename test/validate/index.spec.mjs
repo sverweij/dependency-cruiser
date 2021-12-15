@@ -470,4 +470,74 @@ describe("validate/index - specific tests", () => {
       ],
     });
   });
+
+  it("moreUnstable: flags when depending on a module that is more unstable (moreUnstable=true, forbidden)", () => {
+    expect(
+      validate.dependency(
+        readRuleSet(
+          "./test/validate/fixtures/rules.stable-dependencies-only-forbidden.json"
+        ),
+        { source: "something", instability: 0 },
+        {
+          resolved: "src/some/thing/else.js",
+          instability: 1,
+        }
+      )
+    ).to.deep.equal({
+      valid: false,
+      rules: [{ name: "SDP", severity: "info" }],
+    });
+  });
+
+  it("moreUnstable: does not flag when depending on a module that is more stable (moreUnstable=true, forbidden)", () => {
+    expect(
+      validate.dependency(
+        readRuleSet(
+          "./test/validate/fixtures/rules.stable-dependencies-only-forbidden.json"
+        ),
+        { source: "something", instability: 1 },
+        {
+          resolved: "src/some/thing/else.js",
+          instability: 0.1,
+        }
+      )
+    ).to.deep.equal({
+      valid: true,
+    });
+  });
+
+  it("moreUnstable: flags when depending on a module that is more unstable (moreUnstable=false, allowed)", () => {
+    expect(
+      validate.dependency(
+        readRuleSet(
+          "./test/validate/fixtures/rules.stable-dependencies-only-allowed.json"
+        ),
+        { source: "something", instability: 0 },
+        {
+          resolved: "src/some/thing/else.js",
+          instability: 1,
+        }
+      )
+    ).to.deep.equal({
+      valid: false,
+      rules: [{ name: "not-in-allowed", severity: "info" }],
+    });
+  });
+
+  it("moreUnstable: does not flag when depending on a module that is more stable (moreUnstable=false, allowed)", () => {
+    expect(
+      validate.dependency(
+        readRuleSet(
+          "./test/validate/fixtures/rules.stable-dependencies-only-allowed.json"
+        ),
+        { source: "something", instability: 1 },
+        {
+          resolved: "src/some/thing/else.js",
+          instability: 0.1,
+        }
+      )
+    ).to.deep.equal({
+      valid: true,
+    });
+  });
 });

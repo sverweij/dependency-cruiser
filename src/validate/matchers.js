@@ -1,3 +1,4 @@
+const _has = require("lodash/has");
 const { intersects } = require("../utl/array-util");
 
 function fromPath(pRule, pModule) {
@@ -123,6 +124,16 @@ function toVia(pRule, pDependency) {
   );
 }
 
+function toIsMoreUnstable(pRule, pFrom, pTo) {
+  if (_has(pRule, "to.moreUnstable")) {
+    return (
+      (pRule.to.moreUnstable && pFrom.instability < pTo.instability) ||
+      (!pRule.to.moreUnstable && pFrom.instability >= pTo.instability)
+    );
+  }
+  return true;
+}
+
 module.exports = {
   _replaceGroupPlaceholders,
   fromPath,
@@ -141,4 +152,5 @@ module.exports = {
   toExoticRequireNot,
   toVia,
   toViaNot,
+  toIsMoreUnstable,
 };

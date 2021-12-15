@@ -84,15 +84,8 @@ describe("enrich/derive/metrics/module - module stability metrics derivation", (
           },
         ],
         { metrics: true }
-      )
-    ).to.deep.equal([
-      {
-        source: "src/hello.js",
-        dependencies: ["for", "this", "only", "array-length", "matters"],
-        dependents: [],
-        instability: 1,
-      },
-    ]);
+      )[0].instability
+    ).to.equal(1);
   });
 
   it("emits an instability metric when we're asking for metrics (dependents as well as dependencies)", () => {
@@ -106,15 +99,9 @@ describe("enrich/derive/metrics/module - module stability metrics derivation", (
           },
         ],
         { metrics: true }
-      )
-    ).to.deep.equal([
-      {
-        source: "src/hello.js",
-        dependencies: ["for", "this", "only", "array-length", "matters"],
-        dependents: ["three", "eight", "actually"],
-        instability: 0.625,
-      },
-    ]);
+      )[0].instability
+      // eslint-disable-next-line no-magic-numbers
+    ).to.equal(0.625);
   });
 
   it("doesn't emit an instability metric when we're asking for metrics on something we don't want to calc them on", () => {
