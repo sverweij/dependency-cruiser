@@ -157,6 +157,12 @@ export default {
             "an array of rules violated by this dependency - left out if the dependency " +
             "is valid",
         },
+        instability: {
+          type: "number",
+          description:
+            "the (de-normalized) instability of the dependency - also available in " +
+            "the module on the 'to' side of this dependency",
+        },
       },
     },
     ...dependencyType.definitions,
