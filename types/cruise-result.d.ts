@@ -221,6 +221,11 @@ export interface IDependency {
    * will be in the 'rule' object at the same level.
    */
   valid: boolean;
+  /**
+   * the (de-normalized) instability of the dependency - also available in
+   * the module on the 'to' side of this dependency
+   */
+  instability: number;
 }
 
 export interface IReachable {

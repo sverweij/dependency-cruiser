@@ -23,6 +23,9 @@ const vueFixtures = requireJSON("./fixtures/cruise-reporterless/vue.json");
 const coffeeFixtures = requireJSON(
   "./fixtures/cruise-reporterless/coffee.json"
 );
+const metricsFixtures = requireJSON(
+  "./fixtures/cruise-reporterless/metrics.json"
+);
 
 use(chaiJSONSchema);
 
@@ -31,7 +34,7 @@ function runRecursiveFixture(pFixture) {
     it(pFixture.title, () => {
       let lResult = cruise(
         [pFixture.input.fileName],
-        { ...pFixture.input.options, forceDeriveDependents: true },
+        { forceDeriveDependents: true, ...pFixture.input.options },
         {
           bustTheCache: true,
           resolveLicenses: true,
@@ -41,6 +44,9 @@ function runRecursiveFixture(pFixture) {
 
       expect(lResult).to.be.jsonSchema(cruiseResultSchema);
       expect(lResult.modules).to.deep.equal(pFixture.expected);
+      if (lResult.folders) {
+        expect(lResult.folders).to.deep.equal(pFixture.expectedFolders);
+      }
     });
   }
 }
@@ -59,3 +65,5 @@ describe("main.cruise - reporterless - Deprecation - ", () =>
   deprecationFixtures.forEach(runRecursiveFixture));
 describe("main.cruise - reporterless - Bundled - ", () =>
   bundledFixtures.forEach(runRecursiveFixture));
+describe("main.cruise - reporterless - metrics - ", () =>
+  metricsFixtures.forEach(runRecursiveFixture));

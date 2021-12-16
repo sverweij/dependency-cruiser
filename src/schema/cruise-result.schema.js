@@ -127,6 +127,7 @@ module.exports = {
           type: "array",
           items: { $ref: "#/definitions/RuleSummaryType" },
         },
+        instability: { type: "number" },
       },
     },
     DependencyTypeType: {
