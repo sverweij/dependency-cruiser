@@ -1,6 +1,19 @@
 {
   "$schema": "../src/schema/configuration.schema.json",
   "extends": "../.dependency-cruiser.json",
+  "forbidden": [
+    {
+      "name": "SDP",
+      "severity": "info",
+      "comment": "This module violates the 'stable dependencies' principle; it depends on a module that is likely to be more prone to changes than it is itself. Consider refactoring. ",
+      "from": {
+        "pathNot": "^test/"
+      },
+      "to": {
+        "moreUnstable": true
+      }
+    }
+  ],
   "options": {
     "reporterOptions": {
       "dot": {
