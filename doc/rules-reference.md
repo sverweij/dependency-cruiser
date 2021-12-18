@@ -1021,7 +1021,7 @@ a one or more dependencies is 100% Instable.
 Instability has a bit of an unusual connotation here - it's not 'bad' to be
 an 100% Instable module - it's just the nature of the module. A CLI or GUI
 component typically only depends on other modules and is 100% Instable. This is
-not a bad thing
+not a bad thing.
 
 Another way to look at Instability is how hard it is to change a module without
 consequences to other modules. Changing a 0% Instable module will typically have
@@ -1048,6 +1048,14 @@ module.exports = {
   ],
 };
 ```
+
+A note on using metrics:
+
+> ..., a metric is not a god; it is merely a measurement against an arbitrary
+> standard. It is certainly possible that the standard chosen in this chapter
+> is appropriate only for certain applications and not for others.
+>
+> Robert C. Martin - Agile Principles, Patterns and Practices in C# (2006)
 
 ## Configurations in JavaScript
 
