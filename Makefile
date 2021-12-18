@@ -66,3 +66,4 @@ src/%.schema.json: tools/%.schema.mjs $(SCHEMA_SOURCES) tools/generate-schemas.u
 
 src/meta.js: package.json
 	$(NODE) ./tools/generate-meta.utl.mjs < $< > $@
+	npx prettier --write $@
