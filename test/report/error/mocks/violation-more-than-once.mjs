@@ -5064,6 +5064,7 @@ export default {
   summary: {
     violations: [
       {
+        type: "dependency",
         from: "src/cli/compileConfig/index.js",
         to: "src/extract/resolve/resolve.js",
         rule: {
@@ -5072,6 +5073,7 @@ export default {
         },
       },
       {
+        type: "dependency",
         from: "src/extract/extract.js",
         to: "node_modules/lodash/lodash.js",
         rule: {
@@ -5080,6 +5082,7 @@ export default {
         },
       },
       {
+        type: "dependency",
         from: "src/extract/index.js",
         to: "node_modules/lodash/lodash.js",
         rule: {

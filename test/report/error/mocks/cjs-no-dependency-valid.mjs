@@ -349,6 +349,7 @@ export default {
   summary: {
     violations: [
       {
+        type: "dependency",
         from: "aap",
         to: "noot",
         rule: {
@@ -357,6 +358,7 @@ export default {
         },
       },
       {
+        type: "dependency",
         from: "aap",
         to: "noot",
         rule: {

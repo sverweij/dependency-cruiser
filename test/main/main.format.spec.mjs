@@ -64,6 +64,7 @@ describe("main.format - format", () => {
 
     expect(lCollapsedResult.summary.violations).to.deep.equal([
       {
+        type: "dependency",
         from: "src/cli/",
         to: "src/extract/",
         rule: {

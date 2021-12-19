@@ -3,6 +3,7 @@ export default {
   summary: {
     violations: [
       {
+        type: "dependency",
         from: "aap",
         to: "noot",
         rule: {

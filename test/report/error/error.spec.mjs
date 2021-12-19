@@ -8,8 +8,11 @@ import onlywarningdependencies from "./mocks/err-only-warnings.mjs";
 import orphanerrs from "./mocks/orphan-deps.mjs";
 import circularerrs from "./mocks/circular-deps.mjs";
 import viaerrs from "./mocks/via-deps.mjs";
+import sdperrors from "./mocks/sdp-errors.mjs";
 import ignoredviolations from "./mocks/ignored-violations.mjs";
 import ignoredandrealviolations from "./mocks/ignored-and-real-violations.mjs";
+import missingViolationType from "./mocks/missing-violation-type.mjs";
+import unknownViolationType from "./mocks/unknown-violation-type.mjs";
 
 describe("report/error", () => {
   let chalkLevel = chalk.level;
@@ -75,6 +78,22 @@ describe("report/error", () => {
     );
     expect(lResult.output).to.contain("      (via via)");
     expect(lResult.exitCode).to.equal(4);
+  });
+  it("renders moreUnstable violations with the module & dependents violations", () => {
+    const lResult = render(sdperrors);
+
+    expect(lResult.output).to.contain(
+      "warn sdp: src/more-stable.js → src/less-stable.js\n      instability: 42 → 100\n"
+    );
+  });
+  it("renders a violation as a dependency-violation when the violation.type ain't there", () => {
+    const lResult = render(missingViolationType);
+    expect(lResult.output).to.contain("warn missing-type: a.js → b.js\n");
+  });
+
+  it("renders a violation as a dependency-violation when the violation.type is yet unknown", () => {
+    const lResult = render(unknownViolationType);
+    expect(lResult.output).to.contain("warn unknown-type: a.js → b.js\n");
   });
   it("emits a warning when there's > 1 ignored violation and no other violations", () => {
     const lResult = render(ignoredviolations);

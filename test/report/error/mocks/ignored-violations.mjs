@@ -3,6 +3,7 @@ export default {
   summary: {
     violations: [
       {
+        type: "module",
         from: "test/extract/ast-extractors/typescript2.8-union-types-ast.json",
         to: "test/extract/ast-extractors/typescript2.8-union-types-ast.json",
         rule: {
@@ -11,6 +12,7 @@ export default {
         },
       },
       {
+        type: "module",
         from: "test/report/baseline/baseline-result.json",
         to: "test/report/baseline/baseline-result.json",
         rule: {
@@ -19,6 +21,7 @@ export default {
         },
       },
       {
+        type: "module",
         from: "test/report/baseline/dc-result-no-violations.json",
         to: "test/report/baseline/dc-result-no-violations.json",
         rule: {
@@ -27,6 +30,7 @@ export default {
         },
       },
       {
+        type: "module",
         from: "test/report/baseline/dc-result-with-violations.json",
         to: "test/report/baseline/dc-result-with-violations.json",
         rule: {
@@ -35,6 +39,7 @@ export default {
         },
       },
       {
+        type: "module",
         from: "test/report/dot/module-level/bare-theme.json",
         to: "test/report/dot/module-level/bare-theme.json",
         rule: {
@@ -43,6 +48,7 @@ export default {
         },
       },
       {
+        type: "module",
         from: "src/cli/format.js",
         to: "src/cli/format.js",
         rule: {
@@ -51,6 +57,7 @@ export default {
         },
       },
       {
+        type: "module",
         from: "src/cli/tools/wrap-stream-in-html.js",
         to: "src/cli/tools/wrap-stream-in-html.js",
         rule: {
@@ -59,6 +66,7 @@ export default {
         },
       },
       {
+        type: "module",
         from: "src/cli/validate-node-environment.js",
         to: "src/cli/validate-node-environment.js",
         rule: {
@@ -67,6 +75,7 @@ export default {
         },
       },
       {
+        type: "module",
         from: "src/schema/baseline-violations.schema.js",
         to: "src/schema/baseline-violations.schema.js",
         rule: {
@@ -75,6 +84,7 @@ export default {
         },
       },
       {
+        type: "module",
         from: "src/utl/array-util.js",
         to: "src/utl/array-util.js",
         rule: {
@@ -83,6 +93,7 @@ export default {
         },
       },
       {
+        type: "module",
         from: "src/utl/wrap-and-indent.js",
         to: "src/utl/wrap-and-indent.js",
         rule: {

@@ -16,6 +16,7 @@ export default {
   summary: {
     violations: [
       {
+        type: "module",
         from: "remi.js",
         to: "remi.js",
         rule: {

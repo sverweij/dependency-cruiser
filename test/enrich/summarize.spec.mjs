@@ -76,6 +76,7 @@ describe("enrich/summarize", () => {
     const lExpected = {
       violations: [
         {
+          type: "cycle",
           from: "src/brand.js",
           to: "src/domain.js",
           rule: {
@@ -85,6 +86,7 @@ describe("enrich/summarize", () => {
           cycle: ["src/domain.js", "src/market.js", "src/brand.js"],
         },
         {
+          type: "cycle",
           from: "src/brand.js",
           to: "src/market.js",
           rule: {
@@ -94,6 +96,7 @@ describe("enrich/summarize", () => {
           cycle: ["src/market.js", "src/brand.js"],
         },
         {
+          type: "cycle",
           from: "src/domain.js",
           to: "src/market.js",
           rule: {

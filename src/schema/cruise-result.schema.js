@@ -210,9 +210,38 @@ module.exports = {
       properties: {
         from: { type: "string" },
         to: { type: "string" },
+        type: {
+          type: "string",
+          enum: [
+            "dependency",
+            "module",
+            "reachability",
+            "cycle",
+            "instability",
+          ],
+        },
         rule: { $ref: "#/definitions/RuleSummaryType" },
         cycle: { type: "array", items: { type: "string" } },
         via: { type: "array", items: { type: "string" } },
+        metrics: {
+          type: "object",
+          required: ["from", "to"],
+          additionalProperties: false,
+          properties: {
+            from: {
+              type: "object",
+              required: ["instability"],
+              additionalProperties: false,
+              properties: { instability: { type: "number" } },
+            },
+            to: {
+              type: "object",
+              required: ["instability"],
+              additionalProperties: false,
+              properties: { instability: { type: "number" } },
+            },
+          },
+        },
       },
     },
     RuleSetType: {
