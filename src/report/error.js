@@ -1,10 +1,10 @@
 /* eslint-disable security/detect-object-injection */
 const chalk = require("chalk");
 const figures = require("figures");
-
 const _get = require("lodash/get");
 const { findRuleByName } = require("../graph-utl/rule-set");
 const wrapAndIndent = require("../utl/wrap-and-indent");
+const utl = require("./utl/index.js");
 
 const SEVERITY2CHALK = {
   error: chalk.red,
@@ -46,28 +46,17 @@ function formatReachabilityViolation(pViolation) {
   )}${formatExtraPathInformation(pViolation.via)}`;
 }
 
-function formatInstability(pNumber) {
-  return Math.round(
-    // eslint-disable-next-line no-magic-numbers
-    100 * pNumber
-  );
-}
-
 function formatInstabilityViolation(pViolation) {
   return `${formatDependencyViolation(pViolation)}\n${wrapAndIndent(
     chalk.dim(
-      `instability: ${formatInstability(pViolation.metrics.from.instability)} ${
-        figures.arrowRight
-      } ${formatInstability(pViolation.metrics.to.instability)}`
+      `instability: ${utl.formatInstability(
+        pViolation.metrics.from.instability
+      )} ${figures.arrowRight} ${utl.formatInstability(
+        pViolation.metrics.to.instability
+      )}`
     ),
     EXTRA_PATH_INFORMATION_INDENT
   )}`;
-}
-
-function formatViolators(pViolation, pViolationType2Formatter) {
-  return (
-    pViolationType2Formatter[pViolation.type] || formatDependencyViolation
-  )(pViolation);
 }
 
 function formatViolation(pViolation) {
@@ -78,9 +67,10 @@ function formatViolation(pViolation) {
     reachability: formatReachabilityViolation,
     instability: formatInstabilityViolation,
   };
-  const lFormattedViolators = formatViolators(
+  const lFormattedViolators = utl.formatViolation(
     pViolation,
-    lViolationType2Formatter
+    lViolationType2Formatter,
+    formatDependencyViolation
   );
 
   return (

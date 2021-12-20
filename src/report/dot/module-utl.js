@@ -1,5 +1,6 @@
 const path = require("path").posix;
 const _has = require("lodash/has");
+const utl = require("../utl/index.js");
 const theming = require("./theming");
 
 const PROTOCOL_PREFIX_RE = /^[a-z]+:\/\//;
@@ -66,9 +67,8 @@ function makeInstabilityString(pModule, pShowMetrics = false) {
   let lInstabilityString = "";
 
   if (pShowMetrics && _has(pModule, "instability") && !pModule.consolidated) {
-    lInstabilityString = ` <FONT color="#808080" point-size="8">${Math.round(
-      // eslint-disable-next-line no-magic-numbers
-      100 * pModule.instability
+    lInstabilityString = ` <FONT color="#808080" point-size="8">${utl.formatInstability(
+      pModule.instability
     )}</FONT>`;
   }
   return lInstabilityString;
