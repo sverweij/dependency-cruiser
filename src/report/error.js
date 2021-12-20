@@ -1,3 +1,4 @@
+/* eslint-disable security/detect-object-injection */
 const chalk = require("chalk");
 const figures = require("figures");
 
@@ -12,37 +13,80 @@ const SEVERITY2CHALK = {
   ignore: chalk.gray,
 };
 
-const CYCLIC_PATH_INDENT = 6;
+const EXTRA_PATH_INFORMATION_INDENT = 6;
 
-function renderExtraPathInformation(pExtra) {
+function formatExtraPathInformation(pExtra) {
   return "\n".concat(
-    wrapAndIndent(pExtra.join(` ${figures.arrowRight} \n`), CYCLIC_PATH_INDENT)
+    wrapAndIndent(
+      pExtra.join(` ${figures.arrowRight} \n`),
+      EXTRA_PATH_INFORMATION_INDENT
+    )
   );
 }
-function determineTo(pViolation) {
-  if (pViolation.cycle) {
-    return renderExtraPathInformation(pViolation.cycle);
-  }
-  if (pViolation.via) {
-    return `${chalk.bold(pViolation.to)}${renderExtraPathInformation(
-      pViolation.via
-    )}`;
-  }
-  return `${chalk.bold(pViolation.to)}`;
+
+function formatModuleViolation(pViolation) {
+  return chalk.bold(pViolation.from);
+}
+
+function formatDependencyViolation(pViolation) {
+  return `${chalk.bold(pViolation.from)} ${figures.arrowRight} ${chalk.bold(
+    pViolation.to
+  )}`;
+}
+
+function formatCycleViolation(pViolation) {
+  return `${chalk.bold(pViolation.from)} ${
+    figures.arrowRight
+  } ${formatExtraPathInformation(pViolation.cycle)}`;
+}
+
+function formatReachabilityViolation(pViolation) {
+  return `${chalk.bold(pViolation.from)} ${figures.arrowRight} ${chalk.bold(
+    pViolation.to
+  )}${formatExtraPathInformation(pViolation.via)}`;
+}
+
+function formatInstability(pNumber) {
+  return Math.round(
+    // eslint-disable-next-line no-magic-numbers
+    100 * pNumber
+  );
+}
+
+function formatInstabilityViolation(pViolation) {
+  return `${formatDependencyViolation(pViolation)}\n${wrapAndIndent(
+    chalk.dim(
+      `instability: ${formatInstability(pViolation.metrics.from.instability)} ${
+        figures.arrowRight
+      } ${formatInstability(pViolation.metrics.to.instability)}`
+    ),
+    EXTRA_PATH_INFORMATION_INDENT
+  )}`;
+}
+
+function formatViolators(pViolation, pViolationType2Formatter) {
+  return (
+    pViolationType2Formatter[pViolation.type] || formatDependencyViolation
+  )(pViolation);
 }
 
 function formatViolation(pViolation) {
-  const lModuleNames =
-    pViolation.from === pViolation.to
-      ? chalk.bold(pViolation.from)
-      : `${chalk.bold(pViolation.from)} ${figures.arrowRight} ${determineTo(
-          pViolation
-        )}`;
+  const lViolationType2Formatter = {
+    module: formatModuleViolation,
+    dependency: formatDependencyViolation,
+    cycle: formatCycleViolation,
+    reachability: formatReachabilityViolation,
+    instability: formatInstabilityViolation,
+  };
+  const lFormattedViolators = formatViolators(
+    pViolation,
+    lViolationType2Formatter
+  );
 
   return (
     `${SEVERITY2CHALK[pViolation.rule.severity](pViolation.rule.severity)} ${
       pViolation.rule.name
-    }: ${lModuleNames}` +
+    }: ${lFormattedViolators}` +
     `${
       pViolation.comment
         ? `\n${wrapAndIndent(chalk.dim(pViolation.comment))}\n`

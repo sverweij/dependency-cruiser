@@ -88,6 +88,7 @@ export default {
   summary: {
     violations: [
       {
+        type: "cycle",
         from: "src/some/folder/nested/center.js",
         to: "src/some/folder/loop-a.js",
         rule: {
@@ -101,6 +102,7 @@ export default {
         ],
       },
       {
+        type: "cycle",
         from: "src/some/folder/loop-a.js",
         to: "src/some/folder/loop-b.js",
         rule: {
@@ -114,6 +116,7 @@ export default {
         ],
       },
       {
+        type: "cycle",
         from: "src/some/folder/loop-b.js",
         to: "src/some/folder/nested/center.js",
         rule: {

@@ -54,6 +54,7 @@ describe("enrich/summarize-modules - summarize extraction", () => {
     expect(lResult).to.deep.equal({
       violations: [
         {
+          type: "module",
           from: "violation.js",
           to: "violation.js",
           rule: {
@@ -111,6 +112,7 @@ describe("enrich/summarize-modules - summarize extraction", () => {
     expect(lResult).to.deep.equal({
       violations: [
         {
+          type: "reachability",
           from: "violation.js",
           to: "dont-touch-this.js",
           rule: {
@@ -120,6 +122,7 @@ describe("enrich/summarize-modules - summarize extraction", () => {
           via: ["via", "romana"],
         },
         {
+          type: "reachability",
           from: "violation.js",
           to: "mc-hammer.js",
           rule: {
@@ -229,6 +232,7 @@ describe("enrich/summarize-modules - summarize extraction", () => {
     expect(lResult).to.deep.equal({
       violations: [
         {
+          type: "dependency",
           from: "violation.js",
           to: "bolderdash",
           rule: {
@@ -237,6 +241,7 @@ describe("enrich/summarize-modules - summarize extraction", () => {
           },
         },
         {
+          type: "module",
           from: "violation.js",
           to: "violation.js",
           rule: {
@@ -251,6 +256,59 @@ describe("enrich/summarize-modules - summarize extraction", () => {
       ignore: 0,
       totalDependenciesCruised: 1,
       totalCruised: 2,
+    });
+  });
+
+  it("violating something with moreUnstable & instabilities", () => {
+    const lResult = summarize(
+      [
+        {
+          source: "violation.js",
+          instability: 0.42,
+          dependencies: [
+            {
+              resolved: "dont-touch-this.js",
+              instability: 1,
+              valid: false,
+              rules: [
+                {
+                  name: "a-rule",
+                  severity: "warn",
+                },
+              ],
+            },
+          ],
+        },
+      ],
+      { forbidden: [{ name: "a-rule", from: {}, to: { moreUnstable: true } }] }
+    );
+
+    expect(lResult).to.deep.equal({
+      violations: [
+        {
+          type: "instability",
+          from: "violation.js",
+          to: "dont-touch-this.js",
+          rule: {
+            name: "a-rule",
+            severity: "warn",
+          },
+          metrics: {
+            from: {
+              instability: 0.42,
+            },
+            to: {
+              instability: 1,
+            },
+          },
+        },
+      ],
+      info: 0,
+      warn: 1,
+      error: 0,
+      ignore: 0,
+      totalDependenciesCruised: 1,
+      totalCruised: 1,
     });
   });
 });

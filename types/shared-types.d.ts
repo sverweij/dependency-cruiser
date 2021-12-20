@@ -42,3 +42,10 @@ export type DependencyType =
   | "type-only";
 
 export type ProtocolType = "data:" | "file:" | "node:";
+
+export type ViolationType =
+  | "dependency"
+  | "module"
+  | "cycle"
+  | "reachability"
+  | "instability";

@@ -85,11 +85,13 @@
   "summary": {
     "violations": [
       {
+        "type": "dependency",
         "from": "src/dynamic-to-circular.js",
         "to": "src/circular.js",
         "rule": { "severity": "warn", "name": "no-dynamic" }
       },
       {
+        "type": "cycle",
         "from": "src/circular.js",
         "to": "src/index.js",
         "rule": { "severity": "info", "name": "no-circular" },

@@ -43,6 +43,7 @@
     "totalDependenciesCruised": 1,
     "violations": [
       {
+        "type": "dependency",
         "from": "src/bla.ts",
         "rule": {
           "name": "no-type-only",

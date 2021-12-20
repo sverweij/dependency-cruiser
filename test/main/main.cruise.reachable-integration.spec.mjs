@@ -31,6 +31,7 @@ describe("main.cruise - reachable integration", () => {
     );
     expect(lResult.summary.violations).to.deep.equal([
       {
+        type: "reachability",
         from: "src/schema-declarations/naughty.info.js",
         to: "src/db/admin.js",
         rule: {
@@ -44,6 +45,7 @@ describe("main.cruise - reachable integration", () => {
         ],
       },
       {
+        type: "module",
         from: "src/utilities/insula.js",
         to: "src/utilities/insula.js",
         rule: {
@@ -52,6 +54,7 @@ describe("main.cruise - reachable integration", () => {
         },
       },
       {
+        type: "module",
         from: "src/utilities/pen.js",
         to: "src/utilities/pen.js",
         rule: {
@@ -77,6 +80,7 @@ describe("main.cruise - reachable integration", () => {
 
     expect(lResult.summary.violations).to.deep.equal([
       {
+        type: "module",
         from: "src/utilities/insula.js",
         to: "src/utilities/insula.js",
         rule: {
@@ -85,6 +89,7 @@ describe("main.cruise - reachable integration", () => {
         },
       },
       {
+        type: "module",
         from: "src/utilities/pen.js",
         to: "src/utilities/pen.js",
         rule: {
@@ -109,6 +114,7 @@ describe("main.cruise - reachable integration", () => {
 
     expect(lResult.summary.violations).to.deep.equal([
       {
+        type: "module",
         from: "src/db/admin.js",
         to: "src/db/admin.js",
         rule: {

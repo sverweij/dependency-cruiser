@@ -196,6 +196,7 @@ export default {
   summary: {
     violations: [
       {
+        type: "reachability",
         from: "src/extract/index.js",
         to: "src/utl/array-util.js",
         rule: {
@@ -205,6 +206,7 @@ export default {
         via: ["(via via)"],
       },
       {
+        type: "reachability",
         from: "src/extract/index.js",
         to: "src/utl/find-rule-by-name.js",
         rule: {
@@ -214,6 +216,7 @@ export default {
         via: ["(via via)"],
       },
       {
+        type: "module",
         from: "src/utl/array-util.js",
         to: "src/utl/array-util.js",
         rule: {
@@ -222,6 +225,7 @@ export default {
         },
       },
       {
+        type: "module",
         from: "src/utl/find-rule-by-name.js",
         to: "src/utl/find-rule-by-name.js",
         rule: {
