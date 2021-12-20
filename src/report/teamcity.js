@@ -1,5 +1,6 @@
 const _get = require("lodash/get");
 const tsm = require("teamcity-service-messages");
+const utl = require("./utl/index.js");
 
 const CATEGORY = "dependency-cruiser";
 const SEVERITY2TEAMCITY_SEVERITY = {
@@ -67,20 +68,45 @@ function reportViolatedRules(pRuleSetUsed, pViolations, pIgnoredCount) {
     .concat(reportIgnoredRules(pIgnoredCount));
 }
 
-function determineTo(pViolation) {
-  if (pViolation.cycle) {
-    return pViolation.cycle.join(" -> ");
-  }
-  if (pViolation.via) {
-    return `${pViolation.to} ${pViolation.via.join(" -> ")}`;
-  }
-  return pViolation.to;
+function formatModuleViolation(pViolation) {
+  return pViolation.from;
+}
+
+function formatDependencyViolation(pViolation) {
+  return `${pViolation.from} -> ${pViolation.to}`;
+}
+
+function formatCycleViolation(pViolation) {
+  return `${pViolation.from} -> ${pViolation.cycle.join(" -> ")}`;
+}
+
+function formatReachabilityViolation(pViolation) {
+  return `${formatDependencyViolation(pViolation)} ${pViolation.via.join(
+    " -> "
+  )}`;
+}
+
+function formatInstabilityViolation(pViolation) {
+  return `${formatDependencyViolation(
+    pViolation
+  )} (instability: ${utl.formatInstability(
+    pViolation.metrics.from.instability
+  )} -> ${utl.formatInstability(pViolation.metrics.to.instability)})`;
 }
 
 function bakeViolationMessage(pViolation) {
-  return pViolation.from === pViolation.to
-    ? pViolation.from
-    : `${pViolation.from} -> ${determineTo(pViolation)}`;
+  const lViolationType2Formatter = {
+    module: formatModuleViolation,
+    dependency: formatDependencyViolation,
+    cycle: formatCycleViolation,
+    reachability: formatReachabilityViolation,
+    instability: formatInstabilityViolation,
+  };
+  return utl.formatViolation(
+    pViolation,
+    lViolationType2Formatter,
+    formatDependencyViolation
+  );
 }
 
 function reportIgnoredViolation(pIgnoredCount) {

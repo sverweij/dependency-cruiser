@@ -163,6 +163,7 @@ export default {
   summary: {
     violations: [
       {
+        type: "dependency",
         from: "src/asneeze.js",
         to: "node_modules/eslint/lib/api.js",
         rule: {
@@ -171,6 +172,7 @@ export default {
         },
       },
       {
+        type: "dependency",
         from: "src/index.js",
         to: "./medontexist.json",
         rule: {
@@ -179,6 +181,7 @@ export default {
         },
       },
       {
+        type: "dependency",
         from: "src/index.js",
         to: "node_modules/dependency-cruiser/src/main/index.js",
         rule: {
@@ -187,6 +190,7 @@ export default {
         },
       },
       {
+        type: "dependency",
         from: "src/index.js",
         to: "node_modules/eslint/lib/api.js",
         rule: {
@@ -195,6 +199,7 @@ export default {
         },
       },
       {
+        type: "module",
         from: "src/orphan.js",
         to: "src/orphan.js",
         rule: {
@@ -203,6 +208,7 @@ export default {
         },
       },
       {
+        type: "dependency",
         from: "src/index.js",
         to: "./medontexist.json",
         rule: {
