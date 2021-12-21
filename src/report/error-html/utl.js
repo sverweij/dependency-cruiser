@@ -1,6 +1,7 @@
 const _get = require("lodash/get");
 const _has = require("lodash/has");
 const { version } = require("../../../src/meta.js");
+const { formatViolation, formatInstability } = require("../utl/index.js");
 
 function getFormattedAllowedRule(pRuleSetUsed) {
   const lAllowed = _get(pRuleSetUsed, "allowed", []);
@@ -29,14 +30,54 @@ function mergeCountsIntoRule(pRule, pViolationCounts) {
   };
 }
 
+function formatCycleTo(pViolation) {
+  return pViolation.cycle.join(" &rightarrow;<br/>");
+}
+
+function formatReachabilityTo(pViolation) {
+  return `${pViolation.to}<br/>${pViolation.via.join(" &rightarrow;<br/>")}`;
+}
+
+function formatDependencyTo(pViolation) {
+  return pViolation.to;
+}
+
+function formatModuleTo() {
+  return "";
+}
+
+function formatInstabilityTo(pViolation) {
+  return `${pViolation.to}&nbsp;<span class="extra">(I: ${formatInstability(
+    pViolation.metrics.to.instability
+  )})</span>`;
+}
+
 function determineTo(pViolation) {
-  if (pViolation.cycle) {
-    return pViolation.cycle.join(" &rightarrow;<br/>");
-  }
-  if (pViolation.via) {
-    return `${pViolation.to}<br/>${pViolation.via.join(" &rightarrow;<br/>")}`;
-  }
-  return pViolation.from === pViolation.to ? "" : pViolation.to;
+  const lViolationType2Formatter = {
+    dependency: formatDependencyTo,
+    module: formatModuleTo,
+    cycle: formatCycleTo,
+    reachability: formatReachabilityTo,
+    instability: formatInstabilityTo,
+  };
+  return formatViolation(
+    pViolation,
+    lViolationType2Formatter,
+    formatDependencyTo
+  );
+}
+
+function formatInstabilityFromExtras(pViolation) {
+  return `&nbsp;<span class="extra">(I: ${formatInstability(
+    pViolation.metrics.from.instability
+  )})</span>`;
+}
+
+function determineFromExtras(pViolation) {
+  const lViolationType2Formatter = {
+    instability: formatInstabilityFromExtras,
+  };
+  return formatViolation(pViolation, lViolationType2Formatter, () => "");
 }
 
 function formatSummaryForReport(pSummary) {
@@ -46,6 +87,7 @@ function formatSummaryForReport(pSummary) {
     runDate: new Date().toISOString(),
     violations: (pSummary.violations || []).map((pViolation) => ({
       ...pViolation,
+      fromExtras: determineFromExtras(pViolation),
       to: determineTo(pViolation),
     })),
   };
@@ -55,5 +97,6 @@ module.exports = {
   getFormattedAllowedRule,
   mergeCountsIntoRule,
   formatSummaryForReport,
+  determineFromExtras,
   determineTo,
 };

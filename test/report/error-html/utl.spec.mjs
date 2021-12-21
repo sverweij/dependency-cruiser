@@ -114,6 +114,7 @@ describe("report/error-html/utl", () => {
     const lResult = utl.formatSummaryForReport({
       violations: [
         {
+          type: "dependency",
           from: "aap",
           to: "noot",
         },
@@ -123,7 +124,9 @@ describe("report/error-html/utl", () => {
     summaryHasMinimalAttributes(lResult);
     expect(lResult.violations).to.deep.equal([
       {
+        type: "dependency",
         from: "aap",
+        fromExtras: "",
         to: "noot",
       },
     ]);
@@ -133,6 +136,7 @@ describe("report/error-html/utl", () => {
     const lResult = utl.formatSummaryForReport({
       violations: [
         {
+          type: "module",
           from: "aap",
           to: "aap",
         },
@@ -142,7 +146,9 @@ describe("report/error-html/utl", () => {
     summaryHasMinimalAttributes(lResult);
     expect(lResult.violations).to.deep.equal([
       {
+        type: "module",
         from: "aap",
+        fromExtras: "",
         to: "",
       },
     ]);
@@ -150,6 +156,7 @@ describe("report/error-html/utl", () => {
 
   it("determineTo - circular violation", () => {
     const lInputViolation = {
+      type: "cycle",
       cycle: ["thing/a", "b", "thingy/bingy/c", "a"],
       from: "a",
       to: "thing/a",
@@ -163,6 +170,7 @@ describe("report/error-html/utl", () => {
 
   it("determineTo - via violation", () => {
     const lInputViolation = {
+      type: "reachability",
       via: ["thing/a", "b", "thingy/bingy/c", "a"],
       from: "a",
       to: "thing/a",
@@ -176,6 +184,7 @@ describe("report/error-html/utl", () => {
 
   it("determineTo - dependency violation", () => {
     const lInputViolation = {
+      type: "dependency",
       from: "a",
       to: "thing/a",
     };
@@ -187,6 +196,7 @@ describe("report/error-html/utl", () => {
 
   it("determineTo - module violation", () => {
     const lInputViolation = {
+      type: "module",
       from: "a",
       to: "a",
     };
@@ -194,5 +204,33 @@ describe("report/error-html/utl", () => {
     const lExpectation = "";
 
     expect(utl.determineTo(lInputViolation)).to.deep.equal(lExpectation);
+  });
+
+  it("determineTo - instability violation", () => {
+    const lInputViolation = {
+      type: "instability",
+      from: "a",
+      to: "b",
+      metrics: { from: { instability: 0.1 }, to: { instability: 1 } },
+    };
+
+    const lExpectation = 'b&nbsp;<span class="extra">(I: 100)</span>';
+
+    expect(utl.determineTo(lInputViolation)).to.deep.equal(lExpectation);
+  });
+
+  it("determineFromExtras - instability violation", () => {
+    const lInputViolation = {
+      type: "instability",
+      from: "a",
+      to: "b",
+      metrics: { from: { instability: 0.1 }, to: { instability: 1 } },
+    };
+
+    const lExpectation = '&nbsp;<span class="extra">(I: 10)</span>';
+
+    expect(utl.determineFromExtras(lInputViolation)).to.deep.equal(
+      lExpectation
+    );
   });
 });
