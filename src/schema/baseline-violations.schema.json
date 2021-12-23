@@ -16,16 +16,7 @@
       "properties": {
         "from": { "type": "string" },
         "to": { "type": "string" },
-        "type": {
-          "type": "string",
-          "enum": [
-            "dependency",
-            "module",
-            "reachability",
-            "cycle",
-            "instability"
-          ]
-        },
+        "type": { "$ref": "#/definitions/ViolationTypeType" },
         "rule": { "$ref": "#/definitions/RuleSummaryType" },
         "cycle": {
           "type": "array",
@@ -75,6 +66,10 @@
       "type": "string",
       "description": "How severe a violation of a rule is. The 'error' severity will make some reporters return a non-zero exit code, so if you want e.g. a build to stop when there's a rule violated: use that.",
       "enum": ["error", "warn", "info", "ignore"]
+    },
+    "ViolationTypeType": {
+      "type": "string",
+      "enum": ["dependency", "module", "reachability", "cycle", "instability"]
     }
   }
 }

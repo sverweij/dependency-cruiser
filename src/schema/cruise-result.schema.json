@@ -395,16 +395,7 @@
       "properties": {
         "from": { "type": "string" },
         "to": { "type": "string" },
-        "type": {
-          "type": "string",
-          "enum": [
-            "dependency",
-            "module",
-            "reachability",
-            "cycle",
-            "instability"
-          ]
-        },
+        "type": { "$ref": "#/definitions/ViolationTypeType" },
         "rule": { "$ref": "#/definitions/RuleSummaryType" },
         "cycle": {
           "type": "array",
@@ -436,6 +427,10 @@
           }
         }
       }
+    },
+    "ViolationTypeType": {
+      "type": "string",
+      "enum": ["dependency", "module", "reachability", "cycle", "instability"]
     },
     "RuleSetType": {
       "type": "object",

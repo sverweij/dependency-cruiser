@@ -1,4 +1,5 @@
 import ruleSummary from "./rule-summary.mjs";
+import violationType from "./violation-type.mjs";
 
 export default {
   definitions: {
@@ -20,16 +21,7 @@ export default {
         to: {
           type: "string",
         },
-        type: {
-          type: "string",
-          enum: [
-            "dependency",
-            "module",
-            "reachability",
-            "cycle",
-            "instability",
-          ],
-        },
+        type: { $ref: "#/definitions/ViolationTypeType" },
         rule: { $ref: "#/definitions/RuleSummaryType" },
         cycle: {
           type: "array",
@@ -69,5 +61,6 @@ export default {
       },
     },
     ...ruleSummary.definitions,
+    ...violationType.definitions,
   },
 };
