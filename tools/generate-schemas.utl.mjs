@@ -32,16 +32,9 @@ function emitConsolidatedSchema(pOutputFileName) {
   return (pJSONSchemaObject) => {
     fs.writeFileSync(
       pOutputFileName,
-      prettier.format(
-        `/* generated - don't edit */
-  
-        module.exports = ${JSON.stringify(
-          stripAttribute(pJSONSchemaObject.default, "description")
-        )}`,
-        {
-          parser: "babel",
-        }
-      ),
+      `/* generated - don't edit */\nmodule.exports=${JSON.stringify(
+        stripAttribute(pJSONSchemaObject.default, "description")
+      )}`,
       "utf8"
     );
   };

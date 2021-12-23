@@ -760,16 +760,7 @@
       "properties": {
         "from": { "type": "string" },
         "to": { "type": "string" },
-        "type": {
-          "type": "string",
-          "enum": [
-            "dependency",
-            "module",
-            "reachability",
-            "cycle",
-            "instability"
-          ]
-        },
+        "type": { "$ref": "#/definitions/ViolationTypeType" },
         "rule": { "$ref": "#/definitions/RuleSummaryType" },
         "cycle": {
           "type": "array",
@@ -814,6 +805,10 @@
         },
         "severity": { "$ref": "#/definitions/SeverityType" }
       }
+    },
+    "ViolationTypeType": {
+      "type": "string",
+      "enum": ["dependency", "module", "reachability", "cycle", "instability"]
     },
     "ExtendsType": {
       "description": "A configuration (or an array of configurations) this configuration uses as a base",
