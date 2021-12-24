@@ -207,7 +207,10 @@
     "expectedFolders": [
       {
         "name": "test",
-        "dependencies": ["ndjson", "os"],
+        "dependencies": [
+          { "name": "ndjson", "instability": 0 },
+          { "name": "os", "instability": 0 }
+        ],
         "dependents": [],
         "moduleCount": 6,
         "afferentCouplings": 0,
@@ -216,7 +219,10 @@
       },
       {
         "name": "test/main",
-        "dependencies": ["ndjson", "os"],
+        "dependencies": [
+          { "name": "ndjson", "instability": 0 },
+          { "name": "os", "instability": 0 }
+        ],
         "dependents": [],
         "moduleCount": 6,
         "afferentCouplings": 0,
@@ -225,7 +231,10 @@
       },
       {
         "name": "test/main/fixtures",
-        "dependencies": ["ndjson", "os"],
+        "dependencies": [
+          { "name": "ndjson", "instability": 0 },
+          { "name": "os", "instability": 0 }
+        ],
         "dependents": [],
         "moduleCount": 6,
         "afferentCouplings": 0,
@@ -234,7 +243,10 @@
       },
       {
         "name": "test/main/fixtures/cruise-reporterless",
-        "dependencies": ["ndjson", "os"],
+        "dependencies": [
+          { "name": "ndjson", "instability": 0 },
+          { "name": "os", "instability": 0 }
+        ],
         "dependents": [],
         "moduleCount": 6,
         "afferentCouplings": 0,
@@ -243,7 +255,10 @@
       },
       {
         "name": "test/main/fixtures/cruise-reporterless/metrics",
-        "dependencies": ["ndjson", "os"],
+        "dependencies": [
+          { "name": "ndjson", "instability": 0 },
+          { "name": "os", "instability": 0 }
+        ],
         "dependents": [],
         "moduleCount": 6,
         "afferentCouplings": 0,
@@ -252,8 +267,10 @@
       },
       {
         "name": "test/main/fixtures/cruise-reporterless/metrics/format-output",
-        "dependencies": ["os"],
-        "dependents": ["test/main/fixtures/cruise-reporterless/metrics"],
+        "dependencies": [{ "name": "os", "instability": 0 }],
+        "dependents": [
+          { "name": "test/main/fixtures/cruise-reporterless/metrics" }
+        ],
         "moduleCount": 1,
         "afferentCouplings": 1,
         "efferentCouplings": 1,
@@ -262,7 +279,9 @@
       {
         "name": "test/main/fixtures/cruise-reporterless/metrics/mangle-entry",
         "dependencies": [],
-        "dependents": ["test/main/fixtures/cruise-reporterless/metrics"],
+        "dependents": [
+          { "name": "test/main/fixtures/cruise-reporterless/metrics" }
+        ],
         "moduleCount": 3,
         "afferentCouplings": 1,
         "efferentCouplings": 0,
@@ -271,7 +290,9 @@
       {
         "name": "test/main/fixtures/cruise-reporterless/metrics/parse-input",
         "dependencies": [],
-        "dependents": ["test/main/fixtures/cruise-reporterless/metrics"],
+        "dependents": [
+          { "name": "test/main/fixtures/cruise-reporterless/metrics" }
+        ],
         "moduleCount": 1,
         "afferentCouplings": 1,
         "efferentCouplings": 0,

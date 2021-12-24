@@ -1,11 +1,12 @@
 /* eslint-disable security/detect-object-injection */
 const path = require("path").posix;
-const { object2Array, getParentFolders } = require("./utl");
+const { calculateInstability, metricsAreCalculable } = require("../module-utl");
 const {
   getAfferentCouplings,
   getEfferentCouplings,
-  metricsAreCalculable,
-} = require("./module-utl");
+  getParentFolders,
+  object2Array,
+} = require("./utl");
 
 function upsertCouplings(pAllDependents, pNewDependents) {
   pNewDependents.forEach((pNewDependent) => {
@@ -34,16 +35,14 @@ function upsertFolderAttributes(pAllMetrics, pModule, pDirname) {
     )
   );
   pAllMetrics[pDirname].moduleCount += 1;
-
   return pAllMetrics;
 }
 
-function orderFolderMetrics(pLeftMetric, pRightMetric) {
-  // return pLeft.name.localeCompare(pRight.name);
-  // For intended use in a table it's probably more useful to sort by
-  // instability. Might need to be either configurable or flexible
-  // in the output, though
-  return pRightMetric.instability - pLeftMetric.instability;
+function aggregateToFolder(pAllFolders, pModule) {
+  getParentFolders(path.dirname(pModule.source)).forEach((pParentDirectory) =>
+    upsertFolderAttributes(pAllFolders, pModule, pParentDirectory)
+  );
+  return pAllFolders;
 }
 
 function sumCounts(pAll, pCurrent) {
@@ -59,12 +58,15 @@ function getFolderLevelCouplings(pCouplingArray) {
           : path.dirname(pCoupling.name)
       )
     )
-  );
+  ).map((pCoupling) => ({ name: pCoupling }));
 }
 
 function calculateFolderMetrics(pFolder) {
   const lModuleDependents = object2Array(pFolder.dependents);
   const lModuleDependencies = object2Array(pFolder.dependencies);
+  // this calculation might look superfluous (why not just .length the dependents
+  // and dependencies?), but it isn't because there can be > 1 relation between
+  // two folders
   const lAfferentCouplings = lModuleDependents.reduce(sumCounts, 0);
   const lEfferentCouplings = lModuleDependencies.reduce(sumCounts, 0);
 
@@ -72,26 +74,33 @@ function calculateFolderMetrics(pFolder) {
     ...pFolder,
     afferentCouplings: lAfferentCouplings,
     efferentCouplings: lEfferentCouplings,
-    // when both afferentCouplings and efferentCouplings equal 0 instability will
-    // yield NaN. Judging Bob Martin's intention, a component with no outgoing
-    // dependencies is maximum stable (0)
-    instability:
-      lEfferentCouplings / (lEfferentCouplings + lAfferentCouplings) || 0,
+    instability: calculateInstability(lEfferentCouplings, lAfferentCouplings),
     dependents: getFolderLevelCouplings(lModuleDependents),
     dependencies: getFolderLevelCouplings(lModuleDependencies),
   };
 }
 
-module.exports = function getStabilityMetrics(pModules) {
-  return object2Array(
-    pModules.filter(metricsAreCalculable).reduce((pAllFolders, pModule) => {
-      getParentFolders(path.dirname(pModule.source)).forEach(
-        (pParentDirectory) =>
-          upsertFolderAttributes(pAllFolders, pModule, pParentDirectory)
-      );
-      return pAllFolders;
-    }, {})
-  )
-    .map(calculateFolderMetrics)
-    .sort(orderFolderMetrics);
+function findFolderByName(pAllFolders, pName) {
+  return pAllFolders.find((pFolder) => pFolder.name === pName);
+}
+
+function denormalizeInstability(pAllFolders) {
+  return (pFolder) => ({
+    ...pFolder,
+    dependencies: pFolder.dependencies.map((pDependency) => {
+      const lFolder = findFolderByName(pAllFolders, pDependency.name) || {};
+      return {
+        ...pDependency,
+        instability: lFolder.instability >= 0 ? lFolder.instability : 0,
+      };
+    }),
+  });
+}
+
+module.exports = function aggregateToFolders(pModules) {
+  const lFolders = object2Array(
+    pModules.filter(metricsAreCalculable).reduce(aggregateToFolder, {})
+  ).map(calculateFolderMetrics);
+
+  return lFolders.map(denormalizeInstability(lFolders));
 };
