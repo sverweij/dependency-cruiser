@@ -1,4 +1,4 @@
-const { isDependent } = require("../utl");
+const { isDependent } = require("../module-utl");
 
 module.exports = function getDependents(pModule, pModules) {
   // perf between O(n) in an unconnected graph and O(n^2) in a fully connected one

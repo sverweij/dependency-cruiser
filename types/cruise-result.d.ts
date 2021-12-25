@@ -379,11 +379,11 @@ export interface IFolder {
   /**
    * List of folders depending on this folder
    */
-  dependents?: string[];
+  dependents?: { name: string }[];
   /**
    * List of folders this folder depends upon
    */
-  dependencies?: string[];
+  dependencies?: { name: string; instability: number }[];
   /**
    * The total number of modules detected in this folder and its sub-folders
    */

@@ -8,7 +8,7 @@ const addDependents = require("./derive/dependents");
 const deriveReachable = require("./derive/reachable");
 const addValidations = require("./add-validations");
 const softenKnownViolations = require("./soften-known-violations");
-const deriveModuleMetrics = require("./derive/metrics/module");
+const deriveModuleMetrics = require("./derive/metrics");
 
 module.exports = function enrichModules(pModules, pOptions) {
   bus.emit("progress", "analyzing: cycles", { level: busLogLevels.INFO });

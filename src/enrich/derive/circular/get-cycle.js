@@ -1,4 +1,4 @@
-const { findModuleByName } = require("../utl");
+const { findModuleByName } = require("../module-utl");
 /* about the absence of checks whether attributes/ objects actually
  * exist:
  * - it saves CPU cycles to the effect of being ~30% faster than with the

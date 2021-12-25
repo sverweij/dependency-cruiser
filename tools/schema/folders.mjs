@@ -1,3 +1,4 @@
+// folders.mjsgit
 export default {
   definitions: {
     FoldersType: {
@@ -26,16 +27,37 @@ export default {
           type: "array",
           description: "list of folders depending on this folder",
           items: {
-            type: "string",
-            description: "the (resolved) name of the dependent",
+            type: "object",
+            required: ["name"],
+            additionalProperties: false,
+            properties: {
+              name: {
+                type: "string",
+                description: "the (resolved) name of the dependent",
+              },
+            },
           },
         },
         dependencies: {
           type: "array",
           description: "list of folders this module depends upon",
           items: {
-            type: "string",
-            description: "the (resolved) name of the dependency",
+            type: "object",
+            required: ["name"],
+            additionalProperties: false,
+            properties: {
+              name: {
+                type: "string",
+                description: "the (resolved) name of the dependency",
+              },
+              instability: {
+                type: "number",
+                description:
+                  "the instability of the dependency (denormalized - this is " +
+                  "a duplicate of the one found in the instability of the " +
+                  "folder with the same name)",
+              },
+            },
           },
         },
         moduleCount: {

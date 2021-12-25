@@ -436,8 +436,8 @@
       },
       "metrics": {
         "orderBy": "name",
-        "hideModules": false,
-        "hideFolders": true
+        "hideModules": true,
+        "hideFolders": false
       },
       "anon": {
         "wordlist": [

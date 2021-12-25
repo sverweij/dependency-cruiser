@@ -1,15 +1,19 @@
 import { expect } from "chai";
 
-import getStabilityMetrics from "../../../../src/enrich/derive/metrics/get-stability-metrics.js";
+import aggregateToFolders from "../../../../src/enrich/derive/folders/aggregate-to-folders.js";
 
-describe("enrich/derive/metrics/get-stability-metrics - folder stability metrics derivation", () => {
+function compareFolders(pLeftFolder, pRightFolder) {
+  return pLeftFolder.name.localeCompare(pRightFolder.name);
+}
+
+describe("enrich/derive/folders/aggregate-to-folders - folder stability metrics derivation", () => {
   it("no modules no metrics", () => {
-    expect(getStabilityMetrics([])).to.deep.equal([]);
+    expect(aggregateToFolders([])).to.deep.equal([]);
   });
 
   it("no dependencies no dependents", () => {
     expect(
-      getStabilityMetrics([
+      aggregateToFolders([
         { source: "src/folder/index.js", dependencies: [], dependents: [] },
       ])
     ).to.deep.equal([
@@ -36,29 +40,43 @@ describe("enrich/derive/metrics/get-stability-metrics - folder stability metrics
 
   it("dependencies no dependents", () => {
     expect(
-      getStabilityMetrics([
+      aggregateToFolders([
         {
           source: "src/folder/index.js",
           dependencies: [{ resolved: "src/other-folder/utensil.js" }],
           dependents: [],
         },
-      ])
+        {
+          source: "src/other-folder/utensils.js",
+          dependencies: [],
+          dependents: ["src/folder/index.js"],
+        },
+      ]).sort(compareFolders)
     ).to.deep.equal([
+      {
+        name: "src",
+        moduleCount: 2,
+        dependents: [],
+        dependencies: [],
+        afferentCouplings: 0,
+        efferentCouplings: 0,
+        instability: 0,
+      },
       {
         name: "src/folder",
         moduleCount: 1,
         dependents: [],
-        dependencies: ["src/other-folder"],
+        dependencies: [{ name: "src/other-folder", instability: 0 }],
         afferentCouplings: 0,
         efferentCouplings: 1,
         instability: 1,
       },
       {
-        name: "src",
+        name: "src/other-folder",
         moduleCount: 1,
-        dependents: [],
         dependencies: [],
-        afferentCouplings: 0,
+        dependents: [{ name: "src/folder" }],
+        afferentCouplings: 1,
         efferentCouplings: 0,
         instability: 0,
       },
@@ -67,13 +85,13 @@ describe("enrich/derive/metrics/get-stability-metrics - folder stability metrics
 
   it("no dependencies but dependents", () => {
     expect(
-      getStabilityMetrics([
+      aggregateToFolders([
         {
           source: "src/folder/index.js",
           dependencies: [],
           dependents: ["src/other-folder/utensil.js"],
         },
-      ])
+      ]).sort(compareFolders)
     ).to.deep.equal([
       {
         name: "src",
@@ -87,7 +105,7 @@ describe("enrich/derive/metrics/get-stability-metrics - folder stability metrics
       {
         name: "src/folder",
         moduleCount: 1,
-        dependents: ["src/other-folder"],
+        dependents: [{ name: "src/other-folder" }],
         dependencies: [],
         afferentCouplings: 1,
         efferentCouplings: 0,
@@ -98,19 +116,19 @@ describe("enrich/derive/metrics/get-stability-metrics - folder stability metrics
 
   it("handling core modules", () => {
     expect(
-      getStabilityMetrics([
+      aggregateToFolders([
         {
           source: "src/index.js",
           dependencies: [{ resolved: "fs" }],
           dependents: [],
         },
-      ])
+      ]).sort(compareFolders)
     ).to.deep.equal([
       {
         name: "src",
         moduleCount: 1,
         dependents: [],
-        dependencies: ["fs"],
+        dependencies: [{ name: "fs", instability: 0 }],
         afferentCouplings: 0,
         efferentCouplings: 1,
         instability: 1,

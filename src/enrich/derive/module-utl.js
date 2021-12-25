@@ -28,6 +28,32 @@ function isDependent(pResolvedName) {
     );
 }
 
+function metricsAreCalculable(pModule) {
+  return (
+    !pModule.coreModule &&
+    !pModule.couldNotResolve &&
+    !pModule.matchesDoNotFollow
+  );
+}
+
+/**
+ * returns the Instability of a component given the number of incoming (afferent)
+ * and outgoign (efferent) connections ('couplings')
+ *
+ * @param {number} pEfferentCouplingCount
+ * @param {number} pAfferentCouplingCount
+ * @returns number
+ */
+function calculateInstability(pEfferentCouplingCount, pAfferentCouplingCount) {
+  // when both afferentCouplings and efferentCouplings equal 0 instability will
+  // yield NaN. Judging Bob Martin's intention, a component with no outgoing
+  // dependencies is maximum stable (0)
+  return (
+    pEfferentCouplingCount /
+      (pEfferentCouplingCount + pAfferentCouplingCount) || 0
+  );
+}
+
 function clearCache() {
   gIndexedGraph = null;
 }
@@ -36,4 +62,6 @@ module.exports = {
   findModuleByName,
   clearCache,
   isDependent,
+  metricsAreCalculable,
+  calculateInstability,
 };
