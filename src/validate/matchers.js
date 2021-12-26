@@ -1,5 +1,31 @@
+/* eslint-disable security/detect-object-injection */
 const _has = require("lodash/has");
 const { intersects } = require("../utl/array-util");
+const { replaceGroupPlaceholders } = require("../utl/regex-util");
+
+function propertyEquals(pRule, pDependency, pProperty) {
+  // The properties can be booleans, so we can't use !pRule.to[pProperty]
+  if (_has(pRule.to, pProperty)) {
+    return pDependency[pProperty] === pRule.to[pProperty];
+  }
+  return true;
+}
+
+function propertyMatches(pRule, pDependency, pRuleProperty, pProperty) {
+  return Boolean(
+    !pRule.to[pRuleProperty] ||
+      (pDependency[pProperty] &&
+        pDependency[pProperty].match(pRule.to[pRuleProperty]))
+  );
+}
+
+function propertyMatchesNot(pRule, pDependency, pRuleProperty, pProperty) {
+  return Boolean(
+    !pRule.to[pRuleProperty] ||
+      (pDependency[pProperty] &&
+        !pDependency[pProperty].match(pRule.to[pRuleProperty]))
+  );
+}
 
 function fromPath(pRule, pModule) {
   return Boolean(!pRule.from.path || pModule.source.match(pRule.from.path));
@@ -21,20 +47,11 @@ function modulePathNot(pRule, pModule) {
   );
 }
 
-function _replaceGroupPlaceholders(pString, pExtractedGroups) {
-  return pExtractedGroups.reduce(
-    (pAll, pThis, pIndex) =>
-      // eslint-disable-next-line security/detect-non-literal-regexp
-      pAll.replace(new RegExp(`\\$${pIndex}`, "g"), pThis),
-    pString
-  );
-}
-
 function _toPath(pRule, pString, pGroups = []) {
   return Boolean(
     !pRule.to.path ||
       (pGroups.length > 0
-        ? pString.match(_replaceGroupPlaceholders(pRule.to.path, pGroups))
+        ? pString.match(replaceGroupPlaceholders(pRule.to.path, pGroups))
         : pString.match(pRule.to.path))
   );
 }
@@ -51,7 +68,7 @@ function _toPathNot(pRule, pString, pGroups = []) {
   return (
     !Boolean(pRule.to.pathNot) ||
     !(pGroups.length > 0
-      ? pString.match(_replaceGroupPlaceholders(pRule.to.pathNot, pGroups))
+      ? pString.match(replaceGroupPlaceholders(pRule.to.pathNot, pGroups))
       : pString.match(pRule.to.pathNot))
   );
 }
@@ -78,33 +95,11 @@ function toDependencyTypesNot(pRule, pDependency) {
   );
 }
 
-function toLicense(pRule, pDependency) {
+function toVia(pRule, pDependency) {
   return Boolean(
-    !pRule.to.license ||
-      (pDependency.license && pDependency.license.match(pRule.to.license))
-  );
-}
-
-function toLicenseNot(pRule, pDependency) {
-  return Boolean(
-    !pRule.to.licenseNot ||
-      (pDependency.license && !pDependency.license.match(pRule.to.licenseNot))
-  );
-}
-
-function toExoticRequire(pRule, pDependency) {
-  return Boolean(
-    !pRule.to.exoticRequire ||
-      (pDependency.exoticRequire &&
-        pDependency.exoticRequire.match(pRule.to.exoticRequire))
-  );
-}
-
-function toExoticRequireNot(pRule, pDependency) {
-  return Boolean(
-    !pRule.to.exoticRequireNot ||
-      (pDependency.exoticRequire &&
-        !pDependency.exoticRequire.match(pRule.to.exoticRequireNot))
+    !pRule.to.via ||
+      (pDependency.cycle &&
+        pDependency.cycle.some((pVia) => pVia.match(pRule.to.via)))
   );
 }
 
@@ -116,26 +111,32 @@ function toViaNot(pRule, pDependency) {
   );
 }
 
-function toVia(pRule, pDependency) {
-  return Boolean(
-    !pRule.to.via ||
-      (pDependency.cycle &&
-        pDependency.cycle.some((pVia) => pVia.match(pRule.to.via)))
-  );
-}
-
-function toIsMoreUnstable(pRule, pFrom, pTo) {
+function toIsMoreUnstable(pRule, pModule, pDependency) {
   if (_has(pRule, "to.moreUnstable")) {
     return (
-      (pRule.to.moreUnstable && pFrom.instability < pTo.instability) ||
-      (!pRule.to.moreUnstable && pFrom.instability >= pTo.instability)
+      (pRule.to.moreUnstable &&
+        pModule.instability < pDependency.instability) ||
+      (!pRule.to.moreUnstable && pModule.instability >= pDependency.instability)
+    );
+  }
+  return true;
+}
+
+function matchesMoreThanOneDependencyType(pRule, pDependency) {
+  if (_has(pRule.to, "moreThanOneDependencyType")) {
+    return (
+      pRule.to.moreThanOneDependencyType ===
+      pDependency.dependencyTypes.length > 1
     );
   }
   return true;
 }
 
 module.exports = {
-  _replaceGroupPlaceholders,
+  replaceGroupPlaceholders,
+  propertyEquals,
+  propertyMatches,
+  propertyMatchesNot,
   fromPath,
   fromPathNot,
   toPath,
@@ -146,11 +147,8 @@ module.exports = {
   toModulePathNot,
   toDependencyTypes,
   toDependencyTypesNot,
-  toLicense,
-  toLicenseNot,
-  toExoticRequire,
-  toExoticRequireNot,
   toVia,
   toViaNot,
   toIsMoreUnstable,
+  matchesMoreThanOneDependencyType,
 };
