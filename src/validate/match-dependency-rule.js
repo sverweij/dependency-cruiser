@@ -1,25 +1,6 @@
-const _has = require("lodash/has");
+const { extractGroups } = require("../utl/regex-util");
 const isModuleOnlyRule = require("./is-module-only-rule");
 const matchers = require("./matchers");
-const { extractGroups } = require("./utl");
-
-function propertyEquals(pTo, pRule, pProperty) {
-  // ignore security/detect-object-injection because:
-  // - we only use it from within the module with two fixed values
-  // - the propertyEquals function is not exposed externaly
-  return _has(pRule.to, pProperty)
-    ? // eslint-disable-next-line security/detect-object-injection
-      pTo[pProperty] === pRule.to[pProperty]
-    : true;
-}
-
-function matchesMoreThanOneDependencyType(pRuleTo, pTo) {
-  if (_has(pRuleTo, "moreThanOneDependencyType")) {
-    return pRuleTo.moreThanOneDependencyType === pTo.dependencyTypes.length > 1;
-  }
-
-  return true;
-}
 
 function match(pFrom, pTo) {
   // eslint-disable-next-line complexity
@@ -33,23 +14,28 @@ function match(pFrom, pTo) {
       matchers.toPathNot(pRule, pTo, lGroups) &&
       matchers.toDependencyTypes(pRule, pTo) &&
       matchers.toDependencyTypesNot(pRule, pTo) &&
-      matchesMoreThanOneDependencyType(pRule.to, pTo) &&
-      matchers.toLicense(pRule, pTo) &&
-      matchers.toLicenseNot(pRule, pTo) &&
-      matchers.toExoticRequire(pRule, pTo) &&
-      matchers.toExoticRequireNot(pRule, pTo) &&
-      matchers.toVia(pRule, pTo) &&
-      matchers.toViaNot(pRule, pTo) &&
-      matchers.toIsMoreUnstable(pRule, pFrom, pTo) &&
+      matchers.matchesMoreThanOneDependencyType(pRule, pTo) &&
       // preCompilationOnly is not a mandatory attribute, but if the attribute
       // is in the rule but not in the dependency there won't be a match
       // anyway, so we can use the default propertyEquals method regardless
-      propertyEquals(pTo, pRule, "preCompilationOnly") &&
+      matchers.propertyEquals(pRule, pTo, "preCompilationOnly") &&
       // couldNotResolve, circular, dynamic and exoticallyRequired _are_ mandatory
-      propertyEquals(pTo, pRule, "couldNotResolve") &&
-      propertyEquals(pTo, pRule, "circular") &&
-      propertyEquals(pTo, pRule, "dynamic") &&
-      propertyEquals(pTo, pRule, "exoticallyRequired")
+      matchers.propertyEquals(pRule, pTo, "couldNotResolve") &&
+      matchers.propertyEquals(pRule, pTo, "circular") &&
+      matchers.propertyEquals(pRule, pTo, "dynamic") &&
+      matchers.propertyEquals(pRule, pTo, "exoticallyRequired") &&
+      matchers.propertyMatches(pRule, pTo, "license", "license") &&
+      matchers.propertyMatchesNot(pRule, pTo, "licenseNot", "license") &&
+      matchers.propertyMatches(pRule, pTo, "exoticRequire", "exoticRequire") &&
+      matchers.propertyMatchesNot(
+        pRule,
+        pTo,
+        "exoticRequireNot",
+        "exoticRequire"
+      ) &&
+      matchers.toVia(pRule, pTo) &&
+      matchers.toViaNot(pRule, pTo) &&
+      matchers.toIsMoreUnstable(pRule, pFrom, pTo)
     );
   };
 }

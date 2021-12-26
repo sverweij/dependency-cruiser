@@ -1,7 +1,7 @@
 const _has = require("lodash/has");
+const { extractGroups } = require("../utl/regex-util");
 const isModuleOnlyRule = require("./is-module-only-rule");
 const matchers = require("./matchers");
-const { extractGroups } = require("./utl");
 
 function matchesOrphanRule(pRule, pModule) {
   return (
