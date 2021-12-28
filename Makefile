@@ -13,23 +13,31 @@ GENERATED_SOURCES=src/cli/init-config/config.js.template.js \
 	src/schema/cruise-result.schema.json \
 	src/meta.js
 
-SCHEMA_SOURCES=tools/schema/compound-exclude-type.mjs \
+SCHEMA_SOURCES=tools/schema/baseline-violations.schema.mjs \
 	tools/schema/compound-donot-follow-type.mjs \
+	tools/schema/compound-exclude-type.mjs \
+	tools/schema/compound-focus-type.mjs \
+	tools/schema/compound-include-only-type.mjs \
+	tools/schema/configuration.schema.mjs \
+	tools/schema/cruise-result.schema.mjs \
 	tools/schema/dependencies.mjs \
 	tools/schema/dependency-type.mjs \
+	tools/schema/folders.mjs \
 	tools/schema/module-system-type.mjs \
 	tools/schema/module-systems-type.mjs \
 	tools/schema/modules.mjs \
-	tools/schema/folders.mjs \
 	tools/schema/options-used.mjs \
 	tools/schema/options.mjs \
 	tools/schema/output-type.mjs \
+	tools/schema/re-as-strings-type.mjs \
 	tools/schema/reporter-options.mjs \
 	tools/schema/restrictions.mjs \
 	tools/schema/rule-set.mjs \
 	tools/schema/rule-summary.mjs \
 	tools/schema/severity-type.mjs \
-	tools/schema/summary.mjs
+	tools/schema/summary.mjs \
+	tools/schema/violation-type.mjs \
+	tools/schema/violations.mjs
 
 .PHONY: help build clean
 
@@ -47,7 +55,7 @@ help:
 	@echo
 	@echo "Useful targets:"
 	@echo
-	@echo "build. If necessary this ..."
+	@echo "build. When necessary this ..."
 	@echo "  - ... recompiles the handlebar templates"
 	@echo "  - ... re-generates the json schema"
 	@echo
@@ -64,6 +72,6 @@ src/%.schema.js: tools/%.schema.mjs $(SCHEMA_SOURCES) tools/generate-schemas.utl
 src/%.schema.json: tools/%.schema.mjs $(SCHEMA_SOURCES) tools/generate-schemas.utl.mjs
 	$(NODE) ./tools/generate-schemas.utl.mjs $@
 
-src/meta.js: package.json
+src/meta.js: package.json tools/generate-meta.utl.mjs
 	$(NODE) ./tools/generate-meta.utl.mjs < $< > $@
 	npx prettier --write $@
