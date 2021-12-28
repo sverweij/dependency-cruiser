@@ -84,8 +84,8 @@ function findFolderByName(pAllFolders, pName) {
   return pAllFolders.find((pFolder) => pFolder.name === pName);
 }
 
-function denormalizeInstability(pAllFolders) {
-  return (pFolder) => ({
+function denormalizeInstability(pFolder, _, pAllFolders) {
+  return {
     ...pFolder,
     dependencies: pFolder.dependencies.map((pDependency) => {
       const lFolder = findFolderByName(pAllFolders, pDependency.name) || {};
@@ -94,7 +94,7 @@ function denormalizeInstability(pAllFolders) {
         instability: lFolder.instability >= 0 ? lFolder.instability : 0,
       };
     }),
-  });
+  };
 }
 
 module.exports = function aggregateToFolders(pModules) {
@@ -102,5 +102,5 @@ module.exports = function aggregateToFolders(pModules) {
     pModules.filter(metricsAreCalculable).reduce(aggregateToFolder, {})
   ).map(calculateFolderMetrics);
 
-  return lFolders.map(denormalizeInstability(lFolders));
+  return lFolders.map(denormalizeInstability);
 };

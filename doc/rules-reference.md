@@ -259,6 +259,35 @@ the rule at all. This can be useful if you want to temporarily
 disable a rule or disable a rule you inherited from a rule set you
 extended.
 
+> If you want to set the severity for the 'allowed' rules you can
+> use [`allowedSeverity`](#allowedSeverity)
+
+### `scope` - enable rules to apply on folders instead of modules
+
+What to apply the rule to - either `module` (the default) or `folder`. For many
+rules this makes no difference. For these rules we advise to not include the
+`scope` attribute at all. There are two notable exceptions where it _does_ make
+a difference:
+
+- rules regarding Instability metrics
+  A folder can contain a highly instable module (e.g. an index.js barrel that
+  depends on everything and their mother within the module), but be stable itself
+  e.g. because there's nothing in the folder that depends on modules outside it.
+- rules regarding circular dependencies
+  For example, when `main/index.js` depends on `utl/helper.js` and `utl/helper.js`
+  depends on `main/utl.js` there is no circular dependency on module level,
+  but there _is_ one between the `main` and `utl` folders
+
+> - :warning: the _scope_ attribute is _experimental_. The attribute was introduced
+>   to enable folder scope validations. Whether this is the best approach to
+>   distinguish folder and module scope validations has to be proven over time.
+>   If there's a better way dependency-cruiser will switch over to that without
+>   a major version bump.
+> - :warning: at this time only the `moreUnstable` attribute works, so it is
+>   possible to check the "stable dependencies principle" on folder level. Other
+>   attributes (including, but not limited to _path_, _pathNot_ and _circular_)
+>   still have to be implemented (after release 11.3.0)
+
 ## Conditions
 
 ### `path`

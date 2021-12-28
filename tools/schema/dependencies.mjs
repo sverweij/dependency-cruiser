@@ -148,7 +148,7 @@ export default {
           type: "boolean",
           description:
             "'true' if this dependency violated a rule; 'false' in all other cases. " +
-            "The violated rule will be in the 'rule' object at the same level.",
+            "The violated rule will be in the 'rules' object at the same level.",
         },
         rules: {
           type: "array",

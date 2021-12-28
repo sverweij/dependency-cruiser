@@ -6,11 +6,19 @@ const clearCaches = require("./clear-caches");
 module.exports = function enrich(pModules, pOptions, pFileAndDirectoryArray) {
   clearCaches();
   const lModules = enrichModules(pModules, pOptions);
+  const lFolders = aggregateToFolders(lModules, pOptions);
 
   clearCaches();
-  return {
+  const lReturnValue = {
     modules: lModules,
-    ...aggregateToFolders(lModules, pOptions),
-    summary: summarize(lModules, pOptions, pFileAndDirectoryArray),
+    ...lFolders,
+    summary: summarize(
+      lModules,
+      pOptions,
+      pFileAndDirectoryArray,
+      lFolders.folders
+    ),
   };
+
+  return lReturnValue;
 };

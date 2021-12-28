@@ -208,8 +208,8 @@
       {
         "name": "test",
         "dependencies": [
-          { "name": "ndjson", "instability": 0 },
-          { "name": "os", "instability": 0 }
+          { "name": "ndjson", "instability": 0, "valid": true },
+          { "name": "os", "instability": 0, "valid": true }
         ],
         "dependents": [],
         "moduleCount": 6,
@@ -220,8 +220,8 @@
       {
         "name": "test/main",
         "dependencies": [
-          { "name": "ndjson", "instability": 0 },
-          { "name": "os", "instability": 0 }
+          { "name": "ndjson", "instability": 0, "valid": true },
+          { "name": "os", "instability": 0, "valid": true }
         ],
         "dependents": [],
         "moduleCount": 6,
@@ -232,8 +232,8 @@
       {
         "name": "test/main/fixtures",
         "dependencies": [
-          { "name": "ndjson", "instability": 0 },
-          { "name": "os", "instability": 0 }
+          { "name": "ndjson", "instability": 0, "valid": true },
+          { "name": "os", "instability": 0, "valid": true }
         ],
         "dependents": [],
         "moduleCount": 6,
@@ -244,8 +244,8 @@
       {
         "name": "test/main/fixtures/cruise-reporterless",
         "dependencies": [
-          { "name": "ndjson", "instability": 0 },
-          { "name": "os", "instability": 0 }
+          { "name": "ndjson", "instability": 0, "valid": true },
+          { "name": "os", "instability": 0, "valid": true }
         ],
         "dependents": [],
         "moduleCount": 6,
@@ -256,8 +256,8 @@
       {
         "name": "test/main/fixtures/cruise-reporterless/metrics",
         "dependencies": [
-          { "name": "ndjson", "instability": 0 },
-          { "name": "os", "instability": 0 }
+          { "name": "ndjson", "instability": 0, "valid": true },
+          { "name": "os", "instability": 0, "valid": true }
         ],
         "dependents": [],
         "moduleCount": 6,
@@ -267,7 +267,7 @@
       },
       {
         "name": "test/main/fixtures/cruise-reporterless/metrics/format-output",
-        "dependencies": [{ "name": "os", "instability": 0 }],
+        "dependencies": [{ "name": "os", "instability": 0, "valid": true }],
         "dependents": [
           { "name": "test/main/fixtures/cruise-reporterless/metrics" }
         ],

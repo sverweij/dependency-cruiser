@@ -15,7 +15,7 @@ describe("enrich/derive/folders/aggregate-to-folders - folder stability metrics 
     expect(
       aggregateToFolders([
         { source: "src/folder/index.js", dependencies: [], dependents: [] },
-      ])
+      ]).sort(compareFolders)
     ).to.deep.equal([
       {
         name: "src",
@@ -74,11 +74,97 @@ describe("enrich/derive/folders/aggregate-to-folders - folder stability metrics 
       {
         name: "src/other-folder",
         moduleCount: 1,
+        dependents: [
+          {
+            name: "src/folder",
+          },
+        ],
         dependencies: [],
-        dependents: [{ name: "src/folder" }],
         afferentCouplings: 1,
         efferentCouplings: 0,
         instability: 0,
+      },
+    ]);
+  });
+
+  it("dependencies no dependents - non-zero instability", () => {
+    expect(
+      aggregateToFolders([
+        {
+          source: "src/folder/index.js",
+          dependencies: [
+            { resolved: "src/other-folder/utensil.js" },
+            { resolved: "src/yet-another-folder/thing.js" },
+          ],
+          dependents: [],
+        },
+        {
+          source: "src/other-folder/uttensil.js",
+          dependencies: [],
+          dependents: [
+            "src/folder/index.js",
+            "src/yet-another-folder/thing.js",
+          ],
+        },
+        {
+          source: "src/yet-another-folder/thing.js",
+          dependencies: [{ resolved: "src/other-folder/utensil.js" }],
+          dependents: ["src/folder/index.js"],
+        },
+      ]).sort(compareFolders)
+    ).to.deep.equal([
+      {
+        name: "src",
+        moduleCount: 3,
+        dependents: [],
+        dependencies: [],
+        afferentCouplings: 0,
+        efferentCouplings: 0,
+        instability: 0,
+      },
+      {
+        name: "src/folder",
+        moduleCount: 1,
+        dependents: [],
+        dependencies: [
+          { name: "src/other-folder", instability: 0 },
+          { name: "src/yet-another-folder", instability: 0.5 },
+        ],
+        afferentCouplings: 0,
+        efferentCouplings: 2,
+        instability: 1,
+      },
+      {
+        name: "src/other-folder",
+        moduleCount: 1,
+        dependents: [
+          { name: "src/folder" },
+          {
+            name: "src/yet-another-folder",
+          },
+        ],
+        dependencies: [],
+        afferentCouplings: 2,
+        efferentCouplings: 0,
+        instability: 0,
+      },
+      {
+        name: "src/yet-another-folder",
+        moduleCount: 1,
+        dependents: [
+          {
+            name: "src/folder",
+          },
+        ],
+        dependencies: [
+          {
+            instability: 0,
+            name: "src/other-folder",
+          },
+        ],
+        afferentCouplings: 1,
+        efferentCouplings: 1,
+        instability: 0.5,
       },
     ]);
   });

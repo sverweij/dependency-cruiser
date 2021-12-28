@@ -1,5 +1,5 @@
 const { extractGroups } = require("../utl/regex-util");
-const isModuleOnlyRule = require("./is-module-only-rule");
+const { isModuleOnlyRule, isFolderScope } = require("./rule-classifiers");
 const matchers = require("./matchers");
 
 function match(pFrom, pTo) {
@@ -40,7 +40,8 @@ function match(pFrom, pTo) {
   };
 }
 
-const isInteresting = (pRule) => !isModuleOnlyRule(pRule);
+const isInteresting = (pRule) =>
+  !isModuleOnlyRule(pRule) && !isFolderScope(pRule);
 
 module.exports = {
   match,

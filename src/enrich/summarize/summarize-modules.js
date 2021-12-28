@@ -15,20 +15,6 @@ function cutNonTransgressions(pModule) {
   };
 }
 
-function extractMetaData(pViolations) {
-  return pViolations.reduce(
-    (pAll, pThis) => {
-      pAll[pThis.rule.severity] += 1;
-      return pAll;
-    },
-    {
-      error: 0,
-      warn: 0,
-      info: 0,
-      ignore: 0,
-    }
-  );
-}
 function toDependencyViolationSummary(pRule, pModule, pDependency, pRuleSet) {
   let lReturnValue = {
     type: "dependency",
@@ -149,22 +135,10 @@ function extractModuleViolations(pModules, pRuleSet) {
 }
 
 module.exports = function summarizeModules(pModules, pRuleSet) {
-  const lViolations = _uniqWith(
+  return _uniqWith(
     extractDependencyViolations(pModules, pRuleSet)
       .concat(extractModuleViolations(pModules, pRuleSet))
       .sort(compare.violations),
     isSameViolation
   );
-
-  return {
-    violations: lViolations,
-    ...extractMetaData(lViolations),
-    totalCruised: pModules.length,
-    totalDependenciesCruised: pModules.reduce(
-      (pAll, pModule) => pAll + pModule.dependencies.length,
-      0
-    ),
-  };
 };
-
-module.exports.extractModuleViolations = extractModuleViolations;

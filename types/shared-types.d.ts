@@ -49,3 +49,5 @@ export type ViolationType =
   | "cycle"
   | "reachability"
   | "instability";
+
+export type RuleScopeType = "module" | "folder";

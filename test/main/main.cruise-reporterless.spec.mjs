@@ -26,10 +26,13 @@ const coffeeFixtures = requireJSON(
 const metricsFixtures = requireJSON(
   "./fixtures/cruise-reporterless/metrics.json"
 );
+const folderFixtures = requireJSON(
+  "./fixtures/cruise-reporterless/folder.json"
+);
 
 use(chaiJSONSchema);
 
-function runRecursiveFixture(pFixture) {
+function runFixture(pFixture) {
   if (!Boolean(pFixture.ignore)) {
     it(pFixture.title, () => {
       let lResult = cruise(
@@ -52,18 +55,20 @@ function runRecursiveFixture(pFixture) {
 }
 
 describe("main.cruise - reporterless - CommonJS - ", () =>
-  commonjsFixtures.forEach(runRecursiveFixture));
+  commonjsFixtures.forEach(runFixture));
 describe("main.cruise - reporterless - AMD - ", () =>
-  amdFixtures.forEach(runRecursiveFixture));
+  amdFixtures.forEach(runFixture));
 describe("main.cruise - reporterless - TypeScript - ", () =>
-  typeScriptFixtures.forEach(runRecursiveFixture));
+  typeScriptFixtures.forEach(runFixture));
 describe("main.cruise - reporterless - Vue - ", () =>
-  vueFixtures.forEach(runRecursiveFixture));
+  vueFixtures.forEach(runFixture));
 describe("main.cruise - reporterless - CoffeeScript - ", () =>
-  coffeeFixtures.forEach(runRecursiveFixture));
+  coffeeFixtures.forEach(runFixture));
 describe("main.cruise - reporterless - Deprecation - ", () =>
-  deprecationFixtures.forEach(runRecursiveFixture));
+  deprecationFixtures.forEach(runFixture));
 describe("main.cruise - reporterless - Bundled - ", () =>
-  bundledFixtures.forEach(runRecursiveFixture));
+  bundledFixtures.forEach(runFixture));
 describe("main.cruise - reporterless - metrics - ", () =>
-  metricsFixtures.forEach(runRecursiveFixture));
+  metricsFixtures.forEach(runFixture));
+describe("main.cruise - reporterless - folder rules - ", () =>
+  folderFixtures.forEach(runFixture));
