@@ -1,6 +1,5 @@
 import { ICruiseResult } from "./cruise-result";
-import { ICruiseOptions } from "./options";
-import { OutputType } from "./shared-types";
+import { ICruiseOptions, IFormatOptions } from "./options";
 
 export * from "./rule-set";
 export * from "./options";
@@ -128,7 +127,7 @@ export function futureCruise(
  */
 export function format(
   pResult: ICruiseResult,
-  pOutputType: OutputType
+  pFormatOptions: IFormatOptions
 ): IReporterOutput;
 
 /**
