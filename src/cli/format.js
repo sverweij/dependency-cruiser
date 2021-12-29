@@ -6,7 +6,6 @@ const io = require("./utl/io");
 
 const KNOWN_FMT_OPTIONS = [
   "collapse",
-  "doNotFollow",
   "exclude",
   "focus",
   "help",
