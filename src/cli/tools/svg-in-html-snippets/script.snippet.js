@@ -1,105 +1,84 @@
-document.body.onmouseover = getHighlightHandler();
-
-function getHighlightHandler() {
-  /** @type {string} */
-  var currentHighlightedTitle;
-
-  /** @type {NodeListOf<SVGGElement>} */
-  var nodes = document.querySelectorAll(".node");
-  /** @type {NodeListOf<SVGGElement>} */
-  var edges = document.querySelectorAll(".edge");
-  var title2ElementMap = new Title2ElementMap(edges, nodes);
-
-  /** @param {MouseEvent} pMouseEvent */
-  return function highlightHandler(pMouseEvent) {
-    var closestNodeOrEdge = pMouseEvent.target.closest(".edge, .node");
-    var closestTitleText = getTitleText(closestNodeOrEdge);
-
-    if (!(currentHighlightedTitle === closestTitleText)) {
-      title2ElementMap.get(currentHighlightedTitle).forEach(removeHighlight);
-      title2ElementMap.get(closestTitleText).forEach(addHighlight);
-      currentHighlightedTitle = closestTitleText;
-    }
-  };
-}
-
 /**
- *
- * @param {SVGGelement[]} pEdges
- * @param {SVGGElement[]} pNodes
+ * @param {SVGGelement[]} edges
+ * @param {SVGGElement[]} nodes
  * @return {{get: (pTitleText:string) => SVGGElement[]}}
  */
-function Title2ElementMap(pEdges, pNodes) {
-  /* {{[key: string]: SVGGElement[]}} */
-  var elementMap = buildMap(pEdges, pNodes);
-
-  /**
-   * @param {NodeListOf<SVGGElement>} pEdges
-   * @param {NodeListOf<SVGGElement>} pNodes
-   * @return {{[key: string]: SVGGElement[]}}
-   */
-  function buildMap(pEdges, pNodes) {
-    var title2NodeMap = buildTitle2NodeMap(pNodes);
-
-    return nodeListToArray(pEdges).reduce(addEdgeToMap(title2NodeMap), {});
-  }
-  /**
-   * @param {NodeListOf<SVGGElement>} pNodes
-   * @return {{[key: string]: SVGGElement}}
-   */
-  function buildTitle2NodeMap(pNodes) {
-    return nodeListToArray(pNodes).reduce(addNodeToMap, {});
+class Graph {
+  constructor(nodes, edges) {
+    this.nodeMap = new Map();
+    this.edgeMap = new Map();
+    this.addNodes(nodes);
+    this.addEdges(edges);
   }
 
-  function addNodeToMap(pMap, pNode) {
-    var titleText = getTitleText(pNode);
-
-    if (titleText) {
-      pMap[titleText] = pNode;
-    }
-    return pMap;
-  }
-
-  function addEdgeToMap(pNodeMap) {
-    return function (pEdgeMap, pEdge) {
-      /** @type {string} */
-      var titleText = getTitleText(pEdge);
-
-      if (titleText) {
-        var edge = pryEdgeFromTitle(titleText);
-
-        pEdgeMap[titleText] = [pNodeMap[edge.from], pNodeMap[edge.to]];
-        (pEdgeMap[edge.from] || (pEdgeMap[edge.from] = [])).push(pEdge);
-        (pEdgeMap[edge.to] || (pEdgeMap[edge.to] = [])).push(pEdge);
-      }
-      return pEdgeMap;
+  createNode(element) {
+    return {
+      key: getTitleText(element),
+      element,
+      inEdges: new Map(),
+      outEdges: new Map(),
     };
+  }
+
+  createEdge(element, source, target) {
+    const edge = {
+      key: getTitleText(element),
+      element,
+      source,
+      target,
+    };
+
+    source.outEdges.set(target.key, edge);
+    target.inEdges.set(source.key, edge);
+
+    return edge;
+  }
+
+  addNodes(nodes) {
+    nodes.forEach((element) => {
+      const node = this.createNode(element);
+      this.nodeMap.set(node.key, node);
+    });
+  }
+
+  addEdges(edges) {
+    edges.forEach((element) => {
+      const link = this.parseLinkFromTitle(getTitleText(element));
+      const source = this.nodeMap.get(link.source);
+      const target = this.nodeMap.get(link.target);
+      if (!source || !target) return;
+      const edge = this.createEdge(element, source, target);
+      this.edgeMap.set(edge.key, edge);
+    });
   }
 
   /**
    *
-   * @param {string} pString
-   * @return {{from?: string; to?:string;}}
+   * @param {string} title
+   * @return {{ source?: string; target?: string }}
    */
-  function pryEdgeFromTitle(pString) {
-    var nodeNames = pString.split(/\s*->\s*/);
+  parseLinkFromTitle(title) {
+    const [source, target] = title.split(/\s*->\s*/);
 
     return {
-      from: nodeNames.shift(),
-      to: nodeNames.shift(),
+      source,
+      target,
     };
   }
+
   /**
    *
-   * @param {string} pTitleText
-   * @return {SVGGElement[]}
+   * @param {string} title
+   * @return {{ node?: Node; edge?: Edge }}
    */
-  function get(pTitleText) {
-    return (pTitleText && elementMap[pTitleText]) || [];
+  getObject(title) {
+    const node = this.nodeMap.get(title);
+    const edge = this.edgeMap.get(title);
+    return {
+      node,
+      edge,
+    };
   }
-  return {
-    get: get,
-  };
 }
 
 /**
@@ -108,9 +87,9 @@ function Title2ElementMap(pEdges, pNodes) {
  */
 function getTitleText(pGElement) {
   /** @type {SVGTitleElement} */
-  var title = pGElement && pGElement.querySelector("title");
+  const title = pGElement && pGElement.querySelector("title");
   /** @type {string} */
-  var titleText = title && title.textContent;
+  let titleText = title && title.textContent;
 
   if (titleText) {
     titleText = titleText.trim();
@@ -119,33 +98,122 @@ function getTitleText(pGElement) {
 }
 
 /**
- * @param {NodeListOf<Element>} pNodeList
- * @return {Element[]}
+ * @param {SVGGElement} element
  */
-function nodeListToArray(pNodeList) {
-  var lReturnValue = [];
-
-  pNodeList.forEach(function (pElement) {
-    lReturnValue.push(pElement);
-  });
-
-  return lReturnValue;
-}
-
-/**
- * @param {SVGGElement} pGElement
- */
-function removeHighlight(pGElement) {
-  if (pGElement && pGElement.classList) {
-    pGElement.classList.remove("current");
+function removeHighlight(element) {
+  if (element && element.classList) {
+    element.classList.remove("highlight");
+    element.classList.remove("highlight-in");
+    element.classList.remove("highlight-out");
   }
 }
 
-/**
- * @param {SVGGElement} pGroup
- */
-function addHighlight(pGroup) {
-  if (pGroup && pGroup.classList) {
-    pGroup.classList.add("current");
-  }
+function addNodeHighlight(node) {
+  if (!node) return;
+  node.element.classList.add("highlight");
+  node.inEdges.forEach(({ element }) => element.classList.add("highlight-in"));
+  node.outEdges.forEach(({ element }) =>
+    element.classList.add("highlight-out")
+  );
 }
+
+function addEdgeHighlight(edge) {
+  if (!edge) return;
+  edge.element.classList.add("highlight");
+  edge.source.element.classList.add("highlight-in");
+  edge.target.element.classList.add("highlight-out");
+}
+
+function removeNodeHighlight(node) {
+  if (!node) return;
+  removeHighlight(node.element);
+  node.inEdges.forEach(({ element }) => removeHighlight(element));
+  node.outEdges.forEach(({ element }) => removeHighlight(element));
+}
+
+function removeEdgeHighlight(edge) {
+  if (!edge) return;
+  removeHighlight(edge.element);
+  removeHighlight(edge.source.element);
+  removeHighlight(edge.target.element);
+}
+
+function getHighlightHandler() {
+  /** @type {string} */
+  let highlightedTitle;
+
+  /** @type {NodeListOf<SVGGElement>} */
+  const nodes = document.querySelectorAll(".node");
+  /** @type {NodeListOf<SVGGElement>} */
+  const edges = document.querySelectorAll(".edge");
+
+  const graph = new Graph([...nodes], [...edges]);
+
+  /** @param {MouseEvent} pMouseEvent */
+  return function highlightHandler(pMouseEvent) {
+    const closestNodeOrEdge = pMouseEvent.target.closest(".edge, .node");
+    const title = getTitleText(closestNodeOrEdge);
+    if (title === highlightedTitle) return;
+    const last = graph.getObject(highlightedTitle);
+    removeNodeHighlight(last.node);
+    removeEdgeHighlight(last.edge);
+    const { node, edge } = graph.getObject(title);
+    addNodeHighlight(node);
+    addEdgeHighlight(edge);
+    highlightedTitle = title;
+  };
+}
+
+document.body.onmouseover = getHighlightHandler();
+
+/** ************************************************ */
+function initScale() {
+  const container = document.body;
+  const element = document.getElementById("root");
+
+  const speed = 0.08;
+  const pos = { x: 0, y: 0 };
+  const delta = { x: 0, y: 0 };
+  const pointer = { x: 0, y: 0 };
+  let scale = 1;
+
+  const scaleHandler = (event) => {
+    event.preventDefault();
+
+    /**
+     * wheel with hold ctrl/command key to scale
+     *
+     * this will trigger by
+     *  - use mouse wheel with hold Ctrl/Command key
+     *  - or two-fingers pinch in trackpad
+     */
+    if (event.ctrlKey || event.metaKey) {
+      pointer.x = event.pageX - container.offsetLeft;
+      pointer.y = event.pageY - container.offsetTop;
+      const originScale = scale;
+
+      scale += -1 * Math.max(-1, Math.min(1, event.deltaY)) * speed * scale;
+
+      const max_scale = 4;
+      const min_scale = 0.01;
+      scale = Math.max(min_scale, Math.min(max_scale, scale));
+
+      const scaleDelta = scale - originScale;
+
+      delta.x = ((pos.x - pointer.x) * scaleDelta) / originScale;
+      delta.y = ((pos.y - pointer.y) * scaleDelta) / originScale;
+
+      pos.x += delta.x;
+      pos.y += delta.y;
+    } else {
+      pos.x -= event.deltaX * 2;
+      pos.y -= event.deltaY * 2;
+    }
+
+    element.style.transform = `translate(${pos.x}px,${pos.y}px) scale(${scale},${scale})`;
+  };
+
+  window.addEventListener("wheel", scaleHandler, { passive: false });
+}
+
+initScale();

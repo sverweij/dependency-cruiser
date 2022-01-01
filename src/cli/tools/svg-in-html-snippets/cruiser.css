@@ -1,0 +1,121 @@
+:root {
+  --highlight-color: fuchsia;
+  --highlight-in-color: rgb(50, 189, 11);
+  --highlight-out-color: rgb(24, 138, 226);
+}
+
+.node:active path,
+.node:hover path,
+.node:active polygon,
+.node:hover polygon,
+.node.highlight path,
+.node.highlight polygon,
+.node.highlight-in path,
+.node.highlight-in polygon,
+.node.highlight-out path,
+.node.highlight-out polygon {
+  stroke-width: 2;
+}
+
+.node.highlight path,
+.node.highlight polygon,
+.node.highlight polyline {
+  stroke: var(--highlight-color);
+}
+
+.node.highlight-in path,
+.node.highlight-in polygon,
+.node.highlight-in polyline {
+  stroke: var(--highlight-in-color);
+}
+
+.node.highlight-out path,
+.node.highlight-out polygon,
+.node.highlight-out polyline {
+  stroke: var(--highlight-out-color);
+}
+
+.edge:active path,
+.edge:hover path,
+.edge:active ellipse,
+.edge:hover ellipse,
+.edge.highlight path,
+.edge.highlight ellipse,
+.edge.highlight-in path,
+.edge.highlight-in ellipse,
+.edge.highlight-out path,
+.edge.highlight-out ellipse {
+  stroke-width: 2.4;
+  stroke-opacity: 1;
+}
+
+.edge.highlight path,
+.edge.highlight ellipse {
+  stroke: var(--highlight-color);
+}
+
+.edge.highlight-in path,
+.edge.highlight-in ellipse {
+  stroke: var(--highlight-in-color);
+}
+
+.edge.highlight-out path,
+.edge.highlight-out ellipse {
+  stroke: var(--highlight-out-color);
+}
+
+.edge:active polygon,
+.edge:hover polygon,
+.edge.highlight polygon,
+.edge.highlight-in polygon,
+.edge.highlight-out polygon {
+  stroke-width: 2.4;
+  stroke-opacity: 1;
+  fill-opacity: 1;
+}
+
+.edge.highlight polygon {
+  stroke: var(--highlight-color);
+  fill: var(--highlight-color);
+}
+
+.edge.highlight-in polygon {
+  stroke: var(--highlight-in-color);
+  fill: var(--highlight-in-color);
+}
+
+.edge.highlight-out polygon {
+  stroke: var(--highlight-out-color);
+  fill: var(--highlight-out-color);
+}
+
+.edge:active text,
+.edge:hover text {
+  fill: var(--highlight-color);
+}
+
+.cluster path {
+  stroke-width: 3;
+}
+.cluster:active path,
+.cluster:hover path {
+  fill: #ffff0011;
+}
+
+html,
+body,
+#root {
+  margin: 0;
+  padding: 0;
+  width: 100%;
+  height: 100%;
+}
+
+body {
+  overflow: hidden;
+}
+
+#root {
+  transition: transform .05s linear;
+  transform-origin: 0 0;
+}

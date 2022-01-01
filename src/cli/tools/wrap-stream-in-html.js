@@ -1,21 +1,22 @@
 const fs = require("fs");
 const path = require("path");
 
-const HEADER_FILE = path.join(
-  __dirname,
-  "svg-in-html-snippets",
-  "header.snippet.html"
-);
-const SCRIPT_FILE = path.join(
+const htmlPath = path.join(__dirname, "svg-in-html-snippets", "index.html");
+const cssPath = path.join(__dirname, "svg-in-html-snippets", "cruiser.css");
+const scriptPath = path.join(
   __dirname,
   "svg-in-html-snippets",
   "script.snippet.js"
 );
-const FOOTER_FILE = path.join(
-  __dirname,
-  "svg-in-html-snippets",
-  "footer.snippet.html"
-);
+
+const streamToString = (pStream) => {
+  const lChunks = [];
+  return new Promise((pResolve, pReject) => {
+    pStream.on("data", (pChunk) => lChunks.push(Buffer.from(pChunk)));
+    pStream.on("end", () => pResolve(Buffer.concat(lChunks).toString("utf8")));
+    pStream.on("error", (pError) => pReject(pError));
+  });
+};
 
 /**
  * Slaps the stuff in the passed stream in between the contents
@@ -28,32 +29,25 @@ const FOOTER_FILE = path.join(
  *
  * ... but portable over node platforms
  *
- * @param {readStream} pStream stream whose characters are to be slapped between header and footer
- * @param {writeStream} pOutStream stream to write to
+ * @param {ReadStream} pStream stream whose characters are to be slapped between header and footer
+ * @param {WriteStream} pOutStream stream to write to
  */
-function wrap(pInStream, pOutStream) {
-  const lHeader = fs.readFileSync(HEADER_FILE, "utf8");
-  const lScript = fs.readFileSync(SCRIPT_FILE, "utf8");
-  const lEnd = fs.readFileSync(FOOTER_FILE, "utf8");
-  const lFooter = `<script>${lScript}</script>${lEnd}`;
+const wrap = async (pInStream, pOutStream) => {
+  const html = fs.readFileSync(htmlPath, "utf8");
+  const css = fs.readFileSync(cssPath, "utf8");
+  const script = fs.readFileSync(scriptPath, "utf8");
 
-  pOutStream.write(lHeader);
-  pInStream
-    .on("end", () => {
-      pOutStream.write(lFooter);
-      pOutStream.end();
-    })
-    .on(
-      "error",
-      /* c8 ignore start */
-      (pError) => {
-        process.stderr.write(`${pError}\n`);
-      }
-      /* c8 ignore stop */
+  const svg = await streamToString(pInStream);
+
+  const result = html
+    .replace("{{ cruiser-style }}", css)
+    .replace(
+      "{{ cruiser-svg }}",
+      svg.replace(/ xlink:href=/g, ` target="_blank" xlink:href=`)
     )
-    .on("data", (pChunk) => {
-      pOutStream.write(pChunk);
-    });
-}
+    .replace("{{ canvas-handler }}", script);
+
+  pOutStream.write(result);
+};
 
 module.exports = (pInStream, pOutStream) => wrap(pInStream, pOutStream);
