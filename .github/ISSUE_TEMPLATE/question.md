@@ -1,14 +1,10 @@
 ---
-name: Other
-about: Stuff not a bug report, feature request or question
-title: "Ehm: ..."
+name: Question
+about: Questions
+title: "Question: ..."
 ---
 
 <!--- Provide a general summary of the issue in the Title above --->
-
-<!--- For feature requests, bug reports and questions please use their
-      respective templates
-  --->
 
 ### Summary
 
@@ -23,7 +19,7 @@ title: "Ehm: ..."
 
 ### Environment
 
-<!--- Include as many details about the environment relevant for this issue.
+<!--- Include as many details about the environment - when relevant for this issue.
   --->
 
 - Version used:

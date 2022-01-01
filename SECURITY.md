@@ -9,8 +9,8 @@ reflected in the _master_ branch) with security updates.
 
 If you think you have found a vulnerability, please report responsibly. Don't
 create GitHub issues for security issues. Instead, please send an email to
-sverweij@yandex.com and/ or a direct message (DM) to @depcruise on twitter and
-we'll look into it as soon as we can.
+sverweij@yandex.com and/ or a direct message (DM) to [@mcmeadow](https://twitter.com/mcmeadow)
+on twitter and we'll look into it as soon as we can.
 
 We appreciate any responsible disclosure of vulnerabilities that might impact
 the integrity of our platforms and users. While we do not offer any bounties
