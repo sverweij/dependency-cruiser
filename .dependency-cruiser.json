@@ -158,12 +158,12 @@
       }
     },
     {
-      "name": "only-try-require-exotic",
+      "name": "only-known-exotic",
       "severity": "error",
-      "comment": "The only 'exotic' require allowed is tryRequire",
+      "comment": "The only 'exotic' requires allowed are tryRequire and requireJSON",
       "from": {},
       "to": {
-        "exoticRequireNot": "^tryRequire$",
+        "exoticRequireNot": "^(tryRequire|requireJSON)$",
         "exoticallyRequired": true
       }
     },
@@ -311,7 +311,7 @@
         // ".svelte"
       ]
     },
-    "exoticRequireStrings": ["tryRequire"],
+    "exoticRequireStrings": ["tryRequire", "requireJSON"],
     "reporterOptions": {
       "archi": {
         "collapsePattern": ["^(src|test)/[^/]+", "^bin/", "node_modules/[^/]+"]
