@@ -3,9 +3,19 @@
   "extends": "../.dependency-cruiser.json",
   "forbidden": [
     {
+      "name": "folder-SDP",
+      "scope": "folder",
+      "severity": "info",
+      "comment": "This folder dependency violates the 'stable dependencies' principle as it depends on a folder that is likely to be more prone to changes.",
+      "from": {},
+      "to": {
+        "moreUnstable": true
+      }
+    },
+    {
       "name": "SDP",
       "severity": "info",
-      "comment": "This module violates the 'stable dependencies' principle; it depends on a module that is likely to be more prone to changes than it is itself. Consider refactoring. ",
+      "comment": "This dependency violates the 'stable dependencies' principle; it depends on a module that is likely to be more prone to changes than it is itself. Consider refactoring. ",
       "from": {
         "pathNot": "^test/"
       },

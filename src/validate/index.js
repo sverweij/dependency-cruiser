@@ -2,6 +2,7 @@ const _has = require("lodash/has");
 const matchModuleRule = require("./match-module-rule");
 const matchDependencyRule = require("./match-dependency-rule");
 const violatesRequiredRule = require("./violates-required-rule");
+const matchFolderRule = require("./match-folder-dependency-rule");
 
 function compareSeverity(pFirst, pSecond) {
   const lSeverity2Int = {
@@ -81,31 +82,33 @@ function validateAgainstRules(pRuleSet, pFrom, pTo, pMatchModule) {
   return lReturnValue;
 }
 
-/**
- * If pValidate equals true, validates the pFrom and pTo
- * dependency pair against the given ruleset pRuleSet
- *
- * @param  {import("../../types/rule-set").IFlattenedRuleSet} pRuleSet
- *    a ruleset (adhering to  [the ruleset schema](jsonschema.json))
- * @param  {import("../../types/cruise-result").IModule} pFrom
- *    The from part of the dependency
- * @param  {import("../../types/cruise-result").IModule} pTo
- *    The 'to' part of the dependency
- * @return {any}           an object with as attributes:
- *                            - valid: (boolean) true if the relation
- *                              between pTo and pFalse is valid (as far as the
- *                              given ruleset is concerend). false in all other
- *                              cases.
- *                            - rule (only when the relation between pFrom and
- *                              pTo was false):
- *                              - name: the name (from the ruleset) of the
- *                                  violated rule
- *                              - severity: the severity of that rule - as per
- *                                  the ruleset
- */
 module.exports = {
   module: (pRuleSet, pModule) =>
     validateAgainstRules(pRuleSet, pModule, {}, matchModuleRule),
+  /**
+   * Validates the pFrom and pTo dependency pair against the given
+   * ruleset pRuleSet
+   *
+   * @param  {import("../../types/rule-set").IFlattenedRuleSet} pRuleSet
+   *    a ruleset (adhering to  [the ruleset schema](jsonschema.json))
+   * @param  {import("../../types/cruise-result").IModule} pFrom
+   *    The from part of the dependency
+   * @param  {import("../../types/cruise-result").IModule} pTo
+   *    The 'to' part of the dependency
+   * @return {any}           an object with as attributes:
+   *                            - valid: (boolean) true if the relation
+   *                              between pTo and pFalse is valid (as far as the
+   *                              given ruleset is concerend). false in all other
+   *                              cases.
+   *                            - rule (only when the relation between pFrom and
+   *                              pTo was false):
+   *                              - name: the name (from the ruleset) of the
+   *                                  violated rule
+   *                              - severity: the severity of that rule - as per
+   *                                  the ruleset
+   */
   dependency: (pRuleSet, pFrom, pTo) =>
     validateAgainstRules(pRuleSet, pFrom, pTo, matchDependencyRule),
+  folder: (pRuleSet, pFromFolder, pToFolder) =>
+    validateAgainstRules(pRuleSet, pFromFolder, pToFolder, matchFolderRule),
 };

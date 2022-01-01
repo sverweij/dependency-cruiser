@@ -1,0 +1,810 @@
+[
+  {
+    "title": "folder rule",
+    "input": {
+      "fileName": "test/main/fixtures/cruise-reporterless/folder",
+      "options": {
+        "ruleSet": {
+          "forbidden": [
+            {
+              "name": "sdp",
+              "scope": "folder",
+              "from": {},
+              "to": {
+                "moreUnstable": true
+              }
+            }
+          ]
+        }
+      }
+    },
+    "expected": [
+      {
+        "source": "test/main/fixtures/cruise-reporterless/folder/stable/index.js",
+        "dependencies": [
+          {
+            "module": "../unstable/index.js",
+            "moduleSystem": "cjs",
+            "dynamic": false,
+            "exoticallyRequired": false,
+            "resolved": "test/main/fixtures/cruise-reporterless/folder/unstable/index.js",
+            "coreModule": false,
+            "followable": true,
+            "couldNotResolve": false,
+            "dependencyTypes": ["local"],
+            "matchesDoNotFollow": false,
+            "circular": false,
+            "instability": 0.875,
+            "valid": true
+          }
+        ],
+        "dependents": [],
+        "orphan": false,
+        "instability": 1,
+        "valid": true
+      },
+      {
+        "source": "test/main/fixtures/cruise-reporterless/folder/unstable/index.js",
+        "dependencies": [
+          {
+            "module": "../stable/utl",
+            "moduleSystem": "cjs",
+            "dynamic": false,
+            "exoticallyRequired": false,
+            "resolved": "test/main/fixtures/cruise-reporterless/folder/stable/utl.js",
+            "coreModule": false,
+            "followable": true,
+            "couldNotResolve": false,
+            "dependencyTypes": ["local"],
+            "matchesDoNotFollow": false,
+            "circular": false,
+            "instability": 0,
+            "valid": true
+          },
+          {
+            "module": "aap",
+            "moduleSystem": "cjs",
+            "dynamic": false,
+            "exoticallyRequired": false,
+            "resolved": "aap",
+            "coreModule": false,
+            "followable": false,
+            "couldNotResolve": true,
+            "dependencyTypes": ["unknown"],
+            "matchesDoNotFollow": false,
+            "circular": false,
+            "instability": 0,
+            "valid": true
+          },
+          {
+            "module": "jet",
+            "moduleSystem": "cjs",
+            "dynamic": false,
+            "exoticallyRequired": false,
+            "resolved": "jet",
+            "coreModule": false,
+            "followable": false,
+            "couldNotResolve": true,
+            "dependencyTypes": ["unknown"],
+            "matchesDoNotFollow": false,
+            "circular": false,
+            "instability": 0,
+            "valid": true
+          },
+          {
+            "module": "mies",
+            "moduleSystem": "cjs",
+            "dynamic": false,
+            "exoticallyRequired": false,
+            "resolved": "mies",
+            "coreModule": false,
+            "followable": false,
+            "couldNotResolve": true,
+            "dependencyTypes": ["unknown"],
+            "matchesDoNotFollow": false,
+            "circular": false,
+            "instability": 0,
+            "valid": true
+          },
+          {
+            "module": "noot",
+            "moduleSystem": "cjs",
+            "dynamic": false,
+            "exoticallyRequired": false,
+            "resolved": "noot",
+            "coreModule": false,
+            "followable": false,
+            "couldNotResolve": true,
+            "dependencyTypes": ["unknown"],
+            "matchesDoNotFollow": false,
+            "circular": false,
+            "instability": 0,
+            "valid": true
+          },
+          {
+            "module": "wim",
+            "moduleSystem": "cjs",
+            "dynamic": false,
+            "exoticallyRequired": false,
+            "resolved": "wim",
+            "coreModule": false,
+            "followable": false,
+            "couldNotResolve": true,
+            "dependencyTypes": ["unknown"],
+            "matchesDoNotFollow": false,
+            "circular": false,
+            "instability": 0,
+            "valid": true
+          },
+          {
+            "module": "zus",
+            "moduleSystem": "cjs",
+            "dynamic": false,
+            "exoticallyRequired": false,
+            "resolved": "zus",
+            "coreModule": false,
+            "followable": false,
+            "couldNotResolve": true,
+            "dependencyTypes": ["unknown"],
+            "matchesDoNotFollow": false,
+            "circular": false,
+            "instability": 0,
+            "valid": true
+          }
+        ],
+        "dependents": [
+          "test/main/fixtures/cruise-reporterless/folder/stable/index.js"
+        ],
+        "orphan": false,
+        "instability": 0.875,
+        "valid": true
+      },
+      {
+        "source": "aap",
+        "followable": false,
+        "coreModule": false,
+        "couldNotResolve": true,
+        "matchesDoNotFollow": false,
+        "dependencyTypes": ["unknown"],
+        "dependencies": [],
+        "dependents": [
+          "test/main/fixtures/cruise-reporterless/folder/unstable/index.js"
+        ],
+        "orphan": false,
+        "valid": true
+      },
+      {
+        "source": "jet",
+        "followable": false,
+        "coreModule": false,
+        "couldNotResolve": true,
+        "matchesDoNotFollow": false,
+        "dependencyTypes": ["unknown"],
+        "dependencies": [],
+        "dependents": [
+          "test/main/fixtures/cruise-reporterless/folder/unstable/index.js"
+        ],
+        "orphan": false,
+        "valid": true
+      },
+      {
+        "source": "mies",
+        "followable": false,
+        "coreModule": false,
+        "couldNotResolve": true,
+        "matchesDoNotFollow": false,
+        "dependencyTypes": ["unknown"],
+        "dependencies": [],
+        "dependents": [
+          "test/main/fixtures/cruise-reporterless/folder/unstable/index.js"
+        ],
+        "orphan": false,
+        "valid": true
+      },
+      {
+        "source": "noot",
+        "followable": false,
+        "coreModule": false,
+        "couldNotResolve": true,
+        "matchesDoNotFollow": false,
+        "dependencyTypes": ["unknown"],
+        "dependencies": [],
+        "dependents": [
+          "test/main/fixtures/cruise-reporterless/folder/unstable/index.js"
+        ],
+        "orphan": false,
+        "valid": true
+      },
+      {
+        "source": "wim",
+        "followable": false,
+        "coreModule": false,
+        "couldNotResolve": true,
+        "matchesDoNotFollow": false,
+        "dependencyTypes": ["unknown"],
+        "dependencies": [],
+        "dependents": [
+          "test/main/fixtures/cruise-reporterless/folder/unstable/index.js"
+        ],
+        "orphan": false,
+        "valid": true
+      },
+      {
+        "source": "zus",
+        "followable": false,
+        "coreModule": false,
+        "couldNotResolve": true,
+        "matchesDoNotFollow": false,
+        "dependencyTypes": ["unknown"],
+        "dependencies": [],
+        "dependents": [
+          "test/main/fixtures/cruise-reporterless/folder/unstable/index.js"
+        ],
+        "orphan": false,
+        "valid": true
+      },
+      {
+        "source": "test/main/fixtures/cruise-reporterless/folder/stable/utl.js",
+        "dependencies": [],
+        "dependents": [
+          "test/main/fixtures/cruise-reporterless/folder/unstable/index.js"
+        ],
+        "orphan": false,
+        "instability": 0,
+        "valid": true
+      }
+    ],
+    "folders": [
+      {
+        "name": "test",
+        "dependencies": [
+          {
+            "name": "aap",
+            "instability": 0,
+            "valid": true
+          },
+          {
+            "name": "jet",
+            "instability": 0,
+            "valid": true
+          },
+          {
+            "name": "mies",
+            "instability": 0,
+            "valid": true
+          },
+          {
+            "name": "noot",
+            "instability": 0,
+            "valid": true
+          },
+          {
+            "name": "wim",
+            "instability": 0,
+            "valid": true
+          },
+          {
+            "name": "zus",
+            "instability": 0,
+            "valid": true
+          }
+        ],
+        "dependents": [],
+        "moduleCount": 3,
+        "afferentCouplings": 0,
+        "efferentCouplings": 6,
+        "instability": 1
+      },
+      {
+        "name": "test/main",
+        "dependencies": [
+          {
+            "name": "aap",
+            "instability": 0,
+            "valid": true
+          },
+          {
+            "name": "jet",
+            "instability": 0,
+            "valid": true
+          },
+          {
+            "name": "mies",
+            "instability": 0,
+            "valid": true
+          },
+          {
+            "name": "noot",
+            "instability": 0,
+            "valid": true
+          },
+          {
+            "name": "wim",
+            "instability": 0,
+            "valid": true
+          },
+          {
+            "name": "zus",
+            "instability": 0,
+            "valid": true
+          }
+        ],
+        "dependents": [],
+        "moduleCount": 3,
+        "afferentCouplings": 0,
+        "efferentCouplings": 6,
+        "instability": 1
+      },
+      {
+        "name": "test/main/fixtures",
+        "dependencies": [
+          {
+            "name": "aap",
+            "instability": 0,
+            "valid": true
+          },
+          {
+            "name": "jet",
+            "instability": 0,
+            "valid": true
+          },
+          {
+            "name": "mies",
+            "instability": 0,
+            "valid": true
+          },
+          {
+            "name": "noot",
+            "instability": 0,
+            "valid": true
+          },
+          {
+            "name": "wim",
+            "instability": 0,
+            "valid": true
+          },
+          {
+            "name": "zus",
+            "instability": 0,
+            "valid": true
+          }
+        ],
+        "dependents": [],
+        "moduleCount": 3,
+        "afferentCouplings": 0,
+        "efferentCouplings": 6,
+        "instability": 1
+      },
+      {
+        "name": "test/main/fixtures/cruise-reporterless",
+        "dependencies": [
+          {
+            "name": "aap",
+            "instability": 0,
+            "valid": true
+          },
+          {
+            "name": "jet",
+            "instability": 0,
+            "valid": true
+          },
+          {
+            "name": "mies",
+            "instability": 0,
+            "valid": true
+          },
+          {
+            "name": "noot",
+            "instability": 0,
+            "valid": true
+          },
+          {
+            "name": "wim",
+            "instability": 0,
+            "valid": true
+          },
+          {
+            "name": "zus",
+            "instability": 0,
+            "valid": true
+          }
+        ],
+        "dependents": [],
+        "moduleCount": 3,
+        "afferentCouplings": 0,
+        "efferentCouplings": 6,
+        "instability": 1
+      },
+      {
+        "name": "test/main/fixtures/cruise-reporterless/folder",
+        "dependencies": [
+          {
+            "name": "aap",
+            "instability": 0,
+            "valid": true
+          },
+          {
+            "name": "jet",
+            "instability": 0,
+            "valid": true
+          },
+          {
+            "name": "mies",
+            "instability": 0,
+            "valid": true
+          },
+          {
+            "name": "noot",
+            "instability": 0,
+            "valid": true
+          },
+          {
+            "name": "wim",
+            "instability": 0,
+            "valid": true
+          },
+          {
+            "name": "zus",
+            "instability": 0,
+            "valid": true
+          }
+        ],
+        "dependents": [],
+        "moduleCount": 3,
+        "afferentCouplings": 0,
+        "efferentCouplings": 6,
+        "instability": 1
+      },
+      {
+        "name": "test/main/fixtures/cruise-reporterless/folder/stable",
+        "dependencies": [
+          {
+            "name": "test/main/fixtures/cruise-reporterless/folder/unstable",
+            "instability": 0.875,
+            "valid": false,
+            "rules": [
+              {
+                "severity": "warn",
+                "name": "sdp"
+              }
+            ]
+          }
+        ],
+        "dependents": [
+          {
+            "name": "test/main/fixtures/cruise-reporterless/folder/unstable"
+          }
+        ],
+        "moduleCount": 2,
+        "afferentCouplings": 1,
+        "efferentCouplings": 1,
+        "instability": 0.5
+      },
+      {
+        "name": "test/main/fixtures/cruise-reporterless/folder/unstable",
+        "dependencies": [
+          {
+            "name": "test/main/fixtures/cruise-reporterless/folder/stable",
+            "instability": 0.5,
+            "valid": true
+          },
+          {
+            "name": "aap",
+            "instability": 0,
+            "valid": true
+          },
+          {
+            "name": "jet",
+            "instability": 0,
+            "valid": true
+          },
+          {
+            "name": "mies",
+            "instability": 0,
+            "valid": true
+          },
+          {
+            "name": "noot",
+            "instability": 0,
+            "valid": true
+          },
+          {
+            "name": "wim",
+            "instability": 0,
+            "valid": true
+          },
+          {
+            "name": "zus",
+            "instability": 0,
+            "valid": true
+          }
+        ],
+        "dependents": [
+          {
+            "name": "test/main/fixtures/cruise-reporterless/folder/stable"
+          }
+        ],
+        "moduleCount": 1,
+        "afferentCouplings": 1,
+        "efferentCouplings": 7,
+        "instability": 0.875
+      }
+    ],
+    "expectedFolders": [
+      {
+        "name": "test",
+        "dependencies": [
+          {
+            "name": "aap",
+            "instability": 0,
+            "valid": true
+          },
+          {
+            "name": "jet",
+            "instability": 0,
+            "valid": true
+          },
+          {
+            "name": "mies",
+            "instability": 0,
+            "valid": true
+          },
+          {
+            "name": "noot",
+            "instability": 0,
+            "valid": true
+          },
+          {
+            "name": "wim",
+            "instability": 0,
+            "valid": true
+          },
+          {
+            "name": "zus",
+            "instability": 0,
+            "valid": true
+          }
+        ],
+        "dependents": [],
+        "moduleCount": 3,
+        "afferentCouplings": 0,
+        "efferentCouplings": 6,
+        "instability": 1
+      },
+      {
+        "name": "test/main",
+        "dependencies": [
+          {
+            "name": "aap",
+            "instability": 0,
+            "valid": true
+          },
+          {
+            "name": "jet",
+            "instability": 0,
+            "valid": true
+          },
+          {
+            "name": "mies",
+            "instability": 0,
+            "valid": true
+          },
+          {
+            "name": "noot",
+            "instability": 0,
+            "valid": true
+          },
+          {
+            "name": "wim",
+            "instability": 0,
+            "valid": true
+          },
+          {
+            "name": "zus",
+            "instability": 0,
+            "valid": true
+          }
+        ],
+        "dependents": [],
+        "moduleCount": 3,
+        "afferentCouplings": 0,
+        "efferentCouplings": 6,
+        "instability": 1
+      },
+      {
+        "name": "test/main/fixtures",
+        "dependencies": [
+          {
+            "name": "aap",
+            "instability": 0,
+            "valid": true
+          },
+          {
+            "name": "jet",
+            "instability": 0,
+            "valid": true
+          },
+          {
+            "name": "mies",
+            "instability": 0,
+            "valid": true
+          },
+          {
+            "name": "noot",
+            "instability": 0,
+            "valid": true
+          },
+          {
+            "name": "wim",
+            "instability": 0,
+            "valid": true
+          },
+          {
+            "name": "zus",
+            "instability": 0,
+            "valid": true
+          }
+        ],
+        "dependents": [],
+        "moduleCount": 3,
+        "afferentCouplings": 0,
+        "efferentCouplings": 6,
+        "instability": 1
+      },
+      {
+        "name": "test/main/fixtures/cruise-reporterless",
+        "dependencies": [
+          {
+            "name": "aap",
+            "instability": 0,
+            "valid": true
+          },
+          {
+            "name": "jet",
+            "instability": 0,
+            "valid": true
+          },
+          {
+            "name": "mies",
+            "instability": 0,
+            "valid": true
+          },
+          {
+            "name": "noot",
+            "instability": 0,
+            "valid": true
+          },
+          {
+            "name": "wim",
+            "instability": 0,
+            "valid": true
+          },
+          {
+            "name": "zus",
+            "instability": 0,
+            "valid": true
+          }
+        ],
+        "dependents": [],
+        "moduleCount": 3,
+        "afferentCouplings": 0,
+        "efferentCouplings": 6,
+        "instability": 1
+      },
+      {
+        "name": "test/main/fixtures/cruise-reporterless/folder",
+        "dependencies": [
+          {
+            "name": "aap",
+            "instability": 0,
+            "valid": true
+          },
+          {
+            "name": "jet",
+            "instability": 0,
+            "valid": true
+          },
+          {
+            "name": "mies",
+            "instability": 0,
+            "valid": true
+          },
+          {
+            "name": "noot",
+            "instability": 0,
+            "valid": true
+          },
+          {
+            "name": "wim",
+            "instability": 0,
+            "valid": true
+          },
+          {
+            "name": "zus",
+            "instability": 0,
+            "valid": true
+          }
+        ],
+        "dependents": [],
+        "moduleCount": 3,
+        "afferentCouplings": 0,
+        "efferentCouplings": 6,
+        "instability": 1
+      },
+      {
+        "name": "test/main/fixtures/cruise-reporterless/folder/stable",
+        "dependencies": [
+          {
+            "name": "test/main/fixtures/cruise-reporterless/folder/unstable",
+            "instability": 0.875,
+            "valid": false,
+            "rules": [
+              {
+                "severity": "warn",
+                "name": "sdp"
+              }
+            ]
+          }
+        ],
+        "dependents": [
+          {
+            "name": "test/main/fixtures/cruise-reporterless/folder/unstable"
+          }
+        ],
+        "moduleCount": 2,
+        "afferentCouplings": 1,
+        "efferentCouplings": 1,
+        "instability": 0.5
+      },
+      {
+        "name": "test/main/fixtures/cruise-reporterless/folder/unstable",
+        "dependencies": [
+          {
+            "name": "test/main/fixtures/cruise-reporterless/folder/stable",
+            "instability": 0.5,
+            "valid": true
+          },
+          {
+            "name": "aap",
+            "instability": 0,
+            "valid": true
+          },
+          {
+            "name": "jet",
+            "instability": 0,
+            "valid": true
+          },
+          {
+            "name": "mies",
+            "instability": 0,
+            "valid": true
+          },
+          {
+            "name": "noot",
+            "instability": 0,
+            "valid": true
+          },
+          {
+            "name": "wim",
+            "instability": 0,
+            "valid": true
+          },
+          {
+            "name": "zus",
+            "instability": 0,
+            "valid": true
+          }
+        ],
+        "dependents": [
+          {
+            "name": "test/main/fixtures/cruise-reporterless/folder/stable"
+          }
+        ],
+        "moduleCount": 1,
+        "afferentCouplings": 1,
+        "efferentCouplings": 7,
+        "instability": 0.875
+      }
+    ]
+  }
+]

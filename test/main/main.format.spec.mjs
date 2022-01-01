@@ -18,7 +18,10 @@ const MINIMAL_RESULT = {
     ignore: 0,
     totalCruised: 0,
     totalDependenciesCruised: 0,
-    optionsUsed: {},
+    optionsUsed: {
+      args: "",
+      outputType: "json",
+    },
   },
 };
 

@@ -182,4 +182,76 @@ describe("enrich/summarize", () => {
       warn: 0,
     });
   });
+
+  it("violating something with moreUnstable & instabilities", () => {
+    const lResult = summarize(
+      [
+        {
+          source: "violation.js",
+          instability: 0.42,
+          dependencies: [
+            {
+              resolved: "dont-touch-this.js",
+              instability: 1,
+              valid: false,
+              rules: [
+                {
+                  name: "a-rule",
+                  severity: "warn",
+                },
+              ],
+            },
+          ],
+        },
+      ],
+      {
+        ruleSet: {
+          forbidden: [{ name: "a-rule", from: {}, to: { moreUnstable: true } }],
+        },
+      },
+      []
+    );
+
+    expect(lResult).to.deep.equal({
+      violations: [
+        {
+          type: "instability",
+          from: "violation.js",
+          to: "dont-touch-this.js",
+          rule: {
+            name: "a-rule",
+            severity: "warn",
+          },
+          metrics: {
+            from: {
+              instability: 0.42,
+            },
+            to: {
+              instability: 1,
+            },
+          },
+        },
+      ],
+      info: 0,
+      warn: 1,
+      error: 0,
+      ignore: 0,
+      totalDependenciesCruised: 1,
+      totalCruised: 1,
+      optionsUsed: {
+        args: "",
+      },
+      ruleSetUsed: {
+        forbidden: [
+          {
+            from: {},
+            name: "a-rule",
+            to: {
+              moreUnstable: true,
+            },
+          },
+        ],
+      },
+    });
+  });
 });

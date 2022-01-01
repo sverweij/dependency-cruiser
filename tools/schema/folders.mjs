@@ -1,4 +1,5 @@
-// folders.mjsgit
+import ruleSummary from "./rule-summary.mjs";
+
 export default {
   definitions: {
     FoldersType: {
@@ -43,7 +44,7 @@ export default {
           description: "list of folders this module depends upon",
           items: {
             type: "object",
-            required: ["name"],
+            required: ["name", "valid"],
             additionalProperties: false,
             properties: {
               name: {
@@ -56,6 +57,20 @@ export default {
                   "the instability of the dependency (denormalized - this is " +
                   "a duplicate of the one found in the instability of the " +
                   "folder with the same name)",
+              },
+              valid: {
+                type: "boolean",
+                description:
+                  "'true' if this folder dependency violated a rule; 'false' in " +
+                  "all other cases. " +
+                  "The violated rule will be in the 'rules' object at the same level.",
+              },
+              rules: {
+                type: "array",
+                items: { $ref: "#/definitions/RuleSummaryType" },
+                description:
+                  "an array of rules violated by this dependency - left out if the dependency " +
+                  "is valid",
               },
             },
           },
@@ -93,5 +108,6 @@ export default {
         },
       },
     },
+    ...ruleSummary.definitions,
   },
 };
