@@ -317,7 +317,7 @@
         "collapsePattern": ["^(src|test)/[^/]+", "^bin/", "node_modules/[^/]+"]
       },
       "dot": {
-        "collapsePattern": ["^src/report/[^/]+"],
+        "collapsePattern": ["^src/report/[^/]+", "^src/enrich/derive/[^/]+"],
         "filters": {
           "includeOnly": { "path": "^(src|bin)" },
           "exclude": { "path": ["^src/meta\\.js$", "^src/utl/bus.+"] }

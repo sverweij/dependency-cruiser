@@ -25,10 +25,9 @@
     }
   ],
   "options": {
-    "includeOnly": "^(bin|src)",
+    "includeOnly": { "path": "^(bin|src)" },
     "reporterOptions": {
       "dot": {
-        "collapsePattern": ["^src/report/[^/]+"],
         "showMetrics": true,
         "theme": {
           "replace": false,
