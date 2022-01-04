@@ -1,6 +1,6 @@
 /* eslint-disable no-unused-expressions */
 import { expect } from "chai";
-import filterbank from "../../src/graph-utl/filterbank.js";
+import filterbank from "../../src/graph-utl/filterbank-modules.js";
 
 const MODULES = [
   {

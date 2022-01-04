@@ -6,12 +6,17 @@ function moduleMatchesFilter(pModule, pFilter) {
   return filenameMatchesPattern(pModule.source, pFilter.path);
 }
 
+function folderMatchesFilter(pFolder, pFilter) {
+  return filenameMatchesPattern(pFolder.name, pFilter.path);
+}
+
 function dependencyMatchesFilter(pDependency, pFilter) {
   return filenameMatchesPattern(pDependency.resolved, pFilter.path);
 }
 
 module.exports = {
   moduleMatchesFilter,
+  folderMatchesFilter,
   dependencyMatchesFilter,
   filenameMatchesPattern,
 };

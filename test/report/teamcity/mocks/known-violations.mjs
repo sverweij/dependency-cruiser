@@ -374,7 +374,7 @@ export default {
         "src/extract/resolve/get-manifest/merge-manifests.js",
         "src/main/options/normalize.js",
         "src/report/anon/index.js",
-        "src/graph-utl/filterbank.js",
+        "src/graph-utl/filterbank-modules.js",
         "src/graph-utl/consolidate-module-dependencies.js",
         "src/graph-utl/consolidate-modules.js",
         "src/cli/normalize-cli-options.js",
@@ -1734,7 +1734,7 @@ export default {
       ],
       dependents: [
         "src/enrich/enrich-modules.js",
-        "src/graph-utl/filterbank.js",
+        "src/graph-utl/filterbank-modules.js",
         "test/graph-utl/add-focus.spec.mjs",
       ],
       orphan: false,
@@ -1758,7 +1758,7 @@ export default {
       dependents: [
         "src/graph-utl/add-focus.js",
         "src/extract/gather-initial-sources.js",
-        "src/graph-utl/filterbank.js",
+        "src/graph-utl/filterbank-modules.js",
       ],
       orphan: false,
       reachable: [
@@ -7779,10 +7779,10 @@ export default {
       dependencies: [
         {
           dynamic: false,
-          module: "../../graph-utl/filterbank",
+          module: "../../graph-utl/filterbank-modules",
           moduleSystem: "cjs",
           exoticallyRequired: false,
-          resolved: "src/graph-utl/filterbank.js",
+          resolved: "src/graph-utl/filterbank-modules.js",
           coreModule: false,
           followable: true,
           couldNotResolve: false,
@@ -7955,7 +7955,7 @@ export default {
       valid: true,
     },
     {
-      source: "src/graph-utl/filterbank.js",
+      source: "src/graph-utl/filterbank-modules.js",
       dependencies: [
         {
           dynamic: false,
@@ -8004,7 +8004,7 @@ export default {
       dependents: [
         "src/report/dot/index.js",
         "src/main/report-wrap.js",
-        "test/graph-utl/filterbank.spec.mjs",
+        "test/graph-utl/filterbank-modules.spec.mjs",
       ],
       orphan: false,
       reachable: [
@@ -9667,10 +9667,10 @@ export default {
         },
         {
           dynamic: false,
-          module: "../graph-utl/filterbank",
+          module: "../graph-utl/filterbank-modules",
           moduleSystem: "cjs",
           exoticallyRequired: false,
-          resolved: "src/graph-utl/filterbank.js",
+          resolved: "src/graph-utl/filterbank-modules.js",
           coreModule: false,
           followable: true,
           couldNotResolve: false,
@@ -12633,7 +12633,7 @@ export default {
         "test/graph-utl/compare.violations.spec.mjs",
         "test/graph-utl/consolidate-to-folder.spec.mjs",
         "test/graph-utl/consolidate-to-pattern.spec.mjs",
-        "test/graph-utl/filterbank.spec.mjs",
+        "test/graph-utl/filterbank-modules.spec.mjs",
         "test/graph-utl/rule-set.spec.mjs",
         "test/main/files-and-dirs/normalize.spec.mjs",
         "test/main/main.cruise-reporterless.spec.mjs",
@@ -18401,14 +18401,14 @@ export default {
       valid: true,
     },
     {
-      source: "test/graph-utl/filterbank.spec.mjs",
+      source: "test/graph-utl/filterbank-modules.spec.mjs",
       dependencies: [
         {
           dynamic: false,
-          module: "../../src/graph-utl/filterbank.js",
+          module: "../../src/graph-utl/filterbank-modules.js",
           moduleSystem: "es6",
           exoticallyRequired: false,
-          resolved: "src/graph-utl/filterbank.js",
+          resolved: "src/graph-utl/filterbank-modules.js",
           coreModule: false,
           followable: true,
           couldNotResolve: false,

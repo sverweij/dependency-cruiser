@@ -1,6 +1,6 @@
 const Handlebars = require("handlebars/runtime");
 const _get = require("lodash/get");
-const filterbank = require("../../graph-utl/filterbank");
+const filterbank = require("../../graph-utl/filterbank-modules");
 const theming = require("./theming");
 const moduleUtl = require("./module-utl");
 const prepareFolderLevel = require("./prepare-folder-level");

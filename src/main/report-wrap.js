@@ -1,7 +1,8 @@
 const _get = require("lodash/get");
 const _has = require("lodash/has");
-const filterbank = require("../graph-utl/filterbank");
 const summarize = require("../enrich/summarize");
+const modulesFilterbank = require("../graph-utl/filterbank-modules");
+const foldersFilterbank = require("../graph-utl/filterbank-folders");
 const consolidateToPattern = require("../graph-utl/consolidate-to-pattern");
 const compare = require("../graph-utl/compare");
 const stripSelfTransitions = require("../graph-utl/strip-self-transitions");
@@ -14,7 +15,14 @@ const report = require("../report");
  * @returns {import('../../types/dependency-cruiser').ICruiseResult}
  */
 function reSummarizeResults(pResult, pFormatOptions) {
-  let lModules = filterbank.applyFilters(pResult.modules, pFormatOptions);
+  let lModules = modulesFilterbank.applyFilters(
+    pResult.modules,
+    pFormatOptions
+  );
+  let lFolders = foldersFilterbank.applyFilters(
+    pResult.folders,
+    pFormatOptions
+  );
 
   if (_has(pFormatOptions, "collapse")) {
     lModules = consolidateToPattern(lModules, pFormatOptions.collapse)
@@ -34,6 +42,7 @@ function reSummarizeResults(pResult, pFormatOptions) {
       ),
     },
     modules: lModules,
+    folders: lFolders,
   };
 }
 
