@@ -2,10 +2,10 @@
 import { expect } from "chai";
 import validators from "../../../src/cli/init-config/inquirer-validators.js";
 
-describe("cli/init-config/inquirer-validators - validateFileExistence", () => {
+describe("[U] cli/init-config/inquirer-validators - validateFileExistence", () => {
   const WORKING_DIR = process.cwd();
   const lFixturesDirectory =
-    "test/cli/init-config/fixtures/validate-file-existence";
+    "test/cli/init-config/__fixtures__/validate-file-existence";
 
   beforeEach("set up", () => {
     process.chdir(lFixturesDirectory);
@@ -33,9 +33,10 @@ describe("cli/init-config/inquirer-validators - validateFileExistence", () => {
   });
 });
 
-describe("cli/init-config/inquirer-validators - validateLocation", () => {
+describe("[U] cli/init-config/inquirer-validators - validateLocation", () => {
   const WORKING_DIR = process.cwd();
-  const lFixturesDirectory = "test/cli/fixtures/init-config/validate-location";
+  const lFixturesDirectory =
+    "test/cli/__fixtures__/init-config/validate-location";
 
   afterEach("tear down", () => {
     process.chdir(WORKING_DIR);

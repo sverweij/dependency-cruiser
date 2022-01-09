@@ -6,7 +6,7 @@ function compareFolders(pLeftFolder, pRightFolder) {
   return pLeftFolder.name.localeCompare(pRightFolder.name);
 }
 
-describe("enrich/derive/folders/aggregate-to-folders - folder stability metrics derivation", () => {
+describe("[U] enrich/derive/folders/aggregate-to-folders - folder stability metrics derivation", () => {
   it("no modules no metrics", () => {
     expect(aggregateToFolders([])).to.deep.equal([]);
   });

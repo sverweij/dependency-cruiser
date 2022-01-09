@@ -5,9 +5,9 @@ import { fileURLToPath } from "node:url";
 import { expect } from "chai";
 import io from "../../../src/cli/utl/io.js";
 
-describe("cli/utl/io", () => {
+describe("[U] cli/utl/io", () => {
   const OUTFILE = fileURLToPath(
-    new URL("./fixtures/empty.json", import.meta.url)
+    new URL("./__fixtures__/empty.json", import.meta.url)
   );
 
   it("getInStream(OUTFILE) yields a readable stream", () => {

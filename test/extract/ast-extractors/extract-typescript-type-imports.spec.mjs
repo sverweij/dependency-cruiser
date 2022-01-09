@@ -1,7 +1,7 @@
 import { expect } from "chai";
 import extractTypescript from "./extract-typescript.utl.mjs";
 
-describe("ast-extractors/extract-typescript - type imports", () => {
+describe("[U] ast-extractors/extract-typescript - type imports", () => {
   it("extracts type imports in const declarations", () => {
     expect(
       extractTypescript("const tiepetjes: import('./types').T;")

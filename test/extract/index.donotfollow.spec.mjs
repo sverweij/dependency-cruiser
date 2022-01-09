@@ -9,7 +9,7 @@ use(chaiJSONSchema);
 
 const requireJSON = createRequireJSON(import.meta.url);
 
-describe("extract/index - do not follow", () => {
+describe("[I] extract/index - do not follow", () => {
   it("do not follow - doNotFollow.path", () => {
     const lOptions = normalize.normalizeCruiseOptions({
       doNotFollow: {
@@ -23,12 +23,14 @@ describe("extract/index - do not follow", () => {
       lOptions
     );
     const lResult = extract(
-      ["./test/extract/fixtures/donotfollow/index.js"],
+      ["./test/extract/__mocks__/donotfollow/index.js"],
       lOptions,
       lResolveOptions
     );
 
-    expect(lResult).to.deep.equal(requireJSON("./fixtures/donotfollow.json"));
+    expect(lResult).to.deep.equal(
+      requireJSON("./__fixtures__/donotfollow.json")
+    );
   });
 
   it("do not follow - doNotFollow.dependencyTypes", () => {
@@ -44,13 +46,13 @@ describe("extract/index - do not follow", () => {
       lOptions
     );
     const lResult = extract(
-      ["./test/extract/fixtures/donotfollow-dependency-types/index.js"],
+      ["./test/extract/__mocks__/donotfollow-dependency-types/index.js"],
       lOptions,
       lResolveOptions
     );
 
     expect(lResult).to.deep.equal(
-      requireJSON("./fixtures/donotfollow-dependency-types.json")
+      requireJSON("./__fixtures__/donotfollow-dependency-types.json")
     );
   });
 });

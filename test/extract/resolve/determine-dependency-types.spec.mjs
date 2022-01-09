@@ -5,7 +5,7 @@ import determineDependencyTypes from "../../../src/extract/resolve/determine-dep
 
 const __dirname = fileURLToPath(new URL(".", import.meta.url));
 
-describe("extract/resolve/determineDependencyTypes - determine dependencyTypes", () => {
+describe("[U] extract/resolve/determineDependencyTypes - determine dependencyTypes", () => {
   it("sorts local dependencies into 'local'", () => {
     expect(
       determineDependencyTypes(

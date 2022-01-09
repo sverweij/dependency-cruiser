@@ -2,14 +2,16 @@ import { readFileSync } from "fs";
 import { fileURLToPath } from "url";
 import { expect } from "chai";
 import render from "../../../src/report/html/index.js";
-import deps from "./mocks/cjs-no-dependency-valid.mjs";
+import deps from "./__mocks__/cjs-no-dependency-valid.mjs";
 
 const elementFixture = readFileSync(
-  fileURLToPath(new URL("mocks/cjs-no-dependency-valid.html", import.meta.url)),
+  fileURLToPath(
+    new URL("__mocks__/cjs-no-dependency-valid.html", import.meta.url)
+  ),
   "utf8"
 );
 
-describe("report/html reporter", () => {
+describe("[I] report/html reporter", () => {
   it("renders html - modules in the root don't come in a cluster; and one module could not be resolved", () => {
     const lReturnValue = render(deps);
 

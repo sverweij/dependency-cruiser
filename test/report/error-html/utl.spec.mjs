@@ -7,7 +7,7 @@ function summaryHasMinimalAttributes(pResult) {
   expect(pResult).to.haveOwnProperty("violations");
 }
 
-describe("report/error-html/utl", () => {
+describe("[U] report/error-html/utl", () => {
   it("getFormattedAllowedRule - no allowed rule available returns empty array", () => {
     expect(utl.getFormattedAllowedRule({})).to.deep.equal([]);
   });

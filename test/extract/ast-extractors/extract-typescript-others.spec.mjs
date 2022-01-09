@@ -3,7 +3,7 @@ import { fileURLToPath } from "node:url";
 import { expect } from "chai";
 import extractTypescriptFromAST from "../../../src/extract/ast-extractors/extract-typescript-deps.js";
 
-describe("ast-extractors/extract-typescript - others", () => {
+describe("[U] ast-extractors/extract-typescript - others", () => {
   // see issue #167 - union types on tsc 2.8 and before don't deliver/
   // recognize union types - which made dependency-cruiser 4.27.1 choke
   // this ut ensures it won't regress
@@ -13,7 +13,10 @@ describe("ast-extractors/extract-typescript - others", () => {
         JSON.parse(
           readFileSync(
             fileURLToPath(
-              new URL("typescript2.8-union-types-ast.json", import.meta.url)
+              new URL(
+                "__mocks__/typescript2.8-union-types-ast.json",
+                import.meta.url
+              )
             ),
             "utf8"
           )

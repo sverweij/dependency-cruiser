@@ -3,11 +3,11 @@ import { expect } from "chai";
 import validate from "../../src/validate/index.js";
 import readRuleSet from "./readruleset.utl.mjs";
 
-describe("validate/index dependency - cycle viaNot", () => {
+describe("[I] validate/index dependency - cycle viaNot", () => {
   it("a => ba => bb => bc => a get flagged when none of them is in a viaNot", () => {
     expect(
       validate.dependency(
-        readRuleSet("./test/validate/fixtures/rules.cycle.via-not.json"),
+        readRuleSet("./test/validate/__mocks__/rules.cycle.via-not.json"),
         { source: "tmp/a.js" },
         {
           resolved: "tmp/ba.js",
@@ -24,7 +24,7 @@ describe("validate/index dependency - cycle viaNot", () => {
   it("a => aa => ab => ac => a doesn't get flagged when one of them is in a viaNot", () => {
     expect(
       validate.dependency(
-        readRuleSet("./test/validate/fixtures/rules.cycle.via-not.json"),
+        readRuleSet("./test/validate/__mocks__/rules.cycle.via-not.json"),
         { source: "tmp/a.js" },
         {
           resolved: "tmp/aa.js",
@@ -38,11 +38,11 @@ describe("validate/index dependency - cycle viaNot", () => {
   });
 });
 
-describe("validate/index dependency - cycle via", () => {
+describe("[I] validate/index dependency - cycle via", () => {
   it("a => ba => bb => bc => a doesn't get flagged when none of them is in a via", () => {
     expect(
       validate.dependency(
-        readRuleSet("./test/validate/fixtures/rules.cycle.via.json"),
+        readRuleSet("./test/validate/__mocks__/rules.cycle.via.json"),
         { source: "tmp/a.js" },
         {
           resolved: "tmp/ba.js",
@@ -58,7 +58,7 @@ describe("validate/index dependency - cycle via", () => {
   it("a => aa => ab => ac => a get flagged when one of them is in a via", () => {
     expect(
       validate.dependency(
-        readRuleSet("./test/validate/fixtures/rules.cycle.via.json"),
+        readRuleSet("./test/validate/__mocks__/rules.cycle.via.json"),
         { source: "tmp/a.js" },
         {
           resolved: "tmp/aa.js",

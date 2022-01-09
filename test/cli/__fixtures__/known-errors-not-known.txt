@@ -1,0 +1,6 @@
+
+  [31merror[39m no-forbidden-fruit: [1mtest/cli/__fixtures__/known-violations/src/mies.js[22m → [1mtest/cli/__fixtures__/known-violations/src/forbidden-fruit/peach.js[22m
+  [31merror[39m no-forbidden-fruit: [1mtest/cli/__fixtures__/known-violations/src/aap.js[22m → [1mtest/cli/__fixtures__/known-violations/src/forbidden-fruit/apple.js[22m
+[31m[39m
+[31m✖ 2 dependency violations (2 errors, 0 warnings). 6 modules, 3 dependencies cruised.[39m
+[31m[39m

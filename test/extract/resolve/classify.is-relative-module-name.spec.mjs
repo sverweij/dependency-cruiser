@@ -1,7 +1,7 @@
 import { expect } from "chai";
 import { isRelativeModuleName } from "../../../src/extract/resolve/module-classifiers.js";
 
-describe("extract/resolve/module-classifiers - isRelativeModuleName", () => {
+describe("[U] extract/resolve/module-classifiers - isRelativeModuleName", () => {
   it("throws an error when passed nothing", () => {
     expect(() => {
       isRelativeModuleName();

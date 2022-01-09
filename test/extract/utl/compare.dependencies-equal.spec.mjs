@@ -1,7 +1,7 @@
 import { expect } from "chai";
 import { dependenciesEqual } from "../../../src/extract/utl/compare.js";
 
-describe("extract/utl/compare - dependencyEquals", () => {
+describe("[U] extract/utl/compare - dependencyEquals", () => {
   it("two empty dependencies are equal", () => {
     expect(dependenciesEqual({})({})).to.equal(true);
   });

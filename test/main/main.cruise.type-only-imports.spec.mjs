@@ -6,16 +6,16 @@ import { createRequireJSON } from "../backwards.utl.mjs";
 
 const requireJSON = createRequireJSON(import.meta.url);
 
-const output = requireJSON("./fixtures/type-only-imports/output.json");
+const output = requireJSON("./__mocks__/type-only-imports/output.json");
 const outputWithRules = requireJSON(
-  "./fixtures/type-only-imports/output-with-rules.json"
+  "./__mocks__/type-only-imports/output-with-rules.json"
 );
 
 use(chaiJSONSchema);
 
 const WORKING_DIRECTORY = process.cwd();
 
-describe("main.cruise - explicitly type only imports", () => {
+describe("[E] main.cruise - explicitly type only imports", () => {
   beforeEach("reset current wd", () => {
     process.chdir(WORKING_DIRECTORY);
   });
@@ -25,7 +25,7 @@ describe("main.cruise - explicitly type only imports", () => {
   });
 
   it("classifies type only imports as type only in addition to their regular type", () => {
-    process.chdir("test/main/fixtures/type-only-imports");
+    process.chdir("test/main/__mocks__/type-only-imports");
 
     const lResult = cruise(
       ["src"],
@@ -40,7 +40,7 @@ describe("main.cruise - explicitly type only imports", () => {
   });
 
   it("flags type onlye imports when forbidden", () => {
-    process.chdir("test/main/fixtures/type-only-imports");
+    process.chdir("test/main/__mocks__/type-only-imports");
 
     const lResult = cruise(
       ["src"],

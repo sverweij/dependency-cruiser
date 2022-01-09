@@ -11,9 +11,9 @@ import getDependencies from "../../src/extract/get-dependencies.js";
 const __dirname = fileURLToPath(new URL(".", import.meta.url));
 const requireJSON = createRequireJSON(import.meta.url);
 
-const cjsFixtures = requireJSON("./fixtures/cjs.json");
+const cjsFixtures = requireJSON("./__fixtures__/cjs.json");
 
-let symlinkDirectory = join(__dirname, "fixtures", "symlinked");
+let symlinkDirectory = join(__dirname, "__mocks__", "symlinked");
 
 function runFixture(pFixture, pParser = "acorn") {
   const lOptions = {
@@ -47,7 +47,7 @@ function runFixture(pFixture, pParser = "acorn") {
 /* eslint-disable mocha/no-top-level-hooks */
 before((pCallback) => {
   symlinkDir(
-    join(__dirname, "fixtures", "symlinkTarget"),
+    join(__dirname, "__mocks__", "symlinkTarget"),
     symlinkDirectory
   ).then(
     () => pCallback(),
@@ -63,13 +63,13 @@ after(() => {
   }
 });
 
-describe("extract/getDependencies - CommonJS - ", () => {
+describe("[I] extract/getDependencies - CommonJS - ", () => {
   cjsFixtures.forEach((pFixture) => runFixture(pFixture, "acorn"));
   cjsFixtures.forEach((pFixture) => runFixture(pFixture, "swc"));
   cjsFixtures.forEach((pFixture) => runFixture(pFixture, "tsc"));
 });
 
-describe("extract/getDependencies - CommonJS - with bangs", () => {
+describe("[I] extract/getDependencies - CommonJS - with bangs", () => {
   it("strips the inline loader prefix from the module name when resolving", () => {
     const lOptions = normalizeCruiseOptions({ moduleSystems: ["cjs"] });
     const lResolveOptions = normalizeResolveOptions(
@@ -79,13 +79,13 @@ describe("extract/getDependencies - CommonJS - with bangs", () => {
 
     expect(
       getDependencies(
-        "test/extract/fixtures/cjs-bangs/index.js",
+        "test/extract/__mocks__/cjs-bangs/index.js",
         lOptions,
         lResolveOptions
       )
     ).to.deep.equal([
       {
-        resolved: "test/extract/fixtures/cjs-bangs/dependency.js",
+        resolved: "test/extract/__mocks__/cjs-bangs/dependency.js",
         coreModule: false,
         dependencyTypes: ["local"],
         dynamic: false,
@@ -108,13 +108,13 @@ describe("extract/getDependencies - CommonJS - with bangs", () => {
 
     expect(
       getDependencies(
-        "test/extract/fixtures/cjs-multi-bangs/index.js",
+        "test/extract/__mocks__/cjs-multi-bangs/index.js",
         lOptions,
         lResolveOptions
       )
     ).to.deep.equal([
       {
-        resolved: "test/extract/fixtures/cjs-multi-bangs/dependency.js",
+        resolved: "test/extract/__mocks__/cjs-multi-bangs/dependency.js",
         coreModule: false,
         dependencyTypes: ["local"],
         dynamic: false,

@@ -2,14 +2,14 @@ import { readFileSync } from "fs";
 import { fileURLToPath } from "url";
 import { expect } from "chai";
 import render from "../../../src/report/teamcity.js";
-import okdeps from "./mocks/everything-fine.mjs";
-import moduleErrs from "./mocks/module-errors.mjs";
-import requiredErrs from "./mocks/required-errors.mjs";
-import circulars from "./mocks/circular-deps.mjs";
-import vias from "./mocks/via-deps.mjs";
-import unsupportedErrorLevels from "./mocks/unsupported-severity.mjs";
-import knownViolations from "./mocks/known-violations.mjs";
-import instabilities from "./mocks/instabilities.mjs";
+import okdeps from "./__mocks__/everything-fine.mjs";
+import moduleErrs from "./__mocks__/module-errors.mjs";
+import requiredErrs from "./__mocks__/required-errors.mjs";
+import circulars from "./__mocks__/circular-deps.mjs";
+import vias from "./__mocks__/via-deps.mjs";
+import unsupportedErrorLevels from "./__mocks__/unsupported-severity.mjs";
+import knownViolations from "./__mocks__/known-violations.mjs";
+import instabilities from "./__mocks__/instabilities.mjs";
 
 function removePerSessionAttributes(pString) {
   return pString.replace(/ flowId='[^']+' timestamp='[^']+'/g, "");
@@ -21,9 +21,11 @@ function readFixture(pRelativePath) {
     "utf8"
   );
 }
-describe("report/teamcity", () => {
+describe("[I] report/teamcity", () => {
   it("says everything fine when everything is fine", () => {
-    const lFixture = readFixture("mocks/everything-fine-teamcity-format.txt");
+    const lFixture = readFixture(
+      "__mocks__/everything-fine-teamcity-format.txt"
+    );
     const lResult = render(okdeps);
 
     expect(removePerSessionAttributes(lResult.output)).to.equal(lFixture);
@@ -31,7 +33,7 @@ describe("report/teamcity", () => {
   });
 
   it("renders module only transgressions", () => {
-    const lFixture = readFixture("mocks/module-errors-teamcity-format.txt");
+    const lFixture = readFixture("__mocks__/module-errors-teamcity-format.txt");
     const lResult = render(moduleErrs);
 
     expect(removePerSessionAttributes(lResult.output)).to.equal(
@@ -42,7 +44,9 @@ describe("report/teamcity", () => {
   });
 
   it("renders 'required' violations", () => {
-    const lFixture = readFixture("mocks/required-errors-teamcity-format.txt");
+    const lFixture = readFixture(
+      "__mocks__/required-errors-teamcity-format.txt"
+    );
     const lResult = render(requiredErrs);
 
     expect(removePerSessionAttributes(lResult.output)).to.equal(
@@ -53,7 +57,7 @@ describe("report/teamcity", () => {
   });
 
   it("renders circular transgressions", () => {
-    const lFixture = readFixture("mocks/circular-deps-teamcity-format.txt");
+    const lFixture = readFixture("__mocks__/circular-deps-teamcity-format.txt");
     const lResult = render(circulars);
 
     expect(removePerSessionAttributes(lResult.output)).to.equal(
@@ -64,7 +68,7 @@ describe("report/teamcity", () => {
   });
 
   it("renders via transgressions", () => {
-    const lFixture = readFixture("mocks/via-deps-teamcity-format.txt");
+    const lFixture = readFixture("__mocks__/via-deps-teamcity-format.txt");
     const lResult = render(vias);
 
     expect(removePerSessionAttributes(lResult.output)).to.equal(
@@ -75,7 +79,7 @@ describe("report/teamcity", () => {
   });
 
   it("renders instability transgressions", () => {
-    const lFixture = readFixture("mocks/instabilities-teamcity-format.txt");
+    const lFixture = readFixture("__mocks__/instabilities-teamcity-format.txt");
     const lResult = render(instabilities);
 
     expect(removePerSessionAttributes(lResult.output)).to.equal(
@@ -87,7 +91,7 @@ describe("report/teamcity", () => {
 
   it("renders unsupported error levels (like 'ignore') as 'info'", () => {
     const lFixture = readFixture(
-      "mocks/unsupported-severity-teamcity-format.txt"
+      "__mocks__/unsupported-severity-teamcity-format.txt"
     );
     const lResult = render(unsupportedErrorLevels);
 
@@ -99,7 +103,9 @@ describe("report/teamcity", () => {
   });
 
   it("renders known errors in a single warning", () => {
-    const lFixture = readFixture("mocks/known-violations-teamcity-format.txt");
+    const lFixture = readFixture(
+      "__mocks__/known-violations-teamcity-format.txt"
+    );
     const lResult = render(knownViolations);
 
     expect(removePerSessionAttributes(lResult.output)).to.equal(

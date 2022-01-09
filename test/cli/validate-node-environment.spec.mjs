@@ -1,7 +1,7 @@
 import { expect } from "chai";
 import validateNodeEnvironment from "../../src/cli/validate-node-environment.js";
 
-describe("cli/validateNodeEnv", () => {
+describe("[U] cli/validateNodeEnv", () => {
   it("throws when an older and unsupported node version is passed", () => {
     expect(() => {
       validateNodeEnvironment("6.0.0");

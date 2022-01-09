@@ -13,7 +13,7 @@ const ANY_REACHES_IN_ALLOWED = {
   to: { reachable: true },
 };
 
-describe("validate/match-module-rule - reaches", () => {
+describe("[I] validate/match-module-rule - reaches", () => {
   it("rule without reachable attribute doesn't match modules with a reaches (implicit)", () => {
     expect(matchModuleRule.matchesReachesRule(EMPTY_RULE, {})).to.equal(false);
   });

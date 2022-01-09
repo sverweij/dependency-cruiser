@@ -1,7 +1,7 @@
 import { expect } from "chai";
 import validateFileExistence from "../../../src/cli/utl/validate-file-existence.js";
 
-describe("cli/utl/validateFileExistence", () => {
+describe("[U] cli/utl/validateFileExistence", () => {
   it("throws when the file or dir passed does not exists", () => {
     expect(() => {
       validateFileExistence("file-or-dir-does-not-exist");

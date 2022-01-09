@@ -58,7 +58,7 @@ const FIXTURE_MERGED = {
   bundledDependencies: ["nodash", "slodash", "furtherdash"],
 };
 
-describe("extract/resolve/get-manifest-dependencies/merge-manifests", () => {
+describe("[U] extract/resolve/get-manifest-dependencies/merge-manifests", () => {
   it("merging empty packages yields {}", () => {
     expect(mergePackages({}, {})).to.deep.equal({});
   });

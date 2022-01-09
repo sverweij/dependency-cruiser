@@ -18,7 +18,7 @@ const RESOLVE_OPTIONS_HEEDING_EXPORTS = normalizeResolveOptions(
   { exportsFields: ["exports"], conditionNames: ["require", "imports"] },
   normalizeCruiseOptions({})
 );
-describe("extract/resolve/externalModuleHelpers.getPackageJson", () => {
+describe("[U] extract/resolve/externalModuleHelpers.getPackageJson", () => {
   beforeEach(() => {
     clearCaches();
   });
@@ -75,7 +75,7 @@ describe("extract/resolve/externalModuleHelpers.getPackageJson", () => {
   it("returns a package.json when there is one ('local' node_modules)", () => {
     let lPackageJson = getPackageJson(
       "deprecated-at-the-start-for-test-purposes",
-      "./test/main/fixtures/cruise-reporterless/deprecated-node-module/",
+      "./test/extract/resolve/__mocks__/deprecated-node-module/",
       BASIC_RESOLVE_OPTIONS
     );
 
@@ -89,7 +89,7 @@ describe("extract/resolve/externalModuleHelpers.getPackageJson", () => {
   it("returns a package.json even when it's not specified in the node modules exports and the regular resolver is supposed to heed those exports", () => {
     let lPackageJson = getPackageJson(
       "testinga-two",
-      "./test/extract/resolve/fixtures/unreadable-package-json-because-not-exported",
+      "./test/extract/resolve/__mocks__/unreadable-package-json-because-not-exported",
       RESOLVE_OPTIONS_HEEDING_EXPORTS
     );
 
@@ -99,7 +99,7 @@ describe("extract/resolve/externalModuleHelpers.getPackageJson", () => {
   });
 });
 
-describe("extract/resolve/externalModuleHelpers.getPackageRoot", () => {
+describe("[U] extract/resolve/externalModuleHelpers.getPackageRoot", () => {
   it("returns undefined if called without parameters", () => {
     expect(typeof getPackageRoot()).to.equal("undefined");
   });
@@ -135,7 +135,7 @@ describe("extract/resolve/externalModuleHelpers.getPackageRoot", () => {
   });
 });
 
-describe("extract/resolve/externalModuleHelpers.getLicense", () => {
+describe("[U] extract/resolve/externalModuleHelpers.getLicense", () => {
   it("returns '' if the module does not exist", () => {
     expect(
       getLicense("this-module-does-not-exist", ".", BASIC_RESOLVE_OPTIONS)
@@ -196,14 +196,14 @@ describe("extract/resolve/externalModuleHelpers.getLicense", () => {
     expect(
       getLicense(
         "GPL-license",
-        "./test/extract/resolve/fixtures/licenses/",
+        "./test/extract/resolve/__mocks__/licenses/",
         BASIC_RESOLVE_OPTIONS
       )
     ).to.equal("GPL-3.0");
   });
 });
 
-describe("extract/resolve/externalModuleHelpers.dependencyIsDeprecated", () => {
+describe("[U] extract/resolve/externalModuleHelpers.dependencyIsDeprecated", () => {
   it("returns false if the module does not exist", () => {
     expect(
       dependencyIsDeprecated(

@@ -16,7 +16,7 @@ const CORPUS = [
   "<script hazoo=69>console.log(44)</script>",
 ];
 
-describe("sync svelte pre-processor", () => {
+describe("[U] sync svelte pre-processor", () => {
   CORPUS.forEach((pInput, pCorpusNumber, pCorpus) => {
     it(`pre-processes svelte like svelte's preprocessor, but sync (${(pCorpusNumber += 1)}/${
       pCorpus.length

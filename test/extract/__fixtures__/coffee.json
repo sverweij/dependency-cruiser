@@ -1,0 +1,70 @@
+[
+  {
+    "title": "kitchensink",
+    "input": {
+      "fileName": "test/extract/__mocks__/coffee/index.coffee"
+    },
+    "expected": [
+      {
+        "module": "./javascriptThing",
+        "resolved": "test/extract/__mocks__/coffee/javascriptThing.js",
+        "moduleSystem": "es6",
+        "coreModule": false,
+        "dependencyTypes": ["local"],
+        "dynamic": false,
+        "followable": true,
+        "exoticallyRequired": false,
+        "matchesDoNotFollow": false,
+        "couldNotResolve": false
+      },
+      {
+        "module": "./sub",
+        "resolved": "test/extract/__mocks__/coffee/sub/index.coffee",
+        "moduleSystem": "es6",
+        "coreModule": false,
+        "dependencyTypes": ["local"],
+        "dynamic": false,
+        "followable": true,
+        "exoticallyRequired": false,
+        "matchesDoNotFollow": false,
+        "couldNotResolve": false
+      },
+      {
+        "module": "./sub/kaching",
+        "resolved": "test/extract/__mocks__/coffee/sub/kaching.litcoffee",
+        "moduleSystem": "es6",
+        "coreModule": false,
+        "dependencyTypes": ["local"],
+        "dynamic": false,
+        "followable": true,
+        "exoticallyRequired": false,
+        "matchesDoNotFollow": false,
+        "couldNotResolve": false
+      },
+      {
+        "module": "./sub/willBeReExported",
+        "resolved": "test/extract/__mocks__/coffee/sub/willBeReExported.coffee.md",
+        "moduleSystem": "es6",
+        "coreModule": false,
+        "dependencyTypes": ["local"],
+        "dynamic": false,
+        "followable": true,
+        "exoticallyRequired": false,
+        "matchesDoNotFollow": false,
+        "couldNotResolve": false
+      },
+      {
+        "module": "path",
+        "resolved": "path",
+        "moduleSystem": "es6",
+        "coreModule": true,
+        "dependencyTypes": ["core"],
+        "dynamic": false,
+        "followable": false,
+        "exoticallyRequired": false,
+        "matchesDoNotFollow": false,
+        "couldNotResolve": false
+      }
+    ]
+  }
+]

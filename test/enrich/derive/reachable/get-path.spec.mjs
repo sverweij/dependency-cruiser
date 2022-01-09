@@ -2,7 +2,7 @@ import { expect } from "chai";
 import getPath from "../../../../src/enrich/derive/reachable/get-path.js";
 import clearCaches from "../../../../src/enrich/clear-caches.js";
 
-describe("enrich/derive/reachable/getGraph - reachability detection", () => {
+describe("[U] enrich/derive/reachable/getGraph - reachability detection", () => {
   beforeEach("set up", () => {
     clearCaches();
   });

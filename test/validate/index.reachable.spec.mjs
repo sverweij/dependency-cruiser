@@ -2,11 +2,11 @@ import { expect } from "chai";
 import validate from "../../src/validate/index.js";
 import readRuleSet from "./readruleset.utl.mjs";
 
-describe("validate/index - reachable (in forbidden set)", () => {
+describe("[I] validate/index - reachable (in forbidden set)", () => {
   it("Skips modules that have no reachable attribute (reachable false)", () => {
     expect(
       validate.module(
-        readRuleSet("./test/validate/fixtures/rules.reachable-false.json"),
+        readRuleSet("./test/validate/__mocks__/rules.reachable-false.json"),
         { source: "something" }
       )
     ).to.deep.equal({ valid: true });
@@ -15,7 +15,7 @@ describe("validate/index - reachable (in forbidden set)", () => {
   it("Skips modules that have no reachable attribute (reachable true)", () => {
     expect(
       validate.module(
-        readRuleSet("./test/validate/fixtures/rules.reachable-true.json"),
+        readRuleSet("./test/validate/__mocks__/rules.reachable-true.json"),
         { source: "something" }
       )
     ).to.deep.equal({ valid: true });
@@ -24,7 +24,7 @@ describe("validate/index - reachable (in forbidden set)", () => {
   it("Triggers on modules that have a reachable attribute (non-matching, reachable false)", () => {
     expect(
       validate.module(
-        readRuleSet("./test/validate/fixtures/rules.reachable-false.json"),
+        readRuleSet("./test/validate/__mocks__/rules.reachable-false.json"),
         {
           source: "something",
           reachable: [
@@ -42,7 +42,7 @@ describe("validate/index - reachable (in forbidden set)", () => {
   it("Triggers on modules that have a reachable attribute (non-matching, reachable true)", () => {
     expect(
       validate.module(
-        readRuleSet("./test/validate/fixtures/rules.reachable-true.json"),
+        readRuleSet("./test/validate/__mocks__/rules.reachable-true.json"),
         {
           source: "something",
           reachable: [
@@ -60,7 +60,7 @@ describe("validate/index - reachable (in forbidden set)", () => {
   it("Triggers on modules that have a reachable attribute (reachable false)", () => {
     expect(
       validate.module(
-        readRuleSet("./test/validate/fixtures/rules.reachable-false.json"),
+        readRuleSet("./test/validate/__mocks__/rules.reachable-false.json"),
         {
           source: "something",
           reachable: [
@@ -86,7 +86,7 @@ describe("validate/index - reachable (in forbidden set)", () => {
   it("Triggers on modules that have a reachable attribute (reachable true)", () => {
     expect(
       validate.module(
-        readRuleSet("./test/validate/fixtures/rules.reachable-true.json"),
+        readRuleSet("./test/validate/__mocks__/rules.reachable-true.json"),
         {
           source: "something",
           reachable: [
@@ -112,7 +112,9 @@ describe("validate/index - reachable (in forbidden set)", () => {
   it("Triggers on modules that have a reachable attribute (with a path, reachable false)", () => {
     expect(
       validate.module(
-        readRuleSet("./test/validate/fixtures/rules.reachable-false.path.json"),
+        readRuleSet(
+          "./test/validate/__mocks__/rules.reachable-false.path.json"
+        ),
         {
           source: "something",
           reachable: [
@@ -138,7 +140,7 @@ describe("validate/index - reachable (in forbidden set)", () => {
   it("Triggers on modules that have a reachable attribute (with a path, reachable true)", () => {
     expect(
       validate.module(
-        readRuleSet("./test/validate/fixtures/rules.reachable-true.path.json"),
+        readRuleSet("./test/validate/__mocks__/rules.reachable-true.path.json"),
         {
           source: "something",
           reachable: [
@@ -165,7 +167,7 @@ describe("validate/index - reachable (in forbidden set)", () => {
     expect(
       validate.module(
         readRuleSet(
-          "./test/validate/fixtures/rules.reachable-false.pathnot.json"
+          "./test/validate/__mocks__/rules.reachable-false.pathnot.json"
         ),
         {
           source: "something",
@@ -185,7 +187,7 @@ describe("validate/index - reachable (in forbidden set)", () => {
     expect(
       validate.module(
         readRuleSet(
-          "./test/validate/fixtures/rules.reachable-true.pathnot.json"
+          "./test/validate/__mocks__/rules.reachable-true.pathnot.json"
         ),
         {
           source: "something",
@@ -201,11 +203,11 @@ describe("validate/index - reachable (in forbidden set)", () => {
     ).to.deep.equal({ valid: true });
   });
 });
-describe("validate/index - reachable (in allowed set)", () => {
+describe("[I] validate/index - reachable (in allowed set)", () => {
   it("Triggers on modules that have no reachable attribute ('allowed' rule set)", () => {
     expect(
       validate.module(
-        readRuleSet("./test/validate/fixtures/rules.reachable.allowed.json"),
+        readRuleSet("./test/validate/__mocks__/rules.reachable.allowed.json"),
         {
           source: "something",
         }
@@ -224,7 +226,7 @@ describe("validate/index - reachable (in allowed set)", () => {
   it("Skips on modules that have a reachable attribute (match - 'allowed' rule set)", () => {
     expect(
       validate.module(
-        readRuleSet("./test/validate/fixtures/rules.reachable.allowed.json"),
+        readRuleSet("./test/validate/__mocks__/rules.reachable.allowed.json"),
         {
           source: "something",
           reachable: [
@@ -244,7 +246,7 @@ describe("validate/index - reachable (in allowed set)", () => {
   it("Triggers on modules that have a reachable attribute (no match - 'allowed' rule set)", () => {
     expect(
       validate.module(
-        readRuleSet("./test/validate/fixtures/rules.reachable.allowed.json"),
+        readRuleSet("./test/validate/__mocks__/rules.reachable.allowed.json"),
         {
           source: "something",
           reachable: [
@@ -268,7 +270,7 @@ describe("validate/index - reachable (in allowed set)", () => {
 
   it("Respects capturing groups", () => {
     const lRuleSet = readRuleSet(
-      "./test/validate/fixtures/rules.reachable.capturing-group.json"
+      "./test/validate/__mocks__/rules.reachable.capturing-group.json"
     );
     const lModule = {
       source: "src/hoonk/not-reached.js",

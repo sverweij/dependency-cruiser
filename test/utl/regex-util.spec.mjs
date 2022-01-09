@@ -1,7 +1,7 @@
 import { expect } from "chai";
 import utl from "../../src/utl/regex-util.js";
 
-describe("validate/regex-util", () => {
+describe("[U] utl/regex-util", () => {
   it("replaceGroupPlaceholders - leaves re alone if passed empty match result", () => {
     expect(utl.replaceGroupPlaceholders("$1/aap|noot", [])).to.equal(
       "$1/aap|noot"

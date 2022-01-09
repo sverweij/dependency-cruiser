@@ -7,7 +7,7 @@ import normalizeSource from "../normalize-source.utl.mjs";
 
 const __dirname = fileURLToPath(new URL(".", import.meta.url));
 
-describe("transpiler", () => {
+describe("[I] transpiler", () => {
   it("As the 'livescript' transpiler is not available, returns the original source", () => {
     expect(
       transpile({ extension: ".ls", source: "whatever the bever" })
@@ -25,11 +25,11 @@ describe("transpiler", () => {
 
   it("Returns svelte compiled down to js", () => {
     const lInput = readFileSync(
-      join(__dirname, "fixtures", "svelte-ts.svelte"),
+      join(__dirname, "__mocks__", "svelte-ts.svelte"),
       "utf8"
     );
     const lExpectedOoutput = normalizeSource(
-      readFileSync(join(__dirname, "fixtures", "svelte.js"), "utf8")
+      readFileSync(join(__dirname, "__fixtures__", "svelte.js"), "utf8")
     );
 
     expect(
@@ -39,13 +39,13 @@ describe("transpiler", () => {
 
   it("Does not confuse .ts for .tsx", () => {
     const lInputFixture = readFileSync(
-      join(__dirname, "fixtures/dontconfuse_ts_for_tsx/input/Observable.ts"),
+      join(__dirname, "__mocks__/dontconfuse_ts_for_tsx/input/Observable.ts"),
       "utf8"
     );
     const lTranspiledFixture = readFileSync(
       join(
         __dirname,
-        "fixtures/dontconfuse_ts_for_tsx/transpiled/Observable.js"
+        "__mocks__/dontconfuse_ts_for_tsx/transpiled/Observable.js"
       ),
       "utf8"
     );
@@ -57,13 +57,13 @@ describe("transpiler", () => {
 
   it("Takes a tsconfig and takes that into account on transpilation", () => {
     const lInputFixture = readFileSync(
-      join(__dirname, "fixtures/dontconfuse_ts_for_tsx/input/Observable.ts"),
+      join(__dirname, "__mocks__/dontconfuse_ts_for_tsx/input/Observable.ts"),
       "utf8"
     );
     const lTranspiledFixture = readFileSync(
       join(
         __dirname,
-        "fixtures/dontconfuse_ts_for_tsx/transpiled/Observable.js"
+        "__mocks__/dontconfuse_ts_for_tsx/transpiled/Observable.js"
       ),
       "utf8"
     );

@@ -2,9 +2,9 @@ const path = require("path");
 const { expect } = require("chai");
 const { getExternalPluginReporter } = require("../../../src/report/plugins");
 
-const FIXTURE_DIRECTORY = path.join(__dirname, "fixtures");
+const FIXTURE_DIRECTORY = path.join(__dirname, "__fixtures__");
 
-describe("report/plugins - getExternalPluginReporter", () => {
+describe("[I] report/plugins - getExternalPluginReporter", () => {
   it("throws when the plugin:reporter is not a valid plugin (missing exit code)", () => {
     const lNoExitCodePlugin = path.join(
       FIXTURE_DIRECTORY,

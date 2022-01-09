@@ -1,9 +1,9 @@
 import { expect } from "chai";
 import clearCaches from "../../../../src/enrich/clear-caches.js";
 import getCycle from "../../../../src/enrich/derive/circular/get-cycle.js";
-import inputgraphs from "./inputgraphs.mjs";
+import inputgraphs from "./__mocks__/inputgraphs.mjs";
 
-describe("enrich/derive/circular/getCycle", () => {
+describe("[U] enrich/derive/circular/get-cycle", () => {
   beforeEach("set up", () => {
     clearCaches();
   });

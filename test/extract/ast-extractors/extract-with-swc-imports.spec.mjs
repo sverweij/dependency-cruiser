@@ -1,7 +1,7 @@
 import { expect } from "chai";
 import extractWithSwc from "./extract-with-swc.utl.mjs";
 
-describe("ast-extractors/extract-swc - regular imports", () => {
+describe("[U] ast-extractors/extract-swc - regular imports", () => {
   it("extracts 'import for side effects only'", () => {
     expect(extractWithSwc("import './import-for-side-effects';")).to.deep.equal(
       [

@@ -6,7 +6,7 @@ const ANY_ORPHAN = { from: { orphan: true }, to: {} };
 const ORPHAN_IN_PATH = { from: { orphan: true, path: "^src" }, to: {} };
 const ORPHAN_IN_PATH_NOT = { from: { orphan: true, pathNot: "^src" }, to: {} };
 
-describe("validate/match-module-rule - orphan", () => {
+describe("[I] validate/match-module-rule - orphan", () => {
   it("rule without orphan attribute doesn't non-orphans (implicit)", () => {
     expect(matchModuleRule.matchesOrphanRule(EMPTY_RULE, {})).to.equal(false);
   });

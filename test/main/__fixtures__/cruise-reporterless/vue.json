@@ -1,0 +1,87 @@
+[
+  {
+    "title": "vue",
+    "input": {
+      "fileName": "test/main/__mocks__/cruise-reporterless/vue/main.js"
+    },
+    "expected": [
+      {
+        "source": "test/main/__mocks__/cruise-reporterless/vue/main.js",
+        "orphan": false,
+        "dependencies": [
+          {
+            "resolved": "test/main/__mocks__/cruise-reporterless/vue/App.vue",
+            "coreModule": false,
+            "followable": true,
+            "exoticallyRequired": false,
+            "couldNotResolve": false,
+            "dependencyTypes": ["local"],
+            "dynamic": false,
+            "circular": false,
+            "module": "./App.vue",
+            "moduleSystem": "es6",
+            "matchesDoNotFollow": false,
+            "valid": true
+          },
+          {
+            "resolved": "vue",
+            "coreModule": false,
+            "followable": false,
+            "couldNotResolve": true,
+            "exoticallyRequired": false,
+            "dependencyTypes": ["unknown"],
+            "dynamic": false,
+            "circular": false,
+            "module": "vue",
+            "moduleSystem": "es6",
+            "matchesDoNotFollow": false,
+            "valid": true
+          }
+        ],
+        "dependents": [],
+        "valid": true
+      },
+      {
+        "source": "vue",
+        "followable": false,
+        "coreModule": false,
+        "couldNotResolve": true,
+        "matchesDoNotFollow": false,
+        "dependencyTypes": ["unknown"],
+        "orphan": false,
+        "dependencies": [],
+        "dependents": ["test/main/__mocks__/cruise-reporterless/vue/main.js"],
+        "valid": true
+      },
+      {
+        "source": "test/main/__mocks__/cruise-reporterless/vue/App.vue",
+        "orphan": false,
+        "dependencies": [
+          {
+            "resolved": "test/main/__mocks__/cruise-reporterless/vue/components/HelloWorld.vue",
+            "coreModule": false,
+            "followable": true,
+            "exoticallyRequired": false,
+            "couldNotResolve": false,
+            "dependencyTypes": ["local"],
+            "dynamic": false,
+            "circular": false,
+            "module": "./components/HelloWorld.vue",
+            "moduleSystem": "es6",
+            "matchesDoNotFollow": false,
+            "valid": true
+          }
+        ],
+        "dependents": ["test/main/__mocks__/cruise-reporterless/vue/main.js"],
+        "valid": true
+      },
+      {
+        "source": "test/main/__mocks__/cruise-reporterless/vue/components/HelloWorld.vue",
+        "orphan": false,
+        "dependencies": [],
+        "dependents": ["test/main/__mocks__/cruise-reporterless/vue/App.vue"],
+        "valid": true
+      }
+    ]
+  }
+]

@@ -7,17 +7,17 @@ import { createRequireJSON } from "../backwards.utl.mjs";
 const requireJSON = createRequireJSON(import.meta.url);
 
 const output = requireJSON(
-  "./fixtures/type-only-module-references/output.json"
+  "./__mocks__/type-only-module-references/output.json"
 );
 const outputNoTS = requireJSON(
-  "./fixtures/type-only-module-references/output-no-ts.json"
+  "./__mocks__/type-only-module-references/output-no-ts.json"
 );
 
 use(chaiJSONSchema);
 
 const WORKING_DIRECTORY = process.cwd();
 
-describe("main.cruise - type only module references", () => {
+describe("[E] main.cruise - type only module references", () => {
   beforeEach("reset current wd", () => {
     process.chdir(WORKING_DIRECTORY);
   });
@@ -27,7 +27,7 @@ describe("main.cruise - type only module references", () => {
   });
 
   it("finds something that's only in node_modules/@types", () => {
-    process.chdir("test/main/fixtures/type-only-module-references");
+    process.chdir("test/main/__mocks__/type-only-module-references");
 
     const lResult = cruise(
       ["src"],
@@ -42,7 +42,7 @@ describe("main.cruise - type only module references", () => {
   });
 
   it("don't find it when not looking for pre-compilation deps", () => {
-    process.chdir("test/main/fixtures/type-only-module-references");
+    process.chdir("test/main/__mocks__/type-only-module-references");
 
     const lResult = cruise(
       ["src"],

@@ -7,16 +7,18 @@ import wrap from "../../../src/extract/transpile/vue-template-wrap.js";
 
 const __dirname = fileURLToPath(new URL(".", import.meta.url));
 
-describe("vue transpiler", () => {
+describe("[I] vue transpiler", () => {
   it("extracts the script content from a vue SFC", () => {
     expect(
       normalizeNewline(
         wrap.transpile(
-          readFileSync(join(__dirname, "fixtures/vue.vue"), "utf8")
+          readFileSync(join(__dirname, "__mocks__/vue.vue"), "utf8")
         )
       )
     ).to.equal(
-      normalizeNewline(readFileSync(join(__dirname, "fixtures/vue.js"), "utf8"))
+      normalizeNewline(
+        readFileSync(join(__dirname, "__fixtures__/vue.js"), "utf8")
+      )
     );
   });
 
@@ -24,7 +26,7 @@ describe("vue transpiler", () => {
     expect(
       normalizeNewline(
         wrap.transpile(
-          readFileSync(join(__dirname, "fixtures/vue-noscript.vue"), "utf8")
+          readFileSync(join(__dirname, "__mocks__/vue-noscript.vue"), "utf8")
         )
       )
     ).to.equal(normalizeNewline(""));
@@ -34,7 +36,7 @@ describe("vue transpiler", () => {
     expect(
       normalizeNewline(
         wrap.transpile(
-          readFileSync(join(__dirname, "fixtures/vue-invalid.vue"), "utf8")
+          readFileSync(join(__dirname, "__mocks__/vue-invalid.vue"), "utf8")
         )
       )
     ).to.equal(normalizeNewline(""));

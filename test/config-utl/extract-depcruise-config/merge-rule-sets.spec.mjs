@@ -1,7 +1,7 @@
 import { expect } from "chai";
 import merge from "../../../src/config-utl/extract-depcruise-config/merge-configs.js";
 
-describe("cli/mergeRuleSets - general", () => {
+describe("[U] config-utl/mergeRuleSets - general", () => {
   it("two empty rule sets yield an empty rule set with named attributes", () => {
     expect(merge({}, {})).to.deep.equal({
       options: {},
@@ -9,7 +9,7 @@ describe("cli/mergeRuleSets - general", () => {
   });
 });
 
-describe("cli/mergeRuleSets - forbidden", () => {
+describe("[U] config-utl/mergeRuleSets - forbidden", () => {
   it("extending empty forbidden yields that forbidden", () => {
     expect(
       merge({ forbidden: [{ from: "src", to: "test" }] }, {})
@@ -182,7 +182,7 @@ describe("cli/mergeRuleSets - forbidden", () => {
   });
 });
 
-describe("cli/mergeRuleSets - allowed", () => {
+describe("[U] config-utl/mergeRuleSets - allowed", () => {
   it("extending empty allowed yields that allowed", () => {
     expect(merge({ allowed: [{ from: "test", to: "src" }] }, {})).to.deep.equal(
       {
@@ -233,7 +233,7 @@ describe("cli/mergeRuleSets - allowed", () => {
   });
 });
 
-describe("cli/mergeRuleSets - allowedSeverity", () => {
+describe("[U] config-utl/mergeRuleSets - allowedSeverity", () => {
   it("extending empty set with only an allowedSeverity error yields no allowedSeverity", () => {
     expect(merge({ allowedSeverity: "error" }, {})).to.deep.equal({
       options: {},
@@ -274,7 +274,7 @@ describe("cli/mergeRuleSets - allowedSeverity", () => {
   });
 });
 
-describe("cli/mergeRuleSets - required", () => {
+describe("[U] config-utl/mergeRuleSets - required", () => {
   it("extending an existing named rule - the extended wins", () => {
     expect(
       merge(
@@ -302,7 +302,7 @@ describe("cli/mergeRuleSets - required", () => {
     });
   });
 });
-describe("cli/mergeRuleSets - options", () => {
+describe("[U] config-utl/mergeRuleSets - options", () => {
   it("extending empty options with some options yield those options", () => {
     expect(
       merge(

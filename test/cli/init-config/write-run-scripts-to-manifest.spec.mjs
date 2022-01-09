@@ -1,7 +1,7 @@
 import { expect } from "chai";
 import write from "../../../src/cli/init-config/write-run-scripts-to-manifest.js";
 
-describe("cli/init-config/write-run-scripts-to-manifest - logic", () => {
+describe("[U] cli/init-config/write-run-scripts-to-manifest - logic", () => {
   it("no manifest and no scripts retain the empty manifest with a scripts section", () => {
     expect(write.addRunScriptsToManifest()).to.deep.equal({ scripts: {} });
   });
@@ -51,7 +51,7 @@ describe("cli/init-config/write-run-scripts-to-manifest - logic", () => {
   });
 });
 
-describe("cli/init-config/write-run-scripts-to-manifest - compile run script", () => {
+describe("[U] cli/init-config/write-run-scripts-to-manifest - compile run script", () => {
   it("no sourcelocation no extra scripts (no init options object)", () => {
     expect(write.compileRunScripts()).to.deep.equal({});
   });

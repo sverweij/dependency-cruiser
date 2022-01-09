@@ -1,7 +1,7 @@
 import { expect } from "chai";
 import randomString from "../../../src/report/anon/random-string.js";
 
-describe("report/anon/random-string", () => {
+describe("[U] report/anon/random-string", () => {
   it("returns the empty string when passed the empty string", () => {
     expect(randomString("")).to.equal("");
   });

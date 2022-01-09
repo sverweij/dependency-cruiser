@@ -10,21 +10,21 @@ const __dirname = fileURLToPath(new URL(".", import.meta.url));
 
 const TSCONFIG = join(
   __dirname,
-  "fixtures",
+  "__mocks__",
   "ts-config-with-path",
   "tsconfig.json"
 );
 const PARSED_TSCONFIG = extractTSConfig(TSCONFIG);
 const TSCONFIG_RESOLUTIONS = join(
   __dirname,
-  "fixtures",
+  "__mocks__",
   "ts-config-with-path-correct-resolution-prio",
   "tsconfig.json"
 );
 const PARSED_TSCONFIG_RESOLUTIONS = extractTSConfig(TSCONFIG);
 const WORKING_DIRECTORY = process.cwd();
 
-describe("extract/resolve/index", () => {
+describe("[I] extract/resolve/index", () => {
   beforeEach("reset current wd", () => {
     process.chdir(WORKING_DIRECTORY);
   });
@@ -39,8 +39,8 @@ describe("extract/resolve/index", () => {
           module: "./hots",
           moduleSystem: "es6",
         },
-        join(__dirname, "fixtures"),
-        join(__dirname, "fixtures", "resolve"),
+        join(__dirname, "__mocks__"),
+        join(__dirname, "__mocks__", "resolve"),
         normalizeResolveOptions({}, {})
       )
     ).to.deep.equal({
@@ -59,8 +59,8 @@ describe("extract/resolve/index", () => {
           module: "path",
           moduleSystem: "es6",
         },
-        join(__dirname, "fixtures"),
-        join(__dirname, "fixtures", "resolve"),
+        join(__dirname, "__mocks__"),
+        join(__dirname, "__mocks__", "resolve"),
         {}
       )
     ).to.deep.equal({
@@ -79,8 +79,8 @@ describe("extract/resolve/index", () => {
           module: "./doesnotexist",
           moduleSystem: "es6",
         },
-        join(__dirname, "fixtures"),
-        join(__dirname, "fixtures", "followability"),
+        join(__dirname, "__mocks__"),
+        join(__dirname, "__mocks__", "followability"),
         {
           bustTheCache: true,
         }
@@ -101,8 +101,8 @@ describe("extract/resolve/index", () => {
           module: "./something.json",
           moduleSystem: "es6",
         },
-        join(__dirname, "fixtures"),
-        join(__dirname, "fixtures", "followability"),
+        join(__dirname, "__mocks__"),
+        join(__dirname, "__mocks__", "followability"),
         normalizeResolveOptions({ bustTheCache: true }, {})
       )
     ).to.deep.equal({
@@ -121,8 +121,8 @@ describe("extract/resolve/index", () => {
           module: "./something.json",
           moduleSystem: "es6",
         },
-        join(__dirname, "fixtures"),
-        join(__dirname, "fixtures", "followability"),
+        join(__dirname, "__mocks__"),
+        join(__dirname, "__mocks__", "followability"),
         normalizeResolveOptions(
           {
             extensions: [".js", ".json"],
@@ -147,8 +147,8 @@ describe("extract/resolve/index", () => {
           module: "./something.scss",
           moduleSystem: "es6",
         },
-        join(__dirname, "fixtures"),
-        join(__dirname, "fixtures", "followability"),
+        join(__dirname, "__mocks__"),
+        join(__dirname, "__mocks__", "followability"),
         normalizeResolveOptions(
           {
             extensions: [".js", ".json", ".scss"],
@@ -173,8 +173,8 @@ describe("extract/resolve/index", () => {
           module: "./x",
           moduleSystem: "es6",
         },
-        join(__dirname, "fixtures"),
-        join(__dirname, "fixtures", "vue-last"),
+        join(__dirname, "__mocks__"),
+        join(__dirname, "__mocks__", "vue-last"),
         normalizeResolveOptions(
           {
             bustTheCache: true,
@@ -198,12 +198,12 @@ describe("extract/resolve/index", () => {
           module: "hoepla/hoi",
           moduleSystem: "es6",
         },
-        join(__dirname, "fixtures"),
-        join(__dirname, "fixtures", "resolve"),
+        join(__dirname, "__mocks__"),
+        join(__dirname, "__mocks__", "resolve"),
         normalizeResolveOptions(
           {
             alias: {
-              hoepla: join(__dirname, "fixtures", "i-got-aliased-to-hoepla"),
+              hoepla: join(__dirname, "__mocks__", "i-got-aliased-to-hoepla"),
             },
             bustTheCache: true,
           },
@@ -226,15 +226,15 @@ describe("extract/resolve/index", () => {
           module: "shared",
           moduleSystem: "es6",
         },
-        join(__dirname, "fixtures"),
-        join(__dirname, "fixtures", "resolve"),
+        join(__dirname, "__mocks__"),
+        join(__dirname, "__mocks__", "resolve"),
         normalizeResolveOptions(
           {
             modules: [
               "node_modules",
               join(
                 __dirname,
-                "fixtures",
+                "__mocks__",
                 "localmodulesfix",
                 "localmoduleshere"
               ),
@@ -260,8 +260,8 @@ describe("extract/resolve/index", () => {
           module: "shared",
           moduleSystem: "es6",
         },
-        join(__dirname, "fixtures"),
-        join(__dirname, "fixtures", "ts-config-with-path"),
+        join(__dirname, "__mocks__"),
+        join(__dirname, "__mocks__", "ts-config-with-path"),
         normalizeResolveOptions(
           {
             tsConfig: TSCONFIG,
@@ -287,8 +287,8 @@ describe("extract/resolve/index", () => {
           module: "gewoon/wood/tree",
           moduleSystem: "es6",
         },
-        join(__dirname, "fixtures"),
-        join(__dirname, "fixtures", "ts-config-with-path"),
+        join(__dirname, "__mocks__"),
+        join(__dirname, "__mocks__", "ts-config-with-path"),
         normalizeResolveOptions(
           {
             tsConfig: TSCONFIG,
@@ -314,8 +314,8 @@ describe("extract/resolve/index", () => {
           module: "daddayaddaya",
           moduleSystem: "es6",
         },
-        join(__dirname, "fixtures"),
-        join(__dirname, "fixtures", "ts-config-with-path"),
+        join(__dirname, "__mocks__"),
+        join(__dirname, "__mocks__", "ts-config-with-path"),
         normalizeResolveOptions(
           {
             tsConfig: TSCONFIG,
@@ -337,7 +337,7 @@ describe("extract/resolve/index", () => {
   it("considers a typescript config - no paths, no aliases, resolves relative to baseUrl", () => {
     const TSCONFIG_NO_PATHS = join(
       __dirname,
-      "fixtures",
+      "__mocks__",
       "ts-config-with-path",
       "tsconfig-no-paths.json"
     );
@@ -348,8 +348,8 @@ describe("extract/resolve/index", () => {
           module: "common/wood/tree",
           moduleSystem: "es6",
         },
-        join(__dirname, "fixtures"),
-        join(__dirname, "fixtures", "ts-config-with-path", "src", "typos"),
+        join(__dirname, "__mocks__"),
+        join(__dirname, "__mocks__", "ts-config-with-path", "src", "typos"),
         normalizeResolveOptions(
           {
             tsConfig: TSCONFIG_NO_PATHS,
@@ -375,10 +375,10 @@ describe("extract/resolve/index", () => {
           module: "things/dts-before-ts",
           moduleSystem: "es6",
         },
-        join(__dirname, "fixtures"),
+        join(__dirname, "__mocks__"),
         join(
           __dirname,
-          "fixtures",
+          "__mocks__",
           "ts-config-with-path-correct-resolution-prio"
         ),
         normalizeResolveOptions(
@@ -407,10 +407,10 @@ describe("extract/resolve/index", () => {
           module: "things/js-before-ts",
           moduleSystem: "es6",
         },
-        join(__dirname, "fixtures"),
+        join(__dirname, "__mocks__"),
         join(
           __dirname,
-          "fixtures",
+          "__mocks__",
           "ts-config-with-path-correct-resolution-prio"
         ),
         normalizeResolveOptions(
@@ -439,8 +439,8 @@ describe("extract/resolve/index", () => {
           module: "shared",
           moduleSystem: "es6",
         },
-        join(__dirname, "fixtures"),
-        join(__dirname, "fixtures", "ts-config-with-path"),
+        join(__dirname, "__mocks__"),
+        join(__dirname, "__mocks__", "ts-config-with-path"),
         normalizeResolveOptions(
           {
             bustTheCache: true,
@@ -464,8 +464,8 @@ describe("extract/resolve/index", () => {
           module: "./hots.js?blah",
           moduleSystem: "es6",
         },
-        join(__dirname, "fixtures"),
-        join(__dirname, "fixtures", "resolve"),
+        join(__dirname, "__mocks__"),
+        join(__dirname, "__mocks__", "resolve"),
         normalizeResolveOptions({}, {})
       )
     ).to.deep.equal({
@@ -478,7 +478,7 @@ describe("extract/resolve/index", () => {
   });
 
   it("by default does not look at 'exports' fields in package.json", () => {
-    process.chdir("test/extract/resolve/fixtures/package-json-with-exports");
+    process.chdir("test/extract/resolve/__mocks__/package-json-with-exports");
     expect(
       resolve(
         {
@@ -499,7 +499,7 @@ describe("extract/resolve/index", () => {
   });
 
   it("looks at the 'exports' fields in package.json when enhanced-resolve is instructed to", () => {
-    process.chdir("test/extract/resolve/fixtures/package-json-with-exports");
+    process.chdir("test/extract/resolve/__mocks__/package-json-with-exports");
     expect(
       resolve(
         {
@@ -528,7 +528,7 @@ describe("extract/resolve/index", () => {
 
   it("Resolves the .ts even when the import includes a (non-existing) .js with explicit extension", () => {
     process.chdir(
-      "test/extract/resolve/fixtures/resolve-to-ts-even-when-imported-as-js"
+      "test/extract/resolve/__mocks__/resolve-to-ts-even-when-imported-as-js"
     );
     expect(
       resolve(
@@ -556,7 +556,7 @@ describe("extract/resolve/index", () => {
 
   it("Does NOT resolve the .ts when the import includes a (non-existing) .cjs with explicit extension", () => {
     process.chdir(
-      "test/extract/resolve/fixtures/resolve-to-ts-even-when-imported-as-js"
+      "test/extract/resolve/__mocks__/resolve-to-ts-even-when-imported-as-js"
     );
     expect(
       resolve(
@@ -583,7 +583,7 @@ describe("extract/resolve/index", () => {
   });
 
   it("Does NOT resolve to something non-typescriptish when the import includes a (non-existing) .js with explicit extension", () => {
-    process.chdir("test/extract/resolve/fixtures/donot-resolve-to-non-ts");
+    process.chdir("test/extract/resolve/__mocks__/donot-resolve-to-non-ts");
     expect(
       resolve(
         {
@@ -609,7 +609,7 @@ describe("extract/resolve/index", () => {
   });
 
   it("Correctly resolves file names with #'s in it (formerly an upstream issue in enhanced-resolve)", () => {
-    process.chdir("test/extract/resolve/fixtures/resolve-hashmarks");
+    process.chdir("test/extract/resolve/__mocks__/resolve-hashmarks");
     expect(
       resolve(
         {
@@ -635,7 +635,7 @@ describe("extract/resolve/index", () => {
   });
 
   it("Correctly resolves file names that _correctly_ use #'s (in the 'URL' fashion) in it (formerly an upstream issue in enhanced-resolve)", () => {
-    process.chdir("test/extract/resolve/fixtures/resolve-hashmarks");
+    process.chdir("test/extract/resolve/__mocks__/resolve-hashmarks");
     expect(
       resolve(
         {
@@ -662,7 +662,7 @@ describe("extract/resolve/index", () => {
   });
 
   it("resolves triple slash directives - local", () => {
-    process.chdir("test/extract/resolve/fixtures/triple-slash-directives");
+    process.chdir("test/extract/resolve/__mocks__/triple-slash-directives");
     expect(
       resolve(
         {
@@ -688,7 +688,7 @@ describe("extract/resolve/index", () => {
   });
 
   it("resolves triple slash directives - external", () => {
-    process.chdir("test/extract/resolve/fixtures/triple-slash-directives");
+    process.chdir("test/extract/resolve/__mocks__/triple-slash-directives");
     expect(
       resolve(
         {

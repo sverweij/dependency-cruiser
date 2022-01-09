@@ -9,7 +9,7 @@ use(chaiJSONSchema);
 
 const requireJSON = createRequireJSON(import.meta.url);
 
-describe("extract/index - exclude", () => {
+describe("[I] extract/index - exclude", () => {
   it("exclude - exclude.path", () => {
     const lOptions = normalize.normalizeCruiseOptions({
       exclude: {
@@ -23,13 +23,13 @@ describe("extract/index - exclude", () => {
       lOptions
     );
     const lResult = extract(
-      ["./test/extract/fixtures/exclude/path/es/src"],
+      ["./test/extract/__mocks__/exclude/path/es/src"],
       lOptions,
       lResolveOptions
     );
 
     expect(lResult).to.deep.equal(
-      requireJSON("./fixtures/exclude/path/es/output.json")
+      requireJSON("./__mocks__/exclude/path/es/output.json")
     );
   });
 
@@ -46,13 +46,13 @@ describe("extract/index - exclude", () => {
       lOptions
     );
     const lResult = extract(
-      ["./test/extract/fixtures/exclude/dynamic/es/src"],
+      ["./test/extract/__mocks__/exclude/dynamic/es/src"],
       lOptions,
       lResolveOptions
     );
 
     expect(lResult).to.deep.equal(
-      requireJSON("./fixtures/exclude/dynamic/es/output.json")
+      requireJSON("./__mocks__/exclude/dynamic/es/output.json")
     );
   });
 });

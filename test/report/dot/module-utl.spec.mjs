@@ -1,7 +1,7 @@
 import { expect } from "chai";
 import moduleUtl from "../../../src/report/dot/module-utl.js";
 
-describe("report/dot/module-utl", () => {
+describe("[U] report/dot/module-utl", () => {
   it("extractFirstTransgression - keeps as is when there's no transgressions", () => {
     expect(
       moduleUtl.extractFirstTransgression({ dependencies: [] })

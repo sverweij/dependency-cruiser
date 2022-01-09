@@ -6,9 +6,9 @@ import normalizeResolveOptions from "../../../src/main/resolve-options/normalize
 
 const __dirname = fileURLToPath(new URL(".", import.meta.url));
 
-describe("main/resolve-options/normalize", () => {
+describe("[I] main/resolve-options/normalize", () => {
   const lDefaultNoOfResolveOptions = 10;
-  const TEST_TSCONFIG = join(__dirname, "..", "fixtures", "tsconfig.test.json");
+  const TEST_TSCONFIG = join(__dirname, "__mocks__", "tsconfig.test.json");
   const lTsconfigContents = {};
   const lTsconfigContentsWithBaseURLAndPaths = {
     options: { baseUrl: "", paths: { "*": ["lalala/*"] } },

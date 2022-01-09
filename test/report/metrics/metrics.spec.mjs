@@ -2,7 +2,7 @@ import { EOL } from "node:os";
 import { expect } from "chai";
 import metrics from "../../../src/report/metrics.js";
 
-describe("report/metrics", () => {
+describe("[I] report/metrics", () => {
   it("errors when the input doesn't contain a 'folders' section", () => {
     const lResult = metrics({ modules: [] });
 

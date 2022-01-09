@@ -7,27 +7,27 @@ import { createRequireJSON } from "../backwards.utl.mjs";
 const requireJSON = createRequireJSON(import.meta.url);
 
 const commonjsFixtures = requireJSON(
-  "./fixtures/cruise-reporterless/commonjs.json"
+  "./__fixtures__/cruise-reporterless/commonjs.json"
 );
 const deprecationFixtures = requireJSON(
-  "./fixtures/cruise-reporterless/deprecated-node-module.json"
+  "./__fixtures__/cruise-reporterless/deprecated-node-module.json"
 );
 const bundledFixtures = requireJSON(
-  "./fixtures/cruise-reporterless/bundled-dependencies.json"
+  "./__fixtures__/cruise-reporterless/bundled-dependencies.json"
 );
-const amdFixtures = requireJSON("./fixtures/cruise-reporterless/amd.json");
+const amdFixtures = requireJSON("./__fixtures__/cruise-reporterless/amd.json");
 const typeScriptFixtures = requireJSON(
-  "./fixtures/cruise-reporterless/typescript.json"
+  "./__fixtures__/cruise-reporterless/typescript.json"
 );
-const vueFixtures = requireJSON("./fixtures/cruise-reporterless/vue.json");
+const vueFixtures = requireJSON("./__fixtures__/cruise-reporterless/vue.json");
 const coffeeFixtures = requireJSON(
-  "./fixtures/cruise-reporterless/coffee.json"
+  "./__fixtures__/cruise-reporterless/coffee.json"
 );
 const metricsFixtures = requireJSON(
-  "./fixtures/cruise-reporterless/metrics.json"
+  "./__fixtures__/cruise-reporterless/metrics.json"
 );
 const folderFixtures = requireJSON(
-  "./fixtures/cruise-reporterless/folder.json"
+  "./__fixtures__/cruise-reporterless/folder.json"
 );
 
 use(chaiJSONSchema);
@@ -54,21 +54,21 @@ function runFixture(pFixture) {
   }
 }
 
-describe("main.cruise - reporterless - CommonJS - ", () =>
+describe("[E] main.cruise - reporterless - CommonJS - ", () =>
   commonjsFixtures.forEach(runFixture));
-describe("main.cruise - reporterless - AMD - ", () =>
+describe("[E] main.cruise - reporterless - AMD - ", () =>
   amdFixtures.forEach(runFixture));
-describe("main.cruise - reporterless - TypeScript - ", () =>
+describe("[E] main.cruise - reporterless - TypeScript - ", () =>
   typeScriptFixtures.forEach(runFixture));
-describe("main.cruise - reporterless - Vue - ", () =>
+describe("[E] main.cruise - reporterless - Vue - ", () =>
   vueFixtures.forEach(runFixture));
-describe("main.cruise - reporterless - CoffeeScript - ", () =>
+describe("[E] main.cruise - reporterless - CoffeeScript - ", () =>
   coffeeFixtures.forEach(runFixture));
-describe("main.cruise - reporterless - Deprecation - ", () =>
+describe("[E] main.cruise - reporterless - Deprecation - ", () =>
   deprecationFixtures.forEach(runFixture));
-describe("main.cruise - reporterless - Bundled - ", () =>
+describe("[E] main.cruise - reporterless - Bundled - ", () =>
   bundledFixtures.forEach(runFixture));
-describe("main.cruise - reporterless - metrics - ", () =>
+describe("[E] main.cruise - reporterless - metrics - ", () =>
   metricsFixtures.forEach(runFixture));
-describe("main.cruise - reporterless - folder rules - ", () =>
+describe("[E] main.cruise - reporterless - folder rules - ", () =>
   folderFixtures.forEach(runFixture));

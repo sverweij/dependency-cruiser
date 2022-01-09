@@ -1,10 +1,10 @@
 import { expect } from "chai";
 import summarize from "../../src/enrich/summarize/index.js";
-import cycleStartsOnOne from "./mocks/cycle-starts-on-one.mjs";
-import cycleStartsOnTwo from "./mocks/cycle-starts-on-two.mjs";
-import cycleFest from "./mocks/cycle-fest.mjs";
+import cycleStartsOnOne from "./__mocks__/cycle-starts-on-one.mjs";
+import cycleStartsOnTwo from "./__mocks__/cycle-starts-on-two.mjs";
+import cycleFest from "./__mocks__/cycle-fest.mjs";
 
-describe("enrich/summarize", () => {
+describe("[I] enrich/summarize", () => {
   it("doesn't add a rule set when there isn't one", () => {
     expect(summarize([], {}, [])).to.deep.equal({
       error: 0,

@@ -1,0 +1,72 @@
+[
+  {
+    "title": "can detect officially deprecated node modules",
+    "input": {
+      "fileName": "test/main/__mocks__/cruise-reporterless/deprecated-node-module/require-something-deprecated.js",
+      "moduleSystems": ["cjs"]
+    },
+    "expected": [
+      {
+        "source": "test/main/__mocks__/cruise-reporterless/deprecated-node-module/require-something-deprecated.js",
+        "orphan": false,
+        "dependencies": [
+          {
+            "resolved": "test/main/__mocks__/cruise-reporterless/deprecated-node-module/node_modules/deprecated-at-the-start-for-test-purposes/index.js",
+            "coreModule": false,
+            "followable": true,
+            "exoticallyRequired": false,
+            "matchesDoNotFollow": false,
+            "couldNotResolve": false,
+            "dependencyTypes": ["npm-no-pkg", "deprecated"],
+            "dynamic": false,
+            "circular": false,
+            "module": "deprecated-at-the-start-for-test-purposes",
+            "moduleSystem": "cjs",
+            "valid": true,
+            "license": "GPL"
+          }
+        ],
+        "dependents": [],
+        "valid": true
+      },
+      {
+        "source": "test/main/__mocks__/cruise-reporterless/deprecated-node-module/node_modules/deprecated-at-the-start-for-test-purposes/index.js",
+        "orphan": false,
+        "dependencies": [
+          {
+            "resolved": "test/main/__mocks__/cruise-reporterless/deprecated-node-module/node_modules/deprecated-at-the-start-for-test-purposes/package.json",
+            "coreModule": false,
+            "followable": false,
+            "exoticallyRequired": false,
+            "matchesDoNotFollow": false,
+            "couldNotResolve": false,
+            "dependencyTypes": ["local"],
+            "dynamic": false,
+            "circular": false,
+            "module": "./package.json",
+            "moduleSystem": "cjs",
+            "valid": true
+          }
+        ],
+        "dependents": [
+          "test/main/__mocks__/cruise-reporterless/deprecated-node-module/require-something-deprecated.js"
+        ],
+        "valid": true
+      },
+      {
+        "source": "test/main/__mocks__/cruise-reporterless/deprecated-node-module/node_modules/deprecated-at-the-start-for-test-purposes/package.json",
+        "followable": false,
+        "matchesDoNotFollow": false,
+        "coreModule": false,
+        "couldNotResolve": false,
+        "dependencyTypes": ["local"],
+        "orphan": false,
+        "dependencies": [],
+        "dependents": [
+          "test/main/__mocks__/cruise-reporterless/deprecated-node-module/node_modules/deprecated-at-the-start-for-test-purposes/index.js"
+        ],
+        "valid": true
+      }
+    ]
+  }
+]

@@ -8,7 +8,7 @@ const extractES6 = (pJavaScriptSource, pDependencies, pExtension = ".js") =>
     pDependencies
   );
 
-describe("ast-extractors/extract-ES6-deps", () => {
+describe("[U] ast-extractors/extract-ES6-deps", () => {
   it("dynamic imports of strings", () => {
     let lDeps = [];
 

@@ -2,11 +2,11 @@ import { expect } from "chai";
 import validate from "../../src/validate/index.js";
 import readRuleSet from "./readruleset.utl.mjs";
 
-describe("validate/index - license", () => {
+describe("[I] validate/index - license", () => {
   it("Skips dependencies that have no license attached", () => {
     expect(
       validate.dependency(
-        readRuleSet("./test/validate/fixtures/rules.license.json"),
+        readRuleSet("./test/validate/__mocks__/rules.license.json"),
         { source: "something" },
         { resolved: "src/aap/speeltuigen/autoband.ts" }
       )
@@ -16,7 +16,7 @@ describe("validate/index - license", () => {
   it("does not flag dependencies that do not match the license expression", () => {
     expect(
       validate.dependency(
-        readRuleSet("./test/validate/fixtures/rules.license.json"),
+        readRuleSet("./test/validate/__mocks__/rules.license.json"),
         { source: "something" },
         {
           resolved: "src/aap/speeltuigen/autoband.ts",
@@ -29,7 +29,7 @@ describe("validate/index - license", () => {
   it("flags dependencies that match the license expression", () => {
     expect(
       validate.dependency(
-        readRuleSet("./test/validate/fixtures/rules.license.json"),
+        readRuleSet("./test/validate/__mocks__/rules.license.json"),
         { source: "something" },
         {
           resolved: "src/aap/speeltuigen/autoband.ts",
@@ -43,11 +43,11 @@ describe("validate/index - license", () => {
   });
 });
 
-describe("validate/index - licenseNot", () => {
+describe("[I] validate/index - licenseNot", () => {
   it("Skips dependencies that have no license attached", () => {
     expect(
       validate.dependency(
-        readRuleSet("./test/validate/fixtures/rules.licensenot.json"),
+        readRuleSet("./test/validate/__mocks__/rules.licensenot.json"),
         { source: "something" },
         { resolved: "src/aap/speeltuigen/autoband.ts" }
       )
@@ -57,7 +57,7 @@ describe("validate/index - licenseNot", () => {
   it("does not flag dependencies that do match the license expression", () => {
     expect(
       validate.dependency(
-        readRuleSet("./test/validate/fixtures/rules.licensenot.json"),
+        readRuleSet("./test/validate/__mocks__/rules.licensenot.json"),
         { source: "something" },
         {
           resolved: "src/aap/speeltuigen/autoband.ts",
@@ -70,7 +70,7 @@ describe("validate/index - licenseNot", () => {
   it("flags dependencies that do not match the license expression", () => {
     expect(
       validate.dependency(
-        readRuleSet("./test/validate/fixtures/rules.licensenot.json"),
+        readRuleSet("./test/validate/__mocks__/rules.licensenot.json"),
         { source: "something" },
         {
           resolved: "src/aap/speeltuigen/autoband.ts",

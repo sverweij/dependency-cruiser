@@ -8,15 +8,15 @@ import cli from "../../src/cli/index.js";
 import { assertFileEqual, assertJSONFileEqual } from "./asserthelpers.utl.mjs";
 import deleteDammit from "./delete-dammit.utl.cjs";
 
-const OUT_DIR = "./test/cli/output";
-const FIX_DIR = "./test/cli/fixtures";
+const OUT_DIR = "./test/cli/__output__";
+const FIX_DIR = "./test/cli/__fixtures__";
 
 /* eslint max-len:0*/
 const TEST_PAIRS = [
   {
     description:
-      "dependency-cruise -f test/output/{{moduleType}}.dir.json test/cli/fixtures/{{moduleType}}",
-    dirOrFile: "test/cli/fixtures/{{moduleType}}",
+      "dependency-cruise -f test/output/{{moduleType}}.dir.json test/cli/__fixtures__/{{moduleType}}",
+    dirOrFile: "test/cli/__fixtures__/{{moduleType}}",
     options: {
       outputTo: path.join(OUT_DIR, "{{moduleType}}.dir.json"),
       outputType: "json",
@@ -26,8 +26,8 @@ const TEST_PAIRS = [
   },
   {
     description:
-      "dependency-cruise -f test/output/{{moduleType}}.dir.json test/cli/fixtures/{{moduleType}}",
-    dirOrFile: "test/cli/fixtures/{{moduleType}}",
+      "dependency-cruise -f test/output/{{moduleType}}.dir.json test/cli/__fixtures__/{{moduleType}}",
+    dirOrFile: "test/cli/__fixtures__/{{moduleType}}",
     options: {
       outputTo: path.join(OUT_DIR, "{{moduleType}}.dir.json"),
       outputType: "json",
@@ -37,8 +37,8 @@ const TEST_PAIRS = [
   },
   {
     description:
-      "dependency-cruise -f test/output/{{moduleType}}.file.json test/cli/fixtures/{{moduleType}}/root_one.js",
-    dirOrFile: "test/cli/fixtures/{{moduleType}}/root_one.js",
+      "dependency-cruise -f test/output/{{moduleType}}.file.json test/cli/__fixtures__/{{moduleType}}/root_one.js",
+    dirOrFile: "test/cli/__fixtures__/{{moduleType}}/root_one.js",
     options: {
       outputTo: path.join(OUT_DIR, "{{moduleType}}.file.json"),
       outputType: "json",
@@ -48,8 +48,8 @@ const TEST_PAIRS = [
   },
   {
     description:
-      "dependency-cruise -f test/output/{{moduleType}}.dir.filtered.json -x node_modules test/cli/fixtures/{{moduleType}}",
-    dirOrFile: "test/cli/fixtures/{{moduleType}}",
+      "dependency-cruise -f test/output/{{moduleType}}.dir.filtered.json -x node_modules test/cli/__fixtures__/{{moduleType}}",
+    dirOrFile: "test/cli/__fixtures__/{{moduleType}}",
     options: {
       outputTo: path.join(OUT_DIR, "{{moduleType}}.dir.filtered.json"),
       outputType: "json",
@@ -60,11 +60,11 @@ const TEST_PAIRS = [
   },
   {
     description: "html",
-    dirOrFile: "test/cli/fixtures/{{moduleType}}",
+    dirOrFile: "test/cli/__fixtures__/{{moduleType}}",
     options: {
       outputTo: path.join(OUT_DIR, "{{moduleType}}.dir.filtered.html"),
       outputType: "html",
-      validate: "test/cli/fixtures/rules.sub-not-allowed.json",
+      validate: "test/cli/__fixtures__/rules.sub-not-allowed.json",
       exclude: "node_modules",
     },
     expect: "{{moduleType}}.dir.filtered.html",
@@ -72,10 +72,10 @@ const TEST_PAIRS = [
   },
   {
     description: "regular dot with default theme",
-    dirOrFile: "test/cli/fixtures/{{moduleType}}",
+    dirOrFile: "test/cli/__fixtures__/{{moduleType}}",
     options: {
       outputTo: path.join(OUT_DIR, "{{moduleType}}.dir.filtered.dot"),
-      validate: "test/cli/fixtures/rules.sub-not-allowed.json",
+      validate: "test/cli/__fixtures__/rules.sub-not-allowed.json",
       outputType: "dot",
       exclude: "node_modules",
     },
@@ -84,7 +84,7 @@ const TEST_PAIRS = [
   },
   {
     description: "dot - duplicate subs",
-    dirOrFile: "test/cli/fixtures/duplicate-subs",
+    dirOrFile: "test/cli/__fixtures__/duplicate-subs",
     options: {
       outputTo: path.join(OUT_DIR, "duplicate-subs.dot"),
       outputType: "dot",
@@ -95,11 +95,11 @@ const TEST_PAIRS = [
   },
   {
     description: "csv",
-    dirOrFile: "test/cli/fixtures/{{moduleType}}",
+    dirOrFile: "test/cli/__fixtures__/{{moduleType}}",
     options: {
       outputTo: path.join(OUT_DIR, "{{moduleType}}.dir.filtered.csv"),
       outputType: "csv",
-      validate: "test/cli/fixtures/rules.sub-not-allowed.json",
+      validate: "test/cli/__fixtures__/rules.sub-not-allowed.json",
       exclude: "node_modules",
     },
     expect: "{{moduleType}}.dir.filtered.csv",
@@ -178,7 +178,7 @@ function runFileBasedTests(pModuleType) {
   });
 }
 /* eslint mocha/no-hooks-for-single-case: off */
-describe("cli/index", () => {
+describe("[E] cli/index", () => {
   before("set up", () => {
     resetOutputDirectory();
   });
@@ -187,15 +187,15 @@ describe("cli/index", () => {
     resetOutputDirectory();
   });
 
-  describe("specials", () => {
+  describe("[I] specials", () => {
     it("dependency-cruises multiple files and folders in one go", () => {
       const lOutputFileName = "multiple-in-one-go.json";
       const lOutputTo = path.join(OUT_DIR, lOutputFileName);
       const lExitCode = cli(
         [
-          "test/cli/fixtures/cjs/sub",
-          "test/cli/fixtures/duplicate-subs/sub/more-in-sub.js",
-          "test/cli/fixtures/unresolvable-in-sub",
+          "test/cli/__fixtures__/cjs/sub",
+          "test/cli/__fixtures__/duplicate-subs/sub/more-in-sub.js",
+          "test/cli/__fixtures__/unresolvable-in-sub",
         ],
         {
           outputTo: lOutputTo,
@@ -210,10 +210,10 @@ describe("cli/index", () => {
     it("returns 0 even if there's transgressions when outputType !== 'error' ", () => {
       const lOutputFileName = "transgression-count.json";
       const lOutputTo = path.join(OUT_DIR, lOutputFileName);
-      const lExitCode = cli(["test/cli/fixtures/cjs"], {
+      const lExitCode = cli(["test/cli/__fixtures__/cjs"], {
         outputTo: lOutputTo,
         outputType: "json",
-        validate: "test/cli/fixtures/rules.sub-not-allowed-error.json",
+        validate: "test/cli/__fixtures__/rules.sub-not-allowed-error.json",
       });
       const lExpectedTransgressions = 0;
 
@@ -223,10 +223,10 @@ describe("cli/index", () => {
     it("returns the number of transgressions if outputType === 'error' ", () => {
       const lOutputFileName = "transgression-count.json";
       const lOutputTo = path.join(OUT_DIR, lOutputFileName);
-      const lExitCode = cli(["test/cli/fixtures/cjs"], {
+      const lExitCode = cli(["test/cli/__fixtures__/cjs"], {
         outputTo: lOutputTo,
         outputType: "err",
-        validate: "test/cli/fixtures/rules.sub-not-allowed-error.json",
+        validate: "test/cli/__fixtures__/rules.sub-not-allowed-error.json",
       });
       const lExpectedTransgressions = 3;
 
@@ -277,7 +277,7 @@ describe("cli/index", () => {
       const unhookInterceptStdError = intercept((pText) => {
         lCapturedStderr += pText;
       });
-      const lExitCode = cli(["test/cli/fixtures"], {
+      const lExitCode = cli(["test/cli/__fixtures__"], {
         outputTo: path.join(OUT_DIR, "file/you/cant/write/to"),
       });
 
@@ -293,7 +293,7 @@ describe("cli/index", () => {
       );
     });
 
-    it("dependency-cruise test/cli/fixtures without rules will report no dependency violations on stdout", () => {
+    it("dependency-cruise test/cli/__fixtures__ without rules will report no dependency violations on stdout", () => {
       let lCapturedStderr = "";
       const unhookInterceptStdOut = intercept(() => {
         // This space intentionally left empty
@@ -301,7 +301,7 @@ describe("cli/index", () => {
       const unhookInterceptStdError = intercept((pText) => {
         lCapturedStderr += pText;
       });
-      const lExitCode = cli(["test/cli/fixtures"]);
+      const lExitCode = cli(["test/cli/__fixtures__"]);
 
       unhookInterceptStdOut();
       unhookInterceptStdError();
@@ -326,7 +326,7 @@ describe("cli/index", () => {
       });
 
       deleteDammit(lValidationFileName);
-      const lExitCode = cli(["test/cli/fixtures"], {
+      const lExitCode = cli(["test/cli/__fixtures__"], {
         init: "js",
       });
 
@@ -346,12 +346,15 @@ describe("cli/index", () => {
     it("dependency-cruise with a --webpack-config with an object export will respect the resolve stuff in there", () => {
       const lOutputFileName = "webpack-config-alias.json";
       const lOutputTo = path.join(OUT_DIR, lOutputFileName);
-      const lExitCode = cli(["test/cli/fixtures/webpackconfig/aliassy/src"], {
-        outputTo: lOutputTo,
-        outputType: "json",
-        webpackConfig:
-          "test/cli/fixtures/webpackconfig/aliassy/webpack.regularexport.config.js",
-      });
+      const lExitCode = cli(
+        ["test/cli/__fixtures__/webpackconfig/aliassy/src"],
+        {
+          outputTo: lOutputTo,
+          outputType: "json",
+          webpackConfig:
+            "test/cli/__fixtures__/webpackconfig/aliassy/webpack.regularexport.config.js",
+        }
+      );
 
       expect(lExitCode).to.equal(0);
       assertJSONFileEqual(lOutputTo, path.join(FIX_DIR, lOutputFileName));
@@ -360,12 +363,15 @@ describe("cli/index", () => {
     it("dependency-cruise with a .dependency-cruiser config with a webpackConfig section will respect that config", () => {
       const lOutputFileName = "webpack-config-alias-cruiser-config.json";
       const lOutputTo = path.join(OUT_DIR, lOutputFileName);
-      const lExitCode = cli(["test/cli/fixtures/webpackconfig/aliassy/src"], {
-        outputTo: lOutputTo,
-        outputType: "json",
-        validate:
-          "test/cli/fixtures/webpackconfig/aliassy/dependency-cruiser-json-with-webpack-config.json",
-      });
+      const lExitCode = cli(
+        ["test/cli/__fixtures__/webpackconfig/aliassy/src"],
+        {
+          outputTo: lOutputTo,
+          outputType: "json",
+          validate:
+            "test/cli/__fixtures__/webpackconfig/aliassy/dependency-cruiser-json-with-webpack-config.json",
+        }
+      );
 
       expect(lExitCode).to.equal(0);
       assertJSONFileEqual(lOutputTo, path.join(FIX_DIR, lOutputFileName));
@@ -377,13 +383,13 @@ describe("cli/index", () => {
     const lOutputTo = path.join(OUT_DIR, lOutputFileName);
     const lExitCode = cli(
       [
-        "test/cli/fixtures/typescriptconfig/cli-dynamic-imports/import_dynamically.ts",
+        "test/cli/__fixtures__/typescriptconfig/cli-dynamic-imports/import_dynamically.ts",
       ],
       {
         outputTo: lOutputTo,
         outputType: "json",
         tsConfig:
-          "test/cli/fixtures/typescriptconfig/cli-dynamic-imports/tsconfig.compile_dynamic_imports.json",
+          "test/cli/__fixtures__/typescriptconfig/cli-dynamic-imports/tsconfig.compile_dynamic_imports.json",
       }
     );
 
@@ -396,13 +402,13 @@ describe("cli/index", () => {
     const lOutputTo = path.join(OUT_DIR, lOutputFileName);
     const lExitCode = cli(
       [
-        "test/cli/fixtures/typescriptconfig/cli-dynamic-imports/import_dynamically2.ts",
+        "test/cli/__fixtures__/typescriptconfig/cli-dynamic-imports/import_dynamically2.ts",
       ],
       {
         outputTo: lOutputTo,
         outputType: "json",
         tsConfig:
-          "test/cli/fixtures/typescriptconfig/cli-dynamic-imports/tsconfig.error_on_compile_dynamic_imports.json",
+          "test/cli/__fixtures__/typescriptconfig/cli-dynamic-imports/tsconfig.error_on_compile_dynamic_imports.json",
       }
     );
 
@@ -415,14 +421,14 @@ describe("cli/index", () => {
     const lOutputTo = path.join(OUT_DIR, lOutputFileName);
 
     const lExitCode = cli(
-      ["test/cli/fixtures/typescriptconfig/cli-config-with-path/src"],
+      ["test/cli/__fixtures__/typescriptconfig/cli-config-with-path/src"],
       {
         outputTo: lOutputTo,
         outputType: "json",
         tsConfig:
-          "test/cli/fixtures/typescriptconfig/cli-config-with-path/tsconfig.json",
+          "test/cli/__fixtures__/typescriptconfig/cli-config-with-path/tsconfig.json",
         webpackConfig:
-          "test/cli/fixtures/typescriptconfig/cli-config-with-path/webpack.config.js",
+          "test/cli/__fixtures__/typescriptconfig/cli-config-with-path/webpack.config.js",
       }
     );
 
@@ -434,11 +440,12 @@ describe("cli/index", () => {
     const lOutputFileName = "babel-es6-result.json";
     const lOutputTo = path.join(OUT_DIR, lOutputFileName);
 
-    const lExitCode = cli(["test/cli/fixtures/babel/es6/src"], {
+    const lExitCode = cli(["test/cli/__fixtures__/babel/es6/src"], {
       outputTo: lOutputTo,
       outputType: "json",
-      babelConfig: "test/cli/fixtures/babel/es6/babelrc.valid.json",
-      webpackConfig: "test/cli/fixtures/babel/es6/webpack-cache-bust.config.js",
+      babelConfig: "test/cli/__fixtures__/babel/es6/babelrc.valid.json",
+      webpackConfig:
+        "test/cli/__fixtures__/babel/es6/webpack-cache-bust.config.js",
     });
 
     expect(lExitCode).to.equal(0);
@@ -452,11 +459,12 @@ describe("cli/index", () => {
     const lOutputFileName = "babel-ts-result.json";
     const lOutputTo = path.join(OUT_DIR, lOutputFileName);
 
-    const lExitCode = cli(["test/cli/fixtures/babel/ts/src"], {
+    const lExitCode = cli(["test/cli/__fixtures__/babel/ts/src"], {
       outputTo: lOutputTo,
       outputType: "json",
-      babelConfig: "test/cli/fixtures/babel/ts/babelrc.json",
-      webpackConfig: "test/cli/fixtures/babel/ts/webpack-cache-bust.config.js",
+      babelConfig: "test/cli/__fixtures__/babel/ts/babelrc.json",
+      webpackConfig:
+        "test/cli/__fixtures__/babel/ts/webpack-cache-bust.config.js",
     });
 
     expect(lExitCode).to.equal(0);
@@ -470,10 +478,10 @@ describe("cli/index", () => {
     const lOutputFileName = "known-errors-not-known.txt";
     const lOutputTo = path.join(OUT_DIR, lOutputFileName);
 
-    const lExitCode = cli(["test/cli/fixtures/known-violations/src"], {
+    const lExitCode = cli(["test/cli/__fixtures__/known-violations/src"], {
       outputTo: lOutputTo,
       outputType: "err",
-      validate: "test/cli/fixtures/known-violations/config.js",
+      validate: "test/cli/__fixtures__/known-violations/config.js",
     });
     const lExpectedAmountOfErrors = 2;
 
@@ -489,11 +497,11 @@ describe("cli/index", () => {
     const lOutputFileName = "known-errors-known.txt";
     const lOutputTo = path.join(OUT_DIR, lOutputFileName);
 
-    const lExitCode = cli(["test/cli/fixtures/known-violations/src"], {
+    const lExitCode = cli(["test/cli/__fixtures__/known-violations/src"], {
       outputTo: lOutputTo,
       outputType: "err",
-      validate: "test/cli/fixtures/known-violations/config.js",
-      ignoreKnown: "test/cli/fixtures/known-violations/known.json",
+      validate: "test/cli/__fixtures__/known-violations/config.js",
+      ignoreKnown: "test/cli/__fixtures__/known-violations/known.json",
     });
 
     expect(lExitCode).to.equal(1);
@@ -504,7 +512,7 @@ describe("cli/index", () => {
     // );
   });
 
-  describe("file based tests - commonJS", () => {
+  describe("[I] file based tests - commonJS", () => {
     runFileBasedTests("cjs");
   });
 });

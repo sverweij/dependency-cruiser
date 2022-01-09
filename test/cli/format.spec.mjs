@@ -8,13 +8,13 @@ import deleteDammit from "./delete-dammit.utl.cjs";
 function relative(pFileName) {
   return fileURLToPath(new URL(pFileName, import.meta.url));
 }
-describe("cli/format", () => {
+describe("[E] cli/format", () => {
   it("formats a cruise result and writes it to file", async () => {
     const lOutFile = "thing";
 
     deleteDammit(lOutFile);
 
-    const lExitCode = await format(relative("fixtures/empty.json"), {
+    const lExitCode = await format(relative("__fixtures__/empty.json"), {
       outputTo: lOutFile,
     });
 
@@ -29,7 +29,7 @@ describe("cli/format", () => {
     deleteDammit(lOutFile);
 
     const lExitCode = await format(
-      relative("fixtures/result-has-a-dependency-violation.json"),
+      relative("__fixtures__/result-has-a-dependency-violation.json"),
       {
         outputTo: lOutFile,
         outputType: "json",
@@ -63,7 +63,7 @@ describe("cli/format", () => {
     deleteDammit(lOutFile);
 
     const lExitCode = await format(
-      relative("fixtures/result-has-a-dependency-violation.json"),
+      relative("__fixtures__/result-has-a-dependency-violation.json"),
       {
         outputTo: lOutFile,
       }

@@ -1,7 +1,7 @@
 import { expect } from "chai";
 import normalize from "../../../src/main/options/normalize.js";
 
-describe("main/options/normalize - format options", () => {
+describe("[U] main/options/normalize - format options", () => {
   it("makes focus strings into an object", () => {
     expect(
       normalize.normalizeFormatOptions({
