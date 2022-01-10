@@ -2,7 +2,7 @@ import { expect } from "chai";
 import noOrphansRule from "../../configs/rules/no-orphans.js";
 import matchModuleRule from "../../src/validate/match-module-rule.js";
 
-describe("configs/rules/no-orphans", () => {
+describe("[I] configs/rules/no-orphans", () => {
   it("flags non-excepted orphans as orphan rule transgression", () => {
     expect(
       matchModuleRule.matchesOrphanRule(noOrphansRule, {
@@ -21,7 +21,7 @@ describe("configs/rules/no-orphans", () => {
     ).to.deep.equal(true);
   });
 
-  it("does not flag dot files not as orphan rule transgressions", () => {
+  it("does not flag dot files as orphan rule transgressions", () => {
     expect(
       matchModuleRule.matchesOrphanRule(noOrphansRule, {
         source: ".Rémi.js",

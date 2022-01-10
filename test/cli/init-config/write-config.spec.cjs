@@ -7,7 +7,7 @@ const writeConfig = require("../../../src/cli/init-config/write-config");
 const RULES_FILE_JS = ".dependency-cruiser.js";
 const expect = chai.expect;
 
-describe("cli/init-config/write-config", () => {
+describe("[U] cli/init-config/write-config", () => {
   const WORKINGDIR = process.cwd();
 
   afterEach("tear down", () => {
@@ -16,10 +16,10 @@ describe("cli/init-config/write-config", () => {
 
   it("writes if there's no file there yet", () => {
     const lEmptyDirectory =
-      "test/cli/fixtures/init-config/no-config-files-exist";
+      "test/cli/__fixtures__/init-config/no-config-files-exist";
     const lCustomConfigFileName = "depcruise.config.js";
     const lConfigResultFileName = `./${path.join(
-      "../fixtures/init-config/no-config-files-exist",
+      "../__fixtures__/init-config/no-config-files-exist",
       lCustomConfigFileName
     )}`;
 
@@ -47,7 +47,7 @@ describe("cli/init-config/write-config", () => {
   });
 
   it("does not overwrite an existing config", () => {
-    process.chdir("test/cli/fixtures/init-config/config-file-exists");
+    process.chdir("test/cli/__fixtures__/init-config/config-file-exists");
     let lStillHere = true;
 
     fs.writeFileSync(RULES_FILE_JS, "module.exports = {}", {

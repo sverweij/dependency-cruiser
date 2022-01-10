@@ -1,7 +1,7 @@
 import { expect } from "chai";
 import extractWithSwc from "./extract-with-swc.utl.mjs";
 
-describe("ast-extractors/extract-swc - type imports", () => {
+describe("[U] ast-extractors/extract-swc - type imports", () => {
   // normal fail, but Visitor.visitTsTypeAnnotation doesn't seem to get called
   // it("extracts type imports in const declarations", () => {
   //   expect(

@@ -1,0 +1,97 @@
+[
+  {
+    "title": "recursive on non-relative AMD modules",
+    "input": {
+      "fileName": "test/main/__mocks__/cruise-reporterless/amd/requires-non-relative-module.js"
+    },
+    "expected": [
+      {
+        "source": "test/main/__mocks__/cruise-reporterless/amd/requires-non-relative-module.js",
+        "orphan": false,
+        "dependencies": [
+          {
+            "module": "lodash",
+            "resolved": "lodash",
+            "moduleSystem": "amd",
+            "coreModule": false,
+            "dependencyTypes": ["unknown"],
+            "dynamic": false,
+            "circular": false,
+            "followable": false,
+            "exoticallyRequired": false,
+            "matchesDoNotFollow": false,
+            "couldNotResolve": true,
+            "valid": true
+          },
+          {
+            "module": "other-module-in-the-config",
+            "resolved": "other-module-in-the-config",
+            "moduleSystem": "amd",
+            "coreModule": false,
+            "dependencyTypes": ["unknown"],
+            "dynamic": false,
+            "circular": false,
+            "followable": false,
+            "exoticallyRequired": false,
+            "matchesDoNotFollow": false,
+            "couldNotResolve": true,
+            "valid": true
+          },
+          {
+            "module": "sub/local-module-in-drag",
+            "resolved": "test/main/__mocks__/cruise-reporterless/amd/sub/local-module-in-drag.js",
+            "moduleSystem": "amd",
+            "coreModule": false,
+            "dependencyTypes": ["undetermined"],
+            "dynamic": false,
+            "circular": false,
+            "followable": true,
+            "exoticallyRequired": false,
+            "matchesDoNotFollow": false,
+            "couldNotResolve": false,
+            "valid": true
+          }
+        ],
+        "dependents": [],
+        "valid": true
+      },
+      {
+        "source": "lodash",
+        "followable": false,
+        "matchesDoNotFollow": false,
+        "coreModule": false,
+        "couldNotResolve": true,
+        "dependencyTypes": ["unknown"],
+        "orphan": false,
+        "dependencies": [],
+        "dependents": [
+          "test/main/__mocks__/cruise-reporterless/amd/requires-non-relative-module.js"
+        ],
+        "valid": true
+      },
+      {
+        "source": "other-module-in-the-config",
+        "followable": false,
+        "matchesDoNotFollow": false,
+        "coreModule": false,
+        "couldNotResolve": true,
+        "dependencyTypes": ["unknown"],
+        "orphan": false,
+        "dependencies": [],
+        "dependents": [
+          "test/main/__mocks__/cruise-reporterless/amd/requires-non-relative-module.js"
+        ],
+        "valid": true
+      },
+      {
+        "source": "test/main/__mocks__/cruise-reporterless/amd/sub/local-module-in-drag.js",
+        "orphan": false,
+        "dependencies": [],
+        "dependents": [
+          "test/main/__mocks__/cruise-reporterless/amd/requires-non-relative-module.js"
+        ],
+        "valid": true
+      }
+    ]
+  }
+]

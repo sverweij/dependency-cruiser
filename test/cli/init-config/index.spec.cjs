@@ -9,7 +9,7 @@ use(require("chai-json-schema"));
 
 const RULES_FILE_JS = ".dependency-cruiser.js";
 
-describe("cli/init-config/index", () => {
+describe("[I] cli/init-config/index", () => {
   const WORKINGDIR = process.cwd();
 
   afterEach("tear down", () => {
@@ -17,9 +17,9 @@ describe("cli/init-config/index", () => {
   });
 
   it("init called with a string !== 'preset' creates a self-contained js rules file", () => {
-    process.chdir("test/cli/fixtures/init-config/no-config-files-exist");
+    process.chdir("test/cli/__fixtures__/init-config/no-config-files-exist");
     const lConfigResultFileName = `./${path.join(
-      "../fixtures/init-config/no-config-files-exist",
+      "../__fixtures__/init-config/no-config-files-exist",
       RULES_FILE_JS
     )}`;
 
@@ -39,9 +39,9 @@ describe("cli/init-config/index", () => {
   });
 
   it("init preset creates a preset based js rules file", () => {
-    process.chdir("test/cli/fixtures/init-config/no-config-files-exist");
+    process.chdir("test/cli/__fixtures__/init-config/no-config-files-exist");
     const lConfigResultFileName = `./${path.join(
-      "../fixtures/init-config/no-config-files-exist",
+      "../__fixtures__/init-config/no-config-files-exist",
       RULES_FILE_JS
     )}`;
 
@@ -64,9 +64,9 @@ describe("cli/init-config/index", () => {
   });
 
   it("init yes creates a self-contained js rules file", () => {
-    process.chdir("test/cli/fixtures/init-config/no-config-files-exist");
+    process.chdir("test/cli/__fixtures__/init-config/no-config-files-exist");
     const lConfigResultFileName = `./${path.join(
-      "../fixtures/init-config/no-config-files-exist",
+      "../__fixtures__/init-config/no-config-files-exist",
       RULES_FILE_JS
     )}`;
 
@@ -87,9 +87,9 @@ describe("cli/init-config/index", () => {
   });
 
   it("init yes in a ts project creates a self-contained js rules file with typescript things flipped to yes", () => {
-    process.chdir("test/cli/fixtures/init-config/ts-config-exists");
+    process.chdir("test/cli/__fixtures__/init-config/ts-config-exists");
     const lConfigResultFileName = `./${path.join(
-      "../fixtures/init-config/ts-config-exists",
+      "../__fixtures__/init-config/ts-config-exists",
       RULES_FILE_JS
     )}`;
 
@@ -113,9 +113,9 @@ describe("cli/init-config/index", () => {
   });
 
   it("init yes in a webpack project creates a self-contained js rules file with webpack things flipped to yes", () => {
-    process.chdir("test/cli/fixtures/init-config/webpack-config-exists");
+    process.chdir("test/cli/__fixtures__/init-config/webpack-config-exists");
     const lConfigResultFileName = `./${path.join(
-      "../fixtures/init-config/webpack-config-exists",
+      "../__fixtures__/init-config/webpack-config-exists",
       RULES_FILE_JS
     )}`;
 
@@ -139,10 +139,10 @@ describe("cli/init-config/index", () => {
   });
 
   it("init experimental-scripts creates a .dependency-cruiser config + updates package.json with scripts", () => {
-    process.chdir("test/cli/init-config/fixtures/update-manifest");
+    process.chdir("test/cli/init-config/__fixtures__/update-manifest");
 
     const lConfigResultFileName = `./${path.join(
-      "fixtures/update-manifest",
+      "__fixtures__/update-manifest",
       RULES_FILE_JS
     )}`;
 
@@ -169,11 +169,11 @@ describe("cli/init-config/index", () => {
 
   it("init experimental-scripts updates package.json with scripts, and leaves an existing dc config alone", () => {
     process.chdir(
-      "test/cli/init-config/fixtures/update-manifest-dc-config-exists"
+      "test/cli/init-config/__fixtures__/update-manifest-dc-config-exists"
     );
 
     const lConfigResultFileName = `./${path.join(
-      "fixtures/update-manifest-dc-config-exists",
+      "__fixtures__/update-manifest-dc-config-exists",
       RULES_FILE_JS
     )}`;
     const lManifestFilename = "package.json";

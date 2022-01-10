@@ -1,7 +1,7 @@
 import { expect } from "chai";
 import softenKnownViolations from "../../src/enrich/soften-known-violations.js";
 
-describe("enrich/soften-known-violations - modules violations", () => {
+describe("[U] enrich/soften-known-violations - modules violations", () => {
   /** @type import("../../types/baseline-violations").IBaselineViolations */
   const lKnownModuleViolations = [
     {
@@ -96,7 +96,7 @@ describe("enrich/soften-known-violations - modules violations", () => {
   });
 });
 
-describe("enrich/soften-known-violations - dependency violations", () => {
+describe("[U] enrich/soften-known-violations - dependency violations", () => {
   /** @type import("../../types/baseline-violations").IBaselineViolations */
   const lKnownDependencyViolations = [
     {

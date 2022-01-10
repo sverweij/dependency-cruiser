@@ -5,7 +5,7 @@ import { createRequireJSON } from "../backwards.utl.mjs";
 
 const requireJSON = createRequireJSON(import.meta.url);
 const cruiseResult = requireJSON(
-  "./fixtures/cruise-results-dc-2020-08-30-src-cli.json"
+  "./__mocks__/cruise-results-dc-2020-08-30-src-cli.json"
 );
 
 const MINIMAL_RESULT = {
@@ -25,7 +25,7 @@ const MINIMAL_RESULT = {
   },
 };
 
-describe("main.format - format", () => {
+describe("[E] main.format - format", () => {
   it("barfs when it gets an invalid output type", () => {
     expect(() => {
       main.format({}, { outputType: "not-a-valid-reporter" });

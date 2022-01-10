@@ -1,0 +1,38 @@
+[
+  {
+    "resolved": "test/extract/__mocks__/amd-bangs/root_one.js",
+    "coreModule": false,
+    "dependencyTypes": ["local"],
+    "dynamic": false,
+    "followable": true,
+    "exoticallyRequired": false,
+    "matchesDoNotFollow": false,
+    "couldNotResolve": false,
+    "module": "./excitingpolyfill!./root_one",
+    "moduleSystem": "amd"
+  },
+  {
+    "resolved": "./root_two",
+    "coreModule": false,
+    "dependencyTypes": ["unknown"],
+    "dynamic": false,
+    "followable": false,
+    "exoticallyRequired": false,
+    "matchesDoNotFollow": false,
+    "couldNotResolve": true,
+    "module": "./root_two",
+    "moduleSystem": "amd"
+  },
+  {
+    "resolved": "test/extract/__mocks__/amd-bangs/somedata.json",
+    "coreModule": false,
+    "dependencyTypes": ["local"],
+    "dynamic": false,
+    "followable": false,
+    "exoticallyRequired": false,
+    "matchesDoNotFollow": false,
+    "couldNotResolve": false,
+    "module": "json!./somedata.json",
+    "moduleSystem": "amd"
+  }
+]

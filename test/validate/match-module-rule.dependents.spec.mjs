@@ -53,7 +53,7 @@ const USED_FROM_SNACKBAR_BETWEEN = {
   },
 };
 
-describe("validate/match-module-rule - dependents", () => {
+describe("[I] validate/match-module-rule - dependents", () => {
   it("rule without dependents restriction doesn't flag (implicit)", () => {
     expect(matchModuleRule.matchesDependentsRule(EMPTY_RULE, {})).to.equal(
       false

@@ -14,7 +14,7 @@ const extractcommonJS = (
     pExoticRequireStrings
   );
 
-describe("ast-extractors/extract-cjs-deps", () => {
+describe("[U] ast-extractors/extract-cjs-deps", () => {
   it("require with in an assignment", () => {
     let lDeps = [];
 

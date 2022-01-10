@@ -7,19 +7,19 @@ import { runFixture } from "./run-get-dependencies-fixture.utl.mjs";
 
 const requireJSON = createRequireJSON(import.meta.url);
 
-const coffeeFixtures = requireJSON("./fixtures/coffee.json");
-const vueFixtures = requireJSON("./fixtures/vue.json");
+const coffeeFixtures = requireJSON("./__fixtures__/coffee.json");
+const vueFixtures = requireJSON("./__fixtures__/vue.json");
 
 /* eslint-disable mocha/no-top-level-hooks */
 
-describe("extract/getDependencies - Vue with TypeScript - ", () => {
+describe("[I] extract/getDependencies - Vue with TypeScript - ", () => {
   vueFixtures.forEach((pFixture) => runFixture(pFixture, "tsc"));
 });
-describe("extract/getDependencies - CoffeeScript - ", () => {
+describe("[I] extract/getDependencies - CoffeeScript - ", () => {
   coffeeFixtures.forEach((pFixture) => runFixture(pFixture));
 });
 
-describe("extract/getDependencies - Error scenarios - ", () => {
+describe("[I] extract/getDependencies - Error scenarios - ", () => {
   it("Does not raise an exception on syntax errors (because we're on the loose parser)", () => {
     const lOptions = normalizeCruiseOptions({});
     const lResolveOptions = normalizeResolveOptions(
@@ -29,7 +29,7 @@ describe("extract/getDependencies - Error scenarios - ", () => {
 
     expect(() =>
       getDependencies(
-        "test/extract/fixtures/syntax-error.js",
+        "test/extract/__mocks__/syntax-error.js",
         lOptions,
         lResolveOptions
       )
@@ -46,7 +46,7 @@ describe("extract/getDependencies - Error scenarios - ", () => {
   });
 });
 
-describe("extract/getDependencies - even when require gets non-string arguments, extract doesn't break", () => {
+describe("[I] extract/getDependencies - even when require gets non-string arguments, extract doesn't break", () => {
   const lOptions = normalizeCruiseOptions({});
   const lResolveOptions = normalizeResolveOptions(
     { bustTheCache: true },
@@ -56,7 +56,7 @@ describe("extract/getDependencies - even when require gets non-string arguments,
   it("Just skips require(481)", () => {
     expect(
       getDependencies(
-        "./test/extract/fixtures/cjs-require-non-strings/require-a-number.js",
+        "./test/extract/__mocks__/cjs-require-non-strings/require-a-number.js",
         lOptions,
         lResolveOptions
       ).length
@@ -66,7 +66,7 @@ describe("extract/getDependencies - even when require gets non-string arguments,
   it("Just skips require(a function)", () => {
     expect(
       getDependencies(
-        "./test/extract/fixtures/cjs-require-non-strings/require-a-function.js",
+        "./test/extract/__mocks__/cjs-require-non-strings/require-a-function.js",
         lOptions,
         lResolveOptions
       ).length
@@ -76,7 +76,7 @@ describe("extract/getDependencies - even when require gets non-string arguments,
   it("Just skips require(an iife)", () => {
     expect(
       getDependencies(
-        "./test/extract/fixtures/cjs-require-non-strings/require-an-iife.js",
+        "./test/extract/__mocks__/cjs-require-non-strings/require-an-iife.js",
         normalizeCruiseOptions({}),
         {}
       ).length
@@ -84,7 +84,7 @@ describe("extract/getDependencies - even when require gets non-string arguments,
   });
 });
 
-describe("extract/getDependencies - include", () => {
+describe("[I] extract/getDependencies - include", () => {
   it("returns no dependencies when the includeOnly pattern is erroneous", () => {
     const lOptions = normalizeCruiseOptions({
       includeOnly: "will-not-match-dependencies-for-this-file",
@@ -96,7 +96,7 @@ describe("extract/getDependencies - include", () => {
 
     expect(
       getDependencies(
-        "./test/extract/fixtures/include/src/index.js",
+        "./test/extract/__mocks__/include/src/index.js",
         lOptions,
         lResolveOptions
       )
@@ -112,7 +112,7 @@ describe("extract/getDependencies - include", () => {
 
     expect(
       getDependencies(
-        "./test/extract/fixtures/include/src/index.js",
+        "./test/extract/__mocks__/include/src/index.js",
         lOptions,
         lResolveOptions
       )
@@ -127,7 +127,7 @@ describe("extract/getDependencies - include", () => {
         matchesDoNotFollow: false,
         module: "./bla",
         moduleSystem: "cjs",
-        resolved: "test/extract/fixtures/include/src/bla.js",
+        resolved: "test/extract/__mocks__/include/src/bla.js",
       },
     ]);
   });
@@ -141,7 +141,7 @@ describe("extract/getDependencies - include", () => {
 
     expect(
       getDependencies(
-        "./test/extract/fixtures/include/src/index.js",
+        "./test/extract/__mocks__/include/src/index.js",
         lOptions,
         lResolveOptions
       )
@@ -156,7 +156,7 @@ describe("extract/getDependencies - include", () => {
         matchesDoNotFollow: false,
         module: "../di",
         moduleSystem: "cjs",
-        resolved: "test/extract/fixtures/include/di.js",
+        resolved: "test/extract/__mocks__/include/di.js",
       },
       {
         coreModule: false,
@@ -168,7 +168,7 @@ describe("extract/getDependencies - include", () => {
         matchesDoNotFollow: false,
         module: "./bla",
         moduleSystem: "cjs",
-        resolved: "test/extract/fixtures/include/src/bla.js",
+        resolved: "test/extract/__mocks__/include/src/bla.js",
       },
     ]);
   });
@@ -182,7 +182,7 @@ describe("extract/getDependencies - include", () => {
 
     expect(
       getDependencies(
-        "./test/extract/fixtures/exotic-require/index.js",
+        "./test/extract/__mocks__/exotic-require/index.js",
         lOptions,
         lResolveOptions
       )
@@ -198,7 +198,7 @@ describe("extract/getDependencies - include", () => {
         module: "./required-with-need",
         moduleSystem: "cjs",
         exoticRequire: "need",
-        resolved: "test/extract/fixtures/exotic-require/required-with-need.js",
+        resolved: "test/extract/__mocks__/exotic-require/required-with-need.js",
       },
     ]);
   });
@@ -214,7 +214,7 @@ describe("extract/getDependencies - include", () => {
 
     expect(
       getDependencies(
-        "./test/extract/fixtures/extra-extensions/not-parsed-when-in-extra-extensions.yolo",
+        "./test/extract/__mocks__/extra-extensions/not-parsed-when-in-extra-extensions.yolo",
         lOptions,
         lResolveOptions
       )
@@ -232,7 +232,7 @@ describe("extract/getDependencies - include", () => {
 
     expect(
       getDependencies(
-        "./test/extract/fixtures/specifyTsPreCompilationDeps/index.ts",
+        "./test/extract/__mocks__/specifyTsPreCompilationDeps/index.ts",
         lOptions,
         lResolveOptions
       )
@@ -249,7 +249,7 @@ describe("extract/getDependencies - include", () => {
         moduleSystem: "es6",
         preCompilationOnly: true,
         resolved:
-          "test/extract/fixtures/specifyTsPreCompilationDeps/pre-compilation-only.d.ts",
+          "test/extract/__mocks__/specifyTsPreCompilationDeps/pre-compilation-only.d.ts",
       },
       {
         coreModule: false,
@@ -263,7 +263,7 @@ describe("extract/getDependencies - include", () => {
         moduleSystem: "es6",
         preCompilationOnly: false,
         resolved:
-          "test/extract/fixtures/specifyTsPreCompilationDeps/real-deal.ts",
+          "test/extract/__mocks__/specifyTsPreCompilationDeps/real-deal.ts",
       },
     ]);
   });

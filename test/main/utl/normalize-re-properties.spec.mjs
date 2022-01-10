@@ -23,7 +23,7 @@ const DE_ARRAYED_OBJECT = {
   jet: true,
 };
 
-describe("main/utl/normalize-re-properties", () => {
+describe("[U] main/utl/normalize-re-properties", () => {
   it("returns the input when an empty object and an empty array of properties input is passed", () => {
     expect(normalizeREProperties({}, [])).to.deep.equal({});
   });

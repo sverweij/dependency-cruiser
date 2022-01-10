@@ -2,7 +2,7 @@ import { expect } from "chai";
 
 import deriveModuleMetrics from "../../../../src/enrich/derive/metrics/index.js";
 
-describe("enrich/derive/metrics/module - module stability metrics derivation", () => {
+describe("[U] enrich/derive/metrics/module - module stability metrics derivation", () => {
   it("doesn't do anything when we're not asking for metrics (metrics nor outputType)", () => {
     expect(deriveModuleMetrics([], {})).to.deep.equal([]);
   });

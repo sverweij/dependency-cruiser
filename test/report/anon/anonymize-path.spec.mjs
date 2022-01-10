@@ -2,7 +2,7 @@ import { expect } from "chai";
 import anonymizePath from "../../../src/report/anon/anonymize-path.js";
 import { clearCache } from "../../../src/report/anon/anonymize-path-element.js";
 
-describe("report/anon/anonymizePath", () => {
+describe("[U] report/anon/anonymizePath", () => {
   beforeEach(() => {
     clearCache();
   });

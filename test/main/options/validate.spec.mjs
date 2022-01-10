@@ -1,7 +1,7 @@
 import { expect } from "chai";
 import validate from "../../../src/main/options/validate.js";
 
-describe("main/options/validate", () => {
+describe("[U] main/options/validate", () => {
   it("throws when a invalid module system is passed ", () => {
     expect(() => {
       validate.validateCruiseOptions({

@@ -1,7 +1,7 @@
 import { expect } from "chai";
 import extractKnownViolations from "../../src/config-utl/extract-known-violations.js";
 
-describe("config-utl/extractKnownViolations", () => {
+describe("[I] config-utl/extractKnownViolations", () => {
   const WORKINGDIR = process.cwd();
 
   afterEach(() => {
@@ -15,14 +15,14 @@ describe("config-utl/extractKnownViolations", () => {
   });
 
   it("Throws a SyntaxError when passed non-json", () => {
-    process.chdir("./test/config-utl/fixtures/known-violations");
+    process.chdir("./test/config-utl/__mocks__/known-violations");
     expect(() => extractKnownViolations("this-is-no-json.txt")).to.throw(
       SyntaxError
     );
   });
 
   it("Return the parsed json content of the violations file", () => {
-    process.chdir("./test/config-utl/fixtures/known-violations");
+    process.chdir("./test/config-utl/__mocks__/known-violations");
     expect(extractKnownViolations("known-violations.json")).to.deep.equal([
       {
         from: "src/schema/baseline-violations.schema.js",

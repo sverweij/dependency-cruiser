@@ -5,7 +5,7 @@ import handlers from "../../../../src/cli/listeners/performance-log/handlers.js"
 
 const MAX_LEVEL = 20;
 
-describe("cli/listeners/performance-log/handlers - getHeader", () => {
+describe("[U] cli/listeners/performance-log/handlers - getHeader", () => {
   it("when the level is > the max => empty string", () => {
     expect(handlers.getHeader(30, MAX_LEVEL)).to.equal("");
   });
@@ -17,7 +17,7 @@ describe("cli/listeners/performance-log/handlers - getHeader", () => {
   });
 });
 
-describe("cli/listeners/performance-log/handlers - getProgressLine", () => {
+describe("[U] cli/listeners/performance-log/handlers - getProgressLine", () => {
   const lStateMock = {
     previousTime: process.uptime() - 10,
     previousMessage: "previous message",
@@ -55,7 +55,7 @@ describe("cli/listeners/performance-log/handlers - getProgressLine", () => {
   });
 });
 
-describe("cli/listeners/performance-log/handlers - getEndText", () => {
+describe("[U] cli/listeners/performance-log/handlers - getEndText", () => {
   const lStateMock = {
     previousTime: process.uptime() - 10,
   };

@@ -9,7 +9,7 @@ use(chaiJSONSchema);
 
 const WORKING_DIRECTORY = process.cwd();
 
-describe("main.cruise - reachable integration", () => {
+describe("[E] main.cruise - reachable integration", () => {
   beforeEach("reset current wd", () => {
     process.chdir(WORKING_DIRECTORY);
   });
@@ -19,7 +19,7 @@ describe("main.cruise - reachable integration", () => {
   });
 
   it("finds the dead wood and the stuff isolated from one 'forbidden' rule set", () => {
-    process.chdir(join("test", "main", "fixtures", "reachables"));
+    process.chdir(join("test", "main", "__mocks__", "reachables"));
     const lResult = JSON.parse(
       cruise(
         ["src"],
@@ -67,7 +67,7 @@ describe("main.cruise - reachable integration", () => {
   });
 
   it("finds the dead wood from an 'allowed' rule set", () => {
-    process.chdir(join("test", "main", "fixtures", "reachables"));
+    process.chdir(join("test", "main", "__mocks__", "reachables"));
     const lResult = JSON.parse(
       cruise(
         ["src"],
@@ -101,7 +101,7 @@ describe("main.cruise - reachable integration", () => {
     expect(lResult).to.be.jsonSchema(cruiseResultSchema);
   });
   it("finds the stuff that needs to be isolated from an 'allowed' rule set", () => {
-    process.chdir(join("test", "main", "fixtures", "reachables"));
+    process.chdir(join("test", "main", "__mocks__", "reachables"));
     const lResult = JSON.parse(
       cruise(
         ["src"],

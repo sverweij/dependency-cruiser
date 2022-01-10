@@ -1,7 +1,7 @@
 import { expect } from "chai";
 import extractTypescript from "./extract-typescript.utl.mjs";
 
-describe("ast-extractors/extract-typescript - regular imports", () => {
+describe("[U] ast-extractors/extract-typescript - regular imports", () => {
   it("extracts 'import for side effects only'", () => {
     expect(
       extractTypescript("import './import-for-side-effects';")

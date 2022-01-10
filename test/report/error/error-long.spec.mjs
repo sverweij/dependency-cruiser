@@ -2,13 +2,13 @@
 import { expect } from "chai";
 import chalk from "chalk";
 import render from "../../../src/report/error-long.js";
-import okdeps from "./mocks/everything-fine.mjs";
-import deps from "./mocks/cjs-no-dependency-valid.mjs";
-import warndeps from "./mocks/err-only-warnings.mjs";
-import erradds from "./mocks/err-with-additional-information.mjs";
-import orphanerrs from "./mocks/orphan-deps.mjs";
+import okdeps from "./__mocks__/everything-fine.mjs";
+import deps from "./__mocks__/cjs-no-dependency-valid.mjs";
+import warndeps from "./__mocks__/err-only-warnings.mjs";
+import erradds from "./__mocks__/err-with-additional-information.mjs";
+import orphanerrs from "./__mocks__/orphan-deps.mjs";
 
-describe("report/error-long", () => {
+describe("[I] report/error-long", () => {
   let chalkLevel = chalk.level;
 
   before("disable chalk coloring", () => {

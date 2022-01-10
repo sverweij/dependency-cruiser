@@ -1,10 +1,10 @@
 /* eslint-disable unicorn/no-useless-undefined */
 import { expect } from "chai";
 import addFocus from "../../src/graph-utl/add-focus.js";
-import $input from "./fixtures/focus/dependency-cruiser-only-src.mjs";
-import $focus from "./fixtures/focus/dependency-cruiser-focus-on-main.mjs";
+import $input from "./__fixtures__/focus/dependency-cruiser-only-src.mjs";
+import $focus from "./__fixtures__/focus/dependency-cruiser-focus-on-main.mjs";
 
-describe("enrich/add-focus", () => {
+describe("[U] graph-utl/add-focus", () => {
   it("returns the input modules when there's no pattern", () => {
     expect(addFocus($input)).to.deep.equal($input);
   });

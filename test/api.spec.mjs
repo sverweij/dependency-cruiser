@@ -13,7 +13,7 @@ import extractWebpackResolveConfig from "dependency-cruiser/config-utl/extract-w
  * 'exports' in package.json only work in some of the latest node versions.
  */
 if (satisfies(process.versions.node, "^12.19 || >=14.7")) {
-  describe("api from esm (on node ^12.19 || >= 14.7)", () => {
+  describe("[E] api from esm (on node ^12.19 || >= 14.7)", () => {
     it("exposes dependency-cruiser main with some functions", () => {
       expect(typeof dependencyCruiser).to.equal("object");
       expect(typeof dependencyCruiser.cruise).to.equal("function");

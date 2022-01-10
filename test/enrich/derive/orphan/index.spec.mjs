@@ -1,12 +1,12 @@
 import { expect } from "chai";
 
 import orphan from "../../../../src/enrich/derive/orphan/index.js";
-import ONE_MODULE_FIXTURE from "./fixtures/one-module.mjs";
-import ONE_MODULE_AFTER_PROCESSING from "./fixtures/one-module.afterprocessing.mjs";
-import TWO_MODULES_FIXTURE from "./fixtures/two-module.mjs";
-import TWO_MODULES_AFTER_PROCESSING from "./fixtures/two-module.afterprocessing.mjs";
+import ONE_MODULE_FIXTURE from "./__mocks__/one-module.mjs";
+import ONE_MODULE_AFTER_PROCESSING from "./__mocks__/one-module.afterprocessing.mjs";
+import TWO_MODULES_FIXTURE from "./__mocks__/two-module.mjs";
+import TWO_MODULES_AFTER_PROCESSING from "./__mocks__/two-module.afterprocessing.mjs";
 
-describe("enrich/derive/orphan/index - orphan detection", () => {
+describe("[U] enrich/derive/orphan/index - orphan detection", () => {
   it('attaches the "orphan" boolean to orphan modules by default', () => {
     expect(orphan(ONE_MODULE_FIXTURE, {})).to.deep.equal(
       ONE_MODULE_AFTER_PROCESSING

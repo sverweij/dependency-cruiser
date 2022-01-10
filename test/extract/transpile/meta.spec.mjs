@@ -5,7 +5,7 @@ import lsWrap from "../../../src/extract/transpile/livescript-wrap.js";
 import babelWrap from "../../../src/extract/transpile/babel-wrap.js";
 import vueTemplateWrap from "../../../src/extract/transpile/vue-template-wrap.js";
 
-describe("extract/transpile/meta", () => {
+describe("[U] extract/transpile/meta", () => {
   it("tells which extensions can be scanned", () => {
     expect(meta.scannableExtensions).to.deep.equal([
       ".js",

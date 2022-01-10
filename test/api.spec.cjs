@@ -7,7 +7,7 @@ const semver = require("semver");
  * 'exports' in package.json only work in some of the latest node versions.
  */
 if (semver.satisfies(process.versions.node, "^12.19 || >=14.7")) {
-  describe("api from commonjs (on node ^12.19 || >= 14.7)", () => {
+  describe("[E] api from commonjs (on node ^12.19 || >= 14.7)", () => {
     it("exposes dependency-cruiser main with some functions", () => {
       const dependencyCruiser = require("dependency-cruiser");
       expect(typeof dependencyCruiser).to.equal("object");

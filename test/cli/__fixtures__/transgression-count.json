@@ -1,0 +1,7 @@
+
+  [31merror[39m sub-not-allowed: [1mtest/cli/__fixtures__/cjs/two_only_one.js[22m → [1mtest/cli/__fixtures__/cjs/sub/dir.js[22m
+  [31merror[39m sub-not-allowed: [1mtest/cli/__fixtures__/cjs/sub/dir.js[22m → [1mtest/cli/__fixtures__/cjs/sub/depindir.js[22m
+  [31merror[39m sub-not-allowed: [1mtest/cli/__fixtures__/cjs/root_one.js[22m → [1mtest/cli/__fixtures__/cjs/sub/dir.js[22m
+[31m[39m
+[31m✖ 3 dependency violations (3 errors, 0 warnings). 15 modules, 19 dependencies cruised.[39m
+[31m[39m

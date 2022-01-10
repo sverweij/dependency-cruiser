@@ -3,7 +3,7 @@ import { expect } from "chai";
 import normalizeSource from "../normalize-source.utl.mjs";
 import wrap from "../../../src/extract/transpile/babel-wrap.js";
 
-describe("extract/transpile/babel-wrap", () => {
+describe("[I] extract/transpile/babel-wrap", () => {
   it("tells the babel transpiler is available", () => {
     expect(wrap.isAvailable()).to.equal(true);
   });
@@ -12,12 +12,12 @@ describe("extract/transpile/babel-wrap", () => {
     expect(
       normalizeSource(
         wrap.transpile(
-          readFileSync("./test/extract/transpile/fixtures/babel-in.js", "utf8")
+          readFileSync("./test/extract/transpile/__mocks__/babel-in.js", "utf8")
         )
       )
     ).to.equal(
       readFileSync(
-        "./test/extract/transpile/fixtures/babel-out-no-options.js",
+        "./test/extract/transpile/__fixtures__/babel-out-no-options.js",
         "utf8"
       )
     );
@@ -25,7 +25,7 @@ describe("extract/transpile/babel-wrap", () => {
 
   it("transpiles with babel differently when babel options are passed", () => {
     const lInputFileContents = readFileSync(
-      "./test/extract/transpile/fixtures/babel-in.js",
+      "./test/extract/transpile/__mocks__/babel-in.js",
       "utf8"
     );
     const lBabelOptions = {
@@ -37,12 +37,12 @@ describe("extract/transpile/babel-wrap", () => {
     const lOutput = normalizeSource(
       wrap.transpile(
         lInputFileContents,
-        "/test/extract/transpile/fixtures/babel-in.js",
+        "/test/extract/transpile/__mocks__/babel-in.js",
         lBabelOptions
       )
     );
     const lExpected = readFileSync(
-      "./test/extract/transpile/fixtures/babel-out-es-old.js",
+      "./test/extract/transpile/__fixtures__/babel-out-es-old.js",
       "utf8"
     );
 

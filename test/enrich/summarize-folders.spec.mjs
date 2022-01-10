@@ -127,7 +127,7 @@ const SDP_RULE_SET = {
   ],
 };
 
-describe("enrich/summarize/summarize-folders", () => {
+describe("[I] enrich/summarize/summarize-folders", () => {
   it("returns an empty array when presented with an empty array of folders", () => {
     expect(summarizeFolders([], SDP_RULE_SET)).to.deep.equal([]);
   });

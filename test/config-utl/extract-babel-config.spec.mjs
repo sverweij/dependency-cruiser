@@ -24,7 +24,7 @@ const DEFAULT_EMPTY_BABEL_OPTIONS_OBJECT = {
   targets: {},
 };
 
-describe("config-utl/parseBabelConfig", () => {
+describe("[I] config-utl/extract-babel-config", () => {
   it("throws when no config file name is passed", () => {
     expect(() => {
       extractBabelConfig();
@@ -40,7 +40,7 @@ describe("config-utl/parseBabelConfig", () => {
   it("throws when a config file is passed that does not contain valid json5", () => {
     expect(() => {
       extractBabelConfig(
-        getFullPath("./fixtures/babelconfig/babelrc.invalid.json")
+        getFullPath("./__mocks__/babelconfig/babelrc.invalid.json")
       );
     }).to.throw();
   });
@@ -48,18 +48,18 @@ describe("config-utl/parseBabelConfig", () => {
   it("throws when a config file is passed contains a non-babel option", () => {
     expect(() => {
       extractBabelConfig(
-        getFullPath("./fixtures/babelconfig/babelrc.not-a-babel-option.json")
+        getFullPath("./__mocks__/babelconfig/babelrc.not-a-babel-option.json")
       );
     }).to.throw();
   });
 
   it("returns a default options object when an empty config file is passed", () => {
     const lBabelConfig = extractBabelConfig(
-      getFullPath("./fixtures/babelconfig/babelrc.empty.json")
+      getFullPath("./__mocks__/babelconfig/babelrc.empty.json")
     );
     expect(lBabelConfig).to.have.property("filename");
     expect(pathToPosix(lBabelConfig.filename)).to.contain(
-      "/fixtures/babelconfig/babelrc.empty.json"
+      "/__mocks__/babelconfig/babelrc.empty.json"
     );
     expect(omit(lBabelConfig, "filename")).to.deep.equal(
       DEFAULT_EMPTY_BABEL_OPTIONS_OBJECT
@@ -68,18 +68,20 @@ describe("config-utl/parseBabelConfig", () => {
 
   it("reads the 'babel' key when a package.json is passed", () => {
     expect(
-      extractBabelConfig(getFullPath("./fixtures/babelconfig/package.json"))
+      extractBabelConfig(getFullPath("./__mocks__/babelconfig/package.json"))
         .plugins.length
     ).to.equal(1);
   });
 
   it("returns an empty (/ default) options object when package.json without a babel key is passed", () => {
     const lBabelConfig = extractBabelConfig(
-      getFullPath("./fixtures/babelconfig/no-babel-config-in-this-package.json")
+      getFullPath(
+        "./__mocks__/babelconfig/no-babel-config-in-this-package.json"
+      )
     );
     expect(lBabelConfig).to.have.property("filename");
     expect(pathToPosix(lBabelConfig.filename)).to.contain(
-      "/fixtures/babelconfig/no-babel-config-in-this-package.json"
+      "/__mocks__/babelconfig/no-babel-config-in-this-package.json"
     );
     expect(omit(lBabelConfig, "filename")).to.deep.equal(
       DEFAULT_EMPTY_BABEL_OPTIONS_OBJECT
@@ -89,14 +91,14 @@ describe("config-utl/parseBabelConfig", () => {
   it("returns a babel config when a javascript file with a regular object export is passed", () => {
     expect(
       extractBabelConfig(
-        getFullPath("./fixtures/babelconfig-js/babel.object-export.config.js")
+        getFullPath("./__mocks__/babelconfig-js/babel.object-export.config.js")
       ).plugins.length
     ).to.equal(1);
   });
 
   it("returns a babel config _including_ the array of plugins when a config with presets is passed", () => {
     const lFoundConfig = extractBabelConfig(
-      getFullPath("./fixtures/babelconfig/babelrc.with-a-preset.json")
+      getFullPath("./__mocks__/babelconfig/babelrc.with-a-preset.json")
     );
     expect(lFoundConfig.presets.length).to.equal(1);
     expect(lFoundConfig.presets).to.deep.equal(["@babel/preset-typescript"]);
@@ -105,7 +107,9 @@ describe("config-utl/parseBabelConfig", () => {
   it("throws when a javascript file with a function export is passed", () => {
     expect(() => {
       extractBabelConfig(
-        getFullPath("./fixtures/babelconfig-js/babel.function-export.config.js")
+        getFullPath(
+          "./__mocks__/babelconfig-js/babel.function-export.config.js"
+        )
       );
     }).to.throw();
   });
@@ -114,7 +118,7 @@ describe("config-utl/parseBabelConfig", () => {
     expect(() => {
       extractBabelConfig(
         getFullPath(
-          "./fixtures/babelconfig-js/babel.config.wildly-unsupported-extension"
+          "./__mocks__/babelconfig-js/babel.config.wildly-unsupported-extension"
         )
       );
     }).to.throw();
@@ -123,7 +127,7 @@ describe("config-utl/parseBabelConfig", () => {
   it("throws when an es module is passed", () => {
     expect(() => {
       extractBabelConfig(
-        getFullPath("./fixtures/babelconfig-js/babel.es-module.config.js")
+        getFullPath("./__mocks__/babelconfig-js/babel.es-module.config.js")
       );
     }).to.throw();
   });

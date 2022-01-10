@@ -1,0 +1,367 @@
+[
+  {
+    "title": "test on dependency-cruiser cjs fixture one",
+    "input": {
+      "fileName": "../dependency-cruiser/test/extract/__mocks__/cjs/root_one.js",
+      "baseDir": "../dependency-cruiser",
+      "moduleSystems": ["cjs"]
+    },
+    "expected": [
+      {
+        "module": "./one_only_one",
+        "resolved": "test/extract/__mocks__/cjs/one_only_one.js",
+        "moduleSystem": "cjs",
+        "coreModule": false,
+        "dependencyTypes": ["local"],
+        "dynamic": false,
+        "followable": true,
+        "exoticallyRequired": false,
+        "matchesDoNotFollow": false,
+        "couldNotResolve": false
+      },
+      {
+        "module": "./one_only_two",
+        "resolved": "test/extract/__mocks__/cjs/one_only_two.js",
+        "moduleSystem": "cjs",
+        "coreModule": false,
+        "dependencyTypes": ["local"],
+        "dynamic": false,
+        "followable": true,
+        "exoticallyRequired": false,
+        "matchesDoNotFollow": false,
+        "couldNotResolve": false
+      },
+      {
+        "module": "./shared",
+        "resolved": "test/extract/__mocks__/cjs/shared.js",
+        "moduleSystem": "cjs",
+        "coreModule": false,
+        "dependencyTypes": ["local"],
+        "dynamic": false,
+        "followable": true,
+        "exoticallyRequired": false,
+        "matchesDoNotFollow": false,
+        "couldNotResolve": false
+      },
+      {
+        "module": "./sub/dir",
+        "resolved": "test/extract/__mocks__/cjs/sub/dir.js",
+        "moduleSystem": "cjs",
+        "coreModule": false,
+        "dependencyTypes": ["local"],
+        "dynamic": false,
+        "followable": true,
+        "exoticallyRequired": false,
+        "matchesDoNotFollow": false,
+        "couldNotResolve": false
+      },
+      {
+        "module": "commander",
+        "resolved": "node_modules/commander/index.js",
+        "moduleSystem": "cjs",
+        "coreModule": false,
+        "dependencyTypes": ["npm"],
+        "dynamic": false,
+        "license": "MIT",
+        "followable": true,
+        "exoticallyRequired": false,
+        "matchesDoNotFollow": false,
+        "couldNotResolve": false
+      },
+      {
+        "module": "fs",
+        "resolved": "fs",
+        "moduleSystem": "cjs",
+        "coreModule": true,
+        "dependencyTypes": ["core"],
+        "dynamic": false,
+        "followable": false,
+        "exoticallyRequired": false,
+        "matchesDoNotFollow": false,
+        "couldNotResolve": false
+      }
+    ]
+  },
+  {
+    "title": "empty module",
+    "input": {
+      "fileName": "test/extract/__mocks__/cjs/empty.js"
+    },
+    "expected": []
+  },
+  {
+    "title": "direct requires",
+    "input": {
+      "fileName": "test/extract/__mocks__/cjs/direct-require.js"
+    },
+    "expected": [
+      {
+        "module": "./empty",
+        "resolved": "test/extract/__mocks__/cjs/empty.js",
+        "moduleSystem": "cjs",
+        "coreModule": false,
+        "dependencyTypes": ["local"],
+        "dynamic": false,
+        "followable": true,
+        "exoticallyRequired": false,
+        "matchesDoNotFollow": false,
+        "couldNotResolve": false
+      },
+      {
+        "module": "fs",
+        "resolved": "fs",
+        "moduleSystem": "cjs",
+        "coreModule": true,
+        "dependencyTypes": ["core"],
+        "dynamic": false,
+        "followable": false,
+        "exoticallyRequired": false,
+        "matchesDoNotFollow": false,
+        "couldNotResolve": false
+      }
+    ]
+  },
+  {
+    "title": "declare-and-use requires",
+    "input": {
+      "fileName": "test/extract/__mocks__/cjs/declare-and-use.js"
+    },
+    "expected": [
+      {
+        "module": "os",
+        "resolved": "os",
+        "moduleSystem": "cjs",
+        "coreModule": true,
+        "dependencyTypes": ["core"],
+        "dynamic": false,
+        "followable": false,
+        "exoticallyRequired": false,
+        "matchesDoNotFollow": false,
+        "couldNotResolve": false
+      }
+    ]
+  },
+  {
+    "title": "uniq duplicate requires",
+    "input": {
+      "fileName": "test/extract/__mocks__/cjs/duplicates.js"
+    },
+    "expected": [
+      {
+        "module": "os",
+        "resolved": "os",
+        "moduleSystem": "cjs",
+        "coreModule": true,
+        "dependencyTypes": ["core"],
+        "dynamic": false,
+        "followable": false,
+        "exoticallyRequired": false,
+        "matchesDoNotFollow": false,
+        "couldNotResolve": false
+      }
+    ]
+  },
+  {
+    "title": "require('bladiebla.js') is apparently valid in CJS",
+    "input": {
+      "fileName": "test/extract/__mocks__/cjs/dot-js-inclusion.js"
+    },
+    "expected": [
+      {
+        "module": "./direct-require.js",
+        "resolved": "test/extract/__mocks__/cjs/direct-require.js",
+        "moduleSystem": "cjs",
+        "coreModule": false,
+        "dependencyTypes": ["local"],
+        "dynamic": false,
+        "followable": true,
+        "exoticallyRequired": false,
+        "matchesDoNotFollow": false,
+        "couldNotResolve": false
+      }
+    ]
+  },
+  {
+    "title": "Only match require when it's actually a function call of some sort",
+    "input": {
+      "fileName": "test/extract/__mocks__/cjs/require-tester.js"
+    },
+    "expected": []
+  },
+  {
+    "title": "require('bladiebla.js') for relative paths apparently valid in CJS",
+    "input": {
+      "fileName": "test/extract/__mocks__/cjs/directory-inclusion.js"
+    },
+    "expected": [
+      {
+        "module": "./sub",
+        "resolved": "test/extract/__mocks__/cjs/sub/not-the-index.js",
+        "moduleSystem": "cjs",
+        "coreModule": false,
+        "dependencyTypes": ["local"],
+        "dynamic": false,
+        "followable": true,
+        "exoticallyRequired": false,
+        "matchesDoNotFollow": false,
+        "couldNotResolve": false
+      }
+    ]
+  },
+  {
+    "title": "require a thing from node_modules",
+    "input": {
+      "fileName": "test/extract/__mocks__/cjs/sub/depends-on-some-module.js"
+    },
+    "expected": [
+      {
+        "module": "some-module",
+        "resolved": "test/extract/__mocks__/cjs/sub/node_modules/some-module/main.js",
+        "moduleSystem": "cjs",
+        "coreModule": false,
+        "dependencyTypes": ["npm-no-pkg"],
+        "dynamic": false,
+        "followable": true,
+        "exoticallyRequired": false,
+        "matchesDoNotFollow": false,
+        "couldNotResolve": false
+      }
+    ]
+  },
+  {
+    "title": "require a non-existing module",
+    "input": {
+      "fileName": "test/extract/__mocks__/cjs/requires-non-existing-module.js"
+    },
+    "expected": [
+      {
+        "module": "./does-not-exist-either",
+        "resolved": "./does-not-exist-either",
+        "moduleSystem": "cjs",
+        "coreModule": false,
+        "dependencyTypes": ["unknown"],
+        "dynamic": false,
+        "followable": false,
+        "exoticallyRequired": false,
+        "matchesDoNotFollow": false,
+        "couldNotResolve": true
+      },
+      {
+        "module": "really-does-not-exist",
+        "resolved": "really-does-not-exist",
+        "moduleSystem": "cjs",
+        "coreModule": false,
+        "dependencyTypes": ["unknown"],
+        "dynamic": false,
+        "followable": false,
+        "exoticallyRequired": false,
+        "matchesDoNotFollow": false,
+        "couldNotResolve": true
+      }
+    ]
+  },
+  {
+    "title": "require a symlinked module",
+    "input": {
+      "fileName": "test/extract/__mocks__/cjs/symlink.js"
+    },
+    "expected": [
+      {
+        "module": "../symlinked",
+        "resolved": "test/extract/__mocks__/symlinkTarget/index.js",
+        "moduleSystem": "cjs",
+        "coreModule": false,
+        "dependencyTypes": ["local"],
+        "dynamic": false,
+        "followable": true,
+        "exoticallyRequired": false,
+        "matchesDoNotFollow": false,
+        "couldNotResolve": false
+      }
+    ]
+  },
+  {
+    "title": "require a symlinked module -- with preserveSymlinks=true",
+    "input": {
+      "fileName": "test/extract/__mocks__/cjs/symlink.js",
+      "preserveSymlinks": true
+    },
+    "expected": [
+      {
+        "module": "../symlinked",
+        "resolved": "test/extract/__mocks__/symlinked/index.js",
+        "moduleSystem": "cjs",
+        "coreModule": false,
+        "dependencyTypes": ["local"],
+        "dynamic": false,
+        "followable": true,
+        "exoticallyRequired": false,
+        "matchesDoNotFollow": false,
+        "couldNotResolve": false
+      }
+    ]
+  },
+  {
+    "title": "require a symlinked module -- with preserveSymlinks=false",
+    "input": {
+      "fileName": "test/extract/__mocks__/cjs/symlink.js",
+      "preserveSymlinks": false
+    },
+    "expected": [
+      {
+        "module": "../symlinked",
+        "resolved": "test/extract/__mocks__/symlinkTarget/index.js",
+        "moduleSystem": "cjs",
+        "coreModule": false,
+        "dependencyTypes": ["local"],
+        "dynamic": false,
+        "followable": true,
+        "exoticallyRequired": false,
+        "matchesDoNotFollow": false,
+        "couldNotResolve": false
+      }
+    ]
+  },
+  {
+    "title": "require a symlinked module -- without preserveSymlinks specified",
+    "input": {
+      "fileName": "test/extract/__mocks__/cjs/symlink.js"
+    },
+    "expected": [
+      {
+        "module": "../symlinked",
+        "resolved": "test/extract/__mocks__/symlinkTarget/index.js",
+        "moduleSystem": "cjs",
+        "coreModule": false,
+        "dependencyTypes": ["local"],
+        "dynamic": false,
+        "followable": true,
+        "exoticallyRequired": false,
+        "matchesDoNotFollow": false,
+        "couldNotResolve": false
+      }
+    ]
+  },
+  {
+    "title": "require a symlinked module -- with preserveSymlinks=false and baseDir",
+    "input": {
+      "fileName": "symlink.js",
+      "baseDir": "test/extract/__mocks__/cjs",
+      "preserveSymlinks": false
+    },
+    "expected": [
+      {
+        "module": "../symlinked",
+        "resolved": "../symlinkTarget/index.js",
+        "moduleSystem": "cjs",
+        "coreModule": false,
+        "dependencyTypes": ["local"],
+        "dynamic": false,
+        "followable": true,
+        "exoticallyRequired": false,
+        "matchesDoNotFollow": false,
+        "couldNotResolve": false
+      }
+    ]
+  }
+]

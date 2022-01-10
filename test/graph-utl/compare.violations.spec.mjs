@@ -1,7 +1,7 @@
 import { expect } from "chai";
 import { violations } from "../../src/graph-utl/compare.js";
 
-describe("utl/compare - violations", () => {
+describe("[U] graph-utl/compare - violations", () => {
   const lViolation = {
     from: "from",
     to: "to",

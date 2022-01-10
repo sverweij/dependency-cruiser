@@ -1,7 +1,7 @@
 import { expect } from "chai";
 import normalize from "../../../src/main/rule-set/normalize.js";
 
-describe("main/rule-set/normalize", () => {
+describe("[U] main/rule-set/normalize", () => {
   it("leaves the empty ruleset alone", () => {
     expect(normalize({})).to.deep.equal({});
   });

@@ -1,7 +1,7 @@
 import { expect } from "chai";
 import anonymizePath from "../../../src/report/anon/anonymize-path-element.js";
 
-describe("report/anon/anonymizePathElement - uncached", () => {
+describe("[U] report/anon/anonymizePathElement - uncached", () => {
   it("'' => ''", () => {
     expect(anonymizePath("", [], /^$/, false)).to.equal("");
   });
@@ -37,7 +37,7 @@ describe("report/anon/anonymizePathElement - uncached", () => {
   });
 });
 
-describe("report/anon/anonymizePathElement - cached", () => {
+describe("[U] report/anon/anonymizePathElement - cached", () => {
   it("subsequent calls with the same string yield the same result", () => {
     const lFirstResult = anonymizePath("yudelyo");
 

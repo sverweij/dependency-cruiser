@@ -2,19 +2,19 @@
 import { expect } from "chai";
 import chalk from "chalk";
 import render from "../../../src/report/error.js";
-import okdeps from "./mocks/everything-fine.mjs";
-import dependencies from "./mocks/cjs-no-dependency-valid.mjs";
-import onlywarningdependencies from "./mocks/err-only-warnings.mjs";
-import orphanerrs from "./mocks/orphan-deps.mjs";
-import circularerrs from "./mocks/circular-deps.mjs";
-import viaerrs from "./mocks/via-deps.mjs";
-import sdperrors from "./mocks/sdp-errors.mjs";
-import ignoredviolations from "./mocks/ignored-violations.mjs";
-import ignoredandrealviolations from "./mocks/ignored-and-real-violations.mjs";
-import missingViolationType from "./mocks/missing-violation-type.mjs";
-import unknownViolationType from "./mocks/unknown-violation-type.mjs";
+import okdeps from "./__mocks__/everything-fine.mjs";
+import dependencies from "./__mocks__/cjs-no-dependency-valid.mjs";
+import onlywarningdependencies from "./__mocks__/err-only-warnings.mjs";
+import orphanerrs from "./__mocks__/orphan-deps.mjs";
+import circularerrs from "./__mocks__/circular-deps.mjs";
+import viaerrs from "./__mocks__/via-deps.mjs";
+import sdperrors from "./__mocks__/sdp-errors.mjs";
+import ignoredviolations from "./__mocks__/ignored-violations.mjs";
+import ignoredandrealviolations from "./__mocks__/ignored-and-real-violations.mjs";
+import missingViolationType from "./__mocks__/missing-violation-type.mjs";
+import unknownViolationType from "./__mocks__/unknown-violation-type.mjs";
 
-describe("report/error", () => {
+describe("[I] report/error", () => {
   let chalkLevel = chalk.level;
 
   before("disable chalk coloring", () => {

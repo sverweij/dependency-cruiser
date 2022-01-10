@@ -1,14 +1,14 @@
 const path = require("path");
 const { expect } = require("chai");
 const loadConfig = require("../../../src/config-utl/extract-depcruise-config");
-const fixture = require("./mocks/rules.sub-not-allowed-error.json");
-const mergedFixture = require("./mocks/extends/merged.json");
-const mergedArrayOneFixture = require("./mocks/extends/merged-array-1.json");
-const mergedArrayTwoFixture = require("./mocks/extends/merged-array-2.json");
+const fixture = require("./__mocks__/rules.sub-not-allowed-error.json");
+const mergedFixture = require("./__mocks__/extends/merged.json");
+const mergedArrayOneFixture = require("./__mocks__/extends/merged-array-1.json");
+const mergedArrayTwoFixture = require("./__mocks__/extends/merged-array-2.json");
 
-const mockDirectory = path.join(__dirname, "mocks");
+const mockDirectory = path.join(__dirname, "__mocks__");
 
-describe("cli/compile-config", () => {
+describe("[I] config-utl/compile-config", () => {
   it("a rule set without an extends returns just that rule set", () => {
     expect(
       loadConfig(path.join(mockDirectory, "rules.sub-not-allowed-error.json"))

@@ -1,7 +1,0 @@
-{
-    "options": {
-        "webpackConfig": {
-            "fileName": "test/cli/fixtures/webpackconfig/aliassy/webpack.regularexport.config.js"
-        }
-    }
-}

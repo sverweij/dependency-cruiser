@@ -1,10 +1,10 @@
 import { expect } from "chai";
 import errorHTML from "../../../src/report/error-html/index.js";
-import everythingFineResult from "./mocks/everything-fine.mjs";
-import validationMoreThanOnce from "./mocks/violation-more-than-once.mjs";
-import validationMoreThanOnceWithAnIgnore from "./mocks/violation-more-than-once-with-an-ignore.mjs";
+import everythingFineResult from "./__mocks__/everything-fine.mjs";
+import validationMoreThanOnce from "./__mocks__/violation-more-than-once.mjs";
+import validationMoreThanOnceWithAnIgnore from "./__mocks__/violation-more-than-once-with-an-ignore.mjs";
 
-describe("report/error-html", () => {
+describe("[I] report/error-html", () => {
   const lOkeliDokelyKey = "gummy bears";
   const lOkeliDokelyHeader = "No violations found";
 

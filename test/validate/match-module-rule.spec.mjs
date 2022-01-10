@@ -4,7 +4,7 @@ import matchModuleRule from "../../src/validate/match-module-rule.js";
 const EMPTY_RULE = { from: {}, to: {} };
 const ORPHAN_RULE = { from: { orphan: true }, to: {} };
 
-describe("validate/match-module-rule - match", () => {
+describe("[I] validate/match-module-rule - match", () => {
   it("does not match anything when passed a non-module rule", () => {
     expect(matchModuleRule.match({})(EMPTY_RULE)).to.equal(false);
   });

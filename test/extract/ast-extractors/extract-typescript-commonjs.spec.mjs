@@ -1,7 +1,7 @@
 import { expect } from "chai";
 import extractTypescript from "./extract-typescript.utl.mjs";
 
-describe("ast-extractors/extract-typescript - regular commonjs require", () => {
+describe("[U] ast-extractors/extract-typescript - regular commonjs require", () => {
   it("extracts require of a module that uses an export-equals'", () => {
     expect(
       extractTypescript(

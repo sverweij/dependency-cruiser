@@ -12,7 +12,7 @@ chai.use(require("chai-json-schema"));
 const createConfigNormalized = (pInitOptions) =>
   buildConfig(normalizeInitOptions(pInitOptions));
 
-describe("cli/init-config/build-config", () => {
+describe("[I] cli/init-config/build-config", () => {
   const WORKINGDIR = process.cwd();
 
   afterEach("tear down", () => {
@@ -20,7 +20,7 @@ describe("cli/init-config/build-config", () => {
   });
 
   it("generates a valid config - configType preset without preset yields warn-only", () => {
-    process.chdir("test/cli/fixtures/init-config/no-config-files-exist");
+    process.chdir("test/cli/__fixtures__/init-config/no-config-files-exist");
     const lResult = eval(
       createConfigNormalized({
         configType: "preset",
@@ -35,7 +35,7 @@ describe("cli/init-config/build-config", () => {
   });
 
   it("generates a valid config - with all things in one", () => {
-    process.chdir("test/cli/fixtures/init-config/no-config-files-exist");
+    process.chdir("test/cli/__fixtures__/init-config/no-config-files-exist");
 
     const lResult = eval(createConfigNormalized({}));
 
@@ -44,7 +44,7 @@ describe("cli/init-config/build-config", () => {
   });
 
   it("generates a valid config - extending the passed preset", () => {
-    process.chdir("test/cli/fixtures/init-config/no-config-files-exist");
+    process.chdir("test/cli/__fixtures__/init-config/no-config-files-exist");
 
     const lResult = eval(
       createConfigNormalized({
@@ -61,7 +61,7 @@ describe("cli/init-config/build-config", () => {
   });
 
   it("generates a valid config - tests live with their sources", () => {
-    process.chdir("test/cli/fixtures/init-config/no-config-files-exist");
+    process.chdir("test/cli/__fixtures__/init-config/no-config-files-exist");
 
     const lResult = eval(
       createConfigNormalized({
@@ -78,7 +78,7 @@ describe("cli/init-config/build-config", () => {
   });
 
   it("generates a valid config - tests live separately", () => {
-    process.chdir("test/cli/fixtures/init-config/no-config-files-exist");
+    process.chdir("test/cli/__fixtures__/init-config/no-config-files-exist");
 
     const lResult = eval(
       createConfigNormalized({
@@ -95,7 +95,7 @@ describe("cli/init-config/build-config", () => {
   });
 
   it("generates a valid config - webpackConfig", () => {
-    process.chdir("test/cli/fixtures/init-config/no-config-files-exist");
+    process.chdir("test/cli/__fixtures__/init-config/no-config-files-exist");
 
     const lResult = eval(
       createConfigNormalized({
@@ -112,7 +112,7 @@ describe("cli/init-config/build-config", () => {
   });
 
   it("generates a valid config - tsConfig", () => {
-    process.chdir("test/cli/fixtures/init-config/no-config-files-exist");
+    process.chdir("test/cli/__fixtures__/init-config/no-config-files-exist");
 
     const lResult = eval(
       createConfigNormalized({

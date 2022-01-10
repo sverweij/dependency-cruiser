@@ -2,11 +2,11 @@ import { expect } from "chai";
 import validate from "../../src/validate/index.js";
 import readRuleSet from "./readruleset.utl.mjs";
 
-describe("validate/index - orphans", () => {
+describe("[I] validate/index - orphans", () => {
   it("Skips modules that have no orphan attribute", () => {
     expect(
       validate.module(
-        readRuleSet("./test/validate/fixtures/rules.orphan.json"),
+        readRuleSet("./test/validate/__mocks__/rules.orphan.json"),
         { source: "something" }
       )
     ).to.deep.equal({ valid: true });
@@ -15,7 +15,7 @@ describe("validate/index - orphans", () => {
   it("Flags modules that are orphans", () => {
     expect(
       validate.module(
-        readRuleSet("./test/validate/fixtures/rules.orphan.json"),
+        readRuleSet("./test/validate/__mocks__/rules.orphan.json"),
         {
           source: "something",
           orphan: true,
@@ -35,7 +35,7 @@ describe("validate/index - orphans", () => {
   it("Flags modules that are orphans if they're in the 'allowed' section", () => {
     expect(
       validate.module(
-        readRuleSet("./test/validate/fixtures/rules.orphan.allowed.json"),
+        readRuleSet("./test/validate/__mocks__/rules.orphan.allowed.json"),
         {
           source: "something",
           orphan: true,
@@ -55,7 +55,7 @@ describe("validate/index - orphans", () => {
   it("Leaves modules alone that aren't orphans if there's a rule in the 'allowed' section forbidding them", () => {
     expect(
       validate.module(
-        readRuleSet("./test/validate/fixtures/rules.orphan.allowed.json"),
+        readRuleSet("./test/validate/__mocks__/rules.orphan.allowed.json"),
         {
           source: "something",
           orphan: false,
@@ -67,7 +67,7 @@ describe("validate/index - orphans", () => {
   it("Leaves modules that are orphans, but that don't match the rule path", () => {
     expect(
       validate.module(
-        readRuleSet("./test/validate/fixtures/rules.orphan.path.json"),
+        readRuleSet("./test/validate/__mocks__/rules.orphan.path.json"),
         {
           source: "something",
           orphan: true,
@@ -79,7 +79,7 @@ describe("validate/index - orphans", () => {
   it("Flags modules that are orphans and that match the rule's path", () => {
     expect(
       validate.module(
-        readRuleSet("./test/validate/fixtures/rules.orphan.path.json"),
+        readRuleSet("./test/validate/__mocks__/rules.orphan.path.json"),
         {
           source: "noorphansallowedhere/blah/something.ts",
           orphan: true,
@@ -99,7 +99,7 @@ describe("validate/index - orphans", () => {
   it("Leaves modules that are orphans, but that do match the rule's pathNot", () => {
     expect(
       validate.module(
-        readRuleSet("./test/validate/fixtures/rules.orphan.pathnot.json"),
+        readRuleSet("./test/validate/__mocks__/rules.orphan.pathnot.json"),
         {
           source: "orphansallowedhere/something",
           orphan: true,
@@ -111,7 +111,7 @@ describe("validate/index - orphans", () => {
   it("Flags modules that are orphans, but that do not match the rule's pathNot", () => {
     expect(
       validate.module(
-        readRuleSet("./test/validate/fixtures/rules.orphan.pathnot.json"),
+        readRuleSet("./test/validate/__mocks__/rules.orphan.pathnot.json"),
         {
           source: "blah/something.ts",
           orphan: true,
@@ -131,7 +131,7 @@ describe("validate/index - orphans", () => {
   it("The 'dependency' validation leaves the module only orphan rule alone", () => {
     expect(
       validate.dependency(
-        readRuleSet("./test/validate/fixtures/rules.orphan.path.json"),
+        readRuleSet("./test/validate/__mocks__/rules.orphan.path.json"),
         {
           source: "noorphansallowedhere/something.ts",
           orphan: true,
