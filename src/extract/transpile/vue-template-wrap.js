@@ -40,7 +40,14 @@ function vue3Transpile(pSource) {
     return "";
   }
 
-  return _get(parsedComponent, "descriptor.script.content", "");
+  const scriptContent = _get(parsedComponent, "descriptor.script.content", "");
+  const scriptSetupContent = _get(
+    parsedComponent,
+    "descriptor.scriptSetup.content",
+    ""
+  );
+
+  return scriptContent + scriptSetupContent;
 }
 
 function vue2Transpile(pSource) {
