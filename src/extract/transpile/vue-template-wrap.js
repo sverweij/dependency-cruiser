@@ -1,3 +1,4 @@
+const { EOL } = require("os");
 const isEmpty = require("lodash/isEmpty");
 const _get = require("lodash/get");
 const tryRequire = require("semver-try-require");
@@ -47,7 +48,11 @@ function vue3Transpile(pSource) {
     ""
   );
 
-  return scriptContent + scriptSetupContent;
+	if (scriptContent && scriptSetupContent) {
+		return scriptContent + EOL + scriptSetupContent;
+	}
+
+	return scriptContent || scriptSetupContent;
 }
 
 function vue2Transpile(pSource) {
