@@ -55,4 +55,44 @@ describe("[I] vue transpiler", () => {
       )
     ).to.equal(normalizeNewline(""));
   });
+
+  it("extracts the script setup content from a vue SFC", () => {
+    expect(
+      normalizeNewline(
+        wrap.transpile(
+          readFileSync(
+            join(__dirname, "__mocks__/vue-script-setup.vue"),
+            "utf8"
+          )
+        )
+      )
+    ).to.equal(
+      normalizeNewline(
+        readFileSync(
+          join(__dirname, "__fixtures__/vue-script-setup.js"),
+          "utf8"
+        )
+      )
+    );
+  });
+
+  it("extracts the script setup content and script content from a vue SFC", () => {
+    expect(
+      normalizeNewline(
+        wrap.transpile(
+          readFileSync(
+            join(__dirname, "__mocks__/vue-script-setup-and-script.vue"),
+            "utf8"
+          )
+        )
+      )
+    ).to.equal(
+      normalizeNewline(
+        readFileSync(
+          join(__dirname, "__fixtures__/vue-script-setup-and-script.js"),
+          "utf8"
+        )
+      )
+    );
+  });
 });
