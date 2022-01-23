@@ -77,11 +77,35 @@ function extractExoticMemberCallExpression(pNode, pExoticRequireStrings) {
   return lReturnValue;
 }
 
-function isInterestingCallExpression(pExoticRequireStrings, pNode) {
-  return ["require", "import"]
-    .concat(pExoticRequireStrings.filter((pString) => !pString.includes(".")))
-    .includes(pNode.callee.value);
+function isImportCallExpression(pNode) {
+  /* 
+    somewhere between swc 1.2.123 and 1.2.133 the swc AST started to
+    represent import call expressions with .callee.type === "Import"
+    instead of .callee.value === "import". Keeping both detection
+    methods in here for backwards compatiblity
+  */
+  return pNode.callee.value === "import" || pNode.callee.type === "Import";
 }
+
+function isNonExoticallyRequiredExpression(pNode) {
+  return pNode.callee.value === "require" || isImportCallExpression(pNode);
+}
+
+function isInterestingCallExpression(pExoticRequireStrings, pNode) {
+  /* 
+    somewhere between swc 1.2.123 and 1.2.133 the swc AST started to
+    represent import call expressions with .callee.type === "Import"
+    instead of .callee.value === "import". Keeping both detection
+    methods in here for backwards compatiblity
+  */
+  return (
+    pNode.callee.type === "Import" ||
+    ["require", "import"]
+      .concat(pExoticRequireStrings.filter((pString) => !pString.includes(".")))
+      .includes(pNode.callee.value)
+  );
+}
+
 if (VisitorModule) {
   module.exports = class SwcDependencyVisitor extends Visitor {
     constructor(pExoticRequireStrings) {
@@ -159,11 +183,11 @@ if (VisitorModule) {
         this.lResult.push({
           module: pryStringsFromArguments(pNode.arguments),
 
-          ...(pNode.callee.value === "import"
+          ...(isImportCallExpression(pNode)
             ? { moduleSystem: "es6", dynamic: true }
             : { moduleSystem: "cjs", dynamic: false }),
 
-          ...(["require", "import"].includes(pNode.callee.value)
+          ...(isNonExoticallyRequiredExpression(pNode)
             ? { exoticallyRequired: false }
             : { exoticallyRequired: true, exoticRequire: pNode.callee.value }),
         });
