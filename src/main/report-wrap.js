@@ -27,7 +27,10 @@ function reSummarizeResults(pResult, pFormatOptions) {
       ...pResult.summary,
       ...summarize(
         lModules,
-        pFormatOptions,
+        {
+          ...pResult.summary.optionsUsed,
+          ...pFormatOptions,
+        },
         (pResult.summary.optionsUsed.args || "").split(" "),
         // TODO: apply filters to the folders too
         pResult.folders
