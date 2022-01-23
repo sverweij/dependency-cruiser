@@ -89,6 +89,7 @@ describe("[E] main.format - format", () => {
       "This cli module depends on something not in the public interface"
     );
   });
+
   it("returns string without error explanations when asked for the err report", () => {
     const lErrorResult = main.format(cruiseResult, {
       outputType: "err",
@@ -97,5 +98,19 @@ describe("[E] main.format - format", () => {
     expect(lErrorResult).to.not.contain(
       "This cli module depends on something not in the public interface"
     );
+  });
+
+  it("retains options that are in .summary.optionsUsed unless overriden", () => {
+    const lJSONResult = JSON.parse(
+      main.format(cruiseResult, {
+        outputType: "anon",
+        includeOnly: "^src/",
+      }).output
+    );
+    expect(Object.keys(lJSONResult.summary.optionsUsed).length).to.equal(16);
+    expect(lJSONResult.summary.optionsUsed.outputType).to.equal("anon");
+    expect(lJSONResult.summary.optionsUsed.includeOnly).to.equal("^src/");
+    // without includeOnly it'd be 53
+    expect(lJSONResult.modules.length).to.equal(33);
   });
 });
