@@ -159,7 +159,7 @@ module.exports = {
   options: {
     /* conditions specifying which files not to follow further when encountered:
        - path: a regular expression to match
-       - dependencyTypes: see https://github.com/sverweij/dependency-cruiser/blob/master/doc/rules-reference.md#dependencytypes
+       - dependencyTypes: see https://github.com/sverweij/dependency-cruiser/blob/master/doc/rules-reference.md#dependencytypes-and-dependencytypesnot
        for a complete list
     */
     doNotFollow: {
