@@ -7,10 +7,16 @@ The output format contains two sections:
 - `summary` - a summary with meta information like how many sources got visited,
   how many violations it found, array of the actual violations and the rule set
   and other options used in the cruise.
+- `folders` - optional, and only present when needed for validating folder
+  specific rules. It's an array of all folders dependency-cruiser visited, their
+  folder level depenedencies and some
 
 A [json schema](../src/schema/cruise-result.schema.json) describes the output format
 attributes in painstaking detail. The schema is accurate and actual - each build
-unit tests assure the output format adheres to the schema.
+unit tests assure the output format adheres to the schema. A more accessible version
+of the schema is
+[this high level graphical overview](https://sverweij.github.io/dependency-cruiser/schema-overview.html),
+of the es6 modules the schema is generated from.
 
 A sample output (for the popular [commander.js](https://github.com/tj/commander.js)
 module):
