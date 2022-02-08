@@ -18,11 +18,11 @@ module.exports = function extractModuleAttributes(pString) {
   let lReturnValue = { module: pString };
   const lModuleAttributes = pString.match(
     // eslint-disable-next-line security/detect-unsafe-regex, unicorn/no-unsafe-regex
-    /^(node:|file:|data:)?(([^,]+),)?(.+)$/
+    /^((node:|file:|data:)(([^,]+),)?)(.+)$/
   );
-  const lProtocolPosition = 1;
-  const lMimeTypePosition = 3;
-  const lModulePosition = 4;
+  const lProtocolPosition = 2;
+  const lMimeTypePosition = 4;
+  const lModulePosition = 5;
 
   if (lModuleAttributes) {
     lReturnValue.module = lModuleAttributes[lModulePosition];
@@ -33,5 +33,6 @@ module.exports = function extractModuleAttributes(pString) {
       lReturnValue.mimeType = lModuleAttributes[lMimeTypePosition];
     }
   }
+
   return lReturnValue;
 };
