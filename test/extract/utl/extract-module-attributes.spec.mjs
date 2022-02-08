@@ -44,6 +44,12 @@ describe("[U] extract/utl/extract-module-attributes", () => {
     });
   });
 
+  it("treats comma's without a (known) protocol as part of the filename", () => {
+    expect(extractModuleAttributes("a com, ma.json")).to.deep.equal({
+      module: "a com, ma.json",
+    });
+  });
+
   it("when protocol separator is mistyped, returns it as part of the module name", () => {
     expect(
       extractModuleAttributes("data:application/json;gegevens.json")
