@@ -48,11 +48,11 @@ function vue3Transpile(pSource) {
     ""
   );
 
-	if (scriptContent && scriptSetupContent) {
-		return scriptContent + EOL + scriptSetupContent;
-	}
+  if (scriptContent && scriptSetupContent) {
+    return scriptContent + EOL + scriptSetupContent;
+  }
 
-	return scriptContent || scriptSetupContent;
+  return scriptContent || scriptSetupContent;
 }
 
 function vue2Transpile(pSource) {
