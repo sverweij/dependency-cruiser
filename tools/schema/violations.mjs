@@ -58,6 +58,12 @@ export default {
             },
           },
         },
+        comment: {
+          type: "string",
+          description:
+            "Free format text you can e.g. use to explain why this violation " +
+            "can be ignored or is quarantined (only used in _known-violations_) ",
+        },
       },
     },
     ...ruleSummary.definitions,

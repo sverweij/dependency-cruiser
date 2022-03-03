@@ -1,4 +1,4 @@
-import { unlinkSync } from "node:fs";
+import { unlinkSync, readFileSync } from "node:fs";
 // path.posix instead of path because otherwise on win32 the resulting
 // outputTo would contain \\ instead of / which for this unit test doesn't matter
 import { posix as path } from "node:path";
@@ -128,6 +128,7 @@ function resetOutputDirectory() {
   deleteDammit(path.join(OUT_DIR, "babel-ts-result.json"));
   deleteDammit(path.join(OUT_DIR, "known-errors-not-known.txt"));
   deleteDammit(path.join(OUT_DIR, "known-errors-known.txt"));
+  deleteDammit(path.join(OUT_DIR, "this-thing-likely-wont-exist.txt"));
 }
 
 function setModuleType(pTestPairs, pModuleType) {
@@ -187,7 +188,7 @@ describe("[E] cli/index", () => {
     resetOutputDirectory();
   });
 
-  describe("[I] specials", () => {
+  describe("[E] specials", () => {
     it("dependency-cruises multiple files and folders in one go", () => {
       const lOutputFileName = "multiple-in-one-go.json";
       const lOutputTo = path.join(OUT_DIR, lOutputFileName);
@@ -477,13 +478,13 @@ describe("[E] cli/index", () => {
   it("dependency-cruise on a violation-ridden code base will return the errors", () => {
     const lOutputFileName = "known-errors-not-known.txt";
     const lOutputTo = path.join(OUT_DIR, lOutputFileName);
+    const lExpectedAmountOfErrors = 2;
 
     const lExitCode = cli(["test/cli/__fixtures__/known-violations/src"], {
       outputTo: lOutputTo,
       outputType: "err",
       validate: "test/cli/__fixtures__/known-violations/config.js",
     });
-    const lExpectedAmountOfErrors = 2;
 
     expect(lExitCode).to.equal(lExpectedAmountOfErrors);
 
@@ -496,6 +497,8 @@ describe("[E] cli/index", () => {
   it("dependency-cruise on a violation-ridden code base with known errors will only return unknown errors", () => {
     const lOutputFileName = "known-errors-known.txt";
     const lOutputTo = path.join(OUT_DIR, lOutputFileName);
+    let lResult = "";
+    const lExpectedAmountOfErrors = 1;
 
     const lExitCode = cli(["test/cli/__fixtures__/known-violations/src"], {
       outputTo: lOutputTo,
@@ -504,12 +507,33 @@ describe("[E] cli/index", () => {
       ignoreKnown: "test/cli/__fixtures__/known-violations/known.json",
     });
 
-    expect(lExitCode).to.equal(1);
+    expect(lExitCode).to.equal(lExpectedAmountOfErrors);
+    expect(() => {
+      lResult = readFileSync(lOutputTo, { encoding: "utf8" });
+    }).to.not.throw();
+    expect(lResult).to.contain(
+      "1 dependency violations (1 errors, 0 warnings). 6 modules, 3 dependencies cruised"
+    );
+    expect(lResult).to.contain("1 known violations ignored");
+  });
 
-    // assertJSONFileEqual(
-    //   lOutputTo,
-    //   path.join(FIX_DIR, "babel", lOutputFileName)
-    // );
+  it("will barf when the known violations file is invalid", () => {
+    const lOutputFileName = "this-thing-likely-wont-exist.txt";
+    const lOutputTo = path.join(OUT_DIR, lOutputFileName);
+    const lExpectedAmountOfErrors = 1;
+
+    const lExitCode = cli(["test/cli/__fixtures__/known-violations/src"], {
+      outputTo: lOutputTo,
+      outputType: "err",
+      validate: "test/cli/__fixtures__/known-violations/config.js",
+      ignoreKnown:
+        "test/cli/__fixtures__/known-violations/invalid-known-violations-file.json",
+    });
+
+    expect(lExitCode).to.equal(lExpectedAmountOfErrors);
+    expect(() => {
+      readFileSync(lOutputTo, { encoding: "utf8" });
+    }).to.throw();
   });
 
   describe("[I] file based tests - commonJS", () => {
