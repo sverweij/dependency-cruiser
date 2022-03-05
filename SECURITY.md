@@ -9,7 +9,7 @@ reflected in the _master_ branch) with security updates.
 
 If you think you have found a vulnerability, please report responsibly. Don't
 create GitHub issues for security issues. Instead, please send an email to
-sverweij@yandex.com and/ or a direct message (DM) to [@mcmeadow](https://twitter.com/mcmeadow)
+sander_verweij@yahoo.com and/ or a direct message (DM) to [@mcmeadow](https://twitter.com/mcmeadow)
 on twitter and we'll look into it as soon as we can.
 
 We appreciate any responsible disclosure of vulnerabilities that might impact
