@@ -40,4 +40,9 @@ export interface IViolation {
    * principle
    */
   metrics?: IMetricsSummary;
+  /**
+   * Free format text you can e.g. use to explain why this violation
+   * can be ignored or is quarantined (only used in known violations)
+   */
+  comment?: string;
 }
