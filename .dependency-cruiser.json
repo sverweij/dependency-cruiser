@@ -290,7 +290,7 @@
     // },
     /* Experimental: the parser to use
      */
-    "parser": "swc", // acorn, swc, tsc
+    "parser": "tsc", // acorn, swc, tsc
     "enhancedResolveOptions": {
       "exportsFields": ["exports"],
       "conditionNames": ["require"],

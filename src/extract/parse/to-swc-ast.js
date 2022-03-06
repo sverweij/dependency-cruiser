@@ -5,14 +5,16 @@ const { supportedTranspilers } = require("../../../src/meta.js");
 /** @type {import('@swc/core')} */
 const swc = tryRequire("@swc/core", supportedTranspilers.swc);
 
+/** @type {import('@swc/core').ParseOptions} */
 const SWC_PARSE_OPTIONS = {
   dynamicImport: true,
-  // TODO: use ecmascript when it's an ecmascript-ish extension (or as
-  // typescript is a superset of ecmascript => typescript always?)
+  // typescript is a superset of ecmascript, so we use typescript always
   syntax: "typescript",
   // target doesn't have effect on parsing it seems
-  target: "es2020",
-  // TODO jsx
+  target: "es2022",
+  // allow for decorators
+  decorators: true,
+  // TODO: {tj}sx ?
 };
 
 function getASTFromSource(pSource) {

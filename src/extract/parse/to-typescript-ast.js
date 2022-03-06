@@ -5,6 +5,7 @@ const { supportedTranspilers } = require("../../../src/meta.js");
 const transpile = require("../transpile");
 const getExtension = require("../utl/get-extension");
 
+/** @type {import('typescript')} */
 const typescript = tryRequire("typescript", supportedTranspilers.typescript);
 
 /**
