@@ -341,9 +341,9 @@ This has a few advantages over bundling the transpilers as dependencies:
 **A**: Yes.
 
 You can feed dependency-cruiser a webpack configuration
-([`--webpack-config`](./doc/cli.md#--webpack-config-use-the-resolution-options-of-a-webpack-configuration)
+([`--webpack-config`](./options-reference.md#webpackconfig-use-the-resolution-options-of-a-webpack-configuration)
 on the cli or `webpackConfig` in the dependency-cruiser config file
-in the [`options`](./doc/rules.md#options) section) and it
+in the [`options`](./rules-reference.md#options) section) and it
 will take the `resolve` part in there into account when cruising
 your dependencies. This includes any `alias` you might have in there.
 
