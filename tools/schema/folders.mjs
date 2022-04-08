@@ -44,7 +44,7 @@ export default {
           description: "list of folders this module depends upon",
           items: {
             type: "object",
-            required: ["name", "valid"],
+            required: ["name", "valid", "circular"],
             additionalProperties: false,
             properties: {
               name: {
@@ -64,6 +64,20 @@ export default {
                   "'true' if this folder dependency violated a rule; 'false' in " +
                   "all other cases. " +
                   "The violated rule will be in the 'rules' object at the same level.",
+              },
+              circular: {
+                type: "boolean",
+                description:
+                  "'true' if following this dependency will ultimately return to the " +
+                  "source, false in all other cases",
+              },
+              cycle: {
+                type: "array",
+                items: { type: "string" },
+                description:
+                  "If following this dependency will ultimately return to the source " +
+                  "(circular === true), this attribute will contain an (ordered) array " +
+                  "of module names that shows (one of) the circular path(s)",
               },
               rules: {
                 type: "array",

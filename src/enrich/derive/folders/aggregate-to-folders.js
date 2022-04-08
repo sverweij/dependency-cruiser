@@ -1,7 +1,9 @@
 /* eslint-disable security/detect-object-injection */
 const path = require("path").posix;
 const { calculateInstability, metricsAreCalculable } = require("../module-utl");
+const detectCycles = require("../circular");
 const {
+  findFolderByName,
   getAfferentCouplings,
   getEfferentCouplings,
   getParentFolders,
@@ -80,10 +82,6 @@ function calculateFolderMetrics(pFolder) {
   };
 }
 
-function findFolderByName(pAllFolders, pName) {
-  return pAllFolders.find((pFolder) => pFolder.name === pName);
-}
-
 function denormalizeInstability(pFolder, _, pAllFolders) {
   return {
     ...pFolder,
@@ -96,11 +94,35 @@ function denormalizeInstability(pFolder, _, pAllFolders) {
     }),
   };
 }
+function uniq(pArray) {
+  return [...new Set(pArray)];
+}
+function getSinks(pFolders) {
+  const lKnownFolders = new Set(pFolders.map(({ name }) => name));
+  const lAllFolders = uniq(
+    pFolders.flatMap(({ dependencies }) => dependencies.map(({ name }) => name))
+  );
+  const lReturnValue = lAllFolders
+    .filter((pFolder) => !lKnownFolders.has(pFolder))
+    .map((pFolder) => ({
+      name: pFolder,
+      moduleCount: -1,
+      dependencies: [],
+      dependents: [],
+    }));
+  return lReturnValue;
+}
 
 module.exports = function aggregateToFolders(pModules) {
   const lFolders = object2Array(
     pModules.filter(metricsAreCalculable).reduce(aggregateToFolder, {})
-  ).map(calculateFolderMetrics);
+  )
+    .map(calculateFolderMetrics)
+    .map(denormalizeInstability);
 
-  return lFolders.map(denormalizeInstability);
+  return detectCycles(lFolders.concat(getSinks(lFolders)), {
+    pSourceAttribute: "name",
+    pDependencyName: "name",
+    pFindNodeByName: findFolderByName,
+  });
 };

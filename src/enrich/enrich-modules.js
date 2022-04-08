@@ -2,17 +2,22 @@ const _get = require("lodash/get");
 const bus = require("../utl/bus");
 const busLogLevels = require("../utl/bus-log-levels");
 const addFocus = require("../../src/graph-utl/add-focus");
-const deriveCirculars = require("./derive/circular");
+const deriveCycles = require("./derive/circular");
 const deriveOrphans = require("./derive/orphan");
 const addDependents = require("./derive/dependents");
 const deriveReachable = require("./derive/reachable");
 const addValidations = require("./add-validations");
 const softenKnownViolations = require("./soften-known-violations");
 const deriveModuleMetrics = require("./derive/metrics");
+const { findModuleByName } = require("./derive/module-utl");
 
 module.exports = function enrichModules(pModules, pOptions) {
   bus.emit("progress", "analyzing: cycles", { level: busLogLevels.INFO });
-  let lModules = deriveCirculars(pModules);
+  let lModules = deriveCycles(pModules, {
+    pSourceAttribute: "source",
+    pDependencyName: "resolved",
+    pFindNodeByName: findModuleByName,
+  });
   bus.emit("progress", "analyzing: dependents", { level: busLogLevels.INFO });
   lModules = addDependents(lModules, pOptions);
   bus.emit("progress", "analyzing: orphans", { level: busLogLevels.INFO });
