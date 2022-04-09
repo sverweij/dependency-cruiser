@@ -5,9 +5,8 @@ function match(pFromFolder, pToFolder) {
   return (pRule) =>
     // TODO: add path rules - they need to be frippled from the ones
     // already in place for modules
-    // TODO: same for cycles - but these will additionally have to be
-    // yognated with an adapted cycle detection for folders
-    matchers.toIsMoreUnstable(pRule, pFromFolder, pToFolder);
+    matchers.toIsMoreUnstable(pRule, pFromFolder, pToFolder) &&
+    matchers.propertyEquals(pRule, pToFolder, "circular");
 }
 
 const isInteresting = (pRule) =>

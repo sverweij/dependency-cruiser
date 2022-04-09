@@ -1,6 +1,7 @@
 /* eslint-disable security/detect-object-injection */
-const _clone = require("lodash/clone");
-const _has = require("lodash/has");
+const get = require("lodash/get");
+const clone = require("lodash/clone");
+const has = require("lodash/has");
 const normalizeREProperties = require("../utl/normalize-re-properties");
 const defaults = require("./defaults.js");
 
@@ -67,7 +68,12 @@ function normalizeCollapse(pCollapse) {
 }
 
 function hasMetricsRule(pRule) {
-  return _has(pRule, "to.moreUnstable");
+  // TODO: philosophy: is a rule with 'folder' in it a metrics rule?
+  //       Or is it a misuse to ensure folder derivations (like cycles) get
+  //       kicked off?
+  return (
+    has(pRule, "to.moreUnstable") || get(pRule, "scope", "module") === "folder"
+  );
 }
 
 function ruleSetHasMetricsRule(pRuleSet) {
@@ -107,7 +113,7 @@ function normalizeCruiseOptions(pOptions) {
 
   lReturnValue.maxDepth = Number.parseInt(lReturnValue.maxDepth, 10);
   lReturnValue.moduleSystems = uniq(lReturnValue.moduleSystems.sort());
-  if (_has(lReturnValue, "collapse")) {
+  if (has(lReturnValue, "collapse")) {
     lReturnValue.collapse = normalizeCollapse(lReturnValue.collapse);
   }
   // TODO: further down the execution path code still relies on .doNotFollow
@@ -133,9 +139,9 @@ function normalizeCruiseOptions(pOptions) {
 }
 
 function normalizeFormatOptions(pFormatOptions) {
-  const lFormatOptions = _clone(pFormatOptions);
+  const lFormatOptions = clone(pFormatOptions);
 
-  if (_has(lFormatOptions, "collapse")) {
+  if (has(lFormatOptions, "collapse")) {
     lFormatOptions.collapse = normalizeCollapse(lFormatOptions.collapse);
   }
   return normalizeFilterOptions(lFormatOptions, [
