@@ -22,6 +22,16 @@
       "to": {
         "moreUnstable": true
       }
+    },
+    {
+      "name": "no-folder-cycles",
+      "scope": "folder",
+      "severity": "warn",
+      "comment": "This folder is part of a circular relationship. You might want to refactor that a bit.",
+      "from": {},
+      "to": {
+        "circular": true
+      }
     }
   ],
   "options": {
