@@ -1,6 +1,10 @@
 /* eslint-disable security/detect-object-injection */
 const path = require("path").posix;
 
+function findFolderByName(pAllFolders, pName) {
+  return pAllFolders.find((pFolder) => pFolder.name === pName);
+}
+
 function getAfferentCouplings(pModule, pDirname) {
   return pModule.dependents.filter(
     (pDependent) => !pDependent.startsWith(pDirname.concat(path.sep))
@@ -37,6 +41,7 @@ function object2Array(pObject) {
 }
 
 module.exports = {
+  findFolderByName,
   getAfferentCouplings,
   getEfferentCouplings,
   getParentFolders,

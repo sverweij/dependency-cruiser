@@ -208,8 +208,13 @@
       {
         "name": "test",
         "dependencies": [
-          { "name": "ndjson", "instability": 0, "valid": true },
-          { "name": "os", "instability": 0, "valid": true }
+          {
+            "name": "ndjson",
+            "instability": 0,
+            "valid": true,
+            "circular": false
+          },
+          { "name": "os", "instability": 0, "valid": true, "circular": false }
         ],
         "dependents": [],
         "moduleCount": 6,
@@ -220,8 +225,13 @@
       {
         "name": "test/main",
         "dependencies": [
-          { "name": "ndjson", "instability": 0, "valid": true },
-          { "name": "os", "instability": 0, "valid": true }
+          {
+            "name": "ndjson",
+            "instability": 0,
+            "valid": true,
+            "circular": false
+          },
+          { "name": "os", "instability": 0, "valid": true, "circular": false }
         ],
         "dependents": [],
         "moduleCount": 6,
@@ -232,8 +242,13 @@
       {
         "name": "test/main/__mocks__",
         "dependencies": [
-          { "name": "ndjson", "instability": 0, "valid": true },
-          { "name": "os", "instability": 0, "valid": true }
+          {
+            "name": "ndjson",
+            "instability": 0,
+            "valid": true,
+            "circular": false
+          },
+          { "name": "os", "instability": 0, "valid": true, "circular": false }
         ],
         "dependents": [],
         "moduleCount": 6,
@@ -244,8 +259,13 @@
       {
         "name": "test/main/__mocks__/cruise-reporterless",
         "dependencies": [
-          { "name": "ndjson", "instability": 0, "valid": true },
-          { "name": "os", "instability": 0, "valid": true }
+          {
+            "name": "ndjson",
+            "instability": 0,
+            "valid": true,
+            "circular": false
+          },
+          { "name": "os", "instability": 0, "valid": true, "circular": false }
         ],
         "dependents": [],
         "moduleCount": 6,
@@ -256,8 +276,13 @@
       {
         "name": "test/main/__mocks__/cruise-reporterless/metrics",
         "dependencies": [
-          { "name": "ndjson", "instability": 0, "valid": true },
-          { "name": "os", "instability": 0, "valid": true }
+          {
+            "name": "ndjson",
+            "instability": 0,
+            "valid": true,
+            "circular": false
+          },
+          { "name": "os", "instability": 0, "valid": true, "circular": false }
         ],
         "dependents": [],
         "moduleCount": 6,
@@ -267,7 +292,9 @@
       },
       {
         "name": "test/main/__mocks__/cruise-reporterless/metrics/format-output",
-        "dependencies": [{ "name": "os", "instability": 0, "valid": true }],
+        "dependencies": [
+          { "name": "os", "instability": 0, "valid": true, "circular": false }
+        ],
         "dependents": [
           { "name": "test/main/__mocks__/cruise-reporterless/metrics" }
         ],
@@ -297,6 +324,18 @@
         "afferentCouplings": 1,
         "efferentCouplings": 0,
         "instability": 0
+      },
+      {
+        "dependencies": [],
+        "dependents": [],
+        "moduleCount": -1,
+        "name": "ndjson"
+      },
+      {
+        "dependencies": [],
+        "dependents": [],
+        "moduleCount": -1,
+        "name": "os"
       }
     ]
   }

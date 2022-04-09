@@ -66,7 +66,9 @@ describe("[U] enrich/derive/folders/aggregate-to-folders - folder stability metr
         name: "src/folder",
         moduleCount: 1,
         dependents: [],
-        dependencies: [{ name: "src/other-folder", instability: 0 }],
+        dependencies: [
+          { name: "src/other-folder", instability: 0, circular: false },
+        ],
         afferentCouplings: 0,
         efferentCouplings: 1,
         instability: 1,
@@ -127,8 +129,8 @@ describe("[U] enrich/derive/folders/aggregate-to-folders - folder stability metr
         moduleCount: 1,
         dependents: [],
         dependencies: [
-          { name: "src/other-folder", instability: 0 },
-          { name: "src/yet-another-folder", instability: 0.5 },
+          { name: "src/other-folder", instability: 0, circular: false },
+          { name: "src/yet-another-folder", instability: 0.5, circular: false },
         ],
         afferentCouplings: 0,
         efferentCouplings: 2,
@@ -160,6 +162,7 @@ describe("[U] enrich/derive/folders/aggregate-to-folders - folder stability metr
           {
             instability: 0,
             name: "src/other-folder",
+            circular: false,
           },
         ],
         afferentCouplings: 1,
@@ -211,10 +214,16 @@ describe("[U] enrich/derive/folders/aggregate-to-folders - folder stability metr
       ]).sort(compareFolders)
     ).to.deep.equal([
       {
+        dependencies: [],
+        dependents: [],
+        moduleCount: -1,
+        name: "fs",
+      },
+      {
         name: "src",
         moduleCount: 1,
         dependents: [],
-        dependencies: [{ name: "fs", instability: 0 }],
+        dependencies: [{ name: "fs", instability: 0, circular: false }],
         afferentCouplings: 0,
         efferentCouplings: 1,
         instability: 1,

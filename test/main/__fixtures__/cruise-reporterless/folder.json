@@ -537,32 +537,38 @@
           {
             "name": "aap",
             "instability": 0,
-            "valid": true
+            "valid": true,
+            "circular": false
           },
           {
             "name": "jet",
             "instability": 0,
-            "valid": true
+            "valid": true,
+            "circular": false
           },
           {
             "name": "mies",
             "instability": 0,
-            "valid": true
+            "valid": true,
+            "circular": false
           },
           {
             "name": "noot",
             "instability": 0,
-            "valid": true
+            "valid": true,
+            "circular": false
           },
           {
             "name": "wim",
             "instability": 0,
-            "valid": true
+            "valid": true,
+            "circular": false
           },
           {
             "name": "zus",
             "instability": 0,
-            "valid": true
+            "valid": true,
+            "circular": false
           }
         ],
         "dependents": [],
@@ -577,32 +583,38 @@
           {
             "name": "aap",
             "instability": 0,
-            "valid": true
+            "valid": true,
+            "circular": false
           },
           {
             "name": "jet",
             "instability": 0,
-            "valid": true
+            "valid": true,
+            "circular": false
           },
           {
             "name": "mies",
             "instability": 0,
-            "valid": true
+            "valid": true,
+            "circular": false
           },
           {
             "name": "noot",
             "instability": 0,
-            "valid": true
+            "valid": true,
+            "circular": false
           },
           {
             "name": "wim",
             "instability": 0,
-            "valid": true
+            "valid": true,
+            "circular": false
           },
           {
             "name": "zus",
             "instability": 0,
-            "valid": true
+            "valid": true,
+            "circular": false
           }
         ],
         "dependents": [],
@@ -617,32 +629,38 @@
           {
             "name": "aap",
             "instability": 0,
-            "valid": true
+            "valid": true,
+            "circular": false
           },
           {
             "name": "jet",
             "instability": 0,
-            "valid": true
+            "valid": true,
+            "circular": false
           },
           {
             "name": "mies",
             "instability": 0,
-            "valid": true
+            "valid": true,
+            "circular": false
           },
           {
             "name": "noot",
             "instability": 0,
-            "valid": true
+            "valid": true,
+            "circular": false
           },
           {
             "name": "wim",
             "instability": 0,
-            "valid": true
+            "valid": true,
+            "circular": false
           },
           {
             "name": "zus",
             "instability": 0,
-            "valid": true
+            "valid": true,
+            "circular": false
           }
         ],
         "dependents": [],
@@ -657,32 +675,38 @@
           {
             "name": "aap",
             "instability": 0,
-            "valid": true
+            "valid": true,
+            "circular": false
           },
           {
             "name": "jet",
             "instability": 0,
-            "valid": true
+            "valid": true,
+            "circular": false
           },
           {
             "name": "mies",
             "instability": 0,
-            "valid": true
+            "valid": true,
+            "circular": false
           },
           {
             "name": "noot",
             "instability": 0,
-            "valid": true
+            "valid": true,
+            "circular": false
           },
           {
             "name": "wim",
             "instability": 0,
-            "valid": true
+            "valid": true,
+            "circular": false
           },
           {
             "name": "zus",
             "instability": 0,
-            "valid": true
+            "valid": true,
+            "circular": false
           }
         ],
         "dependents": [],
@@ -697,32 +721,38 @@
           {
             "name": "aap",
             "instability": 0,
-            "valid": true
+            "valid": true,
+            "circular": false
           },
           {
             "name": "jet",
             "instability": 0,
-            "valid": true
+            "valid": true,
+            "circular": false
           },
           {
             "name": "mies",
             "instability": 0,
-            "valid": true
+            "valid": true,
+            "circular": false
           },
           {
             "name": "noot",
             "instability": 0,
-            "valid": true
+            "valid": true,
+            "circular": false
           },
           {
             "name": "wim",
             "instability": 0,
-            "valid": true
+            "valid": true,
+            "circular": false
           },
           {
             "name": "zus",
             "instability": 0,
-            "valid": true
+            "valid": true,
+            "circular": false
           }
         ],
         "dependents": [],
@@ -737,6 +767,11 @@
           {
             "name": "test/main/__mocks__/cruise-reporterless/folder/unstable",
             "instability": 0.875,
+            "circular": true,
+            "cycle": [
+              "test/main/__mocks__/cruise-reporterless/folder/unstable",
+              "test/main/__mocks__/cruise-reporterless/folder/stable"
+            ],
             "valid": false,
             "rules": [
               {
@@ -762,37 +797,48 @@
           {
             "name": "test/main/__mocks__/cruise-reporterless/folder/stable",
             "instability": 0.5,
-            "valid": true
+            "valid": true,
+            "circular": true,
+            "cycle": [
+              "test/main/__mocks__/cruise-reporterless/folder/stable",
+              "test/main/__mocks__/cruise-reporterless/folder/unstable"
+            ]
           },
           {
             "name": "aap",
             "instability": 0,
-            "valid": true
+            "valid": true,
+            "circular": false
           },
           {
             "name": "jet",
             "instability": 0,
-            "valid": true
+            "valid": true,
+            "circular": false
           },
           {
             "name": "mies",
             "instability": 0,
-            "valid": true
+            "valid": true,
+            "circular": false
           },
           {
             "name": "noot",
             "instability": 0,
-            "valid": true
+            "valid": true,
+            "circular": false
           },
           {
             "name": "wim",
             "instability": 0,
-            "valid": true
+            "valid": true,
+            "circular": false
           },
           {
             "name": "zus",
             "instability": 0,
-            "valid": true
+            "valid": true,
+            "circular": false
           }
         ],
         "dependents": [
@@ -804,6 +850,42 @@
         "afferentCouplings": 1,
         "efferentCouplings": 7,
         "instability": 0.875
+      },
+      {
+        "dependencies": [],
+        "dependents": [],
+        "moduleCount": -1,
+        "name": "aap"
+      },
+      {
+        "dependencies": [],
+        "dependents": [],
+        "moduleCount": -1,
+        "name": "jet"
+      },
+      {
+        "dependencies": [],
+        "dependents": [],
+        "moduleCount": -1,
+        "name": "mies"
+      },
+      {
+        "dependencies": [],
+        "dependents": [],
+        "moduleCount": -1,
+        "name": "noot"
+      },
+      {
+        "dependencies": [],
+        "dependents": [],
+        "moduleCount": -1,
+        "name": "wim"
+      },
+      {
+        "dependencies": [],
+        "dependents": [],
+        "moduleCount": -1,
+        "name": "zus"
       }
     ]
   }
