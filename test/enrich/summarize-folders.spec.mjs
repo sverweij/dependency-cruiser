@@ -45,7 +45,7 @@ const FIXTURE_WITHOUT_VIOLATIONS = [
     instability: 0.8461538461538461,
   },
 ];
-const FIXTURE_WITH_VIOLATION = [
+const FIXTURE_WITH_SDP_VIOLATION = [
   {
     name: "src",
     dependencies: [],
@@ -109,7 +109,6 @@ const FIXTURE_WITH_VIOLATION = [
     instability: 0.6666666666666666,
   },
 ];
-
 const SDP_RULE_SET = {
   forbidden: [
     {
@@ -127,6 +126,65 @@ const SDP_RULE_SET = {
   ],
 };
 
+const FIXTURE_WITH_CYCLE_VIOLATION = [
+  {
+    name: "src",
+    dependencies: [
+      {
+        name: "bin",
+        circular: true,
+        cycle: ["bin", "src"],
+        valid: false,
+        rules: [
+          {
+            severity: "warn",
+            name: "no-folder-cycles",
+          },
+        ],
+      },
+    ],
+    dependents: [
+      {
+        name: "bin",
+      },
+    ],
+  },
+  {
+    name: "bin",
+    dependencies: [
+      {
+        name: "src",
+        circular: true,
+        cycle: ["src", "bin"],
+        valid: false,
+        rules: [
+          {
+            severity: "warn",
+            name: "no-folder-cycles",
+          },
+        ],
+      },
+    ],
+    dependents: [
+      {
+        name: "bin",
+      },
+    ],
+  },
+];
+
+const CYCLE_RULE_SET = {
+  forbidden: [
+    {
+      name: "no-folder-cycles",
+      from: {},
+      to: {
+        circular: true,
+      },
+    },
+  ],
+};
+
 describe("[I] enrich/summarize/summarize-folders", () => {
   it("returns an empty array when presented with an empty array of folders", () => {
     expect(summarizeFolders([], SDP_RULE_SET)).to.deep.equal([]);
@@ -138,9 +196,9 @@ describe("[I] enrich/summarize/summarize-folders", () => {
     ).to.deep.equal([]);
   });
 
-  it("returns a summary of the violations when presented with an array of folders with violations", () => {
+  it("returns a summary of the violations when presented with an array of folders with violations (SDP)", () => {
     expect(
-      summarizeFolders(FIXTURE_WITH_VIOLATION, SDP_RULE_SET)
+      summarizeFolders(FIXTURE_WITH_SDP_VIOLATION, SDP_RULE_SET)
     ).to.deep.equal([
       {
         type: "instability",
@@ -167,6 +225,33 @@ describe("[I] enrich/summarize/summarize-folders", () => {
           name: "non-sdp-rule",
           severity: "info",
         },
+      },
+    ]);
+  });
+
+  it("returns a summary of the violations when presented with an array of folders with violations (cycles)", () => {
+    expect(
+      summarizeFolders(FIXTURE_WITH_CYCLE_VIOLATION, CYCLE_RULE_SET)
+    ).to.deep.equal([
+      {
+        type: "cycle",
+        from: "src",
+        to: "bin",
+        rule: {
+          name: "no-folder-cycles",
+          severity: "warn",
+        },
+        cycle: ["bin", "src"],
+      },
+      {
+        type: "cycle",
+        from: "bin",
+        to: "src",
+        rule: {
+          name: "no-folder-cycles",
+          severity: "warn",
+        },
+        cycle: ["src", "bin"],
       },
     ]);
   });

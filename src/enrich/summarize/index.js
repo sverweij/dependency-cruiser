@@ -1,3 +1,4 @@
+const compare = require("../../graph-utl/compare");
 const addRuleSetUsed = require("./add-rule-set-used");
 const summarizeModules = require("./summarize-modules");
 const summarizeFolders = require("./summarize-folders");
@@ -28,9 +29,9 @@ module.exports = function summarize(
   pFileDirectoryArray,
   pFolders
 ) {
-  const lViolations = summarizeModules(pModules, pOptions.ruleSet).concat(
-    summarizeFolders(pFolders || [], pOptions.ruleSet)
-  );
+  const lViolations = summarizeModules(pModules, pOptions.ruleSet)
+    .concat(summarizeFolders(pFolders || [], pOptions.ruleSet))
+    .sort(compare.violations);
 
   return {
     violations: lViolations,

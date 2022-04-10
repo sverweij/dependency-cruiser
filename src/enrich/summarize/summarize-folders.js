@@ -1,9 +1,13 @@
-const _has = require("lodash/has");
+const has = require("lodash/has");
 const { findRuleByName } = require("../../graph-utl/rule-set");
 
 function classifyViolation(pRule, pRuleSet) {
-  if (_has(findRuleByName(pRuleSet, pRule.name), "to.moreUnstable")) {
+  const lRule = findRuleByName(pRuleSet, pRule.name);
+  if (has(lRule, "to.moreUnstable")) {
     return "instability";
+  }
+  if (has(lRule, "to.circular")) {
+    return "cycle";
   }
   return "folder";
 }
@@ -26,6 +30,11 @@ function getViolations(pFolder, pRuleSet) {
                   from: { instability: pFolder.instability },
                   to: { instability: pDependency.instability },
                 },
+              }
+            : {}),
+          ...(lViolationType === "cycle"
+            ? {
+                cycle: pDependency.cycle,
               }
             : {}),
         };
