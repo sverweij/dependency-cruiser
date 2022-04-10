@@ -13,7 +13,11 @@ function pryStringsFromArguments(pArguments) {
     lReturnValue = pArguments[0].expression.value;
   } else if (pArguments[0].expression.type === "TemplateLiteral") {
     /* c8 ignore start */
-    lReturnValue = pArguments[0].expression.quasis[0].cooked.value;
+    // @swc/core@1.2.159 and before: cooked.value.
+    // @swc/core@1.2.160 and after: just cooked
+    lReturnValue =
+      pArguments[0].expression.quasis[0].cooked.value ||
+      pArguments[0].expression.quasis[0].cooked;
   }
   /* c8 ignore stop */
 
