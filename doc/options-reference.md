@@ -12,7 +12,7 @@
   - [`tsPreCompilationDeps`](#tsprecompilationdeps)
   - [`tsConfig`: use a TypeScript configuration file ('project')](#tsconfig-use-a-typescript-configuration-file-project)
   - [`babelConfig`: use a babel configuration file](#babelconfig-use-a-babel-configuration-file)
-  - [`webackConfig`: use (the resolution options of) a webpack configuration](#webpackconfig-use-the-resolution-options-of-a-webpack-configuration)
+  - [`webpackConfig`: use (the resolution options of) a webpack configuration](#webpackconfig-use-the-resolution-options-of-a-webpack-configuration)
   - [Yarn Plug'n'Play support - `externalModuleResolutionStrategy`](#yarn-plugnplay-support---externalmoduleresolutionstrategy)
   - [`prefix`: prefix links in reports](#prefix-prefix-links-in-reports)
 - [`reporterOptions`](#reporteroptions)
