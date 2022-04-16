@@ -1105,8 +1105,12 @@ to write to an alternative output location.
 ## depcruise-wrap-stream-in-html
 
 With `depcruise-wrap-stream-in-html` you can wrap the graphical output of
-GraphViz dot into html that is geared to make the graph easier to use. It a.o.
-adds highlight-on-hover.
+GraphViz dot into html that is geared to make the graph easier to use. It adds a.o.:
+
+- highlighting dependencies on hover
+- the ability to 'pin' that highlight with a left mouse click ("on context menu").
+  Can be cleared with a left mouse click on something not a module or dependency
+  or by pressing the _Escape_ key.
 
 <img width="799" alt="highlight on hover" src="assets/highlight-on-hover.png">
 
