@@ -1,6 +1,6 @@
 document.addEventListener("contextmenu", getSelectHandler(title2ElementMap));
 document.addEventListener("mouseover", getHoverHandler(title2ElementMap));
-document.addEventListener("keydown", resetHandler);
+document.addEventListener("keydown", keyboardEventHandler);
 
 var gMode = new Mode();
 
@@ -12,13 +12,6 @@ var title2ElementMap = (function makeElementMap() {
   return new Title2ElementMap(edges, nodes);
 })();
 
-/** @param {KeyboardEvent} pKeyboardEvent */
-function resetHandler(pKeyboardEvent) {
-  if (pKeyboardEvent.key === "Escape") {
-    resetNodesAndEdges();
-    gMode.setToHover();
-  }
-}
 function getHoverHandler() {
   /** @type {string} */
   var currentHighlightedTitle;
@@ -220,3 +213,39 @@ function addHighlight(pGroup) {
     pGroup.classList.add("current");
   }
 }
+
+var hints = {
+  HIDDEN: 1,
+  SHOWN: 2,
+  state: this.HIDDEN,
+  show: function () {
+    document.getElementById("hints").removeAttribute("style");
+    hints.state = hints.SHOWN;
+  },
+  hide: function () {
+    document.getElementById("hints").style = "display:none";
+    hints.state = hints.HIDDEN;
+  },
+  toggle: function () {
+    if ((hints.state || hints.HIDDEN) === hints.HIDDEN) {
+      hints.show();
+    } else {
+      hints.hide();
+    }
+  },
+};
+
+/** @param {KeyboardEvent} pKeyboardEvent */
+function keyboardEventHandler(pKeyboardEvent) {
+  if (pKeyboardEvent.key === "Escape") {
+    resetNodesAndEdges();
+    gMode.setToHover();
+    hints.hide();
+  }
+  if (pKeyboardEvent.key === "F1") {
+    pKeyboardEvent.preventDefault();
+    hints.toggle();
+  }
+}
+document.getElementById("close-hints").addEventListener("click", hints.hide);
+document.getElementById("button_help").addEventListener("click", hints.toggle);
