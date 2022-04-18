@@ -36,12 +36,14 @@ To get the above graph we used [berry-dependency-cruiser-config.js](real-world-s
 
 - `yarn` (with yarn v2 :-))
 - `yarn add -D dependency-cruiser`
-- copy `berry-dependency-cruiser-config.js` to the root of the repo
-- add this script to package.json (so don't use the globally installed depcruise
-  or even the locally installed one - yarn's pnp resolution won't work otherwise:)
+- `rm -f berry-dependency-cruiser-config.js`
+- `wget https://raw.githubusercontent.com/sverweij/dependency-cruiser/develop/doc/real-world-samples/berry-dependency-cruiser-config.js`
+- add these two lines to the `scripts` section of the package.json (so don't
+  use the globally installed depcruise or even the locally installed one -
+  yarn's pnp resolution won't work otherwise:)
   ```
   "dc": "depcruise --version && depcruise --config berry-dependency-cruiser-config.js --output-type err packages",
-  "depcruise:archi": "depcruise --config berry-dependency-cruiser-config.js --output-type archi packages | dot -T svg | tee berry-high-level-dependencies.svg | depcruise-wrap-stream-in-html > berry-high-level-dependencies.html",
+  "depcruise:archi": "depcruise --version && depcruise --config berry-dependency-cruiser-config.js --output-type archi packages | dot -T svg | tee berry-high-level-dependencies.svg | depcruise-wrap-stream-in-html > berry-high-level-dependencies.html",
   ```
 - run `yarn depcruise:archi`
 </details>
@@ -73,10 +75,12 @@ wget https://raw.githubusercontent.com/sverweij/dependency-cruiser/develop/doc/r
 - Add these run-scripts to the package.json:
 
   ```
-    "dc": "depcruise --version && depcruise --config react-dependency-cruiser-config.js -T err packages/*/{*.js,src}",
-    "depcruise:archi": "depcruise --config react-dependency-cruiser-config.js -T archi packages/*/{*.js,src} | dot -T svg | tee react-high-level-dependencies.svg | depcruise-wrap-stream-in-html > react-high-level-dependencies.html
+    "dc": "depcruise --version && depcruise --ignore-known --config react-dependency-cruiser-config.js -T err packages/*/{*.js,src}",
+    "depcruise:baseline": "depcruise --version && depcruise-baseline packages/*/{*.js,src} --config react-dependency-cruiser-config.js",
+    "depcruise:archi": "depcruise --ignore-known --config react-dependency-cruiser-config.js -T archi packages/*/{*.js,src} | dot -T svg | tee react-high-level-dependencies.svg | depcruise-wrap-stream-in-html > react-high-level-dependencies.html
   ```
 
+- `yarn depcruise:baseline`
 - `yarn depcruise:archi`
 
 </details>
