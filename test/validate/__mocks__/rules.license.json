@@ -1,9 +1,0 @@
-{
-    "forbidden": [
-        {
-            "name": "no-somepl-license",
-            "from": {},
-            "to": {"license": "SomePL"}
-        }
-    ]
-}

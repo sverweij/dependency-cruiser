@@ -1,12 +1,21 @@
 import { expect } from "chai";
 import validate from "../../src/validate/index.js";
-import readRuleSet from "./readruleset.utl.mjs";
+import parseRuleSet from "./parse-ruleset.utl.mjs";
 
 describe("[I] validate/index - exoticallyRequired", () => {
+  const lExoticallyRequiredRuleSet = parseRuleSet({
+    forbidden: [
+      {
+        name: "no-exotic-requires-period",
+        from: {},
+        to: { exoticallyRequired: true },
+      },
+    ],
+  });
   it("does not flag dependencies that are required with a regular require or import", () => {
     expect(
       validate.dependency(
-        readRuleSet("./test/validate/__mocks__/rules.exotically-required.json"),
+        lExoticallyRequiredRuleSet,
         { source: "something" },
         {
           resolved: "src/aap/speeltuigen/autoband.ts",
@@ -19,7 +28,7 @@ describe("[I] validate/index - exoticallyRequired", () => {
   it("does flag dependencies that are required with any exotic require", () => {
     expect(
       validate.dependency(
-        readRuleSet("./test/validate/__mocks__/rules.exotically-required.json"),
+        lExoticallyRequiredRuleSet,
         { source: "something" },
         {
           resolved: "src/aap/speeltuigen/autoband.ts",
@@ -35,10 +44,19 @@ describe("[I] validate/index - exoticallyRequired", () => {
 });
 
 describe("[I] validate/index - exoticRequire", () => {
+  const lExoticRequireRuleSet = parseRuleSet({
+    forbidden: [
+      {
+        name: "no-use-as-exotic-require",
+        from: {},
+        to: { exoticRequire: "^use$" },
+      },
+    ],
+  });
   it("does not flag dependencies that are required with a regular require or import", () => {
     expect(
       validate.dependency(
-        readRuleSet("./test/validate/__mocks__/rules.exotic-require.json"),
+        lExoticRequireRuleSet,
         { source: "something" },
         { resolved: "src/aap/speeltuigen/autoband.ts" }
       )
@@ -48,7 +66,7 @@ describe("[I] validate/index - exoticRequire", () => {
   it("does not flag dependencies that are required with an exotic require not in the forbdidden RE", () => {
     expect(
       validate.dependency(
-        readRuleSet("./test/validate/__mocks__/rules.exotic-require.json"),
+        lExoticRequireRuleSet,
         { source: "something" },
         { resolved: "src/aap/speeltuigen/autoband.ts", exoticRequire: "notUse" }
       )
@@ -58,7 +76,7 @@ describe("[I] validate/index - exoticRequire", () => {
   it("flags dependencies that are required with a forbidden exotic require", () => {
     expect(
       validate.dependency(
-        readRuleSet("./test/validate/__mocks__/rules.exotic-require.json"),
+        lExoticRequireRuleSet,
         { source: "something" },
         { resolved: "src/aap/speeltuigen/autoband.ts", exoticRequire: "use" }
       )
@@ -70,10 +88,19 @@ describe("[I] validate/index - exoticRequire", () => {
 });
 
 describe("[I] validate/index - exoticRequireNot", () => {
+  const lExoticRequireNotRuleSet = parseRuleSet({
+    forbidden: [
+      {
+        name: "only-use-as-exotic-require",
+        from: {},
+        to: { exoticRequireNot: "^use$" },
+      },
+    ],
+  });
   it("does not flag dependencies that are required with a regular require or import", () => {
     expect(
       validate.dependency(
-        readRuleSet("./test/validate/__mocks__/rules.exotic-require-not.json"),
+        lExoticRequireNotRuleSet,
         { source: "something" },
         { resolved: "src/aap/speeltuigen/autoband.ts" }
       )
@@ -83,7 +110,7 @@ describe("[I] validate/index - exoticRequireNot", () => {
   it("does not flag dependencies that are required with a sanctioned exotic require", () => {
     expect(
       validate.dependency(
-        readRuleSet("./test/validate/__mocks__/rules.exotic-require-not.json"),
+        lExoticRequireNotRuleSet,
         { source: "something" },
         {
           resolved: "src/aap/speeltuigen/autoband.ts",
@@ -96,7 +123,7 @@ describe("[I] validate/index - exoticRequireNot", () => {
   it("flags dependencies are required with an unsanctioned exotic require", () => {
     expect(
       validate.dependency(
-        readRuleSet("./test/validate/__mocks__/rules.exotic-require-not.json"),
+        lExoticRequireNotRuleSet,
         { source: "something" },
         {
           resolved: "src/aap/speeltuigen/autoband.ts",

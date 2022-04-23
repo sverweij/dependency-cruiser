@@ -1,9 +1,0 @@
-{
-  "forbidden": [
-    {
-      "name": "no-exotic-requires-period",
-      "from": {},
-      "to": { "exoticallyRequired": true }
-    }
-  ]
-}

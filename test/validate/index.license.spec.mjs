@@ -1,12 +1,22 @@
 import { expect } from "chai";
 import validate from "../../src/validate/index.js";
-import readRuleSet from "./readruleset.utl.mjs";
+import parseRuleSet from "./parse-ruleset.utl.mjs";
 
 describe("[I] validate/index - license", () => {
+  const lLicenseRuleSet = parseRuleSet({
+    forbidden: [
+      {
+        name: "no-somepl-license",
+        from: {},
+        to: { license: "SomePL" },
+      },
+    ],
+  });
+
   it("Skips dependencies that have no license attached", () => {
     expect(
       validate.dependency(
-        readRuleSet("./test/validate/__mocks__/rules.license.json"),
+        lLicenseRuleSet,
         { source: "something" },
         { resolved: "src/aap/speeltuigen/autoband.ts" }
       )
@@ -16,7 +26,7 @@ describe("[I] validate/index - license", () => {
   it("does not flag dependencies that do not match the license expression", () => {
     expect(
       validate.dependency(
-        readRuleSet("./test/validate/__mocks__/rules.license.json"),
+        lLicenseRuleSet,
         { source: "something" },
         {
           resolved: "src/aap/speeltuigen/autoband.ts",
@@ -29,7 +39,7 @@ describe("[I] validate/index - license", () => {
   it("flags dependencies that match the license expression", () => {
     expect(
       validate.dependency(
-        readRuleSet("./test/validate/__mocks__/rules.license.json"),
+        lLicenseRuleSet,
         { source: "something" },
         {
           resolved: "src/aap/speeltuigen/autoband.ts",
@@ -44,10 +54,20 @@ describe("[I] validate/index - license", () => {
 });
 
 describe("[I] validate/index - licenseNot", () => {
+  const lLicenseNotRuleSet = parseRuleSet({
+    forbidden: [
+      {
+        name: "only-somepl-license",
+        from: {},
+        to: { licenseNot: "SomePL" },
+      },
+    ],
+  });
+
   it("Skips dependencies that have no license attached", () => {
     expect(
       validate.dependency(
-        readRuleSet("./test/validate/__mocks__/rules.licensenot.json"),
+        lLicenseNotRuleSet,
         { source: "something" },
         { resolved: "src/aap/speeltuigen/autoband.ts" }
       )
@@ -57,7 +77,7 @@ describe("[I] validate/index - licenseNot", () => {
   it("does not flag dependencies that do match the license expression", () => {
     expect(
       validate.dependency(
-        readRuleSet("./test/validate/__mocks__/rules.licensenot.json"),
+        lLicenseNotRuleSet,
         { source: "something" },
         {
           resolved: "src/aap/speeltuigen/autoband.ts",
@@ -70,7 +90,7 @@ describe("[I] validate/index - licenseNot", () => {
   it("flags dependencies that do not match the license expression", () => {
     expect(
       validate.dependency(
-        readRuleSet("./test/validate/__mocks__/rules.licensenot.json"),
+        lLicenseNotRuleSet,
         { source: "something" },
         {
           resolved: "src/aap/speeltuigen/autoband.ts",

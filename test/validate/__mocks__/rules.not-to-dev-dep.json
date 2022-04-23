@@ -1,8 +1,0 @@
-{
-    "forbidden": [{
-        "name": "not-to-dev-dep",
-        "severity": "error",
-        "from": {},
-        "to": { "dependencyTypes": ["npm-dev"] }
-    }]
-}
