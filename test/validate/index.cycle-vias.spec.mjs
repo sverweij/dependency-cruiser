@@ -1,13 +1,24 @@
 /* eslint-disable max-statements */
 import { expect } from "chai";
 import validate from "../../src/validate/index.js";
-import readRuleSet from "./readruleset.utl.mjs";
+import parseRuleSet from "./parse-ruleset.utl.mjs";
 
 describe("[I] validate/index dependency - cycle viaNot", () => {
+  const lCycleViaNotRuleSet = parseRuleSet({
+    forbidden: [
+      {
+        from: {},
+        to: {
+          circular: true,
+          viaNot: "^tmp/ab\\.js$",
+        },
+      },
+    ],
+  });
   it("a => ba => bb => bc => a get flagged when none of them is in a viaNot", () => {
     expect(
       validate.dependency(
-        readRuleSet("./test/validate/__mocks__/rules.cycle.via-not.json"),
+        lCycleViaNotRuleSet,
         { source: "tmp/a.js" },
         {
           resolved: "tmp/ba.js",
@@ -24,7 +35,7 @@ describe("[I] validate/index dependency - cycle viaNot", () => {
   it("a => aa => ab => ac => a doesn't get flagged when one of them is in a viaNot", () => {
     expect(
       validate.dependency(
-        readRuleSet("./test/validate/__mocks__/rules.cycle.via-not.json"),
+        lCycleViaNotRuleSet,
         { source: "tmp/a.js" },
         {
           resolved: "tmp/aa.js",
@@ -39,10 +50,22 @@ describe("[I] validate/index dependency - cycle viaNot", () => {
 });
 
 describe("[I] validate/index dependency - cycle via", () => {
+  const lCycleViaRuleSet = parseRuleSet({
+    forbidden: [
+      {
+        from: {},
+        to: {
+          circular: true,
+          via: "^tmp/ab\\.js$",
+        },
+      },
+    ],
+  });
+
   it("a => ba => bb => bc => a doesn't get flagged when none of them is in a via", () => {
     expect(
       validate.dependency(
-        readRuleSet("./test/validate/__mocks__/rules.cycle.via.json"),
+        lCycleViaRuleSet,
         { source: "tmp/a.js" },
         {
           resolved: "tmp/ba.js",
@@ -58,7 +81,7 @@ describe("[I] validate/index dependency - cycle via", () => {
   it("a => aa => ab => ac => a get flagged when one of them is in a via", () => {
     expect(
       validate.dependency(
-        readRuleSet("./test/validate/__mocks__/rules.cycle.via.json"),
+        lCycleViaRuleSet,
         { source: "tmp/a.js" },
         {
           resolved: "tmp/aa.js",

@@ -1,9 +1,0 @@
-{
-  "forbidden": [
-    {
-      "name": "no-reachable",
-      "from": { "path": "src/index\\.js" },
-      "to": { "reachable": true }
-    }
-  ]
-}

@@ -1,26 +1,30 @@
 import { expect } from "chai";
 import validate from "../../src/validate/index.js";
-import readRuleSet from "./readruleset.utl.mjs";
+import parseRuleSet from "./parse-ruleset.utl.mjs";
 
 describe("[I] validate/index - orphans", () => {
+  const lOrphanRuleSet = parseRuleSet({
+    forbidden: [
+      {
+        name: "no-orphans",
+        from: { orphan: true },
+        to: {},
+      },
+    ],
+  });
+
   it("Skips modules that have no orphan attribute", () => {
     expect(
-      validate.module(
-        readRuleSet("./test/validate/__mocks__/rules.orphan.json"),
-        { source: "something" }
-      )
+      validate.module(lOrphanRuleSet, { source: "something" })
     ).to.deep.equal({ valid: true });
   });
 
   it("Flags modules that are orphans", () => {
     expect(
-      validate.module(
-        readRuleSet("./test/validate/__mocks__/rules.orphan.json"),
-        {
-          source: "something",
-          orphan: true,
-        }
-      )
+      validate.module(lOrphanRuleSet, {
+        source: "something",
+        orphan: true,
+      })
     ).to.deep.equal({
       valid: false,
       rules: [
@@ -31,16 +35,23 @@ describe("[I] validate/index - orphans", () => {
       ],
     });
   });
+});
+describe("[I] validate/index - orphans in 'allowed' rules", () => {
+  const lOrphansAllowedRuleSet = parseRuleSet({
+    allowed: [
+      {
+        from: { orphan: false },
+        to: {},
+      },
+    ],
+  });
 
   it("Flags modules that are orphans if they're in the 'allowed' section", () => {
     expect(
-      validate.module(
-        readRuleSet("./test/validate/__mocks__/rules.orphan.allowed.json"),
-        {
-          source: "something",
-          orphan: true,
-        }
-      )
+      validate.module(lOrphansAllowedRuleSet, {
+        source: "something",
+        orphan: true,
+      })
     ).to.deep.equal({
       valid: false,
       rules: [
@@ -54,37 +65,49 @@ describe("[I] validate/index - orphans", () => {
 
   it("Leaves modules alone that aren't orphans if there's a rule in the 'allowed' section forbidding them", () => {
     expect(
-      validate.module(
-        readRuleSet("./test/validate/__mocks__/rules.orphan.allowed.json"),
-        {
-          source: "something",
-          orphan: false,
-        }
-      )
+      validate.module(lOrphansAllowedRuleSet, {
+        source: "something",
+        orphan: false,
+      })
     ).to.deep.equal({ valid: true });
   });
+});
 
+describe("[I] validate/index - orphans combined with path/ pathNot", () => {
+  const lOrphanPathRuleSet = parseRuleSet({
+    forbidden: [
+      {
+        name: "no-orphans",
+        severity: "error",
+        from: { orphan: true, path: "noorphansallowedhere" },
+        to: {},
+      },
+    ],
+  });
+  const lOrphanPathNotRuleSet = parseRuleSet({
+    forbidden: [
+      {
+        name: "no-orphans",
+        from: { orphan: true, pathNot: "orphansallowedhere" },
+        to: {},
+      },
+    ],
+  });
   it("Leaves modules that are orphans, but that don't match the rule path", () => {
     expect(
-      validate.module(
-        readRuleSet("./test/validate/__mocks__/rules.orphan.path.json"),
-        {
-          source: "something",
-          orphan: true,
-        }
-      )
+      validate.module(lOrphanPathRuleSet, {
+        source: "something",
+        orphan: true,
+      })
     ).to.deep.equal({ valid: true });
   });
 
   it("Flags modules that are orphans and that match the rule's path", () => {
     expect(
-      validate.module(
-        readRuleSet("./test/validate/__mocks__/rules.orphan.path.json"),
-        {
-          source: "noorphansallowedhere/blah/something.ts",
-          orphan: true,
-        }
-      )
+      validate.module(lOrphanPathRuleSet, {
+        source: "noorphansallowedhere/blah/something.ts",
+        orphan: true,
+      })
     ).to.deep.equal({
       valid: false,
       rules: [
@@ -98,25 +121,19 @@ describe("[I] validate/index - orphans", () => {
 
   it("Leaves modules that are orphans, but that do match the rule's pathNot", () => {
     expect(
-      validate.module(
-        readRuleSet("./test/validate/__mocks__/rules.orphan.pathnot.json"),
-        {
-          source: "orphansallowedhere/something",
-          orphan: true,
-        }
-      )
+      validate.module(lOrphanPathNotRuleSet, {
+        source: "orphansallowedhere/something",
+        orphan: true,
+      })
     ).to.deep.equal({ valid: true });
   });
 
   it("Flags modules that are orphans, but that do not match the rule's pathNot", () => {
     expect(
-      validate.module(
-        readRuleSet("./test/validate/__mocks__/rules.orphan.pathnot.json"),
-        {
-          source: "blah/something.ts",
-          orphan: true,
-        }
-      )
+      validate.module(lOrphanPathNotRuleSet, {
+        source: "blah/something.ts",
+        orphan: true,
+      })
     ).to.deep.equal({
       valid: false,
       rules: [
@@ -131,7 +148,7 @@ describe("[I] validate/index - orphans", () => {
   it("The 'dependency' validation leaves the module only orphan rule alone", () => {
     expect(
       validate.dependency(
-        readRuleSet("./test/validate/__mocks__/rules.orphan.path.json"),
+        lOrphanPathRuleSet,
         {
           source: "noorphansallowedhere/something.ts",
           orphan: true,
