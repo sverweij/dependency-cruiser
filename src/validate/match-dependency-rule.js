@@ -33,8 +33,10 @@ function match(pFrom, pTo) {
         "exoticRequireNot",
         "exoticRequire"
       ) &&
-      matchers.toVia(pRule, pTo) &&
-      matchers.toViaNot(pRule, pTo) &&
+      matchers.toVia(pRule, pTo, lGroups) &&
+      matchers.toViaOnly(pRule, pTo, lGroups) &&
+      matchers.toViaNot(pRule, pTo, lGroups) &&
+      matchers.toViaNotSome(pRule, pTo, lGroups) &&
       matchers.toIsMoreUnstable(pRule, pFrom, pTo)
     );
   };

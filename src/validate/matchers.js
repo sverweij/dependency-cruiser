@@ -50,9 +50,7 @@ function modulePathNot(pRule, pModule) {
 function _toPath(pRule, pString, pGroups = []) {
   return Boolean(
     !pRule.to.path ||
-      (pGroups.length > 0
-        ? pString.match(replaceGroupPlaceholders(pRule.to.path, pGroups))
-        : pString.match(pRule.to.path))
+      pString.match(replaceGroupPlaceholders(pRule.to.path, pGroups))
   );
 }
 
@@ -67,9 +65,7 @@ function toModulePath(pRule, pModule, pGroups) {
 function _toPathNot(pRule, pString, pGroups = []) {
   return (
     !Boolean(pRule.to.pathNot) ||
-    !(pGroups.length > 0
-      ? pString.match(replaceGroupPlaceholders(pRule.to.pathNot, pGroups))
-      : pString.match(pRule.to.pathNot))
+    !pString.match(replaceGroupPlaceholders(pRule.to.pathNot, pGroups))
   );
 }
 
@@ -95,19 +91,61 @@ function toDependencyTypesNot(pRule, pDependency) {
   );
 }
 
-function toVia(pRule, pDependency) {
+const removeLast = (_via, pIndex, pArray) => pIndex !== pArray.length - 1;
+
+function toVia(pRule, pDependency, pGroups) {
   return Boolean(
     !pRule.to.via ||
       (pDependency.cycle &&
-        pDependency.cycle.some((pVia) => pVia.match(pRule.to.via)))
+        pDependency.cycle
+          // the last in the cycle is always the module itself, which, for
+          // via & viaNot checks isn't very useful
+          .filter(removeLast)
+          .some((pVia) =>
+            pVia.match(replaceGroupPlaceholders(pRule.to.via, pGroups))
+          ))
   );
 }
 
-function toViaNot(pRule, pDependency) {
+function toViaOnly(pRule, pDependency, pGroups) {
+  return Boolean(
+    !pRule.to.viaOnly ||
+      (pDependency.cycle &&
+        pDependency.cycle
+          // the last in the cycle is always the module itself, which, for
+          // via & viaNot checks isn't very useful
+          .filter(removeLast)
+          .every((pVia) =>
+            pVia.match(replaceGroupPlaceholders(pRule.to.viaOnly, pGroups))
+          ))
+  );
+}
+
+function toViaNot(pRule, pDependency, pGroups) {
   return Boolean(
     !pRule.to.viaNot ||
       (pDependency.cycle &&
-        !pDependency.cycle.some((pVia) => pVia.match(pRule.to.viaNot)))
+        !pDependency.cycle
+          // the last in the cycle is always the module itself, which, for
+          // via & viaNot checks isn't very useful
+          .filter(removeLast)
+          .some((pVia) =>
+            pVia.match(replaceGroupPlaceholders(pRule.to.viaNot, pGroups))
+          ))
+  );
+}
+
+function toViaNotSome(pRule, pDependency, pGroups) {
+  return Boolean(
+    !pRule.to.viaNotSome ||
+      (pDependency.cycle &&
+        !pDependency.cycle
+          // the last in the cycle is always the module itself, which, for
+          // via & viaNot checks isn't very useful
+          .filter(removeLast)
+          .every((pVia) =>
+            pVia.match(replaceGroupPlaceholders(pRule.to.viaNotSome, pGroups))
+          ))
   );
 }
 
@@ -148,7 +186,9 @@ module.exports = {
   toDependencyTypes,
   toDependencyTypesNot,
   toVia,
+  toViaOnly,
   toViaNot,
+  toViaNotSome,
   toIsMoreUnstable,
   matchesMoreThanOneDependencyType,
 };
