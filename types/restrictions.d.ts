@@ -34,18 +34,35 @@ export interface IToRestriction extends IBaseRestrictionType {
    */
   circular?: boolean;
   /**
-   * For circular dependencies - whether or not to match cycles that include include modules
-   * with this regular expression. E.g. to allow all cycles, except when they go through one
-   * specific module. Typically to temporarily disallow some cycles with a lower severity -
-   * setting up a rule with a viaNot that ignores them.
+   * "For circular dependencies - whether or not to match cycles that include
+   * exclusively modules with this regular expression. This is different from
+   * the regular via that already mathces when only some of the modules in the
+   * cycle satisfy the regular expression
    */
   via?: string | string[];
   /**
-   * For circular dependencies - whether or not to match cycles that do NOT include modules
-   * with this regular expression. E.g. to disallow all cycles, except when they go through
-   * one specific module. Typically to temporarily allow some cycles until they're removed.
+   * For circular dependencies - whether or not to match cycles that include
+   * some modules with this regular expression. If you want to match cycles that
+   * _exclusively_ include modules satisfying the regular expression use the viaOnly
+   * restriction.
+   * E.g. to allow all cycles
+   * except when they go through one specific module. Typically to temporarily
+   * disallow some cycles with a lower severity - setting up a rule with a via
+   * that ignores them in an 'allowed' section.
+   */
+  viaOnly?: string | string[];
+  /**
+   * For circular dependencies - whether or not to match cycles that include
+   * _only_ modules that don't satisfy this regular expression. E.g. to disallow all cycles,
+   * except when they go through one specific module. Typically to temporarily
+   * allow some cycles until they're removed.
    */
   viaNot?: string | string[];
+  /**
+   * "For circular dependencies - whether or not to match cycles that include
+   * _some_ modules that don't satisfy this regular expression.
+   */
+  viaSomeNot?: string | string[];
   /**
    * Whether or not to match when the dependency is a dynamic one.
    */

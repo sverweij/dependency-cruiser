@@ -709,7 +709,7 @@ up at itself.
 }
 ```
 
-### `via` and `viaNot` - restricting what cycles to match
+### `via` and `viaNot`, `viaOnly` and `viaSomeNot` - restricting what cycles to match
 
 Some codebases include a lot of circular dependencies, sometimes with a few 'knots'
 (typically barrel files) that partake in most of them. Fixing these cycles might
@@ -717,9 +717,26 @@ take a spell, so you might want to (temporarily :-) ) exclude them from breaking
 the build. At the same time you might want to prevent any new violation going
 unnoticed because of this.
 
-One solution to this is to use dependency-cruiser's `ignore-known` mechanism, but
-for this specific case it's also possible to exclude everything passing through
-these knots from breaking the build, but still flagging any other cycle.
+One solution to this is to use dependency-cruiser's
+[`ignore-known`](cli.md#--ignore-known-ignore-known-violations) mechanism, Another
+solution is to put restrictions on through which modules the cycles pass; the
+"via"'s, in a similar fashion as possible with `path` and `pathNot`. There are
+_four_ via-like restrictions in dependency-cruiser, as - different from the
+`path`/`pathNot` restrictions the `via` (and `viaNot`) ones always almost have
+to check against multiple paths; all the "via"'s in the cycle. The variants
+exist to enable matching against only _some_ of the modules in the cycle or
+against _all_ of them.
+
+The examples below refer to this cycle: `a/aa.js`, `a/ab.js`, `b/bb.js`, `a/aa.js`
+
+| restriction  | what it does                                                        | example input | match?  | because...                    |
+| ------------ | ------------------------------------------------------------------- | ------------- | ------- | ----------------------------- |
+| `via`        | **some** of the modules in the cycle **do** match the expression    | `^a/.+`       | `true`  | `a/aa.js` and `a/ab.js` match |
+| `viaOnly`    | **all** of the modules in the cycle **do** match the expression     | `^a/.+`       | `false` | `b/bb.js` doesn't match       |
+| `viaNot`     | **all** of the modules in the cycle **don't** match the expression  | `^a/.+`       | `false` | `a/aa.js` and `a/ab.js` match |
+| `viaSomeNot` | **some** of the modules in the cycle **don't** match the expression | `^a/.+`       | `true`  | `b/bb.js` doesn't match       |
+
+#### Usage example: prevent code from going through a 'knot'
 
 In this example `app/javascript/tables/index.ts` and `app/javascript/tables/index.ts`
 are the known 'knots':
@@ -755,6 +772,34 @@ are the known 'knots':
       '^app/javascript/ui/index.tsx',
     ]
   }
+}
+```
+
+#### Usage example: prevent cycles from going outside a folder
+
+This example (adapted from a
+[question on GitHub](https://github.com/sverweij/dependency-cruiser/issues/585)
+by [@PetFeld-ed](https://github.com/PetFeld-ed))
+not only makes use of the `viaSomeNot`, but also displays the use of
+[group matching](#group-matching).
+
+```javascript
+// in the `forbidden` section of a dependency-cruiser config:
+{
+  name: 'no-circular-dependency-of-modules',
+  comment:
+    'If a module in business component A depends on one in component B, then ' +
+    'the module in component B should not depend on that component in module A ' +
+    'This is also forbidden if the dependency is transitive. ',
+    "I.a.w.: if there's a cycle, it should stay within the same component " +
+  severity: 'error',
+  from: {
+    path: '^src/business-components/([^/]+)/.+'
+  },
+  to: {
+    circular: true,
+    viaSomeNot: '^src/business-components/$1/.+',
+  },
 }
 ```
 
