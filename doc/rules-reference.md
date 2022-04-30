@@ -284,10 +284,10 @@ a difference:
 >   If there's a better way dependency-cruiser will switch over to that without
 >   a major version bump.
 > - :warning: at this time only the `moreUnstable`, `circular` and `path`/ `pathNot`
->   attributes works, so it is
+>   attributes (including 'group matching') work, so it is
 >   possible to check the "stable dependencies principle" on folder level. Other
 >   attributes (including, but not limited to _via_)
->   still have to be implemented (after release 11.6.0)
+>   still have to be implemented (after release 11.7.0)
 
 ## Conditions
 

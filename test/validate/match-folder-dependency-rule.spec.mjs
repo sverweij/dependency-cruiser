@@ -77,16 +77,47 @@ describe("[I] validate/match-folder-dependency-rule - match from pathNot", () =>
 
 describe("[I] validate/match-folder-dependency-rule - match to path", () => {
   const lPathRule = { scope: "folder", from: {}, to: { path: "src/" } };
+  const lGroupMatchingPathRule = {
+    scope: "folder",
+    from: {
+      path: "src/components/[^/]+",
+    },
+    to: { path: "src/components/", pathNot: "src/components/$1" },
+  };
 
   it("does not match folders not in the from path of the rule", () => {
     expect(
       matchFolderRule.match({}, { name: "test/shouldnotmatch" })(lPathRule)
     ).to.equal(false);
   });
+  it("does not match folders not in the from path of the rule (group matching variant)", () => {
+    expect(
+      matchFolderRule.match(
+        { name: "src/components/thing" },
+        { name: "test/components/other-thing" }
+      )(lGroupMatchingPathRule)
+    ).to.equal(false);
+  });
   it("does match folders in the from path of the rule", () => {
     expect(
       matchFolderRule.match({}, { name: "src/shouldmatch" })(lPathRule)
     ).to.equal(true);
+  });
+  it("does match folders in the from path of the rule (group matching variant - matching one, not the other)", () => {
+    expect(
+      matchFolderRule.match(
+        { name: "src/components/thing" },
+        { name: "src/components/thing/folder-in-thing" }
+      )(lGroupMatchingPathRule)
+    ).to.equal(true);
+  });
+  it("does not match folders in the from path of the rule (group matching  - not matching any)", () => {
+    expect(
+      matchFolderRule.match(
+        { name: "src/components/thing" },
+        { name: "src/not-even-a-component" }
+      )(lGroupMatchingPathRule)
+    ).to.equal(false);
   });
 });
 

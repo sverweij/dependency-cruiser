@@ -1,3 +1,7 @@
+const {
+  extractGroups,
+  replaceGroupPlaceholders,
+} = require("../utl/regex-util");
 const { isModuleOnlyRule, isFolderScope } = require("./rule-classifiers");
 const matchers = require("./matchers");
 
@@ -11,24 +15,34 @@ function fromFolderPathNot(pRule, pFromFolder) {
   );
 }
 
-function toFolderPath(pRule, pToFolder) {
-  return Boolean(!pRule.to.path || pToFolder.name.match(pRule.to.path));
+function toFolderPath(pRule, pToFolder, pGroups) {
+  return Boolean(
+    !pRule.to.path ||
+      pToFolder.name.match(replaceGroupPlaceholders(pRule.to.path, pGroups))
+  );
 }
 
-function toFolderPathNot(pRule, pToFolder) {
-  return Boolean(!pRule.to.pathNot || !pToFolder.name.match(pRule.to.pathNot));
+function toFolderPathNot(pRule, pToFolder, pGroups) {
+  return Boolean(
+    !pRule.to.pathNot ||
+      !pToFolder.name.match(replaceGroupPlaceholders(pRule.to.pathNot, pGroups))
+  );
 }
 
 function match(pFromFolder, pToFolder) {
-  return (pRule) =>
-    // TODO: to path rules - they need to be frippled from the ones
-    // already in place for modules
-    fromFolderPath(pRule, pFromFolder) &&
-    fromFolderPathNot(pRule, pFromFolder) &&
-    toFolderPath(pRule, pToFolder) &&
-    toFolderPathNot(pRule, pToFolder) &&
-    matchers.toIsMoreUnstable(pRule, pFromFolder, pToFolder) &&
-    matchers.propertyEquals(pRule, pToFolder, "circular");
+  return (pRule) => {
+    const lGroups = extractGroups(pRule.from, pFromFolder.name);
+
+    // TODO: via's
+    return (
+      fromFolderPath(pRule, pFromFolder) &&
+      fromFolderPathNot(pRule, pFromFolder) &&
+      toFolderPath(pRule, pToFolder, lGroups) &&
+      toFolderPathNot(pRule, pToFolder, lGroups) &&
+      matchers.toIsMoreUnstable(pRule, pFromFolder, pToFolder) &&
+      matchers.propertyEquals(pRule, pToFolder, "circular")
+    );
+  };
 }
 
 const isInteresting = (pRule) =>
