@@ -179,8 +179,15 @@ function matchesPattern(pFullPathToFile, pPattern) {
   return RegExp(pPattern, "g").test(pFullPathToFile);
 }
 
+/**
+ *
+ * @param {import("../../types/dependency-cruiser").IDependency} pDependency
+ * @returns {string}
+ */
 function getDependencyUniqueKey(pDependency) {
-  return `${pDependency.module} ${pDependency.moduleSystem}`;
+  return `${pDependency.module} ${pDependency.moduleSystem} ${(
+    pDependency.dependencyTypes || []
+  ).includes("type-only")}`;
 }
 
 function compareDeps(pLeft, pRight) {
