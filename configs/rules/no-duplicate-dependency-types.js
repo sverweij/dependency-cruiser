@@ -11,5 +11,9 @@ module.exports = {
   from: {},
   to: {
     moreThanOneDependencyType: true,
+    // as it's pretty common to have a type import be a type only import
+    // _and_ (e.g.) a devDependency - don't consider type-only dependency
+    // types for this rule
+    dependencyTypesNot: ["type-only"],
   },
 };
