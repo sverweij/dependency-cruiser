@@ -12,6 +12,12 @@
 
 **A**: Install the compiler you use in the same spot dependency-cruiser is installed (or vv).
 
+For some types of TypeScript dependencies you need to flip a switch,
+which is what the next question is about.
+
+<details>
+<summary>Background</summary>
+
 Dependency-cruiser doesn't come shipped with the necessary transpilers to
 handle these languages. Instead, it uses what is already available in the
 environment (see [below](#q-does-this-mean-dependency-cruiser-installs-transpilers-for-all-these-languages)).
@@ -31,8 +37,7 @@ When it turns out they aren't yet:
   npx -p typescript@4.3.5 -p dependency-cruiser@latest depcruise src -T text --focus src/main/index.ts
   ```
 
-For some types of TypeScript dependencies you need to flip a switch,
-which is what the next question is about:
+</details>
 
 ### Q: Some TypeScript dependencies I'd expect don't show up. What gives?
 
@@ -40,6 +45,12 @@ which is what the next question is about:
 dependency-cruiser configuration (`.dependency-cruiser.json` or
 `.dependency-cruiser.js`) or use `--ts-pre-compilation-deps` on the
 command line.
+
+See [--ts-pre-compilation-deps](./cli.md#--ts-pre-compilation-deps-TypeScript-only)
+for documentation and examples.
+
+<details>
+<summary>background ...</summary>
 
 By default, dependency-cruiser only takes post-compilation dependencies into
 account; dependencies between TypeScript modules that exist after compilation
@@ -54,8 +65,7 @@ If you _do_ want to see these dependencies, do one of these:
   in the `options` section.
 - pass `--ts-pre-compilation-deps` as a command line option
 
-See [--ts-pre-compilation-deps](./cli.md#--ts-pre-compilation-deps-TypeScript-only)
-for details and examples.
+</details>
 
 ### Q: Some TypeScript dependencies _still_ don't show up (`/// tripple slash directives`)
 
@@ -63,9 +73,14 @@ for details and examples.
 directives are recognized without the need for additional configuration. Easiest
 is to upgrade to version 9.0.0 or higher.
 
-> In older versions you needed to add the "tsd" (_tripple slash directive_)
-> module system to the `moduleSystems` array in your dependency-cruiser
-> configuration - or pass it on the command line (with `--module-systems cjs,ejs,tsd`).
+<details>
+<summary>background</summary>
+
+In older versions you needed to add the "tsd" (_tripple slash rective_)
+module system to the `moduleSystems` array in your dependency-cruiser
+configuration - or pass it on the command line (with `--module-systems cjs,ejs,tsd`).
+
+</details>
 
 ### Q: It looks like dependency-cruiser only detects the first of level dependencies - what is going on (TypeScript)?
 
@@ -75,22 +90,25 @@ is to upgrade to version 9.0.0 or higher.
 compiler at the same spot you installed it in - see [Q: TypeScript dependencies don't show up. How can I fix that?](#q-typescript-coffeescript-livescript-or-vue-single-file-component-sfc-dependencies-dont-show-up-how-can-i-fix-that)
 for a solution.
 
-> Background/ what's happening?
->
-> The graph above is the result of a command like `depcruise src/index.ts -T dot | dot -T svg > deps.svg`.
-> As dependency-cruiser got _src/index.ts_ as an explicit argument, it'll scan it.
-> When no TypeScript compiler is available it'll fall back to the JavaScript one.
-> As TypeScript looks a lot like JavaScript, it will still find all direct dependencies.
-> However, when it tries to resolve those dependencies (e.g. _configuration_ in the
-> example above) it's going to check for extensions it can handle - which will
-> typically be ".js", ".json", etc. - but not ".ts". As it cannot find the modules
-> it marks them as unresolvable. This is also why the graph shows them with red
-> lines and text.
->
-> Once dependency-cruiser _does_ have a TypeScript compiler available, it will find
-> a lot more dependencies with the same command:
->
-> ![the same command, but now with a TypeScript compiler in the neighbourhood](assets/and-now-with-the-typescript-compiler.svg)
+<details>
+<summary>Background</summary>
+
+The graph above is the result of a command like `depcruise src/index.ts -T dot | dot -T svg > deps.svg`.
+As dependency-cruiser got _src/index.ts_ as an explicit argument, it'll scan it.
+When no TypeScript compiler is available it'll fall back to the JavaScript one.
+As TypeScript looks a lot like JavaScript, it will still find all direct dependencies.
+However, when it tries to resolve those dependencies (e.g. _configuration_ in the
+example above) it's going to check for extensions it can handle - which will
+typically be ".js", ".json", etc. - but not ".ts". As it cannot find the modules
+it marks them as unresolvable. This is also why the graph shows them with red
+lines and text.
+
+Once dependency-cruiser _does_ have a TypeScript compiler available, it will find
+a lot more dependencies with the same command:
+
+![the same command, but now with a TypeScript compiler in the neighbourhood](assets/and-now-with-the-typescript-compiler.svg)
+
+</details>
 
 ### Q: The graph dependency-cruiser generates is humongous, and I can't follow the lines very well what can I do?
 
@@ -108,6 +126,9 @@ though, so dependency-cruiser has a few options to get you sorted.
 If you just want to get an overview of how the main components of your application
 are connected, you can aggregate dependencies to a higher level.
 
+<details>
+<summary>Background</summary>
+
 ```sh
 dependency-cruiser --config .dependency-cruiser.js --output-type archi -- src | dot -T svg > high-level-dependency-graph.svg
 ```
@@ -120,10 +141,15 @@ An example of how this can look: [dependency-cruiser's high level dependency gra
 Compare that to [dependency-cruiser's internal module graph](https://sverweij.github.io/dependency-cruiser/dependency-cruiser-dependency-graph.html)
 with ~100 modules to appreciate the difference)
 
+</details>
+
 #### Folder level dependency graph ('ddot' reporter)
 
 For a birds-eye view, you can use the `ddot` reporter that summarises dependencies
-on a folder level:
+on a folder level.
+
+<details>
+<summary>Background</summary>
 
 ```sh
 dependency-cruiser --config .dependency-cruiser.js --output-type ddot -- src | dot -T svg > folder-level-dependency-graph.svg
@@ -131,23 +157,37 @@ dependency-cruiser --config .dependency-cruiser.js --output-type ddot -- src | d
 
 See an example of how this can look: [dependency-cruiser's folder level dependency graph](https://sverweij.github.io/dependency-cruiser/dependency-cruiser-dir-graph.html)
 
+</details>
+
 #### Filtering
 
 The `--include-only`, `exclude`, `--do-not-follow`, `--focus` (and for more
 extreme measures `--max-depth`) command line options and their configuration
 file equivalents provide various ways to reduce the number of modules and
-dependencies in the dot output. E.g. to focus on stuff _within_ src only and not
+dependencies in the dot output.
+
+<details>
+<summary>Background</summary>
+
+E.g. to focus on stuff _within_ src only and not
 show any test and mock files, you'd do something like this:
 
 ```sh
 depcruise --include-only "^src/" --exclude "mocks\\.ts$|\\.spec\\.ts$" --output-type dot | dot -T svg > dependency-graph.svg
 ```
 
+</details>
+
 #### Bonus: report level filtering
 
 If you want to apply a different filter for your graph as for your validations
-(because the detail you need for your graph is lower, for instance), you have
-two options:
+(because the detail you need for your graph is lower, for instance) this is
+possible as well
+
+<details>
+<summary>Background</summary>
+
+There are two options:
 
 1. Create a configuration separate from your validation configuration,
    dedicated to the generation of graphs.
@@ -176,11 +216,18 @@ two options:
 
 You can do this with the _includeOnly_, _exclude_ and _focus_ filters
 
+</details>
+
 #### Make dot render orthogonal edges instead of splines
 
-Some of the examples you see in the documentation have orthogonal edges, instead
-of splines. Sometimes this will improve legibility quite a bit. To achieve that
-either pass `-Gsplines=ortho` to dot, e.g. in a complete incantation:
+Some of the examples you see in the documentation have orthogonal (right) edges,
+instead of splines (curvy lines). Sometimes this will improve legibility
+quite a bit.
+
+<details>
+<summary>Background</summary>
+
+To achieve that either pass `-Gsplines=ortho` to dot, e.g. in a complete incantation:
 
 ```sh
 depcruise --config .dependency-cruiser-graph.js --output-type dot -- src | dot -Gsplines=ortho -T svg > dependency-graph-with-orthogonal-edges.svg
@@ -210,21 +257,28 @@ module.exports = {
 The reason it's not the default for the dot reporter output is GraphViz won't
 always be able to render a graph with orthogonal edges, so YMMV.
 
+</details>
+
 ### Q: TypeScript dynamic imports show up as "✖" . What's up there?
 
 **A**: You're using a version of dependency-cruiser < 4.17.0. Dynamic imports,
 both in TypeScript and JavaScript are supported as of version 4.17.0 -
 and ✖'s in the output should be a thing of the past.
 
-> Before dependency-cruiser@4.17.0 this instruction was in place:
->
-> By default dependency-cruiser uses _ES2015_ as compilation target to figure out
-> what your TypeScript sources look like. That does not play nice with dynamic
-> imports. Chances are you already have a `tsconfig.json` with a configuration
-> that makes your TypeScript compiler happy about compiling dynamic imports.
-> If so: feed it to dependency-cruiser with the `--ts-config` command line
-> parameter and dependency-cruiser will attempt to resolve the dynamic imports -
-> which will work as long as you're not importing variables (or expressions).
+<details>
+<summary>Background</summary>
+
+Before dependency-cruiser@4.17.0 this instruction was in place:
+
+By default dependency-cruiser uses _ES2015_ as compilation target to figure out
+what your TypeScript sources look like. That does not play nice with dynamic
+imports. Chances are you already have a `tsconfig.json` with a configuration
+that makes your TypeScript compiler happy about compiling dynamic imports.
+If so: feed it to dependency-cruiser with the `--ts-config` command line
+parameter and dependency-cruiser will attempt to resolve the dynamic imports -
+which will work as long as you're not importing variables (or expressions).
+
+</details>
 
 ### Q: My package is pure ESM and I get "Must use import to load ES Module" when I run dependency-cruiser. How do I fix that?
 
@@ -235,7 +289,7 @@ and ✖'s in the output should be a thing of the past.
 ### Q: Should I run dependency-cruiser as a global install, with npx or as as local development dependency?
 
 **A**: It's recommended to install dependency-cruiser as a local (development)
-dependency in your project, though. That way it will automatically use the same
+dependency in your project. That way it will automatically use the same
 versions of compiler tooling as your project does, which will give the most
 reliable results.
 
@@ -253,7 +307,13 @@ out of the box as well. For jsx there is a little caveat, though.
 
 ### Q: I hear there is a little caveat with jsx. What is that?
 
-**A**: Under the hood dependency-cruiser currently uses `acorn` and `acorn-jsx`
+**A**: In (extremely) rare cases dependency-cruiser could find that a jsx depends
+on something it doesn't depend upon in reality.
+
+<details>
+<summary>Background</summary>
+
+Under the hood dependency-cruiser currently uses `acorn` and `acorn-jsx`
 which (for at least some time) have been the official jsx transpilers and are
 still used by other tools (source: acorn-jsx github page). Some constructs in
 jsx it does not support however. In the lion's share of the cases you will not
@@ -262,8 +322,7 @@ less than are in the source code) because it will fall back on the acorn-loose
 parser, which will pick up the pieces. _except_, that is when you happen to use
 _import_, _export_ or _require_ in jsx fragments in one special flavor of jsx
 
-<details>
-<summary>Sample of jsx the default parser doesn't parse</summary>
+Sample of jsx the default parser doesn't parse
 
 ```jsx
 import React from "react";
@@ -284,8 +343,6 @@ export class ReplicateIssueComponent extends React.Component {
 }
 ```
 
-</details>
-
 In [this comment](https://github.com/sverweij/dependency-cruiser/issues/395#issuecomment-730295987)
 on the orignal issue [@audunsol](https://github.com/audunsol) offers a few
 ways to work around the issue you might find helpful when you have similar
@@ -294,9 +351,14 @@ jsx.
 (As a future feature dependency-cruiser will include ways to handle even these
 situations without workarounds).
 
+</details>
+
 ### Q: Does this work with Vue as well?
 
 **A**: Yes.
+
+<details>
+<summary>Background</summary>
 
 For `.vue` single file components it uses _either_ the `vue-template-compiler`
 (Vue2) or `@vue/compiler-sfc` (Vue3).
@@ -309,9 +371,14 @@ place.
 If you are using an older version of Vue 3, you may have to add `@vue/compiler-sfc`
 manually.
 
+</details>
+
 ### Q: Does this work with Svelte as well?
 
 **A**: Yes.
+
+<details>
+<summary>Background</summary>
 
 For `.svelte` single file components it uses the `svelte` (version 3.x)
 
@@ -320,9 +387,14 @@ For `.svelte` single file components it uses the `svelte` (version 3.x)
   If that turns out to be too noisy, you can configure dependency-cruiser to
   ignore it (either in the config file or with a command-line param)
 
+</details>
+
 ### Q: Does this mean dependency-cruiser installs transpilers for all these languages?
 
 **A**: No.
+
+<details>
+<summary>Background</summary>
 
 For LiveScript, TypeScript, CoffeeScript, Svelte and Vue Single File Components
 dependency-cruiser will use the transpiler already in your project (or,
@@ -336,9 +408,14 @@ This has a few advantages over bundling the transpilers as dependencies:
 - Dependency-cruiser will use the version of the transpiler you are using
   in your project (which might not be the most recent one for valid reasons).
 
+</details>
+
 ### Q: Does this work with webpack configs (e.g. `alias` and `modules`)?
 
 **A**: Yes.
+
+<details>
+<summary>Background</summary>
 
 You can feed dependency-cruiser a webpack configuration
 ([`--webpack-config`](./options-reference.md#webpackconfig-use-the-resolution-options-of-a-webpack-configuration)
@@ -362,12 +439,55 @@ config file formats:
 Support for other formats (promise exports, TypeScript, fancier
 ECMAScript) might come later.
 
+</details>
+
+### Q: Can I tweak things to make dependency-cruiser go faster?
+
+**A**: You can, very likely.
+
+<details>
+<summary>Background</summary>
+
+At its default settings (with a `.dependency-cruiser.js` scaffolded with `--init`)
+favours correctness over speed - erring on the side of cautiousness. Things that
+influence performance, loosely in order of impact:
+
+- `moduleSystems` - reducing the number of module systems to the ones
+  you actually use (these days likely only `es6` and possibly `cjs`) will
+  speed up processing.
+- `tsPreCompilationDeps` - with this on `true` dependency-cruiser runs faster
+  on typescript sources as with that it directly analyzes the typescript AST
+  instead of first transpiling it down to JavaScript.
+- `enhancedResolveOptions.extensions` - setting this to only the extensions
+  you actually use (e.g. `.ts`) will make resolving faster. By default
+  dependency-cruiser initialises this array to support all extensions the
+  parsers in your current environment supports (for just tsc or swc this will
+  be something like .js, .cjs, .mjs, .ts, .d.ts, jsx, tsx). If removing extensions
+  from that array is not an option, ordering it from most to least occurring
+  will help as well as the resolver (enhanced-resolve) will try to find
+  files in that order and stop once it’s found one.
+- older versions of dependency-cruiser initialised the `doNotFollow` to a bunch
+  of `dependencyTypes` - it’s faster (and just as accurate - even in _yarn PnP_)
+  to _only_ set a `path` for that (typically `node_modules`).
+- If your codebase can be compiled successfully with `swc` setting the parser
+  to `swc` will help speed up things a bit (although not as dramatically as
+  you'd dexpect).
+- By default some rules dependency-cruiser ships with include regular
+  expressions that will not be entirely applicable to your code base (do you
+  still have files ending in `.coffee`?). It’s probably not going to make a
+  big dent, but all little bits help.
+- In some rare cases tweaking the cache time enhanced-resolve uses might make
+  for a bit better performance (traded against memory use)
+  [`enhancedResolveOptions.cachedInputFileSystem.cacheDuration`](options-reference.md#cachedinputfilesystem---cacheduration)
+
+</details>
+
 ### Q: Does dependency-cruiser detect [dynamic imports](https://github.com/tc39/proposal-dynamic-import)?
 
 **A**: Yes; in both TypeScript and JavaScript - but only with static string arguments
 or template expressions that don't contain placeholders (see the next question).
 This should cover most of the use cases for dynamic
-imports that leverage asynchronous module loading (like
+imports that use asynchronous module loading (like
 [webpack code splitting](https://webpack.js.org/guides/code-splitting/#dynamic-imports)),
 though.
 
@@ -375,12 +495,17 @@ though.
 
 **A**: No.
 
+<details>
+<summary>Background</summary>
+
 If you have imports with variables (`require(someVariable)`,
 `import(someOtherVariable).then((pMod) => {...})`) or expressions
 (`require(funkyBoolean ? 'lodash' : 'underscore'))`
 in your code dependency-cruiser won't be able to determine what dependencies
 they're about. For now dependency-cruiser focuses on doing static analysis
 only and doing that well.
+
+</details>
 
 ### Q: Does dependency-cruiser support [webpack inline loaders](https://webpack.js.org/concepts/loaders/#inline)?
 
@@ -399,9 +524,14 @@ used to determine if a package was declared as dependency.
 
 **A**: Yes.
 
+<details>
+<summary>Background</summary>
+
 From version 9.21.3 this works automatically. In earlier versions (from 4.14.0)
 you only needed to `yarn-pnp` into _externalModuleResolutionStrategy_ key in
 the config (--init took care of that), but that's not necessary anymore.
+
+</details>
 
 ### Q: dependency-cruiser detected a circular dependency. How can I see (one of the) cycles that dependency-cruiser saw?
 
@@ -422,6 +552,9 @@ your configuration with the wrapper(s) and/ or re-definitions of require:
 
 **A**: Yes.
 
+<details>
+<summary>Background</summary>
+
 You can get code completion & suggestions in editors that support these things
 by typing the module.exports with a comment like so:
 
@@ -433,6 +566,8 @@ module.exports = {
 ```
 
 > Newer versions of the `--init` generator automatically do this for you.
+
+</details>
 
 ## Expanding dependency-cruiser
 
