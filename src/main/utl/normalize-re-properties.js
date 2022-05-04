@@ -12,6 +12,8 @@ const RE_PROPERTIES = [
   "exoticRequireNot",
   "via",
   "viaNot",
+  "viaOnly",
+  "viaSomeNot",
 ];
 
 module.exports = function normalizeREProperties(
