@@ -24,9 +24,7 @@
           "coreModule": false,
           "followable": true,
           "couldNotResolve": false,
-          "dependencyTypes": [
-            "local"
-          ],
+          "dependencyTypes": ["local"],
           "matchesDoNotFollow": false,
           "circular": false,
           "valid": true
@@ -40,9 +38,7 @@
           "coreModule": false,
           "followable": true,
           "couldNotResolve": false,
-          "dependencyTypes": [
-            "npm-no-pkg"
-          ],
+          "dependencyTypes": ["npm-no-pkg"],
           "matchesDoNotFollow": false,
           "circular": false,
           "valid": true
@@ -63,9 +59,7 @@
           "coreModule": true,
           "followable": false,
           "couldNotResolve": false,
-          "dependencyTypes": [
-            "core"
-          ],
+          "dependencyTypes": ["core"],
           "matchesDoNotFollow": false,
           "circular": false,
           "valid": true
@@ -80,9 +74,7 @@
       "coreModule": true,
       "couldNotResolve": false,
       "matchesDoNotFollow": false,
-      "dependencyTypes": [
-        "core"
-      ],
+      "dependencyTypes": ["core"],
       "dependencies": [],
       "orphan": false,
       "valid": true
@@ -99,9 +91,7 @@
           "coreModule": true,
           "followable": false,
           "couldNotResolve": false,
-          "dependencyTypes": [
-            "core"
-          ],
+          "dependencyTypes": ["core"],
           "matchesDoNotFollow": false,
           "circular": false,
           "valid": true
@@ -122,9 +112,7 @@
           "coreModule": false,
           "followable": true,
           "couldNotResolve": false,
-          "dependencyTypes": [
-            "local"
-          ],
+          "dependencyTypes": ["local"],
           "matchesDoNotFollow": false,
           "circular": false,
           "valid": true
@@ -138,9 +126,7 @@
           "coreModule": false,
           "followable": true,
           "couldNotResolve": false,
-          "dependencyTypes": [
-            "local"
-          ],
+          "dependencyTypes": ["local"],
           "matchesDoNotFollow": false,
           "circular": false,
           "valid": true
@@ -154,9 +140,7 @@
           "coreModule": false,
           "followable": true,
           "couldNotResolve": false,
-          "dependencyTypes": [
-            "local"
-          ],
+          "dependencyTypes": ["local"],
           "matchesDoNotFollow": false,
           "circular": false,
           "valid": true
@@ -170,9 +154,7 @@
           "coreModule": false,
           "followable": true,
           "couldNotResolve": false,
-          "dependencyTypes": [
-            "local"
-          ],
+          "dependencyTypes": ["local"],
           "matchesDoNotFollow": false,
           "circular": false,
           "valid": true
@@ -186,9 +168,7 @@
           "coreModule": true,
           "followable": false,
           "couldNotResolve": false,
-          "dependencyTypes": [
-            "core"
-          ],
+          "dependencyTypes": ["core"],
           "matchesDoNotFollow": false,
           "circular": false,
           "valid": true
@@ -202,9 +182,7 @@
           "coreModule": false,
           "followable": true,
           "couldNotResolve": false,
-          "dependencyTypes": [
-            "npm-no-pkg"
-          ],
+          "dependencyTypes": ["npm-no-pkg"],
           "matchesDoNotFollow": false,
           "circular": false,
           "valid": true
@@ -219,9 +197,7 @@
       "coreModule": true,
       "couldNotResolve": false,
       "matchesDoNotFollow": false,
-      "dependencyTypes": [
-        "core"
-      ],
+      "dependencyTypes": ["core"],
       "dependencies": [],
       "orphan": false,
       "valid": true
@@ -238,9 +214,7 @@
           "coreModule": true,
           "followable": false,
           "couldNotResolve": false,
-          "dependencyTypes": [
-            "core"
-          ],
+          "dependencyTypes": ["core"],
           "matchesDoNotFollow": false,
           "circular": false,
           "valid": true
@@ -261,9 +235,7 @@
           "coreModule": false,
           "followable": true,
           "couldNotResolve": false,
-          "dependencyTypes": [
-            "local"
-          ],
+          "dependencyTypes": ["local"],
           "matchesDoNotFollow": false,
           "circular": false,
           "valid": true
@@ -277,9 +249,7 @@
           "coreModule": true,
           "followable": false,
           "couldNotResolve": false,
-          "dependencyTypes": [
-            "core"
-          ],
+          "dependencyTypes": ["core"],
           "matchesDoNotFollow": false,
           "circular": false,
           "valid": true
@@ -300,9 +270,7 @@
           "coreModule": true,
           "followable": false,
           "couldNotResolve": false,
-          "dependencyTypes": [
-            "core"
-          ],
+          "dependencyTypes": ["core"],
           "matchesDoNotFollow": false,
           "circular": false,
           "valid": true
@@ -323,9 +291,7 @@
           "coreModule": false,
           "followable": true,
           "couldNotResolve": false,
-          "dependencyTypes": [
-            "local"
-          ],
+          "dependencyTypes": ["local"],
           "matchesDoNotFollow": false,
           "circular": false,
           "valid": true
@@ -339,9 +305,7 @@
           "coreModule": false,
           "followable": false,
           "couldNotResolve": false,
-          "dependencyTypes": [
-            "local"
-          ],
+          "dependencyTypes": ["local"],
           "matchesDoNotFollow": false,
           "circular": false,
           "valid": true
@@ -355,9 +319,7 @@
           "coreModule": false,
           "followable": true,
           "couldNotResolve": false,
-          "dependencyTypes": [
-            "local"
-          ],
+          "dependencyTypes": ["local"],
           "matchesDoNotFollow": false,
           "circular": false,
           "valid": true
@@ -371,9 +333,7 @@
           "coreModule": true,
           "followable": false,
           "couldNotResolve": false,
-          "dependencyTypes": [
-            "core"
-          ],
+          "dependencyTypes": ["core"],
           "matchesDoNotFollow": false,
           "circular": false,
           "valid": true
@@ -388,9 +348,7 @@
       "coreModule": false,
       "couldNotResolve": false,
       "matchesDoNotFollow": false,
-      "dependencyTypes": [
-        "local"
-      ],
+      "dependencyTypes": ["local"],
       "dependencies": [],
       "orphan": false,
       "valid": true
@@ -401,9 +359,7 @@
       "coreModule": true,
       "couldNotResolve": false,
       "matchesDoNotFollow": false,
-      "dependencyTypes": [
-        "core"
-      ],
+      "dependencyTypes": ["core"],
       "dependencies": [],
       "orphan": false,
       "valid": true
@@ -420,9 +376,7 @@
           "coreModule": false,
           "followable": true,
           "couldNotResolve": false,
-          "dependencyTypes": [
-            "local"
-          ],
+          "dependencyTypes": ["local"],
           "matchesDoNotFollow": false,
           "circular": false,
           "valid": true
@@ -443,12 +397,7 @@
     "optionsUsed": {
       "combinedDependencies": false,
       "externalModuleResolutionStrategy": "node_modules",
-      "moduleSystems": [
-        "amd",
-        "cjs",
-        "es6",
-        "tsd"
-      ],
+      "moduleSystems": ["es6", "cjs", "tsd", "amd"],
       "outputTo": "test/cli/__output__/cjs.dir.json",
       "outputType": "json",
       "preserveSymlinks": false,

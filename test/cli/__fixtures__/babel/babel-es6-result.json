@@ -12,9 +12,7 @@
           "coreModule": false,
           "followable": true,
           "couldNotResolve": false,
-          "dependencyTypes": [
-            "local"
-          ],
+          "dependencyTypes": ["local"],
           "matchesDoNotFollow": false,
           "circular": false,
           "valid": true
@@ -41,9 +39,7 @@
           "coreModule": false,
           "followable": true,
           "couldNotResolve": false,
-          "dependencyTypes": [
-            "local"
-          ],
+          "dependencyTypes": ["local"],
           "matchesDoNotFollow": false,
           "circular": false,
           "valid": true
@@ -64,12 +60,7 @@
     "optionsUsed": {
       "combinedDependencies": false,
       "externalModuleResolutionStrategy": "node_modules",
-      "moduleSystems": [
-        "amd",
-        "cjs",
-        "es6",
-        "tsd"
-      ],
+      "moduleSystems": ["es6", "cjs", "tsd", "amd"],
       "outputTo": "test/cli/__output__/babel-es6-result.json",
       "outputType": "json",
       "preserveSymlinks": false,
