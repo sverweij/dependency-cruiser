@@ -1,7 +1,7 @@
 module.exports = {
   validate: false,
   maxDepth: 0,
-  moduleSystems: ["amd", "cjs", "es6", "tsd"],
+  moduleSystems: ["es6", "cjs", "tsd", "amd"],
   tsPreCompilationDeps: false,
   preserveSymlinks: false,
   combinedDependencies: false,

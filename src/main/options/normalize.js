@@ -112,7 +112,7 @@ function normalizeCruiseOptions(pOptions) {
   };
 
   lReturnValue.maxDepth = Number.parseInt(lReturnValue.maxDepth, 10);
-  lReturnValue.moduleSystems = uniq(lReturnValue.moduleSystems.sort());
+  lReturnValue.moduleSystems = uniq(lReturnValue.moduleSystems);
   if (has(lReturnValue, "collapse")) {
     lReturnValue.collapse = normalizeCollapse(lReturnValue.collapse);
   }
@@ -125,9 +125,7 @@ function normalizeCruiseOptions(pOptions) {
   lReturnValue.extraExtensionsToScan = lReturnValue.extraExtensionsToScan || [];
   lReturnValue = normalizeFilterOptions(lReturnValue, ["focus", "includeOnly"]);
 
-  lReturnValue.exoticRequireStrings = uniq(
-    lReturnValue.exoticRequireStrings.sort()
-  );
+  lReturnValue.exoticRequireStrings = uniq(lReturnValue.exoticRequireStrings);
   if (lReturnValue.reporterOptions) {
     lReturnValue.reporterOptions = normalizeReporterOptions(
       lReturnValue.reporterOptions

@@ -360,15 +360,15 @@ And with `"maxDepth": 3` like this:
 > :shell: command line option equivalent: `--module-systems`
 
 Here you can pass a list of module systems dependency-cruiser should use
-to detect dependencies. It defaults to `["amd", "cjs", "es6", "tsd]` The
+to detect dependencies. It defaults to `["es6", "cjs", "tsd", "amd"]` The
 'module systems' dependency-cruiser supports:
 
 | System | Meaning                                                                                                                                                                        |
 | ------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
-| `amd`  | [Asynchronous Module Definition](https://github.com/amdjs/amdjs-api/wiki/AMD) as used by a.o. [RequireJS](requirejs.org)                                                       |
-| `cjs`  | Common js as popularised by [node.js](https://nodejs.org/dist/latest-v12.x/docs/api/modules.html) which uses the `require` function to include other modules                   |
 | `es6`  | modules as defined for ECMAScript 6 in 2015 in [Emma-262](http://www.ecma-international.org/ecma-262/6.0/index.html#sec-modules), with proper `import` and `export` statements |
+| `cjs`  | Common js as popularised by [node.js](https://nodejs.org/dist/latest-v18.x/docs/api/modules.html) which uses the `require` function to include other modules                   |
 | `tsd`  | [TypeScript 'triple slash directives'](https://www.typescriptlang.org/docs/handbook/triple-slash-directives.html)                                                              |
+| `amd`  | [Asynchronous Module Definition](https://github.com/amdjs/amdjs-api/wiki/AMD) as used by a.o. [RequireJS](requirejs.org)                                                       |
 
 ## `tsPreCompilationDeps`
 
