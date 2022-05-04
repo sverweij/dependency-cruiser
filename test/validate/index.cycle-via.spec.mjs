@@ -332,7 +332,34 @@ describe("[I] validate/index dependency - cycle viaOnly - with group matching", 
           from: {},
           to: {
             circular: true,
-            via: "^tmp/[^.]+\\.js$",
+            viaOnly: "^tmp/[^.]+\\.js$",
+          },
+        },
+      ],
+    });
+    expect(
+      validate.dependency(
+        lRuleSet,
+        { source: "tmp/a.js" },
+        {
+          resolved: "tmp/aa.js",
+          circular: true,
+          cycle: ["tmp/aa.js", "tmp/ab.js", "tmp/ac.js", "tmp/a.js"],
+        }
+      )
+    ).to.deep.equal({
+      valid: false,
+      rules: [{ name: "unnamed", severity: "warn" }],
+    });
+  });
+  it("a => aa => ab => ac => a get flagged when all of them are in a viaOnly presented as an array", () => {
+    const lRuleSet = parseRuleSet({
+      forbidden: [
+        {
+          from: {},
+          to: {
+            circular: true,
+            viaOnly: ["somethingelse", "^tmp/[^.]+\\.js$"],
           },
         },
       ],
