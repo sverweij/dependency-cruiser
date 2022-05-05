@@ -107,11 +107,7 @@ function transformMetricsToTable(
  * - additional output formats (csv?, html?)
  *
  * @param {import('../../types/dependency-cruiser').ICruiseResult} pCruiseResult -
- *      the output of a dependency-cruise adhering to dependency-cruiser's
- *      cruise result schema
  * @return {import('../../types/dependency-cruiser').IReporterOutput} -
- *      output: some metrics on folders and dependencies
- *      exitCode: 0
  */
 module.exports = (pCruiseResult, pReporterOptions) => {
   const lReporterOptions = pReporterOptions || {};

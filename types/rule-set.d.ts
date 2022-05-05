@@ -134,6 +134,11 @@ export interface IRegularAllowedRuleType {
   to: IToRestriction;
 }
 
+export type IAnyRuleType =
+  | IForbiddenRuleType
+  | IAllowedRuleType
+  | IRequiredRuleType;
+
 export interface IFlattenedRuleSet {
   /**
    * A list of rules that describe dependencies that are not allowed.

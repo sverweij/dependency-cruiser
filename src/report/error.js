@@ -155,11 +155,11 @@ function report(pResults, pLong) {
  * - for each violation a message stating the violation name and the to and from
  * - a summary with total number of errors and warnings found, and the total
  *   number of files cruised
- * @param {ICruiseResult} pResults -
+ * @param {import("../../types/cruise-result").ICruiseResult} pResults -
  * @param {any} pOptions - An object with options;
  *                         {boolean} long - whether or not to include an explanation
  *                                          (/ comment) which each violation
- * @returns {IReporterOutput} - output: the formatted text in a string
+ * @returns {import("../../types/dependency-cruiser").IReporterOutput} - output: the formatted text in a string
  *                              exitCode: the number of errors found
  */
 module.exports = (pResults, pOptions) => ({

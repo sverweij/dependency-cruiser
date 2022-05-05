@@ -84,7 +84,7 @@ function gatherScannableFilesFromDirectory(pDirectoryName, pOptions) {
  *
  * @param  {string[]} pFileAndDirectoryArray globs and/ or paths to files or
  *                               directories to be gathered
- * @param  {import('../../types/options').ICruiseOptions} pOptions options that
+ * @param  {import('../../types/dependency-cruiser').ICruiseOptions} pOptions options that
  *                               influence what needs to be gathered/ scanned
  *                               notably useful attributes:
  *                               - exclude - regexp of what to exclude

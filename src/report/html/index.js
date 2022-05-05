@@ -14,14 +14,6 @@ function addShowTitle(pDependencyEntry) {
   };
 }
 
-/**
- * Returns the results of a cruise in an 'incidence matrix'
- *
- * @param {ICruiseResult} pResults - the output of a dependency-cruise adhering to ../../schema/cruise-result.schema.json
- * @returns {IReporterOutput} - .output: incidence matrix in an html table with some simple bits and bobs to make
- *                                       it easier to navigate.
- *                              .exitCode: 0
- */
 function report(pResults) {
   return Handlebars.templates["html.template.hbs"]({
     modules: dependencyToIncidenceTransformer(pResults.modules).map(
@@ -30,6 +22,12 @@ function report(pResults) {
   });
 }
 
+/**
+ * Returns the results of a cruise in an 'incidence matrix'
+ *
+ * @param {import("../../../types/cruise-result").ICruiseResult} pResults
+ * @returns {import("../../../types/dependency-cruiser").IReporterOutput}
+ */
 module.exports = (pResults) => ({
   output: report(pResults),
   exitCode: 0,

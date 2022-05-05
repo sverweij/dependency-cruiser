@@ -108,13 +108,13 @@ function extractWithTsc(
 
 /**
  *
- * @param {import('../../types/options').ICruiseOptions} pCruiseOptions
+ * @param {import('../../types/dependency-cruiser').ICruiseOptions} pCruiseOptions
  * @param {string} pFileName
  * @param {any} pTranspileOptions
- * @returns {Partial<import('../../types/cruise-result').IDependency[]>}
+ * @returns {import('../../types/cruise-result').IDependency[]}
  */
 function extractDependencies(pCruiseOptions, pFileName, pTranspileOptions) {
-  /** @type Partial<import('../../types/cruise-result').IDependency[]> */
+  /** @type import('../../types/cruise-result').IDependency[] */
   let lDependencies = [];
 
   if (!pCruiseOptions.extraExtensionsToScan.includes(path.extname(pFileName))) {
@@ -208,9 +208,9 @@ function compareDeps(pLeft, pRight) {
  *
  *
  * @param  {string} pFileName path to the file
- * @param  {import("../../../types/dependency-cruiser").ICruiseOptions} pCruiseOptions cruise options
- * @param {import("../../types/resolve-options").IResolveOptions} pResolveOptions  webpack 'enhanced-resolve' options
- * @param  {any} pTranspileOptions       an object with tsconfig ('typescript project') options
+ * @param  {import("../../types/dependency-cruiser").ICruiseOptions} pCruiseOptions cruise options
+ * @param {import("../../types/dependency-cruiser").IResolveOptions} pResolveOptions  webpack 'enhanced-resolve' options
+ * @param  {import("../../types/dependency-cruiser").ITranspileOptions} pTranspileOptions       an object with tsconfig ('typescript project') options
  *                               ('flattened' so there's no need for file access on any
  *                               'extends' option in there)
  * @return {import("../../types/dependency-cruiser").IDependency[]} an array of dependency objects (see above)

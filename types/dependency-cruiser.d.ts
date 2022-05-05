@@ -1,11 +1,13 @@
 import { ICruiseResult } from "./cruise-result";
 import { ICruiseOptions, IFormatOptions } from "./options";
+import { IResolveOptions } from "./resolve-options";
 
 export * from "./rule-set";
 export * from "./options";
 export * from "./configuration";
 export * from "./shared-types";
 export * from "./cruise-result";
+export * from "./resolve-options";
 
 /**
  * all supported extensions; for each extension whether or not
@@ -74,7 +76,7 @@ export interface IReporterOutput {
 export function cruise(
   pFileAndDirectoryArray: string[],
   pCruiseOptions?: ICruiseOptions,
-  pResolveOptions?: any,
+  pResolveOptions?: IResolveOptions,
   pTSConfig?: any
 ): IReporterOutput;
 
@@ -114,7 +116,7 @@ export interface ITranspileOptions {
 export function futureCruise(
   pFileAndDirectoryArray: string[],
   pCruiseOptions?: ICruiseOptions,
-  pResolveOptions?: any,
+  pResolveOptions?: IResolveOptions,
   pTranspileOptions?: ITranspileOptions
 ): IReporterOutput;
 

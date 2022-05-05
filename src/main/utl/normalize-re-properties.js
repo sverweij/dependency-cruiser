@@ -1,7 +1,7 @@
 /* eslint-disable security/detect-object-injection */
-const _get = require("lodash/get");
-const _set = require("lodash/set");
-const _cloneDeep = require("lodash/cloneDeep");
+const get = require("lodash/get");
+const set = require("lodash/set");
+const cloneDeep = require("lodash/cloneDeep");
 
 const RE_PROPERTIES = [
   "path",
@@ -20,13 +20,13 @@ module.exports = function normalizeREProperties(
   pPropertyContainer,
   pREProperties = RE_PROPERTIES
 ) {
-  let lPropertyContainer = _cloneDeep(pPropertyContainer);
+  let lPropertyContainer = cloneDeep(pPropertyContainer);
 
   for (const lProperty of pREProperties) {
-    let lValue = _get(lPropertyContainer, lProperty);
+    let lValue = get(lPropertyContainer, lProperty);
 
     if (Array.isArray(lValue)) {
-      _set(lPropertyContainer, lProperty, lValue.join("|"));
+      set(lPropertyContainer, lProperty, lValue.join("|"));
     }
   }
   return lPropertyContainer;

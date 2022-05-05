@@ -10,6 +10,14 @@ const resolveHelpers = require("./resolve-helpers");
 const determineDependencyTypes = require("./determine-dependency-types");
 const getManifest = require("./get-manifest");
 
+/**
+ *
+ * @param {import("../../../types/dependency-cruiser").IModule} pModule
+ * @param {string} pBaseDirectory
+ * @param {string} pFileDirectory
+ * @param {import("../../../types/dependency-cruiser").IResolveOptions} pResolveOptions
+ * @returns {any}
+ */
 function resolveModule(
   pModule,
   pBaseDirectory,
@@ -33,8 +41,7 @@ function resolveModule(
     lReturnValue = resolveAMD(
       lStrippedModuleName,
       pBaseDirectory,
-      pFileDirectory,
-      pResolveOptions
+      pFileDirectory
     );
   }
   return lReturnValue;
@@ -119,20 +126,8 @@ function resolveWithRetry(
  *                              for resolved files.
  * @param  {string} pFileDirectory    the directory of the file the dependency was
  *                              detected in
- * @param  {import(../../../types/resolve-options").IResolveOptions} pResolveOptions
- * @return {Partial <import("../../../types/cruise-result").IDependency>} an object with as attributes:
- *                              - resolved: a string representing the pDependency
- *                                  resolved to a file on disk (or the pDependency
- *                                  name itself when it could not be resolved)
- *                              - coreModule: true the dependency is a (node)
- *                                  core module - false in all other cases
- *                                  (deprecated over dependencyType === 'core')
- *                              - followable: true when it is worthwhile to
- *                                  follow dependencies of this dependency (
- *                                  typically not true for .json)
- *                              - couldNotResolve: true if it was not possible
- *                                  to resolve the dependency to a file on disk
- *                              - dependencyTypes: an array of dependencyTypes
+ * @param  {import("../../../types/resolve-options").IResolveOptions} pResolveOptions
+ * @return {Partial <import("../../../types/cruise-result").IDependency>}
  *
  */
 // eslint-disable-next-line max-lines-per-function

@@ -47,6 +47,7 @@ function determineManifestDependencyTypes(
   pPackageDependencies,
   pResolverModulePaths
 ) {
+  /** @type {import("../../../types/shared-types").DependencyType[]} */
   let lReturnValue = ["npm-unknown"];
 
   if (Boolean(pPackageDependencies)) {
@@ -90,12 +91,21 @@ function dependencyIsBundled(pModule, pPackageDeps) {
   return lReturnValue;
 }
 
+/**
+ *
+ * @param {string} pModuleName
+ * @param {string} pPackageDeps
+ * @param {string} pFileDirectory
+ * @param {import("../../../types/dependency-cruiser").IResolveOptions} pResolveOptions
+ * @returns {import("../../../types/shared-types").DependencyType[]}
+ */
 function determineNodeModuleDependencyTypes(
   pModuleName,
   pPackageDeps,
   pFileDirectory,
   pResolveOptions
 ) {
+  /** @type {import("../../../types/shared-types").DependencyType[]} */
   let lReturnValue = determineManifestDependencyTypes(
     externalModuleHelpers.getPackageRoot(pModuleName),
     pPackageDeps,
@@ -117,17 +127,30 @@ function determineNodeModuleDependencyTypes(
   return lReturnValue;
 }
 
+/**
+ *
+ * @param {import("../../../types/cruise-result").IDependency} pDependency
+ * @param {string} pModuleName
+ * @param {any} pPackageDeps
+ * @param {string} pFileDirectory
+ * @param {import("../../../types/dependency-cruiser").IResolveOptions} pResolveOptions
+ * @param {string} pBaseDirectory
+ * @returns {import("../../../types/shared-types").DependencyType[]}
+ */
 function determineExternalModuleDependencyTypes(
-  pModule,
+  pDependency,
   pModuleName,
   pPackageDeps,
   pFileDirectory,
   pResolveOptions,
   pBaseDirectory
 ) {
+  /** @type {import("../../../types/shared-types").DependencyType[]} */
   let lReturnValue = [];
 
-  if (isExternalModule(pModule.resolved, ["node_modules"], pBaseDirectory)) {
+  if (
+    isExternalModule(pDependency.resolved, ["node_modules"], pBaseDirectory)
+  ) {
     lReturnValue = determineNodeModuleDependencyTypes(
       pModuleName,
       pPackageDeps,

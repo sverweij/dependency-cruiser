@@ -1,4 +1,4 @@
-const _has = require("lodash/has");
+const has = require("lodash/has");
 const normalizeREProperties = require("../utl/normalize-re-properties");
 
 const VALID_SEVERITIES = /^(error|warn|info|ignore)$/;
@@ -34,11 +34,11 @@ function normalizeRule(pRule) {
  * - rule name (default 'unnamed')
  * - severity (default 'warn')
  *
- * @param  {object} pRuleSet [description]
- * @return {object}          [description]
+ * @param  {import("../../../types/dependency-cruiser").IFlattenedRuleSet} pRuleSet [description]
+ * @return {import("../../../types/dependency-cruiser").IFlattenedRuleSet}          [description]
  */
 module.exports = function normalizeRuleSet(pRuleSet) {
-  if (_has(pRuleSet, "allowed")) {
+  if (has(pRuleSet, "allowed")) {
     pRuleSet.allowedSeverity = normalizeSeverity(pRuleSet.allowedSeverity);
     if (pRuleSet.allowedSeverity === "ignore") {
       Reflect.deleteProperty(pRuleSet, "allowed");
@@ -53,13 +53,13 @@ module.exports = function normalizeRuleSet(pRuleSet) {
     }
   }
 
-  if (_has(pRuleSet, "forbidden")) {
+  if (has(pRuleSet, "forbidden")) {
     pRuleSet.forbidden = pRuleSet.forbidden
       .map(normalizeRule)
       .filter((pRule) => pRule.severity !== "ignore");
   }
 
-  if (_has(pRuleSet, "required")) {
+  if (has(pRuleSet, "required")) {
     pRuleSet.required = pRuleSet.required
       .map(normalizeRule)
       .filter((pRule) => pRule.severity !== "ignore");

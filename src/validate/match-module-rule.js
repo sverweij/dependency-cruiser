@@ -1,25 +1,45 @@
-const _has = require("lodash/has");
+const has = require("lodash/has");
 const { extractGroups } = require("../utl/regex-util");
 const { isModuleOnlyRule, isFolderScope } = require("./rule-classifiers");
 const matchers = require("./matchers");
 
+/**
+ * Returns true if pRule is an orphan rule and pModule is an orphan.
+ * Returns false in all other cases
+ *
+ * @param {import("../../types/rule-set").IAnyRuleType} pRule
+ * @param {import("../../types/cruise-result").IModule} pModule
+ * @returns {boolean}
+ */
 function matchesOrphanRule(pRule, pModule) {
   return (
-    _has(pRule.from, "orphan") &&
+    has(pRule, "from.orphan") &&
+    // @ts-ignore the 'has' above guarantees there's a 'from.orphan' attributre
     pModule.orphan === pRule.from.orphan &&
     matchers.fromPath(pRule, pModule) &&
     matchers.fromPathNot(pRule, pModule)
   );
 }
 
+/**
+ * Returns true if pRule is a 'reachable' rule and pModule matches the reachability
+ * criteria.
+ * Returns false in all other cases
+ *
+ * @param {import("../../types/rule-set").IAnyRuleType} pRule
+ * @param {import("../../types/cruise-result").IModule} pModule
+ * @returns {boolean}
+ */
 function matchesReachableRule(pRule, pModule) {
-  if (_has(pRule.to, "reachable") && _has(pModule, "reachable")) {
+  if (has(pRule, "to.reachable") && has(pModule, "reachable")) {
+    // @ts-ignore the 'has' above ensures the 'reachable' exists
     const lReachableRecord = pModule.reachable.find(
       (pReachable) =>
         pReachable.asDefinedInRule === pRule.name &&
+        // @ts-ignore the 'has' above ensures the 'to.reachable' exists
         pReachable.value === pRule.to.reachable
     );
-    if (Boolean(lReachableRecord)) {
+    if (lReachableRecord) {
       const lGroups = extractGroups(pRule.from, lReachableRecord.matchedFrom);
 
       return (
@@ -31,10 +51,20 @@ function matchesReachableRule(pRule, pModule) {
   return false;
 }
 
+/**
+ * Returns true if pRule is a 'reaches' rule and pModule matches the reachability
+ * criteria.
+ * Returns false in all other cases
+ *
+ * @param {import("../../types/rule-set").IAnyRuleType} pRule
+ * @param {import("../../types/cruise-result").IModule} pModule
+ * @returns {boolean}
+ */
 function matchesReachesRule(pRule, pModule) {
   return (
-    _has(pRule.to, "reachable") &&
-    _has(pModule, "reaches") &&
+    has(pRule, "to.reachable") &&
+    has(pModule, "reaches") &&
+    // @ts-ignore the 'has' above guarantees the .reaches exists
     pModule.reaches.some(
       (pReaches) =>
         pReaches.asDefinedInRule === pRule.name &&
@@ -46,7 +76,12 @@ function matchesReachesRule(pRule, pModule) {
     )
   );
 }
-
+/**
+ *
+ * @param {import("../../types/rule-set").IAnyRuleType} pRule
+ * @param {string[]} pDependents
+ * @returns {boolean}
+ */
 function dependentsCountsMatch(pRule, pDependents) {
   const lMatchingDependentsCount = pDependents.filter(
     (pDependent) =>
@@ -61,11 +96,17 @@ function dependentsCountsMatch(pRule, pDependents) {
   );
 }
 
+/**
+ *
+ * @param {import("../../types/rule-set").IAnyRuleType} pRule
+ * @param {import("../../types/cruise-result").IModule} pModule
+ * @returns {boolean}
+ */
 function matchesDependentsRule(pRule, pModule) {
   if (
-    (_has(pModule, "dependents") &&
-      _has(pRule, "module.numberOfDependentsLessThan")) ||
-    _has(pRule, "module.numberOfDependentsMoreThan")
+    (has(pModule, "dependents") &&
+      has(pRule, "module.numberOfDependentsLessThan")) ||
+    has(pRule, "module.numberOfDependentsMoreThan")
   ) {
     return (
       // group matching seems like a nice idea, however, the 'from' part of the
@@ -82,6 +123,11 @@ function matchesDependentsRule(pRule, pModule) {
   return false;
 }
 
+/**
+ *
+ * @param {import("../../types/cruise-result").IModule} pModule
+ * @returns {(pRule:import("../../types/rule-set").IAnyRuleType) => boolean}
+ */
 function match(pModule) {
   return (pRule) => {
     return (
@@ -92,6 +138,12 @@ function match(pModule) {
     );
   };
 }
+
+/**
+ *
+ * @param {import("../../types/rule-set").IAnyRuleType} pRule
+ * @returns boolean
+ */
 const isInteresting = (pRule) =>
   isModuleOnlyRule(pRule) && !isFolderScope(pRule);
 

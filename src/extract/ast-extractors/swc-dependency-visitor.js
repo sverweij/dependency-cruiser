@@ -148,7 +148,9 @@ if (VisitorModule) {
     visitExportAllDeclration(pNode) {
       this.pushImportExportSource(pNode);
       /* c8 ignore start */
+      // @ts-ignore
       if (super.visitExportAllDeclration) {
+        // @ts-ignore
         return super.visitExportAllDeclration(pNode);
       } else {
         /* c8 ignore stop */
@@ -166,7 +168,9 @@ if (VisitorModule) {
     visitExportNamedDeclration(pNode) {
       this.pushImportExportSource(pNode);
       /* c8 ignore start */
+      // @ts-ignore
       if (super.visitExportNamedDeclration) {
+        // @ts-ignore
         return super.visitExportNamedDeclration(pNode);
       } else {
         /* c8 ignore stop */

@@ -140,9 +140,8 @@ function reportViolations(pViolations, pIgnoredCount) {
  * - for each violated rule in the passed results: an `inspectionType` with the name and comment of that rule
  * - for each violation in the passed results: an `inspection` with the violated rule name and the tos and froms
  *
- * @param {ICruiseResult} pResults - the output of a dependency-cruise adhering to ../schema/cruise-result.schema.json
- * @returns {IReporterOutput} - .output: a '\n' separated string of TeamCity service messages
- *                              .exitCode: the number of errors found
+ * @param {import("../../types/dependency-cruiser").ICruiseResult} pResults
+ * @returns {import("../../types/dependency-cruiser").IReporterOutput}
  */
 module.exports = (pResults) => {
   // this is the documented way to get tsm to emit strings

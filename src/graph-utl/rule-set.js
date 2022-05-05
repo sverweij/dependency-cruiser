@@ -8,9 +8,9 @@ const _has = require("lodash/has");
  *
  * (this thing probably belongs in a model-like folder and not in utl)
  *
- * @param {import("../../types/configuration").IConfiguration} pRuleSet - The rule set to search in
+ * @param {import("../../types/dependency-cruiser").IFlattenedRuleSet} pRuleSet - The rule set to search in
  * @param {string} pName - The rule name to look for
- * @return {import("../../types/rule-set").IForbiddenRuleType|import("../../types/rule-set").IAllowedRuleType} - a rule (or 'undefined' if nothing found)
+ * @return {import("../../types/rule-set").IForbiddenRuleType|undefined} - a rule (or 'undefined' if nothing found)
  */
 function findRuleByName(pRuleSet, pName) {
   return _get(pRuleSet, "forbidden", []).find(
@@ -24,26 +24,31 @@ function findRuleByName(pRuleSet, pName) {
  *
  * Returns false in all other cases
  *
- * @param {import('../../../types/rule-set').IFlattenedRuleSet} pRuleSet
+ * @param {import('../../types/dependency-cruiser').IFlattenedRuleSet} pRuleSet
  * @return {boolean}
  */
 function ruleSetHasLicenseRule(pRuleSet) {
   return (
     _get(pRuleSet, "forbidden", []).some(
-      (pRule) => _has(pRule.to, "license") || _has(pRule.to, "licenseNot")
+      (pRule) => _has(pRule, "to.license") || _has(pRule, "to.licenseNot")
     ) ||
     _get(pRuleSet, "allowed", []).some(
-      (pRule) => _has(pRule.to, "license") || _has(pRule.to, "licenseNot")
+      (pRule) => _has(pRule, "to.license") || _has(pRule, "to.licenseNot")
     )
   );
 }
+/**
+ *
+ * @param {import('../../types/dependency-cruiser').IFlattenedRuleSet} pRuleSet
+ * @return {boolean}
+ */
 function ruleSetHasDeprecationRule(pRuleSet) {
   return (
     _get(pRuleSet, "forbidden", []).some((pRule) =>
-      _get(pRule.to, "dependencyTypes", []).includes("deprecated")
+      _get(pRule, "to.dependencyTypes", []).includes("deprecated")
     ) ||
     _get(pRuleSet, "allowed", []).some((pRule) =>
-      _get(pRule.to, "dependencyTypes", []).includes("deprecated")
+      _get(pRule, "to.dependencyTypes", []).includes("deprecated")
     )
   );
 }
