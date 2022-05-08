@@ -1,9 +1,8 @@
 /**
  * Returns the results of a cruise in a javascript object
  *
- * @param {ICruiseResult} pResults - the output of a dependency-cruise adhering to ../schema/cruise-result.schema.json
- * @returns {IReporterOutput} - output: the results in a javascript object (hence adhering to the same json schema)
- *                              exitCode: 0
+ * @param {import("../../types/cruise-result").ICruiseResult} pResults
+ * @returns {import("../../types/dependency-cruiser").IReporterOutput}
  */
 module.exports = (pResults) => ({
   output: pResults,

@@ -370,6 +370,46 @@ export interface IWebpackConfig {
  */
 export type WebpackEnvType = { [key: string]: any } | string;
 
+export interface IFolderDependency {
+  /**
+   * the (resolved) name of the dependency
+   */
+  name: string;
+  /**
+   * 'true' if this folder dependency violated a rule; 'false' in all other
+   * cases. The violated rule will be in the 'rules' object at the same level.
+   */
+  valid: boolean;
+  /**
+   * the instability of the dependency (denormalized - this is a duplicate of
+   * the one found in the instability of the folder with the same name)
+   */
+  instability?: number;
+  /**
+   * 'true' if following this dependency will ultimately return to the source, false in all
+   * other cases
+   */
+  circular: boolean;
+  /**
+   * If following this dependency will ultimately return to the source (circular === true),
+   * this attribute will contain an (ordered) array of module names that shows (one of) the
+   * circular path(s)
+   */
+  cycle?: string[];
+  /**
+   * an array of rules violated by this dependency - left out if the dependency
+   * is valid
+   */
+  rules?: IRuleSummary[];
+}
+
+export interface IFolderDependent {
+  /**
+   * name ('path') of the dependent
+   */
+  name: string;
+}
+
 export interface IFolder {
   /**
    * The name of the folder. FOlder names are normalized to posix (so
@@ -379,42 +419,11 @@ export interface IFolder {
   /**
    * List of folders depending on this folder
    */
-  dependents?: { name: string }[];
+  dependents?: IFolderDependent[];
   /**
    * List of folders this folder depends upon
    */
-  dependencies?: {
-    /**
-     * the (resolved) name of the dependency
-     */
-    name: string;
-    /**
-     * 'true' if this folder dependency violated a rule; 'false' in all other
-     * cases. The violated rule will be in the 'rules' object at the same level.
-     */
-    valid: boolean;
-    /**
-     * the instability of the dependency (denormalized - this is a duplicate of
-     * the one found in the instability of the folder with the same name)
-     */
-    instability?: number;
-    /**
-     * 'true' if following this dependency will ultimately return to the source, false in all
-     * other cases
-     */
-    circular: boolean;
-    /**
-     * If following this dependency will ultimately return to the source (circular === true),
-     * this attribute will contain an (ordered) array of module names that shows (one of) the
-     * circular path(s)
-     */
-    cycle?: string[];
-    /**
-     * an array of rules violated by this dependency - left out if the dependency
-     * is valid
-     */
-    rules?: IRuleSummary[];
-  }[];
+  dependencies?: IFolderDependency[];
   /**
    * The total number of modules detected in this folder and its sub-folders
    */

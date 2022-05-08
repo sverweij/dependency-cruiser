@@ -39,7 +39,12 @@ function reSummarizeResults(pResult, pFormatOptions) {
     modules: lModules,
   };
 }
-
+/**
+ *
+ * @param {import("../../types/dependency-cruiser").ICruiseResult} pResult result of a previous run of dependency-cruiser
+ * @param {import("../../types/dependency-cruiser").IFormatOptions} pFormatOptions
+ * @returns {import("../../types/dependency-cruiser").IReporterOutput}
+ */
 module.exports = function reportWrap(pResult, pFormatOptions) {
   const lReportFunction = report.getReporter(pFormatOptions.outputType);
   const lReportOptions = _get(

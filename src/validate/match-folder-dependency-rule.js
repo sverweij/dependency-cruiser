@@ -29,6 +29,12 @@ function toFolderPathNot(pRule, pToFolder, pGroups) {
   );
 }
 
+/**
+ *
+ * @param {import("../../types/cruise-result").IFolder} pFromFolder
+ * @param {import("../../types/cruise-result").IFolderDependency} pToFolder
+ * @returns {(pRule) => boolean}
+ */
 function match(pFromFolder, pToFolder) {
   return (pRule) => {
     const lGroups = extractGroups(pRule.from, pFromFolder.name);
@@ -44,7 +50,11 @@ function match(pFromFolder, pToFolder) {
     );
   };
 }
-
+/**
+ *
+ * @param {any} pRule
+ * @returns boolean
+ */
 const isInteresting = (pRule) =>
   isFolderScope(pRule) && !isModuleOnlyRule(pRule);
 

@@ -23,9 +23,9 @@ function report(pModules) {
 /**
  * Returns the results of a cruise in an 'incidence matrix'
  *
- * @param {ICruiseResult} pResults - the output of a dependency-cruise adhering to ../../schema/cruise-result.schema.json
- * @returns {IReporterOutput} - output: incidence matrix in csv format
- *                     exitCode: 0
+ * @param {import("../../types/cruise-result").ICruiseResult} pResults -
+ * the output of a dependency-cruise adhering to ../../schema/cruise-result.schema.json
+ * @returns {import("../../types/dependency-cruiser").IReporterOutput}
  */
 module.exports = (pResults) => ({
   output: report(dependencyToIncidenceTransformer(pResults.modules)),

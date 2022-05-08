@@ -67,6 +67,11 @@ function normalizeCollapse(pCollapse) {
   return lReturnValue;
 }
 
+/**
+ *
+ * @param {import("../../../types/dependency-cruiser").IForbiddenRuleType} pRule
+ * @returns {boolean}
+ */
 function hasMetricsRule(pRule) {
   // TODO: philosophy: is a rule with 'folder' in it a metrics rule?
   //       Or is it a misuse to ensure folder derivations (like cycles) get
@@ -76,6 +81,11 @@ function hasMetricsRule(pRule) {
   );
 }
 
+/**
+ *
+ * @param {import("../../../types/dependency-cruiser").IFlattenedRuleSet} pRuleSet
+ * @returns {boolean}
+ */
 function ruleSetHasMetricsRule(pRuleSet) {
   const lRuleSet = pRuleSet || {};
   return (
@@ -87,7 +97,7 @@ function ruleSetHasMetricsRule(pRuleSet) {
 /**
  * Determines whether (instability) metrics should be calculated
  *
- * @param {import('../../../types/options').ICruiseOptions pOptions
+ * @param {import('../../../types/dependency-cruiser').ICruiseOptions} pOptions
  * @returns Boolean
  */
 function shouldCalculateMetrics(pOptions) {
@@ -100,7 +110,7 @@ function shouldCalculateMetrics(pOptions) {
 
 /**
  *
- * @param {Partial <import('../../../types/options').ICruiseOptions>} pOptions
+ * @param {Partial<import('../../../types/options').ICruiseOptions>} pOptions
  * @returns {import('../../../types/options').ICruiseOptions}
  */
 function normalizeCruiseOptions(pOptions) {
@@ -111,6 +121,9 @@ function normalizeCruiseOptions(pOptions) {
     ...pOptions,
   };
 
+  // @ts-ignore the idea of normalizing maxDepth to number is that after
+  // that we're  sure it's a number. Should maybe best be solved by
+  // having two types/ interfaces
   lReturnValue.maxDepth = Number.parseInt(lReturnValue.maxDepth, 10);
   lReturnValue.moduleSystems = uniq(lReturnValue.moduleSystems);
   if (has(lReturnValue, "collapse")) {
@@ -136,6 +149,11 @@ function normalizeCruiseOptions(pOptions) {
   return lReturnValue;
 }
 
+/**
+ *
+ * @param {import("../../../types/dependency-cruiser").IFormatOptions} pFormatOptions
+ * @returns {import("../../../types/dependency-cruiser").IFormatOptions}
+ */
 function normalizeFormatOptions(pFormatOptions) {
   const lFormatOptions = clone(pFormatOptions);
 

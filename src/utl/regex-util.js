@@ -7,17 +7,21 @@
  * This fills our current need. Later we can expand it to return all group
  * matches.
  *
- * @param {import("../../types/rule-set").IFromRestriction} pFromRestriction
+ * @param {import("../../types/restrictions").IFromRestriction} pFromRestriction
  * @param {string} pActualPath
  * @returns {string[]|null}
  */
 function extractGroups(pFromRestriction, pActualPath) {
   let lReturnValue = [];
 
-  if (Boolean(pFromRestriction.path)) {
+  if (pFromRestriction.path) {
+    // @ts-ignore pFromRestriction.path can be a string | string[] | null
+    // except before it enters here it has already been 'normalized' to a string
+    // so it can be safely passed to match. The right solution here (TODO)
+    // is to create a separate type for NormalizedFromRestriction
     let lMatchResult = pActualPath.match(pFromRestriction.path);
 
-    if (Boolean(lMatchResult) && lMatchResult.length > 1) {
+    if (lMatchResult && lMatchResult.length > 1) {
       lReturnValue = lMatchResult.filter(
         (pResult) => typeof pResult === "string"
       );

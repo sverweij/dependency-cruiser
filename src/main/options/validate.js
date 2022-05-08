@@ -1,5 +1,5 @@
 const _get = require("lodash/get");
-const _has = require("lodash/has");
+const has = require("lodash/has");
 const safeRegex = require("safe-regex");
 const report = require("../../report");
 
@@ -55,6 +55,12 @@ function validatePathsSafety(pFilterOption) {
   validateRegExpSafety(_get(pFilterOption, "pathNot", ""));
 }
 
+/**
+ *
+ * @param {any} pOptions
+ * @throws {Error}
+ * @returns {import("../../../types/dependency-cruiser").ICruiseOptions}
+ */
 function validateCruiseOptions(pOptions) {
   let lReturnValue = {};
 
@@ -75,7 +81,7 @@ function validateCruiseOptions(pOptions) {
     // neccessary because not found a way to do this properly in JSON schema
     validateMaxDepth(pOptions.maxDepth);
 
-    if (_has(pOptions, "ruleSet.options")) {
+    if (has(pOptions, "ruleSet.options")) {
       lReturnValue = validateCruiseOptions(pOptions.ruleSet.options);
     }
     return { ...lReturnValue, ...pOptions };
@@ -83,6 +89,11 @@ function validateCruiseOptions(pOptions) {
   return lReturnValue;
 }
 
+/**
+ *
+ * @param {import("../../../types/dependency-cruiser").IFormatOptions} pFormatOptions
+ * @throws {Error}
+ */
 function validateFormatOptions(pFormatOptions) {
   validatePathsSafety(pFormatOptions.exclude);
   validatePathsSafety(pFormatOptions.focus);

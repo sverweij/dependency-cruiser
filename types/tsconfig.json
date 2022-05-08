@@ -1,10 +1,17 @@
 {
   "compilerOptions": {
-    "target": "es5",
-    "module": "commonjs",
+    "noEmit": true,
+    "lib": ["ES2020"],
+    "target": "ES2020",
+    "module": "ES2020",
+    "types": ["node"],
+    "moduleResolution": "node",
     "strict": true,
+    "noUnusedLocals": true,
+    "noUnusedParameters": true,
     "esModuleInterop": true,
     "skipLibCheck": false,
     "forceConsistentCasingInFileNames": true
-  }
+  },
+  "include": ["./*.d.ts"]
 }

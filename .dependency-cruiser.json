@@ -195,7 +195,7 @@
       "from": { "path": "^bin/" },
       "to": {
         "path": "^src",
-        "pathNot": "\\.schema\\.json$",
+        "pathNot": ["\\.schema\\.json$", "\\.d\\.ts$"],
         "reachable": false
       }
     },
@@ -206,7 +206,7 @@
       "from": { "path": "\\.spec\\.m?js$" },
       "to": {
         "path": "^src",
-        "pathNot": "\\.schema\\.json$",
+        "pathNot": ["\\.schema\\.json$", "\\.d\\.ts$"],
         "reachable": false
       }
     },
@@ -218,7 +218,8 @@
         "path": "^src/([^/]+)/index\\.js$"
       },
       "to": {
-        "path": "^src/$1/",
+        "path": ["^src/$1/"],
+        "pathNot": "\\.d\\.ts$",
         "reachable": false
       }
     },

@@ -1,3 +1,4 @@
+/** @type {import('../../../types/options').ICruiseOptions} */
 module.exports = {
   validate: false,
   maxDepth: 0,

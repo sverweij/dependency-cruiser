@@ -7,6 +7,7 @@ const _memoize = require("lodash/memoize");
 const transpile = require("../transpile");
 const getExtension = require("../utl/get-extension");
 
+/** @type acorn.Options */
 const ACORN_OPTIONS = {
   sourceType: "module",
   ecmaVersion: 11,
@@ -33,6 +34,11 @@ function getASTFromSource(pFileRecord, pTranspileOptions) {
     if (needsJSXTreatment(pFileRecord, pTranspileOptions)) {
       return acornJsxParser.parse(lJavaScriptSource, {
         ...ACORN_OPTIONS,
+        // @ts-ignore
+        // acornJsxParser.parse takes an acorn.Options which doesn't include
+        // allowNamespacedObjects. acornJsx.Options doesn't include sourceType
+        // though, so a bit rock < this code > hard place hence ignore it
+        // type wise
         allowNamespacedObjects: true,
       });
     }
@@ -55,7 +61,7 @@ function getASTFromSource(pFileRecord, pTranspileOptions) {
  * @param {string} pFileName      path to the file to be parsed
  * @param {any} pTranspileOptions options for the transpiler(s) - a tsconfig or
  *                                a babel config
- * @returns {any}              the abstract syntax tree
+ * @returns {acorn.Node}              the abstract syntax tree
  */
 function getAST(pFileName, pTranspileOptions) {
   return getASTFromSource(
@@ -87,7 +93,7 @@ module.exports = {
    *
    * @param {string} pFileName - the name of the file to compile
    * @param {any} pTranspileOptions - options for the transpiler(s) - typically a tsconfig or a babel config
-   * @return {any} - a (typescript) AST
+   * @return {acorn.Node} - a (javascript) AST
    */
   getASTCached,
 

@@ -40,7 +40,7 @@ const TYPE2REPORTER = {
  * Returns the reporter function associated with given output type,
  * or the identity reporter if that output type wasn't found
  *
- * @param {OutputType} pOutputType -
+ * @param {import("../../types/shared-types").OutputType} pOutputType -
  * @returns {function} - a function that takes an ICruiseResult, optionally
  *                       an options object (specific to that function)
  *                       and returns an IReporterOutput
@@ -57,7 +57,7 @@ function getReporter(pOutputType) {
 /**
  * Returns a list of all currently available reporters
  *
- * @returns {OutputType[]} -
+ * @returns {import("../../types/shared-types").OutputType[]} -
  */
 function getAvailableReporters() {
   return Object.keys(TYPE2REPORTER);

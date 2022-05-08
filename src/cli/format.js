@@ -15,6 +15,12 @@ const KNOWN_FMT_OPTIONS = [
   "version",
 ];
 
+/**
+ *
+ * @param {string} pResultFile the name of the file with cruise results
+ * @param {import("../../types/dependency-cruiser").IFormatOptions} pOptions
+ * @returns {Number} an exitCode
+ */
 module.exports = async (pResultFile, pOptions) => {
   const lOptions = normalizeOptions(pOptions, KNOWN_FMT_OPTIONS);
 

@@ -2,6 +2,12 @@ const { extractGroups } = require("../utl/regex-util");
 const { isModuleOnlyRule, isFolderScope } = require("./rule-classifiers");
 const matchers = require("./matchers");
 
+/**
+ *
+ * @param {import("../../types/dependency-cruiser").IModule} pFrom
+ * @param {import("../../types/dependency-cruiser").IDependency} pTo
+ * @returns {(pRule) => boolean}
+ */
 function match(pFrom, pTo) {
   // eslint-disable-next-line complexity
   return (pRule) => {
@@ -41,7 +47,11 @@ function match(pFrom, pTo) {
     );
   };
 }
-
+/**
+ *
+ * @param {any} pRule
+ * @returns boolean
+ */
 const isInteresting = (pRule) =>
   !isModuleOnlyRule(pRule) && !isFolderScope(pRule);
 

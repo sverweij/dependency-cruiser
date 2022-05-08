@@ -1,6 +1,6 @@
-const _clone = require("lodash/clone");
-const _get = require("lodash/get");
-const _has = require("lodash/has");
+const clone = require("lodash/clone");
+const get = require("lodash/get");
+const has = require("lodash/has");
 const anonymizePath = require("./anonymize-path");
 
 function anonymizePathArray(pPathArray, pWordList) {
@@ -62,7 +62,7 @@ function anonymizeViolations(pViolations, pWordList) {
 }
 
 function anonymize(pResults, pWordList) {
-  const lResults = _clone(pResults);
+  const lResults = clone(pResults);
 
   lResults.modules = anonymizeModules(lResults.modules, pWordList);
   lResults.summary.violations = anonymizeViolations(
@@ -94,18 +94,19 @@ function sanitizeWordList(pWordList) {
  * (note: the algorith _removes_ elements from pWordList to prevent duplicates,
  * so if the word list is precious to you - pass a clone)
  *
- * @param {ICruiseResult} pResults - the output of a dependency-cruise adhering to ../schema/cruise-result.schema.json
- * @param {wordlist: String[]} wordlist - list of words to use as replacement strings. If
+ * @param {import("../../../types/cruise-result").ICruiseResult} pResults - the output of a dependency-cruise adhering to ../schema/cruise-result.schema.json
+ * @param {{wordlist?: String[]}} pAnonymousReporterOptions of words to use as replacement strings. If
  *                               not passed the reporter uses the string passed
  *                               in the options (reporterOptions.anon.wordlist)
  *                               or - if that doesn't exist - the empty array
- * @returns {IReporterOutput} - output: the results in JSON format (hence adhering to the same json schema)
+ * @returns {import("../../../types/dependency-cruiser").IReporterOutput} - output: the results in JSON format (hence adhering to the same json schema)
  *                              exitCode: 0
  */
 module.exports = function reportAnonymous(pResults, pAnonymousReporterOptions) {
+  /** @type {{wordlist?: String[]}} */
   let lAnonymousReporterOptions = pAnonymousReporterOptions || {};
-  if (!_has(lAnonymousReporterOptions, "wordlist")) {
-    lAnonymousReporterOptions.wordlist = _get(
+  if (!has(lAnonymousReporterOptions, "wordlist")) {
+    lAnonymousReporterOptions.wordlist = get(
       pResults,
       "summary.optionsUsed.reporterOptions.anon.wordlist",
       []

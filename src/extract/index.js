@@ -136,6 +136,16 @@ function filterExcludedDynamicDependencies(pModule, pExclude) {
   };
 }
 
+/**
+ * Recursively runs through the modules matching the pFileDirectoryArray and
+ * returns an array of all the modules it finds that way.
+ *
+ * @param {string[]} pFileDirectoryArray
+ * @param {import("../../types/dependency-cruiser").ICruiseOptions} pCruiseOptions
+ * @param {import("../../types/dependency-cruiser").IResolveOptions} pResolveOptions
+ * @param {import("../../types/dependency-cruiser").ITranspileOptions} pTranspileOptions
+ * @returns {Partial<import("../../types/dependency-cruiser").IModule[]>}
+ */
 module.exports = function extract(
   pFileDirectoryArray,
   pCruiseOptions,

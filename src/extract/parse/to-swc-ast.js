@@ -22,6 +22,7 @@ function getASTFromSource(pSource) {
 }
 
 function getAST(pFileName) {
+  /** @type {import('@swc/core')} swc */
   return swc.parseFileSync(pFileName, SWC_PARSE_OPTIONS);
 }
 
@@ -38,6 +39,7 @@ module.exports = {
    * @return {boolean} - true if the swc compiler is available,
    *                     false in all other cases
    */
+  // @ts-ignore
   isAvailable: () => swc !== false,
 
   /**
