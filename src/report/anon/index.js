@@ -31,6 +31,12 @@ function anonymizeReaches(pReachesArray, pWordList) {
   }));
 }
 
+/**
+ *
+ * @param {import("../../../types/cruise-result").IModule[]} pModules
+ * @param {string[]} pWordList
+ * @returns {import("../../../types/cruise-result").IModule[]}
+ */
 function anonymizeModules(pModules, pWordList) {
   return pModules.map((pModule) => {
     const lReturnValue = {
@@ -38,10 +44,52 @@ function anonymizeModules(pModules, pWordList) {
       dependencies: anonymizeDependencies(pModule.dependencies, pWordList),
       source: anonymizePath(pModule.source, pWordList),
     };
+    if (pModule.dependents) {
+      lReturnValue.dependents = anonymizePathArray(
+        pModule.dependents,
+        pWordList
+      );
+    }
     if (pModule.reaches) {
       lReturnValue.reaches = anonymizeReaches(pModule.reaches, pWordList);
     }
 
+    return lReturnValue;
+  });
+}
+/**
+ *
+ * @param {import("../../../types/cruise-result").IFolder[]} pFolders
+ * @param {string[]} pWordList
+ * @returns {import("../../../types/cruise-result").IFolder[]}
+ */
+function anonymizeFolders(pFolders, pWordList) {
+  return pFolders.map((pFolder) => {
+    const lReturnValue = {
+      ...pFolder,
+      name: anonymizePath(pFolder.name, pWordList),
+    };
+    if (pFolder.dependencies) {
+      lReturnValue.dependencies = pFolder.dependencies.map((pDependency) => {
+        const lReturnDependencies = {
+          ...pDependency,
+          name: anonymizePath(pDependency.name, pWordList),
+        };
+        if (lReturnDependencies.cycle) {
+          lReturnDependencies.cycle = anonymizePathArray(
+            pDependency.cycle,
+            pWordList
+          );
+        }
+        return lReturnDependencies;
+      });
+    }
+    if (pFolder.dependents) {
+      lReturnValue.dependents = pFolder.dependents.map((pDependent) => ({
+        ...pDependent,
+        name: anonymizePath(pDependent.name, pWordList),
+      }));
+    }
     return lReturnValue;
   });
 }
@@ -60,11 +108,19 @@ function anonymizeViolations(pViolations, pWordList) {
     return lReturnValue;
   });
 }
-
+/**
+ *
+ * @param {import("../../../types/cruise-result").ICruiseResult} pResults
+ * @param {string[]} pWordList
+ * @returns {import("../../../types/cruise-result").ICruiseResult}
+ */
 function anonymize(pResults, pWordList) {
   const lResults = clone(pResults);
 
   lResults.modules = anonymizeModules(lResults.modules, pWordList);
+  if (lResults.folders) {
+    lResults.folders = anonymizeFolders(lResults.folders, pWordList);
+  }
   lResults.summary.violations = anonymizeViolations(
     lResults.summary.violations,
     pWordList
