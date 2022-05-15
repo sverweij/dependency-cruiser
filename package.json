@@ -163,17 +163,17 @@
     "@babel/core": "7.17.10",
     "@babel/plugin-transform-modules-commonjs": "7.17.9",
     "@babel/preset-typescript": "7.16.7",
-    "@swc/core": "1.2.175",
+    "@swc/core": "1.2.183",
     "@types/lodash": "4.14.182",
-    "@types/node": "17.0.31",
-    "@typescript-eslint/eslint-plugin": "5.22.0",
-    "@typescript-eslint/parser": "5.22.0",
+    "@types/node": "17.0.33",
+    "@typescript-eslint/eslint-plugin": "5.23.0",
+    "@typescript-eslint/parser": "5.23.0",
     "@vue/compiler-sfc": "3.2.33",
     "c8": "7.11.2",
     "chai": "4.3.6",
     "chai-json-schema": "1.5.1",
     "coffeescript": "2.7.0",
-    "eslint": "^8.14.0",
+    "eslint": "^8.15.0",
     "eslint-config-moving-meadow": "3.0.0",
     "eslint-config-prettier": "8.5.0",
     "eslint-plugin-budapestian": "3.0.2",
@@ -208,7 +208,7 @@
       {
         "package": "eslint-plugin-mocha",
         "policy": "wanted",
-        "because": "version 10 dropped support for node 12, which we still do support"
+        "because": "version 10 bumps into https://github.com/lo1tuma/eslint-plugin-mocha/issues/322"
       },
       {
         "package": "figures",
