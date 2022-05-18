@@ -1,0 +1,76 @@
+{
+  "modules": [
+    {
+      "source": "test/cli/__fixtures__/typescriptconfig/cli-config-with-path/src/index.ts",
+      "dependencies": [
+        {
+          "module": "shared",
+          "moduleSystem": "cjs",
+          "dynamic": false,
+          "exoticallyRequired": false,
+          "resolved": "test/cli/__fixtures__/typescriptconfig/cli-config-with-path/src/shared/index.ts",
+          "coreModule": false,
+          "followable": true,
+          "couldNotResolve": false,
+          "dependencyTypes": ["aliased"],
+          "matchesDoNotFollow": false,
+          "circular": false,
+          "valid": true
+        }
+      ],
+      "orphan": false,
+      "valid": true
+    },
+    {
+      "source": "test/cli/__fixtures__/typescriptconfig/cli-config-with-path/src/shared/index.ts",
+      "dependencies": [],
+      "orphan": false,
+      "valid": true
+    },
+    {
+      "source": "test/cli/__fixtures__/typescriptconfig/cli-config-with-path/src/something/else.ts",
+      "dependencies": [
+        {
+          "module": "shared",
+          "moduleSystem": "cjs",
+          "dynamic": false,
+          "exoticallyRequired": false,
+          "resolved": "test/cli/__fixtures__/typescriptconfig/cli-config-with-path/src/shared/index.ts",
+          "coreModule": false,
+          "followable": true,
+          "couldNotResolve": false,
+          "dependencyTypes": ["aliased"],
+          "matchesDoNotFollow": false,
+          "circular": false,
+          "valid": true
+        }
+      ],
+      "orphan": false,
+      "valid": true
+    }
+  ],
+  "summary": {
+    "violations": [],
+    "error": 0,
+    "warn": 0,
+    "info": 0,
+    "ignore": 0,
+    "totalCruised": 3,
+    "totalDependenciesCruised": 2,
+    "optionsUsed": {
+      "combinedDependencies": false,
+      "externalModuleResolutionStrategy": "node_modules",
+      "moduleSystems": ["es6", "cjs", "tsd", "amd"],
+      "outputTo": "test/cli/__output__/typescript-path-resolution.json",
+      "outputType": "json",
+      "preserveSymlinks": false,
+      "tsPreCompilationDeps": false,
+      "webpackConfig": {
+        "fileName": "test/cli/__fixtures__/typescriptconfig/cli-config-with-path/webpack.config.js"
+      },
+      "exoticRequireStrings": [],
+      "args": "test/cli/__fixtures__/typescriptconfig/cli-config-with-path/src"
+    },
+    "ruleSetUsed": {}
+  }
+}

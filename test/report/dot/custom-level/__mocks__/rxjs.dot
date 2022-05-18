@@ -1,0 +1,49 @@
+strict digraph "dependency-cruiser output"{
+    splines="ortho"
+    
+    
+
+    subgraph "cluster_compat" {label="compat" "compat/Rx.ts" [label=<Rx.ts> tooltip="Rx.ts" URL="compat/Rx.ts" ] }
+    "compat/Rx.ts" -> "compat/add"
+    "compat/Rx.ts" -> "src/index.ts"
+    "compat/Rx.ts" -> "src/ajax"
+    "compat/Rx.ts" -> "src/internal-compatibility"
+    "compat/Rx.ts" -> "src/operators"
+    "compat/Rx.ts" -> "src/testing"
+    subgraph "cluster_compat" {label="compat" "compat/add" [label=<add> tooltip="add" URL="compat/add" ] }
+    "compat/add" -> "src/index.ts"
+    "compat/add" -> "src/ajax"
+    "compat/add" -> "src/webSocket"
+    "compat/add" -> "compat/operator"
+    subgraph "cluster_compat" {label="compat" "compat/index.ts" [label=<index.ts> tooltip="index.ts" URL="compat/index.ts" ] }
+    "compat/index.ts" -> "compat/Rx.ts"
+    subgraph "cluster_compat" {label="compat" "compat/operator" [label=<operator> tooltip="operator" URL="compat/operator" ] }
+    "compat/operator" -> "src/operators"
+    "compat/operator" -> "src/index.ts"
+    "compat/operator" -> "src/internal-compatibility"
+    subgraph "cluster_dist" {label="dist" subgraph "cluster_dist/package" {label="package" "dist/package/Rx.js" [label=<Rx.js> tooltip="Rx.js" URL="dist/package/Rx.js" ] } }
+    "dist/package/Rx.js" -> "compat/index.ts"
+    subgraph "cluster_src" {label="src" "src/MiscJSDoc.ts" [label=<MiscJSDoc.ts> tooltip="MiscJSDoc.ts" URL="src/MiscJSDoc.ts" ] }
+    "src/MiscJSDoc.ts" -> "src/internal"
+    subgraph "cluster_src" {label="src" "src/Rx.global.js" [label=<Rx.global.js> tooltip="Rx.global.js" URL="src/Rx.global.js" ] }
+    "src/Rx.global.js" -> "dist/package/Rx.js"
+    subgraph "cluster_src" {label="src" "src/ajax" [label=<ajax> tooltip="ajax" URL="src/ajax" ] }
+    "src/ajax" -> "src/internal"
+    subgraph "cluster_src" {label="src" "src/index.ts" [label=<index.ts> tooltip="index.ts" URL="src/index.ts" ] }
+    "src/index.ts" -> "src/internal"
+    subgraph "cluster_src" {label="src" "src/internal" [label=<internal> tooltip="internal" URL="src/internal" ] }
+    "src/internal" -> "compat/add"
+    "src/internal" -> "src/ajax"
+    "src/internal" -> "src/index.ts"
+    "src/internal" -> "src/operators"
+    "src/internal" -> "src/testing"
+    "src/internal" -> "src/webSocket"
+    subgraph "cluster_src" {label="src" "src/internal-compatibility" [label=<internal-compatibility> tooltip="internal-compatibility" URL="src/internal-compatibility" ] }
+    "src/internal-compatibility" -> "src/internal"
+    subgraph "cluster_src" {label="src" "src/operators" [label=<operators> tooltip="operators" URL="src/operators" ] }
+    "src/operators" -> "src/internal"
+    subgraph "cluster_src" {label="src" "src/testing" [label=<testing> tooltip="testing" URL="src/testing" ] }
+    "src/testing" -> "src/internal"
+    subgraph "cluster_src" {label="src" "src/webSocket" [label=<webSocket> tooltip="webSocket" URL="src/webSocket" ] }
+    "src/webSocket" -> "src/internal"
+}

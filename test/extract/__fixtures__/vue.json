@@ -1,0 +1,58 @@
+[
+  {
+    "title": "vue",
+    "input": {
+      "fileName": "test/extract/__mocks__/vue/vue.vue"
+    },
+    "expected": [
+      {
+        "module": "./javascriptThing",
+        "resolved": "test/extract/__mocks__/vue/javascriptThing.js",
+        "moduleSystem": "es6",
+        "coreModule": false,
+        "dependencyTypes": ["local"],
+        "dynamic": false,
+        "followable": true,
+        "exoticallyRequired": false,
+        "matchesDoNotFollow": false,
+        "couldNotResolve": false
+      },
+      {
+        "module": "./sub",
+        "resolved": "test/extract/__mocks__/vue/sub/index.ts",
+        "moduleSystem": "es6",
+        "coreModule": false,
+        "dependencyTypes": ["local"],
+        "dynamic": false,
+        "followable": true,
+        "exoticallyRequired": false,
+        "matchesDoNotFollow": false,
+        "couldNotResolve": false
+      },
+      {
+        "module": "./sub/kaching",
+        "resolved": "test/extract/__mocks__/vue/sub/kaching.ts",
+        "moduleSystem": "es6",
+        "coreModule": false,
+        "dependencyTypes": ["local", "type-only"],
+        "dynamic": false,
+        "followable": true,
+        "exoticallyRequired": false,
+        "matchesDoNotFollow": false,
+        "couldNotResolve": false
+      },
+      {
+        "module": "path",
+        "resolved": "path",
+        "moduleSystem": "es6",
+        "coreModule": true,
+        "dependencyTypes": ["core"],
+        "dynamic": false,
+        "followable": false,
+        "exoticallyRequired": false,
+        "matchesDoNotFollow": false,
+        "couldNotResolve": false
+      }
+    ]
+  }
+]

@@ -13,7 +13,7 @@ const extractAMD = (
     pExoticRequireStrings
   );
 
-describe("ast-extractors/extract-AMD-deps", () => {
+describe("[U] ast-extractors/extract-AMD-deps", () => {
   it("amd define", () => {
     let lDeps = [];
 

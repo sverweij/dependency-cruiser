@@ -1,7 +1,7 @@
 import { expect } from "chai";
 import extractTypescript from "./extract-typescript.utl.mjs";
 
-describe("ast-extractors/extract-typescript - exotics", () => {
+describe("[U] ast-extractors/extract-typescript - exotics", () => {
   it("doesn't detects 'exotic' dependencies when no exoticRequireStrings were passed", () => {
     expect(
       extractTypescript(

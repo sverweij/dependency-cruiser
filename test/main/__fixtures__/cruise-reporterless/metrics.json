@@ -1,0 +1,342 @@
+[
+  {
+    "title": "metrics",
+    "input": {
+      "fileName": "test/main/__mocks__/cruise-reporterless/metrics/root.js",
+      "options": {
+        "forceDeriveDependents": false,
+        "metrics": true
+      }
+    },
+    "expected": [
+      {
+        "source": "test/main/__mocks__/cruise-reporterless/metrics/root.js",
+        "dependencies": [
+          {
+            "module": "./format-output",
+            "moduleSystem": "es6",
+            "dynamic": false,
+            "exoticallyRequired": false,
+            "resolved": "test/main/__mocks__/cruise-reporterless/metrics/format-output/index.js",
+            "coreModule": false,
+            "followable": true,
+            "couldNotResolve": false,
+            "dependencyTypes": ["local"],
+            "matchesDoNotFollow": false,
+            "circular": false,
+            "instability": 0.5,
+            "valid": true
+          },
+          {
+            "module": "./mangle-entry",
+            "moduleSystem": "es6",
+            "dynamic": false,
+            "exoticallyRequired": false,
+            "resolved": "test/main/__mocks__/cruise-reporterless/metrics/mangle-entry/index.js",
+            "coreModule": false,
+            "followable": true,
+            "couldNotResolve": false,
+            "dependencyTypes": ["local"],
+            "matchesDoNotFollow": false,
+            "circular": false,
+            "instability": 0.6666666666666666,
+            "valid": true
+          },
+          {
+            "module": "./parse-input",
+            "moduleSystem": "es6",
+            "dynamic": false,
+            "exoticallyRequired": false,
+            "resolved": "test/main/__mocks__/cruise-reporterless/metrics/parse-input/index.js",
+            "coreModule": false,
+            "followable": true,
+            "couldNotResolve": false,
+            "dependencyTypes": ["local"],
+            "matchesDoNotFollow": false,
+            "circular": false,
+            "instability": 0,
+            "valid": true
+          },
+          {
+            "module": "ndjson",
+            "moduleSystem": "es6",
+            "dynamic": false,
+            "exoticallyRequired": false,
+            "resolved": "ndjson",
+            "coreModule": false,
+            "followable": false,
+            "couldNotResolve": true,
+            "dependencyTypes": ["unknown"],
+            "matchesDoNotFollow": false,
+            "circular": false,
+            "instability": 0,
+            "valid": true
+          }
+        ],
+        "dependents": [],
+        "orphan": false,
+        "instability": 1,
+        "valid": true
+      },
+      {
+        "source": "ndjson",
+        "followable": false,
+        "coreModule": false,
+        "couldNotResolve": true,
+        "matchesDoNotFollow": false,
+        "dependencyTypes": ["unknown"],
+        "dependencies": [],
+        "dependents": [
+          "test/main/__mocks__/cruise-reporterless/metrics/root.js"
+        ],
+        "orphan": false,
+        "valid": true
+      },
+      {
+        "source": "test/main/__mocks__/cruise-reporterless/metrics/format-output/index.js",
+        "dependencies": [
+          {
+            "module": "os",
+            "moduleSystem": "es6",
+            "dynamic": false,
+            "exoticallyRequired": false,
+            "resolved": "os",
+            "coreModule": true,
+            "followable": false,
+            "couldNotResolve": false,
+            "dependencyTypes": ["core"],
+            "matchesDoNotFollow": false,
+            "circular": false,
+            "instability": 0,
+            "valid": true
+          }
+        ],
+        "dependents": [
+          "test/main/__mocks__/cruise-reporterless/metrics/root.js"
+        ],
+        "orphan": false,
+        "instability": 0.5,
+        "valid": true
+      },
+      {
+        "source": "os",
+        "followable": false,
+        "coreModule": true,
+        "couldNotResolve": false,
+        "matchesDoNotFollow": false,
+        "dependencyTypes": ["core"],
+        "dependencies": [],
+        "dependents": [
+          "test/main/__mocks__/cruise-reporterless/metrics/format-output/index.js"
+        ],
+        "orphan": false,
+        "valid": true
+      },
+      {
+        "source": "test/main/__mocks__/cruise-reporterless/metrics/mangle-entry/index.js",
+        "dependencies": [
+          {
+            "module": "./do-something-else.js",
+            "moduleSystem": "es6",
+            "dynamic": false,
+            "exoticallyRequired": false,
+            "resolved": "test/main/__mocks__/cruise-reporterless/metrics/mangle-entry/do-something-else.js",
+            "coreModule": false,
+            "followable": true,
+            "couldNotResolve": false,
+            "dependencyTypes": ["local"],
+            "matchesDoNotFollow": false,
+            "circular": false,
+            "instability": 0,
+            "valid": true
+          },
+          {
+            "module": "./do-something.js",
+            "moduleSystem": "es6",
+            "dynamic": false,
+            "exoticallyRequired": false,
+            "resolved": "test/main/__mocks__/cruise-reporterless/metrics/mangle-entry/do-something.js",
+            "coreModule": false,
+            "followable": true,
+            "couldNotResolve": false,
+            "dependencyTypes": ["local"],
+            "matchesDoNotFollow": false,
+            "circular": false,
+            "instability": 0,
+            "valid": true
+          }
+        ],
+        "dependents": [
+          "test/main/__mocks__/cruise-reporterless/metrics/root.js"
+        ],
+        "orphan": false,
+        "instability": 0.6666666666666666,
+        "valid": true
+      },
+      {
+        "source": "test/main/__mocks__/cruise-reporterless/metrics/mangle-entry/do-something-else.js",
+        "dependencies": [],
+        "dependents": [
+          "test/main/__mocks__/cruise-reporterless/metrics/mangle-entry/index.js"
+        ],
+        "orphan": false,
+        "instability": 0,
+        "valid": true
+      },
+      {
+        "source": "test/main/__mocks__/cruise-reporterless/metrics/mangle-entry/do-something.js",
+        "dependencies": [],
+        "dependents": [
+          "test/main/__mocks__/cruise-reporterless/metrics/mangle-entry/index.js"
+        ],
+        "orphan": false,
+        "instability": 0,
+        "valid": true
+      },
+      {
+        "source": "test/main/__mocks__/cruise-reporterless/metrics/parse-input/index.js",
+        "dependencies": [],
+        "dependents": [
+          "test/main/__mocks__/cruise-reporterless/metrics/root.js"
+        ],
+        "orphan": false,
+        "instability": 0,
+        "valid": true
+      }
+    ],
+    "expectedFolders": [
+      {
+        "name": "test",
+        "dependencies": [
+          {
+            "name": "ndjson",
+            "instability": 0,
+            "valid": true,
+            "circular": false
+          },
+          { "name": "os", "instability": 0, "valid": true, "circular": false }
+        ],
+        "dependents": [],
+        "moduleCount": 6,
+        "afferentCouplings": 0,
+        "efferentCouplings": 2,
+        "instability": 1
+      },
+      {
+        "name": "test/main",
+        "dependencies": [
+          {
+            "name": "ndjson",
+            "instability": 0,
+            "valid": true,
+            "circular": false
+          },
+          { "name": "os", "instability": 0, "valid": true, "circular": false }
+        ],
+        "dependents": [],
+        "moduleCount": 6,
+        "afferentCouplings": 0,
+        "efferentCouplings": 2,
+        "instability": 1
+      },
+      {
+        "name": "test/main/__mocks__",
+        "dependencies": [
+          {
+            "name": "ndjson",
+            "instability": 0,
+            "valid": true,
+            "circular": false
+          },
+          { "name": "os", "instability": 0, "valid": true, "circular": false }
+        ],
+        "dependents": [],
+        "moduleCount": 6,
+        "afferentCouplings": 0,
+        "efferentCouplings": 2,
+        "instability": 1
+      },
+      {
+        "name": "test/main/__mocks__/cruise-reporterless",
+        "dependencies": [
+          {
+            "name": "ndjson",
+            "instability": 0,
+            "valid": true,
+            "circular": false
+          },
+          { "name": "os", "instability": 0, "valid": true, "circular": false }
+        ],
+        "dependents": [],
+        "moduleCount": 6,
+        "afferentCouplings": 0,
+        "efferentCouplings": 2,
+        "instability": 1
+      },
+      {
+        "name": "test/main/__mocks__/cruise-reporterless/metrics",
+        "dependencies": [
+          {
+            "name": "ndjson",
+            "instability": 0,
+            "valid": true,
+            "circular": false
+          },
+          { "name": "os", "instability": 0, "valid": true, "circular": false }
+        ],
+        "dependents": [],
+        "moduleCount": 6,
+        "afferentCouplings": 0,
+        "efferentCouplings": 2,
+        "instability": 1
+      },
+      {
+        "name": "test/main/__mocks__/cruise-reporterless/metrics/format-output",
+        "dependencies": [
+          { "name": "os", "instability": 0, "valid": true, "circular": false }
+        ],
+        "dependents": [
+          { "name": "test/main/__mocks__/cruise-reporterless/metrics" }
+        ],
+        "moduleCount": 1,
+        "afferentCouplings": 1,
+        "efferentCouplings": 1,
+        "instability": 0.5
+      },
+      {
+        "name": "test/main/__mocks__/cruise-reporterless/metrics/mangle-entry",
+        "dependencies": [],
+        "dependents": [
+          { "name": "test/main/__mocks__/cruise-reporterless/metrics" }
+        ],
+        "moduleCount": 3,
+        "afferentCouplings": 1,
+        "efferentCouplings": 0,
+        "instability": 0
+      },
+      {
+        "name": "test/main/__mocks__/cruise-reporterless/metrics/parse-input",
+        "dependencies": [],
+        "dependents": [
+          { "name": "test/main/__mocks__/cruise-reporterless/metrics" }
+        ],
+        "moduleCount": 1,
+        "afferentCouplings": 1,
+        "efferentCouplings": 0,
+        "instability": 0
+      },
+      {
+        "dependencies": [],
+        "dependents": [],
+        "moduleCount": -1,
+        "name": "ndjson"
+      },
+      {
+        "dependencies": [],
+        "dependents": [],
+        "moduleCount": -1,
+        "name": "os"
+      }
+    ]
+  }
+]

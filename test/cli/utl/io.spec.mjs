@@ -1,33 +1,14 @@
 /* eslint-disable no-unused-expressions */
-import { unlinkSync, writeFileSync, ReadStream } from "node:fs";
+import { ReadStream } from "node:fs";
 import { Readable } from "node:stream";
 import { fileURLToPath } from "node:url";
 import { expect } from "chai";
 import io from "../../../src/cli/utl/io.js";
 
-function removeDammit(pFileName) {
-  try {
-    unlinkSync(pFileName);
-  } catch (pError) {
-    // probably files didn't exist in the first place
-    // so ignore the exception
-  } finally {
-    // explicitly ignore finally as well
-  }
-}
-
-describe("cli/utl/io", () => {
+describe("[U] cli/utl/io", () => {
   const OUTFILE = fileURLToPath(
-    new URL("./output/tmp_hello_cli_utl_io.json", import.meta.url)
+    new URL("./__fixtures__/empty.json", import.meta.url)
   );
-
-  before("set up", () => {
-    writeFileSync(OUTFILE, "{}", "utf8");
-  });
-
-  after("tear down", () => {
-    removeDammit(OUTFILE);
-  });
 
   it("getInStream(OUTFILE) yields a readable stream", () => {
     expect(io.getInStream(OUTFILE) instanceof Readable).to.be.true;

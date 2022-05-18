@@ -1,5 +1,6 @@
 /**
- * returns true if there's at least one element in pLeftArray that's also in pRightArray
+ * returns true if there's at least one element in pLeftArray that's also
+ * in pRightArray
  *
  * @param {string[]} pLeftArray an array of strings
  * @param {string[]} pRightArray another array of strings

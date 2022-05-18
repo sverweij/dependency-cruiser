@@ -1,9 +1,17 @@
 import { expect } from "chai";
 import clearCaches from "../../../../src/enrich/clear-caches.js";
-import getCycle from "../../../../src/enrich/derive/circular/get-cycle.js";
-import inputgraphs from "./inputgraphs.mjs";
+import getCycleOriginal from "../../../../src/enrich/derive/circular/get-cycle.js";
+import { findModuleByName } from "../../../../src/enrich/derive/module-utl.js";
+import inputgraphs from "./__mocks__/inputgraphs.mjs";
 
-describe("enrich/derive/circular/getCycle", () => {
+function getCycle(pGraph, pFrom, pToDep) {
+  return getCycleOriginal(pGraph, pFrom, pToDep, {
+    pDependencyName: "resolved",
+    pFindNodeByName: findModuleByName,
+  });
+}
+
+describe("[U] enrich/derive/circular/get-cycle", () => {
   beforeEach("set up", () => {
     clearCaches();
   });

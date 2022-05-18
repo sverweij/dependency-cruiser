@@ -20,7 +20,7 @@ class WriteableExpectStream extends Writable {
   }
 }
 
-describe("wrap-stream-in-html", () => {
+describe("[I] wrap-stream-in-html", () => {
   const lInStream = createReadStream("package.json");
   const lOutStream = new WriteableExpectStream();
 

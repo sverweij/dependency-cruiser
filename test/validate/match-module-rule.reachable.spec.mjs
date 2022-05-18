@@ -23,7 +23,7 @@ const ANY_UNREACHABLE_IN_ALLOWED_SET = {
   to: { reachable: false },
 };
 
-describe("validate/match-module-rule - reachable", () => {
+describe("[I] validate/match-module-rule - reachable", () => {
   it("rule without reachable attribute doesn't match reachables (implicit)", () => {
     expect(matchModuleRule.matchesReachableRule(EMPTY_RULE, {})).to.equal(
       false

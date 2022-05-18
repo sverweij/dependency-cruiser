@@ -1,9 +1,0 @@
-{
-    "forbidden": [
-        {
-            "name": "no-orphans",
-            "from": {"orphan":true},
-            "to": {}
-        }
-    ]
-}

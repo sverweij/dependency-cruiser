@@ -1,13 +1,13 @@
 ---
 name: Other
-about: Questions and other stuff not a bug report or feature request
-title: "Not a bug or a feature: ..."
+about: Stuff not a bug report, feature request or question
+title: "Ehm: ..."
 ---
 
 <!--- Provide a general summary of the issue in the Title above --->
 
-<!--- For feature requests and bug reports please use the feature request
-      or bug report template
+<!--- For feature requests, bug reports and questions please use their
+      respective templates
   --->
 
 ### Summary

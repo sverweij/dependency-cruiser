@@ -1,0 +1,11 @@
+[
+  {
+    "from": "test/cli/__fixtures__/known-violations/src/aap.js",
+    "to": "test/cli/__fixtures__/known-violations/src/forbidden-fruit/apple.js",
+    "invalidAttribute": "because we want to test whether comments work",
+    "rule": {
+      "severity": "error",
+      "name": "no-forbidden-fruit"
+    }
+  }
+]

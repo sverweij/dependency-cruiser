@@ -7,6 +7,7 @@
   "additionalProperties": false,
   "properties": {
     "modules": { "$ref": "#/definitions/ModulesType" },
+    "folders": { "$ref": "#/definitions/FoldersType" },
     "summary": { "$ref": "#/definitions/SummaryType" }
   },
   "definitions": {
@@ -88,6 +89,10 @@
         "consolidated": {
           "type": "boolean",
           "description": "true if the module was 'consolidated'. Consolidating implies the entity a Module represents might be several modules at the same time. This attribute is set by tools that consolidate modules for reporting purposes - it will not be present after a regular cruise."
+        },
+        "instability": {
+          "type": "number",
+          "description": "number of dependents/ (number of dependents + number of dependencies)A measure for how stable the module is; ranging between 0 (completely stable module) to 1 (completely instable module). Derived from Uncle Bob's instability metric - but applied to a single module instead of to a group of them. This attribute is only present when dependency-cruiserwas asked to calculate metrics."
         }
       }
     },
@@ -217,6 +222,10 @@
           "type": "boolean",
           "description": "'true' if the dependency between this dependency and its parent only exists before compilation takes place. 'false in all other cases. Dependency-cruiser will only specify this attribute for TypeScript and then only when the option 'tsPreCompilationDeps' has the value 'specify'."
         },
+        "typeOnly": {
+          "type": "boolean",
+          "description": "'true' when the module included the module explicitly as type only with the 'type' keyword e.g. import type { IThingus } from 'thing' Dependency-cruiser will only specify this attribute for TypeScript and when the 'tsPreCompilationDeps' option has either the value true or 'specify'."
+        },
         "circular": {
           "type": "boolean",
           "description": "'true' if following this dependency will ultimately return to the source, false in all other cases"
@@ -229,12 +238,16 @@
         "moduleSystem": { "$ref": "#/definitions/ModuleSystemType" },
         "valid": {
           "type": "boolean",
-          "description": "'true' if this dependency violated a rule; 'false' in all other cases. The violated rule will be in the 'rule' object at the same level."
+          "description": "'true' if this dependency violated a rule; 'false' in all other cases. The violated rule will be in the 'rules' object at the same level."
         },
         "rules": {
           "type": "array",
           "items": { "$ref": "#/definitions/RuleSummaryType" },
           "description": "an array of rules violated by this dependency - left out if the dependency is valid"
+        },
+        "instability": {
+          "type": "number",
+          "description": "the (de-normalized) instability of the dependency - also available in the module on the 'to' side of this dependency"
         }
       }
     },
@@ -254,7 +267,8 @@
         "npm-peer",
         "npm-unknown",
         "undetermined",
-        "unknown"
+        "unknown",
+        "type-only"
       ]
     },
     "ModuleSystemType": {
@@ -278,6 +292,90 @@
       "type": "string",
       "description": "How severe a violation of a rule is. The 'error' severity will make some reporters return a non-zero exit code, so if you want e.g. a build to stop when there's a rule violated: use that.",
       "enum": ["error", "warn", "info", "ignore"]
+    },
+    "FoldersType": {
+      "type": "array",
+      "description": "A list of folders, as derived from the detected modules, with for each folder a bunch of metrics (adapted from 'Agile software development: principles, patterns, and practices' by Robert C Martin (ISBN 0-13-597444-5). Note: these metrics substitute 'components' and 'classes' from that book with 'folders' and 'modules'; the closest relatives that work for the most programming styles in JavaScript (and its derivative languages).",
+      "items": { "$ref": "#/definitions/FolderType" }
+    },
+    "FolderType": {
+      "type": "object",
+      "required": ["name", "moduleCount"],
+      "additionalProperties": false,
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "The name of the folder. Folder names are normalized to posix (so separated by forward slashes e.g.: src/things/morethings)"
+        },
+        "dependents": {
+          "type": "array",
+          "description": "list of folders depending on this folder",
+          "items": {
+            "type": "object",
+            "required": ["name"],
+            "additionalProperties": false,
+            "properties": {
+              "name": {
+                "type": "string",
+                "description": "the (resolved) name of the dependent"
+              }
+            }
+          }
+        },
+        "dependencies": {
+          "type": "array",
+          "description": "list of folders this module depends upon",
+          "items": {
+            "type": "object",
+            "required": ["name", "valid", "circular"],
+            "additionalProperties": false,
+            "properties": {
+              "name": {
+                "type": "string",
+                "description": "the (resolved) name of the dependency"
+              },
+              "instability": {
+                "type": "number",
+                "description": "the instability of the dependency (denormalized - this is a duplicate of the one found in the instability of the folder with the same name)"
+              },
+              "valid": {
+                "type": "boolean",
+                "description": "'true' if this folder dependency violated a rule; 'false' in all other cases. The violated rule will be in the 'rules' object at the same level."
+              },
+              "circular": {
+                "type": "boolean",
+                "description": "'true' if following this dependency will ultimately return to the source, false in all other cases"
+              },
+              "cycle": {
+                "type": "array",
+                "items": { "type": "string" },
+                "description": "If following this dependency will ultimately return to the source (circular === true), this attribute will contain an (ordered) array of module names that shows (one of) the circular path(s)"
+              },
+              "rules": {
+                "type": "array",
+                "items": { "$ref": "#/definitions/RuleSummaryType" },
+                "description": "an array of rules violated by this dependency - left out if the dependency is valid"
+              }
+            }
+          }
+        },
+        "moduleCount": {
+          "type": "number",
+          "description": "The total number of modules detected in this folder and its sub-folders"
+        },
+        "afferentCouplings": {
+          "type": "number",
+          "description": "The number of modules outside this folder that depend on modules within this folder. Only present when dependency-cruiser was asked to calculate it."
+        },
+        "efferentCouplings": {
+          "type": "number",
+          "description": "The number of modules inside this folder that depend on modules outside this folder. Only present when dependency-cruiser was asked to calculate it."
+        },
+        "instability": {
+          "type": "number",
+          "description": "efferentCouplings/ (afferentCouplings + efferentCouplings) A measure for how stable the folder is; ranging between 0 (completely stable folder) to 1 (completely instable folder) Note that while 'instability' has a negative connotation it's also unavoidable in any meaningful system. It's the basis of Martin's variable component stability principle: 'the instability of a folder should be larger than the folders it depends on'. Only present when dependency-cruiser was asked to calculate it."
+        }
+      }
     },
     "SummaryType": {
       "type": "object",
@@ -305,6 +403,10 @@
           "type": "number",
           "description": "the number of informational level notices in the dependencies"
         },
+        "ignore": {
+          "type": "number",
+          "description": "the number of ignored notices in the dependencies"
+        },
         "totalCruised": {
           "type": "number",
           "description": "the number of modules cruised"
@@ -329,6 +431,7 @@
       "properties": {
         "from": { "type": "string" },
         "to": { "type": "string" },
+        "type": { "$ref": "#/definitions/ViolationTypeType" },
         "rule": { "$ref": "#/definitions/RuleSummaryType" },
         "cycle": {
           "type": "array",
@@ -339,8 +442,42 @@
           "type": "array",
           "items": { "type": "string" },
           "description": "The path from the from to the to if the violation is transitive"
+        },
+        "metrics": {
+          "type": "object",
+          "required": ["from", "to"],
+          "additionalProperties": false,
+          "properties": {
+            "from": {
+              "type": "object",
+              "required": ["instability"],
+              "additionalProperties": false,
+              "properties": { "instability": { "type": "number" } }
+            },
+            "to": {
+              "type": "object",
+              "required": ["instability"],
+              "additionalProperties": false,
+              "properties": { "instability": { "type": "number" } }
+            }
+          }
+        },
+        "comment": {
+          "type": "string",
+          "description": "Free format text you can e.g. use to explain why this violation can be ignored or is quarantined (only used in _known-violations_) "
         }
       }
+    },
+    "ViolationTypeType": {
+      "type": "string",
+      "enum": [
+        "dependency",
+        "module",
+        "reachability",
+        "cycle",
+        "instability",
+        "folder"
+      ]
     },
     "RuleSetType": {
       "type": "object",
@@ -410,6 +547,11 @@
           "description": "A short name for the rule - will appear in reporters to enable customers to quickly identify a violated rule. Try to keep them short, eslint style. E.g. 'not-to-core' for a rule forbidding dependencies on core modules, or 'not-to-unresolvable' for one that prevents dependencies on modules that probably don't exist."
         },
         "severity": { "$ref": "#/definitions/SeverityType" },
+        "scope": {
+          "type": "string",
+          "description": "What to apply the rule to - modules (the default) or folders. Switching the scope to 'folder' can be useful in rules where this makes a difference like those regarding circular dependencies or instability. Two things to note when you decide to use 'folder' level scope: (1) the 'scope' attribute is experimental - the way to indicate the scope of a rule can change over time without dependency-cruiser undergoing a major bump. (2) Only the to.moreUnstable, to.circular, and path (both from and to) attributes work at the moment. Other attributes will follow suit in releases after 11.6.0.",
+          "enum": ["module", "folder"]
+        },
         "comment": {
           "type": "string",
           "description": "You can use this field to document why the rule is there."
@@ -534,6 +676,11 @@
           "description": "Whether or not to match modules of any of these types (leaving out matches any of them)",
           "items": { "$ref": "#/definitions/DependencyTypeType" }
         },
+        "dependencyTypesNot": {
+          "type": "array",
+          "description": "Whether or not to match modules NOT of any of these types (leaving out matches none of them)",
+          "items": { "$ref": "#/definitions/DependencyTypeType" }
+        },
         "moreThanOneDependencyType": {
           "type": "boolean",
           "description": "If true matches dependencies with more than one dependency type (e.g. defined in _both_ npm and npm-dev)"
@@ -545,6 +692,26 @@
         "licenseNot": {
           "description": "Whether or not to match modules that were NOT released under one of the mentioned licenses. E.g. to flag everyting non MIT use \"MIT\" here",
           "$ref": "#/definitions/REAsStringsType"
+        },
+        "via": {
+          "description": "For circular dependencies - whether or not to match cycles that include some modules with this regular expression. If you want to match cycles that _exclusively_ include modules satisfying the regular expression use the viaOnly restriction.E.g. to allow all cycles, except when they go through one specific module. Typically to temporarily disallow some cycles with a lower severity - setting up a rule with a via that ignores them in an 'allowed' section.",
+          "$ref": "#/definitions/REAsStringsType"
+        },
+        "viaOnly": {
+          "description": "For circular dependencies - whether or not to match cycles that include exclusively modules with this regular expression. This is different from the regular via that already mathces when only some of the modules in the cycle satisfy the regular expression",
+          "$ref": "#/definitions/REAsStringsType"
+        },
+        "viaNot": {
+          "description": "For circular dependencies - whether or not to match cycles that include _only_ modules that don't satisfy this regular expression. E.g. to disallow all cycles, except when they go through one specific module. Typically to temporarily allow some cycles until they're removed.",
+          "$ref": "#/definitions/REAsStringsType"
+        },
+        "viaSomeNot": {
+          "description": "For circular dependencies - whether or not to match cycles that include _some_ modules that don't satisfy this regular expression. ",
+          "$ref": "#/definitions/REAsStringsType"
+        },
+        "moreUnstable": {
+          "type": "boolean",
+          "description": "When set to true moreUnstable matches for any dependency that has a higherInstability than the module that depends on it. When set to false it matcheswhen the opposite is true; the dependency has an equal or lower Instability.This attribute is useful when you want to check against Robert C. Martin'sstable dependency principle. See online documentation for examples and details.Leave this out when you don't care either way."
         }
       }
     },
@@ -801,6 +968,10 @@
             }
           }
         },
+        "metrics": {
+          "type": "boolean",
+          "description": "When this flag is set to true, dependency-cruiser will calculate (stability) metrics for all modules and folders. Defaults to false."
+        },
         "baseDir": {
           "type": "string",
           "description": "The directory dependency-cruiser should run its cruise from. Defaults to the current working directory."
@@ -844,7 +1015,8 @@
             "err-html",
             "teamcity",
             "anon",
-            "text"
+            "text",
+            "metrics"
           ]
         },
         { "type": "string", "pattern": "^plugin:[^:]+$" }
@@ -912,7 +1084,8 @@
         "archi": { "$ref": "#/definitions/DotReporterOptionsType" },
         "dot": { "$ref": "#/definitions/DotReporterOptionsType" },
         "ddot": { "$ref": "#/definitions/DotReporterOptionsType" },
-        "flat": { "$ref": "#/definitions/DotReporterOptionsType" }
+        "flat": { "$ref": "#/definitions/DotReporterOptionsType" },
+        "metrics": { "$ref": "#/definitions/MetricsReporterOptionsType" }
       }
     },
     "AnonReporterOptionsType": {
@@ -927,6 +1100,32 @@
         }
       }
     },
+    "MetricsReporterOptionsType": {
+      "type": "object",
+      "description": "Options to tweak the output of the metrics reporter",
+      "additionalProperties": false,
+      "properties": {
+        "orderBy": {
+          "type": "string",
+          "enum": [
+            "instability",
+            "moduleCount",
+            "afferentCouplings",
+            "efferentCouplings",
+            "name"
+          ],
+          "description": "By what attribute (in addition to the names of the folders/ modules) to order the metrics by. Defaults to 'instability'."
+        },
+        "hideModules": {
+          "type": "boolean",
+          "description": "When true hides module metrics from the report. Defaults to false"
+        },
+        "hideFolders": {
+          "type": "boolean",
+          "description": "When true hides folder metrics from the report. Defaults to false"
+        }
+      }
+    },
     "DotReporterOptionsType": {
       "type": "object",
       "description": "Options to tweak the output of the dot reporters",
@@ -937,6 +1136,10 @@
           "$ref": "#/definitions/REAsStringsType"
         },
         "filters": { "$ref": "#/definitions/ReporterFiltersType" },
+        "showMetrics": {
+          "description": "When passed the value 'true', shows instability metrics in the output if dependency-cruiser calculated them. Doesn't show them in all other cases. Defaults to false",
+          "type": "boolean"
+        },
         "theme": { "$ref": "#/definitions/DotThemeType" }
       }
     },

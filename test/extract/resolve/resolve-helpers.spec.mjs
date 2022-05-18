@@ -1,7 +1,7 @@
 import { expect } from "chai";
 import resolveHelpers from "../../../src/extract/resolve/resolve-helpers.js";
 
-describe("extract/resolve/resolveHelpers - stripToModuleName", () => {
+describe("[U] extract/resolve/resolveHelpers - stripToModuleName", () => {
   it("yields the empty string when stripping the empty string", () => {
     expect(resolveHelpers.stripToModuleName("")).to.equal("");
   });

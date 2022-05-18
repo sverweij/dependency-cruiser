@@ -17,9 +17,11 @@
         "orphan": true,
         "pathNot": [
           "(^|/)\\.[^/]+\\.(js|cjs|mjs|ts|json)$",
-          "\\.d\\.ts$|(^|/)tsconfig\\.json$",
+          "\\.d\\.ts$",
+          "(^|/)tsconfig\\.json$",
           "(^|/)(babel|webpack)\\.config\\.(js|cjs|mjs|ts|json)$",
-          "-reporter-plugin\\.js$"
+          "-reporter-plugin\\.js$",
+          "\\.schema\\.json$"
         ]
       }
     },
@@ -54,6 +56,7 @@
           "$1",
           "^node_modules",
           "^\\.yarn/cache",
+          "^os$",
           "^path$",
           "^src/meta\\.js$",
           "^src/graph-utl",
@@ -73,7 +76,7 @@
           "$1",
           "^node_modules",
           "^\\.yarn/cache",
-          "^(path|fs|module)$",
+          "^(path|fs|module|os)$",
           "^src/meta\\.js$",
           "^src/graph-utl",
           "^src/utl"
@@ -155,12 +158,12 @@
       }
     },
     {
-      "name": "only-try-require-exotic",
+      "name": "only-known-exotic",
       "severity": "error",
-      "comment": "The only 'exotic' require allowed is tryRequire",
+      "comment": "The only 'exotic' requires allowed are tryRequire and requireJSON",
       "from": {},
       "to": {
-        "exoticRequireNot": "^tryRequire$",
+        "exoticRequireNot": "^(tryRequire|requireJSON)$",
         "exoticallyRequired": true
       }
     },
@@ -190,14 +193,22 @@
       "severity": "error",
       "comment": "This module in the src/ tree is not reachable from the cli - and is likely dead wood. Either use it or remove it. If a module is flagged for which it's logical it is not reachable from cli (i.e. a configuration file), add it to the pathNot in the 'to' of this rule.",
       "from": { "path": "^bin/" },
-      "to": { "path": "^src", "reachable": false }
+      "to": {
+        "path": "^src",
+        "pathNot": ["\\.schema\\.json$", "\\.d\\.ts$"],
+        "reachable": false
+      }
     },
     {
       "name": "not-unreachable-from-test",
       "comment": "This module in src is not reachable by any test. Please provide a test that covers this (poor man's test coverage - this task is better suited for a proper test coverage tool :-) )",
       "severity": "warn",
       "from": { "path": "\\.spec\\.m?js$" },
-      "to": { "path": "^src", "reachable": false }
+      "to": {
+        "path": "^src",
+        "pathNot": ["\\.schema\\.json$", "\\.d\\.ts$"],
+        "reachable": false
+      }
     },
     {
       "name": "not-reachable-from-folder-index",
@@ -207,7 +218,8 @@
         "path": "^src/([^/]+)/index\\.js$"
       },
       "to": {
-        "path": "^src/$1/",
+        "path": ["^src/$1/"],
+        "pathNot": "\\.d\\.ts$",
         "reachable": false
       }
     },
@@ -279,7 +291,7 @@
     // },
     /* Experimental: the parser to use
      */
-    "parser": "swc", // acorn, swc, tsc
+    "parser": "tsc", // acorn, swc, tsc
     "enhancedResolveOptions": {
       "exportsFields": ["exports"],
       "conditionNames": ["require"],
@@ -300,14 +312,16 @@
         // ".svelte"
       ]
     },
-    "exoticRequireStrings": ["tryRequire"],
+    "exoticRequireStrings": ["tryRequire", "requireJSON"],
     "reporterOptions": {
       "archi": {
         "collapsePattern": ["^(src|test)/[^/]+", "^bin/", "node_modules/[^/]+"]
       },
       "dot": {
+        "collapsePattern": ["^src/report/[^/]+", "^src/enrich/derive/[^/]+"],
         "filters": {
-          "includeOnly": { "path": "^(src|bin)" }
+          "includeOnly": { "path": "^(src|bin)" },
+          "exclude": { "path": ["^src/meta\\.js$", "^src/utl/bus.+"] }
         },
         "theme": {
           "replace": false,
@@ -420,6 +434,32 @@
             }
           ]
         }
+      },
+      "metrics": {
+        "orderBy": "name",
+        "hideModules": true,
+        "hideFolders": false
+      },
+      "anon": {
+        "wordlist": [
+          "aap",
+          "noot",
+          "mies",
+          "wim",
+          "zus",
+          "jet",
+          "teun",
+          "vuur",
+          "gijs",
+          "lam",
+          "kees",
+          "bok",
+          "weide",
+          "does",
+          "hok",
+          "duif",
+          "schapen"
+        ]
       }
     },
     "progress": { "type": "performance-log" }

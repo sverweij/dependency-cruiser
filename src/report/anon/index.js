@@ -1,6 +1,6 @@
-const _clone = require("lodash/clone");
-const _get = require("lodash/get");
-const _has = require("lodash/has");
+const clone = require("lodash/clone");
+const get = require("lodash/get");
+const has = require("lodash/has");
 const anonymizePath = require("./anonymize-path");
 
 function anonymizePathArray(pPathArray, pWordList) {
@@ -31,6 +31,12 @@ function anonymizeReaches(pReachesArray, pWordList) {
   }));
 }
 
+/**
+ *
+ * @param {import("../../../types/cruise-result").IModule[]} pModules
+ * @param {string[]} pWordList
+ * @returns {import("../../../types/cruise-result").IModule[]}
+ */
 function anonymizeModules(pModules, pWordList) {
   return pModules.map((pModule) => {
     const lReturnValue = {
@@ -38,10 +44,52 @@ function anonymizeModules(pModules, pWordList) {
       dependencies: anonymizeDependencies(pModule.dependencies, pWordList),
       source: anonymizePath(pModule.source, pWordList),
     };
+    if (pModule.dependents) {
+      lReturnValue.dependents = anonymizePathArray(
+        pModule.dependents,
+        pWordList
+      );
+    }
     if (pModule.reaches) {
       lReturnValue.reaches = anonymizeReaches(pModule.reaches, pWordList);
     }
 
+    return lReturnValue;
+  });
+}
+/**
+ *
+ * @param {import("../../../types/cruise-result").IFolder[]} pFolders
+ * @param {string[]} pWordList
+ * @returns {import("../../../types/cruise-result").IFolder[]}
+ */
+function anonymizeFolders(pFolders, pWordList) {
+  return pFolders.map((pFolder) => {
+    const lReturnValue = {
+      ...pFolder,
+      name: anonymizePath(pFolder.name, pWordList),
+    };
+    if (pFolder.dependencies) {
+      lReturnValue.dependencies = pFolder.dependencies.map((pDependency) => {
+        const lReturnDependencies = {
+          ...pDependency,
+          name: anonymizePath(pDependency.name, pWordList),
+        };
+        if (lReturnDependencies.cycle) {
+          lReturnDependencies.cycle = anonymizePathArray(
+            pDependency.cycle,
+            pWordList
+          );
+        }
+        return lReturnDependencies;
+      });
+    }
+    if (pFolder.dependents) {
+      lReturnValue.dependents = pFolder.dependents.map((pDependent) => ({
+        ...pDependent,
+        name: anonymizePath(pDependent.name, pWordList),
+      }));
+    }
     return lReturnValue;
   });
 }
@@ -60,11 +108,19 @@ function anonymizeViolations(pViolations, pWordList) {
     return lReturnValue;
   });
 }
-
+/**
+ *
+ * @param {import("../../../types/cruise-result").ICruiseResult} pResults
+ * @param {string[]} pWordList
+ * @returns {import("../../../types/cruise-result").ICruiseResult}
+ */
 function anonymize(pResults, pWordList) {
-  const lResults = _clone(pResults);
+  const lResults = clone(pResults);
 
   lResults.modules = anonymizeModules(lResults.modules, pWordList);
+  if (lResults.folders) {
+    lResults.folders = anonymizeFolders(lResults.folders, pWordList);
+  }
   lResults.summary.violations = anonymizeViolations(
     lResults.summary.violations,
     pWordList
@@ -94,18 +150,19 @@ function sanitizeWordList(pWordList) {
  * (note: the algorith _removes_ elements from pWordList to prevent duplicates,
  * so if the word list is precious to you - pass a clone)
  *
- * @param {ICruiseResult} pResults - the output of a dependency-cruise adhering to ../schema/cruise-result.schema.json
- * @param {wordlist: String[]} wordlist - list of words to use as replacement strings. If
+ * @param {import("../../../types/cruise-result").ICruiseResult} pResults - the output of a dependency-cruise adhering to ../schema/cruise-result.schema.json
+ * @param {{wordlist?: String[]}} pAnonymousReporterOptions of words to use as replacement strings. If
  *                               not passed the reporter uses the string passed
  *                               in the options (reporterOptions.anon.wordlist)
  *                               or - if that doesn't exist - the empty array
- * @returns {IReporterOutput} - output: the results in JSON format (hence adhering to the same json schema)
+ * @returns {import("../../../types/dependency-cruiser").IReporterOutput} - output: the results in JSON format (hence adhering to the same json schema)
  *                              exitCode: 0
  */
 module.exports = function reportAnonymous(pResults, pAnonymousReporterOptions) {
+  /** @type {{wordlist?: String[]}} */
   let lAnonymousReporterOptions = pAnonymousReporterOptions || {};
-  if (!_has(lAnonymousReporterOptions, "wordlist")) {
-    lAnonymousReporterOptions.wordlist = _get(
+  if (!has(lAnonymousReporterOptions, "wordlist")) {
+    lAnonymousReporterOptions.wordlist = get(
       pResults,
       "summary.optionsUsed.reporterOptions.anon.wordlist",
       []

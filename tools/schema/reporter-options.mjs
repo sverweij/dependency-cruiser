@@ -15,6 +15,7 @@ export default {
         dot: { $ref: "#/definitions/DotReporterOptionsType" },
         ddot: { $ref: "#/definitions/DotReporterOptionsType" },
         flat: { $ref: "#/definitions/DotReporterOptionsType" },
+        metrics: { $ref: "#/definitions/MetricsReporterOptionsType" },
       },
     },
     AnonReporterOptionsType: {
@@ -37,6 +38,36 @@ export default {
         },
       },
     },
+    MetricsReporterOptionsType: {
+      type: "object",
+      description: "Options to tweak the output of the metrics reporter",
+      additionalProperties: false,
+      properties: {
+        orderBy: {
+          type: "string",
+          enum: [
+            "instability",
+            "moduleCount",
+            "afferentCouplings",
+            "efferentCouplings",
+            "name",
+          ],
+          description:
+            "By what attribute (in addition to the names of the folders/ modules) " +
+            "to order the metrics by. Defaults to 'instability'.",
+        },
+        hideModules: {
+          type: "boolean",
+          description:
+            "When true hides module metrics from the report. Defaults to false",
+        },
+        hideFolders: {
+          type: "boolean",
+          description:
+            "When true hides folder metrics from the report. Defaults to false",
+        },
+      },
+    },
     DotReporterOptionsType: {
       type: "object",
       description: "Options to tweak the output of the dot reporters",
@@ -49,6 +80,13 @@ export default {
           $ref: "#/definitions/REAsStringsType",
         },
         filters: { $ref: "#/definitions/ReporterFiltersType" },
+        showMetrics: {
+          description:
+            "When passed the value 'true', shows instability metrics in the " +
+            "output if dependency-cruiser calculated them. Doesn't show them " +
+            "in all other cases. Defaults to false",
+          type: "boolean",
+        },
         theme: { $ref: "#/definitions/DotThemeType" },
       },
     },

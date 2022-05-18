@@ -2,7 +2,7 @@
 import { expect } from "chai";
 import utl from "../../../src/cli/init-config/utl.js";
 
-describe("cli/init-config/utl - folderNameArrayToRE", () => {
+describe("[U] cli/init-config/utl - folderNameArrayToRE", () => {
   it("transforms an array of folder names into a regex string - empty", () => {
     expect(utl.folderNameArrayToRE([])).to.equal("^()");
   });

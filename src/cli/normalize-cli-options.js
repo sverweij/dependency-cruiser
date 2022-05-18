@@ -21,6 +21,7 @@ const KNOWN_DEPCRUISE_CLI_OPTIONS = [
   "info",
   "init",
   "maxDepth",
+  "metrics",
   "moduleSystems",
   "outputTo",
   "outputType",

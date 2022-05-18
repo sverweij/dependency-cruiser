@@ -21,7 +21,7 @@ you can stick on the wall to impress your grandma.
 ### Install it
 
 - `npm install --save-dev dependency-cruiser` to use it as a validator in your project (recommended) or...
-- `npm install --global dependency-cruiser` if you just want to to inspect multiple projects.
+- `npm install --global dependency-cruiser` if you just want to inspect multiple projects.
 
 ### Show stuff to your grandma
 

@@ -1,7 +1,7 @@
 import { expect } from "chai";
 import extractModuleAttributes from "../../../src/extract/utl/extract-module-attributes.js";
 
-describe("extract/utl/extract-module-attributes", () => {
+describe("[U] extract/utl/extract-module-attributes", () => {
   it("leaves regular module specifications alone", () => {
     expect(extractModuleAttributes("protodash")).to.deep.equal({
       module: "protodash",
@@ -41,6 +41,12 @@ describe("extract/utl/extract-module-attributes", () => {
     expect(extractModuleAttributes("data:,gegevens.json")).to.deep.equal({
       module: ",gegevens.json",
       protocol: "data:",
+    });
+  });
+
+  it("treats comma's without a (known) protocol as part of the filename", () => {
+    expect(extractModuleAttributes("a com, ma.json")).to.deep.equal({
+      module: "a com, ma.json",
     });
   });
 

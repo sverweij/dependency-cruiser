@@ -17,7 +17,15 @@
       },
       "rules": {
         "max-lines": "off",
-        "max-lines-per-function": "off"
+        "max-lines-per-function": "off",
+        "mocha/valid-suite-description": [
+          "error",
+          {
+            "pattern": "^\\[[EIU]\\]",
+            "suiteNames": ["describe"],
+            "message": "start suite titles with [E], [I] or [U] to mark them as E2E, Integration or Unit test suite"
+          }
+        ]
       }
     },
     {

@@ -102,7 +102,7 @@ const ANOTATED_GRAPH_FOR_HAJOO = [
   },
 ];
 
-describe("enrich/derive/reachable/index - reachability detection", () => {
+describe("[U] enrich/derive/reachable/index - reachability detection", () => {
   beforeEach(() => {
     clearExtractCaches();
     clearEnrichCaches();

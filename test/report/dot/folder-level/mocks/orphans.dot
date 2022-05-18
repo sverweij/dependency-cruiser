@@ -1,7 +1,0 @@
-strict digraph "dependency-cruiser output"{
-    ordering="out" rankdir="LR" splines="true" overlap="false" nodesep="0.16" ranksep="0.18" fontname="Helvetica-bold" fontsize="9" style="rounded,bold,filled" fillcolor="#ffffff" compound="true"
-    node [shape="box" style="rounded, filled" height="0.2" color="black" fillcolor="#ffffcc" fontcolor="black" fontname="Helvetica" fontsize="9"]
-    edge [arrowhead="normal" arrowsize="0.6" penwidth="2.0" color="#00000033" fontname="Helvetica" fontsize="9"]
-
-    "tmp" [label="tmp" tooltip="no-orphans" URL="https://github.com/sverweij/dependency-cruiser/blob/develop/tmp" fillcolor="#ccffcc" fontcolor="red" color="red" shape="box3d"]
-}

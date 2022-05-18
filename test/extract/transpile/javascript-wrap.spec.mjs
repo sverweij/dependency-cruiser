@@ -2,7 +2,7 @@ import { readFileSync } from "node:fs";
 import { expect } from "chai";
 import wrap from "../../../src/extract/transpile/javascript-wrap.js";
 
-describe("jsx transpiler (the plain old javascript one)", () => {
+describe("[I] javascript transpiler", () => {
   it("tells the jsx transpiler is available", () => {
     expect(wrap.isAvailable()).to.equal(true);
   });
@@ -10,20 +10,20 @@ describe("jsx transpiler (the plain old javascript one)", () => {
   it("'transpiles' jsx", () => {
     expect(
       wrap.transpile(
-        readFileSync("./test/extract/transpile/fixtures/jsx.jsx", "utf8")
+        readFileSync("./test/extract/transpile/__mocks__/jsx.jsx", "utf8")
       )
     ).to.equal(
-      readFileSync("./test/extract/transpile/fixtures/jsx.js", "utf8")
+      readFileSync("./test/extract/transpile/__fixtures__/jsx.js", "utf8")
     );
   });
 
   it("transpiles mjs", () => {
     expect(
       wrap.transpile(
-        readFileSync("./test/extract/transpile/fixtures/mjs.mjs", "utf8")
+        readFileSync("./test/extract/transpile/__mocks__/mjs.mjs", "utf8")
       )
     ).to.equal(
-      readFileSync("./test/extract/transpile/fixtures/mjs.js", "utf8")
+      readFileSync("./test/extract/transpile/__fixtures__/mjs.js", "utf8")
     );
   });
 });

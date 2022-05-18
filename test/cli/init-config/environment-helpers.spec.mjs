@@ -2,7 +2,7 @@
 import { expect } from "chai";
 import helpers from "../../../src/cli/init-config/environment-helpers.js";
 
-describe("cli/init-config/environment-helpers - isLikelyMonoRepo", () => {
+describe("[U] cli/init-config/environment-helpers - isLikelyMonoRepo", () => {
   it("declares the current folder to be not a mono repo", () => {
     expect(helpers.isLikelyMonoRepo()).to.equal(false);
   });
@@ -19,7 +19,7 @@ describe("cli/init-config/environment-helpers - isLikelyMonoRepo", () => {
   });
 });
 
-describe("cli/init-config/environment-helpers - hasTestsWithinSource", () => {
+describe("[U] cli/init-config/environment-helpers - hasTestsWithinSource", () => {
   it("When there's no sign of a separate test directory - tests are in the source", () => {
     expect(helpers.hasTestsWithinSource([])).to.equal(true);
   });
@@ -53,7 +53,7 @@ describe("cli/init-config/environment-helpers - hasTestsWithinSource", () => {
   });
 });
 
-describe("cli/init-config/environment-helpers - getFolderCandidates", () => {
+describe("[U] cli/init-config/environment-helpers - getFolderCandidates", () => {
   it("returns only existing folders", () => {
     const lCandidates = ["src", "bin"];
     const lRealFolders = ["src", "lib", "node_modules"];

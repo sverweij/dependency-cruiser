@@ -1,0 +1,34 @@
+strict digraph "dependency-cruiser output"{
+    ordering="out" rankdir="LR" splines="true" overlap="false" nodesep="0.16" ranksep="0.18" fontname="Helvetica-bold" fontsize="9" style="rounded,bold,filled" fillcolor="#ffffff" compound="true"
+    node [shape="box" style="rounded, filled" height="0.2" color="black" fillcolor="#ffffcc" fontcolor="black" fontname="Helvetica" fontsize="9"]
+    edge [arrowhead="normal" arrowsize="0.6" penwidth="2.0" color="#00000033" fontname="Helvetica" fontsize="9"]
+
+    "fs" [label=<fs> tooltip="fs" color="grey" fontcolor="grey"]
+    "http" [label=<http> tooltip="http" color="grey" fontcolor="grey"]
+    "path" [label=<path> tooltip="path" color="grey" fontcolor="grey"]
+    subgraph "cluster_test" {label="test" subgraph "cluster_test/cli" {label="cli" subgraph "cluster_test/cli/__fixtures__" {label="__fixtures__" subgraph "cluster_test/cli/__fixtures__/cjs" {label="cjs" "test/cli/__fixtures__/cjs/one_only_one.js" [label=<one_only_one.js> tooltip="one_only_one.js" URL="test/cli/__fixtures__/cjs/one_only_one.js" ] } } } }
+    "test/cli/__fixtures__/cjs/one_only_one.js" -> "path" [style="dashed" penwidth="1.0"]
+    subgraph "cluster_test" {label="test" subgraph "cluster_test/cli" {label="cli" subgraph "cluster_test/cli/__fixtures__" {label="__fixtures__" subgraph "cluster_test/cli/__fixtures__/cjs" {label="cjs" "test/cli/__fixtures__/cjs/one_only_two.js" [label=<one_only_two.js> tooltip="one_only_two.js" URL="test/cli/__fixtures__/cjs/one_only_two.js" ] } } } }
+    "test/cli/__fixtures__/cjs/one_only_two.js" -> "path" [style="dashed" penwidth="1.0"]
+    subgraph "cluster_test" {label="test" subgraph "cluster_test/cli" {label="cli" subgraph "cluster_test/cli/__fixtures__" {label="__fixtures__" subgraph "cluster_test/cli/__fixtures__/cjs" {label="cjs" "test/cli/__fixtures__/cjs/root_one.js" [label=<root_one.js> tooltip="root_one.js" URL="test/cli/__fixtures__/cjs/root_one.js" ] } } } }
+    "test/cli/__fixtures__/cjs/root_one.js" -> "test/cli/__fixtures__/cjs/one_only_one.js"
+    "test/cli/__fixtures__/cjs/root_one.js" -> "test/cli/__fixtures__/cjs/one_only_two.js"
+    "test/cli/__fixtures__/cjs/root_one.js" -> "test/cli/__fixtures__/cjs/shared.js"
+    "test/cli/__fixtures__/cjs/root_one.js" -> "test/cli/__fixtures__/cjs/sub/dir.js" [xlabel="sub-not-allowed" tooltip="sub-not-allowed" fontcolor="orange" color="orange"]
+    "test/cli/__fixtures__/cjs/root_one.js" -> "fs" [style="dashed" penwidth="1.0"]
+    subgraph "cluster_test" {label="test" subgraph "cluster_test/cli" {label="cli" subgraph "cluster_test/cli/__fixtures__" {label="__fixtures__" subgraph "cluster_test/cli/__fixtures__/cjs" {label="cjs" "test/cli/__fixtures__/cjs/root_two.js" [label=<root_two.js> tooltip="root_two.js" URL="test/cli/__fixtures__/cjs/root_two.js" ] } } } }
+    "test/cli/__fixtures__/cjs/root_two.js" -> "test/cli/__fixtures__/cjs/shared.js"
+    "test/cli/__fixtures__/cjs/root_two.js" -> "test/cli/__fixtures__/cjs/somedata.json"
+    "test/cli/__fixtures__/cjs/root_two.js" -> "test/cli/__fixtures__/cjs/two_only_one.js"
+    "test/cli/__fixtures__/cjs/root_two.js" -> "http" [style="dashed" penwidth="1.0"]
+    subgraph "cluster_test" {label="test" subgraph "cluster_test/cli" {label="cli" subgraph "cluster_test/cli/__fixtures__" {label="__fixtures__" subgraph "cluster_test/cli/__fixtures__/cjs" {label="cjs" "test/cli/__fixtures__/cjs/shared.js" [label=<shared.js> tooltip="shared.js" URL="test/cli/__fixtures__/cjs/shared.js" ] } } } }
+    "test/cli/__fixtures__/cjs/shared.js" -> "path" [style="dashed" penwidth="1.0"]
+    subgraph "cluster_test" {label="test" subgraph "cluster_test/cli" {label="cli" subgraph "cluster_test/cli/__fixtures__" {label="__fixtures__" subgraph "cluster_test/cli/__fixtures__/cjs" {label="cjs" "test/cli/__fixtures__/cjs/somedata.json" [label=<somedata.json> tooltip="somedata.json" URL="test/cli/__fixtures__/cjs/somedata.json" fillcolor="#ffee44"] } } } }
+    subgraph "cluster_test" {label="test" subgraph "cluster_test/cli" {label="cli" subgraph "cluster_test/cli/__fixtures__" {label="__fixtures__" subgraph "cluster_test/cli/__fixtures__/cjs" {label="cjs" subgraph "cluster_test/cli/__fixtures__/cjs/sub" {label="sub" "test/cli/__fixtures__/cjs/sub/depindir.js" [label=<depindir.js> tooltip="depindir.js" URL="test/cli/__fixtures__/cjs/sub/depindir.js" ] } } } } }
+    "test/cli/__fixtures__/cjs/sub/depindir.js" -> "path" [style="dashed" penwidth="1.0"]
+    subgraph "cluster_test" {label="test" subgraph "cluster_test/cli" {label="cli" subgraph "cluster_test/cli/__fixtures__" {label="__fixtures__" subgraph "cluster_test/cli/__fixtures__/cjs" {label="cjs" subgraph "cluster_test/cli/__fixtures__/cjs/sub" {label="sub" "test/cli/__fixtures__/cjs/sub/dir.js" [label=<dir.js> tooltip="dir.js" URL="test/cli/__fixtures__/cjs/sub/dir.js" ] } } } } }
+    "test/cli/__fixtures__/cjs/sub/dir.js" -> "test/cli/__fixtures__/cjs/sub/depindir.js" [xlabel="sub-not-allowed" tooltip="sub-not-allowed" fontcolor="orange" color="orange"]
+    "test/cli/__fixtures__/cjs/sub/dir.js" -> "path" [style="dashed" penwidth="1.0"]
+    subgraph "cluster_test" {label="test" subgraph "cluster_test/cli" {label="cli" subgraph "cluster_test/cli/__fixtures__" {label="__fixtures__" subgraph "cluster_test/cli/__fixtures__/cjs" {label="cjs" "test/cli/__fixtures__/cjs/two_only_one.js" [label=<two_only_one.js> tooltip="two_only_one.js" URL="test/cli/__fixtures__/cjs/two_only_one.js" ] } } } }
+    "test/cli/__fixtures__/cjs/two_only_one.js" -> "test/cli/__fixtures__/cjs/sub/dir.js" [xlabel="sub-not-allowed" tooltip="sub-not-allowed" fontcolor="orange" color="orange"]
+}

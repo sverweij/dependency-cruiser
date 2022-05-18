@@ -1,25 +1,83 @@
-document.body.onmouseover = getHighlightHandler();
+document.addEventListener("contextmenu", getSelectHandler(title2ElementMap));
+document.addEventListener("mouseover", getHoverHandler(title2ElementMap));
+document.addEventListener("keydown", keyboardEventHandler);
 
-function getHighlightHandler() {
-  /** @type {string} */
-  var currentHighlightedTitle;
+var gMode = new Mode();
 
+var title2ElementMap = (function makeElementMap() {
   /** @type {NodeListOf<SVGGElement>} */
   var nodes = document.querySelectorAll(".node");
   /** @type {NodeListOf<SVGGElement>} */
   var edges = document.querySelectorAll(".edge");
-  var title2ElementMap = new Title2ElementMap(edges, nodes);
+  return new Title2ElementMap(edges, nodes);
+})();
+
+function getHoverHandler() {
+  /** @type {string} */
+  var currentHighlightedTitle;
 
   /** @param {MouseEvent} pMouseEvent */
-  return function highlightHandler(pMouseEvent) {
+  return function hoverHighlightHandler(pMouseEvent) {
     var closestNodeOrEdge = pMouseEvent.target.closest(".edge, .node");
     var closestTitleText = getTitleText(closestNodeOrEdge);
 
-    if (!(currentHighlightedTitle === closestTitleText)) {
-      title2ElementMap.get(currentHighlightedTitle).forEach(removeHighlight);
+    if (
+      !(currentHighlightedTitle === closestTitleText) &&
+      gMode.get() === gMode.HOVER
+    ) {
+      resetNodesAndEdges();
+      addHighlight(closestNodeOrEdge);
       title2ElementMap.get(closestTitleText).forEach(addHighlight);
       currentHighlightedTitle = closestTitleText;
     }
+  };
+}
+
+function getSelectHandler() {
+  /** @type {string} */
+  var currentHighlightedTitle;
+
+  /** @param {MouseEvent} pMouseEvent */
+  return function selectHighlightHandler(pMouseEvent) {
+    pMouseEvent.preventDefault();
+
+    var closestNodeOrEdge = pMouseEvent.target.closest(".edge, .node");
+    var closestTitleText = getTitleText(closestNodeOrEdge);
+
+    if (!!closestNodeOrEdge) {
+      gMode.setToSelect();
+    } else {
+      gMode.setToHover();
+    }
+    if (!(currentHighlightedTitle === closestTitleText)) {
+      resetNodesAndEdges();
+      addHighlight(closestNodeOrEdge);
+      title2ElementMap.get(closestTitleText).forEach(addHighlight);
+      currentHighlightedTitle = closestTitleText;
+    }
+  };
+}
+function Mode() {
+  var HOVER = 1;
+  var SELECT = 2;
+
+  function setToHover() {
+    this._mode = HOVER;
+  }
+  function setToSelect() {
+    this._mode = SELECT;
+  }
+
+  function get() {
+    return this._mode || HOVER;
+  }
+
+  return {
+    HOVER: HOVER,
+    SELECT: SELECT,
+    setToHover: setToHover,
+    setToSelect: setToSelect,
+    get: get,
   };
 }
 
@@ -132,6 +190,12 @@ function nodeListToArray(pNodeList) {
   return lReturnValue;
 }
 
+function resetNodesAndEdges() {
+  nodeListToArray(document.querySelectorAll(".current")).forEach(
+    removeHighlight
+  );
+}
+
 /**
  * @param {SVGGElement} pGElement
  */
@@ -149,3 +213,39 @@ function addHighlight(pGroup) {
     pGroup.classList.add("current");
   }
 }
+
+var hints = {
+  HIDDEN: 1,
+  SHOWN: 2,
+  state: this.HIDDEN,
+  show: function () {
+    document.getElementById("hints").removeAttribute("style");
+    hints.state = hints.SHOWN;
+  },
+  hide: function () {
+    document.getElementById("hints").style = "display:none";
+    hints.state = hints.HIDDEN;
+  },
+  toggle: function () {
+    if ((hints.state || hints.HIDDEN) === hints.HIDDEN) {
+      hints.show();
+    } else {
+      hints.hide();
+    }
+  },
+};
+
+/** @param {KeyboardEvent} pKeyboardEvent */
+function keyboardEventHandler(pKeyboardEvent) {
+  if (pKeyboardEvent.key === "Escape") {
+    resetNodesAndEdges();
+    gMode.setToHover();
+    hints.hide();
+  }
+  if (pKeyboardEvent.key === "F1") {
+    pKeyboardEvent.preventDefault();
+    hints.toggle();
+  }
+}
+document.getElementById("close-hints").addEventListener("click", hints.hide);
+document.getElementById("button_help").addEventListener("click", hints.toggle);

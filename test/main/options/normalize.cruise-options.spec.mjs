@@ -1,7 +1,7 @@
 import { expect } from "chai";
 import normalize from "../../../src/main/options/normalize.js";
 
-describe("main/options/normalize - cruise options", () => {
+describe("[U] main/options/normalize - cruise options", () => {
   it("ensures maxDepth is an int when passed an int", () => {
     expect(
       normalize.normalizeCruiseOptions({

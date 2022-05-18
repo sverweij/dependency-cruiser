@@ -1,0 +1,9 @@
+strict digraph "dependency-cruiser output"{
+    
+    
+    
+
+    "dontFollowThis" [label=<dontFollowThis> tooltip="dontFollowThis" URL="STUFFCOMINGBEFORE/dontFollowThis" ]
+    subgraph "cluster_test" {label="test" subgraph "cluster_test/cli" {label="cli" subgraph "cluster_test/cli/fixtures" {label="fixtures" subgraph "cluster_test/cli/fixtures/unresolvable-in-sub" {label="unresolvable-in-sub" "test/cli/fixtures/unresolvable-in-sub/refers-to-a-do-not-follow-module.js" [label=<refers-to-a-do-not-follow-module.js> tooltip="refers-to-a-do-not-follow-module.js" URL="STUFFCOMINGBEFORE/test/cli/fixtures/unresolvable-in-sub/refers-to-a-do-not-follow-module.js" ] } } } }
+    "test/cli/fixtures/unresolvable-in-sub/refers-to-a-do-not-follow-module.js" -> "dontFollowThis"
+}

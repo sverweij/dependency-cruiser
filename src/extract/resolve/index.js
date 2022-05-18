@@ -7,7 +7,17 @@ const { isRelativeModuleName } = require("./module-classifiers");
 const resolveAMD = require("./resolve-amd");
 const resolveCommonJS = require("./resolve-cjs");
 const resolveHelpers = require("./resolve-helpers");
+const determineDependencyTypes = require("./determine-dependency-types");
+const getManifest = require("./get-manifest");
 
+/**
+ *
+ * @param {import("../../../types/dependency-cruiser").IModule} pModule
+ * @param {string} pBaseDirectory
+ * @param {string} pFileDirectory
+ * @param {import("../../../types/dependency-cruiser").IResolveOptions} pResolveOptions
+ * @returns {any}
+ */
 function resolveModule(
   pModule,
   pBaseDirectory,
@@ -16,23 +26,22 @@ function resolveModule(
 ) {
   let lReturnValue = null;
 
-  const lModuleName = resolveHelpers.stripToModuleName(pModule.module);
+  const lStrippedModuleName = resolveHelpers.stripToModuleName(pModule.module);
   if (
-    isRelativeModuleName(lModuleName) ||
+    isRelativeModuleName(lStrippedModuleName) ||
     ["cjs", "es6", "tsd"].includes(pModule.moduleSystem)
   ) {
     lReturnValue = resolveCommonJS(
-      pModule.module,
+      lStrippedModuleName,
       pBaseDirectory,
       pFileDirectory,
       pResolveOptions
     );
   } else {
     lReturnValue = resolveAMD(
-      pModule.module,
+      lStrippedModuleName,
       pBaseDirectory,
-      pFileDirectory,
-      pResolveOptions
+      pFileDirectory
     );
   }
   return lReturnValue;
@@ -48,7 +57,7 @@ function isTypeScriptishExtension(pModuleName) {
 function resolveYarnVirtual(pPath) {
   const pnpAPI = get(monkeyPatchedModule, "findPnpApi", () => false)(pPath);
 
-  // the pnp api only works in plug'n play environemnts, and resolveVirtual
+  // the pnp api only works in plug'n play environments, and resolveVirtual
   // only under yarn(berry). As we can't run a 'regular' nodejs environment
   // and a yarn(berry) one at the same time, ignore in the test coverage and
   // cover it in a separate integration test.
@@ -72,7 +81,7 @@ function resolveWithRetry(
     pFileDirectory,
     pResolveOptions
   );
-  const lModuleName = resolveHelpers.stripToModuleName(pModule.module);
+  const lStrippedModuleName = resolveHelpers.stripToModuleName(pModule.module);
 
   // when we feed the typescript compiler an import with an explicit .js(x) extension
   // and the .js(x) file does not exist, it tries files with the .ts, .tsx or
@@ -87,8 +96,14 @@ function resolveWithRetry(
   //
   // This should eventually probably land in either enhanced_resolve or in a
   // plugin/ extension for it (tsconfig-paths-webpack-plugin?)
-  if (lReturnValue.couldNotResolve && canBeResolvedToTsVariant(lModuleName)) {
-    const lModuleWithOutExtension = lModuleName.replace(/\.js(x)?$/g, "");
+  if (
+    lReturnValue.couldNotResolve &&
+    canBeResolvedToTsVariant(lStrippedModuleName)
+  ) {
+    const lModuleWithOutExtension = lStrippedModuleName.replace(
+      /\.js(x)?$/g,
+      ""
+    );
 
     const lReturnValueCandidate = resolveModule(
       { ...pModule, module: lModuleWithOutExtension },
@@ -106,48 +121,61 @@ function resolveWithRetry(
 /**
  * resolves the module name of the pDependency to a file on disk.
  *
- * @param  {import("../../../types/cruise-result").IModule} pModule an object with a module and the moduleSystem
- *                              according to which this is a dependency
+ * @param  {Partial <import("../../../types/cruise-result").IDependency>} pDependency
  * @param  {string} pBaseDirectory    the directory to consider as base (or 'root')
  *                              for resolved files.
  * @param  {string} pFileDirectory    the directory of the file the dependency was
  *                              detected in
- * @param  {import(../../../types/resolve-options").IResolveOptions} pResolveOptions
- * @return {object}             an object with as attributes:
- *                              - resolved: a string representing the pDependency
- *                                  resolved to a file on disk (or the pDependency
- *                                  name itself when it could not be resolved)
- *                              - coreModule: true the dependency is a (node)
- *                                  core module - false in all other cases
- *                                  (deprecated over dependencyType === 'core')
- *                              - followable: true when it is worthwhile to
- *                                  follow dependencies of this dependency (
- *                                  typically not true for .json)
- *                              - couldNotResolve: true if it was not possible
- *                                  to resolve the dependency to a file on disk
- *                              - dependencyTypes: an array of dependencyTypes
+ * @param  {import("../../../types/resolve-options").IResolveOptions} pResolveOptions
+ * @return {Partial <import("../../../types/cruise-result").IDependency>}
  *
  */
+// eslint-disable-next-line max-lines-per-function
 module.exports = function resolve(
-  pModule,
+  pDependency,
   pBaseDirectory,
   pFileDirectory,
   pResolveOptions
 ) {
-  let lResolvedModule = resolveWithRetry(
-    pModule,
+  let lResolvedDependency = resolveWithRetry(
+    pDependency,
     pBaseDirectory,
     pFileDirectory,
     pResolveOptions
   );
+  const lStrippedModuleName = resolveHelpers.stripToModuleName(
+    pDependency.module
+  );
+
+  lResolvedDependency = {
+    ...lResolvedDependency,
+    ...resolveHelpers.addLicenseAttribute(
+      lStrippedModuleName,
+      lResolvedDependency.resolved,
+      { baseDirectory: pBaseDirectory, fileDirectory: pFileDirectory },
+      pResolveOptions
+    ),
+    dependencyTypes: determineDependencyTypes(
+      { ...pDependency, ...lResolvedDependency },
+      lStrippedModuleName,
+      getManifest(
+        pFileDirectory,
+        pBaseDirectory,
+        pResolveOptions.combinedDependencies
+      ),
+      pFileDirectory,
+      pResolveOptions,
+      pBaseDirectory
+    ),
+  };
 
   if (
     !pResolveOptions.symlinks &&
-    !lResolvedModule.coreModule &&
-    !lResolvedModule.couldNotResolve
+    !lResolvedDependency.coreModule &&
+    !lResolvedDependency.couldNotResolve
   ) {
     try {
-      lResolvedModule.resolved = pathToPosix(
+      lResolvedDependency.resolved = pathToPosix(
         path.relative(
           pBaseDirectory,
           fs.realpathSync(
@@ -159,15 +187,15 @@ module.exports = function resolve(
                    again corresponds with a real file on disk
                  */
                 // eslint-disable-next-line no-control-regex
-                lResolvedModule.resolved.replace(/\u0000#/g, "#")
+                lResolvedDependency.resolved.replace(/\u0000#/g, "#")
               )
             )
           )
         )
       );
     } catch (pError) {
-      lResolvedModule.couldNotResolve = true;
+      lResolvedDependency.couldNotResolve = true;
     }
   }
-  return lResolvedModule;
+  return lResolvedDependency;
 };

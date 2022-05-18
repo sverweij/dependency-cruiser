@@ -7,7 +7,7 @@ import typescriptWrap from "../../../src/extract/transpile/typescript-wrap.js";
 
 const wrap = svelteWrap(typescriptWrap(true));
 
-describe("svelte transpiler", () => {
+describe("[I] svelte transpiler", () => {
   it("tells the svelte transpiler is available", () => {
     expect(wrap.isAvailable()).to.equal(true);
   });
@@ -25,12 +25,12 @@ describe("svelte transpiler", () => {
     it(`'transpiles' svelte with "<script lang='${variant}'>"'`, async () => {
       const observedPromise = fsPromise
         .readFile(
-          `./test/extract/transpile/fixtures/svelte-${variant}.svelte`,
+          `./test/extract/transpile/__mocks__/svelte-${variant}.svelte`,
           "utf8"
         )
         .then((pSourceCode) => wrap.transpile(pSourceCode));
       const expectedPromise = fsPromise.readFile(
-        "./test/extract/transpile/fixtures/svelte.js",
+        "./test/extract/transpile/__fixtures__/svelte.js",
         "utf8"
       );
 

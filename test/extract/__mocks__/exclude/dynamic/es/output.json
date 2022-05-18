@@ -1,0 +1,45 @@
+[
+  {
+    "source": "test/extract/__mocks__/exclude/dynamic/es/src/circular.js",
+
+    "dependencies": [
+      {
+        "resolved": "test/extract/__mocks__/exclude/dynamic/es/src/index.js",
+        "coreModule": false,
+        "followable": true,
+        "exoticallyRequired": false,
+        "couldNotResolve": false,
+        "dependencyTypes": ["local"],
+        "module": "./index",
+        "moduleSystem": "es6",
+        "dynamic": false,
+
+        "matchesDoNotFollow": false
+      }
+    ]
+  },
+  {
+    "source": "test/extract/__mocks__/exclude/dynamic/es/src/index.js",
+
+    "dependencies": [
+      {
+        "resolved": "test/extract/__mocks__/exclude/dynamic/es/src/dynamic-to-circular.js",
+        "coreModule": false,
+        "followable": true,
+        "exoticallyRequired": false,
+        "couldNotResolve": false,
+        "dependencyTypes": ["local"],
+        "module": "./dynamic-to-circular",
+        "moduleSystem": "es6",
+        "dynamic": false,
+
+        "matchesDoNotFollow": false
+      }
+    ]
+  },
+  {
+    "source": "test/extract/__mocks__/exclude/dynamic/es/src/dynamic-to-circular.js",
+
+    "dependencies": []
+  }
+]

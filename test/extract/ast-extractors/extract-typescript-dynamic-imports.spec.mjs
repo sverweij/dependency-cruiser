@@ -1,7 +1,7 @@
 import { expect } from "chai";
 import extractTypescript from "./extract-typescript.utl.mjs";
 
-describe("ast-extractors/extract-typescript - dynamic imports", () => {
+describe("[U] ast-extractors/extract-typescript - dynamic imports", () => {
   it("correctly detects a dynamic import statement", () => {
     expect(
       extractTypescript(

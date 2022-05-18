@@ -1,12 +1,23 @@
 import { expect } from "chai";
 import validate from "../../src/validate/index.js";
-import readRuleSet from "./readruleset.utl.mjs";
+import parseRuleSet from "./parse-ruleset.utl.mjs";
 
-describe("validate/index - preCompilationOnly", () => {
+describe("[I] validate/index - preCompilationOnly", () => {
+  const lPreCompilationOnlyRuleSet = parseRuleSet({
+    forbidden: [
+      {
+        name: "precomp",
+        from: {},
+        to: {
+          preCompilationOnly: true,
+        },
+      },
+    ],
+  });
   it("Stuff that still exists after compilation - okeleedokelee", () => {
     expect(
       validate.dependency(
-        readRuleSet("./test/validate/fixtures/rules.pre-compilation-only.json"),
+        lPreCompilationOnlyRuleSet,
         { source: "something" },
         { resolved: "real-stuff-only.ts", preCompilationOnly: false }
       )
@@ -16,7 +27,7 @@ describe("validate/index - preCompilationOnly", () => {
   it("Stuff that only exists before compilation - flaggeleedaggelee", () => {
     expect(
       validate.dependency(
-        readRuleSet("./test/validate/fixtures/rules.pre-compilation-only.json"),
+        lPreCompilationOnlyRuleSet,
         { source: "something" },
         { resolved: "types.d.ts", preCompilationOnly: true }
       )
@@ -29,7 +40,7 @@ describe("validate/index - preCompilationOnly", () => {
   it("Unknown whether stuff that only exists before compilation - okeleedokelee", () => {
     expect(
       validate.dependency(
-        readRuleSet("./test/validate/fixtures/rules.pre-compilation-only.json"),
+        lPreCompilationOnlyRuleSet,
         { source: "something" },
         { resolved: "types.d.ts" }
       )

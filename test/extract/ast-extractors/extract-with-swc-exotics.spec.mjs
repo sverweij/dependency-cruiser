@@ -1,7 +1,7 @@
 import { expect } from "chai";
 import extractWithSwc from "./extract-with-swc.utl.mjs";
 
-describe("ast-extractors/extract-swc - exotics", () => {
+describe("[U] ast-extractors/extract-swc - exotics", () => {
   it("doesn't detects 'exotic' dependencies when no exoticRequireStrings were passed", () => {
     expect(
       extractWithSwc(

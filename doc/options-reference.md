@@ -12,7 +12,7 @@
   - [`tsPreCompilationDeps`](#tsprecompilationdeps)
   - [`tsConfig`: use a TypeScript configuration file ('project')](#tsconfig-use-a-typescript-configuration-file-project)
   - [`babelConfig`: use a babel configuration file](#babelconfig-use-a-babel-configuration-file)
-  - [`webackConfig`: use (the resolution options of) a webpack configuration](#webpackconfig-use-the-resolution-options-of-a-webpack-configuration)
+  - [`webpackConfig`: use (the resolution options of) a webpack configuration](#webpackconfig-use-the-resolution-options-of-a-webpack-configuration)
   - [Yarn Plug'n'Play support - `externalModuleResolutionStrategy`](#yarn-plugnplay-support---externalmoduleresolutionstrategy)
   - [`prefix`: prefix links in reports](#prefix-prefix-links-in-reports)
 - [`reporterOptions`](#reporteroptions)
@@ -360,15 +360,15 @@ And with `"maxDepth": 3` like this:
 > :shell: command line option equivalent: `--module-systems`
 
 Here you can pass a list of module systems dependency-cruiser should use
-to detect dependencies. It defaults to `["amd", "cjs", "es6", "tsd]` The
+to detect dependencies. It defaults to `["es6", "cjs", "tsd", "amd"]` The
 'module systems' dependency-cruiser supports:
 
 | System | Meaning                                                                                                                                                                        |
 | ------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
-| `amd`  | [Asynchronous Module Definition](https://github.com/amdjs/amdjs-api/wiki/AMD) as used by a.o. [RequireJS](requirejs.org)                                                       |
-| `cjs`  | Common js as popularised by [node.js](https://nodejs.org/dist/latest-v12.x/docs/api/modules.html) which uses the `require` function to include other modules                   |
 | `es6`  | modules as defined for ECMAScript 6 in 2015 in [Emma-262](http://www.ecma-international.org/ecma-262/6.0/index.html#sec-modules), with proper `import` and `export` statements |
+| `cjs`  | Common js as popularised by [node.js](https://nodejs.org/dist/latest-v18.x/docs/api/modules.html) which uses the `require` function to include other modules                   |
 | `tsd`  | [TypeScript 'triple slash directives'](https://www.typescriptlang.org/docs/handbook/triple-slash-directives.html)                                                              |
+| `amd`  | [Asynchronous Module Definition](https://github.com/amdjs/amdjs-api/wiki/AMD) as used by a.o. [RequireJS](requirejs.org)                                                       |
 
 ## `tsPreCompilationDeps`
 
@@ -982,6 +982,29 @@ depcruise-fmt -e -T err results.json
 > depcruise-fmt -T dot results.json --include-only "^packages/checkout" | dot -T svg > checkout.svg
 > ```
 
+### showMetrics - (`dot` and `flat` reporters)
+
+When you instructed dependency-cruiser to calculate metrics, with the showMetrics
+switch you can influence whether you want to show them in the graph or not (which
+is also the default).
+
+```javascript
+module.exports = {
+  options: {
+    reporterOptions: {
+      dot: {
+        showMetrics: true,
+      },
+    },
+  },
+};
+```
+
+This currently shows the instability metric next to the filename, e.g for the
+`dot` reporter like so:
+
+<img width="595" alt="sample that includes instability metrics" src="assets/with-metrics.png">
+
 ### wordlist - (`anon` reporter)
 
 The anonymous reporter has a `wordlist` option to pass it a list of words to use
@@ -1029,6 +1052,36 @@ module.exports = {
       }
   }
 }
+```
+
+### options for the _metrics_ reporter
+
+By default the metrics reporter emits instability metrics for all modules and
+folders, ordered by instability (descending). If you want to see less, or
+use a different sort order, you can tweak that with the metrics reporterOptions.
+
+- `hideModules`: switch to `true` if you only want to see instability metrics for
+  folders. Defaults to `false`.
+- `hideFolders`: switch to `true` if you only want to see instability metrics for
+  modules. Defaults to `false`.
+- `orderBy`: with this you can specify how the metrics reporter orders its output.
+  Defaults to `instability`.
+  Possible values `name`, `moduleCount`, `afferentCouplings`, `efferentCouplings`,
+  `instability`.
+
+```javascript
+module.exports = {
+  // ...
+  options: {
+    reporterOptions: {
+      metrics: {
+        hideModules: true, // hides the modules from the metrics reporter output
+        // hideFolders: true, // would hide folders from the metrics reporter output
+        orderBy: "name", // possible values: name, moduleCount, afferentCouplings, efferentCouplings, instability
+      },
+    },
+  },
+};
 ```
 
 ## Esoteric options

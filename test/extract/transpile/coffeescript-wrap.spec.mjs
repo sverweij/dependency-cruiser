@@ -6,7 +6,7 @@ import coffeescriptWrap from "../../../src/extract/transpile/coffeescript-wrap.j
 const wrap = coffeescriptWrap();
 const litWrap = coffeescriptWrap(true);
 
-describe("coffeescript transpiler", () => {
+describe("[I] coffeescript transpiler", () => {
   it("tells the coffeescript transpiler is available", () => {
     expect(wrap.isAvailable()).to.equal(true);
   });
@@ -20,13 +20,13 @@ describe("coffeescript transpiler", () => {
       normalizeNewline(
         wrap.transpile(
           readFileSync(
-            "./test/extract/transpile/fixtures/coffee.coffee",
+            "./test/extract/transpile/__mocks__/coffee.coffee",
             "utf8"
           )
         )
       )
     ).to.equal(
-      readFileSync("./test/extract/transpile/fixtures/coffee.js", "utf8")
+      readFileSync("./test/extract/transpile/__fixtures__/coffee.js", "utf8")
     );
   });
 
@@ -35,13 +35,13 @@ describe("coffeescript transpiler", () => {
       normalizeNewline(
         litWrap.transpile(
           readFileSync(
-            "./test/extract/transpile/fixtures/litcoffee.litcoffee",
+            "./test/extract/transpile/__mocks__/litcoffee.litcoffee",
             "utf8"
           )
         )
       )
     ).to.equal(
-      readFileSync("./test/extract/transpile/fixtures/litcoffee.js", "utf8")
+      readFileSync("./test/extract/transpile/__fixtures__/litcoffee.js", "utf8")
     );
   });
 
@@ -50,14 +50,14 @@ describe("coffeescript transpiler", () => {
       normalizeNewline(
         litWrap.transpile(
           readFileSync(
-            "./test/extract/transpile/fixtures/markdownlitcoffee.coffee.md",
+            "./test/extract/transpile/__mocks__/markdownlitcoffee.coffee.md",
             "utf8"
           )
         )
       )
     ).to.equal(
       readFileSync(
-        "./test/extract/transpile/fixtures/markdownlitcoffee.js",
+        "./test/extract/transpile/__fixtures__/markdownlitcoffee.js",
         "utf8"
       )
     );
@@ -67,11 +67,11 @@ describe("coffeescript transpiler", () => {
     expect(
       normalizeNewline(
         wrap.transpile(
-          readFileSync("./test/extract/transpile/fixtures/csx.cjsx", "utf8")
+          readFileSync("./test/extract/transpile/__mocks__/csx.cjsx", "utf8")
         )
       )
     ).to.equal(
-      readFileSync("./test/extract/transpile/fixtures/csx.jsx", "utf8")
+      readFileSync("./test/extract/transpile/__fixtures__/csx.jsx", "utf8")
     );
   });
 });

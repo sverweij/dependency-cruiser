@@ -1,14 +1,14 @@
 const _clone = require("lodash/clone");
 const _get = require("lodash/get");
 const _reject = require("lodash/reject");
-const _uniqBy = require("lodash/uniqBy");
+const _uniq = require("lodash/uniq");
 const compare = require("./compare");
 
 function mergeDependency(pLeftDependency, pRightDependency) {
   return {
     ...pLeftDependency,
     ...pRightDependency,
-    dependencyTypes: _uniqBy(
+    dependencyTypes: _uniq(
       pLeftDependency.dependencyTypes.concat(pRightDependency.dependencyTypes)
     ),
     rules: pLeftDependency.rules

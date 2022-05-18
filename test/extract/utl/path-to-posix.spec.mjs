@@ -2,7 +2,7 @@ import { win32, posix } from "path";
 import { expect } from "chai";
 import pathToPosix from "../../../src/extract/utl/path-to-posix.js";
 
-describe("utl/pathToPosix on win32", () => {
+describe("[U] utl/pathToPosix on win32", () => {
   it('transforms win32 style paths to posix ones: ""', () => {
     expect(pathToPosix("", win32)).to.equal("");
   });
@@ -26,7 +26,7 @@ describe("utl/pathToPosix on win32", () => {
   });
 });
 
-describe("utl/pathToPosix  on posix", () => {
+describe("[U] utl/pathToPosix  on posix", () => {
   it('leaves win32 style paths alone: ""', () => {
     expect(pathToPosix("", posix)).to.equal("");
   });

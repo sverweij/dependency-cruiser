@@ -17,7 +17,11 @@ const GRANULARITY2FUNCTION = {
   flat: prepareFlatLevel,
 };
 
-function report(pResults, pGranularity, { theme, collapsePattern, filters }) {
+function report(
+  pResults,
+  pGranularity,
+  { theme, collapsePattern, filters, showMetrics }
+) {
   const lTheme = theming.normalizeTheme(theme);
   const lResults = filters
     ? {
@@ -35,7 +39,8 @@ function report(pResults, pGranularity, { theme, collapsePattern, filters }) {
     modules: (GRANULARITY2FUNCTION[pGranularity] || prepareCustomLevel)(
       lResults,
       lTheme,
-      collapsePattern
+      collapsePattern,
+      showMetrics
     ),
   });
 }
@@ -125,13 +130,7 @@ function normalizeDotReporterOptions(
  * @param {string} pGranularity - either "module" (for fine grained module
  *                                level) or "folder" (for a report consolidated
  *                                to folders)
- * @param {ICruiseResult} pResults - the output of a dependency-cruise adhering to
- *                                   ../../../schema/cruise-result.schema.json
- * @param {IDotTheme} pTheme - a mapping of source properties to a attributes (like
- *                             color, shape) - see ../comon/richTheme.json for an example
- * @param {ICollapsePattern[]} - (for the 'custom' granularity level)
- * @returns {IReporterOutput} - .output: the directed graph
- *                              .exitCode: 0
+ * @returns {(pResults, pDotReporterOptions) => import("../../../types/dependency-cruiser").IReporterOutput}
  */
 module.exports = (pGranularity) => (pResults, pDotReporterOptions) => {
   const lDotReporterOptions = normalizeDotReporterOptions(

@@ -5,7 +5,7 @@ import lsWrap from "../../../src/extract/transpile/livescript-wrap.js";
 import babelWrap from "../../../src/extract/transpile/babel-wrap.js";
 import vueTemplateWrap from "../../../src/extract/transpile/vue-template-wrap.js";
 
-describe("extract/transpile/meta", () => {
+describe("[U] extract/transpile/meta", () => {
   it("tells which extensions can be scanned", () => {
     expect(meta.scannableExtensions).to.deep.equal([
       ".js",
@@ -111,6 +111,11 @@ describe("extract/transpile/meta", () => {
       {
         name: "vue-template-compiler",
         version: ">=2.0.0 <3.0.0",
+        available: true,
+      },
+      {
+        name: "@vue/compiler-sfc",
+        version: ">=3.0.0 <4.0.0",
         available: true,
       },
     ]);

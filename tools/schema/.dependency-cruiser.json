@@ -3,6 +3,7 @@
   "extends": "../../.dependency-cruiser.json",
   "options": {
     "prefix": "https://github.com/sverweij/dependency-cruiser/blob/develop/tools/schema/",
+    "extraExtensionsToScan": [],
     "reporterOptions": {
       "dot": {
         "collapsePattern": ["node_modules/[^/]+"],

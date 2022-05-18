@@ -6,7 +6,7 @@ import typescriptWrap from "../../../src/extract/transpile/typescript-wrap.js";
 const wrap = typescriptWrap();
 const tsxWrap = typescriptWrap(true);
 
-describe("typescript transpiler", () => {
+describe("[I] typescript transpiler", () => {
   it("tells the typescript transpiler is available", () => {
     expect(wrap.isAvailable()).to.equal(true);
   });
@@ -16,7 +16,7 @@ describe("typescript transpiler", () => {
       normalizeSource(
         wrap.transpile(
           fs.readFileSync(
-            "./test/extract/transpile/fixtures/typescriptscript.ts",
+            "./test/extract/transpile/__mocks__/typescriptscript.ts",
             "utf8"
           )
         )
@@ -24,7 +24,7 @@ describe("typescript transpiler", () => {
     ).to.equal(
       normalizeSource(
         fs.readFileSync(
-          "./test/extract/transpile/fixtures/typescriptscript.js",
+          "./test/extract/transpile/__fixtures__/typescriptscript.js",
           "utf8"
         )
       )
@@ -32,7 +32,7 @@ describe("typescript transpiler", () => {
   });
 });
 
-describe("tsx transpiler (plain old typescript)", () => {
+describe("[I] tsx transpiler (plain old typescript)", () => {
   it("tells the tsx transpiler is available", () => {
     expect(tsxWrap.isAvailable()).to.equal(true);
   });
@@ -41,12 +41,12 @@ describe("tsx transpiler (plain old typescript)", () => {
     expect(
       normalizeSource(
         tsxWrap.transpile(
-          fs.readFileSync("./test/extract/transpile/fixtures/tsx.tsx", "utf8")
+          fs.readFileSync("./test/extract/transpile/__mocks__/tsx.tsx", "utf8")
         )
       )
     ).to.equal(
       normalizeSource(
-        fs.readFileSync("./test/extract/transpile/fixtures/tsx.js", "utf8")
+        fs.readFileSync("./test/extract/transpile/__fixtures__/tsx.js", "utf8")
       )
     );
   });

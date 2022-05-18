@@ -1,4 +1,3 @@
-const { builtinModules } = require("module");
 const path = require("path");
 const getExtension = require("../utl/get-extension");
 
@@ -17,10 +16,6 @@ function isRelativeModuleName(pModuleName) {
     pModuleName === ".."
     // note ".blah" and "..blah" are _not_ relative
   );
-}
-
-function isCore(pModuleName) {
-  return builtinModules.includes(pModuleName);
 }
 
 function isExternalModule(
@@ -124,7 +119,6 @@ function isAliassy(pModuleName, pResolvedModuleName, pResolveOptions) {
 module.exports = {
   isScoped,
   isRelativeModuleName,
-  isCore,
   isExternalModule,
   isFollowable,
   isAliassy,

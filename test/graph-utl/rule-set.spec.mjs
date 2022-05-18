@@ -2,7 +2,7 @@
 import { expect } from "chai";
 import ruleset from "../../src/graph-utl/rule-set.js";
 
-describe("graph-utl/rule-set - findRuleByName", () => {
+describe("[U] graph-utl/rule-set - findRuleByName", () => {
   const lRuleSet = {
     forbidden: [{ name: "a-rule", severity: "warn", from: {}, to: {} }],
   };
@@ -35,7 +35,7 @@ describe("graph-utl/rule-set - findRuleByName", () => {
   });
 });
 
-describe("graph-utl/rule-set - ruleSetHasLicenseRule", () => {
+describe("[U] graph-utl/rule-set - ruleSetHasLicenseRule", () => {
   it("returns false for an empty rule set", () => {
     expect(ruleset.ruleSetHasLicenseRule({})).to.equal(false);
   });
@@ -84,7 +84,7 @@ describe("graph-utl/rule-set - ruleSetHasLicenseRule", () => {
   });
 });
 
-describe("graph-utl/rule-set - ruleSetHasDeprecation", () => {
+describe("[U] graph-utl/rule-set - ruleSetHasDeprecation", () => {
   it("returns false for an empty rule set", () => {
     expect(ruleset.ruleSetHasDeprecationRule({})).to.equal(false);
   });

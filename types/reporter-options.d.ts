@@ -21,6 +21,10 @@ export interface IReporterOptions {
    * Options to tweak the output of the flat /fdot reporter
    */
   flat?: IDotReporterOptions;
+  /**
+   * Options to tweak the output of the metrics reporter
+   */
+  metrics?: IMetricsReporterOptions;
 }
 
 export interface IReporterFiltersType {
@@ -54,6 +58,12 @@ export interface IDotReporterOptions {
    * goal of the report)
    */
   filters?: IReporterFiltersType;
+  /**
+   * When passed the value 'true', shows instability metrics in the
+   * output if dependency-cruiser calculated them. Doesn't show them
+   * in all other cases. Defaults to false",
+   */
+  showMetrics?: boolean;
   /**
    * A bunch of criteria to (conditionally) theme the dot output
    */
@@ -96,3 +106,16 @@ export interface IDotThemeEntry {
   criteria: any;
   attributes: any;
 }
+
+export interface IMetricsReporterOptions {
+  hideModules?: boolean;
+  hideFolders?: boolean;
+  oderBy?: MetricsOrderByType;
+}
+
+export type MetricsOrderByType =
+  | "instability"
+  | "moduleCount"
+  | "afferentCouplings"
+  | "efferentCouplings"
+  | "name";

@@ -9,7 +9,7 @@ const requireJSON = createRequireJSON(import.meta.url);
 
 use(chaiJSONSchema);
 
-describe("extract/index - max depth", () => {
+describe("[I] extract/index - max depth", () => {
   /* eslint no-magic-numbers:0 */
   [0, 1, 2, 4].forEach((pDepth) =>
     it(`returns the correct graph when max-depth === ${pDepth}`, () => {
@@ -23,14 +23,14 @@ describe("extract/index - max depth", () => {
         lOptions
       );
       const lResult = extract(
-        ["./test/extract/fixtures/maxDepth/index.js"],
+        ["./test/extract/__mocks__/maxDepth/index.js"],
         lOptions,
         lResolveOptions
       );
       /* eslint import/no-dynamic-require:0, security/detect-non-literal-require:0 */
 
       expect(lResult).to.deep.equal(
-        requireJSON(`./fixtures/maxDepth${pDepth}.json`)
+        requireJSON(`./__fixtures__/maxDepth${pDepth}.json`)
       );
       // expect(lResult).to.be.jsonSchema(resultSchema);
     })

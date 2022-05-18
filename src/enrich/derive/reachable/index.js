@@ -4,7 +4,7 @@ const _clone = require("lodash/clone");
 const _get = require("lodash/get");
 const _has = require("lodash/has");
 const matchers = require("../../../validate/matchers");
-const { extractGroups } = require("../../../validate/utl");
+const { extractGroups } = require("../../../utl/regex-util");
 const getPath = require("./get-path");
 
 function getReachableRules(pRuleSet) {

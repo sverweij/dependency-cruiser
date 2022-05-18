@@ -1,7 +1,0 @@
-strict digraph "dependency-cruiser output"{
-    splines="ortho"
-    
-    
-
-    "tmp/" [label="tmp" tooltip="no-orphans" URL="https://github.com/sverweij/dependency-cruiser/blob/develop/tmp/" ]
-}

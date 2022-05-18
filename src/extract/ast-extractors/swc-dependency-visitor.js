@@ -13,7 +13,11 @@ function pryStringsFromArguments(pArguments) {
     lReturnValue = pArguments[0].expression.value;
   } else if (pArguments[0].expression.type === "TemplateLiteral") {
     /* c8 ignore start */
-    lReturnValue = pArguments[0].expression.quasis[0].cooked.value;
+    // @swc/core@1.2.159 and before: cooked.value.
+    // @swc/core@1.2.160 and after: just cooked
+    lReturnValue =
+      pArguments[0].expression.quasis[0].cooked.value ||
+      pArguments[0].expression.quasis[0].cooked;
   }
   /* c8 ignore stop */
 
@@ -77,11 +81,35 @@ function extractExoticMemberCallExpression(pNode, pExoticRequireStrings) {
   return lReturnValue;
 }
 
-function isInterestingCallExpression(pExoticRequireStrings, pNode) {
-  return ["require", "import"]
-    .concat(pExoticRequireStrings.filter((pString) => !pString.includes(".")))
-    .includes(pNode.callee.value);
+function isImportCallExpression(pNode) {
+  /* 
+    somewhere between swc 1.2.123 and 1.2.133 the swc AST started to
+    represent import call expressions with .callee.type === "Import"
+    instead of .callee.value === "import". Keeping both detection
+    methods in here for backwards compatiblity
+  */
+  return pNode.callee.value === "import" || pNode.callee.type === "Import";
 }
+
+function isNonExoticallyRequiredExpression(pNode) {
+  return pNode.callee.value === "require" || isImportCallExpression(pNode);
+}
+
+function isInterestingCallExpression(pExoticRequireStrings, pNode) {
+  /* 
+    somewhere between swc 1.2.123 and 1.2.133 the swc AST started to
+    represent import call expressions with .callee.type === "Import"
+    instead of .callee.value === "import". Keeping both detection
+    methods in here for backwards compatiblity
+  */
+  return (
+    pNode.callee.type === "Import" ||
+    ["require", "import"]
+      .concat(pExoticRequireStrings.filter((pString) => !pString.includes(".")))
+      .includes(pNode.callee.value)
+  );
+}
+
 if (VisitorModule) {
   module.exports = class SwcDependencyVisitor extends Visitor {
     constructor(pExoticRequireStrings) {
@@ -119,7 +147,15 @@ if (VisitorModule) {
     // also include the same method, but with the correct spelling.
     visitExportAllDeclration(pNode) {
       this.pushImportExportSource(pNode);
-      return super.visitExportAllDeclration(pNode);
+      /* c8 ignore start */
+      // @ts-ignore
+      if (super.visitExportAllDeclration) {
+        // @ts-ignore
+        return super.visitExportAllDeclration(pNode);
+      } else {
+        /* c8 ignore stop */
+        return super.visitExportAllDeclaration(pNode);
+      }
     }
 
     /* c8 ignore start */
@@ -131,7 +167,15 @@ if (VisitorModule) {
     // same spelling error as the above - same solution
     visitExportNamedDeclration(pNode) {
       this.pushImportExportSource(pNode);
-      return super.visitExportNamedDeclration(pNode);
+      /* c8 ignore start */
+      // @ts-ignore
+      if (super.visitExportNamedDeclration) {
+        // @ts-ignore
+        return super.visitExportNamedDeclration(pNode);
+      } else {
+        /* c8 ignore stop */
+        return super.visitExportNamedDeclaration(pNode);
+      }
     }
     /* c8 ignore start */
     visitExportNamedDeclaration(pNode) {
@@ -147,11 +191,11 @@ if (VisitorModule) {
         this.lResult.push({
           module: pryStringsFromArguments(pNode.arguments),
 
-          ...(pNode.callee.value === "import"
+          ...(isImportCallExpression(pNode)
             ? { moduleSystem: "es6", dynamic: true }
             : { moduleSystem: "cjs", dynamic: false }),
 
-          ...(["require", "import"].includes(pNode.callee.value)
+          ...(isNonExoticallyRequiredExpression(pNode)
             ? { exoticallyRequired: false }
             : { exoticallyRequired: true, exoticRequire: pNode.callee.value }),
         });

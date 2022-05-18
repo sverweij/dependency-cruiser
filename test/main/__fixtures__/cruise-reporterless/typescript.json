@@ -1,0 +1,388 @@
+[
+  {
+    "title": "recursive on typescript modules",
+    "input": {
+      "fileName": "test/main/__mocks__/cruise-reporterless/typescript/index.ts",
+      "options": {
+        "tsPreCompilationDeps": true
+      }
+    },
+    "expected": [
+      {
+        "source": "test/main/__mocks__/cruise-reporterless/typescript/index.ts",
+        "orphan": false,
+        "dependencies": [
+          {
+            "resolved": "test/main/__mocks__/cruise-reporterless/typescript/javascriptThing.js",
+            "coreModule": false,
+            "dependencyTypes": ["local"],
+            "dynamic": false,
+            "followable": true,
+            "exoticallyRequired": false,
+            "matchesDoNotFollow": false,
+            "couldNotResolve": false,
+            "module": "./javascriptThing",
+            "moduleSystem": "es6",
+            "valid": true,
+            "circular": false
+          },
+          {
+            "resolved": "test/main/__mocks__/cruise-reporterless/typescript/sub/index.ts",
+            "coreModule": false,
+            "dependencyTypes": ["local"],
+            "dynamic": false,
+            "followable": true,
+            "exoticallyRequired": false,
+            "matchesDoNotFollow": false,
+            "couldNotResolve": false,
+            "module": "./sub",
+            "moduleSystem": "es6",
+            "valid": true,
+            "circular": false
+          },
+          {
+            "resolved": "test/main/__mocks__/cruise-reporterless/typescript/sub/kaching.ts",
+            "coreModule": false,
+            "dependencyTypes": ["local"],
+            "dynamic": false,
+            "followable": true,
+            "exoticallyRequired": false,
+            "matchesDoNotFollow": false,
+            "couldNotResolve": false,
+            "module": "./sub/kaching",
+            "moduleSystem": "es6",
+            "valid": true,
+            "circular": false
+          },
+          {
+            "resolved": "test/main/__mocks__/cruise-reporterless/typescript/sub/willBeReExported.ts",
+            "coreModule": false,
+            "dependencyTypes": ["local"],
+            "dynamic": false,
+            "followable": true,
+            "exoticallyRequired": false,
+            "matchesDoNotFollow": false,
+            "couldNotResolve": false,
+            "module": "./sub/willBeReExported",
+            "moduleSystem": "es6",
+            "valid": true,
+            "circular": false
+          },
+          {
+            "resolved": "fs",
+            "coreModule": true,
+            "dependencyTypes": ["core"],
+            "dynamic": false,
+            "followable": false,
+            "exoticallyRequired": false,
+            "matchesDoNotFollow": false,
+            "couldNotResolve": false,
+            "module": "fs",
+            "moduleSystem": "cjs",
+            "valid": true,
+            "circular": false
+          },
+          {
+            "resolved": "path",
+            "coreModule": true,
+            "dependencyTypes": ["core"],
+            "dynamic": false,
+            "followable": false,
+            "exoticallyRequired": false,
+            "matchesDoNotFollow": false,
+            "couldNotResolve": false,
+            "module": "path",
+            "moduleSystem": "es6",
+            "valid": true,
+            "circular": false
+          }
+        ],
+        "dependents": [],
+        "valid": true
+      },
+      {
+        "source": "fs",
+        "followable": false,
+        "matchesDoNotFollow": false,
+        "coreModule": true,
+        "couldNotResolve": false,
+        "dependencyTypes": ["core"],
+        "orphan": false,
+        "dependencies": [],
+        "dependents": [
+          "test/main/__mocks__/cruise-reporterless/typescript/index.ts"
+        ],
+        "valid": true
+      },
+      {
+        "source": "path",
+        "followable": false,
+        "matchesDoNotFollow": false,
+        "coreModule": true,
+        "couldNotResolve": false,
+        "dependencyTypes": ["core"],
+        "orphan": false,
+        "dependencies": [],
+        "dependents": [
+          "test/main/__mocks__/cruise-reporterless/typescript/index.ts"
+        ],
+        "valid": true
+      },
+      {
+        "source": "test/main/__mocks__/cruise-reporterless/typescript/javascriptThing.js",
+        "orphan": false,
+        "dependencies": [],
+        "dependents": [
+          "test/main/__mocks__/cruise-reporterless/typescript/index.ts"
+        ],
+        "valid": true
+      },
+      {
+        "source": "test/main/__mocks__/cruise-reporterless/typescript/sub/index.ts",
+        "orphan": false,
+        "dependencies": [
+          {
+            "resolved": "test/main/__mocks__/cruise-reporterless/typescript/sub/willBeReExported.ts",
+            "coreModule": false,
+            "dependencyTypes": ["local"],
+            "dynamic": false,
+            "followable": true,
+            "exoticallyRequired": false,
+            "matchesDoNotFollow": false,
+            "couldNotResolve": false,
+            "module": "./willBeReExported",
+            "moduleSystem": "es6",
+            "valid": true,
+            "circular": false
+          }
+        ],
+        "dependents": [
+          "test/main/__mocks__/cruise-reporterless/typescript/index.ts"
+        ],
+        "valid": true
+      },
+      {
+        "source": "test/main/__mocks__/cruise-reporterless/typescript/sub/willBeReExported.ts",
+        "orphan": false,
+        "dependencies": [],
+        "dependents": [
+          "test/main/__mocks__/cruise-reporterless/typescript/index.ts",
+          "test/main/__mocks__/cruise-reporterless/typescript/sub/index.ts"
+        ],
+        "valid": true
+      },
+      {
+        "source": "test/main/__mocks__/cruise-reporterless/typescript/sub/kaching.ts",
+        "orphan": false,
+        "dependencies": [],
+        "dependents": [
+          "test/main/__mocks__/cruise-reporterless/typescript/index.ts"
+        ],
+        "valid": true
+      }
+    ]
+  },
+  {
+    "title": "also detect dependencies on typescript types (with --ts-pre-compilation-deps)",
+    "input": {
+      "fileName": "test/main/__mocks__/cruise-reporterless/typescript-circular-with-types/A.ts",
+      "options": {
+        "tsPreCompilationDeps": true
+      }
+    },
+    "expected": [
+      {
+        "source": "test/main/__mocks__/cruise-reporterless/typescript-circular-with-types/A.ts",
+        "orphan": false,
+        "dependencies": [
+          {
+            "resolved": "test/main/__mocks__/cruise-reporterless/typescript-circular-with-types/B.ts",
+            "coreModule": false,
+            "dependencyTypes": ["local"],
+            "dynamic": false,
+            "followable": true,
+            "exoticallyRequired": false,
+            "matchesDoNotFollow": false,
+            "couldNotResolve": false,
+            "module": "./B",
+            "moduleSystem": "es6",
+            "valid": true,
+            "circular": true,
+            "cycle": [
+              "test/main/__mocks__/cruise-reporterless/typescript-circular-with-types/B.ts",
+              "test/main/__mocks__/cruise-reporterless/typescript-circular-with-types/A.ts"
+            ]
+          }
+        ],
+        "dependents": [
+          "test/main/__mocks__/cruise-reporterless/typescript-circular-with-types/B.ts"
+        ],
+        "valid": true
+      },
+      {
+        "source": "test/main/__mocks__/cruise-reporterless/typescript-circular-with-types/B.ts",
+        "orphan": false,
+        "dependencies": [
+          {
+            "resolved": "test/main/__mocks__/cruise-reporterless/typescript-circular-with-types/A.ts",
+            "coreModule": false,
+            "dependencyTypes": ["local"],
+            "dynamic": false,
+            "followable": true,
+            "exoticallyRequired": false,
+            "matchesDoNotFollow": false,
+            "couldNotResolve": false,
+            "module": "./A",
+            "moduleSystem": "es6",
+            "valid": true,
+            "circular": true,
+            "cycle": [
+              "test/main/__mocks__/cruise-reporterless/typescript-circular-with-types/A.ts",
+              "test/main/__mocks__/cruise-reporterless/typescript-circular-with-types/B.ts"
+            ]
+          }
+        ],
+        "dependents": [
+          "test/main/__mocks__/cruise-reporterless/typescript-circular-with-types/A.ts"
+        ],
+        "valid": true
+      }
+    ]
+  },
+  {
+    "title": "also detect dependencies on modules that aren't used (with --ts-pre-compilation-deps)",
+    "input": {
+      "fileName": "test/main/__mocks__/cruise-reporterless/typescript-unused-dependencies/a.ts",
+      "options": {
+        "tsPreCompilationDeps": true
+      }
+    },
+    "expected": [
+      {
+        "source": "test/main/__mocks__/cruise-reporterless/typescript-unused-dependencies/a.ts",
+        "orphan": false,
+        "dependencies": [
+          {
+            "resolved": "test/main/__mocks__/cruise-reporterless/typescript-unused-dependencies/b.ts",
+            "coreModule": false,
+            "followable": true,
+            "exoticallyRequired": false,
+            "couldNotResolve": false,
+            "dependencyTypes": ["local"],
+            "dynamic": false,
+            "circular": false,
+            "module": "./b",
+            "moduleSystem": "es6",
+            "matchesDoNotFollow": false,
+            "valid": true
+          },
+          {
+            "resolved": "test/main/__mocks__/cruise-reporterless/typescript-unused-dependencies/c.ts",
+            "coreModule": false,
+            "followable": true,
+            "exoticallyRequired": false,
+            "couldNotResolve": false,
+            "dependencyTypes": ["local"],
+            "dynamic": false,
+            "circular": false,
+            "module": "./c",
+            "moduleSystem": "es6",
+            "matchesDoNotFollow": false,
+            "valid": true
+          }
+        ],
+        "dependents": [],
+        "valid": true
+      },
+      {
+        "source": "test/main/__mocks__/cruise-reporterless/typescript-unused-dependencies/b.ts",
+        "orphan": false,
+        "dependencies": [
+          {
+            "resolved": "test/main/__mocks__/cruise-reporterless/typescript-unused-dependencies/c.ts",
+            "coreModule": false,
+            "followable": true,
+            "exoticallyRequired": false,
+            "couldNotResolve": false,
+            "dependencyTypes": ["local"],
+            "dynamic": false,
+            "circular": false,
+            "module": "./c",
+            "moduleSystem": "es6",
+            "matchesDoNotFollow": false,
+            "valid": true
+          }
+        ],
+        "dependents": [
+          "test/main/__mocks__/cruise-reporterless/typescript-unused-dependencies/a.ts"
+        ],
+        "valid": true
+      },
+      {
+        "source": "test/main/__mocks__/cruise-reporterless/typescript-unused-dependencies/c.ts",
+        "orphan": false,
+        "dependencies": [],
+        "dependents": [
+          "test/main/__mocks__/cruise-reporterless/typescript-unused-dependencies/a.ts",
+          "test/main/__mocks__/cruise-reporterless/typescript-unused-dependencies/b.ts"
+        ],
+        "valid": true
+      }
+    ]
+  },
+  {
+    "title": "don't detect dependencies on typescript types (without --ts-pre-compilation-deps)",
+    "input": {
+      "fileName": "test/main/__mocks__/cruise-reporterless/typescript-circular-with-types/A.ts",
+      "options": {}
+    },
+    "expected": [
+      {
+        "source": "test/main/__mocks__/cruise-reporterless/typescript-circular-with-types/A.ts",
+        "orphan": false,
+        "dependencies": [
+          {
+            "resolved": "test/main/__mocks__/cruise-reporterless/typescript-circular-with-types/B.ts",
+            "coreModule": false,
+            "dependencyTypes": ["local"],
+            "dynamic": false,
+            "followable": true,
+            "exoticallyRequired": false,
+            "matchesDoNotFollow": false,
+            "couldNotResolve": false,
+            "module": "./B",
+            "moduleSystem": "es6",
+            "valid": true,
+            "circular": false
+          }
+        ],
+        "dependents": [],
+        "valid": true
+      },
+      {
+        "source": "test/main/__mocks__/cruise-reporterless/typescript-circular-with-types/B.ts",
+        "orphan": false,
+        "dependencies": [],
+        "dependents": [
+          "test/main/__mocks__/cruise-reporterless/typescript-circular-with-types/A.ts"
+        ],
+        "valid": true
+      }
+    ]
+  },
+  {
+    "title": "don't detect dependencies on modules that aren't used (with --ts-pre-compilation-deps)",
+    "input": {
+      "fileName": "test/main/__mocks__/cruise-reporterless/typescript-unused-dependencies/a.ts"
+    },
+    "expected": [
+      {
+        "source": "test/main/__mocks__/cruise-reporterless/typescript-unused-dependencies/a.ts",
+        "orphan": true,
+        "dependencies": [],
+        "dependents": [],
+        "valid": true
+      }
+    ]
+  }
+]

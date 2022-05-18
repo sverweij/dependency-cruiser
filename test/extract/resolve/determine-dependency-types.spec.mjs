@@ -5,7 +5,7 @@ import determineDependencyTypes from "../../../src/extract/resolve/determine-dep
 
 const __dirname = fileURLToPath(new URL(".", import.meta.url));
 
-describe("extract/resolve/determineDependencyTypes - determine dependencyTypes", () => {
+describe("[U] extract/resolve/determineDependencyTypes - determine dependencyTypes", () => {
   it("sorts local dependencies into 'local'", () => {
     expect(
       determineDependencyTypes(
@@ -24,6 +24,7 @@ describe("extract/resolve/determineDependencyTypes - determine dependencyTypes",
         {
           couldNotResolve: false,
           resolved: "fs",
+          coreModule: true,
         },
         "fs"
       )
@@ -307,5 +308,23 @@ describe("extract/resolve/determineDependencyTypes - determine dependencyTypes",
         }
       )
     ).to.deep.equal(["undetermined"]);
+  });
+
+  it("classifies a type only import as a type-only dependency", () => {
+    expect(
+      determineDependencyTypes(
+        {
+          dependencyTypes: ["type-only"],
+          couldNotResolve: false,
+          resolved: "src/bla/something-local",
+        },
+        "./something-local",
+        {},
+        "whatever",
+        {
+          modules: ["node_modules", "src"],
+        }
+      )
+    ).to.deep.equal(["local", "type-only"]);
   });
 });

@@ -1,7 +1,7 @@
 import { expect } from "chai";
 import detectPrecompilationNess from "../../../src/extract/utl/detect-pre-compilation-ness.js";
 
-describe("extract/utl/detectPreCompilationNess", () => {
+describe("[U] extract/utl/detectPreCompilationNess", () => {
   it("empty dependency lists yield an empty one", () => {
     expect(detectPrecompilationNess([], [])).to.deep.equal([]);
   });

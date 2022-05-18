@@ -6,17 +6,17 @@ import { createRequireJSON } from "../backwards.utl.mjs";
 
 const requireJSON = createRequireJSON(import.meta.url);
 
-const esOut = requireJSON("./fixtures/dynamic-imports/es/output.json");
-const tsOut = requireJSON("./fixtures/dynamic-imports/typescript/output.json");
+const esOut = requireJSON("./__mocks__/dynamic-imports/es/output.json");
+const tsOut = requireJSON("./__mocks__/dynamic-imports/typescript/output.json");
 const tsOutpre = requireJSON(
-  "./fixtures/dynamic-imports/typescript/output-pre-compilation-deps.json"
+  "./__mocks__/dynamic-imports/typescript/output-pre-compilation-deps.json"
 );
 
 use(chaiJSONSchema);
 
 const WORKING_DIRECTORY = process.cwd();
 
-describe("main.cruise - dynamic imports", () => {
+describe("[E] main.cruise - dynamic imports", () => {
   beforeEach("reset current wd", () => {
     process.chdir(WORKING_DIRECTORY);
   });
@@ -26,7 +26,7 @@ describe("main.cruise - dynamic imports", () => {
   });
 
   it("detects dynamic dependencies in es", () => {
-    process.chdir("test/main/fixtures/dynamic-imports/es");
+    process.chdir("test/main/__mocks__/dynamic-imports/es");
     const lResult = main.cruise(
       ["src"],
       {
@@ -61,7 +61,7 @@ describe("main.cruise - dynamic imports", () => {
   });
 
   it("detects dynamic dependencies in typescript", () => {
-    process.chdir("test/main/fixtures/dynamic-imports/typescript");
+    process.chdir("test/main/__mocks__/dynamic-imports/typescript");
     const lResult = main.cruise(
       ["src"],
       {
@@ -96,7 +96,7 @@ describe("main.cruise - dynamic imports", () => {
   });
 
   it("detects dynamic dependencies in typescript when using tsPreCompilationDeps", () => {
-    process.chdir("test/main/fixtures/dynamic-imports/typescript");
+    process.chdir("test/main/__mocks__/dynamic-imports/typescript");
     const lResult = main.cruise(
       ["src"],
       {

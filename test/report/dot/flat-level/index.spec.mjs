@@ -8,13 +8,13 @@ import dot from "../../../../src/report/dot/index.js";
 const render = dot("flat");
 const requireJSON = createRequireJSON(import.meta.url);
 
-const deps = requireJSON("./mocks/dependency-cruiser-2020-01-25.json");
-const orphans = requireJSON("./mocks/orphans.json");
-const rxjs = requireJSON("./mocks/rxjs.json");
+const deps = requireJSON("./__mocks__/dependency-cruiser-2020-01-25.json");
+const orphans = requireJSON("./__mocks__/orphans.json");
+const rxjs = requireJSON("./__mocks__/rxjs.json");
 
 const __dirname = fileURLToPath(new URL(".", import.meta.url));
 
-const mockFolder = join(__dirname, "mocks");
+const mockFolder = join(__dirname, "__mocks__");
 const flatDot = readFileSync(
   join(mockFolder, "dependency-cruiser-2020-01-25.dot"),
   "utf8"
@@ -22,7 +22,7 @@ const flatDot = readFileSync(
 const flatOrphansDot = readFileSync(join(mockFolder, "orphans.dot"), "utf8");
 const flatRxJs = readFileSync(join(mockFolder, "rxjs.dot"), "utf8");
 
-describe("report/dot/flat-level reporter", () => {
+describe("[I] report/dot/flat-level reporter", () => {
   it("consolidates to flat levels", () => {
     const lReturnValue = render(deps);
 

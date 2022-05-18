@@ -7,9 +7,9 @@ import baselineSchema from "../../../src/schema/baseline-violations.schema.js";
 const requireJSON = createRequireJSON(import.meta.url);
 use(chaiJSONSchema);
 
-describe("report/baseline", () => {
+describe("[I] report/baseline", () => {
   it("returns an empty array when there's no violations", () => {
-    const lInput = requireJSON("./dc-result-no-violations.json");
+    const lInput = requireJSON("./__mocks__/dc-result-no-violations.json");
     const lExpected = [];
     const lResult = baseline(lInput);
 
@@ -19,8 +19,8 @@ describe("report/baseline", () => {
   });
 
   it("returns the violations in a json object", () => {
-    const lInput = requireJSON("./dc-result-with-violations.json");
-    const lExpected = requireJSON("./baseline-result.json");
+    const lInput = requireJSON("./__mocks__/dc-result-with-violations.json");
+    const lExpected = requireJSON("./__fixtures__/baseline-result.json");
     const lResult = baseline(lInput);
 
     expect(JSON.parse(lResult.output)).to.deep.equal(lExpected);

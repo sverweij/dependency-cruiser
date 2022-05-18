@@ -1,7 +1,7 @@
 import { expect } from "chai";
 import extractWithSwc from "./extract-with-swc.utl.mjs";
 
-describe("ast-extractors/extract-swc - regular commonjs require", () => {
+describe("[U] ast-extractors/extract-swc - regular commonjs require", () => {
   it("extracts require of a module that uses an export-equals'", () => {
     expect(
       extractWithSwc(

@@ -1,7 +1,0 @@
-strict digraph "dependency-cruiser output"{
-    
-    
-    
-
-    "remi.js" [label="remi.js" tooltip="no-orphans" URL="remi.js" ]
-}

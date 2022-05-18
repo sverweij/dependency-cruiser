@@ -1,4 +1,4 @@
-const { findModuleByName } = require("../utl");
+const { findModuleByName } = require("../module-utl");
 
 function getPath(pGraph, pFrom, pTo, pVisited = new Set()) {
   let lReturnValue = [];

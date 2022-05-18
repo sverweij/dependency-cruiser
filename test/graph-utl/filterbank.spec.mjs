@@ -50,7 +50,7 @@ const MODULES = [
   },
 ];
 
-describe("utl/filterbank - null's, naughts, and zeros", () => {
+describe("[U] graph-utl/filterbank - null's, naughts, and zeros", () => {
   it("returns the input when no filter passed ", () => {
     expect(filterbank.applyFilters(MODULES)).to.deep.equal(MODULES);
   });
@@ -82,7 +82,7 @@ describe("utl/filterbank - null's, naughts, and zeros", () => {
   });
 });
 
-describe("utl/filterbank - ", () => {
+describe("[U] graph-utl/filterbank - ", () => {
   it("returns the input without excluded modules when exclude is passed ", () => {
     expect(
       filterbank.applyFilters(MODULES, { exclude: { path: "^excluded" } })

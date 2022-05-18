@@ -103,6 +103,15 @@ export default {
             $ref: "#/definitions/DependencyTypeType",
           },
         },
+        dependencyTypesNot: {
+          type: "array",
+          description:
+            "Whether or not to match modules NOT of any of these types (leaving out " +
+            "matches none of them)",
+          items: {
+            $ref: "#/definitions/DependencyTypeType",
+          },
+        },
         moreThanOneDependencyType: {
           type: "boolean",
           description:
@@ -121,6 +130,50 @@ export default {
             "Whether or not to match modules that were NOT released under one of " +
             'the mentioned licenses. E.g. to flag everyting non MIT use "MIT" here',
           $ref: "#/definitions/REAsStringsType",
+        },
+        via: {
+          description:
+            "For circular dependencies - whether or not to match cycles that include " +
+            "some modules with this regular expression. If you want to match cycles that " +
+            "_exclusively_ include modules satisfying the regular expression use the viaOnly " +
+            "restriction." +
+            "E.g. to allow all cycles, " +
+            "except when they go through one specific module. Typically to temporarily " +
+            "disallow some cycles with a lower severity - setting up a rule with a via " +
+            "that ignores them in an 'allowed' section.",
+          $ref: "#/definitions/REAsStringsType",
+        },
+        viaOnly: {
+          description:
+            "For circular dependencies - whether or not to match cycles that include " +
+            "exclusively modules with this regular expression. This is different from " +
+            "the regular via that already mathces when only some of the modules in the " +
+            "cycle satisfy the regular expression",
+          $ref: "#/definitions/REAsStringsType",
+        },
+        viaNot: {
+          description:
+            "For circular dependencies - whether or not to match cycles that include " +
+            "_only_ modules that don't satisfy this regular expression. E.g. to disallow all cycles, " +
+            "except when they go through one specific module. Typically to temporarily " +
+            "allow some cycles until they're removed.",
+          $ref: "#/definitions/REAsStringsType",
+        },
+        viaSomeNot: {
+          description:
+            "For circular dependencies - whether or not to match cycles that include " +
+            "_some_ modules that don't satisfy this regular expression. ",
+          $ref: "#/definitions/REAsStringsType",
+        },
+        moreUnstable: {
+          type: "boolean",
+          description:
+            "When set to true moreUnstable matches for any dependency that has a higher" +
+            "Instability than the module that depends on it. When set to false it matches" +
+            "when the opposite is true; the dependency has an equal or lower Instability." +
+            "This attribute is useful when you want to check against Robert C. Martin's" +
+            "stable dependency principle. See online documentation for examples and details." +
+            "Leave this out when you don't care either way.",
         },
       },
     },

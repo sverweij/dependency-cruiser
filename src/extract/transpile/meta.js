@@ -39,6 +39,7 @@ const TRANSPILER2WRAPPER = {
   swc,
   typescript: typeScriptWrap,
   "vue-template-compiler": vueWrap,
+  "@vue/compiler-sfc": vueWrap,
 };
 
 const BABELEABLE_EXTENSIONS = [
@@ -94,7 +95,7 @@ module.exports.getWrapper = (pExtension, pTranspilerOptions) => {
  * all supported extensions and whether or not it is supported
  * in the current environment
  *
- * @type {string[]}
+ * @type {IAvailableExtension[]}
  */
 module.exports.allExtensions = Object.keys(EXTENSION2WRAPPER).map(
   (pExtension) => ({

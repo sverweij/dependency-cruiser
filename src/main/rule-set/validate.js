@@ -33,6 +33,10 @@ function checkRuleSafety(pRule) {
     { section: "to", condition: "pathNot" },
     { section: "to", condition: "license" },
     { section: "to", condition: "licenseNot" },
+    { section: "to", condition: "via" },
+    { section: "to", condition: "viaNot" },
+    { section: "to", condition: "viaOnly" },
+    { section: "to", condition: "viaSomeNot" },
   ];
 
   if (
@@ -58,7 +62,7 @@ function checkRuleSafety(pRule) {
  * - the ruleset adheres to the [config json schema](../../schema/configuration.schema.json)
  * - any regular expression in the rule set is 'safe' (~= won't be too slow)
  *
- * @param  {any} pConfiguration The configuration to validate
+ * @param  {import("../../../types/configuration").IConfiguration} pConfiguration The configuration to validate
  * @return {import("../../../types/configuration").IConfiguration}  The configuration as passed
  * @throws {Error}                 An error with the reason for the error as
  *                                 a message

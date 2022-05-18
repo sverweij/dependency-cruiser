@@ -1,0 +1,16 @@
+strict digraph "dependency-cruiser output"{
+    
+    
+    
+
+    subgraph "cluster_src" {label="src" "src/coffee.coffee" [label=<coffee.coffee> tooltip="coffee.coffee" URL="src/coffee.coffee" ] }
+    subgraph "cluster_src" {label="src" "src/javascript.js" [label=<javascript.js> tooltip="javascript.js" URL="src/javascript.js" ] }
+    subgraph "cluster_src" {label="src" "src/json.json" [label=<json.json> tooltip="json.json" URL="src/json.json" ] }
+    subgraph "cluster_src" {label="src" "src/litcoffee.litcoffee" [label=<litcoffee.litcoffee> tooltip="litcoffee.litcoffee" URL="src/litcoffee.litcoffee" ] }
+    subgraph "cluster_src" {label="src" "src/litcoffeemarkdown.coffee.md" [label=<litcoffeemarkdown.coffee.md> tooltip="litcoffeemarkdown.coffee.md" URL="src/litcoffeemarkdown.coffee.md" ] }
+    subgraph "cluster_src" {label="src" "src/reactthing.cjsx" [label=<reactthing.cjsx> tooltip="reactthing.cjsx" URL="src/reactthing.cjsx" ] }
+    subgraph "cluster_src" {label="src" "src/reactthing.csx" [label=<reactthing.csx> tooltip="reactthing.csx" URL="src/reactthing.csx" ] }
+    subgraph "cluster_src" {label="src" "src/reactthing.jsx" [label=<reactthing.jsx> tooltip="reactthing.jsx" URL="src/reactthing.jsx" ] }
+    subgraph "cluster_src" {label="src" "src/reactthing.tsx" [label=<reactthing.tsx> tooltip="reactthing.tsx" URL="src/reactthing.tsx" ] }
+    subgraph "cluster_src" {label="src" "src/typescript.ts" [label=<typescript.ts> tooltip="typescript.ts" URL="src/typescript.ts" ] }
+}

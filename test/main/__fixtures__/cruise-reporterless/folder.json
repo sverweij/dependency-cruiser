@@ -1,0 +1,892 @@
+[
+  {
+    "title": "folder rule",
+    "input": {
+      "fileName": "test/main/__mocks__/cruise-reporterless/folder",
+      "options": {
+        "ruleSet": {
+          "forbidden": [
+            {
+              "name": "sdp",
+              "scope": "folder",
+              "from": {},
+              "to": {
+                "moreUnstable": true
+              }
+            }
+          ]
+        }
+      }
+    },
+    "expected": [
+      {
+        "source": "test/main/__mocks__/cruise-reporterless/folder/stable/index.js",
+        "dependencies": [
+          {
+            "module": "../unstable/index.js",
+            "moduleSystem": "cjs",
+            "dynamic": false,
+            "exoticallyRequired": false,
+            "resolved": "test/main/__mocks__/cruise-reporterless/folder/unstable/index.js",
+            "coreModule": false,
+            "followable": true,
+            "couldNotResolve": false,
+            "dependencyTypes": ["local"],
+            "matchesDoNotFollow": false,
+            "circular": false,
+            "instability": 0.875,
+            "valid": true
+          }
+        ],
+        "dependents": [],
+        "orphan": false,
+        "instability": 1,
+        "valid": true
+      },
+      {
+        "source": "test/main/__mocks__/cruise-reporterless/folder/unstable/index.js",
+        "dependencies": [
+          {
+            "module": "../stable/utl",
+            "moduleSystem": "cjs",
+            "dynamic": false,
+            "exoticallyRequired": false,
+            "resolved": "test/main/__mocks__/cruise-reporterless/folder/stable/utl.js",
+            "coreModule": false,
+            "followable": true,
+            "couldNotResolve": false,
+            "dependencyTypes": ["local"],
+            "matchesDoNotFollow": false,
+            "circular": false,
+            "instability": 0,
+            "valid": true
+          },
+          {
+            "module": "aap",
+            "moduleSystem": "cjs",
+            "dynamic": false,
+            "exoticallyRequired": false,
+            "resolved": "aap",
+            "coreModule": false,
+            "followable": false,
+            "couldNotResolve": true,
+            "dependencyTypes": ["unknown"],
+            "matchesDoNotFollow": false,
+            "circular": false,
+            "instability": 0,
+            "valid": true
+          },
+          {
+            "module": "jet",
+            "moduleSystem": "cjs",
+            "dynamic": false,
+            "exoticallyRequired": false,
+            "resolved": "jet",
+            "coreModule": false,
+            "followable": false,
+            "couldNotResolve": true,
+            "dependencyTypes": ["unknown"],
+            "matchesDoNotFollow": false,
+            "circular": false,
+            "instability": 0,
+            "valid": true
+          },
+          {
+            "module": "mies",
+            "moduleSystem": "cjs",
+            "dynamic": false,
+            "exoticallyRequired": false,
+            "resolved": "mies",
+            "coreModule": false,
+            "followable": false,
+            "couldNotResolve": true,
+            "dependencyTypes": ["unknown"],
+            "matchesDoNotFollow": false,
+            "circular": false,
+            "instability": 0,
+            "valid": true
+          },
+          {
+            "module": "noot",
+            "moduleSystem": "cjs",
+            "dynamic": false,
+            "exoticallyRequired": false,
+            "resolved": "noot",
+            "coreModule": false,
+            "followable": false,
+            "couldNotResolve": true,
+            "dependencyTypes": ["unknown"],
+            "matchesDoNotFollow": false,
+            "circular": false,
+            "instability": 0,
+            "valid": true
+          },
+          {
+            "module": "wim",
+            "moduleSystem": "cjs",
+            "dynamic": false,
+            "exoticallyRequired": false,
+            "resolved": "wim",
+            "coreModule": false,
+            "followable": false,
+            "couldNotResolve": true,
+            "dependencyTypes": ["unknown"],
+            "matchesDoNotFollow": false,
+            "circular": false,
+            "instability": 0,
+            "valid": true
+          },
+          {
+            "module": "zus",
+            "moduleSystem": "cjs",
+            "dynamic": false,
+            "exoticallyRequired": false,
+            "resolved": "zus",
+            "coreModule": false,
+            "followable": false,
+            "couldNotResolve": true,
+            "dependencyTypes": ["unknown"],
+            "matchesDoNotFollow": false,
+            "circular": false,
+            "instability": 0,
+            "valid": true
+          }
+        ],
+        "dependents": [
+          "test/main/__mocks__/cruise-reporterless/folder/stable/index.js"
+        ],
+        "orphan": false,
+        "instability": 0.875,
+        "valid": true
+      },
+      {
+        "source": "aap",
+        "followable": false,
+        "coreModule": false,
+        "couldNotResolve": true,
+        "matchesDoNotFollow": false,
+        "dependencyTypes": ["unknown"],
+        "dependencies": [],
+        "dependents": [
+          "test/main/__mocks__/cruise-reporterless/folder/unstable/index.js"
+        ],
+        "orphan": false,
+        "valid": true
+      },
+      {
+        "source": "jet",
+        "followable": false,
+        "coreModule": false,
+        "couldNotResolve": true,
+        "matchesDoNotFollow": false,
+        "dependencyTypes": ["unknown"],
+        "dependencies": [],
+        "dependents": [
+          "test/main/__mocks__/cruise-reporterless/folder/unstable/index.js"
+        ],
+        "orphan": false,
+        "valid": true
+      },
+      {
+        "source": "mies",
+        "followable": false,
+        "coreModule": false,
+        "couldNotResolve": true,
+        "matchesDoNotFollow": false,
+        "dependencyTypes": ["unknown"],
+        "dependencies": [],
+        "dependents": [
+          "test/main/__mocks__/cruise-reporterless/folder/unstable/index.js"
+        ],
+        "orphan": false,
+        "valid": true
+      },
+      {
+        "source": "noot",
+        "followable": false,
+        "coreModule": false,
+        "couldNotResolve": true,
+        "matchesDoNotFollow": false,
+        "dependencyTypes": ["unknown"],
+        "dependencies": [],
+        "dependents": [
+          "test/main/__mocks__/cruise-reporterless/folder/unstable/index.js"
+        ],
+        "orphan": false,
+        "valid": true
+      },
+      {
+        "source": "wim",
+        "followable": false,
+        "coreModule": false,
+        "couldNotResolve": true,
+        "matchesDoNotFollow": false,
+        "dependencyTypes": ["unknown"],
+        "dependencies": [],
+        "dependents": [
+          "test/main/__mocks__/cruise-reporterless/folder/unstable/index.js"
+        ],
+        "orphan": false,
+        "valid": true
+      },
+      {
+        "source": "zus",
+        "followable": false,
+        "coreModule": false,
+        "couldNotResolve": true,
+        "matchesDoNotFollow": false,
+        "dependencyTypes": ["unknown"],
+        "dependencies": [],
+        "dependents": [
+          "test/main/__mocks__/cruise-reporterless/folder/unstable/index.js"
+        ],
+        "orphan": false,
+        "valid": true
+      },
+      {
+        "source": "test/main/__mocks__/cruise-reporterless/folder/stable/utl.js",
+        "dependencies": [],
+        "dependents": [
+          "test/main/__mocks__/cruise-reporterless/folder/unstable/index.js"
+        ],
+        "orphan": false,
+        "instability": 0,
+        "valid": true
+      }
+    ],
+    "folders": [
+      {
+        "name": "test",
+        "dependencies": [
+          {
+            "name": "aap",
+            "instability": 0,
+            "valid": true
+          },
+          {
+            "name": "jet",
+            "instability": 0,
+            "valid": true
+          },
+          {
+            "name": "mies",
+            "instability": 0,
+            "valid": true
+          },
+          {
+            "name": "noot",
+            "instability": 0,
+            "valid": true
+          },
+          {
+            "name": "wim",
+            "instability": 0,
+            "valid": true
+          },
+          {
+            "name": "zus",
+            "instability": 0,
+            "valid": true
+          }
+        ],
+        "dependents": [],
+        "moduleCount": 3,
+        "afferentCouplings": 0,
+        "efferentCouplings": 6,
+        "instability": 1
+      },
+      {
+        "name": "test/main",
+        "dependencies": [
+          {
+            "name": "aap",
+            "instability": 0,
+            "valid": true
+          },
+          {
+            "name": "jet",
+            "instability": 0,
+            "valid": true
+          },
+          {
+            "name": "mies",
+            "instability": 0,
+            "valid": true
+          },
+          {
+            "name": "noot",
+            "instability": 0,
+            "valid": true
+          },
+          {
+            "name": "wim",
+            "instability": 0,
+            "valid": true
+          },
+          {
+            "name": "zus",
+            "instability": 0,
+            "valid": true
+          }
+        ],
+        "dependents": [],
+        "moduleCount": 3,
+        "afferentCouplings": 0,
+        "efferentCouplings": 6,
+        "instability": 1
+      },
+      {
+        "name": "test/main/__mocks__",
+        "dependencies": [
+          {
+            "name": "aap",
+            "instability": 0,
+            "valid": true
+          },
+          {
+            "name": "jet",
+            "instability": 0,
+            "valid": true
+          },
+          {
+            "name": "mies",
+            "instability": 0,
+            "valid": true
+          },
+          {
+            "name": "noot",
+            "instability": 0,
+            "valid": true
+          },
+          {
+            "name": "wim",
+            "instability": 0,
+            "valid": true
+          },
+          {
+            "name": "zus",
+            "instability": 0,
+            "valid": true
+          }
+        ],
+        "dependents": [],
+        "moduleCount": 3,
+        "afferentCouplings": 0,
+        "efferentCouplings": 6,
+        "instability": 1
+      },
+      {
+        "name": "test/main/__mocks__/cruise-reporterless",
+        "dependencies": [
+          {
+            "name": "aap",
+            "instability": 0,
+            "valid": true
+          },
+          {
+            "name": "jet",
+            "instability": 0,
+            "valid": true
+          },
+          {
+            "name": "mies",
+            "instability": 0,
+            "valid": true
+          },
+          {
+            "name": "noot",
+            "instability": 0,
+            "valid": true
+          },
+          {
+            "name": "wim",
+            "instability": 0,
+            "valid": true
+          },
+          {
+            "name": "zus",
+            "instability": 0,
+            "valid": true
+          }
+        ],
+        "dependents": [],
+        "moduleCount": 3,
+        "afferentCouplings": 0,
+        "efferentCouplings": 6,
+        "instability": 1
+      },
+      {
+        "name": "test/main/__mocks__/cruise-reporterless/folder",
+        "dependencies": [
+          {
+            "name": "aap",
+            "instability": 0,
+            "valid": true
+          },
+          {
+            "name": "jet",
+            "instability": 0,
+            "valid": true
+          },
+          {
+            "name": "mies",
+            "instability": 0,
+            "valid": true
+          },
+          {
+            "name": "noot",
+            "instability": 0,
+            "valid": true
+          },
+          {
+            "name": "wim",
+            "instability": 0,
+            "valid": true
+          },
+          {
+            "name": "zus",
+            "instability": 0,
+            "valid": true
+          }
+        ],
+        "dependents": [],
+        "moduleCount": 3,
+        "afferentCouplings": 0,
+        "efferentCouplings": 6,
+        "instability": 1
+      },
+      {
+        "name": "test/main/__mocks__/cruise-reporterless/folder/stable",
+        "dependencies": [
+          {
+            "name": "test/main/__mocks__/cruise-reporterless/folder/unstable",
+            "instability": 0.875,
+            "valid": false,
+            "rules": [
+              {
+                "severity": "warn",
+                "name": "sdp"
+              }
+            ]
+          }
+        ],
+        "dependents": [
+          {
+            "name": "test/main/__mocks__/cruise-reporterless/folder/unstable"
+          }
+        ],
+        "moduleCount": 2,
+        "afferentCouplings": 1,
+        "efferentCouplings": 1,
+        "instability": 0.5
+      },
+      {
+        "name": "test/main/__mocks__/cruise-reporterless/folder/unstable",
+        "dependencies": [
+          {
+            "name": "test/main/__mocks__/cruise-reporterless/folder/stable",
+            "instability": 0.5,
+            "valid": true
+          },
+          {
+            "name": "aap",
+            "instability": 0,
+            "valid": true
+          },
+          {
+            "name": "jet",
+            "instability": 0,
+            "valid": true
+          },
+          {
+            "name": "mies",
+            "instability": 0,
+            "valid": true
+          },
+          {
+            "name": "noot",
+            "instability": 0,
+            "valid": true
+          },
+          {
+            "name": "wim",
+            "instability": 0,
+            "valid": true
+          },
+          {
+            "name": "zus",
+            "instability": 0,
+            "valid": true
+          }
+        ],
+        "dependents": [
+          {
+            "name": "test/main/__mocks__/cruise-reporterless/folder/stable"
+          }
+        ],
+        "moduleCount": 1,
+        "afferentCouplings": 1,
+        "efferentCouplings": 7,
+        "instability": 0.875
+      }
+    ],
+    "expectedFolders": [
+      {
+        "name": "test",
+        "dependencies": [
+          {
+            "name": "aap",
+            "instability": 0,
+            "valid": true,
+            "circular": false
+          },
+          {
+            "name": "jet",
+            "instability": 0,
+            "valid": true,
+            "circular": false
+          },
+          {
+            "name": "mies",
+            "instability": 0,
+            "valid": true,
+            "circular": false
+          },
+          {
+            "name": "noot",
+            "instability": 0,
+            "valid": true,
+            "circular": false
+          },
+          {
+            "name": "wim",
+            "instability": 0,
+            "valid": true,
+            "circular": false
+          },
+          {
+            "name": "zus",
+            "instability": 0,
+            "valid": true,
+            "circular": false
+          }
+        ],
+        "dependents": [],
+        "moduleCount": 3,
+        "afferentCouplings": 0,
+        "efferentCouplings": 6,
+        "instability": 1
+      },
+      {
+        "name": "test/main",
+        "dependencies": [
+          {
+            "name": "aap",
+            "instability": 0,
+            "valid": true,
+            "circular": false
+          },
+          {
+            "name": "jet",
+            "instability": 0,
+            "valid": true,
+            "circular": false
+          },
+          {
+            "name": "mies",
+            "instability": 0,
+            "valid": true,
+            "circular": false
+          },
+          {
+            "name": "noot",
+            "instability": 0,
+            "valid": true,
+            "circular": false
+          },
+          {
+            "name": "wim",
+            "instability": 0,
+            "valid": true,
+            "circular": false
+          },
+          {
+            "name": "zus",
+            "instability": 0,
+            "valid": true,
+            "circular": false
+          }
+        ],
+        "dependents": [],
+        "moduleCount": 3,
+        "afferentCouplings": 0,
+        "efferentCouplings": 6,
+        "instability": 1
+      },
+      {
+        "name": "test/main/__mocks__",
+        "dependencies": [
+          {
+            "name": "aap",
+            "instability": 0,
+            "valid": true,
+            "circular": false
+          },
+          {
+            "name": "jet",
+            "instability": 0,
+            "valid": true,
+            "circular": false
+          },
+          {
+            "name": "mies",
+            "instability": 0,
+            "valid": true,
+            "circular": false
+          },
+          {
+            "name": "noot",
+            "instability": 0,
+            "valid": true,
+            "circular": false
+          },
+          {
+            "name": "wim",
+            "instability": 0,
+            "valid": true,
+            "circular": false
+          },
+          {
+            "name": "zus",
+            "instability": 0,
+            "valid": true,
+            "circular": false
+          }
+        ],
+        "dependents": [],
+        "moduleCount": 3,
+        "afferentCouplings": 0,
+        "efferentCouplings": 6,
+        "instability": 1
+      },
+      {
+        "name": "test/main/__mocks__/cruise-reporterless",
+        "dependencies": [
+          {
+            "name": "aap",
+            "instability": 0,
+            "valid": true,
+            "circular": false
+          },
+          {
+            "name": "jet",
+            "instability": 0,
+            "valid": true,
+            "circular": false
+          },
+          {
+            "name": "mies",
+            "instability": 0,
+            "valid": true,
+            "circular": false
+          },
+          {
+            "name": "noot",
+            "instability": 0,
+            "valid": true,
+            "circular": false
+          },
+          {
+            "name": "wim",
+            "instability": 0,
+            "valid": true,
+            "circular": false
+          },
+          {
+            "name": "zus",
+            "instability": 0,
+            "valid": true,
+            "circular": false
+          }
+        ],
+        "dependents": [],
+        "moduleCount": 3,
+        "afferentCouplings": 0,
+        "efferentCouplings": 6,
+        "instability": 1
+      },
+      {
+        "name": "test/main/__mocks__/cruise-reporterless/folder",
+        "dependencies": [
+          {
+            "name": "aap",
+            "instability": 0,
+            "valid": true,
+            "circular": false
+          },
+          {
+            "name": "jet",
+            "instability": 0,
+            "valid": true,
+            "circular": false
+          },
+          {
+            "name": "mies",
+            "instability": 0,
+            "valid": true,
+            "circular": false
+          },
+          {
+            "name": "noot",
+            "instability": 0,
+            "valid": true,
+            "circular": false
+          },
+          {
+            "name": "wim",
+            "instability": 0,
+            "valid": true,
+            "circular": false
+          },
+          {
+            "name": "zus",
+            "instability": 0,
+            "valid": true,
+            "circular": false
+          }
+        ],
+        "dependents": [],
+        "moduleCount": 3,
+        "afferentCouplings": 0,
+        "efferentCouplings": 6,
+        "instability": 1
+      },
+      {
+        "name": "test/main/__mocks__/cruise-reporterless/folder/stable",
+        "dependencies": [
+          {
+            "name": "test/main/__mocks__/cruise-reporterless/folder/unstable",
+            "instability": 0.875,
+            "circular": true,
+            "cycle": [
+              "test/main/__mocks__/cruise-reporterless/folder/unstable",
+              "test/main/__mocks__/cruise-reporterless/folder/stable"
+            ],
+            "valid": false,
+            "rules": [
+              {
+                "severity": "warn",
+                "name": "sdp"
+              }
+            ]
+          }
+        ],
+        "dependents": [
+          {
+            "name": "test/main/__mocks__/cruise-reporterless/folder/unstable"
+          }
+        ],
+        "moduleCount": 2,
+        "afferentCouplings": 1,
+        "efferentCouplings": 1,
+        "instability": 0.5
+      },
+      {
+        "name": "test/main/__mocks__/cruise-reporterless/folder/unstable",
+        "dependencies": [
+          {
+            "name": "test/main/__mocks__/cruise-reporterless/folder/stable",
+            "instability": 0.5,
+            "valid": true,
+            "circular": true,
+            "cycle": [
+              "test/main/__mocks__/cruise-reporterless/folder/stable",
+              "test/main/__mocks__/cruise-reporterless/folder/unstable"
+            ]
+          },
+          {
+            "name": "aap",
+            "instability": 0,
+            "valid": true,
+            "circular": false
+          },
+          {
+            "name": "jet",
+            "instability": 0,
+            "valid": true,
+            "circular": false
+          },
+          {
+            "name": "mies",
+            "instability": 0,
+            "valid": true,
+            "circular": false
+          },
+          {
+            "name": "noot",
+            "instability": 0,
+            "valid": true,
+            "circular": false
+          },
+          {
+            "name": "wim",
+            "instability": 0,
+            "valid": true,
+            "circular": false
+          },
+          {
+            "name": "zus",
+            "instability": 0,
+            "valid": true,
+            "circular": false
+          }
+        ],
+        "dependents": [
+          {
+            "name": "test/main/__mocks__/cruise-reporterless/folder/stable"
+          }
+        ],
+        "moduleCount": 1,
+        "afferentCouplings": 1,
+        "efferentCouplings": 7,
+        "instability": 0.875
+      },
+      {
+        "dependencies": [],
+        "dependents": [],
+        "moduleCount": -1,
+        "name": "aap"
+      },
+      {
+        "dependencies": [],
+        "dependents": [],
+        "moduleCount": -1,
+        "name": "jet"
+      },
+      {
+        "dependencies": [],
+        "dependents": [],
+        "moduleCount": -1,
+        "name": "mies"
+      },
+      {
+        "dependencies": [],
+        "dependents": [],
+        "moduleCount": -1,
+        "name": "noot"
+      },
+      {
+        "dependencies": [],
+        "dependents": [],
+        "moduleCount": -1,
+        "name": "wim"
+      },
+      {
+        "dependencies": [],
+        "dependents": [],
+        "moduleCount": -1,
+        "name": "zus"
+      }
+    ]
+  }
+]

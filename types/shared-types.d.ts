@@ -18,6 +18,7 @@ export type OutputType =
   | "teamcity"
   | "anon"
   | "text"
+  | "metrics"
   | string;
 
 export type SeverityType = "error" | "warn" | "info" | "ignore";
@@ -37,6 +38,16 @@ export type DependencyType =
   | "npm-peer"
   | "npm-unknown"
   | "undetermined"
-  | "unknown";
+  | "unknown"
+  | "type-only";
 
-export type ProtocolType = "data:" | "file:" | "node";
+export type ProtocolType = "data:" | "file:" | "node:";
+
+export type ViolationType =
+  | "dependency"
+  | "module"
+  | "cycle"
+  | "reachability"
+  | "instability";
+
+export type RuleScopeType = "module" | "folder";

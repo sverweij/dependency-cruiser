@@ -1,0 +1,66 @@
+[
+  {
+    "title": "can detect bundled dependencies",
+    "input": {
+      "fileName": "index.js",
+      "options": {
+        "moduleSystems": ["cjs"],
+        "baseDir": "test/main/__mocks__/cruise-reporterless/bundled-dependencies"
+      }
+    },
+    "expected": [
+      {
+        "source": "index.js",
+        "orphan": false,
+        "dependencies": [
+          {
+            "resolved": "node_modules/idontgetbundled/index.js",
+            "coreModule": false,
+            "followable": true,
+            "exoticallyRequired": false,
+            "matchesDoNotFollow": false,
+            "couldNotResolve": false,
+            "dependencyTypes": ["npm"],
+            "dynamic": false,
+            "circular": false,
+            "license": "MIT",
+            "module": "idontgetbundled",
+            "moduleSystem": "cjs",
+            "valid": true
+          },
+          {
+            "resolved": "node_modules/igetbundled/index.js",
+            "coreModule": false,
+            "followable": true,
+            "exoticallyRequired": false,
+            "matchesDoNotFollow": false,
+            "couldNotResolve": false,
+            "dependencyTypes": ["npm", "npm-bundled"],
+            "dynamic": false,
+            "circular": false,
+            "license": "MIT",
+            "module": "igetbundled",
+            "moduleSystem": "cjs",
+            "valid": true
+          }
+        ],
+        "dependents": [],
+        "valid": true
+      },
+      {
+        "source": "node_modules/idontgetbundled/index.js",
+        "orphan": false,
+        "dependencies": [],
+        "dependents": ["index.js"],
+        "valid": true
+      },
+      {
+        "source": "node_modules/igetbundled/index.js",
+        "orphan": false,
+        "dependencies": [],
+        "dependents": ["index.js"],
+        "valid": true
+      }
+    ]
+  }
+]

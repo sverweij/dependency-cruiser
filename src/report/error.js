@@ -1,9 +1,10 @@
+/* eslint-disable security/detect-object-injection */
 const chalk = require("chalk");
 const figures = require("figures");
-
 const _get = require("lodash/get");
 const { findRuleByName } = require("../graph-utl/rule-set");
 const wrapAndIndent = require("../utl/wrap-and-indent");
+const utl = require("./utl/index.js");
 
 const SEVERITY2CHALK = {
   error: chalk.red,
@@ -12,37 +13,70 @@ const SEVERITY2CHALK = {
   ignore: chalk.gray,
 };
 
-const CYCLIC_PATH_INDENT = 6;
+const EXTRA_PATH_INFORMATION_INDENT = 6;
 
-function renderExtraPathInformation(pExtra) {
+function formatExtraPathInformation(pExtra) {
   return "\n".concat(
-    wrapAndIndent(pExtra.join(` ${figures.arrowRight} \n`), CYCLIC_PATH_INDENT)
+    wrapAndIndent(
+      pExtra.join(` ${figures.arrowRight} \n`),
+      EXTRA_PATH_INFORMATION_INDENT
+    )
   );
 }
-function determineTo(pViolation) {
-  if (pViolation.cycle) {
-    return renderExtraPathInformation(pViolation.cycle);
-  }
-  if (pViolation.via) {
-    return `${chalk.bold(pViolation.to)}${renderExtraPathInformation(
-      pViolation.via
-    )}`;
-  }
-  return `${chalk.bold(pViolation.to)}`;
+
+function formatModuleViolation(pViolation) {
+  return chalk.bold(pViolation.from);
+}
+
+function formatDependencyViolation(pViolation) {
+  return `${chalk.bold(pViolation.from)} ${figures.arrowRight} ${chalk.bold(
+    pViolation.to
+  )}`;
+}
+
+function formatCycleViolation(pViolation) {
+  return `${chalk.bold(pViolation.from)} ${
+    figures.arrowRight
+  } ${formatExtraPathInformation(pViolation.cycle)}`;
+}
+
+function formatReachabilityViolation(pViolation) {
+  return `${chalk.bold(pViolation.from)} ${figures.arrowRight} ${chalk.bold(
+    pViolation.to
+  )}${formatExtraPathInformation(pViolation.via)}`;
+}
+
+function formatInstabilityViolation(pViolation) {
+  return `${formatDependencyViolation(pViolation)}\n${wrapAndIndent(
+    chalk.dim(
+      `instability: ${utl.formatInstability(
+        pViolation.metrics.from.instability
+      )} ${figures.arrowRight} ${utl.formatInstability(
+        pViolation.metrics.to.instability
+      )}`
+    ),
+    EXTRA_PATH_INFORMATION_INDENT
+  )}`;
 }
 
 function formatViolation(pViolation) {
-  const lModuleNames =
-    pViolation.from === pViolation.to
-      ? chalk.bold(pViolation.from)
-      : `${chalk.bold(pViolation.from)} ${figures.arrowRight} ${determineTo(
-          pViolation
-        )}`;
+  const lViolationType2Formatter = {
+    module: formatModuleViolation,
+    dependency: formatDependencyViolation,
+    cycle: formatCycleViolation,
+    reachability: formatReachabilityViolation,
+    instability: formatInstabilityViolation,
+  };
+  const lFormattedViolators = utl.formatViolation(
+    pViolation,
+    lViolationType2Formatter,
+    formatDependencyViolation
+  );
 
   return (
     `${SEVERITY2CHALK[pViolation.rule.severity](pViolation.rule.severity)} ${
       pViolation.rule.name
-    }: ${lModuleNames}` +
+    }: ${lFormattedViolators}` +
     `${
       pViolation.comment
         ? `\n${wrapAndIndent(chalk.dim(pViolation.comment))}\n`
@@ -82,14 +116,10 @@ function addExplanation(pRuleSet, pLong) {
     : (pViolation) => pViolation;
 }
 
-function formatIgnoreWarning(pViolations) {
-  const lIgnoredViolations = pViolations.filter(
-    (pViolation) => pViolation.rule.severity === "ignore"
-  );
-
-  if (lIgnoredViolations.length > 0) {
+function formatIgnoreWarning(pNumberOfIgnoredViolations) {
+  if (pNumberOfIgnoredViolations > 0) {
     return chalk.yellow(
-      `${figures.warning} ${lIgnoredViolations.length} known violations ignored. Run without --ignore-known to see them.\n`
+      `${figures.warning} ${pNumberOfIgnoredViolations} known violations ignored. Run without --ignore-known to see them.\n`
     );
   }
   return "";
@@ -106,7 +136,7 @@ function report(pResults, pLong) {
     } modules, ${
       pResults.summary.totalDependenciesCruised
     } dependencies cruised)\n${formatIgnoreWarning(
-      pResults.summary.violations
+      pResults.summary.ignore
     )}\n\n`;
   }
 
@@ -115,7 +145,7 @@ function report(pResults, pLong) {
     .map(addExplanation(pResults.summary.ruleSetUsed, pLong))
     .reduce((pAll, pThis) => `${pAll}  ${formatViolation(pThis)}\n`, "\n")
     .concat(formatSummary(pResults.summary))
-    .concat(formatIgnoreWarning(pResults.summary.violations))
+    .concat(formatIgnoreWarning(pResults.summary.ignore))
     .concat(`\n`);
 }
 
@@ -125,11 +155,11 @@ function report(pResults, pLong) {
  * - for each violation a message stating the violation name and the to and from
  * - a summary with total number of errors and warnings found, and the total
  *   number of files cruised
- * @param {ICruiseResult} pResults -
+ * @param {import("../../types/cruise-result").ICruiseResult} pResults -
  * @param {any} pOptions - An object with options;
  *                         {boolean} long - whether or not to include an explanation
  *                                          (/ comment) which each violation
- * @returns {IReporterOutput} - output: the formatted text in a string
+ * @returns {import("../../types/dependency-cruiser").IReporterOutput} - output: the formatted text in a string
  *                              exitCode: the number of errors found
  */
 module.exports = (pResults, pOptions) => ({

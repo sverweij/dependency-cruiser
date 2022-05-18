@@ -21,15 +21,18 @@ function extractFromSwcAST(pOptions, pFileName) {
   );
 }
 
-function extractFromTypeScriptAST(pOptions, pFileName) {
+function extractFromTypeScriptAST(pOptions, pFileName, pTranspileOptions) {
   return extractTypeScriptDeps(
-    toTypescriptAST.getASTCached(path.join(pOptions.baseDir, pFileName)),
+    toTypescriptAST.getASTCached(
+      path.join(pOptions.baseDir, pFileName),
+      pTranspileOptions
+    ),
     pOptions.exoticRequireStrings
   );
 }
 
 function isTypeScriptCompatible(pFileName) {
-  return [".ts", ".tsx", ".js", ".mjs", ".cjs"].includes(
+  return [".ts", ".tsx", ".js", ".mjs", ".cjs", ".vue"].includes(
     path.extname(pFileName)
   );
 }
@@ -88,9 +91,11 @@ function extractWithTsc(
   pFileName,
   pTranspileOptions
 ) {
-  pDependencies = extractFromTypeScriptAST(pCruiseOptions, pFileName).filter(
-    (pDep) => pCruiseOptions.moduleSystems.includes(pDep.moduleSystem)
-  );
+  pDependencies = extractFromTypeScriptAST(
+    pCruiseOptions,
+    pFileName,
+    pTranspileOptions
+  ).filter((pDep) => pCruiseOptions.moduleSystems.includes(pDep.moduleSystem));
 
   if (pCruiseOptions.tsPreCompilationDeps === "specify") {
     pDependencies = detectPreCompilationNess(
@@ -103,13 +108,13 @@ function extractWithTsc(
 
 /**
  *
- * @param {import('../../types/options').ICruiseOptions} pCruiseOptions
+ * @param {import('../../types/dependency-cruiser').ICruiseOptions} pCruiseOptions
  * @param {string} pFileName
  * @param {any} pTranspileOptions
- * @returns {Partial<import('../../types/cruise-result').IDependency[]>}
+ * @returns {import('../../types/cruise-result').IDependency[]}
  */
 function extractDependencies(pCruiseOptions, pFileName, pTranspileOptions) {
-  /** @type Partial<import('../../types/cruise-result').IDependency[]> */
+  /** @type import('../../types/cruise-result').IDependency[] */
   let lDependencies = [];
 
   if (!pCruiseOptions.extraExtensionsToScan.includes(path.extname(pFileName))) {
@@ -162,8 +167,8 @@ function addResolutionAttributes(pOptions, pFileName, pResolveOptions) {
     );
 
     return {
-      ...lResolved,
       ...pDependency,
+      ...lResolved,
       followable: lResolved.followable && !lMatchesDoNotFollow,
       matchesDoNotFollow: lMatchesDoNotFollow,
     };
@@ -174,8 +179,15 @@ function matchesPattern(pFullPathToFile, pPattern) {
   return RegExp(pPattern, "g").test(pFullPathToFile);
 }
 
+/**
+ *
+ * @param {import("../../types/dependency-cruiser").IDependency} pDependency
+ * @returns {string}
+ */
 function getDependencyUniqueKey(pDependency) {
-  return `${pDependency.module} ${pDependency.moduleSystem}`;
+  return `${pDependency.module} ${pDependency.moduleSystem} ${(
+    pDependency.dependencyTypes || []
+  ).includes("type-only")}`;
 }
 
 function compareDeps(pLeft, pRight) {
@@ -196,22 +208,12 @@ function compareDeps(pLeft, pRight) {
  *
  *
  * @param  {string} pFileName path to the file
- * @param  {object} pCruiseOptions  an object with one or more of these properties:
- *                            - baseDir         - the directory to consider as the
- *                                                base for all files
- *                                                Default: the current working directory
- *                            - moduleSystems   - an array of module systems to
- *                                                consider.
- *                                                Default: ["cjs", "es6", "amd"]
- *                            - exclude         - a regular expression string
- *                                                with a pattern of modules to exclude
- *                                                (e.g. "(node_modules)"). Default: none
- *                            - preserveSymlinks - don't resolve symlinks.
- * @param {object} pResolveOptions an object with webpack 'enhanced-resolve' options
- * @param  {any} pTranspileOptions       an object with tsconfig ('typescript project') options
+ * @param  {import("../../types/dependency-cruiser").ICruiseOptions} pCruiseOptions cruise options
+ * @param {import("../../types/dependency-cruiser").IResolveOptions} pResolveOptions  webpack 'enhanced-resolve' options
+ * @param  {import("../../types/dependency-cruiser").ITranspileOptions} pTranspileOptions       an object with tsconfig ('typescript project') options
  *                               ('flattened' so there's no need for file access on any
  *                               'extends' option in there)
- * @return {array}           an array of dependency objects (see above)
+ * @return {import("../../types/dependency-cruiser").IDependency[]} an array of dependency objects (see above)
  */
 module.exports = function getDependencies(
   pFileName,

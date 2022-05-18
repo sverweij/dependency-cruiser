@@ -86,7 +86,6 @@ module.exports = {
           '^(node-inspect\/lib\/internal\/inspect_client)$',
           '^(node-inspect\/lib\/internal\/inspect_repl)$',
           '^(async_hooks)$',
-          '^(assert)$',
           '^(punycode)$',
           '^(domain)$',
           '^(constants)$',
@@ -145,7 +144,11 @@ module.exports = {
       severity: 'warn',
       from: {},
       to: {
-        moreThanOneDependencyType: true
+        moreThanOneDependencyType: true,
+        // as it's pretty common to have a type import be a type only import 
+        // _and_ (e.g.) a devDependency - don't consider type-only dependency
+        // types for this rule
+        dependencyTypesNot: ["type-only"]
       }
     },
 
@@ -233,7 +236,7 @@ module.exports = {
 
     /* conditions specifying which files not to follow further when encountered:
        - path: a regular expression to match
-       - dependencyTypes: see https://github.com/sverweij/dependency-cruiser/blob/master/doc/rules-reference.md#dependencytypes
+       - dependencyTypes: see https://github.com/sverweij/dependency-cruiser/blob/master/doc/rules-reference.md#dependencytypes-and-dependencytypesnot
        for a complete list
     */
     doNotFollow: {

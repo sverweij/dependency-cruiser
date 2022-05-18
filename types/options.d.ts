@@ -239,4 +239,41 @@ export interface ICruiseOptions {
      */
     type: ProgressType;
   };
+  /**
+   * When this flag is set to true, dependency-cruiser will calculate (stability) metrics
+   * for all modules and folders. Defaults to false.
+   */
+  metrics?: boolean;
+}
+
+export interface IFormatOptions {
+  /**
+   * regular expression describing which dependencies the function
+   * should not cruise
+   */
+  exclude?: string | string[] | IExcludeType;
+  /**
+   * regular expression describing which dependencies the function
+   * should cruise - anything not matching this will be skipped
+   */
+  includeOnly?: string | string[] | IIncludeOnlyType;
+  /**
+   * dependency-cruiser will include modules matching this regular expression
+   * in its output, as well as their neighbours (direct dependencies and
+   * dependents)
+   */
+  focus?: string | string[] | IFocusType;
+  /**
+   * collapse a to a folder depth by passing a single digit (e.g. 2).
+   * When passed a regex collapse to that pattern
+   *
+   * E.g. ^packages/[^/]+/ would collapse to modules/ folders directly under
+   * your packages folder.
+   */
+  collapse?: string | number;
+  /**
+   * one of "json", "html", "dot", "csv" or "err". When left
+   * out the function will return a javascript object as dependencies
+   */
+  outputType?: OutputType;
 }

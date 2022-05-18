@@ -2,7 +2,7 @@
 import { expect } from "chai";
 import normalizeInitOptions from "../../../src/cli/init-config/normalize-init-options.js";
 
-describe("cli/init-config/normalize-init-options", () => {
+describe("[U] cli/init-config/normalize-init-options", () => {
   it("If it's a mono repo, doesn't return a testLocation array", () => {
     expect(
       normalizeInitOptions({ isMonoRepo: true }).testLocation

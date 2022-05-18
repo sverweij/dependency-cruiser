@@ -1,9 +1,7 @@
 const path = require("path");
+const { builtinModules } = require("module");
 const pathToPosix = require("../utl/path-to-posix");
-const determineDependencyTypes = require("./determine-dependency-types");
-const { isCore, isFollowable } = require("./module-classifiers");
-const getManifest = require("./get-manifest");
-const resolveHelpers = require("./resolve-helpers");
+const { isFollowable } = require("./module-classifiers");
 const resolve = require("./resolve");
 
 function addResolutionAttributes(
@@ -14,7 +12,7 @@ function addResolutionAttributes(
 ) {
   let lReturnValue = {};
 
-  if (isCore(pModuleName)) {
+  if (builtinModules.includes(pModuleName)) {
     lReturnValue.coreModule = true;
   } else {
     try {
@@ -39,47 +37,21 @@ function addResolutionAttributes(
  * resolves both CommonJS and ES6
  */
 module.exports = function resolveCommonJS(
-  pRawModuleName,
+  pStrippedModuleName,
   pBaseDirectory,
   pFileDirectory,
   pResolveOptions
 ) {
-  const lModuleName = resolveHelpers.stripToModuleName(pRawModuleName);
-  const lManifest = getManifest(
-    pFileDirectory,
-    pBaseDirectory,
-    pResolveOptions.combinedDependencies
-  );
-
-  let lReturnValue = {
-    resolved: lModuleName,
+  return {
+    resolved: pStrippedModuleName,
     coreModule: false,
     followable: false,
     couldNotResolve: false,
-    dependencyTypes: ["undetermined"],
     ...addResolutionAttributes(
       pBaseDirectory,
-      lModuleName,
+      pStrippedModuleName,
       pFileDirectory,
       pResolveOptions
-    ),
-  };
-
-  return {
-    ...lReturnValue,
-    ...resolveHelpers.addLicenseAttribute(
-      lModuleName,
-      lReturnValue.resolved,
-      { baseDirectory: pBaseDirectory, fileDirectory: pFileDirectory },
-      pResolveOptions
-    ),
-    dependencyTypes: determineDependencyTypes(
-      lReturnValue,
-      lModuleName,
-      lManifest,
-      pFileDirectory,
-      pResolveOptions,
-      pBaseDirectory
     ),
   };
 };

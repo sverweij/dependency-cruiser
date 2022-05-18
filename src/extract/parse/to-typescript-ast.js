@@ -2,21 +2,29 @@ const fs = require("fs");
 const tryRequire = require("semver-try-require");
 const _memoize = require("lodash/memoize");
 const { supportedTranspilers } = require("../../../src/meta.js");
+const transpile = require("../transpile");
+const getExtension = require("../utl/get-extension");
 
+/** @type {import('typescript')} */
 const typescript = tryRequire("typescript", supportedTranspilers.typescript);
 
 /**
  * Compiles pTypescriptSource into a (typescript) AST
  *
- * @param {string} pTypescriptSource - the source to compile
- * @param {string} [pFileName] - (optional) file name the typescript
- *                              compiler can use in error messages
+ * @param {object} pFileRecord Record with source code, an extension and a filename
+ * @param {any} [pTranspileOptions] options for the transpiler(s) - a tsconfig or
+ *                                a babel config
  * @return {object} - a (typescript) AST
  */
-function getASTFromSource(pTypescriptSource, pFileName) {
+function getASTFromSource(pFileRecord, pTranspileOptions) {
+  let lSource = pFileRecord.source;
+  if (pFileRecord.extension === ".vue") {
+    lSource = transpile(pFileRecord, pTranspileOptions);
+  }
+
   return typescript.createSourceFile(
-    pFileName || "$internal-file-name",
-    pTypescriptSource,
+    pFileRecord.filename || "$internal-file-name",
+    lSource,
     typescript.ScriptTarget.Latest,
     false
   );
@@ -27,10 +35,19 @@ function getASTFromSource(pTypescriptSource, pFileName) {
  * AST and returns it
  *
  * @param {string} pFileName - the name of the file to compile
+ * @param {any} [pTranspileOptions] options for the transpiler(s) - a tsconfig or
+ *                                a babel config
  * @return {object} - a (typescript) AST
  */
-function getAST(pFileName) {
-  return getASTFromSource(fs.readFileSync(pFileName, "utf8"), pFileName);
+function getAST(pFileName, pTranspileOptions) {
+  return getASTFromSource(
+    {
+      source: fs.readFileSync(pFileName, "utf8"),
+      extension: getExtension(pFileName),
+      filename: pFileName,
+    },
+    pTranspileOptions
+  );
 }
 
 const getASTCached = _memoize(getAST);
@@ -46,6 +63,7 @@ module.exports = {
    * @return {boolean} - true if the typescript compiler is available,
    *                     false in all other cases
    */
+  // @ts-ignore
   isAvailable: () => typescript !== false,
 
   /**

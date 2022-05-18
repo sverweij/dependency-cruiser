@@ -2,13 +2,13 @@ import { readFileSync } from "fs";
 import { fileURLToPath } from "url";
 import { expect } from "chai";
 import renderText from "../../../src/report/text.js";
-import dependencies from "./mocks/dependencies.mjs";
+import dependencies from "./__mocks__/dependencies.mjs";
 
-describe("report/text", () => {
+describe("[I] report/text", () => {
   it("renders a bunch of dependencies", () => {
     const lResult = renderText(dependencies);
     const lExpectedOutput = readFileSync(
-      fileURLToPath(new URL("fixtures/dependencies.txt", import.meta.url)),
+      fileURLToPath(new URL("__fixtures__/dependencies.txt", import.meta.url)),
       "utf8"
     );
 

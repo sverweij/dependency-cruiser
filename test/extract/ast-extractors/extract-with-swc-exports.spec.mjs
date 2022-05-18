@@ -1,7 +1,7 @@
 import { expect } from "chai";
 import extractWithSwc from "./extract-with-swc.utl.mjs";
 
-describe("ast-extractors/extract-swc - re-exports", () => {
+describe("[U] ast-extractors/extract-swc - re-exports", () => {
   it("extracts 're-export everything'", () => {
     expect(extractWithSwc("export * from './ts-thing';")).to.deep.equal([
       {

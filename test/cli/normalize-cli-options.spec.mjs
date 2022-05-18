@@ -3,7 +3,7 @@ import { expect } from "chai";
 import normalizeOptions from "../../src/cli/normalize-cli-options.js";
 
 // eslint-disable max-statements
-describe("cli/normalizeOptions", () => {
+describe("[I] cli/normalizeOptions", () => {
   const WORKINGDIR = process.cwd();
 
   afterEach(() => {
@@ -36,7 +36,7 @@ describe("cli/normalizeOptions", () => {
   });
 
   it("-c / --config without params gets translated to -v/ --validate.", () => {
-    process.chdir("test/cli/fixtures/normalize-config/json-only");
+    process.chdir("test/cli/__fixtures__/normalize-config/json-only");
     expect(normalizeOptions({ config: true })).to.deep.equal({
       outputTo: "-",
       outputType: "err",
@@ -48,7 +48,7 @@ describe("cli/normalizeOptions", () => {
   });
 
   it("-c / --config with something gets translated to -v/ --validate.", () => {
-    process.chdir("test/cli/fixtures/normalize-config/json-only");
+    process.chdir("test/cli/__fixtures__/normalize-config/json-only");
     expect(
       normalizeOptions({ config: ".dependency-cruiser.json" })
     ).to.deep.equal({
@@ -62,7 +62,7 @@ describe("cli/normalizeOptions", () => {
   });
 
   it("-v argument assumes .dependency-cruiser.json for rules (and borks if it doesn't exist)", () => {
-    process.chdir("test/cli/fixtures/normalize-config/no-default-config");
+    process.chdir("test/cli/__fixtures__/normalize-config/no-default-config");
     try {
       normalizeOptions({ validate: true });
     } catch (pError) {
@@ -71,7 +71,7 @@ describe("cli/normalizeOptions", () => {
   });
 
   it("-v finds .dependency-cruiser.js when no parameters to it are passed and it exists", () => {
-    process.chdir("test/cli/fixtures/normalize-config/js-only");
+    process.chdir("test/cli/__fixtures__/normalize-config/js-only");
     expect(normalizeOptions({ validate: true })).to.deep.equal({
       outputTo: "-",
       outputType: "err",
@@ -82,7 +82,7 @@ describe("cli/normalizeOptions", () => {
   });
 
   it("-v finds .dependency-cruiser.json when no parameters to it are passed and it exists", () => {
-    process.chdir("test/cli/fixtures/normalize-config/json-only");
+    process.chdir("test/cli/__fixtures__/normalize-config/json-only");
     expect(normalizeOptions({ validate: true })).to.deep.equal({
       outputTo: "-",
       outputType: "err",
@@ -93,7 +93,7 @@ describe("cli/normalizeOptions", () => {
   });
 
   it("-v finds .dependency-cruiser.json when no parameters to it are passed and also the .js variant exists", () => {
-    process.chdir("test/cli/fixtures/normalize-config/both-js-and-json");
+    process.chdir("test/cli/__fixtures__/normalize-config/both-js-and-json");
     expect(normalizeOptions({ validate: true })).to.deep.equal({
       outputTo: "-",
       outputType: "err",
@@ -113,11 +113,11 @@ describe("cli/normalizeOptions", () => {
 
   it("-v with parameter uses that parameter as rules file", () => {
     expect(
-      normalizeOptions({ validate: "./test/cli/fixtures/rules.empty.json" })
+      normalizeOptions({ validate: "./test/cli/__fixtures__/rules.empty.json" })
     ).to.deep.equal({
       outputTo: "-",
       outputType: "err",
-      rulesFile: "./test/cli/fixtures/rules.empty.json",
+      rulesFile: "./test/cli/__fixtures__/rules.empty.json",
       ruleSet: {},
       validate: true,
     });
@@ -126,12 +126,12 @@ describe("cli/normalizeOptions", () => {
   it("a rules file with comments gets the comments stripped out & parsed", () => {
     expect(
       normalizeOptions({
-        validate: "./test/cli/fixtures/rules.withcomments.json",
+        validate: "./test/cli/__fixtures__/rules.withcomments.json",
       })
     ).to.deep.equal({
       outputTo: "-",
       outputType: "err",
-      rulesFile: "./test/cli/fixtures/rules.withcomments.json",
+      rulesFile: "./test/cli/__fixtures__/rules.withcomments.json",
       ruleSet: {
         forbidden: [
           {
@@ -151,12 +151,12 @@ describe("cli/normalizeOptions", () => {
   it("accepts and interprets a javascript rule file (relative path)", () => {
     expect(
       normalizeOptions({
-        validate: "./test/cli/fixtures/rules.withcomments.js",
+        validate: "./test/cli/__fixtures__/rules.withcomments.js",
       })
     ).to.deep.equal({
       outputTo: "-",
       outputType: "err",
-      rulesFile: "./test/cli/fixtures/rules.withcomments.js",
+      rulesFile: "./test/cli/__fixtures__/rules.withcomments.js",
       ruleSet: {
         forbidden: [
           {
@@ -175,7 +175,7 @@ describe("cli/normalizeOptions", () => {
 
   it("accepts and interprets a javascript rule file (absolute path)", () => {
     const lRulesFileName = fileURLToPath(
-      new URL("fixtures/rules.withcomments.js", import.meta.url)
+      new URL("__fixtures__/rules.withcomments.js", import.meta.url)
     );
 
     expect(normalizeOptions({ validate: lRulesFileName })).to.deep.equal({
@@ -201,12 +201,12 @@ describe("cli/normalizeOptions", () => {
   it("defaults tsConfig.fileName to 'tsconfig.json' if it wasn't specified", () => {
     expect(
       normalizeOptions({
-        validate: "./test/cli/fixtures/rules.tsConfigNoFileName.json",
+        validate: "./test/cli/__fixtures__/rules.tsConfigNoFileName.json",
       })
     ).to.deep.equal({
       outputTo: "-",
       outputType: "err",
-      rulesFile: "./test/cli/fixtures/rules.tsConfigNoFileName.json",
+      rulesFile: "./test/cli/__fixtures__/rules.tsConfigNoFileName.json",
       ruleSet: {
         options: {
           tsConfig: {
@@ -220,12 +220,12 @@ describe("cli/normalizeOptions", () => {
   it("defaults webpackConfig.fileName to 'tsconfig.json' if it wasn't specified", () => {
     expect(
       normalizeOptions({
-        validate: "./test/cli/fixtures/rules.webpackConfigNoFileName.json",
+        validate: "./test/cli/__fixtures__/rules.webpackConfigNoFileName.json",
       })
     ).to.deep.equal({
       outputTo: "-",
       outputType: "err",
-      rulesFile: "./test/cli/fixtures/rules.webpackConfigNoFileName.json",
+      rulesFile: "./test/cli/__fixtures__/rules.webpackConfigNoFileName.json",
       ruleSet: {
         options: {
           webpackConfig: {
@@ -249,7 +249,7 @@ describe("cli/normalizeOptions", () => {
   });
 });
 
-describe("cli/normalizeOptions - known violations", () => {
+describe("[I] cli/normalizeOptions - known violations", () => {
   const WORKINGDIR = process.cwd();
 
   afterEach(() => {
@@ -257,7 +257,7 @@ describe("cli/normalizeOptions - known violations", () => {
   });
 
   it("--ignore-known without params gets the default known-violations json", () => {
-    process.chdir("test/cli/fixtures/normalize-config/known-violations");
+    process.chdir("test/cli/__fixtures__/normalize-config/known-violations");
     expect(normalizeOptions({ ignoreKnown: true })).to.deep.equal({
       outputTo: "-",
       outputType: "err",
@@ -268,7 +268,7 @@ describe("cli/normalizeOptions - known violations", () => {
   });
 
   it("--ignore-known with params gets the mentioned known-violations", () => {
-    process.chdir("test/cli/fixtures/normalize-config/known-violations");
+    process.chdir("test/cli/__fixtures__/normalize-config/known-violations");
     expect(
       normalizeOptions({ ignoreKnown: "custom-known-violations.json" })
     ).to.deep.equal({
@@ -281,14 +281,14 @@ describe("cli/normalizeOptions - known violations", () => {
   });
 
   it("--ignore-known with non-existing file as param throws", () => {
-    process.chdir("test/cli/fixtures/normalize-config/known-violations");
+    process.chdir("test/cli/__fixtures__/normalize-config/known-violations");
     expect(() =>
       normalizeOptions({ ignoreKnown: "this-file-does-not-exist" })
     ).to.throw();
   });
 });
 
-describe("cli/normalizeOptions.determineRulesFileName", () => {
+describe("[U] cli/normalizeOptions.determineRulesFileName", () => {
   it("returns '.dependency-cruiser.json' when no file name is passed", () => {
     expect(normalizeOptions.determineRulesFileName()).to.equal(
       ".dependency-cruiser.json"

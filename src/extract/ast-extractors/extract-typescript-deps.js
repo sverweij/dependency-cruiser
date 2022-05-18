@@ -30,6 +30,9 @@ function extractImportsAndExports(pAST) {
       module: pStatement.moduleSpecifier.text,
       moduleSystem: "es6",
       exoticallyRequired: false,
+      ...(pStatement.importClause && pStatement.importClause.isTypeOnly
+        ? { dependencyTypes: ["type-only"] }
+        : {}),
     }));
 }
 

@@ -1,7 +1,7 @@
 import { expect } from "chai";
 import consolidateToFolder from "../../src/graph-utl/consolidate-to-folder.js";
 
-describe("report/utl/consolidateToFolder", () => {
+describe("[U] graph-utl/consolidateToFolder", () => {
   it("source gets squashed to its folder", () => {
     const lInput = [
       {

@@ -36,12 +36,14 @@ To get the above graph we used [berry-dependency-cruiser-config.js](real-world-s
 
 - `yarn` (with yarn v2 :-))
 - `yarn add -D dependency-cruiser`
-- copy `berry-dependency-cruiser-config.js` to the root of the repo
-- add this script to package.json (so don't use the globally installed depcruise
-  or even the locally installed one - yarn's pnp resolution won't work otherwise:)
+- `rm -f berry-dependency-cruiser-config.js`
+- `wget https://raw.githubusercontent.com/sverweij/dependency-cruiser/develop/doc/real-world-samples/berry-dependency-cruiser-config.js`
+- add these two lines to the `scripts` section of the package.json (so don't
+  use the globally installed depcruise or even the locally installed one -
+  yarn's pnp resolution won't work otherwise:)
   ```
   "dc": "depcruise --version && depcruise --config berry-dependency-cruiser-config.js --output-type err packages",
-  "depcruise:archi": "depcruise --config berry-dependency-cruiser-config.js --output-type archi packages | dot -T svg | tee berry-high-level-dependencies.svg | depcruise-wrap-stream-in-html > berry-high-level-dependencies.html",
+  "depcruise:archi": "depcruise --version && depcruise --config berry-dependency-cruiser-config.js --output-type archi packages | dot -T svg | tee berry-high-level-dependencies.svg | depcruise-wrap-stream-in-html > berry-high-level-dependencies.html",
   ```
 - run `yarn depcruise:archi`
 </details>
@@ -73,10 +75,12 @@ wget https://raw.githubusercontent.com/sverweij/dependency-cruiser/develop/doc/r
 - Add these run-scripts to the package.json:
 
   ```
-    "dc": "depcruise --version && depcruise --config react-dependency-cruiser-config.js -T err packages/*/{*.js,src}",
-    "depcruise:archi": "depcruise --config react-dependency-cruiser-config.js -T archi packages/*/{*.js,src} | dot -T svg | tee react-high-level-dependencies.svg | depcruise-wrap-stream-in-html > react-high-level-dependencies.html
+    "dc": "depcruise --version && depcruise --ignore-known --config react-dependency-cruiser-config.js -T err packages/*/{*.js,src}",
+    "depcruise:baseline": "depcruise --version && depcruise-baseline packages/*/{*.js,src} --config react-dependency-cruiser-config.js",
+    "depcruise:archi": "depcruise --ignore-known --config react-dependency-cruiser-config.js -T archi packages/*/{*.js,src} | dot -T svg | tee react-high-level-dependencies.svg | depcruise-wrap-stream-in-html > react-high-level-dependencies.html
   ```
 
+- `yarn depcruise:baseline`
 - `yarn depcruise:archi`
 
 </details>
@@ -156,13 +160,92 @@ them. Click for slightly more interactive versions.
 
 [![dependency cruiser's dependency graph aggregated to its main parts](./real-world-samples/dependency-cruiser-archi-graph.svg)](https://sverweij.github.io/dependency-cruiser/dependency-cruiser-archi-graph.html)
 
+<details>
+<summary>howto</summary>
+
+To generate this yourself do this in the root of the dependency-cruiser repo:
+
+```
+node ./bin/dependency-cruise.js bin src --config --output-type archi | \
+  # format the output with dot. For this specific graph top-down (TD)
+  # orientation works best
+  dot -T svg -Grankdir=TD | \
+  # save the svg
+  tee doc/real-world-samples/dependency-cruiser-archi-graph.svg | \
+  # process the svg into an interactive html graph
+  node bin/wrap-stream-in-html.js > docs/dependency-cruiser-archi-graph.html
+```
+
+> the only repository in the world you can't use the commands `depcruise`,
+> `depcruise-fmt` or `depcruise-wrap-stream-in-html` is dependency-cruiser's own -
+> instead we run the JavaScript files from `bin` directly.
+> If you adapt the script for your own use replace
+> `node ./bin/dependency-cruise.js` with `depcruise`,
+> `node ./bin/wrap-stream-in-html.js` with `depcruise-wrap-stream-in-html`.
+
+</details>
+
 #### folder level overview ('ddot')
 
 [![dependency cruiser's dependency graph aggregated to folders](./real-world-samples/dependency-cruiser-dir-graph.svg)](https://sverweij.github.io/dependency-cruiser/dependency-cruiser-dir-graph.html)
 
+<details>
+<summary>howto</summary>
+
+To generate this yourself do this in the root of the dependency-cruiser repo:
+
+```
+node ./bin/dependency-cruise.js bin src --config --output-type ddot | \
+  # format the output with dot. For this specific graph top-down (TD)
+  # orientation works best
+  dot -T svg -Grankdir=TD | \
+  # save the svg
+  tee doc/real-world-samples/dependency-cruiser-dir-graph.svg | \
+  # process the svg into an interactive html graph
+  node bin/wrap-stream-in-html.js > docs/dependency-cruiser-dir-graph.html
+```
+
+> the only repository in the world you can't use the commands `depcruise`,
+> `depcruise-fmt` or `depcruise-wrap-stream-in-html` is dependency-cruiser's own -
+> instead we run the JavaScript files from `bin` directly.
+> If you adapt the script for your own use replace
+> `node ./bin/dependency-cruise.js` with `depcruise`,
+> `node ./bin/wrap-stream-in-html.js` with `depcruise-wrap-stream-in-html`.
+
+</details>
+
 #### detailed overview ('dot')
 
 [![dependency cruiser's dependency graph](real-world-samples/dependency-cruiser-without-node_modules.svg)](https://sverweij.github.io/dependency-cruiser/dependency-cruiser-dependency-graph.html)
+
+<details>
+<summary>howto</summary>
+
+To generate this yourself do this in the root of the dependency-cruiser repo:
+
+```
+# The --prefix will make sure that any links in the report open in vscode
+# You can alternatively configure this in your .dependency-cruiser.js
+node ./bin/dependency-cruise.js bin src --prefix vscode://file/$(pwd)/ --config --output-type dot | \
+  # format the output with dot
+  dot -T svg |\
+  # process the svg into an interactive html graph
+  node ./bin/wrap-stream-in-html.js |\
+  # The browser command opens the graph-in-html just produced in your
+  # default browser
+  browser
+```
+
+> the only repository in the world you can't use the commands `depcruise`,
+> `depcruise-fmt` or `depcruise-wrap-stream-in-html` is dependency-cruiser's own.
+> Instead we run the JavaScript files from `bin` directly. Alternatively, in the
+> dependency-cruiser repo you can run a script from package.json to get this
+> result as well: `depcruise:graph:view` - which also opens the graph.
+> If you adapt the script for your own use replace
+> `node ./bin/dependency-cruise.js` with `depcruise`,
+> `node ./bin/wrap-stream-in-html.js` with `depcruise-wrap-stream-in-html`.
+
+</details>
 
 ### state machine cat
 

@@ -28,12 +28,8 @@ function report(pResults) {
 /**
  * Returns the results of a cruise in a text only format
  * - for each dependency the from and the two, separated by an arrow.
- * @param {ICruiseResult} pResults -
- * @param {any} pOptions - An object with options;
- *                         {boolean} long - whether or not to include an explanation
- *                                          (/ comment) which each violation
- * @returns {IReporterOutput} - output: the formatted text in a string
- *                              exitCode: the number of errors found
+ * @param {import("../../types/cruise-result").ICruiseResult} pResults
+ * @returns {import("../../types/dependency-cruiser").IReporterOutput}
  */
 module.exports = (pResults) => ({
   output: report(pResults),

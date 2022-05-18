@@ -1,0 +1,52 @@
+{
+  "modules": [
+    {
+      "source": "test/cli/__fixtures__/typescriptconfig/cli-dynamic-imports/import_dynamically2.ts",
+      "dependencies": [
+        {
+          "module": "./import_this",
+          "moduleSystem": "es6",
+          "dynamic": true,
+          "exoticallyRequired": false,
+          "resolved": "test/cli/__fixtures__/typescriptconfig/cli-dynamic-imports/import_this.ts",
+          "coreModule": false,
+          "followable": true,
+          "couldNotResolve": false,
+          "dependencyTypes": ["local"],
+          "matchesDoNotFollow": false,
+          "circular": false,
+          "valid": true
+        }
+      ],
+      "orphan": false,
+      "valid": true
+    },
+    {
+      "source": "test/cli/__fixtures__/typescriptconfig/cli-dynamic-imports/import_this.ts",
+      "dependencies": [],
+      "orphan": false,
+      "valid": true
+    }
+  ],
+  "summary": {
+    "violations": [],
+    "error": 0,
+    "warn": 0,
+    "info": 0,
+    "ignore": 0,
+    "totalCruised": 2,
+    "totalDependenciesCruised": 1,
+    "optionsUsed": {
+      "combinedDependencies": false,
+      "externalModuleResolutionStrategy": "node_modules",
+      "moduleSystems": ["es6", "cjs", "tsd", "amd"],
+      "outputTo": "test/cli/__output__/dynamic-import-nok.json",
+      "outputType": "json",
+      "preserveSymlinks": false,
+      "tsPreCompilationDeps": false,
+      "exoticRequireStrings": [],
+      "args": "test/cli/__fixtures__/typescriptconfig/cli-dynamic-imports/import_dynamically2.ts"
+    },
+    "ruleSetUsed": {}
+  }
+}

@@ -1,0 +1,11 @@
+strict digraph "dependency-cruiser output"{
+    splines="ortho"
+    
+    
+
+    "tmp/index.js" [label=<tmp/<BR/><B>index.js</B>> tooltip="index.js" URL="https://github.com/sverweij/dependency-cruiser/blob/develop/tmp/index.js" ]
+    "tmp/index.js" -> "tmp/non-orphan.js"
+    "tmp/non-orphan.js" [label=<tmp/<BR/><B>non-orphan.js</B>> tooltip="non-orphan.js" URL="https://github.com/sverweij/dependency-cruiser/blob/develop/tmp/non-orphan.js" ]
+    "tmp/orphan.js" [label=<tmp/<BR/><B>orphan.js</B>> tooltip="no-orphans" URL="https://github.com/sverweij/dependency-cruiser/blob/develop/tmp/orphan.js" ]
+    "tmp/remi.js" [label=<tmp/<BR/><B>remi.js</B>> tooltip="no-orphans" URL="https://github.com/sverweij/dependency-cruiser/blob/develop/tmp/remi.js" ]
+}

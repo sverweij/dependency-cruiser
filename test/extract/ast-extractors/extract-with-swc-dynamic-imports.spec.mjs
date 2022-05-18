@@ -1,10 +1,12 @@
 import { expect } from "chai";
 import extractWithSwc from "./extract-with-swc.utl.mjs";
 
-describe("ast-extractors/extract-swc - dynamic imports", () => {
+describe("[U] ast-extractors/extract-swc - dynamic imports", () => {
   it("correctly detects a dynamic import statement", () => {
     expect(
-      extractWithSwc("import('judeljo').then(judeljo => { judeljo.hochik() })")
+      extractWithSwc(
+        "import('judeljo').then(someModule => { someModule.hochik() })"
+      )
     ).to.deep.equal([
       {
         module: "judeljo",

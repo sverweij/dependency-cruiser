@@ -5,7 +5,7 @@ import normalizeFilesAndDirectories from "../../../src/main/files-and-dirs/norma
 
 const __dirname = fileURLToPath(new URL(".", import.meta.url));
 
-describe("main/files-and-dirs", () => {
+describe("[U] main/files-and-dirs", () => {
   it("Keeps an empty file dir array as is", () => {
     expect(normalizeFilesAndDirectories([])).to.deep.equal([]);
   });

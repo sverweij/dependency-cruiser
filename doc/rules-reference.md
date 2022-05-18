@@ -38,11 +38,12 @@
    - [rules on dependents - `numberOfDependentsMoreThan`](#rules-on-dependents---numberOfDependentsMoreThan)
    - [`circular`](#circular)
    - [`license` and `licenseNot`](#license-and-licensenot)
-   - [`dependencyTypes`](#dependencytypes)
+   - [`dependencyTypes` and `dependencyTypesNot`](#dependencytypes-and-dependencytypesnot)
    - [`dynamic`](#dynamic)
    - [`moreThanOneDependencyType`](#more-than-one-dependencytype-per-dependency-morethanonedependencytype)
    - [`exoticRequire` and `exoticRequireNot`](#exoticallyrequired-exoticrequire-and-exoticrequirenot)
    - [`preCompilationOnly`](#precompilationonly)
+   - [`moreUnstable`](#moreunstable)
 4. [Configurations in JavaScript](#configurations-in-javascript)
 
 ## The structure of a dependency cruiser configuration
@@ -257,6 +258,36 @@ With the severity set to `ignore` dependency-cruiser will not check
 the rule at all. This can be useful if you want to temporarily
 disable a rule or disable a rule you inherited from a rule set you
 extended.
+
+> If you want to set the severity for the 'allowed' rules you can
+> use [`allowedSeverity`](#allowedSeverity)
+
+### `scope` - enable rules to apply on folders instead of modules
+
+What to apply the rule to - either `module` (the default) or `folder`. For many
+rules this makes no difference. For these rules we advise to not include the
+`scope` attribute at all. There are two notable exceptions where it _does_ make
+a difference:
+
+- rules regarding Instability metrics
+  A folder can contain a highly instable module (e.g. an index.js barrel that
+  depends on everything and their mother within the module), but be stable itself
+  e.g. because there's nothing in the folder that depends on modules outside it.
+- rules regarding circular dependencies
+  For example, when `main/index.js` depends on `utl/helper.js` and `utl/helper.js`
+  depends on `main/utl.js` there is no circular dependency on module level,
+  but there _is_ one between the `main` and `utl` folders
+
+> - :warning: the _scope_ attribute is _experimental_. The attribute was introduced
+>   to enable folder scope validations. Whether this is the best approach to
+>   distinguish folder and module scope validations has to be proven over time.
+>   If there's a better way dependency-cruiser will switch over to that without
+>   a major version bump.
+> - :warning: at this time only the `moreUnstable`, `circular` and `path`/ `pathNot`
+>   attributes (including 'group matching') work, so it is
+>   possible to check the "stable dependencies principle" on folder level. Other
+>   attributes (including, but not limited to _via_)
+>   still have to be implemented (after release 11.7.0)
 
 ## Conditions
 
@@ -678,6 +709,100 @@ up at itself.
 }
 ```
 
+### `via` and `viaNot`, `viaOnly` and `viaSomeNot` - restricting what cycles to match
+
+Some codebases include a lot of circular dependencies, sometimes with a few 'knots'
+(typically barrel files) that partake in most of them. Fixing these cycles might
+take a spell, so you might want to (temporarily :-) ) exclude them from breaking
+the build. At the same time you might want to prevent any new violation going
+unnoticed because of this.
+
+One solution to this is to use dependency-cruiser's
+[`ignore-known`](cli.md#--ignore-known-ignore-known-violations) mechanism, Another
+solution is to put restrictions on through which modules the cycles pass; the
+"via"'s, in a similar fashion as possible with `path` and `pathNot`. There are
+_four_ via-like restrictions in dependency-cruiser, as - different from the
+`path`/`pathNot` restrictions the `via` (and `viaNot`) ones always almost have
+to check against multiple paths; all the "via"'s in the cycle. The variants
+exist to enable matching against only _some_ of the modules in the cycle or
+against _all_ of them.
+
+The examples below refer to this cycle: `a/aa.js`, `a/ab.js`, `b/bb.js`, `a/aa.js`
+
+| restriction  | what it does                                                        | example input | match?  | because...                    |
+| ------------ | ------------------------------------------------------------------- | ------------- | ------- | ----------------------------- |
+| `via`        | **some** of the modules in the cycle **do** match the expression    | `^a/.+`       | `true`  | `a/aa.js` and `a/ab.js` match |
+| `viaOnly`    | **all** of the modules in the cycle **do** match the expression     | `^a/.+`       | `false` | `b/bb.js` doesn't match       |
+| `viaNot`     | **all** of the modules in the cycle **don't** match the expression  | `^a/.+`       | `false` | `a/aa.js` and `a/ab.js` match |
+| `viaSomeNot` | **some** of the modules in the cycle **don't** match the expression | `^a/.+`       | `true`  | `b/bb.js` doesn't match       |
+
+#### Usage example: prevent code from going through a 'knot'
+
+In this example `app/javascript/tables/index.ts` and `app/javascript/tables/index.ts`
+are the known 'knots':
+
+```javascript
+// log an error for all circular dependencies except when they are via one of the
+// known 'knots'
+{
+  name: 'no-circular',
+  severity: 'error',
+  from: {
+  },
+  to: {
+    circular: true,
+    viaNot: [
+      '^app/javascript/tables/index.ts',
+      '^app/javascript/ui/index.tsx',
+    ]
+  }
+},
+
+// for circular dependencies that pass through one of the knots, still generate
+// a warning
+{
+  name: 'no-circular (exception for known barrels)',
+  severity: 'warn',
+  from: {
+  },
+  to: {
+    circular: true,
+    via: [
+      '^app/javascript/tables/index.ts',
+      '^app/javascript/ui/index.tsx',
+    ]
+  }
+}
+```
+
+#### Usage example: prevent cycles from going outside a folder
+
+This example (adapted from a
+[question on GitHub](https://github.com/sverweij/dependency-cruiser/issues/585)
+by [@PetFeld-ed](https://github.com/PetFeld-ed))
+not only makes use of the `viaSomeNot`, but also displays the use of
+[group matching](#group-matching).
+
+```javascript
+// in the `forbidden` section of a dependency-cruiser config:
+{
+  name: 'no-circular-dependency-of-modules',
+  comment:
+    'If a module in business component A depends on one in component B, then ' +
+    'the module in component B should not depend on that component in module A ' +
+    'This is also forbidden if the dependency is transitive. ',
+    "I.a.w.: if there's a cycle, it should stay within the same component " +
+  severity: 'error',
+  from: {
+    path: '^src/business-components/([^/]+)/.+'
+  },
+  to: {
+    circular: true,
+    viaSomeNot: '^src/business-components/$1/.+',
+  },
+}
+```
+
 ### `license` and `licenseNot`
 
 You can flag dependent modules that have licenses that are e.g. not
@@ -729,7 +854,7 @@ for managing your own legal stuff. To re-iterate what is in the
 > OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 > SOFTWARE.
 
-### `dependencyTypes`
+### `dependencyTypes` and `dependencyTypesNot`
 
 You might have spent some time wondering why something works on your machine,
 but not on other's. Only to discover you _did_ install a dependency, but
@@ -737,7 +862,7 @@ _did not_ save it to package.json. Or you already had it in your devDependencies
 and started using it in a production source.
 
 To save you from embarrassing moments like this, you can make rules with the
-`dependencyTypes` verb. E.g. to prevent you accidentally depend on a
+`dependencyTypes` restrction. E.g. to prevent you accidentally depend on a
 `devDependency` from anything in `src` add this to your
 .dependency-cruiser.js's "forbidden" section:
 
@@ -765,29 +890,47 @@ Or to detect stuff you npm i'd without putting it in your package.json:
 }
 ```
 
-If you don't specify dependencyTypes in a rule, dependency-cruiser will ignore
-them in the evaluation of that rule.
+Likewise you can use the inverse `dependencyTypesNot` restriction. E.g. to ensure
+type-only imports (e.g. `import type { IYadda } from "./types"`) are used from
+`.d.ts` modules and/ or modules called `types.ts`:
+
+```json
+{
+  "name": "only-type-only",
+  "comment": "use explicit 'type' imports to import from type declaration modules",
+  "severity": "error",
+  "from": {},
+  "to": {
+    "path": ["types\\.ts$", "\\.d\\.ts$"],
+    "dependencyTypesNot": ["type-only"]
+  }
+}
+```
+
+If you don't specify dependencyTypes (or dependencyTypesNot) in a rule, dependency-cruiser
+will ignore them in the evaluation of that rule.
 
 #### OK - `unknown`, `npm-unknown`, `undetermined` - I'm officially weirded out - what's that about?
 
 This is a list of dependency types dependency-cruiser currently detects.
 
-| dependency type | meaning                                                                                                                                                                   | example                   |
-| --------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------- |
-| local           | a module in your own ('local') package                                                                                                                                    | "./klont"                 |
-| localmodule     | a module in your own ('local') package, but which was in the `resolve.modules` attribute of the webpack config you passed                                                 | "shared/stuff.ts"         |
-| npm             | it's a module in package.json's `dependencies`                                                                                                                            | "lodash"                  |
-| npm-dev         | it's a module in package.json's `devDependencies`                                                                                                                         | "chai"                    |
-| npm-optional    | it's a module in package.json's `optionalDependencies`                                                                                                                    | "livescript"              |
-| npm-peer        | it's a module in package.json's `peerDependencies` - note: deprecated in npm 3                                                                                            | "thing-i-am-a-plugin-for" |
-| npm-bundled     | it's a module that occurs in package.json's `bundle(d)Dependencies` array                                                                                                 | "iwillgetbundled"         |
-| npm-no-pkg      | it's an npm module - but it's nowhere in your package.json                                                                                                                | "forgetmenot"             |
-| npm-unknown     | it's an npm module - but there is no (parseable/ valid) package.json in your package                                                                                      |
-| deprecated      | it's an npm module, but the version you're using or the module itself is officially deprecated                                                                            | "some-deprecated-package" |
-| core            | it's a core module                                                                                                                                                        | "fs"                      |
-| aliased         | it's a module that's linked through an aliased (webpack)                                                                                                                  | "~/hello.ts"              |
-| unknown         | it's unknown what kind of dependency type this is - probably because the module could not be resolved in the first place                                                  | "loodash"                 |
-| undetermined    | the dependency fell through all detection holes. This could happen with amd dependencies - which have a whole Jurassic park of ways to define where to resolve modules to | "veloci!./raptor"         |
+| dependency type | meaning                                                                                                                                                                       | example                   |
+| --------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------- |
+| local           | a module in your own ('local') package                                                                                                                                        | "./klont"                 |
+| localmodule     | a module in your own ('local') package, but which was in the `resolve.modules` attribute of the webpack config you passed                                                     | "shared/stuff.ts"         |
+| npm             | it's a module in package.json's `dependencies`                                                                                                                                | "lodash"                  |
+| npm-dev         | it's a module in package.json's `devDependencies`                                                                                                                             | "chai"                    |
+| npm-optional    | it's a module in package.json's `optionalDependencies`                                                                                                                        | "livescript"              |
+| npm-peer        | it's a module in package.json's `peerDependencies` - note: deprecated in npm 3                                                                                                | "thing-i-am-a-plugin-for" |
+| npm-bundled     | it's a module that occurs in package.json's `bundle(d)Dependencies` array                                                                                                     | "iwillgetbundled"         |
+| npm-no-pkg      | it's an npm module - but it's nowhere in your package.json                                                                                                                    | "forgetmenot"             |
+| npm-unknown     | it's an npm module - but there is no (parseable/ valid) package.json in your package                                                                                          |                           |
+| deprecated      | it's an npm module, but the version you're using or the module itself is officially deprecated                                                                                | "some-deprecated-package" |
+| core            | it's a core module                                                                                                                                                            | "fs"                      |
+| aliased         | it's a module that's linked through an aliased (webpack)                                                                                                                      | "~/hello.ts"              |
+| unknown         | it's unknown what kind of dependency type this is - probably because the module could not be resolved in the first place                                                      | "loodash"                 |
+| undetermined    | the dependency fell through all detection holes. This could happen with amd dependencies - which have a whole Jurassic park of ways to define where to resolve modules to     | "veloci!./raptor"         |
+| type-only       | the module was imported as 'type only' (e.g. `import type { IThing } from "./things";`) - only available for TypeScript sources, and only when tsPreCompilationDeps !== false |                           |
 
 ### `dynamic`
 
@@ -934,6 +1077,60 @@ make it beyond the pre-compilation step:
 
 :warning: This attribute only works for TypeScript sources, and only when
 [`tsPreCompilationDeps`](#tsprecompilationdeps) option is set to `"specify"`.
+
+### `moreUnstable`
+
+When set to true moreUnstable matches for any dependency that has a higher
+Instability than the module that depends on it. When set to false it matches
+when the opposite is true; the dependency has an equal or lower Instability.
+
+This attribute is useful when you want to check against Robert C. Martin's
+stable dependencies principle: "depend in the direction of stability". Martin
+defines Instability as a function of the number of dependents and dependencies
+a component has: Instability = #dependencies/ (#dependents + #dependencies).
+
+E.g. a module with no dependencies and one or more dependents has a Instability
+of 0%; as stable as it can get. Conversely a module with no dependents, but
+a one or more dependencies is 100% Instable.
+
+Instability has a bit of an unusual connotation here - it's not 'bad' to be
+an 100% Instable module - it's just the nature of the module. A CLI or GUI
+component typically only depends on other modules and is 100% Instable. This is
+not a bad thing.
+
+Another way to look at Instability is how hard it is to change a module without
+consequences to other modules. Changing a 0% Instable module will typically have
+consequences for all its dependents. Making changes to a 100% Instable module
+will have consequences for itself only.
+
+To enforce/ find all modules that violate the stable dependencies principle
+(SDP) you can include a rule like this in the _forbidden_ section
+
+```javascript
+module.exports = {
+  forbidden: [
+    {
+      name: "SDP",
+      description:
+        "This module violates the 'stable dependencies' principle; it depends " +
+        "on a module that is likely to be more prone to changes than it is " +
+        "itself. Consider refactoring.",
+      from: {},
+      to: {
+        moreUnstable: true,
+      },
+    },
+  ],
+};
+```
+
+A note on using metrics:
+
+> ..., a metric is not a god; it is merely a measurement against an arbitrary
+> standard. It is certainly possible that the standard chosen in this chapter
+> is appropriate only for certain applications and not for others.
+>
+> Robert C. Martin - Agile Principles, Patterns and Practices in C# (2006)
 
 ## Configurations in JavaScript
 

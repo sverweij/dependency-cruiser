@@ -15,7 +15,7 @@ const TSX_SOURCE = `
 
     export default Index;
     `;
-describe("extract/parse/to-javascript-ast", () => {
+describe("[U] extract/parse/to-javascript-ast", () => {
   it("recogizes 'preserve'd tsx as jsx", () => {
     const lFoundAST = getASTFromSource(
       {

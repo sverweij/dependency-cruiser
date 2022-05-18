@@ -5,6 +5,7 @@ on:
     branches:
       - master
       - develop
+      - v10
   pull_request:
 
 jobs:
@@ -13,9 +14,9 @@ jobs:
       fail-fast: false
       matrix:
         node-version:
-          - 12.x
           - 14.x
           - 16.x
+          - 18.x
         platform:
           - ubuntu-latest
 

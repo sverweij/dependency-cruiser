@@ -1,7 +1,7 @@
 import { expect } from "chai";
 import { severities } from "../../src/graph-utl/compare.js";
 
-describe("utl/compare - severities", () => {
+describe("[U] graph-utl/compare - severities", () => {
   it("returns 0 for identical severities", () => {
     expect(severities("warn", "warn")).to.equal(0);
   });

@@ -15,11 +15,11 @@ const path = require("path");
  * with 100% confidence.
  *
  * @param  {string} pFilePath   the path to transform
- * @param  {string} pPathModule optional - the path module/ object to use (for testing
+ * @param  {path} pPathModule? optional - the path module/ object to use (for testing
  *                              this module on posix platforms only; defaults to require('path'))
  * @return {string}             the transformed path
  */
-module.exports = function pathToPosix(pFilePath, pPathModule) {
+module.exports = function pathToPosix(pFilePath, pPathModule = path) {
   const lPathModule = pPathModule || path;
 
   if (lPathModule.sep !== path.posix.sep) {

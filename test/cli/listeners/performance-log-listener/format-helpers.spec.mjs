@@ -2,7 +2,7 @@
 import { expect } from "chai";
 import formatHelpers from "../../../../src/cli/listeners/performance-log/format-helpers.js";
 
-describe("cli/listeners/performance-log/format-helpers - formatTime", () => {
+describe("[U] cli/listeners/performance-log/format-helpers - formatTime", () => {
   it("converts to ms, leftpads & adds the unit at the end", () => {
     expect(formatHelpers.formatTime(14.88041018)).to.equal("  14880ms");
   });
@@ -28,7 +28,7 @@ describe("cli/listeners/performance-log/format-helpers - formatTime", () => {
   });
 });
 
-describe("cli/listeners/performance-log/format-helpers - formatMemory", () => {
+describe("[U] cli/listeners/performance-log/format-helpers - formatMemory", () => {
   it("converts to Mb, leftpads & adds the unit at the end", () => {
     expect(formatHelpers.formatMemory(4033856)).to.equal("      4Mb");
   });
@@ -54,7 +54,7 @@ describe("cli/listeners/performance-log/format-helpers - formatMemory", () => {
   });
 });
 
-describe("cli/ears/performance-log-listener/format-helpers - formatPerfLine", () => {
+describe("[U] cli/ears/performance-log-listener/format-helpers - formatPerfLine", () => {
   it("produces neat columns with time, memmory and a message", () => {
     expect(
       formatHelpers.formatPerfLine(14.88041018, 7.245436738, "sim sala bim")

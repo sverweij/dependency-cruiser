@@ -16,6 +16,7 @@
       "properties": {
         "from": { "type": "string" },
         "to": { "type": "string" },
+        "type": { "$ref": "#/definitions/ViolationTypeType" },
         "rule": { "$ref": "#/definitions/RuleSummaryType" },
         "cycle": {
           "type": "array",
@@ -26,6 +27,29 @@
           "type": "array",
           "items": { "type": "string" },
           "description": "The path from the from to the to if the violation is transitive"
+        },
+        "metrics": {
+          "type": "object",
+          "required": ["from", "to"],
+          "additionalProperties": false,
+          "properties": {
+            "from": {
+              "type": "object",
+              "required": ["instability"],
+              "additionalProperties": false,
+              "properties": { "instability": { "type": "number" } }
+            },
+            "to": {
+              "type": "object",
+              "required": ["instability"],
+              "additionalProperties": false,
+              "properties": { "instability": { "type": "number" } }
+            }
+          }
+        },
+        "comment": {
+          "type": "string",
+          "description": "Free format text you can e.g. use to explain why this violation can be ignored or is quarantined (only used in _known-violations_) "
         }
       }
     },
@@ -46,6 +70,17 @@
       "type": "string",
       "description": "How severe a violation of a rule is. The 'error' severity will make some reporters return a non-zero exit code, so if you want e.g. a build to stop when there's a rule violated: use that.",
       "enum": ["error", "warn", "info", "ignore"]
+    },
+    "ViolationTypeType": {
+      "type": "string",
+      "enum": [
+        "dependency",
+        "module",
+        "reachability",
+        "cycle",
+        "instability",
+        "folder"
+      ]
     }
   }
 }

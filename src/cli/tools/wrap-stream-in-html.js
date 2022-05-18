@@ -31,7 +31,7 @@ const FOOTER_FILE = path.join(
  * @param {readStream} pStream stream whose characters are to be slapped between header and footer
  * @param {writeStream} pOutStream stream to write to
  */
-function wrap(pInStream, pOutStream) {
+module.exports = function wrap(pInStream, pOutStream) {
   const lHeader = fs.readFileSync(HEADER_FILE, "utf8");
   const lScript = fs.readFileSync(SCRIPT_FILE, "utf8");
   const lEnd = fs.readFileSync(FOOTER_FILE, "utf8");
@@ -54,6 +54,4 @@ function wrap(pInStream, pOutStream) {
     .on("data", (pChunk) => {
       pOutStream.write(pChunk);
     });
-}
-
-module.exports = (pInStream, pOutStream) => wrap(pInStream, pOutStream);
+};

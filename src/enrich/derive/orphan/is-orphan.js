@@ -1,4 +1,4 @@
-const { isDependent } = require("../utl");
+const { isDependent } = require("../module-utl");
 
 module.exports = (pModule, pGraph) => {
   if (pModule.dependencies.length > 0) {

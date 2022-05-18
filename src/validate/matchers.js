@@ -1,4 +1,31 @@
+/* eslint-disable security/detect-object-injection */
+const _has = require("lodash/has");
 const { intersects } = require("../utl/array-util");
+const { replaceGroupPlaceholders } = require("../utl/regex-util");
+
+function propertyEquals(pRule, pDependency, pProperty) {
+  // The properties can be booleans, so we can't use !pRule.to[pProperty]
+  if (_has(pRule.to, pProperty)) {
+    return pDependency[pProperty] === pRule.to[pProperty];
+  }
+  return true;
+}
+
+function propertyMatches(pRule, pDependency, pRuleProperty, pProperty) {
+  return Boolean(
+    !pRule.to[pRuleProperty] ||
+      (pDependency[pProperty] &&
+        pDependency[pProperty].match(pRule.to[pRuleProperty]))
+  );
+}
+
+function propertyMatchesNot(pRule, pDependency, pRuleProperty, pProperty) {
+  return Boolean(
+    !pRule.to[pRuleProperty] ||
+      (pDependency[pProperty] &&
+        !pDependency[pProperty].match(pRule.to[pRuleProperty]))
+  );
+}
 
 function fromPath(pRule, pModule) {
   return Boolean(!pRule.from.path || pModule.source.match(pRule.from.path));
@@ -20,21 +47,10 @@ function modulePathNot(pRule, pModule) {
   );
 }
 
-function _replaceGroupPlaceholders(pString, pExtractedGroups) {
-  return pExtractedGroups.reduce(
-    (pAll, pThis, pIndex) =>
-      // eslint-disable-next-line security/detect-non-literal-regexp
-      pAll.replace(new RegExp(`\\$${pIndex}`, "g"), pThis),
-    pString
-  );
-}
-
 function _toPath(pRule, pString, pGroups = []) {
   return Boolean(
     !pRule.to.path ||
-      (pGroups.length > 0
-        ? pString.match(_replaceGroupPlaceholders(pRule.to.path, pGroups))
-        : pString.match(pRule.to.path))
+      pString.match(replaceGroupPlaceholders(pRule.to.path, pGroups))
   );
 }
 
@@ -49,9 +65,7 @@ function toModulePath(pRule, pModule, pGroups) {
 function _toPathNot(pRule, pString, pGroups = []) {
   return (
     !Boolean(pRule.to.pathNot) ||
-    !(pGroups.length > 0
-      ? pString.match(_replaceGroupPlaceholders(pRule.to.pathNot, pGroups))
-      : pString.match(pRule.to.pathNot))
+    !pString.match(replaceGroupPlaceholders(pRule.to.pathNot, pGroups))
   );
 }
 
@@ -70,38 +84,97 @@ function toDependencyTypes(pRule, pDependency) {
   );
 }
 
-function toLicense(pRule, pDependency) {
+function toDependencyTypesNot(pRule, pDependency) {
   return Boolean(
-    !pRule.to.license ||
-      (pDependency.license && pDependency.license.match(pRule.to.license))
+    !pRule.to.dependencyTypesNot ||
+      !intersects(pDependency.dependencyTypes, pRule.to.dependencyTypesNot)
   );
 }
 
-function toLicenseNot(pRule, pDependency) {
+const removeLast = (_via, pIndex, pArray) => pIndex !== pArray.length - 1;
+
+function toVia(pRule, pDependency, pGroups) {
   return Boolean(
-    !pRule.to.licenseNot ||
-      (pDependency.license && !pDependency.license.match(pRule.to.licenseNot))
+    !pRule.to.via ||
+      (pDependency.cycle &&
+        pDependency.cycle
+          // the last in the cycle is always the module itself, which, for
+          // via & viaNot checks isn't very useful
+          .filter(removeLast)
+          .some((pVia) =>
+            pVia.match(replaceGroupPlaceholders(pRule.to.via, pGroups))
+          ))
   );
 }
 
-function toExoticRequire(pRule, pDependency) {
+function toViaOnly(pRule, pDependency, pGroups) {
   return Boolean(
-    !pRule.to.exoticRequire ||
-      (pDependency.exoticRequire &&
-        pDependency.exoticRequire.match(pRule.to.exoticRequire))
+    !pRule.to.viaOnly ||
+      (pDependency.cycle &&
+        pDependency.cycle
+          // the last in the cycle is always the module itself, which, for
+          // via & viaNot checks isn't very useful
+          .filter(removeLast)
+          .every((pVia) =>
+            pVia.match(replaceGroupPlaceholders(pRule.to.viaOnly, pGroups))
+          ))
   );
 }
 
-function toExoticRequireNot(pRule, pDependency) {
+function toViaNot(pRule, pDependency, pGroups) {
   return Boolean(
-    !pRule.to.exoticRequireNot ||
-      (pDependency.exoticRequire &&
-        !pDependency.exoticRequire.match(pRule.to.exoticRequireNot))
+    !pRule.to.viaNot ||
+      (pDependency.cycle &&
+        !pDependency.cycle
+          // the last in the cycle is always the module itself, which, for
+          // via & viaNot checks isn't very useful
+          .filter(removeLast)
+          .some((pVia) =>
+            pVia.match(replaceGroupPlaceholders(pRule.to.viaNot, pGroups))
+          ))
   );
+}
+
+function toviaSomeNot(pRule, pDependency, pGroups) {
+  return Boolean(
+    !pRule.to.viaSomeNot ||
+      (pDependency.cycle &&
+        !pDependency.cycle
+          // the last in the cycle is always the module itself, which, for
+          // via & viaNot checks isn't very useful
+          .filter(removeLast)
+          .every((pVia) =>
+            pVia.match(replaceGroupPlaceholders(pRule.to.viaSomeNot, pGroups))
+          ))
+  );
+}
+
+function toIsMoreUnstable(pRule, pModule, pDependency) {
+  if (_has(pRule, "to.moreUnstable")) {
+    return (
+      (pRule.to.moreUnstable &&
+        pModule.instability < pDependency.instability) ||
+      (!pRule.to.moreUnstable && pModule.instability >= pDependency.instability)
+    );
+  }
+  return true;
+}
+
+function matchesMoreThanOneDependencyType(pRule, pDependency) {
+  if (_has(pRule.to, "moreThanOneDependencyType")) {
+    return (
+      pRule.to.moreThanOneDependencyType ===
+      pDependency.dependencyTypes.length > 1
+    );
+  }
+  return true;
 }
 
 module.exports = {
-  _replaceGroupPlaceholders,
+  replaceGroupPlaceholders,
+  propertyEquals,
+  propertyMatches,
+  propertyMatchesNot,
   fromPath,
   fromPathNot,
   toPath,
@@ -111,8 +184,11 @@ module.exports = {
   toPathNot,
   toModulePathNot,
   toDependencyTypes,
-  toLicense,
-  toLicenseNot,
-  toExoticRequire,
-  toExoticRequireNot,
+  toDependencyTypesNot,
+  toVia,
+  toViaOnly,
+  toViaNot,
+  toviaSomeNot,
+  toIsMoreUnstable,
+  matchesMoreThanOneDependencyType,
 };

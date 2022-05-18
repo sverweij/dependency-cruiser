@@ -11,10 +11,10 @@ import { createRequireJSON } from "../backwards.utl.mjs";
 const __dirname = fileURLToPath(new URL(".", import.meta.url));
 const requireJSON = createRequireJSON(import.meta.url);
 
-const tsFixture = requireJSON("./fixtures/ts.json");
-const tsxFixture = requireJSON("./fixtures/tsx.json");
-const jsxFixture = requireJSON("./fixtures/jsx.json");
-const jsxAsObjectFixture = requireJSON("./fixtures/jsx-as-object.json");
+const tsFixture = requireJSON("./__fixtures__/ts.json");
+const tsxFixture = requireJSON("./__fixtures__/tsx.json");
+const jsxFixture = requireJSON("./__fixtures__/jsx.json");
+const jsxAsObjectFixture = requireJSON("./__fixtures__/jsx-as-object.json");
 
 use(chaiJSONSchema);
 
@@ -26,9 +26,9 @@ function pathPosixify(pOutput) {
   return lReturnValue;
 }
 
-describe("main.cruise", () => {
+describe("[E] main.cruise", () => {
   it("Returns an object when no options are passed", () => {
-    const lResult = main.cruise(["test/main/fixtures/ts"]);
+    const lResult = main.cruise(["test/main/__mocks__/ts"]);
 
     expect(pathPosixify(lResult.output)).to.deep.equal(tsFixture);
     expect(lResult.output).to.be.jsonSchema(cruiseResultSchema);
@@ -36,7 +36,7 @@ describe("main.cruise", () => {
 
   it("Returns an object when no options are passed (absolute path)", () => {
     const lResult = main.cruise(
-      [path.join(__dirname, "fixtures", "ts")],
+      [path.join(__dirname, "__mocks__", "ts")],
       {},
       { bustTheCache: true }
     );
@@ -47,7 +47,7 @@ describe("main.cruise", () => {
 
   it("Also processes tsx correctly", () => {
     const lResult = main.cruise(
-      ["test/main/fixtures/tsx"],
+      ["test/main/__mocks__/tsx"],
       {},
       { bustTheCache: true }
     );
@@ -57,7 +57,7 @@ describe("main.cruise", () => {
   });
   it("And jsx", () => {
     const lResult = main.cruise(
-      ["test/main/fixtures/jsx"],
+      ["test/main/__mocks__/jsx"],
       {},
       { bustTheCache: true }
     );
@@ -67,7 +67,7 @@ describe("main.cruise", () => {
   });
   it("And rulesets in the form a an object instead of json", () => {
     const lResult = main.cruise(
-      ["test/main/fixtures/jsx"],
+      ["test/main/__mocks__/jsx"],
       {
         ruleSet: {},
       },
@@ -79,10 +79,10 @@ describe("main.cruise", () => {
   });
   it("Collapses to a pattern when a collapse pattern is passed", () => {
     const lResult = main.cruise(
-      ["test/main/fixtures/collapse-after-cruise"],
+      ["test/main/__mocks__/collapse-after-cruise"],
       {
         ruleSet: {},
-        collapse: "^test/main/fixtures/collapse-after-cruise/src/[^/]+",
+        collapse: "^test/main/__mocks__/collapse-after-cruise/src/[^/]+",
       },
       { bustTheCache: true }
     );
@@ -90,7 +90,7 @@ describe("main.cruise", () => {
     expect(pathPosixify(lResult.output)).to.deep.equal(
       JSON.parse(
         readFileSync(
-          "test/main/fixtures/collapse-after-cruise/expected-result.json",
+          "test/main/__mocks__/collapse-after-cruise/expected-result.json",
           "utf8"
         )
       )

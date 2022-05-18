@@ -8,6 +8,7 @@ const SHAREABLE_OPTIONS = [
   "externalModuleResolutionStrategy",
   "focus",
   "includeOnly",
+  "knownViolations",
   "maxDepth",
   "moduleSystems",
   "outputTo",
@@ -28,19 +29,27 @@ const SHAREABLE_OPTIONS = [
 
 function makeOptionsPresentable(pOptions) {
   return SHAREABLE_OPTIONS.filter(
-    (pOption) => _has(pOptions, pOption) && pOptions[pOption] !== 0
+    (pShareableOptionKey) =>
+      _has(pOptions, pShareableOptionKey) && pOptions[pShareableOptionKey] !== 0
   )
     .filter(
-      (pOption) =>
-        pOption !== "doNotFollow" ||
+      (pShareableOptionKey) =>
+        pShareableOptionKey !== "doNotFollow" ||
         Object.keys(pOptions.doNotFollow).length > 0
     )
     .filter(
-      (pOption) =>
-        pOption !== "exclude" || Object.keys(pOptions.exclude).length > 0
+      (pShareableOptionKey) =>
+        pShareableOptionKey !== "exclude" ||
+        Object.keys(pOptions.exclude).length > 0
     )
-    .reduce((pAll, pOption) => {
-      pAll[pOption] = pOptions[pOption];
+    .filter(
+      (pShareableOptionKey) =>
+        pShareableOptionKey !== "knownViolations" ||
+        pOptions.knownViolations.length > 0
+    )
+    .reduce((pAll, pShareableOptionKey) => {
+      // console.error(pOption);
+      pAll[pShareableOptionKey] = pOptions[pShareableOptionKey];
       return pAll;
     }, {});
 }

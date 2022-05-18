@@ -3,8 +3,12 @@
   "extends": "../.dependency-cruiser.json",
   "options": {
     "tsPreCompilationDeps": true,
+    "extraExtensionsToScan": [],
     "reporterOptions": {
-      "dot": { "theme": { "graph": { "splines": "ortho" } } }
+      "dot": {
+        "collapsePattern": ["node_modules/[^/]+"],
+        "theme": { "graph": { "splines": "ortho" } }
+      }
     }
   }
 }

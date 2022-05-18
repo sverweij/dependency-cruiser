@@ -1,6 +1,6 @@
 {
   "name": "dependency-cruiser",
-  "version": "10.3.0",
+  "version": "11.7.1",
   "description": "Validate and visualize dependencies. With your rules. JavaScript, TypeScript, CoffeeScript. ES6, CommonJS, AMD.",
   "keywords": [
     "static analysis",
@@ -77,7 +77,6 @@
     "depcruise:all": "node ./bin/dependency-cruise.js src bin test configs types tools --config",
     "depcruise:baseline": "node ./bin/depcruise-baseline.js src bin test configs types tools",
     "depcruise:explain": "node ./bin/dependency-cruise.js src bin test configs types tools --output-type err-long --config --progress none",
-    "depcruise:graph:dev": "node ./bin/dependency-cruise.js bin src --prefix vscode://file/$(pwd)/ --config --output-type dot --progress cli-feedback | dot -T svg | node ./bin/wrap-stream-in-html.js | browser",
     "depcruise:graph:doc": "npm-run-all depcruise:graph:doc:json --parallel depcruise:graph:doc:fmt-* depcruise:graph:doc:samples",
     "depcruise:graph:doc:json": "node ./bin/dependency-cruise.js bin src test --config --output-type json --output-to tmp_graph_deps.json --progress",
     "depcruise:graph:doc:fmt-detail": "./bin/depcruise-fmt.js -T dot -f - tmp_graph_deps.json | dot -T svg | tee doc/real-world-samples/dependency-cruiser-without-node_modules.svg | node bin/wrap-stream-in-html.js > docs/dependency-cruiser-dependency-graph.html",
@@ -89,16 +88,18 @@
     "depcruise:graph:dot": "node ./bin/dependency-cruise.js bin src --config --output-type dot | dot -T svg > tmp_deps.svg",
     "depcruise:graph:fdp": "node ./bin/dependency-cruise.js bin src --config --output-type dot | fdp -GK=0.1 -Gsplines=true -T svg > tmp_deps.svg",
     "depcruise:graph:osage": "node ./bin/dependency-cruise.js bin src --config --output-type dot | osage -Gpack=32 -GpackMode=array2 -T svg > tmp_deps.svg",
-    "depcruise:report": "node ./bin/dependency-cruise.js src bin test configs types --output-type err-html --config --output-to dependency-violations.html",
+    "depcruise:graph:view": "node ./bin/dependency-cruise.js bin src --prefix vscode://file/$(pwd)/ --config configs/.dependency-cruiser-show-metrics-config.json --output-type dot --progress cli-feedback | dot -T svg | node ./bin/wrap-stream-in-html.js | browser",
+    "depcruise:report": "node ./bin/dependency-cruise.js src bin test configs types --output-type err-html --config configs/.dependency-cruiser-show-metrics-config.json --output-to dependency-violations.html",
+    "depcruise:report:view": "node ./bin/dependency-cruise.js src bin test configs types --output-type err-html --config configs/.dependency-cruiser-show-metrics-config.json --output-to - | browser",
     "depcruise:focus": "node ./bin/dependency-cruise.js src bin test configs types --progress --config --output-type text --focus",
-    "lint": "npm-run-all --parallel --aggregate-output lint:eslint lint:prettier:check lint:types",
+    "lint": "npm-run-all --parallel --aggregate-output lint:eslint lint:prettier lint:types",
     "lint:eslint": "eslint bin/dependency-cruise.js src test configs tools/**/*.mjs --cache --cache-location .cache/eslint/",
     "lint:eslint:fix": "eslint --fix bin src test configs  tools/**/*.mjs --cache --cache-location .cache/eslint/",
-    "lint:fix": "npm-run-all lint:eslint:fix lint:prettier lint:types:fix",
-    "lint:prettier": "prettier --loglevel warn --write src/**/*.js configs/**/*.js tools/**/*.mjs bin/* types/*.d.ts test/**/*.spec.{cjs,js} test/**/*.{spec,utl}.mjs",
-    "lint:prettier:check": "prettier --loglevel warn --check src/**/*.js configs/**/*.js tools/**/*.mjs bin/* types/*.d.ts test/**/*.spec.{cjs,js} test/**/*.{spec,utl}.mjs",
+    "lint:fix": "npm-run-all lint:eslint:fix lint:prettier:fix lint:types:fix",
+    "lint:prettier": "prettier --loglevel warn --check \"src/**/*.js\" \"configs/**/*.js\" \"tools/**/*.mjs\" \"bin/*\" \"types/*.d.ts\" \"test/**/*.spec.{cjs,js}\" \"test/**/*.{spec,utl}.mjs\"",
+    "lint:prettier:fix": "prettier --loglevel warn --write \"src/**/*.js\" \"configs/**/*.js\" \"tools/**/*.mjs\" \"bin/*\" \"types/*.d.ts\" \"test/**/*.spec.{cjs,js}\" \"test/**/*.{spec,utl}.mjs\"",
     "lint:types": "npm-run-all lint:types:tsc lint:types:lint",
-    "lint:types:tsc": "tsc --noEmit --strict --types --noUnusedLocals --noUnusedParameters types/dependency-cruiser.d.ts",
+    "lint:types:tsc": "tsc --project types/tsconfig.json",
     "lint:types:lint": "eslint --no-ignore --config types/.eslintrc.json types/*.d.ts",
     "lint:types:fix": "eslint --no-ignore --config types/.eslintrc.json --fix types/*.d.ts",
     "scm:push": "run-p --aggregate-output scm:push:*",
@@ -113,8 +114,11 @@
     "scm:push:gitlab-mirror:tags": "git push --tags gitlab-mirror",
     "scm:stage": "git add .",
     "test": "mocha --timeout 4000 \"test/**/*.spec.{js,mjs,cjs}\"",
+    "test:i": "mocha --timeout 4000 \"test/**/*.spec.{js,mjs,cjs}\" -g \"^\\[[I]\\]\"",
+    "test:u": "mocha --timeout 4000 \"test/**/*.spec.{js,mjs,cjs}\" --grep \"^\\[[U]\\]\"",
+    "test:e": "mocha --timeout 4000 \"test/**/*.spec.{js,mjs,cjs}\" --grep \"^\\[[E]\\]\"",
     "test:cover": "c8 --check-coverage --statements 99.9 --branches 99.7 --functions 100 --lines 99.9 --exclude \"{bin,configs,doc,docs,coverage,test,tools,webpack.conf.js,tmp*,src/**/*.template.js,src/cli/tools/svg-in-html-snippets/script.snippet.js,src/cli/init-config/get-user-input.js,src/cli/listeners/*/index.js}\" --reporter text-summary --reporter html --reporter json-summary npm test",
-    "test:glob": "set -f && test \"`bin/dependency-cruise.js test/extract/fixtures/gather-globbing/packages/**/src/**/*.js | grep \"no dependency violations found\"`\" = \"✔ no dependency violations found (6 modules, 0 dependencies cruised)\"",
+    "test:glob": "set -f && test \"`bin/dependency-cruise.js test/extract/__mocks__/gather-globbing/packages/**/src/**/*.js | grep \"no dependency violations found\"`\" = \"✔ no dependency violations found (6 modules, 0 dependencies cruised)\"",
     "test:yarn-pnp": "npm-run-all test:yarn-pnp:cleanup test:yarn-pnp:pack test:yarn-pnp:copy test:yarn-pnp:install test:yarn-pnp:version test:yarn-pnp:run test:yarn-pnp:test test:yarn-pnp:cleanup",
     "test:yarn-pnp:pack": "npm pack",
     "test:yarn-pnp:copy": "shx cp -r test/integration/yarn-pnp.template test/integration/yarn-pnp.testing-ground",
@@ -132,71 +136,90 @@
     "version": "npm-run-all build depcruise:graph:doc scm:stage"
   },
   "dependencies": {
-    "acorn": "8.5.0",
+    "acorn": "8.7.1",
     "acorn-jsx": "5.3.2",
     "acorn-jsx-walk": "2.0.0",
-    "acorn-loose": "8.2.1",
+    "acorn-loose": "8.3.0",
     "acorn-walk": "8.2.0",
-    "ajv": "8.6.3",
-    "chalk": "4.1.2",
-    "commander": "8.2.0",
-    "enhanced-resolve": "5.8.2",
+    "ajv": "8.11.0",
+    "chalk": "^4.1.2",
+    "commander": "9.2.0",
+    "enhanced-resolve": "5.9.3",
     "figures": "^3.2.0",
     "get-stream": "^6.0.1",
-    "glob": "7.1.7",
+    "glob": "7.2.0",
     "handlebars": "4.7.7",
     "indent-string": "^4.0.0",
-    "inquirer": "8.1.5",
-    "json5": "2.2.0",
+    "inquirer": "8.2.4",
+    "json5": "2.2.1",
     "lodash": "4.17.21",
     "safe-regex": "2.1.1",
-    "semver": "^7.3.5",
-    "semver-try-require": "^5.0.1",
-    "teamcity-service-messages": "0.1.11",
-    "tsconfig-paths-webpack-plugin": "3.5.1",
+    "semver": "^7.3.7",
+    "semver-try-require": "^5.0.2",
+    "teamcity-service-messages": "0.1.14",
+    "tsconfig-paths-webpack-plugin": "3.5.2",
     "wrap-ansi": "^7.0.0"
   },
   "devDependencies": {
-    "@babel/core": "7.15.5",
-    "@babel/plugin-transform-modules-commonjs": "7.15.4",
-    "@babel/preset-typescript": "7.15.0",
-    "@swc/core": "1.2.88",
-    "@typescript-eslint/eslint-plugin": "4.31.1",
-    "@typescript-eslint/parser": "4.31.1",
-    "c8": "7.9.0",
-    "chai": "4.3.4",
+    "@babel/core": "7.17.10",
+    "@babel/plugin-transform-modules-commonjs": "7.17.9",
+    "@babel/preset-typescript": "7.16.7",
+    "@swc/core": "1.2.183",
+    "@types/lodash": "4.14.182",
+    "@types/node": "17.0.33",
+    "@typescript-eslint/eslint-plugin": "5.23.0",
+    "@typescript-eslint/parser": "5.23.0",
+    "@vue/compiler-sfc": "3.2.33",
+    "c8": "7.11.2",
+    "chai": "4.3.6",
     "chai-json-schema": "1.5.1",
-    "coffeescript": "2.5.1",
-    "eslint": "7.32.0",
-    "eslint-config-moving-meadow": "2.0.9",
-    "eslint-config-prettier": "8.3.0",
-    "eslint-plugin-budapestian": "2.3.0",
-    "eslint-plugin-import": "2.24.2",
-    "eslint-plugin-mocha": "9.0.0",
+    "coffeescript": "2.7.0",
+    "eslint": "^8.15.0",
+    "eslint-config-moving-meadow": "3.0.0",
+    "eslint-config-prettier": "8.5.0",
+    "eslint-plugin-budapestian": "3.0.2",
+    "eslint-plugin-import": "2.26.0",
+    "eslint-plugin-mocha": "^9.0.0",
     "eslint-plugin-node": "11.1.0",
-    "eslint-plugin-security": "1.4.0",
-    "eslint-plugin-unicorn": "36.0.0",
+    "eslint-plugin-security": "1.5.0",
+    "eslint-plugin-unicorn": "^42.0.0",
     "husky": "^4.3.8",
     "intercept-stdout": "0.1.2",
-    "lint-staged": "11.1.2",
-    "mocha": "9.1.1",
-    "normalize-newline": "4.1.0",
+    "lint-staged": "12.3.4",
+    "mocha": "10.0.0",
+    "normalize-newline": "^3.0.0",
     "npm-run-all": "4.1.5",
-    "prettier": "2.4.1",
-    "shx": "0.3.3",
-    "svelte": "3.42.6",
+    "prettier": "2.6.2",
+    "proxyquire": "2.1.3",
+    "shx": "0.3.4",
+    "svelte": "3.48.0",
     "symlink-dir": "5.0.1",
-    "typescript": "4.4.3",
+    "typescript": "4.6.4",
     "upem": "^7.0.0",
     "vue-template-compiler": "2.6.14",
-    "yarn": "1.22.11"
+    "yarn": "1.22.18"
   },
   "upem": {
     "policies": [
       {
+        "package": "chalk",
+        "policy": "wanted",
+        "because": "version 5 only exports ejs - and we use cjs and don't transpile"
+      },
+      {
+        "package": "eslint-plugin-mocha",
+        "policy": "wanted",
+        "because": "version 10 bumps into https://github.com/lo1tuma/eslint-plugin-mocha/issues/322"
+      },
+      {
         "package": "figures",
         "policy": "wanted",
         "because": "version 4 only exports ejs - and we use cjs and don't transpile"
+      },
+      {
+        "package": "glob",
+        "policy": "pin",
+        "because": "from version 7.2.1 behavior on windows changes - in a potentially breaking fashion. Wait with upgrading until we're majoring or from when there's a vuln in 7.2.0"
       },
       {
         "package": "husky",
@@ -207,6 +230,16 @@
         "package": "indent-string",
         "policy": "wanted",
         "because": "version 5 only exports ejs - and we use cjs and don't transpile"
+      },
+      {
+        "package": "lint-staged",
+        "policy": "pin",
+        "because": "12.3.5 fails with SyntaxError: Unexpected token o in JSON at position 1"
+      },
+      {
+        "package": "normalize-newline",
+        "policy": "wanted",
+        "because": "version 4 only exports ejs - and we use cjs and don't transpile (this only used in unit tests - but one of'em is a cjs one ...)"
       },
       {
         "package": "wrap-ansi",
@@ -225,10 +258,11 @@
     "src/**/*.template.js",
     "src/cli/tools/svg-in-html-snippets/script.snippet.js",
     "test/integration/**",
-    "test/*/fixtures/**",
-    "test/*/*/fixtures/**",
-    "test/*/mocks/**",
-    "test/*/*/mocks/**",
+    "test/*/__fixtures__/**",
+    "test/*/*/__fixtures__/**",
+    "test/*/*/*/__fixtures__/**",
+    "test/*/__mocks__/**",
+    "test/*/*/__mocks__/**",
     "types/**"
   ],
   "engines": {
@@ -242,7 +276,8 @@
     "svelte": ">=3.0.0 <4.0.0",
     "swc": ">=1.0.0 <2.0.0",
     "typescript": ">=2.0.0 <5.0.0",
-    "vue-template-compiler": ">=2.0.0 <3.0.0"
+    "vue-template-compiler": ">=2.0.0 <3.0.0",
+    "@vue/compiler-sfc": ">=3.0.0 <4.0.0"
   },
   "husky": {
     "hooks": {
@@ -260,13 +295,13 @@
       "eslint --fix",
       "prettier --write"
     ],
-    "test/**/*.{utl,spec}.js": [
+    "test/**/*.{utl,spec}.{mjs,cjs}": [
       "eslint --fix",
       "prettier --write"
     ],
-    "*.d.ts": [
+    "types/**/*.d.ts": [
       "eslint --config types/.eslintrc.json --fix",
-      "prettier --write --ignore-path .prettierignore"
+      "prettier --write"
     ]
   }
 }

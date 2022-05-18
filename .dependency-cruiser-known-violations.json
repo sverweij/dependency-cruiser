@@ -1,29 +1,6 @@
 [
   {
-    "from": "src/schema/baseline-violations.schema.json",
-    "to": "src/schema/baseline-violations.schema.json",
-    "rule": {
-      "severity": "error",
-      "name": "no-orphans"
-    }
-  },
-  {
-    "from": "src/schema/configuration.schema.json",
-    "to": "src/schema/configuration.schema.json",
-    "rule": {
-      "severity": "error",
-      "name": "no-orphans"
-    }
-  },
-  {
-    "from": "src/schema/cruise-result.schema.json",
-    "to": "src/schema/cruise-result.schema.json",
-    "rule": {
-      "severity": "error",
-      "name": "no-orphans"
-    }
-  },
-  {
+    "type": "module",
     "from": "test/extract/ast-extractors/typescript2.8-union-types-ast.json",
     "to": "test/extract/ast-extractors/typescript2.8-union-types-ast.json",
     "rule": {
@@ -32,38 +9,7 @@
     }
   },
   {
-    "from": "test/report/baseline/baseline-result.json",
-    "to": "test/report/baseline/baseline-result.json",
-    "rule": {
-      "severity": "error",
-      "name": "no-orphans"
-    }
-  },
-  {
-    "from": "test/report/baseline/dc-result-no-violations.json",
-    "to": "test/report/baseline/dc-result-no-violations.json",
-    "rule": {
-      "severity": "error",
-      "name": "no-orphans"
-    }
-  },
-  {
-    "from": "test/report/baseline/dc-result-with-violations.json",
-    "to": "test/report/baseline/dc-result-with-violations.json",
-    "rule": {
-      "severity": "error",
-      "name": "no-orphans"
-    }
-  },
-  {
-    "from": "test/report/dot/module-level/bare-theme.json",
-    "to": "test/report/dot/module-level/bare-theme.json",
-    "rule": {
-      "severity": "error",
-      "name": "no-orphans"
-    }
-  },
-  {
+    "type": "module",
     "from": "src/schema/baseline-violations.schema.js",
     "to": "src/schema/baseline-violations.schema.js",
     "rule": {
@@ -72,54 +18,7 @@
     }
   },
   {
-    "from": "src/schema/baseline-violations.schema.json",
-    "to": "src/schema/baseline-violations.schema.json",
-    "rule": {
-      "severity": "error",
-      "name": "not-unreachable-from-cli"
-    }
-  },
-  {
-    "from": "src/schema/configuration.schema.json",
-    "to": "src/schema/configuration.schema.json",
-    "rule": {
-      "severity": "error",
-      "name": "not-unreachable-from-cli"
-    }
-  },
-  {
-    "from": "src/schema/cruise-result.schema.json",
-    "to": "src/schema/cruise-result.schema.json",
-    "rule": {
-      "severity": "error",
-      "name": "not-unreachable-from-cli"
-    }
-  },
-  {
-    "from": "src/schema/baseline-violations.schema.json",
-    "to": "src/schema/baseline-violations.schema.json",
-    "rule": {
-      "severity": "warn",
-      "name": "not-unreachable-from-test"
-    }
-  },
-  {
-    "from": "src/schema/configuration.schema.json",
-    "to": "src/schema/configuration.schema.json",
-    "rule": {
-      "severity": "warn",
-      "name": "not-unreachable-from-test"
-    }
-  },
-  {
-    "from": "src/schema/cruise-result.schema.json",
-    "to": "src/schema/cruise-result.schema.json",
-    "rule": {
-      "severity": "warn",
-      "name": "not-unreachable-from-test"
-    }
-  },
-  {
+    "type": "module",
     "from": "src/cli/format.js",
     "to": "src/cli/format.js",
     "rule": {
@@ -128,6 +27,7 @@
     }
   },
   {
+    "type": "module",
     "from": "src/cli/tools/wrap-stream-in-html.js",
     "to": "src/cli/tools/wrap-stream-in-html.js",
     "rule": {
@@ -136,6 +36,7 @@
     }
   },
   {
+    "type": "module",
     "from": "src/cli/validate-node-environment.js",
     "to": "src/cli/validate-node-environment.js",
     "rule": {
@@ -144,6 +45,7 @@
     }
   },
   {
+    "type": "module",
     "from": "src/utl/array-util.js",
     "to": "src/utl/array-util.js",
     "rule": {
@@ -152,6 +54,7 @@
     }
   },
   {
+    "type": "module",
     "from": "src/utl/wrap-and-indent.js",
     "to": "src/utl/wrap-and-indent.js",
     "rule": {

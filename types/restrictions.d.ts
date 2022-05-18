@@ -34,11 +34,35 @@ export interface IToRestriction extends IBaseRestrictionType {
    */
   circular?: boolean;
   /**
-   * If following this dependency will ultimately return to the source
-   * (circular === true), this attribute will contain an (ordered) array of module
-   * names that shows (one of the) circular path(s)
+   * "For circular dependencies - whether or not to match cycles that include
+   * exclusively modules with this regular expression. This is different from
+   * the regular via that already mathces when only some of the modules in the
+   * cycle satisfy the regular expression
    */
-  cycle?: string[];
+  via?: string | string[];
+  /**
+   * For circular dependencies - whether or not to match cycles that include
+   * some modules with this regular expression. If you want to match cycles that
+   * _exclusively_ include modules satisfying the regular expression use the viaOnly
+   * restriction.
+   * E.g. to allow all cycles
+   * except when they go through one specific module. Typically to temporarily
+   * disallow some cycles with a lower severity - setting up a rule with a via
+   * that ignores them in an 'allowed' section.
+   */
+  viaOnly?: string | string[];
+  /**
+   * For circular dependencies - whether or not to match cycles that include
+   * _only_ modules that don't satisfy this regular expression. E.g. to disallow all cycles,
+   * except when they go through one specific module. Typically to temporarily
+   * allow some cycles until they're removed.
+   */
+  viaNot?: string | string[];
+  /**
+   * "For circular dependencies - whether or not to match cycles that include
+   * _some_ modules that don't satisfy this regular expression.
+   */
+  viaSomeNot?: string | string[];
   /**
    * Whether or not to match when the dependency is a dynamic one.
    */
@@ -65,6 +89,11 @@ export interface IToRestriction extends IBaseRestrictionType {
    */
   dependencyTypes?: DependencyType[];
   /**
+   * Whether or not to match modules NOT of any of these types (leaving out
+   * matches none of them)"
+   */
+  dependencyTypesNot?: DependencyType[];
+  /**
    * If true matches dependencies with more than one dependency type (e.g. defined in
    * _both_ npm and npm-dev)
    */
@@ -80,6 +109,18 @@ export interface IToRestriction extends IBaseRestrictionType {
    * licenses. E.g. to flag everyting non MIT use "MIT" here
    */
   licenseNot?: string | string[];
+  /**
+   * When set to true moreUnstable matches for any dependency that has a higher
+   * Instability than the module that depends on it. When set to false it matches
+   * when the opposite is true; the dependency has an equal or lower Instability.
+   *
+   * This attribute is useful when you want to check against Robert C. Martin's
+   * stable dependency * principle. See online documentation for examples and
+   * details.
+   *
+   * Leave this out when you don't care either way.
+   */
+  moreUnstable?: boolean;
 }
 
 export interface IReachabilityToRestrictionType extends IBaseRestrictionType {

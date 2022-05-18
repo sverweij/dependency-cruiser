@@ -17,6 +17,7 @@ export default {
         "npm-unknown",
         "undetermined",
         "unknown",
+        "type-only",
       ],
     },
   },

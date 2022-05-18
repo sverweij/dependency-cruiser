@@ -2,7 +2,7 @@ import path from "path";
 import { expect } from "chai";
 import makeAbsolute from "../../src/config-utl/make-absolute.js";
 
-describe("cli/utl/makeAbsolute", () => {
+describe("[U] cli/utl/makeAbsolute", () => {
   it("leaves absolute path names alone", () => {
     expect(makeAbsolute("/hallo/dit/is/een/absoluut/pad")).to.equal(
       "/hallo/dit/is/een/absoluut/pad"

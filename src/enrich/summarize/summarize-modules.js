@@ -1,45 +1,51 @@
 const _flattenDeep = require("lodash/flattenDeep");
 const _get = require("lodash/get");
+const _has = require("lodash/has");
+const _uniqWith = require("lodash/uniqWith");
 const { findRuleByName } = require("../../graph-utl/rule-set");
 const compare = require("../../graph-utl/compare");
-const deDuplicateViolations = require("./de-duplicate-violations");
+const isSameViolation = require("./is-same-violation");
 
-function cutNonTransgressions(pSourceEntry) {
+function cutNonTransgressions(pModule) {
   return {
-    source: pSourceEntry.source,
-    dependencies: pSourceEntry.dependencies.filter(
+    ...pModule,
+    dependencies: pModule.dependencies.filter(
       (pDependency) => pDependency.valid === false
     ),
   };
 }
 
-function extractMetaData(pViolations) {
-  return pViolations.reduce(
-    (pAll, pThis) => {
-      pAll[pThis.rule.severity] += 1;
-      return pAll;
-    },
-    {
-      error: 0,
-      warn: 0,
-      info: 0,
-    }
-  );
-}
 function toDependencyViolationSummary(pRule, pModule, pDependency, pRuleSet) {
   let lReturnValue = {
+    type: "dependency",
     from: pModule.source,
     to: pDependency.resolved,
     rule: pRule,
   };
 
   if (
-    pDependency.cycle &&
+    _has(pDependency, "cycle") &&
     _get(findRuleByName(pRuleSet, pRule.name), "to.circular")
   ) {
     lReturnValue = {
       ...lReturnValue,
+      type: "cycle",
       cycle: pDependency.cycle,
+    };
+  }
+
+  if (
+    _has(pModule, "instability") &&
+    _has(pDependency, "instability") &&
+    _has(findRuleByName(pRuleSet, pRule.name), "to.moreUnstable")
+  ) {
+    lReturnValue = {
+      ...lReturnValue,
+      type: "instability",
+      metrics: {
+        from: { instability: pModule.instability },
+        to: { instability: pDependency.instability },
+      },
     };
   }
 
@@ -80,7 +86,7 @@ function extractDependencyViolations(pModules, pRuleSet) {
 
 function toModuleViolationSummary(pRule, pModule, pRuleSet) {
   let lReturnValue = [
-    { from: pModule.source, to: pModule.source, rule: pRule },
+    { type: "module", from: pModule.source, to: pModule.source, rule: pRule },
   ];
   if (
     pModule.reaches &&
@@ -99,6 +105,7 @@ function toModuleViolationSummary(pRule, pModule, pRuleSet) {
         []
       )
       .map((pToModule) => ({
+        type: "reachability",
         from: pModule.source,
         to: pToModule.to,
         rule: pRule,
@@ -128,21 +135,10 @@ function extractModuleViolations(pModules, pRuleSet) {
 }
 
 module.exports = function summarizeModules(pModules, pRuleSet) {
-  const lViolations = deDuplicateViolations(
+  return _uniqWith(
     extractDependencyViolations(pModules, pRuleSet)
       .concat(extractModuleViolations(pModules, pRuleSet))
-      .sort(compare.violations)
+      .sort(compare.violations),
+    isSameViolation
   );
-
-  return {
-    violations: lViolations,
-    ...extractMetaData(lViolations),
-    totalCruised: pModules.length,
-    totalDependenciesCruised: pModules.reduce(
-      (pAll, pModule) => pAll + pModule.dependencies.length,
-      0
-    ),
-  };
 };
-
-module.exports.extractModuleViolations = extractModuleViolations;

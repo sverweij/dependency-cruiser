@@ -1,7 +1,10 @@
 import { expect } from "chai";
-import deDuplicateViolations from "../../src/enrich/summarize/de-duplicate-violations.js";
+import uniqWith from "lodash/uniqWith.js";
+import isSameViolation from "../../src/enrich/summarize/is-same-violation.js";
 
-describe("enrich/de-duplicate-violations", () => {
+const deDuplicateViolations = (pViolations) =>
+  uniqWith(pViolations, isSameViolation);
+describe("[U] enrich/de-duplicate-violations", () => {
   it("no violations => no violations", () => {
     expect(deDuplicateViolations([])).to.deep.equal([]);
   });

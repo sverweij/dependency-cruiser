@@ -1,5 +1,9 @@
 const path = require("path");
-
+/**
+ *
+ * @param {string} pFileDirectory
+ * @returns {string}
+ */
 function relativize(pFileDirectory) {
   // if pFileDirectory === process.cwd() path.relative will yield an empty string
   // whereas we actually want something non-empty => hence normalize
@@ -9,6 +13,11 @@ function relativize(pFileDirectory) {
     : pFileDirectory;
 }
 
+/**
+ *
+ * @param {string[]} pFileAndDirectoryArray
+ * @returns {string[]}
+ */
 module.exports = function normalizeFileAndDirectoryArray(
   pFileAndDirectoryArray
 ) {

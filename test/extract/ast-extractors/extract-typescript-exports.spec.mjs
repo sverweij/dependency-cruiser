@@ -1,7 +1,7 @@
 import { expect } from "chai";
 import extractTypescript from "./extract-typescript.utl.mjs";
 
-describe("ast-extractors/extract-typescript - re-exports", () => {
+describe("[U] ast-extractors/extract-typescript - re-exports", () => {
   it("extracts 're-export everything'", () => {
     expect(extractTypescript("export * from './ts-thing';")).to.deep.equal([
       {

@@ -65,6 +65,10 @@
             color: blue;
         }
 
+        .ignore {
+            color:gray;
+        }
+
         .ok {
             color: limegreen;
         }
@@ -98,6 +102,31 @@
         }
 
         #show-all-the-rules:target tr.unviolated {
+            display: table-row;
+            color: gray;
+        }
+
+        #show-ignored {
+            display: block
+        }
+
+        #hide-ignored {
+            display: none
+        }
+
+        #show-ignored-violations:target #show-ignored {
+            display: none
+        }
+
+        #show-ignored-violations:target #hide-ignored {
+            display: block
+        }
+
+        tr.ignored {
+            display: none
+        }
+
+        #show-ignored-violations:target tr.ignored {
             display: table-row;
             color: gray;
         }
@@ -144,8 +173,9 @@
     </style>
 </head>
 
-<body id="show-all-the-rules">
+<body>
     <h1>Forbidden dependency check - results</h1>
+    <span id="show-all-the-rules">
     <h2><svg class="p__svg--inline" viewBox="0 0 14 16" version="1.1" aria-hidden="true">
             <path fill-rule="evenodd"
                 d="M11.5 8L8.8 5.4 6.6 8.5 5.5 1.6 2.38 8H0v2h3.6l.9-1.8.9 5.4L9 8.5l1.6 1.5H14V8h-2.5z"></path>
@@ -166,6 +196,11 @@
         <div style="float:left;padding-right:20px">
             <strong>{{summary.info}}</strong> informational
         </div>
+        {{#if summary.ignore}}
+        <div style="float:left;padding-right:20px" class="ignore">
+            <strong>{{summary.ignore}}</strong> ignored
+        </div>
+        {{/if}}
         &nbsp;
     </p>
     <table>
@@ -175,9 +210,9 @@
                     <th></th>
                     <th>severity</th>
                     <th>rule</th>
-                    <th>#&nbsp;violations</th>
+                    <th>violations</th>
+                    {{#if summary.ignore}}<th>ignored</th>{{/if}}
                     <th>explanation</th>
-                </tr>
             </thead>
             {{#summary.agggregateViolations}}
             <tr {{#if unviolated}}class="unviolated" {{/if}}>
@@ -187,11 +222,12 @@
                 <td class="nowrap"><a href="#{{name}}-instance" id="{{name}}-definition" class="noiseless">{{name}}</a>
                 </td>
                 <td><strong>{{count}}</strong></td>
+                {{#if ../summary.ignore}}<td><strong>{{ignoredCount}}</strong></td>{{/if}}
                 <td>{{comment}}</td>
             </tr>
             {{/summary.agggregateViolations}}
             <tr>
-                <td colspan="5" class="controls">
+                <td colspan={{#if summary.ignore}}"6"{{^}}"5"{{/if}} class="controls">
                     <div id="show-unviolated">
                         &downarrow; <a href="#show-all-the-rules">also show unviolated rules</a>
                     </div>
@@ -202,8 +238,10 @@
             </tr>
         </tbody>
     </table>
+    </span>
 
     {{#if summary.violations}}
+    <span id="show-ignored-violations">
     <h2><svg class="p__svg--inline" viewBox="0 0 12 16" version="1.1" aria-hidden="true">
             <path fill-rule="evenodd"
                 d="M5.05.31c.81 2.17.41 3.38-.52 4.31C3.55 5.67 1.98 6.45.9 7.98c-1.45 2.05-1.7 6.53 3.53 7.7-2.2-1.16-2.67-4.52-.3-6.61-.61 2.03.53 3.33 1.94 2.86 1.39-.47 2.3.53 2.27 1.67-.02.78-.31 1.44-1.13 1.81 3.42-.59 4.78-3.42 4.78-5.56 0-2.84-2.53-3.22-1.25-5.61-1.52.13-2.03 1.13-1.89 2.75.09 1.08-1.02 1.8-1.86 1.33-.67-.41-.66-1.19-.06-1.78C8.18 5.31 8.68 2.45 5.05.32L5.03.3l.02.01z">
@@ -220,17 +258,30 @@
         </thead>
         <tbody>
             {{#summary.violations}}
-            <tr>
+            <tr class="{{rule.severity}}d">
                 <td class="{{rule.severity}}">{{rule.severity}}</td>
                 <td class="nowrap"><a href="#{{rule.name}}-definition" id="{{rule.name}}-instance"
                         class="noiseless">{{rule.name}}</a></td>
-                <td><a href="{{../summary.optionsUsed.prefix}}{{from}}">{{from}}</a></td>
+                <td><a href="{{../summary.optionsUsed.prefix}}{{from}}">{{from}}</a>{{{fromExtras}}}</td>
                 <td>{{{to}}}</td>
 
             </tr>
             {{/summary.violations}}
+            {{#if summary.ignore}}
+            <tr>
+                <td colspan="4" class="controls">
+                    <div id="show-ignored">
+                        &downarrow; <a href="#show-ignored-violations">also show ignored violations</a>
+                    </div>
+                    <div id="hide-ignored">
+                        &uparrow; <a href="">hide ignored violations</a>
+                    </div>
+                </td>
+            </tr>
+            {{/if}}
         </tbody>
     </table>
+    </span>
     {{else}}
     <h2><span aria-hidden="true">&hearts;</span> No violations found</h2>
     <p>Get gummy bears to celebrate.</p>

@@ -1,5 +1,5 @@
+const { extractGroups } = require("../utl/regex-util");
 const matchers = require("./matchers");
-const { extractGroups } = require("./utl");
 
 /**
  * Returns true if the module violates the rule.

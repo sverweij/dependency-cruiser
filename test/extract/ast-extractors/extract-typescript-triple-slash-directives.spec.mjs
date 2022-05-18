@@ -1,7 +1,7 @@
 import { expect } from "chai";
 import extractTypescript from "./extract-typescript.utl.mjs";
 
-describe("ast-extractors/extract-typescript - triple slash directives", () => {
+describe("[U] ast-extractors/extract-typescript - triple slash directives", () => {
   it("path", () => {
     expect(
       extractTypescript('/// <reference path="./ts-thing" />')

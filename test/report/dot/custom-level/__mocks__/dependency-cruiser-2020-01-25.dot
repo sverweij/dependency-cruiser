@@ -1,0 +1,46 @@
+strict digraph "dependency-cruiser output"{
+    splines="ortho"
+    
+    
+
+    subgraph "cluster_bin" {label="bin" "bin/depcruise-fmt.js" [label=<depcruise-fmt.js> tooltip="depcruise-fmt.js" URL="https://github.com/sverweij/dependency-cruiser/blob/develop/bin/depcruise-fmt.js" ] }
+    "bin/depcruise-fmt.js" -> "src/cli"
+    subgraph "cluster_bin" {label="bin" "bin/dependency-cruise.js" [label=<dependency-cruise.js> tooltip="dependency-cruise.js" URL="https://github.com/sverweij/dependency-cruiser/blob/develop/bin/dependency-cruise.js" ] }
+    "bin/dependency-cruise.js" -> "src/cli"
+    subgraph "cluster_src" {label="src" "src/cli" [label=<cli> tooltip="cli" URL="https://github.com/sverweij/dependency-cruiser/blob/develop/src/cli" ] }
+    "src/cli" -> "src/main"
+    "src/cli" -> "src/extract" [xlabel="cli-to-main-only-warn" tooltip="cli-to-main-only-warn" ]
+    subgraph "cluster_src" {label="src" "src/extract" [label=<extract> tooltip="extract" URL="https://github.com/sverweij/dependency-cruiser/blob/develop/src/extract" ] }
+    "src/extract" -> "src/validate"
+    "src/extract" -> "src/utl"
+    subgraph "cluster_src" {label="src" "src/main" [label=<main> tooltip="main" URL="https://github.com/sverweij/dependency-cruiser/blob/develop/src/main" ] }
+    "src/main" -> "src/extract"
+    "src/main" -> "src/report"
+    "src/main" -> "src/schema"
+    subgraph "cluster_src" {label="src" "src/report" [label=<report> tooltip="report" URL="https://github.com/sverweij/dependency-cruiser/blob/develop/src/report" ] }
+    "src/report" -> "src/utl"
+    subgraph "cluster_src" {label="src" "src/schema" [label=<schema> tooltip="schema" URL="https://github.com/sverweij/dependency-cruiser/blob/develop/src/schema" ] }
+    subgraph "cluster_src" {label="src" "src/utl" [label=<utl> tooltip="utl" URL="https://github.com/sverweij/dependency-cruiser/blob/develop/src/utl" ] }
+    subgraph "cluster_src" {label="src" "src/validate" [label=<validate> tooltip="validate" URL="https://github.com/sverweij/dependency-cruiser/blob/develop/src/validate" ] }
+    "src/validate" -> "src/utl"
+    subgraph "cluster_test" {label="test" "test/cli" [label=<cli> tooltip="cli" URL="https://github.com/sverweij/dependency-cruiser/blob/develop/test/cli" ] }
+    "test/cli" -> "src/cli"
+    "test/cli" -> "test/utl"
+    "test/cli" -> "src/schema"
+    "test/cli" -> "src/extract"
+    subgraph "cluster_test" {label="test" "test/extract" [label=<extract> tooltip="extract" URL="https://github.com/sverweij/dependency-cruiser/blob/develop/test/extract" ] }
+    "test/extract" -> "src/extract"
+    "test/extract" -> "src/main"
+    "test/extract" -> "src/schema"
+    "test/extract" -> "src/cli"
+    subgraph "cluster_test" {label="test" "test/main" [label=<main> tooltip="main" URL="https://github.com/sverweij/dependency-cruiser/blob/develop/test/main" ] }
+    "test/main" -> "src/main"
+    "test/main" -> "src/schema"
+    subgraph "cluster_test" {label="test" "test/report" [label=<report> tooltip="no-orphans" URL="https://github.com/sverweij/dependency-cruiser/blob/develop/test/report" ] }
+    "test/report" -> "src/report"
+    subgraph "cluster_test" {label="test" "test/utl" [label=<utl> tooltip="utl" URL="https://github.com/sverweij/dependency-cruiser/blob/develop/test/utl" ] }
+    "test/utl" -> "src/utl"
+    subgraph "cluster_test" {label="test" "test/validate" [label=<validate> tooltip="validate" URL="https://github.com/sverweij/dependency-cruiser/blob/develop/test/validate" ] }
+    "test/validate" -> "src/validate"
+    "test/validate" -> "src/main"
+}

@@ -5,7 +5,7 @@ import { createRequireJSON } from "../backwards.utl.mjs";
 
 const requireJSON = createRequireJSON(import.meta.url);
 const cruiseResult = requireJSON(
-  "./fixtures/cruise-results-dc-2020-08-30-src-cli.json"
+  "./__mocks__/cruise-results-dc-2020-08-30-src-cli.json"
 );
 
 const MINIMAL_RESULT = {
@@ -15,13 +15,17 @@ const MINIMAL_RESULT = {
     error: 0,
     warn: 0,
     info: 0,
+    ignore: 0,
     totalCruised: 0,
     totalDependenciesCruised: 0,
-    optionsUsed: {},
+    optionsUsed: {
+      args: "",
+      outputType: "json",
+    },
   },
 };
 
-describe("main.format - format", () => {
+describe("[E] main.format - format", () => {
   it("barfs when it gets an invalid output type", () => {
     expect(() => {
       main.format({}, { outputType: "not-a-valid-reporter" });
@@ -63,6 +67,7 @@ describe("main.format - format", () => {
 
     expect(lCollapsedResult.summary.violations).to.deep.equal([
       {
+        type: "dependency",
         from: "src/cli/",
         to: "src/extract/",
         rule: {
@@ -84,6 +89,7 @@ describe("main.format - format", () => {
       "This cli module depends on something not in the public interface"
     );
   });
+
   it("returns string without error explanations when asked for the err report", () => {
     const lErrorResult = main.format(cruiseResult, {
       outputType: "err",
@@ -92,5 +98,19 @@ describe("main.format - format", () => {
     expect(lErrorResult).to.not.contain(
       "This cli module depends on something not in the public interface"
     );
+  });
+
+  it("retains options that are in .summary.optionsUsed unless overriden", () => {
+    const lJSONResult = JSON.parse(
+      main.format(cruiseResult, {
+        outputType: "anon",
+        includeOnly: "^src/",
+      }).output
+    );
+    expect(Object.keys(lJSONResult.summary.optionsUsed).length).to.equal(16);
+    expect(lJSONResult.summary.optionsUsed.outputType).to.equal("anon");
+    expect(lJSONResult.summary.optionsUsed.includeOnly).to.equal("^src/");
+    // without includeOnly it'd be 53
+    expect(lJSONResult.modules.length).to.equal(33);
   });
 });

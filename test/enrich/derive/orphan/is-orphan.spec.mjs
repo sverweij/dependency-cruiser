@@ -1,10 +1,10 @@
 import { expect } from "chai";
 
 import isOrphan from "../../../../src/enrich/derive/orphan/is-orphan.js";
-import ONE_MODULE_FIXTURE from "./fixtures/one-module.mjs";
-import TWO_MODULES_FIXTURE from "./fixtures/two-module.mjs";
+import ONE_MODULE_FIXTURE from "./__mocks__/one-module.mjs";
+import TWO_MODULES_FIXTURE from "./__mocks__/two-module.mjs";
 
-describe("enrich/derive/orphan/isOrphan", () => {
+describe("[U] enrich/derive/orphan/isOrphan", () => {
   it("flags a single module dependency graph as orphan", () => {
     expect(
       isOrphan({ source: "./lonely.js", dependencies: [] }, ONE_MODULE_FIXTURE)
