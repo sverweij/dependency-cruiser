@@ -1111,7 +1111,7 @@ module.exports = {
   forbidden: [
     {
       name: "SDP",
-      description:
+      comment:
         "This module violates the 'stable dependencies' principle; it depends " +
         "on a module that is likely to be more prone to changes than it is " +
         "itself. Consider refactoring.",
