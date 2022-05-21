@@ -112,9 +112,42 @@ describe("[U] cli/init-config/environment-helpers - getTSConfigCandidates", () =
     );
     expect(helpers.getTSConfigCandidates()).to.deep.equal([
       "extended-tsconfig-from-base.json",
-      "jsconfig.json",
       "tsconfig.base.json",
       "tsconfig.json",
+    ]);
+  });
+});
+
+describe("[U] cli/init-config/environment-helpers - getJSConfigCandidates", () => {
+  const WORKINGDIR = process.cwd();
+  afterEach("tear down", () => {
+    process.chdir(WORKINGDIR);
+  });
+  it("Returns an empty array when the folder is empty", () => {
+    process.chdir(
+      "test/cli/init-config/__fixtures__/get-matching-filenames-empty"
+    );
+    expect(helpers.getJSConfigCandidates()).to.deep.equal([]);
+  });
+  it("Returns an empty array when there's only babel configs", () => {
+    process.chdir(
+      "test/cli/init-config/__fixtures__/get-matching-filenames-babel"
+    );
+    expect(helpers.getJSConfigCandidates()).to.deep.equal([]);
+  });
+  it("Returns an empty array when there's only webpack configs", () => {
+    process.chdir(
+      "test/cli/init-config/__fixtures__/get-matching-filenames-webpack"
+    );
+    expect(helpers.getJSConfigCandidates()).to.deep.equal([]);
+  });
+  it("Returns all js config variants present in a folder", () => {
+    process.chdir(
+      "test/cli/init-config/__fixtures__/get-matching-filenames-ts"
+    );
+    expect(helpers.getJSConfigCandidates()).to.deep.equal([
+      "jsconfig.json",
+      "thingie-jsconfig.json",
     ]);
   });
 });

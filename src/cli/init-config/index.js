@@ -13,6 +13,8 @@ const {
   hasTSConfigCandidates,
   getTSConfigCandidates,
   getDefaultConfigFileName,
+  hasJSConfigCandidates,
+  getJSConfigCandidates,
 } = require("./environment-helpers");
 const {
   writeRunScriptsToManifest,
@@ -32,6 +34,8 @@ function getOneshotConfig(pOneShotConfigId) {
   const lBaseConfig = {
     isMonoRepo: isLikelyMonoRepo(),
     combinedDependencies: false,
+    useJsConfig: hasJSConfigCandidates() && !hasTSConfigCandidates(),
+    jsConfig: getJSConfigCandidates().shift(),
     useTsConfig: hasTSConfigCandidates(),
     tsConfig: getTSConfigCandidates().shift(),
     tsPreCompilationDeps: hasTSConfigCandidates(),

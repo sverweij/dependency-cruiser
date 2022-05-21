@@ -320,9 +320,15 @@ module.exports = {
       fileName: '{{tsConfig}}'
     },
     {{^}}
+      {{#if useJsConfig}}
+    tsConfig: {
+      fileName: '{{jsConfig}}'
+    },
+      {{^}}
     // tsConfig: {
     //  fileName: './tsconfig.json'
     // },
+      {{/if}}
     {{/if}}
 
     /* Webpack configuration to use to get resolve options from.
