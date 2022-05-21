@@ -53,7 +53,7 @@ try {
     )
     .option(
       "--ts-config [file]",
-      "use a typescript configuration (e.g. tsconfig.json)"
+      "use a TypeScript configuration (e.g. tsconfig.json) or it's JavaScript counterpart (e.g. jsconfig.json)"
     )
     .option(
       "--webpack-config [file]",
