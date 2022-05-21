@@ -1,0 +1,25 @@
+flowchart LR
+
+subgraph test["test"]
+  subgraph testcli["cli"]
+    subgraph testclifixtures["fixtures"]
+      subgraph testclifixturesunresolvable-in-sub["unresolvable-in-sub"]
+        testclifixturesunresolvable-in-subrefers-to-an-unresolvable-modulejs["refers-to-an-unresolvable-module.js"]
+      end
+    end
+  end
+end
+subgraph __currentPath__["."]
+  __currentPath__not-at-home["not-at-home"]
+  subgraph __currentPath__this["this"]
+    subgraph __currentPath__thispath["path"]
+      subgraph __currentPath__thispathdoes["does"]
+        subgraph __currentPath__thispathdoesnot["not"]
+          __currentPath__thispathdoesnotexist["exist"]
+        end
+      end
+    end
+  end
+end
+testclifixturesunresolvable-in-subrefers-to-an-unresolvable-modulejs --> __currentPath__not-at-home
+testclifixturesunresolvable-in-subrefers-to-an-unresolvable-modulejs --> __currentPath__thispathdoesnotexist

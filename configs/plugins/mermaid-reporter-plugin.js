@@ -85,8 +85,7 @@ const renderMermaidThing = (pCruiseResult) => {
   const subgraphs = convertedSubgraphSources(pCruiseResult);
   const edges = convertedEdgeSources(pCruiseResult);
 
-  return `
-flowchart LR
+  return `flowchart LR
 
 ${mermaidSubgraphs(subgraphs)}
 ${mermaidEdges(edges)}

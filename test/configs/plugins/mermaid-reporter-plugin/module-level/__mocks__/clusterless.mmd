@@ -1,0 +1,48 @@
+flowchart LR
+
+subgraph node_modules["node_modules"]
+  subgraph node_modulessomemodule["somemodule"]
+    subgraph node_modulessomemodulenode_modules["node_modules"]
+      subgraph node_modulessomemodulenode_modulessomeothermodule["someothermodule"]
+        node_modulessomemodulenode_modulessomeothermodulemainjs["main.js"]
+      end
+    end
+    subgraph node_modulessomemodulesrc["src"]
+      node_modulessomemodulesrcmoar-javascriptjs["moar-javascript.js"]
+      node_modulessomemodulesrcsomemodulejs["somemodule.js"]
+    end
+  end
+end
+one_only_onejs["one_only_one.js"]
+path["path"]
+one_only_twojs["one_only_two.js"]
+root_onejs["root_one.js"]
+fs["fs"]
+sharedjs["shared.js"]
+subgraph sub["sub"]
+  subdirjs["dir.js"]
+  subdepindirjs["depindir.js"]
+end
+root_twojs["root_two.js"]
+somedatajson["somedata.json"]
+http["http"]
+two_only_onejs["two_only_one.js"]
+node_modulessomemodulesrcsomemodulejs --> node_modulessomemodulesrcmoar-javascriptjs
+node_modulessomemodulesrcsomemodulejs --> node_modulessomemodulenode_modulessomeothermodulemainjs
+one_only_onejs --> path
+one_only_twojs --> path
+root_onejs --> one_only_onejs
+root_onejs --> one_only_twojs
+root_onejs --> sharedjs
+root_onejs --> subdirjs
+root_onejs --> fs
+root_onejs --> node_modulessomemodulesrcsomemodulejs
+sharedjs --> path
+subdirjs --> subdepindirjs
+subdirjs --> path
+subdepindirjs --> path
+root_twojs --> sharedjs
+root_twojs --> somedatajson
+root_twojs --> two_only_onejs
+root_twojs --> http
+two_only_onejs --> subdirjs

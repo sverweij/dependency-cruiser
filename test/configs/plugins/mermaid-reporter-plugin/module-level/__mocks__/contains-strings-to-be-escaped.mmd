@@ -1,0 +1,15 @@
+flowchart LR
+
+subgraph pages["pages"]
+  subgraph pagesposts["posts"]
+    pagespostsidjsx["[id].jsx"]
+  end
+end
+subgraph src["src"]
+  subgraph srccomponents["components"]
+    subgraph srccomponentsPost["Post"]
+      srccomponentsPostindextsx["index.tsx"]
+    end
+  end
+end
+pagespostsidjsx --> srccomponentsPostindextsx
