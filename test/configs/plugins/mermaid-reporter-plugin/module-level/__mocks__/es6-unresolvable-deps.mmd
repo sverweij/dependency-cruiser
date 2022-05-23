@@ -1,10 +1,10 @@
 flowchart LR
 
 subgraph test["test"]
-  subgraph testcli["cli"]
-    subgraph testclifixtures["fixtures"]
-      subgraph testclifixturesunresolvable-in-sub["unresolvable-in-sub"]
-        testclifixturesunresolvable-in-subrefers-to-an-unresolvable-modulejs["refers-to-an-unresolvable-module.js"]
+  subgraph test_cli["cli"]
+    subgraph test_cli_fixtures["fixtures"]
+      subgraph test_cli_fixtures_unresolvable-in-sub["unresolvable-in-sub"]
+        test_cli_fixtures_unresolvable-in-sub_refers-to-an-unresolvable-module_js["refers-to-an-unresolvable-module.js"]
       end
     end
   end
@@ -12,14 +12,14 @@ end
 subgraph __currentPath__["."]
   __currentPath__not-at-home["not-at-home"]
   subgraph __currentPath__this["this"]
-    subgraph __currentPath__thispath["path"]
-      subgraph __currentPath__thispathdoes["does"]
-        subgraph __currentPath__thispathdoesnot["not"]
-          __currentPath__thispathdoesnotexist["exist"]
+    subgraph __currentPath__this_path["path"]
+      subgraph __currentPath__this_path_does["does"]
+        subgraph __currentPath__this_path_does_not["not"]
+          __currentPath__this_path_does_not_exist["exist"]
         end
       end
     end
   end
 end
-testclifixturesunresolvable-in-subrefers-to-an-unresolvable-modulejs --> __currentPath__not-at-home
-testclifixturesunresolvable-in-subrefers-to-an-unresolvable-modulejs --> __currentPath__thispathdoesnotexist
+test_cli_fixtures_unresolvable-in-sub_refers-to-an-unresolvable-module_js --> __currentPath__not-at-home
+test_cli_fixtures_unresolvable-in-sub_refers-to-an-unresolvable-module_js --> __currentPath__this_path_does_not_exist

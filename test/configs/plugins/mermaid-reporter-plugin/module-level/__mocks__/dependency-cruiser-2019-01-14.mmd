@@ -1,419 +1,419 @@
 flowchart LR
 
 subgraph bin["bin"]
-  bindependency-cruise["dependency-cruise"]
+  bin_dependency-cruise["dependency-cruise"]
 end
-packagejson["package.json"]
+package_json["package.json"]
 subgraph node_modules["node_modules"]
-  subgraph node_modulescommander["commander"]
-    node_modulescommanderindexjs["index.js"]
+  subgraph node_modules_commander["commander"]
+    node_modules_commander_index_js["index.js"]
   end
-  subgraph node_modulessemver["semver"]
-    node_modulessemversemverjs["semver.js"]
+  subgraph node_modules_semver["semver"]
+    node_modules_semver_semver_js["semver.js"]
   end
-  subgraph node_modulesglob["glob"]
-    node_modulesglobglobjs["glob.js"]
+  subgraph node_modules_glob["glob"]
+    node_modules_glob_glob_js["glob.js"]
   end
-  subgraph node_moduleslodash["lodash"]
-    node_moduleslodashgetjs["get.js"]
-    node_moduleslodashlodashjs["lodash.js"]
-    node_moduleslodashmemoizejs["memoize.js"]
-    node_moduleslodashclonejs["clone.js"]
-    node_moduleslodashuniqjs["uniq.js"]
-    node_moduleslodashflattenDeepjs["flattenDeep.js"]
-    node_moduleslodashuniqByjs["uniqBy.js"]
-    node_moduleslodashsetjs["set.js"]
-    node_moduleslodashisEqualjs["isEqual.js"]
-    node_moduleslodashuniqWithjs["uniqWith.js"]
+  subgraph node_modules_lodash["lodash"]
+    node_modules_lodash_get_js["get.js"]
+    node_modules_lodash_lodash_js["lodash.js"]
+    node_modules_lodash_memoize_js["memoize.js"]
+    node_modules_lodash_clone_js["clone.js"]
+    node_modules_lodash_uniq_js["uniq.js"]
+    node_modules_lodash_flattenDeep_js["flattenDeep.js"]
+    node_modules_lodash_uniqBy_js["uniqBy.js"]
+    node_modules_lodash_set_js["set.js"]
+    node_modules_lodash_isEqual_js["isEqual.js"]
+    node_modules_lodash_uniqWith_js["uniqWith.js"]
   end
-  subgraph node_modulesacorn-walk["acorn-walk"]
-    subgraph node_modulesacorn-walkdist["dist"]
-      node_modulesacorn-walkdistwalkjs["walk.js"]
+  subgraph node_modules_acorn-walk["acorn-walk"]
+    subgraph node_modules_acorn-walk_dist["dist"]
+      node_modules_acorn-walk_dist_walk_js["walk.js"]
     end
   end
-  subgraph node_modulessemver-try-require["semver-try-require"]
-    subgraph node_modulessemver-try-requiresrc["src"]
-      node_modulessemver-try-requiresrcindexjs["index.js"]
+  subgraph node_modules_semver-try-require["semver-try-require"]
+    subgraph node_modules_semver-try-require_src["src"]
+      node_modules_semver-try-require_src_index_js["index.js"]
     end
   end
-  subgraph node_modulesacorn["acorn"]
-    subgraph node_modulesacorndist["dist"]
-      node_modulesacorndistacornjs["acorn.js"]
+  subgraph node_modules_acorn["acorn"]
+    subgraph node_modules_acorn_dist["dist"]
+      node_modules_acorn_dist_acorn_js["acorn.js"]
     end
   end
-  subgraph node_modulesacorn-loose["acorn-loose"]
-    subgraph node_modulesacorn-loosedist["dist"]
-      node_modulesacorn-loosedistacorn-loosejs["acorn-loose.js"]
+  subgraph node_modules_acorn-loose["acorn-loose"]
+    subgraph node_modules_acorn-loose_dist["dist"]
+      node_modules_acorn-loose_dist_acorn-loose_js["acorn-loose.js"]
     end
   end
-  subgraph node_modulesresolve["resolve"]
-    node_modulesresolveindexjs["index.js"]
+  subgraph node_modules_resolve["resolve"]
+    node_modules_resolve_index_js["index.js"]
   end
-  subgraph node_modulesenhanced-resolve["enhanced-resolve"]
-    subgraph node_modulesenhanced-resolvelib["lib"]
-      node_modulesenhanced-resolvelibnodejs["node.js"]
+  subgraph node_modules_enhanced-resolve["enhanced-resolve"]
+    subgraph node_modules_enhanced-resolve_lib["lib"]
+      node_modules_enhanced-resolve_lib_node_js["node.js"]
     end
   end
-  subgraph node_modulesawesome-typescript-loader["awesome-typescript-loader"]
-    subgraph node_modulesawesome-typescript-loaderdist["dist"]
-      node_modulesawesome-typescript-loaderdistentryjs["entry.js"]
+  subgraph node_modules_awesome-typescript-loader["awesome-typescript-loader"]
+    subgraph node_modules_awesome-typescript-loader_dist["dist"]
+      node_modules_awesome-typescript-loader_dist_entry_js["entry.js"]
     end
   end
-  subgraph node_moduleshandlebars["handlebars"]
-    node_moduleshandlebarsruntimejs["runtime.js"]
+  subgraph node_modules_handlebars["handlebars"]
+    node_modules_handlebars_runtime_js["runtime.js"]
   end
-  subgraph node_moduleschalk["chalk"]
-    node_moduleschalkindexjs["index.js"]
+  subgraph node_modules_chalk["chalk"]
+    node_modules_chalk_index_js["index.js"]
   end
-  subgraph node_modulesfigures["figures"]
-    node_modulesfiguresindexjs["index.js"]
+  subgraph node_modules_figures["figures"]
+    node_modules_figures_index_js["index.js"]
   end
-  subgraph node_modulessafe-regex["safe-regex"]
-    node_modulessafe-regexindexjs["index.js"]
+  subgraph node_modules_safe-regex["safe-regex"]
+    node_modules_safe-regex_index_js["index.js"]
   end
-  subgraph node_modulesajv["ajv"]
-    subgraph node_modulesajvlib["lib"]
-      node_modulesajvlibajvjs["ajv.js"]
+  subgraph node_modules_ajv["ajv"]
+    subgraph node_modules_ajv_lib["lib"]
+      node_modules_ajv_lib_ajv_js["ajv.js"]
     end
   end
-  subgraph node_modulesinquirer["inquirer"]
-    subgraph node_modulesinquirerlib["lib"]
-      node_modulesinquirerlibinquirerjs["inquirer.js"]
+  subgraph node_modules_inquirer["inquirer"]
+    subgraph node_modules_inquirer_lib["lib"]
+      node_modules_inquirer_lib_inquirer_js["inquirer.js"]
     end
   end
-  subgraph node_modulesstrip-json-comments["strip-json-comments"]
-    node_modulesstrip-json-commentsindexjs["index.js"]
+  subgraph node_modules_strip-json-comments["strip-json-comments"]
+    node_modules_strip-json-comments_index_js["index.js"]
   end
 end
 subgraph src["src"]
-  subgraph srccli["cli"]
-    srccliindexjs["index.js"]
-    srccliformatMetaInfojs["formatMetaInfo.js"]
-    srccligetResolveConfigjs["getResolveConfig.js"]
-    subgraph srccliutl["utl"]
-      srccliutlmakeAbsolutejs["makeAbsolute.js"]
-      srccliutliojs["io.js"]
-      srccliutlvalidateFileExistencejs["validateFileExistence.js"]
+  subgraph src_cli["cli"]
+    src_cli_index_js["index.js"]
+    src_cli_formatMetaInfo_js["formatMetaInfo.js"]
+    src_cli_getResolveConfig_js["getResolveConfig.js"]
+    subgraph src_cli_utl["utl"]
+      src_cli_utl_makeAbsolute_js["makeAbsolute.js"]
+      src_cli_utl_io_js["io.js"]
+      src_cli_utl_validateFileExistence_js["validateFileExistence.js"]
     end
-    subgraph srccliinitConfig["initConfig"]
-      srccliinitConfigindexjs["index.js"]
-      srccliinitConfigcreateConfigFilejs["createConfigFile.js"]
-      srccliinitConfigconfigjstemplatejs["config.js.template.js"]
-      srccliinitConfigconfigjsontemplatejs["config.json.template.js"]
-      srccliinitConfiggetUserInputjs["getUserInput.js"]
+    subgraph src_cli_initConfig["initConfig"]
+      src_cli_initConfig_index_js["index.js"]
+      src_cli_initConfig_createConfigFile_js["createConfigFile.js"]
+      src_cli_initConfig_config_js_template_js["config.js.template.js"]
+      src_cli_initConfig_config_json_template_js["config.json.template.js"]
+      src_cli_initConfig_getUserInput_js["getUserInput.js"]
     end
-    srcclinormalizeOptionsjs["normalizeOptions.js"]
-    srcclidefaultsjson["defaults.json"]
-    subgraph srcclicompileConfig["compileConfig"]
-      srcclicompileConfigindexjs["index.js"]
-      srcclicompileConfigmergeConfigsjs["mergeConfigs.js"]
-      srcclicompileConfigreadConfigjs["readConfig.js"]
+    src_cli_normalizeOptions_js["normalizeOptions.js"]
+    src_cli_defaults_json["defaults.json"]
+    subgraph src_cli_compileConfig["compileConfig"]
+      src_cli_compileConfig_index_js["index.js"]
+      src_cli_compileConfig_mergeConfigs_js["mergeConfigs.js"]
+      src_cli_compileConfig_readConfig_js["readConfig.js"]
     end
-    srccliparseTSConfigjs["parseTSConfig.js"]
+    src_cli_parseTSConfig_js["parseTSConfig.js"]
   end
-  subgraph srcmain["main"]
-    srcmainindexjs["index.js"]
-    subgraph srcmainoptions["options"]
-      srcmainoptionsnormalizejs["normalize.js"]
-      srcmainoptionsdefaultsjson["defaults.json"]
-      srcmainoptionsvalidatejs["validate.js"]
+  subgraph src_main["main"]
+    src_main_index_js["index.js"]
+    subgraph src_main_options["options"]
+      src_main_options_normalize_js["normalize.js"]
+      src_main_options_defaults_json["defaults.json"]
+      src_main_options_validate_js["validate.js"]
     end
-    subgraph srcmainruleSet["ruleSet"]
-      srcmainruleSetnormalizejs["normalize.js"]
-      srcmainruleSetvalidatejs["validate.js"]
-      srcmainruleSetjsonschemajson["jsonschema.json"]
+    subgraph src_main_ruleSet["ruleSet"]
+      src_main_ruleSet_normalize_js["normalize.js"]
+      src_main_ruleSet_validate_js["validate.js"]
+      src_main_ruleSet_jsonschema_json["jsonschema.json"]
     end
   end
-  subgraph srcreport["report"]
-    subgraph srcreportdot["dot"]
-      srcreportdotrichModuleColorSchemejson["richModuleColorScheme.json"]
-      srcreportdotcoloringjs["coloring.js"]
-      srcreportdotdefaultModuleColorSchemejson["defaultModuleColorScheme.json"]
-      srcreportdotindexjs["index.js"]
-      srcreportdotdottemplatejs["dot.template.js"]
+  subgraph src_report["report"]
+    subgraph src_report_dot["dot"]
+      src_report_dot_richModuleColorScheme_json["richModuleColorScheme.json"]
+      src_report_dot_coloring_js["coloring.js"]
+      src_report_dot_defaultModuleColorScheme_json["defaultModuleColorScheme.json"]
+      src_report_dot_index_js["index.js"]
+      src_report_dot_dot_template_js["dot.template.js"]
     end
-    subgraph srcreportcsv["csv"]
-      srcreportcsvindexjs["index.js"]
-      srcreportcsvcsvtemplatejs["csv.template.js"]
+    subgraph src_report_csv["csv"]
+      src_report_csv_index_js["index.js"]
+      src_report_csv_csv_template_js["csv.template.js"]
     end
-    srcreportdependencyToIncidenceTransformerjs["dependencyToIncidenceTransformer.js"]
-    subgraph srcreportddot["ddot"]
-      srcreportddotindexjs["index.js"]
-      srcreportddotddottemplatejs["ddot.template.js"]
+    src_report_dependencyToIncidenceTransformer_js["dependencyToIncidenceTransformer.js"]
+    subgraph src_report_ddot["ddot"]
+      src_report_ddot_index_js["index.js"]
+      src_report_ddot_ddot_template_js["ddot.template.js"]
     end
-    srcreporterrjs["err.js"]
-    subgraph srcreporthtml["html"]
-      srcreporthtmlindexjs["index.js"]
-      srcreporthtmlhtmltemplatejs["html.template.js"]
+    src_report_err_js["err.js"]
+    subgraph src_report_html["html"]
+      src_report_html_index_js["index.js"]
+      src_report_html_html_template_js["html.template.js"]
     end
-    srcreportjsonjs["json.js"]
+    src_report_json_js["json.js"]
   end
-  subgraph srcextract["extract"]
-    srcextractindexjs["index.js"]
-    srcextractaddValidationsjs["addValidations.js"]
-    subgraph srcextractderive["derive"]
-      subgraph srcextractderivecircular["circular"]
-        srcextractderivecircularindexjs["index.js"]
-        srcextractderivecirculardependencyEndsUpAtFromjs["dependencyEndsUpAtFrom.js"]
+  subgraph src_extract["extract"]
+    src_extract_index_js["index.js"]
+    src_extract_addValidations_js["addValidations.js"]
+    subgraph src_extract_derive["derive"]
+      subgraph src_extract_derive_circular["circular"]
+        src_extract_derive_circular_index_js["index.js"]
+        src_extract_derive_circular_dependencyEndsUpAtFrom_js["dependencyEndsUpAtFrom.js"]
       end
-      subgraph srcextractderiveorphan["orphan"]
-        srcextractderiveorphanindexjs["index.js"]
-        srcextractderiveorphanisOrphanjs["isOrphan.js"]
+      subgraph src_extract_derive_orphan["orphan"]
+        src_extract_derive_orphan_index_js["index.js"]
+        src_extract_derive_orphan_isOrphan_js["isOrphan.js"]
       end
     end
-    srcextractextractjs["extract.js"]
-    subgraph srcextractast-extractors["ast-extractors"]
-      srcextractast-extractorsextract-AMD-depsjs["extract-AMD-deps.js"]
-      srcextractast-extractorsextract-commonJS-depsjs["extract-commonJS-deps.js"]
-      srcextractast-extractorsextract-ES6-depsjs["extract-ES6-deps.js"]
-      srcextractast-extractorsextract-typescript-depsjs["extract-typescript-deps.js"]
+    src_extract_extract_js["extract.js"]
+    subgraph src_extract_ast-extractors["ast-extractors"]
+      src_extract_ast-extractors_extract-AMD-deps_js["extract-AMD-deps.js"]
+      src_extract_ast-extractors_extract-commonJS-deps_js["extract-commonJS-deps.js"]
+      src_extract_ast-extractors_extract-ES6-deps_js["extract-ES6-deps.js"]
+      src_extract_ast-extractors_extract-typescript-deps_js["extract-typescript-deps.js"]
     end
-    srcextractignorejs["ignore.js"]
-    subgraph srcextractparse["parse"]
-      srcextractparsetoJavascriptASTjs["toJavascriptAST.js"]
-      srcextractparsetoTypescriptASTjs["toTypescriptAST.js"]
+    src_extract_ignore_js["ignore.js"]
+    subgraph src_extract_parse["parse"]
+      src_extract_parse_toJavascriptAST_js["toJavascriptAST.js"]
+      src_extract_parse_toTypescriptAST_js["toTypescriptAST.js"]
     end
-    subgraph srcextracttranspile["transpile"]
-      srcextracttranspileindexjs["index.js"]
-      srcextracttranspilemetajs["meta.js"]
-      srcextracttranspilecoffeeWrapjs["coffeeWrap.js"]
-      srcextracttranspilejavaScriptWrapjs["javaScriptWrap.js"]
-      srcextracttranspileliveScriptWrapjs["liveScriptWrap.js"]
-      srcextracttranspiletypeScriptWrapjs["typeScriptWrap.js"]
+    subgraph src_extract_transpile["transpile"]
+      src_extract_transpile_index_js["index.js"]
+      src_extract_transpile_meta_js["meta.js"]
+      src_extract_transpile_coffeeWrap_js["coffeeWrap.js"]
+      src_extract_transpile_javaScriptWrap_js["javaScriptWrap.js"]
+      src_extract_transpile_liveScriptWrap_js["liveScriptWrap.js"]
+      src_extract_transpile_typeScriptWrap_js["typeScriptWrap.js"]
     end
-    subgraph srcextractutl["utl"]
-      srcextractutlgetExtensionjs["getExtension.js"]
-      srcextractutlpathToPosixjs["pathToPosix.js"]
+    subgraph src_extract_utl["utl"]
+      src_extract_utl_getExtension_js["getExtension.js"]
+      src_extract_utl_pathToPosix_js["pathToPosix.js"]
     end
-    subgraph srcextractresolve["resolve"]
-      srcextractresolveindexjs["index.js"]
-      srcextractresolveresolve-AMDjs["resolve-AMD.js"]
-      srcextractresolvedetermineDependencyTypesjs["determineDependencyTypes.js"]
-      srcextractresolvelocalNpmHelpersjs["localNpmHelpers.js"]
-      srcextractresolveresolvejs["resolve.js"]
-      srcextractresolvecompileResolveOptionsjs["compileResolveOptions.js"]
-      subgraph srcextractresolvereadPackageDeps["readPackageDeps"]
-        srcextractresolvereadPackageDepsindexjs["index.js"]
-        srcextractresolvereadPackageDepsmergePackagesjs["mergePackages.js"]
+    subgraph src_extract_resolve["resolve"]
+      src_extract_resolve_index_js["index.js"]
+      src_extract_resolve_resolve-AMD_js["resolve-AMD.js"]
+      src_extract_resolve_determineDependencyTypes_js["determineDependencyTypes.js"]
+      src_extract_resolve_localNpmHelpers_js["localNpmHelpers.js"]
+      src_extract_resolve_resolve_js["resolve.js"]
+      src_extract_resolve_compileResolveOptions_js["compileResolveOptions.js"]
+      subgraph src_extract_resolve_readPackageDeps["readPackageDeps"]
+        src_extract_resolve_readPackageDeps_index_js["index.js"]
+        src_extract_resolve_readPackageDeps_mergePackages_js["mergePackages.js"]
       end
-      srcextractresolveresolve-helpersjs["resolve-helpers.js"]
-      srcextractresolveresolve-commonJSjs["resolve-commonJS.js"]
-      srcextractresolveisFollowablejs["isFollowable.js"]
+      src_extract_resolve_resolve-helpers_js["resolve-helpers.js"]
+      src_extract_resolve_resolve-commonJS_js["resolve-commonJS.js"]
+      src_extract_resolve_isFollowable_js["isFollowable.js"]
     end
-    srcextractgatherInitialSourcesjs["gatherInitialSources.js"]
-    srcextractsummarizejs["summarize.js"]
+    src_extract_gatherInitialSources_js["gatherInitialSources.js"]
+    src_extract_summarize_js["summarize.js"]
   end
-  subgraph srcvalidate["validate"]
-    srcvalidateindexjs["index.js"]
-    srcvalidatematchDependencyRulejs["matchDependencyRule.js"]
-    srcvalidateisModuleOnlyRulejs["isModuleOnlyRule.js"]
-    srcvalidatematchModuleRulejs["matchModuleRule.js"]
+  subgraph src_validate["validate"]
+    src_validate_index_js["index.js"]
+    src_validate_matchDependencyRule_js["matchDependencyRule.js"]
+    src_validate_isModuleOnlyRule_js["isModuleOnlyRule.js"]
+    src_validate_matchModuleRule_js["matchModuleRule.js"]
   end
 end
 path["path"]
 fs["fs"]
-bindependency-cruise --> packagejson
-bindependency-cruise --> srccliindexjs
-bindependency-cruise --> node_modulescommanderindexjs
-bindependency-cruise --> node_modulessemversemverjs
-srccliindexjs --> srcmainindexjs
-srccliindexjs --> srccliformatMetaInfojs
-srccliindexjs --> srccligetResolveConfigjs
-srccliindexjs --> srccliinitConfigindexjs
-srccliindexjs --> srcclinormalizeOptionsjs
-srccliindexjs --> srccliparseTSConfigjs
-srccliindexjs --> srccliutliojs
-srccliindexjs --> srccliutlvalidateFileExistencejs
-srccliindexjs --> node_modulesglobglobjs
-srccliindexjs --> node_moduleslodashgetjs
-srcmainindexjs --> srcextractindexjs
-srcmainindexjs --> srcextracttranspilemetajs
-srcmainindexjs --> srcreportcsvindexjs
-srcmainindexjs --> srcreportddotindexjs
-srcmainindexjs --> srcreportdotindexjs
-srcmainindexjs --> srcreportdotrichModuleColorSchemejson
-srcmainindexjs --> srcreporterrjs
-srcmainindexjs --> srcreporthtmlindexjs
-srcmainindexjs --> srcreportjsonjs
-srcmainindexjs --> srcmainoptionsnormalizejs
-srcmainindexjs --> srcmainoptionsvalidatejs
-srcmainindexjs --> srcmainruleSetnormalizejs
-srcmainindexjs --> srcmainruleSetvalidatejs
-srcextractindexjs --> srcextractaddValidationsjs
-srcextractindexjs --> srcextractderivecircularindexjs
-srcextractindexjs --> srcextractderiveorphanindexjs
-srcextractindexjs --> srcextractextractjs
-srcextractindexjs --> srcextractgatherInitialSourcesjs
-srcextractindexjs --> srcextractsummarizejs
-srcextractindexjs --> srcextractutlpathToPosixjs
-srcextractindexjs --> node_moduleslodashlodashjs
-srcextractaddValidationsjs --> srcvalidateindexjs
-srcvalidateindexjs --> srcvalidatematchDependencyRulejs
-srcvalidateindexjs --> srcvalidatematchModuleRulejs
-srcvalidatematchDependencyRulejs --> srcvalidateisModuleOnlyRulejs
-srcvalidatematchModuleRulejs --> srcvalidateisModuleOnlyRulejs
-srcextractderivecircularindexjs --> srcextractderivecirculardependencyEndsUpAtFromjs
-srcextractderivecircularindexjs --> node_moduleslodashgetjs
-srcextractderiveorphanindexjs --> srcextractderiveorphanisOrphanjs
-srcextractderiveorphanindexjs --> node_moduleslodashgetjs
-srcextractextractjs --> srcextractast-extractorsextract-AMD-depsjs
-srcextractextractjs --> srcextractast-extractorsextract-ES6-depsjs
-srcextractextractjs --> srcextractast-extractorsextract-commonJS-depsjs
-srcextractextractjs --> srcextractast-extractorsextract-typescript-depsjs
-srcextractextractjs --> srcextractignorejs
-srcextractextractjs --> srcextractparsetoJavascriptASTjs
-srcextractextractjs --> srcextractparsetoTypescriptASTjs
-srcextractextractjs --> srcextractresolveindexjs
-srcextractextractjs --> node_moduleslodashlodashjs
-srcextractextractjs --> path
-srcextractast-extractorsextract-AMD-depsjs --> srcextractast-extractorsextract-commonJS-depsjs
-srcextractast-extractorsextract-AMD-depsjs --> node_modulesacorn-walkdistwalkjs
-srcextractast-extractorsextract-commonJS-depsjs --> node_modulesacorn-walkdistwalkjs
-srcextractast-extractorsextract-ES6-depsjs --> node_modulesacorn-walkdistwalkjs
-srcextractast-extractorsextract-typescript-depsjs --> packagejson
-srcextractast-extractorsextract-typescript-depsjs --> node_modulessemver-try-requiresrcindexjs
-srcextractparsetoJavascriptASTjs --> srcextracttranspileindexjs
-srcextractparsetoJavascriptASTjs --> srcextractutlgetExtensionjs
-srcextractparsetoJavascriptASTjs --> node_modulesacorndistacornjs
-srcextractparsetoJavascriptASTjs --> node_modulesacorn-loosedistacorn-loosejs
-srcextractparsetoJavascriptASTjs --> fs
-srcextractparsetoJavascriptASTjs --> node_moduleslodashmemoizejs
-srcextracttranspileindexjs --> srcextracttranspilemetajs
-srcextracttranspilemetajs --> packagejson
-srcextracttranspilemetajs --> srcextracttranspilecoffeeWrapjs
-srcextracttranspilemetajs --> srcextracttranspilejavaScriptWrapjs
-srcextracttranspilemetajs --> srcextracttranspileliveScriptWrapjs
-srcextracttranspilemetajs --> srcextracttranspiletypeScriptWrapjs
-srcextracttranspilecoffeeWrapjs --> packagejson
-srcextracttranspilecoffeeWrapjs --> node_modulessemver-try-requiresrcindexjs
-srcextracttranspileliveScriptWrapjs --> packagejson
-srcextracttranspileliveScriptWrapjs --> node_modulessemver-try-requiresrcindexjs
-srcextracttranspiletypeScriptWrapjs --> packagejson
-srcextracttranspiletypeScriptWrapjs --> node_moduleslodashgetjs
-srcextracttranspiletypeScriptWrapjs --> node_modulessemver-try-requiresrcindexjs
-srcextractutlgetExtensionjs --> path
-srcextractparsetoTypescriptASTjs --> packagejson
-srcextractparsetoTypescriptASTjs --> fs
-srcextractparsetoTypescriptASTjs --> node_moduleslodashmemoizejs
-srcextractparsetoTypescriptASTjs --> node_modulessemver-try-requiresrcindexjs
-srcextractresolveindexjs --> srcextractutlpathToPosixjs
-srcextractresolveindexjs --> srcextractresolveresolve-AMDjs
-srcextractresolveindexjs --> srcextractresolveresolve-commonJSjs
-srcextractresolveindexjs --> fs
-srcextractresolveindexjs --> path
-srcextractutlpathToPosixjs --> path
-srcextractresolveresolve-AMDjs --> srcextractutlpathToPosixjs
-srcextractresolveresolve-AMDjs --> srcextractresolvedetermineDependencyTypesjs
-srcextractresolveresolve-AMDjs --> srcextractresolvereadPackageDepsindexjs
-srcextractresolveresolve-AMDjs --> srcextractresolveresolve-helpersjs
-srcextractresolveresolve-AMDjs --> fs
-srcextractresolveresolve-AMDjs --> node_moduleslodashmemoizejs
-srcextractresolveresolve-AMDjs --> path
-srcextractresolveresolve-AMDjs --> node_modulesresolveindexjs
-srcextractresolvedetermineDependencyTypesjs --> srcextractresolvelocalNpmHelpersjs
-srcextractresolvedetermineDependencyTypesjs --> path
-srcextractresolvedetermineDependencyTypesjs --> node_modulesresolveindexjs
-srcextractresolvelocalNpmHelpersjs --> srcextractresolveresolvejs
-srcextractresolvelocalNpmHelpersjs --> fs
-srcextractresolvelocalNpmHelpersjs --> node_moduleslodashmemoizejs
-srcextractresolvelocalNpmHelpersjs --> path
-srcextractresolveresolvejs --> srcextractutlpathToPosixjs
-srcextractresolveresolvejs --> srcextractresolvecompileResolveOptionsjs
-srcextractresolveresolvejs --> node_modulesenhanced-resolvelibnodejs
-srcextractresolvecompileResolveOptionsjs --> srcextracttranspilemetajs
-srcextractresolvecompileResolveOptionsjs --> node_modulesawesome-typescript-loaderdistentryjs
-srcextractresolvecompileResolveOptionsjs --> node_modulesenhanced-resolvelibnodejs
-srcextractresolvereadPackageDepsindexjs --> srcextractresolvereadPackageDepsmergePackagesjs
-srcextractresolvereadPackageDepsindexjs --> fs
-srcextractresolvereadPackageDepsindexjs --> node_moduleslodashmemoizejs
-srcextractresolvereadPackageDepsindexjs --> path
-srcextractresolvereadPackageDepsmergePackagesjs --> node_moduleslodashclonejs
-srcextractresolvereadPackageDepsmergePackagesjs --> node_moduleslodashgetjs
-srcextractresolvereadPackageDepsmergePackagesjs --> node_moduleslodashuniqjs
-srcextractresolveresolve-helpersjs --> srcextractresolvelocalNpmHelpersjs
-srcextractresolveresolve-commonJSjs --> srcextractutlpathToPosixjs
-srcextractresolveresolve-commonJSjs --> srcextractresolvedetermineDependencyTypesjs
-srcextractresolveresolve-commonJSjs --> srcextractresolveisFollowablejs
-srcextractresolveresolve-commonJSjs --> srcextractresolvereadPackageDepsindexjs
-srcextractresolveresolve-commonJSjs --> srcextractresolveresolvejs
-srcextractresolveresolve-commonJSjs --> srcextractresolveresolve-helpersjs
-srcextractresolveresolve-commonJSjs --> path
-srcextractresolveresolve-commonJSjs --> node_modulesresolveindexjs
-srcextractresolveisFollowablejs --> srcextractutlgetExtensionjs
-srcextractresolveisFollowablejs --> srcextractresolvecompileResolveOptionsjs
-srcextractgatherInitialSourcesjs --> srcextractignorejs
-srcextractgatherInitialSourcesjs --> srcextracttranspilemetajs
-srcextractgatherInitialSourcesjs --> fs
-srcextractgatherInitialSourcesjs --> node_modulesglobglobjs
-srcextractgatherInitialSourcesjs --> path
-srcextractsummarizejs --> node_moduleslodashflattenDeepjs
-srcreportcsvindexjs --> srcreportdependencyToIncidenceTransformerjs
-srcreportcsvindexjs --> srcreportcsvcsvtemplatejs
-srcreportcsvindexjs --> node_moduleshandlebarsruntimejs
-srcreportcsvcsvtemplatejs --> node_moduleshandlebarsruntimejs
-srcreportddotindexjs --> srcreportdotcoloringjs
-srcreportddotindexjs --> srcreportddotddottemplatejs
-srcreportddotindexjs --> node_moduleshandlebarsruntimejs
-srcreportddotindexjs --> node_moduleslodashclonejs
-srcreportddotindexjs --> node_moduleslodashgetjs
-srcreportddotindexjs --> node_moduleslodashuniqByjs
-srcreportddotindexjs --> path
-srcreportdotcoloringjs --> srcreportdotdefaultModuleColorSchemejson
-srcreportdotcoloringjs --> node_moduleslodashgetjs
-srcreportddotddottemplatejs --> node_moduleshandlebarsruntimejs
-srcreportdotindexjs --> srcreportdotcoloringjs
-srcreportdotindexjs --> srcreportdotdottemplatejs
-srcreportdotindexjs --> node_moduleshandlebarsruntimejs
-srcreportdotindexjs --> path
-srcreportdotdottemplatejs --> node_moduleshandlebarsruntimejs
-srcreporterrjs --> node_moduleschalkindexjs
-srcreporterrjs --> node_modulesfiguresindexjs
-srcreporthtmlindexjs --> srcreportdependencyToIncidenceTransformerjs
-srcreporthtmlindexjs --> srcreporthtmlhtmltemplatejs
-srcreporthtmlindexjs --> node_moduleshandlebarsruntimejs
-srcreporthtmlhtmltemplatejs --> node_moduleshandlebarsruntimejs
-srcmainoptionsnormalizejs --> srcmainoptionsdefaultsjson
-srcmainoptionsvalidatejs --> node_modulessafe-regexindexjs
-srcmainruleSetvalidatejs --> srcmainoptionsvalidatejs
-srcmainruleSetvalidatejs --> srcmainruleSetjsonschemajson
-srcmainruleSetvalidatejs --> node_modulesajvlibajvjs
-srcmainruleSetvalidatejs --> node_modulessafe-regexindexjs
-srccliformatMetaInfojs --> srcmainindexjs
-srccliformatMetaInfojs --> node_moduleschalkindexjs
-srccliformatMetaInfojs --> node_modulesfiguresindexjs
-srccligetResolveConfigjs --> srccliutlmakeAbsolutejs
-srccliutlmakeAbsolutejs --> path
-srccliinitConfigindexjs --> srccliinitConfigcreateConfigFilejs
-srccliinitConfigindexjs --> srccliinitConfiggetUserInputjs
-srccliinitConfigcreateConfigFilejs --> packagejson
-srccliinitConfigcreateConfigFilejs --> srccliinitConfigconfigjstemplatejs
-srccliinitConfigcreateConfigFilejs --> srccliinitConfigconfigjsontemplatejs
-srccliinitConfigcreateConfigFilejs --> fs
-srccliinitConfigcreateConfigFilejs --> node_moduleshandlebarsruntimejs
-srccliinitConfigconfigjstemplatejs --> node_moduleshandlebarsruntimejs
-srccliinitConfigconfigjsontemplatejs --> node_moduleshandlebarsruntimejs
-srccliinitConfiggetUserInputjs --> node_modulesinquirerlibinquirerjs
-srcclinormalizeOptionsjs --> srcclicompileConfigindexjs
-srcclinormalizeOptionsjs --> srcclidefaultsjson
-srcclinormalizeOptionsjs --> fs
-srcclinormalizeOptionsjs --> node_moduleslodashclonejs
-srcclinormalizeOptionsjs --> node_moduleslodashgetjs
-srcclinormalizeOptionsjs --> node_moduleslodashsetjs
-srcclinormalizeOptionsjs --> path
-srcclicompileConfigindexjs --> srcextractresolveresolvejs
-srcclicompileConfigindexjs --> srcclicompileConfigmergeConfigsjs
-srcclicompileConfigindexjs --> srcclicompileConfigreadConfigjs
-srcclicompileConfigindexjs --> path
-srcclicompileConfigmergeConfigsjs --> node_moduleslodashgetjs
-srcclicompileConfigmergeConfigsjs --> node_moduleslodashisEqualjs
-srcclicompileConfigmergeConfigsjs --> node_moduleslodashuniqByjs
-srcclicompileConfigmergeConfigsjs --> node_moduleslodashuniqWithjs
-srcclicompileConfigreadConfigjs --> fs
-srcclicompileConfigreadConfigjs --> path
-srcclicompileConfigreadConfigjs --> node_modulesstrip-json-commentsindexjs
-srccliparseTSConfigjs --> packagejson
-srccliparseTSConfigjs --> node_moduleslodashgetjs
-srccliparseTSConfigjs --> path
-srccliparseTSConfigjs --> node_modulessemver-try-requiresrcindexjs
-srccliutliojs --> fs
-srccliutlvalidateFileExistencejs --> fs
+bin_dependency-cruise --> package_json
+bin_dependency-cruise --> src_cli_index_js
+bin_dependency-cruise --> node_modules_commander_index_js
+bin_dependency-cruise --> node_modules_semver_semver_js
+src_cli_index_js --> src_main_index_js
+src_cli_index_js --> src_cli_formatMetaInfo_js
+src_cli_index_js --> src_cli_getResolveConfig_js
+src_cli_index_js --> src_cli_initConfig_index_js
+src_cli_index_js --> src_cli_normalizeOptions_js
+src_cli_index_js --> src_cli_parseTSConfig_js
+src_cli_index_js --> src_cli_utl_io_js
+src_cli_index_js --> src_cli_utl_validateFileExistence_js
+src_cli_index_js --> node_modules_glob_glob_js
+src_cli_index_js --> node_modules_lodash_get_js
+src_main_index_js --> src_extract_index_js
+src_main_index_js --> src_extract_transpile_meta_js
+src_main_index_js --> src_report_csv_index_js
+src_main_index_js --> src_report_ddot_index_js
+src_main_index_js --> src_report_dot_index_js
+src_main_index_js --> src_report_dot_richModuleColorScheme_json
+src_main_index_js --> src_report_err_js
+src_main_index_js --> src_report_html_index_js
+src_main_index_js --> src_report_json_js
+src_main_index_js --> src_main_options_normalize_js
+src_main_index_js --> src_main_options_validate_js
+src_main_index_js --> src_main_ruleSet_normalize_js
+src_main_index_js --> src_main_ruleSet_validate_js
+src_extract_index_js --> src_extract_addValidations_js
+src_extract_index_js --> src_extract_derive_circular_index_js
+src_extract_index_js --> src_extract_derive_orphan_index_js
+src_extract_index_js --> src_extract_extract_js
+src_extract_index_js --> src_extract_gatherInitialSources_js
+src_extract_index_js --> src_extract_summarize_js
+src_extract_index_js --> src_extract_utl_pathToPosix_js
+src_extract_index_js --> node_modules_lodash_lodash_js
+src_extract_addValidations_js --> src_validate_index_js
+src_validate_index_js --> src_validate_matchDependencyRule_js
+src_validate_index_js --> src_validate_matchModuleRule_js
+src_validate_matchDependencyRule_js --> src_validate_isModuleOnlyRule_js
+src_validate_matchModuleRule_js --> src_validate_isModuleOnlyRule_js
+src_extract_derive_circular_index_js --> src_extract_derive_circular_dependencyEndsUpAtFrom_js
+src_extract_derive_circular_index_js --> node_modules_lodash_get_js
+src_extract_derive_orphan_index_js --> src_extract_derive_orphan_isOrphan_js
+src_extract_derive_orphan_index_js --> node_modules_lodash_get_js
+src_extract_extract_js --> src_extract_ast-extractors_extract-AMD-deps_js
+src_extract_extract_js --> src_extract_ast-extractors_extract-ES6-deps_js
+src_extract_extract_js --> src_extract_ast-extractors_extract-commonJS-deps_js
+src_extract_extract_js --> src_extract_ast-extractors_extract-typescript-deps_js
+src_extract_extract_js --> src_extract_ignore_js
+src_extract_extract_js --> src_extract_parse_toJavascriptAST_js
+src_extract_extract_js --> src_extract_parse_toTypescriptAST_js
+src_extract_extract_js --> src_extract_resolve_index_js
+src_extract_extract_js --> node_modules_lodash_lodash_js
+src_extract_extract_js --> path
+src_extract_ast-extractors_extract-AMD-deps_js --> src_extract_ast-extractors_extract-commonJS-deps_js
+src_extract_ast-extractors_extract-AMD-deps_js --> node_modules_acorn-walk_dist_walk_js
+src_extract_ast-extractors_extract-commonJS-deps_js --> node_modules_acorn-walk_dist_walk_js
+src_extract_ast-extractors_extract-ES6-deps_js --> node_modules_acorn-walk_dist_walk_js
+src_extract_ast-extractors_extract-typescript-deps_js --> package_json
+src_extract_ast-extractors_extract-typescript-deps_js --> node_modules_semver-try-require_src_index_js
+src_extract_parse_toJavascriptAST_js --> src_extract_transpile_index_js
+src_extract_parse_toJavascriptAST_js --> src_extract_utl_getExtension_js
+src_extract_parse_toJavascriptAST_js --> node_modules_acorn_dist_acorn_js
+src_extract_parse_toJavascriptAST_js --> node_modules_acorn-loose_dist_acorn-loose_js
+src_extract_parse_toJavascriptAST_js --> fs
+src_extract_parse_toJavascriptAST_js --> node_modules_lodash_memoize_js
+src_extract_transpile_index_js --> src_extract_transpile_meta_js
+src_extract_transpile_meta_js --> package_json
+src_extract_transpile_meta_js --> src_extract_transpile_coffeeWrap_js
+src_extract_transpile_meta_js --> src_extract_transpile_javaScriptWrap_js
+src_extract_transpile_meta_js --> src_extract_transpile_liveScriptWrap_js
+src_extract_transpile_meta_js --> src_extract_transpile_typeScriptWrap_js
+src_extract_transpile_coffeeWrap_js --> package_json
+src_extract_transpile_coffeeWrap_js --> node_modules_semver-try-require_src_index_js
+src_extract_transpile_liveScriptWrap_js --> package_json
+src_extract_transpile_liveScriptWrap_js --> node_modules_semver-try-require_src_index_js
+src_extract_transpile_typeScriptWrap_js --> package_json
+src_extract_transpile_typeScriptWrap_js --> node_modules_lodash_get_js
+src_extract_transpile_typeScriptWrap_js --> node_modules_semver-try-require_src_index_js
+src_extract_utl_getExtension_js --> path
+src_extract_parse_toTypescriptAST_js --> package_json
+src_extract_parse_toTypescriptAST_js --> fs
+src_extract_parse_toTypescriptAST_js --> node_modules_lodash_memoize_js
+src_extract_parse_toTypescriptAST_js --> node_modules_semver-try-require_src_index_js
+src_extract_resolve_index_js --> src_extract_utl_pathToPosix_js
+src_extract_resolve_index_js --> src_extract_resolve_resolve-AMD_js
+src_extract_resolve_index_js --> src_extract_resolve_resolve-commonJS_js
+src_extract_resolve_index_js --> fs
+src_extract_resolve_index_js --> path
+src_extract_utl_pathToPosix_js --> path
+src_extract_resolve_resolve-AMD_js --> src_extract_utl_pathToPosix_js
+src_extract_resolve_resolve-AMD_js --> src_extract_resolve_determineDependencyTypes_js
+src_extract_resolve_resolve-AMD_js --> src_extract_resolve_readPackageDeps_index_js
+src_extract_resolve_resolve-AMD_js --> src_extract_resolve_resolve-helpers_js
+src_extract_resolve_resolve-AMD_js --> fs
+src_extract_resolve_resolve-AMD_js --> node_modules_lodash_memoize_js
+src_extract_resolve_resolve-AMD_js --> path
+src_extract_resolve_resolve-AMD_js --> node_modules_resolve_index_js
+src_extract_resolve_determineDependencyTypes_js --> src_extract_resolve_localNpmHelpers_js
+src_extract_resolve_determineDependencyTypes_js --> path
+src_extract_resolve_determineDependencyTypes_js --> node_modules_resolve_index_js
+src_extract_resolve_localNpmHelpers_js --> src_extract_resolve_resolve_js
+src_extract_resolve_localNpmHelpers_js --> fs
+src_extract_resolve_localNpmHelpers_js --> node_modules_lodash_memoize_js
+src_extract_resolve_localNpmHelpers_js --> path
+src_extract_resolve_resolve_js --> src_extract_utl_pathToPosix_js
+src_extract_resolve_resolve_js --> src_extract_resolve_compileResolveOptions_js
+src_extract_resolve_resolve_js --> node_modules_enhanced-resolve_lib_node_js
+src_extract_resolve_compileResolveOptions_js --> src_extract_transpile_meta_js
+src_extract_resolve_compileResolveOptions_js --> node_modules_awesome-typescript-loader_dist_entry_js
+src_extract_resolve_compileResolveOptions_js --> node_modules_enhanced-resolve_lib_node_js
+src_extract_resolve_readPackageDeps_index_js --> src_extract_resolve_readPackageDeps_mergePackages_js
+src_extract_resolve_readPackageDeps_index_js --> fs
+src_extract_resolve_readPackageDeps_index_js --> node_modules_lodash_memoize_js
+src_extract_resolve_readPackageDeps_index_js --> path
+src_extract_resolve_readPackageDeps_mergePackages_js --> node_modules_lodash_clone_js
+src_extract_resolve_readPackageDeps_mergePackages_js --> node_modules_lodash_get_js
+src_extract_resolve_readPackageDeps_mergePackages_js --> node_modules_lodash_uniq_js
+src_extract_resolve_resolve-helpers_js --> src_extract_resolve_localNpmHelpers_js
+src_extract_resolve_resolve-commonJS_js --> src_extract_utl_pathToPosix_js
+src_extract_resolve_resolve-commonJS_js --> src_extract_resolve_determineDependencyTypes_js
+src_extract_resolve_resolve-commonJS_js --> src_extract_resolve_isFollowable_js
+src_extract_resolve_resolve-commonJS_js --> src_extract_resolve_readPackageDeps_index_js
+src_extract_resolve_resolve-commonJS_js --> src_extract_resolve_resolve_js
+src_extract_resolve_resolve-commonJS_js --> src_extract_resolve_resolve-helpers_js
+src_extract_resolve_resolve-commonJS_js --> path
+src_extract_resolve_resolve-commonJS_js --> node_modules_resolve_index_js
+src_extract_resolve_isFollowable_js --> src_extract_utl_getExtension_js
+src_extract_resolve_isFollowable_js --> src_extract_resolve_compileResolveOptions_js
+src_extract_gatherInitialSources_js --> src_extract_ignore_js
+src_extract_gatherInitialSources_js --> src_extract_transpile_meta_js
+src_extract_gatherInitialSources_js --> fs
+src_extract_gatherInitialSources_js --> node_modules_glob_glob_js
+src_extract_gatherInitialSources_js --> path
+src_extract_summarize_js --> node_modules_lodash_flattenDeep_js
+src_report_csv_index_js --> src_report_dependencyToIncidenceTransformer_js
+src_report_csv_index_js --> src_report_csv_csv_template_js
+src_report_csv_index_js --> node_modules_handlebars_runtime_js
+src_report_csv_csv_template_js --> node_modules_handlebars_runtime_js
+src_report_ddot_index_js --> src_report_dot_coloring_js
+src_report_ddot_index_js --> src_report_ddot_ddot_template_js
+src_report_ddot_index_js --> node_modules_handlebars_runtime_js
+src_report_ddot_index_js --> node_modules_lodash_clone_js
+src_report_ddot_index_js --> node_modules_lodash_get_js
+src_report_ddot_index_js --> node_modules_lodash_uniqBy_js
+src_report_ddot_index_js --> path
+src_report_dot_coloring_js --> src_report_dot_defaultModuleColorScheme_json
+src_report_dot_coloring_js --> node_modules_lodash_get_js
+src_report_ddot_ddot_template_js --> node_modules_handlebars_runtime_js
+src_report_dot_index_js --> src_report_dot_coloring_js
+src_report_dot_index_js --> src_report_dot_dot_template_js
+src_report_dot_index_js --> node_modules_handlebars_runtime_js
+src_report_dot_index_js --> path
+src_report_dot_dot_template_js --> node_modules_handlebars_runtime_js
+src_report_err_js --> node_modules_chalk_index_js
+src_report_err_js --> node_modules_figures_index_js
+src_report_html_index_js --> src_report_dependencyToIncidenceTransformer_js
+src_report_html_index_js --> src_report_html_html_template_js
+src_report_html_index_js --> node_modules_handlebars_runtime_js
+src_report_html_html_template_js --> node_modules_handlebars_runtime_js
+src_main_options_normalize_js --> src_main_options_defaults_json
+src_main_options_validate_js --> node_modules_safe-regex_index_js
+src_main_ruleSet_validate_js --> src_main_options_validate_js
+src_main_ruleSet_validate_js --> src_main_ruleSet_jsonschema_json
+src_main_ruleSet_validate_js --> node_modules_ajv_lib_ajv_js
+src_main_ruleSet_validate_js --> node_modules_safe-regex_index_js
+src_cli_formatMetaInfo_js --> src_main_index_js
+src_cli_formatMetaInfo_js --> node_modules_chalk_index_js
+src_cli_formatMetaInfo_js --> node_modules_figures_index_js
+src_cli_getResolveConfig_js --> src_cli_utl_makeAbsolute_js
+src_cli_utl_makeAbsolute_js --> path
+src_cli_initConfig_index_js --> src_cli_initConfig_createConfigFile_js
+src_cli_initConfig_index_js --> src_cli_initConfig_getUserInput_js
+src_cli_initConfig_createConfigFile_js --> package_json
+src_cli_initConfig_createConfigFile_js --> src_cli_initConfig_config_js_template_js
+src_cli_initConfig_createConfigFile_js --> src_cli_initConfig_config_json_template_js
+src_cli_initConfig_createConfigFile_js --> fs
+src_cli_initConfig_createConfigFile_js --> node_modules_handlebars_runtime_js
+src_cli_initConfig_config_js_template_js --> node_modules_handlebars_runtime_js
+src_cli_initConfig_config_json_template_js --> node_modules_handlebars_runtime_js
+src_cli_initConfig_getUserInput_js --> node_modules_inquirer_lib_inquirer_js
+src_cli_normalizeOptions_js --> src_cli_compileConfig_index_js
+src_cli_normalizeOptions_js --> src_cli_defaults_json
+src_cli_normalizeOptions_js --> fs
+src_cli_normalizeOptions_js --> node_modules_lodash_clone_js
+src_cli_normalizeOptions_js --> node_modules_lodash_get_js
+src_cli_normalizeOptions_js --> node_modules_lodash_set_js
+src_cli_normalizeOptions_js --> path
+src_cli_compileConfig_index_js --> src_extract_resolve_resolve_js
+src_cli_compileConfig_index_js --> src_cli_compileConfig_mergeConfigs_js
+src_cli_compileConfig_index_js --> src_cli_compileConfig_readConfig_js
+src_cli_compileConfig_index_js --> path
+src_cli_compileConfig_mergeConfigs_js --> node_modules_lodash_get_js
+src_cli_compileConfig_mergeConfigs_js --> node_modules_lodash_isEqual_js
+src_cli_compileConfig_mergeConfigs_js --> node_modules_lodash_uniqBy_js
+src_cli_compileConfig_mergeConfigs_js --> node_modules_lodash_uniqWith_js
+src_cli_compileConfig_readConfig_js --> fs
+src_cli_compileConfig_readConfig_js --> path
+src_cli_compileConfig_readConfig_js --> node_modules_strip-json-comments_index_js
+src_cli_parseTSConfig_js --> package_json
+src_cli_parseTSConfig_js --> node_modules_lodash_get_js
+src_cli_parseTSConfig_js --> path
+src_cli_parseTSConfig_js --> node_modules_semver-try-require_src_index_js
+src_cli_utl_io_js --> fs
+src_cli_utl_validateFileExistence_js --> fs

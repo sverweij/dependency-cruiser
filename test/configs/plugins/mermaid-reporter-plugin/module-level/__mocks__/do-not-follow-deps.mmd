@@ -1,13 +1,13 @@
 flowchart LR
 
 subgraph test["test"]
-  subgraph testcli["cli"]
-    subgraph testclifixtures["fixtures"]
-      subgraph testclifixturesunresolvable-in-sub["unresolvable-in-sub"]
-        testclifixturesunresolvable-in-subrefers-to-a-do-not-follow-modulejs["refers-to-a-do-not-follow-module.js"]
+  subgraph test_cli["cli"]
+    subgraph test_cli_fixtures["fixtures"]
+      subgraph test_cli_fixtures_unresolvable-in-sub["unresolvable-in-sub"]
+        test_cli_fixtures_unresolvable-in-sub_refers-to-a-do-not-follow-module_js["refers-to-a-do-not-follow-module.js"]
       end
     end
   end
 end
 dontFollowThis["dontFollowThis"]
-testclifixturesunresolvable-in-subrefers-to-a-do-not-follow-modulejs --> dontFollowThis
+test_cli_fixtures_unresolvable-in-sub_refers-to-a-do-not-follow-module_js --> dontFollowThis
