@@ -3,7 +3,7 @@ const mermaidNode = (pNode, pText) => {
   const lNode = pNode
     .replace(/^\.$|^\.\//g, "__currentPath__")
     .replace(/^\.{2}$|^\.{2}\//g, "__prevPath__")
-    .replace(/[[\]/.@]/g, "");
+    .replace(/[[\]/.@]/g, "_");
   const lText = pText ? `["${pText}"]` : "";
   return `${lNode}${lText}`;
 };
