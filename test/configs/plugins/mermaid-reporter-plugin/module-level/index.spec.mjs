@@ -26,10 +26,6 @@ describe("[I] configs/plugins/mermaid-reporter-plugin module-level reporter", ()
   it("renders a mermaid - matchesDoNotFollow NOT rendered as folders", () =>
     same("do-not-follow-deps"));
   it("renders a mermaid - renders orphan module", () => same("orphan-deps"));
-  it("renders a mermaid - uri prefix get concatenated", () =>
-    same("prefix-uri"));
-  it("renders a mermaid - non-uri prefixes get path.posix.joined", () =>
-    same("prefix-non-uri"));
   it("renders a mermaid - rendered strings that mermaid cannot parse are escaped.", () =>
     same("contains-strings-to-be-escaped"));
 });
