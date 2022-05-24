@@ -1,0 +1,68 @@
+{
+  "modules": [
+    {
+      "source": "yarn.lock",
+      "dependencies": [
+        {
+          "module": "✖",
+          "moduleSystem": "es6",
+          "dynamic": false,
+          "exoticallyRequired": false,
+          "resolved": "✖",
+          "coreModule": false,
+          "followable": false,
+          "couldNotResolve": true,
+          "dependencyTypes": [
+            "unknown"
+          ],
+          "matchesDoNotFollow": false,
+          "circular": false,
+          "valid": true
+        }
+      ],
+      "orphan": false,
+      "valid": true
+    },
+    {
+      "source": "✖",
+      "followable": false,
+      "coreModule": false,
+      "couldNotResolve": true,
+      "matchesDoNotFollow": false,
+      "dependencyTypes": [
+        "unknown"
+      ],
+      "dependencies": [],
+      "orphan": false,
+      "valid": true
+    }
+  ],
+  "summary": {
+    "violations": [],
+    "error": 0,
+    "warn": 0,
+    "info": 0,
+    "ignore": 0,
+    "totalCruised": 2,
+    "totalDependenciesCruised": 1,
+    "optionsUsed": {
+      "combinedDependencies": false,
+      "exclude": {
+        "path": "node_modules"
+      },
+      "externalModuleResolutionStrategy": "node_modules",
+      "moduleSystems": [
+        "es6",
+        "cjs",
+        "tsd",
+        "amd"
+      ],
+      "outputTo": "-",
+      "outputType": "json",
+      "preserveSymlinks": false,
+      "tsPreCompilationDeps": false,
+      "exoticRequireStrings": [],
+      "args": "yarn.lock"
+    }
+  }
+}
