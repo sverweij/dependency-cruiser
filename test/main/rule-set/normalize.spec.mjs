@@ -66,6 +66,7 @@ describe("[U] main/rule-set/normalize", () => {
     ).to.deep.equal({
       forbidden: [
         {
+          scope: "module",
           from: { path: ".+" },
           to: { path: ".+" },
           severity: "warn",
@@ -90,6 +91,7 @@ describe("[U] main/rule-set/normalize", () => {
     ).to.deep.equal({
       forbidden: [
         {
+          scope: "module",
           from: { path: ".+" },
           to: { path: ".+" },
           severity: "error",
@@ -115,6 +117,7 @@ describe("[U] main/rule-set/normalize", () => {
     ).to.deep.equal({
       forbidden: [
         {
+          scope: "module",
           from: { path: ".+" },
           to: { path: ".+" },
           severity: "error",
@@ -196,6 +199,7 @@ describe("[U] main/rule-set/normalize", () => {
     ).to.deep.equal({
       forbidden: [
         {
+          scope: "module",
           name: "regularize-regular",
           severity: "warn",
           from: {
@@ -231,6 +235,7 @@ describe("[U] main/rule-set/normalize", () => {
     ).to.deep.equal({
       required: [
         {
+          scope: "module",
           name: "regularize-regular",
           severity: "warn",
           from: {
@@ -304,6 +309,7 @@ describe("[U] main/rule-set/normalize", () => {
     ).to.deep.equal({
       forbidden: [
         {
+          scope: "module",
           name: "license-thing",
           severity: "warn",
           from: {},
@@ -350,6 +356,7 @@ describe("[U] main/rule-set/normalize", () => {
     ).to.deep.equal({
       forbidden: [
         {
+          scope: "module",
           name: "exotic-require-thing",
           severity: "warn",
           from: {},
