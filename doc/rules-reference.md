@@ -727,6 +727,10 @@ to check against multiple paths; all the "via"'s in the cycle. The variants
 exist to enable matching against only _some_ of the modules in the cycle or
 against _all_ of them.
 
+All these restrictions take the whole cycle into account; _including_ the tested
+'from'; if `a/aa.js` has a cycle via `a/ab.js` and `b/bb/js` back to `a/aa.js`
+the via-like restrictions also take `a/aa.js` into account.
+
 The examples below refer to this cycle: `a/aa.js`, `a/ab.js`, `b/bb.js`, `a/aa.js`
 
 | restriction  | what it does                                                        | example input | match?  | because...                    |
