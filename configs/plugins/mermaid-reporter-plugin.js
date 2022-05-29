@@ -1,9 +1,9 @@
-const figures = require("figures");
+const ACORN_DUMMY_VALUE = "✖";
 
 /* eslint-disable security/detect-object-injection */
 const mermaidNode = (pNode, pText) => {
   const lNode = pNode
-    .replace(figures.cross, "__unknown__")
+    .replace(ACORN_DUMMY_VALUE, "__unknown__")
     .replace(/^\.$|^\.\//g, "__currentPath__")
     .replace(/^\.{2}$|^\.{2}\//g, "__prevPath__")
     .replace(/[[\]/.@]/g, "_");
