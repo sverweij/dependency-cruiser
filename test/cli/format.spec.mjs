@@ -57,6 +57,27 @@ describe("[E] cli/format", () => {
     deleteDammit(lOutFile);
   });
 
+  it("formats a cruise result --prefix is reflected into the summary", async () => {
+    const lOutFile = "thing.json";
+    const lAlternatePrefix = "http://localhost:2022/";
+
+    deleteDammit(lOutFile);
+
+    await format(
+      relative("__fixtures__/result-has-a-dependency-violation.json"),
+      {
+        outputTo: lOutFile,
+        outputType: "json",
+        prefix: lAlternatePrefix,
+      }
+    );
+    const lResult = JSON.parse(readFileSync(lOutFile, "utf8"));
+
+    expect(lResult.summary.optionsUsed.prefix).to.equal(lAlternatePrefix);
+
+    deleteDammit(lOutFile);
+  });
+
   it("returns a non-zero exit code when there's error level dependency violations in the output (regardless the value of exitCode)", async () => {
     const lOutFile = "otherthing";
 

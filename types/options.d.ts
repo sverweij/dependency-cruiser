@@ -276,4 +276,10 @@ export interface IFormatOptions {
    * out the function will return a javascript object as dependencies
    */
   outputType?: OutputType;
+  /**
+   * a string to insert before links (in dot/ svg output) so with
+   * cruising local dependencies it is possible to point to sources
+   * elsewhere (e.g. in an online repository)
+   */
+  prefix?: string;
 }
