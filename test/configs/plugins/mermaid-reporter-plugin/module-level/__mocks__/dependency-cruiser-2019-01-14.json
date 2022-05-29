@@ -1,0 +1,3581 @@
+{
+  "modules": [
+    {
+      "source": "bin/dependency-cruise",
+      "dependencies": [
+        {
+          "resolved": "package.json",
+          "coreModule": false,
+          "followable": false,
+          "couldNotResolve": false,
+          "dependencyTypes": ["local"],
+          "module": "../package.json",
+          "moduleSystem": "cjs",
+          "matchesDoNotFollow": false,
+          "circular": false,
+          "dynamic": false,
+          "valid": true
+        },
+        {
+          "resolved": "src/cli/index.js",
+          "coreModule": false,
+          "followable": true,
+          "couldNotResolve": false,
+          "dependencyTypes": ["local"],
+          "module": "../src/cli",
+          "moduleSystem": "cjs",
+          "matchesDoNotFollow": false,
+          "circular": false,
+          "dynamic": false,
+          "valid": true
+        },
+        {
+          "resolved": "node_modules/commander/index.js",
+          "coreModule": false,
+          "followable": false,
+          "couldNotResolve": false,
+          "dependencyTypes": ["npm"],
+          "license": "MIT",
+          "module": "commander",
+          "moduleSystem": "cjs",
+          "matchesDoNotFollow": true,
+          "circular": false,
+          "dynamic": false,
+          "valid": true
+        },
+        {
+          "resolved": "node_modules/semver/semver.js",
+          "coreModule": false,
+          "followable": false,
+          "couldNotResolve": false,
+          "dependencyTypes": ["npm"],
+          "license": "ISC",
+          "module": "semver",
+          "moduleSystem": "cjs",
+          "matchesDoNotFollow": true,
+          "circular": false,
+          "dynamic": false,
+          "valid": true
+        }
+      ],
+      "valid": true
+    },
+    {
+      "source": "package.json",
+      "followable": false,
+      "coreModule": false,
+      "couldNotResolve": false,
+      "matchesDoNotFollow": false,
+      "dependencyTypes": ["local"],
+      "dependencies": [],
+      "valid": true
+    },
+    {
+      "source": "node_modules/commander/index.js",
+      "followable": false,
+      "coreModule": false,
+      "couldNotResolve": false,
+      "matchesDoNotFollow": true,
+      "dependencyTypes": ["npm"],
+      "dependencies": [],
+      "valid": true
+    },
+    {
+      "source": "node_modules/semver/semver.js",
+      "followable": false,
+      "coreModule": false,
+      "couldNotResolve": false,
+      "matchesDoNotFollow": true,
+      "dependencyTypes": ["npm"],
+      "dependencies": [],
+      "valid": true
+    },
+    {
+      "source": "src/cli/index.js",
+      "dependencies": [
+        {
+          "resolved": "src/main/index.js",
+          "coreModule": false,
+          "followable": true,
+          "couldNotResolve": false,
+          "dependencyTypes": ["local"],
+          "module": "../main",
+          "moduleSystem": "cjs",
+          "matchesDoNotFollow": false,
+          "circular": false,
+          "dynamic": false,
+          "valid": true
+        },
+        {
+          "resolved": "src/cli/formatMetaInfo.js",
+          "coreModule": false,
+          "followable": true,
+          "couldNotResolve": false,
+          "dependencyTypes": ["local"],
+          "module": "./formatMetaInfo",
+          "moduleSystem": "cjs",
+          "matchesDoNotFollow": false,
+          "circular": false,
+          "dynamic": false,
+          "valid": true
+        },
+        {
+          "resolved": "src/cli/getResolveConfig.js",
+          "coreModule": false,
+          "followable": true,
+          "couldNotResolve": false,
+          "dependencyTypes": ["local"],
+          "module": "./getResolveConfig",
+          "moduleSystem": "cjs",
+          "matchesDoNotFollow": false,
+          "circular": false,
+          "dynamic": false,
+          "valid": true
+        },
+        {
+          "resolved": "src/cli/initConfig/index.js",
+          "coreModule": false,
+          "followable": true,
+          "couldNotResolve": false,
+          "dependencyTypes": ["local"],
+          "module": "./initConfig",
+          "moduleSystem": "cjs",
+          "matchesDoNotFollow": false,
+          "circular": false,
+          "dynamic": false,
+          "valid": true
+        },
+        {
+          "resolved": "src/cli/normalizeOptions.js",
+          "coreModule": false,
+          "followable": true,
+          "couldNotResolve": false,
+          "dependencyTypes": ["local"],
+          "module": "./normalizeOptions",
+          "moduleSystem": "cjs",
+          "matchesDoNotFollow": false,
+          "circular": false,
+          "dynamic": false,
+          "valid": true
+        },
+        {
+          "resolved": "src/cli/parseTSConfig.js",
+          "coreModule": false,
+          "followable": true,
+          "couldNotResolve": false,
+          "dependencyTypes": ["local"],
+          "module": "./parseTSConfig",
+          "moduleSystem": "cjs",
+          "matchesDoNotFollow": false,
+          "circular": false,
+          "dynamic": false,
+          "valid": true
+        },
+        {
+          "resolved": "src/cli/utl/io.js",
+          "coreModule": false,
+          "followable": true,
+          "couldNotResolve": false,
+          "dependencyTypes": ["local"],
+          "module": "./utl/io",
+          "moduleSystem": "cjs",
+          "matchesDoNotFollow": false,
+          "circular": false,
+          "dynamic": false,
+          "valid": true
+        },
+        {
+          "resolved": "src/cli/utl/validateFileExistence.js",
+          "coreModule": false,
+          "followable": true,
+          "couldNotResolve": false,
+          "dependencyTypes": ["local"],
+          "module": "./utl/validateFileExistence",
+          "moduleSystem": "cjs",
+          "matchesDoNotFollow": false,
+          "circular": false,
+          "dynamic": false,
+          "valid": true
+        },
+        {
+          "resolved": "node_modules/glob/glob.js",
+          "coreModule": false,
+          "followable": false,
+          "couldNotResolve": false,
+          "dependencyTypes": ["npm"],
+          "license": "ISC",
+          "module": "glob",
+          "moduleSystem": "cjs",
+          "matchesDoNotFollow": true,
+          "circular": false,
+          "dynamic": false,
+          "valid": true
+        },
+        {
+          "resolved": "node_modules/lodash/get.js",
+          "coreModule": false,
+          "followable": false,
+          "couldNotResolve": false,
+          "dependencyTypes": ["npm"],
+          "license": "MIT",
+          "module": "lodash/get",
+          "moduleSystem": "cjs",
+          "matchesDoNotFollow": true,
+          "circular": false,
+          "dynamic": false,
+          "valid": true
+        }
+      ],
+      "valid": true
+    },
+    {
+      "source": "node_modules/glob/glob.js",
+      "followable": false,
+      "coreModule": false,
+      "couldNotResolve": false,
+      "matchesDoNotFollow": true,
+      "dependencyTypes": ["npm"],
+      "dependencies": [],
+      "valid": true
+    },
+    {
+      "source": "node_modules/lodash/get.js",
+      "followable": false,
+      "coreModule": false,
+      "couldNotResolve": false,
+      "matchesDoNotFollow": true,
+      "dependencyTypes": ["npm"],
+      "dependencies": [],
+      "valid": true
+    },
+    {
+      "source": "src/main/index.js",
+      "dependencies": [
+        {
+          "resolved": "src/extract/index.js",
+          "coreModule": false,
+          "followable": true,
+          "couldNotResolve": false,
+          "dependencyTypes": ["local"],
+          "module": "../extract",
+          "moduleSystem": "cjs",
+          "matchesDoNotFollow": false,
+          "circular": false,
+          "dynamic": false,
+          "valid": true
+        },
+        {
+          "resolved": "src/extract/transpile/meta.js",
+          "coreModule": false,
+          "followable": true,
+          "couldNotResolve": false,
+          "dependencyTypes": ["local"],
+          "module": "../extract/transpile/meta",
+          "moduleSystem": "cjs",
+          "matchesDoNotFollow": false,
+          "circular": false,
+          "dynamic": false,
+          "valid": true
+        },
+        {
+          "resolved": "src/report/csv/index.js",
+          "coreModule": false,
+          "followable": true,
+          "couldNotResolve": false,
+          "dependencyTypes": ["local"],
+          "module": "../report/csv",
+          "moduleSystem": "cjs",
+          "matchesDoNotFollow": false,
+          "circular": false,
+          "dynamic": false,
+          "valid": true
+        },
+        {
+          "resolved": "src/report/ddot/index.js",
+          "coreModule": false,
+          "followable": true,
+          "couldNotResolve": false,
+          "dependencyTypes": ["local"],
+          "module": "../report/ddot",
+          "moduleSystem": "cjs",
+          "matchesDoNotFollow": false,
+          "circular": false,
+          "dynamic": false,
+          "valid": true
+        },
+        {
+          "resolved": "src/report/dot/index.js",
+          "coreModule": false,
+          "followable": true,
+          "couldNotResolve": false,
+          "dependencyTypes": ["local"],
+          "module": "../report/dot",
+          "moduleSystem": "cjs",
+          "matchesDoNotFollow": false,
+          "circular": false,
+          "dynamic": false,
+          "valid": true
+        },
+        {
+          "resolved": "src/report/dot/richModuleColorScheme.json",
+          "coreModule": false,
+          "followable": false,
+          "couldNotResolve": false,
+          "dependencyTypes": ["local"],
+          "module": "../report/dot/richModuleColorScheme.json",
+          "moduleSystem": "cjs",
+          "matchesDoNotFollow": false,
+          "circular": false,
+          "dynamic": false,
+          "valid": true
+        },
+        {
+          "resolved": "src/report/err.js",
+          "coreModule": false,
+          "followable": true,
+          "couldNotResolve": false,
+          "dependencyTypes": ["local"],
+          "module": "../report/err",
+          "moduleSystem": "cjs",
+          "matchesDoNotFollow": false,
+          "circular": false,
+          "dynamic": false,
+          "valid": true
+        },
+        {
+          "resolved": "src/report/html/index.js",
+          "coreModule": false,
+          "followable": true,
+          "couldNotResolve": false,
+          "dependencyTypes": ["local"],
+          "module": "../report/html",
+          "moduleSystem": "cjs",
+          "matchesDoNotFollow": false,
+          "circular": false,
+          "dynamic": false,
+          "valid": true
+        },
+        {
+          "resolved": "src/report/json.js",
+          "coreModule": false,
+          "followable": true,
+          "couldNotResolve": false,
+          "dependencyTypes": ["local"],
+          "module": "../report/json",
+          "moduleSystem": "cjs",
+          "matchesDoNotFollow": false,
+          "circular": false,
+          "dynamic": false,
+          "valid": true
+        },
+        {
+          "resolved": "src/main/options/normalize.js",
+          "coreModule": false,
+          "followable": true,
+          "couldNotResolve": false,
+          "dependencyTypes": ["local"],
+          "module": "./options/normalize",
+          "moduleSystem": "cjs",
+          "matchesDoNotFollow": false,
+          "circular": false,
+          "dynamic": false,
+          "valid": true
+        },
+        {
+          "resolved": "src/main/options/validate.js",
+          "coreModule": false,
+          "followable": true,
+          "couldNotResolve": false,
+          "dependencyTypes": ["local"],
+          "module": "./options/validate",
+          "moduleSystem": "cjs",
+          "matchesDoNotFollow": false,
+          "circular": false,
+          "dynamic": false,
+          "valid": true
+        },
+        {
+          "resolved": "src/main/ruleSet/normalize.js",
+          "coreModule": false,
+          "followable": true,
+          "couldNotResolve": false,
+          "dependencyTypes": ["local"],
+          "module": "./ruleSet/normalize",
+          "moduleSystem": "cjs",
+          "matchesDoNotFollow": false,
+          "circular": false,
+          "dynamic": false,
+          "valid": true
+        },
+        {
+          "resolved": "src/main/ruleSet/validate.js",
+          "coreModule": false,
+          "followable": true,
+          "couldNotResolve": false,
+          "dependencyTypes": ["local"],
+          "module": "./ruleSet/validate",
+          "moduleSystem": "cjs",
+          "matchesDoNotFollow": false,
+          "circular": false,
+          "dynamic": false,
+          "valid": true
+        }
+      ],
+      "valid": true
+    },
+    {
+      "source": "src/report/dot/richModuleColorScheme.json",
+      "followable": false,
+      "coreModule": false,
+      "couldNotResolve": false,
+      "matchesDoNotFollow": false,
+      "dependencyTypes": ["local"],
+      "dependencies": [],
+      "valid": true
+    },
+    {
+      "source": "src/extract/index.js",
+      "dependencies": [
+        {
+          "resolved": "src/extract/addValidations.js",
+          "coreModule": false,
+          "followable": true,
+          "couldNotResolve": false,
+          "dependencyTypes": ["local"],
+          "module": "./addValidations",
+          "moduleSystem": "cjs",
+          "matchesDoNotFollow": false,
+          "circular": false,
+          "dynamic": false,
+          "valid": true
+        },
+        {
+          "resolved": "src/extract/derive/circular/index.js",
+          "coreModule": false,
+          "followable": true,
+          "couldNotResolve": false,
+          "dependencyTypes": ["local"],
+          "module": "./derive/circular",
+          "moduleSystem": "cjs",
+          "matchesDoNotFollow": false,
+          "circular": false,
+          "dynamic": false,
+          "valid": true
+        },
+        {
+          "resolved": "src/extract/derive/orphan/index.js",
+          "coreModule": false,
+          "followable": true,
+          "couldNotResolve": false,
+          "dependencyTypes": ["local"],
+          "module": "./derive/orphan",
+          "moduleSystem": "cjs",
+          "matchesDoNotFollow": false,
+          "circular": false,
+          "dynamic": false,
+          "valid": true
+        },
+        {
+          "resolved": "src/extract/extract.js",
+          "coreModule": false,
+          "followable": true,
+          "couldNotResolve": false,
+          "dependencyTypes": ["local"],
+          "module": "./extract",
+          "moduleSystem": "cjs",
+          "matchesDoNotFollow": false,
+          "circular": false,
+          "dynamic": false,
+          "valid": true
+        },
+        {
+          "resolved": "src/extract/gatherInitialSources.js",
+          "coreModule": false,
+          "followable": true,
+          "couldNotResolve": false,
+          "dependencyTypes": ["local"],
+          "module": "./gatherInitialSources",
+          "moduleSystem": "cjs",
+          "matchesDoNotFollow": false,
+          "circular": false,
+          "dynamic": false,
+          "valid": true
+        },
+        {
+          "resolved": "src/extract/summarize.js",
+          "coreModule": false,
+          "followable": true,
+          "couldNotResolve": false,
+          "dependencyTypes": ["local"],
+          "module": "./summarize",
+          "moduleSystem": "cjs",
+          "matchesDoNotFollow": false,
+          "circular": false,
+          "dynamic": false,
+          "valid": true
+        },
+        {
+          "resolved": "src/extract/utl/pathToPosix.js",
+          "coreModule": false,
+          "followable": true,
+          "couldNotResolve": false,
+          "dependencyTypes": ["local"],
+          "module": "./utl/pathToPosix",
+          "moduleSystem": "cjs",
+          "matchesDoNotFollow": false,
+          "circular": false,
+          "dynamic": false,
+          "valid": true
+        },
+        {
+          "resolved": "node_modules/lodash/lodash.js",
+          "coreModule": false,
+          "followable": false,
+          "couldNotResolve": false,
+          "dependencyTypes": ["npm"],
+          "license": "MIT",
+          "module": "lodash",
+          "moduleSystem": "cjs",
+          "matchesDoNotFollow": true,
+          "circular": false,
+          "dynamic": false,
+          "valid": false,
+          "rules": [
+            {
+              "severity": "info",
+              "name": "prefer-lodash-individuals"
+            }
+          ]
+        }
+      ],
+      "valid": true
+    },
+    {
+      "source": "node_modules/lodash/lodash.js",
+      "followable": false,
+      "coreModule": false,
+      "couldNotResolve": false,
+      "matchesDoNotFollow": true,
+      "dependencyTypes": ["npm"],
+      "dependencies": [],
+      "valid": true
+    },
+    {
+      "source": "src/extract/addValidations.js",
+      "dependencies": [
+        {
+          "resolved": "src/validate/index.js",
+          "coreModule": false,
+          "followable": true,
+          "couldNotResolve": false,
+          "dependencyTypes": ["local"],
+          "module": "../validate",
+          "moduleSystem": "cjs",
+          "matchesDoNotFollow": false,
+          "circular": false,
+          "dynamic": false,
+          "valid": true
+        }
+      ],
+      "valid": true
+    },
+    {
+      "source": "src/validate/index.js",
+      "dependencies": [
+        {
+          "resolved": "src/validate/matchDependencyRule.js",
+          "coreModule": false,
+          "followable": true,
+          "couldNotResolve": false,
+          "dependencyTypes": ["local"],
+          "module": "./matchDependencyRule",
+          "moduleSystem": "cjs",
+          "matchesDoNotFollow": false,
+          "circular": false,
+          "dynamic": false,
+          "valid": true
+        },
+        {
+          "resolved": "src/validate/matchModuleRule.js",
+          "coreModule": false,
+          "followable": true,
+          "couldNotResolve": false,
+          "dependencyTypes": ["local"],
+          "module": "./matchModuleRule",
+          "moduleSystem": "cjs",
+          "matchesDoNotFollow": false,
+          "circular": false,
+          "dynamic": false,
+          "valid": true
+        }
+      ],
+      "valid": true
+    },
+    {
+      "source": "src/validate/matchDependencyRule.js",
+      "dependencies": [
+        {
+          "resolved": "src/validate/isModuleOnlyRule.js",
+          "coreModule": false,
+          "followable": true,
+          "couldNotResolve": false,
+          "dependencyTypes": ["local"],
+          "module": "./isModuleOnlyRule",
+          "moduleSystem": "cjs",
+          "matchesDoNotFollow": false,
+          "circular": false,
+          "dynamic": false,
+          "valid": true
+        }
+      ],
+      "valid": true
+    },
+    {
+      "source": "src/validate/isModuleOnlyRule.js",
+      "dependencies": [],
+      "valid": true
+    },
+    {
+      "source": "src/validate/matchModuleRule.js",
+      "dependencies": [
+        {
+          "resolved": "src/validate/isModuleOnlyRule.js",
+          "coreModule": false,
+          "followable": true,
+          "couldNotResolve": false,
+          "dependencyTypes": ["local"],
+          "module": "./isModuleOnlyRule",
+          "moduleSystem": "cjs",
+          "matchesDoNotFollow": false,
+          "circular": false,
+          "dynamic": false,
+          "valid": true
+        }
+      ],
+      "valid": true
+    },
+    {
+      "source": "src/extract/derive/circular/index.js",
+      "dependencies": [
+        {
+          "resolved": "src/extract/derive/circular/dependencyEndsUpAtFrom.js",
+          "coreModule": false,
+          "followable": true,
+          "couldNotResolve": false,
+          "dependencyTypes": ["local"],
+          "module": "./dependencyEndsUpAtFrom",
+          "moduleSystem": "cjs",
+          "matchesDoNotFollow": false,
+          "circular": false,
+          "dynamic": false,
+          "valid": true
+        },
+        {
+          "resolved": "node_modules/lodash/get.js",
+          "coreModule": false,
+          "followable": false,
+          "couldNotResolve": false,
+          "dependencyTypes": ["npm"],
+          "license": "MIT",
+          "module": "lodash/get",
+          "moduleSystem": "cjs",
+          "matchesDoNotFollow": true,
+          "circular": false,
+          "dynamic": false,
+          "valid": true
+        }
+      ],
+      "valid": true
+    },
+    {
+      "source": "src/extract/derive/circular/dependencyEndsUpAtFrom.js",
+      "dependencies": [],
+      "valid": true
+    },
+    {
+      "source": "src/extract/derive/orphan/index.js",
+      "dependencies": [
+        {
+          "resolved": "src/extract/derive/orphan/isOrphan.js",
+          "coreModule": false,
+          "followable": true,
+          "couldNotResolve": false,
+          "dependencyTypes": ["local"],
+          "module": "./isOrphan",
+          "moduleSystem": "cjs",
+          "matchesDoNotFollow": false,
+          "circular": false,
+          "dynamic": false,
+          "valid": true
+        },
+        {
+          "resolved": "node_modules/lodash/get.js",
+          "coreModule": false,
+          "followable": false,
+          "couldNotResolve": false,
+          "dependencyTypes": ["npm"],
+          "license": "MIT",
+          "module": "lodash/get",
+          "moduleSystem": "cjs",
+          "matchesDoNotFollow": true,
+          "circular": false,
+          "dynamic": false,
+          "valid": true
+        }
+      ],
+      "valid": true
+    },
+    {
+      "source": "src/extract/derive/orphan/isOrphan.js",
+      "dependencies": [],
+      "valid": true
+    },
+    {
+      "source": "src/extract/extract.js",
+      "dependencies": [
+        {
+          "resolved": "src/extract/ast-extractors/extract-AMD-deps.js",
+          "coreModule": false,
+          "followable": true,
+          "couldNotResolve": false,
+          "dependencyTypes": ["local"],
+          "module": "./ast-extractors/extract-AMD-deps",
+          "moduleSystem": "cjs",
+          "matchesDoNotFollow": false,
+          "circular": false,
+          "dynamic": false,
+          "valid": true
+        },
+        {
+          "resolved": "src/extract/ast-extractors/extract-ES6-deps.js",
+          "coreModule": false,
+          "followable": true,
+          "couldNotResolve": false,
+          "dependencyTypes": ["local"],
+          "module": "./ast-extractors/extract-ES6-deps",
+          "moduleSystem": "cjs",
+          "matchesDoNotFollow": false,
+          "circular": false,
+          "dynamic": false,
+          "valid": true
+        },
+        {
+          "resolved": "src/extract/ast-extractors/extract-commonJS-deps.js",
+          "coreModule": false,
+          "followable": true,
+          "couldNotResolve": false,
+          "dependencyTypes": ["local"],
+          "module": "./ast-extractors/extract-commonJS-deps",
+          "moduleSystem": "cjs",
+          "matchesDoNotFollow": false,
+          "circular": false,
+          "dynamic": false,
+          "valid": true
+        },
+        {
+          "resolved": "src/extract/ast-extractors/extract-typescript-deps.js",
+          "coreModule": false,
+          "followable": true,
+          "couldNotResolve": false,
+          "dependencyTypes": ["local"],
+          "module": "./ast-extractors/extract-typescript-deps",
+          "moduleSystem": "cjs",
+          "matchesDoNotFollow": false,
+          "circular": false,
+          "dynamic": false,
+          "valid": true
+        },
+        {
+          "resolved": "src/extract/ignore.js",
+          "coreModule": false,
+          "followable": true,
+          "couldNotResolve": false,
+          "dependencyTypes": ["local"],
+          "license": "MIT",
+          "module": "./ignore",
+          "moduleSystem": "cjs",
+          "matchesDoNotFollow": false,
+          "circular": false,
+          "dynamic": false,
+          "valid": true
+        },
+        {
+          "resolved": "src/extract/parse/toJavascriptAST.js",
+          "coreModule": false,
+          "followable": true,
+          "couldNotResolve": false,
+          "dependencyTypes": ["local"],
+          "module": "./parse/toJavascriptAST",
+          "moduleSystem": "cjs",
+          "matchesDoNotFollow": false,
+          "circular": false,
+          "dynamic": false,
+          "valid": true
+        },
+        {
+          "resolved": "src/extract/parse/toTypescriptAST.js",
+          "coreModule": false,
+          "followable": true,
+          "couldNotResolve": false,
+          "dependencyTypes": ["local"],
+          "module": "./parse/toTypescriptAST",
+          "moduleSystem": "cjs",
+          "matchesDoNotFollow": false,
+          "circular": false,
+          "dynamic": false,
+          "valid": true
+        },
+        {
+          "resolved": "src/extract/resolve/index.js",
+          "coreModule": false,
+          "followable": true,
+          "couldNotResolve": false,
+          "dependencyTypes": ["local"],
+          "license": "MIT",
+          "module": "./resolve",
+          "moduleSystem": "cjs",
+          "matchesDoNotFollow": false,
+          "circular": false,
+          "dynamic": false,
+          "valid": true
+        },
+        {
+          "resolved": "node_modules/lodash/lodash.js",
+          "coreModule": false,
+          "followable": false,
+          "couldNotResolve": false,
+          "dependencyTypes": ["npm"],
+          "license": "MIT",
+          "module": "lodash",
+          "moduleSystem": "cjs",
+          "matchesDoNotFollow": true,
+          "circular": false,
+          "dynamic": false,
+          "valid": false,
+          "rules": [
+            {
+              "severity": "info",
+              "name": "prefer-lodash-individuals"
+            }
+          ]
+        },
+        {
+          "resolved": "path",
+          "coreModule": true,
+          "followable": false,
+          "couldNotResolve": false,
+          "dependencyTypes": ["core"],
+          "module": "path",
+          "moduleSystem": "cjs",
+          "matchesDoNotFollow": false,
+          "circular": false,
+          "dynamic": false,
+          "valid": true
+        }
+      ],
+      "valid": true
+    },
+    {
+      "source": "path",
+      "followable": false,
+      "coreModule": true,
+      "couldNotResolve": false,
+      "matchesDoNotFollow": false,
+      "dependencyTypes": ["core"],
+      "dependencies": [],
+      "valid": true
+    },
+    {
+      "source": "src/extract/ast-extractors/extract-AMD-deps.js",
+      "dependencies": [
+        {
+          "resolved": "src/extract/ast-extractors/extract-commonJS-deps.js",
+          "coreModule": false,
+          "followable": true,
+          "couldNotResolve": false,
+          "dependencyTypes": ["local"],
+          "module": "./extract-commonJS-deps",
+          "moduleSystem": "cjs",
+          "matchesDoNotFollow": false,
+          "circular": false,
+          "dynamic": false,
+          "valid": true
+        },
+        {
+          "resolved": "node_modules/acorn-walk/dist/walk.js",
+          "coreModule": false,
+          "followable": false,
+          "couldNotResolve": false,
+          "dependencyTypes": ["npm"],
+          "license": "MIT",
+          "module": "acorn-walk",
+          "moduleSystem": "cjs",
+          "matchesDoNotFollow": true,
+          "circular": false,
+          "dynamic": false,
+          "valid": true
+        }
+      ],
+      "valid": true
+    },
+    {
+      "source": "node_modules/acorn-walk/dist/walk.js",
+      "followable": false,
+      "coreModule": false,
+      "couldNotResolve": false,
+      "matchesDoNotFollow": true,
+      "dependencyTypes": ["npm"],
+      "dependencies": [],
+      "valid": true
+    },
+    {
+      "source": "src/extract/ast-extractors/extract-commonJS-deps.js",
+      "dependencies": [
+        {
+          "resolved": "node_modules/acorn-walk/dist/walk.js",
+          "coreModule": false,
+          "followable": false,
+          "couldNotResolve": false,
+          "dependencyTypes": ["npm"],
+          "license": "MIT",
+          "module": "acorn-walk",
+          "moduleSystem": "cjs",
+          "matchesDoNotFollow": true,
+          "circular": false,
+          "dynamic": false,
+          "valid": true
+        }
+      ],
+      "valid": true
+    },
+    {
+      "source": "src/extract/ast-extractors/extract-ES6-deps.js",
+      "dependencies": [
+        {
+          "resolved": "node_modules/acorn-walk/dist/walk.js",
+          "coreModule": false,
+          "followable": false,
+          "couldNotResolve": false,
+          "dependencyTypes": ["npm"],
+          "license": "MIT",
+          "module": "acorn-walk",
+          "moduleSystem": "cjs",
+          "matchesDoNotFollow": true,
+          "circular": false,
+          "dynamic": false,
+          "valid": true
+        }
+      ],
+      "valid": true
+    },
+    {
+      "source": "src/extract/ast-extractors/extract-typescript-deps.js",
+      "dependencies": [
+        {
+          "resolved": "package.json",
+          "coreModule": false,
+          "followable": false,
+          "couldNotResolve": false,
+          "dependencyTypes": ["local"],
+          "module": "../../../package.json",
+          "moduleSystem": "cjs",
+          "matchesDoNotFollow": false,
+          "circular": false,
+          "dynamic": false,
+          "valid": true
+        },
+        {
+          "resolved": "node_modules/semver-try-require/src/index.js",
+          "coreModule": false,
+          "followable": false,
+          "couldNotResolve": false,
+          "dependencyTypes": ["npm"],
+          "license": "MIT",
+          "module": "semver-try-require",
+          "moduleSystem": "cjs",
+          "matchesDoNotFollow": true,
+          "circular": false,
+          "dynamic": false,
+          "valid": true
+        }
+      ],
+      "valid": true
+    },
+    {
+      "source": "node_modules/semver-try-require/src/index.js",
+      "followable": false,
+      "coreModule": false,
+      "couldNotResolve": false,
+      "matchesDoNotFollow": true,
+      "dependencyTypes": ["npm"],
+      "dependencies": [],
+      "valid": true
+    },
+    {
+      "source": "src/extract/ignore.js",
+      "dependencies": [],
+      "valid": true
+    },
+    {
+      "source": "src/extract/parse/toJavascriptAST.js",
+      "dependencies": [
+        {
+          "resolved": "src/extract/transpile/index.js",
+          "coreModule": false,
+          "followable": true,
+          "couldNotResolve": false,
+          "dependencyTypes": ["local"],
+          "module": "../transpile",
+          "moduleSystem": "cjs",
+          "matchesDoNotFollow": false,
+          "circular": false,
+          "dynamic": false,
+          "valid": true
+        },
+        {
+          "resolved": "src/extract/utl/getExtension.js",
+          "coreModule": false,
+          "followable": true,
+          "couldNotResolve": false,
+          "dependencyTypes": ["local"],
+          "module": "../utl/getExtension",
+          "moduleSystem": "cjs",
+          "matchesDoNotFollow": false,
+          "circular": false,
+          "dynamic": false,
+          "valid": true
+        },
+        {
+          "resolved": "node_modules/acorn/dist/acorn.js",
+          "coreModule": false,
+          "followable": false,
+          "couldNotResolve": false,
+          "dependencyTypes": ["npm"],
+          "license": "MIT",
+          "module": "acorn",
+          "moduleSystem": "cjs",
+          "matchesDoNotFollow": true,
+          "circular": false,
+          "dynamic": false,
+          "valid": true
+        },
+        {
+          "resolved": "node_modules/acorn-loose/dist/acorn-loose.js",
+          "coreModule": false,
+          "followable": false,
+          "couldNotResolve": false,
+          "dependencyTypes": ["npm"],
+          "license": "MIT",
+          "module": "acorn-loose",
+          "moduleSystem": "cjs",
+          "matchesDoNotFollow": true,
+          "circular": false,
+          "dynamic": false,
+          "valid": true
+        },
+        {
+          "resolved": "fs",
+          "coreModule": true,
+          "followable": false,
+          "couldNotResolve": false,
+          "dependencyTypes": ["core"],
+          "module": "fs",
+          "moduleSystem": "cjs",
+          "matchesDoNotFollow": false,
+          "circular": false,
+          "dynamic": false,
+          "valid": true
+        },
+        {
+          "resolved": "node_modules/lodash/memoize.js",
+          "coreModule": false,
+          "followable": false,
+          "couldNotResolve": false,
+          "dependencyTypes": ["npm"],
+          "license": "MIT",
+          "module": "lodash/memoize",
+          "moduleSystem": "cjs",
+          "matchesDoNotFollow": true,
+          "circular": false,
+          "dynamic": false,
+          "valid": true
+        }
+      ],
+      "valid": true
+    },
+    {
+      "source": "node_modules/acorn/dist/acorn.js",
+      "followable": false,
+      "coreModule": false,
+      "couldNotResolve": false,
+      "matchesDoNotFollow": true,
+      "dependencyTypes": ["npm"],
+      "dependencies": [],
+      "valid": true
+    },
+    {
+      "source": "node_modules/acorn-loose/dist/acorn-loose.js",
+      "followable": false,
+      "coreModule": false,
+      "couldNotResolve": false,
+      "matchesDoNotFollow": true,
+      "dependencyTypes": ["npm"],
+      "dependencies": [],
+      "valid": true
+    },
+    {
+      "source": "fs",
+      "followable": false,
+      "coreModule": true,
+      "couldNotResolve": false,
+      "matchesDoNotFollow": false,
+      "dependencyTypes": ["core"],
+      "dependencies": [],
+      "valid": true
+    },
+    {
+      "source": "node_modules/lodash/memoize.js",
+      "followable": false,
+      "coreModule": false,
+      "couldNotResolve": false,
+      "matchesDoNotFollow": true,
+      "dependencyTypes": ["npm"],
+      "dependencies": [],
+      "valid": true
+    },
+    {
+      "source": "src/extract/transpile/index.js",
+      "dependencies": [
+        {
+          "resolved": "src/extract/transpile/meta.js",
+          "coreModule": false,
+          "followable": true,
+          "couldNotResolve": false,
+          "dependencyTypes": ["local"],
+          "module": "./meta",
+          "moduleSystem": "cjs",
+          "matchesDoNotFollow": false,
+          "circular": false,
+          "dynamic": false,
+          "valid": true
+        }
+      ],
+      "valid": true
+    },
+    {
+      "source": "src/extract/transpile/meta.js",
+      "dependencies": [
+        {
+          "resolved": "package.json",
+          "coreModule": false,
+          "followable": false,
+          "couldNotResolve": false,
+          "dependencyTypes": ["local"],
+          "module": "../../../package.json",
+          "moduleSystem": "cjs",
+          "matchesDoNotFollow": false,
+          "circular": false,
+          "dynamic": false,
+          "valid": true
+        },
+        {
+          "resolved": "src/extract/transpile/coffeeWrap.js",
+          "coreModule": false,
+          "followable": true,
+          "couldNotResolve": false,
+          "dependencyTypes": ["local"],
+          "module": "./coffeeWrap",
+          "moduleSystem": "cjs",
+          "matchesDoNotFollow": false,
+          "circular": false,
+          "dynamic": false,
+          "valid": true
+        },
+        {
+          "resolved": "src/extract/transpile/javaScriptWrap.js",
+          "coreModule": false,
+          "followable": true,
+          "couldNotResolve": false,
+          "dependencyTypes": ["local"],
+          "module": "./javaScriptWrap",
+          "moduleSystem": "cjs",
+          "matchesDoNotFollow": false,
+          "circular": false,
+          "dynamic": false,
+          "valid": true
+        },
+        {
+          "resolved": "src/extract/transpile/liveScriptWrap.js",
+          "coreModule": false,
+          "followable": true,
+          "couldNotResolve": false,
+          "dependencyTypes": ["local"],
+          "module": "./liveScriptWrap",
+          "moduleSystem": "cjs",
+          "matchesDoNotFollow": false,
+          "circular": false,
+          "dynamic": false,
+          "valid": true
+        },
+        {
+          "resolved": "src/extract/transpile/typeScriptWrap.js",
+          "coreModule": false,
+          "followable": true,
+          "couldNotResolve": false,
+          "dependencyTypes": ["local"],
+          "module": "./typeScriptWrap",
+          "moduleSystem": "cjs",
+          "matchesDoNotFollow": false,
+          "circular": false,
+          "dynamic": false,
+          "valid": true
+        }
+      ],
+      "valid": true
+    },
+    {
+      "source": "src/extract/transpile/coffeeWrap.js",
+      "dependencies": [
+        {
+          "resolved": "package.json",
+          "coreModule": false,
+          "followable": false,
+          "couldNotResolve": false,
+          "dependencyTypes": ["local"],
+          "module": "../../../package.json",
+          "moduleSystem": "cjs",
+          "matchesDoNotFollow": false,
+          "circular": false,
+          "dynamic": false,
+          "valid": true
+        },
+        {
+          "resolved": "node_modules/semver-try-require/src/index.js",
+          "coreModule": false,
+          "followable": false,
+          "couldNotResolve": false,
+          "dependencyTypes": ["npm"],
+          "license": "MIT",
+          "module": "semver-try-require",
+          "moduleSystem": "cjs",
+          "matchesDoNotFollow": true,
+          "circular": false,
+          "dynamic": false,
+          "valid": true
+        }
+      ],
+      "valid": true
+    },
+    {
+      "source": "src/extract/transpile/javaScriptWrap.js",
+      "dependencies": [],
+      "valid": true
+    },
+    {
+      "source": "src/extract/transpile/liveScriptWrap.js",
+      "dependencies": [
+        {
+          "resolved": "package.json",
+          "coreModule": false,
+          "followable": false,
+          "couldNotResolve": false,
+          "dependencyTypes": ["local"],
+          "module": "../../../package.json",
+          "moduleSystem": "cjs",
+          "matchesDoNotFollow": false,
+          "circular": false,
+          "dynamic": false,
+          "valid": true
+        },
+        {
+          "resolved": "node_modules/semver-try-require/src/index.js",
+          "coreModule": false,
+          "followable": false,
+          "couldNotResolve": false,
+          "dependencyTypes": ["npm"],
+          "license": "MIT",
+          "module": "semver-try-require",
+          "moduleSystem": "cjs",
+          "matchesDoNotFollow": true,
+          "circular": false,
+          "dynamic": false,
+          "valid": true
+        }
+      ],
+      "valid": true
+    },
+    {
+      "source": "src/extract/transpile/typeScriptWrap.js",
+      "dependencies": [
+        {
+          "resolved": "package.json",
+          "coreModule": false,
+          "followable": false,
+          "couldNotResolve": false,
+          "dependencyTypes": ["local"],
+          "module": "../../../package.json",
+          "moduleSystem": "cjs",
+          "matchesDoNotFollow": false,
+          "circular": false,
+          "dynamic": false,
+          "valid": true
+        },
+        {
+          "resolved": "node_modules/lodash/get.js",
+          "coreModule": false,
+          "followable": false,
+          "couldNotResolve": false,
+          "dependencyTypes": ["npm"],
+          "license": "MIT",
+          "module": "lodash/get",
+          "moduleSystem": "cjs",
+          "matchesDoNotFollow": true,
+          "circular": false,
+          "dynamic": false,
+          "valid": true
+        },
+        {
+          "resolved": "node_modules/semver-try-require/src/index.js",
+          "coreModule": false,
+          "followable": false,
+          "couldNotResolve": false,
+          "dependencyTypes": ["npm"],
+          "license": "MIT",
+          "module": "semver-try-require",
+          "moduleSystem": "cjs",
+          "matchesDoNotFollow": true,
+          "circular": false,
+          "dynamic": false,
+          "valid": true
+        }
+      ],
+      "valid": true
+    },
+    {
+      "source": "src/extract/utl/getExtension.js",
+      "dependencies": [
+        {
+          "resolved": "path",
+          "coreModule": true,
+          "followable": false,
+          "couldNotResolve": false,
+          "dependencyTypes": ["core"],
+          "module": "path",
+          "moduleSystem": "cjs",
+          "matchesDoNotFollow": false,
+          "circular": false,
+          "dynamic": false,
+          "valid": true
+        }
+      ],
+      "valid": true
+    },
+    {
+      "source": "src/extract/parse/toTypescriptAST.js",
+      "dependencies": [
+        {
+          "resolved": "package.json",
+          "coreModule": false,
+          "followable": false,
+          "couldNotResolve": false,
+          "dependencyTypes": ["local"],
+          "module": "../../../package.json",
+          "moduleSystem": "cjs",
+          "matchesDoNotFollow": false,
+          "circular": false,
+          "dynamic": false,
+          "valid": true
+        },
+        {
+          "resolved": "fs",
+          "coreModule": true,
+          "followable": false,
+          "couldNotResolve": false,
+          "dependencyTypes": ["core"],
+          "module": "fs",
+          "moduleSystem": "cjs",
+          "matchesDoNotFollow": false,
+          "circular": false,
+          "dynamic": false,
+          "valid": true
+        },
+        {
+          "resolved": "node_modules/lodash/memoize.js",
+          "coreModule": false,
+          "followable": false,
+          "couldNotResolve": false,
+          "dependencyTypes": ["npm"],
+          "license": "MIT",
+          "module": "lodash/memoize",
+          "moduleSystem": "cjs",
+          "matchesDoNotFollow": true,
+          "circular": false,
+          "dynamic": false,
+          "valid": true
+        },
+        {
+          "resolved": "node_modules/semver-try-require/src/index.js",
+          "coreModule": false,
+          "followable": false,
+          "couldNotResolve": false,
+          "dependencyTypes": ["npm"],
+          "license": "MIT",
+          "module": "semver-try-require",
+          "moduleSystem": "cjs",
+          "matchesDoNotFollow": true,
+          "circular": false,
+          "dynamic": false,
+          "valid": true
+        }
+      ],
+      "valid": true
+    },
+    {
+      "source": "src/extract/resolve/index.js",
+      "dependencies": [
+        {
+          "resolved": "src/extract/utl/pathToPosix.js",
+          "coreModule": false,
+          "followable": true,
+          "couldNotResolve": false,
+          "dependencyTypes": ["local"],
+          "module": "../utl/pathToPosix",
+          "moduleSystem": "cjs",
+          "matchesDoNotFollow": false,
+          "circular": false,
+          "dynamic": false,
+          "valid": true
+        },
+        {
+          "resolved": "src/extract/resolve/resolve-AMD.js",
+          "coreModule": false,
+          "followable": true,
+          "couldNotResolve": false,
+          "dependencyTypes": ["local"],
+          "module": "./resolve-AMD",
+          "moduleSystem": "cjs",
+          "matchesDoNotFollow": false,
+          "circular": false,
+          "dynamic": false,
+          "valid": true
+        },
+        {
+          "resolved": "src/extract/resolve/resolve-commonJS.js",
+          "coreModule": false,
+          "followable": true,
+          "couldNotResolve": false,
+          "dependencyTypes": ["local"],
+          "module": "./resolve-commonJS",
+          "moduleSystem": "cjs",
+          "matchesDoNotFollow": false,
+          "circular": false,
+          "dynamic": false,
+          "valid": true
+        },
+        {
+          "resolved": "fs",
+          "coreModule": true,
+          "followable": false,
+          "couldNotResolve": false,
+          "dependencyTypes": ["core"],
+          "module": "fs",
+          "moduleSystem": "cjs",
+          "matchesDoNotFollow": false,
+          "circular": false,
+          "dynamic": false,
+          "valid": true
+        },
+        {
+          "resolved": "path",
+          "coreModule": true,
+          "followable": false,
+          "couldNotResolve": false,
+          "dependencyTypes": ["core"],
+          "module": "path",
+          "moduleSystem": "cjs",
+          "matchesDoNotFollow": false,
+          "circular": false,
+          "dynamic": false,
+          "valid": true
+        }
+      ],
+      "valid": true
+    },
+    {
+      "source": "src/extract/utl/pathToPosix.js",
+      "dependencies": [
+        {
+          "resolved": "path",
+          "coreModule": true,
+          "followable": false,
+          "couldNotResolve": false,
+          "dependencyTypes": ["core"],
+          "module": "path",
+          "moduleSystem": "cjs",
+          "matchesDoNotFollow": false,
+          "circular": false,
+          "dynamic": false,
+          "valid": true
+        }
+      ],
+      "valid": true
+    },
+    {
+      "source": "src/extract/resolve/resolve-AMD.js",
+      "dependencies": [
+        {
+          "resolved": "src/extract/utl/pathToPosix.js",
+          "coreModule": false,
+          "followable": true,
+          "couldNotResolve": false,
+          "dependencyTypes": ["local"],
+          "module": "../utl/pathToPosix",
+          "moduleSystem": "cjs",
+          "matchesDoNotFollow": false,
+          "circular": false,
+          "dynamic": false,
+          "valid": true
+        },
+        {
+          "resolved": "src/extract/resolve/determineDependencyTypes.js",
+          "coreModule": false,
+          "followable": true,
+          "couldNotResolve": false,
+          "dependencyTypes": ["local"],
+          "module": "./determineDependencyTypes",
+          "moduleSystem": "cjs",
+          "matchesDoNotFollow": false,
+          "circular": false,
+          "dynamic": false,
+          "valid": true
+        },
+        {
+          "resolved": "src/extract/resolve/readPackageDeps/index.js",
+          "coreModule": false,
+          "followable": true,
+          "couldNotResolve": false,
+          "dependencyTypes": ["local"],
+          "module": "./readPackageDeps",
+          "moduleSystem": "cjs",
+          "matchesDoNotFollow": false,
+          "circular": false,
+          "dynamic": false,
+          "valid": true
+        },
+        {
+          "resolved": "src/extract/resolve/resolve-helpers.js",
+          "coreModule": false,
+          "followable": true,
+          "couldNotResolve": false,
+          "dependencyTypes": ["local"],
+          "module": "./resolve-helpers",
+          "moduleSystem": "cjs",
+          "matchesDoNotFollow": false,
+          "circular": false,
+          "dynamic": false,
+          "valid": true
+        },
+        {
+          "resolved": "fs",
+          "coreModule": true,
+          "followable": false,
+          "couldNotResolve": false,
+          "dependencyTypes": ["core"],
+          "module": "fs",
+          "moduleSystem": "cjs",
+          "matchesDoNotFollow": false,
+          "circular": false,
+          "dynamic": false,
+          "valid": true
+        },
+        {
+          "resolved": "node_modules/lodash/memoize.js",
+          "coreModule": false,
+          "followable": false,
+          "couldNotResolve": false,
+          "dependencyTypes": ["npm"],
+          "license": "MIT",
+          "module": "lodash/memoize",
+          "moduleSystem": "cjs",
+          "matchesDoNotFollow": true,
+          "circular": false,
+          "dynamic": false,
+          "valid": true
+        },
+        {
+          "resolved": "path",
+          "coreModule": true,
+          "followable": false,
+          "couldNotResolve": false,
+          "dependencyTypes": ["core"],
+          "module": "path",
+          "moduleSystem": "cjs",
+          "matchesDoNotFollow": false,
+          "circular": false,
+          "dynamic": false,
+          "valid": true
+        },
+        {
+          "resolved": "node_modules/resolve/index.js",
+          "coreModule": false,
+          "followable": false,
+          "couldNotResolve": false,
+          "dependencyTypes": ["npm"],
+          "license": "MIT",
+          "module": "resolve",
+          "moduleSystem": "cjs",
+          "matchesDoNotFollow": true,
+          "circular": false,
+          "dynamic": false,
+          "valid": true
+        }
+      ],
+      "valid": true
+    },
+    {
+      "source": "node_modules/resolve/index.js",
+      "followable": false,
+      "coreModule": false,
+      "couldNotResolve": false,
+      "matchesDoNotFollow": true,
+      "dependencyTypes": ["npm"],
+      "dependencies": [],
+      "valid": true
+    },
+    {
+      "source": "src/extract/resolve/determineDependencyTypes.js",
+      "dependencies": [
+        {
+          "resolved": "src/extract/resolve/localNpmHelpers.js",
+          "coreModule": false,
+          "followable": true,
+          "couldNotResolve": false,
+          "dependencyTypes": ["local"],
+          "module": "./localNpmHelpers",
+          "moduleSystem": "cjs",
+          "matchesDoNotFollow": false,
+          "circular": false,
+          "dynamic": false,
+          "valid": true
+        },
+        {
+          "resolved": "path",
+          "coreModule": true,
+          "followable": false,
+          "couldNotResolve": false,
+          "dependencyTypes": ["core"],
+          "module": "path",
+          "moduleSystem": "cjs",
+          "matchesDoNotFollow": false,
+          "circular": false,
+          "dynamic": false,
+          "valid": true
+        },
+        {
+          "resolved": "node_modules/resolve/index.js",
+          "coreModule": false,
+          "followable": false,
+          "couldNotResolve": false,
+          "dependencyTypes": ["npm"],
+          "license": "MIT",
+          "module": "resolve",
+          "moduleSystem": "cjs",
+          "matchesDoNotFollow": true,
+          "circular": false,
+          "dynamic": false,
+          "valid": true
+        }
+      ],
+      "valid": true
+    },
+    {
+      "source": "src/extract/resolve/localNpmHelpers.js",
+      "dependencies": [
+        {
+          "resolved": "src/extract/resolve/resolve.js",
+          "coreModule": false,
+          "followable": true,
+          "couldNotResolve": false,
+          "dependencyTypes": ["local"],
+          "license": "MIT",
+          "module": "./resolve",
+          "moduleSystem": "cjs",
+          "matchesDoNotFollow": false,
+          "circular": false,
+          "dynamic": false,
+          "valid": true
+        },
+        {
+          "resolved": "fs",
+          "coreModule": true,
+          "followable": false,
+          "couldNotResolve": false,
+          "dependencyTypes": ["core"],
+          "module": "fs",
+          "moduleSystem": "cjs",
+          "matchesDoNotFollow": false,
+          "circular": false,
+          "dynamic": false,
+          "valid": true
+        },
+        {
+          "resolved": "node_modules/lodash/memoize.js",
+          "coreModule": false,
+          "followable": false,
+          "couldNotResolve": false,
+          "dependencyTypes": ["npm"],
+          "license": "MIT",
+          "module": "lodash/memoize",
+          "moduleSystem": "cjs",
+          "matchesDoNotFollow": true,
+          "circular": false,
+          "dynamic": false,
+          "valid": true
+        },
+        {
+          "resolved": "path",
+          "coreModule": true,
+          "followable": false,
+          "couldNotResolve": false,
+          "dependencyTypes": ["core"],
+          "module": "path",
+          "moduleSystem": "cjs",
+          "matchesDoNotFollow": false,
+          "circular": false,
+          "dynamic": false,
+          "valid": true
+        }
+      ],
+      "valid": true
+    },
+    {
+      "source": "src/extract/resolve/resolve.js",
+      "dependencies": [
+        {
+          "resolved": "src/extract/utl/pathToPosix.js",
+          "coreModule": false,
+          "followable": true,
+          "couldNotResolve": false,
+          "dependencyTypes": ["local"],
+          "module": "../utl/pathToPosix",
+          "moduleSystem": "cjs",
+          "matchesDoNotFollow": false,
+          "circular": false,
+          "dynamic": false,
+          "valid": true
+        },
+        {
+          "resolved": "src/extract/resolve/compileResolveOptions.js",
+          "coreModule": false,
+          "followable": true,
+          "couldNotResolve": false,
+          "dependencyTypes": ["local"],
+          "module": "./compileResolveOptions",
+          "moduleSystem": "cjs",
+          "matchesDoNotFollow": false,
+          "circular": false,
+          "dynamic": false,
+          "valid": true
+        },
+        {
+          "resolved": "node_modules/enhanced-resolve/lib/node.js",
+          "coreModule": false,
+          "followable": false,
+          "couldNotResolve": false,
+          "dependencyTypes": ["npm"],
+          "module": "enhanced-resolve",
+          "moduleSystem": "cjs",
+          "matchesDoNotFollow": true,
+          "circular": false,
+          "dynamic": false,
+          "valid": true
+        }
+      ],
+      "valid": true
+    },
+    {
+      "source": "node_modules/enhanced-resolve/lib/node.js",
+      "followable": false,
+      "coreModule": false,
+      "couldNotResolve": false,
+      "matchesDoNotFollow": true,
+      "dependencyTypes": ["npm"],
+      "dependencies": [],
+      "valid": true
+    },
+    {
+      "source": "src/extract/resolve/compileResolveOptions.js",
+      "dependencies": [
+        {
+          "resolved": "src/extract/transpile/meta.js",
+          "coreModule": false,
+          "followable": true,
+          "couldNotResolve": false,
+          "dependencyTypes": ["local"],
+          "module": "../transpile/meta",
+          "moduleSystem": "cjs",
+          "matchesDoNotFollow": false,
+          "circular": false,
+          "dynamic": false,
+          "valid": true
+        },
+        {
+          "resolved": "node_modules/awesome-typescript-loader/dist/entry.js",
+          "coreModule": false,
+          "followable": false,
+          "couldNotResolve": false,
+          "dependencyTypes": ["npm"],
+          "license": "MIT",
+          "module": "awesome-typescript-loader",
+          "moduleSystem": "cjs",
+          "matchesDoNotFollow": true,
+          "circular": false,
+          "dynamic": false,
+          "valid": true
+        },
+        {
+          "resolved": "node_modules/enhanced-resolve/lib/node.js",
+          "coreModule": false,
+          "followable": false,
+          "couldNotResolve": false,
+          "dependencyTypes": ["npm"],
+          "module": "enhanced-resolve",
+          "moduleSystem": "cjs",
+          "matchesDoNotFollow": true,
+          "circular": false,
+          "dynamic": false,
+          "valid": true
+        }
+      ],
+      "valid": true
+    },
+    {
+      "source": "node_modules/awesome-typescript-loader/dist/entry.js",
+      "followable": false,
+      "coreModule": false,
+      "couldNotResolve": false,
+      "matchesDoNotFollow": true,
+      "dependencyTypes": ["npm"],
+      "dependencies": [],
+      "valid": true
+    },
+    {
+      "source": "src/extract/resolve/readPackageDeps/index.js",
+      "dependencies": [
+        {
+          "resolved": "src/extract/resolve/readPackageDeps/mergePackages.js",
+          "coreModule": false,
+          "followable": true,
+          "couldNotResolve": false,
+          "dependencyTypes": ["local"],
+          "module": "./mergePackages",
+          "moduleSystem": "cjs",
+          "matchesDoNotFollow": false,
+          "circular": false,
+          "dynamic": false,
+          "valid": true
+        },
+        {
+          "resolved": "fs",
+          "coreModule": true,
+          "followable": false,
+          "couldNotResolve": false,
+          "dependencyTypes": ["core"],
+          "module": "fs",
+          "moduleSystem": "cjs",
+          "matchesDoNotFollow": false,
+          "circular": false,
+          "dynamic": false,
+          "valid": true
+        },
+        {
+          "resolved": "node_modules/lodash/memoize.js",
+          "coreModule": false,
+          "followable": false,
+          "couldNotResolve": false,
+          "dependencyTypes": ["npm"],
+          "license": "MIT",
+          "module": "lodash/memoize",
+          "moduleSystem": "cjs",
+          "matchesDoNotFollow": true,
+          "circular": false,
+          "dynamic": false,
+          "valid": true
+        },
+        {
+          "resolved": "path",
+          "coreModule": true,
+          "followable": false,
+          "couldNotResolve": false,
+          "dependencyTypes": ["core"],
+          "module": "path",
+          "moduleSystem": "cjs",
+          "matchesDoNotFollow": false,
+          "circular": false,
+          "dynamic": false,
+          "valid": true
+        }
+      ],
+      "valid": true
+    },
+    {
+      "source": "src/extract/resolve/readPackageDeps/mergePackages.js",
+      "dependencies": [
+        {
+          "resolved": "node_modules/lodash/clone.js",
+          "coreModule": false,
+          "followable": false,
+          "couldNotResolve": false,
+          "dependencyTypes": ["npm"],
+          "license": "MIT",
+          "module": "lodash/clone",
+          "moduleSystem": "cjs",
+          "matchesDoNotFollow": true,
+          "circular": false,
+          "dynamic": false,
+          "valid": true
+        },
+        {
+          "resolved": "node_modules/lodash/get.js",
+          "coreModule": false,
+          "followable": false,
+          "couldNotResolve": false,
+          "dependencyTypes": ["npm"],
+          "license": "MIT",
+          "module": "lodash/get",
+          "moduleSystem": "cjs",
+          "matchesDoNotFollow": true,
+          "circular": false,
+          "dynamic": false,
+          "valid": true
+        },
+        {
+          "resolved": "node_modules/lodash/uniq.js",
+          "coreModule": false,
+          "followable": false,
+          "couldNotResolve": false,
+          "dependencyTypes": ["npm"],
+          "license": "MIT",
+          "module": "lodash/uniq",
+          "moduleSystem": "cjs",
+          "matchesDoNotFollow": true,
+          "circular": false,
+          "dynamic": false,
+          "valid": true
+        }
+      ],
+      "valid": true
+    },
+    {
+      "source": "node_modules/lodash/clone.js",
+      "followable": false,
+      "coreModule": false,
+      "couldNotResolve": false,
+      "matchesDoNotFollow": true,
+      "dependencyTypes": ["npm"],
+      "dependencies": [],
+      "valid": true
+    },
+    {
+      "source": "node_modules/lodash/uniq.js",
+      "followable": false,
+      "coreModule": false,
+      "couldNotResolve": false,
+      "matchesDoNotFollow": true,
+      "dependencyTypes": ["npm"],
+      "dependencies": [],
+      "valid": true
+    },
+    {
+      "source": "src/extract/resolve/resolve-helpers.js",
+      "dependencies": [
+        {
+          "resolved": "src/extract/resolve/localNpmHelpers.js",
+          "coreModule": false,
+          "followable": true,
+          "couldNotResolve": false,
+          "dependencyTypes": ["local"],
+          "module": "./localNpmHelpers",
+          "moduleSystem": "cjs",
+          "matchesDoNotFollow": false,
+          "circular": false,
+          "dynamic": false,
+          "valid": true
+        }
+      ],
+      "valid": true
+    },
+    {
+      "source": "src/extract/resolve/resolve-commonJS.js",
+      "dependencies": [
+        {
+          "resolved": "src/extract/utl/pathToPosix.js",
+          "coreModule": false,
+          "followable": true,
+          "couldNotResolve": false,
+          "dependencyTypes": ["local"],
+          "module": "../utl/pathToPosix",
+          "moduleSystem": "cjs",
+          "matchesDoNotFollow": false,
+          "circular": false,
+          "dynamic": false,
+          "valid": true
+        },
+        {
+          "resolved": "src/extract/resolve/determineDependencyTypes.js",
+          "coreModule": false,
+          "followable": true,
+          "couldNotResolve": false,
+          "dependencyTypes": ["local"],
+          "module": "./determineDependencyTypes",
+          "moduleSystem": "cjs",
+          "matchesDoNotFollow": false,
+          "circular": false,
+          "dynamic": false,
+          "valid": true
+        },
+        {
+          "resolved": "src/extract/resolve/isFollowable.js",
+          "coreModule": false,
+          "followable": true,
+          "couldNotResolve": false,
+          "dependencyTypes": ["local"],
+          "module": "./isFollowable",
+          "moduleSystem": "cjs",
+          "matchesDoNotFollow": false,
+          "circular": false,
+          "dynamic": false,
+          "valid": true
+        },
+        {
+          "resolved": "src/extract/resolve/readPackageDeps/index.js",
+          "coreModule": false,
+          "followable": true,
+          "couldNotResolve": false,
+          "dependencyTypes": ["local"],
+          "module": "./readPackageDeps",
+          "moduleSystem": "cjs",
+          "matchesDoNotFollow": false,
+          "circular": false,
+          "dynamic": false,
+          "valid": true
+        },
+        {
+          "resolved": "src/extract/resolve/resolve.js",
+          "coreModule": false,
+          "followable": true,
+          "couldNotResolve": false,
+          "dependencyTypes": ["local"],
+          "license": "MIT",
+          "module": "./resolve",
+          "moduleSystem": "cjs",
+          "matchesDoNotFollow": false,
+          "circular": false,
+          "dynamic": false,
+          "valid": true
+        },
+        {
+          "resolved": "src/extract/resolve/resolve-helpers.js",
+          "coreModule": false,
+          "followable": true,
+          "couldNotResolve": false,
+          "dependencyTypes": ["local"],
+          "module": "./resolve-helpers",
+          "moduleSystem": "cjs",
+          "matchesDoNotFollow": false,
+          "circular": false,
+          "dynamic": false,
+          "valid": true
+        },
+        {
+          "resolved": "path",
+          "coreModule": true,
+          "followable": false,
+          "couldNotResolve": false,
+          "dependencyTypes": ["core"],
+          "module": "path",
+          "moduleSystem": "cjs",
+          "matchesDoNotFollow": false,
+          "circular": false,
+          "dynamic": false,
+          "valid": true
+        },
+        {
+          "resolved": "node_modules/resolve/index.js",
+          "coreModule": false,
+          "followable": false,
+          "couldNotResolve": false,
+          "dependencyTypes": ["npm"],
+          "license": "MIT",
+          "module": "resolve",
+          "moduleSystem": "cjs",
+          "matchesDoNotFollow": true,
+          "circular": false,
+          "dynamic": false,
+          "valid": true
+        }
+      ],
+      "valid": true
+    },
+    {
+      "source": "src/extract/resolve/isFollowable.js",
+      "dependencies": [
+        {
+          "resolved": "src/extract/utl/getExtension.js",
+          "coreModule": false,
+          "followable": true,
+          "couldNotResolve": false,
+          "dependencyTypes": ["local"],
+          "module": "../utl/getExtension",
+          "moduleSystem": "cjs",
+          "matchesDoNotFollow": false,
+          "circular": false,
+          "dynamic": false,
+          "valid": true
+        },
+        {
+          "resolved": "src/extract/resolve/compileResolveOptions.js",
+          "coreModule": false,
+          "followable": true,
+          "couldNotResolve": false,
+          "dependencyTypes": ["local"],
+          "module": "./compileResolveOptions",
+          "moduleSystem": "cjs",
+          "matchesDoNotFollow": false,
+          "circular": false,
+          "dynamic": false,
+          "valid": true
+        }
+      ],
+      "valid": true
+    },
+    {
+      "source": "src/extract/gatherInitialSources.js",
+      "dependencies": [
+        {
+          "resolved": "src/extract/ignore.js",
+          "coreModule": false,
+          "followable": true,
+          "couldNotResolve": false,
+          "dependencyTypes": ["local"],
+          "license": "MIT",
+          "module": "./ignore",
+          "moduleSystem": "cjs",
+          "matchesDoNotFollow": false,
+          "circular": false,
+          "dynamic": false,
+          "valid": true
+        },
+        {
+          "resolved": "src/extract/transpile/meta.js",
+          "coreModule": false,
+          "followable": true,
+          "couldNotResolve": false,
+          "dependencyTypes": ["local"],
+          "module": "./transpile/meta",
+          "moduleSystem": "cjs",
+          "matchesDoNotFollow": false,
+          "circular": false,
+          "dynamic": false,
+          "valid": true
+        },
+        {
+          "resolved": "fs",
+          "coreModule": true,
+          "followable": false,
+          "couldNotResolve": false,
+          "dependencyTypes": ["core"],
+          "module": "fs",
+          "moduleSystem": "cjs",
+          "matchesDoNotFollow": false,
+          "circular": false,
+          "dynamic": false,
+          "valid": true
+        },
+        {
+          "resolved": "node_modules/glob/glob.js",
+          "coreModule": false,
+          "followable": false,
+          "couldNotResolve": false,
+          "dependencyTypes": ["npm"],
+          "license": "ISC",
+          "module": "glob",
+          "moduleSystem": "cjs",
+          "matchesDoNotFollow": true,
+          "circular": false,
+          "dynamic": false,
+          "valid": true
+        },
+        {
+          "resolved": "path",
+          "coreModule": true,
+          "followable": false,
+          "couldNotResolve": false,
+          "dependencyTypes": ["core"],
+          "module": "path",
+          "moduleSystem": "cjs",
+          "matchesDoNotFollow": false,
+          "circular": false,
+          "dynamic": false,
+          "valid": true
+        }
+      ],
+      "valid": true
+    },
+    {
+      "source": "src/extract/summarize.js",
+      "dependencies": [
+        {
+          "resolved": "node_modules/lodash/flattenDeep.js",
+          "coreModule": false,
+          "followable": false,
+          "couldNotResolve": false,
+          "dependencyTypes": ["npm"],
+          "license": "MIT",
+          "module": "lodash/flattenDeep",
+          "moduleSystem": "cjs",
+          "matchesDoNotFollow": true,
+          "circular": false,
+          "dynamic": false,
+          "valid": true
+        }
+      ],
+      "valid": true
+    },
+    {
+      "source": "node_modules/lodash/flattenDeep.js",
+      "followable": false,
+      "coreModule": false,
+      "couldNotResolve": false,
+      "matchesDoNotFollow": true,
+      "dependencyTypes": ["npm"],
+      "dependencies": [],
+      "valid": true
+    },
+    {
+      "source": "src/report/csv/index.js",
+      "dependencies": [
+        {
+          "resolved": "src/report/dependencyToIncidenceTransformer.js",
+          "coreModule": false,
+          "followable": true,
+          "couldNotResolve": false,
+          "dependencyTypes": ["local"],
+          "module": "../dependencyToIncidenceTransformer",
+          "moduleSystem": "cjs",
+          "matchesDoNotFollow": false,
+          "circular": false,
+          "dynamic": false,
+          "valid": true
+        },
+        {
+          "resolved": "src/report/csv/csv.template.js",
+          "coreModule": false,
+          "followable": true,
+          "couldNotResolve": false,
+          "dependencyTypes": ["local"],
+          "module": "./csv.template",
+          "moduleSystem": "cjs",
+          "matchesDoNotFollow": false,
+          "circular": false,
+          "dynamic": false,
+          "valid": true
+        },
+        {
+          "resolved": "node_modules/handlebars/runtime.js",
+          "coreModule": false,
+          "followable": false,
+          "couldNotResolve": false,
+          "dependencyTypes": ["npm"],
+          "license": "MIT",
+          "module": "handlebars/runtime",
+          "moduleSystem": "cjs",
+          "matchesDoNotFollow": true,
+          "circular": false,
+          "dynamic": false,
+          "valid": true
+        }
+      ],
+      "valid": true
+    },
+    {
+      "source": "node_modules/handlebars/runtime.js",
+      "followable": false,
+      "coreModule": false,
+      "couldNotResolve": false,
+      "matchesDoNotFollow": true,
+      "dependencyTypes": ["npm"],
+      "dependencies": [],
+      "valid": true
+    },
+    {
+      "source": "src/report/dependencyToIncidenceTransformer.js",
+      "dependencies": [],
+      "valid": true
+    },
+    {
+      "source": "src/report/csv/csv.template.js",
+      "dependencies": [
+        {
+          "resolved": "node_modules/handlebars/runtime.js",
+          "coreModule": false,
+          "followable": false,
+          "couldNotResolve": false,
+          "dependencyTypes": ["npm"],
+          "license": "MIT",
+          "module": "handlebars/runtime",
+          "moduleSystem": "cjs",
+          "matchesDoNotFollow": true,
+          "circular": false,
+          "dynamic": false,
+          "valid": true
+        }
+      ],
+      "valid": true
+    },
+    {
+      "source": "src/report/ddot/index.js",
+      "dependencies": [
+        {
+          "resolved": "src/report/dot/coloring.js",
+          "coreModule": false,
+          "followable": true,
+          "couldNotResolve": false,
+          "dependencyTypes": ["local"],
+          "module": "../dot/coloring",
+          "moduleSystem": "cjs",
+          "matchesDoNotFollow": false,
+          "circular": false,
+          "dynamic": false,
+          "valid": true
+        },
+        {
+          "resolved": "src/report/ddot/ddot.template.js",
+          "coreModule": false,
+          "followable": true,
+          "couldNotResolve": false,
+          "dependencyTypes": ["local"],
+          "module": "./ddot.template",
+          "moduleSystem": "cjs",
+          "matchesDoNotFollow": false,
+          "circular": false,
+          "dynamic": false,
+          "valid": true
+        },
+        {
+          "resolved": "node_modules/handlebars/runtime.js",
+          "coreModule": false,
+          "followable": false,
+          "couldNotResolve": false,
+          "dependencyTypes": ["npm"],
+          "license": "MIT",
+          "module": "handlebars/runtime",
+          "moduleSystem": "cjs",
+          "matchesDoNotFollow": true,
+          "circular": false,
+          "dynamic": false,
+          "valid": true
+        },
+        {
+          "resolved": "node_modules/lodash/clone.js",
+          "coreModule": false,
+          "followable": false,
+          "couldNotResolve": false,
+          "dependencyTypes": ["npm"],
+          "license": "MIT",
+          "module": "lodash/clone",
+          "moduleSystem": "cjs",
+          "matchesDoNotFollow": true,
+          "circular": false,
+          "dynamic": false,
+          "valid": true
+        },
+        {
+          "resolved": "node_modules/lodash/get.js",
+          "coreModule": false,
+          "followable": false,
+          "couldNotResolve": false,
+          "dependencyTypes": ["npm"],
+          "license": "MIT",
+          "module": "lodash/get",
+          "moduleSystem": "cjs",
+          "matchesDoNotFollow": true,
+          "circular": false,
+          "dynamic": false,
+          "valid": true
+        },
+        {
+          "resolved": "node_modules/lodash/uniqBy.js",
+          "coreModule": false,
+          "followable": false,
+          "couldNotResolve": false,
+          "dependencyTypes": ["npm"],
+          "license": "MIT",
+          "module": "lodash/uniqBy",
+          "moduleSystem": "cjs",
+          "matchesDoNotFollow": true,
+          "circular": false,
+          "dynamic": false,
+          "valid": true
+        },
+        {
+          "resolved": "path",
+          "coreModule": true,
+          "followable": false,
+          "couldNotResolve": false,
+          "dependencyTypes": ["core"],
+          "module": "path",
+          "moduleSystem": "cjs",
+          "matchesDoNotFollow": false,
+          "circular": false,
+          "dynamic": false,
+          "valid": true
+        }
+      ],
+      "valid": true
+    },
+    {
+      "source": "node_modules/lodash/uniqBy.js",
+      "followable": false,
+      "coreModule": false,
+      "couldNotResolve": false,
+      "matchesDoNotFollow": true,
+      "dependencyTypes": ["npm"],
+      "dependencies": [],
+      "valid": true
+    },
+    {
+      "source": "src/report/dot/coloring.js",
+      "dependencies": [
+        {
+          "resolved": "src/report/dot/defaultModuleColorScheme.json",
+          "coreModule": false,
+          "followable": false,
+          "couldNotResolve": false,
+          "dependencyTypes": ["local"],
+          "module": "./defaultModuleColorScheme.json",
+          "moduleSystem": "cjs",
+          "matchesDoNotFollow": false,
+          "circular": false,
+          "dynamic": false,
+          "valid": true
+        },
+        {
+          "resolved": "node_modules/lodash/get.js",
+          "coreModule": false,
+          "followable": false,
+          "couldNotResolve": false,
+          "dependencyTypes": ["npm"],
+          "license": "MIT",
+          "module": "lodash/get",
+          "moduleSystem": "cjs",
+          "matchesDoNotFollow": true,
+          "circular": false,
+          "dynamic": false,
+          "valid": true
+        }
+      ],
+      "valid": true
+    },
+    {
+      "source": "src/report/dot/defaultModuleColorScheme.json",
+      "followable": false,
+      "coreModule": false,
+      "couldNotResolve": false,
+      "matchesDoNotFollow": false,
+      "dependencyTypes": ["local"],
+      "dependencies": [],
+      "valid": true
+    },
+    {
+      "source": "src/report/ddot/ddot.template.js",
+      "dependencies": [
+        {
+          "resolved": "node_modules/handlebars/runtime.js",
+          "coreModule": false,
+          "followable": false,
+          "couldNotResolve": false,
+          "dependencyTypes": ["npm"],
+          "license": "MIT",
+          "module": "handlebars/runtime",
+          "moduleSystem": "cjs",
+          "matchesDoNotFollow": true,
+          "circular": false,
+          "dynamic": false,
+          "valid": true
+        }
+      ],
+      "valid": true
+    },
+    {
+      "source": "src/report/dot/index.js",
+      "dependencies": [
+        {
+          "resolved": "src/report/dot/coloring.js",
+          "coreModule": false,
+          "followable": true,
+          "couldNotResolve": false,
+          "dependencyTypes": ["local"],
+          "module": "./coloring",
+          "moduleSystem": "cjs",
+          "matchesDoNotFollow": false,
+          "circular": false,
+          "dynamic": false,
+          "valid": true
+        },
+        {
+          "resolved": "src/report/dot/dot.template.js",
+          "coreModule": false,
+          "followable": true,
+          "couldNotResolve": false,
+          "dependencyTypes": ["local"],
+          "module": "./dot.template",
+          "moduleSystem": "cjs",
+          "matchesDoNotFollow": false,
+          "circular": false,
+          "dynamic": false,
+          "valid": true
+        },
+        {
+          "resolved": "node_modules/handlebars/runtime.js",
+          "coreModule": false,
+          "followable": false,
+          "couldNotResolve": false,
+          "dependencyTypes": ["npm"],
+          "license": "MIT",
+          "module": "handlebars/runtime",
+          "moduleSystem": "cjs",
+          "matchesDoNotFollow": true,
+          "circular": false,
+          "dynamic": false,
+          "valid": true
+        },
+        {
+          "resolved": "path",
+          "coreModule": true,
+          "followable": false,
+          "couldNotResolve": false,
+          "dependencyTypes": ["core"],
+          "module": "path",
+          "moduleSystem": "cjs",
+          "matchesDoNotFollow": false,
+          "circular": false,
+          "dynamic": false,
+          "valid": true
+        }
+      ],
+      "valid": true
+    },
+    {
+      "source": "src/report/dot/dot.template.js",
+      "dependencies": [
+        {
+          "resolved": "node_modules/handlebars/runtime.js",
+          "coreModule": false,
+          "followable": false,
+          "couldNotResolve": false,
+          "dependencyTypes": ["npm"],
+          "license": "MIT",
+          "module": "handlebars/runtime",
+          "moduleSystem": "cjs",
+          "matchesDoNotFollow": true,
+          "circular": false,
+          "dynamic": false,
+          "valid": true
+        }
+      ],
+      "valid": true
+    },
+    {
+      "source": "src/report/err.js",
+      "dependencies": [
+        {
+          "resolved": "node_modules/chalk/index.js",
+          "coreModule": false,
+          "followable": false,
+          "couldNotResolve": false,
+          "dependencyTypes": ["npm"],
+          "license": "MIT",
+          "module": "chalk",
+          "moduleSystem": "cjs",
+          "matchesDoNotFollow": true,
+          "circular": false,
+          "dynamic": false,
+          "valid": true
+        },
+        {
+          "resolved": "node_modules/figures/index.js",
+          "coreModule": false,
+          "followable": false,
+          "couldNotResolve": false,
+          "dependencyTypes": ["npm"],
+          "license": "MIT",
+          "module": "figures",
+          "moduleSystem": "cjs",
+          "matchesDoNotFollow": true,
+          "circular": false,
+          "dynamic": false,
+          "valid": true
+        }
+      ],
+      "valid": true
+    },
+    {
+      "source": "node_modules/chalk/index.js",
+      "followable": false,
+      "coreModule": false,
+      "couldNotResolve": false,
+      "matchesDoNotFollow": true,
+      "dependencyTypes": ["npm"],
+      "dependencies": [],
+      "valid": true
+    },
+    {
+      "source": "node_modules/figures/index.js",
+      "followable": false,
+      "coreModule": false,
+      "couldNotResolve": false,
+      "matchesDoNotFollow": true,
+      "dependencyTypes": ["npm"],
+      "dependencies": [],
+      "valid": true
+    },
+    {
+      "source": "src/report/html/index.js",
+      "dependencies": [
+        {
+          "resolved": "src/report/dependencyToIncidenceTransformer.js",
+          "coreModule": false,
+          "followable": true,
+          "couldNotResolve": false,
+          "dependencyTypes": ["local"],
+          "module": "../dependencyToIncidenceTransformer",
+          "moduleSystem": "cjs",
+          "matchesDoNotFollow": false,
+          "circular": false,
+          "dynamic": false,
+          "valid": true
+        },
+        {
+          "resolved": "src/report/html/html.template.js",
+          "coreModule": false,
+          "followable": true,
+          "couldNotResolve": false,
+          "dependencyTypes": ["local"],
+          "module": "./html.template",
+          "moduleSystem": "cjs",
+          "matchesDoNotFollow": false,
+          "circular": false,
+          "dynamic": false,
+          "valid": true
+        },
+        {
+          "resolved": "node_modules/handlebars/runtime.js",
+          "coreModule": false,
+          "followable": false,
+          "couldNotResolve": false,
+          "dependencyTypes": ["npm"],
+          "license": "MIT",
+          "module": "handlebars/runtime",
+          "moduleSystem": "cjs",
+          "matchesDoNotFollow": true,
+          "circular": false,
+          "dynamic": false,
+          "valid": true
+        }
+      ],
+      "valid": true
+    },
+    {
+      "source": "src/report/html/html.template.js",
+      "dependencies": [
+        {
+          "resolved": "node_modules/handlebars/runtime.js",
+          "coreModule": false,
+          "followable": false,
+          "couldNotResolve": false,
+          "dependencyTypes": ["npm"],
+          "license": "MIT",
+          "module": "handlebars/runtime",
+          "moduleSystem": "cjs",
+          "matchesDoNotFollow": true,
+          "circular": false,
+          "dynamic": false,
+          "valid": true
+        }
+      ],
+      "valid": true
+    },
+    {
+      "source": "src/report/json.js",
+      "dependencies": [],
+      "valid": true
+    },
+    {
+      "source": "src/main/options/normalize.js",
+      "dependencies": [
+        {
+          "resolved": "src/main/options/defaults.json",
+          "coreModule": false,
+          "followable": false,
+          "couldNotResolve": false,
+          "dependencyTypes": ["local"],
+          "module": "./defaults.json",
+          "moduleSystem": "cjs",
+          "matchesDoNotFollow": false,
+          "circular": false,
+          "dynamic": false,
+          "valid": true
+        }
+      ],
+      "valid": true
+    },
+    {
+      "source": "src/main/options/defaults.json",
+      "followable": false,
+      "coreModule": false,
+      "couldNotResolve": false,
+      "matchesDoNotFollow": false,
+      "dependencyTypes": ["local"],
+      "dependencies": [],
+      "valid": true
+    },
+    {
+      "source": "src/main/options/validate.js",
+      "dependencies": [
+        {
+          "resolved": "node_modules/safe-regex/index.js",
+          "coreModule": false,
+          "followable": false,
+          "couldNotResolve": false,
+          "dependencyTypes": ["npm"],
+          "license": "MIT",
+          "module": "safe-regex",
+          "moduleSystem": "cjs",
+          "matchesDoNotFollow": true,
+          "circular": false,
+          "dynamic": false,
+          "valid": true
+        }
+      ],
+      "valid": true
+    },
+    {
+      "source": "node_modules/safe-regex/index.js",
+      "followable": false,
+      "coreModule": false,
+      "couldNotResolve": false,
+      "matchesDoNotFollow": true,
+      "dependencyTypes": ["npm"],
+      "dependencies": [],
+      "valid": true
+    },
+    {
+      "source": "src/main/ruleSet/normalize.js",
+      "dependencies": [],
+      "valid": true
+    },
+    {
+      "source": "src/main/ruleSet/validate.js",
+      "dependencies": [
+        {
+          "resolved": "src/main/options/validate.js",
+          "coreModule": false,
+          "followable": true,
+          "couldNotResolve": false,
+          "dependencyTypes": ["local"],
+          "module": "../options/validate",
+          "moduleSystem": "cjs",
+          "matchesDoNotFollow": false,
+          "circular": false,
+          "dynamic": false,
+          "valid": true
+        },
+        {
+          "resolved": "src/main/ruleSet/jsonschema.json",
+          "coreModule": false,
+          "followable": false,
+          "couldNotResolve": false,
+          "dependencyTypes": ["local"],
+          "module": "./jsonschema.json",
+          "moduleSystem": "cjs",
+          "matchesDoNotFollow": false,
+          "circular": false,
+          "dynamic": false,
+          "valid": true
+        },
+        {
+          "resolved": "node_modules/ajv/lib/ajv.js",
+          "coreModule": false,
+          "followable": false,
+          "couldNotResolve": false,
+          "dependencyTypes": ["npm"],
+          "license": "MIT",
+          "module": "ajv",
+          "moduleSystem": "cjs",
+          "matchesDoNotFollow": true,
+          "circular": false,
+          "dynamic": false,
+          "valid": true
+        },
+        {
+          "resolved": "node_modules/safe-regex/index.js",
+          "coreModule": false,
+          "followable": false,
+          "couldNotResolve": false,
+          "dependencyTypes": ["npm"],
+          "license": "MIT",
+          "module": "safe-regex",
+          "moduleSystem": "cjs",
+          "matchesDoNotFollow": true,
+          "circular": false,
+          "dynamic": false,
+          "valid": true
+        }
+      ],
+      "valid": true
+    },
+    {
+      "source": "src/main/ruleSet/jsonschema.json",
+      "followable": false,
+      "coreModule": false,
+      "couldNotResolve": false,
+      "matchesDoNotFollow": false,
+      "dependencyTypes": ["local"],
+      "dependencies": [],
+      "valid": true
+    },
+    {
+      "source": "node_modules/ajv/lib/ajv.js",
+      "followable": false,
+      "coreModule": false,
+      "couldNotResolve": false,
+      "matchesDoNotFollow": true,
+      "dependencyTypes": ["npm"],
+      "dependencies": [],
+      "valid": true
+    },
+    {
+      "source": "src/cli/formatMetaInfo.js",
+      "dependencies": [
+        {
+          "resolved": "src/main/index.js",
+          "coreModule": false,
+          "followable": true,
+          "couldNotResolve": false,
+          "dependencyTypes": ["local"],
+          "module": "../main",
+          "moduleSystem": "cjs",
+          "matchesDoNotFollow": false,
+          "circular": false,
+          "dynamic": false,
+          "valid": true
+        },
+        {
+          "resolved": "node_modules/chalk/index.js",
+          "coreModule": false,
+          "followable": false,
+          "couldNotResolve": false,
+          "dependencyTypes": ["npm"],
+          "license": "MIT",
+          "module": "chalk",
+          "moduleSystem": "cjs",
+          "matchesDoNotFollow": true,
+          "circular": false,
+          "dynamic": false,
+          "valid": true
+        },
+        {
+          "resolved": "node_modules/figures/index.js",
+          "coreModule": false,
+          "followable": false,
+          "couldNotResolve": false,
+          "dependencyTypes": ["npm"],
+          "license": "MIT",
+          "module": "figures",
+          "moduleSystem": "cjs",
+          "matchesDoNotFollow": true,
+          "circular": false,
+          "dynamic": false,
+          "valid": true
+        }
+      ],
+      "valid": true
+    },
+    {
+      "source": "src/cli/getResolveConfig.js",
+      "dependencies": [
+        {
+          "resolved": "src/cli/utl/makeAbsolute.js",
+          "coreModule": false,
+          "followable": true,
+          "couldNotResolve": false,
+          "dependencyTypes": ["local"],
+          "module": "./utl/makeAbsolute",
+          "moduleSystem": "cjs",
+          "matchesDoNotFollow": false,
+          "circular": false,
+          "dynamic": false,
+          "valid": true
+        }
+      ],
+      "valid": true
+    },
+    {
+      "source": "src/cli/utl/makeAbsolute.js",
+      "dependencies": [
+        {
+          "resolved": "path",
+          "coreModule": true,
+          "followable": false,
+          "couldNotResolve": false,
+          "dependencyTypes": ["core"],
+          "module": "path",
+          "moduleSystem": "cjs",
+          "matchesDoNotFollow": false,
+          "circular": false,
+          "dynamic": false,
+          "valid": true
+        }
+      ],
+      "valid": true
+    },
+    {
+      "source": "src/cli/initConfig/index.js",
+      "dependencies": [
+        {
+          "resolved": "src/cli/initConfig/createConfigFile.js",
+          "coreModule": false,
+          "followable": true,
+          "couldNotResolve": false,
+          "dependencyTypes": ["local"],
+          "module": "./createConfigFile",
+          "moduleSystem": "cjs",
+          "matchesDoNotFollow": false,
+          "circular": false,
+          "dynamic": false,
+          "valid": true
+        },
+        {
+          "resolved": "src/cli/initConfig/getUserInput.js",
+          "coreModule": false,
+          "followable": true,
+          "couldNotResolve": false,
+          "dependencyTypes": ["local"],
+          "module": "./getUserInput",
+          "moduleSystem": "cjs",
+          "matchesDoNotFollow": false,
+          "circular": false,
+          "dynamic": false,
+          "valid": true
+        }
+      ],
+      "valid": true
+    },
+    {
+      "source": "src/cli/initConfig/createConfigFile.js",
+      "dependencies": [
+        {
+          "resolved": "package.json",
+          "coreModule": false,
+          "followable": false,
+          "couldNotResolve": false,
+          "dependencyTypes": ["local"],
+          "module": "../../../package.json",
+          "moduleSystem": "cjs",
+          "matchesDoNotFollow": false,
+          "circular": false,
+          "dynamic": false,
+          "valid": true
+        },
+        {
+          "resolved": "src/cli/initConfig/config.js.template.js",
+          "coreModule": false,
+          "followable": true,
+          "couldNotResolve": false,
+          "dependencyTypes": ["local"],
+          "module": "./config.js.template",
+          "moduleSystem": "cjs",
+          "matchesDoNotFollow": false,
+          "circular": false,
+          "dynamic": false,
+          "valid": true
+        },
+        {
+          "resolved": "src/cli/initConfig/config.json.template.js",
+          "coreModule": false,
+          "followable": true,
+          "couldNotResolve": false,
+          "dependencyTypes": ["local"],
+          "module": "./config.json.template",
+          "moduleSystem": "cjs",
+          "matchesDoNotFollow": false,
+          "circular": false,
+          "dynamic": false,
+          "valid": true
+        },
+        {
+          "resolved": "fs",
+          "coreModule": true,
+          "followable": false,
+          "couldNotResolve": false,
+          "dependencyTypes": ["core"],
+          "module": "fs",
+          "moduleSystem": "cjs",
+          "matchesDoNotFollow": false,
+          "circular": false,
+          "dynamic": false,
+          "valid": true
+        },
+        {
+          "resolved": "node_modules/handlebars/runtime.js",
+          "coreModule": false,
+          "followable": false,
+          "couldNotResolve": false,
+          "dependencyTypes": ["npm"],
+          "license": "MIT",
+          "module": "handlebars/runtime",
+          "moduleSystem": "cjs",
+          "matchesDoNotFollow": true,
+          "circular": false,
+          "dynamic": false,
+          "valid": true
+        }
+      ],
+      "valid": true
+    },
+    {
+      "source": "src/cli/initConfig/config.js.template.js",
+      "dependencies": [
+        {
+          "resolved": "node_modules/handlebars/runtime.js",
+          "coreModule": false,
+          "followable": false,
+          "couldNotResolve": false,
+          "dependencyTypes": ["npm"],
+          "license": "MIT",
+          "module": "handlebars/runtime",
+          "moduleSystem": "cjs",
+          "matchesDoNotFollow": true,
+          "circular": false,
+          "dynamic": false,
+          "valid": true
+        }
+      ],
+      "valid": true
+    },
+    {
+      "source": "src/cli/initConfig/config.json.template.js",
+      "dependencies": [
+        {
+          "resolved": "node_modules/handlebars/runtime.js",
+          "coreModule": false,
+          "followable": false,
+          "couldNotResolve": false,
+          "dependencyTypes": ["npm"],
+          "license": "MIT",
+          "module": "handlebars/runtime",
+          "moduleSystem": "cjs",
+          "matchesDoNotFollow": true,
+          "circular": false,
+          "dynamic": false,
+          "valid": true
+        }
+      ],
+      "valid": true
+    },
+    {
+      "source": "src/cli/initConfig/getUserInput.js",
+      "dependencies": [
+        {
+          "resolved": "node_modules/inquirer/lib/inquirer.js",
+          "coreModule": false,
+          "followable": false,
+          "couldNotResolve": false,
+          "dependencyTypes": ["npm"],
+          "license": "MIT",
+          "module": "inquirer",
+          "moduleSystem": "cjs",
+          "matchesDoNotFollow": true,
+          "circular": false,
+          "dynamic": false,
+          "valid": true
+        }
+      ],
+      "valid": true
+    },
+    {
+      "source": "node_modules/inquirer/lib/inquirer.js",
+      "followable": false,
+      "coreModule": false,
+      "couldNotResolve": false,
+      "matchesDoNotFollow": true,
+      "dependencyTypes": ["npm"],
+      "dependencies": [],
+      "valid": true
+    },
+    {
+      "source": "src/cli/normalizeOptions.js",
+      "dependencies": [
+        {
+          "resolved": "src/cli/compileConfig/index.js",
+          "coreModule": false,
+          "followable": true,
+          "couldNotResolve": false,
+          "dependencyTypes": ["local"],
+          "module": "./compileConfig",
+          "moduleSystem": "cjs",
+          "matchesDoNotFollow": false,
+          "circular": false,
+          "dynamic": false,
+          "valid": true
+        },
+        {
+          "resolved": "src/cli/defaults.json",
+          "coreModule": false,
+          "followable": false,
+          "couldNotResolve": false,
+          "dependencyTypes": ["local"],
+          "module": "./defaults.json",
+          "moduleSystem": "cjs",
+          "matchesDoNotFollow": false,
+          "circular": false,
+          "dynamic": false,
+          "valid": true
+        },
+        {
+          "resolved": "fs",
+          "coreModule": true,
+          "followable": false,
+          "couldNotResolve": false,
+          "dependencyTypes": ["core"],
+          "module": "fs",
+          "moduleSystem": "cjs",
+          "matchesDoNotFollow": false,
+          "circular": false,
+          "dynamic": false,
+          "valid": true
+        },
+        {
+          "resolved": "node_modules/lodash/clone.js",
+          "coreModule": false,
+          "followable": false,
+          "couldNotResolve": false,
+          "dependencyTypes": ["npm"],
+          "license": "MIT",
+          "module": "lodash/clone",
+          "moduleSystem": "cjs",
+          "matchesDoNotFollow": true,
+          "circular": false,
+          "dynamic": false,
+          "valid": true
+        },
+        {
+          "resolved": "node_modules/lodash/get.js",
+          "coreModule": false,
+          "followable": false,
+          "couldNotResolve": false,
+          "dependencyTypes": ["npm"],
+          "license": "MIT",
+          "module": "lodash/get",
+          "moduleSystem": "cjs",
+          "matchesDoNotFollow": true,
+          "circular": false,
+          "dynamic": false,
+          "valid": true
+        },
+        {
+          "resolved": "node_modules/lodash/set.js",
+          "coreModule": false,
+          "followable": false,
+          "couldNotResolve": false,
+          "dependencyTypes": ["npm"],
+          "license": "MIT",
+          "module": "lodash/set",
+          "moduleSystem": "cjs",
+          "matchesDoNotFollow": true,
+          "circular": false,
+          "dynamic": false,
+          "valid": true
+        },
+        {
+          "resolved": "path",
+          "coreModule": true,
+          "followable": false,
+          "couldNotResolve": false,
+          "dependencyTypes": ["core"],
+          "module": "path",
+          "moduleSystem": "cjs",
+          "matchesDoNotFollow": false,
+          "circular": false,
+          "dynamic": false,
+          "valid": true
+        }
+      ],
+      "valid": true
+    },
+    {
+      "source": "src/cli/defaults.json",
+      "followable": false,
+      "coreModule": false,
+      "couldNotResolve": false,
+      "matchesDoNotFollow": false,
+      "dependencyTypes": ["local"],
+      "dependencies": [],
+      "valid": true
+    },
+    {
+      "source": "node_modules/lodash/set.js",
+      "followable": false,
+      "coreModule": false,
+      "couldNotResolve": false,
+      "matchesDoNotFollow": true,
+      "dependencyTypes": ["npm"],
+      "dependencies": [],
+      "valid": true
+    },
+    {
+      "source": "src/cli/compileConfig/index.js",
+      "dependencies": [
+        {
+          "resolved": "src/extract/resolve/resolve.js",
+          "coreModule": false,
+          "followable": true,
+          "couldNotResolve": false,
+          "dependencyTypes": ["local"],
+          "module": "../../extract/resolve/resolve",
+          "moduleSystem": "cjs",
+          "matchesDoNotFollow": false,
+          "circular": false,
+          "dynamic": false,
+          "valid": false,
+          "rules": [
+            {
+              "severity": "warn",
+              "name": "cli-to-main-only-warn"
+            }
+          ]
+        },
+        {
+          "resolved": "src/cli/compileConfig/mergeConfigs.js",
+          "coreModule": false,
+          "followable": true,
+          "couldNotResolve": false,
+          "dependencyTypes": ["local"],
+          "module": "./mergeConfigs",
+          "moduleSystem": "cjs",
+          "matchesDoNotFollow": false,
+          "circular": false,
+          "dynamic": false,
+          "valid": true
+        },
+        {
+          "resolved": "src/cli/compileConfig/readConfig.js",
+          "coreModule": false,
+          "followable": true,
+          "couldNotResolve": false,
+          "dependencyTypes": ["local"],
+          "module": "./readConfig",
+          "moduleSystem": "cjs",
+          "matchesDoNotFollow": false,
+          "circular": false,
+          "dynamic": false,
+          "valid": true
+        },
+        {
+          "resolved": "path",
+          "coreModule": true,
+          "followable": false,
+          "couldNotResolve": false,
+          "dependencyTypes": ["core"],
+          "module": "path",
+          "moduleSystem": "cjs",
+          "matchesDoNotFollow": false,
+          "circular": false,
+          "dynamic": false,
+          "valid": true
+        }
+      ],
+      "valid": true
+    },
+    {
+      "source": "src/cli/compileConfig/mergeConfigs.js",
+      "dependencies": [
+        {
+          "resolved": "node_modules/lodash/get.js",
+          "coreModule": false,
+          "followable": false,
+          "couldNotResolve": false,
+          "dependencyTypes": ["npm"],
+          "license": "MIT",
+          "module": "lodash/get",
+          "moduleSystem": "cjs",
+          "matchesDoNotFollow": true,
+          "circular": false,
+          "dynamic": false,
+          "valid": true
+        },
+        {
+          "resolved": "node_modules/lodash/isEqual.js",
+          "coreModule": false,
+          "followable": false,
+          "couldNotResolve": false,
+          "dependencyTypes": ["npm"],
+          "license": "MIT",
+          "module": "lodash/isEqual",
+          "moduleSystem": "cjs",
+          "matchesDoNotFollow": true,
+          "circular": false,
+          "dynamic": false,
+          "valid": true
+        },
+        {
+          "resolved": "node_modules/lodash/uniqBy.js",
+          "coreModule": false,
+          "followable": false,
+          "couldNotResolve": false,
+          "dependencyTypes": ["npm"],
+          "license": "MIT",
+          "module": "lodash/uniqBy",
+          "moduleSystem": "cjs",
+          "matchesDoNotFollow": true,
+          "circular": false,
+          "dynamic": false,
+          "valid": true
+        },
+        {
+          "resolved": "node_modules/lodash/uniqWith.js",
+          "coreModule": false,
+          "followable": false,
+          "couldNotResolve": false,
+          "dependencyTypes": ["npm"],
+          "license": "MIT",
+          "module": "lodash/uniqWith",
+          "moduleSystem": "cjs",
+          "matchesDoNotFollow": true,
+          "circular": false,
+          "dynamic": false,
+          "valid": true
+        }
+      ],
+      "valid": true
+    },
+    {
+      "source": "node_modules/lodash/isEqual.js",
+      "followable": false,
+      "coreModule": false,
+      "couldNotResolve": false,
+      "matchesDoNotFollow": true,
+      "dependencyTypes": ["npm"],
+      "dependencies": [],
+      "valid": true
+    },
+    {
+      "source": "node_modules/lodash/uniqWith.js",
+      "followable": false,
+      "coreModule": false,
+      "couldNotResolve": false,
+      "matchesDoNotFollow": true,
+      "dependencyTypes": ["npm"],
+      "dependencies": [],
+      "valid": true
+    },
+    {
+      "source": "src/cli/compileConfig/readConfig.js",
+      "dependencies": [
+        {
+          "resolved": "fs",
+          "coreModule": true,
+          "followable": false,
+          "couldNotResolve": false,
+          "dependencyTypes": ["core"],
+          "module": "fs",
+          "moduleSystem": "cjs",
+          "matchesDoNotFollow": false,
+          "circular": false,
+          "dynamic": false,
+          "valid": true
+        },
+        {
+          "resolved": "path",
+          "coreModule": true,
+          "followable": false,
+          "couldNotResolve": false,
+          "dependencyTypes": ["core"],
+          "module": "path",
+          "moduleSystem": "cjs",
+          "matchesDoNotFollow": false,
+          "circular": false,
+          "dynamic": false,
+          "valid": true
+        },
+        {
+          "resolved": "node_modules/strip-json-comments/index.js",
+          "coreModule": false,
+          "followable": false,
+          "couldNotResolve": false,
+          "dependencyTypes": ["npm"],
+          "license": "MIT",
+          "module": "strip-json-comments",
+          "moduleSystem": "cjs",
+          "matchesDoNotFollow": true,
+          "circular": false,
+          "dynamic": false,
+          "valid": true
+        }
+      ],
+      "valid": true
+    },
+    {
+      "source": "node_modules/strip-json-comments/index.js",
+      "followable": false,
+      "coreModule": false,
+      "couldNotResolve": false,
+      "matchesDoNotFollow": true,
+      "dependencyTypes": ["npm"],
+      "dependencies": [],
+      "valid": true
+    },
+    {
+      "source": "src/cli/parseTSConfig.js",
+      "dependencies": [
+        {
+          "resolved": "package.json",
+          "coreModule": false,
+          "followable": false,
+          "couldNotResolve": false,
+          "dependencyTypes": ["local"],
+          "module": "../../package.json",
+          "moduleSystem": "cjs",
+          "matchesDoNotFollow": false,
+          "circular": false,
+          "dynamic": false,
+          "valid": true
+        },
+        {
+          "resolved": "node_modules/lodash/get.js",
+          "coreModule": false,
+          "followable": false,
+          "couldNotResolve": false,
+          "dependencyTypes": ["npm"],
+          "license": "MIT",
+          "module": "lodash/get",
+          "moduleSystem": "cjs",
+          "matchesDoNotFollow": true,
+          "circular": false,
+          "dynamic": false,
+          "valid": true
+        },
+        {
+          "resolved": "path",
+          "coreModule": true,
+          "followable": false,
+          "couldNotResolve": false,
+          "dependencyTypes": ["core"],
+          "module": "path",
+          "moduleSystem": "cjs",
+          "matchesDoNotFollow": false,
+          "circular": false,
+          "dynamic": false,
+          "valid": true
+        },
+        {
+          "resolved": "node_modules/semver-try-require/src/index.js",
+          "coreModule": false,
+          "followable": false,
+          "couldNotResolve": false,
+          "dependencyTypes": ["npm"],
+          "license": "MIT",
+          "module": "semver-try-require",
+          "moduleSystem": "cjs",
+          "matchesDoNotFollow": true,
+          "circular": false,
+          "dynamic": false,
+          "valid": true
+        }
+      ],
+      "valid": true
+    },
+    {
+      "source": "src/cli/utl/io.js",
+      "dependencies": [
+        {
+          "resolved": "fs",
+          "coreModule": true,
+          "followable": false,
+          "couldNotResolve": false,
+          "dependencyTypes": ["core"],
+          "module": "fs",
+          "moduleSystem": "cjs",
+          "matchesDoNotFollow": false,
+          "circular": false,
+          "dynamic": false,
+          "valid": true
+        }
+      ],
+      "valid": true
+    },
+    {
+      "source": "src/cli/utl/validateFileExistence.js",
+      "dependencies": [
+        {
+          "resolved": "fs",
+          "coreModule": true,
+          "followable": false,
+          "couldNotResolve": false,
+          "dependencyTypes": ["core"],
+          "module": "fs",
+          "moduleSystem": "cjs",
+          "matchesDoNotFollow": false,
+          "circular": false,
+          "dynamic": false,
+          "valid": true
+        }
+      ],
+      "valid": true
+    }
+  ],
+  "summary": {
+    "violations": [
+      {
+        "from": "src/cli/compileConfig/index.js",
+        "to": "src/extract/resolve/resolve.js",
+        "rule": {
+          "severity": "warn",
+          "name": "cli-to-main-only-warn"
+        }
+      },
+      {
+        "from": "src/extract/extract.js",
+        "to": "node_modules/lodash/lodash.js",
+        "rule": {
+          "severity": "info",
+          "name": "prefer-lodash-individuals"
+        }
+      },
+      {
+        "from": "src/extract/index.js",
+        "to": "node_modules/lodash/lodash.js",
+        "rule": {
+          "severity": "info",
+          "name": "prefer-lodash-individuals"
+        }
+      }
+    ],
+    "error": 0,
+    "warn": 1,
+    "info": 2,
+    "totalCruised": 108,
+    "optionsUsed": {
+      "rulesFile": ".dependency-cruiser.json",
+      "outputTo": "-",
+      "doNotFollow": { "path": "node_modules" },
+      "exclude": { "path": "fixtures" },
+      "moduleSystems": ["amd", "cjs", "es6"],
+      "outputType": "json",
+      "prefix": "https://github.com/sverweij/dependency-cruiser/blob/develop/",
+      "tsPreCompilationDeps": false,
+      "preserveSymlinks": false
+    }
+  }
+}

@@ -1,0 +1,43 @@
+{
+  "modules": [
+    {
+      "source": "remi.js",
+      "dependencies": [],
+      "orphan": true,
+      "valid": false,
+      "rules": [
+        {
+          "severity": "error",
+          "name": "no-orphans"
+        }
+      ]
+    }
+  ],
+  "summary": {
+    "violations": [
+      {
+        "from": "remi.js",
+        "to": "remi.js",
+        "rule": {
+          "severity": "error",
+          "name": "no-orphans"
+        }
+      }
+    ],
+    "error": 1,
+    "warn": 0,
+    "info": 0,
+    "totalCruised": 1,
+    "totalDependenciesCruised": 0,
+    "optionsUsed": {
+      "rulesFile": ".dependency-cruiser-custom.json",
+      "outputTo": "-",
+      "doNotFollow": { "path": "^node_modules" },
+      "exclude": { "path": "fixtures" },
+      "moduleSystems": ["amd", "cjs", "es6"],
+      "outputType": "json",
+      "tsPreCompilationDeps": false,
+      "preserveSymlinks": false
+    }
+  }
+}

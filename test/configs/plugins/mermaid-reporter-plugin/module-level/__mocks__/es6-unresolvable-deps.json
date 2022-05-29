@@ -1,0 +1,53 @@
+{
+  "modules": [
+    {
+      "source": "test/cli/fixtures/unresolvable-in-sub/refers-to-an-unresolvable-module.js",
+      "valid": true,
+      "dependencies": [
+        {
+          "resolved": "./not-at-home",
+          "coreModule": false,
+          "followable": false,
+          "couldNotResolve": true,
+          "module": "./not-at-home",
+          "moduleSystem": "es6",
+          "valid": true
+        },
+        {
+          "resolved": "./this/path/does/not/exist",
+          "coreModule": false,
+          "followable": false,
+          "couldNotResolve": true,
+          "module": "./this/path/does/not/exist",
+          "moduleSystem": "es6",
+          "valid": true
+        }
+      ]
+    },
+    {
+      "source": "./not-at-home",
+      "valid": true,
+      "followable": false,
+      "coreModule": false,
+      "couldNotResolve": true,
+      "dependencies": []
+    },
+    {
+      "source": "./this/path/does/not/exist",
+      "valid": true,
+      "followable": false,
+      "coreModule": false,
+      "couldNotResolve": true,
+      "dependencies": []
+    }
+  ],
+  "summary": {
+    "violations": [],
+    "err": 481,
+    "warn": 30,
+    "info": 0,
+    "optionsUsed": {
+      "prefix": "STUFFCOMINGBEFORE"
+    }
+  }
+}
