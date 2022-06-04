@@ -83,7 +83,7 @@ export interface ICruiseOptions {
    * and the collapse options offer better, more reliable and more
    * understandable results.
    */
-  maxDepth?: number;
+  maxDepth?: number | string;
   /**
    * an array of module systems to use for following dependencies;
    * defaults to ["es6", "cjs", "amd"]

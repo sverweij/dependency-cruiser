@@ -120,12 +120,14 @@
     "ruleSetUsed": {
       "forbidden": [
         {
+          "scope": "module",
           "name": "no-circular",
           "severity": "info",
           "from": {},
           "to": { "dynamic": false, "circular": true }
         },
         {
+          "scope": "module",
           "name": "no-dynamic",
           "severity": "warn",
           "from": {},

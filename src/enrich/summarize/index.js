@@ -14,7 +14,7 @@ const {
  * @param {import("../../../types/cruise-result").IModule[]} pModules -
  *    cruised modules that have been enriched with mandatory attributes &
  *    have been validated against rules as passed in the options
- * @param {import("../../../types/options").ICruiseOptions} pOptions -
+ * @param {import("../../../types/options").IStrictCruiseOptions} pOptions -
  * @param {string[]} pFileDirectoryArray -
  *    the files/ directories originally passed to be cruised
  * @param {import("../../../types/dependency-cruiser").IFolder[]} pFolders -

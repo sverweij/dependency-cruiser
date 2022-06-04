@@ -9,7 +9,7 @@ const transpileMeta = require("./transpile/meta");
 
 /**
  *
- * @param {import('../../types/options').ICruiseOptions} pOptions
+ * @param {import('../../types/options').IStrictCruiseOptions} pOptions
  * @returns {string[]}
  */
 function getScannableExtensions(pOptions) {
@@ -37,7 +37,7 @@ function shouldNotBeExcluded(pFullPathToFile, pOptions) {
 /**
  *
  * @param {string} pDirectoryName
- * @param  {import('../../types/options').ICruiseOptions} pOptions options that
+ * @param  {import('../../types/options').IStrictCruiseOptions} pOptions options that
  * @returns {string[]}
  */
 function gatherScannableFilesFromDirectory(pDirectoryName, pOptions) {
@@ -84,7 +84,7 @@ function gatherScannableFilesFromDirectory(pDirectoryName, pOptions) {
  *
  * @param  {string[]} pFileAndDirectoryArray globs and/ or paths to files or
  *                               directories to be gathered
- * @param  {import('../../types/dependency-cruiser').ICruiseOptions} pOptions options that
+ * @param  {import('../../types/dependency-cruiser').IStrictCruiseOptions} pOptions options that
  *                               influence what needs to be gathered/ scanned
  *                               notably useful attributes:
  *                               - exclude - regexp of what to exclude

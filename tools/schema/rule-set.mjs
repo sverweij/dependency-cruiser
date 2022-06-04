@@ -68,6 +68,13 @@ export default {
         comment: {
           type: "string",
         },
+        scope: {
+          type: "string",
+          description:
+            "What to apply the rule to - modules (the default) or folders. " +
+            "Currently ignored for 'allowed' rules, defaulting to 'module'",
+          enum: ["module", "folder"],
+        },
         from: {
           $ref: "#/definitions/FromRestrictionType",
         },
@@ -83,6 +90,13 @@ export default {
       properties: {
         comment: {
           type: "string",
+        },
+        scope: {
+          type: "string",
+          description:
+            "What to apply the rule to - modules (the default) or folders. " +
+            "Currently ignored for 'allowed' rules, defaulting to 'module'",
+          enum: ["module", "folder"],
         },
         from: {
           $ref: "#/definitions/ReachabilityFromRestrictionType",
@@ -160,6 +174,13 @@ export default {
         severity: {
           $ref: "#/definitions/SeverityType",
         },
+        scope: {
+          type: "string",
+          description:
+            "What to apply the rule to - modules (the default) or folders. " +
+            "Currently ignored for DependentsForbiddenRules, defaulting to 'module'",
+          enum: ["module", "folder"],
+        },
         comment: {
           type: "string",
         },
@@ -182,6 +203,13 @@ export default {
         severity: {
           $ref: "#/definitions/SeverityType",
         },
+        scope: {
+          type: "string",
+          description:
+            "What to apply the rule to - modules (the default) or folders. " +
+            "Currently ignored for ReachabilityForbiddenRules, defaulting to 'module'",
+          enum: ["module", "folder"],
+        },
         comment: {
           type: "string",
         },
@@ -203,6 +231,13 @@ export default {
         },
         severity: {
           $ref: "#/definitions/SeverityType",
+        },
+        scope: {
+          type: "string",
+          description:
+            "What to apply the rule to - modules (the default) or folders. " +
+            "Currently ignored for RequiredRules, defaulting to 'module'",
+          enum: ["module", "folder"],
         },
         comment: {
           type: "string",

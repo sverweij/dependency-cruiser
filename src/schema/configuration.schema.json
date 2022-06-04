@@ -67,6 +67,11 @@
       "additionalProperties": false,
       "properties": {
         "comment": { "type": "string" },
+        "scope": {
+          "type": "string",
+          "description": "What to apply the rule to - modules (the default) or folders. Currently ignored for 'allowed' rules, defaulting to 'module'",
+          "enum": ["module", "folder"]
+        },
         "from": { "$ref": "#/definitions/FromRestrictionType" },
         "to": { "$ref": "#/definitions/ToRestrictionType" }
       }
@@ -77,6 +82,11 @@
       "additionalProperties": false,
       "properties": {
         "comment": { "type": "string" },
+        "scope": {
+          "type": "string",
+          "description": "What to apply the rule to - modules (the default) or folders. Currently ignored for 'allowed' rules, defaulting to 'module'",
+          "enum": ["module", "folder"]
+        },
         "from": { "$ref": "#/definitions/ReachabilityFromRestrictionType" },
         "to": { "$ref": "#/definitions/ReachabilityToRestrictionType" }
       }
@@ -118,6 +128,11 @@
       "properties": {
         "name": { "type": "string" },
         "severity": { "$ref": "#/definitions/SeverityType" },
+        "scope": {
+          "type": "string",
+          "description": "What to apply the rule to - modules (the default) or folders. Currently ignored for DependentsForbiddenRules, defaulting to 'module'",
+          "enum": ["module", "folder"]
+        },
         "comment": { "type": "string" },
         "module": { "$ref": "#/definitions/DependentsModuleRestrictionType" },
         "from": { "$ref": "#/definitions/DependentsFromRestrictionType" }
@@ -130,6 +145,11 @@
       "properties": {
         "name": { "type": "string" },
         "severity": { "$ref": "#/definitions/SeverityType" },
+        "scope": {
+          "type": "string",
+          "description": "What to apply the rule to - modules (the default) or folders. Currently ignored for ReachabilityForbiddenRules, defaulting to 'module'",
+          "enum": ["module", "folder"]
+        },
         "comment": { "type": "string" },
         "from": { "$ref": "#/definitions/ReachabilityFromRestrictionType" },
         "to": { "$ref": "#/definitions/ReachabilityToRestrictionType" }
@@ -142,6 +162,11 @@
       "properties": {
         "name": { "type": "string" },
         "severity": { "$ref": "#/definitions/SeverityType" },
+        "scope": {
+          "type": "string",
+          "description": "What to apply the rule to - modules (the default) or folders. Currently ignored for RequiredRules, defaulting to 'module'",
+          "enum": ["module", "folder"]
+        },
         "comment": { "type": "string" },
         "module": { "$ref": "#/definitions/RequiredModuleRestrictionType" },
         "to": { "$ref": "#/definitions/RequiredToRestrictionType" }

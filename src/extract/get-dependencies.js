@@ -108,7 +108,7 @@ function extractWithTsc(
 
 /**
  *
- * @param {import('../../types/dependency-cruiser').ICruiseOptions} pCruiseOptions
+ * @param {import('../../types/dependency-cruiser').IStrictCruiseOptions} pCruiseOptions
  * @param {string} pFileName
  * @param {any} pTranspileOptions
  * @returns {import('../../types/cruise-result').IDependency[]}
@@ -208,7 +208,7 @@ function compareDeps(pLeft, pRight) {
  *
  *
  * @param  {string} pFileName path to the file
- * @param  {import("../../types/dependency-cruiser").ICruiseOptions} pCruiseOptions cruise options
+ * @param  {import("../../types/dependency-cruiser").IStrictCruiseOptions} pCruiseOptions cruise options
  * @param {import("../../types/dependency-cruiser").IResolveOptions} pResolveOptions  webpack 'enhanced-resolve' options
  * @param  {import("../../types/dependency-cruiser").ITranspileOptions} pTranspileOptions       an object with tsconfig ('typescript project') options
  *                               ('flattened' so there's no need for file access on any

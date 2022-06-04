@@ -110,11 +110,10 @@ function shouldCalculateMetrics(pOptions) {
 
 /**
  *
- * @param {Partial<import('../../../types/options').ICruiseOptions>} pOptions
- * @returns {import('../../../types/options').ICruiseOptions}
+ * @param {import('../../../types/options').ICruiseOptions} pOptions
+ * @returns {import('../../../types/strict-options').IStrictCruiseOptions}
  */
 function normalizeCruiseOptions(pOptions) {
-  /** @type {import('../../../types/options').ICruiseOptions} */
   let lReturnValue = {
     baseDir: process.cwd(),
     ...defaults,
@@ -145,6 +144,9 @@ function normalizeCruiseOptions(pOptions) {
     );
   }
   lReturnValue.metrics = shouldCalculateMetrics(pOptions);
+  // if (has(pOptions, "ruleSet")) {
+  //   lReturnValue.ruleSet = normalizeRuleSet(pOptions.ruleSet);
+  // }
 
   return lReturnValue;
 }
@@ -152,7 +154,7 @@ function normalizeCruiseOptions(pOptions) {
 /**
  *
  * @param {import("../../../types/dependency-cruiser").IFormatOptions} pFormatOptions
- * @returns {import("../../../types/dependency-cruiser").IFormatOptions}
+ * @returns {import("../../../types/strict-options").IStrictFormatOptions}
  */
 function normalizeFormatOptions(pFormatOptions) {
   const lFormatOptions = clone(pFormatOptions);

@@ -1,4 +1,4 @@
-/** @type {import('../../../types/options').ICruiseOptions} */
+/** @type {import('../../../types/strict-options').IStrictCruiseOptions} */
 module.exports = {
   validate: false,
   maxDepth: 0,
