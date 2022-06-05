@@ -1,11 +1,12 @@
 const fs = require("fs");
 const path = require("path");
 const glob = require("glob");
-const _get = require("lodash/get");
+const get = require("lodash/get");
 const filenameMatchesPattern =
   require("../graph-utl/match-facade").filenameMatchesPattern;
 const pathToPosix = require("./utl/path-to-posix");
 const transpileMeta = require("./transpile/meta");
+const getExtension = require("./utl/get-extension");
 
 /**
  *
@@ -18,18 +19,22 @@ function getScannableExtensions(pOptions) {
   );
 }
 
+function fileIsScannable(pOptions, pPathToFile) {
+  return getScannableExtensions(pOptions).includes(getExtension(pPathToFile));
+}
+
 function shouldBeIncluded(pFullPathToFile, pOptions) {
   return (
-    !_get(pOptions, "includeOnly.path") ||
+    !get(pOptions, "includeOnly.path") ||
     filenameMatchesPattern(pFullPathToFile, pOptions.includeOnly.path)
   );
 }
 
 function shouldNotBeExcluded(pFullPathToFile, pOptions) {
   return (
-    (!_get(pOptions, "exclude.path") ||
+    (!get(pOptions, "exclude.path") ||
       !filenameMatchesPattern(pFullPathToFile, pOptions.exclude.path)) &&
-    (!_get(pOptions, "doNotFollow.path") ||
+    (!get(pOptions, "doNotFollow.path") ||
       !filenameMatchesPattern(pFullPathToFile, pOptions.doNotFollow.path))
   );
 }
@@ -59,11 +64,7 @@ function gatherScannableFilesFromDirectory(pDirectoryName, pOptions) {
           gatherScannableFilesFromDirectory(pFullPathToFile, pOptions)
         );
       }
-      if (
-        getScannableExtensions(pOptions).some((pExtension) =>
-          pFullPathToFile.endsWith(pExtension)
-        )
-      ) {
+      if (fileIsScannable(pOptions, pFullPathToFile)) {
         return pSum.concat(pFullPathToFile);
       }
       return pSum;
