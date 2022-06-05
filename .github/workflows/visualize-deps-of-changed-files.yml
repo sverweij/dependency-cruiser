@@ -1,0 +1,17 @@
+name: visualize dependenices of changed files in pull request
+on:
+  pull_request_target:
+
+jobs:
+  report:
+    permissions:
+      pull-requests: write
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+        with:
+          fetch-depth: 0
+          ref: ${{ github.event.pull_request.head.ref || github.ref }}
+      - uses: MH4GF/dependency-cruiser-report-action@v0.0.6
+        with:
+          cruise-script: node ./bin/dependency-cruise.js
