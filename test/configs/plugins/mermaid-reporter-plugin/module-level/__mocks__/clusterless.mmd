@@ -8,7 +8,7 @@ subgraph node_modules["node_modules"]
       end
     end
     subgraph node_modules_somemodule_src["src"]
-      node_modules_somemodule_src_moar-javascript_js["moar-javascript.js"]
+      node_modules_somemodule_src_moar_javascript_js["moar-javascript.js"]
       node_modules_somemodule_src_somemodule_js["somemodule.js"]
     end
   end
@@ -27,7 +27,7 @@ root_two_js["root_two.js"]
 somedata_json["somedata.json"]
 http["http"]
 two_only_one_js["two_only_one.js"]
-node_modules_somemodule_src_somemodule_js --> node_modules_somemodule_src_moar-javascript_js
+node_modules_somemodule_src_somemodule_js --> node_modules_somemodule_src_moar_javascript_js
 node_modules_somemodule_src_somemodule_js --> node_modules_somemodule_node_modules_someothermodule_main_js
 one_only_one_js --> path
 one_only_two_js --> path

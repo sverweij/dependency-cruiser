@@ -29,6 +29,22 @@
       "coreModule": false,
       "couldNotResolve": true,
       "dependencies": []
+    },
+    {
+      "source": "src/components/Post/foo--bar.ts",
+      "valid": true,
+      "followable": false,
+      "coreModule": false,
+      "couldNotResolve": true,
+      "dependencies": []
+    },
+    {
+      "source": "~/baz.ts",
+      "valid": true,
+      "followable": false,
+      "coreModule": false,
+      "couldNotResolve": true,
+      "dependencies": []
     }
   ],
   "summary": {

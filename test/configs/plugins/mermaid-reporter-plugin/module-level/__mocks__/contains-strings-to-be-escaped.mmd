@@ -9,7 +9,11 @@ subgraph src["src"]
   subgraph src_components["components"]
     subgraph src_components_Post["Post"]
       src_components_Post_index_tsx["index.tsx"]
+      src_components_Post_foo__bar_ts["foo--bar.ts"]
     end
   end
+end
+subgraph _["~"]
+  __baz_ts["baz.ts"]
 end
 pages_posts__id__jsx --> src_components_Post_index_tsx
