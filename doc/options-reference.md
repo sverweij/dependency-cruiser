@@ -984,9 +984,14 @@ depcruise-fmt -e -T err results.json
 
 ### showMetrics - (`dot` and `flat` reporters)
 
-When you instructed dependency-cruiser to calculate metrics, with the showMetrics
-switch you can influence whether you want to show them in the graph or not (which
-is also the default).
+With the showMetrics switch you can influence whether you want to show metrics
+in in the graph or not (_not_ is also the default).
+This only works when you instructed dependency-cruiser to actually calculate metrics
+(e.g. by passing the `--metrics` option on the command line or by [having a rule that validates modules against metrics](./rules-reference.md#moreunstable)).
+
+> Dependency-cruiser doesn't calculate these metrics by default - as likely not
+> a lot of folks need them, and it _does_ involve serious numbers of CPU-cycles
+> to calculate them.
 
 ```javascript
 module.exports = {
