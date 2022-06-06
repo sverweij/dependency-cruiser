@@ -20,6 +20,7 @@
   - [summarising/ `collapsePattern` (`dot` and `archi` reporters)](#summarising-collapsepattern-dot-and-archi-reporters)
   - [filtering (`dot`, `ddot` and `archi` reporters)](#filtering-dot-ddot-and-archi-reporters)
   - [wordlist - (`anon` reporter)](#wordlist---anon-reporter)
+  - [markdown](#markdown)
 - [Esoteric options](#esoteric-options)
   - [preserveSymlinks](#preservesymlinks)
   - [mono repo behaviour - combinedDependencies](#mono-repo-behaviour---combinedDependencies)
@@ -1088,6 +1089,69 @@ module.exports = {
   },
 };
 ```
+
+## markdown
+
+The `markdown` reporter by default delivers a report approximately as complete as
+the `err-html` reporter, including a title, a summary section, a details section
+and a footer. It might be you don't need that in your target situation (e.g. in a
+[GitHub action job summary](https://github.blog/2022-05-09-supercharging-github-actions-with-job-summaries/)).
+This is why it is configurable. The a `markdown` section in the
+`options.reporterOptions` section of your dependency-cruiser lets you configure
+what parts to leave in or out - and even what titles and headers the report
+should show:
+
+```javascript
+module.exports = {
+  // ...
+  options: {
+    reporterOptions: {
+      markdown: {
+        // Whether or not to show a title in the report. Defaults to true.
+        showTitle: true,
+        // The text to show as a title of the report.
+        title: "## dependency-cruiser forbidden dependency check - results",
+
+        // Whether or not to show a summary in the report
+        showSummary: true,
+        // Whether or not to give the summary a header
+        showSummaryHeader: true,
+        // The text to show as a header on top of the summary
+        summaryHeader: "### Summary",
+        // Whether or not to show high level stats in the summary
+        showStatsSummary: true,
+        // Whether or not to show a list of violated rules in the summary
+        showRulesSummary: true,
+
+        // Whether or not to show a detailed list of violations
+        showDetails: true,
+        // Whether or not to give the detailed list of violations a header
+        showDetailsHeader: true,
+        // The text to show as a header on top of the detailed list of violations
+        detailsHeader: "### All violations",
+        // Whether or not to collapse the list of violations in a <details> block
+        // especiall practical when the list of violations is still large.
+        collapseDetails: true,
+        // The text to in the <summary> section of the <details> block
+        collapsedMessage: "Violations found - click to expand",
+        // The text to show when no violations were found
+        noViolationsMessage: "No violations vound",
+
+        // Whether or not to show a footer (with version & run date) at the bottom of the report
+        showFooter: true,
+      },
+    },
+  },
+};
+```
+
+<details><summary>Example output</summary>
+
+<img width="722" 
+  alt="annotated screen shot of a markdown report - the real one is accessible" 
+  src="assets/sample-markdown-output.png">
+
+</details>
 
 ## Esoteric options
 
