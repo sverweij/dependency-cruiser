@@ -6,7 +6,7 @@ const mermaidNode = (pNode, pText) => {
     .replace(ACORN_DUMMY_VALUE, "__unknown__")
     .replace(/^\.$|^\.\//g, "__currentPath__")
     .replace(/^\.{2}$|^\.{2}\//g, "__prevPath__")
-    .replace(/[[\]/.@]/g, "_");
+    .replace(/[[\]/.@-]/g, "_");
   const lText = pText ? `["${pText}"]` : "";
   return `${lNode}${lText}`;
 };
