@@ -1093,7 +1093,11 @@ stable dependencies principle: "depend in the direction of stability". Martin
 defines $Instability$ as a function of the number of dependents and dependencies
 a component has:
 
-$$Instability = {\#dependencies \over \#dependents + \#dependencies}$$
+<!-- note: \# is valid LaTex/ KaTex for a #
+     MathJax on GitHub, however needs an _extra_ backslash
+-->
+
+$$Instability = {\\#dependencies \over \\#dependents + \\#dependencies}$$
 
 E.g. a module with no dependencies and one or more dependents has a Instability
 of 0%; as stable as it can get. Conversely a module with no dependents, but
