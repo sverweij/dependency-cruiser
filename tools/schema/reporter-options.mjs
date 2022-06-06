@@ -15,6 +15,7 @@ export default {
         dot: { $ref: "#/definitions/DotReporterOptionsType" },
         ddot: { $ref: "#/definitions/DotReporterOptionsType" },
         flat: { $ref: "#/definitions/DotReporterOptionsType" },
+        markdown: { $ref: "#/definitions/MarkdownReporterOptionsType" },
         metrics: { $ref: "#/definitions/MetricsReporterOptionsType" },
       },
     },
@@ -65,6 +66,92 @@ export default {
           type: "boolean",
           description:
             "When true hides folder metrics from the report. Defaults to false",
+        },
+      },
+    },
+    MarkdownReporterOptionsType: {
+      type: "object",
+      description:
+        "Options to show and hide sections of the markdown reporter and to provide " +
+        "alternate boilerplate text",
+      additionalProperties: false,
+      properties: {
+        showTitle: {
+          type: "boolean",
+          description:
+            "Whether or not to show a title in the report. Defaults to true.",
+        },
+        title: {
+          type: "string",
+          description:
+            "The text to show as a title of the report. E.g. " +
+            "'## dependency-cruiser forbidden dependency check - results'. " +
+            "When left out shows a default value.",
+        },
+        showSummary: {
+          type: "boolean",
+          description:
+            "Whether or not to show a summary in the report. Defaults to true.",
+        },
+        showSummaryHeader: {
+          type: "boolean",
+          description:
+            "Whether or not to give the summary a header. Defaults to true.",
+        },
+        summaryHeader: {
+          type: "string",
+          description:
+            "The text to show as a header on top of the summary. E.g. '### Summary'" +
+            "When left out shows a default value.",
+        },
+        showStatsSummary: {
+          type: "boolean",
+          description:
+            "Whether or not to show high level stats in the summary. Defaults to true.",
+        },
+        showRulesSummary: {
+          type: "boolean",
+          description:
+            "Whether or not to show a list of violated rules in the summary. Defaults to true.",
+        },
+        showDetails: {
+          type: "boolean",
+          description:
+            "Whether or not to show a detailed list of violations. Defaults to true.",
+        },
+        showDetailsHeader: {
+          type: "boolean",
+          description:
+            "Whether or not to give the detailed list of violations a header. Defaults to true.",
+        },
+        detailsHeader: {
+          type: "string",
+          description:
+            "The text to show as a header on top of the detailed list of violations. E.g. '### All violations'" +
+            "When left out shows a default value.",
+        },
+        collapseDetails: {
+          type: "boolean",
+          description:
+            "Whether or not to collapse the list of violations in a <details> block. Defaults to true.",
+        },
+        collapsedMessage: {
+          type: "string",
+          description:
+            "The text to in the <summary> section of the <details> block. E.g. 'click to see all violations'" +
+            "When left out shows a default value.",
+        },
+        noViolationsMessage: {
+          type: "string",
+          description:
+            "The text to show when no violations were found. E.g. 'No violations found'." +
+            "When left out shows a default value.",
+        },
+        showFooter: {
+          type: "boolean",
+          description:
+            "Whether or not to show a footer (with version & run date) at the bottom of the report. " +
+            "Defaults to true",
         },
       },
     },

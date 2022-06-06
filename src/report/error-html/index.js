@@ -1,57 +1,9 @@
 /* eslint-disable security/detect-object-injection */
 const Handlebars = require("handlebars/runtime");
-const get = require("lodash/get");
-const {
-  getFormattedAllowedRule,
-  mergeCountsIntoRule,
-  formatSummaryForReport,
-} = require("./utl");
+const { formatSummaryForReport, aggregateViolations } = require("./utl");
 
 // eslint-disable-next-line import/no-unassigned-import
 require("./error-html.template");
-
-function aggregateCountsPerRule(pViolations) {
-  return pViolations.reduce((pAll, pCurrentViolation) => {
-    if (pAll[pCurrentViolation.rule.name]) {
-      pAll[pCurrentViolation.rule.name] =
-        pCurrentViolation.rule.severity === "ignore"
-          ? {
-              count: pAll[pCurrentViolation.rule.name].count,
-              ignoredCount: pAll[pCurrentViolation.rule.name].ignoredCount + 1,
-            }
-          : {
-              count: pAll[pCurrentViolation.rule.name].count + 1,
-              ignoredCount: pAll[pCurrentViolation.rule.name].ignoredCount,
-            };
-    } else {
-      pAll[pCurrentViolation.rule.name] =
-        pCurrentViolation.rule.severity === "ignore"
-          ? {
-              count: 0,
-              ignoredCount: 1,
-            }
-          : {
-              count: 1,
-              ignoredCount: 0,
-            };
-    }
-    return pAll;
-  }, {});
-}
-
-function aggregateViolations(pViolations, pRuleSetUsed) {
-  const lViolationCounts = aggregateCountsPerRule(pViolations);
-
-  return get(pRuleSetUsed, "forbidden", [])
-    .concat(get(pRuleSetUsed, "required", []))
-    .concat(getFormattedAllowedRule(pRuleSetUsed))
-    .map((pRule) => mergeCountsIntoRule(pRule, lViolationCounts))
-    .sort(
-      (pFirst, pSecond) =>
-        Math.sign(pSecond.count - pFirst.count) ||
-        pFirst.name.localeCompare(pSecond.name)
-    );
-}
 
 function massageSummaryIntoSomethingUsable(pResults) {
   const lSummary = formatSummaryForReport(pResults.summary);

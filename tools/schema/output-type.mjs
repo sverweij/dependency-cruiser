@@ -21,6 +21,7 @@ export default {
             "anon",
             "text",
             "metrics",
+            "markdown",
           ],
         },
         {

@@ -15,6 +15,7 @@ const text = require("./text");
 const baseline = require("./baseline");
 const metrics = require("./metrics");
 const { getExternalPluginReporter } = require("./plugins");
+const markdown = require("./markdown");
 
 const TYPE2REPORTER = {
   anon,
@@ -26,6 +27,7 @@ const TYPE2REPORTER = {
   fdot,
   flat: fdot,
   "err-html": errorHtml,
+  markdown,
   "err-long": errorLong,
   err: error,
   html,
