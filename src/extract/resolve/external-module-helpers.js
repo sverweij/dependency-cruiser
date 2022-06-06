@@ -1,7 +1,7 @@
 const fs = require("fs");
 const path = require("path");
-const _memoize = require("lodash/memoize");
-const _has = require("lodash/has");
+const memoize = require("lodash/memoize");
+const has = require("lodash/has");
 const resolve = require("./resolve");
 const { isScoped, isRelativeModuleName } = require("./module-classifiers");
 
@@ -106,7 +106,7 @@ function bareGetPackageJson(pModuleName, pFileDirectory, pResolveOptions) {
   return lReturnValue;
 }
 
-const getPackageJson = _memoize(
+const getPackageJson = memoize(
   bareGetPackageJson,
   (pModuleName, pBaseDirectory) => `${pBaseDirectory}|${pModuleName}`
 );
@@ -128,7 +128,7 @@ function dependencyIsDeprecated(pModuleName, pFileDirectory, pResolveOptions) {
   );
 
   if (Boolean(lPackageJson)) {
-    lReturnValue = _has(lPackageJson, "deprecated") && lPackageJson.deprecated;
+    lReturnValue = has(lPackageJson, "deprecated") && lPackageJson.deprecated;
   }
   return lReturnValue;
 }
@@ -152,7 +152,7 @@ function getLicense(pModuleName, pFileDirectory, pResolveOptions) {
 
   if (
     Boolean(lPackageJson) &&
-    _has(lPackageJson, "license") &&
+    has(lPackageJson, "license") &&
     typeof lPackageJson.license === "string"
   ) {
     lReturnValue = lPackageJson.license;

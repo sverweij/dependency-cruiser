@@ -1,4 +1,4 @@
-const { cloneDeep } = require("lodash");
+const cloneDeep = require("lodash/cloneDeep");
 const has = require("lodash/has");
 const normalizeREProperties = require("../utl/normalize-re-properties");
 

@@ -1,4 +1,4 @@
-const _get = require("lodash/get");
+const get = require("lodash/get");
 const matchFacade = require("./match-facade");
 
 function getFocusModules(pModules, pFilter) {
@@ -44,7 +44,7 @@ function getCalledModules(pModules, pFilter, pFocusModules) {
 }
 
 module.exports = function addFocus(pModules, pFilter) {
-  if (_get(pFilter, "path")) {
+  if (get(pFilter, "path")) {
     const lFocusModules = getFocusModules(pModules, pFilter);
 
     return lFocusModules

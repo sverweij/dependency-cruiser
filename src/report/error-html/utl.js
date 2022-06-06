@@ -1,18 +1,18 @@
-const _get = require("lodash/get");
-const _has = require("lodash/has");
+const get = require("lodash/get");
+const has = require("lodash/has");
 const { version } = require("../../../src/meta.js");
 const { formatViolation, formatInstability } = require("../utl/index.js");
 
 function getFormattedAllowedRule(pRuleSetUsed) {
-  const lAllowed = _get(pRuleSetUsed, "allowed", []);
-  const lCommentedRule = lAllowed.find((pRule) => _has(pRule, "comment"));
+  const lAllowed = get(pRuleSetUsed, "allowed", []);
+  const lCommentedRule = lAllowed.find((pRule) => has(pRule, "comment"));
   const lComment = lCommentedRule ? lCommentedRule.comment : "-";
 
   return lAllowed.length > 0
     ? {
         name: "not-in-allowed",
         comment: lComment,
-        severity: _get(pRuleSetUsed, "allowedSeverity", "warn"),
+        severity: get(pRuleSetUsed, "allowedSeverity", "warn"),
       }
     : [];
 }

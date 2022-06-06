@@ -1,6 +1,6 @@
 const { EOL } = require("os");
 const isEmpty = require("lodash/isEmpty");
-const _get = require("lodash/get");
+const get = require("lodash/get");
 const tryRequire = require("semver-try-require");
 const { supportedTranspilers } = require("../../../src/meta.js");
 
@@ -35,14 +35,14 @@ const { lCompiler: vueTemplateCompiler, lIsVue3: isVue3 } =
 
 function vue3Transpile(pSource) {
   const parsedComponent = vueTemplateCompiler.parse(pSource);
-  const errors = _get(parsedComponent, "errors");
+  const errors = get(parsedComponent, "errors");
 
   if (!isEmpty(errors)) {
     return "";
   }
 
-  const scriptContent = _get(parsedComponent, "descriptor.script.content", "");
-  const scriptSetupContent = _get(
+  const scriptContent = get(parsedComponent, "descriptor.script.content", "");
+  const scriptSetupContent = get(
     parsedComponent,
     "descriptor.scriptSetup.content",
     ""
@@ -56,11 +56,7 @@ function vue3Transpile(pSource) {
 }
 
 function vue2Transpile(pSource) {
-  return _get(
-    vueTemplateCompiler.parseComponent(pSource),
-    "script.content",
-    ""
-  );
+  return get(vueTemplateCompiler.parseComponent(pSource), "script.content", "");
 }
 
 module.exports = {

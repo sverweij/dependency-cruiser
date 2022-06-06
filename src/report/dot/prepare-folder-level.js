@@ -1,4 +1,4 @@
-const _get = require("lodash/get");
+const get = require("lodash/get");
 const consolidateToFolder = require("../../graph-utl/consolidate-to-folder");
 const compare = require("../../graph-utl/compare");
 const stripSelfTransitions = require("../../graph-utl/strip-self-transitions");
@@ -11,5 +11,5 @@ module.exports = (pResults, pTheme, _, pShowMetrics) => {
     .map(moduleUtl.folderify(pShowMetrics))
     .map(stripSelfTransitions)
     .map(moduleUtl.applyTheme(pTheme))
-    .map(moduleUtl.addURL(_get(pResults, "summary.optionsUsed.prefix", "")));
+    .map(moduleUtl.addURL(get(pResults, "summary.optionsUsed.prefix", "")));
 };

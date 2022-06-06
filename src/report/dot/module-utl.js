@@ -1,5 +1,5 @@
 const path = require("path").posix;
-const _has = require("lodash/has");
+const has = require("lodash/has");
 const utl = require("../utl/index.js");
 const theming = require("./theming");
 
@@ -16,7 +16,7 @@ function attributizeObject(pObject) {
 
 function extractFirstTransgression(pModule) {
   return {
-    ...(_has(pModule, "rules[0]")
+    ...(has(pModule, "rules[0]")
       ? { ...pModule, tooltip: pModule.rules[0].name }
       : pModule),
     dependencies: pModule.dependencies.map((pDependency) =>
@@ -66,7 +66,7 @@ function aggregate(pPathSnippet, pCounter, pPathArray) {
 function makeInstabilityString(pModule, pShowMetrics = false) {
   let lInstabilityString = "";
 
-  if (pShowMetrics && _has(pModule, "instability") && !pModule.consolidated) {
+  if (pShowMetrics && has(pModule, "instability") && !pModule.consolidated) {
     lInstabilityString = ` <FONT color="#808080" point-size="8">${utl.formatInstability(
       pModule.instability
     )}</FONT>`;

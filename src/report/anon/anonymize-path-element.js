@@ -1,11 +1,11 @@
-const _memoize = require("lodash/memoize");
+const memoize = require("lodash/memoize");
 const randomString = require("./random-string");
 
 function replace(pElement, pIndex, pWordList) {
   return pIndex === 0 ? pWordList.shift() || randomString(pElement) : pElement;
 }
 
-const replaceCached = _memoize(replace);
+const replaceCached = memoize(replace);
 
 function replaceFromWordList(pPathElement, pWordList, pCached) {
   return pPathElement

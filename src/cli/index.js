@@ -1,7 +1,7 @@
 const glob = require("glob");
-const _get = require("lodash/get");
-const _clone = require("lodash/clone");
-const _set = require("lodash/set");
+const get = require("lodash/get");
+const clone = require("lodash/clone");
+const set = require("lodash/set");
 
 const main = require("../main");
 const bus = require("../utl/bus");
@@ -19,7 +19,7 @@ const setUpPerformanceLogListener = require("./listeners/performance-log");
 
 function extractResolveOptions(pCruiseOptions) {
   let lResolveOptions = {};
-  const lWebPackConfigFileName = _get(
+  const lWebPackConfigFileName = get(
     pCruiseOptions,
     "ruleSet.options.webpackConfig.fileName",
     null
@@ -28,8 +28,8 @@ function extractResolveOptions(pCruiseOptions) {
   if (lWebPackConfigFileName) {
     lResolveOptions = extractWebpackResolveConfig(
       lWebPackConfigFileName,
-      _get(pCruiseOptions, "ruleSet.options.webpackConfig.env", null),
-      _get(pCruiseOptions, "ruleSet.options.webpackConfig.arguments", null)
+      get(pCruiseOptions, "ruleSet.options.webpackConfig.env", null),
+      get(pCruiseOptions, "ruleSet.options.webpackConfig.arguments", null)
     );
   }
   return lResolveOptions;
@@ -43,8 +43,8 @@ function addKnownViolations(pCruiseOptions) {
 
     // Check against json schema is already done in src/main/options/validate
     // so here we can just concentrate on the io
-    let lCruiseOptions = _clone(pCruiseOptions);
-    _set(lCruiseOptions, "ruleSet.options.knownViolations", lKnownViolations);
+    let lCruiseOptions = clone(pCruiseOptions);
+    set(lCruiseOptions, "ruleSet.options.knownViolations", lKnownViolations);
     return lCruiseOptions;
   }
   return pCruiseOptions;
@@ -52,7 +52,7 @@ function addKnownViolations(pCruiseOptions) {
 
 function extractTSConfigOptions(pCruiseOptions) {
   let lReturnValue = {};
-  const lTSConfigFileName = _get(
+  const lTSConfigFileName = get(
     pCruiseOptions,
     "ruleSet.options.tsConfig.fileName",
     null
@@ -67,7 +67,7 @@ function extractTSConfigOptions(pCruiseOptions) {
 
 function extractBabelConfigOptions(pCruiseOptions) {
   let lReturnValue = {};
-  const lBabelConfigFileName = _get(
+  const lBabelConfigFileName = get(
     pCruiseOptions,
     "ruleSet.options.babelConfig.fileName",
     null
@@ -85,12 +85,12 @@ function setUpListener(pCruiseOptions) {
     "cli-feedback": setUpCliFeedbackListener,
     "performance-log": setUpPerformanceLogListener,
   };
-  const lListenerID = _get(
+  const lListenerID = get(
     pCruiseOptions,
     "progress",
-    _get(pCruiseOptions, "ruleSet.options.progress.type")
+    get(pCruiseOptions, "ruleSet.options.progress.type")
   );
-  const lListenerFunction = _get(lString2Listener, lListenerID);
+  const lListenerFunction = get(lString2Listener, lListenerID);
   /* c8 ignore next 3 */
   if (Boolean(lListenerFunction)) {
     lListenerFunction(bus);

@@ -1,7 +1,7 @@
 /* eslint-disable security/detect-object-injection */
 const chalk = require("chalk");
 const figures = require("figures");
-const _get = require("lodash/get");
+const get = require("lodash/get");
 const { findRuleByName } = require("../graph-utl/rule-set");
 const wrapAndIndent = require("../utl/wrap-and-indent");
 const utl = require("./utl/index.js");
@@ -107,7 +107,7 @@ function addExplanation(pRuleSet, pLong) {
   return pLong
     ? (pViolation) => ({
         ...pViolation,
-        comment: _get(
+        comment: get(
           findRuleByName(pRuleSet, pViolation.rule.name),
           "comment",
           "-"

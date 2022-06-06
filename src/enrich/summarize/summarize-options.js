@@ -1,5 +1,5 @@
-const _get = require("lodash/get");
-const _has = require("lodash/has");
+const get = require("lodash/get");
+const has = require("lodash/has");
 
 const SHAREABLE_OPTIONS = [
   "combinedDependencies",
@@ -30,7 +30,7 @@ const SHAREABLE_OPTIONS = [
 function makeOptionsPresentable(pOptions) {
   return SHAREABLE_OPTIONS.filter(
     (pShareableOptionKey) =>
-      _has(pOptions, pShareableOptionKey) && pOptions[pShareableOptionKey] !== 0
+      has(pOptions, pShareableOptionKey) && pOptions[pShareableOptionKey] !== 0
   )
     .filter(
       (pShareableOptionKey) =>
@@ -58,7 +58,7 @@ function makeIncludOnlyBackwardsCompatible(pOptions) {
   return pOptions.includeOnly
     ? {
         ...pOptions,
-        includeOnly: _get(pOptions, "includeOnly.path"),
+        includeOnly: get(pOptions, "includeOnly.path"),
       }
     : pOptions;
 }

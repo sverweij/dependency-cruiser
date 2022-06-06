@@ -1,7 +1,7 @@
 const fs = require("fs");
 const path = require("path");
-const _has = require("lodash/has");
-const _get = require("lodash/get");
+const has = require("lodash/has");
+const get = require("lodash/get");
 const { DEFAULT_CONFIG_FILE_NAME } = require("../defaults");
 
 const LIKELY_SOURCE_FOLDERS = ["src", "lib", "app", "bin", "sources"];
@@ -41,7 +41,7 @@ function babelIsConfiguredInManifest() {
   let lReturnValue = false;
 
   try {
-    lReturnValue = _has(readManifest(), "babel");
+    lReturnValue = has(readManifest(), "babel");
   } catch (pError) {
     // silently ignore - we'll return false anyway then
   }
@@ -52,7 +52,7 @@ function isTypeModule() {
   let lReturnValue = false;
 
   try {
-    lReturnValue = _get(readManifest(), "type", "commonjs") === "module";
+    lReturnValue = get(readManifest(), "type", "commonjs") === "module";
   } catch (pError) {
     // silently ignore - we'll return false anyway then
   }

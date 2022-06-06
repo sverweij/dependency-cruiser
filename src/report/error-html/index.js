@@ -1,6 +1,6 @@
 /* eslint-disable security/detect-object-injection */
 const Handlebars = require("handlebars/runtime");
-const _get = require("lodash/get");
+const get = require("lodash/get");
 const {
   getFormattedAllowedRule,
   mergeCountsIntoRule,
@@ -42,8 +42,8 @@ function aggregateCountsPerRule(pViolations) {
 function aggregateViolations(pViolations, pRuleSetUsed) {
   const lViolationCounts = aggregateCountsPerRule(pViolations);
 
-  return _get(pRuleSetUsed, "forbidden", [])
-    .concat(_get(pRuleSetUsed, "required", []))
+  return get(pRuleSetUsed, "forbidden", [])
+    .concat(get(pRuleSetUsed, "required", []))
     .concat(getFormattedAllowedRule(pRuleSetUsed))
     .map((pRule) => mergeCountsIntoRule(pRule, lViolationCounts))
     .sort(

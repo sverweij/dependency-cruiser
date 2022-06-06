@@ -1,5 +1,5 @@
-const _get = require("lodash/get");
-const _has = require("lodash/has");
+const get = require("lodash/get");
+const has = require("lodash/has");
 
 /**
  * Finds the first rule in the rule set that has name pName,
@@ -13,7 +13,7 @@ const _has = require("lodash/has");
  * @return {import("../../types/rule-set").IForbiddenRuleType|undefined} - a rule (or 'undefined' if nothing found)
  */
 function findRuleByName(pRuleSet, pName) {
-  return _get(pRuleSet, "forbidden", []).find(
+  return get(pRuleSet, "forbidden", []).find(
     (pForbiddenRule) => pForbiddenRule.name === pName
   );
 }
@@ -29,11 +29,11 @@ function findRuleByName(pRuleSet, pName) {
  */
 function ruleSetHasLicenseRule(pRuleSet) {
   return (
-    _get(pRuleSet, "forbidden", []).some(
-      (pRule) => _has(pRule, "to.license") || _has(pRule, "to.licenseNot")
+    get(pRuleSet, "forbidden", []).some(
+      (pRule) => has(pRule, "to.license") || has(pRule, "to.licenseNot")
     ) ||
-    _get(pRuleSet, "allowed", []).some(
-      (pRule) => _has(pRule, "to.license") || _has(pRule, "to.licenseNot")
+    get(pRuleSet, "allowed", []).some(
+      (pRule) => has(pRule, "to.license") || has(pRule, "to.licenseNot")
     )
   );
 }
@@ -44,11 +44,11 @@ function ruleSetHasLicenseRule(pRuleSet) {
  */
 function ruleSetHasDeprecationRule(pRuleSet) {
   return (
-    _get(pRuleSet, "forbidden", []).some((pRule) =>
-      _get(pRule, "to.dependencyTypes", []).includes("deprecated")
+    get(pRuleSet, "forbidden", []).some((pRule) =>
+      get(pRule, "to.dependencyTypes", []).includes("deprecated")
     ) ||
-    _get(pRuleSet, "allowed", []).some((pRule) =>
-      _get(pRule, "to.dependencyTypes", []).includes("deprecated")
+    get(pRuleSet, "allowed", []).some((pRule) =>
+      get(pRule, "to.dependencyTypes", []).includes("deprecated")
     )
   );
 }

@@ -1,11 +1,11 @@
 /* eslint-disable security/detect-object-injection */
-const _has = require("lodash/has");
+const has = require("lodash/has");
 const { intersects } = require("../utl/array-util");
 const { replaceGroupPlaceholders } = require("../utl/regex-util");
 
 function propertyEquals(pRule, pDependency, pProperty) {
   // The properties can be booleans, so we can't use !pRule.to[pProperty]
-  if (_has(pRule.to, pProperty)) {
+  if (has(pRule.to, pProperty)) {
     return pDependency[pProperty] === pRule.to[pProperty];
   }
   return true;
@@ -132,7 +132,7 @@ function toviaSomeNot(pRule, pDependency, pGroups) {
 }
 
 function toIsMoreUnstable(pRule, pModule, pDependency) {
-  if (_has(pRule, "to.moreUnstable")) {
+  if (has(pRule, "to.moreUnstable")) {
     return (
       (pRule.to.moreUnstable &&
         pModule.instability < pDependency.instability) ||
@@ -143,7 +143,7 @@ function toIsMoreUnstable(pRule, pModule, pDependency) {
 }
 
 function matchesMoreThanOneDependencyType(pRule, pDependency) {
-  if (_has(pRule.to, "moreThanOneDependencyType")) {
+  if (has(pRule.to, "moreThanOneDependencyType")) {
     return (
       pRule.to.moreThanOneDependencyType ===
       pDependency.dependencyTypes.length > 1

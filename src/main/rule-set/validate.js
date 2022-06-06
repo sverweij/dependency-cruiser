@@ -1,6 +1,6 @@
 const Ajv = require("ajv").default;
 const safeRegex = require("safe-regex");
-const _has = require("lodash/has");
+const has = require("lodash/has");
 const { validateCruiseOptions } = require("../options/validate");
 const configurationSchema = require("../../schema/configuration.schema.js");
 
@@ -15,7 +15,7 @@ function validateAgainstSchema(pSchema, pConfiguration) {
 }
 
 function hasPath(pObject, pSection, pCondition) {
-  return _has(pObject, pSection) && _has(pObject[pSection], pCondition);
+  return has(pObject, pSection) && has(pObject[pSection], pCondition);
 }
 
 function safeRule(pRule, pSection, pCondition) {
@@ -71,7 +71,7 @@ module.exports = function validateConfiguration(pConfiguration) {
   validateAgainstSchema(configurationSchema, pConfiguration);
   (pConfiguration.allowed || []).forEach(checkRuleSafety);
   (pConfiguration.forbidden || []).forEach(checkRuleSafety);
-  if (_has(pConfiguration, "options")) {
+  if (has(pConfiguration, "options")) {
     validateCruiseOptions(pConfiguration.options);
   }
   return pConfiguration;

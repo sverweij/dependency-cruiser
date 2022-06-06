@@ -1,4 +1,4 @@
-const _get = require("lodash/get");
+const get = require("lodash/get");
 const compare = require("../../graph-utl/compare");
 const moduleUtl = require("./module-utl");
 
@@ -8,5 +8,5 @@ module.exports = (pResults, pTheme, _, pShowMetrics) => {
     .map(moduleUtl.flatLabel(pShowMetrics))
     .map(moduleUtl.extractFirstTransgression)
     .map(moduleUtl.applyTheme(pTheme))
-    .map(moduleUtl.addURL(_get(pResults, "summary.optionsUsed.prefix", "")));
+    .map(moduleUtl.addURL(get(pResults, "summary.optionsUsed.prefix", "")));
 };

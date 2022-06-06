@@ -1,6 +1,6 @@
-const _cloneDeep = require("lodash/cloneDeep");
-const _get = require("lodash/get");
-const _has = require("lodash/has");
+const cloneDeep = require("lodash/cloneDeep");
+const get = require("lodash/get");
+const has = require("lodash/has");
 const DEFAULT_THEME = require("./default-theme");
 
 function matchesRE(pValue, pRE) {
@@ -12,9 +12,9 @@ function matchesRE(pValue, pRE) {
 function moduleOrDependencyMatchesCriteria(pSchemeEntry, pModule) {
   return Object.keys(pSchemeEntry.criteria).every(
     (pKey) =>
-      (_get(pModule, pKey) || _has(pModule, pKey)) &&
-      (_get(pModule, pKey) === _get(pSchemeEntry.criteria, pKey) ||
-        matchesRE(_get(pModule, pKey), _get(pSchemeEntry.criteria, pKey)))
+      (get(pModule, pKey) || has(pModule, pKey)) &&
+      (get(pModule, pKey) === get(pSchemeEntry.criteria, pKey) ||
+        matchesRE(get(pModule, pKey), get(pSchemeEntry.criteria, pKey)))
   );
 }
 
@@ -28,7 +28,7 @@ function determineAttributes(pModuleOrDependency, pAttributeCriteria) {
 }
 
 function normalizeTheme(pTheme) {
-  let lReturnValue = _cloneDeep(DEFAULT_THEME);
+  let lReturnValue = cloneDeep(DEFAULT_THEME);
 
   if (pTheme) {
     if (pTheme.replace) {

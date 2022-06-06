@@ -1,6 +1,6 @@
 const path = require("path");
-const _get = require("lodash/get");
-const _uniqBy = require("lodash/uniqBy");
+const get = require("lodash/get");
+const uniqBy = require("lodash/uniqBy");
 const { intersects } = require("../utl/array-util");
 const resolve = require("./resolve");
 const extractES6Deps = require("./ast-extractors/extract-es6-deps");
@@ -222,7 +222,7 @@ module.exports = function getDependencies(
   pTranspileOptions
 ) {
   try {
-    return _uniqBy(
+    return uniqBy(
       extractDependencies(pCruiseOptions, pFileName, pTranspileOptions),
       getDependencyUniqueKey
     )
@@ -230,9 +230,9 @@ module.exports = function getDependencies(
       .map(addResolutionAttributes(pCruiseOptions, pFileName, pResolveOptions))
       .filter(
         (pDep) =>
-          (!_get(pCruiseOptions, "exclude.path") ||
+          (!get(pCruiseOptions, "exclude.path") ||
             !matchesPattern(pDep.resolved, pCruiseOptions.exclude.path)) &&
-          (!_get(pCruiseOptions, "includeOnly.path") ||
+          (!get(pCruiseOptions, "includeOnly.path") ||
             matchesPattern(pDep.resolved, pCruiseOptions.includeOnly.path))
       );
   } catch (pError) {

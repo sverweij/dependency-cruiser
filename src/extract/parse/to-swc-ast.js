@@ -1,5 +1,5 @@
 const tryRequire = require("semver-try-require");
-const _memoize = require("lodash/memoize");
+const memoize = require("lodash/memoize");
 const { supportedTranspilers } = require("../../../src/meta.js");
 
 /** @type {import('@swc/core')} */
@@ -26,7 +26,7 @@ function getAST(pFileName) {
   return swc.parseFileSync(pFileName, SWC_PARSE_OPTIONS);
 }
 
-const getASTCached = _memoize(getAST);
+const getASTCached = memoize(getAST);
 
 function clearCache() {
   getASTCached.cache.clear();

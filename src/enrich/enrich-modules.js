@@ -1,4 +1,4 @@
-const _get = require("lodash/get");
+const get = require("lodash/get");
 const bus = require("../utl/bus");
 const busLogLevels = require("../utl/bus-log-levels");
 const addFocus = require("../../src/graph-utl/add-focus");
@@ -31,7 +31,7 @@ module.exports = function enrichModules(pModules, pOptions) {
   bus.emit("progress", "analyzing: add focus (if any)", {
     level: busLogLevels.INFO,
   });
-  lModules = addFocus(lModules, _get(pOptions, "focus"));
+  lModules = addFocus(lModules, get(pOptions, "focus"));
 
   // when validate === false we might want to skip the addValidations.
   // We don't at this time, however, as "valid" is a mandatory

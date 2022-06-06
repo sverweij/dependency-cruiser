@@ -1,4 +1,4 @@
-const _get = require("lodash/get");
+const get = require("lodash/get");
 const consolidateToPattern = require("../../graph-utl/consolidate-to-pattern");
 const compare = require("../../graph-utl/compare");
 const stripSelfTransitions = require("../../graph-utl/strip-self-transitions");
@@ -15,5 +15,5 @@ module.exports = (pResults, pTheme, pCollapsePattern, pShowMetrics) => {
     .map(moduleUtl.extractFirstTransgression)
     .map(stripSelfTransitions)
     .map(moduleUtl.applyTheme(pTheme))
-    .map(moduleUtl.addURL(_get(pResults, "summary.optionsUsed.prefix", "")));
+    .map(moduleUtl.addURL(get(pResults, "summary.optionsUsed.prefix", "")));
 };
