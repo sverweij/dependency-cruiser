@@ -37,6 +37,14 @@
       "coreModule": false,
       "couldNotResolve": true,
       "dependencies": []
+    },
+    {
+      "source": "~/baz.ts",
+      "valid": true,
+      "followable": false,
+      "coreModule": false,
+      "couldNotResolve": true,
+      "dependencies": []
     }
   ],
   "summary": {
