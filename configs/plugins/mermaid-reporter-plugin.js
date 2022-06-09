@@ -1,19 +1,18 @@
+/* eslint-disable security/detect-object-injection */
 const ACORN_DUMMY_VALUE = "✖";
 
-/* eslint-disable security/detect-object-injection */
-const mermaidNode = (pNode, pText) => {
-  const lNode = pNode
+const hashNodeName = (pNode) =>
+  pNode
     .replace(ACORN_DUMMY_VALUE, "__unknown__")
     .replace(/^\.$|^\.\//g, "__currentPath__")
     .replace(/^\.{2}$|^\.{2}\//g, "__prevPath__")
     .replace(/[[\]/.@~-]/g, "_");
-  const lText = pText ? `["${pText}"]` : "";
-  return `${lNode}${lText}`;
-};
+
+const mermaidNode = (pNode, pText) => `${hashNodeName(pNode)}["${pText}"]`;
 
 const mermaidEdge = (pFrom, pTo) => {
-  const lFromNode = mermaidNode(pFrom.node);
-  const lToNode = mermaidNode(pTo.node);
+  const lFromNode = hashNodeName(pFrom.node);
+  const lToNode = hashNodeName(pTo.node);
   return `${lFromNode} --> ${lToNode}`;
 };
 
@@ -84,6 +83,18 @@ const convertedSubgraphSources = (pCruiseResult) => {
   return lTree;
 };
 
+const focusHighlights = (pModules) => {
+  const lHighLightStyle = "fill:lime,color:black";
+
+  return pModules
+    .filter((pModule) => pModule.matchesFocus === true)
+    .reduce(
+      (pAll, pModule) =>
+        (pAll += `\nstyle ${hashNodeName(pModule.source)} ${lHighLightStyle}`),
+      ""
+    );
+};
+
 const renderMermaidThing = (pCruiseResult) => {
   const subgraphs = convertedSubgraphSources(pCruiseResult);
   const edges = convertedEdgeSources(pCruiseResult);
@@ -92,7 +103,7 @@ const renderMermaidThing = (pCruiseResult) => {
 
 ${mermaidSubgraphs(subgraphs)}
 ${mermaidEdges(edges)}
-`;
+${focusHighlights(pCruiseResult.modules)}`;
 };
 
 /**

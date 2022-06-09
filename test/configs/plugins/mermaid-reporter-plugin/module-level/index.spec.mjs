@@ -30,4 +30,6 @@ describe("[I] configs/plugins/mermaid-reporter-plugin module-level reporter", ()
     same("contains-strings-to-be-escaped"));
   it("renders a mermaid - rendered strings that replaced from unknown figures.", () =>
     same("unknown-deps"));
+  it("renders a mermaid - renders focussed elements with highlights", () =>
+    same("with-focus"));
 });
