@@ -95,6 +95,21 @@ function ruleSetHasMetricsRule(pRuleSet) {
 }
 
 /**
+ *
+ * @param {import('../../../types/dependency-cruiser').ICruiseOptions} pOptions
+ * @returns Boolean
+ */
+function reporterShowsMetrics(pOptions) {
+  return (
+    get(
+      pOptions,
+      `reporterOptions.${pOptions.outputType}.showMetrics`,
+      false
+    ) === true
+  );
+}
+
+/**
  * Determines whether (instability) metrics should be calculated
  *
  * @param {import('../../../types/dependency-cruiser').ICruiseOptions} pOptions
@@ -104,6 +119,7 @@ function shouldCalculateMetrics(pOptions) {
   return (
     pOptions.metrics ||
     pOptions.outputType === "metrics" ||
+    reporterShowsMetrics(pOptions) ||
     ruleSetHasMetricsRule(pOptions.ruleSet)
   );
 }
