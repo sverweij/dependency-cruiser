@@ -3,6 +3,7 @@ import markdown from "../../../src/report/markdown.js";
 import everythingFineResult from "./__mocks__/everything-fine.mjs";
 import validationMoreThanOnce from "./__mocks__/violation-more-than-once.mjs";
 import validationMoreThanOnceWithAnIgnore from "./__mocks__/violation-more-than-once-with-an-ignore.mjs";
+import orphansCyclesMetrics from "./__mocks__/orphans-cycles-metrics.mjs";
 
 describe("[I] report/markdown", () => {
   const lOkeliDokelyKey = "gummy bears";
@@ -116,5 +117,27 @@ describe("[I] report/markdown", () => {
     expect(lReport.output).to.not.contain("src/cli/compileConfig/index.js");
 
     expect(lReport.exitCode).to.equal(0);
+  });
+
+  it("report nicely on orphans, cycles and metric rules", () => {
+    const lResult = markdown(orphansCyclesMetrics);
+
+    expect(lResult.output).to.contain(lDefaultTitle);
+    expect(lResult.output).to.contain(lDefaultSummaryHeader);
+    expect(lResult.output).to.not.contain(lOkeliDokelyKey);
+    expect(lResult.output).to.not.contain(lOkeliDokelyHeader);
+
+    // empty 'to' column for module only rules
+    expect(lResult.output).to.contain(
+      "|:exclamation:&nbsp;_no-orphans_|src/schema/baseline-violations.schema.js||"
+    );
+    // cycles as cycles in the 'to' column:
+    expect(lResult.output).to.contain(
+      "|:warning:&nbsp;_no-folder-cycles_|src/extract/parse|src/extract/transpile &rightarrow;<br/>src/extract/parse|"
+    );
+    // metrics violations with the 'instability' for the involved modules in:
+    expect(lResult.output).to.contain(
+      '|:grey_exclamation:&nbsp;_SDP_|src/extract/gather-initial-sources.js&nbsp;<span class="extra">(I: 75)</span>|src/extract/transpile/meta.js&nbsp;<span class="extra">(I: 80)</span>|'
+    );
   });
 });

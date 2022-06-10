@@ -1091,6 +1091,9 @@ module.exports = {
 
 ## markdown
 
+> The markdown reporter is a keeper, but the reporterOptions.markdown interface
+> below is _experimental_ and might change without a major version bump.
+
 The `markdown` reporter by default delivers a report approximately as complete as
 the `err-html` reporter, including a title, a summary section, a details section
 and a footer. It might be you don't need that in your target situation (e.g. in a

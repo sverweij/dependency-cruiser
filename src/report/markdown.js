@@ -1,5 +1,9 @@
 const { version } = require("../meta.js");
-const { aggregateViolations } = require("./error-html/utl");
+const {
+  aggregateViolations,
+  determineTo,
+  determineFromExtras,
+} = require("./error-html/utl");
 
 const REPORT_DEFAULTS = {
   showTitle: true,
@@ -83,7 +87,7 @@ function formatRulesSummary(pCruiseResult, pIncludeIgnoredInSummary) {
  * @return {string}
  */
 function formatViolations(pViolations, pIncludeIgnoredInDetails) {
-  const lTableHead = "|violated rule|from|to|\n|:---|:---|:---|\n";
+  const lTableHead = "|violated rule|module|to|\n|:---|:---|:---|\n";
 
   return pViolations
     .filter(
@@ -91,9 +95,12 @@ function formatViolations(pViolations, pIncludeIgnoredInDetails) {
         pViolation.rule.severity !== "ignore" || pIncludeIgnoredInDetails
     )
     .reduce((pAll, pViolation) => {
+      const lFromExtras = determineFromExtras(pViolation);
+      const lTo = determineTo(pViolation);
+
       return `${pAll}|${severity2Icon(pViolation.rule.severity)}&nbsp;_${
         pViolation.rule.name
-      }_|\`${pViolation.from}\`|\`${pViolation.to}\`|\n`;
+      }_|${pViolation.from}${lFromExtras}|${lTo}|\n`;
     }, lTableHead);
 }
 
@@ -152,7 +159,6 @@ function report(pResults, pOptions) {
   return lReturnValue;
 }
 
-// TODO: format specials (like orphans, cycles, reachability rules)
 /**
  * Returns the violations from a cruise in markdown format
  *
