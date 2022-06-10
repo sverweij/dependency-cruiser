@@ -10,8 +10,10 @@ const REPORT_DEFAULTS = {
   summaryHeader: "### :chart_with_upwards_trend: Summary",
   showStatsSummary: true,
   showRulesSummary: true,
+  includeIgnoredInSummary: true,
 
   showDetails: true,
+  includeIgnoredInDetails: true,
   showDetailsHeader: true,
   detailsHeader: "### :fire: All violations",
   collapseDetails: true,
@@ -31,6 +33,7 @@ function severity2Icon(pSeverity) {
   const lSeverity2IconMap = {
     error: ":exclamation:",
     info: ":grey_exclamation:",
+    ignore: ":see_no_evil:",
   };
   // eslint-disable-next-line security/detect-object-injection
   return lSeverity2IconMap[pSeverity] || ":warning:";
@@ -49,8 +52,10 @@ function formatStatsSummary(pSummary) {
 /**
  *
  * @param {import("../../types/cruise-result").ICruiseResult} pCruiseResult
+ * @param {Boolean} pIncludeIgnoredInSummary
+ * @return {string}
  */
-function formatRulesSummary(pCruiseResult) {
+function formatRulesSummary(pCruiseResult, pIncludeIgnoredInSummary) {
   const lTableHead =
     "|rule|violations|ignored|explanation\n|:---|:---:|:---:|:---|\n";
 
@@ -58,7 +63,10 @@ function formatRulesSummary(pCruiseResult) {
     pCruiseResult.summary.violations,
     pCruiseResult.summary.ruleSetUsed
   )
-    .filter((pRule) => pRule.count > 0)
+    .filter(
+      (pRule) =>
+        pRule.count > 0 || (pIncludeIgnoredInSummary && pRule.ignoredCount > 0)
+    )
     .reduce(
       (pAll, pRule) =>
         (pAll += `|${severity2Icon(pRule.severity)}&nbsp;_${pRule.name}_|**${
@@ -71,12 +79,17 @@ function formatRulesSummary(pCruiseResult) {
 /**
  *
  * @param {import("../../types/cruise-result").IViolation[]} pViolations
+ * @param {boolean} pIncludeIgnoredInDetails
+ * @return {string}
  */
-function formatViolations(pViolations) {
+function formatViolations(pViolations, pIncludeIgnoredInDetails) {
   const lTableHead = "|violated rule|from|to|\n|:---|:---|:---|\n";
 
   return pViolations
-    .filter((pViolation) => pViolation.rule.severity !== "ignore")
+    .filter(
+      (pViolation) =>
+        pViolation.rule.severity !== "ignore" || pIncludeIgnoredInDetails
+    )
     .reduce((pAll, pViolation) => {
       return `${pAll}|${severity2Icon(pViolation.rule.severity)}&nbsp;_${
         pViolation.rule.name
@@ -105,7 +118,10 @@ function report(pResults, pOptions) {
     lReturnValue += `${formatStatsSummary(pResults.summary)}\n\n`;
 
     if (pResults.summary.violations.length > 0 && lOptions.showRulesSummary) {
-      lReturnValue += `${formatRulesSummary(pResults)}\n\n`;
+      lReturnValue += `${formatRulesSummary(
+        pResults,
+        lOptions.includeIgnoredInSummary
+      )}\n\n`;
     }
   }
 
@@ -117,7 +133,10 @@ function report(pResults, pOptions) {
       if (lOptions.collapseDetails) {
         lReturnValue += `<details><summary>${lOptions.collapsedMessage}</summary>\n\n`;
       }
-      lReturnValue += `${formatViolations(pResults.summary.violations)}\n\n`;
+      lReturnValue += `${formatViolations(
+        pResults.summary.violations,
+        lOptions.includeIgnoredInDetails
+      )}\n\n`;
       if (lOptions.collapseDetails) {
         lReturnValue += "</details>\n\n";
       }
