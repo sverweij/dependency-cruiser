@@ -81,6 +81,39 @@ describe("[I] report/markdown", () => {
     expect(lReport.output).to.contain("**0** warnings");
     expect(lReport.output).to.contain("**1** informational");
     expect(lReport.output).to.contain("**2** ignored");
+    expect(lReport.output).to.contain(
+      "|:warning:&nbsp;_cli-to-main-only-warn_|**0**|**1**|"
+    );
+    expect(lReport.output).to.contain(
+      ":see_no_evil:&nbsp;_cli-to-main-only-warn_"
+    );
+    expect(lReport.output).to.contain("src/cli/compileConfig/index.js");
+
+    expect(lReport.exitCode).to.equal(0);
+  });
+
+  it("report with violations and ignored violations hidden", () => {
+    const lReport = markdown(validationMoreThanOnceWithAnIgnore, {
+      includeIgnoredInSummary: false,
+      includeIgnoredInDetails: false,
+    });
+
+    expect(lReport.output).to.not.contain(lOkeliDokelyKey);
+    expect(lReport.output).to.not.contain(lOkeliDokelyHeader);
+    expect(lReport.output).to.contain("All violations");
+    expect(lReport.output).to.contain("**127** modules");
+    expect(lReport.output).to.contain("**259** dependencies");
+    expect(lReport.output).to.contain("**0** errors");
+    expect(lReport.output).to.contain("**0** warnings");
+    expect(lReport.output).to.contain("**1** informational");
+    expect(lReport.output).to.contain("**2** ignored");
+    expect(lReport.output).to.not.contain(
+      "|:warning:&nbsp;_cli-to-main-only-warn_|**0**|**1**|"
+    );
+    expect(lReport.output).to.not.contain(
+      ":see_no_evil:&nbsp;_cli-to-main-only-warn_"
+    );
+    expect(lReport.output).to.not.contain("src/cli/compileConfig/index.js");
 
     expect(lReport.exitCode).to.equal(0);
   });

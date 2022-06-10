@@ -151,9 +151,18 @@ export interface IMarkdownReporterOptions {
    */
   showRulesSummary?: boolean;
   /**
+   * Whether or not to show rules in the list of rules for which all violations are ignored.
+   * Defaults to true.
+   */
+  includeIgnoredInSummary?: boolean;
+  /**
    * Whether or not to show a detailed list of violations. Defaults to true.
    */
   showDetails?: boolean;
+  /**
+   * Whether or not to show ignored violations in the detailed list. Defaults to true.
+   */
+  includeIgnoredInDetails?: boolean;
   /**
    * Whether or not to give the detailed list of violations a header. Defaults to true.
    */

@@ -1121,9 +1121,13 @@ module.exports = {
         showStatsSummary: true,
         // Whether or not to show a list of violated rules in the summary
         showRulesSummary: true,
+        // Whether or not to show rules in the list of rules for which all violations are ignored.
+        includeIgnoredInSummary
 
         // Whether or not to show a detailed list of violations
         showDetails: true,
+        // Whether or not to show ignored violations in the detailed list.
+        includeIgnoredInDetails: true,
         // Whether or not to give the detailed list of violations a header
         showDetailsHeader: true,
         // The text to show as a header on top of the detailed list of violations

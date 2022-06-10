@@ -1186,9 +1186,17 @@
           "type": "boolean",
           "description": "Whether or not to show a list of violated rules in the summary. Defaults to true."
         },
+        "includeIgnoredInSummary": {
+          "type": "boolean",
+          "description": "Whether or not to show rules in the list of rules for which all violations are ignored. Defaults to true."
+        },
         "showDetails": {
           "type": "boolean",
           "description": "Whether or not to show a detailed list of violations. Defaults to true."
+        },
+        "includeIgnoredInDetails": {
+          "type": "boolean",
+          "description": "Whether or not to show ignored violations in the detailed list. Defaults to true."
         },
         "showDetailsHeader": {
           "type": "boolean",
