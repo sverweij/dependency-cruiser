@@ -1042,7 +1042,8 @@
             "anon",
             "text",
             "metrics",
-            "markdown"
+            "markdown",
+            "mermaid"
           ]
         },
         { "type": "string", "pattern": "^plugin:[^:]+$" }

@@ -22,6 +22,7 @@ export default {
             "text",
             "metrics",
             "markdown",
+            "mermaid",
           ],
         },
         {

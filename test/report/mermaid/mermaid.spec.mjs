@@ -2,21 +2,22 @@ import { readFileSync } from "node:fs";
 import { join } from "node:path";
 import { fileURLToPath } from "node:url";
 import { expect } from "chai";
-import mermaidReporterPlugin from "../../../../../configs/plugins/mermaid-reporter-plugin.js";
-import { createRequireJSON } from "../../../../backwards.utl.mjs";
+import mermaid from "../../../src/report/mermaid.js";
+import mermaidReporterPlugin from "../../../configs/plugins/mermaid-reporter-plugin.js";
+import { createRequireJSON } from "../../backwards.utl.mjs";
 
 const requireJSON = createRequireJSON(import.meta.url);
 const __dirname = fileURLToPath(new URL(".", import.meta.url));
 const mockPath = join(__dirname, "__mocks__");
 
-const same = (pName) => {
+const same = (pName, pMermaidModule = mermaid) => {
   const definition = requireJSON(`./__mocks__/${pName}.json`);
   const expected = readFileSync(join(mockPath, `${pName}.mmd`), "utf8");
-  const output = mermaidReporterPlugin(definition).output;
+  const output = pMermaidModule(definition).output;
   expect(output).to.deep.equal(expected);
 };
 
-describe("[I] configs/plugins/mermaid-reporter-plugin module-level reporter", () => {
+describe("[I] report/mermaid", () => {
   it("renders a mermaid - render directories", () =>
     same("dependency-cruiser-2019-01-14"));
   it("renders a mermaid - modules in the root don't come in a cluster", () =>
@@ -32,4 +33,9 @@ describe("[I] configs/plugins/mermaid-reporter-plugin module-level reporter", ()
     same("unknown-deps"));
   it("renders a mermaid - renders focussed elements with highlights", () =>
     same("with-focus"));
+});
+
+describe("[I] configs/plugins/mermaid-reporter-plugin", () => {
+  it("still renders mermaid with the mermaid reporter as a 'plugin'", () =>
+    same("dependency-cruiser-2019-01-14", mermaidReporterPlugin));
 });
