@@ -16,6 +16,7 @@ const baseline = require("./baseline");
 const metrics = require("./metrics");
 const { getExternalPluginReporter } = require("./plugins");
 const markdown = require("./markdown");
+const mermaid = require("./mermaid");
 
 const TYPE2REPORTER = {
   anon,
@@ -36,6 +37,7 @@ const TYPE2REPORTER = {
   text,
   baseline,
   metrics,
+  mermaid,
 };
 
 /**

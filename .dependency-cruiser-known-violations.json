@@ -1,11 +1,11 @@
 [
   {
-    "type": "module",
-    "from": "test/extract/ast-extractors/typescript2.8-union-types-ast.json",
-    "to": "test/extract/ast-extractors/typescript2.8-union-types-ast.json",
+    "type": "dependency",
+    "from": "configs/plugins/mermaid-reporter-plugin.js",
+    "to": "src/report/mermaid.js",
     "rule": {
       "severity": "error",
-      "name": "no-orphans"
+      "name": "no-external-to-here"
     }
   },
   {

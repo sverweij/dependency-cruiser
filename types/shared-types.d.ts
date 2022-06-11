@@ -19,6 +19,10 @@ export type OutputType =
   | "anon"
   | "text"
   | "metrics"
+  | "markdown"
+  | "mermaid"
+  // for plugins: string. TODO: research whether it's possible to
+  // tie this down to the `^plugin:[^:]+-reporter-plugin.c?js$` regex
   | string;
 
 export type SeverityType = "error" | "warn" | "info" | "ignore";
