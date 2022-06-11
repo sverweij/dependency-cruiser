@@ -1,5 +1,5 @@
 const Handlebars = require("handlebars/runtime");
-const _get = require("lodash/get");
+const get = require("lodash/get");
 const filterbank = require("../../graph-utl/filterbank");
 const theming = require("./theming");
 const moduleUtl = require("./module-utl");
@@ -53,12 +53,12 @@ const GRANULARITY2REPORTER_OPTIONS = {
 };
 
 function pryReporterOptionsFromResults(pGranularity, pResults) {
-  const lFallbackReporterOptions = _get(
+  const lFallbackReporterOptions = get(
     pResults,
     "summary.optionsUsed.reporterOptions.dot"
   );
 
-  return _get(
+  return get(
     pResults,
     // eslint-disable-next-line security/detect-object-injection
     GRANULARITY2REPORTER_OPTIONS[pGranularity],
@@ -67,11 +67,11 @@ function pryReporterOptionsFromResults(pGranularity, pResults) {
 }
 
 function pryThemeFromResults(pGranularity, pResults) {
-  const lFallbackTheme = _get(
+  const lFallbackTheme = get(
     pResults,
     "summary.optionsUsed.reporterOptions.dot.theme"
   );
-  return _get(
+  return get(
     pryReporterOptionsFromResults(pGranularity, pResults),
     "theme",
     lFallbackTheme
@@ -79,11 +79,11 @@ function pryThemeFromResults(pGranularity, pResults) {
 }
 
 function pryFiltersFromResults(pGranularity, pResults) {
-  const lFallbackFilters = _get(
+  const lFallbackFilters = get(
     pResults,
     "summary.optionsUsed.reporterOptions.dot.filters"
   );
-  return _get(
+  return get(
     pryReporterOptionsFromResults(pGranularity, pResults),
     "filters",
     lFallbackFilters
@@ -98,7 +98,7 @@ function getCollapseFallbackPattern(pGranularity) {
 }
 
 function pryCollapsePatternFromResults(pGranularity, pResults) {
-  return _get(
+  return get(
     pryReporterOptionsFromResults(pGranularity, pResults),
     "collapsePattern",
     getCollapseFallbackPattern(pGranularity)

@@ -1,6 +1,6 @@
 const path = require("path");
-const _get = require("lodash/get");
-const _uniqBy = require("lodash/uniqBy");
+const get = require("lodash/get");
+const uniqBy = require("lodash/uniqBy");
 const { intersects } = require("../utl/array-util");
 const resolve = require("./resolve");
 const extractES6Deps = require("./ast-extractors/extract-es6-deps");
@@ -108,7 +108,7 @@ function extractWithTsc(
 
 /**
  *
- * @param {import('../../types/dependency-cruiser').ICruiseOptions} pCruiseOptions
+ * @param {import('../../types/dependency-cruiser').IStrictCruiseOptions} pCruiseOptions
  * @param {string} pFileName
  * @param {any} pTranspileOptions
  * @returns {import('../../types/cruise-result').IDependency[]}
@@ -208,7 +208,7 @@ function compareDeps(pLeft, pRight) {
  *
  *
  * @param  {string} pFileName path to the file
- * @param  {import("../../types/dependency-cruiser").ICruiseOptions} pCruiseOptions cruise options
+ * @param  {import("../../types/dependency-cruiser").IStrictCruiseOptions} pCruiseOptions cruise options
  * @param {import("../../types/dependency-cruiser").IResolveOptions} pResolveOptions  webpack 'enhanced-resolve' options
  * @param  {import("../../types/dependency-cruiser").ITranspileOptions} pTranspileOptions       an object with tsconfig ('typescript project') options
  *                               ('flattened' so there's no need for file access on any
@@ -222,7 +222,7 @@ module.exports = function getDependencies(
   pTranspileOptions
 ) {
   try {
-    return _uniqBy(
+    return uniqBy(
       extractDependencies(pCruiseOptions, pFileName, pTranspileOptions),
       getDependencyUniqueKey
     )
@@ -230,9 +230,9 @@ module.exports = function getDependencies(
       .map(addResolutionAttributes(pCruiseOptions, pFileName, pResolveOptions))
       .filter(
         (pDep) =>
-          (!_get(pCruiseOptions, "exclude.path") ||
+          (!get(pCruiseOptions, "exclude.path") ||
             !matchesPattern(pDep.resolved, pCruiseOptions.exclude.path)) &&
-          (!_get(pCruiseOptions, "includeOnly.path") ||
+          (!get(pCruiseOptions, "includeOnly.path") ||
             matchesPattern(pDep.resolved, pCruiseOptions.includeOnly.path))
       );
   } catch (pError) {

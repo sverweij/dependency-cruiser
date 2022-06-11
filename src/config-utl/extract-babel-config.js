@@ -4,8 +4,8 @@
 const fs = require("fs");
 const path = require("path");
 const json5 = require("json5");
-const _get = require("lodash/get");
-const _has = require("lodash/has");
+const get = require("lodash/get");
+const has = require("lodash/has");
 const tryRequire = require("semver-try-require");
 const { supportedTranspilers } = require("../../src/meta.js");
 const makeAbsolute = require("./make-absolute");
@@ -48,7 +48,7 @@ function getJSON5Config(pBabelConfigFileName) {
   }
 
   if (pBabelConfigFileName.endsWith("package.json")) {
-    lReturnValue = _get(lReturnValue, "babel", {});
+    lReturnValue = get(lReturnValue, "babel", {});
   }
   return lReturnValue;
 }
@@ -63,7 +63,7 @@ function getConfig(pBabelConfigFileName) {
   };
   const lExtension = path.extname(pBabelConfigFileName);
 
-  if (!_has(lExtensionToParseFunction, lExtension)) {
+  if (!has(lExtensionToParseFunction, lExtension)) {
     throw new Error(
       `The babel config '${pBabelConfigFileName}' is in a format ('${lExtension}')\n` +
         "         dependency-cruiser doesn't support yet.\n"

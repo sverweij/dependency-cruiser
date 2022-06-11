@@ -55,6 +55,7 @@
     "ruleSetUsed": {
       "forbidden": [
         {
+          "scope": "module",
           "from": {},
           "name": "no-type-only",
           "severity": "warn",

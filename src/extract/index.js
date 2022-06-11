@@ -1,4 +1,4 @@
-const _has = require("lodash/has");
+const has = require("lodash/has");
 const bus = require("../utl/bus");
 const busLogLevels = require("../utl/bus-log-levels");
 const getDependencies = require("./get-dependencies");
@@ -131,7 +131,7 @@ function filterExcludedDynamicDependencies(pModule, pExclude) {
     ...pModule,
     dependencies: pModule.dependencies.filter(
       (pDependency) =>
-        !_has(pExclude, "dynamic") || pExclude.dynamic !== pDependency.dynamic
+        !has(pExclude, "dynamic") || pExclude.dynamic !== pDependency.dynamic
     ),
   };
 }
@@ -141,7 +141,7 @@ function filterExcludedDynamicDependencies(pModule, pExclude) {
  * returns an array of all the modules it finds that way.
  *
  * @param {string[]} pFileDirectoryArray
- * @param {import("../../types/dependency-cruiser").ICruiseOptions} pCruiseOptions
+ * @param {import("../../types/dependency-cruiser").IStrictCruiseOptions} pCruiseOptions
  * @param {import("../../types/dependency-cruiser").IResolveOptions} pResolveOptions
  * @param {import("../../types/dependency-cruiser").ITranspileOptions} pTranspileOptions
  * @returns {Partial<import("../../types/dependency-cruiser").IModule[]>}

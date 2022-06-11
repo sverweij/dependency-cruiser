@@ -1,7 +1,7 @@
 const _flattenDeep = require("lodash/flattenDeep");
-const _get = require("lodash/get");
-const _has = require("lodash/has");
-const _uniqWith = require("lodash/uniqWith");
+const get = require("lodash/get");
+const has = require("lodash/has");
+const uniqWith = require("lodash/uniqWith");
 const { findRuleByName } = require("../../graph-utl/rule-set");
 const compare = require("../../graph-utl/compare");
 const isSameViolation = require("./is-same-violation");
@@ -24,8 +24,8 @@ function toDependencyViolationSummary(pRule, pModule, pDependency, pRuleSet) {
   };
 
   if (
-    _has(pDependency, "cycle") &&
-    _get(findRuleByName(pRuleSet, pRule.name), "to.circular")
+    has(pDependency, "cycle") &&
+    get(findRuleByName(pRuleSet, pRule.name), "to.circular")
   ) {
     lReturnValue = {
       ...lReturnValue,
@@ -35,9 +35,9 @@ function toDependencyViolationSummary(pRule, pModule, pDependency, pRuleSet) {
   }
 
   if (
-    _has(pModule, "instability") &&
-    _has(pDependency, "instability") &&
-    _has(findRuleByName(pRuleSet, pRule.name), "to.moreUnstable")
+    has(pModule, "instability") &&
+    has(pDependency, "instability") &&
+    has(findRuleByName(pRuleSet, pRule.name), "to.moreUnstable")
   ) {
     lReturnValue = {
       ...lReturnValue,
@@ -90,7 +90,7 @@ function toModuleViolationSummary(pRule, pModule, pRuleSet) {
   ];
   if (
     pModule.reaches &&
-    _get(findRuleByName(pRuleSet, pRule.name), "to.reachable")
+    get(findRuleByName(pRuleSet, pRule.name), "to.reachable")
   ) {
     lReturnValue = pModule.reaches
       .filter((pReachable) => pReachable.asDefinedInRule === pRule.name)
@@ -135,7 +135,7 @@ function extractModuleViolations(pModules, pRuleSet) {
 }
 
 module.exports = function summarizeModules(pModules, pRuleSet) {
-  return _uniqWith(
+  return uniqWith(
     extractDependencyViolations(pModules, pRuleSet)
       .concat(extractModuleViolations(pModules, pRuleSet))
       .sort(compare.violations),

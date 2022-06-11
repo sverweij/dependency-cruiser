@@ -1,5 +1,5 @@
-const _get = require("lodash/get");
-const _has = require("lodash/has");
+const get = require("lodash/get");
+const has = require("lodash/has");
 const filterbank = require("../graph-utl/filterbank");
 const summarize = require("../enrich/summarize");
 const consolidateToPattern = require("../graph-utl/consolidate-to-pattern");
@@ -16,7 +16,7 @@ const report = require("../report");
 function reSummarizeResults(pResult, pFormatOptions) {
   let lModules = filterbank.applyFilters(pResult.modules, pFormatOptions);
 
-  if (_has(pFormatOptions, "collapse")) {
+  if (has(pFormatOptions, "collapse")) {
     lModules = consolidateToPattern(lModules, pFormatOptions.collapse)
       .sort(compare.modules)
       .map(stripSelfTransitions);
@@ -47,7 +47,7 @@ function reSummarizeResults(pResult, pFormatOptions) {
  */
 module.exports = function reportWrap(pResult, pFormatOptions) {
   const lReportFunction = report.getReporter(pFormatOptions.outputType);
-  const lReportOptions = _get(
+  const lReportOptions = get(
     pResult,
     `summary.optionsUsed.reporterOptions.${pFormatOptions.outputType}`,
     {}
@@ -57,7 +57,7 @@ module.exports = function reportWrap(pResult, pFormatOptions) {
     reSummarizeResults(pResult, pFormatOptions),
     // passing format options here so reporters that read collapse patterns
     // from the result take the one passed in the format options instead
-    _has(pFormatOptions, "collapse")
+    has(pFormatOptions, "collapse")
       ? { ...lReportOptions, collapsePattern: pFormatOptions.collapse }
       : lReportOptions
   );

@@ -1,6 +1,6 @@
 const fs = require("fs");
-const _get = require("lodash/get");
-const _has = require("lodash/has");
+const get = require("lodash/get");
+const has = require("lodash/has");
 const _omit = require("lodash/omit");
 const enhancedResolve = require("enhanced-resolve");
 const transpileMeta = require("../../extract/transpile/meta");
@@ -65,7 +65,7 @@ function pushPlugin(pPlugins, pPluginToPush) {
 }
 
 function isTsConfigPathsEligible(pTSConfig) {
-  return _has(pTSConfig, "options.baseUrl");
+  return has(pTSConfig, "options.baseUrl");
 }
 
 function compileResolveOptions(
@@ -110,7 +110,7 @@ function compileResolveOptions(
     ..._omit(pResolveOptionsFromDCConfig, "cachedInputFileSystem"),
     ...pResolveOptions,
     ...getNonOverridableResolveOptions(
-      _get(
+      get(
         pResolveOptionsFromDCConfig,
         "cachedInputFileSystem.cacheDuration",
         DEFAULT_CACHE_DURATION
@@ -131,7 +131,7 @@ module.exports = function normalizeResolveOptions(
   pOptions,
   pTSConfig
 ) {
-  const lRuleSet = _get(pOptions, "ruleSet", {});
+  const lRuleSet = get(pOptions, "ruleSet", {});
   return compileResolveOptions(
     {
       /*
@@ -140,20 +140,20 @@ module.exports = function normalizeResolveOptions(
         symlink === !preserveSymlinks - but using it that way
         breaks backwards compatibility
       */
-      symlinks: _get(pOptions, "preserveSymlinks", null),
-      tsConfig: _get(pOptions, "ruleSet.options.tsConfig.fileName", null),
+      symlinks: get(pOptions, "preserveSymlinks", null),
+      tsConfig: get(pOptions, "ruleSet.options.tsConfig.fileName", null),
 
       /* squirel the externalModuleResolutionStrategy and combinedDependencies
          thing into the resolve options
          - they're not for enhanced resolve, but they are for what we consider
          resolve options ...
        */
-      combinedDependencies: _get(pOptions, "combinedDependencies", false),
+      combinedDependencies: get(pOptions, "combinedDependencies", false),
       resolveLicenses: ruleSetHasLicenseRule(lRuleSet),
       resolveDeprecations: ruleSetHasDeprecationRule(lRuleSet),
       ...(pResolveOptions || {}),
     },
     pTSConfig || {},
-    _get(pOptions, "enhancedResolveOptions", {})
+    get(pOptions, "enhancedResolveOptions", {})
   );
 };

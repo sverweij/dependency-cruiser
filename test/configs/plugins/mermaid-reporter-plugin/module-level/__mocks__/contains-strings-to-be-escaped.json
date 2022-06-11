@@ -1,0 +1,59 @@
+{
+  "modules": [
+    {
+      "source": "pages/posts/[id].jsx",
+      "valid": true,
+      "dependencies": [
+        {
+          "module": "~/src/components/Post",
+          "moduleSystem": "es6",
+          "dynamic": false,
+          "exoticallyRequired": false,
+          "resolved": "src/components/Post/index.tsx",
+          "coreModule": false,
+          "followable": true,
+          "couldNotResolve": false,
+          "dependencyTypes": [
+            "aliased"
+          ],
+          "matchesDoNotFollow": false,
+          "circular": false,
+          "valid": true
+        }
+      ]
+    },
+    {
+      "source": "src/components/Post/index.tsx",
+      "valid": true,
+      "followable": false,
+      "coreModule": false,
+      "couldNotResolve": true,
+      "dependencies": []
+    },
+    {
+      "source": "src/components/Post/foo--bar.ts",
+      "valid": true,
+      "followable": false,
+      "coreModule": false,
+      "couldNotResolve": true,
+      "dependencies": []
+    },
+    {
+      "source": "~/baz.ts",
+      "valid": true,
+      "followable": false,
+      "coreModule": false,
+      "couldNotResolve": true,
+      "dependencies": []
+    }
+  ],
+  "summary": {
+    "violations": [],
+    "err": 481,
+    "warn": 30,
+    "info": 0,
+    "optionsUsed": {
+      "prefix": "STUFFCOMINGBEFORE"
+    }
+  }
+}

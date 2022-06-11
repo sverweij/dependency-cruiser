@@ -1,6 +1,7 @@
 import { EOL } from "node:os";
 import { expect } from "chai";
 import metrics from "../../../src/report/metrics.js";
+import cruiseResultWithMetricsForModulesAndFolders from "./__mocks/cruise-result-with-metrics-for-modules-and-folders.mjs";
 
 describe("[I] report/metrics", () => {
   it("errors when the input doesn't contain a 'folders' section", () => {
@@ -146,5 +147,16 @@ describe("[I] report/metrics", () => {
     expect(lResult.output).to.not.contain(
       `src/mies.js     1     1     1  0.5 ${EOL}src/aap.js      1     1     3  0.25${EOL}src/noot`
     );
+  });
+
+  it("ignores folders for which we can't calculate metrics (e.g. because they were in donotfollow)", () => {
+    const lResult = metrics(cruiseResultWithMetricsForModulesAndFolders, {
+      hideModules: true,
+    });
+
+    expect(lResult.exitCode).to.equal(0);
+    expect(lResult.output).to.contain("src");
+    expect(lResult.output).to.contain("src/report");
+    expect(lResult.output).to.not.contain("node_modules");
   });
 });

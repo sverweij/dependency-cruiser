@@ -51,6 +51,7 @@ function futureCruise(
   pTranspileOptions
 ) {
   bus.emit("progress", "parsing options", c(1));
+  /** @type {import("../../types/strict-options").IStrictCruiseOptions} */
   let lCruiseOptions = normalizeCruiseOptions(
     validateCruiseOptions(pCruiseOptions)
   );

@@ -1,6 +1,6 @@
 const path = require("path");
 const fs = require("fs");
-const _memoize = require("lodash/memoize");
+const memoize = require("lodash/memoize");
 const mergePackages = require("./merge-manifests");
 
 /**
@@ -16,7 +16,7 @@ const mergePackages = require("./merge-manifests");
  *               object or null if the package.json could not be
  *               found or is invalid
  */
-const getSingleManifest = _memoize((pFileDirectory) => {
+const getSingleManifest = memoize((pFileDirectory) => {
   let lReturnValue = null;
 
   try {
@@ -84,7 +84,7 @@ function getIntermediatePaths(pFileDirectory, pBaseDirectory) {
 // to the _.memoize. This is deliberate - the pBaseDirectory will typically
 // be the same for each call in a typical cruise, so the lodash'
 // default memoize resolver (the first param) will suffice.
-const getCombinedManifests = _memoize((pFileDirectory, pBaseDirectory) => {
+const getCombinedManifests = memoize((pFileDirectory, pBaseDirectory) => {
   // The way this is called, this shouldn't happen. If it is, there's
   // something gone terribly awry
   if (

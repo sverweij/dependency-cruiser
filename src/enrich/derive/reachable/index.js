@@ -1,19 +1,17 @@
 /* eslint-disable security/detect-object-injection, no-inline-comments */
 
-const _clone = require("lodash/clone");
-const _get = require("lodash/get");
-const _has = require("lodash/has");
+const clone = require("lodash/clone");
+const get = require("lodash/get");
+const has = require("lodash/has");
 const matchers = require("../../../validate/matchers");
 const { extractGroups } = require("../../../utl/regex-util");
 const getPath = require("./get-path");
 
 function getReachableRules(pRuleSet) {
-  return _get(pRuleSet, "forbidden", [])
-    .filter((pRule) => _has(pRule.to, "reachable"))
+  return get(pRuleSet, "forbidden", [])
+    .filter((pRule) => has(pRule.to, "reachable"))
     .concat(
-      _get(pRuleSet, "allowed", []).filter((pRule) =>
-        _has(pRule.to, "reachable")
-      )
+      get(pRuleSet, "allowed", []).filter((pRule) => has(pRule.to, "reachable"))
     );
 }
 
@@ -87,8 +85,8 @@ function hasCapturingGroups(pRule) {
   const lCapturingGroupPlaceholderRe = "\\$[0-9]+";
 
   return Boolean(
-    _get(pRule, "to.path", "").match(lCapturingGroupPlaceholderRe) ||
-      _get(pRule, "to.pathNot", "").match(lCapturingGroupPlaceholderRe)
+    get(pRule, "to.path", "").match(lCapturingGroupPlaceholderRe) ||
+      get(pRule, "to.pathNot", "").match(lCapturingGroupPlaceholderRe)
   );
 }
 function shouldAddReachable(pRule, pModuleTo, pGraph) {
@@ -156,7 +154,7 @@ function addReachableToModule(pModule, pGraph, pReachableRule) {
 
 function addReachabilityToGraph(pGraph, pReachableRule) {
   return pGraph.map((pModule) => {
-    let lClonedModule = _clone(pModule);
+    let lClonedModule = clone(pModule);
 
     if (shouldAddReaches(pReachableRule, lClonedModule)) {
       lClonedModule = addReachesToModule(lClonedModule, pGraph, pReachableRule);
@@ -177,6 +175,6 @@ module.exports = (pGraph, pRuleSet) => {
 
   return lReachableRules.reduce(
     (pReturnGraph, pRule) => addReachabilityToGraph(pReturnGraph, pRule),
-    _clone(pGraph)
+    clone(pGraph)
   );
 };

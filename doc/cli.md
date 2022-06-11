@@ -209,6 +209,20 @@ dependency-cruise --validate --output-type err-html -f dependency-report.html sr
 
 <img width="722" alt="screen shot of an err-html report - the real one is accessible" src="assets/sample-err-html-output.png">
 
+#### markdown
+
+> This reporter is _experimental_. It's currently as configurable as it is
+> to test out how it works in various contexts a.o. GitHub actions action summary's
+> and possibly in a custom action (to show output in a PR, for instance)
+>
+> At the moment of writing (2022-06-09) it doesn't support links or show
+> a complete list of all run validations like e.g. the `err-html` reporter does.
+
+Approximately the same content as the `err-html` reporter, but instead in markdown
+format. The markdown reporter is fairly configurable - see the
+[markdown](./options-reference.md#markdown) section in the options reference
+for details.
+
 #### html
 
 Write it to html with a dependency matrix instead:
@@ -1037,6 +1051,16 @@ depcruise-fmt -T text --focus "^src/main/spelunkme\\.ts$" cruise_result.json
 
 Summarize or collapse to either a folder depth or (if you're feeling fancy) a regular
 expression. It works the same as the regular depcruise command's [`--collapse`](#--collapse-summarize-to-folder-depth-or-pattern) option.
+
+### prefix
+
+To enable different prefixes on the same depcruise run, you can uses the `--prefix`
+option to set (or override) the prefix used in e.g. the `err-html` and the
+`dot`-like reporters. It works the same as depcruise's
+[option of the same name](https://github.com/sverweij/dependency-cruiser/blob/develop/doc/cli.md#--prefix-prefixing-links)
+
+See [prefix](./options-reference.md#prefix-prefix-links-in-reports) in the options
+reference for details.
 
 ### getting non-zero exit codes
 

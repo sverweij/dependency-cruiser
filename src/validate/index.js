@@ -1,4 +1,4 @@
-const _has = require("lodash/has");
+const has = require("lodash/has");
 const matchModuleRule = require("./match-module-rule");
 const matchDependencyRule = require("./match-dependency-rule");
 const violatesRequiredRule = require("./violates-required-rule");
@@ -50,7 +50,7 @@ function validateAgainstForbiddenRules(pRuleSet, pMatchModule, pFrom, pTo) {
 function validateAgainstRequiredRules(pRuleSet, pModule, pMatchModule) {
   let lFoundRequiredRuleViolations = [];
 
-  if (_has(pRuleSet, "required")) {
+  if (has(pRuleSet, "required")) {
     lFoundRequiredRuleViolations = pRuleSet.required
       .filter(pMatchModule.isInteresting)
       .filter((pRule) => violatesRequiredRule(pRule, pModule))

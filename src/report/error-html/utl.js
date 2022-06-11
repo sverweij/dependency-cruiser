@@ -1,18 +1,18 @@
-const _get = require("lodash/get");
-const _has = require("lodash/has");
+const get = require("lodash/get");
+const has = require("lodash/has");
 const { version } = require("../../../src/meta.js");
 const { formatViolation, formatInstability } = require("../utl/index.js");
 
 function getFormattedAllowedRule(pRuleSetUsed) {
-  const lAllowed = _get(pRuleSetUsed, "allowed", []);
-  const lCommentedRule = lAllowed.find((pRule) => _has(pRule, "comment"));
+  const lAllowed = get(pRuleSetUsed, "allowed", []);
+  const lCommentedRule = lAllowed.find((pRule) => has(pRule, "comment"));
   const lComment = lCommentedRule ? lCommentedRule.comment : "-";
 
   return lAllowed.length > 0
     ? {
         name: "not-in-allowed",
         comment: lComment,
-        severity: _get(pRuleSetUsed, "allowedSeverity", "warn"),
+        severity: get(pRuleSetUsed, "allowedSeverity", "warn"),
       }
     : [];
 }
@@ -93,7 +93,52 @@ function formatSummaryForReport(pSummary) {
   };
 }
 
+function aggregateCountsPerRule(pViolations) {
+  return pViolations.reduce((pAll, pCurrentViolation) => {
+    if (pAll[pCurrentViolation.rule.name]) {
+      pAll[pCurrentViolation.rule.name] =
+        pCurrentViolation.rule.severity === "ignore"
+          ? {
+              count: pAll[pCurrentViolation.rule.name].count,
+              ignoredCount: pAll[pCurrentViolation.rule.name].ignoredCount + 1,
+            }
+          : {
+              count: pAll[pCurrentViolation.rule.name].count + 1,
+              ignoredCount: pAll[pCurrentViolation.rule.name].ignoredCount,
+            };
+    } else {
+      pAll[pCurrentViolation.rule.name] =
+        pCurrentViolation.rule.severity === "ignore"
+          ? {
+              count: 0,
+              ignoredCount: 1,
+            }
+          : {
+              count: 1,
+              ignoredCount: 0,
+            };
+    }
+    return pAll;
+  }, {});
+}
+
+function aggregateViolations(pViolations, pRuleSetUsed) {
+  const lViolationCounts = aggregateCountsPerRule(pViolations);
+
+  return get(pRuleSetUsed, "forbidden", [])
+    .concat(get(pRuleSetUsed, "required", []))
+    .concat(getFormattedAllowedRule(pRuleSetUsed))
+    .map((pRule) => mergeCountsIntoRule(pRule, lViolationCounts))
+    .sort(
+      (pFirst, pSecond) =>
+        Math.sign(pSecond.count - pFirst.count) ||
+        Math.sign(pSecond.ignoredCount - pFirst.ignoredCount) ||
+        pFirst.name.localeCompare(pSecond.name)
+    );
+}
+
 module.exports = {
+  aggregateViolations,
   getFormattedAllowedRule,
   mergeCountsIntoRule,
   formatSummaryForReport,

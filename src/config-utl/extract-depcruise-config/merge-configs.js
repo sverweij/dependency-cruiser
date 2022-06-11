@@ -1,7 +1,7 @@
 const util = require("util");
-const _get = require("lodash/get");
-const _uniqBy = require("lodash/uniqBy");
-const _uniqWith = require("lodash/uniqWith");
+const get = require("lodash/get");
+const uniqBy = require("lodash/uniqBy");
+const uniqWith = require("lodash/uniqWith");
 
 function extendNamedRule(pExtendedRule, pForbiddenArrayBase) {
   return pForbiddenArrayBase
@@ -31,7 +31,7 @@ function extendNamedRule(pExtendedRule, pForbiddenArrayBase) {
  */
 function mergeRules(pRuleArrayExtended, pRuleArrayBase) {
   // merge anonymous on 100% equality
-  let lAnonymousRules = _uniqWith(
+  let lAnonymousRules = uniqWith(
     pRuleArrayExtended.concat(pRuleArrayBase).filter((pRule) => !pRule.name),
     util.isDeepStrictEqual
   );
@@ -41,7 +41,7 @@ function mergeRules(pRuleArrayExtended, pRuleArrayBase) {
     .map((pNamedRule) => extendNamedRule(pNamedRule, pRuleArrayBase));
 
   // merge named rules based on unique name
-  lNamedRules = _uniqBy(
+  lNamedRules = uniqBy(
     // ordered extended => base because the uniqBy picks the
     // first it encounters and we want the ones from the
     // extended in case of a conflict
@@ -66,7 +66,7 @@ function mergeRules(pRuleArrayExtended, pRuleArrayBase) {
  * @return {Array} - the merged array
  */
 function mergeAllowedRules(pAllowedArrayExtended, pAllowedArrayBase) {
-  return _uniqWith(
+  return uniqWith(
     pAllowedArrayExtended.concat(pAllowedArrayBase),
     util.isDeepStrictEqual
   );
@@ -87,10 +87,10 @@ function mergeOptions(pOptionsExtended, pOptionsBase) {
  * @returns {string} - a string from the SeverityType value set
  */
 function mergeAllowedSeverities(pConfigExtended, pConfigBase) {
-  return _get(
+  return get(
     pConfigExtended,
     "allowedSeverity",
-    _get(pConfigBase, "allowedSeverity", "warn")
+    get(pConfigBase, "allowedSeverity", "warn")
   );
 }
 
@@ -110,16 +110,16 @@ function mergeAllowedSeverities(pConfigExtended, pConfigBase) {
  */
 module.exports = (pConfigExtended, pConfigBase) => {
   const lForbidden = mergeRules(
-    _get(pConfigExtended, "forbidden", []),
-    _get(pConfigBase, "forbidden", [])
+    get(pConfigExtended, "forbidden", []),
+    get(pConfigBase, "forbidden", [])
   );
   const lRequired = mergeRules(
-    _get(pConfigExtended, "required", []),
-    _get(pConfigBase, "required", [])
+    get(pConfigExtended, "required", []),
+    get(pConfigBase, "required", [])
   );
   const lAllowed = mergeAllowedRules(
-    _get(pConfigExtended, "allowed", []),
-    _get(pConfigBase, "allowed", [])
+    get(pConfigExtended, "allowed", []),
+    get(pConfigBase, "allowed", [])
   );
 
   return {
@@ -132,8 +132,8 @@ module.exports = (pConfigExtended, pConfigBase) => {
         }
       : {}),
     options: mergeOptions(
-      _get(pConfigExtended, "options", {}),
-      _get(pConfigBase, "options", {})
+      get(pConfigExtended, "options", {}),
+      get(pConfigBase, "options", {})
     ),
   };
 };

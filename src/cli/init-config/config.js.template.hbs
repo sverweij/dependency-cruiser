@@ -240,15 +240,7 @@ module.exports = {
        for a complete list
     */
     doNotFollow: {
-      path: 'node_modules',
-      dependencyTypes: [
-        'npm',
-        'npm-dev',
-        'npm-optional',
-        'npm-peer',
-        'npm-bundled',
-        'npm-no-pkg'
-      ]
+      path: 'node_modules'
     },
 
     /* conditions specifying which dependencies to exclude
@@ -320,9 +312,15 @@ module.exports = {
       fileName: '{{tsConfig}}'
     },
     {{^}}
+      {{#if useJsConfig}}
+    tsConfig: {
+      fileName: '{{jsConfig}}'
+    },
+      {{^}}
     // tsConfig: {
     //  fileName: './tsconfig.json'
     // },
+      {{/if}}
     {{/if}}
 
     /* Webpack configuration to use to get resolve options from.

@@ -1,19 +1,19 @@
-const _clone = require("lodash/clone");
-const _get = require("lodash/get");
+const clone = require("lodash/clone");
+const get = require("lodash/get");
 const _reject = require("lodash/reject");
-const _uniqBy = require("lodash/uniqBy");
+const uniqBy = require("lodash/uniqBy");
 const compare = require("./compare");
 
 function mergeModule(pLeftModule, pRightModule) {
   return {
     ...pLeftModule,
     ...pRightModule,
-    dependencies: _uniqBy(
+    dependencies: uniqBy(
       pLeftModule.dependencies.concat(pRightModule.dependencies),
       (pDependency) => pDependency.resolved
     ),
     rules: pLeftModule.rules
-      .concat(_get(pRightModule, "rules", []))
+      .concat(get(pRightModule, "rules", []))
       .sort(compare.rules),
     valid: pLeftModule.valid && pRightModule.valid,
     consolidated:
@@ -36,7 +36,7 @@ function mergeModules(pSourceString, pModules) {
 }
 
 module.exports = (pModules) => {
-  let lModules = _clone(pModules);
+  let lModules = clone(pModules);
   let lReturnValue = [];
 
   while (lModules.length > 0) {

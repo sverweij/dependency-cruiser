@@ -113,10 +113,6 @@ export interface IRequiredRuleType extends IBaseRuleType {
   to: IRequiredToRestrictionType;
 }
 
-export type IAllowedRuleType =
-  | IRegularAllowedRuleType
-  | IReachabilityAllowedRuleType;
-
 export interface IRegularAllowedRuleType {
   /**
    * You can use this field to document why the rule is there.
@@ -133,6 +129,10 @@ export interface IRegularAllowedRuleType {
    */
   to: IToRestriction;
 }
+
+export type IAllowedRuleType =
+  | IRegularAllowedRuleType
+  | IReachabilityAllowedRuleType;
 
 export type IAnyRuleType =
   | IForbiddenRuleType

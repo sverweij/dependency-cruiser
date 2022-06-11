@@ -1,4 +1,4 @@
-const _has = require("lodash/has");
+const has = require("lodash/has");
 const { version } = require("../../../src/meta.js");
 const {
   getSourceFolderCandidates,
@@ -40,7 +40,7 @@ module.exports = function normalizeInitOptions(pInitOptions) {
   if (lReturnValue.configType === "preset" && !lReturnValue.preset) {
     lReturnValue.preset = "dependency-cruiser/configs/recommended-warn-only";
   }
-  if (!_has(lReturnValue, "hasTestsOutsideSource")) {
+  if (!has(lReturnValue, "hasTestsOutsideSource")) {
     lReturnValue.hasTestsOutsideSource =
       !pInitOptions.isMonoRepo &&
       !hasTestsWithinSource(

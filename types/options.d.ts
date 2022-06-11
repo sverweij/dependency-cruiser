@@ -83,7 +83,7 @@ export interface ICruiseOptions {
    * and the collapse options offer better, more reliable and more
    * understandable results.
    */
-  maxDepth?: number;
+  maxDepth?: number | string;
   /**
    * an array of module systems to use for following dependencies;
    * defaults to ["es6", "cjs", "amd"]
@@ -276,4 +276,10 @@ export interface IFormatOptions {
    * out the function will return a javascript object as dependencies
    */
   outputType?: OutputType;
+  /**
+   * a string to insert before links (in dot/ svg output) so with
+   * cruising local dependencies it is possible to point to sources
+   * elsewhere (e.g. in an online repository)
+   */
+  prefix?: string;
 }

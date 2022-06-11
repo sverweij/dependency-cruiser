@@ -1,5 +1,5 @@
 const path = require("path");
-const _has = require("lodash/has");
+const has = require("lodash/has");
 const resolve = require("../../extract/resolve/resolve");
 const normalizeResolveOptions = require("../../main/resolve-options/normalize");
 const readConfig = require("./read-config");
@@ -78,7 +78,7 @@ function extractDepcruiseConfig(
 
   let lReturnValue = readConfig(lResolvedFileName, pBaseDirectory);
 
-  if (_has(lReturnValue, "extends")) {
+  if (has(lReturnValue, "extends")) {
     lReturnValue = processExtends(
       lReturnValue,
       pAlreadyVisited,

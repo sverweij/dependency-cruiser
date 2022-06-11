@@ -1,0 +1,419 @@
+flowchart LR
+
+subgraph bin["bin"]
+  bin_dependency_cruise["dependency-cruise"]
+end
+package_json["package.json"]
+subgraph node_modules["node_modules"]
+  subgraph node_modules_commander["commander"]
+    node_modules_commander_index_js["index.js"]
+  end
+  subgraph node_modules_semver["semver"]
+    node_modules_semver_semver_js["semver.js"]
+  end
+  subgraph node_modules_glob["glob"]
+    node_modules_glob_glob_js["glob.js"]
+  end
+  subgraph node_modules_lodash["lodash"]
+    node_modules_lodash_get_js["get.js"]
+    node_modules_lodash_lodash_js["lodash.js"]
+    node_modules_lodash_memoize_js["memoize.js"]
+    node_modules_lodash_clone_js["clone.js"]
+    node_modules_lodash_uniq_js["uniq.js"]
+    node_modules_lodash_flattenDeep_js["flattenDeep.js"]
+    node_modules_lodash_uniqBy_js["uniqBy.js"]
+    node_modules_lodash_set_js["set.js"]
+    node_modules_lodash_isEqual_js["isEqual.js"]
+    node_modules_lodash_uniqWith_js["uniqWith.js"]
+  end
+  subgraph node_modules_acorn_walk["acorn-walk"]
+    subgraph node_modules_acorn_walk_dist["dist"]
+      node_modules_acorn_walk_dist_walk_js["walk.js"]
+    end
+  end
+  subgraph node_modules_semver_try_require["semver-try-require"]
+    subgraph node_modules_semver_try_require_src["src"]
+      node_modules_semver_try_require_src_index_js["index.js"]
+    end
+  end
+  subgraph node_modules_acorn["acorn"]
+    subgraph node_modules_acorn_dist["dist"]
+      node_modules_acorn_dist_acorn_js["acorn.js"]
+    end
+  end
+  subgraph node_modules_acorn_loose["acorn-loose"]
+    subgraph node_modules_acorn_loose_dist["dist"]
+      node_modules_acorn_loose_dist_acorn_loose_js["acorn-loose.js"]
+    end
+  end
+  subgraph node_modules_resolve["resolve"]
+    node_modules_resolve_index_js["index.js"]
+  end
+  subgraph node_modules_enhanced_resolve["enhanced-resolve"]
+    subgraph node_modules_enhanced_resolve_lib["lib"]
+      node_modules_enhanced_resolve_lib_node_js["node.js"]
+    end
+  end
+  subgraph node_modules_awesome_typescript_loader["awesome-typescript-loader"]
+    subgraph node_modules_awesome_typescript_loader_dist["dist"]
+      node_modules_awesome_typescript_loader_dist_entry_js["entry.js"]
+    end
+  end
+  subgraph node_modules_handlebars["handlebars"]
+    node_modules_handlebars_runtime_js["runtime.js"]
+  end
+  subgraph node_modules_chalk["chalk"]
+    node_modules_chalk_index_js["index.js"]
+  end
+  subgraph node_modules_figures["figures"]
+    node_modules_figures_index_js["index.js"]
+  end
+  subgraph node_modules_safe_regex["safe-regex"]
+    node_modules_safe_regex_index_js["index.js"]
+  end
+  subgraph node_modules_ajv["ajv"]
+    subgraph node_modules_ajv_lib["lib"]
+      node_modules_ajv_lib_ajv_js["ajv.js"]
+    end
+  end
+  subgraph node_modules_inquirer["inquirer"]
+    subgraph node_modules_inquirer_lib["lib"]
+      node_modules_inquirer_lib_inquirer_js["inquirer.js"]
+    end
+  end
+  subgraph node_modules_strip_json_comments["strip-json-comments"]
+    node_modules_strip_json_comments_index_js["index.js"]
+  end
+end
+subgraph src["src"]
+  subgraph src_cli["cli"]
+    src_cli_index_js["index.js"]
+    src_cli_formatMetaInfo_js["formatMetaInfo.js"]
+    src_cli_getResolveConfig_js["getResolveConfig.js"]
+    subgraph src_cli_utl["utl"]
+      src_cli_utl_makeAbsolute_js["makeAbsolute.js"]
+      src_cli_utl_io_js["io.js"]
+      src_cli_utl_validateFileExistence_js["validateFileExistence.js"]
+    end
+    subgraph src_cli_initConfig["initConfig"]
+      src_cli_initConfig_index_js["index.js"]
+      src_cli_initConfig_createConfigFile_js["createConfigFile.js"]
+      src_cli_initConfig_config_js_template_js["config.js.template.js"]
+      src_cli_initConfig_config_json_template_js["config.json.template.js"]
+      src_cli_initConfig_getUserInput_js["getUserInput.js"]
+    end
+    src_cli_normalizeOptions_js["normalizeOptions.js"]
+    src_cli_defaults_json["defaults.json"]
+    subgraph src_cli_compileConfig["compileConfig"]
+      src_cli_compileConfig_index_js["index.js"]
+      src_cli_compileConfig_mergeConfigs_js["mergeConfigs.js"]
+      src_cli_compileConfig_readConfig_js["readConfig.js"]
+    end
+    src_cli_parseTSConfig_js["parseTSConfig.js"]
+  end
+  subgraph src_main["main"]
+    src_main_index_js["index.js"]
+    subgraph src_main_options["options"]
+      src_main_options_normalize_js["normalize.js"]
+      src_main_options_defaults_json["defaults.json"]
+      src_main_options_validate_js["validate.js"]
+    end
+    subgraph src_main_ruleSet["ruleSet"]
+      src_main_ruleSet_normalize_js["normalize.js"]
+      src_main_ruleSet_validate_js["validate.js"]
+      src_main_ruleSet_jsonschema_json["jsonschema.json"]
+    end
+  end
+  subgraph src_report["report"]
+    subgraph src_report_dot["dot"]
+      src_report_dot_richModuleColorScheme_json["richModuleColorScheme.json"]
+      src_report_dot_coloring_js["coloring.js"]
+      src_report_dot_defaultModuleColorScheme_json["defaultModuleColorScheme.json"]
+      src_report_dot_index_js["index.js"]
+      src_report_dot_dot_template_js["dot.template.js"]
+    end
+    subgraph src_report_csv["csv"]
+      src_report_csv_index_js["index.js"]
+      src_report_csv_csv_template_js["csv.template.js"]
+    end
+    src_report_dependencyToIncidenceTransformer_js["dependencyToIncidenceTransformer.js"]
+    subgraph src_report_ddot["ddot"]
+      src_report_ddot_index_js["index.js"]
+      src_report_ddot_ddot_template_js["ddot.template.js"]
+    end
+    src_report_err_js["err.js"]
+    subgraph src_report_html["html"]
+      src_report_html_index_js["index.js"]
+      src_report_html_html_template_js["html.template.js"]
+    end
+    src_report_json_js["json.js"]
+  end
+  subgraph src_extract["extract"]
+    src_extract_index_js["index.js"]
+    src_extract_addValidations_js["addValidations.js"]
+    subgraph src_extract_derive["derive"]
+      subgraph src_extract_derive_circular["circular"]
+        src_extract_derive_circular_index_js["index.js"]
+        src_extract_derive_circular_dependencyEndsUpAtFrom_js["dependencyEndsUpAtFrom.js"]
+      end
+      subgraph src_extract_derive_orphan["orphan"]
+        src_extract_derive_orphan_index_js["index.js"]
+        src_extract_derive_orphan_isOrphan_js["isOrphan.js"]
+      end
+    end
+    src_extract_extract_js["extract.js"]
+    subgraph src_extract_ast_extractors["ast-extractors"]
+      src_extract_ast_extractors_extract_AMD_deps_js["extract-AMD-deps.js"]
+      src_extract_ast_extractors_extract_commonJS_deps_js["extract-commonJS-deps.js"]
+      src_extract_ast_extractors_extract_ES6_deps_js["extract-ES6-deps.js"]
+      src_extract_ast_extractors_extract_typescript_deps_js["extract-typescript-deps.js"]
+    end
+    src_extract_ignore_js["ignore.js"]
+    subgraph src_extract_parse["parse"]
+      src_extract_parse_toJavascriptAST_js["toJavascriptAST.js"]
+      src_extract_parse_toTypescriptAST_js["toTypescriptAST.js"]
+    end
+    subgraph src_extract_transpile["transpile"]
+      src_extract_transpile_index_js["index.js"]
+      src_extract_transpile_meta_js["meta.js"]
+      src_extract_transpile_coffeeWrap_js["coffeeWrap.js"]
+      src_extract_transpile_javaScriptWrap_js["javaScriptWrap.js"]
+      src_extract_transpile_liveScriptWrap_js["liveScriptWrap.js"]
+      src_extract_transpile_typeScriptWrap_js["typeScriptWrap.js"]
+    end
+    subgraph src_extract_utl["utl"]
+      src_extract_utl_getExtension_js["getExtension.js"]
+      src_extract_utl_pathToPosix_js["pathToPosix.js"]
+    end
+    subgraph src_extract_resolve["resolve"]
+      src_extract_resolve_index_js["index.js"]
+      src_extract_resolve_resolve_AMD_js["resolve-AMD.js"]
+      src_extract_resolve_determineDependencyTypes_js["determineDependencyTypes.js"]
+      src_extract_resolve_localNpmHelpers_js["localNpmHelpers.js"]
+      src_extract_resolve_resolve_js["resolve.js"]
+      src_extract_resolve_compileResolveOptions_js["compileResolveOptions.js"]
+      subgraph src_extract_resolve_readPackageDeps["readPackageDeps"]
+        src_extract_resolve_readPackageDeps_index_js["index.js"]
+        src_extract_resolve_readPackageDeps_mergePackages_js["mergePackages.js"]
+      end
+      src_extract_resolve_resolve_helpers_js["resolve-helpers.js"]
+      src_extract_resolve_resolve_commonJS_js["resolve-commonJS.js"]
+      src_extract_resolve_isFollowable_js["isFollowable.js"]
+    end
+    src_extract_gatherInitialSources_js["gatherInitialSources.js"]
+    src_extract_summarize_js["summarize.js"]
+  end
+  subgraph src_validate["validate"]
+    src_validate_index_js["index.js"]
+    src_validate_matchDependencyRule_js["matchDependencyRule.js"]
+    src_validate_isModuleOnlyRule_js["isModuleOnlyRule.js"]
+    src_validate_matchModuleRule_js["matchModuleRule.js"]
+  end
+end
+path["path"]
+fs["fs"]
+bin_dependency_cruise --> package_json
+bin_dependency_cruise --> src_cli_index_js
+bin_dependency_cruise --> node_modules_commander_index_js
+bin_dependency_cruise --> node_modules_semver_semver_js
+src_cli_index_js --> src_main_index_js
+src_cli_index_js --> src_cli_formatMetaInfo_js
+src_cli_index_js --> src_cli_getResolveConfig_js
+src_cli_index_js --> src_cli_initConfig_index_js
+src_cli_index_js --> src_cli_normalizeOptions_js
+src_cli_index_js --> src_cli_parseTSConfig_js
+src_cli_index_js --> src_cli_utl_io_js
+src_cli_index_js --> src_cli_utl_validateFileExistence_js
+src_cli_index_js --> node_modules_glob_glob_js
+src_cli_index_js --> node_modules_lodash_get_js
+src_main_index_js --> src_extract_index_js
+src_main_index_js --> src_extract_transpile_meta_js
+src_main_index_js --> src_report_csv_index_js
+src_main_index_js --> src_report_ddot_index_js
+src_main_index_js --> src_report_dot_index_js
+src_main_index_js --> src_report_dot_richModuleColorScheme_json
+src_main_index_js --> src_report_err_js
+src_main_index_js --> src_report_html_index_js
+src_main_index_js --> src_report_json_js
+src_main_index_js --> src_main_options_normalize_js
+src_main_index_js --> src_main_options_validate_js
+src_main_index_js --> src_main_ruleSet_normalize_js
+src_main_index_js --> src_main_ruleSet_validate_js
+src_extract_index_js --> src_extract_addValidations_js
+src_extract_index_js --> src_extract_derive_circular_index_js
+src_extract_index_js --> src_extract_derive_orphan_index_js
+src_extract_index_js --> src_extract_extract_js
+src_extract_index_js --> src_extract_gatherInitialSources_js
+src_extract_index_js --> src_extract_summarize_js
+src_extract_index_js --> src_extract_utl_pathToPosix_js
+src_extract_index_js --> node_modules_lodash_lodash_js
+src_extract_addValidations_js --> src_validate_index_js
+src_validate_index_js --> src_validate_matchDependencyRule_js
+src_validate_index_js --> src_validate_matchModuleRule_js
+src_validate_matchDependencyRule_js --> src_validate_isModuleOnlyRule_js
+src_validate_matchModuleRule_js --> src_validate_isModuleOnlyRule_js
+src_extract_derive_circular_index_js --> src_extract_derive_circular_dependencyEndsUpAtFrom_js
+src_extract_derive_circular_index_js --> node_modules_lodash_get_js
+src_extract_derive_orphan_index_js --> src_extract_derive_orphan_isOrphan_js
+src_extract_derive_orphan_index_js --> node_modules_lodash_get_js
+src_extract_extract_js --> src_extract_ast_extractors_extract_AMD_deps_js
+src_extract_extract_js --> src_extract_ast_extractors_extract_ES6_deps_js
+src_extract_extract_js --> src_extract_ast_extractors_extract_commonJS_deps_js
+src_extract_extract_js --> src_extract_ast_extractors_extract_typescript_deps_js
+src_extract_extract_js --> src_extract_ignore_js
+src_extract_extract_js --> src_extract_parse_toJavascriptAST_js
+src_extract_extract_js --> src_extract_parse_toTypescriptAST_js
+src_extract_extract_js --> src_extract_resolve_index_js
+src_extract_extract_js --> node_modules_lodash_lodash_js
+src_extract_extract_js --> path
+src_extract_ast_extractors_extract_AMD_deps_js --> src_extract_ast_extractors_extract_commonJS_deps_js
+src_extract_ast_extractors_extract_AMD_deps_js --> node_modules_acorn_walk_dist_walk_js
+src_extract_ast_extractors_extract_commonJS_deps_js --> node_modules_acorn_walk_dist_walk_js
+src_extract_ast_extractors_extract_ES6_deps_js --> node_modules_acorn_walk_dist_walk_js
+src_extract_ast_extractors_extract_typescript_deps_js --> package_json
+src_extract_ast_extractors_extract_typescript_deps_js --> node_modules_semver_try_require_src_index_js
+src_extract_parse_toJavascriptAST_js --> src_extract_transpile_index_js
+src_extract_parse_toJavascriptAST_js --> src_extract_utl_getExtension_js
+src_extract_parse_toJavascriptAST_js --> node_modules_acorn_dist_acorn_js
+src_extract_parse_toJavascriptAST_js --> node_modules_acorn_loose_dist_acorn_loose_js
+src_extract_parse_toJavascriptAST_js --> fs
+src_extract_parse_toJavascriptAST_js --> node_modules_lodash_memoize_js
+src_extract_transpile_index_js --> src_extract_transpile_meta_js
+src_extract_transpile_meta_js --> package_json
+src_extract_transpile_meta_js --> src_extract_transpile_coffeeWrap_js
+src_extract_transpile_meta_js --> src_extract_transpile_javaScriptWrap_js
+src_extract_transpile_meta_js --> src_extract_transpile_liveScriptWrap_js
+src_extract_transpile_meta_js --> src_extract_transpile_typeScriptWrap_js
+src_extract_transpile_coffeeWrap_js --> package_json
+src_extract_transpile_coffeeWrap_js --> node_modules_semver_try_require_src_index_js
+src_extract_transpile_liveScriptWrap_js --> package_json
+src_extract_transpile_liveScriptWrap_js --> node_modules_semver_try_require_src_index_js
+src_extract_transpile_typeScriptWrap_js --> package_json
+src_extract_transpile_typeScriptWrap_js --> node_modules_lodash_get_js
+src_extract_transpile_typeScriptWrap_js --> node_modules_semver_try_require_src_index_js
+src_extract_utl_getExtension_js --> path
+src_extract_parse_toTypescriptAST_js --> package_json
+src_extract_parse_toTypescriptAST_js --> fs
+src_extract_parse_toTypescriptAST_js --> node_modules_lodash_memoize_js
+src_extract_parse_toTypescriptAST_js --> node_modules_semver_try_require_src_index_js
+src_extract_resolve_index_js --> src_extract_utl_pathToPosix_js
+src_extract_resolve_index_js --> src_extract_resolve_resolve_AMD_js
+src_extract_resolve_index_js --> src_extract_resolve_resolve_commonJS_js
+src_extract_resolve_index_js --> fs
+src_extract_resolve_index_js --> path
+src_extract_utl_pathToPosix_js --> path
+src_extract_resolve_resolve_AMD_js --> src_extract_utl_pathToPosix_js
+src_extract_resolve_resolve_AMD_js --> src_extract_resolve_determineDependencyTypes_js
+src_extract_resolve_resolve_AMD_js --> src_extract_resolve_readPackageDeps_index_js
+src_extract_resolve_resolve_AMD_js --> src_extract_resolve_resolve_helpers_js
+src_extract_resolve_resolve_AMD_js --> fs
+src_extract_resolve_resolve_AMD_js --> node_modules_lodash_memoize_js
+src_extract_resolve_resolve_AMD_js --> path
+src_extract_resolve_resolve_AMD_js --> node_modules_resolve_index_js
+src_extract_resolve_determineDependencyTypes_js --> src_extract_resolve_localNpmHelpers_js
+src_extract_resolve_determineDependencyTypes_js --> path
+src_extract_resolve_determineDependencyTypes_js --> node_modules_resolve_index_js
+src_extract_resolve_localNpmHelpers_js --> src_extract_resolve_resolve_js
+src_extract_resolve_localNpmHelpers_js --> fs
+src_extract_resolve_localNpmHelpers_js --> node_modules_lodash_memoize_js
+src_extract_resolve_localNpmHelpers_js --> path
+src_extract_resolve_resolve_js --> src_extract_utl_pathToPosix_js
+src_extract_resolve_resolve_js --> src_extract_resolve_compileResolveOptions_js
+src_extract_resolve_resolve_js --> node_modules_enhanced_resolve_lib_node_js
+src_extract_resolve_compileResolveOptions_js --> src_extract_transpile_meta_js
+src_extract_resolve_compileResolveOptions_js --> node_modules_awesome_typescript_loader_dist_entry_js
+src_extract_resolve_compileResolveOptions_js --> node_modules_enhanced_resolve_lib_node_js
+src_extract_resolve_readPackageDeps_index_js --> src_extract_resolve_readPackageDeps_mergePackages_js
+src_extract_resolve_readPackageDeps_index_js --> fs
+src_extract_resolve_readPackageDeps_index_js --> node_modules_lodash_memoize_js
+src_extract_resolve_readPackageDeps_index_js --> path
+src_extract_resolve_readPackageDeps_mergePackages_js --> node_modules_lodash_clone_js
+src_extract_resolve_readPackageDeps_mergePackages_js --> node_modules_lodash_get_js
+src_extract_resolve_readPackageDeps_mergePackages_js --> node_modules_lodash_uniq_js
+src_extract_resolve_resolve_helpers_js --> src_extract_resolve_localNpmHelpers_js
+src_extract_resolve_resolve_commonJS_js --> src_extract_utl_pathToPosix_js
+src_extract_resolve_resolve_commonJS_js --> src_extract_resolve_determineDependencyTypes_js
+src_extract_resolve_resolve_commonJS_js --> src_extract_resolve_isFollowable_js
+src_extract_resolve_resolve_commonJS_js --> src_extract_resolve_readPackageDeps_index_js
+src_extract_resolve_resolve_commonJS_js --> src_extract_resolve_resolve_js
+src_extract_resolve_resolve_commonJS_js --> src_extract_resolve_resolve_helpers_js
+src_extract_resolve_resolve_commonJS_js --> path
+src_extract_resolve_resolve_commonJS_js --> node_modules_resolve_index_js
+src_extract_resolve_isFollowable_js --> src_extract_utl_getExtension_js
+src_extract_resolve_isFollowable_js --> src_extract_resolve_compileResolveOptions_js
+src_extract_gatherInitialSources_js --> src_extract_ignore_js
+src_extract_gatherInitialSources_js --> src_extract_transpile_meta_js
+src_extract_gatherInitialSources_js --> fs
+src_extract_gatherInitialSources_js --> node_modules_glob_glob_js
+src_extract_gatherInitialSources_js --> path
+src_extract_summarize_js --> node_modules_lodash_flattenDeep_js
+src_report_csv_index_js --> src_report_dependencyToIncidenceTransformer_js
+src_report_csv_index_js --> src_report_csv_csv_template_js
+src_report_csv_index_js --> node_modules_handlebars_runtime_js
+src_report_csv_csv_template_js --> node_modules_handlebars_runtime_js
+src_report_ddot_index_js --> src_report_dot_coloring_js
+src_report_ddot_index_js --> src_report_ddot_ddot_template_js
+src_report_ddot_index_js --> node_modules_handlebars_runtime_js
+src_report_ddot_index_js --> node_modules_lodash_clone_js
+src_report_ddot_index_js --> node_modules_lodash_get_js
+src_report_ddot_index_js --> node_modules_lodash_uniqBy_js
+src_report_ddot_index_js --> path
+src_report_dot_coloring_js --> src_report_dot_defaultModuleColorScheme_json
+src_report_dot_coloring_js --> node_modules_lodash_get_js
+src_report_ddot_ddot_template_js --> node_modules_handlebars_runtime_js
+src_report_dot_index_js --> src_report_dot_coloring_js
+src_report_dot_index_js --> src_report_dot_dot_template_js
+src_report_dot_index_js --> node_modules_handlebars_runtime_js
+src_report_dot_index_js --> path
+src_report_dot_dot_template_js --> node_modules_handlebars_runtime_js
+src_report_err_js --> node_modules_chalk_index_js
+src_report_err_js --> node_modules_figures_index_js
+src_report_html_index_js --> src_report_dependencyToIncidenceTransformer_js
+src_report_html_index_js --> src_report_html_html_template_js
+src_report_html_index_js --> node_modules_handlebars_runtime_js
+src_report_html_html_template_js --> node_modules_handlebars_runtime_js
+src_main_options_normalize_js --> src_main_options_defaults_json
+src_main_options_validate_js --> node_modules_safe_regex_index_js
+src_main_ruleSet_validate_js --> src_main_options_validate_js
+src_main_ruleSet_validate_js --> src_main_ruleSet_jsonschema_json
+src_main_ruleSet_validate_js --> node_modules_ajv_lib_ajv_js
+src_main_ruleSet_validate_js --> node_modules_safe_regex_index_js
+src_cli_formatMetaInfo_js --> src_main_index_js
+src_cli_formatMetaInfo_js --> node_modules_chalk_index_js
+src_cli_formatMetaInfo_js --> node_modules_figures_index_js
+src_cli_getResolveConfig_js --> src_cli_utl_makeAbsolute_js
+src_cli_utl_makeAbsolute_js --> path
+src_cli_initConfig_index_js --> src_cli_initConfig_createConfigFile_js
+src_cli_initConfig_index_js --> src_cli_initConfig_getUserInput_js
+src_cli_initConfig_createConfigFile_js --> package_json
+src_cli_initConfig_createConfigFile_js --> src_cli_initConfig_config_js_template_js
+src_cli_initConfig_createConfigFile_js --> src_cli_initConfig_config_json_template_js
+src_cli_initConfig_createConfigFile_js --> fs
+src_cli_initConfig_createConfigFile_js --> node_modules_handlebars_runtime_js
+src_cli_initConfig_config_js_template_js --> node_modules_handlebars_runtime_js
+src_cli_initConfig_config_json_template_js --> node_modules_handlebars_runtime_js
+src_cli_initConfig_getUserInput_js --> node_modules_inquirer_lib_inquirer_js
+src_cli_normalizeOptions_js --> src_cli_compileConfig_index_js
+src_cli_normalizeOptions_js --> src_cli_defaults_json
+src_cli_normalizeOptions_js --> fs
+src_cli_normalizeOptions_js --> node_modules_lodash_clone_js
+src_cli_normalizeOptions_js --> node_modules_lodash_get_js
+src_cli_normalizeOptions_js --> node_modules_lodash_set_js
+src_cli_normalizeOptions_js --> path
+src_cli_compileConfig_index_js --> src_extract_resolve_resolve_js
+src_cli_compileConfig_index_js --> src_cli_compileConfig_mergeConfigs_js
+src_cli_compileConfig_index_js --> src_cli_compileConfig_readConfig_js
+src_cli_compileConfig_index_js --> path
+src_cli_compileConfig_mergeConfigs_js --> node_modules_lodash_get_js
+src_cli_compileConfig_mergeConfigs_js --> node_modules_lodash_isEqual_js
+src_cli_compileConfig_mergeConfigs_js --> node_modules_lodash_uniqBy_js
+src_cli_compileConfig_mergeConfigs_js --> node_modules_lodash_uniqWith_js
+src_cli_compileConfig_readConfig_js --> fs
+src_cli_compileConfig_readConfig_js --> path
+src_cli_compileConfig_readConfig_js --> node_modules_strip_json_comments_index_js
+src_cli_parseTSConfig_js --> package_json
+src_cli_parseTSConfig_js --> node_modules_lodash_get_js
+src_cli_parseTSConfig_js --> path
+src_cli_parseTSConfig_js --> node_modules_semver_try_require_src_index_js
+src_cli_utl_io_js --> fs
+src_cli_utl_validateFileExistence_js --> fs

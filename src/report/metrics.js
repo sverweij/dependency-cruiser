@@ -69,6 +69,12 @@ function orderByString(pAttributeName) {
     pLeft[pAttributeName].localeCompare(pRight[pAttributeName]);
 }
 
+function componentIsCalculable(pComponent) {
+  return (
+    Number.isInteger(pComponent.moduleCount) && pComponent.moduleCount > -1
+  );
+}
+
 function transformMetricsToTable(
   { modules, folders },
   { orderBy, hideFolders, hideModules }
@@ -91,6 +97,7 @@ function transformMetricsToTable(
     .concat(
       getMetricsTable(
         lComponents
+          .filter(componentIsCalculable)
           .sort(orderByString("name"))
           .sort(orderByNumber(orderBy || "instability")),
         lMaxNameWidth

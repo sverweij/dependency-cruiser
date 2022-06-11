@@ -1,6 +1,6 @@
 const fs = require("fs");
 const tryRequire = require("semver-try-require");
-const _memoize = require("lodash/memoize");
+const memoize = require("lodash/memoize");
 const { supportedTranspilers } = require("../../../src/meta.js");
 const transpile = require("../transpile");
 const getExtension = require("../utl/get-extension");
@@ -50,7 +50,7 @@ function getAST(pFileName, pTranspileOptions) {
   );
 }
 
-const getASTCached = _memoize(getAST);
+const getASTCached = memoize(getAST);
 
 function clearCache() {
   getASTCached.cache.clear();

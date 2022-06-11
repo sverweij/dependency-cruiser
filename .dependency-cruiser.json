@@ -330,6 +330,19 @@
           },
           "modules": [
             {
+              "criteria": { "matchesFocus": true },
+              "attributes": {
+                "fillcolor": "lime",
+                "penwidth": 2
+              }
+            },
+            {
+              "criteria": { "matchesFocus": false },
+              "attributes": {
+                "fillcolor": "lightgrey"
+              }
+            },
+            {
               "criteria": { "source": "^src/cli" },
               "attributes": { "fillcolor": "#ccccff" }
             },

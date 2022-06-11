@@ -727,6 +727,10 @@ to check against multiple paths; all the "via"'s in the cycle. The variants
 exist to enable matching against only _some_ of the modules in the cycle or
 against _all_ of them.
 
+All these restrictions take the whole cycle into account; _including_ the tested
+'from'; if `a/aa.js` has a cycle via `a/ab.js` and `b/bb/js` back to `a/aa.js`
+the via-like restrictions also take `a/aa.js` into account.
+
 The examples below refer to this cycle: `a/aa.js`, `a/ab.js`, `b/bb.js`, `a/aa.js`
 
 | restriction  | what it does                                                        | example input | match?  | because...                    |
@@ -1086,12 +1090,18 @@ when the opposite is true; the dependency has an equal or lower Instability.
 
 This attribute is useful when you want to check against Robert C. Martin's
 stable dependencies principle: "depend in the direction of stability". Martin
-defines Instability as a function of the number of dependents and dependencies
-a component has: Instability = #dependencies/ (#dependents + #dependencies).
+defines $Instability$ as a function of the number of dependents and dependencies
+a component has:
+
+<!-- note: \# is valid LaTex/ KaTex for a #
+     MathJax on GitHub, however needs an _extra_ backslash
+-->
+
+$$Instability = {\\#dependencies \over \\#dependents + \\#dependencies}$$
 
 E.g. a module with no dependencies and one or more dependents has a Instability
 of 0%; as stable as it can get. Conversely a module with no dependents, but
-a one or more dependencies is 100% Instable.
+with one or more dependencies is 100% Instable.
 
 Instability has a bit of an unusual connotation here - it's not 'bad' to be
 an 100% Instable module - it's just the nature of the module. A CLI or GUI
@@ -1111,7 +1121,7 @@ module.exports = {
   forbidden: [
     {
       name: "SDP",
-      description:
+      comment:
         "This module violates the 'stable dependencies' principle; it depends " +
         "on a module that is likely to be more prone to changes than it is " +
         "itself. Consider refactoring.",

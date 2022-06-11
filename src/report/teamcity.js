@@ -1,4 +1,4 @@
-const _get = require("lodash/get");
+const get = require("lodash/get");
 const tsm = require("teamcity-service-messages");
 const utl = require("./utl/index.js");
 
@@ -62,9 +62,9 @@ function reportIgnoredRules(pIgnoredCount) {
 }
 
 function reportViolatedRules(pRuleSetUsed, pViolations, pIgnoredCount) {
-  return reportRules(_get(pRuleSetUsed, "forbidden", []), pViolations)
-    .concat(reportAllowedRule(_get(pRuleSetUsed, "allowed", []), pViolations))
-    .concat(reportRules(_get(pRuleSetUsed, "required", []), pViolations))
+  return reportRules(get(pRuleSetUsed, "forbidden", []), pViolations)
+    .concat(reportAllowedRule(get(pRuleSetUsed, "allowed", []), pViolations))
+    .concat(reportRules(get(pRuleSetUsed, "required", []), pViolations))
     .concat(reportIgnoredRules(pIgnoredCount));
 }
 
@@ -152,11 +152,11 @@ module.exports = (pResults) => {
   // setting this property directly
   tsm.stdout = false;
 
-  const lRuleSet = _get(pResults, "summary.ruleSetUsed", []);
-  const lViolations = _get(pResults, "summary.violations", []).filter(
+  const lRuleSet = get(pResults, "summary.ruleSetUsed", []);
+  const lViolations = get(pResults, "summary.violations", []).filter(
     (pViolation) => pViolation.rule.severity !== "ignore"
   );
-  const lIgnoredCount = _get(pResults, "summary.ignore", 0);
+  const lIgnoredCount = get(pResults, "summary.ignore", 0);
 
   return {
     output: reportViolatedRules(lRuleSet, lViolations, lIgnoredCount)

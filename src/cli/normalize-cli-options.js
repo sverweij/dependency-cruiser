@@ -1,9 +1,9 @@
 const fs = require("fs");
 const path = require("path");
-const _set = require("lodash/set");
-const _get = require("lodash/get");
-const _has = require("lodash/has");
-const _clone = require("lodash/clone");
+const set = require("lodash/set");
+const get = require("lodash/get");
+const has = require("lodash/has");
+const clone = require("lodash/clone");
 const loadConfig = require("../config-utl/extract-depcruise-config");
 const defaults = require("./defaults");
 
@@ -68,10 +68,10 @@ function ejectNonCLIOptions(pCliOptions, pKnownCliOptions) {
 }
 
 function normalizeConfigFileName(pCliOptions, pConfigWrapperName, pDefault) {
-  let lOptions = _clone(pCliOptions);
+  let lOptions = clone(pCliOptions);
 
-  if (_has(lOptions, pConfigWrapperName)) {
-    _set(
+  if (has(lOptions, pConfigWrapperName)) {
+    set(
       lOptions,
       `ruleSet.options.${pConfigWrapperName}.fileName`,
       getOptionValue(pDefault)(lOptions[pConfigWrapperName])
@@ -81,10 +81,10 @@ function normalizeConfigFileName(pCliOptions, pConfigWrapperName, pDefault) {
   }
 
   if (
-    _get(lOptions, `ruleSet.options.${pConfigWrapperName}`, null) &&
-    !_get(lOptions, `ruleSet.options.${pConfigWrapperName}.fileName`, null)
+    get(lOptions, `ruleSet.options.${pConfigWrapperName}`, null) &&
+    !get(lOptions, `ruleSet.options.${pConfigWrapperName}.fileName`, null)
   ) {
-    _set(lOptions, `ruleSet.options.${pConfigWrapperName}.fileName`, pDefault);
+    set(lOptions, `ruleSet.options.${pConfigWrapperName}.fileName`, pDefault);
   }
 
   return lOptions;
@@ -153,7 +153,7 @@ function validateAndGetKnownViolationsFileName(pKnownViolations) {
 }
 
 function normalizeKnownViolationsOption(pCliOptions) {
-  if (_has(pCliOptions, "ignoreKnown")) {
+  if (has(pCliOptions, "ignoreKnown")) {
     const lReturnValue = {
       knownViolationsFile: validateAndGetKnownViolationsFileName(
         pCliOptions.ignoreKnown
@@ -165,7 +165,7 @@ function normalizeKnownViolationsOption(pCliOptions) {
 }
 
 function normalizeValidationOption(pCliOptions) {
-  if (_has(pCliOptions, "validate")) {
+  if (has(pCliOptions, "validate")) {
     const rulesFile = validateAndNormalizeRulesFileName(pCliOptions.validate);
     return {
       rulesFile,
@@ -184,8 +184,8 @@ function normalizeValidationOption(pCliOptions) {
 function normalizeProgress(pCliOptions) {
   let lProgress = null;
 
-  if (_has(pCliOptions, "progress")) {
-    lProgress = _get(pCliOptions, "progress");
+  if (has(pCliOptions, "progress")) {
+    lProgress = get(pCliOptions, "progress");
     if (lProgress === true) {
       lProgress = "cli-feedback";
     }
@@ -211,13 +211,13 @@ module.exports = function normalizeOptions(
     ...ejectNonCLIOptions(pOptionsAsPassedFromCommander, pKnownCliOptions),
   };
 
-  if (_has(lOptions, "moduleSystems")) {
+  if (has(lOptions, "moduleSystems")) {
     lOptions.moduleSystems = lOptions.moduleSystems
       .split(",")
       .map((pString) => pString.trim());
   }
 
-  if (_has(lOptions, "config")) {
+  if (has(lOptions, "config")) {
     lOptions.validate = lOptions.config;
   }
 

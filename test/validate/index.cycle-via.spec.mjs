@@ -228,8 +228,7 @@ describe("[I] validate/index dependency - cycle viaOnly", () => {
         }
       )
     ).to.deep.equal({
-      valid: false,
-      rules: [{ name: "unnamed", severity: "warn" }],
+      valid: true,
     });
   });
 
@@ -320,8 +319,7 @@ describe("[I] validate/index dependency - cycle viaOnly - with group matching", 
         }
       )
     ).to.deep.equal({
-      valid: false,
-      rules: [{ name: "unnamed", severity: "warn" }],
+      valid: true,
     });
   });
 

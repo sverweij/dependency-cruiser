@@ -1,5 +1,5 @@
 const path = require("path");
-const _has = require("lodash/has");
+const has = require("lodash/has");
 const {
   isRelativeModuleName,
   isExternalModule,
@@ -14,7 +14,7 @@ function dependencyKeyHasModuleName(
 ) {
   return (pKey) =>
     pKey.includes("ependencies") &&
-    _has(pPackageDependencies[pKey], path.posix.join(pPrefix, pModuleName));
+    has(pPackageDependencies[pKey], path.posix.join(pPrefix, pModuleName));
 }
 
 const NPM2DEP_TYPE = {

@@ -12,6 +12,7 @@ const KNOWN_FMT_OPTIONS = [
   "includeOnly",
   "outputTo",
   "outputType",
+  "prefix",
   "version",
 ];
 

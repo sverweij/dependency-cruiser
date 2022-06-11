@@ -25,6 +25,11 @@ export interface IReporterOptions {
    * Options to tweak the output of the metrics reporter
    */
   metrics?: IMetricsReporterOptions;
+  /**
+   * Options to show and hide sections of the markdown reporter and to provide
+   * alternate boilerplate text.
+   */
+  markdown?: IMarkdownReporterOptions;
 }
 
 export interface IReporterFiltersType {
@@ -111,6 +116,81 @@ export interface IMetricsReporterOptions {
   hideModules?: boolean;
   hideFolders?: boolean;
   oderBy?: MetricsOrderByType;
+}
+
+export interface IMarkdownReporterOptions {
+  /**
+   * Whether or not to show a title in the report. Defaults to true.
+   */
+  showTitle?: boolean;
+  /**
+   * The text to show as a title of the report. E.g.
+   * '## dependency-cruiser forbidden dependency check - results'.
+   * When left out shows a default value.
+   */
+  title?: string;
+  /**
+   * Whether or not to show a summary in the report. Defaults to true.
+   */
+  showSummary?: boolean;
+  /**
+   * Whether or not to give the summary a header. Defaults to true.
+   */
+  showSummaryHeader?: boolean;
+  /**
+   * The text to show as a header on top of the summary. E.g. '### Summary'"
+   * When left out shows a default value.
+   */
+  summaryHeader?: string;
+  /**
+   * Whether or not to show high level stats in the summary. Defaults to true.
+   */
+  showStatsSummary?: boolean;
+  /**
+   * Whether or not to show a list of violated rules in the summary. Defaults to true.
+   */
+  showRulesSummary?: boolean;
+  /**
+   * Whether or not to show rules in the list of rules for which all violations are ignored.
+   * Defaults to true.
+   */
+  includeIgnoredInSummary?: boolean;
+  /**
+   * Whether or not to show a detailed list of violations. Defaults to true.
+   */
+  showDetails?: boolean;
+  /**
+   * Whether or not to show ignored violations in the detailed list. Defaults to true.
+   */
+  includeIgnoredInDetails?: boolean;
+  /**
+   * Whether or not to give the detailed list of violations a header. Defaults to true.
+   */
+  showDetailsHeader?: boolean;
+  /**
+   * The text to show as a header on top of the detailed list of violations. E.g. '### All violations'
+   * When left out shows a default value.
+   */
+  detailsHeader?: boolean;
+  /**
+   * Whether or not to collapse the list of violations in a <details> block. Defaults to true.
+   */
+  collapseDetails?: boolean;
+  /**
+   * The text to in the <summary> section of the <details> block. E.g. 'click to see all violations'
+   * When left out shows a default value.
+   */
+  collapsedMessage?: string;
+  /**
+   * The text to show when no violations were found. E.g. 'No violations found'.
+   * When left out shows a default value.
+   */
+  noViolationsMessage?: string;
+  /**
+   * Whether or not to show a footer (with version & run date) at the bottom of the report.
+   * Defaults to true
+   */
+  showFooter?: boolean;
 }
 
 export type MetricsOrderByType =

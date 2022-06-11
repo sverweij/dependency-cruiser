@@ -1,13 +1,14 @@
 const fs = require("fs");
 const path = require("path");
-const _has = require("lodash/has");
-const _get = require("lodash/get");
+const has = require("lodash/has");
+const get = require("lodash/get");
 const { DEFAULT_CONFIG_FILE_NAME } = require("../defaults");
 
 const LIKELY_SOURCE_FOLDERS = ["src", "lib", "app", "bin", "sources"];
 const LIKELY_TEST_FOLDERS = ["test", "spec", "tests", "specs", "bdd"];
 const LIKELY_PACKAGES_FOLDERS = ["packages"];
-const TSCONFIG_CANDIDATE_PATTERN = /.*[tj]sconfig.*\.json$/gi;
+const TSCONFIG_CANDIDATE_PATTERN = /.*tsconfig.*\.json$/gi;
+const JSCONFIG_CANDIDATE_PATTERN = /.*jsconfig.*\.json$/gi;
 const WEBPACK_CANDIDATE_PATTERN = /.*webpack.*\.c?js(on)?$/gi;
 const BABEL_CONFIG_CANDIDATE_PATTERN = /^\.babelrc$|.*babel.*\.json/gi;
 
@@ -40,7 +41,7 @@ function babelIsConfiguredInManifest() {
   let lReturnValue = false;
 
   try {
-    lReturnValue = _has(readManifest(), "babel");
+    lReturnValue = has(readManifest(), "babel");
   } catch (pError) {
     // silently ignore - we'll return false anyway then
   }
@@ -51,7 +52,7 @@ function isTypeModule() {
   let lReturnValue = false;
 
   try {
-    lReturnValue = _get(readManifest(), "type", "commonjs") === "module";
+    lReturnValue = get(readManifest(), "type", "commonjs") === "module";
   } catch (pError) {
     // silently ignore - we'll return false anyway then
   }
@@ -119,6 +120,10 @@ const getTSConfigCandidates = (pFolderName = process.cwd()) =>
   getMatchingFileNames(TSCONFIG_CANDIDATE_PATTERN, pFolderName);
 const hasTSConfigCandidates = (pFolderName = process.cwd()) =>
   getTSConfigCandidates(pFolderName).length > 0;
+const getJSConfigCandidates = (pFolderName = process.cwd()) =>
+  getMatchingFileNames(JSCONFIG_CANDIDATE_PATTERN, pFolderName);
+const hasJSConfigCandidates = (pFolderName = process.cwd()) =>
+  getJSConfigCandidates(pFolderName).length > 0;
 
 const getWebpackConfigCandidates = () =>
   getMatchingFileNames(WEBPACK_CANDIDATE_PATTERN);
@@ -149,6 +154,8 @@ module.exports = {
   hasWebpackConfigCandidates,
   getTSConfigCandidates,
   hasTSConfigCandidates,
+  getJSConfigCandidates,
+  hasJSConfigCandidates,
   getSourceFolderCandidates,
   getTestFolderCandidates,
   getMonoRepoPackagesCandidates,

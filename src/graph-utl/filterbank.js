@@ -1,4 +1,4 @@
-const _clone = require("lodash/clone");
+const clone = require("lodash/clone");
 const focus = require("./add-focus");
 const matchFacade = require("./match-facade");
 
@@ -35,7 +35,7 @@ function exclude(pModules, pExcludeFilter) {
 
 function applyFilters(pModules, pFilters) {
   if (pFilters) {
-    let lReturnValue = _clone(pModules);
+    let lReturnValue = clone(pModules);
 
     if (pFilters.exclude) {
       lReturnValue = exclude(lReturnValue, pFilters.exclude);

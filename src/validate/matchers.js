@@ -1,11 +1,11 @@
 /* eslint-disable security/detect-object-injection */
-const _has = require("lodash/has");
+const has = require("lodash/has");
 const { intersects } = require("../utl/array-util");
 const { replaceGroupPlaceholders } = require("../utl/regex-util");
 
 function propertyEquals(pRule, pDependency, pProperty) {
   // The properties can be booleans, so we can't use !pRule.to[pProperty]
-  if (_has(pRule.to, pProperty)) {
+  if (has(pRule.to, pProperty)) {
     return pDependency[pProperty] === pRule.to[pProperty];
   }
   return true;
@@ -91,19 +91,13 @@ function toDependencyTypesNot(pRule, pDependency) {
   );
 }
 
-const removeLast = (_via, pIndex, pArray) => pIndex !== pArray.length - 1;
-
 function toVia(pRule, pDependency, pGroups) {
   return Boolean(
     !pRule.to.via ||
       (pDependency.cycle &&
-        pDependency.cycle
-          // the last in the cycle is always the module itself, which, for
-          // via & viaNot checks isn't very useful
-          .filter(removeLast)
-          .some((pVia) =>
-            pVia.match(replaceGroupPlaceholders(pRule.to.via, pGroups))
-          ))
+        pDependency.cycle.some((pVia) =>
+          pVia.match(replaceGroupPlaceholders(pRule.to.via, pGroups))
+        ))
   );
 }
 
@@ -111,13 +105,9 @@ function toViaOnly(pRule, pDependency, pGroups) {
   return Boolean(
     !pRule.to.viaOnly ||
       (pDependency.cycle &&
-        pDependency.cycle
-          // the last in the cycle is always the module itself, which, for
-          // via & viaNot checks isn't very useful
-          .filter(removeLast)
-          .every((pVia) =>
-            pVia.match(replaceGroupPlaceholders(pRule.to.viaOnly, pGroups))
-          ))
+        pDependency.cycle.every((pVia) =>
+          pVia.match(replaceGroupPlaceholders(pRule.to.viaOnly, pGroups))
+        ))
   );
 }
 
@@ -125,13 +115,9 @@ function toViaNot(pRule, pDependency, pGroups) {
   return Boolean(
     !pRule.to.viaNot ||
       (pDependency.cycle &&
-        !pDependency.cycle
-          // the last in the cycle is always the module itself, which, for
-          // via & viaNot checks isn't very useful
-          .filter(removeLast)
-          .some((pVia) =>
-            pVia.match(replaceGroupPlaceholders(pRule.to.viaNot, pGroups))
-          ))
+        !pDependency.cycle.some((pVia) =>
+          pVia.match(replaceGroupPlaceholders(pRule.to.viaNot, pGroups))
+        ))
   );
 }
 
@@ -139,18 +125,14 @@ function toviaSomeNot(pRule, pDependency, pGroups) {
   return Boolean(
     !pRule.to.viaSomeNot ||
       (pDependency.cycle &&
-        !pDependency.cycle
-          // the last in the cycle is always the module itself, which, for
-          // via & viaNot checks isn't very useful
-          .filter(removeLast)
-          .every((pVia) =>
-            pVia.match(replaceGroupPlaceholders(pRule.to.viaSomeNot, pGroups))
-          ))
+        !pDependency.cycle.every((pVia) =>
+          pVia.match(replaceGroupPlaceholders(pRule.to.viaSomeNot, pGroups))
+        ))
   );
 }
 
 function toIsMoreUnstable(pRule, pModule, pDependency) {
-  if (_has(pRule, "to.moreUnstable")) {
+  if (has(pRule, "to.moreUnstable")) {
     return (
       (pRule.to.moreUnstable &&
         pModule.instability < pDependency.instability) ||
@@ -161,7 +143,7 @@ function toIsMoreUnstable(pRule, pModule, pDependency) {
 }
 
 function matchesMoreThanOneDependencyType(pRule, pDependency) {
-  if (_has(pRule.to, "moreThanOneDependencyType")) {
+  if (has(pRule.to, "moreThanOneDependencyType")) {
     return (
       pRule.to.moreThanOneDependencyType ===
       pDependency.dependencyTypes.length > 1

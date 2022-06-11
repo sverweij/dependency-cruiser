@@ -126,6 +126,38 @@ describe("[U] main/options/normalize - cruise options", () => {
       collapse: "^packages/[^/]+",
     });
   });
+
+  it("calculates metrics when the selected reporter specifies to show metrics", () => {
+    expect(
+      normalize.normalizeCruiseOptions({
+        outputType: "dot",
+        reporterOptions: { dot: { showMetrics: true } },
+      })
+    ).to.contain({
+      metrics: true,
+    });
+  });
+
+  it("calculates metrics when the selected reporter specifies to not show metrics", () => {
+    expect(
+      normalize.normalizeCruiseOptions({
+        outputType: "dot",
+        reporterOptions: { dot: { showMetrics: false } },
+      })
+    ).to.contain({
+      metrics: false,
+    });
+  });
+
+  it("calculates metrics when the selected reporter doesn't specify to show metrics", () => {
+    expect(
+      normalize.normalizeCruiseOptions({
+        outputType: "dot",
+      })
+    ).to.contain({
+      metrics: false,
+    });
+  });
 });
 
 /* eslint no-magic-numbers: 0*/

@@ -1,0 +1,45 @@
+flowchart LR
+
+subgraph src["src"]
+  subgraph src_main["main"]
+    subgraph src_main_rule_set["rule-set"]
+      src_main_rule_set_normalize_js["normalize.js"]
+    end
+    src_main_index_js["index.js"]
+    subgraph src_main_utl["utl"]
+      src_main_utl_normalize_re_properties_js["normalize-re-properties.js"]
+    end
+  end
+end
+subgraph test["test"]
+  subgraph test_enrich["enrich"]
+    subgraph test_enrich_derive["derive"]
+      subgraph test_enrich_derive_reachable["reachable"]
+        test_enrich_derive_reachable_index_spec_mjs["index.spec.mjs"]
+      end
+    end
+  end
+  subgraph test_main["main"]
+    subgraph test_main_rule_set["rule-set"]
+      test_main_rule_set_normalize_spec_mjs["normalize.spec.mjs"]
+    end
+  end
+  subgraph test_validate["validate"]
+    test_validate_parse_ruleset_utl_mjs["parse-ruleset.utl.mjs"]
+  end
+end
+subgraph node_modules["node_modules"]
+  subgraph node_modules_lodash["lodash"]
+    node_modules_lodash_has_js["has.js"]
+    node_modules_lodash_cloneDeep_js["cloneDeep.js"]
+  end
+end
+src_main_rule_set_normalize_js --> src_main_utl_normalize_re_properties_js
+src_main_rule_set_normalize_js --> node_modules_lodash_cloneDeep_js
+src_main_rule_set_normalize_js --> node_modules_lodash_has_js
+src_main_index_js --> src_main_rule_set_normalize_js
+test_enrich_derive_reachable_index_spec_mjs --> src_main_rule_set_normalize_js
+test_main_rule_set_normalize_spec_mjs --> src_main_rule_set_normalize_js
+test_validate_parse_ruleset_utl_mjs --> src_main_rule_set_normalize_js
+
+style src_main_rule_set_normalize_js fill:lime,color:black

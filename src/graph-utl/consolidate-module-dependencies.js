@@ -1,18 +1,18 @@
-const _clone = require("lodash/clone");
-const _get = require("lodash/get");
+const clone = require("lodash/clone");
+const get = require("lodash/get");
 const _reject = require("lodash/reject");
-const _uniq = require("lodash/uniq");
+const uniq = require("lodash/uniq");
 const compare = require("./compare");
 
 function mergeDependency(pLeftDependency, pRightDependency) {
   return {
     ...pLeftDependency,
     ...pRightDependency,
-    dependencyTypes: _uniq(
+    dependencyTypes: uniq(
       pLeftDependency.dependencyTypes.concat(pRightDependency.dependencyTypes)
     ),
     rules: pLeftDependency.rules
-      .concat(_get(pRightDependency, "rules", []))
+      .concat(get(pRightDependency, "rules", []))
       .sort(compare.rules),
     valid: pLeftDependency.valid && pRightDependency.valid,
   };
@@ -33,7 +33,7 @@ function mergeDependencies(pResolvedName, pDependencies) {
 }
 
 function consolidateDependencies(pDependencies) {
-  let lDependencies = _clone(pDependencies);
+  let lDependencies = clone(pDependencies);
   let lReturnValue = [];
 
   while (lDependencies.length > 0) {

@@ -1,12 +1,12 @@
-const _uniq = require("lodash/uniq");
-const _get = require("lodash/get");
-const _clone = require("lodash/clone");
+const uniq = require("lodash/uniq");
+const get = require("lodash/get");
+const clone = require("lodash/clone");
 
 function normalizeManifestKeys(pManifest) {
   let lReturnValue = pManifest;
 
   if (pManifest.bundleDependencies) {
-    pManifest.bundledDependencies = _clone(pManifest.bundleDependencies);
+    pManifest.bundledDependencies = clone(pManifest.bundleDependencies);
     Reflect.deleteProperty(pManifest, "bundleDependencies");
   }
   return lReturnValue;
@@ -20,7 +20,7 @@ function mergeDependencyKey(pClosestDependencyKey, pFurtherDependencyKey) {
 }
 
 function mergeDependencyArray(pClosestDependencyKey, pFurtherDependencyKey) {
-  return _uniq(pClosestDependencyKey.concat(pFurtherDependencyKey));
+  return uniq(pClosestDependencyKey.concat(pFurtherDependencyKey));
 }
 
 function isDependencyKey(pKey) {
@@ -32,7 +32,7 @@ function getDependencyKeys(pPackage) {
 }
 
 function getJointUniqueDependencyKeys(pClosestPackage, pFurtherPackage) {
-  return _uniq(
+  return uniq(
     getDependencyKeys(pClosestPackage).concat(
       getDependencyKeys(pFurtherPackage)
     )
@@ -64,12 +64,12 @@ module.exports = function mergeManifests(pClosestManifest, pFurtherManifest) {
       key: pKey,
       value: pKey.startsWith("bundle")
         ? mergeDependencyArray(
-            _get(pClosestManifest, pKey, []),
-            _get(pFurtherManifest, pKey, [])
+            get(pClosestManifest, pKey, []),
+            get(pFurtherManifest, pKey, [])
           )
         : mergeDependencyKey(
-            _get(pClosestManifest, pKey, {}),
-            _get(pFurtherManifest, pKey, {})
+            get(pClosestManifest, pKey, {}),
+            get(pFurtherManifest, pKey, {})
           ),
     }))
     .reduce((pJoinedObject, pJoinedKey) => {
