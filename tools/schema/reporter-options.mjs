@@ -17,6 +17,7 @@ export default {
         flat: { $ref: "#/definitions/DotReporterOptionsType" },
         markdown: { $ref: "#/definitions/MarkdownReporterOptionsType" },
         metrics: { $ref: "#/definitions/MetricsReporterOptionsType" },
+        mermaid: { $ref: "#/definitions/MermaidReporterOptionsType" },
       },
     },
     AnonReporterOptionsType: {
@@ -162,6 +163,18 @@ export default {
           description:
             "Whether or not to show a footer (with version & run date) at the bottom of the report. " +
             "Defaults to true",
+        },
+      },
+    },
+    MermaidReporterOptionsType: {
+      type: "object",
+      description: "Options to tweak the output of the mermaid reporters",
+      additionalProperties: false,
+      properties: {
+        minify: {
+          type: "boolean",
+          description:
+            "Whether or not to compresses the output text. Defaults to true.",
         },
       },
     },
