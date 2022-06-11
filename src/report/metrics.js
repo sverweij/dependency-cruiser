@@ -114,6 +114,7 @@ function transformMetricsToTable(
  * - additional output formats (csv?, html?)
  *
  * @param {import('../../types/dependency-cruiser').ICruiseResult} pCruiseResult -
+ * @param {import("../../types/reporter-options").IMetricsReporterOptions} pReporterOptions
  * @return {import('../../types/dependency-cruiser').IReporterOutput} -
  */
 module.exports = (pCruiseResult, pReporterOptions) => {
