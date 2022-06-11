@@ -193,6 +193,13 @@ export interface IMarkdownReporterOptions {
   showFooter?: boolean;
 }
 
+export interface IMermaidReporterOptions {
+  /**
+   * Whether or not to compresses the output text. Defaults to true.
+   */
+  minify?: boolean;
+}
+
 export type MetricsOrderByType =
   | "instability"
   | "moduleCount"

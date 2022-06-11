@@ -1,0 +1,45 @@
+flowchart LR
+
+subgraph 0["src"]
+subgraph 1["main"]
+subgraph 2["rule-set"]
+3["normalize.js"]
+end
+4["index.js"]
+subgraph 18["utl"]
+19["normalize-re-properties.js"]
+end
+end
+end
+subgraph 5["test"]
+subgraph 6["enrich"]
+subgraph 7["derive"]
+subgraph 8["reachable"]
+9["index.spec.mjs"]
+end
+end
+end
+subgraph 10["main"]
+subgraph 11["rule-set"]
+12["normalize.spec.mjs"]
+end
+end
+subgraph 13["validate"]
+14["parse-ruleset.utl.mjs"]
+end
+end
+subgraph 15["node_modules"]
+subgraph 16["lodash"]
+17["has.js"]
+20["cloneDeep.js"]
+end
+end
+3 --> 19
+3 --> 20
+3 --> 17
+4 --> 3
+9 --> 3
+12 --> 3
+14 --> 3
+
+style 3 fill:lime,color:black

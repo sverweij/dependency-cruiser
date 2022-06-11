@@ -1,0 +1,419 @@
+flowchart LR
+
+subgraph 0["bin"]
+1["dependency-cruise"]
+end
+2["package.json"]
+subgraph 3["node_modules"]
+subgraph 4["commander"]
+5["index.js"]
+end
+subgraph 6["semver"]
+7["semver.js"]
+end
+subgraph 11["glob"]
+12["glob.js"]
+end
+subgraph 13["lodash"]
+14["get.js"]
+22["lodash.js"]
+59["memoize.js"]
+89["clone.js"]
+90["uniq.js"]
+96["flattenDeep.js"]
+105["uniqBy.js"]
+148["set.js"]
+152["isEqual.js"]
+153["uniqWith.js"]
+end
+subgraph 40["acorn-walk"]
+subgraph 41["dist"]
+42["walk.js"]
+end
+end
+subgraph 46["semver-try-require"]
+subgraph 47["src"]
+48["index.js"]
+end
+end
+subgraph 52["acorn"]
+subgraph 53["dist"]
+54["acorn.js"]
+end
+end
+subgraph 55["acorn-loose"]
+subgraph 56["dist"]
+57["acorn-loose.js"]
+end
+end
+subgraph 74["resolve"]
+75["index.js"]
+end
+subgraph 79["enhanced-resolve"]
+subgraph 80["lib"]
+81["node.js"]
+end
+end
+subgraph 83["awesome-typescript-loader"]
+subgraph 84["dist"]
+85["entry.js"]
+end
+end
+subgraph 99["handlebars"]
+100["runtime.js"]
+end
+subgraph 112["chalk"]
+113["index.js"]
+end
+subgraph 114["figures"]
+115["index.js"]
+end
+subgraph 124["safe-regex"]
+125["index.js"]
+end
+subgraph 130["ajv"]
+subgraph 131["lib"]
+132["ajv.js"]
+end
+end
+subgraph 143["inquirer"]
+subgraph 144["lib"]
+145["inquirer.js"]
+end
+end
+subgraph 155["strip-json-comments"]
+156["index.js"]
+end
+end
+subgraph 8["src"]
+subgraph 9["cli"]
+10["index.js"]
+133["formatMetaInfo.js"]
+134["getResolveConfig.js"]
+subgraph 135["utl"]
+136["makeAbsolute.js"]
+158["io.js"]
+159["validateFileExistence.js"]
+end
+subgraph 137["initConfig"]
+138["index.js"]
+139["createConfigFile.js"]
+140["config.js.template.js"]
+141["config.json.template.js"]
+142["getUserInput.js"]
+end
+146["normalizeOptions.js"]
+147["defaults.json"]
+subgraph 149["compileConfig"]
+150["index.js"]
+151["mergeConfigs.js"]
+154["readConfig.js"]
+end
+157["parseTSConfig.js"]
+end
+subgraph 15["main"]
+16["index.js"]
+subgraph 120["options"]
+121["normalize.js"]
+122["defaults.json"]
+123["validate.js"]
+end
+subgraph 126["ruleSet"]
+127["normalize.js"]
+128["validate.js"]
+129["jsonschema.json"]
+end
+end
+subgraph 17["report"]
+subgraph 18["dot"]
+19["richModuleColorScheme.json"]
+106["coloring.js"]
+107["defaultModuleColorScheme.json"]
+109["index.js"]
+110["dot.template.js"]
+end
+subgraph 97["csv"]
+98["index.js"]
+102["csv.template.js"]
+end
+101["dependencyToIncidenceTransformer.js"]
+subgraph 103["ddot"]
+104["index.js"]
+108["ddot.template.js"]
+end
+111["err.js"]
+subgraph 116["html"]
+117["index.js"]
+118["html.template.js"]
+end
+119["json.js"]
+end
+subgraph 20["extract"]
+21["index.js"]
+23["addValidations.js"]
+subgraph 29["derive"]
+subgraph 30["circular"]
+31["index.js"]
+32["dependencyEndsUpAtFrom.js"]
+end
+subgraph 33["orphan"]
+34["index.js"]
+35["isOrphan.js"]
+end
+end
+36["extract.js"]
+subgraph 38["ast-extractors"]
+39["extract-AMD-deps.js"]
+43["extract-commonJS-deps.js"]
+44["extract-ES6-deps.js"]
+45["extract-typescript-deps.js"]
+end
+49["ignore.js"]
+subgraph 50["parse"]
+51["toJavascriptAST.js"]
+69["toTypescriptAST.js"]
+end
+subgraph 60["transpile"]
+61["index.js"]
+62["meta.js"]
+63["coffeeWrap.js"]
+64["javaScriptWrap.js"]
+65["liveScriptWrap.js"]
+66["typeScriptWrap.js"]
+end
+subgraph 67["utl"]
+68["getExtension.js"]
+72["pathToPosix.js"]
+end
+subgraph 70["resolve"]
+71["index.js"]
+73["resolve-AMD.js"]
+76["determineDependencyTypes.js"]
+77["localNpmHelpers.js"]
+78["resolve.js"]
+82["compileResolveOptions.js"]
+subgraph 86["readPackageDeps"]
+87["index.js"]
+88["mergePackages.js"]
+end
+91["resolve-helpers.js"]
+92["resolve-commonJS.js"]
+93["isFollowable.js"]
+end
+94["gatherInitialSources.js"]
+95["summarize.js"]
+end
+subgraph 24["validate"]
+25["index.js"]
+26["matchDependencyRule.js"]
+27["isModuleOnlyRule.js"]
+28["matchModuleRule.js"]
+end
+end
+37["path"]
+58["fs"]
+1 --> 2
+1 --> 10
+1 --> 5
+1 --> 7
+10 --> 16
+10 --> 133
+10 --> 134
+10 --> 138
+10 --> 146
+10 --> 157
+10 --> 158
+10 --> 159
+10 --> 12
+10 --> 14
+16 --> 21
+16 --> 62
+16 --> 98
+16 --> 104
+16 --> 109
+16 --> 19
+16 --> 111
+16 --> 117
+16 --> 119
+16 --> 121
+16 --> 123
+16 --> 127
+16 --> 128
+21 --> 23
+21 --> 31
+21 --> 34
+21 --> 36
+21 --> 94
+21 --> 95
+21 --> 72
+21 --> 22
+23 --> 25
+25 --> 26
+25 --> 28
+26 --> 27
+28 --> 27
+31 --> 32
+31 --> 14
+34 --> 35
+34 --> 14
+36 --> 39
+36 --> 44
+36 --> 43
+36 --> 45
+36 --> 49
+36 --> 51
+36 --> 69
+36 --> 71
+36 --> 22
+36 --> 37
+39 --> 43
+39 --> 42
+43 --> 42
+44 --> 42
+45 --> 2
+45 --> 48
+51 --> 61
+51 --> 68
+51 --> 54
+51 --> 57
+51 --> 58
+51 --> 59
+61 --> 62
+62 --> 2
+62 --> 63
+62 --> 64
+62 --> 65
+62 --> 66
+63 --> 2
+63 --> 48
+65 --> 2
+65 --> 48
+66 --> 2
+66 --> 14
+66 --> 48
+68 --> 37
+69 --> 2
+69 --> 58
+69 --> 59
+69 --> 48
+71 --> 72
+71 --> 73
+71 --> 92
+71 --> 58
+71 --> 37
+72 --> 37
+73 --> 72
+73 --> 76
+73 --> 87
+73 --> 91
+73 --> 58
+73 --> 59
+73 --> 37
+73 --> 75
+76 --> 77
+76 --> 37
+76 --> 75
+77 --> 78
+77 --> 58
+77 --> 59
+77 --> 37
+78 --> 72
+78 --> 82
+78 --> 81
+82 --> 62
+82 --> 85
+82 --> 81
+87 --> 88
+87 --> 58
+87 --> 59
+87 --> 37
+88 --> 89
+88 --> 14
+88 --> 90
+91 --> 77
+92 --> 72
+92 --> 76
+92 --> 93
+92 --> 87
+92 --> 78
+92 --> 91
+92 --> 37
+92 --> 75
+93 --> 68
+93 --> 82
+94 --> 49
+94 --> 62
+94 --> 58
+94 --> 12
+94 --> 37
+95 --> 96
+98 --> 101
+98 --> 102
+98 --> 100
+102 --> 100
+104 --> 106
+104 --> 108
+104 --> 100
+104 --> 89
+104 --> 14
+104 --> 105
+104 --> 37
+106 --> 107
+106 --> 14
+108 --> 100
+109 --> 106
+109 --> 110
+109 --> 100
+109 --> 37
+110 --> 100
+111 --> 113
+111 --> 115
+117 --> 101
+117 --> 118
+117 --> 100
+118 --> 100
+121 --> 122
+123 --> 125
+128 --> 123
+128 --> 129
+128 --> 132
+128 --> 125
+133 --> 16
+133 --> 113
+133 --> 115
+134 --> 136
+136 --> 37
+138 --> 139
+138 --> 142
+139 --> 2
+139 --> 140
+139 --> 141
+139 --> 58
+139 --> 100
+140 --> 100
+141 --> 100
+142 --> 145
+146 --> 150
+146 --> 147
+146 --> 58
+146 --> 89
+146 --> 14
+146 --> 148
+146 --> 37
+150 --> 78
+150 --> 151
+150 --> 154
+150 --> 37
+151 --> 14
+151 --> 152
+151 --> 105
+151 --> 153
+154 --> 58
+154 --> 37
+154 --> 156
+157 --> 2
+157 --> 14
+157 --> 37
+157 --> 48
+158 --> 58
+159 --> 58
