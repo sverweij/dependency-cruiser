@@ -17,7 +17,7 @@ const mermaidNode = (pNode, pText) => `${hashNodeName(pNode)}["${pText}"]`;
 const mermaidEdge = (pFrom, pTo) => {
   const lFromNode = hashNodeName(pFrom.node);
   const lToNode = hashNodeName(pTo.node);
-  return `${lFromNode} --> ${lToNode}`;
+  return `${lFromNode}-->${lToNode}`;
 };
 
 const mermaidEdges = (pEdges) => {

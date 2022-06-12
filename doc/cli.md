@@ -244,13 +244,13 @@ subgraph node_modules["node_modules"]
     node_modules_lodash_cloneDeep_js["cloneDeep.js"]
   end
 end
-src_main_rule_set_normalize_js --> src_main_utl_normalize_re_properties_js
-src_main_rule_set_normalize_js --> node_modules_lodash_cloneDeep_js
-src_main_rule_set_normalize_js --> node_modules_lodash_has_js
-src_main_index_js --> src_main_rule_set_normalize_js
-test_enrich_derive_reachable_index_spec_mjs --> src_main_rule_set_normalize_js
-test_main_rule_set_normalize_spec_mjs --> src_main_rule_set_normalize_js
-test_validate_parse_ruleset_utl_mjs --> src_main_rule_set_normalize_js
+src_main_rule_set_normalize_js-->src_main_utl_normalize_re_properties_js
+src_main_rule_set_normalize_js-->node_modules_lodash_cloneDeep_js
+src_main_rule_set_normalize_js-->node_modules_lodash_has_js
+src_main_index_js-->src_main_rule_set_normalize_js
+test_enrich_derive_reachable_index_spec_mjs-->src_main_rule_set_normalize_js
+test_main_rule_set_normalize_spec_mjs-->src_main_rule_set_normalize_js
+test_validate_parse_ruleset_utl_mjs-->src_main_rule_set_normalize_js
 
 style src_main_rule_set_normalize_js fill:lime,color:black
 ```
