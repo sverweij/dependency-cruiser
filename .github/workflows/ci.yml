@@ -12,6 +12,7 @@ env:
   NODE_LATEST: 18.x
   PLATFORM: ubuntu-latest
   CI: true
+
 defaults:
   run:
     shell: bash
@@ -29,22 +30,18 @@ jobs:
           - ubuntu-latest
     runs-on: ${{matrix.platform}}
     steps:
-      - name: checkout
-        uses: actions/checkout@v3
-      - name: cache node modules for ${{matrix.node-version}}@${{matrix.platform}}
-        uses: actions/cache@v3
+      - uses: actions/checkout@v3
+      - uses: actions/cache@v3
         with:
           path: node_modules
           key: ${{matrix.node-version}}@${{matrix.platform}}-build-${{hashFiles('package.json')}}
           restore-keys: |
             ${{matrix.node-version}}@${{matrix.platform}}-build-
-      - name: set up node ${{matrix.node-version}}@${{matrix.platform}}
-        uses: actions/setup-node@v3
+      - uses: actions/setup-node@v3
         with:
           node-version: ${{matrix.node-version}}
       - name: install & build
         run: |
-          node --version
           npm install
           npm run build
       - name: cache eslint for ${{matrix.node-version}}@${{matrix.platform}} (run on node ${{env.NODE_LATEST}} only)
@@ -56,25 +53,16 @@ jobs:
             ${{matrix.node-version}}@${{matrix.platform}}-build-eslint-
         if: matrix.node-version == env.NODE_LATEST
       - name: lint (run on node ${{env.NODE_LATEST}} only)
-        run: |
-          node --version
-          npx prettier --version
-          npm run lint
         if: matrix.node-version == env.NODE_LATEST
+        run: npm run lint
       - name: forbidden dependency check
-        run: |
-          node --version
-          npm run depcruise
+        run: npm run depcruise
       - name: test coverage (run on node ${{env.NODE_LATEST}} only)
-        run: |
-          node --version
-          npm run test:cover
         if: matrix.node-version == env.NODE_LATEST
+        run: npm run test:cover
       - name: regular test (run on node != ${{env.NODE_LATEST}} only)
-        run: |
-          node --version
-          npm run test
         if: matrix.node-version != env.NODE_LATEST
+        run: npm test
 
   check-windows:
     strategy:
@@ -83,32 +71,24 @@ jobs:
       PLATFORM: windows-latest
     runs-on: windows-latest
     steps:
-      - name: checkout
-        uses: actions/checkout@v3
-      - name: cache node modules for ${{env.NODE_LATEST}}@${{env.PLATFORM}}
-        uses: actions/cache@v3
+      - uses: actions/checkout@v3
+      - uses: actions/cache@v3
         with:
           path: node_modules
           key: ${{env.NODE_LATEST}}@${{env.PLATFORM}}-build-${{hashFiles('package.json')}}
           restore-keys: |
             ${{env.NODE_LATEST}}@${{env.PLATFORM}}-build-
-      - name: set up node ${{env.NODE_LATEST}}@${{env.PLATFORM}}
-        uses: actions/setup-node@v3
+      - uses: actions/setup-node@v3
         with:
           node-version: ${{env.NODE_LATEST}}
       - name: install & build
         run: |
-          node --version
           npm install
           npm run build
       - name: forbidden dependency check
-        run: |
-          node --version
-          npm run depcruise
+        run: npm run depcruise
       - name: test
-        run: |
-          node --version
-          npm run test
+        run: npm test
 
   check-berry-integration:
     strategy:
@@ -117,10 +97,8 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - name: checkout
-        uses: actions/checkout@v3
-      - name: cache external modules for ${{env.NODE_VERSION}}@${{env.PLATFORM}}
-        uses: actions/cache@v3
+      - uses: actions/checkout@v3
+      - uses: actions/cache@v3
         with:
           path: |
             .yarn
@@ -130,19 +108,16 @@ jobs:
           key: ${{env.NODE_VERSION}}@${{env.PLATFORM}}-build-${{hashFiles('package.json')}}
           restore-keys: |
             ${{env.NODE_VERSION}}@${{env.PLATFORM}}-build-
-      - name: set up node ${{env.NODE_VERSION}}@${{env.PLATFORM}}
-        uses: actions/setup-node@v3
+      - uses: actions/setup-node@v3
         with:
           node-version: ${{env.NODE_VERSION}}
       - name: install & build
         run: |
-          node --version
           rm -f .npmrc
           yarn set version berry
           YARN_ENABLE_IMMUTABLE_INSTALLS=false yarn
       - name: forbidden dependency check
         run: |
-          node --version
           yarn --version
           yarn depcruise
       # testing doesn't work as the tests are esm and berry, with pnp enabled,
@@ -158,17 +133,11 @@ jobs:
       fail-fast: false
     runs-on: ubuntu-latest
     steps:
-      - name: checkout
-        uses: actions/checkout@v3
-      - name: set up node ${{env.NODE_VERSION}}@${{env.PLATFORM}}
-        uses: actions/setup-node@v3
+      - uses: actions/checkout@v3
+      - uses: actions/setup-node@v3
         with:
           node-version: ${{env.NODE_VERSION}}
       - name: install
-        run: |
-          node --version
-          npm install
+        run: npm install
       - name: forbidden dependency checks in a yarn pnp environment
-        run: |
-          node --version
-          npm run test:yarn-pnp
+        run: npm run test:yarn-pnp
