@@ -30,6 +30,10 @@ export interface IReporterOptions {
    * alternate boilerplate text.
    */
   markdown?: IMarkdownReporterOptions;
+  /**
+   * Options that influence rendition in the mermad reporter
+   */
+  mermaid: IMermaidReporterOptions;
 }
 
 export interface IReporterFiltersType {
