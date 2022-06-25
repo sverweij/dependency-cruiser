@@ -21,6 +21,7 @@
   - [filtering (`dot`, `ddot` and `archi` reporters)](#filtering-dot-ddot-and-archi-reporters)
   - [wordlist - (`anon` reporter)](#wordlist---anon-reporter)
   - [markdown](#markdown)
+  - [mermaid](#mermaid)
 - [Esoteric options](#esoteric-options)
   - [preserveSymlinks](#preservesymlinks)
   - [mono repo behaviour - combinedDependencies](#mono-repo-behaviour---combinedDependencies)
@@ -1158,6 +1159,25 @@ module.exports = {
   src="assets/sample-markdown-output.png">
 
 </details>
+
+## mermaid
+
+By default the `mermaid` reporter delivers "compressed" results - This means that the rendered appearance remains the same, but the node is hashed and shortened. The default value for mermaid.js limits the amount of text that mermaid.js will render to 50000 characters.
+However, it is also possible to output highly readable results without compression:
+
+```javascript
+module.exports = {
+  // ...
+  options: {
+    reporterOptions: {
+      mermaid: {
+        // Whether or not to compresses the output text. Defaults to true.
+        minify: false,
+      },
+    },
+  },
+};
+```
 
 ## Esoteric options
 

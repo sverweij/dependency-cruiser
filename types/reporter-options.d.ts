@@ -30,6 +30,10 @@ export interface IReporterOptions {
    * alternate boilerplate text.
    */
   markdown?: IMarkdownReporterOptions;
+  /**
+   * Options that influence rendition in the mermad reporter
+   */
+  mermaid: IMermaidReporterOptions;
 }
 
 export interface IReporterFiltersType {
@@ -191,6 +195,13 @@ export interface IMarkdownReporterOptions {
    * Defaults to true
    */
   showFooter?: boolean;
+}
+
+export interface IMermaidReporterOptions {
+  /**
+   * Whether or not to compresses the output text. Defaults to true.
+   */
+  minify?: boolean;
 }
 
 export type MetricsOrderByType =
