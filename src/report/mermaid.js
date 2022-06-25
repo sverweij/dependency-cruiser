@@ -120,7 +120,7 @@ const focusHighlights = (pModules, pNamesHashMap) => {
  * @return {Map<string, string>}
  */
 const hashModuleNames = (pModules, pMinify) => {
-  const lBase = 10;
+  const lBase = 36;
   const lNamesHashMap = new Map();
   let lCount = 0;
 
