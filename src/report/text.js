@@ -1,25 +1,77 @@
 const figures = require("figures");
+const { underline: highlight } = require("chalk");
 
-function toFlatModuleDependencies(pModule) {
+const DEFAULT_OPTIONS = {
+  highlightFocused: false,
+};
+
+/**
+ *
+ * @param {import("../../types/cruise-result").IModule} pModule
+ * @param {Set<string>} pModulesInFocus
+ * @param {boolean} pHighlightFocused
+ * @returns {any}
+ */
+function toFlatModuleDependencies(pModule, pModulesInFocus, pHighlightFocused) {
   return pModule.dependencies.map((pDependency) => ({
-    from: pModule.source,
-    to: pDependency.resolved,
+    from: {
+      name: pModule.source,
+      highlight: pHighlightFocused && Boolean(pModule.matchesFocus),
+    },
+    to: {
+      name: pDependency.resolved,
+      highlight: pHighlightFocused && pModulesInFocus.has(pDependency.resolved),
+    },
   }));
 }
 
-function toFlatDependencies(pModules) {
+function toFlatDependencies(pModules, pModulesInFocus, pHighlightFocused) {
   return pModules.reduce(
-    (pAll, pModule) => pAll.concat(toFlatModuleDependencies(pModule)),
+    (pAll, pModule) =>
+      pAll.concat(
+        toFlatModuleDependencies(pModule, pModulesInFocus, pHighlightFocused)
+      ),
     []
   );
 }
 
-function stringify(pFlatDependency) {
-  return `${pFlatDependency.from} ${figures.arrowRight} ${pFlatDependency.to}`;
+function stringifyModule(pModule) {
+  return pModule.highlight ? highlight(pModule.name) : pModule.name;
 }
 
-function report(pResults) {
-  return toFlatDependencies(pResults.modules).reduce(
+function stringify(pFlatDependency) {
+  return `${stringifyModule(pFlatDependency.from)} ${
+    figures.arrowRight
+  } ${stringifyModule(pFlatDependency.to)}`;
+}
+
+/**
+ *
+ * @param {import("../../types/cruise-result").IModule[]} pModules
+ * @returns {Set<string>}
+ */
+function getModulesInFocus(pModules) {
+  return new Set(
+    pModules
+      .filter((pModule) => Boolean(pModule.matchesFocus))
+      .map((pModule) => pModule.source)
+  );
+}
+
+/**
+ *
+ * @param {import("../../types/cruise-result").ICruiseResult} pResults
+ * @param {import("../../types/reporter-options").ITextReporterOptions} pOptions
+ * @returns {string}
+ */
+function report(pResults, pOptions) {
+  const lOptions = { ...DEFAULT_OPTIONS, ...pOptions };
+
+  return toFlatDependencies(
+    pResults.modules,
+    getModulesInFocus(pResults.modules),
+    lOptions.highlightFocused === true
+  ).reduce(
     (pAll, pDependency) => pAll.concat(stringify(pDependency)).concat("\n"),
     ""
   );
@@ -29,9 +81,10 @@ function report(pResults) {
  * Returns the results of a cruise in a text only format
  * - for each dependency the from and the two, separated by an arrow.
  * @param {import("../../types/cruise-result").ICruiseResult} pResults
+ * @param {import("../../types/reporter-options").ITextReporterOptions} pOptions
  * @returns {import("../../types/dependency-cruiser").IReporterOutput}
  */
-module.exports = (pResults) => ({
-  output: report(pResults),
+module.exports = (pResults, pOptions) => ({
+  output: report(pResults, pOptions || {}),
   exitCode: 0,
 });
