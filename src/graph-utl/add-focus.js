@@ -1,33 +1,33 @@
-const get = require("lodash/get");
-const matchFacade = require("./match-facade");
+const has = require("lodash/has");
+const { moduleMatchesFilter } = require("./match-facade");
 
 function getFocusModules(pModules, pFilter) {
   return pModules
-    .filter((pModule) => matchFacade.moduleMatchesFilter(pModule, pFilter))
+    .filter((pModule) => moduleMatchesFilter(pModule, pFilter))
     .map((pModule) => ({ ...pModule, matchesFocus: true }));
 }
 
-function getCallingModules(pModules, pFilter) {
+function getCallingModules(pModules, pFocusedModuleNames) {
   return pModules
     .filter(
       (pModule) =>
-        !matchFacade.moduleMatchesFilter(pModule, pFilter) &&
+        !pFocusedModuleNames.has(pModule.source) &&
         pModule.dependencies.some((pDependency) =>
-          matchFacade.dependencyMatchesFilter(pDependency, pFilter)
+          pFocusedModuleNames.has(pDependency.resolved)
         )
     )
     .map((pModule) => ({
       ...pModule,
       matchesFocus: false,
       dependencies: pModule.dependencies.filter((pDependency) =>
-        matchFacade.dependencyMatchesFilter(pDependency, pFilter)
+        pFocusedModuleNames.has(pDependency.resolved)
       ),
     }));
 }
 
-function getCalledModules(pModules, pFilter, pFocusModules) {
+function getCalledModules(pModules, pFocusedModules, pFocusedModuleNames) {
   const lCalledModuleNames = new Set(
-    pFocusModules.reduce(
+    pFocusedModules.reduce(
       (pAll, pModule) =>
         pAll.concat(pModule.dependencies.map(({ resolved }) => resolved)),
       []
@@ -37,19 +37,22 @@ function getCalledModules(pModules, pFilter, pFocusModules) {
   return pModules
     .filter(
       (pModule) =>
-        !matchFacade.moduleMatchesFilter(pModule, pFilter) &&
+        !pFocusedModuleNames.has(pModule.source) &&
         lCalledModuleNames.has(pModule.source)
     )
     .map((pModule) => ({ ...pModule, matchesFocus: false, dependencies: [] }));
 }
 
 module.exports = function addFocus(pModules, pFilter) {
-  if (get(pFilter, "path")) {
-    const lFocusModules = getFocusModules(pModules, pFilter);
+  if (has(pFilter, "path")) {
+    const lFocusedModules = getFocusModules(pModules, pFilter);
+    const lFocusedModuleNames = new Set(
+      lFocusedModules.map(({ source }) => source)
+    );
 
-    return lFocusModules
-      .concat(getCallingModules(pModules, pFilter))
-      .concat(getCalledModules(pModules, pFilter, lFocusModules));
+    return lFocusedModules
+      .concat(getCallingModules(pModules, lFocusedModuleNames))
+      .concat(getCalledModules(pModules, lFocusedModules, lFocusedModuleNames));
   }
   return pModules;
 };
