@@ -31,9 +31,13 @@ export interface IReporterOptions {
    */
   markdown?: IMarkdownReporterOptions;
   /**
-   * Options that influence rendition in the mermad reporter
+   * Options that influence rendition of the mermaid reporter
    */
   mermaid?: IMermaidReporterOptions;
+  /**
+   * Options that influence rendition of the text reporter
+   */
+  text?: ITextReporterOptions;
 }
 
 export interface IReporterFiltersType {
@@ -202,6 +206,14 @@ export interface IMermaidReporterOptions {
    * Whether or not to compresses the output text. Defaults to true.
    */
   minify?: boolean;
+}
+
+export interface ITextReporterOptions {
+  /**
+   * Whether or not to highlight modules that are focused with the --focus
+   * command line option (/ general option). Defaults to false
+   */
+  highlightFocused?: boolean;
 }
 
 export type MetricsOrderByType =

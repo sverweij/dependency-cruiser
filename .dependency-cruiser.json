@@ -453,6 +453,9 @@
         "hideModules": true,
         "hideFolders": false
       },
+      "text": {
+        "highlightFocused": true
+      },
       "anon": {
         "wordlist": [
           "aap",

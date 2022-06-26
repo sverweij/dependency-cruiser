@@ -18,6 +18,7 @@ export default {
         markdown: { $ref: "#/definitions/MarkdownReporterOptionsType" },
         metrics: { $ref: "#/definitions/MetricsReporterOptionsType" },
         mermaid: { $ref: "#/definitions/MermaidReporterOptionsType" },
+        text: { $ref: "#/definitions/TextReporterOptionsType" },
       },
     },
     AnonReporterOptionsType: {
@@ -175,6 +176,19 @@ export default {
           type: "boolean",
           description:
             "Whether or not to compresses the output text. Defaults to true.",
+        },
+      },
+    },
+    TextReporterOptionsType: {
+      type: "object",
+      description: "Options that influence rendition of the text reporter",
+      additionalProperties: false,
+      properties: {
+        highlightFocused: {
+          type: "boolean",
+          description:
+            "Whether or not to highlight modules that are focused with the --focus " +
+            "command line option (/ general option). Defaults to false",
         },
       },
     },

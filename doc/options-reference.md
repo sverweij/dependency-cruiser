@@ -22,6 +22,7 @@
   - [wordlist - (`anon` reporter)](#wordlist---anon-reporter)
   - [markdown](#markdown)
   - [mermaid](#mermaid)
+  - [text](#text)
 - [Esoteric options](#esoteric-options)
   - [preserveSymlinks](#preservesymlinks)
   - [mono repo behaviour - combinedDependencies](#mono-repo-behaviour---combinedDependencies)
@@ -1162,8 +1163,12 @@ module.exports = {
 
 ## mermaid
 
-By default the `mermaid` reporter delivers "compressed" results - This means that the rendered appearance remains the same, but the node is hashed and shortened. The default value for mermaid.js limits the amount of text that mermaid.js will render to 50000 characters.
-However, it is also possible to output highly readable results without compression:
+By default the `mermaid` reporter delivers "compressed" results - This means that
+the rendered appearance remains the same, but the node is hashed and shortened.
+The default value for mermaid.js limits the amount of text that mermaid.js will
+render to 50000 characters.
+
+However, it is also possible to output readable results without compression:
 
 ```javascript
 module.exports = {
@@ -1173,6 +1178,28 @@ module.exports = {
       mermaid: {
         // Whether or not to compresses the output text. Defaults to true.
         minify: false,
+      },
+    },
+  },
+};
+```
+
+## text
+
+When you emit a text report you might want to see more clearly which modules you
+'focussed' with the `focus` option and which are callers/ callees. In order to do
+so you can pass an option that highlights focused modules (currently by
+<u>underlining</u> the focused modules).
+
+```javascript
+module.exports = {
+  // ...
+  options: {
+    reporterOptions: {
+      text: {
+        // Whether or not to highlight modules that are focused with the focus
+        // option. Defaults to false.
+        highlightFocused: true,
       },
     },
   },
