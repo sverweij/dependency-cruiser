@@ -75,19 +75,19 @@ const mermaidSubgraphs = (pSource, pOptions, pDepth = 0) => {
 
 /**
  * @param {import('../../types/dependency-cruiser').ICruiseResult} pCruiseResult
- * @param {Map<string, string>} pMinifiedNames
+ * @param {Map<string, string>} pNamesHashMap
  */
-const convertedSubgraphSources = (pCruiseResult, pMinifiedNames) => {
+const convertedSubgraphSources = (pCruiseResult, pNamesHashMap) => {
   let lTree = {};
 
   pCruiseResult.modules.forEach((pModule) => {
-    const paths = pModule.source.split("/");
+    const lPaths = pModule.source.split("/");
 
-    paths.reduce((pChildren, pCurrentPath, pIndex) => {
+    lPaths.reduce((pChildren, pCurrentPath, pIndex) => {
       if (!pChildren[pCurrentPath]) {
-        const node = paths.slice(0, pIndex + 1).join("/");
+        const node = lPaths.slice(0, pIndex + 1).join("/");
         pChildren[pCurrentPath] = {
-          node: pMinifiedNames.get(node),
+          node: pNamesHashMap.get(node),
           text: pCurrentPath,
           children: {},
         };
@@ -129,7 +129,7 @@ const hashModuleNames = (pModules, pMinify) => {
 
     for (let lIndex = 0; lIndex < lPaths.length; lIndex += 1) {
       const lName = lPaths.slice(0, lIndex + 1).join("/");
-      if (!lNamesHashMap.get(lName)) {
+      if (!lNamesHashMap.has(lName)) {
         if (pMinify) {
           lNamesHashMap.set(lName, lCount.toString(lBase));
           lCount += 1;
