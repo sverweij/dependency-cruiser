@@ -1,7 +1,6 @@
 import { readFileSync } from "node:fs";
 import { join } from "node:path";
 import { fileURLToPath } from "node:url";
-import { dir } from "node:console";
 import { expect } from "chai";
 import mermaid from "../../../src/report/mermaid.js";
 import mermaidReporterPlugin from "../../../configs/plugins/mermaid-reporter-plugin.js";
@@ -12,7 +11,6 @@ const __dirname = fileURLToPath(new URL(".", import.meta.url));
 const mockPath = join(__dirname, "__mocks__");
 
 const same = (pName, pOptions, pMermaidModule = mermaid) => {
-  dir(pOptions);
   const definition = requireJSON(`./__mocks__/${pName}.json`);
   const expected = readFileSync(
     join(
