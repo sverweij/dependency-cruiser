@@ -33,7 +33,7 @@ export interface IReporterOptions {
   /**
    * Options that influence rendition in the mermad reporter
    */
-  mermaid: IMermaidReporterOptions;
+  mermaid?: IMermaidReporterOptions;
 }
 
 export interface IReporterFiltersType {
