@@ -2,11 +2,10 @@ name: ci
 
 on:
   push:
-    branches:
-      - master
-      - develop
-      - v10
+    branches: [master, develop, v10]
   pull_request:
+    branches: [develop]
+  workflow_dispatch:
 
 env:
   NODE_LATEST: 18.x
@@ -22,12 +21,8 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        node-version:
-          - 14.x
-          - 16.x
-          - 18.x
-        platform:
-          - ubuntu-latest
+        node-version: [14.x, 16.x, 18.x]
+        platform: [ubuntu-latest]
     runs-on: ${{matrix.platform}}
     steps:
       - uses: actions/checkout@v3
@@ -65,8 +60,6 @@ jobs:
         run: npm test
 
   check-windows:
-    strategy:
-      fail-fast: false
     env:
       PLATFORM: windows-latest
     runs-on: windows-latest
@@ -85,14 +78,10 @@ jobs:
         run: |
           npm install
           npm run build
-      - name: forbidden dependency check
-        run: npm run depcruise
-      - name: test
-        run: npm test
+      - run: npm run depcruise
+      - run: npm test
 
   check-berry-integration:
-    strategy:
-      fail-fast: false
 
     runs-on: ubuntu-latest
 
@@ -129,15 +118,11 @@ jobs:
       #     yarn test:cover
 
   check-yarn-integration:
-    strategy:
-      fail-fast: false
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
       - uses: actions/setup-node@v3
         with:
           node-version: ${{env.NODE_VERSION}}
-      - name: install
-        run: npm install
-      - name: forbidden dependency checks in a yarn pnp environment
-        run: npm run test:yarn-pnp
+      - run: npm install
+      - run: npm run test:yarn-pnp
