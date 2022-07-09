@@ -327,6 +327,20 @@ export default {
             "The directory dependency-cruiser should run its cruise from. Defaults to the current " +
             "working directory.",
         },
+        cache: {
+          oneOf: [
+            {
+              type: "boolean",
+            },
+            {
+              type: "string",
+            },
+          ],
+          description:
+            "When set to true dependency-cruiser will cache its results in node_modules/.cache/dependency-cruiser. " +
+            "When passed a string dependency-cruiser will cache in the folder designated by the string." +
+            "Defaults to false.",
+        },
       },
     },
     ...moduleSystemsType.definitions,

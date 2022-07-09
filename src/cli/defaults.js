@@ -13,4 +13,5 @@ module.exports = {
   PACKAGE_MANIFEST: "package.json",
   OUTPUT_TYPE: "err",
   OUTPUT_TO: "-",
+  CACHE_FOLDER: "node_modules/.cache/dependency-cruiser",
 };

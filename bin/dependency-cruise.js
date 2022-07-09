@@ -87,6 +87,11 @@ try {
       "-P, --prefix <prefix>",
       "prefix to use for links in the dot and err-html reporters"
     )
+    .option(
+      "-C, --cache [cache-location]",
+      "(experimental) use a cache to speed up execution." +
+        "Location defaults to node_modules/.cache/dependency-cruiser"
+    )
     .option("--preserve-symlinks", `leave symlinks unchanged (off by default)`)
     .option("-v, --validate [file]", `alias for --config`)
     .option(
