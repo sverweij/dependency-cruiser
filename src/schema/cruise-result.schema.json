@@ -8,7 +8,8 @@
   "properties": {
     "modules": { "$ref": "#/definitions/ModulesType" },
     "folders": { "$ref": "#/definitions/FoldersType" },
-    "summary": { "$ref": "#/definitions/SummaryType" }
+    "summary": { "$ref": "#/definitions/SummaryType" },
+    "revisionData": { "$ref": "#/definitions/RevisionDataType" }
   },
   "definitions": {
     "ModulesType": {
@@ -1012,6 +1013,10 @@
           "type": "string",
           "description": "The directory dependency-cruiser should run its cruise from. Defaults to the current working directory."
         },
+        "cache": {
+          "oneOf": [{ "type": "boolean" }, { "type": "string" }],
+          "description": "When set to true dependency-cruiser will cache its results in node_modules/.cache/dependency-cruiser. When passed a string dependency-cruiser will cache in the folder designated by the string.Defaults to false."
+        },
         "args": {
           "type": "string",
           "description": "arguments passed on the command line"
@@ -1343,6 +1348,44 @@
         "path": {
           "description": "dependency-cruiser will include modules matching this regular expression in its output, as well as _any_ module that reaches them - either directly or via via",
           "$ref": "#/definitions/REAsStringsType"
+        }
+      }
+    },
+    "RevisionDataType": {
+      "type": "object",
+      "required": ["SHA1", "changes"],
+      "properties": {
+        "SHA1": { "type": "string" },
+        "changes": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "required": ["name", "changeType"],
+            "properties": {
+              "name": { "type": "string" },
+              "changeType": {
+                "type": "string",
+                "enum": [
+                  "added",
+                  "copied",
+                  "deleted",
+                  "modified",
+                  "renamed",
+                  "type changed",
+                  "unmerged",
+                  "pairing broken",
+                  "unknown",
+                  "unmodified",
+                  "untracked",
+                  "ignored"
+                ]
+              },
+              "oldName": { "type": "string" },
+              "checksum": { "type": "string" },
+              "args": { "type": "array", "items": { "type": "string" } },
+              "rulesFile": { "type": "string" }
+            }
+          }
         }
       }
     }

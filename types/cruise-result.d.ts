@@ -3,6 +3,21 @@ import { IFlattenedRuleSet } from "./rule-set";
 import { DependencyType, ModuleSystemType, ProtocolType } from "./shared-types";
 import { IViolation } from "./violations";
 import { IRuleSummary } from "./rule-summary";
+import { IChange } from "watskeburt";
+
+export interface IRevisionChange extends IChange {
+  checksum: string;
+}
+
+/**
+ * caching revisionData. doc and proper naming will follow
+ */
+export interface IRevisionData {
+  SHA1: string;
+  changes: IRevisionChange[];
+  args: string[];
+  rulesFile: string;
+}
 
 export interface ICruiseResult {
   /**
@@ -22,6 +37,10 @@ export interface ICruiseResult {
    * Data summarizing the found dependencies
    */
   summary: ISummary;
+  /**
+   * caching revisionData. doc and proper naming will follow
+   */
+  revisionData?: IRevisionData;
 }
 
 export interface IModule {
@@ -54,7 +73,7 @@ export interface IModule {
   couldNotResolve?: boolean;
   /**
    * the type of inclusion - local, core, unknown (= we honestly don't know), undetermined (=
-   * we didn't bother determining it) or one of the npm dependencies defined in a package.jsom
+   * we didn't bother determining it) or one of the npm dependencies defined in a package.json
    * ('npm' for 'dependencies', 'npm-dev', 'npm-optional', 'npm-peer', 'npm-no-pkg' for
    * development, optional, peer dependencies and dependencies in node_modules but not in
    * package.json respectively)
@@ -130,7 +149,7 @@ export interface IDependency {
    */
   coreModule: boolean;
   /**
-   * 'true' if dependency-cruiser could not resulve the module name in the source code to a
+   * 'true' if dependency-cruiser could not resolve the module name in the source code to a
    * file name or core module. 'false' in all other cases.
    */
   couldNotResolve: boolean;

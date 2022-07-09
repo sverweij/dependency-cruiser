@@ -32,6 +32,7 @@ SCHEMA_SOURCES=tools/schema/baseline-violations.schema.mjs \
 	tools/schema/re-as-strings-type.mjs \
 	tools/schema/reporter-options.mjs \
 	tools/schema/restrictions.mjs \
+	tools/schema/revision-data.mjs \
 	tools/schema/rule-set.mjs \
 	tools/schema/rule-summary.mjs \
 	tools/schema/severity-type.mjs \
