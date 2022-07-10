@@ -39,14 +39,6 @@ jobs:
         run: |
           npm install
           npm run build
-      - name: cache eslint for ${{matrix.node-version}}@${{matrix.platform}} (run on node ${{env.NODE_LATEST}} only)
-        uses: actions/cache@v3
-        with:
-          path: .cache
-          key: ${{matrix.node-version}}@${{matrix.platform}}-build-eslint-${{hashFiles('package.json')}}
-          restore-keys: |
-            ${{matrix.node-version}}@${{matrix.platform}}-build-eslint-
-        if: matrix.node-version == env.NODE_LATEST
       - name: lint (run on node ${{env.NODE_LATEST}} only)
         if: matrix.node-version == env.NODE_LATEST
         run: npm run lint
