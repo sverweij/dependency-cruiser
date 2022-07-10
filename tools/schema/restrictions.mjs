@@ -128,7 +128,7 @@ export default {
         licenseNot: {
           description:
             "Whether or not to match modules that were NOT released under one of " +
-            'the mentioned licenses. E.g. to flag everyting non MIT use "MIT" here',
+            'the mentioned licenses. E.g. to flag everything non MIT use "MIT" here',
           $ref: "#/definitions/REAsStringsType",
         },
         via: {
@@ -147,7 +147,7 @@ export default {
           description:
             "For circular dependencies - whether or not to match cycles that include " +
             "exclusively modules with this regular expression. This is different from " +
-            "the regular via that already mathces when only some of the modules in the " +
+            "the regular via that already matches when only some of the modules in the " +
             "cycle satisfy the regular expression",
           $ref: "#/definitions/REAsStringsType",
         },
@@ -211,7 +211,7 @@ export default {
     },
     DependentsFromRestrictionType: {
       description:
-        "Criteria the dependents of the module should adehere to be caught by this rule " +
+        "Criteria the dependents of the module should adhere to be caught by this rule " +
         "rule. Leave it empty if you want any dependent to be matched.",
       required: [],
       type: "object",

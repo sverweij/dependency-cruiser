@@ -30,7 +30,7 @@ When it turns out they aren't yet:
   dependency (**recommended!**), install the necessary transpilers there.
 - if you're running dependency-cruiser as a global install, install
   the necessary transpilers globally as well.
-- if you're running dependency-crusier with npx you can pass the necessary
+- if you're running dependency-cruiser with npx you can pass the necessary
   compiler(s) with the `-p` option. E.g. to get a list of all incoming and
   outgoing dependencies of a TypeScript file you could use this:
   ```
@@ -67,16 +67,16 @@ If you _do_ want to see these dependencies, do one of these:
 
 </details>
 
-### Q: Some TypeScript dependencies _still_ don't show up (`/// tripple slash directives`)
+### Q: Some TypeScript dependencies _still_ don't show up (`/// triple slash directives`)
 
-**_A_**: You're using a version <9.0.0. From version 9.0.0 on tripple slash
+**_A_**: You're using a version <9.0.0. From version 9.0.0 on triple slash
 directives are recognized without the need for additional configuration. Easiest
 is to upgrade to version 9.0.0 or higher.
 
 <details>
 <summary>background</summary>
 
-In older versions you needed to add the "tsd" (_tripple slash rective_)
+In older versions you needed to add the "tsd" (_triple slash directive_)
 module system to the `moduleSystems` array in your dependency-cruiser
 configuration - or pass it on the command line (with `--module-systems cjs,ejs,tsd`).
 
@@ -344,7 +344,7 @@ export class ReplicateIssueComponent extends React.Component {
 ```
 
 In [this comment](https://github.com/sverweij/dependency-cruiser/issues/395#issuecomment-730295987)
-on the orignal issue [@audunsol](https://github.com/audunsol) offers a few
+on the original issue [@audunsol](https://github.com/audunsol) offers a few
 ways to work around the issue you might find helpful when you have similar
 jsx.
 
@@ -383,7 +383,7 @@ manually.
 For `.svelte` single file components it uses the `svelte` (version 3.x)
 
 - which will be in your module dependencies if you're developing with Svelte.
-- because of how svelt works, all `.svelte` files depend on `"svelte/internal"`.
+- because of how svelte works, all `.svelte` files depend on `"svelte/internal"`.
   If that turns out to be too noisy, you can configure dependency-cruiser to
   ignore it (either in the config file or with a command-line param)
 
@@ -471,7 +471,7 @@ influence performance, loosely in order of impact:
   to _only_ set a `path` for that (typically `node_modules`).
 - If your codebase can be compiled successfully with `swc` setting the parser
   to `swc` will help speed up things a bit (although not as dramatically as
-  you'd dexpect).
+  you'd expect).
 - By default some rules dependency-cruiser ships with include regular
   expressions that will not be entirely applicable to your code base (do you
   still have files ending in `.coffee`?). It’s probably not going to make a
@@ -615,7 +615,7 @@ For reporters that should come shipped with dependency-cruiser do this:
 - In `test/report` add unit tests that prove your reporter does what it
   intends.
 
-### Q: How do I add support for my favourite alt-js language?
+### Q: How do I add support for my favorite alt-js language?
 
 **A**: Ask me nicely or make a PR.
 

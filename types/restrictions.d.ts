@@ -36,7 +36,7 @@ export interface IToRestriction extends IBaseRestrictionType {
   /**
    * "For circular dependencies - whether or not to match cycles that include
    * exclusively modules with this regular expression. This is different from
-   * the regular via that already mathces when only some of the modules in the
+   * the regular via that already matches when only some of the modules in the
    * cycle satisfy the regular expression
    */
   via?: string | string[];
@@ -106,7 +106,7 @@ export interface IToRestriction extends IBaseRestrictionType {
   license?: string | string[];
   /**
    * Whether or not to match modules that were NOT released under one of the mentioned
-   * licenses. E.g. to flag everyting non MIT use "MIT" here
+   * licenses. E.g. to flag everything non MIT use "MIT" here
    */
   licenseNot?: string | string[];
   /**

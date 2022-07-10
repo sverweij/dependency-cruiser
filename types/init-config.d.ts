@@ -23,7 +23,7 @@ export interface IInitConfig {
    */
   tsConfig?: string;
   /**
-   * Wheter or not to take dependencies into account that only exist before
+   * Whether or not to take dependencies into account that only exist before
    * compilation to javascript
    */
   tsPreCompilationDeps: boolean;

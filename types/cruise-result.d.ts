@@ -55,7 +55,7 @@ export interface IModule {
   /**
    * the type of inclusion - local, core, unknown (= we honestly don't know), undetermined (=
    * we didn't bother determining it) or one of the npm dependencies defined in a package.jsom
-   * ('npm' for 'depenencies', 'npm-dev', 'npm-optional', 'npm-peer', 'npm-no-pkg' for
+   * ('npm' for 'dependencies', 'npm-dev', 'npm-optional', 'npm-peer', 'npm-no-pkg' for
    * development, optional, peer dependencies and dependencies in node_modules but not in
    * package.json respectively)
    */
@@ -152,8 +152,8 @@ export interface IDependency {
   cycle?: string[];
   /**
    * the type of inclusion - local, core, unknown (= we honestly don't know), undetermined (=
-   * we didn't bother determining it) or one of the npm dependencies defined in a package.jsom
-   * ('npm' for 'depenencies', 'npm-dev', 'npm-optional', 'npm-peer', 'npm-no-pkg' for
+   * we didn't bother determining it) or one of the npm dependencies defined in a package.json
+   * ('npm' for 'dependencies', 'npm-dev', 'npm-optional', 'npm-peer', 'npm-no-pkg' for
    * development, optional, peer dependencies and dependencies in node_modules but not in
    * package.json respectively)
    */
@@ -253,7 +253,7 @@ export interface IReachesModule {
    */
   source: string;
   /**
-   * The path along wich the 'to' module is reachable from this one.
+   * The path along which the 'to' module is reachable from this one.
    */
   via: string[];
 }
@@ -381,7 +381,7 @@ export interface IFolderDependency {
    */
   valid: boolean;
   /**
-   * the instability of the dependency (denormalized - this is a duplicate of
+   * the instability of the dependency (de-normalized - this is a duplicate of
    * the one found in the instability of the folder with the same name)
    */
   instability?: number;

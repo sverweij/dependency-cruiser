@@ -6,7 +6,7 @@ API
 
 ## Versioning
 
-The API follows the same (semantic) versioning rules and rythm as the API does
+The API follows the same (semantic) versioning rules and rhythm as the API does
 
 function cruise(pFileAndDirectoryArray, pOptions, pResolveOptions, pTSConfig) {
 
@@ -33,7 +33,7 @@ console.dir(cruiseResult.output, { depth: 10 });
 You might notice a few things when you do this
 
 - the function ruthlessly cruises _everything_ in `src` and whatever it uses,
-  recucrsively - even in your `node_modules`. This takes a long time and might
+  recursively - even in your `node_modules`. This takes a long time and might
   not give the information you actually seek. Dependency-cruiser has a bunch of
   options to steer what it actually cruises;
   [passing cruise options](#Passing cruise options) will get you sorted.

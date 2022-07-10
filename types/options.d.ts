@@ -10,11 +10,7 @@ import {
 import { IBaselineViolations } from "./baseline-violations";
 
 export type ExternalModuleResolutionStrategyType = "node_modules" | "yarn-pnp";
-export type ProgressType =
-  | /** yo with the banjo*/
-  "cli-feedback" /** mean with the mandoline */
-  | "performance-log"
-  | "none";
+export type ProgressType = "cli-feedback" | "performance-log" | "none";
 
 export interface ICruiseOptions {
   /**

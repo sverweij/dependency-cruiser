@@ -219,7 +219,7 @@ node ./bin/dependency-cruise.js bin src --config --output-type ddot | \
 [![dependency cruiser's dependency graph](real-world-samples/dependency-cruiser-without-node_modules.svg)](https://sverweij.github.io/dependency-cruiser/dependency-cruiser-dependency-graph.html)
 
 <details>
-<summary>howto</summary>
+<summary>how to</summary>
 
 To generate this yourself do this in the root of the dependency-cruiser repo:
 
@@ -254,14 +254,14 @@ interpreter for writing nice state diagrams. Click for a slightly
 more interactive version. As you can see this graph does not group modules
 from same folders into clusters. Instead it uses only colors for 'grouping'
 and notes the folder name in the nodes. It's what the ['flat'](https://github.com/sverweij/dependency-cruiser/blob/develop/doc/cli.md#flat-fdot) graph reporter
-does for you. See the howto foldout below to see how to reproduce it.
+does for you. See the _how to_ foldout below to see how to reproduce it.
 
 (For this too: click for a slightly more interactive version)
 
 [![state-machine-cat without external dependencies](https://state-machine-cat.js.org/dependency-cruiser-graph-flat-dot.svg)](https://state-machine-cat.js.org/dependency-cruiser-graph-flat-dot.html)
 
 <details>
-<summary>howto</summary>
+<summary>how to</summary>
 
 ```sh
 git clone git@github.com:sverweij/state-machine-cat.git

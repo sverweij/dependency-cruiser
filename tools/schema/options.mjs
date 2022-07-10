@@ -151,7 +151,7 @@ export default {
         forceDeriveDependents: {
           type: "boolean",
           description:
-            "When true includes denormalized dependents in the cruise-result, even " +
+            "When true includes de-normalized dependents in the cruise-result, even " +
             "though there's no rule in the rule set that requires them. Defaults to false.",
         },
         webpackConfig: {
@@ -231,7 +231,7 @@ export default {
                 "extensions attribute. E.g. when you're 100% sure you _only_ have " +
                 "typescript & json and nothing else you can pass ['.ts', '.json'] " +
                 "- which can lead to performance gains on systems with slow i/o " +
-                "(like ms-windows), especially when your tsconfig contains paths/ aliasses.",
+                "(like ms-windows), especially when your tsconfig contains paths/ aliases.",
               items: {
                 type: "string",
               },
@@ -250,7 +250,7 @@ export default {
                   maximum: 1800000,
                   description:
                     "The number of milliseconds [enhanced-resolve](webpack/enhanced-resolve)'s " +
-                    "cached file system should use for cache duration. Typicially you won't " +
+                    "cached file system should use for cache duration. Typically you won't " +
                     "have to touch this - the default works well for repos up to 5000 modules/ " +
                     "20000 dependencies, and likely for numbers above as well. " +
                     "If you experience memory problems on a (humongous) repository you can " +
@@ -290,7 +290,7 @@ export default {
           type: "array",
           description:
             "List of strings you have in use in addition to cjs/ es6 requires & " +
-            "imports to declare module dependencies. Use this e.g. if you've redeclared " +
+            "imports to declare module dependencies. Use this e.g. if you've re-declared " +
             "require (`const want = require`), use a require-wrapper (like semver-try-require) " +
             "or use window.require as a hack to workaround something",
           items: {

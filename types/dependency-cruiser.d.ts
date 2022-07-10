@@ -90,14 +90,14 @@ export interface ITranspileOptions {
   tsConfig?: any;
   /**
    * An object with with a babel config object. Either pass the options
-   * manually or extract them from a configu file with e.g. with
+   * manually or extract them from a configuration file with e.g. with
    * 'dependency-cruiser/config-utl/extract-babel-config')
    */
   babelConfig?: any;
 }
 
 /**
- * /!\ Beta cruise function. Supports slightlhy more stuff (i.e. babel), but
+ * /!\ Beta cruise function. Supports slightly more stuff (i.e. babel), but
  * the function signature might change without notice. /!\
  *
  * Cruises the specified files and files with supported extensions in

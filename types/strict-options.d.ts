@@ -14,7 +14,7 @@ import {
 
 /**
  * the ICruiseOptions interface is lenient in what it accepts for convenience
- * and/ or backwards compatiblity reasons. Internally we use a stricter version
+ * and/ or backwards compatibility reasons. Internally we use a stricter version
  * of ICruiseOptions that
  * - allows only one data type per attribute
  * - makes some attributes mandatory so they're easier to work with

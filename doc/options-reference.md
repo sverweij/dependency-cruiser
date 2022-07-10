@@ -492,7 +492,7 @@ Sample
 }
 ```
 
-You can do it even more minimalistically like so (in which case dependency-cruiser will
+You can do it even more minimalistic like so (in which case dependency-cruiser will
 assume the fileName to be `tsconfig.json`)
 
 ```json
@@ -568,7 +568,7 @@ babelConfig - dependency-cruiser will sort it out for you.
   for regular features might be considered breaking (think of more precise
   module system determination).
 - :construction: The current implementation of babel support is robust, but can be more
-  efficient. It's on the [roadmap](https://github.com/sverweij/dependency-cruiser/projects/1#card-39192574),
+  efficient. It's on the [road map](https://github.com/sverweij/dependency-cruiser/projects/1#card-39192574),
   but as it's not entirely trivial it may take some time. The implementation
   will be feature switched to guarantee stability.
 
@@ -1187,7 +1187,7 @@ module.exports = {
 ## text
 
 When you emit a text report you might want to see more clearly which modules you
-'focussed' with the `focus` option and which are callers/ callees. In order to do
+'focussed' with the `focus` option and which are callers/ called. In order to do
 so you can pass an option that highlights focused modules (currently by
 <u>underlining</u> the focused modules).
 
@@ -1277,7 +1277,7 @@ The first step dependency-cruiser takes is to scan files and folders matching
 the arguments you passed it for files it can parse - typically TypeScript or
 JavaScript sources. Only in a next step it considers other file types, like
 when you include a picture from a `.jsx`. This approach means dependency-cruiser
-only finds these file types when they're reachable from parseable file types.
+only finds these file types when they're reachable from parsable file types.
 
 If you want to run orphan or reachability rules against these file types, however
 you might want include them in the first scan already. To do so you can pass
@@ -1336,7 +1336,7 @@ However, if you want it to scan less you can specify so with the extensions
 attribute. E.g. when you're 100% sure you _only_ have typescript & json and
 nothing else you can pass `['.ts', '.json']` - which can lead to performance gains
 on systems with slow i/o (like ms-windows), especially when your tsconfig
-contains paths/ aliasses.
+contains paths/ aliases.
 
 #### cachedInputFileSystem - `cacheDuration`
 
@@ -1350,7 +1350,7 @@ resolutions in memory.
 
 With `cacheDuration` you can tweak the number of milliseconds
 [enhanced-resolve](https://github.com/webpack/enhanced-resolve)'s cached
-file system should use for cache duration. Typicially you won't have to touch
+file system should use for cache duration. Typically you won't have to touch
 this - the default works well for repos up to 5000 modules/ 20000 dependencies,
 and likely for numbers above as well. If you experience memory problems on a
 (humongous) repository you can use the cacheDuration attribute to tame
@@ -1394,6 +1394,6 @@ as the primary parser: the `acorn` one, which handles all things javascript
 typescript; microsoft's `tsc` or the faster and smaller (but slightly less
 feature rich) `swc`.
 
-`swc` and `tsc` only work when the compilers (respectivley `@core/swc` and
+`swc` and `tsc` only work when the compilers (respectively `@core/swc` and
 `typescript`) are installed in the same spot as dependency-cruiser is. They're
 not bundled with dependency-cruiser.

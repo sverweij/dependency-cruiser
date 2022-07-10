@@ -46,7 +46,7 @@ module.exports = {
         "This is an orphan module - it's likely not used (anymore?). Either use it or " +
         "remove it. If it's logical this module is an orphan (i.e. it's a config file), " +
         "add an exception for it in your dependency-cruiser configuration. By default " +
-        "this rule does not scrutinize dotfiles (e.g. .eslintrc.js), TypeScript declaration " +
+        "this rule does not scrutinize dot-files (e.g. .eslintrc.js), TypeScript declaration " +
         "files (.d.ts), tsconfig.json and some of the babel and webpack configs.",
       severity: 'warn',
       from: {
@@ -138,7 +138,7 @@ module.exports = {
     {
       name: 'no-duplicate-dep-types',
       comment:
-        "Likeley this module depends on an external ('npm') package that occurs more than once " +
+        "Likely this module depends on an external ('npm') package that occurs more than once " +
         "in your package.json i.e. bot as a devDependencies and in dependencies. This will cause " +
         "maintenance problems later on.",
       severity: 'warn',
@@ -208,7 +208,7 @@ module.exports = {
         "This module depends on an npm package that is declared as an optional dependency " +
         "in your package.json. As this makes sense in limited situations only, it's flagged here. " +
         "If you're using an optional dependency here by design - add an exception to your" +
-        "depdency-cruiser configuration.",
+        "dependency-cruiser configuration.",
       from: {},
       to: {
         dependencyTypes: [
@@ -365,7 +365,7 @@ module.exports = {
 
     /* List of strings you have in use in addition to cjs/ es6 requires
        & imports to declare module dependencies. Use this e.g. if you've
-       redeclared require, use a require-wrapper or use window.require as
+       re-declared require, use a require-wrapper or use window.require as
        a hack.
     */
     // exoticRequireStrings: [],

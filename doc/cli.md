@@ -262,7 +262,7 @@ style src_main_rule_set_normalize_js fill:lime,color:black
 Generates a stand-alone html report with:
 
 - a summary with files & dependencies cruised and the number of errors and warnings found
-- all rules, ordered by the number of violations (unviolated ones are hidden by default)
+- all rules, ordered by the number of violations (un-violated ones are hidden by default)
 - a list of all dependency and module violations, ordered by severity, rule name, from module, to module.
 
 ```shell
@@ -1000,7 +1000,7 @@ stay in view when dependency-cruiser is done.
 
 #### none (the default when you don't pass --progress )
 
-Make sure dependency-cruiser doesn't print any feedback. Usefull if you want to
+Make sure dependency-cruiser doesn't print any feedback. Useful if you want to
 override the progress option configured in a configuration file (currently
 an undocumented feature that is subject to change).
 
@@ -1095,7 +1095,7 @@ depcruise-fmt -T dot cruise_result.json | dot -T svg > dependency-graph.svg
 ### filters
 
 You can also use the filters `--focus`, `--include-only` and `--exclude` to peruse
-parts of the dependency-graph. This could be useful for chopping up humoungous
+parts of the dependency-graph. This could be useful for chopping up humongous
 graphs efficiently, or to quickly find the uses of a module:
 
 ```sh

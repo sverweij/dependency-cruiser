@@ -54,7 +54,7 @@ export default {
               instability: {
                 type: "number",
                 description:
-                  "the instability of the dependency (denormalized - this is " +
+                  "the instability of the dependency (de-normalized - this is " +
                   "a duplicate of the one found in the instability of the " +
                   "folder with the same name)",
               },

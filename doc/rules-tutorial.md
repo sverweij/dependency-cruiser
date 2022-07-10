@@ -183,7 +183,7 @@ forbidden: [
 ```
 
 As you see this rule uses the $1 and $2 variables. These match the parts in the
-from.path between brackets. In the regular expession world this is called
+from.path between brackets. In the regular expression world this is called
 'group matching'. Read more about this in the [rules reference](./rules-reference.md#group-matching)
 
 Et voilá:

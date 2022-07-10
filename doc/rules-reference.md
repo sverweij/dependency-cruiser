@@ -866,7 +866,7 @@ _did not_ save it to package.json. Or you already had it in your devDependencies
 and started using it in a production source.
 
 To save you from embarrassing moments like this, you can make rules with the
-`dependencyTypes` restrction. E.g. to prevent you accidentally depend on a
+`dependencyTypes` restriction. E.g. to prevent you accidentally depend on a
 `devDependency` from anything in `src` add this to your
 .dependency-cruiser.js's "forbidden" section:
 
