@@ -19,7 +19,9 @@ try {
 
   program
     .description(
-      "Writes all known violations of rules in a .dependency-cruiser.js to a file.\nAlias for depcruise -c -T baseline -f .dependency-cruiser-known-violations.json [files-or-directories]\nDetails: https://github.com/sverweij/dependency-cruiser"
+      "Writes all known violations of rules in a .dependency-cruiser.js to a file.\n" +
+        "Alias for depcruise -c -T baseline -f .dependency-cruiser-known-violations.json [files-or-directories]\n" +
+        "Details: https://github.com/sverweij/dependency-cruiser"
     )
     .option("-c, --config [file]", "read rules and options from [file]", true)
     .option(
