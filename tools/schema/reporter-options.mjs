@@ -2,6 +2,7 @@ import REAsStringsType from "./re-as-strings-type.mjs";
 import compoundExcludeType from "./compound-exclude-type.mjs";
 import compoundFocusType from "./compound-focus-type.mjs";
 import compoundIncludeOnlyType from "./compound-include-only-type.mjs";
+import compoundReachesType from "./compound-reaches-type.mjs";
 
 export default {
   definitions: {
@@ -285,6 +286,7 @@ export default {
     ...compoundExcludeType.definitions,
     ...compoundIncludeOnlyType.definitions,
     ...compoundFocusType.definitions,
+    ...compoundReachesType.definitions,
     ...REAsStringsType.definitions,
   },
 };

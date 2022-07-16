@@ -39,3 +39,12 @@ export interface IFocusType {
    */
   path?: string | string[];
 }
+
+export interface IReachesType {
+  /**
+   * dependency-cruiser will include modules matching this regular expression
+   * in its output, as well as _any_ module that reaches them - either directly
+   * or via via.
+   */
+  path?: string | string[];
+}

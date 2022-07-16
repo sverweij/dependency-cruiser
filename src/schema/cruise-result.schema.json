@@ -61,7 +61,7 @@
         "dependencyTypes": {
           "type": "array",
           "items": { "$ref": "#/definitions/DependencyTypeType" },
-          "description": "the type of inclusion - local, core, unknown (= we honestly don't know), undetermined (= we didn't bother determining it) or one of the npm dependencies defined in a package.jsom ('npm' for 'depenencies', 'npm-dev', 'npm-optional', 'npm-peer', 'npm-no-pkg' for development, optional, peer dependencies and dependencies in node_modules but not in package.json respectively)"
+          "description": "the type of inclusion - local, core, unknown (= we honestly don't know), undetermined (= we didn't bother determining it) or one of the npm dependencies defined in a package.json ('npm' for 'dependencies', 'npm-dev', 'npm-optional', 'npm-peer', 'npm-no-pkg' for development, optional, peer dependencies and dependencies in node_modules but not in package.json respectively)"
         },
         "license": {
           "type": "string",
@@ -130,7 +130,7 @@
               "source": { "type": "string" },
               "via": {
                 "type": "array",
-                "description": "The path along wich the 'to' module is reachable from this one.",
+                "description": "The path along which the 'to' module is reachable from this one.",
                 "items": { "type": "string" }
               }
             }
@@ -188,7 +188,7 @@
         "dependencyTypes": {
           "type": "array",
           "items": { "$ref": "#/definitions/DependencyTypeType" },
-          "description": "the type of inclusion - local, core, unknown (= we honestly don't know), undetermined (= we didn't bother determining it) or one of the npm dependencies defined in a package.jsom ('npm' for 'dependencies', 'npm-dev', 'npm-optional', 'npm-peer', 'npm-no-pkg' for development, optional, peer dependencies and dependencies in node_modules but not in package.json respectively)"
+          "description": "the type of inclusion - local, core, unknown (= we honestly don't know), undetermined (= we didn't bother determining it) or one of the npm dependencies defined in a package.json ('npm' for 'dependencies', 'npm-dev', 'npm-optional', 'npm-peer', 'npm-no-pkg' for development, optional, peer dependencies and dependencies in node_modules but not in package.json respectively)"
         },
         "license": {
           "type": "string",
@@ -216,7 +216,7 @@
         },
         "couldNotResolve": {
           "type": "boolean",
-          "description": "'true' if dependency-cruiser could not resulve the module name in the source code to a file name or core module. 'false' in all other cases."
+          "description": "'true' if dependency-cruiser could not resolve the module name in the source code to a file name or core module. 'false' in all other cases."
         },
         "preCompilationOnly": {
           "type": "boolean",
@@ -336,7 +336,7 @@
               },
               "instability": {
                 "type": "number",
-                "description": "the instability of the dependency (denormalized - this is a duplicate of the one found in the instability of the folder with the same name)"
+                "description": "the instability of the dependency (de-normalized - this is a duplicate of the one found in the instability of the folder with the same name)"
               },
               "valid": {
                 "type": "boolean",
@@ -715,7 +715,7 @@
           "$ref": "#/definitions/REAsStringsType"
         },
         "licenseNot": {
-          "description": "Whether or not to match modules that were NOT released under one of the mentioned licenses. E.g. to flag everyting non MIT use \"MIT\" here",
+          "description": "Whether or not to match modules that were NOT released under one of the mentioned licenses. E.g. to flag everything non MIT use \"MIT\" here",
           "$ref": "#/definitions/REAsStringsType"
         },
         "via": {
@@ -723,7 +723,7 @@
           "$ref": "#/definitions/REAsStringsType"
         },
         "viaOnly": {
-          "description": "For circular dependencies - whether or not to match cycles that include exclusively modules with this regular expression. This is different from the regular via that already mathces when only some of the modules in the cycle satisfy the regular expression",
+          "description": "For circular dependencies - whether or not to match cycles that include exclusively modules with this regular expression. This is different from the regular via that already matches when only some of the modules in the cycle satisfy the regular expression",
           "$ref": "#/definitions/REAsStringsType"
         },
         "viaNot": {
@@ -769,7 +769,7 @@
       }
     },
     "DependentsFromRestrictionType": {
-      "description": "Criteria the dependents of the module should adehere to be caught by this rule rule. Leave it empty if you want any dependent to be matched.",
+      "description": "Criteria the dependents of the module should adhere to be caught by this rule rule. Leave it empty if you want any dependent to be matched.",
       "required": [],
       "type": "object",
       "additionalProperties": false,
@@ -853,6 +853,13 @@
           ]
         },
         "focus": { "$ref": "#/definitions/CompoundFocusType" },
+        "reaches": {
+          "description": "dependency-cruiser will include modules matching this regular expression in its output, as well as _any_ module that reaches them - either directly or via via",
+          "oneOf": [
+            { "$ref": "#/definitions/REAsStringsType" },
+            { "$ref": "#/definitions/CompoundReachesType" }
+          ]
+        },
         "knownViolations": {
           "description": "baseline of known validations. Typically you'd specify these in a file called .dependency-cruiser-known-violations.json (which you'd generate with the --outputType 'baseline') - and which is easy to keep up to date. In a pinch you can specify them here as well. The known violations in .dependency-cruiser-known-violations.json always take precedence.",
           "$ref": "#/definitions/ViolationsType"
@@ -904,7 +911,7 @@
         },
         "forceDeriveDependents": {
           "type": "boolean",
-          "description": "When true includes denormalized dependents in the cruise-result, even though there's no rule in the rule set that requires them. Defaults to false."
+          "description": "When true includes de-normalized dependents in the cruise-result, even though there's no rule in the rule set that requires them. Defaults to false."
         },
         "webpackConfig": {
           "type": "object",
@@ -942,7 +949,7 @@
             },
             "extensions": {
               "type": "array",
-              "description": "List of extensions to scan for when resolving. Typically you want to leave this alone as dependency-cruiser figures out what extensions to scan based on 1. what is available in your environment 2. in the order your environment (nodejs, typescript) applies the resolution itself. However, if you want it to scan less you can specify so with the extensions attribute. E.g. when you're 100% sure you _only_ have typescript & json and nothing else you can pass ['.ts', '.json'] - which can lead to performance gains on systems with slow i/o (like ms-windows), especially when your tsconfig contains paths/ aliasses.",
+              "description": "List of extensions to scan for when resolving. Typically you want to leave this alone as dependency-cruiser figures out what extensions to scan based on 1. what is available in your environment 2. in the order your environment (nodejs, typescript) applies the resolution itself. However, if you want it to scan less you can specify so with the extensions attribute. E.g. when you're 100% sure you _only_ have typescript & json and nothing else you can pass ['.ts', '.json'] - which can lead to performance gains on systems with slow i/o (like ms-windows), especially when your tsconfig contains paths/ aliases.",
               "items": { "type": "string" }
             },
             "cachedInputFileSystem": {
@@ -954,7 +961,7 @@
                   "type": "integer",
                   "minimum": 0,
                   "maximum": 1800000,
-                  "description": "The number of milliseconds [enhanced-resolve](webpack/enhanced-resolve)'s cached file system should use for cache duration. Typicially you won't have to touch this - the default works well for repos up to 5000 modules/ 20000 dependencies, and likely for numbers above as well. If you experience memory problems on a (humongous) repository you can use the cacheDuration attribute to tame enhanced-resolve's memory usage by lowering the cache duration trading off against some (for values over 1000ms) or significant (for values below 500ms) performance. Dependency-cruiser currently uses 4000ms, and in the past has used 1000ms - both with good results."
+                  "description": "The number of milliseconds [enhanced-resolve](webpack/enhanced-resolve)'s cached file system should use for cache duration. Typically you won't have to touch this - the default works well for repos up to 5000 modules/ 20000 dependencies, and likely for numbers above as well. If you experience memory problems on a (humongous) repository you can use the cacheDuration attribute to tame enhanced-resolve's memory usage by lowering the cache duration trading off against some (for values over 1000ms) or significant (for values below 500ms) performance. Dependency-cruiser currently uses 4000ms, and in the past has used 1000ms - both with good results."
                 }
               }
             }
@@ -978,7 +985,7 @@
         },
         "exoticRequireStrings": {
           "type": "array",
-          "description": "List of strings you have in use in addition to cjs/ es6 requires & imports to declare module dependencies. Use this e.g. if you've redeclared require (`const want = require`), use a require-wrapper (like semver-try-require) or use window.require as a hack to workaround something",
+          "description": "List of strings you have in use in addition to cjs/ es6 requires & imports to declare module dependencies. Use this e.g. if you've re-declared require (`const want = require`), use a require-wrapper (like semver-try-require) or use window.require as a hack to workaround something",
           "items": { "type": "string" }
         },
         "reporterOptions": { "$ref": "#/definitions/ReporterOptionsType" },
@@ -1317,6 +1324,16 @@
         "exclude": { "$ref": "#/definitions/CompoundExcludeType" },
         "includeOnly": { "$ref": "#/definitions/CompoundIncludeOnlyType" },
         "focus": { "$ref": "#/definitions/CompoundFocusType" }
+      }
+    },
+    "CompoundReachesType": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "path": {
+          "description": "dependency-cruiser will include modules matching this regular expression in its output, as well as _any_ module that reaches them - either directly or via via",
+          "$ref": "#/definitions/REAsStringsType"
+        }
       }
     }
   }

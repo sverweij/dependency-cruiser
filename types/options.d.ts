@@ -6,6 +6,7 @@ import {
   IExcludeType,
   IFocusType,
   IIncludeOnlyType,
+  IReachesType,
 } from "./filter-types";
 import { IBaselineViolations } from "./baseline-violations";
 
@@ -53,6 +54,12 @@ export interface ICruiseOptions {
    * dependents)
    */
   focus?: string | string[] | IFocusType;
+  /**
+   * dependency-cruiser will include modules matching this regular expression
+   * in its output, as well as _any_ module that reaches them - either directly
+   * or via via.
+   */
+  reaches?: string | string[] | IReachesType;
   /*
    * baseline of known validations. Typically you'd specify these in a file called
    * .dependency-cruiser-known-violations.json (which you'd generate with the --outputType
@@ -259,6 +266,12 @@ export interface IFormatOptions {
    * dependents)
    */
   focus?: string | string[] | IFocusType;
+  /**
+   * dependency-cruiser will include modules matching this regular expression
+   * in its output, as well as _any_ module that reaches them - either directly
+   * or via via.
+   */
+  reaches?: string | string[] | IReachesType;
   /**
    * collapse a to a folder depth by passing a single digit (e.g. 2).
    * When passed a regex collapse to that pattern

@@ -4,6 +4,7 @@
   - [`doNotFollow`: don't cruise modules any further](#donotfollow-dont-cruise-modules-any-further)
   - [`includeOnly`: only include modules satisfying a pattern](#includeonly-only-include-modules-satisfying-a-pattern)
   - [`focus`: show modules matching a pattern - with their direct neighbours](#focus-show-modules-matching-a-pattern---with-their-direct-neighbours)
+  - [`reaches`: show modules matching a pattern - with everything that can reach them](#reaches-show-modules-matching-a-pattern---with-everything-that-can-reach-them)
   - [`exclude`: exclude dependencies from being cruised](#exclude-exclude-dependencies-from-being-cruised)
   - [`collapse`: summarize to folder depth or pattern](#collapse-summarize-to-folder-depth-or-pattern)
   - [`maxDepth`](#maxdepth)
@@ -270,6 +271,37 @@ depcruise -c snazzy-focus.config.json -T dot | dot -T svg > snazzy-focus.svg
 ![snazzy focus](assets/filtering/snazzy-focus.svg)
 
 </details>
+
+### `reaches`: show modules matching a pattern - with everything that can reach them
+
+> :shell: command line option equivalent: `--reaches`
+
+Just like the `includeOnly` and `focus` option, `reaches` takes a regular expression
+that dependency-cruiser uses to find modules to show in its output. In addition
+to what `includeOnly` does, dependency-cruiser will all dependents (direct _and_
+indirect) of the modules matched by the regular expression.
+
+This can be useful if you want to make an impact analysis on what would
+be affected when you change one or more modules around.
+
+Example configuration that'd filter out everything in src/report that can
+directly or indirectly reach the dependency-to-incidence-transformer module:
+
+```json
+{
+  "options": {
+    "includeOnly": "^src/report",
+    "reaches": "^src/report/utl/index.js"
+  }
+}
+```
+
+Which will look something like this when output through a `dot` reporter:
+
+![graphical output showing all modules in src/report that (transitively) depend on the src/report/utl/index.js module](assets/filtering/reaches-example.svg)
+
+> In later versions of dependency-cruiser 'snazzy' coloring options
+> might appear akin to those available with the 'focus' reporter.
 
 ### `exclude`: exclude dependencies from being cruised
 

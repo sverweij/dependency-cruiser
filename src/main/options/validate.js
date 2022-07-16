@@ -73,6 +73,7 @@ function validateCruiseOptions(pOptions) {
     validatePathsSafety(pOptions.exclude);
     validateRegExpSafety(pOptions.includeOnly);
     validateRegExpSafety(pOptions.focus);
+    validateRegExpSafety(pOptions.reaches);
     validateRegExpSafety(pOptions.collapse);
 
     // necessary because not in the config schema
@@ -97,6 +98,7 @@ function validateCruiseOptions(pOptions) {
 function validateFormatOptions(pFormatOptions) {
   validatePathsSafety(pFormatOptions.exclude);
   validatePathsSafety(pFormatOptions.focus);
+  validatePathsSafety(pFormatOptions.reaches);
   validatePathsSafety(pFormatOptions.includeOnly);
   validateRegExpSafety(pFormatOptions.collapse);
   validateOutputType(pFormatOptions.outputType);

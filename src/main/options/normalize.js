@@ -146,12 +146,16 @@ function normalizeCruiseOptions(pOptions) {
   }
   // TODO: further down the execution path code still relies on .doNotFollow
   //       and .exclude existing. We should treat them the same as the
-  //       other two filters (so either make all exist always or only
+  //       other filters (so either make all exist always or only
   //       when they're actually defined)
   lReturnValue.doNotFollow = normalizeFilterOption(lReturnValue.doNotFollow);
   lReturnValue.exclude = normalizeFilterOption(lReturnValue.exclude);
   lReturnValue.extraExtensionsToScan = lReturnValue.extraExtensionsToScan || [];
-  lReturnValue = normalizeFilterOptions(lReturnValue, ["focus", "includeOnly"]);
+  lReturnValue = normalizeFilterOptions(lReturnValue, [
+    "focus",
+    "includeOnly",
+    "reaches",
+  ]);
 
   lReturnValue.exoticRequireStrings = uniq(lReturnValue.exoticRequireStrings);
   if (lReturnValue.reporterOptions) {
@@ -182,6 +186,7 @@ function normalizeFormatOptions(pFormatOptions) {
     "exclude",
     "focus",
     "includeOnly",
+    "reaches",
   ]);
 }
 

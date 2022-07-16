@@ -39,6 +39,10 @@ try {
       "-F, --focus <regex>",
       "only include modules matching the regex + their direct neighbours"
     )
+    .option(
+      "-R, --reaches <regex>",
+      "only include modules matching the regex + all modules that can reach it"
+    )
     .option("-x, --exclude <regex>", "exclude all modules matching the regex")
     .option(
       "-S, --collapse <regex>",

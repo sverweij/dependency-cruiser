@@ -28,6 +28,7 @@ const KNOWN_DEPCRUISE_CLI_OPTIONS = [
   "prefix",
   "preserveSymlinks",
   "progress",
+  "reaches",
   "tsPreCompilationDeps",
   "tsConfig",
   "validate",
