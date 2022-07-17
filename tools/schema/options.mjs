@@ -4,6 +4,7 @@ import compoundDoNotFollowType from "./compound-donot-follow-type.mjs";
 import compoundExcludeType from "./compound-exclude-type.mjs";
 import compoundFocusType from "./compound-focus-type.mjs";
 import compoundIncludeOnlyType from "./compound-include-only-type.mjs";
+import compoundReachesType from "./compound-reaches-type.mjs";
 import dependencyType from "./dependency-type.mjs";
 import moduleSystemsType from "./module-systems-type.mjs";
 import reporterOptions from "./reporter-options.mjs";
@@ -49,6 +50,16 @@ export default {
           oneOf: [
             { $ref: "#/definitions/REAsStringsType" },
             { $ref: "#/definitions/CompoundFocusType" },
+          ],
+        },
+        reaches: {
+          description:
+            "dependency-cruiser will include modules matching this regular expression " +
+            "in its output, as well as _any_ module that reaches them - either directly " +
+            "or via via",
+          oneOf: [
+            { $ref: "#/definitions/REAsStringsType" },
+            { $ref: "#/definitions/CompoundReachesType" },
           ],
         },
         knownViolations: {
@@ -335,6 +346,7 @@ export default {
     ...compoundDoNotFollowType.definitions,
     ...compoundIncludeOnlyType.definitions,
     ...compoundFocusType.definitions,
+    ...compoundReachesType.definitions,
     ...reporterOptions.definitions,
     ...REAsStringsType.definitions,
     ...violations.definitions,

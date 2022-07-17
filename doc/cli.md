@@ -29,6 +29,7 @@ available in dependency-cruiser configurations.
 1. [`--do-not-follow`: don't cruise modules adhering to this pattern any further](#--do-not-follow-dont-cruise-modules-adhering-to-this-pattern-any-further)
 1. [`--include-only`: only include modules satisfying a pattern](#--include-only-only-include-modules-satisfying-a-pattern)
 1. [`--focus`: show modules and their direct neighbours](#--focus-show-modules-and-their-direct-neighbours)
+1. [`--reaches`: show modules and their transitive dependents](#--reaches-show-modules-and-their-transitive-dependents)
 1. [`--collapse`: summarize to folder depth or pattern](#--collapse-summarize-to-folder-depth-or-pattern)
 1. [`--exclude`: exclude dependencies from being cruised](#--exclude-exclude-dependencies-from-being-cruised)
 1. [`--max-depth`](#--max-depth)
@@ -858,10 +859,24 @@ Takes a regular expression in the same fashion `--include-only`, `--exclude` and
 `--do-not-follow` do.
 
 ```sh
-dependency-cruise --include-only "^src" --focus "^src/main" -T dot src | dot -T svg > focus-on-main-dir-graph.svg
+dependency-cruise src --include-only "^src" --focus "^src/main" -T dot | dot -T svg > focus-on-main-dir-graph.svg
 ```
 
 See [focus](./options-reference.md#show-modules-matching-a-pattern---with-their-direct-neighbours)
+in the options reference for more details.
+
+### `--reaches`: show modules and their transitive dependents
+
+If you want to e.g. analyze what modules will directly or indirectly be affected
+by a change you make in one or modules you can use this option.
+
+Just like the filter options above, takes a regular expression:
+
+```sh
+dependency-cruise src --include-only "^src/report" --reaches "^src/report/utl/index.js" -T dot | dot -T svg > reaches-example.svg
+```
+
+See [reaches](./options-reference.md#reaches-show-modules-matching-a-pattern---with-everything-that-can-reach-them)
 in the options reference for more details.
 
 ### `--collapse`: summarize to folder depth or pattern

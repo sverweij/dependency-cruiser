@@ -1,6 +1,9 @@
 /* eslint-disable no-unused-expressions */
 import { expect } from "chai";
 import filterbank from "../../src/graph-utl/filterbank.js";
+import reportModules from "./__mocks__/report-modules.mjs";
+import reportIndexModule from "./__fixtures__/reaches/report-index-module.mjs";
+import multiModuleRegexResult from "./__fixtures__/reaches/multi-module-regex-result.mjs";
 
 const MODULES = [
   {
@@ -82,7 +85,7 @@ describe("[U] graph-utl/filterbank - null's, naughts, and zeros", () => {
   });
 });
 
-describe("[U] graph-utl/filterbank - ", () => {
+describe("[U] graph-utl/filterbank - exclude, includeOnly, reaches", () => {
   it("returns the input without excluded modules when exclude is passed ", () => {
     expect(
       filterbank.applyFilters(MODULES, { exclude: { path: "^excluded" } })
@@ -157,5 +160,29 @@ describe("[U] graph-utl/filterbank - ", () => {
         dependencies: [],
       },
     ]);
+  });
+
+  it("reaches: regex selecting no existing module yields an empty array", () => {
+    expect(
+      filterbank.applyFilters(reportModules, {
+        reaches: { path: "this-module-does-not-exist" },
+      })
+    ).to.deep.equal([]);
+  });
+
+  it("reaches: regex selecting only a module without any dependents yields just that module", () => {
+    expect(
+      filterbank.applyFilters(reportModules, {
+        reaches: { path: "src/report/index.js" },
+      })
+    ).to.deep.equal(reportIndexModule);
+  });
+
+  it("reaches: regex selecting a without any dependents yields just that module", () => {
+    expect(
+      filterbank.applyFilters(reportModules, {
+        reaches: { path: "src/report/(utl/|anon/anonymize-path-element)" },
+      })
+    ).to.deep.equal(multiModuleRegexResult);
   });
 });

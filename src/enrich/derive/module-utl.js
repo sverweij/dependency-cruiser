@@ -1,3 +1,4 @@
+/** @type {Map<string,import('../../../types/cruise-result').IModule>} */
 let gIndexedGraph = null;
 
 /**

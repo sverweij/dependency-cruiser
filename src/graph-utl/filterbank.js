@@ -1,5 +1,6 @@
 const clone = require("lodash/clone");
-const focus = require("./add-focus");
+const addFocus = require("./add-focus");
+const IndexedModuleGraph = require("./indexed-module-graph");
 const matchFacade = require("./match-facade");
 
 function includeOnly(pModules, pIncludeFilter) {
@@ -32,6 +33,37 @@ function exclude(pModules, pExcludeFilter) {
         }))
     : pModules;
 }
+/**
+ *
+ * @param {import("../../types/cruise-result").IModule[]} pModules
+ * @param {import("../../types/filter-types").IReachesType} pReachesFilter
+ * @returns {import("../../types/cruise-result").IModule[]}
+ */
+function filterReaches(pModules, pReachesFilter) {
+  const lModuleNamesToReach = pModules
+    .filter((pModule) =>
+      matchFacade.moduleMatchesFilter(pModule, pReachesFilter)
+    )
+    .map(({ source }) => source);
+
+  /** @type {Array<string>} */
+  let lReachingModules = [];
+  let lIndexedModules = new IndexedModuleGraph(pModules);
+
+  for (let lModuleToReach of lModuleNamesToReach) {
+    lReachingModules = lReachingModules.concat(
+      lIndexedModules.findTransitiveDependents(lModuleToReach)
+    );
+  }
+  return pModules
+    .filter(({ source }) => lReachingModules.includes(source))
+    .map((pModule) => ({
+      ...pModule,
+      dependencies: pModule.dependencies.filter(({ resolved }) =>
+        lReachingModules.includes(resolved)
+      ),
+    }));
+}
 
 function applyFilters(pModules, pFilters) {
   if (pFilters) {
@@ -44,7 +76,10 @@ function applyFilters(pModules, pFilters) {
       lReturnValue = includeOnly(lReturnValue, pFilters.includeOnly);
     }
     if (pFilters.focus) {
-      lReturnValue = focus(lReturnValue, pFilters.focus);
+      lReturnValue = addFocus(lReturnValue, pFilters.focus);
+    }
+    if (pFilters.reaches) {
+      lReturnValue = filterReaches(lReturnValue, pFilters.reaches);
     }
     return lReturnValue;
   }

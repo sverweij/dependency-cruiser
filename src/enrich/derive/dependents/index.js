@@ -10,10 +10,16 @@ function hasDependentsRule(pOptions) {
   );
 }
 
+/**
+ *
+ * @param {import("../../../../types/cruise-result").IOptions} pOptions
+ * @returns
+ */
 function shouldAddDependents(pOptions) {
   return (
     Boolean(pOptions.forceDeriveDependents) ||
     Boolean(pOptions.metrics) ||
+    Boolean(pOptions.reaches) ||
     pOptions.outputType === "metrics" ||
     hasDependentsRule(pOptions)
   );
