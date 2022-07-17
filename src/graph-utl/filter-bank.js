@@ -36,7 +36,7 @@ function exclude(pModules, pExcludeFilter) {
 /**
  *
  * @param {import("../../types/cruise-result").IModule[]} pModules
- * @param {import("../../types/filter-types").IReachesType} pReachesFilter
+ * @param {import("../../types/strict-filter-types").IStrictReachesType} pReachesFilter
  * @returns {import("../../types/cruise-result").IModule[]}
  */
 function filterReaches(pModules, pReachesFilter) {

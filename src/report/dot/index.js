@@ -1,6 +1,6 @@
 const Handlebars = require("handlebars/runtime");
 const get = require("lodash/get");
-const filterbank = require("../../graph-utl/filterbank");
+const filterBank = require("../../graph-utl/filter-bank");
 const theming = require("./theming");
 const moduleUtl = require("./module-utl");
 const prepareFolderLevel = require("./prepare-folder-level");
@@ -26,7 +26,7 @@ function report(
   const lResults = filters
     ? {
         ...pResults,
-        modules: filterbank.applyFilters(pResults.modules, filters),
+        modules: filterBank.applyFilters(pResults.modules, filters),
       }
     : pResults;
 

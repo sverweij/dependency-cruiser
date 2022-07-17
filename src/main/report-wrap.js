@@ -1,6 +1,6 @@
 const get = require("lodash/get");
 const has = require("lodash/has");
-const filterbank = require("../graph-utl/filterbank");
+const filterBank = require("../graph-utl/filter-bank");
 const summarize = require("../enrich/summarize");
 const consolidateToPattern = require("../graph-utl/consolidate-to-pattern");
 const compare = require("../graph-utl/compare");
@@ -14,7 +14,7 @@ const report = require("../report");
  * @returns {import('../../types/dependency-cruiser').ICruiseResult}
  */
 function reSummarizeResults(pResult, pFormatOptions) {
-  let lModules = filterbank.applyFilters(pResult.modules, pFormatOptions);
+  let lModules = filterBank.applyFilters(pResult.modules, pFormatOptions);
 
   if (has(pFormatOptions, "collapse")) {
     lModules = consolidateToPattern(lModules, pFormatOptions.collapse)

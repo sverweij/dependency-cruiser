@@ -3,6 +3,7 @@ import {
   IExcludeType,
   IFocusType,
   IIncludeOnlyType,
+  IReachesType,
 } from "./filter-types";
 import { DependencyType } from "./shared-types";
 
@@ -50,4 +51,13 @@ export interface IStrictFocusType extends IFocusType {
    * up to the specified depth.
    */
   depth?: number;
+}
+
+export interface IStrictReachesType extends IReachesType {
+  /**
+   * dependency-cruiser will include modules matching this regular expression
+   * in its output, as well as _any_ module that reaches them - either directly
+   * or via via.
+   */
+  path: string;
 }

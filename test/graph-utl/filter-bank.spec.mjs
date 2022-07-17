@@ -1,6 +1,6 @@
 /* eslint-disable no-unused-expressions */
 import { expect } from "chai";
-import filterbank from "../../src/graph-utl/filterbank.js";
+import filterBank from "../../src/graph-utl/filter-bank.js";
 import reportModules from "./__mocks__/report-modules.mjs";
 import reportIndexModule from "./__fixtures__/reaches/report-index-module.mjs";
 import multiModuleRegexResult from "./__fixtures__/reaches/multi-module-regex-result.mjs";
@@ -53,42 +53,42 @@ const MODULES = [
   },
 ];
 
-describe("[U] graph-utl/filterbank - null's, naughts, and zeros", () => {
+describe("[U] graph-utl/filter-bank - null's, naughts, and zeros", () => {
   it("returns the input when no filter passed ", () => {
-    expect(filterbank.applyFilters(MODULES)).to.deep.equal(MODULES);
+    expect(filterBank.applyFilters(MODULES)).to.deep.equal(MODULES);
   });
 
   it("returns the input when an empty collection of filters is passed ", () => {
-    expect(filterbank.applyFilters(MODULES, {})).to.deep.equal(MODULES);
+    expect(filterBank.applyFilters(MODULES, {})).to.deep.equal(MODULES);
   });
 
   it("returns the input when empty filters are passed (exclude)", () => {
     expect(
-      filterbank.applyFilters(MODULES, {
+      filterBank.applyFilters(MODULES, {
         exclude: {},
       })
     ).to.deep.equal(MODULES);
   });
   it("returns the input when empty filters are passed (includeOnly)", () => {
     expect(
-      filterbank.applyFilters(MODULES, {
+      filterBank.applyFilters(MODULES, {
         includeOnly: {},
       })
     ).to.deep.equal(MODULES);
   });
   it("returns the input when empty filters are passed (focus)", () => {
     expect(
-      filterbank.applyFilters(MODULES, {
+      filterBank.applyFilters(MODULES, {
         focus: {},
       })
     ).to.deep.equal(MODULES);
   });
 });
 
-describe("[U] graph-utl/filterbank - exclude, includeOnly, reaches", () => {
+describe("[U] graph-utl/filter-bank - exclude, includeOnly, reaches", () => {
   it("returns the input without excluded modules when exclude is passed ", () => {
     expect(
-      filterbank.applyFilters(MODULES, { exclude: { path: "^excluded" } })
+      filterBank.applyFilters(MODULES, { exclude: { path: "^excluded" } })
     ).to.deep.equal([
       {
         source: "included/index.js",
@@ -131,7 +131,7 @@ describe("[U] graph-utl/filterbank - exclude, includeOnly, reaches", () => {
 
   it("returns the input with only the included modules when includeOnly is passed ", () => {
     expect(
-      filterbank.applyFilters(MODULES, { includeOnly: { path: "included" } })
+      filterBank.applyFilters(MODULES, { includeOnly: { path: "included" } })
     ).to.deep.equal([
       {
         source: "included/index.js",
@@ -164,7 +164,7 @@ describe("[U] graph-utl/filterbank - exclude, includeOnly, reaches", () => {
 
   it("reaches: regex selecting no existing module yields an empty array", () => {
     expect(
-      filterbank.applyFilters(reportModules, {
+      filterBank.applyFilters(reportModules, {
         reaches: { path: "this-module-does-not-exist" },
       })
     ).to.deep.equal([]);
@@ -172,7 +172,7 @@ describe("[U] graph-utl/filterbank - exclude, includeOnly, reaches", () => {
 
   it("reaches: regex selecting only a module without any dependents yields just that module", () => {
     expect(
-      filterbank.applyFilters(reportModules, {
+      filterBank.applyFilters(reportModules, {
         reaches: { path: "src/report/index.js" },
       })
     ).to.deep.equal(reportIndexModule);
@@ -180,7 +180,7 @@ describe("[U] graph-utl/filterbank - exclude, includeOnly, reaches", () => {
 
   it("reaches: regex selecting a without any dependents yields just that module", () => {
     expect(
-      filterbank.applyFilters(reportModules, {
+      filterBank.applyFilters(reportModules, {
         reaches: { path: "src/report/(utl/|anon/anonymize-path-element)" },
       })
     ).to.deep.equal(multiModuleRegexResult);
