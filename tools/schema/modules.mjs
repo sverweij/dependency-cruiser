@@ -46,13 +46,18 @@ export default {
         matchesDoNotFollow: {
           type: "boolean",
           description:
-            "'true' if the file name of this module matches the doNotFollow regular " +
+            "'true' if the file name of this module matches the doNotFollow filter regular " +
             "expression",
         },
         matchesFocus: {
           type: "boolean",
           description:
-            "'true' if the file name of this module matches the focus regular expression",
+            "'true' if the file name of this module matches the focus filter regular expression",
+        },
+        matchesReaches: {
+          type: "boolean",
+          description:
+            "'true' if the file name of this module matches the 'reaches' filter regular expression",
         },
         coreModule: {
           type: "boolean",

@@ -334,8 +334,53 @@ Which will look something like this when output through a `dot` reporter:
 
 ![graphical output showing all modules in src/report that (transitively) depend on the src/report/utl/index.js module](assets/filtering/reaches-example.svg)
 
-> In later versions of dependency-cruiser 'snazzy' coloring options
-> might appear akin to those available with the 'focus' reporter.
+#### snazzy-up graphics with the 'matchesReaches' attribute
+
+Just like with the `focus` filter option dependency-cruiser tags the modules that
+_directly_ match the regular expression in the filter with `matchesReaches: true`
+and all other modules with `matchesReaches: false`. You can use this in the `dot`
+like reporter configurations to do some nice highlighting:
+
+```javascript
+{
+  "options": {
+    "includeOnly": "^src/",
+    "reaches": "^src/report/index.js",
+    "reporterOptions": {
+      "dot": {
+        "theme": {
+          "graph": {
+            "splines": "ortho"
+          },
+          "modules": [
+            {
+              "criteria": { "matchesReaches": true },
+              "attributes": {
+                "fillcolor": "lime"
+              }
+            },
+            {
+              "criteria": { "matchesReaches": false },
+              "attributes": {
+                "fillcolor": "lightgray",
+                "fontcolor": "gray"
+              }
+            }
+          ]
+        }
+      }
+    }
+  }
+}
+```
+
+Without this theming engaged the graph would look like this:
+
+![All modules that can reach src/report/index.js - no highlighting](./assets/filtering/reaches-without-highlight.svg)
+
+With the theming it looks like this:
+
+![All modules that can reach src/report/index.js - with only that module highlighted](./assets/filtering/reaches-with-highlight.svg)
 
 ### `exclude`: exclude dependencies from being cruised
 

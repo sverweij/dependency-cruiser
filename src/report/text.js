@@ -53,7 +53,7 @@ function stringify(pFlatDependency) {
 function getModulesInFocus(pModules) {
   return new Set(
     pModules
-      .filter((pModule) => Boolean(pModule.matchesFocus))
+      .filter((pModule) => pModule.matchesFocus || pModule.matchesReaches)
       .map((pModule) => pModule.source)
   );
 }

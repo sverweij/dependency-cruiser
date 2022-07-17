@@ -59,6 +59,7 @@ function filterReaches(pModules, pReachesFilter) {
     .filter(({ source }) => lReachingModules.includes(source))
     .map((pModule) => ({
       ...pModule,
+      matchesReaches: lModuleNamesToReach.includes(pModule.source),
       dependencies: pModule.dependencies.filter(({ resolved }) =>
         lReachingModules.includes(resolved)
       ),
