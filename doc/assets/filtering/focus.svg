@@ -1,1 +1,556 @@
-<svg width="968" height="1264" viewBox="0 0 726 948" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"><g class="graph"><path fill="#fff" stroke="transparent" d="M0 948V0h726v948H0z"/><g class="cluster"><path fill="#fff" stroke="#000" stroke-width="2" d="M24 936h678c6 0 12-6 12-12V24c0-6-6-12-12-12H24c-6 0-12 6-12 12v900c0 6 6 12 12 12"/><text text-anchor="middle" x="359" y="-920.8" font-family="Helvetica,sans-Serif" font-weight="bold" font-size="9" transform="translate(4 944)">src</text></g><g class="cluster"><path fill="#fff" stroke="#000" stroke-width="2" d="M32 686h84c6 0 12-6 12-12v-88c0-6-6-12-12-12H32c-6 0-12 6-12 12v88c0 6 6 12 12 12"/><text text-anchor="middle" x="70" y="-358.8" font-family="Helvetica,sans-Serif" font-weight="bold" font-size="9" transform="translate(4 944)">cli</text></g><g class="cluster"><path fill="#fff" stroke="#000" stroke-width="2" d="M156 928h114c6 0 12-6 12-12v-62c0-6-6-12-12-12H156c-6 0-12 6-12 12v62c0 6 6 12 12 12"/><text text-anchor="middle" x="209" y="-90.8" font-family="Helvetica,sans-Serif" font-weight="bold" font-size="9" transform="translate(4 944)">config-utl</text></g><g class="cluster"><path fill="#fff" stroke="#000" stroke-width="2" d="M164 920h98c6 0 12-6 12-12v-28c0-6-6-12-12-12h-98c-6 0-12 6-12 12v28c0 6 6 12 12 12"/><text text-anchor="middle" x="209" y="-64.8" font-family="Helvetica,sans-Serif" font-weight="bold" font-size="9" transform="translate(4 944)">extract-depcruise-config</text></g><g class="cluster"><path fill="#fff" stroke="#000" stroke-width="2" d="M455.5 360h62c6 0 12-6 12-12v-88c0-6-6-12-12-12h-62c-6 0-12 6-12 12v88c0 6 6 12 12 12"/><text text-anchor="middle" x="482.5" y="-684.8" font-family="Helvetica,sans-Serif" font-weight="bold" font-size="9" transform="translate(4 944)">enrich</text></g><g class="cluster"><path fill="#fff" stroke="#000" stroke-width="2" d="M463.5 352h46c6 0 12-6 12-12v-28c0-6-6-12-12-12h-46c-6 0-12 6-12 12v28c0 6 6 12 12 12"/><text text-anchor="middle" x="482.5" y="-632.8" font-family="Helvetica,sans-Serif" font-weight="bold" font-size="9" transform="translate(4 944)">summarize</text></g><g class="cluster"><path fill="#fff" stroke="#000" stroke-width="2" d="M455.5 240h62c6 0 12-6 12-12v-88c0-6-6-12-12-12h-62c-6 0-12 6-12 12v88c0 6 6 12 12 12"/><text text-anchor="middle" x="482.5" y="-804.8" font-family="Helvetica,sans-Serif" font-weight="bold" font-size="9" transform="translate(4 944)">extract</text></g><g class="cluster"><path fill="#fff" stroke="#000" stroke-width="2" d="M463.5 232h46c6 0 12-6 12-12v-28c0-6-6-12-12-12h-46c-6 0-12 6-12 12v28c0 6 6 12 12 12"/><text text-anchor="middle" x="482.5" y="-752.8" font-family="Helvetica,sans-Serif" font-weight="bold" font-size="9" transform="translate(4 944)">transpile</text></g><g class="cluster"><path fill="#fff" stroke="#000" stroke-width="2" d="M433 540h107c6 0 12-6 12-12V380c0-6-6-12-12-12H433c-6 0-12 6-12 12v148c0 6 6 12 12 12"/><text text-anchor="middle" x="482.5" y="-564.8" font-family="Helvetica,sans-Serif" font-weight="bold" font-size="9" transform="translate(4 944)">graph-utl</text></g><g class="cluster"><path fill="#fff" stroke="#000" stroke-width="2" d="M190 834h504c6 0 12-6 12-12V560c0-6-6-12-12-12H190c-6 0-12 6-12 12v262c0 6 6 12 12 12"/><text text-anchor="middle" x="438" y="-384.8" font-family="Helvetica,sans-Serif" font-weight="bold" font-size="9" transform="translate(4 944)">main</text></g><g class="cluster"><path fill="#fff" stroke="#000" stroke-width="2" d="M326 626h58c6 0 12-6 12-12v-28c0-6-6-12-12-12h-58c-6 0-12 6-12 12v28c0 6 6 12 12 12"/><text text-anchor="middle" x="351" y="-358.8" font-family="Helvetica,sans-Serif" font-weight="bold" font-size="9" transform="translate(4 944)">files-and-dirs</text></g><g class="cluster"><path fill="#fff" stroke="#000" stroke-width="2" d="M326 686h59c6 0 12-6 12-12v-28c0-6-6-12-12-12h-59c-6 0-12 6-12 12v28c0 6 6 12 12 12"/><text text-anchor="middle" x="351.5" y="-298.8" font-family="Helvetica,sans-Serif" font-weight="bold" font-size="9" transform="translate(4 944)">resolve-options</text></g><g class="cluster"><path fill="#fff" stroke="#000" stroke-width="2" d="M326 802h58c6 0 12-6 12-12v-58c0-6-6-12-12-12h-58c-6 0-12 6-12 12v58c0 6 6 12 12 12"/><text text-anchor="middle" x="351" y="-212.8" font-family="Helvetica,sans-Serif" font-weight="bold" font-size="9" transform="translate(4 944)">rule-set</text></g><g class="cluster"><path fill="#fff" stroke="#000" stroke-width="2" d="M457.5 826H654c6 0 12-6 12-12v-58c0-6-6-12-12-12H457.5c-6 0-12 6-12 12v58c0 6 6 12 12 12"/><text text-anchor="middle" x="551.75" y="-188.8" font-family="Helvetica,sans-Serif" font-weight="bold" font-size="9" transform="translate(4 944)">options</text></g><g class="cluster"><path fill="#fff" stroke="#000" stroke-width="2" d="M572 736h114c6 0 12-6 12-12v-28c0-6-6-12-12-12H572c-6 0-12 6-12 12v28c0 6 6 12 12 12"/><text text-anchor="middle" x="625" y="-248.8" font-family="Helvetica,sans-Serif" font-weight="bold" font-size="9" transform="translate(4 944)">utl</text></g><g class="cluster"><path fill="#fff" stroke="#000" stroke-width="2" d="M606 540h46c6 0 12-6 12-12v-28c0-6-6-12-12-12h-46c-6 0-12 6-12 12v28c0 6 6 12 12 12"/><text text-anchor="middle" x="625" y="-444.8" font-family="Helvetica,sans-Serif" font-weight="bold" font-size="9" transform="translate(4 944)">report</text></g><g class="cluster"><path fill="#fff" stroke="#000" stroke-width="2" d="M434 120h105c6 0 12-6 12-12V50c0-6-6-12-12-12H434c-6 0-12 6-12 12v58c0 6 6 12 12 12"/><text text-anchor="middle" x="482.5" y="-894.8" font-family="Helvetica,sans-Serif" font-weight="bold" font-size="9" transform="translate(4 944)">schema</text></g><g class="cluster"><path fill="#fff" stroke="#000" stroke-width="2" d="M332 540h46c6 0 12-6 12-12v-28c0-6-6-12-12-12h-46c-6 0-12 6-12 12v28c0 6 6 12 12 12"/><text text-anchor="middle" x="351" y="-444.8" font-family="Helvetica,sans-Serif" font-weight="bold" font-size="9" transform="translate(4 944)">utl</text></g><a xlink:href="src/cli/format-meta-info.js" xlink:title="format-meta-info.js" class="node" transform="translate(4 944)"><path fill="#ffc" stroke="#000" d="M110-344H30c-3 0-6 3-6 6v6c0 3 3 6 6 6h80c3 0 6-3 6-6v-6c0-3-3-6-6-6"/><text x="32" y="-332.8" font-family="Helvetica,sans-Serif" font-size="9">format-meta-info.js</text></a><a xlink:href="src/main/index.js" xlink:title="index.js" class="node" transform="translate(4 944)"><path fill="#ffc" stroke="#000" d="M230-314h-42c-3 0-6 3-6 6v6c0 3 3 6 6 6h42c3 0 6-3 6-6v-6c0-3-3-6-6-6"/><text x="193" y="-302.8" font-family="Helvetica,sans-Serif" font-size="9">index.js</text></a><g class="edge" stroke="#000" stroke-width="2" stroke-opacity=".2"><path fill="none" d="M111 618.14V636h68.93"/><path fill-opacity=".2" d="m179.93 633.9 6 2.1-6 2.1v-4.2z"/></g><a xlink:href="src/main/resolve-options/normalize.js" xlink:title="normalize.js" class="node" transform="translate(4 944)"><path fill="#ffc" stroke="#000" d="M378-284h-54c-3 0-6 3-6 6v6c0 3 3 6 6 6h54c3 0 6-3 6-6v-6c0-3-3-6-6-6"/><text x="326" y="-272.8" font-family="Helvetica,sans-Serif" font-size="9">normalize.js</text></a><g class="edge" stroke="#000" stroke-width="2" stroke-opacity=".2"><path fill="none" d="M234 648.16V669h81.94"/><path fill-opacity=".2" d="m315.94 666.9 6 2.1-6 2.1v-4.2z"/></g><a xlink:href="src/enrich/index.js" xlink:title="index.js" class="node" transform="translate(4 944)"><path fill="#ffc" stroke="#000" d="M503.5-670h-42c-3 0-6 3-6 6v6c0 3 3 6 6 6h42c3 0 6-3 6-6v-6c0-3-3-6-6-6"/><text x="466.5" y="-658.8" font-family="Helvetica,sans-Serif" font-size="9">index.js</text></a><g class="edge" stroke="#000" stroke-width="2" stroke-opacity=".2"><path fill="none" d="M217 629.84V283h236.43"/><path fill-opacity=".2" d="m453.43 280.9 6 2.1-6 2.1v-4.2z"/></g><a xlink:href="src/extract/index.js" xlink:title="index.js" class="node" transform="translate(4 944)"><path fill="#ffc" stroke="#000" d="M503.5-790h-42c-3 0-6 3-6 6v6c0 3 3 6 6 6h42c3 0 6-3 6-6v-6c0-3-3-6-6-6"/><text x="466.5" y="-778.8" font-family="Helvetica,sans-Serif" font-size="9">index.js</text></a><g class="edge" stroke="#000" stroke-width="2" stroke-opacity=".2"><path fill="none" d="M202 629.92V163h251.48"/><path fill-opacity=".2" d="m453.48 160.9 6 2.1-6 2.1v-4.2z"/></g><a xlink:href="src/extract/transpile/meta.js" xlink:title="meta.js" class="node" transform="translate(4 944)"><path fill="#ffc" stroke="#000" d="M503.5-738h-42c-3 0-6 3-6 6v6c0 3 3 6 6 6h42c3 0 6-3 6-6v-6c0-3-3-6-6-6"/><text x="467.5" y="-726.8" font-family="Helvetica,sans-Serif" font-size="9">meta.js</text></a><g class="edge" stroke="#000" stroke-width="2" stroke-opacity=".2"><path fill="none" d="M210 629.68V212h243.48"/><path fill-opacity=".2" d="m453.48 209.9 6 2.1-6 2.1v-4.2z"/></g><a xlink:href="src/main/files-and-dirs/normalize.js" xlink:title="normalize.js" class="node" transform="translate(4 944)"><path fill="#ffc" stroke="#000" d="M378-344h-54c-3 0-6 3-6 6v6c0 3 3 6 6 6h54c3 0 6-3 6-6v-6c0-3-3-6-6-6"/><text x="326" y="-332.8" font-family="Helvetica,sans-Serif" font-size="9">normalize.js</text></a><g class="edge" stroke="#000" stroke-width="2" stroke-opacity=".2"><path fill="none" d="M233 629.84V609h82.99"/><path fill-opacity=".2" d="m315.99 606.9 6 2.1-6 2.1v-4.2z"/></g><a xlink:href="src/schema/cruise-result.schema.js" xlink:title="cruise-result.schema.js" class="node" transform="translate(4 944)"><path fill="#ffc" stroke="#000" d="M531.5-880h-98c-3 0-6 3-6 6v6c0 3 3 6 6 6h98c3 0 6-3 6-6v-6c0-3-3-6-6-6"/><text x="435.5" y="-868.8" font-family="Helvetica,sans-Serif" font-size="9">cruise-result.schema.js</text></a><g class="edge" stroke="#000" stroke-width="2" stroke-opacity=".2"><path fill="none" d="M194 629.65V73h231.48"/><path fill-opacity=".2" d="m425.48 70.9 6 2.1-6 2.1v-4.2z"/></g><a xlink:href="src/utl/bus.js" xlink:title="bus.js" class="node" transform="translate(4 944)"><path fill="#ffc" stroke="#000" d="M372-430h-42c-3 0-6 3-6 6v6c0 3 3 6 6 6h42c3 0 6-3 6-6v-6c0-3-3-6-6-6"/><text x="338.5" y="-418.8" font-family="Helvetica,sans-Serif" font-size="9">bus.js</text></a><g class="edge" stroke="#000" stroke-width="2" stroke-opacity=".2"><path fill="none" d="M225 629.9V523h96.75"/><path fill-opacity=".2" d="m321.75 520.9 6 2.1-6 2.1v-4.2z"/></g><a xlink:href="src/main/options/normalize.js" xlink:title="normalize.js" class="node" transform="translate(4 944)"><path fill="#ffc" stroke="#000" d="M509.5-144h-54c-3 0-6 3-6 6v6c0 3 3 6 6 6h54c3 0 6-3 6-6v-6c0-3-3-6-6-6"/><text x="457.5" y="-132.8" font-family="Helvetica,sans-Serif" font-size="9">normalize.js</text></a><g class="edge" stroke="#000" stroke-width="2" stroke-opacity=".2"><path fill="none" d="M200 648.14V809h247.35"/><path fill-opacity=".2" d="m447.35 806.9 6 2.1-6 2.1v-4.2z"/></g><a xlink:href="src/main/options/validate.js" xlink:title="validate.js" class="node" transform="translate(4 944)"><path fill="#ffc" stroke="#000" d="M505.5-174h-46c-3 0-6 3-6 6v6c0 3 3 6 6 6h46c3 0 6-3 6-6v-6c0-3-3-6-6-6"/><text x="461.5" y="-162.8" font-family="Helvetica,sans-Serif" font-size="9">validate.js</text></a><g class="edge" stroke="#000" stroke-width="2" stroke-opacity=".2"><path fill="none" d="M240.27 639H487v124.81"/><path fill-opacity=".2" d="m489.1 763.81-2.1 6-2.1-6h4.2z"/></g><a xlink:href="src/main/report-wrap.js" xlink:title="report-wrap.js" class="node" transform="translate(4 944)"><path fill="#ffc" stroke="#000" d="M381.5-250h-61c-3 0-6 3-6 6v6c0 3 3 6 6 6h61c3 0 6-3 6-6v-6c0-3-3-6-6-6"/><text x="322.5" y="-238.8" font-family="Helvetica,sans-Serif" font-size="9">report-wrap.js</text></a><g class="edge" stroke="#000" stroke-width="2" stroke-opacity=".2"><path fill="none" d="M227 648.17V703h85.32"/><path fill-opacity=".2" d="m312.32 700.9 6 2.1-6 2.1v-4.2z"/></g><a xlink:href="src/main/rule-set/normalize.js" xlink:title="normalize.js" class="node" transform="translate(4 944)"><path fill="#ffc" stroke="#000" d="M378-198h-54c-3 0-6 3-6 6v6c0 3 3 6 6 6h54c3 0 6-3 6-6v-6c0-3-3-6-6-6"/><text x="326" y="-186.8" font-family="Helvetica,sans-Serif" font-size="9">normalize.js</text></a><g class="edge" stroke="#000" stroke-width="2" stroke-opacity=".2"><path fill="none" d="M220 648.1V755h95.98"/><path fill-opacity=".2" d="m315.98 752.9 6 2.1-6 2.1v-4.2z"/></g><a xlink:href="src/main/rule-set/validate.js" xlink:title="validate.js" class="node" transform="translate(4 944)"><path fill="#ffc" stroke="#000" d="M374-168h-46c-3 0-6 3-6 6v6c0 3 3 6 6 6h46c3 0 6-3 6-6v-6c0-3-3-6-6-6"/><text x="330" y="-156.8" font-family="Helvetica,sans-Serif" font-size="9">validate.js</text></a><g class="edge" stroke="#000" stroke-width="2" stroke-opacity=".2"><path fill="none" d="M213 648.13V785h106.92"/><path fill-opacity=".2" d="m319.92 782.9 6 2.1-6 2.1v-4.2z"/></g><a xlink:href="src/cli/format.js" xlink:title="format.js" class="node" transform="translate(4 944)"><path fill="#ffc" stroke="#000" d="M91-314H49c-3 0-6 3-6 6v6c0 3 3 6 6 6h42c3 0 6-3 6-6v-6c0-3-3-6-6-6"/><text x="52.5" y="-302.8" font-family="Helvetica,sans-Serif" font-size="9">format.js</text></a><g class="edge" stroke="#000" stroke-width="2" stroke-opacity=".2"><path fill="none" d="M101.13 642h78.81"/><path fill-opacity=".2" d="m179.94 639.9 6 2.1-6 2.1v-4.2z"/></g><a xlink:href="src/cli/index.js" xlink:title="index.js" class="node" transform="translate(4 944)"><path fill="#ffc" stroke="#000" d="M91-284H49c-3 0-6 3-6 6v6c0 3 3 6 6 6h42c3 0 6-3 6-6v-6c0-3-3-6-6-6"/><text x="54" y="-272.8" font-family="Helvetica,sans-Serif" font-size="9">index.js</text></a><g class="edge" stroke="#000" stroke-width="2" stroke-opacity=".2"><path fill="none" d="M101 664.5h92v-10.29"/><path fill-opacity=".2" d="m190.9 654.21 2.1-6 2.1 6h-4.2z"/></g><a xlink:href="src/config-utl/extract-depcruise-config/index.js" xlink:title="index.js" class="node" transform="translate(4 944)"><path fill="#ffc" stroke="#000" d="M230-50h-42c-3 0-6 3-6 6v6c0 3 3 6 6 6h42c3 0 6-3 6-6v-6c0-3-3-6-6-6"/><text x="193" y="-38.8" font-family="Helvetica,sans-Serif" font-size="9">index.js</text></a><g class="edge" stroke="#000" stroke-width="2" stroke-opacity=".2"><path fill="none" d="M207 893.72V673.5h108.79"/><path fill-opacity=".2" d="m315.79 671.4 6 2.1-6 2.1v-4.2z"/></g><g class="edge" stroke="#000" stroke-width="2" stroke-opacity=".2"><path fill="none" d="M388.43 666H401V218h52.45"/><path fill-opacity=".2" d="m453.45 215.9 6 2.1-6 2.1v-4.2z"/></g><a xlink:href="src/graph-utl/rule-set.js" xlink:title="rule-set.js" class="node" transform="translate(4 944)"><path fill="#ffc" stroke="#000" d="M504.5-550h-44c-3 0-6 3-6 6v6c0 3 3 6 6 6h44c3 0 6-3 6-6v-6c0-3-3-6-6-6"/><text x="462.5" y="-538.8" font-family="Helvetica,sans-Serif" font-size="9">rule-set.js</text></a><g class="edge" stroke="#000" stroke-width="2" stroke-opacity=".2"><path fill="none" d="M388.22 672H411V403h41.39"/><path fill-opacity=".2" d="m452.39 400.9 6 2.1-6 2.1v-4.2z"/></g><a xlink:href="src/enrich/summarize/index.js" xlink:title="index.js" class="node" transform="translate(4 944)"><path fill="#ffc" stroke="#000" d="M503.5-618h-42c-3 0-6 3-6 6v6c0 3 3 6 6 6h42c3 0 6-3 6-6v-6c0-3-3-6-6-6"/><text x="466.5" y="-606.8" font-family="Helvetica,sans-Serif" font-size="9">index.js</text></a><a xlink:href="src/graph-utl/compare.js" xlink:title="compare.js" class="node" transform="translate(4 944)"><path fill="#ffc" stroke="#000" d="M507.5-520h-50c-3 0-6 3-6 6v6c0 3 3 6 6 6h50c3 0 6-3 6-6v-6c0-3-3-6-6-6"/><text x="459.5" y="-508.8" font-family="Helvetica,sans-Serif" font-size="9">compare.js</text></a><a xlink:href="src/graph-utl/consolidate-to-pattern.js" xlink:title="consolidate-to-pattern.js" class="node" transform="translate(4 944)"><path fill="#ffc" stroke="#000" d="M534-490H431c-3 0-6 3-6 6v6c0 3 3 6 6 6h103c3 0 6-3 6-6v-6c0-3-3-6-6-6"/><text x="433" y="-478.8" font-family="Helvetica,sans-Serif" font-size="9">consolidate-to-pattern.js</text></a><a xlink:href="src/graph-utl/filterbank.js" xlink:title="filterbank.js" class="node" transform="translate(4 944)"><path fill="#ffc" stroke="#000" d="M508-460h-51c-3 0-6 3-6 6v6c0 3 3 6 6 6h51c3 0 6-3 6-6v-6c0-3-3-6-6-6"/><text x="459" y="-448.8" font-family="Helvetica,sans-Serif" font-size="9">filterbank.js</text></a><a xlink:href="src/graph-utl/strip-self-transitions.js" xlink:title="strip-self-transitions.js" class="node" transform="translate(4 944)"><path fill="#ffc" stroke="#000" d="M529-430h-93c-3 0-6 3-6 6v6c0 3 3 6 6 6h93c3 0 6-3 6-6v-6c0-3-3-6-6-6"/><text x="438" y="-418.8" font-family="Helvetica,sans-Serif" font-size="9">strip-self-transitions.js</text></a><a xlink:href="src/main/options/defaults.js" xlink:title="defaults.js" class="node" transform="translate(4 944)"><path fill="#ffc" stroke="#000" d="M648-144h-46c-3 0-6 3-6 6v6c0 3 3 6 6 6h46c3 0 6-3 6-6v-6c0-3-3-6-6-6"/><text x="604" y="-132.8" font-family="Helvetica,sans-Serif" font-size="9">defaults.js</text></a><g class="edge" stroke="#000" stroke-width="2" stroke-opacity=".2"><path fill="none" d="M519.55 812h74.44"/><path fill-opacity=".2" d="m593.99 809.9 6 2.1-6 2.1v-4.2z"/></g><a xlink:href="src/main/utl/normalize-re-properties.js" xlink:title="normalize-re-properties.js" class="node" transform="translate(4 944)"><path fill="#ffc" stroke="#000" d="M680-234H570c-3 0-6 3-6 6v6c0 3 3 6 6 6h110c3 0 6-3 6-6v-6c0-3-3-6-6-6"/><text x="572" y="-222.8" font-family="Helvetica,sans-Serif" font-size="9">normalize-re-properties.js</text></a><g class="edge" stroke="#000" stroke-width="2" stroke-opacity=".2"><path fill="none" d="M519.53 806H590v-71.69"/><path fill-opacity=".2" d="m587.9 734.31 2.1-6 2.1 6h-4.2z"/></g><a xlink:href="src/report/index.js" xlink:title="index.js" class="node" transform="translate(4 944)"><path fill="#ffc" stroke="#000" d="M646-430h-42c-3 0-6 3-6 6v6c0 3 3 6 6 6h42c3 0 6-3 6-6v-6c0-3-3-6-6-6"/><text x="609" y="-418.8" font-family="Helvetica,sans-Serif" font-size="9">index.js</text></a><g class="edge" stroke="#000" stroke-width="2" stroke-opacity=".2"><path fill="none" d="M515.57 779H556V523h39.82"/><path fill-opacity=".2" d="m595.82 520.9 6 2.1-6 2.1v-4.2z"/></g><g class="edge" stroke="#000" stroke-width="2" stroke-opacity=".2"><path fill="none" d="M391.52 700.86H406V335h47.25"/><path fill-opacity=".2" d="m453.25 332.9 6 2.1-6 2.1v-4.2z"/></g><g class="edge" stroke="#000" stroke-width="2" stroke-opacity=".2"><path fill="none" d="M391.63 703.14H415V433h34.35"/><path fill-opacity=".2" d="m449.35 430.9 6 2.1-6 2.1v-4.2z"/></g><g class="edge" stroke="#000" stroke-width="2" stroke-opacity=".2"><path fill="none" d="M391.68 705.43H420V463h2.97"/><path fill-opacity=".2" d="m422.97 460.9 6 2.1-6 2.1v-4.2z"/></g><g class="edge" stroke="#000" stroke-width="2" stroke-opacity=".2"><path fill="none" d="M391.64 707.71H425V493h23.67"/><path fill-opacity=".2" d="m448.67 490.9 6 2.1-6 2.1v-4.2z"/></g><g class="edge" stroke="#000" stroke-width="2" stroke-opacity=".2"><path fill="none" d="M391.71 696.29H444V538.32"/><path fill-opacity=".2" d="m441.9 538.32 2.1-6 2.1 6h-4.2z"/></g><g class="edge" stroke="#000" stroke-width="2" stroke-opacity=".2"><path fill="none" d="M391.67 698.57H629V538.44"/><path fill-opacity=".2" d="m626.9 538.44 2.1-6 2.1 6h-4.2z"/></g><g class="edge" stroke="#000" stroke-width="2" stroke-opacity=".2"><path fill="none" d="M388.05 755H579v-20.92"/><path fill-opacity=".2" d="m576.9 734.08 2.1-6 2.1 6h-4.2z"/></g><g class="edge" stroke="#000" stroke-width="2" stroke-opacity=".2"><path fill="none" d="M384.18 784h67.22"/><path fill-opacity=".2" d="m451.4 781.9 6 2.1-6 2.1v-4.2z"/></g><a xlink:href="src/schema/configuration.schema.js" xlink:title="configuration.schema.js" class="node" transform="translate(4 944)"><path fill="#ffc" stroke="#000" d="M533-850H432c-3 0-6 3-6 6v6c0 3 3 6 6 6h101c3 0 6-3 6-6v-6c0-3-3-6-6-6"/><text x="434" y="-838.8" font-family="Helvetica,sans-Serif" font-size="9">configuration.schema.js</text></a><g class="edge" stroke="#000" stroke-width="2" stroke-opacity=".2"><path fill="none" d="M384.17 780H397V103h26.82"/><path fill-opacity=".2" d="m423.82 100.9 6 2.1-6 2.1v-4.2z"/></g></g></svg>
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN"
+ "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
+<!-- Generated by graphviz version 3.0.0 (20220226.1711)
+ -->
+<!-- Title: dependency&#45;cruiser output Pages: 1 -->
+<svg width="791pt" height="766pt"
+ viewBox="0.00 0.00 791.00 766.00" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+<g id="graph0" class="graph" transform="scale(1 1) rotate(0) translate(4 762)">
+<title>dependency&#45;cruiser output</title>
+<polygon fill="white" stroke="transparent" points="-4,4 -4,-762 787,-762 787,4 -4,4"/>
+<g id="clust1" class="cluster">
+<title>cluster_src</title>
+<path fill="#ffffff" stroke="black" stroke-width="2" d="M20,-8C20,-8 763,-8 763,-8 769,-8 775,-14 775,-20 775,-20 775,-738 775,-738 775,-744 769,-750 763,-750 763,-750 20,-750 20,-750 14,-750 8,-744 8,-738 8,-738 8,-20 8,-20 8,-14 14,-8 20,-8"/>
+<text text-anchor="middle" x="391.5" y="-738.8" font-family="Helvetica,sans-Serif" font-weight="bold" font-size="9.00">src</text>
+</g>
+<g id="clust2" class="cluster">
+<title>cluster_src/cli</title>
+<path fill="#ffffff" stroke="black" stroke-width="2" d="M28,-307C28,-307 179,-307 179,-307 185,-307 191,-313 191,-319 191,-319 191,-377 191,-377 191,-383 185,-389 179,-389 179,-389 28,-389 28,-389 22,-389 16,-383 16,-377 16,-377 16,-319 16,-319 16,-313 22,-307 28,-307"/>
+<text text-anchor="middle" x="103.5" y="-377.8" font-family="Helvetica,sans-Serif" font-weight="bold" font-size="9.00">cli</text>
+</g>
+<g id="clust3" class="cluster">
+<title>cluster_src/config&#45;utl</title>
+<path fill="#ffffff" stroke="black" stroke-width="2" d="M219,-16C219,-16 333,-16 333,-16 339,-16 345,-22 345,-28 345,-28 345,-90 345,-90 345,-96 339,-102 333,-102 333,-102 219,-102 219,-102 213,-102 207,-96 207,-90 207,-90 207,-28 207,-28 207,-22 213,-16 219,-16"/>
+<text text-anchor="middle" x="276" y="-90.8" font-family="Helvetica,sans-Serif" font-weight="bold" font-size="9.00">config&#45;utl</text>
+</g>
+<g id="clust4" class="cluster">
+<title>cluster_src/config&#45;utl/extract&#45;depcruise&#45;config</title>
+<path fill="#ffffff" stroke="black" stroke-width="2" d="M227,-24C227,-24 325,-24 325,-24 331,-24 337,-30 337,-36 337,-36 337,-64 337,-64 337,-70 331,-76 325,-76 325,-76 227,-76 227,-76 221,-76 215,-70 215,-64 215,-64 215,-36 215,-36 215,-30 221,-24 227,-24"/>
+<text text-anchor="middle" x="276" y="-64.8" font-family="Helvetica,sans-Serif" font-weight="bold" font-size="9.00">extract&#45;depcruise&#45;config</text>
+</g>
+<g id="clust5" class="cluster">
+<title>cluster_src/enrich</title>
+<path fill="#ffffff" stroke="black" stroke-width="2" d="M395,-614C395,-614 579.5,-614 579.5,-614 585.5,-614 591.5,-620 591.5,-626 591.5,-626 591.5,-688 591.5,-688 591.5,-694 585.5,-700 579.5,-700 579.5,-700 395,-700 395,-700 389,-700 383,-694 383,-688 383,-688 383,-626 383,-626 383,-620 389,-614 395,-614"/>
+<text text-anchor="middle" x="487.25" y="-688.8" font-family="Helvetica,sans-Serif" font-weight="bold" font-size="9.00">enrich</text>
+</g>
+<g id="clust6" class="cluster">
+<title>cluster_src/enrich/summarize</title>
+<path fill="#ffffff" stroke="black" stroke-width="2" d="M525.5,-622C525.5,-622 571.5,-622 571.5,-622 577.5,-622 583.5,-628 583.5,-634 583.5,-634 583.5,-662 583.5,-662 583.5,-668 577.5,-674 571.5,-674 571.5,-674 525.5,-674 525.5,-674 519.5,-674 513.5,-668 513.5,-662 513.5,-662 513.5,-634 513.5,-634 513.5,-628 519.5,-622 525.5,-622"/>
+<text text-anchor="middle" x="548.5" y="-662.8" font-family="Helvetica,sans-Serif" font-weight="bold" font-size="9.00">summarize</text>
+</g>
+<g id="clust7" class="cluster">
+<title>cluster_src/extract</title>
+<path fill="#ffffff" stroke="black" stroke-width="2" d="M517.5,-404C517.5,-404 579.5,-404 579.5,-404 585.5,-404 591.5,-410 591.5,-416 591.5,-416 591.5,-504 591.5,-504 591.5,-510 585.5,-516 579.5,-516 579.5,-516 517.5,-516 517.5,-516 511.5,-516 505.5,-510 505.5,-504 505.5,-504 505.5,-416 505.5,-416 505.5,-410 511.5,-404 517.5,-404"/>
+<text text-anchor="middle" x="548.5" y="-504.8" font-family="Helvetica,sans-Serif" font-weight="bold" font-size="9.00">extract</text>
+</g>
+<g id="clust8" class="cluster">
+<title>cluster_src/extract/transpile</title>
+<path fill="#ffffff" stroke="black" stroke-width="2" d="M525.5,-412C525.5,-412 571.5,-412 571.5,-412 577.5,-412 583.5,-418 583.5,-424 583.5,-424 583.5,-452 583.5,-452 583.5,-458 577.5,-464 571.5,-464 571.5,-464 525.5,-464 525.5,-464 519.5,-464 513.5,-458 513.5,-452 513.5,-452 513.5,-424 513.5,-424 513.5,-418 519.5,-412 525.5,-412"/>
+<text text-anchor="middle" x="548.5" y="-452.8" font-family="Helvetica,sans-Serif" font-weight="bold" font-size="9.00">transpile</text>
+</g>
+<g id="clust9" class="cluster">
+<title>cluster_src/graph&#45;utl</title>
+<path fill="#ffffff" stroke="black" stroke-width="2" d="M636.5,-404C636.5,-404 743.5,-404 743.5,-404 749.5,-404 755.5,-410 755.5,-416 755.5,-416 755.5,-564 755.5,-564 755.5,-570 749.5,-576 743.5,-576 743.5,-576 636.5,-576 636.5,-576 630.5,-576 624.5,-570 624.5,-564 624.5,-564 624.5,-416 624.5,-416 624.5,-410 630.5,-404 636.5,-404"/>
+<text text-anchor="middle" x="690" y="-564.8" font-family="Helvetica,sans-Serif" font-weight="bold" font-size="9.00">graph&#45;utl</text>
+</g>
+<g id="clust10" class="cluster">
+<title>cluster_src/main</title>
+<path fill="#ffffff" stroke="black" stroke-width="2" d="M253,-110C253,-110 755,-110 755,-110 761,-110 767,-116 767,-122 767,-122 767,-384 767,-384 767,-390 761,-396 755,-396 755,-396 253,-396 253,-396 247,-396 241,-390 241,-384 241,-384 241,-122 241,-122 241,-116 247,-110 253,-110"/>
+<text text-anchor="middle" x="504" y="-384.8" font-family="Helvetica,sans-Serif" font-weight="bold" font-size="9.00">main</text>
+</g>
+<g id="clust11" class="cluster">
+<title>cluster_src/main/files&#45;and&#45;dirs</title>
+<path fill="#ffffff" stroke="black" stroke-width="2" d="M389,-318C389,-318 447,-318 447,-318 453,-318 459,-324 459,-330 459,-330 459,-358 459,-358 459,-364 453,-370 447,-370 447,-370 389,-370 389,-370 383,-370 377,-364 377,-358 377,-358 377,-330 377,-330 377,-324 383,-318 389,-318"/>
+<text text-anchor="middle" x="418" y="-358.8" font-family="Helvetica,sans-Serif" font-weight="bold" font-size="9.00">files&#45;and&#45;dirs</text>
+</g>
+<g id="clust12" class="cluster">
+<title>cluster_src/main/options</title>
+<path fill="#ffffff" stroke="black" stroke-width="2" d="M519.5,-118C519.5,-118 715,-118 715,-118 721,-118 727,-124 727,-130 727,-130 727,-188 727,-188 727,-194 721,-200 715,-200 715,-200 519.5,-200 519.5,-200 513.5,-200 507.5,-194 507.5,-188 507.5,-188 507.5,-130 507.5,-130 507.5,-124 513.5,-118 519.5,-118"/>
+<text text-anchor="middle" x="617.25" y="-188.8" font-family="Helvetica,sans-Serif" font-weight="bold" font-size="9.00">options</text>
+</g>
+<g id="clust13" class="cluster">
+<title>cluster_src/main/resolve&#45;options</title>
+<path fill="#ffffff" stroke="black" stroke-width="2" d="M389,-258C389,-258 448,-258 448,-258 454,-258 460,-264 460,-270 460,-270 460,-298 460,-298 460,-304 454,-310 448,-310 448,-310 389,-310 389,-310 383,-310 377,-304 377,-298 377,-298 377,-270 377,-270 377,-264 383,-258 389,-258"/>
+<text text-anchor="middle" x="418.5" y="-298.8" font-family="Helvetica,sans-Serif" font-weight="bold" font-size="9.00">resolve&#45;options</text>
+</g>
+<g id="clust14" class="cluster">
+<title>cluster_src/main/rule&#45;set</title>
+<path fill="#ffffff" stroke="black" stroke-width="2" d="M389,-142C389,-142 447,-142 447,-142 453,-142 459,-148 459,-154 459,-154 459,-212 459,-212 459,-218 453,-224 447,-224 447,-224 389,-224 389,-224 383,-224 377,-218 377,-212 377,-212 377,-154 377,-154 377,-148 383,-142 389,-142"/>
+<text text-anchor="middle" x="418" y="-212.8" font-family="Helvetica,sans-Serif" font-weight="bold" font-size="9.00">rule&#45;set</text>
+</g>
+<g id="clust15" class="cluster">
+<title>cluster_src/main/utl</title>
+<path fill="#ffffff" stroke="black" stroke-width="2" d="M633,-208C633,-208 747,-208 747,-208 753,-208 759,-214 759,-220 759,-220 759,-248 759,-248 759,-254 753,-260 747,-260 747,-260 633,-260 633,-260 627,-260 621,-254 621,-248 621,-248 621,-220 621,-220 621,-214 627,-208 633,-208"/>
+<text text-anchor="middle" x="690" y="-248.8" font-family="Helvetica,sans-Serif" font-weight="bold" font-size="9.00">utl</text>
+</g>
+<g id="clust16" class="cluster">
+<title>cluster_src/report</title>
+<path fill="#ffffff" stroke="black" stroke-width="2" d="M667,-50C667,-50 713,-50 713,-50 719,-50 725,-56 725,-62 725,-62 725,-90 725,-90 725,-96 719,-102 713,-102 713,-102 667,-102 667,-102 661,-102 655,-96 655,-90 655,-90 655,-62 655,-62 655,-56 661,-50 667,-50"/>
+<text text-anchor="middle" x="690" y="-90.8" font-family="Helvetica,sans-Serif" font-weight="bold" font-size="9.00">report</text>
+</g>
+<g id="clust17" class="cluster">
+<title>cluster_src/schema</title>
+<path fill="#ffffff" stroke="black" stroke-width="2" d="M496,-524C496,-524 601,-524 601,-524 607,-524 613,-530 613,-536 613,-536 613,-594 613,-594 613,-600 607,-606 601,-606 601,-606 496,-606 496,-606 490,-606 484,-600 484,-594 484,-594 484,-536 484,-536 484,-530 490,-524 496,-524"/>
+<text text-anchor="middle" x="548.5" y="-594.8" font-family="Helvetica,sans-Serif" font-weight="bold" font-size="9.00">schema</text>
+</g>
+<g id="clust18" class="cluster">
+<title>cluster_src/utl</title>
+<path fill="#ffffff" stroke="black" stroke-width="2" d="M667,-672C667,-672 713,-672 713,-672 719,-672 725,-678 725,-684 725,-684 725,-712 725,-712 725,-718 719,-724 713,-724 713,-724 667,-724 667,-724 661,-724 655,-718 655,-712 655,-712 655,-684 655,-684 655,-678 661,-672 667,-672"/>
+<text text-anchor="middle" x="690" y="-712.8" font-family="Helvetica,sans-Serif" font-weight="bold" font-size="9.00">utl</text>
+</g>
+<!-- src/cli/format&#45;meta&#45;info.js -->
+<g id="node1" class="node">
+<title>src/cli/format&#45;meta&#45;info.js</title>
+<g id="a_node1"><a xlink:href="src/cli/format-meta-info.js" xlink:title="format&#45;meta&#45;info.js">
+<path fill="#ffffcc" stroke="black" d="M177,-333C177,-333 97,-333 97,-333 94,-333 91,-330 91,-327 91,-327 91,-321 91,-321 91,-318 94,-315 97,-315 97,-315 177,-315 177,-315 180,-315 183,-318 183,-321 183,-321 183,-327 183,-327 183,-330 180,-333 177,-333"/>
+<text text-anchor="start" x="99" y="-321.8" font-family="Helvetica,sans-Serif" font-size="9.00">format&#45;meta&#45;info.js</text>
+</a>
+</g>
+</g>
+<!-- src/main/index.js -->
+<g id="node2" class="node">
+<title>src/main/index.js</title>
+<g id="a_node2"><a xlink:href="src/main/index.js" xlink:title="index.js">
+<path fill="#ffffcc" stroke="black" d="M297,-344C297,-344 255,-344 255,-344 252,-344 249,-341 249,-338 249,-338 249,-332 249,-332 249,-329 252,-326 255,-326 255,-326 297,-326 297,-326 300,-326 303,-329 303,-332 303,-332 303,-338 303,-338 303,-341 300,-344 297,-344"/>
+<text text-anchor="start" x="260" y="-332.8" font-family="Helvetica,sans-Serif" font-size="9.00">index.js</text>
+</a>
+</g>
+</g>
+<!-- src/cli/format&#45;meta&#45;info.js&#45;&gt;src/main/index.js -->
+<g id="edge1" class="edge">
+<title>src/cli/format&#45;meta&#45;info.js&#45;&gt;src/main/index.js</title>
+<path fill="none" stroke="#000000" stroke-width="2" stroke-opacity="0.200000" d="M183.28,-329.5C183.28,-329.5 242.96,-329.5 242.96,-329.5"/>
+<polygon fill="#000000" fill-opacity="0.200000" stroke="#000000" stroke-width="2" stroke-opacity="0.200000" points="242.96,-331.6 248.96,-329.5 242.96,-327.4 242.96,-331.6"/>
+</g>
+<!-- src/utl/bus.js -->
+<g id="node5" class="node">
+<title>src/utl/bus.js</title>
+<g id="a_node5"><a xlink:href="src/utl/bus.js" xlink:title="bus.js">
+<path fill="#ffffcc" stroke="black" d="M711,-698C711,-698 669,-698 669,-698 666,-698 663,-695 663,-692 663,-692 663,-686 663,-686 663,-683 666,-680 669,-680 669,-680 711,-680 711,-680 714,-680 717,-683 717,-686 717,-686 717,-692 717,-692 717,-695 714,-698 711,-698"/>
+<text text-anchor="start" x="677.5" y="-686.8" font-family="Helvetica,sans-Serif" font-size="9.00">bus.js</text>
+</a>
+</g>
+</g>
+<!-- src/main/index.js&#45;&gt;src/utl/bus.js -->
+<g id="edge14" class="edge">
+<title>src/main/index.js&#45;&gt;src/utl/bus.js</title>
+<path fill="none" stroke="#000000" stroke-width="2" stroke-opacity="0.200000" d="M258,-344.11C258,-399.52 258,-689 258,-689 258,-689 656.98,-689 656.98,-689"/>
+<polygon fill="#000000" fill-opacity="0.200000" stroke="#000000" stroke-width="2" stroke-opacity="0.200000" points="656.98,-691.1 662.98,-689 656.98,-686.9 656.98,-691.1"/>
+</g>
+<!-- src/main/resolve&#45;options/normalize.js -->
+<g id="node7" class="node">
+<title>src/main/resolve&#45;options/normalize.js</title>
+<g id="a_node7"><a xlink:href="src/main/resolve-options/normalize.js" xlink:title="normalize.js">
+<path fill="#ffffcc" stroke="black" d="M445,-284C445,-284 391,-284 391,-284 388,-284 385,-281 385,-278 385,-278 385,-272 385,-272 385,-269 388,-266 391,-266 391,-266 445,-266 445,-266 448,-266 451,-269 451,-272 451,-272 451,-278 451,-278 451,-281 448,-284 445,-284"/>
+<text text-anchor="start" x="393" y="-272.8" font-family="Helvetica,sans-Serif" font-size="9.00">normalize.js</text>
+</a>
+</g>
+</g>
+<!-- src/main/index.js&#45;&gt;src/main/resolve&#45;options/normalize.js -->
+<g id="edge19" class="edge">
+<title>src/main/index.js&#45;&gt;src/main/resolve&#45;options/normalize.js</title>
+<path fill="none" stroke="#000000" stroke-width="2" stroke-opacity="0.200000" d="M297,-325.84C297,-309.73 297,-278 297,-278 297,-278 378.94,-278 378.94,-278"/>
+<polygon fill="#000000" fill-opacity="0.200000" stroke="#000000" stroke-width="2" stroke-opacity="0.200000" points="378.94,-280.1 384.94,-278 378.94,-275.9 378.94,-280.1"/>
+</g>
+<!-- src/enrich/index.js -->
+<g id="node8" class="node">
+<title>src/enrich/index.js</title>
+<g id="a_node8"><a xlink:href="src/enrich/index.js" xlink:title="index.js">
+<path fill="#ffffcc" stroke="black" d="M439,-644C439,-644 397,-644 397,-644 394,-644 391,-641 391,-638 391,-638 391,-632 391,-632 391,-629 394,-626 397,-626 397,-626 439,-626 439,-626 442,-626 445,-629 445,-632 445,-632 445,-638 445,-638 445,-641 442,-644 439,-644"/>
+<text text-anchor="start" x="402" y="-632.8" font-family="Helvetica,sans-Serif" font-size="9.00">index.js</text>
+</a>
+</g>
+</g>
+<!-- src/main/index.js&#45;&gt;src/enrich/index.js -->
+<g id="edge10" class="edge">
+<title>src/main/index.js&#45;&gt;src/enrich/index.js</title>
+<path fill="none" stroke="#000000" stroke-width="2" stroke-opacity="0.200000" d="M267,-344.31C267,-394.94 267,-635 267,-635 267,-635 384.66,-635 384.66,-635"/>
+<polygon fill="#000000" fill-opacity="0.200000" stroke="#000000" stroke-width="2" stroke-opacity="0.200000" points="384.66,-637.1 390.66,-635 384.66,-632.9 384.66,-637.1"/>
+</g>
+<!-- src/extract/index.js -->
+<g id="node11" class="node">
+<title>src/extract/index.js</title>
+<g id="a_node11"><a xlink:href="src/extract/index.js" xlink:title="index.js">
+<path fill="#ffffcc" stroke="black" d="M569.5,-490C569.5,-490 527.5,-490 527.5,-490 524.5,-490 521.5,-487 521.5,-484 521.5,-484 521.5,-478 521.5,-478 521.5,-475 524.5,-472 527.5,-472 527.5,-472 569.5,-472 569.5,-472 572.5,-472 575.5,-475 575.5,-478 575.5,-478 575.5,-484 575.5,-484 575.5,-487 572.5,-490 569.5,-490"/>
+<text text-anchor="start" x="532.5" y="-478.8" font-family="Helvetica,sans-Serif" font-size="9.00">index.js</text>
+</a>
+</g>
+</g>
+<!-- src/main/index.js&#45;&gt;src/extract/index.js -->
+<g id="edge11" class="edge">
+<title>src/main/index.js&#45;&gt;src/extract/index.js</title>
+<path fill="none" stroke="#000000" stroke-width="2" stroke-opacity="0.200000" d="M285,-344.13C285,-376.1 285,-481 285,-481 285,-481 515.29,-481 515.29,-481"/>
+<polygon fill="#000000" fill-opacity="0.200000" stroke="#000000" stroke-width="2" stroke-opacity="0.200000" points="515.29,-483.1 521.29,-481 515.29,-478.9 515.29,-483.1"/>
+</g>
+<!-- src/extract/transpile/meta.js -->
+<g id="node12" class="node">
+<title>src/extract/transpile/meta.js</title>
+<g id="a_node12"><a xlink:href="src/extract/transpile/meta.js" xlink:title="meta.js">
+<path fill="#ffffcc" stroke="black" d="M569.5,-438C569.5,-438 527.5,-438 527.5,-438 524.5,-438 521.5,-435 521.5,-432 521.5,-432 521.5,-426 521.5,-426 521.5,-423 524.5,-420 527.5,-420 527.5,-420 569.5,-420 569.5,-420 572.5,-420 575.5,-423 575.5,-426 575.5,-426 575.5,-432 575.5,-432 575.5,-435 572.5,-438 569.5,-438"/>
+<text text-anchor="start" x="533.5" y="-426.8" font-family="Helvetica,sans-Serif" font-size="9.00">meta.js</text>
+</a>
+</g>
+</g>
+<!-- src/main/index.js&#45;&gt;src/extract/transpile/meta.js -->
+<g id="edge12" class="edge">
+<title>src/main/index.js&#45;&gt;src/extract/transpile/meta.js</title>
+<path fill="none" stroke="#000000" stroke-width="2" stroke-opacity="0.200000" d="M294,-344.01C294,-367.54 294,-429 294,-429 294,-429 515.26,-429 515.26,-429"/>
+<polygon fill="#000000" fill-opacity="0.200000" stroke="#000000" stroke-width="2" stroke-opacity="0.200000" points="515.26,-431.1 521.26,-429 515.26,-426.9 515.26,-431.1"/>
+</g>
+<!-- src/main/files&#45;and&#45;dirs/normalize.js -->
+<g id="node17" class="node">
+<title>src/main/files&#45;and&#45;dirs/normalize.js</title>
+<g id="a_node17"><a xlink:href="src/main/files-and-dirs/normalize.js" xlink:title="normalize.js">
+<path fill="#ffffcc" stroke="black" d="M445,-344C445,-344 391,-344 391,-344 388,-344 385,-341 385,-338 385,-338 385,-332 385,-332 385,-329 388,-326 391,-326 391,-326 445,-326 445,-326 448,-326 451,-329 451,-332 451,-332 451,-338 451,-338 451,-341 448,-344 445,-344"/>
+<text text-anchor="start" x="393" y="-332.8" font-family="Helvetica,sans-Serif" font-size="9.00">normalize.js</text>
+</a>
+</g>
+</g>
+<!-- src/main/index.js&#45;&gt;src/main/files&#45;and&#45;dirs/normalize.js -->
+<g id="edge15" class="edge">
+<title>src/main/index.js&#45;&gt;src/main/files&#45;and&#45;dirs/normalize.js</title>
+<path fill="none" stroke="#000000" stroke-width="2" stroke-opacity="0.200000" d="M303.04,-335C303.04,-335 378.81,-335 378.81,-335"/>
+<polygon fill="#000000" fill-opacity="0.200000" stroke="#000000" stroke-width="2" stroke-opacity="0.200000" points="378.81,-337.1 384.81,-335 378.81,-332.9 378.81,-337.1"/>
+</g>
+<!-- src/schema/cruise&#45;result.schema.js -->
+<g id="node18" class="node">
+<title>src/schema/cruise&#45;result.schema.js</title>
+<g id="a_node18"><a xlink:href="src/schema/cruise-result.schema.js" xlink:title="cruise&#45;result.schema.js">
+<path fill="#ffffcc" stroke="black" d="M597.5,-580C597.5,-580 499.5,-580 499.5,-580 496.5,-580 493.5,-577 493.5,-574 493.5,-574 493.5,-568 493.5,-568 493.5,-565 496.5,-562 499.5,-562 499.5,-562 597.5,-562 597.5,-562 600.5,-562 603.5,-565 603.5,-568 603.5,-568 603.5,-574 603.5,-574 603.5,-577 600.5,-580 597.5,-580"/>
+<text text-anchor="start" x="501.5" y="-568.8" font-family="Helvetica,sans-Serif" font-size="9.00">cruise&#45;result.schema.js</text>
+</a>
+</g>
+</g>
+<!-- src/main/index.js&#45;&gt;src/schema/cruise&#45;result.schema.js -->
+<g id="edge13" class="edge">
+<title>src/main/index.js&#45;&gt;src/schema/cruise&#45;result.schema.js</title>
+<path fill="none" stroke="#000000" stroke-width="2" stroke-opacity="0.200000" d="M276,-344.25C276,-387.88 276,-571 276,-571 276,-571 487.36,-571 487.36,-571"/>
+<polygon fill="#000000" fill-opacity="0.200000" stroke="#000000" stroke-width="2" stroke-opacity="0.200000" points="487.36,-573.1 493.36,-571 487.36,-568.9 487.36,-573.1"/>
+</g>
+<!-- src/main/options/normalize.js -->
+<g id="node19" class="node">
+<title>src/main/options/normalize.js</title>
+<g id="a_node19"><a xlink:href="src/main/options/normalize.js" xlink:title="normalize.js">
+<path fill="#ffffcc" stroke="black" d="M575.5,-174C575.5,-174 521.5,-174 521.5,-174 518.5,-174 515.5,-171 515.5,-168 515.5,-168 515.5,-162 515.5,-162 515.5,-159 518.5,-156 521.5,-156 521.5,-156 575.5,-156 575.5,-156 578.5,-156 581.5,-159 581.5,-162 581.5,-162 581.5,-168 581.5,-168 581.5,-171 578.5,-174 575.5,-174"/>
+<text text-anchor="start" x="523.5" y="-162.8" font-family="Helvetica,sans-Serif" font-size="9.00">normalize.js</text>
+</a>
+</g>
+</g>
+<!-- src/main/index.js&#45;&gt;src/main/options/normalize.js -->
+<g id="edge16" class="edge">
+<title>src/main/index.js&#45;&gt;src/main/options/normalize.js</title>
+<path fill="none" stroke="#000000" stroke-width="2" stroke-opacity="0.200000" d="M263,-325.73C263,-322.89 263,-320.5 263,-320.5 263,-320.5 540,-320.5 540,-320.5 540,-320.5 540,-180.26 540,-180.26"/>
+<polygon fill="#000000" fill-opacity="0.200000" stroke="#000000" stroke-width="2" stroke-opacity="0.200000" points="542.1,-180.26 540,-174.26 537.9,-180.26 542.1,-180.26"/>
+</g>
+<!-- src/main/options/validate.js -->
+<g id="node20" class="node">
+<title>src/main/options/validate.js</title>
+<g id="a_node20"><a xlink:href="src/main/options/validate.js" xlink:title="validate.js">
+<path fill="#ffffcc" stroke="black" d="M571.5,-144C571.5,-144 525.5,-144 525.5,-144 522.5,-144 519.5,-141 519.5,-138 519.5,-138 519.5,-132 519.5,-132 519.5,-129 522.5,-126 525.5,-126 525.5,-126 571.5,-126 571.5,-126 574.5,-126 577.5,-129 577.5,-132 577.5,-132 577.5,-138 577.5,-138 577.5,-141 574.5,-144 571.5,-144"/>
+<text text-anchor="start" x="527.5" y="-132.8" font-family="Helvetica,sans-Serif" font-size="9.00">validate.js</text>
+</a>
+</g>
+</g>
+<!-- src/main/index.js&#45;&gt;src/main/options/validate.js -->
+<g id="edge17" class="edge">
+<title>src/main/index.js&#45;&gt;src/main/options/validate.js</title>
+<path fill="none" stroke="#000000" stroke-width="2" stroke-opacity="0.200000" d="M256,-325.75C256,-286.04 256,-132 256,-132 256,-132 513.38,-132 513.38,-132"/>
+<polygon fill="#000000" fill-opacity="0.200000" stroke="#000000" stroke-width="2" stroke-opacity="0.200000" points="513.38,-134.1 519.38,-132 513.38,-129.9 513.38,-134.1"/>
+</g>
+<!-- src/main/report&#45;wrap.js -->
+<g id="node21" class="node">
+<title>src/main/report&#45;wrap.js</title>
+<g id="a_node21"><a xlink:href="src/main/report-wrap.js" xlink:title="report&#45;wrap.js">
+<path fill="#ffffcc" stroke="black" d="M448.5,-250C448.5,-250 387.5,-250 387.5,-250 384.5,-250 381.5,-247 381.5,-244 381.5,-244 381.5,-238 381.5,-238 381.5,-235 384.5,-232 387.5,-232 387.5,-232 448.5,-232 448.5,-232 451.5,-232 454.5,-235 454.5,-238 454.5,-238 454.5,-244 454.5,-244 454.5,-247 451.5,-250 448.5,-250"/>
+<text text-anchor="start" x="389.5" y="-238.8" font-family="Helvetica,sans-Serif" font-size="9.00">report&#45;wrap.js</text>
+</a>
+</g>
+</g>
+<!-- src/main/index.js&#45;&gt;src/main/report&#45;wrap.js -->
+<g id="edge18" class="edge">
+<title>src/main/index.js&#45;&gt;src/main/report&#45;wrap.js</title>
+<path fill="none" stroke="#000000" stroke-width="2" stroke-opacity="0.200000" d="M290,-325.99C290,-302.46 290,-241 290,-241 290,-241 375.32,-241 375.32,-241"/>
+<polygon fill="#000000" fill-opacity="0.200000" stroke="#000000" stroke-width="2" stroke-opacity="0.200000" points="375.32,-243.1 381.32,-241 375.32,-238.9 375.32,-243.1"/>
+</g>
+<!-- src/main/rule&#45;set/normalize.js -->
+<g id="node22" class="node">
+<title>src/main/rule&#45;set/normalize.js</title>
+<g id="a_node22"><a xlink:href="src/main/rule-set/normalize.js" xlink:title="normalize.js">
+<path fill="#ffffcc" stroke="black" d="M445,-198C445,-198 391,-198 391,-198 388,-198 385,-195 385,-192 385,-192 385,-186 385,-186 385,-183 388,-180 391,-180 391,-180 445,-180 445,-180 448,-180 451,-183 451,-186 451,-186 451,-192 451,-192 451,-195 448,-198 445,-198"/>
+<text text-anchor="start" x="393" y="-186.8" font-family="Helvetica,sans-Serif" font-size="9.00">normalize.js</text>
+</a>
+</g>
+</g>
+<!-- src/main/index.js&#45;&gt;src/main/rule&#45;set/normalize.js -->
+<g id="edge20" class="edge">
+<title>src/main/index.js&#45;&gt;src/main/rule&#45;set/normalize.js</title>
+<path fill="none" stroke="#000000" stroke-width="2" stroke-opacity="0.200000" d="M283,-325.87C283,-293.9 283,-189 283,-189 283,-189 378.98,-189 378.98,-189"/>
+<polygon fill="#000000" fill-opacity="0.200000" stroke="#000000" stroke-width="2" stroke-opacity="0.200000" points="378.98,-191.1 384.98,-189 378.98,-186.9 378.98,-191.1"/>
+</g>
+<!-- src/main/rule&#45;set/validate.js -->
+<g id="node23" class="node">
+<title>src/main/rule&#45;set/validate.js</title>
+<g id="a_node23"><a xlink:href="src/main/rule-set/validate.js" xlink:title="validate.js">
+<path fill="#ffffcc" stroke="black" d="M441,-168C441,-168 395,-168 395,-168 392,-168 389,-165 389,-162 389,-162 389,-156 389,-156 389,-153 392,-150 395,-150 395,-150 441,-150 441,-150 444,-150 447,-153 447,-156 447,-156 447,-162 447,-162 447,-165 444,-168 441,-168"/>
+<text text-anchor="start" x="397" y="-156.8" font-family="Helvetica,sans-Serif" font-size="9.00">validate.js</text>
+</a>
+</g>
+</g>
+<!-- src/main/index.js&#45;&gt;src/main/rule&#45;set/validate.js -->
+<g id="edge21" class="edge">
+<title>src/main/index.js&#45;&gt;src/main/rule&#45;set/validate.js</title>
+<path fill="none" stroke="#000000" stroke-width="2" stroke-opacity="0.200000" d="M276,-325.54C276,-288.98 276,-159 276,-159 276,-159 382.92,-159 382.92,-159"/>
+<polygon fill="#000000" fill-opacity="0.200000" stroke="#000000" stroke-width="2" stroke-opacity="0.200000" points="382.92,-161.1 388.92,-159 382.92,-156.9 382.92,-161.1"/>
+</g>
+<!-- src/cli/format.js -->
+<g id="node3" class="node">
+<title>src/cli/format.js</title>
+<g id="a_node3"><a xlink:href="src/cli/format.js" xlink:title="format.js">
+<path fill="#ffffcc" stroke="black" d="M72,-333C72,-333 30,-333 30,-333 27,-333 24,-330 24,-327 24,-327 24,-321 24,-321 24,-318 27,-315 30,-315 30,-315 72,-315 72,-315 75,-315 78,-318 78,-321 78,-321 78,-327 78,-327 78,-330 75,-333 72,-333"/>
+<text text-anchor="start" x="33.5" y="-321.8" font-family="Helvetica,sans-Serif" font-size="9.00">format.js</text>
+</a>
+</g>
+</g>
+<!-- src/cli/format.js&#45;&gt;src/main/index.js -->
+<g id="edge2" class="edge">
+<title>src/cli/format.js&#45;&gt;src/main/index.js</title>
+<path fill="none" stroke="#000000" stroke-width="2" stroke-opacity="0.200000" d="M42,-333.21C42,-335.17 42,-336.67 42,-336.67 42,-336.67 242.7,-336.67 242.7,-336.67"/>
+<polygon fill="#000000" fill-opacity="0.200000" stroke="#000000" stroke-width="2" stroke-opacity="0.200000" points="242.7,-338.77 248.7,-336.67 242.7,-334.57 242.7,-338.77"/>
+</g>
+<!-- src/cli/index.js -->
+<g id="node4" class="node">
+<title>src/cli/index.js</title>
+<g id="a_node4"><a xlink:href="src/cli/index.js" xlink:title="index.js">
+<path fill="#ffffcc" stroke="black" d="M72,-363C72,-363 30,-363 30,-363 27,-363 24,-360 24,-357 24,-357 24,-351 24,-351 24,-348 27,-345 30,-345 30,-345 72,-345 72,-345 75,-345 78,-348 78,-351 78,-351 78,-357 78,-357 78,-360 75,-363 72,-363"/>
+<text text-anchor="start" x="35" y="-351.8" font-family="Helvetica,sans-Serif" font-size="9.00">index.js</text>
+</a>
+</g>
+</g>
+<!-- src/cli/index.js&#45;&gt;src/cli/format&#45;meta&#45;info.js -->
+<g id="edge5" class="edge">
+<title>src/cli/index.js&#45;&gt;src/cli/format&#45;meta&#45;info.js</title>
+<path fill="none" stroke="#000000" stroke-width="2" stroke-opacity="0.200000" d="M78.21,-354C103.41,-354 137,-354 137,-354 137,-354 137,-339.16 137,-339.16"/>
+<polygon fill="#000000" fill-opacity="0.200000" stroke="#000000" stroke-width="2" stroke-opacity="0.200000" points="139.1,-339.16 137,-333.16 134.9,-339.16 139.1,-339.16"/>
+</g>
+<!-- src/cli/index.js&#45;&gt;src/main/index.js -->
+<g id="edge3" class="edge">
+<title>src/cli/index.js&#45;&gt;src/main/index.js</title>
+<path fill="none" stroke="#000000" stroke-width="2" stroke-opacity="0.200000" d="M60,-344.96C60,-342.42 60,-340.33 60,-340.33 60,-340.33 242.64,-340.33 242.64,-340.33"/>
+<polygon fill="#000000" fill-opacity="0.200000" stroke="#000000" stroke-width="2" stroke-opacity="0.200000" points="242.64,-342.43 248.64,-340.33 242.64,-338.23 242.64,-342.43"/>
+</g>
+<!-- src/cli/index.js&#45;&gt;src/utl/bus.js -->
+<g id="edge4" class="edge">
+<title>src/cli/index.js&#45;&gt;src/utl/bus.js</title>
+<path fill="none" stroke="#000000" stroke-width="2" stroke-opacity="0.200000" d="M51,-363.08C51,-417.07 51,-693.5 51,-693.5 51,-693.5 656.95,-693.5 656.95,-693.5"/>
+<polygon fill="#000000" fill-opacity="0.200000" stroke="#000000" stroke-width="2" stroke-opacity="0.200000" points="656.95,-695.6 662.95,-693.5 656.95,-691.4 656.95,-695.6"/>
+</g>
+<!-- src/config&#45;utl/extract&#45;depcruise&#45;config/index.js -->
+<g id="node6" class="node">
+<title>src/config&#45;utl/extract&#45;depcruise&#45;config/index.js</title>
+<g id="a_node6"><a xlink:href="src/config-utl/extract-depcruise-config/index.js" xlink:title="index.js">
+<path fill="#ffffcc" stroke="black" d="M297,-50C297,-50 255,-50 255,-50 252,-50 249,-47 249,-44 249,-44 249,-38 249,-38 249,-35 252,-32 255,-32 255,-32 297,-32 297,-32 300,-32 303,-35 303,-38 303,-38 303,-44 303,-44 303,-47 300,-50 297,-50"/>
+<text text-anchor="start" x="260" y="-38.8" font-family="Helvetica,sans-Serif" font-size="9.00">index.js</text>
+</a>
+</g>
+</g>
+<!-- src/config&#45;utl/extract&#45;depcruise&#45;config/index.js&#45;&gt;src/main/resolve&#45;options/normalize.js -->
+<g id="edge6" class="edge">
+<title>src/config&#45;utl/extract&#45;depcruise&#45;config/index.js&#45;&gt;src/main/resolve&#45;options/normalize.js</title>
+<path fill="none" stroke="#000000" stroke-width="2" stroke-opacity="0.200000" d="M270,-50.06C270,-92.76 270,-272 270,-272 270,-272 378.79,-272 378.79,-272"/>
+<polygon fill="#000000" fill-opacity="0.200000" stroke="#000000" stroke-width="2" stroke-opacity="0.200000" points="378.79,-274.1 384.79,-272 378.79,-269.9 378.79,-274.1"/>
+</g>
+<!-- src/main/resolve&#45;options/normalize.js&#45;&gt;src/extract/transpile/meta.js -->
+<g id="edge31" class="edge">
+<title>src/main/resolve&#45;options/normalize.js&#45;&gt;src/extract/transpile/meta.js</title>
+<path fill="none" stroke="#000000" stroke-width="2" stroke-opacity="0.200000" d="M451.18,-278C492.58,-278 558,-278 558,-278 558,-278 558,-413.55 558,-413.55"/>
+<polygon fill="#000000" fill-opacity="0.200000" stroke="#000000" stroke-width="2" stroke-opacity="0.200000" points="555.9,-413.55 558,-419.55 560.1,-413.55 555.9,-413.55"/>
+</g>
+<!-- src/graph&#45;utl/rule&#45;set.js -->
+<g id="node15" class="node">
+<title>src/graph&#45;utl/rule&#45;set.js</title>
+<g id="a_node15"><a xlink:href="src/graph-utl/rule-set.js" xlink:title="rule&#45;set.js">
+<path fill="#ffffcc" stroke="black" d="M712,-550C712,-550 668,-550 668,-550 665,-550 662,-547 662,-544 662,-544 662,-538 662,-538 662,-535 665,-532 668,-532 668,-532 712,-532 712,-532 715,-532 718,-535 718,-538 718,-538 718,-544 718,-544 718,-547 715,-550 712,-550"/>
+<text text-anchor="start" x="670" y="-538.8" font-family="Helvetica,sans-Serif" font-size="9.00">rule&#45;set.js</text>
+</a>
+</g>
+</g>
+<!-- src/main/resolve&#45;options/normalize.js&#45;&gt;src/graph&#45;utl/rule&#45;set.js -->
+<g id="edge32" class="edge">
+<title>src/main/resolve&#45;options/normalize.js&#45;&gt;src/graph&#45;utl/rule&#45;set.js</title>
+<path fill="none" stroke="#000000" stroke-width="2" stroke-opacity="0.200000" d="M451.31,-272C507.96,-272 617,-272 617,-272 617,-272 617,-541 617,-541 617,-541 655.99,-541 655.99,-541"/>
+<polygon fill="#000000" fill-opacity="0.200000" stroke="#000000" stroke-width="2" stroke-opacity="0.200000" points="655.99,-543.1 661.99,-541 655.99,-538.9 655.99,-543.1"/>
+</g>
+<!-- src/enrich/summarize/index.js -->
+<g id="node9" class="node">
+<title>src/enrich/summarize/index.js</title>
+<g id="a_node9"><a xlink:href="src/enrich/summarize/index.js" xlink:title="index.js">
+<path fill="#ffffcc" stroke="black" d="M569.5,-648C569.5,-648 527.5,-648 527.5,-648 524.5,-648 521.5,-645 521.5,-642 521.5,-642 521.5,-636 521.5,-636 521.5,-633 524.5,-630 527.5,-630 527.5,-630 569.5,-630 569.5,-630 572.5,-630 575.5,-633 575.5,-636 575.5,-636 575.5,-642 575.5,-642 575.5,-645 572.5,-648 569.5,-648"/>
+<text text-anchor="start" x="532.5" y="-636.8" font-family="Helvetica,sans-Serif" font-size="9.00">index.js</text>
+</a>
+</g>
+</g>
+<!-- src/enrich/index.js&#45;&gt;src/enrich/summarize/index.js -->
+<g id="edge7" class="edge">
+<title>src/enrich/index.js&#45;&gt;src/enrich/summarize/index.js</title>
+<path fill="none" stroke="#000000" stroke-width="2" stroke-opacity="0.200000" d="M445.04,-639.33C445.04,-639.33 515.49,-639.33 515.49,-639.33"/>
+<polygon fill="#000000" fill-opacity="0.200000" stroke="#000000" stroke-width="2" stroke-opacity="0.200000" points="515.49,-641.43 521.49,-639.33 515.49,-637.23 515.49,-641.43"/>
+</g>
+<!-- src/graph&#45;utl/compare.js -->
+<g id="node10" class="node">
+<title>src/graph&#45;utl/compare.js</title>
+<g id="a_node10"><a xlink:href="src/graph-utl/compare.js" xlink:title="compare.js">
+<path fill="#ffffcc" stroke="black" d="M715,-520C715,-520 665,-520 665,-520 662,-520 659,-517 659,-514 659,-514 659,-508 659,-508 659,-505 662,-502 665,-502 665,-502 715,-502 715,-502 718,-502 721,-505 721,-508 721,-508 721,-514 721,-514 721,-517 718,-520 715,-520"/>
+<text text-anchor="start" x="667" y="-508.8" font-family="Helvetica,sans-Serif" font-size="9.00">compare.js</text>
+</a>
+</g>
+</g>
+<!-- src/enrich/summarize/index.js&#45;&gt;src/graph&#45;utl/compare.js -->
+<g id="edge8" class="edge">
+<title>src/enrich/summarize/index.js&#45;&gt;src/graph&#45;utl/compare.js</title>
+<path fill="none" stroke="#000000" stroke-width="2" stroke-opacity="0.200000" d="M575.82,-639C597.08,-639 623,-639 623,-639 623,-639 623,-514 623,-514 623,-514 652.85,-514 652.85,-514"/>
+<polygon fill="#000000" fill-opacity="0.200000" stroke="#000000" stroke-width="2" stroke-opacity="0.200000" points="652.85,-516.1 658.85,-514 652.85,-511.9 652.85,-516.1"/>
+</g>
+<!-- src/extract/index.js&#45;&gt;src/utl/bus.js -->
+<g id="edge9" class="edge">
+<title>src/extract/index.js&#45;&gt;src/utl/bus.js</title>
+<path fill="none" stroke="#000000" stroke-width="2" stroke-opacity="0.200000" d="M575.73,-484C592.57,-484 611,-484 611,-484 611,-484 611,-684.5 611,-684.5 611,-684.5 656.81,-684.5 656.81,-684.5"/>
+<polygon fill="#000000" fill-opacity="0.200000" stroke="#000000" stroke-width="2" stroke-opacity="0.200000" points="656.81,-686.6 662.81,-684.5 656.81,-682.4 656.81,-686.6"/>
+</g>
+<!-- src/graph&#45;utl/consolidate&#45;to&#45;pattern.js -->
+<g id="node13" class="node">
+<title>src/graph&#45;utl/consolidate&#45;to&#45;pattern.js</title>
+<g id="a_node13"><a xlink:href="src/graph-utl/consolidate-to-pattern.js" xlink:title="consolidate&#45;to&#45;pattern.js">
+<path fill="#ffffcc" stroke="black" d="M741.5,-490C741.5,-490 638.5,-490 638.5,-490 635.5,-490 632.5,-487 632.5,-484 632.5,-484 632.5,-478 632.5,-478 632.5,-475 635.5,-472 638.5,-472 638.5,-472 741.5,-472 741.5,-472 744.5,-472 747.5,-475 747.5,-478 747.5,-478 747.5,-484 747.5,-484 747.5,-487 744.5,-490 741.5,-490"/>
+<text text-anchor="start" x="640.5" y="-478.8" font-family="Helvetica,sans-Serif" font-size="9.00">consolidate&#45;to&#45;pattern.js</text>
+</a>
+</g>
+</g>
+<!-- src/graph&#45;utl/filter&#45;bank.js -->
+<g id="node14" class="node">
+<title>src/graph&#45;utl/filter&#45;bank.js</title>
+<g id="a_node14"><a xlink:href="src/graph-utl/filter-bank.js" xlink:title="filter&#45;bank.js">
+<path fill="#ffffcc" stroke="black" d="M717,-430C717,-430 663,-430 663,-430 660,-430 657,-427 657,-424 657,-424 657,-418 657,-418 657,-415 660,-412 663,-412 663,-412 717,-412 717,-412 720,-412 723,-415 723,-418 723,-418 723,-424 723,-424 723,-427 720,-430 717,-430"/>
+<text text-anchor="start" x="665" y="-418.8" font-family="Helvetica,sans-Serif" font-size="9.00">filter&#45;bank.js</text>
+</a>
+</g>
+</g>
+<!-- src/graph&#45;utl/strip&#45;self&#45;transitions.js -->
+<g id="node16" class="node">
+<title>src/graph&#45;utl/strip&#45;self&#45;transitions.js</title>
+<g id="a_node16"><a xlink:href="src/graph-utl/strip-self-transitions.js" xlink:title="strip&#45;self&#45;transitions.js">
+<path fill="#ffffcc" stroke="black" d="M736.5,-460C736.5,-460 643.5,-460 643.5,-460 640.5,-460 637.5,-457 637.5,-454 637.5,-454 637.5,-448 637.5,-448 637.5,-445 640.5,-442 643.5,-442 643.5,-442 736.5,-442 736.5,-442 739.5,-442 742.5,-445 742.5,-448 742.5,-448 742.5,-454 742.5,-454 742.5,-457 739.5,-460 736.5,-460"/>
+<text text-anchor="start" x="645.5" y="-448.8" font-family="Helvetica,sans-Serif" font-size="9.00">strip&#45;self&#45;transitions.js</text>
+</a>
+</g>
+</g>
+<!-- src/main/options/defaults.js -->
+<g id="node24" class="node">
+<title>src/main/options/defaults.js</title>
+<g id="a_node24"><a xlink:href="src/main/options/defaults.js" xlink:title="defaults.js">
+<path fill="#ffffcc" stroke="black" d="M713,-174C713,-174 667,-174 667,-174 664,-174 661,-171 661,-168 661,-168 661,-162 661,-162 661,-159 664,-156 667,-156 667,-156 713,-156 713,-156 716,-156 719,-159 719,-162 719,-162 719,-168 719,-168 719,-171 716,-174 713,-174"/>
+<text text-anchor="start" x="669" y="-162.8" font-family="Helvetica,sans-Serif" font-size="9.00">defaults.js</text>
+</a>
+</g>
+</g>
+<!-- src/main/options/normalize.js&#45;&gt;src/main/options/defaults.js -->
+<g id="edge23" class="edge">
+<title>src/main/options/normalize.js&#45;&gt;src/main/options/defaults.js</title>
+<path fill="none" stroke="#000000" stroke-width="2" stroke-opacity="0.200000" d="M581.68,-162C581.68,-162 654.87,-162 654.87,-162"/>
+<polygon fill="#000000" fill-opacity="0.200000" stroke="#000000" stroke-width="2" stroke-opacity="0.200000" points="654.87,-164.1 660.87,-162 654.87,-159.9 654.87,-164.1"/>
+</g>
+<!-- src/main/utl/normalize&#45;re&#45;properties.js -->
+<g id="node25" class="node">
+<title>src/main/utl/normalize&#45;re&#45;properties.js</title>
+<g id="a_node25"><a xlink:href="src/main/utl/normalize-re-properties.js" xlink:title="normalize&#45;re&#45;properties.js">
+<path fill="#ffffcc" stroke="black" d="M745,-234C745,-234 635,-234 635,-234 632,-234 629,-231 629,-228 629,-228 629,-222 629,-222 629,-219 632,-216 635,-216 635,-216 745,-216 745,-216 748,-216 751,-219 751,-222 751,-222 751,-228 751,-228 751,-231 748,-234 745,-234"/>
+<text text-anchor="start" x="637" y="-222.8" font-family="Helvetica,sans-Serif" font-size="9.00">normalize&#45;re&#45;properties.js</text>
+</a>
+</g>
+</g>
+<!-- src/main/options/normalize.js&#45;&gt;src/main/utl/normalize&#45;re&#45;properties.js -->
+<g id="edge22" class="edge">
+<title>src/main/options/normalize.js&#45;&gt;src/main/utl/normalize&#45;re&#45;properties.js</title>
+<path fill="none" stroke="#000000" stroke-width="2" stroke-opacity="0.200000" d="M581.78,-168C611.71,-168 651,-168 651,-168 651,-168 651,-209.84 651,-209.84"/>
+<polygon fill="#000000" fill-opacity="0.200000" stroke="#000000" stroke-width="2" stroke-opacity="0.200000" points="648.9,-209.84 651,-215.84 653.1,-209.84 648.9,-209.84"/>
+</g>
+<!-- src/report/index.js -->
+<g id="node26" class="node">
+<title>src/report/index.js</title>
+<g id="a_node26"><a xlink:href="src/report/index.js" xlink:title="index.js">
+<path fill="#ffffcc" stroke="black" d="M711,-76C711,-76 669,-76 669,-76 666,-76 663,-73 663,-70 663,-70 663,-64 663,-64 663,-61 666,-58 669,-58 669,-58 711,-58 711,-58 714,-58 717,-61 717,-64 717,-64 717,-70 717,-70 717,-73 714,-76 711,-76"/>
+<text text-anchor="start" x="674" y="-64.8" font-family="Helvetica,sans-Serif" font-size="9.00">index.js</text>
+</a>
+</g>
+</g>
+<!-- src/main/options/validate.js&#45;&gt;src/report/index.js -->
+<g id="edge24" class="edge">
+<title>src/main/options/validate.js&#45;&gt;src/report/index.js</title>
+<path fill="none" stroke="#000000" stroke-width="2" stroke-opacity="0.200000" d="M577.82,-135C619.27,-135 690,-135 690,-135 690,-135 690,-82.17 690,-82.17"/>
+<polygon fill="#000000" fill-opacity="0.200000" stroke="#000000" stroke-width="2" stroke-opacity="0.200000" points="692.1,-82.17 690,-76.17 687.9,-82.17 692.1,-82.17"/>
+</g>
+<!-- src/main/report&#45;wrap.js&#45;&gt;src/enrich/summarize/index.js -->
+<g id="edge25" class="edge">
+<title>src/main/report&#45;wrap.js&#45;&gt;src/enrich/summarize/index.js</title>
+<path fill="none" stroke="#000000" stroke-width="2" stroke-opacity="0.200000" d="M454.69,-240.86C460.16,-240.86 464,-240.86 464,-240.86 464,-240.86 464,-634.67 464,-634.67 464,-634.67 515.3,-634.67 515.3,-634.67"/>
+<polygon fill="#000000" fill-opacity="0.200000" stroke="#000000" stroke-width="2" stroke-opacity="0.200000" points="515.3,-636.77 521.3,-634.67 515.3,-632.57 515.3,-636.77"/>
+</g>
+<!-- src/main/report&#45;wrap.js&#45;&gt;src/graph&#45;utl/compare.js -->
+<g id="edge26" class="edge">
+<title>src/main/report&#45;wrap.js&#45;&gt;src/graph&#45;utl/compare.js</title>
+<path fill="none" stroke="#000000" stroke-width="2" stroke-opacity="0.200000" d="M454.73,-238.57C465.28,-238.57 474,-238.57 474,-238.57 474,-238.57 474,-508 474,-508 474,-508 652.59,-508 652.59,-508"/>
+<polygon fill="#000000" fill-opacity="0.200000" stroke="#000000" stroke-width="2" stroke-opacity="0.200000" points="652.59,-510.1 658.59,-508 652.59,-505.9 652.59,-510.1"/>
+</g>
+<!-- src/main/report&#45;wrap.js&#45;&gt;src/graph&#45;utl/consolidate&#45;to&#45;pattern.js -->
+<g id="edge27" class="edge">
+<title>src/main/report&#45;wrap.js&#45;&gt;src/graph&#45;utl/consolidate&#45;to&#45;pattern.js</title>
+<path fill="none" stroke="#000000" stroke-width="2" stroke-opacity="0.200000" d="M454.9,-247.71C506.5,-247.71 594,-247.71 594,-247.71 594,-247.71 594,-478 594,-478 594,-478 626.49,-478 626.49,-478"/>
+<polygon fill="#000000" fill-opacity="0.200000" stroke="#000000" stroke-width="2" stroke-opacity="0.200000" points="626.49,-480.1 632.49,-478 626.49,-475.9 626.49,-480.1"/>
+</g>
+<!-- src/main/report&#45;wrap.js&#45;&gt;src/graph&#45;utl/filter&#45;bank.js -->
+<g id="edge28" class="edge">
+<title>src/main/report&#45;wrap.js&#45;&gt;src/graph&#45;utl/filter&#45;bank.js</title>
+<path fill="none" stroke="#000000" stroke-width="2" stroke-opacity="0.200000" d="M454.68,-243.14C528.93,-243.14 690,-243.14 690,-243.14 690,-243.14 690,-405.94 690,-405.94"/>
+<polygon fill="#000000" fill-opacity="0.200000" stroke="#000000" stroke-width="2" stroke-opacity="0.200000" points="687.9,-405.94 690,-411.94 692.1,-405.94 687.9,-405.94"/>
+</g>
+<!-- src/main/report&#45;wrap.js&#45;&gt;src/graph&#45;utl/strip&#45;self&#45;transitions.js -->
+<g id="edge29" class="edge">
+<title>src/main/report&#45;wrap.js&#45;&gt;src/graph&#45;utl/strip&#45;self&#45;transitions.js</title>
+<path fill="none" stroke="#000000" stroke-width="2" stroke-opacity="0.200000" d="M454.7,-245.43C519.63,-245.43 648,-245.43 648,-245.43 648,-245.43 648,-435.9 648,-435.9"/>
+<polygon fill="#000000" fill-opacity="0.200000" stroke="#000000" stroke-width="2" stroke-opacity="0.200000" points="645.9,-435.9 648,-441.9 650.1,-435.9 645.9,-435.9"/>
+</g>
+<!-- src/main/report&#45;wrap.js&#45;&gt;src/report/index.js -->
+<g id="edge30" class="edge">
+<title>src/main/report&#45;wrap.js&#45;&gt;src/report/index.js</title>
+<path fill="none" stroke="#000000" stroke-width="2" stroke-opacity="0.200000" d="M454.68,-236.29C469.42,-236.29 483,-236.29 483,-236.29 483,-236.29 483,-67 483,-67 483,-67 656.94,-67 656.94,-67"/>
+<polygon fill="#000000" fill-opacity="0.200000" stroke="#000000" stroke-width="2" stroke-opacity="0.200000" points="656.94,-69.1 662.94,-67 656.94,-64.9 656.94,-69.1"/>
+</g>
+<!-- src/main/rule&#45;set/normalize.js&#45;&gt;src/main/utl/normalize&#45;re&#45;properties.js -->
+<g id="edge33" class="edge">
+<title>src/main/rule&#45;set/normalize.js&#45;&gt;src/main/utl/normalize&#45;re&#45;properties.js</title>
+<path fill="none" stroke="#000000" stroke-width="2" stroke-opacity="0.200000" d="M451.24,-189C513.17,-189 640,-189 640,-189 640,-189 640,-209.92 640,-209.92"/>
+<polygon fill="#000000" fill-opacity="0.200000" stroke="#000000" stroke-width="2" stroke-opacity="0.200000" points="637.9,-209.92 640,-215.92 642.1,-209.92 637.9,-209.92"/>
+</g>
+<!-- src/main/rule&#45;set/validate.js&#45;&gt;src/main/options/validate.js -->
+<g id="edge35" class="edge">
+<title>src/main/rule&#45;set/validate.js&#45;&gt;src/main/options/validate.js</title>
+<path fill="none" stroke="#000000" stroke-width="2" stroke-opacity="0.200000" d="M418,-149.97C418,-144.28 418,-138 418,-138 418,-138 513.21,-138 513.21,-138"/>
+<polygon fill="#000000" fill-opacity="0.200000" stroke="#000000" stroke-width="2" stroke-opacity="0.200000" points="513.21,-140.1 519.21,-138 513.21,-135.9 513.21,-140.1"/>
+</g>
+<!-- src/schema/configuration.schema.js -->
+<g id="node27" class="node">
+<title>src/schema/configuration.schema.js</title>
+<g id="a_node27"><a xlink:href="src/schema/configuration.schema.js" xlink:title="configuration.schema.js">
+<path fill="#ffffcc" stroke="black" d="M599,-550C599,-550 498,-550 498,-550 495,-550 492,-547 492,-544 492,-544 492,-538 492,-538 492,-535 495,-532 498,-532 498,-532 599,-532 599,-532 602,-532 605,-535 605,-538 605,-538 605,-544 605,-544 605,-547 602,-550 599,-550"/>
+<text text-anchor="start" x="500" y="-538.8" font-family="Helvetica,sans-Serif" font-size="9.00">configuration.schema.js</text>
+</a>
+</g>
+</g>
+<!-- src/main/rule&#45;set/validate.js&#45;&gt;src/schema/configuration.schema.js -->
+<g id="edge34" class="edge">
+<title>src/main/rule&#45;set/validate.js&#45;&gt;src/schema/configuration.schema.js</title>
+<path fill="none" stroke="#000000" stroke-width="2" stroke-opacity="0.200000" d="M447.12,-162C472.06,-162 504,-162 504,-162 504,-162 504,-525.63 504,-525.63"/>
+<polygon fill="#000000" fill-opacity="0.200000" stroke="#000000" stroke-width="2" stroke-opacity="0.200000" points="501.9,-525.63 504,-531.63 506.1,-525.63 501.9,-525.63"/>
+</g>
+</g>
+</svg>
