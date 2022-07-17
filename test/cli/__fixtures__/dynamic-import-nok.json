@@ -12,18 +12,24 @@
           "coreModule": false,
           "followable": true,
           "couldNotResolve": false,
-          "dependencyTypes": ["local"],
+          "dependencyTypes": [
+            "local"
+          ],
           "matchesDoNotFollow": false,
           "circular": false,
           "valid": true
         }
       ],
+      "dependents": [],
       "orphan": false,
       "valid": true
     },
     {
       "source": "test/cli/__fixtures__/typescriptconfig/cli-dynamic-imports/import_this.ts",
       "dependencies": [],
+      "dependents": [
+        "test/cli/__fixtures__/typescriptconfig/cli-dynamic-imports/import_dynamically2.ts"
+      ],
       "orphan": false,
       "valid": true
     }
@@ -39,7 +45,12 @@
     "optionsUsed": {
       "combinedDependencies": false,
       "externalModuleResolutionStrategy": "node_modules",
-      "moduleSystems": ["es6", "cjs", "tsd", "amd"],
+      "moduleSystems": [
+        "es6",
+        "cjs",
+        "tsd",
+        "amd"
+      ],
       "outputTo": "test/cli/__output__/dynamic-import-nok.json",
       "outputType": "json",
       "preserveSymlinks": false,

@@ -1,0 +1,397 @@
+strict digraph "dependency-cruiser output"{
+    
+    
+    
+
+    subgraph "cluster_bin" {label="bin" "bin/depcruise-baseline.js" [label=<depcruise-baseline.js> tooltip="depcruise-baseline.js" URL="https://github.com/sverweij/dependency-cruiser/blob/develop/bin/depcruise-baseline.js" ] }
+    "bin/depcruise-baseline.js" -> "src/cli/index.js"
+    "bin/depcruise-baseline.js" -> "src/cli/validate-node-environment.js"
+    subgraph "cluster_bin" {label="bin" "bin/depcruise-fmt.js" [label=<depcruise-fmt.js> tooltip="depcruise-fmt.js" URL="https://github.com/sverweij/dependency-cruiser/blob/develop/bin/depcruise-fmt.js" ] }
+    "bin/depcruise-fmt.js" -> "src/cli/format.js"
+    "bin/depcruise-fmt.js" -> "src/cli/validate-node-environment.js"
+    subgraph "cluster_bin" {label="bin" "bin/dependency-cruise.js" [label=<dependency-cruise.js> tooltip="dependency-cruise.js" URL="https://github.com/sverweij/dependency-cruiser/blob/develop/bin/dependency-cruise.js" ] }
+    "bin/dependency-cruise.js" -> "src/cli/index.js"
+    "bin/dependency-cruise.js" -> "src/cli/validate-node-environment.js"
+    subgraph "cluster_bin" {label="bin" "bin/wrap-stream-in-html.js" [label=<wrap-stream-in-html.js> tooltip="wrap-stream-in-html.js" URL="https://github.com/sverweij/dependency-cruiser/blob/develop/bin/wrap-stream-in-html.js" ] }
+    "bin/wrap-stream-in-html.js" -> "src/cli/tools/wrap-stream-in-html.js"
+    subgraph "cluster_src" {label="src" subgraph "cluster_src/cli" {label="cli" "src/cli/defaults.js" [label=<defaults.js> tooltip="defaults.js" URL="https://github.com/sverweij/dependency-cruiser/blob/develop/src/cli/defaults.js" ] } }
+    subgraph "cluster_src" {label="src" subgraph "cluster_src/cli" {label="cli" "src/cli/format-meta-info.js" [label=<format-meta-info.js> tooltip="format-meta-info.js" URL="https://github.com/sverweij/dependency-cruiser/blob/develop/src/cli/format-meta-info.js" ] } }
+    "src/cli/format-meta-info.js" -> "src/main/index.js"
+    subgraph "cluster_src" {label="src" subgraph "cluster_src/cli" {label="cli" "src/cli/format.js" [label=<format.js> tooltip="not-reachable-from-folder-index" URL="https://github.com/sverweij/dependency-cruiser/blob/develop/src/cli/format.js" ] } }
+    "src/cli/format.js" -> "src/main/index.js"
+    "src/cli/format.js" -> "src/cli/normalize-cli-options.js"
+    "src/cli/format.js" -> "src/cli/utl/io.js"
+    "src/cli/format.js" -> "src/cli/utl/validate-file-existence.js"
+    subgraph "cluster_src" {label="src" subgraph "cluster_src/cli" {label="cli" "src/cli/index.js" [label=<index.js> tooltip="index.js" URL="https://github.com/sverweij/dependency-cruiser/blob/develop/src/cli/index.js" ] } }
+    "src/cli/index.js" -> "src/config-utl/extract-babel-config.js"
+    "src/cli/index.js" -> "src/config-utl/extract-known-violations.js"
+    "src/cli/index.js" -> "src/config-utl/extract-ts-config.js"
+    "src/cli/index.js" -> "src/config-utl/extract-webpack-resolve-config.js"
+    "src/cli/index.js" -> "src/main/index.js"
+    "src/cli/index.js" -> "src/cli/format-meta-info.js"
+    "src/cli/index.js" -> "src/cli/init-config/index.js"
+    "src/cli/index.js" -> "src/cli/listeners/cli-feedback/index.js"
+    "src/cli/index.js" -> "src/cli/listeners/performance-log/index.js"
+    "src/cli/index.js" -> "src/cli/normalize-cli-options.js"
+    "src/cli/index.js" -> "src/cli/utl/io.js"
+    "src/cli/index.js" -> "src/cli/utl/validate-file-existence.js"
+    subgraph "cluster_src" {label="src" subgraph "cluster_src/cli" {label="cli" subgraph "cluster_src/cli/init-config" {label="init-config" "src/cli/init-config/build-config.js" [label=<build-config.js> tooltip="build-config.js" URL="https://github.com/sverweij/dependency-cruiser/blob/develop/src/cli/init-config/build-config.js" ] } } }
+    "src/cli/init-config/build-config.js" -> "src/cli/init-config/config.js.template.js"
+    "src/cli/init-config/build-config.js" -> "src/cli/init-config/utl.js"
+    subgraph "cluster_src" {label="src" subgraph "cluster_src/cli" {label="cli" subgraph "cluster_src/cli/init-config" {label="init-config" "src/cli/init-config/config.js.template.js" [label=<config.js.template.js> tooltip="config.js.template.js" URL="https://github.com/sverweij/dependency-cruiser/blob/develop/src/cli/init-config/config.js.template.js" ] } } }
+    subgraph "cluster_src" {label="src" subgraph "cluster_src/cli" {label="cli" subgraph "cluster_src/cli/init-config" {label="init-config" "src/cli/init-config/environment-helpers.js" [label=<environment-helpers.js> tooltip="environment-helpers.js" URL="https://github.com/sverweij/dependency-cruiser/blob/develop/src/cli/init-config/environment-helpers.js" ] } } }
+    "src/cli/init-config/environment-helpers.js" -> "src/cli/defaults.js"
+    subgraph "cluster_src" {label="src" subgraph "cluster_src/cli" {label="cli" subgraph "cluster_src/cli/init-config" {label="init-config" "src/cli/init-config/get-user-input.js" [label=<get-user-input.js> tooltip="get-user-input.js" URL="https://github.com/sverweij/dependency-cruiser/blob/develop/src/cli/init-config/get-user-input.js" ] } } }
+    "src/cli/init-config/get-user-input.js" -> "src/cli/init-config/environment-helpers.js"
+    "src/cli/init-config/get-user-input.js" -> "src/cli/init-config/inquirer-validators.js"
+    subgraph "cluster_src" {label="src" subgraph "cluster_src/cli" {label="cli" subgraph "cluster_src/cli/init-config" {label="init-config" "src/cli/init-config/index.js" [label=<index.js> tooltip="index.js" URL="https://github.com/sverweij/dependency-cruiser/blob/develop/src/cli/init-config/index.js" ] } } }
+    "src/cli/init-config/index.js" -> "src/cli/defaults.js"
+    "src/cli/init-config/index.js" -> "src/cli/init-config/build-config.js"
+    "src/cli/init-config/index.js" -> "src/cli/init-config/environment-helpers.js"
+    "src/cli/init-config/index.js" -> "src/cli/init-config/get-user-input.js"
+    "src/cli/init-config/index.js" -> "src/cli/init-config/normalize-init-options.js"
+    "src/cli/init-config/index.js" -> "src/cli/init-config/write-config.js"
+    "src/cli/init-config/index.js" -> "src/cli/init-config/write-run-scripts-to-manifest.js"
+    subgraph "cluster_src" {label="src" subgraph "cluster_src/cli" {label="cli" subgraph "cluster_src/cli/init-config" {label="init-config" "src/cli/init-config/inquirer-validators.js" [label=<inquirer-validators.js> tooltip="inquirer-validators.js" URL="https://github.com/sverweij/dependency-cruiser/blob/develop/src/cli/init-config/inquirer-validators.js" ] } } }
+    "src/cli/init-config/inquirer-validators.js" -> "src/cli/init-config/environment-helpers.js"
+    subgraph "cluster_src" {label="src" subgraph "cluster_src/cli" {label="cli" subgraph "cluster_src/cli/init-config" {label="init-config" "src/cli/init-config/normalize-init-options.js" [label=<normalize-init-options.js> tooltip="normalize-init-options.js" URL="https://github.com/sverweij/dependency-cruiser/blob/develop/src/cli/init-config/normalize-init-options.js" ] } } }
+    "src/cli/init-config/normalize-init-options.js" -> "src/cli/init-config/environment-helpers.js"
+    subgraph "cluster_src" {label="src" subgraph "cluster_src/cli" {label="cli" subgraph "cluster_src/cli/init-config" {label="init-config" "src/cli/init-config/utl.js" [label=<utl.js> tooltip="utl.js" URL="https://github.com/sverweij/dependency-cruiser/blob/develop/src/cli/init-config/utl.js" ] } } }
+    subgraph "cluster_src" {label="src" subgraph "cluster_src/cli" {label="cli" subgraph "cluster_src/cli/init-config" {label="init-config" "src/cli/init-config/write-config.js" [label=<write-config.js> tooltip="write-config.js" URL="https://github.com/sverweij/dependency-cruiser/blob/develop/src/cli/init-config/write-config.js" ] } } }
+    "src/cli/init-config/write-config.js" -> "src/cli/init-config/environment-helpers.js"
+    subgraph "cluster_src" {label="src" subgraph "cluster_src/cli" {label="cli" subgraph "cluster_src/cli/init-config" {label="init-config" "src/cli/init-config/write-run-scripts-to-manifest.js" [label=<write-run-scripts-to-manifest.js> tooltip="write-run-scripts-to-manifest.js" URL="https://github.com/sverweij/dependency-cruiser/blob/develop/src/cli/init-config/write-run-scripts-to-manifest.js" ] } } }
+    "src/cli/init-config/write-run-scripts-to-manifest.js" -> "src/utl/wrap-and-indent.js"
+    "src/cli/init-config/write-run-scripts-to-manifest.js" -> "src/cli/defaults.js"
+    "src/cli/init-config/write-run-scripts-to-manifest.js" -> "src/cli/init-config/environment-helpers.js"
+    "src/cli/init-config/write-run-scripts-to-manifest.js" -> "src/cli/init-config/utl.js"
+    subgraph "cluster_src" {label="src" subgraph "cluster_src/cli" {label="cli" subgraph "cluster_src/cli/listeners" {label="listeners" subgraph "cluster_src/cli/listeners/cli-feedback" {label="cli-feedback" "src/cli/listeners/cli-feedback/index.js" [label=<index.js> tooltip="index.js" URL="https://github.com/sverweij/dependency-cruiser/blob/develop/src/cli/listeners/cli-feedback/index.js" ] } } } }
+    subgraph "cluster_src" {label="src" subgraph "cluster_src/cli" {label="cli" subgraph "cluster_src/cli/listeners" {label="listeners" subgraph "cluster_src/cli/listeners/performance-log" {label="performance-log" "src/cli/listeners/performance-log/format-helpers.js" [label=<format-helpers.js> tooltip="format-helpers.js" URL="https://github.com/sverweij/dependency-cruiser/blob/develop/src/cli/listeners/performance-log/format-helpers.js" ] } } } }
+    subgraph "cluster_src" {label="src" subgraph "cluster_src/cli" {label="cli" subgraph "cluster_src/cli/listeners" {label="listeners" subgraph "cluster_src/cli/listeners/performance-log" {label="performance-log" "src/cli/listeners/performance-log/handlers.js" [label=<handlers.js> tooltip="handlers.js" URL="https://github.com/sverweij/dependency-cruiser/blob/develop/src/cli/listeners/performance-log/handlers.js" ] } } } }
+    "src/cli/listeners/performance-log/handlers.js" -> "src/cli/listeners/performance-log/format-helpers.js"
+    subgraph "cluster_src" {label="src" subgraph "cluster_src/cli" {label="cli" subgraph "cluster_src/cli/listeners" {label="listeners" subgraph "cluster_src/cli/listeners/performance-log" {label="performance-log" "src/cli/listeners/performance-log/index.js" [label=<index.js> tooltip="index.js" URL="https://github.com/sverweij/dependency-cruiser/blob/develop/src/cli/listeners/performance-log/index.js" ] } } } }
+    "src/cli/listeners/performance-log/index.js" -> "src/cli/listeners/performance-log/handlers.js"
+    subgraph "cluster_src" {label="src" subgraph "cluster_src/cli" {label="cli" "src/cli/normalize-cli-options.js" [label=<normalize-cli-options.js> tooltip="normalize-cli-options.js" URL="https://github.com/sverweij/dependency-cruiser/blob/develop/src/cli/normalize-cli-options.js" ] } }
+    "src/cli/normalize-cli-options.js" -> "src/config-utl/extract-depcruise-config/index.js"
+    "src/cli/normalize-cli-options.js" -> "src/cli/defaults.js"
+    subgraph "cluster_src" {label="src" subgraph "cluster_src/cli" {label="cli" subgraph "cluster_src/cli/tools" {label="tools" "src/cli/tools/wrap-stream-in-html.js" [label=<wrap-stream-in-html.js> tooltip="not-reachable-from-folder-index" URL="https://github.com/sverweij/dependency-cruiser/blob/develop/src/cli/tools/wrap-stream-in-html.js" ] } } }
+    subgraph "cluster_src" {label="src" subgraph "cluster_src/cli" {label="cli" subgraph "cluster_src/cli/utl" {label="utl" "src/cli/utl/io.js" [label=<io.js> tooltip="io.js" URL="https://github.com/sverweij/dependency-cruiser/blob/develop/src/cli/utl/io.js" ] } } }
+    subgraph "cluster_src" {label="src" subgraph "cluster_src/cli" {label="cli" subgraph "cluster_src/cli/utl" {label="utl" "src/cli/utl/validate-file-existence.js" [label=<validate-file-existence.js> tooltip="validate-file-existence.js" URL="https://github.com/sverweij/dependency-cruiser/blob/develop/src/cli/utl/validate-file-existence.js" ] } } }
+    subgraph "cluster_src" {label="src" subgraph "cluster_src/cli" {label="cli" "src/cli/validate-node-environment.js" [label=<validate-node-environment.js> tooltip="not-reachable-from-folder-index" URL="https://github.com/sverweij/dependency-cruiser/blob/develop/src/cli/validate-node-environment.js" ] } }
+    subgraph "cluster_src" {label="src" subgraph "cluster_src/config-utl" {label="config-utl" "src/config-utl/extract-babel-config.js" [label=<extract-babel-config.js> tooltip="extract-babel-config.js" URL="https://github.com/sverweij/dependency-cruiser/blob/develop/src/config-utl/extract-babel-config.js" ] } }
+    "src/config-utl/extract-babel-config.js" -> "src/config-utl/make-absolute.js"
+    subgraph "cluster_src" {label="src" subgraph "cluster_src/config-utl" {label="config-utl" subgraph "cluster_src/config-utl/extract-depcruise-config" {label="extract-depcruise-config" "src/config-utl/extract-depcruise-config/index.js" [label=<index.js> tooltip="index.js" URL="https://github.com/sverweij/dependency-cruiser/blob/develop/src/config-utl/extract-depcruise-config/index.js" ] } } }
+    "src/config-utl/extract-depcruise-config/index.js" -> "src/extract/resolve/resolve.js"
+    "src/config-utl/extract-depcruise-config/index.js" -> "src/main/resolve-options/normalize.js"
+    "src/config-utl/extract-depcruise-config/index.js" -> "src/config-utl/extract-depcruise-config/merge-configs.js"
+    "src/config-utl/extract-depcruise-config/index.js" -> "src/config-utl/extract-depcruise-config/read-config.js"
+    subgraph "cluster_src" {label="src" subgraph "cluster_src/config-utl" {label="config-utl" subgraph "cluster_src/config-utl/extract-depcruise-config" {label="extract-depcruise-config" "src/config-utl/extract-depcruise-config/merge-configs.js" [label=<merge-configs.js> tooltip="merge-configs.js" URL="https://github.com/sverweij/dependency-cruiser/blob/develop/src/config-utl/extract-depcruise-config/merge-configs.js" ] } } }
+    subgraph "cluster_src" {label="src" subgraph "cluster_src/config-utl" {label="config-utl" subgraph "cluster_src/config-utl/extract-depcruise-config" {label="extract-depcruise-config" "src/config-utl/extract-depcruise-config/read-config.js" [label=<read-config.js> tooltip="read-config.js" URL="https://github.com/sverweij/dependency-cruiser/blob/develop/src/config-utl/extract-depcruise-config/read-config.js" ] } } }
+    subgraph "cluster_src" {label="src" subgraph "cluster_src/config-utl" {label="config-utl" "src/config-utl/extract-known-violations.js" [label=<extract-known-violations.js> tooltip="extract-known-violations.js" URL="https://github.com/sverweij/dependency-cruiser/blob/develop/src/config-utl/extract-known-violations.js" ] } }
+    "src/config-utl/extract-known-violations.js" -> "src/config-utl/make-absolute.js"
+    subgraph "cluster_src" {label="src" subgraph "cluster_src/config-utl" {label="config-utl" "src/config-utl/extract-ts-config.js" [label=<extract-ts-config.js> tooltip="extract-ts-config.js" URL="https://github.com/sverweij/dependency-cruiser/blob/develop/src/config-utl/extract-ts-config.js" ] } }
+    subgraph "cluster_src" {label="src" subgraph "cluster_src/config-utl" {label="config-utl" "src/config-utl/extract-webpack-resolve-config.js" [label=<extract-webpack-resolve-config.js> tooltip="extract-webpack-resolve-config.js" URL="https://github.com/sverweij/dependency-cruiser/blob/develop/src/config-utl/extract-webpack-resolve-config.js" ] } }
+    "src/config-utl/extract-webpack-resolve-config.js" -> "src/config-utl/make-absolute.js"
+    subgraph "cluster_src" {label="src" subgraph "cluster_src/config-utl" {label="config-utl" "src/config-utl/make-absolute.js" [label=<make-absolute.js> tooltip="make-absolute.js" URL="https://github.com/sverweij/dependency-cruiser/blob/develop/src/config-utl/make-absolute.js" ] } }
+    subgraph "cluster_src" {label="src" subgraph "cluster_src/enrich" {label="enrich" "src/enrich/add-validations.js" [label=<add-validations.js> tooltip="add-validations.js" URL="https://github.com/sverweij/dependency-cruiser/blob/develop/src/enrich/add-validations.js" ] } }
+    "src/enrich/add-validations.js" -> "src/validate/index.js"
+    subgraph "cluster_src" {label="src" subgraph "cluster_src/enrich" {label="enrich" "src/enrich/clear-caches.js" [label=<clear-caches.js> tooltip="clear-caches.js" URL="https://github.com/sverweij/dependency-cruiser/blob/develop/src/enrich/clear-caches.js" ] } }
+    "src/enrich/clear-caches.js" -> "src/enrich/derive/module-utl.js"
+    subgraph "cluster_src" {label="src" subgraph "cluster_src/enrich" {label="enrich" subgraph "cluster_src/enrich/derive" {label="derive" "src/enrich/derive/circular" [label=<circular> tooltip="circular" URL="https://github.com/sverweij/dependency-cruiser/blob/develop/src/enrich/derive/circular" ] } } }
+    subgraph "cluster_src" {label="src" subgraph "cluster_src/enrich" {label="enrich" subgraph "cluster_src/enrich/derive" {label="derive" "src/enrich/derive/dependents" [label=<dependents> tooltip="dependents" URL="https://github.com/sverweij/dependency-cruiser/blob/develop/src/enrich/derive/dependents" ] } } }
+    "src/enrich/derive/dependents" -> "src/enrich/derive/module-utl.js"
+    subgraph "cluster_src" {label="src" subgraph "cluster_src/enrich" {label="enrich" subgraph "cluster_src/enrich/derive" {label="derive" "src/enrich/derive/folders" [label=<folders> tooltip="folders" URL="https://github.com/sverweij/dependency-cruiser/blob/develop/src/enrich/derive/folders" ] } } }
+    "src/enrich/derive/folders" -> "src/validate/index.js"
+    "src/enrich/derive/folders" -> "src/enrich/derive/circular"
+    "src/enrich/derive/folders" -> "src/enrich/derive/module-utl.js"
+    subgraph "cluster_src" {label="src" subgraph "cluster_src/enrich" {label="enrich" subgraph "cluster_src/enrich/derive" {label="derive" "src/enrich/derive/metrics" [label=<metrics> tooltip="metrics" URL="https://github.com/sverweij/dependency-cruiser/blob/develop/src/enrich/derive/metrics" ] } } }
+    "src/enrich/derive/metrics" -> "src/enrich/derive/module-utl.js"
+    subgraph "cluster_src" {label="src" subgraph "cluster_src/enrich" {label="enrich" subgraph "cluster_src/enrich/derive" {label="derive" "src/enrich/derive/module-utl.js" [label=<module-utl.js> tooltip="module-utl.js" URL="https://github.com/sverweij/dependency-cruiser/blob/develop/src/enrich/derive/module-utl.js" ] } } }
+    subgraph "cluster_src" {label="src" subgraph "cluster_src/enrich" {label="enrich" subgraph "cluster_src/enrich/derive" {label="derive" "src/enrich/derive/orphan" [label=<orphan> tooltip="orphan" URL="https://github.com/sverweij/dependency-cruiser/blob/develop/src/enrich/derive/orphan" ] } } }
+    "src/enrich/derive/orphan" -> "src/enrich/derive/module-utl.js"
+    subgraph "cluster_src" {label="src" subgraph "cluster_src/enrich" {label="enrich" subgraph "cluster_src/enrich/derive" {label="derive" "src/enrich/derive/reachable" [label=<reachable> tooltip="reachable" URL="https://github.com/sverweij/dependency-cruiser/blob/develop/src/enrich/derive/reachable" ] } } }
+    "src/enrich/derive/reachable" -> "src/utl/regex-util.js"
+    "src/enrich/derive/reachable" -> "src/validate/matchers.js"
+    "src/enrich/derive/reachable" -> "src/enrich/derive/module-utl.js"
+    subgraph "cluster_src" {label="src" subgraph "cluster_src/enrich" {label="enrich" "src/enrich/enrich-modules.js" [label=<enrich-modules.js> tooltip="enrich-modules.js" URL="https://github.com/sverweij/dependency-cruiser/blob/develop/src/enrich/enrich-modules.js" ] } }
+    "src/enrich/enrich-modules.js" -> "src/graph-utl/add-focus.js"
+    "src/enrich/enrich-modules.js" -> "src/enrich/add-validations.js"
+    "src/enrich/enrich-modules.js" -> "src/enrich/derive/circular"
+    "src/enrich/enrich-modules.js" -> "src/enrich/derive/dependents"
+    "src/enrich/enrich-modules.js" -> "src/enrich/derive/metrics"
+    "src/enrich/enrich-modules.js" -> "src/enrich/derive/module-utl.js"
+    "src/enrich/enrich-modules.js" -> "src/enrich/derive/orphan"
+    "src/enrich/enrich-modules.js" -> "src/enrich/derive/reachable"
+    "src/enrich/enrich-modules.js" -> "src/enrich/soften-known-violations.js"
+    subgraph "cluster_src" {label="src" subgraph "cluster_src/enrich" {label="enrich" "src/enrich/index.js" [label=<index.js> tooltip="index.js" URL="https://github.com/sverweij/dependency-cruiser/blob/develop/src/enrich/index.js" ] } }
+    "src/enrich/index.js" -> "src/enrich/clear-caches.js"
+    "src/enrich/index.js" -> "src/enrich/derive/folders"
+    "src/enrich/index.js" -> "src/enrich/enrich-modules.js"
+    "src/enrich/index.js" -> "src/enrich/summarize/index.js"
+    subgraph "cluster_src" {label="src" subgraph "cluster_src/enrich" {label="enrich" "src/enrich/soften-known-violations.js" [label=<soften-known-violations.js> tooltip="soften-known-violations.js" URL="https://github.com/sverweij/dependency-cruiser/blob/develop/src/enrich/soften-known-violations.js" ] } }
+    "src/enrich/soften-known-violations.js" -> "src/enrich/summarize/is-same-violation.js"
+    subgraph "cluster_src" {label="src" subgraph "cluster_src/enrich" {label="enrich" subgraph "cluster_src/enrich/summarize" {label="summarize" "src/enrich/summarize/add-rule-set-used.js" [label=<add-rule-set-used.js> tooltip="add-rule-set-used.js" URL="https://github.com/sverweij/dependency-cruiser/blob/develop/src/enrich/summarize/add-rule-set-used.js" ] } } }
+    subgraph "cluster_src" {label="src" subgraph "cluster_src/enrich" {label="enrich" subgraph "cluster_src/enrich/summarize" {label="summarize" "src/enrich/summarize/get-stats.js" [label=<get-stats.js> tooltip="get-stats.js" URL="https://github.com/sverweij/dependency-cruiser/blob/develop/src/enrich/summarize/get-stats.js" ] } } }
+    subgraph "cluster_src" {label="src" subgraph "cluster_src/enrich" {label="enrich" subgraph "cluster_src/enrich/summarize" {label="summarize" "src/enrich/summarize/index.js" [label=<index.js> tooltip="index.js" URL="https://github.com/sverweij/dependency-cruiser/blob/develop/src/enrich/summarize/index.js" ] } } }
+    "src/enrich/summarize/index.js" -> "src/graph-utl/compare.js"
+    "src/enrich/summarize/index.js" -> "src/enrich/summarize/add-rule-set-used.js"
+    "src/enrich/summarize/index.js" -> "src/enrich/summarize/get-stats.js"
+    "src/enrich/summarize/index.js" -> "src/enrich/summarize/summarize-folders.js"
+    "src/enrich/summarize/index.js" -> "src/enrich/summarize/summarize-modules.js"
+    "src/enrich/summarize/index.js" -> "src/enrich/summarize/summarize-options.js"
+    subgraph "cluster_src" {label="src" subgraph "cluster_src/enrich" {label="enrich" subgraph "cluster_src/enrich/summarize" {label="summarize" "src/enrich/summarize/is-same-violation.js" [label=<is-same-violation.js> tooltip="is-same-violation.js" URL="https://github.com/sverweij/dependency-cruiser/blob/develop/src/enrich/summarize/is-same-violation.js" ] } } }
+    subgraph "cluster_src" {label="src" subgraph "cluster_src/enrich" {label="enrich" subgraph "cluster_src/enrich/summarize" {label="summarize" "src/enrich/summarize/summarize-folders.js" [label=<summarize-folders.js> tooltip="summarize-folders.js" URL="https://github.com/sverweij/dependency-cruiser/blob/develop/src/enrich/summarize/summarize-folders.js" ] } } }
+    "src/enrich/summarize/summarize-folders.js" -> "src/graph-utl/rule-set.js"
+    subgraph "cluster_src" {label="src" subgraph "cluster_src/enrich" {label="enrich" subgraph "cluster_src/enrich/summarize" {label="summarize" "src/enrich/summarize/summarize-modules.js" [label=<summarize-modules.js> tooltip="summarize-modules.js" URL="https://github.com/sverweij/dependency-cruiser/blob/develop/src/enrich/summarize/summarize-modules.js" ] } } }
+    "src/enrich/summarize/summarize-modules.js" -> "src/graph-utl/compare.js"
+    "src/enrich/summarize/summarize-modules.js" -> "src/graph-utl/rule-set.js"
+    "src/enrich/summarize/summarize-modules.js" -> "src/enrich/summarize/is-same-violation.js"
+    subgraph "cluster_src" {label="src" subgraph "cluster_src/enrich" {label="enrich" subgraph "cluster_src/enrich/summarize" {label="summarize" "src/enrich/summarize/summarize-options.js" [label=<summarize-options.js> tooltip="summarize-options.js" URL="https://github.com/sverweij/dependency-cruiser/blob/develop/src/enrich/summarize/summarize-options.js" ] } } }
+    subgraph "cluster_src" {label="src" subgraph "cluster_src/extract" {label="extract" subgraph "cluster_src/extract/ast-extractors" {label="ast-extractors" "src/extract/ast-extractors/estree-helpers.js" [label=<estree-helpers.js> tooltip="estree-helpers.js" URL="https://github.com/sverweij/dependency-cruiser/blob/develop/src/extract/ast-extractors/estree-helpers.js" ] } } }
+    subgraph "cluster_src" {label="src" subgraph "cluster_src/extract" {label="extract" subgraph "cluster_src/extract/ast-extractors" {label="ast-extractors" "src/extract/ast-extractors/extract-amd-deps.js" [label=<extract-amd-deps.js> tooltip="extract-amd-deps.js" URL="https://github.com/sverweij/dependency-cruiser/blob/develop/src/extract/ast-extractors/extract-amd-deps.js" ] } } }
+    "src/extract/ast-extractors/extract-amd-deps.js" -> "src/extract/ast-extractors/estree-helpers.js"
+    "src/extract/ast-extractors/extract-amd-deps.js" -> "src/extract/ast-extractors/extract-cjs-deps.js"
+    subgraph "cluster_src" {label="src" subgraph "cluster_src/extract" {label="extract" subgraph "cluster_src/extract/ast-extractors" {label="ast-extractors" "src/extract/ast-extractors/extract-cjs-deps.js" [label=<extract-cjs-deps.js> tooltip="extract-cjs-deps.js" URL="https://github.com/sverweij/dependency-cruiser/blob/develop/src/extract/ast-extractors/extract-cjs-deps.js" ] } } }
+    "src/extract/ast-extractors/extract-cjs-deps.js" -> "src/extract/ast-extractors/estree-helpers.js"
+    subgraph "cluster_src" {label="src" subgraph "cluster_src/extract" {label="extract" subgraph "cluster_src/extract/ast-extractors" {label="ast-extractors" "src/extract/ast-extractors/extract-es6-deps.js" [label=<extract-es6-deps.js> tooltip="extract-es6-deps.js" URL="https://github.com/sverweij/dependency-cruiser/blob/develop/src/extract/ast-extractors/extract-es6-deps.js" ] } } }
+    "src/extract/ast-extractors/extract-es6-deps.js" -> "src/extract/ast-extractors/estree-helpers.js"
+    subgraph "cluster_src" {label="src" subgraph "cluster_src/extract" {label="extract" subgraph "cluster_src/extract/ast-extractors" {label="ast-extractors" "src/extract/ast-extractors/extract-swc-deps.js" [label=<extract-swc-deps.js> tooltip="extract-swc-deps.js" URL="https://github.com/sverweij/dependency-cruiser/blob/develop/src/extract/ast-extractors/extract-swc-deps.js" ] } } }
+    "src/extract/ast-extractors/extract-swc-deps.js" -> "src/extract/ast-extractors/swc-dependency-visitor.js"
+    subgraph "cluster_src" {label="src" subgraph "cluster_src/extract" {label="extract" subgraph "cluster_src/extract/ast-extractors" {label="ast-extractors" "src/extract/ast-extractors/extract-typescript-deps.js" [label=<extract-typescript-deps.js> tooltip="extract-typescript-deps.js" URL="https://github.com/sverweij/dependency-cruiser/blob/develop/src/extract/ast-extractors/extract-typescript-deps.js" ] } } }
+    subgraph "cluster_src" {label="src" subgraph "cluster_src/extract" {label="extract" subgraph "cluster_src/extract/ast-extractors" {label="ast-extractors" "src/extract/ast-extractors/swc-dependency-visitor.js" [label=<swc-dependency-visitor.js> tooltip="swc-dependency-visitor.js" URL="https://github.com/sverweij/dependency-cruiser/blob/develop/src/extract/ast-extractors/swc-dependency-visitor.js" ] } } }
+    subgraph "cluster_src" {label="src" subgraph "cluster_src/extract" {label="extract" "src/extract/clear-caches.js" [label=<clear-caches.js> tooltip="clear-caches.js" URL="https://github.com/sverweij/dependency-cruiser/blob/develop/src/extract/clear-caches.js" ] } }
+    "src/extract/clear-caches.js" -> "src/extract/parse/to-javascript-ast.js"
+    "src/extract/clear-caches.js" -> "src/extract/parse/to-swc-ast.js"
+    "src/extract/clear-caches.js" -> "src/extract/parse/to-typescript-ast.js"
+    "src/extract/clear-caches.js" -> "src/extract/resolve/external-module-helpers.js"
+    "src/extract/clear-caches.js" -> "src/extract/resolve/get-manifest/index.js"
+    "src/extract/clear-caches.js" -> "src/extract/resolve/resolve.js"
+    "src/extract/clear-caches.js" -> "src/extract/resolve/resolve-amd.js"
+    subgraph "cluster_src" {label="src" subgraph "cluster_src/extract" {label="extract" "src/extract/gather-initial-sources.js" [label=<gather-initial-sources.js> tooltip="gather-initial-sources.js" URL="https://github.com/sverweij/dependency-cruiser/blob/develop/src/extract/gather-initial-sources.js" ] } }
+    "src/extract/gather-initial-sources.js" -> "src/graph-utl/match-facade.js"
+    "src/extract/gather-initial-sources.js" -> "src/extract/transpile/meta.js"
+    "src/extract/gather-initial-sources.js" -> "src/extract/utl/get-extension.js"
+    "src/extract/gather-initial-sources.js" -> "src/extract/utl/path-to-posix.js"
+    subgraph "cluster_src" {label="src" subgraph "cluster_src/extract" {label="extract" "src/extract/get-dependencies.js" [label=<get-dependencies.js> tooltip="get-dependencies.js" URL="https://github.com/sverweij/dependency-cruiser/blob/develop/src/extract/get-dependencies.js" ] } }
+    "src/extract/get-dependencies.js" -> "src/utl/array-util.js"
+    "src/extract/get-dependencies.js" -> "src/extract/ast-extractors/extract-amd-deps.js"
+    "src/extract/get-dependencies.js" -> "src/extract/ast-extractors/extract-cjs-deps.js"
+    "src/extract/get-dependencies.js" -> "src/extract/ast-extractors/extract-es6-deps.js"
+    "src/extract/get-dependencies.js" -> "src/extract/ast-extractors/extract-swc-deps.js"
+    "src/extract/get-dependencies.js" -> "src/extract/ast-extractors/extract-typescript-deps.js"
+    "src/extract/get-dependencies.js" -> "src/extract/parse/to-javascript-ast.js"
+    "src/extract/get-dependencies.js" -> "src/extract/parse/to-swc-ast.js"
+    "src/extract/get-dependencies.js" -> "src/extract/parse/to-typescript-ast.js"
+    "src/extract/get-dependencies.js" -> "src/extract/resolve/index.js"
+    "src/extract/get-dependencies.js" -> "src/extract/utl/detect-pre-compilation-ness.js"
+    "src/extract/get-dependencies.js" -> "src/extract/utl/extract-module-attributes.js"
+    subgraph "cluster_src" {label="src" subgraph "cluster_src/extract" {label="extract" "src/extract/index.js" [label=<index.js> tooltip="index.js" URL="https://github.com/sverweij/dependency-cruiser/blob/develop/src/extract/index.js" ] } }
+    "src/extract/index.js" -> "src/extract/clear-caches.js"
+    "src/extract/index.js" -> "src/extract/gather-initial-sources.js"
+    "src/extract/index.js" -> "src/extract/get-dependencies.js"
+    subgraph "cluster_src" {label="src" subgraph "cluster_src/extract" {label="extract" subgraph "cluster_src/extract/parse" {label="parse" "src/extract/parse/to-javascript-ast.js" [label=<to-javascript-ast.js> tooltip="to-javascript-ast.js" URL="https://github.com/sverweij/dependency-cruiser/blob/develop/src/extract/parse/to-javascript-ast.js" ] } } }
+    "src/extract/parse/to-javascript-ast.js" -> "src/extract/transpile/index.js"
+    "src/extract/parse/to-javascript-ast.js" -> "src/extract/utl/get-extension.js"
+    subgraph "cluster_src" {label="src" subgraph "cluster_src/extract" {label="extract" subgraph "cluster_src/extract/parse" {label="parse" "src/extract/parse/to-swc-ast.js" [label=<to-swc-ast.js> tooltip="to-swc-ast.js" URL="https://github.com/sverweij/dependency-cruiser/blob/develop/src/extract/parse/to-swc-ast.js" ] } } }
+    subgraph "cluster_src" {label="src" subgraph "cluster_src/extract" {label="extract" subgraph "cluster_src/extract/parse" {label="parse" "src/extract/parse/to-typescript-ast.js" [label=<to-typescript-ast.js> tooltip="to-typescript-ast.js" URL="https://github.com/sverweij/dependency-cruiser/blob/develop/src/extract/parse/to-typescript-ast.js" ] } } }
+    "src/extract/parse/to-typescript-ast.js" -> "src/extract/transpile/index.js"
+    "src/extract/parse/to-typescript-ast.js" -> "src/extract/utl/get-extension.js"
+    subgraph "cluster_src" {label="src" subgraph "cluster_src/extract" {label="extract" subgraph "cluster_src/extract/resolve" {label="resolve" "src/extract/resolve/determine-dependency-types.js" [label=<determine-dependency-types.js> tooltip="determine-dependency-types.js" URL="https://github.com/sverweij/dependency-cruiser/blob/develop/src/extract/resolve/determine-dependency-types.js" ] } } }
+    "src/extract/resolve/determine-dependency-types.js" -> "src/extract/resolve/external-module-helpers.js"
+    "src/extract/resolve/determine-dependency-types.js" -> "src/extract/resolve/module-classifiers.js"
+    subgraph "cluster_src" {label="src" subgraph "cluster_src/extract" {label="extract" subgraph "cluster_src/extract/resolve" {label="resolve" "src/extract/resolve/external-module-helpers.js" [label=<external-module-helpers.js> tooltip="external-module-helpers.js" URL="https://github.com/sverweij/dependency-cruiser/blob/develop/src/extract/resolve/external-module-helpers.js" ] } } }
+    "src/extract/resolve/external-module-helpers.js" -> "src/extract/resolve/module-classifiers.js"
+    "src/extract/resolve/external-module-helpers.js" -> "src/extract/resolve/resolve.js"
+    subgraph "cluster_src" {label="src" subgraph "cluster_src/extract" {label="extract" subgraph "cluster_src/extract/resolve" {label="resolve" subgraph "cluster_src/extract/resolve/get-manifest" {label="get-manifest" "src/extract/resolve/get-manifest/index.js" [label=<index.js> tooltip="index.js" URL="https://github.com/sverweij/dependency-cruiser/blob/develop/src/extract/resolve/get-manifest/index.js" ] } } } }
+    "src/extract/resolve/get-manifest/index.js" -> "src/extract/resolve/get-manifest/merge-manifests.js"
+    subgraph "cluster_src" {label="src" subgraph "cluster_src/extract" {label="extract" subgraph "cluster_src/extract/resolve" {label="resolve" subgraph "cluster_src/extract/resolve/get-manifest" {label="get-manifest" "src/extract/resolve/get-manifest/merge-manifests.js" [label=<merge-manifests.js> tooltip="merge-manifests.js" URL="https://github.com/sverweij/dependency-cruiser/blob/develop/src/extract/resolve/get-manifest/merge-manifests.js" ] } } } }
+    subgraph "cluster_src" {label="src" subgraph "cluster_src/extract" {label="extract" subgraph "cluster_src/extract/resolve" {label="resolve" "src/extract/resolve/index.js" [label=<index.js> tooltip="index.js" URL="https://github.com/sverweij/dependency-cruiser/blob/develop/src/extract/resolve/index.js" ] } } }
+    "src/extract/resolve/index.js" -> "src/extract/utl/path-to-posix.js"
+    "src/extract/resolve/index.js" -> "src/extract/resolve/determine-dependency-types.js"
+    "src/extract/resolve/index.js" -> "src/extract/resolve/get-manifest/index.js"
+    "src/extract/resolve/index.js" -> "src/extract/resolve/module-classifiers.js"
+    "src/extract/resolve/index.js" -> "src/extract/resolve/resolve-amd.js"
+    "src/extract/resolve/index.js" -> "src/extract/resolve/resolve-cjs.js"
+    "src/extract/resolve/index.js" -> "src/extract/resolve/resolve-helpers.js"
+    subgraph "cluster_src" {label="src" subgraph "cluster_src/extract" {label="extract" subgraph "cluster_src/extract/resolve" {label="resolve" "src/extract/resolve/module-classifiers.js" [label=<module-classifiers.js> tooltip="module-classifiers.js" URL="https://github.com/sverweij/dependency-cruiser/blob/develop/src/extract/resolve/module-classifiers.js" ] } } }
+    "src/extract/resolve/module-classifiers.js" -> "src/extract/utl/get-extension.js"
+    subgraph "cluster_src" {label="src" subgraph "cluster_src/extract" {label="extract" subgraph "cluster_src/extract/resolve" {label="resolve" "src/extract/resolve/resolve-amd.js" [label=<resolve-amd.js> tooltip="resolve-amd.js" URL="https://github.com/sverweij/dependency-cruiser/blob/develop/src/extract/resolve/resolve-amd.js" ] } } }
+    "src/extract/resolve/resolve-amd.js" -> "src/extract/utl/path-to-posix.js"
+    subgraph "cluster_src" {label="src" subgraph "cluster_src/extract" {label="extract" subgraph "cluster_src/extract/resolve" {label="resolve" "src/extract/resolve/resolve-cjs.js" [label=<resolve-cjs.js> tooltip="resolve-cjs.js" URL="https://github.com/sverweij/dependency-cruiser/blob/develop/src/extract/resolve/resolve-cjs.js" ] } } }
+    "src/extract/resolve/resolve-cjs.js" -> "src/extract/utl/path-to-posix.js"
+    "src/extract/resolve/resolve-cjs.js" -> "src/extract/resolve/module-classifiers.js"
+    "src/extract/resolve/resolve-cjs.js" -> "src/extract/resolve/resolve.js"
+    subgraph "cluster_src" {label="src" subgraph "cluster_src/extract" {label="extract" subgraph "cluster_src/extract/resolve" {label="resolve" "src/extract/resolve/resolve-helpers.js" [label=<resolve-helpers.js> tooltip="resolve-helpers.js" URL="https://github.com/sverweij/dependency-cruiser/blob/develop/src/extract/resolve/resolve-helpers.js" ] } } }
+    "src/extract/resolve/resolve-helpers.js" -> "src/extract/resolve/external-module-helpers.js"
+    "src/extract/resolve/resolve-helpers.js" -> "src/extract/resolve/module-classifiers.js"
+    subgraph "cluster_src" {label="src" subgraph "cluster_src/extract" {label="extract" subgraph "cluster_src/extract/resolve" {label="resolve" "src/extract/resolve/resolve.js" [label=<resolve.js> tooltip="resolve.js" URL="https://github.com/sverweij/dependency-cruiser/blob/develop/src/extract/resolve/resolve.js" ] } } }
+    "src/extract/resolve/resolve.js" -> "src/extract/utl/path-to-posix.js"
+    "src/extract/resolve/resolve.js" -> "src/extract/utl/strip-query-parameters.js"
+    subgraph "cluster_src" {label="src" subgraph "cluster_src/extract" {label="extract" subgraph "cluster_src/extract/transpile" {label="transpile" "src/extract/transpile/babel-wrap.js" [label=<babel-wrap.js> tooltip="babel-wrap.js" URL="https://github.com/sverweij/dependency-cruiser/blob/develop/src/extract/transpile/babel-wrap.js" ] } } }
+    subgraph "cluster_src" {label="src" subgraph "cluster_src/extract" {label="extract" subgraph "cluster_src/extract/transpile" {label="transpile" "src/extract/transpile/coffeescript-wrap.js" [label=<coffeescript-wrap.js> tooltip="coffeescript-wrap.js" URL="https://github.com/sverweij/dependency-cruiser/blob/develop/src/extract/transpile/coffeescript-wrap.js" ] } } }
+    subgraph "cluster_src" {label="src" subgraph "cluster_src/extract" {label="extract" subgraph "cluster_src/extract/transpile" {label="transpile" "src/extract/transpile/index.js" [label=<index.js> tooltip="index.js" URL="https://github.com/sverweij/dependency-cruiser/blob/develop/src/extract/transpile/index.js" ] } } }
+    "src/extract/transpile/index.js" -> "src/extract/transpile/meta.js"
+    subgraph "cluster_src" {label="src" subgraph "cluster_src/extract" {label="extract" subgraph "cluster_src/extract/transpile" {label="transpile" "src/extract/transpile/javascript-wrap.js" [label=<javascript-wrap.js> tooltip="javascript-wrap.js" URL="https://github.com/sverweij/dependency-cruiser/blob/develop/src/extract/transpile/javascript-wrap.js" ] } } }
+    subgraph "cluster_src" {label="src" subgraph "cluster_src/extract" {label="extract" subgraph "cluster_src/extract/transpile" {label="transpile" "src/extract/transpile/livescript-wrap.js" [label=<livescript-wrap.js> tooltip="livescript-wrap.js" URL="https://github.com/sverweij/dependency-cruiser/blob/develop/src/extract/transpile/livescript-wrap.js" ] } } }
+    subgraph "cluster_src" {label="src" subgraph "cluster_src/extract" {label="extract" subgraph "cluster_src/extract/transpile" {label="transpile" "src/extract/transpile/meta.d.ts" [label=<meta.d.ts> tooltip="meta.d.ts" URL="https://github.com/sverweij/dependency-cruiser/blob/develop/src/extract/transpile/meta.d.ts" ] } } }
+    subgraph "cluster_src" {label="src" subgraph "cluster_src/extract" {label="extract" subgraph "cluster_src/extract/transpile" {label="transpile" "src/extract/transpile/meta.js" [label=<meta.js> tooltip="meta.js" URL="https://github.com/sverweij/dependency-cruiser/blob/develop/src/extract/transpile/meta.js" ] } } }
+    "src/extract/transpile/meta.js" -> "src/extract/parse/to-swc-ast.js"
+    "src/extract/transpile/meta.js" -> "src/extract/transpile/babel-wrap.js"
+    "src/extract/transpile/meta.js" -> "src/extract/transpile/coffeescript-wrap.js"
+    "src/extract/transpile/meta.js" -> "src/extract/transpile/javascript-wrap.js"
+    "src/extract/transpile/meta.js" -> "src/extract/transpile/livescript-wrap.js"
+    "src/extract/transpile/meta.js" -> "src/extract/transpile/svelte-wrap.js"
+    "src/extract/transpile/meta.js" -> "src/extract/transpile/typescript-wrap.js"
+    "src/extract/transpile/meta.js" -> "src/extract/transpile/vue-template-wrap.js"
+    subgraph "cluster_src" {label="src" subgraph "cluster_src/extract" {label="extract" subgraph "cluster_src/extract/transpile" {label="transpile" "src/extract/transpile/svelte-preprocess.js" [label=<svelte-preprocess.js> tooltip="svelte-preprocess.js" URL="https://github.com/sverweij/dependency-cruiser/blob/develop/src/extract/transpile/svelte-preprocess.js" ] } } }
+    subgraph "cluster_src" {label="src" subgraph "cluster_src/extract" {label="extract" subgraph "cluster_src/extract/transpile" {label="transpile" "src/extract/transpile/svelte-wrap.js" [label=<svelte-wrap.js> tooltip="svelte-wrap.js" URL="https://github.com/sverweij/dependency-cruiser/blob/develop/src/extract/transpile/svelte-wrap.js" ] } } }
+    "src/extract/transpile/svelte-wrap.js" -> "src/extract/transpile/svelte-preprocess.js"
+    subgraph "cluster_src" {label="src" subgraph "cluster_src/extract" {label="extract" subgraph "cluster_src/extract/transpile" {label="transpile" "src/extract/transpile/typescript-wrap.js" [label=<typescript-wrap.js> tooltip="typescript-wrap.js" URL="https://github.com/sverweij/dependency-cruiser/blob/develop/src/extract/transpile/typescript-wrap.js" ] } } }
+    subgraph "cluster_src" {label="src" subgraph "cluster_src/extract" {label="extract" subgraph "cluster_src/extract/transpile" {label="transpile" "src/extract/transpile/vue-template-wrap.js" [label=<vue-template-wrap.js> tooltip="vue-template-wrap.js" URL="https://github.com/sverweij/dependency-cruiser/blob/develop/src/extract/transpile/vue-template-wrap.js" ] } } }
+    subgraph "cluster_src" {label="src" subgraph "cluster_src/extract" {label="extract" subgraph "cluster_src/extract/utl" {label="utl" "src/extract/utl/compare.js" [label=<compare.js> tooltip="compare.js" URL="https://github.com/sverweij/dependency-cruiser/blob/develop/src/extract/utl/compare.js" ] } } }
+    subgraph "cluster_src" {label="src" subgraph "cluster_src/extract" {label="extract" subgraph "cluster_src/extract/utl" {label="utl" "src/extract/utl/detect-pre-compilation-ness.js" [label=<detect-pre-compilation-ness.js> tooltip="detect-pre-compilation-ness.js" URL="https://github.com/sverweij/dependency-cruiser/blob/develop/src/extract/utl/detect-pre-compilation-ness.js" ] } } }
+    "src/extract/utl/detect-pre-compilation-ness.js" -> "src/extract/utl/compare.js"
+    subgraph "cluster_src" {label="src" subgraph "cluster_src/extract" {label="extract" subgraph "cluster_src/extract/utl" {label="utl" "src/extract/utl/extract-module-attributes.js" [label=<extract-module-attributes.js> tooltip="extract-module-attributes.js" URL="https://github.com/sverweij/dependency-cruiser/blob/develop/src/extract/utl/extract-module-attributes.js" ] } } }
+    subgraph "cluster_src" {label="src" subgraph "cluster_src/extract" {label="extract" subgraph "cluster_src/extract/utl" {label="utl" "src/extract/utl/get-extension.js" [label=<get-extension.js> tooltip="get-extension.js" URL="https://github.com/sverweij/dependency-cruiser/blob/develop/src/extract/utl/get-extension.js" ] } } }
+    subgraph "cluster_src" {label="src" subgraph "cluster_src/extract" {label="extract" subgraph "cluster_src/extract/utl" {label="utl" "src/extract/utl/path-to-posix.js" [label=<path-to-posix.js> tooltip="path-to-posix.js" URL="https://github.com/sverweij/dependency-cruiser/blob/develop/src/extract/utl/path-to-posix.js" ] } } }
+    subgraph "cluster_src" {label="src" subgraph "cluster_src/extract" {label="extract" subgraph "cluster_src/extract/utl" {label="utl" "src/extract/utl/strip-query-parameters.js" [label=<strip-query-parameters.js> tooltip="strip-query-parameters.js" URL="https://github.com/sverweij/dependency-cruiser/blob/develop/src/extract/utl/strip-query-parameters.js" ] } } }
+    subgraph "cluster_src" {label="src" subgraph "cluster_src/graph-utl" {label="graph-utl" "src/graph-utl/add-focus.js" [label=<add-focus.js> tooltip="add-focus.js" URL="https://github.com/sverweij/dependency-cruiser/blob/develop/src/graph-utl/add-focus.js" ] } }
+    "src/graph-utl/add-focus.js" -> "src/graph-utl/indexed-module-graph.js"
+    "src/graph-utl/add-focus.js" -> "src/graph-utl/match-facade.js"
+    subgraph "cluster_src" {label="src" subgraph "cluster_src/graph-utl" {label="graph-utl" "src/graph-utl/compare.js" [label=<compare.js> tooltip="compare.js" URL="https://github.com/sverweij/dependency-cruiser/blob/develop/src/graph-utl/compare.js" ] } }
+    subgraph "cluster_src" {label="src" subgraph "cluster_src/graph-utl" {label="graph-utl" "src/graph-utl/consolidate-module-dependencies.js" [label=<consolidate-module-dependencies.js> tooltip="consolidate-module-dependencies.js" URL="https://github.com/sverweij/dependency-cruiser/blob/develop/src/graph-utl/consolidate-module-dependencies.js" ] } }
+    "src/graph-utl/consolidate-module-dependencies.js" -> "src/graph-utl/compare.js"
+    subgraph "cluster_src" {label="src" subgraph "cluster_src/graph-utl" {label="graph-utl" "src/graph-utl/consolidate-modules.js" [label=<consolidate-modules.js> tooltip="consolidate-modules.js" URL="https://github.com/sverweij/dependency-cruiser/blob/develop/src/graph-utl/consolidate-modules.js" ] } }
+    "src/graph-utl/consolidate-modules.js" -> "src/graph-utl/compare.js"
+    subgraph "cluster_src" {label="src" subgraph "cluster_src/graph-utl" {label="graph-utl" "src/graph-utl/consolidate-to-folder.js" [label=<consolidate-to-folder.js> tooltip="consolidate-to-folder.js" URL="https://github.com/sverweij/dependency-cruiser/blob/develop/src/graph-utl/consolidate-to-folder.js" ] } }
+    "src/graph-utl/consolidate-to-folder.js" -> "src/graph-utl/consolidate-module-dependencies.js"
+    "src/graph-utl/consolidate-to-folder.js" -> "src/graph-utl/consolidate-modules.js"
+    subgraph "cluster_src" {label="src" subgraph "cluster_src/graph-utl" {label="graph-utl" "src/graph-utl/consolidate-to-pattern.js" [label=<consolidate-to-pattern.js> tooltip="consolidate-to-pattern.js" URL="https://github.com/sverweij/dependency-cruiser/blob/develop/src/graph-utl/consolidate-to-pattern.js" ] } }
+    "src/graph-utl/consolidate-to-pattern.js" -> "src/graph-utl/consolidate-module-dependencies.js"
+    "src/graph-utl/consolidate-to-pattern.js" -> "src/graph-utl/consolidate-modules.js"
+    subgraph "cluster_src" {label="src" subgraph "cluster_src/graph-utl" {label="graph-utl" "src/graph-utl/filterbank.js" [label=<filterbank.js> tooltip="filterbank.js" URL="https://github.com/sverweij/dependency-cruiser/blob/develop/src/graph-utl/filterbank.js" ] } }
+    "src/graph-utl/filterbank.js" -> "src/graph-utl/add-focus.js"
+    "src/graph-utl/filterbank.js" -> "src/graph-utl/indexed-module-graph.js"
+    "src/graph-utl/filterbank.js" -> "src/graph-utl/match-facade.js"
+    subgraph "cluster_src" {label="src" subgraph "cluster_src/graph-utl" {label="graph-utl" "src/graph-utl/indexed-module-graph.js" [label=<indexed-module-graph.js> tooltip="indexed-module-graph.js" URL="https://github.com/sverweij/dependency-cruiser/blob/develop/src/graph-utl/indexed-module-graph.js" ] } }
+    subgraph "cluster_src" {label="src" subgraph "cluster_src/graph-utl" {label="graph-utl" "src/graph-utl/match-facade.js" [label=<match-facade.js> tooltip="match-facade.js" URL="https://github.com/sverweij/dependency-cruiser/blob/develop/src/graph-utl/match-facade.js" ] } }
+    subgraph "cluster_src" {label="src" subgraph "cluster_src/graph-utl" {label="graph-utl" "src/graph-utl/rule-set.js" [label=<rule-set.js> tooltip="rule-set.js" URL="https://github.com/sverweij/dependency-cruiser/blob/develop/src/graph-utl/rule-set.js" ] } }
+    subgraph "cluster_src" {label="src" subgraph "cluster_src/graph-utl" {label="graph-utl" "src/graph-utl/strip-self-transitions.js" [label=<strip-self-transitions.js> tooltip="strip-self-transitions.js" URL="https://github.com/sverweij/dependency-cruiser/blob/develop/src/graph-utl/strip-self-transitions.js" ] } }
+    subgraph "cluster_src" {label="src" subgraph "cluster_src/main" {label="main" subgraph "cluster_src/main/files-and-dirs" {label="files-and-dirs" "src/main/files-and-dirs/normalize.js" [label=<normalize.js> tooltip="normalize.js" URL="https://github.com/sverweij/dependency-cruiser/blob/develop/src/main/files-and-dirs/normalize.js" ] } } }
+    subgraph "cluster_src" {label="src" subgraph "cluster_src/main" {label="main" "src/main/index.js" [label=<index.js> tooltip="index.js" URL="https://github.com/sverweij/dependency-cruiser/blob/develop/src/main/index.js" ] } }
+    "src/main/index.js" -> "src/enrich/index.js"
+    "src/main/index.js" -> "src/extract/index.js"
+    "src/main/index.js" -> "src/extract/transpile/meta.js"
+    "src/main/index.js" -> "src/schema/cruise-result.schema.js"
+    "src/main/index.js" -> "src/main/files-and-dirs/normalize.js"
+    "src/main/index.js" -> "src/main/options/normalize.js"
+    "src/main/index.js" -> "src/main/options/validate.js"
+    "src/main/index.js" -> "src/main/report-wrap.js"
+    "src/main/index.js" -> "src/main/resolve-options/normalize.js"
+    "src/main/index.js" -> "src/main/rule-set/normalize.js"
+    "src/main/index.js" -> "src/main/rule-set/validate.js"
+    subgraph "cluster_src" {label="src" subgraph "cluster_src/main" {label="main" subgraph "cluster_src/main/options" {label="options" "src/main/options/defaults.js" [label=<defaults.js> tooltip="defaults.js" URL="https://github.com/sverweij/dependency-cruiser/blob/develop/src/main/options/defaults.js" ] } } }
+    subgraph "cluster_src" {label="src" subgraph "cluster_src/main" {label="main" subgraph "cluster_src/main/options" {label="options" "src/main/options/normalize.js" [label=<normalize.js> tooltip="normalize.js" URL="https://github.com/sverweij/dependency-cruiser/blob/develop/src/main/options/normalize.js" ] } } }
+    "src/main/options/normalize.js" -> "src/main/utl/normalize-re-properties.js"
+    "src/main/options/normalize.js" -> "src/main/options/defaults.js"
+    subgraph "cluster_src" {label="src" subgraph "cluster_src/main" {label="main" subgraph "cluster_src/main/options" {label="options" "src/main/options/validate.js" [label=<validate.js> tooltip="validate.js" URL="https://github.com/sverweij/dependency-cruiser/blob/develop/src/main/options/validate.js" ] } } }
+    "src/main/options/validate.js" -> "src/report/index.js"
+    subgraph "cluster_src" {label="src" subgraph "cluster_src/main" {label="main" "src/main/report-wrap.js" [label=<report-wrap.js> tooltip="report-wrap.js" URL="https://github.com/sverweij/dependency-cruiser/blob/develop/src/main/report-wrap.js" ] } }
+    "src/main/report-wrap.js" -> "src/enrich/summarize/index.js"
+    "src/main/report-wrap.js" -> "src/graph-utl/compare.js"
+    "src/main/report-wrap.js" -> "src/graph-utl/consolidate-to-pattern.js"
+    "src/main/report-wrap.js" -> "src/graph-utl/filterbank.js"
+    "src/main/report-wrap.js" -> "src/graph-utl/strip-self-transitions.js"
+    "src/main/report-wrap.js" -> "src/report/index.js"
+    subgraph "cluster_src" {label="src" subgraph "cluster_src/main" {label="main" subgraph "cluster_src/main/resolve-options" {label="resolve-options" "src/main/resolve-options/normalize.js" [label=<normalize.js> tooltip="normalize.js" URL="https://github.com/sverweij/dependency-cruiser/blob/develop/src/main/resolve-options/normalize.js" ] } } }
+    "src/main/resolve-options/normalize.js" -> "src/extract/transpile/meta.js"
+    "src/main/resolve-options/normalize.js" -> "src/graph-utl/rule-set.js"
+    subgraph "cluster_src" {label="src" subgraph "cluster_src/main" {label="main" subgraph "cluster_src/main/rule-set" {label="rule-set" "src/main/rule-set/normalize.js" [label=<normalize.js> tooltip="normalize.js" URL="https://github.com/sverweij/dependency-cruiser/blob/develop/src/main/rule-set/normalize.js" ] } } }
+    "src/main/rule-set/normalize.js" -> "src/main/utl/normalize-re-properties.js"
+    subgraph "cluster_src" {label="src" subgraph "cluster_src/main" {label="main" subgraph "cluster_src/main/rule-set" {label="rule-set" "src/main/rule-set/validate.js" [label=<validate.js> tooltip="validate.js" URL="https://github.com/sverweij/dependency-cruiser/blob/develop/src/main/rule-set/validate.js" ] } } }
+    "src/main/rule-set/validate.js" -> "src/schema/configuration.schema.js"
+    "src/main/rule-set/validate.js" -> "src/main/options/validate.js"
+    subgraph "cluster_src" {label="src" subgraph "cluster_src/main" {label="main" subgraph "cluster_src/main/utl" {label="utl" "src/main/utl/normalize-re-properties.js" [label=<normalize-re-properties.js> tooltip="normalize-re-properties.js" URL="https://github.com/sverweij/dependency-cruiser/blob/develop/src/main/utl/normalize-re-properties.js" ] } } }
+    subgraph "cluster_src" {label="src" subgraph "cluster_src/report" {label="report" "src/report/anon" [label=<anon> tooltip="anon" URL="https://github.com/sverweij/dependency-cruiser/blob/develop/src/report/anon" ] } }
+    subgraph "cluster_src" {label="src" subgraph "cluster_src/report" {label="report" "src/report/baseline.js" [label=<baseline.js> tooltip="baseline.js" URL="https://github.com/sverweij/dependency-cruiser/blob/develop/src/report/baseline.js" ] } }
+    subgraph "cluster_src" {label="src" subgraph "cluster_src/report" {label="report" "src/report/csv.js" [label=<csv.js> tooltip="csv.js" URL="https://github.com/sverweij/dependency-cruiser/blob/develop/src/report/csv.js" ] } }
+    "src/report/csv.js" -> "src/report/utl"
+    subgraph "cluster_src" {label="src" subgraph "cluster_src/report" {label="report" "src/report/dot" [label=<dot> tooltip="dot" URL="https://github.com/sverweij/dependency-cruiser/blob/develop/src/report/dot" ] } }
+    "src/report/dot" -> "src/graph-utl/filterbank.js"
+    "src/report/dot" -> "src/report/utl"
+    "src/report/dot" -> "src/graph-utl/compare.js"
+    "src/report/dot" -> "src/graph-utl/consolidate-to-pattern.js"
+    "src/report/dot" -> "src/graph-utl/strip-self-transitions.js"
+    "src/report/dot" -> "src/graph-utl/consolidate-to-folder.js"
+    subgraph "cluster_src" {label="src" subgraph "cluster_src/report" {label="report" "src/report/error-html" [label=<error-html> tooltip="error-html" URL="https://github.com/sverweij/dependency-cruiser/blob/develop/src/report/error-html" ] } }
+    "src/report/error-html" -> "src/report/utl"
+    subgraph "cluster_src" {label="src" subgraph "cluster_src/report" {label="report" "src/report/error-long.js" [label=<error-long.js> tooltip="error-long.js" URL="https://github.com/sverweij/dependency-cruiser/blob/develop/src/report/error-long.js" ] } }
+    "src/report/error-long.js" -> "src/report/error.js"
+    subgraph "cluster_src" {label="src" subgraph "cluster_src/report" {label="report" "src/report/error.js" [label=<error.js> tooltip="error.js" URL="https://github.com/sverweij/dependency-cruiser/blob/develop/src/report/error.js" ] } }
+    "src/report/error.js" -> "src/graph-utl/rule-set.js"
+    "src/report/error.js" -> "src/utl/wrap-and-indent.js"
+    "src/report/error.js" -> "src/report/utl"
+    subgraph "cluster_src" {label="src" subgraph "cluster_src/report" {label="report" "src/report/html" [label=<html> tooltip="html" URL="https://github.com/sverweij/dependency-cruiser/blob/develop/src/report/html" ] } }
+    "src/report/html" -> "src/report/utl"
+    subgraph "cluster_src" {label="src" subgraph "cluster_src/report" {label="report" "src/report/identity.js" [label=<identity.js> tooltip="identity.js" URL="https://github.com/sverweij/dependency-cruiser/blob/develop/src/report/identity.js" ] } }
+    subgraph "cluster_src" {label="src" subgraph "cluster_src/report" {label="report" "src/report/index.js" [label=<index.js> tooltip="index.js" URL="https://github.com/sverweij/dependency-cruiser/blob/develop/src/report/index.js" ] } }
+    "src/report/index.js" -> "src/report/anon"
+    "src/report/index.js" -> "src/report/baseline.js"
+    "src/report/index.js" -> "src/report/csv.js"
+    "src/report/index.js" -> "src/report/dot"
+    "src/report/index.js" -> "src/report/error.js"
+    "src/report/index.js" -> "src/report/error-html"
+    "src/report/index.js" -> "src/report/error-long.js"
+    "src/report/index.js" -> "src/report/html"
+    "src/report/index.js" -> "src/report/identity.js"
+    "src/report/index.js" -> "src/report/json.js"
+    "src/report/index.js" -> "src/report/markdown.js"
+    "src/report/index.js" -> "src/report/mermaid.js"
+    "src/report/index.js" -> "src/report/metrics.js"
+    "src/report/index.js" -> "src/report/plugins"
+    "src/report/index.js" -> "src/report/teamcity.js"
+    "src/report/index.js" -> "src/report/text.js"
+    subgraph "cluster_src" {label="src" subgraph "cluster_src/report" {label="report" "src/report/json.js" [label=<json.js> tooltip="json.js" URL="https://github.com/sverweij/dependency-cruiser/blob/develop/src/report/json.js" ] } }
+    subgraph "cluster_src" {label="src" subgraph "cluster_src/report" {label="report" "src/report/markdown.js" [label=<markdown.js> tooltip="markdown.js" URL="https://github.com/sverweij/dependency-cruiser/blob/develop/src/report/markdown.js" ] } }
+    "src/report/markdown.js" -> "src/report/error-html"
+    subgraph "cluster_src" {label="src" subgraph "cluster_src/report" {label="report" "src/report/mermaid.js" [label=<mermaid.js> tooltip="mermaid.js" URL="https://github.com/sverweij/dependency-cruiser/blob/develop/src/report/mermaid.js" ] } }
+    subgraph "cluster_src" {label="src" subgraph "cluster_src/report" {label="report" "src/report/metrics.js" [label=<metrics.js> tooltip="metrics.js" URL="https://github.com/sverweij/dependency-cruiser/blob/develop/src/report/metrics.js" ] } }
+    subgraph "cluster_src" {label="src" subgraph "cluster_src/report" {label="report" "src/report/plugins" [label=<plugins> tooltip="plugins" URL="https://github.com/sverweij/dependency-cruiser/blob/develop/src/report/plugins" ] } }
+    subgraph "cluster_src" {label="src" subgraph "cluster_src/report" {label="report" "src/report/teamcity.js" [label=<teamcity.js> tooltip="teamcity.js" URL="https://github.com/sverweij/dependency-cruiser/blob/develop/src/report/teamcity.js" ] } }
+    "src/report/teamcity.js" -> "src/report/utl"
+    subgraph "cluster_src" {label="src" subgraph "cluster_src/report" {label="report" "src/report/text.js" [label=<text.js> tooltip="text.js" URL="https://github.com/sverweij/dependency-cruiser/blob/develop/src/report/text.js" ] } }
+    subgraph "cluster_src" {label="src" subgraph "cluster_src/report" {label="report" "src/report/utl" [label=<utl> tooltip="utl" URL="https://github.com/sverweij/dependency-cruiser/blob/develop/src/report/utl" ] } }
+    subgraph "cluster_src" {label="src" subgraph "cluster_src/schema" {label="schema" "src/schema/baseline-violations.schema.js" [label=<baseline-violations.schema.js> tooltip="not-unreachable-from-cli" URL="https://github.com/sverweij/dependency-cruiser/blob/develop/src/schema/baseline-violations.schema.js" ] } }
+    subgraph "cluster_src" {label="src" subgraph "cluster_src/schema" {label="schema" "src/schema/baseline-violations.schema.json" [label=<baseline-violations.schema.json> tooltip="baseline-violations.schema.json" URL="https://github.com/sverweij/dependency-cruiser/blob/develop/src/schema/baseline-violations.schema.json" ] } }
+    subgraph "cluster_src" {label="src" subgraph "cluster_src/schema" {label="schema" "src/schema/configuration.schema.js" [label=<configuration.schema.js> tooltip="configuration.schema.js" URL="https://github.com/sverweij/dependency-cruiser/blob/develop/src/schema/configuration.schema.js" ] } }
+    subgraph "cluster_src" {label="src" subgraph "cluster_src/schema" {label="schema" "src/schema/configuration.schema.json" [label=<configuration.schema.json> tooltip="configuration.schema.json" URL="https://github.com/sverweij/dependency-cruiser/blob/develop/src/schema/configuration.schema.json" ] } }
+    subgraph "cluster_src" {label="src" subgraph "cluster_src/schema" {label="schema" "src/schema/cruise-result.schema.js" [label=<cruise-result.schema.js> tooltip="cruise-result.schema.js" URL="https://github.com/sverweij/dependency-cruiser/blob/develop/src/schema/cruise-result.schema.js" ] } }
+    subgraph "cluster_src" {label="src" subgraph "cluster_src/schema" {label="schema" "src/schema/cruise-result.schema.json" [label=<cruise-result.schema.json> tooltip="cruise-result.schema.json" URL="https://github.com/sverweij/dependency-cruiser/blob/develop/src/schema/cruise-result.schema.json" ] } }
+    subgraph "cluster_src" {label="src" subgraph "cluster_src/utl" {label="utl" "src/utl/array-util.js" [label=<array-util.js> tooltip="utl-module-not-shared-enough" URL="https://github.com/sverweij/dependency-cruiser/blob/develop/src/utl/array-util.js" ] } }
+    subgraph "cluster_src" {label="src" subgraph "cluster_src/utl" {label="utl" "src/utl/regex-util.js" [label=<regex-util.js> tooltip="regex-util.js" URL="https://github.com/sverweij/dependency-cruiser/blob/develop/src/utl/regex-util.js" ] } }
+    subgraph "cluster_src" {label="src" subgraph "cluster_src/utl" {label="utl" "src/utl/wrap-and-indent.js" [label=<wrap-and-indent.js> tooltip="utl-module-not-shared-enough" URL="https://github.com/sverweij/dependency-cruiser/blob/develop/src/utl/wrap-and-indent.js" ] } }
+    subgraph "cluster_src" {label="src" subgraph "cluster_src/validate" {label="validate" "src/validate/index.d.ts" [label=<index.d.ts> tooltip="index.d.ts" URL="https://github.com/sverweij/dependency-cruiser/blob/develop/src/validate/index.d.ts" ] } }
+    subgraph "cluster_src" {label="src" subgraph "cluster_src/validate" {label="validate" "src/validate/index.js" [label=<index.js> tooltip="index.js" URL="https://github.com/sverweij/dependency-cruiser/blob/develop/src/validate/index.js" ] } }
+    "src/validate/index.js" -> "src/validate/match-dependency-rule.js"
+    "src/validate/index.js" -> "src/validate/match-folder-dependency-rule.js"
+    "src/validate/index.js" -> "src/validate/match-module-rule.js"
+    "src/validate/index.js" -> "src/validate/violates-required-rule.js"
+    subgraph "cluster_src" {label="src" subgraph "cluster_src/validate" {label="validate" "src/validate/match-dependency-rule.js" [label=<match-dependency-rule.js> tooltip="match-dependency-rule.js" URL="https://github.com/sverweij/dependency-cruiser/blob/develop/src/validate/match-dependency-rule.js" ] } }
+    "src/validate/match-dependency-rule.js" -> "src/utl/regex-util.js"
+    "src/validate/match-dependency-rule.js" -> "src/validate/matchers.js"
+    "src/validate/match-dependency-rule.js" -> "src/validate/rule-classifiers.js"
+    subgraph "cluster_src" {label="src" subgraph "cluster_src/validate" {label="validate" "src/validate/match-folder-dependency-rule.js" [label=<match-folder-dependency-rule.js> tooltip="match-folder-dependency-rule.js" URL="https://github.com/sverweij/dependency-cruiser/blob/develop/src/validate/match-folder-dependency-rule.js" ] } }
+    "src/validate/match-folder-dependency-rule.js" -> "src/utl/regex-util.js"
+    "src/validate/match-folder-dependency-rule.js" -> "src/validate/matchers.js"
+    "src/validate/match-folder-dependency-rule.js" -> "src/validate/rule-classifiers.js"
+    subgraph "cluster_src" {label="src" subgraph "cluster_src/validate" {label="validate" "src/validate/match-module-rule.js" [label=<match-module-rule.js> tooltip="match-module-rule.js" URL="https://github.com/sverweij/dependency-cruiser/blob/develop/src/validate/match-module-rule.js" ] } }
+    "src/validate/match-module-rule.js" -> "src/utl/regex-util.js"
+    "src/validate/match-module-rule.js" -> "src/validate/matchers.js"
+    "src/validate/match-module-rule.js" -> "src/validate/rule-classifiers.js"
+    subgraph "cluster_src" {label="src" subgraph "cluster_src/validate" {label="validate" "src/validate/matchers.js" [label=<matchers.js> tooltip="matchers.js" URL="https://github.com/sverweij/dependency-cruiser/blob/develop/src/validate/matchers.js" ] } }
+    "src/validate/matchers.js" -> "src/utl/array-util.js"
+    "src/validate/matchers.js" -> "src/utl/regex-util.js"
+    subgraph "cluster_src" {label="src" subgraph "cluster_src/validate" {label="validate" "src/validate/rule-classifiers.js" [label=<rule-classifiers.js> tooltip="rule-classifiers.js" URL="https://github.com/sverweij/dependency-cruiser/blob/develop/src/validate/rule-classifiers.js" ] } }
+    subgraph "cluster_src" {label="src" subgraph "cluster_src/validate" {label="validate" "src/validate/violates-required-rule.js" [label=<violates-required-rule.js> tooltip="violates-required-rule.js" URL="https://github.com/sverweij/dependency-cruiser/blob/develop/src/validate/violates-required-rule.js" ] } }
+    "src/validate/violates-required-rule.js" -> "src/utl/regex-util.js"
+    "src/validate/violates-required-rule.js" -> "src/validate/matchers.js"
+}

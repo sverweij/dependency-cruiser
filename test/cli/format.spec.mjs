@@ -38,9 +38,9 @@ describe("[E] cli/format", () => {
     );
     const lResult = JSON.parse(readFileSync(lOutFile, "utf8"));
     expect(lResult.summary.error).to.equal(0);
-    expect(lResult.summary.totalCruised).to.be.lessThan(116);
-    expect(lResult.summary.totalDependenciesCruised).to.be.lessThan(169);
-    expect(lResult.summary.violations.length).to.equal(0);
+    expect(lResult.summary.totalCruised).to.be.lessThan(175);
+    expect(lResult.summary.totalDependenciesCruised).to.be.lessThan(298);
+    expect(lResult.summary.violations.length).to.equal(1);
     expect(lResult.modules.map((pModule) => pModule.source)).to.not.include(
       "bin/depcruise-fmt.js"
     );
@@ -90,7 +90,7 @@ describe("[E] cli/format", () => {
       }
     );
 
-    expect(lExitCode).to.equal(1);
+    expect(lExitCode).to.equal(2);
     deleteDammit(lOutFile);
   });
 });

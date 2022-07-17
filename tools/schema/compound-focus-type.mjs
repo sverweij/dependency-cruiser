@@ -14,6 +14,15 @@ export default {
             "dependents)",
           $ref: "#/definitions/REAsStringsType",
         },
+        depth: {
+          description:
+            "by default 'focus' only inlcudes the direct neighbours of the focus'ed module(s). " +
+            "This property makes dependency-cruiser will also include neighbors of neighbors, " +
+            "up to the specified depth.",
+          type: "number",
+          minimum: 1,
+          maximum: 4,
+        },
       },
     },
     ...REAsStringsType.definitions,

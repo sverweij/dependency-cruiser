@@ -3,6 +3,7 @@
     {
       "source": "src/use-maybe.ts",
       "dependencies": [],
+      "dependents": [],
       "orphan": true,
       "valid": true
     }

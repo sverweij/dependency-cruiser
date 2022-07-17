@@ -12,18 +12,25 @@
           "coreModule": false,
           "followable": true,
           "couldNotResolve": false,
-          "dependencyTypes": ["aliased"],
+          "dependencyTypes": [
+            "aliased"
+          ],
           "matchesDoNotFollow": false,
           "circular": false,
           "valid": true
         }
       ],
+      "dependents": [],
       "orphan": false,
       "valid": true
     },
     {
       "source": "test/cli/__fixtures__/typescriptconfig/cli-config-with-path/src/shared/index.ts",
       "dependencies": [],
+      "dependents": [
+        "test/cli/__fixtures__/typescriptconfig/cli-config-with-path/src/index.ts",
+        "test/cli/__fixtures__/typescriptconfig/cli-config-with-path/src/something/else.ts"
+      ],
       "orphan": false,
       "valid": true
     },
@@ -39,12 +46,15 @@
           "coreModule": false,
           "followable": true,
           "couldNotResolve": false,
-          "dependencyTypes": ["aliased"],
+          "dependencyTypes": [
+            "aliased"
+          ],
           "matchesDoNotFollow": false,
           "circular": false,
           "valid": true
         }
       ],
+      "dependents": [],
       "orphan": false,
       "valid": true
     }
@@ -60,7 +70,12 @@
     "optionsUsed": {
       "combinedDependencies": false,
       "externalModuleResolutionStrategy": "node_modules",
-      "moduleSystems": ["es6", "cjs", "tsd", "amd"],
+      "moduleSystems": [
+        "es6",
+        "cjs",
+        "tsd",
+        "amd"
+      ],
       "outputTo": "test/cli/__output__/typescript-path-resolution.json",
       "outputType": "json",
       "preserveSymlinks": false,

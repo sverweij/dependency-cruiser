@@ -3,6 +3,9 @@
     {
       "source": "test/cli/__fixtures__/webpackconfig/aliassy/src/configspullen/index.js",
       "dependencies": [],
+      "dependents": [
+        "test/cli/__fixtures__/webpackconfig/aliassy/src/index.js"
+      ],
       "orphan": false,
       "valid": true
     },
@@ -18,7 +21,9 @@
           "coreModule": false,
           "followable": true,
           "couldNotResolve": false,
-          "dependencyTypes": ["aliased"],
+          "dependencyTypes": [
+            "aliased"
+          ],
           "matchesDoNotFollow": false,
           "circular": false,
           "valid": true
@@ -32,12 +37,15 @@
           "coreModule": false,
           "followable": false,
           "couldNotResolve": false,
-          "dependencyTypes": ["aliased"],
+          "dependencyTypes": [
+            "aliased"
+          ],
           "matchesDoNotFollow": false,
           "circular": false,
           "valid": true
         }
       ],
+      "dependents": [],
       "orphan": false,
       "valid": true
     },
@@ -47,8 +55,13 @@
       "coreModule": false,
       "couldNotResolve": false,
       "matchesDoNotFollow": false,
-      "dependencyTypes": ["aliased"],
+      "dependencyTypes": [
+        "aliased"
+      ],
       "dependencies": [],
+      "dependents": [
+        "test/cli/__fixtures__/webpackconfig/aliassy/src/index.js"
+      ],
       "orphan": false,
       "valid": true
     }
@@ -64,7 +77,12 @@
     "optionsUsed": {
       "combinedDependencies": false,
       "externalModuleResolutionStrategy": "node_modules",
-      "moduleSystems": ["es6", "cjs", "tsd", "amd"],
+      "moduleSystems": [
+        "es6",
+        "cjs",
+        "tsd",
+        "amd"
+      ],
       "outputTo": "test/cli/__output__/webpack-config-alias.json",
       "outputType": "json",
       "preserveSymlinks": false,

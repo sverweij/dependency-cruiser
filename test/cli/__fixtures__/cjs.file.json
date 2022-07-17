@@ -12,7 +12,9 @@
           "coreModule": false,
           "followable": true,
           "couldNotResolve": false,
-          "dependencyTypes": ["local"],
+          "dependencyTypes": [
+            "local"
+          ],
           "matchesDoNotFollow": false,
           "circular": false,
           "valid": true
@@ -26,7 +28,9 @@
           "coreModule": false,
           "followable": true,
           "couldNotResolve": false,
-          "dependencyTypes": ["local"],
+          "dependencyTypes": [
+            "local"
+          ],
           "matchesDoNotFollow": false,
           "circular": false,
           "valid": true
@@ -40,7 +44,9 @@
           "coreModule": false,
           "followable": true,
           "couldNotResolve": false,
-          "dependencyTypes": ["local"],
+          "dependencyTypes": [
+            "local"
+          ],
           "matchesDoNotFollow": false,
           "circular": false,
           "valid": true
@@ -54,7 +60,9 @@
           "coreModule": false,
           "followable": true,
           "couldNotResolve": false,
-          "dependencyTypes": ["local"],
+          "dependencyTypes": [
+            "local"
+          ],
           "matchesDoNotFollow": false,
           "circular": false,
           "valid": true
@@ -68,7 +76,9 @@
           "coreModule": true,
           "followable": false,
           "couldNotResolve": false,
-          "dependencyTypes": ["core"],
+          "dependencyTypes": [
+            "core"
+          ],
           "matchesDoNotFollow": false,
           "circular": false,
           "valid": true
@@ -82,12 +92,15 @@
           "coreModule": false,
           "followable": true,
           "couldNotResolve": false,
-          "dependencyTypes": ["npm-no-pkg"],
+          "dependencyTypes": [
+            "npm-no-pkg"
+          ],
           "matchesDoNotFollow": false,
           "circular": false,
           "valid": true
         }
       ],
+      "dependents": [],
       "orphan": false,
       "valid": true
     },
@@ -97,8 +110,13 @@
       "coreModule": true,
       "couldNotResolve": false,
       "matchesDoNotFollow": false,
-      "dependencyTypes": ["core"],
+      "dependencyTypes": [
+        "core"
+      ],
       "dependencies": [],
+      "dependents": [
+        "test/cli/__fixtures__/cjs/root_one.js"
+      ],
       "orphan": false,
       "valid": true
     },
@@ -114,11 +132,16 @@
           "coreModule": true,
           "followable": false,
           "couldNotResolve": false,
-          "dependencyTypes": ["core"],
+          "dependencyTypes": [
+            "core"
+          ],
           "matchesDoNotFollow": false,
           "circular": false,
           "valid": true
         }
+      ],
+      "dependents": [
+        "test/cli/__fixtures__/cjs/root_one.js"
       ],
       "orphan": false,
       "valid": true
@@ -129,8 +152,17 @@
       "coreModule": true,
       "couldNotResolve": false,
       "matchesDoNotFollow": false,
-      "dependencyTypes": ["core"],
+      "dependencyTypes": [
+        "core"
+      ],
       "dependencies": [],
+      "dependents": [
+        "test/cli/__fixtures__/cjs/one_only_one.js",
+        "test/cli/__fixtures__/cjs/one_only_two.js",
+        "test/cli/__fixtures__/cjs/shared.js",
+        "test/cli/__fixtures__/cjs/sub/dir.js",
+        "test/cli/__fixtures__/cjs/sub/depindir.js"
+      ],
       "orphan": false,
       "valid": true
     },
@@ -146,11 +178,16 @@
           "coreModule": true,
           "followable": false,
           "couldNotResolve": false,
-          "dependencyTypes": ["core"],
+          "dependencyTypes": [
+            "core"
+          ],
           "matchesDoNotFollow": false,
           "circular": false,
           "valid": true
         }
+      ],
+      "dependents": [
+        "test/cli/__fixtures__/cjs/root_one.js"
       ],
       "orphan": false,
       "valid": true
@@ -167,11 +204,16 @@
           "coreModule": true,
           "followable": false,
           "couldNotResolve": false,
-          "dependencyTypes": ["core"],
+          "dependencyTypes": [
+            "core"
+          ],
           "matchesDoNotFollow": false,
           "circular": false,
           "valid": true
         }
+      ],
+      "dependents": [
+        "test/cli/__fixtures__/cjs/root_one.js"
       ],
       "orphan": false,
       "valid": true
@@ -188,7 +230,9 @@
           "coreModule": false,
           "followable": true,
           "couldNotResolve": false,
-          "dependencyTypes": ["local"],
+          "dependencyTypes": [
+            "local"
+          ],
           "matchesDoNotFollow": false,
           "circular": false,
           "valid": true
@@ -202,11 +246,16 @@
           "coreModule": true,
           "followable": false,
           "couldNotResolve": false,
-          "dependencyTypes": ["core"],
+          "dependencyTypes": [
+            "core"
+          ],
           "matchesDoNotFollow": false,
           "circular": false,
           "valid": true
         }
+      ],
+      "dependents": [
+        "test/cli/__fixtures__/cjs/root_one.js"
       ],
       "orphan": false,
       "valid": true
@@ -223,11 +272,16 @@
           "coreModule": true,
           "followable": false,
           "couldNotResolve": false,
-          "dependencyTypes": ["core"],
+          "dependencyTypes": [
+            "core"
+          ],
           "matchesDoNotFollow": false,
           "circular": false,
           "valid": true
         }
+      ],
+      "dependents": [
+        "test/cli/__fixtures__/cjs/sub/dir.js"
       ],
       "orphan": false,
       "valid": true
@@ -244,7 +298,9 @@
           "coreModule": false,
           "followable": true,
           "couldNotResolve": false,
-          "dependencyTypes": ["local"],
+          "dependencyTypes": [
+            "local"
+          ],
           "matchesDoNotFollow": false,
           "circular": false,
           "valid": true
@@ -258,11 +314,16 @@
           "coreModule": false,
           "followable": true,
           "couldNotResolve": false,
-          "dependencyTypes": ["npm-no-pkg"],
+          "dependencyTypes": [
+            "npm-no-pkg"
+          ],
           "matchesDoNotFollow": false,
           "circular": false,
           "valid": true
         }
+      ],
+      "dependents": [
+        "test/cli/__fixtures__/cjs/root_one.js"
       ],
       "orphan": false,
       "valid": true
@@ -270,12 +331,18 @@
     {
       "source": "test/cli/__fixtures__/cjs/node_modules/somemodule/src/moar-javascript.js",
       "dependencies": [],
+      "dependents": [
+        "test/cli/__fixtures__/cjs/node_modules/somemodule/src/somemodule.js"
+      ],
       "orphan": false,
       "valid": true
     },
     {
       "source": "test/cli/__fixtures__/cjs/node_modules/somemodule/node_modules/someothermodule/main.js",
       "dependencies": [],
+      "dependents": [
+        "test/cli/__fixtures__/cjs/node_modules/somemodule/src/somemodule.js"
+      ],
       "orphan": false,
       "valid": true
     }
@@ -291,7 +358,12 @@
     "optionsUsed": {
       "combinedDependencies": false,
       "externalModuleResolutionStrategy": "node_modules",
-      "moduleSystems": ["es6", "cjs", "tsd", "amd"],
+      "moduleSystems": [
+        "es6",
+        "cjs",
+        "tsd",
+        "amd"
+      ],
       "outputTo": "test/cli/__output__/cjs.file.json",
       "outputType": "json",
       "preserveSymlinks": false,

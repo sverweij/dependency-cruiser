@@ -4,20 +4,23 @@
       "source": "test/main/__mocks__/tsx/index.ts",
       "dependencies": [
         {
-          "resolved": "test/main/__mocks__/tsx/sub/render.tsx",
-          "coreModule": false,
-          "followable": true,
-          "couldNotResolve": false,
-          "dependencyTypes": ["local"],
           "module": "./sub/render",
           "moduleSystem": "es6",
           "dynamic": false,
           "exoticallyRequired": false,
+          "resolved": "test/main/__mocks__/tsx/sub/render.tsx",
+          "coreModule": false,
+          "followable": true,
+          "couldNotResolve": false,
+          "dependencyTypes": [
+            "local"
+          ],
           "matchesDoNotFollow": false,
           "circular": false,
           "valid": true
         }
       ],
+      "dependents": [],
       "orphan": false,
       "valid": true
     },
@@ -25,19 +28,24 @@
       "source": "test/main/__mocks__/tsx/sub/render.tsx",
       "dependencies": [
         {
-          "resolved": "react-dom",
-          "coreModule": false,
-          "followable": false,
-          "couldNotResolve": true,
-          "dependencyTypes": ["unknown"],
           "module": "react-dom",
           "moduleSystem": "es6",
           "dynamic": false,
           "exoticallyRequired": false,
+          "resolved": "react-dom",
+          "coreModule": false,
+          "followable": false,
+          "couldNotResolve": true,
+          "dependencyTypes": [
+            "unknown"
+          ],
           "matchesDoNotFollow": false,
           "circular": false,
           "valid": true
         }
+      ],
+      "dependents": [
+        "test/main/__mocks__/tsx/index.ts"
       ],
       "orphan": false,
       "valid": true
@@ -48,8 +56,13 @@
       "coreModule": false,
       "couldNotResolve": true,
       "matchesDoNotFollow": false,
-      "dependencyTypes": ["unknown"],
+      "dependencyTypes": [
+        "unknown"
+      ],
       "dependencies": [],
+      "dependents": [
+        "test/main/__mocks__/tsx/sub/render.tsx"
+      ],
       "orphan": false,
       "valid": true
     }
@@ -65,7 +78,12 @@
     "optionsUsed": {
       "combinedDependencies": false,
       "externalModuleResolutionStrategy": "node_modules",
-      "moduleSystems": ["es6", "cjs", "tsd", "amd"],
+      "moduleSystems": [
+        "es6",
+        "cjs",
+        "tsd",
+        "amd"
+      ],
       "preserveSymlinks": false,
       "tsPreCompilationDeps": false,
       "exoticRequireStrings": [],

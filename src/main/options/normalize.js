@@ -67,6 +67,21 @@ function normalizeCollapse(pCollapse) {
   return lReturnValue;
 }
 
+function normalizeFocusDepth(pFormatOptions) {
+  /** @type  {import("../../../types/dependency-cruiser").IFormatOptions}*/
+  let lFormatOptions = clone(pFormatOptions);
+  if (has(lFormatOptions, "focusDepth")) {
+    if (has(lFormatOptions, "focus")) {
+      lFormatOptions.focus.depth = Number.parseInt(
+        lFormatOptions.focusDepth,
+        10
+      );
+    }
+    delete lFormatOptions.focusDepth;
+  }
+  return lFormatOptions;
+}
+
 /**
  *
  * @param {import("../../../types/dependency-cruiser").IForbiddenRuleType} pRule
@@ -168,7 +183,7 @@ function normalizeCruiseOptions(pOptions) {
   //   lReturnValue.ruleSet = normalizeRuleSet(pOptions.ruleSet);
   // }
 
-  return lReturnValue;
+  return normalizeFocusDepth(lReturnValue);
 }
 
 /**
@@ -177,17 +192,20 @@ function normalizeCruiseOptions(pOptions) {
  * @returns {import("../../../types/strict-options").IStrictFormatOptions}
  */
 function normalizeFormatOptions(pFormatOptions) {
-  const lFormatOptions = clone(pFormatOptions);
+  let lFormatOptions = clone(pFormatOptions);
 
   if (has(lFormatOptions, "collapse")) {
     lFormatOptions.collapse = normalizeCollapse(lFormatOptions.collapse);
   }
-  return normalizeFilterOptions(lFormatOptions, [
+
+  lFormatOptions = normalizeFilterOptions(lFormatOptions, [
     "exclude",
     "focus",
     "includeOnly",
     "reaches",
   ]);
+
+  return normalizeFocusDepth(lFormatOptions);
 }
 
 module.exports = {

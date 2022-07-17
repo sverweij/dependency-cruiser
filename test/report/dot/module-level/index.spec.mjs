@@ -13,7 +13,7 @@ const requireJSON = createRequireJSON(import.meta.url);
 const clusterless = requireJSON("./__mocks__/clusterless.json");
 const bunchOfModules = requireJSON("./__mocks__/bunch-of-modules.json");
 const focusMeModules = requireJSON(
-  "./__mocks__/dependency-cruiser-2020-01-25-focus-me.json"
+  "./__mocks__/dependency-cruiser-2022-07-17-focus-me.json"
 );
 const orphanDeps = requireJSON("./__mocks__/orphan-deps.json");
 const unresolvableDeps = requireJSON("./__mocks__/es6-unresolvable-deps.json");
@@ -63,7 +63,7 @@ const bareColorFixture = readFileSync(
   "utf8"
 );
 const focusMeModulesFixture = readFileSync(
-  join(mockPath, "dependency-cruiser-2020-01-25-focus-me.dot"),
+  join(mockPath, "dependency-cruiser-2022-07-17-focus-me.dot"),
   "utf8"
 );
 

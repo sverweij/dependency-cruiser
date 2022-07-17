@@ -3,7 +3,7 @@
 - [Filters](#filters)
   - [`doNotFollow`: don't cruise modules any further](#donotfollow-dont-cruise-modules-any-further)
   - [`includeOnly`: only include modules satisfying a pattern](#includeonly-only-include-modules-satisfying-a-pattern)
-  - [`focus`: show modules matching a pattern - with their direct neighbours](#focus-show-modules-matching-a-pattern---with-their-direct-neighbours)
+  - [`focus`: show modules matching a pattern - with their direct neighbours](#focus-show-modules-matching-a-pattern---with-their-neighbours)
   - [`reaches`: show modules matching a pattern - with everything that can reach them](#reaches-show-modules-matching-a-pattern---with-everything-that-can-reach-them)
   - [`exclude`: exclude dependencies from being cruised](#exclude-exclude-dependencies-from-being-cruised)
   - [`collapse`: summarize to folder depth or pattern](#collapse-summarize-to-folder-depth-or-pattern)
@@ -166,14 +166,15 @@ exclude all node_modules, core modules and modules otherwise outside it):
 If you specify both an includeOnly and an exclude (see below), dependency-cruiser takes
 them _both_ into account.
 
-### `focus`: show modules matching a pattern - with their direct neighbours
+### `focus`: show modules matching a pattern - with their neighbours
 
 > :shell: command line option equivalent: `--focus`
 
 Just like the `includeOnly` option, `focus` takes a regular expressions you want
 dependency-cruiser to show in its output. In addition dependency-cruiser will
-include all neighbours of those modules; direct dependencies and direct
-dependents.
+include all neighbours of those modules. By default these will be direct dependencies
+and direct dependents - if you want more, you can use the [`depth`](#adding-depth)
+attribute.
 
 This can be useful if you just want to focus on one part of your application and
 how it interacts with the outside world.
@@ -209,10 +210,43 @@ Example configuration:
 <summary>sample command line invocation and graphical output</summary>
 
 ```sh
-depcruise -c focus.config.json -T dot | dot -T svg > focus.svg
+depcruise -src c focus.config.json -T dot | dot -T svg > focus.svg
 ```
 
 ![focus](assets/filtering/focus.svg)
+
+</details>
+
+#### adding `depth`
+
+> :shell: command line option equivalent: `--focus-depth`
+
+With the `depth` attribute you can influence whether to include not only direct
+neighbours (`depth: 1` - the default), but also _their_ neighbours (`depth: 2`)
+etc. Just like with the `maxDepth` option, a depth of 0 is interpreted as _infinite_.
+
+Example configuration:
+
+```json
+{
+  "options": {
+    "includeOnly": "^src/",
+    "focus": {
+      "path": "^src/main/",
+      "depth": 2
+    }
+  }
+}
+```
+
+<details>
+<summary>sample command line invocation and graphical output</summary>
+
+```sh
+depcruise src -c focus-depth-2.config.json -T dot | dot -T svg > focus-depth-2.svg
+```
+
+![focus with depth 2](assets/filtering/focus-depth-2.svg)
 
 </details>
 
@@ -263,7 +297,7 @@ a `matchesFocus` attribute, which is either `true` for modules in focus or
 When run...
 
 ```sh
-depcruise -c snazzy-focus.config.json -T dot | dot -T svg > snazzy-focus.svg
+depcruise src -c snazzy-focus.config.json -T dot | dot -T svg > snazzy-focus.svg
 ```
 
 ...it'll look something like this:

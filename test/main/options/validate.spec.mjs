@@ -1,7 +1,7 @@
 import { expect } from "chai";
 import validate from "../../../src/main/options/validate.js";
 
-describe("[U] main/options/validate", () => {
+describe("[U] main/options/validate - module systems", () => {
   it("throws when a invalid module system is passed ", () => {
     expect(() => {
       validate.validateCruiseOptions({
@@ -15,7 +15,9 @@ describe("[U] main/options/validate", () => {
       validate.validateCruiseOptions({ moduleSystems: ["cjs"] });
     }).to.not.throw();
   });
+});
 
+describe("[U] main/options/validate - output types", () => {
   it("throws when a invalid output type is passed ", () => {
     expect(() => {
       validate.validateCruiseOptions({ outputType: "notAValidOutputType" });
@@ -27,7 +29,9 @@ describe("[U] main/options/validate", () => {
       validate.validateCruiseOptions({ outputType: "err" });
     }).to.not.throw();
   });
+});
 
+describe("[U] main/options/validate - maxDepth", () => {
   it("throws when a non-integer is passed as maxDepth", () => {
     expect(() => {
       validate.validateCruiseOptions({ maxDepth: "not an integer" });
@@ -71,7 +75,63 @@ describe("[U] main/options/validate", () => {
       validate.validateCruiseOptions({ maxDepth: 42 });
     }).to.not.throw();
   });
+});
 
+describe("[U] main/options/validate - focusDepth", () => {
+  it("throws when a non-integer is passed", () => {
+    expect(() => {
+      validate.validateCruiseOptions({ focusDepth: "not an integer" });
+    }).to.throw(
+      "'not an integer' is not a valid focus depth - use an integer between 0 and 99"
+    );
+  });
+
+  it("throws when > 99 is passed (string)", () => {
+    expect(() => {
+      validate.validateCruiseOptions({ focusDepth: "101" });
+    }).to.throw(
+      "'101' is not a valid focus depth - use an integer between 0 and 99"
+    );
+  });
+
+  it("throws when > 99 is passed as maxDepth (number)", () => {
+    expect(() => {
+      validate.validateCruiseOptions({ focusDepth: 101 });
+    }).to.throw(
+      "'101' is not a valid focus depth - use an integer between 0 and 99"
+    );
+  });
+
+  it("throws when < 0 is passed (string)", () => {
+    expect(() => {
+      validate.validateCruiseOptions({ focusDepth: "-1" });
+    }).to.throw(
+      "'-1' is not a valid focus depth - use an integer between 0 and 99"
+    );
+  });
+
+  it("throws when < 0 is passed (number)", () => {
+    expect(() => {
+      validate.validateCruiseOptions({ focusDepth: -1 });
+    }).to.throw(
+      "'-1' is not a valid focus depth - use an integer between 0 and 99"
+    );
+  });
+
+  it("passes when a valid depth is passed (string)", () => {
+    expect(() => {
+      validate.validateCruiseOptions({ focusDepth: "42" });
+    }).to.not.throw();
+  });
+
+  it("passes when a valid depth is passed (number)", () => {
+    expect(() => {
+      validate.validateCruiseOptions({ focusDepth: 42 });
+    }).to.not.throw();
+  });
+});
+
+describe("[U] main/options/validate - exclude", () => {
   it("throws when --exclude is passed an unsafe regex", () => {
     expect(() => {
       validate.validateCruiseOptions({ exclude: "([A-Za-z]+)*" });

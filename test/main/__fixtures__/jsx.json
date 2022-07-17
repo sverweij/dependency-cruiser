@@ -4,20 +4,23 @@
       "source": "test/main/__mocks__/jsx/index.js",
       "dependencies": [
         {
-          "resolved": "test/main/__mocks__/jsx/jsx.jsx",
-          "coreModule": false,
-          "followable": true,
-          "couldNotResolve": false,
-          "dependencyTypes": ["local"],
           "module": "./jsx",
           "moduleSystem": "cjs",
           "dynamic": false,
           "exoticallyRequired": false,
+          "resolved": "test/main/__mocks__/jsx/jsx.jsx",
+          "coreModule": false,
+          "followable": true,
+          "couldNotResolve": false,
+          "dependencyTypes": [
+            "local"
+          ],
           "matchesDoNotFollow": false,
           "circular": false,
           "valid": true
         }
       ],
+      "dependents": [],
       "orphan": false,
       "valid": true
     },
@@ -25,89 +28,104 @@
       "source": "test/main/__mocks__/jsx/jsx.jsx",
       "dependencies": [
         {
-          "resolved": "components/pay-method-choice",
-          "coreModule": false,
-          "followable": false,
-          "couldNotResolve": true,
-          "dependencyTypes": ["unknown"],
           "module": "components/pay-method-choice",
           "moduleSystem": "es6",
           "dynamic": false,
           "exoticallyRequired": false,
+          "resolved": "components/pay-method-choice",
+          "coreModule": false,
+          "followable": false,
+          "couldNotResolve": true,
+          "dependencyTypes": [
+            "unknown"
+          ],
           "matchesDoNotFollow": false,
           "circular": false,
           "valid": true
         },
         {
-          "resolved": "components/product-detail",
-          "coreModule": false,
-          "followable": false,
-          "couldNotResolve": true,
-          "dependencyTypes": ["unknown"],
           "module": "components/product-detail",
           "moduleSystem": "es6",
           "dynamic": false,
           "exoticallyRequired": false,
+          "resolved": "components/product-detail",
+          "coreModule": false,
+          "followable": false,
+          "couldNotResolve": true,
+          "dependencyTypes": [
+            "unknown"
+          ],
           "matchesDoNotFollow": false,
           "circular": false,
           "valid": true
         },
         {
-          "resolved": "products",
-          "coreModule": false,
-          "followable": false,
-          "couldNotResolve": true,
-          "dependencyTypes": ["unknown"],
           "module": "products",
           "moduleSystem": "es6",
           "dynamic": false,
           "exoticallyRequired": false,
+          "resolved": "products",
+          "coreModule": false,
+          "followable": false,
+          "couldNotResolve": true,
+          "dependencyTypes": [
+            "unknown"
+          ],
           "matchesDoNotFollow": false,
           "circular": false,
           "valid": true
         },
         {
-          "resolved": "react",
-          "coreModule": false,
-          "followable": false,
-          "couldNotResolve": true,
-          "dependencyTypes": ["unknown"],
           "module": "react",
           "moduleSystem": "es6",
           "dynamic": false,
           "exoticallyRequired": false,
+          "resolved": "react",
+          "coreModule": false,
+          "followable": false,
+          "couldNotResolve": true,
+          "dependencyTypes": [
+            "unknown"
+          ],
           "matchesDoNotFollow": false,
           "circular": false,
           "valid": true
         },
         {
-          "resolved": "tracking",
-          "coreModule": false,
-          "followable": false,
-          "couldNotResolve": true,
-          "dependencyTypes": ["unknown"],
           "module": "tracking",
           "moduleSystem": "es6",
           "dynamic": false,
           "exoticallyRequired": false,
+          "resolved": "tracking",
+          "coreModule": false,
+          "followable": false,
+          "couldNotResolve": true,
+          "dependencyTypes": [
+            "unknown"
+          ],
           "matchesDoNotFollow": false,
           "circular": false,
           "valid": true
         },
         {
-          "resolved": "utils",
-          "coreModule": false,
-          "followable": false,
-          "couldNotResolve": true,
-          "dependencyTypes": ["unknown"],
           "module": "utils",
           "moduleSystem": "es6",
           "dynamic": false,
           "exoticallyRequired": false,
+          "resolved": "utils",
+          "coreModule": false,
+          "followable": false,
+          "couldNotResolve": true,
+          "dependencyTypes": [
+            "unknown"
+          ],
           "matchesDoNotFollow": false,
           "circular": false,
           "valid": true
         }
+      ],
+      "dependents": [
+        "test/main/__mocks__/jsx/index.js"
       ],
       "orphan": false,
       "valid": true
@@ -118,8 +136,13 @@
       "coreModule": false,
       "couldNotResolve": true,
       "matchesDoNotFollow": false,
-      "dependencyTypes": ["unknown"],
+      "dependencyTypes": [
+        "unknown"
+      ],
       "dependencies": [],
+      "dependents": [
+        "test/main/__mocks__/jsx/jsx.jsx"
+      ],
       "orphan": false,
       "valid": true
     },
@@ -129,8 +152,13 @@
       "coreModule": false,
       "couldNotResolve": true,
       "matchesDoNotFollow": false,
-      "dependencyTypes": ["unknown"],
+      "dependencyTypes": [
+        "unknown"
+      ],
       "dependencies": [],
+      "dependents": [
+        "test/main/__mocks__/jsx/jsx.jsx"
+      ],
       "orphan": false,
       "valid": true
     },
@@ -140,8 +168,13 @@
       "coreModule": false,
       "couldNotResolve": true,
       "matchesDoNotFollow": false,
-      "dependencyTypes": ["unknown"],
+      "dependencyTypes": [
+        "unknown"
+      ],
       "dependencies": [],
+      "dependents": [
+        "test/main/__mocks__/jsx/jsx.jsx"
+      ],
       "orphan": false,
       "valid": true
     },
@@ -151,8 +184,13 @@
       "coreModule": false,
       "couldNotResolve": true,
       "matchesDoNotFollow": false,
-      "dependencyTypes": ["unknown"],
+      "dependencyTypes": [
+        "unknown"
+      ],
       "dependencies": [],
+      "dependents": [
+        "test/main/__mocks__/jsx/jsx.jsx"
+      ],
       "orphan": false,
       "valid": true
     },
@@ -162,8 +200,13 @@
       "coreModule": false,
       "couldNotResolve": true,
       "matchesDoNotFollow": false,
-      "dependencyTypes": ["unknown"],
+      "dependencyTypes": [
+        "unknown"
+      ],
       "dependencies": [],
+      "dependents": [
+        "test/main/__mocks__/jsx/jsx.jsx"
+      ],
       "orphan": false,
       "valid": true
     },
@@ -173,8 +216,13 @@
       "coreModule": false,
       "couldNotResolve": true,
       "matchesDoNotFollow": false,
-      "dependencyTypes": ["unknown"],
+      "dependencyTypes": [
+        "unknown"
+      ],
       "dependencies": [],
+      "dependents": [
+        "test/main/__mocks__/jsx/jsx.jsx"
+      ],
       "orphan": false,
       "valid": true
     }
@@ -190,7 +238,12 @@
     "optionsUsed": {
       "combinedDependencies": false,
       "externalModuleResolutionStrategy": "node_modules",
-      "moduleSystems": ["es6", "cjs", "tsd", "amd"],
+      "moduleSystems": [
+        "es6",
+        "cjs",
+        "tsd",
+        "amd"
+      ],
       "preserveSymlinks": false,
       "tsPreCompilationDeps": false,
       "exoticRequireStrings": [],

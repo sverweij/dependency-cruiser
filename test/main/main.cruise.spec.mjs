@@ -55,6 +55,7 @@ describe("[E] main.cruise", () => {
     expect(pathPosixify(lResult.output)).to.deep.equal(tsxFixture);
     expect(lResult.output).to.be.jsonSchema(cruiseResultSchema);
   });
+
   it("And jsx", () => {
     const lResult = main.cruise(
       ["test/main/__mocks__/jsx"],

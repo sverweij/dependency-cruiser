@@ -19,12 +19,14 @@
           "valid": true
         }
       ],
+      "dependents": [],
       "orphan": false,
       "valid": true
     },
     {
       "source": "node_modules/@types/graphql/tsutils/Maybe.d.ts",
       "dependencies": [],
+      "dependents": ["src/use-maybe.ts"],
       "orphan": false,
       "valid": true
     }
