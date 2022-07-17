@@ -91,7 +91,7 @@ function focusHighlights(pModules, pNamesHashMap) {
   const lHighLightStyle = "fill:lime,color:black";
 
   return pModules
-    .filter((pModule) => pModule.matchesFocus === true)
+    .filter((pModule) => pModule.matchesFocus || pModule.matchesReaches)
     .reduce((pAll, pModule) => {
       const lSource = pNamesHashMap.get(pModule.source);
       return (pAll += `\nstyle ${lSource} ${lHighLightStyle}`);

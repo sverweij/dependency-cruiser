@@ -12,6 +12,7 @@ export default [
       },
     ],
     valid: true,
+    matchesReaches: true,
   },
   {
     source: "src/report/anon/anonymize-path.js",
@@ -41,6 +42,7 @@ export default [
       },
     ],
     valid: true,
+    matchesReaches: false,
   },
   {
     source: "src/report/anon/index.js",
@@ -70,6 +72,7 @@ export default [
       },
     ],
     valid: true,
+    matchesReaches: false,
   },
   {
     source: "src/report/csv.js",
@@ -99,6 +102,7 @@ export default [
       },
     ],
     valid: true,
+    matchesReaches: false,
   },
   {
     source: "src/report/utl/dependency-to-incidence-transformer.js",
@@ -113,6 +117,7 @@ export default [
       },
     ],
     valid: true,
+    matchesReaches: true,
   },
   {
     source: "src/report/dot/index.js",
@@ -184,6 +189,7 @@ export default [
       },
     ],
     valid: true,
+    matchesReaches: false,
   },
   {
     source: "src/report/dot/module-utl.js",
@@ -218,6 +224,7 @@ export default [
       },
     ],
     valid: true,
+    matchesReaches: false,
   },
   {
     source: "src/report/utl/index.js",
@@ -237,6 +244,7 @@ export default [
       },
     ],
     valid: true,
+    matchesReaches: true,
   },
   {
     source: "src/report/dot/prepare-custom-level.js",
@@ -266,6 +274,7 @@ export default [
       },
     ],
     valid: true,
+    matchesReaches: false,
   },
   {
     source: "src/report/dot/prepare-flat-level.js",
@@ -295,6 +304,7 @@ export default [
       },
     ],
     valid: true,
+    matchesReaches: false,
   },
   {
     source: "src/report/dot/prepare-folder-level.js",
@@ -324,6 +334,7 @@ export default [
       },
     ],
     valid: true,
+    matchesReaches: false,
   },
   {
     source: "src/report/error-html/index.js",
@@ -353,6 +364,7 @@ export default [
       },
     ],
     valid: true,
+    matchesReaches: false,
   },
   {
     source: "src/report/error-html/utl.js",
@@ -382,6 +394,7 @@ export default [
       },
     ],
     valid: true,
+    matchesReaches: false,
   },
   {
     source: "src/report/error-long.js",
@@ -411,6 +424,7 @@ export default [
       },
     ],
     valid: true,
+    matchesReaches: false,
   },
   {
     source: "src/report/error.js",
@@ -440,6 +454,7 @@ export default [
       },
     ],
     valid: true,
+    matchesReaches: false,
   },
   {
     source: "src/report/html/index.js",
@@ -469,6 +484,7 @@ export default [
       },
     ],
     valid: true,
+    matchesReaches: false,
   },
   {
     source: "src/report/index.js",
@@ -603,6 +619,7 @@ export default [
     dependents: [],
     orphan: false,
     valid: true,
+    matchesReaches: false,
   },
   {
     source: "src/report/markdown.js",
@@ -632,6 +649,7 @@ export default [
       },
     ],
     valid: true,
+    matchesReaches: false,
   },
   {
     source: "src/report/teamcity.js",
@@ -661,5 +679,6 @@ export default [
       },
     ],
     valid: true,
+    matchesReaches: false,
   },
 ];

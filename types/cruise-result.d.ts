@@ -71,13 +71,17 @@ export interface IModule {
    */
   license?: string;
   /**
-   * 'true' if the file name of this module matches the doNotFollow regular expression
+   * 'true' if the file name of this module matches the 'doNotFollow' regular expression
    */
   matchesDoNotFollow?: boolean;
   /**
-   * 'true' if the file name of this module matches the focus regular expression
+   * 'true' if the file name of this module matches the 'focus' filter regular expression
    */
   matchesFocus?: boolean;
+  /**
+   * 'true' if the file name of this module matches the 'reaches' filter regular expression
+   */
+  matchesReaches?: boolean;
   /**
    * 'true' if this module does not have dependencies, and no module has it as a dependency
    */
