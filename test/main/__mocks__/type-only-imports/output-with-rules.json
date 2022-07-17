@@ -24,12 +24,14 @@
           ]
         }
       ],
+      "dependents": [],
       "orphan": false,
       "valid": true
     },
     {
       "source": "src/types.ts",
       "dependencies": [],
+      "dependents": ["src/bla.ts"],
       "orphan": false,
       "valid": true
     }

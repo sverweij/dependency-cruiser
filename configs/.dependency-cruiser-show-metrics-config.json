@@ -37,6 +37,9 @@
   "options": {
     "includeOnly": { "path": "^(bin|src)" },
     "reporterOptions": {
+      "text": {
+        "highlightFocused": true
+      },
       "dot": {
         "showMetrics": true,
         "theme": {

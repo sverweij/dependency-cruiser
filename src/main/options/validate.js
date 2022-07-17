@@ -46,6 +46,22 @@ function validateMaxDepth(pDepth) {
   }
 }
 
+function validateFocusDepth(pFocusDepth) {
+  const lFocusDepth = Number.parseInt(pFocusDepth, 10);
+  const lMaxFocusDepth = 99;
+
+  if (
+    Boolean(pFocusDepth) &&
+    (Number.isNaN(lFocusDepth) ||
+      lFocusDepth < 0 ||
+      lFocusDepth > lMaxFocusDepth)
+  ) {
+    throw new Error(
+      `'${pFocusDepth}' is not a valid focus depth - use an integer between 0 and ${lMaxFocusDepth}`
+    );
+  }
+}
+
 function validatePathsSafety(pFilterOption) {
   if (typeof pFilterOption === "string") {
     validateRegExpSafety(pFilterOption);
@@ -82,6 +98,8 @@ function validateCruiseOptions(pOptions) {
     // neccessary because not found a way to do this properly in JSON schema
     validateMaxDepth(pOptions.maxDepth);
 
+    validateFocusDepth(pOptions.focusDepth);
+
     if (has(pOptions, "ruleSet.options")) {
       lReturnValue = validateCruiseOptions(pOptions.ruleSet.options);
     }
@@ -102,6 +120,7 @@ function validateFormatOptions(pFormatOptions) {
   validatePathsSafety(pFormatOptions.includeOnly);
   validateRegExpSafety(pFormatOptions.collapse);
   validateOutputType(pFormatOptions.outputType);
+  validateFocusDepth(pFormatOptions.focusDepth);
 }
 
 module.exports = {

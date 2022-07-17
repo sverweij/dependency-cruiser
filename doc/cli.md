@@ -28,7 +28,8 @@ available in dependency-cruiser configurations.
 
 1. [`--do-not-follow`: don't cruise modules adhering to this pattern any further](#--do-not-follow-dont-cruise-modules-adhering-to-this-pattern-any-further)
 1. [`--include-only`: only include modules satisfying a pattern](#--include-only-only-include-modules-satisfying-a-pattern)
-1. [`--focus`: show modules and their direct neighbours](#--focus-show-modules-and-their-direct-neighbours)
+1. [`--focus`: show modules and their neighbours](#--focus-show-modules-and-their-neighbours)
+1. [`--focus-depth`: influence how many layers of neighbors --focus shows](#--focus-depth-influence-how-many-layers-of-neighbors---focus-shows)
 1. [`--reaches`: show modules and their transitive dependents](#--reaches-show-modules-and-their-transitive-dependents)
 1. [`--collapse`: summarize to folder depth or pattern](#--collapse-summarize-to-folder-depth-or-pattern)
 1. [`--exclude`: exclude dependencies from being cruised](#--exclude-exclude-dependencies-from-being-cruised)
@@ -850,7 +851,7 @@ dependency-cruise --include-only "^src" -T dot src | dot -T svg > internal-depen
 See [includeOnly](./options-reference.md#includeonly-only-include-modules-satisfying-a-pattern)
 in the options reference for more details.
 
-### `--focus`: show modules and their direct neighbours
+### `--focus`: show modules and their neighbours
 
 You can use this e.g. to inspect one module or folder and see what the direct
 dependencies are and which modules are direct dependents.
@@ -862,8 +863,23 @@ Takes a regular expression in the same fashion `--include-only`, `--exclude` and
 dependency-cruise src --include-only "^src" --focus "^src/main" -T dot | dot -T svg > focus-on-main-dir-graph.svg
 ```
 
-See [focus](./options-reference.md#show-modules-matching-a-pattern---with-their-direct-neighbours)
+See [focus](./options-reference.md#focus-show-modules-matching-a-pattern---with-their-neighbours)
 in the options reference for more details.
+
+### `--focus-depth`: influence how many layers of neighbors --focus shows
+
+If you want to increase the number of layers of neighbors (transitive dependencies
+& dependents) the focus option shows as context, you can specify that with this
+command line switch. A value of 1 (which is also the default) means _direct neighbours
+only_. 2 also shows the neighbour's neighbours, etc. The value 0 means 'infinite'.
+
+```sh
+dependency-cruise src --include-only "^src" --focus "^src/main" --focus-depth 0 -T dot |\
+  dot -T svg > focus-on-main-dir-graph.svg
+```
+
+See [focus depth](./options-reference.md#adding-depth) in the options reference
+for more details
 
 ### `--reaches`: show modules and their transitive dependents
 

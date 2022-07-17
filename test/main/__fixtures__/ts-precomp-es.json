@@ -3,18 +3,27 @@
     {
       "source": "test/main/__mocks__/ts-precompilation-deps-on-es/also-used.ts",
       "dependencies": [],
+      "dependents": [
+        "test/main/__mocks__/ts-precompilation-deps-on-es/index.ts"
+      ],
       "orphan": false,
       "valid": true
     },
     {
       "source": "test/main/__mocks__/ts-precompilation-deps-on-es/definitely-used.ts",
       "dependencies": [],
+      "dependents": [
+        "test/main/__mocks__/ts-precompilation-deps-on-es/index.ts"
+      ],
       "orphan": false,
       "valid": true
     },
     {
       "source": "test/main/__mocks__/ts-precompilation-deps-on-es/imported-from-index-but-not-used.ts",
       "dependencies": [],
+      "dependents": [
+        "test/main/__mocks__/ts-precompilation-deps-on-es/index.ts"
+      ],
       "orphan": false,
       "valid": true
     },
@@ -64,6 +73,7 @@
           "valid": true
         }
       ],
+      "dependents": [],
       "orphan": false,
       "valid": true
     }

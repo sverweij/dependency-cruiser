@@ -12,6 +12,26 @@ describe("[U] main/options/normalize - format options", () => {
     });
   });
 
+  it("makes focus strings into an object - with addition of focus depth if it's there", () => {
+    expect(
+      normalize.normalizeFormatOptions({
+        focus: "42",
+        focusDepth: 10,
+      }).focus
+    ).to.deep.equal({
+      path: "42",
+      depth: 10,
+    });
+  });
+
+  it("ignores focus depth when there's not also a focus attribute", () => {
+    expect(
+      normalize.normalizeFormatOptions({
+        focusDepth: 10,
+      })
+    ).to.deep.equal({});
+  });
+
   it("makes exclude arrays into an object with a string", () => {
     expect(
       normalize.normalizeFormatOptions({

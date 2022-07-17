@@ -9,84 +9,99 @@
       "coreModule": false,
       "couldNotResolve": true,
       "matchesDoNotFollow": false,
-      "dependencyTypes": ["unknown"],
+      "dependencyTypes": [
+        "unknown"
+      ],
+      "dependents": [
+        "test/main/__mocks__/collapse-after-cruise/src/index.js"
+      ],
       "orphan": false,
       "consolidated": false
     },
     {
       "dependencies": [
         {
-          "dependencyTypes": ["local"],
+          "dependencyTypes": [
+            "local"
+          ],
           "rules": [],
           "valid": true,
-          "resolved": "test/main/__mocks__/collapse-after-cruise/src/input",
-          "coreModule": false,
-          "followable": true,
-          "couldNotResolve": false,
           "module": "./input",
           "moduleSystem": "cjs",
           "dynamic": false,
           "exoticallyRequired": false,
+          "resolved": "test/main/__mocks__/collapse-after-cruise/src/input",
+          "coreModule": false,
+          "followable": true,
+          "couldNotResolve": false,
           "matchesDoNotFollow": false,
           "circular": false
         },
         {
-          "dependencyTypes": ["local"],
+          "dependencyTypes": [
+            "local"
+          ],
           "rules": [],
           "valid": true,
-          "resolved": "test/main/__mocks__/collapse-after-cruise/src/output",
-          "coreModule": false,
-          "followable": true,
-          "couldNotResolve": false,
           "module": "./output",
           "moduleSystem": "cjs",
           "dynamic": false,
           "exoticallyRequired": false,
+          "resolved": "test/main/__mocks__/collapse-after-cruise/src/output",
+          "coreModule": false,
+          "followable": true,
+          "couldNotResolve": false,
           "matchesDoNotFollow": false,
           "circular": false
         },
         {
-          "dependencyTypes": ["local"],
+          "dependencyTypes": [
+            "local"
+          ],
           "rules": [],
           "valid": true,
-          "resolved": "test/main/__mocks__/collapse-after-cruise/src/post-processing",
-          "coreModule": false,
-          "followable": true,
-          "couldNotResolve": false,
           "module": "./post-processing",
           "moduleSystem": "cjs",
           "dynamic": false,
           "exoticallyRequired": false,
+          "resolved": "test/main/__mocks__/collapse-after-cruise/src/post-processing",
+          "coreModule": false,
+          "followable": true,
+          "couldNotResolve": false,
           "matchesDoNotFollow": false,
           "circular": false
         },
         {
-          "dependencyTypes": ["local"],
+          "dependencyTypes": [
+            "local"
+          ],
           "rules": [],
           "valid": true,
-          "resolved": "test/main/__mocks__/collapse-after-cruise/src/pre-processing",
-          "coreModule": false,
-          "followable": true,
-          "couldNotResolve": false,
           "module": "./pre-processing",
           "moduleSystem": "cjs",
           "dynamic": false,
           "exoticallyRequired": false,
+          "resolved": "test/main/__mocks__/collapse-after-cruise/src/pre-processing",
+          "coreModule": false,
+          "followable": true,
+          "couldNotResolve": false,
           "matchesDoNotFollow": false,
           "circular": false
         },
         {
-          "dependencyTypes": ["unknown"],
+          "dependencyTypes": [
+            "unknown"
+          ],
           "rules": [],
           "valid": true,
-          "resolved": "./processing",
-          "coreModule": false,
-          "followable": false,
-          "couldNotResolve": true,
           "module": "./processing",
           "moduleSystem": "cjs",
           "dynamic": false,
           "exoticallyRequired": false,
+          "resolved": "./processing",
+          "coreModule": false,
+          "followable": false,
+          "couldNotResolve": true,
           "matchesDoNotFollow": false,
           "circular": false
         }
@@ -94,23 +109,26 @@
       "rules": [],
       "valid": true,
       "source": "test/main/__mocks__/collapse-after-cruise/src/index.js",
+      "dependents": [],
       "orphan": false,
       "consolidated": false
     },
     {
       "dependencies": [
         {
-          "dependencyTypes": ["local"],
+          "dependencyTypes": [
+            "local"
+          ],
           "rules": [],
           "valid": true,
-          "resolved": "test/main/__mocks__/collapse-after-cruise/src/utl",
-          "coreModule": false,
-          "followable": true,
-          "couldNotResolve": false,
           "module": "../utl/do-interesting-things",
           "moduleSystem": "cjs",
           "dynamic": false,
           "exoticallyRequired": false,
+          "resolved": "test/main/__mocks__/collapse-after-cruise/src/utl",
+          "coreModule": false,
+          "followable": true,
+          "couldNotResolve": false,
           "matchesDoNotFollow": false,
           "circular": false
         }
@@ -118,6 +136,9 @@
       "rules": [],
       "valid": true,
       "source": "test/main/__mocks__/collapse-after-cruise/src/input",
+      "dependents": [
+        "test/main/__mocks__/collapse-after-cruise/src/input/index.js"
+      ],
       "orphan": false,
       "consolidated": true
     },
@@ -126,6 +147,9 @@
       "rules": [],
       "valid": true,
       "source": "test/main/__mocks__/collapse-after-cruise/src/output",
+      "dependents": [
+        "test/main/__mocks__/collapse-after-cruise/src/index.js"
+      ],
       "orphan": false,
       "consolidated": true
     },
@@ -134,6 +158,9 @@
       "rules": [],
       "valid": true,
       "source": "test/main/__mocks__/collapse-after-cruise/src/post-processing",
+      "dependents": [
+        "test/main/__mocks__/collapse-after-cruise/src/index.js"
+      ],
       "orphan": false,
       "consolidated": true
     },
@@ -142,6 +169,9 @@
       "rules": [],
       "valid": true,
       "source": "test/main/__mocks__/collapse-after-cruise/src/pre-processing",
+      "dependents": [
+        "test/main/__mocks__/collapse-after-cruise/src/index.js"
+      ],
       "orphan": false,
       "consolidated": true
     },
@@ -150,6 +180,9 @@
       "rules": [],
       "valid": true,
       "source": "test/main/__mocks__/collapse-after-cruise/src/utl",
+      "dependents": [
+        "test/main/__mocks__/collapse-after-cruise/src/input/index.js"
+      ],
       "orphan": false,
       "consolidated": true
     }
@@ -165,7 +198,12 @@
     "optionsUsed": {
       "combinedDependencies": false,
       "externalModuleResolutionStrategy": "node_modules",
-      "moduleSystems": ["es6", "cjs", "tsd", "amd"],
+      "moduleSystems": [
+        "es6",
+        "cjs",
+        "tsd",
+        "amd"
+      ],
       "preserveSymlinks": false,
       "tsPreCompilationDeps": false,
       "exoticRequireStrings": [],

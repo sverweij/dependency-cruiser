@@ -4,15 +4,17 @@
       "source": "src/circular.js",
       "dependencies": [
         {
-          "resolved": "src/index.js",
-          "coreModule": false,
-          "followable": true,
-          "couldNotResolve": false,
-          "dependencyTypes": ["local"],
           "module": "./index",
           "moduleSystem": "es6",
           "dynamic": false,
           "exoticallyRequired": false,
+          "resolved": "src/index.js",
+          "coreModule": false,
+          "followable": true,
+          "couldNotResolve": false,
+          "dependencyTypes": [
+            "local"
+          ],
           "matchesDoNotFollow": false,
           "circular": true,
           "cycle": [
@@ -21,8 +23,16 @@
             "src/circular.js"
           ],
           "valid": false,
-          "rules": [{ "severity": "info", "name": "no-circular" }]
+          "rules": [
+            {
+              "severity": "info",
+              "name": "no-circular"
+            }
+          ]
         }
+      ],
+      "dependents": [
+        "src/dynamic-to-circular.js"
       ],
       "orphan": false,
       "valid": true
@@ -31,15 +41,17 @@
       "source": "src/index.js",
       "dependencies": [
         {
-          "resolved": "src/dynamic-to-circular.js",
-          "coreModule": false,
-          "followable": true,
-          "couldNotResolve": false,
-          "dependencyTypes": ["local"],
           "module": "./dynamic-to-circular",
           "moduleSystem": "es6",
           "dynamic": false,
           "exoticallyRequired": false,
+          "resolved": "src/dynamic-to-circular.js",
+          "coreModule": false,
+          "followable": true,
+          "couldNotResolve": false,
+          "dependencyTypes": [
+            "local"
+          ],
           "matchesDoNotFollow": false,
           "circular": true,
           "cycle": [
@@ -48,8 +60,16 @@
             "src/index.js"
           ],
           "valid": false,
-          "rules": [{ "severity": "info", "name": "no-circular" }]
+          "rules": [
+            {
+              "severity": "info",
+              "name": "no-circular"
+            }
+          ]
         }
+      ],
+      "dependents": [
+        "src/circular.js"
       ],
       "orphan": false,
       "valid": true
@@ -58,15 +78,17 @@
       "source": "src/dynamic-to-circular.js",
       "dependencies": [
         {
-          "resolved": "src/circular.js",
-          "coreModule": false,
-          "followable": true,
-          "couldNotResolve": false,
-          "dependencyTypes": ["local"],
           "module": "./circular",
           "moduleSystem": "es6",
           "dynamic": true,
           "exoticallyRequired": false,
+          "resolved": "src/circular.js",
+          "coreModule": false,
+          "followable": true,
+          "couldNotResolve": false,
+          "dependencyTypes": [
+            "local"
+          ],
           "matchesDoNotFollow": false,
           "circular": true,
           "cycle": [
@@ -75,8 +97,16 @@
             "src/dynamic-to-circular.js"
           ],
           "valid": false,
-          "rules": [{ "severity": "warn", "name": "no-dynamic" }]
+          "rules": [
+            {
+              "severity": "warn",
+              "name": "no-dynamic"
+            }
+          ]
         }
+      ],
+      "dependents": [
+        "src/index.js"
       ],
       "orphan": false,
       "valid": true
@@ -88,13 +118,19 @@
         "type": "dependency",
         "from": "src/dynamic-to-circular.js",
         "to": "src/circular.js",
-        "rule": { "severity": "warn", "name": "no-dynamic" }
+        "rule": {
+          "severity": "warn",
+          "name": "no-dynamic"
+        }
       },
       {
         "type": "cycle",
         "from": "src/circular.js",
         "to": "src/index.js",
-        "rule": { "severity": "info", "name": "no-circular" },
+        "rule": {
+          "severity": "info",
+          "name": "no-circular"
+        },
         "cycle": [
           "src/index.js",
           "src/dynamic-to-circular.js",
@@ -111,7 +147,12 @@
     "optionsUsed": {
       "combinedDependencies": false,
       "externalModuleResolutionStrategy": "node_modules",
-      "moduleSystems": ["es6", "cjs", "tsd", "amd"],
+      "moduleSystems": [
+        "es6",
+        "cjs",
+        "tsd",
+        "amd"
+      ],
       "preserveSymlinks": false,
       "tsPreCompilationDeps": false,
       "exoticRequireStrings": [],
@@ -120,18 +161,23 @@
     "ruleSetUsed": {
       "forbidden": [
         {
-          "scope": "module",
           "name": "no-circular",
           "severity": "info",
           "from": {},
-          "to": { "dynamic": false, "circular": true }
+          "to": {
+            "dynamic": false,
+            "circular": true
+          },
+          "scope": "module"
         },
         {
-          "scope": "module",
           "name": "no-dynamic",
           "severity": "warn",
           "from": {},
-          "to": { "dynamic": true }
+          "to": {
+            "dynamic": true
+          },
+          "scope": "module"
         }
       ]
     }

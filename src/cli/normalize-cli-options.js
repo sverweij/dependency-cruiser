@@ -15,6 +15,7 @@ const KNOWN_DEPCRUISE_CLI_OPTIONS = [
   "doNotFollow",
   "exclude",
   "focus",
+  "focusDepth",
   "help",
   "ignoreKnown",
   "includeOnly",

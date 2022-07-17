@@ -38,6 +38,12 @@ export interface IFocusType {
    * dependents)
    */
   path?: string | string[];
+  /**
+   * by default 'focus' only inlcudes the direct neighbours of the focus'ed module(s).
+   * This property makes dependency-cruiser will also include neighbors of neighbors,
+   * up to the specified depth.
+   */
+  depth?: number;
 }
 
 export interface IReachesType {

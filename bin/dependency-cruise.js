@@ -43,6 +43,12 @@ try {
       "only include modules matching the regex + their direct neighbours"
     )
     .option(
+      "--focus-depth <number>",
+      "the depth to focus on - only applied when --focus is passed too. " +
+        "1= direct neighbors, 2=neighbours of neighbours etc.",
+      1
+    )
+    .option(
       "-R, --reaches <regex>",
       "only include modules matching the regex + all modules that can reach it"
     )

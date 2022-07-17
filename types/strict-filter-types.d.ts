@@ -44,4 +44,10 @@ export interface IStrictFocusType extends IFocusType {
    * dependents)
    */
   path: string;
+  /**
+   * by default 'focus' only includes the direct neighbours of the focus'ed module(s).
+   * This property makes dependency-cruiser will also include neighbors of neighbors,
+   * up to the specified depth.
+   */
+  depth?: number;
 }

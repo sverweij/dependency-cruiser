@@ -8,11 +8,13 @@ const KNOWN_FMT_OPTIONS = [
   "collapse",
   "exclude",
   "focus",
+  "focusDepth",
   "help",
   "includeOnly",
   "outputTo",
   "outputType",
   "prefix",
+  "reaches",
   "version",
 ];
 

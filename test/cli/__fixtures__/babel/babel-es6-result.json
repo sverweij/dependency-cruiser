@@ -12,18 +12,25 @@
           "coreModule": false,
           "followable": true,
           "couldNotResolve": false,
-          "dependencyTypes": ["local"],
+          "dependencyTypes": [
+            "local"
+          ],
           "matchesDoNotFollow": false,
           "circular": false,
           "valid": true
         }
       ],
+      "dependents": [],
       "orphan": false,
       "valid": true
     },
     {
       "source": "test/cli/__fixtures__/babel/es6/src/shared/index.js",
       "dependencies": [],
+      "dependents": [
+        "test/cli/__fixtures__/babel/es6/src/index.js",
+        "test/cli/__fixtures__/babel/es6/src/something/else.js"
+      ],
       "orphan": false,
       "valid": true
     },
@@ -39,12 +46,15 @@
           "coreModule": false,
           "followable": true,
           "couldNotResolve": false,
-          "dependencyTypes": ["local"],
+          "dependencyTypes": [
+            "local"
+          ],
           "matchesDoNotFollow": false,
           "circular": false,
           "valid": true
         }
       ],
+      "dependents": [],
       "orphan": false,
       "valid": true
     }
@@ -60,7 +70,12 @@
     "optionsUsed": {
       "combinedDependencies": false,
       "externalModuleResolutionStrategy": "node_modules",
-      "moduleSystems": ["es6", "cjs", "tsd", "amd"],
+      "moduleSystems": [
+        "es6",
+        "cjs",
+        "tsd",
+        "amd"
+      ],
       "outputTo": "test/cli/__output__/babel-es6-result.json",
       "outputType": "json",
       "preserveSymlinks": false,

@@ -12,18 +12,25 @@
           "coreModule": false,
           "followable": true,
           "couldNotResolve": false,
-          "dependencyTypes": ["local"],
+          "dependencyTypes": [
+            "local"
+          ],
           "matchesDoNotFollow": false,
           "circular": false,
           "valid": true
         }
       ],
+      "dependents": [],
       "orphan": false,
       "valid": true
     },
     {
       "source": "test/cli/__fixtures__/babel/ts/src/shared/index.ts",
       "dependencies": [],
+      "dependents": [
+        "test/cli/__fixtures__/babel/ts/src/index.ts",
+        "test/cli/__fixtures__/babel/ts/src/something/else.ts"
+      ],
       "orphan": false,
       "valid": true
     },
@@ -39,12 +46,15 @@
           "coreModule": false,
           "followable": true,
           "couldNotResolve": false,
-          "dependencyTypes": ["local"],
+          "dependencyTypes": [
+            "local"
+          ],
           "matchesDoNotFollow": false,
           "circular": false,
           "valid": true
         }
       ],
+      "dependents": [],
       "orphan": false,
       "valid": true
     },
@@ -60,11 +70,16 @@
           "coreModule": false,
           "followable": false,
           "couldNotResolve": true,
-          "dependencyTypes": ["unknown"],
+          "dependencyTypes": [
+            "unknown"
+          ],
           "matchesDoNotFollow": false,
           "circular": false,
           "valid": true
         }
+      ],
+      "dependents": [
+        "test/cli/__fixtures__/babel/ts/src/something/some-page.tsx"
       ],
       "orphan": false,
       "valid": true
@@ -75,14 +90,23 @@
       "coreModule": false,
       "couldNotResolve": true,
       "matchesDoNotFollow": false,
-      "dependencyTypes": ["unknown"],
+      "dependencyTypes": [
+        "unknown"
+      ],
       "dependencies": [],
+      "dependents": [
+        "test/cli/__fixtures__/babel/ts/src/something/home.ts",
+        "test/cli/__fixtures__/babel/ts/src/something/some-page.tsx"
+      ],
       "orphan": false,
       "valid": true
     },
     {
       "source": "test/cli/__fixtures__/babel/ts/src/something/routes-config.ts",
       "dependencies": [],
+      "dependents": [
+        "test/cli/__fixtures__/babel/ts/src/something/some-page.tsx"
+      ],
       "orphan": false,
       "valid": true
     },
@@ -98,7 +122,9 @@
           "coreModule": false,
           "followable": true,
           "couldNotResolve": false,
-          "dependencyTypes": ["local"],
+          "dependencyTypes": [
+            "local"
+          ],
           "matchesDoNotFollow": false,
           "circular": false,
           "valid": true
@@ -112,7 +138,9 @@
           "coreModule": false,
           "followable": true,
           "couldNotResolve": false,
-          "dependencyTypes": ["local"],
+          "dependencyTypes": [
+            "local"
+          ],
           "matchesDoNotFollow": false,
           "circular": false,
           "valid": true
@@ -126,7 +154,9 @@
           "coreModule": false,
           "followable": false,
           "couldNotResolve": true,
-          "dependencyTypes": ["unknown"],
+          "dependencyTypes": [
+            "unknown"
+          ],
           "matchesDoNotFollow": false,
           "circular": false,
           "valid": true
@@ -140,12 +170,15 @@
           "coreModule": false,
           "followable": false,
           "couldNotResolve": true,
-          "dependencyTypes": ["unknown"],
+          "dependencyTypes": [
+            "unknown"
+          ],
           "matchesDoNotFollow": false,
           "circular": false,
           "valid": true
         }
       ],
+      "dependents": [],
       "orphan": false,
       "valid": true
     },
@@ -155,8 +188,13 @@
       "coreModule": false,
       "couldNotResolve": true,
       "matchesDoNotFollow": false,
-      "dependencyTypes": ["unknown"],
+      "dependencyTypes": [
+        "unknown"
+      ],
       "dependencies": [],
+      "dependents": [
+        "test/cli/__fixtures__/babel/ts/src/something/some-page.tsx"
+      ],
       "orphan": false,
       "valid": true
     }
@@ -172,7 +210,12 @@
     "optionsUsed": {
       "combinedDependencies": false,
       "externalModuleResolutionStrategy": "node_modules",
-      "moduleSystems": ["es6", "cjs", "tsd", "amd"],
+      "moduleSystems": [
+        "es6",
+        "cjs",
+        "tsd",
+        "amd"
+      ],
       "outputTo": "test/cli/__output__/babel-ts-result.json",
       "outputType": "json",
       "preserveSymlinks": false,

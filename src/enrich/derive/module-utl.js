@@ -9,6 +9,8 @@ let gIndexedGraph = null;
  * call this function consecutively for different module graphs, you can clear
  * this cache with the clearCache function from this module.
  *
+ * TODO: use IndexedModuleGraph class from src/graph-utl in stead
+ *
  * @param {import('../../../types/cruise-result').IModule[]} pModuleGraph
  * @param {string} pSource
  * @returns {import('../../../types/cruise-result').IModule | undefined}
