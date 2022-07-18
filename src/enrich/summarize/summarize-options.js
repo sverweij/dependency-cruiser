@@ -2,11 +2,17 @@ const get = require("lodash/get");
 const has = require("lodash/has");
 
 const SHAREABLE_OPTIONS = [
+  "babelConfig",
+  "collapse",
   "combinedDependencies",
   "doNotFollow",
+  "enhancedResolveOptions",
   "exclude",
+  "exoticallyRequired",
+  "exoticRequireStrings",
   "externalModuleResolutionStrategy",
   "focus",
+  "focusDepth",
   "includeOnly",
   "knownViolations",
   "maxDepth",
@@ -15,16 +21,14 @@ const SHAREABLE_OPTIONS = [
   "outputType",
   "prefix",
   "preserveSymlinks",
+  "progress",
+  "reaches",
+  "reporterOptions",
   "rulesFile",
   "tsPreCompilationDeps",
-  // "tsConfig", TODO enableify
   "webpackConfig",
-  "babelConfig",
-  "exoticallyRequired",
-  "exoticRequireStrings",
-  "reporterOptions",
-  "enhancedResolveOptions",
-  "collapse",
+  // "metrics", TODO: should be enabled
+  // "tsConfig", TODO: should be enabled
 ];
 
 function makeOptionsPresentable(pOptions) {
