@@ -36,6 +36,7 @@ try {
   if (Boolean(program.args[0])) {
     process.exitCode = cli(program.args, {
       ...program.opts(),
+      cache: false,
       outputType: "baseline",
     });
   } else {

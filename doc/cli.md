@@ -41,6 +41,7 @@ available in dependency-cruiser configurations.
 1. [`--ts-config`: use a typescript configuration file ('project')](#--ts-config-use-a-typescript-configuration-file-project)
 1. [`--webpack-config`: use (the resolution options of) a webpack configuration`](#--webpack-config-use-the-resolution-options-of-a-webpack-configuration)
 1. [`--preserve-symlinks`](#--preserve-symlinks)
+1. [`--cache`: use a cache to speed up cruising (experimental)](#--cache-use-a-cache-to-speed-up-cruising-experimental)
 
 ### Standalone formatting of dependency graphs: [depcruise-fmt](#depcruise-fmt)
 
@@ -1094,6 +1095,36 @@ to `false` (which is also nodejs' default behavior since release 6).
 
 You'll typically want to set this in the configuration file with the [preserveSymlinks](./options-reference.md#preservesymlinks)
 option.
+
+### `--cache`: use a cache to speed up cruising (experimental)
+
+> :warning: the cache feature is _experimental_. It _is_ significantly faster
+> and it _is_ tested, but the interface & format might be changing without
+> dependency-cruiser getting a major bump.
+
+> Available from version 11.14.0.
+
+With `--cache` you instruct dependency-cruiser to use a cache. When you don't
+specify a location it uses `node_modules/.cache/dependency-cruiser` as the
+folder for the cache.
+
+Dependency-cruiser will use the cache as long as it's not invalidated, which
+happens when
+
+- changes to files that would be part of a cruise have happened.
+  This includes modifications of files already included in the earlier cruise,
+  new files, file deletions and file renaming. Dependency-cruiser uses `git`
+  to do this.
+- The parameters/ options of the cruises are still "compatible".
+  The rule of thumb is that if the _existing_ cache has a broader scope than
+  the _new_ one, the cruises are compatible and the new cruise can use the
+  cache. Currently dependency-cruiser takes a simplified approach to this:
+  - if the arguments are not equal the cache is not valid anymore
+  - if the cache was created as the result of a filter (e.g. _includeOnly_,
+    _reaches_ or _collapse_) the new cruise can be served from the cache when
+    the filters are exactly the same.
+  - if the cache was created without a filter, but the new cruise includes one,
+    the new cruise _can_ be served from the cache.
 
 ## depcruise-fmt
 

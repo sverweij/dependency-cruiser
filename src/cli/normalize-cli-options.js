@@ -10,6 +10,7 @@ const defaults = require("./defaults");
 const KNOWN_DEPCRUISE_CLI_OPTIONS = [
   "babelConfig",
   "baseDir",
+  "cache",
   "collapse",
   "config",
   "doNotFollow",
@@ -195,6 +196,19 @@ function normalizeProgress(pCliOptions) {
   return lProgress ? { progress: lProgress } : {};
 }
 
+function normalizeCacheFolderName(pCliOptions) {
+  const lCache = get(pCliOptions, "cache", false);
+  let lReturnValue = clone(pCliOptions);
+
+  if (lCache === true) {
+    lReturnValue = {
+      ...lReturnValue,
+      cache: defaults.CACHE_FOLDER,
+    };
+  }
+  return lReturnValue;
+}
+
 /**
  * returns the pOptionsAsPassedFromCommander, so that the returned value contains a
  * valid value for each possible option
@@ -226,7 +240,7 @@ module.exports = function normalizeOptions(
   lOptions = { ...lOptions, ...normalizeValidationOption(lOptions) };
   lOptions = { ...lOptions, ...normalizeProgress(lOptions) };
   lOptions = { ...lOptions, ...normalizeKnownViolationsOption(lOptions) };
-
+  lOptions = normalizeCacheFolderName(lOptions);
   lOptions = normalizeConfigFileName(
     lOptions,
     "webpackConfig",
