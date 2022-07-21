@@ -3,6 +3,7 @@ const has = require("lodash/has");
 
 const SHAREABLE_OPTIONS = [
   "babelConfig",
+  "cache",
   "collapse",
   "combinedDependencies",
   "doNotFollow",
@@ -52,13 +53,12 @@ function makeOptionsPresentable(pOptions) {
         pOptions.knownViolations.length > 0
     )
     .reduce((pAll, pShareableOptionKey) => {
-      // console.error(pOption);
       pAll[pShareableOptionKey] = pOptions[pShareableOptionKey];
       return pAll;
     }, {});
 }
 
-function makeIncludOnlyBackwardsCompatible(pOptions) {
+function makeIncludeOnlyBackwardsCompatible(pOptions) {
   return pOptions.includeOnly
     ? {
         ...pOptions,
@@ -70,7 +70,7 @@ function makeIncludOnlyBackwardsCompatible(pOptions) {
 module.exports = function summarizeOptions(pFileDirectoryArray, pOptions) {
   return {
     optionsUsed: {
-      ...makeOptionsPresentable(makeIncludOnlyBackwardsCompatible(pOptions)),
+      ...makeOptionsPresentable(makeIncludeOnlyBackwardsCompatible(pOptions)),
       args: pFileDirectoryArray.join(" "),
     },
   };

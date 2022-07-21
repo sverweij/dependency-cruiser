@@ -142,13 +142,16 @@ function shouldCalculateMetrics(pOptions) {
 /**
  *
  * @param {import('../../../types/options').ICruiseOptions} pOptions
+ * @param {string[]} pFileAndDirectoryArray
  * @returns {import('../../../types/strict-options').IStrictCruiseOptions}
  */
-function normalizeCruiseOptions(pOptions) {
+function normalizeCruiseOptions(pOptions, pFileAndDirectoryArray = []) {
+  /** @type {import('../../../types/strict-options').IStrictCruiseOptions} */
   let lReturnValue = {
     baseDir: process.cwd(),
     ...defaults,
     ...pOptions,
+    args: pFileAndDirectoryArray.join(" "),
   };
 
   // @ts-ignore the idea of normalizing maxDepth to number is that after

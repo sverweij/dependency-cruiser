@@ -89,6 +89,7 @@
     "depcruise:graph:fdp": "node ./bin/dependency-cruise.js bin src --config --output-type dot | fdp -GK=0.1 -Gsplines=true -T svg > tmp_deps.svg",
     "depcruise:graph:osage": "node ./bin/dependency-cruise.js bin src --config --output-type dot | osage -Gpack=32 -GpackMode=array2 -T svg > tmp_deps.svg",
     "depcruise:graph:view": "node ./bin/dependency-cruise.js bin src --prefix vscode://file/$(pwd)/ --config configs/.dependency-cruiser-show-metrics-config.json --output-type dot --progress cli-feedback | dot -T svg | node ./bin/wrap-stream-in-html.js | browser",
+    "depcruise:graph:view:diff": "node ./bin/dependency-cruise.js bin src --prefix vscode://file/$(pwd)/ --config configs/.dependency-cruiser-show-metrics-config.json --output-type dot --progress cli-feedback --focus \"$(watskeburt develop)\" | dot -T svg | node ./bin/wrap-stream-in-html.js | browser",
     "depcruise:report": "node ./bin/dependency-cruise.js src bin test configs types --output-type err-html --config configs/.dependency-cruiser-show-metrics-config.json --output-to dependency-violations.html",
     "depcruise:report:view": "node ./bin/dependency-cruise.js src bin test configs types --output-type err-html --config configs/.dependency-cruiser-show-metrics-config.json --output-to - | browser",
     "depcruise:focus": "node ./bin/dependency-cruise.js src bin test configs types tools --progress --config --output-type text --focus",
@@ -159,6 +160,7 @@
     "semver-try-require": "^5.0.2",
     "teamcity-service-messages": "0.1.14",
     "tsconfig-paths-webpack-plugin": "3.5.2",
+    "watskeburt": "0.6.0",
     "wrap-ansi": "^7.0.0"
   },
   "devDependencies": {
