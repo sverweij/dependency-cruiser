@@ -420,13 +420,39 @@ module.exports = {
         //   },
         //   modules: [
         //     {
+        //       criteria: { matchesFocus: true },
+        //       attributes: {
+        //         fillcolor: "lime",
+        //         penwidth: 2,
+        //       },
+        //     },
+        //     {
+        //       criteria: { matchesFocus: false },
+        //       attributes: {
+        //         fillcolor: "lightgrey",
+        //       },
+        //     },
+        //     {
+        //       criteria: { matchesReaches: true },
+        //       attributes: {
+        //         fillcolor: "lime",
+        //         penwidth: 2,
+        //       },
+        //     },
+        //     {
+        //       criteria: { matchesReaches: false },
+        //       attributes: {
+        //         fillcolor: "lightgrey",
+        //       },
+        //     },
+        //     {
         //       criteria: { source: "^src/model" },
         //       attributes: { fillcolor: "#ccccff" }
         //     },
         //     {
         //       criteria: { source: "^src/view" },
         //       attributes: { fillcolor: "#ccffcc" }
-        //     }
+        //     },
         //   ],
         //   dependencies: [
         //     {
@@ -468,7 +494,10 @@ module.exports = {
          */
         // theme: {
         // },
-      }
+      },
+      "text": {
+        "highlightFocused": true
+      },
     }
   }
 };

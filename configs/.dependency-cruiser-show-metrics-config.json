@@ -62,6 +62,19 @@
               }
             },
             {
+              "criteria": { "matchesReaches": true },
+              "attributes": {
+                "fillcolor": "lime",
+                "penwidth": 2
+              }
+            },
+            {
+              "criteria": { "matchesReaches": false },
+              "attributes": {
+                "fillcolor": "lightgrey"
+              }
+            },
+            {
               "criteria": { "source": "^src/cli" },
               "attributes": { "fillcolor": "#ccccff" }
             },
