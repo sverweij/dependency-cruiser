@@ -21,13 +21,13 @@ const SHAREABLE_OPTIONS = [
   "outputType",
   "prefix",
   "preserveSymlinks",
-  "progress",
   "reaches",
   "reporterOptions",
   "rulesFile",
   "tsPreCompilationDeps",
   "webpackConfig",
   // "metrics", TODO: should be enabled
+  // "progress", TODO: could be enabled
   // "tsConfig", TODO: should be enabled
 ];
 

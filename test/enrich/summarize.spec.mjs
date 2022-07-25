@@ -1,12 +1,17 @@
-import { expect } from "chai";
+import { expect, use } from "chai";
+import chaiJSONSchema from "chai-json-schema";
 import summarize from "../../src/enrich/summarize/index.js";
+import cruiseResultSchema from "../../src/schema/cruise-result.schema.js";
 import cycleStartsOnOne from "./__mocks__/cycle-starts-on-one.mjs";
 import cycleStartsOnTwo from "./__mocks__/cycle-starts-on-two.mjs";
 import cycleFest from "./__mocks__/cycle-fest.mjs";
 
+use(chaiJSONSchema);
+
 describe("[I] enrich/summarize", () => {
   it("doesn't add a rule set when there isn't one", () => {
-    expect(summarize([], {}, [])).to.deep.equal({
+    const lSummary = summarize([], {}, []);
+    expect(lSummary).to.deep.equal({
       error: 0,
       info: 0,
       ignore: 0,
@@ -18,9 +23,13 @@ describe("[I] enrich/summarize", () => {
       violations: [],
       warn: 0,
     });
+    expect({ modules: [], summary: lSummary }).to.be.jsonSchema(
+      cruiseResultSchema
+    );
   });
   it("adds a rule set when there is one", () => {
-    expect(summarize([], { ruleSet: { required: [] } }, [])).to.deep.equal({
+    const lSummary = summarize([], { ruleSet: { required: [] } }, []);
+    expect(lSummary).to.deep.equal({
       error: 0,
       info: 0,
       ignore: 0,
@@ -35,6 +44,9 @@ describe("[I] enrich/summarize", () => {
       violations: [],
       warn: 0,
     });
+    expect({ modules: [], summary: lSummary }).to.be.jsonSchema(
+      cruiseResultSchema
+    );
   });
 
   it("consistently summarizes the same circular dependency, regardless the order", () => {
@@ -56,6 +68,9 @@ describe("[I] enrich/summarize", () => {
     const lResult2 = summarize(cycleStartsOnTwo, lOptions, ["src"]);
 
     expect(lResult1).to.deep.equal(lResult2);
+    expect({ modules: [], summary: lResult1 }).to.be.jsonSchema(
+      cruiseResultSchema
+    );
   });
 
   it("summarizes all circular dependencies, even when there's more per thingus", () => {
@@ -128,8 +143,11 @@ describe("[I] enrich/summarize", () => {
         ],
       },
     };
-    const lResult = summarize(cycleFest, lOptions, ["src"]);
-    expect(lResult).to.deep.equal(lExpected);
+    const lSummary = summarize(cycleFest, lOptions, ["src"]);
+    expect(lSummary).to.deep.equal(lExpected);
+    expect({ modules: [], summary: lSummary }).to.be.jsonSchema(
+      cruiseResultSchema
+    );
   });
 
   it("includes known violations in the summary", () => {
@@ -184,7 +202,7 @@ describe("[I] enrich/summarize", () => {
   });
 
   it("violating something with moreUnstable & instabilities", () => {
-    const lResult = summarize(
+    const lSummary = summarize(
       [
         {
           source: "violation.js",
@@ -212,7 +230,7 @@ describe("[I] enrich/summarize", () => {
       []
     );
 
-    expect(lResult).to.deep.equal({
+    expect(lSummary).to.deep.equal({
       violations: [
         {
           type: "instability",
@@ -253,5 +271,8 @@ describe("[I] enrich/summarize", () => {
         ],
       },
     });
+    expect({ modules: [], summary: lSummary }).to.be.jsonSchema(
+      cruiseResultSchema
+    );
   });
 });
