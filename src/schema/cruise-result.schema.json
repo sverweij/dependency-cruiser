@@ -1338,7 +1338,8 @@
       "properties": {
         "exclude": { "$ref": "#/definitions/CompoundExcludeType" },
         "includeOnly": { "$ref": "#/definitions/CompoundIncludeOnlyType" },
-        "focus": { "$ref": "#/definitions/CompoundFocusType" }
+        "focus": { "$ref": "#/definitions/CompoundFocusType" },
+        "reaches": { "$ref": "#/definitions/CompoundReachesType" }
       }
     },
     "CompoundReachesType": {

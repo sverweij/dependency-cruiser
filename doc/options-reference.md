@@ -1031,17 +1031,15 @@ dependencies to either folders ([_ddot_](#ddot)), or to a level you specify
 ([_archi_](#archi)).
 
 With _filters_ you can prune the dependency tree the _dot_ reporter shows. It
-works _on top_ of the cruise-level filters (_includeOnly_, _exclude_, _focus_
-and _doNotFollow_) and only for the reporter you configured it for.
+works _on top_ of the cruise-level filters (_includeOnly_, _exclude_, _focus_,
+_reaches_ and _doNotFollow_) and only for the reporter you configured it for.
 
 > The filters specified in the _dot_ reporterOptions act as a fall back for
 > the _archi_ and _ddot_ reporterOptions. This is because we found that often
-> you want the same pruning for all visualisations.
+> you want the same pruning for all visualizations.
 
 The filters the _reporterOptions.dot.filters_ support are _includeOnly_,
-_exclude_ and _focus_. Currently they only support the path attribute (which,
-just like the ones on top cruise level accepts either a regular-expression-as-a-string
-or an array of them).
+_exclude_, _focus_ and _reaches_.
 
 Example:
 
@@ -1084,7 +1082,7 @@ depcruise src bin test -T json -c > results.json
 # than even one cruise:
 depcruise-fmt -T dot results.json | dot -T svg > module-graph.svg
 depcruise-fmt -T archi results.json | dot -T svg > high-level-graph.svg
-depcruise-fmt -e -T err results.json
+depcruise-fmt --exit-code -T err results.json
 ```
 
 > Note: as of version 9.12.0 depcruise-fmt has [filters](cli.md#depcruise-fmt)
