@@ -281,6 +281,7 @@ export default {
         exclude: { $ref: "#/definitions/CompoundExcludeType" },
         includeOnly: { $ref: "#/definitions/CompoundIncludeOnlyType" },
         focus: { $ref: "#/definitions/CompoundFocusType" },
+        reaches: { $ref: "#/definitions/CompoundReachesType" },
       },
     },
     ...compoundExcludeType.definitions,
