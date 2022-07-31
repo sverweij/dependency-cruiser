@@ -35,7 +35,7 @@
     }
   ],
   "options": {
-    "includeOnly": { "path": "^(bin|src)" },
+    "includeOnly": { "path": "^(bin|src|types)" },
     "reporterOptions": {
       "text": {
         "highlightFocused": true
@@ -58,7 +58,7 @@
             {
               "criteria": { "matchesFocus": false },
               "attributes": {
-                "fillcolor": "lightgrey"
+                "color": "grey"
               }
             },
             {
@@ -71,7 +71,7 @@
             {
               "criteria": { "matchesReaches": false },
               "attributes": {
-                "fillcolor": "lightgrey"
+                "color": "grey"
               }
             },
             {
