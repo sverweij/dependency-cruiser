@@ -438,7 +438,7 @@ described primarily [over there](cli.md#--collapse-summarize-to-folder-depth-or-
 > :shell: command line option equivalent: `--max-depth`
 
 Only cruise the specified depth, counting from the specified root-module(s). This
-command is mostly useful in combination with visualisation output like _dot_ to
+command is mostly useful in combination with visualization output like _dot_ to
 keep the generated output to a manageable size.
 
 > :bulb: If you use this to get a high level overview of your dependencies, be sure
@@ -761,7 +761,7 @@ open the link on GitHub instead of the local file - pass that in the
 ```
 
 Any URL works, so you can also use it to make sure links always open in your
-favourite editor. Here's an example for visual studio code:
+favorite editor. Here's an example for visual studio code:
 
 ```javascript
 ...
@@ -919,7 +919,7 @@ module.exports = {
 
 ![vertical](assets/theming/vertical.svg)
 
-To get output without any attributes and no conditional colouring you can order
+To get output without any attributes and no conditional coloring you can order
 the default theme to be replaced by flipping the `replace` attribute to `true`.
 
 <details>
@@ -1248,12 +1248,12 @@ module.exports = {
         // The text to show as a header on top of the detailed list of violations
         detailsHeader: "### All violations",
         // Whether or not to collapse the list of violations in a <details> block
-        // especiall practical when the list of violations is still large.
+        // especially practical when the list of violations is still large.
         collapseDetails: true,
         // The text to in the <summary> section of the <details> block
         collapsedMessage: "Violations found - click to expand",
         // The text to show when no violations were found
-        noViolationsMessage: "No violations vound",
+        noViolationsMessage: "No violations found",
 
         // Whether or not to show a footer (with version & run date) at the bottom of the report
         showFooter: true,
@@ -1518,31 +1518,25 @@ not bundled with dependency-cruiser.
 > and it _is_ tested, but the interface & format might be changing without
 > dependency-cruiser getting a major bump.
 
-Set whether or not caching should be used (default: false), and optionally
-to determine where dependency-cruiser's cache folder location should be.
-
-```javascript
-{
-  // ...
- "options": {
-    // cache dependency-cruiser results to the default location
-    // (node_modules/.cache/dependency-cruiser)
-    cache: true
-    // ...
-  }
-}
-```
+Set where dependency-cruiser's cache folder location should be. Setting it
+to a string implies dependency-cruiser _will_ use caching.
 
 ```javascript
 {
   // ...
  "options": {
     // cache dependency-cruiser results to a custom location
-
     cache: "some-folder/where-you-want-to-store/cache"
     // ...
   }
 }
 ```
 
-See [`--cache`: use a cache to speed up cruising (experimental)](cli.md#--cache-use-a-cache-to-speed-up-cruising-experimental) for more details.
+It's also possible to pass the value `false` here (also the default) - which
+tells dependency-cruiser to not use its cache feature.
+
+As with most settings the command line option of the same name takes
+precedence of whichever is specified here.
+
+See [`--cache`: use a cache to speed up cruising (experimental)](cli.md#--cache-use-a-cache-to-speed-up-cruising-experimental)
+in the command line documentation for more details.

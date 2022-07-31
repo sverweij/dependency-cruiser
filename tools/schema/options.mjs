@@ -342,6 +342,7 @@ export default {
           oneOf: [
             {
               type: "boolean",
+              enum: [false],
             },
             {
               type: "string",
