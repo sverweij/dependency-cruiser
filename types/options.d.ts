@@ -247,6 +247,12 @@ export interface ICruiseOptions {
    * for all modules and folders. Defaults to false.
    */
   metrics?: boolean;
+  /**
+   * When set to true dependency-cruiser will cache its results in node_modules/.cache/dependency-cruiser.
+   * When passed a string dependency-cruiser will cache in the folder designated by the string.
+   * Defaults to false.
+   */
+  cache?: boolean | string;
 }
 
 export interface IFormatOptions {

@@ -112,7 +112,7 @@
       "severity": "error",
       "from": {
         "pathNot": [
-          "^src/(main/resolve-options/normalize\\.js|extract/parse|extract/resolve|extract/gather-initial-sources\\.js|config-utl|cli)",
+          "^src/(main/resolve-options/normalize\\.js|extract/parse|extract/resolve|extract/gather-initial-sources\\.js|config-utl|cli|cache)",
           "^test",
           "^tools"
         ]
@@ -339,7 +339,7 @@
             {
               "criteria": { "matchesFocus": false },
               "attributes": {
-                "fillcolor": "lightgrey"
+                "color": "grey"
               }
             },
             {
@@ -352,7 +352,7 @@
             {
               "criteria": { "matchesReaches": false },
               "attributes": {
-                "fillcolor": "lightgrey"
+                "color": "grey"
               }
             },
             {
@@ -491,6 +491,7 @@
         ]
       }
     },
-    "progress": { "type": "performance-log" }
+    "progress": { "type": "performance-log" },
+    "cache": "node_modules/.cache/dependency-cruiser"
   }
 }

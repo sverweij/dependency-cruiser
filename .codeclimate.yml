@@ -5,7 +5,7 @@ checks:
       threshold: 7
   method-lines:
     config:
-      threshold: 32
+      threshold: 36
 # removed the eslint plugin. The eslint ecosystem moves faster
 # than what codeclimate can keep up with - and we're running
 # eslint on other ci platforms anyway now.

@@ -32,6 +32,7 @@
   - [enhancedResolveOptions](#enhancedresolveoptions)
   - [forceDeriveDependents](#forcederivedependents)
   - [parser](#parser)
+  - [cache](#cache)
 
 ## Filters
 
@@ -1508,3 +1509,42 @@ feature rich) `swc`.
 `swc` and `tsc` only work when the compilers (respectively `@core/swc` and
 `typescript`) are installed in the same spot as dependency-cruiser is. They're
 not bundled with dependency-cruiser.
+
+### `cache`
+
+> :shell: command line option equivalent: --cache
+
+> Available from version 11.14.0.
+
+> :warning: the cache feature is _experimental_. It _is_ significantly faster
+> and it _is_ tested, but the interface & format might be changing without
+> dependency-cruiser getting a major bump.
+
+Set whether or not caching should be used (default: false), and optionally
+to determine where dependency-cruiser's cache folder location should be.
+
+```javascript
+{
+  // ...
+ "options": {
+    // cache dependency-cruiser results to the default location
+    // (node_modules/.cache/dependency-cruiser)
+    cache: true
+    // ...
+  }
+}
+```
+
+```javascript
+{
+  // ...
+ "options": {
+    // cache dependency-cruiser results to a custom location
+
+    cache: "some-folder/where-you-want-to-store/cache"
+    // ...
+  }
+}
+```
+
+See [`--cache`: use a cache to speed up cruising (experimental)](cli.md#--cache-use-a-cache-to-speed-up-cruising-experimental) for more details.
