@@ -377,6 +377,7 @@
     "totalDependenciesCruised": 19,
     "optionsUsed": {
       "outputTo": "-",
+      "metrics": false,
       "moduleSystems": ["amd", "cjs", "es6"],
       "outputType": "json",
       "combinedDependencies": false,

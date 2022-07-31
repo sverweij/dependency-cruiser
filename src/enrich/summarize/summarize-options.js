@@ -16,6 +16,7 @@ const SHAREABLE_OPTIONS = [
   "includeOnly",
   "knownViolations",
   "maxDepth",
+  "metrics",
   "moduleSystems",
   "outputTo",
   "outputType",
@@ -26,7 +27,6 @@ const SHAREABLE_OPTIONS = [
   "rulesFile",
   "tsPreCompilationDeps",
   "webpackConfig",
-  // "metrics", TODO: should be enabled
   // "progress", TODO: could be enabled
   // "tsConfig", TODO: should be enabled
 ];

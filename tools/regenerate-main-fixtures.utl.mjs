@@ -6,18 +6,22 @@ import main from "../src/main/index.js";
 
 const __dirname = fileURLToPath(new URL(".", import.meta.url));
 const WORKING_DIR = process.cwd();
+const MAIN_FIXTURE_DIR = path.join(
+  __dirname,
+  "..",
+  "test",
+  "main",
+  "__fixtures__"
+);
+const MAIN_MOCKS_DIR = path.join(__dirname, "..", "test", "main", "__mocks__");
 
-function barfTheJSON(pTargetFileName, pResult) {
-  const MAIN_FIXTURE_DIR = path.join(
-    __dirname,
-    "..",
-    "test",
-    "main",
-    "fixtures"
-  );
-
+function barfTheJSON(
+  pTargetFileName,
+  pResult,
+  pTargetDirectory = MAIN_MOCKS_DIR
+) {
   fs.writeFileSync(
-    path.join(MAIN_FIXTURE_DIR, pTargetFileName),
+    path.join(pTargetDirectory, pTargetFileName),
     prettier.format(JSON.stringify(pResult.output), { parser: "json" }),
     {
       encoding: "utf8",
@@ -26,45 +30,52 @@ function barfTheJSON(pTargetFileName, pResult) {
 }
 
 // main.cruise
-barfTheJSON("ts.json", main.cruise(["test/main/fixtures/ts"]));
+barfTheJSON(
+  "ts.json",
+  main.cruise(["test/main/__mocks__/ts"]),
+  MAIN_FIXTURE_DIR
+);
 barfTheJSON(
   "tsx.json",
-  main.cruise(["test/main/fixtures/tsx"], {}, { bustTheCache: true })
+  main.cruise(["test/main/__mocks__/tsx"], {}, { bustTheCache: true }),
+  MAIN_FIXTURE_DIR
 );
 barfTheJSON(
   "jsx.json",
-  main.cruise(["test/main/fixtures/jsx"], {}, { bustTheCache: true })
+  main.cruise(["test/main/__mocks__/jsx"], {}, { bustTheCache: true }),
+  MAIN_FIXTURE_DIR
 );
 barfTheJSON(
   "jsx-as-object.json",
   main.cruise(
-    ["test/main/fixtures/jsx"],
+    ["test/main/__mocks__/jsx"],
     {
       ruleSet: {},
     },
     { bustTheCache: true }
-  )
+  ),
+  MAIN_FIXTURE_DIR
 );
 barfTheJSON(
   "collapse-after-cruise/expected-result.json",
   main.cruise(
-    ["test/main/fixtures/collapse-after-cruise"],
+    ["test/main/__mocks__/collapse-after-cruise"],
     {
       ruleSet: {},
-      collapse: "^test/main/fixtures/collapse-after-cruise/src/[^/]+",
+      collapse: "^test/main/__mocks__/collapse-after-cruise/src/[^/]+",
     },
     { bustTheCache: true }
   )
 );
 
-// main.cruise - tsPreCompilationDeps
+// // main.cruise - tsPreCompilationDeps
 barfTheJSON(
   "ts-precomp-cjs.json",
   main.cruise(
-    ["test/main/fixtures/ts-precompilation-deps-on-cjs"],
+    ["test/main/__mocks__/ts-precompilation-deps-on-cjs"],
     {
       tsConfig: {
-        fileName: "test/main/fixtures/tsconfig.targetcjs.json",
+        fileName: "test/main/__mocks__/tsconfig.targetcjs.json",
       },
       tsPreCompilationDeps: true,
     },
@@ -75,16 +86,17 @@ barfTheJSON(
         module: "commonjs",
       },
     }
-  )
+  ),
+  MAIN_FIXTURE_DIR
 );
 
 barfTheJSON(
   "ts-no-precomp-cjs.json",
   main.cruise(
-    ["test/main/fixtures/ts-precompilation-deps-off-cjs"],
+    ["test/main/__mocks__/ts-precompilation-deps-off-cjs"],
     {
       tsConfig: {
-        fileName: "test/main/fixtures/tsconfig.targetcjs.json",
+        fileName: "test/main/__mocks__/tsconfig.targetcjs.json",
       },
       tsPreCompilationDeps: false,
     },
@@ -95,16 +107,17 @@ barfTheJSON(
         module: "commonjs",
       },
     }
-  )
+  ),
+  MAIN_FIXTURE_DIR
 );
 
 barfTheJSON(
   "ts-precomp-es.json",
   main.cruise(
-    ["test/main/fixtures/ts-precompilation-deps-on-es"],
+    ["test/main/__mocks__/ts-precompilation-deps-on-es"],
     {
       tsConfig: {
-        fileName: "test/main/fixtures/tsconfig.targetes.json",
+        fileName: "test/main/__mocks__/tsconfig.targetes.json",
       },
       tsPreCompilationDeps: true,
     },
@@ -115,16 +128,17 @@ barfTheJSON(
         module: "es6",
       },
     }
-  )
+  ),
+  MAIN_FIXTURE_DIR
 );
 
 barfTheJSON(
   "ts-no-precomp-es.json",
   main.cruise(
-    ["test/main/fixtures/ts-precompilation-deps-off-es"],
+    ["test/main/__mocks__/ts-precompilation-deps-off-es"],
     {
       tsConfig: {
-        fileName: "test/main/fixtures/tsconfig.targetes.json",
+        fileName: "test/main/__mocks__/tsconfig.targetes.json",
       },
       tsPreCompilationDeps: false,
     },
@@ -135,7 +149,8 @@ barfTheJSON(
         module: "es6",
       },
     }
-  )
+  ),
+  MAIN_FIXTURE_DIR
 );
 
 // main.cruise - dynamic imports
@@ -164,21 +179,21 @@ const DYNAMIC_IMPORTS_RULE_SET = {
   validate: true,
 };
 
-process.chdir("test/main/fixtures/dynamic-imports/es");
+process.chdir("test/main/__mocks__/dynamic-imports/es");
 barfTheJSON(
   "dynamic-imports/es/output.json",
   main.cruise(["src"], DYNAMIC_IMPORTS_RULE_SET, { bustTheCache: true })
 );
 process.chdir(WORKING_DIR);
 
-process.chdir("test/main/fixtures/dynamic-imports/typescript");
+process.chdir("test/main/__mocks__/dynamic-imports/typescript");
 barfTheJSON(
   "dynamic-imports/typescript/output.json",
   main.cruise(["src"], DYNAMIC_IMPORTS_RULE_SET, { bustTheCache: true })
 );
 process.chdir(WORKING_DIR);
 
-process.chdir("test/main/fixtures/dynamic-imports/typescript");
+process.chdir("test/main/__mocks__/dynamic-imports/typescript");
 barfTheJSON(
   "dynamic-imports/typescript/output-pre-compilation-deps.json",
   main.cruise(
@@ -190,8 +205,7 @@ barfTheJSON(
 process.chdir(WORKING_DIR);
 
 // main.cruise - type only module references
-
-process.chdir("test/main/fixtures/type-only-module-references");
+process.chdir("test/main/__mocks__/type-only-module-references");
 barfTheJSON(
   "type-only-module-references/output.json",
   main.cruise(
@@ -202,9 +216,48 @@ barfTheJSON(
 );
 process.chdir(WORKING_DIR);
 
-process.chdir("test/main/fixtures/type-only-module-references");
+process.chdir("test/main/__mocks__/type-only-module-references");
 barfTheJSON(
   "type-only-module-references/output-no-ts.json",
   main.cruise(["src"], { tsPreCompilationDeps: false }, { bustTheCache: true })
+);
+process.chdir(WORKING_DIR);
+
+// main. cruise - explicitly type only imports
+process.chdir("test/main/__mocks__/type-only-imports");
+barfTheJSON(
+  "type-only-imports/output.json",
+  main.cruise(
+    ["src"],
+    {
+      tsPreCompilationDeps: true,
+    },
+    { bustTheCache: true, resolveLicenses: false }
+  )
+);
+process.chdir(WORKING_DIR);
+
+process.chdir("test/main/__mocks__/type-only-imports");
+barfTheJSON(
+  "type-only-imports/output-with-rules.json",
+  main.cruise(
+    ["src"],
+    {
+      ruleSet: {
+        forbidden: [
+          {
+            name: "no-type-only",
+            from: {},
+            to: {
+              dependencyTypes: ["type-only"],
+            },
+          },
+        ],
+      },
+      validate: true,
+      tsPreCompilationDeps: true,
+    },
+    { bustTheCache: true, resolveLicenses: false }
+  )
 );
 process.chdir(WORKING_DIR);

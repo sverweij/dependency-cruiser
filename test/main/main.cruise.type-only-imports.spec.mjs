@@ -39,7 +39,7 @@ describe("[E] main.cruise - explicitly type only imports", () => {
     expect(lResult.output).to.be.jsonSchema(cruiseResultSchema);
   });
 
-  it("flags type onlye imports when forbidden", () => {
+  it("flags type only imports when forbidden", () => {
     process.chdir("test/main/__mocks__/type-only-imports");
 
     const lResult = cruise(

@@ -16,12 +16,7 @@
           "matchesDoNotFollow": false,
           "circular": false,
           "valid": false,
-          "rules": [
-            {
-              "name": "no-type-only",
-              "severity": "warn"
-            }
-          ]
+          "rules": [{ "severity": "warn", "name": "no-type-only" }]
         }
       ],
       "dependents": [],
@@ -37,44 +32,40 @@
     }
   ],
   "summary": {
+    "violations": [
+      {
+        "type": "dependency",
+        "from": "src/bla.ts",
+        "to": "src/types.ts",
+        "rule": { "severity": "warn", "name": "no-type-only" }
+      }
+    ],
     "error": 0,
     "warn": 1,
     "info": 0,
     "ignore": 0,
     "totalCruised": 2,
     "totalDependenciesCruised": 1,
-    "violations": [
-      {
-        "type": "dependency",
-        "from": "src/bla.ts",
-        "rule": {
-          "name": "no-type-only",
-          "severity": "warn"
-        },
-        "to": "src/types.ts"
-      }
-    ],
-    "ruleSetUsed": {
-      "forbidden": [
-        {
-          "scope": "module",
-          "from": {},
-          "name": "no-type-only",
-          "severity": "warn",
-          "to": {
-            "dependencyTypes": ["type-only"]
-          }
-        }
-      ]
-    },
     "optionsUsed": {
       "combinedDependencies": false,
+      "exoticRequireStrings": [],
       "externalModuleResolutionStrategy": "node_modules",
+      "metrics": false,
       "moduleSystems": ["es6", "cjs", "tsd", "amd"],
       "preserveSymlinks": false,
       "tsPreCompilationDeps": true,
-      "exoticRequireStrings": [],
       "args": "src"
+    },
+    "ruleSetUsed": {
+      "forbidden": [
+        {
+          "name": "no-type-only",
+          "from": {},
+          "to": { "dependencyTypes": ["type-only"] },
+          "severity": "warn",
+          "scope": "module"
+        }
+      ]
     }
   }
 }

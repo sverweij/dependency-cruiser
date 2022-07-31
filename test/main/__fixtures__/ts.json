@@ -12,9 +12,7 @@
           "coreModule": false,
           "followable": true,
           "couldNotResolve": false,
-          "dependencyTypes": [
-            "local"
-          ],
+          "dependencyTypes": ["local"],
           "matchesDoNotFollow": false,
           "circular": false,
           "valid": true
@@ -28,9 +26,7 @@
           "coreModule": false,
           "followable": true,
           "couldNotResolve": false,
-          "dependencyTypes": [
-            "local"
-          ],
+          "dependencyTypes": ["local"],
           "matchesDoNotFollow": false,
           "circular": false,
           "valid": true
@@ -44,9 +40,7 @@
           "coreModule": false,
           "followable": true,
           "couldNotResolve": false,
-          "dependencyTypes": [
-            "local"
-          ],
+          "dependencyTypes": ["local"],
           "matchesDoNotFollow": false,
           "circular": false,
           "valid": true
@@ -60,9 +54,7 @@
           "coreModule": false,
           "followable": true,
           "couldNotResolve": false,
-          "dependencyTypes": [
-            "local"
-          ],
+          "dependencyTypes": ["local"],
           "matchesDoNotFollow": false,
           "circular": false,
           "valid": true
@@ -76,9 +68,7 @@
           "coreModule": true,
           "followable": false,
           "couldNotResolve": false,
-          "dependencyTypes": [
-            "core"
-          ],
+          "dependencyTypes": ["core"],
           "matchesDoNotFollow": false,
           "circular": false,
           "valid": true
@@ -94,22 +84,16 @@
       "coreModule": true,
       "couldNotResolve": false,
       "matchesDoNotFollow": false,
-      "dependencyTypes": [
-        "core"
-      ],
+      "dependencyTypes": ["core"],
       "dependencies": [],
-      "dependents": [
-        "test/main/__mocks__/ts/index.ts"
-      ],
+      "dependents": ["test/main/__mocks__/ts/index.ts"],
       "orphan": false,
       "valid": true
     },
     {
       "source": "test/main/__mocks__/ts/javascriptThing.js",
       "dependencies": [],
-      "dependents": [
-        "test/main/__mocks__/ts/index.ts"
-      ],
+      "dependents": ["test/main/__mocks__/ts/index.ts"],
       "orphan": false,
       "valid": true
     },
@@ -125,17 +109,13 @@
           "coreModule": false,
           "followable": true,
           "couldNotResolve": false,
-          "dependencyTypes": [
-            "local"
-          ],
+          "dependencyTypes": ["local"],
           "matchesDoNotFollow": false,
           "circular": false,
           "valid": true
         }
       ],
-      "dependents": [
-        "test/main/__mocks__/ts/index.ts"
-      ],
+      "dependents": ["test/main/__mocks__/ts/index.ts"],
       "orphan": false,
       "valid": true
     },
@@ -152,9 +132,7 @@
     {
       "source": "test/main/__mocks__/ts/sub/kaching.ts",
       "dependencies": [],
-      "dependents": [
-        "test/main/__mocks__/ts/index.ts"
-      ],
+      "dependents": ["test/main/__mocks__/ts/index.ts"],
       "orphan": false,
       "valid": true
     }
@@ -169,16 +147,12 @@
     "totalDependenciesCruised": 6,
     "optionsUsed": {
       "combinedDependencies": false,
+      "exoticRequireStrings": [],
       "externalModuleResolutionStrategy": "node_modules",
-      "moduleSystems": [
-        "es6",
-        "cjs",
-        "tsd",
-        "amd"
-      ],
+      "metrics": false,
+      "moduleSystems": ["es6", "cjs", "tsd", "amd"],
       "preserveSymlinks": false,
       "tsPreCompilationDeps": false,
-      "exoticRequireStrings": [],
       "args": "test/main/__mocks__/ts"
     }
   }
