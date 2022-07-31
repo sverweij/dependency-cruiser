@@ -12,17 +12,13 @@
           "coreModule": true,
           "followable": false,
           "couldNotResolve": false,
-          "dependencyTypes": [
-            "core"
-          ],
+          "dependencyTypes": ["core"],
           "matchesDoNotFollow": false,
           "circular": false,
           "valid": true
         }
       ],
-      "dependents": [
-        "test/cli/__fixtures__/cjs/sub/dir.js"
-      ],
+      "dependents": ["test/cli/__fixtures__/cjs/sub/dir.js"],
       "orphan": false,
       "valid": true
     },
@@ -32,9 +28,7 @@
       "coreModule": true,
       "couldNotResolve": false,
       "matchesDoNotFollow": false,
-      "dependencyTypes": [
-        "core"
-      ],
+      "dependencyTypes": ["core"],
       "dependencies": [],
       "dependents": [
         "test/cli/__fixtures__/cjs/sub/depindir.js",
@@ -55,9 +49,7 @@
           "coreModule": false,
           "followable": true,
           "couldNotResolve": false,
-          "dependencyTypes": [
-            "local"
-          ],
+          "dependencyTypes": ["local"],
           "matchesDoNotFollow": false,
           "circular": false,
           "valid": true
@@ -71,9 +63,7 @@
           "coreModule": true,
           "followable": false,
           "couldNotResolve": false,
-          "dependencyTypes": [
-            "core"
-          ],
+          "dependencyTypes": ["core"],
           "matchesDoNotFollow": false,
           "circular": false,
           "valid": true
@@ -102,9 +92,7 @@
           "coreModule": false,
           "followable": false,
           "couldNotResolve": true,
-          "dependencyTypes": [
-            "unknown"
-          ],
+          "dependencyTypes": ["unknown"],
           "matchesDoNotFollow": false,
           "circular": false,
           "valid": true
@@ -118,9 +106,7 @@
           "coreModule": false,
           "followable": false,
           "couldNotResolve": true,
-          "dependencyTypes": [
-            "unknown"
-          ],
+          "dependencyTypes": ["unknown"],
           "matchesDoNotFollow": false,
           "circular": false,
           "valid": true
@@ -136,9 +122,7 @@
       "coreModule": false,
       "couldNotResolve": true,
       "matchesDoNotFollow": false,
-      "dependencyTypes": [
-        "unknown"
-      ],
+      "dependencyTypes": ["unknown"],
       "dependencies": [],
       "dependents": [
         "test/cli/__fixtures__/unresolvable-in-sub/refers-to-an-unresolvable-module.js"
@@ -152,9 +136,7 @@
       "coreModule": false,
       "couldNotResolve": true,
       "matchesDoNotFollow": false,
-      "dependencyTypes": [
-        "unknown"
-      ],
+      "dependencyTypes": ["unknown"],
       "dependencies": [],
       "dependents": [
         "test/cli/__fixtures__/unresolvable-in-sub/refers-to-an-unresolvable-module.js"
@@ -174,12 +156,8 @@
     "optionsUsed": {
       "combinedDependencies": false,
       "externalModuleResolutionStrategy": "node_modules",
-      "moduleSystems": [
-        "es6",
-        "cjs",
-        "tsd",
-        "amd"
-      ],
+      "metrics": false,
+      "moduleSystems": ["es6", "cjs", "tsd", "amd"],
       "outputTo": "test/cli/__output__/multiple-in-one-go.json",
       "outputType": "json",
       "preserveSymlinks": false,

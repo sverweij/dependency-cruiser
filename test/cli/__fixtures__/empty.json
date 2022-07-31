@@ -11,6 +11,7 @@
     "optionsUsed": {
       "args": "whatever",
       "outputTo": "empty.json",
+      "metrics": false,
       "moduleSystems": ["amd", "cjs", "es6"],
       "outputType": "json",
       "tsPreCompilationDeps": false,

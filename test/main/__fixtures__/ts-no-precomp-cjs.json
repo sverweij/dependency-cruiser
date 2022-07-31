@@ -29,29 +29,29 @@
       "source": "test/main/__mocks__/ts-precompilation-deps-off-cjs/index.ts",
       "dependencies": [
         {
+          "module": "./also-used",
+          "moduleSystem": "cjs",
+          "dynamic": false,
+          "exoticallyRequired": false,
           "resolved": "test/main/__mocks__/ts-precompilation-deps-off-cjs/also-used.ts",
           "coreModule": false,
           "followable": true,
           "couldNotResolve": false,
           "dependencyTypes": ["local"],
-          "module": "./also-used",
-          "moduleSystem": "cjs",
-          "dynamic": false,
-          "exoticallyRequired": false,
           "matchesDoNotFollow": false,
           "circular": false,
           "valid": true
         },
         {
+          "module": "./definitely-used",
+          "moduleSystem": "cjs",
+          "dynamic": false,
+          "exoticallyRequired": false,
           "resolved": "test/main/__mocks__/ts-precompilation-deps-off-cjs/definitely-used.ts",
           "coreModule": false,
           "followable": true,
           "couldNotResolve": false,
           "dependencyTypes": ["local"],
-          "module": "./definitely-used",
-          "moduleSystem": "cjs",
-          "dynamic": false,
-          "exoticallyRequired": false,
           "matchesDoNotFollow": false,
           "circular": false,
           "valid": true
@@ -72,11 +72,12 @@
     "totalDependenciesCruised": 2,
     "optionsUsed": {
       "combinedDependencies": false,
+      "exoticRequireStrings": [],
       "externalModuleResolutionStrategy": "node_modules",
+      "metrics": false,
       "moduleSystems": ["es6", "cjs", "tsd", "amd"],
       "preserveSymlinks": false,
       "tsPreCompilationDeps": false,
-      "exoticRequireStrings": [],
       "args": "test/main/__mocks__/ts-precompilation-deps-off-cjs"
     }
   }

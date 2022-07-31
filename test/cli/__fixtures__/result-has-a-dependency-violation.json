@@ -12,9 +12,7 @@
           "coreModule": false,
           "followable": true,
           "couldNotResolve": false,
-          "dependencyTypes": [
-            "local"
-          ],
+          "dependencyTypes": ["local"],
           "matchesDoNotFollow": false,
           "circular": false,
           "instability": 0.8666666666666667,
@@ -29,9 +27,7 @@
           "coreModule": false,
           "followable": true,
           "couldNotResolve": false,
-          "dependencyTypes": [
-            "local"
-          ],
+          "dependencyTypes": ["local"],
           "matchesDoNotFollow": false,
           "circular": false,
           "instability": 0.25,
@@ -46,9 +42,7 @@
           "coreModule": false,
           "followable": true,
           "couldNotResolve": false,
-          "dependencyTypes": [
-            "local"
-          ],
+          "dependencyTypes": ["local"],
           "matchesDoNotFollow": false,
           "circular": false,
           "instability": 0,
@@ -72,9 +66,7 @@
           "coreModule": false,
           "followable": true,
           "couldNotResolve": false,
-          "dependencyTypes": [
-            "local"
-          ],
+          "dependencyTypes": ["local"],
           "matchesDoNotFollow": false,
           "circular": false,
           "instability": 0.6666666666666666,
@@ -89,9 +81,7 @@
           "coreModule": false,
           "followable": true,
           "couldNotResolve": false,
-          "dependencyTypes": [
-            "local"
-          ],
+          "dependencyTypes": ["local"],
           "matchesDoNotFollow": false,
           "circular": false,
           "instability": 0.5,
@@ -106,9 +96,7 @@
           "coreModule": false,
           "followable": true,
           "couldNotResolve": false,
-          "dependencyTypes": [
-            "local"
-          ],
+          "dependencyTypes": ["local"],
           "matchesDoNotFollow": false,
           "circular": false,
           "instability": 0.5,
@@ -123,9 +111,7 @@
           "coreModule": false,
           "followable": true,
           "couldNotResolve": false,
-          "dependencyTypes": [
-            "local"
-          ],
+          "dependencyTypes": ["local"],
           "matchesDoNotFollow": false,
           "circular": false,
           "instability": 0.5,
@@ -140,9 +126,7 @@
           "coreModule": false,
           "followable": true,
           "couldNotResolve": false,
-          "dependencyTypes": [
-            "local"
-          ],
+          "dependencyTypes": ["local"],
           "matchesDoNotFollow": false,
           "circular": false,
           "instability": 0.8,
@@ -157,9 +141,7 @@
           "coreModule": false,
           "followable": true,
           "couldNotResolve": false,
-          "dependencyTypes": [
-            "local"
-          ],
+          "dependencyTypes": ["local"],
           "matchesDoNotFollow": false,
           "circular": false,
           "instability": 0,
@@ -174,9 +156,7 @@
           "coreModule": false,
           "followable": true,
           "couldNotResolve": false,
-          "dependencyTypes": [
-            "local"
-          ],
+          "dependencyTypes": ["local"],
           "matchesDoNotFollow": false,
           "circular": false,
           "instability": 0.5,
@@ -191,9 +171,7 @@
           "coreModule": false,
           "followable": true,
           "couldNotResolve": false,
-          "dependencyTypes": [
-            "local"
-          ],
+          "dependencyTypes": ["local"],
           "matchesDoNotFollow": false,
           "circular": false,
           "instability": 0.875,
@@ -208,9 +186,7 @@
           "coreModule": false,
           "followable": true,
           "couldNotResolve": false,
-          "dependencyTypes": [
-            "local"
-          ],
+          "dependencyTypes": ["local"],
           "matchesDoNotFollow": false,
           "circular": false,
           "instability": 0.5,
@@ -225,9 +201,7 @@
           "coreModule": false,
           "followable": true,
           "couldNotResolve": false,
-          "dependencyTypes": [
-            "local"
-          ],
+          "dependencyTypes": ["local"],
           "matchesDoNotFollow": false,
           "circular": false,
           "instability": 0.6666666666666666,
@@ -242,9 +216,7 @@
           "coreModule": false,
           "followable": true,
           "couldNotResolve": false,
-          "dependencyTypes": [
-            "local"
-          ],
+          "dependencyTypes": ["local"],
           "matchesDoNotFollow": false,
           "circular": false,
           "instability": 0.5,
@@ -259,9 +231,7 @@
           "coreModule": false,
           "followable": true,
           "couldNotResolve": false,
-          "dependencyTypes": [
-            "local"
-          ],
+          "dependencyTypes": ["local"],
           "matchesDoNotFollow": false,
           "circular": false,
           "instability": 0,
@@ -276,19 +246,14 @@
           "coreModule": false,
           "followable": true,
           "couldNotResolve": false,
-          "dependencyTypes": [
-            "local"
-          ],
+          "dependencyTypes": ["local"],
           "matchesDoNotFollow": false,
           "circular": false,
           "instability": 0,
           "valid": true
         }
       ],
-      "dependents": [
-        "bin/depcruise-baseline.js",
-        "bin/dependency-cruise.js"
-      ],
+      "dependents": ["bin/depcruise-baseline.js", "bin/dependency-cruise.js"],
       "orphan": false,
       "reachable": [
         {
@@ -312,9 +277,7 @@
           "coreModule": false,
           "followable": true,
           "couldNotResolve": false,
-          "dependencyTypes": [
-            "local"
-          ],
+          "dependencyTypes": ["local"],
           "matchesDoNotFollow": false,
           "circular": false,
           "instability": 0,
@@ -329,18 +292,14 @@
           "coreModule": false,
           "followable": true,
           "couldNotResolve": false,
-          "dependencyTypes": [
-            "local"
-          ],
+          "dependencyTypes": ["local"],
           "matchesDoNotFollow": false,
           "circular": false,
           "instability": 0,
           "valid": true
         }
       ],
-      "dependents": [
-        "src/cli/index.js"
-      ],
+      "dependents": ["src/cli/index.js"],
       "orphan": false,
       "reachable": [
         {
@@ -419,18 +378,14 @@
           "coreModule": false,
           "followable": true,
           "couldNotResolve": false,
-          "dependencyTypes": [
-            "local"
-          ],
+          "dependencyTypes": ["local"],
           "matchesDoNotFollow": false,
           "circular": false,
           "instability": 0,
           "valid": true
         }
       ],
-      "dependents": [
-        "src/cli/index.js"
-      ],
+      "dependents": ["src/cli/index.js"],
       "orphan": false,
       "reachable": [
         {
@@ -454,18 +409,14 @@
           "coreModule": false,
           "followable": true,
           "couldNotResolve": false,
-          "dependencyTypes": [
-            "local"
-          ],
+          "dependencyTypes": ["local"],
           "matchesDoNotFollow": false,
           "circular": false,
           "instability": 0,
           "valid": true
         }
       ],
-      "dependents": [
-        "src/cli/index.js"
-      ],
+      "dependents": ["src/cli/index.js"],
       "orphan": false,
       "reachable": [
         {
@@ -489,18 +440,14 @@
           "coreModule": false,
           "followable": true,
           "couldNotResolve": false,
-          "dependencyTypes": [
-            "local"
-          ],
+          "dependencyTypes": ["local"],
           "matchesDoNotFollow": false,
           "circular": false,
           "instability": 0,
           "valid": true
         }
       ],
-      "dependents": [
-        "src/cli/index.js"
-      ],
+      "dependents": ["src/cli/index.js"],
       "orphan": false,
       "reachable": [
         {
@@ -524,9 +471,7 @@
           "coreModule": false,
           "followable": true,
           "couldNotResolve": false,
-          "dependencyTypes": [
-            "local"
-          ],
+          "dependencyTypes": ["local"],
           "matchesDoNotFollow": false,
           "circular": false,
           "instability": 0.8,
@@ -541,9 +486,7 @@
           "coreModule": false,
           "followable": true,
           "couldNotResolve": false,
-          "dependencyTypes": [
-            "local"
-          ],
+          "dependencyTypes": ["local"],
           "matchesDoNotFollow": false,
           "circular": false,
           "instability": 0.8333333333333334,
@@ -558,9 +501,7 @@
           "coreModule": false,
           "followable": true,
           "couldNotResolve": false,
-          "dependencyTypes": [
-            "local"
-          ],
+          "dependencyTypes": ["local"],
           "matchesDoNotFollow": false,
           "circular": false,
           "instability": 0.6923076923076923,
@@ -575,9 +516,7 @@
           "coreModule": false,
           "followable": true,
           "couldNotResolve": false,
-          "dependencyTypes": [
-            "local"
-          ],
+          "dependencyTypes": ["local"],
           "matchesDoNotFollow": false,
           "circular": false,
           "instability": 0,
@@ -592,9 +531,7 @@
           "coreModule": false,
           "followable": true,
           "couldNotResolve": false,
-          "dependencyTypes": [
-            "local"
-          ],
+          "dependencyTypes": ["local"],
           "matchesDoNotFollow": false,
           "circular": false,
           "instability": 0,
@@ -609,9 +546,7 @@
           "coreModule": false,
           "followable": true,
           "couldNotResolve": false,
-          "dependencyTypes": [
-            "local"
-          ],
+          "dependencyTypes": ["local"],
           "matchesDoNotFollow": false,
           "circular": false,
           "instability": 0,
@@ -626,9 +561,7 @@
           "coreModule": false,
           "followable": true,
           "couldNotResolve": false,
-          "dependencyTypes": [
-            "local"
-          ],
+          "dependencyTypes": ["local"],
           "matchesDoNotFollow": false,
           "circular": false,
           "instability": 0.6666666666666666,
@@ -643,9 +576,7 @@
           "coreModule": false,
           "followable": true,
           "couldNotResolve": false,
-          "dependencyTypes": [
-            "local"
-          ],
+          "dependencyTypes": ["local"],
           "matchesDoNotFollow": false,
           "circular": false,
           "instability": 0.3333333333333333,
@@ -660,9 +591,7 @@
           "coreModule": false,
           "followable": true,
           "couldNotResolve": false,
-          "dependencyTypes": [
-            "local"
-          ],
+          "dependencyTypes": ["local"],
           "matchesDoNotFollow": false,
           "circular": false,
           "instability": 0.8571428571428571,
@@ -677,9 +606,7 @@
           "coreModule": false,
           "followable": true,
           "couldNotResolve": false,
-          "dependencyTypes": [
-            "local"
-          ],
+          "dependencyTypes": ["local"],
           "matchesDoNotFollow": false,
           "circular": false,
           "instability": 0.5,
@@ -694,9 +621,7 @@
           "coreModule": false,
           "followable": true,
           "couldNotResolve": false,
-          "dependencyTypes": [
-            "local"
-          ],
+          "dependencyTypes": ["local"],
           "matchesDoNotFollow": false,
           "circular": false,
           "instability": 0.5,
@@ -711,9 +636,7 @@
           "coreModule": false,
           "followable": true,
           "couldNotResolve": false,
-          "dependencyTypes": [
-            "local"
-          ],
+          "dependencyTypes": ["local"],
           "matchesDoNotFollow": false,
           "circular": false,
           "instability": 0.6666666666666666,
@@ -748,9 +671,7 @@
           "coreModule": false,
           "followable": true,
           "couldNotResolve": false,
-          "dependencyTypes": [
-            "local"
-          ],
+          "dependencyTypes": ["local"],
           "matchesDoNotFollow": false,
           "circular": false,
           "instability": 0.5,
@@ -765,9 +686,7 @@
           "coreModule": false,
           "followable": true,
           "couldNotResolve": false,
-          "dependencyTypes": [
-            "local"
-          ],
+          "dependencyTypes": ["local"],
           "matchesDoNotFollow": false,
           "circular": false,
           "instability": 0.6666666666666666,
@@ -782,9 +701,7 @@
           "coreModule": false,
           "followable": true,
           "couldNotResolve": false,
-          "dependencyTypes": [
-            "local"
-          ],
+          "dependencyTypes": ["local"],
           "matchesDoNotFollow": false,
           "circular": false,
           "instability": 0.9166666666666666,
@@ -799,18 +716,14 @@
           "coreModule": false,
           "followable": true,
           "couldNotResolve": false,
-          "dependencyTypes": [
-            "local"
-          ],
+          "dependencyTypes": ["local"],
           "matchesDoNotFollow": false,
           "circular": false,
           "instability": 0.75,
           "valid": true
         }
       ],
-      "dependents": [
-        "src/main/index.js"
-      ],
+      "dependents": ["src/main/index.js"],
       "orphan": false,
       "reachable": [
         {
@@ -834,18 +747,14 @@
           "coreModule": false,
           "followable": true,
           "couldNotResolve": false,
-          "dependencyTypes": [
-            "local"
-          ],
+          "dependencyTypes": ["local"],
           "matchesDoNotFollow": false,
           "circular": false,
           "instability": 0,
           "valid": true
         }
       ],
-      "dependents": [
-        "src/enrich/index.js"
-      ],
+      "dependents": ["src/enrich/index.js"],
       "orphan": false,
       "reachable": [
         {
@@ -903,9 +812,7 @@
           "coreModule": false,
           "followable": true,
           "couldNotResolve": false,
-          "dependencyTypes": [
-            "local"
-          ],
+          "dependencyTypes": ["local"],
           "matchesDoNotFollow": false,
           "circular": false,
           "instability": 0.6666666666666666,
@@ -920,18 +827,14 @@
           "coreModule": false,
           "followable": true,
           "couldNotResolve": false,
-          "dependencyTypes": [
-            "local"
-          ],
+          "dependencyTypes": ["local"],
           "matchesDoNotFollow": false,
           "circular": false,
           "instability": 0.75,
           "valid": true
         }
       ],
-      "dependents": [
-        "src/enrich/index.js"
-      ],
+      "dependents": ["src/enrich/index.js"],
       "orphan": false,
       "reachable": [
         {
@@ -960,9 +863,7 @@
           "coreModule": false,
           "followable": true,
           "couldNotResolve": false,
-          "dependencyTypes": [
-            "local"
-          ],
+          "dependencyTypes": ["local"],
           "matchesDoNotFollow": false,
           "circular": false,
           "instability": 0.75,
@@ -977,9 +878,7 @@
           "coreModule": false,
           "followable": true,
           "couldNotResolve": false,
-          "dependencyTypes": [
-            "local"
-          ],
+          "dependencyTypes": ["local"],
           "matchesDoNotFollow": false,
           "circular": false,
           "instability": 0.75,
@@ -994,9 +893,7 @@
           "coreModule": false,
           "followable": true,
           "couldNotResolve": false,
-          "dependencyTypes": [
-            "local"
-          ],
+          "dependencyTypes": ["local"],
           "matchesDoNotFollow": false,
           "circular": false,
           "instability": 0.75,
@@ -1011,9 +908,7 @@
           "coreModule": false,
           "followable": true,
           "couldNotResolve": false,
-          "dependencyTypes": [
-            "local"
-          ],
+          "dependencyTypes": ["local"],
           "matchesDoNotFollow": false,
           "circular": false,
           "instability": 0.6666666666666666,
@@ -1047,9 +942,7 @@
           "coreModule": false,
           "followable": true,
           "couldNotResolve": false,
-          "dependencyTypes": [
-            "local"
-          ],
+          "dependencyTypes": ["local"],
           "matchesDoNotFollow": false,
           "circular": false,
           "instability": 0,
@@ -1064,9 +957,7 @@
           "coreModule": false,
           "followable": true,
           "couldNotResolve": false,
-          "dependencyTypes": [
-            "local"
-          ],
+          "dependencyTypes": ["local"],
           "matchesDoNotFollow": false,
           "circular": false,
           "instability": 0.2857142857142857,
@@ -1081,18 +972,14 @@
           "coreModule": false,
           "followable": true,
           "couldNotResolve": false,
-          "dependencyTypes": [
-            "local"
-          ],
+          "dependencyTypes": ["local"],
           "matchesDoNotFollow": false,
           "circular": false,
           "instability": 0,
           "valid": true
         }
       ],
-      "dependents": [
-        "src/validate/index.js"
-      ],
+      "dependents": ["src/validate/index.js"],
       "orphan": false,
       "reachable": [
         {
@@ -1143,9 +1030,7 @@
           "coreModule": false,
           "followable": true,
           "couldNotResolve": false,
-          "dependencyTypes": [
-            "local"
-          ],
+          "dependencyTypes": ["local"],
           "matchesDoNotFollow": false,
           "circular": false,
           "instability": 0,
@@ -1160,9 +1045,7 @@
           "coreModule": false,
           "followable": true,
           "couldNotResolve": false,
-          "dependencyTypes": [
-            "local"
-          ],
+          "dependencyTypes": ["local"],
           "matchesDoNotFollow": false,
           "circular": false,
           "instability": 0,
@@ -1252,9 +1135,7 @@
           "coreModule": false,
           "followable": true,
           "couldNotResolve": false,
-          "dependencyTypes": [
-            "local"
-          ],
+          "dependencyTypes": ["local"],
           "matchesDoNotFollow": false,
           "circular": false,
           "instability": 0,
@@ -1269,9 +1150,7 @@
           "coreModule": false,
           "followable": true,
           "couldNotResolve": false,
-          "dependencyTypes": [
-            "local"
-          ],
+          "dependencyTypes": ["local"],
           "matchesDoNotFollow": false,
           "circular": false,
           "instability": 0.2857142857142857,
@@ -1286,18 +1165,14 @@
           "coreModule": false,
           "followable": true,
           "couldNotResolve": false,
-          "dependencyTypes": [
-            "local"
-          ],
+          "dependencyTypes": ["local"],
           "matchesDoNotFollow": false,
           "circular": false,
           "instability": 0,
           "valid": true
         }
       ],
-      "dependents": [
-        "src/validate/index.js"
-      ],
+      "dependents": ["src/validate/index.js"],
       "orphan": false,
       "reachable": [
         {
@@ -1326,9 +1201,7 @@
           "coreModule": false,
           "followable": true,
           "couldNotResolve": false,
-          "dependencyTypes": [
-            "local"
-          ],
+          "dependencyTypes": ["local"],
           "matchesDoNotFollow": false,
           "circular": false,
           "instability": 0,
@@ -1343,9 +1216,7 @@
           "coreModule": false,
           "followable": true,
           "couldNotResolve": false,
-          "dependencyTypes": [
-            "local"
-          ],
+          "dependencyTypes": ["local"],
           "matchesDoNotFollow": false,
           "circular": false,
           "instability": 0.2857142857142857,
@@ -1360,18 +1231,14 @@
           "coreModule": false,
           "followable": true,
           "couldNotResolve": false,
-          "dependencyTypes": [
-            "local"
-          ],
+          "dependencyTypes": ["local"],
           "matchesDoNotFollow": false,
           "circular": false,
           "instability": 0,
           "valid": true
         }
       ],
-      "dependents": [
-        "src/validate/index.js"
-      ],
+      "dependents": ["src/validate/index.js"],
       "orphan": false,
       "reachable": [
         {
@@ -1400,9 +1267,7 @@
           "coreModule": false,
           "followable": true,
           "couldNotResolve": false,
-          "dependencyTypes": [
-            "local"
-          ],
+          "dependencyTypes": ["local"],
           "matchesDoNotFollow": false,
           "circular": false,
           "instability": 0,
@@ -1417,18 +1282,14 @@
           "coreModule": false,
           "followable": true,
           "couldNotResolve": false,
-          "dependencyTypes": [
-            "local"
-          ],
+          "dependencyTypes": ["local"],
           "matchesDoNotFollow": false,
           "circular": false,
           "instability": 0.2857142857142857,
           "valid": true
         }
       ],
-      "dependents": [
-        "src/validate/index.js"
-      ],
+      "dependents": ["src/validate/index.js"],
       "orphan": false,
       "reachable": [
         {
@@ -1457,9 +1318,7 @@
           "coreModule": false,
           "followable": true,
           "couldNotResolve": false,
-          "dependencyTypes": [
-            "local"
-          ],
+          "dependencyTypes": ["local"],
           "matchesDoNotFollow": false,
           "circular": false,
           "instability": 0.3333333333333333,
@@ -1474,9 +1333,7 @@
           "coreModule": false,
           "followable": true,
           "couldNotResolve": false,
-          "dependencyTypes": [
-            "local"
-          ],
+          "dependencyTypes": ["local"],
           "matchesDoNotFollow": false,
           "circular": false,
           "instability": 0,
@@ -1491,18 +1348,14 @@
           "coreModule": false,
           "followable": true,
           "couldNotResolve": false,
-          "dependencyTypes": [
-            "local"
-          ],
+          "dependencyTypes": ["local"],
           "matchesDoNotFollow": false,
           "circular": false,
           "instability": 0,
           "valid": true
         }
       ],
-      "dependents": [
-        "src/enrich/derive/folders/index.js"
-      ],
+      "dependents": ["src/enrich/derive/folders/index.js"],
       "orphan": false,
       "reachable": [
         {
@@ -1531,9 +1384,7 @@
           "coreModule": false,
           "followable": true,
           "couldNotResolve": false,
-          "dependencyTypes": [
-            "local"
-          ],
+          "dependencyTypes": ["local"],
           "matchesDoNotFollow": false,
           "circular": false,
           "instability": 0,
@@ -1563,9 +1414,7 @@
     {
       "source": "src/enrich/derive/circular/get-cycle.js",
       "dependencies": [],
-      "dependents": [
-        "src/enrich/derive/circular/index.js"
-      ],
+      "dependents": ["src/enrich/derive/circular/index.js"],
       "orphan": false,
       "reachable": [
         {
@@ -1585,9 +1434,7 @@
     {
       "source": "src/enrich/derive/folders/utl.js",
       "dependencies": [],
-      "dependents": [
-        "src/enrich/derive/folders/aggregate-to-folders.js"
-      ],
+      "dependents": ["src/enrich/derive/folders/aggregate-to-folders.js"],
       "orphan": false,
       "reachable": [
         {
@@ -1616,9 +1463,7 @@
           "coreModule": false,
           "followable": true,
           "couldNotResolve": false,
-          "dependencyTypes": [
-            "local"
-          ],
+          "dependencyTypes": ["local"],
           "matchesDoNotFollow": false,
           "circular": false,
           "instability": 0.5,
@@ -1633,9 +1478,7 @@
           "coreModule": false,
           "followable": true,
           "couldNotResolve": false,
-          "dependencyTypes": [
-            "local"
-          ],
+          "dependencyTypes": ["local"],
           "matchesDoNotFollow": false,
           "circular": false,
           "instability": 0,
@@ -1650,9 +1493,7 @@
           "coreModule": false,
           "followable": true,
           "couldNotResolve": false,
-          "dependencyTypes": [
-            "local"
-          ],
+          "dependencyTypes": ["local"],
           "matchesDoNotFollow": false,
           "circular": false,
           "instability": 0,
@@ -1667,9 +1508,7 @@
           "coreModule": false,
           "followable": true,
           "couldNotResolve": false,
-          "dependencyTypes": [
-            "local"
-          ],
+          "dependencyTypes": ["local"],
           "matchesDoNotFollow": false,
           "circular": false,
           "instability": 0.5,
@@ -1684,9 +1523,7 @@
           "coreModule": false,
           "followable": true,
           "couldNotResolve": false,
-          "dependencyTypes": [
-            "local"
-          ],
+          "dependencyTypes": ["local"],
           "matchesDoNotFollow": false,
           "circular": false,
           "instability": 0.3333333333333333,
@@ -1701,9 +1538,7 @@
           "coreModule": false,
           "followable": true,
           "couldNotResolve": false,
-          "dependencyTypes": [
-            "local"
-          ],
+          "dependencyTypes": ["local"],
           "matchesDoNotFollow": false,
           "circular": false,
           "instability": 0.5,
@@ -1718,9 +1553,7 @@
           "coreModule": false,
           "followable": true,
           "couldNotResolve": false,
-          "dependencyTypes": [
-            "local"
-          ],
+          "dependencyTypes": ["local"],
           "matchesDoNotFollow": false,
           "circular": false,
           "instability": 0.6666666666666666,
@@ -1735,9 +1568,7 @@
           "coreModule": false,
           "followable": true,
           "couldNotResolve": false,
-          "dependencyTypes": [
-            "local"
-          ],
+          "dependencyTypes": ["local"],
           "matchesDoNotFollow": false,
           "circular": false,
           "instability": 0,
@@ -1752,9 +1583,7 @@
           "coreModule": false,
           "followable": true,
           "couldNotResolve": false,
-          "dependencyTypes": [
-            "local"
-          ],
+          "dependencyTypes": ["local"],
           "matchesDoNotFollow": false,
           "circular": false,
           "instability": 0.5,
@@ -1769,9 +1598,7 @@
           "coreModule": false,
           "followable": true,
           "couldNotResolve": false,
-          "dependencyTypes": [
-            "local"
-          ],
+          "dependencyTypes": ["local"],
           "matchesDoNotFollow": false,
           "circular": false,
           "instability": 0.75,
@@ -1786,18 +1613,14 @@
           "coreModule": false,
           "followable": true,
           "couldNotResolve": false,
-          "dependencyTypes": [
-            "local"
-          ],
+          "dependencyTypes": ["local"],
           "matchesDoNotFollow": false,
           "circular": false,
           "instability": 0.75,
           "valid": true
         }
       ],
-      "dependents": [
-        "src/enrich/index.js"
-      ],
+      "dependents": ["src/enrich/index.js"],
       "orphan": false,
       "reachable": [
         {
@@ -1826,9 +1649,7 @@
           "coreModule": false,
           "followable": true,
           "couldNotResolve": false,
-          "dependencyTypes": [
-            "local"
-          ],
+          "dependencyTypes": ["local"],
           "matchesDoNotFollow": false,
           "circular": false,
           "instability": 0,
@@ -1843,9 +1664,7 @@
           "coreModule": false,
           "followable": true,
           "couldNotResolve": false,
-          "dependencyTypes": [
-            "local"
-          ],
+          "dependencyTypes": ["local"],
           "matchesDoNotFollow": false,
           "circular": false,
           "instability": 0,
@@ -1958,18 +1777,14 @@
           "coreModule": false,
           "followable": true,
           "couldNotResolve": false,
-          "dependencyTypes": [
-            "local"
-          ],
+          "dependencyTypes": ["local"],
           "matchesDoNotFollow": false,
           "circular": false,
           "instability": 0.6666666666666666,
           "valid": true
         }
       ],
-      "dependents": [
-        "src/enrich/enrich-modules.js"
-      ],
+      "dependents": ["src/enrich/enrich-modules.js"],
       "orphan": false,
       "reachable": [
         {
@@ -1998,18 +1813,14 @@
           "coreModule": false,
           "followable": true,
           "couldNotResolve": false,
-          "dependencyTypes": [
-            "local"
-          ],
+          "dependencyTypes": ["local"],
           "matchesDoNotFollow": false,
           "circular": false,
           "instability": 0.5,
           "valid": true
         }
       ],
-      "dependents": [
-        "src/enrich/enrich-modules.js"
-      ],
+      "dependents": ["src/enrich/enrich-modules.js"],
       "orphan": false,
       "reachable": [
         {
@@ -2038,18 +1849,14 @@
           "coreModule": false,
           "followable": true,
           "couldNotResolve": false,
-          "dependencyTypes": [
-            "local"
-          ],
+          "dependencyTypes": ["local"],
           "matchesDoNotFollow": false,
           "circular": false,
           "instability": 0,
           "valid": true
         }
       ],
-      "dependents": [
-        "src/enrich/derive/dependents/index.js"
-      ],
+      "dependents": ["src/enrich/derive/dependents/index.js"],
       "orphan": false,
       "reachable": [
         {
@@ -2078,9 +1885,7 @@
           "coreModule": false,
           "followable": true,
           "couldNotResolve": false,
-          "dependencyTypes": [
-            "local"
-          ],
+          "dependencyTypes": ["local"],
           "matchesDoNotFollow": false,
           "circular": false,
           "instability": 0,
@@ -2095,18 +1900,14 @@
           "coreModule": false,
           "followable": true,
           "couldNotResolve": false,
-          "dependencyTypes": [
-            "local"
-          ],
+          "dependencyTypes": ["local"],
           "matchesDoNotFollow": false,
           "circular": false,
           "instability": 0.5,
           "valid": true
         }
       ],
-      "dependents": [
-        "src/enrich/enrich-modules.js"
-      ],
+      "dependents": ["src/enrich/enrich-modules.js"],
       "orphan": false,
       "reachable": [
         {
@@ -2135,18 +1936,14 @@
           "coreModule": false,
           "followable": true,
           "couldNotResolve": false,
-          "dependencyTypes": [
-            "local"
-          ],
+          "dependencyTypes": ["local"],
           "matchesDoNotFollow": false,
           "circular": false,
           "instability": 0,
           "valid": true
         }
       ],
-      "dependents": [
-        "src/enrich/derive/metrics/index.js"
-      ],
+      "dependents": ["src/enrich/derive/metrics/index.js"],
       "orphan": false,
       "reachable": [
         {
@@ -2175,18 +1972,14 @@
           "coreModule": false,
           "followable": true,
           "couldNotResolve": false,
-          "dependencyTypes": [
-            "local"
-          ],
+          "dependencyTypes": ["local"],
           "matchesDoNotFollow": false,
           "circular": false,
           "instability": 0.5,
           "valid": true
         }
       ],
-      "dependents": [
-        "src/enrich/enrich-modules.js"
-      ],
+      "dependents": ["src/enrich/enrich-modules.js"],
       "orphan": false,
       "reachable": [
         {
@@ -2215,18 +2008,14 @@
           "coreModule": false,
           "followable": true,
           "couldNotResolve": false,
-          "dependencyTypes": [
-            "local"
-          ],
+          "dependencyTypes": ["local"],
           "matchesDoNotFollow": false,
           "circular": false,
           "instability": 0,
           "valid": true
         }
       ],
-      "dependents": [
-        "src/enrich/derive/orphan/index.js"
-      ],
+      "dependents": ["src/enrich/derive/orphan/index.js"],
       "orphan": false,
       "reachable": [
         {
@@ -2255,9 +2044,7 @@
           "coreModule": false,
           "followable": true,
           "couldNotResolve": false,
-          "dependencyTypes": [
-            "local"
-          ],
+          "dependencyTypes": ["local"],
           "matchesDoNotFollow": false,
           "circular": false,
           "instability": 0,
@@ -2272,9 +2059,7 @@
           "coreModule": false,
           "followable": true,
           "couldNotResolve": false,
-          "dependencyTypes": [
-            "local"
-          ],
+          "dependencyTypes": ["local"],
           "matchesDoNotFollow": false,
           "circular": false,
           "instability": 0.2857142857142857,
@@ -2289,18 +2074,14 @@
           "coreModule": false,
           "followable": true,
           "couldNotResolve": false,
-          "dependencyTypes": [
-            "local"
-          ],
+          "dependencyTypes": ["local"],
           "matchesDoNotFollow": false,
           "circular": false,
           "instability": 0.5,
           "valid": true
         }
       ],
-      "dependents": [
-        "src/enrich/enrich-modules.js"
-      ],
+      "dependents": ["src/enrich/enrich-modules.js"],
       "orphan": false,
       "reachable": [
         {
@@ -2329,18 +2110,14 @@
           "coreModule": false,
           "followable": true,
           "couldNotResolve": false,
-          "dependencyTypes": [
-            "local"
-          ],
+          "dependencyTypes": ["local"],
           "matchesDoNotFollow": false,
           "circular": false,
           "instability": 0,
           "valid": true
         }
       ],
-      "dependents": [
-        "src/enrich/derive/reachable/index.js"
-      ],
+      "dependents": ["src/enrich/derive/reachable/index.js"],
       "orphan": false,
       "reachable": [
         {
@@ -2369,9 +2146,7 @@
           "coreModule": false,
           "followable": true,
           "couldNotResolve": false,
-          "dependencyTypes": [
-            "local"
-          ],
+          "dependencyTypes": ["local"],
           "matchesDoNotFollow": false,
           "circular": false,
           "instability": 0,
@@ -2386,9 +2161,7 @@
           "coreModule": false,
           "followable": true,
           "couldNotResolve": false,
-          "dependencyTypes": [
-            "local"
-          ],
+          "dependencyTypes": ["local"],
           "matchesDoNotFollow": false,
           "circular": false,
           "instability": 0,
@@ -2403,18 +2176,14 @@
           "coreModule": false,
           "followable": true,
           "couldNotResolve": false,
-          "dependencyTypes": [
-            "local"
-          ],
+          "dependencyTypes": ["local"],
           "matchesDoNotFollow": false,
           "circular": false,
           "instability": 0,
           "valid": true
         }
       ],
-      "dependents": [
-        "src/enrich/enrich-modules.js"
-      ],
+      "dependents": ["src/enrich/enrich-modules.js"],
       "orphan": false,
       "reachable": [
         {
@@ -2466,9 +2235,7 @@
           "coreModule": false,
           "followable": true,
           "couldNotResolve": false,
-          "dependencyTypes": [
-            "local"
-          ],
+          "dependencyTypes": ["local"],
           "matchesDoNotFollow": false,
           "circular": false,
           "instability": 0,
@@ -2483,9 +2250,7 @@
           "coreModule": false,
           "followable": true,
           "couldNotResolve": false,
-          "dependencyTypes": [
-            "local"
-          ],
+          "dependencyTypes": ["local"],
           "matchesDoNotFollow": false,
           "circular": false,
           "instability": 0,
@@ -2500,9 +2265,7 @@
           "coreModule": false,
           "followable": true,
           "couldNotResolve": false,
-          "dependencyTypes": [
-            "local"
-          ],
+          "dependencyTypes": ["local"],
           "matchesDoNotFollow": false,
           "circular": false,
           "instability": 0,
@@ -2517,9 +2280,7 @@
           "coreModule": false,
           "followable": true,
           "couldNotResolve": false,
-          "dependencyTypes": [
-            "local"
-          ],
+          "dependencyTypes": ["local"],
           "matchesDoNotFollow": false,
           "circular": false,
           "instability": 0.5,
@@ -2534,9 +2295,7 @@
           "coreModule": false,
           "followable": true,
           "couldNotResolve": false,
-          "dependencyTypes": [
-            "local"
-          ],
+          "dependencyTypes": ["local"],
           "matchesDoNotFollow": false,
           "circular": false,
           "instability": 0.75,
@@ -2551,19 +2310,14 @@
           "coreModule": false,
           "followable": true,
           "couldNotResolve": false,
-          "dependencyTypes": [
-            "local"
-          ],
+          "dependencyTypes": ["local"],
           "matchesDoNotFollow": false,
           "circular": false,
           "instability": 0,
           "valid": true
         }
       ],
-      "dependents": [
-        "src/enrich/index.js",
-        "src/main/report-wrap.js"
-      ],
+      "dependents": ["src/enrich/index.js", "src/main/report-wrap.js"],
       "orphan": false,
       "reachable": [
         {
@@ -2607,9 +2361,7 @@
     {
       "source": "src/enrich/summarize/add-rule-set-used.js",
       "dependencies": [],
-      "dependents": [
-        "src/enrich/summarize/index.js"
-      ],
+      "dependents": ["src/enrich/summarize/index.js"],
       "orphan": false,
       "reachable": [
         {
@@ -2629,9 +2381,7 @@
     {
       "source": "src/enrich/summarize/get-stats.js",
       "dependencies": [],
-      "dependents": [
-        "src/enrich/summarize/index.js"
-      ],
+      "dependents": ["src/enrich/summarize/index.js"],
       "orphan": false,
       "reachable": [
         {
@@ -2660,18 +2410,14 @@
           "coreModule": false,
           "followable": true,
           "couldNotResolve": false,
-          "dependencyTypes": [
-            "local"
-          ],
+          "dependencyTypes": ["local"],
           "matchesDoNotFollow": false,
           "circular": false,
           "instability": 0,
           "valid": true
         }
       ],
-      "dependents": [
-        "src/enrich/summarize/index.js"
-      ],
+      "dependents": ["src/enrich/summarize/index.js"],
       "orphan": false,
       "reachable": [
         {
@@ -2720,9 +2466,7 @@
           "coreModule": false,
           "followable": true,
           "couldNotResolve": false,
-          "dependencyTypes": [
-            "local"
-          ],
+          "dependencyTypes": ["local"],
           "matchesDoNotFollow": false,
           "circular": false,
           "instability": 0,
@@ -2737,9 +2481,7 @@
           "coreModule": false,
           "followable": true,
           "couldNotResolve": false,
-          "dependencyTypes": [
-            "local"
-          ],
+          "dependencyTypes": ["local"],
           "matchesDoNotFollow": false,
           "circular": false,
           "instability": 0,
@@ -2754,18 +2496,14 @@
           "coreModule": false,
           "followable": true,
           "couldNotResolve": false,
-          "dependencyTypes": [
-            "local"
-          ],
+          "dependencyTypes": ["local"],
           "matchesDoNotFollow": false,
           "circular": false,
           "instability": 0,
           "valid": true
         }
       ],
-      "dependents": [
-        "src/enrich/summarize/index.js"
-      ],
+      "dependents": ["src/enrich/summarize/index.js"],
       "orphan": false,
       "reachable": [
         {
@@ -2785,9 +2523,7 @@
     {
       "source": "src/enrich/summarize/summarize-options.js",
       "dependencies": [],
-      "dependents": [
-        "src/enrich/summarize/index.js"
-      ],
+      "dependents": ["src/enrich/summarize/index.js"],
       "orphan": false,
       "reachable": [
         {
@@ -2816,9 +2552,7 @@
           "coreModule": false,
           "followable": true,
           "couldNotResolve": false,
-          "dependencyTypes": [
-            "local"
-          ],
+          "dependencyTypes": ["local"],
           "matchesDoNotFollow": false,
           "circular": false,
           "instability": 0,
@@ -2833,9 +2567,7 @@
           "coreModule": false,
           "followable": true,
           "couldNotResolve": false,
-          "dependencyTypes": [
-            "local"
-          ],
+          "dependencyTypes": ["local"],
           "matchesDoNotFollow": false,
           "circular": false,
           "instability": 0,
@@ -2850,9 +2582,7 @@
           "coreModule": false,
           "followable": true,
           "couldNotResolve": false,
-          "dependencyTypes": [
-            "local"
-          ],
+          "dependencyTypes": ["local"],
           "matchesDoNotFollow": false,
           "circular": false,
           "instability": 0.875,
@@ -2867,9 +2597,7 @@
           "coreModule": false,
           "followable": true,
           "couldNotResolve": false,
-          "dependencyTypes": [
-            "local"
-          ],
+          "dependencyTypes": ["local"],
           "matchesDoNotFollow": false,
           "circular": false,
           "instability": 0.8,
@@ -2884,18 +2612,14 @@
           "coreModule": false,
           "followable": true,
           "couldNotResolve": false,
-          "dependencyTypes": [
-            "local"
-          ],
+          "dependencyTypes": ["local"],
           "matchesDoNotFollow": false,
           "circular": false,
           "instability": 0.9230769230769231,
           "valid": true
         }
       ],
-      "dependents": [
-        "src/main/index.js"
-      ],
+      "dependents": ["src/main/index.js"],
       "orphan": false,
       "reachable": [
         {
@@ -2919,9 +2643,7 @@
           "coreModule": false,
           "followable": true,
           "couldNotResolve": false,
-          "dependencyTypes": [
-            "local"
-          ],
+          "dependencyTypes": ["local"],
           "matchesDoNotFollow": false,
           "circular": false,
           "instability": 0.5,
@@ -2936,9 +2658,7 @@
           "coreModule": false,
           "followable": true,
           "couldNotResolve": false,
-          "dependencyTypes": [
-            "local"
-          ],
+          "dependencyTypes": ["local"],
           "matchesDoNotFollow": false,
           "circular": false,
           "instability": 0.25,
@@ -2953,9 +2673,7 @@
           "coreModule": false,
           "followable": true,
           "couldNotResolve": false,
-          "dependencyTypes": [
-            "local"
-          ],
+          "dependencyTypes": ["local"],
           "matchesDoNotFollow": false,
           "circular": false,
           "instability": 0.6,
@@ -2970,9 +2688,7 @@
           "coreModule": false,
           "followable": true,
           "couldNotResolve": false,
-          "dependencyTypes": [
-            "local"
-          ],
+          "dependencyTypes": ["local"],
           "matchesDoNotFollow": false,
           "circular": false,
           "instability": 0.4,
@@ -2987,9 +2703,7 @@
           "coreModule": false,
           "followable": true,
           "couldNotResolve": false,
-          "dependencyTypes": [
-            "local"
-          ],
+          "dependencyTypes": ["local"],
           "matchesDoNotFollow": false,
           "circular": false,
           "instability": 0.3333333333333333,
@@ -3004,9 +2718,7 @@
           "coreModule": false,
           "followable": true,
           "couldNotResolve": false,
-          "dependencyTypes": [
-            "local"
-          ],
+          "dependencyTypes": ["local"],
           "matchesDoNotFollow": false,
           "circular": false,
           "instability": 0.3333333333333333,
@@ -3021,18 +2733,14 @@
           "coreModule": false,
           "followable": true,
           "couldNotResolve": false,
-          "dependencyTypes": [
-            "local"
-          ],
+          "dependencyTypes": ["local"],
           "matchesDoNotFollow": false,
           "circular": false,
           "instability": 0.3333333333333333,
           "valid": true
         }
       ],
-      "dependents": [
-        "src/extract/index.js"
-      ],
+      "dependents": ["src/extract/index.js"],
       "orphan": false,
       "reachable": [
         {
@@ -3061,9 +2769,7 @@
           "coreModule": false,
           "followable": true,
           "couldNotResolve": false,
-          "dependencyTypes": [
-            "local"
-          ],
+          "dependencyTypes": ["local"],
           "matchesDoNotFollow": false,
           "circular": false,
           "instability": 0.3333333333333333,
@@ -3078,9 +2784,7 @@
           "coreModule": false,
           "followable": true,
           "couldNotResolve": false,
-          "dependencyTypes": [
-            "local"
-          ],
+          "dependencyTypes": ["local"],
           "matchesDoNotFollow": false,
           "circular": false,
           "instability": 0,
@@ -3119,9 +2823,7 @@
           "coreModule": false,
           "followable": true,
           "couldNotResolve": false,
-          "dependencyTypes": [
-            "local"
-          ],
+          "dependencyTypes": ["local"],
           "matchesDoNotFollow": false,
           "circular": false,
           "instability": 0.6923076923076923,
@@ -3160,9 +2862,7 @@
           "coreModule": false,
           "followable": true,
           "couldNotResolve": false,
-          "dependencyTypes": [
-            "local"
-          ],
+          "dependencyTypes": ["local"],
           "matchesDoNotFollow": false,
           "circular": false,
           "instability": 0,
@@ -3177,9 +2877,7 @@
           "coreModule": false,
           "followable": true,
           "couldNotResolve": false,
-          "dependencyTypes": [
-            "local"
-          ],
+          "dependencyTypes": ["local"],
           "matchesDoNotFollow": false,
           "circular": false,
           "instability": 0.25,
@@ -3194,9 +2892,7 @@
           "coreModule": false,
           "followable": true,
           "couldNotResolve": false,
-          "dependencyTypes": [
-            "local"
-          ],
+          "dependencyTypes": ["local"],
           "matchesDoNotFollow": false,
           "circular": false,
           "instability": 0.5,
@@ -3211,9 +2907,7 @@
           "coreModule": false,
           "followable": true,
           "couldNotResolve": false,
-          "dependencyTypes": [
-            "local"
-          ],
+          "dependencyTypes": ["local"],
           "matchesDoNotFollow": false,
           "circular": false,
           "instability": 0.5,
@@ -3228,9 +2922,7 @@
           "coreModule": false,
           "followable": true,
           "couldNotResolve": false,
-          "dependencyTypes": [
-            "local"
-          ],
+          "dependencyTypes": ["local"],
           "matchesDoNotFollow": false,
           "circular": false,
           "instability": 0,
@@ -3245,9 +2937,7 @@
           "coreModule": false,
           "followable": true,
           "couldNotResolve": false,
-          "dependencyTypes": [
-            "local"
-          ],
+          "dependencyTypes": ["local"],
           "matchesDoNotFollow": false,
           "circular": false,
           "instability": 0.5,
@@ -3262,9 +2952,7 @@
           "coreModule": false,
           "followable": true,
           "couldNotResolve": false,
-          "dependencyTypes": [
-            "local"
-          ],
+          "dependencyTypes": ["local"],
           "matchesDoNotFollow": false,
           "circular": false,
           "instability": 0.6666666666666666,
@@ -3279,9 +2967,7 @@
           "coreModule": false,
           "followable": true,
           "couldNotResolve": false,
-          "dependencyTypes": [
-            "local"
-          ],
+          "dependencyTypes": ["local"],
           "matchesDoNotFollow": false,
           "circular": false,
           "instability": 0.5,
@@ -3296,9 +2982,7 @@
           "coreModule": false,
           "followable": true,
           "couldNotResolve": false,
-          "dependencyTypes": [
-            "local"
-          ],
+          "dependencyTypes": ["local"],
           "matchesDoNotFollow": false,
           "circular": false,
           "instability": 0.5,
@@ -3339,9 +3023,7 @@
           "coreModule": false,
           "followable": true,
           "couldNotResolve": false,
-          "dependencyTypes": [
-            "local"
-          ],
+          "dependencyTypes": ["local"],
           "matchesDoNotFollow": false,
           "circular": false,
           "instability": 0,
@@ -3381,18 +3063,14 @@
           "coreModule": false,
           "followable": true,
           "couldNotResolve": false,
-          "dependencyTypes": [
-            "local"
-          ],
+          "dependencyTypes": ["local"],
           "matchesDoNotFollow": false,
           "circular": false,
           "instability": 0,
           "valid": true
         }
       ],
-      "dependents": [
-        "src/extract/transpile/meta.js"
-      ],
+      "dependents": ["src/extract/transpile/meta.js"],
       "orphan": false,
       "reachable": [
         {
@@ -3421,18 +3099,14 @@
           "coreModule": false,
           "followable": true,
           "couldNotResolve": false,
-          "dependencyTypes": [
-            "local"
-          ],
+          "dependencyTypes": ["local"],
           "matchesDoNotFollow": false,
           "circular": false,
           "instability": 0,
           "valid": true
         }
       ],
-      "dependents": [
-        "src/extract/transpile/meta.js"
-      ],
+      "dependents": ["src/extract/transpile/meta.js"],
       "orphan": false,
       "reachable": [
         {
@@ -3452,9 +3126,7 @@
     {
       "source": "src/extract/transpile/javascript-wrap.js",
       "dependencies": [],
-      "dependents": [
-        "src/extract/transpile/meta.js"
-      ],
+      "dependents": ["src/extract/transpile/meta.js"],
       "orphan": false,
       "reachable": [
         {
@@ -3483,18 +3155,14 @@
           "coreModule": false,
           "followable": true,
           "couldNotResolve": false,
-          "dependencyTypes": [
-            "local"
-          ],
+          "dependencyTypes": ["local"],
           "matchesDoNotFollow": false,
           "circular": false,
           "instability": 0,
           "valid": true
         }
       ],
-      "dependents": [
-        "src/extract/transpile/meta.js"
-      ],
+      "dependents": ["src/extract/transpile/meta.js"],
       "orphan": false,
       "reachable": [
         {
@@ -3523,9 +3191,7 @@
           "coreModule": false,
           "followable": true,
           "couldNotResolve": false,
-          "dependencyTypes": [
-            "local"
-          ],
+          "dependencyTypes": ["local"],
           "matchesDoNotFollow": false,
           "circular": false,
           "instability": 0,
@@ -3540,18 +3206,14 @@
           "coreModule": false,
           "followable": true,
           "couldNotResolve": false,
-          "dependencyTypes": [
-            "local"
-          ],
+          "dependencyTypes": ["local"],
           "matchesDoNotFollow": false,
           "circular": false,
           "instability": 0,
           "valid": true
         }
       ],
-      "dependents": [
-        "src/extract/transpile/meta.js"
-      ],
+      "dependents": ["src/extract/transpile/meta.js"],
       "orphan": false,
       "reachable": [
         {
@@ -3571,9 +3233,7 @@
     {
       "source": "src/extract/transpile/svelte-preprocess.js",
       "dependencies": [],
-      "dependents": [
-        "src/extract/transpile/svelte-wrap.js"
-      ],
+      "dependents": ["src/extract/transpile/svelte-wrap.js"],
       "orphan": false,
       "reachable": [
         {
@@ -3602,18 +3262,14 @@
           "coreModule": false,
           "followable": true,
           "couldNotResolve": false,
-          "dependencyTypes": [
-            "local"
-          ],
+          "dependencyTypes": ["local"],
           "matchesDoNotFollow": false,
           "circular": false,
           "instability": 0,
           "valid": true
         }
       ],
-      "dependents": [
-        "src/extract/transpile/meta.js"
-      ],
+      "dependents": ["src/extract/transpile/meta.js"],
       "orphan": false,
       "reachable": [
         {
@@ -3642,18 +3298,14 @@
           "coreModule": false,
           "followable": true,
           "couldNotResolve": false,
-          "dependencyTypes": [
-            "local"
-          ],
+          "dependencyTypes": ["local"],
           "matchesDoNotFollow": false,
           "circular": false,
           "instability": 0,
           "valid": true
         }
       ],
-      "dependents": [
-        "src/extract/transpile/meta.js"
-      ],
+      "dependents": ["src/extract/transpile/meta.js"],
       "orphan": false,
       "reachable": [
         {
@@ -3707,9 +3359,7 @@
           "coreModule": false,
           "followable": true,
           "couldNotResolve": false,
-          "dependencyTypes": [
-            "local"
-          ],
+          "dependencyTypes": ["local"],
           "matchesDoNotFollow": false,
           "circular": false,
           "instability": 0,
@@ -3724,9 +3374,7 @@
           "coreModule": false,
           "followable": true,
           "couldNotResolve": false,
-          "dependencyTypes": [
-            "local"
-          ],
+          "dependencyTypes": ["local"],
           "matchesDoNotFollow": false,
           "circular": false,
           "instability": 0.3333333333333333,
@@ -3741,9 +3389,7 @@
           "coreModule": false,
           "followable": true,
           "couldNotResolve": false,
-          "dependencyTypes": [
-            "local"
-          ],
+          "dependencyTypes": ["local"],
           "matchesDoNotFollow": false,
           "circular": false,
           "instability": 0,
@@ -3782,9 +3428,7 @@
           "coreModule": false,
           "followable": true,
           "couldNotResolve": false,
-          "dependencyTypes": [
-            "local"
-          ],
+          "dependencyTypes": ["local"],
           "matchesDoNotFollow": false,
           "circular": false,
           "instability": 0.16666666666666666,
@@ -3799,9 +3443,7 @@
           "coreModule": false,
           "followable": true,
           "couldNotResolve": false,
-          "dependencyTypes": [
-            "local"
-          ],
+          "dependencyTypes": ["local"],
           "matchesDoNotFollow": false,
           "circular": false,
           "instability": 0.3333333333333333,
@@ -3841,9 +3483,7 @@
           "coreModule": false,
           "followable": true,
           "couldNotResolve": false,
-          "dependencyTypes": [
-            "local"
-          ],
+          "dependencyTypes": ["local"],
           "matchesDoNotFollow": false,
           "circular": false,
           "instability": 0,
@@ -3885,9 +3525,7 @@
           "coreModule": false,
           "followable": true,
           "couldNotResolve": false,
-          "dependencyTypes": [
-            "local"
-          ],
+          "dependencyTypes": ["local"],
           "matchesDoNotFollow": false,
           "circular": false,
           "instability": 0,
@@ -3902,9 +3540,7 @@
           "coreModule": false,
           "followable": true,
           "couldNotResolve": false,
-          "dependencyTypes": [
-            "local"
-          ],
+          "dependencyTypes": ["local"],
           "matchesDoNotFollow": false,
           "circular": false,
           "instability": 0,
@@ -3962,9 +3598,7 @@
     {
       "source": "src/extract/utl/strip-query-parameters.js",
       "dependencies": [],
-      "dependents": [
-        "src/extract/resolve/resolve.js"
-      ],
+      "dependents": ["src/extract/resolve/resolve.js"],
       "orphan": false,
       "reachable": [
         {
@@ -3993,9 +3627,7 @@
           "coreModule": false,
           "followable": true,
           "couldNotResolve": false,
-          "dependencyTypes": [
-            "local"
-          ],
+          "dependencyTypes": ["local"],
           "matchesDoNotFollow": false,
           "circular": false,
           "instability": 0,
@@ -4025,9 +3657,7 @@
     {
       "source": "src/extract/resolve/get-manifest/merge-manifests.js",
       "dependencies": [],
-      "dependents": [
-        "src/extract/resolve/get-manifest/index.js"
-      ],
+      "dependents": ["src/extract/resolve/get-manifest/index.js"],
       "orphan": false,
       "reachable": [
         {
@@ -4056,9 +3686,7 @@
           "coreModule": false,
           "followable": true,
           "couldNotResolve": false,
-          "dependencyTypes": [
-            "local"
-          ],
+          "dependencyTypes": ["local"],
           "matchesDoNotFollow": false,
           "circular": false,
           "instability": 0,
@@ -4097,9 +3725,7 @@
           "coreModule": false,
           "followable": true,
           "couldNotResolve": false,
-          "dependencyTypes": [
-            "local"
-          ],
+          "dependencyTypes": ["local"],
           "matchesDoNotFollow": false,
           "circular": false,
           "instability": 0,
@@ -4114,9 +3740,7 @@
           "coreModule": false,
           "followable": true,
           "couldNotResolve": false,
-          "dependencyTypes": [
-            "local"
-          ],
+          "dependencyTypes": ["local"],
           "matchesDoNotFollow": false,
           "circular": false,
           "instability": 0.6923076923076923,
@@ -4131,9 +3755,7 @@
           "coreModule": false,
           "followable": true,
           "couldNotResolve": false,
-          "dependencyTypes": [
-            "local"
-          ],
+          "dependencyTypes": ["local"],
           "matchesDoNotFollow": false,
           "circular": false,
           "instability": 0,
@@ -4148,18 +3770,14 @@
           "coreModule": false,
           "followable": true,
           "couldNotResolve": false,
-          "dependencyTypes": [
-            "local"
-          ],
+          "dependencyTypes": ["local"],
           "matchesDoNotFollow": false,
           "circular": false,
           "instability": 0,
           "valid": true
         }
       ],
-      "dependents": [
-        "src/extract/index.js"
-      ],
+      "dependents": ["src/extract/index.js"],
       "orphan": false,
       "reachable": [
         {
@@ -4188,9 +3806,7 @@
           "coreModule": false,
           "followable": true,
           "couldNotResolve": false,
-          "dependencyTypes": [
-            "local"
-          ],
+          "dependencyTypes": ["local"],
           "matchesDoNotFollow": false,
           "circular": false,
           "instability": 0,
@@ -4205,9 +3821,7 @@
           "coreModule": false,
           "followable": true,
           "couldNotResolve": false,
-          "dependencyTypes": [
-            "local"
-          ],
+          "dependencyTypes": ["local"],
           "matchesDoNotFollow": false,
           "circular": false,
           "instability": 0.6666666666666666,
@@ -4222,9 +3836,7 @@
           "coreModule": false,
           "followable": true,
           "couldNotResolve": false,
-          "dependencyTypes": [
-            "local"
-          ],
+          "dependencyTypes": ["local"],
           "matchesDoNotFollow": false,
           "circular": false,
           "instability": 0.3333333333333333,
@@ -4239,9 +3851,7 @@
           "coreModule": false,
           "followable": true,
           "couldNotResolve": false,
-          "dependencyTypes": [
-            "local"
-          ],
+          "dependencyTypes": ["local"],
           "matchesDoNotFollow": false,
           "circular": false,
           "instability": 0.5,
@@ -4256,9 +3866,7 @@
           "coreModule": false,
           "followable": true,
           "couldNotResolve": false,
-          "dependencyTypes": [
-            "local"
-          ],
+          "dependencyTypes": ["local"],
           "matchesDoNotFollow": false,
           "circular": false,
           "instability": 0.5,
@@ -4273,9 +3881,7 @@
           "coreModule": false,
           "followable": true,
           "couldNotResolve": false,
-          "dependencyTypes": [
-            "local"
-          ],
+          "dependencyTypes": ["local"],
           "matchesDoNotFollow": false,
           "circular": false,
           "instability": 0.5,
@@ -4290,9 +3896,7 @@
           "coreModule": false,
           "followable": true,
           "couldNotResolve": false,
-          "dependencyTypes": [
-            "local"
-          ],
+          "dependencyTypes": ["local"],
           "matchesDoNotFollow": false,
           "circular": false,
           "instability": 0.5,
@@ -4307,9 +3911,7 @@
           "coreModule": false,
           "followable": true,
           "couldNotResolve": false,
-          "dependencyTypes": [
-            "local"
-          ],
+          "dependencyTypes": ["local"],
           "matchesDoNotFollow": false,
           "circular": false,
           "instability": 0.25,
@@ -4324,9 +3926,7 @@
           "coreModule": false,
           "followable": true,
           "couldNotResolve": false,
-          "dependencyTypes": [
-            "local"
-          ],
+          "dependencyTypes": ["local"],
           "matchesDoNotFollow": false,
           "circular": false,
           "instability": 0.6,
@@ -4341,9 +3941,7 @@
           "coreModule": false,
           "followable": true,
           "couldNotResolve": false,
-          "dependencyTypes": [
-            "local"
-          ],
+          "dependencyTypes": ["local"],
           "matchesDoNotFollow": false,
           "circular": false,
           "instability": 0.875,
@@ -4358,9 +3956,7 @@
           "coreModule": false,
           "followable": true,
           "couldNotResolve": false,
-          "dependencyTypes": [
-            "local"
-          ],
+          "dependencyTypes": ["local"],
           "matchesDoNotFollow": false,
           "circular": false,
           "instability": 0.5,
@@ -4375,18 +3971,14 @@
           "coreModule": false,
           "followable": true,
           "couldNotResolve": false,
-          "dependencyTypes": [
-            "local"
-          ],
+          "dependencyTypes": ["local"],
           "matchesDoNotFollow": false,
           "circular": false,
           "instability": 0,
           "valid": true
         }
       ],
-      "dependents": [
-        "src/extract/index.js"
-      ],
+      "dependents": ["src/extract/index.js"],
       "orphan": false,
       "reachable": [
         {
@@ -4415,9 +4007,7 @@
           "coreModule": false,
           "followable": true,
           "couldNotResolve": false,
-          "dependencyTypes": [
-            "local"
-          ],
+          "dependencyTypes": ["local"],
           "matchesDoNotFollow": false,
           "circular": false,
           "instability": 0,
@@ -4432,18 +4022,14 @@
           "coreModule": false,
           "followable": true,
           "couldNotResolve": false,
-          "dependencyTypes": [
-            "local"
-          ],
+          "dependencyTypes": ["local"],
           "matchesDoNotFollow": false,
           "circular": false,
           "instability": 0.3333333333333333,
           "valid": true
         }
       ],
-      "dependents": [
-        "src/extract/get-dependencies.js"
-      ],
+      "dependents": ["src/extract/get-dependencies.js"],
       "orphan": false,
       "reachable": [
         {
@@ -4496,9 +4082,7 @@
           "coreModule": false,
           "followable": true,
           "couldNotResolve": false,
-          "dependencyTypes": [
-            "local"
-          ],
+          "dependencyTypes": ["local"],
           "matchesDoNotFollow": false,
           "circular": false,
           "instability": 0,
@@ -4537,18 +4121,14 @@
           "coreModule": false,
           "followable": true,
           "couldNotResolve": false,
-          "dependencyTypes": [
-            "local"
-          ],
+          "dependencyTypes": ["local"],
           "matchesDoNotFollow": false,
           "circular": false,
           "instability": 0,
           "valid": true
         }
       ],
-      "dependents": [
-        "src/extract/get-dependencies.js"
-      ],
+      "dependents": ["src/extract/get-dependencies.js"],
       "orphan": false,
       "reachable": [
         {
@@ -4577,18 +4157,14 @@
           "coreModule": false,
           "followable": true,
           "couldNotResolve": false,
-          "dependencyTypes": [
-            "local"
-          ],
+          "dependencyTypes": ["local"],
           "matchesDoNotFollow": false,
           "circular": false,
           "instability": 0.5,
           "valid": true
         }
       ],
-      "dependents": [
-        "src/extract/get-dependencies.js"
-      ],
+      "dependents": ["src/extract/get-dependencies.js"],
       "orphan": false,
       "reachable": [
         {
@@ -4617,18 +4193,14 @@
           "coreModule": false,
           "followable": true,
           "couldNotResolve": false,
-          "dependencyTypes": [
-            "local"
-          ],
+          "dependencyTypes": ["local"],
           "matchesDoNotFollow": false,
           "circular": false,
           "instability": 0,
           "valid": true
         }
       ],
-      "dependents": [
-        "src/extract/ast-extractors/extract-swc-deps.js"
-      ],
+      "dependents": ["src/extract/ast-extractors/extract-swc-deps.js"],
       "orphan": false,
       "reachable": [
         {
@@ -4657,18 +4229,14 @@
           "coreModule": false,
           "followable": true,
           "couldNotResolve": false,
-          "dependencyTypes": [
-            "local"
-          ],
+          "dependencyTypes": ["local"],
           "matchesDoNotFollow": false,
           "circular": false,
           "instability": 0,
           "valid": true
         }
       ],
-      "dependents": [
-        "src/extract/get-dependencies.js"
-      ],
+      "dependents": ["src/extract/get-dependencies.js"],
       "orphan": false,
       "reachable": [
         {
@@ -4697,9 +4265,7 @@
           "coreModule": false,
           "followable": true,
           "couldNotResolve": false,
-          "dependencyTypes": [
-            "local"
-          ],
+          "dependencyTypes": ["local"],
           "matchesDoNotFollow": false,
           "circular": false,
           "instability": 0,
@@ -4714,9 +4280,7 @@
           "coreModule": false,
           "followable": true,
           "couldNotResolve": false,
-          "dependencyTypes": [
-            "local"
-          ],
+          "dependencyTypes": ["local"],
           "matchesDoNotFollow": false,
           "circular": false,
           "instability": 0.6666666666666666,
@@ -4731,9 +4295,7 @@
           "coreModule": false,
           "followable": true,
           "couldNotResolve": false,
-          "dependencyTypes": [
-            "local"
-          ],
+          "dependencyTypes": ["local"],
           "matchesDoNotFollow": false,
           "circular": false,
           "instability": 0.3333333333333333,
@@ -4748,9 +4310,7 @@
           "coreModule": false,
           "followable": true,
           "couldNotResolve": false,
-          "dependencyTypes": [
-            "local"
-          ],
+          "dependencyTypes": ["local"],
           "matchesDoNotFollow": false,
           "circular": false,
           "instability": 0.16666666666666666,
@@ -4765,9 +4325,7 @@
           "coreModule": false,
           "followable": true,
           "couldNotResolve": false,
-          "dependencyTypes": [
-            "local"
-          ],
+          "dependencyTypes": ["local"],
           "matchesDoNotFollow": false,
           "circular": false,
           "instability": 0.3333333333333333,
@@ -4782,9 +4340,7 @@
           "coreModule": false,
           "followable": true,
           "couldNotResolve": false,
-          "dependencyTypes": [
-            "local"
-          ],
+          "dependencyTypes": ["local"],
           "matchesDoNotFollow": false,
           "circular": false,
           "instability": 0.75,
@@ -4799,18 +4355,14 @@
           "coreModule": false,
           "followable": true,
           "couldNotResolve": false,
-          "dependencyTypes": [
-            "local"
-          ],
+          "dependencyTypes": ["local"],
           "matchesDoNotFollow": false,
           "circular": false,
           "instability": 0.6666666666666666,
           "valid": true
         }
       ],
-      "dependents": [
-        "src/extract/get-dependencies.js"
-      ],
+      "dependents": ["src/extract/get-dependencies.js"],
       "orphan": false,
       "reachable": [
         {
@@ -4839,9 +4391,7 @@
           "coreModule": false,
           "followable": true,
           "couldNotResolve": false,
-          "dependencyTypes": [
-            "local"
-          ],
+          "dependencyTypes": ["local"],
           "matchesDoNotFollow": false,
           "circular": false,
           "instability": 0.4,
@@ -4856,18 +4406,14 @@
           "coreModule": false,
           "followable": true,
           "couldNotResolve": false,
-          "dependencyTypes": [
-            "local"
-          ],
+          "dependencyTypes": ["local"],
           "matchesDoNotFollow": false,
           "circular": false,
           "instability": 0.16666666666666666,
           "valid": true
         }
       ],
-      "dependents": [
-        "src/extract/resolve/index.js"
-      ],
+      "dependents": ["src/extract/resolve/index.js"],
       "orphan": false,
       "reachable": [
         {
@@ -4896,9 +4442,7 @@
           "coreModule": false,
           "followable": true,
           "couldNotResolve": false,
-          "dependencyTypes": [
-            "local"
-          ],
+          "dependencyTypes": ["local"],
           "matchesDoNotFollow": false,
           "circular": false,
           "instability": 0,
@@ -4913,9 +4457,7 @@
           "coreModule": false,
           "followable": true,
           "couldNotResolve": false,
-          "dependencyTypes": [
-            "local"
-          ],
+          "dependencyTypes": ["local"],
           "matchesDoNotFollow": false,
           "circular": false,
           "instability": 0.16666666666666666,
@@ -4930,18 +4472,14 @@
           "coreModule": false,
           "followable": true,
           "couldNotResolve": false,
-          "dependencyTypes": [
-            "local"
-          ],
+          "dependencyTypes": ["local"],
           "matchesDoNotFollow": false,
           "circular": false,
           "instability": 0.3333333333333333,
           "valid": true
         }
       ],
-      "dependents": [
-        "src/extract/resolve/index.js"
-      ],
+      "dependents": ["src/extract/resolve/index.js"],
       "orphan": false,
       "reachable": [
         {
@@ -4970,9 +4508,7 @@
           "coreModule": false,
           "followable": true,
           "couldNotResolve": false,
-          "dependencyTypes": [
-            "local"
-          ],
+          "dependencyTypes": ["local"],
           "matchesDoNotFollow": false,
           "circular": false,
           "instability": 0.4,
@@ -4987,18 +4523,14 @@
           "coreModule": false,
           "followable": true,
           "couldNotResolve": false,
-          "dependencyTypes": [
-            "local"
-          ],
+          "dependencyTypes": ["local"],
           "matchesDoNotFollow": false,
           "circular": false,
           "instability": 0.16666666666666666,
           "valid": true
         }
       ],
-      "dependents": [
-        "src/extract/resolve/index.js"
-      ],
+      "dependents": ["src/extract/resolve/index.js"],
       "orphan": false,
       "reachable": [
         {
@@ -5027,18 +4559,14 @@
           "coreModule": false,
           "followable": true,
           "couldNotResolve": false,
-          "dependencyTypes": [
-            "local"
-          ],
+          "dependencyTypes": ["local"],
           "matchesDoNotFollow": false,
           "circular": false,
           "instability": 0,
           "valid": true
         }
       ],
-      "dependents": [
-        "src/extract/get-dependencies.js"
-      ],
+      "dependents": ["src/extract/get-dependencies.js"],
       "orphan": false,
       "reachable": [
         {
@@ -5058,9 +4586,7 @@
     {
       "source": "src/extract/utl/compare.js",
       "dependencies": [],
-      "dependents": [
-        "src/extract/utl/detect-pre-compilation-ness.js"
-      ],
+      "dependents": ["src/extract/utl/detect-pre-compilation-ness.js"],
       "orphan": false,
       "reachable": [
         {
@@ -5080,9 +4606,7 @@
     {
       "source": "src/extract/utl/extract-module-attributes.js",
       "dependencies": [],
-      "dependents": [
-        "src/extract/get-dependencies.js"
-      ],
+      "dependents": ["src/extract/get-dependencies.js"],
       "orphan": false,
       "reachable": [
         {
@@ -5102,9 +4626,7 @@
     {
       "source": "src/schema/cruise-result.schema.js",
       "dependencies": [],
-      "dependents": [
-        "src/main/index.js"
-      ],
+      "dependents": ["src/main/index.js"],
       "orphan": false,
       "reachable": [
         {
@@ -5119,9 +4641,7 @@
     {
       "source": "src/main/files-and-dirs/normalize.js",
       "dependencies": [],
-      "dependents": [
-        "src/main/index.js"
-      ],
+      "dependents": ["src/main/index.js"],
       "orphan": false,
       "reachable": [
         {
@@ -5150,9 +4670,7 @@
           "coreModule": false,
           "followable": true,
           "couldNotResolve": false,
-          "dependencyTypes": [
-            "local"
-          ],
+          "dependencyTypes": ["local"],
           "matchesDoNotFollow": false,
           "circular": false,
           "instability": 0,
@@ -5167,18 +4685,14 @@
           "coreModule": false,
           "followable": true,
           "couldNotResolve": false,
-          "dependencyTypes": [
-            "local"
-          ],
+          "dependencyTypes": ["local"],
           "matchesDoNotFollow": false,
           "circular": false,
           "instability": 0,
           "valid": true
         }
       ],
-      "dependents": [
-        "src/main/index.js"
-      ],
+      "dependents": ["src/main/index.js"],
       "orphan": false,
       "reachable": [
         {
@@ -5221,9 +4735,7 @@
     {
       "source": "src/main/options/defaults.js",
       "dependencies": [],
-      "dependents": [
-        "src/main/options/normalize.js"
-      ],
+      "dependents": ["src/main/options/normalize.js"],
       "orphan": false,
       "reachable": [
         {
@@ -5252,19 +4764,14 @@
           "coreModule": false,
           "followable": true,
           "couldNotResolve": false,
-          "dependencyTypes": [
-            "local"
-          ],
+          "dependencyTypes": ["local"],
           "matchesDoNotFollow": false,
           "circular": false,
           "instability": 0.8888888888888888,
           "valid": true
         }
       ],
-      "dependents": [
-        "src/main/index.js",
-        "src/main/rule-set/validate.js"
-      ],
+      "dependents": ["src/main/index.js", "src/main/rule-set/validate.js"],
       "orphan": false,
       "reachable": [
         {
@@ -5293,9 +4800,7 @@
           "coreModule": false,
           "followable": true,
           "couldNotResolve": false,
-          "dependencyTypes": [
-            "local"
-          ],
+          "dependencyTypes": ["local"],
           "matchesDoNotFollow": false,
           "circular": false,
           "instability": 0.5,
@@ -5310,9 +4815,7 @@
           "coreModule": false,
           "followable": true,
           "couldNotResolve": false,
-          "dependencyTypes": [
-            "local"
-          ],
+          "dependencyTypes": ["local"],
           "matchesDoNotFollow": false,
           "circular": false,
           "instability": 0,
@@ -5327,9 +4830,7 @@
           "coreModule": false,
           "followable": true,
           "couldNotResolve": false,
-          "dependencyTypes": [
-            "local"
-          ],
+          "dependencyTypes": ["local"],
           "matchesDoNotFollow": false,
           "circular": false,
           "instability": 0.5,
@@ -5344,9 +4845,7 @@
           "coreModule": false,
           "followable": true,
           "couldNotResolve": false,
-          "dependencyTypes": [
-            "local"
-          ],
+          "dependencyTypes": ["local"],
           "matchesDoNotFollow": false,
           "circular": false,
           "instability": 0.875,
@@ -5361,9 +4860,7 @@
           "coreModule": false,
           "followable": true,
           "couldNotResolve": false,
-          "dependencyTypes": [
-            "local"
-          ],
+          "dependencyTypes": ["local"],
           "matchesDoNotFollow": false,
           "circular": false,
           "instability": 0.6,
@@ -5378,9 +4875,7 @@
           "coreModule": false,
           "followable": true,
           "couldNotResolve": false,
-          "dependencyTypes": [
-            "local"
-          ],
+          "dependencyTypes": ["local"],
           "matchesDoNotFollow": false,
           "circular": false,
           "instability": 0.6666666666666666,
@@ -5395,9 +4890,7 @@
           "coreModule": false,
           "followable": true,
           "couldNotResolve": false,
-          "dependencyTypes": [
-            "local"
-          ],
+          "dependencyTypes": ["local"],
           "matchesDoNotFollow": false,
           "circular": false,
           "instability": 0.5,
@@ -5412,9 +4905,7 @@
           "coreModule": false,
           "followable": true,
           "couldNotResolve": false,
-          "dependencyTypes": [
-            "local"
-          ],
+          "dependencyTypes": ["local"],
           "matchesDoNotFollow": false,
           "circular": false,
           "instability": 0.6666666666666666,
@@ -5429,9 +4920,7 @@
           "coreModule": false,
           "followable": true,
           "couldNotResolve": false,
-          "dependencyTypes": [
-            "local"
-          ],
+          "dependencyTypes": ["local"],
           "matchesDoNotFollow": false,
           "circular": false,
           "instability": 0,
@@ -5446,9 +4935,7 @@
           "coreModule": false,
           "followable": true,
           "couldNotResolve": false,
-          "dependencyTypes": [
-            "local"
-          ],
+          "dependencyTypes": ["local"],
           "matchesDoNotFollow": false,
           "circular": false,
           "instability": 0,
@@ -5463,9 +4950,7 @@
           "coreModule": false,
           "followable": true,
           "couldNotResolve": false,
-          "dependencyTypes": [
-            "local"
-          ],
+          "dependencyTypes": ["local"],
           "matchesDoNotFollow": false,
           "circular": false,
           "instability": 0.6666666666666666,
@@ -5480,9 +4965,7 @@
           "coreModule": false,
           "followable": true,
           "couldNotResolve": false,
-          "dependencyTypes": [
-            "local"
-          ],
+          "dependencyTypes": ["local"],
           "matchesDoNotFollow": false,
           "circular": false,
           "instability": 0,
@@ -5497,9 +4980,7 @@
           "coreModule": false,
           "followable": true,
           "couldNotResolve": false,
-          "dependencyTypes": [
-            "local"
-          ],
+          "dependencyTypes": ["local"],
           "matchesDoNotFollow": false,
           "circular": false,
           "instability": 0,
@@ -5514,9 +4995,7 @@
           "coreModule": false,
           "followable": true,
           "couldNotResolve": false,
-          "dependencyTypes": [
-            "local"
-          ],
+          "dependencyTypes": ["local"],
           "matchesDoNotFollow": false,
           "circular": false,
           "instability": 0,
@@ -5531,9 +5010,7 @@
           "coreModule": false,
           "followable": true,
           "couldNotResolve": false,
-          "dependencyTypes": [
-            "local"
-          ],
+          "dependencyTypes": ["local"],
           "matchesDoNotFollow": false,
           "circular": false,
           "instability": 0.5,
@@ -5548,19 +5025,14 @@
           "coreModule": false,
           "followable": true,
           "couldNotResolve": false,
-          "dependencyTypes": [
-            "local"
-          ],
+          "dependencyTypes": ["local"],
           "matchesDoNotFollow": false,
           "circular": false,
           "instability": 0,
           "valid": true
         }
       ],
-      "dependents": [
-        "src/main/options/validate.js",
-        "src/main/report-wrap.js"
-      ],
+      "dependents": ["src/main/options/validate.js", "src/main/report-wrap.js"],
       "orphan": false,
       "reachable": [
         {
@@ -5584,18 +5056,14 @@
           "coreModule": false,
           "followable": true,
           "couldNotResolve": false,
-          "dependencyTypes": [
-            "local"
-          ],
+          "dependencyTypes": ["local"],
           "matchesDoNotFollow": false,
           "circular": false,
           "instability": 0.5,
           "valid": true
         }
       ],
-      "dependents": [
-        "src/report/index.js"
-      ],
+      "dependents": ["src/report/index.js"],
       "orphan": false,
       "reachable": [
         {
@@ -5624,18 +5092,14 @@
           "coreModule": false,
           "followable": true,
           "couldNotResolve": false,
-          "dependencyTypes": [
-            "local"
-          ],
+          "dependencyTypes": ["local"],
           "matchesDoNotFollow": false,
           "circular": false,
           "instability": 0.5,
           "valid": true
         }
       ],
-      "dependents": [
-        "src/report/anon/index.js"
-      ],
+      "dependents": ["src/report/anon/index.js"],
       "orphan": false,
       "reachable": [
         {
@@ -5664,18 +5128,14 @@
           "coreModule": false,
           "followable": true,
           "couldNotResolve": false,
-          "dependencyTypes": [
-            "local"
-          ],
+          "dependencyTypes": ["local"],
           "matchesDoNotFollow": false,
           "circular": false,
           "instability": 0,
           "valid": true
         }
       ],
-      "dependents": [
-        "src/report/anon/anonymize-path.js"
-      ],
+      "dependents": ["src/report/anon/anonymize-path.js"],
       "orphan": false,
       "reachable": [
         {
@@ -5695,9 +5155,7 @@
     {
       "source": "src/report/anon/random-string.js",
       "dependencies": [],
-      "dependents": [
-        "src/report/anon/anonymize-path-element.js"
-      ],
+      "dependents": ["src/report/anon/anonymize-path-element.js"],
       "orphan": false,
       "reachable": [
         {
@@ -5717,9 +5175,7 @@
     {
       "source": "src/report/baseline.js",
       "dependencies": [],
-      "dependents": [
-        "src/report/index.js"
-      ],
+      "dependents": ["src/report/index.js"],
       "orphan": false,
       "reachable": [
         {
@@ -5748,18 +5204,14 @@
           "coreModule": false,
           "followable": true,
           "couldNotResolve": false,
-          "dependencyTypes": [
-            "local"
-          ],
+          "dependencyTypes": ["local"],
           "matchesDoNotFollow": false,
           "circular": false,
           "instability": 0,
           "valid": true
         }
       ],
-      "dependents": [
-        "src/report/index.js"
-      ],
+      "dependents": ["src/report/index.js"],
       "orphan": false,
       "reachable": [
         {
@@ -5779,10 +5231,7 @@
     {
       "source": "src/report/utl/dependency-to-incidence-transformer.js",
       "dependencies": [],
-      "dependents": [
-        "src/report/csv.js",
-        "src/report/html/index.js"
-      ],
+      "dependents": ["src/report/csv.js", "src/report/html/index.js"],
       "orphan": false,
       "reachable": [
         {
@@ -5811,9 +5260,7 @@
           "coreModule": false,
           "followable": true,
           "couldNotResolve": false,
-          "dependencyTypes": [
-            "local"
-          ],
+          "dependencyTypes": ["local"],
           "matchesDoNotFollow": false,
           "circular": false,
           "instability": 0.6,
@@ -5828,9 +5275,7 @@
           "coreModule": false,
           "followable": true,
           "couldNotResolve": false,
-          "dependencyTypes": [
-            "local"
-          ],
+          "dependencyTypes": ["local"],
           "matchesDoNotFollow": false,
           "circular": false,
           "instability": 0,
@@ -5845,9 +5290,7 @@
           "coreModule": false,
           "followable": true,
           "couldNotResolve": false,
-          "dependencyTypes": [
-            "local"
-          ],
+          "dependencyTypes": ["local"],
           "matchesDoNotFollow": false,
           "circular": false,
           "instability": 0.3333333333333333,
@@ -5862,9 +5305,7 @@
           "coreModule": false,
           "followable": true,
           "couldNotResolve": false,
-          "dependencyTypes": [
-            "local"
-          ],
+          "dependencyTypes": ["local"],
           "matchesDoNotFollow": false,
           "circular": false,
           "instability": 0.8,
@@ -5879,9 +5320,7 @@
           "coreModule": false,
           "followable": true,
           "couldNotResolve": false,
-          "dependencyTypes": [
-            "local"
-          ],
+          "dependencyTypes": ["local"],
           "matchesDoNotFollow": false,
           "circular": false,
           "instability": 0.6666666666666666,
@@ -5896,9 +5335,7 @@
           "coreModule": false,
           "followable": true,
           "couldNotResolve": false,
-          "dependencyTypes": [
-            "local"
-          ],
+          "dependencyTypes": ["local"],
           "matchesDoNotFollow": false,
           "circular": false,
           "instability": 0.8,
@@ -5913,18 +5350,14 @@
           "coreModule": false,
           "followable": true,
           "couldNotResolve": false,
-          "dependencyTypes": [
-            "local"
-          ],
+          "dependencyTypes": ["local"],
           "matchesDoNotFollow": false,
           "circular": false,
           "instability": 0.3333333333333333,
           "valid": true
         }
       ],
-      "dependents": [
-        "src/report/index.js"
-      ],
+      "dependents": ["src/report/index.js"],
       "orphan": false,
       "reachable": [
         {
@@ -5953,9 +5386,7 @@
           "coreModule": false,
           "followable": true,
           "couldNotResolve": false,
-          "dependencyTypes": [
-            "local"
-          ],
+          "dependencyTypes": ["local"],
           "matchesDoNotFollow": false,
           "circular": false,
           "instability": 0.5,
@@ -5970,9 +5401,7 @@
           "coreModule": false,
           "followable": true,
           "couldNotResolve": false,
-          "dependencyTypes": [
-            "local"
-          ],
+          "dependencyTypes": ["local"],
           "matchesDoNotFollow": false,
           "circular": false,
           "instability": 0,
@@ -5987,19 +5416,14 @@
           "coreModule": false,
           "followable": true,
           "couldNotResolve": false,
-          "dependencyTypes": [
-            "local"
-          ],
+          "dependencyTypes": ["local"],
           "matchesDoNotFollow": false,
           "circular": false,
           "instability": 0,
           "valid": true
         }
       ],
-      "dependents": [
-        "src/report/dot/index.js",
-        "src/main/report-wrap.js"
-      ],
+      "dependents": ["src/report/dot/index.js", "src/main/report-wrap.js"],
       "orphan": false,
       "reachable": [
         {
@@ -6014,9 +5438,7 @@
     {
       "source": "src/report/dot/dot.template.js",
       "dependencies": [],
-      "dependents": [
-        "src/report/dot/index.js"
-      ],
+      "dependents": ["src/report/dot/index.js"],
       "orphan": false,
       "reachable": [
         {
@@ -6045,9 +5467,7 @@
           "coreModule": false,
           "followable": true,
           "couldNotResolve": false,
-          "dependencyTypes": [
-            "local"
-          ],
+          "dependencyTypes": ["local"],
           "matchesDoNotFollow": false,
           "circular": false,
           "instability": 0,
@@ -6062,9 +5482,7 @@
           "coreModule": false,
           "followable": true,
           "couldNotResolve": false,
-          "dependencyTypes": [
-            "local"
-          ],
+          "dependencyTypes": ["local"],
           "matchesDoNotFollow": false,
           "circular": false,
           "instability": 0.3333333333333333,
@@ -6130,19 +5548,14 @@
           "coreModule": false,
           "followable": true,
           "couldNotResolve": false,
-          "dependencyTypes": [
-            "local"
-          ],
+          "dependencyTypes": ["local"],
           "matchesDoNotFollow": false,
           "circular": false,
           "instability": 0,
           "valid": true
         }
       ],
-      "dependents": [
-        "src/report/dot/index.js",
-        "src/report/dot/module-utl.js"
-      ],
+      "dependents": ["src/report/dot/index.js", "src/report/dot/module-utl.js"],
       "orphan": false,
       "reachable": [
         {
@@ -6162,9 +5575,7 @@
     {
       "source": "src/report/dot/default-theme.js",
       "dependencies": [],
-      "dependents": [
-        "src/report/dot/theming.js"
-      ],
+      "dependents": ["src/report/dot/theming.js"],
       "orphan": false,
       "reachable": [
         {
@@ -6193,9 +5604,7 @@
           "coreModule": false,
           "followable": true,
           "couldNotResolve": false,
-          "dependencyTypes": [
-            "local"
-          ],
+          "dependencyTypes": ["local"],
           "matchesDoNotFollow": false,
           "circular": false,
           "instability": 0,
@@ -6210,9 +5619,7 @@
           "coreModule": false,
           "followable": true,
           "couldNotResolve": false,
-          "dependencyTypes": [
-            "local"
-          ],
+          "dependencyTypes": ["local"],
           "matchesDoNotFollow": false,
           "circular": false,
           "instability": 0.5,
@@ -6227,9 +5634,7 @@
           "coreModule": false,
           "followable": true,
           "couldNotResolve": false,
-          "dependencyTypes": [
-            "local"
-          ],
+          "dependencyTypes": ["local"],
           "matchesDoNotFollow": false,
           "circular": false,
           "instability": 0,
@@ -6244,18 +5649,14 @@
           "coreModule": false,
           "followable": true,
           "couldNotResolve": false,
-          "dependencyTypes": [
-            "local"
-          ],
+          "dependencyTypes": ["local"],
           "matchesDoNotFollow": false,
           "circular": false,
           "instability": 0.3333333333333333,
           "valid": true
         }
       ],
-      "dependents": [
-        "src/report/dot/index.js"
-      ],
+      "dependents": ["src/report/dot/index.js"],
       "orphan": false,
       "reachable": [
         {
@@ -6284,9 +5685,7 @@
           "coreModule": false,
           "followable": true,
           "couldNotResolve": false,
-          "dependencyTypes": [
-            "local"
-          ],
+          "dependencyTypes": ["local"],
           "matchesDoNotFollow": false,
           "circular": false,
           "instability": 0.3333333333333333,
@@ -6301,9 +5700,7 @@
           "coreModule": false,
           "followable": true,
           "couldNotResolve": false,
-          "dependencyTypes": [
-            "local"
-          ],
+          "dependencyTypes": ["local"],
           "matchesDoNotFollow": false,
           "circular": false,
           "instability": 0.3333333333333333,
@@ -6337,9 +5734,7 @@
           "coreModule": false,
           "followable": true,
           "couldNotResolve": false,
-          "dependencyTypes": [
-            "local"
-          ],
+          "dependencyTypes": ["local"],
           "matchesDoNotFollow": false,
           "circular": false,
           "instability": 0,
@@ -6373,9 +5768,7 @@
           "coreModule": false,
           "followable": true,
           "couldNotResolve": false,
-          "dependencyTypes": [
-            "local"
-          ],
+          "dependencyTypes": ["local"],
           "matchesDoNotFollow": false,
           "circular": false,
           "instability": 0,
@@ -6428,9 +5821,7 @@
           "coreModule": false,
           "followable": true,
           "couldNotResolve": false,
-          "dependencyTypes": [
-            "local"
-          ],
+          "dependencyTypes": ["local"],
           "matchesDoNotFollow": false,
           "circular": false,
           "instability": 0,
@@ -6445,18 +5836,14 @@
           "coreModule": false,
           "followable": true,
           "couldNotResolve": false,
-          "dependencyTypes": [
-            "local"
-          ],
+          "dependencyTypes": ["local"],
           "matchesDoNotFollow": false,
           "circular": false,
           "instability": 0.3333333333333333,
           "valid": true
         }
       ],
-      "dependents": [
-        "src/report/dot/index.js"
-      ],
+      "dependents": ["src/report/dot/index.js"],
       "orphan": false,
       "reachable": [
         {
@@ -6485,9 +5872,7 @@
           "coreModule": false,
           "followable": true,
           "couldNotResolve": false,
-          "dependencyTypes": [
-            "local"
-          ],
+          "dependencyTypes": ["local"],
           "matchesDoNotFollow": false,
           "circular": false,
           "instability": 0,
@@ -6502,9 +5887,7 @@
           "coreModule": false,
           "followable": true,
           "couldNotResolve": false,
-          "dependencyTypes": [
-            "local"
-          ],
+          "dependencyTypes": ["local"],
           "matchesDoNotFollow": false,
           "circular": false,
           "instability": 0.6666666666666666,
@@ -6519,9 +5902,7 @@
           "coreModule": false,
           "followable": true,
           "couldNotResolve": false,
-          "dependencyTypes": [
-            "local"
-          ],
+          "dependencyTypes": ["local"],
           "matchesDoNotFollow": false,
           "circular": false,
           "instability": 0,
@@ -6536,18 +5917,14 @@
           "coreModule": false,
           "followable": true,
           "couldNotResolve": false,
-          "dependencyTypes": [
-            "local"
-          ],
+          "dependencyTypes": ["local"],
           "matchesDoNotFollow": false,
           "circular": false,
           "instability": 0.3333333333333333,
           "valid": true
         }
       ],
-      "dependents": [
-        "src/report/dot/index.js"
-      ],
+      "dependents": ["src/report/dot/index.js"],
       "orphan": false,
       "reachable": [
         {
@@ -6576,9 +5953,7 @@
           "coreModule": false,
           "followable": true,
           "couldNotResolve": false,
-          "dependencyTypes": [
-            "local"
-          ],
+          "dependencyTypes": ["local"],
           "matchesDoNotFollow": false,
           "circular": false,
           "instability": 0.3333333333333333,
@@ -6593,18 +5968,14 @@
           "coreModule": false,
           "followable": true,
           "couldNotResolve": false,
-          "dependencyTypes": [
-            "local"
-          ],
+          "dependencyTypes": ["local"],
           "matchesDoNotFollow": false,
           "circular": false,
           "instability": 0.3333333333333333,
           "valid": true
         }
       ],
-      "dependents": [
-        "src/report/dot/prepare-folder-level.js"
-      ],
+      "dependents": ["src/report/dot/prepare-folder-level.js"],
       "orphan": false,
       "reachable": [
         {
@@ -6628,9 +5999,7 @@
           "coreModule": false,
           "followable": true,
           "couldNotResolve": false,
-          "dependencyTypes": [
-            "local"
-          ],
+          "dependencyTypes": ["local"],
           "matchesDoNotFollow": false,
           "circular": false,
           "instability": 0,
@@ -6645,9 +6014,7 @@
           "coreModule": false,
           "followable": true,
           "couldNotResolve": false,
-          "dependencyTypes": [
-            "local"
-          ],
+          "dependencyTypes": ["local"],
           "matchesDoNotFollow": false,
           "circular": false,
           "instability": 0,
@@ -6662,19 +6029,14 @@
           "coreModule": false,
           "followable": true,
           "couldNotResolve": false,
-          "dependencyTypes": [
-            "local"
-          ],
+          "dependencyTypes": ["local"],
           "matchesDoNotFollow": false,
           "circular": false,
           "instability": 0,
           "valid": true
         }
       ],
-      "dependents": [
-        "src/report/index.js",
-        "src/report/error-long.js"
-      ],
+      "dependents": ["src/report/index.js", "src/report/error-long.js"],
       "orphan": false,
       "reachable": [
         {
@@ -6727,9 +6089,7 @@
           "coreModule": false,
           "followable": true,
           "couldNotResolve": false,
-          "dependencyTypes": [
-            "local"
-          ],
+          "dependencyTypes": ["local"],
           "matchesDoNotFollow": false,
           "circular": false,
           "instability": 0,
@@ -6744,18 +6104,14 @@
           "coreModule": false,
           "followable": true,
           "couldNotResolve": false,
-          "dependencyTypes": [
-            "local"
-          ],
+          "dependencyTypes": ["local"],
           "matchesDoNotFollow": false,
           "circular": false,
           "instability": 0.5,
           "valid": true
         }
       ],
-      "dependents": [
-        "src/report/index.js"
-      ],
+      "dependents": ["src/report/index.js"],
       "orphan": false,
       "reachable": [
         {
@@ -6775,9 +6131,7 @@
     {
       "source": "src/report/error-html/error-html.template.js",
       "dependencies": [],
-      "dependents": [
-        "src/report/error-html/index.js"
-      ],
+      "dependents": ["src/report/error-html/index.js"],
       "orphan": false,
       "reachable": [
         {
@@ -6806,9 +6160,7 @@
           "coreModule": false,
           "followable": true,
           "couldNotResolve": false,
-          "dependencyTypes": [
-            "local"
-          ],
+          "dependencyTypes": ["local"],
           "matchesDoNotFollow": false,
           "circular": false,
           "instability": 0,
@@ -6823,9 +6175,7 @@
           "coreModule": false,
           "followable": true,
           "couldNotResolve": false,
-          "dependencyTypes": [
-            "local"
-          ],
+          "dependencyTypes": ["local"],
           "matchesDoNotFollow": false,
           "circular": false,
           "instability": 0,
@@ -6864,18 +6214,14 @@
           "coreModule": false,
           "followable": true,
           "couldNotResolve": false,
-          "dependencyTypes": [
-            "local"
-          ],
+          "dependencyTypes": ["local"],
           "matchesDoNotFollow": false,
           "circular": false,
           "instability": 0.6,
           "valid": true
         }
       ],
-      "dependents": [
-        "src/report/index.js"
-      ],
+      "dependents": ["src/report/index.js"],
       "orphan": false,
       "reachable": [
         {
@@ -6904,9 +6250,7 @@
           "coreModule": false,
           "followable": true,
           "couldNotResolve": false,
-          "dependencyTypes": [
-            "local"
-          ],
+          "dependencyTypes": ["local"],
           "matchesDoNotFollow": false,
           "circular": false,
           "instability": 0,
@@ -6921,18 +6265,14 @@
           "coreModule": false,
           "followable": true,
           "couldNotResolve": false,
-          "dependencyTypes": [
-            "local"
-          ],
+          "dependencyTypes": ["local"],
           "matchesDoNotFollow": false,
           "circular": false,
           "instability": 0,
           "valid": true
         }
       ],
-      "dependents": [
-        "src/report/index.js"
-      ],
+      "dependents": ["src/report/index.js"],
       "orphan": false,
       "reachable": [
         {
@@ -6952,9 +6292,7 @@
     {
       "source": "src/report/html/html.template.js",
       "dependencies": [],
-      "dependents": [
-        "src/report/html/index.js"
-      ],
+      "dependents": ["src/report/html/index.js"],
       "orphan": false,
       "reachable": [
         {
@@ -6974,9 +6312,7 @@
     {
       "source": "src/report/identity.js",
       "dependencies": [],
-      "dependents": [
-        "src/report/index.js"
-      ],
+      "dependents": ["src/report/index.js"],
       "orphan": false,
       "reachable": [
         {
@@ -6996,9 +6332,7 @@
     {
       "source": "src/report/json.js",
       "dependencies": [],
-      "dependents": [
-        "src/report/index.js"
-      ],
+      "dependents": ["src/report/index.js"],
       "orphan": false,
       "reachable": [
         {
@@ -7027,9 +6361,7 @@
           "coreModule": false,
           "followable": true,
           "couldNotResolve": false,
-          "dependencyTypes": [
-            "local"
-          ],
+          "dependencyTypes": ["local"],
           "matchesDoNotFollow": false,
           "circular": false,
           "instability": 0,
@@ -7044,18 +6376,14 @@
           "coreModule": false,
           "followable": true,
           "couldNotResolve": false,
-          "dependencyTypes": [
-            "local"
-          ],
+          "dependencyTypes": ["local"],
           "matchesDoNotFollow": false,
           "circular": false,
           "instability": 0.5,
           "valid": true
         }
       ],
-      "dependents": [
-        "src/report/index.js"
-      ],
+      "dependents": ["src/report/index.js"],
       "orphan": false,
       "reachable": [
         {
@@ -7075,9 +6403,7 @@
     {
       "source": "src/report/mermaid.js",
       "dependencies": [],
-      "dependents": [
-        "src/report/index.js"
-      ],
+      "dependents": ["src/report/index.js"],
       "orphan": false,
       "reachable": [
         {
@@ -7097,9 +6423,7 @@
     {
       "source": "src/report/metrics.js",
       "dependencies": [],
-      "dependents": [
-        "src/report/index.js"
-      ],
+      "dependents": ["src/report/index.js"],
       "orphan": false,
       "reachable": [
         {
@@ -7119,9 +6443,7 @@
     {
       "source": "src/report/plugins/index.js",
       "dependencies": [],
-      "dependents": [
-        "src/report/index.js"
-      ],
+      "dependents": ["src/report/index.js"],
       "orphan": false,
       "reachable": [
         {
@@ -7150,18 +6472,14 @@
           "coreModule": false,
           "followable": true,
           "couldNotResolve": false,
-          "dependencyTypes": [
-            "local"
-          ],
+          "dependencyTypes": ["local"],
           "matchesDoNotFollow": false,
           "circular": false,
           "instability": 0,
           "valid": true
         }
       ],
-      "dependents": [
-        "src/report/index.js"
-      ],
+      "dependents": ["src/report/index.js"],
       "orphan": false,
       "reachable": [
         {
@@ -7181,9 +6499,7 @@
     {
       "source": "src/report/text.js",
       "dependencies": [],
-      "dependents": [
-        "src/report/index.js"
-      ],
+      "dependents": ["src/report/index.js"],
       "orphan": false,
       "reachable": [
         {
@@ -7212,9 +6528,7 @@
           "coreModule": false,
           "followable": true,
           "couldNotResolve": false,
-          "dependencyTypes": [
-            "local"
-          ],
+          "dependencyTypes": ["local"],
           "matchesDoNotFollow": false,
           "circular": false,
           "instability": 0.75,
@@ -7229,9 +6543,7 @@
           "coreModule": false,
           "followable": true,
           "couldNotResolve": false,
-          "dependencyTypes": [
-            "local"
-          ],
+          "dependencyTypes": ["local"],
           "matchesDoNotFollow": false,
           "circular": false,
           "instability": 0,
@@ -7246,9 +6558,7 @@
           "coreModule": false,
           "followable": true,
           "couldNotResolve": false,
-          "dependencyTypes": [
-            "local"
-          ],
+          "dependencyTypes": ["local"],
           "matchesDoNotFollow": false,
           "circular": false,
           "instability": 0.5,
@@ -7263,9 +6573,7 @@
           "coreModule": false,
           "followable": true,
           "couldNotResolve": false,
-          "dependencyTypes": [
-            "local"
-          ],
+          "dependencyTypes": ["local"],
           "matchesDoNotFollow": false,
           "circular": false,
           "instability": 0.6,
@@ -7280,9 +6588,7 @@
           "coreModule": false,
           "followable": true,
           "couldNotResolve": false,
-          "dependencyTypes": [
-            "local"
-          ],
+          "dependencyTypes": ["local"],
           "matchesDoNotFollow": false,
           "circular": false,
           "instability": 0,
@@ -7297,18 +6603,14 @@
           "coreModule": false,
           "followable": true,
           "couldNotResolve": false,
-          "dependencyTypes": [
-            "local"
-          ],
+          "dependencyTypes": ["local"],
           "matchesDoNotFollow": false,
           "circular": false,
           "instability": 0.8888888888888888,
           "valid": true
         }
       ],
-      "dependents": [
-        "src/main/index.js"
-      ],
+      "dependents": ["src/main/index.js"],
       "orphan": false,
       "reachable": [
         {
@@ -7337,9 +6639,7 @@
           "coreModule": false,
           "followable": true,
           "couldNotResolve": false,
-          "dependencyTypes": [
-            "local"
-          ],
+          "dependencyTypes": ["local"],
           "matchesDoNotFollow": false,
           "circular": false,
           "instability": 0.6923076923076923,
@@ -7354,9 +6654,7 @@
           "coreModule": false,
           "followable": true,
           "couldNotResolve": false,
-          "dependencyTypes": [
-            "local"
-          ],
+          "dependencyTypes": ["local"],
           "matchesDoNotFollow": false,
           "circular": false,
           "instability": 0,
@@ -7395,18 +6693,14 @@
           "coreModule": false,
           "followable": true,
           "couldNotResolve": false,
-          "dependencyTypes": [
-            "local"
-          ],
+          "dependencyTypes": ["local"],
           "matchesDoNotFollow": false,
           "circular": false,
           "instability": 0,
           "valid": true
         }
       ],
-      "dependents": [
-        "src/main/index.js"
-      ],
+      "dependents": ["src/main/index.js"],
       "orphan": false,
       "reachable": [
         {
@@ -7435,9 +6729,7 @@
           "coreModule": false,
           "followable": true,
           "couldNotResolve": false,
-          "dependencyTypes": [
-            "local"
-          ],
+          "dependencyTypes": ["local"],
           "matchesDoNotFollow": false,
           "circular": false,
           "instability": 0,
@@ -7452,18 +6744,14 @@
           "coreModule": false,
           "followable": true,
           "couldNotResolve": false,
-          "dependencyTypes": [
-            "local"
-          ],
+          "dependencyTypes": ["local"],
           "matchesDoNotFollow": false,
           "circular": false,
           "instability": 0.3333333333333333,
           "valid": true
         }
       ],
-      "dependents": [
-        "src/main/index.js"
-      ],
+      "dependents": ["src/main/index.js"],
       "orphan": false,
       "reachable": [
         {
@@ -7483,9 +6771,7 @@
     {
       "source": "src/schema/configuration.schema.js",
       "dependencies": [],
-      "dependents": [
-        "src/main/rule-set/validate.js"
-      ],
+      "dependents": ["src/main/rule-set/validate.js"],
       "orphan": false,
       "reachable": [
         {
@@ -7509,18 +6795,14 @@
           "coreModule": false,
           "followable": true,
           "couldNotResolve": false,
-          "dependencyTypes": [
-            "local"
-          ],
+          "dependencyTypes": ["local"],
           "matchesDoNotFollow": false,
           "circular": false,
           "instability": 0.8,
           "valid": true
         }
       ],
-      "dependents": [
-        "src/cli/index.js"
-      ],
+      "dependents": ["src/cli/index.js"],
       "orphan": false,
       "reachable": [
         {
@@ -7549,9 +6831,7 @@
           "coreModule": false,
           "followable": true,
           "couldNotResolve": false,
-          "dependencyTypes": [
-            "local"
-          ],
+          "dependencyTypes": ["local"],
           "matchesDoNotFollow": false,
           "circular": false,
           "instability": 0,
@@ -7566,9 +6846,7 @@
           "coreModule": false,
           "followable": true,
           "couldNotResolve": false,
-          "dependencyTypes": [
-            "local"
-          ],
+          "dependencyTypes": ["local"],
           "matchesDoNotFollow": false,
           "circular": false,
           "instability": 0.6666666666666666,
@@ -7583,9 +6861,7 @@
           "coreModule": false,
           "followable": true,
           "couldNotResolve": false,
-          "dependencyTypes": [
-            "local"
-          ],
+          "dependencyTypes": ["local"],
           "matchesDoNotFollow": false,
           "circular": false,
           "instability": 0.14285714285714285,
@@ -7600,9 +6876,7 @@
           "coreModule": false,
           "followable": true,
           "couldNotResolve": false,
-          "dependencyTypes": [
-            "local"
-          ],
+          "dependencyTypes": ["local"],
           "matchesDoNotFollow": false,
           "circular": false,
           "instability": 0.6666666666666666,
@@ -7617,9 +6891,7 @@
           "coreModule": false,
           "followable": true,
           "couldNotResolve": false,
-          "dependencyTypes": [
-            "local"
-          ],
+          "dependencyTypes": ["local"],
           "matchesDoNotFollow": false,
           "circular": false,
           "instability": 0.6666666666666666,
@@ -7634,9 +6906,7 @@
           "coreModule": false,
           "followable": true,
           "couldNotResolve": false,
-          "dependencyTypes": [
-            "local"
-          ],
+          "dependencyTypes": ["local"],
           "matchesDoNotFollow": false,
           "circular": false,
           "instability": 0.5,
@@ -7651,18 +6921,14 @@
           "coreModule": false,
           "followable": true,
           "couldNotResolve": false,
-          "dependencyTypes": [
-            "local"
-          ],
+          "dependencyTypes": ["local"],
           "matchesDoNotFollow": false,
           "circular": false,
           "instability": 0.8,
           "valid": true
         }
       ],
-      "dependents": [
-        "src/cli/index.js"
-      ],
+      "dependents": ["src/cli/index.js"],
       "orphan": false,
       "reachable": [
         {
@@ -7716,9 +6982,7 @@
           "coreModule": false,
           "followable": true,
           "couldNotResolve": false,
-          "dependencyTypes": [
-            "local"
-          ],
+          "dependencyTypes": ["local"],
           "matchesDoNotFollow": false,
           "circular": false,
           "instability": 0,
@@ -7733,18 +6997,14 @@
           "coreModule": false,
           "followable": true,
           "couldNotResolve": false,
-          "dependencyTypes": [
-            "local"
-          ],
+          "dependencyTypes": ["local"],
           "matchesDoNotFollow": false,
           "circular": false,
           "instability": 0,
           "valid": true
         }
       ],
-      "dependents": [
-        "src/cli/init-config/index.js"
-      ],
+      "dependents": ["src/cli/init-config/index.js"],
       "orphan": false,
       "reachable": [
         {
@@ -7764,9 +7024,7 @@
     {
       "source": "src/cli/init-config/config.js.template.js",
       "dependencies": [],
-      "dependents": [
-        "src/cli/init-config/build-config.js"
-      ],
+      "dependents": ["src/cli/init-config/build-config.js"],
       "orphan": false,
       "reachable": [
         {
@@ -7818,9 +7076,7 @@
           "coreModule": false,
           "followable": true,
           "couldNotResolve": false,
-          "dependencyTypes": [
-            "local"
-          ],
+          "dependencyTypes": ["local"],
           "matchesDoNotFollow": false,
           "circular": false,
           "instability": 0,
@@ -7863,9 +7119,7 @@
           "coreModule": false,
           "followable": true,
           "couldNotResolve": false,
-          "dependencyTypes": [
-            "local"
-          ],
+          "dependencyTypes": ["local"],
           "matchesDoNotFollow": false,
           "circular": false,
           "instability": 0.14285714285714285,
@@ -7880,18 +7134,14 @@
           "coreModule": false,
           "followable": true,
           "couldNotResolve": false,
-          "dependencyTypes": [
-            "local"
-          ],
+          "dependencyTypes": ["local"],
           "matchesDoNotFollow": false,
           "circular": false,
           "instability": 0.5,
           "valid": true
         }
       ],
-      "dependents": [
-        "src/cli/init-config/index.js"
-      ],
+      "dependents": ["src/cli/init-config/index.js"],
       "orphan": false,
       "reachable": [
         {
@@ -7920,18 +7170,14 @@
           "coreModule": false,
           "followable": true,
           "couldNotResolve": false,
-          "dependencyTypes": [
-            "local"
-          ],
+          "dependencyTypes": ["local"],
           "matchesDoNotFollow": false,
           "circular": false,
           "instability": 0.14285714285714285,
           "valid": true
         }
       ],
-      "dependents": [
-        "src/cli/init-config/get-user-input.js"
-      ],
+      "dependents": ["src/cli/init-config/get-user-input.js"],
       "orphan": false,
       "reachable": [
         {
@@ -7960,9 +7206,7 @@
           "coreModule": false,
           "followable": true,
           "couldNotResolve": false,
-          "dependencyTypes": [
-            "local"
-          ],
+          "dependencyTypes": ["local"],
           "matchesDoNotFollow": false,
           "circular": false,
           "instability": 0,
@@ -7977,18 +7221,14 @@
           "coreModule": false,
           "followable": true,
           "couldNotResolve": false,
-          "dependencyTypes": [
-            "local"
-          ],
+          "dependencyTypes": ["local"],
           "matchesDoNotFollow": false,
           "circular": false,
           "instability": 0.14285714285714285,
           "valid": true
         }
       ],
-      "dependents": [
-        "src/cli/init-config/index.js"
-      ],
+      "dependents": ["src/cli/init-config/index.js"],
       "orphan": false,
       "reachable": [
         {
@@ -8017,18 +7257,14 @@
           "coreModule": false,
           "followable": true,
           "couldNotResolve": false,
-          "dependencyTypes": [
-            "local"
-          ],
+          "dependencyTypes": ["local"],
           "matchesDoNotFollow": false,
           "circular": false,
           "instability": 0.14285714285714285,
           "valid": true
         }
       ],
-      "dependents": [
-        "src/cli/init-config/index.js"
-      ],
+      "dependents": ["src/cli/init-config/index.js"],
       "orphan": false,
       "reachable": [
         {
@@ -8057,9 +7293,7 @@
           "coreModule": false,
           "followable": true,
           "couldNotResolve": false,
-          "dependencyTypes": [
-            "local"
-          ],
+          "dependencyTypes": ["local"],
           "matchesDoNotFollow": false,
           "circular": false,
           "instability": 0,
@@ -8074,9 +7308,7 @@
           "coreModule": false,
           "followable": true,
           "couldNotResolve": false,
-          "dependencyTypes": [
-            "local"
-          ],
+          "dependencyTypes": ["local"],
           "matchesDoNotFollow": false,
           "circular": false,
           "instability": 0,
@@ -8091,9 +7323,7 @@
           "coreModule": false,
           "followable": true,
           "couldNotResolve": false,
-          "dependencyTypes": [
-            "local"
-          ],
+          "dependencyTypes": ["local"],
           "matchesDoNotFollow": false,
           "circular": false,
           "instability": 0.14285714285714285,
@@ -8108,18 +7338,14 @@
           "coreModule": false,
           "followable": true,
           "couldNotResolve": false,
-          "dependencyTypes": [
-            "local"
-          ],
+          "dependencyTypes": ["local"],
           "matchesDoNotFollow": false,
           "circular": false,
           "instability": 0,
           "valid": true
         }
       ],
-      "dependents": [
-        "src/cli/init-config/index.js"
-      ],
+      "dependents": ["src/cli/init-config/index.js"],
       "orphan": false,
       "reachable": [
         {
@@ -8148,18 +7374,14 @@
           "coreModule": false,
           "followable": true,
           "couldNotResolve": false,
-          "dependencyTypes": [
-            "local"
-          ],
+          "dependencyTypes": ["local"],
           "matchesDoNotFollow": false,
           "circular": false,
           "instability": 0,
           "valid": true
         }
       ],
-      "dependents": [
-        "src/cli/index.js"
-      ],
+      "dependents": ["src/cli/index.js"],
       "orphan": false,
       "reachable": [
         {
@@ -8188,9 +7410,7 @@
           "coreModule": false,
           "followable": true,
           "couldNotResolve": false,
-          "dependencyTypes": [
-            "local"
-          ],
+          "dependencyTypes": ["local"],
           "matchesDoNotFollow": false,
           "circular": false,
           "instability": 0,
@@ -8205,18 +7425,14 @@
           "coreModule": false,
           "followable": true,
           "couldNotResolve": false,
-          "dependencyTypes": [
-            "local"
-          ],
+          "dependencyTypes": ["local"],
           "matchesDoNotFollow": false,
           "circular": false,
           "instability": 0.5,
           "valid": true
         }
       ],
-      "dependents": [
-        "src/cli/index.js"
-      ],
+      "dependents": ["src/cli/index.js"],
       "orphan": false,
       "reachable": [
         {
@@ -8245,18 +7461,14 @@
           "coreModule": false,
           "followable": true,
           "couldNotResolve": false,
-          "dependencyTypes": [
-            "local"
-          ],
+          "dependencyTypes": ["local"],
           "matchesDoNotFollow": false,
           "circular": false,
           "instability": 0,
           "valid": true
         }
       ],
-      "dependents": [
-        "src/cli/listeners/performance-log/index.js"
-      ],
+      "dependents": ["src/cli/listeners/performance-log/index.js"],
       "orphan": false,
       "reachable": [
         {
@@ -8276,9 +7488,7 @@
     {
       "source": "src/cli/listeners/performance-log/format-helpers.js",
       "dependencies": [],
-      "dependents": [
-        "src/cli/listeners/performance-log/handlers.js"
-      ],
+      "dependents": ["src/cli/listeners/performance-log/handlers.js"],
       "orphan": false,
       "reachable": [
         {
@@ -8307,9 +7517,7 @@
           "coreModule": false,
           "followable": true,
           "couldNotResolve": false,
-          "dependencyTypes": [
-            "local"
-          ],
+          "dependencyTypes": ["local"],
           "matchesDoNotFollow": false,
           "circular": false,
           "instability": 0.8,
@@ -8324,19 +7532,14 @@
           "coreModule": false,
           "followable": true,
           "couldNotResolve": false,
-          "dependencyTypes": [
-            "local"
-          ],
+          "dependencyTypes": ["local"],
           "matchesDoNotFollow": false,
           "circular": false,
           "instability": 0,
           "valid": true
         }
       ],
-      "dependents": [
-        "src/cli/index.js",
-        "src/cli/format.js"
-      ],
+      "dependents": ["src/cli/index.js", "src/cli/format.js"],
       "orphan": false,
       "reachable": [
         {
@@ -8365,9 +7568,7 @@
           "coreModule": false,
           "followable": true,
           "couldNotResolve": false,
-          "dependencyTypes": [
-            "local"
-          ],
+          "dependencyTypes": ["local"],
           "matchesDoNotFollow": false,
           "circular": false,
           "instability": 0.3333333333333333,
@@ -8382,9 +7583,7 @@
           "coreModule": false,
           "followable": true,
           "couldNotResolve": false,
-          "dependencyTypes": [
-            "local"
-          ],
+          "dependencyTypes": ["local"],
           "matchesDoNotFollow": false,
           "circular": false,
           "instability": 0.5,
@@ -8399,9 +7598,7 @@
           "coreModule": false,
           "followable": true,
           "couldNotResolve": false,
-          "dependencyTypes": [
-            "local"
-          ],
+          "dependencyTypes": ["local"],
           "matchesDoNotFollow": false,
           "circular": false,
           "instability": 0,
@@ -8416,18 +7613,14 @@
           "coreModule": false,
           "followable": true,
           "couldNotResolve": false,
-          "dependencyTypes": [
-            "local"
-          ],
+          "dependencyTypes": ["local"],
           "matchesDoNotFollow": false,
           "circular": false,
           "instability": 0,
           "valid": true
         }
       ],
-      "dependents": [
-        "src/cli/normalize-cli-options.js"
-      ],
+      "dependents": ["src/cli/normalize-cli-options.js"],
       "orphan": false,
       "reachable": [
         {
@@ -8442,9 +7635,7 @@
     {
       "source": "src/config-utl/extract-depcruise-config/merge-configs.js",
       "dependencies": [],
-      "dependents": [
-        "src/config-utl/extract-depcruise-config/index.js"
-      ],
+      "dependents": ["src/config-utl/extract-depcruise-config/index.js"],
       "orphan": false,
       "reachable": [
         {
@@ -8459,9 +7650,7 @@
     {
       "source": "src/config-utl/extract-depcruise-config/read-config.js",
       "dependencies": [],
-      "dependents": [
-        "src/config-utl/extract-depcruise-config/index.js"
-      ],
+      "dependents": ["src/config-utl/extract-depcruise-config/index.js"],
       "orphan": false,
       "reachable": [
         {
@@ -8476,10 +7665,7 @@
     {
       "source": "src/cli/utl/io.js",
       "dependencies": [],
-      "dependents": [
-        "src/cli/index.js",
-        "src/cli/format.js"
-      ],
+      "dependents": ["src/cli/index.js", "src/cli/format.js"],
       "orphan": false,
       "reachable": [
         {
@@ -8499,10 +7685,7 @@
     {
       "source": "src/cli/utl/validate-file-existence.js",
       "dependencies": [],
-      "dependents": [
-        "src/cli/index.js",
-        "src/cli/format.js"
-      ],
+      "dependents": ["src/cli/index.js", "src/cli/format.js"],
       "orphan": false,
       "reachable": [
         {
@@ -8531,9 +7714,7 @@
           "coreModule": false,
           "followable": true,
           "couldNotResolve": false,
-          "dependencyTypes": [
-            "local"
-          ],
+          "dependencyTypes": ["local"],
           "matchesDoNotFollow": false,
           "circular": false,
           "instability": 0,
@@ -8579,9 +7760,7 @@
           "coreModule": false,
           "followable": true,
           "couldNotResolve": false,
-          "dependencyTypes": [
-            "local"
-          ],
+          "dependencyTypes": ["local"],
           "matchesDoNotFollow": false,
           "circular": false,
           "instability": 0.8,
@@ -8596,9 +7775,7 @@
           "coreModule": false,
           "followable": true,
           "couldNotResolve": false,
-          "dependencyTypes": [
-            "local"
-          ],
+          "dependencyTypes": ["local"],
           "matchesDoNotFollow": false,
           "circular": false,
           "instability": 0.25,
@@ -8613,9 +7790,7 @@
           "coreModule": false,
           "followable": true,
           "couldNotResolve": false,
-          "dependencyTypes": [
-            "local"
-          ],
+          "dependencyTypes": ["local"],
           "matchesDoNotFollow": false,
           "circular": false,
           "instability": 0,
@@ -8639,9 +7814,7 @@
           "coreModule": false,
           "followable": true,
           "couldNotResolve": false,
-          "dependencyTypes": [
-            "local"
-          ],
+          "dependencyTypes": ["local"],
           "matchesDoNotFollow": false,
           "circular": false,
           "instability": 0.8,
@@ -8656,9 +7829,7 @@
           "coreModule": false,
           "followable": true,
           "couldNotResolve": false,
-          "dependencyTypes": [
-            "local"
-          ],
+          "dependencyTypes": ["local"],
           "matchesDoNotFollow": false,
           "circular": false,
           "instability": 0.5,
@@ -8673,9 +7844,7 @@
           "coreModule": false,
           "followable": true,
           "couldNotResolve": false,
-          "dependencyTypes": [
-            "local"
-          ],
+          "dependencyTypes": ["local"],
           "matchesDoNotFollow": false,
           "circular": false,
           "instability": 0,
@@ -8690,18 +7859,14 @@
           "coreModule": false,
           "followable": true,
           "couldNotResolve": false,
-          "dependencyTypes": [
-            "local"
-          ],
+          "dependencyTypes": ["local"],
           "matchesDoNotFollow": false,
           "circular": false,
           "instability": 0,
           "valid": true
         }
       ],
-      "dependents": [
-        "bin/depcruise-fmt.js"
-      ],
+      "dependents": ["bin/depcruise-fmt.js"],
       "orphan": false,
       "reachable": [
         {
@@ -8736,9 +7901,7 @@
           "coreModule": false,
           "followable": true,
           "couldNotResolve": false,
-          "dependencyTypes": [
-            "local"
-          ],
+          "dependencyTypes": ["local"],
           "matchesDoNotFollow": false,
           "circular": false,
           "instability": 0.8666666666666667,
@@ -8753,9 +7916,7 @@
           "coreModule": false,
           "followable": true,
           "couldNotResolve": false,
-          "dependencyTypes": [
-            "local"
-          ],
+          "dependencyTypes": ["local"],
           "matchesDoNotFollow": false,
           "circular": false,
           "instability": 0.25,
@@ -8770,9 +7931,7 @@
           "coreModule": false,
           "followable": true,
           "couldNotResolve": false,
-          "dependencyTypes": [
-            "local"
-          ],
+          "dependencyTypes": ["local"],
           "matchesDoNotFollow": false,
           "circular": false,
           "instability": 0,
@@ -8796,9 +7955,7 @@
           "coreModule": false,
           "followable": true,
           "couldNotResolve": false,
-          "dependencyTypes": [
-            "local"
-          ],
+          "dependencyTypes": ["local"],
           "matchesDoNotFollow": false,
           "circular": false,
           "instability": 0,
@@ -8813,9 +7970,7 @@
     {
       "source": "src/cli/tools/wrap-stream-in-html.js",
       "dependencies": [],
-      "dependents": [
-        "bin/wrap-stream-in-html.js"
-      ],
+      "dependents": ["bin/wrap-stream-in-html.js"],
       "orphan": false,
       "reachable": [
         {
@@ -9450,10 +8605,7 @@
           "name": "src/extract/transpile",
           "instability": 0.6153846153846154,
           "circular": true,
-          "cycle": [
-            "src/extract/transpile",
-            "src/extract/parse"
-          ],
+          "cycle": ["src/extract/transpile", "src/extract/parse"],
           "valid": true
         },
         {
@@ -9495,10 +8647,7 @@
           "name": "src/extract/parse",
           "instability": 0.46153846153846156,
           "circular": true,
-          "cycle": [
-            "src/extract/parse",
-            "src/extract/transpile"
-          ],
+          "cycle": ["src/extract/parse", "src/extract/transpile"],
           "valid": true
         }
       ],
@@ -10124,20 +9273,15 @@
       },
       "externalModuleResolutionStrategy": "node_modules",
       "includeOnly": "^(src|bin)",
-      "moduleSystems": [
-        "cjs",
-        "es6"
-      ],
+      "metrics": false,
+      "moduleSystems": ["cjs", "es6"],
       "outputTo": "-",
       "outputType": "json",
       "prefix": "https://github.com/sverweij/dependency-cruiser/blob/develop/",
       "preserveSymlinks": false,
       "rulesFile": ".dependency-cruiser.json",
       "tsPreCompilationDeps": true,
-      "exoticRequireStrings": [
-        "tryRequire",
-        "requireJSON"
-      ],
+      "exoticRequireStrings": ["tryRequire", "requireJSON"],
       "reporterOptions": {
         "archi": {
           "collapsePattern": "^(src|test)/[^/]+|^bin/|node_modules/[^/]+"
@@ -10407,16 +9551,9 @@
         }
       },
       "enhancedResolveOptions": {
-        "exportsFields": [
-          "exports"
-        ],
-        "conditionNames": [
-          "require"
-        ],
-        "extensions": [
-          ".js",
-          ".d.ts"
-        ]
+        "exportsFields": ["exports"],
+        "conditionNames": ["require"],
+        "extensions": [".js", ".d.ts"]
       },
       "args": "bin src"
     },
@@ -10572,9 +9709,7 @@
             "path": "^(bin|src)"
           },
           "to": {
-            "dependencyTypes": [
-              "npm-dev"
-            ],
+            "dependencyTypes": ["npm-dev"],
             "exoticallyRequired": false
           },
           "scope": "module"
@@ -10596,9 +9731,7 @@
           "comment": "This module uses an external dependency that in package.json shows up as an optional dependency. In dependency-cruiser optional dependencies donot make sense - and are hence forbidden. Either make it a regular dependency (if it's production code) or a dev one (if it's for development only)",
           "from": {},
           "to": {
-            "dependencyTypes": [
-              "npm-optional"
-            ]
+            "dependencyTypes": ["npm-optional"]
           },
           "scope": "module"
         },
@@ -10608,9 +9741,7 @@
           "severity": "error",
           "from": {},
           "to": {
-            "dependencyTypes": [
-              "npm-peer"
-            ]
+            "dependencyTypes": ["npm-peer"]
           },
           "scope": "module"
         },
@@ -10695,9 +9826,7 @@
           "severity": "error",
           "from": {},
           "to": {
-            "dependencyTypes": [
-              "core"
-            ],
+            "dependencyTypes": ["core"],
             "path": "^(punycode|domain|constants|sys|_linklist|_stream_wrap)$"
           },
           "scope": "module"
@@ -10709,9 +9838,7 @@
           "from": {},
           "to": {
             "moreThanOneDependencyType": true,
-            "dependencyTypesNot": [
-              "type-only"
-            ]
+            "dependencyTypesNot": ["type-only"]
           },
           "scope": "module"
         },
@@ -10721,10 +9848,7 @@
           "comment": "This module depends on an npm package that isn't in the 'dependencies' section of your package.json. That's problematic as the package either (1) won't be available on live (2 - worse) will be available on live with an non-guaranteed version. Fix it by adding the package to the dependencies in your package.json.",
           "from": {},
           "to": {
-            "dependencyTypes": [
-              "npm-no-pkg",
-              "npm-unknown"
-            ]
+            "dependencyTypes": ["npm-no-pkg", "npm-unknown"]
           },
           "scope": "module"
         },
@@ -10734,9 +9858,7 @@
           "severity": "error",
           "from": {},
           "to": {
-            "dependencyTypes": [
-              "deprecated"
-            ]
+            "dependencyTypes": ["deprecated"]
           },
           "scope": "module"
         }

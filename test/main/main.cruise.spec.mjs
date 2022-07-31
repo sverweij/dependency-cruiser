@@ -26,7 +26,7 @@ function pathPosixify(pOutput) {
   return lReturnValue;
 }
 
-describe("[E] main.cruise", () => {
+describe("[E] main.cruise - main", () => {
   it("Returns an object when no options are passed", () => {
     const lResult = main.cruise(["test/main/__mocks__/ts"]);
 
@@ -45,7 +45,7 @@ describe("[E] main.cruise", () => {
     expect(lResult.output).to.be.jsonSchema(cruiseResultSchema);
   });
 
-  it("Also processes tsx correctly", () => {
+  it("processes tsx correctly", () => {
     const lResult = main.cruise(
       ["test/main/__mocks__/tsx"],
       {},
@@ -56,7 +56,7 @@ describe("[E] main.cruise", () => {
     expect(lResult.output).to.be.jsonSchema(cruiseResultSchema);
   });
 
-  it("And jsx", () => {
+  it("processes jsx correctly", () => {
     const lResult = main.cruise(
       ["test/main/__mocks__/jsx"],
       {},
@@ -66,7 +66,7 @@ describe("[E] main.cruise", () => {
     expect(pathPosixify(lResult.output)).to.deep.equal(jsxFixture);
     expect(lResult.output).to.be.jsonSchema(cruiseResultSchema);
   });
-  it("And rulesets in the form a an object instead of json", () => {
+  it("process rulesets in the form a an object instead of json", () => {
     const lResult = main.cruise(
       ["test/main/__mocks__/jsx"],
       {

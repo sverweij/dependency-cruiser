@@ -40,11 +40,12 @@
     "totalDependenciesCruised": 1,
     "optionsUsed": {
       "combinedDependencies": false,
+      "exoticRequireStrings": [],
       "externalModuleResolutionStrategy": "node_modules",
+      "metrics": false,
       "moduleSystems": ["es6", "cjs", "tsd", "amd"],
       "preserveSymlinks": false,
       "tsPreCompilationDeps": true,
-      "exoticRequireStrings": [],
       "args": "src"
     }
   }

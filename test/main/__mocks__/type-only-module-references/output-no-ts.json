@@ -18,11 +18,12 @@
     "totalDependenciesCruised": 0,
     "optionsUsed": {
       "combinedDependencies": false,
+      "exoticRequireStrings": [],
       "externalModuleResolutionStrategy": "node_modules",
+      "metrics": false,
       "moduleSystems": ["es6", "cjs", "tsd", "amd"],
       "preserveSymlinks": false,
       "tsPreCompilationDeps": false,
-      "exoticRequireStrings": [],
       "args": "src"
     }
   }

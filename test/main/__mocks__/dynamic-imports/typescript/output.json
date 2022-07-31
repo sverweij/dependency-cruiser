@@ -12,9 +12,7 @@
           "coreModule": false,
           "followable": true,
           "couldNotResolve": false,
-          "dependencyTypes": [
-            "local"
-          ],
+          "dependencyTypes": ["local"],
           "matchesDoNotFollow": false,
           "circular": true,
           "cycle": [
@@ -23,17 +21,10 @@
             "src/circular.ts"
           ],
           "valid": false,
-          "rules": [
-            {
-              "severity": "info",
-              "name": "no-circular"
-            }
-          ]
+          "rules": [{ "severity": "info", "name": "no-circular" }]
         }
       ],
-      "dependents": [
-        "src/dynamic-to-circular.ts"
-      ],
+      "dependents": ["src/dynamic-to-circular.ts"],
       "orphan": false,
       "valid": true
     },
@@ -49,9 +40,7 @@
           "coreModule": false,
           "followable": true,
           "couldNotResolve": false,
-          "dependencyTypes": [
-            "local"
-          ],
+          "dependencyTypes": ["local"],
           "matchesDoNotFollow": false,
           "circular": true,
           "cycle": [
@@ -60,17 +49,10 @@
             "src/index.ts"
           ],
           "valid": false,
-          "rules": [
-            {
-              "severity": "info",
-              "name": "no-circular"
-            }
-          ]
+          "rules": [{ "severity": "info", "name": "no-circular" }]
         }
       ],
-      "dependents": [
-        "src/circular.ts"
-      ],
+      "dependents": ["src/circular.ts"],
       "orphan": false,
       "valid": true
     },
@@ -86,9 +68,7 @@
           "coreModule": false,
           "followable": true,
           "couldNotResolve": false,
-          "dependencyTypes": [
-            "local"
-          ],
+          "dependencyTypes": ["local"],
           "matchesDoNotFollow": false,
           "circular": true,
           "cycle": [
@@ -97,17 +77,10 @@
             "src/dynamic-to-circular.ts"
           ],
           "valid": false,
-          "rules": [
-            {
-              "severity": "warn",
-              "name": "no-dynamic"
-            }
-          ]
+          "rules": [{ "severity": "warn", "name": "no-dynamic" }]
         }
       ],
-      "dependents": [
-        "src/index.ts"
-      ],
+      "dependents": ["src/index.ts"],
       "orphan": false,
       "valid": true
     }
@@ -118,19 +91,13 @@
         "type": "dependency",
         "from": "src/dynamic-to-circular.ts",
         "to": "src/circular.ts",
-        "rule": {
-          "severity": "warn",
-          "name": "no-dynamic"
-        }
+        "rule": { "severity": "warn", "name": "no-dynamic" }
       },
       {
         "type": "cycle",
         "from": "src/circular.ts",
         "to": "src/index.ts",
-        "rule": {
-          "severity": "info",
-          "name": "no-circular"
-        },
+        "rule": { "severity": "info", "name": "no-circular" },
         "cycle": [
           "src/index.ts",
           "src/dynamic-to-circular.ts",
@@ -146,16 +113,12 @@
     "totalDependenciesCruised": 3,
     "optionsUsed": {
       "combinedDependencies": false,
+      "exoticRequireStrings": [],
       "externalModuleResolutionStrategy": "node_modules",
-      "moduleSystems": [
-        "es6",
-        "cjs",
-        "tsd",
-        "amd"
-      ],
+      "metrics": false,
+      "moduleSystems": ["es6", "cjs", "tsd", "amd"],
       "preserveSymlinks": false,
       "tsPreCompilationDeps": false,
-      "exoticRequireStrings": [],
       "args": "src"
     },
     "ruleSetUsed": {
@@ -164,19 +127,14 @@
           "name": "no-circular",
           "severity": "info",
           "from": {},
-          "to": {
-            "dynamic": false,
-            "circular": true
-          },
+          "to": { "dynamic": false, "circular": true },
           "scope": "module"
         },
         {
           "name": "no-dynamic",
           "severity": "warn",
           "from": {},
-          "to": {
-            "dynamic": true
-          },
+          "to": { "dynamic": true },
           "scope": "module"
         }
       ]

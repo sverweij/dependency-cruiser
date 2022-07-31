@@ -12,9 +12,7 @@
           "coreModule": false,
           "followable": true,
           "couldNotResolve": false,
-          "dependencyTypes": [
-            "aliased"
-          ],
+          "dependencyTypes": ["aliased"],
           "matchesDoNotFollow": false,
           "circular": false,
           "valid": true
@@ -46,9 +44,7 @@
           "coreModule": false,
           "followable": true,
           "couldNotResolve": false,
-          "dependencyTypes": [
-            "aliased"
-          ],
+          "dependencyTypes": ["aliased"],
           "matchesDoNotFollow": false,
           "circular": false,
           "valid": true
@@ -70,12 +66,8 @@
     "optionsUsed": {
       "combinedDependencies": false,
       "externalModuleResolutionStrategy": "node_modules",
-      "moduleSystems": [
-        "es6",
-        "cjs",
-        "tsd",
-        "amd"
-      ],
+      "metrics": false,
+      "moduleSystems": ["es6", "cjs", "tsd", "amd"],
       "outputTo": "test/cli/__output__/typescript-path-resolution.json",
       "outputType": "json",
       "preserveSymlinks": false,
