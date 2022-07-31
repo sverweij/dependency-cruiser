@@ -34,27 +34,27 @@ export interface IValidationResult {
  * Validates the pModule module against the given
  * ruleset pRuleSet
  */
-export function module(
+export type module = (
   pRuleSet: IFlattenedRuleSet,
   pModule: IModule
-): IValidationResult;
+) => IValidationResult;
 
 /**
  * Validates the pFrom and pTo dependency pair against the given
  * ruleset pRuleSet
  */
-export function dependency(
+export type dependency = (
   pRuleSet: IFlattenedRuleSet,
   pFrom: IModule,
   pTo: IDependency
-): IValidationResult;
+) => IValidationResult;
 
 /**
  * Validates the pFrom and pTo dependency pair against the given
  * ruleset pRuleSet
  */
-export function folder(
+export type folder = (
   pRuleSet: IFlattenedRuleSet,
   pFromFolder: IFolder,
   pToFolder: IFolderDependency
-): IValidationResult;
+) => IValidationResult;
