@@ -7,7 +7,7 @@ export interface ITranspilerWrapper {
   ) => string;
 }
 
-export type getWrapper = (pExtension, pTranspileOptions) => ITranspilerWrapper;
+export function getWrapper(pExtension, pTranspileOptions): ITranspilerWrapper;
 
 export const scannableExtensions: string[];
 
@@ -19,4 +19,4 @@ export interface IAvailableTranspiler {
   available: boolean;
 }
 
-export type getAvailableTranspilers = () => IAvailableTranspiler[];
+export function getAvailableTranspilers(): IAvailableTranspiler[];

@@ -73,12 +73,12 @@ export interface IReporterOutput {
  *                        before calling make sure to flatten them out if you want them
  *                        used (e.g. with 'dependency-cruiser/config-utl/extract-ts-config')
  */
-export type cruise = (
+export function cruise(
   pFileAndDirectoryArray: string[],
   pCruiseOptions?: ICruiseOptions,
   pResolveOptions?: IResolveOptions,
   pTSConfig?: any
-) => IReporterOutput;
+): IReporterOutput;
 
 export interface ITranspileOptions {
   /**
@@ -113,12 +113,12 @@ export interface ITranspileOptions {
  * @param pTranspileOptions Object to hold options to pass to underlying transpilers
  *                        like TypeScript or Babel
  */
-export type futureCruise = (
+export function futureCruise(
   pFileAndDirectoryArray: string[],
   pCruiseOptions?: ICruiseOptions,
   pResolveOptions?: IResolveOptions,
   pTranspileOptions?: ITranspileOptions
-) => IReporterOutput;
+): IReporterOutput;
 
 /**
  * Given a cruise result, formats it with the given reporter (pOutputType)
@@ -127,10 +127,10 @@ export type futureCruise = (
  *                    to the [dependency-cruiser results schema](https://github.com/sverweij/dependency-cruiser/blob/develop/src/schema/cruise-result.json)
  * @param pOutputType Which reporter to use to format the cruise result with
  */
-export type format = (
+export function format(
   pResult: ICruiseResult,
   pFormatOptions: IFormatOptions
-) => IReporterOutput;
+): IReporterOutput;
 
 /**
  * Returns an array of supported transpilers and for each of the transpilers
@@ -138,4 +138,4 @@ export type format = (
  * - the supported version range (semver version range)
  * - whether or not the transpiler is available in the current environment
  */
-export type getAvailableTranspilers = () => IAvailableTranspiler[];
+export function getAvailableTranspilers(): IAvailableTranspiler[];
