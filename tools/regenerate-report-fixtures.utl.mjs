@@ -74,43 +74,34 @@ function renderBareThemeDot(pResultObject) {
   return renderDot(pResultObject, { theme: lBareTheme });
 }
 
-function renderDefaultThemeDot(pResultObject) {
-  // empty theme with no overrides gets the default theme assigned
-  return renderDot(pResultObject, { theme: {} });
-}
-
 const CDOT_MOCK_DIR = path.join(
   __dirname,
-  "../test/report/dot/custom-level/mocks/"
+  "../test/report/dot/custom-level/__mocks__/"
 );
 const DDOT_MOCK_DIR = path.join(
   __dirname,
-  "../test/report/dot/folder-level/mocks/"
+  "../test/report/dot/folder-level/__mocks__/"
 );
 const FDOT_MOCK_DIR = path.join(
   __dirname,
-  "../test/report/dot/flat-level/mocks/"
+  "../test/report/dot/flat-level/__mocks__/"
 );
 const DOT_MOCK_DIR = path.join(
   __dirname,
-  "../test/report/dot/module-level/mocks/"
+  "../test/report/dot/module-level/__mocks__/"
 );
 const TEAMCITY_MOCK_DIR = path.join(
   __dirname,
-  "../test/report/teamcity/mocks/"
+  "../test/report/teamcity/__mocks__/"
 );
-const HTML_MOCK_DIR = path.join(__dirname, "../test/report/html/mocks/");
-const CSV_MOCK_DIR = path.join(__dirname, "../test/report/csv/mocks/");
+const HTML_MOCK_DIR = path.join(__dirname, "../test/report/html/__mocks__/");
+const CSV_MOCK_DIR = path.join(__dirname, "../test/report/csv/__mocks__/");
 
 regenerateReportFixtures(DDOT_MOCK_DIR, renderDdot, ".dot");
 regenerateReportFixtures(CDOT_MOCK_DIR, renderCdot, ".dot");
 regenerateReportFixtures(FDOT_MOCK_DIR, renderFdot, ".dot");
 regenerateReportFixtures(DOT_MOCK_DIR, renderBareThemeDot, ".dot");
-regenerateReportFixtures(
-  DOT_MOCK_DIR,
-  renderDefaultThemeDot,
-  "-default-theme.dot"
-);
+
 regenerateReportFixturesFromMJS(
   TEAMCITY_MOCK_DIR,
   renderTeamcity,
