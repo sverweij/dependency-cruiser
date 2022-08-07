@@ -1,5 +1,5 @@
-const fs = require("fs");
-const path = require("path");
+const { readFileSync, readdirSync, accessSync, statSync, R_OK } = require("fs");
+const { join } = require("path");
 const has = require("lodash/has");
 const get = require("lodash/get");
 const { DEFAULT_CONFIG_FILE_NAME } = require("../defaults");
@@ -9,7 +9,7 @@ const LIKELY_TEST_FOLDERS = ["test", "spec", "tests", "specs", "bdd"];
 const LIKELY_PACKAGES_FOLDERS = ["packages"];
 const TSCONFIG_CANDIDATE_PATTERN = /.*tsconfig.*\.json$/gi;
 const JSCONFIG_CANDIDATE_PATTERN = /.*jsconfig.*\.json$/gi;
-const WEBPACK_CANDIDATE_PATTERN = /.*webpack.*\.c?js(on)?$/gi;
+const WEBPACK_CANDIDATE_PATTERN = /.*webpack.*\.(c?js|json5?|ts|ya?ml)$/gi;
 const BABEL_CONFIG_CANDIDATE_PATTERN = /^\.babelrc$|.*babel.*\.json/gi;
 
 /**
@@ -17,11 +17,11 @@ const BABEL_CONFIG_CANDIDATE_PATTERN = /^\.babelrc$|.*babel.*\.json/gi;
  *
  * @param {string} pManifestFileName - the file name where the package manifest (package.json) lives
  * @returns {any} - the contents of said manifest as a javascript object
- * @throws ENOENT when the manifest wasn't found
- * @throws SyntaxError when the manifest's json is invalid
+ * @throws {ENOENT} when the manifest wasn't found
+ * @throws {SyntaxError} when the manifest's json is invalid
  */
 function readManifest(pManifestFileName = "./package.json") {
-  return JSON.parse(fs.readFileSync(pManifestFileName, "utf8"));
+  return JSON.parse(readFileSync(pManifestFileName, "utf8"));
 }
 
 /*
@@ -30,7 +30,7 @@ function readManifest(pManifestFileName = "./package.json") {
  */
 function fileExists(pFile) {
   try {
-    fs.accessSync(pFile, fs.R_OK);
+    accessSync(pFile, R_OK);
   } catch (pError) {
     return false;
   }
@@ -61,21 +61,17 @@ function isTypeModule() {
 }
 
 function getFolderNames(pFolderName) {
-  return fs
-    .readdirSync(pFolderName, "utf8")
-    .filter((pFileName) =>
-      fs.statSync(path.join(pFolderName, pFileName)).isDirectory()
-    );
+  return readdirSync(pFolderName, "utf8").filter((pFileName) =>
+    statSync(join(pFolderName, pFileName)).isDirectory()
+  );
 }
 
 function getMatchingFileNames(pPattern, pFolderName = process.cwd()) {
-  return fs
-    .readdirSync(pFolderName, "utf8")
-    .filter(
-      (pFileName) =>
-        fs.statSync(path.join(pFolderName, pFileName)).isFile() &&
-        pFileName.match(pPattern)
-    );
+  return readdirSync(pFolderName, "utf8").filter(
+    (pFileName) =>
+      statSync(join(pFolderName, pFileName)).isFile() &&
+      pFileName.match(pPattern)
+  );
 }
 
 function isLikelyMonoRepo(pFolderNames = getFolderNames(process.cwd())) {
