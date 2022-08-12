@@ -152,9 +152,9 @@
     "glob": "7.2.0",
     "handlebars": "4.7.7",
     "indent-string": "^4.0.0",
-    "inquirer": "^8.2.4",
     "json5": "2.2.1",
     "lodash": "4.17.21",
+    "prompts": "2.4.2",
     "safe-regex": "2.1.1",
     "semver": "^7.3.7",
     "semver-try-require": "^5.0.2",
@@ -170,6 +170,7 @@
     "@swc/core": "1.2.220",
     "@types/lodash": "4.14.182",
     "@types/node": "18.6.2",
+    "@types/prompts": "2.0.14",
     "@typescript-eslint/eslint-plugin": "5.31.0",
     "@typescript-eslint/parser": "5.31.0",
     "@vue/compiler-sfc": "3.2.37",
@@ -223,11 +224,6 @@
         "package": "husky",
         "policy": "wanted",
         "because": "https://github.com/typicode/husky/issues/822"
-      },
-      {
-        "package": "inquirer",
-        "policy": "wanted",
-        "because": "version 9 only exports ejs - and we use cjs and don't transpile"
       },
       {
         "package": "indent-string",

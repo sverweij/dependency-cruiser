@@ -1,141 +1,141 @@
-const inquirer = require("inquirer");
+const prompts = require("prompts");
 const {
+  isLikelyMonoRepo,
+  getMonoRepoPackagesCandidates,
   getSourceFolderCandidates,
   getTestFolderCandidates,
+  hasJSConfigCandidates,
+  hasTSConfigCandidates,
+  hasTestsWithinSource,
+  toSourceLocationArray,
+  getJSConfigCandidates,
+  getTSConfigCandidates,
   hasBabelConfigCandidates,
   getBabelConfigCandidates,
-  hasJSConfigCandidates,
-  getJSConfigCandidates,
-  hasTSConfigCandidates,
-  getTSConfigCandidates,
   hasWebpackConfigCandidates,
   getWebpackConfigCandidates,
-  getMonoRepoPackagesCandidates,
-  hasTestsWithinSource,
-  isLikelyMonoRepo,
-  toSourceLocationArray,
 } = require("./environment-helpers");
 const { validateLocation } = require("./inquirer-validators");
 
-const INQUIRER_QUESTIONS = [
+function toPromptChoice(pString) {
+  return {
+    title: pString,
+    value: pString,
+  };
+}
+
+/** @type {import('@types/prompts').PromptObject[]} */
+const QUESTIONS = [
   {
     name: "isMonoRepo",
-    type: "confirm",
-    message: "This looks like a mono repo. Is that correct?",
-    default: isLikelyMonoRepo(),
-    when: () => isLikelyMonoRepo(),
+    type: () => (isLikelyMonoRepo() ? "confirm" : false),
+    message: "This looks like mono repo. Is that correct?",
+    initial: isLikelyMonoRepo(),
   },
   {
     name: "sourceLocation",
-    type: "input",
+    type: (_, pAnswers) => (pAnswers.isMonoRepo ? "text" : false),
     message: "Mono repo it is! Where do your packages live?",
-    default: getMonoRepoPackagesCandidates(),
+    initial: getMonoRepoPackagesCandidates(),
     validate: validateLocation,
-    when: (pAnswers) => pAnswers.isMonoRepo,
   },
   {
     name: "combinedDependencies",
-    type: "confirm",
+    type: (_, pAnswers) => (pAnswers.isMonoRepo ? "confirm" : false),
     message:
       "Do your packages use dependencies declared in the root of your repo?",
-    default: false,
-    when: (pAnswers) => pAnswers.isMonoRepo,
+    initial: false,
   },
   {
     name: "sourceLocation",
-    type: "input",
+    type: (_, pAnswers) => (pAnswers.isMonoRepo ? false : "text"),
     message: "Where do your source files live?",
-    default: getSourceFolderCandidates(),
+    initial: getSourceFolderCandidates(),
     validate: validateLocation,
-    when: (pAnswers) => !pAnswers.isMonoRepo,
   },
   {
     name: "hasTestsOutsideSource",
-    type: "confirm",
+    type: (_, pAnswers) => (pAnswers.isMonoRepo ? false : "confirm"),
     message: "Do your test files live in a separate folder?",
-    default: (pAnswers) => {
+    initial: (_, pAnswers) => {
       return !hasTestsWithinSource(
         getTestFolderCandidates(),
         toSourceLocationArray(pAnswers.sourceLocation)
       );
     },
-    when: (pAnswers) => !pAnswers.isMonoRepo,
   },
   {
     name: "testLocation",
-    type: "input",
+    type: (_, pAnswers) =>
+      pAnswers.hasTestsOutsideSource && !pAnswers.isMonoRepo ? "text" : false,
     message: "Where do your test files live?",
-    default: getTestFolderCandidates(),
+    initial: getTestFolderCandidates(),
     validate: validateLocation,
-    when: (pAnswers) => pAnswers.hasTestsOutsideSource && !pAnswers.isMonoRepo,
   },
   {
     name: "useJsConfig",
-    type: "confirm",
+    type: () =>
+      hasJSConfigCandidates() && !hasTSConfigCandidates() ? "confirm" : false,
     message: "Looks like you're using a 'jsconfig.json'. Use that?",
-    default: true,
-    when: () => hasJSConfigCandidates() && !hasTSConfigCandidates(),
+    initial: true,
   },
   {
     name: "jsConfig",
-    type: "list",
-    message: "Full path to your 'jsconfig.json':",
-    choices: getJSConfigCandidates(),
-    when: (pAnswers) => pAnswers.useJsConfig,
+    type: (_, pAnswers) => (pAnswers.useJsConfig ? "select" : false),
+    message: "Full path to your 'jsconfig.json",
+    choices: getJSConfigCandidates().map((pCandidate) => ({
+      title: pCandidate,
+      value: pCandidate,
+    })),
   },
   {
     name: "useTsConfig",
-    type: "confirm",
-    message: "Looks like you're using TypeScript. Use a 'tsconfig.json'?",
-    default: true,
-    when: () => hasTSConfigCandidates(),
+    type: () => (hasTSConfigCandidates() ? "confirm" : false),
+    message: "Looks like you're using a 'tsconfig.json'. Use that?",
+    initial: true,
   },
   {
     name: "tsConfig",
-    type: "list",
-    message: "Full path to your 'tsconfig.json':",
-    choices: getTSConfigCandidates(),
-    when: (pAnswers) => pAnswers.useTsConfig,
+    type: (_, pAnswers) => (pAnswers.useTsConfig ? "select" : false),
+    message: "Full path to your 'tsconfig.json",
+    choices: getTSConfigCandidates().map(toPromptChoice),
   },
   {
     name: "tsPreCompilationDeps",
-    type: "confirm",
+    type: (_, pAnswers) => (pAnswers.useTsConfig ? "confirm" : false),
     message:
       "Also regard TypeScript dependencies that exist only before compilation?",
-    when: (pAnswers) => pAnswers.useTsConfig,
+    initial: true,
   },
   {
     name: "useBabelConfig",
-    type: "confirm",
+    type: () => (hasBabelConfigCandidates() ? "confirm" : false),
     message: "Looks like you're using Babel. Use a babel config?",
-    default: true,
-    when: () => hasBabelConfigCandidates(),
+    initial: true,
   },
   {
     name: "babelConfig",
-    type: "list",
+    type: (_, pAnswers) => (pAnswers.useBabelConfig ? "select" : false),
     message: "Full path to your babel config:",
-    choices: getBabelConfigCandidates(),
-    when: (pAnswers) => pAnswers.useBabelConfig,
+    choices: getBabelConfigCandidates().map(toPromptChoice),
   },
   {
-    name: "useWebpackConfig",
-    type: "confirm",
+    name: "useWebPackConfig",
+    type: () => (hasWebpackConfigCandidates() ? "confirm" : false),
     message: "Looks like you're using webpack - specify a webpack config?",
-    default: true,
-    when: () => hasWebpackConfigCandidates(),
+    initial: true,
   },
   {
     name: "webpackConfig",
-    type: "list",
+    type: (_, pAnswers) => (pAnswers.useWebpackConfig ? "select" : false),
     message: "Full path to your webpack config:",
-    choices: getWebpackConfigCandidates(),
-    when: (pAnswers) => pAnswers.useWebpackConfig,
+    choices: getWebpackConfigCandidates().map(toPromptChoice),
   },
 ];
+
 /**
  * @return {Promise<import("../../../types/init-config").IPartialInitConfig>}
  */
 module.exports = function getUserInput() {
-  return inquirer.prompt(INQUIRER_QUESTIONS);
+  return prompts(QUESTIONS);
 };
