@@ -104,6 +104,7 @@
     "lint:types:tsc": "tsc --project types/tsconfig.json",
     "lint:types:lint": "eslint --no-ignore --config types/.eslintrc.json types/*.d.ts",
     "lint:types:fix": "eslint --no-ignore --config types/.eslintrc.json --fix types/*.d.ts",
+    "prepare": "husky install",
     "scm:push": "run-p --aggregate-output scm:push:*",
     "scm:push:bitbucket-mirror": "run-p --aggregate-output scm:push:bitbucket-mirror:*",
     "scm:push:bitbucket-mirror:commits": "git push bitbucket-mirror",
@@ -187,7 +188,7 @@
     "eslint-plugin-node": "11.1.0",
     "eslint-plugin-security": "1.5.0",
     "eslint-plugin-unicorn": "^43.0.1",
-    "husky": "^4.3.8",
+    "husky": "8.0.1",
     "intercept-stdout": "0.1.2",
     "lint-staged": "12.3.4",
     "mocha": "10.0.0",
@@ -219,11 +220,6 @@
         "package": "glob",
         "policy": "pin",
         "because": "from version 7.2.1 behavior on windows changes - in a potentially breaking fashion. Wait with upgrading until we're majoring or from when there's a vuln in 7.2.0"
-      },
-      {
-        "package": "husky",
-        "policy": "wanted",
-        "because": "https://github.com/typicode/husky/issues/822"
       },
       {
         "package": "indent-string",
@@ -277,11 +273,6 @@
     "typescript": ">=2.0.0 <5.0.0",
     "vue-template-compiler": ">=2.0.0 <3.0.0",
     "@vue/compiler-sfc": ">=3.0.0 <4.0.0"
-  },
-  "husky": {
-    "hooks": {
-      "pre-commit": "lint-staged"
-    }
   },
   "lint-staged": {
     "{src,config}/**/*.js": [
