@@ -153,9 +153,11 @@
     "glob": "7.2.0",
     "handlebars": "4.7.7",
     "indent-string": "^4.0.0",
+    "interpret": "^2.2.0",
     "json5": "2.2.1",
     "lodash": "4.17.21",
     "prompts": "2.4.2",
+    "rechoir": "^0.8.0",
     "safe-regex": "2.1.1",
     "semver": "^7.3.7",
     "semver-try-require": "^5.0.2",
@@ -209,12 +211,12 @@
       {
         "package": "chalk",
         "policy": "wanted",
-        "because": "version 5 only exports ejs - and we use cjs and don't transpile"
+        "because": "version 5 only exports esm - and we use cjs and don't transpile"
       },
       {
         "package": "figures",
         "policy": "wanted",
-        "because": "version 4 only exports ejs - and we use cjs and don't transpile"
+        "because": "version 4 only exports esm - and we use cjs and don't transpile"
       },
       {
         "package": "glob",
@@ -224,7 +226,12 @@
       {
         "package": "indent-string",
         "policy": "wanted",
-        "because": "version 5 only exports ejs - and we use cjs and don't transpile"
+        "because": "version 5 only exports esm - and we use cjs and don't transpile"
+      },
+      {
+        "package": "interpret",
+        "policy": "wanted",
+        "because": "we want to keep interpret ~similar to what webpack-cli uses (which is ^2.2.0)"
       },
       {
         "package": "lint-staged",
@@ -234,12 +241,17 @@
       {
         "package": "normalize-newline",
         "policy": "wanted",
-        "because": "version 4 only exports ejs - and we use cjs and don't transpile (this only used in unit tests - but one of'em is a cjs one ...)"
+        "because": "version 4 only exports esm - and we use cjs and don't transpile (this only used in unit tests - but one of'em is a cjs one ...)"
+      },
+      {
+        "package": "rechoir",
+        "policy": "wanted",
+        "because": "we want to keep rechoir ~similar to what webpack-cli uses (which is ^0.7.0, but ^0.8.0 is similar enough and more recent anyway)"
       },
       {
         "package": "wrap-ansi",
         "policy": "wanted",
-        "because": "version 8 only exports ejs - and we use cjs and don't transpile"
+        "because": "version 8 only exports esm - and we use cjs and don't transpile"
       }
     ]
   },
