@@ -135,7 +135,7 @@
     "test:watch": "mocha --watch --watch-extensions=json --reporter=min test/\\*\\*/\\*.spec.js",
     "update-dependencies": "npm-run-all upem:update upem:install build:clean build lint:fix depcruise test:cover",
     "upem:install": "npm install",
-    "upem:update": "npm outdated --json | upem",
+    "upem:update": "npm outdated --json --long | upem | pbcopy && pbpaste",
     "version": "npm-run-all build depcruise:graph:doc scm:stage"
   },
   "dependencies": {
@@ -170,12 +170,12 @@
     "@babel/core": "7.18.10",
     "@babel/plugin-transform-modules-commonjs": "7.18.6",
     "@babel/preset-typescript": "7.18.6",
-    "@swc/core": "1.2.231",
-    "@types/lodash": "4.14.182",
-    "@types/node": "18.7.3",
+    "@swc/core": "1.2.241",
+    "@types/lodash": "4.14.184",
+    "@types/node": "18.7.8",
     "@types/prompts": "2.0.14",
-    "@typescript-eslint/eslint-plugin": "5.33.0",
-    "@typescript-eslint/parser": "5.33.0",
+    "@typescript-eslint/eslint-plugin": "5.33.1",
+    "@typescript-eslint/parser": "5.33.1",
     "@vue/compiler-sfc": "3.2.37",
     "c8": "7.12.0",
     "chai": "4.3.6",
@@ -202,8 +202,8 @@
     "svelte": "3.49.0",
     "symlink-dir": "5.0.1",
     "typescript": "4.7.4",
-    "upem": "7.0.2",
-    "vue-template-compiler": "2.7.8",
+    "upem": "7.2.0",
+    "vue-template-compiler": "2.7.9",
     "yarn": "1.22.19"
   },
   "upem": {
