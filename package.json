@@ -134,6 +134,7 @@
     "test:load:short": "hyperfine --warmup 1 --runs 5 \"bin/dependency-cruise.js --ignore-known --validate -- src bin test configs types tools\"",
     "test:watch": "mocha --watch --watch-extensions=json --reporter=min test/\\*\\*/\\*.spec.js",
     "update-dependencies": "npm-run-all upem:update upem:install build:clean build lint:fix depcruise test:cover",
+    "upem-outdated": "npm outdated --json --long | upem --dry-run",
     "upem:install": "npm install",
     "upem:update": "npm outdated --json --long | upem | pbcopy && pbpaste",
     "version": "npm-run-all build depcruise:graph:doc scm:stage"
@@ -202,7 +203,7 @@
     "svelte": "3.49.0",
     "symlink-dir": "5.0.1",
     "typescript": "4.7.4",
-    "upem": "7.2.0",
+    "upem": "7.3.0",
     "vue-template-compiler": "2.7.9",
     "yarn": "1.22.19"
   },
