@@ -1,4 +1,3 @@
-/* eslint-disable security/detect-object-injection */
 const get = require("lodash/get");
 const has = require("lodash/has");
 const set = require("lodash/set");

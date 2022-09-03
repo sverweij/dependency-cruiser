@@ -1,4 +1,3 @@
-// eslint-disable-next-line node/no-unsupported-features/node-builtins
 import { promises as fsPromise } from "node:fs";
 import { expect } from "chai";
 import svelteWrap from "../../../src/extract/transpile/svelte-wrap.js";

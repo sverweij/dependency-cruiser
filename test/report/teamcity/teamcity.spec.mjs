@@ -85,7 +85,7 @@ describe("[I] report/teamcity", () => {
     expect(removePerSessionAttributes(lResult.output)).to.equal(
       removePerSessionAttributes(lFixture)
     );
-    // eslint-disable-next-line no-magic-numbers
+
     expect(lResult.exitCode).to.equal(0);
   });
 

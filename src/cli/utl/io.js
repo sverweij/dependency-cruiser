@@ -32,7 +32,6 @@ function writeToStdOut(pString, pBufferSize = PIPE_BUFFER_SIZE) {
 
   /* eslint no-plusplus: 0 */
   for (lIndex = 0; lIndex < lNumberOfChunks; lIndex++) {
-    // eslint-disable-next-line unicorn/prefer-string-slice
     process.stdout.write(
       pString.substr(lIndex * pBufferSize, pBufferSize),
       "utf8"

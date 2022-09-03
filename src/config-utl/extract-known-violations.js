@@ -5,7 +5,7 @@ const makeAbsolute = require("./make-absolute");
 module.exports = function extractKnownViolations(pKnownViolationsFileName) {
   try {
     return json5.parse(
-      readFileSync(makeAbsolute(pKnownViolationsFileName), "utf-8")
+      readFileSync(makeAbsolute(pKnownViolationsFileName), "utf8")
     );
     // TODO: apparently node12 native coverage doesn't see this is covered with UT
     //      (node 14 and 16 do), so c8 doesn't either. The ignore can be removed

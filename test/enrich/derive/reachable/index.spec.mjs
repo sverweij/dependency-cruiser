@@ -372,7 +372,6 @@ describe("[U] enrich/derive/reachable/index - reachability detection", () => {
     ).to.deep.equal(lAnotatedGraphForHajooAllowed);
   });
 
-  // eslint-disable-next-line max-len
   it('returns the reachability annotated graph when passed a rule set with forbidden "reachable" in it (and a pathNot from)', () => {
     const lForbiddenReachabilityRuleSetHajoo = {
       forbidden: [

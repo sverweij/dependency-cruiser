@@ -1,4 +1,3 @@
-/* eslint-disable no-unused-expressions */
 import { expect } from "chai";
 import filterBank from "../../src/graph-utl/filter-bank.js";
 import reportModules from "./__mocks__/report-modules.mjs";

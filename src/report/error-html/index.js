@@ -1,4 +1,3 @@
-/* eslint-disable security/detect-object-injection */
 const Handlebars = require("handlebars/runtime");
 const { formatSummaryForReport, aggregateViolations } = require("./utl");
 

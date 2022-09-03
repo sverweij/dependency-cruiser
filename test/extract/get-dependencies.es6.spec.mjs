@@ -5,8 +5,6 @@ const requireJSON = createRequireJSON(import.meta.url);
 
 const es6Fixtures = requireJSON("./__fixtures__/es6.json");
 
-/* eslint-disable mocha/no-top-level-hooks */
-
 describe("[I] extract/getDependencies - ES6 - ", () => {
   es6Fixtures.forEach((pFixture) => runFixture(pFixture, "acorn"));
   es6Fixtures.forEach((pFixture) => runFixture(pFixture, "swc"));

@@ -1,4 +1,3 @@
-/* eslint-disable max-statements */
 import { expect } from "chai";
 import validate from "../../src/validate/index.js";
 import parseRuleSet from "./parse-ruleset.utl.mjs";

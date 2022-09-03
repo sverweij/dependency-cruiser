@@ -17,11 +17,10 @@ require("./config.js.template");
 module.exports = function buildConfig(pNormalizedInitOptions) {
   return Handlebars.templates["config.js.template.hbs"]({
     ...pNormalizedInitOptions,
-    ...{
-      sourceLocationRE: folderNameArrayToRE(
-        pNormalizedInitOptions.sourceLocation
-      ),
-      testLocationRE: folderNameArrayToRE(pNormalizedInitOptions.testLocation),
-    },
+
+    sourceLocationRE: folderNameArrayToRE(
+      pNormalizedInitOptions.sourceLocation
+    ),
+    testLocationRE: folderNameArrayToRE(pNormalizedInitOptions.testLocation),
   });
 };

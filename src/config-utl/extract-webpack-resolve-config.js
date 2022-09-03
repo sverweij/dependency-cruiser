@@ -82,7 +82,7 @@ function tryRegisterNonNative(pWebpackConfigFilename) {
  * @throws {Error} when the webpack config isn't usable (e.g. because it
  *                 doesn't exist, or because it's invalid)
  */
-// eslint-disable-next-line max-lines-per-function, complexity
+
 module.exports = function extractWebpackResolveConfig(
   pWebpackConfigFilename,
   pEnvironment,

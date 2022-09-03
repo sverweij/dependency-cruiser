@@ -10,8 +10,6 @@ const requireJSON = createRequireJSON(import.meta.url);
 const coffeeFixtures = requireJSON("./__fixtures__/coffee.json");
 const vueFixtures = requireJSON("./__fixtures__/vue.json");
 
-/* eslint-disable mocha/no-top-level-hooks */
-
 describe("[I] extract/getDependencies - Vue with TypeScript - ", () => {
   vueFixtures.forEach((pFixture) => runFixture(pFixture, "tsc"));
 });

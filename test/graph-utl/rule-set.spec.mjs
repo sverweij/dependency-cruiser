@@ -22,7 +22,6 @@ describe("[U] graph-utl/rule-set - findRuleByName", () => {
       .undefined;
   });
   it("returns undefined if the rule is not in there", () => {
-    // eslint-disable-next-line no-undefined
     expect(ruleset.findRuleByName(lRuleSet, "another-rule")).to.be.undefined;
   });
   it("returns the rule if the rule is in there", () => {

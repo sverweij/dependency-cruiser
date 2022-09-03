@@ -79,11 +79,8 @@ function isLikelyMonoRepo(pFolderNames = getFolderNames(process.cwd())) {
 }
 
 function hasTestsWithinSource(pTestLocations, pSourceLocations) {
-  return (
-    pTestLocations.length === 0 ||
-    pTestLocations.every((pTestLocation) =>
-      pSourceLocations.includes(pTestLocation)
-    )
+  return pTestLocations.every((pTestLocation) =>
+    pSourceLocations.includes(pTestLocation)
   );
 }
 

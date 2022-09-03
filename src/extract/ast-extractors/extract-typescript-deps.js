@@ -1,4 +1,4 @@
-/* eslint-disable valid-jsdoc, no-inline-comments */
+/* eslint-disable no-inline-comments */
 const tryRequire = require("semver-try-require");
 const { supportedTranspilers } = require("../../../src/meta.js");
 

@@ -1,4 +1,3 @@
-/* eslint-disable security/detect-object-injection */
 const chalk = require("chalk");
 const figures = require("figures");
 const get = require("lodash/get");

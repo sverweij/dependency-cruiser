@@ -1,5 +1,5 @@
 /* eslint-disable no-magic-numbers */
-/* eslint-disable import/max-dependencies */
+
 const Ajv = require("ajv").default;
 const extract = require("../extract");
 const enrich = require("../enrich");

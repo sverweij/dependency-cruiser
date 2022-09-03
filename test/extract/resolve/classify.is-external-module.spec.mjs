@@ -1,4 +1,3 @@
-/* eslint-disable no-unused-expressions */
 import { expect } from "chai";
 import { isExternalModule } from "../../../src/extract/resolve/module-classifiers.js";
 

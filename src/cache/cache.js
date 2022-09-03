@@ -14,7 +14,7 @@ function writeCache(pCacheFolder, pCruiseResult) {
   writeFileSync(
     join(pCacheFolder, CACHE_FILE_NAME),
     JSON.stringify(pCruiseResult),
-    "utf-8"
+    "utf8"
   );
 }
 
@@ -26,7 +26,7 @@ function writeCache(pCacheFolder, pCruiseResult) {
 function readCache(pCacheFolder) {
   try {
     return JSON.parse(
-      readFileSync(join(pCacheFolder, CACHE_FILE_NAME), "utf-8")
+      readFileSync(join(pCacheFolder, CACHE_FILE_NAME), "utf8")
     );
   } catch (pError) {
     return { modules: [], summary: {} };

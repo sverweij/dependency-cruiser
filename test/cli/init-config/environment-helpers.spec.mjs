@@ -1,4 +1,3 @@
-/* eslint-disable no-unused-expressions */
 import { expect } from "chai";
 import helpers from "../../../src/cli/init-config/environment-helpers.js";
 

@@ -42,7 +42,7 @@ function hash(pString) {
 
 function getFileHash(pFileName) {
   try {
-    return hash(readFileSync(pFileName, "utf-8"));
+    return hash(readFileSync(pFileName, "utf8"));
   } catch (pError) {
     return "file not found";
   }
