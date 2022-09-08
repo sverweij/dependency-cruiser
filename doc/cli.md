@@ -354,7 +354,7 @@ src/report/dot/index.js → src/report/dot/prepare-custom-level.js
 src/report/dot/index.js → src/report/dot/prepare-folder-level.js
 src/report/dot/index.js → src/report/dot/theming.js
 src/report/dot/module-utl.js → src/report/dot/theming.js
-src/report/dot/theming.js → src/report/dot/default-theme.json
+src/report/dot/theming.js → src/report/dot/default-theme.js
 src/report/dot/prepare-custom-level.js → src/report/utl/consolidate-to-pattern.js
 src/report/dot/prepare-custom-level.js → src/report/dot/module-utl.js
 src/report/utl/consolidate-to-pattern.js → src/report/utl/consolidate-module-dependencies.js
