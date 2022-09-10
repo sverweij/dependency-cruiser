@@ -1,6 +1,5 @@
 module.exports = {
   graph: {
-    ordering: "out",
     rankdir: "LR",
     splines: "true",
     overlap: "false",

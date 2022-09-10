@@ -10,7 +10,7 @@ const defaultRender = dot();
 const render = dot("module");
 const requireJSON = createRequireJSON(import.meta.url);
 
-const clusterless = requireJSON("./__mocks__/clusterless.json");
+const clusterLess = requireJSON("./__mocks__/clusterless.json");
 const bunchOfModules = requireJSON("./__mocks__/bunch-of-modules.json");
 const focusMeModules = requireJSON(
   "./__mocks__/dependency-cruiser-2022-07-17-focus-me.json"
@@ -24,53 +24,56 @@ const bareTheme = requireJSON("./bare-theme.json");
 
 const __dirname = fileURLToPath(new URL(".", import.meta.url));
 
-const mockPath = join(__dirname, "__mocks__");
-const clusterlessFixture = readFileSync(
-  join(mockPath, "clusterless.dot"),
+const fixturesPath = join(__dirname, "__fixtures__");
+const clusterLessFixture = readFileSync(
+  join(fixturesPath, "clusterless.dot"),
   "utf8"
 );
 const unresolvableFixture = readFileSync(
-  join(mockPath, "es6-unresolvable-deps.dot"),
+  join(fixturesPath, "es6-unresolvable-deps.dot"),
   "utf8"
 );
 const doNotFollowFixtureDefaultTheme = readFileSync(
-  join(mockPath, "do-not-follow-deps-default-theme.dot"),
+  join(fixturesPath, "do-not-follow-deps-default-theme.dot"),
   "utf8"
 );
 const doNotFollowFixture = readFileSync(
-  join(mockPath, "do-not-follow-deps.dot"),
+  join(fixturesPath, "do-not-follow-deps.dot"),
   "utf8"
 );
 const orphanFixture = readFileSync(
-  join(mockPath, "orphan-deps-default-theme.dot"),
+  join(fixturesPath, "orphan-deps-default-theme.dot"),
   "utf8"
 );
 const orphanFixtureBoring = readFileSync(
-  join(mockPath, "orphan-deps.dot"),
+  join(fixturesPath, "orphan-deps.dot"),
   "utf8"
 );
-const prefixUriFixture = readFileSync(join(mockPath, "prefix-uri.dot"), "utf8");
+const prefixUriFixture = readFileSync(
+  join(fixturesPath, "prefix-uri.dot"),
+  "utf8"
+);
 const prefixNonUriFixture = readFileSync(
-  join(mockPath, "prefix-non-uri.dot"),
+  join(fixturesPath, "prefix-non-uri.dot"),
   "utf8"
 );
 const defaultColorFixture = readFileSync(
-  join(__dirname, "__mocks__/bunch-of-modules-default-theme.dot"),
+  join(fixturesPath, "bunch-of-modules-default-theme.dot"),
   "utf8"
 );
 const bareColorFixture = readFileSync(
-  join(__dirname, "__mocks__/bunch-of-modules.dot"),
+  join(fixturesPath, "bunch-of-modules.dot"),
   "utf8"
 );
 const focusMeModulesFixture = readFileSync(
-  join(mockPath, "dependency-cruiser-2022-07-17-focus-me.dot"),
+  join(fixturesPath, "dependency-cruiser-2022-07-17-focus-me.dot"),
   "utf8"
 );
 
 describe("[I] report/dot/module-level reporter", () => {
   it("renders a dot - modules in the root don't come in a cluster", () => {
-    expect(render(clusterless, { theme: bareTheme }).output).to.deep.equal(
-      clusterlessFixture
+    expect(render(clusterLess, { theme: bareTheme }).output).to.deep.equal(
+      clusterLessFixture
     );
   });
 
