@@ -14,16 +14,16 @@ const rxjs = requireJSON("./__mocks__/rxjs.json");
 
 const __dirname = fileURLToPath(new URL(".", import.meta.url));
 
-const mockFolder = join(__dirname, "__mocks__");
+const fixturesFolder = join(__dirname, "__fixtures__");
 const consolidatedDot = readFileSync(
-  join(mockFolder, "dependency-cruiser-2019-01-14.dot"),
+  join(fixturesFolder, "dependency-cruiser-2019-01-14.dot"),
   "utf8"
 );
 const consolidatedOrphansDot = readFileSync(
-  join(mockFolder, "orphans.dot"),
+  join(fixturesFolder, "orphans.dot"),
   "utf8"
 );
-const consolidatedRxJs = readFileSync(join(mockFolder, "rxjs.dot"), "utf8");
+const consolidatedRxJs = readFileSync(join(fixturesFolder, "rxjs.dot"), "utf8");
 
 describe("[I] report/dot/folder-level reporter", () => {
   it("consolidates to folder level", () => {

@@ -14,13 +14,16 @@ const rxjs = requireJSON("./__mocks__/rxjs.json");
 
 const __dirname = fileURLToPath(new URL(".", import.meta.url));
 
-const mockFolder = join(__dirname, "__mocks__");
+const fixturesFolder = join(__dirname, "__fixtures__");
 const flatDot = readFileSync(
-  join(mockFolder, "dependency-cruiser-2020-01-25.dot"),
+  join(fixturesFolder, "dependency-cruiser-2020-01-25.dot"),
   "utf8"
 );
-const flatOrphansDot = readFileSync(join(mockFolder, "orphans.dot"), "utf8");
-const flatRxJs = readFileSync(join(mockFolder, "rxjs.dot"), "utf8");
+const flatOrphansDot = readFileSync(
+  join(fixturesFolder, "orphans.dot"),
+  "utf8"
+);
+const flatRxJs = readFileSync(join(fixturesFolder, "rxjs.dot"), "utf8");
 
 describe("[I] report/dot/flat-level reporter", () => {
   it("consolidates to flat levels", () => {
