@@ -2,6 +2,8 @@ const glob = require("glob");
 const get = require("lodash/get");
 const clone = require("lodash/clone");
 const set = require("lodash/set");
+const isInstalledGlobally = require("is-installed-globally");
+const { red, yellow, bold } = require("chalk");
 
 const main = require("../main");
 const bus = require("../utl/bus");
@@ -138,13 +140,30 @@ module.exports = function executeCli(pFileDirectoryArray, pCruiseOptions) {
   let lExitCode = 0;
 
   try {
+    /* c8 ignore start */
+    if (isInstalledGlobally) {
+      process.stderr.write(
+        `\n  ${yellow(
+          "WARNING"
+        )}: You're running a globally installed dependency-cruiser.\n\n` +
+          `           We recommend to ${bold.italic.underline(
+            "install and run it as a local devDependency"
+          )} in\n` +
+          `           your project instead. There it has your project's environment and\n` +
+          `           transpilers at its disposal. That will ensure it can find e.g.\n` +
+          `           TypeScript, Vue or Svelte modules and dependencies.\n\n`
+      );
+    }
+    /* c8 ignore stop */
     if (pCruiseOptions.info === true) {
       process.stdout.write(formatMetaInfo());
     } else if (pCruiseOptions.init) {
-      // requiring init-config takes ~100ms (most of it taken up by requiring
+      // requiring init-config took ~100ms (most of it taken up by requiring
       // inquirer, measured on a 2.6GHz quad core i7 with flash storage on
       // macOS 10.15.7). Only requiring it when '--init' is necessary speeds up
-      // (the start-up) of cruises by that same amount.
+      // (the start-up) of cruises by that same amount. We've since replaced
+      // inquirer with 'prompts' (which is much smaller), but the same reasoning
+      // holds.
       // eslint-disable-next-line node/global-require
       const initConfig = require("./init-config");
       initConfig(pCruiseOptions.init);
@@ -152,7 +171,7 @@ module.exports = function executeCli(pFileDirectoryArray, pCruiseOptions) {
       lExitCode = runCruise(pFileDirectoryArray, pCruiseOptions);
     }
   } catch (pError) {
-    process.stderr.write(`\n  ERROR: ${pError.message}\n`);
+    process.stderr.write(`\n  ${red("ERROR")}: ${pError.message}\n`);
     bus.emit("end");
     lExitCode = 1;
   }
