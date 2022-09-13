@@ -4,6 +4,7 @@ import { unlinkSync, readFileSync } from "node:fs";
 import { posix as path } from "node:path";
 import { expect } from "chai";
 import intercept from "intercept-stdout";
+import chalk from "chalk";
 import cli from "../../src/cli/index.js";
 import { assertFileEqual, assertJSONFileEqual } from "./asserthelpers.utl.mjs";
 import deleteDammit from "./delete-dammit.utl.cjs";
@@ -189,6 +190,14 @@ describe("[E] cli/index", () => {
   });
 
   describe("[E] specials", () => {
+    let lChalkLevel = chalk.level;
+
+    before("disable chalk coloring", () => {
+      chalk.level = 0;
+    });
+    after("enable chalk coloring again", () => {
+      chalk.level = lChalkLevel;
+    });
     it("dependency-cruises multiple files and folders in one go", () => {
       const lOutputFileName = "multiple-in-one-go.json";
       const lOutputTo = path.join(OUT_DIR, lOutputFileName);
