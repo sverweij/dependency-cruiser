@@ -13,7 +13,7 @@ This runs through the dependencies in any JavaScript, TypeScript, LiveScript or 
   - in text (for your builds)
   - in graphics (for your eyeballs)
 
-As a side effect it can generate [**cool dependency graphs**](./doc/real-world-samples.md)
+As a side effect it can generate dependency graphs in various output formats including [**cool visualizations**](./doc/real-world-samples.md)
 you can stick on the wall to impress your grandma.
 
 ## How do I use it?
@@ -37,6 +37,8 @@ depcruise --include-only "^src" --output-type dot src | dot -T svg > dependencyg
   options in the [command line interface](./doc/cli.md) documentation.
 - _[Real world samples](./doc/real-world-samples.md)_
   contains dependency cruises of some of the most used projects on npm.
+
+Other [output formats](./doc/cli.md#--output-type-specify-the-output-format) include json, csv, text, and html.
 
 ### Validate things
 
