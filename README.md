@@ -20,42 +20,57 @@ you can stick on the wall to impress your grandma.
 
 ### Install it
 
-- `npm install --save-dev dependency-cruiser` to use it as a validator in your project (recommended) or...
-- `npm install --global dependency-cruiser` if you just want to inspect multiple projects.
+- `npm install --save-dev dependency-cruiser` (with `yarn` or `pnpm` use their
+  equivalent to install & save dependency-cruiser as a development dependency).
+
+### Generate a config
+
+```shell
+npx depcruise --init
+```
+
+This will look around in your environment a bit, ask you some questions and create
+a `.dependency-cruiser.js` configuration file attuned to your project[^1].
+
+[^1]:
+    We're using `npx` in the example scripts for convenience. When you use the
+    commands in a script in `package.json` it's not necessary to prefix them with
+    `npx`.
 
 ### Show stuff to your grandma
 
 To create a graph of the dependencies in your src folder, you'd run dependency
-cruiser with output type `dot` and run _GraphViz dot_ on the result. In
+cruiser with output type `dot` and run _GraphViz dot_[^2] on the result. In
 a one liner:
 
 ```shell
-depcruise --include-only "^src" --output-type dot src | dot -T svg > dependencygraph.svg
+npx depcruise src --include-only "^src" --config --output-type dot | dot -T svg > dependency-graph.svg
 ```
 
 - You can read more about what you can do with `--include-only` and other command line
   options in the [command line interface](./doc/cli.md) documentation.
 - _[Real world samples](./doc/real-world-samples.md)_
   contains dependency cruises of some of the most used projects on npm.
+- If our grandma is more into formats like `mermaid`, `json`, `csv`, `html` or plain text
+  we've [got her covered](./doc/cli.md#--output-type-specify-the-output-format)
+  as well.
 
-Other [output formats](./doc/cli.md#--output-type-specify-the-output-format) include json, csv, text, and html.
+[^2]:
+    This assumes the GraphViz `dot` command is available - on most linux and
+    comparable systems this will be. In case it's not, see
+    [GraphViz' download page](https://www.graphviz.org/download/) for instructions
+    on how to get it on your machine.
 
 ### Validate things
 
 #### Declare some rules
 
-The easy way to get you started:
+When you ran the `depcruise --init command` above, the command also added some rules
+to `.dependency-cruiser.js` that make sense in most projects, like detecting
+**circular dependencies**, dependencies **missing** in package.json, **orphans**,
+and production code relying on dev- or optionalDependencies.
 
-```shell
-depcruise --init
-```
-
-This will ask you some questions and create a `.dependency-cruiser.js` with some
-rules that make sense in most projects (detecting **circular dependencies**,
-dependencies **missing** in package.json, **orphans**, production code relying on
-dev- or optionalDependencies, ...).
-
-Start adding your rules by tweaking that file.
+Start adding your rules own by tweaking that file.
 
 Sample rule:
 
@@ -76,12 +91,11 @@ Sample rule:
 - To read more about writing rules check the
   [writing rules](./doc/rules-tutorial.md) tutorial
   or the [rules reference](./doc/rules-reference.md)
-- You can find the `--init-rules` set [here](./doc/rules.starter.json)
 
 #### Report them
 
 ```sh
-depcruise --config .dependency-cruiser.js src
+npx depcruise --config .dependency-cruiser.js src
 ```
 
 This will validate against your rules and shows any violations in an eslint-like format:
@@ -89,14 +103,14 @@ This will validate against your rules and shows any violations in an eslint-like
 ![sample err output](https://raw.githubusercontent.com/sverweij/dependency-cruiser/master/doc/assets/sample-err-output.png)
 
 There's more ways to report validations; in a graph (like the one on top of this
-readme) or in a table.
+readme) or in an self-containing `html` file.
 
 - Read more about the err, dot, csv and html reporters in the
   [command line interface](./doc/cli.md)
   documentation.
 - dependency-cruiser uses itself to check on itself in its own build process;
   see the `depcruise` script in the
-  [package.json](https://github.com/sverweij/dependency-cruiser/blob/master/package.json#L64)
+  [package.json](https://github.com/sverweij/dependency-cruiser/blob/master/package.json#L76)
 
 ## I want to know more!
 
