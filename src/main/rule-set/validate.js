@@ -5,6 +5,18 @@ const { validateCruiseOptions } = require("../options/validate");
 const configurationSchema = require("../../schema/configuration.schema.js");
 
 const ajv = new Ajv();
+// the default for this is 25 - as noted in the safe-regex source code already,
+// the repeat limit is not the best of heuristics for indicating exponential time
+// regular expressions - and it leads to false positives. E.g. if you use rules
+// 'generated' from rules it could be the generated 'from' or 'to' have a list
+// of file patterns that's easily > 25 of length. It's currently not possible
+// to disable this check in safe-regex (e.g. by setting it to an odd value like
+// 0 or -1, or by passing a 'switch this thing off please' option), so the only
+// option is to increase the repeat limit to something fairly high.
+//
+// This does _not_ influence the star height algorithm, which is the main value
+// of the safe-regex package.
+const MAX_SAFE_REGEX_STAR_REPEAT_LIMIT = 10000;
 
 function validateAgainstSchema(pSchema, pConfiguration) {
   if (!ajv.validate(pSchema, pConfiguration)) {
@@ -21,7 +33,9 @@ function hasPath(pObject, pSection, pCondition) {
 function safeRule(pRule, pSection, pCondition) {
   return (
     !hasPath(pRule, pSection, pCondition) ||
-    safeRegex(pRule[pSection][pCondition])
+    safeRegex(pRule[pSection][pCondition], {
+      limit: MAX_SAFE_REGEX_STAR_REPEAT_LIMIT,
+    })
   );
 }
 

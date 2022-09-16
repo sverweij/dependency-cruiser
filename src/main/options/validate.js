@@ -81,10 +81,10 @@ function validateCruiseOptions(pOptions) {
   let lReturnValue = {};
 
   if (Boolean(pOptions)) {
-    // neccessary because can slip through the cracks when passed as a cli parameter
+    // necessary because can slip through the cracks when passed as a cli parameter
     validateSystems(pOptions.moduleSystems);
 
-    // neccessary because this safety check can't be done in json schema (a.f.a.i.k.)
+    // necessary because this safety check can't be done in json schema (a.f.a.i.k.)
     validatePathsSafety(pOptions.doNotFollow);
     validatePathsSafety(pOptions.exclude);
     validateRegExpSafety(pOptions.includeOnly);
@@ -95,7 +95,7 @@ function validateCruiseOptions(pOptions) {
     // necessary because not in the config schema
     validateOutputType(pOptions.outputType);
 
-    // neccessary because not found a way to do this properly in JSON schema
+    // necessary because not found a way to do this properly in JSON schema
     validateMaxDepth(pOptions.maxDepth);
 
     validateFocusDepth(pOptions.focusDepth);
