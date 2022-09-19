@@ -1,0 +1,12 @@
+{
+  "forbidden": [
+    {
+      "from": {
+        "path": ".+"
+      },
+      "to": {
+        "path": ["(.+)*", "something else"]
+      }
+    }
+  ]
+}

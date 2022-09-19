@@ -28,7 +28,7 @@ function normalizeToREAsString(pStringish) {
   return pStringish;
 }
 
-module.exports = function normalizeREProperties(
+function normalizeREProperties(
   pPropertyContainer,
   pREProperties = RE_PROPERTIES
 ) {
@@ -44,4 +44,9 @@ module.exports = function normalizeREProperties(
     }
   }
   return lPropertyContainer;
+}
+
+module.exports = {
+  normalizeToREAsString,
+  normalizeREProperties,
 };

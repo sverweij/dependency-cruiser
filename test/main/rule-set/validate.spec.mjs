@@ -67,6 +67,17 @@ describe("[I] main/rule-set/validate - regexp safety checks", () => {
     );
   });
 
+  it("bails out on scary regexps in paths - also when they're arrays", () => {
+    shouldBarfWithMessage(
+      "./test/validate/__mocks__/rules.scary-regex-array.json",
+      'rule {"from":{"path":".+"},"to":{"path":["(.+)*","something else"]}} has an unsafe regular expression. Bailing out.\n'
+    );
+  });
+
+  it("is ok about regexps in paths that just have a bunch of repetition but no scary star-height", () => {
+    shouldBeOK("./test/validate/__mocks__/rules.ok-regex-just-repeating.json");
+  });
+
   it("bails out on scary regexps in pathNots", () => {
     shouldBarfWithMessage(
       "./test/validate/__mocks__/rules.scary-regex-in-pathnot.json",
