@@ -169,9 +169,9 @@
 <g id="node10" class="node">
 <title>src/graph&#45;utl/rule&#45;set.js</title>
 <g id="a_node10"><a xlink:href="https://github.com/sverweij/dependency-cruiser/blob/develop/src/graph-utl/rule-set.js" xlink:title="rule&#45;set.js">
-<path fill="#ffcccc" stroke="black" d="M542.09,-327.31C542.09,-327.31 489.43,-327.31 489.43,-327.31 485.09,-327.31 480.76,-322.97 480.76,-318.64 480.76,-318.64 480.76,-309.97 480.76,-309.97 480.76,-305.64 485.09,-301.31 489.43,-301.31 489.43,-301.31 542.09,-301.31 542.09,-301.31 546.43,-301.31 550.76,-305.64 550.76,-309.97 550.76,-309.97 550.76,-318.64 550.76,-318.64 550.76,-322.97 546.43,-327.31 542.09,-327.31"/>
-<text text-anchor="start" x="488.76" y="-317.11" font-family="Helvetica,sans-Serif" font-size="9.00">src/graph&#45;utl/</text>
-<text text-anchor="start" x="494.26" y="-308.11" font-family="Helvetica,sans-Serif" font-weight="bold" font-size="9.00">rule&#45;set.js</text>
+<path fill="#ffcccc" stroke="black" d="M542.06,-327.3C542.06,-327.3 489.4,-327.3 489.4,-327.3 485.06,-327.3 480.73,-322.97 480.73,-318.64 480.73,-318.64 480.73,-309.97 480.73,-309.97 480.73,-305.64 485.06,-301.3 489.4,-301.3 489.4,-301.3 542.06,-301.3 542.06,-301.3 546.4,-301.3 550.73,-305.64 550.73,-309.97 550.73,-309.97 550.73,-318.64 550.73,-318.64 550.73,-322.97 546.4,-327.3 542.06,-327.3"/>
+<text text-anchor="start" x="488.73" y="-317.1" font-family="Helvetica,sans-Serif" font-size="9.00">src/graph&#45;utl/</text>
+<text text-anchor="start" x="494.23" y="-308.1" font-family="Helvetica,sans-Serif" font-weight="bold" font-size="9.00">rule&#45;set.js</text>
 </a>
 </g>
 </g>
@@ -189,9 +189,9 @@
 <g id="node12" class="node">
 <title>src/report/anon/anonymize&#45;path&#45;element.js</title>
 <g id="a_node12"><a xlink:href="https://github.com/sverweij/dependency-cruiser/blob/develop/src/report/anon/anonymize-path-element.js" xlink:title="anonymize&#45;path&#45;element.js">
-<path fill="#ffccff" stroke="black" d="M682.13,-350.68C682.13,-350.68 567.46,-350.68 567.46,-350.68 563.13,-350.68 558.79,-346.35 558.79,-342.02 558.79,-342.02 558.79,-333.35 558.79,-333.35 558.79,-329.02 563.13,-324.68 567.46,-324.68 567.46,-324.68 682.13,-324.68 682.13,-324.68 686.46,-324.68 690.79,-329.02 690.79,-333.35 690.79,-333.35 690.79,-342.02 690.79,-342.02 690.79,-346.35 686.46,-350.68 682.13,-350.68"/>
-<text text-anchor="start" x="592.79" y="-340.48" font-family="Helvetica,sans-Serif" font-size="9.00">src/report/anon/</text>
-<text text-anchor="start" x="566.79" y="-331.48" font-family="Helvetica,sans-Serif" font-weight="bold" font-size="9.00">anonymize&#45;path&#45;element.js</text>
+<path fill="#ffccff" stroke="black" d="M682.1,-350.67C682.1,-350.67 567.43,-350.67 567.43,-350.67 563.1,-350.67 558.76,-346.33 558.76,-342 558.76,-342 558.76,-333.33 558.76,-333.33 558.76,-329 563.1,-324.67 567.43,-324.67 567.43,-324.67 682.1,-324.67 682.1,-324.67 686.43,-324.67 690.76,-329 690.76,-333.33 690.76,-333.33 690.76,-342 690.76,-342 690.76,-346.33 686.43,-350.67 682.1,-350.67"/>
+<text text-anchor="start" x="592.76" y="-340.47" font-family="Helvetica,sans-Serif" font-size="9.00">src/report/anon/</text>
+<text text-anchor="start" x="566.76" y="-331.47" font-family="Helvetica,sans-Serif" font-weight="bold" font-size="9.00">anonymize&#45;path&#45;element.js</text>
 </a>
 </g>
 </g>
@@ -208,8 +208,8 @@
 <!-- src/report/anon/anonymize&#45;path&#45;element.js&#45;&gt;src/report/anon/random&#45;string.js -->
 <g id="edge12" class="edge">
 <title>src/report/anon/anonymize&#45;path&#45;element.js&#45;&gt;src/report/anon/random&#45;string.js</title>
-<path fill="none" stroke="#ff00ff" stroke-width="2" stroke-opacity="0.466667" d="M586.23,-324.48C586.23,-324.48 586.23,-261.79 586.23,-261.79"/>
-<polygon fill="#ff00ff" fill-opacity="0.466667" stroke="#ff00ff" stroke-width="2" stroke-opacity="0.466667" points="588.33,-261.79 586.23,-255.79 584.13,-261.79 588.33,-261.79"/>
+<path fill="none" stroke="#ff00ff" stroke-width="2" stroke-opacity="0.466667" d="M586.22,-324.46C586.22,-324.46 586.22,-261.79 586.22,-261.79"/>
+<polygon fill="#ff00ff" fill-opacity="0.466667" stroke="#ff00ff" stroke-width="2" stroke-opacity="0.466667" points="588.32,-261.79 586.22,-255.79 584.12,-261.79 588.32,-261.79"/>
 </g>
 <!-- src/report/anon/anonymize&#45;path.js -->
 <g id="node14" class="node">
@@ -224,8 +224,8 @@
 <!-- src/report/anon/anonymize&#45;path.js&#45;&gt;src/report/anon/anonymize&#45;path&#45;element.js -->
 <g id="edge13" class="edge">
 <title>src/report/anon/anonymize&#45;path.js&#45;&gt;src/report/anon/anonymize&#45;path&#45;element.js</title>
-<path fill="none" stroke="#ff00ff" stroke-width="2" stroke-opacity="0.466667" d="M600.42,-370.73C600.42,-370.73 600.42,-356.98 600.42,-356.98"/>
-<polygon fill="#ff00ff" fill-opacity="0.466667" stroke="#ff00ff" stroke-width="2" stroke-opacity="0.466667" points="602.52,-356.98 600.42,-350.98 598.32,-356.98 602.52,-356.98"/>
+<path fill="none" stroke="#ff00ff" stroke-width="2" stroke-opacity="0.466667" d="M600.4,-370.72C600.4,-370.72 600.4,-356.96 600.4,-356.96"/>
+<polygon fill="#ff00ff" fill-opacity="0.466667" stroke="#ff00ff" stroke-width="2" stroke-opacity="0.466667" points="602.5,-356.96 600.4,-350.96 598.3,-356.96 602.5,-356.96"/>
 </g>
 <!-- src/report/anon/index.js -->
 <g id="node15" class="node">
@@ -257,9 +257,9 @@
 <g id="node17" class="node">
 <title>src/report/csv.js</title>
 <g id="a_node17"><a xlink:href="https://github.com/sverweij/dependency-cruiser/blob/develop/src/report/csv.js" xlink:title="csv.js">
-<path fill="#ffccff" stroke="black" d="M279.91,-396.9C279.91,-396.9 240.24,-396.9 240.24,-396.9 235.91,-396.9 231.58,-392.57 231.58,-388.23 231.58,-388.23 231.58,-379.57 231.58,-379.57 231.58,-375.23 235.91,-370.9 240.24,-370.9 240.24,-370.9 279.91,-370.9 279.91,-370.9 284.24,-370.9 288.58,-375.23 288.58,-379.57 288.58,-379.57 288.58,-388.23 288.58,-388.23 288.58,-392.57 284.24,-396.9 279.91,-396.9"/>
-<text text-anchor="start" x="239.58" y="-386.7" font-family="Helvetica,sans-Serif" font-size="9.00">src/report/</text>
-<text text-anchor="start" x="247.58" y="-377.7" font-family="Helvetica,sans-Serif" font-weight="bold" font-size="9.00">csv.js</text>
+<path fill="#ffccff" stroke="black" d="M279.9,-396.89C279.9,-396.89 240.24,-396.89 240.24,-396.89 235.9,-396.89 231.57,-392.56 231.57,-388.23 231.57,-388.23 231.57,-379.56 231.57,-379.56 231.57,-375.23 235.9,-370.89 240.24,-370.89 240.24,-370.89 279.9,-370.89 279.9,-370.89 284.24,-370.89 288.57,-375.23 288.57,-379.56 288.57,-379.56 288.57,-388.23 288.57,-388.23 288.57,-392.56 284.24,-396.89 279.9,-396.89"/>
+<text text-anchor="start" x="239.57" y="-386.69" font-family="Helvetica,sans-Serif" font-size="9.00">src/report/</text>
+<text text-anchor="start" x="247.57" y="-377.69" font-family="Helvetica,sans-Serif" font-weight="bold" font-size="9.00">csv.js</text>
 </a>
 </g>
 </g>
@@ -267,16 +267,16 @@
 <g id="node18" class="node">
 <title>src/report/utl/dependency&#45;to&#45;incidence&#45;transformer.js</title>
 <g id="a_node18"><a xlink:href="https://github.com/sverweij/dependency-cruiser/blob/develop/src/report/utl/dependency-to-incidence-transformer.js" xlink:title="dependency&#45;to&#45;incidence&#45;transformer.js">
-<path fill="#ffccff" stroke="black" d="M219.67,-430.93C219.67,-430.93 49,-430.93 49,-430.93 44.67,-430.93 40.33,-426.59 40.33,-422.26 40.33,-422.26 40.33,-413.59 40.33,-413.59 40.33,-409.26 44.67,-404.93 49,-404.93 49,-404.93 219.67,-404.93 219.67,-404.93 224,-404.93 228.33,-409.26 228.33,-413.59 228.33,-413.59 228.33,-422.26 228.33,-422.26 228.33,-426.59 224,-430.93 219.67,-430.93"/>
-<text text-anchor="start" x="107.83" y="-420.73" font-family="Helvetica,sans-Serif" font-size="9.00">src/report/utl/</text>
-<text text-anchor="start" x="48.33" y="-411.73" font-family="Helvetica,sans-Serif" font-weight="bold" font-size="9.00">dependency&#45;to&#45;incidence&#45;transformer.js</text>
+<path fill="#ffccff" stroke="black" d="M219.73,-430.91C219.73,-430.91 49.06,-430.91 49.06,-430.91 44.73,-430.91 40.4,-426.58 40.4,-422.24 40.4,-422.24 40.4,-413.58 40.4,-413.58 40.4,-409.24 44.73,-404.91 49.06,-404.91 49.06,-404.91 219.73,-404.91 219.73,-404.91 224.06,-404.91 228.4,-409.24 228.4,-413.58 228.4,-413.58 228.4,-422.24 228.4,-422.24 228.4,-426.58 224.06,-430.91 219.73,-430.91"/>
+<text text-anchor="start" x="107.9" y="-420.71" font-family="Helvetica,sans-Serif" font-size="9.00">src/report/utl/</text>
+<text text-anchor="start" x="48.4" y="-411.71" font-family="Helvetica,sans-Serif" font-weight="bold" font-size="9.00">dependency&#45;to&#45;incidence&#45;transformer.js</text>
 </a>
 </g>
 </g>
 <!-- src/report/csv.js&#45;&gt;src/report/utl/dependency&#45;to&#45;incidence&#45;transformer.js -->
 <g id="edge15" class="edge">
 <title>src/report/csv.js&#45;&gt;src/report/utl/dependency&#45;to&#45;incidence&#45;transformer.js</title>
-<path fill="none" stroke="#ff00ff" stroke-width="2" stroke-opacity="0.466667" d="M238.14,-396.96C238.14,-405.84 238.14,-416 238.14,-416 238.14,-416 234.56,-416 234.56,-416"/>
+<path fill="none" stroke="#ff00ff" stroke-width="2" stroke-opacity="0.466667" d="M238.14,-396.95C238.14,-405.84 238.14,-416 238.14,-416 238.14,-416 234.56,-416 234.56,-416"/>
 <polygon fill="#ff00ff" fill-opacity="0.466667" stroke="#ff00ff" stroke-width="2" stroke-opacity="0.466667" points="234.56,-413.9 228.56,-416 234.56,-418.1 234.56,-413.9"/>
 </g>
 <!-- src/report/dot/default&#45;theme.js -->
@@ -303,22 +303,22 @@
 <g id="node21" class="node">
 <title>src/report/dot/index.js</title>
 <g id="a_node21"><a xlink:href="https://github.com/sverweij/dependency-cruiser/blob/develop/src/report/dot/index.js" xlink:title="index.js">
-<path fill="#ffccff" stroke="black" d="M366.95,-242.17C366.95,-242.17 312.28,-242.17 312.28,-242.17 307.95,-242.17 303.62,-237.83 303.62,-233.5 303.62,-233.5 303.62,-224.83 303.62,-224.83 303.62,-220.5 307.95,-216.17 312.28,-216.17 312.28,-216.17 366.95,-216.17 366.95,-216.17 371.28,-216.17 375.62,-220.5 375.62,-224.83 375.62,-224.83 375.62,-233.5 375.62,-233.5 375.62,-237.83 371.28,-242.17 366.95,-242.17"/>
-<text text-anchor="start" x="311.62" y="-231.97" font-family="Helvetica,sans-Serif" font-size="9.00">src/report/dot/</text>
-<text text-anchor="start" x="322.62" y="-222.97" font-family="Helvetica,sans-Serif" font-weight="bold" font-size="9.00">index.js</text>
+<path fill="#ffccff" stroke="black" d="M366.94,-242.17C366.94,-242.17 312.27,-242.17 312.27,-242.17 307.94,-242.17 303.6,-237.83 303.6,-233.5 303.6,-233.5 303.6,-224.83 303.6,-224.83 303.6,-220.5 307.94,-216.17 312.27,-216.17 312.27,-216.17 366.94,-216.17 366.94,-216.17 371.27,-216.17 375.6,-220.5 375.6,-224.83 375.6,-224.83 375.6,-233.5 375.6,-233.5 375.6,-237.83 371.27,-242.17 366.94,-242.17"/>
+<text text-anchor="start" x="311.6" y="-231.97" font-family="Helvetica,sans-Serif" font-size="9.00">src/report/dot/</text>
+<text text-anchor="start" x="322.6" y="-222.97" font-family="Helvetica,sans-Serif" font-weight="bold" font-size="9.00">index.js</text>
 </a>
 </g>
 </g>
 <!-- src/report/dot/index.js&#45;&gt;src/graph&#45;utl/filter&#45;bank.js -->
 <g id="edge16" class="edge">
 <title>src/report/dot/index.js&#45;&gt;src/graph&#45;utl/filter&#45;bank.js</title>
-<path fill="none" stroke="#770000" stroke-width="2" stroke-opacity="0.466667" d="M362.35,-215.87C362.35,-215.87 362.35,-136.35 362.35,-136.35"/>
-<polygon fill="#770000" fill-opacity="0.466667" stroke="#770000" stroke-width="2" stroke-opacity="0.466667" points="364.45,-136.35 362.35,-130.35 360.25,-136.35 364.45,-136.35"/>
+<path fill="none" stroke="#770000" stroke-width="2" stroke-opacity="0.466667" d="M362.35,-215.87C362.35,-215.87 362.35,-136.36 362.35,-136.36"/>
+<polygon fill="#770000" fill-opacity="0.466667" stroke="#770000" stroke-width="2" stroke-opacity="0.466667" points="364.45,-136.36 362.35,-130.36 360.25,-136.36 364.45,-136.36"/>
 </g>
 <!-- src/report/dot/index.js&#45;&gt;src/report/dot/dot.template.js -->
 <g id="edge17" class="edge">
 <title>src/report/dot/index.js&#45;&gt;src/report/dot/dot.template.js</title>
-<path fill="none" stroke="#ff00ff" stroke-width="2" stroke-opacity="0.466667" d="M314.47,-242.48C314.47,-251.21 314.47,-261 314.47,-261 314.47,-261 259.77,-261 259.77,-261"/>
+<path fill="none" stroke="#ff00ff" stroke-width="2" stroke-opacity="0.466667" d="M314.46,-242.48C314.46,-251.21 314.46,-261 314.46,-261 314.46,-261 259.77,-261 259.77,-261"/>
 <polygon fill="#ff00ff" fill-opacity="0.466667" stroke="#ff00ff" stroke-width="2" stroke-opacity="0.466667" points="259.77,-258.9 253.77,-261 259.77,-263.1 259.77,-258.9"/>
 </g>
 <!-- src/report/dot/module&#45;utl.js -->
@@ -334,8 +334,8 @@
 <!-- src/report/dot/index.js&#45;&gt;src/report/dot/module&#45;utl.js -->
 <g id="edge18" class="edge">
 <title>src/report/dot/index.js&#45;&gt;src/report/dot/module&#45;utl.js</title>
-<path fill="none" stroke="#ff00ff" stroke-width="2" stroke-opacity="0.466667" d="M370.99,-215.89C370.99,-215.89 370.99,-207.78 370.99,-207.78"/>
-<polygon fill="#ff00ff" fill-opacity="0.466667" stroke="#ff00ff" stroke-width="2" stroke-opacity="0.466667" points="373.09,-207.78 370.99,-201.78 368.89,-207.78 373.09,-207.78"/>
+<path fill="none" stroke="#ff00ff" stroke-width="2" stroke-opacity="0.466667" d="M370.98,-215.89C370.98,-215.89 370.98,-207.79 370.98,-207.79"/>
+<polygon fill="#ff00ff" fill-opacity="0.466667" stroke="#ff00ff" stroke-width="2" stroke-opacity="0.466667" points="373.08,-207.79 370.98,-201.79 368.88,-207.79 373.08,-207.79"/>
 </g>
 <!-- src/report/dot/prepare&#45;custom&#45;level.js -->
 <g id="node23" class="node">
@@ -350,8 +350,8 @@
 <!-- src/report/dot/index.js&#45;&gt;src/report/dot/prepare&#45;custom&#45;level.js -->
 <g id="edge19" class="edge">
 <title>src/report/dot/index.js&#45;&gt;src/report/dot/prepare&#45;custom&#45;level.js</title>
-<path fill="none" stroke="#ff00ff" stroke-width="2" stroke-opacity="0.466667" d="M330.99,-215.71C330.99,-215.71 330.99,-204.18 330.99,-204.18"/>
-<polygon fill="#ff00ff" fill-opacity="0.466667" stroke="#ff00ff" stroke-width="2" stroke-opacity="0.466667" points="333.09,-204.18 330.99,-198.18 328.89,-204.18 333.09,-204.18"/>
+<path fill="none" stroke="#ff00ff" stroke-width="2" stroke-opacity="0.466667" d="M330.98,-215.71C330.98,-215.71 330.98,-204.18 330.98,-204.18"/>
+<polygon fill="#ff00ff" fill-opacity="0.466667" stroke="#ff00ff" stroke-width="2" stroke-opacity="0.466667" points="333.08,-204.18 330.98,-198.18 328.88,-204.18 333.08,-204.18"/>
 </g>
 <!-- src/report/dot/prepare&#45;flat&#45;level.js -->
 <g id="node24" class="node">
@@ -366,8 +366,8 @@
 <!-- src/report/dot/index.js&#45;&gt;src/report/dot/prepare&#45;flat&#45;level.js -->
 <g id="edge20" class="edge">
 <title>src/report/dot/index.js&#45;&gt;src/report/dot/prepare&#45;flat&#45;level.js</title>
-<path fill="none" stroke="#ff00ff" stroke-width="2" stroke-opacity="0.466667" d="M303.5,-224C303.5,-224 301.62,-224 301.62,-224"/>
-<polygon fill="#ff00ff" fill-opacity="0.466667" stroke="#ff00ff" stroke-width="2" stroke-opacity="0.466667" points="301.62,-221.9 295.62,-224 301.62,-226.1 301.62,-221.9"/>
+<path fill="none" stroke="#ff00ff" stroke-width="2" stroke-opacity="0.466667" d="M303.49,-224C303.49,-224 301.61,-224 301.61,-224"/>
+<polygon fill="#ff00ff" fill-opacity="0.466667" stroke="#ff00ff" stroke-width="2" stroke-opacity="0.466667" points="301.61,-221.9 295.61,-224 301.61,-226.1 301.61,-221.9"/>
 </g>
 <!-- src/report/dot/prepare&#45;folder&#45;level.js -->
 <g id="node25" class="node">
@@ -432,7 +432,7 @@
 <!-- src/report/dot/prepare&#45;custom&#45;level.js&#45;&gt;src/graph&#45;utl/consolidate&#45;to&#45;pattern.js -->
 <g id="edge26" class="edge">
 <title>src/report/dot/prepare&#45;custom&#45;level.js&#45;&gt;src/graph&#45;utl/consolidate&#45;to&#45;pattern.js</title>
-<path fill="none" stroke="#770000" stroke-width="2" stroke-opacity="0.466667" d="M299.56,-198.2C299.56,-213.57 299.56,-237 299.56,-237 299.56,-237 171.78,-237 171.78,-237"/>
+<path fill="none" stroke="#770000" stroke-width="2" stroke-opacity="0.466667" d="M299.55,-198.2C299.55,-213.57 299.55,-237 299.55,-237 299.55,-237 171.78,-237 171.78,-237"/>
 <polygon fill="#770000" fill-opacity="0.466667" stroke="#770000" stroke-width="2" stroke-opacity="0.466667" points="171.78,-234.9 165.78,-237 171.78,-239.1 171.78,-234.9"/>
 </g>
 <!-- src/report/dot/prepare&#45;custom&#45;level.js&#45;&gt;src/graph&#45;utl/strip&#45;self&#45;transitions.js -->
@@ -456,8 +456,8 @@
 <!-- src/report/dot/prepare&#45;flat&#45;level.js&#45;&gt;src/report/dot/module&#45;utl.js -->
 <g id="edge30" class="edge">
 <title>src/report/dot/prepare&#45;flat&#45;level.js&#45;&gt;src/report/dot/module&#45;utl.js</title>
-<path fill="none" stroke="#ff00ff" stroke-width="2" stroke-opacity="0.466667" d="M274.56,-232.25C274.56,-239.07 274.56,-246 274.56,-246 274.56,-246 391.61,-246 391.61,-246 391.61,-246 391.61,-207.64 391.61,-207.64"/>
-<polygon fill="#ff00ff" fill-opacity="0.466667" stroke="#ff00ff" stroke-width="2" stroke-opacity="0.466667" points="393.71,-207.64 391.61,-201.64 389.51,-207.64 393.71,-207.64"/>
+<path fill="none" stroke="#ff00ff" stroke-width="2" stroke-opacity="0.466667" d="M274.56,-232.25C274.56,-239.07 274.56,-246 274.56,-246 274.56,-246 391.6,-246 391.6,-246 391.6,-246 391.6,-207.64 391.6,-207.64"/>
+<polygon fill="#ff00ff" fill-opacity="0.466667" stroke="#ff00ff" stroke-width="2" stroke-opacity="0.466667" points="393.7,-207.64 391.6,-201.64 389.5,-207.64 393.7,-207.64"/>
 </g>
 <!-- src/report/dot/prepare&#45;folder&#45;level.js&#45;&gt;src/graph&#45;utl/compare.js -->
 <g id="edge31" class="edge">
@@ -528,7 +528,7 @@
 <!-- src/report/error&#45;html/index.js&#45;&gt;src/report/error&#45;html/utl.js -->
 <g id="edge37" class="edge">
 <title>src/report/error&#45;html/index.js&#45;&gt;src/report/error&#45;html/utl.js</title>
-<path fill="none" stroke="#ff00ff" stroke-width="2" stroke-opacity="0.466667" d="M228.98,-323C241.48,-323 251.41,-323 251.41,-323 251.41,-323 251.41,-320.88 251.41,-320.88"/>
+<path fill="none" stroke="#ff00ff" stroke-width="2" stroke-opacity="0.466667" d="M228.98,-323C241.47,-323 251.41,-323 251.41,-323 251.41,-323 251.41,-320.88 251.41,-320.88"/>
 <polygon fill="#ff00ff" fill-opacity="0.466667" stroke="#ff00ff" stroke-width="2" stroke-opacity="0.466667" points="253.51,-320.88 251.41,-314.88 249.31,-320.88 253.51,-320.88"/>
 </g>
 <!-- src/report/error&#45;html/utl.js&#45;&gt;src/report/utl/index.js -->
@@ -541,7 +541,7 @@
 <g id="node31" class="node">
 <title>src/report/error&#45;long.js</title>
 <g id="a_node31"><a xlink:href="https://github.com/sverweij/dependency-cruiser/blob/develop/src/report/error-long.js" xlink:title="error&#45;long.js">
-<path fill="#ffccff" stroke="black" d="M455.91,-372.77C455.91,-372.77 404.24,-372.77 404.24,-372.77 399.91,-372.77 395.57,-368.44 395.57,-364.11 395.57,-364.11 395.57,-355.44 395.57,-355.44 395.57,-351.11 399.91,-346.77 404.24,-346.77 404.24,-346.77 455.91,-346.77 455.91,-346.77 460.24,-346.77 464.57,-351.11 464.57,-355.44 464.57,-355.44 464.57,-364.11 464.57,-364.11 464.57,-368.44 460.24,-372.77 455.91,-372.77"/>
+<path fill="#ffccff" stroke="black" d="M455.9,-372.77C455.9,-372.77 404.23,-372.77 404.23,-372.77 399.9,-372.77 395.57,-368.44 395.57,-364.11 395.57,-364.11 395.57,-355.44 395.57,-355.44 395.57,-351.11 399.9,-346.77 404.23,-346.77 404.23,-346.77 455.9,-346.77 455.9,-346.77 460.23,-346.77 464.57,-351.11 464.57,-355.44 464.57,-355.44 464.57,-364.11 464.57,-364.11 464.57,-368.44 460.23,-372.77 455.9,-372.77"/>
 <text text-anchor="start" x="409.57" y="-362.57" font-family="Helvetica,sans-Serif" font-size="9.00">src/report/</text>
 <text text-anchor="start" x="403.57" y="-353.57" font-family="Helvetica,sans-Serif" font-weight="bold" font-size="9.00">error&#45;long.js</text>
 </a>
@@ -551,29 +551,29 @@
 <g id="node32" class="node">
 <title>src/report/error.js</title>
 <g id="a_node32"><a xlink:href="https://github.com/sverweij/dependency-cruiser/blob/develop/src/report/error.js" xlink:title="error.js">
-<path fill="#ffccff" stroke="black" d="M464.06,-315.78C464.06,-315.78 424.39,-315.78 424.39,-315.78 420.06,-315.78 415.72,-311.45 415.72,-307.12 415.72,-307.12 415.72,-298.45 415.72,-298.45 415.72,-294.12 420.06,-289.78 424.39,-289.78 424.39,-289.78 464.06,-289.78 464.06,-289.78 468.39,-289.78 472.72,-294.12 472.72,-298.45 472.72,-298.45 472.72,-307.12 472.72,-307.12 472.72,-311.45 468.39,-315.78 464.06,-315.78"/>
-<text text-anchor="start" x="423.72" y="-305.58" font-family="Helvetica,sans-Serif" font-size="9.00">src/report/</text>
-<text text-anchor="start" x="428.72" y="-296.58" font-family="Helvetica,sans-Serif" font-weight="bold" font-size="9.00">error.js</text>
+<path fill="#ffccff" stroke="black" d="M464.02,-315.84C464.02,-315.84 424.35,-315.84 424.35,-315.84 420.02,-315.84 415.69,-311.51 415.69,-307.18 415.69,-307.18 415.69,-298.51 415.69,-298.51 415.69,-294.18 420.02,-289.84 424.35,-289.84 424.35,-289.84 464.02,-289.84 464.02,-289.84 468.35,-289.84 472.69,-294.18 472.69,-298.51 472.69,-298.51 472.69,-307.18 472.69,-307.18 472.69,-311.51 468.35,-315.84 464.02,-315.84"/>
+<text text-anchor="start" x="423.69" y="-305.64" font-family="Helvetica,sans-Serif" font-size="9.00">src/report/</text>
+<text text-anchor="start" x="428.69" y="-296.64" font-family="Helvetica,sans-Serif" font-weight="bold" font-size="9.00">error.js</text>
 </a>
 </g>
 </g>
 <!-- src/report/error&#45;long.js&#45;&gt;src/report/error.js -->
 <g id="edge39" class="edge">
 <title>src/report/error&#45;long.js&#45;&gt;src/report/error.js</title>
-<path fill="none" stroke="#ff00ff" stroke-width="2" stroke-opacity="0.466667" d="M440.15,-346.55C440.15,-346.55 440.15,-321.93 440.15,-321.93"/>
-<polygon fill="#ff00ff" fill-opacity="0.466667" stroke="#ff00ff" stroke-width="2" stroke-opacity="0.466667" points="442.25,-321.93 440.15,-315.93 438.05,-321.93 442.25,-321.93"/>
+<path fill="none" stroke="#ff00ff" stroke-width="2" stroke-opacity="0.466667" d="M440.13,-346.57C440.13,-346.57 440.13,-321.98 440.13,-321.98"/>
+<polygon fill="#ff00ff" fill-opacity="0.466667" stroke="#ff00ff" stroke-width="2" stroke-opacity="0.466667" points="442.23,-321.98 440.13,-315.98 438.03,-321.98 442.23,-321.98"/>
 </g>
 <!-- src/report/error.js&#45;&gt;src/graph&#45;utl/rule&#45;set.js -->
 <g id="edge40" class="edge">
 <title>src/report/error.js&#45;&gt;src/graph&#45;utl/rule&#45;set.js</title>
-<path fill="none" stroke="#770000" stroke-width="2" stroke-opacity="0.466667" d="M472.91,-308C472.91,-308 474.46,-308 474.46,-308"/>
-<polygon fill="#770000" fill-opacity="0.466667" stroke="#770000" stroke-width="2" stroke-opacity="0.466667" points="474.46,-310.1 480.46,-308 474.46,-305.9 474.46,-310.1"/>
+<path fill="none" stroke="#770000" stroke-width="2" stroke-opacity="0.466667" d="M472.87,-308C472.87,-308 474.43,-308 474.43,-308"/>
+<polygon fill="#770000" fill-opacity="0.466667" stroke="#770000" stroke-width="2" stroke-opacity="0.466667" points="474.43,-310.1 480.43,-308 474.43,-305.9 474.43,-310.1"/>
 </g>
 <!-- src/report/error.js&#45;&gt;src/report/utl/index.js -->
 <g id="edge42" class="edge">
 <title>src/report/error.js&#45;&gt;src/report/utl/index.js</title>
-<path fill="none" stroke="#ff00ff" stroke-width="2" stroke-opacity="0.466667" d="M426.18,-289.39C426.18,-289.39 426.18,-282.33 426.18,-282.33"/>
-<polygon fill="#ff00ff" fill-opacity="0.466667" stroke="#ff00ff" stroke-width="2" stroke-opacity="0.466667" points="428.28,-282.33 426.18,-276.33 424.08,-282.33 428.28,-282.33"/>
+<path fill="none" stroke="#ff00ff" stroke-width="2" stroke-opacity="0.466667" d="M426.17,-289.42C426.17,-289.42 426.17,-282.35 426.17,-282.35"/>
+<polygon fill="#ff00ff" fill-opacity="0.466667" stroke="#ff00ff" stroke-width="2" stroke-opacity="0.466667" points="428.27,-282.35 426.17,-276.35 424.07,-282.35 428.27,-282.35"/>
 </g>
 <!-- src/utl/wrap&#45;and&#45;indent.js -->
 <g id="node33" class="node">
@@ -588,8 +588,8 @@
 <!-- src/report/error.js&#45;&gt;src/utl/wrap&#45;and&#45;indent.js -->
 <g id="edge41" class="edge">
 <title>src/report/error.js&#45;&gt;src/utl/wrap&#45;and&#45;indent.js</title>
-<path fill="none" stroke="#aaaaaa" stroke-width="2" stroke-opacity="0.466667" d="M454.68,-289.59C454.68,-289.59 454.68,-244.27 454.68,-244.27"/>
-<polygon fill="#aaaaaa" fill-opacity="0.466667" stroke="#aaaaaa" stroke-width="2" stroke-opacity="0.466667" points="456.78,-244.27 454.68,-238.27 452.58,-244.27 456.78,-244.27"/>
+<path fill="none" stroke="#aaaaaa" stroke-width="2" stroke-opacity="0.466667" d="M454.67,-289.64C454.67,-289.64 454.67,-244.02 454.67,-244.02"/>
+<polygon fill="#aaaaaa" fill-opacity="0.466667" stroke="#aaaaaa" stroke-width="2" stroke-opacity="0.466667" points="456.77,-244.02 454.67,-238.02 452.57,-244.02 456.77,-244.02"/>
 </g>
 <!-- src/report/html/html.template.js -->
 <g id="node34" class="node">
@@ -614,8 +614,8 @@
 <!-- src/report/html/index.js&#45;&gt;src/report/utl/dependency&#45;to&#45;incidence&#45;transformer.js -->
 <g id="edge43" class="edge">
 <title>src/report/html/index.js&#45;&gt;src/report/utl/dependency&#45;to&#45;incidence&#45;transformer.js</title>
-<path fill="none" stroke="#ff00ff" stroke-width="2" stroke-opacity="0.466667" d="M208.72,-452.71C208.72,-452.71 208.72,-436.99 208.72,-436.99"/>
-<polygon fill="#ff00ff" fill-opacity="0.466667" stroke="#ff00ff" stroke-width="2" stroke-opacity="0.466667" points="210.82,-436.99 208.72,-430.99 206.62,-436.99 210.82,-436.99"/>
+<path fill="none" stroke="#ff00ff" stroke-width="2" stroke-opacity="0.466667" d="M208.75,-452.71C208.75,-452.71 208.75,-436.98 208.75,-436.98"/>
+<polygon fill="#ff00ff" fill-opacity="0.466667" stroke="#ff00ff" stroke-width="2" stroke-opacity="0.466667" points="210.85,-436.98 208.75,-430.98 206.65,-436.98 210.85,-436.98"/>
 </g>
 <!-- src/report/html/index.js&#45;&gt;src/report/html/html.template.js -->
 <g id="edge44" class="edge">
@@ -646,8 +646,8 @@
 <!-- src/report/index.js&#45;&gt;src/report/anon/index.js -->
 <g id="edge45" class="edge">
 <title>src/report/index.js&#45;&gt;src/report/anon/index.js</title>
-<path fill="none" stroke="#ff00ff" stroke-width="2" stroke-opacity="0.466667" d="M351.64,-384.35C351.64,-379.87 351.64,-376 351.64,-376 351.64,-376 468.65,-376 468.65,-376 468.65,-376 468.65,-376.5 468.65,-376.5"/>
-<polygon fill="#ff00ff" fill-opacity="0.466667" stroke="#ff00ff" stroke-width="2" stroke-opacity="0.466667" points="466.55,-374.95 468.65,-380.95 470.75,-374.95 466.55,-374.95"/>
+<path fill="none" stroke="#ff00ff" stroke-width="2" stroke-opacity="0.466667" d="M351.63,-384.35C351.63,-379.87 351.63,-376 351.63,-376 351.63,-376 468.63,-376 468.63,-376 468.63,-376 468.63,-376.5 468.63,-376.5"/>
+<polygon fill="#ff00ff" fill-opacity="0.466667" stroke="#ff00ff" stroke-width="2" stroke-opacity="0.466667" points="466.53,-374.95 468.63,-380.95 470.73,-374.95 466.53,-374.95"/>
 </g>
 <!-- src/report/index.js&#45;&gt;src/report/baseline.js -->
 <g id="edge46" class="edge">
@@ -658,38 +658,38 @@
 <!-- src/report/index.js&#45;&gt;src/report/csv.js -->
 <g id="edge47" class="edge">
 <title>src/report/index.js&#45;&gt;src/report/csv.js</title>
-<path fill="none" stroke="#ff00ff" stroke-width="2" stroke-opacity="0.466667" d="M296.59,-390C296.59,-390 294.76,-390 294.76,-390"/>
-<polygon fill="#ff00ff" fill-opacity="0.466667" stroke="#ff00ff" stroke-width="2" stroke-opacity="0.466667" points="294.76,-387.9 288.76,-390 294.76,-392.1 294.76,-387.9"/>
+<path fill="none" stroke="#ff00ff" stroke-width="2" stroke-opacity="0.466667" d="M296.58,-390C296.58,-390 294.75,-390 294.75,-390"/>
+<polygon fill="#ff00ff" fill-opacity="0.466667" stroke="#ff00ff" stroke-width="2" stroke-opacity="0.466667" points="294.75,-387.9 288.75,-390 294.75,-392.1 294.75,-387.9"/>
 </g>
 <!-- src/report/index.js&#45;&gt;src/report/dot/index.js -->
 <g id="edge48" class="edge">
 <title>src/report/index.js&#45;&gt;src/report/dot/index.js</title>
-<path fill="none" stroke="#ff00ff" stroke-width="2" stroke-opacity="0.466667" d="M340.67,-384.52C340.67,-384.52 340.67,-248.33 340.67,-248.33"/>
-<polygon fill="#ff00ff" fill-opacity="0.466667" stroke="#ff00ff" stroke-width="2" stroke-opacity="0.466667" points="342.77,-248.33 340.67,-242.33 338.57,-248.33 342.77,-248.33"/>
+<path fill="none" stroke="#ff00ff" stroke-width="2" stroke-opacity="0.466667" d="M340.65,-384.52C340.65,-384.52 340.65,-248.33 340.65,-248.33"/>
+<polygon fill="#ff00ff" fill-opacity="0.466667" stroke="#ff00ff" stroke-width="2" stroke-opacity="0.466667" points="342.75,-248.33 340.65,-242.33 338.55,-248.33 342.75,-248.33"/>
 </g>
 <!-- src/report/index.js&#45;&gt;src/report/error&#45;html/index.js -->
 <g id="edge50" class="edge">
 <title>src/report/index.js&#45;&gt;src/report/error&#45;html/index.js</title>
-<path fill="none" stroke="#ff00ff" stroke-width="2" stroke-opacity="0.466667" d="M338.65,-384.69C338.65,-365 338.65,-330 338.65,-330 338.65,-330 234.82,-330 234.82,-330"/>
-<polygon fill="#ff00ff" fill-opacity="0.466667" stroke="#ff00ff" stroke-width="2" stroke-opacity="0.466667" points="234.82,-327.9 228.82,-330 234.82,-332.1 234.82,-327.9"/>
+<path fill="none" stroke="#ff00ff" stroke-width="2" stroke-opacity="0.466667" d="M338.64,-384.69C338.64,-365 338.64,-330 338.64,-330 338.64,-330 234.81,-330 234.81,-330"/>
+<polygon fill="#ff00ff" fill-opacity="0.466667" stroke="#ff00ff" stroke-width="2" stroke-opacity="0.466667" points="234.81,-327.9 228.81,-330 234.81,-332.1 234.81,-327.9"/>
 </g>
 <!-- src/report/index.js&#45;&gt;src/report/error&#45;long.js -->
 <g id="edge51" class="edge">
 <title>src/report/index.js&#45;&gt;src/report/error&#45;long.js</title>
-<path fill="none" stroke="#ff00ff" stroke-width="2" stroke-opacity="0.466667" d="M349.33,-384.47C349.33,-375.77 349.33,-366 349.33,-366 349.33,-366 389.36,-366 389.36,-366"/>
-<polygon fill="#ff00ff" fill-opacity="0.466667" stroke="#ff00ff" stroke-width="2" stroke-opacity="0.466667" points="389.36,-368.1 395.36,-366 389.36,-363.9 389.36,-368.1"/>
+<path fill="none" stroke="#ff00ff" stroke-width="2" stroke-opacity="0.466667" d="M349.3,-384.47C349.3,-375.77 349.3,-366 349.3,-366 349.3,-366 389.35,-366 389.35,-366"/>
+<polygon fill="#ff00ff" fill-opacity="0.466667" stroke="#ff00ff" stroke-width="2" stroke-opacity="0.466667" points="389.35,-368.1 395.35,-366 389.35,-363.9 389.35,-368.1"/>
 </g>
 <!-- src/report/index.js&#45;&gt;src/report/error.js -->
 <g id="edge49" class="edge">
 <title>src/report/index.js&#45;&gt;src/report/error.js</title>
-<path fill="none" stroke="#ff00ff" stroke-width="2" stroke-opacity="0.466667" d="M342.69,-384.7C342.69,-358.29 342.69,-301 342.69,-301 342.69,-301 409.67,-301 409.67,-301"/>
-<polygon fill="#ff00ff" fill-opacity="0.466667" stroke="#ff00ff" stroke-width="2" stroke-opacity="0.466667" points="409.67,-303.1 415.67,-301 409.67,-298.9 409.67,-303.1"/>
+<path fill="none" stroke="#ff00ff" stroke-width="2" stroke-opacity="0.466667" d="M342.65,-384.7C342.65,-358.29 342.65,-301 342.65,-301 342.65,-301 409.63,-301 409.63,-301"/>
+<polygon fill="#ff00ff" fill-opacity="0.466667" stroke="#ff00ff" stroke-width="2" stroke-opacity="0.466667" points="409.63,-303.1 415.63,-301 409.63,-298.9 409.63,-303.1"/>
 </g>
 <!-- src/report/index.js&#45;&gt;src/report/html/index.js -->
 <g id="edge52" class="edge">
 <title>src/report/index.js&#45;&gt;src/report/html/index.js</title>
-<path fill="none" stroke="#ff00ff" stroke-width="2" stroke-opacity="0.466667" d="M296.76,-402C273.55,-402 244.71,-402 244.71,-402 244.71,-402 244.71,-446.57 244.71,-446.57"/>
-<polygon fill="#ff00ff" fill-opacity="0.466667" stroke="#ff00ff" stroke-width="2" stroke-opacity="0.466667" points="242.61,-446.57 244.71,-452.57 246.81,-446.57 242.61,-446.57"/>
+<path fill="none" stroke="#ff00ff" stroke-width="2" stroke-opacity="0.466667" d="M296.75,-402C273.55,-402 244.7,-402 244.7,-402 244.7,-402 244.7,-446.57 244.7,-446.57"/>
+<polygon fill="#ff00ff" fill-opacity="0.466667" stroke="#ff00ff" stroke-width="2" stroke-opacity="0.466667" points="242.6,-446.57 244.7,-452.57 246.8,-446.57 242.6,-446.57"/>
 </g>
 <!-- src/report/index.js&#45;&gt;src/report/identity.js -->
 <g id="edge53" class="edge">
@@ -710,24 +710,24 @@
 <!-- src/report/index.js&#45;&gt;src/report/json.js -->
 <g id="edge54" class="edge">
 <title>src/report/index.js&#45;&gt;src/report/json.js</title>
-<path fill="none" stroke="#ff00ff" stroke-width="2" stroke-opacity="0.466667" d="M296.76,-399C221.37,-399 23.43,-399 23.43,-399 23.43,-399 23.43,-495 23.43,-495 23.43,-495 263.91,-495 263.91,-495"/>
+<path fill="none" stroke="#ff00ff" stroke-width="2" stroke-opacity="0.466667" d="M296.77,-399C221.39,-399 23.46,-399 23.46,-399 23.46,-399 23.46,-495 23.46,-495 23.46,-495 263.91,-495 263.91,-495"/>
 <polygon fill="#ff00ff" fill-opacity="0.466667" stroke="#ff00ff" stroke-width="2" stroke-opacity="0.466667" points="263.91,-497.1 269.91,-495 263.91,-492.9 263.91,-497.1"/>
 </g>
 <!-- src/report/markdown.js -->
 <g id="node39" class="node">
 <title>src/report/markdown.js</title>
 <g id="a_node39"><a xlink:href="https://github.com/sverweij/dependency-cruiser/blob/develop/src/report/markdown.js" xlink:title="markdown.js">
-<path fill="#ffccff" stroke="black" d="M327.97,-362.9C327.97,-362.9 274.3,-362.9 274.3,-362.9 269.97,-362.9 265.64,-358.56 265.64,-354.23 265.64,-354.23 265.64,-345.56 265.64,-345.56 265.64,-341.23 269.97,-336.9 274.3,-336.9 274.3,-336.9 327.97,-336.9 327.97,-336.9 332.3,-336.9 336.64,-341.23 336.64,-345.56 336.64,-345.56 336.64,-354.23 336.64,-354.23 336.64,-358.56 332.3,-362.9 327.97,-362.9"/>
-<text text-anchor="start" x="280.64" y="-352.7" font-family="Helvetica,sans-Serif" font-size="9.00">src/report/</text>
-<text text-anchor="start" x="273.64" y="-343.7" font-family="Helvetica,sans-Serif" font-weight="bold" font-size="9.00">markdown.js</text>
+<path fill="#ffccff" stroke="black" d="M327.97,-362.89C327.97,-362.89 274.3,-362.89 274.3,-362.89 269.97,-362.89 265.63,-358.56 265.63,-354.23 265.63,-354.23 265.63,-345.56 265.63,-345.56 265.63,-341.23 269.97,-336.89 274.3,-336.89 274.3,-336.89 327.97,-336.89 327.97,-336.89 332.3,-336.89 336.63,-341.23 336.63,-345.56 336.63,-345.56 336.63,-354.23 336.63,-354.23 336.63,-358.56 332.3,-362.89 327.97,-362.89"/>
+<text text-anchor="start" x="280.63" y="-352.69" font-family="Helvetica,sans-Serif" font-size="9.00">src/report/</text>
+<text text-anchor="start" x="273.63" y="-343.69" font-family="Helvetica,sans-Serif" font-weight="bold" font-size="9.00">markdown.js</text>
 </a>
 </g>
 </g>
 <!-- src/report/index.js&#45;&gt;src/report/markdown.js -->
 <g id="edge55" class="edge">
 <title>src/report/index.js&#45;&gt;src/report/markdown.js</title>
-<path fill="none" stroke="#ff00ff" stroke-width="2" stroke-opacity="0.466667" d="M316.79,-384.68C316.79,-384.68 316.79,-368.96 316.79,-368.96"/>
-<polygon fill="#ff00ff" fill-opacity="0.466667" stroke="#ff00ff" stroke-width="2" stroke-opacity="0.466667" points="318.89,-368.96 316.79,-362.96 314.69,-368.96 318.89,-368.96"/>
+<path fill="none" stroke="#ff00ff" stroke-width="2" stroke-opacity="0.466667" d="M316.79,-384.67C316.79,-384.67 316.79,-368.95 316.79,-368.95"/>
+<polygon fill="#ff00ff" fill-opacity="0.466667" stroke="#ff00ff" stroke-width="2" stroke-opacity="0.466667" points="318.89,-368.95 316.79,-362.95 314.69,-368.95 318.89,-368.95"/>
 </g>
 <!-- src/report/mermaid.js -->
 <g id="node40" class="node">
@@ -781,17 +781,17 @@
 <g id="node43" class="node">
 <title>src/report/teamcity.js</title>
 <g id="a_node43"><a xlink:href="https://github.com/sverweij/dependency-cruiser/blob/develop/src/report/teamcity.js" xlink:title="teamcity.js">
-<path fill="#ffccff" stroke="black" d="M399.04,-338.45C399.04,-338.45 353.37,-338.45 353.37,-338.45 349.04,-338.45 344.7,-334.12 344.7,-329.79 344.7,-329.79 344.7,-321.12 344.7,-321.12 344.7,-316.79 349.04,-312.45 353.37,-312.45 353.37,-312.45 399.04,-312.45 399.04,-312.45 403.37,-312.45 407.7,-316.79 407.7,-321.12 407.7,-321.12 407.7,-329.79 407.7,-329.79 407.7,-334.12 403.37,-338.45 399.04,-338.45"/>
-<text text-anchor="start" x="355.7" y="-328.25" font-family="Helvetica,sans-Serif" font-size="9.00">src/report/</text>
-<text text-anchor="start" x="352.7" y="-319.25" font-family="Helvetica,sans-Serif" font-weight="bold" font-size="9.00">teamcity.js</text>
+<path fill="#ffccff" stroke="black" d="M398.99,-338.46C398.99,-338.46 353.33,-338.46 353.33,-338.46 348.99,-338.46 344.66,-334.13 344.66,-329.79 344.66,-329.79 344.66,-321.13 344.66,-321.13 344.66,-316.79 348.99,-312.46 353.33,-312.46 353.33,-312.46 398.99,-312.46 398.99,-312.46 403.33,-312.46 407.66,-316.79 407.66,-321.13 407.66,-321.13 407.66,-329.79 407.66,-329.79 407.66,-334.13 403.33,-338.46 398.99,-338.46"/>
+<text text-anchor="start" x="355.66" y="-328.26" font-family="Helvetica,sans-Serif" font-size="9.00">src/report/</text>
+<text text-anchor="start" x="352.66" y="-319.26" font-family="Helvetica,sans-Serif" font-weight="bold" font-size="9.00">teamcity.js</text>
 </a>
 </g>
 </g>
 <!-- src/report/index.js&#45;&gt;src/report/teamcity.js -->
 <g id="edge59" class="edge">
 <title>src/report/index.js&#45;&gt;src/report/teamcity.js</title>
-<path fill="none" stroke="#ff00ff" stroke-width="2" stroke-opacity="0.466667" d="M347.01,-384.49C347.01,-384.49 347.01,-344.63 347.01,-344.63"/>
-<polygon fill="#ff00ff" fill-opacity="0.466667" stroke="#ff00ff" stroke-width="2" stroke-opacity="0.466667" points="349.11,-344.63 347.01,-338.63 344.91,-344.63 349.11,-344.63"/>
+<path fill="none" stroke="#ff00ff" stroke-width="2" stroke-opacity="0.466667" d="M346.98,-384.49C346.98,-384.49 346.98,-344.64 346.98,-344.64"/>
+<polygon fill="#ff00ff" fill-opacity="0.466667" stroke="#ff00ff" stroke-width="2" stroke-opacity="0.466667" points="349.08,-344.64 346.98,-338.64 344.88,-344.64 349.08,-344.64"/>
 </g>
 <!-- src/report/text.js -->
 <g id="node44" class="node">
@@ -818,8 +818,8 @@
 <!-- src/report/teamcity.js&#45;&gt;src/report/utl/index.js -->
 <g id="edge62" class="edge">
 <title>src/report/teamcity.js&#45;&gt;src/report/utl/index.js</title>
-<path fill="none" stroke="#ff00ff" stroke-width="2" stroke-opacity="0.466667" d="M387.67,-312.25C387.67,-312.25 387.67,-282.39 387.67,-282.39"/>
-<polygon fill="#ff00ff" fill-opacity="0.466667" stroke="#ff00ff" stroke-width="2" stroke-opacity="0.466667" points="389.77,-282.39 387.67,-276.39 385.57,-282.39 389.77,-282.39"/>
+<path fill="none" stroke="#ff00ff" stroke-width="2" stroke-opacity="0.466667" d="M387.65,-312.26C387.65,-312.26 387.65,-282.39 387.65,-282.39"/>
+<polygon fill="#ff00ff" fill-opacity="0.466667" stroke="#ff00ff" stroke-width="2" stroke-opacity="0.466667" points="389.75,-282.39 387.65,-276.39 385.55,-282.39 389.75,-282.39"/>
 </g>
 </g>
 </svg>
