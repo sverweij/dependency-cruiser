@@ -3,6 +3,7 @@ const safeRegex = require("safe-regex");
 const has = require("lodash/has");
 const { validateCruiseOptions } = require("../options/validate");
 const configurationSchema = require("../../schema/configuration.schema.js");
+const { normalizeToREAsString } = require("../utl/normalize-re-properties");
 
 const ajv = new Ajv();
 // the default for this is 25 - as noted in the safe-regex source code already,
@@ -33,7 +34,7 @@ function hasPath(pObject, pSection, pCondition) {
 function safeRule(pRule, pSection, pCondition) {
   return (
     !hasPath(pRule, pSection, pCondition) ||
-    safeRegex(pRule[pSection][pCondition], {
+    safeRegex(normalizeToREAsString(pRule[pSection][pCondition]), {
       limit: MAX_SAFE_REGEX_STAR_REPEAT_LIMIT,
     })
   );

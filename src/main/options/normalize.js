@@ -2,7 +2,7 @@
 const get = require("lodash/get");
 const clone = require("lodash/clone");
 const has = require("lodash/has");
-const normalizeREProperties = require("../utl/normalize-re-properties");
+const { normalizeREProperties } = require("../utl/normalize-re-properties");
 const defaults = require("./defaults.js");
 
 function uniq(pArray) {

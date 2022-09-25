@@ -1,6 +1,6 @@
 const cloneDeep = require("lodash/cloneDeep");
 const has = require("lodash/has");
-const normalizeREProperties = require("../utl/normalize-re-properties");
+const { normalizeREProperties } = require("../utl/normalize-re-properties");
 
 const VALID_SEVERITIES = /^(error|warn|info|ignore)$/;
 const DEFAULT_SEVERITY = "warn";
