@@ -1,14 +1,5 @@
 [
   {
-    "type": "dependency",
-    "from": "configs/plugins/mermaid-reporter-plugin.js",
-    "to": "src/report/mermaid.js",
-    "rule": {
-      "severity": "error",
-      "name": "no-external-to-here"
-    }
-  },
-  {
     "type": "module",
     "from": "src/schema/baseline-violations.schema.js",
     "to": "src/schema/baseline-violations.schema.js",
