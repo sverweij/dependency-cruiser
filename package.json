@@ -52,7 +52,7 @@
     "./config-utl/extract-webpack-resolve-config": "./src/config-utl/extract-webpack-resolve-config.js",
     "./sample-reporter-plugin": "./configs/plugins/stats-reporter-plugin.js",
     "./sample-3d-reporter-plugin": "./configs/plugins/3d-reporter-plugin.js",
-    "./mermaid-reporter-plugin": "./configs/plugins/mermaid-reporter-plugin.js"
+    "./mermaid-reporter-plugin": "./src/report/mermaid.js"
   },
   "types": "types/dependency-cruiser.d.ts",
   "files": [
