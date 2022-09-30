@@ -21,7 +21,8 @@
           "(^|/)tsconfig\\.json$",
           "(^|/)(babel|webpack)\\.config\\.(js|cjs|mjs|ts|json)$",
           "-reporter-plugin\\.js$",
-          "\\.schema\\.json$"
+          "\\.schema\\.json$",
+          "^tools/istanbul-json-summary-to-markdown\\.mjs$"
         ]
       }
     },

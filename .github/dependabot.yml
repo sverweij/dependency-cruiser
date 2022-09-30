@@ -5,5 +5,5 @@ updates:
     schedule:
       interval: "weekly"
     commit-message:
-      prefix: "build(GHA)"
+      prefix: "ci"
       include: scope

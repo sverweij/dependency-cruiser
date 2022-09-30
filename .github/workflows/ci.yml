@@ -47,6 +47,12 @@ jobs:
       - name: test coverage (run on node ${{env.NODE_LATEST}} only)
         if: matrix.node-version == env.NODE_LATEST
         run: npm run test:cover
+      - name: emit coverage results & depcruise result to step summary
+        if: always() && matrix.node-version == env.NODE_LATEST
+        run: |
+          echo '## Code coverage' >> $GITHUB_STEP_SUMMARY
+          node tools/istanbul-json-summary-to-markdown.mjs < coverage/coverage-summary.json >> $GITHUB_STEP_SUMMARY
+          yarn --silent depcruise --output-type markdown >> $GITHUB_STEP_SUMMARY
       - name: regular test (run on node != ${{env.NODE_LATEST}} only)
         if: matrix.node-version != env.NODE_LATEST
         run: npm test
