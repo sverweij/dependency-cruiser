@@ -15,13 +15,15 @@ describe("[U] extract/transpile/meta", () => {
       ".ts",
       ".tsx",
       ".d.ts",
+      ".cts",
+      ".mts",
+      ".vue",
+      ".svelte",
       ".coffee",
       ".litcoffee",
       ".coffee.md",
       ".csx",
       ".cjsx",
-      ".vue",
-      ".svelte",
     ]);
   });
 

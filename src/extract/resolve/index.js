@@ -90,7 +90,8 @@ function resolveWithRetry(
   //
   // This behavior is very specific:
   // - tsc only (doesn't work in ts-node for instance)
-  // - _only_ for the .js and .jsx extensions
+  // - until TypeScript 4.6 only for the .js and .jsx extensions
+  // - since TypeScript 4.7 also for .cjs and .mjs (=> .cts, .mts) extensions
   //
   // Hence also this oddly specific looking check & retry.
   //
@@ -101,7 +102,7 @@ function resolveWithRetry(
     canBeResolvedToTsVariant(lStrippedModuleName)
   ) {
     const lModuleWithOutExtension = lStrippedModuleName.replace(
-      /\.js(x)?$/g,
+      /\.(js|jsx|mjs|cjs)$/g,
       ""
     );
 

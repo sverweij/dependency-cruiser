@@ -86,7 +86,7 @@ function isImportCallExpression(pNode) {
     somewhere between swc 1.2.123 and 1.2.133 the swc AST started to
     represent import call expressions with .callee.type === "Import"
     instead of .callee.value === "import". Keeping both detection
-    methods in here for backwards compatiblity
+    methods in here for backwards compatibility
   */
   return pNode.callee.value === "import" || pNode.callee.type === "Import";
 }
@@ -100,7 +100,7 @@ function isInterestingCallExpression(pExoticRequireStrings, pNode) {
     somewhere between swc 1.2.123 and 1.2.133 the swc AST started to
     represent import call expressions with .callee.type === "Import"
     instead of .callee.value === "import". Keeping both detection
-    methods in here for backwards compatiblity
+    methods in here for backwards compatibility
   */
   return (
     pNode.callee.type === "Import" ||

@@ -3,18 +3,19 @@ import { expect } from "chai";
 import normalizeSource from "../normalize-source.utl.mjs";
 import typescriptWrap from "../../../src/extract/transpile/typescript-wrap.js";
 
-const wrap = typescriptWrap();
-const tsxWrap = typescriptWrap(true);
+const typeScriptRegularWrap = typescriptWrap();
+const typeScriptTsxWrap = typescriptWrap("tsx");
+const typeScriptESMWrap = typescriptWrap("esm");
 
 describe("[I] typescript transpiler", () => {
   it("tells the typescript transpiler is available", () => {
-    expect(wrap.isAvailable()).to.equal(true);
+    expect(typeScriptRegularWrap.isAvailable()).to.equal(true);
   });
 
   it("transpiles typescript", () => {
     expect(
       normalizeSource(
-        wrap.transpile(
+        typeScriptRegularWrap.transpile(
           fs.readFileSync(
             "./test/extract/transpile/__mocks__/typescriptscript.ts",
             "utf8"
@@ -32,21 +33,41 @@ describe("[I] typescript transpiler", () => {
   });
 });
 
-describe("[I] tsx transpiler (plain old typescript)", () => {
+describe("[I] typescript transpiler (tsx)", () => {
   it("tells the tsx transpiler is available", () => {
-    expect(tsxWrap.isAvailable()).to.equal(true);
+    expect(typeScriptTsxWrap.isAvailable()).to.equal(true);
   });
 
   it("transpiles tsx", () => {
     expect(
       normalizeSource(
-        tsxWrap.transpile(
+        typeScriptTsxWrap.transpile(
           fs.readFileSync("./test/extract/transpile/__mocks__/tsx.tsx", "utf8")
         )
       )
     ).to.equal(
       normalizeSource(
         fs.readFileSync("./test/extract/transpile/__fixtures__/tsx.js", "utf8")
+      )
+    );
+  });
+});
+
+describe("[I] typescript transpiler (esm)", () => {
+  it("tells the ts transpiler is available for mts (esm) modules", () => {
+    expect(typeScriptESMWrap.isAvailable()).to.equal(true);
+  });
+
+  it("transpiles mts", () => {
+    expect(
+      normalizeSource(
+        typeScriptESMWrap.transpile(
+          fs.readFileSync("./test/extract/transpile/__mocks__/mts.mts", "utf8")
+        )
+      )
+    ).to.equal(
+      normalizeSource(
+        fs.readFileSync("./test/extract/transpile/__fixtures__/mts.mjs", "utf8")
       )
     );
   });
