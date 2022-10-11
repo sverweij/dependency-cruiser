@@ -70,7 +70,7 @@ to `.dependency-cruiser.js` that make sense in most projects, like detecting
 **circular dependencies**, dependencies **missing** in package.json, **orphans**,
 and production code relying on dev- or optionalDependencies.
 
-Start adding your rules own by tweaking that file.
+Start adding your own rules by tweaking that file.
 
 Sample rule:
 
