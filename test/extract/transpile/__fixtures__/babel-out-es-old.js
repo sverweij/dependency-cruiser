@@ -4,9 +4,7 @@ Object.defineProperty(exports, "__esModule", {
   value: true,
 });
 exports.default = void 0;
-
 var alias = _interopRequireWildcard(require("somemodule"));
-
 function _getRequireWildcardCache(nodeInterop) {
   if (typeof WeakMap !== "function") return null;
   var cacheBabelInterop = new WeakMap();
@@ -15,7 +13,6 @@ function _getRequireWildcardCache(nodeInterop) {
     return nodeInterop ? cacheNodeInterop : cacheBabelInterop;
   })(nodeInterop);
 }
-
 function _interopRequireWildcard(obj, nodeInterop) {
   if (!nodeInterop && obj && obj.__esModule) {
     return obj;
@@ -48,7 +45,5 @@ function _interopRequireWildcard(obj, nodeInterop) {
   }
   return newObj;
 }
-
 var _default = console.log(alias.doStuff());
-
 exports.default = _default;
