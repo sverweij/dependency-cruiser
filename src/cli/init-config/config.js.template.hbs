@@ -283,7 +283,11 @@ module.exports = {
     // tsPreCompilationDeps: false,
     {{/if}}
     
-    /* list of extensions (typically non-parseable) to scan. Empty by default. */
+    /* 
+       list of extensions to scan that aren't javascript or compile-to-javascript. 
+       Empty by default. Only put extensions in here that you want to take into
+       account that are _not_ parsable. 
+    */
     // extraExtensionsToScan: [".json", ".jpg", ".png", ".svg", ".webp"],
 
     /* if true combines the package.jsons found from the module up to the base
@@ -381,7 +385,7 @@ module.exports = {
          ['exports'] when you use packages that use such a field and your environment
          supports it (e.g. node ^12.19 || >=14.7 or recent versions of webpack).
 
-        If you have an `exportsFields` attribute in your webpack config, that one
+         If you have an `exportsFields` attribute in your webpack config, that one
          will have precedence over the one specified here.
       */ 
       exportsFields: ["exports"],
@@ -395,6 +399,16 @@ module.exports = {
         have precedence over the one specified here.
       */
       conditionNames: ["import", "require", "node", "default"]
+      /*
+         The extensions, by default are the same as the ones dependency-cruiser
+         can access (run `npx depcruise --info` to see which ones that are in
+         _your_ environment. If that list is larger than what you need (e.g. 
+         it contains .js, .jsx, .ts, .tsx, .cts, .mts - but you don't use 
+         TypeScript you can pass just the extensions you actually use (e.g. 
+         [".js", ".jsx"]). This can speed up the most expensive step in 
+         dependency cruising (module resolution) quite a bit.
+       */
+      // extensions: [".js", ".jsx", ".ts", ".tsx", ".d.ts"]
     },
     reporterOptions: {
       dot: {

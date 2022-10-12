@@ -3,7 +3,8 @@ const { supportedTranspilers } = require("../../../src/meta.js");
 const swc = require("../parse/to-swc-ast");
 const javaScriptWrap = require("./javascript-wrap");
 const typeScriptWrap = require("./typescript-wrap")();
-const tsxWrap = require("./typescript-wrap")(true);
+const typeScriptESMWrap = require("./typescript-wrap")("esm");
+const typeScriptTsxWrap = require("./typescript-wrap")("tsx");
 const liveScriptWrap = require("./livescript-wrap");
 const coffeeWrap = require("./coffeescript-wrap")();
 const litCoffeeWrap = require("./coffeescript-wrap")(true);
@@ -17,16 +18,18 @@ const EXTENSION2WRAPPER = {
   ".mjs": javaScriptWrap,
   ".jsx": javaScriptWrap,
   ".ts": typeScriptWrap,
-  ".tsx": tsxWrap,
+  ".tsx": typeScriptTsxWrap,
   ".d.ts": typeScriptWrap,
+  ".cts": typeScriptWrap,
+  ".mts": typeScriptESMWrap,
+  ".vue": vueWrap,
+  ".svelte": svelteWrap,
   ".ls": liveScriptWrap,
   ".coffee": coffeeWrap,
   ".litcoffee": litCoffeeWrap,
   ".coffee.md": litCoffeeWrap,
   ".csx": coffeeWrap,
   ".cjsx": coffeeWrap,
-  ".vue": vueWrap,
-  ".svelte": svelteWrap,
 };
 
 const TRANSPILER2WRAPPER = {
