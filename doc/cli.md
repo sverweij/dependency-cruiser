@@ -31,6 +31,7 @@ available in dependency-cruiser configurations.
 1. [`--focus`: show modules and their neighbours](#--focus-show-modules-and-their-neighbours)
 1. [`--focus-depth`: influence how many layers of neighbors --focus shows](#--focus-depth-influence-how-many-layers-of-neighbors---focus-shows)
 1. [`--reaches`: show modules and their transitive dependents](#--reaches-show-modules-and-their-transitive-dependents)
+1. [`--highlight`: highlight modules](#--highlight-highlight-modules)
 1. [`--collapse`: summarize to folder depth or pattern](#--collapse-summarize-to-folder-depth-or-pattern)
 1. [`--exclude`: exclude dependencies from being cruised](#--exclude-exclude-dependencies-from-being-cruised)
 1. [`--max-depth`](#--max-depth)
@@ -895,6 +896,61 @@ dependency-cruise src --include-only "^src/report" --reaches "^src/report/utl/in
 
 See [reaches](./options-reference.md#reaches-show-modules-matching-a-pattern---with-everything-that-can-reach-them)
 in the options reference for more details.
+
+### `--highlight`: highlight modules
+
+This option takes a regular expression and reporters that recognize the
+highlight option[^1] will highlight the modules that match that regular
+expression.
+
+[^1]: Currently only _dot_ (and its variants) and _mermaid_.
+
+```sh
+dependency-cruise src --include-only "^src/report" --highlight "^src/report/utl/index.js" -T dot | dot -T svg > highlight-example.svg
+```
+
+This can be useful when you want to display what modules have changed since
+the last commit[^2]. Especially when the number of modules of your project is
+limited this can be more effective than using the `--reaches` option for the
+same.
+
+[^2]:
+    This uses [watskeburt](https://github.com/sverweij/watskeburt) which by default
+    generates a regular expression that includes all modules changed since the last
+    commit. Here we pass the `main` branch to it so we can see all modules that
+    make up the diff between that branch and wherever we are currently in the
+    git history.
+
+```sh
+dependency-cruise src --highlight "$(watskeburt main)" -T dot | dot -T svg > highlight-diff-example.svg
+```
+
+<details>
+<summary>Example output</summary>
+
+With --highlight it shows the whole code base (suitable when your codebase is not
+that big). Command used:
+
+```
+npx depcruise src types --include-only '^(src|types)' --highlight "$(watskeburt main)" --config --output-type dot | dot -T svg > with-highlight.svg
+```
+
+![shows all modules that make up watskeburt with changes to one module](./assets/with-highlight.svg)
+
+With --reaches it shows only part of the code base (suitable when your codebase
+is large). Command used:
+
+```
+npx depcruise src types --include-only '^(src|types)' --highlight "$(watskeburt main)" --config --output-type dot | dot -T svg > with-highlight.svg
+```
+
+![shows the one changed module, with all modules that can reach it](./assets/with-reaches.svg)
+
+</details>
+
+See [highlight](./options-reference.md#highlight-highlight-modules) in the options
+reference for more details, like how to adjust the attributes used for highlighting
+in the dot-like reporters.
 
 ### `--collapse`: summarize to folder depth or pattern
 

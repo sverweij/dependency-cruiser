@@ -18,6 +18,7 @@ const KNOWN_DEPCRUISE_CLI_OPTIONS = [
   "focus",
   "focusDepth",
   "help",
+  "highlight",
   "ignoreKnown",
   "includeOnly",
   "info",

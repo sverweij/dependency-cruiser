@@ -20,12 +20,6 @@
               }
             },
             {
-              "criteria": { "matchesFocus": false },
-              "attributes": {
-                "color": "grey"
-              }
-            },
-            {
               "criteria": { "matchesReaches": true },
               "attributes": {
                 "fillcolor": "lime",
@@ -33,9 +27,10 @@
               }
             },
             {
-              "criteria": { "matchesReaches": false },
+              "criteria": { "matchesHighlight": true },
               "attributes": {
-                "color": "grey"
+                "fillcolor": "yellow",
+                "penwidth": 2
               }
             },
             {

@@ -4,6 +4,7 @@ import {
   IFocusType,
   IIncludeOnlyType,
   IReachesType,
+  IHighlightType,
 } from "./filter-types";
 import { DependencyType } from "./shared-types";
 
@@ -54,6 +55,15 @@ export interface IStrictFocusType extends IFocusType {
 }
 
 export interface IStrictReachesType extends IReachesType {
+  /**
+   * dependency-cruiser will include modules matching this regular expression
+   * in its output, as well as _any_ module that reaches them - either directly
+   * or via via.
+   */
+  path: string;
+}
+
+export interface IStrictHighlightType extends IHighlightType {
   /**
    * dependency-cruiser will include modules matching this regular expression
    * in its output, as well as _any_ module that reaches them - either directly

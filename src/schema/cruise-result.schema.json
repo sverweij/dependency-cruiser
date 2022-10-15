@@ -55,6 +55,10 @@
           "type": "boolean",
           "description": "'true' if the file name of this module matches the 'reaches' filter regular expression"
         },
+        "matchesHighlight": {
+          "type": "boolean",
+          "description": "'true' if the file name of this module matches the 'highlight' regular expression"
+        },
         "coreModule": {
           "type": "boolean",
           "description": "Whether or not this is a node.js core module"
@@ -858,13 +862,8 @@
           ]
         },
         "focus": { "$ref": "#/definitions/CompoundFocusType" },
-        "reaches": {
-          "description": "dependency-cruiser will include modules matching this regular expression in its output, as well as _any_ module that reaches them - either directly or via via",
-          "oneOf": [
-            { "$ref": "#/definitions/REAsStringsType" },
-            { "$ref": "#/definitions/CompoundReachesType" }
-          ]
-        },
+        "reaches": { "$ref": "#/definitions/CompoundReachesType" },
+        "highlight": { "$ref": "#/definitions/CompoundHighlightType" },
         "knownViolations": {
           "description": "baseline of known validations. Typically you'd specify these in a file called .dependency-cruiser-known-violations.json (which you'd generate with the --outputType 'baseline') - and which is easy to keep up to date. In a pinch you can specify them here as well. The known violations in .dependency-cruiser-known-violations.json always take precedence.",
           "$ref": "#/definitions/ViolationsType"
@@ -1127,6 +1126,26 @@
         }
       }
     },
+    "CompoundReachesType": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "path": {
+          "description": "dependency-cruiser will include modules matching this regular expression in its output, as well as _any_ module that reaches them - either directly or via via",
+          "$ref": "#/definitions/REAsStringsType"
+        }
+      }
+    },
+    "CompoundHighlightType": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "path": {
+          "description": "dependency-cruiser will mark modules matching this regular expression as 'highlighted' in its output",
+          "$ref": "#/definitions/REAsStringsType"
+        }
+      }
+    },
     "ReporterOptionsType": {
       "type": "object",
       "description": "Options to tweak the output of reporters",
@@ -1343,16 +1362,6 @@
         "includeOnly": { "$ref": "#/definitions/CompoundIncludeOnlyType" },
         "focus": { "$ref": "#/definitions/CompoundFocusType" },
         "reaches": { "$ref": "#/definitions/CompoundReachesType" }
-      }
-    },
-    "CompoundReachesType": {
-      "type": "object",
-      "additionalProperties": false,
-      "properties": {
-        "path": {
-          "description": "dependency-cruiser will include modules matching this regular expression in its output, as well as _any_ module that reaches them - either directly or via via",
-          "$ref": "#/definitions/REAsStringsType"
-        }
       }
     },
     "RevisionDataType": {

@@ -66,6 +66,17 @@ function filterReaches(pModules, pReachesFilter) {
     }));
 }
 
+function tagHighlight(pModules, pHighlightFilter) {
+  return pModules.map((pModule) => ({
+    ...pModule,
+    matchesHighlight: matchFacade.moduleMatchesFilter(
+      pModule,
+      pHighlightFilter
+    ),
+  }));
+}
+
+// eslint-disable-next-line complexity
 function applyFilters(pModules, pFilters) {
   if (pFilters) {
     let lReturnValue = clone(pModules);
@@ -81,6 +92,9 @@ function applyFilters(pModules, pFilters) {
     }
     if (pFilters.reaches) {
       lReturnValue = filterReaches(lReturnValue, pFilters.reaches);
+    }
+    if (pFilters.highlight) {
+      lReturnValue = tagHighlight(lReturnValue, pFilters.highlight);
     }
     return lReturnValue;
   }

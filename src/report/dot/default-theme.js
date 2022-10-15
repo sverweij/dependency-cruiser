@@ -106,6 +106,13 @@ module.exports = {
       criteria: { source: "\\.ls$/g" },
       attributes: { fillcolor: "pink" },
     },
+    {
+      criteria: { matchesHighlight: true },
+      attributes: {
+        fillcolor: "lime",
+        penwidth: 2,
+      },
+    },
   ],
   dependencies: [
     {

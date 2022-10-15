@@ -5,6 +5,7 @@
   - [`includeOnly`: only include modules satisfying a pattern](#includeonly-only-include-modules-satisfying-a-pattern)
   - [`focus`: show modules matching a pattern - with their direct neighbours](#focus-show-modules-matching-a-pattern---with-their-neighbours)
   - [`reaches`: show modules matching a pattern - with everything that can reach them](#reaches-show-modules-matching-a-pattern---with-everything-that-can-reach-them)
+  - [`highlight`: highlight modules](#highlight-highlight-modules)
   - [`exclude`: exclude dependencies from being cruised](#exclude-exclude-dependencies-from-being-cruised)
   - [`collapse`: summarize to folder depth or pattern](#collapse-summarize-to-folder-depth-or-pattern)
   - [`maxDepth`](#maxdepth)
@@ -382,6 +383,48 @@ Without this theming engaged the graph would look like this:
 With the theming it looks like this:
 
 ![All modules that can reach src/report/index.js - with only that module highlighted](./assets/filtering/reaches-with-highlight.svg)
+
+### `highlight`: highlight modules
+
+> :shell: command line option equivalent: `--highlight`
+
+In contrast to all other 'filter' types this doesn't really filter anything. It
+will, however, label all modules that match the regular expression `matchesHighlight`
+boolean attribute. Reporters can use this to their advantage to apply special
+colors or fonts to the modules marked as such. The `mermaid` and `dot` reporters
+do this out of the box. The `dot` (and related, like ddot, archi and flat) reporter
+allows for some tweaking in the `options.reporterOptions` section of your
+.dependency-cruiser.js, the same way you can tweak the modules matched by
+the `reaches` or `focus` filters.
+
+An example:
+
+```javascript
+{
+  "options": {
+    "includeOnly": "^src/",
+    "reaches": "^src/report/index.js",
+    "reporterOptions": {
+      "dot": {
+        "theme": {
+          "graph": {
+            "splines": "ortho"
+          },
+          "modules": [
+            {
+              "criteria": { "matchesHighlight": true },
+              "attributes": {
+                "fillcolor": "yellow",
+                "penwidth": 2
+              }
+            },
+          ]
+        }
+      }
+    }
+  }
+}
+```
 
 ### `exclude`: exclude dependencies from being cruised
 
