@@ -59,6 +59,11 @@ export default {
           description:
             "'true' if the file name of this module matches the 'reaches' filter regular expression",
         },
+        matchesHighlight: {
+          type: "boolean",
+          description:
+            "'true' if the file name of this module matches the 'highlight' regular expression",
+        },
         coreModule: {
           type: "boolean",
           description: "Whether or not this is a node.js core module",

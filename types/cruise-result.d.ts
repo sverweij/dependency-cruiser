@@ -102,6 +102,10 @@ export interface IModule {
    */
   matchesReaches?: boolean;
   /**
+   * 'true' if the file name of this module matches the 'highlight' regular expression
+   */
+  matchesHighlight?: boolean;
+  /**
    * 'true' if this module does not have dependencies, and no module has it as a dependency
    */
   orphan?: boolean;

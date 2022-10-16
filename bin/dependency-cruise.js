@@ -52,6 +52,10 @@ try {
       "-R, --reaches <regex>",
       "only include modules matching the regex + all modules that can reach it"
     )
+    .option(
+      "-H, --highlight <regex>",
+      "mark modules matching the regex as 'highlighted'"
+    )
     .option("-x, --exclude <regex>", "exclude all modules matching the regex")
     .option(
       "-X, --do-not-follow <regex>",

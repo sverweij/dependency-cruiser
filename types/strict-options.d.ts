@@ -9,7 +9,9 @@ import {
   IStrictDoNotFollowType,
   IStrictExcludeType,
   IStrictFocusType,
+  IStrictHighlightType,
   IStrictIncludeOnlyType,
+  IStrictReachesType,
 } from "./strict-filter-types";
 
 /**
@@ -26,6 +28,8 @@ export interface IStrictCruiseOptions extends ICruiseOptions {
   exclude: IStrictExcludeType;
   includeOnly?: IStrictIncludeOnlyType;
   focus?: IStrictFocusType;
+  reaches?: IStrictReachesType;
+  highlight?: IStrictHighlightType;
   collapse?: string;
   maxDepth: number;
   moduleSystems: ModuleSystemType[];
@@ -42,6 +46,7 @@ export interface IStrictFormatOptions extends IFormatOptions {
   exclude?: IStrictExcludeType;
   includeOnly?: IStrictIncludeOnlyType;
   focus?: IStrictFocusType;
+  reaches?: IStrictFocusType;
   collapse?: string;
   outputType: OutputType;
 }

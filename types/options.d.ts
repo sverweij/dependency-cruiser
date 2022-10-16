@@ -7,6 +7,7 @@ import {
   IFocusType,
   IIncludeOnlyType,
   IReachesType,
+  IHighlightType,
 } from "./filter-types";
 import { IBaselineViolations } from "./baseline-violations";
 
@@ -60,6 +61,11 @@ export interface ICruiseOptions {
    * or via via.
    */
   reaches?: string | string[] | IReachesType;
+  /**
+   * dependency-cruiser will mark modules matching this regular expression
+   * as 'highlighted' in its output
+   */
+  highlight?: string | string[] | IHighlightType;
   /*
    * baseline of known validations. Typically you'd specify these in a file called
    * .dependency-cruiser-known-violations.json (which you'd generate with the --outputType

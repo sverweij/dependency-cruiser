@@ -54,3 +54,11 @@ export interface IReachesType {
    */
   path?: string | string[];
 }
+
+export interface IHighlightType {
+  /**
+   * dependency-cruiser will mark modules matching this regular expression
+   * as 'highlighted' in its output
+   */
+  path?: string | string[];
+}

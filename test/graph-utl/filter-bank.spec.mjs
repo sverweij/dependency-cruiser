@@ -3,6 +3,7 @@ import filterBank from "../../src/graph-utl/filter-bank.js";
 import reportModules from "./__mocks__/report-modules.mjs";
 import reportIndexModule from "./__fixtures__/reaches/report-index-module.mjs";
 import multiModuleRegexResult from "./__fixtures__/reaches/multi-module-regex-result.mjs";
+import highlightResult from "./__fixtures__/highlight/highlight-result.mjs";
 
 const MODULES = [
   {
@@ -84,7 +85,7 @@ describe("[U] graph-utl/filter-bank - null's, naughts, and zeros", () => {
   });
 });
 
-describe("[U] graph-utl/filter-bank - exclude, includeOnly, reaches", () => {
+describe("[U] graph-utl/filter-bank - exclude, includeOnly, reaches, highlight", () => {
   it("returns the input without excluded modules when exclude is passed ", () => {
     expect(
       filterBank.applyFilters(MODULES, { exclude: { path: "^excluded" } })
@@ -183,5 +184,12 @@ describe("[U] graph-utl/filter-bank - exclude, includeOnly, reaches", () => {
         reaches: { path: "src/report/(utl/|anon/anonymize-path-element)" },
       })
     ).to.deep.equal(multiModuleRegexResult);
+  });
+  it("highlight: labels modules with matchesHighlight when they match the highlight", () => {
+    expect(
+      filterBank.applyFilters(reportModules, {
+        highlight: { path: "src/report/(utl/|anon/anonymize-path-element)" },
+      })
+    ).to.deep.equal(highlightResult);
   });
 });

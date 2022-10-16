@@ -173,6 +173,7 @@ function normalizeCruiseOptions(pOptions, pFileAndDirectoryArray = []) {
     "focus",
     "includeOnly",
     "reaches",
+    "highlight",
   ]);
 
   lReturnValue.exoticRequireStrings = uniq(lReturnValue.exoticRequireStrings);

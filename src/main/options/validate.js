@@ -90,6 +90,7 @@ function validateCruiseOptions(pOptions) {
     validateRegExpSafety(pOptions.includeOnly);
     validateRegExpSafety(pOptions.focus);
     validateRegExpSafety(pOptions.reaches);
+    validateRegExpSafety(pOptions.highlight);
     validateRegExpSafety(pOptions.collapse);
 
     // necessary because not in the config schema

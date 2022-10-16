@@ -92,6 +92,7 @@ function optionsAreCompatible(pOldOptions, pNewOptions) {
     optionIsCompatible(pOldOptions.exclude, pNewOptions.exclude) &&
     optionIsCompatible(pOldOptions.focus, pNewOptions.focus) &&
     optionIsCompatible(pOldOptions.reaches, pNewOptions.reaches) &&
+    optionIsCompatible(pOldOptions.highlight, pNewOptions.highlight) &&
     optionIsCompatible(pOldOptions.collapse, pNewOptions.collapse) &&
     limitIsCompatible(pOldOptions.maxDepth, pNewOptions.maxDepth) &&
     optionIsCompatible(

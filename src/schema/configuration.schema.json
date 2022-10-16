@@ -454,6 +454,13 @@
             { "$ref": "#/definitions/CompoundReachesType" }
           ]
         },
+        "highlight": {
+          "description": "dependency-cruiser will mark modules matching this regular expression as 'highlighted' in its output",
+          "oneOf": [
+            { "$ref": "#/definitions/REAsStringsType" },
+            { "$ref": "#/definitions/CompoundHighlightType" }
+          ]
+        },
         "knownViolations": {
           "description": "baseline of known validations. Typically you'd specify these in a file called .dependency-cruiser-known-violations.json (which you'd generate with the --outputType 'baseline') - and which is easy to keep up to date. In a pinch you can specify them here as well. The known violations in .dependency-cruiser-known-violations.json always take precedence.",
           "$ref": "#/definitions/ViolationsType"
@@ -691,6 +698,16 @@
       "properties": {
         "path": {
           "description": "dependency-cruiser will include modules matching this regular expression in its output, as well as _any_ module that reaches them - either directly or via via",
+          "$ref": "#/definitions/REAsStringsType"
+        }
+      }
+    },
+    "CompoundHighlightType": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "path": {
+          "description": "dependency-cruiser will mark modules matching this regular expression as 'highlighted' in its output",
           "$ref": "#/definitions/REAsStringsType"
         }
       }
