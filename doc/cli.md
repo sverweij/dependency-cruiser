@@ -1222,10 +1222,16 @@ depcruise-fmt -T dot --focus "^src/main" cruise_result.json | dot -T svg > main.
 depcruise-fmt -T dot --focus "^src/juggle" cruise_result.json | dot -T svg > juggle.svg
 depcruise-fmt -T dot --include-only "^src/the-law" cruise_result.json | dot -T svg > the-law.svg
 
-## or to find dependencies going into or departing from the spelunkme module
+## or to find dependencies going into or departing from the spelunk-me module
 ## and emitting them to stdout:
-depcruise-fmt -T text --focus "^src/main/spelunkme\\.ts$" cruise_result.json
+depcruise-fmt -T text --focus "^src/main/spelunk-me\\.ts$" cruise_result.json
 ```
+
+### highlight
+
+The `--highlight` option is also available in case you want to just highlight
+modules without filtering them. See the [--highlight](#highlight-highlight-modules)
+documentation of the regular depcruise command for more information.
 
 ### collapse/ summarize
 
