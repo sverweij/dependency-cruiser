@@ -10,6 +10,7 @@ const KNOWN_FMT_OPTIONS = [
   "focus",
   "focusDepth",
   "help",
+  "highlight",
   "includeOnly",
   "outputTo",
   "outputType",

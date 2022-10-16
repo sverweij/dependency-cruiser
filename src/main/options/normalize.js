@@ -205,6 +205,7 @@ function normalizeFormatOptions(pFormatOptions) {
   lFormatOptions = normalizeFilterOptions(lFormatOptions, [
     "exclude",
     "focus",
+    "highlight",
     "includeOnly",
     "reaches",
   ]);
