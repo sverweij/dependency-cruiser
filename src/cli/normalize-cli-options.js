@@ -7,38 +7,6 @@ const clone = require("lodash/clone");
 const loadConfig = require("../config-utl/extract-depcruise-config");
 const defaults = require("./defaults");
 
-const KNOWN_DEPCRUISE_CLI_OPTIONS = [
-  "babelConfig",
-  "baseDir",
-  "cache",
-  "collapse",
-  "config",
-  "doNotFollow",
-  "exclude",
-  "focus",
-  "focusDepth",
-  "help",
-  "highlight",
-  "ignoreKnown",
-  "includeOnly",
-  "info",
-  "init",
-  "maxDepth",
-  "metrics",
-  "moduleSystems",
-  "outputTo",
-  "outputType",
-  "prefix",
-  "preserveSymlinks",
-  "progress",
-  "reaches",
-  "tsPreCompilationDeps",
-  "tsConfig",
-  "validate",
-  "version",
-  "webpackConfig",
-];
-
 function getOptionValue(pDefault) {
   return (pValue) => {
     let lReturnValue = pDefault;
@@ -48,27 +16,6 @@ function getOptionValue(pDefault) {
     }
     return lReturnValue;
   };
-}
-
-function isKnownCLIOption(pKnownOptions) {
-  return (pCandidateString) => pKnownOptions.includes(pCandidateString);
-}
-
-/**
- * Remove all attributes from the input object (which'd typically be
- * originating from commander) that are not functional dependency-cruiser
- * options so a clean object can be passed through to the main function
- *
- * @param {any} pCliOptions - an options object e.g. as output from commander
- * @returns {ICruiseOptions} - an options object that only contains stuff we care about
- */
-function ejectNonCLIOptions(pCliOptions, pKnownCliOptions) {
-  return Object.keys(pCliOptions)
-    .filter(isKnownCLIOption(pKnownCliOptions))
-    .reduce((pAll, pKey) => {
-      pAll[pKey] = pCliOptions[pKey];
-      return pAll;
-    }, {});
 }
 
 function normalizeConfigFileName(pCliOptions, pConfigWrapperName, pDefault) {
@@ -218,14 +165,12 @@ function normalizeCacheFolderName(pCliOptions) {
  * @param {any} pKnownCliOptions [description]
  * @return {object}          [description]
  */
-module.exports = function normalizeOptions(
-  pOptionsAsPassedFromCommander,
-  pKnownCliOptions = KNOWN_DEPCRUISE_CLI_OPTIONS
-) {
+module.exports = function normalizeOptions(pOptionsAsPassedFromCommander) {
   let lOptions = {
     outputTo: defaults.OUTPUT_TO,
     outputType: defaults.OUTPUT_TYPE,
-    ...ejectNonCLIOptions(pOptionsAsPassedFromCommander, pKnownCliOptions),
+    ...pOptionsAsPassedFromCommander,
+    // ...ejectNonCLIOptions(pOptionsAsPassedFromCommander, pKnownCliOptions),
   };
 
   if (has(lOptions, "moduleSystems")) {

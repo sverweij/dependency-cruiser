@@ -4,21 +4,6 @@ const validateFileExistence = require("./utl/validate-file-existence");
 const normalizeOptions = require("./normalize-cli-options");
 const io = require("./utl/io");
 
-const KNOWN_FMT_OPTIONS = [
-  "collapse",
-  "exclude",
-  "focus",
-  "focusDepth",
-  "help",
-  "highlight",
-  "includeOnly",
-  "outputTo",
-  "outputType",
-  "prefix",
-  "reaches",
-  "version",
-];
-
 /**
  *
  * @param {string} pResultFile the name of the file with cruise results
@@ -26,7 +11,7 @@ const KNOWN_FMT_OPTIONS = [
  * @returns {Number} an exitCode
  */
 module.exports = async (pResultFile, pOptions) => {
-  const lOptions = normalizeOptions(pOptions, KNOWN_FMT_OPTIONS);
+  const lOptions = normalizeOptions(pOptions);
 
   if (pResultFile !== "-") {
     validateFileExistence(pResultFile);
