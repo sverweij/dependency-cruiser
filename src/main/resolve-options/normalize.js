@@ -14,7 +14,7 @@ const DEFAULT_CACHE_DURATION = 4000;
 const DEFAULT_RESOLVE_OPTIONS = {
   // for later: check semantics of enhanced-resolve symlinks and
   // node's preserveSymlinks. They seem to be
-  // symlink === !preserveSynlinks - but using it that way
+  // symlink === !preserveSymlinks - but using it that way
   // breaks backwards compatibility
   //
   // Someday we'll rely on this and remove the code that manually
@@ -55,7 +55,7 @@ function getNonOverridableResolveOptions(pCacheDuration) {
     // worse.
     fileSystem: new enhancedResolve.CachedInputFileSystem(fs, pCacheDuration),
     // our code depends on sync behavior, so having this
-    // overriden is not an option
+    // overridden is not an option
     useSyncFileSystemCalls: true,
   };
 }
@@ -91,7 +91,7 @@ function compileResolveOptions(
     const TsConfigPathsPlugin = require("tsconfig-paths-webpack-plugin");
     lResolveOptions.plugins = pushPlugin(
       lResolveOptions.plugins,
-      // @ts-ignore TS2351 "TsConfPathsPlugin is not constructuable" - is unjustified
+      // @ts-ignore TS2351 "TsConfPathsPlugin is not constructable" - is unjustified
       new TsConfigPathsPlugin({
         configFile: pResolveOptions.tsConfig,
         // TsConfigPathsPlugin doesn't (can't) read enhanced-resolve's
@@ -120,7 +120,6 @@ function compileResolveOptions(
 }
 
 /**
- *
  * @param {import("../../../types/dependency-cruiser").IResolveOptions} pResolveOptions
  * @param {import("../../../types/dependency-cruiser").ICruiseOptions} pOptions
  * @param {import("typescript").ParsedTsconfig} pTSConfig
@@ -143,7 +142,7 @@ module.exports = function normalizeResolveOptions(
       symlinks: get(pOptions, "preserveSymlinks", null),
       tsConfig: get(pOptions, "ruleSet.options.tsConfig.fileName", null),
 
-      /* squirel the externalModuleResolutionStrategy and combinedDependencies
+      /* squirrel the externalModuleResolutionStrategy and combinedDependencies
          thing into the resolve options
          - they're not for enhanced resolve, but they are for what we consider
          resolve options ...

@@ -51,8 +51,8 @@ function canBeResolvedToTsVariant(pModuleName) {
   return [".js", ".jsx"].includes(path.extname(pModuleName));
 }
 
-function isTypeScriptishExtension(pModuleName) {
-  return [".ts", ".tsx"].includes(path.extname(pModuleName));
+function isTypeScriptIshExtension(pModuleName) {
+  return [".ts", ".tsx", ".cts", ".mts"].includes(path.extname(pModuleName));
 }
 function resolveYarnVirtual(pPath) {
   const pnpAPI = get(monkeyPatchedModule, "findPnpApi", () => false)(pPath);
@@ -113,7 +113,7 @@ function resolveWithRetry(
       pResolveOptions
     );
 
-    if (isTypeScriptishExtension(lReturnValueCandidate.resolved)) {
+    if (isTypeScriptIshExtension(lReturnValueCandidate.resolved)) {
       lReturnValue = lReturnValueCandidate;
     }
   }

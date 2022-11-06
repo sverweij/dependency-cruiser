@@ -21,7 +21,9 @@ const EXTENSION2WRAPPER = {
   ".tsx": typeScriptTsxWrap,
   ".d.ts": typeScriptWrap,
   ".cts": typeScriptWrap,
+  ".d.cts": typeScriptWrap,
   ".mts": typeScriptESMWrap,
+  ".d.mts": typeScriptESMWrap,
   ".vue": vueWrap,
   ".svelte": svelteWrap,
   ".ls": liveScriptWrap,
@@ -109,7 +111,7 @@ module.exports.allExtensions = Object.keys(EXTENSION2WRAPPER).map(
 
 /**
  * an array of extensions that are 'scannable' (have a valid transpiler
- * available for) in the current environemnt.
+ * available for) in the current environment.
  *
  * @type {string[]}
  */
@@ -117,7 +119,7 @@ module.exports.scannableExtensions =
   Object.keys(EXTENSION2WRAPPER).filter(extensionIsAvailable);
 
 /**
- * returns an array of supported transpilers, whith for each transpiler:
+ * returns an array of supported transpilers, with for each transpiler:
  * - the version (range) supported
  * - whether or not it is available in the current environment
  *

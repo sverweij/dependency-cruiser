@@ -1,5 +1,5 @@
 const DOT_FILE_PATTERN = "(^|/)\\.[^/]+\\.(js|cjs|mjs|ts|json)$";
-const TS_DECLARATION_FILE_PATTERN = "\\.d\\.ts$";
+const TS_DECLARATION_FILE_PATTERN = "\\.d\\.(c|m)?ts$";
 const TS_CONFIG_FILE_PATTERN = "(^|/)tsconfig\\.json$";
 const OTHER_CONFIG_FILES_PATTERN =
   "(^|/)(babel|webpack)\\.config\\.(js|cjs|mjs|ts|json)$";
@@ -18,7 +18,7 @@ module.exports = {
     "remove it. If it's logical this module is an orphan (i.e. it's a config file), " +
     "add an exception for it in your dependency-cruiser configuration. By default " +
     "this rule does not scrutinize dotfiles (e.g. .eslintrc.js), TypeScript declaration " +
-    "files (.d.ts), tsconfig.json and some of the babel and webpack configs.",
+    "files (.d.ts/ .d.cts/ .d.mts), tsconfig.json and some of the babel and webpack configs.",
   severity: "warn",
   from: {
     orphan: true,
