@@ -1,4 +1,4 @@
-import { promises as fsPromise } from "node:fs";
+import { promises as fsPromise } from "fs";
 import { expect } from "chai";
 import svelteWrap from "../../../src/extract/transpile/svelte-wrap.js";
 import normalizeSource from "../normalize-source.utl.mjs";

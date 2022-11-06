@@ -1,4 +1,3 @@
-const get = require("lodash/get");
 const has = require("lodash/has");
 const safeRegex = require("safe-regex");
 const report = require("../../report");
@@ -67,8 +66,8 @@ function validatePathsSafety(pFilterOption) {
     validateRegExpSafety(pFilterOption);
   }
 
-  validateRegExpSafety(get(pFilterOption, "path", ""));
-  validateRegExpSafety(get(pFilterOption, "pathNot", ""));
+  validateRegExpSafety(pFilterOption?.path ?? "");
+  validateRegExpSafety(pFilterOption?.pathNot ?? "");
 }
 
 /**

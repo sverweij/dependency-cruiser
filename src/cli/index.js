@@ -1,5 +1,4 @@
 const glob = require("glob");
-const get = require("lodash/get");
 const clone = require("lodash/clone");
 const set = require("lodash/set");
 const isInstalledGlobally = require("is-installed-globally");
@@ -21,17 +20,14 @@ const setUpPerformanceLogListener = require("./listeners/performance-log");
 
 function extractResolveOptions(pCruiseOptions) {
   let lResolveOptions = {};
-  const lWebPackConfigFileName = get(
-    pCruiseOptions,
-    "ruleSet.options.webpackConfig.fileName",
-    null
-  );
+  const lWebPackConfigFileName =
+    pCruiseOptions?.ruleSet?.options?.webpackConfig?.fileName ?? null;
 
   if (lWebPackConfigFileName) {
     lResolveOptions = extractWebpackResolveConfig(
       lWebPackConfigFileName,
-      get(pCruiseOptions, "ruleSet.options.webpackConfig.env", null),
-      get(pCruiseOptions, "ruleSet.options.webpackConfig.arguments", null)
+      pCruiseOptions?.ruleSet?.options?.webpackConfig?.env ?? null,
+      pCruiseOptions?.ruleSet?.options?.webpackConfig?.arguments ?? null
     );
   }
   return lResolveOptions;
@@ -54,11 +50,8 @@ function addKnownViolations(pCruiseOptions) {
 
 function extractTSConfigOptions(pCruiseOptions) {
   let lReturnValue = {};
-  const lTSConfigFileName = get(
-    pCruiseOptions,
-    "ruleSet.options.tsConfig.fileName",
-    null
-  );
+  const lTSConfigFileName =
+    pCruiseOptions?.ruleSet?.options?.tsConfig?.fileName ?? null;
 
   if (lTSConfigFileName) {
     lReturnValue = extractTSConfig(lTSConfigFileName);
@@ -69,11 +62,8 @@ function extractTSConfigOptions(pCruiseOptions) {
 
 function extractBabelConfigOptions(pCruiseOptions) {
   let lReturnValue = {};
-  const lBabelConfigFileName = get(
-    pCruiseOptions,
-    "ruleSet.options.babelConfig.fileName",
-    null
-  );
+  const lBabelConfigFileName =
+    pCruiseOptions?.ruleSet?.options?.babelConfig?.fileName ?? null;
 
   if (lBabelConfigFileName) {
     lReturnValue = extractBabelConfig(lBabelConfigFileName);
@@ -87,12 +77,11 @@ function setUpListener(pCruiseOptions) {
     "cli-feedback": setUpCliFeedbackListener,
     "performance-log": setUpPerformanceLogListener,
   };
-  const lListenerID = get(
-    pCruiseOptions,
-    "progress",
-    get(pCruiseOptions, "ruleSet.options.progress.type")
-  );
-  const lListenerFunction = get(lString2Listener, lListenerID);
+  const lListenerID =
+    pCruiseOptions?.progress ??
+    pCruiseOptions?.ruleSet?.options?.progress?.type;
+  // eslint-disable-next-line security/detect-object-injection
+  const lListenerFunction = lString2Listener?.[lListenerID];
   /* c8 ignore next 3 */
   if (Boolean(lListenerFunction)) {
     lListenerFunction(bus);

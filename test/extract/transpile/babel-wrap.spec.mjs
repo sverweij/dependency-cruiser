@@ -1,4 +1,4 @@
-import { readFileSync } from "node:fs";
+import { readFileSync } from "fs";
 import { expect } from "chai";
 import normalizeSource from "../normalize-source.utl.mjs";
 import wrap from "../../../src/extract/transpile/babel-wrap.js";

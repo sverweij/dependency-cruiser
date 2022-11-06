@@ -1,6 +1,5 @@
 const chalk = require("chalk");
 const figures = require("figures");
-const get = require("lodash/get");
 const { findRuleByName } = require("../graph-utl/rule-set");
 const wrapAndIndent = require("../utl/wrap-and-indent");
 const utl = require("./utl/index.js");
@@ -106,11 +105,7 @@ function addExplanation(pRuleSet, pLong) {
   return pLong
     ? (pViolation) => ({
         ...pViolation,
-        comment: get(
-          findRuleByName(pRuleSet, pViolation.rule.name),
-          "comment",
-          "-"
-        ),
+        comment: findRuleByName(pRuleSet, pViolation.rule.name)?.comment ?? "-",
       })
     : (pViolation) => pViolation;
 }

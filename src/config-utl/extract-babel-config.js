@@ -4,7 +4,6 @@
 const fs = require("fs");
 const path = require("path");
 const json5 = require("json5");
-const get = require("lodash/get");
 const has = require("lodash/has");
 const tryRequire = require("semver-try-require");
 const { supportedTranspilers } = require("../../src/meta.js");
@@ -48,7 +47,7 @@ function getJSON5Config(pBabelConfigFileName) {
   }
 
   if (pBabelConfigFileName.endsWith("package.json")) {
-    lReturnValue = get(lReturnValue, "babel", {});
+    lReturnValue = lReturnValue?.babel ?? {};
   }
   return lReturnValue;
 }

@@ -1,4 +1,4 @@
-import { lstatSync } from "node:fs";
+import { lstatSync } from "fs";
 import { expect } from "chai";
 import gatherInitialSources from "../../src/extract/gather-initial-sources.js";
 import p2p from "../../src/extract/utl/path-to-posix.js";

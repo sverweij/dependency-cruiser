@@ -1,5 +1,4 @@
 const has = require("lodash/has");
-const get = require("lodash/get");
 
 /**
  * @param {import("../../types/strict-rule-set").IStrictAnyRuleType} pRule a dependency-cruiser rule
@@ -21,7 +20,7 @@ function isModuleOnlyRule(pRule) {
 function isFolderScope(pRule) {
   // TODO might be possible to just rule pRule.scope as it's now
   // normalized away before getting here.
-  return get(pRule, "scope", "module") === "folder";
+  return (pRule?.scope ?? module) === "folder";
 }
 
 module.exports = { isModuleOnlyRule, isFolderScope };

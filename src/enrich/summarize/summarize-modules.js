@@ -1,5 +1,4 @@
 const _flattenDeep = require("lodash/flattenDeep");
-const get = require("lodash/get");
 const has = require("lodash/has");
 const uniqWith = require("lodash/uniqWith");
 const { findRuleByName } = require("../../graph-utl/rule-set");
@@ -25,7 +24,7 @@ function toDependencyViolationSummary(pRule, pModule, pDependency, pRuleSet) {
 
   if (
     has(pDependency, "cycle") &&
-    get(findRuleByName(pRuleSet, pRule.name), "to.circular")
+    findRuleByName(pRuleSet, pRule.name)?.to?.circular
   ) {
     lReturnValue = {
       ...lReturnValue,
@@ -88,10 +87,7 @@ function toModuleViolationSummary(pRule, pModule, pRuleSet) {
   let lReturnValue = [
     { type: "module", from: pModule.source, to: pModule.source, rule: pRule },
   ];
-  if (
-    pModule.reaches &&
-    get(findRuleByName(pRuleSet, pRule.name), "to.reachable")
-  ) {
+  if (pModule.reaches && findRuleByName(pRuleSet, pRule.name)?.to?.reachable) {
     lReturnValue = pModule.reaches
       .filter((pReachable) => pReachable.asDefinedInRule === pRule.name)
       .reduce(

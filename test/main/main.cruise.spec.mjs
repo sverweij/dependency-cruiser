@@ -1,6 +1,6 @@
-import { posix as path } from "node:path";
-import { readFileSync } from "node:fs";
-import { fileURLToPath } from "node:url";
+import { posix as path } from "path";
+import { readFileSync } from "fs";
+import { fileURLToPath } from "url";
 import { expect, use } from "chai";
 import chaiJSONSchema from "chai-json-schema";
 import pathToPosix from "../../src/extract/utl/path-to-posix.js";

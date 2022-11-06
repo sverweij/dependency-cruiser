@@ -1,4 +1,4 @@
-import { EOL } from "node:os";
+import { EOL } from "os";
 import { expect } from "chai";
 import metrics from "../../../src/report/metrics.js";
 import cruiseResultWithMetricsForModulesAndFolders from "./__mocks/cruise-result-with-metrics-for-modules-and-folders.mjs";

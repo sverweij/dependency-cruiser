@@ -1,5 +1,5 @@
-import { createReadStream } from "node:fs";
-import { Writable } from "node:stream";
+import { createReadStream } from "fs";
+import { Writable } from "stream";
 import { expect } from "chai";
 import wrapStreamInHTML from "../../../src/cli/tools/wrap-stream-in-html.js";
 

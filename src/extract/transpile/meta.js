@@ -1,4 +1,3 @@
-const get = require("lodash/get");
 const { supportedTranspilers } = require("../../../src/meta.js");
 const swc = require("../parse/to-swc-ast");
 const javaScriptWrap = require("./javascript-wrap");
@@ -88,7 +87,7 @@ function extensionIsAvailable(pExtension) {
  */
 module.exports.getWrapper = (pExtension, pTranspilerOptions) => {
   if (
-    Object.keys(get(pTranspilerOptions, "babelConfig", {})).length > 0 &&
+    Object.keys(pTranspilerOptions?.babelConfig ?? {}).length > 0 &&
     BABELEABLE_EXTENSIONS.includes(pExtension)
   ) {
     return babelWrap;

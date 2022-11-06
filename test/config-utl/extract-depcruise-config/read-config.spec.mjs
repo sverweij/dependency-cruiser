@@ -1,4 +1,4 @@
-import { fileURLToPath } from "node:url";
+import { fileURLToPath } from "url";
 import { expect } from "chai";
 import readConfig from "../../../src/config-utl/extract-depcruise-config/read-config.js";
 

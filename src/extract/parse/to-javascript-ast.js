@@ -2,7 +2,6 @@ const fs = require("fs");
 const acorn = require("acorn");
 const acornLoose = require("acorn-loose");
 const acornJsx = require("acorn-jsx");
-const get = require("lodash/get");
 const memoize = require("lodash/memoize");
 const transpile = require("../transpile");
 const getExtension = require("../utl/get-extension");
@@ -22,7 +21,7 @@ function needsJSXTreatment(pFileRecord, pTranspileOptions) {
   return (
     pFileRecord.extension === ".jsx" ||
     (pFileRecord.extension === ".tsx" &&
-      get(pTranspileOptions, "tsConfig.options.jsx") ===
+      pTranspileOptions?.tsConfig?.options?.jsx ===
         TSCONFIG_CONSTANTS.PRESERVE_JSX)
   );
 }

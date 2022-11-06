@@ -1,6 +1,6 @@
 /* eslint-disable security/detect-object-injection */
-import fs from "node:fs";
-import path from "node:path";
+import fs from "fs";
+import path from "path";
 import prettier from "prettier";
 import clone from "lodash/clone.js";
 

@@ -1,5 +1,5 @@
-import { join } from "node:path";
-import { fileURLToPath } from "node:url";
+import { join } from "path";
+import { fileURLToPath } from "url";
 import { expect } from "chai";
 import normalize from "../../../src/main/options/normalize.js";
 import normalizeResolveOptions from "../../../src/main/resolve-options/normalize.js";
