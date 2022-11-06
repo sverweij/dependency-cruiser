@@ -1,3 +1,5 @@
+// @ts-check
+/** @type {Mocha} */
 module.exports = {
   extension: ["js", "mjs", "cjs"],
   timeout: 4000,
