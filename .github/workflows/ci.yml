@@ -17,45 +17,45 @@ defaults:
     shell: bash
 
 jobs:
-  check-linux:
-    strategy:
-      fail-fast: false
-      matrix:
-        node-version: [14.x, 16.x, 19.x]
-        platform: [ubuntu-latest]
-    runs-on: ${{matrix.platform}}
-    steps:
-      - uses: actions/checkout@v3
-      - uses: actions/cache@v3
-        with:
-          path: node_modules
-          key: ${{matrix.node-version}}@${{matrix.platform}}-build-${{hashFiles('package.json')}}
-          restore-keys: |
-            ${{matrix.node-version}}@${{matrix.platform}}-build-
-      - uses: actions/setup-node@v3
-        with:
-          node-version: ${{matrix.node-version}}
-      - name: install & build
-        run: |
-          npm install
-          npm run build
-      - name: lint (run on node ${{env.NODE_LATEST}} only)
-        if: matrix.node-version == env.NODE_LATEST
-        run: npm run lint
-      - name: forbidden dependency check
-        run: npm run depcruise
-      - name: test coverage (run on node ${{env.NODE_LATEST}} only)
-        if: matrix.node-version == env.NODE_LATEST
-        run: npm run test:cover
-      - name: emit coverage results & depcruise result to step summary
-        if: always() && matrix.node-version == env.NODE_LATEST
-        run: |
-          echo '## Code coverage' >> $GITHUB_STEP_SUMMARY
-          node tools/istanbul-json-summary-to-markdown.mjs < coverage/coverage-summary.json >> $GITHUB_STEP_SUMMARY
-          yarn --silent depcruise --output-type markdown >> $GITHUB_STEP_SUMMARY
-      - name: regular test (run on node != ${{env.NODE_LATEST}} only)
-        if: matrix.node-version != env.NODE_LATEST
-        run: npm test
+  # check-linux:
+  #   strategy:
+  #     fail-fast: false
+  #     matrix:
+  #       node-version: [14.x, 16.x, 19.x]
+  #       platform: [ubuntu-latest]
+  #   runs-on: ${{matrix.platform}}
+  #   steps:
+  #     - uses: actions/checkout@v3
+  #     - uses: actions/cache@v3
+  #       with:
+  #         path: node_modules
+  #         key: ${{matrix.node-version}}@${{matrix.platform}}-build-${{hashFiles('package.json')}}
+  #         restore-keys: |
+  #           ${{matrix.node-version}}@${{matrix.platform}}-build-
+  #     - uses: actions/setup-node@v3
+  #       with:
+  #         node-version: ${{matrix.node-version}}
+  #     - name: install & build
+  #       run: |
+  #         npm install
+  #         npm run build
+  #     - name: lint (run on node ${{env.NODE_LATEST}} only)
+  #       if: matrix.node-version == env.NODE_LATEST
+  #       run: npm run lint
+  #     - name: forbidden dependency check
+  #       run: npm run depcruise
+  #     - name: test coverage (run on node ${{env.NODE_LATEST}} only)
+  #       if: matrix.node-version == env.NODE_LATEST
+  #       run: npm run test:cover
+  #     - name: emit coverage results & depcruise result to step summary
+  #       if: always() && matrix.node-version == env.NODE_LATEST
+  #       run: |
+  #         echo '## Code coverage' >> $GITHUB_STEP_SUMMARY
+  #         node tools/istanbul-json-summary-to-markdown.mjs < coverage/coverage-summary.json >> $GITHUB_STEP_SUMMARY
+  #         yarn --silent depcruise --output-type markdown >> $GITHUB_STEP_SUMMARY
+  #     - name: regular test (run on node != ${{env.NODE_LATEST}} only)
+  #       if: matrix.node-version != env.NODE_LATEST
+  #       run: npm test
 
   check-windows:
     env:
@@ -79,46 +79,46 @@ jobs:
       - run: npm run depcruise
       - run: npm test
 
-  check-berry-integration:
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v3
-      - uses: actions/cache@v3
-        with:
-          path: |
-            .yarn
-            .yarnrc.yml
-            .pnp.js
-            yarn.lock
-          key: ${{env.NODE_LATEST}}@${{env.PLATFORM}}-build-${{hashFiles('package.json')}}
-          restore-keys: |
-            ${{env.NODE_LATEST}}@${{env.PLATFORM}}-build-
-      - uses: actions/setup-node@v3
-        with:
-          node-version: ${{env.NODE_LATEST}}
-      - name: install & build
-        run: |
-          rm -f .npmrc
-          yarn set version berry
-          YARN_ENABLE_IMMUTABLE_INSTALLS=false yarn
-      - name: forbidden dependency check
-        run: |
-          yarn --version
-          yarn depcruise
-      # testing doesn't work as the tests are esm and berry, with pnp enabled,
-      # doesn't support esm yet.
-      # - name: test coverage
-      #   run: |
-      #     node --version
-      #     yarn --version
-      #     yarn test:cover
+  # check-berry-integration:
+  #   runs-on: ubuntu-latest
+  #   steps:
+  #     - uses: actions/checkout@v3
+  #     - uses: actions/cache@v3
+  #       with:
+  #         path: |
+  #           .yarn
+  #           .yarnrc.yml
+  #           .pnp.js
+  #           yarn.lock
+  #         key: ${{env.NODE_LATEST}}@${{env.PLATFORM}}-build-${{hashFiles('package.json')}}
+  #         restore-keys: |
+  #           ${{env.NODE_LATEST}}@${{env.PLATFORM}}-build-
+  #     - uses: actions/setup-node@v3
+  #       with:
+  #         node-version: ${{env.NODE_LATEST}}
+  #     - name: install & build
+  #       run: |
+  #         rm -f .npmrc
+  #         yarn set version berry
+  #         YARN_ENABLE_IMMUTABLE_INSTALLS=false yarn
+  #     - name: forbidden dependency check
+  #       run: |
+  #         yarn --version
+  #         yarn depcruise
+  #     # testing doesn't work as the tests are esm and berry, with pnp enabled,
+  #     # doesn't support esm yet.
+  #     # - name: test coverage
+  #     #   run: |
+  #     #     node --version
+  #     #     yarn --version
+  #     #     yarn test:cover
 
-  check-yarn-integration:
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v3
-      - uses: actions/setup-node@v3
-        with:
-          node-version: ${{env.NODE_LATEST}}
-      - run: npm install
-      - run: npm run test:yarn-pnp
+  # check-yarn-integration:
+  #   runs-on: ubuntu-latest
+  #   steps:
+  #     - uses: actions/checkout@v3
+  #     - uses: actions/setup-node@v3
+  #       with:
+  #         node-version: ${{env.NODE_LATEST}}
+  #     - run: npm install
+  #     - run: npm run test:yarn-pnp
