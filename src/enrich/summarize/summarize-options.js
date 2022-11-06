@@ -1,4 +1,3 @@
-const get = require("lodash/get");
 const has = require("lodash/has");
 
 const SHAREABLE_OPTIONS = [
@@ -62,7 +61,7 @@ function makeIncludeOnlyBackwardsCompatible(pOptions) {
   return pOptions.includeOnly
     ? {
         ...pOptions,
-        includeOnly: get(pOptions, "includeOnly.path"),
+        includeOnly: pOptions?.includeOnly?.path,
       }
     : pOptions;
 }

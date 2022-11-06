@@ -1,10 +1,9 @@
-const get = require("lodash/get");
 const has = require("lodash/has");
 const { version } = require("../../../src/meta.js");
 const { formatViolation, formatInstability } = require("../utl/index.js");
 
 function getFormattedAllowedRule(pRuleSetUsed) {
-  const lAllowed = get(pRuleSetUsed, "allowed", []);
+  const lAllowed = pRuleSetUsed?.allowed ?? [];
   const lCommentedRule = lAllowed.find((pRule) => has(pRule, "comment"));
   const lComment = lCommentedRule ? lCommentedRule.comment : "-";
 
@@ -12,7 +11,7 @@ function getFormattedAllowedRule(pRuleSetUsed) {
     ? {
         name: "not-in-allowed",
         comment: lComment,
-        severity: get(pRuleSetUsed, "allowedSeverity", "warn"),
+        severity: pRuleSetUsed?.allowedSeverity ?? "warn",
       }
     : [];
 }
@@ -125,8 +124,8 @@ function aggregateCountsPerRule(pViolations) {
 function aggregateViolations(pViolations, pRuleSetUsed) {
   const lViolationCounts = aggregateCountsPerRule(pViolations);
 
-  return get(pRuleSetUsed, "forbidden", [])
-    .concat(get(pRuleSetUsed, "required", []))
+  return (pRuleSetUsed?.forbidden ?? [])
+    .concat(pRuleSetUsed?.required ?? [])
     .concat(getFormattedAllowedRule(pRuleSetUsed))
     .map((pRule) => mergeCountsIntoRule(pRule, lViolationCounts))
     .sort(

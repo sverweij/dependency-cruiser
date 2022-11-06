@@ -1,6 +1,4 @@
-/* eslint-disable no-magic-numbers */
-/* eslint-disable security/detect-object-injection */
-const get = require("lodash/get");
+/* eslint-disable no-magic-numbers, security/detect-object-injection */
 
 /*
  parseAttributes copied verbatim from
@@ -35,9 +33,9 @@ function composeTranspilerOptions(pTranspilerOptions) {
   return {
     ...pTranspilerOptions,
     tsConfig: {
-      ...get(pTranspilerOptions, "tsConfig", {}),
+      ...(pTranspilerOptions?.tsConfig ?? {}),
       options: {
-        ...get(pTranspilerOptions, "tsConfig.options", {}),
+        ...(pTranspilerOptions?.tsConfig?.options ?? {}),
         importsNotUsedAsValues: "preserve",
         jsx: "preserve",
       },

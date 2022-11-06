@@ -1,4 +1,3 @@
-const get = require("lodash/get");
 const clone = require("lodash/clone");
 
 // the fixed name for allowed rules served a purpose during the extraction
@@ -11,10 +10,10 @@ function removeNames(pRule) {
 }
 
 module.exports = function addRuleSetUsed(pOptions) {
-  const lForbidden = get(pOptions, "ruleSet.forbidden");
-  const lAllowed = get(pOptions, "ruleSet.allowed");
-  const lAllowedSeverity = get(pOptions, "ruleSet.allowedSeverity");
-  const lRequired = get(pOptions, "ruleSet.required");
+  const lForbidden = pOptions?.ruleSet?.forbidden;
+  const lAllowed = pOptions?.ruleSet?.allowed;
+  const lAllowedSeverity = pOptions?.ruleSet?.allowedSeverity;
+  const lRequired = pOptions?.ruleSet?.required;
 
   return Object.assign(
     lForbidden ? { forbidden: lForbidden } : {},

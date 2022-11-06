@@ -10,45 +10,45 @@ module.exports = {
             color: "white",
             fontcolor: "white",
             fillcolor: "transparent",
-            splines: "ortho"
+            splines: "ortho",
           },
           node: {
             color: "white",
             fillcolor: "#ffffff33",
-            fontcolor: "white"
+            fontcolor: "white",
           },
           edge: {
             arrowhead: "vee",
             arrowsize: "0.5",
             penwidth: "1.0",
             color: "white",
-            fontcolor: "white"
+            fontcolor: "white",
           },
           modules: [
             {
               criteria: { source: "\\.json$" },
               attributes: {
                 shape: "cylinder",
-                fillcolor: "#ffffff33:#ffffff88"
-              }
+                fillcolor: "#ffffff33:#ffffff88",
+              },
             },
             {
               criteria: { coreModule: true },
               attributes: {
                 color: "white",
                 fillcolor: "#ffffff33",
-                fontcolor: "white"
-              }
-            }
+                fontcolor: "white",
+              },
+            },
           ],
           dependencies: [
             {
               criteria: { resolved: "\\.json$" },
-              attributes: { arrowhead: "obox" }
-            }
-          ]
-        }
-      }
-    }
-  }
+              attributes: { arrowhead: "obox" },
+            },
+          ],
+        },
+      },
+    },
+  },
 };

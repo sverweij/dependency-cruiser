@@ -1,6 +1,5 @@
 const path = require("path");
 const tryRequire = require("semver-try-require");
-const get = require("lodash/get");
 const { supportedTranspilers } = require("../../src/meta.js");
 
 const typescript = tryRequire("typescript", supportedTranspilers.typescript);
@@ -11,7 +10,7 @@ const FORMAT_DIAGNOSTICS_HOST = {
 
     // depends on the platform which branch is taken, hence the c8 ignore
     /* c8 ignore start */
-    if (get(typescript, "sys.useCaseSensitiveFileNames", false)) {
+    if (typescript?.sys?.useCaseSensitiveFileNames ?? false) {
       lReturnValue = pFileName;
     }
     /* c8 ignore stop */

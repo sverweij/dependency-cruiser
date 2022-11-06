@@ -1,5 +1,5 @@
+/* eslint-disable security/detect-object-injection */
 const uniq = require("lodash/uniq");
-const get = require("lodash/get");
 const clone = require("lodash/clone");
 
 function normalizeManifestKeys(pManifest) {
@@ -64,12 +64,12 @@ module.exports = function mergeManifests(pClosestManifest, pFurtherManifest) {
       key: pKey,
       value: pKey.startsWith("bundle")
         ? mergeDependencyArray(
-            get(pClosestManifest, pKey, []),
-            get(pFurtherManifest, pKey, [])
+            pClosestManifest?.[pKey] ?? [],
+            pFurtherManifest?.[pKey] ?? []
           )
         : mergeDependencyKey(
-            get(pClosestManifest, pKey, {}),
-            get(pFurtherManifest, pKey, {})
+            pClosestManifest?.[pKey] ?? {},
+            pFurtherManifest?.[pKey] ?? {}
           ),
     }))
     .reduce((pJoinedObject, pJoinedKey) => {

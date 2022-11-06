@@ -1,6 +1,6 @@
-import { readFileSync } from "node:fs";
-import { join } from "node:path";
-import { fileURLToPath } from "node:url";
+import { readFileSync } from "fs";
+import { join } from "path";
+import { fileURLToPath } from "url";
 import { expect } from "chai";
 import transpile from "../../../src/extract/transpile/index.js";
 import normalizeSource from "../normalize-source.utl.mjs";

@@ -1,7 +1,6 @@
 const fs = require("fs");
 const path = require("path");
 const monkeyPatchedModule = require("module");
-const get = require("lodash/get");
 const pathToPosix = require("../utl/path-to-posix");
 const { isRelativeModuleName } = require("./module-classifiers");
 const resolveAMD = require("./resolve-amd");
@@ -55,14 +54,14 @@ function isTypeScriptIshExtension(pModuleName) {
   return [".ts", ".tsx", ".cts", ".mts"].includes(path.extname(pModuleName));
 }
 function resolveYarnVirtual(pPath) {
-  const pnpAPI = get(monkeyPatchedModule, "findPnpApi", () => false)(pPath);
+  const pnpAPI = (monkeyPatchedModule?.findPnpApi ?? (() => false))(pPath);
 
   // the pnp api only works in plug'n play environments, and resolveVirtual
   // only under yarn(berry). As we can't run a 'regular' nodejs environment
   // and a yarn(berry) one at the same time, ignore in the test coverage and
   // cover it in a separate integration test.
   /* c8 ignore start */
-  if (pnpAPI && get(pnpAPI, "VERSIONS.resolveVirtual", 0) === 1) {
+  if (pnpAPI && (pnpAPI?.VERSIONS?.resolveVirtual ?? 0) === 1) {
     return pnpAPI.resolveVirtual(path.resolve(pPath)) || pPath;
   }
   /* c8 ignore stop */

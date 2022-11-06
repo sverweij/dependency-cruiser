@@ -1,5 +1,3 @@
-const get = require("lodash/get");
-
 function isStringLiteral(pArgument) {
   return pArgument.type === "Literal" && typeof pArgument.value === "string";
 }
@@ -40,10 +38,7 @@ function isMemberCallExpression(pNode, pObjectName, pPropertyName) {
 }
 
 function isCalleeIdentifier(pNode, pName) {
-  return (
-    "Identifier" === get(pNode, "callee.type") &&
-    pName === get(pNode, "callee.name")
-  );
+  return "Identifier" === pNode?.callee?.type && pName === pNode?.callee?.name;
 }
 
 function isRequireOfSomeSort(pNode, pName) {

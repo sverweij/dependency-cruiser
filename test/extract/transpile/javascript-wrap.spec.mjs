@@ -1,4 +1,4 @@
-import { readFileSync } from "node:fs";
+import { readFileSync } from "fs";
 import { expect } from "chai";
 import wrap from "../../../src/extract/transpile/javascript-wrap.js";
 

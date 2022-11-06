@@ -1,5 +1,4 @@
 const tryRequire = require("semver-try-require");
-const get = require("lodash/get");
 const { supportedTranspilers } = require("../../../src/meta.js");
 
 const typescript = tryRequire("typescript", supportedTranspilers.typescript);
@@ -26,7 +25,7 @@ function getCompilerOptions(pFlavor, pTSConfig) {
     // compatibility.
     target: "es2015",
     ...lCompilerOptions,
-    ...get(pTSConfig, "options", {}),
+    ...(pTSConfig?.options ?? {}),
   };
 }
 

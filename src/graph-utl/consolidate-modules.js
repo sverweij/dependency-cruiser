@@ -1,5 +1,4 @@
 const clone = require("lodash/clone");
-const get = require("lodash/get");
 const _reject = require("lodash/reject");
 const uniqBy = require("lodash/uniqBy");
 const compare = require("./compare");
@@ -13,7 +12,7 @@ function mergeModule(pLeftModule, pRightModule) {
       (pDependency) => pDependency.resolved
     ),
     rules: pLeftModule.rules
-      .concat(get(pRightModule, "rules", []))
+      .concat(pRightModule?.rules ?? [])
       .sort(compare.rules),
     valid: pLeftModule.valid && pRightModule.valid,
     consolidated:

@@ -1,5 +1,5 @@
-import { win32, posix } from "node:path";
-import { fileURLToPath } from "node:url";
+import { win32, posix } from "path";
+import { fileURLToPath } from "url";
 import { expect } from "chai";
 import normalizeFilesAndDirectories from "../../../src/main/files-and-dirs/normalize.js";
 

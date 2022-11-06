@@ -1,6 +1,6 @@
-import { join } from "node:path";
-import { unlinkSync } from "node:fs";
-import { fileURLToPath } from "node:url";
+import { join } from "path";
+import { unlinkSync } from "fs";
+import { fileURLToPath } from "url";
 import symlinkDir from "symlink-dir";
 import { expect } from "chai";
 import normalizeResolveOptions from "../../src/main/resolve-options/normalize.js";
