@@ -14,6 +14,10 @@ describe("[U] extract/utl/getExtension", () => {
     expect(getExtension("./types/types.d.ts")).to.equal(".d.ts");
   });
 
+  it("types.d.mts classifies as .d.mts", () => {
+    expect(getExtension("./types/types.d.mts")).to.equal(".d.mts");
+  });
+
   it("any extension (e.g. .ts) classifies as that", () => {
     expect(getExtension("./types/typed.ts")).to.equal(".ts");
   });
