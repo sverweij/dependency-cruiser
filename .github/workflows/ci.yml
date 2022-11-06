@@ -8,7 +8,7 @@ on:
   workflow_dispatch:
 
 env:
-  NODE_LATEST: 18.x
+  NODE_LATEST: 19.x
   PLATFORM: ubuntu-latest
   CI: true
 
@@ -21,7 +21,7 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        node-version: [14.x, 16.x, 18.x]
+        node-version: [14.x, 16.x, 19.x]
         platform: [ubuntu-latest]
     runs-on: ${{matrix.platform}}
     steps:
@@ -80,9 +80,7 @@ jobs:
       - run: npm test
 
   check-berry-integration:
-
     runs-on: ubuntu-latest
-
     steps:
       - uses: actions/checkout@v3
       - uses: actions/cache@v3
