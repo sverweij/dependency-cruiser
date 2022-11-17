@@ -83,7 +83,7 @@ describe("[I] report/error", () => {
     const lResult = render(sdperrors);
 
     expect(lResult.output).to.contain(
-      "warn sdp: src/more-stable.js → src/less-stable.js\n      instability: 42 → 100\n"
+      "warn sdp: src/more-stable.js → src/less-stable.js\n      instability: 42% → 100%\n"
     );
   });
   it("renders a violation as a dependency-violation when the violation.type ain't there", () => {

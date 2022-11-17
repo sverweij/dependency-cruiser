@@ -214,7 +214,7 @@ describe("[U] report/error-html/utl", () => {
       metrics: { from: { instability: 0.1 }, to: { instability: 1 } },
     };
 
-    const lExpectation = 'b&nbsp;<span class="extra">(I: 100)</span>';
+    const lExpectation = 'b&nbsp;<span class="extra">(I: 100%)</span>';
 
     expect(utl.determineTo(lInputViolation)).to.deep.equal(lExpectation);
   });
@@ -227,7 +227,7 @@ describe("[U] report/error-html/utl", () => {
       metrics: { from: { instability: 0.1 }, to: { instability: 1 } },
     };
 
-    const lExpectation = '&nbsp;<span class="extra">(I: 10)</span>';
+    const lExpectation = '&nbsp;<span class="extra">(I: 10%)</span>';
 
     expect(utl.determineFromExtras(lInputViolation)).to.deep.equal(
       lExpectation
