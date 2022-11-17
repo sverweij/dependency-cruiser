@@ -49,9 +49,9 @@ function formatInstabilityViolation(pViolation) {
     chalk.dim(
       `instability: ${utl.formatInstability(
         pViolation.metrics.from.instability
-      )} ${figures.arrowRight} ${utl.formatInstability(
+      )}% ${figures.arrowRight} ${utl.formatInstability(
         pViolation.metrics.to.instability
-      )}`
+      )}%`
     ),
     EXTRA_PATH_INFORMATION_INDENT
   )}`;

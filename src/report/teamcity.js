@@ -91,7 +91,7 @@ function formatInstabilityViolation(pViolation) {
     pViolation
   )} (instability: ${utl.formatInstability(
     pViolation.metrics.from.instability
-  )} -> ${utl.formatInstability(pViolation.metrics.to.instability)})`;
+  )}% -> ${utl.formatInstability(pViolation.metrics.to.instability)}%)`;
 }
 
 function bakeViolationMessage(pViolation) {

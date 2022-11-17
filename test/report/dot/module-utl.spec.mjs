@@ -72,7 +72,7 @@ describe("[U] report/dot/module-utl", () => {
       })
     ).to.deep.equal({
       source: "aap/noot/mies/wim/zus.jet",
-      label: `<aap/noot/mies/wim/<BR/><B>zus.jet</B> <FONT color="#808080" point-size="8">48</FONT>>`,
+      label: `<aap/noot/mies/wim/<BR/><B>zus.jet</B> <FONT color="#808080" point-size="8">48%</FONT>>`,
       tooltip: "zus.jet",
       instability: "0.481",
     });

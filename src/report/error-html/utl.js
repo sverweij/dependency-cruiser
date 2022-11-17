@@ -48,7 +48,7 @@ function formatModuleTo() {
 function formatInstabilityTo(pViolation) {
   return `${pViolation.to}&nbsp;<span class="extra">(I: ${formatInstability(
     pViolation.metrics.to.instability
-  )})</span>`;
+  )}%)</span>`;
 }
 
 function determineTo(pViolation) {
@@ -69,7 +69,7 @@ function determineTo(pViolation) {
 function formatInstabilityFromExtras(pViolation) {
   return `&nbsp;<span class="extra">(I: ${formatInstability(
     pViolation.metrics.from.instability
-  )})</span>`;
+  )}%)</span>`;
 }
 
 function determineFromExtras(pViolation) {

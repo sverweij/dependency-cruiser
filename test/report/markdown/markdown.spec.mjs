@@ -137,7 +137,7 @@ describe("[I] report/markdown", () => {
     );
     // metrics violations with the 'instability' for the involved modules in:
     expect(lResult.output).to.contain(
-      '|:grey_exclamation:&nbsp;_SDP_|src/extract/gather-initial-sources.js&nbsp;<span class="extra">(I: 75)</span>|src/extract/transpile/meta.js&nbsp;<span class="extra">(I: 80)</span>|'
+      '|:grey_exclamation:&nbsp;_SDP_|src/extract/gather-initial-sources.js&nbsp;<span class="extra">(I: 75%)</span>|src/extract/transpile/meta.js&nbsp;<span class="extra">(I: 80%)</span>|'
     );
   });
 });
