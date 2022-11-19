@@ -1,10 +1,9 @@
 const { EOL } = require("os");
 const chalk = require("chalk");
+const utl = require("./utl");
 
 const DECIMAL_BASE = 10;
 const METRIC_WIDTH = 4;
-const INSTABILITY_DECIMALS = 2;
-const YADDUM = DECIMAL_BASE ** INSTABILITY_DECIMALS;
 const COMPONENT_HEADER = "name";
 
 function getHeader(pMaxNameWidth) {
@@ -12,7 +11,7 @@ function getHeader(pMaxNameWidth) {
     METRIC_WIDTH + 1
   )} ${"Ca".padStart(METRIC_WIDTH + 1)} ${"Ce".padStart(
     METRIC_WIDTH + 1
-  )}  ${"I".padEnd(METRIC_WIDTH + 1)}`;
+  )}  ${"I (%)".padEnd(METRIC_WIDTH + 1)}`;
 }
 
 function getDemarcationLine(pMaxNameWidth) {
@@ -38,9 +37,10 @@ function getMetricsTable(pMetrics, pMaxNameWidth) {
         .toString(DECIMAL_BASE)
         .padStart(METRIC_WIDTH)}  ${efferentCouplings
         .toString(DECIMAL_BASE)
-        .padStart(METRIC_WIDTH)}  ${(Math.round(YADDUM * instability) / YADDUM)
+        .padStart(METRIC_WIDTH)}  ${utl
+        .formatInstability(instability)
         .toString(DECIMAL_BASE)
-        .padEnd(METRIC_WIDTH)}`
+        .padStart(METRIC_WIDTH)}`
   );
 }
 

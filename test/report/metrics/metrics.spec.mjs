@@ -26,7 +26,7 @@ describe("[I] report/metrics", () => {
     });
 
     expect(lResult.exitCode).to.equal(0);
-    expect(lResult.output).to.contain("src      1     1     1  0.5");
+    expect(lResult.output).to.contain("src      1     1     1    50");
   });
 
   it("does not emit folder metrics when asked to hide them", () => {
@@ -47,7 +47,7 @@ describe("[I] report/metrics", () => {
     );
 
     expect(lResult.exitCode).to.equal(0);
-    expect(lResult.output).to.not.contain("src      1     1     1  0.5");
+    expect(lResult.output).to.not.contain("src      1     1     1    50");
   });
 
   it("emits module metrics (sorted by instability by default)", () => {
@@ -77,7 +77,7 @@ describe("[I] report/metrics", () => {
 
     expect(lResult.exitCode).to.equal(0);
     expect(lResult.output).to.contain(
-      `src/mies.js     1     1     1  0.5 ${EOL}src/aap.js      1     1     3  0.25${EOL}src/noot`
+      `src/mies.js     1     1     1    50${EOL}src/aap.js      1     1     3    25${EOL}src/noot.js`
     );
   });
 
@@ -111,7 +111,7 @@ describe("[I] report/metrics", () => {
 
     expect(lResult.exitCode).to.equal(0);
     expect(lResult.output).to.contain(
-      `src/aap.js      1     1     3  0.25${EOL}src/mies.js     1     1     1  0.5 ${EOL}src/noot.js`
+      `src/aap.js      1     1     3    25${EOL}src/mies.js     1     1     1    50${EOL}src/noot.js`
     );
   });
 
@@ -145,7 +145,7 @@ describe("[I] report/metrics", () => {
 
     expect(lResult.exitCode).to.equal(0);
     expect(lResult.output).to.not.contain(
-      `src/mies.js     1     1     1  0.5 ${EOL}src/aap.js      1     1     3  0.25${EOL}src/noot`
+      `src/mies.js     1     1     1    50${EOL}src/aap.js      1     1     3    25${EOL}src/noot.js`
     );
   });
 
