@@ -12,7 +12,7 @@ import deleteDammit from "./delete-dammit.utl.cjs";
 const OUT_DIR = "./test/cli/__output__";
 const FIX_DIR = "./test/cli/__fixtures__";
 
-/* eslint max-len:0*/
+/* eslint max-len:0 */
 const TEST_PAIRS = [
   {
     description:
@@ -91,7 +91,7 @@ const TEST_PAIRS = [
       outputType: "dot",
       exclude: "node_modules",
     },
-    expect: "duplicate-subs.dot",
+    expect: "duplicate-subs/expected.dot",
     cleanup: true,
   },
   {
@@ -104,6 +104,22 @@ const TEST_PAIRS = [
       exclude: "node_modules",
     },
     expect: "{{moduleType}}.dir.filtered.csv",
+    cleanup: true,
+  },
+  {
+    description: "alternate basedir",
+    dirOrFile: "src",
+    options: {
+      outputTo: path.join(OUT_DIR, "alternate-basedir.json"),
+      outputType: "json",
+      doNotFollow: "node_modules",
+      ruleSet: {
+        options: {
+          baseDir: "test/cli/__fixtures__/alternate-basedir",
+        },
+      },
+    },
+    expect: "alternate-basedir/expected.json",
     cleanup: true,
   },
 ];

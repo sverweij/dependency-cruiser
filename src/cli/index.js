@@ -1,3 +1,4 @@
+const path = require("path");
 const glob = require("glob");
 const clone = require("lodash/clone");
 const set = require("lodash/set");
@@ -89,13 +90,18 @@ function setUpListener(pCruiseOptions) {
 }
 
 function runCruise(pFileDirectoryArray, pCruiseOptions) {
-  pFileDirectoryArray
-    .filter((pFileOrDirectory) => !glob.hasMagic(pFileOrDirectory))
-    .forEach(validateFileExistence);
-
   const lCruiseOptions = addKnownViolations(
     normalizeCliOptions(pCruiseOptions)
   );
+
+  pFileDirectoryArray
+    .filter((pFileOrDirectory) => !glob.hasMagic(pFileOrDirectory))
+    .map((pFileOrDirectory) =>
+      lCruiseOptions?.ruleSet?.options?.baseDir
+        ? path.join(lCruiseOptions.ruleSet.options.baseDir, pFileOrDirectory)
+        : pFileOrDirectory
+    )
+    .forEach(validateFileExistence);
 
   setUpListener(lCruiseOptions);
 
