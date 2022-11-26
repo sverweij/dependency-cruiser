@@ -615,7 +615,18 @@ be in json format or a valid node module returning a rules object literal.
 dependency-cruise -x node_modules --config my.rules.json src spec
 ```
 
-> _Tip_: usually you don't need to specify the rules file. However if run
+> _Caveat_: currently, you need to specify the `--config` command line
+> option in order for a config file to be used at all. When that config file
+> is one of the default file names you don't need to specify that file
+> behind it, but the command line option _does_ need to be specified in order
+> for the configuration file to be used. We understand that this behaviour is
+> not like a lot of other tools do this, and with that, not very un-intuitive.
+> For this reason we want to change this so you don't need to pass the
+> `--config` option in order for the default config file to be found. This
+> _will_ be a breaking change though - so watch a next major release for
+> this to happen.
+
+> _Tip_: usually you don't need to specify the rules file when. However if run
 > `depcruise --config src`, _src_ will be interpreted as the rules file.
 > Which is probably is not what you want. To prevent this, place `--`
 > after the last option, like so:
