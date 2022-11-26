@@ -3,14 +3,15 @@ import chaiJSONSchema from "chai-json-schema";
 import { cruise } from "../../src/main/index.js";
 import cruiseResultSchema from "../../src/schema/cruise-result.schema.js";
 import { createRequireJSON } from "../backwards.utl.mjs";
+import normBaseDirectory from "./norm-base-directory.utl.mjs";
 
 const requireJSON = createRequireJSON(import.meta.url);
 
-const output = requireJSON(
-  "./__mocks__/type-only-module-references/output.json"
+const output = normBaseDirectory(
+  requireJSON("./__mocks__/type-only-module-references/output.json")
 );
-const outputNoTS = requireJSON(
-  "./__mocks__/type-only-module-references/output-no-ts.json"
+const outputNoTS = normBaseDirectory(
+  requireJSON("./__mocks__/type-only-module-references/output-no-ts.json")
 );
 
 use(chaiJSONSchema);

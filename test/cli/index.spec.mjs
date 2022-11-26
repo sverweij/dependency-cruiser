@@ -1,7 +1,7 @@
 import { unlinkSync, readFileSync } from "fs";
 // path.posix instead of path because otherwise on win32 the resulting
 // outputTo would contain \\ instead of / which for this unit test doesn't matter
-import { posix as path } from "path";
+import { join, posix as path } from "path";
 import { expect } from "chai";
 import intercept from "intercept-stdout";
 import chalk from "chalk";
@@ -115,7 +115,10 @@ const TEST_PAIRS = [
       doNotFollow: "node_modules",
       ruleSet: {
         options: {
-          baseDir: "test/cli/__fixtures__/alternate-basedir",
+          baseDir: join(
+            process.cwd(),
+            "test/cli/__fixtures__/alternate-basedir"
+          ),
         },
       },
     },

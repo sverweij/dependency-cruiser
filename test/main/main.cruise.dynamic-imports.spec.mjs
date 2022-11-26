@@ -3,13 +3,20 @@ import chaiJSONSchema from "chai-json-schema";
 import cruiseResultSchema from "../../src/schema/cruise-result.schema.js";
 import main from "../../src/main/index.js";
 import { createRequireJSON } from "../backwards.utl.mjs";
+import normBaseDirectory from "./norm-base-directory.utl.mjs";
 
 const requireJSON = createRequireJSON(import.meta.url);
 
-const esOut = requireJSON("./__mocks__/dynamic-imports/es/output.json");
-const tsOut = requireJSON("./__mocks__/dynamic-imports/typescript/output.json");
-const tsOutpre = requireJSON(
-  "./__mocks__/dynamic-imports/typescript/output-pre-compilation-deps.json"
+const esOut = normBaseDirectory(
+  requireJSON("./__mocks__/dynamic-imports/es/output.json")
+);
+const tsOut = normBaseDirectory(
+  requireJSON("./__mocks__/dynamic-imports/typescript/output.json")
+);
+const tsOutpre = normBaseDirectory(
+  requireJSON(
+    "./__mocks__/dynamic-imports/typescript/output-pre-compilation-deps.json"
+  )
 );
 
 use(chaiJSONSchema);

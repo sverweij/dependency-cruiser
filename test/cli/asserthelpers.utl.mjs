@@ -1,5 +1,6 @@
 import { readFileSync } from "fs";
 import { expect } from "chai";
+import normBaseDirectory from "../main/norm-base-directory.utl.mjs";
 
 export function assertFileEqual(pActualFileName, pExpectedFileName) {
   expect(readFileSync(pActualFileName, { encoding: "utf8" })).to.equal(
@@ -10,6 +11,8 @@ export function assertJSONFileEqual(pActualFileName, pExpectedFileName) {
   expect(
     JSON.parse(readFileSync(pActualFileName, { encoding: "utf8" }))
   ).to.deep.equal(
-    JSON.parse(readFileSync(pExpectedFileName, { encoding: "utf8" }))
+    normBaseDirectory(
+      JSON.parse(readFileSync(pExpectedFileName, { encoding: "utf8" }))
+    )
   );
 }

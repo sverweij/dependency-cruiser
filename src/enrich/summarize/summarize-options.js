@@ -2,6 +2,7 @@ const has = require("lodash/has");
 
 const SHAREABLE_OPTIONS = [
   "babelConfig",
+  "baseDir",
   "cache",
   "collapse",
   "combinedDependencies",
