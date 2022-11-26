@@ -491,66 +491,6 @@ so it's easier to compare than the two json's):
 Generates a list of all current violations you can use as input for the
 [`--ignore-known`](#--ignore-known-ignore-known-violations) option.
 
-### `--config`/ `--validate`
-
-Validates against a list of rules in a configuration file. This defaults to a file
-called `.dependency-cruiser.js` (/ `.dependency-cruiser.cjs`/
-`.dependency-cruiser.json`), but you can specify your own rules file, which can
-be in json format or a valid node module returning a rules object literal.
-
-```shell
-dependency-cruise -x node_modules --config my.rules.json src spec
-```
-
-> _Tip_: usually you don't need to specify the rules file. However if run
-> `depcruise --config src`, _src_ will be interpreted as the rules file.
-> Which is probably is not what you want. To prevent this, place `--`
-> after the last option, like so:
->
-> ```
-> dependency-cruise --config -- src
-> ```
-
-The configuration specifies a bunch of regular expressions pairs your dependencies
-should adhere tom as well as configuration options that tweak what is cruised and
-how.
-
-A simple validation configuration that forbids modules in `src` to use stuff
-in the `test` folder and allows everything else:
-
-```json
-{
-  "forbidden": [
-    {
-      "from": { "path": "^src" },
-      "to": { "path": "^test" }
-    }
-  ]
-}
-```
-
-You can optionally specify a name and an error severity ('error', 'warn' (the
-default) and 'info') with them that will appear in some reporters:
-
-```json
-{
-  "forbidden": [
-    {
-      "name": "no-src-to-test",
-      "severity": "error",
-      "from": { "path": "^src" },
-      "to": { "path": "^test" }
-    }
-  ]
-}
-```
-
-For more information about writing rules see the [tutorial](rules-tutorial.md) and the
-[rules-reference](rules-reference.md). For options check out the
-[options reference](options-reference.md).
-
-For an easy set up of both use [--init](#--init)
-
 #### metrics - generate a report with stability metrics for each folder
 
 Shows for each module and each folder:
@@ -663,6 +603,66 @@ src/validate/utl.js                                       1     3     0  0
 ```
 
 </details>
+
+### `--config`/ `--validate`
+
+Validates against a list of rules in a configuration file. This defaults to a file
+called `.dependency-cruiser.js` (/ `.dependency-cruiser.cjs`/
+`.dependency-cruiser.json`), but you can specify your own rules file, which can
+be in json format or a valid node module returning a rules object literal.
+
+```shell
+dependency-cruise -x node_modules --config my.rules.json src spec
+```
+
+> _Tip_: usually you don't need to specify the rules file. However if run
+> `depcruise --config src`, _src_ will be interpreted as the rules file.
+> Which is probably is not what you want. To prevent this, place `--`
+> after the last option, like so:
+>
+> ```
+> dependency-cruise --config -- src
+> ```
+
+The configuration specifies a bunch of regular expressions pairs your dependencies
+should adhere tom as well as configuration options that tweak what is cruised and
+how.
+
+A simple validation configuration that forbids modules in `src` to use stuff
+in the `test` folder and allows everything else:
+
+```json
+{
+  "forbidden": [
+    {
+      "from": { "path": "^src" },
+      "to": { "path": "^test" }
+    }
+  ]
+}
+```
+
+You can optionally specify a name and an error severity ('error', 'warn' (the
+default) and 'info') with them that will appear in some reporters:
+
+```json
+{
+  "forbidden": [
+    {
+      "name": "no-src-to-test",
+      "severity": "error",
+      "from": { "path": "^src" },
+      "to": { "path": "^test" }
+    }
+  ]
+}
+```
+
+For more information about writing rules see the [tutorial](rules-tutorial.md) and the
+[rules-reference](rules-reference.md). For options check out the
+[options reference](options-reference.md).
+
+For an easy set up of both use [--init](#--init)
 
 ### `--init`
 
