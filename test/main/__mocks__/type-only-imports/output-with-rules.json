@@ -54,7 +54,8 @@
       "moduleSystems": ["es6", "cjs", "tsd", "amd"],
       "preserveSymlinks": false,
       "tsPreCompilationDeps": true,
-      "args": "src"
+      "args": "src",
+      "baseDir": "test/main/__mocks__/type-only-imports"
     },
     "ruleSetUsed": {
       "forbidden": [

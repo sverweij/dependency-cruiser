@@ -3,16 +3,21 @@ import chaiJSONSchema from "chai-json-schema";
 import cruiseResultSchema from "../../src/schema/cruise-result.schema.js";
 import { cruise } from "../../src/main/index.js";
 import { createRequireJSON } from "../backwards.utl.mjs";
+import normBaseDirectory from "./norm-base-directory.utl.mjs";
 
 const requireJSON = createRequireJSON(import.meta.url);
 
-const tsPreCompFixtureCJS = requireJSON("./__fixtures__/ts-precomp-cjs.json");
-const tsPreCompFixtureES = requireJSON("./__fixtures__/ts-precomp-es.json");
-const tsNoPrecompFixtureCJS = requireJSON(
-  "./__fixtures__/ts-no-precomp-cjs.json"
+const tsPreCompFixtureCJS = normBaseDirectory(
+  requireJSON("./__fixtures__/ts-precomp-cjs.json")
 );
-const tsNoPrecompFixtureES = requireJSON(
-  "./__fixtures__/ts-no-precomp-es.json"
+const tsPreCompFixtureES = normBaseDirectory(
+  requireJSON("./__fixtures__/ts-precomp-es.json")
+);
+const tsNoPrecompFixtureCJS = normBaseDirectory(
+  requireJSON("./__fixtures__/ts-no-precomp-cjs.json")
+);
+const tsNoPrecompFixtureES = normBaseDirectory(
+  requireJSON("./__fixtures__/ts-no-precomp-es.json")
 );
 
 use(chaiJSONSchema);

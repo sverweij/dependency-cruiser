@@ -78,7 +78,8 @@
       "moduleSystems": ["es6", "cjs", "tsd", "amd"],
       "preserveSymlinks": false,
       "tsPreCompilationDeps": false,
-      "args": "test/main/__mocks__/ts-precompilation-deps-off-es"
+      "args": "test/main/__mocks__/ts-precompilation-deps-off-es",
+      "baseDir": ""
     }
   }
 }

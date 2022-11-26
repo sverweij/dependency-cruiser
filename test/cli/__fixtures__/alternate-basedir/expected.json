@@ -24,17 +24,13 @@
       "exoticRequireStrings": [],
       "externalModuleResolutionStrategy": "node_modules",
       "metrics": false,
-      "moduleSystems": [
-        "es6",
-        "cjs",
-        "tsd",
-        "amd"
-      ],
+      "moduleSystems": ["es6", "cjs", "tsd", "amd"],
       "outputTo": "test/cli/__output__/alternate-basedir.json",
       "outputType": "json",
       "preserveSymlinks": false,
       "tsPreCompilationDeps": false,
-      "args": "src"
+      "args": "src",
+      "baseDir": "test/cli/__fixtures__/alternate-basedir"
     },
     "ruleSetUsed": {}
   }

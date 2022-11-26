@@ -24,7 +24,8 @@
       "moduleSystems": ["es6", "cjs", "tsd", "amd"],
       "preserveSymlinks": false,
       "tsPreCompilationDeps": false,
-      "args": "src"
+      "args": "src",
+      "baseDir": "test/main/__mocks__/type-only-module-references"
     }
   }
 }

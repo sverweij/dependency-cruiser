@@ -7,14 +7,17 @@ import pathToPosix from "../../src/extract/utl/path-to-posix.js";
 import cruiseResultSchema from "../../src/schema/cruise-result.schema.js";
 import main from "../../src/main/index.js";
 import { createRequireJSON } from "../backwards.utl.mjs";
+import normBaseDirectory from "./norm-base-directory.utl.mjs";
 
 const __dirname = fileURLToPath(new URL(".", import.meta.url));
 const requireJSON = createRequireJSON(import.meta.url);
 
-const tsFixture = requireJSON("./__fixtures__/ts.json");
-const tsxFixture = requireJSON("./__fixtures__/tsx.json");
-const jsxFixture = requireJSON("./__fixtures__/jsx.json");
-const jsxAsObjectFixture = requireJSON("./__fixtures__/jsx-as-object.json");
+const tsFixture = normBaseDirectory(requireJSON("./__fixtures__/ts.json"));
+const tsxFixture = normBaseDirectory(requireJSON("./__fixtures__/tsx.json"));
+const jsxFixture = normBaseDirectory(requireJSON("./__fixtures__/jsx.json"));
+const jsxAsObjectFixture = normBaseDirectory(
+  requireJSON("./__fixtures__/jsx-as-object.json")
+);
 
 use(chaiJSONSchema);
 
@@ -89,10 +92,12 @@ describe("[E] main.cruise - main", () => {
     );
 
     expect(pathPosixify(lResult.output)).to.deep.equal(
-      JSON.parse(
-        readFileSync(
-          "test/main/__mocks__/collapse-after-cruise/expected-result.json",
-          "utf8"
+      normBaseDirectory(
+        JSON.parse(
+          readFileSync(
+            "test/main/__mocks__/collapse-after-cruise/expected-result.json",
+            "utf8"
+          )
         )
       )
     );
