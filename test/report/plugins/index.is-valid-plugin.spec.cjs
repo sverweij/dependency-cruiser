@@ -1,6 +1,6 @@
 /* eslint-disable node/global-require */
 const { expect } = require("chai");
-const { isValidPlugin } = require("../../../src/report/plugins/index.js");
+const { isValidPlugin } = require("../../../src/report/plugins.js");
 
 describe("[U] report/plugins - isValidPlugin", () => {
   it("returns false when the plugin's function doesn't return an exit code attribute", () => {
@@ -29,7 +29,7 @@ describe("[U] report/plugins - isValidPlugin", () => {
     ).to.equal(false);
   });
 
-  it("returns true when the plugin doesn't returns a function that takes a minimal cruise result and returns an output attribute + an numberical exitCode attribute", () => {
+  it("returns true when the plugin doesn't returns a function that takes a minimal cruise result and returns an output attribute + an numerical exitCode attribute", () => {
     expect(isValidPlugin(require("./__fixtures__/valid-plugin.cjs"))).to.equal(
       true
     );

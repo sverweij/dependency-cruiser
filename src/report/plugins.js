@@ -2,13 +2,14 @@ const has = require("lodash/has");
 
 function isValidPlugin(pPluginFunction) {
   let lReturnValue = false;
-  /** @type {import('../../../types/dependency-cruiser').ICruiseResult} */
+  /** @type {import('../../types/dependency-cruiser').ICruiseResult} */
   const lMinimalCruiseResult = {
     modules: [],
     summary: {
       error: 0,
       info: 0,
       warn: 0,
+      ignore: 0,
       totalCruised: 0,
       violations: [],
       optionsUsed: {},
@@ -32,7 +33,9 @@ function getPluginReporter(pOutputType) {
     // eslint-disable-next-line import/no-dynamic-require, node/global-require, security/detect-non-literal-require
     lReturnValue = require(pOutputType);
   } catch (pError) {
-    throw new Error(`Could not find reporter plugin '${pOutputType}'`);
+    throw new Error(
+      `Could not find reporter plugin '${pOutputType}' (or it isn't valid)`
+    );
   }
   if (!isValidPlugin(lReturnValue)) {
     throw new Error(`${pOutputType} is not a valid plugin`);
