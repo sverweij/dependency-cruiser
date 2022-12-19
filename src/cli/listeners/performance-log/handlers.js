@@ -3,7 +3,9 @@ const { formatTime, formatPerfLine } = require("./format-helpers");
 
 function getHeader(pLevel, pMaxLevel) {
   if (pLevel <= pMaxLevel) {
-    return chalk.bold("  elapsed heapTotal  heapUsed after step...\n");
+    return chalk.bold(
+      "  elapsed       rss heapTotal  heapUsed  external after step...\n"
+    );
   }
   return "";
 }
