@@ -19,8 +19,10 @@ function formatMemory(pBytes) {
 
 function formatPerfLine(pTime, pPreviousTime, pMessage) {
   return `${formatTime(pTime - pPreviousTime)} ${formatMemory(
-    process.memoryUsage().heapTotal
-  )} ${formatMemory(process.memoryUsage().heapUsed)} ${pMessage}\n`;
+    process.memoryUsage().rss
+  )} ${formatMemory(process.memoryUsage().heapTotal)} ${formatMemory(
+    process.memoryUsage().heapUsed
+  )} ${formatMemory(process.memoryUsage().external)} ${pMessage}\n`;
 }
 
 module.exports = {

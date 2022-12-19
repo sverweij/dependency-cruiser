@@ -58,6 +58,8 @@ describe("[U] cli/ears/performance-log-listener/format-helpers - formatPerfLine"
   it("produces neat columns with time, memmory and a message", () => {
     expect(
       formatHelpers.formatPerfLine(14.88041018, 7.245436738, "sim sala bim")
-    ).to.match(/ {3}7635ms {0,}\d+Mb {0,}\d+Mb sim sala bim\n/);
+    ).to.match(
+      / {3}7635ms {0,}\d+Mb {0,}\d+Mb {0,}\d+Mb {0,}\d+Mb sim sala bim\n/
+    );
   });
 });

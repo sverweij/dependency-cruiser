@@ -1078,21 +1078,26 @@ stay in view when dependency-cruiser is done.
 <summary>Typical output</summary>
 
 ```
-  elapsed heapTotal  heapUsed after step...
-    712ms      72Mb      46Mb start of node process
-      2ms      72Mb      46Mb parsing options
-    100ms      73Mb      56Mb parsing rule set
-      0ms      73Mb      56Mb making sense of files and directories
-      0ms      73Mb      56Mb determining how to resolve
-   1874ms     158Mb     138Mb reading files
-      0ms     158Mb     138Mb analyzing
-     17ms     161Mb     131Mb analyzing: cycles
-      3ms     161Mb     132Mb analyzing: orphans
-    161ms     163Mb     140Mb analyzing: reachables
-      0ms     163Mb     140Mb analyzing: add focus (if any)
-     51ms     163Mb     135Mb analyzing: validations
-      2ms     163Mb     135Mb reporting
-      0ms     163Mb     135Mb really done (2924ms)
+  elapsed       rss heapTotal  heapUsed  external after step...
+    735ms     125Mb      84Mb      61Mb       2Mb start of node process
+     10ms     125Mb      84Mb      62Mb       2Mb parsing options
+     90ms     128Mb      85Mb      64Mb       2Mb cache: checking freshness
+    202ms     145Mb      91Mb      70Mb       1Mb parsing rule set
+      0ms     145Mb      91Mb      70Mb       1Mb determining how to resolve
+      0ms     145Mb      91Mb      70Mb       1Mb reading files
+     25ms     145Mb      91Mb      73Mb       1Mb reading files: gathering initial sources
+   1190ms     194Mb     137Mb     110Mb       1Mb reading files: visiting dependencies
+      0ms     194Mb     137Mb     110Mb       1Mb analyzing
+     18ms     194Mb     137Mb     116Mb       1Mb analyzing: cycles
+     37ms     197Mb     139Mb     119Mb       1Mb analyzing: dependents
+      1ms     197Mb     139Mb     119Mb       1Mb analyzing: orphans
+    257ms     198Mb     141Mb     122Mb       1Mb analyzing: reachables
+      0ms     198Mb     141Mb     122Mb       1Mb analyzing: module metrics
+      0ms     198Mb     141Mb     122Mb       1Mb analyzing: add focus (if any)
+     87ms     199Mb     141Mb     117Mb       1Mb analyzing: validations
+     10ms     200Mb     142Mb     121Mb       2Mb analyzing: comparing against known errors
+      5ms     200Mb     142Mb     121Mb       2Mb reporting
+      0ms     200Mb     142Mb     121Mb       2Mb really done (2670ms)
 ```
 
 </details>
