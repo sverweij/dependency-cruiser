@@ -32,6 +32,12 @@ module.exports = function setUpPerformanceLogListener(
   let lState = {
     previousMessage: "start of node process",
     previousTime: 0,
+    previousUserUsage: 0,
+    previousSystemUsage: 0,
+    previousRss: 0,
+    previousHeapTotal: 0,
+    previousHeapUsed: 0,
+    previousExternal: 0,
   };
 
   pEventEmitter.on("start", getHeaderWriter(pStream, pMaxLevel));
