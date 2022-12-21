@@ -73,9 +73,9 @@ function formatRulesSummary(pCruiseResult, pIncludeIgnoredInSummary) {
     )
     .reduce(
       (pAll, pRule) =>
-        (pAll += `|${severity2Icon(pRule.severity)}&nbsp;_${pRule.name}_|**${
+        `${pAll}|${severity2Icon(pRule.severity)}&nbsp;_${pRule.name}_|**${
           pRule.count
-        }**|**${pRule.ignoredCount}**|${pRule.comment}|\n`),
+        }**|**${pRule.ignoredCount}**|${pRule.comment}|\n`,
       lTableHead
     );
 }

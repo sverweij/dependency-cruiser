@@ -66,7 +66,7 @@ function extractExoticMemberCallExpression(pNode, pExoticRequireStrings) {
           pNode.callee.property.value === pThing.property &&
           argumentsAreUsable(pNode.arguments)
         ) {
-          pAll = pAll.concat({
+          return pAll.concat({
             module: pryStringsFromArguments(pNode.arguments),
             moduleSystem: "cjs",
             exoticallyRequired: true,

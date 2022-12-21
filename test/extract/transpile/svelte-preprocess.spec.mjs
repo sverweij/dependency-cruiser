@@ -18,9 +18,9 @@ const CORPUS = [
 
 describe("[U] sync svelte pre-processor", () => {
   CORPUS.forEach((pInput, pCorpusNumber, pCorpus) => {
-    it(`pre-processes svelte like svelte's preprocessor, but sync (${(pCorpusNumber += 1)}/${
-      pCorpus.length
-    })`, async () => {
+    it(`pre-processes svelte like svelte's preprocessor, but sync (${
+      pCorpusNumber + 1
+    }/${pCorpus.length})`, async () => {
       const lSyncResult = sveltePreProcess(pInput, typeScriptWrap, {});
       const lAsyncResult = await svelteCompiler.preprocess(pInput, {
         script: ({ content, attributes }) => {

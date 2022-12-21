@@ -1,4 +1,5 @@
 const path = require("path");
+const cloneDeep = require("lodash/cloneDeep");
 const has = require("lodash/has");
 const resolve = require("../../extract/resolve/resolve");
 const normalizeResolveOptions = require("../../main/resolve-options/normalize");
@@ -7,29 +8,31 @@ const mergeConfigs = require("./merge-configs");
 
 /* eslint no-use-before-define: 0 */
 function processExtends(pReturnValue, pAlreadyVisited, pBaseDirectory) {
-  if (typeof pReturnValue.extends === "string") {
-    pReturnValue = mergeConfigs(
-      pReturnValue,
+  let lReturnValue = cloneDeep(pReturnValue);
+
+  if (typeof lReturnValue.extends === "string") {
+    lReturnValue = mergeConfigs(
+      lReturnValue,
       extractDepcruiseConfig(
-        pReturnValue.extends,
+        lReturnValue.extends,
         pAlreadyVisited,
         pBaseDirectory
       )
     );
   }
 
-  if (Array.isArray(pReturnValue.extends)) {
-    pReturnValue = pReturnValue.extends.reduce(
+  if (Array.isArray(lReturnValue.extends)) {
+    lReturnValue = lReturnValue.extends.reduce(
       (pAll, pExtends) =>
         mergeConfigs(
           pAll,
           extractDepcruiseConfig(pExtends, pAlreadyVisited, pBaseDirectory)
         ),
-      pReturnValue
+      lReturnValue
     );
   }
-  Reflect.deleteProperty(pReturnValue, "extends");
-  return pReturnValue;
+  Reflect.deleteProperty(lReturnValue, "extends");
+  return lReturnValue;
 }
 
 /**

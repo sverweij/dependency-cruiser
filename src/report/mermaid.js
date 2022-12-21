@@ -99,7 +99,7 @@ function focusHighlights(pModules, pNamesHashMap) {
     )
     .reduce((pAll, pModule) => {
       const lSource = pNamesHashMap.get(pModule.source);
-      return (pAll += `\nstyle ${lSource} ${lHighLightStyle}`);
+      return `${pAll}\nstyle ${lSource} ${lHighLightStyle}`;
     }, "");
 }
 

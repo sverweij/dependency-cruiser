@@ -38,11 +38,10 @@ function getCycle(
   { pDependencyName, pFindNodeByName },
   pVisited
 ) {
-  pVisited = pVisited || new Set();
-
+  let lVisited = pVisited || new Set();
   const lCurrentNode = pFindNodeByName(pGraph, pCurrentSource);
   const lDependencies = lCurrentNode.dependencies.filter(
-    (pDependency) => !pVisited.has(pDependency[pDependencyName])
+    (pDependency) => !lVisited.has(pDependency[pDependencyName])
   );
   const lMatch = lDependencies.find(
     (pDependency) => pDependency[pDependencyName] === pInitialSource
@@ -57,7 +56,7 @@ function getCycle(
         pInitialSource,
         pDependency[pDependencyName],
         { pDependencyName, pFindNodeByName },
-        pVisited.add(pDependency[pDependencyName])
+        lVisited.add(pDependency[pDependencyName])
       );
 
       if (lCycle.length > 0 && !lCycle.includes(pCurrentSource)) {
