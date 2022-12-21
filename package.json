@@ -195,7 +195,7 @@
     "eslint-plugin-unicorn": "^45.0.0",
     "husky": "8.0.2",
     "intercept-stdout": "0.1.2",
-    "lint-staged": "12.3.4",
+    "lint-staged": "13.1.0",
     "mocha": "10.2.0",
     "normalize-newline": "^3.0.0",
     "npm-run-all": "4.1.5",
@@ -235,11 +235,6 @@
         "package": "interpret",
         "policy": "wanted",
         "because": "we want to keep interpret ~similar to what webpack-cli uses (which is ^2.2.0)"
-      },
-      {
-        "package": "lint-staged",
-        "policy": "pin",
-        "because": "12.3.5 fails with SyntaxError: Unexpected token o in JSON at position 1"
       },
       {
         "package": "normalize-newline",
