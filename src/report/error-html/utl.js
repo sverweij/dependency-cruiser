@@ -1,6 +1,6 @@
 const has = require("lodash/has");
 const { version } = require("../../../src/meta.js");
-const { formatViolation, formatInstability } = require("../utl/index.js");
+const { formatViolation, formatPercentage } = require("../utl/index.js");
 
 function getFormattedAllowedRule(pRuleSetUsed) {
   const lAllowed = pRuleSetUsed?.allowed ?? [];
@@ -46,9 +46,9 @@ function formatModuleTo() {
 }
 
 function formatInstabilityTo(pViolation) {
-  return `${pViolation.to}&nbsp;<span class="extra">(I: ${formatInstability(
+  return `${pViolation.to}&nbsp;<span class="extra">(I: ${formatPercentage(
     pViolation.metrics.to.instability
-  )}%)</span>`;
+  )})</span>`;
 }
 
 function determineTo(pViolation) {
@@ -67,9 +67,9 @@ function determineTo(pViolation) {
 }
 
 function formatInstabilityFromExtras(pViolation) {
-  return `&nbsp;<span class="extra">(I: ${formatInstability(
+  return `&nbsp;<span class="extra">(I: ${formatPercentage(
     pViolation.metrics.from.instability
-  )}%)</span>`;
+  )})</span>`;
 }
 
 function determineFromExtras(pViolation) {

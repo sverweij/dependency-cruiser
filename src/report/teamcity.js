@@ -89,9 +89,9 @@ function formatReachabilityViolation(pViolation) {
 function formatInstabilityViolation(pViolation) {
   return `${formatDependencyViolation(
     pViolation
-  )} (instability: ${utl.formatInstability(
+  )} (instability: ${utl.formatPercentage(
     pViolation.metrics.from.instability
-  )}% -> ${utl.formatInstability(pViolation.metrics.to.instability)}%)`;
+  )} -> ${utl.formatPercentage(pViolation.metrics.to.instability)})`;
 }
 
 function bakeViolationMessage(pViolation) {

@@ -67,9 +67,9 @@ function makeInstabilityString(pModule, pShowMetrics = false) {
   let lInstabilityString = "";
 
   if (pShowMetrics && has(pModule, "instability") && !pModule.consolidated) {
-    lInstabilityString = ` <FONT color="#808080" point-size="8">${utl.formatInstability(
+    lInstabilityString = ` <FONT color="#808080" point-size="8">${utl.formatPercentage(
       pModule.instability
-    )}%</FONT>`;
+    )}</FONT>`;
   }
   return lInstabilityString;
 }

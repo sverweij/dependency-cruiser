@@ -47,11 +47,11 @@ function formatReachabilityViolation(pViolation) {
 function formatInstabilityViolation(pViolation) {
   return `${formatDependencyViolation(pViolation)}\n${wrapAndIndent(
     chalk.dim(
-      `instability: ${utl.formatInstability(
+      `instability: ${utl.formatPercentage(
         pViolation.metrics.from.instability
-      )}% ${figures.arrowRight} ${utl.formatInstability(
+      )} ${figures.arrowRight} ${utl.formatPercentage(
         pViolation.metrics.to.instability
-      )}%`
+      )}`
     ),
     EXTRA_PATH_INFORMATION_INDENT
   )}`;

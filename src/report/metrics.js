@@ -38,7 +38,7 @@ function getMetricsTable(pMetrics, pMaxNameWidth) {
         .padStart(METRIC_WIDTH)}  ${efferentCouplings
         .toString(DECIMAL_BASE)
         .padStart(METRIC_WIDTH)}  ${utl
-        .formatInstability(instability)
+        .formatPercentage(instability)
         .toString(DECIMAL_BASE)
         .padStart(METRIC_WIDTH)}`
   );
