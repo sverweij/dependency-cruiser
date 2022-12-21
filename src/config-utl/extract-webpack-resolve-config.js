@@ -33,8 +33,7 @@ function suggestModules(pSuggestionList, pWebpackConfigFilename) {
 
   if (Array.isArray(lSuggestionList) && lSuggestionList.length > 0) {
     lReturnValue = lSuggestionList.reduce(
-      (pAll, pCurrent) =>
-        (pAll += `         - ${pCurrent.module || pCurrent}\n`),
+      (pAll, pCurrent) => `${pAll}         - ${pCurrent.module || pCurrent}\n`,
       `\n         Some npm modules that might fix that problem (one of which you'll` +
         `\n         need so '${pWebpackConfigFilename}' works with webpack anyway):\n`
     );

@@ -185,7 +185,7 @@ module.exports = function determineDependencyTypes(
 ) {
   /** @type {import("../../../types/shared-types").DependencyType[]}*/
   let lReturnValue = ["undetermined"];
-  pResolveOptions = pResolveOptions || {};
+  const lResolveOptions = pResolveOptions || {};
 
   if (pDependency.couldNotResolve) {
     lReturnValue = ["unknown"];
@@ -201,7 +201,7 @@ module.exports = function determineDependencyTypes(
   } else if (
     isExternalModule(
       pDependency.resolved,
-      pResolveOptions.modules,
+      lResolveOptions.modules,
       pBaseDirectory
     )
   ) {
@@ -210,10 +210,10 @@ module.exports = function determineDependencyTypes(
       pModuleName,
       pManifest,
       pFileDirectory,
-      pResolveOptions,
+      lResolveOptions,
       pBaseDirectory
     );
-  } else if (isAliassy(pModuleName, pDependency.resolved, pResolveOptions)) {
+  } else if (isAliassy(pModuleName, pDependency.resolved, lResolveOptions)) {
     lReturnValue = ["aliased"];
   }
 

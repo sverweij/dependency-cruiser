@@ -1,6 +1,6 @@
 const path = require("path");
 const glob = require("glob");
-const clone = require("lodash/clone");
+const cloneDeep = require("lodash/cloneDeep");
 const set = require("lodash/set");
 const isInstalledGlobally = require("is-installed-globally");
 const { red, yellow, bold } = require("chalk");
@@ -42,7 +42,7 @@ function addKnownViolations(pCruiseOptions) {
 
     // Check against json schema is already done in src/main/options/validate
     // so here we can just concentrate on the io
-    let lCruiseOptions = clone(pCruiseOptions);
+    let lCruiseOptions = cloneDeep(pCruiseOptions);
     set(lCruiseOptions, "ruleSet.options.knownViolations", lKnownViolations);
     return lCruiseOptions;
   }
@@ -127,11 +127,11 @@ function runCruise(pFileDirectoryArray, pCruiseOptions) {
 /**
  *
  * @param {string[]} pFileDirectoryArray
- * @param {import("../../types/options").ICruiseOptions} pCruiseOptions
+ * @param {import("../../types/options").ICruiseOptions} lCruiseOptions
  * @returns {number}
  */
 module.exports = function executeCli(pFileDirectoryArray, pCruiseOptions) {
-  pCruiseOptions = pCruiseOptions || {};
+  let lCruiseOptions = cloneDeep(pCruiseOptions || {});
   let lExitCode = 0;
 
   try {
@@ -150,9 +150,9 @@ module.exports = function executeCli(pFileDirectoryArray, pCruiseOptions) {
       );
     }
     /* c8 ignore stop */
-    if (pCruiseOptions.info === true) {
+    if (lCruiseOptions.info === true) {
       process.stdout.write(formatMetaInfo());
-    } else if (pCruiseOptions.init) {
+    } else if (lCruiseOptions.init) {
       // requiring init-config took ~100ms (most of it taken up by requiring
       // inquirer, measured on a 2.6GHz quad core i7 with flash storage on
       // macOS 10.15.7). Only requiring it when '--init' is necessary speeds up
@@ -161,9 +161,9 @@ module.exports = function executeCli(pFileDirectoryArray, pCruiseOptions) {
       // holds.
       // eslint-disable-next-line node/global-require
       const initConfig = require("./init-config");
-      initConfig(pCruiseOptions.init);
+      initConfig(lCruiseOptions.init);
     } else {
-      lExitCode = runCruise(pFileDirectoryArray, pCruiseOptions);
+      lExitCode = runCruise(pFileDirectoryArray, lCruiseOptions);
     }
   } catch (pError) {
     process.stderr.write(`\n  ${red("ERROR")}: ${pError.message}\n`);

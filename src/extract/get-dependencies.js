@@ -78,32 +78,26 @@ function extractFromJavaScriptAST(pOptions, pFileName, pTranspileOptions) {
   return lDependencies;
 }
 
-function extractWithSwc(pDependencies, pCruiseOptions, pFileName) {
-  pDependencies = extractFromSwcAST(pCruiseOptions, pFileName).filter((pDep) =>
+function extractWithSwc(pCruiseOptions, pFileName) {
+  return extractFromSwcAST(pCruiseOptions, pFileName).filter((pDep) =>
     pCruiseOptions.moduleSystems.includes(pDep.moduleSystem)
   );
-  return pDependencies;
 }
 
-function extractWithTsc(
-  pDependencies,
-  pCruiseOptions,
-  pFileName,
-  pTranspileOptions
-) {
-  pDependencies = extractFromTypeScriptAST(
+function extractWithTsc(pCruiseOptions, pFileName, pTranspileOptions) {
+  let lDependencies = extractFromTypeScriptAST(
     pCruiseOptions,
     pFileName,
     pTranspileOptions
   ).filter((pDep) => pCruiseOptions.moduleSystems.includes(pDep.moduleSystem));
 
   if (pCruiseOptions.tsPreCompilationDeps === "specify") {
-    pDependencies = detectPreCompilationNess(
-      pDependencies,
+    lDependencies = detectPreCompilationNess(
+      lDependencies,
       extractFromJavaScriptAST(pCruiseOptions, pFileName, pTranspileOptions)
     );
   }
-  return pDependencies;
+  return lDependencies;
 }
 
 /**
@@ -119,10 +113,9 @@ function extractDependencies(pCruiseOptions, pFileName, pTranspileOptions) {
 
   if (!pCruiseOptions.extraExtensionsToScan.includes(path.extname(pFileName))) {
     if (shouldUseSwc(pCruiseOptions, pFileName)) {
-      lDependencies = extractWithSwc(lDependencies, pCruiseOptions, pFileName);
+      lDependencies = extractWithSwc(pCruiseOptions, pFileName);
     } else if (shouldUseTsc(pCruiseOptions, pFileName)) {
       lDependencies = extractWithTsc(
-        lDependencies,
         pCruiseOptions,
         pFileName,
         pTranspileOptions
@@ -208,12 +201,12 @@ function compareDeps(pLeft, pRight) {
  *
  *
  * @param  {string} pFileName path to the file
- * @param  {import("../../types/dependency-cruiser").IStrictCruiseOptions} pCruiseOptions cruise options
- * @param {import("../../types/dependency-cruiser").IResolveOptions} pResolveOptions  webpack 'enhanced-resolve' options
- * @param  {import("../../types/dependency-cruiser").ITranspileOptions} pTranspileOptions       an object with tsconfig ('typescript project') options
+ * @param  {import("../..").IStrictCruiseOptions} pCruiseOptions cruise options
+ * @param {import("../..").IResolveOptions} pResolveOptions  webpack 'enhanced-resolve' options
+ * @param  {import("../..").ITranspileOptions} pTranspileOptions       an object with tsconfig ('typescript project') options
  *                               ('flattened' so there's no need for file access on any
  *                               'extends' option in there)
- * @return {import("../../types/dependency-cruiser").IDependency[]} an array of dependency objects (see above)
+ * @return {import("../..").IDependency[]} an array of dependency objects (see above)
  */
 module.exports = function getDependencies(
   pFileName,
