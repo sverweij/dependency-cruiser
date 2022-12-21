@@ -1078,27 +1078,31 @@ stay in view when dependency-cruiser is done.
 <summary>Typical output</summary>
 
 ```
-  elapsed       rss heapTotal  heapUsed  external after step...
-    735ms     125Mb      84Mb      61Mb       2Mb start of node process
-     10ms     125Mb      84Mb      62Mb       2Mb parsing options
-     90ms     128Mb      85Mb      64Mb       2Mb cache: checking freshness
-    202ms     145Mb      91Mb      70Mb       1Mb parsing rule set
-      0ms     145Mb      91Mb      70Mb       1Mb determining how to resolve
-      0ms     145Mb      91Mb      70Mb       1Mb reading files
-     25ms     145Mb      91Mb      73Mb       1Mb reading files: gathering initial sources
-   1190ms     194Mb     137Mb     110Mb       1Mb reading files: visiting dependencies
-      0ms     194Mb     137Mb     110Mb       1Mb analyzing
-     18ms     194Mb     137Mb     116Mb       1Mb analyzing: cycles
-     37ms     197Mb     139Mb     119Mb       1Mb analyzing: dependents
-      1ms     197Mb     139Mb     119Mb       1Mb analyzing: orphans
-    257ms     198Mb     141Mb     122Mb       1Mb analyzing: reachables
-      0ms     198Mb     141Mb     122Mb       1Mb analyzing: module metrics
-      0ms     198Mb     141Mb     122Mb       1Mb analyzing: add focus (if any)
-     87ms     199Mb     141Mb     117Mb       1Mb analyzing: validations
-     10ms     200Mb     142Mb     121Mb       2Mb analyzing: comparing against known errors
-      5ms     200Mb     142Mb     121Mb       2Mb reporting
-      0ms     200Mb     142Mb     121Mb       2Mb really done (2670ms)
+elapsed real         user       system        ∆ rss  ∆ heapTotal   ∆ heapUsed   ∆ external after step...
+------------ ------------ ------------ ------------ ------------ ------------ ------------ ------------
+      778 ms       805 ms       104 ms  +130.300 kB   +85.020 kB   +62.024 kB    +2.232 kB start of node process
+       11 ms        11 ms         1 ms      +900 kB         0 kB      +307 kB         0 kB parsing options
+       76 ms        18 ms         4 ms    +2.508 kB      +804 kB    +1.969 kB      +542 kB cache: checking freshness
+      186 ms       339 ms        12 ms   +18.864 kB    +6.512 kB    +7.253 kB    -1.382 kB parsing rule set
+        0 ms         1 ms         0 ms       +24 kB         0 kB       +28 kB         0 kB determining how to resolve
+        0 ms         0 ms         0 ms        +4 kB         0 kB        +8 kB         0 kB reading files
+       21 ms        29 ms         7 ms      +172 kB      +256 kB    +2.420 kB         0 kB reading files: gathering initial sources
+    1.102 ms     1.871 ms       103 ms   +51.520 kB   +46.848 kB   +38.511 kB      +285 kB reading files: visiting dependencies
+        0 ms         0 ms         0 ms       +12 kB         0 kB        +3 kB         0 kB analyzing
+       15 ms        37 ms         0 ms       +28 kB         0 kB    +6.723 kB         0 kB analyzing: cycles
+       26 ms        57 ms         2 ms    +2.852 kB    +2.304 kB    +2.895 kB         0 kB analyzing: dependents
+        1 ms         1 ms         0 ms        +4 kB         0 kB       +48 kB         0 kB analyzing: orphans
+      246 ms       305 ms         4 ms    +1.464 kB    +1.792 kB   -13.542 kB       -29 kB analyzing: reachables
+        0 ms         0 ms         0 ms         0 kB         0 kB        +3 kB         0 kB analyzing: module metrics
+        0 ms         0 ms         0 ms         0 kB         0 kB        +3 kB         0 kB analyzing: add focus (if any)
+       79 ms       148 ms         3 ms      +356 kB         0 kB   +11.700 kB         0 kB analyzing: validations
+       10 ms        16 ms         1 ms    +1.680 kB    +1.088 kB    +2.842 kB      +541 kB analyzing: comparing against known errors
+        4 ms         4 ms         0 ms       +20 kB         0 kB      +723 kB         0 kB reporting
+        0 ms         0 ms         0 ms         0 kB         0 kB        +4 kB         0 kB really done (2.558 ms, +123.921 kB)
 ```
+
+Number formatting takes place with the `Intl` API, so in your locale the numbers
+and units might look slightly different.
 
 </details>
 

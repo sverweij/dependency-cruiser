@@ -1,11 +1,13 @@
-const chalk = require("chalk");
-const { formatTime, formatPerfLine } = require("./format-helpers");
+const {
+  formatTime,
+  formatPerfLine,
+  formatHeader,
+  formatMemory,
+} = require("./format-helpers");
 
 function getHeader(pLevel, pMaxLevel) {
   if (pLevel <= pMaxLevel) {
-    return chalk.bold(
-      "  elapsed       rss heapTotal  heapUsed  external after step...\n"
-    );
+    return formatHeader();
   }
   return "";
 }
@@ -15,14 +17,29 @@ function getProgressLine(pMessage, pState, pLevel, pMaxLevel) {
 
   if (pLevel <= pMaxLevel) {
     const lTime = process.uptime();
+    const { user, system } = process.cpuUsage();
+    const { rss, heapTotal, heapUsed, external } = process.memoryUsage();
+    const lStats = {
+      elapsedTime: lTime - pState.previousTime,
+      elapsedUser: user - pState.previousUserUsage,
+      elapsedSystem: system - pState.previousSystemUsage,
+      deltaRss: rss - pState.previousRss,
+      deltaHeapUsed: heapUsed - pState.previousHeapUsed,
+      deltaHeapTotal: heapTotal - pState.previousHeapTotal,
+      deltaExternal: external - pState.previousExternal,
+      message: pState.previousMessage,
+    };
 
-    lReturnValue = formatPerfLine(
-      lTime,
-      pState.previousTime,
-      pState.previousMessage
-    );
     pState.previousMessage = pMessage;
     pState.previousTime = lTime;
+    pState.previousUserUsage = user;
+    pState.previousSystemUsage = system;
+    pState.previousRss = rss;
+    pState.previousHeapTotal = heapTotal;
+    pState.previousHeapUsed = heapUsed;
+    pState.previousExternal = external;
+
+    lReturnValue = formatPerfLine(lStats);
   }
   return lReturnValue;
 }
@@ -30,12 +47,11 @@ function getProgressLine(pMessage, pState, pLevel, pMaxLevel) {
 function getEndText(pState, pLevel, pMaxLevel) {
   if (pLevel <= pMaxLevel) {
     const lTime = process.uptime();
-
-    return formatPerfLine(
-      lTime,
-      pState.previousTime,
-      `really done (${formatTime(lTime).trim()})`
-    );
+    const { heapUsed } = process.memoryUsage();
+    pState.previousMessage = `really done (${formatTime(
+      lTime
+    ).trim()}, ${formatMemory(heapUsed).trim()})`;
+    return getProgressLine("", pState, pLevel, pMaxLevel);
   }
   return "";
 }

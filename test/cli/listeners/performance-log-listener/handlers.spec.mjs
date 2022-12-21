@@ -58,6 +58,7 @@ describe("[U] cli/listeners/performance-log/handlers - getProgressLine", () => {
 describe("[U] cli/listeners/performance-log/handlers - getEndText", () => {
   const lStateMock = {
     previousTime: process.uptime() - 10,
+    previousHeapUsed: process.memoryUsage().heapUsed - 1000,
   };
   it("when the level is > the max => empty string", () => {
     expect(handlers.getEndText(lStateMock, 30, MAX_LEVEL)).to.equal("");
@@ -71,7 +72,7 @@ describe("[U] cli/listeners/performance-log/handlers - getEndText", () => {
 
   it("message contains an end time", () => {
     expect(handlers.getEndText(lStateMock, 10, MAX_LEVEL)).to.match(
-      /really done \([0-9]+ms\)\n$/g
+      /really done \([0-9,]+ms, [+-]?[0-9,]+kB\)\n$/g
     );
   });
 });

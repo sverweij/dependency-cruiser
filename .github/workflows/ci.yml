@@ -11,6 +11,10 @@ env:
   NODE_LATEST: 19.x
   PLATFORM: ubuntu-latest
   CI: true
+  # the LANG (used by the Intl API, which we use for some of the number
+  # formatting) is set in the run scripts. This works everywhere, except on
+  # windows. So, especially for windows ...
+  LANG: en_US.UTF-8
 
 defaults:
   run:
@@ -77,7 +81,7 @@ jobs:
           npm install
           npm run build
       - run: npm run depcruise
-      - run: npm test
+      - run: npx mocha
 
   check-berry-integration:
     runs-on: ubuntu-latest

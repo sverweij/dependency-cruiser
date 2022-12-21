@@ -9,9 +9,9 @@ const report = require("../report");
 
 /**
  *
- * @param {import('../../types/dependency-cruiser').ICruiseResult} pResult
- * @param {import('../../types/dependency-cruiser').IFormatOptions} pFormatOptions
- * @returns {import('../../types/dependency-cruiser').ICruiseResult}
+ * @param {import('../..').ICruiseResult} pResult
+ * @param {import('../..').IFormatOptions} pFormatOptions
+ * @returns {import('../..').ICruiseResult}
  */
 function reSummarizeResults(pResult, pFormatOptions) {
   let lModules = filterBank.applyFilters(pResult.modules, pFormatOptions);
@@ -41,9 +41,9 @@ function reSummarizeResults(pResult, pFormatOptions) {
 }
 /**
  *
- * @param {import("../../types/dependency-cruiser").ICruiseResult} pResult result of a previous run of dependency-cruiser
- * @param {import("../../types/dependency-cruiser").IFormatOptions} pFormatOptions
- * @returns {import("../../types/dependency-cruiser").IReporterOutput}
+ * @param {import("../..).ICruiseResult} pResult result of a previous run of dependency-cruiser
+ * @param {import("../..").IFormatOptions} pFormatOptions
+ * @returns {import("../..").IReporterOutput}
  */
 module.exports = function reportWrap(pResult, pFormatOptions) {
   const lReportFunction = report.getReporter(pFormatOptions.outputType);
