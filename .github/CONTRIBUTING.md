@@ -19,7 +19,8 @@ a [FAQ](../doc/faq.md) that might help you out.
 - In turn, we try to **respond within a week**.  
   This might or might not include an actual code fix.
 - If there's something that doesn't fit an issue, feel free to contact us on
-  twitter [@mcmeadow](https://twitter.com/mcmeadow).
+  Mastodon [@mcmeadow@mstdn.social](https://mstdn.social/@mcmeadow) (or
+  on twitter, while it lasts [@mcmeadow](https://twitter.com/mcmeadow))
 
 ### Contributing code
 
