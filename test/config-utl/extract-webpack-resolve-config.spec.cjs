@@ -34,7 +34,7 @@ describe("[I] config-utl/getWebpackResolveConfig - non-native formats", () => {
       loadResolveConfig(
         join(__dirname, "__mocks__", "webpackconfig", "webpack.config.ls")
       )
-    ).to.throw(/- livescript/m);
+    ).to.throw(/No module loader found for ".ls"/m);
   });
 
   it("throws an error with suggested modules when there's a known loader for the extension, but it isn't installed (yaml)", () => {
@@ -44,7 +44,7 @@ describe("[I] config-utl/getWebpackResolveConfig - non-native formats", () => {
       loadResolveConfig(
         join(__dirname, "__mocks__", "webpackconfig", "webpack.config.yml")
       )
-    ).to.throw(/- require-yaml/m);
+    ).to.throw(/Unable to use specified module loader/m);
   });
 
   it("returns contents of the webpack config when the non-native extension _is_ registered", () => {

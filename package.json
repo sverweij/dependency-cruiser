@@ -154,7 +154,7 @@
     "glob": "7.2.0",
     "handlebars": "4.7.7",
     "indent-string": "^4.0.0",
-    "interpret": "^2.2.0",
+    "interpret": "^3.1.0",
     "is-installed-globally": "0.4.0",
     "json5": "2.2.2",
     "lodash": "4.17.21",
@@ -234,7 +234,7 @@
       {
         "package": "interpret",
         "policy": "wanted",
-        "because": "we want to keep interpret ~similar to what webpack-cli uses (which is ^2.2.0)"
+        "because": "we want to keep interpret ~similar to what webpack-cli uses (which is ^3.1.0 since 2022-11-15)"
       },
       {
         "package": "normalize-newline",
@@ -244,7 +244,7 @@
       {
         "package": "rechoir",
         "policy": "wanted",
-        "because": "we want to keep rechoir ~similar to what webpack-cli uses (which is ^0.7.0, but ^0.8.0 is similar enough and more recent anyway)"
+        "because": "we want to keep rechoir ~similar to what webpack-cli uses (which is ^0.8.0 since 2022-11-15))"
       },
       {
         "package": "wrap-ansi",
