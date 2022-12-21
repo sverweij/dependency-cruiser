@@ -1,7 +1,6 @@
-function formatInstability(pNumber) {
-  // eslint-disable-next-line no-magic-numbers
-  return Math.round(100 * pNumber);
-}
+// eslint-disable-next-line no-undefined
+const formatPercentage = new Intl.NumberFormat(undefined, { style: "percent" })
+  .format;
 
 function formatViolation(
   pViolation,
@@ -13,4 +12,4 @@ function formatViolation(
   );
 }
 
-module.exports = { formatViolation, formatInstability };
+module.exports = { formatViolation, formatPercentage };
