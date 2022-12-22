@@ -119,7 +119,6 @@ function runCruise(pFileDirectoryArray, pCruiseOptions) {
   bus.emit("progress", "cli: writing results");
   bus.emit("write-start");
   io.write(lCruiseOptions.outputTo, lReportingResult.output);
-  bus.emit("end");
 
   return lReportingResult.exitCode;
 }
@@ -131,7 +130,7 @@ function runCruise(pFileDirectoryArray, pCruiseOptions) {
  * @returns {number}
  */
 module.exports = function executeCli(pFileDirectoryArray, pCruiseOptions) {
-  let lCruiseOptions = cloneDeep(pCruiseOptions || {});
+  let lCruiseOptions = pCruiseOptions || {};
   let lExitCode = 0;
 
   try {
@@ -170,6 +169,6 @@ module.exports = function executeCli(pFileDirectoryArray, pCruiseOptions) {
     bus.emit("end");
     lExitCode = 1;
   }
-
+  bus.emit("end");
   return lExitCode;
 };

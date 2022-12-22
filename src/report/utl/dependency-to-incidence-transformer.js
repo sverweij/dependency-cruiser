@@ -45,5 +45,6 @@ function addIncidences(pFromList) {
 /*
 
 */
-module.exports = (pFromList) =>
-  pFromList.sort(compareOnSource).map(addIncidences(pFromList));
+module.exports = function transformDependenciesToIncidences(pFromList) {
+  return pFromList.sort(compareOnSource).map(addIncidences(pFromList));
+};

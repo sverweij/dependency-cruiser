@@ -4,7 +4,9 @@
  * @param {import("../../types/cruise-result").ICruiseResult} pResults
  * @returns {import("../../types/dependency-cruiser").IReporterOutput}
  */
-module.exports = (pResults) => ({
-  output: JSON.stringify(pResults, null, "  "),
-  exitCode: 0,
-});
+module.exports = function json(pResults) {
+  return {
+    output: JSON.stringify(pResults, null, "  "),
+    exitCode: 0,
+  };
+};

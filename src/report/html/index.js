@@ -28,7 +28,9 @@ function report(pResults) {
  * @param {import("../../../types/cruise-result").ICruiseResult} pResults
  * @returns {import("../../../types/dependency-cruiser").IReporterOutput}
  */
-module.exports = (pResults) => ({
-  output: report(pResults),
-  exitCode: 0,
-});
+module.exports = function html(pResults) {
+  return {
+    output: report(pResults),
+    exitCode: 0,
+  };
+};

@@ -27,7 +27,9 @@ function report(pModules) {
  * the output of a dependency-cruise adhering to ../../schema/cruise-result.schema.json
  * @returns {import("../../types/dependency-cruiser").IReporterOutput}
  */
-module.exports = (pResults) => ({
-  output: report(dependencyToIncidenceTransformer(pResults.modules)),
-  exitCode: 0,
-});
+module.exports = function csv(pResults) {
+  return {
+    output: report(dependencyToIncidenceTransformer(pResults.modules)),
+    exitCode: 0,
+  };
+};

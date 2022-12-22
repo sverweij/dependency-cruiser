@@ -163,7 +163,9 @@ ${focusHighlights(pCruiseResult.modules, lNamesHashMap)}`;
  * @param {import("../../types/reporter-options").IMermaidReporterOptions} pOptions
  * @return {import('../../types/dependency-cruiser').IReporterOutput}
  */
-module.exports = (pCruiseResult, pOptions) => ({
-  output: renderMermaidSource(pCruiseResult, pOptions),
-  exitCode: 0,
-});
+module.exports = function mermaid(pCruiseResult, pOptions) {
+  return {
+    output: renderMermaidSource(pCruiseResult, pOptions),
+    exitCode: 0,
+  };
+};

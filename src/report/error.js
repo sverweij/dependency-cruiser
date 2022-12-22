@@ -156,7 +156,9 @@ function report(pResults, pLong) {
  * @returns {import("../../types/dependency-cruiser").IReporterOutput} - output: the formatted text in a string
  *                              exitCode: the number of errors found
  */
-module.exports = (pResults, pOptions) => ({
-  output: report(pResults, (pOptions || {}).long),
-  exitCode: pResults.summary.error,
-});
+module.exports = function error(pResults, pOptions) {
+  return {
+    output: report(pResults, (pOptions || {}).long),
+    exitCode: pResults.summary.error,
+  };
+};

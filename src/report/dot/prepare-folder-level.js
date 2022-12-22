@@ -3,7 +3,12 @@ const compare = require("../../graph-utl/compare");
 const stripSelfTransitions = require("../../graph-utl/strip-self-transitions");
 const moduleUtl = require("./module-utl");
 
-module.exports = (pResults, pTheme, _, pShowMetrics) => {
+module.exports = function prepareFolderLevel(
+  pResults,
+  pTheme,
+  _,
+  pShowMetrics
+) {
   return consolidateToFolder(pResults.modules)
     .sort(compare.modules)
     .map(moduleUtl.extractFirstTransgression)
