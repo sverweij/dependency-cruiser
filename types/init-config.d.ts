@@ -2,8 +2,6 @@ export type OneShotConfigIDType = "preset" | "yes" | "experimental-scripts";
 
 export type ConfigTypeType = "preset" | "self-contained";
 
-export type ExternalModuleResolutionStrategyType = "yarn-pnp" | "node_modules";
-
 export interface IInitConfig {
   /**
    * Whether or not the current folder houses a mono repo
@@ -17,6 +15,14 @@ export interface IInitConfig {
   /**
    * Whether or not to use a TypeScript config
    */
+  useJsConfig: boolean;
+  /**
+   * The file name of the TypeScript config to use
+   */
+  jsConfig?: string;
+  /**
+   * Whether or not to use a TypeScript config
+   */
   useTsConfig: boolean;
   /**
    * The file name of the TypeScript config to use
@@ -27,15 +33,6 @@ export interface IInitConfig {
    * compilation to javascript
    */
   tsPreCompilationDeps: boolean;
-  /**
-   * Whether or not to use Yarn plug'n play for module resolution (only useful
-   * when the package.json + repo are prepared for this)
-   */
-  useYarnPnP: boolean;
-  /**
-   *
-   */
-  externalModuleResolutionStrategy: ExternalModuleResolutionStrategyType;
   /**
    * Whether or not to use a Webpack config
    */

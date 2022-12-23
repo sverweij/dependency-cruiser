@@ -15,7 +15,7 @@ const {
   hasWebpackConfigCandidates,
   getWebpackConfigCandidates,
 } = require("./environment-helpers");
-const { validateLocation } = require("./inquirer-validators");
+const { validateLocation } = require("./validators");
 
 function toPromptChoice(pString) {
   return {
@@ -24,7 +24,7 @@ function toPromptChoice(pString) {
   };
 }
 
-/** @type {import('@types/prompts').PromptObject[]} */
+/** @type {import('prompts').PromptObject[]} */
 const QUESTIONS = [
   {
     name: "isMonoRepo",

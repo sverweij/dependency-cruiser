@@ -11,7 +11,7 @@ const {
  *
  * @returns {void}  Nothing
  * @param  {string} pConfig - dependency-cruiser configuration
- * @param  {string} pFileName - name of the file to write to
+ * @param  {import("fs").PathOrFileDescriptor} pFileName - name of the file to write to
  * @throws {Error}  An error object with the root cause of the problem
  *                  as a description:
  *                  - file already exists
