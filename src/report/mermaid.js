@@ -4,7 +4,8 @@ const REPORT_DEFAULTS = {
   minify: true,
 };
 
-const renderNode = (pNode, pText) => `${pNode}["${pText}"]`;
+const renderNode = (pNode, pText) =>
+  `${pNode}["${pText.length > 0 ? pText : " "}"]`;
 
 const renderEdge = (pFrom, pTo) => `${pFrom.node}-->${pTo.node}`;
 

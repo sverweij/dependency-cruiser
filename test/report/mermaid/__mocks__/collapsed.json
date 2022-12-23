@@ -1,0 +1,65 @@
+{
+  "modules": [
+    {
+      "dependencies": [],
+      "rules": [],
+      "valid": false,
+      "source": "src/",
+      "dependents": [],
+      "orphan": true,
+      "consolidated": true
+    }
+  ],
+  "summary": {
+    "violations": [],
+    "error": 0,
+    "warn": 0,
+    "info": 0,
+    "ignore": 0,
+    "totalCruised": 1,
+    "totalDependenciesCruised": 0,
+    "optionsUsed": {
+      "baseDir": "/Users/jdoe/dependency-cruiser",
+      "cache": "node_modules/.cache/dependency-cruiser",
+      "collapse": "node_modules/[^/]+|^[^/]+/",
+      "combinedDependencies": false,
+      "doNotFollow": {
+        "path": "node_modules",
+        "dependencyTypes": [
+          "npm",
+          "npm-dev",
+          "npm-optional",
+          "npm-peer",
+          "npm-bundled",
+          "npm-no-pkg"
+        ]
+      },
+      "enhancedResolveOptions": {
+        "exportsFields": ["exports"],
+        "conditionNames": ["require"],
+        "extensions": [".js", ".d.ts"]
+      },
+      "exclude": {
+        "path": "mocks|fixtures|test/integration|src/cli/tools/svg-in-html-snippets/script.snippet.js"
+      },
+      "exoticRequireStrings": ["tryRequire", "requireJSON"],
+      "externalModuleResolutionStrategy": "node_modules",
+      "includeOnly": "^src/",
+      "metrics": false,
+      "moduleSystems": ["cjs", "es6"],
+      "outputTo": "-",
+      "outputType": "json",
+      "prefix": "https://github.com/sverweij/dependency-cruiser/blob/develop/",
+      "preserveSymlinks": false,
+      "reporterOptions": {},
+      "rulesFile": ".dependency-cruiser.json",
+      "tsPreCompilationDeps": true,
+      "args": "bin src"
+    },
+    "ruleSetUsed": {}
+  },
+  "revisionData": {
+    "SHA1": "3fc6295ac0edfdb8f23957720298be9b8d6d395f",
+    "changes": []
+  }
+}
