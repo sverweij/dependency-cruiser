@@ -1,3 +1,4 @@
+// @ts-check
 const $defaults = require("../defaults");
 const normalizeInitOptions = require("./normalize-init-options");
 const buildConfig = require("./build-config");
@@ -29,8 +30,8 @@ const PACKAGE_MANIFEST = `./${$defaults.PACKAGE_MANIFEST}`;
  * @param {import("../../../types/init-config").OneShotConfigIDType} pOneShotConfigId
  * @return {import("../../../types/init-config").IPartialInitConfig} an initialization configuration
  */
-function getOneshotConfig(pOneShotConfigId) {
-  /** @type {"../../../types/init-config").IPartialInitConfig} */
+function getOneShotConfig(pOneShotConfigId) {
+  /** @type {import("../../../types/init-config").IPartialInitConfig} */
   const lBaseConfig = {
     isMonoRepo: isLikelyMonoRepo(),
     combinedDependencies: false,
@@ -44,7 +45,8 @@ function getOneshotConfig(pOneShotConfigId) {
     useBabelConfig: hasBabelConfigCandidates(),
     babelConfig: getBabelConfigCandidates().shift(),
   };
-  const lOneshotConfigs = {
+  /** @type {Record<import("../../../types/init-config").OneShotConfigIDType, import("../../../types/init-config").IPartialInitConfig>} */
+  const lOneShotConfigs = {
     preset: {
       configType: "preset",
       preset: "dependency-cruiser/configs/recommended-strict",
@@ -58,20 +60,23 @@ function getOneshotConfig(pOneShotConfigId) {
   };
 
   // eslint-disable-next-line security/detect-object-injection
-  return lOneshotConfigs[pOneShotConfigId] || lBaseConfig;
+  return lOneShotConfigs[pOneShotConfigId] || lBaseConfig;
 }
 
 /**
  *
  * @param {import("../../../types/init-config").IInitConfig} pNormalizedInitConfig
  */
-function manifestIsUpdateable(pNormalizedInitConfig) {
+function manifestIsUpdatable(pNormalizedInitConfig) {
   return (
     pNormalizedInitConfig.updateManifest &&
     pNormalizedInitConfig.sourceLocation.length > 0
   );
 }
 
+/**
+ * @param {boolean|import("../../../types/init-config").OneShotConfigIDType} pInit
+ */
 module.exports = function initConfig(pInit) {
   /* c8 ignore start */
   if (pInit === true) {
@@ -83,13 +88,15 @@ module.exports = function initConfig(pInit) {
         process.stderr.write(`\n  ERROR: ${pError.message}\n`);
       });
     /* c8 ignore stop */
+  } else if (pInit === false) {
+    // do nothing; deliberately left empty
   } else {
-    const lNormalizedInitConfig = normalizeInitOptions(getOneshotConfig(pInit));
+    const lNormalizedInitConfig = normalizeInitOptions(getOneShotConfig(pInit));
     if (!fileExists(getDefaultConfigFileName())) {
       writeConfig(buildConfig(lNormalizedInitConfig));
     }
 
-    if (manifestIsUpdateable(lNormalizedInitConfig)) {
+    if (manifestIsUpdatable(lNormalizedInitConfig)) {
       writeRunScriptsToManifest(lNormalizedInitConfig);
     }
   }

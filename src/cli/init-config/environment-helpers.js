@@ -24,9 +24,12 @@ function readManifest(pManifestFileName = "./package.json") {
   return JSON.parse(readFileSync(pManifestFileName, "utf8"));
 }
 
-/*
-  We could have used utl.fileExists - but that one is cached.
-  Not typically what we want for this util.
+/**
+ * We could have used utl.fileExists - but that one is cached.
+ * Not typically what we want for this util.
+ *
+ * @param {import("fs").PathLike} pFile
+ * @returns {boolean}
  */
 function fileExists(pFile) {
   try {

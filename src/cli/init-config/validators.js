@@ -1,12 +1,5 @@
 const fs = require("fs");
-const { toSourceLocationArray, fileExists } = require("./environment-helpers");
-
-function validateFileExistence(pInput) {
-  return (
-    fileExists(pInput) ||
-    `hmm, '${pInput}' doesn't seem to exist - could you try again?`
-  );
-}
+const { toSourceLocationArray } = require("./environment-helpers");
 
 function validateLocation(pLocations) {
   for (const lLocation of toSourceLocationArray(pLocations)) {
@@ -23,6 +16,5 @@ function validateLocation(pLocations) {
 }
 
 module.exports = {
-  validateFileExistence,
   validateLocation,
 };
