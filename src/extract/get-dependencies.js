@@ -102,7 +102,7 @@ function extractWithTsc(pCruiseOptions, pFileName, pTranspileOptions) {
 
 /**
  *
- * @param {import('../../types/dependency-cruiser').IStrictCruiseOptions} pCruiseOptions
+ * @param {import('../..').IStrictCruiseOptions} pCruiseOptions
  * @param {string} pFileName
  * @param {any} pTranspileOptions
  * @returns {import('../../types/cruise-result').IDependency[]}
@@ -174,7 +174,7 @@ function matchesPattern(pFullPathToFile, pPattern) {
 
 /**
  *
- * @param {import("../../types/dependency-cruiser").IDependency} pDependency
+ * @param {import("../..").IDependency} pDependency
  * @returns {string}
  */
 function getDependencyUniqueKey(pDependency) {

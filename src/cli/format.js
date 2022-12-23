@@ -7,7 +7,7 @@ const io = require("./utl/io");
 /**
  *
  * @param {string} pResultFile the name of the file with cruise results
- * @param {import("../../types/dependency-cruiser").IFormatOptions} pOptions
+ * @param {import("../..").IFormatOptions} pOptions
  * @returns {Number} an exitCode
  */
 module.exports = async function format(pResultFile, pOptions) {

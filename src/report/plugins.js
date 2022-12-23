@@ -2,7 +2,7 @@ const has = require("lodash/has");
 
 function isValidPlugin(pPluginFunction) {
   let lReturnValue = false;
-  /** @type {import('../../types/dependency-cruiser').ICruiseResult} */
+  /** @type {import('../..').ICruiseResult} */
   const lMinimalCruiseResult = {
     modules: [],
     summary: {

@@ -17,7 +17,7 @@ const {
  * @param {import("../../../types/options").IStrictCruiseOptions} pOptions -
  * @param {string[]} pFileDirectoryArray -
  *    the files/ directories originally passed to be cruised
- * @param {import("../../../types/dependency-cruiser").IFolder[]} pFolders -
+ * @param {import("../../..").IFolder[]} pFolders -
  *    the pModules collapsed to folders, with their own metrics & deps
  *
  * @returns {import("../../../types/cruise-result").ISummary} -

@@ -55,7 +55,7 @@ function normalizeRule(pRule) {
  * - rule name (default 'unnamed')
  * - severity (default 'warn')
  *
- * @param  {import("../../../types/dependency-cruiser").IFlattenedRuleSet} pRuleSet
+ * @param  {import("../../..").IFlattenedRuleSet} pRuleSet
  * @return {import("../../../types/strict-rule-set").IStrictRuleSet}
  */
 module.exports = function normalizeRuleSet(pRuleSet) {

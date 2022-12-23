@@ -82,7 +82,7 @@ function report(pResults, pOptions) {
  * - for each dependency the from and the two, separated by an arrow.
  * @param {import("../../types/cruise-result").ICruiseResult} pResults
  * @param {import("../../types/reporter-options").ITextReporterOptions} pOptions
- * @returns {import("../../types/dependency-cruiser").IReporterOutput}
+ * @returns {import("../..").IReporterOutput}
  */
 module.exports = function text(pResults, pOptions) {
   return {

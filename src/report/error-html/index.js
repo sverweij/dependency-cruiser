@@ -27,7 +27,7 @@ function report(pResults) {
  * Returns the results of a cruise in an 'incidence matrix'
  *
  * @param {import("../../../types/cruise-result").ICruiseResult} pResults - the output of a dependency-cruise adhering to ../../schema/cruise-result.schema.json
- * @returns {import("../../../types/dependency-cruiser").IReporterOutput} - output: an html program showing the summary & the violations (if any)
+ * @returns {import("../../..").IReporterOutput} - output: an html program showing the summary & the violations (if any)
  *                              exitCode: 0
  */
 module.exports = function errorHtml(pResults) {

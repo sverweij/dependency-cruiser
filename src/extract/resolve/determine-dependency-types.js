@@ -96,7 +96,7 @@ function dependencyIsBundled(pModule, pPackageDeps) {
  * @param {string} pModuleName
  * @param {string} pPackageDeps
  * @param {string} pFileDirectory
- * @param {import("../../../types/dependency-cruiser").IResolveOptions} pResolveOptions
+ * @param {import("../../..").IResolveOptions} pResolveOptions
  * @returns {import("../../../types/shared-types").DependencyType[]}
  */
 function determineNodeModuleDependencyTypes(
@@ -133,7 +133,7 @@ function determineNodeModuleDependencyTypes(
  * @param {string} pModuleName
  * @param {any} pPackageDeps
  * @param {string} pFileDirectory
- * @param {import("../../../types/dependency-cruiser").IResolveOptions} pResolveOptions
+ * @param {import("../../..").IResolveOptions} pResolveOptions
  * @param {string} pBaseDirectory
  * @returns {import("../../../types/shared-types").DependencyType[]}
  */

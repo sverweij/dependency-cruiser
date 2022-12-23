@@ -33,7 +33,7 @@ function doMagic(pCruiseResult) {
  * returns an object with some stats from the ICruiseResult pCruiseResult it
  * got passed
  *
- * @param {import('../../types/dependency-cruiser').ICruiseResult} pCruiseResult - a result from a cruise.
+ * @param {import('../..').ICruiseResult} pCruiseResult - a result from a cruise.
  * @return {string} an object with some stats
  */
 function samplePluginReporter(pCruiseResult) {
@@ -65,10 +65,10 @@ function samplePluginReporter(pCruiseResult) {
 /**
  * Sample plugin
  *
- * @param {import('../../types/dependency-cruiser').ICruiseResult} pCruiseResult -
+ * @param {import('../..').ICruiseResult} pCruiseResult -
  *      the output of a dependency-cruise adhering to dependency-cruiser's
  *      cruise result schema
- * @return {import('../../types/dependency-cruiser').IReporterOutput} -
+ * @return {import('../..').IReporterOutput} -
  *      output: some stats on modules and dependencies in json format
  *      exitCode: 0
  */

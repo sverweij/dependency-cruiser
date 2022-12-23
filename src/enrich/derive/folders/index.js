@@ -4,7 +4,7 @@ const aggregateToFolders = require("./aggregate-to-folders");
 /**
  *
  * @param {*} pFolder
- * @param {import('../../../../types/dependency-cruiser').IOptions} pOptions
+ * @param {import('../../../..').IOptions} pOptions
  * @returns
  */
 function validateFolderDependency(pFolder, pOptions) {
@@ -29,8 +29,8 @@ function addFolderDependencyViolations(pOptions) {
 
 /**
  *
- * @param {import('../../../../types/dependency-cruiser').IModule[]} pModules
- * @param {import('../../../../types/dependency-cruiser').IOptions} pOptions
+ * @param {import('../../../..').IModule[]} pModules
+ * @param {import('../../../..').IOptions} pOptions
  * @returns {any}
  */
 module.exports = function deriveFolderMetrics(pModules, pOptions) {

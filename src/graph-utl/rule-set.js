@@ -7,7 +7,7 @@ const has = require("lodash/has");
  *
  * (this thing probably belongs in a model-like folder and not in utl)
  *
- * @param {import("../../types/dependency-cruiser").IFlattenedRuleSet} pRuleSet - The rule set to search in
+ * @param {import("../..").IFlattenedRuleSet} pRuleSet - The rule set to search in
  * @param {string} pName - The rule name to look for
  * @return {import("../../types/rule-set").IForbiddenRuleType|undefined} - a rule (or 'undefined' if nothing found)
  */
@@ -23,7 +23,7 @@ function findRuleByName(pRuleSet, pName) {
  *
  * Returns false in all other cases
  *
- * @param {import('../../types/dependency-cruiser').IFlattenedRuleSet} pRuleSet
+ * @param {import('../..').IFlattenedRuleSet} pRuleSet
  * @return {boolean}
  */
 function ruleSetHasLicenseRule(pRuleSet) {
@@ -38,7 +38,7 @@ function ruleSetHasLicenseRule(pRuleSet) {
 }
 /**
  *
- * @param {import('../../types/dependency-cruiser').IFlattenedRuleSet} pRuleSet
+ * @param {import('../..').IFlattenedRuleSet} pRuleSet
  * @return {boolean}
  */
 function ruleSetHasDeprecationRule(pRuleSet) {

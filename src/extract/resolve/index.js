@@ -11,10 +11,10 @@ const getManifest = require("./get-manifest");
 
 /**
  *
- * @param {import("../../../types/dependency-cruiser").IModule} pModule
+ * @param {import("../../..").IModule} pModule
  * @param {string} pBaseDirectory
  * @param {string} pFileDirectory
- * @param {import("../../../types/dependency-cruiser").IResolveOptions} pResolveOptions
+ * @param {import("../../..").IResolveOptions} pResolveOptions
  * @returns {any}
  */
 function resolveModule(

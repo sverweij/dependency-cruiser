@@ -74,7 +74,7 @@ function validatePathsSafety(pFilterOption) {
  *
  * @param {any} pOptions
  * @throws {Error}
- * @returns {import("../../../types/dependency-cruiser").ICruiseOptions}
+ * @returns {import("../../..").ICruiseOptions}
  */
 function validateCruiseOptions(pOptions) {
   let lReturnValue = {};
@@ -110,7 +110,7 @@ function validateCruiseOptions(pOptions) {
 
 /**
  *
- * @param {import("../../../types/dependency-cruiser").IFormatOptions} pFormatOptions
+ * @param {import("../../..").IFormatOptions} pFormatOptions
  * @throws {Error}
  */
 function validateFormatOptions(pFormatOptions) {

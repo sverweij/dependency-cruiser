@@ -140,8 +140,8 @@ function reportViolations(pViolations, pIgnoredCount) {
  * - for each violated rule in the passed results: an `inspectionType` with the name and comment of that rule
  * - for each violation in the passed results: an `inspection` with the violated rule name and the tos and froms
  *
- * @param {import("../../types/dependency-cruiser").ICruiseResult} pResults
- * @returns {import("../../types/dependency-cruiser").IReporterOutput}
+ * @param {import("../..").ICruiseResult} pResults
+ * @returns {import("../..").IReporterOutput}
  */
 module.exports = function teamcity(pResults) {
   // this is the documented way to get tsm to emit strings

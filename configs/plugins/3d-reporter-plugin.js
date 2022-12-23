@@ -81,7 +81,7 @@ function formatDependency(pFrom, pTo) {
 
 /**
  *
- * @param {import('../../types/dependency-cruiser').ICruiseResult} pCruiseResult
+ * @param {import('../..').ICruiseResult} pCruiseResult
  */
 function render3DThing(pCruiseResult) {
   const lNodes = pCruiseResult.modules.map((pModule) => {
@@ -114,10 +114,10 @@ function render3DThing(pCruiseResult) {
 /**
  * Sample plugin: 3d representation
  *
- * @param {import('../../types/dependency-cruiser').ICruiseResult} pCruiseResult -
+ * @param {import('../..').ICruiseResult} pCruiseResult -
  *      the output of a dependency-cruise adhering to dependency-cruiser's
  *      cruise result schema
- * @return {import('../../types/dependency-cruiser').IReporterOutput} -
+ * @return {import('../..').IReporterOutput} -
  *      output: a string
  *      exitCode: 0
  */

@@ -23,7 +23,7 @@ function scrub(pModuleNamesSet) {
 }
 /**
  *
- * @param {import("../../types/dependency-cruiser").IModule[]} pModules
+ * @param {import("../..").IModule[]} pModules
  * @param {import("../../types/strict-filter-types").IStrictFocusType} pFilter
  * @returns
  */

@@ -164,7 +164,7 @@ function report(pResults, pOptions) {
  *
  * @param {import("../../types/cruise-result").ICruiseResult} pResults
  * @param {import("../../types/reporter-options").IMarkdownReporterOptions} pOptions
- * @returns {import("../../types/dependency-cruiser").IReporterOutput}
+ * @returns {import("../..").IReporterOutput}
  */
 module.exports = function markdown(pResults, pOptions) {
   return {

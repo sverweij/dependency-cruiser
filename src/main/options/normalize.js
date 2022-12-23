@@ -68,7 +68,7 @@ function normalizeCollapse(pCollapse) {
 }
 
 function normalizeFocusDepth(pFormatOptions) {
-  /** @type  {import("../../../types/dependency-cruiser").IFormatOptions}*/
+  /** @type  {import("../../..").IFormatOptions}*/
   let lFormatOptions = clone(pFormatOptions);
   if (has(lFormatOptions, "focusDepth")) {
     if (has(lFormatOptions, "focus")) {
@@ -84,7 +84,7 @@ function normalizeFocusDepth(pFormatOptions) {
 
 /**
  *
- * @param {import("../../../types/dependency-cruiser").IForbiddenRuleType} pRule
+ * @param {import("../../..").IForbiddenRuleType} pRule
  * @returns {boolean}
  */
 function hasMetricsRule(pRule) {
@@ -98,7 +98,7 @@ function hasMetricsRule(pRule) {
 
 /**
  *
- * @param {import("../../../types/dependency-cruiser").IFlattenedRuleSet} pRuleSet
+ * @param {import("../../..").IFlattenedRuleSet} pRuleSet
  * @returns {boolean}
  */
 function ruleSetHasMetricsRule(pRuleSet) {
@@ -111,7 +111,7 @@ function ruleSetHasMetricsRule(pRuleSet) {
 
 /**
  *
- * @param {import('../../../types/dependency-cruiser').ICruiseOptions} pOptions
+ * @param {import('../../..').ICruiseOptions} pOptions
  * @returns Boolean
  */
 function reporterShowsMetrics(pOptions) {
@@ -127,7 +127,7 @@ function reporterShowsMetrics(pOptions) {
 /**
  * Determines whether (instability) metrics should be calculated
  *
- * @param {import('../../../types/dependency-cruiser').ICruiseOptions} pOptions
+ * @param {import('../../..').ICruiseOptions} pOptions
  * @returns Boolean
  */
 function shouldCalculateMetrics(pOptions) {
@@ -192,7 +192,7 @@ function normalizeCruiseOptions(pOptions, pFileAndDirectoryArray = []) {
 
 /**
  *
- * @param {import("../../../types/dependency-cruiser").IFormatOptions} pFormatOptions
+ * @param {import("../../..").IFormatOptions} pFormatOptions
  * @returns {import("../../../types/strict-options").IStrictFormatOptions}
  */
 function normalizeFormatOptions(pFormatOptions) {

@@ -4,6 +4,7 @@ const { deepEqual } = require("assert");
  *
  * @param {any} pLeftObject
  * @param {any} pRightObject
+ * @returns {boolean}
  */
 function objectsAreEqual(pLeftObject, pRightObject) {
   try {

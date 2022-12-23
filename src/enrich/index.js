@@ -11,10 +11,10 @@ const clearCaches = require("./clear-caches");
  * used in the cruise, so consumers of the cruise result (reporters, depcruise-fmt,
  * caching) can use that.
  *
- * @param {import("../../types/dependency-cruiser").IModule[]} pModules
- * @param {import("../../types/dependency-cruiser").ICruiseOptions} pOptions
+ * @param {import("../..").IModule[]} pModules
+ * @param {import("../..").ICruiseOptions} pOptions
  * @param {string[]} pFileAndDirectoryArray
- * @returns {import("../../types/dependency-cruiser").ICruiseResult}
+ * @returns {import("../..").ICruiseResult}
  */
 module.exports = function enrich(pModules, pOptions, pFileAndDirectoryArray) {
   clearCaches();

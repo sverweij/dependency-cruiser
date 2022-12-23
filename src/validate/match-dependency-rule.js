@@ -4,8 +4,8 @@ const matchers = require("./matchers");
 
 /**
  *
- * @param {import("../../types/dependency-cruiser").IModule} pFrom
- * @param {import("../../types/dependency-cruiser").IDependency} pTo
+ * @param {import("../..").IModule} pFrom
+ * @param {import("../..").IDependency} pTo
  * @returns {(pRule) => boolean}
  */
 function match(pFrom, pTo) {

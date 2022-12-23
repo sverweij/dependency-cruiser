@@ -3,10 +3,10 @@ const DEFAULT_JSON_INDENT = 2;
 /**
  * Sample plugin
  *
- * @param {import('../../types/dependency-cruiser').ICruiseResult} pCruiseResult -
+ * @param {import('../..').ICruiseResult} pCruiseResult -
  *      the output of a dependency-cruise adhering to dependency-cruiser's
  *      cruise result schema
- * @return {import('../../types/dependency-cruiser').IReporterOutput} -
+ * @return {import('../..').IReporterOutput} -
  *      output: some stats on modules and dependencies in json format
  *      exitCode: 0
  */
