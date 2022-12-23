@@ -314,7 +314,6 @@
       ]
     },
     "exoticRequireStrings": ["tryRequire", "requireJSON"],
-    "highlight": ["src/cache/"],
     "reporterOptions": {
       "archi": {
         "collapsePattern": ["^(src|test)/[^/]+", "^bin/", "node_modules/[^/]+"]

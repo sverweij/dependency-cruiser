@@ -30,6 +30,13 @@ jobs:
     runs-on: ${{matrix.platform}}
     steps:
       - uses: actions/checkout@v3
+        with:
+          fetch-depth: 2
+        if: github.event_name == 'pull_request' && matrix.node-version == env.NODE_LATEST 
+      - uses: actions/checkout@v3
+        with: 
+          fetch-depth: 1
+        if: github.event_name != 'pull_request' || matrix.node-version != env.NODE_LATEST 
       - uses: actions/cache@v3
         with:
           path: node_modules
@@ -57,6 +64,24 @@ jobs:
           echo '## Code coverage' >> $GITHUB_STEP_SUMMARY
           node tools/istanbul-json-summary-to-markdown.mjs < coverage/coverage-summary.json >> $GITHUB_STEP_SUMMARY
           yarn --silent depcruise --output-type markdown >> $GITHUB_STEP_SUMMARY
+      - name: on pushes to the default branch emit graph to the step summary
+        if: always() && matrix.node-version == env.NODE_LATEST && github.event_name == 'push' && github.ref_name == github.event.repository.default_branch
+        run: |
+          echo '## Visual overview' >> $GITHUB_STEP_SUMMARY
+          echo '```mermaid' >> $GITHUB_STEP_SUMMARY
+          yarn --silent depcruise:graph:mermaid >> $GITHUB_STEP_SUMMARY
+          echo '' >> $GITHUB_STEP_SUMMARY
+          echo '```' >> $GITHUB_STEP_SUMMARY
+      - name: on pull requests emit depcruise graph to step summary with changed modules highlighted
+        if: always() && matrix.node-version == env.NODE_LATEST && github.event_name == 'pull_request' && github.ref_name != github.event.repository.default_branch
+        run: |
+          echo '## Visual diff' >> $GITHUB_STEP_SUMMARY
+          echo Modules changed in this PR have a fluorescent green color. All other modules in the graph are those directly or indirectly affected by changes in the green modules. >> $GITHUB_STEP_SUMMARY
+          echo '```mermaid' >> $GITHUB_STEP_SUMMARY
+          SHA=${{github.event.pull_request.base.sha}} yarn --silent depcruise:graph:mermaid:diff >> $GITHUB_STEP_SUMMARY
+          echo '' >> $GITHUB_STEP_SUMMARY
+          echo '```' >> $GITHUB_STEP_SUMMARY
+
       - name: regular test (run on node != ${{env.NODE_LATEST}} only)
         if: matrix.node-version != env.NODE_LATEST
         run: npm test

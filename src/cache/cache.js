@@ -21,7 +21,7 @@ function writeCache(pCacheFolder, pCruiseResult) {
 /**
  *
  * @param {string} pCacheFolder
- * @returns {import("../../types/cruise-result").ICruiseResult}
+ * @returns {import("../..").ICruiseResult}
  */
 function readCache(pCacheFolder) {
   try {
@@ -36,11 +36,11 @@ function readCache(pCacheFolder) {
 /**
  *
  * @param {import("../../types/strict-options").IStrictCruiseOptions} pOptions
- * @param {import("../../types/cruise-result").IRevisionData} pRevisionData
- * @returns
+ * @param {import("../..").IRevisionData} pRevisionData
+ * @returns {boolean}
  */
 function canServeFromCache(pOptions, pRevisionData) {
-  /** @type {import("../../types/cruise-result").ICruiseResult} */
+  /** @type {import("../..").ICruiseResult} */
   const lCachedResults = readCache(pOptions.cache);
 
   return (
