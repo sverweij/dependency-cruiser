@@ -84,7 +84,9 @@ function report(pResults, pOptions) {
  * @param {import("../../types/reporter-options").ITextReporterOptions} pOptions
  * @returns {import("../../types/dependency-cruiser").IReporterOutput}
  */
-module.exports = (pResults, pOptions) => ({
-  output: report(pResults, pOptions || {}),
-  exitCode: 0,
-});
+module.exports = function text(pResults, pOptions) {
+  return {
+    output: report(pResults, pOptions || {}),
+    exitCode: 0,
+  };
+};

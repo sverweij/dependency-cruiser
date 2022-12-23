@@ -72,7 +72,7 @@ function manifestIsUpdateable(pNormalizedInitConfig) {
   );
 }
 
-module.exports = (pInit) => {
+module.exports = function initConfig(pInit) {
   /* c8 ignore start */
   if (pInit === true) {
     getUserInput()

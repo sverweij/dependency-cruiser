@@ -1,6 +1,6 @@
 const { isDependent } = require("../module-utl");
 
-module.exports = (pModule, pGraph) => {
+module.exports = function isOrphan(pModule, pGraph) {
   if (pModule.dependencies.length > 0) {
     return false;
   }

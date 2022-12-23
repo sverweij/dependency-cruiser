@@ -143,7 +143,7 @@ function reportViolations(pViolations, pIgnoredCount) {
  * @param {import("../../types/dependency-cruiser").ICruiseResult} pResults
  * @returns {import("../../types/dependency-cruiser").IReporterOutput}
  */
-module.exports = (pResults) => {
+module.exports = function teamcity(pResults) {
   // this is the documented way to get tsm to emit strings
   // Alternatively we could've used the 'low level API', which
   // involves creating new `Message`s and stringifying those.

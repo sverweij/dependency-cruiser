@@ -10,11 +10,13 @@ const DEFAULT_JSON_INDENT = 2;
  *      output: some stats on modules and dependencies in json format
  *      exitCode: 0
  */
-module.exports = (pCruiseResult) => ({
-  output: JSON.stringify(
-    pCruiseResult.summary.violations,
-    null,
-    DEFAULT_JSON_INDENT
-  ),
-  exitCode: 0,
-});
+module.exports = function baseline(pCruiseResult) {
+  return {
+    output: JSON.stringify(
+      pCruiseResult.summary.violations,
+      null,
+      DEFAULT_JSON_INDENT
+    ),
+    exitCode: 0,
+  };
+};

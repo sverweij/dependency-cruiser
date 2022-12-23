@@ -130,17 +130,19 @@ function normalizeDotReporterOptions(
  * @param {string} pGranularity - either "module" (for fine grained module
  *                                level) or "folder" (for a report consolidated
  *                                to folders)
- * @returns {(pResults, pDotReporterOptions) => import("../../../types/dependency-cruiser").IReporterOutput}
+ * @returns {(pResults, pDotReporterOptions) => import("../../..").IReporterOutput}
  */
-module.exports = (pGranularity) => (pResults, pDotReporterOptions) => {
-  const lDotReporterOptions = normalizeDotReporterOptions(
-    pDotReporterOptions,
-    pGranularity,
-    pResults
-  );
+module.exports = function produceDotReporter(pGranularity) {
+  return function dot(pResults, pDotReporterOptions) {
+    const lDotReporterOptions = normalizeDotReporterOptions(
+      pDotReporterOptions,
+      pGranularity,
+      pResults
+    );
 
-  return {
-    output: report(pResults, pGranularity, lDotReporterOptions),
-    exitCode: 0,
+    return {
+      output: report(pResults, pGranularity, lDotReporterOptions),
+      exitCode: 0,
+    };
   };
 };

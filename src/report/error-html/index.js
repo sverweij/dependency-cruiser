@@ -30,7 +30,9 @@ function report(pResults) {
  * @returns {import("../../../types/dependency-cruiser").IReporterOutput} - output: an html program showing the summary & the violations (if any)
  *                              exitCode: 0
  */
-module.exports = (pResults) => ({
-  output: report(pResults),
-  exitCode: 0,
-});
+module.exports = function errorHtml(pResults) {
+  return {
+    output: report(pResults),
+    exitCode: 0,
+  };
+};

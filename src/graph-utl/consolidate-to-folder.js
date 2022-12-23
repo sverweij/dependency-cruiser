@@ -17,7 +17,8 @@ function squashModuleToDirectory(pModule) {
   };
 }
 
-module.exports = (pModules) =>
-  consolidateModules(pModules.map(squashModuleToDirectory)).map(
+module.exports = function consolidateToFolder(pModules) {
+  return consolidateModules(pModules.map(squashModuleToDirectory)).map(
     consolidateModuleDependencies
   );
+};

@@ -4,7 +4,9 @@
  * @param {import("../../types/cruise-result").ICruiseResult} pResults
  * @returns {import("../../types/dependency-cruiser").IReporterOutput}
  */
-module.exports = (pResults) => ({
-  output: pResults,
-  exitCode: 0,
-});
+module.exports = function identity(pResults) {
+  return {
+    output: pResults,
+    exitCode: 0,
+  };
+};

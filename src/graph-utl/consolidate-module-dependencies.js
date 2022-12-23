@@ -47,7 +47,9 @@ function consolidateDependencies(pDependencies) {
   return lReturnValue;
 }
 
-module.exports = (pModule) => ({
-  ...pModule,
-  dependencies: consolidateDependencies(pModule.dependencies),
-});
+module.exports = function consolidateModuleDependencies(pModule) {
+  return {
+    ...pModule,
+    dependencies: consolidateDependencies(pModule.dependencies),
+  };
+};

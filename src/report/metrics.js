@@ -117,7 +117,7 @@ function transformMetricsToTable(
  * @param {import("../../types/reporter-options").IMetricsReporterOptions} pReporterOptions
  * @return {import('../../types/dependency-cruiser').IReporterOutput} -
  */
-module.exports = (pCruiseResult, pReporterOptions) => {
+module.exports = function metrics(pCruiseResult, pReporterOptions) {
   const lReporterOptions = pReporterOptions || {};
   if (pCruiseResult.folders) {
     return {

@@ -20,7 +20,7 @@ function addDependencyViolations(pModule, pDependency, pRuleSet, pValidate) {
  *                  of them added whether or not it is
  *                  valid and if not which rules were violated
  */
-module.exports = (pModules, pRuleSet, pValidate) => {
+module.exports = function addValidations(pModules, pRuleSet, pValidate) {
   return pModules.map((pModule) => ({
     ...pModule,
     ...(pValidate ? validate.module(pRuleSet, pModule) : { valid: true }),

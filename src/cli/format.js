@@ -10,7 +10,7 @@ const io = require("./utl/io");
  * @param {import("../../types/dependency-cruiser").IFormatOptions} pOptions
  * @returns {Number} an exitCode
  */
-module.exports = async (pResultFile, pOptions) => {
+module.exports = async function format(pResultFile, pOptions) {
   const lOptions = normalizeOptions(pOptions);
 
   if (pResultFile !== "-") {

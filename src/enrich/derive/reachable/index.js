@@ -169,7 +169,7 @@ function addReachabilityToGraph(pGraph, pReachableRule) {
   });
 }
 
-module.exports = (pGraph, pRuleSet) => {
+module.exports = function deriveReachables(pGraph, pRuleSet) {
   const lReachableRules = pRuleSet ? getReachableRules(pRuleSet) : [];
 
   return lReachableRules.reduce(

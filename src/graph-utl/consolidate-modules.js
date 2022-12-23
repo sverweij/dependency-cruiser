@@ -34,7 +34,7 @@ function mergeModules(pSourceString, pModules) {
     );
 }
 
-module.exports = (pModules) => {
+module.exports = function consolidateModules(pModules) {
   let lModules = clone(pModules);
   let lReturnValue = [];
 
