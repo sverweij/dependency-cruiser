@@ -36,10 +36,18 @@ function isInterestingChangeType(pInterestingChangeTypes) {
   return (pChange) => pInterestingChangeTypes.has(pChange.changeType);
 }
 
+/**
+ * @param {string} pString
+ * @returns {string}
+ */
 function hash(pString) {
   return createHash("sha1").update(pString).digest("base64");
 }
 
+/**
+ * @param {import("fs").PathOrFileDescriptor} pFileName
+ * @returns {string}
+ */
 function getFileHash(pFileName) {
   try {
     return hash(readFileSync(pFileName, "utf8"));
@@ -50,7 +58,7 @@ function getFileHash(pFileName) {
 
 /**
  * @param {import("watskeburt").IChange} pChange
- * @param {import("../../types/cruise-result").IRevisionChange}
+ * @param {import("../..").IRevisionChange}
  */
 function addChecksum(pChange) {
   return {
@@ -66,8 +74,8 @@ function addChecksum(pChange) {
  * @param {Object} pOptions
  * @param {() => string} pOptions.shaRetrievalFn
  * @param {(pString:string) => Array<import("watskeburt").IChange>} pOptions.diffListFn
- * @param {(import("watskeburt").IChange) => import("../../types/cruise-result").IRevisionChange} pOptions.checkSumFn
- * @returns {import("../../types/cruise-result").IRevisionData}
+ * @param {(import("watskeburt").IChange) => import("../..").IRevisionChange} pOptions.checkSumFn
+ * @returns {import("../..").IRevisionData}
  */
 function getRevisionData(
   pExtensions,
@@ -100,9 +108,8 @@ function getRevisionData(
 }
 
 /**
- *
- * @param {import("../../types/cruise-result").IRevisionData} pExistingRevisionData
- * @param {import("../../types/cruise-result").IRevisionData} pNewRevisionData
+ * @param {import("../..").IRevisionData} pExistingRevisionData
+ * @param {import("../..").IRevisionData} pNewRevisionData
  * @returns {boolean}
  */
 function revisionDataEqual(pExistingRevisionData, pNewRevisionData) {
