@@ -52,6 +52,9 @@ describe("[I] report/mermaid", () => {
   it("renders a mermaid - renders focused elements with highlights - minified", () => {
     same("with-focus", { minify: true });
   });
+  it("renders collapsed nodes correctly", () => {
+    same("collapsed", { minify: true });
+  });
 });
 
 describe("[I] configs/plugins/mermaid-reporter-plugin", () => {
