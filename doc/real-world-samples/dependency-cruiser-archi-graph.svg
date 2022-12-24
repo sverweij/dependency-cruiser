@@ -102,10 +102,10 @@
 <g id="node3" class="node">
 <title>src/cache</title>
 <g id="a_node3"><a xlink:href="https://github.com/sverweij/dependency-cruiser/blob/develop/src/cache" xlink:title="cache">
-<polygon fill="yellow" stroke="black" stroke-width="2" points="216,-96 164,-96 162,-94 162,-78 214,-78 216,-80 216,-96"/>
-<polyline fill="none" stroke="black" stroke-width="2" points="214,-94 162,-94"/>
-<polyline fill="none" stroke="black" stroke-width="2" points="214,-94 214,-78"/>
-<polyline fill="none" stroke="black" stroke-width="2" points="214,-94 216,-96"/>
+<polygon fill="#ffffcc" stroke="black" points="216,-96 164,-96 162,-94 162,-78 214,-78 216,-80 216,-96"/>
+<polyline fill="none" stroke="black" points="214,-94 162,-94"/>
+<polyline fill="none" stroke="black" points="214,-94 214,-78"/>
+<polyline fill="none" stroke="black" points="214,-94 216,-96"/>
 <text text-anchor="start" x="176.5" y="-84.8" font-family="Helvetica,sans-Serif" font-size="9.00">cache</text>
 </a>
 </g>
@@ -137,8 +137,8 @@
 <!-- src/main&#45;&gt;src/cache -->
 <g id="edge12" class="edge">
 <title>src/main&#45;&gt;src/cache</title>
-<path fill="none" stroke="#000000" stroke-width="2" stroke-opacity="0.200000" d="M194.5,-108.53C194.5,-108.53 194.5,-105.87 194.5,-105.87"/>
-<polygon fill="#000000" fill-opacity="0.200000" stroke="#000000" stroke-width="2" stroke-opacity="0.200000" points="196.6,-105.87 194.5,-99.87 192.4,-105.87 196.6,-105.87"/>
+<path fill="none" stroke="#000000" stroke-width="2" stroke-opacity="0.200000" d="M194.5,-108.53C194.5,-108.53 194.5,-105.44 194.5,-105.44"/>
+<polygon fill="#000000" fill-opacity="0.200000" stroke="#000000" stroke-width="2" stroke-opacity="0.200000" points="196.6,-105.44 194.5,-99.44 192.4,-105.44 196.6,-105.44"/>
 </g>
 <!-- src/main&#45;&gt;src/extract -->
 <g id="edge14" class="edge">
