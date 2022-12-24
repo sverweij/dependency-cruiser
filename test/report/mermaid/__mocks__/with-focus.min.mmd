@@ -6,8 +6,8 @@ subgraph 2["rule-set"]
 3["normalize.js"]
 end
 4["index.js"]
-subgraph i["utl"]
-j["normalize-re-properties.js"]
+subgraph I["utl"]
+J["normalize-re-properties.js"]
 end
 end
 end
@@ -19,27 +19,27 @@ subgraph 8["reachable"]
 end
 end
 end
-subgraph a["main"]
-subgraph b["rule-set"]
-c["normalize.spec.mjs"]
+subgraph A["main"]
+subgraph B["rule-set"]
+C["normalize.spec.mjs"]
 end
 end
-subgraph d["validate"]
-e["parse-ruleset.utl.mjs"]
+subgraph D["validate"]
+E["parse-ruleset.utl.mjs"]
 end
 end
-subgraph f["node_modules"]
-subgraph g["lodash"]
-h["has.js"]
-k["cloneDeep.js"]
+subgraph F["node_modules"]
+subgraph G["lodash"]
+H["has.js"]
+K["cloneDeep.js"]
 end
 end
-3-->j
-3-->k
-3-->h
+3-->J
+3-->K
+3-->H
 4-->3
 9-->3
-c-->3
-e-->3
+C-->3
+E-->3
 
 style 3 fill:lime,color:black
