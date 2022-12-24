@@ -3,7 +3,7 @@ const chalk = require("chalk");
 const utl = require("./utl");
 
 const DECIMAL_BASE = 10;
-const METRIC_WIDTH = 4;
+const METRIC_WIDTH = 5;
 const COMPONENT_HEADER = "name";
 
 function getHeader(pMaxNameWidth) {
@@ -11,7 +11,7 @@ function getHeader(pMaxNameWidth) {
     METRIC_WIDTH + 1
   )} ${"Ca".padStart(METRIC_WIDTH + 1)} ${"Ce".padStart(
     METRIC_WIDTH + 1
-  )}  ${"I (%)".padEnd(METRIC_WIDTH + 1)}`;
+  )} ${"I (%)".padStart(METRIC_WIDTH + 1)}`;
 }
 
 function getDemarcationLine(pMaxNameWidth) {
@@ -19,7 +19,7 @@ function getDemarcationLine(pMaxNameWidth) {
     METRIC_WIDTH + 1
   )} ${"-".repeat(METRIC_WIDTH + 1)} ${"-".repeat(
     METRIC_WIDTH + 1
-  )}  ${"-".repeat(METRIC_WIDTH + 1)}`;
+  )} ${"-".repeat(METRIC_WIDTH + 1)}`;
 }
 
 function getMetricsTable(pMetrics, pMaxNameWidth) {
@@ -39,7 +39,6 @@ function getMetricsTable(pMetrics, pMaxNameWidth) {
         .toString(DECIMAL_BASE)
         .padStart(METRIC_WIDTH)}  ${utl
         .formatPercentage(instability)
-        .toString(DECIMAL_BASE)
         .padStart(METRIC_WIDTH)}`
   );
 }
