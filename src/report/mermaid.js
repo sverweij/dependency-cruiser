@@ -128,7 +128,17 @@ function hashModuleNames(pModules, pMinify) {
       const lName = lPaths.slice(0, lIndex + 1).join("/");
       if (!lNamesHashMap.has(lName)) {
         if (pMinify) {
-          lNamesHashMap.set(lName, lCount.toString(lBase));
+          // toUpperCase because otherwise we generate e.g. o-->a and x-->a
+          // which are ambiguous in mermaid (o--> and x--> are edge shapes
+          // whereas e.g. a--> is node 'a' + the arrow shape -->). The only
+          // collision within alphanums are 'o' and 'x', so upper casing
+          // saves us...
+          // ref: https://mermaid.js.org/syntax/flowchart.html#new-arrow-types
+          // another way to solve this would be to place a space between the
+          // node name and the edge shape (x --> a) - however, this would make
+          // for a larger output, running into the mermaid max source size
+          // earlier
+          lNamesHashMap.set(lName, lCount.toString(lBase).toUpperCase());
           lCount += 1;
         } else {
           lNamesHashMap.set(lName, hashToReadableNodeName(lName));
