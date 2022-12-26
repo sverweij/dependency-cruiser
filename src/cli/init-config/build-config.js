@@ -9,7 +9,7 @@ require("./config.js.template");
  * Creates a .dependency-cruiser config with a set of basic validations
  * to the current directory.
  *
- * @param {import("../../../types/init-config").IInitConfig} pNormalizedInitOptions Options that influence the shape of
+ * @param {import("./types").IInitConfig} pNormalizedInitOptions Options that influence the shape of
  *                  the configuration
  * @returns {string} the configuration as a string
  */

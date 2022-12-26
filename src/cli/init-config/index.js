@@ -27,11 +27,11 @@ const PACKAGE_MANIFEST = `./${$defaults.PACKAGE_MANIFEST}`;
  * Create a initialization configuration based on guessed defaults
  * (e.g. a tsconfig exists => use it and assume typescript is used)
  *
- * @param {import("../../../types/init-config").OneShotConfigIDType} pOneShotConfigId
- * @return {import("../../../types/init-config").IPartialInitConfig} an initialization configuration
+ * @param {import("./types").OneShotConfigIDType} pOneShotConfigId
+ * @return {import("./types").IPartialInitConfig} an initialization configuration
  */
 function getOneShotConfig(pOneShotConfigId) {
-  /** @type {import("../../../types/init-config").IPartialInitConfig} */
+  /** @type {import("./types").IPartialInitConfig} */
   const lBaseConfig = {
     isMonoRepo: isLikelyMonoRepo(),
     combinedDependencies: false,
@@ -45,7 +45,7 @@ function getOneShotConfig(pOneShotConfigId) {
     useBabelConfig: hasBabelConfigCandidates(),
     babelConfig: getBabelConfigCandidates().shift(),
   };
-  /** @type {Record<import("../../../types/init-config").OneShotConfigIDType, import("../../../types/init-config").IPartialInitConfig>} */
+  /** @type {Record<import("./types").OneShotConfigIDType, import("./types").IPartialInitConfig>} */
   const lOneShotConfigs = {
     preset: {
       configType: "preset",
@@ -65,7 +65,7 @@ function getOneShotConfig(pOneShotConfigId) {
 
 /**
  *
- * @param {import("../../../types/init-config").IInitConfig} pNormalizedInitConfig
+ * @param {import("./types").IInitConfig} pNormalizedInitConfig
  */
 function manifestIsUpdatable(pNormalizedInitConfig) {
   return (
@@ -75,7 +75,7 @@ function manifestIsUpdatable(pNormalizedInitConfig) {
 }
 
 /**
- * @param {boolean|import("../../../types/init-config").OneShotConfigIDType} pInit
+ * @param {boolean|import("./types").OneShotConfigIDType} pInit
  */
 module.exports = function initConfig(pInit) {
   /* c8 ignore start */
