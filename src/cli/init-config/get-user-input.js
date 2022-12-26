@@ -134,7 +134,7 @@ const QUESTIONS = [
 ];
 
 /**
- * @return {Promise<import("../../../types/init-config").IPartialInitConfig>}
+ * @return {Promise<import("./types").IPartialInitConfig>}
  */
 module.exports = function getUserInput() {
   return prompts(QUESTIONS);

@@ -9,8 +9,8 @@ const {
 
 /**
  *
- * @param {import("../../../types/init-config").IPartialInitConfig} pInitOptions
- * @return {import("../../../types/init-config").IPartialInitConfig}
+ * @param {import("./types").IPartialInitConfig} pInitOptions
+ * @return {import("./types").IPartialInitConfig}
  */
 function populate(pInitOptions) {
   return {
@@ -31,8 +31,8 @@ function populate(pInitOptions) {
 
 /**
  *
- * @param {import("../../../types/init-config").IPartialInitConfig} pInitOptions
- * @return {import("../../../types/init-config").IInitConfig}
+ * @param {import("./types").IPartialInitConfig} pInitOptions
+ * @return {import("./types").IInitConfig}
  */
 module.exports = function normalizeInitOptions(pInitOptions) {
   let lReturnValue = populate(pInitOptions);

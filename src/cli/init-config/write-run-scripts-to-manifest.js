@@ -55,7 +55,7 @@ const EXPERIMENTAL_SCRIPT_DOC = [
 
 /**
  *
- * @param {import("../../../types/init-config").IInitConfig} pInitOptions
+ * @param {import("./types").IInitConfig} pInitOptions
  * @return {any} an bunch of key value pairs that can be plonked into a `scripts` attribute in a package.json
  */
 function compileRunScripts(pInitOptions) {
