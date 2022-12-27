@@ -1,3 +1,4 @@
+// @ts-check
 const { readFileSync, readdirSync, accessSync, statSync, R_OK } = require("fs");
 const { join } = require("path");
 const has = require("lodash/has");
@@ -15,8 +16,8 @@ const BABEL_CONFIG_CANDIDATE_PATTERN = /^\.babelrc$|.*babel.*\.json/gi;
 /**
  * Read the package manifest ('package.json') and return it as a javascript object
  *
- * @param {string} pManifestFileName - the file name where the package manifest (package.json) lives
- * @returns {any} - the contents of said manifest as a javascript object
+ * @param {import("fs").PathOrFileDescriptor} pManifestFileName - the file name where the package manifest (package.json) lives
+ * @returns {Record<string,any>} - the contents of said manifest as a javascript object
  * @throws {ENOENT} when the manifest wasn't found
  * @throws {SyntaxError} when the manifest's json is invalid
  */
@@ -40,6 +41,9 @@ function fileExists(pFile) {
   return true;
 }
 
+/**
+ * @returns {boolean}
+ */
 function babelIsConfiguredInManifest() {
   let lReturnValue = false;
 
@@ -51,6 +55,9 @@ function babelIsConfiguredInManifest() {
   return lReturnValue;
 }
 
+/**
+ * @returns {boolean}
+ */
 function isTypeModule() {
   let lReturnValue = false;
 
@@ -63,12 +70,21 @@ function isTypeModule() {
   return lReturnValue;
 }
 
+/**
+ * @param {string} pFolderName
+ * @returns {string[]} Array of folder names
+ */
 function getFolderNames(pFolderName) {
   return readdirSync(pFolderName, "utf8").filter((pFileName) =>
     statSync(join(pFolderName, pFileName)).isDirectory()
   );
 }
 
+/**
+ * @param {RegExp} pPattern
+ * @param {string=} pFolderName
+ * @returns {string[]}
+ */
 function getMatchingFileNames(pPattern, pFolderName = process.cwd()) {
   return readdirSync(pFolderName, "utf8").filter(
     (pFileName) =>
@@ -77,6 +93,10 @@ function getMatchingFileNames(pPattern, pFolderName = process.cwd()) {
   );
 }
 
+/**
+ * @param {string[]} pFolderNames
+ * @returns {boolean}
+ */
 function isLikelyMonoRepo(pFolderNames = getFolderNames(process.cwd())) {
   return pFolderNames.includes("packages");
 }
@@ -95,6 +115,10 @@ function getFolderCandidates(pCandidateFolderArray) {
   };
 }
 
+/**
+ * @param {string[]|string} pLocations
+ * @returns {string[]}
+ */
 function toSourceLocationArray(pLocations) {
   if (!Array.isArray(pLocations)) {
     return pLocations.split(",").map((pFolder) => pFolder.trim());
@@ -102,6 +126,9 @@ function toSourceLocationArray(pLocations) {
   return pLocations;
 }
 
+/**
+ * @returns {string[]}
+ */
 function getManifestFilesWithABabelConfig() {
   return babelIsConfiguredInManifest() ? ["package.json"] : [];
 }
@@ -132,6 +159,10 @@ const getTestFolderCandidates = getFolderCandidates(LIKELY_TEST_FOLDERS);
 const getMonoRepoPackagesCandidates = getFolderCandidates(
   LIKELY_PACKAGES_FOLDERS
 );
+
+/**
+ * @returns {string}
+ */
 function getDefaultConfigFileName() {
   return isTypeModule() ? ".dependency-cruiser.cjs" : DEFAULT_CONFIG_FILE_NAME;
 }

@@ -1,6 +1,6 @@
 const path = require("path");
 const { builtinModules } = require("module");
-const pathToPosix = require("../utl/path-to-posix");
+const pathToPosix = require("../../utl/path-to-posix");
 const { isFollowable } = require("./module-classifiers");
 const resolve = require("./resolve");
 

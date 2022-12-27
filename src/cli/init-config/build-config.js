@@ -1,9 +1,28 @@
+// @ts-check
 const Handlebars = require("handlebars/runtime");
-
 const { folderNameArrayToRE } = require("./utl");
 
 /* eslint import/no-unassigned-import: 0 */
 require("./config.js.template");
+
+/**
+ * @param {string} pString
+ * @returns {string}
+ */
+function quote(pString) {
+  return `"${pString}"`;
+}
+
+/**
+ * @param {string[]=} pExtensions
+ * @returns {string}
+ */
+function extensionsToString(pExtensions) {
+  if (pExtensions) {
+    return `[${pExtensions.map(quote).join(", ")}]`;
+  }
+  return "";
+}
 
 /**
  * Creates a .dependency-cruiser config with a set of basic validations
@@ -22,5 +41,8 @@ module.exports = function buildConfig(pNormalizedInitOptions) {
       pNormalizedInitOptions.sourceLocation
     ),
     testLocationRE: folderNameArrayToRE(pNormalizedInitOptions.testLocation),
+    resolutionExtensionsAsString: extensionsToString(
+      pNormalizedInitOptions.resolutionExtensions
+    ),
   });
 };

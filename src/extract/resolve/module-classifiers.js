@@ -1,5 +1,5 @@
 const path = require("path");
-const getExtension = require("../utl/get-extension");
+const getExtension = require("../../utl/get-extension");
 
 let gFollowableExtensionsCache = new Set();
 let gFollowableExtensionsCacheInitialized = false;

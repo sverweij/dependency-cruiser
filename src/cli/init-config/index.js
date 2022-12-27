@@ -44,6 +44,7 @@ function getOneShotConfig(pOneShotConfigId) {
     webpackConfig: getWebpackConfigCandidates().shift(),
     useBabelConfig: hasBabelConfigCandidates(),
     babelConfig: getBabelConfigCandidates().shift(),
+    specifyResolutionExtensions: true,
   };
   /** @type {Record<import("./types").OneShotConfigIDType, import("./types").IPartialInitConfig>} */
   const lOneShotConfigs = {

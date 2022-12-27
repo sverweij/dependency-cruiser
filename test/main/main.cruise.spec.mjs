@@ -3,7 +3,7 @@ import { readFileSync } from "fs";
 import { fileURLToPath } from "url";
 import { expect, use } from "chai";
 import chaiJSONSchema from "chai-json-schema";
-import pathToPosix from "../../src/extract/utl/path-to-posix.js";
+import pathToPosix from "../../src/utl/path-to-posix.js";
 import cruiseResultSchema from "../../src/schema/cruise-result.schema.js";
 import main from "../../src/main/index.js";
 import { createRequireJSON } from "../backwards.utl.mjs";

@@ -1,3 +1,4 @@
+// @ts-check
 const prompts = require("prompts");
 const {
   isLikelyMonoRepo,
@@ -34,9 +35,9 @@ const QUESTIONS = [
   },
   {
     name: "sourceLocation",
-    type: (_, pAnswers) => (pAnswers.isMonoRepo ? "text" : false),
+    type: (_, pAnswers) => (pAnswers.isMonoRepo ? "list" : false),
     message: "Mono repo it is! Where do your packages live?",
-    initial: getMonoRepoPackagesCandidates(),
+    initial: getMonoRepoPackagesCandidates().join(", "),
     validate: validateLocation,
   },
   {
@@ -48,9 +49,9 @@ const QUESTIONS = [
   },
   {
     name: "sourceLocation",
-    type: (_, pAnswers) => (pAnswers.isMonoRepo ? false : "text"),
+    type: (_, pAnswers) => (pAnswers.isMonoRepo ? false : "list"),
     message: "Where do your source files live?",
-    initial: getSourceFolderCandidates(),
+    initial: getSourceFolderCandidates().join(", "),
     validate: validateLocation,
   },
   {
@@ -67,9 +68,9 @@ const QUESTIONS = [
   {
     name: "testLocation",
     type: (_, pAnswers) =>
-      pAnswers.hasTestsOutsideSource && !pAnswers.isMonoRepo ? "text" : false,
+      pAnswers.hasTestsOutsideSource && !pAnswers.isMonoRepo ? "list" : false,
     message: "Where do your test files live?",
-    initial: getTestFolderCandidates(),
+    initial: getTestFolderCandidates().join(", "),
     validate: validateLocation,
   },
   {

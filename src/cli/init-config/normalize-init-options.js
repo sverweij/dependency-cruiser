@@ -6,6 +6,7 @@ const {
   hasTestsWithinSource,
   toSourceLocationArray,
 } = require("./environment-helpers");
+const findExtensions = require("./find-extensions.js");
 
 /**
  *
@@ -13,7 +14,7 @@ const {
  * @return {import("./types").IPartialInitConfig}
  */
 function populate(pInitOptions) {
-  return {
+  const lReturnValue = {
     version,
     date: new Date().toJSON(),
     configType: "self-contained",
@@ -27,6 +28,12 @@ function populate(pInitOptions) {
           pInitOptions.testLocation || getTestFolderCandidates()
         ),
   };
+  if (lReturnValue.specifyResolutionExtensions) {
+    lReturnValue.resolutionExtensions = findExtensions(
+      lReturnValue.sourceLocation.concat(lReturnValue.testLocation)
+    );
+  }
+  return lReturnValue;
 }
 
 /**

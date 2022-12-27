@@ -4,7 +4,7 @@ const acornLoose = require("acorn-loose");
 const acornJsx = require("acorn-jsx");
 const memoize = require("lodash/memoize");
 const transpile = require("../transpile");
-const getExtension = require("../utl/get-extension");
+const getExtension = require("../../utl/get-extension");
 
 /** @type acorn.Options */
 const ACORN_OPTIONS = {

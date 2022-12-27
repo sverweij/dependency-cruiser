@@ -67,6 +67,18 @@ export interface IInitConfig {
    */
   testLocation?: string[];
   /**
+   * Whether or not to explicitly pass extensions to the resolver. When not
+   * set explicitly dependency-cruiser will pass it all extensions it knows
+   * to handle - which makes it more sure to catch everything, at the trade-off
+   * of potentially being slower if the number of extensions used in reality
+   * is (a lot) smaller.
+   */
+  specifyResolutionExtensions: boolean;
+  /**
+   * An array of extensions the resolver should use when resolving dependencies
+   */
+  resolutionExtensions?: string[];
+  /**
    * Dependency-cruiser version used
    */
   version: string;

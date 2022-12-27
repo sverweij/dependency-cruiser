@@ -1,7 +1,7 @@
 const fs = require("fs");
 const path = require("path");
 const monkeyPatchedModule = require("module");
-const pathToPosix = require("../utl/path-to-posix");
+const pathToPosix = require("../../utl/path-to-posix");
 const { isRelativeModuleName } = require("./module-classifiers");
 const resolveAMD = require("./resolve-amd");
 const resolveCommonJS = require("./resolve-cjs");
