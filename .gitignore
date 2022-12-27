@@ -36,3 +36,4 @@ yarn.lock
 
 # integration test intermediate files
 test/integration/*.testing-ground
+test/extract/__mocks__/symlinked

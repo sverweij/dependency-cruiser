@@ -1,7 +1,7 @@
 import { fileURLToPath } from "url";
 import omit from "lodash/omit.js";
 import { expect } from "chai";
-import pathToPosix from "../../src/extract/utl/path-to-posix.js";
+import pathToPosix from "../../src/utl/path-to-posix.js";
 import extractBabelConfig from "../../src/config-utl/extract-babel-config.js";
 
 function getFullPath(pRelativePath) {

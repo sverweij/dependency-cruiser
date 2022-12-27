@@ -94,7 +94,7 @@
     "depcruise:graph:view:diff": "node ./bin/dependency-cruise.js bin src test --prefix vscode://file/$(pwd)/ --config configs/.dependency-cruiser-unlimited.json --output-type dot --progress cli-feedback --reaches \"$(watskeburt develop)\" | dot -T svg | node ./bin/wrap-stream-in-html.js | browser",
     "depcruise:report": "node ./bin/dependency-cruise.js src bin test configs types --output-type err-html --config configs/.dependency-cruiser-show-metrics-config.json --output-to dependency-violations.html",
     "depcruise:report:view": "node ./bin/dependency-cruise.js src bin test configs types --output-type err-html --config configs/.dependency-cruiser-show-metrics-config.json --output-to - | browser",
-    "depcruise:focus": "node ./bin/dependency-cruise.js src bin test configs types tools --progress --config configs/.dependency-cruiser-show-metrics-config.json --output-type text --focus",
+    "depcruise:focus": "node ./bin/dependency-cruise.js src bin test configs types tools --progress --config --output-type text --focus",
     "depcruise:reaches": "node ./bin/dependency-cruise.js src bin test configs types tools --progress --config configs/.dependency-cruiser-unlimited.json --output-type text --reaches",
     "format": "prettier --loglevel warn --write \"src/**/*.js\" \"configs/**/*.js\" \"tools/**/*.mjs\" \"bin/*\" \"types/*.d.ts\" \"test/**/*.spec.{cjs,js}\" \"test/**/*.{spec,utl}.mjs\"",
     "format:check": "prettier --loglevel warn --check \"src/**/*.js\" \"configs/**/*.js\" \"tools/**/*.mjs\" \"bin/*\" \"types/*.d.ts\" \"test/**/*.spec.{cjs,js}\" \"test/**/*.{spec,utl}.mjs\"",

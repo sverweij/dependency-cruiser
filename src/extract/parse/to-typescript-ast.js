@@ -3,7 +3,7 @@ const tryRequire = require("semver-try-require");
 const memoize = require("lodash/memoize");
 const { supportedTranspilers } = require("../../../src/meta.js");
 const transpile = require("../transpile");
-const getExtension = require("../utl/get-extension");
+const getExtension = require("../../utl/get-extension");
 
 /** @type {import('typescript')} */
 const typescript = tryRequire("typescript", supportedTranspilers.typescript);

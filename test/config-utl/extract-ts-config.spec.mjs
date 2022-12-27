@@ -1,7 +1,7 @@
 import { fileURLToPath } from "url";
 import { expect } from "chai";
 import loadTSConfig from "../../src/config-utl/extract-ts-config.js";
-import pathToPosix from "../../src/extract/utl/path-to-posix.js";
+import pathToPosix from "../../src/utl/path-to-posix.js";
 
 function getFullPath(pRelativePath) {
   return fileURLToPath(new URL(pRelativePath, import.meta.url));

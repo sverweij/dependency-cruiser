@@ -41,7 +41,8 @@
           "^fs$",
           "^path$",
           "$1",
-          "^src/meta.js$"
+          "^src/meta.js$",
+          "^src/extract/transpile/meta.js$"
         ]
       }
     },
@@ -299,11 +300,15 @@
       "extensions": [
         ".js",
         // ".cjs",
-        // ".mjs",
+        ".mjs",
         // ".jsx",
         // ".ts",
+        // ".cts",
+        // ".mts",
         // ".tsx",
         ".d.ts"
+        // ".d.cts",
+        // ".d.mts",
         // ".coffee",
         // ".litcoffee",
         // "cofee.md",

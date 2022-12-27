@@ -2,7 +2,7 @@ const fs = require("fs");
 const path = require("path");
 const { builtinModules } = require("module");
 const memoize = require("lodash/memoize");
-const pathToPosix = require("../utl/path-to-posix");
+const pathToPosix = require("../../utl/path-to-posix");
 
 const fileExists = memoize((pFile) => {
   try {

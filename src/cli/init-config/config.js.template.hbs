@@ -398,7 +398,7 @@ module.exports = {
         If you have a 'conditionNames' attribute in your webpack config, that one will
         have precedence over the one specified here.
       */
-      conditionNames: ["import", "require", "node", "default"]
+      conditionNames: ["import", "require", "node", "default"],
       /*
          The extensions, by default are the same as the ones dependency-cruiser
          can access (run `npx depcruise --info` to see which ones that are in
@@ -408,7 +408,11 @@ module.exports = {
          [".js", ".jsx"]). This can speed up the most expensive step in 
          dependency cruising (module resolution) quite a bit.
        */
+      {{#if specifyResolutionExtensions}}
+      extensions: {{{resolutionExtensionsAsString}}},
+      {{^}}
       // extensions: [".js", ".jsx", ".ts", ".tsx", ".d.ts"]
+      {{/if}}
     },
     reporterOptions: {
       dot: {

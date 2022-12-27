@@ -4,9 +4,9 @@ const glob = require("glob");
 const get = require("lodash/get");
 const filenameMatchesPattern =
   require("../graph-utl/match-facade").filenameMatchesPattern;
-const pathToPosix = require("./utl/path-to-posix");
+const getExtension = require("../utl/get-extension");
+const pathToPosix = require("../utl/path-to-posix");
 const transpileMeta = require("./transpile/meta");
-const getExtension = require("./utl/get-extension");
 
 /**
  *

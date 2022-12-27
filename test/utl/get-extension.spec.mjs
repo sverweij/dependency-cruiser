@@ -1,7 +1,7 @@
 import { expect } from "chai";
-import getExtension from "../../../src/extract/utl/get-extension.js";
+import getExtension from "../../src/utl/get-extension.js";
 
-describe("[U] extract/utl/getExtension", () => {
+describe("[U] utl/getExtension", () => {
   it(".coffee.md classifies as .coffee.md", () => {
     expect(getExtension("./aap/noot/mies.coffee.md")).to.equal(".coffee.md");
   });
