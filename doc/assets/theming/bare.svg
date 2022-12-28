@@ -34,15 +34,15 @@
 <polygon fill="none" stroke="black" points="464,-182 464,-257 701,-257 701,-182 464,-182"/>
 <text text-anchor="middle" x="582.5" y="-241.8" font-family="Times,serif" font-size="14.00">rule&#45;set</text>
 </g>
-<g id="clust3" class="cluster">
-<title>cluster_src/main/files&#45;and&#45;dirs</title>
-<polygon fill="none" stroke="black" points="24,-182 24,-257 150,-257 150,-182 24,-182"/>
-<text text-anchor="middle" x="87" y="-241.8" font-family="Times,serif" font-size="14.00">files&#45;and&#45;dirs</text>
-</g>
 <g id="clust7" class="cluster">
 <title>cluster_src/main/utl</title>
 <polygon fill="none" stroke="black" points="479,-24 479,-99 701,-99 701,-24 479,-24"/>
 <text text-anchor="middle" x="590" y="-83.8" font-family="Times,serif" font-size="14.00">utl</text>
+</g>
+<g id="clust3" class="cluster">
+<title>cluster_src/main/files&#45;and&#45;dirs</title>
+<polygon fill="none" stroke="black" points="24,-182 24,-257 150,-257 150,-182 24,-182"/>
+<text text-anchor="middle" x="87" y="-241.8" font-family="Times,serif" font-size="14.00">files&#45;and&#45;dirs</text>
 </g>
 <!-- src/main/files&#45;and&#45;dirs/normalize.js -->
 <g id="node1" class="node">
