@@ -1,6 +1,7 @@
 import { expect } from "chai";
 // eslint-disable-next-line node/file-extension-in-import
 import * as svelteCompiler from "svelte/compiler";
+import normalizeNewline from "normalize-newline";
 import thing from "../../../src/extract/transpile/typescript-wrap.js";
 import sveltePreProcess from "../../../src/extract/transpile/svelte-preprocess.js";
 
@@ -14,6 +15,7 @@ const CORPUS = [
   "<script>function f(<ReadOnly>pString:string):string {return pString.reverse()}</script><div><script>console.log('whoop')</script></div>",
   "<script hazoo>console.log(43)</script>",
   "<script hazoo=69>console.log(44)</script>",
+  "<script lang='js'>console.log(713)</script><style></style>",
 ];
 
 describe("[U] sync svelte pre-processor", () => {
@@ -50,5 +52,28 @@ describe("[U] sync svelte pre-processor", () => {
     const lAsyncResult = await svelteCompiler.preprocess(lInput, {});
 
     expect(lSyncResult).to.equal(lAsyncResult.code);
+  });
+  it("ignores style tags that require a pre-processor", () => {
+    const lInput = `<script lang="ts">console.log(713)</script>
+      <style lang="scss">
+        button {
+          background-color: blue;
+          &:button {
+            background-color: red;
+          }
+        }
+      </style>
+      <button on:click={increment}>
+        count is {count}
+      </button>`;
+    const lExpected = `<script lang="ts">console.log(713);
+</script>
+      
+      <button on:click={increment}>
+        count is {count}
+      </button>`;
+    const lResult = sveltePreProcess(lInput, typeScriptWrap, {});
+
+    expect(normalizeNewline(lResult)).to.equal(normalizeNewline(lExpected));
   });
 });
