@@ -1,5 +1,4 @@
 /* eslint-disable no-magic-numbers, security/detect-object-injection */
-
 /*
  parseAttributes copied verbatim from
  https://github.com/sveltejs/svelte/blob/67dea941bb1e61f0912ebd2257666b899c1ccefa/src/compiler/preprocess/index.ts#L27
@@ -60,20 +59,41 @@ function getSourceReplacer(pTranspiler, pTranspilerOptions) {
   };
 }
 
+function styleReplacer(pMatch, pAttributes) {
+  const lParsedAttributes = parseAttributes(pAttributes || "");
+
+  if (lParsedAttributes.lang === "css" || !pAttributes) {
+    return pMatch;
+  } else {
+    return "";
+  }
+}
+
 module.exports = function preProcess(
   pSource,
   pTranspilerWrapper,
   pTranspilerOptions
 ) {
-  // regex from
+  // regexes from
   // github.com/sveltejs/svelte/blob/67dea941bb1e61f0912ebd2257666b899c1ccefa/src/compiler/preprocess/index.ts#L165
   // eslint-disable-next-line security/detect-unsafe-regex, unicorn/no-unsafe-regex
   const lScriptRegex = /<script(\s[^]*?)?(?:>([^]*?)<\/script>|\/>)/gi;
+  // eslint-disable-next-line security/detect-unsafe-regex, unicorn/no-unsafe-regex
+  const lStyleRegex = /<style(\s[^]*?)?(?:>([^]*?)<\/style>|\/>)/gi;
 
   if (pTranspilerWrapper.isAvailable) {
-    return pSource.replace(
-      lScriptRegex,
-      getSourceReplacer(pTranspilerWrapper.transpile, pTranspilerOptions)
+    return (
+      pSource
+        .replace(
+          lScriptRegex,
+          getSourceReplacer(pTranspilerWrapper.transpile, pTranspilerOptions)
+        )
+        // we don't regard styling in our dependency analysis, so we can remove
+        // styles that (our instance of) svelte doesn't have pre-processors
+        // installed for (e.g. sass/scss/postcss/sss/styl/stylus/...) and that
+        // can potentially get svelte compiler to error out (for an example see
+        // https://github.com/sverweij/dependency-cruiser/issues/713)
+        .replace(lStyleRegex, styleReplacer)
     );
   } else {
     return pSource;
