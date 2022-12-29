@@ -26,11 +26,11 @@ export interface ICruiseResult {
   modules: IModule[];
   /**
    * A list of folders, as derived from the detected modules, with for each
-   * "folder a bunch of metrics (adapted from 'Agile software development:
-   * "principles, patterns, and practices' by Robert C Martin (ISBN 0-13-597444-5).
-   * "Note: these metrics substitute 'components' and 'classes' from that book
-   * "with 'folders' and 'modules'; the closest relatives that work for the most
-   * "programming styles in JavaScript (and its derivative languages).
+   * folder a bunch of metrics (adapted from 'Agile software development:
+   * principles, patterns, and practices' by Robert C Martin (ISBN 0-13-597444-5).
+   * Note: these metrics substitute 'components' and 'classes' from that book
+   * with 'folders' and 'modules'; the closest relatives that work for the most
+   * programming styles in JavaScript (and its derivative languages).
    */
   folders?: IFolder[];
   /**
@@ -165,10 +165,10 @@ export interface IDependency {
    */
   preCompilationOnly?: boolean;
   /**
-   * 'true' when the module included the module explicitly as type only with the '
-   * type' keyword e.g. import type { IThingus } from 'thing' Dependency-cruiser
+   * 'true' when the module included the module explicitly as type only with the
+   * `type` keyword e.g. `import type { IThingus } from 'thing'`. Dependency-cruiser
    * will only specify this attribute for TypeScript and when the 'tsPreCompilationDeps'
-   * option has either the value true or 'specify'.
+   * option has either the value `true` or `"specify"`.
    */
   typeOnly?: boolean;
   /**
