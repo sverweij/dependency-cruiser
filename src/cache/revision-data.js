@@ -1,8 +1,6 @@
-const { createHash } = require("crypto");
-const { readFileSync } = require("fs");
 const { extname } = require("path");
 const { getSHASync, listSync } = require("watskeburt");
-const { objectsAreEqual } = require("./utl");
+const { objectsAreEqual, getFileHash } = require("./utl");
 
 // skipping: "pairing broken", "unmodified", "unmerged", "type changed"
 const DEFAULT_INTERESTING_CHANGE_TYPES = new Set([
@@ -34,26 +32,6 @@ function hasInterestingExtension(pExtensions) {
  */
 function isInterestingChangeType(pInterestingChangeTypes) {
   return (pChange) => pInterestingChangeTypes.has(pChange.changeType);
-}
-
-/**
- * @param {string} pString
- * @returns {string}
- */
-function hash(pString) {
-  return createHash("sha1").update(pString).digest("base64");
-}
-
-/**
- * @param {import("fs").PathOrFileDescriptor} pFileName
- * @returns {string}
- */
-function getFileHash(pFileName) {
-  try {
-    return hash(readFileSync(pFileName, "utf8"));
-  } catch (pError) {
-    return "file not found";
-  }
 }
 
 /**

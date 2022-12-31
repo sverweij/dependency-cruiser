@@ -55,7 +55,7 @@ function futureCruise(
   pResolveOptions,
   pTranspileOptions
 ) {
-  /** @type {import("../../types/cruise-result").IRevisionData|null} */
+  /** @type {import("../..").IRevisionData|null} */
   let lRevisionData = null;
 
   bus.emit("progress", "parsing options", c(1));
@@ -124,7 +124,7 @@ function futureCruise(
 }
 
 // see [api.md](../../doc/api.md) and/ or the
-// [type definition](../...d.ts) for details
+// [type definition](../../types/dependency-cruiser.d.ts) for details
 /** @type {import("../..").cruise} */
 function cruise(pFileAndDirectoryArray, pOptions, pResolveOptions, pTSConfig) {
   return futureCruise(pFileAndDirectoryArray, pOptions, pResolveOptions, {
