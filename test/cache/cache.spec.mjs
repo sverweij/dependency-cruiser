@@ -79,40 +79,37 @@ describe("[I] cache/cache - canServeFromCache", () => {
     revisionData: { SHA1: "dummy-sha", changes: [] },
   };
 
-  before("remove __outputs__ folder", () => {
-    rmSync(OUTPUTS_FOLDER, { recursive: true, force: true });
-  });
-  after("remove __outputs__ folder", () => {
-    rmSync(OUTPUTS_FOLDER, { recursive: true, force: true });
-  });
-
   it("returns false when cache not written yet", () => {
     const lCacheFolder = join(OUTPUTS_FOLDER, "serve-from-cache");
+    const lEmptyCruiseResult = { modules: [], summary: [] };
+
     expect(
       canServeFromCache(
         { cache: lCacheFolder },
-        { SHA1: "dummy-sha", changes: [] }
+        { SHA1: "dummy-sha", changes: [] },
+        lEmptyCruiseResult
       )
     ).to.equal(false);
   });
 
   it("returns false when the base SHA differs", () => {
     const lCacheFolder = join(OUTPUTS_FOLDER, "serve-from-cache-sha-differs");
-    writeCache(lCacheFolder, lMinimalCruiseResult);
+
     expect(
       canServeFromCache(
         { args: "src test tools", cache: lCacheFolder },
         {
           SHA1: "another-sha",
           changes: [],
-        }
+        },
+        lMinimalCruiseResult
       )
     ).to.equal(false);
   });
 
   it("returns false when a file was added", () => {
     const lCacheFolder = join(OUTPUTS_FOLDER, "serve-from-cache-file-added");
-    writeCache(lCacheFolder, lMinimalCruiseResult);
+
     expect(
       canServeFromCache(
         { args: "src test tools", cache: lCacheFolder },
@@ -125,7 +122,8 @@ describe("[I] cache/cache - canServeFromCache", () => {
               checksum: "dummy-checksum",
             },
           ],
-        }
+        },
+        lMinimalCruiseResult
       )
     ).to.equal(false);
   });
@@ -135,26 +133,24 @@ describe("[I] cache/cache - canServeFromCache", () => {
       OUTPUTS_FOLDER,
       "serve-from-cache-options-incompatible"
     );
-    /** @type {import("../../types/cruise-result.js").ICruiseResult} */
 
-    writeCache(lCacheFolder, lMinimalCruiseResult);
     expect(
       canServeFromCache(
         { args: "src test tools configs", cache: lCacheFolder },
-        { SHA1: "dummy-sha", changes: [] }
+        { SHA1: "dummy-sha", changes: [] },
+        lMinimalCruiseResult
       )
     ).to.equal(false);
   });
 
   it("returns true when cache written & revision data equal & options compatible", () => {
     const lCacheFolder = join(OUTPUTS_FOLDER, "serve-from-cache-compatible");
-    /** @type {import("../../types/cruise-result.js").ICruiseResult} */
 
-    writeCache(lCacheFolder, lMinimalCruiseResult);
     expect(
       canServeFromCache(
         { args: "src test tools", cache: lCacheFolder },
-        { SHA1: "dummy-sha", changes: [] }
+        { SHA1: "dummy-sha", changes: [] },
+        lMinimalCruiseResult
       )
     ).to.equal(true);
   });

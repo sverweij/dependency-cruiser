@@ -72,11 +72,13 @@ function futureCruise(
         meta.scannableExtensions.concat(lCruiseOptions.extraExtensionsToScan)
       )
     );
-    if (lRevisionData && canServeFromCache(lCruiseOptions, lRevisionData)) {
-      bus.emit("progress", "cache: retrieving from cache", c(3));
-      const lCachedResults = readCache(lCruiseOptions.cache);
+    const lCachedResults = readCache(lCruiseOptions.cache);
 
-      bus.emit("progress", "cache: reporting from cache", c(4));
+    if (
+      lRevisionData &&
+      canServeFromCache(lCruiseOptions, lRevisionData, lCachedResults)
+    ) {
+      bus.emit("progress", "cache: reporting from cache", c(3));
       return reportWrap(lCachedResults, lCruiseOptions);
     }
   }

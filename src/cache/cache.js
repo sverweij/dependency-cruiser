@@ -4,10 +4,10 @@ const { optionsAreCompatible } = require("./options-compatible");
 const { revisionDataEqual } = require("./git-revision-data");
 
 const CACHE_FILE_NAME = "cache.json";
+
 /**
- *
  * @param {string} pCacheFolder
- * @param {import("../../types/cruise-result").ICruiseResult} pCruiseResult
+ * @param {import("../..").ICruiseResult} pCruiseResult
  */
 function writeCache(pCacheFolder, pCruiseResult) {
   mkdirSync(pCacheFolder, { recursive: true });
@@ -19,7 +19,6 @@ function writeCache(pCacheFolder, pCruiseResult) {
 }
 
 /**
- *
  * @param {string} pCacheFolder
  * @returns {import("../..").ICruiseResult}
  */
@@ -34,18 +33,15 @@ function readCache(pCacheFolder) {
 }
 
 /**
- *
  * @param {import("../../types/strict-options").IStrictCruiseOptions} pOptions
  * @param {import("../..").IRevisionData} pRevisionData
+ * @param {import("../..").ICruiseResult} pCachedCruiseResult
  * @returns {boolean}
  */
-function canServeFromCache(pOptions, pRevisionData) {
-  /** @type {import("../..").ICruiseResult} */
-  const lCachedResults = readCache(pOptions.cache);
-
+function canServeFromCache(pOptions, pRevisionData, pCachedCruiseResult) {
   return (
-    revisionDataEqual(lCachedResults.revisionData, pRevisionData) &&
-    optionsAreCompatible(lCachedResults.summary.optionsUsed, pOptions)
+    revisionDataEqual(pCachedCruiseResult.revisionData, pRevisionData) &&
+    optionsAreCompatible(pCachedCruiseResult.summary.optionsUsed, pOptions)
   );
 }
 
