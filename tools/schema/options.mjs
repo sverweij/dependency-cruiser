@@ -10,6 +10,7 @@ import dependencyType from "./dependency-type.mjs";
 import moduleSystemsType from "./module-systems-type.mjs";
 import reporterOptions from "./reporter-options.mjs";
 import violations from "./violations.mjs";
+import cacheOptions from "./cache-options.mjs";
 
 export default {
   definitions: {
@@ -352,16 +353,20 @@ export default {
           oneOf: [
             {
               type: "boolean",
-              enum: [false],
             },
             {
               type: "string",
             },
+            { $ref: "#/definitions/CacheOptionsType" },
           ],
           description:
-            "When set to true dependency-cruiser will cache its results in node_modules/.cache/dependency-cruiser. " +
-            "When passed a string dependency-cruiser will cache in the folder designated by the string." +
-            "Defaults to false.",
+            "- false: don't use caching. \n" +
+            "- true or empty object: use caching with the default settings \n" +
+            "- a string (deprecated): cache in the folder denoted by the string & use the \n" +
+            "  default caching strategy. This is deprecated - instead pass a cache object \n" +
+            "  e.g. ```{ folder: 'your/cache/location' }```.\n\n" +
+            "Defaults to false (no caching).\n" +
+            "When caching is switched on the default cache folder is 'node_modules/.cache/dependency-cruiser/'",
         },
       },
     },
@@ -376,5 +381,6 @@ export default {
     ...reporterOptions.definitions,
     ...REAsStringsType.definitions,
     ...violations.definitions,
+    ...cacheOptions.definitions,
   },
 };

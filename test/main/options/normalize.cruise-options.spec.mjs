@@ -160,4 +160,60 @@ describe("[U] main/options/normalize - cruise options", () => {
   });
 });
 
+describe("[I] normalize cache options", () => {
+  it("normalizes cache options into an object - true", () => {
+    expect(
+      normalize.normalizeCruiseOptions({ cache: true }).cache
+    ).to.deep.equal({
+      folder: "node_modules/.cache/dependency-cruiser",
+      strategy: "metadata",
+    });
+  });
+  it("normalizes cache options into an object - string", () => {
+    expect(
+      normalize.normalizeCruiseOptions({ cache: "some/alternate/folder" }).cache
+    ).to.deep.equal({
+      folder: "some/alternate/folder",
+      strategy: "metadata",
+    });
+  });
+  it("normalizes cache options into an object - empty object", () => {
+    expect(normalize.normalizeCruiseOptions({ cache: {} }).cache).to.deep.equal(
+      {
+        folder: "node_modules/.cache/dependency-cruiser",
+        strategy: "metadata",
+      }
+    );
+  });
+
+  it("normalizes cache options into an object - partial object (strategy only)", () => {
+    expect(
+      normalize.normalizeCruiseOptions({ cache: { strategy: "content" } }).cache
+    ).to.deep.equal({
+      folder: "node_modules/.cache/dependency-cruiser",
+      strategy: "content",
+    });
+  });
+  it("normalizes cache options into an object - partial object (folder only)", () => {
+    expect(
+      normalize.normalizeCruiseOptions({
+        cache: { folder: "some/alternate/folder" },
+      }).cache
+    ).to.deep.equal({
+      folder: "some/alternate/folder",
+      strategy: "metadata",
+    });
+  });
+  it("passed false for cache - remains false (no object)", () => {
+    expect(normalize.normalizeCruiseOptions({ cache: false }).cache).to.equal(
+      false
+    );
+  });
+  it("passed no cache - no cache property", () => {
+    expect(normalize.normalizeCruiseOptions({})).to.not.haveOwnProperty(
+      "cache"
+    );
+  });
+});
+
 /* eslint no-magic-numbers: 0*/

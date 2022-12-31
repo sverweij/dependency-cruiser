@@ -1568,8 +1568,33 @@ not bundled with dependency-cruiser.
 > and it _is_ tested, but the interface & format might be changing without
 > dependency-cruiser getting a major bump.
 
-Set where dependency-cruiser's cache folder location should be. Setting it
-to a string implies dependency-cruiser _will_ use caching.
+Indicates if you want to use caching, and if so enables you to tweak how it
+operates.
+
+The long form:
+
+```javascript
+{
+  // ...
+ "options": {
+    cache: {
+      // folder where dependency-cruiser will put its cache files
+      folder: "node_modules/.cache/dependency-cruiser",
+      // cache strategy to use - either 'metadata' (which uses git in the
+      // background) or 'content' (which will look at file content (hashes), but
+      // which is not operational yet)
+      strategy: "metadata"
+    }
+    // ...
+  }
+}
+```
+
+It's also possible to shorten this either by providing an empty object or `true`
+(= 'do use caching, but use the default settings'): `cache: {}` or `cache: true`.
+
+For backwards compatibility you can give it a string as well - dependency-cruiser
+will interpret that as the cache folder.
 
 ```javascript
 {
@@ -1582,11 +1607,12 @@ to a string implies dependency-cruiser _will_ use caching.
 }
 ```
 
-It's also possible to pass the value `false` here (also the default) - which
-tells dependency-cruiser to not use its cache feature.
+If you don't want to use caching you cah leave the cache option out altogether or
+use `cache: false`.
 
 As with most settings the command line option of the same name takes
 precedence of whichever is specified here.
 
 See [`--cache`: use a cache to speed up cruising (experimental)](cli.md#--cache-use-a-cache-to-speed-up-cruising-experimental)
-in the command line documentation for more details.
+in the command line documentation for more details on how the caching function
+currently operates.

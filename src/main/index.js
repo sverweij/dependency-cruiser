@@ -69,7 +69,7 @@ function futureCruise(
   if (lCruiseOptions.cache) {
     bus.emit("progress", "cache: checking freshness", c(2));
 
-    const lCachedResults = readCache(lCruiseOptions.cache);
+    const lCachedResults = readCache(lCruiseOptions.cache.folder);
 
     if (canServeFromCache(lCruiseOptions, lCachedResults)) {
       bus.emit("progress", "cache: reporting from cache", c(3));
@@ -111,7 +111,7 @@ function futureCruise(
   );
 
   if (lCruiseOptions.cache) {
-    writeCache(lCruiseOptions.cache, lCruiseResult);
+    writeCache(lCruiseOptions.cache.folder, lCruiseResult);
     clearCache();
   }
 

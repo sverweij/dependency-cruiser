@@ -14,6 +14,8 @@ GENERATED_SOURCES=src/cli/init-config/config.js.template.js \
 	src/meta.js
 
 SCHEMA_SOURCES=tools/schema/baseline-violations.schema.mjs \
+	tools/schema/cache-options.mjs \
+	tools/schema/cache-strategy-type.mjs \
 	tools/schema/compound-donot-follow-type.mjs \
 	tools/schema/compound-exclude-type.mjs \
 	tools/schema/compound-focus-type.mjs \

@@ -5,6 +5,9 @@ const has = require("lodash/has");
 const { normalizeREProperties } = require("../utl/normalize-re-properties");
 const defaults = require("./defaults.js");
 
+const DEFAULT_CACHE_FOLDER = "node_modules/.cache/dependency-cruiser";
+const DEFAULT_CACHE_STRATEGY = "metadata";
+
 function uniq(pArray) {
   return [...new Set(pArray)];
 }
@@ -140,6 +143,33 @@ function shouldCalculateMetrics(pOptions) {
 }
 
 /**
+ * @param {string|boolean|Partial<import("../../../types/cache-options").ICacheOptions>} pCacheOptions
+ * @returns {import("../../../types/cache-options").ICacheOptions}
+ */
+function normalizeCacheOptions(pCacheOptions) {
+  let lNormalizedCacheOptions = pCacheOptions;
+
+  if (typeof pCacheOptions === "string") {
+    lNormalizedCacheOptions = {
+      folder: pCacheOptions,
+    };
+  }
+
+  if (pCacheOptions === true) {
+    lNormalizedCacheOptions = {};
+  }
+
+  // TODO: put these values in a central spot as constants
+  //      (folder is already in src/cli/defaults.js but depending on the UI (cli)
+  //       is not OK. We might b.t.w. wanna deduplicate the defaulting)
+  return {
+    folder: DEFAULT_CACHE_FOLDER,
+    strategy: DEFAULT_CACHE_STRATEGY,
+    ...lNormalizedCacheOptions,
+  };
+}
+
+/**
  *
  * @param {import('../../../types/options').ICruiseOptions} pOptions
  * @param {string[]} pFileAndDirectoryArray
@@ -186,6 +216,9 @@ function normalizeCruiseOptions(pOptions, pFileAndDirectoryArray = []) {
   // if (has(pOptions, "ruleSet")) {
   //   lReturnValue.ruleSet = normalizeRuleSet(pOptions.ruleSet);
   // }
+  if (lReturnValue.cache) {
+    lReturnValue.cache = normalizeCacheOptions(lReturnValue.cache);
+  }
 
   return normalizeFocusDepth(lReturnValue);
 }
