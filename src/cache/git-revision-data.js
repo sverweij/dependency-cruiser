@@ -36,7 +36,7 @@ function isInterestingChangeType(pInterestingChangeTypes) {
 
 /**
  * @param {import("watskeburt").IChange} pChange
- * @param {import("../..").IRevisionChange}
+ * @param {import("../../types/dependency-cruiser").IRevisionChange}
  */
 function addChecksum(pChange) {
   return {
@@ -53,7 +53,7 @@ function addChecksum(pChange) {
  * @param {() => string} pOptions.shaRetrievalFn
  * @param {(pString:string) => Array<import("watskeburt").IChange>} pOptions.diffListFn
  * @param {(import("watskeburt").IChange) => import("../..").IRevisionChange} pOptions.checkSumFn
- * @returns {import("../..").IRevisionData}
+ * @returns {import("../../types/dependency-cruiser").IRevisionData}
  */
 function getRevisionData(
   pExtensions,
@@ -86,8 +86,8 @@ function getRevisionData(
 }
 
 /**
- * @param {import("../..").IRevisionData} pExistingRevisionData
- * @param {import("../..").IRevisionData} pNewRevisionData
+ * @param {import("../../types/dependency-cruiser").IRevisionData} pExistingRevisionData
+ * @param {import("../../types/dependency-cruiser").IRevisionData} pNewRevisionData
  * @returns {boolean}
  */
 function revisionDataEqual(pExistingRevisionData, pNewRevisionData) {

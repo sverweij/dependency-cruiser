@@ -1,7 +1,7 @@
 const { readFileSync, mkdirSync, writeFileSync } = require("fs");
 const { join } = require("path");
 const { optionsAreCompatible } = require("./options-compatible");
-const { revisionDataEqual } = require("./revision-data");
+const { revisionDataEqual } = require("./git-revision-data");
 
 const CACHE_FILE_NAME = "cache.json";
 /**
