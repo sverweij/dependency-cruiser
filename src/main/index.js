@@ -6,8 +6,12 @@ const enrich = require("../enrich");
 const cruiseResultSchema = require("../schema/cruise-result.schema.js");
 const meta = require("../extract/transpile/meta");
 const bus = require("../utl/bus");
-const { canServeFromCache, readCache, writeCache } = require("../cache/cache");
-const { getRevisionData } = require("../cache/git-revision-data");
+const {
+  canServeFromCache,
+  readCache,
+  writeCache,
+  clearCache,
+} = require("../cache/cache");
 const normalizeFilesAndDirectories = require("./files-and-dirs/normalize");
 const validateRuleSet = require("./rule-set/validate");
 const normalizeRuleSet = require("./rule-set/normalize");
@@ -48,16 +52,13 @@ function c(pComplete, pTotal = TOTAL_STEPS) {
 }
 
 /** @type {import("../..").futureCruise} */
-// eslint-disable-next-line max-lines-per-function, complexity, max-statements
+// eslint-disable-next-line max-lines-per-function, max-statements
 function futureCruise(
   pFileAndDirectoryArray,
   pCruiseOptions,
   pResolveOptions,
   pTranspileOptions
 ) {
-  /** @type {import("../..").IRevisionData|null} */
-  let lRevisionData = null;
-
   bus.emit("progress", "parsing options", c(1));
   /** @type {import("../../types/strict-options").IStrictCruiseOptions} */
   let lCruiseOptions = normalizeCruiseOptions(
@@ -67,17 +68,10 @@ function futureCruise(
 
   if (lCruiseOptions.cache) {
     bus.emit("progress", "cache: checking freshness", c(2));
-    lRevisionData = getRevisionData(
-      new Set(
-        meta.scannableExtensions.concat(lCruiseOptions.extraExtensionsToScan)
-      )
-    );
+
     const lCachedResults = readCache(lCruiseOptions.cache);
 
-    if (
-      lRevisionData &&
-      canServeFromCache(lCruiseOptions, lRevisionData, lCachedResults)
-    ) {
+    if (canServeFromCache(lCruiseOptions, lCachedResults)) {
       bus.emit("progress", "cache: reporting from cache", c(3));
       return reportWrap(lCachedResults, lCruiseOptions);
     }
@@ -116,9 +110,9 @@ function futureCruise(
     lNormalizedFileAndDirectoryArray
   );
 
-  if (lCruiseOptions.cache && lRevisionData) {
-    lCruiseResult.revisionData = lRevisionData;
+  if (lCruiseOptions.cache) {
     writeCache(lCruiseOptions.cache, lCruiseResult);
+    clearCache();
   }
 
   bus.emit("progress", "reporting", c(7));

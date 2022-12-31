@@ -84,11 +84,10 @@ describe("[I] cache/cache - canServeFromCache", () => {
     const lEmptyCruiseResult = { modules: [], summary: [] };
 
     expect(
-      canServeFromCache(
-        { cache: lCacheFolder },
-        { SHA1: "dummy-sha", changes: [] },
-        lEmptyCruiseResult
-      )
+      canServeFromCache({ cache: lCacheFolder }, lEmptyCruiseResult, {
+        SHA1: "dummy-sha",
+        changes: [],
+      })
     ).to.equal(false);
   });
 
@@ -98,11 +97,11 @@ describe("[I] cache/cache - canServeFromCache", () => {
     expect(
       canServeFromCache(
         { args: "src test tools", cache: lCacheFolder },
+        lMinimalCruiseResult,
         {
           SHA1: "another-sha",
           changes: [],
-        },
-        lMinimalCruiseResult
+        }
       )
     ).to.equal(false);
   });
@@ -113,6 +112,7 @@ describe("[I] cache/cache - canServeFromCache", () => {
     expect(
       canServeFromCache(
         { args: "src test tools", cache: lCacheFolder },
+        lMinimalCruiseResult,
         {
           SHA1: "dummy-sha",
           changes: [
@@ -122,8 +122,7 @@ describe("[I] cache/cache - canServeFromCache", () => {
               checksum: "dummy-checksum",
             },
           ],
-        },
-        lMinimalCruiseResult
+        }
       )
     ).to.equal(false);
   });
@@ -137,8 +136,8 @@ describe("[I] cache/cache - canServeFromCache", () => {
     expect(
       canServeFromCache(
         { args: "src test tools configs", cache: lCacheFolder },
-        { SHA1: "dummy-sha", changes: [] },
-        lMinimalCruiseResult
+        lMinimalCruiseResult,
+        { SHA1: "dummy-sha", changes: [] }
       )
     ).to.equal(false);
   });
@@ -149,8 +148,8 @@ describe("[I] cache/cache - canServeFromCache", () => {
     expect(
       canServeFromCache(
         { args: "src test tools", cache: lCacheFolder },
-        { SHA1: "dummy-sha", changes: [] },
-        lMinimalCruiseResult
+        lMinimalCruiseResult,
+        { SHA1: "dummy-sha", changes: [] }
       )
     ).to.equal(true);
   });

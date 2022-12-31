@@ -27,11 +27,14 @@ describe("[E] main.cruise - cache", () => {
       { bustTheCache: true },
       {}
     );
-    expect(lResult.output).to.deep.equal(readCache(CACHE_FOLDER));
+    const lCache = readCache(CACHE_FOLDER);
+    Reflect.deleteProperty(lCache, "revisionData");
+
+    expect(lResult.output).to.deep.equal(lCache);
     expect(lResult.output).to.be.jsonSchema(cruiseResultSchema);
   });
 
-  it("cruising twice yields the same result", () => {
+  it("cruising twice yields the same result (minus 'revisionData')", () => {
     const lResult = futureCruise(
       ["test/main/__mocks__/cache"],
       {
@@ -40,7 +43,10 @@ describe("[E] main.cruise - cache", () => {
       { bustTheCache: true },
       {}
     );
-    expect(lResult.output).to.deep.equal(readCache(CACHE_FOLDER));
+    const lCache = readCache(CACHE_FOLDER);
+    Reflect.deleteProperty(lCache, "revisionData");
+
+    expect(lResult.output).to.deep.equal(lCache);
 
     const lResultTwo = futureCruise(
       ["test/main/__mocks__/cache"],
@@ -50,6 +56,7 @@ describe("[E] main.cruise - cache", () => {
       { bustTheCache: true },
       {}
     );
+    Reflect.deleteProperty(lResultTwo.output, "revisionData");
     expect(lResultTwo.output).to.deep.equal(lResult.output);
     expect(lResultTwo.output).to.be.jsonSchema(cruiseResultSchema);
   });
@@ -64,6 +71,8 @@ describe("[E] main.cruise - cache", () => {
       {}
     );
     const lOldCache = readCache(CACHE_FOLDER);
+    Reflect.deleteProperty(lOldCache, "revisionData");
+
     expect(lResult.output).to.deep.equal(lOldCache);
 
     const lResultTwo = futureCruise(
@@ -75,6 +84,7 @@ describe("[E] main.cruise - cache", () => {
       {}
     );
     const lNewCache = readCache(CACHE_FOLDER);
+    Reflect.deleteProperty(lNewCache, "revisionData");
     expect(lNewCache).to.not.deep.equal(lOldCache);
     expect(lNewCache).to.deep.equal(lResultTwo.output);
     expect(lNewCache).to.be.jsonSchema(cruiseResultSchema);
