@@ -122,7 +122,7 @@
     "test:i": "LANG=en_US.UTF-8 mocha --grep \"^\\[[I]\\]\"",
     "test:u": "LANG=en_US.UTF-8 mocha --grep \"^\\[[U]\\]\"",
     "test:e": "LANG=en_US.UTF-8 mocha --grep \"^\\[[E]\\]\"",
-    "test:cover": "LANG=en_US.UTF-8 c8 --check-coverage --statements 99.9 --branches 99.7 --functions 100 --lines 99.9 --exclude \"{bin,configs/*.js,configs/rules,configs/plugins/3d-*.js,configs/plugins/stats-*.js,doc,docs,coverage,test,tools,webpack.conf.js,tmp*,src/**/*.template.js,src/cli/tools/svg-in-html-snippets/script.snippet.js,src/cli/init-config/get-user-input.js,src/cli/listeners/*/index.js}\" --reporter text-summary --reporter html --reporter json-summary mocha",
+    "test:cover": "LANG=en_US.UTF-8 c8 --check-coverage --statements 99.9 --branches 99.7 --functions 100 --lines 99.9 --exclude \"{bin,configs/*.js,configs/rules,configs/plugins/3d-*.js,configs/plugins/stats-*.js,doc,docs,coverage,test,tools,webpack.conf.js,tmp*,src/**/*.template.js,src/cli/tools/svg-in-html-snippets/script.snippet.js,src/cli/init-config/get-user-input.js,src/cli/listeners/*/index.js,src/cli/listeners/cli-feedback.js}\" --reporter text-summary --reporter html --reporter json-summary mocha",
     "test:glob": "set -f && test \"`bin/dependency-cruise.js test/extract/__mocks__/gather-globbing/packages/**/src/**/*.js | grep \"no dependency violations found\"`\" = \"✔ no dependency violations found (6 modules, 0 dependencies cruised)\"",
     "test:yarn-pnp": "npm-run-all test:yarn-pnp:cleanup test:yarn-pnp:pack test:yarn-pnp:copy test:yarn-pnp:install test:yarn-pnp:version test:yarn-pnp:run test:yarn-pnp:test test:yarn-pnp:cleanup",
     "test:yarn-pnp:pack": "npm pack",

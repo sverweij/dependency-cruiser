@@ -1,6 +1,6 @@
 const chalk = require("chalk");
 const figures = require("figures");
-const busLogLevels = require("../../../utl/bus-log-levels");
+const busLogLevels = require("../../utl/bus-log-levels");
 
 const FULL_ON = 100;
 
