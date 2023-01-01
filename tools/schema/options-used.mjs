@@ -9,6 +9,7 @@ import moduleSystemsType from "./module-systems-type.mjs";
 import options from "./options.mjs";
 import outputType from "./output-type.mjs";
 import reporterOptions from "./reporter-options.mjs";
+import cacheOptions from "./cache-options.mjs";
 
 export default {
   definitions: {
@@ -60,6 +61,18 @@ export default {
         collapse: {
           type: "string",
         },
+        // for backwards compatibility reasons can be either a string, false
+        // or an object in the input, but for internal processing and output
+        // always put as an object
+        cache: {
+          oneOf: [
+            {
+              type: "boolean",
+              enum: [false],
+            },
+            { $ref: "#/definitions/CacheOptionsType" },
+          ],
+        },
       },
     },
     ...moduleSystemsType.definitions,
@@ -72,5 +85,6 @@ export default {
     ...compoundReachesType.definitions,
     ...compoundHighlightType.definitions,
     ...reporterOptions.definitions,
+    ...cacheOptions.definitions,
   },
 };

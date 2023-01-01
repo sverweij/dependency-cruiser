@@ -1,8 +1,6 @@
-const { createHash } = require("crypto");
-const { readFileSync } = require("fs");
 const { extname } = require("path");
 const { getSHASync, listSync } = require("watskeburt");
-const { objectsAreEqual } = require("./utl");
+const { objectsAreEqual, getFileHash } = require("./utl");
 
 // skipping: "pairing broken", "unmodified", "unmerged", "type changed"
 const DEFAULT_INTERESTING_CHANGE_TYPES = new Set([
@@ -37,28 +35,8 @@ function isInterestingChangeType(pInterestingChangeTypes) {
 }
 
 /**
- * @param {string} pString
- * @returns {string}
- */
-function hash(pString) {
-  return createHash("sha1").update(pString).digest("base64");
-}
-
-/**
- * @param {import("fs").PathOrFileDescriptor} pFileName
- * @returns {string}
- */
-function getFileHash(pFileName) {
-  try {
-    return hash(readFileSync(pFileName, "utf8"));
-  } catch (pError) {
-    return "file not found";
-  }
-}
-
-/**
  * @param {import("watskeburt").IChange} pChange
- * @param {import("../..").IRevisionChange}
+ * @param {import("../../types/dependency-cruiser").IRevisionChange}
  */
 function addChecksum(pChange) {
   return {
@@ -75,7 +53,7 @@ function addChecksum(pChange) {
  * @param {() => string} pOptions.shaRetrievalFn
  * @param {(pString:string) => Array<import("watskeburt").IChange>} pOptions.diffListFn
  * @param {(import("watskeburt").IChange) => import("../..").IRevisionChange} pOptions.checkSumFn
- * @returns {import("../..").IRevisionData}
+ * @returns {import("../../types/dependency-cruiser").IRevisionData}
  */
 function getRevisionData(
   pExtensions,
@@ -108,8 +86,8 @@ function getRevisionData(
 }
 
 /**
- * @param {import("../..").IRevisionData} pExistingRevisionData
- * @param {import("../..").IRevisionData} pNewRevisionData
+ * @param {import("../../types/dependency-cruiser").IRevisionData} pExistingRevisionData
+ * @param {import("../../types/dependency-cruiser").IRevisionData} pNewRevisionData
  * @returns {boolean}
  */
 function revisionDataEqual(pExistingRevisionData, pNewRevisionData) {

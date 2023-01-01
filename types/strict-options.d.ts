@@ -13,6 +13,7 @@ import {
   IStrictIncludeOnlyType,
   IStrictReachesType,
 } from "./strict-filter-types";
+import { ICacheOptions } from "./cache-options";
 
 /**
  * the ICruiseOptions interface is lenient in what it accepts for convenience
@@ -40,6 +41,7 @@ export interface IStrictCruiseOptions extends ICruiseOptions {
   externalModuleResolutionStrategy: ExternalModuleResolutionStrategyType;
   exoticRequireStrings: string[];
   metrics: boolean;
+  cache?: false | ICacheOptions;
 }
 
 export interface IStrictFormatOptions extends IFormatOptions {

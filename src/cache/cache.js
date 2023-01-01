@@ -1,25 +1,37 @@
 const { readFileSync, mkdirSync, writeFileSync } = require("fs");
 const { join } = require("path");
+const meta = require("../extract/transpile/meta");
 const { optionsAreCompatible } = require("./options-compatible");
-const { revisionDataEqual } = require("./revision-data");
+const { getRevisionData, revisionDataEqual } = require("./git-revision-data");
 
 const CACHE_FILE_NAME = "cache.json";
+let gRevisionData = null;
+
 /**
- *
  * @param {string} pCacheFolder
- * @param {import("../../types/cruise-result").ICruiseResult} pCruiseResult
+ * @param {import("../..").ICruiseResult} pCruiseResult
+ * @param {import("../..").IRevisionData=} pRevisionData
  */
-function writeCache(pCacheFolder, pCruiseResult) {
+function writeCache(pCacheFolder, pCruiseResult, pRevisionData) {
+  const lRevisionData = pRevisionData ?? gRevisionData;
+
   mkdirSync(pCacheFolder, { recursive: true });
   writeFileSync(
     join(pCacheFolder, CACHE_FILE_NAME),
-    JSON.stringify(pCruiseResult),
+    JSON.stringify(
+      lRevisionData
+        ? {
+            ...pCruiseResult,
+            revisionData: lRevisionData,
+          }
+        : pCruiseResult
+    ),
     "utf8"
   );
+  gRevisionData = null;
 }
 
 /**
- *
  * @param {string} pCacheFolder
  * @returns {import("../..").ICruiseResult}
  */
@@ -34,23 +46,30 @@ function readCache(pCacheFolder) {
 }
 
 /**
- *
  * @param {import("../../types/strict-options").IStrictCruiseOptions} pOptions
- * @param {import("../..").IRevisionData} pRevisionData
+ * @param {import("../..").ICruiseResult} pCachedCruiseResult
+ * @param {import("../..").IRevisionData=} pRevisionData
  * @returns {boolean}
  */
-function canServeFromCache(pOptions, pRevisionData) {
-  /** @type {import("../..").ICruiseResult} */
-  const lCachedResults = readCache(pOptions.cache);
-
+function canServeFromCache(pOptions, pCachedCruiseResult, pRevisionData) {
+  gRevisionData =
+    pRevisionData ??
+    getRevisionData(
+      new Set(meta.scannableExtensions.concat(pOptions.extraExtensionsToScan))
+    );
   return (
-    revisionDataEqual(lCachedResults.revisionData, pRevisionData) &&
-    optionsAreCompatible(lCachedResults.summary.optionsUsed, pOptions)
+    revisionDataEqual(pCachedCruiseResult.revisionData, gRevisionData) &&
+    optionsAreCompatible(pCachedCruiseResult.summary.optionsUsed, pOptions)
   );
+}
+
+function clearCache() {
+  gRevisionData = null;
 }
 
 module.exports = {
   writeCache,
   readCache,
   canServeFromCache,
+  clearCache,
 };

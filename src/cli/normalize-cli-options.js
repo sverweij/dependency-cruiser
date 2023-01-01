@@ -144,19 +144,6 @@ function normalizeProgress(pCliOptions) {
   return lProgress ? { progress: lProgress } : {};
 }
 
-function normalizeCacheFolderName(pCliOptions) {
-  const lCache = get(pCliOptions, "cache", false);
-  let lReturnValue = clone(pCliOptions);
-
-  if (lCache === true) {
-    lReturnValue = {
-      ...lReturnValue,
-      cache: defaults.CACHE_FOLDER,
-    };
-  }
-  return lReturnValue;
-}
-
 /**
  * returns the pOptionsAsPassedFromCommander, so that the returned value contains a
  * valid value for each possible option
@@ -170,7 +157,6 @@ module.exports = function normalizeOptions(pOptionsAsPassedFromCommander) {
     outputTo: defaults.OUTPUT_TO,
     outputType: defaults.OUTPUT_TYPE,
     ...pOptionsAsPassedFromCommander,
-    // ...ejectNonCLIOptions(pOptionsAsPassedFromCommander, pKnownCliOptions),
   };
 
   if (has(lOptions, "moduleSystems")) {
@@ -186,7 +172,6 @@ module.exports = function normalizeOptions(pOptionsAsPassedFromCommander) {
   lOptions = { ...lOptions, ...normalizeValidationOption(lOptions) };
   lOptions = { ...lOptions, ...normalizeProgress(lOptions) };
   lOptions = { ...lOptions, ...normalizeKnownViolationsOption(lOptions) };
-  lOptions = normalizeCacheFolderName(lOptions);
   lOptions = normalizeConfigFileName(
     lOptions,
     "webpackConfig",

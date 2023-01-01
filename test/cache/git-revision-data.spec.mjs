@@ -2,7 +2,7 @@ import { expect } from "chai";
 import {
   getRevisionData,
   revisionDataEqual,
-} from "../../src/cache/revision-data.js";
+} from "../../src/cache/git-revision-data.js";
 
 const INTERESTING_EXTENSIONS = new Set([".aap", ".noot", ".mies"]);
 const INTERESTING_CHANGE_TYPES = new Set([

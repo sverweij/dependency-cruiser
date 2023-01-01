@@ -493,6 +493,6 @@
       }
     },
     "progress": { "type": "performance-log" },
-    "cache": "node_modules/.cache/dependency-cruiser"
+    "cache": true
   }
 }

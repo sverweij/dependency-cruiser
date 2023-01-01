@@ -1,15 +1,16 @@
-import { IReporterOptions } from "./reporter-options";
-import { IFlattenedRuleSet } from "./rule-set";
-import { ModuleSystemType, OutputType } from "./shared-types";
+import { IBaselineViolations } from "./baseline-violations";
+import { ICacheOptions } from "./cache-options";
 import {
   IDoNotFollowType,
   IExcludeType,
   IFocusType,
+  IHighlightType,
   IIncludeOnlyType,
   IReachesType,
-  IHighlightType,
 } from "./filter-types";
-import { IBaselineViolations } from "./baseline-violations";
+import { IReporterOptions } from "./reporter-options";
+import { IFlattenedRuleSet } from "./rule-set";
+import { ModuleSystemType, OutputType } from "./shared-types";
 
 export type ExternalModuleResolutionStrategyType = "node_modules" | "yarn-pnp";
 export type ProgressType = "cli-feedback" | "performance-log" | "none";
@@ -210,7 +211,7 @@ export interface ICruiseOptions {
      * attribute. E.g. when you're 100% sure you _only_ have typescript & json
      * and nothing else you can pass `['.ts', '.json']` - which can lead to performance
      * gains on systems with slow i/o (like ms-windows), especially when your
-     * tsconfig contains paths/ aliasses.
+     * tsconfig contains paths/ aliases.
      */
     extensions?: string[];
     /**
@@ -220,7 +221,7 @@ export interface ICruiseOptions {
     cachedInputFileSystem?: {
       /**
        * The number of milliseconds [enhanced-resolve](webpack/enhanced-resolve)'s
-       * cached file system should use for cache duration. Typicially you won't
+       * cached file system should use for cache duration. Typically you won't
        * have to touch this - the default works well for repos up to 5000 modules/
        * 20000 dependencies, and likely for numbers above as well.
        *
@@ -254,10 +255,16 @@ export interface ICruiseOptions {
    */
   metrics?: boolean;
   /**
-   * Location dependency-cruiser will store its cache. 'false' means: don't use
-   * caching. Defaults to false.
+   * - false: don't use caching.
+   * - true or empty object: use caching with the default settings
+   * - a string (deprecated): cache in the folder denoted by the string & use the
+   *   default caching strategy. This is deprecated - instead pass a cache object
+   *   e.g. ```{ folder: 'your/cache/location' }```
+   *
+   * Defaults to false.
+   * When caching is switched on the default cache folder is 'node_modules/.cache/dependency-cruiser/'
    */
-  cache?: false | string;
+  cache?: boolean | string | Partial<ICacheOptions>;
 }
 
 export interface IFormatOptions {

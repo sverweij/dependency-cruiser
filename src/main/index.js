@@ -6,8 +6,12 @@ const enrich = require("../enrich");
 const cruiseResultSchema = require("../schema/cruise-result.schema.js");
 const meta = require("../extract/transpile/meta");
 const bus = require("../utl/bus");
-const { canServeFromCache, readCache, writeCache } = require("../cache/cache");
-const { getRevisionData } = require("../cache/revision-data");
+const {
+  canServeFromCache,
+  readCache,
+  writeCache,
+  clearCache,
+} = require("../cache/cache");
 const normalizeFilesAndDirectories = require("./files-and-dirs/normalize");
 const validateRuleSet = require("./rule-set/validate");
 const normalizeRuleSet = require("./rule-set/normalize");
@@ -48,16 +52,13 @@ function c(pComplete, pTotal = TOTAL_STEPS) {
 }
 
 /** @type {import("../..").futureCruise} */
-// eslint-disable-next-line max-lines-per-function, complexity, max-statements
+// eslint-disable-next-line max-lines-per-function, max-statements
 function futureCruise(
   pFileAndDirectoryArray,
   pCruiseOptions,
   pResolveOptions,
   pTranspileOptions
 ) {
-  /** @type {import("../../types/cruise-result").IRevisionData|null} */
-  let lRevisionData = null;
-
   bus.emit("progress", "parsing options", c(1));
   /** @type {import("../../types/strict-options").IStrictCruiseOptions} */
   let lCruiseOptions = normalizeCruiseOptions(
@@ -67,16 +68,11 @@ function futureCruise(
 
   if (lCruiseOptions.cache) {
     bus.emit("progress", "cache: checking freshness", c(2));
-    lRevisionData = getRevisionData(
-      new Set(
-        meta.scannableExtensions.concat(lCruiseOptions.extraExtensionsToScan)
-      )
-    );
-    if (lRevisionData && canServeFromCache(lCruiseOptions, lRevisionData)) {
-      bus.emit("progress", "cache: retrieving from cache", c(3));
-      const lCachedResults = readCache(lCruiseOptions.cache);
 
-      bus.emit("progress", "cache: reporting from cache", c(4));
+    const lCachedResults = readCache(lCruiseOptions.cache.folder);
+
+    if (canServeFromCache(lCruiseOptions, lCachedResults)) {
+      bus.emit("progress", "cache: reporting from cache", c(3));
       return reportWrap(lCachedResults, lCruiseOptions);
     }
   }
@@ -114,9 +110,9 @@ function futureCruise(
     lNormalizedFileAndDirectoryArray
   );
 
-  if (lCruiseOptions.cache && lRevisionData) {
-    lCruiseResult.revisionData = lRevisionData;
-    writeCache(lCruiseOptions.cache, lCruiseResult);
+  if (lCruiseOptions.cache) {
+    writeCache(lCruiseOptions.cache.folder, lCruiseResult);
+    clearCache();
   }
 
   bus.emit("progress", "reporting", c(7));
@@ -124,7 +120,7 @@ function futureCruise(
 }
 
 // see [api.md](../../doc/api.md) and/ or the
-// [type definition](../...d.ts) for details
+// [type definition](../../types/dependency-cruiser.d.ts) for details
 /** @type {import("../..").cruise} */
 function cruise(pFileAndDirectoryArray, pOptions, pResolveOptions, pTSConfig) {
   return futureCruise(pFileAndDirectoryArray, pOptions, pResolveOptions, {

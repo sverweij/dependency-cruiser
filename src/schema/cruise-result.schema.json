@@ -1015,9 +1015,8 @@
         "cache": {
           "oneOf": [
             { "type": "boolean", "enum": [false] },
-            { "type": "string" }
-          ],
-          "description": "When set to true dependency-cruiser will cache its results in node_modules/.cache/dependency-cruiser. When passed a string dependency-cruiser will cache in the folder designated by the string.Defaults to false."
+            { "$ref": "#/definitions/CacheOptionsType" }
+          ]
         },
         "args": {
           "type": "string",
@@ -1363,6 +1362,22 @@
         "focus": { "$ref": "#/definitions/CompoundFocusType" },
         "reaches": { "$ref": "#/definitions/CompoundReachesType" }
       }
+    },
+    "CacheOptionsType": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "folder": {
+          "type": "string",
+          "description": "The folder to store the cache in. Defaults to node_modules/.cache/dependency-cruiser"
+        },
+        "strategy": { "$ref": "#/definitions/CacheStrategyType" }
+      }
+    },
+    "CacheStrategyType": {
+      "type": "string",
+      "description": "The strategy to use for caching. 'metadata': use git metadata to detect changes; 'content': use (a checksum of) the contents of files to detect changes. The last one is useful if you're not on git or work on partial clones (which is typical on CI's). Trade-of: might be a bit slower, will not detect changes on files that are entirely new. Defaults to 'metadata'.",
+      "enum": ["metadata", "content"]
     },
     "RevisionDataType": {
       "type": "object",

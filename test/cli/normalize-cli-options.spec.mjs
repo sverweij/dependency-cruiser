@@ -251,25 +251,11 @@ describe("[I] cli/normalizeCliOptions", () => {
   });
 });
 
-describe("[I] cli/normalizeCliOptions - cache", () => {
-  it("when cache is true it gets the value of the default cache folder", () => {
-    expect(normalizeCliOptions({ cache: true })).to.contain({
-      cache: "node_modules/.cache/dependency-cruiser",
-    });
-  });
-
-  it("when cache is a string it's set as the value of the cache folder", () => {
-    expect(normalizeCliOptions({ cache: "some/string" })).to.contain({
-      cache: "some/string",
-    });
-  });
-});
-
 describe("[I] cli/normalizeCliOptions - known violations", () => {
-  const WORKINGDIR = process.cwd();
+  const WORKING_DIR = process.cwd();
 
   afterEach(() => {
-    process.chdir(WORKINGDIR);
+    process.chdir(WORKING_DIR);
   });
 
   it("--ignore-known without params gets the default known-violations json", () => {
