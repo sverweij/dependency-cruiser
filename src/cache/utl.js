@@ -1,4 +1,4 @@
-const { deepEqual } = require("assert");
+const { deepStrictEqual } = require("assert");
 const { createHash } = require("crypto");
 const { readFileSync } = require("fs");
 /**
@@ -9,7 +9,7 @@ const { readFileSync } = require("fs");
  */
 function objectsAreEqual(pLeftObject, pRightObject) {
   try {
-    deepEqual(pLeftObject, pRightObject);
+    deepStrictEqual(pLeftObject, pRightObject);
     return true;
   } catch (pError) {
     return false;

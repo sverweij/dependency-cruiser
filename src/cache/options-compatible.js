@@ -58,8 +58,8 @@ function includeOnlyIsCompatible(pExistingFilter, pNewFilter) {
     !pExistingFilter || objectsAreEqual({ path: pExistingFilter }, pNewFilter)
   );
 }
-function optionIsCompatible(pExistingFilter, pNewFilter) {
-  return !pExistingFilter || objectsAreEqual(pExistingFilter, pNewFilter);
+function optionIsCompatible(pExistingOption, pNewOption) {
+  return !pExistingOption || objectsAreEqual(pExistingOption, pNewOption);
 }
 
 function limitIsCompatible(pExistingLimit, pNewLimit) {
@@ -68,6 +68,16 @@ function limitIsCompatible(pExistingLimit, pNewLimit) {
 
 function metricsIsCompatible(pExistingMetrics, pNewMetrics) {
   return pExistingMetrics || pExistingMetrics === pNewMetrics;
+}
+
+function cacheOptionIsCompatible(pExistingCacheOption, pNewCacheOption) {
+  if (!pExistingCacheOption || !pNewCacheOption) {
+    return false;
+  }
+  return (
+    pExistingCacheOption === pNewCacheOption ||
+    objectsAreEqual(pExistingCacheOption, pNewCacheOption)
+  );
 }
 
 /**
@@ -106,7 +116,8 @@ function optionsAreCompatible(pOldOptions, pNewOptions) {
     optionIsCompatible(
       pOldOptions.exoticRequireStrings,
       pNewOptions.exoticRequireStrings
-    )
+    ) &&
+    cacheOptionIsCompatible(pOldOptions.cache, pNewOptions.cache)
   );
 }
 
@@ -116,4 +127,5 @@ module.exports = {
   limitsAreCompatible: limitIsCompatible,
   metricsAreCompatible: metricsIsCompatible,
   includeOnlyFiltersAreCompatible: includeOnlyIsCompatible,
+  cacheOptionIsCompatible,
 };
