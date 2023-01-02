@@ -69,10 +69,19 @@ describe("[I] cache/cache - writeCache", () => {
 });
 
 describe("[I] cache/cache - canServeFromCache", () => {
+  const lOriginalCacheFolder = join(
+    OUTPUTS_FOLDER,
+    "serve-from-cache-compatible"
+  );
+  /** @type import("../..").ICruiseResult */
   const lMinimalCruiseResult = {
     modules: [],
     summary: {
       optionsUsed: {
+        cache: {
+          folder: lOriginalCacheFolder,
+          strategy: "metadata",
+        },
         args: "src test tools",
       },
     },
@@ -84,10 +93,14 @@ describe("[I] cache/cache - canServeFromCache", () => {
     const lEmptyCruiseResult = { modules: [], summary: [] };
 
     expect(
-      canServeFromCache({ cache: lCacheFolder }, lEmptyCruiseResult, {
-        SHA1: "dummy-sha",
-        changes: [],
-      })
+      canServeFromCache(
+        { cache: { folder: lCacheFolder, strategy: "metadata" } },
+        lEmptyCruiseResult,
+        {
+          SHA1: "dummy-sha",
+          changes: [],
+        }
+      )
     ).to.equal(false);
   });
 
@@ -96,7 +109,10 @@ describe("[I] cache/cache - canServeFromCache", () => {
 
     expect(
       canServeFromCache(
-        { args: "src test tools", cache: lCacheFolder },
+        {
+          args: "src test tools",
+          cache: { folder: lCacheFolder, strategy: "metadata" },
+        },
         lMinimalCruiseResult,
         {
           SHA1: "another-sha",
@@ -111,7 +127,10 @@ describe("[I] cache/cache - canServeFromCache", () => {
 
     expect(
       canServeFromCache(
-        { args: "src test tools", cache: lCacheFolder },
+        {
+          args: "src test tools",
+          cache: { folder: lCacheFolder, strategy: "metadata" },
+        },
         lMinimalCruiseResult,
         {
           SHA1: "dummy-sha",
@@ -135,7 +154,10 @@ describe("[I] cache/cache - canServeFromCache", () => {
 
     expect(
       canServeFromCache(
-        { args: "src test tools configs", cache: lCacheFolder },
+        {
+          args: "src test tools configs",
+          cache: { folder: lCacheFolder, strategy: "metadata" },
+        },
         lMinimalCruiseResult,
         { SHA1: "dummy-sha", changes: [] }
       )
@@ -143,11 +165,12 @@ describe("[I] cache/cache - canServeFromCache", () => {
   });
 
   it("returns true when cache written & revision data equal & options compatible", () => {
-    const lCacheFolder = join(OUTPUTS_FOLDER, "serve-from-cache-compatible");
-
     expect(
       canServeFromCache(
-        { args: "src test tools", cache: lCacheFolder },
+        {
+          args: "src test tools",
+          cache: { folder: lOriginalCacheFolder, strategy: "metadata" },
+        },
         lMinimalCruiseResult,
         { SHA1: "dummy-sha", changes: [] }
       )

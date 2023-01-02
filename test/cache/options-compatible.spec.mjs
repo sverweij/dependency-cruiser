@@ -6,6 +6,7 @@ import {
   limitsAreCompatible,
   metricsAreCompatible,
   optionsAreCompatible,
+  cacheOptionIsCompatible,
 } from "../../src/cache/options-compatible.js";
 
 describe("[U] cache/options-compatible - filtersAreCompatible", () => {
@@ -125,33 +126,102 @@ describe("[U] cache/options-compatible - metricsAreCompatible", () => {
   });
 });
 
+describe("[U] cache/options-compatible - cacheOptionIsCompatible", () => {
+  it("returns true when both equal 'true'", () => {
+    expect(cacheOptionIsCompatible(true, true)).to.equal(true);
+  });
+  it("returns true when are objects & they're 100% equal", () => {
+    expect(
+      cacheOptionIsCompatible(
+        { folder: "x", strategy: "metadata" },
+        { folder: "x", strategy: "metadata" }
+      )
+    ).to.equal(true);
+  });
+  it("returns false when are objects & the folders differ", () => {
+    expect(
+      cacheOptionIsCompatible(
+        { folder: "x", strategy: "metadata" },
+        { folder: "not-x", strategy: "metadata" }
+      )
+    ).to.equal(false);
+  });
+  it("returns false when both cache options are objects & the strategies differ", () => {
+    expect(
+      cacheOptionIsCompatible(
+        { folder: "x", strategy: "metadata" },
+        { folder: "x", strategy: "content" }
+      )
+    ).to.equal(false);
+  });
+  it("returns false when one cache option is an object and the other one isn't", () => {
+    expect(
+      cacheOptionIsCompatible(true, { folder: "x", strategy: "metadata" })
+    ).to.equal(false);
+    expect(
+      cacheOptionIsCompatible("x", { folder: "x", strategy: "metadata" })
+    ).to.equal(false);
+  });
+});
+
 describe("[U] cache/options-compatible - optionsAreCompatible", () => {
-  it("options are compatible when there's none in either", () => {
-    expect(optionsAreCompatible({}, {})).to.equal(true);
+  it("options are not compatible when there's none in either", () => {
+    expect(optionsAreCompatible({}, {})).to.equal(false);
+  });
+  it("options are compatible when there's none in either (except a cache option)", () => {
+    expect(optionsAreCompatible({ cache: true }, { cache: true })).to.equal(
+      true
+    );
   });
   it("options are compatible when args are exactly equal", () => {
     expect(
-      optionsAreCompatible({ args: "aap noot mies" }, { args: "aap noot mies" })
+      optionsAreCompatible(
+        { args: "aap noot mies", cache: true },
+        { args: "aap noot mies", cache: true }
+      )
     ).to.equal(true);
   });
   it("options are not compatible when args are not exactly equal", () => {
     expect(
-      optionsAreCompatible({ args: "aap noot mies" }, { args: "aap noot" })
+      optionsAreCompatible(
+        { args: "aap noot mies", cache: true },
+        { args: "aap noot", cache: true }
+      )
     ).to.equal(false);
   });
   it("options are compatible when also rulesFiles are exactly equal", () => {
     expect(
       optionsAreCompatible(
-        { args: "aap", rulesFile: "thing.js", tsPreCompilationDeps: false },
-        { args: "aap", rulesFile: "thing.js", tsPreCompilationDeps: false }
+        {
+          args: "aap",
+          rulesFile: "thing.js",
+          tsPreCompilationDeps: false,
+          cache: true,
+        },
+        {
+          args: "aap",
+          rulesFile: "thing.js",
+          tsPreCompilationDeps: false,
+          cache: true,
+        }
       )
     ).to.equal(true);
   });
   it("options are not compatible when also tsPreCompilationDeps are not exactly equal", () => {
     expect(
       optionsAreCompatible(
-        { args: "aap", rulesFile: "thing.js", tsPreCompilationDeps: false },
-        { args: "aap", rulesFile: "thing.js", tsPreCompilationDeps: true }
+        {
+          args: "aap",
+          rulesFile: "thing.js",
+          tsPreCompilationDeps: false,
+          cache: true,
+        },
+        {
+          args: "aap",
+          rulesFile: "thing.js",
+          tsPreCompilationDeps: true,
+          cache: true,
+        }
       )
     ).to.equal(false);
   });
@@ -164,12 +234,14 @@ describe("[U] cache/options-compatible - optionsAreCompatible", () => {
           rulesFile: "thing.js",
           tsPreCompilationDeps: false,
           includeOnly: "mies",
+          cache: true,
         },
         {
           args: "aap",
           rulesFile: "thing.js",
           tsPreCompilationDeps: false,
           includeOnly: { path: "mies" },
+          cache: true,
         }
       )
     ).to.equal(true);
@@ -178,8 +250,8 @@ describe("[U] cache/options-compatible - optionsAreCompatible", () => {
   it("options are not compatible when also collapse filters are not compatible equal", () => {
     expect(
       optionsAreCompatible(
-        { args: "aap", rulesFile: "thing.js", collapse: "zus" },
-        { args: "aap", rulesFile: "thing.js", collapse: "jet" }
+        { args: "aap", rulesFile: "thing.js", collapse: "zus", cache: true },
+        { args: "aap", rulesFile: "thing.js", collapse: "jet", cache: true }
       )
     ).to.equal(false);
   });
@@ -191,12 +263,14 @@ describe("[U] cache/options-compatible - optionsAreCompatible", () => {
           args: "aap",
           rulesFile: "thing.js",
           tsPreCompilationDeps: false,
+          cache: true,
         },
         {
           args: "aap",
           rulesFile: "thing.js",
           tsPreCompilationDeps: false,
           collapse: "jet",
+          cache: true,
         }
       )
     ).to.equal(true);
