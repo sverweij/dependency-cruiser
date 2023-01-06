@@ -29,8 +29,11 @@ function populate(pInitOptions) {
         ),
   };
   if (lReturnValue.specifyResolutionExtensions) {
+    const lFoldersToScan = lReturnValue.sourceLocation.concat(
+      lReturnValue.testLocation
+    );
     lReturnValue.resolutionExtensions = findExtensions(
-      lReturnValue.sourceLocation.concat(lReturnValue.testLocation)
+      lFoldersToScan.length > 0 ? lFoldersToScan : ["."]
     );
   }
   return lReturnValue;

@@ -5,7 +5,7 @@
 **tmp**
 *.bak
 
-# ide garbage
+# ide settings
 .project
 .settings/*
 .vscode
@@ -17,17 +17,17 @@ coverage
 jsdoc
 dependency-violations.html
 .cache
+isolate-*-v8.log
 *.cpuprofile
 *.heapprofile
 
 # node and npm
 /node_modules/
-isolate-*-v8.log
 npm-debug.log
 package-lock.json
 dependency-cruiser-*.tgz
 
-# we're not actively on yarn but occasionally test stuff - shouldn't get committed accidentally
+# yarn - we don't use it but occasionally test stuff - shouldn't get committed accidentally
 .pnp*
 .yarn/
 .yarnrc.yml

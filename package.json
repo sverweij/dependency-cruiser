@@ -155,6 +155,7 @@
     "get-stream": "^6.0.1",
     "glob": "7.2.0",
     "handlebars": "4.7.7",
+    "ignore": "5.2.4",
     "indent-string": "^4.0.0",
     "interpret": "^3.1.0",
     "is-installed-globally": "0.4.0",
