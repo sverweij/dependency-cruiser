@@ -15,7 +15,6 @@ describe("[U] cli/init-config/find-extensions", () => {
   it("returns an empty array of extension when passed a directory with files that have no extensions", () => {
     const lFound = findExtensions(["no-extensions"], {
       baseDir: "test/cli/init-config/__mocks__/extensions",
-      ignorablePathElements: [],
       scannableExtensions: [".js", ".mjs", ".cjs", ".jsx"],
     });
 
@@ -25,7 +24,6 @@ describe("[U] cli/init-config/find-extensions", () => {
   it("filters scannable extensions from all extensions", () => {
     const lFound = findExtensions(["both-js-and-ts-extensions"], {
       baseDir: "test/cli/init-config/__mocks__/extensions",
-      ignorablePathElements: [],
       scannableExtensions: [".js", ".mjs", ".cjs", ".jsx"],
     });
 
@@ -35,7 +33,6 @@ describe("[U] cli/init-config/find-extensions", () => {
   it("sorts by the number of times the extension occurs", () => {
     const lFound = findExtensions(["both-js-and-ts-extensions"], {
       baseDir: "test/cli/init-config/__mocks__/extensions",
-      ignorablePathElements: [],
       scannableExtensions: [
         ".js",
         ".mjs",
@@ -57,7 +54,8 @@ describe("[U] cli/init-config/find-extensions", () => {
   it("ignores path elements that aren't worth scanning", () => {
     const lFound = findExtensions(["both-js-and-ts-extensions"], {
       baseDir: "test/cli/init-config/__mocks__/extensions",
-      ignorablePathElements: ["only-javascript"],
+      ignoreFileContents:
+        "# ignore everything in the javascript only folder\nonly-javascript/",
       scannableExtensions: [
         ".js",
         ".mjs",
