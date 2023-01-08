@@ -116,7 +116,7 @@ function runCruise(pFileDirectoryArray, pCruiseOptions) {
     }
   );
 
-  bus.emit("progress", "cli: writing results");
+  bus.emit("progress", "cli: writing results", { complete: 1 });
   bus.emit("write-start");
   io.write(lCruiseOptions.outputTo, lReportingResult.output);
 

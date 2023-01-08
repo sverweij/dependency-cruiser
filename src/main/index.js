@@ -45,7 +45,7 @@ function format(pResult, pFormatOptions = {}) {
   return reportWrap(pResult, lFormatOptions);
 }
 
-const TOTAL_STEPS = 8;
+const TOTAL_STEPS = 9;
 
 function c(pComplete, pTotal = TOTAL_STEPS) {
   return { complete: pComplete / pTotal };
@@ -72,7 +72,7 @@ function futureCruise(
     const lCachedResults = readCache(lCruiseOptions.cache.folder);
 
     if (canServeFromCache(lCruiseOptions, lCachedResults)) {
-      bus.emit("progress", "cache: reporting from cache", c(3));
+      bus.emit("progress", "cache: reporting from cache", c(8));
       return reportWrap(lCachedResults, lCruiseOptions);
     }
   }
@@ -111,11 +111,12 @@ function futureCruise(
   );
 
   if (lCruiseOptions.cache) {
+    bus.emit("progress", "cache: saving", c(7));
     writeCache(lCruiseOptions.cache.folder, lCruiseResult);
     clearCache();
   }
 
-  bus.emit("progress", "reporting", c(7));
+  bus.emit("progress", "reporting", c(8));
   return reportWrap(lCruiseResult, lCruiseOptions);
 }
 
