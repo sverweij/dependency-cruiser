@@ -1581,8 +1581,9 @@ The long form:
       // folder where dependency-cruiser will put its cache files
       folder: "node_modules/.cache/dependency-cruiser",
       // cache strategy to use - either 'metadata' (which uses git in the
-      // background) or 'content' (which will look at file content (hashes), but
-      // which is not operational yet)
+      // background) or 'content' (which will look at file content (hashes),
+      // is slower than 'metadata' and is a bleeding edge feature as of
+      // version 12.5.0)
       strategy: "metadata"
     }
     // ...
