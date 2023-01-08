@@ -6,7 +6,7 @@ const { isDeepStrictEqual } = require("util");
   -i, --info                  
   -V, --version               
   -h, --help         
-  -T, --output-type <type>    unless counting implicit shizzle like dependendents, metrics calculation
+  -T, --output-type <type>    unless counting implicit shizzle like dependents, metrics calculation
   -f, --output-to <file>      
   -p, --progress [type]       
   -P, --prefix <prefix>       
@@ -123,9 +123,9 @@ function optionsAreCompatible(pOldOptions, pNewOptions) {
 
 module.exports = {
   optionsAreCompatible,
-  filtersAreCompatible: optionIsCompatible,
-  limitsAreCompatible: limitIsCompatible,
-  metricsAreCompatible: metricsIsCompatible,
-  includeOnlyFiltersAreCompatible: includeOnlyIsCompatible,
+  optionIsCompatible,
+  limitIsCompatible,
+  metricsIsCompatible,
+  includeOnlyIsCompatible,
   cacheOptionIsCompatible,
 };

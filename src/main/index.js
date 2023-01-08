@@ -6,12 +6,7 @@ const enrich = require("../enrich");
 const cruiseResultSchema = require("../schema/cruise-result.schema.js");
 const meta = require("../extract/transpile/meta");
 const bus = require("../utl/bus");
-const {
-  canServeFromCache,
-  readCache,
-  writeCache,
-  clearCache,
-} = require("../cache/cache");
+const Cache = require("../cache/cache");
 const normalizeFilesAndDirectories = require("./files-and-dirs/normalize");
 const validateRuleSet = require("./rule-set/validate");
 const normalizeRuleSet = require("./rule-set/normalize");
@@ -65,13 +60,19 @@ function futureCruise(
     validateCruiseOptions(pCruiseOptions),
     pFileAndDirectoryArray
   );
+  let lCache = null;
 
   if (lCruiseOptions.cache) {
-    bus.emit("progress", "cache: checking freshness", c(2));
+    bus.emit(
+      "progress",
+      `cache: check freshness with ${lCruiseOptions.cache.strategy}`,
+      c(2)
+    );
 
-    const lCachedResults = readCache(lCruiseOptions.cache.folder);
+    lCache = new Cache(lCruiseOptions.cache.strategy);
+    const lCachedResults = lCache.read(lCruiseOptions.cache.folder);
 
-    if (canServeFromCache(lCruiseOptions, lCachedResults)) {
+    if (lCache.canServeFromCache(lCruiseOptions, lCachedResults)) {
       bus.emit("progress", "cache: reporting from cache", c(8));
       return reportWrap(lCachedResults, lCruiseOptions);
     }
@@ -111,9 +112,8 @@ function futureCruise(
   );
 
   if (lCruiseOptions.cache) {
-    bus.emit("progress", "cache: saving", c(7));
-    writeCache(lCruiseOptions.cache.folder, lCruiseResult);
-    clearCache();
+    bus.emit("progress", "cache: save", c(7));
+    lCache.write(lCruiseOptions.cache.folder, lCruiseResult);
   }
 
   bus.emit("progress", "reporting", c(8));
