@@ -335,6 +335,15 @@ export default {
               type: "string",
               enum: ["cli-feedback", "performance-log", "none"],
             },
+            maximumLevel: {
+              description:
+                "The maximum log level to emit messages at. Ranges from OFF (-1, don't " +
+                "show any messages), via SUMMARY (40), INFO (50), DEBUG (60) all the " +
+                "way to show ALL messages (99).",
+              type: "number",
+              // eslint-disable-next-line no-magic-numbers
+              enum: [-1, 40, 50, 60, 70, 80, 99],
+            },
           },
         },
         metrics: {
