@@ -1,6 +1,7 @@
 const { extname } = require("path");
+const { isDeepStrictEqual } = require("util");
 const { getSHASync, listSync } = require("watskeburt");
-const { objectsAreEqual, getFileHash } = require("./utl");
+const { getFileHash } = require("./utl");
 
 // skipping: "pairing broken", "unmodified", "unmerged", "type changed"
 const DEFAULT_INTERESTING_CHANGE_TYPES = new Set([
@@ -95,7 +96,7 @@ function revisionDataEqual(pExistingRevisionData, pNewRevisionData) {
     Boolean(pExistingRevisionData) &&
     Boolean(pNewRevisionData) &&
     pExistingRevisionData.SHA1 === pNewRevisionData.SHA1 &&
-    objectsAreEqual(pExistingRevisionData.changes, pNewRevisionData.changes)
+    isDeepStrictEqual(pExistingRevisionData.changes, pNewRevisionData.changes)
   );
 }
 

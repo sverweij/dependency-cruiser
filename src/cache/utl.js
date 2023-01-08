@@ -1,20 +1,5 @@
-const { deepStrictEqual } = require("assert");
 const { createHash } = require("crypto");
 const { readFileSync } = require("fs");
-/**
- *
- * @param {any} pLeftObject
- * @param {any} pRightObject
- * @returns {boolean}
- */
-function objectsAreEqual(pLeftObject, pRightObject) {
-  try {
-    deepStrictEqual(pLeftObject, pRightObject);
-    return true;
-  } catch (pError) {
-    return false;
-  }
-}
 
 /**
  * @param {string} pString
@@ -36,4 +21,4 @@ function getFileHash(pFileName) {
   }
 }
 
-module.exports = { objectsAreEqual, getFileHash };
+module.exports = { getFileHash };
