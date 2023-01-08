@@ -1,4 +1,4 @@
-const { objectsAreEqual } = require("./utl");
+const { isDeepStrictEqual } = require("util");
 
 /*
 # command line options
@@ -55,11 +55,11 @@ const { objectsAreEqual } = require("./utl");
 
 function includeOnlyIsCompatible(pExistingFilter, pNewFilter) {
   return (
-    !pExistingFilter || objectsAreEqual({ path: pExistingFilter }, pNewFilter)
+    !pExistingFilter || isDeepStrictEqual({ path: pExistingFilter }, pNewFilter)
   );
 }
 function optionIsCompatible(pExistingOption, pNewOption) {
-  return !pExistingOption || objectsAreEqual(pExistingOption, pNewOption);
+  return !pExistingOption || isDeepStrictEqual(pExistingOption, pNewOption);
 }
 
 function limitIsCompatible(pExistingLimit, pNewLimit) {
@@ -76,7 +76,7 @@ function cacheOptionIsCompatible(pExistingCacheOption, pNewCacheOption) {
   }
   return (
     pExistingCacheOption === pNewCacheOption ||
-    objectsAreEqual(pExistingCacheOption, pNewCacheOption)
+    isDeepStrictEqual(pExistingCacheOption, pNewCacheOption)
   );
 }
 

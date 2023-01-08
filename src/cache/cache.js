@@ -28,7 +28,6 @@ function writeCache(pCacheFolder, pCruiseResult, pRevisionData) {
     ),
     "utf8"
   );
-  gRevisionData = null;
 }
 
 /**
