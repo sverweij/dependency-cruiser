@@ -12,6 +12,7 @@ const extractTSConfig = require("../config-utl/extract-ts-config");
 const extractBabelConfig = require("../config-utl/extract-babel-config");
 const extractWebpackResolveConfig = require("../config-utl/extract-webpack-resolve-config");
 const extractKnownViolations = require("../config-utl/extract-known-violations");
+const { INFO } = require("../utl/bus-log-levels");
 const validateFileExistence = require("./utl/validate-file-existence");
 const normalizeCliOptions = require("./normalize-cli-options");
 const io = require("./utl/io");
@@ -83,9 +84,12 @@ function setUpListener(pCruiseOptions) {
     pCruiseOptions?.ruleSet?.options?.progress?.type;
   // eslint-disable-next-line security/detect-object-injection
   const lListenerFunction = lString2Listener?.[lListenerID];
-  /* c8 ignore next 3 */
+  /* c8 ignore next 6 */
   if (Boolean(lListenerFunction)) {
-    lListenerFunction(bus);
+    lListenerFunction(
+      bus,
+      pCruiseOptions?.ruleSet?.options?.progress?.maximumLevel ?? INFO
+    );
   }
 }
 

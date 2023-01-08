@@ -492,7 +492,7 @@
         ]
       }
     },
-    "progress": { "type": "performance-log" },
+    "progress": { "type": "performance-log", "maximumLevel": 50 },
     "cache": true
   }
 }

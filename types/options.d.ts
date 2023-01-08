@@ -248,6 +248,12 @@ export interface ICruiseOptions {
      * of each major step to stderr.
      */
     type: ProgressType;
+    /**
+     * The maximum log level to emit messages at. Ranges from OFF (-1, don't " +
+     * show any messages), via SUMMARY (40), INFO (50), DEBUG (60) all the " +
+     * way to show ALL messages (99)."
+     */
+    maximumLevel?: -1 | 40 | 50 | 60 | 70 | 80 | 99;
   };
   /**
    * When this flag is set to true, dependency-cruiser will calculate (stability) metrics
