@@ -6,7 +6,7 @@ import { IRuleSummary } from "./rule-summary";
 import { IChange } from "watskeburt";
 
 export interface IRevisionChange extends IChange {
-  checksum: string;
+  checkSum: string;
 }
 
 /**

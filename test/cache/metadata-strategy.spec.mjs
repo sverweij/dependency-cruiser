@@ -2,7 +2,7 @@ import { expect } from "chai";
 import {
   getRevisionData,
   revisionDataEqual,
-} from "../../src/cache/git-revision-data.js";
+} from "../../src/cache/metadata-strategy.js";
 
 const INTERESTING_EXTENSIONS = new Set([".aap", ".noot", ".mies"]);
 const INTERESTING_CHANGE_TYPES = new Set([
@@ -18,13 +18,15 @@ const INTERESTING_CHANGE_TYPES = new Set([
 const DUMMY_SHA = "01234567890abcdef01234567890abcdef012345";
 const dummyCheckSumFunction = (pChange) => ({
   ...pChange,
-  checksum: "dummy-checksum",
+  checkSum: "dummy-checkSum",
 });
 
-describe("[U] cache/revision-data - getRevisionData", () => {
+describe("[U] cache/metadata-strategy - getRevisionData", () => {
   it("if the current folder isn't under version control, the function throws", () => {
     expect(() => {
-      getRevisionData(INTERESTING_EXTENSIONS, INTERESTING_CHANGE_TYPES, {
+      getRevisionData(null, null, null, {
+        extensions: INTERESTING_EXTENSIONS,
+        interestingChangeTypes: INTERESTING_CHANGE_TYPES,
         shaRetrievalFn: () => DUMMY_SHA,
         diffListFn: () => {
           throw new Error(
@@ -49,13 +51,15 @@ describe("[U] cache/revision-data - getRevisionData", () => {
         {
           changeType: "modified",
           name: "file-does-not-exist.aap",
-          checksum: "file not found",
+          checkSum: "file not found",
         },
       ],
     };
 
     expect(
-      getRevisionData(INTERESTING_EXTENSIONS, INTERESTING_CHANGE_TYPES, {
+      getRevisionData(null, null, null, {
+        extensions: INTERESTING_EXTENSIONS,
+        interestingChangeTypes: INTERESTING_CHANGE_TYPES,
         shaRetrievalFn: () => DUMMY_SHA,
         diffListFn: () => lInputChanges,
       })
@@ -76,13 +80,15 @@ describe("[U] cache/revision-data - getRevisionData", () => {
         {
           changeType: "modified",
           name: "test/cache/__mocks__/calculate-shasum-of-this.aap",
-          checksum: "2jmj7l5rSw0yVb/vlWAYkK/YBwk=",
+          checkSum: "2jmj7l5rSw0yVb/vlWAYkK/YBwk=",
         },
       ],
     };
 
     expect(
-      getRevisionData(INTERESTING_EXTENSIONS, INTERESTING_CHANGE_TYPES, {
+      getRevisionData(null, null, null, {
+        extensions: INTERESTING_EXTENSIONS,
+        interestingChangeTypes: INTERESTING_CHANGE_TYPES,
         shaRetrievalFn: () => DUMMY_SHA,
         diffListFn: () => lInputChanges,
       })
@@ -91,7 +97,9 @@ describe("[U] cache/revision-data - getRevisionData", () => {
 
   it("if there's no changes the change set contains the passed sha & an empty array", () => {
     expect(
-      getRevisionData(INTERESTING_EXTENSIONS, INTERESTING_CHANGE_TYPES, {
+      getRevisionData(null, null, null, {
+        extensions: INTERESTING_EXTENSIONS,
+        interestingChangeTypes: INTERESTING_CHANGE_TYPES,
         shaRetrievalFn: () => DUMMY_SHA,
         diffListFn: () => [],
       })
@@ -129,7 +137,9 @@ describe("[U] cache/revision-data - getRevisionData", () => {
     ];
 
     expect(
-      getRevisionData(lLimitedExtensions, INTERESTING_CHANGE_TYPES, {
+      getRevisionData(null, null, null, {
+        extensions: lLimitedExtensions,
+        interestingChangeTypes: INTERESTING_CHANGE_TYPES,
         shaRetrievalFn: () => DUMMY_SHA,
         diffListFn: () => lInputChanges,
         checkSumFn: dummyCheckSumFunction,
@@ -140,13 +150,13 @@ describe("[U] cache/revision-data - getRevisionData", () => {
         {
           changeType: "added",
           name: "noot-extension-hence-returned.noot",
-          checksum: "dummy-checksum",
+          checkSum: "dummy-checkSum",
         },
         {
           changeType: "renamed",
           name: "old-name-has-extension-wim-hence-returned.mies",
           oldName: "wim-extension-hence-returned.wim",
-          checksum: "dummy-checksum",
+          checkSum: "dummy-checkSum",
         },
       ],
     });
@@ -184,7 +194,9 @@ describe("[U] cache/revision-data - getRevisionData", () => {
     ];
 
     expect(
-      getRevisionData(INTERESTING_EXTENSIONS, lLimitedChangeTypes, {
+      getRevisionData(null, null, null, {
+        extensions: INTERESTING_EXTENSIONS,
+        interestingChangeTypes: lLimitedChangeTypes,
         shaRetrievalFn: () => DUMMY_SHA,
         diffListFn: () => lInputChanges,
         checkSumFn: dummyCheckSumFunction,
@@ -195,41 +207,41 @@ describe("[U] cache/revision-data - getRevisionData", () => {
         {
           changeType: "added",
           name: "added-hence-returned.aap",
-          checksum: "dummy-checksum",
+          checkSum: "dummy-checkSum",
         },
         {
           changeType: "added",
           name: "added-hence-returned.noot",
-          checksum: "dummy-checksum",
+          checkSum: "dummy-checkSum",
         },
         {
           changeType: "renamed",
           name: "renamed-hence-returned.mies",
           oldName: "old-name.wim",
-          checksum: "dummy-checksum",
+          checkSum: "dummy-checkSum",
         },
       ],
     });
   });
 });
 
-describe("[U] cache/revision-data - revisionDataEqual", () => {
+describe("[U] cache/metadata-strategy - revisionDataEqual", () => {
   const lChanges = [
     {
       changeType: "added",
       name: "added-hence-returned.aap",
-      checksum: "dummy-checksum",
+      checkSum: "dummy-checkSum",
     },
     {
       changeType: "added",
       name: "added-hence-returned.noot",
-      checksum: "dummy-checksum",
+      checkSum: "dummy-checkSum",
     },
     {
       changeType: "renamed",
       name: "renamed-hence-returned.mies",
       oldName: "old-name.wim",
-      checksum: "dummy-checksum",
+      checkSum: "dummy-checkSum",
     },
   ];
 

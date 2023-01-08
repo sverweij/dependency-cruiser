@@ -3,7 +3,7 @@ import { expect, use } from "chai";
 import chaiJSONSchema from "chai-json-schema";
 import cruiseResultSchema from "../../src/schema/cruise-result.schema.js";
 import { futureCruise } from "../../src/main/index.js";
-import { readCache } from "../../src/cache/cache.js";
+import Cache from "../../src/cache/cache.js";
 
 use(chaiJSONSchema);
 
@@ -27,7 +27,7 @@ describe("[E] main.cruise - cache", () => {
       { bustTheCache: true },
       {}
     );
-    const lCache = readCache(CACHE_FOLDER);
+    const lCache = new Cache().read(CACHE_FOLDER);
     Reflect.deleteProperty(lCache, "revisionData");
 
     expect(lResult.output).to.deep.equal(lCache);
@@ -43,7 +43,7 @@ describe("[E] main.cruise - cache", () => {
       { bustTheCache: true },
       {}
     );
-    const lCache = readCache(CACHE_FOLDER);
+    const lCache = new Cache().read(CACHE_FOLDER);
     Reflect.deleteProperty(lCache, "revisionData");
 
     expect(lResult.output).to.deep.equal(lCache);
@@ -70,7 +70,7 @@ describe("[E] main.cruise - cache", () => {
       { bustTheCache: true },
       {}
     );
-    const lOldCache = readCache(CACHE_FOLDER);
+    const lOldCache = new Cache().read(CACHE_FOLDER);
     Reflect.deleteProperty(lOldCache, "revisionData");
 
     expect(lResult.output).to.deep.equal(lOldCache);
@@ -83,7 +83,7 @@ describe("[E] main.cruise - cache", () => {
       { bustTheCache: true },
       {}
     );
-    const lNewCache = readCache(CACHE_FOLDER);
+    const lNewCache = new Cache().read(CACHE_FOLDER);
     Reflect.deleteProperty(lNewCache, "revisionData");
     expect(lNewCache).to.not.deep.equal(lOldCache);
     expect(lNewCache).to.deep.equal(lResultTwo.output);

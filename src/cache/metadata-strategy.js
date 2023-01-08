@@ -16,7 +16,6 @@ const DEFAULT_INTERESTING_CHANGE_TYPES = new Set([
 ]);
 
 /**
- *
  * @param {Set<string>} pExtensions
  * @returns {(pChange: import("watskeburt").IChange) => boolean}
  */
@@ -42,7 +41,7 @@ function isInterestingChangeType(pInterestingChangeTypes) {
 function addChecksum(pChange) {
   return {
     ...pChange,
-    checksum: getFileHash(pChange.name),
+    checkSum: getFileHash(pChange.name),
   };
 }
 
@@ -50,21 +49,26 @@ function addChecksum(pChange) {
  *
  * @param {Set<string>} pExtensions
  * @param {Set<import("watskeburt").changeTypeType>} pInterestingChangeTypes
+ * @param {import("../../types/strict-options").IStrictCruiseOptions} pCruiseOptions
  * @param {Object} pOptions
+ * @param {Set<string>} pOptions.extensions
+ * @param {Set<import("watskeburt").changeTypeType>} pOptions.interestingChangeTypes
  * @param {() => string} pOptions.shaRetrievalFn
  * @param {(pString:string) => Array<import("watskeburt").IChange>} pOptions.diffListFn
  * @param {(import("watskeburt").IChange) => import("../..").IRevisionChange} pOptions.checkSumFn
  * @returns {import("../../types/dependency-cruiser").IRevisionData}
  */
 function getRevisionData(
-  pExtensions,
-  pInterestingChangeTypes = DEFAULT_INTERESTING_CHANGE_TYPES,
+  pDirectory,
+  pCachedCruiseResult,
+  pCruiseOptions,
   pOptions
 ) {
   const lOptions = {
     shaRetrievalFn: getSHASync,
     diffListFn: listSync,
     checkSumFn: addChecksum,
+    interestingChangeTypes: DEFAULT_INTERESTING_CHANGE_TYPES,
     ...pOptions,
   };
   try {
@@ -73,8 +77,9 @@ function getRevisionData(
       SHA1: lSHA,
       changes: lOptions
         .diffListFn(lSHA)
-        .filter(hasInterestingExtension(pExtensions))
-        .filter(isInterestingChangeType(pInterestingChangeTypes))
+        // TODO: optimize - also apply filters for exclude and includeOnly (see content strategy)
+        .filter(hasInterestingExtension(lOptions.extensions))
+        .filter(isInterestingChangeType(lOptions.interestingChangeTypes))
         .map(lOptions.checkSumFn),
     };
   } catch (pError) {
@@ -100,7 +105,23 @@ function revisionDataEqual(pExistingRevisionData, pNewRevisionData) {
   );
 }
 
+/**
+ *
+ * @param {import("../..").ICruiseResult} pCruiseResult
+ * @param {*} pRevisionData
+ * @returns {import("../..").ICruiseResult}
+ */
+function prepareRevisionDataForSaving(pCruiseResult, pRevisionData) {
+  return pRevisionData
+    ? {
+        ...pCruiseResult,
+        revisionData: pRevisionData,
+      }
+    : pCruiseResult;
+}
+
 module.exports = {
   getRevisionData,
   revisionDataEqual,
+  prepareRevisionDataForSaving,
 };

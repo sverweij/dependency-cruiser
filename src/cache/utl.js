@@ -1,5 +1,6 @@
 const { createHash } = require("crypto");
 const { readFileSync } = require("fs");
+const memoize = require("lodash/memoize");
 
 /**
  * @param {string} pString
@@ -13,7 +14,7 @@ function hash(pString) {
  * @param {import("fs").PathOrFileDescriptor} pFileName
  * @returns {string}
  */
-function getFileHash(pFileName) {
+function _getFileHash(pFileName) {
   try {
     return hash(readFileSync(pFileName, "utf8"));
   } catch (pError) {
@@ -21,4 +22,4 @@ function getFileHash(pFileName) {
   }
 }
 
-module.exports = { getFileHash };
+module.exports = { getFileHash: memoize(_getFileHash) };

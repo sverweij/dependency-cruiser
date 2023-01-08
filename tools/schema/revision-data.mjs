@@ -36,7 +36,7 @@ export default {
               oldName: {
                 type: "string",
               },
-              checksum: {
+              checkSum: {
                 type: "string",
               },
               args: {
