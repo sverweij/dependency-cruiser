@@ -4,6 +4,10 @@ const ignore = require("ignore");
 const pathToPosix = require("./path-to-posix");
 
 /**
+ * @typedef {(pString:string, pIndex: number, pArray: string[]) => boolean} FilterFunctionType
+ */
+
+/**
  * @param {string} pFullPathToFile
  * @param {string} pBaseDirectory
  * @returns {boolean}
@@ -19,13 +23,18 @@ function fileIsDirectory(pFullPathToFile, pBaseDirectory) {
 
 /**
  * @param {string} pDirectoryName
- * @param {{baseDir: string; ignoreFilterFn: (pString:string, pIndex: number, pArray: string[]) => boolean)}} pOptions
+ * @param {{baseDir: string; ignoreFilterFn: FilterFunctionType; excludeFilterFn: FilterFunctionType; includeOnlyFilterFn: FilterFunctionType}} pOptions
  * @returns {string[]}
  */
-function walk(pDirectoryName, { baseDir, ignoreFilterFn }) {
+function walk(
+  pDirectoryName,
+  { baseDir, ignoreFilterFn, excludeFilterFn, includeOnlyFilterFn }
+) {
   return readdirSync(join(baseDir, pDirectoryName))
     .map((pFileName) => join(pDirectoryName, pFileName))
     .filter(ignoreFilterFn)
+    .filter(excludeFilterFn)
+    .filter(includeOnlyFilterFn)
     .map((pFullPathToFile) => ({
       fullPathToFile: pFullPathToFile,
       isDirectory: fileIsDirectory(pFullPathToFile, baseDir),
@@ -38,7 +47,14 @@ function walk(pDirectoryName, { baseDir, ignoreFilterFn }) {
        */
       (pSum, { fullPathToFile, isDirectory }) => {
         if (isDirectory) {
-          return pSum.concat(walk(fullPathToFile, { baseDir, ignoreFilterFn }));
+          return pSum.concat(
+            walk(fullPathToFile, {
+              baseDir,
+              ignoreFilterFn,
+              excludeFilterFn,
+              includeOnlyFilterFn,
+            })
+          );
         }
         return pSum.concat(fullPathToFile);
       },
@@ -56,13 +72,27 @@ function readIgnoreFile(pFileName) {
 }
 
 /**
+ * @type FilterFunctionType
+ */
+// eslint-disable-next-line no-unused-vars
+function identityFilter(_pString, _pIndex, _pArray) {
+  return true;
+}
+
+/**
  * @param {string} pDirectoryName
- * @param {{baseDir: string; ignoreFileContents?: string; additionalIgnorePatterns?: string[]}} pOptions
+ * @param {{baseDir: string; ignoreFileContents?: string; additionalIgnorePatterns?: string[]; excludeFilterFn: FilterFunctionType; includeOnlyFilterFn: FilterFunctionType}} pOptions
  * @returns {string[]}
  */
 module.exports = function findAllFiles(
   pDirectoryName,
-  { baseDir, ignoreFileContents, additionalIgnorePatterns }
+  {
+    baseDir,
+    ignoreFileContents,
+    additionalIgnorePatterns,
+    excludeFilterFn,
+    includeOnlyFilterFn,
+  }
 ) {
   const lIgnoreFileContents =
     ignoreFileContents ?? readIgnoreFile(join(baseDir, ".gitignore"));
@@ -75,5 +105,7 @@ module.exports = function findAllFiles(
   return walk(pDirectoryName, {
     baseDir,
     ignoreFilterFn: lIgnoreFilterFunction,
+    excludeFilterFn: excludeFilterFn ?? identityFilter,
+    includeOnlyFilterFn: includeOnlyFilterFn ?? identityFilter,
   });
 };

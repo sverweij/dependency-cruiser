@@ -2,73 +2,86 @@ const { readFileSync, mkdirSync, writeFileSync } = require("fs");
 const { join } = require("path");
 const meta = require("../extract/transpile/meta");
 const { optionsAreCompatible } = require("./options-compatible");
-const { getRevisionData, revisionDataEqual } = require("./git-revision-data");
+const metadataStrategy = require("./metadata-strategy");
+const contentStrategy = require("./content-strategy");
 
 const CACHE_FILE_NAME = "cache.json";
-let gRevisionData = null;
 
-/**
- * @param {string} pCacheFolder
- * @param {import("../..").ICruiseResult} pCruiseResult
- * @param {import("../..").IRevisionData=} pRevisionData
- */
-function writeCache(pCacheFolder, pCruiseResult, pRevisionData) {
-  const lRevisionData = pRevisionData ?? gRevisionData;
-
-  mkdirSync(pCacheFolder, { recursive: true });
-  writeFileSync(
-    join(pCacheFolder, CACHE_FILE_NAME),
-    JSON.stringify(
-      lRevisionData
-        ? {
-            ...pCruiseResult,
-            revisionData: lRevisionData,
-          }
-        : pCruiseResult
-    ),
-    "utf8"
-  );
-}
-
-/**
- * @param {string} pCacheFolder
- * @returns {import("../..").ICruiseResult}
- */
-function readCache(pCacheFolder) {
-  try {
-    return JSON.parse(
-      readFileSync(join(pCacheFolder, CACHE_FILE_NAME), "utf8")
-    );
-  } catch (pError) {
-    return { modules: [], summary: {} };
+module.exports = class Cache {
+  /**
+   * @param {import("../../types/cache-options").cacheStrategyType=} pCacheStrategy
+   */
+  constructor(pCacheStrategy) {
+    this.revisionData = null;
+    this.cacheStrategy =
+      pCacheStrategy === "content" ? contentStrategy : metadataStrategy;
   }
-}
 
-/**
- * @param {import("../../types/strict-options").IStrictCruiseOptions} pOptions
- * @param {import("../..").ICruiseResult} pCachedCruiseResult
- * @param {import("../..").IRevisionData=} pRevisionData
- * @returns {boolean}
- */
-function canServeFromCache(pOptions, pCachedCruiseResult, pRevisionData) {
-  gRevisionData =
-    pRevisionData ??
-    getRevisionData(
-      new Set(meta.scannableExtensions.concat(pOptions.extraExtensionsToScan))
+  /**
+   * @param {import("../../types/strict-options").IStrictCruiseOptions} pCruiseOptions
+   * @param {import("../..").ICruiseResult} pCachedCruiseResult
+   * @param {import("../..").IRevisionData=} pRevisionData
+   * @returns {boolean}
+   */
+  canServeFromCache(pCruiseOptions, pCachedCruiseResult, pRevisionData) {
+    this.revisionData =
+      pRevisionData ??
+      this.cacheStrategy.getRevisionData(
+        ".",
+        pCachedCruiseResult,
+        pCruiseOptions,
+        {
+          extensions: new Set(
+            meta.scannableExtensions.concat(
+              pCruiseOptions.extraExtensionsToScan
+            )
+          ),
+        }
+      );
+    return (
+      this.cacheStrategy.revisionDataEqual(
+        pCachedCruiseResult.revisionData,
+        this.revisionData
+      ) &&
+      optionsAreCompatible(
+        pCachedCruiseResult.summary.optionsUsed,
+        pCruiseOptions
+      )
     );
-  return (
-    revisionDataEqual(pCachedCruiseResult.revisionData, gRevisionData) &&
-    optionsAreCompatible(pCachedCruiseResult.summary.optionsUsed, pOptions)
-  );
-}
+  }
 
-function clearCache() {
-  gRevisionData = null;
-}
+  /**
+   * @param {string} pCacheFolder
+   * @returns {import("../..").ICruiseResult}
+   */
+  read(pCacheFolder) {
+    try {
+      return JSON.parse(
+        readFileSync(join(pCacheFolder, CACHE_FILE_NAME), "utf8")
+      );
+    } catch (pError) {
+      return { modules: [], summary: {} };
+    }
+  }
 
-module.exports = {
-  writeCache,
-  readCache,
-  canServeFromCache,
-  clearCache,
+  /**
+   * @param {string} pCacheFolder
+   * @param {import("../..").ICruiseResult} pCruiseResult
+   * @param {import("../..").IRevisionData=} pRevisionData
+   */
+  write(pCacheFolder, pCruiseResult, pRevisionData) {
+    const lRevisionData = pRevisionData ?? this.revisionData;
+
+    mkdirSync(pCacheFolder, { recursive: true });
+    writeFileSync(
+      join(pCacheFolder, CACHE_FILE_NAME),
+      JSON.stringify(
+        this.cacheStrategy.prepareRevisionDataForSaving(
+          pCruiseResult,
+          lRevisionData
+        )
+      ),
+      "utf8"
+    );
+  }
 };
