@@ -106,6 +106,11 @@ try {
       "(experimental) use a cache to speed up execution. " +
         "The directory defaults to node_modules/.cache/dependency-cruiser"
     )
+    .option(
+      "--cache-strategy <strategy>",
+      "(experimental) strategy to use for detecting changed files in the cache. " +
+        "Possible values: metadata (= use git, the default), content"
+    )
     .option("--preserve-symlinks", `leave symlinks unchanged (off by default)`)
     .option("-v, --validate [file]", `alias for --config`)
     .option(
