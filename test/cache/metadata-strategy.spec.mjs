@@ -1,8 +1,5 @@
 import { expect } from "chai";
-import {
-  getRevisionData,
-  revisionDataEqual,
-} from "../../src/cache/git-revision-data.js";
+import MetaDataStrategy from "../../src/cache/metadata-strategy.js";
 
 const INTERESTING_EXTENSIONS = new Set([".aap", ".noot", ".mies"]);
 const INTERESTING_CHANGE_TYPES = new Set([
@@ -21,17 +18,24 @@ const dummyCheckSumFunction = (pChange) => ({
   checksum: "dummy-checksum",
 });
 
-describe("[U] cache/revision-data - getRevisionData", () => {
+describe("[U] cache/metadata-strategy - getRevisionData", () => {
   it("if the current folder isn't under version control, the function throws", () => {
     expect(() => {
-      getRevisionData(INTERESTING_EXTENSIONS, INTERESTING_CHANGE_TYPES, {
-        shaRetrievalFn: () => DUMMY_SHA,
-        diffListFn: () => {
-          throw new Error(
-            "fatal: not a git repository (or any of the parent directories): .git"
-          );
-        },
-      });
+      new MetaDataStrategy().getRevisionData(
+        null,
+        null,
+        { exclude: {}, includeOnly: {} },
+        {
+          extensions: INTERESTING_EXTENSIONS,
+          interestingChangeTypes: INTERESTING_CHANGE_TYPES,
+          shaRetrievalFn: () => DUMMY_SHA,
+          diffListFn: () => {
+            throw new Error(
+              "fatal: not a git repository (or any of the parent directories): .git"
+            );
+          },
+        }
+      );
     }).to.throw(/The --cache option works in concert with git/);
   });
 
@@ -55,10 +59,17 @@ describe("[U] cache/revision-data - getRevisionData", () => {
     };
 
     expect(
-      getRevisionData(INTERESTING_EXTENSIONS, INTERESTING_CHANGE_TYPES, {
-        shaRetrievalFn: () => DUMMY_SHA,
-        diffListFn: () => lInputChanges,
-      })
+      new MetaDataStrategy().getRevisionData(
+        null,
+        null,
+        { exclude: {}, includeOnly: {} },
+        {
+          extensions: INTERESTING_EXTENSIONS,
+          interestingChangeTypes: INTERESTING_CHANGE_TYPES,
+          shaRetrievalFn: () => DUMMY_SHA,
+          diffListFn: () => lInputChanges,
+        }
+      )
     ).to.deep.equal(lExpected);
   });
 
@@ -82,19 +93,33 @@ describe("[U] cache/revision-data - getRevisionData", () => {
     };
 
     expect(
-      getRevisionData(INTERESTING_EXTENSIONS, INTERESTING_CHANGE_TYPES, {
-        shaRetrievalFn: () => DUMMY_SHA,
-        diffListFn: () => lInputChanges,
-      })
+      new MetaDataStrategy().getRevisionData(
+        null,
+        null,
+        { exclude: {}, includeOnly: {} },
+        {
+          extensions: INTERESTING_EXTENSIONS,
+          interestingChangeTypes: INTERESTING_CHANGE_TYPES,
+          shaRetrievalFn: () => DUMMY_SHA,
+          diffListFn: () => lInputChanges,
+        }
+      )
     ).to.deep.equal(lExpected);
   });
 
   it("if there's no changes the change set contains the passed sha & an empty array", () => {
     expect(
-      getRevisionData(INTERESTING_EXTENSIONS, INTERESTING_CHANGE_TYPES, {
-        shaRetrievalFn: () => DUMMY_SHA,
-        diffListFn: () => [],
-      })
+      new MetaDataStrategy().getRevisionData(
+        null,
+        null,
+        { exclude: {}, includeOnly: {} },
+        {
+          extensions: INTERESTING_EXTENSIONS,
+          interestingChangeTypes: INTERESTING_CHANGE_TYPES,
+          shaRetrievalFn: () => DUMMY_SHA,
+          diffListFn: () => [],
+        }
+      )
     ).to.deep.equal({
       SHA1: DUMMY_SHA,
       changes: [],
@@ -129,11 +154,18 @@ describe("[U] cache/revision-data - getRevisionData", () => {
     ];
 
     expect(
-      getRevisionData(lLimitedExtensions, INTERESTING_CHANGE_TYPES, {
-        shaRetrievalFn: () => DUMMY_SHA,
-        diffListFn: () => lInputChanges,
-        checkSumFn: dummyCheckSumFunction,
-      })
+      new MetaDataStrategy().getRevisionData(
+        null,
+        null,
+        { exclude: {}, includeOnly: {} },
+        {
+          extensions: lLimitedExtensions,
+          interestingChangeTypes: INTERESTING_CHANGE_TYPES,
+          shaRetrievalFn: () => DUMMY_SHA,
+          diffListFn: () => lInputChanges,
+          checksumFn: dummyCheckSumFunction,
+        }
+      )
     ).to.deep.equal({
       SHA1: DUMMY_SHA,
       changes: [
@@ -184,11 +216,18 @@ describe("[U] cache/revision-data - getRevisionData", () => {
     ];
 
     expect(
-      getRevisionData(INTERESTING_EXTENSIONS, lLimitedChangeTypes, {
-        shaRetrievalFn: () => DUMMY_SHA,
-        diffListFn: () => lInputChanges,
-        checkSumFn: dummyCheckSumFunction,
-      })
+      new MetaDataStrategy().getRevisionData(
+        null,
+        null,
+        { exclude: {}, includeOnly: {} },
+        {
+          extensions: INTERESTING_EXTENSIONS,
+          interestingChangeTypes: lLimitedChangeTypes,
+          shaRetrievalFn: () => DUMMY_SHA,
+          diffListFn: () => lInputChanges,
+          checksumFn: dummyCheckSumFunction,
+        }
+      )
     ).to.deep.equal({
       SHA1: DUMMY_SHA,
       changes: [
@@ -211,9 +250,115 @@ describe("[U] cache/revision-data - getRevisionData", () => {
       ],
     });
   });
+
+  it("by default only returns a subset of change types", () => {
+    /** @type {import('watskeburt').IChange[]} */
+    const lInputChanges = [
+      {
+        changeType: "added",
+        name: "added-hence-returned.aap",
+      },
+      {
+        changeType: "copied",
+        name: "copied-hence-returned.noot",
+      },
+      {
+        changeType: "deleted",
+        name: "deleted-hence-returned.aap",
+      },
+      {
+        changeType: "modified",
+        name: "modified-hence-returned.mies",
+        oldName: "old-name.wim",
+      },
+      {
+        changeType: "renamed",
+        name: "renamed-hence-returned.aap",
+      },
+      {
+        changeType: "unmerged",
+        name: "unmerged-hence-returned.aap",
+      },
+      {
+        changeType: "untracked",
+        name: "untracked-hence-returned.aap",
+      },
+      {
+        changeType: "pairing broken",
+        name: "pairing-broken-hence-ignored.aap",
+      },
+      {
+        changeType: "unmodified",
+        name: "unmodified-hence-ignored.aap",
+      },
+      {
+        changeType: "type changed",
+        name: "type-changed-hence-ignored.aap",
+      },
+      {
+        changeType: "ignored",
+        name: "ignored-hence-ignored.aap",
+      },
+    ];
+
+    expect(
+      new MetaDataStrategy().getRevisionData(
+        null,
+        null,
+        { exclude: {}, includeOnly: {} },
+        {
+          extensions: INTERESTING_EXTENSIONS,
+          // interestingChangeTypes NOT specified here
+          shaRetrievalFn: () => DUMMY_SHA,
+          diffListFn: () => lInputChanges,
+          checksumFn: dummyCheckSumFunction,
+        }
+      )
+    ).to.deep.equal({
+      SHA1: DUMMY_SHA,
+      changes: [
+        {
+          changeType: "added",
+          name: "added-hence-returned.aap",
+          checksum: "dummy-checksum",
+        },
+        {
+          changeType: "copied",
+          name: "copied-hence-returned.noot",
+          checksum: "dummy-checksum",
+        },
+        {
+          changeType: "deleted",
+          name: "deleted-hence-returned.aap",
+          checksum: "dummy-checksum",
+        },
+        {
+          changeType: "modified",
+          name: "modified-hence-returned.mies",
+          oldName: "old-name.wim",
+          checksum: "dummy-checksum",
+        },
+        {
+          changeType: "renamed",
+          name: "renamed-hence-returned.aap",
+          checksum: "dummy-checksum",
+        },
+        {
+          changeType: "unmerged",
+          name: "unmerged-hence-returned.aap",
+          checksum: "dummy-checksum",
+        },
+        {
+          changeType: "untracked",
+          name: "untracked-hence-returned.aap",
+          checksum: "dummy-checksum",
+        },
+      ],
+    });
+  });
 });
 
-describe("[U] cache/revision-data - revisionDataEqual", () => {
+describe("[U] cache/metadata-strategy - revisionDataEqual", () => {
   const lChanges = [
     {
       changeType: "added",
@@ -234,24 +379,32 @@ describe("[U] cache/revision-data - revisionDataEqual", () => {
   ];
 
   it("returns false when revision data objects are don't exist", () => {
-    expect(revisionDataEqual(null, null)).to.equal(false);
+    expect(new MetaDataStrategy().revisionDataEqual(null, null)).to.equal(
+      false
+    );
   });
 
   it("returns false when old revision data object doesn't exist", () => {
-    expect(revisionDataEqual(null, { SHA1: "some-sha", changes: [] })).to.equal(
-      false
-    );
+    expect(
+      new MetaDataStrategy().revisionDataEqual(null, {
+        SHA1: "some-sha",
+        changes: [],
+      })
+    ).to.equal(false);
   });
 
   it("returns false when new revision data object doesn't exist", () => {
-    expect(revisionDataEqual({ SHA1: "some-sha", changes: [] }, null)).to.equal(
-      false
-    );
+    expect(
+      new MetaDataStrategy().revisionDataEqual(
+        { SHA1: "some-sha", changes: [] },
+        null
+      )
+    ).to.equal(false);
   });
 
   it("returns false when sha-sums aren't equal", () => {
     expect(
-      revisionDataEqual(
+      new MetaDataStrategy().revisionDataEqual(
         { SHA1: "some-sha", changes: [] },
         { SHA1: "some-other-sha", changes: [] }
       )
@@ -260,7 +413,7 @@ describe("[U] cache/revision-data - revisionDataEqual", () => {
 
   it("returns false when sha-sums are equal, but changes are not", () => {
     expect(
-      revisionDataEqual(
+      new MetaDataStrategy().revisionDataEqual(
         { SHA1: "some-sha", changes: [] },
         { SHA1: "some-sha", changes: lChanges }
       )
@@ -269,7 +422,7 @@ describe("[U] cache/revision-data - revisionDataEqual", () => {
 
   it("returns true when sha-sums are equal, and changes are as well", () => {
     expect(
-      revisionDataEqual(
+      new MetaDataStrategy().revisionDataEqual(
         { SHA1: "some-sha", changes: lChanges },
         { SHA1: "some-sha", changes: lChanges }
       )
@@ -278,7 +431,7 @@ describe("[U] cache/revision-data - revisionDataEqual", () => {
 
   it("returns true when sha-sums are equal, and changes are as well (even when neither contain changes)", () => {
     expect(
-      revisionDataEqual(
+      new MetaDataStrategy().revisionDataEqual(
         { SHA1: "some-sha", changes: [] },
         { SHA1: "some-sha", changes: [] }
       )

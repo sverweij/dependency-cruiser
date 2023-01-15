@@ -1,4 +1,5 @@
 const has = require("lodash/has");
+const merge = require("lodash/merge");
 const safeRegex = require("safe-regex");
 const report = require("../../report");
 
@@ -103,7 +104,7 @@ function validateCruiseOptions(pOptions) {
     if (has(pOptions, "ruleSet.options")) {
       lReturnValue = validateCruiseOptions(pOptions.ruleSet.options);
     }
-    return { ...lReturnValue, ...pOptions };
+    return merge({}, lReturnValue, pOptions);
   }
   return lReturnValue;
 }
