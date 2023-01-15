@@ -8,14 +8,7 @@ const loadConfig = require("../config-utl/extract-depcruise-config");
 const defaults = require("./defaults");
 
 function getOptionValue(pDefault) {
-  return (pValue) => {
-    let lReturnValue = pDefault;
-
-    if (typeof pValue === "string") {
-      lReturnValue = pValue;
-    }
-    return lReturnValue;
-  };
+  return (pValue) => (typeof pValue === "string" ? pValue : pDefault);
 }
 
 function normalizeConfigFileName(pCliOptions, pConfigWrapperName, pDefault) {
@@ -104,44 +97,42 @@ function validateAndGetKnownViolationsFileName(pKnownViolations) {
 }
 
 function normalizeKnownViolationsOption(pCliOptions) {
-  if (has(pCliOptions, "ignoreKnown")) {
-    const lReturnValue = {
-      knownViolationsFile: validateAndGetKnownViolationsFileName(
-        pCliOptions.ignoreKnown
-      ),
-    };
-    return lReturnValue;
+  if (!has(pCliOptions, "ignoreKnown")) {
+    return {};
   }
-  return {};
+  return {
+    knownViolationsFile: validateAndGetKnownViolationsFileName(
+      pCliOptions.ignoreKnown
+    ),
+  };
 }
 
 function normalizeValidationOption(pCliOptions) {
-  if (has(pCliOptions, "validate")) {
-    const rulesFile = validateAndNormalizeRulesFileName(pCliOptions.validate);
-    return {
-      rulesFile,
-      ruleSet: loadConfig(
-        path.isAbsolute(rulesFile) ? rulesFile : `./${rulesFile}`
-      ),
-      validate: true,
-    };
-  } else {
+  if (!has(pCliOptions, "validate")) {
     return {
       validate: false,
     };
   }
+  const rulesFile = validateAndNormalizeRulesFileName(pCliOptions.validate);
+  return {
+    rulesFile,
+    ruleSet: loadConfig(
+      path.isAbsolute(rulesFile) ? rulesFile : `./${rulesFile}`
+    ),
+    validate: true,
+  };
 }
 
 function normalizeProgress(pCliOptions) {
-  let lProgress = null;
-
-  if (has(pCliOptions, "progress")) {
-    lProgress = get(pCliOptions, "progress");
-    if (lProgress === true) {
-      lProgress = "cli-feedback";
-    }
+  if (!has(pCliOptions, "progress")) {
+    return {};
   }
-  return lProgress ? { progress: lProgress } : {};
+
+  let lProgress = pCliOptions.progress;
+  if (lProgress === true) {
+    lProgress = "cli-feedback";
+  }
+  return { progress: lProgress };
 }
 
 function normalizeCache(pCliOptions) {
