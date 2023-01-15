@@ -43,6 +43,7 @@ available in dependency-cruiser configurations.
 1. [`--webpack-config`: use (the resolution options of) a webpack configuration`](#--webpack-config-use-the-resolution-options-of-a-webpack-configuration)
 1. [`--preserve-symlinks`](#--preserve-symlinks)
 1. [`--cache`: use a cache to speed up cruising (experimental)](#--cache-use-a-cache-to-speed-up-cruising-experimental)
+1. [`--cache-strategy`: influence how the cache functionality detects changes (experimental)]
 
 ### Standalone formatting of dependency graphs: [depcruise-fmt](#depcruise-fmt)
 
@@ -1189,8 +1190,8 @@ happens when
 
 - changes to files that would be part of a cruise have happened.
   This includes modifications of files already included in the earlier cruise,
-  new files, file deletions and file renaming. Dependency-cruiser uses `git`
-  to do this.
+  new files, file deletions and file renaming. By default dependency-cruiser
+  uses `git` to do this (see `--cache-strategy` below for other options).
 - The parameters/ options of the cruises are still "compatible".
   The rule of thumb is that if the _existing_ cache has a broader scope than
   the _new_ one, the cruises are compatible and the new cruise can use the
@@ -1201,6 +1202,25 @@ happens when
     the filters are exactly the same.
   - if the cache was created without a filter, but the new cruise includes one,
     the new cruise _can_ be served from the cache.
+
+### `--cache-strategy`: influence how the cache functionality detects changes (experimental)
+
+> :warning: this is part of the _experimental_ cache feature. Especially the
+> 'content' cache strategy is quite new. The feature _is_ tested and works, but
+> interface & format might change without dependency-cruiser getting a major
+> bump.
+
+> Available from version 12.5.0
+
+With this option you can tell dependency-cruiser how it should detect whether
+files have changed. The default (`metadata`) use git for this - it is the fastest
+and most reliable of the two. The other one (`content`) is there in case you
+don't have git available or are working on a shallow clone of your repository
+(which might be the only practical way on a continuous integration server). The
+`content` strategy looks at the content of the files.
+
+When you don't pass --cache-strategy (and don't specify a `strategy` in the
+`cache` option in you .dependency-cruiser.js) the strategy defaults to `metadata`.
 
 ## depcruise-fmt
 
