@@ -135,6 +135,28 @@ function normalizeProgress(pCliOptions) {
   return { progress: lProgress };
 }
 
+function normalizeCacheStrategy(pCliOptions) {
+  if (!has(pCliOptions, "cacheStrategy")) {
+    return {};
+  }
+  const lStrategy =
+    pCliOptions.cacheStrategy === "content" ? "content" : "metadata";
+
+  let lReturnValue = {};
+
+  if (pCliOptions.cache && typeof pCliOptions.cache === "object") {
+    lReturnValue.cache = clone(pCliOptions.cache);
+    lReturnValue.cache.strategy = lStrategy;
+  } else {
+    lReturnValue = {
+      cache: {
+        strategy: lStrategy,
+      },
+    };
+  }
+  return lReturnValue;
+}
+
 function normalizeCache(pCliOptions) {
   if (!has(pCliOptions, "cache")) {
     return {};
@@ -183,6 +205,7 @@ module.exports = function normalizeOptions(pOptionsAsPassedFromCommander) {
   lOptions = { ...lOptions, ...normalizeValidationOption(lOptions) };
   lOptions = { ...lOptions, ...normalizeProgress(lOptions) };
   lOptions = { ...lOptions, ...normalizeCache(lOptions) };
+  lOptions = { ...lOptions, ...normalizeCacheStrategy(lOptions) };
   lOptions = { ...lOptions, ...normalizeKnownViolationsOption(lOptions) };
   lOptions = normalizeConfigFileName(
     lOptions,

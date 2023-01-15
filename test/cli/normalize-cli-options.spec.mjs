@@ -275,10 +275,57 @@ describe("[I] cli/normalizeCliOptions - regular normalizations", () => {
       cache: false,
     });
   });
+
   it("no cache option translates to still not having a cache option", () => {
     expect(
       normalizeCliOptions({ "not-a-cache-option": true })
     ).to.not.haveOwnProperty("cache");
+  });
+
+  it("cache-strategy with a string value == 'content' translates to the strategy 'content' in the cache option", () => {
+    expect(normalizeCliOptions({ cacheStrategy: "content" })).to.deep.contain({
+      cache: { strategy: "content" },
+    });
+  });
+
+  it("cache-strategy with a string value !== 'content' translates to the strategy 'metadata' in the cache option", () => {
+    expect(
+      normalizeCliOptions({ cacheStrategy: "some-string" })
+    ).to.deep.contain({
+      cache: { strategy: "metadata" },
+    });
+  });
+
+  it("cache with a string value & cache-strategy with a string value translates both present in the cache option", () => {
+    expect(
+      normalizeCliOptions({ cache: "somewhere", cacheStrategy: "some-string" })
+    ).to.deep.contain({
+      cache: { folder: "somewhere", strategy: "metadata" },
+    });
+  });
+
+  it("cache with a value of true & cache-strategy with a string value translates to a cache option with that strategy", () => {
+    expect(
+      normalizeCliOptions({ cache: true, cacheStrategy: "metadata" })
+    ).to.deep.contain({
+      cache: { strategy: "metadata" },
+    });
+  });
+
+  it("cache with a value of false & cache-strategy with a string value translates to a cache option with that strategy", () => {
+    expect(
+      normalizeCliOptions({ cache: false, cacheStrategy: "metadata" })
+    ).to.deep.contain({
+      cache: { strategy: "metadata" },
+    });
+  });
+
+  it("cache with a value of true & cache-strategy with a string value translates to a cache option with that strategy x", () => {
+    expect(
+      normalizeCliOptions({ cache: true, cacheStrategy: "content" })
+    ).to.deep.contain({
+      cache: { strategy: "content" },
+    });
   });
 });
 
