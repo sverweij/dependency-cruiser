@@ -2,8 +2,8 @@ import { fileURLToPath } from "url";
 import { expect } from "chai";
 import normalizeCliOptions from "../../src/cli/normalize-cli-options.js";
 
-// eslint-disable max-statements
-describe("[I] cli/normalizeCliOptions", () => {
+// eslint-disable-next-line max-statements
+describe("[I] cli/normalizeCliOptions - regular normalizations", () => {
   const WORKINGDIR = process.cwd();
 
   afterEach(() => {
@@ -219,6 +219,7 @@ describe("[I] cli/normalizeCliOptions", () => {
       validate: true,
     });
   });
+
   it("defaults webpackConfig.fileName to 'tsconfig.json' if it wasn't specified", () => {
     expect(
       normalizeCliOptions({
@@ -238,6 +239,7 @@ describe("[I] cli/normalizeCliOptions", () => {
       validate: true,
     });
   });
+
   it("progress without parameter defaults to cli-feedback", () => {
     expect(normalizeCliOptions({ progress: true })).to.contain({
       progress: "cli-feedback",
@@ -248,6 +250,35 @@ describe("[I] cli/normalizeCliOptions", () => {
     expect(normalizeCliOptions({ progress: "performance-log" })).to.contain({
       progress: "performance-log",
     });
+  });
+
+  it("cache with value true translates to {}", () => {
+    expect(normalizeCliOptions({ cache: true })).to.deep.contain({
+      cache: {},
+    });
+  });
+
+  it("cache with a string value translates to the folder name in the cache option", () => {
+    expect(normalizeCliOptions({ cache: "some-string" })).to.deep.contain({
+      cache: { folder: "some-string" },
+    });
+  });
+
+  it("cache with an numerical value (which is invalid) translates to explicitly false cache option", () => {
+    expect(normalizeCliOptions({ cache: 481 })).to.deep.contain({
+      cache: false,
+    });
+  });
+
+  it("cache with value true translates explicitly false cache option", () => {
+    expect(normalizeCliOptions({ cache: false })).to.deep.contain({
+      cache: false,
+    });
+  });
+  it("no cache option translates to still not having a cache option", () => {
+    expect(
+      normalizeCliOptions({ "not-a-cache-option": true })
+    ).to.not.haveOwnProperty("cache");
   });
 });
 

@@ -144,6 +144,26 @@ function normalizeProgress(pCliOptions) {
   return lProgress ? { progress: lProgress } : {};
 }
 
+function normalizeCache(pCliOptions) {
+  if (!has(pCliOptions, "cache")) {
+    return {};
+  }
+
+  if (pCliOptions.cache === true) {
+    return { cache: {} };
+  }
+
+  if (typeof pCliOptions.cache === "string") {
+    return {
+      cache: {
+        folder: pCliOptions.cache,
+      },
+    };
+  }
+
+  return { cache: false };
+}
+
 /**
  * returns the pOptionsAsPassedFromCommander, so that the returned value contains a
  * valid value for each possible option
@@ -171,6 +191,7 @@ module.exports = function normalizeOptions(pOptionsAsPassedFromCommander) {
 
   lOptions = { ...lOptions, ...normalizeValidationOption(lOptions) };
   lOptions = { ...lOptions, ...normalizeProgress(lOptions) };
+  lOptions = { ...lOptions, ...normalizeCache(lOptions) };
   lOptions = { ...lOptions, ...normalizeKnownViolationsOption(lOptions) };
   lOptions = normalizeConfigFileName(
     lOptions,
