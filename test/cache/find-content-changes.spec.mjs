@@ -73,6 +73,34 @@ describe("[U] cache/find-content-changes - cached vs new", () => {
     ]);
   });
 
+  it("returns files that have been earmarked as not followable as 'ignored'", () => {
+    expect(
+      findContentChanges(
+        ".",
+        {
+          modules: [
+            {
+              source: "not-in-content-changes-as-extension.weird",
+              followable: false,
+            },
+          ],
+        },
+        {
+          baseDir:
+            "test/cache/__mocks__/find-content-changes/folder-with-unfollowable-extensions",
+          exclude: {},
+          includeOnly: {},
+          extensions: new Set([".js"]),
+        }
+      )
+    ).to.deep.equal([
+      {
+        name: "not-in-content-changes-as-extension.weird",
+        changeType: "ignored",
+      },
+    ]);
+  });
+
   it("returns files both in directory and in cache that are different as 'modified'", () => {
     expect(
       findContentChanges(
@@ -108,6 +136,7 @@ describe("[U] cache/find-content-changes - cached vs new", () => {
       },
     ]);
   });
+
   it("returns files both in directory and in cache that are the same as 'unmodified'", () => {
     expect(
       findContentChanges(
@@ -173,6 +202,7 @@ describe("[U] cache/find-content-changes - new vs cached", () => {
       },
     ]);
   });
+
   it("returns changes when there's file in the directory and modules is empty (missing includeOnly filter)", () => {
     expect(
       findContentChanges(

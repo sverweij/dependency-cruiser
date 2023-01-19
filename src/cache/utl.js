@@ -111,7 +111,10 @@ function moduleIsInterestingForDiff(pModule) {
     !pModule.consolidated &&
     !pModule.coreModule &&
     !pModule.couldNotResolve &&
-    !pModule.matchesDoNotFollow
+    !pModule.matchesDoNotFollow &&
+    // as followable is optional, !exists when the module _is_ followable
+    // explicit comparison with false
+    pModule.followable !== false
   );
 }
 
