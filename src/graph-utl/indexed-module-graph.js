@@ -1,18 +1,18 @@
 module.exports = class IndexedModuleGraph {
-  init(pModules) {
+  init(pModules, pIndexAttribute) {
     this.indexedGraph = new Map(
-      pModules.map((pModule) => [pModule.source, pModule])
+      // eslint-disable-next-line security/detect-object-injection
+      pModules.map((pModule) => [pModule[pIndexAttribute], pModule])
     );
   }
 
-  constructor(pModules) {
-    this.init(pModules);
+  constructor(pModules, pIndexAttribute = "source") {
+    this.init(pModules, pIndexAttribute);
   }
 
   /**
-   *
    * @param {string} pName
-   * @return {import("../types/cruise-result").IModule}
+   * @return {import("..").IModule}
    */
   findModuleByName(pName) {
     return this.indexedGraph.get(pName);
@@ -99,6 +99,38 @@ module.exports = class IndexedModuleGraph {
           );
       }
       lReturnValue = Array.from(lVisited);
+    }
+    return lReturnValue;
+  }
+
+  /**
+   * @param {string} pFrom
+   * @param {string} pTo
+   * @param {Set<string>} pVisited
+   * @returns {string[]}
+   */
+  getPath(pFrom, pTo, pVisited = new Set()) {
+    let lReturnValue = [];
+    const lFromNode = this.findModuleByName(pFrom);
+
+    pVisited.add(pFrom);
+
+    if (lFromNode) {
+      const lDirectUnvisitedDependencies = lFromNode.dependencies
+        .filter((pDependency) => !pVisited.has(pDependency.resolved))
+        .map((pDependency) => pDependency.resolved);
+      if (lDirectUnvisitedDependencies.includes(pTo)) {
+        lReturnValue = [pFrom, pTo];
+      } else {
+        for (const lFrom of lDirectUnvisitedDependencies) {
+          let lCandidatePath = this.getPath(lFrom, pTo, pVisited);
+          // eslint-disable-next-line max-depth
+          if (lCandidatePath.length > 0) {
+            lReturnValue = [pFrom].concat(lCandidatePath);
+            break;
+          }
+        }
+      }
     }
     return lReturnValue;
   }

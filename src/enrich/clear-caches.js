@@ -1,5 +1,5 @@
-const utl = require("./derive/module-utl");
+const indexedGraph = require("./derive/indexed-graph");
 
 module.exports = function clearCaches() {
-  utl.clearCache();
+  indexedGraph.clearCache();
 };

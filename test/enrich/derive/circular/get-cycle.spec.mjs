@@ -1,7 +1,7 @@
 import { expect } from "chai";
 import clearCaches from "../../../../src/enrich/clear-caches.js";
 import getCycleOriginal from "../../../../src/enrich/derive/circular/get-cycle.js";
-import { findModuleByName } from "../../../../src/enrich/derive/module-utl.js";
+import { findModuleByName } from "../../../../src/enrich/derive/indexed-graph.js";
 import inputgraphs from "./__mocks__/inputgraphs.mjs";
 
 function getCycle(pGraph, pFrom, pToDep) {

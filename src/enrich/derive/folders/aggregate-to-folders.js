@@ -82,7 +82,7 @@ function calculateFolderMetrics(pFolder) {
   };
 }
 
-function denormalizeInstability(pFolder, _, pAllFolders) {
+function deNormalizeInstability(pFolder, _, pAllFolders) {
   return {
     ...pFolder,
     dependencies: pFolder.dependencies.map((pDependency) => {
@@ -118,7 +118,7 @@ module.exports = function aggregateToFolders(pModules) {
     pModules.filter(metricsAreCalculable).reduce(aggregateToFolder, {})
   )
     .map(calculateFolderMetrics)
-    .map(denormalizeInstability);
+    .map(deNormalizeInstability);
 
   return detectCycles(lFolders.concat(getSinks(lFolders)), {
     pSourceAttribute: "name",

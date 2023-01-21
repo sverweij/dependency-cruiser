@@ -1,4 +1,4 @@
-const { findModuleByName } = require("../module-utl");
+const IndexedModuleGraph = require("../../../graph-utl/indexed-module-graph");
 const { calculateInstability, metricsAreCalculable } = require("../module-utl");
 
 function addInstabilityMetric(pModule) {
@@ -16,11 +16,12 @@ function addInstabilityMetric(pModule) {
 }
 
 function addInstabilityToDependency(pAllModules) {
+  const lIndexedModules = new IndexedModuleGraph(pAllModules);
   return (pDependency) => ({
     ...pDependency,
     instability:
-      (findModuleByName(pAllModules, pDependency.resolved) || {}).instability ||
-      0,
+      (lIndexedModules.findModuleByName(pDependency.resolved) || {})
+        .instability || 0,
   });
 }
 
