@@ -1,4 +1,3 @@
-const { clearCache } = require("../module-utl");
 const {
   addInstabilityMetric,
   deNormalizeInstabilityMetricsToDependencies,
@@ -6,9 +5,9 @@ const {
 
 module.exports = function deriveModulesMetrics(pModules, pOptions) {
   if (pOptions.metrics) {
-    const lModules = pModules.map(addInstabilityMetric);
-    clearCache();
-    return lModules.map(deNormalizeInstabilityMetricsToDependencies);
+    return pModules
+      .map(addInstabilityMetric)
+      .map(deNormalizeInstabilityMetricsToDependencies);
   }
   return pModules;
 };

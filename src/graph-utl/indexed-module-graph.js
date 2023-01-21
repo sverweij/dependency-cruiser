@@ -1,18 +1,18 @@
+/* eslint-disable security/detect-object-injection */
 module.exports = class IndexedModuleGraph {
-  init(pModules) {
+  init(pModules, pIndexAttribute) {
     this.indexedGraph = new Map(
-      pModules.map((pModule) => [pModule.source, pModule])
+      pModules.map((pModule) => [pModule[pIndexAttribute], pModule])
     );
   }
 
-  constructor(pModules) {
-    this.init(pModules);
+  constructor(pModules, pIndexAttribute = "source") {
+    this.init(pModules, pIndexAttribute);
   }
 
   /**
-   *
    * @param {string} pName
-   * @return {import("../types/cruise-result").IModule}
+   * @return {import("..").IModule}
    */
   findModuleByName(pName) {
     return this.indexedGraph.get(pName);
@@ -101,5 +101,79 @@ module.exports = class IndexedModuleGraph {
       lReturnValue = Array.from(lVisited);
     }
     return lReturnValue;
+  }
+
+  /**
+   * @param {string} pFrom
+   * @param {string} pTo
+   * @param {Set<string>} pVisited
+   * @returns {string[]}
+   */
+  getPath(pFrom, pTo, pVisited = new Set()) {
+    let lReturnValue = [];
+    const lFromNode = this.findModuleByName(pFrom);
+
+    pVisited.add(pFrom);
+
+    if (lFromNode) {
+      const lDirectUnvisitedDependencies = lFromNode.dependencies
+        .filter((pDependency) => !pVisited.has(pDependency.resolved))
+        .map((pDependency) => pDependency.resolved);
+      if (lDirectUnvisitedDependencies.includes(pTo)) {
+        lReturnValue = [pFrom, pTo];
+      } else {
+        for (const lFrom of lDirectUnvisitedDependencies) {
+          let lCandidatePath = this.getPath(lFrom, pTo, pVisited);
+          // eslint-disable-next-line max-depth
+          if (lCandidatePath.length > 0) {
+            lReturnValue = [pFrom].concat(lCandidatePath);
+            break;
+          }
+        }
+      }
+    }
+    return lReturnValue;
+  }
+
+  /**
+   * Returns the first non-zero length path from pInitialSource to pInitialSource
+   * Returns the empty array if there is no such path
+   *
+   * @param {string} pInitialSource The 'source' attribute of the node to be tested
+   *                                (source uniquely identifying a node)
+   * @param {string} pCurrentSource The 'source' attribute of the 'to' node to
+   *                                be traversed
+   * @param {string} pDependencyName The attribute name of the dependency to use.
+   *                                defaults to "resolved" (which is in use for
+   *                                modules). For folders pass "name"
+   * @return {string[]}             see description above
+   */
+  getCycle(pInitialSource, pCurrentSource, pDependencyName, pVisited) {
+    let lVisited = pVisited || new Set();
+    const lCurrentNode = this.findModuleByName(pCurrentSource);
+    const lDependencies = lCurrentNode.dependencies.filter(
+      (pDependency) => !lVisited.has(pDependency[pDependencyName])
+    );
+    const lMatch = lDependencies.find(
+      (pDependency) => pDependency[pDependencyName] === pInitialSource
+    );
+    if (lMatch) {
+      return [pCurrentSource, lMatch[pDependencyName]];
+    }
+    return lDependencies.reduce((pAll, pDependency) => {
+      if (!pAll.includes(pCurrentSource)) {
+        const lCycle = this.getCycle(
+          pInitialSource,
+          pDependency[pDependencyName],
+          pDependencyName,
+          lVisited.add(pDependency[pDependencyName])
+        );
+
+        if (lCycle.length > 0 && !lCycle.includes(pCurrentSource)) {
+          return pAll.concat(pCurrentSource).concat(lCycle);
+        }
+      }
+      return pAll;
+    }, []);
   }
 };

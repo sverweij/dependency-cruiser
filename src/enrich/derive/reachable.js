@@ -1,10 +1,10 @@
 /* eslint-disable security/detect-object-injection, no-inline-comments */
 
-const clone = require("lodash/clone");
+const cloneDeep = require("lodash/cloneDeep");
 const has = require("lodash/has");
-const matchers = require("../../../validate/matchers");
-const { extractGroups } = require("../../../utl/regex-util");
-const getPath = require("./get-path");
+const matchers = require("../../validate/matchers");
+const { extractGroups } = require("../../utl/regex-util");
+const IndexedModuleGraph = require("../../graph-utl/indexed-module-graph");
 
 function getReachableRules(pRuleSet) {
   return (pRuleSet?.forbidden ?? [])
@@ -105,14 +105,14 @@ function shouldAddReachable(pRule, pModuleTo, pGraph) {
   return lReturnValue;
 }
 
-function addReachesToModule(pModule, pGraph, pReachableRule) {
+function addReachesToModule(pModule, pGraph, pIndexedGraph, pReachableRule) {
   const lToModules = pGraph.filter((pToModule) =>
     isModuleInRuleTo(pReachableRule, pToModule, pModule)
   );
 
   for (let lToModule of lToModules) {
     if (pModule.source !== lToModule.source) {
-      const lPath = getPath(pGraph, pModule.source, lToModule.source);
+      const lPath = pIndexedGraph.getPath(pModule.source, lToModule.source);
 
       if (lPath.length > 0) {
         pModule.reaches = mergeReachesProperties(
@@ -127,7 +127,7 @@ function addReachesToModule(pModule, pGraph, pReachableRule) {
   return pModule;
 }
 
-function addReachableToModule(pModule, pGraph, pReachableRule) {
+function addReachableToModule(pModule, pGraph, pIndexedGraph, pReachableRule) {
   const lFromModules = pGraph.filter(isModuleInRuleFrom(pReachableRule));
   let lFound = false;
 
@@ -137,7 +137,7 @@ function addReachableToModule(pModule, pGraph, pReachableRule) {
       pModule.source !== lFromModule.source &&
       isModuleInRuleTo(pReachableRule, pModule, lFromModule)
     ) {
-      const lPath = getPath(pGraph, lFromModule.source, pModule.source);
+      const lPath = pIndexedGraph.getPath(lFromModule.source, pModule.source);
 
       lFound = lPath.length > 0;
       pModule.reachable = mergeReachableProperties(
@@ -151,17 +151,23 @@ function addReachableToModule(pModule, pGraph, pReachableRule) {
   return pModule;
 }
 
-function addReachabilityToGraph(pGraph, pReachableRule) {
+function addReachabilityToGraph(pGraph, pIndexedGraph, pReachableRule) {
   return pGraph.map((pModule) => {
-    let lClonedModule = clone(pModule);
+    let lClonedModule = cloneDeep(pModule);
 
     if (shouldAddReaches(pReachableRule, lClonedModule)) {
-      lClonedModule = addReachesToModule(lClonedModule, pGraph, pReachableRule);
+      lClonedModule = addReachesToModule(
+        lClonedModule,
+        pGraph,
+        pIndexedGraph,
+        pReachableRule
+      );
     }
     if (shouldAddReachable(pReachableRule, lClonedModule, pGraph)) {
       lClonedModule = addReachableToModule(
         lClonedModule,
         pGraph,
+        pIndexedGraph,
         pReachableRule
       );
     }
@@ -171,9 +177,12 @@ function addReachabilityToGraph(pGraph, pReachableRule) {
 
 module.exports = function deriveReachables(pGraph, pRuleSet) {
   const lReachableRules = pRuleSet ? getReachableRules(pRuleSet) : [];
+  const lIndexedGraph =
+    lReachableRules.length > 0 ? new IndexedModuleGraph(pGraph) : {};
 
   return lReachableRules.reduce(
-    (pReturnGraph, pRule) => addReachabilityToGraph(pReturnGraph, pRule),
-    clone(pGraph)
+    (pReturnGraph, pRule) =>
+      addReachabilityToGraph(pReturnGraph, lIndexedGraph, pRule),
+    cloneDeep(pGraph)
   );
 };
