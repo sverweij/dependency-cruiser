@@ -2,6 +2,7 @@
 const path = require("path").posix;
 const { calculateInstability, metricsAreCalculable } = require("../module-utl");
 const detectCycles = require("../circular");
+const IndexedModuleGraph = require("../../../graph-utl/indexed-module-graph");
 const {
   findFolderByName,
   getAfferentCouplings,
@@ -114,15 +115,15 @@ function getSinks(pFolders) {
 }
 
 module.exports = function aggregateToFolders(pModules) {
-  const lFolders = object2Array(
+  let lFolders = object2Array(
     pModules.filter(metricsAreCalculable).reduce(aggregateToFolder, {})
   )
     .map(calculateFolderMetrics)
     .map(deNormalizeInstability);
+  lFolders = lFolders.concat(getSinks(lFolders));
 
-  return detectCycles(lFolders.concat(getSinks(lFolders)), {
+  return detectCycles(lFolders, new IndexedModuleGraph(lFolders, "name"), {
     pSourceAttribute: "name",
     pDependencyName: "name",
-    pFindNodeByName: findFolderByName,
   });
 };

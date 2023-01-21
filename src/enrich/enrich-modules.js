@@ -1,6 +1,7 @@
 const bus = require("../utl/bus");
 const busLogLevels = require("../utl/bus-log-levels");
 const addFocus = require("../../src/graph-utl/add-focus");
+const IndexedModuleGraph = require("../graph-utl/indexed-module-graph");
 const deriveCycles = require("./derive/circular");
 const deriveOrphans = require("./derive/orphan");
 const addDependents = require("./derive/dependents");
@@ -8,14 +9,13 @@ const deriveReachable = require("./derive/reachable");
 const addValidations = require("./add-validations");
 const softenKnownViolations = require("./soften-known-violations");
 const deriveModuleMetrics = require("./derive/metrics");
-const { findModuleByName } = require("./derive/indexed-graph");
 
 module.exports = function enrichModules(pModules, pOptions) {
   bus.emit("progress", "analyzing: cycles", { level: busLogLevels.INFO });
-  let lModules = deriveCycles(pModules, {
+  const lIndexedModules = new IndexedModuleGraph(pModules);
+  let lModules = deriveCycles(pModules, lIndexedModules, {
     pSourceAttribute: "source",
     pDependencyName: "resolved",
-    pFindNodeByName: findModuleByName,
   });
   bus.emit("progress", "analyzing: dependents", { level: busLogLevels.INFO });
   lModules = addDependents(lModules, pOptions);

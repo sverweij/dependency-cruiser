@@ -3,6 +3,7 @@ import { expect } from "chai";
 import IndexedModuleGraph from "../../src/graph-utl/indexed-module-graph.js";
 import unIndexedModules from "./__mocks__/un-indexed-modules.mjs";
 import unIndexedModulesWithoutDependents from "./__mocks__/un-indexed-modules-without-dependents.mjs";
+import cycleInputGraphs from "./__mocks__/cycle-input-graphs.mjs";
 
 describe("[U] graph-utl/indexed-module-graph - findModuleByName", () => {
   it("searching any module in an empty graph yields undefined", () => {
@@ -382,6 +383,96 @@ describe("[U] graph-utl/indexed-module-graph - getPath", () => {
       "./src/index.js",
       "./src/intermediate.js",
       "./src/hajoo.js",
+    ]);
+  });
+});
+
+function getCycle(pGraph, pFrom, pToDep) {
+  const lIndexedGraph = new IndexedModuleGraph(pGraph);
+  return lIndexedGraph.getCycle(pFrom, pToDep, "resolved");
+}
+
+describe("[U] graph-utl/indexed-module-graph - getCycle", () => {
+  it("leaves non circular dependencies alone", () => {
+    expect(getCycle(cycleInputGraphs.A_B, "a", "b")).to.deep.equal([]);
+  });
+  it("detects self circular (c <-> c)", () => {
+    expect(getCycle(cycleInputGraphs.C_C, "c", "c")).to.deep.equal(["c", "c"]);
+  });
+  it("detects 1 step circular (d <-> e)", () => {
+    expect(getCycle(cycleInputGraphs.D_E_D, "d", "e")).to.deep.equal([
+      "e",
+      "d",
+    ]);
+  });
+  it("detects 2 step circular (q -> r -> s -> q)", () => {
+    expect(getCycle(cycleInputGraphs.Q_R_S_Q, "q", "r")).to.deep.equal([
+      "r",
+      "s",
+      "q",
+    ]);
+    expect(getCycle(cycleInputGraphs.Q_R_S_Q, "r", "s")).to.deep.equal([
+      "s",
+      "q",
+      "r",
+    ]);
+    expect(getCycle(cycleInputGraphs.Q_R_S_Q, "s", "q")).to.deep.equal([
+      "q",
+      "r",
+      "s",
+    ]);
+  });
+  it("does not get confused because another circular (t -> u -> t, t -> v)", () => {
+    expect(getCycle(cycleInputGraphs.T_U_T_V, "t", "u")).to.deep.equal([
+      "u",
+      "t",
+    ]);
+    expect(getCycle(cycleInputGraphs.T_U_T_V, "t", "v")).to.deep.equal([]);
+  });
+  it("detects two circles (a -> b -> c -> a, a -> d -> e -> a)", () => {
+    expect(getCycle(cycleInputGraphs.TWO_CIRCLES, "a", "b")).to.deep.equal([
+      "b",
+      "c",
+      "a",
+    ]);
+    expect(getCycle(cycleInputGraphs.TWO_CIRCLES, "b", "c")).to.deep.equal([
+      "c",
+      "a",
+      "b",
+    ]);
+    expect(getCycle(cycleInputGraphs.TWO_CIRCLES, "c", "a")).to.deep.equal([
+      "a",
+      "b",
+      "c",
+    ]);
+    expect(getCycle(cycleInputGraphs.TWO_CIRCLES, "a", "d")).to.deep.equal([
+      "d",
+      "e",
+      "a",
+    ]);
+    expect(getCycle(cycleInputGraphs.TWO_CIRCLES, "d", "e")).to.deep.equal([
+      "e",
+      "a",
+      "d",
+    ]);
+    expect(getCycle(cycleInputGraphs.TWO_CIRCLES, "e", "a")).to.deep.equal([
+      "a",
+      "d",
+      "e",
+    ]);
+  });
+  it("it goes to a circle but isn't in it itself (z -> a -> b -> c -> a)", () => {
+    expect(getCycle(cycleInputGraphs.TO_A_CIRCLE, "z", "a")).to.deep.equal([]);
+  });
+  it("it goes to a circle; isn't in it itself, but also to one where it is (z -> a -> b -> c -> a, c -> z)", () => {
+    expect(
+      getCycle(cycleInputGraphs.TO_A_CIRCLE_AND_IN_IT, "z", "a")
+    ).to.deep.equal(["a", "b", "c", "z"]);
+  });
+  it("just returns one cycle when querying a hub node", () => {
+    expect(getCycle(cycleInputGraphs.FLOWER, "a", "b")).to.deep.equal([
+      "b",
+      "a",
     ]);
   });
 });

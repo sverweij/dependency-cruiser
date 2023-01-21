@@ -2,8 +2,7 @@ const validate = require("../../../validate");
 const aggregateToFolders = require("./aggregate-to-folders");
 
 /**
- *
- * @param {*} pFolder
+ * @param {import("../../../..").IFolder} pFolder
  * @param {import('../../../..').IOptions} pOptions
  * @returns
  */

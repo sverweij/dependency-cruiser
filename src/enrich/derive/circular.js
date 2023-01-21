@@ -1,20 +1,20 @@
 /* eslint-disable security/detect-object-injection */
-const getCycle = require("./get-cycle");
 
 function addCircularityCheckToDependency(
-  pGraph,
+  pIndexedGraph,
   pFrom,
   pToDep,
-  { pDependencyName, pFindNodeByName }
+  pDependencyName
 ) {
   let lReturnValue = {
     ...pToDep,
     circular: false,
   };
-  const lCycle = getCycle(pGraph, pFrom, pToDep[pDependencyName], {
-    pDependencyName,
-    pFindNodeByName,
-  });
+  const lCycle = pIndexedGraph.getCycle(
+    pFrom,
+    pToDep[pDependencyName],
+    pDependencyName
+  );
 
   if (lCycle.length > 0) {
     lReturnValue = {
@@ -32,21 +32,20 @@ function addCircularityCheckToDependency(
  * whether it's (part of a) circular (relationship) and returns the
  * dependencies with that added.
  */
-module.exports = (
+module.exports = function detectAndAddCycles(
   pNodes,
-  { pSourceAttribute, pDependencyName, pFindNodeByName }
-) =>
-  pNodes.map((pModule) => ({
+  pIndexedNodes,
+  { pSourceAttribute, pDependencyName }
+) {
+  return pNodes.map((pModule) => ({
     ...pModule,
     dependencies: pModule.dependencies.map((pToDep) =>
       addCircularityCheckToDependency(
-        pNodes,
+        pIndexedNodes,
         pModule[pSourceAttribute],
         pToDep,
-        {
-          pDependencyName,
-          pFindNodeByName,
-        }
+        pDependencyName
       )
     ),
   }));
+};

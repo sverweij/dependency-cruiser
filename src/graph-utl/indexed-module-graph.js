@@ -1,7 +1,7 @@
+/* eslint-disable security/detect-object-injection */
 module.exports = class IndexedModuleGraph {
   init(pModules, pIndexAttribute) {
     this.indexedGraph = new Map(
-      // eslint-disable-next-line security/detect-object-injection
       pModules.map((pModule) => [pModule[pIndexAttribute], pModule])
     );
   }
@@ -133,5 +133,47 @@ module.exports = class IndexedModuleGraph {
       }
     }
     return lReturnValue;
+  }
+
+  /**
+   * Returns the first non-zero length path from pInitialSource to pInitialSource
+   * Returns the empty array if there is no such path
+   *
+   * @param {string} pInitialSource The 'source' attribute of the node to be tested
+   *                                (source uniquely identifying a node)
+   * @param {string} pCurrentSource The 'source' attribute of the 'to' node to
+   *                                be traversed
+   * @param {string} pDependencyName The attribute name of the dependency to use.
+   *                                defaults to "resolved" (which is in use for
+   *                                modules). For folders pass "name"
+   * @return {string[]}             see description above
+   */
+  getCycle(pInitialSource, pCurrentSource, pDependencyName, pVisited) {
+    let lVisited = pVisited || new Set();
+    const lCurrentNode = this.findModuleByName(pCurrentSource);
+    const lDependencies = lCurrentNode.dependencies.filter(
+      (pDependency) => !lVisited.has(pDependency[pDependencyName])
+    );
+    const lMatch = lDependencies.find(
+      (pDependency) => pDependency[pDependencyName] === pInitialSource
+    );
+    if (lMatch) {
+      return [pCurrentSource, lMatch[pDependencyName]];
+    }
+    return lDependencies.reduce((pAll, pDependency) => {
+      if (!pAll.includes(pCurrentSource)) {
+        const lCycle = this.getCycle(
+          pInitialSource,
+          pDependency[pDependencyName],
+          pDependencyName,
+          lVisited.add(pDependency[pDependencyName])
+        );
+
+        if (lCycle.length > 0 && !lCycle.includes(pCurrentSource)) {
+          return pAll.concat(pCurrentSource).concat(lCycle);
+        }
+      }
+      return pAll;
+    }, []);
   }
 };
