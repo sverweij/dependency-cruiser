@@ -2,9 +2,9 @@
 
 set -e
 
-for dir in $(ls recipes)
+for dir in recipes/*
 do
-    cd recipes/$dir
+    cd "$dir"
     sh runme.sh
     cd -
 done
