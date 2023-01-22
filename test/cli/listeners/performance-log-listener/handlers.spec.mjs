@@ -70,9 +70,9 @@ describe("[U] cli/listeners/performance-log/handlers - getEndText", () => {
     expect(handlers.getEndText(lStateMock, 10, MAX_LEVEL)).to.be.not.empty;
   });
 
-  it("message contains an end time", () => {
+  it("message contains a line with totals", () => {
     expect(handlers.getEndText(lStateMock, 10, MAX_LEVEL)).to.match(
-      /really done \([0-9,]+ms, [+-]?[0-9,]+kB\)\n$/g
+      /really done\n------------- ------------- ------------- ------------- ------------- ------------- ------------- ------------- \n[ ]*[0-9,]+ms[ ]*[0-9,]+ms[ ]*[0-9,]+ms[ ]*[+-]?[0-9,]+kB[ ]*[+-]?[0-9,]+kB[ ]*[+-]?[0-9,]+kB[ ]*[+-]?[0-9,]+kB/g
     );
   });
 });
