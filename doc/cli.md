@@ -1079,27 +1079,30 @@ stay in view when dependency-cruiser is done.
 <summary>Typical output</summary>
 
 ```
-elapsed real         user       system        ∆ rss  ∆ heapTotal   ∆ heapUsed   ∆ external after step...
------------- ------------ ------------ ------------ ------------ ------------ ------------ ------------
-      778 ms       805 ms       104 ms  +130.300 kB   +85.020 kB   +62.024 kB    +2.232 kB start of node process
-       11 ms        11 ms         1 ms      +900 kB         0 kB      +307 kB         0 kB parsing options
-       76 ms        18 ms         4 ms    +2.508 kB      +804 kB    +1.969 kB      +542 kB cache: checking freshness
-      186 ms       339 ms        12 ms   +18.864 kB    +6.512 kB    +7.253 kB    -1.382 kB parsing rule set
-        0 ms         1 ms         0 ms       +24 kB         0 kB       +28 kB         0 kB determining how to resolve
-        0 ms         0 ms         0 ms        +4 kB         0 kB        +8 kB         0 kB reading files
-       21 ms        29 ms         7 ms      +172 kB      +256 kB    +2.420 kB         0 kB reading files: gathering initial sources
-    1.102 ms     1.871 ms       103 ms   +51.520 kB   +46.848 kB   +38.511 kB      +285 kB reading files: visiting dependencies
-        0 ms         0 ms         0 ms       +12 kB         0 kB        +3 kB         0 kB analyzing
-       15 ms        37 ms         0 ms       +28 kB         0 kB    +6.723 kB         0 kB analyzing: cycles
-       26 ms        57 ms         2 ms    +2.852 kB    +2.304 kB    +2.895 kB         0 kB analyzing: dependents
-        1 ms         1 ms         0 ms        +4 kB         0 kB       +48 kB         0 kB analyzing: orphans
-      246 ms       305 ms         4 ms    +1.464 kB    +1.792 kB   -13.542 kB       -29 kB analyzing: reachables
-        0 ms         0 ms         0 ms         0 kB         0 kB        +3 kB         0 kB analyzing: module metrics
-        0 ms         0 ms         0 ms         0 kB         0 kB        +3 kB         0 kB analyzing: add focus (if any)
-       79 ms       148 ms         3 ms      +356 kB         0 kB   +11.700 kB         0 kB analyzing: validations
-       10 ms        16 ms         1 ms    +1.680 kB    +1.088 kB    +2.842 kB      +541 kB analyzing: comparing against known errors
-        4 ms         4 ms         0 ms       +20 kB         0 kB      +723 kB         0 kB reporting
-        0 ms         0 ms         0 ms         0 kB         0 kB        +4 kB         0 kB really done (2.558 ms, +123.921 kB)
+ elapsed real          user        system         ∆ rss   ∆ heapTotal    ∆ heapUsed    ∆ external after step...
+------------- ------------- ------------- ------------- ------------- ------------- ------------- -------------
+        785ms         813ms          98ms    +132,384kB     +85,020kB     +62,483kB      +2,280kB start of node process
+         12ms          11ms           1ms      +1,148kB        +256kB        +785kB           0kB parsing options
+         79ms          18ms           5ms      +2,492kB        +548kB      +1,731kB        +541kB cache: check freshness with metadata
+        187ms         345ms          11ms     +18,620kB      +7,024kB      +9,037kB      -1,430kB parsing rule set
+          0ms           2ms           0ms          +8kB           0kB         +28kB           0kB determining how to resolve
+          0ms           1ms           0ms         +24kB           0kB          +9kB           0kB reading files
+         23ms          32ms           7ms        +724kB      +1,280kB     -12,023kB           0kB reading files: gathering initial sources
+      1,260ms       2,040ms         112ms     +50,152kB     +48,640kB     +51,344kB        +413kB reading files: visiting dependencies
+          0ms           0ms           0ms          +8kB           0kB          +3kB           0kB analyzing
+         13ms          33ms           0ms         +28kB           0kB      +6,083kB           0kB analyzing: cycles
+         27ms          59ms           2ms      +3,012kB      +2,816kB      +1,842kB        -157kB analyzing: dependents
+          1ms           1ms           0ms          +8kB           0kB         +46kB           0kB analyzing: orphans
+        292ms         384ms           8ms      +2,176kB      +2,048kB        +668kB           0kB analyzing: reachables
+          0ms           0ms           0ms         +12kB           0kB          +3kB           0kB analyzing: module metrics
+          0ms           0ms           0ms           0kB           0kB          +3kB           0kB analyzing: add focus (if any)
+         80ms         157ms           3ms        +560kB        +768kB      -3,119kB           0kB analyzing: validations
+          5ms          13ms           0ms         +56kB        +256kB        +960kB           0kB analyzing: comparing against known errors
+          6ms           7ms           1ms      +1,704kB      +1,088kB      +2,314kB        +541kB cache: save
+          5ms           5ms           0ms         +40kB           0kB        +596kB           0kB reporting
+          0ms           0ms           0ms           0kB           0kB          +5kB           0kB really done
+------------- ------------- ------------- ------------- ------------- ------------- ------------- -------------
+      2,775ms       3,920ms         248ms    +213,156kB    +149,744kB    +122,798kB      +2,188kB
 ```
 
 Number formatting takes place with the `Intl` API, so in your locale the numbers

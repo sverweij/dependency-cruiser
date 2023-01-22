@@ -1,8 +1,7 @@
 const {
-  formatTime,
   formatPerfLine,
   formatHeader,
-  formatMemory,
+  formatDividerLine,
 } = require("./format-helpers");
 
 function getHeader(pLevel, pMaxLevel) {
@@ -47,11 +46,24 @@ function getProgressLine(pMessage, pState, pLevel, pMaxLevel) {
 function getEndText(pState, pLevel, pMaxLevel) {
   if (pLevel <= pMaxLevel) {
     const lTime = process.uptime();
-    const { heapUsed } = process.memoryUsage();
-    pState.previousMessage = `really done (${formatTime(
-      lTime
-    ).trim()}, ${formatMemory(heapUsed).trim()})`;
-    return getProgressLine("", pState, pLevel, pMaxLevel);
+    const { user, system } = process.cpuUsage();
+    const { heapUsed, heapTotal, external, rss } = process.memoryUsage();
+    pState.previousMessage = "really done";
+
+    return (
+      getProgressLine("", pState, pLevel, pMaxLevel) +
+      formatDividerLine() +
+      formatPerfLine({
+        elapsedTime: lTime,
+        elapsedUser: user,
+        elapsedSystem: system,
+        deltaRss: rss,
+        deltaHeapUsed: heapUsed,
+        deltaHeapTotal: heapTotal,
+        deltaExternal: external,
+        message: "",
+      })
+    );
   }
   return "";
 }

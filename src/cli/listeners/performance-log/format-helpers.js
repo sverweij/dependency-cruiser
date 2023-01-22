@@ -2,7 +2,7 @@ const chalk = require("chalk");
 
 const MS_PER_SECOND = 1000;
 const MS_PER_MICRO_SECOND = 0.001;
-const MAX_LENGTH_EXPECTED = 12;
+const MAX_EXPECTED_LENGTH = 13;
 const NUMBER_OF_COLUMNS = 8;
 const K = 1024;
 /*
@@ -28,7 +28,11 @@ const gSizeFormat = new Intl.NumberFormat(LOCALE, {
   maximumFractionDigits: 0,
 }).format;
 
-const pad = (pString) => pString.padStart(MAX_LENGTH_EXPECTED).concat(" ");
+const pad = (pString) => pString.padStart(MAX_EXPECTED_LENGTH).concat(" ");
+
+function formatDividerLine() {
+  return `${`${"-".repeat(MAX_EXPECTED_LENGTH)} `.repeat(NUMBER_OF_COLUMNS)}\n`;
+}
 
 function formatHeader() {
   return chalk
@@ -43,19 +47,17 @@ function formatHeader() {
         pad("∆ external")
       }after step...\n`
     )
-    .concat(
-      `${`${"-".repeat(MAX_LENGTH_EXPECTED)} `.repeat(NUMBER_OF_COLUMNS)}\n`
-    );
+    .concat(formatDividerLine());
 }
 
 function formatTime(pNumber, pConversionMultiplier = MS_PER_SECOND) {
   return gTimeFormat(pConversionMultiplier * pNumber)
-    .padStart(MAX_LENGTH_EXPECTED)
+    .padStart(MAX_EXPECTED_LENGTH)
     .concat(" ");
 }
 
 function formatMemory(pBytes) {
-  const lReturnValue = gSizeFormat(pBytes / K).padStart(MAX_LENGTH_EXPECTED);
+  const lReturnValue = gSizeFormat(pBytes / K).padStart(MAX_EXPECTED_LENGTH);
 
   return (pBytes < 0 ? chalk.blue(lReturnValue) : lReturnValue).concat(" ");
 }
@@ -87,4 +89,5 @@ module.exports = {
   formatMemory,
   formatPerfLine,
   formatHeader,
+  formatDividerLine,
 };
