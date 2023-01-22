@@ -111,6 +111,11 @@ try {
       "(experimental) strategy to use for detecting changed files in the cache. " +
         "Possible values: metadata (= use git, the default), content"
     )
+    .option(
+      "--no-cache",
+      "switch off caching. Overrides the 'cache' key in .dependency-cruiser.js " +
+        "and --cache options set earlier on the command line"
+    )
     .option("--preserve-symlinks", `leave symlinks unchanged (off by default)`)
     .option("-v, --validate [file]", `alias for --config`)
     .option(
