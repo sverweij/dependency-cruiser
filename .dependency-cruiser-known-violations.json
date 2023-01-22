@@ -46,6 +46,15 @@
   },
   {
     "type": "module",
+    "from": "src/utl/find-all-files.js",
+    "to": "src/utl/find-all-files.js",
+    "rule": {
+      "severity": "info",
+      "name": "utl-module-not-shared-enough"
+    }
+  },
+  {
+    "type": "module",
     "from": "src/utl/wrap-and-indent.js",
     "to": "src/utl/wrap-and-indent.js",
     "rule": {
