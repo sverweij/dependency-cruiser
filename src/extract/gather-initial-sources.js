@@ -53,19 +53,19 @@ function gatherScannableFilesFromDirectory(pDirectoryName, pOptions) {
       shouldNotBeExcluded(pathToPosix(pFullPathToFile), pOptions)
     )
     .reduce((pSum, pFullPathToFile) => {
-      let lStat = {};
-      try {
-        lStat = fs.statSync(path.join(pOptions.baseDir, pFullPathToFile));
-      } catch (pError) {
-        return pSum;
-      }
-      if (lStat.isDirectory()) {
-        return pSum.concat(
-          gatherScannableFilesFromDirectory(pFullPathToFile, pOptions)
-        );
-      }
-      if (fileIsScannable(pOptions, pFullPathToFile)) {
-        return pSum.concat(pFullPathToFile);
+      let lStat = fs.statSync(path.join(pOptions.baseDir, pFullPathToFile), {
+        throwIfNoEntry: false,
+      });
+
+      if (lStat) {
+        if (lStat.isDirectory()) {
+          return pSum.concat(
+            gatherScannableFilesFromDirectory(pFullPathToFile, pOptions)
+          );
+        }
+        if (fileIsScannable(pOptions, pFullPathToFile)) {
+          return pSum.concat(pFullPathToFile);
+        }
       }
       return pSum;
     }, [])

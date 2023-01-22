@@ -13,12 +13,10 @@ const pathToPosix = require("./path-to-posix");
  * @returns {boolean}
  */
 function fileIsDirectory(pFullPathToFile, pBaseDirectory) {
-  try {
-    const lStat = statSync(join(pBaseDirectory, pFullPathToFile));
-    return lStat.isDirectory();
-  } catch (pError) {
-    return false;
-  }
+  const lStat = statSync(join(pBaseDirectory, pFullPathToFile), {
+    throwIfNoEntry: false,
+  });
+  return lStat?.isDirectory() ?? false;
 }
 
 /**
