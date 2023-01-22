@@ -44,6 +44,7 @@ available in dependency-cruiser configurations.
 1. [`--preserve-symlinks`](#--preserve-symlinks)
 1. [`--cache`: use a cache to speed up cruising (experimental)](#--cache-use-a-cache-to-speed-up-cruising-experimental)
 1. [`--cache-strategy`: influence how the cache functionality detects changes (experimental)]
+1. [`--no-cache`: switch off caching](#--no-cache-switch-off-caching)
 
 ### Standalone formatting of dependency graphs: [depcruise-fmt](#depcruise-fmt)
 
@@ -1224,6 +1225,12 @@ don't have git available or are working on a shallow clone of your repository
 
 When you don't pass --cache-strategy (and don't specify a `strategy` in the
 `cache` option in you .dependency-cruiser.js) the strategy defaults to `metadata`.
+
+### `--no-cache`: switch off caching
+
+This overrides any `--cache`, `--cache-strategy` options set earlier on the
+command line as well as the [`cache`](./options-reference.md#cache)
+configuration option.
 
 ## depcruise-fmt
 
