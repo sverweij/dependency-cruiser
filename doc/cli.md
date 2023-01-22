@@ -43,7 +43,7 @@ available in dependency-cruiser configurations.
 1. [`--webpack-config`: use (the resolution options of) a webpack configuration`](#--webpack-config-use-the-resolution-options-of-a-webpack-configuration)
 1. [`--preserve-symlinks`](#--preserve-symlinks)
 1. [`--cache`: use a cache to speed up cruising (experimental)](#--cache-use-a-cache-to-speed-up-cruising-experimental)
-1. [`--cache-strategy`: influence how the cache functionality detects changes (experimental)]
+1. [`--cache-strategy`: influence how the cache functionality detects changes (experimental)](#--cache-strategy-influence-how-the-cache-functionality-detects-changes-experimental)
 1. [`--no-cache`: switch off caching](#--no-cache-switch-off-caching)
 
 ### Standalone formatting of dependency graphs: [depcruise-fmt](#depcruise-fmt)
