@@ -333,7 +333,7 @@ export default {
           properties: {
             type: {
               type: "string",
-              enum: ["cli-feedback", "performance-log", "none"],
+              enum: ["cli-feedback", "performance-log", "ndjson", "none"],
             },
             maximumLevel: {
               description:
