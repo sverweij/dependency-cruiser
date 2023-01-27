@@ -1000,7 +1000,7 @@
           "properties": {
             "type": {
               "type": "string",
-              "enum": ["cli-feedback", "performance-log", "none"]
+              "enum": ["cli-feedback", "performance-log", "ndjson", "none"]
             },
             "maximumLevel": {
               "description": "The maximum log level to emit messages at. Ranges from OFF (-1, don't show any messages), via SUMMARY (40), INFO (50), DEBUG (60) all the way to show ALL messages (99).",

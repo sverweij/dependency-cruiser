@@ -13,7 +13,11 @@ import { IFlattenedRuleSet } from "./rule-set";
 import { ModuleSystemType, OutputType } from "./shared-types";
 
 export type ExternalModuleResolutionStrategyType = "node_modules" | "yarn-pnp";
-export type ProgressType = "cli-feedback" | "performance-log" | "none";
+export type ProgressType =
+  | "cli-feedback"
+  | "performance-log"
+  | "ndjson"
+  | "none";
 
 export interface ICruiseOptions {
   /**

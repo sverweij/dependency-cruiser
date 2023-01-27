@@ -19,6 +19,7 @@ const io = require("./utl/io");
 const formatMetaInfo = require("./format-meta-info");
 const setUpCliFeedbackListener = require("./listeners/cli-feedback");
 const setUpPerformanceLogListener = require("./listeners/performance-log");
+const setUpNDJSONListener = require("./listeners/ndjson");
 
 function extractResolveOptions(pCruiseOptions) {
   let lResolveOptions = {};
@@ -78,6 +79,7 @@ function setUpListener(pCruiseOptions) {
   const lString2Listener = {
     "cli-feedback": setUpCliFeedbackListener,
     "performance-log": setUpPerformanceLogListener,
+    ndjson: setUpNDJSONListener,
   };
   const lListenerID =
     pCruiseOptions?.progress ??
@@ -162,7 +164,7 @@ module.exports = function executeCli(pFileDirectoryArray, pCruiseOptions) {
       // (the start-up) of cruises by that same amount. We've since replaced
       // inquirer with 'prompts' (which is much smaller), but the same reasoning
       // holds.
-      // eslint-disable-next-line node/global-require
+      // eslint-disable-next-line node/global-require, import/max-dependencies
       const initConfig = require("./init-config");
       initConfig(lCruiseOptions.init);
     } else {

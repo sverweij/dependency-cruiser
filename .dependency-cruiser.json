@@ -38,6 +38,7 @@
           "^src/(main|utl|config-utl)/",
           "^node_modules",
           "^\\.yarn/cache",
+          "^os$",
           "^fs$",
           "^path$",
           "$1",
@@ -488,7 +489,22 @@
           "does",
           "hok",
           "duif",
-          "schapen"
+          "schapen",
+          "raam",
+          "roos",
+          "neef",
+          "fik",
+          "gat",
+          "wiel",
+          "zes",
+          "juk",
+          "schop",
+          "voet",
+          "neus",
+          "muur",
+          "bijl",
+          "ei",
+          "ui"
         ]
       }
     },
