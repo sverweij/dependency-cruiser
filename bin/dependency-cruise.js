@@ -88,6 +88,7 @@ try {
       "-p, --progress [type]",
       "show progress while dependency-cruiser is busy. Possible values: cli-feedback, performance-log, none"
     )
+    .option("--no-progress", "Alias of --progress none")
     .option(
       "-d, --max-depth <n>",
       "You probably want to use --collapse instead of --max-depth. " +

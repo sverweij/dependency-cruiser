@@ -35,7 +35,8 @@ available in dependency-cruiser configurations.
 1. [`--collapse`: summarize to folder depth or pattern](#--collapse-summarize-to-folder-depth-or-pattern)
 1. [`--exclude`: exclude dependencies from being cruised](#--exclude-exclude-dependencies-from-being-cruised)
 1. [`--max-depth`](#--max-depth)
-1. [`--progress`: get feedback on what dependency-cruiser is doing while it's running](#--progress-get-feedbakc-on-what-dependency-cruiser-is-doing-while-its-running)
+1. [`--progress`: get feedback on what dependency-cruiser is doing while it's running](#--progress-get-feedback-on-what-dependency-cruiser-is-doing-while-its-running)
+1. [`--no-progress`: don't show feedback on what dependency-cruiser is doing](#--no-progress-dont-show-feedback-on-what-dependency-cruiser-is-doing)
 1. [`--prefix` prefixing links](#--prefix-prefixing-links)
 1. [`--module-systems`](#--module-systems)
 1. [`--ts-pre-compilation-deps` (typescript only)](#--ts-pre-compilation-deps-typescript-only)
@@ -1116,6 +1117,14 @@ and units might look slightly different.
 Make sure dependency-cruiser doesn't print any feedback. Useful if you want to
 override the progress option configured in a configuration file (currently
 an undocumented feature that is subject to change).
+
+### `--no-progress`: don't show feedback on what dependency-cruiser is doing
+
+The equivalent of `--progress none`.
+
+As showing no progress is dependency-cruiser's default the only use for this
+option is to override a `progress` setting from a configuration file or a
+`--progress` command line option set earlier on the command line.
 
 ### `--prefix` prefixing links
 
