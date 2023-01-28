@@ -30,17 +30,25 @@ npx depcruise --init
 ```
 
 This will look around in your environment a bit, ask you some questions and create
-a `.dependency-cruiser.js` configuration file attuned to your project[^1].
+a `.dependency-cruiser.js` configuration file attuned to your project[^1][^2].
 
 [^1]:
     We're using `npx` in the example scripts for convenience. When you use the
     commands in a script in `package.json` it's not necessary to prefix them with
     `npx`.
 
+[^2]:
+    If you don't don't want to use `npx`, but instead `pnpx` (from the `pnpm`
+    package manager) or `yarn` - please refer to that tool's documentation.
+    Particularly `pnpx` has semantics that differ from `npx` quite significantly
+    and that you want to be aware of before using it. In the mean time: `npx`
+    _should_ work even when you installed the dependency with a package manager
+    different from `npm`.
+
 ### Show stuff to your grandma
 
 To create a graph of the dependencies in your src folder, you'd run dependency
-cruiser with output type `dot` and run _GraphViz dot_[^2] on the result. In
+cruiser with output type `dot` and run _GraphViz dot_[^3] on the result. In
 a one liner:
 
 ```shell
@@ -55,7 +63,7 @@ npx depcruise src --include-only "^src" --config --output-type dot | dot -T svg 
   we've [got her covered](./doc/cli.md#--output-type-specify-the-output-format)
   as well.
 
-[^2]:
+[^3]:
     This assumes the GraphViz `dot` command is available - on most linux and
     comparable systems this will be. In case it's not, see
     [GraphViz' download page](https://www.graphviz.org/download/) for instructions
