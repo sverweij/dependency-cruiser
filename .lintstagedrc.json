@@ -1,0 +1,10 @@
+{
+  "{src,config}/**/*.js": ["eslint --fix"],
+  "{tools,src,config}/**/*.{mjs,js,json}": ["prettier --write"],
+  "bin/*": ["eslint --fix", "prettier --write"],
+  "test/**/*.{utl,spec}.{mjs,cjs}": ["eslint --fix", "prettier --write"],
+  "types/**/*.d.ts": [
+    "eslint --config types/.eslintrc.json --fix",
+    "prettier --write"
+  ]
+}
