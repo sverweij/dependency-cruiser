@@ -36,5 +36,22 @@
         "node/no-unsupported-features/es-syntax": "off"
       }
     }
+  ],
+  "ignorePatterns": [
+    ".pnp.cjs",
+    ".yarn",
+    "node_modules",
+    "coverage",
+    "tmp",
+    "src/**/*.schema.js",
+    "src/**/*.template.js",
+    "src/cli/tools/svg-in-html-snippets/script.snippet.js",
+    "test/integration/**",
+    "test/*/__fixtures__/**",
+    "test/*/*/__fixtures__/**",
+    "test/*/*/*/__fixtures__/**",
+    "test/*/__mocks__/**",
+    "test/*/*/__mocks__/**",
+    "types/**"
   ]
 }
