@@ -1,0 +1,23 @@
+{
+  "statements": 99.9,
+  "branches": 99.7,
+  "functions": 100,
+  "lines": 99.9,
+  "exclude": [
+    "bin",
+    "configs",
+    "doc",
+    "docs",
+    "coverage",
+    "test",
+    "tools",
+    "webpack.conf.js",
+    "tmp*",
+    "src/**/*.template.js",
+    "src/cli/tools/svg-in-html-snippets/script.snippet.js",
+    "src/cli/init-config/get-user-input.js",
+    "src/cli/listeners/*/index.js",
+    "src/cli/listeners/{cli-feedback,ndjson}.js"
+  ],
+  "reporter": ["text-summary", "html", "json-summary"]
+}
