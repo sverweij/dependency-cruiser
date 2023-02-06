@@ -47,7 +47,7 @@ function resolveModule(
 }
 
 function canBeResolvedToTsVariant(pModuleName) {
-  return [".js", ".jsx"].includes(path.extname(pModuleName));
+  return [".js", ".jsx", ".mjs", ".cjs"].includes(path.extname(pModuleName));
 }
 
 function isTypeScriptIshExtension(pModuleName) {
@@ -68,6 +68,23 @@ function resolveYarnVirtual(pPath) {
   return pPath;
 }
 
+/**
+ *
+ * @param {string} pJavaScriptExtension
+ * @returns {string}
+ */
+function getTypeScriptExtensionsToTry(pJavaScriptExtension) {
+  const lJS2TSMap = {
+    ".js": [".ts", ".tsx", ".d.ts"],
+    ".jsx": [".ts", ".tsx", ".d.ts"],
+    ".cjs": [".cts", ".d.cts"],
+    ".mjs": [".mts", ".d.mts"],
+  };
+  // eslint-disable-next-line security/detect-object-injection
+  return lJS2TSMap[pJavaScriptExtension] ?? [];
+}
+
+// eslint-disable-next-line max-lines-per-function
 function resolveWithRetry(
   pModule,
   pBaseDirectory,
@@ -90,7 +107,11 @@ function resolveWithRetry(
   // This behavior is very specific:
   // - tsc only (doesn't work in ts-node for instance)
   // - until TypeScript 4.6 only for the .js and .jsx extensions
-  // - since TypeScript 4.7 also for .cjs and .mjs (=> .cts, .mts) extensions
+  // - since TypeScript 4.7 also for .cjs and .mjs (=> .cts, .mts) extensions,
+  //   which work subtly different;
+  //   .cjs resolves to .cts or .d.cts (in that order)
+  //   .mjs resolves to .mts or .d.mts (in that order)
+  // ref: https://www.typescriptlang.org/docs/handbook/esm-node.html#new-file-extensions
   //
   // Hence also this oddly specific looking check & retry.
   //
@@ -100,16 +121,19 @@ function resolveWithRetry(
     lReturnValue.couldNotResolve &&
     canBeResolvedToTsVariant(lStrippedModuleName)
   ) {
-    const lModuleWithOutExtension = lStrippedModuleName.replace(
-      /\.(js|jsx|mjs|cjs)$/g,
+    const lModuleWithoutExtension = lStrippedModuleName.replace(
+      /\.(js|jsx|cjs|mjs)$/g,
       ""
+    );
+    const lExtensionsToTry = getTypeScriptExtensionsToTry(
+      path.extname(lStrippedModuleName)
     );
 
     const lReturnValueCandidate = resolveModule(
-      { ...pModule, module: lModuleWithOutExtension },
+      { ...pModule, module: lModuleWithoutExtension },
       pBaseDirectory,
       pFileDirectory,
-      pResolveOptions
+      { ...pResolveOptions, extensions: lExtensionsToTry }
     );
 
     if (isTypeScriptIshExtension(lReturnValueCandidate.resolved)) {
