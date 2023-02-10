@@ -323,4 +323,28 @@ describe("[I] extract/resolve/index - general", () => {
       resolved: "hashmark-after-this.js#this-is-extra",
     });
   });
+
+  it("Passes mainFields correctly so it's possible to resolve type-only packages", () => {
+    process.chdir("test/extract/resolve/__mocks__/resolve-type-only-packages");
+    expect(
+      resolve(
+        {
+          module: "lalala-interfaces",
+          moduleSystem: "es6",
+        },
+        process.cwd(),
+        process.cwd(),
+        normalizeResolveOptions({
+          bustTheCache: true,
+          mainFields: ["main", "types"],
+        })
+      )
+    ).to.deep.equal({
+      coreModule: false,
+      couldNotResolve: false,
+      dependencyTypes: ["npm-no-pkg"],
+      followable: true,
+      resolved: "node_modules/lalala-interfaces/dist/interfaces/index.d.ts",
+    });
+  });
 });

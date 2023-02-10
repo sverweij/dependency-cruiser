@@ -258,6 +258,22 @@ export default {
                 type: "string",
               },
             },
+            mainFields: {
+              type: "array",
+              description:
+                "A list of main fields in manifests (package.json s). Typically you'd " +
+                "want to keep leave this this on its default (['main']) , but if " +
+                "you e.g. use external packages that only expose types, and you " +
+                "still want references to these types to be resolved you could expand " +
+                "this to ['main', 'types']",
+            },
+            mainFiles: {
+              type: "array",
+              description:
+                "A list of files to consider 'main' files, defaults to " +
+                "['index']. Only set this when you have really special needs that" +
+                "that warrant it.",
+            },
             cachedInputFileSystem: {
               type: "object",
               description:

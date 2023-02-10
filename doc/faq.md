@@ -293,6 +293,30 @@ dependency in your project. That way it will automatically use the same
 versions of compiler tooling as your project does, which will give the most
 reliable results.
 
+### Q: dependency-cruiser complains it cannot resolve a type from an external package. What to do?
+
+**A**: add a `mainFields` attribute to the `options.enhancedResolveOptions` section
+in your .dependency-cruiser.js that tells it to _also_ look for the _types_ field
+in that external package package.json e.g. like so:
+
+```JavaScript
+{
+  // rules: [],
+  options: {
+    enhancedResolveOptions: {
+      mainFields: ["main", "types"]
+    }
+    // other options ...
+  }
+}
+```
+
+Dependency-cruiser uses the defaults of `enhanced-resolve`, which (correctly,
+as per node.js specification) looks at `main` and `export` fields in package.json,
+in addition to files named `index` (.js, .mjs, .cjs, ...). It can be instructed
+to also look at other fields with this `mainFields` attribute, which
+dependency-cruiser will 1:1 pass on to it.
+
 ## Features
 
 ### Q: How do I enable TypeScript, CoffeeScript or LiveScript in dependency-cruiser?

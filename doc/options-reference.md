@@ -1498,6 +1498,20 @@ nothing else you can pass `['.ts', '.json']` - which can lead to performance gai
 on systems with slow i/o (like ms-windows), especially when your tsconfig
 contains paths/ aliases.
 
+#### `mainFields`
+
+A list of main fields in manifests (package.json-s). Typically you'd want to keep
+leave this this on its default (`['main']`) , but if you e.g. use external packages
+that only expose types, and you still want references to these types to be resolved
+you could expand this to `['main', 'types']`.
+
+#### `mainFiles`
+
+> Likely you will not need to use this
+
+A list of files to consider 'main' files, defaults to ['index']. Only set this
+when you have really special needs that that warrant it.
+
 #### cachedInputFileSystem - `cacheDuration`
 
 > Likely you will not need to use this
