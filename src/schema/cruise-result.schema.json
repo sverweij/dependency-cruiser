@@ -956,6 +956,14 @@
               "description": "List of extensions to scan for when resolving. Typically you want to leave this alone as dependency-cruiser figures out what extensions to scan based on 1. what is available in your environment 2. in the order your environment (nodejs, typescript) applies the resolution itself. However, if you want it to scan less you can specify so with the extensions attribute. E.g. when you're 100% sure you _only_ have typescript & json and nothing else you can pass ['.ts', '.json'] - which can lead to performance gains on systems with slow i/o (like ms-windows), especially when your tsconfig contains paths/ aliases.",
               "items": { "type": "string" }
             },
+            "mainFields": {
+              "type": "array",
+              "description": "A list of main fields in manifests (package.json s). Typically you'd want to keep leave this this on its default (['main']) , but if you e.g. use external packages that only expose types, and you still want references to these types to be resolved you could expand this to ['main', 'types']"
+            },
+            "mainFiles": {
+              "type": "array",
+              "description": "A list of files to consider 'main' files, defaults to ['index']. Only set this when you have really special needs thatthat warrant it."
+            },
             "cachedInputFileSystem": {
               "type": "object",
               "description": "Options to pass to the resolver (webpack's 'enhanced resolve') regardingcaching.",
