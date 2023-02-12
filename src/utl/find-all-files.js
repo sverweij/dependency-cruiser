@@ -79,7 +79,7 @@ function identityFilter(_pString, _pIndex, _pArray) {
 
 /**
  * @param {string} pDirectoryName
- * @param {{baseDir: string; ignoreFileContents?: string; additionalIgnorePatterns?: string[]; excludeFilterFn: FilterFunctionType; includeOnlyFilterFn: FilterFunctionType}} pOptions
+ * @param {{baseDir: string; ignoreFileContents?: string; additionalIgnorePatterns?: string[]; excludeFilterFn?: FilterFunctionType; includeOnlyFilterFn?: FilterFunctionType}} pOptions
  * @returns {string[]}
  */
 module.exports = function findAllFiles(

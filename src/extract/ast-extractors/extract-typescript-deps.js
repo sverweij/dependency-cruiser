@@ -14,7 +14,7 @@ const typescript = tryRequire("typescript", supportedTranspilers.typescript);
  * Get all import and export statements from the top level AST node
  *
  * @param {import("typescript").Node} pAST - the (top-level in this case) AST node
- * @returns {{module: string, moduleSystem: string, exoticallyRequired: boolean}[]} -
+ * @returns {{module: string; moduleSystem: string; exoticallyRequired: boolean; dependencyTypes?: string[];}[]} -
  *                                  all import and export statements in the
  *                                  (top level) AST node
  */
@@ -44,7 +44,7 @@ function extractImportsAndExports(pAST) {
  * which happens in typescript/lib/protocol.d.ts)
  *
  * @param {import("typescript").Node} pAST - the (top-level in this case) AST node
- * @returns {{module: string, moduleSystem: string}[]} - all import equals statements in the
+ * @returns {{module: string, moduleSystem: string;exoticallyRequired: boolean;}[]} - all import equals statements in the
  *                                  (top level) AST node
  */
 function extractImportEquals(pAST) {

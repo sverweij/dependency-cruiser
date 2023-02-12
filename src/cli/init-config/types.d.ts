@@ -34,6 +34,12 @@ export interface IInitConfig {
    */
   tsPreCompilationDeps: boolean;
   /**
+   * Derived attribute. True if the current project likely uses typescript (has a
+   * tsconfig, has files with typescript extensions in source and/ or test
+   * folders, or has a truthy tsPreCompilationDeps)
+   */
+  usesTypeScript: boolean;
+  /**
    * Whether or not to use a Webpack config
    */
   useWebpackConfig: boolean;

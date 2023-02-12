@@ -9,7 +9,36 @@ const {
 const findExtensions = require("./find-extensions.js");
 
 /**
- *
+ * @param {import("./types").IInitConfig} pInitOptions
+ * @param {string[]} pExtensions
+ * @returns {boolean}
+ */
+function usesTypeScript(pInitOptions, pExtensions) {
+  return Boolean(
+    pInitOptions.tsConfig ||
+      pInitOptions.tsPreCompilationDeps ||
+      (pExtensions || []).some((pExtension) =>
+        [".ts", ".tsx", ".d.ts", ".mts", ".d.mts", ".cts", ".d.cts"].includes(
+          pExtension
+        )
+      )
+  );
+}
+
+/**
+ * @param {import("./types").IInitConfig} pInitOptions
+ * @returns {string[]}
+ */
+function getExtensions(pInitOptions) {
+  let lFoldersToScan = pInitOptions.sourceLocation;
+
+  if (pInitOptions.hasTestsOutsideSource) {
+    lFoldersToScan = lFoldersToScan.concat(pInitOptions.testLocation);
+  }
+  return findExtensions(lFoldersToScan.length > 0 ? lFoldersToScan : ["."]);
+}
+
+/**
  * @param {import("./types").IPartialInitConfig} pInitOptions
  * @return {import("./types").IPartialInitConfig}
  */
@@ -28,13 +57,11 @@ function populate(pInitOptions) {
           pInitOptions.testLocation || getTestFolderCandidates()
         ),
   };
+  const lExtensions = getExtensions(lReturnValue);
+  lReturnValue.usesTypeScript = usesTypeScript(pInitOptions, lExtensions);
+
   if (lReturnValue.specifyResolutionExtensions) {
-    const lFoldersToScan = lReturnValue.sourceLocation.concat(
-      lReturnValue.testLocation
-    );
-    lReturnValue.resolutionExtensions = findExtensions(
-      lFoldersToScan.length > 0 ? lFoldersToScan : ["."]
-    );
+    lReturnValue.resolutionExtensions = lExtensions;
   }
   return lReturnValue;
 }
