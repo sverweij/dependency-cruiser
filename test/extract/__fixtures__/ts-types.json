@@ -30,6 +30,38 @@
         "couldNotResolve": false
       }
     ]
+  },
+  {
+    "title": "type only from .mts + regular import from the same module yields 2 dependencies",
+    "input": {
+      "fileName": "test/extract/__mocks__/ts-types/two-import-types-one-dependency.mts"
+    },
+    "expected": [
+      {
+        "module": "./things",
+        "resolved": "test/extract/__mocks__/ts-types/things.ts",
+        "moduleSystem": "es6",
+        "coreModule": false,
+        "dependencyTypes": ["local"],
+        "dynamic": false,
+        "followable": true,
+        "exoticallyRequired": false,
+        "matchesDoNotFollow": false,
+        "couldNotResolve": false
+      },
+      {
+        "module": "./things",
+        "resolved": "test/extract/__mocks__/ts-types/things.ts",
+        "moduleSystem": "es6",
+        "coreModule": false,
+        "dependencyTypes": ["local", "type-only"],
+        "dynamic": false,
+        "followable": true,
+        "exoticallyRequired": false,
+        "matchesDoNotFollow": false,
+        "couldNotResolve": false
+      }
+    ]
   }
   // TODO: nope - that doesn't work yet; fix in a separate PR
   // {
