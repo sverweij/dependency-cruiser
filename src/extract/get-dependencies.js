@@ -32,9 +32,16 @@ function extractFromTypeScriptAST(pOptions, pFileName, pTranspileOptions) {
 }
 
 function isTypeScriptCompatible(pFileName) {
-  return [".ts", ".tsx", ".js", ".mjs", ".cjs", ".vue"].includes(
-    path.extname(pFileName)
-  );
+  return [
+    ".ts",
+    ".tsx",
+    ".mts",
+    ".cts",
+    ".js",
+    ".mjs",
+    ".cjs",
+    ".vue",
+  ].includes(path.extname(pFileName));
 }
 
 function shouldUseTsc(pOptions, pFileName) {
