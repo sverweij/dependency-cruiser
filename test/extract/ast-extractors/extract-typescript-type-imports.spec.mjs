@@ -100,6 +100,7 @@ describe("[U] ast-extractors/extract-typescript - type imports", () => {
       },
     ]);
   });
+
   it("extracts imports that explicitly state they only import a type - default import plus parts", () => {
     expect(
       extractTypescript(
