@@ -18,6 +18,7 @@ available in dependency-cruiser configurations.
 1. [arguments - files and/ or directories](#arguments---files-and-or-directories)
 1. [`--output-type`: specify the output format](#--output-type-specify-the-output-format)
 1. [`--config`/ `--validate`: use a configuration with rules and/or options](#--config---validate)
+1. [`--no-config`: do not use a configuration file](#--no-config)
 1. [`--init`](#--init)
 1. [`--metrics`: calculate stability metrics](#--metrics)
 1. [`--info`: show what alt-js are supported](#--info-showing-what-alt-js-are-supported)
@@ -677,6 +678,16 @@ For more information about writing rules see the [tutorial](rules-tutorial.md) a
 [options reference](options-reference.md).
 
 For an easy set up of both use [--init](#--init)
+
+### `--no-config`
+
+Use this if you don't want to use a configuration file. Overrides any earlier
+specified --config (or --validate) option.
+
+> If you actually use this, I'm interested in your use case. Please drop an
+> [issue on GitHub](https://github.com/sverweij/dependency-cruiser/issues/new?assignees=&labels=&template=use-without-config.md&title=I+use+dependency-cruiser+without+a+configuration+file.+This+is+why:) or contact me on mastodon
+> ([@mcmeadow@mstdn.social](https://mstdn.social/@mcmeadow)) or twitter
+> ([@mcmeadow](https://twitter.com/mcmeadow)).
 
 ### `--init`
 

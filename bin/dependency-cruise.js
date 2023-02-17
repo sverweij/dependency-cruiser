@@ -25,6 +25,11 @@ try {
       "read rules and options from [file] (e.g. .dependency-cruiser.js)"
     )
     .option(
+      "--no-config",
+      "do not use a configuration file. " +
+        "Overrides any --config option set earlier"
+    )
+    .option(
       "-T, --output-type <type>",
       "output type; e.g. err, err-html, dot, ddot, archi, flat, baseline or json\n(default: err)"
     )

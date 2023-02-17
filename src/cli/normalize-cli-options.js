@@ -108,7 +108,7 @@ function normalizeKnownViolationsOption(pCliOptions) {
 }
 
 function normalizeValidationOption(pCliOptions) {
-  if (!has(pCliOptions, "validate")) {
+  if (!pCliOptions.validate) {
     return {
       validate: false,
     };
