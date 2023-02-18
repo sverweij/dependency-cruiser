@@ -8,6 +8,7 @@ try {
   // error. Otherwise, on unsupported platforms we would show a stack trace, which is
   // not so nice
   /* eslint-disable node/global-require */
+  const { EOL } = require("os");
   const program = require("commander");
   const { version } = require("../src/meta.js");
   const cli = require("../src/cli");
@@ -15,7 +16,7 @@ try {
   /** @type {import('commander')} */
   program
     .description(
-      "Validate and visualize dependencies.\nDetails: https://github.com/sverweij/dependency-cruiser"
+      `Validate and visualize dependencies.${EOL}Details: https://github.com/sverweij/dependency-cruiser`
     )
     .option(
       "--init [oneshot]",
@@ -76,18 +77,24 @@ try {
       "ignore known violations as saved in [file] (default: .dependency-cruiser-known-violations.json)"
     )
     .addOption(new program.Option("--no-ignore-known").hideHelp(true))
-    .option(
-      "--ts-config [file]",
-      "use a TypeScript configuration (e.g. tsconfig.json) or it's JavaScript counterpart (e.g. jsconfig.json)"
+    .addOption(
+      new program.Option(
+        "--ts-config [file]",
+        "use a TypeScript configuration (e.g. tsconfig.json) or it's JavaScript counterpart (e.g. jsconfig.json)"
+      ).hideHelp(true)
     )
-    .option(
-      "--webpack-config [file]",
-      "use a webpack configuration (e.g. webpack.config.js)"
+    .addOption(
+      new program.Option(
+        "--webpack-config [file]",
+        "use a webpack configuration (e.g. webpack.config.js)"
+      ).hideHelp(true)
     )
-    .option(
-      "--ts-pre-compilation-deps",
-      "detect dependencies that only exist before typescript-to-javascript " +
-        "compilation (off by default)"
+    .addOption(
+      new program.Option(
+        "--ts-pre-compilation-deps",
+        "detect dependencies that only exist before typescript-to-javascript " +
+          "compilation (off by default)"
+      ).hideHelp(true)
     )
     .option(
       "-S, --collapse <regex>",
@@ -99,7 +106,7 @@ try {
       new program.Option(
         "-p, --progress [type]",
         "show progress while dependency-cruiser is busy"
-      ).choices(["cli-feedback", "performance-log", "none"])
+      ).choices(["cli-feedback", "performance-log", "ndjson", "none"])
     )
     .addOption(
       new program.Option("--no-progress", "Alias of --progress none").hideHelp(
@@ -113,9 +120,11 @@ try {
           "(max-depth would limit the cruise depth; 0 <= n <= 99 (default: 0 - no limit))."
       ).hideHelp(true)
     )
-    .option(
-      "-M, --module-systems <items>",
-      "list of module systems (default: amd, cjs, es6, tsd)"
+    .addOption(
+      new program.Option(
+        "-M, --module-systems <items>",
+        "list of module systems (default: amd, cjs, es6, tsd)"
+      ).hideHelp(true)
     )
     .option(
       "-P, --prefix <prefix>",
@@ -139,7 +148,12 @@ try {
           "and --cache options set earlier on the command line"
       ).hideHelp(true)
     )
-    .option("--preserve-symlinks", `leave symlinks unchanged (off by default)`)
+    .addOption(
+      new program.Option(
+        "--preserve-symlinks",
+        "leave symlinks unchanged (off by default)"
+      ).hideHelp(true)
+    )
     .addOption(
       new program.Option(
         "-v, --validate [file]",
@@ -149,6 +163,11 @@ try {
     .option(
       "-i, --info",
       "shows what languages and extensions dependency-cruiser supports"
+    )
+    .addHelpText(
+      "after",
+      `${EOL}Other options:` +
+        `${EOL}    see https://github.com/sverweij/dependency-cruiser/blob/master/doc/cli.md${EOL}`
     )
     .version(version)
     .arguments("[files-or-directories]")
