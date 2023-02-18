@@ -23,6 +23,7 @@ available in dependency-cruiser configurations.
 1. [`--metrics`: calculate stability metrics](#--metrics)
 1. [`--info`: show what alt-js are supported](#--info-showing-what-alt-js-are-supported)
 1. [`--ignore-known`: ignore known violations](#--ignore-known-ignore-known-violations)
+1. [`--no-ignore-known`: don't ignore known violations](#--no-ignore-known)
 1. [`--help`/ no parameters: get help](#--help--no-parameters)
 
 ### Options also available in dependency-cruiser configurations
@@ -833,6 +834,11 @@ you already decided to fix later - possibly burying any new violations (which
 you probably want to avoid).
 
 With this option you can avoid that.
+
+### `--no-ignore-known`
+
+Don't ignore known violations. Use this if you want to override an `--ignore-known`
+option set earlier on the command line.
 
 ### `--help` / no parameters
 

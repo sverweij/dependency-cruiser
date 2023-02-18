@@ -58,8 +58,13 @@ function includeOnlyIsCompatible(pExistingFilter, pNewFilter) {
     !pExistingFilter || isDeepStrictEqual({ path: pExistingFilter }, pNewFilter)
   );
 }
-function optionIsCompatible(pExistingOption, pNewOption) {
+
+function filterOptionIsCompatible(pExistingOption, pNewOption) {
   return !pExistingOption || isDeepStrictEqual(pExistingOption, pNewOption);
+}
+
+function optionIsCompatible(pExistingOption, pNewOption) {
+  return isDeepStrictEqual(pExistingOption, pNewOption);
 }
 
 function limitIsCompatible(pExistingLimit, pNewLimit) {
@@ -97,13 +102,19 @@ function optionsAreCompatible(pOldOptions, pNewOptions) {
     metricsIsCompatible(pOldOptions.metrics, pNewOptions.metrics) &&
     // includeOnly suffers from a backwards compatibility disease
     includeOnlyIsCompatible(pOldOptions.includeOnly, pNewOptions.includeOnly) &&
-    optionIsCompatible(pOldOptions.doNotFollow, pNewOptions.doNotFollow) &&
-    optionIsCompatible(pOldOptions.moduleSystems, pNewOptions.moduleSystems) &&
-    optionIsCompatible(pOldOptions.exclude, pNewOptions.exclude) &&
-    optionIsCompatible(pOldOptions.focus, pNewOptions.focus) &&
-    optionIsCompatible(pOldOptions.reaches, pNewOptions.reaches) &&
-    optionIsCompatible(pOldOptions.highlight, pNewOptions.highlight) &&
-    optionIsCompatible(pOldOptions.collapse, pNewOptions.collapse) &&
+    filterOptionIsCompatible(
+      pOldOptions.doNotFollow,
+      pNewOptions.doNotFollow
+    ) &&
+    filterOptionIsCompatible(
+      pOldOptions.moduleSystems,
+      pNewOptions.moduleSystems
+    ) &&
+    filterOptionIsCompatible(pOldOptions.exclude, pNewOptions.exclude) &&
+    filterOptionIsCompatible(pOldOptions.focus, pNewOptions.focus) &&
+    filterOptionIsCompatible(pOldOptions.reaches, pNewOptions.reaches) &&
+    filterOptionIsCompatible(pOldOptions.highlight, pNewOptions.highlight) &&
+    filterOptionIsCompatible(pOldOptions.collapse, pNewOptions.collapse) &&
     limitIsCompatible(pOldOptions.maxDepth, pNewOptions.maxDepth) &&
     optionIsCompatible(
       pOldOptions.knownViolations,
@@ -123,6 +134,7 @@ function optionsAreCompatible(pOldOptions, pNewOptions) {
 
 module.exports = {
   optionsAreCompatible,
+  filterOptionIsCompatible,
   optionIsCompatible,
   limitIsCompatible,
   metricsIsCompatible,

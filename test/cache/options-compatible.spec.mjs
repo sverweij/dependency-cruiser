@@ -2,6 +2,7 @@
 import { expect } from "chai";
 import {
   optionIsCompatible,
+  filterOptionIsCompatible,
   includeOnlyIsCompatible,
   limitIsCompatible,
   metricsIsCompatible,
@@ -14,13 +15,14 @@ describe("[U] cache/options-compatible - optionIsCompatible", () => {
     expect(optionIsCompatible()).to.equal(true);
   });
 
-  it("if the old filter doesn't exist, the new one is compatible, whatever it is", () => {
+  it("if the old option doesn't exist, the new one is not compatible, whatever it is", () => {
     expect(
-      optionIsCompatible(null, { path: ["aap", "noot", "mies"] })
-    ).to.equal(true);
+      // eslint-disable-next-line no-undefined
+      optionIsCompatible(undefined, { path: ["aap", "noot", "mies"] })
+    ).to.equal(false);
   });
 
-  it("if the old filter exists, the new one is compatible when it's _exactly_ the same", () => {
+  it("if the old option exists, the new one is compatible when it's _exactly_ the same", () => {
     expect(
       optionIsCompatible(
         { path: ["aap", "noot", "mies"] },
@@ -29,19 +31,78 @@ describe("[U] cache/options-compatible - optionIsCompatible", () => {
     ).to.equal(true);
   });
 
-  it("if the old filter exists, the new one is _not_ compatible when it doesn't exist", () => {
+  it("if the old option exists, the new one is _not_ compatible when it doesn't exist", () => {
     expect(
       optionIsCompatible({ path: ["aap", "noot", "mies"] }, null)
     ).to.equal(false);
   });
 
-  it("if the old filter exists, the new one is _not_ compatible when it isn't exactly the same", () => {
+  it("if the old option exists, the new one is _not_ compatible when it isn't exactly the same", () => {
     expect(
       optionIsCompatible(
         { path: ["aap", "noot", "mies"] },
         { path: ["aap", "mies"] }
       )
     ).to.equal(false);
+  });
+
+  it("if the old option equals false and the new one is as well, they're compatible", () => {
+    expect(optionIsCompatible(false, false)).to.equal(true);
+  });
+
+  it("if the old option equals false and the new one is true, they're _not_ compatible", () => {
+    expect(optionIsCompatible(false, true)).to.equal(false);
+  });
+});
+
+describe("[U] cache/options-compatible - filterOptionIsCompatible", () => {
+  it("if neither filter exists they're compatible", () => {
+    expect(filterOptionIsCompatible()).to.equal(true);
+  });
+
+  it("if the old (filter) option doesn't exist, the new one is compatible, whatever it is", () => {
+    expect(
+      // eslint-disable-next-line no-undefined
+      filterOptionIsCompatible(undefined, { path: ["aap", "noot", "mies"] })
+    ).to.equal(true);
+  });
+
+  it("if the old (filter) option is null, the new one is compatible, whatever it is", () => {
+    expect(
+      filterOptionIsCompatible(null, { path: ["aap", "noot", "mies"] })
+    ).to.equal(true);
+  });
+
+  it("if the old (filter) option exists, the new one is compatible when it's _exactly_ the same", () => {
+    expect(
+      filterOptionIsCompatible(
+        { path: ["aap", "noot", "mies"] },
+        { path: ["aap", "noot", "mies"] }
+      )
+    ).to.equal(true);
+  });
+
+  it("if the old (filter) option exists, the new one is _not_ compatible when it doesn't exist", () => {
+    expect(
+      filterOptionIsCompatible({ path: ["aap", "noot", "mies"] }, null)
+    ).to.equal(false);
+  });
+
+  it("if the old (filter) option exists, the new one is _not_ compatible when it isn't exactly the same", () => {
+    expect(
+      filterOptionIsCompatible(
+        { path: ["aap", "noot", "mies"] },
+        { path: ["aap", "mies"] }
+      )
+    ).to.equal(false);
+  });
+
+  it("if the old (filter) option equals false and the new one is as well, they're compatible", () => {
+    expect(filterOptionIsCompatible(false, false)).to.equal(true);
+  });
+
+  it("if the old (filter) option equals false and the new one is true, they're compatible", () => {
+    expect(filterOptionIsCompatible(false, true)).to.equal(true);
   });
 });
 

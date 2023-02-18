@@ -97,7 +97,7 @@ function validateAndGetKnownViolationsFileName(pKnownViolations) {
 }
 
 function normalizeKnownViolationsOption(pCliOptions) {
-  if (!has(pCliOptions, "ignoreKnown")) {
+  if (!has(pCliOptions, "ignoreKnown") || pCliOptions.ignoreKnown === false) {
     return {};
   }
   return {
