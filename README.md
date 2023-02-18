@@ -20,8 +20,12 @@ you can stick on the wall to impress your grandma.
 
 ### Install it
 
-- `npm install --save-dev dependency-cruiser` (with `yarn` or `pnpm` use their
-  equivalent to install & save dependency-cruiser as a development dependency).
+```shell
+npm install --save-dev dependency-cruiser
+# or
+yarn add -D dependency-cruiser
+pnpm add -D dependency-cruiser
+```
 
 ### Generate a config
 
