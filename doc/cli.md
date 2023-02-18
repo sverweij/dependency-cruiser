@@ -854,12 +854,16 @@ options documented here in order to keep it inviting to use. The ones left out
 are:
 
 - the _implied_ ones (e.g. `--config` implies the existence of
-  a `--no-config` option)
+  a `--no-config` option).
 - ones that have an _alias_ to prevent a breaking change
-  (`--validate` is an alias for `--config`)
-- ones that have been superseded by better options but were left in to prevent
-  a breaking change (`--max-depth`; `--focus`/ `--focus-depth` and `--collapse`
-  are both more powerful and to the point for most use cases)
+  (`--validate` is an alias for `--config`).
+- ones that have been superseded by better options but were left in for
+  backwards compatibility. E.g. `--max-depth` has been superseded by the
+  `--focus`/ `--focus-depth` and `--collapse` which are both more powerful
+  and mor to the point for most use cases.
+- those that better live in the configuration file, but are still cli
+  options for backwards compatibility (e.g. `--ts-config`, `--webpack-config`,
+  `--ts-pre-compilation-deps`, `--module-systems`, `--preserve-symlinks`)
 
 ## Options also available in dependency-cruiser configurations
 

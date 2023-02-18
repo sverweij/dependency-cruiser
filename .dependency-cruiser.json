@@ -105,7 +105,8 @@
           "^src/cli",
           "^node_modules",
           "^\\.yarn/cache",
-          "^src/meta\\.js$"
+          "^src/meta\\.js$",
+          "^os$"
         ]
       }
     },
