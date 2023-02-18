@@ -22,7 +22,7 @@ you can stick on the wall to impress your grandma.
 
 ```javascript
 npm install --save-dev dependency-cruiser
-// or
+# or
 yarn add -D dependency-cruiser
 pnpm add -D dependency-cruiser
 ```
