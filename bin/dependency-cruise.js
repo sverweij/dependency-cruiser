@@ -12,6 +12,7 @@ try {
   const { version } = require("../src/meta.js");
   const cli = require("../src/cli");
 
+  /** @type {import('commander')} */
   program
     .description(
       "Validate and visualize dependencies.\nDetails: https://github.com/sverweij/dependency-cruiser"
@@ -24,14 +25,17 @@ try {
       "-c, --config [file]",
       "read rules and options from [file] (e.g. .dependency-cruiser.js)"
     )
-    .option(
-      "--no-config",
-      "do not use a configuration file. " +
-        "Overrides any --config option set earlier"
+    .addOption(
+      new program.Option(
+        "--no-config",
+        "do not use a configuration file. " +
+          "Overrides any --config option set earlier"
+      ).hideHelp(true)
     )
     .option(
       "-T, --output-type <type>",
-      "output type; e.g. err, err-html, dot, ddot, archi, flat, baseline or json\n(default: err)"
+      "output type; e.g. err, err-html, dot, ddot, archi, flat, baseline or json",
+      "err"
     )
     .option("-m, --metrics", "calculate stability metrics", false)
     .option(
@@ -89,15 +93,23 @@ try {
         "regex collapses to that pattern E.g. ^packages/[^/]+/ would collapse to " +
         "modules/ folders directly under your packages folder. "
     )
-    .option(
-      "-p, --progress [type]",
-      "show progress while dependency-cruiser is busy. Possible values: cli-feedback, performance-log, none"
+    .addOption(
+      new program.Option(
+        "-p, --progress [type]",
+        "show progress while dependency-cruiser is busy"
+      ).choices(["cli-feedback", "performance-log", "none"])
     )
-    .option("--no-progress", "Alias of --progress none")
-    .option(
-      "-d, --max-depth <n>",
-      "You probably want to use --collapse instead of --max-depth. " +
-        "(max-depth would limit the cruise depth; 0 <= n <= 99 (default: 0 - no limit))."
+    .addOption(
+      new program.Option("--no-progress", "Alias of --progress none").hideHelp(
+        true
+      )
+    )
+    .addOption(
+      new program.Option(
+        "-d, --max-depth <n>",
+        "You probably want to use --collapse instead of --max-depth. " +
+          "(max-depth would limit the cruise depth; 0 <= n <= 99 (default: 0 - no limit))."
+      ).hideHelp(true)
     )
     .option(
       "-M, --module-systems <items>",
@@ -112,18 +124,26 @@ try {
       "(experimental) use a cache to speed up execution. " +
         "The directory defaults to node_modules/.cache/dependency-cruiser"
     )
-    .option(
-      "--cache-strategy <strategy>",
-      "(experimental) strategy to use for detecting changed files in the cache. " +
-        "Possible values: metadata (= use git, the default), content"
+    .addOption(
+      new program.Option(
+        "--cache-strategy <strategy>",
+        "(experimental) strategy to use for detecting changed files in the cache. "
+      ).choices(["metadata", "content"])
     )
-    .option(
-      "--no-cache",
-      "switch off caching. Overrides the 'cache' key in .dependency-cruiser.js " +
-        "and --cache options set earlier on the command line"
+    .addOption(
+      new program.Option(
+        "--no-cache",
+        "switch off caching. Overrides the 'cache' key in .dependency-cruiser.js " +
+          "and --cache options set earlier on the command line"
+      ).hideHelp(true)
     )
     .option("--preserve-symlinks", `leave symlinks unchanged (off by default)`)
-    .option("-v, --validate [file]", `alias for --config`)
+    .addOption(
+      new program.Option(
+        "-v, --validate [file]",
+        `alias for --config`
+      ).hideHelp(true)
+    )
     .option(
       "-i, --info",
       "shows what languages and extensions dependency-cruiser supports"
