@@ -21,6 +21,7 @@ available in dependency-cruiser configurations.
 1. [`--no-config`: do not use a configuration file](#--no-config)
 1. [`--init`](#--init)
 1. [`--metrics`: calculate stability metrics](#--metrics)
+1. [`--no-metrics`: do not calculate stability metrics](#--no-metrics)
 1. [`--info`: show what alt-js are supported](#--info-showing-what-alt-js-are-supported)
 1. [`--ignore-known`: ignore known violations](#--ignore-known-ignore-known-violations)
 1. [`--no-ignore-known`: don't ignore known violations](#--no-ignore-known)
@@ -738,6 +739,12 @@ Currently this output is only reflected in the `json` and the
   need to specify it there.
 - Not on by default as it's relatively resource intensive (especially when
   dependency-cruiser doesn't already derives dependents of folders.)
+
+### `--no-metrics`
+
+Do not calculate metrics. You can use this to override an earlier set `--metrics`
+command line option or `metrics` option in a .dependency-cruiser.js configuration
+file.
 
 ### `--info` showing what alt-js are supported
 
