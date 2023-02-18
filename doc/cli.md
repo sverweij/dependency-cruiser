@@ -829,14 +829,24 @@ When you first deploy dependency-cruiser in a large code base chances are it wil
 detect quite some violations - even when it only uses the default set of rules
 that comes with `--init`. It will not always possible to fix all the violations
 right away. This means that any run of dependency-cruiser will show violations
-you already decided to fix later - possibly burrying any new violations (which
+you already decided to fix later - possibly burying any new violations (which
 you probably want to avoid).
 
 With this option you can avoid that.
 
 ### `--help` / no parameters
 
-Running with no parameters or with `--help` gets you help.
+Running with no parameters or with `--help` gets you help. It doesn't show all
+options documented here in order to keep it inviting to use. The ones left out
+are:
+
+- the _implied_ ones (e.g. `--config` implies the existence of
+  a `--no-config` option)
+- ones that have an _alias_ to prevent a breaking change
+  (`--validate` is an alias for `--config`)
+- ones that have been superseded by better options but were left in to prevent
+  a breaking change (`--max-depth`; `--focus`/ `--focus-depth` and `--collapse`
+  are both more powerful and to the point for most use cases)
 
 ## Options also available in dependency-cruiser configurations
 
