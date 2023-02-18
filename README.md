@@ -20,7 +20,7 @@ you can stick on the wall to impress your grandma.
 
 ### Install it
 
-```javascript
+```shell
 npm install --save-dev dependency-cruiser
 # or
 yarn add -D dependency-cruiser
