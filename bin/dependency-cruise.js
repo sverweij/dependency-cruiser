@@ -74,6 +74,7 @@ try {
       "--ignore-known [file]",
       "ignore known violations as saved in [file] (default: .dependency-cruiser-known-violations.json)"
     )
+    .addOption(new program.Option("--no-ignore-known").hideHelp(true))
     .option(
       "--ts-config [file]",
       "use a TypeScript configuration (e.g. tsconfig.json) or it's JavaScript counterpart (e.g. jsconfig.json)"
