@@ -38,6 +38,7 @@ try {
       "err"
     )
     .option("-m, --metrics", "calculate stability metrics", false)
+    .addOption(new program.Option("--no-metrics").hideHelp(true))
     .option(
       "-f, --output-to <file>",
       "file to write output to; - for stdout",
