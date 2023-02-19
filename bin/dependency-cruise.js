@@ -5,7 +5,7 @@ try {
   validateNodeEnvironment();
 
   // importing things only after the validateNodeEnv check so we can show an understandable
-  // error. Otherwise, on unsupported platforms we would show a stack trace, which is
+  // error. Otherwise, on unsupported platforms we could show a stack trace, which is
   // not so nice
   /* eslint-disable node/global-require */
   const { EOL } = require("os");
@@ -13,14 +13,13 @@ try {
   const { version } = require("../src/meta.js");
   const cli = require("../src/cli");
 
-  /** @type {import('commander')} */
   program
     .description(
       `Validate and visualize dependencies.${EOL}Details: https://github.com/sverweij/dependency-cruiser`
     )
     .option(
       "--init [oneshot]",
-      "set up dependency-cruiser for use in your environment (<<< recommended!)"
+      `set up dependency-cruiser for use in your environment (<<< recommended!)${EOL}${EOL}`
     )
     .option(
       "-c, --config [file]",
@@ -35,7 +34,7 @@ try {
     )
     .option(
       "-T, --output-type <type>",
-      "output type; e.g. err, err-html, dot, ddot, archi, flat, baseline or json",
+      "output type; e.g. err, err-html, dot, ddot, archi, flat, text or json",
       "err"
     )
     .option("-m, --metrics", "calculate stability metrics", false)
@@ -99,7 +98,7 @@ try {
     .option(
       "-S, --collapse <regex>",
       "collapse a to a folder depth by passing a single digit (e.g. 2). When passed a " +
-        "regex collapses to that pattern E.g. ^packages/[^/]+/ would collapse to " +
+        'regex collapses to that pattern. E.g. "^packages/[^/]+/" would collapse to ' +
         "modules/ folders directly under your packages folder. "
     )
     .addOption(
@@ -128,7 +127,7 @@ try {
     )
     .option(
       "-P, --prefix <prefix>",
-      "prefix to use for links in the dot and err-html reporters"
+      `prefix to use for links in the dot and err-html reporters${EOL}${EOL}`
     )
     .option(
       "-C, --cache [cache-directory]",
@@ -138,7 +137,7 @@ try {
     .addOption(
       new program.Option(
         "--cache-strategy <strategy>",
-        "(experimental) strategy to use for detecting changed files in the cache. "
+        "(experimental) strategy to use for detecting changed files in the cache."
       ).choices(["metadata", "content"])
     )
     .addOption(
@@ -167,7 +166,7 @@ try {
     .addHelpText(
       "after",
       `${EOL}Other options:` +
-        `${EOL}    see https://github.com/sverweij/dependency-cruiser/blob/master/doc/cli.md${EOL}`
+        `${EOL}  see https://github.com/sverweij/dependency-cruiser/blob/master/doc/cli.md${EOL}`
     )
     .version(version)
     .arguments("[files-or-directories]")
