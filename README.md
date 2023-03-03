@@ -18,7 +18,7 @@ you can stick on the wall to impress your grandma.
 
 ## How do I use it?
 
-### Install it
+### Install it ...
 
 ```shell
 npm install --save-dev dependency-cruiser
@@ -27,7 +27,7 @@ yarn add -D dependency-cruiser
 pnpm add -D dependency-cruiser
 ```
 
-### Generate a config
+### ... and generate a config
 
 ```shell
 npx depcruise --init
