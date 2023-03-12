@@ -323,7 +323,11 @@
     "exoticRequireStrings": ["tryRequire", "requireJSON"],
     "reporterOptions": {
       "archi": {
-        "collapsePattern": ["^(src|test)/[^/]+", "^bin/", "node_modules/[^/]+"]
+        "collapsePattern": [
+          "^(src|test)/[^/]+",
+          "^bin/",
+          "node_modules/(@[^/]+/[^/]+|[^/]+)"
+        ]
       },
       "dot": {
         "collapsePattern": ["^src/report/[^/]+", "^src/enrich/derive/[^/]+"],
