@@ -269,7 +269,7 @@ a `matchesFocus` attribute, which is either `true` for modules in focus or
     "focus": "^src/main/",
     "reporterOptions": {
       "dot": {
-        "collapsePattern": "^node_modules/[^/]+/",
+        "collapsePattern": "^node_modules/(@[^/]+/[^/]+|[^/]+)/",
         "theme": {
           "graph": {
             "splines": "ortho"
@@ -1010,6 +1010,9 @@ module.exports = {
       dot: {
         // collapse onto folders one step below node_modules:
         collapsePattern: "^(node_modules/[^/]+)",
+        // if you additionally collapse to scoped packages (@foo/bar, @foo/baz)
+        // instead of just the scope (@foo) you can use this pattern:
+        // collapsePattern: "^(node_modules/(@[^/]+/[^/]+|[^/]+))",
       },
     },
   },
