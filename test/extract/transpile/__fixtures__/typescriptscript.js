@@ -5,10 +5,11 @@ export class Ching {
     this.lMessage = pMessage;
   }
 }
-export class Ka extends Ching {
+class Ka extends Ching {
   constructor(pMessage) {
     super(pMessage);
     this.pMessage = pMessage;
   }
 }
 Ka.NAME = "FatalError";
+export { Ka };

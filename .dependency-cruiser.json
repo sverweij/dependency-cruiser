@@ -301,6 +301,7 @@
       "conditionNames": ["require"],
       "extensions": [
         ".js",
+        //
         // ".cjs",
         ".mjs",
         // ".jsx",
