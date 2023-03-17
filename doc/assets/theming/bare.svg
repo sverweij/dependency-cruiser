@@ -19,6 +19,11 @@
 <polygon fill="none" stroke="black" points="16,-16 16,-332 709,-332 709,-16 16,-16"/>
 <text text-anchor="middle" x="362.5" y="-316.8" font-family="Times,serif" font-size="14.00">main</text>
 </g>
+<g id="clust3" class="cluster">
+<title>cluster_src/main/files&#45;and&#45;dirs</title>
+<polygon fill="none" stroke="black" points="24,-182 24,-257 150,-257 150,-182 24,-182"/>
+<text text-anchor="middle" x="87" y="-241.8" font-family="Times,serif" font-size="14.00">files&#45;and&#45;dirs</text>
+</g>
 <g id="clust4" class="cluster">
 <title>cluster_src/main/options</title>
 <polygon fill="none" stroke="black" points="234,-24 234,-174 471,-174 471,-24 234,-24"/>
@@ -39,11 +44,6 @@
 <polygon fill="none" stroke="black" points="479,-24 479,-99 701,-99 701,-24 479,-24"/>
 <text text-anchor="middle" x="590" y="-83.8" font-family="Times,serif" font-size="14.00">utl</text>
 </g>
-<g id="clust3" class="cluster">
-<title>cluster_src/main/files&#45;and&#45;dirs</title>
-<polygon fill="none" stroke="black" points="24,-182 24,-257 150,-257 150,-182 24,-182"/>
-<text text-anchor="middle" x="87" y="-241.8" font-family="Times,serif" font-size="14.00">files&#45;and&#45;dirs</text>
-</g>
 <!-- src/main/files&#45;and&#45;dirs/normalize.js -->
 <g id="node1" class="node">
 <title>src/main/files&#45;and&#45;dirs/normalize.js</title>
@@ -53,10 +53,19 @@
 </a>
 </g>
 </g>
-<!-- src/main/index.js -->
+<!-- src/main/index.d.ts -->
 <g id="node2" class="node">
+<title>src/main/index.d.ts</title>
+<g id="a_node2"><a xlink:href="src/main/index.d.ts" xlink:title="index.d.ts">
+<ellipse fill="none" stroke="black" cx="538" cy="-283" rx="45.49" ry="18"/>
+<text text-anchor="start" x="511" y="-279.3" font-family="Times,serif" font-size="14.00">index.d.ts</text>
+</a>
+</g>
+</g>
+<!-- src/main/index.js -->
+<g id="node3" class="node">
 <title>src/main/index.js</title>
-<g id="a_node2"><a xlink:href="src/main/index.js" xlink:title="index.js">
+<g id="a_node3"><a xlink:href="src/main/index.js" xlink:title="index.js">
 <ellipse fill="none" stroke="black" cx="319" cy="-283" rx="38.19" ry="18"/>
 <text text-anchor="start" x="297.5" y="-279.3" font-family="Times,serif" font-size="14.00">index.js</text>
 </a>
@@ -69,9 +78,9 @@
 <polygon fill="black" stroke="black" points="113.23,-230.8 103.52,-226.56 108.47,-235.93 113.23,-230.8"/>
 </g>
 <!-- src/main/options/normalize.js -->
-<g id="node3" class="node">
+<g id="node4" class="node">
 <title>src/main/options/normalize.js</title>
-<g id="a_node3"><a xlink:href="src/main/options/normalize.js" xlink:title="normalize.js">
+<g id="a_node4"><a xlink:href="src/main/options/normalize.js" xlink:title="normalize.js">
 <ellipse fill="none" stroke="black" cx="297" cy="-125" rx="54.69" ry="18"/>
 <text text-anchor="start" x="263" y="-121.3" font-family="Times,serif" font-size="14.00">normalize.js</text>
 </a>
@@ -84,9 +93,9 @@
 <polygon fill="black" stroke="black" points="303.65,-154.48 299.05,-144.94 296.69,-155.27 303.65,-154.48"/>
 </g>
 <!-- src/main/options/validate.js -->
-<g id="node4" class="node">
+<g id="node5" class="node">
 <title>src/main/options/validate.js</title>
-<g id="a_node4"><a xlink:href="src/main/options/validate.js" xlink:title="validate.js">
+<g id="a_node5"><a xlink:href="src/main/options/validate.js" xlink:title="validate.js">
 <ellipse fill="none" stroke="black" cx="416" cy="-125" rx="46.59" ry="18"/>
 <text text-anchor="start" x="388" y="-121.3" font-family="Times,serif" font-size="14.00">validate.js</text>
 </a>
@@ -99,9 +108,9 @@
 <polygon fill="black" stroke="black" points="395.89,-152.7 400.57,-143.19 390.99,-147.71 395.89,-152.7"/>
 </g>
 <!-- src/main/report&#45;wrap.js -->
-<g id="node5" class="node">
+<g id="node6" class="node">
 <title>src/main/report&#45;wrap.js</title>
-<g id="a_node5"><a xlink:href="src/main/report-wrap.js" xlink:title="report&#45;wrap.js">
+<g id="a_node6"><a xlink:href="src/main/report-wrap.js" xlink:title="report&#45;wrap.js">
 <ellipse fill="none" stroke="black" cx="220" cy="-208" rx="60.39" ry="18"/>
 <text text-anchor="start" x="181.5" y="-204.3" font-family="Times,serif" font-size="14.00">report&#45;wrap.js</text>
 </a>
@@ -114,9 +123,9 @@
 <polygon fill="black" stroke="black" points="253.07,-229.03 242.94,-225.92 248.91,-234.67 253.07,-229.03"/>
 </g>
 <!-- src/main/resolve&#45;options/normalize.js -->
-<g id="node6" class="node">
+<g id="node7" class="node">
 <title>src/main/resolve&#45;options/normalize.js</title>
-<g id="a_node6"><a xlink:href="src/main/resolve-options/normalize.js" xlink:title="normalize.js">
+<g id="a_node7"><a xlink:href="src/main/resolve-options/normalize.js" xlink:title="normalize.js">
 <ellipse fill="none" stroke="black" cx="393" cy="-208" rx="54.69" ry="18"/>
 <text text-anchor="start" x="359" y="-204.3" font-family="Times,serif" font-size="14.00">normalize.js</text>
 </a>
@@ -129,9 +138,9 @@
 <polygon fill="black" stroke="black" points="370.56,-236.05 375.22,-226.54 365.65,-231.07 370.56,-236.05"/>
 </g>
 <!-- src/main/rule&#45;set/normalize.js -->
-<g id="node7" class="node">
+<g id="node8" class="node">
 <title>src/main/rule&#45;set/normalize.js</title>
-<g id="a_node7"><a xlink:href="src/main/rule-set/normalize.js" xlink:title="normalize.js">
+<g id="a_node8"><a xlink:href="src/main/rule-set/normalize.js" xlink:title="normalize.js">
 <ellipse fill="none" stroke="black" cx="638" cy="-208" rx="54.69" ry="18"/>
 <text text-anchor="start" x="604" y="-204.3" font-family="Times,serif" font-size="14.00">normalize.js</text>
 </a>
@@ -140,13 +149,13 @@
 <!-- src/main/index.js&#45;&gt;src/main/rule&#45;set/normalize.js -->
 <g id="edge6" class="edge">
 <title>src/main/index.js&#45;&gt;src/main/rule&#45;set/normalize.js</title>
-<path fill="none" stroke="black" d="M357.28,-280.82C418.72,-278.5 536.34,-272.18 575,-257 588.9,-251.54 602.34,-242.08 613.22,-232.99"/>
-<polygon fill="black" stroke="black" points="615.36,-235.76 620.56,-226.53 610.74,-230.5 615.36,-235.76"/>
+<path fill="none" stroke="black" d="M356.01,-278.03C389.44,-274.48 440,-269.2 484,-265 504.21,-263.07 556.07,-264.33 575,-257 588.92,-251.61 602.37,-242.15 613.24,-233.05"/>
+<polygon fill="black" stroke="black" points="615.39,-235.83 620.58,-226.59 610.77,-230.57 615.39,-235.83"/>
 </g>
 <!-- src/main/rule&#45;set/validate.js -->
-<g id="node8" class="node">
+<g id="node9" class="node">
 <title>src/main/rule&#45;set/validate.js</title>
-<g id="a_node8"><a xlink:href="src/main/rule-set/validate.js" xlink:title="validate.js">
+<g id="a_node9"><a xlink:href="src/main/rule-set/validate.js" xlink:title="validate.js">
 <ellipse fill="none" stroke="black" cx="519" cy="-208" rx="46.59" ry="18"/>
 <text text-anchor="start" x="491" y="-204.3" font-family="Times,serif" font-size="14.00">validate.js</text>
 </a>
@@ -159,9 +168,9 @@
 <polygon fill="black" stroke="black" points="497.42,-235.74 502.4,-226.39 492.67,-230.59 497.42,-235.74"/>
 </g>
 <!-- src/main/options/defaults.js -->
-<g id="node9" class="node">
+<g id="node10" class="node">
 <title>src/main/options/defaults.js</title>
-<g id="a_node9"><a xlink:href="src/main/options/defaults.js" xlink:title="defaults.js">
+<g id="a_node10"><a xlink:href="src/main/options/defaults.js" xlink:title="defaults.js">
 <ellipse fill="none" stroke="black" cx="297" cy="-50" rx="46.59" ry="18"/>
 <text text-anchor="start" x="269" y="-46.3" font-family="Times,serif" font-size="14.00">defaults.js</text>
 </a>
@@ -174,9 +183,9 @@
 <polygon fill="black" stroke="black" points="300.5,-79.94 297,-69.94 293.5,-79.94 300.5,-79.94"/>
 </g>
 <!-- src/main/utl/normalize&#45;re&#45;properties.js -->
-<g id="node10" class="node">
+<g id="node11" class="node">
 <title>src/main/utl/normalize&#45;re&#45;properties.js</title>
-<g id="a_node10"><a xlink:href="src/main/utl/normalize-re-properties.js" xlink:title="normalize&#45;re&#45;properties.js">
+<g id="a_node11"><a xlink:href="src/main/utl/normalize-re-properties.js" xlink:title="normalize&#45;re&#45;properties.js">
 <ellipse fill="none" stroke="black" cx="590" cy="-50" rx="102.88" ry="18"/>
 <text text-anchor="start" x="519" y="-46.3" font-family="Times,serif" font-size="14.00">normalize&#45;re&#45;properties.js</text>
 </a>
