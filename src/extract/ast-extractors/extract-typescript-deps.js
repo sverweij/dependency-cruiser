@@ -4,6 +4,19 @@ const { supportedTranspilers } = require("../../../src/meta.js");
 
 const typescript = tryRequire("typescript", supportedTranspilers.typescript);
 
+function isTypeOnly(pStatement) {
+  return (
+    (pStatement.importClause && pStatement.importClause.isTypeOnly) ||
+    // for some weird reason the isTypeOnly indicator is on _statement_ level
+    // and not in exportClause as it is in the importClause ¯\_ (ツ)_/¯.
+    // Also in the case of the omission of an alias the exportClause
+    // is not there entirely. So regardless whether there is a
+    // pStatement.exportClause or not, we can directly test for the
+    // isTypeOnly attribute.
+    pStatement.isTypeOnly
+  );
+}
+
 /*
  * Both extractImport* assume the imports/ exports can only occur at
  * top level. AFAIK this the only place they're allowed, so we should
@@ -30,9 +43,7 @@ function extractImportsAndExports(pAST) {
       module: pStatement.moduleSpecifier.text,
       moduleSystem: "es6",
       exoticallyRequired: false,
-      ...(pStatement.importClause && pStatement.importClause.isTypeOnly
-        ? { dependencyTypes: ["type-only"] }
-        : {}),
+      ...(isTypeOnly(pStatement) ? { dependencyTypes: ["type-only"] } : {}),
     }));
 }
 

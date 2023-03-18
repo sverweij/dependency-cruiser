@@ -1,7 +1,7 @@
 import { expect } from "chai";
 import extractTypescript from "./extract-typescript.utl.mjs";
 
-describe("[U] ast-extractors/extract-typescript - type imports", () => {
+describe("[U] ast-extractors/extract-typescript - type imports and exports", () => {
   it("extracts type imports in const declarations", () => {
     expect(
       extractTypescript("const tiepetjes: import('./types').T;")
@@ -115,5 +115,33 @@ describe("[U] ast-extractors/extract-typescript - type imports", () => {
         dependencyTypes: ["type-only"],
       },
     ]);
+  });
+
+  it("extracts re-exports that explicitly state they only re-export a type", () => {
+    expect(
+      extractTypescript("export type * as vehicles from './vehicles';")
+    ).to.deep.equal([
+      {
+        module: "./vehicles",
+        moduleSystem: "es6",
+        dynamic: false,
+        exoticallyRequired: false,
+        dependencyTypes: ["type-only"],
+      },
+    ]);
+  });
+
+  it("extracts re-exports that explicitly state they only re-export a type (without aliases)", () => {
+    expect(extractTypescript("export type * from './vehicles';")).to.deep.equal(
+      [
+        {
+          module: "./vehicles",
+          moduleSystem: "es6",
+          dynamic: false,
+          exoticallyRequired: false,
+          dependencyTypes: ["type-only"],
+        },
+      ]
+    );
   });
 });
