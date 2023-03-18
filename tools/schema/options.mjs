@@ -271,13 +271,13 @@ export default {
               type: "array",
               description:
                 "A list of files to consider 'main' files, defaults to " +
-                "['index']. Only set this when you have really special needs that" +
+                "['index']. Only set this when you have really special needs " +
                 "that warrant it.",
             },
             cachedInputFileSystem: {
               type: "object",
               description:
-                "Options to pass to the resolver (webpack's 'enhanced resolve') regarding" +
+                "Options to pass to the resolver (webpack's 'enhanced resolve') regarding " +
                 "caching.",
               additionalProperties: false,
               properties: {

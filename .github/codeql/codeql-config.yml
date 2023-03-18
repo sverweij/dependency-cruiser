@@ -1,0 +1,19 @@
+name: 'CodeQL config'
+
+paths:
+  - bin/
+  - src/
+  - tes
+  - tools/
+  - types/
+paths-ignore:
+  - '**/*.template.js'
+  - '**/*.schema.js'
+  - 'test/integration/**'
+  - 'test/*/__fixtures__/**'
+  - 'test/*/*/__fixtures__/**'
+  - 'test/*/*/*/__fixtures__/**'
+  - 'test/*/__mocks__/**'
+  - 'test/*/*/__mocks__/**'
+queries:
+  - uses: security-and-quality

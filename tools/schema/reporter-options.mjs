@@ -31,7 +31,7 @@ export default {
           type: "array",
           description:
             "List of words to use to replace path elements of file names in the output " +
-            "with so the output isn't directly traceable to its intended purpose." +
+            "with so the output isn't directly traceable to its intended purpose. " +
             "When the list is exhausted, the anon reporter will use random strings " +
             "patterned after the original file name in stead. The list is empty " +
             "by default. " +
@@ -104,7 +104,7 @@ export default {
         summaryHeader: {
           type: "string",
           description:
-            "The text to show as a header on top of the summary. E.g. '### Summary'" +
+            "The text to show as a header on top of the summary. E.g. '### Summary'. " +
             "When left out shows a default value.",
         },
         showStatsSummary: {
@@ -140,7 +140,7 @@ export default {
         detailsHeader: {
           type: "string",
           description:
-            "The text to show as a header on top of the detailed list of violations. E.g. '### All violations'" +
+            "The text to show as a header on top of the detailed list of violations. E.g. '### All violations'. " +
             "When left out shows a default value.",
         },
         collapseDetails: {
@@ -151,13 +151,13 @@ export default {
         collapsedMessage: {
           type: "string",
           description:
-            "The text to in the <summary> section of the <details> block. E.g. 'click to see all violations'" +
+            "The text to in the <summary> section of the <details> block. E.g. 'click to see all violations'. " +
             "When left out shows a default value.",
         },
         noViolationsMessage: {
           type: "string",
           description:
-            "The text to show when no violations were found. E.g. 'No violations found'." +
+            "The text to show when no violations were found. E.g. 'No violations found'. " +
             "When left out shows a default value.",
         },
         showFooter: {

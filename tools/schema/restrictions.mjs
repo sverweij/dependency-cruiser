@@ -168,11 +168,11 @@ export default {
         moreUnstable: {
           type: "boolean",
           description:
-            "When set to true moreUnstable matches for any dependency that has a higher" +
-            "Instability than the module that depends on it. When set to false it matches" +
-            "when the opposite is true; the dependency has an equal or lower Instability." +
-            "This attribute is useful when you want to check against Robert C. Martin's" +
-            "stable dependency principle. See online documentation for examples and details." +
+            "When set to true moreUnstable matches for any dependency that has a higher " +
+            "Instability than the module that depends on it. When set to false it matches " +
+            "when the opposite is true; the dependency has an equal or lower Instability. " +
+            "This attribute is useful when you want to check against Robert C. Martin's " +
+            "stable dependency principle. See online documentation for examples and details. " +
             "Leave this out when you don't care either way.",
         },
       },
@@ -255,7 +255,7 @@ export default {
       properties: {
         path: {
           description:
-            "Criteria at least one dependency of each matching module must" +
+            "Criteria at least one dependency of each matching module must " +
             "adhere to.",
           $ref: "#/definitions/REAsStringsType",
         },

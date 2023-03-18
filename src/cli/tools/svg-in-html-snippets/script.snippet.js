@@ -1,7 +1,3 @@
-document.addEventListener("contextmenu", getSelectHandler(title2ElementMap));
-document.addEventListener("mouseover", getHoverHandler(title2ElementMap));
-document.addEventListener("keydown", keyboardEventHandler);
-
 var gMode = new Mode();
 
 var title2ElementMap = (function makeElementMap() {
@@ -12,7 +8,7 @@ var title2ElementMap = (function makeElementMap() {
   return new Title2ElementMap(edges, nodes);
 })();
 
-function getHoverHandler() {
+function getHoverHandler(pTitle2ElementMap) {
   /** @type {string} */
   var currentHighlightedTitle;
 
@@ -27,13 +23,13 @@ function getHoverHandler() {
     ) {
       resetNodesAndEdges();
       addHighlight(closestNodeOrEdge);
-      title2ElementMap.get(closestTitleText).forEach(addHighlight);
+      pTitle2ElementMap.get(closestTitleText).forEach(addHighlight);
       currentHighlightedTitle = closestTitleText;
     }
   };
 }
 
-function getSelectHandler() {
+function getSelectHandler(pTitle2ElementMap) {
   /** @type {string} */
   var currentHighlightedTitle;
 
@@ -52,7 +48,7 @@ function getSelectHandler() {
     if (!(currentHighlightedTitle === closestTitleText)) {
       resetNodesAndEdges();
       addHighlight(closestNodeOrEdge);
-      title2ElementMap.get(closestTitleText).forEach(addHighlight);
+      pTitle2ElementMap.get(closestTitleText).forEach(addHighlight);
       currentHighlightedTitle = closestTitleText;
     }
   };
@@ -247,5 +243,9 @@ function keyboardEventHandler(pKeyboardEvent) {
     hints.toggle();
   }
 }
+
+document.addEventListener("contextmenu", getSelectHandler(title2ElementMap));
+document.addEventListener("mouseover", getHoverHandler(title2ElementMap));
+document.addEventListener("keydown", keyboardEventHandler);
 document.getElementById("close-hints").addEventListener("click", hints.hide);
 document.getElementById("button_help").addEventListener("click", hints.toggle);

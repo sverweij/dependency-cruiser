@@ -1,0 +1,24 @@
+name: "CodeQL - scheduled"
+
+on:
+  schedule:
+    - cron: "14 3 * * 1"
+  workflow_dispatch:
+
+jobs:
+  analyze:
+    name: CodeQL
+    runs-on: ubuntu-latest
+    permissions:
+      actions: read
+      contents: read
+      security-events: write
+
+    steps:
+      - uses: actions/checkout@v3
+      - uses: github/codeql-action/init@v2
+        with:
+          languages: javascript
+          # See https://docs.github.com/en/code-security/code-scanning/automatically-scanning-your-code-for-vulnerabilities-and-errors/configuring-code-scanning#using-queries-in-ql-packs
+          config-file: ./.github/codeql/codeql-config.yml
+      - uses: github/codeql-action/analyze@v2
