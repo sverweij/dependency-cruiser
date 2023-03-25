@@ -228,14 +228,14 @@ module.exports = {
        to dependency-cruiser's current working directory. When not provided defaults
        to './webpack.conf.js'.
 
-       The (optional) `env` and `args` attributes contain the parameters to be passed if
+       The (optional) `env` and `arguments` attributes contain the parameters to be passed if
        your webpack config is a function and takes them (see webpack documentation
        for details)
      */
     // , webpackConfig: {
     //  fileName: './webpack.config.js'
     //  , env: {}
-    //  , args: {}
+    //  , arguments: {}
     // }
 
     /* How to resolve external modules - use "yarn-pnp" if you're using yarn's Plug'n'Play.
