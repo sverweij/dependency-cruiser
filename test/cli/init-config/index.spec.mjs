@@ -3,7 +3,7 @@ import { join } from "path";
 import { use, expect } from "chai";
 import chaiJsonSchema from "chai-json-schema";
 import deleteDammit from "../delete-dammit.utl.cjs";
-import initConfig from "../../../src/cli/init-config/index.js";
+import initConfig from "../../../src/cli/init-config/index.mjs";
 import configurationSchema from "../../../src/schema/configuration.schema.js";
 
 use(chaiJsonSchema);
@@ -27,7 +27,6 @@ describe("[I] cli/init-config/index", () => {
     try {
       initConfig("notyes");
       const lResult = await import(lConfigResultFileName);
-      // console.dir(lResult.default, { depth: 10 });
 
       expect(lResult.default).to.be.jsonSchema(configurationSchema);
       expect(lResult.default).to.not.haveOwnProperty("extends");

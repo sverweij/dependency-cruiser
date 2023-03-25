@@ -1,5 +1,9 @@
 #!/usr/bin/env node
-const validateNodeEnvironment = require("../src/cli/validate-node-environment");
+
+import { program } from "commander";
+import validateNodeEnvironment from "../src/cli/validate-node-environment.mjs";
+import meta from "../src/meta.js";
+import format from "../src/cli/format.mjs";
 
 function formatError(pError) {
   process.stderr.write(pError.message);
@@ -8,14 +12,6 @@ function formatError(pError) {
 
 try {
   validateNodeEnvironment();
-
-  // importing things only after the validateNodeEnv check so we can show an understandable
-  // error. Otherwise, on unsupported platforms we would show a stack trace, which is
-  // not so nice
-  /* eslint-disable node/global-require */
-  const program = require("commander");
-  const { version } = require("../src/meta.js");
-  const format = require("../src/cli/format.js");
 
   program
     .description(
@@ -69,7 +65,7 @@ try {
       "exit with a non-zero exit code when the input json contains error level " +
         "dependency violations. Works for err, err-long and teamcity output types"
     )
-    .version(version)
+    .version(meta.version)
     .arguments("<dependency-cruiser-json>")
     .parse(process.argv);
 

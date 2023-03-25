@@ -1,20 +1,14 @@
-const fs = require("fs");
-const path = require("path");
+import { readFileSync } from "fs";
+import { fileURLToPath } from "url";
 
-const HEADER_FILE = path.join(
-  __dirname,
-  "svg-in-html-snippets",
-  "header.snippet.html"
+const HEADER_FILE = fileURLToPath(
+  new URL("svg-in-html-snippets/header.snippet.html", import.meta.url)
 );
-const SCRIPT_FILE = path.join(
-  __dirname,
-  "svg-in-html-snippets",
-  "script.snippet.js"
+const SCRIPT_FILE = fileURLToPath(
+  new URL("svg-in-html-snippets/script.snippet.js", import.meta.url)
 );
-const FOOTER_FILE = path.join(
-  __dirname,
-  "svg-in-html-snippets",
-  "footer.snippet.html"
+const FOOTER_FILE = fileURLToPath(
+  new URL("svg-in-html-snippets/footer.snippet.html", import.meta.url)
 );
 
 /**
@@ -31,10 +25,10 @@ const FOOTER_FILE = path.join(
  * @param {readStream} pStream stream whose characters are to be slapped between header and footer
  * @param {writeStream} pOutStream stream to write to
  */
-module.exports = function wrap(pInStream, pOutStream) {
-  const lHeader = fs.readFileSync(HEADER_FILE, "utf8");
-  const lScript = fs.readFileSync(SCRIPT_FILE, "utf8");
-  const lEnd = fs.readFileSync(FOOTER_FILE, "utf8");
+export default function wrap(pInStream, pOutStream) {
+  const lHeader = readFileSync(HEADER_FILE, "utf8");
+  const lScript = readFileSync(SCRIPT_FILE, "utf8");
+  const lEnd = readFileSync(FOOTER_FILE, "utf8");
   const lFooter = `<script>${lScript}</script>${lEnd}`;
 
   pOutStream.write(lHeader);
@@ -54,4 +48,4 @@ module.exports = function wrap(pInStream, pOutStream) {
     .on("data", (pChunk) => {
       pOutStream.write(pChunk);
     });
-};
+}

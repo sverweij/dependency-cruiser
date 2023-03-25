@@ -1,5 +1,5 @@
 import { expect } from "chai";
-import utl from "../../../src/cli/init-config/utl.js";
+import utl from "../../../src/cli/init-config/utl.cjs";
 
 describe("[U] cli/init-config/utl - folderNameArrayToRE", () => {
   it("transforms an array of folder names into a regex string - empty", () => {

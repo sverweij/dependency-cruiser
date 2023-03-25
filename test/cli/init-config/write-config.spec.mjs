@@ -2,7 +2,7 @@ import { writeFileSync, readFileSync } from "fs";
 import { join } from "path";
 import { expect } from "chai";
 import deleteDammit from "../delete-dammit.utl.cjs";
-import writeConfig from "../../../src/cli/init-config/write-config.js";
+import writeConfig from "../../../src/cli/init-config/write-config.mjs";
 
 const RULES_FILE_JS = ".dependency-cruiser.js";
 

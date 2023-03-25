@@ -1,5 +1,5 @@
-const busLogLevels = require("../../../utl/bus-log-levels");
-const { getHeader, getProgressLine, getEndText } = require("./handlers");
+import busLogLevels from "../../../utl/bus-log-levels.js";
+import { getHeader, getProgressLine, getEndText } from "./handlers.mjs";
 
 function getHeaderWriter(pStream, pMaxLevel) {
   return (_pMessage, pOptions) => {
@@ -24,7 +24,7 @@ function getEndWriter(pStream, pState, pMaxLevel) {
   };
 }
 
-module.exports = function setUpPerformanceLogListener(
+export default function setUpPerformanceLogListener(
   pEventEmitter,
   pMaxLevel = busLogLevels.INFO,
   pStream = process.stderr
@@ -45,4 +45,4 @@ module.exports = function setUpPerformanceLogListener(
   pEventEmitter.on("progress", getProgressWriter(pStream, lState, pMaxLevel));
 
   pEventEmitter.on("end", getEndWriter(pStream, lState, pMaxLevel));
-};
+}

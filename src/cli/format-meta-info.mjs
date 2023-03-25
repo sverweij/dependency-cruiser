@@ -1,6 +1,7 @@
-const chalk = require("chalk");
-const figures = require("figures");
-const main = require("../main");
+import chalk from "chalk";
+import figures from "figures";
+
+import main from "../main/index.js";
 
 function bool2Symbol(pBool) {
   return pBool ? chalk.green(figures.tick) : chalk.red(figures.cross);
@@ -26,7 +27,7 @@ function formatExtensions(pExtensions) {
   );
 }
 
-module.exports = function formatMetaInfo() {
+export default function formatMetaInfo() {
   return `
   Supported:
 
@@ -43,6 +44,6 @@ ${formatTranspilers()}
 
 ${formatExtensions(main.allExtensions)}
 `;
-};
+}
 
 /* eslint security/detect-object-injection : 0 */

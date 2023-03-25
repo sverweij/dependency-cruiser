@@ -41,6 +41,7 @@
           "^os$",
           "^fs$",
           "^path$",
+          "^url$",
           "$1",
           "^src/meta.js$",
           "^src/extract/transpile/meta.js$"

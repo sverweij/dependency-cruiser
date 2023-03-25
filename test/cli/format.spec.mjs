@@ -2,7 +2,7 @@
 import { readFileSync } from "fs";
 import { fileURLToPath } from "url";
 import { expect } from "chai";
-import format from "../../src/cli/format.js";
+import format from "../../src/cli/format.mjs";
 import deleteDammit from "./delete-dammit.utl.cjs";
 
 function relative(pFileName) {
@@ -42,7 +42,7 @@ describe("[E] cli/format", () => {
     expect(lResult.summary.totalDependenciesCruised).to.be.lessThan(298);
     expect(lResult.summary.violations.length).to.equal(1);
     expect(lResult.modules.map((pModule) => pModule.source)).to.not.include(
-      "bin/depcruise-fmt.js"
+      "bin/depcruise-fmt.mjs"
     );
     expect(lResult.modules.map((pModule) => pModule.source)).to.include(
       "src/main/index.js"

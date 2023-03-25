@@ -1,13 +1,14 @@
+/* eslint-disable import/exports-last */
 /* eslint-disable security/detect-object-injection */
-const fs = require("fs");
-const figures = require("figures");
-const chalk = require("chalk");
-const wrapAndIndent = require("../../utl/wrap-and-indent");
-const $defaults = require("../defaults");
-const { readManifest } = require("./environment-helpers");
-const { folderNameArrayToRE } = require("./utl");
+import { writeFileSync } from "node:fs";
+import figures from "figures";
+import chalk from "chalk";
+import wrapAndIndent from "../../utl/wrap-and-indent.js";
+import { PACKAGE_MANIFEST as _PACKAGE_MANIFEST } from "../defaults.mjs";
+import { readManifest } from "./environment-helpers.mjs";
+import { folderNameArrayToRE } from "./utl.cjs";
 
-const PACKAGE_MANIFEST = `./${$defaults.PACKAGE_MANIFEST}`;
+const PACKAGE_MANIFEST = `./${_PACKAGE_MANIFEST}`;
 
 const EXPERIMENTAL_SCRIPT_DOC = [
   {
@@ -54,11 +55,10 @@ const EXPERIMENTAL_SCRIPT_DOC = [
 ];
 
 /**
- *
  * @param {import("./types").IInitConfig} pInitOptions
  * @return {any} an bunch of key value pairs that can be plonked into a `scripts` attribute in a package.json
  */
-function compileRunScripts(pInitOptions) {
+export function compileRunScripts(pInitOptions) {
   let lReturnValue = {};
 
   if (pInitOptions && (pInitOptions.sourceLocation || []).length > 0) {
@@ -99,7 +99,7 @@ function filterNewScriptEntries(pExistingRunScripts, pAdditionalRunScripts) {
     }, {});
 }
 
-function addRunScriptsToManifest(pManifest, pAdditionalRunScripts) {
+export function addRunScriptsToManifest(pManifest, pAdditionalRunScripts) {
   const lManifest = { ...(pManifest || {}) };
   const lExistingRunScripts = lManifest.scripts || {};
 
@@ -127,25 +127,21 @@ function getSuccessMessage(pDestinationManifestFileName) {
   }, `  ${chalk.green(figures.tick)} Run scripts added to '${pDestinationManifestFileName}':\n`);
 }
 
-module.exports = {
-  addRunScriptsToManifest,
-  compileRunScripts,
-  writeRunScriptsToManifest: (
-    pNormalizedInitOptions,
-    pManifest = readManifest(),
-    pDestinationManifestFileName = PACKAGE_MANIFEST
-  ) => {
-    const lUpdatedManifest = addRunScriptsToManifest(
-      pManifest,
-      compileRunScripts(pNormalizedInitOptions)
-    );
+export function writeRunScriptsToManifest(
+  pNormalizedInitOptions,
+  pManifest = readManifest(),
+  pDestinationManifestFileName = PACKAGE_MANIFEST
+) {
+  const lUpdatedManifest = addRunScriptsToManifest(
+    pManifest,
+    compileRunScripts(pNormalizedInitOptions)
+  );
 
-    fs.writeFileSync(
-      pDestinationManifestFileName,
-      JSON.stringify(lUpdatedManifest, null, "  "),
-      "utf8"
-    );
+  writeFileSync(
+    pDestinationManifestFileName,
+    JSON.stringify(lUpdatedManifest, null, "  "),
+    "utf8"
+  );
 
-    process.stdout.write(getSuccessMessage(pDestinationManifestFileName));
-  },
-};
+  process.stdout.write(getSuccessMessage(pDestinationManifestFileName));
+}

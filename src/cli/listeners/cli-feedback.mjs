@@ -1,6 +1,6 @@
-const chalk = require("chalk");
-const figures = require("figures");
-const busLogLevels = require("../../utl/bus-log-levels");
+import chalk from "chalk";
+import figures from "figures";
+import busLogLevels from "../../utl/bus-log-levels.js";
 
 const FULL_ON = 100;
 
@@ -12,7 +12,7 @@ function normalizeParameters(pParameters) {
     ...(pParameters || {}),
   };
 }
-function getPercBar(pPercentage, pParameters) {
+function getPercentageBar(pPercentage, pParameters) {
   const lParameters = normalizeParameters(pParameters);
   const lPercentage = Math.min(pPercentage || 0, 1);
   const lBlocks = Math.floor(lParameters.barSize * lPercentage);
@@ -35,7 +35,9 @@ function getProgressMessageWriter(pStream, pState, pMaxLogLevel) {
 
     if (pStream.isTTY && lOptions.level <= pMaxLogLevel) {
       pStream.clearLine(1);
-      pStream.write(`  ${getPercBar(lOptions.complete)} ${pMessage} ...\n`);
+      pStream.write(
+        `  ${getPercentageBar(lOptions.complete)} ${pMessage} ...\n`
+      );
       pStream.moveCursor(0, -1);
     }
   };
@@ -52,7 +54,7 @@ function getStartWriter(pStream) {
   };
 }
 
-module.exports = function setUpCliFeedbackListener(
+export default function setUpCliFeedbackListener(
   pEventEmitter,
   pMaxLogLevel = busLogLevels.SUMMARY,
   pStream = process.stderr
@@ -68,4 +70,4 @@ module.exports = function setUpCliFeedbackListener(
   pEventEmitter.on("write-start", getStartWriter(pStream));
 
   pEventEmitter.on("end", () => pStream.end());
-};
+}

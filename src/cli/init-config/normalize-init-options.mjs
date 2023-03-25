@@ -1,15 +1,15 @@
-const has = require("lodash/has");
-const { version } = require("../../../src/meta.js");
-const {
+import has from "lodash/has.js";
+import meta from "../../meta.js";
+import {
   getSourceFolderCandidates,
   getTestFolderCandidates,
   hasTestsWithinSource,
   toSourceLocationArray,
-} = require("./environment-helpers");
-const findExtensions = require("./find-extensions.js");
+} from "./environment-helpers.mjs";
+import findExtensions from "./find-extensions.mjs";
 
 /**
- * @param {import("./types").IInitConfig} pInitOptions
+ * @param {import("./types.js").IInitConfig} pInitOptions
  * @param {string[]} pExtensions
  * @returns {boolean}
  */
@@ -26,7 +26,7 @@ function usesTypeScript(pInitOptions, pExtensions) {
 }
 
 /**
- * @param {import("./types").IInitConfig} pInitOptions
+ * @param {import("./types.js").IInitConfig} pInitOptions
  * @returns {string[]}
  */
 function getExtensions(pInitOptions) {
@@ -39,12 +39,12 @@ function getExtensions(pInitOptions) {
 }
 
 /**
- * @param {import("./types").IPartialInitConfig} pInitOptions
- * @return {import("./types").IPartialInitConfig}
+ * @param {import("./types.js").IPartialInitConfig} pInitOptions
+ * @return {import("./types.js").IPartialInitConfig}
  */
 function populate(pInitOptions) {
   const lReturnValue = {
-    version,
+    version: meta.version,
     date: new Date().toJSON(),
     configType: "self-contained",
     ...pInitOptions,
@@ -68,10 +68,10 @@ function populate(pInitOptions) {
 
 /**
  *
- * @param {import("./types").IPartialInitConfig} pInitOptions
- * @return {import("./types").IInitConfig}
+ * @param {import("./types.js").IPartialInitConfig} pInitOptions
+ * @return {import("./types.js").IInitConfig}
  */
-module.exports = function normalizeInitOptions(pInitOptions) {
+export default function normalizeInitOptions(pInitOptions) {
   let lReturnValue = populate(pInitOptions);
 
   if (lReturnValue.configType === "preset" && !lReturnValue.preset) {
@@ -86,4 +86,4 @@ module.exports = function normalizeInitOptions(pInitOptions) {
       );
   }
   return lReturnValue;
-};
+}

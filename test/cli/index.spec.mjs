@@ -5,7 +5,7 @@ import { join, posix as path } from "path";
 import { expect } from "chai";
 import intercept from "intercept-stdout";
 import chalk from "chalk";
-import cli from "../../src/cli/index.js";
+import cli from "../../src/cli/index.mjs";
 import { assertFileEqual, assertJSONFileEqual } from "./asserthelpers.utl.mjs";
 import deleteDammit from "./delete-dammit.utl.cjs";
 
