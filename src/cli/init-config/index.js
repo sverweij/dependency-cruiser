@@ -77,8 +77,9 @@ function manifestIsUpdatable(pNormalizedInitConfig) {
 
 /**
  * @param {boolean|import("./types").OneShotConfigIDType} pInit
+ * @param {string=} pConfigFileName
  */
-module.exports = function initConfig(pInit) {
+module.exports = function initConfig(pInit, pConfigFileName) {
   /* c8 ignore start */
   if (pInit === true) {
     getUserInput()
@@ -89,12 +90,12 @@ module.exports = function initConfig(pInit) {
         process.stderr.write(`\n  ERROR: ${pError.message}\n`);
       });
     /* c8 ignore stop */
-  } else if (pInit === false) {
-    // do nothing; deliberately left empty
-  } else {
+  } else if (pInit !== false) {
     const lNormalizedInitConfig = normalizeInitOptions(getOneShotConfig(pInit));
-    if (!fileExists(getDefaultConfigFileName())) {
-      writeConfig(buildConfig(lNormalizedInitConfig));
+    const lConfigFileName = pConfigFileName || getDefaultConfigFileName();
+
+    if (!fileExists(lConfigFileName)) {
+      writeConfig(buildConfig(lNormalizedInitConfig), lConfigFileName);
     }
 
     if (manifestIsUpdatable(lNormalizedInitConfig)) {
