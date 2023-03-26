@@ -1,11 +1,10 @@
-const fs = require("fs");
-const path = require("path");
-const chai = require("chai");
-const deleteDammit = require("../delete-dammit.utl.cjs");
-const writeConfig = require("../../../src/cli/init-config/write-config");
+import { writeFileSync, readFileSync } from "fs";
+import { join } from "path";
+import { expect } from "chai";
+import deleteDammit from "../delete-dammit.utl.cjs";
+import writeConfig from "../../../src/cli/init-config/write-config.js";
 
 const RULES_FILE_JS = ".dependency-cruiser.js";
-const expect = chai.expect;
 
 describe("[U] cli/init-config/write-config", () => {
   const WORKINGDIR = process.cwd();
@@ -14,11 +13,11 @@ describe("[U] cli/init-config/write-config", () => {
     process.chdir(WORKINGDIR);
   });
 
-  it("writes if there's no file there yet", () => {
+  it("writes if there's no file there yet", async () => {
     const lEmptyDirectory =
       "test/cli/__fixtures__/init-config/no-config-files-exist";
     const lCustomConfigFileName = "depcruise.config.js";
-    const lConfigResultFileName = `./${path.join(
+    const lConfigResultFileName = `./${join(
       "../__fixtures__/init-config/no-config-files-exist",
       lCustomConfigFileName
     )}`;
@@ -32,16 +31,12 @@ describe("[U] cli/init-config/write-config", () => {
         }`,
         lCustomConfigFileName
       );
-      // eslint-disable-next-line node/global-require,import/no-dynamic-require
-      const lResult = require(lConfigResultFileName);
 
-      expect(lResult).to.haveOwnProperty("aap");
-      expect(lResult).to.haveOwnProperty("wim");
+      const lResult = await import(lConfigResultFileName);
+
+      expect(lResult.default).to.haveOwnProperty("aap");
+      expect(lResult.default).to.haveOwnProperty("wim");
     } finally {
-      Reflect.deleteProperty(
-        require.cache,
-        require.resolve(lConfigResultFileName)
-      );
       deleteDammit(lCustomConfigFileName);
     }
   });
@@ -50,7 +45,7 @@ describe("[U] cli/init-config/write-config", () => {
     process.chdir("test/cli/__fixtures__/init-config/config-file-exists");
     let lStillHere = true;
 
-    fs.writeFileSync(RULES_FILE_JS, "module.exports = {}", {
+    writeFileSync(RULES_FILE_JS, "module.exports = {}", {
       encoding: "utf8",
       flag: "w",
     });
@@ -66,8 +61,6 @@ describe("[U] cli/init-config/write-config", () => {
 
     expect(lStillHere).to.equal(false);
 
-    expect(fs.readFileSync(RULES_FILE_JS, "utf8")).to.equal(
-      "module.exports = {}"
-    );
+    expect(readFileSync(RULES_FILE_JS, "utf8")).to.equal("module.exports = {}");
   });
 });
