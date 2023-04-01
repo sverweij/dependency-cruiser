@@ -1,7 +1,6 @@
 [
   {
-    "source": "./test/extract/__mocks__/maxDepth/index.js",
-
+    "source": "test/extract/__mocks__/maxDepth/index.js",
     "dependencies": [
       {
         "resolved": "test/extract/__mocks__/maxDepth/oneAndTwoDeep.js",
@@ -12,7 +11,6 @@
         "couldNotResolve": false,
         "dependencyTypes": ["local"],
         "dynamic": false,
-
         "module": "./oneAndTwoDeep",
         "moduleSystem": "es6"
       },
@@ -25,7 +23,6 @@
         "couldNotResolve": false,
         "dependencyTypes": ["local"],
         "dynamic": false,
-
         "module": "./oneDeep",
         "moduleSystem": "es6"
       },
@@ -38,7 +35,6 @@
         "couldNotResolve": false,
         "dependencyTypes": ["local"],
         "dynamic": false,
-
         "module": "./sub/oneDeepInSub",
         "moduleSystem": "es6"
       },
@@ -51,7 +47,6 @@
         "couldNotResolve": false,
         "dependencyTypes": ["core"],
         "dynamic": false,
-
         "module": "os",
         "moduleSystem": "es6"
       }
@@ -64,73 +59,18 @@
     "coreModule": true,
     "couldNotResolve": false,
     "dependencyTypes": ["core"],
-
     "dependencies": []
   },
   {
     "source": "test/extract/__mocks__/maxDepth/oneAndTwoDeep.js",
-
     "dependencies": []
   },
   {
     "source": "test/extract/__mocks__/maxDepth/oneDeep.js",
-
-    "dependencies": [
-      {
-        "resolved": "test/extract/__mocks__/maxDepth/oneAndTwoDeep.js",
-        "coreModule": false,
-        "followable": true,
-        "exoticallyRequired": false,
-        "matchesDoNotFollow": false,
-        "couldNotResolve": false,
-        "dependencyTypes": ["local"],
-        "dynamic": false,
-
-        "module": "./oneAndTwoDeep",
-        "moduleSystem": "es6"
-      },
-      {
-        "resolved": "test/extract/__mocks__/maxDepth/twoDeep.js",
-        "coreModule": false,
-        "followable": true,
-        "exoticallyRequired": false,
-        "matchesDoNotFollow": false,
-        "couldNotResolve": false,
-        "dependencyTypes": ["local"],
-        "dynamic": false,
-
-        "module": "./twoDeep",
-        "moduleSystem": "es6"
-      }
-    ]
-  },
-  {
-    "source": "test/extract/__mocks__/maxDepth/twoDeep.js",
-
     "dependencies": []
   },
   {
     "source": "test/extract/__mocks__/maxDepth/sub/oneDeepInSub.js",
-
-    "dependencies": [
-      {
-        "resolved": "test/extract/__mocks__/maxDepth/sub/twoDeepInSub.js",
-        "coreModule": false,
-        "followable": true,
-        "exoticallyRequired": false,
-        "matchesDoNotFollow": false,
-        "couldNotResolve": false,
-        "dependencyTypes": ["local"],
-        "dynamic": false,
-
-        "module": "./twoDeepInSub",
-        "moduleSystem": "es6"
-      }
-    ]
-  },
-  {
-    "source": "test/extract/__mocks__/maxDepth/sub/twoDeepInSub.js",
-
     "dependencies": []
   }
 ]
