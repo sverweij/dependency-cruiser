@@ -1,6 +1,6 @@
 [
   {
-    "source": "./test/extract/__mocks__/cache-busting/index.ts",
+    "source": "test/extract/__mocks__/cache-busting/index.ts",
     "dependencies": [
       {
         "resolved": "test/extract/__mocks__/cache-busting/local.js",

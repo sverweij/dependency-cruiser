@@ -3,7 +3,7 @@
 module.exports = {
   version: "12.11.0",
   engines: {
-    node: "^14||^16||>=18",
+    node: "^16.14||>=18",
   },
   supportedTranspilers: {
     babel: ">=7.0.0 <8.0.0",

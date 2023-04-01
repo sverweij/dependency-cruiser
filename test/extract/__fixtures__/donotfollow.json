@@ -1,6 +1,6 @@
 [
   {
-    "source": "./test/extract/__mocks__/donotfollow/index.js",
+    "source": "test/extract/__mocks__/donotfollow/index.js",
 
     "dependencies": [
       {

@@ -30,7 +30,7 @@ describe("[I] extract/index - max depth", () => {
       /* eslint import/no-dynamic-require:0, security/detect-non-literal-require:0 */
 
       expect(lResult).to.deep.equal(
-        requireJSON(`./__fixtures__/maxDepth${pDepth}.json`)
+        requireJSON(`./__fixtures__/max-depth-${pDepth}.json`)
       );
       // expect(lResult).to.be.jsonSchema(resultSchema);
     })
