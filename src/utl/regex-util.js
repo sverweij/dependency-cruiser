@@ -15,7 +15,7 @@ function extractGroups(pFromRestriction, pActualPath) {
   let lReturnValue = [];
 
   if (pFromRestriction.path) {
-    // @ts-ignore pFromRestriction.path can be a string | string[] | null
+    // @ts-expect-error pFromRestriction.path can be a string | string[] | null
     // except before it enters here it has already been 'normalized' to a string
     // so it can be safely passed to match. The right solution here (TODO)
     // is to create a separate type for NormalizedFromRestriction

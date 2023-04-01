@@ -72,7 +72,7 @@ function readIgnoreFile(pFileName) {
 /**
  * @type FilterFunctionType
  */
-// eslint-disable-next-line no-unused-vars
+
 function identityFilter(_pString, _pIndex, _pArray) {
   return true;
 }

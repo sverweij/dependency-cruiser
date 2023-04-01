@@ -1,12 +1,14 @@
-const path = require("path");
-const { expect } = require("chai");
-const { getExternalPluginReporter } = require("../../../src/report/plugins");
+import { join } from "node:path";
+import { fileURLToPath } from "node:url";
+import { expect } from "chai";
+import { getExternalPluginReporter } from "../../../src/report/plugins.js";
 
-const FIXTURE_DIRECTORY = path.join(__dirname, "__fixtures__");
+const __dirname = fileURLToPath(new URL(".", import.meta.url));
+const FIXTURE_DIRECTORY = join(__dirname, "__fixtures__");
 
 describe("[I] report/plugins - getExternalPluginReporter", () => {
   it("throws when the plugin:reporter is not a valid plugin (missing exit code)", () => {
-    const lNoExitCodePlugin = path.join(
+    const lNoExitCodePlugin = join(
       FIXTURE_DIRECTORY,
       "invalid-no-exit-code-plugin.cjs"
     );
@@ -16,7 +18,7 @@ describe("[I] report/plugins - getExternalPluginReporter", () => {
   });
 
   it("throws when the plugin:reporter is not a valid plugin (missing output)", () => {
-    const lNoExitCodePlugin = path.join(
+    const lNoExitCodePlugin = join(
       FIXTURE_DIRECTORY,
       "invalid-no-output-plugin.cjs"
     );
