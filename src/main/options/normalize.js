@@ -184,8 +184,8 @@ function normalizeCruiseOptions(pOptions, pFileAndDirectoryArray = []) {
     args: pFileAndDirectoryArray.join(" "),
   };
 
-  // @ts-ignore the idea of normalizing maxDepth to number is that after
-  // that we're  sure it's a number. Should maybe best be solved by
+  // @ts-expect-error the idea of normalizing maxDepth to number is that after
+  // that we're sure it's a number. Should maybe best be solved by
   // having two types/ interfaces
   lReturnValue.maxDepth = Number.parseInt(lReturnValue.maxDepth, 10);
   lReturnValue.moduleSystems = uniq(lReturnValue.moduleSystems);

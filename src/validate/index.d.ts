@@ -1,10 +1,13 @@
+/* eslint-disable node/no-unpublished-import */
+/* eslint-disable node/no-missing-import */
+/* eslint-disable import/no-unresolved */
 import {
   IDependency,
   IFolder,
   IFolderDependency,
   IModule,
+  IFlattenedRuleSet,
 } from "../../types/cruise-result";
-import { IFlattenedRuleSet } from "../../types/rule-set";
 import { SeverityType } from "../../types/shared-types";
 
 export interface IValidationResult {

@@ -91,7 +91,7 @@ function compileResolveOptions(
     const TsConfigPathsPlugin = require("tsconfig-paths-webpack-plugin");
     lResolveOptions.plugins = pushPlugin(
       lResolveOptions.plugins,
-      // @ts-ignore TS2351 "TsConfPathsPlugin is not constructable" - is unjustified
+      // @ts-expect-error TS2351 "TsConfPathsPlugin is not constructable" - is unjustified
       new TsConfigPathsPlugin({
         configFile: pResolveOptions.tsConfig,
         // TsConfigPathsPlugin doesn't (can't) read enhanced-resolve's

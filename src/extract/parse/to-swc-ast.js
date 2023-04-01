@@ -39,7 +39,7 @@ module.exports = {
    * @return {boolean} - true if the swc compiler is available,
    *                     false in all other cases
    */
-  // @ts-ignore
+  // @ts-expect-error dfdfd
   isAvailable: () => swc !== false,
 
   /**

@@ -33,7 +33,7 @@ function getASTFromSource(pFileRecord, pTranspileOptions) {
     if (needsJSXTreatment(pFileRecord, pTranspileOptions)) {
       return acornJsxParser.parse(lJavaScriptSource, {
         ...ACORN_OPTIONS,
-        // @ts-ignore
+        // @ts-expect-error because ...
         // acornJsxParser.parse takes an acorn.Options which doesn't include
         // allowNamespacedObjects. acornJsx.Options doesn't include sourceType
         // though, so a bit rock < this code > hard place hence ignore it

@@ -14,7 +14,7 @@ const matchers = require("./matchers");
 function matchesOrphanRule(pRule, pModule) {
   return (
     has(pRule, "from.orphan") &&
-    // @ts-ignore the 'has' above guarantees there's a 'from.orphan' attributre
+    // @ts-expect-error the 'has' above guarantees there's a 'from.orphan' attribute
     pModule.orphan === pRule.from.orphan &&
     matchers.fromPath(pRule, pModule) &&
     matchers.fromPathNot(pRule, pModule)
@@ -32,11 +32,11 @@ function matchesOrphanRule(pRule, pModule) {
  */
 function matchesReachableRule(pRule, pModule) {
   if (has(pRule, "to.reachable") && has(pModule, "reachable")) {
-    // @ts-ignore the 'has' above ensures the 'reachable' exists
+    // @ts-expect-error the 'has' above ensures the 'reachable' exists
     const lReachableRecord = pModule.reachable.find(
       (pReachable) =>
         pReachable.asDefinedInRule === pRule.name &&
-        // @ts-ignore the 'has' above ensures the 'to.reachable' exists
+        // @ts-expect-error the 'has' above ensures the 'to.reachable' exists
         pReachable.value === pRule.to.reachable
     );
     if (lReachableRecord) {
@@ -64,7 +64,7 @@ function matchesReachesRule(pRule, pModule) {
   return (
     has(pRule, "to.reachable") &&
     has(pModule, "reaches") &&
-    // @ts-ignore the 'has' above guarantees the .reaches exists
+    // @ts-expect-error the 'has' above guarantees the .reaches exists
     pModule.reaches.some(
       (pReaches) =>
         pReaches.asDefinedInRule === pRule.name &&

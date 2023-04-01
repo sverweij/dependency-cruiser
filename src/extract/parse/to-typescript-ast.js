@@ -63,7 +63,6 @@ module.exports = {
    * @return {boolean} - true if the typescript compiler is available,
    *                     false in all other cases
    */
-  // @ts-ignore
   isAvailable: () => typescript !== false,
 
   /**
