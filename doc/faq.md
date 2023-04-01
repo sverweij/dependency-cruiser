@@ -555,6 +555,13 @@ From version 9.21.3 this works automatically. In earlier versions (from 4.14.0)
 you only needed to `yarn-pnp` into _externalModuleResolutionStrategy_ key in
 the config (--init took care of that), but that's not necessary anymore.
 
+As of version 13.0.0 dependency-cruiser does not work with the pnp from
+yarn 1.x.x anymore. The yarn team has done only life cycle management and security
+fixes on that version for several years - but encourages everyone to migrate over
+to yarn 3. Our guess is that everyone who is serious about using yarn pnp has
+already done so long ago. Moreover the old yarn 1 pnp version was holding us
+back from moving on with the nodejs and javascript ecosystem.
+
 </details>
 
 ### Q: dependency-cruiser detected a circular dependency. How can I see (one of the) cycles that dependency-cruiser saw?
