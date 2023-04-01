@@ -101,7 +101,11 @@ module.exports = function gatherInitialSources(
   return pFileAndDirectoryArray
     .reduce(
       (pAll, pFileOrDirectory) =>
-        pAll.concat(glob.sync(pFileOrDirectory, { cwd: lOptions.baseDir })),
+        pAll.concat(
+          glob.sync(pathToPosix(pFileOrDirectory), {
+            cwd: pathToPosix(lOptions.baseDir),
+          })
+        ),
       []
     )
     .reduce((pAll, pFileOrDirectory) => {
