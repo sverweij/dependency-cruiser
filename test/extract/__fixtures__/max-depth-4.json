@@ -1,6 +1,7 @@
 [
   {
-    "source": "./test/extract/__mocks__/maxDepth/index.js",
+    "source": "test/extract/__mocks__/maxDepth/index.js",
+
     "dependencies": [
       {
         "resolved": "test/extract/__mocks__/maxDepth/oneAndTwoDeep.js",
@@ -11,6 +12,7 @@
         "couldNotResolve": false,
         "dependencyTypes": ["local"],
         "dynamic": false,
+
         "module": "./oneAndTwoDeep",
         "moduleSystem": "es6"
       },
@@ -23,6 +25,7 @@
         "couldNotResolve": false,
         "dependencyTypes": ["local"],
         "dynamic": false,
+
         "module": "./oneDeep",
         "moduleSystem": "es6"
       },
@@ -35,6 +38,7 @@
         "couldNotResolve": false,
         "dependencyTypes": ["local"],
         "dynamic": false,
+
         "module": "./sub/oneDeepInSub",
         "moduleSystem": "es6"
       },
@@ -47,6 +51,7 @@
         "couldNotResolve": false,
         "dependencyTypes": ["core"],
         "dynamic": false,
+
         "module": "os",
         "moduleSystem": "es6"
       }
@@ -59,14 +64,17 @@
     "coreModule": true,
     "couldNotResolve": false,
     "dependencyTypes": ["core"],
+
     "dependencies": []
   },
   {
     "source": "test/extract/__mocks__/maxDepth/oneAndTwoDeep.js",
+
     "dependencies": []
   },
   {
     "source": "test/extract/__mocks__/maxDepth/oneDeep.js",
+
     "dependencies": [
       {
         "resolved": "test/extract/__mocks__/maxDepth/oneAndTwoDeep.js",
@@ -77,6 +85,7 @@
         "couldNotResolve": false,
         "dependencyTypes": ["local"],
         "dynamic": false,
+
         "module": "./oneAndTwoDeep",
         "moduleSystem": "es6"
       },
@@ -89,6 +98,7 @@
         "couldNotResolve": false,
         "dependencyTypes": ["local"],
         "dynamic": false,
+
         "module": "./twoDeep",
         "moduleSystem": "es6"
       }
@@ -96,6 +106,7 @@
   },
   {
     "source": "test/extract/__mocks__/maxDepth/twoDeep.js",
+
     "dependencies": [
       {
         "resolved": "test/extract/__mocks__/maxDepth/sub/threeDeepInSub.js",
@@ -106,6 +117,7 @@
         "couldNotResolve": false,
         "dependencyTypes": ["local"],
         "dynamic": false,
+
         "module": "./sub/threeDeepInSub",
         "moduleSystem": "cjs"
       }
@@ -113,6 +125,7 @@
   },
   {
     "source": "test/extract/__mocks__/maxDepth/sub/threeDeepInSub.js",
+
     "dependencies": [
       {
         "resolved": "os",
@@ -123,6 +136,7 @@
         "couldNotResolve": false,
         "dependencyTypes": ["core"],
         "dynamic": false,
+
         "module": "os",
         "moduleSystem": "cjs"
       }
@@ -130,6 +144,7 @@
   },
   {
     "source": "test/extract/__mocks__/maxDepth/sub/oneDeepInSub.js",
+
     "dependencies": [
       {
         "resolved": "test/extract/__mocks__/maxDepth/sub/twoDeepInSub.js",
@@ -140,6 +155,7 @@
         "couldNotResolve": false,
         "dependencyTypes": ["local"],
         "dynamic": false,
+
         "module": "./twoDeepInSub",
         "moduleSystem": "es6"
       }
@@ -147,6 +163,7 @@
   },
   {
     "source": "test/extract/__mocks__/maxDepth/sub/twoDeepInSub.js",
+
     "dependencies": [
       {
         "resolved": "test/extract/__mocks__/maxDepth/sub/threeDeepInSub.js",
@@ -157,6 +174,7 @@
         "couldNotResolve": false,
         "dependencyTypes": ["local"],
         "dynamic": false,
+
         "module": "./threeDeepInSub",
         "moduleSystem": "cjs"
       }

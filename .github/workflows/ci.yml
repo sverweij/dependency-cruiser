@@ -81,7 +81,6 @@ jobs:
           SHA=${{github.event.pull_request.base.sha}} yarn --silent depcruise:graph:mermaid:diff >> $GITHUB_STEP_SUMMARY
           echo '' >> $GITHUB_STEP_SUMMARY
           echo '```' >> $GITHUB_STEP_SUMMARY
-
       - name: regular test (run on node != ${{env.NODE_LATEST}} only)
         if: matrix.node-version != env.NODE_LATEST
         run: npm test
