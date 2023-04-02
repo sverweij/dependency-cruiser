@@ -621,19 +621,14 @@ be in json format or a valid node module returning a rules object literal.
 dependency-cruise -x node_modules --config my.rules.json src spec
 ```
 
-> _Caveat_: currently, you need to specify the `--config` command line
-> option in order for a config file to be used at all. When that config file
-> is one of the default file names you don't need to specify that file
-> behind it, but the command line option _does_ need to be specified in order
-> for the configuration file to be used. We understand that this behaviour is
-> not like a lot of other tools do this, and with that, not very un-intuitive.
-> For this reason we want to change this so you don't need to pass the
-> `--config` option in order for the default config file to be found. This
-> _will_ be a breaking change though - so watch a next major release for
-> this to happen.
+> _Caveat_: up to version 12, you needed to specify the `--config` command line
+> option in order for a config file to be used at all. As of version 13 picking
+> up a config file is the default, so you don't need to specify `--config` anymore
+> _unless_ you want to have an alternate name or location for it.
+> If you want to run _without_ a configuration file use --no-config
 
-> _Tip_: usually you don't need to specify the rules file when. However if run
-> `depcruise --config src`, _src_ will be interpreted as the rules file.
+> _Tip_: usually you don't need to specify the rules file after --config. However
+> if you run `depcruise --config src`, _src_ will be interpreted as the rules file.
 > Which is probably is not what you want. To prevent this, place `--`
 > after the last option, like so:
 >
@@ -683,8 +678,8 @@ For an easy set up of both use [--init](#--init)
 
 ### `--no-config`
 
-Use this if you don't want to use a configuration file. Overrides any earlier
-specified --config (or --validate) option.
+Use this if you don't want to use a configuration file. Also overrides earlier
+specified --config (or --validate) options.
 
 > If you actually use this, I'm interested in your use case. Please drop an
 > [issue on GitHub](https://github.com/sverweij/dependency-cruiser/issues/new?assignees=&labels=&template=use-without-config.md&title=I+use+dependency-cruiser+without+a+configuration+file.+This+is+why:) or contact me on mastodon

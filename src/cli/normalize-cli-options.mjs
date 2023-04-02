@@ -7,7 +7,6 @@ import clone from "lodash/clone.js";
 import loadConfig from "../config-utl/extract-depcruise-config/index.js";
 import {
   RULES_FILE_NAME_SEARCH_ARRAY,
-  DEFAULT_CONFIG_FILE_NAME,
   DEFAULT_BASELINE_FILE_NAME,
   OUTPUT_TO,
   OUTPUT_TYPE,
@@ -60,8 +59,9 @@ function validateAndGetCustomRulesFileName(pValidate) {
     lReturnValue = pValidate;
   } else {
     throw new Error(
-      `Can't open '${pValidate}' for reading. Does it exist?` +
-        ` (You can create a dependency-cruiser configuration file with depcruise --init .)\n`
+      `Can't open config file '${pValidate}' for reading. Does it exist?\n` +
+        `         - You can create a config file by running 'npx dependency-cruiser --init'\n` +
+        `         - If you intended to run a config file use --no-config\n`
     );
   }
   return lReturnValue;
@@ -72,7 +72,9 @@ function validateAndGetDefaultRulesFileName() {
 
   if (typeof lReturnValue === "undefined") {
     throw new TypeError(
-      `Can't open '${DEFAULT_CONFIG_FILE_NAME}(on)' for reading. Does it exist?\n`
+      `Can't open a config file (.dependency-cruiser.(c)js) at the default location. Does it exist?\n` +
+        `         - You can create one by running 'npx dependency-cruiser --init'\n` +
+        `         - If you intended to run a without a config file use --no-config\n`
     );
   }
   return lReturnValue;

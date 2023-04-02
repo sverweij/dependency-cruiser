@@ -8,10 +8,6 @@ import cli from "../src/cli/index.mjs";
 try {
   validateNodeEnvironment();
 
-  // importing things only after the validateNodeEnv check so we can show an understandable
-  // error. Otherwise, on unsupported platforms we could show a stack trace, which is
-  // not so nice
-
   program
     .description(
       `Validate and visualize dependencies.${EOL}Details: https://github.com/sverweij/dependency-cruiser`
@@ -22,7 +18,8 @@ try {
     )
     .option(
       "-c, --config [file]",
-      "read rules and options from [file] (e.g. .dependency-cruiser.js)"
+      "read rules and options from [file] (e.g. .dependency-cruiser.js)",
+      true
     )
     .addOption(
       new program.Option(
