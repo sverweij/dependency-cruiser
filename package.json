@@ -156,7 +156,7 @@
     "handlebars": "4.7.7",
     "ignore": "5.2.4",
     "indent-string": "^4.0.0",
-    "interpret": "^3.1.0",
+    "interpret": "^3.1.1",
     "is-installed-globally": "0.4.0",
     "json5": "2.2.3",
     "lodash": "4.17.21",
@@ -236,7 +236,7 @@
       {
         "package": "interpret",
         "policy": "wanted",
-        "because": "we want to keep interpret ~similar to what webpack-cli uses (which is ^3.1.0 since 2022-11-15)"
+        "because": "we want to keep interpret ~similar to what webpack-cli uses (which is ^3.1.1 since 2022-11-15). See https://github.com/webpack/webpack-cli/blame/master/packages/webpack-cli/package.json"
       },
       {
         "package": "normalize-newline",
@@ -246,7 +246,7 @@
       {
         "package": "rechoir",
         "policy": "wanted",
-        "because": "we want to keep rechoir ~similar to what webpack-cli uses (which is ^0.8.0 since 2022-11-15))"
+        "because": "we want to keep rechoir ~similar to what webpack-cli uses (which is ^0.8.0 since 2022-11-15). See https://github.com/webpack/webpack-cli/blame/master/packages/webpack-cli/package.json"
       },
       {
         "package": "wrap-ansi",
