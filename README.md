@@ -56,7 +56,7 @@ cruiser with output type `dot` and run _GraphViz dot_[^3] on the result. In
 a one liner:
 
 ```shell
-npx depcruise src --include-only "^src" --config --output-type dot | dot -T svg > dependency-graph.svg
+npx depcruise src --include-only "^src" --output-type dot | dot -T svg > dependency-graph.svg
 ```
 
 - You can read more about what you can do with `--include-only` and other command line
@@ -77,7 +77,7 @@ npx depcruise src --include-only "^src" --config --output-type dot | dot -T svg 
 
 #### Declare some rules
 
-When you ran the `depcruise --init command` above, the command also added some rules
+When you ran `depcruise --init` above, the command also added some rules
 to `.dependency-cruiser.js` that make sense in most projects, like detecting
 **circular dependencies**, dependencies **missing** in package.json, **orphans**,
 and production code relying on dev- or optionalDependencies.
