@@ -1,5 +1,9 @@
 #!/usr/bin/env node
-const validateNodeEnvironment = require("../src/cli/validate-node-environment");
+import { EOL } from "os";
+import { program } from "commander";
+import validateNodeEnvironment from "../src/cli/validate-node-environment.mjs";
+import meta from "../src/meta.js";
+import cli from "../src/cli/index.mjs";
 
 try {
   validateNodeEnvironment();
@@ -7,11 +11,6 @@ try {
   // importing things only after the validateNodeEnv check so we can show an understandable
   // error. Otherwise, on unsupported platforms we could show a stack trace, which is
   // not so nice
-  /* eslint-disable node/global-require */
-  const { EOL } = require("os");
-  const program = require("commander");
-  const { version } = require("../src/meta.js");
-  const cli = require("../src/cli");
 
   program
     .description(
@@ -168,7 +167,7 @@ try {
       `${EOL}Other options:` +
         `${EOL}  see https://github.com/sverweij/dependency-cruiser/blob/master/doc/cli.md${EOL}`
     )
-    .version(version)
+    .version(meta.version)
     .arguments("[files-or-directories]")
     .parse(process.argv);
 

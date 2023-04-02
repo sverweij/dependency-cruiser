@@ -10,33 +10,6 @@
   },
   {
     "type": "module",
-    "from": "src/cli/format.js",
-    "to": "src/cli/format.js",
-    "rule": {
-      "severity": "info",
-      "name": "not-reachable-from-folder-index"
-    }
-  },
-  {
-    "type": "module",
-    "from": "src/cli/tools/wrap-stream-in-html.js",
-    "to": "src/cli/tools/wrap-stream-in-html.js",
-    "rule": {
-      "severity": "info",
-      "name": "not-reachable-from-folder-index"
-    }
-  },
-  {
-    "type": "module",
-    "from": "src/cli/validate-node-environment.js",
-    "to": "src/cli/validate-node-environment.js",
-    "rule": {
-      "severity": "info",
-      "name": "not-reachable-from-folder-index"
-    }
-  },
-  {
-    "type": "module",
     "from": "src/utl/array-util.js",
     "to": "src/utl/array-util.js",
     "rule": {

@@ -1,5 +1,5 @@
-const { EOL } = require("os");
-const busLogLevels = require("../../utl/bus-log-levels");
+import { EOL } from "os";
+import busLogLevels from "../../utl/bus-log-levels.js";
 
 const MICRO_SECONDS_PER_SECOND = 1000000;
 
@@ -69,7 +69,7 @@ function getProgressWriter(pStream, pState, pMaxLevel) {
   };
 }
 
-module.exports = function setUpNDJSONListener(
+export default function setUpNDJSONListener(
   pEventEmitter,
   pMaxLevel = busLogLevels.INFO,
   pStream = process.stderr
@@ -87,4 +87,4 @@ module.exports = function setUpNDJSONListener(
   pEventEmitter.on("end", () => {
     pStream.end();
   });
-};
+}

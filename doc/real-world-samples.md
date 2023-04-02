@@ -166,22 +166,22 @@ them. Click for slightly more interactive versions.
 To generate this yourself do this in the root of the dependency-cruiser repo:
 
 ```
-node ./bin/dependency-cruise.js bin src --config --output-type archi | \
+node ./bin/dependency-cruise.mjs bin src --config --output-type archi | \
   # format the output with dot. For this specific graph top-down (TD)
   # orientation works best
   dot -T svg -Grankdir=TD | \
   # save the svg
   tee doc/real-world-samples/dependency-cruiser-archi-graph.svg | \
   # process the svg into an interactive html graph
-  node bin/wrap-stream-in-html.js > docs/dependency-cruiser-archi-graph.html
+  node bin/wrap-stream-in-html.mjs > docs/dependency-cruiser-archi-graph.html
 ```
 
 > the only repository in the world you can't use the commands `depcruise`,
 > `depcruise-fmt` or `depcruise-wrap-stream-in-html` is dependency-cruiser's own -
 > instead we run the JavaScript files from `bin` directly.
 > If you adapt the script for your own use replace
-> `node ./bin/dependency-cruise.js` with `depcruise`,
-> `node ./bin/wrap-stream-in-html.js` with `depcruise-wrap-stream-in-html`.
+> `node ./bin/dependency-cruise.mjs` with `depcruise`,
+> `node ./bin/wrap-stream-in-html.mjs` with `depcruise-wrap-stream-in-html`.
 
 </details>
 

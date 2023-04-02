@@ -1,8 +1,8 @@
 // @ts-check
 /* eslint-disable security/detect-object-injection */
-const getExtension = require("../../utl/get-extension.js");
-const meta = require("../../extract/transpile/meta");
-const findAllFiles = require("../../utl/find-all-files");
+import getExtension from "../../utl/get-extension.js";
+import meta from "../../extract/transpile/meta.js";
+import findAllFiles from "../../utl/find-all-files.js";
 
 /**
  * @param {Record<string,number>} pAll
@@ -28,7 +28,7 @@ function compareByCount(pCountsObject) {
  * @param {{baseDir?: string; ignoreFileContents?: string}=} pOptions
  * @returns {string[]}
  */
-module.exports = function findExtensions(pDirectories, pOptions) {
+export default function findExtensions(pDirectories, pOptions) {
   const lOptions = {
     baseDir: process.cwd(),
     scannableExtensions: meta.scannableExtensions,
@@ -49,4 +49,4 @@ module.exports = function findExtensions(pDirectories, pOptions) {
   return Object.keys(lExtensionsWithCounts)
     .filter((pExtension) => lOptions.scannableExtensions.includes(pExtension))
     .sort(compareByCount(lExtensionsWithCounts));
-};
+}

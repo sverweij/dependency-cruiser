@@ -1,6 +1,8 @@
 import { fileURLToPath } from "url";
 import { expect } from "chai";
-import normalizeCliOptions from "../../src/cli/normalize-cli-options.js";
+import normalizeCliOptions, {
+  determineRulesFileName,
+} from "../../src/cli/normalize-cli-options.mjs";
 
 // eslint-disable-next-line max-statements
 describe("[I] cli/normalizeCliOptions - regular normalizations", () => {
@@ -368,22 +370,16 @@ describe("[I] cli/normalizeCliOptions - known violations", () => {
   });
 });
 
-describe("[U] cli/normalizeCliOptions.determineRulesFileName", () => {
+describe("[U] cli/determineRulesFileName", () => {
   it("returns '.dependency-cruiser.json' when no file name is passed", () => {
-    expect(normalizeCliOptions.determineRulesFileName()).to.equal(
-      ".dependency-cruiser.json"
-    );
+    expect(determineRulesFileName()).to.equal(".dependency-cruiser.json");
   });
 
   it("returns '.dependency-cruiser.json' when a non-string is passed", () => {
-    expect(normalizeCliOptions.determineRulesFileName(true)).to.equal(
-      ".dependency-cruiser.json"
-    );
+    expect(determineRulesFileName(true)).to.equal(".dependency-cruiser.json");
   });
 
   it("returns string passed when a string is passed", () => {
-    expect(normalizeCliOptions.determineRulesFileName("a string")).to.equal(
-      "a string"
-    );
+    expect(determineRulesFileName("a string")).to.equal("a string");
   });
 });

@@ -1,4 +1,4 @@
-const chalk = require("chalk");
+import chalk from "chalk";
 
 const MS_PER_SECOND = 1000;
 const MS_PER_MICRO_SECOND = 0.001;
@@ -30,11 +30,11 @@ const gSizeFormat = new Intl.NumberFormat(LOCALE, {
 
 const pad = (pString) => pString.padStart(MAX_EXPECTED_LENGTH).concat(" ");
 
-function formatDividerLine() {
+export function formatDividerLine() {
   return `${`${"-".repeat(MAX_EXPECTED_LENGTH)} `.repeat(NUMBER_OF_COLUMNS)}\n`;
 }
 
-function formatHeader() {
+export function formatHeader() {
   return chalk
     .bold(
       `${
@@ -50,19 +50,19 @@ function formatHeader() {
     .concat(formatDividerLine());
 }
 
-function formatTime(pNumber, pConversionMultiplier = MS_PER_SECOND) {
+export function formatTime(pNumber, pConversionMultiplier = MS_PER_SECOND) {
   return gTimeFormat(pConversionMultiplier * pNumber)
     .padStart(MAX_EXPECTED_LENGTH)
     .concat(" ");
 }
 
-function formatMemory(pBytes) {
+export function formatMemory(pBytes) {
   const lReturnValue = gSizeFormat(pBytes / K).padStart(MAX_EXPECTED_LENGTH);
 
   return (pBytes < 0 ? chalk.blue(lReturnValue) : lReturnValue).concat(" ");
 }
 
-function formatPerfLine({
+export function formatPerfLine({
   elapsedTime,
   elapsedUser,
   elapsedSystem,
@@ -83,11 +83,3 @@ function formatPerfLine({
     message
   }\n`;
 }
-
-module.exports = {
-  formatTime,
-  formatMemory,
-  formatPerfLine,
-  formatHeader,
-  formatDividerLine,
-};

@@ -1,17 +1,17 @@
-const {
+import {
   formatPerfLine,
   formatHeader,
   formatDividerLine,
-} = require("./format-helpers");
+} from "./format-helpers.mjs";
 
-function getHeader(pLevel, pMaxLevel) {
+export function getHeader(pLevel, pMaxLevel) {
   if (pLevel <= pMaxLevel) {
     return formatHeader();
   }
   return "";
 }
 
-function getProgressLine(pMessage, pState, pLevel, pMaxLevel) {
+export function getProgressLine(pMessage, pState, pLevel, pMaxLevel) {
   let lReturnValue = "";
 
   if (pLevel <= pMaxLevel) {
@@ -43,7 +43,7 @@ function getProgressLine(pMessage, pState, pLevel, pMaxLevel) {
   return lReturnValue;
 }
 
-function getEndText(pState, pLevel, pMaxLevel) {
+export function getEndText(pState, pLevel, pMaxLevel) {
   if (pLevel <= pMaxLevel) {
     const lTime = process.uptime();
     const { user, system } = process.cpuUsage();
@@ -67,9 +67,3 @@ function getEndText(pState, pLevel, pMaxLevel) {
   }
   return "";
 }
-
-module.exports = {
-  getHeader,
-  getProgressLine,
-  getEndText,
-};

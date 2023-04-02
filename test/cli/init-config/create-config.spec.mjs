@@ -1,12 +1,10 @@
-import { writeFileSync } from "fs";
-import { tmpdir } from "os";
-// import {join} from "path/posix" is of course more elegant, but borks on node14
-// by reason of path/posix not existing (or something like that)
-import { posix as path } from "path";
+import { writeFileSync } from "node:fs";
+import { tmpdir } from "node:os";
+import { join } from "node:path/posix";
 import { expect, use } from "chai";
 import chaiJsonSchema from "chai-json-schema";
-import buildConfig from "../../../src/cli/init-config/build-config.js";
-import normalizeInitOptions from "../../../src/cli/init-config/normalize-init-options.js";
+import buildConfig from "../../../src/cli/init-config/build-config.cjs";
+import normalizeInitOptions from "../../../src/cli/init-config/normalize-init-options.mjs";
 import configurationSchema from "../../../src/schema/configuration.schema.js";
 import deleteDammit from "../delete-dammit.utl.cjs";
 
@@ -15,7 +13,7 @@ use(chaiJsonSchema);
 const createConfigNormalized = async (pInitOptions) => {
   const lConfigAsString = buildConfig(normalizeInitOptions(pInitOptions));
   const lBaseAbc = 36;
-  let lTemporaryFileName = path.join(
+  let lTemporaryFileName = join(
     tmpdir(),
     `${Math.random().toString(lBaseAbc).split(".").pop()}.cjs`
   );
