@@ -1,10 +1,10 @@
-const fs = require("fs");
+import { writeFileSync, createReadStream } from "fs";
 
 const PIPE_BUFFER_SIZE = 512;
 
 function writeToFile(pOutputTo, pDependencyString) {
   try {
-    fs.writeFileSync(pOutputTo, pDependencyString, {
+    writeFileSync(pOutputTo, pDependencyString, {
       encoding: "utf8",
       flag: "w",
     });
@@ -38,7 +38,7 @@ function writeToStdOut(pString, pBufferSize = PIPE_BUFFER_SIZE) {
     );
   }
 }
-function write(pOutputTo, pContent) {
+export function write(pOutputTo, pContent) {
   if ("-" === pOutputTo) {
     writeToStdOut(pContent);
   } else {
@@ -46,14 +46,9 @@ function write(pOutputTo, pContent) {
   }
 }
 
-function getInStream(pInputFrom) {
+export function getInStream(pInputFrom) {
   if ("-" === pInputFrom) {
     return process.stdin;
   }
-  return fs.createReadStream(pInputFrom);
+  return createReadStream(pInputFrom);
 }
-
-module.exports = {
-  write,
-  getInStream,
-};

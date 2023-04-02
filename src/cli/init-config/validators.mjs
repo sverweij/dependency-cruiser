@@ -1,7 +1,7 @@
-const fs = require("fs");
-const { toSourceLocationArray } = require("./environment-helpers");
+import fs from "fs";
+import { toSourceLocationArray } from "./environment-helpers.mjs";
 
-function validateLocation(pLocations) {
+export function validateLocation(pLocations) {
   for (const lLocation of toSourceLocationArray(pLocations)) {
     try {
       if (!fs.statSync(lLocation).isDirectory()) {
@@ -14,7 +14,3 @@ function validateLocation(pLocations) {
 
   return true;
 }
-
-module.exports = {
-  validateLocation,
-};

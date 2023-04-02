@@ -1,5 +1,8 @@
 #!/usr/bin/env node
-const validateNodeEnvironment = require("../src/cli/validate-node-environment");
+import { program } from "commander";
+import validateNodeEnvironment from "../src/cli/validate-node-environment.mjs";
+import meta from "../src/meta.js";
+import cli from "../src/cli/index.mjs";
 
 function formatError(pError) {
   process.stderr.write(pError.message);
@@ -8,14 +11,6 @@ function formatError(pError) {
 
 try {
   validateNodeEnvironment();
-
-  // importing things only after the validateNodeEnv check so we can show an understandable
-  // error. Otherwise, on unsupported platforms we would show a stack trace, which is
-  // not so nice
-  /* eslint-disable node/global-require */
-  const program = require("commander");
-  const { version } = require("../src/meta.js");
-  const cli = require("../src/cli");
 
   program
     .description(
@@ -29,7 +24,7 @@ try {
       "file to write output to; - for stdout",
       ".dependency-cruiser-known-violations.json"
     )
-    .version(version)
+    .version(meta.version)
     .arguments("<files-or-directories>")
     .parse(process.argv);
 

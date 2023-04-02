@@ -1,5 +1,5 @@
 import { expect } from "chai";
-import findExtensions from "../../../src/cli/init-config/find-extensions.js";
+import findExtensions from "../../../src/cli/init-config/find-extensions.mjs";
 
 describe("[U] cli/init-config/find-extensions", () => {
   it("returns an empty array of extensions when passed no directories", () => {

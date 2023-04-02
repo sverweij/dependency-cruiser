@@ -1,7 +1,7 @@
 import { createReadStream } from "fs";
 import { Writable } from "stream";
 import { expect } from "chai";
-import wrapStreamInHTML from "../../../src/cli/tools/wrap-stream-in-html.js";
+import wrapStreamInHTML from "../../../src/cli/tools/wrap-stream-in-html.mjs";
 
 class WriteableExpectStream extends Writable {
   _write(pThing) {

@@ -1,10 +1,10 @@
-const fs = require("fs");
-const figures = require("figures");
-const chalk = require("chalk");
-const {
+import { writeFileSync } from "fs";
+import figures from "figures";
+import chalk from "chalk";
+import {
   fileExists,
   getDefaultConfigFileName,
-} = require("./environment-helpers");
+} from "./environment-helpers.mjs";
 
 /**
  * Write a .dependency-cruiser config to the current directory
@@ -18,7 +18,7 @@ const {
  *                  - writing to the file doesn't work
  *
  */
-module.exports = function writeConfig(
+export default function writeConfig(
   pConfig,
   pFileName = getDefaultConfigFileName()
 ) {
@@ -26,7 +26,7 @@ module.exports = function writeConfig(
     throw new Error(`A '${pFileName}' already exists here - leaving it be.\n`);
   } else {
     try {
-      fs.writeFileSync(pFileName, pConfig);
+      writeFileSync(pFileName, pConfig);
       process.stdout.write(
         `\n  ${chalk.green(
           figures.tick
@@ -40,4 +40,4 @@ module.exports = function writeConfig(
     }
     /* c8 ignore stop */
   }
-};
+}

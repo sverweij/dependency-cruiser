@@ -16,8 +16,8 @@
     "src/**/*.template.js",
     "src/cli/tools/svg-in-html-snippets/script.snippet.js",
     "src/cli/init-config/get-user-input.js",
-    "src/cli/listeners/*/index.js",
-    "src/cli/listeners/{cli-feedback,ndjson}.js"
+    "src/cli/listeners/*/index.mjs",
+    "src/cli/listeners/{cli-feedback,ndjson}.mjs"
   ],
   "reporter": ["text-summary", "html", "json-summary"]
 }

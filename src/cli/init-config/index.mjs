@@ -1,10 +1,10 @@
 // @ts-check
-const $defaults = require("../defaults");
-const normalizeInitOptions = require("./normalize-init-options");
-const buildConfig = require("./build-config");
-const writeConfig = require("./write-config");
-const getUserInput = require("./get-user-input");
-const {
+import { PACKAGE_MANIFEST as _PACKAGE_MANIFEST } from "../defaults.mjs";
+import normalizeInitOptions from "./normalize-init-options.mjs";
+import buildConfig from "./build-config.cjs";
+import writeConfig from "./write-config.mjs";
+import getUserInput from "./get-user-input.mjs";
+import {
   isLikelyMonoRepo,
   fileExists,
   hasBabelConfigCandidates,
@@ -16,12 +16,10 @@ const {
   getDefaultConfigFileName,
   hasJSConfigCandidates,
   getJSConfigCandidates,
-} = require("./environment-helpers");
-const {
-  writeRunScriptsToManifest,
-} = require("./write-run-scripts-to-manifest");
+} from "./environment-helpers.mjs";
+import { writeRunScriptsToManifest } from "./write-run-scripts-to-manifest.mjs";
 
-const PACKAGE_MANIFEST = `./${$defaults.PACKAGE_MANIFEST}`;
+const PACKAGE_MANIFEST = `./${_PACKAGE_MANIFEST}`;
 
 /**
  * Create a initialization configuration based on guessed defaults
@@ -79,7 +77,7 @@ function manifestIsUpdatable(pNormalizedInitConfig) {
  * @param {boolean|import("./types").OneShotConfigIDType} pInit
  * @param {string=} pConfigFileName
  */
-module.exports = function initConfig(pInit, pConfigFileName) {
+export default function initConfig(pInit, pConfigFileName) {
   /* c8 ignore start */
   if (pInit === true) {
     getUserInput()
@@ -102,4 +100,4 @@ module.exports = function initConfig(pInit, pConfigFileName) {
       writeRunScriptsToManifest(lNormalizedInitConfig);
     }
   }
-};
+}

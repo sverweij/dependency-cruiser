@@ -974,7 +974,7 @@ the default theme to be replaced by flipping the `replace` attribute to `true`.
 
 <details>
 <summary>bare</summary>
-<!-- bin/dependency-cruise.js -Tdot -v doc/assets/theming/bare.config.js src/main | dot -Tsvg > doc/assets/theming/bare.svg-->
+<!-- bin/dependency-cruise.mjs -Tdot -v doc/assets/theming/bare.config.js src/main | dot -Tsvg > doc/assets/theming/bare.svg-->
 
 ```javascript
 module.exports = {

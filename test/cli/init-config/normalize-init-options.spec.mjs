@@ -1,5 +1,5 @@
 import { expect } from "chai";
-import normalizeInitOptions from "../../../src/cli/init-config/normalize-init-options.js";
+import normalizeInitOptions from "../../../src/cli/init-config/normalize-init-options.mjs";
 
 describe("[U] cli/init-config/normalize-init-options", () => {
   let lSavedWorkingDirectory = process.cwd();

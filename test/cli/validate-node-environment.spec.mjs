@@ -1,5 +1,5 @@
 import { expect } from "chai";
-import validateNodeEnvironment from "../../src/cli/validate-node-environment.js";
+import validateNodeEnvironment from "../../src/cli/validate-node-environment.mjs";
 
 describe("[U] cli/validateNodeEnv", () => {
   it("throws when an older and unsupported node version is passed", () => {

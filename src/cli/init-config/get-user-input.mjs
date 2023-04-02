@@ -1,6 +1,6 @@
 // @ts-check
-const prompts = require("prompts");
-const {
+import prompts from "prompts";
+import {
   isLikelyMonoRepo,
   getMonoRepoPackagesCandidates,
   getSourceFolderCandidates,
@@ -15,8 +15,8 @@ const {
   getBabelConfigCandidates,
   hasWebpackConfigCandidates,
   getWebpackConfigCandidates,
-} = require("./environment-helpers");
-const { validateLocation } = require("./validators");
+} from "./environment-helpers.mjs";
+import { validateLocation } from "./validators.mjs";
 
 function toPromptChoice(pString) {
   return {
@@ -137,6 +137,6 @@ const QUESTIONS = [
 /**
  * @return {Promise<import("./types").IPartialInitConfig>}
  */
-module.exports = function getUserInput() {
+export default function getUserInput() {
   return prompts(QUESTIONS);
-};
+}

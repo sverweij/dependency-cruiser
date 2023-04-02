@@ -1,6 +1,6 @@
 // @ts-check
 const Handlebars = require("handlebars/runtime");
-const { folderNameArrayToRE } = require("./utl");
+const { folderNameArrayToRE } = require("./utl.cjs");
 
 /* eslint import/no-unassigned-import: 0 */
 require("./config.js.template");

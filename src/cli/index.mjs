@@ -1,25 +1,27 @@
-const path = require("path");
-const glob = require("glob");
-const cloneDeep = require("lodash/cloneDeep");
-const set = require("lodash/set");
-const isInstalledGlobally = require("is-installed-globally");
-const { red, yellow, bold } = require("chalk");
+/* eslint-disable import/max-dependencies */
+import { join } from "path";
+import { glob } from "glob";
+import cloneDeep from "lodash/cloneDeep.js";
+import set from "lodash/set.js";
+import isInstalledGlobally from "is-installed-globally";
+import chalk from "chalk";
 
-const main = require("../main");
-const bus = require("../utl/bus");
+import main from "../main/index.js";
+import bus from "../utl/bus.js";
 
-const extractTSConfig = require("../config-utl/extract-ts-config");
-const extractBabelConfig = require("../config-utl/extract-babel-config");
-const extractWebpackResolveConfig = require("../config-utl/extract-webpack-resolve-config");
-const extractKnownViolations = require("../config-utl/extract-known-violations");
-const { INFO } = require("../utl/bus-log-levels");
-const validateFileExistence = require("./utl/validate-file-existence");
-const normalizeCliOptions = require("./normalize-cli-options");
-const io = require("./utl/io");
-const formatMetaInfo = require("./format-meta-info");
-const setUpCliFeedbackListener = require("./listeners/cli-feedback");
-const setUpPerformanceLogListener = require("./listeners/performance-log");
-const setUpNDJSONListener = require("./listeners/ndjson");
+import extractTSConfig from "../config-utl/extract-ts-config.js";
+import extractBabelConfig from "../config-utl/extract-babel-config.js";
+import extractWebpackResolveConfig from "../config-utl/extract-webpack-resolve-config.js";
+import extractKnownViolations from "../config-utl/extract-known-violations.js";
+import busLogLevels from "../utl/bus-log-levels.js";
+import validateFileExistence from "./utl/validate-file-existence.mjs";
+import normalizeCliOptions from "./normalize-cli-options.mjs";
+import { write } from "./utl/io.mjs";
+import formatMetaInfo from "./format-meta-info.mjs";
+import setUpCliFeedbackListener from "./listeners/cli-feedback.mjs";
+import setUpPerformanceLogListener from "./listeners/performance-log/index.mjs";
+import setUpNDJSONListener from "./listeners/ndjson.mjs";
+import initConfig from "./init-config/index.mjs";
 
 function extractResolveOptions(pCruiseOptions) {
   let lResolveOptions = {};
@@ -90,7 +92,8 @@ function setUpListener(pCruiseOptions) {
   if (Boolean(lListenerFunction)) {
     lListenerFunction(
       bus,
-      pCruiseOptions?.ruleSet?.options?.progress?.maximumLevel ?? INFO
+      pCruiseOptions?.ruleSet?.options?.progress?.maximumLevel ??
+        busLogLevels.INFO
     );
   }
 }
@@ -104,7 +107,7 @@ function runCruise(pFileDirectoryArray, pCruiseOptions) {
     .filter((pFileOrDirectory) => !glob.hasMagic(pFileOrDirectory))
     .map((pFileOrDirectory) =>
       lCruiseOptions?.ruleSet?.options?.baseDir
-        ? path.join(lCruiseOptions.ruleSet.options.baseDir, pFileOrDirectory)
+        ? join(lCruiseOptions.ruleSet.options.baseDir, pFileOrDirectory)
         : pFileOrDirectory
     )
     .forEach(validateFileExistence);
@@ -124,7 +127,7 @@ function runCruise(pFileDirectoryArray, pCruiseOptions) {
 
   bus.emit("progress", "cli: writing results", { complete: 1 });
   bus.emit("write-start");
-  io.write(lCruiseOptions.outputTo, lReportingResult.output);
+  write(lCruiseOptions.outputTo, lReportingResult.output);
 
   return lReportingResult.exitCode;
 }
@@ -135,7 +138,7 @@ function runCruise(pFileDirectoryArray, pCruiseOptions) {
  * @param {import("../../types/options").ICruiseOptions} lCruiseOptions
  * @returns {number}
  */
-module.exports = function executeCli(pFileDirectoryArray, pCruiseOptions) {
+export default function executeCli(pFileDirectoryArray, pCruiseOptions) {
   let lCruiseOptions = pCruiseOptions || {};
   let lExitCode = 0;
 
@@ -143,10 +146,10 @@ module.exports = function executeCli(pFileDirectoryArray, pCruiseOptions) {
     /* c8 ignore start */
     if (isInstalledGlobally) {
       process.stderr.write(
-        `\n  ${yellow(
+        `\n  ${chalk.yellow(
           "WARNING"
         )}: You're running a globally installed dependency-cruiser.\n\n` +
-          `           We recommend to ${bold.italic.underline(
+          `           We recommend to ${chalk.bold.italic.underline(
             "install and run it as a local devDependency"
           )} in\n` +
           `           your project instead. There it has your project's environment and\n` +
@@ -158,23 +161,15 @@ module.exports = function executeCli(pFileDirectoryArray, pCruiseOptions) {
     if (lCruiseOptions.info === true) {
       process.stdout.write(formatMetaInfo());
     } else if (lCruiseOptions.init) {
-      // requiring init-config took ~100ms (most of it taken up by requiring
-      // inquirer, measured on a 2.6GHz quad core i7 with flash storage on
-      // macOS 10.15.7). Only requiring it when '--init' is necessary speeds up
-      // (the start-up) of cruises by that same amount. We've since replaced
-      // inquirer with 'prompts' (which is much smaller), but the same reasoning
-      // holds.
-      // eslint-disable-next-line node/global-require, import/max-dependencies
-      const initConfig = require("./init-config");
       initConfig(lCruiseOptions.init);
     } else {
       lExitCode = runCruise(pFileDirectoryArray, lCruiseOptions);
     }
   } catch (pError) {
-    process.stderr.write(`\n  ${red("ERROR")}: ${pError.message}\n`);
+    process.stderr.write(`\n  ${chalk.red("ERROR")}: ${pError.message}\n`);
     bus.emit("end");
     lExitCode = 1;
   }
   bus.emit("end");
   return lExitCode;
-};
+}
