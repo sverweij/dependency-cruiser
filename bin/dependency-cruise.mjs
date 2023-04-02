@@ -169,7 +169,7 @@ try {
     .parse(process.argv);
 
   if (Boolean(program.args[0]) || program.opts().info || program.opts().init) {
-    process.exitCode = cli(program.args, program.opts());
+    process.exitCode = await cli(program.args, program.opts());
   } else {
     program.help();
   }

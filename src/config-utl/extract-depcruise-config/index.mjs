@@ -1,19 +1,19 @@
-const path = require("path");
-const cloneDeep = require("lodash/cloneDeep");
-const has = require("lodash/has");
-const resolve = require("../../extract/resolve/resolve");
-const normalizeResolveOptions = require("../../main/resolve-options/normalize");
-const readConfig = require("./read-config");
-const mergeConfigs = require("./merge-configs");
+import path from "path";
+import cloneDeep from "lodash/cloneDeep.js";
+import has from "lodash/has.js";
+import resolve from "../../extract/resolve/resolve.js";
+import normalizeResolveOptions from "../../main/resolve-options/normalize.js";
+import readConfig from "./read-config.mjs";
+import mergeConfigs from "./merge-configs.mjs";
 
 /* eslint no-use-before-define: 0 */
-function processExtends(pReturnValue, pAlreadyVisited, pBaseDirectory) {
+async function processExtends(pReturnValue, pAlreadyVisited, pBaseDirectory) {
   let lReturnValue = cloneDeep(pReturnValue);
 
   if (typeof lReturnValue.extends === "string") {
     lReturnValue = mergeConfigs(
       lReturnValue,
-      extractDepcruiseConfig(
+      await extractDepcruiseConfig(
         lReturnValue.extends,
         pAlreadyVisited,
         pBaseDirectory
@@ -22,14 +22,13 @@ function processExtends(pReturnValue, pAlreadyVisited, pBaseDirectory) {
   }
 
   if (Array.isArray(lReturnValue.extends)) {
-    lReturnValue = lReturnValue.extends.reduce(
-      (pAll, pExtends) =>
-        mergeConfigs(
-          pAll,
-          extractDepcruiseConfig(pExtends, pAlreadyVisited, pBaseDirectory)
-        ),
-      lReturnValue
-    );
+    for (let lExtends of lReturnValue.extends) {
+      lReturnValue = mergeConfigs(
+        lReturnValue,
+        // eslint-disable-next-line no-await-in-loop
+        await extractDepcruiseConfig(lExtends, pAlreadyVisited, pBaseDirectory)
+      );
+    }
   }
   Reflect.deleteProperty(lReturnValue, "extends");
   return lReturnValue;
@@ -49,10 +48,10 @@ function processExtends(pReturnValue, pAlreadyVisited, pBaseDirectory) {
  * @param {string} pConfigFileName
  * @param {Set?} pAlreadyVisited
  * @param {string?} pBaseDirectory
- * @return {import('../../../types/options').ICruiseOptions} dependency-cruiser options
+ * @return {import('../../../types/options.js').ICruiseOptions} dependency-cruiser options
  * @throws {Error} when the config is not valid (/ does not exist/ isn't readable)
  */
-function extractDepcruiseConfig(
+export default async function extractDepcruiseConfig(
   pConfigFileName,
   pAlreadyVisited = new Set(),
   pBaseDirectory = process.cwd()
@@ -62,7 +61,7 @@ function extractDepcruiseConfig(
     pBaseDirectory,
     normalizeResolveOptions(
       {
-        extensions: [".js", ".json", ".cjs"],
+        extensions: [".js", ".json", ".cjs", ".mjs"],
       },
       {}
     ),
@@ -79,10 +78,10 @@ function extractDepcruiseConfig(
   }
   pAlreadyVisited.add(lResolvedFileName);
 
-  let lReturnValue = readConfig(lResolvedFileName, pBaseDirectory);
+  let lReturnValue = await readConfig(lResolvedFileName);
 
   if (has(lReturnValue, "extends")) {
-    lReturnValue = processExtends(
+    lReturnValue = await processExtends(
       lReturnValue,
       pAlreadyVisited,
       lBaseDirectory
@@ -91,5 +90,3 @@ function extractDepcruiseConfig(
 
   return lReturnValue;
 }
-
-module.exports = extractDepcruiseConfig;

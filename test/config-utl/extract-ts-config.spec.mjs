@@ -1,6 +1,6 @@
 import { fileURLToPath } from "url";
 import { expect } from "chai";
-import loadTSConfig from "../../src/config-utl/extract-ts-config.js";
+import loadTSConfig from "../../src/config-utl/extract-ts-config.mjs";
 import pathToPosix from "../../src/utl/path-to-posix.js";
 
 function getFullPath(pRelativePath) {

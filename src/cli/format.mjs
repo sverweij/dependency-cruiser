@@ -11,7 +11,7 @@ import { getInStream, write } from "./utl/io.mjs";
  * @returns {Number} an exitCode
  */
 export default async function format(pResultFile, pOptions) {
-  const lOptions = normalizeOptions(pOptions);
+  const lOptions = await normalizeOptions(pOptions);
 
   if (pResultFile !== "-") {
     validateFileExistence(pResultFile);

@@ -1,11 +1,11 @@
-const util = require("util");
-const get = require("lodash/get");
-const uniqBy = require("lodash/uniqBy");
-const uniqWith = require("lodash/uniqWith");
+import { isDeepStrictEqual } from "util";
+import get from "lodash/get.js";
+import uniqBy from "lodash/uniqBy.js";
+import uniqWith from "lodash/uniqWith.js";
 
 function extendNamedRule(pExtendedRule, pForbiddenArrayBase) {
   return pForbiddenArrayBase
-    .filter((pBaseRule) => pBaseRule.name === pExtendedRule.name)
+    .filter(({ name }) => name === pExtendedRule.name)
     .reduce(
       (pAll, pBaseRule) => ({
         ...pBaseRule,
@@ -32,12 +32,12 @@ function extendNamedRule(pExtendedRule, pForbiddenArrayBase) {
 function mergeRules(pRuleArrayExtended, pRuleArrayBase) {
   // merge anonymous on 100% equality
   let lAnonymousRules = uniqWith(
-    pRuleArrayExtended.concat(pRuleArrayBase).filter((pRule) => !pRule.name),
-    util.isDeepStrictEqual
+    pRuleArrayExtended.concat(pRuleArrayBase).filter(({ name }) => !name),
+    isDeepStrictEqual
   );
 
   let lNamedRules = pRuleArrayExtended
-    .filter((pRule) => pRule.name)
+    .filter(({ name }) => name)
     .map((pNamedRule) => extendNamedRule(pNamedRule, pRuleArrayBase));
 
   // merge named rules based on unique name
@@ -48,8 +48,8 @@ function mergeRules(pRuleArrayExtended, pRuleArrayBase) {
 
     // the other concats (anonymous, allowed) don't need it
     // but have it to be consistent with this
-    lNamedRules.concat(pRuleArrayBase).filter((pRule) => pRule.name),
-    (pRule) => pRule.name
+    lNamedRules.concat(pRuleArrayBase).filter(({ name }) => name),
+    ({ name }) => name
   );
 
   return lNamedRules.concat(lAnonymousRules);
@@ -68,7 +68,7 @@ function mergeRules(pRuleArrayExtended, pRuleArrayBase) {
 function mergeAllowedRules(pAllowedArrayExtended, pAllowedArrayBase) {
   return uniqWith(
     pAllowedArrayExtended.concat(pAllowedArrayBase),
-    util.isDeepStrictEqual
+    isDeepStrictEqual
   );
 }
 
@@ -108,7 +108,7 @@ function mergeAllowedSeverities(pConfigExtended, pConfigBase) {
  *
  * @returns {Object} - The merged rule set
  */
-module.exports = (pConfigExtended, pConfigBase) => {
+export default (pConfigExtended, pConfigBase) => {
   const lForbidden = mergeRules(
     get(pConfigExtended, "forbidden", []),
     get(pConfigBase, "forbidden", [])

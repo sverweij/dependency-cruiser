@@ -46,10 +46,22 @@
   "main": "src/main/index.js",
   "exports": {
     ".": "./src/main/index.js",
-    "./config-utl/extract-babel-config": "./src/config-utl/extract-babel-config.js",
-    "./config-utl/extract-depcruise-config": "./src/config-utl/extract-depcruise-config/index.js",
-    "./config-utl/extract-ts-config": "./src/config-utl/extract-ts-config.js",
-    "./config-utl/extract-webpack-resolve-config": "./src/config-utl/extract-webpack-resolve-config.js",
+    "./config-utl/extract-babel-config": {
+      "import": "./src/config-utl/extract-babel-config.mjs",
+      "require": "./dist/config-utl/extract-babel-config.js"
+    },
+    "./config-utl/extract-depcruise-config": {
+      "import": "./src/config-utl/extract-depcruise-config/index.mjs",
+      "require": "./dist/config-utl/extract-depcruise-config/index.js"
+    },
+    "./config-utl/extract-ts-config": {
+      "import": "./src/config-utl/extract-ts-config.mjs",
+      "require": "./dist/config-utl/extract-ts-config.js"
+    },
+    "./config-utl/extract-webpack-resolve-config": {
+      "import": "./src/config-utl/extract-webpack-resolve-config.mjs",
+      "require": "./dist/config-utl/extract-webpack-resolve-config.js"
+    },
     "./sample-reporter-plugin": "./configs/plugins/stats-reporter-plugin.js",
     "./sample-3d-reporter-plugin": "./configs/plugins/3d-reporter-plugin.js",
     "./mermaid-reporter-plugin": "./src/report/mermaid.js"
@@ -83,14 +95,14 @@
     "depcruise:graph:doc:fmt-archi": "./bin/depcruise-fmt.mjs -T archi -f - tmp_graph_deps.json | dot -T svg -Gordering=in -Grankdir=TD | tee doc/real-world-samples/dependency-cruiser-archi-graph.svg | node bin/wrap-stream-in-html.mjs > docs/dependency-cruiser-archi-graph.html",
     "depcruise:graph:doc:fmt-dir": "./bin/depcruise-fmt.mjs -T ddot -f - tmp_graph_deps.json | dot -T svg -Grankdir=TD | tee doc/real-world-samples/dependency-cruiser-dir-graph.svg | node bin/wrap-stream-in-html.mjs > docs/dependency-cruiser-dir-graph.html",
     "depcruise:graph:doc:fmt-schema": "cd tools/schema && node ../../bin/dependency-cruise.mjs . --output-type dot | dot -T svg | tee ../overview.svg | node ../../bin/wrap-stream-in-html.mjs > ../../docs/schema-overview.html && cd -",
-    "depcruise:graph:doc:fmt-types": "cd types && node ../bin/dependency-cruise.mjs . --ts-pre-compilation-deps --output-type dot | dot -T svg > overview.svg && cd -",
+    "depcruise:graph:doc:fmt-types": "cd types && node ../bin/dependency-cruise.mjs . --output-type dot | dot -T svg > overview.svg && cd -",
     "depcruise:graph:doc:samples": "sh tools/generate-samples.sh",
     "depcruise:graph:mermaid": "node ./bin/dependency-cruise.mjs bin src --include-only ^src/ --collapse 2 --output-type mermaid",
     "depcruise:graph:mermaid:diff": "node ./bin/dependency-cruise.mjs bin src test types tools --config configs/.dependency-cruiser-unlimited.json --output-type mermaid --reaches \"$(watskeburt $SHA)\"",
-    "depcruise:graph:view": "node ./bin/dependency-cruise.mjs bin src --prefix vscode://file/$(pwd)/ --config configs/.dependency-cruiser-show-metrics-config.json --output-type dot --progress cli-feedback --highlight \"$(watskeburt develop)\" | dot -T svg | node ./bin/wrap-stream-in-html.mjs | browser",
+    "depcruise:graph:view": "node ./bin/dependency-cruise.mjs bin src --prefix vscode://file/$(pwd)/ --config configs/.dependency-cruiser-show-metrics-config.mjs --output-type dot --progress cli-feedback --highlight \"$(watskeburt develop)\" | dot -T svg | node ./bin/wrap-stream-in-html.mjs | browser",
     "depcruise:graph:view:diff": "node ./bin/dependency-cruise.mjs bin src test --prefix vscode://file/$(pwd)/ --config configs/.dependency-cruiser-unlimited.json --output-type dot --progress cli-feedback --reaches \"$(watskeburt develop)\" | dot -T svg | node ./bin/wrap-stream-in-html.mjs | browser",
-    "depcruise:report": "node ./bin/dependency-cruise.mjs src bin test configs types --output-type err-html --config configs/.dependency-cruiser-show-metrics-config.json --output-to dependency-violations.html",
-    "depcruise:report:view": "node ./bin/dependency-cruise.mjs src bin test configs types --output-type err-html --config configs/.dependency-cruiser-show-metrics-config.json --output-to - | browser",
+    "depcruise:report": "node ./bin/dependency-cruise.mjs src bin test configs types --output-type err-html --config configs/.dependency-cruiser-show-metrics-config.mjs --output-to dependency-violations.html",
+    "depcruise:report:view": "node ./bin/dependency-cruise.mjs src bin test configs types --output-type err-html --config configs/.dependency-cruiser-show-metrics-config.mjs --output-to - | browser",
     "depcruise:focus": "node ./bin/dependency-cruise.mjs src bin test configs types tools --progress --output-type text --focus",
     "depcruise:reaches": "node ./bin/dependency-cruise.mjs src bin test configs types tools --progress --config configs/.dependency-cruiser-unlimited.json --output-type text --reaches",
     "format": "prettier --loglevel warn --write \"src/**/*.js\" \"configs/**/*.js\" \"tools/**/*.mjs\" \"bin/*\" \"types/*.d.ts\" \"test/**/*.spec.{cjs,js}\" \"test/**/*.{spec,utl}.mjs\"",
@@ -121,7 +133,7 @@
     "test:u": "LANG=en_US.UTF-8 mocha --grep \"^\\[[U]\\]\"",
     "test:e": "LANG=en_US.UTF-8 mocha --grep \"^\\[[E]\\]\"",
     "test:cover": "LANG=en_US.UTF-8 c8 mocha",
-    "test:glob": "set -f && test \"`bin/dependency-cruise.mjs test/extract/__mocks__/gather-globbing/packages/**/src/**/*.js | grep \"no dependency violations found\"`\" = \"✔ no dependency violations found (6 modules, 0 dependencies cruised)\"",
+    "test:glob": "set -f && test \"`bin/dependency-cruise.mjs --no-config test/extract/__mocks__/gather-globbing/packages/**/src/**/*.js | grep \"no dependency violations found\"`\" = \"✔ no dependency violations found (6 modules, 0 dependencies cruised)\"",
     "test:load": "hyperfine --warmup 3 --runs 30 \"bin/dependency-cruise.mjs src bin test configs types tools --ignore-known --validate --no-cache --no-progress\"",
     "test:load:short": "hyperfine --warmup 1 --runs 5 \"bin/dependency-cruise.mjs src bin test configs types tools --ignore-known --validate --no-cache --no-progress\"",
     "test:watch": "mocha --watch --watch-extensions=json --reporter=min test/\\*\\*/\\*.spec.js",
@@ -155,7 +167,7 @@
     "rechoir": "^0.8.0",
     "safe-regex": "2.1.1",
     "semver": "^7.3.7",
-    "semver-try-require": "6.2.0",
+    "semver-try-require": "6.2.1",
     "teamcity-service-messages": "0.1.14",
     "tsconfig-paths-webpack-plugin": "4.0.1",
     "watskeburt": "0.10.1",

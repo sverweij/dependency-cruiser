@@ -1,11 +1,11 @@
 import { fileURLToPath } from "url";
 import { expect } from "chai";
-import loadResolveConfig from "../../src/config-utl/extract-webpack-resolve-config.js";
+import loadResolveConfig from "../../src/config-utl/extract-webpack-resolve-config.mjs";
 
 function getFullPath(pRelativePath) {
   return fileURLToPath(new URL(pRelativePath, import.meta.url));
 }
-describe("[I] config-utl/getWebpackResolveConfig", () => {
+describe("[I] config-utl/extract-webpack-resolve-config - native formats", () => {
   it("throws when no config file name is passed", () => {
     expect(() => loadResolveConfig()).to.throw();
   });

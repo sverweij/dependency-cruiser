@@ -1,8 +1,8 @@
-const { readFileSync } = require("fs");
-const json5 = require("json5");
-const makeAbsolute = require("./make-absolute");
+import { readFileSync } from "fs";
+import json5 from "json5";
+import makeAbsolute from "./make-absolute.mjs";
 
-module.exports = function extractKnownViolations(pKnownViolationsFileName) {
+export default function extractKnownViolations(pKnownViolationsFileName) {
   try {
     return json5.parse(
       readFileSync(makeAbsolute(pKnownViolationsFileName), "utf8")
@@ -19,4 +19,4 @@ module.exports = function extractKnownViolations(pKnownViolationsFileName) {
   // TODO: validate the json against the schema? (might be more clear to do it here,
   // even if (in context of the cli) it's done again when validating the whole
   // config
-};
+}

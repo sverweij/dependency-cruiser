@@ -1,8 +1,11 @@
-const path = require("path");
-const tryRequire = require("semver-try-require");
-const { supportedTranspilers } = require("../../src/meta.js");
+import path from "path";
+import tryImport from "semver-try-require";
+import meta from "../meta.js";
 
-const typescript = tryRequire("typescript", supportedTranspilers.typescript);
+const typescript = await tryImport(
+  "typescript",
+  meta.supportedTranspilers.typescript
+);
 
 const FORMAT_DIAGNOSTICS_HOST = {
   getCanonicalFileName(pFileName) {
@@ -35,7 +38,7 @@ const FORMAT_DIAGNOSTICS_HOST = {
  * @throws {Error} when the tsconfig is invalid/ jas errors
  * @throws {TypeError} when the tsconfig is unreadable
  */
-module.exports = function extractTSConfig(pTSConfigFileName) {
+export default function extractTSConfig(pTSConfigFileName) {
   let lReturnValue = {};
 
   if (typescript) {
@@ -70,4 +73,4 @@ module.exports = function extractTSConfig(pTSConfigFileName) {
   }
 
   return lReturnValue;
-};
+}

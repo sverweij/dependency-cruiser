@@ -1,5 +1,8 @@
-const { extname } = require("path");
-const makeAbsolute = require("./make-absolute");
+import { extname } from "path";
+import { createRequire } from "module";
+import makeAbsolute from "./make-absolute.mjs";
+
+const require = createRequire(import.meta.url);
 
 function pryConfigFromTheConfig(
   pWebpackConfigModule,
@@ -82,7 +85,7 @@ function tryRegisterNonNative(pWebpackConfigFilename) {
  *                 doesn't exist, or because it's invalid)
  */
 
-module.exports = function extractWebpackResolveConfig(
+export default function extractWebpackResolveConfig(
   pWebpackConfigFilename,
   pEnvironment,
   pArguments
@@ -96,6 +99,11 @@ module.exports = function extractWebpackResolveConfig(
   }
 
   try {
+    /* we're using still using require instead of dynamic imports here because
+     * the modules webpack uses for non-native formats monkey-patch on the commonjs
+     * module system. If we'd use a dynamic import, these monkey-patches wouldn't
+     * be used.
+     */
     /* eslint node/global-require:0, security/detect-non-literal-require:0, import/no-dynamic-require:0 */
     const lWebpackConfigModule = require(lWebpackConfigFilename);
     const lWebpackConfig = pryConfigFromTheConfig(
@@ -115,4 +123,4 @@ module.exports = function extractWebpackResolveConfig(
   }
 
   return lReturnValue;
-};
+}

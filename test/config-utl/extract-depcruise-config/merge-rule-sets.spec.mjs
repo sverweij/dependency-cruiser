@@ -1,5 +1,5 @@
 import { expect } from "chai";
-import merge from "../../../src/config-utl/extract-depcruise-config/merge-configs.js";
+import merge from "../../../src/config-utl/extract-depcruise-config/merge-configs.mjs";
 
 describe("[U] config-utl/mergeRuleSets - general", () => {
   it("two empty rule sets yield an empty rule set with named attributes", () => {

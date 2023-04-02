@@ -1,7 +1,7 @@
 import { join } from "path";
 import { fileURLToPath } from "url";
 import { expect } from "chai";
-import extractTSConfig from "../../../src/config-utl/extract-ts-config.js";
+import extractTSConfig from "../../../src/config-utl/extract-ts-config.mjs";
 import resolve from "../../../src/extract/resolve/index.js";
 import normalizeResolveOptions from "../../../src/main/resolve-options/normalize.js";
 

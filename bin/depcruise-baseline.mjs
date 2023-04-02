@@ -29,7 +29,7 @@ try {
     .parse(process.argv);
 
   if (Boolean(program.args[0])) {
-    process.exitCode = cli(program.args, {
+    process.exitCode = await cli(program.args, {
       ...program.opts(),
       cache: false,
       outputType: "baseline",

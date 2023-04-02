@@ -9,10 +9,10 @@ import chalk from "chalk";
 import main from "../main/index.js";
 import bus from "../utl/bus.js";
 
-import extractTSConfig from "../config-utl/extract-ts-config.js";
-import extractBabelConfig from "../config-utl/extract-babel-config.js";
-import extractWebpackResolveConfig from "../config-utl/extract-webpack-resolve-config.js";
-import extractKnownViolations from "../config-utl/extract-known-violations.js";
+import extractTSConfig from "../config-utl/extract-ts-config.mjs";
+import extractBabelConfig from "../config-utl/extract-babel-config.mjs";
+import extractWebpackResolveConfig from "../config-utl/extract-webpack-resolve-config.mjs";
+import extractKnownViolations from "../config-utl/extract-known-violations.mjs";
 import busLogLevels from "../utl/bus-log-levels.js";
 import validateFileExistence from "./utl/validate-file-existence.mjs";
 import normalizeCliOptions from "./normalize-cli-options.mjs";
@@ -98,9 +98,9 @@ function setUpListener(pCruiseOptions) {
   }
 }
 
-function runCruise(pFileDirectoryArray, pCruiseOptions) {
+async function runCruise(pFileDirectoryArray, pCruiseOptions) {
   const lCruiseOptions = addKnownViolations(
-    normalizeCliOptions(pCruiseOptions)
+    await normalizeCliOptions(pCruiseOptions)
   );
 
   pFileDirectoryArray
@@ -121,7 +121,7 @@ function runCruise(pFileDirectoryArray, pCruiseOptions) {
     extractResolveOptions(lCruiseOptions),
     {
       tsConfig: extractTSConfigOptions(lCruiseOptions),
-      babelConfig: extractBabelConfigOptions(lCruiseOptions),
+      babelConfig: await extractBabelConfigOptions(lCruiseOptions),
     }
   );
 
@@ -138,7 +138,7 @@ function runCruise(pFileDirectoryArray, pCruiseOptions) {
  * @param {import("../../types/options").ICruiseOptions} lCruiseOptions
  * @returns {number}
  */
-export default function executeCli(pFileDirectoryArray, pCruiseOptions) {
+export default async function executeCli(pFileDirectoryArray, pCruiseOptions) {
   let lCruiseOptions = pCruiseOptions || {};
   let lExitCode = 0;
 
@@ -163,7 +163,7 @@ export default function executeCli(pFileDirectoryArray, pCruiseOptions) {
     } else if (lCruiseOptions.init) {
       initConfig(lCruiseOptions.init);
     } else {
-      lExitCode = runCruise(pFileDirectoryArray, lCruiseOptions);
+      lExitCode = await runCruise(pFileDirectoryArray, lCruiseOptions);
     }
   } catch (pError) {
     process.stderr.write(`\n  ${chalk.red("ERROR")}: ${pError.message}\n`);

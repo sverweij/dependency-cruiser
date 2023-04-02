@@ -1,25 +1,26 @@
-/* eslint-disable security/detect-non-literal-require */
-/* eslint-disable import/no-dynamic-require */
-/* eslint-disable node/global-require */
-const fs = require("fs");
-const path = require("path");
-const json5 = require("json5");
-const has = require("lodash/has");
-const tryRequire = require("semver-try-require");
-const { supportedTranspilers } = require("../../src/meta.js");
-const makeAbsolute = require("./make-absolute");
+import { readFileSync } from "fs";
 
-function getCommonJSConfig(pBabelConfigFileName) {
+import { extname } from "path";
+import json5 from "json5";
+import has from "lodash/has.js";
+import tryImport from "semver-try-require";
+import meta from "../meta.js";
+import makeAbsolute from "./make-absolute.mjs";
+
+async function getCommonJSConfig(pBabelConfigFileName) {
   let lReturnValue = {};
 
   try {
-    lReturnValue = require(makeAbsolute(pBabelConfigFileName));
+    const lModule = await import(
+      `file://${makeAbsolute(pBabelConfigFileName)}`
+    );
+    lReturnValue = lModule.default;
   } catch (pError) {
     throw new Error(
-      `Encountered an error while parsing babel config '${pBabelConfigFileName}':` +
-        `\n\n          ${pError}` +
-        "\n\n         At this time dependency-cruiser only supports babel configurations\n" +
-        "         in either commonjs or json5.\n"
+      `${
+        `Encountered an error while parsing babel config '${pBabelConfigFileName}':` +
+        `\n\n          ${pError}`
+      }\n\n         At this time dependency-cruiser only supports babel configurations\n         in either commonjs or json5.\n`
     );
   }
 
@@ -38,7 +39,7 @@ function getJSON5Config(pBabelConfigFileName) {
   let lReturnValue = {};
 
   try {
-    lReturnValue = json5.parse(fs.readFileSync(pBabelConfigFileName, "utf8"));
+    lReturnValue = json5.parse(readFileSync(pBabelConfigFileName, "utf8"));
   } catch (pError) {
     throw new Error(
       `Encountered an error while parsing the babel config '${pBabelConfigFileName}':` +
@@ -52,30 +53,30 @@ function getJSON5Config(pBabelConfigFileName) {
   return lReturnValue;
 }
 
-function getConfig(pBabelConfigFileName) {
+async function getConfig(pBabelConfigFileName) {
   const lExtensionToParseFunction = {
     ".js": getCommonJSConfig,
     ".cjs": getCommonJSConfig,
+    ".mjs": getCommonJSConfig,
     "": getJSON5Config,
     ".json": getJSON5Config,
     ".json5": getJSON5Config,
   };
-  const lExtension = path.extname(pBabelConfigFileName);
+  const lExtension = extname(pBabelConfigFileName);
 
   if (!has(lExtensionToParseFunction, lExtension)) {
     throw new Error(
-      `The babel config '${pBabelConfigFileName}' is in a format ('${lExtension}')\n` +
-        "         dependency-cruiser doesn't support yet.\n"
+      `${`The babel config '${pBabelConfigFileName}' is in a format ('${lExtension}')\n`}         dependency-cruiser doesn't support yet.\n`
     );
   }
-  // eslint-disable-next-line security/detect-object-injection
-  return lExtensionToParseFunction[lExtension](pBabelConfigFileName);
+  // eslint-disable-next-line security/detect-object-injection, no-return-await
+  return await lExtensionToParseFunction[lExtension](pBabelConfigFileName);
 }
 
 /**
  * Reads the file with name `pBabelConfigFileName` and returns its parsed
  * contents as an object
- *
+ *x
  * Silently fails if a supported @babel/core version can't be found
  *
  * @param {string} pBabelConfigFileName
@@ -84,13 +85,13 @@ function getConfig(pBabelConfigFileName) {
  *                 when the babel config is invalid OR
  *                 when dependency-cruiser can't yet process it
  */
-module.exports = function extractBabelConfig(pBabelConfigFileName) {
+export default async function extractBabelConfig(pBabelConfigFileName) {
   let lReturnValue = {};
-  const babel = tryRequire("@babel/core", supportedTranspilers.babel);
+  const babel = await tryImport("@babel/core", meta.supportedTranspilers.babel);
 
   if (babel) {
     const lConfig = {
-      ...getConfig(pBabelConfigFileName),
+      ...(await getConfig(pBabelConfigFileName)),
       // under some circumstances babel (and/ or its plugins) really likes to
       // have a filename to go with the config - so we pass it
       filename: pBabelConfigFileName,
@@ -105,4 +106,4 @@ module.exports = function extractBabelConfig(pBabelConfigFileName) {
   }
 
   return lReturnValue;
-};
+}
