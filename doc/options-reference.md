@@ -708,20 +708,15 @@ babelConfig - dependency-cruiser will sort it out for you.
   but [raise an issue](https://github.com/sverweij/dependency-cruiser/issues/new?template=feature-request.md&title=Feature+request%3A+use+babel+only+for+specific+extensions?)
   if you need this to be configurable.
 - :bulb: Dependency-cruiser can process json (/ json5) configurations, either in a
-  separate file or as a key in your package.json. It can also process .js and
-  .cjs configurations, as long as they're commonjs modules and export a simple
-  javascript object. JavaScript configurations that export a function, and/ or
-  that are es modules might be supported in a later stage.
+  separate file or as a key in your package.json. It can also process .js , .cjs
+  and .mjs configurations, as long as they export a simple javascript object.
+  JavaScript configurations that export a function, might get supported in a
+  later stage (upon request).
 - :bulb: Auto detection in [--init](cli.md#--init) looks at some of the likely suspects
   for babel configs - _package.json_ (only if it contains a _babel_ key),
   _.babelrc_, _.babelrc.json_, _babel.config.json_ and any other file with _babel_
   in the name that ends on _json_ or _json5_. - The feature currently works with
   babel versions >=7.0.0
-- :warning: Babel support is currently an experimental feature. This means it
-  is thoroughly tested, works well as far as we could determine. It also means
-  dependency-cruiser won't get a major version bump for little changes that
-  for regular features might be considered breaking (think of more precise
-  module system determination).
 - :construction: The current implementation of babel support is robust, but can be more
   efficient. It's on the [road map](https://github.com/sverweij/dependency-cruiser/projects/1#card-39192574),
   but as it's not entirely trivial it may take some time. The implementation

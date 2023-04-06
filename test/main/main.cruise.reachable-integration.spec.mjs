@@ -18,12 +18,12 @@ describe("[E] main.cruise - reachable integration", () => {
     process.chdir(WORKING_DIRECTORY);
   });
 
-  it("finds the dead wood and the stuff isolated from one 'forbidden' rule set", () => {
+  it("finds the dead wood and the stuff isolated from one 'forbidden' rule set", async () => {
     process.chdir(join("test", "main", "__mocks__", "reachables"));
     const lResult = JSON.parse(
       cruise(
         ["src"],
-        normalizeOptions({
+        await normalizeOptions({
           config: "forbidden-dead-wood-and-isolation.js",
           outputType: "json",
         })
@@ -66,12 +66,12 @@ describe("[E] main.cruise - reachable integration", () => {
     expect(lResult).to.be.jsonSchema(cruiseResultSchema);
   });
 
-  it("finds the dead wood from an 'allowed' rule set", () => {
+  it("finds the dead wood from an 'allowed' rule set", async () => {
     process.chdir(join("test", "main", "__mocks__", "reachables"));
     const lResult = JSON.parse(
       cruise(
         ["src"],
-        normalizeOptions({
+        await normalizeOptions({
           config: "allowed-dead-wood.js",
           outputType: "json",
         })
@@ -100,12 +100,13 @@ describe("[E] main.cruise - reachable integration", () => {
     ]);
     expect(lResult).to.be.jsonSchema(cruiseResultSchema);
   });
-  it("finds the stuff that needs to be isolated from an 'allowed' rule set", () => {
+
+  it("finds the stuff that needs to be isolated from an 'allowed' rule set", async () => {
     process.chdir(join("test", "main", "__mocks__", "reachables"));
     const lResult = JSON.parse(
       cruise(
         ["src"],
-        normalizeOptions({
+        await normalizeOptions({
           config: "allowed-isolation.js",
           outputType: "json",
         })

@@ -1,5 +1,77 @@
 [
   {
+    "type": "dependency",
+    "from": "test/api.spec.cjs",
+    "to": "dependency-cruiser/config-utl/extract-babel-config",
+    "rule": {
+      "severity": "error",
+      "name": "not-to-unresolvable"
+    }
+  },
+  {
+    "type": "dependency",
+    "from": "test/api.spec.cjs",
+    "to": "dependency-cruiser/config-utl/extract-depcruise-config",
+    "rule": {
+      "severity": "error",
+      "name": "not-to-unresolvable"
+    }
+  },
+  {
+    "type": "dependency",
+    "from": "test/api.spec.cjs",
+    "to": "dependency-cruiser/config-utl/extract-ts-config",
+    "rule": {
+      "severity": "error",
+      "name": "not-to-unresolvable"
+    }
+  },
+  {
+    "type": "dependency",
+    "from": "test/api.spec.cjs",
+    "to": "dependency-cruiser/config-utl/extract-webpack-resolve-config",
+    "rule": {
+      "severity": "error",
+      "name": "not-to-unresolvable"
+    }
+  },
+  {
+    "type": "dependency",
+    "from": "test/api.spec.mjs",
+    "to": "dependency-cruiser/config-utl/extract-babel-config",
+    "rule": {
+      "severity": "error",
+      "name": "not-to-unresolvable"
+    }
+  },
+  {
+    "type": "dependency",
+    "from": "test/api.spec.mjs",
+    "to": "dependency-cruiser/config-utl/extract-depcruise-config",
+    "rule": {
+      "severity": "error",
+      "name": "not-to-unresolvable"
+    }
+  },
+  {
+    "type": "dependency",
+    "from": "test/api.spec.mjs",
+    "to": "dependency-cruiser/config-utl/extract-ts-config",
+    "rule": {
+      "severity": "error",
+      "name": "not-to-unresolvable"
+    }
+  },
+  {
+    "type": "dependency",
+    "from": "test/api.spec.mjs",
+    "to": "dependency-cruiser/config-utl/extract-webpack-resolve-config",
+    "rule": {
+      "severity": "error",
+      "name": "not-to-unresolvable"
+    }
+  },
+  {
     "type": "module",
     "from": "src/schema/baseline-violations.schema.js",
     "to": "src/schema/baseline-violations.schema.js",

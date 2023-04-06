@@ -1,6 +1,6 @@
 import path from "path";
 import { expect } from "chai";
-import makeAbsolute from "../../src/config-utl/make-absolute.js";
+import makeAbsolute from "../../src/config-utl/make-absolute.mjs";
 
 describe("[U] cli/utl/makeAbsolute", () => {
   it("leaves absolute path names alone", () => {

@@ -1,8 +1,11 @@
-const { join } = require("path");
-const { expect } = require("chai");
-const loadResolveConfig = require("../../src/config-utl/extract-webpack-resolve-config.js");
+import { join } from "path";
+import { fileURLToPath } from "url";
+import { expect } from "chai";
+import loadResolveConfig from "../../src/config-utl/extract-webpack-resolve-config.mjs";
 
-describe("[I] config-utl/getWebpackResolveConfig - non-native formats", () => {
+const __dirname = fileURLToPath(new URL(".", import.meta.url));
+
+describe("[I] config-utl/extract-webpack-resolve-config - non-native formats", () => {
   it("throws an error when the config is .mjs ", () => {
     expect(() =>
       loadResolveConfig(

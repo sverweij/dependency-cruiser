@@ -1,12 +1,12 @@
 import { fileURLToPath } from "node:url";
 import path from "node:path";
 import { expect } from "chai";
-import loadConfig from "../../../src/config-utl/extract-depcruise-config/index.js";
+import loadConfig from "../../../src/config-utl/extract-depcruise-config/index.mjs";
 
 const __dirname = fileURLToPath(new URL(".", import.meta.url));
 const mockDirectory = path.join(__dirname, "__mocks__");
 
-describe("[I] config-utl/compile-config", () => {
+describe("[I] config-utl/extract-depcruise-config", () => {
   it("a rule set without an extends returns just that rule set", async () => {
     const fixture = await import(
       "./__mocks__/rules.sub-not-allowed-error.json",
@@ -15,7 +15,9 @@ describe("[I] config-utl/compile-config", () => {
       }
     );
     expect(
-      loadConfig(path.join(mockDirectory, "rules.sub-not-allowed-error.json"))
+      await loadConfig(
+        path.join(mockDirectory, "rules.sub-not-allowed-error.json")
+      )
     ).to.deep.equal(fixture.default);
   });
 
@@ -24,13 +26,13 @@ describe("[I] config-utl/compile-config", () => {
       assert: { type: "json" },
     });
     expect(
-      loadConfig(path.join(mockDirectory, "extends/extending.json"))
+      await loadConfig(path.join(mockDirectory, "extends/extending.json"))
     ).to.deep.equal(mergedFixture.default);
   });
 
-  it("a rule set with an extends array (0 members) returns that rule set", () => {
+  it("a rule set with an extends array (0 members) returns that rule set", async () => {
     expect(
-      loadConfig(
+      await loadConfig(
         path.join(
           mockDirectory,
           "extends/extending-array-with-zero-members.json"
@@ -55,7 +57,7 @@ describe("[I] config-utl/compile-config", () => {
       }
     );
     expect(
-      loadConfig(
+      await loadConfig(
         path.join(mockDirectory, "extends/extending-array-with-one-member.json")
       )
     ).to.deep.equal(mergedArrayOneFixture.default);
@@ -69,7 +71,7 @@ describe("[I] config-utl/compile-config", () => {
       }
     );
     expect(
-      loadConfig(
+      await loadConfig(
         path.join(
           mockDirectory,
           "extends/extending-array-with-two-members.json"
@@ -78,9 +80,9 @@ describe("[I] config-utl/compile-config", () => {
     ).to.deep.equal(mergedArrayTwoFixture.default);
   });
 
-  it("a rule set with an extends from node_modules gets merged properly as well", () => {
+  it("a rule set with an extends from node_modules gets merged properly as well", async () => {
     expect(
-      loadConfig(
+      await loadConfig(
         path.join(mockDirectory, "extends/extending-from-node-modules.json")
       )
     ).to.deep.equal({
@@ -101,7 +103,7 @@ describe("[I] config-utl/compile-config", () => {
     });
   });
 
-  it("borks on a circular extends (1 step)", () => {
+  it("borks on a circular extends (1 step)", async () => {
     const lMessageOutTake = `config is circular - ${path.join(
       mockDirectory,
       "extends/circular-one.js"
@@ -109,9 +111,14 @@ describe("[I] config-utl/compile-config", () => {
       mockDirectory,
       "extends/circular-one.js"
     )}.`;
+    let lError = "none";
 
-    expect(() => {
-      loadConfig(path.join(mockDirectory, "extends/circular-one.js"));
-    }).to.throw(lMessageOutTake);
+    try {
+      await loadConfig(path.join(mockDirectory, "extends/circular-one.js"));
+    } catch (pError) {
+      lError = pError.toString();
+    }
+
+    expect(lError).to.contain(lMessageOutTake);
   });
 });

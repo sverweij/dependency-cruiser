@@ -3,6 +3,7 @@ export const RULES_FILE_NAME_SEARCH_ARRAY = [
   ".dependency-cruiser.json",
   ".dependency-cruiser.js",
   ".dependency-cruiser.cjs",
+  ".dependency-cruiser.mjs",
 ];
 export const DEFAULT_BASELINE_FILE_NAME =
   ".dependency-cruiser-known-violations.json";

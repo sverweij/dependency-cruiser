@@ -1,5 +1,5 @@
 import { expect } from "chai";
-import extractKnownViolations from "../../src/config-utl/extract-known-violations.js";
+import extractKnownViolations from "../../src/config-utl/extract-known-violations.mjs";
 
 describe("[I] config-utl/extractKnownViolations", () => {
   const WORKINGDIR = process.cwd();
