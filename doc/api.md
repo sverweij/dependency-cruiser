@@ -98,30 +98,35 @@ try {
 
 ### Utility functions
 
-> Exposition of `extract-xxx` functions is _experimental_. It also will only
-> work on node ^12.19 || >=14.7 as those are versions that support the `exports`
-> entry points feature in package.json.
-
 ```typescript
-import { cruise, ICruiseOptions, IReporterOutput } from ".";
-import extractDepcruiseConfig from "./src/config-utl/extract-depcruise-config";
-import extractTSConfig from "./src/config-utl/extract-ts-config";
-import extractWebpackResolveConfig from "./src/config-utl/extract-webpack-resolve-config";
+import { cruise, ICruiseOptions, IReporterOutput } from "dependency-cruiser";
+import extractDepcruiseConfig from "dependency-cruiser/config-utl/extract-depcruise-config";
+import extractTSConfig from "dependency-cruiser/config-utl/extract-ts-config";
+import extractWebpackResolveConfig from "dependency-cruiser/config-utl/extract-webpack-resolve-config";
+import extractBabelConfig from "dependency-cruiser/config-utl/extract-babel-config";
 
 try {
   const ARRAY_OF_FILES_AND_DIRS_TO_CRUISE = ["src"];
 
-  const depcruiseConfig: ICruiseOptions = extractDepcruiseConfig(
+  const depcruiseConfig: ICruiseOptions = await extractDepcruiseConfig(
     "./.dependency-cruiser.js"
   );
   const webpackResolveConfig = extractWebpackResolveConfig("./webpack.conf.js");
   const tsConfig = extractTSConfig("./tsconfig.json");
+  // const babelConfig = await extractBabelConfig("./babel.conf.json");
 
   const cruiseResult: IReporterOutput = cruise(
     ARRAY_OF_FILES_AND_DIRS_TO_CRUISE,
     depcruiseConfig,
     webpackResolveConfig,
-    tsConfig
+    //   change since v13: in stead of passing the tsConfig directly, like so:
+    // tsconfig
+    //   you now pass it into an object that also supports other types of
+    //   compiler options, like those for babel:
+    {
+      tsConfig: tsConfig,
+      // babelConfig: babelConfig,
+    }
   );
 
   console.dir(cruiseResult.output, { depth: 10 });

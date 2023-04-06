@@ -34,9 +34,11 @@ describe("[E] main.cruise - tsPreCompilationDeps", () => {
       },
       { bustTheCache: true },
       {
-        options: {
-          baseUrl: ".",
-          module: "commonjs",
+        tsConfig: {
+          options: {
+            baseUrl: ".",
+            module: "commonjs",
+          },
         },
       }
     );
@@ -55,9 +57,11 @@ describe("[E] main.cruise - tsPreCompilationDeps", () => {
       },
       { bustTheCache: true },
       {
-        options: {
-          baseUrl: ".",
-          module: "es6",
+        tsConfig: {
+          options: {
+            baseUrl: ".",
+            module: "es6",
+          },
         },
       }
     );
@@ -76,9 +80,11 @@ describe("[E] main.cruise - tsPreCompilationDeps", () => {
       },
       { bustTheCache: true },
       {
-        options: {
-          baseUrl: ".",
-          module: "commonjs",
+        tsConfig: {
+          options: {
+            baseUrl: ".",
+            module: "commonjs",
+          },
         },
       }
     );
@@ -97,9 +103,11 @@ describe("[E] main.cruise - tsPreCompilationDeps", () => {
       },
       { bustTheCache: true },
       {
-        options: {
-          baseUrl: ".",
-          module: "es6",
+        tsConfig: {
+          options: {
+            baseUrl: ".",
+            module: "es6",
+          },
         },
       }
     );

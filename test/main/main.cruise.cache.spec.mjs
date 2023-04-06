@@ -2,7 +2,7 @@ import { rmSync } from "fs";
 import { expect, use } from "chai";
 import chaiJSONSchema from "chai-json-schema";
 import cruiseResultSchema from "../../src/schema/cruise-result.schema.js";
-import { futureCruise } from "../../src/main/index.js";
+import { cruise } from "../../src/main/index.js";
 import Cache from "../../src/cache/cache.js";
 
 use(chaiJSONSchema);
@@ -19,7 +19,7 @@ describe("[E] main.cruise - cache", () => {
   });
 
   it("cruising fills the cache", () => {
-    const lResult = futureCruise(
+    const lResult = cruise(
       ["test/main/__mocks__/cache"],
       {
         cache: CACHE_FOLDER,
@@ -35,7 +35,7 @@ describe("[E] main.cruise - cache", () => {
   });
 
   it("cruising twice yields the same result (minus 'revisionData')", () => {
-    const lResult = futureCruise(
+    const lResult = cruise(
       ["test/main/__mocks__/cache"],
       {
         cache: CACHE_FOLDER,
@@ -48,7 +48,7 @@ describe("[E] main.cruise - cache", () => {
 
     expect(lResult.output).to.deep.equal(lCache);
 
-    const lResultTwo = futureCruise(
+    const lResultTwo = cruise(
       ["test/main/__mocks__/cache"],
       {
         cache: CACHE_FOLDER,
@@ -62,7 +62,7 @@ describe("[E] main.cruise - cache", () => {
   });
 
   it("cruising twice with non-compatible arguments yields different results", () => {
-    const lResult = futureCruise(
+    const lResult = cruise(
       ["test/main/__mocks__/cache"],
       {
         cache: CACHE_FOLDER,
@@ -75,7 +75,7 @@ describe("[E] main.cruise - cache", () => {
 
     expect(lResult.output).to.deep.equal(lOldCache);
 
-    const lResultTwo = futureCruise(
+    const lResultTwo = cruise(
       ["test/main/__mocks__/cache test/main/__mocks__/cache-too "],
       {
         cache: CACHE_FOLDER,
