@@ -1,7 +1,7 @@
 import chalk from "chalk";
 import figures from "figures";
 
-import main from "../main/index.js";
+import main from "../main/index.mjs";
 
 function bool2Symbol(pBool) {
   return pBool ? chalk.green(figures.tick) : chalk.red(figures.cross);

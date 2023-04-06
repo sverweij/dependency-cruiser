@@ -2,13 +2,11 @@
 
 The typical use for dependency-cruiser is on the command line. However, you
 might want to use it programmatically. For this, dependency-cruiser has an
-API
+API.
 
 ## Versioning
 
-The API follows the same (semantic) versioning rules and rhythm as the API does
-
-function cruise(pFileAndDirectoryArray, pOptions, pResolveOptions, pTSConfig) {
+The API follows the same (semantic) versioning rules and rhythm as the CLI does.
 
 ## Using the API - step by step
 
@@ -23,7 +21,7 @@ import { cruise, IReporterOutput } from "dependency-cruiser";
 
 const ARRAY_OF_FILES_AND_DIRS_TO_CRUISE: string[] = ["src"];
 try {
-    const cruiseResult: IReporterOutput = cruise(ARRAY_OF_FILES_AND_DIRS_TO_CRUISE);
+    const cruiseResult: IReporterOutput = await cruise(ARRAY_OF_FILES_AND_DIRS_TO_CRUISE);
 } catch(error)
 
 
@@ -52,7 +50,7 @@ const cruiseOptions: ICruiseOptions = {
   includeOnly: "src",
 };
 try {
-  const cruiseResult: IReporterOutput = cruise(
+  const cruiseResult: IReporterOutput = await cruise(
     ARRAY_OF_FILES_AND_DIRS_TO_CRUISE,
     cruiseOptions
   );
@@ -85,7 +83,7 @@ const webpackResolveOptions = {
 };
 
 try {
-  const cruiseResult: IReporterOutput = cruise(
+  const cruiseResult: IReporterOutput = await cruise(
     ARRAY_OF_FILES_AND_DIRS_TO_CRUISE,
     cruiseOptions,
     webpackResolveOptions
@@ -115,7 +113,7 @@ try {
   const tsConfig = extractTSConfig("./tsconfig.json");
   // const babelConfig = await extractBabelConfig("./babel.conf.json");
 
-  const cruiseResult: IReporterOutput = cruise(
+  const cruiseResult: IReporterOutput = await cruise(
     ARRAY_OF_FILES_AND_DIRS_TO_CRUISE,
     depcruiseConfig,
     webpackResolveConfig,

@@ -1,12 +1,12 @@
 import { expect } from "chai";
-import meta from "../../../src/extract/transpile/meta.js";
-import jsWrap from "../../../src/extract/transpile/javascript-wrap.js";
-import lsWrap from "../../../src/extract/transpile/livescript-wrap.js";
-import babelWrap from "../../../src/extract/transpile/babel-wrap.js";
-import vueTemplateWrap from "../../../src/extract/transpile/vue-template-wrap.js";
+import meta from "../../../src/extract/transpile/meta.mjs";
+import jsWrap from "../../../src/extract/transpile/javascript-wrap.mjs";
+import lsWrap from "../../../src/extract/transpile/livescript-wrap.mjs";
+import babelWrap from "../../../src/extract/transpile/babel-wrap.mjs";
+import vueTemplateWrap from "../../../src/extract/transpile/vue-template-wrap.cjs";
 
 describe("[U] extract/transpile/meta", () => {
-  it("tells which extensions can be scanned", () => {
+  it("tells which extensio ns can be scanned", () => {
     expect(meta.scannableExtensions).to.deep.equal([
       ".js",
       ".cjs",

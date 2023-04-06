@@ -1,6 +1,6 @@
 import { expect } from "chai";
 import get from "lodash/get.js";
-import { getASTFromSource } from "../../../src/extract/parse/to-javascript-ast.js";
+import { getASTFromSource } from "../../../src/extract/parse/to-javascript-ast.mjs";
 
 const TSCONFIG_CONSTANTS = {
   ESNEXT: 99,

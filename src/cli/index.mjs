@@ -6,7 +6,7 @@ import set from "lodash/set.js";
 import isInstalledGlobally from "is-installed-globally";
 import chalk from "chalk";
 
-import main from "../main/index.js";
+import { cruise } from "../main/index.mjs";
 import bus from "../utl/bus.js";
 
 import extractTSConfig from "../config-utl/extract-ts-config.mjs";
@@ -115,7 +115,7 @@ async function runCruise(pFileDirectoryArray, pCruiseOptions) {
   setUpListener(lCruiseOptions);
 
   bus.emit("start");
-  const lReportingResult = main.cruise(
+  const lReportingResult = await cruise(
     pFileDirectoryArray,
     lCruiseOptions,
     extractResolveOptions(lCruiseOptions),

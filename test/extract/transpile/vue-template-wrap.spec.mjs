@@ -3,7 +3,7 @@ import { join } from "path";
 import { fileURLToPath } from "url";
 import { expect } from "chai";
 import normalizeNewline from "normalize-newline";
-import wrap from "../../../src/extract/transpile/vue-template-wrap.js";
+import wrap from "../../../src/extract/transpile/vue-template-wrap.cjs";
 
 const __dirname = fileURLToPath(new URL(".", import.meta.url));
 

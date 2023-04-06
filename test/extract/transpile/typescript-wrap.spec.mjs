@@ -1,7 +1,7 @@
 import fs from "fs";
 import { expect } from "chai";
 import normalizeSource from "../normalize-source.utl.mjs";
-import typescriptWrap from "../../../src/extract/transpile/typescript-wrap.js";
+import typescriptWrap from "../../../src/extract/transpile/typescript-wrap.mjs";
 
 const typeScriptRegularWrap = typescriptWrap();
 const typeScriptTsxWrap = typescriptWrap("tsx");

@@ -2,8 +2,8 @@ import { rmSync } from "fs";
 import { expect, use } from "chai";
 import chaiJSONSchema from "chai-json-schema";
 import cruiseResultSchema from "../../src/schema/cruise-result.schema.js";
-import { cruise } from "../../src/main/index.js";
-import Cache from "../../src/cache/cache.js";
+import { cruise } from "../../src/main/index.mjs";
+import Cache from "../../src/cache/cache.mjs";
 
 use(chaiJSONSchema);
 
@@ -18,8 +18,8 @@ describe("[E] main.cruise - cache", () => {
     rmSync(CACHE_FOLDER, { force: true, recursive: true });
   });
 
-  it("cruising fills the cache", () => {
-    const lResult = cruise(
+  it("cruising fills the cache", async () => {
+    const lResult = await cruise(
       ["test/main/__mocks__/cache"],
       {
         cache: CACHE_FOLDER,
@@ -34,8 +34,8 @@ describe("[E] main.cruise - cache", () => {
     expect(lResult.output).to.be.jsonSchema(cruiseResultSchema);
   });
 
-  it("cruising twice yields the same result (minus 'revisionData')", () => {
-    const lResult = cruise(
+  it("cruising twice yields the same result (minus 'revisionData')", async () => {
+    const lResult = await cruise(
       ["test/main/__mocks__/cache"],
       {
         cache: CACHE_FOLDER,
@@ -48,7 +48,7 @@ describe("[E] main.cruise - cache", () => {
 
     expect(lResult.output).to.deep.equal(lCache);
 
-    const lResultTwo = cruise(
+    const lResultTwo = await cruise(
       ["test/main/__mocks__/cache"],
       {
         cache: CACHE_FOLDER,
@@ -61,8 +61,8 @@ describe("[E] main.cruise - cache", () => {
     expect(lResultTwo.output).to.be.jsonSchema(cruiseResultSchema);
   });
 
-  it("cruising twice with non-compatible arguments yields different results", () => {
-    const lResult = cruise(
+  it("cruising twice with non-compatible arguments yields different results", async () => {
+    const lResult = await cruise(
       ["test/main/__mocks__/cache"],
       {
         cache: CACHE_FOLDER,
@@ -75,7 +75,7 @@ describe("[E] main.cruise - cache", () => {
 
     expect(lResult.output).to.deep.equal(lOldCache);
 
-    const lResultTwo = cruise(
+    const lResultTwo = await cruise(
       ["test/main/__mocks__/cache test/main/__mocks__/cache-too "],
       {
         cache: CACHE_FOLDER,

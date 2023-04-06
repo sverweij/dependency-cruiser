@@ -1,14 +1,14 @@
 import { renameSync } from "fs";
 import { expect } from "chai";
-import extract from "../../src/extract/index.js";
+import extract from "../../src/extract/index.mjs";
 import { createRequireJSON } from "../backwards.utl.mjs";
 import normalize from "../../src/main/options/normalize.js";
-import normalizeResolveOptions from "../../src/main/resolve-options/normalize.js";
+import normalizeResolveOptions from "../../src/main/resolve-options/normalize.mjs";
 
 const requireJSON = createRequireJSON(import.meta.url);
 
 describe("[I] extract/index - cache busting", () => {
-  it("delivers a different output", () => {
+  it("delivers a different output", async () => {
     const lOptions = normalize.normalizeCruiseOptions({
       ruleSet: {
         forbidden: [
@@ -35,7 +35,7 @@ describe("[I] extract/index - cache busting", () => {
         ],
       },
     });
-    const lResolveOptions = normalizeResolveOptions({}, lOptions);
+    const lResolveOptions = await normalizeResolveOptions({}, lOptions);
     const lFirstResultFixture = requireJSON(
       "./__fixtures__/cache-busting-first-tree.json"
     );

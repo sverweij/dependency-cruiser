@@ -1,19 +1,19 @@
 import { join } from "path";
 import { fileURLToPath } from "url";
 import { expect } from "chai";
-import resolve from "../../../src/extract/resolve/index.js";
-import normalizeResolveOptions from "../../../src/main/resolve-options/normalize.js";
+import resolve from "../../../src/extract/resolve/index.mjs";
+import normalizeResolveOptions from "../../../src/main/resolve-options/normalize.mjs";
 
 const __dirname = fileURLToPath(new URL(".", import.meta.url));
 
 const WORKING_DIRECTORY = process.cwd();
 
-function wrappedResolve(pModuleAttributes) {
+async function wrappedResolve(pModuleAttributes) {
   return resolve(
     pModuleAttributes,
     process.cwd(),
     process.cwd(),
-    normalizeResolveOptions(
+    await normalizeResolveOptions(
       {
         bustTheCache: true,
       },
@@ -31,7 +31,7 @@ describe("[I] extract/resolve/index - general", () => {
     process.chdir(WORKING_DIRECTORY);
   });
 
-  it("resolves a local dependency to a file on disk", () => {
+  it("resolves a local dependency to a file on disk", async () => {
     expect(
       resolve(
         {
@@ -40,7 +40,7 @@ describe("[I] extract/resolve/index - general", () => {
         },
         join(__dirname, "__mocks__"),
         join(__dirname, "__mocks__", "resolve"),
-        normalizeResolveOptions({}, {})
+        await normalizeResolveOptions({}, {})
       )
     ).to.deep.equal({
       coreModule: false,
@@ -93,7 +93,7 @@ describe("[I] extract/resolve/index - general", () => {
     });
   });
 
-  it("resolves known non-followables as not followable: json", () => {
+  it("resolves known non-followables as not followable: json", async () => {
     expect(
       resolve(
         {
@@ -102,7 +102,7 @@ describe("[I] extract/resolve/index - general", () => {
         },
         join(__dirname, "__mocks__"),
         join(__dirname, "__mocks__", "followability"),
-        normalizeResolveOptions({ bustTheCache: true }, {})
+        await normalizeResolveOptions({ bustTheCache: true }, {})
       )
     ).to.deep.equal({
       coreModule: false,
@@ -113,7 +113,7 @@ describe("[I] extract/resolve/index - general", () => {
     });
   });
 
-  it("resolves known non-followables as not followable, even when it's a resolve registered extension: json", () => {
+  it("resolves known non-followables as not followable, even when it's a resolve registered extension: json", async () => {
     expect(
       resolve(
         {
@@ -122,7 +122,7 @@ describe("[I] extract/resolve/index - general", () => {
         },
         join(__dirname, "__mocks__"),
         join(__dirname, "__mocks__", "followability"),
-        normalizeResolveOptions(
+        await normalizeResolveOptions(
           {
             extensions: [".js", ".json"],
             bustTheCache: true,
@@ -139,7 +139,7 @@ describe("[I] extract/resolve/index - general", () => {
     });
   });
 
-  it("resolves known non-followables as not followable, even when it's a resolve registered extension: sass", () => {
+  it("resolves known non-followables as not followable, even when it's a resolve registered extension: sass", async () => {
     expect(
       resolve(
         {
@@ -148,7 +148,7 @@ describe("[I] extract/resolve/index - general", () => {
         },
         join(__dirname, "__mocks__"),
         join(__dirname, "__mocks__", "followability"),
-        normalizeResolveOptions(
+        await normalizeResolveOptions(
           {
             extensions: [".js", ".json", ".scss"],
             bustTheCache: true,
@@ -165,7 +165,7 @@ describe("[I] extract/resolve/index - general", () => {
     });
   });
 
-  it("considers passed (webpack) aliases", () => {
+  it("considers passed (webpack) aliases", async () => {
     expect(
       resolve(
         {
@@ -174,7 +174,7 @@ describe("[I] extract/resolve/index - general", () => {
         },
         join(__dirname, "__mocks__"),
         join(__dirname, "__mocks__", "resolve"),
-        normalizeResolveOptions(
+        await normalizeResolveOptions(
           {
             alias: {
               hoepla: join(__dirname, "__mocks__", "i-got-aliased-to-hoepla"),
@@ -193,7 +193,7 @@ describe("[I] extract/resolve/index - general", () => {
     });
   });
 
-  it("considers a passed (webpack) modules array", () => {
+  it("considers a passed (webpack) modules array", async () => {
     expect(
       resolve(
         {
@@ -202,7 +202,7 @@ describe("[I] extract/resolve/index - general", () => {
         },
         join(__dirname, "__mocks__"),
         join(__dirname, "__mocks__", "resolve"),
-        normalizeResolveOptions(
+        await normalizeResolveOptions(
           {
             modules: [
               "node_modules",
@@ -227,7 +227,7 @@ describe("[I] extract/resolve/index - general", () => {
     });
   });
 
-  it("strips query parameters from file names", () => {
+  it("strips query parameters from file names", async () => {
     expect(
       resolve(
         {
@@ -236,7 +236,7 @@ describe("[I] extract/resolve/index - general", () => {
         },
         join(__dirname, "__mocks__"),
         join(__dirname, "__mocks__", "resolve"),
-        normalizeResolveOptions({}, {})
+        await normalizeResolveOptions({}, {})
       )
     ).to.deep.equal({
       coreModule: false,
@@ -247,10 +247,10 @@ describe("[I] extract/resolve/index - general", () => {
     });
   });
 
-  it("by default does not look at 'exports' fields in package.json", () => {
+  it("by default does not look at 'exports' fields in package.json", async () => {
     process.chdir("test/extract/resolve/__mocks__/package-json-with-exports");
     expect(
-      wrappedResolve({
+      await wrappedResolve({
         module: "export-testinga/conditionalExports",
         moduleSystem: "cjs",
       })
@@ -263,7 +263,7 @@ describe("[I] extract/resolve/index - general", () => {
     });
   });
 
-  it("looks at the 'exports' fields in package.json when enhanced-resolve is instructed to", () => {
+  it("looks at the 'exports' fields in package.json when enhanced-resolve is instructed to", async () => {
     process.chdir("test/extract/resolve/__mocks__/package-json-with-exports");
     expect(
       resolve(
@@ -273,7 +273,7 @@ describe("[I] extract/resolve/index - general", () => {
         },
         process.cwd(),
         process.cwd(),
-        normalizeResolveOptions(
+        await normalizeResolveOptions(
           {
             bustTheCache: true,
             exportsFields: ["exports"],
@@ -291,10 +291,10 @@ describe("[I] extract/resolve/index - general", () => {
     });
   });
 
-  it("Correctly resolves file names with #'s in it (formerly an upstream issue in enhanced-resolve)", () => {
+  it("Correctly resolves file names with #'s in it (formerly an upstream issue in enhanced-resolve)", async () => {
     process.chdir("test/extract/resolve/__mocks__/resolve-hashmarks");
     expect(
-      wrappedResolve({
+      await wrappedResolve({
         module: "./#/hashmark.js",
         moduleSystem: "cjs",
       })
@@ -307,10 +307,10 @@ describe("[I] extract/resolve/index - general", () => {
     });
   });
 
-  it("Correctly resolves file names that _correctly_ use #'s (in the 'URL' fashion) in it (formerly an upstream issue in enhanced-resolve)", () => {
+  it("Correctly resolves file names that _correctly_ use #'s (in the 'URL' fashion) in it (formerly an upstream issue in enhanced-resolve)", async () => {
     process.chdir("test/extract/resolve/__mocks__/resolve-hashmarks");
     expect(
-      wrappedResolve({
+      await wrappedResolve({
         module: "./hashmark-after-this.js#this-is-extra",
         moduleSystem: "cjs",
       })
@@ -324,7 +324,7 @@ describe("[I] extract/resolve/index - general", () => {
     });
   });
 
-  it("Passes mainFields correctly so it's possible to resolve type-only packages", () => {
+  it("Passes mainFields correctly so it's possible to resolve type-only packages", async () => {
     process.chdir("test/extract/resolve/__mocks__/resolve-type-only-packages");
     expect(
       resolve(
@@ -334,7 +334,7 @@ describe("[I] extract/resolve/index - general", () => {
         },
         process.cwd(),
         process.cwd(),
-        normalizeResolveOptions({
+        await normalizeResolveOptions({
           bustTheCache: true,
           mainFields: ["main", "types"],
         })

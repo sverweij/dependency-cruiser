@@ -1,7 +1,7 @@
 import { readFileSync } from "fs";
 import { expect } from "chai";
 import normalizeNewline from "normalize-newline";
-import coffeescriptWrap from "../../../src/extract/transpile/coffeescript-wrap.js";
+import coffeescriptWrap from "../../../src/extract/transpile/coffeescript-wrap.mjs";
 
 const wrap = coffeescriptWrap();
 const litWrap = coffeescriptWrap(true);

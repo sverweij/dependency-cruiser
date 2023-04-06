@@ -5,7 +5,7 @@ import { expect, use } from "chai";
 import chaiJSONSchema from "chai-json-schema";
 import pathToPosix from "../../src/utl/path-to-posix.js";
 import cruiseResultSchema from "../../src/schema/cruise-result.schema.js";
-import { cruise } from "../../src/main/index.js";
+import { cruise } from "../../src/main/index.mjs";
 import { createRequireJSON } from "../backwards.utl.mjs";
 import normBaseDirectory from "./norm-base-directory.utl.mjs";
 
@@ -30,15 +30,15 @@ function pathPosixify(pOutput) {
 }
 
 describe("[E] main.cruise - main", () => {
-  it("Returns an object when no options are passed", () => {
-    const lResult = cruise(["test/main/__mocks__/ts"]);
+  it("Returns an object when no options are passed", async () => {
+    const lResult = await cruise(["test/main/__mocks__/ts"]);
 
     expect(pathPosixify(lResult.output)).to.deep.equal(tsFixture);
     expect(lResult.output).to.be.jsonSchema(cruiseResultSchema);
   });
 
-  it("Returns an object when no options are passed (absolute path)", () => {
-    const lResult = cruise(
+  it("Returns an object when no options are passed (absolute path)", async () => {
+    const lResult = await cruise(
       [path.join(__dirname, "__mocks__", "ts")],
       {},
       { bustTheCache: true }
@@ -48,8 +48,8 @@ describe("[E] main.cruise - main", () => {
     expect(lResult.output).to.be.jsonSchema(cruiseResultSchema);
   });
 
-  it("processes tsx correctly", () => {
-    const lResult = cruise(
+  it("processes tsx correctly", async () => {
+    const lResult = await cruise(
       ["test/main/__mocks__/tsx"],
       {},
       { bustTheCache: true }
@@ -59,8 +59,8 @@ describe("[E] main.cruise - main", () => {
     expect(lResult.output).to.be.jsonSchema(cruiseResultSchema);
   });
 
-  it("processes jsx correctly", () => {
-    const lResult = cruise(
+  it("processes jsx correctly", async () => {
+    const lResult = await cruise(
       ["test/main/__mocks__/jsx"],
       {},
       { bustTheCache: true }
@@ -69,8 +69,8 @@ describe("[E] main.cruise - main", () => {
     expect(pathPosixify(lResult.output)).to.deep.equal(jsxFixture);
     expect(lResult.output).to.be.jsonSchema(cruiseResultSchema);
   });
-  it("process rulesets in the form a an object instead of json", () => {
-    const lResult = cruise(
+  it("process rulesets in the form a an object instead of json", async () => {
+    const lResult = await cruise(
       ["test/main/__mocks__/jsx"],
       {
         ruleSet: {},
@@ -81,8 +81,8 @@ describe("[E] main.cruise - main", () => {
     expect(pathPosixify(lResult.output)).to.deep.equal(jsxAsObjectFixture);
     expect(lResult.output).to.be.jsonSchema(cruiseResultSchema);
   });
-  it("Collapses to a pattern when a collapse pattern is passed", () => {
-    const lResult = cruise(
+  it("Collapses to a pattern when a collapse pattern is passed", async () => {
+    const lResult = await cruise(
       ["test/main/__mocks__/collapse-after-cruise"],
       {
         ruleSet: {},

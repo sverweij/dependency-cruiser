@@ -1,8 +1,8 @@
 import { expect, use } from "chai";
 import chaiJSONSchema from "chai-json-schema";
-import extract from "../../src/extract/index.js";
+import extract from "../../src/extract/index.mjs";
 import normalize from "../../src/main/options/normalize.js";
-import normalizeResolveOptions from "../../src/main/resolve-options/normalize.js";
+import normalizeResolveOptions from "../../src/main/resolve-options/normalize.mjs";
 import { createRequireJSON } from "../backwards.utl.mjs";
 
 use(chaiJSONSchema);
@@ -10,13 +10,13 @@ use(chaiJSONSchema);
 const requireJSON = createRequireJSON(import.meta.url);
 
 describe("[I] extract/index - do not follow", () => {
-  it("do not follow - doNotFollow.path", () => {
+  it("do not follow - doNotFollow.path", async () => {
     const lOptions = normalize.normalizeCruiseOptions({
       doNotFollow: {
         path: "donotfollowonceinthisfolder",
       },
     });
-    const lResolveOptions = normalizeResolveOptions(
+    const lResolveOptions = await normalizeResolveOptions(
       {
         bustTheCache: true,
       },
@@ -33,13 +33,13 @@ describe("[I] extract/index - do not follow", () => {
     );
   });
 
-  it("do not follow - doNotFollow.dependencyTypes", () => {
+  it("do not follow - doNotFollow.dependencyTypes", async () => {
     const lOptions = normalize.normalizeCruiseOptions({
       doNotFollow: {
         dependencyTypes: ["npm-no-pkg"],
       },
     });
-    const lResolveOptions = normalizeResolveOptions(
+    const lResolveOptions = await normalizeResolveOptions(
       {
         bustTheCache: true,
       },

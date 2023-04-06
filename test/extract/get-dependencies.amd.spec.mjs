@@ -3,10 +3,10 @@ import { unlinkSync } from "fs";
 import { fileURLToPath } from "url";
 import symlinkDir from "symlink-dir";
 import { expect } from "chai";
-import normalizeResolveOptions from "../../src/main/resolve-options/normalize.js";
+import normalizeResolveOptions from "../../src/main/resolve-options/normalize.mjs";
 import { normalizeCruiseOptions } from "../../src/main/options/normalize.js";
 import { createRequireJSON } from "../backwards.utl.mjs";
-import getDependencies from "../../src/extract/get-dependencies.js";
+import getDependencies from "../../src/extract/get-dependencies.mjs";
 import { runFixture } from "./run-get-dependencies-fixture.utl.mjs";
 
 const __dirname = fileURLToPath(new URL(".", import.meta.url));
@@ -45,9 +45,9 @@ describe("[I] extract/getDependencies - AMD - ", () => {
   // amdFixtures.forEach((pFixture) => runFixture(pFixture, "tsc"));
 });
 describe("[I] extract/getDependencies - AMD - with bangs", () => {
-  it("splits extracts the module part of the plugin + module - regular requirejs", () => {
+  it("splits extracts the module part of the plugin + module - regular requirejs", async () => {
     const lOptions = normalizeCruiseOptions({ moduleSystems: ["amd"] });
-    const lResolveOptions = normalizeResolveOptions(
+    const lResolveOptions = await normalizeResolveOptions(
       { bustTheCache: true },
       lOptions
     );
@@ -61,9 +61,9 @@ describe("[I] extract/getDependencies - AMD - with bangs", () => {
     ).to.deep.equal(amdBangRequirejs);
   });
 
-  it("splits bang!./blabla into bang and ./blabla - CommonJS wrapper", () => {
+  it("splits bang!./blabla into bang and ./blabla - CommonJS wrapper", async () => {
     const lOptions = normalizeCruiseOptions({ moduleSystems: ["amd"] });
-    const lResolveOptions = normalizeResolveOptions(
+    const lResolveOptions = await normalizeResolveOptions(
       { bustTheCache: true },
       lOptions
     );

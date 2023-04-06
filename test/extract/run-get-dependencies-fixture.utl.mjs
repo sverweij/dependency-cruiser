@@ -1,7 +1,7 @@
 import { expect } from "chai";
-import getDependencies from "../../src/extract/get-dependencies.js";
+import getDependencies from "../../src/extract/get-dependencies.mjs";
 import { normalizeCruiseOptions } from "../../src/main/options/normalize.js";
-import normalizeResolveOptions from "../../src/main/resolve-options/normalize.js";
+import normalizeResolveOptions from "../../src/main/resolve-options/normalize.mjs";
 
 /* eslint-disable mocha/no-exports */
 export function runFixture(pFixture, pParser = "acorn") {
@@ -19,12 +19,12 @@ export function runFixture(pFixture, pParser = "acorn") {
     lOptions.preserveSymlinks = pFixture.input.preserveSymlinks;
   }
 
-  it(`${pFixture.title} (with '${pParser}' as parser)`, () => {
+  it(`${pFixture.title} (with '${pParser}' as parser)`, async () => {
     expect(
       getDependencies(
         pFixture.input.fileName,
         normalizeCruiseOptions(lOptions),
-        normalizeResolveOptions(
+        await normalizeResolveOptions(
           { bustTheCache: true, resolveLicenses: true },
           normalizeCruiseOptions(lOptions)
         )

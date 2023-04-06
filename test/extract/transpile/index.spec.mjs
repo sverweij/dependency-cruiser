@@ -2,7 +2,7 @@ import { readFileSync } from "fs";
 import { join } from "path";
 import { fileURLToPath } from "url";
 import { expect } from "chai";
-import transpile from "../../../src/extract/transpile/index.js";
+import transpile from "../../../src/extract/transpile/index.mjs";
 import normalizeSource from "../normalize-source.utl.mjs";
 
 const __dirname = fileURLToPath(new URL(".", import.meta.url));

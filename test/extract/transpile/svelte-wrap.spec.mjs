@@ -2,7 +2,7 @@ import { promises as fsPromise } from "fs";
 import { expect } from "chai";
 import svelteWrap from "../../../src/extract/transpile/svelte-wrap.js";
 import normalizeSource from "../normalize-source.utl.mjs";
-import typescriptWrap from "../../../src/extract/transpile/typescript-wrap.js";
+import typescriptWrap from "../../../src/extract/transpile/typescript-wrap.mjs";
 
 const wrap = svelteWrap(typescriptWrap(true));
 

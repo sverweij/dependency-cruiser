@@ -1,8 +1,8 @@
 import { expect, use } from "chai";
 import chaiJSONSchema from "chai-json-schema";
-import extract from "../../src/extract/index.js";
+import extract from "../../src/extract/index.mjs";
 import normalize from "../../src/main/options/normalize.js";
-import normalizeResolveOptions from "../../src/main/resolve-options/normalize.js";
+import normalizeResolveOptions from "../../src/main/resolve-options/normalize.mjs";
 import { createRequireJSON } from "../backwards.utl.mjs";
 
 use(chaiJSONSchema);
@@ -10,13 +10,13 @@ use(chaiJSONSchema);
 const requireJSON = createRequireJSON(import.meta.url);
 
 describe("[I] extract/index - exclude", () => {
-  it("exclude - exclude.path", () => {
+  it("exclude - exclude.path", async () => {
     const lOptions = normalize.normalizeCruiseOptions({
       exclude: {
         path: "dynamic-to-circular",
       },
     });
-    const lResolveOptions = normalizeResolveOptions(
+    const lResolveOptions = await normalizeResolveOptions(
       {
         bustTheCache: true,
       },
@@ -33,13 +33,13 @@ describe("[I] extract/index - exclude", () => {
     );
   });
 
-  it("exclude - exclude.dynamic", () => {
+  it("exclude - exclude.dynamic", async () => {
     const lOptions = normalize.normalizeCruiseOptions({
       exclude: {
         dynamic: true,
       },
     });
-    const lResolveOptions = normalizeResolveOptions(
+    const lResolveOptions = await normalizeResolveOptions(
       {
         bustTheCache: true,
       },

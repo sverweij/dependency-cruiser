@@ -1,5 +1,5 @@
 import { expect } from "chai";
-import extractModuleAttributes from "../../../src/extract/utl/extract-module-attributes.js";
+import extractModuleAttributes from "../../../src/extract/utl/extract-module-attributes.mjs";
 
 describe("[U] extract/utl/extract-module-attributes", () => {
   it("leaves regular module specifications alone", () => {

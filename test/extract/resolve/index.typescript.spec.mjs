@@ -1,19 +1,19 @@
 import { join } from "path";
 import { fileURLToPath } from "url";
 import { expect } from "chai";
-import resolve from "../../../src/extract/resolve/index.js";
-import normalizeResolveOptions from "../../../src/main/resolve-options/normalize.js";
+import resolve from "../../../src/extract/resolve/index.mjs";
+import normalizeResolveOptions from "../../../src/main/resolve-options/normalize.mjs";
 
 const __dirname = fileURLToPath(new URL(".", import.meta.url));
 
 const WORKING_DIRECTORY = process.cwd();
 
-function wrappedResolve(pModuleAttributes) {
+async function wrappedResolve(pModuleAttributes) {
   return resolve(
     pModuleAttributes,
     process.cwd(),
     process.cwd(),
-    normalizeResolveOptions(
+    await normalizeResolveOptions(
       {
         bustTheCache: true,
       },
@@ -31,7 +31,7 @@ describe("[I] extract/resolve/index - typescript", () => {
     process.chdir(WORKING_DIRECTORY);
   });
 
-  it("resolves to ts before it considers vue", () => {
+  it("resolves to ts before it considers vue", async () => {
     expect(
       resolve(
         {
@@ -40,7 +40,7 @@ describe("[I] extract/resolve/index - typescript", () => {
         },
         join(__dirname, "__mocks__"),
         join(__dirname, "__mocks__", "vue-last"),
-        normalizeResolveOptions(
+        await normalizeResolveOptions(
           {
             bustTheCache: true,
           },
@@ -56,12 +56,12 @@ describe("[I] extract/resolve/index - typescript", () => {
     });
   });
 
-  it("Resolves the .ts even when the import includes a (non-existing) .js with explicit extension", () => {
+  it("Resolves the .ts even when the import includes a (non-existing) .js with explicit extension", async () => {
     process.chdir(
       "test/extract/resolve/__mocks__/resolve-to-ts-even-when-imported-as-js"
     );
     expect(
-      wrappedResolve({
+      await wrappedResolve({
         module: "./i-am-secretly-typescript.js",
         moduleSystem: "es6",
       })
@@ -74,12 +74,12 @@ describe("[I] extract/resolve/index - typescript", () => {
     });
   });
 
-  it("Resolves the .js even when the import includes an existing .js with explicit extension and the .ts exists", () => {
+  it("Resolves the .js even when the import includes an existing .js with explicit extension and the .ts exists", async () => {
     process.chdir(
       "test/extract/resolve/__mocks__/resolve-to-js-even-when-imported-as-js"
     );
     expect(
-      wrappedResolve({
+      await wrappedResolve({
         module: "./i-am-genuinely-javascript.js",
         moduleSystem: "es6",
       })
@@ -92,12 +92,12 @@ describe("[I] extract/resolve/index - typescript", () => {
     });
   });
 
-  it("Does NOT resolve the .ts when the import includes a (non-existing) .cjs with explicit extension", () => {
+  it("Does NOT resolve the .ts when the import includes a (non-existing) .cjs with explicit extension", async () => {
     process.chdir(
       "test/extract/resolve/__mocks__/resolve-to-ts-even-when-imported-as-js"
     );
     expect(
-      wrappedResolve({
+      await wrappedResolve({
         module: "./i-am-secretly-typescript.cjs",
         moduleSystem: "es6",
       })
@@ -110,12 +110,12 @@ describe("[I] extract/resolve/index - typescript", () => {
     });
   });
   // cjs => cts
-  it("Resolves the .cts when the import includes a (non-existing) .cjs with explicit extension (even when .d.cts exists)", () => {
+  it("Resolves the .cts when the import includes a (non-existing) .cjs with explicit extension (even when .d.cts exists)", async () => {
     process.chdir(
       "test/extract/resolve/__mocks__/resolve-to-cts-even-when-imported-as-cjs"
     );
     expect(
-      wrappedResolve({
+      await wrappedResolve({
         module: "./i-am-secretly-typescript.cjs",
         moduleSystem: "es6",
       })
@@ -128,12 +128,12 @@ describe("[I] extract/resolve/index - typescript", () => {
     });
   });
 
-  it("Resolves the .d.cts when the import includes a (non-existing) .cjs with explicit extension", () => {
+  it("Resolves the .d.cts when the import includes a (non-existing) .cjs with explicit extension", async () => {
     process.chdir(
       "test/extract/resolve/__mocks__/resolve-to-d-cts-even-when-imported-as-cjs"
     );
     expect(
-      wrappedResolve({
+      await wrappedResolve({
         module: "./i-am-secretly-typescript.cjs",
         moduleSystem: "es6",
       })
@@ -146,12 +146,12 @@ describe("[I] extract/resolve/index - typescript", () => {
     });
   });
 
-  it("Resolves the .cjs when the import includes an existing .cjs with explicit extension and the .cts exists", () => {
+  it("Resolves the .cjs when the import includes an existing .cjs with explicit extension and the .cts exists", async () => {
     process.chdir(
       "test/extract/resolve/__mocks__/resolve-to-cjs-when-imported-as-cjs"
     );
     expect(
-      wrappedResolve({
+      await wrappedResolve({
         module: "./i-am-just-commonjs.cjs",
         moduleSystem: "es6",
       })
@@ -164,12 +164,12 @@ describe("[I] extract/resolve/index - typescript", () => {
     });
   });
   // mjs => mts
-  it("Resolves the .mts when the import includes a (non-existing) .mjs with explicit extension (even when .d.mts exists)", () => {
+  it("Resolves the .mts when the import includes a (non-existing) .mjs with explicit extension (even when .d.mts exists)", async () => {
     process.chdir(
       "test/extract/resolve/__mocks__/resolve-to-mts-even-when-imported-as-mjs"
     );
     expect(
-      wrappedResolve({
+      await wrappedResolve({
         module: "./i-am-secretly-typescript.mjs",
         moduleSystem: "es6",
       })
@@ -182,12 +182,12 @@ describe("[I] extract/resolve/index - typescript", () => {
     });
   });
 
-  it("Resolves the .d.mts when the import includes a (non-existing) .mjs with explicit extension", () => {
+  it("Resolves the .d.mts when the import includes a (non-existing) .mjs with explicit extension", async () => {
     process.chdir(
       "test/extract/resolve/__mocks__/resolve-to-d-mts-even-when-imported-as-mjs"
     );
     expect(
-      wrappedResolve({
+      await wrappedResolve({
         module: "./i-am-secretly-typescript.mjs",
         moduleSystem: "es6",
       })
@@ -200,12 +200,12 @@ describe("[I] extract/resolve/index - typescript", () => {
     });
   });
 
-  it("Resolves the .mjs when the import includes an existing .mjs with explicit extension and the .cts exists", () => {
+  it("Resolves the .mjs when the import includes an existing .mjs with explicit extension and the .cts exists", async () => {
     process.chdir(
       "test/extract/resolve/__mocks__/resolve-to-mjs-when-imported-as-mjs"
     );
     expect(
-      wrappedResolve({
+      await wrappedResolve({
         module: "./i-am-just-esm.mjs",
         moduleSystem: "es6",
       })
@@ -218,10 +218,10 @@ describe("[I] extract/resolve/index - typescript", () => {
     });
   });
 
-  it("Does NOT resolve to something non-typescript-ish when the import includes a (non-existing) .js with explicit extension", () => {
+  it("Does NOT resolve to something non-typescript-ish when the import includes a (non-existing) .js with explicit extension", async () => {
     process.chdir("test/extract/resolve/__mocks__/donot-resolve-to-non-ts");
     expect(
-      wrappedResolve({
+      await wrappedResolve({
         module: "./there-is-a-cjs-variant-of-me-but-you-will-not-find-it.js",
         moduleSystem: "es6",
       })
@@ -234,10 +234,10 @@ describe("[I] extract/resolve/index - typescript", () => {
     });
   });
 
-  it("resolves triple slash directives - local", () => {
+  it("resolves triple slash directives - local", async () => {
     process.chdir("test/extract/resolve/__mocks__/triple-slash-directives");
     expect(
-      wrappedResolve({
+      await wrappedResolve({
         module: "./hello",
         moduleSystem: "tsd",
       })
@@ -250,10 +250,10 @@ describe("[I] extract/resolve/index - typescript", () => {
     });
   });
 
-  it("resolves triple slash directives - external", () => {
+  it("resolves triple slash directives - external", async () => {
     process.chdir("test/extract/resolve/__mocks__/triple-slash-directives");
     expect(
-      wrappedResolve({
+      await await wrappedResolve({
         module: "something",
         moduleSystem: "tsd",
       })

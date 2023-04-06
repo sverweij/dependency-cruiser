@@ -92,7 +92,7 @@ export function cruise(
   pCruiseOptions?: ICruiseOptions,
   pResolveOptions?: IResolveOptions,
   pTranspileOptions?: ITranspileOptions
-): IReporterOutput;
+): Promise<IReporterOutput>;
 
 /**
  * Given a cruise result, formats it with the given reporter (pOutputType)
@@ -104,7 +104,7 @@ export function cruise(
 export function format(
   pResult: ICruiseResult,
   pFormatOptions: IFormatOptions
-): IReporterOutput;
+): Promise<IReporterOutput>;
 
 /**
  * Returns an array of supported transpilers and for each of the transpilers

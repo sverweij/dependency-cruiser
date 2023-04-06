@@ -2,7 +2,7 @@ import { expect } from "chai";
 // eslint-disable-next-line node/file-extension-in-import
 import * as svelteCompiler from "svelte/compiler";
 import normalizeNewline from "normalize-newline";
-import thing from "../../../src/extract/transpile/typescript-wrap.js";
+import thing from "../../../src/extract/transpile/typescript-wrap.mjs";
 import sveltePreProcess from "../../../src/extract/transpile/svelte-preprocess.js";
 
 const typeScriptWrap = thing(false);

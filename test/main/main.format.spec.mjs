@@ -1,6 +1,6 @@
 /* eslint-disable no-magic-numbers */
 import { expect } from "chai";
-import main from "../../src/main/index.js";
+import { format } from "../../src/main/index.mjs";
 import { createRequireJSON } from "../backwards.utl.mjs";
 
 const requireJSON = createRequireJSON(import.meta.url);
@@ -28,40 +28,38 @@ const MINIMAL_RESULT = {
 describe("[E] main.format - format", () => {
   it("barfs when it gets an invalid output type", () => {
     expect(() => {
-      main.format({}, { outputType: "not-a-valid-reporter" });
+      format({}, { outputType: "not-a-valid-reporter" });
     }).to.throw("'not-a-valid-reporter' is not a valid output type.");
   });
 
   it("barfs when it gets a result passed that is invalid json", () => {
     expect(() => {
-      main.format("that is no json");
+      format("that is no json");
     }).to.throw("The supplied dependency-cruiser result is not valid:");
   });
 
   it("barfs when it gets a result passed that doesn't comply to the result schema", () => {
     expect(() => {
-      main.format({ valid: "JSON", not: "schema compliant though" });
+      format({ valid: "JSON", not: "schema compliant though" });
     }).to.throw(
       "The supplied dependency-cruiser result is not valid: data must have required property 'summary'"
     );
   });
 
   it("returns an error reporter formatted report when presented with a legal result", () => {
-    expect(
-      main.format(MINIMAL_RESULT, { outputType: "err" }).output
-    ).to.contain(
+    expect(format(MINIMAL_RESULT, { outputType: "err" }).output).to.contain(
       "no dependency violations found (0 modules, 0 dependencies cruised)"
     );
   });
 
   it("returns an json reporter formatted report when presented with a legal result", () => {
     expect(
-      JSON.parse(main.format(MINIMAL_RESULT, { outputType: "json" }).output)
+      JSON.parse(format(MINIMAL_RESULT, { outputType: "json" }).output)
     ).to.deep.equal(MINIMAL_RESULT);
   });
 
   it("returns a collapsed version of the report when passed a collapse option", () => {
-    const lCollapsedResult = main.format(cruiseResult, {
+    const lCollapsedResult = format(cruiseResult, {
       collapse: "^[^/]+/[^/]+/",
     }).output;
 
@@ -81,7 +79,7 @@ describe("[E] main.format - format", () => {
   });
 
   it("returns string with error explanations when asked for the err-long report", () => {
-    const lErrorLongResult = main.format(cruiseResult, {
+    const lErrorLongResult = format(cruiseResult, {
       outputType: "err-long",
     }).output;
     expect(lErrorLongResult).to.contain("cli-to-main-only-warn:");
@@ -91,7 +89,7 @@ describe("[E] main.format - format", () => {
   });
 
   it("returns string without error explanations when asked for the err report", () => {
-    const lErrorResult = main.format(cruiseResult, {
+    const lErrorResult = format(cruiseResult, {
       outputType: "err",
     }).output;
     expect(lErrorResult).to.contain("cli-to-main-only-warn:");
@@ -102,7 +100,7 @@ describe("[E] main.format - format", () => {
 
   it("retains options that are in .summary.optionsUsed unless overriden", () => {
     const lJSONResult = JSON.parse(
-      main.format(cruiseResult, {
+      format(cruiseResult, {
         outputType: "anon",
         includeOnly: "^src/",
       }).output
