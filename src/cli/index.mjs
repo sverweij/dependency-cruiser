@@ -115,7 +115,7 @@ async function runCruise(pFileDirectoryArray, pCruiseOptions) {
   setUpListener(lCruiseOptions);
 
   bus.emit("start");
-  const lReportingResult = main.futureCruise(
+  const lReportingResult = main.cruise(
     pFileDirectoryArray,
     lCruiseOptions,
     extractResolveOptions(lCruiseOptions),

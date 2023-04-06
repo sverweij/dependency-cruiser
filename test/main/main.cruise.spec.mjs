@@ -5,7 +5,7 @@ import { expect, use } from "chai";
 import chaiJSONSchema from "chai-json-schema";
 import pathToPosix from "../../src/utl/path-to-posix.js";
 import cruiseResultSchema from "../../src/schema/cruise-result.schema.js";
-import main from "../../src/main/index.js";
+import { cruise } from "../../src/main/index.js";
 import { createRequireJSON } from "../backwards.utl.mjs";
 import normBaseDirectory from "./norm-base-directory.utl.mjs";
 
@@ -31,14 +31,14 @@ function pathPosixify(pOutput) {
 
 describe("[E] main.cruise - main", () => {
   it("Returns an object when no options are passed", () => {
-    const lResult = main.cruise(["test/main/__mocks__/ts"]);
+    const lResult = cruise(["test/main/__mocks__/ts"]);
 
     expect(pathPosixify(lResult.output)).to.deep.equal(tsFixture);
     expect(lResult.output).to.be.jsonSchema(cruiseResultSchema);
   });
 
   it("Returns an object when no options are passed (absolute path)", () => {
-    const lResult = main.cruise(
+    const lResult = cruise(
       [path.join(__dirname, "__mocks__", "ts")],
       {},
       { bustTheCache: true }
@@ -49,7 +49,7 @@ describe("[E] main.cruise - main", () => {
   });
 
   it("processes tsx correctly", () => {
-    const lResult = main.cruise(
+    const lResult = cruise(
       ["test/main/__mocks__/tsx"],
       {},
       { bustTheCache: true }
@@ -60,7 +60,7 @@ describe("[E] main.cruise - main", () => {
   });
 
   it("processes jsx correctly", () => {
-    const lResult = main.cruise(
+    const lResult = cruise(
       ["test/main/__mocks__/jsx"],
       {},
       { bustTheCache: true }
@@ -70,7 +70,7 @@ describe("[E] main.cruise - main", () => {
     expect(lResult.output).to.be.jsonSchema(cruiseResultSchema);
   });
   it("process rulesets in the form a an object instead of json", () => {
-    const lResult = main.cruise(
+    const lResult = cruise(
       ["test/main/__mocks__/jsx"],
       {
         ruleSet: {},
@@ -82,7 +82,7 @@ describe("[E] main.cruise - main", () => {
     expect(lResult.output).to.be.jsonSchema(cruiseResultSchema);
   });
   it("Collapses to a pattern when a collapse pattern is passed", () => {
-    const lResult = main.cruise(
+    const lResult = cruise(
       ["test/main/__mocks__/collapse-after-cruise"],
       {
         ruleSet: {},

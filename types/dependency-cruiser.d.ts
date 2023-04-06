@@ -57,29 +57,6 @@ export interface IReporterOutput {
   exitCode: number;
 }
 
-/**
- * Cruises the specified files and files with supported extensions in
- * the specified directories in the pFileDirArray and returns the result
- * in an object.
- *
- * @param pFileAndDirectoryArray  An array of (names of) files, directories and/ or glob patterns
- *                        to start the cruise with
- * @param pCruiseOptions  Options that influence the way the dependencies are cruised - and
- *                        how they are returned.
- * @param pResolveOptions Options that influence how dependency references are resolved to disk.
- *                        See https://webpack.js.org/configuration/resolve/ for the details.
- * @param pTSConfig       An object with with a typescript config object. Note that the
- *                        API will not take any 'extends' keys there into account, so
- *                        before calling make sure to flatten them out if you want them
- *                        used (e.g. with 'dependency-cruiser/config-utl/extract-ts-config')
- */
-export function cruise(
-  pFileAndDirectoryArray: string[],
-  pCruiseOptions?: ICruiseOptions,
-  pResolveOptions?: IResolveOptions,
-  pTSConfig?: any
-): IReporterOutput;
-
 export interface ITranspileOptions {
   /**
    * An object with with a typescript config object. Note that the
@@ -97,9 +74,6 @@ export interface ITranspileOptions {
 }
 
 /**
- * /!\ Beta cruise function. Supports slightly more stuff (i.e. babel), but
- * the function signature might change without notice. /!\
- *
  * Cruises the specified files and files with supported extensions in
  * the specified directories in the pFileDirArray and returns the result
  * in an object.
@@ -113,7 +87,7 @@ export interface ITranspileOptions {
  * @param pTranspileOptions Object to hold options to pass to underlying transpilers
  *                        like TypeScript or Babel
  */
-export function futureCruise(
+export function cruise(
   pFileAndDirectoryArray: string[],
   pCruiseOptions?: ICruiseOptions,
   pResolveOptions?: IResolveOptions,

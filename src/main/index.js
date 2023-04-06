@@ -46,9 +46,9 @@ function c(pComplete, pTotal = TOTAL_STEPS) {
   return { complete: pComplete / pTotal };
 }
 
-/** @type {import("../..").futureCruise} */
+/** @type {import("../..").cruise} */
 // eslint-disable-next-line max-lines-per-function, max-statements
-function futureCruise(
+function cruise(
   pFileAndDirectoryArray,
   pCruiseOptions,
   pResolveOptions,
@@ -93,7 +93,7 @@ function futureCruise(
   const lNormalizedResolveOptions = normalizeResolveOptions(
     pResolveOptions,
     lCruiseOptions,
-    pTranspileOptions.tsConfig
+    pTranspileOptions?.tsConfig
   );
 
   bus.emit("progress", "reading files", c(5));
@@ -120,18 +120,8 @@ function futureCruise(
   return reportWrap(lCruiseResult, lCruiseOptions);
 }
 
-// see [api.md](../../doc/api.md) and/ or the
-// [type definition](../../types/dependency-cruiser.d.ts) for details
-/** @type {import("../..").cruise} */
-function cruise(pFileAndDirectoryArray, pOptions, pResolveOptions, pTSConfig) {
-  return futureCruise(pFileAndDirectoryArray, pOptions, pResolveOptions, {
-    tsConfig: pTSConfig,
-  });
-}
-
 module.exports = {
   cruise,
-  futureCruise,
   format,
   allExtensions: meta.allExtensions,
   getAvailableTranspilers: meta.getAvailableTranspilers,
