@@ -8,7 +8,7 @@ import {
   metricsIsCompatible,
   cacheOptionIsCompatible,
   optionsAreCompatible,
-} from "../../src/cache/options-compatible.js";
+} from "../../src/cache/options-compatible.mjs";
 
 describe("[U] cache/options-compatible - optionIsCompatible", () => {
   it("if neither filter exists they're compatible", () => {

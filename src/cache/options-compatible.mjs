@@ -1,4 +1,4 @@
-const { isDeepStrictEqual } = require("node:util");
+import { isDeepStrictEqual } from "node:util";
 
 /*
 # command line options
@@ -53,29 +53,29 @@ const { isDeepStrictEqual } = require("node:util");
 - knownViolations
 */
 
-function includeOnlyIsCompatible(pExistingFilter, pNewFilter) {
+export function includeOnlyIsCompatible(pExistingFilter, pNewFilter) {
   return (
     !pExistingFilter || isDeepStrictEqual({ path: pExistingFilter }, pNewFilter)
   );
 }
 
-function filterOptionIsCompatible(pExistingOption, pNewOption) {
+export function filterOptionIsCompatible(pExistingOption, pNewOption) {
   return !pExistingOption || isDeepStrictEqual(pExistingOption, pNewOption);
 }
 
-function optionIsCompatible(pExistingOption, pNewOption) {
+export function optionIsCompatible(pExistingOption, pNewOption) {
   return isDeepStrictEqual(pExistingOption, pNewOption);
 }
 
-function limitIsCompatible(pExistingLimit, pNewLimit) {
+export function limitIsCompatible(pExistingLimit, pNewLimit) {
   return !pExistingLimit || pExistingLimit >= (pNewLimit || pExistingLimit + 1);
 }
 
-function metricsIsCompatible(pExistingMetrics, pNewMetrics) {
+export function metricsIsCompatible(pExistingMetrics, pNewMetrics) {
   return pExistingMetrics || pExistingMetrics === pNewMetrics;
 }
 
-function cacheOptionIsCompatible(pExistingCacheOption, pNewCacheOption) {
+export function cacheOptionIsCompatible(pExistingCacheOption, pNewCacheOption) {
   if (!pExistingCacheOption || !pNewCacheOption) {
     return false;
   }
@@ -92,7 +92,7 @@ function cacheOptionIsCompatible(pExistingCacheOption, pNewCacheOption) {
  * @returns {boolean}
  */
 // eslint-disable-next-line complexity
-function optionsAreCompatible(pOldOptions, pNewOptions) {
+export function optionsAreCompatible(pOldOptions, pNewOptions) {
   return (
     pOldOptions.args === pNewOptions.args &&
     pOldOptions.rulesFile === pNewOptions.rulesFile &&
@@ -131,13 +131,3 @@ function optionsAreCompatible(pOldOptions, pNewOptions) {
     cacheOptionIsCompatible(pOldOptions.cache, pNewOptions.cache)
   );
 }
-
-module.exports = {
-  optionsAreCompatible,
-  filterOptionIsCompatible,
-  optionIsCompatible,
-  limitIsCompatible,
-  metricsIsCompatible,
-  includeOnlyIsCompatible,
-  cacheOptionIsCompatible,
-};

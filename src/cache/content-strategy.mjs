@@ -1,16 +1,16 @@
-const { join } = require("node:path").posix;
-const { isDeepStrictEqual } = require("node:util");
-const findContentChanges = require("./find-content-changes");
-const {
+import { isDeepStrictEqual } from "node:util";
+import { join } from "node:path/posix";
+import findContentChanges from "./find-content-changes.mjs";
+import {
   getFileHash,
   isInterestingChangeType,
   addCheckSumToChange,
   moduleIsInterestingForDiff,
-} = require("./utl");
+} from "./helpers.mjs";
 
 /**
  * @param {string} pBaseDirectory
- * @returns {(pModule: import("../..").IModule) => import("../..").IModule}
+ * @returns {(pModule: import("../../types/dependency-cruiser.js").IModule) => import("../../types/dependency-cruiser.js").IModule}
  */
 function addCheckSumToModule(pBaseDirectory) {
   return (pModule) => {
@@ -25,9 +25,9 @@ function addCheckSumToModule(pBaseDirectory) {
 }
 
 /**
- * @param {import("../..").IRevisionChange[]} pChanges
- * @param {import("../..").IModule[]} pModules
- * @returns {import("../..").IRevisionChange[]}
+ * @param {import("../../types/dependency-cruiser.js").IRevisionChange[]} pChanges
+ * @param {import("../../types/dependency-cruiser.js").IModule[]} pModules
+ * @returns {import("../../types/dependency-cruiser.js").IRevisionChange[]}
  */
 function refreshChanges(pChanges, pModules) {
   return pChanges.filter(
@@ -40,18 +40,18 @@ function refreshChanges(pChanges, pModules) {
   );
 }
 
-module.exports = class ContentStrategy {
+export default class ContentStrategy {
   /**
    * @param {string} pDirectory
-   * @param {import("../..").ICruiseResult} pCachedCruiseResult
-   * @param {import("../../types/strict-options").IStrictCruiseOptions} pCruiseOptions
+   * @param {import("../../types/dependency-cruiser.js").ICruiseResult} pCachedCruiseResult
+   * @param {import("../../types/strict-options.js").IStrictCruiseOptions} pCruiseOptions
    * @param {Object} pOptions
    * @param {Set<string>} pOptions.extensions
    * @param {Set<import("watskeburt").changeTypeType>} pOptions.interestingChangeTypes
    * @param {string} pOptions.baseDir
    * @param {(pString:string) => Array<import("watskeburt").IChange>} pOptions.diffListFn
    * @param {(import("watskeburt").IChange) => import("../..").IRevisionChange} pOptions.checksumFn
-   * @returns {import("../..").IRevisionData}
+   * @returns {import("../../types/dependency-cruiser.js").IRevisionData}
    */
   getRevisionData(pDirectory, pCachedCruiseResult, pCruiseOptions, pOptions) {
     const lOptions = {
@@ -74,8 +74,8 @@ module.exports = class ContentStrategy {
   }
 
   /**
-   * @param {import("../..").IRevisionData} pExistingRevisionData
-   * @param {import("../..").IRevisionData} pNewRevisionData
+   * @param {import("../../types/dependency-cruiser.js").IRevisionData} pExistingRevisionData
+   * @param {import("../../types/dependency-cruiser.js").IRevisionData} pNewRevisionData
    * @returns {boolean}
    */
   revisionDataEqual(pExistingRevisionData, pNewRevisionData) {
@@ -91,9 +91,9 @@ module.exports = class ContentStrategy {
   }
 
   /**
-   * @param {import("../..").ICruiseResult} pCruiseResult
-   * @param {import("../..").IRevisionData} pRevisionData
-   * @returns {import("../..").ICruiseResult}
+   * @param {import("../../types/dependency-cruiser.js").ICruiseResult} pCruiseResult
+   * @param {import("../../types/dependency-cruiser.js").IRevisionData} pRevisionData
+   * @returns {import("../../types/dependency-cruiser.js").ICruiseResult}
    */
   prepareRevisionDataForSaving(pCruiseResult, pRevisionData) {
     const lModulesWithCheckSum = pCruiseResult.modules.map(
@@ -110,4 +110,4 @@ module.exports = class ContentStrategy {
       revisionData: lRevisionData,
     };
   }
-};
+}

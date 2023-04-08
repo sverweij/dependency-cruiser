@@ -1,5 +1,5 @@
 import { expect } from "chai";
-import MetaDataStrategy from "../../src/cache/metadata-strategy.js";
+import MetaDataStrategy from "../../src/cache/metadata-strategy.mjs";
 
 const INTERESTING_EXTENSIONS = new Set([".aap", ".noot", ".mies"]);
 const INTERESTING_CHANGE_TYPES = new Set([

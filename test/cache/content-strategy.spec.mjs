@@ -1,5 +1,5 @@
 import { expect } from "chai";
-import ContentStrategy from "../../src/cache/content-strategy.js";
+import ContentStrategy from "../../src/cache/content-strategy.mjs";
 
 const INTERESTING_EXTENSIONS = new Set([".aap", ".noot", ".mies"]);
 const INTERESTING_CHANGE_TYPES = new Set([
