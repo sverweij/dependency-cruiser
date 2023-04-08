@@ -4,7 +4,7 @@ import Ajv from "ajv";
 
 import extract from "../extract/index.mjs";
 import enrich from "../enrich/index.js";
-import cruiseResultSchema from "../schema/cruise-result.schema.js";
+import cruiseResultSchema from "../schema/cruise-result.schema.mjs";
 import bus from "../utl/bus.js";
 import Cache from "../cache/cache.mjs";
 import {

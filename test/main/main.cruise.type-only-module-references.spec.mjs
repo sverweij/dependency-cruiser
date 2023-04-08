@@ -1,7 +1,7 @@
 import { expect, use } from "chai";
 import chaiJSONSchema from "chai-json-schema";
 import { cruise } from "../../src/main/index.mjs";
-import cruiseResultSchema from "../../src/schema/cruise-result.schema.js";
+import cruiseResultSchema from "../../src/schema/cruise-result.schema.mjs";
 import { createRequireJSON } from "../backwards.utl.mjs";
 import normBaseDirectory from "./norm-base-directory.utl.mjs";
 

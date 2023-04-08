@@ -1,7 +1,7 @@
 import { expect, use } from "chai";
 import chaiJSONSchema from "chai-json-schema";
 import summarize from "../../src/enrich/summarize/index.js";
-import cruiseResultSchema from "../../src/schema/cruise-result.schema.js";
+import cruiseResultSchema from "../../src/schema/cruise-result.schema.mjs";
 import cycleStartsOnOne from "./__mocks__/cycle-starts-on-one.mjs";
 import cycleStartsOnTwo from "./__mocks__/cycle-starts-on-two.mjs";
 import cycleFest from "./__mocks__/cycle-fest.mjs";

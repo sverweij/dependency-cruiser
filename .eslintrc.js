@@ -54,7 +54,7 @@ module.exports = {
     "node_modules",
     "coverage",
     "tmp",
-    "src/**/*.schema.js",
+    "src/**/*.schema.mjs",
     "src/**/*.template.js",
     "src/cli/tools/svg-in-html-snippets/script.snippet.js",
     "test/integration/**",

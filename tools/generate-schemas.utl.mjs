@@ -1,6 +1,6 @@
 /* eslint-disable security/detect-object-injection */
-import fs from "fs";
-import path from "path";
+import { writeFileSync } from "node:fs";
+import { extname } from "node:path";
 import prettier from "prettier";
 import clone from "lodash/clone.js";
 
@@ -18,9 +18,9 @@ function stripAttribute(pObject, pAttribute) {
 }
 
 function emitConsolidatedSchema(pOutputFileName) {
-  if (path.extname(pOutputFileName) === ".json") {
+  if (extname(pOutputFileName) === ".json") {
     return (pJSONSchemaObject) => {
-      fs.writeFileSync(
+      writeFileSync(
         pOutputFileName,
         prettier.format(JSON.stringify(pJSONSchemaObject.default), {
           parser: "json",
@@ -30,9 +30,9 @@ function emitConsolidatedSchema(pOutputFileName) {
     };
   }
   return (pJSONSchemaObject) => {
-    fs.writeFileSync(
+    writeFileSync(
       pOutputFileName,
-      `/* generated - don't edit */\nmodule.exports=${JSON.stringify(
+      `/* generated - don't edit */export default ${JSON.stringify(
         stripAttribute(pJSONSchemaObject.default, "description")
       )}`,
       "utf8"
@@ -42,9 +42,9 @@ function emitConsolidatedSchema(pOutputFileName) {
 
 function getInputModuleName(pOutputFileName) {
   const lRE =
-    path.extname(pOutputFileName) === ".json"
+    extname(pOutputFileName) === ".json"
       ? /[^/]+\/([^.]+)\.schema.json/g
-      : /[^/]+\/([^.]+)\.schema.js/g;
+      : /[^/]+\/([^.]+)\.schema.mjs/g;
   return pOutputFileName.replace(lRE, "./$1.schema.mjs");
 }
 
@@ -53,6 +53,7 @@ if (process.argv.length === 3) {
 
   import(getInputModuleName(lOutputFileName))
     .then(emitConsolidatedSchema(lOutputFileName))
+    // eslint-disable-next-line unicorn/prefer-top-level-await
     .catch((pError) => {
       process.exitCode = 2;
       process.stderr.write(`${pError}\n`);
