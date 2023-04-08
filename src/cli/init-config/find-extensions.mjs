@@ -1,7 +1,7 @@
 // @ts-check
 /* eslint-disable security/detect-object-injection */
 import getExtension from "../../utl/get-extension.js";
-import meta from "../../extract/transpile/meta.js";
+import meta from "../../extract/transpile/meta.mjs";
 import findAllFiles from "../../utl/find-all-files.js";
 
 /**

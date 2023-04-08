@@ -1,6 +1,6 @@
 import { readFileSync } from "fs";
 import { expect } from "chai";
-import wrap from "../../../src/extract/transpile/javascript-wrap.js";
+import wrap from "../../../src/extract/transpile/javascript-wrap.mjs";
 
 describe("[I] javascript transpiler", () => {
   it("tells the jsx transpiler is available", () => {

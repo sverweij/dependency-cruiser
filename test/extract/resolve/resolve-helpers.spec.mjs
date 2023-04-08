@@ -1,5 +1,5 @@
 import { expect } from "chai";
-import resolveHelpers from "../../../src/extract/resolve/resolve-helpers.js";
+import resolveHelpers from "../../../src/extract/resolve/resolve-helpers.mjs";
 
 describe("[U] extract/resolve/resolveHelpers - stripToModuleName", () => {
   it("yields the empty string when stripping the empty string", () => {

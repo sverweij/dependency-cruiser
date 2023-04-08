@@ -2,6 +2,9 @@
   "$schema": "../src/schema/configuration.schema.json",
   "extends": "../.dependency-cruiser.json",
   "options": {
+    "cache": {
+      "folder": "node_modules/.cache/dependency-cruiser/unlimited"
+    },
     "reporterOptions": {
       "dot": {
         "showMetrics": true,

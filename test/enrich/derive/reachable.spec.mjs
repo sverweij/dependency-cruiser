@@ -1,7 +1,7 @@
 import { expect } from "chai";
 import normalize from "../../../src/main/rule-set/normalize.js";
 import addReachability from "../../../src/enrich/derive/reachable.js";
-import clearExtractCaches from "../../../src/extract/clear-caches.js";
+import clearExtractCaches from "../../../src/extract/clear-caches.mjs";
 
 const GRAPH = [
   {

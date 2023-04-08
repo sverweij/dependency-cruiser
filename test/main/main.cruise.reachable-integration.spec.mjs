@@ -1,7 +1,7 @@
 import { join } from "path";
 import { expect, use } from "chai";
 import chaiJSONSchema from "chai-json-schema";
-import { cruise } from "../../src/main/index.js";
+import { cruise } from "../../src/main/index.mjs";
 import normalizeOptions from "../../src/cli/normalize-cli-options.mjs";
 import cruiseResultSchema from "../../src/schema/cruise-result.schema.js";
 
@@ -20,15 +20,14 @@ describe("[E] main.cruise - reachable integration", () => {
 
   it("finds the dead wood and the stuff isolated from one 'forbidden' rule set", async () => {
     process.chdir(join("test", "main", "__mocks__", "reachables"));
-    const lResult = JSON.parse(
-      cruise(
-        ["src"],
-        await normalizeOptions({
-          config: "forbidden-dead-wood-and-isolation.js",
-          outputType: "json",
-        })
-      ).output
+    const lCruiseResult = await cruise(
+      ["src"],
+      await normalizeOptions({
+        config: "forbidden-dead-wood-and-isolation.js",
+        outputType: "json",
+      })
     );
+    const lResult = JSON.parse(lCruiseResult.output);
     expect(lResult.summary.violations).to.deep.equal([
       {
         type: "reachability",
@@ -68,15 +67,14 @@ describe("[E] main.cruise - reachable integration", () => {
 
   it("finds the dead wood from an 'allowed' rule set", async () => {
     process.chdir(join("test", "main", "__mocks__", "reachables"));
-    const lResult = JSON.parse(
-      cruise(
-        ["src"],
-        await normalizeOptions({
-          config: "allowed-dead-wood.js",
-          outputType: "json",
-        })
-      ).output
+    const lCruiseResult = await cruise(
+      ["src"],
+      await normalizeOptions({
+        config: "allowed-dead-wood.js",
+        outputType: "json",
+      })
     );
+    const lResult = JSON.parse(lCruiseResult.output);
 
     expect(lResult.summary.violations).to.deep.equal([
       {
@@ -103,15 +101,15 @@ describe("[E] main.cruise - reachable integration", () => {
 
   it("finds the stuff that needs to be isolated from an 'allowed' rule set", async () => {
     process.chdir(join("test", "main", "__mocks__", "reachables"));
-    const lResult = JSON.parse(
-      cruise(
-        ["src"],
-        await normalizeOptions({
-          config: "allowed-isolation.js",
-          outputType: "json",
-        })
-      ).output
+    const lCruiseResult = await cruise(
+      ["src"],
+      await normalizeOptions({
+        config: "allowed-isolation.js",
+        outputType: "json",
+      })
     );
+
+    const lResult = JSON.parse(lCruiseResult.output);
 
     expect(lResult.summary.violations).to.deep.equal([
       {

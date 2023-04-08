@@ -1,5 +1,5 @@
 import getStream from "get-stream";
-import { format as _format } from "../main/index.js";
+import { format as _format } from "../main/index.mjs";
 import validateFileExistence from "./utl/validate-file-existence.mjs";
 import normalizeOptions from "./normalize-cli-options.mjs";
 import { getInStream, write } from "./utl/io.mjs";

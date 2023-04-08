@@ -1,5 +1,5 @@
 import { expect } from "chai";
-import { isExternalModule } from "../../../src/extract/resolve/module-classifiers.js";
+import { isExternalModule } from "../../../src/extract/resolve/module-classifiers.mjs";
 
 describe("[U] extract/resolve/module-classifiers - isExternalModule", () => {
   it("returns false when passed nothing", () => {

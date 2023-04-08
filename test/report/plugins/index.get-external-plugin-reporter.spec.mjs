@@ -41,9 +41,9 @@ describe("[I] report/plugins - getExternalPluginReporter", () => {
   });
 
   it("throws when the plugin:reporter is not a valid plugin (package ref)", () => {
-    expect(() =>
-      getExternalPluginReporter(`plugin:dependency-cruiser`)
-    ).to.throw(`dependency-cruiser is not a valid plugin`);
+    expect(() => getExternalPluginReporter(`plugin:watskeburt`)).to.throw(
+      `watskeburt is not a valid plugin`
+    );
   });
 
   it("returns the plugin module when it's valid and exists", () => {

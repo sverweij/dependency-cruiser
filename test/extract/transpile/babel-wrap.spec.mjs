@@ -1,7 +1,7 @@
 import { readFileSync } from "fs";
 import { expect } from "chai";
 import normalizeSource from "../normalize-source.utl.mjs";
-import wrap from "../../../src/extract/transpile/babel-wrap.js";
+import wrap from "../../../src/extract/transpile/babel-wrap.mjs";
 
 describe("[I] extract/transpile/babel-wrap", () => {
   it("tells the babel transpiler is available", () => {

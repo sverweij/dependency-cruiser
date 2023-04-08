@@ -2,6 +2,15 @@
   {
     "type": "dependency",
     "from": "test/api.spec.cjs",
+    "to": "dependency-cruiser",
+    "rule": {
+      "severity": "error",
+      "name": "not-to-unresolvable"
+    }
+  },
+  {
+    "type": "dependency",
+    "from": "test/api.spec.cjs",
     "to": "dependency-cruiser/config-utl/extract-babel-config",
     "rule": {
       "severity": "error",
@@ -30,6 +39,15 @@
     "type": "dependency",
     "from": "test/api.spec.cjs",
     "to": "dependency-cruiser/config-utl/extract-webpack-resolve-config",
+    "rule": {
+      "severity": "error",
+      "name": "not-to-unresolvable"
+    }
+  },
+  {
+    "type": "dependency",
+    "from": "test/api.spec.mjs",
+    "to": "dependency-cruiser",
     "rule": {
       "severity": "error",
       "name": "not-to-unresolvable"

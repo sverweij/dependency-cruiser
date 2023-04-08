@@ -1,8 +1,8 @@
 import { expect } from "chai";
-import normalizeResolveOptions from "../../src/main/resolve-options/normalize.js";
+import normalizeResolveOptions from "../../src/main/resolve-options/normalize.mjs";
 import { normalizeCruiseOptions } from "../../src/main/options/normalize.js";
 import { createRequireJSON } from "../backwards.utl.mjs";
-import getDependencies from "../../src/extract/get-dependencies.js";
+import getDependencies from "../../src/extract/get-dependencies.mjs";
 import { runFixture } from "./run-get-dependencies-fixture.utl.mjs";
 
 const requireJSON = createRequireJSON(import.meta.url);
@@ -18,9 +18,9 @@ describe("[I] extract/getDependencies - CoffeeScript - ", () => {
 });
 
 describe("[I] extract/getDependencies - Error scenarios - ", () => {
-  it("Does not raise an exception on syntax errors (because we're on the loose parser)", () => {
+  it("Does not raise an exception on syntax errors (because we're on the loose parser)", async () => {
     const lOptions = normalizeCruiseOptions({});
-    const lResolveOptions = normalizeResolveOptions(
+    const lResolveOptions = await normalizeResolveOptions(
       { bustTheCache: true },
       lOptions
     );
@@ -45,11 +45,16 @@ describe("[I] extract/getDependencies - Error scenarios - ", () => {
 });
 
 describe("[I] extract/getDependencies - even when require gets non-string arguments, extract doesn't break", () => {
-  const lOptions = normalizeCruiseOptions({});
-  const lResolveOptions = normalizeResolveOptions(
-    { bustTheCache: true },
-    lOptions
-  );
+  let lOptions = {};
+  let lResolveOptions = {};
+
+  before("normalize options & resolve options", async () => {
+    lOptions = normalizeCruiseOptions({});
+    lResolveOptions = await normalizeResolveOptions(
+      { bustTheCache: true },
+      lOptions
+    );
+  });
 
   it("Just skips require(481)", () => {
     expect(
@@ -83,11 +88,11 @@ describe("[I] extract/getDependencies - even when require gets non-string argume
 });
 
 describe("[I] extract/getDependencies - include", () => {
-  it("returns no dependencies when the includeOnly pattern is erroneous", () => {
+  it("returns no dependencies when the includeOnly pattern is erroneous", async () => {
     const lOptions = normalizeCruiseOptions({
       includeOnly: "will-not-match-dependencies-for-this-file",
     });
-    const lResolveOptions = normalizeResolveOptions(
+    const lResolveOptions = await normalizeResolveOptions(
       { bustTheCache: true },
       lOptions
     );
@@ -101,9 +106,9 @@ describe("[I] extract/getDependencies - include", () => {
     ).to.deep.equal([]);
   });
 
-  it('only includes dependencies matching the passed "includeOnly" (1)', () => {
+  it('only includes dependencies matching the passed "includeOnly" (1)', async () => {
     const lOptions = normalizeCruiseOptions({ includeOnly: "/src/" });
-    const lResolveOptions = normalizeResolveOptions(
+    const lResolveOptions = await normalizeResolveOptions(
       { bustTheCache: true },
       lOptions
     );
@@ -130,9 +135,9 @@ describe("[I] extract/getDependencies - include", () => {
     ]);
   });
 
-  it('only includes dependencies matching the passed "includeOnly" (2)', () => {
+  it('only includes dependencies matching the passed "includeOnly" (2)', async () => {
     const lOptions = normalizeCruiseOptions({ includeOnly: "include" });
-    const lResolveOptions = normalizeResolveOptions(
+    const lResolveOptions = await normalizeResolveOptions(
       { bustTheCache: true },
       lOptions
     );
@@ -171,9 +176,9 @@ describe("[I] extract/getDependencies - include", () => {
     ]);
   });
 
-  it("annotates the exotic require", () => {
+  it("annotates the exotic require", async () => {
     const lOptions = normalizeCruiseOptions({ exoticRequireStrings: ["need"] });
-    const lResolveOptions = normalizeResolveOptions(
+    const lResolveOptions = await normalizeResolveOptions(
       { bustTheCache: true },
       lOptions
     );
@@ -201,11 +206,11 @@ describe("[I] extract/getDependencies - include", () => {
     ]);
   });
 
-  it("does not parse files matching extensions in the extraExtensionsToScan array", () => {
+  it("does not parse files matching extensions in the extraExtensionsToScan array", async () => {
     const lOptions = normalizeCruiseOptions({
       extraExtensionsToScan: [".bentknee", ".yolo"],
     });
-    const lResolveOptions = normalizeResolveOptions(
+    const lResolveOptions = await normalizeResolveOptions(
       { bustTheCache: true },
       lOptions
     );
@@ -219,11 +224,11 @@ describe("[I] extract/getDependencies - include", () => {
     ).to.deep.equal([]);
   });
 
-  it("adds a preCompilationOnly attribute when tsPreCompilationDeps === 'specify'", () => {
+  it("adds a preCompilationOnly attribute when tsPreCompilationDeps === 'specify'", async () => {
     const lOptions = normalizeCruiseOptions({
       tsPreCompilationDeps: "specify",
     });
-    const lResolveOptions = normalizeResolveOptions(
+    const lResolveOptions = await normalizeResolveOptions(
       { bustTheCache: true },
       lOptions
     );

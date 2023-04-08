@@ -2,7 +2,7 @@ import { rmSync } from "fs";
 import { join } from "path";
 import { expect } from "chai";
 import { describe } from "mocha";
-import Cache from "../../src/cache/cache.js";
+import Cache from "../../src/cache/cache.mjs";
 
 const OUTPUTS_FOLDER = "test/cache/__outputs__/";
 

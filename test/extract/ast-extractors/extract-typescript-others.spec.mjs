@@ -1,7 +1,7 @@
 import { readFileSync } from "fs";
 import { fileURLToPath } from "url";
 import { expect } from "chai";
-import extractTypescriptFromAST from "../../../src/extract/ast-extractors/extract-typescript-deps.js";
+import extractTypescriptFromAST from "../../../src/extract/ast-extractors/extract-typescript-deps.mjs";
 
 describe("[U] ast-extractors/extract-typescript - others", () => {
   // see issue #167 - union types on tsc 2.8 and before don't deliver/

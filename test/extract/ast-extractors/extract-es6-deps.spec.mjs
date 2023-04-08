@@ -1,6 +1,6 @@
 import { expect } from "chai";
-import extractES6Deps from "../../../src/extract/ast-extractors/extract-es6-deps.js";
-import { getASTFromSource } from "../../../src/extract/parse/to-javascript-ast.js";
+import extractES6Deps from "../../../src/extract/ast-extractors/extract-es6-deps.mjs";
+import { getASTFromSource } from "../../../src/extract/parse/to-javascript-ast.mjs";
 
 const extractES6 = (pJavaScriptSource, pDependencies, pExtension = ".js") =>
   extractES6Deps(

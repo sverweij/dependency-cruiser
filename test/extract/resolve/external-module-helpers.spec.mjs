@@ -1,20 +1,20 @@
 import { expect } from "chai";
 import has from "lodash/has.js";
-import clearCaches from "../../../src/extract/clear-caches.js";
+import clearCaches from "../../../src/extract/clear-caches.mjs";
 import {
   getPackageJson,
   getPackageRoot,
   getLicense,
   dependencyIsDeprecated,
-} from "../../../src/extract/resolve/external-module-helpers.js";
-import normalizeResolveOptions from "../../../src/main/resolve-options/normalize.js";
+} from "../../../src/extract/resolve/external-module-helpers.mjs";
+import normalizeResolveOptions from "../../../src/main/resolve-options/normalize.mjs";
 import { normalizeCruiseOptions } from "../../../src/main/options/normalize.js";
 
-const BASIC_RESOLVE_OPTIONS = normalizeResolveOptions(
+const BASIC_RESOLVE_OPTIONS = await normalizeResolveOptions(
   {},
   normalizeCruiseOptions({})
 );
-const RESOLVE_OPTIONS_HEEDING_EXPORTS = normalizeResolveOptions(
+const RESOLVE_OPTIONS_HEEDING_EXPORTS = await normalizeResolveOptions(
   { exportsFields: ["exports"], conditionNames: ["require", "imports"] },
   normalizeCruiseOptions({})
 );

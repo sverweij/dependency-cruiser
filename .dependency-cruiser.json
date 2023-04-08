@@ -43,8 +43,8 @@
           "^path$",
           "^url$",
           "$1",
-          "^src/meta.js$",
-          "^src/extract/transpile/meta.js$"
+          "^src/meta\\.js$",
+          "^src/extract/transpile/meta\\.mjs$"
         ]
       }
     },
@@ -117,7 +117,7 @@
       "severity": "error",
       "from": {
         "pathNot": [
-          "^src/(main/resolve-options/normalize\\.js|extract/parse|extract/resolve|extract/gather-initial-sources\\.js|config-utl|cli|cache|utl/find-all-files\\.js)",
+          "^src/(main/resolve-options/normalize\\.mjs|extract/parse|extract/resolve|extract/gather-initial-sources\\.mjs|config-utl|cli|cache|utl/find-all-files\\.js)",
           "^test",
           "^tools"
         ]
@@ -168,7 +168,7 @@
       "comment": "The only 'exotic' requires allowed are tryRequire and requireJSON",
       "from": {},
       "to": {
-        "exoticRequireNot": "^(tryRequire|requireJSON)$",
+        "exoticRequireNot": "^(tryRequire|tryImport|requireJSON|proxyquire\\.load)$",
         "exoticallyRequired": true
       }
     },
@@ -322,7 +322,12 @@
         // ".svelte"
       ]
     },
-    "exoticRequireStrings": ["tryRequire", "requireJSON"],
+    "exoticRequireStrings": [
+      "tryRequire",
+      "tryImport",
+      "requireJSON",
+      "proxyquire.load"
+    ],
     "reporterOptions": {
       "archi": {
         "collapsePattern": [

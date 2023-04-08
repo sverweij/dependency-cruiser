@@ -2,7 +2,7 @@ import fs from "fs";
 import path from "path";
 import { fileURLToPath } from "url";
 import { expect } from "chai";
-import getManifest from "../../../../src/extract/resolve/get-manifest/index.js";
+import { getManifest } from "../../../../src/extract/resolve/get-manifest/index.mjs";
 
 const rootPackageJson = JSON.parse(
   fs.readFileSync(
@@ -147,7 +147,7 @@ describe("[I] extract/resolve/get-manifest - combined dependencies strategy", ()
     );
     expect(() => {
       getManifest(process.cwd(), "bullocks-or-non-valid-basedir", true);
-    }).to.throw(/Unusal baseDir passed to package reading function/);
+    }).to.throw(/Unusual baseDir passed to package reading function/);
   });
 
   it("passing a basedir that weirdly ends in '/' doesn't make combining dependencies loop eternaly", () => {
@@ -156,6 +156,6 @@ describe("[I] extract/resolve/get-manifest - combined dependencies strategy", ()
     );
     expect(() => {
       getManifest(process.cwd(), `${path.dirname(process.cwd())}/`, true);
-    }).to.throw(/Unusal baseDir passed to package reading function/);
+    }).to.throw(/Unusual baseDir passed to package reading function/);
   });
 });

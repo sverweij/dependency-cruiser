@@ -1,7 +1,7 @@
 import { expect, use } from "chai";
 import chaiJSONSchema from "chai-json-schema";
 import cruiseResultSchema from "../../src/schema/cruise-result.schema.js";
-import { cruise } from "../../src/main/index.js";
+import { cruise } from "../../src/main/index.mjs";
 import { createRequireJSON } from "../backwards.utl.mjs";
 import normBaseDirectory from "./norm-base-directory.utl.mjs";
 
@@ -32,9 +32,9 @@ describe("[E] main.cruise - dynamic imports", () => {
     process.chdir(WORKING_DIRECTORY);
   });
 
-  it("detects dynamic dependencies in es", () => {
+  it("detects dynamic dependencies in es", async () => {
     process.chdir("test/main/__mocks__/dynamic-imports/es");
-    const lResult = cruise(
+    const lResult = await cruise(
       ["src"],
       {
         ruleSet: {
@@ -67,9 +67,9 @@ describe("[E] main.cruise - dynamic imports", () => {
     expect(lResult.output).to.be.jsonSchema(cruiseResultSchema);
   });
 
-  it("detects dynamic dependencies in typescript", () => {
+  it("detects dynamic dependencies in typescript", async () => {
     process.chdir("test/main/__mocks__/dynamic-imports/typescript");
-    const lResult = cruise(
+    const lResult = await cruise(
       ["src"],
       {
         ruleSet: {
@@ -102,9 +102,9 @@ describe("[E] main.cruise - dynamic imports", () => {
     expect(lResult.output).to.be.jsonSchema(cruiseResultSchema);
   });
 
-  it("detects dynamic dependencies in typescript when using tsPreCompilationDeps", () => {
+  it("detects dynamic dependencies in typescript when using tsPreCompilationDeps", async () => {
     process.chdir("test/main/__mocks__/dynamic-imports/typescript");
-    const lResult = cruise(
+    const lResult = await cruise(
       ["src"],
       {
         ruleSet: {

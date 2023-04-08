@@ -2,8 +2,8 @@ import { join } from "path";
 import { fileURLToPath } from "url";
 import { expect } from "chai";
 import extractTSConfig from "../../../src/config-utl/extract-ts-config.mjs";
-import resolve from "../../../src/extract/resolve/index.js";
-import normalizeResolveOptions from "../../../src/main/resolve-options/normalize.js";
+import resolve from "../../../src/extract/resolve/index.mjs";
+import normalizeResolveOptions from "../../../src/main/resolve-options/normalize.mjs";
 
 const __dirname = fileURLToPath(new URL(".", import.meta.url));
 
@@ -23,7 +23,7 @@ const TSCONFIG_RESOLUTIONS = join(
 const PARSED_TSCONFIG_RESOLUTIONS = extractTSConfig(TSCONFIG);
 
 describe("[I] extract/resolve/index - typescript tsconfig processing", () => {
-  it("considers a typescript config - non-* alias", () => {
+  it("considers a typescript config - non-* alias", async () => {
     expect(
       resolve(
         {
@@ -32,7 +32,7 @@ describe("[I] extract/resolve/index - typescript tsconfig processing", () => {
         },
         join(__dirname, "__mocks__"),
         join(__dirname, "__mocks__", "ts-config-with-path"),
-        normalizeResolveOptions(
+        await normalizeResolveOptions(
           {
             tsConfig: TSCONFIG,
             bustTheCache: true,
@@ -50,7 +50,7 @@ describe("[I] extract/resolve/index - typescript tsconfig processing", () => {
     });
   });
 
-  it("considers a typescript config - combined/* alias", () => {
+  it("considers a typescript config - combined/* alias", async () => {
     expect(
       resolve(
         {
@@ -59,7 +59,7 @@ describe("[I] extract/resolve/index - typescript tsconfig processing", () => {
         },
         join(__dirname, "__mocks__"),
         join(__dirname, "__mocks__", "ts-config-with-path"),
-        normalizeResolveOptions(
+        await normalizeResolveOptions(
           {
             tsConfig: TSCONFIG,
             bustTheCache: true,
@@ -77,7 +77,7 @@ describe("[I] extract/resolve/index - typescript tsconfig processing", () => {
     });
   });
 
-  it("considers a typescript config - * alias", () => {
+  it("considers a typescript config - * alias", async () => {
     expect(
       resolve(
         {
@@ -86,7 +86,7 @@ describe("[I] extract/resolve/index - typescript tsconfig processing", () => {
         },
         join(__dirname, "__mocks__"),
         join(__dirname, "__mocks__", "ts-config-with-path"),
-        normalizeResolveOptions(
+        await normalizeResolveOptions(
           {
             tsConfig: TSCONFIG,
             bustTheCache: true,
@@ -104,7 +104,7 @@ describe("[I] extract/resolve/index - typescript tsconfig processing", () => {
     });
   });
 
-  it("considers a typescript config - no paths, no aliases, resolves relative to baseUrl", () => {
+  it("considers a typescript config - no paths, no aliases, resolves relative to baseUrl", async () => {
     const TSCONFIG_NO_PATHS = join(
       __dirname,
       "__mocks__",
@@ -120,7 +120,7 @@ describe("[I] extract/resolve/index - typescript tsconfig processing", () => {
         },
         join(__dirname, "__mocks__"),
         join(__dirname, "__mocks__", "ts-config-with-path", "src", "typos"),
-        normalizeResolveOptions(
+        await normalizeResolveOptions(
           {
             tsConfig: TSCONFIG_NO_PATHS,
             bustTheCache: true,
@@ -138,7 +138,7 @@ describe("[I] extract/resolve/index - typescript tsconfig processing", () => {
     });
   });
 
-  it("for aliases resolves in the same fashion as the typescript compiler - dts-vs-ts", () => {
+  it("for aliases resolves in the same fashion as the typescript compiler - dts-vs-ts", async () => {
     expect(
       resolve(
         {
@@ -151,7 +151,7 @@ describe("[I] extract/resolve/index - typescript tsconfig processing", () => {
           "__mocks__",
           "ts-config-with-path-correct-resolution-prio"
         ),
-        normalizeResolveOptions(
+        await normalizeResolveOptions(
           {
             tsConfig: TSCONFIG_RESOLUTIONS,
             bustTheCache: true,
@@ -170,7 +170,7 @@ describe("[I] extract/resolve/index - typescript tsconfig processing", () => {
     });
   });
 
-  it("for aliases resolves in the same fashion as the typescript compiler - js-vs-ts", () => {
+  it("for aliases resolves in the same fashion as the typescript compiler - js-vs-ts", async () => {
     expect(
       resolve(
         {
@@ -183,7 +183,7 @@ describe("[I] extract/resolve/index - typescript tsconfig processing", () => {
           "__mocks__",
           "ts-config-with-path-correct-resolution-prio"
         ),
-        normalizeResolveOptions(
+        await normalizeResolveOptions(
           {
             tsConfig: TSCONFIG_RESOLUTIONS,
             bustTheCache: true,
@@ -202,7 +202,7 @@ describe("[I] extract/resolve/index - typescript tsconfig processing", () => {
     });
   });
 
-  it("gives a different result for the same input without a webpack config", () => {
+  it("gives a different result for the same input without a webpack config", async () => {
     expect(
       resolve(
         {
@@ -211,7 +211,7 @@ describe("[I] extract/resolve/index - typescript tsconfig processing", () => {
         },
         join(__dirname, "__mocks__"),
         join(__dirname, "__mocks__", "ts-config-with-path"),
-        normalizeResolveOptions(
+        await normalizeResolveOptions(
           {
             bustTheCache: true,
           },

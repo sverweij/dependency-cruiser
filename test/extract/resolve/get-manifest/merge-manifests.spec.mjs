@@ -1,5 +1,5 @@
 import { expect } from "chai";
-import mergePackages from "../../../../src/extract/resolve/get-manifest/merge-manifests.js";
+import mergePackages from "../../../../src/extract/resolve/get-manifest/merge-manifests.mjs";
 
 const INPUT = {
   description: "testington",

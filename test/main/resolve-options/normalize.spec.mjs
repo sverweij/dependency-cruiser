@@ -2,7 +2,7 @@ import { join } from "path";
 import { fileURLToPath } from "url";
 import { expect } from "chai";
 import normalize from "../../../src/main/options/normalize.js";
-import normalizeResolveOptions from "../../../src/main/resolve-options/normalize.js";
+import normalizeResolveOptions from "../../../src/main/resolve-options/normalize.mjs";
 
 const __dirname = fileURLToPath(new URL(".", import.meta.url));
 
@@ -14,8 +14,8 @@ describe("[I] main/resolve-options/normalize", () => {
     options: { baseUrl: "", paths: { "*": ["lalala/*"] } },
   };
 
-  it("comes with a set of defaults when passed with no options at all", () => {
-    const lNormalizedOptions = normalizeResolveOptions(
+  it("comes with a set of defaults when passed with no options at all", async () => {
+    const lNormalizedOptions = await normalizeResolveOptions(
       {},
       normalize.normalizeCruiseOptions({})
     );
@@ -31,8 +31,8 @@ describe("[I] main/resolve-options/normalize", () => {
     expect(lNormalizedOptions.useSyncFileSystemCalls).to.equal(true);
   });
 
-  it("does not add the typescript paths plugin to the plugins if a tsConfig is specified without a baseUrl", () => {
-    const lNormalizedOptions = normalizeResolveOptions(
+  it("does not add the typescript paths plugin to the plugins if a tsConfig is specified without a baseUrl", async () => {
+    const lNormalizedOptions = await normalizeResolveOptions(
       {},
       normalize.normalizeCruiseOptions({
         ruleSet: { options: { tsConfig: { fileName: TEST_TSCONFIG } } },
@@ -52,8 +52,8 @@ describe("[I] main/resolve-options/normalize", () => {
     expect(lNormalizedOptions.useSyncFileSystemCalls).to.equal(true);
   });
 
-  it("adds the typescript paths plugin to the plugins if a tsConfig is specified with a baseUrl and actual paths", () => {
-    const lNormalizedOptions = normalizeResolveOptions(
+  it("adds the typescript paths plugin to the plugins if a tsConfig is specified with a baseUrl and actual paths", async () => {
+    const lNormalizedOptions = await normalizeResolveOptions(
       {},
       normalize.normalizeCruiseOptions({
         ruleSet: { options: { tsConfig: { fileName: TEST_TSCONFIG } } },
