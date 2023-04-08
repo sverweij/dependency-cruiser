@@ -120,7 +120,7 @@ export default {
             },
             {
               criteria: {
-                source: "^src/meta\\.js$|\\.template\\.js$|\\.schema\\.js$",
+                source: "^src/meta\\.js$|\\.template\\.js$|\\.schema\\.mjs$",
               },
               attributes: { style: "filled" },
             },

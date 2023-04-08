@@ -1,4 +1,4 @@
 **/*.template.hbs
 **/*.template.js
-**/*.schema.js
+**/*.schema.mjs
 **/*.schema.json
