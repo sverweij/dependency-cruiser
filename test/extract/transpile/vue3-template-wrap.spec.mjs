@@ -1,7 +1,7 @@
-import { readFileSync } from "fs";
-import { join } from "path";
-import { createRequire } from "module";
-import { fileURLToPath } from "url";
+import { readFileSync } from "node:fs";
+import { join } from "node:path";
+import { createRequire } from "node:module";
+import { fileURLToPath } from "node:url";
 import { expect } from "chai";
 import normalizeNewline from "normalize-newline";
 

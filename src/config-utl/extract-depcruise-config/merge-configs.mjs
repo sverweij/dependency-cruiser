@@ -1,4 +1,4 @@
-import { isDeepStrictEqual } from "util";
+import { isDeepStrictEqual } from "node:util";
 import get from "lodash/get.js";
 import uniqBy from "lodash/uniqBy.js";
 import uniqWith from "lodash/uniqWith.js";

@@ -1,5 +1,5 @@
-import { join, dirname, sep } from "path";
-import { readFileSync } from "fs";
+import { join, dirname, sep } from "node:path";
+import { readFileSync } from "node:fs";
 import memoize from "lodash/memoize.js";
 import mergePackages from "./merge-manifests.mjs";
 

@@ -1,4 +1,4 @@
-import { readFileSync } from "fs";
+import { readFileSync } from "node:fs";
 import JSON5 from "json5";
 
 export function createRequireJSON(pBaseURL) {

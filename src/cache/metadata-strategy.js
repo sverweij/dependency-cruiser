@@ -1,4 +1,4 @@
-const { isDeepStrictEqual } = require("util");
+const { isDeepStrictEqual } = require("node:util");
 const { getSHASync, listSync } = require("watskeburt");
 const {
   isInterestingChangeType,

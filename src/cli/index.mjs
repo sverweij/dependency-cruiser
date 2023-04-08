@@ -1,5 +1,5 @@
 /* eslint-disable import/max-dependencies */
-import { join } from "path";
+import { join } from "node:path";
 import { glob } from "glob";
 import cloneDeep from "lodash/cloneDeep.js";
 import set from "lodash/set.js";

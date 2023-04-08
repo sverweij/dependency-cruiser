@@ -1,4 +1,4 @@
-import { fileURLToPath } from "url";
+import { fileURLToPath } from "node:url";
 import { expect } from "chai";
 import loadResolveConfig from "../../src/config-utl/extract-webpack-resolve-config.mjs";
 

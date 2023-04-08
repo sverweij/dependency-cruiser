@@ -1,5 +1,5 @@
-import { rmSync } from "fs";
-import { join } from "path";
+import { rmSync } from "node:fs";
+import { join } from "node:path";
 import { expect } from "chai";
 import { describe } from "mocha";
 import Cache from "../../src/cache/cache.mjs";

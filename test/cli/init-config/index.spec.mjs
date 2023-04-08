@@ -1,5 +1,5 @@
-import { writeFileSync, readFileSync } from "fs";
-import { join } from "path";
+import { writeFileSync, readFileSync } from "node:fs";
+import { join } from "node:path";
 import { use, expect } from "chai";
 import chaiJsonSchema from "chai-json-schema";
 import deleteDammit from "../delete-dammit.utl.cjs";

@@ -1,4 +1,4 @@
-import { join, extname, dirname } from "path";
+import { join, extname, dirname } from "node:path";
 import get from "lodash/get.js";
 import uniqBy from "lodash/uniqBy.js";
 import { intersects } from "../utl/array-util.js";

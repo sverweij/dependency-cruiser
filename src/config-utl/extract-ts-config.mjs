@@ -1,4 +1,4 @@
-import path from "path";
+import path from "node:path";
 import tryImport from "semver-try-require";
 import meta from "../meta.js";
 

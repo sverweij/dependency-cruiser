@@ -1,4 +1,4 @@
-import { readFileSync } from "fs";
+import { readFileSync } from "node:fs";
 import { expect } from "chai";
 import validate from "../../../src/main/rule-set/validate.js";
 

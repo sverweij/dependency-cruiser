@@ -1,5 +1,5 @@
-import { readFileSync } from "fs";
-import { fileURLToPath } from "url";
+import { readFileSync } from "node:fs";
+import { fileURLToPath } from "node:url";
 import { expect } from "chai";
 import extractTypescriptFromAST from "../../../src/extract/ast-extractors/extract-typescript-deps.mjs";
 

@@ -1,5 +1,5 @@
-import { readFileSync, mkdirSync, writeFileSync } from "fs";
-import { join } from "path";
+import { readFileSync, mkdirSync, writeFileSync } from "node:fs";
+import { join } from "node:path";
 import { scannableExtensions } from "../extract/transpile/meta.mjs";
 import optionsCompatible from "./options-compatible.js";
 import MetadataStrategy from "./metadata-strategy.js";

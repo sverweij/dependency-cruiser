@@ -1,5 +1,5 @@
 #!/usr/bin/env node
-import { EOL } from "os";
+import { EOL } from "node:os";
 import { program } from "commander";
 import validateNodeEnvironment from "../src/cli/validate-node-environment.mjs";
 import meta from "../src/meta.js";

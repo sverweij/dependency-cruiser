@@ -1,5 +1,5 @@
-const { join } = require("path").posix;
-const { isDeepStrictEqual } = require("util");
+const { join } = require("node:path").posix;
+const { isDeepStrictEqual } = require("node:util");
 const findContentChanges = require("./find-content-changes");
 const {
   getFileHash,

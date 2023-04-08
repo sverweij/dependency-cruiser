@@ -1,4 +1,4 @@
-import { join } from "path";
+import { join } from "node:path";
 import { expect, use } from "chai";
 import chaiJSONSchema from "chai-json-schema";
 import { cruise } from "../../src/main/index.mjs";

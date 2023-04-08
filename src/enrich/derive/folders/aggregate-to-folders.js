@@ -1,5 +1,5 @@
 /* eslint-disable security/detect-object-injection */
-const path = require("path").posix;
+const path = require("node:path").posix;
 const { calculateInstability, metricsAreCalculable } = require("../module-utl");
 const detectCycles = require("../circular");
 const IndexedModuleGraph = require("../../../graph-utl/indexed-module-graph");

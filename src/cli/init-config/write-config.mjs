@@ -1,4 +1,4 @@
-import { writeFileSync } from "fs";
+import { writeFileSync } from "node:fs";
 import figures from "figures";
 import chalk from "chalk";
 import {

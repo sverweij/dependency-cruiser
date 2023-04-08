@@ -1,4 +1,4 @@
-const path = require("path").posix;
+const path = require("node:path").posix;
 const has = require("lodash/has");
 const utl = require("../utl/index.js");
 const theming = require("./theming");

@@ -1,4 +1,4 @@
-import { EOL } from "os";
+import { EOL } from "node:os";
 import busLogLevels from "../../utl/bus-log-levels.js";
 
 const MICRO_SECONDS_PER_SECOND = 1000000;

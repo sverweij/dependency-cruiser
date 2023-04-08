@@ -1,6 +1,6 @@
-import { accessSync, R_OK } from "fs";
-import { relative, join } from "path";
-import { builtinModules } from "module";
+import { accessSync, R_OK } from "node:fs";
+import { relative, join } from "node:path";
+import { builtinModules } from "node:module";
 import memoize from "lodash/memoize.js";
 import pathToPosix from "../../utl/path-to-posix.js";
 

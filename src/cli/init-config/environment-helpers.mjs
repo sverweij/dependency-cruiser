@@ -1,7 +1,7 @@
 /* eslint-disable import/exports-last */
 // @ts-check
-import { readFileSync, readdirSync, accessSync, statSync, R_OK } from "fs";
-import { join } from "path";
+import { readFileSync, readdirSync, accessSync, statSync, R_OK } from "node:fs";
+import { join } from "node:path";
 import has from "lodash/has.js";
 import { DEFAULT_CONFIG_FILE_NAME } from "../defaults.mjs";
 

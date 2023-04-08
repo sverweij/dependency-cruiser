@@ -1,5 +1,5 @@
-import { resolve } from "path";
-import { fileURLToPath } from "url";
+import { resolve } from "node:path";
+import { fileURLToPath } from "node:url";
 import { expect } from "chai";
 import determineDependencyTypes from "../../../src/extract/resolve/determine-dependency-types.mjs";
 

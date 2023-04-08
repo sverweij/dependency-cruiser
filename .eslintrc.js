@@ -13,9 +13,7 @@ module.exports = {
     "budapestian/global-constant-pattern": "off", // currently does not work with the AST as emitted @typescript-eslint parser (FIXME)
     "no-param-reassign": "error",
     "security/detect-non-literal-fs-filename": "off",
-    "unicorn/prefer-top-level-await": "off", // only works as of node 16
     "unicorn/no-useless-fallback-in-spread": "off", // useful, probably. We'll try it later, though
-    "unicorn/prefer-node-protocol": "off", // yarn 1 pnp doesn't understand node: protocol, and as we still support yarn 1 pnp we're not doing this
   },
   overrides: [
     {

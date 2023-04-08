@@ -1,4 +1,4 @@
-import fs from "fs";
+import fs from "node:fs";
 import { expect } from "chai";
 import normalizeSource from "../normalize-source.utl.mjs";
 import typescriptWrap from "../../../src/extract/transpile/typescript-wrap.mjs";

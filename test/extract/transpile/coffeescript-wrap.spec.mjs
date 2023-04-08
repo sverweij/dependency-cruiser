@@ -1,4 +1,4 @@
-import { readFileSync } from "fs";
+import { readFileSync } from "node:fs";
 import { expect } from "chai";
 import normalizeNewline from "normalize-newline";
 import coffeescriptWrap from "../../../src/extract/transpile/coffeescript-wrap.mjs";

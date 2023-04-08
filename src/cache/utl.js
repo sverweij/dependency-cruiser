@@ -1,6 +1,6 @@
-const { createHash } = require("crypto");
-const { readFileSync } = require("fs");
-const path = require("path");
+const { createHash } = require("node:crypto");
+const { readFileSync } = require("node:fs");
+const path = require("node:path");
 const memoize = require("lodash/memoize");
 const { filenameMatchesPattern } = require("../graph-utl/match-facade");
 

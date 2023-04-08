@@ -1,5 +1,5 @@
-import fs from "fs";
-import path from "path";
+import fs from "node:fs";
+import path from "node:path";
 import set from "lodash/set.js";
 import get from "lodash/get.js";
 import has from "lodash/has.js";

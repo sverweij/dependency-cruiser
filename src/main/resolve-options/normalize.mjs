@@ -1,4 +1,4 @@
-import fs from "fs";
+import fs from "node:fs";
 import get from "lodash/get.js";
 import has from "lodash/has.js";
 import omit from "lodash/omit.js";

@@ -1,4 +1,4 @@
-import { accessSync, R_OK } from "fs";
+import { accessSync, R_OK } from "node:fs";
 
 export default function validateFileExistence(pDirectoryOrFile) {
   try {

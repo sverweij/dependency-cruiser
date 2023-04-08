@@ -1,5 +1,5 @@
 /* eslint-disable import/exports-last */
-import { readFileSync } from "fs";
+import { readFileSync } from "node:fs";
 import { Parser as acornParser, parse as acornParse } from "acorn";
 import { parse as acornLooseParse } from "acorn-loose";
 import acornJsx from "acorn-jsx";
