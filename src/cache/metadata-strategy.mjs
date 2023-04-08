@@ -1,25 +1,25 @@
-const { isDeepStrictEqual } = require("node:util");
-const { getSHASync, listSync } = require("watskeburt");
-const {
+import { isDeepStrictEqual } from "node:util";
+import { getSHASync, listSync } from "watskeburt";
+import {
   isInterestingChangeType,
   addCheckSumToChange,
   excludeFilter,
   includeOnlyFilter,
   changeHasInterestingExtension,
-} = require("./utl");
+} from "./helpers.mjs";
 
-module.exports = class MetaDataStrategy {
+export default class MetaDataStrategy {
   /**
    * @param {Set<string>} pExtensions
    * @param {Set<import("watskeburt").changeTypeType>} pInterestingChangeTypes
-   * @param {import("../../types/strict-options").IStrictCruiseOptions} pCruiseOptions
+   * @param {import("../../types/strict-options.js").IStrictCruiseOptions} pCruiseOptions
    * @param {Object} pOptions
    * @param {Set<string>} pOptions.extensions
    * @param {Set<import("watskeburt").changeTypeType>} pOptions.interestingChangeTypes
    * @param {() => string} pOptions.shaRetrievalFn
    * @param {(pString:string) => Array<import("watskeburt").IChange>} pOptions.diffListFn
    * @param {(import("watskeburt").IChange) => import("../..").IRevisionChange} pOptions.checksumFn
-   * @returns {import("../..").IRevisionData}
+   * @returns {import("../../types/dependency-cruiser.js").IRevisionData}
    */
   getRevisionData(pDirectory, pCachedCruiseResult, pCruiseOptions, pOptions) {
     const lOptions = {
@@ -44,16 +44,14 @@ module.exports = class MetaDataStrategy {
       };
     } catch (pError) {
       throw new Error(
-        "The --cache option works in concert with git - and it seems either the " +
-          "current folder isn't version managed or git isn't installed. Error:" +
-          `\n\n          ${pError}\n`
+        `The --cache option works in concert with git - and it seems either the current folder isn't version managed or git isn't installed. Error:${`\n\n          ${pError}\n`}`
       );
     }
   }
 
   /**
-   * @param {import("../..").IRevisionData} pExistingRevisionData
-   * @param {import("../..").IRevisionData} pNewRevisionData
+   * @param {import("../../types/dependency-cruiser.js").IRevisionData} pExistingRevisionData
+   * @param {import("../../types/dependency-cruiser.js").IRevisionData} pNewRevisionData
    * @returns {boolean}
    */
   revisionDataEqual(pExistingRevisionData, pNewRevisionData) {
@@ -66,9 +64,9 @@ module.exports = class MetaDataStrategy {
   }
 
   /**
-   * @param {import("../..").ICruiseResult} pCruiseResult
-   * @param {import("../..").IRevisionData} pRevisionData
-   * @returns {import("../..").ICruiseResult}
+   * @param {import("../../types/dependency-cruiser.js").ICruiseResult} pCruiseResult
+   * @param {import("../../types/dependency-cruiser.js").IRevisionData} pRevisionData
+   * @returns {import("../../types/dependency-cruiser.js").ICruiseResult}
    */
   prepareRevisionDataForSaving(pCruiseResult, pRevisionData) {
     return pRevisionData
@@ -78,4 +76,4 @@ module.exports = class MetaDataStrategy {
         }
       : pCruiseResult;
   }
-};
+}

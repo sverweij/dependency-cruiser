@@ -1,9 +1,9 @@
 import { readFileSync, mkdirSync, writeFileSync } from "node:fs";
 import { join } from "node:path";
 import { scannableExtensions } from "../extract/transpile/meta.mjs";
-import optionsCompatible from "./options-compatible.js";
-import MetadataStrategy from "./metadata-strategy.js";
-import ContentStrategy from "./content-strategy.js";
+import { optionsAreCompatible } from "./options-compatible.mjs";
+import MetadataStrategy from "./metadata-strategy.mjs";
+import ContentStrategy from "./content-strategy.mjs";
 
 const CACHE_FILE_NAME = "cache.json";
 
@@ -43,7 +43,7 @@ export default class Cache {
         pCachedCruiseResult.revisionData,
         this.revisionData
       ) &&
-      optionsCompatible.optionsAreCompatible(
+      optionsAreCompatible(
         pCachedCruiseResult.summary.optionsUsed,
         pCruiseOptions
       )

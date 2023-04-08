@@ -1,8 +1,11 @@
-const { createHash } = require("node:crypto");
-const { readFileSync } = require("node:fs");
-const path = require("node:path");
-const memoize = require("lodash/memoize");
-const { filenameMatchesPattern } = require("../graph-utl/match-facade");
+/* eslint-disable import/exports-last */
+import { createHash } from "node:crypto";
+import { readFileSync } from "node:fs";
+import path from "node:path";
+import memoize from "lodash/memoize.js";
+import matchFacade from "../graph-utl/match-facade.js";
+
+const { filenameMatchesPattern } = matchFacade;
 
 /**
  * @param {string} pString
@@ -24,13 +27,13 @@ function _getFileHash(pFileName) {
   }
 }
 
-const getFileHash = memoize(_getFileHash);
+export const getFileHash = memoize(_getFileHash);
 
 /**
  * @param {import("watskeburt").IChange} pChange
- * @param {import("../..").IRevisionChange}
+ * @param {import("../../types/dependency-cruiser.js").IRevisionChange}
  */
-function addCheckSumToChange(pChange) {
+export function addCheckSumToChange(pChange) {
   return {
     ...pChange,
     checksum: getFileHash(pChange.name),
@@ -39,10 +42,10 @@ function addCheckSumToChange(pChange) {
 
 /**
  *
- * @param {import("../../types/strict-filter-types").IStrictExcludeType} pExcludeOption
+ * @param {import("../../types/strict-filter-types.js").IStrictExcludeType} pExcludeOption
  * @returns {(pFileName: string) => boolean}
  */
-function excludeFilter(pExcludeOption) {
+export function excludeFilter(pExcludeOption) {
   return (pFileName) => {
     if (pExcludeOption.path) {
       return !filenameMatchesPattern(pFileName, pExcludeOption.path);
@@ -52,10 +55,10 @@ function excludeFilter(pExcludeOption) {
 }
 
 /**
- * @param {import("../../types/strict-filter-types").IStrictIncludeOnlyType} pIncludeOnlyFilter
+ * @param {import("../../types/strict-filter-types.js").IStrictIncludeOnlyType} pIncludeOnlyFilter
  * @returns {(pFileName: string) => boolean}
  */
-function includeOnlyFilter(pIncludeOnlyFilter) {
+export function includeOnlyFilter(pIncludeOnlyFilter) {
   return (pFileName) => {
     if (pIncludeOnlyFilter) {
       return filenameMatchesPattern(pFileName, pIncludeOnlyFilter.path);
@@ -67,7 +70,7 @@ function includeOnlyFilter(pIncludeOnlyFilter) {
  * @param {Set<string>} pExtensions
  * @returns {(pFileName: string) => boolean}
  */
-function hasInterestingExtension(pExtensions) {
+export function hasInterestingExtension(pExtensions) {
   return (pFileName) => pExtensions.has(path.extname(pFileName));
 }
 
@@ -75,7 +78,7 @@ function hasInterestingExtension(pExtensions) {
  * @param {Set<string>} pExtensions
  * @returns {(pChange: import("watskeburt").IChange) => boolean}
  */
-function changeHasInterestingExtension(pExtensions) {
+export function changeHasInterestingExtension(pExtensions) {
   return (pChange) =>
     hasInterestingExtension(pExtensions)(pChange.name) ||
     (pChange.oldName && hasInterestingExtension(pExtensions)(pChange.oldName));
@@ -96,7 +99,7 @@ const DEFAULT_INTERESTING_CHANGE_TYPES = new Set([
  * @param {Set<import("watskeburt").changeTypeType>} pInterestingChangeTypes
  * @returns {(pChange: import("watskeburt").IChange) => boolean}
  */
-function isInterestingChangeType(pInterestingChangeTypes) {
+export function isInterestingChangeType(pInterestingChangeTypes) {
   return (pChange) =>
     (pInterestingChangeTypes ?? DEFAULT_INTERESTING_CHANGE_TYPES).has(
       pChange.changeType
@@ -106,7 +109,7 @@ function isInterestingChangeType(pInterestingChangeTypes) {
 /**
  * @param {pModule:import("../..").IModule} pModule
  */
-function moduleIsInterestingForDiff(pModule) {
+export function moduleIsInterestingForDiff(pModule) {
   return (
     !pModule.consolidated &&
     !pModule.coreModule &&
@@ -117,14 +120,3 @@ function moduleIsInterestingForDiff(pModule) {
     pModule.followable !== false
   );
 }
-
-module.exports = {
-  getFileHash,
-  excludeFilter,
-  includeOnlyFilter,
-  hasInterestingExtension,
-  changeHasInterestingExtension,
-  isInterestingChangeType,
-  addCheckSumToChange,
-  moduleIsInterestingForDiff,
-};

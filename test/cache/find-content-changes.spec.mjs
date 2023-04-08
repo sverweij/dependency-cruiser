@@ -1,5 +1,5 @@
 import { expect } from "chai";
-import findContentChanges from "../../src/cache/find-content-changes.js";
+import findContentChanges from "../../src/cache/find-content-changes.mjs";
 
 describe("[U] cache/find-content-changes - cached vs new", () => {
   it("returns files not in directory but in cache as 'ignored' when they're not interesting for diffing", () => {

@@ -1,14 +1,16 @@
-const { join } = require("node:path").posix;
-const bus = require("../utl/bus");
-const { DEBUG } = require("../utl/bus-log-levels");
-const findAllFiles = require("../utl/find-all-files");
-const {
+import { join } from "node:path/posix";
+import bus from "../utl/bus.js";
+import busLogLevels from "../utl/bus-log-levels.js";
+import findAllFiles from "../utl/find-all-files.js";
+import {
   getFileHash,
   excludeFilter,
   includeOnlyFilter,
   hasInterestingExtension,
   moduleIsInterestingForDiff,
-} = require("./utl");
+} from "./helpers.mjs";
+
+const { DEBUG } = busLogLevels;
 
 /**
  * @param {Set<string>} pFileSet
@@ -68,7 +70,7 @@ function diffCachedModuleAgainstFileSet(
  * @param {string} pOptions.baseDir
  * @returns {{source: string; changeType: import("watskeburt").changeTypeType; checksum: string}[]}
  */
-module.exports = function findContentChanges(
+export default function findContentChanges(
   pDirectory,
   pCachedCruiseResult,
   pOptions
@@ -101,4 +103,4 @@ module.exports = function findContentChanges(
 
   bus.emit("progress", "cache: - returning revision data", { level: DEBUG });
   return lDiffCachedVsNew.concat(lDiffNewVsCached);
-};
+}
