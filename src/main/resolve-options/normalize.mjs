@@ -3,7 +3,7 @@ import get from "lodash/get.js";
 import has from "lodash/has.js";
 import omit from "lodash/omit.js";
 import enhancedResolve from "enhanced-resolve";
-import transpileMeta from "../../extract/transpile/meta.mjs";
+import { scannableExtensions } from "../../extract/transpile/meta.mjs";
 import ruleSet from "../../graph-utl/rule-set.js";
 
 const DEFAULT_CACHE_DURATION = 4000;
@@ -22,7 +22,7 @@ const DEFAULT_RESOLVE_OPTIONS = {
   // anyway, that works well in most circumstances.
   // Note that if extract/transpile/index gets an unknown extension
   // passed, it'll fall back to the javascript parser
-  extensions: transpileMeta.scannableExtensions,
+  extensions: scannableExtensions,
   // for typescript projects that import stuff that's only in
   // node_modules/@types we need:
   // - the inclusion of .d.ts to the extensions (see above)

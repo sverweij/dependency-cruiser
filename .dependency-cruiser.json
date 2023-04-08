@@ -80,7 +80,7 @@
           "$1",
           "^node_modules",
           "^\\.yarn/cache",
-          "^(path|fs|module|os)$",
+          "^(path|path/posix|fs|module|os)$",
           "^src/meta\\.js$",
           "^src/graph-utl",
           "^src/utl"

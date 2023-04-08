@@ -1,12 +1,10 @@
 /* eslint-disable import/exports-last */
-import fs from "fs";
-import path from "path";
+import { readFileSync } from "fs";
+import { join } from "path";
 import memoize from "lodash/memoize.js";
 import has from "lodash/has.js";
 import { resolve } from "./resolve.mjs";
-import moduleClassifiers from "./module-classifiers.mjs";
-
-const { isScoped, isRelativeModuleName } = moduleClassifiers;
+import { isScoped, isRelativeModuleName } from "./module-classifiers.mjs";
 
 /**
  * Returns the 'root' of the package - the spot where we can probably find
@@ -81,7 +79,7 @@ function bareGetPackageJson(pModuleName, pFileDirectory, pResolveOptions) {
 
   try {
     const lPackageJsonFilename = resolve(
-      path.join(getPackageRoot(pModuleName), "package.json"),
+      join(getPackageRoot(pModuleName), "package.json"),
       pFileDirectory ? pFileDirectory : process.cwd(),
       {
         ...pResolveOptions,
@@ -102,7 +100,7 @@ function bareGetPackageJson(pModuleName, pFileDirectory, pResolveOptions) {
       // and an array of extensions
       "manifest-resolution"
     );
-    lReturnValue = JSON.parse(fs.readFileSync(lPackageJsonFilename, "utf8"));
+    lReturnValue = JSON.parse(readFileSync(lPackageJsonFilename, "utf8"));
   } catch (pError) {
     // left empty on purpose
   }
@@ -170,11 +168,3 @@ export function getLicense(pModuleName, pFileDirectory, pResolveOptions) {
 export function clearCache() {
   getPackageJson.cache.clear();
 }
-
-export default {
-  getPackageRoot,
-  getPackageJson,
-  dependencyIsDeprecated,
-  getLicense,
-  clearCache,
-};

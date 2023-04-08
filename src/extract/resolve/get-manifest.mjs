@@ -1,5 +1,5 @@
-import path from "path";
-import fs from "fs";
+import { join, dirname, sep } from "path";
+import { readFileSync } from "fs";
 import memoize from "lodash/memoize.js";
 import mergePackages from "./merge-manifests.mjs";
 
@@ -21,8 +21,8 @@ const getSingleManifest = memoize((pFileDirectory) => {
 
   try {
     // find the closest package.json from pFileDirectory
-    const lPackageContent = fs.readFileSync(
-      path.join(pFileDirectory, "package.json"),
+    const lPackageContent = readFileSync(
+      join(pFileDirectory, "package.json"),
       "utf8"
     );
 
@@ -32,7 +32,7 @@ const getSingleManifest = memoize((pFileDirectory) => {
       // left empty on purpose
     }
   } catch (pError) {
-    const lNextDirectory = path.dirname(pFileDirectory);
+    const lNextDirectory = dirname(pFileDirectory);
 
     if (lNextDirectory !== pFileDirectory) {
       // not yet reached root directory
@@ -46,8 +46,8 @@ function maybeReadPackage(pFileDirectory) {
   let lReturnValue = {};
 
   try {
-    const lPackageContent = fs.readFileSync(
-      path.join(pFileDirectory, "package.json"),
+    const lPackageContent = readFileSync(
+      join(pFileDirectory, "package.json"),
       "utf8"
     );
 
@@ -71,10 +71,10 @@ function getIntermediatePaths(pFileDirectory, pBaseDirectory) {
     // safety hatch in case pBaseDirectory is either not a part of
     // pFileDirectory or not something uniquely comparable to a
     // dirname
-    lIntermediate !== path.dirname(lIntermediate)
+    lIntermediate !== dirname(lIntermediate)
   ) {
     lReturnValue.push(lIntermediate);
-    lIntermediate = path.dirname(lIntermediate);
+    lIntermediate = dirname(lIntermediate);
   }
   lReturnValue.push(pBaseDirectory);
   return lReturnValue;
@@ -89,7 +89,7 @@ const getCombinedManifests = memoize((pFileDirectory, pBaseDirectory) => {
   // something gone terribly awry
   if (
     !pFileDirectory.startsWith(pBaseDirectory) ||
-    pBaseDirectory.endsWith(path.sep)
+    pBaseDirectory.endsWith(sep)
   ) {
     throw new Error(
       `Unexpected Error: Unusual baseDir passed to package reading function: '${pBaseDirectory}'\n` +

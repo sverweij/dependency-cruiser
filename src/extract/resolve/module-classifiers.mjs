@@ -1,5 +1,5 @@
 /* eslint-disable import/exports-last */
-import path from "path";
+import { isAbsolute, resolve as path_resolve } from "path";
 import getExtension from "../../utl/get-extension.js";
 
 let gFollowableExtensionsCache = new Set();
@@ -36,10 +36,10 @@ export function isExternalModule(
       // hence we'll have to test for them in different fashion as well.
       // reference: https://webpack.js.org/configuration/resolve/#resolve-modules
       (pModuleFolderName) => {
-        if (path.isAbsolute(pModuleFolderName)) {
-          return path
-            .resolve(pBaseDirectory, pResolvedModuleName)
-            .startsWith(pModuleFolderName);
+        if (isAbsolute(pModuleFolderName)) {
+          return path_resolve(pBaseDirectory, pResolvedModuleName).startsWith(
+            pModuleFolderName
+          );
         }
         return pResolvedModuleName.includes(pModuleFolderName);
       }
@@ -116,11 +116,3 @@ export function isAliassy(pModuleName, pResolvedModuleName, pResolveOptions) {
     isLikelyTSAliased(pModuleName, pResolvedModuleName, pResolveOptions)
   );
 }
-
-export default {
-  isScoped,
-  isRelativeModuleName,
-  isExternalModule,
-  isFollowable,
-  isAliassy,
-};

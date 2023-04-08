@@ -1,3 +1,4 @@
+/* eslint security/detect-object-injection : 0*/
 import meta from "../../meta.js";
 import swc from "../parse/to-swc-ast.mjs";
 import javaScriptWrap from "./javascript-wrap.mjs";
@@ -135,11 +136,3 @@ export function getAvailableTranspilers() {
     available: TRANSPILER2WRAPPER[pTranspiler].isAvailable(),
   }));
 }
-
-export default {
-  getWrapper,
-  allExtensions,
-  scannableExtensions,
-  getAvailableTranspilers,
-};
-/* eslint security/detect-object-injection : 0*/

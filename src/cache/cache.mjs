@@ -1,6 +1,6 @@
 import { readFileSync, mkdirSync, writeFileSync } from "fs";
 import { join } from "path";
-import meta from "../extract/transpile/meta.mjs";
+import { scannableExtensions } from "../extract/transpile/meta.mjs";
 import optionsCompatible from "./options-compatible.js";
 import MetadataStrategy from "./metadata-strategy.js";
 import ContentStrategy from "./content-strategy.js";
@@ -34,9 +34,7 @@ export default class Cache {
         pCruiseOptions,
         {
           extensions: new Set(
-            meta.scannableExtensions.concat(
-              pCruiseOptions.extraExtensionsToScan
-            )
+            scannableExtensions.concat(pCruiseOptions.extraExtensionsToScan)
           ),
         }
       );

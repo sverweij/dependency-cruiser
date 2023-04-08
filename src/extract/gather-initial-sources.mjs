@@ -1,11 +1,11 @@
-import fs from "fs";
-import path from "path";
+import { readdirSync, statSync } from "fs";
+import { join } from "path";
 import { glob } from "glob";
 import get from "lodash/get.js";
 import { filenameMatchesPattern } from "../graph-utl/match-facade.js";
 import getExtension from "../utl/get-extension.js";
 import pathToPosix from "../utl/path-to-posix.js";
-import transpileMeta from "./transpile/meta.mjs";
+import { scannableExtensions } from "./transpile/meta.mjs";
 
 /**
  *
@@ -13,9 +13,7 @@ import transpileMeta from "./transpile/meta.mjs";
  * @returns {string[]}
  */
 function getScannableExtensions(pOptions) {
-  return transpileMeta.scannableExtensions.concat(
-    pOptions.extraExtensionsToScan
-  );
+  return scannableExtensions.concat(pOptions.extraExtensionsToScan);
 }
 
 function fileIsScannable(pOptions, pPathToFile) {
@@ -45,14 +43,13 @@ function shouldNotBeExcluded(pFullPathToFile, pOptions) {
  * @returns {string[]}
  */
 function gatherScannableFilesFromDirectory(pDirectoryName, pOptions) {
-  return fs
-    .readdirSync(path.join(pOptions.baseDir, pDirectoryName))
-    .map((pFileName) => path.join(pDirectoryName, pFileName))
+  return readdirSync(join(pOptions.baseDir, pDirectoryName))
+    .map((pFileName) => join(pDirectoryName, pFileName))
     .filter((pFullPathToFile) =>
       shouldNotBeExcluded(pathToPosix(pFullPathToFile), pOptions)
     )
     .reduce((pSum, pFullPathToFile) => {
-      let lStat = fs.statSync(path.join(pOptions.baseDir, pFullPathToFile), {
+      let lStat = statSync(join(pOptions.baseDir, pFullPathToFile), {
         throwIfNoEntry: false,
       });
 
@@ -105,9 +102,7 @@ export default function gatherInitialSources(pFileAndDirectoryArray, pOptions) {
       []
     )
     .reduce((pAll, pFileOrDirectory) => {
-      if (
-        fs.statSync(path.join(lOptions.baseDir, pFileOrDirectory)).isDirectory()
-      ) {
+      if (statSync(join(lOptions.baseDir, pFileOrDirectory)).isDirectory()) {
         return pAll.concat(
           gatherScannableFilesFromDirectory(pFileOrDirectory, lOptions)
         );

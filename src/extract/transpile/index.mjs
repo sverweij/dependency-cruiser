@@ -1,4 +1,4 @@
-import meta from "./meta.mjs";
+import { getWrapper } from "./meta.mjs";
 
 /**
  * Transpiles the string pFile with the transpiler configured for extension
@@ -22,7 +22,7 @@ export default function transpile(
   { extension, source, filename },
   pTranspilerOptions
 ) {
-  const lWrapper = meta.getWrapper(extension, pTranspilerOptions);
+  const lWrapper = getWrapper(extension, pTranspilerOptions);
 
   if (lWrapper.isAvailable()) {
     return lWrapper.transpile(source, filename, pTranspilerOptions);

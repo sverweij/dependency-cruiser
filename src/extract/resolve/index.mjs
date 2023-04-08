@@ -1,11 +1,11 @@
-import fs from "fs";
-import path from "path";
+import { realpathSync } from "fs";
+import { extname, resolve as path_resolve, relative } from "path";
 import monkeyPatchedModule from "module";
 import pathToPosix from "../../utl/path-to-posix.js";
-import moduleClassifiers from "./module-classifiers.mjs";
+import { isRelativeModuleName } from "./module-classifiers.mjs";
 import { resolveAMD } from "./resolve-amd.mjs";
 import resolveCommonJS from "./resolve-cjs.mjs";
-import resolveHelpers from "./resolve-helpers.mjs";
+import { stripToModuleName, addLicenseAttribute } from "./resolve-helpers.mjs";
 import determineDependencyTypes from "./determine-dependency-types.mjs";
 import { getManifest } from "./get-manifest.mjs";
 
@@ -25,9 +25,9 @@ function resolveModule(
 ) {
   let lReturnValue = null;
 
-  const lStrippedModuleName = resolveHelpers.stripToModuleName(pModule.module);
+  const lStrippedModuleName = stripToModuleName(pModule.module);
   if (
-    moduleClassifiers.isRelativeModuleName(lStrippedModuleName) ||
+    isRelativeModuleName(lStrippedModuleName) ||
     ["cjs", "es6", "tsd"].includes(pModule.moduleSystem)
   ) {
     lReturnValue = resolveCommonJS(
@@ -47,11 +47,11 @@ function resolveModule(
 }
 
 function canBeResolvedToTsVariant(pModuleName) {
-  return [".js", ".jsx", ".mjs", ".cjs"].includes(path.extname(pModuleName));
+  return [".js", ".jsx", ".mjs", ".cjs"].includes(extname(pModuleName));
 }
 
 function isTypeScriptIshExtension(pModuleName) {
-  return [".ts", ".tsx", ".cts", ".mts"].includes(path.extname(pModuleName));
+  return [".ts", ".tsx", ".cts", ".mts"].includes(extname(pModuleName));
 }
 function resolveYarnVirtual(pPath) {
   const pnpAPI = (monkeyPatchedModule?.findPnpApi ?? (() => false))(pPath);
@@ -62,7 +62,7 @@ function resolveYarnVirtual(pPath) {
   // cover it in a separate integration test.
   /* c8 ignore start */
   if (pnpAPI && (pnpAPI?.VERSIONS?.resolveVirtual ?? 0) === 1) {
-    return pnpAPI.resolveVirtual(path.resolve(pPath)) || pPath;
+    return pnpAPI.resolveVirtual(path_resolve(pPath)) || pPath;
   }
   /* c8 ignore stop */
   return pPath;
@@ -97,7 +97,7 @@ function resolveWithRetry(
     pFileDirectory,
     pResolveOptions
   );
-  const lStrippedModuleName = resolveHelpers.stripToModuleName(pModule.module);
+  const lStrippedModuleName = stripToModuleName(pModule.module);
 
   // when we feed the typescript compiler an import with an explicit .js(x) extension
   // and the .js(x) file does not exist, it tries files with the .ts, .tsx or
@@ -126,7 +126,7 @@ function resolveWithRetry(
       ""
     );
     const lExtensionsToTry = getTypeScriptExtensionsToTry(
-      path.extname(lStrippedModuleName)
+      extname(lStrippedModuleName)
     );
 
     const lReturnValueCandidate = resolveModule(
@@ -168,13 +168,11 @@ export default function resolve(
     pFileDirectory,
     pResolveOptions
   );
-  const lStrippedModuleName = resolveHelpers.stripToModuleName(
-    pDependency.module
-  );
+  const lStrippedModuleName = stripToModuleName(pDependency.module);
 
   lResolvedDependency = {
     ...lResolvedDependency,
-    ...resolveHelpers.addLicenseAttribute(
+    ...addLicenseAttribute(
       lStrippedModuleName,
       lResolvedDependency.resolved,
       { baseDirectory: pBaseDirectory, fileDirectory: pFileDirectory },
@@ -201,11 +199,11 @@ export default function resolve(
   ) {
     try {
       lResolvedDependency.resolved = pathToPosix(
-        path.relative(
+        relative(
           pBaseDirectory,
-          fs.realpathSync(
+          realpathSync(
             resolveYarnVirtual(
-              path.resolve(
+              path_resolve(
                 pBaseDirectory,
                 /* enhanced-resolve inserts a NULL character in front of any `#` 
                    character. This wonky replace undoes that so the filename

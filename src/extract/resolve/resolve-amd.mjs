@@ -1,12 +1,12 @@
-import fs from "fs";
-import path from "path";
+import { accessSync, R_OK } from "fs";
+import { relative, join } from "path";
 import { builtinModules } from "module";
 import memoize from "lodash/memoize.js";
 import pathToPosix from "../../utl/path-to-posix.js";
 
 const fileExists = memoize((pFile) => {
   try {
-    fs.accessSync(pFile, fs.R_OK);
+    accessSync(pFile, R_OK);
   } catch (pError) {
     return false;
   }
@@ -16,10 +16,7 @@ const fileExists = memoize((pFile) => {
 
 function guessPath(pBaseDirectory, pFileDirectory, pStrippedModuleName) {
   return pathToPosix(
-    path.relative(
-      pBaseDirectory,
-      path.join(pFileDirectory, pStrippedModuleName)
-    )
+    relative(pBaseDirectory, join(pFileDirectory, pStrippedModuleName))
   );
 }
 
