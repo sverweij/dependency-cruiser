@@ -2,16 +2,16 @@ import fs from "fs";
 import path from "path";
 import { fileURLToPath } from "url";
 import { expect } from "chai";
-import { getManifest } from "../../../../src/extract/resolve/get-manifest/index.mjs";
+import { getManifest } from "../../../src/extract/resolve/get-manifest.mjs";
 
 const rootPackageJson = JSON.parse(
   fs.readFileSync(
-    fileURLToPath(new URL("../../../../package.json", import.meta.url)),
+    fileURLToPath(new URL("../../../package.json", import.meta.url)),
     "utf8"
   )
 );
 
-const FIXTUREDIR = "test/extract/resolve/get-manifest/__fixtures__";
+const FIXTUREDIR = "test/extract/resolve/__fixtures__";
 const WORKINGDIR = process.cwd();
 
 describe("[I] extract/resolve/get-manifest - classic strategy", () => {
@@ -20,9 +20,7 @@ describe("[I] extract/resolve/get-manifest - classic strategy", () => {
   });
 
   it("returns 'null' if the package.json does not exist over there", () => {
-    process.chdir(
-      "test/extract/resolve/get-manifest/__fixtures__/no-package-json-here"
-    );
+    process.chdir("test/extract/resolve/__fixtures__/no-package-json-here");
     expect(getManifest(path.parse(process.cwd()).root)).to.equal(null);
   });
 
@@ -60,9 +58,7 @@ describe("[I] extract/resolve/get-manifest - combined dependencies strategy", ()
   });
 
   it("returns 'null' if the package.json does not exist over there", () => {
-    process.chdir(
-      "test/extract/resolve/get-manifest/__fixtures__/no-package-json-here"
-    );
+    process.chdir("test/extract/resolve/__fixtures__/no-package-json-here");
     expect(getManifest(process.cwd(), process.cwd(), true)).to.equal(null);
   });
 
@@ -77,9 +73,7 @@ describe("[I] extract/resolve/get-manifest - combined dependencies strategy", ()
   });
 
   it("returns the deps if the package.json exists in the baseDir", () => {
-    process.chdir(
-      "test/extract/resolve/get-manifest/__fixtures__/package-json-in-here"
-    );
+    process.chdir("test/extract/resolve/__fixtures__/package-json-in-here");
     expect(getManifest(process.cwd(), process.cwd(), true)).to.deep.equal({
       dependencies: {
         modash: "11.11.11",
@@ -88,9 +82,7 @@ describe("[I] extract/resolve/get-manifest - combined dependencies strategy", ()
   });
 
   it("returns the combined deps if there's a package.json in both base and sub package", () => {
-    process.chdir(
-      "test/extract/resolve/get-manifest/__fixtures__/two-level-package-jsons"
-    );
+    process.chdir("test/extract/resolve/__fixtures__/two-level-package-jsons");
     expect(
       getManifest(
         path.join(process.cwd(), "packages", "subthing"),
@@ -112,9 +104,7 @@ describe("[I] extract/resolve/get-manifest - combined dependencies strategy", ()
   });
 
   it("returns the combined deps if there's a package.json in both base and sub package - subdir of sub", () => {
-    process.chdir(
-      "test/extract/resolve/get-manifest/__fixtures__/two-level-package-jsons"
-    );
+    process.chdir("test/extract/resolve/__fixtures__/two-level-package-jsons");
     expect(
       getManifest(
         path.join(
@@ -143,7 +133,7 @@ describe("[I] extract/resolve/get-manifest - combined dependencies strategy", ()
 
   it("passing a non-matching or non-existing basedir doesn't make combining dependencies loop eternaly", () => {
     process.chdir(
-      "test/extract/resolve/get-manifest/__fixtures__/amok-prevention-non-exist"
+      "test/extract/resolve/__fixtures__/amok-prevention-non-exist"
     );
     expect(() => {
       getManifest(process.cwd(), "bullocks-or-non-valid-basedir", true);
@@ -152,7 +142,7 @@ describe("[I] extract/resolve/get-manifest - combined dependencies strategy", ()
 
   it("passing a basedir that weirdly ends in '/' doesn't make combining dependencies loop eternaly", () => {
     process.chdir(
-      "test/extract/resolve/get-manifest/__fixtures__/amok-prevention-bogus-sub"
+      "test/extract/resolve/__fixtures__/amok-prevention-bogus-sub"
     );
     expect(() => {
       getManifest(process.cwd(), `${path.dirname(process.cwd())}/`, true);
