@@ -1,7 +1,7 @@
 import { expect } from "chai";
-import extractModuleAttributes from "../../../src/extract/utl/extract-module-attributes.mjs";
+import { extractModuleAttributes } from "../../src/extract/helpers.mjs";
 
-describe("[U] extract/utl/extract-module-attributes", () => {
+describe("[U] extract/helpers - extractModuleAttributes", () => {
   it("leaves regular module specifications alone", () => {
     expect(extractModuleAttributes("protodash")).to.deep.equal({
       module: "protodash",

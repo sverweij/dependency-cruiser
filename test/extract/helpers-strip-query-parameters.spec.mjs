@@ -1,7 +1,7 @@
 import { expect } from "chai";
-import stripQueryParameters from "../../../src/extract/utl/strip-query-parameters.mjs";
+import { stripQueryParameters } from "../../src/extract/helpers.mjs";
 
-describe("[U] extract/utl/stripQueryParams", () => {
+describe("[U] extract/helpers - stripQueryParams", () => {
   it("leaves the empty string alone", () => {
     expect(stripQueryParameters("")).to.equal("");
   });

@@ -1,14 +1,14 @@
 import { expect } from "chai";
-import detectPrecompilationNess from "../../../src/extract/utl/detect-pre-compilation-ness.mjs";
+import { detectPreCompilationNess } from "../../src/extract/helpers.mjs";
 
-describe("[U] extract/utl/detectPreCompilationNess", () => {
+describe("[U] extract/helpers - detectPreCompilationNess", () => {
   it("empty dependency lists yield an empty one", () => {
-    expect(detectPrecompilationNess([], [])).to.deep.equal([]);
+    expect(detectPreCompilationNess([], [])).to.deep.equal([]);
   });
 
   it("deps in the first not in the second get the isPreCompilationOnly attribute", () => {
     expect(
-      detectPrecompilationNess([{ module: "foo", moduleSystem: "es6" }], [])
+      detectPreCompilationNess([{ module: "foo", moduleSystem: "es6" }], [])
     ).to.deep.equal([
       { module: "foo", moduleSystem: "es6", preCompilationOnly: true },
     ]);
@@ -16,7 +16,7 @@ describe("[U] extract/utl/detectPreCompilationNess", () => {
 
   it("deps in the first and in the second get the isPreCompilationOnly attribute with value false", () => {
     expect(
-      detectPrecompilationNess(
+      detectPreCompilationNess(
         [{ module: "foo", moduleSystem: "es6" }],
         [{ module: "foo", moduleSystem: "es6" }]
       )
@@ -27,7 +27,7 @@ describe("[U] extract/utl/detectPreCompilationNess", () => {
 
   it("deps in the first but not in the second (moduleSystem mismatch only) get the isPreCompilationOnly attribute with value true", () => {
     expect(
-      detectPrecompilationNess(
+      detectPreCompilationNess(
         [{ module: "foo", moduleSystem: "es6" }],
         [{ module: "foo", moduleSystem: "cjs" }]
       )
@@ -38,7 +38,7 @@ describe("[U] extract/utl/detectPreCompilationNess", () => {
 
   it("deps only in the second list vanish", () => {
     expect(
-      detectPrecompilationNess([], [{ module: "foo", moduleSystem: "es6" }])
+      detectPreCompilationNess([], [{ module: "foo", moduleSystem: "es6" }])
     ).to.deep.equal([]);
   });
 });
