@@ -1,7 +1,7 @@
-import { unlinkSync, readFileSync } from "fs";
+import { unlinkSync, readFileSync } from "node:fs";
 // path.posix instead of path because otherwise on win32 the resulting
 // outputTo would contain \\ instead of / which for this unit test doesn't matter
-import { join, posix as path } from "path";
+import { join, posix as path } from "node:path";
 import { expect } from "chai";
 import intercept from "intercept-stdout";
 import chalk from "chalk";

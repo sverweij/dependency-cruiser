@@ -1,4 +1,4 @@
-import { readFileSync } from "fs";
+import { readFileSync } from "node:fs";
 import { expect } from "chai";
 import normBaseDirectory from "../main/norm-base-directory.utl.mjs";
 

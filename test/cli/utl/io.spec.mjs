@@ -1,7 +1,7 @@
 /* eslint-disable no-unused-expressions */
-import { ReadStream } from "fs";
-import { Readable } from "stream";
-import { fileURLToPath } from "url";
+import { ReadStream } from "node:fs";
+import { Readable } from "node:stream";
+import { fileURLToPath } from "node:url";
 import { expect } from "chai";
 import { getInStream } from "../../../src/cli/utl/io.mjs";
 

@@ -1,6 +1,6 @@
-import { realpathSync } from "fs";
-import { extname, resolve as path_resolve, relative } from "path";
-import monkeyPatchedModule from "module";
+import { realpathSync } from "node:fs";
+import { extname, resolve as path_resolve, relative } from "node:path";
+import monkeyPatchedModule from "node:module";
 import pathToPosix from "../../utl/path-to-posix.js";
 import { isRelativeModuleName } from "./module-classifiers.mjs";
 import { resolveAMD } from "./resolve-amd.mjs";

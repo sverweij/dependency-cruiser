@@ -1,5 +1,5 @@
-import { readFileSync } from "fs";
-import { fileURLToPath } from "url";
+import { readFileSync } from "node:fs";
+import { fileURLToPath } from "node:url";
 
 const HEADER_FILE = fileURLToPath(
   new URL("svg-in-html-snippets/header.snippet.html", import.meta.url)

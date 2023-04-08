@@ -1,4 +1,4 @@
-import path from "path";
+import path from "node:path";
 import cloneDeep from "lodash/cloneDeep.js";
 import has from "lodash/has.js";
 import { resolve } from "../../extract/resolve/resolve.mjs";

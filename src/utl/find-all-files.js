@@ -1,5 +1,5 @@
-const { readdirSync, statSync, readFileSync } = require("fs");
-const { join } = require("path");
+const { readdirSync, statSync, readFileSync } = require("node:fs");
+const { join } = require("node:path");
 const ignore = require("ignore");
 const pathToPosix = require("./path-to-posix");
 

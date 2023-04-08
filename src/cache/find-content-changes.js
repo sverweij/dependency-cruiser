@@ -1,4 +1,4 @@
-const { join } = require("path").posix;
+const { join } = require("node:path").posix;
 const bus = require("../utl/bus");
 const { DEBUG } = require("../utl/bus-log-levels");
 const findAllFiles = require("../utl/find-all-files");

@@ -1,5 +1,5 @@
-import { join } from "path";
-import { fileURLToPath } from "url";
+import { join } from "node:path";
+import { fileURLToPath } from "node:url";
 import { expect } from "chai";
 import extractTSConfig from "../../../src/config-utl/extract-ts-config.mjs";
 import resolve from "../../../src/extract/resolve/index.mjs";

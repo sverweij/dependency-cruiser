@@ -1,5 +1,5 @@
-import { extname } from "path";
-import { createRequire } from "module";
+import { extname } from "node:path";
+import { createRequire } from "node:module";
 import makeAbsolute from "./make-absolute.mjs";
 
 const require = createRequire(import.meta.url);

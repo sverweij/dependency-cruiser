@@ -1,4 +1,4 @@
-import { join } from "path/posix";
+import { join } from "node:path/posix";
 import has from "lodash/has.js";
 import {
   isRelativeModuleName,

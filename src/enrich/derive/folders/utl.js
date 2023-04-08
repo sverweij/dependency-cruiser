@@ -1,5 +1,5 @@
 /* eslint-disable security/detect-object-injection */
-const path = require("path").posix;
+const path = require("node:path").posix;
 
 function findFolderByName(pAllFolders, pName) {
   return pAllFolders.find((pFolder) => pFolder.name === pName);

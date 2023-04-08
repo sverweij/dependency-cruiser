@@ -70,13 +70,10 @@ try {
     .parse(process.argv);
 
   if (program.args[0]) {
-    format(program.args[0], program.opts())
-      .then((pExitCode) => {
-        if (program.opts().exitCode) {
-          process.exitCode = pExitCode;
-        }
-      })
-      .catch(formatError);
+    const lExitCode = await format(program.args[0], program.opts());
+    if (program.opts().exitCode) {
+      process.exitCode = lExitCode;
+    }
   } else {
     program.help();
   }

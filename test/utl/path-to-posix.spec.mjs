@@ -1,4 +1,4 @@
-import { win32, posix } from "path";
+import { win32, posix } from "node:path";
 import { expect } from "chai";
 import pathToPosix from "../../src/utl/path-to-posix.js";
 

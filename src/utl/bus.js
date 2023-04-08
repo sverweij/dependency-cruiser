@@ -1,4 +1,4 @@
-const EventEmitter = require("events");
+const EventEmitter = require("node:events");
 
 const gBus = new EventEmitter();
 

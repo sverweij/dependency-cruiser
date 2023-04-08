@@ -1,4 +1,4 @@
-import path from "path";
+import path from "node:path";
 import { expect } from "chai";
 import makeAbsolute from "../../src/config-utl/make-absolute.mjs";
 

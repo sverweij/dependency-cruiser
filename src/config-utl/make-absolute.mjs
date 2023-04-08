@@ -1,4 +1,4 @@
-import { join, isAbsolute } from "path";
+import { join, isAbsolute } from "node:path";
 
 export default function makeAbsolute(pFilename) {
   let lReturnValue = pFilename;

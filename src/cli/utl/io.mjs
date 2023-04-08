@@ -1,4 +1,4 @@
-import { writeFileSync, createReadStream } from "fs";
+import { writeFileSync, createReadStream } from "node:fs";
 
 const PIPE_BUFFER_SIZE = 512;
 

@@ -1,5 +1,5 @@
 // @ts-check
-const path = require("path");
+const path = require("node:path");
 
 const EXTENSION_RE = /(?<extension>((\.d\.(c|m)?ts)|\.coffee\.md)$)/;
 

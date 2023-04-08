@@ -1,4 +1,4 @@
-import { renameSync } from "fs";
+import { renameSync } from "node:fs";
 import { expect } from "chai";
 import extract from "../../src/extract/index.mjs";
 import { createRequireJSON } from "../backwards.utl.mjs";

@@ -1,6 +1,6 @@
-import { readFileSync } from "fs";
+import { readFileSync } from "node:fs";
 
-import { extname } from "path";
+import { extname } from "node:path";
 import json5 from "json5";
 import has from "lodash/has.js";
 import tryImport from "semver-try-require";

@@ -1,4 +1,4 @@
-const path = require("path");
+const path = require("node:path");
 const consolidateModules = require("./consolidate-modules");
 const consolidateModuleDependencies = require("./consolidate-module-dependencies");
 

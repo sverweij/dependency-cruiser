@@ -1,6 +1,6 @@
 /* eslint-disable import/exports-last */
-import { readFileSync } from "fs";
-import { join } from "path";
+import { readFileSync } from "node:fs";
+import { join } from "node:path";
 import memoize from "lodash/memoize.js";
 import has from "lodash/has.js";
 import { resolve } from "./resolve.mjs";

@@ -1,4 +1,4 @@
-const path = require("path");
+const path = require("node:path");
 
 /**
  * On win32 platforms transform win32 type paths into posix paths

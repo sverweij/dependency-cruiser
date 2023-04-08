@@ -1,4 +1,4 @@
-import fs from "fs";
+import fs from "node:fs";
 import { toSourceLocationArray } from "./environment-helpers.mjs";
 
 export function validateLocation(pLocations) {

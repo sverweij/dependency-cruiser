@@ -1,5 +1,5 @@
-import { writeFileSync, readFileSync } from "fs";
-import { join } from "path";
+import { writeFileSync, readFileSync } from "node:fs";
+import { join } from "node:path";
 import { expect } from "chai";
 import deleteDammit from "../delete-dammit.utl.cjs";
 import writeConfig from "../../../src/cli/init-config/write-config.mjs";

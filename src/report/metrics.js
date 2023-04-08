@@ -1,4 +1,4 @@
-const { EOL } = require("os");
+const { EOL } = require("node:os");
 const chalk = require("chalk");
 const utl = require("./utl");
 

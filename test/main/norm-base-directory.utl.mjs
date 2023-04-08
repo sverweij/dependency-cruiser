@@ -1,4 +1,4 @@
-import { join } from "path";
+import { join } from "node:path";
 import cloneDeep from "lodash/cloneDeep.js";
 
 export default function normBaseDirectory(

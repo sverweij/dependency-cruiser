@@ -1,4 +1,4 @@
-import { readFileSync } from "fs";
+import { readFileSync } from "node:fs";
 import json5 from "json5";
 import makeAbsolute from "./make-absolute.mjs";
 

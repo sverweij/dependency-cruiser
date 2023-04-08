@@ -1,6 +1,6 @@
-import { readFileSync } from "fs";
-import { join } from "path";
-import { fileURLToPath } from "url";
+import { readFileSync } from "node:fs";
+import { join } from "node:path";
+import { fileURLToPath } from "node:url";
 import { expect } from "chai";
 import normalizeNewline from "normalize-newline";
 import wrap from "../../../src/extract/transpile/vue-template-wrap.cjs";

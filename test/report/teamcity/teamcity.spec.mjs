@@ -1,5 +1,5 @@
-import { readFileSync } from "fs";
-import { fileURLToPath } from "url";
+import { readFileSync } from "node:fs";
+import { fileURLToPath } from "node:url";
 import { expect } from "chai";
 import render from "../../../src/report/teamcity.js";
 import okdeps from "./__mocks__/everything-fine.mjs";
