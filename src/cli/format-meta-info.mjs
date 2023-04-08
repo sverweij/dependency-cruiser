@@ -1,22 +1,20 @@
 import chalk from "chalk";
 import figures from "figures";
 
-import main from "../main/index.mjs";
+import { getAvailableTranspilers, allExtensions } from "../main/index.mjs";
 
 function bool2Symbol(pBool) {
   return pBool ? chalk.green(figures.tick) : chalk.red(figures.cross);
 }
 
 function formatTranspilers() {
-  return main
-    .getAvailableTranspilers()
-    .reduce(
-      (pAll, pThis) =>
-        `${pAll}    ${bool2Symbol(pThis.available)} ${pThis.name} (${
-          pThis.version
-        })\n`,
-      `    ${bool2Symbol(true)} javascript (>es1)\n`
-    );
+  return getAvailableTranspilers().reduce(
+    (pAll, pThis) =>
+      `${pAll}    ${bool2Symbol(pThis.available)} ${pThis.name} (${
+        pThis.version
+      })\n`,
+    `    ${bool2Symbol(true)} javascript (>es1)\n`
+  );
 }
 
 function formatExtensions(pExtensions) {
@@ -42,7 +40,7 @@ export default function formatMetaInfo() {
 ${formatTranspilers()}
   Extensions:
 
-${formatExtensions(main.allExtensions)}
+${formatExtensions(allExtensions)}
 `;
 }
 

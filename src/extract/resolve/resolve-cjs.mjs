@@ -1,10 +1,8 @@
-import path from "path";
+import { relative } from "path";
 import { builtinModules } from "module";
 import pathToPosix from "../../utl/path-to-posix.js";
-import moduleClassifiers from "./module-classifiers.mjs";
+import { isFollowable } from "./module-classifiers.mjs";
 import { resolve } from "./resolve.mjs";
-
-const { isFollowable } = moduleClassifiers;
 
 function addResolutionAttributes(
   pBaseDirectory,
@@ -19,7 +17,7 @@ function addResolutionAttributes(
   } else {
     try {
       lReturnValue.resolved = pathToPosix(
-        path.relative(
+        relative(
           pBaseDirectory,
           resolve(pModuleName, pFileDirectory, pResolveOptions)
         )

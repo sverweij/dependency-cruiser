@@ -1,7 +1,7 @@
 // @ts-check
 /* eslint-disable security/detect-object-injection */
 import getExtension from "../../utl/get-extension.js";
-import meta from "../../extract/transpile/meta.mjs";
+import { scannableExtensions } from "../../extract/transpile/meta.mjs";
 import findAllFiles from "../../utl/find-all-files.js";
 
 /**
@@ -31,7 +31,7 @@ function compareByCount(pCountsObject) {
 export default function findExtensions(pDirectories, pOptions) {
   const lOptions = {
     baseDir: process.cwd(),
-    scannableExtensions: meta.scannableExtensions,
+    scannableExtensions,
     ...pOptions,
   };
 

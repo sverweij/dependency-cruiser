@@ -5,9 +5,12 @@ import Ajv from "ajv";
 import extract from "../extract/index.mjs";
 import enrich from "../enrich/index.js";
 import cruiseResultSchema from "../schema/cruise-result.schema.js";
-import meta from "../extract/transpile/meta.mjs";
 import bus from "../utl/bus.js";
 import Cache from "../cache/cache.mjs";
+import {
+  allExtensions,
+  getAvailableTranspilers,
+} from "../extract/transpile/meta.mjs";
 import normalizeFilesAndDirectories from "./files-and-dirs/normalize.js";
 import validateRuleSet from "./rule-set/validate.js";
 import normalizeRuleSet from "./rule-set/normalize.js";
@@ -121,12 +124,14 @@ export async function cruise(
   return reportWrap(lCruiseResult, lCruiseOptions);
 }
 
-export const allExtensions = meta.allExtensions;
-export const getAvailableTranspilers = meta.getAvailableTranspilers;
+export {
+  allExtensions,
+  getAvailableTranspilers,
+} from "../extract/transpile/meta.mjs";
 
 export default {
   cruise,
   format,
-  allExtensions: meta.allExtensions,
-  getAvailableTranspilers: meta.getAvailableTranspilers,
+  allExtensions,
+  getAvailableTranspilers,
 };

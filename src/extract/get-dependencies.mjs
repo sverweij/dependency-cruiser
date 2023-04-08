@@ -1,4 +1,4 @@
-import path from "path";
+import { join, extname, dirname } from "path";
 import get from "lodash/get.js";
 import uniqBy from "lodash/uniqBy.js";
 import { intersects } from "../utl/array-util.js";
@@ -18,7 +18,7 @@ import {
 
 function extractFromSwcAST({ baseDir, exoticRequireStrings }, pFileName) {
   return extractSwcDeps(
-    toSwcAST.getASTCached(path.join(baseDir, pFileName)),
+    toSwcAST.getASTCached(join(baseDir, pFileName)),
     exoticRequireStrings
   );
 }
@@ -29,10 +29,7 @@ function extractFromTypeScriptAST(
   pTranspileOptions
 ) {
   return extractTypeScriptDeps(
-    toTypescriptAST.getASTCached(
-      path.join(baseDir, pFileName),
-      pTranspileOptions
-    ),
+    toTypescriptAST.getASTCached(join(baseDir, pFileName), pTranspileOptions),
     exoticRequireStrings
   );
 }
@@ -47,7 +44,7 @@ function isTypeScriptCompatible(pFileName) {
     ".mjs",
     ".cjs",
     ".vue",
-  ].includes(path.extname(pFileName));
+  ].includes(extname(pFileName));
 }
 
 function shouldUseTsc({ tsPreCompilationDeps, parser }, pFileName) {
@@ -73,7 +70,7 @@ function extractFromJavaScriptAST(
 ) {
   let lDependencies = [];
   const lAST = toJavascriptAST.getASTCached(
-    path.join(baseDir, pFileName),
+    join(baseDir, pFileName),
     pTranspileOptions
   );
 
@@ -125,7 +122,7 @@ function extractDependencies(pCruiseOptions, pFileName, pTranspileOptions) {
   /** @type import('../../types/cruise-result.js').IDependency[] */
   let lDependencies = [];
 
-  if (!pCruiseOptions.extraExtensionsToScan.includes(path.extname(pFileName))) {
+  if (!pCruiseOptions.extraExtensionsToScan.includes(extname(pFileName))) {
     if (shouldUseSwc(pCruiseOptions, pFileName)) {
       lDependencies = extractWithSwc(pCruiseOptions, pFileName);
     } else if (shouldUseTsc(pCruiseOptions, pFileName)) {
@@ -169,7 +166,7 @@ function addResolutionAttributes(
     const lResolved = resolve(
       pDependency,
       baseDir,
-      path.join(baseDir, path.dirname(pFileName)),
+      join(baseDir, dirname(pFileName)),
       pResolveOptions
     );
     const lMatchesDoNotFollow = matchesDoNotFollow(lResolved, doNotFollow);

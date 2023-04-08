@@ -1,5 +1,5 @@
 /* eslint-disable import/exports-last */
-import fs from "fs";
+import { readFileSync } from "fs";
 import tryImport from "semver-try-require";
 import memoize from "lodash/memoize.js";
 import meta from "../../meta.js";
@@ -46,7 +46,7 @@ export function getASTFromSource(pFileRecord, pTranspileOptions) {
 function getAST(pFileName, pTranspileOptions) {
   return getASTFromSource(
     {
-      source: fs.readFileSync(pFileName, "utf8"),
+      source: readFileSync(pFileName, "utf8"),
       extension: getExtension(pFileName),
       filename: pFileName,
     },

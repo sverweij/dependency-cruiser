@@ -1,9 +1,14 @@
-import path from "path";
+import { join } from "path/posix";
 import has from "lodash/has.js";
-import moduleClassifiers from "./module-classifiers.mjs";
-import externalModuleHelpers from "./external-module-helpers.mjs";
-
-const { isRelativeModuleName, isExternalModule, isAliassy } = moduleClassifiers;
+import {
+  isRelativeModuleName,
+  isExternalModule,
+  isAliassy,
+} from "./module-classifiers.mjs";
+import {
+  dependencyIsDeprecated,
+  getPackageRoot,
+} from "./external-module-helpers.mjs";
 
 function dependencyKeyHasModuleName(
   pPackageDependencies,
@@ -12,7 +17,7 @@ function dependencyKeyHasModuleName(
 ) {
   return (pKey) =>
     pKey.includes("ependencies") &&
-    has(pPackageDependencies[pKey], path.posix.join(pPrefix, pModuleName));
+    has(pPackageDependencies[pKey], join(pPrefix, pModuleName));
 }
 
 const NPM2DEP_TYPE = {
@@ -105,17 +110,13 @@ function determineNodeModuleDependencyTypes(
 ) {
   /** @type {import("../../../types/shared-types.js").DependencyType[]} */
   let lReturnValue = determineManifestDependencyTypes(
-    externalModuleHelpers.getPackageRoot(pModuleName),
+    getPackageRoot(pModuleName),
     pPackageDeps,
     pResolveOptions.modules
   );
   if (
     pResolveOptions.resolveDeprecations &&
-    externalModuleHelpers.dependencyIsDeprecated(
-      pModuleName,
-      pFileDirectory,
-      pResolveOptions
-    )
+    dependencyIsDeprecated(pModuleName, pFileDirectory, pResolveOptions)
   ) {
     lReturnValue.push("deprecated");
   }

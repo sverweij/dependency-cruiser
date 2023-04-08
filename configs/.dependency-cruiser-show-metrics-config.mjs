@@ -1,6 +1,5 @@
 /** @type {import('../').IConfiguration} */
 export default {
-  $schema: "../src/schema/configuration.schema.json",
   extends: "../.dependency-cruiser.json",
   forbidden: [
     {

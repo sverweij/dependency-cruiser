@@ -1,5 +1,5 @@
 /* eslint-disable import/exports-last */
-import fs from "fs";
+import { readFileSync } from "fs";
 import { Parser as acornParser, parse as acornParse } from "acorn";
 import { parse as acornLooseParse } from "acorn-loose";
 import acornJsx from "acorn-jsx";
@@ -66,7 +66,7 @@ export function getASTFromSource(pFileRecord, pTranspileOptions) {
 function getAST(pFileName, pTranspileOptions) {
   return getASTFromSource(
     {
-      source: fs.readFileSync(pFileName, "utf8"),
+      source: readFileSync(pFileName, "utf8"),
       extension: getExtension(pFileName),
       filename: pFileName,
     },
