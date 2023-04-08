@@ -44,13 +44,13 @@ function getPluginReporter(pOutputType) {
 }
 
 function getExternalPluginReporter(pOutputType) {
-  const lPluginPatternRE = /^plugin:(.+)$/;
+  const lPluginPatternRE = /^plugin:(?<pluginName>.+)$/;
   const lPluginMatch = (pOutputType || "").match(lPluginPatternRE);
 
-  if (Boolean(lPluginMatch)) {
-    const lPluginName = lPluginMatch[1];
-    return getPluginReporter(lPluginName);
+  if (lPluginMatch?.groups) {
+    return getPluginReporter(lPluginMatch.groups.pluginName);
   }
+
   return false;
 }
 
