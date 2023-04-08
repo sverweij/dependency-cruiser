@@ -1,7 +1,7 @@
-const has = require("lodash/has");
-const merge = require("lodash/merge");
-const safeRegex = require("safe-regex");
-const report = require("../../report");
+import has from "lodash/has.js";
+import merge from "lodash/merge.js";
+import safeRegex from "safe-regex";
+import report from "../../report/index.js";
 
 const MODULE_SYSTEM_LIST_RE = /^((cjs|amd|es6|tsd)(,|$))+$/gi;
 const VALID_DEPTH_RE = /^\d{1,2}$/g;
@@ -72,12 +72,11 @@ function validatePathsSafety(pFilterOption) {
 }
 
 /**
- *
  * @param {any} pOptions
  * @throws {Error}
- * @returns {import("../../..").ICruiseOptions}
+ * @returns {import("../../../types/dependency-cruiser.js").ICruiseOptions}
  */
-function validateCruiseOptions(pOptions) {
+export function validateCruiseOptions(pOptions) {
   let lReturnValue = {};
 
   if (Boolean(pOptions)) {
@@ -111,10 +110,10 @@ function validateCruiseOptions(pOptions) {
 
 /**
  *
- * @param {import("../../..").IFormatOptions} pFormatOptions
+ * @param {import("../../../types/dependency-cruiser.js").IFormatOptions} pFormatOptions
  * @throws {Error}
  */
-function validateFormatOptions(pFormatOptions) {
+export function validateFormatOptions(pFormatOptions) {
   validatePathsSafety(pFormatOptions.exclude);
   validatePathsSafety(pFormatOptions.focus);
   validatePathsSafety(pFormatOptions.reaches);
@@ -123,8 +122,3 @@ function validateFormatOptions(pFormatOptions) {
   validateOutputType(pFormatOptions.outputType);
   validateFocusDepth(pFormatOptions.focusDepth);
 }
-
-module.exports = {
-  validateCruiseOptions,
-  validateFormatOptions,
-};

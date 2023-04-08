@@ -11,19 +11,19 @@ import {
   allExtensions,
   getAvailableTranspilers,
 } from "../extract/transpile/meta.mjs";
-import normalizeFilesAndDirectories from "./files-and-dirs/normalize.js";
-import validateRuleSet from "./rule-set/validate.js";
-import normalizeRuleSet from "./rule-set/normalize.js";
+import normalizeFilesAndDirectories from "./files-and-dirs/normalize.mjs";
+import validateRuleSet from "./rule-set/validate.mjs";
+import normalizeRuleSet from "./rule-set/normalize.mjs";
 import {
   validateCruiseOptions,
   validateFormatOptions,
-} from "./options/validate.js";
+} from "./options/validate.mjs";
 import {
   normalizeCruiseOptions,
   normalizeFormatOptions,
-} from "./options/normalize.js";
+} from "./options/normalize.mjs";
 import normalizeResolveOptions from "./resolve-options/normalize.mjs";
-import reportWrap from "./report-wrap.js";
+import reportWrap from "./report-wrap.mjs";
 
 const TOTAL_STEPS = 9;
 

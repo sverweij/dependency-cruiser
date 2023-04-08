@@ -1,6 +1,6 @@
 import { expect } from "chai";
 import normalizeResolveOptions from "../../src/main/resolve-options/normalize.mjs";
-import { normalizeCruiseOptions } from "../../src/main/options/normalize.js";
+import { normalizeCruiseOptions } from "../../src/main/options/normalize.mjs";
 import { createRequireJSON } from "../backwards.utl.mjs";
 import getDependencies from "../../src/extract/get-dependencies.mjs";
 import { runFixture } from "./run-get-dependencies-fixture.utl.mjs";

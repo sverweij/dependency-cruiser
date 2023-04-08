@@ -2,7 +2,7 @@ import { lstatSync } from "node:fs";
 import { expect } from "chai";
 import gatherInitialSources from "../../src/extract/gather-initial-sources.mjs";
 import p2p from "../../src/utl/path-to-posix.js";
-import normalize from "../../src/main/options/normalize.js";
+import { normalizeCruiseOptions } from "../../src/main/options/normalize.mjs";
 
 // make the import pathToPosix the correct function profile
 // (1 parameter exactly) for use in map
@@ -10,7 +10,7 @@ function pathToPosix(pPath) {
   return p2p(pPath);
 }
 
-const EMPTYOPTIONS = normalize.normalizeCruiseOptions({});
+const EMPTYOPTIONS = normalizeCruiseOptions({});
 
 describe("[I] extract/gatherInitialSources", () => {
   it("one file stays one file", () => {
@@ -236,7 +236,7 @@ describe("[I] extract/gatherInitialSources", () => {
     expect(
       gatherInitialSources(
         ["**/src/**/*.js"],
-        normalize.normalizeCruiseOptions({
+        normalizeCruiseOptions({
           baseDir: "test/extract/__mocks__/gather-globbing",
         })
       ).map(pathToPosix)

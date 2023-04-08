@@ -8,7 +8,7 @@ import {
   dependencyIsDeprecated,
 } from "../../../src/extract/resolve/external-module-helpers.mjs";
 import normalizeResolveOptions from "../../../src/main/resolve-options/normalize.mjs";
-import { normalizeCruiseOptions } from "../../../src/main/options/normalize.js";
+import { normalizeCruiseOptions } from "../../../src/main/options/normalize.mjs";
 
 const BASIC_RESOLVE_OPTIONS = await normalizeResolveOptions(
   {},

@@ -1,6 +1,6 @@
-const cloneDeep = require("lodash/cloneDeep");
-const has = require("lodash/has");
-const { normalizeREProperties } = require("../utl/normalize-re-properties");
+import cloneDeep from "lodash/cloneDeep.js";
+import has from "lodash/has.js";
+import { normalizeREProperties } from "../helpers.mjs";
 
 const VALID_SEVERITIES = /^(error|warn|info|ignore)$/;
 const DEFAULT_SEVERITY = "warn";
@@ -25,8 +25,8 @@ function normalizeName(pRuleName) {
 
 /**
  *
- * @param {import("../../../types/shared-types").RuleScopeType} pScope?
- * @returns {import("../../../types/shared-types").RuleScopeType}
+ * @param {import("../../../types/shared-types.js").RuleScopeType} pScope?
+ * @returns {import("../../../types/shared-types.js").RuleScopeType}
  */
 function normalizeScope(pScope) {
   return pScope ? pScope : DEFAULT_SCOPE;
@@ -34,8 +34,8 @@ function normalizeScope(pScope) {
 
 /**
  *
- * @param {import("../../../types/rule-set").IAnyRuleType} pRule
- * @returns {import("../../../types/strict-rule-set").IStrictAnyRuleType}
+ * @param {import("../../../types/rule-set.js").IAnyRuleType} pRule
+ * @returns {import("../../../types/strict-rule-set.js").IStrictAnyRuleType}
  */
 function normalizeRule(pRule) {
   return {
@@ -55,10 +55,10 @@ function normalizeRule(pRule) {
  * - rule name (default 'unnamed')
  * - severity (default 'warn')
  *
- * @param  {import("../../..").IFlattenedRuleSet} pRuleSet
- * @return {import("../../../types/strict-rule-set").IStrictRuleSet}
+ * @param  {import("../../../types/dependency-cruiser.js").IFlattenedRuleSet} pRuleSet
+ * @return {import("../../../types/strict-rule-set.js").IStrictRuleSet}
  */
-module.exports = function normalizeRuleSet(pRuleSet) {
+export default function normalizeRuleSet(pRuleSet) {
   const lRuleSet = cloneDeep(pRuleSet);
 
   if (has(lRuleSet, "allowed")) {
@@ -89,4 +89,4 @@ module.exports = function normalizeRuleSet(pRuleSet) {
   }
 
   return lRuleSet;
-};
+}

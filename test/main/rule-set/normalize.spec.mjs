@@ -1,5 +1,5 @@
 import { expect } from "chai";
-import normalize from "../../../src/main/rule-set/normalize.js";
+import normalize from "../../../src/main/rule-set/normalize.mjs";
 
 describe("[U] main/rule-set/normalize", () => {
   it("leaves the empty ruleset alone", () => {

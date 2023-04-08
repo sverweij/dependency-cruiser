@@ -1,6 +1,6 @@
 import { expect, use } from "chai";
 import chaiJSONSchema from "chai-json-schema";
-import { normalizeREProperties } from "../../../src/main/utl/normalize-re-properties.js";
+import { normalizeREProperties } from "../../src/main/helpers.mjs";
 
 use(chaiJSONSchema);
 

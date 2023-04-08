@@ -1,17 +1,16 @@
-const get = require("lodash/get");
-const has = require("lodash/has");
-const filterBank = require("../graph-utl/filter-bank");
-const summarize = require("../enrich/summarize");
-const consolidateToPattern = require("../graph-utl/consolidate-to-pattern");
-const compare = require("../graph-utl/compare");
-const stripSelfTransitions = require("../graph-utl/strip-self-transitions");
-const report = require("../report");
+import has from "lodash/has.js";
+import filterBank from "../graph-utl/filter-bank.js";
+import summarize from "../enrich/summarize/index.js";
+import consolidateToPattern from "../graph-utl/consolidate-to-pattern.js";
+import compare from "../graph-utl/compare.js";
+import stripSelfTransitions from "../graph-utl/strip-self-transitions.js";
+import report from "../report/index.js";
 
 /**
  *
- * @param {import('../..').ICruiseResult} pResult
- * @param {import('../..').IFormatOptions} pFormatOptions
- * @returns {import('../..').ICruiseResult}
+ * @param {import('../../types/dependency-cruiser.js').ICruiseResult} pResult
+ * @param {import('../../types/dependency-cruiser.js').IFormatOptions} pFormatOptions
+ * @returns {import('../../types/dependency-cruiser.js').ICruiseResult}
  */
 function reSummarizeResults(pResult, pFormatOptions) {
   let lModules = filterBank.applyFilters(pResult.modules, pFormatOptions);
@@ -39,19 +38,18 @@ function reSummarizeResults(pResult, pFormatOptions) {
     modules: lModules,
   };
 }
+
 /**
  *
  * @param {import("../..).ICruiseResult} pResult result of a previous run of dependency-cruiser
- * @param {import("../..").IFormatOptions} pFormatOptions
- * @returns {import("../..").IReporterOutput}
+ * @param {import("../../types/dependency-cruiser.js").IFormatOptions} pFormatOptions
+ * @returns {import("../../types/dependency-cruiser.js").IReporterOutput}
  */
-module.exports = function reportWrap(pResult, pFormatOptions) {
+export default function reportWrap(pResult, pFormatOptions) {
   const lReportFunction = report.getReporter(pFormatOptions.outputType);
-  const lReportOptions = get(
-    pResult,
-    `summary.optionsUsed.reporterOptions.${pFormatOptions.outputType}`,
-    {}
-  );
+  const lReportOptions =
+    pResult.summary.optionsUsed?.reporterOptions?.[pFormatOptions.outputType] ??
+    {};
 
   return lReportFunction(
     reSummarizeResults(pResult, pFormatOptions),
@@ -61,4 +59,4 @@ module.exports = function reportWrap(pResult, pFormatOptions) {
       ? { ...lReportOptions, collapsePattern: pFormatOptions.collapse }
       : lReportOptions
   );
-};
+}

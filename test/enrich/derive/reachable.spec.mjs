@@ -1,5 +1,5 @@
 import { expect } from "chai";
-import normalize from "../../../src/main/rule-set/normalize.js";
+import normalize from "../../../src/main/rule-set/normalize.mjs";
 import addReachability from "../../../src/enrich/derive/reachable.js";
 import clearExtractCaches from "../../../src/extract/clear-caches.mjs";
 

@@ -1,7 +1,7 @@
-const get = require("lodash/get");
-const has = require("lodash/has");
-const set = require("lodash/set");
-const cloneDeep = require("lodash/cloneDeep");
+import get from "lodash/get.js";
+import has from "lodash/has.js";
+import set from "lodash/set.js";
+import cloneDeep from "lodash/cloneDeep.js";
 
 const RE_PROPERTIES = [
   "path",
@@ -21,14 +21,14 @@ const RE_PROPERTIES = [
  * @param {string|string[]} pStringish
  * @returns {string}
  */
-function normalizeToREAsString(pStringish) {
+export function normalizeToREAsString(pStringish) {
   if (Array.isArray(pStringish)) {
     return pStringish.join("|");
   }
   return pStringish;
 }
 
-function normalizeREProperties(
+export function normalizeREProperties(
   pPropertyContainer,
   pREProperties = RE_PROPERTIES
 ) {
@@ -39,14 +39,10 @@ function normalizeREProperties(
       set(
         lPropertyContainer,
         lProperty,
+
         normalizeToREAsString(get(lPropertyContainer, lProperty))
       );
     }
   }
   return lPropertyContainer;
 }
-
-module.exports = {
-  normalizeToREAsString,
-  normalizeREProperties,
-};

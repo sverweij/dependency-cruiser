@@ -1,9 +1,8 @@
 /* eslint-disable security/detect-object-injection */
-const get = require("lodash/get");
-const clone = require("lodash/clone");
-const has = require("lodash/has");
-const { normalizeREProperties } = require("../utl/normalize-re-properties");
-const defaults = require("./defaults.js");
+import clone from "lodash/clone.js";
+import has from "lodash/has.js";
+import { normalizeREProperties } from "../helpers.mjs";
+import defaults from "./defaults.mjs";
 
 const DEFAULT_CACHE_FOLDER = "node_modules/.cache/dependency-cruiser";
 const DEFAULT_CACHE_STRATEGY = "metadata";
@@ -71,7 +70,7 @@ function normalizeCollapse(pCollapse) {
 }
 
 function normalizeFocusDepth(pFormatOptions) {
-  /** @type  {import("../../..").IFormatOptions}*/
+  /** @type  {import("../../../types/dependency-cruiser.js").IFormatOptions}*/
   let lFormatOptions = clone(pFormatOptions);
   if (has(lFormatOptions, "focusDepth")) {
     if (has(lFormatOptions, "focus")) {
@@ -87,7 +86,7 @@ function normalizeFocusDepth(pFormatOptions) {
 
 /**
  *
- * @param {import("../../..").IForbiddenRuleType} pRule
+ * @param {import("../../../types/dependency-cruiser.js").IForbiddenRuleType} pRule
  * @returns {boolean}
  */
 function hasMetricsRule(pRule) {
@@ -95,13 +94,13 @@ function hasMetricsRule(pRule) {
   //       Or is it a misuse to ensure folder derivations (like cycles) get
   //       kicked off?
   return (
-    has(pRule, "to.moreUnstable") || get(pRule, "scope", "module") === "folder"
+    has(pRule, "to.moreUnstable") || (pRule?.scope ?? "module") === "folder"
   );
 }
 
 /**
  *
- * @param {import("../../..").IFlattenedRuleSet} pRuleSet
+ * @param {import("../../../types/dependency-cruiser.js").IFlattenedRuleSet} pRuleSet
  * @returns {boolean}
  */
 function ruleSetHasMetricsRule(pRuleSet) {
@@ -114,23 +113,20 @@ function ruleSetHasMetricsRule(pRuleSet) {
 
 /**
  *
- * @param {import('../../..').ICruiseOptions} pOptions
+ * @param {import('../../../types/dependency-cruiser.js').ICruiseOptions} pOptions
  * @returns Boolean
  */
 function reporterShowsMetrics(pOptions) {
   return (
-    get(
-      pOptions,
-      `reporterOptions.${pOptions.outputType}.showMetrics`,
-      false
-    ) === true
+    (pOptions.reporterOptions?.[pOptions?.outputType]?.showMetrics ?? false) ===
+    true
   );
 }
 
 /**
  * Determines whether (instability) metrics should be calculated
  *
- * @param {import('../../..').ICruiseOptions} pOptions
+ * @param {import('../../../types/dependency-cruiser.js').ICruiseOptions} pOptions
  * @returns Boolean
  */
 function shouldCalculateMetrics(pOptions) {
@@ -143,8 +139,8 @@ function shouldCalculateMetrics(pOptions) {
 }
 
 /**
- * @param {string|boolean|Partial<import("../../../types/cache-options").ICacheOptions>} pCacheOptions
- * @returns {import("../../../types/cache-options").ICacheOptions}
+ * @param {string|boolean|Partial<import("../../../types/cache-options.js").ICacheOptions>} pCacheOptions
+ * @returns {import("../../../types/cache-options.js").ICacheOptions}
  */
 function normalizeCacheOptions(pCacheOptions) {
   let lNormalizedCacheOptions = pCacheOptions;
@@ -171,12 +167,12 @@ function normalizeCacheOptions(pCacheOptions) {
 
 /**
  *
- * @param {import('../../../types/options').ICruiseOptions} pOptions
+ * @param {import('../../../types/options.js').ICruiseOptions} pOptions
  * @param {string[]} pFileAndDirectoryArray
- * @returns {import('../../../types/strict-options').IStrictCruiseOptions}
+ * @returns {import('../../../types/strict-options.js').IStrictCruiseOptions}
  */
-function normalizeCruiseOptions(pOptions, pFileAndDirectoryArray = []) {
-  /** @type {import('../../../types/strict-options').IStrictCruiseOptions} */
+export function normalizeCruiseOptions(pOptions, pFileAndDirectoryArray = []) {
+  /** @type {import('../../../types/strict-options.js').IStrictCruiseOptions} */
   let lReturnValue = {
     baseDir: process.cwd(),
     ...defaults,
@@ -225,10 +221,10 @@ function normalizeCruiseOptions(pOptions, pFileAndDirectoryArray = []) {
 
 /**
  *
- * @param {import("../../..").IFormatOptions} pFormatOptions
- * @returns {import("../../../types/strict-options").IStrictFormatOptions}
+ * @param {import("../../../types/dependency-cruiser.js").IFormatOptions} pFormatOptions
+ * @returns {import("../../../types/strict-options.js").IStrictFormatOptions}
  */
-function normalizeFormatOptions(pFormatOptions) {
+export function normalizeFormatOptions(pFormatOptions) {
   let lFormatOptions = clone(pFormatOptions);
 
   if (has(lFormatOptions, "collapse")) {
@@ -245,8 +241,3 @@ function normalizeFormatOptions(pFormatOptions) {
 
   return normalizeFocusDepth(lFormatOptions);
 }
-
-module.exports = {
-  normalizeCruiseOptions,
-  normalizeFormatOptions,
-};
