@@ -1,7 +1,7 @@
 import { expect, use } from "chai";
 import _clone from "lodash/clone.js";
 import chaiJSONSchema from "chai-json-schema";
-import cruiseResultSchema from "../../../src/schema/cruise-result.schema.js";
+import cruiseResultSchema from "../../../src/schema/cruise-result.schema.mjs";
 import { clearCache } from "../../../src/report/anon/anonymize-path-element.js";
 import anonymize from "../../../src/report/anon/index.js";
 import sourceReport from "./__mocks__/src-report.mjs";

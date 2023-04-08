@@ -2,7 +2,7 @@ import Ajv from "ajv";
 import safeRegex from "safe-regex";
 import has from "lodash/has.js";
 import { validateCruiseOptions } from "../options/validate.mjs";
-import configurationSchema from "../../schema/configuration.schema.js";
+import configurationSchema from "../../schema/configuration.schema.mjs";
 import { normalizeToREAsString } from "../helpers.mjs";
 
 const ajv = new Ajv();
