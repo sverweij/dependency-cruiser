@@ -2,7 +2,7 @@ import toTypescriptAST from "./parse/to-typescript-ast.mjs";
 import toJavascriptAST from "./parse/to-javascript-ast.mjs";
 import toSwcAST from "./parse/to-swc-ast.mjs";
 import localNpmHelpers from "./resolve/external-module-helpers.mjs";
-import { clearCache as getManifest_clearCache } from "./resolve/get-manifest/index.mjs";
+import { clearCache as getManifest_clearCache } from "./resolve/get-manifest.mjs";
 import { clearCache as resolveAMD_clearCache } from "./resolve/resolve-amd.mjs";
 import { clearCache as resolve_clearCache } from "./resolve/resolve.mjs";
 

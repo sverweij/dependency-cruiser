@@ -7,7 +7,7 @@ import { resolveAMD } from "./resolve-amd.mjs";
 import resolveCommonJS from "./resolve-cjs.mjs";
 import resolveHelpers from "./resolve-helpers.mjs";
 import determineDependencyTypes from "./determine-dependency-types.mjs";
-import { getManifest } from "./get-manifest/index.mjs";
+import { getManifest } from "./get-manifest.mjs";
 
 /**
  *
