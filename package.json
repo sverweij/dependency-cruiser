@@ -43,7 +43,7 @@
     "depcruise-fmt": "bin/depcruise-fmt.mjs",
     "depcruise-wrap-stream-in-html": "bin/wrap-stream-in-html.mjs"
   },
-  "main": "src/main/index.js",
+  "main": "src/main/index.mjs",
   "exports": {
     ".": {
       "import": "./src/main/index.mjs",
