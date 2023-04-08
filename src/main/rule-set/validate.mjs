@@ -1,9 +1,9 @@
-const Ajv = require("ajv").default;
-const safeRegex = require("safe-regex");
-const has = require("lodash/has");
-const { validateCruiseOptions } = require("../options/validate");
-const configurationSchema = require("../../schema/configuration.schema.js");
-const { normalizeToREAsString } = require("../utl/normalize-re-properties");
+import Ajv from "ajv";
+import safeRegex from "safe-regex";
+import has from "lodash/has.js";
+import { validateCruiseOptions } from "../options/validate.mjs";
+import configurationSchema from "../../schema/configuration.schema.js";
+import { normalizeToREAsString } from "../helpers.mjs";
 
 const ajv = new Ajv();
 // the default for this is 25 - as noted in the safe-regex source code already,
@@ -77,12 +77,12 @@ function checkRuleSafety(pRule) {
  * - the ruleset adheres to the [config json schema](../../schema/configuration.schema.json)
  * - any regular expression in the rule set is 'safe' (~= won't be too slow)
  *
- * @param  {import("../../../types/configuration").IConfiguration} pConfiguration The configuration to validate
- * @return {import("../../../types/configuration").IConfiguration}  The configuration as passed
+ * @param  {import("../../../types/configuration.js").IConfiguration} pConfiguration The configuration to validate
+ * @return {import("../../../types/configuration.js").IConfiguration}  The configuration as passed
  * @throws {Error}                 An error with the reason for the error as
  *                                 a message
  */
-module.exports = function validateConfiguration(pConfiguration) {
+export default function validateConfiguration(pConfiguration) {
   validateAgainstSchema(configurationSchema, pConfiguration);
   (pConfiguration.allowed || []).forEach(checkRuleSafety);
   (pConfiguration.forbidden || []).forEach(checkRuleSafety);
@@ -90,7 +90,7 @@ module.exports = function validateConfiguration(pConfiguration) {
     validateCruiseOptions(pConfiguration.options);
   }
   return pConfiguration;
-};
+}
 
 /* think we can ignore object injection here because it's not a public function */
 /* eslint security/detect-object-injection: 0 */

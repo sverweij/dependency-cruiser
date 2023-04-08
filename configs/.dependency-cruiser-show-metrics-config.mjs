@@ -41,7 +41,7 @@ export default {
     cache: {
       folder: "node_modules/.cache/dependency-cruiser/show-metrics",
     },
-    includeOnly: { path: "^(bin|src|types)" },
+    includeOnly: { path: "^(bin|src)" },
     reporterOptions: {
       text: {
         highlightFocused: true,
@@ -51,7 +51,7 @@ export default {
         theme: {
           replace: false,
           graph: {
-            splines: "true", // "ortho" looks nicer, but with the full graph takes long
+            splines: "ortho", // "ortho" looks nicer, but with the full graph takes long
           },
           modules: [
             {

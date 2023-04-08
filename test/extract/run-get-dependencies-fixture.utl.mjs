@@ -1,6 +1,6 @@
 import { expect } from "chai";
 import getDependencies from "../../src/extract/get-dependencies.mjs";
-import { normalizeCruiseOptions } from "../../src/main/options/normalize.js";
+import { normalizeCruiseOptions } from "../../src/main/options/normalize.mjs";
 import normalizeResolveOptions from "../../src/main/resolve-options/normalize.mjs";
 
 /* eslint-disable mocha/no-exports */

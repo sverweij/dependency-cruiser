@@ -1,7 +1,7 @@
 import { expect, use } from "chai";
 import chaiJSONSchema from "chai-json-schema";
 import extract from "../../src/extract/index.mjs";
-import { normalizeCruiseOptions } from "../../src/main/options/normalize.js";
+import { normalizeCruiseOptions } from "../../src/main/options/normalize.mjs";
 import normalizeResolveOptions from "../../src/main/resolve-options/normalize.mjs";
 import { createRequireJSON } from "../backwards.utl.mjs";
 

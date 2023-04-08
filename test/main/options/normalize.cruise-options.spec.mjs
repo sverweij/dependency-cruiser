@@ -1,10 +1,10 @@
 import { expect } from "chai";
-import normalize from "../../../src/main/options/normalize.js";
+import { normalizeCruiseOptions } from "../../../src/main/options/normalize.mjs";
 
 describe("[U] main/options/normalize - cruise options", () => {
   it("ensures maxDepth is an int when passed an int", () => {
     expect(
-      normalize.normalizeCruiseOptions({
+      normalizeCruiseOptions({
         maxDepth: 42,
       }).maxDepth
     ).to.equal(42);
@@ -12,7 +12,7 @@ describe("[U] main/options/normalize - cruise options", () => {
 
   it("ensures maxDepth is an int when passed a string", () => {
     expect(
-      normalize.normalizeCruiseOptions({
+      normalizeCruiseOptions({
         maxDepth: "42",
       }).maxDepth
     ).to.equal(42);
@@ -20,7 +20,7 @@ describe("[U] main/options/normalize - cruise options", () => {
 
   it("makes doNotFollow strings into an object", () => {
     expect(
-      normalize.normalizeCruiseOptions({
+      normalizeCruiseOptions({
         doNotFollow: "42",
       }).doNotFollow
     ).to.deep.equal({
@@ -29,7 +29,7 @@ describe("[U] main/options/normalize - cruise options", () => {
   });
   it("makes focus strings into an object", () => {
     expect(
-      normalize.normalizeCruiseOptions({
+      normalizeCruiseOptions({
         focus: "42",
       }).focus
     ).to.deep.equal({
@@ -39,7 +39,7 @@ describe("[U] main/options/normalize - cruise options", () => {
 
   it("makes exclude arrays into an object with a string", () => {
     expect(
-      normalize.normalizeCruiseOptions({
+      normalizeCruiseOptions({
         exclude: ["^aap", "^noot", "mies$"],
       }).exclude
     ).to.deep.equal({
@@ -49,7 +49,7 @@ describe("[U] main/options/normalize - cruise options", () => {
 
   it("makes exclude object with an array for path into an exclude path with a string for path", () => {
     expect(
-      normalize.normalizeCruiseOptions({
+      normalizeCruiseOptions({
         exclude: { path: ["^aap", "^noot", "mies$"] },
       }).exclude
     ).to.deep.equal({
@@ -59,7 +59,7 @@ describe("[U] main/options/normalize - cruise options", () => {
 
   it("de-arrayify's archi reporter options' collapsePattern", () => {
     expect(
-      normalize.normalizeCruiseOptions({
+      normalizeCruiseOptions({
         reporterOptions: {
           archi: {
             collapsePattern: ["^src/[^/]+", "^node_modules/[^/]+", "^bin/"],
@@ -75,7 +75,7 @@ describe("[U] main/options/normalize - cruise options", () => {
 
   it("de-arrayify's dot reporter options' filters", () => {
     expect(
-      normalize.normalizeCruiseOptions({
+      normalizeCruiseOptions({
         reporterOptions: {
           dot: {
             filters: {
@@ -94,34 +94,28 @@ describe("[U] main/options/normalize - cruise options", () => {
   });
 
   it("collapse: normalizes a single digit for collapse to a folder depth regex", () => {
-    expect(
-      normalize.normalizeCruiseOptions({ collapse: 2 }, ["collapse"])
-    ).to.contain({
+    expect(normalizeCruiseOptions({ collapse: 2 }, ["collapse"])).to.contain({
       collapse: "node_modules/[^/]+|^[^/]+/[^/]+/",
     });
   });
 
   it("collapse: normalizes a single digit for collapse to a folder depth regex (digit in a string)", () => {
-    expect(
-      normalize.normalizeCruiseOptions({ collapse: "2" }, ["collapse"])
-    ).to.contain({
+    expect(normalizeCruiseOptions({ collapse: "2" }, ["collapse"])).to.contain({
       collapse: "node_modules/[^/]+|^[^/]+/[^/]+/",
     });
   });
 
   it("collapse: leaves non-single digits alone", () => {
-    expect(
-      normalize.normalizeCruiseOptions({ collapse: "22" }, ["collapse"])
-    ).to.contain({
-      collapse: "22",
-    });
+    expect(normalizeCruiseOptions({ collapse: "22" }, ["collapse"])).to.contain(
+      {
+        collapse: "22",
+      }
+    );
   });
 
   it("collapse: leaves a normal string/ regex like alone", () => {
     expect(
-      normalize.normalizeCruiseOptions({ collapse: "^packages/[^/]+" }, [
-        "collapse",
-      ])
+      normalizeCruiseOptions({ collapse: "^packages/[^/]+" }, ["collapse"])
     ).to.contain({
       collapse: "^packages/[^/]+",
     });
@@ -129,7 +123,7 @@ describe("[U] main/options/normalize - cruise options", () => {
 
   it("calculates metrics when the selected reporter specifies to show metrics", () => {
     expect(
-      normalize.normalizeCruiseOptions({
+      normalizeCruiseOptions({
         outputType: "dot",
         reporterOptions: { dot: { showMetrics: true } },
       })
@@ -140,7 +134,7 @@ describe("[U] main/options/normalize - cruise options", () => {
 
   it("calculates metrics when the selected reporter specifies to not show metrics", () => {
     expect(
-      normalize.normalizeCruiseOptions({
+      normalizeCruiseOptions({
         outputType: "dot",
         reporterOptions: { dot: { showMetrics: false } },
       })
@@ -151,7 +145,7 @@ describe("[U] main/options/normalize - cruise options", () => {
 
   it("calculates metrics when the selected reporter doesn't specify to show metrics", () => {
     expect(
-      normalize.normalizeCruiseOptions({
+      normalizeCruiseOptions({
         outputType: "dot",
       })
     ).to.contain({
@@ -162,33 +156,29 @@ describe("[U] main/options/normalize - cruise options", () => {
 
 describe("[I] normalize cache options", () => {
   it("normalizes cache options into an object - true", () => {
-    expect(
-      normalize.normalizeCruiseOptions({ cache: true }).cache
-    ).to.deep.equal({
+    expect(normalizeCruiseOptions({ cache: true }).cache).to.deep.equal({
       folder: "node_modules/.cache/dependency-cruiser",
       strategy: "metadata",
     });
   });
   it("normalizes cache options into an object - string", () => {
     expect(
-      normalize.normalizeCruiseOptions({ cache: "some/alternate/folder" }).cache
+      normalizeCruiseOptions({ cache: "some/alternate/folder" }).cache
     ).to.deep.equal({
       folder: "some/alternate/folder",
       strategy: "metadata",
     });
   });
   it("normalizes cache options into an object - empty object", () => {
-    expect(normalize.normalizeCruiseOptions({ cache: {} }).cache).to.deep.equal(
-      {
-        folder: "node_modules/.cache/dependency-cruiser",
-        strategy: "metadata",
-      }
-    );
+    expect(normalizeCruiseOptions({ cache: {} }).cache).to.deep.equal({
+      folder: "node_modules/.cache/dependency-cruiser",
+      strategy: "metadata",
+    });
   });
 
   it("normalizes cache options into an object - partial object (strategy only)", () => {
     expect(
-      normalize.normalizeCruiseOptions({ cache: { strategy: "content" } }).cache
+      normalizeCruiseOptions({ cache: { strategy: "content" } }).cache
     ).to.deep.equal({
       folder: "node_modules/.cache/dependency-cruiser",
       strategy: "content",
@@ -196,7 +186,7 @@ describe("[I] normalize cache options", () => {
   });
   it("normalizes cache options into an object - partial object (folder only)", () => {
     expect(
-      normalize.normalizeCruiseOptions({
+      normalizeCruiseOptions({
         cache: { folder: "some/alternate/folder" },
       }).cache
     ).to.deep.equal({
@@ -205,14 +195,10 @@ describe("[I] normalize cache options", () => {
     });
   });
   it("passed false for cache - remains false (no object)", () => {
-    expect(normalize.normalizeCruiseOptions({ cache: false }).cache).to.equal(
-      false
-    );
+    expect(normalizeCruiseOptions({ cache: false }).cache).to.equal(false);
   });
   it("passed no cache - no cache property", () => {
-    expect(normalize.normalizeCruiseOptions({})).to.not.haveOwnProperty(
-      "cache"
-    );
+    expect(normalizeCruiseOptions({})).to.not.haveOwnProperty("cache");
   });
 });
 

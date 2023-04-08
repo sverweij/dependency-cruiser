@@ -1,7 +1,7 @@
 import { join } from "node:path";
 import { fileURLToPath } from "node:url";
 import { expect } from "chai";
-import normalize from "../../../src/main/options/normalize.js";
+import { normalizeCruiseOptions } from "../../../src/main/options/normalize.mjs";
 import normalizeResolveOptions from "../../../src/main/resolve-options/normalize.mjs";
 
 const __dirname = fileURLToPath(new URL(".", import.meta.url));
@@ -17,7 +17,7 @@ describe("[I] main/resolve-options/normalize", () => {
   it("comes with a set of defaults when passed with no options at all", async () => {
     const lNormalizedOptions = await normalizeResolveOptions(
       {},
-      normalize.normalizeCruiseOptions({})
+      normalizeCruiseOptions({})
     );
 
     expect(Object.keys(lNormalizedOptions).length).to.equal(
@@ -34,7 +34,7 @@ describe("[I] main/resolve-options/normalize", () => {
   it("does not add the typescript paths plugin to the plugins if a tsConfig is specified without a baseUrl", async () => {
     const lNormalizedOptions = await normalizeResolveOptions(
       {},
-      normalize.normalizeCruiseOptions({
+      normalizeCruiseOptions({
         ruleSet: { options: { tsConfig: { fileName: TEST_TSCONFIG } } },
       }),
       lTsconfigContents
@@ -55,7 +55,7 @@ describe("[I] main/resolve-options/normalize", () => {
   it("adds the typescript paths plugin to the plugins if a tsConfig is specified with a baseUrl and actual paths", async () => {
     const lNormalizedOptions = await normalizeResolveOptions(
       {},
-      normalize.normalizeCruiseOptions({
+      normalizeCruiseOptions({
         ruleSet: { options: { tsConfig: { fileName: TEST_TSCONFIG } } },
       }),
       lTsconfigContentsWithBaseURLAndPaths

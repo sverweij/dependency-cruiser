@@ -1,5 +1,5 @@
 /** @type {import('../../../types/strict-options').IStrictCruiseOptions} */
-module.exports = {
+export default {
   validate: false,
   maxDepth: 0,
   moduleSystems: ["es6", "cjs", "tsd", "amd"],
