@@ -1,5 +1,5 @@
 import { expect } from "chai";
-import moduleUtl from "../../../src/report/dot/module-utl.js";
+import moduleUtl from "../../../src/report/dot/module-utl.mjs";
 
 describe("[U] report/dot/module-utl", () => {
   it("extractFirstTransgression - keeps as is when there's no transgressions", () => {

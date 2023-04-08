@@ -1,6 +1,5 @@
-const get = require("lodash/get");
-const tsm = require("teamcity-service-messages");
-const utl = require("./utl/index.js");
+import tsm from "teamcity-service-messages";
+import { formatPercentage, formatViolation } from "./utl/index.mjs";
 
 const CATEGORY = "dependency-cruiser";
 const SEVERITY2TEAMCITY_SEVERITY = {
@@ -62,9 +61,9 @@ function reportIgnoredRules(pIgnoredCount) {
 }
 
 function reportViolatedRules(pRuleSetUsed, pViolations, pIgnoredCount) {
-  return reportRules(get(pRuleSetUsed, "forbidden", []), pViolations)
-    .concat(reportAllowedRule(get(pRuleSetUsed, "allowed", []), pViolations))
-    .concat(reportRules(get(pRuleSetUsed, "required", []), pViolations))
+  return reportRules(pRuleSetUsed?.forbidden ?? [], pViolations)
+    .concat(reportAllowedRule(pRuleSetUsed?.allowed ?? [], pViolations))
+    .concat(reportRules(pRuleSetUsed?.required ?? [], pViolations))
     .concat(reportIgnoredRules(pIgnoredCount));
 }
 
@@ -89,9 +88,9 @@ function formatReachabilityViolation(pViolation) {
 function formatInstabilityViolation(pViolation) {
   return `${formatDependencyViolation(
     pViolation
-  )} (instability: ${utl.formatPercentage(
+  )} (instability: ${formatPercentage(
     pViolation.metrics.from.instability
-  )} -> ${utl.formatPercentage(pViolation.metrics.to.instability)})`;
+  )} -> ${formatPercentage(pViolation.metrics.to.instability)})`;
 }
 
 function bakeViolationMessage(pViolation) {
@@ -102,7 +101,7 @@ function bakeViolationMessage(pViolation) {
     reachability: formatReachabilityViolation,
     instability: formatInstabilityViolation,
   };
-  return utl.formatViolation(
+  return formatViolation(
     pViolation,
     lViolationType2Formatter,
     formatDependencyViolation
@@ -140,10 +139,10 @@ function reportViolations(pViolations, pIgnoredCount) {
  * - for each violated rule in the passed results: an `inspectionType` with the name and comment of that rule
  * - for each violation in the passed results: an `inspection` with the violated rule name and the tos and froms
  *
- * @param {import("../..").ICruiseResult} pResults
- * @returns {import("../..").IReporterOutput}
+ * @param {import("../../types/dependency-cruiser.js").ICruiseResult} pResults
+ * @returns {import("../../types/dependency-cruiser.js").IReporterOutput}
  */
-module.exports = function teamcity(pResults) {
+export default function teamcity(pResults) {
   // this is the documented way to get tsm to emit strings
   // Alternatively we could've used the 'low level API', which
   // involves creating new `Message`s and stringifying those.
@@ -152,11 +151,11 @@ module.exports = function teamcity(pResults) {
   // setting this property directly
   tsm.stdout = false;
 
-  const lRuleSet = get(pResults, "summary.ruleSetUsed", []);
-  const lViolations = get(pResults, "summary.violations", []).filter(
+  const lRuleSet = pResults?.summary?.ruleSetUsed ?? [];
+  const lViolations = (pResults?.summary?.violations ?? []).filter(
     (pViolation) => pViolation.rule.severity !== "ignore"
   );
-  const lIgnoredCount = get(pResults, "summary.ignore", 0);
+  const lIgnoredCount = pResults?.summary?.ignore ?? 0;
 
   return {
     output: reportViolatedRules(lRuleSet, lViolations, lIgnoredCount)
@@ -164,4 +163,4 @@ module.exports = function teamcity(pResults) {
       .reduce((pAll, pCurrent) => `${pAll}${pCurrent}\n`, ""),
     exitCode: pResults.summary.error,
   };
-};
+}

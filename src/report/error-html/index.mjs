@@ -1,8 +1,7 @@
-const Handlebars = require("handlebars/runtime");
-const { formatSummaryForReport, aggregateViolations } = require("./utl");
+import Handlebars from "handlebars/runtime.js";
+import { formatSummaryForReport, aggregateViolations } from "./utl.mjs";
 
-// eslint-disable-next-line import/no-unassigned-import
-require("./error-html.template");
+await import("./error-html.template.js");
 
 function massageSummaryIntoSomethingUsable(pResults) {
   const lSummary = formatSummaryForReport(pResults.summary);
@@ -26,13 +25,13 @@ function report(pResults) {
 /**
  * Returns the results of a cruise in an 'incidence matrix'
  *
- * @param {import("../../../types/cruise-result").ICruiseResult} pResults - the output of a dependency-cruise adhering to ../../schema/cruise-result.schema.json
- * @returns {import("../../..").IReporterOutput} - output: an html program showing the summary & the violations (if any)
+ * @param {import("../../../types/cruise-result.js").ICruiseResult} pResults - the output of a dependency-cruise adhering to ../../schema/cruise-result.schema.json
+ * @returns {import("../../../types/dependency-cruiser.js").IReporterOutput} - output: an html program showing the summary & the violations (if any)
  *                              exitCode: 0
  */
-module.exports = function errorHtml(pResults) {
+export default function errorHtml(pResults) {
   return {
     output: report(pResults),
     exitCode: 0,
   };
-};
+}

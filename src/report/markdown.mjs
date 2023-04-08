@@ -1,9 +1,7 @@
-const { version } = require("../meta.js");
-const {
-  aggregateViolations,
-  determineTo,
-  determineFromExtras,
-} = require("./error-html/utl");
+import meta from "../meta.js";
+import errorHtmlUtl from "./error-html/utl.mjs";
+
+const { aggregateViolations, determineTo, determineFromExtras } = errorHtmlUtl;
 
 const REPORT_DEFAULTS = {
   showTitle: true,
@@ -26,12 +24,14 @@ const REPORT_DEFAULTS = {
     ":revolving_hearts: No violations found. Get gummy bears to celebrate.",
 
   showFooter: true,
-  footer: `---\n[dependency-cruiser@${version}](https://www.github.com/sverweij/dependency-cruiser) / ${new Date().toISOString()}`,
+  footer: `---\n[dependency-cruiser@${
+    meta.version
+  }](https://www.github.com/sverweij/dependency-cruiser) / ${new Date().toISOString()}`,
 };
 
 /**
  *
- * @param {import("../../types/shared-types").SeverityType} pSeverity
+ * @param {import("../../types/shared-types.js").SeverityType} pSeverity
  */
 function severity2Icon(pSeverity) {
   const lSeverity2IconMap = {
@@ -45,7 +45,7 @@ function severity2Icon(pSeverity) {
 
 /**
  *
- * @param {import("../../types/cruise-result").ISummary} pSummary
+ * @param {import("../../types/cruise-result.js").ISummary} pSummary
  */
 function formatStatsSummary(pSummary) {
   const lSpacerLength = 4;
@@ -55,7 +55,7 @@ function formatStatsSummary(pSummary) {
 
 /**
  *
- * @param {import("../../types/cruise-result").ICruiseResult} pCruiseResult
+ * @param {import("../../types/cruise-result.js").ICruiseResult} pCruiseResult
  * @param {Boolean} pIncludeIgnoredInSummary
  * @return {string}
  */
@@ -82,7 +82,7 @@ function formatRulesSummary(pCruiseResult, pIncludeIgnoredInSummary) {
 
 /**
  *
- * @param {import("../../types/cruise-result").IViolation[]} pViolations
+ * @param {import("../../types/cruise-result.js").IViolation[]} pViolations
  * @param {boolean} pIncludeIgnoredInDetails
  * @return {string}
  */
@@ -106,8 +106,8 @@ function formatViolations(pViolations, pIncludeIgnoredInDetails) {
 
 /**
  *
- * @param {import("../../types/cruise-result").ICruiseResult} pResults
- * @param {import("../../types/reporter-options").IMarkdownReporterOptions} pOptions
+ * @param {import("../../types/cruise-result.js").ICruiseResult} pResults
+ * @param {import("../../types/reporter-options.js").IMarkdownReporterOptions} pOptions
  */
 // eslint-disable-next-line complexity, max-statements
 function report(pResults, pOptions) {
@@ -162,13 +162,13 @@ function report(pResults, pOptions) {
 /**
  * Returns the violations from a cruise in markdown format
  *
- * @param {import("../../types/cruise-result").ICruiseResult} pResults
- * @param {import("../../types/reporter-options").IMarkdownReporterOptions} pOptions
- * @returns {import("../..").IReporterOutput}
+ * @param {import("../../types/cruise-result.js").ICruiseResult} pResults
+ * @param {import("../../types/reporter-options.js").IMarkdownReporterOptions} pOptions
+ * @returns {import("../../types/dependency-cruiser.js").IReporterOutput}
  */
-module.exports = function markdown(pResults, pOptions) {
+export default function markdown(pResults, pOptions) {
   return {
     output: report(pResults, pOptions),
     exitCode: 0,
   };
-};
+}

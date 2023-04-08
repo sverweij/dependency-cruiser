@@ -1,6 +1,6 @@
-const { EOL } = require("node:os");
-const chalk = require("chalk");
-const utl = require("./utl");
+import { EOL } from "node:os";
+import chalk from "chalk";
+import { formatPercentage } from "./utl/index.mjs";
 
 const DECIMAL_BASE = 10;
 const METRIC_WIDTH = 5;
@@ -37,9 +37,9 @@ function getMetricsTable(pMetrics, pMaxNameWidth) {
         .toString(DECIMAL_BASE)
         .padStart(METRIC_WIDTH)}  ${efferentCouplings
         .toString(DECIMAL_BASE)
-        .padStart(METRIC_WIDTH)}  ${utl
-        .formatPercentage(instability)
-        .padStart(METRIC_WIDTH)}`
+        .padStart(METRIC_WIDTH)}  ${formatPercentage(instability).padStart(
+        METRIC_WIDTH
+      )}`
   );
 }
 
@@ -112,11 +112,11 @@ function transformMetricsToTable(
  * Potential future features:
  * - additional output formats (csv?, html?)
  *
- * @param {import('../..').ICruiseResult} pCruiseResult -
- * @param {import("../../types/reporter-options").IMetricsReporterOptions} pReporterOptions
- * @return {import('../..').IReporterOutput} -
+ * @param {import('../../types/dependency-cruiser.js').ICruiseResult} pCruiseResult -
+ * @param {import("../../types/reporter-options.js").IMetricsReporterOptions} pReporterOptions
+ * @return {import('../../types/dependency-cruiser.js').IReporterOutput} -
  */
-module.exports = function metrics(pCruiseResult, pReporterOptions) {
+export default function metrics(pCruiseResult, pReporterOptions) {
   const lReporterOptions = pReporterOptions || {};
   if (pCruiseResult.folders) {
     return {
@@ -131,4 +131,4 @@ module.exports = function metrics(pCruiseResult, pReporterOptions) {
       exitCode: 1,
     };
   }
-};
+}

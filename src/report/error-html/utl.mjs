@@ -1,6 +1,7 @@
-const has = require("lodash/has");
-const { version } = require("../../../src/meta.js");
-const { formatViolation, formatPercentage } = require("../utl/index.js");
+/* eslint-disable import/exports-last */
+import has from "lodash/has.js";
+import meta from "../../meta.js";
+import { formatViolation, formatPercentage } from "../utl/index.mjs";
 
 function getFormattedAllowedRule(pRuleSetUsed) {
   const lAllowed = pRuleSetUsed?.allowed ?? [];
@@ -79,10 +80,10 @@ function determineFromExtras(pViolation) {
   return formatViolation(pViolation, lViolationType2Formatter, () => "");
 }
 
-function formatSummaryForReport(pSummary) {
+export function formatSummaryForReport(pSummary) {
   return {
     ...pSummary,
-    depcruiseVersion: `dependency-cruiser@${version}`,
+    depcruiseVersion: `dependency-cruiser@${meta.version}`,
     runDate: new Date().toISOString(),
     violations: (pSummary.violations || []).map((pViolation) => ({
       ...pViolation,
@@ -121,7 +122,7 @@ function aggregateCountsPerRule(pViolations) {
   }, {});
 }
 
-function aggregateViolations(pViolations, pRuleSetUsed) {
+export function aggregateViolations(pViolations, pRuleSetUsed) {
   const lViolationCounts = aggregateCountsPerRule(pViolations);
 
   return (pRuleSetUsed?.forbidden ?? [])
@@ -136,7 +137,7 @@ function aggregateViolations(pViolations, pRuleSetUsed) {
     );
 }
 
-module.exports = {
+export default {
   aggregateViolations,
   getFormattedAllowedRule,
   mergeCountsIntoRule,

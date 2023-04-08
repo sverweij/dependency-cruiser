@@ -1,7 +1,7 @@
 /* eslint-disable no-magic-numbers */
 import { expect } from "chai";
 import chalk from "chalk";
-import render from "../../../src/report/error.js";
+import render from "../../../src/report/error.mjs";
 import okdeps from "./__mocks__/everything-fine.mjs";
 import dependencies from "./__mocks__/cjs-no-dependency-valid.mjs";
 import onlywarningdependencies from "./__mocks__/err-only-warnings.mjs";

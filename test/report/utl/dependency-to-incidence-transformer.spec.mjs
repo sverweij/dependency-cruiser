@@ -1,5 +1,5 @@
 import { expect } from "chai";
-import transform from "../../../src/report/utl/dependency-to-incidence-transformer.js";
+import transform from "../../../src/report/utl/dependency-to-incidence-transformer.mjs";
 
 import oneViolation from "./__mocks__/one-violation.mjs";
 import ONE_VIOLATION_DEPS_FIXTURE from "./__mocks__/one-violation-incidences.mjs";

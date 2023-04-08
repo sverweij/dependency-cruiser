@@ -1,8 +1,9 @@
-const has = require("lodash/has");
+/* eslint-disable import/exports-last */
+import has from "lodash/has.js";
 
-function isValidPlugin(pPluginFunction) {
+export function isValidPlugin(pPluginFunction) {
   let lReturnValue = false;
-  /** @type {import('../..').ICruiseResult} */
+  /** @type {import('../../types/dependency-cruiser').ICruiseResult} */
   const lMinimalCruiseResult = {
     modules: [],
     summary: {
@@ -26,12 +27,12 @@ function isValidPlugin(pPluginFunction) {
   return lReturnValue;
 }
 
-function getPluginReporter(pOutputType) {
+async function getPluginReporter(pOutputType) {
   let lReturnValue = false;
 
   try {
-    // eslint-disable-next-line import/no-dynamic-require, node/global-require, security/detect-non-literal-require
-    lReturnValue = require(pOutputType);
+    const lModule = await import(pOutputType);
+    lReturnValue = lModule.default;
   } catch (pError) {
     throw new Error(
       `Could not find reporter plugin '${pOutputType}' (or it isn't valid)`
@@ -43,7 +44,7 @@ function getPluginReporter(pOutputType) {
   return lReturnValue;
 }
 
-function getExternalPluginReporter(pOutputType) {
+export function getExternalPluginReporter(pOutputType) {
   const lPluginPatternRE = /^plugin:(?<pluginName>.+)$/;
   const lPluginMatch = (pOutputType || "").match(lPluginPatternRE);
 
@@ -53,9 +54,3 @@ function getExternalPluginReporter(pOutputType) {
 
   return false;
 }
-
-module.exports = {
-  getExternalPluginReporter,
-  getPluginReporter,
-  isValidPlugin,
-};

@@ -5,7 +5,7 @@ import { expect } from "chai";
 // eslint-plugins import and node don't yet understand these 'self references'
 // eslint-disable-next-line import/no-unresolved, node/no-missing-import
 import mermaidReporterPlugin from "dependency-cruiser/mermaid-reporter-plugin";
-import mermaid from "../../../src/report/mermaid.js";
+import mermaid from "../../../src/report/mermaid.mjs";
 import { createRequireJSON } from "../../backwards.utl.mjs";
 
 const requireJSON = createRequireJSON(import.meta.url);

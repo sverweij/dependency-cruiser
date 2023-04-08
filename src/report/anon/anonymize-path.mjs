@@ -1,6 +1,6 @@
-const anonymizePathElement = require("./anonymize-path-element");
+import { anonymizePathElement } from "./anonymize-path-element.mjs";
 
-const WHITELIST_RE =
+export const WHITELIST_RE =
   // eslint-disable-next-line security/detect-unsafe-regex, unicorn/no-unsafe-regex
   /^(|[.]+|~|bin|apps?|cli|src|libs?|configs?|components?|fixtures?|helpers?|i18n|index\.(jsx?|[mc]js|d\.ts|tsx?|vue|coffee|ls)|_?_?mocks?_?_?|node_modules|packages?|package\.json|scripts?|services?|sources?|specs?|_?_?tests?_?_?|types?|uti?ls?)$/;
 
@@ -21,7 +21,7 @@ const WHITELIST_RE =
  *                              modifier on it.
  * @returns {string} - anonymized path
  */
-module.exports = function anonymizePath(
+export function anonymizePath(
   pPath,
   pWordList = [],
   pWhiteListRE = WHITELIST_RE
@@ -32,6 +32,4 @@ module.exports = function anonymizePath(
       anonymizePathElement(pPathElement, pWordList, pWhiteListRE)
     )
     .join("/");
-};
-
-module.exports.WHITELIST_RE = WHITELIST_RE;
+}

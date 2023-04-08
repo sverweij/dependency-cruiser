@@ -1,8 +1,13 @@
-const chalk = require("chalk");
-const figures = require("figures");
-const { findRuleByName } = require("../graph-utl/rule-set");
-const wrapAndIndent = require("../utl/wrap-and-indent");
-const utl = require("./utl/index.js");
+import chalk from "chalk";
+import figures from "figures";
+import ruleSet from "../graph-utl/rule-set.js";
+import wrapAndIndent from "../utl/wrap-and-indent.mjs";
+import {
+  formatPercentage,
+  formatViolation as _formatViolation,
+} from "./utl/index.mjs";
+
+const { findRuleByName } = ruleSet;
 
 const SEVERITY2CHALK = {
   error: chalk.red,
@@ -47,11 +52,9 @@ function formatReachabilityViolation(pViolation) {
 function formatInstabilityViolation(pViolation) {
   return `${formatDependencyViolation(pViolation)}\n${wrapAndIndent(
     chalk.dim(
-      `instability: ${utl.formatPercentage(
-        pViolation.metrics.from.instability
-      )} ${figures.arrowRight} ${utl.formatPercentage(
-        pViolation.metrics.to.instability
-      )}`
+      `instability: ${formatPercentage(pViolation.metrics.from.instability)} ${
+        figures.arrowRight
+      } ${formatPercentage(pViolation.metrics.to.instability)}`
     ),
     EXTRA_PATH_INFORMATION_INDENT
   )}`;
@@ -65,7 +68,7 @@ function formatViolation(pViolation) {
     reachability: formatReachabilityViolation,
     instability: formatInstabilityViolation,
   };
-  const lFormattedViolators = utl.formatViolation(
+  const lFormattedViolators = _formatViolation(
     pViolation,
     lViolationType2Formatter,
     formatDependencyViolation
@@ -149,16 +152,16 @@ function report(pResults, pLong) {
  * - for each violation a message stating the violation name and the to and from
  * - a summary with total number of errors and warnings found, and the total
  *   number of files cruised
- * @param {import("../../types/cruise-result").ICruiseResult} pResults -
+ * @param {import("../../types/cruise-result.js").ICruiseResult} pResults -
  * @param {any} pOptions - An object with options;
  *                         {boolean} long - whether or not to include an explanation
  *                                          (/ comment) which each violation
- * @returns {import("../..").IReporterOutput} - output: the formatted text in a string
+ * @returns {import("../../types/dependency-cruiser.js").IReporterOutput} - output: the formatted text in a string
  *                              exitCode: the number of errors found
  */
-module.exports = function error(pResults, pOptions) {
+export default function error(pResults, pOptions) {
   return {
     output: report(pResults, (pOptions || {}).long),
     exitCode: pResults.summary.error,
   };
-};
+}

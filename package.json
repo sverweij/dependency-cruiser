@@ -67,7 +67,7 @@
     },
     "./sample-reporter-plugin": "./configs/plugins/stats-reporter-plugin.js",
     "./sample-3d-reporter-plugin": "./configs/plugins/3d-reporter-plugin.js",
-    "./mermaid-reporter-plugin": "./src/report/mermaid.js"
+    "./mermaid-reporter-plugin": "./src/report/mermaid.mjs"
   },
   "types": "types/dependency-cruiser.d.ts",
   "files": [
@@ -153,15 +153,15 @@
     "acorn-loose": "8.3.0",
     "acorn-walk": "8.2.0",
     "ajv": "8.12.0",
-    "chalk": "^4.1.2",
+    "chalk": "5.2.0",
     "commander": "10.0.0",
     "enhanced-resolve": "5.12.0",
-    "figures": "^3.2.0",
+    "figures": "5.0.0",
     "get-stream": "^6.0.1",
     "glob": "9.3.2",
     "handlebars": "4.7.7",
     "ignore": "5.2.4",
-    "indent-string": "^4.0.0",
+    "indent-string": "5.0.0",
     "interpret": "^3.1.1",
     "is-installed-globally": "0.4.0",
     "json5": "2.2.3",
@@ -174,7 +174,7 @@
     "teamcity-service-messages": "0.1.14",
     "tsconfig-paths-webpack-plugin": "4.0.1",
     "watskeburt": "0.10.1",
-    "wrap-ansi": "^7.0.0"
+    "wrap-ansi": "8.1.0"
   },
   "devDependencies": {
     "@babel/core": "7.21.4",
@@ -220,21 +220,6 @@
   "upem": {
     "policies": [
       {
-        "package": "chalk",
-        "policy": "wanted",
-        "because": "version 5 only exports esm - and we use cjs and don't transpile"
-      },
-      {
-        "package": "figures",
-        "policy": "wanted",
-        "because": "version 4 only exports esm - and we use cjs and don't transpile"
-      },
-      {
-        "package": "indent-string",
-        "policy": "wanted",
-        "because": "version 5 only exports esm - and we use cjs and don't transpile"
-      },
-      {
         "package": "interpret",
         "policy": "wanted",
         "because": "we want to keep interpret ~similar to what webpack-cli uses (which is ^3.1.1 since 2022-11-15). See https://github.com/webpack/webpack-cli/blame/master/packages/webpack-cli/package.json"
@@ -243,11 +228,6 @@
         "package": "rechoir",
         "policy": "wanted",
         "because": "we want to keep rechoir ~similar to what webpack-cli uses (which is ^0.8.0 since 2022-11-15). See https://github.com/webpack/webpack-cli/blame/master/packages/webpack-cli/package.json"
-      },
-      {
-        "package": "wrap-ansi",
-        "policy": "wanted",
-        "because": "version 8 only exports esm - and we use cjs and don't transpile"
       }
     ]
   },

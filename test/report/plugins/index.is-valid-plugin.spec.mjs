@@ -1,5 +1,5 @@
 import { expect } from "chai";
-import { isValidPlugin } from "../../../src/report/plugins.js";
+import { isValidPlugin } from "../../../src/report/plugins.mjs";
 
 describe("[U] report/plugins - isValidPlugin", () => {
   it("returns false when the plugin's function doesn't return an exit code attribute", async () => {

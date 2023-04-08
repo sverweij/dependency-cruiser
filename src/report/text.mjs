@@ -1,5 +1,5 @@
-const figures = require("figures");
-const { underline: highlight } = require("chalk");
+import figures from "figures";
+import chalk from "chalk";
 
 const DEFAULT_OPTIONS = {
   highlightFocused: false,
@@ -36,7 +36,7 @@ function toFlatDependencies(pModules, pModulesInFocus, pHighlightFocused) {
 }
 
 function stringifyModule(pModule) {
-  return pModule.highlight ? highlight(pModule.name) : pModule.name;
+  return pModule.highlight ? chalk.underline(pModule.name) : pModule.name;
 }
 
 function stringify(pFlatDependency) {
@@ -82,11 +82,11 @@ function report(pResults, pOptions) {
  * - for each dependency the from and the two, separated by an arrow.
  * @param {import("../../types/cruise-result").ICruiseResult} pResults
  * @param {import("../../types/reporter-options").ITextReporterOptions} pOptions
- * @returns {import("../..").IReporterOutput}
+ * @returns {import("../../types/dependency-cruiser").IReporterOutput}
  */
-module.exports = function text(pResults, pOptions) {
+export default function text(pResults, pOptions) {
   return {
     output: report(pResults, pOptions || {}),
     exitCode: 0,
   };
-};
+}

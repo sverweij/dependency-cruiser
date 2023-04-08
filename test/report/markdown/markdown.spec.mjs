@@ -1,5 +1,5 @@
 import { expect } from "chai";
-import markdown from "../../../src/report/markdown.js";
+import markdown from "../../../src/report/markdown.mjs";
 import everythingFineResult from "./__mocks__/everything-fine.mjs";
 import validationMoreThanOnce from "./__mocks__/violation-more-than-once.mjs";
 import validationMoreThanOnceWithAnIgnore from "./__mocks__/violation-more-than-once-with-an-ignore.mjs";

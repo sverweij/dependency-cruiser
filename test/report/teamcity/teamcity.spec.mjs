@@ -1,7 +1,7 @@
 import { readFileSync } from "node:fs";
 import { fileURLToPath } from "node:url";
 import { expect } from "chai";
-import render from "../../../src/report/teamcity.js";
+import render from "../../../src/report/teamcity.mjs";
 import okdeps from "./__mocks__/everything-fine.mjs";
 import moduleErrs from "./__mocks__/module-errors.mjs";
 import requiredErrs from "./__mocks__/required-errors.mjs";

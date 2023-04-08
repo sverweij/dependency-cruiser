@@ -1,6 +1,6 @@
 import { expect } from "chai";
-import anonymizePath from "../../../src/report/anon/anonymize-path.js";
-import { clearCache } from "../../../src/report/anon/anonymize-path-element.js";
+import { anonymizePath } from "../../../src/report/anon/anonymize-path.mjs";
+import { clearCache } from "../../../src/report/anon/anonymize-path-element.mjs";
 
 describe("[U] report/anon/anonymizePath", () => {
   beforeEach(() => {
