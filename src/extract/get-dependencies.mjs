@@ -11,8 +11,10 @@ import extractSwcDeps from "./ast-extractors/extract-swc-deps.mjs";
 import toJavascriptAST from "./parse/to-javascript-ast.mjs";
 import toTypescriptAST from "./parse/to-typescript-ast.mjs";
 import toSwcAST from "./parse/to-swc-ast.mjs";
-import detectPreCompilationNess from "./utl/detect-pre-compilation-ness.mjs";
-import extractModuleAttributes from "./utl/extract-module-attributes.mjs";
+import {
+  detectPreCompilationNess,
+  extractModuleAttributes,
+} from "./helpers.mjs";
 
 function extractFromSwcAST({ baseDir, exoticRequireStrings }, pFileName) {
   return extractSwcDeps(

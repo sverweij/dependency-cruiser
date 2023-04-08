@@ -1,7 +1,7 @@
 import { expect } from "chai";
-import { dependenciesEqual } from "../../../src/extract/utl/compare.mjs";
+import { dependenciesEqual } from "../../src/extract/helpers.mjs";
 
-describe("[U] extract/utl/compare - dependencyEquals", () => {
+describe("[U] extract/helpers - dependencyEqual", () => {
   it("two empty dependencies are equal", () => {
     expect(dependenciesEqual({})({})).to.equal(true);
   });
