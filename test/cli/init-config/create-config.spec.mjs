@@ -3,7 +3,7 @@ import { tmpdir } from "node:os";
 import { join } from "node:path/posix";
 import { expect, use } from "chai";
 import chaiJsonSchema from "chai-json-schema";
-import buildConfig from "../../../src/cli/init-config/build-config.cjs";
+import buildConfig from "../../../src/cli/init-config/build-config.mjs";
 import normalizeInitOptions from "../../../src/cli/init-config/normalize-init-options.mjs";
 import configurationSchema from "../../../src/schema/configuration.schema.mjs";
 import deleteDammit from "../delete-dammit.utl.cjs";

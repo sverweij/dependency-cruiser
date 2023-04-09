@@ -1,7 +1,7 @@
 // @ts-check
 import { PACKAGE_MANIFEST as _PACKAGE_MANIFEST } from "../defaults.mjs";
 import normalizeInitOptions from "./normalize-init-options.mjs";
-import buildConfig from "./build-config.cjs";
+import buildConfig from "./build-config.mjs";
 import writeConfig from "./write-config.mjs";
 import getUserInput from "./get-user-input.mjs";
 import {
