@@ -1,6 +1,6 @@
 import chalk from "chalk";
 import figures from "figures";
-import busLogLevels from "../../utl/bus-log-levels.js";
+import busLogLevels from "../../utl/bus-log-levels.mjs";
 
 const FULL_ON = 100;
 

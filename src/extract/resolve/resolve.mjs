@@ -1,5 +1,5 @@
 import enhancedResolve from "enhanced-resolve";
-import pathToPosix from "../../utl/path-to-posix.js";
+import pathToPosix from "../../utl/path-to-posix.mjs";
 import { stripQueryParameters } from "../helpers.mjs";
 
 let gResolvers = {};

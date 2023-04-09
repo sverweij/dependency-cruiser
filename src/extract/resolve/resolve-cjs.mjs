@@ -1,6 +1,6 @@
 import { relative } from "node:path";
 import { builtinModules } from "node:module";
-import pathToPosix from "../../utl/path-to-posix.js";
+import pathToPosix from "../../utl/path-to-posix.mjs";
 import { isFollowable } from "./module-classifiers.mjs";
 import { resolve } from "./resolve.mjs";
 

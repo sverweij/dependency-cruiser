@@ -11,7 +11,7 @@
  * @param {string} pActualPath
  * @returns {string[]|null}
  */
-function extractGroups(pFromRestriction, pActualPath) {
+export function extractGroups(pFromRestriction, pActualPath) {
   let lReturnValue = [];
 
   if (pFromRestriction.path) {
@@ -46,7 +46,7 @@ function extractGroups(pFromRestriction, pActualPath) {
  * @returns {string} pString with the matching groups replaced with the
  * groups from pExtractedgroups
  */
-function replaceGroupPlaceholders(pString, pExtractedGroups) {
+export function replaceGroupPlaceholders(pString, pExtractedGroups) {
   return pExtractedGroups.reduce(
     (pAll, pThis, pIndex) =>
       // eslint-disable-next-line security/detect-non-literal-regexp
@@ -55,7 +55,7 @@ function replaceGroupPlaceholders(pString, pExtractedGroups) {
   );
 }
 
-module.exports = {
+export default {
   extractGroups,
   replaceGroupPlaceholders,
 };

@@ -100,8 +100,8 @@
   },
   {
     "type": "module",
-    "from": "src/utl/array-util.js",
-    "to": "src/utl/array-util.js",
+    "from": "src/utl/array-util.mjs",
+    "to": "src/utl/array-util.mjs",
     "rule": {
       "severity": "info",
       "name": "utl-module-not-shared-enough"
@@ -109,8 +109,8 @@
   },
   {
     "type": "module",
-    "from": "src/utl/find-all-files.js",
-    "to": "src/utl/find-all-files.js",
+    "from": "src/utl/find-all-files.mjs",
+    "to": "src/utl/find-all-files.mjs",
     "rule": {
       "severity": "info",
       "name": "utl-module-not-shared-enough"

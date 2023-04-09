@@ -1,7 +1,7 @@
-const { readdirSync, statSync, readFileSync } = require("node:fs");
-const { join } = require("node:path");
-const ignore = require("ignore");
-const pathToPosix = require("./path-to-posix");
+import { readdirSync, statSync, readFileSync } from "node:fs";
+import { join } from "node:path";
+import ignore from "ignore";
+import pathToPosix from "./path-to-posix.mjs";
 
 /**
  * @typedef {(pString:string, pIndex: number, pArray: string[]) => boolean} FilterFunctionType
@@ -82,7 +82,7 @@ function identityFilter(_pString, _pIndex, _pArray) {
  * @param {{baseDir: string; ignoreFileContents?: string; additionalIgnorePatterns?: string[]; excludeFilterFn?: FilterFunctionType; includeOnlyFilterFn?: FilterFunctionType}} pOptions
  * @returns {string[]}
  */
-module.exports = function findAllFiles(
+export default function findAllFiles(
   pDirectoryName,
   {
     baseDir,
@@ -106,4 +106,4 @@ module.exports = function findAllFiles(
     excludeFilterFn: excludeFilterFn ?? identityFilter,
     includeOnlyFilterFn: includeOnlyFilterFn ?? identityFilter,
   });
-};
+}

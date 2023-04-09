@@ -1,5 +1,5 @@
-import bus from "../utl/bus.js";
-import busLogLevels from "../utl/bus-log-levels.js";
+import bus from "../utl/bus.mjs";
+import busLogLevels from "../utl/bus-log-levels.mjs";
 import isSameViolation from "./summarize/is-same-violation.mjs";
 
 function softenModuleViolation(

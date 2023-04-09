@@ -1,13 +1,9 @@
 /* eslint-disable security/detect-object-injection, no-inline-comments */
-
 import cloneDeep from "lodash/cloneDeep.js";
-
 import has from "lodash/has.js";
 import matchers from "../../validate/matchers.mjs";
-import regexUtil from "../../utl/regex-util.js";
+import { extractGroups } from "../../utl/regex-util.mjs";
 import IndexedModuleGraph from "../../graph-utl/indexed-module-graph.mjs";
-
-const { extractGroups } = regexUtil;
 
 function getReachableRules(pRuleSet) {
   return (pRuleSet?.forbidden ?? [])

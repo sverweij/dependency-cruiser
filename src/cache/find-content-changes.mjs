@@ -1,7 +1,7 @@
 import { join } from "node:path/posix";
-import bus from "../utl/bus.js";
-import busLogLevels from "../utl/bus-log-levels.js";
-import findAllFiles from "../utl/find-all-files.js";
+import bus from "../utl/bus.mjs";
+import busLogLevels from "../utl/bus-log-levels.mjs";
+import findAllFiles from "../utl/find-all-files.mjs";
 import {
   getFileHash,
   excludeFilter,

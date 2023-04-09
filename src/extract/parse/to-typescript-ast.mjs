@@ -4,7 +4,7 @@ import tryImport from "semver-try-require";
 import memoize from "lodash/memoize.js";
 import meta from "../../meta.js";
 import transpile from "../transpile/index.mjs";
-import getExtension from "../../utl/get-extension.js";
+import getExtension from "../../utl/get-extension.mjs";
 
 /** @type {import('typescript')} */
 const typescript = await tryImport(

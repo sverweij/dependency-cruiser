@@ -1,6 +1,6 @@
 import { win32, posix } from "node:path";
 import { expect } from "chai";
-import pathToPosix from "../../src/utl/path-to-posix.js";
+import pathToPosix from "../../src/utl/path-to-posix.mjs";
 
 describe("[U] utl/pathToPosix on win32", () => {
   it('transforms win32 style paths to posix ones: ""', () => {

@@ -1,5 +1,5 @@
-import bus from "../utl/bus.js";
-import busLogLevels from "../utl/bus-log-levels.js";
+import bus from "../utl/bus.mjs";
+import busLogLevels from "../utl/bus-log-levels.mjs";
 import addFocus from "../graph-utl/add-focus.mjs";
 import IndexedModuleGraph from "../graph-utl/indexed-module-graph.mjs";
 import deriveCycles from "./derive/circular.mjs";

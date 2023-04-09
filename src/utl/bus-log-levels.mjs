@@ -1,4 +1,4 @@
-module.exports = {
+export default {
   OFF: -1,
   SUMMARY: 40,
   INFO: 50,
