@@ -1,5 +1,5 @@
-const consolidateModules = require("./consolidate-modules");
-const consolidateModuleDependencies = require("./consolidate-module-dependencies");
+import consolidateModules from "./consolidate-modules.mjs";
+import consolidateModuleDependencies from "./consolidate-module-dependencies.mjs";
 
 function squashDependencyToPattern(pCollapsePattern) {
   return (pDependency) => {
@@ -44,8 +44,8 @@ function squashModuleToPattern(pCollapsePattern) {
   };
 }
 
-module.exports = function consolidateToPattern(pModules, pCollapsePattern) {
+export default function consolidateToPattern(pModules, pCollapsePattern) {
   return consolidateModules(
     pModules.map(squashModuleToPattern(pCollapsePattern))
   ).map(consolidateModuleDependencies);
-};
+}

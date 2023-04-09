@@ -1,5 +1,5 @@
 import { expect } from "chai";
-import { violations } from "../../src/graph-utl/compare.js";
+import { violations } from "../../src/graph-utl/compare.mjs";
 
 describe("[U] graph-utl/compare - violations", () => {
   const lViolation = {

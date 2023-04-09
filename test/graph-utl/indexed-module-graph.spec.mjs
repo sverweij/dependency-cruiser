@@ -1,6 +1,6 @@
 /* eslint-disable no-magic-numbers */
 import { expect } from "chai";
-import IndexedModuleGraph from "../../src/graph-utl/indexed-module-graph.js";
+import IndexedModuleGraph from "../../src/graph-utl/indexed-module-graph.mjs";
 import unIndexedModules from "./__mocks__/un-indexed-modules.mjs";
 import unIndexedModulesWithoutDependents from "./__mocks__/un-indexed-modules-without-dependents.mjs";
 import cycleInputGraphs from "./__mocks__/cycle-input-graphs.mjs";

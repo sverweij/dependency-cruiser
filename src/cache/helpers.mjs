@@ -3,9 +3,7 @@ import { createHash } from "node:crypto";
 import { readFileSync } from "node:fs";
 import path from "node:path";
 import memoize from "lodash/memoize.js";
-import matchFacade from "../graph-utl/match-facade.js";
-
-const { filenameMatchesPattern } = matchFacade;
+import { filenameMatchesPattern } from "../graph-utl/match-facade.mjs";
 
 /**
  * @param {string} pString

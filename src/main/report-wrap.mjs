@@ -1,9 +1,9 @@
 import has from "lodash/has.js";
-import filterBank from "../graph-utl/filter-bank.js";
+import { applyFilters } from "../graph-utl/filter-bank.mjs";
 import summarize from "../enrich/summarize/index.mjs";
-import consolidateToPattern from "../graph-utl/consolidate-to-pattern.js";
-import compare from "../graph-utl/compare.js";
-import stripSelfTransitions from "../graph-utl/strip-self-transitions.js";
+import consolidateToPattern from "../graph-utl/consolidate-to-pattern.mjs";
+import compare from "../graph-utl/compare.mjs";
+import stripSelfTransitions from "../graph-utl/strip-self-transitions.mjs";
 import report from "../report/index.mjs";
 
 /**
@@ -13,7 +13,7 @@ import report from "../report/index.mjs";
  * @returns {import('../../types/dependency-cruiser.js').ICruiseResult}
  */
 function reSummarizeResults(pResult, pFormatOptions) {
-  let lModules = filterBank.applyFilters(pResult.modules, pFormatOptions);
+  let lModules = applyFilters(pResult.modules, pFormatOptions);
 
   if (has(pFormatOptions, "collapse")) {
     lModules = consolidateToPattern(lModules, pFormatOptions.collapse)

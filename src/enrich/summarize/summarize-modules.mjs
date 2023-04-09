@@ -1,11 +1,9 @@
 import flattenDeep from "lodash/flattenDeep.js";
 import has from "lodash/has.js";
 import uniqWith from "lodash/uniqWith.js";
-import graphUtlRuleSet from "../../graph-utl/rule-set.js";
-import compare from "../../graph-utl/compare.js";
+import { findRuleByName } from "../../graph-utl/rule-set.mjs";
+import compare from "../../graph-utl/compare.mjs";
 import isSameViolation from "./is-same-violation.mjs";
-
-const { findRuleByName } = graphUtlRuleSet;
 
 function cutNonTransgressions(pModule) {
   return {

@@ -1,7 +1,7 @@
-const clone = require("lodash/clone");
-const _reject = require("lodash/reject");
-const uniq = require("lodash/uniq");
-const compare = require("./compare");
+import clone from "lodash/clone.js";
+import _reject from "lodash/reject.js";
+import uniq from "lodash/uniq.js";
+import compare from "./compare.mjs";
 
 function mergeDependency(pLeftDependency, pRightDependency) {
   return {
@@ -47,9 +47,9 @@ function consolidateDependencies(pDependencies) {
   return lReturnValue;
 }
 
-module.exports = function consolidateModuleDependencies(pModule) {
+export default function consolidateModuleDependencies(pModule) {
   return {
     ...pModule,
     dependencies: consolidateDependencies(pModule.dependencies),
   };
-};
+}

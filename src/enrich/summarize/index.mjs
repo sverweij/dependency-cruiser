@@ -1,4 +1,4 @@
-import compare from "../../graph-utl/compare.js";
+import compare from "../../graph-utl/compare.mjs";
 import addRuleSetUsed from "./add-rule-set-used.mjs";
 import summarizeModules from "./summarize-modules.mjs";
 import summarizeFolders from "./summarize-folders.mjs";

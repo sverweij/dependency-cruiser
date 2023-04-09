@@ -1,5 +1,5 @@
 /* eslint-disable security/detect-object-injection */
-module.exports = class IndexedModuleGraph {
+export default class IndexedModuleGraph {
   init(pModules, pIndexAttribute) {
     this.indexedGraph = new Map(
       pModules.map((pModule) => [pModule[pIndexAttribute], pModule])
@@ -176,4 +176,4 @@ module.exports = class IndexedModuleGraph {
       return pAll;
     }, []);
   }
-};
+}

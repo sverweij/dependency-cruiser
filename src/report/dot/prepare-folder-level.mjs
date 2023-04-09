@@ -1,6 +1,6 @@
-import consolidateToFolder from "../../graph-utl/consolidate-to-folder.js";
-import compare from "../../graph-utl/compare.js";
-import stripSelfTransitions from "../../graph-utl/strip-self-transitions.js";
+import consolidateToFolder from "../../graph-utl/consolidate-to-folder.mjs";
+import compare from "../../graph-utl/compare.mjs";
+import stripSelfTransitions from "../../graph-utl/strip-self-transitions.mjs";
 import moduleUtl from "./module-utl.mjs";
 
 export default function prepareFolderLevel(pResults, pTheme, _, pShowMetrics) {

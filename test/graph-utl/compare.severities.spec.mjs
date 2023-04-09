@@ -1,5 +1,5 @@
 import { expect } from "chai";
-import { severities } from "../../src/graph-utl/compare.js";
+import { severities } from "../../src/graph-utl/compare.mjs";
 
 describe("[U] graph-utl/compare - severities", () => {
   it("returns 0 for identical severities", () => {

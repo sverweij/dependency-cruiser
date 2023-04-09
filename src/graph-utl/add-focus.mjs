@@ -1,6 +1,6 @@
-const has = require("lodash/has");
-const IndexedModuleGraph = require("./indexed-module-graph");
-const { moduleMatchesFilter } = require("./match-facade");
+import has from "lodash/has.js";
+import IndexedModuleGraph from "./indexed-module-graph.mjs";
+import { moduleMatchesFilter } from "./match-facade.mjs";
 
 function getFocusModules(pModules, pFilter) {
   return pModules.filter((pModule) => moduleMatchesFilter(pModule, pFilter));
@@ -21,13 +21,14 @@ function scrub(pModuleNamesSet) {
     ),
   });
 }
+
 /**
  *
- * @param {import("../..").IModule[]} pModules
- * @param {import("../../types/strict-filter-types").IStrictFocusType} pFilter
+ * @param {import("../../types/dependency-cruiser.js").IModule[]} pModules
+ * @param {import("../../types/strict-filter-types.js").IStrictFocusType} pFilter
  * @returns
  */
-module.exports = function addFocus(pModules, pFilter) {
+export default function addFocus(pModules, pFilter) {
   if (has(pFilter, "path")) {
     const lDepth = typeof pFilter.depth === "undefined" ? 1 : pFilter.depth;
     const lFocusedModuleNames = getFocusModules(pModules, pFilter).map(
@@ -55,4 +56,4 @@ module.exports = function addFocus(pModules, pFilter) {
       .map(tag(lFocusedModuleNamesSet));
   }
   return pModules;
-};
+}

@@ -1,6 +1,6 @@
-import consolidateToPattern from "../../graph-utl/consolidate-to-pattern.js";
-import compare from "../../graph-utl/compare.js";
-import stripSelfTransitions from "../../graph-utl/strip-self-transitions.js";
+import consolidateToPattern from "../../graph-utl/consolidate-to-pattern.mjs";
+import compare from "../../graph-utl/compare.mjs";
+import stripSelfTransitions from "../../graph-utl/strip-self-transitions.mjs";
 import moduleUtl from "./module-utl.mjs";
 
 export default function prepareCustomLevel(

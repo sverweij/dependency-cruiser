@@ -1,13 +1,11 @@
 import chalk from "chalk";
 import figures from "figures";
-import ruleSet from "../graph-utl/rule-set.js";
+import { findRuleByName } from "../graph-utl/rule-set.mjs";
 import wrapAndIndent from "../utl/wrap-and-indent.mjs";
 import {
   formatPercentage,
   formatViolation as _formatViolation,
 } from "./utl/index.mjs";
-
-const { findRuleByName } = ruleSet;
 
 const SEVERITY2CHALK = {
   error: chalk.red,

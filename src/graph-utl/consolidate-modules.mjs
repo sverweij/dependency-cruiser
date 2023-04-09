@@ -1,7 +1,7 @@
-const clone = require("lodash/clone");
-const _reject = require("lodash/reject");
-const uniqBy = require("lodash/uniqBy");
-const compare = require("./compare");
+import clone from "lodash/clone.js";
+import _reject from "lodash/reject.js";
+import uniqBy from "lodash/uniqBy.js";
+import compare from "./compare.mjs";
 
 function mergeModule(pLeftModule, pRightModule) {
   return {
@@ -34,7 +34,7 @@ function mergeModules(pSourceString, pModules) {
     );
 }
 
-module.exports = function consolidateModules(pModules) {
+export default function consolidateModules(pModules) {
   let lModules = clone(pModules);
   let lReturnValue = [];
 
@@ -43,4 +43,4 @@ module.exports = function consolidateModules(pModules) {
     lModules = _reject(lModules, { source: lModules[0].source });
   }
   return lReturnValue;
-};
+}
