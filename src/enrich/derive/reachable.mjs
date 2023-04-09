@@ -1,10 +1,13 @@
 /* eslint-disable security/detect-object-injection, no-inline-comments */
 
-const cloneDeep = require("lodash/cloneDeep");
-const has = require("lodash/has");
-const matchers = require("../../validate/matchers");
-const { extractGroups } = require("../../utl/regex-util");
-const IndexedModuleGraph = require("../../graph-utl/indexed-module-graph");
+import cloneDeep from "lodash/cloneDeep.js";
+
+import has from "lodash/has.js";
+import matchers from "../../validate/matchers.js";
+import regexUtil from "../../utl/regex-util.js";
+import IndexedModuleGraph from "../../graph-utl/indexed-module-graph.js";
+
+const { extractGroups } = regexUtil;
 
 function getReachableRules(pRuleSet) {
   return (pRuleSet?.forbidden ?? [])
@@ -175,7 +178,7 @@ function addReachabilityToGraph(pGraph, pIndexedGraph, pReachableRule) {
   });
 }
 
-module.exports = function deriveReachables(pGraph, pRuleSet) {
+export default function deriveReachables(pGraph, pRuleSet) {
   const lReachableRules = pRuleSet ? getReachableRules(pRuleSet) : [];
   const lIndexedGraph =
     lReachableRules.length > 0 ? new IndexedModuleGraph(pGraph) : {};
@@ -185,4 +188,4 @@ module.exports = function deriveReachables(pGraph, pRuleSet) {
       addReachabilityToGraph(pReturnGraph, lIndexedGraph, pRule),
     cloneDeep(pGraph)
   );
-};
+}

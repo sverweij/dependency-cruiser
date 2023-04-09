@@ -1,6 +1,6 @@
 import { expect } from "chai";
 import normalize from "../../../src/main/rule-set/normalize.mjs";
-import addReachability from "../../../src/enrich/derive/reachable.js";
+import addReachability from "../../../src/enrich/derive/reachable.mjs";
 import clearExtractCaches from "../../../src/extract/clear-caches.mjs";
 
 const GRAPH = [

@@ -1,4 +1,4 @@
-const has = require("lodash/has");
+import has from "lodash/has.js";
 
 const SHAREABLE_OPTIONS = [
   "babelConfig",
@@ -67,12 +67,12 @@ function makeIncludeOnlyBackwardsCompatible(pOptions) {
     : pOptions;
 }
 
-module.exports = function summarizeOptions(pFileDirectoryArray, pOptions) {
+export default function summarizeOptions(pFileDirectoryArray, pOptions) {
   return {
     optionsUsed: {
       ...makeOptionsPresentable(makeIncludeOnlyBackwardsCompatible(pOptions)),
       args: pFileDirectoryArray.join(" "),
     },
   };
-};
+}
 /* eslint security/detect-object-injection: 0 */

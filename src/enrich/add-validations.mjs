@@ -1,4 +1,4 @@
-const validate = require("../validate");
+import validate from "../validate/index.js";
 
 function addDependencyViolations(pModule, pDependency, pRuleSet, pValidate) {
   return {
@@ -8,19 +8,20 @@ function addDependencyViolations(pModule, pDependency, pRuleSet, pValidate) {
       : { valid: true }),
   };
 }
+
 /**
  * Runs through all dependencies, validates them
  * - when there's a transgression: adds it
  * - when everything is hunky-dory: adds the dependency is valid
  *
- * @param  {Partial<import("../../types/cruise-result").IModule>[]} pModules array of modules
- * @param  {import("../../types/rule-set").IFlattenedRuleSet} pRuleSet normalized & validated rule set
+ * @param  {Partial<import("../../types/cruise-result.js").IModule>[]} pModules array of modules
+ * @param  {import("../../types/rule-set.js").IFlattenedRuleSet} pRuleSet normalized & validated rule set
  * @param {boolean} pValidate - whether or not to validate (typically you want to pass 'true' here)
- * @return {import("../../types/cruise-result").IModule[]} the same array of modules, with for each
+ * @return {import("../../types/cruise-result.js").IModule[]} the same array of modules, with for each
  *                  of them added whether or not it is
  *                  valid and if not which rules were violated
  */
-module.exports = function addValidations(pModules, pRuleSet, pValidate) {
+export default function addValidations(pModules, pRuleSet, pValidate) {
   return pModules.map((pModule) => ({
     ...pModule,
     ...(pValidate ? validate.module(pRuleSet, pModule) : { valid: true }),
@@ -28,4 +29,4 @@ module.exports = function addValidations(pModules, pRuleSet, pValidate) {
       addDependencyViolations(pModule, pDependency, pRuleSet, pValidate)
     ),
   }));
-};
+}

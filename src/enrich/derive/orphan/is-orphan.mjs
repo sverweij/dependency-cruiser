@@ -1,6 +1,6 @@
-const { isDependent } = require("../module-utl");
+import { isDependent } from "../module-utl.mjs";
 
-module.exports = function isOrphan(pModule, pGraph) {
+export default function isOrphan(pModule, pGraph) {
   if (pModule.dependencies.length > 0) {
     return false;
   }
@@ -11,4 +11,4 @@ module.exports = function isOrphan(pModule, pGraph) {
   }
   // ... otherwise calculate them
   return !pGraph.some(isDependent(pModule.source));
-};
+}

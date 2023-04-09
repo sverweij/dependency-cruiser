@@ -1,8 +1,8 @@
-const isOrphan = require("./is-orphan");
+import isOrphan from "./is-orphan.mjs";
 
-module.exports = function deriveOrphans(pModules) {
+export default function deriveOrphans(pModules) {
   return pModules.map((pModule) => ({
     ...pModule,
     orphan: isOrphan(pModule, pModules),
   }));
-};
+}

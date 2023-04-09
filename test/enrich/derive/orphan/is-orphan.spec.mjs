@@ -1,6 +1,6 @@
 import { expect } from "chai";
 
-import isOrphan from "../../../../src/enrich/derive/orphan/is-orphan.js";
+import isOrphan from "../../../../src/enrich/derive/orphan/is-orphan.mjs";
 import ONE_MODULE_FIXTURE from "./__mocks__/one-module.mjs";
 import TWO_MODULES_FIXTURE from "./__mocks__/two-module.mjs";
 

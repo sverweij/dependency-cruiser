@@ -1,9 +1,11 @@
-const _flattenDeep = require("lodash/flattenDeep");
-const has = require("lodash/has");
-const uniqWith = require("lodash/uniqWith");
-const { findRuleByName } = require("../../graph-utl/rule-set");
-const compare = require("../../graph-utl/compare");
-const isSameViolation = require("./is-same-violation");
+import flattenDeep from "lodash/flattenDeep.js";
+import has from "lodash/has.js";
+import uniqWith from "lodash/uniqWith.js";
+import graphUtlRuleSet from "../../graph-utl/rule-set.js";
+import compare from "../../graph-utl/compare.js";
+import isSameViolation from "./is-same-violation.mjs";
+
+const { findRuleByName } = graphUtlRuleSet;
 
 function cutNonTransgressions(pModule) {
   return {
@@ -69,7 +71,7 @@ function toDependencyViolationSummary(pRule, pModule, pDependency, pRuleSet) {
  * @return {any} an array of violations
  */
 function extractDependencyViolations(pModules, pRuleSet) {
-  return _flattenDeep(
+  return flattenDeep(
     pModules
       .map(cutNonTransgressions)
       .filter((pModule) => pModule.dependencies.length > 0)
@@ -130,11 +132,11 @@ function extractModuleViolations(pModules, pRuleSet) {
     );
 }
 
-module.exports = function summarizeModules(pModules, pRuleSet) {
+export default function summarizeModules(pModules, pRuleSet) {
   return uniqWith(
     extractDependencyViolations(pModules, pRuleSet)
       .concat(extractModuleViolations(pModules, pRuleSet))
       .sort(compare.violations),
     isSameViolation
   );
-};
+}

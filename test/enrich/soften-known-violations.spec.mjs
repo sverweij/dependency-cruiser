@@ -1,5 +1,5 @@
 import { expect } from "chai";
-import softenKnownViolations from "../../src/enrich/soften-known-violations.js";
+import softenKnownViolations from "../../src/enrich/soften-known-violations.mjs";
 
 describe("[U] enrich/soften-known-violations - modules violations", () => {
   /** @type import("../../types/baseline-violations").IBaselineViolations */

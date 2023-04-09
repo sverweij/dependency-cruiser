@@ -32,7 +32,7 @@ function addCircularityCheckToDependency(
  * whether it's (part of a) circular (relationship) and returns the
  * dependencies with that added.
  */
-module.exports = function detectAndAddCycles(
+export default function detectAndAddCycles(
   pNodes,
   pIndexedNodes,
   { pSourceAttribute, pDependencyName }
@@ -48,4 +48,4 @@ module.exports = function detectAndAddCycles(
       )
     ),
   }));
-};
+}
