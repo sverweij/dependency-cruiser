@@ -1,5 +1,5 @@
 import { expect } from "chai";
-import violatesRequiredRule from "../../src/validate/violates-required-rule.js";
+import violatesRequiredRule from "../../src/validate/violates-required-rule.mjs";
 
 const SIMPLE_RULE = {
   module: {

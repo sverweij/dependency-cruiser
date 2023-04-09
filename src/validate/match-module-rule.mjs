@@ -1,14 +1,16 @@
-const has = require("lodash/has");
-const { extractGroups } = require("../utl/regex-util");
-const { isModuleOnlyRule, isFolderScope } = require("./rule-classifiers");
-const matchers = require("./matchers");
+import has from "lodash/has.js";
+import rutl from "../utl/regex-util.js";
+import { isModuleOnlyRule, isFolderScope } from "./rule-classifiers.mjs";
+import matchers from "./matchers.mjs";
+
+const { extractGroups } = rutl;
 
 /**
  * Returns true if pRule is an orphan rule and pModule is an orphan.
  * Returns false in all other cases
  *
- * @param {import("../../types/rule-set").IAnyRuleType} pRule
- * @param {import("../../types/cruise-result").IModule} pModule
+ * @param {import("../../types/rule-set.js").IAnyRuleType} pRule
+ * @param {import("../../types/cruise-result.js").IModule} pModule
  * @returns {boolean}
  */
 function matchesOrphanRule(pRule, pModule) {
@@ -26,8 +28,8 @@ function matchesOrphanRule(pRule, pModule) {
  * criteria.
  * Returns false in all other cases
  *
- * @param {import("../../types/rule-set").IAnyRuleType} pRule
- * @param {import("../../types/cruise-result").IModule} pModule
+ * @param {import("../../types/rule-set.js").IAnyRuleType} pRule
+ * @param {import("../../types/cruise-result.js").IModule} pModule
  * @returns {boolean}
  */
 function matchesReachableRule(pRule, pModule) {
@@ -56,8 +58,8 @@ function matchesReachableRule(pRule, pModule) {
  * criteria.
  * Returns false in all other cases
  *
- * @param {import("../../types/rule-set").IAnyRuleType} pRule
- * @param {import("../../types/cruise-result").IModule} pModule
+ * @param {import("../../types/rule-set.js").IAnyRuleType} pRule
+ * @param {import("../../types/cruise-result.js").IModule} pModule
  * @returns {boolean}
  */
 function matchesReachesRule(pRule, pModule) {
@@ -78,7 +80,7 @@ function matchesReachesRule(pRule, pModule) {
 }
 /**
  *
- * @param {import("../../types/rule-set").IAnyRuleType} pRule
+ * @param {import("../../types/rule-set.js").IAnyRuleType} pRule
  * @param {string[]} pDependents
  * @returns {boolean}
  */
@@ -98,8 +100,8 @@ function dependentsCountsMatch(pRule, pDependents) {
 
 /**
  *
- * @param {import("../../types/rule-set").IAnyRuleType} pRule
- * @param {import("../../types/cruise-result").IModule} pModule
+ * @param {import("../../types/rule-set.js").IAnyRuleType} pRule
+ * @param {import("../../types/cruise-result.js").IModule} pModule
  * @returns {boolean}
  */
 function matchesDependentsRule(pRule, pModule) {
@@ -125,29 +127,26 @@ function matchesDependentsRule(pRule, pModule) {
 
 /**
  *
- * @param {import("../../types/cruise-result").IModule} pModule
- * @returns {(pRule:import("../../types/rule-set").IAnyRuleType) => boolean}
+ * @param {import("../../types/cruise-result.js").IModule} pModule
+ * @returns {(pRule:import("../../types/rule-set.js").IAnyRuleType) => boolean}
  */
 function match(pModule) {
-  return (pRule) => {
-    return (
-      matchesOrphanRule(pRule, pModule) ||
-      matchesReachableRule(pRule, pModule) ||
-      matchesReachesRule(pRule, pModule) ||
-      matchesDependentsRule(pRule, pModule)
-    );
-  };
+  return (pRule) =>
+    matchesOrphanRule(pRule, pModule) ||
+    matchesReachableRule(pRule, pModule) ||
+    matchesReachesRule(pRule, pModule) ||
+    matchesDependentsRule(pRule, pModule);
 }
 
 /**
  *
- * @param {import("../../types/rule-set").IAnyRuleType} pRule
+ * @param {import("../../types/rule-set.js").IAnyRuleType} pRule
  * @returns boolean
  */
 const isInteresting = (pRule) =>
   isModuleOnlyRule(pRule) && !isFolderScope(pRule);
 
-module.exports = {
+export default {
   matchesOrphanRule,
   matchesReachableRule,
   matchesReachesRule,

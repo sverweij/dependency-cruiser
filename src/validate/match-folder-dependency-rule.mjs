@@ -1,9 +1,8 @@
-const {
-  extractGroups,
-  replaceGroupPlaceholders,
-} = require("../utl/regex-util");
-const { isModuleOnlyRule, isFolderScope } = require("./rule-classifiers");
-const matchers = require("./matchers");
+import rutl from "../utl/regex-util.js";
+import { isModuleOnlyRule, isFolderScope } from "./rule-classifiers.mjs";
+import matchers from "./matchers.mjs";
+
+const { extractGroups, replaceGroupPlaceholders } = rutl;
 
 function fromFolderPath(pRule, pFromFolder) {
   return Boolean(!pRule.from.path || pFromFolder.name.match(pRule.from.path));
@@ -31,8 +30,8 @@ function toFolderPathNot(pRule, pToFolder, pGroups) {
 
 /**
  *
- * @param {import("../../types/cruise-result").IFolder} pFromFolder
- * @param {import("../../types/cruise-result").IFolderDependency} pToFolder
+ * @param {import("../../types/cruise-result.js").IFolder} pFromFolder
+ * @param {import("../../types/cruise-result.js").IFolderDependency} pToFolder
  * @returns {(pRule) => boolean}
  */
 function match(pFromFolder, pToFolder) {
@@ -58,7 +57,7 @@ function match(pFromFolder, pToFolder) {
 const isInteresting = (pRule) =>
   isFolderScope(pRule) && !isModuleOnlyRule(pRule);
 
-module.exports = {
+export default {
   match,
   isInteresting,
 };

@@ -1,7 +1,11 @@
 /* eslint-disable security/detect-object-injection */
-const has = require("lodash/has");
-const { intersects } = require("../utl/array-util");
-const { replaceGroupPlaceholders } = require("../utl/regex-util");
+import has from "lodash/has.js";
+
+import rutl from "../utl/regex-util.js";
+import aryutl from "../utl/array-util.js";
+
+const { intersects } = aryutl;
+const { replaceGroupPlaceholders } = rutl;
 
 function propertyEquals(pRule, pDependency, pProperty) {
   // The properties can be booleans, so we can't use !pRule.to[pProperty]
@@ -152,7 +156,7 @@ function matchesMoreThanOneDependencyType(pRule, pDependency) {
   return true;
 }
 
-module.exports = {
+export default {
   replaceGroupPlaceholders,
   propertyEquals,
   propertyMatches,

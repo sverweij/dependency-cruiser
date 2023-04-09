@@ -1,11 +1,12 @@
-const { extractGroups } = require("../utl/regex-util");
-const { isModuleOnlyRule, isFolderScope } = require("./rule-classifiers");
-const matchers = require("./matchers");
+import regexutl from "../utl/regex-util.js";
+import { isModuleOnlyRule, isFolderScope } from "./rule-classifiers.mjs";
+import matchers from "./matchers.mjs";
 
+const { extractGroups } = regexutl;
 /**
  *
- * @param {import("../..").IModule} pFrom
- * @param {import("../..").IDependency} pTo
+ * @param {import("../../types/dependency-cruiser.js").IModule} pFrom
+ * @param {import("../../types/dependency-cruiser.js").IDependency} pTo
  * @returns {(pRule) => boolean}
  */
 function match(pFrom, pTo) {
@@ -55,7 +56,7 @@ function match(pFrom, pTo) {
 const isInteresting = (pRule) =>
   !isModuleOnlyRule(pRule) && !isFolderScope(pRule);
 
-module.exports = {
+export default {
   match,
   isInteresting,
 };

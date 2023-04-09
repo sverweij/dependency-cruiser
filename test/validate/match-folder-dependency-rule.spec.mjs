@@ -1,5 +1,5 @@
 import { expect } from "chai";
-import matchFolderRule from "../../src/validate/match-folder-dependency-rule.js";
+import matchFolderRule from "../../src/validate/match-folder-dependency-rule.mjs";
 
 describe("[I] validate/match-folder-dependency-rule - match generic", () => {
   const lEmptyRule = { scope: "folder", from: {}, to: {} };
