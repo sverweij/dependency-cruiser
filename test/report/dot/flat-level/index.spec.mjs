@@ -3,7 +3,7 @@ import { join } from "node:path";
 import { fileURLToPath } from "node:url";
 import { expect } from "chai";
 import { createRequireJSON } from "../../../backwards.utl.mjs";
-import dot from "../../../../src/report/dot/index.js";
+import dot from "../../../../src/report/dot/index.mjs";
 
 const render = dot("flat");
 const requireJSON = createRequireJSON(import.meta.url);

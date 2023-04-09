@@ -1,7 +1,7 @@
-const cloneDeep = require("lodash/cloneDeep");
-const get = require("lodash/get");
-const has = require("lodash/has");
-const DEFAULT_THEME = require("./default-theme");
+import cloneDeep from "lodash/cloneDeep.js";
+import get from "lodash/get.js";
+import has from "lodash/has.js";
+import DEFAULT_THEME from "./default-theme.mjs";
 
 function matchesRE(pValue, pRE) {
   const lMatchResult = pValue.match && pValue.match(pRE);
@@ -48,7 +48,7 @@ function normalizeTheme(pTheme) {
   return lReturnValue;
 }
 
-module.exports = {
+export default {
   normalizeTheme,
   determineAttributes,
 };

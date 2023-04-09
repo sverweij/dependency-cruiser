@@ -1,4 +1,4 @@
-const random = require("lodash/random");
+import random from "lodash/random.js";
 
 const NUMBER = 0;
 const SEPARATOR = 1;
@@ -39,6 +39,7 @@ function getRandomChar(pChar) {
       return lLowerCaseChars[random(0, lLowerCaseChars.length - 1)];
   }
 }
+
 /**
  * Returns a random string with the same length as pString
  * acii characters - respecting case & numbers + leaving separators
@@ -52,6 +53,6 @@ function getRandomChar(pChar) {
  * @param {string} pString - any string
  * @return {string} - a random string with above specs
  */
-module.exports = function getRandomString(pString) {
+export default function getRandomString(pString) {
   return Array.from(pString).map(getRandomChar).join("");
-};
+}

@@ -2,8 +2,8 @@ import { readFileSync } from "node:fs";
 import { join } from "node:path";
 import { fileURLToPath } from "node:url";
 import { expect } from "chai";
-import defaultTheme from "../../../../src/report/dot/default-theme.js";
-import dot from "../../../../src/report/dot/index.js";
+import defaultTheme from "../../../../src/report/dot/default-theme.mjs";
+import dot from "../../../../src/report/dot/index.mjs";
 import { createRequireJSON } from "../../../backwards.utl.mjs";
 
 const defaultRender = dot();

@@ -1,5 +1,5 @@
 import { expect } from "chai";
-import utl from "../../../src/report/error-html/utl.js";
+import utl from "../../../src/report/error-html/utl.mjs";
 
 function summaryHasMinimalAttributes(pResult) {
   expect(pResult).to.haveOwnProperty("depcruiseVersion");

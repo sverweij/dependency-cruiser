@@ -3,7 +3,7 @@
 import { writeFileSync } from "node:fs";
 import figures from "figures";
 import chalk from "chalk";
-import wrapAndIndent from "../../utl/wrap-and-indent.js";
+import wrapAndIndent from "../../utl/wrap-and-indent.mjs";
 import { PACKAGE_MANIFEST as _PACKAGE_MANIFEST } from "../defaults.mjs";
 import { readManifest } from "./environment-helpers.mjs";
 import { folderNameArrayToRE } from "./utl.cjs";
@@ -21,7 +21,7 @@ const EXPERIMENTAL_SCRIPT_DOC = [
     name: "depcruise:html",
     headline: "npm run depcruise:html",
     description:
-      "validates against the rules in .dependency-cruiser.js and writes it to 'dependendency-violation-report.html' with a friendly layout",
+      "validates against the rules in .dependency-cruiser.js and writes it to 'dependency-violation-report.html' with a friendly layout",
   },
   {
     name: "depcruise:graph",

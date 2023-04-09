@@ -1,4 +1,4 @@
-module.exports = {
+export default {
   graph: {
     rankdir: "LR",
     splines: "true",

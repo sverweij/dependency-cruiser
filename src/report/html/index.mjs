@@ -1,8 +1,7 @@
-const Handlebars = require("handlebars/runtime");
-const dependencyToIncidenceTransformer = require("../utl/dependency-to-incidence-transformer");
+import Handlebars from "handlebars/runtime.js";
+import dependencyToIncidenceTransformer from "../utl/dependency-to-incidence-transformer.mjs";
 
-// eslint-disable-next-line import/no-unassigned-import
-require("./html.template");
+await import("./html.template.js");
 
 function addShowTitle(pDependencyEntry) {
   return {
@@ -25,12 +24,12 @@ function report(pResults) {
 /**
  * Returns the results of a cruise in an 'incidence matrix'
  *
- * @param {import("../../../types/cruise-result").ICruiseResult} pResults
- * @returns {import("../../..").IReporterOutput}
+ * @param {import("../../../types/cruise-result.js").ICruiseResult} pResults
+ * @returns {import("../../../types/dependency-cruiser.js").IReporterOutput}
  */
-module.exports = function html(pResults) {
+export default function html(pResults) {
   return {
     output: report(pResults),
     exitCode: 0,
   };
-};
+}

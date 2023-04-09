@@ -2,7 +2,7 @@ import { readFileSync } from "node:fs";
 import { fileURLToPath } from "node:url";
 import { expect } from "chai";
 import chalk from "chalk";
-import renderText from "../../../src/report/text.js";
+import renderText from "../../../src/report/text.mjs";
 import dependencies from "./__mocks__/dependencies.mjs";
 import cruiseResultWithFocus from "./__mocks__/cruise-result-with-focus.mjs";
 

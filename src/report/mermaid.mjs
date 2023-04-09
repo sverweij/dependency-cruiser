@@ -13,7 +13,7 @@ const renderEdges = (pEdges) =>
   pEdges.map((pEdge) => renderEdge(pEdge.from, pEdge.to)).join("\n");
 
 /**
- * @param {import('../..').ICruiseResult} pCruiseResult
+ * @param {import('../../types/dependency-cruiser').ICruiseResult} pCruiseResult
  * @param {Map<string, string>} pNamesHashMap
  */
 function convertEdgeSources(pCruiseResult, pNamesHashMap) {
@@ -59,7 +59,7 @@ function renderSubgraphs(pSource, pOptions, pDepth = 0) {
 }
 
 /**
- * @param {import('../..').ICruiseResult} pCruiseResult
+ * @param {import('../../types/dependency-cruiser').ICruiseResult} pCruiseResult
  * @param {Map<string, string>} pNamesHashMap
  */
 function convertSubgraphSources(pCruiseResult, pNamesHashMap) {
@@ -151,7 +151,7 @@ function hashModuleNames(pModules, pMinify) {
 }
 
 /**
- * @param {import('../..').ICruiseResult} pCruiseResult
+ * @param {import('../../types/dependency-cruiser').ICruiseResult} pCruiseResult
  * @param {import("../../types/reporter-options").IMermaidReporterOptions} pOptions
  */
 function renderMermaidSource(pCruiseResult, pOptions) {
@@ -170,13 +170,13 @@ ${focusHighlights(pCruiseResult.modules, lNamesHashMap)}`;
 /**
  * mermaid reporter
  *
- * @param {import('../..').ICruiseResult} pCruiseResult
+ * @param {import('../../types/dependency-cruiser').ICruiseResult} pCruiseResult
  * @param {import("../../types/reporter-options").IMermaidReporterOptions} pOptions
- * @return {import('../..').IReporterOutput}
+ * @return {import('../../types/dependency-cruiser').IReporterOutput}
  */
-module.exports = function mermaid(pCruiseResult, pOptions) {
+export default function mermaid(pCruiseResult, pOptions) {
   return {
     output: renderMermaidSource(pCruiseResult, pOptions),
     exitCode: 0,
   };
-};
+}

@@ -1,5 +1,5 @@
-const memoize = require("lodash/memoize");
-const randomString = require("./random-string");
+import memoize from "lodash/memoize.js";
+import randomString from "./random-string.mjs";
 
 function replace(pElement, pIndex, pWordList) {
   return pIndex === 0 ? pWordList.shift() || randomString(pElement) : pElement;
@@ -45,7 +45,7 @@ function replaceFromWordList(pPathElement, pWordList, pCached) {
  * @param {boolean} pCached caches the replaced value, with pPathElement as the key
  * @return {string} the path element, anonymized if it isn't whitelisted
  */
-function anonymizePathElement(
+export function anonymizePathElement(
   pPathElement,
   pWordList = [],
   pWhiteListRE = /^$/g,
@@ -56,14 +56,12 @@ function anonymizePathElement(
     : replaceFromWordList(pPathElement, pWordList, pCached);
 }
 
-module.exports = anonymizePathElement;
-
 /**
  * Clears the path element => replaced value cache
  * Here for testing purposes.
  *
  * @returns {void}
  */
-module.exports.clearCache = () => {
+export function clearCache() {
   replaceCached.cache.clear();
-};
+}

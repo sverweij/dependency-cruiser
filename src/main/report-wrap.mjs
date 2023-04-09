@@ -4,7 +4,7 @@ import summarize from "../enrich/summarize/index.js";
 import consolidateToPattern from "../graph-utl/consolidate-to-pattern.js";
 import compare from "../graph-utl/compare.js";
 import stripSelfTransitions from "../graph-utl/strip-self-transitions.js";
-import report from "../report/index.js";
+import report from "../report/index.mjs";
 
 /**
  *
@@ -45,8 +45,8 @@ function reSummarizeResults(pResult, pFormatOptions) {
  * @param {import("../../types/dependency-cruiser.js").IFormatOptions} pFormatOptions
  * @returns {import("../../types/dependency-cruiser.js").IReporterOutput}
  */
-export default function reportWrap(pResult, pFormatOptions) {
-  const lReportFunction = report.getReporter(pFormatOptions.outputType);
+export default async function reportWrap(pResult, pFormatOptions) {
+  const lReportFunction = await report.getReporter(pFormatOptions.outputType);
   const lReportOptions =
     pResult.summary.optionsUsed?.reporterOptions?.[pFormatOptions.outputType] ??
     {};

@@ -1,3 +1,4 @@
+/* eslint-disable no-return-await */
 /* eslint-disable no-magic-numbers */
 
 import Ajv from "ajv";
@@ -41,13 +42,13 @@ function validateResultAgainstSchema(pResult) {
   }
 }
 /** @type {import("../../types/dependency-cruiser.js").format} */
-export function format(pResult, pFormatOptions = {}) {
+export async function format(pResult, pFormatOptions = {}) {
   const lFormatOptions = normalizeFormatOptions(pFormatOptions);
   validateFormatOptions(lFormatOptions);
 
   validateResultAgainstSchema(pResult);
 
-  return reportWrap(pResult, lFormatOptions);
+  return await reportWrap(pResult, lFormatOptions);
 }
 
 /** @type {import("../../types/dependency-cruiser.js").cruise} */
@@ -78,7 +79,7 @@ export async function cruise(
 
     if (lCache.canServeFromCache(lCruiseOptions, lCachedResults)) {
       bus.emit("progress", "cache: reporting from cache", c(8));
-      return reportWrap(lCachedResults, lCruiseOptions);
+      return await reportWrap(lCachedResults, lCruiseOptions);
     }
   }
 
@@ -121,7 +122,7 @@ export async function cruise(
   }
 
   bus.emit("progress", "reporting", c(8));
-  return reportWrap(lCruiseResult, lCruiseOptions);
+  return await reportWrap(lCruiseResult, lCruiseOptions);
 }
 
 export {

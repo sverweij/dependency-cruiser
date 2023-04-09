@@ -1,7 +1,7 @@
 import { readFileSync } from "node:fs";
 import { fileURLToPath } from "node:url";
 import { expect } from "chai";
-import render from "../../../src/report/html/index.js";
+import render from "../../../src/report/html/index.mjs";
 import deps from "./__mocks__/cjs-no-dependency-valid.mjs";
 
 const elementFixture = readFileSync(

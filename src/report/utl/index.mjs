@@ -1,8 +1,9 @@
 // eslint-disable-next-line no-undefined
-const formatPercentage = new Intl.NumberFormat(undefined, { style: "percent" })
-  .format;
+export const formatPercentage = new Intl.NumberFormat(undefined, {
+  style: "percent",
+}).format;
 
-function formatViolation(
+export function formatViolation(
   pViolation,
   pViolationType2Formatter,
   pDefaultFormatter
@@ -11,5 +12,3 @@ function formatViolation(
     pViolation
   );
 }
-
-module.exports = { formatViolation, formatPercentage };

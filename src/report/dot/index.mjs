@@ -1,14 +1,13 @@
-const Handlebars = require("handlebars/runtime");
-const get = require("lodash/get");
-const filterBank = require("../../graph-utl/filter-bank");
-const theming = require("./theming");
-const moduleUtl = require("./module-utl");
-const prepareFolderLevel = require("./prepare-folder-level");
-const prepareCustomLevel = require("./prepare-custom-level");
-const prepareFlatLevel = require("./prepare-flat-level");
+import Handlebars from "handlebars/runtime.js";
+import get from "lodash/get.js";
+import filterBank from "../../graph-utl/filter-bank.js";
+import theming from "./theming.mjs";
+import moduleUtl from "./module-utl.mjs";
+import prepareFolderLevel from "./prepare-folder-level.mjs";
+import prepareCustomLevel from "./prepare-custom-level.mjs";
+import prepareFlatLevel from "./prepare-flat-level.mjs";
 
-// eslint-disable-next-line import/no-unassigned-import
-require("./dot.template");
+await import("./dot.template.js");
 
 const GRANULARITY2FUNCTION = {
   module: prepareCustomLevel,
@@ -124,15 +123,16 @@ function normalizeDotReporterOptions(
     ...lDotReporterOptions,
   };
 }
+
 /**
  * Returns the results of a cruise as a directed graph in the dot language.
  *
  * @param {string} pGranularity - either "module" (for fine grained module
  *                                level) or "folder" (for a report consolidated
  *                                to folders)
- * @returns {(pResults, pDotReporterOptions) => import("../../..").IReporterOutput}
+ * @returns {(pResults, pDotReporterOptions) => import("../../../types/dependency-cruiser.js").IReporterOutput}
  */
-module.exports = function produceDotReporter(pGranularity) {
+export default function produceDotReporter(pGranularity) {
   return function dot(pResults, pDotReporterOptions) {
     const lDotReporterOptions = normalizeDotReporterOptions(
       pDotReporterOptions,
@@ -145,4 +145,4 @@ module.exports = function produceDotReporter(pGranularity) {
       exitCode: 0,
     };
   };
-};
+}

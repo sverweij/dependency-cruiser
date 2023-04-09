@@ -1,7 +1,7 @@
-const path = require("node:path").posix;
-const has = require("lodash/has");
-const utl = require("../utl/index.js");
-const theming = require("./theming");
+import { basename, sep, dirname, join } from "node:path/posix";
+import has from "lodash/has.js";
+import { formatPercentage } from "../utl/index.mjs";
+import theming from "./theming.mjs";
 
 const PROTOCOL_PREFIX_RE = /^[a-z]+:\/\//;
 
@@ -51,7 +51,7 @@ function applyTheme(pTheme) {
 }
 
 function toFullPath(pAll, pCurrent) {
-  return `${pAll}${pCurrent}${path.sep}`;
+  return `${pAll}${pCurrent}${sep}`;
 }
 
 function aggregate(pPathSnippet, pCounter, pPathArray) {
@@ -67,7 +67,7 @@ function makeInstabilityString(pModule, pShowMetrics = false) {
   let lInstabilityString = "";
 
   if (pShowMetrics && has(pModule, "instability") && !pModule.consolidated) {
-    lInstabilityString = ` <FONT color="#808080" point-size="8">${utl.formatPercentage(
+    lInstabilityString = ` <FONT color="#808080" point-size="8">${formatPercentage(
       pModule.instability
     )}</FONT>`;
   }
@@ -77,17 +77,18 @@ function makeInstabilityString(pModule, pShowMetrics = false) {
 function folderify(pShowMetrics) {
   return (pModule) => {
     let lAdditions = {};
-    let lDirectoryName = path.dirname(pModule.source);
+    let lDirectoryName = dirname(pModule.source);
 
     if (lDirectoryName !== ".") {
       lAdditions.folder = lDirectoryName;
-      lAdditions.path = lDirectoryName.split(path.sep).map(aggregate);
+      lAdditions.path = lDirectoryName.split(sep).map(aggregate);
     }
 
-    lAdditions.label = `<${path.basename(
-      pModule.source
-    )}${makeInstabilityString(pModule, pShowMetrics)}>`;
-    lAdditions.tooltip = path.basename(pModule.source);
+    lAdditions.label = `<${basename(pModule.source)}${makeInstabilityString(
+      pModule,
+      pShowMetrics
+    )}>`;
+    lAdditions.tooltip = basename(pModule.source);
 
     return {
       ...pModule,
@@ -112,7 +113,7 @@ function smartURIConcat(pPrefix, pSource) {
   if (pPrefix.match(PROTOCOL_PREFIX_RE)) {
     return `${pPrefix}${pSource}`;
   } else {
-    return path.join(pPrefix, pSource);
+    return join(pPrefix, pSource);
   }
 }
 
@@ -126,21 +127,20 @@ function addURL(pPrefix) {
 }
 
 function makeLabel(pModule, pShowMetrics) {
-  return `<${path.dirname(pModule.source)}/<BR/><B>${path.basename(
+  return `<${dirname(pModule.source)}/<BR/><B>${basename(
     pModule.source
   )}</B>${makeInstabilityString(pModule, pShowMetrics)}>`;
 }
 
 function flatLabel(pShowMetrics) {
-  return (pModule) => {
-    return {
-      ...pModule,
-      label: makeLabel(pModule, pShowMetrics),
-      tooltip: path.basename(pModule.source),
-    };
-  };
+  return (pModule) => ({
+    ...pModule,
+    label: makeLabel(pModule, pShowMetrics),
+    tooltip: basename(pModule.source),
+  });
 }
-module.exports = {
+
+export default {
   folderify,
   applyTheme,
   extractFirstTransgression,

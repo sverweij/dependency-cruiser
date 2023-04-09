@@ -1,4 +1,4 @@
-const dependencyToIncidenceTransformer = require("./utl/dependency-to-incidence-transformer");
+import dependencyToIncidenceTransformer from "./utl/dependency-to-incidence-transformer.mjs";
 
 function renderHeader(pModules) {
   return pModules.map((pModule) => `"${pModule.source}"`).join(",");
@@ -23,13 +23,13 @@ function report(pModules) {
 /**
  * Returns the results of a cruise in an 'incidence matrix'
  *
- * @param {import("../../types/cruise-result").ICruiseResult} pResults -
+ * @param {import("../../types/cruise-result.js").ICruiseResult} pResults -
  * the output of a dependency-cruise adhering to ../../schema/cruise-result.schema.json
- * @returns {import("../..").IReporterOutput}
+ * @returns {import("../../types/dependency-cruiser.js").IReporterOutput}
  */
-module.exports = function csv(pResults) {
+export default function csv(pResults) {
   return {
     output: report(dependencyToIncidenceTransformer(pResults.modules)),
     exitCode: 0,
   };
-};
+}

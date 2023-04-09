@@ -1,6 +1,6 @@
 import { EOL } from "node:os";
 import { expect } from "chai";
-import metrics from "../../../src/report/metrics.js";
+import metrics from "../../../src/report/metrics.mjs";
 import cruiseResultWithMetricsForModulesAndFolders from "./__mocks/cruise-result-with-metrics-for-modules-and-folders.mjs";
 
 describe("[I] report/metrics", () => {

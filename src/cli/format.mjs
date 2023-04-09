@@ -19,7 +19,7 @@ export default async function format(pResultFile, pOptions) {
 
   const lResult = await getStream(getInStream(pResultFile));
 
-  const lReportingResult = _format(JSON.parse(lResult), lOptions);
+  const lReportingResult = await _format(JSON.parse(lResult), lOptions);
 
   write(lOptions.outputTo, lReportingResult.output);
   return lReportingResult.exitCode;

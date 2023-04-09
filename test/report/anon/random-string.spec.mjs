@@ -1,5 +1,5 @@
 import { expect } from "chai";
-import randomString from "../../../src/report/anon/random-string.js";
+import randomString from "../../../src/report/anon/random-string.mjs";
 
 describe("[U] report/anon/random-string", () => {
   it("returns the empty string when passed the empty string", () => {

@@ -1,7 +1,6 @@
-const clone = require("lodash/clone");
-const get = require("lodash/get");
-const has = require("lodash/has");
-const anonymizePath = require("./anonymize-path");
+import clone from "lodash/clone.js";
+import has from "lodash/has.js";
+import { anonymizePath, WHITELIST_RE } from "./anonymize-path.mjs";
 
 function anonymizePathArray(pPathArray, pWordList) {
   return (pPathArray || []).map((pPath) => anonymizePath(pPath, pWordList));
@@ -33,9 +32,9 @@ function anonymizeReaches(pReachesArray, pWordList) {
 
 /**
  *
- * @param {import("../../../types/cruise-result").IModule[]} pModules
+ * @param {import("../../../types/cruise-result.js").IModule[]} pModules
  * @param {string[]} pWordList
- * @returns {import("../../../types/cruise-result").IModule[]}
+ * @returns {import("../../../types/cruise-result.js").IModule[]}
  */
 function anonymizeModules(pModules, pWordList) {
   return pModules.map((pModule) => {
@@ -59,9 +58,9 @@ function anonymizeModules(pModules, pWordList) {
 }
 /**
  *
- * @param {import("../../../types/cruise-result").IFolder[]} pFolders
+ * @param {import("../../../types/cruise-result.js").IFolder[]} pFolders
  * @param {string[]} pWordList
- * @returns {import("../../../types/cruise-result").IFolder[]}
+ * @returns {import("../../../types/cruise-result.js").IFolder[]}
  */
 function anonymizeFolders(pFolders, pWordList) {
   return pFolders.map((pFolder) => {
@@ -110,9 +109,9 @@ function anonymizeViolations(pViolations, pWordList) {
 }
 /**
  *
- * @param {import("../../../types/cruise-result").ICruiseResult} pResults
+ * @param {import("../../../types/cruise-result.js").ICruiseResult} pResults
  * @param {string[]} pWordList
- * @returns {import("../../../types/cruise-result").ICruiseResult}
+ * @returns {import("../../../types/cruise-result.js").ICruiseResult}
  */
 function anonymize(pResults, pWordList) {
   const lResults = clone(pResults);
@@ -133,7 +132,7 @@ function sanitizeWordList(pWordList) {
   return pWordList
     .map((pString) => pString.replace(/[^a-zA-Z-]/g, "_"))
     .filter((pString) => pString.match(/^[a-zA-Z-_]+$/g))
-    .filter((pString) => !pString.match(anonymizePath.WHITELIST_RE));
+    .filter((pString) => !pString.match(WHITELIST_RE));
 }
 
 /**
@@ -150,23 +149,20 @@ function sanitizeWordList(pWordList) {
  * (note: the algorith _removes_ elements from pWordList to prevent duplicates,
  * so if the word list is precious to you - pass a clone)
  *
- * @param {import("../../../types/cruise-result").ICruiseResult} pResults - the output of a dependency-cruise adhering to ../schema/cruise-result.schema.json
+ * @param {import("../../../types/cruise-result.js").ICruiseResult} pResults - the output of a dependency-cruise adhering to ../schema/cruise-result.schema.json
  * @param {{wordlist?: String[]}} pAnonymousReporterOptions of words to use as replacement strings. If
  *                               not passed the reporter uses the string passed
  *                               in the options (reporterOptions.anon.wordlist)
  *                               or - if that doesn't exist - the empty array
- * @returns {import("../../..").IReporterOutput} - output: the results in JSON format (hence adhering to the same json schema)
+ * @returns {import("../../../types/dependency-cruiser.js").IReporterOutput} - output: the results in JSON format (hence adhering to the same json schema)
  *                              exitCode: 0
  */
-module.exports = function reportAnonymous(pResults, pAnonymousReporterOptions) {
+export default function reportAnonymous(pResults, pAnonymousReporterOptions) {
   /** @type {{wordlist?: String[]}} */
   let lAnonymousReporterOptions = pAnonymousReporterOptions || {};
   if (!has(lAnonymousReporterOptions, "wordlist")) {
-    lAnonymousReporterOptions.wordlist = get(
-      pResults,
-      "summary.optionsUsed.reporterOptions.anon.wordlist",
-      []
-    );
+    lAnonymousReporterOptions.wordlist =
+      pResults?.summary?.optionsUsed?.reporterOptions?.anon?.wordlist ?? [];
   }
   return {
     output: JSON.stringify(
@@ -176,4 +172,4 @@ module.exports = function reportAnonymous(pResults, pAnonymousReporterOptions) {
     ),
     exitCode: 0,
   };
-};
+}

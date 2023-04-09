@@ -62,6 +62,7 @@
           "^\\.yarn/cache",
           "^os$",
           "^path$",
+          "^path/posix$",
           "^src/meta\\.js$",
           "^src/graph-utl",
           "^src/utl"
