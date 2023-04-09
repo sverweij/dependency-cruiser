@@ -1,4 +1,4 @@
-import validate from "../validate/index.js";
+import validate from "../validate/index.mjs";
 
 function addDependencyViolations(pModule, pDependency, pRuleSet, pValidate) {
   return {

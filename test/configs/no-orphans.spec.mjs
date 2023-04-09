@@ -1,6 +1,6 @@
 import { expect } from "chai";
 import noOrphansRule from "../../configs/rules/no-orphans.js";
-import matchModuleRule from "../../src/validate/match-module-rule.js";
+import matchModuleRule from "../../src/validate/match-module-rule.mjs";
 
 describe("[I] configs/rules/no-orphans", () => {
   it("flags non-excepted orphans as orphan rule transgression", () => {

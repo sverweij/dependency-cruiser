@@ -1,8 +1,8 @@
-const has = require("lodash/has");
-const matchModuleRule = require("./match-module-rule");
-const matchDependencyRule = require("./match-dependency-rule");
-const violatesRequiredRule = require("./violates-required-rule");
-const matchFolderRule = require("./match-folder-dependency-rule");
+import has from "lodash/has.js";
+import matchModuleRule from "./match-module-rule.mjs";
+import matchDependencyRule from "./match-dependency-rule.mjs";
+import violatesRequiredRule from "./violates-required-rule.mjs";
+import matchFolderRule from "./match-folder-dependency-rule.mjs";
 
 function compareSeverity(pFirst, pSecond) {
   const lSeverity2Int = {
@@ -68,10 +68,10 @@ function validateAgainstRequiredRules(pRuleSet, pModule, pMatchModule) {
  * @param {*} pFrom
  * @param {*} pTo
  * @param {*} pMatchModule
- * @returns {import(".").IValidationResult}
+ * @returns {import("./index.js").IValidationResult}
  */
 function validateAgainstRules(pRuleSet, pFrom, pTo, pMatchModule) {
-  /** @type {import(".").IValidationResult} */
+  /** @type {import("./index.js").IValidationResult} */
   let lReturnValue = { valid: true };
 
   const lFoundRuleViolations = validateAgainstAllowedRules(
@@ -91,13 +91,21 @@ function validateAgainstRules(pRuleSet, pFrom, pTo, pMatchModule) {
   return lReturnValue;
 }
 
-module.exports = {
-  module: (pRuleSet, pModule) =>
-    validateAgainstRules(pRuleSet, pModule, {}, matchModuleRule),
+export default {
+  module: function module(pRuleSet, pModule) {
+    return validateAgainstRules(pRuleSet, pModule, {}, matchModuleRule);
+  },
 
-  dependency: (pRuleSet, pFrom, pTo) =>
-    validateAgainstRules(pRuleSet, pFrom, pTo, matchDependencyRule),
+  dependency: function dependency(pRuleSet, pFrom, pTo) {
+    return validateAgainstRules(pRuleSet, pFrom, pTo, matchDependencyRule);
+  },
 
-  folder: (pRuleSet, pFromFolder, pToFolder) =>
-    validateAgainstRules(pRuleSet, pFromFolder, pToFolder, matchFolderRule),
+  folder: function folder(pRuleSet, pFromFolder, pToFolder) {
+    return validateAgainstRules(
+      pRuleSet,
+      pFromFolder,
+      pToFolder,
+      matchFolderRule
+    );
+  },
 };

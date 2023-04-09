@@ -1,5 +1,5 @@
 import { expect } from "chai";
-import validate from "../../src/validate/index.js";
+import validate from "../../src/validate/index.mjs";
 import parseRuleSet from "./parse-ruleset.utl.mjs";
 
 describe("[I] [I] validate/index - type-only", () => {

@@ -1,5 +1,5 @@
 import { expect } from "chai";
-import matchModuleRule from "../../src/validate/match-module-rule.js";
+import matchModuleRule from "../../src/validate/match-module-rule.mjs";
 
 const EMPTY_RULE = { from: {}, to: {} };
 const ORPHAN_RULE = { from: { orphan: true }, to: {} };

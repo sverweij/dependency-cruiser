@@ -1,15 +1,17 @@
-const { extractGroups } = require("../utl/regex-util");
-const matchers = require("./matchers");
+import rutl from "../utl/regex-util.js";
+import matchers from "./matchers.mjs";
+
+const { extractGroups } = rutl;
 
 /**
  * Returns true if the module violates the rule.
  * Returns false in all other cases.
  *
- * @param {import("../../types/rule-set").IRequiredRuleType} pRule
- * @param {import("../../types/cruise-result").IModule} pModule
+ * @param {import("../../types/rule-set.js").IRequiredRuleType} pRule
+ * @param {import("../../types/cruise-result.js").IModule} pModule
  * @returns {boolean}
  */
-module.exports = function violatesRequiredRule(pRule, pModule) {
+export default function violatesRequiredRule(pRule, pModule) {
   let lReturnValue = false;
 
   if (
@@ -23,4 +25,4 @@ module.exports = function violatesRequiredRule(pRule, pModule) {
     );
   }
   return lReturnValue;
-};
+}

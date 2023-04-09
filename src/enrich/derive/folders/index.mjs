@@ -1,4 +1,4 @@
-import validate from "../../../validate/index.js";
+import validate from "../../../validate/index.mjs";
 import aggregateToFolders from "./aggregate-to-folders.mjs";
 
 /**
