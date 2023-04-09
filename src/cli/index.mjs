@@ -21,7 +21,6 @@ import formatMetaInfo from "./format-meta-info.mjs";
 import setUpCliFeedbackListener from "./listeners/cli-feedback.mjs";
 import setUpPerformanceLogListener from "./listeners/performance-log/index.mjs";
 import setUpNDJSONListener from "./listeners/ndjson.mjs";
-import initConfig from "./init-config/index.mjs";
 
 function extractResolveOptions(pCruiseOptions) {
   let lResolveOptions = {};
@@ -161,6 +160,7 @@ export default async function executeCli(pFileDirectoryArray, pCruiseOptions) {
     if (lCruiseOptions.info === true) {
       process.stdout.write(formatMetaInfo());
     } else if (lCruiseOptions.init) {
+      const initConfig = await import("./init-config/index.mjs");
       initConfig(lCruiseOptions.init);
     } else {
       lExitCode = await runCruise(pFileDirectoryArray, lCruiseOptions);
