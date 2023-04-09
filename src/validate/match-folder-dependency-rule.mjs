@@ -1,8 +1,6 @@
-import rutl from "../utl/regex-util.js";
+import { extractGroups, replaceGroupPlaceholders } from "../utl/regex-util.mjs";
 import { isModuleOnlyRule, isFolderScope } from "./rule-classifiers.mjs";
 import matchers from "./matchers.mjs";
-
-const { extractGroups, replaceGroupPlaceholders } = rutl;
 
 function fromFolderPath(pRule, pFromFolder) {
   return Boolean(!pRule.from.path || pFromFolder.name.match(pRule.from.path));

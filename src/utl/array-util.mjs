@@ -6,10 +6,6 @@
  * @param {string[]} pRightArray another array of strings
  * @return {boolean} true if there's at least one element in pLeftArray also in pRightArray
  */
-function intersects(pLeftArray, pRightArray) {
+export function intersects(pLeftArray, pRightArray) {
   return pLeftArray.some((pLeftItem) => pRightArray.includes(pLeftItem));
 }
-
-module.exports = {
-  intersects,
-};

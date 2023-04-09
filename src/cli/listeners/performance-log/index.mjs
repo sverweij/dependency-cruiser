@@ -1,4 +1,4 @@
-import busLogLevels from "../../../utl/bus-log-levels.js";
+import busLogLevels from "../../../utl/bus-log-levels.mjs";
 import { getHeader, getProgressLine, getEndText } from "./handlers.mjs";
 
 function getHeaderWriter(pStream, pMaxLevel) {

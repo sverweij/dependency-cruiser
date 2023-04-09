@@ -1,7 +1,7 @@
 import { lstatSync } from "node:fs";
 import { expect } from "chai";
 import gatherInitialSources from "../../src/extract/gather-initial-sources.mjs";
-import p2p from "../../src/utl/path-to-posix.js";
+import p2p from "../../src/utl/path-to-posix.mjs";
 import { normalizeCruiseOptions } from "../../src/main/options/normalize.mjs";
 
 // make the import pathToPosix the correct function profile

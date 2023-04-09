@@ -1,5 +1,5 @@
 import { expect } from "chai";
-import getExtension from "../../src/utl/get-extension.js";
+import getExtension from "../../src/utl/get-extension.mjs";
 
 describe("[U] utl/getExtension", () => {
   it(".coffee.md classifies as .coffee.md", () => {

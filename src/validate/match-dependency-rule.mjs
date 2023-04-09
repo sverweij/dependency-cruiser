@@ -1,8 +1,7 @@
-import regexutl from "../utl/regex-util.js";
+import { extractGroups } from "../utl/regex-util.mjs";
 import { isModuleOnlyRule, isFolderScope } from "./rule-classifiers.mjs";
 import matchers from "./matchers.mjs";
 
-const { extractGroups } = regexutl;
 /**
  *
  * @param {import("../../types/dependency-cruiser.js").IModule} pFrom

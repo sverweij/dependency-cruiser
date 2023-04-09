@@ -1,11 +1,7 @@
 /* eslint-disable security/detect-object-injection */
 import has from "lodash/has.js";
-
-import rutl from "../utl/regex-util.js";
-import aryutl from "../utl/array-util.js";
-
-const { intersects } = aryutl;
-const { replaceGroupPlaceholders } = rutl;
+import { replaceGroupPlaceholders } from "../utl/regex-util.mjs";
+import { intersects } from "../utl/array-util.mjs";
 
 function propertyEquals(pRule, pDependency, pProperty) {
   // The properties can be booleans, so we can't use !pRule.to[pProperty]

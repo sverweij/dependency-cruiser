@@ -5,7 +5,7 @@ import { parse as acornLooseParse } from "acorn-loose";
 import acornJsx from "acorn-jsx";
 import memoize from "lodash/memoize.js";
 import transpile from "../transpile/index.mjs";
-import getExtension from "../../utl/get-extension.js";
+import getExtension from "../../utl/get-extension.mjs";
 
 /** @type acorn.Options */
 const ACORN_OPTIONS = {

@@ -1,7 +1,5 @@
-import rutl from "../utl/regex-util.js";
+import { extractGroups } from "../utl/regex-util.mjs";
 import matchers from "./matchers.mjs";
-
-const { extractGroups } = rutl;
 
 /**
  * Returns true if the module violates the rule.

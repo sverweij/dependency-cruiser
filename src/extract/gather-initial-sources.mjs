@@ -3,8 +3,8 @@ import { join } from "node:path";
 import { glob } from "glob";
 import get from "lodash/get.js";
 import { filenameMatchesPattern } from "../graph-utl/match-facade.mjs";
-import getExtension from "../utl/get-extension.js";
-import pathToPosix from "../utl/path-to-posix.js";
+import getExtension from "../utl/get-extension.mjs";
+import pathToPosix from "../utl/path-to-posix.mjs";
 import { scannableExtensions } from "./transpile/meta.mjs";
 
 /**

@@ -7,13 +7,13 @@ import isInstalledGlobally from "is-installed-globally";
 import chalk from "chalk";
 
 import { cruise } from "../main/index.mjs";
-import bus from "../utl/bus.js";
+import bus from "../utl/bus.mjs";
 
 import extractTSConfig from "../config-utl/extract-ts-config.mjs";
 import extractBabelConfig from "../config-utl/extract-babel-config.mjs";
 import extractWebpackResolveConfig from "../config-utl/extract-webpack-resolve-config.mjs";
 import extractKnownViolations from "../config-utl/extract-known-violations.mjs";
-import busLogLevels from "../utl/bus-log-levels.js";
+import busLogLevels from "../utl/bus-log-levels.mjs";
 import validateFileExistence from "./utl/validate-file-existence.mjs";
 import normalizeCliOptions from "./normalize-cli-options.mjs";
 import { write } from "./utl/io.mjs";

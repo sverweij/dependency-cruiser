@@ -1,4 +1,4 @@
-const path = require("node:path");
+import path from "node:path";
 
 /**
  * On win32 platforms transform win32 type paths into posix paths
@@ -19,7 +19,7 @@ const path = require("node:path");
  *                              this module on posix platforms only; defaults to require('path'))
  * @return {string}             the transformed path
  */
-module.exports = function pathToPosix(pFilePath, pPathModule = path) {
+export default function pathToPosix(pFilePath, pPathModule = path) {
   const lPathModule = pPathModule || path;
 
   if (lPathModule.sep !== path.posix.sep) {
@@ -27,4 +27,4 @@ module.exports = function pathToPosix(pFilePath, pPathModule = path) {
   }
 
   return pFilePath;
-};
+}

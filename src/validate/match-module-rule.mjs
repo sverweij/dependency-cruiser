@@ -1,9 +1,7 @@
 import has from "lodash/has.js";
-import rutl from "../utl/regex-util.js";
+import { extractGroups } from "../utl/regex-util.mjs";
 import { isModuleOnlyRule, isFolderScope } from "./rule-classifiers.mjs";
 import matchers from "./matchers.mjs";
-
-const { extractGroups } = rutl;
 
 /**
  * Returns true if pRule is an orphan rule and pModule is an orphan.

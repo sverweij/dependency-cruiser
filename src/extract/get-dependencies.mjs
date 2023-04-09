@@ -1,7 +1,7 @@
 import { join, extname, dirname } from "node:path";
 import get from "lodash/get.js";
 import uniqBy from "lodash/uniqBy.js";
-import { intersects } from "../utl/array-util.js";
+import { intersects } from "../utl/array-util.mjs";
 import resolve from "./resolve/index.mjs";
 import extractES6Deps from "./ast-extractors/extract-es6-deps.mjs";
 import extractCommonJSDeps from "./ast-extractors/extract-cjs-deps.mjs";

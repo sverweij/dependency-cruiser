@@ -6,7 +6,7 @@ import Ajv from "ajv";
 import extract from "../extract/index.mjs";
 import enrich from "../enrich/index.mjs";
 import cruiseResultSchema from "../schema/cruise-result.schema.mjs";
-import bus from "../utl/bus.js";
+import bus from "../utl/bus.mjs";
 import Cache from "../cache/cache.mjs";
 import {
   allExtensions,

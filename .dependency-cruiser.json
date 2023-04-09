@@ -118,7 +118,7 @@
       "severity": "error",
       "from": {
         "pathNot": [
-          "^src/(main/resolve-options/normalize\\.mjs|extract/parse|extract/resolve|extract/gather-initial-sources\\.mjs|config-utl|cli|cache|utl/find-all-files\\.js)",
+          "^src/(main/resolve-options/normalize\\.mjs|extract/parse|extract/resolve|extract/gather-initial-sources\\.mjs|config-utl|cli|cache|utl/find-all-files\\.mjs)",
           "^test",
           "^tools"
         ]

@@ -1,8 +1,8 @@
 // @ts-check
 /* eslint-disable security/detect-object-injection */
-import getExtension from "../../utl/get-extension.js";
+import getExtension from "../../utl/get-extension.mjs";
 import { scannableExtensions } from "../../extract/transpile/meta.mjs";
-import findAllFiles from "../../utl/find-all-files.js";
+import findAllFiles from "../../utl/find-all-files.mjs";
 
 /**
  * @param {Record<string,number>} pAll
