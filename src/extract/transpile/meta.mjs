@@ -7,7 +7,7 @@ import liveScriptWrap from "./livescript-wrap.mjs";
 import coffeeWrap from "./coffeescript-wrap.mjs";
 import vueWrap from "./vue-template-wrap.cjs";
 import babelWrap from "./babel-wrap.mjs";
-import svelteDingus from "./svelte-wrap.js";
+import svelteDingus from "./svelte-wrap.mjs";
 
 const typeScriptVanillaWrap = typeScriptWrap();
 const typeScriptESMWrap = typeScriptWrap("esm");
