@@ -53,7 +53,7 @@ function reportIgnoredRules(pIgnoredCount) {
       id: "ignored-known-violations",
       name: "ignored-known-violations",
       description:
-        "some dependency violations were ignored; run without --ignore-known to see them",
+        "some dependency violations were ignored; run with --no-ignore-known to see them",
       category: CATEGORY,
     });
   }
@@ -114,7 +114,7 @@ function reportIgnoredViolation(pIgnoredCount) {
   if (pIgnoredCount > 0) {
     lReturnValue = tsm.inspection({
       typeId: "ignored-known-violations",
-      message: `${pIgnoredCount} known violations ignored. Run without --ignore-known to see them.`,
+      message: `${pIgnoredCount} known violations ignored. Run with --no-ignore-known to see them.`,
       SEVERITY: "WARNING",
     });
   }

@@ -116,7 +116,7 @@ function addExplanation(pRuleSet, pLong) {
 function formatIgnoreWarning(pNumberOfIgnoredViolations) {
   if (pNumberOfIgnoredViolations > 0) {
     return chalk.yellow(
-      `${figures.warning} ${pNumberOfIgnoredViolations} known violations ignored. Run without --ignore-known to see them.\n`
+      `${figures.warning} ${pNumberOfIgnoredViolations} known violations ignored. Run with --no-ignore-known to see them.\n`
     );
   }
   return "";

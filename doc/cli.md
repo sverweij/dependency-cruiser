@@ -823,7 +823,7 @@ warning if there's violations ignored:
 
 ```
 ✔ no dependency violations found (454 modules, 1078 dependencies cruised)
-⚠ 20 known violations ignored. Run without --ignore-known to see them.
+⚠ 20 known violations ignored. Run with --no-ignore-known to see them.
 ```
 
 #### When is this useful?

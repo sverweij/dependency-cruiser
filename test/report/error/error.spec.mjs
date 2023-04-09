@@ -99,7 +99,7 @@ describe("[I] report/error", () => {
     const lResult = render(ignoredviolations);
     expect(lResult.output).to.contain("no dependency violations found");
     expect(lResult.output).to.contain(
-      "11 known violations ignored. Run without --ignore-known to see them."
+      "11 known violations ignored. Run with --no-ignore-known to see them."
     );
   });
   it("emits a warning when there's > 1 ignored violation and at least one other violation", () => {
@@ -112,7 +112,7 @@ describe("[I] report/error", () => {
       "1 dependency violations (0 errors, 1 warnings)"
     );
     expect(lResult.output).to.contain(
-      "10 known violations ignored. Run without --ignore-known to see them."
+      "10 known violations ignored. Run with --no-ignore-known to see them."
     );
   });
 });

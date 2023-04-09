@@ -1,2 +1,2 @@
-##teamcity[inspectionType id='ignored-known-violations' name='ignored-known-violations' description='some dependency violations were ignored; run without --ignore-known to see them' category='dependency-cruiser' flowId='6235406126' timestamp='2021-01-23T21:59:12.466']
-##teamcity[inspection typeId='ignored-known-violations' message='11 known violations ignored. Run without --ignore-known to see them.' SEVERITY='WARNING' flowId='6235406126' timestamp='2021-01-23T21:59:12.466']
+##teamcity[inspectionType id='ignored-known-violations' name='ignored-known-violations' description='some dependency violations were ignored; run with --no-ignore-known to see them' category='dependency-cruiser' flowId='6235406126' timestamp='2021-01-23T21:59:12.466']
+##teamcity[inspection typeId='ignored-known-violations' message='11 known violations ignored. Run with --no-ignore-known to see them.' SEVERITY='WARNING' flowId='6235406126' timestamp='2021-01-23T21:59:12.466']
