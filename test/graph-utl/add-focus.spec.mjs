@@ -1,6 +1,6 @@
 /* eslint-disable unicorn/no-useless-undefined */
 import { expect } from "chai";
-import addFocus from "../../src/graph-utl/add-focus.js";
+import addFocus from "../../src/graph-utl/add-focus.mjs";
 import $input from "./__fixtures__/focus/dependency-cruiser-only-src.mjs";
 import focusOnMainDepthOne from "./__fixtures__/focus/dependency-cruiser-focus-on-main.mjs";
 import focusOnMainDepthTwo from "./__fixtures__/focus/dependency-cruiser-focus-on-main-depth-2.mjs";

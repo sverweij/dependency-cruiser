@@ -1,5 +1,5 @@
 import { expect } from "chai";
-import { rules } from "../../src/graph-utl/compare.js";
+import { rules } from "../../src/graph-utl/compare.mjs";
 
 describe("[U] graph-utl/compare - rules", () => {
   it("samesies yield 0", () => {

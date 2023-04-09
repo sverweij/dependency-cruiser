@@ -4,7 +4,10 @@ import has from "lodash/has.js";
 import omit from "lodash/omit.js";
 import enhancedResolve from "enhanced-resolve";
 import { scannableExtensions } from "../../extract/transpile/meta.mjs";
-import ruleSet from "../../graph-utl/rule-set.js";
+import {
+  ruleSetHasLicenseRule,
+  ruleSetHasDeprecationRule,
+} from "../../graph-utl/rule-set.mjs";
 
 const DEFAULT_CACHE_DURATION = 4000;
 /** @type {Partial<import("../../../types/dependency-cruiser").IResolveOptions>} */
@@ -146,8 +149,8 @@ export default async function normalizeResolveOptions(
          resolve options ...
        */
       combinedDependencies: get(pOptions, "combinedDependencies", false),
-      resolveLicenses: ruleSet.ruleSetHasLicenseRule(lRuleSet),
-      resolveDeprecations: ruleSet.ruleSetHasDeprecationRule(lRuleSet),
+      resolveLicenses: ruleSetHasLicenseRule(lRuleSet),
+      resolveDeprecations: ruleSetHasDeprecationRule(lRuleSet),
       ...(pResolveOptions || {}),
     },
     pTSConfig || {},

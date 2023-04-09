@@ -1,18 +1,19 @@
-const clone = require("lodash/clone");
-const addFocus = require("./add-focus");
-const IndexedModuleGraph = require("./indexed-module-graph");
-const matchFacade = require("./match-facade");
+import clone from "lodash/clone.js";
+import addFocus from "./add-focus.mjs";
+import IndexedModuleGraph from "./indexed-module-graph.mjs";
+import {
+  moduleMatchesFilter,
+  dependencyMatchesFilter,
+} from "./match-facade.mjs";
 
 function includeOnly(pModules, pIncludeFilter) {
   return pIncludeFilter.path
     ? pModules
-        .filter((pModule) =>
-          matchFacade.moduleMatchesFilter(pModule, pIncludeFilter)
-        )
+        .filter((pModule) => moduleMatchesFilter(pModule, pIncludeFilter))
         .map((pModule) => ({
           ...pModule,
           dependencies: pModule.dependencies.filter((pDependency) =>
-            matchFacade.dependencyMatchesFilter(pDependency, pIncludeFilter)
+            dependencyMatchesFilter(pDependency, pIncludeFilter)
           ),
         }))
     : pModules;
@@ -21,29 +22,25 @@ function includeOnly(pModules, pIncludeFilter) {
 function exclude(pModules, pExcludeFilter) {
   return pExcludeFilter.path
     ? pModules
-        .filter(
-          (pModule) => !matchFacade.moduleMatchesFilter(pModule, pExcludeFilter)
-        )
+        .filter((pModule) => !moduleMatchesFilter(pModule, pExcludeFilter))
         .map((pModule) => ({
           ...pModule,
           dependencies: pModule.dependencies.filter(
             (pDependency) =>
-              !matchFacade.dependencyMatchesFilter(pDependency, pExcludeFilter)
+              !dependencyMatchesFilter(pDependency, pExcludeFilter)
           ),
         }))
     : pModules;
 }
 /**
  *
- * @param {import("../../types/cruise-result").IModule[]} pModules
- * @param {import("../../types/strict-filter-types").IStrictReachesType} pReachesFilter
- * @returns {import("../../types/cruise-result").IModule[]}
+ * @param {import("../../types/cruise-result.js").IModule[]} pModules
+ * @param {import("../../types/strict-filter-types.js").IStrictReachesType} pReachesFilter
+ * @returns {import("../../types/cruise-result.js").IModule[]}
  */
 function filterReaches(pModules, pReachesFilter) {
   const lModuleNamesToReach = pModules
-    .filter((pModule) =>
-      matchFacade.moduleMatchesFilter(pModule, pReachesFilter)
-    )
+    .filter((pModule) => moduleMatchesFilter(pModule, pReachesFilter))
     .map(({ source }) => source);
 
   /** @type {Array<string>} */
@@ -69,15 +66,12 @@ function filterReaches(pModules, pReachesFilter) {
 function tagHighlight(pModules, pHighlightFilter) {
   return pModules.map((pModule) => ({
     ...pModule,
-    matchesHighlight: matchFacade.moduleMatchesFilter(
-      pModule,
-      pHighlightFilter
-    ),
+    matchesHighlight: moduleMatchesFilter(pModule, pHighlightFilter),
   }));
 }
 
 // eslint-disable-next-line complexity
-function applyFilters(pModules, pFilters) {
+export function applyFilters(pModules, pFilters) {
   if (pFilters) {
     let lReturnValue = clone(pModules);
 
@@ -100,5 +94,3 @@ function applyFilters(pModules, pFilters) {
   }
   return pModules;
 }
-
-module.exports = { applyFilters };

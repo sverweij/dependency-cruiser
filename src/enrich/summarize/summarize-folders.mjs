@@ -1,7 +1,5 @@
 import has from "lodash/has.js";
-import graphUtlRuleSet from "../../graph-utl/rule-set.js";
-
-const { findRuleByName } = graphUtlRuleSet;
+import { findRuleByName } from "../../graph-utl/rule-set.mjs";
 
 function classifyViolation(pRule, pRuleSet) {
   const lRule = findRuleByName(pRuleSet, pRule.name);

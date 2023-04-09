@@ -1,24 +1,24 @@
-const path = require("node:path");
-const consolidateModules = require("./consolidate-modules");
-const consolidateModuleDependencies = require("./consolidate-module-dependencies");
+import { dirname } from "node:path";
+import consolidateModules from "./consolidate-modules.mjs";
+import consolidateModuleDependencies from "./consolidate-module-dependencies.mjs";
 
 function squashDependencyToDirectory(pDependency) {
   return {
     ...pDependency,
-    resolved: path.dirname(pDependency.resolved),
+    resolved: dirname(pDependency.resolved),
   };
 }
 function squashModuleToDirectory(pModule) {
   return {
     ...pModule,
-    source: path.dirname(pModule.source),
+    source: dirname(pModule.source),
     consolidated: true,
     dependencies: pModule.dependencies.map(squashDependencyToDirectory),
   };
 }
 
-module.exports = function consolidateToFolder(pModules) {
+export default function consolidateToFolder(pModules) {
   return consolidateModules(pModules.map(squashModuleToDirectory)).map(
     consolidateModuleDependencies
   );
-};
+}

@@ -2,7 +2,7 @@
 import path from "node:path/posix";
 import { calculateInstability, metricsAreCalculable } from "../module-utl.mjs";
 import detectCycles from "../circular.mjs";
-import IndexedModuleGraph from "../../../graph-utl/indexed-module-graph.js";
+import IndexedModuleGraph from "../../../graph-utl/indexed-module-graph.mjs";
 import {
   findFolderByName,
   getAfferentCouplings,

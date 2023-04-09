@@ -1,6 +1,6 @@
 import Handlebars from "handlebars/runtime.js";
 import get from "lodash/get.js";
-import filterBank from "../../graph-utl/filter-bank.js";
+import { applyFilters } from "../../graph-utl/filter-bank.mjs";
 import theming from "./theming.mjs";
 import moduleUtl from "./module-utl.mjs";
 import prepareFolderLevel from "./prepare-folder-level.mjs";
@@ -25,7 +25,7 @@ function report(
   const lResults = filters
     ? {
         ...pResults,
-        modules: filterBank.applyFilters(pResults.modules, filters),
+        modules: applyFilters(pResults.modules, filters),
       }
     : pResults;
 
