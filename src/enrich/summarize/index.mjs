@@ -1,29 +1,29 @@
-const compare = require("../../graph-utl/compare");
-const addRuleSetUsed = require("./add-rule-set-used");
-const summarizeModules = require("./summarize-modules");
-const summarizeFolders = require("./summarize-folders");
-const summarizeOptions = require("./summarize-options");
-const {
+import compare from "../../graph-utl/compare.js";
+import addRuleSetUsed from "./add-rule-set-used.mjs";
+import summarizeModules from "./summarize-modules.mjs";
+import summarizeFolders from "./summarize-folders.mjs";
+import summarizeOptions from "./summarize-options.mjs";
+import {
   getViolationStats,
   getModulesCruised,
   getDependenciesCruised,
-} = require("./get-stats");
+} from "./get-stats.mjs";
 
 /**
  *
- * @param {import("../../../types/cruise-result").IModule[]} pModules -
+ * @param {import("../../../types/cruise-result.js").IModule[]} pModules -
  *    cruised modules that have been enriched with mandatory attributes &
  *    have been validated against rules as passed in the options
- * @param {import("../../../types/options").IStrictCruiseOptions} pOptions -
+ * @param {import("../../../types/options.js").IStrictCruiseOptions} pOptions -
  * @param {string[]} pFileDirectoryArray -
  *    the files/ directories originally passed to be cruised
- * @param {import("../../..").IFolder[]} pFolders -
+ * @param {import("../../../types/dependency-cruiser.js").IFolder[]} pFolders -
  *    the pModules collapsed to folders, with their own metrics & deps
  *
- * @returns {import("../../../types/cruise-result").ISummary} -
+ * @returns {import("../../../types/cruise-result.js").ISummary} -
  *    a summary of the found modules, dependencies and any violations
  */
-module.exports = function summarize(
+export default function summarize(
   pModules,
   pOptions,
   pFileDirectoryArray,
@@ -41,4 +41,4 @@ module.exports = function summarize(
     ...summarizeOptions(pFileDirectoryArray, pOptions),
     ...(pOptions.ruleSet ? { ruleSetUsed: addRuleSetUsed(pOptions) } : {}),
   };
-};
+}

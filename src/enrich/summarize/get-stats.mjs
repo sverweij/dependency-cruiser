@@ -1,4 +1,4 @@
-function getViolationStats(pViolations) {
+export function getViolationStats(pViolations) {
   return pViolations.reduce(
     (pAll, pThis) => {
       pAll[pThis.rule.severity] += 1;
@@ -13,19 +13,13 @@ function getViolationStats(pViolations) {
   );
 }
 
-function getModulesCruised(pModules) {
+export function getModulesCruised(pModules) {
   return pModules.length;
 }
 
-function getDependenciesCruised(pModules) {
+export function getDependenciesCruised(pModules) {
   return pModules.reduce(
     (pAll, pModule) => pAll + pModule.dependencies.length,
     0
   );
 }
-
-module.exports = {
-  getViolationStats,
-  getModulesCruised,
-  getDependenciesCruised,
-};

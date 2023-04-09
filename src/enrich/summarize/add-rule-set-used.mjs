@@ -1,4 +1,4 @@
-const clone = require("lodash/clone");
+import clone from "lodash/clone.js";
 
 // the fixed name for allowed rules served a purpose during the extraction
 // process - but it's not necessary to reflect it in the output.
@@ -9,7 +9,7 @@ function removeNames(pRule) {
   return lReturnValue;
 }
 
-module.exports = function addRuleSetUsed(pOptions) {
+export default function addRuleSetUsed(pOptions) {
   const lForbidden = pOptions?.ruleSet?.forbidden;
   const lAllowed = pOptions?.ruleSet?.allowed;
   const lAllowedSeverity = pOptions?.ruleSet?.allowedSeverity;
@@ -21,4 +21,4 @@ module.exports = function addRuleSetUsed(pOptions) {
     lAllowedSeverity ? { allowedSeverity: lAllowedSeverity } : {},
     lRequired ? { required: lRequired } : {}
   );
-};
+}

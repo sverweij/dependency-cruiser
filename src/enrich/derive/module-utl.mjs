@@ -1,11 +1,11 @@
-function isDependent(pResolvedName) {
+export function isDependent(pResolvedName) {
   return (pModule) =>
     pModule.dependencies.some(
       (pDependency) => pDependency.resolved === pResolvedName
     );
 }
 
-function metricsAreCalculable(pModule) {
+export function metricsAreCalculable(pModule) {
   return (
     !pModule.coreModule &&
     !pModule.couldNotResolve &&
@@ -21,7 +21,10 @@ function metricsAreCalculable(pModule) {
  * @param {number} pAfferentCouplingCount
  * @returns number
  */
-function calculateInstability(pEfferentCouplingCount, pAfferentCouplingCount) {
+export function calculateInstability(
+  pEfferentCouplingCount,
+  pAfferentCouplingCount
+) {
   // when both afferentCouplings and efferentCouplings equal 0 instability will
   // yield NaN. Judging Bob Martin's intention, a component with no outgoing
   // dependencies is maximum stable (0)
@@ -30,9 +33,3 @@ function calculateInstability(pEfferentCouplingCount, pAfferentCouplingCount) {
       (pEfferentCouplingCount + pAfferentCouplingCount) || 0
   );
 }
-
-module.exports = {
-  isDependent,
-  metricsAreCalculable,
-  calculateInstability,
-};

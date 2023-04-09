@@ -1,7 +1,8 @@
-const IndexedModuleGraph = require("../../../graph-utl/indexed-module-graph");
-const { calculateInstability, metricsAreCalculable } = require("../module-utl");
+/* eslint-disable import/exports-last */
+import IndexedModuleGraph from "../../../graph-utl/indexed-module-graph.js";
+import { calculateInstability, metricsAreCalculable } from "../module-utl.mjs";
 
-function addInstabilityMetric(pModule) {
+export function addInstabilityMetric(pModule) {
   return {
     ...pModule,
     ...(metricsAreCalculable(pModule)
@@ -25,7 +26,11 @@ function addInstabilityToDependency(pAllModules) {
   });
 }
 
-function deNormalizeInstabilityMetricsToDependencies(pModule, _, pAllModules) {
+export function deNormalizeInstabilityMetricsToDependencies(
+  pModule,
+  _,
+  pAllModules
+) {
   return {
     ...pModule,
     dependencies: pModule.dependencies.map(
@@ -33,8 +38,3 @@ function deNormalizeInstabilityMetricsToDependencies(pModule, _, pAllModules) {
     ),
   };
 }
-
-module.exports = {
-  addInstabilityMetric,
-  deNormalizeInstabilityMetricsToDependencies,
-};

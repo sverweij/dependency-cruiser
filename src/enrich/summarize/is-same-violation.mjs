@@ -1,4 +1,4 @@
-module.exports = function isSameViolation(pLeftViolation, pRightViolation) {
+export default function isSameViolation(pLeftViolation, pRightViolation) {
   let lReturnValue = false;
 
   if (pLeftViolation.rule.name === pRightViolation.rule.name) {
@@ -15,4 +15,4 @@ module.exports = function isSameViolation(pLeftViolation, pRightViolation) {
     }
   }
   return lReturnValue;
-};
+}

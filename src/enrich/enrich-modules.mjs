@@ -1,16 +1,16 @@
-const bus = require("../utl/bus");
-const busLogLevels = require("../utl/bus-log-levels");
-const addFocus = require("../../src/graph-utl/add-focus");
-const IndexedModuleGraph = require("../graph-utl/indexed-module-graph");
-const deriveCycles = require("./derive/circular");
-const deriveOrphans = require("./derive/orphan");
-const addDependents = require("./derive/dependents");
-const deriveReachable = require("./derive/reachable");
-const addValidations = require("./add-validations");
-const softenKnownViolations = require("./soften-known-violations");
-const deriveModuleMetrics = require("./derive/metrics");
+import bus from "../utl/bus.js";
+import busLogLevels from "../utl/bus-log-levels.js";
+import addFocus from "../graph-utl/add-focus.js";
+import IndexedModuleGraph from "../graph-utl/indexed-module-graph.js";
+import deriveCycles from "./derive/circular.mjs";
+import deriveOrphans from "./derive/orphan/index.mjs";
+import addDependents from "./derive/dependents/index.mjs";
+import deriveReachable from "./derive/reachable.mjs";
+import addValidations from "./add-validations.mjs";
+import softenKnownViolations from "./soften-known-violations.mjs";
+import deriveModuleMetrics from "./derive/metrics/index.mjs";
 
-module.exports = function enrichModules(pModules, pOptions) {
+export default function enrichModules(pModules, pOptions) {
   bus.emit("progress", "analyzing: cycles", { level: busLogLevels.INFO });
   const lIndexedModules = new IndexedModuleGraph(pModules);
   let lModules = deriveCycles(pModules, lIndexedModules, {
@@ -41,4 +41,4 @@ module.exports = function enrichModules(pModules, pOptions) {
   lModules = softenKnownViolations(lModules, pOptions.knownViolations);
 
   return lModules;
-};
+}

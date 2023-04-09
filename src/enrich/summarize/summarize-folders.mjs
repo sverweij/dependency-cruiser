@@ -1,5 +1,7 @@
-const has = require("lodash/has");
-const { findRuleByName } = require("../../graph-utl/rule-set");
+import has from "lodash/has.js";
+import graphUtlRuleSet from "../../graph-utl/rule-set.js";
+
+const { findRuleByName } = graphUtlRuleSet;
 
 function classifyViolation(pRule, pRuleSet) {
   const lRule = findRuleByName(pRuleSet, pRule.name);
@@ -42,6 +44,6 @@ function getViolations(pFolder, pRuleSet) {
     );
 }
 
-module.exports = function summarizeFolders(pFolders, pRuleSet) {
+export default function summarizeFolders(pFolders, pRuleSet) {
   return pFolders.flatMap((pFolder) => getViolations(pFolder, pRuleSet));
-};
+}

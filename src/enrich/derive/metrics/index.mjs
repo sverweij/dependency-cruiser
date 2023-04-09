@@ -1,13 +1,13 @@
-const {
+import {
   addInstabilityMetric,
   deNormalizeInstabilityMetricsToDependencies,
-} = require("./get-module-metrics");
+} from "./get-module-metrics.mjs";
 
-module.exports = function deriveModulesMetrics(pModules, pOptions) {
+export default function deriveModulesMetrics(pModules, pOptions) {
   if (pOptions.metrics) {
     return pModules
       .map(addInstabilityMetric)
       .map(deNormalizeInstabilityMetricsToDependencies);
   }
   return pModules;
-};
+}

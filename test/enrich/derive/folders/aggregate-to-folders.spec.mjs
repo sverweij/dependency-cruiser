@@ -1,6 +1,6 @@
 import { expect } from "chai";
 
-import aggregateToFolders from "../../../../src/enrich/derive/folders/aggregate-to-folders.js";
+import aggregateToFolders from "../../../../src/enrich/derive/folders/aggregate-to-folders.mjs";
 
 function compareFolders(pLeftFolder, pRightFolder) {
   return pLeftFolder.name.localeCompare(pRightFolder.name);

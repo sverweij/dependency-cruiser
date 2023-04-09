@@ -1,5 +1,5 @@
 import { expect } from "chai";
-import summarizeFolders from "../../src/enrich/summarize/summarize-folders.js";
+import summarizeFolders from "../../src/enrich/summarize/summarize-folders.mjs";
 
 const FIXTURE_WITHOUT_VIOLATIONS = [
   {

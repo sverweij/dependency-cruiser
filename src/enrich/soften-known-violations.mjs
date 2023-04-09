@@ -1,6 +1,6 @@
-const bus = require("../utl/bus");
-const busLogLevels = require("../utl/bus-log-levels");
-const isSameViolation = require("./summarize/is-same-violation");
+import bus from "../utl/bus.js";
+import busLogLevels from "../utl/bus-log-levels.js";
+import isSameViolation from "./summarize/is-same-violation.mjs";
 
 function softenModuleViolation(
   pRule,
@@ -62,10 +62,10 @@ function softenDependencyViolations(
 }
 /**
  *
- * @param {import("../../types/cruise-result").IModule} pModule
- * @param {import("../../types/baseline-violations").IBaselineViolations} pKnownViolations
- * @param {import("../../types/shared-types").SeverityType} pSoftenedSeverity
- * @returns {import("../../types/cruise-result").IModule}
+ * @param {import("../../types/cruise-result.js").IModule} pModule
+ * @param {import("../../types/baseline-violations.js").IBaselineViolations} pKnownViolations
+ * @param {import("../../types/shared-types.js").SeverityType} pSoftenedSeverity
+ * @returns {import("../../types/cruise-result.js").IModule}
  */
 function softenKnownViolation(pModule, pKnownViolations, pSoftenedSeverity) {
   let lReturnValue = pModule;
@@ -107,12 +107,12 @@ function softenKnownViolation(pModule, pKnownViolations, pSoftenedSeverity) {
 
 /**
  *
- * @param {import("../../types/cruise-result").IModule[]} pModules
- * @param {import("../../types/baseline-violations").IBaselineViolations} pKnownViolations
- * @param {import("../../types/shared-types").SeverityType} pSoftenedSeverity
- * @returns {import("../../types/cruise-result").IModule[]}
+ * @param {import("../../types/cruise-result.js").IModule[]} pModules
+ * @param {import("../../types/baseline-violations.js").IBaselineViolations} pKnownViolations
+ * @param {import("../../types/shared-types.js").SeverityType} pSoftenedSeverity
+ * @returns {import("../../types/cruise-result.js").IModule[]}
  */
-module.exports = function softenKnownViolations(
+export default function softenKnownViolations(
   pModules,
   pKnownViolations,
   pSoftenedSeverity = "ignore"
@@ -126,4 +126,4 @@ module.exports = function softenKnownViolations(
     );
   }
   return pModules;
-};
+}

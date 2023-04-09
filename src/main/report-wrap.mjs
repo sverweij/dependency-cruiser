@@ -1,6 +1,6 @@
 import has from "lodash/has.js";
 import filterBank from "../graph-utl/filter-bank.js";
-import summarize from "../enrich/summarize/index.js";
+import summarize from "../enrich/summarize/index.mjs";
 import consolidateToPattern from "../graph-utl/consolidate-to-pattern.js";
 import compare from "../graph-utl/compare.js";
 import stripSelfTransitions from "../graph-utl/strip-self-transitions.js";

@@ -1,15 +1,15 @@
 /* eslint-disable security/detect-object-injection */
-const path = require("node:path").posix;
-const { calculateInstability, metricsAreCalculable } = require("../module-utl");
-const detectCycles = require("../circular");
-const IndexedModuleGraph = require("../../../graph-utl/indexed-module-graph");
-const {
+import path from "node:path/posix";
+import { calculateInstability, metricsAreCalculable } from "../module-utl.mjs";
+import detectCycles from "../circular.mjs";
+import IndexedModuleGraph from "../../../graph-utl/indexed-module-graph.js";
+import {
   findFolderByName,
   getAfferentCouplings,
   getEfferentCouplings,
   getParentFolders,
   object2Array,
-} = require("./utl");
+} from "./utl.mjs";
 
 function upsertCouplings(pAllDependents, pNewDependents) {
   pNewDependents.forEach((pNewDependent) => {
@@ -114,7 +114,7 @@ function getSinks(pFolders) {
   return lReturnValue;
 }
 
-module.exports = function aggregateToFolders(pModules) {
+export default function aggregateToFolders(pModules) {
   let lFolders = object2Array(
     pModules.filter(metricsAreCalculable).reduce(aggregateToFolder, {})
   )
@@ -126,4 +126,4 @@ module.exports = function aggregateToFolders(pModules) {
     pSourceAttribute: "name",
     pDependencyName: "name",
   });
-};
+}
