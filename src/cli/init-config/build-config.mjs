@@ -1,9 +1,9 @@
 // @ts-check
-const Handlebars = require("handlebars/runtime");
-const { folderNameArrayToRE } = require("./utl.cjs");
+import Handlebars from "handlebars/runtime.js";
+import { folderNameArrayToRE } from "./utl.mjs";
 
 /* eslint import/no-unassigned-import: 0 */
-require("./config.js.template");
+await import("./config.js.template.js");
 
 /**
  * @param {string} pString
@@ -28,12 +28,12 @@ function extensionsToString(pExtensions) {
  * Creates a .dependency-cruiser config with a set of basic validations
  * to the current directory.
  *
- * @param {import("./types").IInitConfig} pNormalizedInitOptions Options that influence the shape of
+ * @param {import("./types.js").IInitConfig} pNormalizedInitOptions Options that influence the shape of
  *                  the configuration
  * @returns {string} the configuration as a string
  */
 
-module.exports = function buildConfig(pNormalizedInitOptions) {
+export default function buildConfig(pNormalizedInitOptions) {
   return Handlebars.templates["config.js.template.hbs"]({
     ...pNormalizedInitOptions,
 
@@ -45,4 +45,4 @@ module.exports = function buildConfig(pNormalizedInitOptions) {
       pNormalizedInitOptions.resolutionExtensions
     ),
   });
-};
+}
