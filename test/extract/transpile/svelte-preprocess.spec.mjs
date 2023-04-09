@@ -3,7 +3,7 @@ import { expect } from "chai";
 import * as svelteCompiler from "svelte/compiler";
 import normalizeNewline from "normalize-newline";
 import thing from "../../../src/extract/transpile/typescript-wrap.mjs";
-import sveltePreProcess from "../../../src/extract/transpile/svelte-preprocess.js";
+import sveltePreProcess from "../../../src/extract/transpile/svelte-preprocess.mjs";
 
 const typeScriptWrap = thing(false);
 

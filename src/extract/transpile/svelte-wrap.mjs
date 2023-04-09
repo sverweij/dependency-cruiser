@@ -1,6 +1,6 @@
 import tryImport from "semver-try-require";
 import meta from "../../meta.js";
-import preProcess from "./svelte-preprocess.js";
+import preProcess from "./svelte-preprocess.mjs";
 
 const { compile } = await tryImport(
   "svelte/compiler",

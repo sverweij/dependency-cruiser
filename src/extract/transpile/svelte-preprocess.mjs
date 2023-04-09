@@ -69,7 +69,7 @@ function styleReplacer(pMatch, pAttributes) {
   }
 }
 
-module.exports = function preProcess(
+export default function preProcess(
   pSource,
   pTranspilerWrapper,
   pTranspilerOptions
@@ -98,4 +98,4 @@ module.exports = function preProcess(
   } else {
     return pSource;
   }
-};
+}
