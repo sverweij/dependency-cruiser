@@ -1,5 +1,5 @@
 /* eslint-disable security/detect-object-injection */
-import path from "node:path/posix";
+import { sep } from "node:path/posix";
 
 export function findFolderByName(pAllFolders, pName) {
   return pAllFolders.find((pFolder) => pFolder.name === pName);
@@ -7,13 +7,13 @@ export function findFolderByName(pAllFolders, pName) {
 
 export function getAfferentCouplings(pModule, pDirname) {
   return pModule.dependents.filter(
-    (pDependent) => !pDependent.startsWith(pDirname.concat(path.sep))
+    (pDependent) => !pDependent.startsWith(pDirname.concat(sep))
   );
 }
 
 export function getEfferentCouplings(pModule, pDirname) {
   return pModule.dependencies.filter(
-    (pDependency) => !pDependency.resolved.startsWith(pDirname.concat(path.sep))
+    (pDependency) => !pDependency.resolved.startsWith(pDirname.concat(sep))
   );
 }
 

@@ -1,5 +1,4 @@
 import { join, extname, dirname } from "node:path";
-import get from "lodash/get.js";
 import uniqBy from "lodash/uniqBy.js";
 import { intersects } from "../utl/array-util.mjs";
 import resolve from "./resolve/index.mjs";
@@ -235,9 +234,9 @@ export default function getDependencies(
       .map(addResolutionAttributes(pCruiseOptions, pFileName, pResolveOptions))
       .filter(
         ({ resolved }) =>
-          (!get(pCruiseOptions, "exclude.path") ||
+          (!pCruiseOptions?.exclude?.path ||
             !matchesPattern(resolved, pCruiseOptions.exclude.path)) &&
-          (!get(pCruiseOptions, "includeOnly.path") ||
+          (!pCruiseOptions?.includeOnly?.path ||
             matchesPattern(resolved, pCruiseOptions.includeOnly.path))
       );
   } catch (pError) {

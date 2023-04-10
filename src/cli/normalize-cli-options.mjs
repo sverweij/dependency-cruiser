@@ -1,5 +1,5 @@
-import fs from "node:fs";
-import path from "node:path";
+import { accessSync, R_OK } from "node:fs";
+import { isAbsolute } from "node:path";
 import set from "lodash/set.js";
 import get from "lodash/get.js";
 import has from "lodash/has.js";
@@ -45,7 +45,7 @@ function normalizeConfigFileName(pCliOptions, pConfigWrapperName, pDefault) {
 
 function fileExists(pFileName) {
   try {
-    fs.accessSync(pFileName, fs.R_OK);
+    accessSync(pFileName, R_OK);
     return true;
   } catch (pError) {
     return false;
@@ -129,7 +129,7 @@ async function normalizeValidationOption(pCliOptions) {
   return {
     rulesFile,
     ruleSet: await loadConfig(
-      path.isAbsolute(rulesFile) ? rulesFile : `./${rulesFile}`
+      isAbsolute(rulesFile) ? rulesFile : `./${rulesFile}`
     ),
     validate: true,
   };

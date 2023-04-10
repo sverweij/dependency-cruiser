@@ -1,27 +1,21 @@
 import { fileURLToPath } from "node:url";
-import fs from "node:fs";
-import path from "node:path";
+import { writeFileSync } from "node:fs";
+import { join } from "node:path";
 import prettier from "prettier";
 import main from "../src/main/index.mjs";
 
 const __dirname = fileURLToPath(new URL(".", import.meta.url));
 const WORKING_DIR = process.cwd();
-const MAIN_FIXTURE_DIR = path.join(
-  __dirname,
-  "..",
-  "test",
-  "main",
-  "__fixtures__"
-);
-const MAIN_MOCKS_DIR = path.join(__dirname, "..", "test", "main", "__mocks__");
+const MAIN_FIXTURE_DIR = join(__dirname, "..", "test", "main", "__fixtures__");
+const MAIN_MOCKS_DIR = join(__dirname, "..", "test", "main", "__mocks__");
 
 function barfTheJSON(
   pTargetFileName,
   pResult,
   pTargetDirectory = MAIN_MOCKS_DIR
 ) {
-  fs.writeFileSync(
-    path.join(pTargetDirectory, pTargetFileName),
+  writeFileSync(
+    join(pTargetDirectory, pTargetFileName),
     prettier.format(JSON.stringify(pResult.output), { parser: "json" }),
     {
       encoding: "utf8",

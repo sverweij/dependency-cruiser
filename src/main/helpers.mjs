@@ -39,7 +39,6 @@ export function normalizeREProperties(
       set(
         lPropertyContainer,
         lProperty,
-
         normalizeToREAsString(get(lPropertyContainer, lProperty))
       );
     }

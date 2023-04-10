@@ -1,7 +1,6 @@
 import { readdirSync, statSync } from "node:fs";
 import { join } from "node:path";
 import { glob } from "glob";
-import get from "lodash/get.js";
 import { filenameMatchesPattern } from "../graph-utl/match-facade.mjs";
 import getExtension from "../utl/get-extension.mjs";
 import pathToPosix from "../utl/path-to-posix.mjs";
@@ -22,16 +21,16 @@ function fileIsScannable(pOptions, pPathToFile) {
 
 function shouldBeIncluded(pFullPathToFile, pOptions) {
   return (
-    !get(pOptions, "includeOnly.path") ||
+    !pOptions?.includeOnly?.path ||
     filenameMatchesPattern(pFullPathToFile, pOptions.includeOnly.path)
   );
 }
 
 function shouldNotBeExcluded(pFullPathToFile, pOptions) {
   return (
-    (!get(pOptions, "exclude.path") ||
+    (!pOptions?.exclude?.path ||
       !filenameMatchesPattern(pFullPathToFile, pOptions.exclude.path)) &&
-    (!get(pOptions, "doNotFollow.path") ||
+    (!pOptions?.doNotFollow?.path ||
       !filenameMatchesPattern(pFullPathToFile, pOptions.doNotFollow.path))
   );
 }
