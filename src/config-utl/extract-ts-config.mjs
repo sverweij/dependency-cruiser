@@ -1,4 +1,4 @@
-import path from "node:path";
+import { dirname, resolve } from "node:path";
 import tryImport from "semver-try-require";
 import meta from "../meta.js";
 
@@ -55,7 +55,7 @@ export default function extractTSConfig(pTSConfigFileName) {
     lReturnValue = typescript.parseJsonConfigFileContent(
       lConfig.config,
       typescript.sys,
-      path.dirname(path.resolve(pTSConfigFileName)),
+      dirname(resolve(pTSConfigFileName)),
       {},
       pTSConfigFileName
     );

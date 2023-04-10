@@ -1,5 +1,5 @@
 /* eslint-disable security/detect-object-injection */
-import path from "node:path/posix";
+import { dirname } from "node:path/posix";
 import { calculateInstability, metricsAreCalculable } from "../module-utl.mjs";
 import detectCycles from "../circular.mjs";
 import IndexedModuleGraph from "../../../graph-utl/indexed-module-graph.mjs";
@@ -42,7 +42,7 @@ function upsertFolderAttributes(pAllMetrics, pModule, pDirname) {
 }
 
 function aggregateToFolder(pAllFolders, pModule) {
-  getParentFolders(path.dirname(pModule.source)).forEach((pParentDirectory) =>
+  getParentFolders(dirname(pModule.source)).forEach((pParentDirectory) =>
     upsertFolderAttributes(pAllFolders, pModule, pParentDirectory)
   );
   return pAllFolders;
@@ -56,9 +56,9 @@ function getFolderLevelCouplings(pCouplingArray) {
   return Array.from(
     new Set(
       pCouplingArray.map((pCoupling) =>
-        path.dirname(pCoupling.name) === "."
+        dirname(pCoupling.name) === "."
           ? pCoupling.name
-          : path.dirname(pCoupling.name)
+          : dirname(pCoupling.name)
       )
     )
   ).map((pCoupling) => ({ name: pCoupling }));

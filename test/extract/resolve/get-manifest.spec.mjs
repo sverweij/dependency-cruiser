@@ -1,11 +1,11 @@
-import fs from "node:fs";
-import path from "node:path";
+import { readFileSync } from "node:fs";
+import { parse, join, dirname } from "node:path";
 import { fileURLToPath } from "node:url";
 import { expect } from "chai";
 import { getManifest } from "../../../src/extract/resolve/get-manifest.mjs";
 
 const rootPackageJson = JSON.parse(
-  fs.readFileSync(
+  readFileSync(
     fileURLToPath(new URL("../../../package.json", import.meta.url)),
     "utf8"
   )
@@ -21,32 +21,32 @@ describe("[I] extract/resolve/get-manifest - classic strategy", () => {
 
   it("returns 'null' if the package.json does not exist over there", () => {
     process.chdir("test/extract/resolve/__fixtures__/no-package-json-here");
-    expect(getManifest(path.parse(process.cwd()).root)).to.equal(null);
+    expect(getManifest(parse(process.cwd()).root)).to.equal(null);
   });
 
   it("returns 'null' if the package.json is invalid", () => {
-    expect(getManifest(path.join(FIXTUREDIR, "invalid-package-json"))).to.equal(
+    expect(getManifest(join(FIXTUREDIR, "invalid-package-json"))).to.equal(
       null
     );
   });
 
   it("returns '{}' if the package.json is empty (which is - strictly speaking - not allowed", () => {
-    expect(
-      getManifest(path.join(FIXTUREDIR, "empty-package-json"))
-    ).to.deep.equal({});
+    expect(getManifest(join(FIXTUREDIR, "empty-package-json"))).to.deep.equal(
+      {}
+    );
   });
 
   it("returns an object with the package.json", () => {
-    expect(
-      getManifest(path.join(FIXTUREDIR, "minimal-package-json"))
-    ).to.deep.equal({
-      name: "the-absolute-bare-minimum-package-json",
-      version: "481.0.0",
-    });
+    expect(getManifest(join(FIXTUREDIR, "minimal-package-json"))).to.deep.equal(
+      {
+        name: "the-absolute-bare-minimum-package-json",
+        version: "481.0.0",
+      }
+    );
   });
 
   it("looks up the closest package.json", () => {
-    expect(getManifest(path.join(FIXTUREDIR, "no-package-json"))).to.deep.equal(
+    expect(getManifest(join(FIXTUREDIR, "no-package-json"))).to.deep.equal(
       rootPackageJson
     );
   });
@@ -65,8 +65,8 @@ describe("[I] extract/resolve/get-manifest - combined dependencies strategy", ()
   it("returns 'null' if the package.json is invalid", () => {
     expect(
       getManifest(
-        path.join(FIXTUREDIR, "invalid-package-json"),
-        path.join(FIXTUREDIR),
+        join(FIXTUREDIR, "invalid-package-json"),
+        join(FIXTUREDIR),
         true
       )
     ).to.equal(null);
@@ -85,7 +85,7 @@ describe("[I] extract/resolve/get-manifest - combined dependencies strategy", ()
     process.chdir("test/extract/resolve/__fixtures__/two-level-package-jsons");
     expect(
       getManifest(
-        path.join(process.cwd(), "packages", "subthing"),
+        join(process.cwd(), "packages", "subthing"),
         process.cwd(),
         true
       )
@@ -107,13 +107,7 @@ describe("[I] extract/resolve/get-manifest - combined dependencies strategy", ()
     process.chdir("test/extract/resolve/__fixtures__/two-level-package-jsons");
     expect(
       getManifest(
-        path.join(
-          process.cwd(),
-          "packages",
-          "subthing",
-          "src",
-          "somefunctionality"
-        ),
+        join(process.cwd(), "packages", "subthing", "src", "somefunctionality"),
         process.cwd(),
         true
       )
@@ -145,7 +139,7 @@ describe("[I] extract/resolve/get-manifest - combined dependencies strategy", ()
       "test/extract/resolve/__fixtures__/amok-prevention-bogus-sub"
     );
     expect(() => {
-      getManifest(process.cwd(), `${path.dirname(process.cwd())}/`, true);
+      getManifest(process.cwd(), `${dirname(process.cwd())}/`, true);
     }).to.throw(/Unusual baseDir passed to package reading function/);
   });
 });

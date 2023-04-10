@@ -1,4 +1,4 @@
-import fs from "node:fs";
+import { readFileSync } from "node:fs";
 import { expect } from "chai";
 import normalizeSource from "../normalize-source.utl.mjs";
 import typescriptWrap from "../../../src/extract/transpile/typescript-wrap.mjs";
@@ -16,7 +16,7 @@ describe("[I] typescript transpiler", () => {
     expect(
       normalizeSource(
         typeScriptRegularWrap.transpile(
-          fs.readFileSync(
+          readFileSync(
             "./test/extract/transpile/__mocks__/typescriptscript.ts",
             "utf8"
           )
@@ -24,7 +24,7 @@ describe("[I] typescript transpiler", () => {
       )
     ).to.equal(
       normalizeSource(
-        fs.readFileSync(
+        readFileSync(
           "./test/extract/transpile/__fixtures__/typescriptscript.js",
           "utf8"
         )
@@ -42,12 +42,12 @@ describe("[I] typescript transpiler (tsx)", () => {
     expect(
       normalizeSource(
         typeScriptTsxWrap.transpile(
-          fs.readFileSync("./test/extract/transpile/__mocks__/tsx.tsx", "utf8")
+          readFileSync("./test/extract/transpile/__mocks__/tsx.tsx", "utf8")
         )
       )
     ).to.equal(
       normalizeSource(
-        fs.readFileSync("./test/extract/transpile/__fixtures__/tsx.js", "utf8")
+        readFileSync("./test/extract/transpile/__fixtures__/tsx.js", "utf8")
       )
     );
   });
@@ -62,12 +62,12 @@ describe("[I] typescript transpiler (esm)", () => {
     expect(
       normalizeSource(
         typeScriptESMWrap.transpile(
-          fs.readFileSync("./test/extract/transpile/__mocks__/mts.mts", "utf8")
+          readFileSync("./test/extract/transpile/__mocks__/mts.mts", "utf8")
         )
       )
     ).to.equal(
       normalizeSource(
-        fs.readFileSync("./test/extract/transpile/__fixtures__/mts.mjs", "utf8")
+        readFileSync("./test/extract/transpile/__fixtures__/mts.mjs", "utf8")
       )
     );
   });

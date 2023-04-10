@@ -1,4 +1,4 @@
-import path from "node:path";
+import { dirname } from "node:path";
 import cloneDeep from "lodash/cloneDeep.js";
 import has from "lodash/has.js";
 import { resolve } from "../../extract/resolve/resolve.mjs";
@@ -67,7 +67,7 @@ export default async function extractDepcruiseConfig(
     ),
     "cli"
   );
-  const lBaseDirectory = path.dirname(lResolvedFileName);
+  const lBaseDirectory = dirname(lResolvedFileName);
 
   if (pAlreadyVisited.has(lResolvedFileName)) {
     throw new Error(

@@ -1,5 +1,4 @@
 import { isDeepStrictEqual } from "node:util";
-import get from "lodash/get.js";
 import uniqBy from "lodash/uniqBy.js";
 import uniqWith from "lodash/uniqWith.js";
 
@@ -87,10 +86,8 @@ function mergeOptions(pOptionsExtended, pOptionsBase) {
  * @returns {string} - a string from the SeverityType value set
  */
 function mergeAllowedSeverities(pConfigExtended, pConfigBase) {
-  return get(
-    pConfigExtended,
-    "allowedSeverity",
-    get(pConfigBase, "allowedSeverity", "warn")
+  return (
+    pConfigExtended?.allowedSeverity ?? pConfigBase?.allowedSeverity ?? "warn"
   );
 }
 
@@ -108,18 +105,19 @@ function mergeAllowedSeverities(pConfigExtended, pConfigBase) {
  *
  * @returns {Object} - The merged rule set
  */
+// eslint-disable-next-line complexity
 export default (pConfigExtended, pConfigBase) => {
   const lForbidden = mergeRules(
-    get(pConfigExtended, "forbidden", []),
-    get(pConfigBase, "forbidden", [])
+    pConfigExtended?.forbidden ?? [],
+    pConfigBase?.forbidden ?? []
   );
   const lRequired = mergeRules(
-    get(pConfigExtended, "required", []),
-    get(pConfigBase, "required", [])
+    pConfigExtended?.required ?? [],
+    pConfigBase?.required ?? []
   );
   const lAllowed = mergeAllowedRules(
-    get(pConfigExtended, "allowed", []),
-    get(pConfigBase, "allowed", [])
+    pConfigExtended?.allowed ?? [],
+    pConfigBase?.allowed ?? []
   );
 
   return {
@@ -132,8 +130,8 @@ export default (pConfigExtended, pConfigBase) => {
         }
       : {}),
     options: mergeOptions(
-      get(pConfigExtended, "options", {}),
-      get(pConfigBase, "options", {})
+      pConfigExtended?.options ?? {},
+      pConfigBase?.options ?? {}
     ),
   };
 };

@@ -1,5 +1,4 @@
 import fs from "node:fs";
-import get from "lodash/get.js";
 import has from "lodash/has.js";
 import omit from "lodash/omit.js";
 import enhancedResolve from "enhanced-resolve";
@@ -110,11 +109,8 @@ async function compileResolveOptions(
     ...omit(pResolveOptionsFromDCConfig, "cachedInputFileSystem"),
     ...pResolveOptions,
     ...getNonOverridableResolveOptions(
-      get(
-        pResolveOptionsFromDCConfig,
-        "cachedInputFileSystem.cacheDuration",
+      pResolveOptionsFromDCConfig?.cachedInputFileSystem?.cacheDuration ??
         DEFAULT_CACHE_DURATION
-      )
     ),
   };
 }
@@ -125,12 +121,13 @@ async function compileResolveOptions(
  * @param {import("typescript").ParsedTsconfig} pTSConfig
  * @returns
  */
+// eslint-disable-next-line complexity
 export default async function normalizeResolveOptions(
   pResolveOptions,
   pOptions,
   pTSConfig
 ) {
-  const lRuleSet = get(pOptions, "ruleSet", {});
+  const lRuleSet = pOptions?.ruleSet ?? {};
   // eslint-disable-next-line no-return-await
   return await compileResolveOptions(
     {
@@ -140,20 +137,20 @@ export default async function normalizeResolveOptions(
         symlink === !preserveSymlinks - but using it that way
         breaks backwards compatibility
       */
-      symlinks: get(pOptions, "preserveSymlinks", null),
-      tsConfig: get(pOptions, "ruleSet.options.tsConfig.fileName", null),
+      symlinks: pOptions?.preserveSymlinks ?? null,
+      tsConfig: pOptions?.ruleSet?.options?.tsConfig?.fileName ?? null,
 
       /* squirrel the externalModuleResolutionStrategy and combinedDependencies
          thing into the resolve options
          - they're not for enhanced resolve, but they are for what we consider
          resolve options ...
        */
-      combinedDependencies: get(pOptions, "combinedDependencies", false),
+      combinedDependencies: pOptions?.combinedDependencies ?? false,
       resolveLicenses: ruleSetHasLicenseRule(lRuleSet),
       resolveDeprecations: ruleSetHasDeprecationRule(lRuleSet),
       ...(pResolveOptions || {}),
     },
     pTSConfig || {},
-    get(pOptions, "enhancedResolveOptions", {})
+    pOptions?.enhancedResolveOptions ?? {}
   );
 }

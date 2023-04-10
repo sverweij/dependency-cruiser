@@ -1,10 +1,10 @@
-import fs from "node:fs";
+import { statSync } from "node:fs";
 import { toSourceLocationArray } from "./environment-helpers.mjs";
 
 export function validateLocation(pLocations) {
   for (const lLocation of toSourceLocationArray(pLocations)) {
     try {
-      if (!fs.statSync(lLocation).isDirectory()) {
+      if (!statSync(lLocation).isDirectory()) {
         return `'${lLocation}' doesn't seem to be a folder - please try again`;
       }
     } catch (pError) {

@@ -1,7 +1,7 @@
 /* eslint-disable import/exports-last */
 import { createHash } from "node:crypto";
 import { readFileSync } from "node:fs";
-import path from "node:path";
+import { extname } from "node:path";
 import memoize from "lodash/memoize.js";
 import { filenameMatchesPattern } from "../graph-utl/match-facade.mjs";
 
@@ -69,7 +69,7 @@ export function includeOnlyFilter(pIncludeOnlyFilter) {
  * @returns {(pFileName: string) => boolean}
  */
 export function hasInterestingExtension(pExtensions) {
-  return (pFileName) => pExtensions.has(path.extname(pFileName));
+  return (pFileName) => pExtensions.has(extname(pFileName));
 }
 
 /**
