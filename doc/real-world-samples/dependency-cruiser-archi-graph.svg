@@ -29,12 +29,12 @@
 <!-- src/cli -->
 <g id="node2" class="node">
 <title>src/cli</title>
-<g id="a_node2"><a xlink:href="https://github.com/sverweij/dependency-cruiser/blob/develop/src/cli" xlink:title="not&#45;reachable&#45;from&#45;folder&#45;index">
-<polygon fill="#ccccff" stroke="blue" points="118,-189 66,-189 64,-187 64,-171 116,-171 118,-173 118,-189"/>
-<polyline fill="none" stroke="blue" points="116,-187 64,-187"/>
-<polyline fill="none" stroke="blue" points="116,-187 116,-171"/>
-<polyline fill="none" stroke="blue" points="116,-187 118,-189"/>
-<text text-anchor="start" x="86" y="-177.8" font-family="Helvetica,sans-Serif" font-size="9.00" fill="blue">cli</text>
+<g id="a_node2"><a xlink:href="https://github.com/sverweij/dependency-cruiser/blob/develop/src/cli" xlink:title="cli">
+<polygon fill="#ccccff" stroke="black" points="118,-189 66,-189 64,-187 64,-171 116,-171 118,-173 118,-189"/>
+<polyline fill="none" stroke="black" points="116,-187 64,-187"/>
+<polyline fill="none" stroke="black" points="116,-187 116,-171"/>
+<polyline fill="none" stroke="black" points="116,-187 118,-189"/>
+<text text-anchor="start" x="86" y="-177.8" font-family="Helvetica,sans-Serif" font-size="9.00">cli</text>
 </a>
 </g>
 </g>
