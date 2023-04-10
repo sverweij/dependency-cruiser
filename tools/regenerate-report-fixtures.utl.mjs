@@ -1,10 +1,10 @@
-import { fileURLToPath } from "url";
+import { fileURLToPath } from "node:url";
 import fs from "node:fs";
 import path from "node:path";
-import dot from "../src/report/dot/index.js";
-import renderTeamcity from "../src/report/teamcity.js";
-import renderHTML from "../src/report/html/index.js";
-import renderCSV from "../src/report/csv.js";
+import dot from "../src/report/dot/index.mjs";
+import renderTeamcity from "../src/report/teamcity.mjs";
+import renderHTML from "../src/report/html/index.mjs";
+import renderCSV from "../src/report/csv.mjs";
 
 const renderCdot = dot("custom");
 const renderDdot = dot("folder");
@@ -21,13 +21,18 @@ function transformJSONtoFile(pInputFileName, pOutputFileName, pFunction) {
   );
 }
 
-function regenerateReportFixtures(pDirectory, pFunction, pTargetExtension) {
+function regenerateReportFixtures(
+  pDirectory,
+  pFunction,
+  pTargetExtension,
+  pRelativeTargetDirectory = "../__fixtures__"
+) {
   fs.readdirSync(pDirectory)
     .filter((pFileName) => pFileName.endsWith(".json"))
     .map((pFileName) => ({
       inputFileName: path.join(pDirectory, pFileName),
       outputFileName: path.join(
-        pDirectory,
+        path.join(pDirectory, pRelativeTargetDirectory),
         pFileName.replace(/\.json$/g, pTargetExtension)
       ),
     }))
@@ -49,14 +54,15 @@ function transformMJStoFile(pInputFileName, pOutputFileName, pFunction) {
 function regenerateReportFixturesFromMJS(
   pDirectory,
   pFunction,
-  pTargetExtension
+  pTargetExtension,
+  pRelativeTargetDirectory = "../__fixtures__"
 ) {
   fs.readdirSync(pDirectory)
     .filter((pFileName) => pFileName.endsWith(".mjs"))
     .map((pFileName) => ({
       inputFileName: path.join(pDirectory, pFileName),
       outputFileName: path.join(
-        pDirectory,
+        path.join(pDirectory, pRelativeTargetDirectory),
         pFileName.replace(/\.mjs$/g, pTargetExtension)
       ),
     }))
@@ -105,7 +111,8 @@ regenerateReportFixtures(DOT_MOCK_DIR, renderBareThemeDot, ".dot");
 regenerateReportFixturesFromMJS(
   TEAMCITY_MOCK_DIR,
   renderTeamcity,
-  "-teamcity-format.txt"
+  "-teamcity-format.txt",
+  "."
 );
-regenerateReportFixtures(HTML_MOCK_DIR, renderHTML, ".html");
-regenerateReportFixtures(CSV_MOCK_DIR, renderCSV, ".csv");
+regenerateReportFixtures(HTML_MOCK_DIR, renderHTML, ".html", ".");
+regenerateReportFixtures(CSV_MOCK_DIR, renderCSV, ".csv", ".");

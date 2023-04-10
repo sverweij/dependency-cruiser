@@ -1,8 +1,8 @@
-import { fileURLToPath } from "url";
-import fs from "fs";
-import path from "path";
+import { fileURLToPath } from "node:url";
+import fs from "node:fs";
+import path from "node:path";
 import prettier from "prettier";
-import main from "../src/main/index.js";
+import main from "../src/main/index.mjs";
 
 const __dirname = fileURLToPath(new URL(".", import.meta.url));
 const WORKING_DIR = process.cwd();
@@ -32,22 +32,22 @@ function barfTheJSON(
 // main.cruise
 barfTheJSON(
   "ts.json",
-  main.cruise(["test/main/__mocks__/ts"]),
+  await main.cruise(["test/main/__mocks__/ts"]),
   MAIN_FIXTURE_DIR
 );
 barfTheJSON(
   "tsx.json",
-  main.cruise(["test/main/__mocks__/tsx"], {}, { bustTheCache: true }),
+  await main.cruise(["test/main/__mocks__/tsx"], {}, { bustTheCache: true }),
   MAIN_FIXTURE_DIR
 );
 barfTheJSON(
   "jsx.json",
-  main.cruise(["test/main/__mocks__/jsx"], {}, { bustTheCache: true }),
+  await main.cruise(["test/main/__mocks__/jsx"], {}, { bustTheCache: true }),
   MAIN_FIXTURE_DIR
 );
 barfTheJSON(
   "jsx-as-object.json",
-  main.cruise(
+  await main.cruise(
     ["test/main/__mocks__/jsx"],
     {
       ruleSet: {},
@@ -58,7 +58,7 @@ barfTheJSON(
 );
 barfTheJSON(
   "collapse-after-cruise/expected-result.json",
-  main.cruise(
+  await main.cruise(
     ["test/main/__mocks__/collapse-after-cruise"],
     {
       ruleSet: {},
@@ -71,7 +71,7 @@ barfTheJSON(
 // // main.cruise - tsPreCompilationDeps
 barfTheJSON(
   "ts-precomp-cjs.json",
-  main.cruise(
+  await main.cruise(
     ["test/main/__mocks__/ts-precompilation-deps-on-cjs"],
     {
       tsConfig: {
@@ -81,9 +81,11 @@ barfTheJSON(
     },
     { bustTheCache: true },
     {
-      options: {
-        baseUrl: ".",
-        module: "commonjs",
+      tsConfig: {
+        options: {
+          baseUrl: ".",
+          module: "commonjs",
+        },
       },
     }
   ),
@@ -92,7 +94,7 @@ barfTheJSON(
 
 barfTheJSON(
   "ts-no-precomp-cjs.json",
-  main.cruise(
+  await main.cruise(
     ["test/main/__mocks__/ts-precompilation-deps-off-cjs"],
     {
       tsConfig: {
@@ -102,9 +104,11 @@ barfTheJSON(
     },
     { bustTheCache: true },
     {
-      options: {
-        baseUrl: ".",
-        module: "commonjs",
+      tsConfig: {
+        options: {
+          baseUrl: ".",
+          module: "commonjs",
+        },
       },
     }
   ),
@@ -113,7 +117,7 @@ barfTheJSON(
 
 barfTheJSON(
   "ts-precomp-es.json",
-  main.cruise(
+  await main.cruise(
     ["test/main/__mocks__/ts-precompilation-deps-on-es"],
     {
       tsConfig: {
@@ -123,9 +127,11 @@ barfTheJSON(
     },
     { bustTheCache: true },
     {
-      options: {
-        baseUrl: ".",
-        module: "es6",
+      tsConfig: {
+        options: {
+          baseUrl: ".",
+          module: "es6",
+        },
       },
     }
   ),
@@ -134,7 +140,7 @@ barfTheJSON(
 
 barfTheJSON(
   "ts-no-precomp-es.json",
-  main.cruise(
+  await main.cruise(
     ["test/main/__mocks__/ts-precompilation-deps-off-es"],
     {
       tsConfig: {
@@ -144,9 +150,11 @@ barfTheJSON(
     },
     { bustTheCache: true },
     {
-      options: {
-        baseUrl: ".",
-        module: "es6",
+      tsConfig: {
+        options: {
+          baseUrl: ".",
+          module: "es6",
+        },
       },
     }
   ),
@@ -182,21 +190,21 @@ const DYNAMIC_IMPORTS_RULE_SET = {
 process.chdir("test/main/__mocks__/dynamic-imports/es");
 barfTheJSON(
   "dynamic-imports/es/output.json",
-  main.cruise(["src"], DYNAMIC_IMPORTS_RULE_SET, { bustTheCache: true })
+  await main.cruise(["src"], DYNAMIC_IMPORTS_RULE_SET, { bustTheCache: true })
 );
 process.chdir(WORKING_DIR);
 
 process.chdir("test/main/__mocks__/dynamic-imports/typescript");
 barfTheJSON(
   "dynamic-imports/typescript/output.json",
-  main.cruise(["src"], DYNAMIC_IMPORTS_RULE_SET, { bustTheCache: true })
+  await main.cruise(["src"], DYNAMIC_IMPORTS_RULE_SET, { bustTheCache: true })
 );
 process.chdir(WORKING_DIR);
 
 process.chdir("test/main/__mocks__/dynamic-imports/typescript");
 barfTheJSON(
   "dynamic-imports/typescript/output-pre-compilation-deps.json",
-  main.cruise(
+  await main.cruise(
     ["src"],
     { ...DYNAMIC_IMPORTS_RULE_SET, tsPreCompilationDeps: true },
     { bustTheCache: true }
@@ -208,7 +216,7 @@ process.chdir(WORKING_DIR);
 process.chdir("test/main/__mocks__/type-only-module-references");
 barfTheJSON(
   "type-only-module-references/output.json",
-  main.cruise(
+  await main.cruise(
     ["src"],
     { tsPreCompilationDeps: true },
     { bustTheCache: true, resolveLicenses: true }
@@ -219,7 +227,11 @@ process.chdir(WORKING_DIR);
 process.chdir("test/main/__mocks__/type-only-module-references");
 barfTheJSON(
   "type-only-module-references/output-no-ts.json",
-  main.cruise(["src"], { tsPreCompilationDeps: false }, { bustTheCache: true })
+  await main.cruise(
+    ["src"],
+    { tsPreCompilationDeps: false },
+    { bustTheCache: true }
+  )
 );
 process.chdir(WORKING_DIR);
 
@@ -227,7 +239,7 @@ process.chdir(WORKING_DIR);
 process.chdir("test/main/__mocks__/type-only-imports");
 barfTheJSON(
   "type-only-imports/output.json",
-  main.cruise(
+  await main.cruise(
     ["src"],
     {
       tsPreCompilationDeps: true,
@@ -240,7 +252,7 @@ process.chdir(WORKING_DIR);
 process.chdir("test/main/__mocks__/type-only-imports");
 barfTheJSON(
   "type-only-imports/output-with-rules.json",
-  main.cruise(
+  await main.cruise(
     ["src"],
     {
       ruleSet: {
