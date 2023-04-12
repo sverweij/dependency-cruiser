@@ -46,24 +46,19 @@
   "main": "src/main/index.mjs",
   "exports": {
     ".": {
-      "import": "./src/main/index.mjs",
-      "require": "./dist/main/index.js"
+      "import": "./src/main/index.mjs"
     },
     "./config-utl/extract-babel-config": {
-      "import": "./src/config-utl/extract-babel-config.mjs",
-      "require": "./dist/config-utl/extract-babel-config.js"
+      "import": "./src/config-utl/extract-babel-config.mjs"
     },
     "./config-utl/extract-depcruise-config": {
-      "import": "./src/config-utl/extract-depcruise-config/index.mjs",
-      "require": "./dist/config-utl/extract-depcruise-config/index.js"
+      "import": "./src/config-utl/extract-depcruise-config/index.mjs"
     },
     "./config-utl/extract-ts-config": {
-      "import": "./src/config-utl/extract-ts-config.mjs",
-      "require": "./dist/config-utl/extract-ts-config.js"
+      "import": "./src/config-utl/extract-ts-config.mjs"
     },
     "./config-utl/extract-webpack-resolve-config": {
-      "import": "./src/config-utl/extract-webpack-resolve-config.mjs",
-      "require": "./dist/config-utl/extract-webpack-resolve-config.js"
+      "import": "./src/config-utl/extract-webpack-resolve-config.mjs"
     },
     "./sample-reporter-plugin": "./configs/plugins/stats-reporter-plugin.js",
     "./sample-3d-reporter-plugin": "./configs/plugins/3d-reporter-plugin.js",
