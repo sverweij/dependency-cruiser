@@ -63,7 +63,7 @@ npx depcruise src --include-only "^src" --output-type dot | dot -T svg > depende
   options in the [command line interface](./doc/cli.md) documentation.
 - _[Real world samples](./doc/real-world-samples.md)_
   contains dependency cruises of some of the most used projects on npm.
-- If our grandma is more into formats like `mermaid`, `json`, `csv`, `html` or plain text
+- If your grandma is more into formats like `mermaid`, `json`, `csv`, `html` or plain text
   we've [got her covered](./doc/cli.md#--output-type-specify-the-output-format)
   as well.
 
@@ -107,7 +107,7 @@ Sample rule:
 #### Report them
 
 ```sh
-npx depcruise --config .dependency-cruiser.js src
+npx depcruise src
 ```
 
 This will validate against your rules and shows any violations in an eslint-like format:
