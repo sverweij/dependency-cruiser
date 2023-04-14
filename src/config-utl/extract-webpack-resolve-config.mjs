@@ -46,14 +46,6 @@ function suggestModules(pSuggestionList, pWebpackConfigFilename) {
 
 function tryRegisterNonNative(pWebpackConfigFilename) {
   const lConfigExtension = extname(pWebpackConfigFilename);
-
-  if (lConfigExtension === ".mjs") {
-    throw new Error(
-      `dependency-cruiser currently does not support webpack configurations in` +
-        `\n         ES Module format (like '${pWebpackConfigFilename}').\n`
-    );
-  }
-
   const interpret = require("interpret");
   const rechoir = require("rechoir");
 
@@ -71,6 +63,41 @@ function tryRegisterNonNative(pWebpackConfigFilename) {
   }
 }
 
+function isNativelySupported(pWebpackConfigFilename) {
+  const lNativelySupportedExtensions = [
+    ".js",
+    ".cjs",
+    ".mjs",
+    ".json",
+    ".node",
+  ];
+  const lWebpackConfigExtension = extname(pWebpackConfigFilename);
+  return lNativelySupportedExtensions.includes(lWebpackConfigExtension);
+}
+
+async function attemptImport(pAbsoluteWebpackConfigFileName) {
+  try {
+    if (isNativelySupported(pAbsoluteWebpackConfigFileName)) {
+      const lModule = await import(`file://${pAbsoluteWebpackConfigFileName}`);
+      return lModule.default;
+    } else {
+      tryRegisterNonNative(pAbsoluteWebpackConfigFileName);
+      /* we're using still using require instead of dynamic imports here because
+       * the modules webpack uses for non-native formats monkey-patch on the commonjs
+       * module system. If we'd use a dynamic import, these monkey-patches wouldn't
+       * be used.
+       */
+      /* eslint node/global-require:0, security/detect-non-literal-require:0, import/no-dynamic-require:0 */
+      return require(pAbsoluteWebpackConfigFileName);
+    }
+  } catch (pError) {
+    throw new Error(
+      `The webpack config '${pAbsoluteWebpackConfigFileName}' seems to be not quite valid for use:` +
+        `\n\n          "${pError}"\n`
+    );
+  }
+}
+
 /**
  * Reads the file with name `pWebpackConfigFilename` and (applying the
  * environment `pEnvironment` and the arguments `pArguments` (which can
@@ -84,42 +111,21 @@ function tryRegisterNonNative(pWebpackConfigFilename) {
  * @throws {Error} when the webpack config isn't usable (e.g. because it
  *                 doesn't exist, or because it's invalid)
  */
-
-export default function extractWebpackResolveConfig(
+export default async function extractWebpackResolveConfig(
   pWebpackConfigFilename,
   pEnvironment,
   pArguments
 ) {
   let lReturnValue = {};
-  const lNativelySupportedExtensions = [".js", ".cjs", ".json", ".node"];
-  const lWebpackConfigFilename = makeAbsolute(pWebpackConfigFilename);
+  const lAbsoluteConfigFilename = makeAbsolute(pWebpackConfigFilename);
+  const lWebpackConfig = pryConfigFromTheConfig(
+    await attemptImport(lAbsoluteConfigFilename),
+    pEnvironment,
+    pArguments
+  );
 
-  if (!lNativelySupportedExtensions.includes(extname(pWebpackConfigFilename))) {
-    tryRegisterNonNative(pWebpackConfigFilename);
-  }
-
-  try {
-    /* we're using still using require instead of dynamic imports here because
-     * the modules webpack uses for non-native formats monkey-patch on the commonjs
-     * module system. If we'd use a dynamic import, these monkey-patches wouldn't
-     * be used.
-     */
-    /* eslint node/global-require:0, security/detect-non-literal-require:0, import/no-dynamic-require:0 */
-    const lWebpackConfigModule = require(lWebpackConfigFilename);
-    const lWebpackConfig = pryConfigFromTheConfig(
-      lWebpackConfigModule,
-      pEnvironment,
-      pArguments
-    );
-
-    if (lWebpackConfig.resolve) {
-      lReturnValue = lWebpackConfig.resolve;
-    }
-  } catch (pError) {
-    throw new Error(
-      `The webpack config '${pWebpackConfigFilename}' seems to be not quite valid for use:` +
-        `\n\n          "${pError}"\n`
-    );
+  if (lWebpackConfig.resolve) {
+    lReturnValue = lWebpackConfig.resolve;
   }
 
   return lReturnValue;

@@ -6,35 +6,49 @@ function getFullPath(pRelativePath) {
   return fileURLToPath(new URL(pRelativePath, import.meta.url));
 }
 describe("[I] config-utl/extract-webpack-resolve-config - native formats", () => {
-  it("throws when no config file name is passed", () => {
-    expect(() => loadResolveConfig()).to.throw();
+  it("throws when no config file name is passed", async () => {
+    let lThrown = false;
+    try {
+      await loadResolveConfig();
+    } catch (_pError) {
+      lThrown = true;
+    }
+    expect(lThrown).to.equal(true);
   });
 
-  it("throws when a non-existing config file is passed", () => {
-    expect(() => {
-      loadResolveConfig("config-does-not-exist");
-    }).to.throw();
+  it("throws when a non-existing config file is passed", async () => {
+    let lThrown = false;
+    try {
+      await loadResolveConfig("config-does-not-exist");
+    } catch (_pError) {
+      lThrown = true;
+    }
+    expect(lThrown).to.equal(true);
   });
 
-  it("throws when a config file is passed that does not contain valid javascript", () => {
-    expect(() => {
-      loadResolveConfig(
+  it("throws when a config file is passed that does not contain valid javascript", async () => {
+    let lThrown = false;
+    try {
+      await loadResolveConfig(
         getFullPath("./__mocks__/webpackconfig/invalid.config.js")
       );
-    }).to.throw();
+    } catch (_pError) {
+      lThrown = true;
+    }
+    expect(lThrown).to.equal(true);
   });
 
-  it("returns an empty object when a config file is passed without a 'resolve' section", () => {
+  it("returns an empty object when a config file is passed without a 'resolve' section", async () => {
     expect(
-      loadResolveConfig(
+      await loadResolveConfig(
         getFullPath("./__mocks__/webpackconfig/noresolve.config.js")
       )
     ).to.deep.equal({});
   });
 
-  it("returns the resolve section of the webpack config if there's any", () => {
+  it("returns the resolve section of the webpack config if there's any", async () => {
     expect(
-      loadResolveConfig(
+      await loadResolveConfig(
         getFullPath("./__mocks__/webpackconfig/hasaresolve.config.js")
       )
     ).to.deep.equal({
@@ -45,9 +59,22 @@ describe("[I] config-utl/extract-webpack-resolve-config - native formats", () =>
     });
   });
 
-  it("returns the production resolve section of the webpack config if that's an environment specific", () => {
+  it("returns the resolve section of the webpack config if there's any (.mjs variant)", async () => {
     expect(
-      loadResolveConfig(
+      await loadResolveConfig(
+        getFullPath("./__mocks__/webpackconfig/webpack.config.mjs")
+      )
+    ).to.deep.equal({
+      alias: {
+        config: "src/config",
+        magic$: "src/merlin/browserify/magic",
+      },
+    });
+  });
+
+  it("returns the production resolve section of the webpack config if that's an environment specific", async () => {
+    expect(
+      await loadResolveConfig(
         getFullPath(
           "./__mocks__/webpackconfig/hastwoseparateresolves.config.js"
         ),
@@ -61,9 +88,9 @@ describe("[I] config-utl/extract-webpack-resolve-config - native formats", () =>
     });
   });
 
-  it("returns the 'other' resolve section of the webpack config if development environment is requested", () => {
+  it("returns the 'other' resolve section of the webpack config if development environment is requested", async () => {
     expect(
-      loadResolveConfig(
+      await loadResolveConfig(
         getFullPath(
           "./__mocks__/webpackconfig/hastwoseparateresolves.config.js"
         ),
@@ -77,9 +104,9 @@ describe("[I] config-utl/extract-webpack-resolve-config - native formats", () =>
     });
   });
 
-  it("returns the resolve section of the function returning webpack config if there's any", () => {
+  it("returns the resolve section of the function returning webpack config if there's any", async () => {
     expect(
-      loadResolveConfig(
+      await loadResolveConfig(
         getFullPath(
           "./__mocks__/webpackconfig/aliassy/webpack.functionexport.config.js"
         )
@@ -92,9 +119,9 @@ describe("[I] config-utl/extract-webpack-resolve-config - native formats", () =>
     });
   });
 
-  it("returns the resolve section of the first element of the array returning webpack config if there's any", () => {
+  it("returns the resolve section of the first element of the array returning webpack config if there's any", async () => {
     expect(
-      loadResolveConfig(
+      await loadResolveConfig(
         getFullPath(
           "./__mocks__/webpackconfig/aliassy/webpack.arrayexport.config.js"
         )
@@ -107,9 +134,9 @@ describe("[I] config-utl/extract-webpack-resolve-config - native formats", () =>
     });
   });
 
-  it("returns the resolve section of the result of the first element of the array if that's a function", () => {
+  it("returns the resolve section of the result of the first element of the array if that's a function", async () => {
     expect(
-      loadResolveConfig(
+      await loadResolveConfig(
         getFullPath(
           "./__mocks__/webpackconfig/aliassy/webpack.functionarrayexport.config.js"
         )

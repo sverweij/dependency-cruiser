@@ -768,9 +768,9 @@ you can provide the parameters like so:
 - :bulb: If your webpack config exports an array of configurations,
   dependency-cruiser will only use the resolve options of the first
   configuration in that array.
-- :warning: at this time webpack configurations in ES module format (.mjs) are
-  _not_ supported.
-- :bulb: other formats of webpack configurations (TypeScript, yaml, livescript(!),
+- :bulb: Configuration files in the node 'native' formats (.json, .js (both commonjs
+  and ESM), .cjs, .mjs, .node) will load without configuration.
+- :bulb: formats of webpack configurations (TypeScript, yaml, livescript(!),
   json5 etc.) only work when the function is available that hacks nodejs into
   accepting the language type.
   This should already be the case in order for `webpack-cli` to parse the config in

@@ -7,7 +7,7 @@ import tryImport from "semver-try-require";
 import meta from "../meta.js";
 import makeAbsolute from "./make-absolute.mjs";
 
-async function getCommonJSConfig(pBabelConfigFileName) {
+async function getJSConfig(pBabelConfigFileName) {
   let lReturnValue = {};
 
   try {
@@ -55,9 +55,9 @@ function getJSON5Config(pBabelConfigFileName) {
 
 async function getConfig(pBabelConfigFileName) {
   const lExtensionToParseFunction = {
-    ".js": getCommonJSConfig,
-    ".cjs": getCommonJSConfig,
-    ".mjs": getCommonJSConfig,
+    ".js": getJSConfig,
+    ".cjs": getJSConfig,
+    ".mjs": getJSConfig,
     "": getJSON5Config,
     ".json": getJSON5Config,
     ".json5": getJSON5Config,

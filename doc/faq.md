@@ -451,7 +451,7 @@ your dependencies. This includes any `alias` you might have in there.
 Currently dependency-cruiser supports a reasonable subset of webpack
 config file formats:
 
-- nodejs parsable JavaScript only
+- nodejs parsable JavaScript only (_including_ ESM)
 - webpack 4 compatible and up (although earlier ones _might_ work
   there's no guarantee)
 - exporting either:
@@ -459,9 +459,10 @@ config file formats:
   - a function (webpack 4 style, taking up to two parameters)
   - an array of the above (where dependency-cruiser takes the
     first element in the array)
-
-Support for other formats (promise exports, TypeScript, fancier
-ECMAScript) might come later.
+- other formats (TypeScript, yaml, LiveScript, ...) will work if the function
+  is available that hacks node into understanding it. If you use a format like
+  this for your webpack configuration, it's likely this function is already
+  available.
 
 </details>
 

@@ -23,13 +23,13 @@ import setUpPerformanceLogListener from "./listeners/performance-log/index.mjs";
 import setUpNDJSONListener from "./listeners/ndjson.mjs";
 import initConfig from "./init-config/index.mjs";
 
-function extractResolveOptions(pCruiseOptions) {
+async function extractResolveOptions(pCruiseOptions) {
   let lResolveOptions = {};
   const lWebPackConfigFileName =
     pCruiseOptions?.ruleSet?.options?.webpackConfig?.fileName ?? null;
 
   if (lWebPackConfigFileName) {
-    lResolveOptions = extractWebpackResolveConfig(
+    lResolveOptions = await extractWebpackResolveConfig(
       lWebPackConfigFileName,
       pCruiseOptions?.ruleSet?.options?.webpackConfig?.env ?? null,
       pCruiseOptions?.ruleSet?.options?.webpackConfig?.arguments ?? null
@@ -118,7 +118,7 @@ async function runCruise(pFileDirectoryArray, pCruiseOptions) {
   const lReportingResult = await cruise(
     pFileDirectoryArray,
     lCruiseOptions,
-    extractResolveOptions(lCruiseOptions),
+    await extractResolveOptions(lCruiseOptions),
     {
       tsConfig: extractTSConfigOptions(lCruiseOptions),
       babelConfig: await extractBabelConfigOptions(lCruiseOptions),
