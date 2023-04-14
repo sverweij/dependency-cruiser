@@ -32,8 +32,9 @@ function writeToStdOut(pString, pBufferSize = PIPE_BUFFER_SIZE) {
 
   /* eslint no-plusplus: 0 */
   for (lIndex = 0; lIndex < lNumberOfChunks; lIndex++) {
+    const lChunkStart = lIndex * pBufferSize;
     process.stdout.write(
-      pString.substr(lIndex * pBufferSize, pBufferSize),
+      pString.substring(lChunkStart, lChunkStart + pBufferSize),
       "utf8"
     );
   }
