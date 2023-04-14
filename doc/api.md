@@ -109,7 +109,9 @@ try {
   const depcruiseConfig: ICruiseOptions = await extractDepcruiseConfig(
     "./.dependency-cruiser.js"
   );
-  const webpackResolveConfig = extractWebpackResolveConfig("./webpack.conf.js");
+  const webpackResolveConfig = await extractWebpackResolveConfig(
+    "./webpack.conf.js"
+  );
   const tsConfig = extractTSConfig("./tsconfig.json");
   // const babelConfig = await extractBabelConfig("./babel.conf.json");
 
