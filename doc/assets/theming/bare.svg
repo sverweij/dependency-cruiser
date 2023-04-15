@@ -24,11 +24,6 @@
 <polygon fill="none" stroke="black" points="258,-24 258,-171 524,-171 524,-24 258,-24"/>
 <text text-anchor="middle" x="391" y="-155.8" font-family="Times,serif" font-size="14.00">options</text>
 </g>
-<g id="clust3" class="cluster">
-<title>cluster_src/main/files&#45;and&#45;dirs</title>
-<polygon fill="none" stroke="black" points="24,-179 24,-254 164,-254 164,-179 24,-179"/>
-<text text-anchor="middle" x="94" y="-238.8" font-family="Times,serif" font-size="14.00">files&#45;and&#45;dirs</text>
-</g>
 <g id="clust5" class="cluster">
 <title>cluster_src/main/resolve&#45;options</title>
 <polygon fill="none" stroke="black" points="359,-179 359,-254 499,-254 499,-179 359,-179"/>
@@ -38,6 +33,11 @@
 <title>cluster_src/main/rule&#45;set</title>
 <polygon fill="none" stroke="black" points="507,-179 507,-254 773,-254 773,-179 507,-179"/>
 <text text-anchor="middle" x="640" y="-238.8" font-family="Times,serif" font-size="14.00">rule&#45;set</text>
+</g>
+<g id="clust3" class="cluster">
+<title>cluster_src/main/files&#45;and&#45;dirs</title>
+<polygon fill="none" stroke="black" points="24,-179 24,-254 164,-254 164,-179 24,-179"/>
+<text text-anchor="middle" x="94" y="-238.8" font-family="Times,serif" font-size="14.00">files&#45;and&#45;dirs</text>
 </g>
 <!-- src/main/files&#45;and&#45;dirs/normalize.mjs -->
 <g id="node1" class="node">
