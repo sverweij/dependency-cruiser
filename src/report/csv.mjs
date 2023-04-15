@@ -1,3 +1,4 @@
+import { EOL } from "node:os";
 import dependencyToIncidenceTransformer from "./utl/dependency-to-incidence-transformer.mjs";
 
 function renderHeader(pModules) {
@@ -9,15 +10,15 @@ function mapIncidences(pIncidences) {
 }
 
 function renderBody(pModules) {
-  return pModules.reduce(
-    (pAll, pModule) =>
-      `${pAll}\n"${pModule.source}",${mapIncidences(pModule.incidences)},""`,
-    ""
-  );
+  return pModules
+    .map(
+      (pModule) => `"${pModule.source}",${mapIncidences(pModule.incidences)},""`
+    )
+    .join(EOL);
 }
 
 function report(pModules) {
-  return `"",${renderHeader(pModules)},""${renderBody(pModules)}\n`;
+  return `"",${renderHeader(pModules)},""${EOL}${renderBody(pModules)}${EOL}`;
 }
 
 /**

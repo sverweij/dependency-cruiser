@@ -1,3 +1,4 @@
+import { EOL } from "node:os";
 import figures from "figures";
 import chalk from "chalk";
 
@@ -72,7 +73,7 @@ function report(pResults, pOptions) {
     getModulesInFocus(pResults.modules),
     lOptions.highlightFocused === true
   ).reduce(
-    (pAll, pDependency) => pAll.concat(stringify(pDependency)).concat("\n"),
+    (pAll, pDependency) => pAll.concat(stringify(pDependency)).concat(EOL),
     ""
   );
 }

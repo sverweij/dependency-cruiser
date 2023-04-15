@@ -1,3 +1,4 @@
+import { EOL } from "node:os";
 import chalk from "chalk";
 import figures from "figures";
 import { findRuleByName } from "../graph-utl/rule-set.mjs";
@@ -17,9 +18,9 @@ const SEVERITY2CHALK = {
 const EXTRA_PATH_INFORMATION_INDENT = 6;
 
 function formatExtraPathInformation(pExtra) {
-  return "\n".concat(
+  return EOL.concat(
     wrapAndIndent(
-      pExtra.join(` ${figures.arrowRight} \n`),
+      pExtra.join(` ${figures.arrowRight} ${EOL}`),
       EXTRA_PATH_INFORMATION_INDENT
     )
   );
@@ -48,7 +49,7 @@ function formatReachabilityViolation(pViolation) {
 }
 
 function formatInstabilityViolation(pViolation) {
-  return `${formatDependencyViolation(pViolation)}\n${wrapAndIndent(
+  return `${formatDependencyViolation(pViolation)}${EOL}${wrapAndIndent(
     chalk.dim(
       `instability: ${formatPercentage(pViolation.metrics.from.instability)} ${
         figures.arrowRight
@@ -78,7 +79,7 @@ function formatViolation(pViolation) {
     }: ${lFormattedViolators}` +
     `${
       pViolation.comment
-        ? `\n${wrapAndIndent(chalk.dim(pViolation.comment))}\n`
+        ? `${EOL}${wrapAndIndent(chalk.dim(pViolation.comment))}${EOL}`
         : ""
     }`
   );
@@ -93,11 +94,11 @@ function sumMeta(pMeta) {
 }
 
 function formatSummary(pSummary) {
-  let lMessage = `\n${figures.cross} ${sumMeta(
+  let lMessage = `${EOL}${figures.cross} ${sumMeta(
     pSummary
   )} dependency violations (${formatMeta(pSummary)}). ${
     pSummary.totalCruised
-  } modules, ${pSummary.totalDependenciesCruised} dependencies cruised.\n`;
+  } modules, ${pSummary.totalDependenciesCruised} dependencies cruised.${EOL}`;
 
   return pSummary.error > 0 ? chalk.red(lMessage) : lMessage;
 }
@@ -114,7 +115,7 @@ function addExplanation(pRuleSet, pLong) {
 function formatIgnoreWarning(pNumberOfIgnoredViolations) {
   if (pNumberOfIgnoredViolations > 0) {
     return chalk.yellow(
-      `${figures.warning} ${pNumberOfIgnoredViolations} known violations ignored. Run with --no-ignore-known to see them.\n`
+      `${figures.warning} ${pNumberOfIgnoredViolations} known violations ignored. Run with --no-ignore-known to see them.${EOL}`
     );
   }
   return "";
@@ -126,22 +127,24 @@ function report(pResults, pLong) {
   );
 
   if (lNonIgnorableViolations.length === 0) {
-    return `\n${chalk.green(figures.tick)} no dependency violations found (${
+    return `${EOL}${chalk.green(
+      figures.tick
+    )} no dependency violations found (${
       pResults.summary.totalCruised
     } modules, ${
       pResults.summary.totalDependenciesCruised
-    } dependencies cruised)\n${formatIgnoreWarning(
+    } dependencies cruised)${EOL}${formatIgnoreWarning(
       pResults.summary.ignore
-    )}\n\n`;
+    )}${EOL}`;
   }
 
   return lNonIgnorableViolations
     .reverse()
     .map(addExplanation(pResults.summary.ruleSetUsed, pLong))
-    .reduce((pAll, pThis) => `${pAll}  ${formatViolation(pThis)}\n`, "\n")
+    .reduce((pAll, pThis) => `${pAll}  ${formatViolation(pThis)}${EOL}`, EOL)
     .concat(formatSummary(pResults.summary))
     .concat(formatIgnoreWarning(pResults.summary.ignore))
-    .concat(`\n`);
+    .concat(EOL);
 }
 
 /**
