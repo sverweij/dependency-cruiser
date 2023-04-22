@@ -90,6 +90,10 @@ function gatherScannableFilesFromDirectory(pDirectoryName, pOptions) {
 export default function gatherInitialSources(pFileAndDirectoryArray, pOptions) {
   const lOptions = { baseDir: process.cwd(), ...pOptions };
 
+  // these are `.reduce`s and not `.map`s because they typically return larger
+  // arrays than the pFileAndDirectoryArray:
+  // - `glob` returns an array of strings
+  // - so does `gatherScannableFilesFromDirectory`
   return pFileAndDirectoryArray
     .reduce(
       (pAll, pFileOrDirectory) =>
