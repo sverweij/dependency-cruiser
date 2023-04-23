@@ -22,7 +22,9 @@
           "(^|/)(babel|webpack)\\.config\\.(js|cjs|mjs|ts|json)$",
           "-reporter-plugin\\.js$",
           "\\.schema\\.json$",
-          "^tools/istanbul-json-summary-to-markdown\\.mjs$"
+          "^tools/istanbul-json-summary-to-markdown\\.mjs$",
+          "^src/report/json\\.mjs",
+          "^src/report/identity\\.mjs"
         ]
       }
     },
@@ -201,7 +203,7 @@
       "from": { "path": "^bin/" },
       "to": {
         "path": "^src",
-        "pathNot": ["\\.schema\\.json$", "\\.d\\.ts$"],
+        "pathNot": ["\\.schema\\.json$", "\\.d\\.ts$", "^src/report/"],
         "reachable": false
       }
     },
@@ -212,7 +214,7 @@
       "from": { "path": "\\.spec\\.m?js$" },
       "to": {
         "path": "^src",
-        "pathNot": ["\\.schema\\.json$", "\\.d\\.ts$"],
+        "pathNot": ["\\.schema\\.json$", "\\.d\\.ts$", "^src/report/"],
         "reachable": false
       }
     },

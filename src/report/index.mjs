@@ -1,45 +1,25 @@
-import anon from "./anon/index.mjs";
-import csv from "./csv.mjs";
-import dotBase from "./dot/index.mjs";
-import errorHtml from "./error-html/index.mjs";
-import error from "./error.mjs";
-import errorLong from "./error-long.mjs";
-import html from "./html/index.mjs";
-import identity from "./identity.mjs";
-import json from "./json.mjs";
-import teamcity from "./teamcity.mjs";
-import text from "./text.mjs";
-import baseline from "./baseline.mjs";
-import metrics from "./metrics.mjs";
 import { getExternalPluginReporter } from "./plugins.mjs";
-import markdown from "./markdown.mjs";
-import mermaid from "./mermaid.mjs";
 
-const dot = dotBase("module");
-const ddot = dotBase("folder");
-const cdot = dotBase("custom");
-const fdot = dotBase("flat");
-
-const TYPE2REPORTER = {
-  anon,
-  csv,
-  dot,
-  ddot,
-  cdot,
-  archi: cdot,
-  fdot,
-  flat: fdot,
-  "err-html": errorHtml,
-  markdown,
-  "err-long": errorLong,
-  err: error,
-  html,
-  json,
-  teamcity,
-  text,
-  baseline,
-  metrics,
-  mermaid,
+const TYPE2MODULE = {
+  anon: "./anon/index.mjs",
+  csv: "./csv.mjs",
+  dot: "./dot/dot-module.mjs",
+  ddot: "./dot/dot-folder.mjs",
+  cdot: "./dot/dot-custom.mjs",
+  archi: "./dot/dot-custom.mjs",
+  fdot: "./dot/dot-flat.mjs",
+  flat: "./dot/dot-flat.mjs",
+  "err-html": "./error-html/index.mjs",
+  markdown: "./markdown.mjs",
+  "err-long": "./error-long.mjs",
+  err: "./error.mjs",
+  html: "./html/index.mjs",
+  json: "./json.mjs",
+  teamcity: "./teamcity.mjs",
+  text: "./text.mjs",
+  baseline: "./baseline.mjs",
+  metrics: "./metrics.mjs",
+  mermaid: "./mermaid.mjs",
 };
 
 /**
@@ -52,12 +32,17 @@ const TYPE2REPORTER = {
  *                       and returns an IReporterOutput
  */
 async function getReporter(pOutputType) {
-  return (
-    // eslint-disable-next-line security/detect-object-injection
-    TYPE2REPORTER[pOutputType] ||
-    (await getExternalPluginReporter(pOutputType)) ||
-    identity
-  );
+  let lReturnValue = {};
+  if (pOutputType?.startsWith("plugin:")) {
+    lReturnValue = await getExternalPluginReporter(pOutputType);
+  } else {
+    const lModuleToImport =
+      // eslint-disable-next-line security/detect-object-injection
+      TYPE2MODULE[pOutputType] || "./identity.mjs";
+    const lModule = await import(lModuleToImport);
+    lReturnValue = lModule.default;
+  }
+  return lReturnValue;
 }
 
 /**
@@ -66,7 +51,7 @@ async function getReporter(pOutputType) {
  * @returns {import("../../types/shared-types.js").OutputType[]} -
  */
 function getAvailableReporters() {
-  return Object.keys(TYPE2REPORTER);
+  return Object.keys(TYPE2MODULE);
 }
 
 export default {

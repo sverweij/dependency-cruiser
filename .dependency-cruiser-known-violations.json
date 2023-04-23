@@ -46,6 +46,15 @@
   },
   {
     "type": "module",
+    "from": "src/graph-utl/consolidate-to-folder.mjs",
+    "to": "src/graph-utl/consolidate-to-folder.mjs",
+    "rule": {
+      "severity": "error",
+      "name": "not-unreachable-from-cli"
+    }
+  },
+  {
+    "type": "module",
     "from": "src/schema/baseline-violations.schema.mjs",
     "to": "src/schema/baseline-violations.schema.mjs",
     "rule": {
