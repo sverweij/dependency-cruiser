@@ -64,15 +64,15 @@
 <path fill="#ffffff" stroke="black" stroke-width="2" d="M265,-256C265,-256 722.5,-256 722.5,-256 728.5,-256 734.5,-262 734.5,-268 734.5,-268 734.5,-530 734.5,-530 734.5,-536 728.5,-542 722.5,-542 722.5,-542 265,-542 265,-542 259,-542 253,-536 253,-530 253,-530 253,-268 253,-268 253,-262 259,-256 265,-256"/>
 <text text-anchor="middle" x="493.75" y="-530.8" font-family="Helvetica,sans-Serif" font-weight="bold" font-size="9.00">main</text>
 </g>
-<g id="clust12" class="cluster">
-<title>cluster_src/main/files&#45;and&#45;dirs</title>
-<path fill="#ffffff" stroke="black" stroke-width="2" d="M386,-374C386,-374 452,-374 452,-374 458,-374 464,-380 464,-386 464,-386 464,-414 464,-414 464,-420 458,-426 452,-426 452,-426 386,-426 386,-426 380,-426 374,-420 374,-414 374,-414 374,-386 374,-386 374,-380 380,-374 386,-374"/>
-<text text-anchor="middle" x="419" y="-414.8" font-family="Helvetica,sans-Serif" font-weight="bold" font-size="9.00">files&#45;and&#45;dirs</text>
-</g>
 <g id="clust13" class="cluster">
 <title>cluster_src/main/options</title>
 <path fill="#ffffff" stroke="black" stroke-width="2" d="M507.5,-334C507.5,-334 714.5,-334 714.5,-334 720.5,-334 726.5,-340 726.5,-346 726.5,-346 726.5,-404 726.5,-404 726.5,-410 720.5,-416 714.5,-416 714.5,-416 507.5,-416 507.5,-416 501.5,-416 495.5,-410 495.5,-404 495.5,-404 495.5,-346 495.5,-346 495.5,-340 501.5,-334 507.5,-334"/>
 <text text-anchor="middle" x="611" y="-404.8" font-family="Helvetica,sans-Serif" font-weight="bold" font-size="9.00">options</text>
+</g>
+<g id="clust12" class="cluster">
+<title>cluster_src/main/files&#45;and&#45;dirs</title>
+<path fill="#ffffff" stroke="black" stroke-width="2" d="M386,-374C386,-374 452,-374 452,-374 458,-374 464,-380 464,-386 464,-386 464,-414 464,-414 464,-420 458,-426 452,-426 452,-426 386,-426 386,-426 380,-426 374,-420 374,-414 374,-414 374,-386 374,-386 374,-380 380,-374 386,-374"/>
+<text text-anchor="middle" x="419" y="-414.8" font-family="Helvetica,sans-Serif" font-weight="bold" font-size="9.00">files&#45;and&#45;dirs</text>
 </g>
 <g id="clust14" class="cluster">
 <title>cluster_src/main/resolve&#45;options</title>

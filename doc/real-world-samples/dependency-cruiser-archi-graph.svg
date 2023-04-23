@@ -143,12 +143,12 @@
 <!-- src/graph&#45;utl -->
 <g id="node6" class="node">
 <title>src/graph&#45;utl</title>
-<g id="a_node6"><a xlink:href="https://github.com/sverweij/dependency-cruiser/blob/develop/src/graph-utl" xlink:title="graph&#45;utl">
-<polygon fill="#ffcccc" stroke="black" points="124,-34 72,-34 70,-32 70,-16 122,-16 124,-18 124,-34"/>
-<polyline fill="none" stroke="black" points="122,-32 70,-32"/>
-<polyline fill="none" stroke="black" points="122,-32 122,-16"/>
-<polyline fill="none" stroke="black" points="122,-32 124,-34"/>
-<text text-anchor="start" x="78.5" y="-22.8" font-family="Helvetica,sans-Serif" font-size="9.00">graph&#45;utl</text>
+<g id="a_node6"><a xlink:href="https://github.com/sverweij/dependency-cruiser/blob/develop/src/graph-utl" xlink:title="not&#45;unreachable&#45;from&#45;cli">
+<polygon fill="#ffcccc" stroke="red" points="124,-34 72,-34 70,-32 70,-16 122,-16 124,-18 124,-34"/>
+<polyline fill="none" stroke="red" points="122,-32 70,-32"/>
+<polyline fill="none" stroke="red" points="122,-32 122,-16"/>
+<polyline fill="none" stroke="red" points="122,-32 124,-34"/>
+<text text-anchor="start" x="78.5" y="-22.8" font-family="Helvetica,sans-Serif" font-size="9.00" fill="red">graph&#45;utl</text>
 </a>
 </g>
 </g>

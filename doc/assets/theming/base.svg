@@ -24,11 +24,6 @@
 <path fill="#ffffff" stroke="black" stroke-width="2" d="M100,-24C100,-24 166,-24 166,-24 172,-24 178,-30 178,-36 178,-36 178,-64 178,-64 178,-70 172,-76 166,-76 166,-76 100,-76 100,-76 94,-76 88,-70 88,-64 88,-64 88,-36 88,-36 88,-30 94,-24 100,-24"/>
 <text text-anchor="middle" x="133" y="-64.8" font-family="Helvetica,sans-Serif" font-weight="bold" font-size="9.00">files&#45;and&#45;dirs</text>
 </g>
-<g id="clust4" class="cluster">
-<title>cluster_src/main/options</title>
-<path fill="#ffffff" stroke="black" stroke-width="2" d="M198,-107C198,-107 342,-107 342,-107 348,-107 354,-113 354,-119 354,-119 354,-177 354,-177 354,-183 348,-189 342,-189 342,-189 198,-189 198,-189 192,-189 186,-183 186,-177 186,-177 186,-119 186,-119 186,-113 192,-107 198,-107"/>
-<text text-anchor="middle" x="270" y="-177.8" font-family="Helvetica,sans-Serif" font-weight="bold" font-size="9.00">options</text>
-</g>
 <g id="clust5" class="cluster">
 <title>cluster_src/main/resolve&#45;options</title>
 <path fill="#ffffff" stroke="black" stroke-width="2" d="M100,-138C100,-138 166,-138 166,-138 172,-138 178,-144 178,-150 178,-150 178,-178 178,-178 178,-184 172,-190 166,-190 166,-190 100,-190 100,-190 94,-190 88,-184 88,-178 88,-178 88,-150 88,-150 88,-144 94,-138 100,-138"/>
@@ -38,6 +33,11 @@
 <title>cluster_src/main/rule&#45;set</title>
 <path fill="#ffffff" stroke="black" stroke-width="2" d="M100,-198C100,-198 166,-198 166,-198 172,-198 178,-204 178,-210 178,-210 178,-268 178,-268 178,-274 172,-280 166,-280 166,-280 100,-280 100,-280 94,-280 88,-274 88,-268 88,-268 88,-210 88,-210 88,-204 94,-198 100,-198"/>
 <text text-anchor="middle" x="133" y="-268.8" font-family="Helvetica,sans-Serif" font-weight="bold" font-size="9.00">rule&#45;set</text>
+</g>
+<g id="clust4" class="cluster">
+<title>cluster_src/main/options</title>
+<path fill="#ffffff" stroke="black" stroke-width="2" d="M198,-107C198,-107 342,-107 342,-107 348,-107 354,-113 354,-119 354,-119 354,-177 354,-177 354,-183 348,-189 342,-189 342,-189 198,-189 198,-189 192,-189 186,-183 186,-177 186,-177 186,-119 186,-119 186,-113 192,-107 198,-107"/>
+<text text-anchor="middle" x="270" y="-177.8" font-family="Helvetica,sans-Serif" font-weight="bold" font-size="9.00">options</text>
 </g>
 <!-- src/main/files&#45;and&#45;dirs/normalize.mjs -->
 <g id="node1" class="node">

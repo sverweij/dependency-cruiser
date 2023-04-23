@@ -19,15 +19,15 @@
 <path fill="#ffffff" stroke="black" stroke-width="2" d="M28,-16C28,-16 500,-16 500,-16 506,-16 512,-22 512,-28 512,-28 512,-207 512,-207 512,-213 506,-219 500,-219 500,-219 28,-219 28,-219 22,-219 16,-213 16,-207 16,-207 16,-28 16,-28 16,-22 22,-16 28,-16"/>
 <text text-anchor="middle" x="264" y="-207.8" font-family="Helvetica,sans-Serif" font-weight="bold" font-size="9.00">main</text>
 </g>
-<g id="clust3" class="cluster">
-<title>cluster_src/main/files&#45;and&#45;dirs</title>
-<path fill="#ffffff" stroke="black" stroke-width="2" d="M36,-115C36,-115 102,-115 102,-115 108,-115 114,-121 114,-127 114,-127 114,-155 114,-155 114,-161 108,-167 102,-167 102,-167 36,-167 36,-167 30,-167 24,-161 24,-155 24,-155 24,-127 24,-127 24,-121 30,-115 36,-115"/>
-<text text-anchor="middle" x="69" y="-155.8" font-family="Helvetica,sans-Serif" font-weight="bold" font-size="9.00">files&#45;and&#45;dirs</text>
-</g>
 <g id="clust4" class="cluster">
 <title>cluster_src/main/options</title>
 <path fill="#ffffff" stroke="black" stroke-width="2" d="M182,-24C182,-24 326,-24 326,-24 332,-24 338,-30 338,-36 338,-36 338,-95 338,-95 338,-101 332,-107 326,-107 326,-107 182,-107 182,-107 176,-107 170,-101 170,-95 170,-95 170,-36 170,-36 170,-30 176,-24 182,-24"/>
 <text text-anchor="middle" x="254" y="-95.8" font-family="Helvetica,sans-Serif" font-weight="bold" font-size="9.00">options</text>
+</g>
+<g id="clust3" class="cluster">
+<title>cluster_src/main/files&#45;and&#45;dirs</title>
+<path fill="#ffffff" stroke="black" stroke-width="2" d="M36,-115C36,-115 102,-115 102,-115 108,-115 114,-121 114,-127 114,-127 114,-155 114,-155 114,-161 108,-167 102,-167 102,-167 36,-167 36,-167 30,-167 24,-161 24,-155 24,-155 24,-127 24,-127 24,-121 30,-115 36,-115"/>
+<text text-anchor="middle" x="69" y="-155.8" font-family="Helvetica,sans-Serif" font-weight="bold" font-size="9.00">files&#45;and&#45;dirs</text>
 </g>
 <g id="clust5" class="cluster">
 <title>cluster_src/main/resolve&#45;options</title>
