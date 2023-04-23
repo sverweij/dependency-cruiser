@@ -373,6 +373,10 @@
               }
             },
             {
+              "criteria": { "dynamic": true },
+              "attributes": { "style": "dashed" }
+            },
+            {
               "criteria": { "source": "^src/cli" },
               "attributes": { "fillcolor": "#ccccff" }
             },
