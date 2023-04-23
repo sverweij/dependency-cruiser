@@ -3,8 +3,6 @@
 
 import Ajv from "ajv";
 
-import extract from "../extract/index.mjs";
-import enrich from "../enrich/index.mjs";
 import cruiseResultSchema from "../schema/cruise-result.schema.mjs";
 import bus from "../utl/bus.mjs";
 import {
@@ -13,7 +11,6 @@ import {
 } from "../extract/transpile/meta.mjs";
 import normalizeFilesAndDirectories from "./files-and-dirs/normalize.mjs";
 import validateRuleSet from "./rule-set/validate.mjs";
-import normalizeRuleSet from "./rule-set/normalize.mjs";
 import {
   validateCruiseOptions,
   validateFormatOptions,
@@ -22,7 +19,6 @@ import {
   normalizeCruiseOptions,
   normalizeFormatOptions,
 } from "./options/normalize.mjs";
-import normalizeResolveOptions from "./resolve-options/normalize.mjs";
 import reportWrap from "./report-wrap.mjs";
 
 const TOTAL_STEPS = 9;
@@ -86,7 +82,8 @@ export async function cruise(
 
   if (Boolean(lCruiseOptions.ruleSet)) {
     bus.emit("progress", "parsing rule set", c(3));
-    lCruiseOptions.ruleSet = normalizeRuleSet(
+    const normalizeRuleSet = await import("./rule-set/normalize.mjs");
+    lCruiseOptions.ruleSet = normalizeRuleSet.default(
       validateRuleSet(lCruiseOptions.ruleSet)
     );
   }
@@ -96,14 +93,16 @@ export async function cruise(
   );
 
   bus.emit("progress", "determining how to resolve", c(4));
-  const lNormalizedResolveOptions = await normalizeResolveOptions(
+  let normalizeResolveOptions = await import("./resolve-options/normalize.mjs");
+  const lNormalizedResolveOptions = await normalizeResolveOptions.default(
     pResolveOptions,
     lCruiseOptions,
     pTranspileOptions?.tsConfig
   );
 
   bus.emit("progress", "reading files", c(5));
-  const lExtractionResult = extract(
+  const extract = await import("../extract/index.mjs");
+  const lExtractionResult = extract.default(
     lNormalizedFileAndDirectoryArray,
     lCruiseOptions,
     lNormalizedResolveOptions,
@@ -111,7 +110,8 @@ export async function cruise(
   );
 
   bus.emit("progress", "analyzing", c(6));
-  const lCruiseResult = enrich(
+  const enrich = await import("../enrich/index.mjs");
+  const lCruiseResult = enrich.default(
     lExtractionResult,
     lCruiseOptions,
     lNormalizedFileAndDirectoryArray

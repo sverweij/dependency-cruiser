@@ -9,15 +9,10 @@ import chalk from "chalk";
 import { cruise } from "../main/index.mjs";
 import bus from "../utl/bus.mjs";
 
-import extractTSConfig from "../config-utl/extract-ts-config.mjs";
-import extractBabelConfig from "../config-utl/extract-babel-config.mjs";
-import extractWebpackResolveConfig from "../config-utl/extract-webpack-resolve-config.mjs";
-import extractKnownViolations from "../config-utl/extract-known-violations.mjs";
 import busLogLevels from "../utl/bus-log-levels.mjs";
 import validateFileExistence from "./utl/validate-file-existence.mjs";
 import normalizeCliOptions from "./normalize-cli-options.mjs";
 import { write } from "./utl/io.mjs";
-import formatMetaInfo from "./format-meta-info.mjs";
 import setUpCliFeedbackListener from "./listeners/cli-feedback.mjs";
 import setUpPerformanceLogListener from "./listeners/performance-log/index.mjs";
 import setUpNDJSONListener from "./listeners/ndjson.mjs";
@@ -28,7 +23,10 @@ async function extractResolveOptions(pCruiseOptions) {
     pCruiseOptions?.ruleSet?.options?.webpackConfig?.fileName ?? null;
 
   if (lWebPackConfigFileName) {
-    lResolveOptions = await extractWebpackResolveConfig(
+    const extractWebpackResolveConfig = await import(
+      "../config-utl/extract-webpack-resolve-config.mjs"
+    );
+    lResolveOptions = await extractWebpackResolveConfig.default(
       lWebPackConfigFileName,
       pCruiseOptions?.ruleSet?.options?.webpackConfig?.env ?? null,
       pCruiseOptions?.ruleSet?.options?.webpackConfig?.arguments ?? null
@@ -37,9 +35,12 @@ async function extractResolveOptions(pCruiseOptions) {
   return lResolveOptions;
 }
 
-function addKnownViolations(pCruiseOptions) {
+async function addKnownViolations(pCruiseOptions) {
   if (pCruiseOptions.knownViolationsFile) {
-    const lKnownViolations = extractKnownViolations(
+    const extractKnownViolations = await import(
+      "../config-utl/extract-known-violations.mjs"
+    );
+    const lKnownViolations = extractKnownViolations.default(
       pCruiseOptions.knownViolationsFile
     );
 
@@ -52,25 +53,28 @@ function addKnownViolations(pCruiseOptions) {
   return pCruiseOptions;
 }
 
-function extractTSConfigOptions(pCruiseOptions) {
+async function extractTSConfigOptions(pCruiseOptions) {
   let lReturnValue = {};
   const lTSConfigFileName =
     pCruiseOptions?.ruleSet?.options?.tsConfig?.fileName ?? null;
 
   if (lTSConfigFileName) {
-    lReturnValue = extractTSConfig(lTSConfigFileName);
+    const extractTSConfig = await import("../config-utl/extract-ts-config.mjs");
+    lReturnValue = extractTSConfig.default(lTSConfigFileName);
   }
 
   return lReturnValue;
 }
 
-function extractBabelConfigOptions(pCruiseOptions) {
+async function extractBabelConfigOptions(pCruiseOptions) {
   let lReturnValue = {};
   const lBabelConfigFileName =
     pCruiseOptions?.ruleSet?.options?.babelConfig?.fileName ?? null;
-
   if (lBabelConfigFileName) {
-    lReturnValue = extractBabelConfig(lBabelConfigFileName);
+    const extractBabelConfig = await import(
+      "../config-utl/extract-babel-config.mjs"
+    );
+    lReturnValue = extractBabelConfig.default(lBabelConfigFileName);
   }
 
   return lReturnValue;
@@ -98,7 +102,7 @@ function setUpListener(pCruiseOptions) {
 }
 
 async function runCruise(pFileDirectoryArray, pCruiseOptions) {
-  const lCruiseOptions = addKnownViolations(
+  const lCruiseOptions = await addKnownViolations(
     await normalizeCliOptions(pCruiseOptions)
   );
 
@@ -119,7 +123,7 @@ async function runCruise(pFileDirectoryArray, pCruiseOptions) {
     lCruiseOptions,
     await extractResolveOptions(lCruiseOptions),
     {
-      tsConfig: extractTSConfigOptions(lCruiseOptions),
+      tsConfig: await extractTSConfigOptions(lCruiseOptions),
       babelConfig: await extractBabelConfigOptions(lCruiseOptions),
     }
   );
@@ -158,7 +162,8 @@ export default async function executeCli(pFileDirectoryArray, pCruiseOptions) {
     }
     /* c8 ignore stop */
     if (lCruiseOptions.info === true) {
-      process.stdout.write(formatMetaInfo());
+      const formatMetaInfo = await import("./format-meta-info.mjs");
+      process.stdout.write(await formatMetaInfo.default());
     } else if (lCruiseOptions.init) {
       const initConfig = await import("./init-config/index.mjs");
       initConfig.default(lCruiseOptions.init);
