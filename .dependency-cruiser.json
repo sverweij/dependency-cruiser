@@ -41,7 +41,7 @@
           "^node_modules",
           "^\\.yarn/cache",
           "^os$",
-          "^fs$",
+          "^fs(/promises)?$",
           "^path$",
           "^url$",
           "$1",
