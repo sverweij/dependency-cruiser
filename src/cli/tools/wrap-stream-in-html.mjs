@@ -1,4 +1,4 @@
-import { readFileSync } from "node:fs";
+import { readFile } from "node:fs/promises";
 import { fileURLToPath } from "node:url";
 
 const HEADER_FILE = fileURLToPath(
@@ -25,10 +25,13 @@ const FOOTER_FILE = fileURLToPath(
  * @param {readStream} pStream stream whose characters are to be slapped between header and footer
  * @param {writeStream} pOutStream stream to write to
  */
-export default function wrap(pInStream, pOutStream) {
-  const lHeader = readFileSync(HEADER_FILE, "utf8");
-  const lScript = readFileSync(SCRIPT_FILE, "utf8");
-  const lEnd = readFileSync(FOOTER_FILE, "utf8");
+export default async function wrap(pInStream, pOutStream) {
+  const [lHeader, lScript, lEnd] = await Promise.all([
+    readFile(HEADER_FILE, "utf8"),
+    readFile(SCRIPT_FILE, "utf8"),
+    readFile(FOOTER_FILE, "utf8"),
+  ]);
+
   const lFooter = `<script>${lScript}</script>${lEnd}`;
 
   pOutStream.write(lHeader);
