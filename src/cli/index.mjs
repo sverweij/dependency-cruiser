@@ -118,14 +118,16 @@ async function runCruise(pFileDirectoryArray, pCruiseOptions) {
   setUpListener(lCruiseOptions);
 
   bus.emit("start");
+  const [lResolveOptions, tsConfig, babelConfig] = await Promise.all([
+    extractResolveOptions(lCruiseOptions),
+    extractTSConfigOptions(lCruiseOptions),
+    extractBabelConfigOptions(lCruiseOptions),
+  ]);
   const lReportingResult = await cruise(
     pFileDirectoryArray,
     lCruiseOptions,
-    await extractResolveOptions(lCruiseOptions),
-    {
-      tsConfig: await extractTSConfigOptions(lCruiseOptions),
-      babelConfig: await extractBabelConfigOptions(lCruiseOptions),
-    }
+    lResolveOptions,
+    { tsConfig, babelConfig }
   );
 
   bus.emit("progress", "cli: writing results", { complete: 1 });
