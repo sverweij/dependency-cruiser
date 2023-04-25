@@ -69,9 +69,9 @@ export async function cruise(
       c(2)
     );
 
-    const CacheModule = await import("../cache/cache.mjs");
-    const Cache = CacheModule.default;
-    lCache = new Cache(lCruiseOptions.cache.strategy);
+    const Cache = await import("../cache/cache.mjs");
+    // eslint-disable-next-line new-cap
+    lCache = new Cache.default(lCruiseOptions.cache.strategy);
     const lCachedResults = lCache.read(lCruiseOptions.cache.folder);
 
     if (lCache.canServeFromCache(lCruiseOptions, lCachedResults)) {
@@ -80,9 +80,18 @@ export async function cruise(
     }
   }
 
+  const [normalizeRuleSet, normalizeResolveOptions, extract, enrich] =
+    await Promise.all([
+      // despite rule set parsing being behind an if, it's the 'normal' use case
+      // for dependency-cruiser, so import it unconditionally nonetheless
+      import("./rule-set/normalize.mjs"),
+      import("./resolve-options/normalize.mjs"),
+      import("../extract/index.mjs"),
+      import("../enrich/index.mjs"),
+    ]);
+
   if (Boolean(lCruiseOptions.ruleSet)) {
     bus.emit("progress", "parsing rule set", c(3));
-    const normalizeRuleSet = await import("./rule-set/normalize.mjs");
     lCruiseOptions.ruleSet = normalizeRuleSet.default(
       validateRuleSet(lCruiseOptions.ruleSet)
     );
@@ -93,7 +102,6 @@ export async function cruise(
   );
 
   bus.emit("progress", "determining how to resolve", c(4));
-  let normalizeResolveOptions = await import("./resolve-options/normalize.mjs");
   const lNormalizedResolveOptions = await normalizeResolveOptions.default(
     pResolveOptions,
     lCruiseOptions,
@@ -101,7 +109,6 @@ export async function cruise(
   );
 
   bus.emit("progress", "reading files", c(5));
-  const extract = await import("../extract/index.mjs");
   const lExtractionResult = extract.default(
     lNormalizedFileAndDirectoryArray,
     lCruiseOptions,
@@ -110,7 +117,6 @@ export async function cruise(
   );
 
   bus.emit("progress", "analyzing", c(6));
-  const enrich = await import("../enrich/index.mjs");
   const lCruiseResult = enrich.default(
     lExtractionResult,
     lCruiseOptions,
