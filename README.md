@@ -59,6 +59,19 @@ a one liner:
 npx depcruise src --include-only "^src" --output-type dot | dot -T svg > dependency-graph.svg
 ```
 
+> <details>
+> <summary>dependency-cruiser v12 and older: add --config option</summary>
+>
+> While not necessary from dependency-cruiser v13, in v12 and older you'll have
+> to pass the --config option to make it find the .dependency-cruiser.js
+> configuration file:
+>
+> ```shell
+> npx depcruise src --include-only "^src" --config --output-type dot | dot -T svg > dependency-graph.svg
+> ```
+
+</details>
+
 - You can read more about what you can do with `--include-only` and other command line
   options in the [command line interface](./doc/cli.md) documentation.
 - _[Real world samples](./doc/real-world-samples.md)_
@@ -109,6 +122,19 @@ Sample rule:
 ```sh
 npx depcruise src
 ```
+
+> <details>
+> <summary>dependency-cruiser v12 and older: add --config option</summary>
+>
+> While not necessary from dependency-cruiser v13, in v12 and older you'll have
+> to pass the --config option to make it find the .dependency-cruiser.js
+> configuration file:
+>
+> ```shell
+> npx depcruise --config .dependency-cruiser.js src
+> ```
+
+</details>
 
 This will validate against your rules and shows any violations in an eslint-like format:
 
