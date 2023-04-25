@@ -6,7 +6,7 @@ import set from "lodash/set.js";
 import isInstalledGlobally from "is-installed-globally";
 import chalk from "chalk";
 
-import { cruise } from "../main/index.mjs";
+import cruise from "../main/cruise.mjs";
 import bus from "../utl/bus.mjs";
 
 import busLogLevels from "../utl/bus-log-levels.mjs";

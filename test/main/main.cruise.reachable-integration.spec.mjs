@@ -1,7 +1,7 @@
 import { join } from "node:path";
 import { expect, use } from "chai";
 import chaiJSONSchema from "chai-json-schema";
-import { cruise } from "../../src/main/index.mjs";
+import cruise from "../../src/main/cruise.mjs";
 import normalizeOptions from "../../src/cli/normalize-cli-options.mjs";
 import cruiseResultSchema from "../../src/schema/cruise-result.schema.mjs";
 

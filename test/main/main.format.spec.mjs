@@ -1,6 +1,6 @@
 /* eslint-disable no-magic-numbers */
 import { expect } from "chai";
-import { format } from "../../src/main/index.mjs";
+import format from "../../src/main/format.mjs";
 import { createRequireJSON } from "../backwards.utl.mjs";
 
 const requireJSON = createRequireJSON(import.meta.url);
