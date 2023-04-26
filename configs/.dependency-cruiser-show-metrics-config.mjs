@@ -131,10 +131,6 @@ export default {
           ],
           dependencies: [
             {
-              criteria: { dynamic: true },
-              attributes: { style: "dashed" },
-            },
-            {
               criteria: { "rules[0].severity": "error" },
               attributes: { fontcolor: "red", color: "red" },
             },

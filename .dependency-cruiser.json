@@ -440,10 +440,6 @@
               "attributes": { "fontcolor": "red", "color": "red" }
             },
             {
-              "criteria": { "dynamic": true },
-              "attributes": { "style": "dashed" }
-            },
-            {
               "criteria": { "resolved": "^src/cli" },
               "attributes": { "color": "#0000ff77" }
             },
