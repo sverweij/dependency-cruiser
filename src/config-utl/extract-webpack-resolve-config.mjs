@@ -78,8 +78,10 @@ function isNativelySupported(pWebpackConfigFilename) {
 async function attemptImport(pAbsoluteWebpackConfigFileName) {
   try {
     if (isNativelySupported(pAbsoluteWebpackConfigFileName)) {
-      const lModule = await import(`file://${pAbsoluteWebpackConfigFileName}`);
-      return lModule.default;
+      const { default: lModule } = await import(
+        `file://${pAbsoluteWebpackConfigFileName}`
+      );
+      return lModule;
     } else {
       tryRegisterNonNative(pAbsoluteWebpackConfigFileName);
       /* we're using still using require instead of dynamic imports here because

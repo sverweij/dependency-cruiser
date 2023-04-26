@@ -23,10 +23,10 @@ async function extractResolveOptions(pCruiseOptions) {
     pCruiseOptions?.ruleSet?.options?.webpackConfig?.fileName ?? null;
 
   if (lWebPackConfigFileName) {
-    const extractWebpackResolveConfig = await import(
+    const { default: extractWebpackResolveConfig } = await import(
       "../config-utl/extract-webpack-resolve-config.mjs"
     );
-    lResolveOptions = await extractWebpackResolveConfig.default(
+    lResolveOptions = await extractWebpackResolveConfig(
       lWebPackConfigFileName,
       pCruiseOptions?.ruleSet?.options?.webpackConfig?.env ?? null,
       pCruiseOptions?.ruleSet?.options?.webpackConfig?.arguments ?? null
@@ -37,10 +37,10 @@ async function extractResolveOptions(pCruiseOptions) {
 
 async function addKnownViolations(pCruiseOptions) {
   if (pCruiseOptions.knownViolationsFile) {
-    const extractKnownViolations = await import(
+    const { default: extractKnownViolations } = await import(
       "../config-utl/extract-known-violations.mjs"
     );
-    const lKnownViolations = extractKnownViolations.default(
+    const lKnownViolations = extractKnownViolations(
       pCruiseOptions.knownViolationsFile
     );
 
@@ -59,8 +59,10 @@ async function extractTSConfigOptions(pCruiseOptions) {
     pCruiseOptions?.ruleSet?.options?.tsConfig?.fileName ?? null;
 
   if (lTSConfigFileName) {
-    const extractTSConfig = await import("../config-utl/extract-ts-config.mjs");
-    lReturnValue = extractTSConfig.default(lTSConfigFileName);
+    const { default: extractTSConfig } = await import(
+      "../config-utl/extract-ts-config.mjs"
+    );
+    lReturnValue = extractTSConfig(lTSConfigFileName);
   }
 
   return lReturnValue;
@@ -71,10 +73,10 @@ async function extractBabelConfigOptions(pCruiseOptions) {
   const lBabelConfigFileName =
     pCruiseOptions?.ruleSet?.options?.babelConfig?.fileName ?? null;
   if (lBabelConfigFileName) {
-    const extractBabelConfig = await import(
+    const { default: extractBabelConfig } = await import(
       "../config-utl/extract-babel-config.mjs"
     );
-    lReturnValue = extractBabelConfig.default(lBabelConfigFileName);
+    lReturnValue = extractBabelConfig(lBabelConfigFileName);
   }
 
   return lReturnValue;
@@ -164,11 +166,13 @@ export default async function executeCli(pFileDirectoryArray, pCruiseOptions) {
     }
     /* c8 ignore stop */
     if (lCruiseOptions.info === true) {
-      const formatMetaInfo = await import("./format-meta-info.mjs");
-      process.stdout.write(await formatMetaInfo.default());
+      const { default: formatMetaInfo } = await import(
+        "./format-meta-info.mjs"
+      );
+      process.stdout.write(await formatMetaInfo());
     } else if (lCruiseOptions.init) {
-      const initConfig = await import("./init-config/index.mjs");
-      initConfig.default(lCruiseOptions.init);
+      const { default: initConfig } = await import("./init-config/index.mjs");
+      initConfig(lCruiseOptions.init);
     } else {
       lExitCode = await runCruise(pFileDirectoryArray, lCruiseOptions);
     }

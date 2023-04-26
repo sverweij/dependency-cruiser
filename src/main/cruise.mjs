@@ -6,7 +6,7 @@ import { validateCruiseOptions } from "./options/validate.mjs";
 import { normalizeCruiseOptions } from "./options/normalize.mjs";
 import reportWrap from "./report-wrap.mjs";
 
-const TOTAL_STEPS = 9;
+const TOTAL_STEPS = 10;
 
 export function c(pComplete, pTotal = TOTAL_STEPS) {
   return { complete: pComplete / pTotal };
@@ -35,9 +35,8 @@ export default async function cruise(
       c(2)
     );
 
-    const Cache = await import("../cache/cache.mjs");
-    // eslint-disable-next-line new-cap
-    lCache = new Cache.default(lCruiseOptions.cache.strategy);
+    const { default: Cache } = await import("../cache/cache.mjs");
+    lCache = new Cache(lCruiseOptions.cache.strategy);
     const lCachedResults = lCache.read(lCruiseOptions.cache.folder);
 
     if (lCache.canServeFromCache(lCruiseOptions, lCachedResults)) {
@@ -46,13 +45,14 @@ export default async function cruise(
     }
   }
 
+  bus.emit("progress", "importing analytical modules", c(3));
   const [
-    normalizeRuleSet,
-    validateRuleSet,
-    normalizeFilesAndDirectories,
-    normalizeResolveOptions,
-    extract,
-    enrich,
+    { default: normalizeRuleSet },
+    { default: validateRuleSet },
+    { default: normalizeFilesAndDirectories },
+    { default: normalizeResolveOptions },
+    { default: extract },
+    { default: enrich },
   ] = await Promise.all([
     // despite rule set parsing being behind an if, it's the 'normal' use case
     // for dependency-cruiser, so import it unconditionally nonetheless
@@ -65,43 +65,43 @@ export default async function cruise(
   ]);
 
   if (Boolean(lCruiseOptions.ruleSet)) {
-    bus.emit("progress", "parsing rule set", c(3));
-    lCruiseOptions.ruleSet = normalizeRuleSet.default(
-      validateRuleSet.default(lCruiseOptions.ruleSet)
+    bus.emit("progress", "parsing rule set", c(4));
+    lCruiseOptions.ruleSet = normalizeRuleSet(
+      validateRuleSet(lCruiseOptions.ruleSet)
     );
   }
 
-  const lNormalizedFileAndDirectoryArray = normalizeFilesAndDirectories.default(
+  const lNormalizedFileAndDirectoryArray = normalizeFilesAndDirectories(
     pFileAndDirectoryArray
   );
 
-  bus.emit("progress", "determining how to resolve", c(4));
-  const lNormalizedResolveOptions = await normalizeResolveOptions.default(
+  bus.emit("progress", "determining how to resolve", c(5));
+  const lNormalizedResolveOptions = await normalizeResolveOptions(
     pResolveOptions,
     lCruiseOptions,
     pTranspileOptions?.tsConfig
   );
 
-  bus.emit("progress", "reading files", c(5));
-  const lExtractionResult = extract.default(
+  bus.emit("progress", "reading files", c(6));
+  const lExtractionResult = extract(
     lNormalizedFileAndDirectoryArray,
     lCruiseOptions,
     lNormalizedResolveOptions,
     pTranspileOptions
   );
 
-  bus.emit("progress", "analyzing", c(6));
-  const lCruiseResult = enrich.default(
+  bus.emit("progress", "analyzing", c(7));
+  const lCruiseResult = enrich(
     lExtractionResult,
     lCruiseOptions,
     lNormalizedFileAndDirectoryArray
   );
 
   if (lCruiseOptions.cache) {
-    bus.emit("progress", "cache: save", c(7));
+    bus.emit("progress", "cache: save", c(8));
     lCache.write(lCruiseOptions.cache.folder, lCruiseResult);
   }
 
-  bus.emit("progress", "reporting", c(8));
+  bus.emit("progress", "reporting", c(9));
   return await reportWrap(lCruiseResult, lCruiseOptions);
 }

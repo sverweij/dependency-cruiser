@@ -11,10 +11,10 @@ async function getJSConfig(pBabelConfigFileName) {
   let lReturnValue = {};
 
   try {
-    const lModule = await import(
+    const { default: lModule } = await import(
       `file://${makeAbsolute(pBabelConfigFileName)}`
     );
-    lReturnValue = lModule.default;
+    lReturnValue = lModule;
   } catch (pError) {
     throw new Error(
       `${
