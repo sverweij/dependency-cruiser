@@ -1,4 +1,4 @@
-import { readFileSync } from "node:fs";
+import { readFile } from "node:fs/promises";
 import { extname } from "node:path";
 import json5 from "json5";
 
@@ -6,8 +6,11 @@ export default async function readConfig(pAbsolutePathToConfigFile) {
   if (
     [".js", ".cjs", ".mjs", ""].includes(extname(pAbsolutePathToConfigFile))
   ) {
-    const lConfig = await import(`file://${pAbsolutePathToConfigFile}`);
-    return lConfig.default;
+    const { default: config } = await import(
+      `file://${pAbsolutePathToConfigFile}`
+    );
+    return config;
   }
-  return json5.parse(readFileSync(pAbsolutePathToConfigFile, "utf8"));
+  const lConfig = await readFile(pAbsolutePathToConfigFile, "utf8");
+  return json5.parse(lConfig);
 }

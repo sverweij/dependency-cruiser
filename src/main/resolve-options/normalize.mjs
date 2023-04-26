@@ -84,10 +84,9 @@ async function compileResolveOptions(
   // Also: requiring the plugin only when it's necessary will save some
   // startup time (especially on a cold require cache)
   if (pResolveOptions.tsConfig && isTsConfigPathsEligible(pTSConfig)) {
-    const TsConfigPathsPluginModule = await import(
+    const { default: TsConfigPathsPlugin } = await import(
       "tsconfig-paths-webpack-plugin"
     );
-    const TsConfigPathsPlugin = TsConfigPathsPluginModule.default;
     lResolveOptions.plugins = pushPlugin(
       lResolveOptions.plugins,
       // @ts-expect-error TS2351 "TsConfPathsPlugin is not constructable" - is unjustified

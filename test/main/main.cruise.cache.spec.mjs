@@ -2,7 +2,7 @@ import { rmSync } from "node:fs";
 import { expect, use } from "chai";
 import chaiJSONSchema from "chai-json-schema";
 import cruiseResultSchema from "../../src/schema/cruise-result.schema.mjs";
-import { cruise } from "../../src/main/index.mjs";
+import cruise from "../../src/main/cruise.mjs";
 import Cache from "../../src/cache/cache.mjs";
 
 use(chaiJSONSchema);
