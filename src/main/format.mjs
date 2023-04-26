@@ -21,5 +21,6 @@ export default async function format(pResult, pFormatOptions = {}) {
 
   validateResultAgainstSchema(pResult);
 
+  // eslint-disable-next-line no-return-await
   return await reportWrap(pResult, lFormatOptions);
 }

@@ -128,6 +128,10 @@ export default {
       attributes: { fontcolor: "blue", color: "blue" },
     },
     {
+      criteria: { dynamic: true },
+      attributes: { style: "dashed" },
+    },
+    {
       criteria: { valid: false },
       attributes: { fontcolor: "red", color: "red" },
     },
