@@ -1,4 +1,4 @@
-import { readFileSync, mkdirSync, writeFileSync } from "node:fs";
+import { readFile, mkdir, writeFile } from "node:fs/promises";
 import { join } from "node:path";
 import { scannableExtensions } from "../extract/transpile/meta.mjs";
 import { bus } from "../utl/bus.mjs";
@@ -56,10 +56,10 @@ export default class Cache {
    * @param {string} pCacheFolder
    * @returns {import("../../types/dependency-cruiser.js").ICruiseResult}
    */
-  read(pCacheFolder) {
+  async read(pCacheFolder) {
     try {
       return JSON.parse(
-        readFileSync(join(pCacheFolder, CACHE_FILE_NAME), "utf8")
+        await readFile(join(pCacheFolder, CACHE_FILE_NAME), "utf8")
       );
     } catch (pError) {
       return { modules: [], summary: {} };
@@ -71,11 +71,11 @@ export default class Cache {
    * @param {import("../../types/dependency-cruiser.js").ICruiseResult} pCruiseResult
    * @param {import("../../types/dependency-cruiser.js").IRevisionData=} pRevisionData
    */
-  write(pCacheFolder, pCruiseResult, pRevisionData) {
+  async write(pCacheFolder, pCruiseResult, pRevisionData) {
     const lRevisionData = pRevisionData ?? this.revisionData;
 
-    mkdirSync(pCacheFolder, { recursive: true });
-    writeFileSync(
+    await mkdir(pCacheFolder, { recursive: true });
+    await writeFile(
       join(pCacheFolder, CACHE_FILE_NAME),
       JSON.stringify(
         this.cacheStrategy.prepareRevisionDataForSaving(

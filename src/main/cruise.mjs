@@ -35,7 +35,7 @@ export default async function cruise(
 
     const { default: Cache } = await import("../cache/cache.mjs");
     lCache = new Cache(lCruiseOptions.cache.strategy);
-    const lCachedResults = lCache.read(lCruiseOptions.cache.folder);
+    const lCachedResults = await lCache.read(lCruiseOptions.cache.folder);
 
     if (lCache.canServeFromCache(lCruiseOptions, lCachedResults)) {
       bus.summary("cache: reporting from cache", c(8));
@@ -97,7 +97,7 @@ export default async function cruise(
 
   if (lCruiseOptions.cache) {
     bus.summary("cache: saving", c(8));
-    lCache.write(lCruiseOptions.cache.folder, lCruiseResult);
+    await lCache.write(lCruiseOptions.cache.folder, lCruiseResult);
   }
 
   bus.summary("reporting", c(9));
