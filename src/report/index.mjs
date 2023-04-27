@@ -20,6 +20,7 @@ const TYPE2MODULE = {
   baseline: "./baseline.mjs",
   metrics: "./metrics.mjs",
   mermaid: "./mermaid.mjs",
+  null: "./null.mjs",
 };
 
 /**
