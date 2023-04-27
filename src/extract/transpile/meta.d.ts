@@ -1,3 +1,8 @@
+import {
+  IAvailableExtension,
+  IAvailableTranspiler,
+} from "../../../types/dependency-cruiser.d.ts";
+
 export interface ITranspilerWrapper {
   isAvailable: () => boolean;
   transpile: (
@@ -11,12 +16,6 @@ export function getWrapper(pExtension, pTranspileOptions): ITranspilerWrapper;
 
 export const scannableExtensions: string[];
 
-export const allExtensions: string[];
-
-export interface IAvailableTranspiler {
-  name: string;
-  version: string;
-  available: boolean;
-}
+export const allExtensions: IAvailableExtension[];
 
 export function getAvailableTranspilers(): IAvailableTranspiler[];
