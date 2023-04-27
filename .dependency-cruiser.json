@@ -24,7 +24,8 @@
           "\\.schema\\.json$",
           "^tools/istanbul-json-summary-to-markdown\\.mjs$",
           "^src/report/json\\.mjs",
-          "^src/report/identity\\.mjs"
+          "^src/report/identity\\.mjs",
+          "^src/report/null\\.mjs"
         ]
       }
     },

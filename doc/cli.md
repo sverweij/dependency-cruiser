@@ -676,6 +676,13 @@ For more information about writing rules see the [tutorial](rules-tutorial.md) a
 
 For an easy set up of both use [--init](#--init)
 
+#### null - no output, just an exit code
+
+This dummy 'reporter' will print _nothing_, not even when there are errors. It
+will exit with the exit code _number of violations with severity `error` found_,
+though. This reporter primarily exists to help in the development of
+dependency-cruiser.
+
 ### `--no-config`
 
 Use this if you don't want to use a configuration file. Also overrides earlier
