@@ -1,5 +1,8 @@
+import chalk from "chalk";
 import busLogLevels from "../../../utl/bus-log-levels.mjs";
 import { getHeader, getProgressLine, getEndText } from "./handlers.mjs";
+
+let gUnderline = false;
 
 function getHeaderWriter(pStream, pMaxLevel) {
   return (_pMessage, pOptions) => {
@@ -12,8 +15,16 @@ function getHeaderWriter(pStream, pMaxLevel) {
 function getProgressWriter(pStream, pState, pMaxLevel) {
   return (pMessage, pOptions) => {
     const lOptions = { level: busLogLevels.SUMMARY, ...(pOptions || {}) };
-
-    pStream.write(getProgressLine(pMessage, pState, lOptions.level, pMaxLevel));
+    const lProgressLine = getProgressLine(
+      pMessage,
+      pState,
+      lOptions.level,
+      pMaxLevel
+    );
+    pStream.write(
+      gUnderline ? `${chalk.underline(lProgressLine)}` : lProgressLine
+    );
+    gUnderline = !gUnderline;
   };
 }
 
