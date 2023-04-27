@@ -7,25 +7,28 @@ import Cache from "../../src/cache/cache.mjs";
 const OUTPUTS_FOLDER = "test/cache/__outputs__/";
 
 describe("[I] cache/cache - readCache", () => {
-  it("returns an empty cache when trying to read from a non-existing one", () => {
-    expect(new Cache().read("this/folder/does/not-exist")).to.deep.equal({
+  it("returns an empty cache when trying to read from a non-existing one", async () => {
+    const lCache = new Cache();
+    expect(await lCache.read("this/folder/does/not-exist")).to.deep.equal({
       modules: [],
       summary: {},
     });
   });
 
-  it("returns an empty cache when trying to read from a file that is invalid JSON", () => {
+  it("returns an empty cache when trying to read from a file that is invalid JSON", async () => {
+    const lCache = new Cache();
     expect(
-      new Cache().read("test/cache/__mocks__/cache/invalid-json")
+      await lCache.read("test/cache/__mocks__/cache/invalid-json")
     ).to.deep.equal({
       modules: [],
       summary: {},
     });
   });
 
-  it("returns the contents of the cache when trying to read from an existing, valid json", () => {
+  it("returns the contents of the cache when trying to read from an existing, valid json", async () => {
+    const lCache = new Cache();
     expect(
-      new Cache().read("test/cache/__mocks__/cache/valid-minimal-cache")
+      await lCache.read("test/cache/__mocks__/cache/valid-minimal-cache")
     ).to.deep.equal({
       modules: [],
       summary: {},
@@ -45,16 +48,16 @@ describe("[I] cache/cache - writeCache", () => {
     rmSync(OUTPUTS_FOLDER, { recursive: true, force: true });
   });
 
-  it("writes the passed cruise options to the cache folder (which is created when it doesn't exist yet)", () => {
+  it("writes the passed cruise options to the cache folder (which is created when it doesn't exist yet)", async () => {
     const lDummyCacheContents = {};
     const lCacheFolder = join(OUTPUTS_FOLDER, "write-cache");
     const lCache = new Cache();
 
-    lCache.write(lCacheFolder, lDummyCacheContents);
-    expect(lCache.read(lCacheFolder)).to.deep.equal(lDummyCacheContents);
+    await lCache.write(lCacheFolder, lDummyCacheContents);
+    expect(await lCache.read(lCacheFolder)).to.deep.equal(lDummyCacheContents);
   });
 
-  it("writes the passed cruise options to the cache folder (folder already exists -> overwrite)", () => {
+  it("writes the passed cruise options to the cache folder (folder already exists -> overwrite)", async () => {
     const lDummyCacheContents = {};
     const lSecondDummyCacheContents = {
       modules: [],
@@ -64,12 +67,14 @@ describe("[I] cache/cache - writeCache", () => {
     const lCacheFolder = join(OUTPUTS_FOLDER, "two-writes");
     const lCache = new Cache();
 
-    lCache.write(lCacheFolder, lDummyCacheContents);
-    lCache.write(lCacheFolder, lSecondDummyCacheContents);
-    expect(lCache.read(lCacheFolder)).to.deep.equal(lSecondDummyCacheContents);
+    await lCache.write(lCacheFolder, lDummyCacheContents);
+    await lCache.write(lCacheFolder, lSecondDummyCacheContents);
+    expect(await lCache.read(lCacheFolder)).to.deep.equal(
+      lSecondDummyCacheContents
+    );
   });
 
-  it("writes the passed cruise options to the cache folder (which is created when it doesn't exist yet) - content based cached strategy", () => {
+  it("writes the passed cruise options to the cache folder (which is created when it doesn't exist yet) - content based cached strategy", async () => {
     /** @type {import("../..").ICruiseResult} */
     const lDummyCacheContents = {
       modules: [],
@@ -80,8 +85,8 @@ describe("[I] cache/cache - writeCache", () => {
     const lCache = new Cache("content");
     const lRevisionData = { SHA1: "dummy-sha", changes: [] };
 
-    lCache.write(lCacheFolder, lDummyCacheContents, lRevisionData);
-    expect(lCache.read(lCacheFolder)).to.deep.equal(lDummyCacheContents);
+    await lCache.write(lCacheFolder, lDummyCacheContents, lRevisionData);
+    expect(await lCache.read(lCacheFolder)).to.deep.equal(lDummyCacheContents);
   });
 });
 

@@ -27,7 +27,8 @@ describe("[E] main.cruise - cache", () => {
       { bustTheCache: true },
       {}
     );
-    const lCache = new Cache().read(CACHE_FOLDER);
+    const lCacheInstance = new Cache();
+    const lCache = await lCacheInstance.read(CACHE_FOLDER);
     Reflect.deleteProperty(lCache, "revisionData");
 
     expect(lResult.output).to.deep.equal(lCache);
@@ -43,7 +44,8 @@ describe("[E] main.cruise - cache", () => {
       { bustTheCache: true },
       {}
     );
-    const lCache = new Cache().read(CACHE_FOLDER);
+    const lCacheInstance = new Cache();
+    const lCache = await lCacheInstance.read(CACHE_FOLDER);
     Reflect.deleteProperty(lCache, "revisionData");
 
     expect(lResult.output).to.deep.equal(lCache);
@@ -70,7 +72,8 @@ describe("[E] main.cruise - cache", () => {
       { bustTheCache: true },
       {}
     );
-    const lOldCache = new Cache().read(CACHE_FOLDER);
+    const lCacheInstance = new Cache();
+    const lOldCache = await lCacheInstance.read(CACHE_FOLDER);
     Reflect.deleteProperty(lOldCache, "revisionData");
 
     expect(lResult.output).to.deep.equal(lOldCache);
@@ -83,7 +86,8 @@ describe("[E] main.cruise - cache", () => {
       { bustTheCache: true },
       {}
     );
-    const lNewCache = new Cache().read(CACHE_FOLDER);
+    const lNewCacheInstance = new Cache();
+    const lNewCache = await lNewCacheInstance.read(CACHE_FOLDER);
     Reflect.deleteProperty(lNewCache, "revisionData");
     expect(lNewCache).to.not.deep.equal(lOldCache);
     expect(lNewCache).to.deep.equal(lResultTwo.output);
