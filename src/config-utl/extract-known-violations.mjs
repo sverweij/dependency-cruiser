@@ -1,11 +1,11 @@
-import { readFileSync } from "node:fs";
+import { readFile } from "node:fs/promises";
 import json5 from "json5";
 import makeAbsolute from "./make-absolute.mjs";
 
-export default function extractKnownViolations(pKnownViolationsFileName) {
+export default async function extractKnownViolations(pKnownViolationsFileName) {
   try {
     return json5.parse(
-      readFileSync(makeAbsolute(pKnownViolationsFileName), "utf8")
+      await readFile(makeAbsolute(pKnownViolationsFileName), "utf8")
     );
   } catch (pError) {
     if (pError instanceof SyntaxError) {

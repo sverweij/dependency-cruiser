@@ -1,4 +1,4 @@
-import { readFileSync } from "node:fs";
+import { readFile } from "node:fs/promises";
 
 import { extname } from "node:path";
 import json5 from "json5";
@@ -35,11 +35,11 @@ async function getJSConfig(pBabelConfigFileName) {
   return lReturnValue;
 }
 
-function getJSON5Config(pBabelConfigFileName) {
+async function getJSON5Config(pBabelConfigFileName) {
   let lReturnValue = {};
 
   try {
-    lReturnValue = json5.parse(readFileSync(pBabelConfigFileName, "utf8"));
+    lReturnValue = json5.parse(await readFile(pBabelConfigFileName, "utf8"));
   } catch (pError) {
     throw new Error(
       `Encountered an error while parsing the babel config '${pBabelConfigFileName}':` +

@@ -11,6 +11,5 @@ export default async function readConfig(pAbsolutePathToConfigFile) {
     );
     return config;
   }
-  const lConfig = await readFile(pAbsolutePathToConfigFile, "utf8");
-  return json5.parse(lConfig);
+  return json5.parse(await readFile(pAbsolutePathToConfigFile, "utf8"));
 }

@@ -40,7 +40,7 @@ async function addKnownViolations(pCruiseOptions) {
     const { default: extractKnownViolations } = await import(
       "../config-utl/extract-known-violations.mjs"
     );
-    const lKnownViolations = extractKnownViolations(
+    const lKnownViolations = await extractKnownViolations(
       pCruiseOptions.knownViolationsFile
     );
 
