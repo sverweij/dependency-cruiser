@@ -18,7 +18,7 @@ export default function enrichModules(pModules, pOptions) {
     pDependencyName: "resolved",
   });
   bus.emit("progress", "analyzing: dependents", { level: busLogLevels.INFO });
-  lModules = addDependents(lModules, pOptions);
+  lModules = addDependents(lModules);
   bus.emit("progress", "analyzing: orphans", { level: busLogLevels.INFO });
   lModules = deriveOrphans(lModules);
   bus.emit("progress", "analyzing: reachables", { level: busLogLevels.INFO });
