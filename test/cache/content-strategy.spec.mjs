@@ -136,7 +136,6 @@ describe("[U] cache/content-strategy - getRevisionData", () => {
         {
           extensions: INTERESTING_EXTENSIONS,
           interestingChangeTypes: lLimitedChangeTypes,
-          shaRetrievalFn: () => DUMMY_SHA,
           diffListFn: () => lInputChanges,
           checksumFn: dummyCheckSumFunction,
         }

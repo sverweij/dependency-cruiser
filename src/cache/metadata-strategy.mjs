@@ -1,9 +1,9 @@
 import { isDeepStrictEqual } from "node:util";
-import { getSHASync, listSync } from "watskeburt";
+import { getSHA, list } from "watskeburt";
 import { bus } from "../utl/bus.mjs";
 import {
   isInterestingChangeType,
-  addCheckSumToChange,
+  addCheckSumToChangeSync,
   excludeFilter,
   includeOnlyFilter,
   changeHasInterestingExtension,
@@ -22,26 +22,31 @@ export default class MetaDataStrategy {
    * @param {(import("watskeburt").IChange) => import("../..").IRevisionChange} pOptions.checksumFn
    * @returns {import("../../types/dependency-cruiser.js").IRevisionData}
    */
-  getRevisionData(pDirectory, pCachedCruiseResult, pCruiseOptions, pOptions) {
+  async getRevisionData(
+    pDirectory,
+    pCachedCruiseResult,
+    pCruiseOptions,
+    pOptions
+  ) {
     const lOptions = {
-      shaRetrievalFn: getSHASync,
-      diffListFn: listSync,
-      checksumFn: addCheckSumToChange,
+      shaRetrievalFn: getSHA,
+      diffListFn: list,
+      checksumFn: addCheckSumToChangeSync,
       ...pOptions,
     };
     try {
       bus.debug("cache: - getting sha");
-      const lSHA = lOptions.shaRetrievalFn();
+      const lSHA = await lOptions.shaRetrievalFn();
       bus.debug("cache: - getting diff");
-      const lChanges = lOptions
-        .diffListFn(lSHA)
+      const lDiff = await lOptions.diffListFn(lSHA);
+      const lChanges = lDiff
         .filter(({ name }) => excludeFilter(pCruiseOptions.exclude)(name))
         .filter(({ name }) =>
           includeOnlyFilter(pCruiseOptions.includeOnly)(name)
         )
         .filter(changeHasInterestingExtension(lOptions.extensions))
         .filter(isInterestingChangeType(lOptions.interestingChangeTypes));
-      bus.debug("cache: - shasumming diff");
+      bus.debug("cache: - sha-summing diff");
       return {
         SHA1: lSHA,
         changes: lChanges.map(lOptions.checksumFn),

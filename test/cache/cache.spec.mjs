@@ -110,12 +110,13 @@ describe("[I] cache/cache - canServeFromCache", () => {
     revisionData: { SHA1: "dummy-sha", changes: [] },
   };
 
-  it("returns false when cache not written yet", () => {
+  it("returns false when cache not written yet", async () => {
     const lCacheFolder = join(OUTPUTS_FOLDER, "serve-from-cache");
     const lEmptyCruiseResult = { modules: [], summary: [] };
+    const lCache = new Cache();
 
     expect(
-      new Cache().canServeFromCache(
+      await lCache.canServeFromCache(
         { cache: { folder: lCacheFolder, strategy: "metadata" } },
         lEmptyCruiseResult,
         {
@@ -126,11 +127,12 @@ describe("[I] cache/cache - canServeFromCache", () => {
     ).to.equal(false);
   });
 
-  it("returns false when the base SHA differs", () => {
+  it("returns false when the base SHA differs", async () => {
     const lCacheFolder = join(OUTPUTS_FOLDER, "serve-from-cache-sha-differs");
+    const lCache = new Cache();
 
     expect(
-      new Cache().canServeFromCache(
+      await lCache.canServeFromCache(
         {
           args: "src test tools",
           cache: { folder: lCacheFolder, strategy: "metadata" },
@@ -144,11 +146,12 @@ describe("[I] cache/cache - canServeFromCache", () => {
     ).to.equal(false);
   });
 
-  it("returns false when a file was added", () => {
+  it("returns false when a file was added", async () => {
     const lCacheFolder = join(OUTPUTS_FOLDER, "serve-from-cache-file-added");
+    const lCache = new Cache();
 
     expect(
-      new Cache().canServeFromCache(
+      await lCache.canServeFromCache(
         {
           args: "src test tools",
           cache: { folder: lCacheFolder, strategy: "metadata" },
@@ -168,14 +171,15 @@ describe("[I] cache/cache - canServeFromCache", () => {
     ).to.equal(false);
   });
 
-  it("returns false when cache written & revision data equal & options incompatible", () => {
+  it("returns false when cache written & revision data equal & options incompatible", async () => {
     const lCacheFolder = join(
       OUTPUTS_FOLDER,
       "serve-from-cache-options-incompatible"
     );
+    const lCache = new Cache();
 
     expect(
-      new Cache().canServeFromCache(
+      await lCache.canServeFromCache(
         {
           args: "src test tools configs",
           cache: { folder: lCacheFolder, strategy: "metadata" },
@@ -186,9 +190,11 @@ describe("[I] cache/cache - canServeFromCache", () => {
     ).to.equal(false);
   });
 
-  it("returns true when cache written & revision data equal & options compatible", () => {
+  it("returns true when cache written & revision data equal & options compatible", async () => {
+    const lCache = new Cache();
+
     expect(
-      new Cache().canServeFromCache(
+      await lCache.canServeFromCache(
         {
           args: "src test tools",
           cache: { folder: lOriginalCacheFolder, strategy: "metadata" },

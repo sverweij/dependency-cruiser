@@ -2,9 +2,8 @@ import { isDeepStrictEqual } from "node:util";
 import { join } from "node:path/posix";
 import findContentChanges from "./find-content-changes.mjs";
 import {
-  getFileHash,
+  getFileHashSync,
   isInterestingChangeType,
-  addCheckSumToChange,
   moduleIsInterestingForDiff,
 } from "./helpers.mjs";
 
@@ -17,7 +16,7 @@ function addCheckSumToModule(pBaseDirectory) {
     if (moduleIsInterestingForDiff(pModule)) {
       return {
         ...pModule,
-        checksum: getFileHash(join(pBaseDirectory, pModule.source)),
+        checksum: getFileHashSync(join(pBaseDirectory, pModule.source)),
       };
     }
     return pModule;
@@ -56,7 +55,6 @@ export default class ContentStrategy {
   getRevisionData(pDirectory, pCachedCruiseResult, pCruiseOptions, pOptions) {
     const lOptions = {
       diffListFn: findContentChanges,
-      checksumFn: addCheckSumToChange,
       baseDir: process.cwd(),
       ...pOptions,
     };

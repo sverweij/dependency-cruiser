@@ -19,9 +19,10 @@ const dummyCheckSumFunction = (pChange) => ({
 });
 
 describe("[U] cache/metadata-strategy - getRevisionData", () => {
-  it("if the current folder isn't under version control, the function throws", () => {
-    expect(() => {
-      new MetaDataStrategy().getRevisionData(
+  it("if the current folder isn't under version control, the function throws", async () => {
+    let lError = "none";
+    try {
+      await new MetaDataStrategy().getRevisionData(
         null,
         null,
         { exclude: {}, includeOnly: {} },
@@ -36,10 +37,13 @@ describe("[U] cache/metadata-strategy - getRevisionData", () => {
           },
         }
       );
-    }).to.throw(/The --cache option works in concert with git/);
+    } catch (pError) {
+      lError = pError.message;
+    }
+    expect(lError).to.match(/The --cache option works in concert with git/);
   });
 
-  it("if one of the listed changes doesn't exist on disk it gets shasum 'file not found'", () => {
+  it("if one of the listed changes doesn't exist on disk it gets shasum 'file not found'", async () => {
     /** @type {import('watskeburt').IChange[]} */
     const lInputChanges = [
       {
@@ -59,7 +63,7 @@ describe("[U] cache/metadata-strategy - getRevisionData", () => {
     };
 
     expect(
-      new MetaDataStrategy().getRevisionData(
+      await new MetaDataStrategy().getRevisionData(
         null,
         null,
         { exclude: {}, includeOnly: {} },
@@ -73,7 +77,7 @@ describe("[U] cache/metadata-strategy - getRevisionData", () => {
     ).to.deep.equal(lExpected);
   });
 
-  it("if a listed change does exist on disk shasum is calculated", () => {
+  it("if a listed change does exist on disk shasum is calculated", async () => {
     /** @type {import('watskeburt').IChange[]} */
     const lInputChanges = [
       {
@@ -93,7 +97,7 @@ describe("[U] cache/metadata-strategy - getRevisionData", () => {
     };
 
     expect(
-      new MetaDataStrategy().getRevisionData(
+      await new MetaDataStrategy().getRevisionData(
         null,
         null,
         { exclude: {}, includeOnly: {} },
@@ -107,9 +111,9 @@ describe("[U] cache/metadata-strategy - getRevisionData", () => {
     ).to.deep.equal(lExpected);
   });
 
-  it("if there's no changes the change set contains the passed sha & an empty array", () => {
+  it("if there's no changes the change set contains the passed sha & an empty array", async () => {
     expect(
-      new MetaDataStrategy().getRevisionData(
+      await new MetaDataStrategy().getRevisionData(
         null,
         null,
         { exclude: {}, includeOnly: {} },
@@ -126,7 +130,7 @@ describe("[U] cache/metadata-strategy - getRevisionData", () => {
     });
   });
 
-  it("returns only the extensions passed", () => {
+  it("returns only the extensions passed", async () => {
     const lLimitedExtensions = new Set([".wim", ".noot"]);
     /** @type {import('watskeburt').IChange[]} */
     const lInputChanges = [
@@ -154,7 +158,7 @@ describe("[U] cache/metadata-strategy - getRevisionData", () => {
     ];
 
     expect(
-      new MetaDataStrategy().getRevisionData(
+      await new MetaDataStrategy().getRevisionData(
         null,
         null,
         { exclude: {}, includeOnly: {} },
@@ -184,7 +188,7 @@ describe("[U] cache/metadata-strategy - getRevisionData", () => {
     });
   });
 
-  it("returns only the changeTypes passed", () => {
+  it("returns only the changeTypes passed", async () => {
     const lLimitedChangeTypes = new Set(["added", "modified", "renamed"]);
     /** @type {import('watskeburt').IChange[]} */
     const lInputChanges = [
@@ -216,7 +220,7 @@ describe("[U] cache/metadata-strategy - getRevisionData", () => {
     ];
 
     expect(
-      new MetaDataStrategy().getRevisionData(
+      await new MetaDataStrategy().getRevisionData(
         null,
         null,
         { exclude: {}, includeOnly: {} },
@@ -251,7 +255,7 @@ describe("[U] cache/metadata-strategy - getRevisionData", () => {
     });
   });
 
-  it("by default only returns a subset of change types", () => {
+  it("by default only returns a subset of change types", async () => {
     /** @type {import('watskeburt').IChange[]} */
     const lInputChanges = [
       {
@@ -302,7 +306,7 @@ describe("[U] cache/metadata-strategy - getRevisionData", () => {
     ];
 
     expect(
-      new MetaDataStrategy().getRevisionData(
+      await new MetaDataStrategy().getRevisionData(
         null,
         null,
         { exclude: {}, includeOnly: {} },
