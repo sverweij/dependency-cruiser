@@ -19,16 +19,6 @@
 <polygon fill="none" stroke="black" points="16,-16 16,-401 758,-401 758,-16 16,-16"/>
 <text text-anchor="middle" x="387" y="-385.8" font-family="Times,serif" font-size="14.00">main</text>
 </g>
-<g id="clust3" class="cluster">
-<title>cluster_src/main/files&#45;and&#45;dirs</title>
-<polygon fill="none" stroke="black" points="298,-179 298,-254 438,-254 438,-179 298,-179"/>
-<text text-anchor="middle" x="368" y="-238.8" font-family="Times,serif" font-size="14.00">files&#45;and&#45;dirs</text>
-</g>
-<g id="clust4" class="cluster">
-<title>cluster_src/main/options</title>
-<polygon fill="none" stroke="black" points="312,-24 312,-171 578,-171 578,-24 312,-24"/>
-<text text-anchor="middle" x="445" y="-155.8" font-family="Times,serif" font-size="14.00">options</text>
-</g>
 <g id="clust5" class="cluster">
 <title>cluster_src/main/resolve&#45;options</title>
 <polygon fill="none" stroke="black" points="480,-179 480,-254 620,-254 620,-179 480,-179"/>
@@ -38,6 +28,16 @@
 <title>cluster_src/main/rule&#45;set</title>
 <polygon fill="none" stroke="black" points="24,-179 24,-254 290,-254 290,-179 24,-179"/>
 <text text-anchor="middle" x="157" y="-238.8" font-family="Times,serif" font-size="14.00">rule&#45;set</text>
+</g>
+<g id="clust3" class="cluster">
+<title>cluster_src/main/files&#45;and&#45;dirs</title>
+<polygon fill="none" stroke="black" points="298,-179 298,-254 438,-254 438,-179 298,-179"/>
+<text text-anchor="middle" x="368" y="-238.8" font-family="Times,serif" font-size="14.00">files&#45;and&#45;dirs</text>
+</g>
+<g id="clust4" class="cluster">
+<title>cluster_src/main/options</title>
+<polygon fill="none" stroke="black" points="312,-24 312,-171 578,-171 578,-24 312,-24"/>
+<text text-anchor="middle" x="445" y="-155.8" font-family="Times,serif" font-size="14.00">options</text>
 </g>
 <!-- src/main/cruise.mjs -->
 <g id="node1" class="node">
