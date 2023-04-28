@@ -1,12 +1,9 @@
-import chalk from "chalk";
-import busLogLevels from "../../../utl/bus-log-levels.mjs";
+import { INFO, SUMMARY } from "../../../utl/bus.mjs";
 import { getHeader, getProgressLine, getEndText } from "./handlers.mjs";
-
-let gUnderline = false;
 
 function getHeaderWriter(pStream, pMaxLevel) {
   return (_pMessage, pOptions) => {
-    const lOptions = { level: busLogLevels.SUMMARY, ...(pOptions || {}) };
+    const lOptions = { level: SUMMARY, ...(pOptions || {}) };
 
     pStream.write(getHeader(lOptions.level, pMaxLevel));
   };
@@ -14,22 +11,19 @@ function getHeaderWriter(pStream, pMaxLevel) {
 
 function getProgressWriter(pStream, pState, pMaxLevel) {
   return (pMessage, pOptions) => {
-    const lOptions = { level: busLogLevels.SUMMARY, ...(pOptions || {}) };
+    const lOptions = { level: SUMMARY, ...(pOptions || {}) };
     const lProgressLine = getProgressLine(
       pMessage,
       pState,
       lOptions.level,
       pMaxLevel
     );
-    pStream.write(
-      gUnderline ? `${chalk.underline(lProgressLine)}` : lProgressLine
-    );
-    gUnderline = !gUnderline;
+    pStream.write(lProgressLine);
   };
 }
 
 function getEndWriter(pStream, pState, pMaxLevel) {
-  return (_pMessage, pLevel = busLogLevels.SUMMARY) => {
+  return (_pMessage, pLevel = SUMMARY) => {
     pStream.write(getEndText(pState, pLevel, pMaxLevel));
     pStream.end();
   };
@@ -37,11 +31,11 @@ function getEndWriter(pStream, pState, pMaxLevel) {
 
 export default function setUpPerformanceLogListener(
   pEventEmitter,
-  pMaxLevel = busLogLevels.INFO,
+  pMaxLevel = INFO,
   pStream = process.stderr
 ) {
   let lState = {
-    previousMessage: "start of node process",
+    previousMessage: "starting nodejs",
     previousTime: 0,
     previousUserUsage: 0,
     previousSystemUsage: 0,

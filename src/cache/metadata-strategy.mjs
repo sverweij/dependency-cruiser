@@ -1,5 +1,6 @@
 import { isDeepStrictEqual } from "node:util";
 import { getSHASync, listSync } from "watskeburt";
+import { bus } from "../utl/bus.mjs";
 import {
   isInterestingChangeType,
   addCheckSumToChange,
@@ -29,18 +30,21 @@ export default class MetaDataStrategy {
       ...pOptions,
     };
     try {
+      bus.debug("cache: - getting sha");
       const lSHA = lOptions.shaRetrievalFn();
+      bus.debug("cache: - getting diff");
+      const lChanges = lOptions
+        .diffListFn(lSHA)
+        .filter(({ name }) => excludeFilter(pCruiseOptions.exclude)(name))
+        .filter(({ name }) =>
+          includeOnlyFilter(pCruiseOptions.includeOnly)(name)
+        )
+        .filter(changeHasInterestingExtension(lOptions.extensions))
+        .filter(isInterestingChangeType(lOptions.interestingChangeTypes));
+      bus.debug("cache: - shasumming diff");
       return {
         SHA1: lSHA,
-        changes: lOptions
-          .diffListFn(lSHA)
-          .filter(({ name }) => excludeFilter(pCruiseOptions.exclude)(name))
-          .filter(({ name }) =>
-            includeOnlyFilter(pCruiseOptions.includeOnly)(name)
-          )
-          .filter(changeHasInterestingExtension(lOptions.extensions))
-          .filter(isInterestingChangeType(lOptions.interestingChangeTypes))
-          .map(lOptions.checksumFn),
+        changes: lChanges.map(lOptions.checksumFn),
       };
     } catch (pError) {
       throw new Error(

@@ -97,7 +97,7 @@ describe("[U] cli/listeners/performance-log/format-helpers - formatPerfLine", ()
       message: "sim sala bim",
     };
     expect(formatPerfLine(lStats, "sim sala bim")).to.match(
-      / {0,}7,635ms {0,}16ms {0,}4ms {0,}\+3,144kB {0,}\+2,420kB {0,}\+2,791kB {0,}0kB sim sala bim\n/
+      / {0,}\+3,144kB {0,}\+2,420kB {0,}\+2,791kB {0,}0kB  {0,}4ms {0,}16ms {0,}7,635ms sim sala bim\n/
     );
   });
 });

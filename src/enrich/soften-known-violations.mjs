@@ -1,5 +1,4 @@
-import bus from "../utl/bus.mjs";
-import busLogLevels from "../utl/bus-log-levels.mjs";
+import { bus } from "../utl/bus.mjs";
 import isSameViolation from "./summarize/is-same-violation.mjs";
 
 function softenModuleViolation(
@@ -118,9 +117,7 @@ export default function softenKnownViolations(
   pSoftenedSeverity = "ignore"
 ) {
   if (Boolean(pKnownViolations)) {
-    bus.emit("progress", "analyzing: comparing against known errors", {
-      level: busLogLevels.INFO,
-    });
+    bus.info("analyzing: comparing against known errors");
     return pModules.map((pModule) =>
       softenKnownViolation(pModule, pKnownViolations, pSoftenedSeverity)
     );

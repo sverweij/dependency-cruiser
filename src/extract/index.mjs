@@ -1,6 +1,5 @@
 import has from "lodash/has.js";
-import bus from "../utl/bus.mjs";
-import busLogLevels from "../utl/bus-log-levels.mjs";
+import { bus } from "../utl/bus.mjs";
 import getDependencies from "./get-dependencies.mjs";
 import gatherInitialSources from "./gather-initial-sources.mjs";
 import clearCaches from "./clear-caches.mjs";
@@ -62,17 +61,13 @@ function extractFileDirectoryArray(
 ) {
   let lVisited = new Set();
 
-  bus.emit("progress", "reading files: gathering initial sources", {
-    level: busLogLevels.INFO,
-  });
+  bus.info("reading files: gathering initial sources");
   const lInitialSources = gatherInitialSources(
     pFileDirectoryArray,
     pCruiseOptions
   );
 
-  bus.emit("progress", "reading files: visiting dependencies", {
-    level: busLogLevels.INFO,
-  });
+  bus.info("reading files: visiting dependencies");
   return lInitialSources.reduce((pDependencies, pFilename) => {
     if (!lVisited.has(pFilename)) {
       lVisited.add(pFilename);

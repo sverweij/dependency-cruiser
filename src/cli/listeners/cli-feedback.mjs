@@ -1,6 +1,6 @@
 import chalk from "chalk";
 import figures from "figures";
-import busLogLevels from "../../utl/bus-log-levels.mjs";
+import { SUMMARY } from "../../utl/bus.mjs";
 
 const FULL_ON = 100;
 
@@ -26,7 +26,7 @@ function getPercentageBar(pPercentage, pParameters) {
 function getProgressMessageWriter(pStream, pState, pMaxLogLevel) {
   return (pMessage, pOptions) => {
     const lOptions = {
-      level: busLogLevels.SUMMARY,
+      level: SUMMARY,
       complete: pState.complete,
       ...(pOptions || {}),
     };
@@ -56,7 +56,7 @@ function getStartWriter(pStream) {
 
 export default function setUpCliFeedbackListener(
   pEventEmitter,
-  pMaxLogLevel = busLogLevels.SUMMARY,
+  pMaxLogLevel = SUMMARY,
   pStream = process.stderr
 ) {
   const lState = {

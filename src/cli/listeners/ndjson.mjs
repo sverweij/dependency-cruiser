@@ -1,5 +1,5 @@
 import { EOL } from "node:os";
-import busLogLevels from "../../utl/bus-log-levels.mjs";
+import { INFO, SUMMARY } from "../../utl/bus.mjs";
 
 const MICRO_SECONDS_PER_SECOND = 1000000;
 
@@ -63,7 +63,7 @@ function getProgressLine(pMessage, pState, pLevel, pMaxLevel) {
 
 function getProgressWriter(pStream, pState, pMaxLevel) {
   return (pMessage, pOptions) => {
-    const lOptions = { level: busLogLevels.SUMMARY, ...(pOptions || {}) };
+    const lOptions = { level: SUMMARY, ...(pOptions || {}) };
 
     pStream.write(getProgressLine(pMessage, pState, lOptions.level, pMaxLevel));
   };
@@ -71,12 +71,12 @@ function getProgressWriter(pStream, pState, pMaxLevel) {
 
 export default function setUpNDJSONListener(
   pEventEmitter,
-  pMaxLevel = busLogLevels.INFO,
+  pMaxLevel = INFO,
   pStream = process.stderr
 ) {
   let lState = {
     runStartTime: new Date(Date.now()).toISOString(),
-    previousMessage: "start of node process",
+    previousMessage: "starting nodejs",
     previousTime: 0,
     previousUserUsage: 0,
     previousSystemUsage: 0,

@@ -1,6 +1,5 @@
 import { join } from "node:path/posix";
-import bus from "../utl/bus.mjs";
-import busLogLevels from "../utl/bus-log-levels.mjs";
+import { bus } from "../utl/bus.mjs";
 import findAllFiles from "../utl/find-all-files.mjs";
 import {
   getFileHash,
@@ -9,8 +8,6 @@ import {
   hasInterestingExtension,
   moduleIsInterestingForDiff,
 } from "./helpers.mjs";
-
-const { DEBUG } = busLogLevels;
 
 /**
  * @param {Set<string>} pFileSet
@@ -75,7 +72,7 @@ export default function findContentChanges(
   pCachedCruiseResult,
   pOptions
 ) {
-  bus.emit("progress", "cache: - hauling revision data", { level: DEBUG });
+  bus.debug("cache: - getting revision data");
   const lFileSet = new Set(
     findAllFiles(pDirectory, {
       baseDir: pOptions.baseDir,
@@ -84,12 +81,12 @@ export default function findContentChanges(
     }).filter(hasInterestingExtension(pOptions.extensions))
   );
 
-  bus.emit("progress", "cache: - determining cached vs new", { level: DEBUG });
+  bus.debug("cache: - getting (cached - new)");
   const lDiffCachedVsNew = pCachedCruiseResult.modules.map(
     diffCachedModuleAgainstFileSet(lFileSet, pOptions.baseDir)
   );
 
-  bus.emit("progress", "cache: - determining new vs cached", { level: DEBUG });
+  bus.debug("cache: - getting (new - cached)");
   lDiffCachedVsNew.forEach(({ name }) => lFileSet.delete(name));
 
   const lDiffNewVsCached = [];
@@ -101,6 +98,6 @@ export default function findContentChanges(
     });
   }
 
-  bus.emit("progress", "cache: - returning revision data", { level: DEBUG });
+  bus.debug("cache: - returning revision data");
   return lDiffCachedVsNew.concat(lDiffNewVsCached);
 }

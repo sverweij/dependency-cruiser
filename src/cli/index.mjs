@@ -1,4 +1,3 @@
-/* eslint-disable import/max-dependencies */
 import { join } from "node:path";
 import { glob } from "glob";
 import cloneDeep from "lodash/cloneDeep.js";
@@ -7,9 +6,8 @@ import isInstalledGlobally from "is-installed-globally";
 import chalk from "chalk";
 
 import cruise from "../main/cruise.mjs";
-import bus from "../utl/bus.mjs";
+import { INFO, bus } from "../utl/bus.mjs";
 
-import busLogLevels from "../utl/bus-log-levels.mjs";
 import validateFileExistence from "./utl/validate-file-existence.mjs";
 import normalizeCliOptions from "./normalize-cli-options.mjs";
 import { write } from "./utl/io.mjs";
@@ -97,8 +95,7 @@ function setUpListener(pCruiseOptions) {
   if (Boolean(lListenerFunction)) {
     lListenerFunction(
       bus,
-      pCruiseOptions?.ruleSet?.options?.progress?.maximumLevel ??
-        busLogLevels.INFO
+      pCruiseOptions?.ruleSet?.options?.progress?.maximumLevel ?? INFO
     );
   }
 }
@@ -132,7 +129,7 @@ async function runCruise(pFileDirectoryArray, pCruiseOptions) {
     { tsConfig, babelConfig }
   );
 
-  bus.emit("progress", "cli: writing results", { complete: 1 });
+  bus.progress("cli: writing results", { complete: 1 });
   bus.emit("write-start");
   write(lCruiseOptions.outputTo, lReportingResult.output);
 

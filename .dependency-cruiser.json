@@ -525,7 +525,7 @@
         ]
       }
     },
-    "progress": { "type": "performance-log", "maximumLevel": 50 },
+    "progress": { "type": "performance-log", "maximumLevel": 60 },
     "cache": {
       "strategy": "metadata"
     }

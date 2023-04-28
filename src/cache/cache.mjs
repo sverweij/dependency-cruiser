@@ -1,6 +1,7 @@
 import { readFileSync, mkdirSync, writeFileSync } from "node:fs";
 import { join } from "node:path";
 import { scannableExtensions } from "../extract/transpile/meta.mjs";
+import { bus } from "../utl/bus.mjs";
 import { optionsAreCompatible } from "./options-compatible.mjs";
 import MetadataStrategy from "./metadata-strategy.mjs";
 import ContentStrategy from "./content-strategy.mjs";
@@ -38,6 +39,7 @@ export default class Cache {
           ),
         }
       );
+    bus.debug("cache: - comparing");
     return (
       this.cacheStrategy.revisionDataEqual(
         pCachedCruiseResult.revisionData,

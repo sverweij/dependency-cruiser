@@ -1,7 +1,6 @@
 /* eslint-disable no-return-await */
 /* eslint-disable no-magic-numbers */
-
-import bus from "../utl/bus.mjs";
+import { bus } from "../utl/bus.mjs";
 import { validateCruiseOptions } from "./options/validate.mjs";
 import { normalizeCruiseOptions } from "./options/normalize.mjs";
 import reportWrap from "./report-wrap.mjs";
@@ -20,7 +19,7 @@ export default async function cruise(
   pResolveOptions,
   pTranspileOptions
 ) {
-  bus.emit("progress", "parsing options", c(1));
+  bus.summary("parsing options", c(1));
   /** @type {import("../../types/strict-options.js").IStrictCruiseOptions} */
   let lCruiseOptions = normalizeCruiseOptions(
     validateCruiseOptions(pCruiseOptions),
@@ -29,9 +28,8 @@ export default async function cruise(
   let lCache = null;
 
   if (lCruiseOptions.cache) {
-    bus.emit(
-      "progress",
-      `cache: check freshness with ${lCruiseOptions.cache.strategy}`,
+    bus.summary(
+      `cache: checking freshness with ${lCruiseOptions.cache.strategy}`,
       c(2)
     );
 
@@ -40,12 +38,12 @@ export default async function cruise(
     const lCachedResults = lCache.read(lCruiseOptions.cache.folder);
 
     if (lCache.canServeFromCache(lCruiseOptions, lCachedResults)) {
-      bus.emit("progress", "cache: reporting from cache", c(8));
+      bus.summary("cache: reporting from cache", c(8));
       return await reportWrap(lCachedResults, lCruiseOptions);
     }
   }
 
-  bus.emit("progress", "importing analytical modules", c(3));
+  bus.summary("importing analytical modules", c(3));
   const [
     { default: normalizeRuleSet },
     { default: validateRuleSet },
@@ -65,7 +63,7 @@ export default async function cruise(
   ]);
 
   if (Boolean(lCruiseOptions.ruleSet)) {
-    bus.emit("progress", "parsing rule set", c(4));
+    bus.summary("parsing rule set", c(4));
     lCruiseOptions.ruleSet = normalizeRuleSet(
       validateRuleSet(lCruiseOptions.ruleSet)
     );
@@ -75,14 +73,14 @@ export default async function cruise(
     pFileAndDirectoryArray
   );
 
-  bus.emit("progress", "determining how to resolve", c(5));
+  bus.summary("determining how to resolve", c(5));
   const lNormalizedResolveOptions = await normalizeResolveOptions(
     pResolveOptions,
     lCruiseOptions,
     pTranspileOptions?.tsConfig
   );
 
-  bus.emit("progress", "reading files", c(6));
+  bus.summary("reading files", c(6));
   const lExtractionResult = extract(
     lNormalizedFileAndDirectoryArray,
     lCruiseOptions,
@@ -90,7 +88,7 @@ export default async function cruise(
     pTranspileOptions
   );
 
-  bus.emit("progress", "analyzing", c(7));
+  bus.summary("analyzing", c(7));
   const lCruiseResult = enrich(
     lExtractionResult,
     lCruiseOptions,
@@ -98,10 +96,10 @@ export default async function cruise(
   );
 
   if (lCruiseOptions.cache) {
-    bus.emit("progress", "cache: save", c(8));
+    bus.summary("cache: saving", c(8));
     lCache.write(lCruiseOptions.cache.folder, lCruiseResult);
   }
 
-  bus.emit("progress", "reporting", c(9));
+  bus.summary("reporting", c(9));
   return await reportWrap(lCruiseResult, lCruiseOptions);
 }
