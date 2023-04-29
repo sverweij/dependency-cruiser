@@ -1,6 +1,7 @@
 /* eslint-disable import/exports-last */
 import { createHash } from "node:crypto";
 import { readFileSync } from "node:fs";
+import { readFile } from "node:fs/promises";
 import { extname } from "node:path";
 import memoize from "lodash/memoize.js";
 import { filenameMatchesPattern } from "../graph-utl/match-facade.mjs";
@@ -15,11 +16,11 @@ function hash(pString) {
 
 /**
  * @param {import("fs").PathOrFileDescriptor} pFileName
- * @returns {string}
+ * @returns {Promise<string>}
  */
-function _getFileHash(pFileName) {
+async function _getFileHash(pFileName) {
   try {
-    return hash(readFileSync(pFileName, "utf8"));
+    return hash(await readFile(pFileName, "utf8"));
   } catch (pError) {
     return "file not found";
   }
@@ -27,14 +28,35 @@ function _getFileHash(pFileName) {
 
 export const getFileHash = memoize(_getFileHash);
 
+export async function addCheckSumToChange(pChange) {
+  return {
+    ...pChange,
+    checksum: await getFileHash(pChange.name),
+  };
+}
+
+/**
+ * @param {import("fs").PathOrFileDescriptor} pFileName
+ * @returns {string}
+ */
+function _getFileHashSync(pFileName) {
+  try {
+    return hash(readFileSync(pFileName, "utf8"));
+  } catch (pError) {
+    return "file not found";
+  }
+}
+
+export const getFileHashSync = memoize(_getFileHashSync);
+
 /**
  * @param {import("watskeburt").IChange} pChange
  * @param {import("../../types/dependency-cruiser.js").IRevisionChange}
  */
-export function addCheckSumToChange(pChange) {
+export function addCheckSumToChangeSync(pChange) {
   return {
     ...pChange,
-    checksum: getFileHash(pChange.name),
+    checksum: getFileHashSync(pChange.name),
   };
 }
 

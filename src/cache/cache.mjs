@@ -26,10 +26,10 @@ export default class Cache {
    * @param {import("../../types/dependency-cruiser.js").IRevisionData=} pRevisionData
    * @returns {boolean}
    */
-  canServeFromCache(pCruiseOptions, pCachedCruiseResult, pRevisionData) {
+  async canServeFromCache(pCruiseOptions, pCachedCruiseResult, pRevisionData) {
     this.revisionData =
       pRevisionData ??
-      this.cacheStrategy.getRevisionData(
+      (await this.cacheStrategy.getRevisionData(
         ".",
         pCachedCruiseResult,
         pCruiseOptions,
@@ -38,7 +38,7 @@ export default class Cache {
             scannableExtensions.concat(pCruiseOptions.extraExtensionsToScan)
           ),
         }
-      );
+      ));
     bus.debug("cache: - comparing");
     return (
       this.cacheStrategy.revisionDataEqual(

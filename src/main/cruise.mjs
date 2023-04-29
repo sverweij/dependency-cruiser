@@ -37,7 +37,7 @@ export default async function cruise(
     lCache = new Cache(lCruiseOptions.cache.strategy);
     const lCachedResults = await lCache.read(lCruiseOptions.cache.folder);
 
-    if (lCache.canServeFromCache(lCruiseOptions, lCachedResults)) {
+    if (await lCache.canServeFromCache(lCruiseOptions, lCachedResults)) {
       bus.summary("cache: reporting from cache", c(8));
       return await reportWrap(lCachedResults, lCruiseOptions);
     }

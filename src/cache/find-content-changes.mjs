@@ -2,7 +2,7 @@ import { join } from "node:path/posix";
 import { bus } from "../utl/bus.mjs";
 import findAllFiles from "../utl/find-all-files.mjs";
 import {
-  getFileHash,
+  getFileHashSync,
   excludeFilter,
   includeOnlyFilter,
   hasInterestingExtension,
@@ -11,13 +11,13 @@ import {
 
 /**
  * @param {Set<string>} pFileSet
- * @param {typeof getFileHash} pFileHashFunction
+ * @param {typeof getFileHashSync} pFileHashFunction
  * @returns {(pModule:import("../..").IModule) => import('../..').IRevisionChange}
  */
 function diffCachedModuleAgainstFileSet(
   pFileSet,
   pBaseDirectory,
-  pFileHashFunction = getFileHash
+  pFileHashFunction = getFileHashSync
 ) {
   return (pModule) => {
     if (!moduleIsInterestingForDiff(pModule)) {
@@ -94,7 +94,7 @@ export default function findContentChanges(
     lDiffNewVsCached.push({
       name: lFileName,
       changeType: "added",
-      checksum: getFileHash(join(pOptions.baseDir, lFileName)),
+      checksum: getFileHashSync(join(pOptions.baseDir, lFileName)),
     });
   }
 
