@@ -35,7 +35,7 @@ export default function setUpPerformanceLogListener(
   pStream = process.stderr
 ) {
   let lState = {
-    previousMessage: "starting nodejs",
+    previousMessage: "nodejs starting",
     previousTime: 0,
     previousUserUsage: 0,
     previousSystemUsage: 0,

@@ -76,7 +76,7 @@ export default function setUpNDJSONListener(
 ) {
   let lState = {
     runStartTime: new Date(Date.now()).toISOString(),
-    previousMessage: "starting nodejs",
+    previousMessage: "nodejs starting",
     previousTime: 0,
     previousUserUsage: 0,
     previousSystemUsage: 0,
