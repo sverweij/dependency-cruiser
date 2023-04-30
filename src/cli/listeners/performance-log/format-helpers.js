@@ -38,13 +38,13 @@ function formatHeader() {
   return chalk
     .bold(
       `${
-        pad("elapsed real") +
-        pad("user") +
-        pad("system") +
         pad("∆ rss") +
         pad("∆ heapTotal") +
         pad("∆ heapUsed") +
-        pad("∆ external")
+        pad("∆ external") +
+        pad("⏱ system") +
+        pad("⏱ user") +
+        pad("⏱ real")
       }after step...\n`
     )
     .concat(formatDividerLine());
@@ -73,13 +73,13 @@ function formatPerfLine({
   message,
 }) {
   return `${
-    formatTime(elapsedTime) +
-    formatTime(elapsedUser, MS_PER_MICRO_SECOND) +
-    formatTime(elapsedSystem, MS_PER_MICRO_SECOND) +
     formatMemory(deltaRss) +
     formatMemory(deltaHeapTotal) +
     formatMemory(deltaHeapUsed) +
     formatMemory(deltaExternal) +
+    formatTime(elapsedSystem, MS_PER_MICRO_SECOND) +
+    formatTime(elapsedUser, MS_PER_MICRO_SECOND) +
+    formatTime(elapsedTime) +
     message
   }\n`;
 }

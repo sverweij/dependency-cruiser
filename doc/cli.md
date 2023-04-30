@@ -1121,7 +1121,7 @@ stay in view when dependency-cruiser is done.
 ```
  elapsed real          user        system         ∆ rss   ∆ heapTotal    ∆ heapUsed    ∆ external after step...
 ------------- ------------- ------------- ------------- ------------- ------------- ------------- -------------
-        785ms         813ms          98ms    +132,384kB     +85,020kB     +62,483kB      +2,280kB start of node process
+        785ms         813ms          98ms    +132,384kB     +85,020kB     +62,483kB      +2,280kB nodejs starting
          12ms          11ms           1ms      +1,148kB        +256kB        +785kB           0kB parsing options
          79ms          18ms           5ms      +2,492kB        +548kB      +1,731kB        +541kB cache: check freshness with metadata
         187ms         345ms          11ms     +18,620kB      +7,024kB      +9,037kB      -1,430kB parsing rule set

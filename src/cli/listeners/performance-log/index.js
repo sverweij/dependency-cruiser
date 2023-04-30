@@ -30,7 +30,7 @@ module.exports = function setUpPerformanceLogListener(
   pStream = process.stderr
 ) {
   let lState = {
-    previousMessage: "start of node process",
+    previousMessage: "nodejs starting",
     previousTime: 0,
     previousUserUsage: 0,
     previousSystemUsage: 0,

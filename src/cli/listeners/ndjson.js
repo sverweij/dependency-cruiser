@@ -76,7 +76,7 @@ module.exports = function setUpNDJSONListener(
 ) {
   let lState = {
     runStartTime: new Date(Date.now()).toISOString(),
-    previousMessage: "start of node process",
+    previousMessage: "nodejs starting",
     previousTime: 0,
     previousUserUsage: 0,
     previousSystemUsage: 0,
