@@ -247,9 +247,9 @@
 <g id="node16" class="node">
 <title>src/report/baseline.mjs</title>
 <g id="a_node16"><a xlink:href="https://github.com/sverweij/dependency-cruiser/blob/develop/src/report/baseline.mjs" xlink:title="no&#45;orphans">
-<path fill="#ffccff" stroke="red" d="M546.07,-69.64C546.07,-69.64 492.4,-69.64 492.4,-69.64 488.07,-69.64 483.74,-65.31 483.74,-60.97 483.74,-60.97 483.74,-52.31 483.74,-52.31 483.74,-47.97 488.07,-43.64 492.4,-43.64 492.4,-43.64 546.07,-43.64 546.07,-43.64 550.4,-43.64 554.74,-47.97 554.74,-52.31 554.74,-52.31 554.74,-60.97 554.74,-60.97 554.74,-65.31 550.4,-69.64 546.07,-69.64"/>
-<text text-anchor="start" x="498.74" y="-59.44" font-family="Helvetica,sans-Serif" font-size="9.00" fill="red">src/report/</text>
-<text text-anchor="start" x="491.74" y="-50.44" font-family="Helvetica,sans-Serif" font-weight="bold" font-size="9.00" fill="red">baseline.mjs</text>
+<path fill="#ffccff" stroke="red" d="M172.07,-69.64C172.07,-69.64 118.4,-69.64 118.4,-69.64 114.07,-69.64 109.74,-65.31 109.74,-60.97 109.74,-60.97 109.74,-52.31 109.74,-52.31 109.74,-47.97 114.07,-43.64 118.4,-43.64 118.4,-43.64 172.07,-43.64 172.07,-43.64 176.4,-43.64 180.74,-47.97 180.74,-52.31 180.74,-52.31 180.74,-60.97 180.74,-60.97 180.74,-65.31 176.4,-69.64 172.07,-69.64"/>
+<text text-anchor="start" x="124.74" y="-59.44" font-family="Helvetica,sans-Serif" font-size="9.00" fill="red">src/report/</text>
+<text text-anchor="start" x="117.74" y="-50.44" font-family="Helvetica,sans-Serif" font-weight="bold" font-size="9.00" fill="red">baseline.mjs</text>
 </a>
 </g>
 </g>
@@ -753,9 +753,9 @@
 <g id="node45" class="node">
 <title>src/report/mermaid.mjs</title>
 <g id="a_node45"><a xlink:href="https://github.com/sverweij/dependency-cruiser/blob/develop/src/report/mermaid.mjs" xlink:title="no&#45;orphans">
-<path fill="#ffccff" stroke="red" d="M174.07,-69.64C174.07,-69.64 118.4,-69.64 118.4,-69.64 114.07,-69.64 109.74,-65.31 109.74,-60.97 109.74,-60.97 109.74,-52.31 109.74,-52.31 109.74,-47.97 114.07,-43.64 118.4,-43.64 118.4,-43.64 174.07,-43.64 174.07,-43.64 178.4,-43.64 182.74,-47.97 182.74,-52.31 182.74,-52.31 182.74,-60.97 182.74,-60.97 182.74,-65.31 178.4,-69.64 174.07,-69.64"/>
-<text text-anchor="start" x="125.74" y="-59.44" font-family="Helvetica,sans-Serif" font-size="9.00" fill="red">src/report/</text>
-<text text-anchor="start" x="117.74" y="-50.44" font-family="Helvetica,sans-Serif" font-weight="bold" font-size="9.00" fill="red">mermaid.mjs</text>
+<path fill="#ffccff" stroke="red" d="M548.07,-69.64C548.07,-69.64 492.4,-69.64 492.4,-69.64 488.07,-69.64 483.74,-65.31 483.74,-60.97 483.74,-60.97 483.74,-52.31 483.74,-52.31 483.74,-47.97 488.07,-43.64 492.4,-43.64 492.4,-43.64 548.07,-43.64 548.07,-43.64 552.4,-43.64 556.74,-47.97 556.74,-52.31 556.74,-52.31 556.74,-60.97 556.74,-60.97 556.74,-65.31 552.4,-69.64 548.07,-69.64"/>
+<text text-anchor="start" x="499.74" y="-59.44" font-family="Helvetica,sans-Serif" font-size="9.00" fill="red">src/report/</text>
+<text text-anchor="start" x="491.74" y="-50.44" font-family="Helvetica,sans-Serif" font-weight="bold" font-size="9.00" fill="red">mermaid.mjs</text>
 </a>
 </g>
 </g>
