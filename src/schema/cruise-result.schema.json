@@ -1077,7 +1077,8 @@
             "text",
             "metrics",
             "markdown",
-            "mermaid"
+            "mermaid",
+            "null"
           ]
         },
         { "type": "string", "pattern": "^plugin:[^:]+$" }
