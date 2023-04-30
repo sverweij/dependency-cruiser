@@ -117,8 +117,8 @@ function optionsAreCompatible(pOldOptions, pNewOptions) {
     filterOptionIsCompatible(pOldOptions.collapse, pNewOptions.collapse) &&
     limitIsCompatible(pOldOptions.maxDepth, pNewOptions.maxDepth) &&
     optionIsCompatible(
-      pOldOptions.knownViolations,
-      pNewOptions.knownViolations
+      pOldOptions.knownViolations || [],
+      pNewOptions.knownViolations || []
     ) &&
     optionIsCompatible(
       pOldOptions.enhancedResolveOptions,
