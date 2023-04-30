@@ -139,6 +139,12 @@ export interface IModule {
    * was asked to calculate metrics.
    */
   instability?: number;
+  /**
+   * checksum of the contents of the module. This attribute is currently only
+   * available when the cruise was executed with caching and the cache strategy
+   * is 'content'.
+   */
+  checksum?: string;
 }
 
 export interface IDependency {
