@@ -21,6 +21,7 @@ export type OutputType =
   | "metrics"
   | "markdown"
   | "mermaid"
+  | "null"
   // for plugins: string. TODO: research whether it's possible to
   // tie this down to the `^plugin:[^:]+-reporter-plugin.c?js$` regex
   | string;

@@ -23,6 +23,7 @@ export default {
             "metrics",
             "markdown",
             "mermaid",
+            "null",
           ],
         },
         {
