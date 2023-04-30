@@ -1,65 +1,57 @@
+/* eslint-disable import/exports-last */
 /* eslint security/detect-object-injection : 0*/
 import meta from "../../meta.js";
-import swc from "../parse/to-swc-ast.mjs";
-import javaScriptWrap from "./javascript-wrap.mjs";
-import typeScriptWrap from "./typescript-wrap.mjs";
-import liveScriptWrap from "./livescript-wrap.mjs";
-import coffeeWrap from "./coffeescript-wrap.mjs";
-import vueWrap from "./vue-template-wrap.cjs";
-import babelWrap from "./babel-wrap.mjs";
-import svelteDingus from "./svelte-wrap.mjs";
+import tryAvailable from "./try-import-available.mjs";
 
-const typeScriptVanillaWrap = typeScriptWrap();
-const typeScriptESMWrap = typeScriptWrap("esm");
-const typeScriptTsxWrap = typeScriptWrap("tsx");
-const coffeeVanillaWrap = coffeeWrap();
-const litCoffeeWrap = coffeeWrap(true);
-const svelteWrap = svelteDingus(typeScriptVanillaWrap);
+function gotCoffee() {
+  return (
+    tryAvailable("coffeescript", meta.supportedTranspilers.coffeescript) ||
+    tryAvailable("coffee-script", meta.supportedTranspilers["coffee-script"])
+  );
+}
 
-const EXTENSION2WRAPPER = {
-  ".js": javaScriptWrap,
-  ".cjs": javaScriptWrap,
-  ".mjs": javaScriptWrap,
-  ".jsx": javaScriptWrap,
-  ".ts": typeScriptVanillaWrap,
-  ".tsx": typeScriptTsxWrap,
-  ".d.ts": typeScriptVanillaWrap,
-  ".cts": typeScriptVanillaWrap,
-  ".d.cts": typeScriptVanillaWrap,
-  ".mts": typeScriptESMWrap,
-  ".d.mts": typeScriptESMWrap,
-  ".vue": vueWrap,
-  ".svelte": svelteWrap,
-  ".ls": liveScriptWrap,
-  ".coffee": coffeeVanillaWrap,
-  ".litcoffee": litCoffeeWrap,
-  ".coffee.md": litCoffeeWrap,
-  ".csx": coffeeVanillaWrap,
-  ".cjsx": coffeeVanillaWrap,
+const TRANSPILER2AVAILABLE = {
+  babel: tryAvailable("@babel/core", meta.supportedTranspilers.babel),
+  javascript: true,
+  "coffee-script": gotCoffee(),
+  coffeescript: gotCoffee(),
+  livescript: tryAvailable("livescript", meta.supportedTranspilers.livescript),
+  svelte: tryAvailable("svelte/compiler", meta.supportedTranspilers.svelte),
+  swc: tryAvailable("@swc/core", meta.supportedTranspilers.swc),
+  typescript: tryAvailable("typescript", meta.supportedTranspilers.typescript),
+  "vue-template-compiler": tryAvailable(
+    "vue-template-compiler",
+    meta.supportedTranspilers["vue-template-compiler"]
+  ),
+  "@vue/compiler-sfc": tryAvailable(
+    "@vue/compiler-sfc",
+    meta.supportedTranspilers["@vue/compiler-sfc"]
+  ),
 };
 
-const TRANSPILER2WRAPPER = {
-  babel: babelWrap,
-  javascript: javaScriptWrap,
-  "coffee-script": coffeeVanillaWrap,
-  coffeescript: coffeeVanillaWrap,
-  livescript: liveScriptWrap,
-  svelte: svelteWrap,
-  swc,
-  typescript: typeScriptVanillaWrap,
-  "vue-template-compiler": vueWrap,
-  "@vue/compiler-sfc": vueWrap,
+export const EXTENSION2AVAILABLE = {
+  ".js": TRANSPILER2AVAILABLE.javascript,
+  ".cjs": TRANSPILER2AVAILABLE.javascript,
+  ".mjs": TRANSPILER2AVAILABLE.javascript,
+  ".jsx": TRANSPILER2AVAILABLE.javascript,
+  ".ts": TRANSPILER2AVAILABLE.typescript,
+  ".tsx": TRANSPILER2AVAILABLE.typescript,
+  ".d.ts": TRANSPILER2AVAILABLE.typescript,
+  ".cts": TRANSPILER2AVAILABLE.typescript,
+  ".d.cts": TRANSPILER2AVAILABLE.typescript,
+  ".mts": TRANSPILER2AVAILABLE.typescript,
+  ".d.mts": TRANSPILER2AVAILABLE.typescript,
+  ".vue":
+    TRANSPILER2AVAILABLE["vue-template-compiler"] ||
+    TRANSPILER2AVAILABLE["@vue/compiler-sfc"],
+  ".svelte": TRANSPILER2AVAILABLE.svelte,
+  ".ls": TRANSPILER2AVAILABLE.livescript,
+  ".coffee": gotCoffee(),
+  ".litcoffee": gotCoffee(),
+  ".coffee.md": gotCoffee(),
+  ".csx": gotCoffee(),
+  ".cjsx": gotCoffee(),
 };
-
-const BABELEABLE_EXTENSIONS = [
-  ".js",
-  ".cjs",
-  ".mjs",
-  ".jsx",
-  ".ts",
-  ".tsx",
-  ".d.ts",
-];
 
 const EXTENSIONS_PER_PARSER = {
   swc: [".js", ".cjs", ".mjs", ".jsx", ".ts", ".tsx", ".d.ts"],
@@ -69,35 +61,10 @@ const EXTENSIONS_PER_PARSER = {
 
 function extensionIsAvailable(pExtension) {
   return (
-    EXTENSION2WRAPPER[pExtension].isAvailable() ||
+    EXTENSION2AVAILABLE[pExtension] ||
     // should eventually also check whether swc is enabled as a parser?
-    (swc.isAvailable() && EXTENSIONS_PER_PARSER.swc.includes(pExtension))
+    (TRANSPILER2AVAILABLE.swc && EXTENSIONS_PER_PARSER.swc.includes(pExtension))
   );
-}
-
-/**
- * returns the babel wrapper if there's a babelConfig in the transpiler
- * options for babeleable extensions (javascript and typescript - currently
- * not configurable)
- *
- * returns the wrapper module configured for the extension pExtension if
- * not.
- *
- * returns the javascript wrapper if there's no wrapper module configured
- * for the extension.
- *
- * @param {string}  pExtension the extension (e.g. ".ts", ".js", ".litcoffee")
- * @param {any} pTranspilerOptions
- * @returns {module} the module
- */
-export function getWrapper(pExtension, pTranspilerOptions) {
-  if (
-    Object.keys(pTranspilerOptions?.babelConfig ?? {}).length > 0 &&
-    BABELEABLE_EXTENSIONS.includes(pExtension)
-  ) {
-    return babelWrap;
-  }
-  return EXTENSION2WRAPPER[pExtension] || javaScriptWrap;
 }
 
 /**
@@ -106,7 +73,7 @@ export function getWrapper(pExtension, pTranspilerOptions) {
  *
  * @type {IAvailableExtension[]}
  */
-export const allExtensions = Object.keys(EXTENSION2WRAPPER).map(
+export const allExtensions = Object.keys(EXTENSION2AVAILABLE).map(
   (pExtension) => ({
     extension: pExtension,
     available: extensionIsAvailable(pExtension),
@@ -120,7 +87,7 @@ export const allExtensions = Object.keys(EXTENSION2WRAPPER).map(
  * @type {string[]}
  */
 export const scannableExtensions =
-  Object.keys(EXTENSION2WRAPPER).filter(extensionIsAvailable);
+  Object.keys(EXTENSION2AVAILABLE).filter(extensionIsAvailable);
 
 /**
  * returns an array of supported transpilers, with for each transpiler:
@@ -133,6 +100,6 @@ export function getAvailableTranspilers() {
   return Object.keys(meta.supportedTranspilers).map((pTranspiler) => ({
     name: pTranspiler,
     version: meta.supportedTranspilers[pTranspiler],
-    available: TRANSPILER2WRAPPER[pTranspiler].isAvailable(),
+    available: TRANSPILER2AVAILABLE[pTranspiler],
   }));
 }

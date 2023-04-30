@@ -1,4 +1,77 @@
-import { getWrapper } from "./meta.mjs";
+/* eslint-disable import/exports-last */
+/* eslint security/detect-object-injection : 0*/
+import javaScriptWrap from "./javascript-wrap.mjs";
+import typeScriptWrap from "./typescript-wrap.mjs";
+import liveScriptWrap from "./livescript-wrap.mjs";
+import coffeeWrap from "./coffeescript-wrap.mjs";
+import vueWrap from "./vue-template-wrap.cjs";
+import babelWrap from "./babel-wrap.mjs";
+import svelteDingus from "./svelte-wrap.mjs";
+
+const typeScriptVanillaWrap = typeScriptWrap();
+const typeScriptESMWrap = typeScriptWrap("esm");
+const typeScriptTsxWrap = typeScriptWrap("tsx");
+const coffeeVanillaWrap = coffeeWrap();
+const litCoffeeWrap = coffeeWrap(true);
+const svelteWrap = svelteDingus(typeScriptVanillaWrap);
+
+export const EXTENSION2WRAPPER = {
+  ".js": javaScriptWrap,
+  ".cjs": javaScriptWrap,
+  ".mjs": javaScriptWrap,
+  ".jsx": javaScriptWrap,
+  ".ts": typeScriptVanillaWrap,
+  ".tsx": typeScriptTsxWrap,
+  ".d.ts": typeScriptVanillaWrap,
+  ".cts": typeScriptVanillaWrap,
+  ".d.cts": typeScriptVanillaWrap,
+  ".mts": typeScriptESMWrap,
+  ".d.mts": typeScriptESMWrap,
+  ".vue": vueWrap,
+  ".svelte": svelteWrap,
+  ".ls": liveScriptWrap,
+  ".coffee": coffeeVanillaWrap,
+  ".litcoffee": litCoffeeWrap,
+  ".coffee.md": litCoffeeWrap,
+  ".csx": coffeeVanillaWrap,
+  ".cjsx": coffeeVanillaWrap,
+};
+
+const BABELEABLE_EXTENSIONS = [
+  ".js",
+  ".cjs",
+  ".mjs",
+  ".jsx",
+  ".ts",
+  ".tsx",
+  ".d.ts",
+];
+
+/**
+ * returns the babel wrapper if there's a babelConfig in the transpiler
+ * options for babeleable extensions (javascript and typescript - currently
+ * not configurable)
+ *
+ * returns the wrapper module configured for the extension pExtension if
+ * not.
+ *
+ * returns the javascript wrapper if there's no wrapper module configured
+ * for the extension.
+ *
+ * @param {string}  pExtension the extension (e.g. ".ts", ".js", ".litcoffee")
+ * @param {any} pTranspilerOptions
+ * @returns {module} the module
+ */
+export function getWrapper(pExtension, pTranspilerOptions) {
+  if (
+    Object.keys(pTranspilerOptions?.babelConfig ?? {}).length > 0 &&
+    BABELEABLE_EXTENSIONS.includes(pExtension)
+  ) {
+    return babelWrap;
+  }
+
+  return EXTENSION2WRAPPER[pExtension] || javaScriptWrap;
+}
 
 /**
  * Transpiles the string pFile with the transpiler configured for extension
