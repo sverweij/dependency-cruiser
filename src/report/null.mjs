@@ -1,5 +1,5 @@
 /**
- * Returns the results of a cruise in JSON
+ * Returns the results of a cruise _only_ in an exitCode
  *
  * @param {import("../../types/cruise-result").ICruiseResult} pResults
  * @returns {import("../../types/dependency-cruiser").IReporterOutput}
