@@ -241,6 +241,7 @@ export interface ICruiseOptions {
    * available
    */
   parser?: "acorn" | "tsc" | "swc";
+
   /**
    * Options used in module resolution that for dependency-cruiser's
    * use cannot go in a webpack config.
@@ -274,6 +275,18 @@ export interface ICruiseOptions {
      */
     extensions?: string[];
     /**
+     * A list of main fields in manifests (package.json s). Typically you'd want
+     * to keep leave this this on its default (['main']) , but if you e.g. use
+     * external packages that only expose types, and you still want references
+     * to these types to be resolved you could expand this to ['main', 'types']
+     */
+    mainFields?: string[];
+    /**
+     * A list of files to consider 'main' files, defaults to ['index']. Only set
+     * this when you have really special needs that warrant it.
+     */
+    mainFiles?: string[];
+    /**
      * Options to pass to the resolver (webpack's 'enhanced resolve') regarding
      * caching.
      */
@@ -295,6 +308,7 @@ export interface ICruiseOptions {
       cacheDuration: number;
     };
   };
+
   /**
    * Whether or not to show progress feedback when the command line
    * app is running.
@@ -314,11 +328,13 @@ export interface ICruiseOptions {
      */
     maximumLevel?: -1 | 40 | 50 | 60 | 70 | 80 | 99;
   };
+
   /**
    * When this flag is set to true, dependency-cruiser will calculate (stability) metrics
    * for all modules and folders. Defaults to false.
    */
   metrics?: boolean;
+
   /**
    * - false: don't use caching.
    * - true or empty object: use caching with the default settings
