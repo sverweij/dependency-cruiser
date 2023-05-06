@@ -72,6 +72,9 @@
       "outputType": "json",
       "preserveSymlinks": false,
       "tsPreCompilationDeps": false,
+      "tsConfig": {
+        "fileName": "test/cli/__fixtures__/typescriptconfig/cli-config-with-path/tsconfig.json"
+      },
       "webpackConfig": {
         "fileName": "test/cli/__fixtures__/typescriptconfig/cli-config-with-path/webpack.config.js"
       },

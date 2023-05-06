@@ -26,10 +26,10 @@ const SHAREABLE_OPTIONS = [
   "reaches",
   "reporterOptions",
   "rulesFile",
+  "tsConfig",
   "tsPreCompilationDeps",
   "webpackConfig",
   // "progress", TODO: could be enabled
-  // "tsConfig", TODO: should be enabled
 ];
 
 function makeOptionsPresentable(pOptions) {

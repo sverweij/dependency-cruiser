@@ -358,50 +358,7 @@ export interface IOptions extends ICruiseOptions {
    * The rules file used to validate the dependencies (if any)
    */
   rulesFile?: string;
-  /**
-   * The TypeScript configuration file used (if any)
-   */
-  tsConfig?: ITsConfig;
-  /**
-   * The webpack configuration options used for the cruise
-   */
-  webpackConfig?: IWebpackConfig;
-  /**
-   * The Babel configuration file used (if any)
-   */
-  babelConfig?: IBabelConfig;
 }
-
-export interface ITsConfig {
-  fileName?: string;
-}
-
-export interface IBabelConfig {
-  fileName?: string;
-}
-
-/**
- * The webpack configuration options used for the cruise
- */
-export interface IWebpackConfig {
-  /**
-   * The arguments used
-   */
-  arguments?: { [key: string]: any };
-  /**
-   * The 'env' parameters passed
-   */
-  env?: WebpackEnvType;
-  /**
-   * The name of the webpack configuration file used
-   */
-  fileName?: string;
-}
-
-/**
- * The 'env' parameters passed
- */
-export type WebpackEnvType = { [key: string]: any } | string;
 
 export interface IFolderDependency {
   /**
