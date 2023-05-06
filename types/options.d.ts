@@ -241,6 +241,7 @@ export interface ICruiseOptions {
    * available
    */
   parser?: "acorn" | "tsc" | "swc";
+
   /**
    * Options used in module resolution that for dependency-cruiser's
    * use cannot go in a webpack config.
