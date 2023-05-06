@@ -48,6 +48,9 @@
       "outputTo": "test/cli/__output__/dynamic-import-ok.json",
       "outputType": "json",
       "preserveSymlinks": false,
+      "tsConfig": {
+        "fileName": "test/cli/__fixtures__/typescriptconfig/cli-dynamic-imports/tsconfig.compile_dynamic_imports.json"
+      },
       "tsPreCompilationDeps": false,
       "exoticRequireStrings": [],
       "args": "test/cli/__fixtures__/typescriptconfig/cli-dynamic-imports/import_dynamically.ts"

@@ -19,6 +19,37 @@ export type ProgressType =
   | "ndjson"
   | "none";
 
+export interface ITsConfig {
+  fileName?: string;
+}
+
+export interface IBabelConfig {
+  fileName?: string;
+}
+
+/**
+ * The 'env' parameters passed to webpack, if any
+ */
+export type WebpackEnvType = { [key: string]: any } | string;
+
+/**
+ * The webpack configuration options used for the cruise
+ */
+export interface IWebpackConfig {
+  /**
+   * The arguments used
+   */
+  arguments?: { [key: string]: any };
+  /**
+   * The 'env' parameters passed
+   */
+  env?: WebpackEnvType;
+  /**
+   * The name of the webpack configuration file used
+   */
+  fileName?: string;
+}
+
 export interface ICruiseOptions {
   /**
    * if true, will attempt to validate with the rules in ruleSet.
@@ -175,7 +206,7 @@ export interface ICruiseOptions {
   /*
    * List of strings you have in use in addition to cjs/ es6 requires
    * & imports to declare module dependencies. Use this e.g. if you've
-   * redeclared require (`const want = require`), use a require-wrapper
+   * re-declared require (`const want = require`), use a require-wrapper
    * (like semver-try-require) or use window.require as a hack
    *
    * Defaults to `[]`
@@ -186,6 +217,30 @@ export interface ICruiseOptions {
    */
   reporterOptions?: IReporterOptions;
 
+  /**
+   * TypeScript project file ('tsconfig.json') to use for (1) compilation
+   * and (2) resolution (e.g. with the paths property)",
+   */
+  tsConfig?: ITsConfig;
+
+  /**
+   * Webpack configuration to use to get resolve options from
+   */
+  webpackConfig?: IWebpackConfig;
+
+  /**
+   * Babel configuration (e.g. '.babelrc.json') to use.
+   */
+  babelConfig?: IBabelConfig;
+
+  /**
+   * Overrides the parser dependency-cruiser will use - EXPERIMENTAL
+   *
+   * Note that you'll _very_ likely not need this - dependency-cruiser will
+   * typically sort out what the best parser for the job is out of the ones
+   * available
+   */
+  parser?: "acorn" | "tsc" | "swc";
   /**
    * Options used in module resolution that for dependency-cruiser's
    * use cannot go in a webpack config.
