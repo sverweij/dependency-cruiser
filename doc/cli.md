@@ -114,7 +114,7 @@ This will:
   will exit with exit code _number of violations with severity `error` found_
   in the same fashion linters and test tools do.
 
-See the _depcruise_ target in the [package.json](https://github.com/sverweij/dependency-cruiser/blob/master/package.json#L55)
+See the _depcruise_ target in the [package.json](https://github.com/sverweij/dependency-cruiser/blob/develop/package.json#L55)
 for a real world example.
 
 #### err-long

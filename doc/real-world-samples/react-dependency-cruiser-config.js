@@ -159,7 +159,7 @@ module.exports = {
   options: {
     /* conditions specifying which files not to follow further when encountered:
        - path: a regular expression to match
-       - dependencyTypes: see https://github.com/sverweij/dependency-cruiser/blob/master/doc/rules-reference.md#dependencytypes-and-dependencytypesnot
+       - dependencyTypes: see https://github.com/sverweij/dependency-cruiser/blob/develop/doc/rules-reference.md#dependencytypes-and-dependencytypesnot
        for a complete list
     */
     doNotFollow: {
@@ -275,7 +275,7 @@ module.exports = {
         collapsePattern: "^(node_modules|packages|src|lib|app|test|spec)/[^/]+",
 
         /* Options to tweak the appearance of your graph.See
-           https://github.com/sverweij/dependency-cruiser/blob/master/doc/options-reference.md#reporteroptions
+           https://github.com/sverweij/dependency-cruiser/blob/develop/doc/options-reference.md#reporteroptions
            for details and some examples. If you don't specify a theme
            for 'archi' dependency-cruiser will use the one specified in the
            dot section (see above), if any, and otherwise use the default one.

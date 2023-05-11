@@ -1,10 +1,10 @@
-# Dependency cruiser ![Dependency cruiser](https://raw.githubusercontent.com/sverweij/dependency-cruiser/master/doc/assets/ZKH-Dependency-recolored-160.png)
+# Dependency cruiser ![Dependency cruiser](https://raw.githubusercontent.com/sverweij/dependency-cruiser/develop/doc/assets/ZKH-Dependency-recolored-160.png)
 
 _Validate and visualise dependencies. With your rules._ JavaScript. TypeScript. CoffeeScript. ES6, CommonJS, AMD.
 
 ## What's this do?
 
-![Snazzy dot output to whet your appetite](https://raw.githubusercontent.com/sverweij/dependency-cruiser/master/doc/assets/sample-dot-output.png)
+![Snazzy dot output to whet your appetite](https://raw.githubusercontent.com/sverweij/dependency-cruiser/develop/doc/assets/sample-dot-output.png)
 
 This runs through the dependencies in any JavaScript, TypeScript, LiveScript or CoffeeScript project and ...
 
@@ -138,7 +138,7 @@ npx depcruise src
 
 This will validate against your rules and shows any violations in an eslint-like format:
 
-![sample err output](https://raw.githubusercontent.com/sverweij/dependency-cruiser/master/doc/assets/sample-err-output.png)
+![sample err output](https://raw.githubusercontent.com/sverweij/dependency-cruiser/develop/doc/assets/sample-err-output.png)
 
 There's more ways to report validations; in a graph (like the one on top of this
 readme) or in an self-containing `html` file.
@@ -148,7 +148,7 @@ readme) or in an self-containing `html` file.
   documentation.
 - dependency-cruiser uses itself to check on itself in its own build process;
   see the `depcruise` script in the
-  [package.json](https://github.com/sverweij/dependency-cruiser/blob/master/package.json#L76)
+  [package.json](https://github.com/sverweij/dependency-cruiser/blob/develop/package.json#L76)
 
 ## I want to know more!
 
@@ -192,7 +192,7 @@ You've come to the right place :-) :
 
 ## Build status
 
-[![GitHub Workflow Status](https://github.com/sverweij/dependency-cruiser/actions/workflows/ci.yml/badge.svg?branch=master)](https://github.com/sverweij/dependency-cruiser/actions/workflows/ci.yml)
+[![GitHub Workflow Status](https://github.com/sverweij/dependency-cruiser/actions/workflows/ci.yml/badge.svg?branch=develop)](https://github.com/sverweij/dependency-cruiser/actions/workflows/ci.yml)
 [![coverage](https://gitlab.com/sverweij/dependency-cruiser/badges/master/coverage.svg)](https://gitlab.com/sverweij/dependency-cruiser/builds)
 [![Maintainability](https://api.codeclimate.com/v1/badges/93035ef5fba33901d479/maintainability)](https://codeclimate.com/github/sverweij/dependency-cruiser/maintainability)
 [![Test Coverage](https://api.codeclimate.com/v1/badges/93035ef5fba33901d479/test_coverage)](https://codeclimate.com/github/sverweij/dependency-cruiser/test_coverage)

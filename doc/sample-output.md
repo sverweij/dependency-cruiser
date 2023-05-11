@@ -32,7 +32,7 @@ weapon._)
 dependency-cruise -v -T dot test/fixtures | dot -T png > sample-dot-output.png
 ```
 
-![sample dot output](https://raw.githubusercontent.com/sverweij/dependency-cruiser/master/doc/assets/sample-dot-output.png)
+![sample dot output](https://raw.githubusercontent.com/sverweij/dependency-cruiser/develop/doc/assets/sample-dot-output.png)
 
 ## err
 
@@ -77,11 +77,11 @@ dependency-cruise -v -T html -f stuff-for-alex/sample-dot-output.html test/fixtu
 nice. In fact that darn clever Daphne put it in her Makefile. Near her coverage
 reporting. The build server just ran it blindly._)
 
-![sample html output](https://raw.githubusercontent.com/sverweij/dependency-cruiser/master/doc/assets/sample-html-output.png)
+![sample html output](https://raw.githubusercontent.com/sverweij/dependency-cruiser/develop/doc/assets/sample-html-output.png)
 
 Alex gets a little cramp in her neck, just when she discovers
 the tiny little _rotate_ button. That's better:
-![sample html output - rotated](https://raw.githubusercontent.com/sverweij/dependency-cruiser/master/doc/assets/sample-html-rotated-output.png)
+![sample html output - rotated](https://raw.githubusercontent.com/sverweij/dependency-cruiser/develop/doc/assets/sample-html-rotated-output.png)
 
 ## csv
 
@@ -93,7 +93,7 @@ environs, however, is not. Hence: comma separated values. In a file. So excel
 dependency-cruise -v -T csv -f sample-dot-output.csv test/fixtures
 ```
 
-![oldskool csv output. In a spreadsheet. Way out man!](https://raw.githubusercontent.com/sverweij/dependency-cruiser/master/doc/assets/sample-csv-output.png)
+![oldskool csv output. In a spreadsheet. Way out man!](https://raw.githubusercontent.com/sverweij/dependency-cruiser/develop/doc/assets/sample-csv-output.png)
 
 ## json
 
@@ -104,4 +104,4 @@ dependency-cruise -T json -v -f sample-json-output.json test/fixtures
 ```
 
 The result is rather voluminous, so here's just a link if you want to see it
-[assets/sample-json-output.json](https://raw.githubusercontent.com/sverweij/dependency-cruiser/master/doc/assets/sample-json-output.json).
+[assets/sample-json-output.json](https://raw.githubusercontent.com/sverweij/dependency-cruiser/develop/doc/assets/sample-json-output.json).

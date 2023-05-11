@@ -1,6 +1,6 @@
 /** @type {import('dependency-cruiser').IConfiguration} */
 module.exports = {
-  'extends': 'dependency-cruiser/configs/recommended-warn-only',
+  extends: "dependency-cruiser/configs/recommended-warn-only",
   /*
      the 'dependency-cruiser/configs/recommended-warn-only' preset
      contains these rules:
@@ -26,39 +26,38 @@ module.exports = {
    */
   forbidden: [
     {
-      name: 'not-to-spec',
+      name: "not-to-spec",
       comment:
-        'This module depends on a spec (test) file. The sole responsibility of a spec file is to test code. ' +
+        "This module depends on a spec (test) file. The sole responsibility of a spec file is to test code. " +
         "If there's something in a spec that's of use to other modules, it doesn't have that single " +
-        'responsibility anymore. Factor it out into (e.g.) a separate utility/ helper or a mock.',
-      severity: 'error',
+        "responsibility anymore. Factor it out into (e.g.) a separate utility/ helper or a mock.",
+      severity: "error",
       from: {},
       to: {
-        path: '\\.(spec|test)\\.(js|mjs|cjs|ts|ls|coffee|litcoffee|coffee\\.md)$'
-      }
+        path: "\\.(spec|test)\\.(js|mjs|cjs|ts|ls|coffee|litcoffee|coffee\\.md)$",
+      },
     },
     {
-      name: 'not-to-dev-dep',
-      severity: 'error',
+      name: "not-to-dev-dep",
+      severity: "error",
       comment:
         "This module depends on an npm package from the 'devDependencies' section of your " +
-        'package.json. It looks like something that ships to production, though. To prevent problems ' +
+        "package.json. It looks like something that ships to production, though. To prevent problems " +
         "with npm packages that aren't there on production declare it (only!) in the 'dependencies'" +
-        'section of your package.json. If this module is development only - add it to the ' +
-        'from.pathNot re of the not-to-dev-dep rule in the dependency-cruiser configuration',
+        "section of your package.json. If this module is development only - add it to the " +
+        "from.pathNot re of the not-to-dev-dep rule in the dependency-cruiser configuration",
       from: {
-        path: '^()',
-        pathNot: '\\.(spec|test)\\.(js|mjs|cjs|ts|ls|coffee|litcoffee|coffee\\.md)$'
+        path: "^()",
+        pathNot:
+          "\\.(spec|test)\\.(js|mjs|cjs|ts|ls|coffee|litcoffee|coffee\\.md)$",
       },
       to: {
-        dependencyTypes: [
-          'npm-dev'
-        ]
-      }
+        dependencyTypes: ["npm-dev"],
+      },
     },
     {
-      name: 'optional-deps-used',
-      severity: 'info',
+      name: "optional-deps-used",
+      severity: "info",
       comment:
         "This module depends on an npm package that is declared as an optional dependency " +
         "in your package.json. As this makes sense in limited situations only, it's flagged here. " +
@@ -66,36 +65,31 @@ module.exports = {
         "dependency-cruiser configuration.",
       from: {},
       to: {
-        dependencyTypes: [
-          'npm-optional'
-        ]
-      }
+        dependencyTypes: ["npm-optional"],
+      },
     },
     {
-      name: 'peer-deps-used',
+      name: "peer-deps-used",
       comment:
         "This module depends on an npm package that is declared as a peer dependency " +
         "in your package.json. This makes sense if your package is e.g. a plugin, but in " +
         "other cases - maybe not so much. If the use of a peer dependency is intentional " +
         "add an exception to your dependency-cruiser configuration.",
-      severity: 'warn',
+      severity: "warn",
       from: {},
       to: {
-        dependencyTypes: [
-          'npm-peer'
-        ]
-      }
-    }
+        dependencyTypes: ["npm-peer"],
+      },
+    },
   ],
   options: {
-
     /* conditions specifying which files not to follow further when encountered:
        - path: a regular expression to match
-       - dependencyTypes: see https://github.com/sverweij/dependency-cruiser/blob/master/doc/rules-reference.md#dependencytypes-and-dependencytypesnot
+       - dependencyTypes: see https://github.com/sverweij/dependency-cruiser/blob/develop/doc/rules-reference.md#dependencytypes-and-dependencytypesnot
        for a complete list
     */
     doNotFollow: {
-      path: 'node_modules'
+      path: "node_modules",
     },
 
     /* conditions specifying which dependencies to exclude
@@ -133,7 +127,7 @@ module.exports = {
        "specify": for each dependency identify whether it only exists before compilation or also after
      */
     // tsPreCompilationDeps: false,
-    
+
     /* 
        list of extensions to scan that aren't javascript or compile-to-javascript. 
        Empty by default. Only put extensions in here that you want to take into
@@ -208,7 +202,7 @@ module.exports = {
 
          If you have an `exportsFields` attribute in your webpack config, that one
          will have precedence over the one specified here.
-      */ 
+      */
       exportsFields: ["exports"],
       /* List of conditions to check for in the exports field. e.g. use ['imports']
          if you're only interested in exposed es6 modules, ['require'] for commonjs,
@@ -247,10 +241,10 @@ module.exports = {
            collapses everything in node_modules to one folder deep so you see
            the external modules, but not the innards your app depends upon.
          */
-        collapsePattern: 'node_modules/(@[^/]+/[^/]+|[^/]+)',
+        collapsePattern: "node_modules/(@[^/]+/[^/]+|[^/]+)",
 
         /* Options to tweak the appearance of your graph.See
-           https://github.com/sverweij/dependency-cruiser/blob/master/doc/options-reference.md#reporteroptions
+           https://github.com/sverweij/dependency-cruiser/blob/develop/doc/options-reference.md#reporteroptions
            for details and some examples. If you don't specify a theme
            don't worry - dependency-cruiser will fall back to the default one.
         */
@@ -328,10 +322,11 @@ module.exports = {
           dependency graph reporter (`archi`) you probably want to tweak
           this collapsePattern to your situation.
         */
-        collapsePattern: '^(packages|src|lib|app|bin|test(s?)|spec(s?))/[^/]+|node_modules/(@[^/]+/[^/]+|[^/]+)',
+        collapsePattern:
+          "^(packages|src|lib|app|bin|test(s?)|spec(s?))/[^/]+|node_modules/(@[^/]+/[^/]+|[^/]+)",
 
         /* Options to tweak the appearance of your graph.See
-           https://github.com/sverweij/dependency-cruiser/blob/master/doc/options-reference.md#reporteroptions
+           https://github.com/sverweij/dependency-cruiser/blob/develop/doc/options-reference.md#reporteroptions
            for details and some examples. If you don't specify a theme
            for 'archi' dependency-cruiser will use the one specified in the
            dot section (see above), if any, and otherwise use the default one.
@@ -339,10 +334,10 @@ module.exports = {
         // theme: {
         // },
       },
-      "text": {
-        "highlightFocused": true
+      text: {
+        highlightFocused: true,
       },
-    }
-  }
+    },
+  },
 };
 // generated: dependency-cruiser@12.11.0 on 2023-03-26T18:53:30.180Z

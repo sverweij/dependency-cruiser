@@ -3,7 +3,7 @@
 ## Supported Versions
 
 At any given time we support the _latest_ version of dependency-cruiser (as
-reflected in the _master_ branch) with security updates.
+reflected in the _develop_ branch) with security updates.
 
 ## Reporting a Vulnerability
 
