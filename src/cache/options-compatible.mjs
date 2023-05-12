@@ -1,3 +1,4 @@
+// @ts-check
 import { isDeepStrictEqual } from "node:util";
 
 /*

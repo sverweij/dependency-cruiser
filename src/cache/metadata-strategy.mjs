@@ -1,3 +1,5 @@
+/* eslint-disable no-inline-comments */
+// @ts-check
 import { isDeepStrictEqual } from "node:util";
 import { getSHA, list } from "watskeburt";
 import { bus } from "../utl/bus.mjs";
@@ -11,20 +13,19 @@ import {
 
 export default class MetaDataStrategy {
   /**
-   * @param {Set<string>} pExtensions
-   * @param {Set<import("watskeburt").changeTypeType>} pInterestingChangeTypes
-   * @param {import("../../types/strict-options.js").IStrictCruiseOptions} pCruiseOptions
+   * @param {string} _pDirectory
+   * @param {import("../../types/cruise-result.js").ICruiseResult} _pCachedCruiseResult
    * @param {Object} pOptions
    * @param {Set<string>} pOptions.extensions
    * @param {Set<import("watskeburt").changeTypeType>} pOptions.interestingChangeTypes
-   * @param {() => string} pOptions.shaRetrievalFn
-   * @param {(pString:string) => Array<import("watskeburt").IChange>} pOptions.diffListFn
-   * @param {(import("watskeburt").IChange) => import("../..").IRevisionChange} pOptions.checksumFn
-   * @returns {import("../../types/dependency-cruiser.js").IRevisionData}
+   * @param {typeof getSHA=} pOptions.shaRetrievalFn
+   * @param {typeof list=} pOptions.diffListFn
+   * @param {typeof addCheckSumToChangeSync=} pOptions.checksumFn
+   * @returns {Promise<import("../../types/dependency-cruiser.js").IRevisionData>}
    */
   async getRevisionData(
-    pDirectory,
-    pCachedCruiseResult,
+    _pDirectory,
+    _pCachedCruiseResult,
     pCruiseOptions,
     pOptions
   ) {
@@ -38,7 +39,9 @@ export default class MetaDataStrategy {
       bus.debug("cache: - getting sha");
       const lSHA = await lOptions.shaRetrievalFn();
       bus.debug("cache: - getting diff");
-      const lDiff = await lOptions.diffListFn(lSHA);
+      const lDiff = /** @type {import("watskeburt").IChange[]} */ (
+        await lOptions.diffListFn(lSHA)
+      );
       const lChanges = lDiff
         .filter(({ name }) => excludeFilter(pCruiseOptions.exclude)(name))
         .filter(({ name }) =>
@@ -74,7 +77,7 @@ export default class MetaDataStrategy {
 
   /**
    * @param {import("../../types/dependency-cruiser.js").ICruiseResult} pCruiseResult
-   * @param {import("../../types/dependency-cruiser.js").IRevisionData} pRevisionData
+   * @param {import("../../types/dependency-cruiser.js").IRevisionData=} pRevisionData
    * @returns {import("../../types/dependency-cruiser.js").ICruiseResult}
    */
   prepareRevisionDataForSaving(pCruiseResult, pRevisionData) {

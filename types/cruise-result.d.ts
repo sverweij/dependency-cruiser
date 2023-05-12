@@ -6,7 +6,11 @@ import { IRuleSummary } from "./rule-summary";
 import { IChange } from "watskeburt";
 
 export interface IRevisionChange extends IChange {
-  checksum: string;
+  // optional because
+  // - in content strategy 'ignored' and 'deleted' files can't have a checksum
+  // - in metadata strategy we don't calculate a checksum because ~we're lazy~
+  //   it's an unnecessary expense
+  checksum?: string;
 }
 
 /**
@@ -15,8 +19,6 @@ export interface IRevisionChange extends IChange {
 export interface IRevisionData {
   SHA1: string;
   changes: IRevisionChange[];
-  args: string[];
-  rulesFile: string;
 }
 
 export interface ICruiseResult {

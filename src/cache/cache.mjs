@@ -1,3 +1,4 @@
+// @ts-check
 import { readFile, mkdir, writeFile } from "node:fs/promises";
 import { join } from "node:path";
 import { scannableExtensions } from "../extract/transpile/meta.mjs";
@@ -24,7 +25,7 @@ export default class Cache {
    * @param {import("../../types/strict-options.js").IStrictCruiseOptions} pCruiseOptions
    * @param {import("../../types/dependency-cruiser.js").ICruiseResult} pCachedCruiseResult
    * @param {import("../../types/dependency-cruiser.js").IRevisionData=} pRevisionData
-   * @returns {boolean}
+   * @returns {Promise<boolean>}
    */
   async canServeFromCache(pCruiseOptions, pCachedCruiseResult, pRevisionData) {
     this.revisionData =
@@ -54,7 +55,7 @@ export default class Cache {
 
   /**
    * @param {string} pCacheFolder
-   * @returns {import("../../types/dependency-cruiser.js").ICruiseResult}
+   * @returns {Promise<import("../../types/dependency-cruiser.js").ICruiseResult>}
    */
   async read(pCacheFolder) {
     try {

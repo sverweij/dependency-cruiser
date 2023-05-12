@@ -1,3 +1,4 @@
+// @ts-check
 /* eslint-disable import/exports-last */
 import { createHash } from "node:crypto";
 import { readFileSync } from "node:fs";
@@ -15,7 +16,7 @@ function hash(pString) {
 }
 
 /**
- * @param {import("fs").PathOrFileDescriptor} pFileName
+ * @param {string} pFileName
  * @returns {Promise<string>}
  */
 async function _getFileHash(pFileName) {
@@ -36,7 +37,7 @@ export async function addCheckSumToChange(pChange) {
 }
 
 /**
- * @param {import("fs").PathOrFileDescriptor} pFileName
+ * @param {string} pFileName
  * @returns {string}
  */
 function _getFileHashSync(pFileName) {
@@ -99,9 +100,15 @@ export function hasInterestingExtension(pExtensions) {
  * @returns {(pChange: import("watskeburt").IChange) => boolean}
  */
 export function changeHasInterestingExtension(pExtensions) {
-  return (pChange) =>
-    hasInterestingExtension(pExtensions)(pChange.name) ||
-    (pChange.oldName && hasInterestingExtension(pExtensions)(pChange.oldName));
+  return (pChange) => {
+    const lNameHasInterestingExtension = hasInterestingExtension(pExtensions)(
+      pChange.name
+    );
+    const lOldNameHasInterestingExtension = Boolean(
+      pChange.oldName && hasInterestingExtension(pExtensions)(pChange.oldName)
+    );
+    return lNameHasInterestingExtension || lOldNameHasInterestingExtension;
+  };
 }
 
 // skipping: "pairing broken", "unmodified", "type changed", "ignored"
@@ -127,7 +134,7 @@ export function isInterestingChangeType(pInterestingChangeTypes) {
 }
 
 /**
- * @param {pModule:import("../..").IModule} pModule
+ * @param {import("../..").IModule} pModule
  */
 export function moduleIsInterestingForDiff(pModule) {
   return (

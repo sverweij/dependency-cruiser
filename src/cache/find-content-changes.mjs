@@ -1,3 +1,5 @@
+/* eslint-disable no-inline-comments */
+// @ts-check
 import { join } from "node:path/posix";
 import { bus } from "../utl/bus.mjs";
 import findAllFiles from "../utl/find-all-files.mjs";
@@ -65,7 +67,7 @@ function diffCachedModuleAgainstFileSet(
  * @param {Object} pOptions
  * @param {Set<string>} pOptions.extensions
  * @param {string} pOptions.baseDir
- * @returns {{source: string; changeType: import("watskeburt").changeTypeType; checksum: string}[]}
+ * @returns {import("../..").IRevisionChange[]}
  */
 export default function findContentChanges(
   pDirectory,
@@ -93,7 +95,7 @@ export default function findContentChanges(
   for (let lFileName of lFileSet) {
     lDiffNewVsCached.push({
       name: lFileName,
-      changeType: "added",
+      changeType: /** @type import('watskeburt').changeTypeType */ ("added"),
       checksum: getFileHashSync(join(pOptions.baseDir, lFileName)),
     });
   }
