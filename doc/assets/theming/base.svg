@@ -19,11 +19,6 @@
 <path fill="#ffffff" stroke="black" stroke-width="2" d="M28,-16C28,-16 424.38,-16 424.38,-16 430.38,-16 436.38,-22 436.38,-28 436.38,-28 436.38,-294 436.38,-294 436.38,-300 430.38,-306 424.38,-306 424.38,-306 28,-306 28,-306 22,-306 16,-300 16,-294 16,-294 16,-28 16,-28 16,-22 22,-16 28,-16"/>
 <text text-anchor="middle" x="226.19" y="-293.45" font-family="Helvetica,sans-Serif" font-weight="bold" font-size="9.00">main</text>
 </g>
-<g id="clust3" class="cluster">
-<title>cluster_src/main/files&#45;and&#45;dirs</title>
-<path fill="#ffffff" stroke="black" stroke-width="2" d="M115.38,-24C115.38,-24 172.88,-24 172.88,-24 178.88,-24 184.88,-30 184.88,-36 184.88,-36 184.88,-64 184.88,-64 184.88,-70 178.88,-76 172.88,-76 172.88,-76 115.38,-76 115.38,-76 109.38,-76 103.38,-70 103.38,-64 103.38,-64 103.38,-36 103.38,-36 103.38,-30 109.38,-24 115.38,-24"/>
-<text text-anchor="middle" x="144.12" y="-63.45" font-family="Helvetica,sans-Serif" font-weight="bold" font-size="9.00">files&#45;and&#45;dirs</text>
-</g>
 <g id="clust4" class="cluster">
 <title>cluster_src/main/options</title>
 <path fill="#ffffff" stroke="black" stroke-width="2" d="M221.88,-103C221.88,-103 384.5,-103 384.5,-103 390.5,-103 396.5,-109 396.5,-115 396.5,-115 396.5,-173 396.5,-173 396.5,-179 390.5,-185 384.5,-185 384.5,-185 221.88,-185 221.88,-185 215.88,-185 209.88,-179 209.88,-173 209.88,-173 209.88,-115 209.88,-115 209.88,-109 215.88,-103 221.88,-103"/>
@@ -43,6 +38,11 @@
 <title>cluster_src/main/utl</title>
 <path fill="#ffffff" stroke="black" stroke-width="2" d="M303.38,-198C303.38,-198 416.38,-198 416.38,-198 422.38,-198 428.38,-204 428.38,-210 428.38,-210 428.38,-238 428.38,-238 428.38,-244 422.38,-250 416.38,-250 416.38,-250 303.38,-250 303.38,-250 297.38,-250 291.38,-244 291.38,-238 291.38,-238 291.38,-210 291.38,-210 291.38,-204 297.38,-198 303.38,-198"/>
 <text text-anchor="middle" x="359.88" y="-237.45" font-family="Helvetica,sans-Serif" font-weight="bold" font-size="9.00">utl</text>
+</g>
+<g id="clust3" class="cluster">
+<title>cluster_src/main/files&#45;and&#45;dirs</title>
+<path fill="#ffffff" stroke="black" stroke-width="2" d="M115.38,-24C115.38,-24 172.88,-24 172.88,-24 178.88,-24 184.88,-30 184.88,-36 184.88,-36 184.88,-64 184.88,-64 184.88,-70 178.88,-76 172.88,-76 172.88,-76 115.38,-76 115.38,-76 109.38,-76 103.38,-70 103.38,-64 103.38,-64 103.38,-36 103.38,-36 103.38,-30 109.38,-24 115.38,-24"/>
+<text text-anchor="middle" x="144.12" y="-63.45" font-family="Helvetica,sans-Serif" font-weight="bold" font-size="9.00">files&#45;and&#45;dirs</text>
 </g>
 <!-- src/main/files&#45;and&#45;dirs/normalize.js -->
 <g id="node1" class="node">
