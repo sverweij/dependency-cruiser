@@ -1186,7 +1186,7 @@
       "properties": {
         "wordlist": {
           "type": "array",
-          "description": "List of words to use to replace path elements of file names in the output with so the output isn't directly traceable to its intended purpose. When the list is exhausted, the anon reporter will use random strings patterned after the original file name in stead. The list is empty by default. Read more in https://github.com/sverweij/dependency-cruiser/blob/develop/doc/cli.md#anon---obfuscated-json",
+          "description": "List of words to use to replace path elements of file names in the output with so the output isn't directly traceable to its intended purpose. When the list is exhausted, the anon reporter will use random strings patterned after the original file name in stead. The list is empty by default. Read more in https://github.com/sverweij/dependency-cruiser/blob/v12/doc/cli.md#anon---obfuscated-json",
           "items": { "type": "string" }
         }
       }

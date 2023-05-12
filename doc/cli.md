@@ -1340,7 +1340,7 @@ expression. It works the same as the regular depcruise command's [`--collapse`](
 To enable different prefixes on the same depcruise run, you can uses the `--prefix`
 option to set (or override) the prefix used in e.g. the `err-html` and the
 `dot`-like reporters. It works the same as depcruise's
-[option of the same name](https://github.com/sverweij/dependency-cruiser/blob/develop/doc/cli.md#--prefix-prefixing-links)
+[option of the same name](https://github.com/sverweij/dependency-cruiser/blob/v12/doc/cli.md#--prefix-prefixing-links)
 
 See [prefix](./options-reference.md#prefix-prefix-links-in-reports) in the options
 reference for details.

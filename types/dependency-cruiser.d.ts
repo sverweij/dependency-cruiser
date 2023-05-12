@@ -124,7 +124,7 @@ export function futureCruise(
  * Given a cruise result, formats it with the given reporter (pOutputType)
  *
  * @param pResult     A javascript object that contains the result of a cruise. Must adhere
- *                    to the [dependency-cruiser results schema](https://github.com/sverweij/dependency-cruiser/blob/develop/src/schema/cruise-result.json)
+ *                    to the [dependency-cruiser results schema](https://github.com/sverweij/dependency-cruiser/blob/v12/src/schema/cruise-result.json)
  * @param pOutputType Which reporter to use to format the cruise result with
  */
 export function format(

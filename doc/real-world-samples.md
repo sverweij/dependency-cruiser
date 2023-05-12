@@ -37,7 +37,7 @@ To get the above graph we used [berry-dependency-cruiser-config.js](real-world-s
 - `yarn` (with yarn v2 :-))
 - `yarn add -D dependency-cruiser`
 - `rm -f berry-dependency-cruiser-config.js`
-- `wget https://raw.githubusercontent.com/sverweij/dependency-cruiser/develop/doc/real-world-samples/berry-dependency-cruiser-config.js`
+- `wget https://raw.githubusercontent.com/sverweij/dependency-cruiser/v12/doc/real-world-samples/berry-dependency-cruiser-config.js`
 - add these two lines to the `scripts` section of the package.json (so don't
   use the globally installed depcruise or even the locally installed one -
   yarn's pnp resolution won't work otherwise:)
@@ -69,7 +69,7 @@ cd react
 yarn
 yarn add -D -W dependency-cruiser
 rm -f react-dependency-cruiser-config.js
-wget https://raw.githubusercontent.com/sverweij/dependency-cruiser/develop/doc/real-world-samples/react-dependency-cruiser-config.js
+wget https://raw.githubusercontent.com/sverweij/dependency-cruiser/v12/doc/real-world-samples/react-dependency-cruiser-config.js
 ```
 
 - Add these run-scripts to the package.json:
@@ -253,7 +253,7 @@ node ./bin/dependency-cruise.js bin src --prefix vscode://file/$(pwd)/ --config 
 interpreter for writing nice state diagrams. Click for a slightly
 more interactive version. As you can see this graph does not group modules
 from same folders into clusters. Instead it uses only colors for 'grouping'
-and notes the folder name in the nodes. It's what the ['flat'](https://github.com/sverweij/dependency-cruiser/blob/develop/doc/cli.md#flat-fdot) graph reporter
+and notes the folder name in the nodes. It's what the ['flat'](https://github.com/sverweij/dependency-cruiser/blob/v12/doc/cli.md#flat-fdot) graph reporter
 does for you. See the _how to_ foldout below to see how to reproduce it.
 
 (For this too: click for a slightly more interactive version)

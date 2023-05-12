@@ -255,7 +255,7 @@
     "moduleSystems": ["cjs", "es6"],
 
     /* prefix for links in html and svg output (e.g. https://github.com/you/yourrepo/blob/develop/) */
-    "prefix": "https://github.com/sverweij/dependency-cruiser/blob/develop/",
+    "prefix": "https://github.com/sverweij/dependency-cruiser/blob/v12/",
 
     /* if true detect dependencies that only exist before typescript-to-javascript compilation */
     "tsPreCompilationDeps": true,

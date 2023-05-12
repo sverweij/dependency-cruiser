@@ -1,10 +1,10 @@
-# Dependency cruiser ![Dependency cruiser](https://raw.githubusercontent.com/sverweij/dependency-cruiser/master/doc/assets/ZKH-Dependency-recolored-160.png)
+# Dependency cruiser ![Dependency cruiser](https://raw.githubusercontent.com/sverweij/dependency-cruiser/v12/doc/assets/ZKH-Dependency-recolored-160.png)
 
 _Validate and visualise dependencies. With your rules._ JavaScript. TypeScript. CoffeeScript. ES6, CommonJS, AMD.
 
 ## What's this do?
 
-![Snazzy dot output to whet your appetite](https://raw.githubusercontent.com/sverweij/dependency-cruiser/master/doc/assets/sample-dot-output.png)
+![Snazzy dot output to whet your appetite](https://raw.githubusercontent.com/sverweij/dependency-cruiser/v12/doc/assets/sample-dot-output.png)
 
 This runs through the dependencies in any JavaScript, TypeScript, LiveScript or CoffeeScript project and ...
 
@@ -112,7 +112,7 @@ npx depcruise --config .dependency-cruiser.js src
 
 This will validate against your rules and shows any violations in an eslint-like format:
 
-![sample err output](https://raw.githubusercontent.com/sverweij/dependency-cruiser/master/doc/assets/sample-err-output.png)
+![sample err output](https://raw.githubusercontent.com/sverweij/dependency-cruiser/v12/doc/assets/sample-err-output.png)
 
 There's more ways to report validations; in a graph (like the one on top of this
 readme) or in an self-containing `html` file.

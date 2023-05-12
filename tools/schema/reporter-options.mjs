@@ -35,7 +35,7 @@ export default {
             "When the list is exhausted, the anon reporter will use random strings " +
             "patterned after the original file name in stead. The list is empty " +
             "by default. " +
-            "Read more in https://github.com/sverweij/dependency-cruiser/blob/develop/doc/cli.md#anon---obfuscated-json",
+            "Read more in https://github.com/sverweij/dependency-cruiser/blob/v12/doc/cli.md#anon---obfuscated-json",
           items: {
             type: "string",
           },
