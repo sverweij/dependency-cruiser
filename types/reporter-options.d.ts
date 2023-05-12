@@ -60,7 +60,7 @@ export interface IAnonReporterOptions {
    * patterned after the original file name in stead. The list is empty
    * by default.
    *
-   * Read more in https://github.com/sverweij/dependency-cruiser/blob/develop/doc/cli.md#anon---obfuscated-json",
+   * Read more in https://github.com/sverweij/dependency-cruiser/blob/main/doc/cli.md#anon---obfuscated-json",
    */
   wordlist?: string[];
 }

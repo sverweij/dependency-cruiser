@@ -162,7 +162,7 @@ try {
     .addHelpText(
       "after",
       `${EOL}Other options:` +
-        `${EOL}  see https://github.com/sverweij/dependency-cruiser/blob/develop/doc/cli.md${EOL}`
+        `${EOL}  see https://github.com/sverweij/dependency-cruiser/blob/main/doc/cli.md${EOL}`
     )
     .version(meta.version)
     .arguments("[files-or-directories]")

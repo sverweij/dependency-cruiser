@@ -2,7 +2,7 @@
   "$schema": "../../src/schema/configuration.schema.json",
   "extends": "../../.dependency-cruiser.json",
   "options": {
-    "prefix": "https://github.com/sverweij/dependency-cruiser/blob/develop/tools/schema/",
+    "prefix": "https://github.com/sverweij/dependency-cruiser/blob/main/tools/schema/",
     "extraExtensionsToScan": [],
     "reporterOptions": {
       "dot": {

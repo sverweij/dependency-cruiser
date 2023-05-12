@@ -114,7 +114,7 @@ This will:
   will exit with exit code _number of violations with severity `error` found_
   in the same fashion linters and test tools do.
 
-See the _depcruise_ target in the [package.json](https://github.com/sverweij/dependency-cruiser/blob/develop/package.json#L55)
+See the _depcruise_ target in the [package.json](https://github.com/sverweij/dependency-cruiser/blob/main/package.json#L55)
 for a real world example.
 
 #### err-long
@@ -1342,7 +1342,7 @@ expression. It works the same as the regular depcruise command's [`--collapse`](
 To enable different prefixes on the same depcruise run, you can uses the `--prefix`
 option to set (or override) the prefix used in e.g. the `err-html` and the
 `dot`-like reporters. It works the same as depcruise's
-[option of the same name](https://github.com/sverweij/dependency-cruiser/blob/develop/doc/cli.md#--prefix-prefixing-links)
+[option of the same name](https://github.com/sverweij/dependency-cruiser/blob/main/doc/cli.md#--prefix-prefixing-links)
 
 See [prefix](./options-reference.md#prefix-prefix-links-in-reports) in the options
 reference for details.

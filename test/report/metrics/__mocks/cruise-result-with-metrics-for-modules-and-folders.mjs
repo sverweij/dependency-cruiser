@@ -151,7 +151,7 @@ export default {
       moduleSystems: ["cjs", "es6"],
       outputTo: "tmp_graph_deps.json",
       outputType: "json",
-      prefix: "https://github.com/sverweij/dependency-cruiser/blob/develop/",
+      prefix: "https://github.com/sverweij/dependency-cruiser/blob/main/",
       preserveSymlinks: false,
       rulesFile: ".dependency-cruiser.json",
       tsPreCompilationDeps: true,

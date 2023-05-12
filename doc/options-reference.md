@@ -837,8 +837,8 @@ Most representational aspects of the 'dot' reporter are customizable:
 - Conditional - only affecting modules (or dependencies) that meet the criteria
   you specify with `modules` and `dependencies`.
   - You can use any
-    [module attribute](https://github.com/sverweij/dependency-cruiser/blob/develop/types/cruise-result.d.ts#L16)
-    and any [dependency attribute](https://github.com/sverweij/dependency-cruiser/blob/develop/types/cruise-result.d.ts#L73)
+    [module attribute](https://github.com/sverweij/dependency-cruiser/blob/main/types/cruise-result.d.ts#L16)
+    and any [dependency attribute](https://github.com/sverweij/dependency-cruiser/blob/main/types/cruise-result.d.ts#L73)
     for dependencies.
   - For attributes you can use anything GraphViz dot can understand as an attribute
     (see their [attributes](https://graphviz.gitlab.io/_pages/doc/info/attrs.html)
