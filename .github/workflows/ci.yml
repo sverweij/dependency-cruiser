@@ -2,13 +2,13 @@ name: ci
 
 on:
   push:
-    branches: [master, develop, v12]
+    branches: [main, v12]
   pull_request:
-    branches: [develop]
+    branches: [main]
   workflow_dispatch:
 
 env:
-  NODE_LATEST: 19.x
+  NODE_LATEST: 20.x
   PLATFORM: ubuntu-latest
   CI: true
   # the LANG (used by the Intl API, which we use for some of the number
@@ -25,7 +25,7 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        node-version: [16.x, 19.x]
+        node-version: [16.x, 20.x]
         platform: [ubuntu-latest]
     runs-on: ${{matrix.platform}}
     steps:
