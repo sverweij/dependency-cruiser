@@ -27,6 +27,7 @@ function getProgressLine(pMessage, pState, pLevel, pMaxLevel) {
       deltaHeapTotal: heapTotal - pState.previousHeapTotal,
       deltaExternal: external - pState.previousExternal,
       message: pState.previousMessage,
+      level: pState.previousLevel,
     };
 
     pState.previousMessage = pMessage;
@@ -37,6 +38,7 @@ function getProgressLine(pMessage, pState, pLevel, pMaxLevel) {
     pState.previousHeapTotal = heapTotal;
     pState.previousHeapUsed = heapUsed;
     pState.previousExternal = external;
+    pState.previousLevel = pLevel;
 
     lReturnValue = formatPerfLine(lStats);
   }
