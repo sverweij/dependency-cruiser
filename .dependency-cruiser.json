@@ -304,7 +304,7 @@
     "parser": "tsc", // acorn, swc, tsc
     "enhancedResolveOptions": {
       "exportsFields": ["exports"],
-      "conditionNames": ["require"],
+      "conditionNames": ["import", "require"],
       "extensions": [
         ".js",
         //
