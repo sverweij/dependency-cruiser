@@ -1,4 +1,3 @@
-/* eslint-disable import/exports-last */
 import EventEmitter from "node:events";
 
 export const OFF = -1;

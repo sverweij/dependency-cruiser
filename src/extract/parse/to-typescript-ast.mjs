@@ -1,4 +1,3 @@
-/* eslint-disable import/exports-last */
 import { readFileSync } from "node:fs";
 import tryImport from "semver-try-require";
 import memoize from "lodash/memoize.js";

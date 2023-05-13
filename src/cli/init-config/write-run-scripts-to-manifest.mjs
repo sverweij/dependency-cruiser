@@ -1,4 +1,3 @@
-/* eslint-disable import/exports-last */
 /* eslint-disable security/detect-object-injection */
 import { writeFileSync } from "node:fs";
 import figures from "figures";

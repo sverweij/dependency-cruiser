@@ -1,4 +1,3 @@
-/* eslint-disable import/exports-last */
 import has from "lodash/has.js";
 
 export function isValidPlugin(pPluginFunction) {

@@ -1,4 +1,3 @@
-/* eslint-disable import/exports-last */
 /* eslint security/detect-object-injection : 0*/
 import javaScriptWrap from "./javascript-wrap.mjs";
 import typeScriptWrap from "./typescript-wrap.mjs";

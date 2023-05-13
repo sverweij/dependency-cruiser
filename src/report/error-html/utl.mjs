@@ -1,4 +1,3 @@
-/* eslint-disable import/exports-last */
 import has from "lodash/has.js";
 import meta from "../../meta.js";
 import { formatViolation, formatPercentage } from "../utl/index.mjs";

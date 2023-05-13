@@ -1,5 +1,4 @@
 // @ts-check
-/* eslint-disable import/exports-last */
 import { createHash } from "node:crypto";
 import { readFileSync } from "node:fs";
 import { readFile } from "node:fs/promises";

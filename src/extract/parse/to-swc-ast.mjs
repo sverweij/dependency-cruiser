@@ -1,4 +1,3 @@
-/* eslint-disable import/exports-last */
 import tryImport from "semver-try-require";
 import memoize from "lodash/memoize.js";
 import meta from "../../meta.js";

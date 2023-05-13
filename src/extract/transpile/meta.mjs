@@ -1,4 +1,3 @@
-/* eslint-disable import/exports-last */
 /* eslint security/detect-object-injection : 0*/
 import meta from "../../meta.js";
 import tryAvailable from "./try-import-available.mjs";

@@ -1,4 +1,3 @@
-/* eslint-disable import/exports-last */
 import { readFileSync } from "node:fs";
 import { join } from "node:path";
 import memoize from "lodash/memoize.js";

@@ -1,4 +1,3 @@
-/* eslint-disable import/exports-last */
 // @ts-check
 import { readFileSync, readdirSync, accessSync, statSync, R_OK } from "node:fs";
 import { join } from "node:path";

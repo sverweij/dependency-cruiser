@@ -1,4 +1,3 @@
-/* eslint-disable import/exports-last */
 import IndexedModuleGraph from "../../../graph-utl/indexed-module-graph.mjs";
 import { calculateInstability, metricsAreCalculable } from "../module-utl.mjs";
 

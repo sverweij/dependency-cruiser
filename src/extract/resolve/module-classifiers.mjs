@@ -1,4 +1,3 @@
-/* eslint-disable import/exports-last */
 import { isAbsolute, resolve as path_resolve } from "node:path";
 import getExtension from "../../utl/get-extension.mjs";
 
