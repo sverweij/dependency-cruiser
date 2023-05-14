@@ -19,7 +19,9 @@ SCHEMA_SOURCES=tools/schema/baseline-violations.schema.mjs \
 	tools/schema/compound-donot-follow-type.mjs \
 	tools/schema/compound-exclude-type.mjs \
 	tools/schema/compound-focus-type.mjs \
+	tools/schema/compound-highlight-type.mjs \
 	tools/schema/compound-include-only-type.mjs \
+	tools/schema/compound-reaches-type.mjs \
 	tools/schema/configuration.schema.mjs \
 	tools/schema/cruise-result.schema.mjs \
 	tools/schema/dependencies.mjs \
