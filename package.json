@@ -46,7 +46,8 @@
   "main": "src/main/index.mjs",
   "exports": {
     ".": {
-      "import": "./src/main/index.mjs"
+      "import": "./src/main/index.mjs",
+      "types": "./types/dependency-cruiser.d.ts"
     },
     "./config-utl/extract-babel-config": {
       "import": "./src/config-utl/extract-babel-config.mjs"
@@ -55,7 +56,8 @@
       "import": "./src/config-utl/extract-depcruise-config/index.mjs"
     },
     "./config-utl/extract-ts-config": {
-      "import": "./src/config-utl/extract-ts-config.mjs"
+      "import": "./src/config-utl/extract-ts-config.mjs",
+      "types": "./types/extract-ts-config.d.ts"
     },
     "./config-utl/extract-webpack-resolve-config": {
       "import": "./src/config-utl/extract-webpack-resolve-config.mjs"
