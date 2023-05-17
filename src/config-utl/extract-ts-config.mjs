@@ -35,7 +35,7 @@ const FORMAT_DIAGNOSTICS_HOST = {
  *
  * @param {string} pTSConfigFileName
  * @return {import("typescript").ParsedCommandLine} tsconfig as an object
- * @throws {Error} when the tsconfig is invalid/ jas errors
+ * @throws {Error} when the tsconfig is invalid/ has errors
  * @throws {TypeError} when the tsconfig is unreadable
  */
 export default function extractTSConfig(pTSConfigFileName) {

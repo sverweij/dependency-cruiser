@@ -76,11 +76,11 @@ async function getConfig(pBabelConfigFileName) {
 /**
  * Reads the file with name `pBabelConfigFileName` and returns its parsed
  * contents as an object
- *x
+ *
  * Silently fails if a supported @babel/core version can't be found
  *
  * @param {string} pBabelConfigFileName
- * @return {any} babel config as an object
+ * @return {object} babel config as an object
  * @throws {Error} when the babel config has an unknown extension OR
  *                 when the babel config is invalid OR
  *                 when dependency-cruiser can't yet process it
