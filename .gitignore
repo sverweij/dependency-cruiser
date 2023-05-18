@@ -12,14 +12,15 @@
 .idea
 
 # metrics results
-.nyc_output
-coverage
-jsdoc
-dependency-violations.html
-.cache
-isolate-*-v8.log
 *.cpuprofile
 *.heapprofile
+.cache
+.clinic/
+.nyc_output
+coverage
+dependency-violations.html
+isolate-*-v8.log
+jsdoc
 
 # node and npm
 /node_modules/
