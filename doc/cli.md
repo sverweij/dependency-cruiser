@@ -46,8 +46,8 @@ available in dependency-cruiser configurations.
 1. [`--ts-config`: use a typescript configuration file ('project')](#--ts-config-use-a-typescript-configuration-file-project)
 1. [`--webpack-config`: use (the resolution options of) a webpack configuration`](#--webpack-config-use-the-resolution-options-of-a-webpack-configuration)
 1. [`--preserve-symlinks`](#--preserve-symlinks)
-1. [`--cache`: use a cache to speed up cruising (experimental)](#--cache-use-a-cache-to-speed-up-cruising-experimental)
-1. [`--cache-strategy`: influence how the cache functionality detects changes (experimental)](#--cache-strategy-influence-how-the-cache-functionality-detects-changes-experimental)
+1. [`--cache`: use a cache to speed up cruising](#--cache-use-a-cache-to-speed-up-cruising)
+1. [`--cache-strategy`: influence how the cache functionality detects changes](#--cache-strategy-influence-how-the-cache-functionality-detects-changes)
 1. [`--no-cache`: switch off caching](#--no-cache-switch-off-caching)
 
 ### Standalone formatting of dependency graphs: [depcruise-fmt](#depcruise-fmt)
@@ -152,18 +152,12 @@ verify whether the _stable dependency principle_ holds.
 
 #### ddot - summarise on folder level
 
-> This reporter is _experimental_. It's likely to stay, but the way you configure
-> it or how its output looks might change without major version bumping.
-
 The `ddot` reporter is a variant on the `dot` output. It summarises modules on
 folder level. You can customise it with [themes](./options-reference.md#theme-dot-ddot-and-archi-reporters)
 and [filters](./options-reference.md#filtering-dot-ddot-and-archi-reporters)
 just like you can the dot reporter output.
 
 #### archi/ cdot
-
-> This reporter is _experimental_. It's likely to stay, but the way you configure
-> it or how its output looks might change without major version bumping.
 
 The archi is a variant on the `dot` output. The archi reporter
 can summarise (or 'collapse') dependencies to folders of your own choosing.
@@ -184,8 +178,6 @@ for details.
 </details>
 
 #### flat/ fdot
-
-> Just like the archi/ ddot reporter, this one is _experimental_.
 
 Also a variant on the `dot` output. Where all other graphical reporters group
 modules into the folders they reside in, this shows all modules on the same
@@ -283,17 +275,15 @@ dependency-cruise --validate --output-type err-html -f dependency-report.html sr
 
 #### markdown
 
-> This reporter is _experimental_. It's currently as configurable as it is
-> to test out how it works in various contexts a.o. GitHub actions action summary's
-> and possibly in a custom action (to show output in a PR, for instance)
->
-> At the moment of writing (2022-06-09) it doesn't support links or show
-> a complete list of all run validations like e.g. the `err-html` reporter does.
-
 Approximately the same content as the `err-html` reporter, but instead in markdown
-format. The markdown reporter is fairly configurable - see the
-[markdown](./options-reference.md#markdown) section in the options reference
-for details.
+format, which can be useful in a.o. GitHub actions action summaries or to show
+results in a PR - potentially along with the mermaid reporter. The markdown
+reporter is fairly configurable - see the [markdown](./options-reference.md#markdown)
+section in the options reference for details.
+
+> As compared to the `err-html` reporter this one doesn't emit links or show
+> a complete list of all run validations. If you need that: create a feature
+> request in the dependency-cruiser repo.
 
 #### html
 
@@ -1085,7 +1075,7 @@ dependency-cruise --max-depth 2 -T dot src/main/index.ts | dot -T svg > depth-li
 
 See [maxDepth](./options-reference.md#maxdepth)
 
-> This will only be effective when you pass one file as an argument.
+> This will only be effective when you pass _one_ file as an argument.
 
 ### `--progress`: get feedback on what dependency-cruiser is doing while it's running
 
@@ -1105,7 +1095,7 @@ without the progress messages ending up in your output.
 <summary>Typical output</summary>
 
 ```
-▶ reading files ...
+  ◼◼◼◼◼◻◻◻◻ 60% reading files ...
 ```
 
 </details>
@@ -1121,30 +1111,21 @@ stay in view when dependency-cruiser is done.
 <summary>Typical output</summary>
 
 ```
- elapsed real          user        system         ∆ rss   ∆ heapTotal    ∆ heapUsed    ∆ external after step...
-------------- ------------- ------------- ------------- ------------- ------------- ------------- -------------
-        785ms         813ms          98ms    +132,384kB     +85,020kB     +62,483kB      +2,280kB start of node process
-         12ms          11ms           1ms      +1,148kB        +256kB        +785kB           0kB parsing options
-         79ms          18ms           5ms      +2,492kB        +548kB      +1,731kB        +541kB cache: check freshness with metadata
-        187ms         345ms          11ms     +18,620kB      +7,024kB      +9,037kB      -1,430kB parsing rule set
-          0ms           2ms           0ms          +8kB           0kB         +28kB           0kB determining how to resolve
-          0ms           1ms           0ms         +24kB           0kB          +9kB           0kB reading files
-         23ms          32ms           7ms        +724kB      +1,280kB     -12,023kB           0kB reading files: gathering initial sources
-      1,260ms       2,040ms         112ms     +50,152kB     +48,640kB     +51,344kB        +413kB reading files: visiting dependencies
-          0ms           0ms           0ms          +8kB           0kB          +3kB           0kB analyzing
-         13ms          33ms           0ms         +28kB           0kB      +6,083kB           0kB analyzing: cycles
-         27ms          59ms           2ms      +3,012kB      +2,816kB      +1,842kB        -157kB analyzing: dependents
-          1ms           1ms           0ms          +8kB           0kB         +46kB           0kB analyzing: orphans
-        292ms         384ms           8ms      +2,176kB      +2,048kB        +668kB           0kB analyzing: reachables
-          0ms           0ms           0ms         +12kB           0kB          +3kB           0kB analyzing: module metrics
-          0ms           0ms           0ms           0kB           0kB          +3kB           0kB analyzing: add focus (if any)
-         80ms         157ms           3ms        +560kB        +768kB      -3,119kB           0kB analyzing: validations
-          5ms          13ms           0ms         +56kB        +256kB        +960kB           0kB analyzing: comparing against known errors
-          6ms           7ms           1ms      +1,704kB      +1,088kB      +2,314kB        +541kB cache: save
-          5ms           5ms           0ms         +40kB           0kB        +596kB           0kB reporting
-          0ms           0ms           0ms           0kB           0kB          +5kB           0kB really done
-------------- ------------- ------------- ------------- ------------- ------------- ------------- -------------
-      2,775ms       3,920ms         248ms    +213,156kB    +149,744kB    +122,798kB      +2,188kB
+        ∆ rss   ∆ heapTotal    ∆ heapUsed    ∆ external     ⏱  system       ⏱  user       ⏱  real after step...
+------------- ------------- ------------- ------------- ------------- ------------- ------------- ------------------------------------------
+   +50.484 kB    +19.028 kB     +9.817 kB     +1.835 kB         64 ms        402 ms        332 ms nodejs starting
+      +648 kB       +256 kB       +760 kB          0 kB          0 ms         13 ms         12 ms parsing options
+    +2.416 kB     +1.316 kB     +3.687 kB       +832 kB          7 ms         41 ms         90 ms cache: checking freshness with metadata
+  +108.932 kB    +71.416 kB    +50.004 kB    +32.978 kB         83 ms        853 ms        794 ms importing analytical modules
+   +11.228 kB     +8.732 kB     +7.417 kB       -139 kB          8 ms        395 ms        195 ms parsing rule set
+        +4 kB          0 kB        +29 kB          0 kB          0 ms          3 ms          1 ms determining how to resolve
+   +42.004 kB    +39.424 kB    +45.359 kB       +357 kB        115 ms      2.198 ms      1.256 ms reading files
+    +6.656 kB     +6.144 kB     +5.186 kB        -72 kB          8 ms        618 ms        345 ms analyzing
+    +1.696 kB     +1.076 kB     +2.245 kB       +535 kB          1 ms          8 ms          8 ms cache: saving
+       +24 kB          0 kB       +632 kB         +1 kB          0 ms          5 ms          5 ms reporting
+         0 kB          0 kB         +4 kB          0 kB          0 ms          0 ms          0 ms really done
+------------- ------------- ------------- ------------- ------------- ------------- ------------- ------------------------------------------
+  +224.092 kB   +147.392 kB   +125.139 kB    +36.326 kB        288 ms      4.537 ms      3.038 ms
 ```
 
 Number formatting takes place with the `Intl` API, so in your locale the numbers
@@ -1155,8 +1136,7 @@ and units might look slightly different.
 #### none (the default when you don't pass --progress )
 
 Make sure dependency-cruiser doesn't print any feedback. Useful if you want to
-override the progress option configured in a configuration file (currently
-an undocumented feature that is subject to change).
+override the progress option configured in a configuration file.
 
 ### `--no-progress`: don't show feedback on what dependency-cruiser is doing
 
@@ -1226,11 +1206,7 @@ to `false` (which is also nodejs' default behavior since release 6).
 You'll typically want to set this in the configuration file with the [preserveSymlinks](./options-reference.md#preservesymlinks)
 option.
 
-### `--cache`: use a cache to speed up cruising (experimental)
-
-> :warning: the cache feature is _experimental_. It _is_ significantly faster
-> and it _is_ tested, but the interface & format might be changing without
-> dependency-cruiser getting a major bump.
+### `--cache`: use a cache to speed up cruising
 
 > Available from version 11.14.0.
 
@@ -1256,12 +1232,7 @@ happens when
   - if the cache was created without a filter, but the new cruise includes one,
     the new cruise _can_ be served from the cache.
 
-### `--cache-strategy`: influence how the cache functionality detects changes (experimental)
-
-> :warning: this is part of the _experimental_ cache feature. Especially the
-> 'content' cache strategy is quite new. The feature _is_ tested and works, but
-> interface & format might change without dependency-cruiser getting a major
-> bump.
+### `--cache-strategy`: influence how the cache functionality detects changes
 
 > Available from version 12.5.0
 

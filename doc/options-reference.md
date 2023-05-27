@@ -34,6 +34,7 @@
   - [forceDeriveDependents](#forcederivedependents)
   - [parser](#parser)
   - [cache](#cache)
+  - [progress](#progress)
 
 ## Filters
 
@@ -1251,9 +1252,6 @@ module.exports = {
 
 ## markdown
 
-> The markdown reporter is a keeper, but the reporterOptions.markdown interface
-> below is _experimental_ and might change without a major version bump.
-
 The `markdown` reporter by default delivers a report approximately as complete as
 the `err-html` reporter, including a title, a summary section, a details section
 and a footer. It might be you don't need that in your target situation (e.g. in a
@@ -1576,10 +1574,6 @@ not bundled with dependency-cruiser.
 
 > Available from version 11.14.0.
 
-> :warning: the cache feature is _experimental_. It _is_ significantly faster
-> and it _is_ tested, but the interface & format might be changing without
-> dependency-cruiser getting a major bump.
-
 Indicates if you want to use caching, and if so enables you to tweak how it
 operates.
 
@@ -1588,7 +1582,7 @@ The long form:
 ```javascript
 {
   // ...
- "options": {
+ options: {
     cache: {
       // folder where dependency-cruiser will put its cache files
       folder: "node_modules/.cache/dependency-cruiser",
@@ -1612,9 +1606,9 @@ will interpret that as the cache folder.
 ```javascript
 {
   // ...
- "options": {
+  options: {
     // cache dependency-cruiser results to a custom location
-    cache: "some-folder/where-you-want-to-store/cache"
+    cache: "some-folder/where-you-want-to-store/cache";
     // ...
   }
 }
@@ -1626,6 +1620,44 @@ use `cache: false`.
 As with most settings the command line option of the same name takes
 precedence of whichever is specified here.
 
-See [`--cache`: use a cache to speed up cruising (experimental)](cli.md#--cache-use-a-cache-to-speed-up-cruising-experimental)
+See [`--cache`: use a cache to speed up cruising](cli.md#--cache-use-a-cache-to-speed-up-cruising)
 in the command line documentation for more details on how the caching function
 currently operates.
+
+### `progress`
+
+> :shell: command line option equivalent: `--progress` (type only)
+
+With this option you control whether or not dependency-cruiser shows progress
+information while it's running + what this information should look like.
+
+See [`--progress`: get feedback on what dependency-cruiser is doing while it's running](cli.md#--progress-get-feedback-on-what-dependency-cruiser-is-doing-while-its-running)
+Here too the command line option takes precedence over what is specified here.
+
+In addition to what is possible on the command line you can specify a `maximumLevel`
+of messages you want dependency-cruiser to report progress on. For regular use
+a `maximumLevel` of `40` (summary) will provide sufficient feedback - higher levels
+can be useful for debugging dependency-cruiser.
+
+```javascript
+// ...
+options: {
+  progress: {
+    type: "performance-log",
+    // options:
+    // "cli-feedback" (the default)
+    // "performance-log"
+    // "none"
+    maximumLevel: 50
+    // allowed levels:
+    // -1 (OFF)
+    // 40 (summary)
+    // 50 (info - the default)
+    // 60 (debug)
+    // 70 (trace)
+    // 80 (extra strong)
+    // 99 (absolutely everything)
+  },
+}
+// ...
+```
