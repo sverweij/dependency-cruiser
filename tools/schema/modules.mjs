@@ -20,6 +20,22 @@ export default {
           description:
             "The (resolved) file name of the module, e.g. 'src/main/index.js'",
         },
+        unresolved: {
+          type: "array",
+          description:
+            "the unresolved name(s) & types this module is also known as",
+          items: {
+            type: "object",
+            required: ["name", "types"],
+            properties: {
+              name: { type: "string" },
+              types: {
+                type: "array",
+                items: { $ref: "#/definitions/DependencyTypeType" },
+              },
+            },
+          },
+        },
         valid: {
           type: "boolean",
           description:

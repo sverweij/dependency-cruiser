@@ -50,9 +50,21 @@ export interface IReachesType {
   /**
    * dependency-cruiser will include modules matching this regular expression
    * in its output, as well as _any_ module that reaches them - either directly
-   * or via via.
+   * or via via. This matches against _resolved_ paths only
+   * ('node_modules/chalk/source/index.js', 'src/utl/useful.ts as opposed to
+   * the unresolved paths ('chalk', @aliased-utl/useful).
+   *
+   * If you want to use the _unresolved_ paths, use `pathUnresolved`.
    */
   path?: string | string[];
+  /**
+   * dependency-cruiser will include modules _equal_ to this (/ these) string(s)
+   * in its output, as well as _any_ module that reaches them - either directly
+   * or via via. This takes unresolved ('chalk', @aliased-utl/useful) paths.
+   *
+   * For _resolved_ paths use `path`
+   */
+  pathUnresolved?: string | string[];
 }
 
 export interface IHighlightType {

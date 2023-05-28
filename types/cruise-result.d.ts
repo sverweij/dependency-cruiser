@@ -51,6 +51,13 @@ export interface IModule {
    */
   source: string;
   /**
+   * The unresolved name(s) & types this module is also known as
+   */
+  unresolved?: {
+    name: string;
+    types: DependencyType[];
+  }[];
+  /**
    * 'true' if this module violated a rule; 'false' in all other cases. The violated rule will
    * be in the 'rule' object at the same level.
    */
