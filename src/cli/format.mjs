@@ -1,4 +1,3 @@
-import getStream from "get-stream";
 import _format from "../main/format.mjs";
 import validateFileExistence from "./utl/validate-file-existence.mjs";
 import normalizeOptions from "./normalize-cli-options.mjs";
@@ -8,7 +7,7 @@ import { getInStream, write } from "./utl/io.mjs";
  *
  * @param {string} pResultFile the name of the file with cruise results
  * @param {import("../../types/dependency-cruiser").IFormatOptions} pOptions
- * @returns {Number} an exitCode
+ * @returns {Promise<Number>} an exitCode
  */
 export default async function format(pResultFile, pOptions) {
   const lOptions = await normalizeOptions(pOptions);
@@ -17,10 +16,30 @@ export default async function format(pResultFile, pOptions) {
     validateFileExistence(pResultFile);
   }
 
-  const lResult = await getStream(getInStream(pResultFile));
+  return new Promise((pResolve, pReject) => {
+    let lInputAsString = "";
+    const lInStream = getInStream(pResultFile);
 
-  const lReportingResult = await _format(JSON.parse(lResult), lOptions);
+    lInStream
+      .on("data", (pChunk) => {
+        lInputAsString += pChunk;
+      })
+      .on(
+        "error",
+        /* c8 ignore start */
+        (pError) => {
+          pReject(pError);
+        }
+        /* c8 ignore stop */
+      )
+      .on("end", async () => {
+        const lReportingResult = await _format(
+          JSON.parse(lInputAsString),
+          lOptions
+        );
 
-  write(lOptions.outputTo, lReportingResult.output);
-  return lReportingResult.exitCode;
+        write(lOptions.outputTo, lReportingResult.output);
+        pResolve(lReportingResult.exitCode);
+      });
+  });
 }

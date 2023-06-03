@@ -1,4 +1,4 @@
-class Observable {
+export class Observable {
   /**
    * @constructor
    */
@@ -27,4 +27,3 @@ class Observable {
 Observable.create = (subscribe) => {
   return new Observable(subscribe);
 };
-export { Observable };
