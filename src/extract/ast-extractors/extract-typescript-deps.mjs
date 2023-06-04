@@ -2,6 +2,7 @@
 import tryImport from "semver-try-require";
 import meta from "../../meta.js";
 
+/** @type {import("typescript")} */
 const typescript = await tryImport(
   "typescript",
   meta.supportedTranspilers.typescript
@@ -120,13 +121,26 @@ function firstArgumentIsAString(pASTNode) {
 }
 
 function isRequireCallExpression(pASTNode) {
-  return (
+  if (
     typescript.SyntaxKind[pASTNode.kind] === "CallExpression" &&
-    pASTNode.expression &&
-    typescript.SyntaxKind[pASTNode.expression.originalKeywordKind] ===
-      "RequireKeyword" &&
-    firstArgumentIsAString(pASTNode)
-  );
+    pASTNode.expression
+  ) {
+    /*
+     * from typescript 5.0.0 the `originalKeywordKind` attribute is deprecated
+     * and from 5.2.0 it will be gone. However, in typescript < 5.0.0 (still used
+     * heavily IRL) it's the only way to get it - hence this test for the
+     * existence of the * identifierToKeywordKind function to remain backwards
+     * compatible
+     */
+    const lSyntaxKind = typescript.identifierToKeywordKind
+      ? typescript.SyntaxKind[
+          typescript.identifierToKeywordKind(pASTNode.expression)
+        ]
+      : /* c8 ignore next 1 */
+        typescript.SyntaxKind[pASTNode.expression.originalKeywordKind];
+    return lSyntaxKind === "RequireKeyword" && firstArgumentIsAString(pASTNode);
+  }
+  return false;
 }
 
 function isSingleExoticRequire(pASTNode, pString) {
