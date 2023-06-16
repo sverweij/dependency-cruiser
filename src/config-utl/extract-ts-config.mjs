@@ -1,5 +1,5 @@
 import { dirname, resolve } from "node:path";
-import tryImport from "semver-try-require";
+import tryImport from "../extract/transpile/try-import.cjs";
 import meta from "../meta.js";
 
 const typescript = await tryImport(

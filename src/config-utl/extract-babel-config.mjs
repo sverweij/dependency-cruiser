@@ -3,7 +3,7 @@ import { readFile } from "node:fs/promises";
 import { extname } from "node:path";
 import json5 from "json5";
 import has from "lodash/has.js";
-import tryImport from "semver-try-require";
+import tryImport from "../extract/transpile/try-import.cjs";
 import meta from "../meta.js";
 import makeAbsolute from "./make-absolute.mjs";
 

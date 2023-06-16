@@ -3,6 +3,7 @@ import { createRequire } from "node:module";
 import { coerce, satisfies } from "semver";
 
 const require = createRequire(import.meta.url);
+const scopedRequire = createRequire(path.join(process.cwd(), "/dummy.js"));
 
 const PACKAGE_RE = "[^/]+";
 const SCOPED_PACKAGE_RE = "@[^/]+(/[^/]+)";
@@ -12,22 +13,20 @@ function extractRootModuleName(pModuleName) {
   return (pModuleName.match(ROOT_MODULE_RE) || []).shift();
 }
 
-function getVersion(pModuleName) {
+function getVersion(pModuleName, pRequireFunction) {
   // of course we'd love to use something like an import with an import assertion
   // (yo, you're import-ing 'json'!), but that's _experimental_, printing scary
   // messages to stderr so: ¯\_(ツ)_/¯
-  // eslint-disable-next-line import/no-dynamic-require, security/detect-non-literal-require
-  const lManifest = require(path.join(
-    extractRootModuleName(pModuleName),
-    "package.json"
-  ));
+  const lManifest = pRequireFunction(
+    path.join(extractRootModuleName(pModuleName), "package.json")
+  );
   return lManifest.version;
 }
 
-export default function tryImportAvailable(pModuleName, pSemanticVersion) {
+function doTryImportAvailable(pModuleName, pSemanticVersion, pRequireFunction) {
   try {
     if (pSemanticVersion) {
-      const lVersion = getVersion(pModuleName);
+      const lVersion = getVersion(pModuleName, pRequireFunction);
       const lCoerced = coerce(lVersion);
       if (
         lVersion &&
@@ -39,8 +38,15 @@ export default function tryImportAvailable(pModuleName, pSemanticVersion) {
     }
     // of course we'd love to use something like import.meta.resolve, but
     // that's _experimental_, so ¯\_(ツ)_/¯
-    return Boolean(require.resolve(pModuleName));
+    return Boolean(pRequireFunction.resolve(pModuleName));
   } catch (pError) {
     return false;
   }
+}
+
+export default function tryImportAvailable(pModuleName, pSemanticVersion) {
+  return (
+    doTryImportAvailable(pModuleName, pSemanticVersion, scopedRequire) ||
+    doTryImportAvailable(pModuleName, pSemanticVersion, require)
+  );
 }

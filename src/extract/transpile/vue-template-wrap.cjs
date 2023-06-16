@@ -1,4 +1,5 @@
 const { EOL } = require("node:os");
+const { join } = require("node:path");
 const isEmpty = require("lodash/isEmpty");
 const tryRequire = require("semver-try-require");
 const meta = require("../../meta.js");
@@ -15,8 +16,26 @@ function getVueTemplateCompiler() {
 
   let lCompiler = tryRequire(
     "vue-template-compiler",
-    meta.supportedTranspilers["vue-template-compiler"]
+    meta.supportedTranspilers["vue-template-compiler"],
+    { path: join(process.cwd(), "dummy.js") }
   );
+
+  if (lCompiler === false) {
+    lCompiler = tryRequire(
+      "@vue/compiler-sfc",
+      meta.supportedTranspilers["@vue/compiler-sfc"],
+      { path: join(process.cwd(), "dummy.js") }
+    );
+    lIsVue3 = true;
+  }
+
+  if (lCompiler === false) {
+    lCompiler = tryRequire(
+      "vue-template-compiler",
+      meta.supportedTranspilers["vue-template-compiler"]
+    );
+    lIsVue3 = false;
+  }
 
   if (lCompiler === false) {
     lCompiler = tryRequire(

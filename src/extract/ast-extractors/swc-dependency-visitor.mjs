@@ -1,7 +1,7 @@
 /* eslint-disable no-inline-comments */
 /* eslint-disable max-classes-per-file */
-import tryImport from "semver-try-require";
 import meta from "../../meta.js";
+import tryImport from "../transpile/try-import.cjs";
 
 /** @type {import('@swc/core/Visitor')} */
 const { Visitor } = await tryImport(
@@ -85,7 +85,7 @@ function extractExoticMemberCallExpression(pNode, pExoticRequireStrings) {
 }
 
 function isImportCallExpression(pNode) {
-  /* 
+  /*
     somewhere between swc 1.2.123 and 1.2.133 the swc AST started to
     represent import call expressions with .callee.type === "Import"
     instead of .callee.value === "import". Keeping both detection
@@ -99,7 +99,7 @@ function isNonExoticallyRequiredExpression(pNode) {
 }
 
 function isInterestingCallExpression(pExoticRequireStrings, pNode) {
-  /* 
+  /*
     somewhere between swc 1.2.123 and 1.2.133 the swc AST started to
     represent import call expressions with .callee.type === "Import"
     instead of .callee.value === "import". Keeping both detection

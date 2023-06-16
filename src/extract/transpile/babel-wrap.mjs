@@ -1,5 +1,5 @@
-import tryImport from "semver-try-require";
 import meta from "../../meta.js";
+import tryImport from "./try-import.cjs";
 
 const babel = await tryImport("@babel/core", meta.supportedTranspilers.babel);
 

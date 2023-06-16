@@ -1,5 +1,5 @@
-import tryImport from "semver-try-require";
 import meta from "../../meta.js";
+import tryImport from "./try-import.cjs";
 
 /*
  * coffeescript's npm repo was renamed from coffee-script to coffeescript
