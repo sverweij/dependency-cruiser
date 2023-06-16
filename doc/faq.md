@@ -10,7 +10,7 @@
 
 ### Q: TypeScript, CoffeeScript, LiveScript or Vue Single File Component (SFC) dependencies don't show up. How can I fix that?
 
-**A**: Install the compiler you use in the same spot dependency-cruiser is installed (or vv).
+**A**: Install the compiler you use in your node_modules, or the same spot dependency-cruiser is installed (or vv).
 
 For some types of TypeScript dependencies you need to flip a switch,
 which is what the next question is about.
@@ -26,16 +26,18 @@ running `depcruise --info`.
 
 When it turns out they aren't yet:
 
-- if you're running dependency-cruiser as a local (development-)
-  dependency (**recommended!**), install the necessary transpilers there.
-- if you're running dependency-cruiser as a global install, install
-  the necessary transpilers globally as well.
-- if you're running dependency-cruiser with npx you can pass the necessary
-  compiler(s) with the `-p` option. E.g. to get a list of all incoming and
-  outgoing dependencies of a TypeScript file you could use this:
-  ```
-  npx -p typescript@4.3.5 -p dependency-cruiser@latest depcruise src -T text --focus src/main/index.ts
-  ```
+- if transpilers are installed in your project (the node_modules directory reachable
+  from the current directory), dependency-cruiser will find them automatically.
+- if you don't want to install transpilers as dependencies of your project,
+  follow the instructions below:
+  - if you're running dependency-cruiser as a global install (npm i -g), install
+    the necessary transpilers globally.
+  - if you're running dependency-cruiser with npx, you can pass the necessary
+    compiler(s) with the `-p` option. E.g. to get a list of all incoming and
+    outgoing dependencies of a TypeScript file you could use this:
+    ```
+    npx -p typescript@4.3.5 -p dependency-cruiser@latest depcruise src -T text --focus src/main/index.ts
+    ```
 
 </details>
 
