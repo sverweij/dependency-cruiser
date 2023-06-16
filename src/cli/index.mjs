@@ -2,7 +2,6 @@ import { join } from "node:path";
 import { glob } from "glob";
 import cloneDeep from "lodash/cloneDeep.js";
 import set from "lodash/set.js";
-import isInstalledGlobally from "is-installed-globally";
 import chalk from "chalk";
 
 import cruise from "../main/cruise.mjs";
@@ -147,21 +146,6 @@ export default async function executeCli(pFileDirectoryArray, pCruiseOptions) {
   let lExitCode = 0;
 
   try {
-    /* c8 ignore start */
-    if (isInstalledGlobally) {
-      process.stderr.write(
-        `\n  ${chalk.yellow(
-          "WARNING"
-        )}: You're running a globally installed dependency-cruiser.\n\n` +
-          `           We recommend to ${chalk.bold.italic.underline(
-            "install and run it as a local devDependency"
-          )} in\n` +
-          `           your project instead. There it has your project's environment and\n` +
-          `           transpilers at its disposal. That will ensure it can find e.g.\n` +
-          `           TypeScript, Vue or Svelte modules and dependencies.\n\n`
-      );
-    }
-    /* c8 ignore stop */
     if (lCruiseOptions.info === true) {
       const { default: formatMetaInfo } = await import(
         "./format-meta-info.mjs"
