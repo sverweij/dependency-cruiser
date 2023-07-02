@@ -31,7 +31,28 @@ describe("[I] main/resolve-options/normalize", () => {
     expect(lNormalizedOptions.useSyncFileSystemCalls).to.equal(true);
   });
 
-  it("does not add the typescript paths plugin to the plugins if a tsConfig is specified without a baseUrl", async () => {
+  it("does not add the typescript paths plugin to the plugins if no tsConfig is specified", async () => {
+    const lNormalizedOptions = await normalizeResolveOptions(
+      {},
+      normalizeCruiseOptions({
+        ruleSet: { options: {} },
+      }),
+      lTsconfigContents
+    );
+
+    expect(Object.keys(lNormalizedOptions).length).to.equal(
+      lDefaultNoOfResolveOptions
+    );
+    expect(lNormalizedOptions.symlinks).to.equal(false);
+    expect(lNormalizedOptions.tsConfig).to.equal(null);
+    expect(lNormalizedOptions.combinedDependencies).to.equal(false);
+    expect(lNormalizedOptions).to.ownProperty("extensions");
+    expect(lNormalizedOptions).to.ownProperty("fileSystem");
+    expect((lNormalizedOptions.plugins || []).length).to.equal(0);
+    expect(lNormalizedOptions.useSyncFileSystemCalls).to.equal(true);
+  });
+
+  it("adds the typescript paths plugin to the plugins if a tsConfig is specified, even without a baseUrl", async () => {
     const lNormalizedOptions = await normalizeResolveOptions(
       {},
       normalizeCruiseOptions({
@@ -41,14 +62,14 @@ describe("[I] main/resolve-options/normalize", () => {
     );
 
     expect(Object.keys(lNormalizedOptions).length).to.equal(
-      lDefaultNoOfResolveOptions
+      lDefaultNoOfResolveOptions + 1
     );
     expect(lNormalizedOptions.symlinks).to.equal(false);
     expect(lNormalizedOptions.tsConfig).to.equal(TEST_TSCONFIG);
     expect(lNormalizedOptions.combinedDependencies).to.equal(false);
     expect(lNormalizedOptions).to.ownProperty("extensions");
     expect(lNormalizedOptions).to.ownProperty("fileSystem");
-    expect((lNormalizedOptions.plugins || []).length).to.equal(0);
+    expect((lNormalizedOptions.plugins || []).length).to.equal(1);
     expect(lNormalizedOptions.useSyncFileSystemCalls).to.equal(true);
   });
 
