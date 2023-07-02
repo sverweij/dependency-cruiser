@@ -1,6 +1,6 @@
 {
   "name": "dependency-cruiser",
-  "version": "13.0.4",
+  "version": "13.0.5",
   "description": "Validate and visualize dependencies. With your rules. JavaScript, TypeScript, CoffeeScript. ES6, CommonJS, AMD.",
   "keywords": [
     "static analysis",
