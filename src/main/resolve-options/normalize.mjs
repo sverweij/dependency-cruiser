@@ -1,11 +1,10 @@
 import fs from "node:fs";
-import has from "lodash/has.js";
-import omit from "lodash/omit.js";
 import enhancedResolve from "enhanced-resolve";
+import omit from "lodash/omit.js";
 import { scannableExtensions } from "../../extract/transpile/meta.mjs";
 import {
-  ruleSetHasLicenseRule,
   ruleSetHasDeprecationRule,
+  ruleSetHasLicenseRule,
 } from "../../graph-utl/rule-set.mjs";
 
 const DEFAULT_CACHE_DURATION = 4000;
