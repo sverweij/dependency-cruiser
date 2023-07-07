@@ -21,6 +21,7 @@ const TYPE2MODULE = {
   metrics: "./metrics.mjs",
   mermaid: "./mermaid.mjs",
   null: "./null.mjs",
+  "azure-devops": "./azure-devops.mjs",
 };
 
 /**
