@@ -100,24 +100,43 @@ function formatViolation(pViolation) {
  *
  * @returns
  */
-function formatResultStatus(pNumberOfErrors, pNumberOfWarns, pNumberOfInfos) {
+function formatResultStatus(
+  pNumberOfErrors,
+  pNumberOfWarns,
+  pNumberOfInfos,
+  pNumberOfIgnored
+) {
   if (pNumberOfErrors > 0) {
     return "Failed";
   }
-  if (pNumberOfWarns + pNumberOfInfos > 0) {
+  if (pNumberOfWarns + pNumberOfInfos + pNumberOfIgnored > 0) {
     return "SucceededWithIssues";
   }
   return "Succeeded";
 }
 
 function formatMeta(pMeta) {
-  return `${pMeta.error} error, ${
-    pMeta.warn + pMeta.info
-  } warning/ informational`;
+  const lWarningCount = pMeta.warn + pMeta.info;
+  const lError = `${pMeta.error} error`;
+  const lWarn = `${lWarningCount} warning/ informational`;
+  const lIgnore = (pMeta?.ignore ?? 0) > 0 ? `, ${pMeta.ignore} ignored` : "";
+
+  return `${lError}, ${lWarn}${lIgnore}`;
 }
 
 function sumMeta(pMeta) {
   return pMeta.error + pMeta.warn + pMeta.info;
+}
+
+/**
+ *
+ * @param {number} pNumberOfIgnored
+ * @returns {string}
+ */
+function formatIgnoreWarning(pNumberOfIgnored) {
+  return (pNumberOfIgnored ?? 0) > 0
+    ? ` - ${pNumberOfIgnored} violations ignored `
+    : "";
 }
 
 /**
@@ -134,7 +153,9 @@ function formatResultMessage(pSummary) {
       pSummary
     )}). ${lStatSummary}`;
   } else {
-    return `no dependency violations found (${lStatSummary})`;
+    return `no dependency violations found${formatIgnoreWarning(
+      pSummary.ignore
+    )} (${lStatSummary})`;
   }
 }
 
@@ -146,7 +167,8 @@ function formatSummary(pSummary) {
   return `##vso[task.complete result=${formatResultStatus(
     pSummary.error,
     pSummary.warn,
-    pSummary.info
+    pSummary.info,
+    pSummary?.ignore ?? 0
   )};]${formatResultMessage(pSummary)}${EOL}`;
 }
 
@@ -155,6 +177,7 @@ function formatSummary(pSummary) {
  * - for each violation in the passed results: the severity, source found, violated rule & some additional info
  * - a summary line
  *
+ * Background documentation:
  * https://learn.microsoft.com/en-us/azure/devops/pipelines/scripts/logging-commands?view=azure-devops&tabs=bash#task-commands
  *
  * @param {import("../../types/dependency-cruiser.js").ICruiseResult} pResults
@@ -162,17 +185,9 @@ function formatSummary(pSummary) {
  */
 // eslint-disable-next-line unicorn/prevent-abbreviations
 export default function azureDevOps(pResults) {
-  // this is the documented way to get tsm to emit strings
-  // Alternatively we could've used the 'low level API', which
-  // involves creating new `Message`s and stringifying those.
-  // The abstraction of the 'higher level API' makes this
-  // reporter more easy to implement and maintain, despite
-  // setting this property directly
-
   const lViolations = (pResults?.summary?.violations ?? []).filter(
     (pViolation) => pViolation.rule.severity !== "ignore"
   );
-  //   const lIgnoredCount = pResults?.summary?.ignore ?? 0;
 
   return {
     output: lViolations

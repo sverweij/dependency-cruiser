@@ -11,7 +11,8 @@ import requiredErrs from "./__mocks__/required-errors.mjs";
 import circulars from "./__mocks__/circular-deps.mjs";
 import vias from "./__mocks__/via-deps.mjs";
 import unsupportedErrorLevels from "./__mocks__/unsupported-severity.mjs";
-// import knownViolations from "./__mocks__/known-violations.mjs";
+import knownViolations from "./__mocks__/known-violations.mjs";
+import errorsAndKnownViolations from "./__mocks__/errors-and-known-violations.mjs";
 import instabilities from "./__mocks__/instabilities.mjs";
 
 function readFixture(pRelativePath) {
@@ -133,13 +134,27 @@ describe("[I] report/azure-devops", () => {
     expect(lResult.exitCode).to.equal(5);
   });
 
-  //   it("renders known errors in a single warning", () => {
-  //     const lFixture = readFixture(
-  //       "__mocks__/known-violations-azure-devops-format.txt"
-  //     );
-  //     const lResult = render(knownViolations);
+  it("renders known errors in a single warning", () => {
+    const lFixture = readFixture(
+      "__mocks__/known-violations-azure-devops-format.txt"
+    );
+    const lResult = render(knownViolations);
 
-  //     expect(lResult.output).to.equal(lFixture);
-  //     expect(lResult.exitCode).to.equal(0);
-  //   });
+    expect(normalizeNewline(lResult.output)).to.equal(
+      normalizeNewline(lFixture)
+    );
+    expect(lResult.exitCode).to.equal(0);
+  });
+
+  it("renders known errors along with other errors", () => {
+    const lFixture = readFixture(
+      "__mocks__/errors-and-known-violations-azure-devops-format.txt"
+    );
+    const lResult = render(errorsAndKnownViolations);
+
+    expect(normalizeNewline(lResult.output)).to.equal(
+      normalizeNewline(lFixture)
+    );
+    expect(lResult.exitCode).to.equal(1);
+  });
 });
