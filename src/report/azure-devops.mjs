@@ -184,18 +184,7 @@ export default function azureDevOps(pResults) {
 }
 
 /*
-Some notes from the documentation on here:
-
-https://learn.microsoft.com/en-us/azure/devops/pipelines/scripts/logging-commands?view=azure-devops&tabs=bash#task-commands
-
-Message grouping
-##[group]Beginning of a group
-##[warning]Warning message
-##[error]Error message
-##[section]Start of a section
-##[debug]Debug text
-##[command]Command-line being run
-##[endgroup]
+Some notes from the documentation over at https://learn.microsoft.com/en-us/azure/devops/pipelines/scripts/logging-commands?view=azure-devops&tabs=bash#task-commands
 
 Warnings and errors:
 
@@ -206,4 +195,13 @@ Progress
 
 Complete
 ##vso[task.complete]current operation
+
+Message grouping
+##[group]Beginning of a group
+##[warning]Warning message
+##[error]Error message
+##[section]Start of a section
+##[debug]Debug text
+##[command]Command-line being run
+##[endgroup]
 */
