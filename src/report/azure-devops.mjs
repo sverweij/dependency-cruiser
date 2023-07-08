@@ -45,7 +45,7 @@ function formatSeverity(pSeverity) {
 function formatViolation(pViolation) {
   return `##vso[task.logissue type=${formatSeverity(
     pViolation.rule.severity
-  )};sourcepath=${pViolation.from}]${pViolation.rule.name}`;
+  )};sourcepath=${pViolation.from}]${pViolation.rule.name}${EOL}`;
 }
 
 /**
@@ -53,8 +53,36 @@ function formatViolation(pViolation) {
  * @param {number} pNumberOfErrors
  * @returns
  */
-function formatSuccess(pNumberOfErrors) {
+function formatResultStatus(pNumberOfErrors) {
   return pNumberOfErrors === 0 ? "Succeeded" : "Failed";
+}
+
+function formatMeta(pMeta) {
+  return `${pMeta.error} error, ${
+    pMeta.warn + pMeta.info
+  } warning/ informational`;
+}
+
+function sumMeta(pMeta) {
+  return pMeta.error + pMeta.warn + pMeta.info;
+}
+
+/**
+ *
+ * @param {import("../../types/cruise-result.js").ISummary} pSummary
+ */
+function formatResultMessage(pSummary) {
+  let lStatSummary = `${pSummary.totalCruised} modules, ${
+    pSummary?.totalDependenciesCruised ?? 0
+  } dependencies cruised`;
+
+  if (sumMeta(pSummary) > 0) {
+    return `${sumMeta(pSummary)} dependency violations (${formatMeta(
+      pSummary
+    )}). ${lStatSummary}`;
+  } else {
+    return `no dependency violations found (${lStatSummary})`;
+  }
 }
 
 /**
@@ -62,9 +90,9 @@ function formatSuccess(pNumberOfErrors) {
  * @param {import("../../types/cruise-result.js").ISummary} pSummary
  */
 function formatSummary(pSummary) {
-  return `##vso[task.complete result=${formatSuccess(pSummary.error)};] ${
-    pSummary.totalCruised
-  } modules, ${pSummary.totalDependenciesCruised} dependencies cruised`;
+  return `##vso[task.complete result=${formatResultStatus(
+    pSummary.error
+  )};]${formatResultMessage(pSummary)}${EOL}`;
 }
 
 /**
@@ -89,15 +117,13 @@ export default function azureDevOps(pResults) {
   const lViolations = (pResults?.summary?.violations ?? []).filter(
     (pViolation) => pViolation.rule.severity !== "ignore"
   );
-  const lIgnoredCount = pResults?.summary?.ignore ?? 0;
+  //   const lIgnoredCount = pResults?.summary?.ignore ?? 0;
 
   return {
     output: lViolations
       .map(formatViolation)
-      .join(EOL)
-      .concat(EOL)
-      .concat(formatSummary(pResults.summary))
-      .concat(EOL),
+      .join("")
+      .concat(formatSummary(pResults.summary)),
     exitCode: pResults.summary.error,
   };
 }
