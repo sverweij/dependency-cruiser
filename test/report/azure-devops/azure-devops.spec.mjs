@@ -7,7 +7,7 @@ import okdeps from "./__mocks__/everything-fine.mjs";
 import warndeps from "./__mocks__/there-are-warnings.mjs";
 import errdeps from "./__mocks__/there-are-errors.mjs";
 import moduleErrs from "./__mocks__/module-errors.mjs";
-// import requiredErrs from "./__mocks__/required-errors.mjs";
+import requiredErrs from "./__mocks__/required-errors.mjs";
 // import circulars from "./__mocks__/circular-deps.mjs";
 // import vias from "./__mocks__/via-deps.mjs";
 // import unsupportedErrorLevels from "./__mocks__/unsupported-severity.mjs";
@@ -70,16 +70,16 @@ describe("[I] report/azure-devops", () => {
     expect(lResult.exitCode).to.equal(5);
   });
 
-  //   it("renders 'required' violations", () => {
-  //     const lFixture = readFixture(
-  //       "__mocks__/required-errors-azure-devops-format.txt"
-  //     );
-  //     const lResult = render(requiredErrs);
+  it("renders 'required' violations", () => {
+    const lFixture = readFixture(
+      "__mocks__/required-errors-azure-devops-format.txt"
+    );
+    const lResult = render(requiredErrs);
 
-  //     expect(lResult.output).to.equal(lFixture);
-  //     // eslint-disable-next-line no-magic-numbers
-  //     expect(lResult.exitCode).to.equal(5);
-  //   });
+    expect(lResult.output).to.equal(lFixture);
+    // eslint-disable-next-line no-magic-numbers
+    expect(lResult.exitCode).to.equal(5);
+  });
 
   //   it("renders circular transgressions", () => {
   //     const lFixture = readFixture(

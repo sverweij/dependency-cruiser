@@ -1,0 +1,6 @@
+##vso[task.logissue type=error;sourcepath=src/asneeze.js]some-required-rule: src/asneeze.js -> node_modules/eslint/lib/api.js
+##vso[task.logissue type=error;sourcepath=src/index.js]not-to-unresolvable: src/index.js -> ./medontexist.json
+##vso[task.logissue type=error;sourcepath=src/index.js]some-required-rule: src/index.js -> node_modules/dependency-cruiser/src/main/index.js
+##vso[task.logissue type=error;sourcepath=src/index.js]some-required-rule: src/index.js -> node_modules/eslint/lib/api.js
+##vso[task.logissue type=error;sourcepath=src/orphan.js]no-orphans: src/orphan.js
+##vso[task.complete result=Failed;]5 dependency violations (5 error, 0 warning/ informational). 7 modules, 0 dependencies cruised
