@@ -12,7 +12,7 @@ import circulars from "./__mocks__/circular-deps.mjs";
 import vias from "./__mocks__/via-deps.mjs";
 // import unsupportedErrorLevels from "./__mocks__/unsupported-severity.mjs";
 // import knownViolations from "./__mocks__/known-violations.mjs";
-// import instabilities from "./__mocks__/instabilities.mjs";
+import instabilities from "./__mocks__/instabilities.mjs";
 
 function readFixture(pRelativePath) {
   return readFileSync(
@@ -105,16 +105,18 @@ describe("[I] report/azure-devops", () => {
     expect(lResult.exitCode).to.equal(4);
   });
 
-  //   it("renders instability transgressions", () => {
-  //     const lFixture = readFixture(
-  //       "__mocks__/instabilities-azure-devops-format.txt"
-  //     );
-  //     const lResult = render(instabilities);
+  it("renders instability transgressions", () => {
+    const lFixture = readFixture(
+      "__mocks__/instabilities-azure-devops-format.txt"
+    );
+    const lResult = render(instabilities);
 
-  //     expect(lResult.output).to.equal(lFixture);
+    expect(normalizeNewline(lResult.output)).to.equal(
+      normalizeNewline(lFixture)
+    );
 
-  //     expect(lResult.exitCode).to.equal(0);
-  //   });
+    expect(lResult.exitCode).to.equal(0);
+  });
 
   //   it("renders unsupported error levels (like 'ignore') as 'info'", () => {
   //     const lFixture = readFixture(

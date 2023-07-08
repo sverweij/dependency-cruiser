@@ -62,13 +62,25 @@ function formatReachabilityViolation(pViolation) {
  * @param {import("../../types/violations.js").IViolation} pViolation
  * @returns {string}
  */
+function formatInstabilityViolation(pViolation) {
+  return `${pViolation.rule.name}: ${pViolation.from} -> ${
+    pViolation.to
+  } (instability: ${formatPercentage(
+    pViolation.metrics.from.instability
+  )} -> ${formatPercentage(pViolation.metrics.to.instability)})`;
+}
+
+/**
+ * @param {import("../../types/violations.js").IViolation} pViolation
+ * @returns {string}
+ */
 function formatViolation(pViolation) {
   const lViolationType2Formatter = {
     module: formatModuleViolation,
     dependency: formatDependencyViolation,
     cycle: formatCycleViolation,
     reachability: formatReachabilityViolation,
-    // instability: formatInstabilityViolation,
+    instability: formatInstabilityViolation,
   };
   let lFormattedViolators = _formatViolation(
     pViolation,
