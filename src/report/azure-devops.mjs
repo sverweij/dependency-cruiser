@@ -1,24 +1,3 @@
-/*
-Message grouping
-##[group]Beginning of a group
-##[warning]Warning message
-##[error]Error message
-##[section]Start of a section
-##[debug]Debug text
-##[command]Command-line being run
-##[endgroup]
-
-Warnings and errors:
-
-##vso[task.logissue type=warning;sourcepath=consoleapp/main.cs;linenumber=1;columnnumber=1;code=100;]Found something that could be a problem.
-
-Progress
-##vso[task.setprogress]current operation
-
-Complete
-##vso[task.complete]current operation
-*/
-
 import { EOL } from "node:os";
 
 const SEVERITY2VSO_TYPE = new Map([
@@ -138,3 +117,28 @@ export default function azureDevOps(pResults) {
     exitCode: pResults.summary.error,
   };
 }
+
+/*
+Some notes from the documentation on here:
+
+https://learn.microsoft.com/en-us/azure/devops/pipelines/scripts/logging-commands?view=azure-devops&tabs=bash#task-commands
+
+Message grouping
+##[group]Beginning of a group
+##[warning]Warning message
+##[error]Error message
+##[section]Start of a section
+##[debug]Debug text
+##[command]Command-line being run
+##[endgroup]
+
+Warnings and errors:
+
+##vso[task.logissue type=warning;sourcepath=consoleapp/main.cs;linenumber=1;columnnumber=1;code=100;]Found something that could be a problem.
+
+Progress
+##vso[task.setprogress]current operation
+
+Complete
+##vso[task.complete]current operation
+*/

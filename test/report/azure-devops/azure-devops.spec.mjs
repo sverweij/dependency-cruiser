@@ -4,6 +4,8 @@ import { expect } from "chai";
 import normalizeNewline from "normalize-newline";
 import render from "../../../src/report/azure-devops.mjs";
 import okdeps from "./__mocks__/everything-fine.mjs";
+import warndeps from "./__mocks__/there-are-warnings.mjs";
+import errdeps from "./__mocks__/there-are-errors.mjs";
 // import moduleErrs from "./__mocks__/module-errors.mjs";
 // import requiredErrs from "./__mocks__/required-errors.mjs";
 // import circulars from "./__mocks__/circular-deps.mjs";
@@ -29,6 +31,30 @@ describe("[I] report/azure-devops", () => {
       normalizeNewline(lFixture)
     );
     expect(lResult.exitCode).to.equal(0);
+  });
+
+  it("says there's warnings when there's warnings", () => {
+    const lFixture = readFixture(
+      "__mocks__/there-are-warnings-azure-devops-format.txt"
+    );
+    const lResult = render(warndeps);
+
+    expect(normalizeNewline(lResult.output)).to.equal(
+      normalizeNewline(lFixture)
+    );
+    expect(lResult.exitCode).to.equal(0);
+  });
+
+  it("says there's errors when there's errors", () => {
+    const lFixture = readFixture(
+      "__mocks__/there-are-errors-azure-devops-format.txt"
+    );
+    const lResult = render(errdeps);
+
+    expect(normalizeNewline(lResult.output)).to.equal(
+      normalizeNewline(lFixture)
+    );
+    expect(lResult.exitCode).to.equal(1);
   });
 
   //   it("renders module only transgressions", () => {
