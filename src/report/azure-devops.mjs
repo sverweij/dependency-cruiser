@@ -34,6 +34,12 @@ function formatDependencyViolation(pViolation) {
   return `${pViolation.rule.name}: ${pViolation.from} -> ${pViolation.to}`;
 }
 
+function formatCycleViolation(pViolation) {
+  return `${pViolation.rule.name}: ${
+    pViolation.from
+  } -> ${pViolation.cycle.join(" -> ")}`;
+}
+
 /**
  *
  * @param {import("../../types/violations.js").IViolation} pViolation
@@ -42,7 +48,7 @@ function formatViolation(pViolation) {
   const lViolationType2Formatter = {
     module: formatModuleViolation,
     dependency: formatDependencyViolation,
-    // cycle: formatCycleViolation,
+    cycle: formatCycleViolation,
     // reachability: formatReachabilityViolation,
     // instability: formatInstabilityViolation,
   };
