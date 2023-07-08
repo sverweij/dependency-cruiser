@@ -1,5 +1,5 @@
-##vso[task.logissue type=error;sourcepath=src/extract/index.js]some-via-rule: src/extract/index.js -> src/utl/array-util.js (via via-one -> via-another)
-##vso[task.logissue type=error;sourcepath=src/extract/index.js]some-via-rule: src/extract/index.js -> src/utl/find-rule-by-name.js (via via-one -> via-another)
-##vso[task.logissue type=error;sourcepath=src/utl/array-util.js]some-via-rule: src/utl/array-util.js
-##vso[task.logissue type=error;sourcepath=src/utl/find-rule-by-name.js]some-via-rule: src/utl/find-rule-by-name.js
+##vso[task.logissue type=error;sourcepath=src/extract/index.js;code=some-via-rule;]src/extract/index.js -> src/utl/array-util.js (via via-one -> via-another)
+##vso[task.logissue type=error;sourcepath=src/extract/index.js;code=some-via-rule;]src/extract/index.js -> src/utl/find-rule-by-name.js (via via-one -> via-another)
+##vso[task.logissue type=error;sourcepath=src/utl/array-util.js;code=some-via-rule;]src/utl/array-util.js
+##vso[task.logissue type=error;sourcepath=src/utl/find-rule-by-name.js;code=some-via-rule;]src/utl/find-rule-by-name.js
 ##vso[task.complete result=Failed;]4 dependency violations (4 error, 0 warning/ informational). 8 modules, 7 dependencies cruised

@@ -1,2 +1,2 @@
-##vso[task.logissue type=error;sourcepath=src/schema/baseline-violations.schema.js]not-unreachable-from-cli: src/schema/baseline-violations.schema.js -> src/schema/baseline-violations.schema.js
+##vso[task.logissue type=error;sourcepath=src/schema/baseline-violations.schema.js;code=not-unreachable-from-cli;]src/schema/baseline-violations.schema.js -> src/schema/baseline-violations.schema.js
 ##vso[task.complete result=Failed;]1 dependency violations (1 error, 0 warning/ informational, 10 ignored). 459 modules, 1093 dependencies cruised

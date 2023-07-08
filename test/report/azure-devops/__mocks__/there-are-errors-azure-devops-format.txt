@@ -1,2 +1,2 @@
-##vso[task.logissue type=error;sourcepath=src/hunkydory.js]not-to-dev-dep: src/hunkydory.js -> node_modules/hunky/dist/index.js
+##vso[task.logissue type=error;sourcepath=src/hunkydory.js;code=not-to-dev-dep;]src/hunkydory.js -> node_modules/hunky/dist/index.js
 ##vso[task.complete result=Failed;]1 dependency violations (1 error, 0 warning/ informational). 2 modules, 1 dependencies cruised

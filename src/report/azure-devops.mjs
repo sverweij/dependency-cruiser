@@ -5,7 +5,7 @@ import {
 } from "./utl/index.mjs";
 
 const SEVERITY2VSO_TYPE = new Map([
-  // "error" | "warn" | "info" | "ignore
+  // "error" | "warn" | "info" | "ignore"
   ["error", "error"],
   ["warn", "warning"],
   // azure devops doesn't seem to understand 'info'. We still want to
@@ -26,7 +26,7 @@ function formatSeverity(pSeverity) {
  * @returns {string}
  */
 function formatModuleViolation(pViolation) {
-  return `${pViolation.rule.name}: ${pViolation.from}`;
+  return pViolation.from;
 }
 
 /**
@@ -35,7 +35,7 @@ function formatModuleViolation(pViolation) {
  * @returns {string}
  */
 function formatDependencyViolation(pViolation) {
-  return `${pViolation.rule.name}: ${pViolation.from} -> ${pViolation.to}`;
+  return `${pViolation.from} -> ${pViolation.to}`;
 }
 
 /**
@@ -43,9 +43,7 @@ function formatDependencyViolation(pViolation) {
  * @returns {string}
  */
 function formatCycleViolation(pViolation) {
-  return `${pViolation.rule.name}: ${
-    pViolation.from
-  } -> ${pViolation.cycle.join(" -> ")}`;
+  return `${pViolation.from} -> ${pViolation.cycle.join(" -> ")}`;
 }
 
 /**
@@ -53,9 +51,9 @@ function formatCycleViolation(pViolation) {
  * @returns {string}
  */
 function formatReachabilityViolation(pViolation) {
-  return `${pViolation.rule.name}: ${pViolation.from} -> ${
-    pViolation.to
-  } (via ${pViolation.via.join(" -> ")})`;
+  return `${pViolation.from} -> ${pViolation.to} (via ${pViolation.via.join(
+    " -> "
+  )})`;
 }
 
 /**
@@ -63,7 +61,7 @@ function formatReachabilityViolation(pViolation) {
  * @returns {string}
  */
 function formatInstabilityViolation(pViolation) {
-  return `${pViolation.rule.name}: ${pViolation.from} -> ${
+  return `${pViolation.from} -> ${
     pViolation.to
   } (instability: ${formatPercentage(
     pViolation.metrics.from.instability
@@ -89,7 +87,9 @@ function formatViolation(pViolation) {
   );
   return `##vso[task.logissue type=${formatSeverity(
     pViolation.rule.severity
-  )};sourcepath=${pViolation.from}]${lFormattedViolators}${EOL}`;
+  )};sourcepath=${pViolation.from};code=${
+    pViolation.rule.name
+  };]${lFormattedViolators}${EOL}`;
 }
 
 /**
