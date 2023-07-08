@@ -1,4 +1,8 @@
 import { EOL } from "node:os";
+import {
+  formatPercentage,
+  formatViolation as _formatViolation,
+} from "./utl/index.mjs";
 
 const SEVERITY2VSO_TYPE = new Map([
   // "error" | "warn" | "info" | "ignore
@@ -17,14 +21,39 @@ function formatSeverity(pSeverity) {
   return SEVERITY2VSO_TYPE.get(pSeverity) ?? "warning";
 }
 
+function formatModuleViolation(pViolation) {
+  return `${pViolation.rule.name}: ${pViolation.from}`;
+}
+
+/**
+ *
+ * @param {import("../../types/violations.js").IViolation} pViolation
+ * @returns {string}
+ */
+function formatDependencyViolation(pViolation) {
+  return `${pViolation.rule.name}: ${pViolation.from} -> ${pViolation.to}`;
+}
+
 /**
  *
  * @param {import("../../types/violations.js").IViolation} pViolation
  */
 function formatViolation(pViolation) {
+  const lViolationType2Formatter = {
+    module: formatModuleViolation,
+    dependency: formatDependencyViolation,
+    // cycle: formatCycleViolation,
+    // reachability: formatReachabilityViolation,
+    // instability: formatInstabilityViolation,
+  };
+  let lFormattedViolators = _formatViolation(
+    pViolation,
+    lViolationType2Formatter,
+    formatDependencyViolation
+  );
   return `##vso[task.logissue type=${formatSeverity(
     pViolation.rule.severity
-  )};sourcepath=${pViolation.from}]${pViolation.rule.name}${EOL}`;
+  )};sourcepath=${pViolation.from}]${lFormattedViolators}${EOL}`;
 }
 
 /**
