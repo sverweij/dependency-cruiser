@@ -1,6 +1,7 @@
 import { readFileSync } from "node:fs";
 import { fileURLToPath } from "node:url";
 import { expect } from "chai";
+import normalizeNewline from "normalize-newline";
 import render from "../../../src/report/azure-devops.mjs";
 import okdeps from "./__mocks__/everything-fine.mjs";
 // import moduleErrs from "./__mocks__/module-errors.mjs";
@@ -24,7 +25,9 @@ describe("[I] report/azure-devops", () => {
     );
     const lResult = render(okdeps);
 
-    expect(lResult.output).to.equal(lFixture);
+    expect(normalizeNewline(lResult.output)).to.equal(
+      normalizeNewline(lFixture)
+    );
     expect(lResult.exitCode).to.equal(0);
   });
 
