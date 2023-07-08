@@ -51,10 +51,19 @@ function formatViolation(pViolation) {
 /**
  *
  * @param {number} pNumberOfErrors
+ * @param {number} pNumberOfWarns
+ * @param {number} pNumberOfInfos
+ *
  * @returns
  */
-function formatResultStatus(pNumberOfErrors) {
-  return pNumberOfErrors === 0 ? "Succeeded" : "Failed";
+function formatResultStatus(pNumberOfErrors, pNumberOfWarns, pNumberOfInfos) {
+  if (pNumberOfErrors > 0) {
+    return "Failed";
+  }
+  if (pNumberOfWarns + pNumberOfInfos > 0) {
+    return "SucceededWithIssues";
+  }
+  return "Succeeded";
 }
 
 function formatMeta(pMeta) {
@@ -91,14 +100,16 @@ function formatResultMessage(pSummary) {
  */
 function formatSummary(pSummary) {
   return `##vso[task.complete result=${formatResultStatus(
-    pSummary.error
+    pSummary.error,
+    pSummary.warn,
+    pSummary.info
   )};]${formatResultMessage(pSummary)}${EOL}`;
 }
 
 /**
  * Returns a bunch of Azure DevOps log messages:
- * - for each violated rule in the passed results: gnork
- * - for each violation in the passed results: bork
+ * - for each violation in the passed results: the severity, source found, violated rule & some additional info
+ * - a summary line
  *
  * https://learn.microsoft.com/en-us/azure/devops/pipelines/scripts/logging-commands?view=azure-devops&tabs=bash#task-commands
  *
