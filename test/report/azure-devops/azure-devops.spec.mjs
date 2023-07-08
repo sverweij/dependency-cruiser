@@ -63,7 +63,9 @@ describe("[I] report/azure-devops", () => {
     );
     const lResult = render(moduleErrs);
 
-    expect(lResult.output).to.equal(lFixture);
+    expect(normalizeNewline(lResult.output)).to.equal(
+      normalizeNewline(lFixture)
+    );
     // eslint-disable-next-line no-magic-numbers
     expect(lResult.exitCode).to.equal(5);
   });
