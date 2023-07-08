@@ -14,13 +14,17 @@ const SEVERITY2VSO_TYPE = new Map([
 ]);
 
 /**
- *
  * @param {import("../../types/shared-types.js").SeverityType} pSeverity
+ * @returns {string}
  */
 function formatSeverity(pSeverity) {
   return SEVERITY2VSO_TYPE.get(pSeverity) ?? "warning";
 }
 
+/**
+ * @param {import("../../types/violations.js").IViolation} pViolation
+ * @returns {string}
+ */
 function formatModuleViolation(pViolation) {
   return `${pViolation.rule.name}: ${pViolation.from}`;
 }
@@ -34,6 +38,10 @@ function formatDependencyViolation(pViolation) {
   return `${pViolation.rule.name}: ${pViolation.from} -> ${pViolation.to}`;
 }
 
+/**
+ * @param {import("../../types/violations.js").IViolation} pViolation
+ * @returns {string}
+ */
 function formatCycleViolation(pViolation) {
   return `${pViolation.rule.name}: ${
     pViolation.from
@@ -41,15 +49,25 @@ function formatCycleViolation(pViolation) {
 }
 
 /**
- *
  * @param {import("../../types/violations.js").IViolation} pViolation
+ * @returns {string}
+ */
+function formatReachabilityViolation(pViolation) {
+  return `${pViolation.rule.name}: ${pViolation.from} -> ${
+    pViolation.to
+  } (via ${pViolation.via.join(" -> ")})`;
+}
+
+/**
+ * @param {import("../../types/violations.js").IViolation} pViolation
+ * @returns {string}
  */
 function formatViolation(pViolation) {
   const lViolationType2Formatter = {
     module: formatModuleViolation,
     dependency: formatDependencyViolation,
     cycle: formatCycleViolation,
-    // reachability: formatReachabilityViolation,
+    reachability: formatReachabilityViolation,
     // instability: formatInstabilityViolation,
   };
   let lFormattedViolators = _formatViolation(

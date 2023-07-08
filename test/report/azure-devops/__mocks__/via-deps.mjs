@@ -203,7 +203,7 @@ export default {
           severity: "error",
           name: "some-via-rule",
         },
-        via: ["(via via)"],
+        via: ["via-one", "via-another"],
       },
       {
         type: "reachability",
@@ -213,7 +213,7 @@ export default {
           severity: "error",
           name: "some-via-rule",
         },
-        via: ["(via via)"],
+        via: ["via-one", "via-another"],
       },
       {
         type: "module",

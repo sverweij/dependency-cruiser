@@ -9,7 +9,7 @@ import errdeps from "./__mocks__/there-are-errors.mjs";
 import moduleErrs from "./__mocks__/module-errors.mjs";
 import requiredErrs from "./__mocks__/required-errors.mjs";
 import circulars from "./__mocks__/circular-deps.mjs";
-// import vias from "./__mocks__/via-deps.mjs";
+import vias from "./__mocks__/via-deps.mjs";
 // import unsupportedErrorLevels from "./__mocks__/unsupported-severity.mjs";
 // import knownViolations from "./__mocks__/known-violations.mjs";
 // import instabilities from "./__mocks__/instabilities.mjs";
@@ -94,14 +94,16 @@ describe("[I] report/azure-devops", () => {
     expect(lResult.exitCode).to.equal(3);
   });
 
-  //   it("renders via transgressions", () => {
-  //     const lFixture = readFixture("__mocks__/via-deps-azure-devops-format.txt");
-  //     const lResult = render(vias);
+  it("renders via transgressions", () => {
+    const lFixture = readFixture("__mocks__/via-deps-azure-devops-format.txt");
+    const lResult = render(vias);
 
-  //     expect(lResult.output).to.equal(lFixture);
-  //     // eslint-disable-next-line no-magic-numbers
-  //     expect(lResult.exitCode).to.equal(4);
-  //   });
+    expect(normalizeNewline(lResult.output)).to.equal(
+      normalizeNewline(lFixture)
+    );
+    // eslint-disable-next-line no-magic-numbers
+    expect(lResult.exitCode).to.equal(4);
+  });
 
   //   it("renders instability transgressions", () => {
   //     const lFixture = readFixture(
