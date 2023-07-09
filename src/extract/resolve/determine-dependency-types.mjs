@@ -20,12 +20,12 @@ function dependencyKeyHasModuleName(
     has(pPackageDependencies[pKey], join(pPrefix, pModuleName));
 }
 
-const NPM2DEP_TYPE = {
-  dependencies: "npm",
-  devDependencies: "npm-dev",
-  optionalDependencies: "npm-optional",
-  peerDependencies: "npm-peer",
-};
+const NPM2DEP_TYPE = new Map([
+  ["dependencies", "npm"],
+  ["devDependencies", "npm-dev"],
+  ["optionalDependencies", "npm-optional"],
+  ["peerDependencies", "npm-peer"],
+]);
 
 function findModuleInPackageDependencies(
   pPackageDependencies,
@@ -36,7 +36,7 @@ function findModuleInPackageDependencies(
     .filter(
       dependencyKeyHasModuleName(pPackageDependencies, pModuleName, pPrefix)
     )
-    .map((pKey) => NPM2DEP_TYPE[pKey] || "npm-no-pkg");
+    .map((pKey) => NPM2DEP_TYPE.get(pKey) || "npm-no-pkg");
 }
 
 function needToLookAtTypesToo(pResolverModulePaths) {

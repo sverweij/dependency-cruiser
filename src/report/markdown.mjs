@@ -30,22 +30,22 @@ const REPORT_DEFAULTS = {
 };
 
 /**
- *
  * @param {import("../../types/shared-types.js").SeverityType} pSeverity
+ * @returns {string}
  */
 function severity2Icon(pSeverity) {
-  const lSeverity2IconMap = {
-    error: ":exclamation:",
-    info: ":grey_exclamation:",
-    ignore: ":see_no_evil:",
-  };
-  // eslint-disable-next-line security/detect-object-injection
-  return lSeverity2IconMap[pSeverity] || ":warning:";
+  const lSeverity2IconMap = new Map([
+    ["error", ":exclamation:"],
+    ["info", ":grey_exclamation:"],
+    ["ignore", ":see_no_evil:"],
+  ]);
+
+  return lSeverity2IconMap.get(pSeverity) || ":warning:";
 }
 
 /**
- *
  * @param {import("../../types/cruise-result.js").ISummary} pSummary
+ * @return {string}
  */
 function formatStatsSummary(pSummary) {
   const lSpacerLength = 4;
@@ -54,7 +54,6 @@ function formatStatsSummary(pSummary) {
 }
 
 /**
- *
  * @param {import("../../types/cruise-result.js").ICruiseResult} pCruiseResult
  * @param {Boolean} pIncludeIgnoredInSummary
  * @return {string}
@@ -108,6 +107,7 @@ function formatViolations(pViolations, pIncludeIgnoredInDetails) {
  *
  * @param {import("../../types/cruise-result.js").ICruiseResult} pResults
  * @param {import("../../types/reporter-options.js").IMarkdownReporterOptions} pOptions
+ * @returns {string}
  */
 // eslint-disable-next-line complexity, max-statements
 function report(pResults, pOptions) {

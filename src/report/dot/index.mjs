@@ -9,12 +9,12 @@ import prepareFlatLevel from "./prepare-flat-level.mjs";
 
 await import("./dot.template.js");
 
-const GRANULARITY2FUNCTION = {
-  module: prepareCustomLevel,
-  folder: prepareFolderLevel,
-  custom: prepareCustomLevel,
-  flat: prepareFlatLevel,
-};
+const GRANULARITY2FUNCTION = new Map([
+  ["module", prepareCustomLevel],
+  ["folder", prepareFolderLevel],
+  ["custom", prepareCustomLevel],
+  ["flat", prepareFlatLevel],
+]);
 
 function report(
   pResults,
@@ -34,8 +34,8 @@ function report(
     nodeAttrs: moduleUtl.attributizeObject(lTheme.node || {}),
     edgeAttrs: moduleUtl.attributizeObject(lTheme.edge || {}),
     clustersHaveOwnNode: "folder" === pGranularity,
-    // eslint-disable-next-line security/detect-object-injection
-    modules: (GRANULARITY2FUNCTION[pGranularity] || prepareCustomLevel)(
+
+    modules: (GRANULARITY2FUNCTION.get(pGranularity) || prepareCustomLevel)(
       lResults,
       lTheme,
       collapsePattern,
@@ -44,12 +44,12 @@ function report(
   });
 }
 
-const GRANULARITY2REPORTER_OPTIONS = {
-  module: "summary.optionsUsed.reporterOptions.dot",
-  folder: "summary.optionsUsed.reporterOptions.ddot",
-  custom: "summary.optionsUsed.reporterOptions.archi",
-  flat: "summary.optionsUsed.reporterOptions.flat",
-};
+const GRANULARITY2REPORTER_OPTIONS = new Map([
+  ["module", "summary.optionsUsed.reporterOptions.dot"],
+  ["folder", "summary.optionsUsed.reporterOptions.ddot"],
+  ["custom", "summary.optionsUsed.reporterOptions.archi"],
+  ["flat", "summary.optionsUsed.reporterOptions.flat"],
+]);
 
 function pryReporterOptionsFromResults(pGranularity, pResults) {
   const lFallbackReporterOptions = get(
@@ -59,8 +59,7 @@ function pryReporterOptionsFromResults(pGranularity, pResults) {
 
   return get(
     pResults,
-    // eslint-disable-next-line security/detect-object-injection
-    GRANULARITY2REPORTER_OPTIONS[pGranularity],
+    GRANULARITY2REPORTER_OPTIONS.get(pGranularity),
     lFallbackReporterOptions
   );
 }

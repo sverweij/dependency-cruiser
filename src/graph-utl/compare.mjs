@@ -1,13 +1,13 @@
+/* eslint-disable no-magic-numbers */
 function severity2number(pSeverity) {
-  const lSeverity2Number = {
-    error: 1,
-    warn: 2,
-    info: 3,
-    ignore: 4,
-  };
+  const lSeverity2Number = new Map([
+    ["error", 1],
+    ["warn", 2],
+    ["info", 3],
+    ["ignore", 4],
+  ]);
 
-  // eslint-disable-next-line security/detect-object-injection
-  return lSeverity2Number[pSeverity] || -1;
+  return lSeverity2Number.get(pSeverity) || -1;
 }
 
 export function severities(pFirstSeverity, pSecondSeverity) {

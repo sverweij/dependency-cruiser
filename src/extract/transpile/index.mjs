@@ -1,4 +1,3 @@
-/* eslint security/detect-object-injection : 0*/
 import javaScriptWrap from "./javascript-wrap.mjs";
 import typeScriptWrap from "./typescript-wrap.mjs";
 import liveScriptWrap from "./livescript-wrap.mjs";
@@ -14,27 +13,27 @@ const coffeeVanillaWrap = coffeeWrap();
 const litCoffeeWrap = coffeeWrap(true);
 const svelteWrap = svelteDingus(typeScriptVanillaWrap);
 
-export const EXTENSION2WRAPPER = {
-  ".js": javaScriptWrap,
-  ".cjs": javaScriptWrap,
-  ".mjs": javaScriptWrap,
-  ".jsx": javaScriptWrap,
-  ".ts": typeScriptVanillaWrap,
-  ".tsx": typeScriptTsxWrap,
-  ".d.ts": typeScriptVanillaWrap,
-  ".cts": typeScriptVanillaWrap,
-  ".d.cts": typeScriptVanillaWrap,
-  ".mts": typeScriptESMWrap,
-  ".d.mts": typeScriptESMWrap,
-  ".vue": vueWrap,
-  ".svelte": svelteWrap,
-  ".ls": liveScriptWrap,
-  ".coffee": coffeeVanillaWrap,
-  ".litcoffee": litCoffeeWrap,
-  ".coffee.md": litCoffeeWrap,
-  ".csx": coffeeVanillaWrap,
-  ".cjsx": coffeeVanillaWrap,
-};
+export const EXTENSION2WRAPPER = new Map([
+  [".js", javaScriptWrap],
+  [".cjs", javaScriptWrap],
+  [".mjs", javaScriptWrap],
+  [".jsx", javaScriptWrap],
+  [".ts", typeScriptVanillaWrap],
+  [".tsx", typeScriptTsxWrap],
+  [".d.ts", typeScriptVanillaWrap],
+  [".cts", typeScriptVanillaWrap],
+  [".d.cts", typeScriptVanillaWrap],
+  [".mts", typeScriptESMWrap],
+  [".d.mts", typeScriptESMWrap],
+  [".vue", vueWrap],
+  [".svelte", svelteWrap],
+  [".ls", liveScriptWrap],
+  [".coffee", coffeeVanillaWrap],
+  [".litcoffee", litCoffeeWrap],
+  [".coffee.md", litCoffeeWrap],
+  [".csx", coffeeVanillaWrap],
+  [".cjsx", coffeeVanillaWrap],
+]);
 
 const BABELEABLE_EXTENSIONS = [
   ".js",
@@ -69,7 +68,7 @@ export function getWrapper(pExtension, pTranspilerOptions) {
     return babelWrap;
   }
 
-  return EXTENSION2WRAPPER[pExtension] || javaScriptWrap;
+  return EXTENSION2WRAPPER.get(pExtension) || javaScriptWrap;
 }
 
 /**

@@ -28,29 +28,31 @@ const TRANSPILER2AVAILABLE = {
   ),
 };
 
-export const EXTENSION2AVAILABLE = {
-  ".js": TRANSPILER2AVAILABLE.javascript,
-  ".cjs": TRANSPILER2AVAILABLE.javascript,
-  ".mjs": TRANSPILER2AVAILABLE.javascript,
-  ".jsx": TRANSPILER2AVAILABLE.javascript,
-  ".ts": TRANSPILER2AVAILABLE.typescript,
-  ".tsx": TRANSPILER2AVAILABLE.typescript,
-  ".d.ts": TRANSPILER2AVAILABLE.typescript,
-  ".cts": TRANSPILER2AVAILABLE.typescript,
-  ".d.cts": TRANSPILER2AVAILABLE.typescript,
-  ".mts": TRANSPILER2AVAILABLE.typescript,
-  ".d.mts": TRANSPILER2AVAILABLE.typescript,
-  ".vue":
+export const EXTENSION2AVAILABLE = new Map([
+  [".js", TRANSPILER2AVAILABLE.javascript],
+  [".cjs", TRANSPILER2AVAILABLE.javascript],
+  [".mjs", TRANSPILER2AVAILABLE.javascript],
+  [".jsx", TRANSPILER2AVAILABLE.javascript],
+  [".ts", TRANSPILER2AVAILABLE.typescript],
+  [".tsx", TRANSPILER2AVAILABLE.typescript],
+  [".d.ts", TRANSPILER2AVAILABLE.typescript],
+  [".cts", TRANSPILER2AVAILABLE.typescript],
+  [".d.cts", TRANSPILER2AVAILABLE.typescript],
+  [".mts", TRANSPILER2AVAILABLE.typescript],
+  [".d.mts", TRANSPILER2AVAILABLE.typescript],
+  [
+    ".vue",
     TRANSPILER2AVAILABLE["vue-template-compiler"] ||
-    TRANSPILER2AVAILABLE["@vue/compiler-sfc"],
-  ".svelte": TRANSPILER2AVAILABLE.svelte,
-  ".ls": TRANSPILER2AVAILABLE.livescript,
-  ".coffee": gotCoffee(),
-  ".litcoffee": gotCoffee(),
-  ".coffee.md": gotCoffee(),
-  ".csx": gotCoffee(),
-  ".cjsx": gotCoffee(),
-};
+      TRANSPILER2AVAILABLE["@vue/compiler-sfc"],
+  ],
+  [".svelte", TRANSPILER2AVAILABLE.svelte],
+  [".ls", TRANSPILER2AVAILABLE.livescript],
+  [".coffee", gotCoffee()],
+  [".litcoffee", gotCoffee()],
+  [".coffee.md", gotCoffee()],
+  [".csx", gotCoffee()],
+  [".cjsx", gotCoffee()],
+]);
 
 const EXTENSIONS_PER_PARSER = {
   swc: [".js", ".cjs", ".mjs", ".jsx", ".ts", ".tsx", ".d.ts"],
@@ -60,7 +62,7 @@ const EXTENSIONS_PER_PARSER = {
 
 function extensionIsAvailable(pExtension) {
   return (
-    EXTENSION2AVAILABLE[pExtension] ||
+    EXTENSION2AVAILABLE.get(pExtension) ||
     // should eventually also check whether swc is enabled as a parser?
     (TRANSPILER2AVAILABLE.swc && EXTENSIONS_PER_PARSER.swc.includes(pExtension))
   );
@@ -72,7 +74,7 @@ function extensionIsAvailable(pExtension) {
  *
  * @type {IAvailableExtension[]}
  */
-export const allExtensions = Object.keys(EXTENSION2AVAILABLE).map(
+export const allExtensions = Array.from(EXTENSION2AVAILABLE.keys()).map(
   (pExtension) => ({
     extension: pExtension,
     available: extensionIsAvailable(pExtension),
@@ -85,8 +87,9 @@ export const allExtensions = Object.keys(EXTENSION2AVAILABLE).map(
  *
  * @type {string[]}
  */
-export const scannableExtensions =
-  Object.keys(EXTENSION2AVAILABLE).filter(extensionIsAvailable);
+export const scannableExtensions = Array.from(
+  EXTENSION2AVAILABLE.keys()
+).filter(extensionIsAvailable);
 
 /**
  * returns an array of supported transpilers, with for each transpiler:

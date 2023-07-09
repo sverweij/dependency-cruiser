@@ -74,14 +74,14 @@ function resolveYarnVirtual(pPath) {
  * @returns {string}
  */
 function getTypeScriptExtensionsToTry(pJavaScriptExtension) {
-  const lJS2TSMap = {
-    ".js": [".ts", ".tsx", ".d.ts"],
-    ".jsx": [".ts", ".tsx", ".d.ts"],
-    ".cjs": [".cts", ".d.cts"],
-    ".mjs": [".mts", ".d.mts"],
-  };
-  // eslint-disable-next-line security/detect-object-injection
-  return lJS2TSMap[pJavaScriptExtension] ?? [];
+  const lJS2TSMap = new Map([
+    [".js", [".ts", ".tsx", ".d.ts"]],
+    [".jsx", [".ts", ".tsx", ".d.ts"]],
+    [".cjs", [".cts", ".d.cts"]],
+    [".mjs", [".mts", ".d.mts"]],
+  ]);
+
+  return lJS2TSMap.get(pJavaScriptExtension) ?? [];
 }
 
 // eslint-disable-next-line max-lines-per-function

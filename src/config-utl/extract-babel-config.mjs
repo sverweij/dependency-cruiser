@@ -2,7 +2,6 @@ import { readFile } from "node:fs/promises";
 
 import { extname } from "node:path";
 import json5 from "json5";
-import has from "lodash/has.js";
 import tryImport from "semver-try-require";
 import meta from "../meta.js";
 import makeAbsolute from "./make-absolute.mjs";
@@ -54,23 +53,23 @@ async function getJSON5Config(pBabelConfigFileName) {
 }
 
 async function getConfig(pBabelConfigFileName) {
-  const lExtensionToParseFunction = {
-    ".js": getJSConfig,
-    ".cjs": getJSConfig,
-    ".mjs": getJSConfig,
-    "": getJSON5Config,
-    ".json": getJSON5Config,
-    ".json5": getJSON5Config,
-  };
+  const lExtensionToParseFunction = new Map([
+    [".js", getJSConfig],
+    [".cjs", getJSConfig],
+    [".mjs", getJSConfig],
+    ["", getJSON5Config],
+    [".json", getJSON5Config],
+    [".json5", getJSON5Config],
+  ]);
   const lExtension = extname(pBabelConfigFileName);
 
-  if (!has(lExtensionToParseFunction, lExtension)) {
+  if (!lExtensionToParseFunction.has(lExtension)) {
     throw new Error(
       `${`The babel config '${pBabelConfigFileName}' is in a format ('${lExtension}')\n`}         dependency-cruiser doesn't support yet.\n`
     );
   }
-  // eslint-disable-next-line security/detect-object-injection, no-return-await
-  return await lExtensionToParseFunction[lExtension](pBabelConfigFileName);
+  // eslint-disable-next-line no-return-await
+  return await lExtensionToParseFunction.get(lExtension)(pBabelConfigFileName);
 }
 
 /**

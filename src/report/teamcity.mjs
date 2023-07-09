@@ -2,15 +2,14 @@ import tsm from "teamcity-service-messages";
 import { formatPercentage, formatViolation } from "./utl/index.mjs";
 
 const CATEGORY = "dependency-cruiser";
-const SEVERITY2TEAMCITY_SEVERITY = {
-  error: "ERROR",
-  warn: "WARNING",
-  info: "INFO",
-};
+const SEVERITY2TEAMCITY_SEVERITY = new Map([
+  ["error", "ERROR"],
+  ["warn", "WARNING"],
+  ["info", "INFO"],
+]);
 
 function severity2teamcitySeverity(pSeverity) {
-  // eslint-disable-next-line security/detect-object-injection
-  return SEVERITY2TEAMCITY_SEVERITY[pSeverity] || "INFO";
+  return SEVERITY2TEAMCITY_SEVERITY.get(pSeverity) || "INFO";
 }
 
 function reportRules(pRules, pViolations) {

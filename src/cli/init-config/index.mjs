@@ -44,22 +44,27 @@ function getOneShotConfig(pOneShotConfigId) {
     babelConfig: getBabelConfigCandidates().shift(),
     specifyResolutionExtensions: true,
   };
-  /** @type {Record<import("./types").OneShotConfigIDType, import("./types").IPartialInitConfig>} */
-  const lOneShotConfigs = {
-    preset: {
-      configType: "preset",
-      preset: "dependency-cruiser/configs/recommended-strict",
-      ...lBaseConfig,
-    },
-    yes: lBaseConfig,
-    "experimental-scripts": {
-      updateManifest: fileExists(PACKAGE_MANIFEST),
-      ...lBaseConfig,
-    },
-  };
+  /** @type {Map<import("./types").OneShotConfigIDType, import("./types").IPartialInitConfig>} */
+  const lOneShotConfigs = new Map([
+    [
+      "preset",
+      {
+        configType: "preset",
+        preset: "dependency-cruiser/configs/recommended-strict",
+        ...lBaseConfig,
+      },
+    ],
+    ["yes", lBaseConfig],
+    [
+      "experimental-scripts",
+      {
+        updateManifest: fileExists(PACKAGE_MANIFEST),
+        ...lBaseConfig,
+      },
+    ],
+  ]);
 
-  // eslint-disable-next-line security/detect-object-injection
-  return lOneShotConfigs[pOneShotConfigId] || lBaseConfig;
+  return lOneShotConfigs.get(pOneShotConfigId) || lBaseConfig;
 }
 
 /**

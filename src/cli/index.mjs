@@ -81,16 +81,16 @@ async function extractBabelConfigOptions(pCruiseOptions) {
 }
 
 function setUpListener(pCruiseOptions) {
-  const lString2Listener = {
-    "cli-feedback": setUpCliFeedbackListener,
-    "performance-log": setUpPerformanceLogListener,
-    ndjson: setUpNDJSONListener,
-  };
+  const lString2Listener = new Map([
+    ["cli-feedback", setUpCliFeedbackListener],
+    ["performance-log", setUpPerformanceLogListener],
+    ["ndjson", setUpNDJSONListener],
+  ]);
   const lListenerID =
     pCruiseOptions?.progress ??
     pCruiseOptions?.ruleSet?.options?.progress?.type;
-  // eslint-disable-next-line security/detect-object-injection
-  const lListenerFunction = lString2Listener?.[lListenerID];
+
+  const lListenerFunction = lString2Listener.get(lListenerID);
   /* c8 ignore next 6 */
   if (Boolean(lListenerFunction)) {
     lListenerFunction(

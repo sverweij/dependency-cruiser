@@ -8,12 +8,12 @@ import {
   formatViolation as _formatViolation,
 } from "./utl/index.mjs";
 
-const SEVERITY2CHALK = {
-  error: chalk.red,
-  warn: chalk.yellow,
-  info: chalk.cyan,
-  ignore: chalk.gray,
-};
+const SEVERITY2CHALK = new Map([
+  ["error", chalk.red],
+  ["warn", chalk.yellow],
+  ["info", chalk.cyan],
+  ["ignore", chalk.gray],
+]);
 
 const EXTRA_PATH_INFORMATION_INDENT = 6;
 
@@ -74,9 +74,9 @@ function formatViolation(pViolation) {
   );
 
   return (
-    `${SEVERITY2CHALK[pViolation.rule.severity](pViolation.rule.severity)} ${
-      pViolation.rule.name
-    }: ${lFormattedViolators}` +
+    `${SEVERITY2CHALK.get(pViolation.rule.severity)(
+      pViolation.rule.severity
+    )} ${pViolation.rule.name}: ${lFormattedViolators}` +
     `${
       pViolation.comment
         ? `${EOL}${wrapAndIndent(chalk.dim(pViolation.comment))}${EOL}`
