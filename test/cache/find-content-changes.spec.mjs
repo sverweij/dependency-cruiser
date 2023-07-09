@@ -31,8 +31,8 @@ describe("[U] cache/find-content-changes - cached vs new", () => {
           exclude: {},
           includeOnly: {},
           extensions: new Set([".js"]),
-        }
-      )
+        },
+      ),
     ).to.deep.equal([
       {
         name: "consolidated",
@@ -63,8 +63,8 @@ describe("[U] cache/find-content-changes - cached vs new", () => {
           exclude: {},
           includeOnly: {},
           extensions: new Set([".js"]),
-        }
-      )
+        },
+      ),
     ).to.deep.equal([
       {
         name: "only-in-cache-ends-up-as-deleted.js",
@@ -91,8 +91,8 @@ describe("[U] cache/find-content-changes - cached vs new", () => {
           exclude: {},
           includeOnly: {},
           extensions: new Set([".js"]),
-        }
-      )
+        },
+      ),
     ).to.deep.equal([
       {
         name: "not-in-content-changes-as-extension.weird",
@@ -121,8 +121,8 @@ describe("[U] cache/find-content-changes - cached vs new", () => {
           exclude: {},
           includeOnly: {},
           extensions: new Set([".js"]),
-        }
-      )
+        },
+      ),
     ).to.deep.equal([
       {
         name: "in-folder-as-well-different-checksum.js",
@@ -154,8 +154,8 @@ describe("[U] cache/find-content-changes - cached vs new", () => {
           exclude: {},
           includeOnly: {},
           extensions: new Set([".js"]),
-        }
-      )
+        },
+      ),
     ).to.deep.equal([
       {
         name: "in-folder-as-well-unmodified.js",
@@ -177,8 +177,8 @@ describe("[U] cache/find-content-changes - new vs cached", () => {
           exclude: {},
           includeOnly: {},
           extensions: new Set([".js"]),
-        }
-      )
+        },
+      ),
     ).to.deep.equal([]);
   });
 
@@ -192,8 +192,8 @@ describe("[U] cache/find-content-changes - new vs cached", () => {
           exclude: {},
           includeOnly: {},
           extensions: new Set([".js"]),
-        }
-      )
+        },
+      ),
     ).to.deep.equal([
       {
         name: "interesting-extension.js",
@@ -212,8 +212,8 @@ describe("[U] cache/find-content-changes - new vs cached", () => {
           baseDir: "test/cache/__mocks__/find-content-changes/extensions-only",
           exclude: {},
           extensions: new Set([".js"]),
-        }
-      )
+        },
+      ),
     ).to.deep.equal([
       {
         name: "interesting-extension.js",
@@ -233,8 +233,8 @@ describe("[U] cache/find-content-changes - new vs cached", () => {
           exclude: { path: "^excluded-.*" },
           includeOnly: {},
           extensions: new Set([".js"]),
-        }
-      )
+        },
+      ),
     ).to.deep.equal([
       {
         name: "interesting-extension.js",
@@ -255,8 +255,8 @@ describe("[U] cache/find-content-changes - new vs cached", () => {
           exclude: {},
           includeOnly: { path: "^interesting-.*" },
           extensions: new Set([".js"]),
-        }
-      )
+        },
+      ),
     ).to.deep.equal([
       {
         name: "interesting-as-well.js",

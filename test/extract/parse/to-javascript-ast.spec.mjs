@@ -35,14 +35,14 @@ describe("[U] extract/parse/to-javascript-ast", () => {
             isolatedModules: true,
           },
         },
-      }
+      },
     );
     expect(
       get(
         lFoundAST,
         "body[0].declarations[0].init.body.type",
-        "not a jsx element"
-      )
+        "not a jsx element",
+      ),
     ).to.equal("JSXElement");
   });
 
@@ -65,31 +65,31 @@ describe("[U] extract/parse/to-javascript-ast", () => {
             isolatedModules: true,
           },
         },
-      }
+      },
     );
 
     const likelyTheArrowExpression = get(
       lFoundAST,
       "body[0].declarations.[0].init",
-      {}
+      {},
     );
     expect(likelyTheArrowExpression.type).to.equal("ArrowFunctionExpression");
     expect(
       get(
         likelyTheArrowExpression,
         "body.callee.type",
-        "not a member expression"
-      )
+        "not a member expression",
+      ),
     ).to.equal("MemberExpression");
     expect(
-      get(likelyTheArrowExpression, "body.callee.object.name", "not react")
+      get(likelyTheArrowExpression, "body.callee.object.name", "not react"),
     ).to.equal("React");
     expect(
       get(
         likelyTheArrowExpression,
         "body.callee.property.name",
-        "not createElement"
-      )
+        "not createElement",
+      ),
     ).to.equal("createElement");
   });
 });

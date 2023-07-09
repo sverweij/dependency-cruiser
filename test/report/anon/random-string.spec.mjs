@@ -32,7 +32,7 @@ describe("[U] report/anon/random-string", () => {
 
   it("returns a lower case ascii character when passed a single character", () => {
     expect(randomString("better-someStuff_operator")).to.match(
-      /[a-z]{6}-[a-z]{4}[A-Z][a-z]{4}_[a-z]{8}/
+      /[a-z]{6}-[a-z]{4}[A-Z][a-z]{4}_[a-z]{8}/,
     );
   });
 });

@@ -12,7 +12,7 @@ describe("[U] config-utl/mergeRuleSets - general", () => {
 describe("[U] config-utl/mergeRuleSets - forbidden", () => {
   it("extending empty forbidden yields that forbidden", () => {
     expect(
-      merge({ forbidden: [{ from: "src", to: "test" }] }, {})
+      merge({ forbidden: [{ from: "src", to: "test" }] }, {}),
     ).to.deep.equal({
       forbidden: [{ from: "src", to: "test" }],
       options: {},
@@ -23,8 +23,8 @@ describe("[U] config-utl/mergeRuleSets - forbidden", () => {
     expect(
       merge(
         { forbidden: [{ from: "src", to: "test" }] },
-        { forbidden: [{ from: "src", to: "test" }] }
-      )
+        { forbidden: [{ from: "src", to: "test" }] },
+      ),
     ).to.deep.equal({
       forbidden: [{ from: "src", to: "test" }],
       options: {},
@@ -33,7 +33,7 @@ describe("[U] config-utl/mergeRuleSets - forbidden", () => {
 
   it("extending forbidden with nothing yields that the base forbidden (dedup)", () => {
     expect(
-      merge({}, { forbidden: [{ from: "src", to: "test" }] })
+      merge({}, { forbidden: [{ from: "src", to: "test" }] }),
     ).to.deep.equal({
       forbidden: [{ from: "src", to: "test" }],
       options: {},
@@ -44,8 +44,8 @@ describe("[U] config-utl/mergeRuleSets - forbidden", () => {
     expect(
       merge(
         { forbidden: [{ from: "bin", to: "test" }] },
-        { forbidden: [{ from: "src", to: "test" }] }
-      )
+        { forbidden: [{ from: "src", to: "test" }] },
+      ),
     ).to.deep.equal({
       forbidden: [
         { from: "bin", to: "test" },
@@ -59,8 +59,8 @@ describe("[U] config-utl/mergeRuleSets - forbidden", () => {
     expect(
       merge(
         { forbidden: [{ name: "already-in-base", from: "bin", to: "test" }] },
-        { forbidden: [{ name: "already-in-base", from: "src", to: "test" }] }
-      )
+        { forbidden: [{ name: "already-in-base", from: "src", to: "test" }] },
+      ),
     ).to.deep.equal({
       forbidden: [{ name: "already-in-base", from: "bin", to: "test" }],
       options: {},
@@ -88,8 +88,8 @@ describe("[U] config-utl/mergeRuleSets - forbidden", () => {
               to: { path: "test" },
             },
           ],
-        }
-      )
+        },
+      ),
     ).to.deep.equal({
       forbidden: [
         {
@@ -124,8 +124,8 @@ describe("[U] config-utl/mergeRuleSets - forbidden", () => {
               to: { path: "test" },
             },
           ],
-        }
-      )
+        },
+      ),
     ).to.deep.equal({
       forbidden: [
         {
@@ -151,8 +151,8 @@ describe("[U] config-utl/mergeRuleSets - forbidden", () => {
               to: { path: "test" },
             },
           ],
-        }
-      )
+        },
+      ),
     ).to.deep.equal({
       forbidden: [
         {
@@ -170,8 +170,8 @@ describe("[U] config-utl/mergeRuleSets - forbidden", () => {
     expect(
       merge(
         { forbidden: [{ name: "not-in-base", from: "bin", to: "test" }] },
-        { forbidden: [{ name: "already-in-base", from: "src", to: "test" }] }
-      )
+        { forbidden: [{ name: "already-in-base", from: "src", to: "test" }] },
+      ),
     ).to.deep.equal({
       forbidden: [
         { name: "not-in-base", from: "bin", to: "test" },
@@ -189,7 +189,7 @@ describe("[U] config-utl/mergeRuleSets - allowed", () => {
         allowed: [{ from: "test", to: "src" }],
         allowedSeverity: "warn",
         options: {},
-      }
+      },
     );
   });
 
@@ -197,8 +197,8 @@ describe("[U] config-utl/mergeRuleSets - allowed", () => {
     expect(
       merge(
         { allowed: [{ from: "test", to: "src" }] },
-        { allowed: [{ from: "test", to: "src" }] }
-      )
+        { allowed: [{ from: "test", to: "src" }] },
+      ),
     ).to.deep.equal({
       allowed: [{ from: "test", to: "src" }],
       allowedSeverity: "warn",
@@ -212,7 +212,7 @@ describe("[U] config-utl/mergeRuleSets - allowed", () => {
         allowed: [{ from: "test", to: "src" }],
         allowedSeverity: "warn",
         options: {},
-      }
+      },
     );
   });
 
@@ -220,8 +220,8 @@ describe("[U] config-utl/mergeRuleSets - allowed", () => {
     expect(
       merge(
         { allowed: [{ from: "bin", to: "test" }] },
-        { allowed: [{ from: "src", to: "test" }] }
-      )
+        { allowed: [{ from: "src", to: "test" }] },
+      ),
     ).to.deep.equal({
       allowedSeverity: "warn",
       allowed: [
@@ -242,7 +242,7 @@ describe("[U] config-utl/mergeRuleSets - allowedSeverity", () => {
 
   it("extending empty set with allowed + allowedSeverity error yields allowedSeverity error", () => {
     expect(
-      merge({}, { allowed: [{ from: {}, to: {} }], allowedSeverity: "error" })
+      merge({}, { allowed: [{ from: {}, to: {} }], allowedSeverity: "error" }),
     ).to.deep.equal({
       allowed: [{ from: {}, to: {} }],
       allowedSeverity: "error",
@@ -252,7 +252,7 @@ describe("[U] config-utl/mergeRuleSets - allowedSeverity", () => {
 
   it("extending allowedSeverity error with nothing yields allowedSeverity error", () => {
     expect(
-      merge({ allowed: [{ from: {}, to: {} }], allowedSeverity: "error" }, {})
+      merge({ allowed: [{ from: {}, to: {} }], allowedSeverity: "error" }, {}),
     ).to.deep.equal({
       allowed: [{ from: {}, to: {} }],
       allowedSeverity: "error",
@@ -264,8 +264,8 @@ describe("[U] config-utl/mergeRuleSets - allowedSeverity", () => {
     expect(
       merge(
         { allowedSeverity: "info" },
-        { allowed: [{ from: {}, to: {} }], allowedSeverity: "error" }
-      )
+        { allowed: [{ from: {}, to: {} }], allowedSeverity: "error" },
+      ),
     ).to.deep.equal({
       allowed: [{ from: {}, to: {} }],
       allowedSeverity: "info",
@@ -279,8 +279,8 @@ describe("[U] config-utl/mergeRuleSets - required", () => {
     expect(
       merge(
         { required: [{ name: "already-in-base", from: "bin", to: "test" }] },
-        { required: [{ name: "already-in-base", from: "src", to: "test" }] }
-      )
+        { required: [{ name: "already-in-base", from: "src", to: "test" }] },
+      ),
     ).to.deep.equal({
       required: [{ name: "already-in-base", from: "bin", to: "test" }],
       options: {},
@@ -291,8 +291,8 @@ describe("[U] config-utl/mergeRuleSets - required", () => {
     expect(
       merge(
         { required: [{ name: "only-in-base", from: "bin", to: "test" }] },
-        { required: [{ name: "only-in-extends", from: "src", to: "test" }] }
-      )
+        { required: [{ name: "only-in-extends", from: "src", to: "test" }] },
+      ),
     ).to.deep.equal({
       required: [
         { name: "only-in-base", from: "bin", to: "test" },
@@ -312,8 +312,8 @@ describe("[U] config-utl/mergeRuleSets - options", () => {
             tsConfig: { fileName: "./tsConfig.json" },
           },
         },
-        {}
-      )
+        {},
+      ),
     ).to.deep.equal({
       options: {
         doNotFollow: "node_modules",
@@ -333,8 +333,8 @@ describe("[U] config-utl/mergeRuleSets - options", () => {
             doNotFollow: "node_modules",
             tsConfig: { fileName: "./tsConfig.json" },
           },
-        }
-      )
+        },
+      ),
     ).to.deep.equal({
       options: {
         doNotFollow: "node_modules",
@@ -354,8 +354,8 @@ describe("[U] config-utl/mergeRuleSets - options", () => {
             doNotFollow: "node_modules",
             tsConfig: { fileName: "./tsConfig.json" },
           },
-        }
-      )
+        },
+      ),
     ).to.deep.equal({
       options: {
         doNotFollow: "node_modules",

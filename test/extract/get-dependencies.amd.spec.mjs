@@ -15,7 +15,7 @@ const requireJSON = createRequireJSON(import.meta.url);
 const amdFixtures = requireJSON("./__fixtures__/amd.json");
 const amdBangRequirejs = requireJSON("./__fixtures__/amd-bang-requirejs.json");
 const amdBangCJSWrapper = requireJSON(
-  "./__fixtures__/amd-bang-CJSWrapper.json"
+  "./__fixtures__/amd-bang-CJSWrapper.json",
 );
 
 let symlinkDirectory = join(__dirname, "__mocks__", "symlinked");
@@ -24,10 +24,10 @@ let symlinkDirectory = join(__dirname, "__mocks__", "symlinked");
 before((pCallback) => {
   symlinkDir(
     join(__dirname, "__mocks__", "symlinkTarget"),
-    symlinkDirectory
+    symlinkDirectory,
   ).then(
     () => pCallback(),
-    (pError) => pCallback(pError)
+    (pError) => pCallback(pError),
   );
 });
 
@@ -49,15 +49,15 @@ describe("[I] extract/getDependencies - AMD - with bangs", () => {
     const lOptions = normalizeCruiseOptions({ moduleSystems: ["amd"] });
     const lResolveOptions = await normalizeResolveOptions(
       { bustTheCache: true },
-      lOptions
+      lOptions,
     );
 
     expect(
       getDependencies(
         "test/extract/__mocks__/amd-bangs/root_one.js",
         lOptions,
-        lResolveOptions
-      )
+        lResolveOptions,
+      ),
     ).to.deep.equal(amdBangRequirejs);
   });
 
@@ -65,15 +65,15 @@ describe("[I] extract/getDependencies - AMD - with bangs", () => {
     const lOptions = normalizeCruiseOptions({ moduleSystems: ["amd"] });
     const lResolveOptions = await normalizeResolveOptions(
       { bustTheCache: true },
-      lOptions
+      lOptions,
     );
 
     expect(
       getDependencies(
         "test/extract/__mocks__/amd-bangs/simplified-commonjs-wrapper.js",
         lOptions,
-        lResolveOptions
-      )
+        lResolveOptions,
+      ),
     ).to.deep.equal(amdBangCJSWrapper);
   });
 });

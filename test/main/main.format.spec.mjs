@@ -5,7 +5,7 @@ import { createRequireJSON } from "../backwards.utl.mjs";
 
 const requireJSON = createRequireJSON(import.meta.url);
 const cruiseResult = requireJSON(
-  "./__mocks__/cruise-results-dc-2020-08-30-src-cli.json"
+  "./__mocks__/cruise-results-dc-2020-08-30-src-cli.json",
 );
 
 const MINIMAL_RESULT = {
@@ -34,7 +34,7 @@ describe("[E] main.format - format", () => {
       lErrorMessage = pError.message;
     }
     expect(lErrorMessage).to.contain(
-      "'not-a-valid-reporter' is not a valid output type."
+      "'not-a-valid-reporter' is not a valid output type.",
     );
   });
 
@@ -46,7 +46,7 @@ describe("[E] main.format - format", () => {
       lErrorMessage = pError.message;
     }
     expect(lErrorMessage).to.contain(
-      "The supplied dependency-cruiser result is not valid:"
+      "The supplied dependency-cruiser result is not valid:",
     );
   });
 
@@ -58,14 +58,14 @@ describe("[E] main.format - format", () => {
       lErrorMessage = pError.message;
     }
     expect(lErrorMessage).to.contain(
-      "The supplied dependency-cruiser result is not valid: data must have required property 'summary'"
+      "The supplied dependency-cruiser result is not valid: data must have required property 'summary'",
     );
   });
 
   it("returns an error reporter formatted report when presented with a legal result", async () => {
     const lResult = await format(MINIMAL_RESULT, { outputType: "err" });
     expect(lResult.output).to.contain(
-      "no dependency violations found (0 modules, 0 dependencies cruised)"
+      "no dependency violations found (0 modules, 0 dependencies cruised)",
     );
   });
 
@@ -101,7 +101,7 @@ describe("[E] main.format - format", () => {
     });
     expect(lErrorLongResult.output).to.contain("cli-to-main-only-warn:");
     expect(lErrorLongResult.output).to.contain(
-      "This cli module depends on something not in the public interface"
+      "This cli module depends on something not in the public interface",
     );
   });
 
@@ -111,7 +111,7 @@ describe("[E] main.format - format", () => {
     });
     expect(lErrorResult.output).to.contain("cli-to-main-only-warn:");
     expect(lErrorResult.output).to.not.contain(
-      "This cli module depends on something not in the public interface"
+      "This cli module depends on something not in the public interface",
     );
   });
 

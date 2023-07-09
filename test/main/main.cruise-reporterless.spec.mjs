@@ -7,27 +7,27 @@ import { createRequireJSON } from "../backwards.utl.mjs";
 const requireJSON = createRequireJSON(import.meta.url);
 
 const commonjsFixtures = requireJSON(
-  "./__fixtures__/cruise-reporterless/commonjs.json"
+  "./__fixtures__/cruise-reporterless/commonjs.json",
 );
 const deprecationFixtures = requireJSON(
-  "./__fixtures__/cruise-reporterless/deprecated-node-module.json"
+  "./__fixtures__/cruise-reporterless/deprecated-node-module.json",
 );
 const bundledFixtures = requireJSON(
-  "./__fixtures__/cruise-reporterless/bundled-dependencies.json"
+  "./__fixtures__/cruise-reporterless/bundled-dependencies.json",
 );
 const amdFixtures = requireJSON("./__fixtures__/cruise-reporterless/amd.json");
 const typeScriptFixtures = requireJSON(
-  "./__fixtures__/cruise-reporterless/typescript.json"
+  "./__fixtures__/cruise-reporterless/typescript.json",
 );
 const vueFixtures = requireJSON("./__fixtures__/cruise-reporterless/vue.json");
 const coffeeFixtures = requireJSON(
-  "./__fixtures__/cruise-reporterless/coffee.json"
+  "./__fixtures__/cruise-reporterless/coffee.json",
 );
 const metricsFixtures = requireJSON(
-  "./__fixtures__/cruise-reporterless/metrics.json"
+  "./__fixtures__/cruise-reporterless/metrics.json",
 );
 const folderFixtures = requireJSON(
-  "./__fixtures__/cruise-reporterless/folder.json"
+  "./__fixtures__/cruise-reporterless/folder.json",
 );
 
 use(chaiJSONSchema);
@@ -42,7 +42,7 @@ function runFixture(pFixture) {
           bustTheCache: true,
           resolveLicenses: true,
           resolveDeprecations: true,
-        }
+        },
       );
 
       expect(lResult.output).to.be.jsonSchema(cruiseResultSchema);

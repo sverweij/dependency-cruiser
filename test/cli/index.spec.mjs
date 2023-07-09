@@ -117,7 +117,7 @@ const TEST_PAIRS = [
         options: {
           baseDir: join(
             process.cwd(),
-            "test/cli/__fixtures__/alternate-basedir"
+            "test/cli/__fixtures__/alternate-basedir",
           ),
         },
       },
@@ -156,7 +156,7 @@ function setModuleType(pTestPairs, pModuleType) {
     let lReturnValue = {
       description: pTestPair.description.replace(
         /{{moduleType}}/g,
-        pModuleType
+        pModuleType,
       ),
       dirOrFile: pTestPair.dirOrFile.replace(/{{moduleType}}/g, pModuleType),
       expect: pTestPair.expect.replace(/{{moduleType}}/g, pModuleType),
@@ -167,7 +167,7 @@ function setModuleType(pTestPairs, pModuleType) {
     lReturnValue.options = { ...pTestPair.options };
     lReturnValue.options.outputTo = pTestPair.options.outputTo.replace(
       /{{moduleType}}/g,
-      pModuleType
+      pModuleType,
     );
     if (Boolean(pTestPair.options.moduleSystems)) {
       lReturnValue.options.moduleSystems =
@@ -187,12 +187,12 @@ function runFileBasedTests(pModuleType) {
       if (pPair.options.outputType === "json") {
         assertJSONFileEqual(
           pPair.options.outputTo,
-          path.join(FIX_DIR, pPair.expect)
+          path.join(FIX_DIR, pPair.expect),
         );
       } else {
         assertFileEqual(
           pPair.options.outputTo,
-          path.join(FIX_DIR, pPair.expect)
+          path.join(FIX_DIR, pPair.expect),
         );
       }
     });
@@ -229,7 +229,7 @@ describe("[E] cli/index", () => {
         {
           outputTo: lOutputTo,
           outputType: "json",
-        }
+        },
       );
 
       expect(lExitCode).to.equal(0);
@@ -273,7 +273,7 @@ describe("[E] cli/index", () => {
 
       expect(lExitCode).to.equal(0);
       expect(lCapturedStdout).to.contain(
-        "If you need a supported, but not enabled transpiler"
+        "If you need a supported, but not enabled transpiler",
       );
     });
 
@@ -294,7 +294,7 @@ describe("[E] cli/index", () => {
 
       expect(lExitCode).to.equal(1);
       expect(lCapturedStderr).to.contain(
-        "ERROR: Can't open 'this-doesnot-exist' for reading. Does it exist?\n"
+        "ERROR: Can't open 'this-doesnot-exist' for reading. Does it exist?\n",
       );
     });
 
@@ -318,7 +318,7 @@ describe("[E] cli/index", () => {
 
       expect(lExitCode).to.equal(1);
       expect(lCapturedStderr).to.contain(
-        "didn't work. Error: ENOENT: no such file or directory, open"
+        "didn't work. Error: ENOENT: no such file or directory, open",
       );
     });
 
@@ -365,7 +365,7 @@ describe("[E] cli/index", () => {
 
       expect(lExitCode).to.equal(0);
       expect(lCapturedStdout).to.contain(
-        `Successfully created '${lValidationFileName}'`
+        `Successfully created '${lValidationFileName}'`,
       );
       deleteDammit(lValidationFileName);
     });
@@ -380,7 +380,7 @@ describe("[E] cli/index", () => {
           outputType: "json",
           webpackConfig:
             "test/cli/__fixtures__/webpackconfig/aliassy/webpack.regularexport.config.js",
-        }
+        },
       );
 
       expect(lExitCode).to.equal(0);
@@ -397,7 +397,7 @@ describe("[E] cli/index", () => {
           outputType: "json",
           validate:
             "test/cli/__fixtures__/webpackconfig/aliassy/dependency-cruiser-json-with-webpack-config.json",
-        }
+        },
       );
 
       expect(lExitCode).to.equal(0);
@@ -417,7 +417,7 @@ describe("[E] cli/index", () => {
         outputType: "json",
         tsConfig:
           "test/cli/__fixtures__/typescriptconfig/cli-dynamic-imports/tsconfig.compile_dynamic_imports.json",
-      }
+      },
     );
 
     expect(lExitCode).to.equal(0);
@@ -436,7 +436,7 @@ describe("[E] cli/index", () => {
         outputType: "json",
         tsConfig:
           "test/cli/__fixtures__/typescriptconfig/cli-dynamic-imports/tsconfig.error_on_compile_dynamic_imports.json",
-      }
+      },
     );
 
     expect(lExitCode).to.equal(0);
@@ -456,7 +456,7 @@ describe("[E] cli/index", () => {
           "test/cli/__fixtures__/typescriptconfig/cli-config-with-path/tsconfig.json",
         webpackConfig:
           "test/cli/__fixtures__/typescriptconfig/cli-config-with-path/webpack.config.js",
-      }
+      },
     );
 
     expect(lExitCode).to.equal(0);
@@ -478,7 +478,7 @@ describe("[E] cli/index", () => {
     expect(lExitCode).to.equal(0);
     assertJSONFileEqual(
       lOutputTo,
-      path.join(FIX_DIR, "babel", lOutputFileName)
+      path.join(FIX_DIR, "babel", lOutputFileName),
     );
   });
 
@@ -497,7 +497,7 @@ describe("[E] cli/index", () => {
     expect(lExitCode).to.equal(0);
     assertJSONFileEqual(
       lOutputTo,
-      path.join(FIX_DIR, "babel", lOutputFileName)
+      path.join(FIX_DIR, "babel", lOutputFileName),
     );
   });
 
@@ -512,7 +512,7 @@ describe("[E] cli/index", () => {
         outputTo: lOutputTo,
         outputType: "err",
         validate: "test/cli/__fixtures__/known-violations/config.js",
-      }
+      },
     );
 
     expect(lExitCode).to.equal(lExpectedAmountOfErrors);
@@ -536,7 +536,7 @@ describe("[E] cli/index", () => {
         outputType: "err",
         validate: "test/cli/__fixtures__/known-violations/config.js",
         ignoreKnown: "test/cli/__fixtures__/known-violations/known.json",
-      }
+      },
     );
 
     expect(lExitCode).to.equal(lExpectedAmountOfErrors);
@@ -544,7 +544,7 @@ describe("[E] cli/index", () => {
       lResult = readFileSync(lOutputTo, { encoding: "utf8" });
     }).to.not.throw();
     expect(lResult).to.contain(
-      "1 dependency violations (1 errors, 0 warnings). 6 modules, 3 dependencies cruised"
+      "1 dependency violations (1 errors, 0 warnings). 6 modules, 3 dependencies cruised",
     );
     expect(lResult).to.contain("1 known violations ignored");
   });
@@ -562,7 +562,7 @@ describe("[E] cli/index", () => {
         validate: "test/cli/__fixtures__/known-violations/config.js",
         ignoreKnown:
           "test/cli/__fixtures__/known-violations/invalid-known-violations-file.json",
-      }
+      },
     );
 
     expect(lExitCode).to.equal(lExpectedAmountOfErrors);

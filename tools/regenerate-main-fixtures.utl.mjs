@@ -12,14 +12,14 @@ const MAIN_MOCKS_DIR = join(__dirname, "..", "test", "main", "__mocks__");
 function barfTheJSON(
   pTargetFileName,
   pResult,
-  pTargetDirectory = MAIN_MOCKS_DIR
+  pTargetDirectory = MAIN_MOCKS_DIR,
 ) {
   writeFileSync(
     join(pTargetDirectory, pTargetFileName),
     prettier.format(JSON.stringify(pResult.output), { parser: "json" }),
     {
       encoding: "utf8",
-    }
+    },
   );
 }
 
@@ -27,17 +27,17 @@ function barfTheJSON(
 barfTheJSON(
   "ts.json",
   await main.cruise(["test/main/__mocks__/ts"]),
-  MAIN_FIXTURE_DIR
+  MAIN_FIXTURE_DIR,
 );
 barfTheJSON(
   "tsx.json",
   await main.cruise(["test/main/__mocks__/tsx"], {}, { bustTheCache: true }),
-  MAIN_FIXTURE_DIR
+  MAIN_FIXTURE_DIR,
 );
 barfTheJSON(
   "jsx.json",
   await main.cruise(["test/main/__mocks__/jsx"], {}, { bustTheCache: true }),
-  MAIN_FIXTURE_DIR
+  MAIN_FIXTURE_DIR,
 );
 barfTheJSON(
   "jsx-as-object.json",
@@ -46,9 +46,9 @@ barfTheJSON(
     {
       ruleSet: {},
     },
-    { bustTheCache: true }
+    { bustTheCache: true },
   ),
-  MAIN_FIXTURE_DIR
+  MAIN_FIXTURE_DIR,
 );
 barfTheJSON(
   "collapse-after-cruise/expected-result.json",
@@ -58,8 +58,8 @@ barfTheJSON(
       ruleSet: {},
       collapse: "^test/main/__mocks__/collapse-after-cruise/src/[^/]+",
     },
-    { bustTheCache: true }
-  )
+    { bustTheCache: true },
+  ),
 );
 
 // // main.cruise - tsPreCompilationDeps
@@ -81,9 +81,9 @@ barfTheJSON(
           module: "commonjs",
         },
       },
-    }
+    },
   ),
-  MAIN_FIXTURE_DIR
+  MAIN_FIXTURE_DIR,
 );
 
 barfTheJSON(
@@ -104,9 +104,9 @@ barfTheJSON(
           module: "commonjs",
         },
       },
-    }
+    },
   ),
-  MAIN_FIXTURE_DIR
+  MAIN_FIXTURE_DIR,
 );
 
 barfTheJSON(
@@ -127,9 +127,9 @@ barfTheJSON(
           module: "es6",
         },
       },
-    }
+    },
   ),
-  MAIN_FIXTURE_DIR
+  MAIN_FIXTURE_DIR,
 );
 
 barfTheJSON(
@@ -150,9 +150,9 @@ barfTheJSON(
           module: "es6",
         },
       },
-    }
+    },
   ),
-  MAIN_FIXTURE_DIR
+  MAIN_FIXTURE_DIR,
 );
 
 // main.cruise - dynamic imports
@@ -184,14 +184,14 @@ const DYNAMIC_IMPORTS_RULE_SET = {
 process.chdir("test/main/__mocks__/dynamic-imports/es");
 barfTheJSON(
   "dynamic-imports/es/output.json",
-  await main.cruise(["src"], DYNAMIC_IMPORTS_RULE_SET, { bustTheCache: true })
+  await main.cruise(["src"], DYNAMIC_IMPORTS_RULE_SET, { bustTheCache: true }),
 );
 process.chdir(WORKING_DIR);
 
 process.chdir("test/main/__mocks__/dynamic-imports/typescript");
 barfTheJSON(
   "dynamic-imports/typescript/output.json",
-  await main.cruise(["src"], DYNAMIC_IMPORTS_RULE_SET, { bustTheCache: true })
+  await main.cruise(["src"], DYNAMIC_IMPORTS_RULE_SET, { bustTheCache: true }),
 );
 process.chdir(WORKING_DIR);
 
@@ -201,8 +201,8 @@ barfTheJSON(
   await main.cruise(
     ["src"],
     { ...DYNAMIC_IMPORTS_RULE_SET, tsPreCompilationDeps: true },
-    { bustTheCache: true }
-  )
+    { bustTheCache: true },
+  ),
 );
 process.chdir(WORKING_DIR);
 
@@ -213,8 +213,8 @@ barfTheJSON(
   await main.cruise(
     ["src"],
     { tsPreCompilationDeps: true },
-    { bustTheCache: true, resolveLicenses: true }
-  )
+    { bustTheCache: true, resolveLicenses: true },
+  ),
 );
 process.chdir(WORKING_DIR);
 
@@ -224,8 +224,8 @@ barfTheJSON(
   await main.cruise(
     ["src"],
     { tsPreCompilationDeps: false },
-    { bustTheCache: true }
-  )
+    { bustTheCache: true },
+  ),
 );
 process.chdir(WORKING_DIR);
 
@@ -238,8 +238,8 @@ barfTheJSON(
     {
       tsPreCompilationDeps: true,
     },
-    { bustTheCache: true, resolveLicenses: false }
-  )
+    { bustTheCache: true, resolveLicenses: false },
+  ),
 );
 process.chdir(WORKING_DIR);
 
@@ -263,7 +263,7 @@ barfTheJSON(
       validate: true,
       tsPreCompilationDeps: true,
     },
-    { bustTheCache: true, resolveLicenses: false }
-  )
+    { bustTheCache: true, resolveLicenses: false },
+  ),
 );
 process.chdir(WORKING_DIR);

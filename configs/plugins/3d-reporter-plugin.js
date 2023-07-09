@@ -75,7 +75,7 @@ function formatFileName(pFileName) {
 }
 function formatDependency(pFrom, pTo) {
   return `${formatFileName(pFrom)} ${figures.arrowRight}</br>${formatFileName(
-    pTo
+    pTo,
   )}`;
 }
 
@@ -100,14 +100,14 @@ function render3DThing(pCruiseResult) {
           source: pCurrentModule.source,
           target: pDependency.resolved,
           label: formatDependency(pCurrentModule.source, pDependency.resolved),
-        }))
+        })),
       ),
-    []
+    [],
   );
 
   return TEMPLATE.replace(/@@NODES@@/g, JSON.stringify(lNodes)).replace(
     /@@LINKS@@/g,
-    JSON.stringify(lLinks)
+    JSON.stringify(lLinks),
   );
 }
 

@@ -46,42 +46,42 @@ describe("[U] graph-utl/rule-set - ruleSetHasLicenseRule", () => {
       ruleSetHasLicenseRule({
         forbidden: [{ from: {}, to: {} }],
         allowed: [{ from: {}, to: {} }],
-      })
+      }),
     ).to.equal(false);
   });
   it("returns true when rule set has a forbidden rule with a license attribute", () => {
     expect(
       ruleSetHasLicenseRule({
         forbidden: [{ from: {}, to: { license: "commercial" } }],
-      })
+      }),
     ).to.equal(true);
   });
   it("returns true when rule set doesn't have a forbidden rule with license like attributes", () => {
     expect(
       ruleSetHasLicenseRule({
         forbidden: [{ from: {}, to: { licenseNot: "" } }],
-      })
+      }),
     ).to.equal(true);
   });
   it("returns true when rule set has a forbidden rule with a licenseNot attribute", () => {
     expect(
       ruleSetHasLicenseRule({
         forbidden: [{ from: {}, to: { licenseNot: "MIT" } }],
-      })
+      }),
     ).to.equal(true);
   });
   it("returns true when rule set has an allowed rule with a license attribute", () => {
     expect(
       ruleSetHasLicenseRule({
         allowed: [{ from: {}, to: { license: "commercial" } }],
-      })
+      }),
     ).to.equal(true);
   });
   it("returns true when rule set has an allowed rule with a licenseNot attribute", () => {
     expect(
       ruleSetHasLicenseRule({
         allowed: [{ from: {}, to: { licenseNot: "MIT" } }],
-      })
+      }),
     ).to.equal(true);
   });
 });
@@ -95,7 +95,7 @@ describe("[U] graph-utl/rule-set - ruleSetHasDeprecation", () => {
       ruleSetHasDeprecationRule({
         forbidden: [{ from: {}, to: { dependencyTypes: ["npm"] } }],
         allowed: [{ from: {}, to: {} }],
-      })
+      }),
     ).to.equal(false);
   });
   it("returns true when there's a 'forbidden' rule that checks for external module deprecation", () => {
@@ -103,7 +103,7 @@ describe("[U] graph-utl/rule-set - ruleSetHasDeprecation", () => {
       ruleSetHasDeprecationRule({
         forbidden: [{ from: {}, to: { dependencyTypes: ["deprecated"] } }],
         allowed: [{ from: {}, to: {} }],
-      })
+      }),
     ).to.equal(true);
   });
   it("returns true when there's an 'allowed' rule that checks for external module deprecation", () => {
@@ -111,7 +111,7 @@ describe("[U] graph-utl/rule-set - ruleSetHasDeprecation", () => {
       ruleSetHasDeprecationRule({
         forbidden: [{ from: {}, to: {} }],
         allowed: [{ from: {}, to: { dependencyTypes: ["deprecated"] } }],
-      })
+      }),
     ).to.equal(true);
   });
 });

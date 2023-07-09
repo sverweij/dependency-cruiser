@@ -56,29 +56,29 @@ const USED_FROM_SNACKBAR_BETWEEN = {
 describe("[I] validate/match-module-rule - dependents", () => {
   it("rule without dependents restriction doesn't flag (implicit)", () => {
     expect(matchModuleRule.matchesDependentsRule(EMPTY_RULE, {})).to.equal(
-      false
+      false,
     );
   });
   it("rule without dependents restriction doesn't flag (explicit)", () => {
     expect(
-      matchModuleRule.matchesDependentsRule(EMPTY_RULE, { dependents: [] })
+      matchModuleRule.matchesDependentsRule(EMPTY_RULE, { dependents: [] }),
     ).to.equal(false);
   });
   it("rule with dependents doesn't match a module with no dependents attribute", () => {
     expect(matchModuleRule.matchesDependentsRule(ANY_DEPENDENTS, {})).to.equal(
-      false
+      false,
     );
   });
   it("rule that matches any dependents does match a module with a dependents attribute", () => {
     expect(
-      matchModuleRule.matchesDependentsRule(ANY_DEPENDENTS, { dependents: [] })
+      matchModuleRule.matchesDependentsRule(ANY_DEPENDENTS, { dependents: [] }),
     ).to.equal(true);
   });
   it("rule that matches any dependents does match a module with a dependents attribute (>1 dependent)", () => {
     expect(
       matchModuleRule.matchesDependentsRule(ANY_DEPENDENTS, {
         dependents: ["aap", "noot", "mies", "wim"],
-      })
+      }),
     ).to.equal(true);
   });
 
@@ -89,8 +89,8 @@ describe("[I] validate/match-module-rule - dependents", () => {
         {
           source: "src/utensils/simsalabim.ts",
           dependents: ["aap", "noot"],
-        }
-      )
+        },
+      ),
     ).to.equal(false);
   });
 
@@ -101,8 +101,8 @@ describe("[I] validate/match-module-rule - dependents", () => {
         {
           source: "src/utensils/simsalabim.ts",
           dependents: ["aap"],
-        }
-      )
+        },
+      ),
     ).to.equal(true);
   });
 
@@ -113,8 +113,8 @@ describe("[I] validate/match-module-rule - dependents", () => {
         {
           source: "src/utensils/simsalabim.ts",
           dependents: [],
-        }
-      )
+        },
+      ),
     ).to.equal(true);
   });
 
@@ -123,7 +123,7 @@ describe("[I] validate/match-module-rule - dependents", () => {
       matchModuleRule.matchesDependentsRule(MUST_BE_SHARED_FROM_SNACKBAR, {
         source: "src/utensils/frieten.ts",
         dependents: ["src/snackbar/kapsalon.ts", "src/snackbar/zijspan.ts"],
-      })
+      }),
     ).to.equal(false);
   });
 
@@ -137,7 +137,7 @@ describe("[I] validate/match-module-rule - dependents", () => {
           "src/fietsenwinkel/index.ts",
           "src/fietsenwinkel/index.ts",
         ],
-      })
+      }),
     ).to.equal(false);
   });
 
@@ -149,7 +149,7 @@ describe("[I] validate/match-module-rule - dependents", () => {
           "src/snackbar/kapsalon.ts",
           "src/fietsenwinkel/zijspan.ts",
         ],
-      })
+      }),
     ).to.equal(true);
   });
 
@@ -163,8 +163,8 @@ describe("[I] validate/match-module-rule - dependents", () => {
             "src/snackbar/kapsalon.ts",
             "src/fietsenwinkel/zijspan.ts",
           ],
-        }
-      )
+        },
+      ),
     ).to.equal(true);
   });
 
@@ -175,8 +175,8 @@ describe("[I] validate/match-module-rule - dependents", () => {
         {
           source: "src/utensils/frieten.ts",
           dependents: ["src/snackbar/kapsalon.ts", "src/snackbar/zijspan.ts"],
-        }
-      )
+        },
+      ),
     ).to.equal(true);
   });
 
@@ -187,8 +187,8 @@ describe("[I] validate/match-module-rule - dependents", () => {
         {
           source: "src/utensils/frieten.ts",
           dependents: ["src/snackbar/kapsalon.ts", "src/snackbar/zijspan.ts"],
-        }
-      )
+        },
+      ),
     ).to.equal(false);
   });
 
@@ -204,8 +204,8 @@ describe("[I] validate/match-module-rule - dependents", () => {
             "src/snackbar/dooierat.ts",
             "src/snackbar/kipcorn.ts",
           ],
-        }
-      )
+        },
+      ),
     ).to.equal(false);
   });
 
@@ -219,7 +219,7 @@ describe("[I] validate/match-module-rule - dependents", () => {
           "src/snackbar/dooierat.ts",
           "src/snackbar/kipcorn.ts",
         ],
-      })
+      }),
     ).to.equal(false);
   });
 
@@ -234,7 +234,7 @@ describe("[I] validate/match-module-rule - dependents", () => {
           "src/snackbar/kipcorn.ts",
           "src/snackbar/bereklauw.ts",
         ],
-      })
+      }),
     ).to.equal(false);
   });
 });

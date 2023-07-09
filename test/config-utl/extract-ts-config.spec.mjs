@@ -22,7 +22,7 @@ describe("[I] config-utl/extract-ts-config - flatten typescript config - simple 
   it("throws when a config file is passed that does not contain valid json", () => {
     expect(() => {
       loadTSConfig(
-        getFullPath("./__mocks__/typescriptconfig/tsconfig.invalid.json")
+        getFullPath("./__mocks__/typescriptconfig/tsconfig.invalid.json"),
       );
     }).to.throw();
   });
@@ -30,11 +30,11 @@ describe("[I] config-utl/extract-ts-config - flatten typescript config - simple 
   it("returns an empty object when an empty config file is passed", () => {
     expect(
       loadTSConfig(
-        getFullPath("./__mocks__/typescriptconfig/tsconfig.empty.json")
-      ).options
+        getFullPath("./__mocks__/typescriptconfig/tsconfig.empty.json"),
+      ).options,
     ).to.deep.equal({
       configFilePath: pathToPosix(
-        getFullPath("./__mocks__/typescriptconfig/tsconfig.empty.json")
+        getFullPath("./__mocks__/typescriptconfig/tsconfig.empty.json"),
       ),
     });
   });
@@ -42,11 +42,11 @@ describe("[I] config-utl/extract-ts-config - flatten typescript config - simple 
   it("returns an empty object when an empty config file with comments is passed", () => {
     expect(
       loadTSConfig(
-        getFullPath("./__mocks__/typescriptconfig/tsconfig.withcomments.json")
-      ).options
+        getFullPath("./__mocks__/typescriptconfig/tsconfig.withcomments.json"),
+      ).options,
     ).to.deep.equal({
       configFilePath: pathToPosix(
-        getFullPath("./__mocks__/typescriptconfig/tsconfig.withcomments.json")
+        getFullPath("./__mocks__/typescriptconfig/tsconfig.withcomments.json"),
       ),
     });
   });
@@ -55,14 +55,14 @@ describe("[I] config-utl/extract-ts-config - flatten typescript config - simple 
     expect(
       loadTSConfig(
         getFullPath(
-          "./__mocks__/typescriptconfig/tsconfig.asgeneratedbydefault.json"
-        )
-      ).options
+          "./__mocks__/typescriptconfig/tsconfig.asgeneratedbydefault.json",
+        ),
+      ).options,
     ).to.deep.equal({
       configFilePath: pathToPosix(
         getFullPath(
-          "./__mocks__/typescriptconfig/tsconfig.asgeneratedbydefault.json"
-        )
+          "./__mocks__/typescriptconfig/tsconfig.asgeneratedbydefault.json",
+        ),
       ),
       esModuleInterop: true,
       module: 1,
@@ -77,8 +77,8 @@ describe("[I] config-utl/extract-ts-config - flatten typescript config - 'extend
     expect(() => {
       loadTSConfig(
         getFullPath(
-          "./__mocks__/typescriptconfig/tsconfig.extendsnonexisting.json"
-        )
+          "./__mocks__/typescriptconfig/tsconfig.extendsnonexisting.json",
+        ),
       );
     }).to.throw();
   });
@@ -86,21 +86,21 @@ describe("[I] config-utl/extract-ts-config - flatten typescript config - 'extend
   it("throws when a config file is passed that has a circular reference", () => {
     expect(() => {
       loadTSConfig(
-        getFullPath("./__mocks__/typescriptconfig/tsconfig.circular.json")
+        getFullPath("./__mocks__/typescriptconfig/tsconfig.circular.json"),
       );
     }).to.throw(
-      "error TS18000: Circularity detected while resolving configuration"
+      "error TS18000: Circularity detected while resolving configuration",
     );
   });
 
   it("returns an empty object (even no 'extend') when a config with an extend to an empty base is passed", () => {
     expect(
       loadTSConfig(
-        getFullPath("./__mocks__/typescriptconfig/tsconfig.simpleextends.json")
-      ).options
+        getFullPath("./__mocks__/typescriptconfig/tsconfig.simpleextends.json"),
+      ).options,
     ).to.deep.equal({
       configFilePath: pathToPosix(
-        getFullPath("./__mocks__/typescriptconfig/tsconfig.simpleextends.json")
+        getFullPath("./__mocks__/typescriptconfig/tsconfig.simpleextends.json"),
       ),
     });
   });
@@ -108,15 +108,15 @@ describe("[I] config-utl/extract-ts-config - flatten typescript config - 'extend
   it("returns an object with properties from base, extends & overrides from extends - non-compilerOptions", () => {
     const lParseResult = loadTSConfig(
       getFullPath(
-        "./__mocks__/typescriptconfig/tsconfig.noncompileroptionsextends.json"
-      )
+        "./__mocks__/typescriptconfig/tsconfig.noncompileroptionsextends.json",
+      ),
     );
     const lWildCardDirectories = {};
 
     lWildCardDirectories[
       // from TypeScript 4 the key name is lower case ¯\_(ツ)_/¯
       pathToPosix(
-        getFullPath("./__mocks__/typescriptconfig/override from extends here")
+        getFullPath("./__mocks__/typescriptconfig/override from extends here"),
       ).toLowerCase()
     ] = 1;
 
@@ -127,8 +127,8 @@ describe("[I] config-utl/extract-ts-config - flatten typescript config - 'extend
       options: {
         configFilePath: pathToPosix(
           getFullPath(
-            "__mocks__/typescriptconfig/tsconfig.noncompileroptionsextends.json"
-          )
+            "__mocks__/typescriptconfig/tsconfig.noncompileroptionsextends.json",
+          ),
         ),
       },
       fileNames: [
@@ -163,14 +163,14 @@ describe("[I] config-utl/extract-ts-config - flatten typescript config - 'extend
     expect(
       loadTSConfig(
         getFullPath(
-          "./__mocks__/typescriptconfig/tsconfig.compileroptionsextends.json"
-        )
-      ).options
+          "./__mocks__/typescriptconfig/tsconfig.compileroptionsextends.json",
+        ),
+      ).options,
     ).to.deep.equal({
       configFilePath: pathToPosix(
         getFullPath(
-          "./__mocks__/typescriptconfig/tsconfig.compileroptionsextends.json"
-        )
+          "./__mocks__/typescriptconfig/tsconfig.compileroptionsextends.json",
+        ),
       ),
       // only in extends:
       allowJs: true,
@@ -189,14 +189,14 @@ describe("[I] config-utl/extract-ts-config - flatten typescript config - 'extend
     expect(
       loadTSConfig(
         getFullPath(
-          "./__mocks__/typescriptconfig/tsconfig.compileroptionsextendslib.json"
-        )
-      ).options
+          "./__mocks__/typescriptconfig/tsconfig.compileroptionsextendslib.json",
+        ),
+      ).options,
     ).to.deep.equal({
       configFilePath: pathToPosix(
         getFullPath(
-          "./__mocks__/typescriptconfig/tsconfig.compileroptionsextendslib.json"
-        )
+          "./__mocks__/typescriptconfig/tsconfig.compileroptionsextendslib.json",
+        ),
       ),
       lib: [
         // "dom.iterable",

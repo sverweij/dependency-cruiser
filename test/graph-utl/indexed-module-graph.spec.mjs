@@ -21,7 +21,7 @@ describe("[U] graph-utl/indexed-module-graph - findModuleByName", () => {
   it("searching for an existing module yields that module", () => {
     const graph = new IndexedModuleGraph(unIndexedModules);
     expect(
-      graph.findModuleByName("src/report/dot/default-theme.js")
+      graph.findModuleByName("src/report/dot/default-theme.js"),
     ).to.deep.equal({
       source: "src/report/dot/default-theme.js",
       dependencies: [],
@@ -43,28 +43,28 @@ describe("[U] graph-utl/indexed-module-graph - findTransitiveDependents", () => 
   it("returns an empty array when asking for a non-existing module", () => {
     const graph = new IndexedModuleGraph(unIndexedModules);
     expect(
-      graph.findTransitiveDependents("this-module-does-not-exist.mjs")
+      graph.findTransitiveDependents("this-module-does-not-exist.mjs"),
     ).to.deep.equal([]);
   });
 
   it("returns just the module itself when the 'dependents' de-normalized attribute isn't in the graph", () => {
     const graph = new IndexedModuleGraph(unIndexedModulesWithoutDependents);
     expect(
-      graph.findTransitiveDependents("src/report/dot/default-theme.js")
+      graph.findTransitiveDependents("src/report/dot/default-theme.js"),
     ).to.deep.equal(["src/report/dot/default-theme.js"]);
   });
 
   it("finds just the module itself when there's no transitive dependents", () => {
     const graph = new IndexedModuleGraph(unIndexedModules);
     expect(graph.findTransitiveDependents("src/report/index.js")).to.deep.equal(
-      ["src/report/index.js"]
+      ["src/report/index.js"],
     );
   });
 
   it("finds transitive dependents for an existing module with actual transitive dependents", () => {
     const graph = new IndexedModuleGraph(unIndexedModules);
     expect(
-      graph.findTransitiveDependents("src/report/dot/default-theme.js")
+      graph.findTransitiveDependents("src/report/dot/default-theme.js"),
     ).to.deep.equal([
       "src/report/dot/default-theme.js",
       "src/report/dot/theming.js",
@@ -80,7 +80,7 @@ describe("[U] graph-utl/indexed-module-graph - findTransitiveDependents", () => 
   it("same, but with a max depth of 1", () => {
     const graph = new IndexedModuleGraph(unIndexedModules);
     expect(
-      graph.findTransitiveDependents("src/report/dot/default-theme.js", 1)
+      graph.findTransitiveDependents("src/report/dot/default-theme.js", 1),
     ).to.deep.equal([
       "src/report/dot/default-theme.js",
       "src/report/dot/theming.js",
@@ -90,7 +90,7 @@ describe("[U] graph-utl/indexed-module-graph - findTransitiveDependents", () => 
   it("same, but with a max depth of 2", () => {
     const graph = new IndexedModuleGraph(unIndexedModules);
     expect(
-      graph.findTransitiveDependents("src/report/dot/default-theme.js", 2)
+      graph.findTransitiveDependents("src/report/dot/default-theme.js", 2),
     ).to.deep.equal([
       "src/report/dot/default-theme.js",
       "src/report/dot/theming.js",
@@ -102,7 +102,7 @@ describe("[U] graph-utl/indexed-module-graph - findTransitiveDependents", () => 
   it("same, but with a max depth of 3", () => {
     const graph = new IndexedModuleGraph(unIndexedModules);
     expect(
-      graph.findTransitiveDependents("src/report/dot/default-theme.js", 3)
+      graph.findTransitiveDependents("src/report/dot/default-theme.js", 3),
     ).to.deep.equal([
       "src/report/dot/default-theme.js",
       "src/report/dot/theming.js",
@@ -118,7 +118,7 @@ describe("[U] graph-utl/indexed-module-graph - findTransitiveDependents", () => 
   it("same, but with a max depth of 4 (as there's nothing beyond depth 3 - will yield same as max depth 3", () => {
     const graph = new IndexedModuleGraph(unIndexedModules);
     expect(
-      graph.findTransitiveDependents("src/report/dot/default-theme.js", 4)
+      graph.findTransitiveDependents("src/report/dot/default-theme.js", 4),
     ).to.deep.equal([
       "src/report/dot/default-theme.js",
       "src/report/dot/theming.js",
@@ -136,21 +136,21 @@ describe("[U] graph-utl/indexed-module-graph - findTransitiveDependencies", () =
   it("returns an empty array when asking for a non-existing module", () => {
     const graph = new IndexedModuleGraph(unIndexedModules);
     expect(
-      graph.findTransitiveDependencies("this-module-does-not-exist.mjs")
+      graph.findTransitiveDependencies("this-module-does-not-exist.mjs"),
     ).to.deep.equal([]);
   });
 
   it("finds just the module itself when there's no transitive dependencies", () => {
     const graph = new IndexedModuleGraph(unIndexedModules);
     expect(
-      graph.findTransitiveDependencies("src/report/dot/default-theme.js")
+      graph.findTransitiveDependencies("src/report/dot/default-theme.js"),
     ).to.deep.equal(["src/report/dot/default-theme.js"]);
   });
 
   it("finds transitive dependencies for an existing module with actual transitive dependents", () => {
     const graph = new IndexedModuleGraph(unIndexedModules);
     expect(
-      graph.findTransitiveDependencies("src/report/error-html/index.js")
+      graph.findTransitiveDependencies("src/report/error-html/index.js"),
     ).to.deep.equal([
       "src/report/error-html/index.js",
       "src/report/error-html/error-html.template.js",
@@ -166,8 +166,8 @@ describe("[U] graph-utl/indexed-module-graph - findTransitiveDependencies", () =
     expect(
       graph.findTransitiveDependencies(
         "src/report/error-html/index.js",
-        lDirectDependenciesOnlyDepth
-      )
+        lDirectDependenciesOnlyDepth,
+      ),
     ).to.deep.equal([
       "src/report/error-html/index.js",
       "src/report/error-html/error-html.template.js",
@@ -179,7 +179,7 @@ describe("[U] graph-utl/indexed-module-graph - findTransitiveDependencies", () =
     const graph = new IndexedModuleGraph(unIndexedModules);
 
     expect(
-      graph.findTransitiveDependencies("src/report/anon/index.js", 1)
+      graph.findTransitiveDependencies("src/report/anon/index.js", 1),
     ).to.deep.equal([
       "src/report/anon/index.js",
       "src/report/anon/anonymize-path.js",
@@ -190,7 +190,7 @@ describe("[U] graph-utl/indexed-module-graph - findTransitiveDependencies", () =
     const graph = new IndexedModuleGraph(unIndexedModules);
 
     expect(
-      graph.findTransitiveDependencies("src/report/anon/index.js", 2)
+      graph.findTransitiveDependencies("src/report/anon/index.js", 2),
     ).to.deep.equal([
       "src/report/anon/index.js",
       "src/report/anon/anonymize-path.js",
@@ -202,7 +202,7 @@ describe("[U] graph-utl/indexed-module-graph - findTransitiveDependencies", () =
     const graph = new IndexedModuleGraph(unIndexedModules);
 
     expect(
-      graph.findTransitiveDependencies("src/report/anon/index.js", 3)
+      graph.findTransitiveDependencies("src/report/anon/index.js", 3),
     ).to.deep.equal([
       "src/report/anon/index.js",
       "src/report/anon/anonymize-path.js",
@@ -215,7 +215,7 @@ describe("[U] graph-utl/indexed-module-graph - findTransitiveDependencies", () =
     const graph = new IndexedModuleGraph(unIndexedModules);
 
     expect(
-      graph.findTransitiveDependencies("src/report/anon/index.js", 4)
+      graph.findTransitiveDependencies("src/report/anon/index.js", 4),
     ).to.deep.equal([
       "src/report/anon/index.js",
       "src/report/anon/anonymize-path.js",
@@ -228,7 +228,7 @@ describe("[U] graph-utl/indexed-module-graph - findTransitiveDependencies", () =
 describe("[U] graph-utl/indexed-module-graph - getPath", () => {
   it("does not explode when passed an empty graph", () => {
     expect(
-      new IndexedModuleGraph([]).getPath("./src/index.js", "./src/hajoo.js")
+      new IndexedModuleGraph([]).getPath("./src/index.js", "./src/hajoo.js"),
     ).to.deep.equal([]);
   });
 
@@ -241,7 +241,10 @@ describe("[U] graph-utl/indexed-module-graph - getPath", () => {
     ];
 
     expect(
-      new IndexedModuleGraph(lGraph).getPath("./src/index.js", "./src/hajoo.js")
+      new IndexedModuleGraph(lGraph).getPath(
+        "./src/index.js",
+        "./src/hajoo.js",
+      ),
     ).to.deep.equal([]);
   });
 
@@ -258,7 +261,10 @@ describe("[U] graph-utl/indexed-module-graph - getPath", () => {
     ];
 
     expect(
-      new IndexedModuleGraph(lGraph).getPath("./src/index.js", "./src/hajoo.js")
+      new IndexedModuleGraph(lGraph).getPath(
+        "./src/index.js",
+        "./src/hajoo.js",
+      ),
     ).to.deep.equal(["./src/index.js", "./src/hajoo.js"]);
   });
 
@@ -275,7 +281,10 @@ describe("[U] graph-utl/indexed-module-graph - getPath", () => {
     ];
 
     expect(
-      new IndexedModuleGraph(lGraph).getPath("./src/index.js", "./src/index.js")
+      new IndexedModuleGraph(lGraph).getPath(
+        "./src/index.js",
+        "./src/index.js",
+      ),
     ).to.deep.equal([]);
   });
 
@@ -292,7 +301,10 @@ describe("[U] graph-utl/indexed-module-graph - getPath", () => {
     ];
 
     expect(
-      new IndexedModuleGraph(lGraph).getPath("./src/index.js", "./src/hajoo.js")
+      new IndexedModuleGraph(lGraph).getPath(
+        "./src/index.js",
+        "./src/hajoo.js",
+      ),
     ).to.deep.equal([]);
   });
 
@@ -317,7 +329,10 @@ describe("[U] graph-utl/indexed-module-graph - getPath", () => {
     ];
 
     expect(
-      new IndexedModuleGraph(lGraph).getPath("./src/index.js", "./src/hajoo.js")
+      new IndexedModuleGraph(lGraph).getPath(
+        "./src/index.js",
+        "./src/hajoo.js",
+      ),
     ).to.deep.equal([
       "./src/index.js",
       "./src/intermediate.js",
@@ -346,7 +361,10 @@ describe("[U] graph-utl/indexed-module-graph - getPath", () => {
     ];
 
     expect(
-      new IndexedModuleGraph(lGraph).getPath("./src/index.js", "./src/hajoo.js")
+      new IndexedModuleGraph(lGraph).getPath(
+        "./src/index.js",
+        "./src/hajoo.js",
+      ),
     ).to.deep.equal([]);
   });
 
@@ -378,7 +396,10 @@ describe("[U] graph-utl/indexed-module-graph - getPath", () => {
     ];
 
     expect(
-      new IndexedModuleGraph(lGraph).getPath("./src/index.js", "./src/hajoo.js")
+      new IndexedModuleGraph(lGraph).getPath(
+        "./src/index.js",
+        "./src/hajoo.js",
+      ),
     ).to.deep.equal([
       "./src/index.js",
       "./src/intermediate.js",
@@ -466,7 +487,7 @@ describe("[U] graph-utl/indexed-module-graph - getCycle", () => {
   });
   it("it goes to a circle; isn't in it itself, but also to one where it is (z -> a -> b -> c -> a, c -> z)", () => {
     expect(
-      getCycle(cycleInputGraphs.TO_A_CIRCLE_AND_IN_IT, "z", "a")
+      getCycle(cycleInputGraphs.TO_A_CIRCLE_AND_IN_IT, "z", "a"),
     ).to.deep.equal(["a", "b", "c", "z"]);
   });
   it("just returns one cycle when querying a hub node", () => {

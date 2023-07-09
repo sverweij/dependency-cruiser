@@ -35,8 +35,8 @@ describe("[I] validate/index - stability checks", () => {
         {
           resolved: "src/some/thing/else.js",
           instability: 1,
-        }
-      )
+        },
+      ),
     ).to.deep.equal({
       valid: false,
       rules: [{ name: "SDP", severity: "info" }],
@@ -51,8 +51,8 @@ describe("[I] validate/index - stability checks", () => {
         {
           resolved: "src/some/thing/else.js",
           instability: 0.1,
-        }
-      )
+        },
+      ),
     ).to.deep.equal({
       valid: true,
     });
@@ -66,8 +66,8 @@ describe("[I] validate/index - stability checks", () => {
         {
           resolved: "src/some/thing/else.js",
           instability: 1,
-        }
-      )
+        },
+      ),
     ).to.deep.equal({
       valid: false,
       rules: [{ name: "not-in-allowed", severity: "info" }],
@@ -82,8 +82,8 @@ describe("[I] validate/index - stability checks", () => {
         {
           resolved: "src/some/thing/else.js",
           instability: 0.1,
-        }
-      )
+        },
+      ),
     ).to.deep.equal({
       valid: true,
     });

@@ -12,24 +12,22 @@ describe("[I] typescript transpiler", () => {
     expect(typeScriptRegularWrap.isAvailable()).to.equal(true);
   });
 
-  it("transpiles typescript", () => {
-    expect(
-      normalizeSource(
-        typeScriptRegularWrap.transpile(
-          readFileSync(
-            "./test/extract/transpile/__mocks__/typescriptscript.ts",
-            "utf8"
-          )
-        )
-      )
-    ).to.equal(
-      normalizeSource(
+  it("transpiles typescript", async () => {
+    const lExpected = await normalizeSource(
+      typeScriptRegularWrap.transpile(
         readFileSync(
-          "./test/extract/transpile/__fixtures__/typescriptscript.js",
-          "utf8"
-        )
-      )
+          "./test/extract/transpile/__mocks__/typescriptscript.ts",
+          "utf8",
+        ),
+      ),
     );
+    const lFound = await normalizeSource(
+      readFileSync(
+        "./test/extract/transpile/__fixtures__/typescriptscript.js",
+        "utf8",
+      ),
+    );
+    expect(lExpected).to.equal(lFound);
   });
 });
 
@@ -38,18 +36,16 @@ describe("[I] typescript transpiler (tsx)", () => {
     expect(typeScriptTsxWrap.isAvailable()).to.equal(true);
   });
 
-  it("transpiles tsx", () => {
-    expect(
-      normalizeSource(
-        typeScriptTsxWrap.transpile(
-          readFileSync("./test/extract/transpile/__mocks__/tsx.tsx", "utf8")
-        )
-      )
-    ).to.equal(
-      normalizeSource(
-        readFileSync("./test/extract/transpile/__fixtures__/tsx.js", "utf8")
-      )
+  it("transpiles tsx", async () => {
+    const lExpected = await normalizeSource(
+      typeScriptTsxWrap.transpile(
+        readFileSync("./test/extract/transpile/__mocks__/tsx.tsx", "utf8"),
+      ),
     );
+    const lFound = await normalizeSource(
+      readFileSync("./test/extract/transpile/__fixtures__/tsx.js", "utf8"),
+    );
+    expect(lExpected).to.equal(lFound);
   });
 });
 
@@ -58,17 +54,15 @@ describe("[I] typescript transpiler (esm)", () => {
     expect(typeScriptESMWrap.isAvailable()).to.equal(true);
   });
 
-  it("transpiles mts", () => {
-    expect(
-      normalizeSource(
-        typeScriptESMWrap.transpile(
-          readFileSync("./test/extract/transpile/__mocks__/mts.mts", "utf8")
-        )
-      )
-    ).to.equal(
-      normalizeSource(
-        readFileSync("./test/extract/transpile/__fixtures__/mts.mjs", "utf8")
-      )
+  it("transpiles mts", async () => {
+    const lExpected = await normalizeSource(
+      typeScriptESMWrap.transpile(
+        readFileSync("./test/extract/transpile/__mocks__/mts.mts", "utf8"),
+      ),
     );
+    const lFound = await normalizeSource(
+      readFileSync("./test/extract/transpile/__fixtures__/mts.mjs", "utf8"),
+    );
+    expect(lExpected).to.equal(lFound);
   });
 });

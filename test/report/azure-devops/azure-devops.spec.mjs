@@ -18,54 +18,54 @@ import instabilities from "./__mocks__/instabilities.mjs";
 function readFixture(pRelativePath) {
   return readFileSync(
     fileURLToPath(new URL(pRelativePath, import.meta.url)),
-    "utf8"
+    "utf8",
   );
 }
 describe("[I] report/azure-devops", () => {
   it("says everything fine when everything is fine", () => {
     const lFixture = readFixture(
-      "__mocks__/everything-fine-azure-devops-format.txt"
+      "__mocks__/everything-fine-azure-devops-format.txt",
     );
     const lResult = render(okdeps);
 
     expect(normalizeNewline(lResult.output)).to.equal(
-      normalizeNewline(lFixture)
+      normalizeNewline(lFixture),
     );
     expect(lResult.exitCode).to.equal(0);
   });
 
   it("says there's warnings when there's warnings", () => {
     const lFixture = readFixture(
-      "__mocks__/there-are-warnings-azure-devops-format.txt"
+      "__mocks__/there-are-warnings-azure-devops-format.txt",
     );
     const lResult = render(warndeps);
 
     expect(normalizeNewline(lResult.output)).to.equal(
-      normalizeNewline(lFixture)
+      normalizeNewline(lFixture),
     );
     expect(lResult.exitCode).to.equal(0);
   });
 
   it("says there's errors when there's errors", () => {
     const lFixture = readFixture(
-      "__mocks__/there-are-errors-azure-devops-format.txt"
+      "__mocks__/there-are-errors-azure-devops-format.txt",
     );
     const lResult = render(errdeps);
 
     expect(normalizeNewline(lResult.output)).to.equal(
-      normalizeNewline(lFixture)
+      normalizeNewline(lFixture),
     );
     expect(lResult.exitCode).to.equal(1);
   });
 
   it("renders module only transgressions", () => {
     const lFixture = readFixture(
-      "__mocks__/module-errors-azure-devops-format.txt"
+      "__mocks__/module-errors-azure-devops-format.txt",
     );
     const lResult = render(moduleErrs);
 
     expect(normalizeNewline(lResult.output)).to.equal(
-      normalizeNewline(lFixture)
+      normalizeNewline(lFixture),
     );
     // eslint-disable-next-line no-magic-numbers
     expect(lResult.exitCode).to.equal(5);
@@ -73,12 +73,12 @@ describe("[I] report/azure-devops", () => {
 
   it("renders 'required' violations", () => {
     const lFixture = readFixture(
-      "__mocks__/required-errors-azure-devops-format.txt"
+      "__mocks__/required-errors-azure-devops-format.txt",
     );
     const lResult = render(requiredErrs);
 
     expect(normalizeNewline(lResult.output)).to.equal(
-      normalizeNewline(lFixture)
+      normalizeNewline(lFixture),
     );
     // eslint-disable-next-line no-magic-numbers
     expect(lResult.exitCode).to.equal(5);
@@ -86,12 +86,12 @@ describe("[I] report/azure-devops", () => {
 
   it("renders circular transgressions", () => {
     const lFixture = readFixture(
-      "__mocks__/circular-deps-azure-devops-format.txt"
+      "__mocks__/circular-deps-azure-devops-format.txt",
     );
     const lResult = render(circulars);
 
     expect(normalizeNewline(lResult.output)).to.equal(
-      normalizeNewline(lFixture)
+      normalizeNewline(lFixture),
     );
     // eslint-disable-next-line no-magic-numbers
     expect(lResult.exitCode).to.equal(3);
@@ -102,7 +102,7 @@ describe("[I] report/azure-devops", () => {
     const lResult = render(vias);
 
     expect(normalizeNewline(lResult.output)).to.equal(
-      normalizeNewline(lFixture)
+      normalizeNewline(lFixture),
     );
     // eslint-disable-next-line no-magic-numbers
     expect(lResult.exitCode).to.equal(4);
@@ -110,12 +110,12 @@ describe("[I] report/azure-devops", () => {
 
   it("renders instability transgressions", () => {
     const lFixture = readFixture(
-      "__mocks__/instabilities-azure-devops-format.txt"
+      "__mocks__/instabilities-azure-devops-format.txt",
     );
     const lResult = render(instabilities);
 
     expect(normalizeNewline(lResult.output)).to.equal(
-      normalizeNewline(lFixture)
+      normalizeNewline(lFixture),
     );
 
     expect(lResult.exitCode).to.equal(0);
@@ -123,12 +123,12 @@ describe("[I] report/azure-devops", () => {
 
   it("renders unsupported error levels (like 'ignore') as 'info'", () => {
     const lFixture = readFixture(
-      "__mocks__/unsupported-severity-azure-devops-format.txt"
+      "__mocks__/unsupported-severity-azure-devops-format.txt",
     );
     const lResult = render(unsupportedErrorLevels);
 
     expect(normalizeNewline(lResult.output)).to.equal(
-      normalizeNewline(lFixture)
+      normalizeNewline(lFixture),
     );
     // eslint-disable-next-line no-magic-numbers
     expect(lResult.exitCode).to.equal(5);
@@ -136,24 +136,24 @@ describe("[I] report/azure-devops", () => {
 
   it("renders known errors in a single warning", () => {
     const lFixture = readFixture(
-      "__mocks__/known-violations-azure-devops-format.txt"
+      "__mocks__/known-violations-azure-devops-format.txt",
     );
     const lResult = render(knownViolations);
 
     expect(normalizeNewline(lResult.output)).to.equal(
-      normalizeNewline(lFixture)
+      normalizeNewline(lFixture),
     );
     expect(lResult.exitCode).to.equal(0);
   });
 
   it("renders known errors along with other errors", () => {
     const lFixture = readFixture(
-      "__mocks__/errors-and-known-violations-azure-devops-format.txt"
+      "__mocks__/errors-and-known-violations-azure-devops-format.txt",
     );
     const lResult = render(errorsAndKnownViolations);
 
     expect(normalizeNewline(lResult.output)).to.equal(
-      normalizeNewline(lFixture)
+      normalizeNewline(lFixture),
     );
     expect(lResult.exitCode).to.equal(1);
   });

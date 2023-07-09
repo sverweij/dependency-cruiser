@@ -17,7 +17,7 @@ function transformJSONtoFile(pInputFileName, pOutputFileName, pFunction) {
   writeFileSync(
     pOutputFileName,
     pFunction(JSON.parse(readFileSync(pInputFileName, "utf8"))).output,
-    "utf8"
+    "utf8",
   );
 }
 
@@ -25,7 +25,7 @@ function regenerateReportFixtures(
   pDirectory,
   pFunction,
   pTargetExtension,
-  pRelativeTargetDirectory = "../__fixtures__"
+  pRelativeTargetDirectory = "../__fixtures__",
 ) {
   readdirSync(pDirectory)
     .filter((pFileName) => pFileName.endsWith(".json"))
@@ -33,7 +33,7 @@ function regenerateReportFixtures(
       inputFileName: join(pDirectory, pFileName),
       outputFileName: join(
         join(pDirectory, pRelativeTargetDirectory),
-        pFileName.replace(/\.json$/g, pTargetExtension)
+        pFileName.replace(/\.json$/g, pTargetExtension),
       ),
     }))
     .forEach((pPair) => {
@@ -51,7 +51,7 @@ function regenerateReportFixturesFromMJS(
   pDirectory,
   pFunction,
   pTargetExtension,
-  pRelativeTargetDirectory = "../__fixtures__"
+  pRelativeTargetDirectory = "../__fixtures__",
 ) {
   readdirSync(pDirectory)
     .filter((pFileName) => pFileName.endsWith(".mjs"))
@@ -59,7 +59,7 @@ function regenerateReportFixturesFromMJS(
       inputFileName: join(pDirectory, pFileName),
       outputFileName: join(
         join(pDirectory, pRelativeTargetDirectory),
-        pFileName.replace(/\.mjs$/g, pTargetExtension)
+        pFileName.replace(/\.mjs$/g, pTargetExtension),
       ),
     }))
     .forEach((pPair) => {
@@ -70,27 +70,27 @@ function regenerateReportFixturesFromMJS(
 function renderBareThemeDot(pResultObject) {
   const lBareTheme = JSON.parse(
     readFileSync(
-      join(__dirname, "../test/report/dot/module-level/bare-theme.json")
-    )
+      join(__dirname, "../test/report/dot/module-level/bare-theme.json"),
+    ),
   );
   return renderDot(pResultObject, { theme: lBareTheme });
 }
 
 const CDOT_MOCK_DIR = join(
   __dirname,
-  "../test/report/dot/custom-level/__mocks__/"
+  "../test/report/dot/custom-level/__mocks__/",
 );
 const DDOT_MOCK_DIR = join(
   __dirname,
-  "../test/report/dot/folder-level/__mocks__/"
+  "../test/report/dot/folder-level/__mocks__/",
 );
 const FDOT_MOCK_DIR = join(
   __dirname,
-  "../test/report/dot/flat-level/__mocks__/"
+  "../test/report/dot/flat-level/__mocks__/",
 );
 const DOT_MOCK_DIR = join(
   __dirname,
-  "../test/report/dot/module-level/__mocks__/"
+  "../test/report/dot/module-level/__mocks__/",
 );
 const TEAMCITY_MOCK_DIR = join(__dirname, "../test/report/teamcity/__mocks__/");
 const HTML_MOCK_DIR = join(__dirname, "../test/report/html/__mocks__/");
@@ -105,7 +105,7 @@ regenerateReportFixturesFromMJS(
   TEAMCITY_MOCK_DIR,
   renderTeamcity,
   "-teamcity-format.txt",
-  "."
+  ".",
 );
 regenerateReportFixtures(HTML_MOCK_DIR, renderHTML, ".html", ".");
 regenerateReportFixtures(CSV_MOCK_DIR, renderCSV, ".csv", ".");

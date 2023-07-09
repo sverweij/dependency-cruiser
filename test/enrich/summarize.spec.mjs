@@ -24,7 +24,7 @@ describe("[I] enrich/summarize", () => {
       warn: 0,
     });
     expect({ modules: [], summary: lSummary }).to.be.jsonSchema(
-      cruiseResultSchema
+      cruiseResultSchema,
     );
   });
   it("adds a rule set when there is one", () => {
@@ -45,7 +45,7 @@ describe("[I] enrich/summarize", () => {
       warn: 0,
     });
     expect({ modules: [], summary: lSummary }).to.be.jsonSchema(
-      cruiseResultSchema
+      cruiseResultSchema,
     );
   });
 
@@ -69,7 +69,7 @@ describe("[I] enrich/summarize", () => {
 
     expect(lResult1).to.deep.equal(lResult2);
     expect({ modules: [], summary: lResult1 }).to.be.jsonSchema(
-      cruiseResultSchema
+      cruiseResultSchema,
     );
   });
 
@@ -146,7 +146,7 @@ describe("[I] enrich/summarize", () => {
     const lSummary = summarize(cycleFest, lOptions, ["src"]);
     expect(lSummary).to.deep.equal(lExpected);
     expect({ modules: [], summary: lSummary }).to.be.jsonSchema(
-      cruiseResultSchema
+      cruiseResultSchema,
     );
   });
 
@@ -170,7 +170,7 @@ describe("[I] enrich/summarize", () => {
       },
     ];
     expect(
-      summarize([], { knownViolations: lKnownViolations }, [])
+      summarize([], { knownViolations: lKnownViolations }, []),
     ).to.deep.equal({
       error: 0,
       info: 0,
@@ -227,7 +227,7 @@ describe("[I] enrich/summarize", () => {
           forbidden: [{ name: "a-rule", from: {}, to: { moreUnstable: true } }],
         },
       },
-      []
+      [],
     );
 
     expect(lSummary).to.deep.equal({
@@ -272,7 +272,7 @@ describe("[I] enrich/summarize", () => {
       },
     });
     expect({ modules: [], summary: lSummary }).to.be.jsonSchema(
-      cruiseResultSchema
+      cruiseResultSchema,
     );
   });
 });

@@ -5,13 +5,13 @@ import { getASTFromSource } from "../../../src/extract/parse/to-javascript-ast.m
 const extractcommonJS = (
   pJavaScriptSource,
   pDependencies,
-  pExoticRequireStrings = []
+  pExoticRequireStrings = [],
 ) =>
   extractcommonJSDeps(
     getASTFromSource({ source: pJavaScriptSource, extension: ".js" }),
     pDependencies,
     "cjs",
-    pExoticRequireStrings
+    pExoticRequireStrings,
   );
 
 describe("[U] ast-extractors/extract-cjs-deps", () => {
@@ -35,7 +35,7 @@ describe("[U] ast-extractors/extract-cjs-deps", () => {
     extractcommonJS(
       "const need = require; const x = need('./static-required-with-need')",
       lDeps,
-      ["need"]
+      ["need"],
     );
     expect(lDeps).to.deep.equal([
       {
@@ -54,7 +54,7 @@ describe("[U] ast-extractors/extract-cjs-deps", () => {
     extractcommonJS(
       "const x = window.require('./static-required-with-need')",
       lDeps,
-      ["window.require"]
+      ["window.require"],
     );
     expect(lDeps).to.deep.equal([
       {
@@ -72,7 +72,7 @@ describe("[U] ast-extractors/extract-cjs-deps", () => {
 
     extractcommonJS(
       "const need = require; const x = need('./static-required-with-need')",
-      lDeps
+      lDeps,
     );
     expect(lDeps).to.deep.equal([]);
   });
@@ -106,7 +106,7 @@ describe("[U] ast-extractors/extract-cjs-deps", () => {
             determineWhatToImport = () => 'bla';
             require(determineWhatToImport());
         `,
-      lDeps
+      lDeps,
     );
     expect(lDeps).to.deep.equal([]);
   });

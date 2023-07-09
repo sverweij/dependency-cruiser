@@ -3,12 +3,12 @@ import cloneDeep from "lodash/cloneDeep.js";
 
 export default function normBaseDirectory(
   pUnprocessedJSON,
-  pBaseDirectory = process.cwd()
+  pBaseDirectory = process.cwd(),
 ) {
   let lReturnValue = cloneDeep(pUnprocessedJSON);
   lReturnValue.summary.optionsUsed.baseDir = join(
     pBaseDirectory,
-    lReturnValue.summary.optionsUsed?.baseDir ?? ""
+    lReturnValue.summary.optionsUsed?.baseDir ?? "",
   );
   return lReturnValue;
 }

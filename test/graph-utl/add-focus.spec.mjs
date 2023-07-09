@@ -18,12 +18,12 @@ describe("[U] graph-utl/add-focus", () => {
   });
   it("mangles the modules to focus on ^src/main if prodded so", () => {
     expect(addFocus($input, { path: "^src/main" })).to.deep.equal(
-      focusOnMainDepthOne
+      focusOnMainDepthOne,
     );
   });
   it("mangles the modules to focus on ^src/main if prodded with a depth of two", () => {
     expect(addFocus($input, { path: "^src/main", depth: 2 })).to.deep.equal(
-      focusOnMainDepthTwo
+      focusOnMainDepthTwo,
     );
   });
 });

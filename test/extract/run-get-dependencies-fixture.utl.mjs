@@ -26,9 +26,9 @@ export function runFixture(pFixture, pParser = "acorn") {
         normalizeCruiseOptions(lOptions),
         await normalizeResolveOptions(
           { bustTheCache: true, resolveLicenses: true },
-          normalizeCruiseOptions(lOptions)
-        )
-      )
+          normalizeCruiseOptions(lOptions),
+        ),
+      ),
     ).to.deep.equal(pFixture.expected);
   });
 }

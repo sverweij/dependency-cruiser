@@ -17,11 +17,11 @@ const __dirname = fileURLToPath(new URL(".", import.meta.url));
 const fixturesFolder = join(__dirname, "__fixtures__");
 const consolidatedDot = readFileSync(
   join(fixturesFolder, "dependency-cruiser-2019-01-14.dot"),
-  "utf8"
+  "utf8",
 );
 const consolidatedOrphansDot = readFileSync(
   join(fixturesFolder, "orphans.dot"),
-  "utf8"
+  "utf8",
 );
 const consolidatedRxJs = readFileSync(join(fixturesFolder, "rxjs.dot"), "utf8");
 

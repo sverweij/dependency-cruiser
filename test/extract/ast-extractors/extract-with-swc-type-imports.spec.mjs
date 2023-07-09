@@ -49,8 +49,8 @@ describe("[U] ast-extractors/extract-swc - type imports", () => {
   it("extracts type imports in class members", () => {
     expect(
       extractWithSwc(
-        "class Klass{ private membert: import('./wypes').T; constructor() { membert = 'x'}}"
-      )
+        "class Klass{ private membert: import('./wypes').T; constructor() { membert = 'x'}}",
+      ),
     ).to.deep.equal([
       {
         module: "./wypes",
@@ -73,13 +73,13 @@ describe("[U] ast-extractors/extract-swc - type imports", () => {
   it("leaves 'import equals' of variables alone", () => {
     expect(
       // typescript/lib/protocol.d.ts has this thing
-      extractWithSwc("import protocol = ts.server.protocol")
+      extractWithSwc("import protocol = ts.server.protocol"),
     ).to.deep.equal([]);
   });
 
   it("extracts type imports (typescript 3.8+)", () => {
     expect(
-      extractWithSwc("import type { SomeType } from './some-module'")
+      extractWithSwc("import type { SomeType } from './some-module'"),
     ).to.deep.equal([
       {
         module: "./some-module",

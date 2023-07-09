@@ -16,13 +16,13 @@ try {
     .description(
       "Writes all known violations of rules in a .dependency-cruiser.js to a file.\n" +
         "Alias for depcruise -c -T baseline -f .dependency-cruiser-known-violations.json [files-or-directories]\n" +
-        "Details: https://github.com/sverweij/dependency-cruiser"
+        "Details: https://github.com/sverweij/dependency-cruiser",
     )
     .option("-c, --config [file]", "read rules and options from [file]", true)
     .option(
       "-f, --output-to [file]",
       "file to write output to; - for stdout",
-      ".dependency-cruiser-known-violations.json"
+      ".dependency-cruiser-known-violations.json",
     )
     .version(meta.version)
     .arguments("<files-or-directories>")

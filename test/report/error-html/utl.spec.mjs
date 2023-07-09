@@ -20,7 +20,7 @@ describe("[U] report/error-html/utl", () => {
     expect(
       utl.getFormattedAllowedRule({
         allowed: [{ from: {}, to: {} }],
-      })
+      }),
     ).to.deep.equal({
       name: "not-in-allowed",
       severity: "warn",
@@ -50,7 +50,7 @@ describe("[U] report/error-html/utl", () => {
             },
           },
         ],
-      })
+      }),
     ).to.deep.equal({
       name: "not-in-allowed",
       severity: "warn",
@@ -72,7 +72,7 @@ describe("[U] report/error-html/utl", () => {
           },
         ],
         allowedSeverity: "info",
-      })
+      }),
     ).to.deep.equal({
       name: "not-in-allowed",
       severity: "info",
@@ -93,8 +93,8 @@ describe("[U] report/error-html/utl", () => {
     expect(
       utl.mergeCountsIntoRule(
         { name: "blah" },
-        { blah: { count: 69, ignoredCount: 0 } }
-      )
+        { blah: { count: 69, ignoredCount: 0 } },
+      ),
     ).to.deep.equal({
       name: "blah",
       count: 69,
@@ -230,7 +230,7 @@ describe("[U] report/error-html/utl", () => {
     const lExpectation = '&nbsp;<span class="extra">(I: 10%)</span>';
 
     expect(utl.determineFromExtras(lInputViolation)).to.deep.equal(
-      lExpectation
+      lExpectation,
     );
   });
 });

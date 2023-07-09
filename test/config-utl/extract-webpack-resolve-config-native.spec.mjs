@@ -30,7 +30,7 @@ describe("[I] config-utl/extract-webpack-resolve-config - native formats", () =>
     let lThrown = false;
     try {
       await loadResolveConfig(
-        getFullPath("./__mocks__/webpackconfig/invalid.config.js")
+        getFullPath("./__mocks__/webpackconfig/invalid.config.js"),
       );
     } catch (_pError) {
       lThrown = true;
@@ -41,16 +41,16 @@ describe("[I] config-utl/extract-webpack-resolve-config - native formats", () =>
   it("returns an empty object when a config file is passed without a 'resolve' section", async () => {
     expect(
       await loadResolveConfig(
-        getFullPath("./__mocks__/webpackconfig/noresolve.config.js")
-      )
+        getFullPath("./__mocks__/webpackconfig/noresolve.config.js"),
+      ),
     ).to.deep.equal({});
   });
 
   it("returns the resolve section of the webpack config if there's any", async () => {
     expect(
       await loadResolveConfig(
-        getFullPath("./__mocks__/webpackconfig/hasaresolve.config.js")
-      )
+        getFullPath("./__mocks__/webpackconfig/hasaresolve.config.js"),
+      ),
     ).to.deep.equal({
       alias: {
         config: "src/config",
@@ -62,8 +62,8 @@ describe("[I] config-utl/extract-webpack-resolve-config - native formats", () =>
   it("returns the resolve section of the webpack config if there's any (.mjs variant)", async () => {
     expect(
       await loadResolveConfig(
-        getFullPath("./__mocks__/webpackconfig/webpack.config.mjs")
-      )
+        getFullPath("./__mocks__/webpackconfig/webpack.config.mjs"),
+      ),
     ).to.deep.equal({
       alias: {
         config: "src/config",
@@ -76,10 +76,10 @@ describe("[I] config-utl/extract-webpack-resolve-config - native formats", () =>
     expect(
       await loadResolveConfig(
         getFullPath(
-          "./__mocks__/webpackconfig/hastwoseparateresolves.config.js"
+          "./__mocks__/webpackconfig/hastwoseparateresolves.config.js",
         ),
-        { production: true }
-      )
+        { production: true },
+      ),
     ).to.deep.equal({
       alias: {
         config: "src/config",
@@ -92,10 +92,10 @@ describe("[I] config-utl/extract-webpack-resolve-config - native formats", () =>
     expect(
       await loadResolveConfig(
         getFullPath(
-          "./__mocks__/webpackconfig/hastwoseparateresolves.config.js"
+          "./__mocks__/webpackconfig/hastwoseparateresolves.config.js",
         ),
-        { develop: true }
-      )
+        { develop: true },
+      ),
     ).to.deep.equal({
       alias: {
         config: "src/dev-config",
@@ -108,9 +108,9 @@ describe("[I] config-utl/extract-webpack-resolve-config - native formats", () =>
     expect(
       await loadResolveConfig(
         getFullPath(
-          "./__mocks__/webpackconfig/aliassy/webpack.functionexport.config.js"
-        )
-      )
+          "./__mocks__/webpackconfig/aliassy/webpack.functionexport.config.js",
+        ),
+      ),
     ).to.deep.equal({
       alias: {
         configSpullenAlias: "./configspullen",
@@ -123,9 +123,9 @@ describe("[I] config-utl/extract-webpack-resolve-config - native formats", () =>
     expect(
       await loadResolveConfig(
         getFullPath(
-          "./__mocks__/webpackconfig/aliassy/webpack.arrayexport.config.js"
-        )
-      )
+          "./__mocks__/webpackconfig/aliassy/webpack.arrayexport.config.js",
+        ),
+      ),
     ).to.deep.equal({
       alias: {
         configSpullenAlias: "./configspullen",
@@ -138,9 +138,9 @@ describe("[I] config-utl/extract-webpack-resolve-config - native formats", () =>
     expect(
       await loadResolveConfig(
         getFullPath(
-          "./__mocks__/webpackconfig/aliassy/webpack.functionarrayexport.config.js"
-        )
-      )
+          "./__mocks__/webpackconfig/aliassy/webpack.functionarrayexport.config.js",
+        ),
+      ),
     ).to.deep.equal({
       alias: {
         configSpullenAlias: "./configspullen",

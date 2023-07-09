@@ -15,14 +15,14 @@ describe("[U] ast-extractors/extract-typescript - others", () => {
             fileURLToPath(
               new URL(
                 "__mocks__/typescript2.8-union-types-ast.json",
-                import.meta.url
-              )
+                import.meta.url,
+              ),
             ),
-            "utf8"
-          )
+            "utf8",
+          ),
         ),
-        []
-      )
+        [],
+      ),
     ).to.deep.equal([]);
   });
 });

@@ -5,8 +5,8 @@ describe("[U] ast-extractors/extract-typescript - regular commonjs require", () 
   it("extracts require of a module that uses an export-equals'", () => {
     expect(
       extractTypescript(
-        "import thing = require('./thing-that-uses-export-equals');"
-      )
+        "import thing = require('./thing-that-uses-export-equals');",
+      ),
     ).to.deep.equal([
       {
         module: "./thing-that-uses-export-equals",
@@ -22,8 +22,8 @@ describe("[U] ast-extractors/extract-typescript - regular commonjs require", () 
       extractTypescript(
         `const lala1 = require('legit-one');
                  let lala2 = require('legit-two');
-                 var lala3 = require('legit-three');`
-      )
+                 var lala3 = require('legit-three');`,
+      ),
     ).to.deep.equal([
       {
         module: "legit-one",
@@ -60,8 +60,8 @@ describe("[U] ast-extractors/extract-typescript - regular commonjs require", () 
                             }
                         }
                     }
-                }`
-      )
+                }`,
+      ),
     ).to.deep.equal([
       {
         module: "midash",
@@ -86,7 +86,7 @@ describe("[U] ast-extractors/extract-typescript - regular commonjs require", () 
 
   it("extracts regular require with a template string without placeholders", () => {
     expect(
-      extractTypescript("const lala = require(`thunderscore`)")
+      extractTypescript("const lala = require(`thunderscore`)"),
     ).to.deep.equal([
       {
         module: "thunderscore",
@@ -108,13 +108,13 @@ describe("[U] ast-extractors/extract-typescript - regular commonjs require", () 
   it("ignores regular require with a template literal with placeholders", () => {
     expect(
       // eslint-disable-next-line no-template-curly-in-string
-      extractTypescript("const lala = require(`shwoooop/${blabla}`)")
+      extractTypescript("const lala = require(`shwoooop/${blabla}`)"),
     ).to.deep.equal([]);
   });
 
   it("ignores regular require with a function for a parameter", () => {
     expect(extractTypescript("const lala = require(helvete())")).to.deep.equal(
-      []
+      [],
     );
   });
 });

@@ -12,21 +12,21 @@ describe("[U] cli/init-config/inquirer-validators - validateLocation", () => {
 
   it("returns an error message when provided with an empty string", () => {
     expect(validateLocation("")).to.equal(
-      "'' doesn't seem to exist - please try again"
+      "'' doesn't seem to exist - please try again",
     );
   });
 
   it("returns an error message when provided with a non-existing folder name", () => {
     process.chdir(lFixturesDirectory);
     expect(validateLocation("non-existing-folder")).to.equal(
-      "'non-existing-folder' doesn't seem to exist - please try again"
+      "'non-existing-folder' doesn't seem to exist - please try again",
     );
   });
 
   it("returns an error message when provided with a name of a file that is not a folder", () => {
     process.chdir(lFixturesDirectory);
     expect(validateLocation("existing-file")).to.equal(
-      "'existing-file' doesn't seem to be a folder - please try again"
+      "'existing-file' doesn't seem to be a folder - please try again",
     );
   });
 
@@ -38,7 +38,7 @@ describe("[U] cli/init-config/inquirer-validators - validateLocation", () => {
   it("returns true when provided with a c.s.l. of existing folders", () => {
     process.chdir(lFixturesDirectory);
     expect(
-      validateLocation("existing-folder, another-existing-folder")
+      validateLocation("existing-folder, another-existing-folder"),
     ).to.equal(true);
   });
 
@@ -46,17 +46,17 @@ describe("[U] cli/init-config/inquirer-validators - validateLocation", () => {
     process.chdir(lFixturesDirectory);
     expect(
       validateLocation(
-        "existing-folder, non-existing-folder, another-existing-folder"
-      )
+        "existing-folder, non-existing-folder, another-existing-folder",
+      ),
     ).to.equal(
-      "'non-existing-folder' doesn't seem to exist - please try again"
+      "'non-existing-folder' doesn't seem to exist - please try again",
     );
   });
 
   it("returns true when provided with an array of existing folders", () => {
     process.chdir(lFixturesDirectory);
     expect(
-      validateLocation(["existing-folder", "another-existing-folder"])
+      validateLocation(["existing-folder", "another-existing-folder"]),
     ).to.equal(true);
   });
 });

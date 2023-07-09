@@ -8,10 +8,10 @@ import normBaseDirectory from "./norm-base-directory.utl.mjs";
 const requireJSON = createRequireJSON(import.meta.url);
 
 const output = normBaseDirectory(
-  requireJSON("./__mocks__/type-only-imports/output.json")
+  requireJSON("./__mocks__/type-only-imports/output.json"),
 );
 const outputWithRules = normBaseDirectory(
-  requireJSON("./__mocks__/type-only-imports/output-with-rules.json")
+  requireJSON("./__mocks__/type-only-imports/output-with-rules.json"),
 );
 
 use(chaiJSONSchema);
@@ -35,7 +35,7 @@ describe("[E] main.cruise - explicitly type only imports", () => {
       {
         tsPreCompilationDeps: true,
       },
-      { bustTheCache: true, resolveLicenses: false }
+      { bustTheCache: true, resolveLicenses: false },
     );
 
     expect(lResult.output).to.deep.equal(output);
@@ -62,7 +62,7 @@ describe("[E] main.cruise - explicitly type only imports", () => {
         validate: true,
         tsPreCompilationDeps: true,
       },
-      { bustTheCache: true, resolveLicenses: false }
+      { bustTheCache: true, resolveLicenses: false },
     );
 
     expect(lResult.output).to.deep.equal(outputWithRules);

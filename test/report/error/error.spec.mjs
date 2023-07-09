@@ -35,7 +35,7 @@ describe("[I] report/error", () => {
 
     expect(lResult.output).to.contain(`error no-leesplank: aap → noot${EOL}`);
     expect(lResult.output).to.contain(
-      "2 dependency violations (2 errors, 0 warnings). 33 modules, 333 dependencies cruised."
+      "2 dependency violations (2 errors, 0 warnings). 33 modules, 333 dependencies cruised.",
     );
     expect(lResult.output).to.not.contain("    comment to no-leesplank");
     expect(lResult.exitCode).to.equal(2);
@@ -44,7 +44,7 @@ describe("[I] report/error", () => {
     const lResult = render(onlyWarningDependencies);
 
     expect(lResult.output).to.contain(
-      "1 dependency violations (0 errors, 1 warnings)"
+      "1 dependency violations (0 errors, 1 warnings)",
     );
     expect(lResult.exitCode).to.equal(0);
   });
@@ -53,7 +53,7 @@ describe("[I] report/error", () => {
 
     expect(lResult.output).to.contain(`error no-orphans: remi.js${EOL}`);
     expect(lResult.output).to.contain(
-      "1 dependency violations (1 errors, 0 warnings). 1 modules, 0 dependencies cruised."
+      "1 dependency violations (1 errors, 0 warnings). 1 modules, 0 dependencies cruised.",
     );
     expect(lResult.exitCode).to.equal(1);
   });
@@ -61,13 +61,13 @@ describe("[I] report/error", () => {
     const lResult = render(circularErrs);
 
     expect(lResult.output).to.contain(
-      `error no-circular: src/some/folder/nested/center.js → ${EOL}`
+      `error no-circular: src/some/folder/nested/center.js → ${EOL}`,
     );
     // these `\n` look odd - they're a side effect of the wrap-ansi module
     // which replaces `\r\n` with `\n` as part of its parse/ split/ re-assemble
     // operation
     expect(lResult.output).to.contain(
-      `      src/some/folder/loop-a.js →\n      src/some/folder/loop-b.js →\n      src/some/folder/nested/center.js`
+      `      src/some/folder/loop-a.js →\n      src/some/folder/loop-b.js →\n      src/some/folder/nested/center.js`,
     );
     expect(lResult.exitCode).to.equal(3);
   });
@@ -75,10 +75,10 @@ describe("[I] report/error", () => {
     const lResult = render(viaErrs);
 
     expect(lResult.output).to.contain(
-      `error some-via-rule: src/extract/index.js → src/utl/find-rule-by-name.js${EOL}`
+      `error some-via-rule: src/extract/index.js → src/utl/find-rule-by-name.js${EOL}`,
     );
     expect(lResult.output).to.contain(
-      `error some-via-rule: src/extract/index.js → src/utl/array-util.js${EOL}`
+      `error some-via-rule: src/extract/index.js → src/utl/array-util.js${EOL}`,
     );
     expect(lResult.output).to.contain("      (via via)");
     expect(lResult.exitCode).to.equal(4);
@@ -87,7 +87,7 @@ describe("[I] report/error", () => {
     const lResult = render(sdpErrors);
 
     expect(lResult.output).to.contain(
-      `warn sdp: src/more-stable.js → src/less-stable.js${EOL}      instability: 42% → 100%${EOL}`
+      `warn sdp: src/more-stable.js → src/less-stable.js${EOL}      instability: 42% → 100%${EOL}`,
     );
   });
   it("renders a violation as a dependency-violation when the violation.type ain't there", () => {
@@ -103,20 +103,20 @@ describe("[I] report/error", () => {
     const lResult = render(ignoredViolations);
     expect(lResult.output).to.contain("no dependency violations found");
     expect(lResult.output).to.contain(
-      "11 known violations ignored. Run with --no-ignore-known to see them."
+      "11 known violations ignored. Run with --no-ignore-known to see them.",
     );
   });
   it("emits a warning when there's > 1 ignored violation and at least one other violation", () => {
     const lResult = render(ignoredAndRealViolations);
 
     expect(lResult.output).to.contain(
-      "warn no-orphans: test/extract/ast-extractors/typescript2.8-union-types-ast.json"
+      "warn no-orphans: test/extract/ast-extractors/typescript2.8-union-types-ast.json",
     );
     expect(lResult.output).to.contain(
-      "1 dependency violations (0 errors, 1 warnings)"
+      "1 dependency violations (0 errors, 1 warnings)",
     );
     expect(lResult.output).to.contain(
-      "10 known violations ignored. Run with --no-ignore-known to see them."
+      "10 known violations ignored. Run with --no-ignore-known to see them.",
     );
   });
 });

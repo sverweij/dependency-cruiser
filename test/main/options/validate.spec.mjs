@@ -39,7 +39,7 @@ describe("[U] main/options/validate - maxDepth", () => {
     expect(() => {
       validateCruiseOptions({ maxDepth: "not an integer" });
     }).to.throw(
-      "'not an integer' is not a valid depth - use an integer between 0 and 99"
+      "'not an integer' is not a valid depth - use an integer between 0 and 99",
     );
   });
 
@@ -85,7 +85,7 @@ describe("[U] main/options/validate - focusDepth", () => {
     expect(() => {
       validateCruiseOptions({ focusDepth: "not an integer" });
     }).to.throw(
-      "'not an integer' is not a valid focus depth - use an integer between 0 and 99"
+      "'not an integer' is not a valid focus depth - use an integer between 0 and 99",
     );
   });
 
@@ -93,7 +93,7 @@ describe("[U] main/options/validate - focusDepth", () => {
     expect(() => {
       validateCruiseOptions({ focusDepth: "101" });
     }).to.throw(
-      "'101' is not a valid focus depth - use an integer between 0 and 99"
+      "'101' is not a valid focus depth - use an integer between 0 and 99",
     );
   });
 
@@ -101,7 +101,7 @@ describe("[U] main/options/validate - focusDepth", () => {
     expect(() => {
       validateCruiseOptions({ focusDepth: 101 });
     }).to.throw(
-      "'101' is not a valid focus depth - use an integer between 0 and 99"
+      "'101' is not a valid focus depth - use an integer between 0 and 99",
     );
   });
 
@@ -109,7 +109,7 @@ describe("[U] main/options/validate - focusDepth", () => {
     expect(() => {
       validateCruiseOptions({ focusDepth: "-1" });
     }).to.throw(
-      "'-1' is not a valid focus depth - use an integer between 0 and 99"
+      "'-1' is not a valid focus depth - use an integer between 0 and 99",
     );
   });
 
@@ -117,7 +117,7 @@ describe("[U] main/options/validate - focusDepth", () => {
     expect(() => {
       validateCruiseOptions({ focusDepth: -1 });
     }).to.throw(
-      "'-1' is not a valid focus depth - use an integer between 0 and 99"
+      "'-1' is not a valid focus depth - use an integer between 0 and 99",
     );
   });
 
@@ -139,7 +139,7 @@ describe("[U] main/options/validate - exclude", () => {
     expect(() => {
       validateCruiseOptions({ exclude: "([A-Za-z]+)*" });
     }).to.throw(
-      "The pattern '([A-Za-z]+)*' will probably run very slowly - cowardly refusing to run.\n"
+      "The pattern '([A-Za-z]+)*' will probably run very slowly - cowardly refusing to run.\n",
     );
   });
 
@@ -147,7 +147,7 @@ describe("[U] main/options/validate - exclude", () => {
     expect(() => {
       validateCruiseOptions({ exclude: "([A-Za-z]+)*" });
     }).to.throw(
-      "The pattern '([A-Za-z]+)*' will probably run very slowly - cowardly refusing to run.\n"
+      "The pattern '([A-Za-z]+)*' will probably run very slowly - cowardly refusing to run.\n",
     );
   });
 
@@ -155,7 +155,7 @@ describe("[U] main/options/validate - exclude", () => {
     expect(() => {
       validateCruiseOptions({ exclude: "([A-Za-z]+)*" });
     }).to.throw(
-      "The pattern '([A-Za-z]+)*' will probably run very slowly - cowardly refusing to run.\n"
+      "The pattern '([A-Za-z]+)*' will probably run very slowly - cowardly refusing to run.\n",
     );
   });
 
@@ -163,7 +163,7 @@ describe("[U] main/options/validate - exclude", () => {
     expect(() => {
       validateCruiseOptions({ doNotFollow: "([A-Za-z]+)*" });
     }).to.throw(
-      "The pattern '([A-Za-z]+)*' will probably run very slowly - cowardly refusing to run.\n"
+      "The pattern '([A-Za-z]+)*' will probably run very slowly - cowardly refusing to run.\n",
     );
   });
 
@@ -187,7 +187,7 @@ describe("[U] main/options/validate - exclude", () => {
         ruleSet: { options: { exclude: "(.*)+" } },
       });
     }).to.throw(
-      "The pattern '(.*)+' will probably run very slowly - cowardly refusing to run.\n"
+      "The pattern '(.*)+' will probably run very slowly - cowardly refusing to run.\n",
     );
   });
 

@@ -12,5 +12,5 @@ import { ParsedCommandLine } from "typescript";
  * @throws {TypeError} when the tsconfig is unreadable
  */
 export default function extractTSConfig(
-  pTSConfigFileName: string
+  pTSConfigFileName: string,
 ): ParsedCommandLine;

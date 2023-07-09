@@ -91,7 +91,7 @@ export function cruise(
   pFileAndDirectoryArray: string[],
   pCruiseOptions?: ICruiseOptions,
   pResolveOptions?: IResolveOptions,
-  pTranspileOptions?: ITranspileOptions
+  pTranspileOptions?: ITranspileOptions,
 ): Promise<IReporterOutput>;
 
 /**
@@ -103,7 +103,7 @@ export function cruise(
  */
 export function format(
   pResult: ICruiseResult,
-  pFormatOptions: IFormatOptions
+  pFormatOptions: IFormatOptions,
 ): Promise<IReporterOutput>;
 
 /**

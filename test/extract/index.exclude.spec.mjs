@@ -20,16 +20,16 @@ describe("[I] extract/index - exclude", () => {
       {
         bustTheCache: true,
       },
-      lOptions
+      lOptions,
     );
     const lResult = extract(
       ["./test/extract/__mocks__/exclude/path/es/src"],
       lOptions,
-      lResolveOptions
+      lResolveOptions,
     );
 
     expect(lResult).to.deep.equal(
-      requireJSON("./__mocks__/exclude/path/es/output.json")
+      requireJSON("./__mocks__/exclude/path/es/output.json"),
     );
   });
 
@@ -43,16 +43,16 @@ describe("[I] extract/index - exclude", () => {
       {
         bustTheCache: true,
       },
-      lOptions
+      lOptions,
     );
     const lResult = extract(
       ["./test/extract/__mocks__/exclude/dynamic/es/src"],
       lOptions,
-      lResolveOptions
+      lResolveOptions,
     );
 
     expect(lResult).to.deep.equal(
-      requireJSON("./__mocks__/exclude/dynamic/es/output.json")
+      requireJSON("./__mocks__/exclude/dynamic/es/output.json"),
     );
   });
 });

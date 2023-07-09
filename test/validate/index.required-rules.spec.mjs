@@ -22,7 +22,7 @@ describe("[I] validate/index - required rules", () => {
     expect(
       validate.module(lRequiredRuleSet, {
         source: "something",
-      })
+      }),
     ).to.deep.equal({ valid: true });
   });
 
@@ -31,7 +31,7 @@ describe("[I] validate/index - required rules", () => {
       validate.module(lRequiredRuleSet, {
         source: "grub-controller.ts",
         dependencies: [],
-      })
+      }),
     ).to.deep.equal({
       rules: [{ name: "thou-shalt-inherit-from-base", severity: "warn" }],
       valid: false,
@@ -50,7 +50,7 @@ describe("[I] validate/index - required rules", () => {
             resolved: "src/not-the-base-controller-either.ts",
           },
         ],
-      })
+      }),
     ).to.deep.equal({
       rules: [{ name: "thou-shalt-inherit-from-base", severity: "warn" }],
       valid: false,
@@ -69,7 +69,7 @@ describe("[I] validate/index - required rules", () => {
             resolved: "src/not-the-base-controller-either.ts",
           },
         ],
-      })
+      }),
     ).to.deep.equal({
       valid: true,
     });
@@ -90,7 +90,7 @@ describe("[I] validate/index - required rules", () => {
             resolved: "src/not-the-base-controller-either.ts",
           },
         ],
-      })
+      }),
     ).to.deep.equal({
       valid: true,
     });

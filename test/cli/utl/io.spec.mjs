@@ -7,7 +7,7 @@ import { getInStream } from "../../../src/cli/utl/io.mjs";
 
 describe("[U] cli/utl/io", () => {
   const OUTFILE = fileURLToPath(
-    new URL("__fixtures__/empty.json", import.meta.url)
+    new URL("__fixtures__/empty.json", import.meta.url),
   );
 
   it("getInStream(OUTFILE) yields a readable stream", () => {

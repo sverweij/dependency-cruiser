@@ -19,7 +19,7 @@ describe("[U] extract/resolve/module-classifiers - isExternalModule", () => {
   });
   it("returns true when passed a path that includes the one passed external module folder", () => {
     expect(
-      isExternalModule("node_modules/a-path-to/index.js", ["node_modules"])
+      isExternalModule("node_modules/a-path-to/index.js", ["node_modules"]),
     ).to.equal(true);
   });
   it("returns true when passed a path that includes one of the passed external module folders", () => {
@@ -28,7 +28,7 @@ describe("[U] extract/resolve/module-classifiers - isExternalModule", () => {
         "node_modules",
         "node_modules/@types",
         "shwok",
-      ])
+      ]),
     ).to.equal(true);
   });
 });

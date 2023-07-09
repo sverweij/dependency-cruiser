@@ -5,8 +5,8 @@ describe("[U] ast-extractors/extract-swc - regular commonjs require", () => {
   it("extracts require of a module that uses an export-equals'", () => {
     expect(
       extractWithSwc(
-        "import thing = require('./thing-that-uses-export-equals');"
-      )
+        "import thing = require('./thing-that-uses-export-equals');",
+      ),
     ).to.deep.equal([
       {
         module: "./thing-that-uses-export-equals",
@@ -22,8 +22,8 @@ describe("[U] ast-extractors/extract-swc - regular commonjs require", () => {
       extractWithSwc(
         `const lala1 = require('legit-one');
                  let lala2 = require('legit-two');
-                 var lala3 = require('legit-three');`
-      )
+                 var lala3 = require('legit-three');`,
+      ),
     ).to.deep.equal([
       {
         module: "legit-one",
@@ -60,8 +60,8 @@ describe("[U] ast-extractors/extract-swc - regular commonjs require", () => {
                             }
                         }
                     }
-                }`
-      )
+                }`,
+      ),
     ).to.deep.equal([
       {
         module: "midash",
@@ -86,7 +86,7 @@ describe("[U] ast-extractors/extract-swc - regular commonjs require", () => {
 
   it("extracts regular require with a template string without placeholders", () => {
     expect(
-      extractWithSwc("const lala = require(`thunderscore`)")
+      extractWithSwc("const lala = require(`thunderscore`)"),
     ).to.deep.equal([
       {
         module: "thunderscore",
@@ -108,7 +108,7 @@ describe("[U] ast-extractors/extract-swc - regular commonjs require", () => {
   it("ignores regular require with a template literal with placeholders", () => {
     expect(
       // eslint-disable-next-line no-template-curly-in-string
-      extractWithSwc("const lala = require(`shwoooop/${blabla}`)")
+      extractWithSwc("const lala = require(`shwoooop/${blabla}`)"),
     ).to.deep.equal([]);
   });
 

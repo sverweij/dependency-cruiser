@@ -12,13 +12,13 @@ describe("[I] vue transpiler", () => {
     expect(
       normalizeNewline(
         wrap.transpile(
-          readFileSync(join(__dirname, "__mocks__/vue.vue"), "utf8")
-        )
-      )
+          readFileSync(join(__dirname, "__mocks__/vue.vue"), "utf8"),
+        ),
+      ),
     ).to.equal(
       normalizeNewline(
-        readFileSync(join(__dirname, "__fixtures__/vue.js"), "utf8")
-      )
+        readFileSync(join(__dirname, "__fixtures__/vue.js"), "utf8"),
+      ),
     );
   });
 
@@ -26,9 +26,9 @@ describe("[I] vue transpiler", () => {
     expect(
       normalizeNewline(
         wrap.transpile(
-          readFileSync(join(__dirname, "__mocks__/vue-noscript.vue"), "utf8")
-        )
-      )
+          readFileSync(join(__dirname, "__mocks__/vue-noscript.vue"), "utf8"),
+        ),
+      ),
     ).to.equal(normalizeNewline(""));
   });
 
@@ -36,9 +36,9 @@ describe("[I] vue transpiler", () => {
     expect(
       normalizeNewline(
         wrap.transpile(
-          readFileSync(join(__dirname, "__mocks__/vue-invalid.vue"), "utf8")
-        )
-      )
+          readFileSync(join(__dirname, "__mocks__/vue-invalid.vue"), "utf8"),
+        ),
+      ),
     ).to.equal(normalizeNewline(""));
   });
 });

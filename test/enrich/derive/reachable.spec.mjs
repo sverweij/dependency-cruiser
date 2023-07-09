@@ -124,7 +124,7 @@ describe("[U] enrich/derive/reachable/index - reachability detection", () => {
     };
 
     expect(
-      addReachability(GRAPH, normalize(lForbiddenReachabilityRuleSetHajoo))
+      addReachability(GRAPH, normalize(lForbiddenReachabilityRuleSetHajoo)),
     ).to.deep.equal(ANNOTATED_GRAPH_FOR_HAJOO);
   });
 
@@ -196,7 +196,7 @@ describe("[U] enrich/derive/reachable/index - reachability detection", () => {
       },
     ];
     expect(
-      addReachability(GRAPH, normalize(lForbiddenReachabilityRuleSetHajoo))
+      addReachability(GRAPH, normalize(lForbiddenReachabilityRuleSetHajoo)),
     ).to.deep.equal(lAnnotatedGraphForHajooAllowed);
   });
 
@@ -268,7 +268,7 @@ describe("[U] enrich/derive/reachable/index - reachability detection", () => {
       },
     ];
     expect(
-      addReachability(GRAPH, normalize(lForbiddenReachabilityRuleSetHajoo))
+      addReachability(GRAPH, normalize(lForbiddenReachabilityRuleSetHajoo)),
     ).to.deep.equal(lAnnotatedGraphForHajooAllowed);
   });
 
@@ -366,7 +366,7 @@ describe("[U] enrich/derive/reachable/index - reachability detection", () => {
       },
     ];
     expect(
-      addReachability(GRAPH_TWO, normalize(lForbiddenReachabilityRuleSetHajoo))
+      addReachability(GRAPH_TWO, normalize(lForbiddenReachabilityRuleSetHajoo)),
     ).to.deep.equal(lAnnotatedGraphForHajooAllowed);
   });
 
@@ -381,7 +381,7 @@ describe("[U] enrich/derive/reachable/index - reachability detection", () => {
     };
 
     expect(
-      addReachability(GRAPH, normalize(lForbiddenReachabilityRuleSetHajoo))
+      addReachability(GRAPH, normalize(lForbiddenReachabilityRuleSetHajoo)),
     ).to.deep.equal(ANNOTATED_GRAPH_FOR_HAJOO);
   });
 
@@ -428,7 +428,7 @@ describe("[U] enrich/derive/reachable/index - reachability detection", () => {
     ];
 
     expect(
-      addReachability(GRAPH, normalize(lForbiddenReachabilityRuleSetHajoo))
+      addReachability(GRAPH, normalize(lForbiddenReachabilityRuleSetHajoo)),
     ).to.deep.equal(lAnnotatedGraphForHajooNoIntermediate);
   });
 
@@ -475,7 +475,7 @@ describe("[U] enrich/derive/reachable/index - reachability detection", () => {
     ];
 
     expect(
-      addReachability(GRAPH, normalize(lForbiddenReachabilityRuleSetHajoo))
+      addReachability(GRAPH, normalize(lForbiddenReachabilityRuleSetHajoo)),
     ).to.deep.equal(lAnnotatedGraphForHajooNoIntermediate);
   });
 
@@ -599,7 +599,7 @@ describe("[U] enrich/derive/reachable/index - reachability detection", () => {
     ];
 
     expect(
-      addReachability(lSourceGraph, normalize(lPoorMansTestCoverageRule))
+      addReachability(lSourceGraph, normalize(lPoorMansTestCoverageRule)),
     ).to.deep.equal(lResultGraph);
   });
 
@@ -738,7 +738,7 @@ describe("[U] enrich/derive/reachable/index - reachability detection", () => {
     ];
 
     expect(
-      addReachability(lSourceGraph, normalize(lTwoDifferentRules))
+      addReachability(lSourceGraph, normalize(lTwoDifferentRules)),
     ).to.deep.equal(lResultGraph);
   });
 
@@ -836,7 +836,7 @@ describe("[U] enrich/derive/reachable/index - reachability detection", () => {
       },
     ];
     expect(
-      addReachability(lSourceGraph, normalize(lTwoDifferentRules))
+      addReachability(lSourceGraph, normalize(lTwoDifferentRules)),
     ).to.deep.equal(lResultGraph);
   });
 
@@ -1030,7 +1030,7 @@ describe("[U] enrich/derive/reachable/index - reachability detection", () => {
       },
     ];
     expect(
-      addReachability(lDependencyGraph, normalize(lRuleSetWithCaptureGroup))
+      addReachability(lDependencyGraph, normalize(lRuleSetWithCaptureGroup)),
     ).to.deep.equal(lExpectedGraph);
   });
 });

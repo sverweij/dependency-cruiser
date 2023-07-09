@@ -17,9 +17,9 @@ const same = (pName, pOptions, pMermaidModule = mermaid) => {
   const expected = readFileSync(
     join(
       mockPath,
-      `${pName}${(pOptions || {}).minify === false ? ".mmd" : ".min.mmd"}`
+      `${pName}${(pOptions || {}).minify === false ? ".mmd" : ".min.mmd"}`,
     ),
-    "utf8"
+    "utf8",
   );
   const output = pMermaidModule(definition, pOptions).output;
   expect(output).to.deep.equal(expected);
@@ -62,12 +62,12 @@ describe("[I] configs/plugins/mermaid-reporter-plugin", () => {
     same(
       "dependency-cruiser-2019-01-14",
       { minify: false },
-      mermaidReporterPlugin
+      mermaidReporterPlugin,
     );
     same(
       "dependency-cruiser-2019-01-14",
       { minify: true },
-      mermaidReporterPlugin
+      mermaidReporterPlugin,
     );
   });
 });

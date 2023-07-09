@@ -17,8 +17,8 @@ describe("[U] enrich/derive/metrics/module - module stability metrics derivation
             dependents: [],
           },
         ],
-        { metrics: true }
-      )
+        { metrics: true },
+      ),
     ).to.deep.equal([
       {
         source: "src/hello.js",
@@ -39,8 +39,8 @@ describe("[U] enrich/derive/metrics/module - module stability metrics derivation
             dependents: [],
           },
         ],
-        { metrics: true }
-      )
+        { metrics: true },
+      ),
     ).to.deep.equal([
       {
         source: "src/hello.js",
@@ -61,8 +61,8 @@ describe("[U] enrich/derive/metrics/module - module stability metrics derivation
             dependents: ["src/ola.js", "node_modules/shodash/index.js"],
           },
         ],
-        { metrics: true }
-      )
+        { metrics: true },
+      ),
     ).to.deep.equal([
       {
         source: "src/hello.js",
@@ -83,8 +83,8 @@ describe("[U] enrich/derive/metrics/module - module stability metrics derivation
             dependents: [],
           },
         ],
-        { metrics: true }
-      )[0].instability
+        { metrics: true },
+      )[0].instability,
     ).to.equal(1);
   });
 
@@ -98,8 +98,8 @@ describe("[U] enrich/derive/metrics/module - module stability metrics derivation
             dependents: ["three", "eight", "actually"],
           },
         ],
-        { metrics: true }
-      )[0].instability
+        { metrics: true },
+      )[0].instability,
       // eslint-disable-next-line no-magic-numbers
     ).to.equal(0.625);
   });
@@ -115,8 +115,8 @@ describe("[U] enrich/derive/metrics/module - module stability metrics derivation
             dependents: ["een", "twee", "drie", "vier"],
           },
         ],
-        { metrics: true }
-      )
+        { metrics: true },
+      ),
     ).to.deep.equal([
       {
         source: "os",

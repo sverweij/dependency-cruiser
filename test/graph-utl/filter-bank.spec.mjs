@@ -66,21 +66,21 @@ describe("[U] graph-utl/filter-bank - null's, naughts, and zeros", () => {
     expect(
       applyFilters(MODULES, {
         exclude: {},
-      })
+      }),
     ).to.deep.equal(MODULES);
   });
   it("returns the input when empty filters are passed (includeOnly)", () => {
     expect(
       applyFilters(MODULES, {
         includeOnly: {},
-      })
+      }),
     ).to.deep.equal(MODULES);
   });
   it("returns the input when empty filters are passed (focus)", () => {
     expect(
       applyFilters(MODULES, {
         focus: {},
-      })
+      }),
     ).to.deep.equal(MODULES);
   });
 });
@@ -88,7 +88,7 @@ describe("[U] graph-utl/filter-bank - null's, naughts, and zeros", () => {
 describe("[U] graph-utl/filter-bank - exclude, includeOnly, reaches, highlight", () => {
   it("returns the input without excluded modules when exclude is passed ", () => {
     expect(
-      applyFilters(MODULES, { exclude: { path: "^excluded" } })
+      applyFilters(MODULES, { exclude: { path: "^excluded" } }),
     ).to.deep.equal([
       {
         source: "included/index.js",
@@ -131,7 +131,7 @@ describe("[U] graph-utl/filter-bank - exclude, includeOnly, reaches, highlight",
 
   it("returns the input with only the included modules when includeOnly is passed ", () => {
     expect(
-      applyFilters(MODULES, { includeOnly: { path: "included" } })
+      applyFilters(MODULES, { includeOnly: { path: "included" } }),
     ).to.deep.equal([
       {
         source: "included/index.js",
@@ -166,7 +166,7 @@ describe("[U] graph-utl/filter-bank - exclude, includeOnly, reaches, highlight",
     expect(
       applyFilters(reportModules, {
         reaches: { path: "this-module-does-not-exist" },
-      })
+      }),
     ).to.deep.equal([]);
   });
 
@@ -174,7 +174,7 @@ describe("[U] graph-utl/filter-bank - exclude, includeOnly, reaches, highlight",
     expect(
       applyFilters(reportModules, {
         reaches: { path: "src/report/index.js" },
-      })
+      }),
     ).to.deep.equal(reportIndexModule);
   });
 
@@ -182,14 +182,14 @@ describe("[U] graph-utl/filter-bank - exclude, includeOnly, reaches, highlight",
     expect(
       applyFilters(reportModules, {
         reaches: { path: "src/report/(utl/|anon/anonymize-path-element)" },
-      })
+      }),
     ).to.deep.equal(multiModuleRegexResult);
   });
   it("highlight: labels modules with matchesHighlight when they match the highlight", () => {
     expect(
       applyFilters(reportModules, {
         highlight: { path: "src/report/(utl/|anon/anonymize-path-element)" },
-      })
+      }),
     ).to.deep.equal(highlightResult);
   });
 });

@@ -13,8 +13,8 @@ describe("[U] extract/resolve/determineDependencyTypes - determine dependencyTyp
           couldNotResolve: false,
           resolved: "src/bla/localthing",
         },
-        "./localthing"
-      )
+        "./localthing",
+      ),
     ).to.deep.equal(["local"]);
   });
 
@@ -26,8 +26,8 @@ describe("[U] extract/resolve/determineDependencyTypes - determine dependencyTyp
           resolved: "fs",
           coreModule: true,
         },
-        "fs"
-      )
+        "fs",
+      ),
     ).to.deep.equal(["core"]);
   });
 
@@ -38,8 +38,8 @@ describe("[U] extract/resolve/determineDependencyTypes - determine dependencyTyp
           couldNotResolve: true,
           resolved: "unresolvable-thing",
         },
-        "unresolvable-thing"
-      )
+        "unresolvable-thing",
+      ),
     ).to.deep.equal(["unknown"]);
   });
 
@@ -50,8 +50,8 @@ describe("[U] extract/resolve/determineDependencyTypes - determine dependencyTyp
           couldNotResolve: false,
           resolved: "node_modules/cool-module/main/index/js",
         },
-        "cool-module"
-      )
+        "cool-module",
+      ),
     ).to.deep.equal(["npm-unknown"]);
   });
 
@@ -64,8 +64,8 @@ describe("[U] extract/resolve/determineDependencyTypes - determine dependencyTyp
           resolved: "node_modules/cool-module/main/index.js",
         },
         "cool-module",
-        {}
-      )
+        {},
+      ),
     ).to.deep.equal(["npm-no-pkg"]);
   });
 
@@ -82,8 +82,8 @@ describe("[U] extract/resolve/determineDependencyTypes - determine dependencyTyp
           dependencies: {
             "cool-module": "1.2.3",
           },
-        }
-      )
+        },
+      ),
     ).to.deep.equal(["npm"]);
   });
 
@@ -99,8 +99,8 @@ describe("[U] extract/resolve/determineDependencyTypes - determine dependencyTyp
           devDependencies: {
             "cool-module": "1.2.3",
           },
-        }
-      )
+        },
+      ),
     ).to.deep.equal(["npm-dev"]);
   });
 
@@ -116,8 +116,8 @@ describe("[U] extract/resolve/determineDependencyTypes - determine dependencyTyp
           devDependencies: {
             "@types/my-totally-weird-types": "1.2.3",
           },
-        }
-      )
+        },
+      ),
     ).to.deep.equal(["npm-dev"]);
   });
 
@@ -136,8 +136,8 @@ describe("[U] extract/resolve/determineDependencyTypes - determine dependencyTyp
           devDependencies: {
             "@types/snodash": "1.2.3",
           },
-        }
-      )
+        },
+      ),
     ).to.deep.equal(["npm"]);
   });
 
@@ -157,8 +157,8 @@ describe("[U] extract/resolve/determineDependencyTypes - determine dependencyTyp
         "whatever",
         {
           modules: ["node_modules"],
-        }
-      )
+        },
+      ),
     ).to.deep.equal(["npm-no-pkg"]);
   });
 
@@ -177,8 +177,8 @@ describe("[U] extract/resolve/determineDependencyTypes - determine dependencyTyp
           devDependencies: {
             "cool-module": "1.2.3",
           },
-        }
-      )
+        },
+      ),
     ).to.deep.equal(["npm", "npm-dev"]);
   });
 
@@ -197,8 +197,8 @@ describe("[U] extract/resolve/determineDependencyTypes - determine dependencyTyp
           devDependencies: {
             "cool-module/wappie": "1.2.3",
           },
-        }
-      )
+        },
+      ),
     ).to.deep.equal(["npm"]);
   });
 
@@ -214,8 +214,8 @@ describe("[U] extract/resolve/determineDependencyTypes - determine dependencyTyp
           vagueDependencies: {
             "cool-module": "1.2.3",
           },
-        }
-      )
+        },
+      ),
     ).to.deep.equal(["npm-no-pkg"]);
   });
 
@@ -233,8 +233,8 @@ describe("[U] extract/resolve/determineDependencyTypes - determine dependencyTyp
           alias: {
             "@": "src",
           },
-        }
-      )
+        },
+      ),
     ).to.deep.equal(["aliased"]);
   });
 
@@ -250,8 +250,8 @@ describe("[U] extract/resolve/determineDependencyTypes - determine dependencyTyp
           cerebralDependencies: {
             "cool-module": "1.2.3",
           },
-        }
-      )
+        },
+      ),
     ).to.deep.equal(["undetermined"]);
   });
 
@@ -267,8 +267,8 @@ describe("[U] extract/resolve/determineDependencyTypes - determine dependencyTyp
         "whatever",
         {
           modules: ["node_modules", "src"],
-        }
-      )
+        },
+      ),
     ).to.deep.equal(["localmodule"]);
   });
 
@@ -288,8 +288,8 @@ describe("[U] extract/resolve/determineDependencyTypes - determine dependencyTyp
             resolve(__dirname, "socrates", "hemlock", "src"),
           ],
         },
-        resolve(__dirname, "socrates", "hemlock", "src", "bla")
-      )
+        resolve(__dirname, "socrates", "hemlock", "src", "bla"),
+      ),
     ).to.deep.equal(["localmodule"]);
   });
 
@@ -305,8 +305,8 @@ describe("[U] extract/resolve/determineDependencyTypes - determine dependencyTyp
         "whatever",
         {
           modules: ["node_modules", "src"],
-        }
-      )
+        },
+      ),
     ).to.deep.equal(["undetermined"]);
   });
 
@@ -323,8 +323,8 @@ describe("[U] extract/resolve/determineDependencyTypes - determine dependencyTyp
         "whatever",
         {
           modules: ["node_modules", "src"],
-        }
-      )
+        },
+      ),
     ).to.deep.equal(["local", "type-only"]);
   });
 });

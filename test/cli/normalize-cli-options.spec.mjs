@@ -22,7 +22,7 @@ describe("[I] cli/normalizeCliOptions - regular normalizations", () => {
 
   it("normalizes --module-systems cjs,es6 to [cjs, es6]", async () => {
     expect(
-      await normalizeCliOptions({ moduleSystems: "cjs,es6" })
+      await normalizeCliOptions({ moduleSystems: "cjs,es6" }),
     ).to.deep.equal({
       outputTo: "-",
       outputType: "err",
@@ -57,7 +57,7 @@ describe("[I] cli/normalizeCliOptions - regular normalizations", () => {
   it("-c / --config with something gets translated to -v/ --validate.", async () => {
     process.chdir("test/cli/__fixtures__/normalize-config/json-only");
     expect(
-      await normalizeCliOptions({ config: ".dependency-cruiser.json" })
+      await normalizeCliOptions({ config: ".dependency-cruiser.json" }),
     ).to.deep.equal({
       outputTo: "-",
       outputType: "err",
@@ -124,7 +124,7 @@ describe("[I] cli/normalizeCliOptions - regular normalizations", () => {
     expect(
       await normalizeCliOptions({
         validate: "./test/cli/__fixtures__/rules.empty.json",
-      })
+      }),
     ).to.deep.equal({
       outputTo: "-",
       outputType: "err",
@@ -138,7 +138,7 @@ describe("[I] cli/normalizeCliOptions - regular normalizations", () => {
     expect(
       await normalizeCliOptions({
         validate: "./test/cli/__fixtures__/rules.withcomments.json",
-      })
+      }),
     ).to.deep.equal({
       outputTo: "-",
       outputType: "err",
@@ -163,7 +163,7 @@ describe("[I] cli/normalizeCliOptions - regular normalizations", () => {
     expect(
       await normalizeCliOptions({
         validate: "./test/cli/__fixtures__/rules.withcomments.js",
-      })
+      }),
     ).to.deep.equal({
       outputTo: "-",
       outputType: "err",
@@ -186,11 +186,11 @@ describe("[I] cli/normalizeCliOptions - regular normalizations", () => {
 
   it("accepts and interprets a javascript rule file (absolute path)", async () => {
     const lRulesFileName = fileURLToPath(
-      new URL("__fixtures__/rules.withcomments.js", import.meta.url)
+      new URL("__fixtures__/rules.withcomments.js", import.meta.url),
     );
 
     expect(
-      await normalizeCliOptions({ validate: lRulesFileName })
+      await normalizeCliOptions({ validate: lRulesFileName }),
     ).to.deep.equal({
       outputTo: "-",
       outputType: "err",
@@ -215,7 +215,7 @@ describe("[I] cli/normalizeCliOptions - regular normalizations", () => {
     expect(
       await normalizeCliOptions({
         validate: "./test/cli/__fixtures__/rules.tsConfigNoFileName.json",
-      })
+      }),
     ).to.deep.equal({
       outputTo: "-",
       outputType: "err",
@@ -235,7 +235,7 @@ describe("[I] cli/normalizeCliOptions - regular normalizations", () => {
     expect(
       await normalizeCliOptions({
         validate: "./test/cli/__fixtures__/rules.webpackConfigNoFileName.json",
-      })
+      }),
     ).to.deep.equal({
       outputTo: "-",
       outputType: "err",
@@ -259,7 +259,7 @@ describe("[I] cli/normalizeCliOptions - regular normalizations", () => {
 
   it("progress with parameter none ends up as progress: none", async () => {
     expect(
-      await normalizeCliOptions({ progress: "performance-log" })
+      await normalizeCliOptions({ progress: "performance-log" }),
     ).to.contain({
       progress: "performance-log",
     });
@@ -275,7 +275,7 @@ describe("[I] cli/normalizeCliOptions - regular normalizations", () => {
     expect(await normalizeCliOptions({ cache: "some-string" })).to.deep.contain(
       {
         cache: { folder: "some-string" },
-      }
+      },
     );
   });
 
@@ -293,13 +293,13 @@ describe("[I] cli/normalizeCliOptions - regular normalizations", () => {
 
   it("no cache option translates to still not having a cache option", async () => {
     expect(
-      await normalizeCliOptions({ "not-a-cache-option": true })
+      await normalizeCliOptions({ "not-a-cache-option": true }),
     ).to.not.haveOwnProperty("cache");
   });
 
   it("cache-strategy with a string value == 'content' translates to the strategy 'content' in the cache option", async () => {
     expect(
-      await normalizeCliOptions({ cacheStrategy: "content" })
+      await normalizeCliOptions({ cacheStrategy: "content" }),
     ).to.deep.contain({
       cache: { strategy: "content" },
     });
@@ -307,7 +307,7 @@ describe("[I] cli/normalizeCliOptions - regular normalizations", () => {
 
   it("cache-strategy with a string value !== 'content' translates to the strategy 'metadata' in the cache option", async () => {
     expect(
-      await normalizeCliOptions({ cacheStrategy: "some-string" })
+      await normalizeCliOptions({ cacheStrategy: "some-string" }),
     ).to.deep.contain({
       cache: { strategy: "metadata" },
     });
@@ -318,7 +318,7 @@ describe("[I] cli/normalizeCliOptions - regular normalizations", () => {
       await normalizeCliOptions({
         cache: "somewhere",
         cacheStrategy: "some-string",
-      })
+      }),
     ).to.deep.contain({
       cache: { folder: "somewhere", strategy: "metadata" },
     });
@@ -326,7 +326,7 @@ describe("[I] cli/normalizeCliOptions - regular normalizations", () => {
 
   it("cache with a value of true & cache-strategy with a string value translates to a cache option with that strategy", async () => {
     expect(
-      await normalizeCliOptions({ cache: true, cacheStrategy: "metadata" })
+      await normalizeCliOptions({ cache: true, cacheStrategy: "metadata" }),
     ).to.deep.contain({
       cache: { strategy: "metadata" },
     });
@@ -334,7 +334,7 @@ describe("[I] cli/normalizeCliOptions - regular normalizations", () => {
 
   it("cache with a value of false & cache-strategy with a string value translates to a cache option with that strategy", async () => {
     expect(
-      await normalizeCliOptions({ cache: false, cacheStrategy: "metadata" })
+      await normalizeCliOptions({ cache: false, cacheStrategy: "metadata" }),
     ).to.deep.contain({
       cache: { strategy: "metadata" },
     });
@@ -342,7 +342,7 @@ describe("[I] cli/normalizeCliOptions - regular normalizations", () => {
 
   it("cache with a value of true & cache-strategy with a string value translates to a cache option with that strategy x", async () => {
     expect(
-      await normalizeCliOptions({ cache: true, cacheStrategy: "content" })
+      await normalizeCliOptions({ cache: true, cacheStrategy: "content" }),
     ).to.deep.contain({
       cache: { strategy: "content" },
     });
@@ -370,7 +370,9 @@ describe("[I] cli/normalizeCliOptions - known violations", () => {
   it("--ignore-known with params gets the mentioned known-violations", async () => {
     process.chdir("test/cli/__fixtures__/normalize-config/known-violations");
     expect(
-      await normalizeCliOptions({ ignoreKnown: "custom-known-violations.json" })
+      await normalizeCliOptions({
+        ignoreKnown: "custom-known-violations.json",
+      }),
     ).to.deep.equal({
       outputTo: "-",
       outputType: "err",
@@ -392,7 +394,7 @@ describe("[I] cli/normalizeCliOptions - known violations", () => {
       lError = pError.toString();
     }
     expect(lError).to.contain(
-      `Can't open 'this-file-does-not-exist' for reading. Does it exist?`
+      `Can't open 'this-file-does-not-exist' for reading. Does it exist?`,
     );
   });
 });

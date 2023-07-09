@@ -8,10 +8,10 @@ import deps from "./__mocks__/cjs-no-dependency-valid.mjs";
 const elementFixture = normalizeNewline(
   readFileSync(
     fileURLToPath(
-      new URL("__mocks__/cjs-no-dependency-valid.csv", import.meta.url)
+      new URL("__mocks__/cjs-no-dependency-valid.csv", import.meta.url),
     ),
-    "utf8"
-  )
+    "utf8",
+  ),
 );
 
 describe("[I] report/csv reporter", () => {

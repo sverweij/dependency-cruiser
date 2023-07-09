@@ -188,7 +188,7 @@ function nodeListToArray(pNodeList) {
 
 function resetNodesAndEdges() {
   nodeListToArray(document.querySelectorAll(".current")).forEach(
-    removeHighlight
+    removeHighlight,
   );
 }
 

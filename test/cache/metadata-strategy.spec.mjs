@@ -32,10 +32,10 @@ describe("[U] cache/metadata-strategy - getRevisionData", () => {
           shaRetrievalFn: () => DUMMY_SHA,
           diffListFn: () => {
             throw new Error(
-              "fatal: not a git repository (or any of the parent directories): .git"
+              "fatal: not a git repository (or any of the parent directories): .git",
             );
           },
-        }
+        },
       );
     } catch (pError) {
       lError = pError.message;
@@ -72,8 +72,8 @@ describe("[U] cache/metadata-strategy - getRevisionData", () => {
           interestingChangeTypes: INTERESTING_CHANGE_TYPES,
           shaRetrievalFn: () => DUMMY_SHA,
           diffListFn: () => lInputChanges,
-        }
-      )
+        },
+      ),
     ).to.deep.equal(lExpected);
   });
 
@@ -106,8 +106,8 @@ describe("[U] cache/metadata-strategy - getRevisionData", () => {
           interestingChangeTypes: INTERESTING_CHANGE_TYPES,
           shaRetrievalFn: () => DUMMY_SHA,
           diffListFn: () => lInputChanges,
-        }
-      )
+        },
+      ),
     ).to.deep.equal(lExpected);
   });
 
@@ -122,8 +122,8 @@ describe("[U] cache/metadata-strategy - getRevisionData", () => {
           interestingChangeTypes: INTERESTING_CHANGE_TYPES,
           shaRetrievalFn: () => DUMMY_SHA,
           diffListFn: () => [],
-        }
-      )
+        },
+      ),
     ).to.deep.equal({
       SHA1: DUMMY_SHA,
       changes: [],
@@ -168,8 +168,8 @@ describe("[U] cache/metadata-strategy - getRevisionData", () => {
           shaRetrievalFn: () => DUMMY_SHA,
           diffListFn: () => lInputChanges,
           checksumFn: dummyCheckSumFunction,
-        }
-      )
+        },
+      ),
     ).to.deep.equal({
       SHA1: DUMMY_SHA,
       changes: [
@@ -230,8 +230,8 @@ describe("[U] cache/metadata-strategy - getRevisionData", () => {
           shaRetrievalFn: () => DUMMY_SHA,
           diffListFn: () => lInputChanges,
           checksumFn: dummyCheckSumFunction,
-        }
-      )
+        },
+      ),
     ).to.deep.equal({
       SHA1: DUMMY_SHA,
       changes: [
@@ -316,8 +316,8 @@ describe("[U] cache/metadata-strategy - getRevisionData", () => {
           shaRetrievalFn: () => DUMMY_SHA,
           diffListFn: () => lInputChanges,
           checksumFn: dummyCheckSumFunction,
-        }
-      )
+        },
+      ),
     ).to.deep.equal({
       SHA1: DUMMY_SHA,
       changes: [
@@ -384,7 +384,7 @@ describe("[U] cache/metadata-strategy - revisionDataEqual", () => {
 
   it("returns false when revision data objects are don't exist", () => {
     expect(new MetaDataStrategy().revisionDataEqual(null, null)).to.equal(
-      false
+      false,
     );
   });
 
@@ -393,7 +393,7 @@ describe("[U] cache/metadata-strategy - revisionDataEqual", () => {
       new MetaDataStrategy().revisionDataEqual(null, {
         SHA1: "some-sha",
         changes: [],
-      })
+      }),
     ).to.equal(false);
   });
 
@@ -401,8 +401,8 @@ describe("[U] cache/metadata-strategy - revisionDataEqual", () => {
     expect(
       new MetaDataStrategy().revisionDataEqual(
         { SHA1: "some-sha", changes: [] },
-        null
-      )
+        null,
+      ),
     ).to.equal(false);
   });
 
@@ -410,8 +410,8 @@ describe("[U] cache/metadata-strategy - revisionDataEqual", () => {
     expect(
       new MetaDataStrategy().revisionDataEqual(
         { SHA1: "some-sha", changes: [] },
-        { SHA1: "some-other-sha", changes: [] }
-      )
+        { SHA1: "some-other-sha", changes: [] },
+      ),
     ).to.equal(false);
   });
 
@@ -419,8 +419,8 @@ describe("[U] cache/metadata-strategy - revisionDataEqual", () => {
     expect(
       new MetaDataStrategy().revisionDataEqual(
         { SHA1: "some-sha", changes: [] },
-        { SHA1: "some-sha", changes: lChanges }
-      )
+        { SHA1: "some-sha", changes: lChanges },
+      ),
     ).to.equal(false);
   });
 
@@ -428,8 +428,8 @@ describe("[U] cache/metadata-strategy - revisionDataEqual", () => {
     expect(
       new MetaDataStrategy().revisionDataEqual(
         { SHA1: "some-sha", changes: lChanges },
-        { SHA1: "some-sha", changes: lChanges }
-      )
+        { SHA1: "some-sha", changes: lChanges },
+      ),
     ).to.equal(true);
   });
 
@@ -437,8 +437,8 @@ describe("[U] cache/metadata-strategy - revisionDataEqual", () => {
     expect(
       new MetaDataStrategy().revisionDataEqual(
         { SHA1: "some-sha", changes: [] },
-        { SHA1: "some-sha", changes: [] }
-      )
+        { SHA1: "some-sha", changes: [] },
+      ),
     ).to.equal(true);
   });
 });

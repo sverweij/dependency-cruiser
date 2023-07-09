@@ -17,11 +17,11 @@ describe("[I] main/resolve-options/normalize", () => {
   it("comes with a set of defaults when passed with no options at all", async () => {
     const lNormalizedOptions = await normalizeResolveOptions(
       {},
-      normalizeCruiseOptions({})
+      normalizeCruiseOptions({}),
     );
 
     expect(Object.keys(lNormalizedOptions).length).to.equal(
-      lDefaultNoOfResolveOptions
+      lDefaultNoOfResolveOptions,
     );
     expect(lNormalizedOptions.symlinks).to.equal(false);
     expect(lNormalizedOptions.tsConfig).to.equal(null);
@@ -37,11 +37,11 @@ describe("[I] main/resolve-options/normalize", () => {
       normalizeCruiseOptions({
         ruleSet: { options: {} },
       }),
-      lTsconfigContents
+      lTsconfigContents,
     );
 
     expect(Object.keys(lNormalizedOptions).length).to.equal(
-      lDefaultNoOfResolveOptions
+      lDefaultNoOfResolveOptions,
     );
     expect(lNormalizedOptions.symlinks).to.equal(false);
     expect(lNormalizedOptions.tsConfig).to.equal(null);
@@ -58,11 +58,11 @@ describe("[I] main/resolve-options/normalize", () => {
       normalizeCruiseOptions({
         ruleSet: { options: { tsConfig: { fileName: TEST_TSCONFIG } } },
       }),
-      lTsconfigContents
+      lTsconfigContents,
     );
 
     expect(Object.keys(lNormalizedOptions).length).to.equal(
-      lDefaultNoOfResolveOptions + 1
+      lDefaultNoOfResolveOptions + 1,
     );
     expect(lNormalizedOptions.symlinks).to.equal(false);
     expect(lNormalizedOptions.tsConfig).to.equal(TEST_TSCONFIG);
@@ -79,11 +79,11 @@ describe("[I] main/resolve-options/normalize", () => {
       normalizeCruiseOptions({
         ruleSet: { options: { tsConfig: { fileName: TEST_TSCONFIG } } },
       }),
-      lTsconfigContentsWithBaseURLAndPaths
+      lTsconfigContentsWithBaseURLAndPaths,
     );
 
     expect(Object.keys(lNormalizedOptions).length).to.equal(
-      lDefaultNoOfResolveOptions + 1
+      lDefaultNoOfResolveOptions + 1,
     );
     expect(lNormalizedOptions.symlinks).to.equal(false);
     expect(lNormalizedOptions.tsConfig).to.equal(TEST_TSCONFIG);

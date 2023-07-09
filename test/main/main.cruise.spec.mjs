@@ -16,7 +16,7 @@ const tsFixture = normBaseDirectory(requireJSON("./__fixtures__/ts.json"));
 const tsxFixture = normBaseDirectory(requireJSON("./__fixtures__/tsx.json"));
 const jsxFixture = normBaseDirectory(requireJSON("./__fixtures__/jsx.json"));
 const jsxAsObjectFixture = normBaseDirectory(
-  requireJSON("./__fixtures__/jsx-as-object.json")
+  requireJSON("./__fixtures__/jsx-as-object.json"),
 );
 
 use(chaiJSONSchema);
@@ -24,7 +24,7 @@ use(chaiJSONSchema);
 function pathPosixify(pOutput) {
   const lReturnValue = { ...pOutput };
   lReturnValue.summary.optionsUsed.args = pathToPosix(
-    lReturnValue.summary.optionsUsed.args
+    lReturnValue.summary.optionsUsed.args,
   );
   return lReturnValue;
 }
@@ -41,7 +41,7 @@ describe("[E] main.cruise - main", () => {
     const lResult = await cruise(
       [path.join(__dirname, "__mocks__", "ts")],
       {},
-      { bustTheCache: true }
+      { bustTheCache: true },
     );
 
     expect(pathPosixify(lResult.output)).to.deep.equal(tsFixture);
@@ -52,7 +52,7 @@ describe("[E] main.cruise - main", () => {
     const lResult = await cruise(
       ["test/main/__mocks__/tsx"],
       {},
-      { bustTheCache: true }
+      { bustTheCache: true },
     );
 
     expect(pathPosixify(lResult.output)).to.deep.equal(tsxFixture);
@@ -63,7 +63,7 @@ describe("[E] main.cruise - main", () => {
     const lResult = await cruise(
       ["test/main/__mocks__/jsx"],
       {},
-      { bustTheCache: true }
+      { bustTheCache: true },
     );
 
     expect(pathPosixify(lResult.output)).to.deep.equal(jsxFixture);
@@ -75,7 +75,7 @@ describe("[E] main.cruise - main", () => {
       {
         ruleSet: {},
       },
-      { bustTheCache: true }
+      { bustTheCache: true },
     );
 
     expect(pathPosixify(lResult.output)).to.deep.equal(jsxAsObjectFixture);
@@ -88,7 +88,7 @@ describe("[E] main.cruise - main", () => {
         ruleSet: {},
         collapse: "^test/main/__mocks__/collapse-after-cruise/src/[^/]+",
       },
-      { bustTheCache: true }
+      { bustTheCache: true },
     );
 
     expect(pathPosixify(lResult.output)).to.deep.equal(
@@ -96,10 +96,10 @@ describe("[E] main.cruise - main", () => {
         JSON.parse(
           readFileSync(
             "test/main/__mocks__/collapse-after-cruise/expected-result.json",
-            "utf8"
-          )
-        )
-      )
+            "utf8",
+          ),
+        ),
+      ),
     );
     expect(lResult.output).to.be.jsonSchema(cruiseResultSchema);
   });

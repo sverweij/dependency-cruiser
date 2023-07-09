@@ -83,10 +83,10 @@ describe("[I] report/markdown", () => {
     expect(lReport.output).to.contain("**1** informational");
     expect(lReport.output).to.contain("**2** ignored");
     expect(lReport.output).to.contain(
-      "|:warning:&nbsp;_cli-to-main-only-warn_|**0**|**1**|"
+      "|:warning:&nbsp;_cli-to-main-only-warn_|**0**|**1**|",
     );
     expect(lReport.output).to.contain(
-      ":see_no_evil:&nbsp;_cli-to-main-only-warn_"
+      ":see_no_evil:&nbsp;_cli-to-main-only-warn_",
     );
     expect(lReport.output).to.contain("src/cli/compileConfig/index.js");
 
@@ -109,10 +109,10 @@ describe("[I] report/markdown", () => {
     expect(lReport.output).to.contain("**1** informational");
     expect(lReport.output).to.contain("**2** ignored");
     expect(lReport.output).to.not.contain(
-      "|:warning:&nbsp;_cli-to-main-only-warn_|**0**|**1**|"
+      "|:warning:&nbsp;_cli-to-main-only-warn_|**0**|**1**|",
     );
     expect(lReport.output).to.not.contain(
-      ":see_no_evil:&nbsp;_cli-to-main-only-warn_"
+      ":see_no_evil:&nbsp;_cli-to-main-only-warn_",
     );
     expect(lReport.output).to.not.contain("src/cli/compileConfig/index.js");
 
@@ -129,15 +129,15 @@ describe("[I] report/markdown", () => {
 
     // empty 'to' column for module only rules
     expect(lResult.output).to.contain(
-      "|:exclamation:&nbsp;_no-orphans_|src/schema/baseline-violations.schema.js||"
+      "|:exclamation:&nbsp;_no-orphans_|src/schema/baseline-violations.schema.js||",
     );
     // cycles as cycles in the 'to' column:
     expect(lResult.output).to.contain(
-      "|:warning:&nbsp;_no-folder-cycles_|src/extract/parse|src/extract/transpile &rightarrow;<br/>src/extract/parse|"
+      "|:warning:&nbsp;_no-folder-cycles_|src/extract/parse|src/extract/transpile &rightarrow;<br/>src/extract/parse|",
     );
     // metrics violations with the 'instability' for the involved modules in:
     expect(lResult.output).to.contain(
-      '|:grey_exclamation:&nbsp;_SDP_|src/extract/gather-initial-sources.js&nbsp;<span class="extra">(I: 75%)</span>|src/extract/transpile/meta.js&nbsp;<span class="extra">(I: 80%)</span>|'
+      '|:grey_exclamation:&nbsp;_SDP_|src/extract/gather-initial-sources.js&nbsp;<span class="extra">(I: 75%)</span>|src/extract/transpile/meta.js&nbsp;<span class="extra">(I: 80%)</span>|',
     );
   });
 });

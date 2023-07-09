@@ -29,7 +29,7 @@ describe("[I] report/error-long", () => {
 
     expect(lResult.output).to.contain(`error no-leesplank: aap → noot${EOL}`);
     expect(lResult.output).to.contain(
-      "2 dependency violations (2 errors, 0 warnings). 33 modules, 333 dependencies cruised."
+      "2 dependency violations (2 errors, 0 warnings). 33 modules, 333 dependencies cruised.",
     );
     expect(lResult.output).to.contain("    comment to no-leesplank");
     expect(lResult.exitCode).to.equal(2);
@@ -38,7 +38,7 @@ describe("[I] report/error-long", () => {
     const lResult = render(warnDeps);
 
     expect(lResult.output).to.contain(
-      "1 dependency violations (0 errors, 1 warnings)"
+      "1 dependency violations (0 errors, 1 warnings)",
     );
     expect(lResult.exitCode).to.equal(0);
   });
@@ -47,7 +47,7 @@ describe("[I] report/error-long", () => {
 
     expect(lResult.output).to.contain(`error no-orphans: remi.js${EOL}`);
     expect(lResult.output).to.contain(
-      "1 dependency violations (1 errors, 0 warnings). 1 modules, 0 dependencies cruised."
+      "1 dependency violations (1 errors, 0 warnings). 1 modules, 0 dependencies cruised.",
     );
     expect(lResult.exitCode).to.equal(1);
   });

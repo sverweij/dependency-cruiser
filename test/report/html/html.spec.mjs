@@ -6,9 +6,9 @@ import deps from "./__mocks__/cjs-no-dependency-valid.mjs";
 
 const elementFixture = readFileSync(
   fileURLToPath(
-    new URL("__mocks__/cjs-no-dependency-valid.html", import.meta.url)
+    new URL("__mocks__/cjs-no-dependency-valid.html", import.meta.url),
   ),
-  "utf8"
+  "utf8",
 );
 
 describe("[I] report/html reporter", () => {

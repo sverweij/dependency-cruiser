@@ -26,7 +26,7 @@ describe("[I] validate/match-module-rule - reaches", () => {
             asDefinedInRule: "no-unreachable",
           },
         ],
-      })
+      }),
     ).to.equal(false);
   });
   it("rule without reachable attribute matches modules with a reaches (explicit)", () => {
@@ -38,7 +38,7 @@ describe("[I] validate/match-module-rule - reaches", () => {
             asDefinedInRule: "no-unreachable",
           },
         ],
-      })
+      }),
     ).to.equal(true);
   });
   it("rule without reachable attribute matches modules with a reaches (explicit, nameless rule)", () => {
@@ -50,7 +50,7 @@ describe("[I] validate/match-module-rule - reaches", () => {
             asDefinedInRule: "not-in-allowed",
           },
         ],
-      })
+      }),
     ).to.equal(true);
   });
 });

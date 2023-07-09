@@ -5,7 +5,7 @@ import { getASTFromSource } from "../../../src/extract/parse/to-javascript-ast.m
 const extractES6 = (pJavaScriptSource, pDependencies, pExtension = ".js") =>
   extractES6Deps(
     getASTFromSource({ source: pJavaScriptSource, extension: pExtension }),
-    pDependencies
+    pDependencies,
   );
 
 describe("[U] ast-extractors/extract-ES6-deps", () => {
@@ -43,7 +43,7 @@ describe("[U] ast-extractors/extract-ES6-deps", () => {
     extractES6(
       // eslint-disable-next-line no-template-curly-in-string
       "import(`./dynamic/${enhop}`).then(pModule => pModule.x);",
-      lDeps
+      lDeps,
     );
     expect(lDeps).to.deep.equal([]);
   });
@@ -80,7 +80,7 @@ describe("[U] ast-extractors/extract-ES6-deps", () => {
             determineWhatToImport = () => 'bla';
             import(determineWhatToImport()).then(pModule => pModule.x);
         `,
-      lDeps
+      lDeps,
     );
     expect(lDeps).to.deep.equal([]);
   });

@@ -13,12 +13,12 @@ describe("[I] validate/match-module-rule - match", () => {
   });
   it("does not match anything when passed an orphan rule and there's an explicit non-orphan module", () => {
     expect(
-      matchModuleRule.match({ from: { orphan: false } })(ORPHAN_RULE)
+      matchModuleRule.match({ from: { orphan: false } })(ORPHAN_RULE),
     ).to.equal(false);
   });
   it("matches when passed an orphan rule and there's an explicit non-orphan module", () => {
     expect(
-      matchModuleRule.match({ from: { orphan: true } })(ORPHAN_RULE)
+      matchModuleRule.match({ from: { orphan: true } })(ORPHAN_RULE),
     ).to.equal(false);
   });
 });

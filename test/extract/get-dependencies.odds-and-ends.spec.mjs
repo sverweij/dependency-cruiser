@@ -22,24 +22,24 @@ describe("[I] extract/getDependencies - Error scenarios - ", () => {
     const lOptions = normalizeCruiseOptions({});
     const lResolveOptions = await normalizeResolveOptions(
       { bustTheCache: true },
-      lOptions
+      lOptions,
     );
 
     expect(() =>
       getDependencies(
         "test/extract/__mocks__/syntax-error.js",
         lOptions,
-        lResolveOptions
-      )
+        lResolveOptions,
+      ),
     ).to.not.throw(
-      "Extracting dependencies ran afoul of... Unexpected token (1:3)"
+      "Extracting dependencies ran afoul of... Unexpected token (1:3)",
     );
   });
   it("Raises an exception on non-existing files", () => {
     expect(() => {
       getDependencies("non-existing-file.md", normalizeCruiseOptions({}), {});
     }).to.throw(
-      "Extracting dependencies ran afoul of...\n\n  ENOENT: no such file or directory, open "
+      "Extracting dependencies ran afoul of...\n\n  ENOENT: no such file or directory, open ",
     );
   });
 });
@@ -52,7 +52,7 @@ describe("[I] extract/getDependencies - even when require gets non-string argume
     lOptions = normalizeCruiseOptions({});
     lResolveOptions = await normalizeResolveOptions(
       { bustTheCache: true },
-      lOptions
+      lOptions,
     );
   });
 
@@ -61,8 +61,8 @@ describe("[I] extract/getDependencies - even when require gets non-string argume
       getDependencies(
         "./test/extract/__mocks__/cjs-require-non-strings/require-a-number.js",
         lOptions,
-        lResolveOptions
-      ).length
+        lResolveOptions,
+      ).length,
     ).to.equal(1);
   });
 
@@ -71,8 +71,8 @@ describe("[I] extract/getDependencies - even when require gets non-string argume
       getDependencies(
         "./test/extract/__mocks__/cjs-require-non-strings/require-a-function.js",
         lOptions,
-        lResolveOptions
-      ).length
+        lResolveOptions,
+      ).length,
     ).to.equal(1);
   });
 
@@ -81,8 +81,8 @@ describe("[I] extract/getDependencies - even when require gets non-string argume
       getDependencies(
         "./test/extract/__mocks__/cjs-require-non-strings/require-an-iife.js",
         normalizeCruiseOptions({}),
-        {}
-      ).length
+        {},
+      ).length,
     ).to.equal(1);
   });
 });
@@ -94,15 +94,15 @@ describe("[I] extract/getDependencies - include", () => {
     });
     const lResolveOptions = await normalizeResolveOptions(
       { bustTheCache: true },
-      lOptions
+      lOptions,
     );
 
     expect(
       getDependencies(
         "./test/extract/__mocks__/include/src/index.js",
         lOptions,
-        lResolveOptions
-      )
+        lResolveOptions,
+      ),
     ).to.deep.equal([]);
   });
 
@@ -110,15 +110,15 @@ describe("[I] extract/getDependencies - include", () => {
     const lOptions = normalizeCruiseOptions({ includeOnly: "/src/" });
     const lResolveOptions = await normalizeResolveOptions(
       { bustTheCache: true },
-      lOptions
+      lOptions,
     );
 
     expect(
       getDependencies(
         "./test/extract/__mocks__/include/src/index.js",
         lOptions,
-        lResolveOptions
-      )
+        lResolveOptions,
+      ),
     ).to.deep.equal([
       {
         coreModule: false,
@@ -139,15 +139,15 @@ describe("[I] extract/getDependencies - include", () => {
     const lOptions = normalizeCruiseOptions({ includeOnly: "include" });
     const lResolveOptions = await normalizeResolveOptions(
       { bustTheCache: true },
-      lOptions
+      lOptions,
     );
 
     expect(
       getDependencies(
         "./test/extract/__mocks__/include/src/index.js",
         lOptions,
-        lResolveOptions
-      )
+        lResolveOptions,
+      ),
     ).to.deep.equal([
       {
         coreModule: false,
@@ -180,15 +180,15 @@ describe("[I] extract/getDependencies - include", () => {
     const lOptions = normalizeCruiseOptions({ exoticRequireStrings: ["need"] });
     const lResolveOptions = await normalizeResolveOptions(
       { bustTheCache: true },
-      lOptions
+      lOptions,
     );
 
     expect(
       getDependencies(
         "./test/extract/__mocks__/exotic-require/index.js",
         lOptions,
-        lResolveOptions
-      )
+        lResolveOptions,
+      ),
     ).to.deep.equal([
       {
         coreModule: false,
@@ -212,15 +212,15 @@ describe("[I] extract/getDependencies - include", () => {
     });
     const lResolveOptions = await normalizeResolveOptions(
       { bustTheCache: true },
-      lOptions
+      lOptions,
     );
 
     expect(
       getDependencies(
         "./test/extract/__mocks__/extra-extensions/not-parsed-when-in-extra-extensions.yolo",
         lOptions,
-        lResolveOptions
-      )
+        lResolveOptions,
+      ),
     ).to.deep.equal([]);
   });
 
@@ -230,15 +230,15 @@ describe("[I] extract/getDependencies - include", () => {
     });
     const lResolveOptions = await normalizeResolveOptions(
       { bustTheCache: true },
-      lOptions
+      lOptions,
     );
 
     expect(
       getDependencies(
         "./test/extract/__mocks__/specifyTsPreCompilationDeps/index.ts",
         lOptions,
-        lResolveOptions
-      )
+        lResolveOptions,
+      ),
     ).to.deep.equal([
       {
         coreModule: false,

@@ -18,13 +18,13 @@ function removePerSessionAttributes(pString) {
 function readFixture(pRelativePath) {
   return readFileSync(
     fileURLToPath(new URL(pRelativePath, import.meta.url)),
-    "utf8"
+    "utf8",
   );
 }
 describe("[I] report/teamcity", () => {
   it("says everything fine when everything is fine", () => {
     const lFixture = readFixture(
-      "__mocks__/everything-fine-teamcity-format.txt"
+      "__mocks__/everything-fine-teamcity-format.txt",
     );
     const lResult = render(okdeps);
 
@@ -37,7 +37,7 @@ describe("[I] report/teamcity", () => {
     const lResult = render(moduleErrs);
 
     expect(removePerSessionAttributes(lResult.output)).to.equal(
-      removePerSessionAttributes(lFixture)
+      removePerSessionAttributes(lFixture),
     );
     // eslint-disable-next-line no-magic-numbers
     expect(lResult.exitCode).to.equal(5);
@@ -45,12 +45,12 @@ describe("[I] report/teamcity", () => {
 
   it("renders 'required' violations", () => {
     const lFixture = readFixture(
-      "__mocks__/required-errors-teamcity-format.txt"
+      "__mocks__/required-errors-teamcity-format.txt",
     );
     const lResult = render(requiredErrs);
 
     expect(removePerSessionAttributes(lResult.output)).to.equal(
-      removePerSessionAttributes(lFixture)
+      removePerSessionAttributes(lFixture),
     );
     // eslint-disable-next-line no-magic-numbers
     expect(lResult.exitCode).to.equal(5);
@@ -61,7 +61,7 @@ describe("[I] report/teamcity", () => {
     const lResult = render(circulars);
 
     expect(removePerSessionAttributes(lResult.output)).to.equal(
-      removePerSessionAttributes(lFixture)
+      removePerSessionAttributes(lFixture),
     );
     // eslint-disable-next-line no-magic-numbers
     expect(lResult.exitCode).to.equal(3);
@@ -72,7 +72,7 @@ describe("[I] report/teamcity", () => {
     const lResult = render(vias);
 
     expect(removePerSessionAttributes(lResult.output)).to.equal(
-      removePerSessionAttributes(lFixture)
+      removePerSessionAttributes(lFixture),
     );
     // eslint-disable-next-line no-magic-numbers
     expect(lResult.exitCode).to.equal(4);
@@ -83,7 +83,7 @@ describe("[I] report/teamcity", () => {
     const lResult = render(instabilities);
 
     expect(removePerSessionAttributes(lResult.output)).to.equal(
-      removePerSessionAttributes(lFixture)
+      removePerSessionAttributes(lFixture),
     );
 
     expect(lResult.exitCode).to.equal(0);
@@ -91,12 +91,12 @@ describe("[I] report/teamcity", () => {
 
   it("renders unsupported error levels (like 'ignore') as 'info'", () => {
     const lFixture = readFixture(
-      "__mocks__/unsupported-severity-teamcity-format.txt"
+      "__mocks__/unsupported-severity-teamcity-format.txt",
     );
     const lResult = render(unsupportedErrorLevels);
 
     expect(removePerSessionAttributes(lResult.output)).to.equal(
-      removePerSessionAttributes(lFixture)
+      removePerSessionAttributes(lFixture),
     );
     // eslint-disable-next-line no-magic-numbers
     expect(lResult.exitCode).to.equal(5);
@@ -104,12 +104,12 @@ describe("[I] report/teamcity", () => {
 
   it("renders known errors in a single warning", () => {
     const lFixture = readFixture(
-      "__mocks__/known-violations-teamcity-format.txt"
+      "__mocks__/known-violations-teamcity-format.txt",
     );
     const lResult = render(knownViolations);
 
     expect(removePerSessionAttributes(lResult.output)).to.equal(
-      removePerSessionAttributes(lFixture)
+      removePerSessionAttributes(lFixture),
     );
     expect(lResult.exitCode).to.equal(0);
   });

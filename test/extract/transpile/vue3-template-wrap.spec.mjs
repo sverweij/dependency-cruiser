@@ -22,7 +22,7 @@ const wrap = proxyquire.load(
       pModuleName === "vue-template-compiler"
         ? false
         : require("@vue/compiler-sfc"),
-  }
+  },
 );
 
 describe("[I] vue transpiler", () => {
@@ -30,13 +30,13 @@ describe("[I] vue transpiler", () => {
     expect(
       normalizeNewline(
         wrap.transpile(
-          readFileSync(join(__dirname, "__mocks__/vue.vue"), "utf8")
-        )
-      )
+          readFileSync(join(__dirname, "__mocks__/vue.vue"), "utf8"),
+        ),
+      ),
     ).to.equal(
       normalizeNewline(
-        readFileSync(join(__dirname, "__fixtures__/vue.js"), "utf8")
-      )
+        readFileSync(join(__dirname, "__fixtures__/vue.js"), "utf8"),
+      ),
     );
   });
 
@@ -44,9 +44,9 @@ describe("[I] vue transpiler", () => {
     expect(
       normalizeNewline(
         wrap.transpile(
-          readFileSync(join(__dirname, "__mocks__/vue-noscript.vue"), "utf8")
-        )
-      )
+          readFileSync(join(__dirname, "__mocks__/vue-noscript.vue"), "utf8"),
+        ),
+      ),
     ).to.equal(normalizeNewline(""));
   });
 
@@ -54,9 +54,9 @@ describe("[I] vue transpiler", () => {
     expect(
       normalizeNewline(
         wrap.transpile(
-          readFileSync(join(__dirname, "__mocks__/vue-invalid.vue"), "utf8")
-        )
-      )
+          readFileSync(join(__dirname, "__mocks__/vue-invalid.vue"), "utf8"),
+        ),
+      ),
     ).to.equal(normalizeNewline(""));
   });
 
@@ -66,17 +66,17 @@ describe("[I] vue transpiler", () => {
         wrap.transpile(
           readFileSync(
             join(__dirname, "__mocks__/vue-script-setup.vue"),
-            "utf8"
-          )
-        )
-      )
+            "utf8",
+          ),
+        ),
+      ),
     ).to.equal(
       normalizeNewline(
         readFileSync(
           join(__dirname, "__fixtures__/vue-script-setup.js"),
-          "utf8"
-        )
-      )
+          "utf8",
+        ),
+      ),
     );
   });
 
@@ -86,17 +86,17 @@ describe("[I] vue transpiler", () => {
         wrap.transpile(
           readFileSync(
             join(__dirname, "__mocks__/vue-script-setup-and-script.vue"),
-            "utf8"
-          )
-        )
-      )
+            "utf8",
+          ),
+        ),
+      ),
     ).to.equal(
       normalizeNewline(
         readFileSync(
           join(__dirname, "__fixtures__/vue-script-setup-and-script.js"),
-          "utf8"
-        )
-      )
+          "utf8",
+        ),
+      ),
     );
   });
 });

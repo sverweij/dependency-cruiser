@@ -18,7 +18,7 @@ describe("[I] cache/cache - readCache", () => {
   it("returns an empty cache when trying to read from a file that is invalid JSON", async () => {
     const lCache = new Cache();
     expect(
-      await lCache.read("test/cache/__mocks__/cache/invalid-json")
+      await lCache.read("test/cache/__mocks__/cache/invalid-json"),
     ).to.deep.equal({
       modules: [],
       summary: {},
@@ -28,7 +28,7 @@ describe("[I] cache/cache - readCache", () => {
   it("returns the contents of the cache when trying to read from an existing, valid json", async () => {
     const lCache = new Cache();
     expect(
-      await lCache.read("test/cache/__mocks__/cache/valid-minimal-cache")
+      await lCache.read("test/cache/__mocks__/cache/valid-minimal-cache"),
     ).to.deep.equal({
       modules: [],
       summary: {},
@@ -70,7 +70,7 @@ describe("[I] cache/cache - writeCache", () => {
     await lCache.write(lCacheFolder, lDummyCacheContents);
     await lCache.write(lCacheFolder, lSecondDummyCacheContents);
     expect(await lCache.read(lCacheFolder)).to.deep.equal(
-      lSecondDummyCacheContents
+      lSecondDummyCacheContents,
     );
   });
 
@@ -93,7 +93,7 @@ describe("[I] cache/cache - writeCache", () => {
 describe("[I] cache/cache - canServeFromCache", () => {
   const lOriginalCacheFolder = join(
     OUTPUTS_FOLDER,
-    "serve-from-cache-compatible"
+    "serve-from-cache-compatible",
   );
   /** @type import("../..").ICruiseResult */
   const lMinimalCruiseResult = {
@@ -122,8 +122,8 @@ describe("[I] cache/cache - canServeFromCache", () => {
         {
           SHA1: "dummy-sha",
           changes: [],
-        }
-      )
+        },
+      ),
     ).to.equal(false);
   });
 
@@ -141,8 +141,8 @@ describe("[I] cache/cache - canServeFromCache", () => {
         {
           SHA1: "another-sha",
           changes: [],
-        }
-      )
+        },
+      ),
     ).to.equal(false);
   });
 
@@ -166,15 +166,15 @@ describe("[I] cache/cache - canServeFromCache", () => {
               checksum: "dummy-checksum",
             },
           ],
-        }
-      )
+        },
+      ),
     ).to.equal(false);
   });
 
   it("returns false when cache written & revision data equal & options incompatible", async () => {
     const lCacheFolder = join(
       OUTPUTS_FOLDER,
-      "serve-from-cache-options-incompatible"
+      "serve-from-cache-options-incompatible",
     );
     const lCache = new Cache();
 
@@ -185,8 +185,8 @@ describe("[I] cache/cache - canServeFromCache", () => {
           cache: { folder: lCacheFolder, strategy: "metadata" },
         },
         lMinimalCruiseResult,
-        { SHA1: "dummy-sha", changes: [] }
-      )
+        { SHA1: "dummy-sha", changes: [] },
+      ),
     ).to.equal(false);
   });
 
@@ -200,8 +200,8 @@ describe("[I] cache/cache - canServeFromCache", () => {
           cache: { folder: lOriginalCacheFolder, strategy: "metadata" },
         },
         lMinimalCruiseResult,
-        { SHA1: "dummy-sha", changes: [] }
-      )
+        { SHA1: "dummy-sha", changes: [] },
+      ),
     ).to.equal(true);
   });
 });

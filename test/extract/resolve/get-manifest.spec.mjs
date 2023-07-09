@@ -7,8 +7,8 @@ import { getManifest } from "../../../src/extract/resolve/get-manifest.mjs";
 const rootPackageJson = JSON.parse(
   readFileSync(
     fileURLToPath(new URL("../../../package.json", import.meta.url)),
-    "utf8"
-  )
+    "utf8",
+  ),
 );
 
 const FIXTUREDIR = "test/extract/resolve/__fixtures__";
@@ -26,13 +26,13 @@ describe("[I] extract/resolve/get-manifest - classic strategy", () => {
 
   it("returns 'null' if the package.json is invalid", () => {
     expect(getManifest(join(FIXTUREDIR, "invalid-package-json"))).to.equal(
-      null
+      null,
     );
   });
 
   it("returns '{}' if the package.json is empty (which is - strictly speaking - not allowed", () => {
     expect(getManifest(join(FIXTUREDIR, "empty-package-json"))).to.deep.equal(
-      {}
+      {},
     );
   });
 
@@ -41,13 +41,13 @@ describe("[I] extract/resolve/get-manifest - classic strategy", () => {
       {
         name: "the-absolute-bare-minimum-package-json",
         version: "481.0.0",
-      }
+      },
     );
   });
 
   it("looks up the closest package.json", () => {
     expect(getManifest(join(FIXTUREDIR, "no-package-json"))).to.deep.equal(
-      rootPackageJson
+      rootPackageJson,
     );
   });
 });
@@ -67,8 +67,8 @@ describe("[I] extract/resolve/get-manifest - combined dependencies strategy", ()
       getManifest(
         join(FIXTUREDIR, "invalid-package-json"),
         join(FIXTUREDIR),
-        true
-      )
+        true,
+      ),
     ).to.equal(null);
   });
 
@@ -87,8 +87,8 @@ describe("[I] extract/resolve/get-manifest - combined dependencies strategy", ()
       getManifest(
         join(process.cwd(), "packages", "subthing"),
         process.cwd(),
-        true
-      )
+        true,
+      ),
     ).to.deep.equal({
       dependencies: {
         "base-only": "1.0.0",
@@ -109,8 +109,8 @@ describe("[I] extract/resolve/get-manifest - combined dependencies strategy", ()
       getManifest(
         join(process.cwd(), "packages", "subthing", "src", "somefunctionality"),
         process.cwd(),
-        true
-      )
+        true,
+      ),
     ).to.deep.equal({
       dependencies: {
         "base-only": "1.0.0",
@@ -127,7 +127,7 @@ describe("[I] extract/resolve/get-manifest - combined dependencies strategy", ()
 
   it("passing a non-matching or non-existing basedir doesn't make combining dependencies loop eternaly", () => {
     process.chdir(
-      "test/extract/resolve/__fixtures__/amok-prevention-non-exist"
+      "test/extract/resolve/__fixtures__/amok-prevention-non-exist",
     );
     expect(() => {
       getManifest(process.cwd(), "bullocks-or-non-valid-basedir", true);
@@ -136,7 +136,7 @@ describe("[I] extract/resolve/get-manifest - combined dependencies strategy", ()
 
   it("passing a basedir that weirdly ends in '/' doesn't make combining dependencies loop eternaly", () => {
     process.chdir(
-      "test/extract/resolve/__fixtures__/amok-prevention-bogus-sub"
+      "test/extract/resolve/__fixtures__/amok-prevention-bogus-sub",
     );
     expect(() => {
       getManifest(process.cwd(), `${dirname(process.cwd())}/`, true);

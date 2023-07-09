@@ -24,7 +24,7 @@ const GROUP_MATCHING_RULE = {
 describe("[I] validate/violates-required-rule", () => {
   it("does not violate when the module does not match", () => {
     expect(
-      violatesRequiredRule(SIMPLE_RULE, { source: "does not match" })
+      violatesRequiredRule(SIMPLE_RULE, { source: "does not match" }),
     ).to.equal(false);
   });
 
@@ -33,7 +33,7 @@ describe("[I] validate/violates-required-rule", () => {
       violatesRequiredRule(SIMPLE_RULE, {
         source: "controllers/sprockets/fred-controller.ts",
         dependencies: [],
-      })
+      }),
     ).to.equal(true);
   });
 
@@ -47,7 +47,7 @@ describe("[I] validate/violates-required-rule", () => {
             module: "path",
           },
         ],
-      })
+      }),
     ).to.equal(true);
   });
 
@@ -61,7 +61,7 @@ describe("[I] validate/violates-required-rule", () => {
             module: "../base-controller.ts",
           },
         ],
-      })
+      }),
     ).to.equal(false);
   });
 
@@ -75,7 +75,7 @@ describe("[I] validate/violates-required-rule", () => {
             module: "~/src/hocuspocus.js",
           },
         ],
-      })
+      }),
     ).to.equal(true);
   });
 
@@ -84,7 +84,7 @@ describe("[I] validate/violates-required-rule", () => {
       violatesRequiredRule(GROUP_MATCHING_RULE, {
         source: "test/simsalabim.spec.js",
         dependencies: [],
-      })
+      }),
     ).to.equal(true);
   });
 
@@ -102,7 +102,7 @@ describe("[I] validate/violates-required-rule", () => {
             module: "~/src/simsalabim.js",
           },
         ],
-      })
+      }),
     ).to.equal(false);
   });
 });

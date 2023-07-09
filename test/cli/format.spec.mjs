@@ -34,7 +34,7 @@ describe("[E] cli/format", () => {
         outputTo: lOutFile,
         outputType: "json",
         focus: "^src/main",
-      }
+      },
     );
     const lResult = JSON.parse(readFileSync(lOutFile, "utf8"));
     expect(lResult.summary.error).to.equal(0);
@@ -42,16 +42,16 @@ describe("[E] cli/format", () => {
     expect(lResult.summary.totalDependenciesCruised).to.be.lessThan(298);
     expect(lResult.summary.violations.length).to.equal(1);
     expect(lResult.modules.map((pModule) => pModule.source)).to.not.include(
-      "bin/depcruise-fmt.mjs"
+      "bin/depcruise-fmt.mjs",
     );
     expect(lResult.modules.map((pModule) => pModule.source)).to.include(
-      "src/main/index.js"
+      "src/main/index.js",
     );
     expect(lResult.modules.map((pModule) => pModule.source)).to.include(
-      "src/cli/index.js"
+      "src/cli/index.js",
     );
     expect(lResult.modules.map((pModule) => pModule.source)).to.not.include(
-      "src/cli/init-config/index.js"
+      "src/cli/init-config/index.js",
     );
     expect(lExitCode).to.equal(0);
     deleteDammit(lOutFile);
@@ -69,7 +69,7 @@ describe("[E] cli/format", () => {
         outputTo: lOutFile,
         outputType: "json",
         prefix: lAlternatePrefix,
-      }
+      },
     );
     const lResult = JSON.parse(readFileSync(lOutFile, "utf8"));
 
@@ -87,7 +87,7 @@ describe("[E] cli/format", () => {
       relative("__fixtures__/result-has-a-dependency-violation.json"),
       {
         outputTo: lOutFile,
-      }
+      },
     );
 
     expect(lExitCode).to.equal(2);

@@ -23,8 +23,8 @@ describe("[I] index/validate - moreThanOneDependencyType", () => {
           module: "chai",
           resolved: "node_modules/chai/index.js",
           dependencyTypes: ["npm", "npm-dev"],
-        }
-      )
+        },
+      ),
     ).to.deep.equal({
       valid: false,
       rules: [
@@ -56,8 +56,8 @@ describe("[I] index/validate - moreThanOneDependencyType", () => {
           module: "chai",
           resolved: "node_modules/chai/index.js",
           dependencyTypes: ["npm-peer"],
-        }
-      )
+        },
+      ),
     ).to.deep.equal({
       valid: false,
       rules: [

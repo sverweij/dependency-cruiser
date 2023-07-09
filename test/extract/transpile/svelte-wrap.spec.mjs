@@ -17,24 +17,26 @@ describe("[I] svelte transpiler", () => {
       (pSource) =>
         pSource.replace(
           'import "./Header.svelte";',
-          'import Header from "./Header.svelte";'
+          'import Header from "./Header.svelte";',
         ),
     ],
   ].forEach(([variant, transformExpected]) => {
-    it(`'transpiles' svelte with "<script lang='${variant}'>"'`, () => {
+    it(`'transpiles' svelte with "<script lang='${variant}'>"'`, async () => {
       const lSource = readFileSync(
         `./test/extract/transpile/__mocks__/svelte-${variant}.svelte`,
-        "utf8"
+        "utf8",
       );
-      const lObserved = wrap.transpile(lSource);
-      const lExpected = readFileSync(
-        "./test/extract/transpile/__fixtures__/svelte.js",
-        "utf8"
+      const lObserved = await normalizeSource(wrap.transpile(lSource));
+      const lExpected = await normalizeSource(
+        transformExpected(
+          readFileSync(
+            "./test/extract/transpile/__fixtures__/svelte.js",
+            "utf8",
+          ),
+        ),
       );
 
-      expect(normalizeSource(lObserved)).to.equal(
-        normalizeSource(transformExpected(lExpected))
-      );
+      expect(lObserved).to.equal(lExpected);
     });
   });
 });

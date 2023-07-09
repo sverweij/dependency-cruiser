@@ -20,5 +20,5 @@ import { ICruiseOptions } from "./options";
 export default function extractDepcruiseConfig(
   pConfigFileName: string,
   pAlreadyVisited?: Set<string>,
-  pBaseDirectory?: string
+  pBaseDirectory?: string,
 ): Promise<ICruiseOptions>;

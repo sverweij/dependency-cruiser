@@ -15,7 +15,7 @@ const createConfigNormalized = async (pInitOptions) => {
   const lBaseAbc = 36;
   let lTemporaryFileName = join(
     tmpdir(),
-    `${Math.random().toString(lBaseAbc).split(".").pop()}.cjs`
+    `${Math.random().toString(lBaseAbc).split(".").pop()}.cjs`,
   );
   writeFileSync(lTemporaryFileName, lConfigAsString, "utf8");
   const lConfigAsModule = await import(`file:///${lTemporaryFileName}`);
@@ -40,7 +40,7 @@ describe("[I] cli/init-config/build-config", () => {
     expect(lResult).to.be.jsonSchema(configurationSchema);
     expect(lResult).to.haveOwnProperty("extends");
     expect(lResult.extends).to.equal(
-      "dependency-cruiser/configs/recommended-warn-only"
+      "dependency-cruiser/configs/recommended-warn-only",
     );
   });
 
@@ -64,7 +64,7 @@ describe("[I] cli/init-config/build-config", () => {
     expect(lResult).to.be.jsonSchema(configurationSchema);
     expect(lResult).to.haveOwnProperty("forbidden");
     expect(lResult.extends).to.equal(
-      "@my/cool/company/configs/depcruise-preset"
+      "@my/cool/company/configs/depcruise-preset",
     );
   });
 
@@ -79,7 +79,7 @@ describe("[I] cli/init-config/build-config", () => {
     expect(lResult).to.be.jsonSchema(configurationSchema);
     expect(lResult).to.haveOwnProperty("forbidden");
     expect(
-      lResult.forbidden.some((pRule) => pRule.name === "not-to-test")
+      lResult.forbidden.some((pRule) => pRule.name === "not-to-test"),
     ).to.equal(false);
   });
 
@@ -94,7 +94,7 @@ describe("[I] cli/init-config/build-config", () => {
     expect(lResult).to.be.jsonSchema(configurationSchema);
     expect(lResult).to.haveOwnProperty("forbidden");
     expect(
-      lResult.forbidden.some((pRule) => pRule.name === "not-to-test")
+      lResult.forbidden.some((pRule) => pRule.name === "not-to-test"),
     ).to.equal(true);
   });
 

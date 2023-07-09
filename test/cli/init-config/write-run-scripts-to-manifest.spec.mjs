@@ -17,7 +17,7 @@ describe("[U] cli/init-config/write-run-scripts-to-manifest - logic", () => {
 
   it("manifest with scripts and empty script object retain the original manifest", () => {
     expect(
-      addRunScriptsToManifest({ scripts: { test: "jest" } }, {})
+      addRunScriptsToManifest({ scripts: { test: "jest" } }, {}),
     ).to.deep.equal({ scripts: { test: "jest" } });
   });
 
@@ -25,8 +25,8 @@ describe("[U] cli/init-config/write-run-scripts-to-manifest - logic", () => {
     expect(
       addRunScriptsToManifest(
         { scripts: { test: "jest" } },
-        { depcruise: "depcruise src -v" }
-      )
+        { depcruise: "depcruise src -v" },
+      ),
     ).to.deep.equal({
       scripts: { depcruise: "depcruise src -v", test: "jest" },
     });
@@ -42,8 +42,8 @@ describe("[U] cli/init-config/write-run-scripts-to-manifest - logic", () => {
               "depcruise --config custom-cruiser-config.js --err-long bin src test",
           },
         },
-        { depcruise: "depcruise src -v" }
-      )
+        { depcruise: "depcruise src -v" },
+      ),
     ).to.deep.equal({
       scripts: {
         test: "jest",

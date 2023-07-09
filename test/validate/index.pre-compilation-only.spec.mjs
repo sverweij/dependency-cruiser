@@ -19,8 +19,8 @@ describe("[I] validate/index - preCompilationOnly", () => {
       validate.dependency(
         lPreCompilationOnlyRuleSet,
         { source: "something" },
-        { resolved: "real-stuff-only.ts", preCompilationOnly: false }
-      )
+        { resolved: "real-stuff-only.ts", preCompilationOnly: false },
+      ),
     ).to.deep.equal({ valid: true });
   });
 
@@ -29,8 +29,8 @@ describe("[I] validate/index - preCompilationOnly", () => {
       validate.dependency(
         lPreCompilationOnlyRuleSet,
         { source: "something" },
-        { resolved: "types.d.ts", preCompilationOnly: true }
-      )
+        { resolved: "types.d.ts", preCompilationOnly: true },
+      ),
     ).to.deep.equal({
       rules: [{ name: "precomp", severity: "warn" }],
       valid: false,
@@ -42,8 +42,8 @@ describe("[I] validate/index - preCompilationOnly", () => {
       validate.dependency(
         lPreCompilationOnlyRuleSet,
         { source: "something" },
-        { resolved: "types.d.ts" }
-      )
+        { resolved: "types.d.ts" },
+      ),
     ).to.deep.equal({ valid: true });
   });
 });

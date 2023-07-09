@@ -21,7 +21,7 @@ describe("[I] cli/init-config/index", () => {
     process.chdir("test/cli/__fixtures__/init-config/no-config-files-exist");
     const lConfigResultFileName = `./${join(
       "../__fixtures__/init-config/no-config-files-exist",
-      RULES_FILE_JS
+      RULES_FILE_JS,
     )}`;
 
     try {
@@ -40,7 +40,7 @@ describe("[I] cli/init-config/index", () => {
     const lConfig = ".dependency-cruiser-preset-based.js";
     const lConfigResultFileName = `./${join(
       "../__fixtures__/init-config/no-config-files-exist",
-      lConfig
+      lConfig,
     )}`;
 
     try {
@@ -50,7 +50,7 @@ describe("[I] cli/init-config/index", () => {
       expect(lResult.default).to.be.jsonSchema(configurationSchema);
       expect(lResult.default).to.haveOwnProperty("extends");
       expect(lResult.default.extends).to.equal(
-        "dependency-cruiser/configs/recommended-strict"
+        "dependency-cruiser/configs/recommended-strict",
       );
     } finally {
       deleteDammit(lConfig);
@@ -62,7 +62,7 @@ describe("[I] cli/init-config/index", () => {
     const lConfig = ".dependency-cruiser-self-contained.js";
     const lConfigResultFileName = `./${join(
       "../__fixtures__/init-config/no-config-files-exist",
-      lConfig
+      lConfig,
     )}`;
 
     try {
@@ -81,7 +81,7 @@ describe("[I] cli/init-config/index", () => {
     process.chdir("test/cli/__fixtures__/init-config/ts-config-exists");
     const lConfigResultFileName = `./${join(
       "../__fixtures__/init-config/ts-config-exists",
-      RULES_FILE_JS
+      RULES_FILE_JS,
     )}`;
 
     try {
@@ -103,7 +103,7 @@ describe("[I] cli/init-config/index", () => {
     process.chdir("test/cli/__fixtures__/init-config/webpack-config-exists");
     const lConfigResultFileName = `./${join(
       "../__fixtures__/init-config/webpack-config-exists",
-      RULES_FILE_JS
+      RULES_FILE_JS,
     )}`;
 
     try {
@@ -126,7 +126,7 @@ describe("[I] cli/init-config/index", () => {
 
     const lConfigResultFileName = `./${join(
       "__fixtures__/update-manifest",
-      RULES_FILE_JS
+      RULES_FILE_JS,
     )}`;
 
     const lManifestFilename = "package.json";
@@ -138,7 +138,7 @@ describe("[I] cli/init-config/index", () => {
 
       expect(lResult.default).to.be.jsonSchema(configurationSchema);
       expect(
-        JSON.parse(readFileSync(lManifestFilename, "utf8"))
+        JSON.parse(readFileSync(lManifestFilename, "utf8")),
       ).to.haveOwnProperty("scripts");
     } finally {
       deleteDammit(RULES_FILE_JS);
@@ -148,12 +148,12 @@ describe("[I] cli/init-config/index", () => {
 
   it("init experimental-scripts updates package.json with scripts, and leaves an existing dc config alone", async () => {
     process.chdir(
-      "test/cli/init-config/__fixtures__/update-manifest-dc-config-exists"
+      "test/cli/init-config/__fixtures__/update-manifest-dc-config-exists",
     );
 
     const lConfigResultFileName = `./${join(
       "__fixtures__/update-manifest-dc-config-exists",
-      RULES_FILE_JS
+      RULES_FILE_JS,
     )}`;
     const lManifestFilename = "package.json";
     writeFileSync(lManifestFilename, "{}");
@@ -165,7 +165,7 @@ describe("[I] cli/init-config/index", () => {
       expect(lResult.default).to.be.jsonSchema(configurationSchema);
       expect(lResult.default).to.deep.equal({});
       expect(
-        JSON.parse(readFileSync(lManifestFilename, "utf8"))
+        JSON.parse(readFileSync(lManifestFilename, "utf8")),
       ).to.haveOwnProperty("scripts");
     } finally {
       deleteDammit(lManifestFilename);

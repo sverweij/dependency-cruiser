@@ -10,7 +10,7 @@ describe("[U] cli/init-config/utl - folderNameArrayToRE", () => {
   });
   it("transforms an array of folder names into a regex string - more than one entry", () => {
     expect(folderNameArrayToRE(["bin", "src", "lib"])).to.equal(
-      "^(bin|src|lib)"
+      "^(bin|src|lib)",
     );
   });
 });

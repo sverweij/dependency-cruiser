@@ -24,8 +24,8 @@ describe("[I] validate/index dependency - cycle via", () => {
           resolved: "tmp/ba.js",
           circular: true,
           cycle: ["tmp/ba.js", "tmp/bb.js", "tmp/bc.js", "tmp/a.js"],
-        }
-      )
+        },
+      ),
     ).to.deep.equal({
       valid: true,
     });
@@ -40,8 +40,8 @@ describe("[I] validate/index dependency - cycle via", () => {
           resolved: "tmp/aa.js",
           circular: true,
           cycle: ["tmp/aa.js", "tmp/ab.js", "tmp/ac.js", "tmp/a.js"],
-        }
-      )
+        },
+      ),
     ).to.deep.equal({
       valid: false,
       rules: [{ name: "unnamed", severity: "warn" }],
@@ -68,8 +68,8 @@ describe("[I] validate/index dependency - cycle via", () => {
           resolved: "tmp/aa.js",
           circular: true,
           cycle: ["tmp/aa.js", "tmp/ab.js", "tmp/ac.js", "tmp/a.js"],
-        }
-      )
+        },
+      ),
     ).to.deep.equal({
       valid: false,
       rules: [{ name: "unnamed", severity: "warn" }],
@@ -101,8 +101,8 @@ describe("[I] validate/index dependency - cycle via - with group matching", () =
           resolved: "tmp/ba.js",
           circular: true,
           cycle: ["tmp/ba.js", "tmp/bb.js", "tmp/bc.js", "tmp/a.js"],
-        }
-      )
+        },
+      ),
     ).to.deep.equal({
       valid: true,
     });
@@ -117,8 +117,8 @@ describe("[I] validate/index dependency - cycle via - with group matching", () =
           resolved: "tmp/ba.js",
           circular: true,
           cycle: ["tmp/ba.js", "not-tmp/ab.js", "tmp/bc.js", "tmp/a.js"],
-        }
-      )
+        },
+      ),
     ).to.deep.equal({
       valid: true,
     });
@@ -133,8 +133,8 @@ describe("[I] validate/index dependency - cycle via - with group matching", () =
           resolved: "tmp/aa.js",
           circular: true,
           cycle: ["tmp/aa.js", "tmp/ab.js", "tmp/ac.js", "tmp/a.js"],
-        }
-      )
+        },
+      ),
     ).to.deep.equal({
       valid: false,
       rules: [{ name: "unnamed", severity: "warn" }],
@@ -161,8 +161,8 @@ describe("[I] validate/index dependency - cycle via - with group matching", () =
           resolved: "tmp/aa.js",
           circular: true,
           cycle: ["tmp/aa.js", "tmp/ab.js", "tmp/ac.js", "tmp/a.js"],
-        }
-      )
+        },
+      ),
     ).to.deep.equal({
       valid: false,
       rules: [{ name: "unnamed", severity: "warn" }],
@@ -192,8 +192,8 @@ describe("[I] validate/index dependency - cycle viaOnly", () => {
           resolved: "tmp/ba.js",
           circular: true,
           cycle: ["tmp/ba.js", "tmp/bb.js", "tmp/bc.js", "tmp/a.js"],
-        }
-      )
+        },
+      ),
     ).to.deep.equal({
       valid: true,
     });
@@ -208,8 +208,8 @@ describe("[I] validate/index dependency - cycle viaOnly", () => {
           resolved: "tmp/aa.js",
           circular: true,
           cycle: ["tmp/aa.js", "tmp/ab.js", "tmp/ac.js", "tmp/a.js"],
-        }
-      )
+        },
+      ),
     ).to.deep.equal({
       valid: true,
     });
@@ -224,8 +224,8 @@ describe("[I] validate/index dependency - cycle viaOnly", () => {
           resolved: "tmp/aa.js",
           circular: true,
           cycle: ["tmp/ab.js", "tmp/a.js"],
-        }
-      )
+        },
+      ),
     ).to.deep.equal({
       valid: true,
     });
@@ -251,8 +251,8 @@ describe("[I] validate/index dependency - cycle viaOnly", () => {
           resolved: "tmp/aa.js",
           circular: true,
           cycle: ["tmp/aa.js", "tmp/ab.js", "tmp/ac.js", "tmp/a.js"],
-        }
-      )
+        },
+      ),
     ).to.deep.equal({
       valid: false,
       rules: [{ name: "unnamed", severity: "warn" }],
@@ -283,8 +283,8 @@ describe("[I] validate/index dependency - cycle viaOnly - with group matching", 
           resolved: "tmp/ba.js",
           circular: true,
           cycle: ["tmp/ba.js", "tmp/bb.js", "tmp/bc.js", "tmp/a.js"],
-        }
-      )
+        },
+      ),
     ).to.deep.equal({
       valid: true,
     });
@@ -299,8 +299,8 @@ describe("[I] validate/index dependency - cycle viaOnly - with group matching", 
           resolved: "tmp/aa.js",
           circular: true,
           cycle: ["tmp/aa.js", "tmp/ab.js", "tmp/ac.js", "tmp/a.js"],
-        }
-      )
+        },
+      ),
     ).to.deep.equal({
       valid: true,
     });
@@ -315,8 +315,8 @@ describe("[I] validate/index dependency - cycle viaOnly - with group matching", 
           resolved: "tmp/aa.js",
           circular: true,
           cycle: ["tmp/ab.js", "tmp/a.js"],
-        }
-      )
+        },
+      ),
     ).to.deep.equal({
       valid: true,
     });
@@ -342,8 +342,8 @@ describe("[I] validate/index dependency - cycle viaOnly - with group matching", 
           resolved: "tmp/aa.js",
           circular: true,
           cycle: ["tmp/aa.js", "tmp/ab.js", "tmp/ac.js", "tmp/a.js"],
-        }
-      )
+        },
+      ),
     ).to.deep.equal({
       valid: false,
       rules: [{ name: "unnamed", severity: "warn" }],
@@ -369,8 +369,8 @@ describe("[I] validate/index dependency - cycle viaOnly - with group matching", 
           resolved: "tmp/aa.js",
           circular: true,
           cycle: ["tmp/aa.js", "tmp/ab.js", "tmp/ac.js", "tmp/a.js"],
-        }
-      )
+        },
+      ),
     ).to.deep.equal({
       valid: false,
       rules: [{ name: "unnamed", severity: "warn" }],

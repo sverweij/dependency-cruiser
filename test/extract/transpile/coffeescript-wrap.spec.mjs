@@ -21,12 +21,12 @@ describe("[I] coffeescript transpiler", () => {
         wrap.transpile(
           readFileSync(
             "./test/extract/transpile/__mocks__/coffee.coffee",
-            "utf8"
-          )
-        )
-      )
+            "utf8",
+          ),
+        ),
+      ),
     ).to.equal(
-      readFileSync("./test/extract/transpile/__fixtures__/coffee.js", "utf8")
+      readFileSync("./test/extract/transpile/__fixtures__/coffee.js", "utf8"),
     );
   });
 
@@ -36,12 +36,15 @@ describe("[I] coffeescript transpiler", () => {
         litWrap.transpile(
           readFileSync(
             "./test/extract/transpile/__mocks__/litcoffee.litcoffee",
-            "utf8"
-          )
-        )
-      )
+            "utf8",
+          ),
+        ),
+      ),
     ).to.equal(
-      readFileSync("./test/extract/transpile/__fixtures__/litcoffee.js", "utf8")
+      readFileSync(
+        "./test/extract/transpile/__fixtures__/litcoffee.js",
+        "utf8",
+      ),
     );
   });
 
@@ -51,15 +54,15 @@ describe("[I] coffeescript transpiler", () => {
         litWrap.transpile(
           readFileSync(
             "./test/extract/transpile/__mocks__/markdownlitcoffee.coffee.md",
-            "utf8"
-          )
-        )
-      )
+            "utf8",
+          ),
+        ),
+      ),
     ).to.equal(
       readFileSync(
         "./test/extract/transpile/__fixtures__/markdownlitcoffee.js",
-        "utf8"
-      )
+        "utf8",
+      ),
     );
   });
 
@@ -67,11 +70,11 @@ describe("[I] coffeescript transpiler", () => {
     expect(
       normalizeNewline(
         wrap.transpile(
-          readFileSync("./test/extract/transpile/__mocks__/csx.cjsx", "utf8")
-        )
-      )
+          readFileSync("./test/extract/transpile/__mocks__/csx.cjsx", "utf8"),
+        ),
+      ),
     ).to.equal(
-      readFileSync("./test/extract/transpile/__fixtures__/csx.jsx", "utf8")
+      readFileSync("./test/extract/transpile/__fixtures__/csx.jsx", "utf8"),
     );
   });
 });

@@ -43,7 +43,7 @@ describe("[I] report/metrics", () => {
           },
         ],
       },
-      { hideFolders: true }
+      { hideFolders: true },
     );
 
     expect(lResult.exitCode).to.equal(0);
@@ -77,7 +77,7 @@ describe("[I] report/metrics", () => {
 
     expect(lResult.exitCode).to.equal(0);
     expect(lResult.output).to.contain(
-      `src/mies.js      1      1      1    50%${EOL}src/aap.js       1      1      3    25%${EOL}src/noot.js`
+      `src/mies.js      1      1      1    50%${EOL}src/aap.js       1      1      3    25%${EOL}src/noot.js`,
     );
   });
 
@@ -106,12 +106,12 @@ describe("[I] report/metrics", () => {
         ],
         folders: [],
       },
-      { orderBy: "name" }
+      { orderBy: "name" },
     );
 
     expect(lResult.exitCode).to.equal(0);
     expect(lResult.output).to.contain(
-      `src/aap.js       1      1      3    25%${EOL}src/mies.js      1      1      1    50%${EOL}src/noot.js`
+      `src/aap.js       1      1      3    25%${EOL}src/mies.js      1      1      1    50%${EOL}src/noot.js`,
     );
   });
 
@@ -140,12 +140,12 @@ describe("[I] report/metrics", () => {
         ],
         folders: [],
       },
-      { hideModules: true }
+      { hideModules: true },
     );
 
     expect(lResult.exitCode).to.equal(0);
     expect(lResult.output).to.not.contain(
-      `src/mies.js      1      1      1     50%${EOL}src/aap.js       1      1      3     25%${EOL}src/noot.js`
+      `src/mies.js      1      1      1     50%${EOL}src/aap.js       1      1      3     25%${EOL}src/noot.js`,
     );
   });
 

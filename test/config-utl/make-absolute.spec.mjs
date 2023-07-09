@@ -5,7 +5,7 @@ import makeAbsolute from "../../src/config-utl/make-absolute.mjs";
 describe("[U] cli/utl/makeAbsolute", () => {
   it("leaves absolute path names alone", () => {
     expect(makeAbsolute("/hallo/dit/is/een/absoluut/pad")).to.equal(
-      "/hallo/dit/is/een/absoluut/pad"
+      "/hallo/dit/is/een/absoluut/pad",
     );
   });
 

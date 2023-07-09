@@ -17,8 +17,8 @@ describe("[I] config-utl/extract-webpack-resolve-config - non-native formats", (
           __dirname,
           "__mocks__",
           "webpackconfig",
-          "webpack.config.unknown-extension"
-        )
+          "webpack.config.unknown-extension",
+        ),
       );
     } catch (_pError) {
       lThrown = true;
@@ -30,7 +30,7 @@ describe("[I] config-utl/extract-webpack-resolve-config - non-native formats", (
     let lThrownError = "none";
     try {
       await loadResolveConfig(
-        join(__dirname, "__mocks__", "webpackconfig", "webpack.config.ls")
+        join(__dirname, "__mocks__", "webpackconfig", "webpack.config.ls"),
       );
     } catch (pError) {
       lThrownError = pError.toString();
@@ -45,7 +45,7 @@ describe("[I] config-utl/extract-webpack-resolve-config - non-native formats", (
     let lThrownError = "none";
     try {
       await loadResolveConfig(
-        join(__dirname, "__mocks__", "webpackconfig", "webpack.config.yml")
+        join(__dirname, "__mocks__", "webpackconfig", "webpack.config.yml"),
       );
     } catch (pError) {
       lThrownError = pError.toString();
@@ -56,8 +56,8 @@ describe("[I] config-utl/extract-webpack-resolve-config - non-native formats", (
   it("returns contents of the webpack config when the non-native extension _is_ registered", async () => {
     expect(
       await loadResolveConfig(
-        join(__dirname, "__mocks__", "webpackconfig", "webpack.config.json5")
-      )
+        join(__dirname, "__mocks__", "webpackconfig", "webpack.config.json5"),
+      ),
     ).to.deep.equal({
       alias: {
         config: "src/config",

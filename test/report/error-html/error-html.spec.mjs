@@ -30,7 +30,7 @@ describe("[I] report/error-html", () => {
 
     expect(lReport.output).to.contain("<td><strong>2</strong></td>");
     expect(lReport.output).to.contain(
-      '<a href="https://github.com/sverweij/dependency-cruiser/blob/develop/src/cli/compileConfig/index.js">'
+      '<a href="https://github.com/sverweij/dependency-cruiser/blob/develop/src/cli/compileConfig/index.js">',
     );
     expect(lReport.exitCode).to.equal(0);
   });
@@ -51,7 +51,7 @@ describe("[I] report/error-html", () => {
     expect(lReport.output).to.contain("<th>ignored</th>");
 
     expect(lReport.output).to.contain(
-      '<a href="https://github.com/sverweij/dependency-cruiser/blob/develop/src/cli/compileConfig/index.js">'
+      '<a href="https://github.com/sverweij/dependency-cruiser/blob/develop/src/cli/compileConfig/index.js">',
     );
     expect(lReport.exitCode).to.equal(0);
   });

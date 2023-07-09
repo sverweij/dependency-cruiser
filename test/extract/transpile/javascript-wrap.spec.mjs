@@ -10,20 +10,20 @@ describe("[I] javascript transpiler", () => {
   it("'transpiles' jsx", () => {
     expect(
       wrap.transpile(
-        readFileSync("./test/extract/transpile/__mocks__/jsx.jsx", "utf8")
-      )
+        readFileSync("./test/extract/transpile/__mocks__/jsx.jsx", "utf8"),
+      ),
     ).to.equal(
-      readFileSync("./test/extract/transpile/__fixtures__/jsx.js", "utf8")
+      readFileSync("./test/extract/transpile/__fixtures__/jsx.js", "utf8"),
     );
   });
 
   it("transpiles mjs", () => {
     expect(
       wrap.transpile(
-        readFileSync("./test/extract/transpile/__mocks__/mjs.mjs", "utf8")
-      )
+        readFileSync("./test/extract/transpile/__mocks__/mjs.mjs", "utf8"),
+      ),
     ).to.equal(
-      readFileSync("./test/extract/transpile/__fixtures__/mjs.js", "utf8")
+      readFileSync("./test/extract/transpile/__fixtures__/mjs.js", "utf8"),
     );
   });
 });

@@ -15,7 +15,7 @@ describe("[U] enrich/derive/folders/aggregate-to-folders - folder stability metr
     expect(
       aggregateToFolders([
         { source: "src/folder/index.js", dependencies: [], dependents: [] },
-      ]).sort(compareFolders)
+      ]).sort(compareFolders),
     ).to.deep.equal([
       {
         name: "src",
@@ -51,7 +51,7 @@ describe("[U] enrich/derive/folders/aggregate-to-folders - folder stability metr
           dependencies: [],
           dependents: ["src/folder/index.js"],
         },
-      ]).sort(compareFolders)
+      ]).sort(compareFolders),
     ).to.deep.equal([
       {
         name: "src",
@@ -113,7 +113,7 @@ describe("[U] enrich/derive/folders/aggregate-to-folders - folder stability metr
           dependencies: [{ resolved: "src/other-folder/utensil.js" }],
           dependents: ["src/folder/index.js"],
         },
-      ]).sort(compareFolders)
+      ]).sort(compareFolders),
     ).to.deep.equal([
       {
         name: "src",
@@ -180,7 +180,7 @@ describe("[U] enrich/derive/folders/aggregate-to-folders - folder stability metr
           dependencies: [],
           dependents: ["src/other-folder/utensil.js"],
         },
-      ]).sort(compareFolders)
+      ]).sort(compareFolders),
     ).to.deep.equal([
       {
         name: "src",
@@ -211,7 +211,7 @@ describe("[U] enrich/derive/folders/aggregate-to-folders - folder stability metr
           dependencies: [{ resolved: "fs" }],
           dependents: [],
         },
-      ]).sort(compareFolders)
+      ]).sort(compareFolders),
     ).to.deep.equal([
       {
         dependencies: [],

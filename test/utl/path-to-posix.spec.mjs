@@ -9,19 +9,19 @@ describe("[U] utl/pathToPosix on win32", () => {
 
   it("transforms win32 style paths to posix ones: \\root\\sub\\file.txt", () => {
     expect(pathToPosix("\\root\\sub\\file.txt", win32)).to.equal(
-      "/root/sub/file.txt"
+      "/root/sub/file.txt",
     );
   });
 
   it("leaves win32 style paths alone: C:\\root\\sub\\file.txt", () => {
     expect(pathToPosix("C:\\root\\sub\\file.txt", win32)).to.equal(
-      "C:/root/sub/file.txt"
+      "C:/root/sub/file.txt",
     );
   });
 
   it("keep posix style paths alone: /root/sub/file.txt", () => {
     expect(pathToPosix("/root/sub/file.txt", win32)).to.equal(
-      "/root/sub/file.txt"
+      "/root/sub/file.txt",
     );
   });
 });
@@ -33,19 +33,19 @@ describe("[U] utl/pathToPosix  on posix", () => {
 
   it("leaves win32 style paths alone: \\root\\sub\\file.txt", () => {
     expect(pathToPosix("\\root\\sub\\file.txt", posix)).to.equal(
-      "\\root\\sub\\file.txt"
+      "\\root\\sub\\file.txt",
     );
   });
 
   it("leaves win32 style paths alone: C:\\root\\sub\\file.txt", () => {
     expect(pathToPosix("C:\\root\\sub\\file.txt", posix)).to.equal(
-      "C:\\root\\sub\\file.txt"
+      "C:\\root\\sub\\file.txt",
     );
   });
 
   it("keeps posix style paths as-is: /root/sub/file.txt", () => {
     expect(pathToPosix("/root/sub/file.txt", posix)).to.equal(
-      "/root/sub/file.txt"
+      "/root/sub/file.txt",
     );
   });
 });

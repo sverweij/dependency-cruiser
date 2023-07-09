@@ -30,19 +30,19 @@ describe("[U] main/utl/normalize-re-properties", () => {
 
   it("returns the input when an any object and an empty array of properties input is passed", () => {
     expect(normalizeREProperties(ARRAYED_OBJECT, [])).to.deep.equal(
-      ARRAYED_OBJECT
+      ARRAYED_OBJECT,
     );
   });
 
   it("returns the input when an empty input is passed", () => {
     expect(normalizeREProperties({}, POTENTIAL_ARRAY_PROPERTIES)).to.deep.equal(
-      {}
+      {},
     );
   });
 
   it("returns the de-arrayed input when an empty input is passed", () => {
     expect(
-      normalizeREProperties(ARRAYED_OBJECT, POTENTIAL_ARRAY_PROPERTIES)
+      normalizeREProperties(ARRAYED_OBJECT, POTENTIAL_ARRAY_PROPERTIES),
     ).to.deep.equal(DE_ARRAYED_OBJECT);
   });
 });

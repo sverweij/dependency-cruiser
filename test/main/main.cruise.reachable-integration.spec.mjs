@@ -25,7 +25,7 @@ describe("[E] main.cruise - reachable integration", () => {
       await normalizeOptions({
         config: "forbidden-dead-wood-and-isolation.js",
         outputType: "json",
-      })
+      }),
     );
     const lResult = JSON.parse(lCruiseResult.output);
     expect(lResult.summary.violations).to.deep.equal([
@@ -72,7 +72,7 @@ describe("[E] main.cruise - reachable integration", () => {
       await normalizeOptions({
         config: "allowed-dead-wood.js",
         outputType: "json",
-      })
+      }),
     );
     const lResult = JSON.parse(lCruiseResult.output);
 
@@ -106,7 +106,7 @@ describe("[E] main.cruise - reachable integration", () => {
       await normalizeOptions({
         config: "allowed-isolation.js",
         outputType: "json",
-      })
+      }),
     );
 
     const lResult = JSON.parse(lCruiseResult.output);

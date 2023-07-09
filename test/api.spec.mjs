@@ -20,7 +20,7 @@ if (satisfies(process.versions.node, "^12.19 || >=14.7")) {
       expect(typeof dependencyCruiser.format).to.equal("function");
       expect(Array.isArray(dependencyCruiser.allExtensions)).to.equal(true);
       expect(typeof dependencyCruiser.getAvailableTranspilers).to.equal(
-        "function"
+        "function",
       );
     });
 

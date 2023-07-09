@@ -20,16 +20,16 @@ describe("[I] extract/index - do not follow", () => {
       {
         bustTheCache: true,
       },
-      lOptions
+      lOptions,
     );
     const lResult = extract(
       ["./test/extract/__mocks__/donotfollow/index.js"],
       lOptions,
-      lResolveOptions
+      lResolveOptions,
     );
 
     expect(lResult).to.deep.equal(
-      requireJSON("./__fixtures__/donotfollow.json")
+      requireJSON("./__fixtures__/donotfollow.json"),
     );
   });
 
@@ -43,16 +43,16 @@ describe("[I] extract/index - do not follow", () => {
       {
         bustTheCache: true,
       },
-      lOptions
+      lOptions,
     );
     const lResult = extract(
       ["./test/extract/__mocks__/donotfollow-dependency-types/index.js"],
       lOptions,
-      lResolveOptions
+      lResolveOptions,
     );
 
     expect(lResult).to.deep.equal(
-      requireJSON("./__fixtures__/donotfollow-dependency-types.json")
+      requireJSON("./__fixtures__/donotfollow-dependency-types.json"),
     );
   });
 });

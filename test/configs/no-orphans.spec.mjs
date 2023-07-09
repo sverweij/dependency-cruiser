@@ -8,7 +8,7 @@ describe("[I] configs/rules/no-orphans", () => {
       matchModuleRule.matchesOrphanRule(noOrphansRule, {
         source: "Rémi.js",
         orphan: true,
-      })
+      }),
     ).to.deep.equal(true);
   });
 
@@ -17,7 +17,7 @@ describe("[I] configs/rules/no-orphans", () => {
       matchModuleRule.matchesOrphanRule(noOrphansRule, {
         source: "looks-like-a-dot-sorta.Rémi.js",
         orphan: true,
-      })
+      }),
     ).to.deep.equal(true);
   });
 
@@ -26,7 +26,7 @@ describe("[I] configs/rules/no-orphans", () => {
       matchModuleRule.matchesOrphanRule(noOrphansRule, {
         source: ".Rémi.js",
         orphan: true,
-      })
+      }),
     ).to.deep.equal(false);
   });
 
@@ -35,7 +35,7 @@ describe("[I] configs/rules/no-orphans", () => {
       matchModuleRule.matchesOrphanRule(noOrphansRule, {
         source: "packages/thing/.Rémi.js",
         orphan: true,
-      })
+      }),
     ).to.deep.equal(false);
   });
 
@@ -44,7 +44,7 @@ describe("[I] configs/rules/no-orphans", () => {
       matchModuleRule.matchesOrphanRule(noOrphansRule, {
         source: "packages/thing/.Rémi.ts",
         orphan: true,
-      })
+      }),
     ).to.deep.equal(false);
   });
 
@@ -53,13 +53,13 @@ describe("[I] configs/rules/no-orphans", () => {
       matchModuleRule.matchesOrphanRule(noOrphansRule, {
         source: "packages/thing/types/lalalal.d.ts",
         orphan: true,
-      })
+      }),
     ).to.deep.equal(false);
     expect(
       matchModuleRule.matchesOrphanRule(noOrphansRule, {
         source: "lalalal.d.ts",
         orphan: true,
-      })
+      }),
     ).to.deep.equal(false);
   });
 
@@ -68,7 +68,7 @@ describe("[I] configs/rules/no-orphans", () => {
       matchModuleRule.matchesOrphanRule(noOrphansRule, {
         source: "packages/thing/babel.config.mjs",
         orphan: true,
-      })
+      }),
     ).to.deep.equal(false);
   });
 
@@ -77,7 +77,7 @@ describe("[I] configs/rules/no-orphans", () => {
       matchModuleRule.matchesOrphanRule(noOrphansRule, {
         source: "babel.config.mjs",
         orphan: true,
-      })
+      }),
     ).to.deep.equal(false);
   });
 });

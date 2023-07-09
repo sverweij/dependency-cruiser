@@ -14,5 +14,5 @@
 export default function extractWebpackResolveConfig(
   pWebpackConfigFilename: string,
   pEnvironment?: string,
-  pArguments?: string | any
+  pArguments?: string | any,
 ): Promise<any>;

@@ -25,7 +25,7 @@ describe("[U] main/files-and-dirs", () => {
 
   it("Normalizes absolute paths to paths relative to the current working dir", () => {
     expect(
-      normalizeFilesAndDirectories([__dirname]).map(win32.normalize)
+      normalizeFilesAndDirectories([__dirname]).map(win32.normalize),
     ).to.deep.equal(["test\\main\\files-and-dirs"]);
   });
 
@@ -33,13 +33,13 @@ describe("[U] main/files-and-dirs", () => {
     expect(
       normalizeFilesAndDirectories([
         posix.join(__dirname, "**", "*.{js,ts}"),
-      ]).map(win32.normalize)
+      ]).map(win32.normalize),
     ).to.deep.equal(["test\\main\\files-and-dirs\\**\\*.{js,ts}"]);
   });
 
   it("Normalizes the current working dir passed as an absolute path to '.'", () => {
     expect(
-      normalizeFilesAndDirectories([process.cwd()]).map(win32.normalize)
+      normalizeFilesAndDirectories([process.cwd()]).map(win32.normalize),
     ).to.deep.equal(["."]);
   });
 });

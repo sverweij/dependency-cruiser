@@ -14,13 +14,13 @@ describe("[U] extract/resolve/resolveHelpers - stripToModuleName", () => {
   it("takes the name after the last ! when there's inline loaders involved", () => {
     expect(stripToModuleName("!some_module")).to.equal("some_module");
     expect(stripToModuleName("hello!./local/module")).to.equal(
-      "./local/module"
+      "./local/module",
     );
     expect(stripToModuleName("wim!zus!jet!@some/module")).to.equal(
-      "@some/module"
+      "@some/module",
     );
     expect(stripToModuleName("!!taa!tuu!taa!tuu!!!./thing.js")).to.equal(
-      "./thing.js"
+      "./thing.js",
     );
     expect(stripToModuleName("edge-case!!")).to.equal("");
   });

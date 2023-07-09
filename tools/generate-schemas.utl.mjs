@@ -19,23 +19,23 @@ function stripAttribute(pObject, pAttribute) {
 
 function emitConsolidatedSchema(pOutputFileName) {
   if (extname(pOutputFileName) === ".json") {
-    return (pJSONSchemaObject) => {
-      writeFileSync(
-        pOutputFileName,
-        prettier.format(JSON.stringify(pJSONSchemaObject.default), {
+    return async (pJSONSchemaObject) => {
+      const lData = await prettier.format(
+        JSON.stringify(pJSONSchemaObject.default),
+        {
           parser: "json",
-        }),
-        "utf8"
+        },
       );
+      writeFileSync(pOutputFileName, lData, "utf8");
     };
   }
   return (pJSONSchemaObject) => {
     writeFileSync(
       pOutputFileName,
       `/* generated - don't edit */export default ${JSON.stringify(
-        stripAttribute(pJSONSchemaObject.default, "description")
+        stripAttribute(pJSONSchemaObject.default, "description"),
       )}`,
-      "utf8"
+      "utf8",
     );
   };
 }
@@ -61,6 +61,6 @@ if (process.argv.length === 3) {
 } else {
   process.exitCode = 1;
   process.stderr.write(
-    `\nUsage: generate-schemas.utl.mjs <target schema>\n\n  e.g. generate-schemas.utl.mjs ./src/schema/configuration.schema.json\n\n`
+    `\nUsage: generate-schemas.utl.mjs <target schema>\n\n  e.g. generate-schemas.utl.mjs ./src/schema/configuration.schema.json\n\n`,
   );
 }

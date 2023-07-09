@@ -8,7 +8,7 @@ describe("[U] extract/helpers - detectPreCompilationNess", () => {
 
   it("deps in the first not in the second get the isPreCompilationOnly attribute", () => {
     expect(
-      detectPreCompilationNess([{ module: "foo", moduleSystem: "es6" }], [])
+      detectPreCompilationNess([{ module: "foo", moduleSystem: "es6" }], []),
     ).to.deep.equal([
       { module: "foo", moduleSystem: "es6", preCompilationOnly: true },
     ]);
@@ -18,8 +18,8 @@ describe("[U] extract/helpers - detectPreCompilationNess", () => {
     expect(
       detectPreCompilationNess(
         [{ module: "foo", moduleSystem: "es6" }],
-        [{ module: "foo", moduleSystem: "es6" }]
-      )
+        [{ module: "foo", moduleSystem: "es6" }],
+      ),
     ).to.deep.equal([
       { module: "foo", moduleSystem: "es6", preCompilationOnly: false },
     ]);
@@ -29,8 +29,8 @@ describe("[U] extract/helpers - detectPreCompilationNess", () => {
     expect(
       detectPreCompilationNess(
         [{ module: "foo", moduleSystem: "es6" }],
-        [{ module: "foo", moduleSystem: "cjs" }]
-      )
+        [{ module: "foo", moduleSystem: "cjs" }],
+      ),
     ).to.deep.equal([
       { module: "foo", moduleSystem: "es6", preCompilationOnly: false },
     ]);
@@ -38,7 +38,7 @@ describe("[U] extract/helpers - detectPreCompilationNess", () => {
 
   it("deps only in the second list vanish", () => {
     expect(
-      detectPreCompilationNess([], [{ module: "foo", moduleSystem: "es6" }])
+      detectPreCompilationNess([], [{ module: "foo", moduleSystem: "es6" }]),
     ).to.deep.equal([]);
   });
 });

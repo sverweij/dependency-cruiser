@@ -215,7 +215,7 @@ describe("[U] graph-utl/consolidateToPattern", () => {
 
     const lConsolidated = consolidateToPattern(lInput, "[^/]+/[^/]+");
     expect(consolidateToPattern(lConsolidated, "[^/]+/[^/]+")).to.deep.equal(
-      lOutput
+      lOutput,
     );
   });
 });

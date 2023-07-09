@@ -24,8 +24,8 @@ describe("[I] [I] validate/index - type-only", () => {
         {
           resolved: "src/robbie-kerkhof.ts",
           dependencyTypes: ["type-only", "local"],
-        }
-      )
+        },
+      ),
     ).to.deep.equal({ valid: true });
   });
 
@@ -34,8 +34,8 @@ describe("[I] [I] validate/index - type-only", () => {
       validate.dependency(
         lTypeOnlyRuleSet,
         { source: "src/koos-koets.ts" },
-        { resolved: "src/ger-hekking.ts", dependencyTypes: ["local"] }
-      )
+        { resolved: "src/ger-hekking.ts", dependencyTypes: ["local"] },
+      ),
     ).to.deep.equal({
       valid: false,
       rules: [

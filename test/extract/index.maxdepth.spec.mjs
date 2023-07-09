@@ -20,20 +20,20 @@ describe("[I] extract/index - max depth", () => {
         {
           bustTheCache: true,
         },
-        lOptions
+        lOptions,
       );
       const lResult = extract(
         ["./test/extract/__mocks__/maxDepth/index.js"],
         lOptions,
-        lResolveOptions
+        lResolveOptions,
       );
       /* eslint import/no-dynamic-require:0, security/detect-non-literal-require:0 */
 
       expect(lResult).to.deep.equal(
-        requireJSON(`./__fixtures__/max-depth-${pDepth}.json`)
+        requireJSON(`./__fixtures__/max-depth-${pDepth}.json`),
       );
       // expect(lResult).to.be.jsonSchema(resultSchema);
-    })
+    }),
   );
 });
 /* eslint node/global-require: 0*/

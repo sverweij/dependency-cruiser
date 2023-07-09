@@ -45,7 +45,7 @@ describe("[U] cli/listeners/performance-log/handlers - getProgressLine", () => {
     const lPreviousTime = lUpdatableStateMock.previousMessage;
 
     expect(
-      getProgressLine("next message", lUpdatableStateMock, 10, MAX_LEVEL)
+      getProgressLine("next message", lUpdatableStateMock, 10, MAX_LEVEL),
     ).to.match(/previous message/);
     expect(lUpdatableStateMock.previousMessage).to.equal("next message");
     expect(lUpdatableStateMock.previousTime).to.not.equal(lPreviousTime);
@@ -69,7 +69,7 @@ describe("[U] cli/listeners/performance-log/handlers - getEndText", () => {
 
   it("message contains a line with totals", () => {
     expect(getEndText(lStateMock, 10, MAX_LEVEL)).to.match(
-      /really done\n------------- ------------- ------------- ------------- ------------- ------------- ------------- ------------------------------------------\n[ ]*[+-]?[0-9,]+kB[ ]*[+-]?[0-9,]+kB[ ]*[+-]?[0-9,]+kB[ ]*[+-]?[0-9,]+kB[ ]*[0-9,]+ms[ ]*[0-9,]+ms[ ]*[0-9,]+ms/g
+      /really done\n------------- ------------- ------------- ------------- ------------- ------------- ------------- ------------------------------------------\n[ ]*[+-]?[0-9,]+kB[ ]*[+-]?[0-9,]+kB[ ]*[+-]?[0-9,]+kB[ ]*[+-]?[0-9,]+kB[ ]*[0-9,]+ms[ ]*[0-9,]+ms[ ]*[0-9,]+ms/g,
     );
   });
 });

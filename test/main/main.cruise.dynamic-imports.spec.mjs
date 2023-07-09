@@ -8,15 +8,15 @@ import normBaseDirectory from "./norm-base-directory.utl.mjs";
 const requireJSON = createRequireJSON(import.meta.url);
 
 const esOut = normBaseDirectory(
-  requireJSON("./__mocks__/dynamic-imports/es/output.json")
+  requireJSON("./__mocks__/dynamic-imports/es/output.json"),
 );
 const tsOut = normBaseDirectory(
-  requireJSON("./__mocks__/dynamic-imports/typescript/output.json")
+  requireJSON("./__mocks__/dynamic-imports/typescript/output.json"),
 );
 const tsOutpre = normBaseDirectory(
   requireJSON(
-    "./__mocks__/dynamic-imports/typescript/output-pre-compilation-deps.json"
-  )
+    "./__mocks__/dynamic-imports/typescript/output-pre-compilation-deps.json",
+  ),
 );
 
 use(chaiJSONSchema);
@@ -60,7 +60,7 @@ describe("[E] main.cruise - dynamic imports", () => {
         },
         validate: true,
       },
-      { bustTheCache: true }
+      { bustTheCache: true },
     );
 
     expect(lResult.output).to.deep.equal(esOut);
@@ -95,7 +95,7 @@ describe("[E] main.cruise - dynamic imports", () => {
         },
         validate: true,
       },
-      { bustTheCache: true }
+      { bustTheCache: true },
     );
 
     expect(lResult.output).to.deep.equal(tsOut);
@@ -131,7 +131,7 @@ describe("[E] main.cruise - dynamic imports", () => {
         validate: true,
         tsPreCompilationDeps: true,
       },
-      { bustTheCache: true }
+      { bustTheCache: true },
     );
 
     expect(lResult.output).to.deep.equal(tsOutpre);

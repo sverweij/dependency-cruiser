@@ -17,8 +17,8 @@ describe("[I] extract/gatherInitialSources", () => {
     expect(
       gatherInitialSources(
         ["test/extract/__mocks__/cjs/root_one.js"],
-        EMPTYOPTIONS
-      ).map(pathToPosix)
+        EMPTYOPTIONS,
+      ).map(pathToPosix),
     ).to.deep.equal(["test/extract/__mocks__/cjs/root_one.js"]);
   });
 
@@ -29,8 +29,8 @@ describe("[I] extract/gatherInitialSources", () => {
           "test/extract/__mocks__/cjs/root_one.js",
           "test/extract/__mocks__/ts/index.ts",
         ],
-        EMPTYOPTIONS
-      ).map(pathToPosix)
+        EMPTYOPTIONS,
+      ).map(pathToPosix),
     ).to.deep.equal([
       "test/extract/__mocks__/cjs/root_one.js",
       "test/extract/__mocks__/ts/index.ts",
@@ -40,8 +40,8 @@ describe("[I] extract/gatherInitialSources", () => {
   it("expands the scannable files in a folder", () => {
     expect(
       gatherInitialSources(["test/extract/__mocks__/ts"], EMPTYOPTIONS).map(
-        pathToPosix
-      )
+        pathToPosix,
+      ),
     ).to.deep.equal([
       "test/extract/__mocks__/ts/index.ts",
       "test/extract/__mocks__/ts/javascriptThing.js",
@@ -55,8 +55,8 @@ describe("[I] extract/gatherInitialSources", () => {
     expect(
       gatherInitialSources(
         ["test/extract/__mocks__/ts", "test/extract/__mocks__/coffee"],
-        EMPTYOPTIONS
-      ).map(pathToPosix)
+        EMPTYOPTIONS,
+      ).map(pathToPosix),
     ).to.deep.equal([
       "test/extract/__mocks__/coffee/index.coffee",
       "test/extract/__mocks__/coffee/javascriptThing.js",
@@ -79,8 +79,8 @@ describe("[I] extract/gatherInitialSources", () => {
           "test/extract/__mocks__/es6/imports-and-exports.js",
           "test/extract/__mocks__/coffee",
         ],
-        EMPTYOPTIONS
-      ).map(pathToPosix)
+        EMPTYOPTIONS,
+      ).map(pathToPosix),
     ).to.deep.equal([
       "test/extract/__mocks__/coffee/index.coffee",
       "test/extract/__mocks__/coffee/javascriptThing.js",
@@ -104,8 +104,8 @@ describe("[I] extract/gatherInitialSources", () => {
           "test/extract/__mocks__/es6/imports-and-exports.js",
           "test/extract/__mocks__/coffee",
         ],
-        { exclude: { path: "dex" } }
-      ).map(pathToPosix)
+        { exclude: { path: "dex" } },
+      ).map(pathToPosix),
     ).to.deep.equal([
       "test/extract/__mocks__/coffee/javascriptThing.js",
       "test/extract/__mocks__/coffee/sub/kaching.litcoffee",
@@ -121,7 +121,7 @@ describe("[I] extract/gatherInitialSources", () => {
     expect(
       gatherInitialSources(["test/extract/__mocks__/ts"], {
         exclude: { path: "^[a-z]+$" },
-      }).map(pathToPosix)
+      }).map(pathToPosix),
     ).to.deep.equal([
       "test/extract/__mocks__/ts/index.ts",
       "test/extract/__mocks__/ts/javascriptThing.js",
@@ -135,8 +135,8 @@ describe("[I] extract/gatherInitialSources", () => {
     expect(
       gatherInitialSources(
         ["test/extract/__mocks__/gather-globbing/packages/**/*.js"],
-        EMPTYOPTIONS
-      ).map(pathToPosix)
+        EMPTYOPTIONS,
+      ).map(pathToPosix),
     ).to.deep.equal([
       "test/extract/__mocks__/gather-globbing/packages/baldr/spec/bow.spec.js",
       "test/extract/__mocks__/gather-globbing/packages/baldr/spec/index.spec.js",
@@ -156,8 +156,8 @@ describe("[I] extract/gatherInitialSources", () => {
     expect(
       gatherInitialSources(
         ["test/extract/__mocks__/gather-globbing/**/src/**/*.js"],
-        EMPTYOPTIONS
-      ).map(pathToPosix)
+        EMPTYOPTIONS,
+      ).map(pathToPosix),
     ).to.deep.equal([
       "test/extract/__mocks__/gather-globbing/packages/baldr/src/bow.js",
       "test/extract/__mocks__/gather-globbing/packages/baldr/src/index.js",
@@ -172,7 +172,7 @@ describe("[I] extract/gatherInitialSources", () => {
     expect(
       gatherInitialSources(["test/extract/__mocks__/gather-globbing/**/src"], {
         exclude: { path: "/deep/ly/" },
-      }).map(pathToPosix)
+      }).map(pathToPosix),
     ).to.deep.equal([
       "test/extract/__mocks__/gather-globbing/packages/baldr/src/bow.js",
       "test/extract/__mocks__/gather-globbing/packages/baldr/src/index.js",
@@ -189,7 +189,7 @@ describe("[I] extract/gatherInitialSources", () => {
     expect(
       gatherInitialSources(["test/extract/__mocks__/gather-globbing/**/src"], {
         doNotFollow: { path: "/deep/ly/" },
-      }).map(pathToPosix)
+      }).map(pathToPosix),
     ).to.deep.equal([
       "test/extract/__mocks__/gather-globbing/packages/baldr/src/bow.js",
       "test/extract/__mocks__/gather-globbing/packages/baldr/src/index.js",
@@ -208,8 +208,8 @@ describe("[I] extract/gatherInitialSources", () => {
         ["test/extract/__mocks__/gather-globbing/packages"],
         {
           includeOnly: { path: "/loki/" },
-        }
-      ).map(pathToPosix)
+        },
+      ).map(pathToPosix),
     ).to.deep.equal([
       "test/extract/__mocks__/gather-globbing/packages/loki/index.ts",
       "test/extract/__mocks__/gather-globbing/packages/loki/script/hots.js",
@@ -223,7 +223,7 @@ describe("[I] extract/gatherInitialSources", () => {
     expect(
       gatherInitialSources(["test/extract/__mocks__/extra-extensions"], {
         extraExtensionsToScan: [".ratm", ".yolo"],
-      }).map(pathToPosix)
+      }).map(pathToPosix),
     ).to.deep.equal([
       "test/extract/__mocks__/extra-extensions/gathered.ratm",
       "test/extract/__mocks__/extra-extensions/in-the-name-of.ratm",
@@ -238,8 +238,8 @@ describe("[I] extract/gatherInitialSources", () => {
         ["**/src/**/*.js"],
         normalizeCruiseOptions({
           baseDir: "test/extract/__mocks__/gather-globbing",
-        })
-      ).map(pathToPosix)
+        }),
+      ).map(pathToPosix),
     ).to.deep.equal([
       "packages/baldr/src/bow.js",
       "packages/baldr/src/index.js",
@@ -253,11 +253,11 @@ describe("[I] extract/gatherInitialSources", () => {
   it("filters invalid symlinks", () => {
     expect(
       lstatSync(
-        "./test/extract/__mocks__/invalid-symlink/index.js"
-      ).isSymbolicLink()
+        "./test/extract/__mocks__/invalid-symlink/index.js",
+      ).isSymbolicLink(),
     ).to.equal(true);
     expect(
-      gatherInitialSources(["test/extract/__mocks__/invalid-symlink"])
+      gatherInitialSources(["test/extract/__mocks__/invalid-symlink"]),
     ).to.deep.equal([]);
   });
 });

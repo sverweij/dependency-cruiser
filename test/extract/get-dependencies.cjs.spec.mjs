@@ -37,9 +37,9 @@ function runFixture(pFixture, pParser = "acorn") {
         normalizeCruiseOptions(lOptions),
         await normalizeResolveOptions(
           { bustTheCache: true, resolveLicenses: true },
-          normalizeCruiseOptions(lOptions)
-        )
-      )
+          normalizeCruiseOptions(lOptions),
+        ),
+      ),
     ).to.deep.equal(pFixture.expected);
   });
 }
@@ -48,10 +48,10 @@ function runFixture(pFixture, pParser = "acorn") {
 before((pCallback) => {
   symlinkDir(
     join(__dirname, "__mocks__", "symlinkTarget"),
-    symlinkDirectory
+    symlinkDirectory,
   ).then(
     () => pCallback(),
-    (pError) => pCallback(pError)
+    (pError) => pCallback(pError),
   );
 });
 
@@ -74,15 +74,15 @@ describe("[I] extract/getDependencies - CommonJS - with bangs", () => {
     const lOptions = normalizeCruiseOptions({ moduleSystems: ["cjs"] });
     const lResolveOptions = await normalizeResolveOptions(
       { bustTheCache: true },
-      lOptions
+      lOptions,
     );
 
     expect(
       getDependencies(
         "test/extract/__mocks__/cjs-bangs/index.js",
         lOptions,
-        lResolveOptions
-      )
+        lResolveOptions,
+      ),
     ).to.deep.equal([
       {
         resolved: "test/extract/__mocks__/cjs-bangs/dependency.js",
@@ -103,15 +103,15 @@ describe("[I] extract/getDependencies - CommonJS - with bangs", () => {
     const lOptions = normalizeCruiseOptions({ moduleSystems: ["cjs"] });
     const lResolveOptions = await normalizeResolveOptions(
       { bustTheCache: true },
-      lOptions
+      lOptions,
     );
 
     expect(
       getDependencies(
         "test/extract/__mocks__/cjs-multi-bangs/index.js",
         lOptions,
-        lResolveOptions
-      )
+        lResolveOptions,
+      ),
     ).to.deep.equal([
       {
         resolved: "test/extract/__mocks__/cjs-multi-bangs/dependency.js",

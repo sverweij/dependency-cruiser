@@ -47,8 +47,8 @@ describe("[U] cache/content-strategy - getRevisionData", () => {
           interestingChangeTypes: INTERESTING_CHANGE_TYPES,
           shaRetrievalFn: () => DUMMY_SHA,
           diffListFn: () => lInputChanges,
-        }
-      )
+        },
+      ),
     ).to.deep.equal(lExpected);
   });
 
@@ -63,8 +63,8 @@ describe("[U] cache/content-strategy - getRevisionData", () => {
           interestingChangeTypes: INTERESTING_CHANGE_TYPES,
           shaRetrievalFn: () => DUMMY_SHA,
           diffListFn: () => [],
-        }
-      )
+        },
+      ),
     ).to.deep.equal({
       SHA1: DUMMY_SHA,
       changes: [],
@@ -83,8 +83,8 @@ describe("[U] cache/content-strategy - getRevisionData", () => {
           extensions: lLimitedExtensions,
           interestingChangeTypes: INTERESTING_CHANGE_TYPES,
           baseDir: "test/cache/__mocks__/content-strategy/extensions-check",
-        }
-      )
+        },
+      ),
     ).to.deep.equal({
       SHA1: DUMMY_SHA,
       changes: [
@@ -138,8 +138,8 @@ describe("[U] cache/content-strategy - getRevisionData", () => {
           interestingChangeTypes: lLimitedChangeTypes,
           diffListFn: () => lInputChanges,
           checksumFn: dummyCheckSumFunction,
-        }
-      )
+        },
+      ),
     ).to.deep.equal({
       SHA1: DUMMY_SHA,
       changes: [
@@ -190,7 +190,7 @@ describe("[U] cache/content-strategy - revisionDataEqual", () => {
       new ContentStrategy().revisionDataEqual(null, {
         SHA1: "some-sha",
         changes: [],
-      })
+      }),
     ).to.equal(false);
   });
 
@@ -198,8 +198,8 @@ describe("[U] cache/content-strategy - revisionDataEqual", () => {
     expect(
       new ContentStrategy().revisionDataEqual(
         { SHA1: "some-sha", changes: [] },
-        null
-      )
+        null,
+      ),
     ).to.equal(false);
   });
 
@@ -207,8 +207,8 @@ describe("[U] cache/content-strategy - revisionDataEqual", () => {
     expect(
       new ContentStrategy().revisionDataEqual(
         { SHA1: "some-sha", changes: [] },
-        { SHA1: "some-sha", changes: lChanges }
-      )
+        { SHA1: "some-sha", changes: lChanges },
+      ),
     ).to.equal(false);
   });
 
@@ -216,8 +216,8 @@ describe("[U] cache/content-strategy - revisionDataEqual", () => {
     expect(
       new ContentStrategy().revisionDataEqual(
         { SHA1: "some-sha", changes: lChanges },
-        { SHA1: "some-sha", changes: lChanges }
-      )
+        { SHA1: "some-sha", changes: lChanges },
+      ),
     ).to.equal(true);
   });
 
@@ -225,8 +225,8 @@ describe("[U] cache/content-strategy - revisionDataEqual", () => {
     expect(
       new ContentStrategy().revisionDataEqual(
         { SHA1: "some-sha", changes: [] },
-        { SHA1: "some-sha", changes: [] }
-      )
+        { SHA1: "some-sha", changes: [] },
+      ),
     ).to.equal(true);
   });
 });
@@ -268,8 +268,8 @@ describe("[U] cache/content-strategy - prepareRevisionDataForSaving", () => {
     expect(
       new ContentStrategy().prepareRevisionDataForSaving(
         lEmptyCruiseResult,
-        lEmptyRevisionData
-      )
+        lEmptyRevisionData,
+      ),
     ).to.deep.equal(lExpectedCruiseResult);
   });
 
@@ -326,8 +326,8 @@ describe("[U] cache/content-strategy - prepareRevisionDataForSaving", () => {
     expect(
       new ContentStrategy().prepareRevisionDataForSaving(
         lEmptyCruiseResult,
-        lEmptyRevisionData
-      )
+        lEmptyRevisionData,
+      ),
     ).to.deep.equal(lExpectedCruiseResult);
   });
 
@@ -414,8 +414,8 @@ describe("[U] cache/content-strategy - prepareRevisionDataForSaving", () => {
     expect(
       new ContentStrategy().prepareRevisionDataForSaving(
         lCruiseResult,
-        lRevisionData
-      )
+        lRevisionData,
+      ),
     ).to.deep.equal(lExpectedCruiseResult);
   });
 });

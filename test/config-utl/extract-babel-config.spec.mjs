@@ -49,7 +49,7 @@ describe("[I] config-utl/extract-babel-config", () => {
     let lThrown = false;
     try {
       await extractBabelConfig(
-        getFullPath("./__mocks__/babelconfig/babelrc.invalid.json")
+        getFullPath("./__mocks__/babelconfig/babelrc.invalid.json"),
       );
     } catch (pError) {
       lThrown = true;
@@ -61,7 +61,7 @@ describe("[I] config-utl/extract-babel-config", () => {
     let lThrown = false;
     try {
       await extractBabelConfig(
-        getFullPath("./__mocks__/babelconfig/babelrc.not-a-babel-option.json")
+        getFullPath("./__mocks__/babelconfig/babelrc.not-a-babel-option.json"),
       );
     } catch (pError) {
       lThrown = true;
@@ -71,20 +71,20 @@ describe("[I] config-utl/extract-babel-config", () => {
 
   it("returns a default options object when an empty config file is passed", async () => {
     const lBabelConfig = await extractBabelConfig(
-      getFullPath("./__mocks__/babelconfig/babelrc.empty.json")
+      getFullPath("./__mocks__/babelconfig/babelrc.empty.json"),
     );
     expect(lBabelConfig).to.have.property("filename");
     expect(pathToPosix(lBabelConfig.filename)).to.contain(
-      "/__mocks__/babelconfig/babelrc.empty.json"
+      "/__mocks__/babelconfig/babelrc.empty.json",
     );
     expect(omit(lBabelConfig, "filename")).to.deep.equal(
-      DEFAULT_EMPTY_BABEL_OPTIONS_OBJECT
+      DEFAULT_EMPTY_BABEL_OPTIONS_OBJECT,
     );
   });
 
   it("reads the 'babel' key when a package.json is passed", async () => {
     const lBabelKey = await extractBabelConfig(
-      getFullPath("./__mocks__/babelconfig/package.json")
+      getFullPath("./__mocks__/babelconfig/package.json"),
     );
     expect(lBabelKey.plugins.length).to.equal(1);
   });
@@ -92,28 +92,28 @@ describe("[I] config-utl/extract-babel-config", () => {
   it("returns an empty (/ default) options object when package.json without a babel key is passed", async () => {
     const lBabelConfig = await extractBabelConfig(
       getFullPath(
-        "./__mocks__/babelconfig/no-babel-config-in-this-package.json"
-      )
+        "./__mocks__/babelconfig/no-babel-config-in-this-package.json",
+      ),
     );
     expect(lBabelConfig).to.have.property("filename");
     expect(pathToPosix(lBabelConfig.filename)).to.contain(
-      "/__mocks__/babelconfig/no-babel-config-in-this-package.json"
+      "/__mocks__/babelconfig/no-babel-config-in-this-package.json",
     );
     expect(omit(lBabelConfig, "filename")).to.deep.equal(
-      DEFAULT_EMPTY_BABEL_OPTIONS_OBJECT
+      DEFAULT_EMPTY_BABEL_OPTIONS_OBJECT,
     );
   });
 
   it("returns a babel config when a javascript file with a regular object export is passed", async () => {
     const lModule = await extractBabelConfig(
-      getFullPath("./__mocks__/babelconfig-js/babel.object-export.config.js")
+      getFullPath("./__mocks__/babelconfig-js/babel.object-export.config.js"),
     );
     expect(lModule.plugins.length).to.equal(1);
   });
 
   it("returns a babel config _including_ the array of plugins when a config with presets is passed", async () => {
     const lFoundConfig = await extractBabelConfig(
-      getFullPath("./__mocks__/babelconfig/babelrc.with-a-preset.json")
+      getFullPath("./__mocks__/babelconfig/babelrc.with-a-preset.json"),
     );
     expect(lFoundConfig.presets.length).to.equal(1);
     expect(lFoundConfig.presets).to.deep.equal(["@babel/preset-typescript"]);
@@ -124,8 +124,8 @@ describe("[I] config-utl/extract-babel-config", () => {
     try {
       await extractBabelConfig(
         getFullPath(
-          "./__mocks__/babelconfig-js/babel.function-export.config.js"
-        )
+          "./__mocks__/babelconfig-js/babel.function-export.config.js",
+        ),
       );
     } catch (pError) {
       lThrown = true;
@@ -138,8 +138,8 @@ describe("[I] config-utl/extract-babel-config", () => {
     try {
       await extractBabelConfig(
         getFullPath(
-          "./__mocks__/babelconfig-js/babel.config.wildly-unsupported-extension"
-        )
+          "./__mocks__/babelconfig-js/babel.config.wildly-unsupported-extension",
+        ),
       );
     } catch (pError) {
       lThrown = true;
@@ -149,20 +149,20 @@ describe("[I] config-utl/extract-babel-config", () => {
 
   it("returns a babel config even when an es module is passed (.js extension)", async () => {
     const lFoundConfig = await extractBabelConfig(
-      getFullPath("./__mocks__/babelconfig-js/babel.es-module.config.mjs")
+      getFullPath("./__mocks__/babelconfig-js/babel.es-module.config.mjs"),
     );
     expect(lFoundConfig.plugins.length).to.equal(1);
     expect(lFoundConfig.plugins[0].key).to.deep.equal(
-      "transform-modules-commonjs"
+      "transform-modules-commonjs",
     );
   });
   it("returns a babel config even when an es module is passed (.mjs extension)", async () => {
     const lFoundConfig = await extractBabelConfig(
-      getFullPath("./__mocks__/babelconfig-js/babel.es-module.config.mjs")
+      getFullPath("./__mocks__/babelconfig-js/babel.es-module.config.mjs"),
     );
     expect(lFoundConfig.plugins.length).to.equal(1);
     expect(lFoundConfig.plugins[0].key).to.deep.equal(
-      "transform-modules-commonjs"
+      "transform-modules-commonjs",
     );
   });
 });

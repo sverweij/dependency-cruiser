@@ -10,7 +10,7 @@ describe("[I] report/plugins - getExternalPluginReporter", () => {
   it("throws when the plugin:reporter is not a valid plugin (missing exit code)", async () => {
     const lNoExitCodePlugin = join(
       FIXTURE_DIRECTORY,
-      "invalid-no-exit-code-plugin.cjs"
+      "invalid-no-exit-code-plugin.cjs",
     );
     let lErrorMessage = "none";
 
@@ -20,14 +20,14 @@ describe("[I] report/plugins - getExternalPluginReporter", () => {
       lErrorMessage = pError.message;
     }
     expect(lErrorMessage).to.contain(
-      `${lNoExitCodePlugin} is not a valid plugin`
+      `${lNoExitCodePlugin} is not a valid plugin`,
     );
   });
 
   it("throws when the plugin:reporter is not a valid plugin (missing output)", async () => {
     const lNoOutputPlugin = join(
       FIXTURE_DIRECTORY,
-      "invalid-no-output-plugin.cjs"
+      "invalid-no-output-plugin.cjs",
     );
     let lErrorMessage = "none";
 
@@ -37,7 +37,7 @@ describe("[I] report/plugins - getExternalPluginReporter", () => {
       lErrorMessage = pError.message;
     }
     expect(lErrorMessage).to.contain(
-      `${lNoOutputPlugin} is not a valid plugin`
+      `${lNoOutputPlugin} is not a valid plugin`,
     );
   });
 
@@ -50,13 +50,13 @@ describe("[I] report/plugins - getExternalPluginReporter", () => {
       lErrorMessage = pError.message;
     }
     expect(lErrorMessage).to.contain(
-      "Could not find reporter plugin 'this-plugin-does-not-exist'"
+      "Could not find reporter plugin 'this-plugin-does-not-exist'",
     );
   });
 
   it("returns false when it's not a plugin", async () => {
     expect(
-      await getExternalPluginReporter(`whatever-just-not-a-plugin`)
+      await getExternalPluginReporter(`whatever-just-not-a-plugin`),
     ).to.equal(false);
     expect(getExternalPluginReporter()).to.equal(false);
   });
@@ -74,7 +74,7 @@ describe("[I] report/plugins - getExternalPluginReporter", () => {
 
   it("returns the plugin module when it's valid and exists", async () => {
     const lSampleReporter = await getExternalPluginReporter(
-      "plugin:dependency-cruiser/sample-reporter-plugin"
+      "plugin:dependency-cruiser/sample-reporter-plugin",
     );
     const lResults = lSampleReporter({
       modules: [],

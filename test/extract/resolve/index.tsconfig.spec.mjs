@@ -11,14 +11,14 @@ const TSCONFIG = join(
   __dirname,
   "__mocks__",
   "ts-config-with-path",
-  "tsconfig.json"
+  "tsconfig.json",
 );
 const PARSED_TSCONFIG = extractTSConfig(TSCONFIG);
 const TSCONFIG_RESOLUTIONS = join(
   __dirname,
   "__mocks__",
   "ts-config-with-path-correct-resolution-prio",
-  "tsconfig.json"
+  "tsconfig.json",
 );
 const PARSED_TSCONFIG_RESOLUTIONS = extractTSConfig(TSCONFIG);
 
@@ -38,9 +38,9 @@ describe("[I] extract/resolve/index - typescript tsconfig processing", () => {
             bustTheCache: true,
           },
           {},
-          PARSED_TSCONFIG
-        )
-      )
+          PARSED_TSCONFIG,
+        ),
+      ),
     ).to.deep.equal({
       coreModule: false,
       couldNotResolve: false,
@@ -65,9 +65,9 @@ describe("[I] extract/resolve/index - typescript tsconfig processing", () => {
             bustTheCache: true,
           },
           {},
-          PARSED_TSCONFIG
-        )
-      )
+          PARSED_TSCONFIG,
+        ),
+      ),
     ).to.deep.equal({
       coreModule: false,
       couldNotResolve: false,
@@ -92,9 +92,9 @@ describe("[I] extract/resolve/index - typescript tsconfig processing", () => {
             bustTheCache: true,
           },
           {},
-          PARSED_TSCONFIG
-        )
-      )
+          PARSED_TSCONFIG,
+        ),
+      ),
     ).to.deep.equal({
       coreModule: false,
       couldNotResolve: false,
@@ -109,7 +109,7 @@ describe("[I] extract/resolve/index - typescript tsconfig processing", () => {
       __dirname,
       "__mocks__",
       "ts-config-with-path",
-      "tsconfig-no-paths.json"
+      "tsconfig-no-paths.json",
     );
     const PARSED_TSCONFIG_NO_PATHS = extractTSConfig(TSCONFIG_NO_PATHS);
     expect(
@@ -126,9 +126,9 @@ describe("[I] extract/resolve/index - typescript tsconfig processing", () => {
             bustTheCache: true,
           },
           {},
-          PARSED_TSCONFIG_NO_PATHS
-        )
-      )
+          PARSED_TSCONFIG_NO_PATHS,
+        ),
+      ),
     ).to.deep.equal({
       coreModule: false,
       couldNotResolve: false,
@@ -149,7 +149,7 @@ describe("[I] extract/resolve/index - typescript tsconfig processing", () => {
         join(
           __dirname,
           "__mocks__",
-          "ts-config-with-path-correct-resolution-prio"
+          "ts-config-with-path-correct-resolution-prio",
         ),
         await normalizeResolveOptions(
           {
@@ -157,9 +157,9 @@ describe("[I] extract/resolve/index - typescript tsconfig processing", () => {
             bustTheCache: true,
           },
           {},
-          PARSED_TSCONFIG_RESOLUTIONS
-        )
-      )
+          PARSED_TSCONFIG_RESOLUTIONS,
+        ),
+      ),
     ).to.deep.equal({
       coreModule: false,
       couldNotResolve: false,
@@ -181,7 +181,7 @@ describe("[I] extract/resolve/index - typescript tsconfig processing", () => {
         join(
           __dirname,
           "__mocks__",
-          "ts-config-with-path-correct-resolution-prio"
+          "ts-config-with-path-correct-resolution-prio",
         ),
         await normalizeResolveOptions(
           {
@@ -189,9 +189,9 @@ describe("[I] extract/resolve/index - typescript tsconfig processing", () => {
             bustTheCache: true,
           },
           {},
-          PARSED_TSCONFIG_RESOLUTIONS
-        )
-      )
+          PARSED_TSCONFIG_RESOLUTIONS,
+        ),
+      ),
     ).to.deep.equal({
       coreModule: false,
       couldNotResolve: false,
@@ -215,9 +215,9 @@ describe("[I] extract/resolve/index - typescript tsconfig processing", () => {
           {
             bustTheCache: true,
           },
-          {}
-        )
-      )
+          {},
+        ),
+      ),
     ).to.deep.equal({
       coreModule: false,
       couldNotResolve: true,

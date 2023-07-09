@@ -11,7 +11,7 @@ describe("[U] extract/helpers - dependencyEqual", () => {
       dependenciesEqual({ module: "foo", moduleSystem: "es6" })({
         module: "foo",
         moduleSystem: "es6",
-      })
+      }),
     ).to.equal(true);
   });
 
@@ -27,7 +27,7 @@ describe("[U] extract/helpers - dependencyEqual", () => {
         moduleSystem: "cjs",
         dynamic: false,
         exoticRequire: "need",
-      })
+      }),
     ).to.equal(true);
   });
 
@@ -39,7 +39,7 @@ describe("[U] extract/helpers - dependencyEqual", () => {
       })({
         module: "foo",
         moduleSystem: "cjs",
-      })
+      }),
     ).to.equal(true);
   });
 
@@ -51,7 +51,7 @@ describe("[U] extract/helpers - dependencyEqual", () => {
       })({
         module: "bar",
         moduleSystem: "es6",
-      })
+      }),
     ).to.equal(false);
   });
 
@@ -64,7 +64,7 @@ describe("[U] extract/helpers - dependencyEqual", () => {
       })({
         module: "foo",
         moduleSystem: "es6",
-      })
+      }),
     ).to.equal(false);
   });
 
@@ -77,7 +77,7 @@ describe("[U] extract/helpers - dependencyEqual", () => {
       })({
         module: "foo",
         moduleSystem: "es6",
-      })
+      }),
     ).to.equal(false);
   });
 });

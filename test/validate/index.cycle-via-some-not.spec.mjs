@@ -27,8 +27,8 @@ describe("[I] validate/index dependency - cycle viaSomeNot - with group matching
             "src/module-b/bc.js",
             "src/module-a/a.js",
           ],
-        }
-      )
+        },
+      ),
     ).to.deep.equal({
       valid: false,
       rules: [
@@ -54,8 +54,8 @@ describe("[I] validate/index dependency - cycle viaSomeNot - with group matching
             "src/module-b/bc.js",
             "src/module-a/a.js",
           ],
-        }
-      )
+        },
+      ),
     ).to.deep.equal({
       valid: false,
       rules: [
@@ -81,8 +81,8 @@ describe("[I] validate/index dependency - cycle viaSomeNot - with group matching
             "src/module-a/ac.js",
             "src/module-a/a.js",
           ],
-        }
-      )
+        },
+      ),
     ).to.deep.equal({
       valid: true,
     });
@@ -114,8 +114,8 @@ describe("[I] validate/index dependency - cycle viaSomeNot - with group matching
             "src/module-a/ac.js",
             "src/module-a/a.js",
           ],
-        }
-      )
+        },
+      ),
     ).to.deep.equal({
       valid: true,
     });

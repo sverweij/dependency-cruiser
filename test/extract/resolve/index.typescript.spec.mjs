@@ -17,8 +17,8 @@ async function wrappedResolve(pModuleAttributes) {
       {
         bustTheCache: true,
       },
-      {}
-    )
+      {},
+    ),
   );
 }
 
@@ -44,9 +44,9 @@ describe("[I] extract/resolve/index - typescript", () => {
           {
             bustTheCache: true,
           },
-          {}
-        )
-      )
+          {},
+        ),
+      ),
     ).to.deep.equal({
       coreModule: false,
       couldNotResolve: false,
@@ -58,13 +58,13 @@ describe("[I] extract/resolve/index - typescript", () => {
 
   it("Resolves the .ts even when the import includes a (non-existing) .js with explicit extension", async () => {
     process.chdir(
-      "test/extract/resolve/__mocks__/resolve-to-ts-even-when-imported-as-js"
+      "test/extract/resolve/__mocks__/resolve-to-ts-even-when-imported-as-js",
     );
     expect(
       await wrappedResolve({
         module: "./i-am-secretly-typescript.js",
         moduleSystem: "es6",
-      })
+      }),
     ).to.deep.equal({
       coreModule: false,
       couldNotResolve: false,
@@ -76,13 +76,13 @@ describe("[I] extract/resolve/index - typescript", () => {
 
   it("Resolves the .js even when the import includes an existing .js with explicit extension and the .ts exists", async () => {
     process.chdir(
-      "test/extract/resolve/__mocks__/resolve-to-js-even-when-imported-as-js"
+      "test/extract/resolve/__mocks__/resolve-to-js-even-when-imported-as-js",
     );
     expect(
       await wrappedResolve({
         module: "./i-am-genuinely-javascript.js",
         moduleSystem: "es6",
-      })
+      }),
     ).to.deep.equal({
       coreModule: false,
       couldNotResolve: false,
@@ -94,13 +94,13 @@ describe("[I] extract/resolve/index - typescript", () => {
 
   it("Does NOT resolve the .ts when the import includes a (non-existing) .cjs with explicit extension", async () => {
     process.chdir(
-      "test/extract/resolve/__mocks__/resolve-to-ts-even-when-imported-as-js"
+      "test/extract/resolve/__mocks__/resolve-to-ts-even-when-imported-as-js",
     );
     expect(
       await wrappedResolve({
         module: "./i-am-secretly-typescript.cjs",
         moduleSystem: "es6",
-      })
+      }),
     ).to.deep.equal({
       coreModule: false,
       couldNotResolve: true,
@@ -112,13 +112,13 @@ describe("[I] extract/resolve/index - typescript", () => {
   // cjs => cts
   it("Resolves the .cts when the import includes a (non-existing) .cjs with explicit extension (even when .d.cts exists)", async () => {
     process.chdir(
-      "test/extract/resolve/__mocks__/resolve-to-cts-even-when-imported-as-cjs"
+      "test/extract/resolve/__mocks__/resolve-to-cts-even-when-imported-as-cjs",
     );
     expect(
       await wrappedResolve({
         module: "./i-am-secretly-typescript.cjs",
         moduleSystem: "es6",
-      })
+      }),
     ).to.deep.equal({
       coreModule: false,
       couldNotResolve: false,
@@ -130,13 +130,13 @@ describe("[I] extract/resolve/index - typescript", () => {
 
   it("Resolves the .d.cts when the import includes a (non-existing) .cjs with explicit extension", async () => {
     process.chdir(
-      "test/extract/resolve/__mocks__/resolve-to-d-cts-even-when-imported-as-cjs"
+      "test/extract/resolve/__mocks__/resolve-to-d-cts-even-when-imported-as-cjs",
     );
     expect(
       await wrappedResolve({
         module: "./i-am-secretly-typescript.cjs",
         moduleSystem: "es6",
-      })
+      }),
     ).to.deep.equal({
       coreModule: false,
       couldNotResolve: false,
@@ -148,13 +148,13 @@ describe("[I] extract/resolve/index - typescript", () => {
 
   it("Resolves the .cjs when the import includes an existing .cjs with explicit extension and the .cts exists", async () => {
     process.chdir(
-      "test/extract/resolve/__mocks__/resolve-to-cjs-when-imported-as-cjs"
+      "test/extract/resolve/__mocks__/resolve-to-cjs-when-imported-as-cjs",
     );
     expect(
       await wrappedResolve({
         module: "./i-am-just-commonjs.cjs",
         moduleSystem: "es6",
-      })
+      }),
     ).to.deep.equal({
       coreModule: false,
       couldNotResolve: false,
@@ -166,13 +166,13 @@ describe("[I] extract/resolve/index - typescript", () => {
   // mjs => mts
   it("Resolves the .mts when the import includes a (non-existing) .mjs with explicit extension (even when .d.mts exists)", async () => {
     process.chdir(
-      "test/extract/resolve/__mocks__/resolve-to-mts-even-when-imported-as-mjs"
+      "test/extract/resolve/__mocks__/resolve-to-mts-even-when-imported-as-mjs",
     );
     expect(
       await wrappedResolve({
         module: "./i-am-secretly-typescript.mjs",
         moduleSystem: "es6",
-      })
+      }),
     ).to.deep.equal({
       coreModule: false,
       couldNotResolve: false,
@@ -184,13 +184,13 @@ describe("[I] extract/resolve/index - typescript", () => {
 
   it("Resolves the .d.mts when the import includes a (non-existing) .mjs with explicit extension", async () => {
     process.chdir(
-      "test/extract/resolve/__mocks__/resolve-to-d-mts-even-when-imported-as-mjs"
+      "test/extract/resolve/__mocks__/resolve-to-d-mts-even-when-imported-as-mjs",
     );
     expect(
       await wrappedResolve({
         module: "./i-am-secretly-typescript.mjs",
         moduleSystem: "es6",
-      })
+      }),
     ).to.deep.equal({
       coreModule: false,
       couldNotResolve: false,
@@ -202,13 +202,13 @@ describe("[I] extract/resolve/index - typescript", () => {
 
   it("Resolves the .mjs when the import includes an existing .mjs with explicit extension and the .cts exists", async () => {
     process.chdir(
-      "test/extract/resolve/__mocks__/resolve-to-mjs-when-imported-as-mjs"
+      "test/extract/resolve/__mocks__/resolve-to-mjs-when-imported-as-mjs",
     );
     expect(
       await wrappedResolve({
         module: "./i-am-just-esm.mjs",
         moduleSystem: "es6",
-      })
+      }),
     ).to.deep.equal({
       coreModule: false,
       couldNotResolve: false,
@@ -224,7 +224,7 @@ describe("[I] extract/resolve/index - typescript", () => {
       await wrappedResolve({
         module: "./there-is-a-cjs-variant-of-me-but-you-will-not-find-it.js",
         moduleSystem: "es6",
-      })
+      }),
     ).to.deep.equal({
       coreModule: false,
       couldNotResolve: true,
@@ -240,7 +240,7 @@ describe("[I] extract/resolve/index - typescript", () => {
       await wrappedResolve({
         module: "./hello",
         moduleSystem: "tsd",
-      })
+      }),
     ).to.deep.equal({
       coreModule: false,
       couldNotResolve: false,
@@ -256,7 +256,7 @@ describe("[I] extract/resolve/index - typescript", () => {
       await await wrappedResolve({
         module: "something",
         moduleSystem: "tsd",
-      })
+      }),
     ).to.deep.equal({
       coreModule: false,
       couldNotResolve: false,

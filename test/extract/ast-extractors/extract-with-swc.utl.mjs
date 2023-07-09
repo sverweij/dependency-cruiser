@@ -4,5 +4,5 @@ import { getASTFromSource } from "../../../src/extract/parse/to-swc-ast.mjs";
 export default (pTypesScriptSource, pExoticRequireStrings = []) =>
   extractSwcDependencies(
     getASTFromSource(pTypesScriptSource),
-    pExoticRequireStrings
+    pExoticRequireStrings,
   );

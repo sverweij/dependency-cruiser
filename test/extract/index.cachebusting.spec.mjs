@@ -37,42 +37,42 @@ describe("[I] extract/index - cache busting", () => {
     });
     const lResolveOptions = await normalizeResolveOptions({}, lOptions);
     const lFirstResultFixture = requireJSON(
-      "./__fixtures__/cache-busting-first-tree.json"
+      "./__fixtures__/cache-busting-first-tree.json",
     );
     const lSecondResultFixture = requireJSON(
-      "./__fixtures__/cache-busting-second-tree.json"
+      "./__fixtures__/cache-busting-second-tree.json",
     );
 
     renameSync(
       "./test/extract/__mocks__/cache-busting-first-tree",
-      "./test/extract/__mocks__/cache-busting"
+      "./test/extract/__mocks__/cache-busting",
     );
 
     const lFirstResult = extract(
       ["./test/extract/__mocks__/cache-busting/index.ts"],
       lOptions,
-      lResolveOptions
+      lResolveOptions,
     );
 
     renameSync(
       "./test/extract/__mocks__/cache-busting",
-      "./test/extract/__mocks__/cache-busting-first-tree"
+      "./test/extract/__mocks__/cache-busting-first-tree",
     );
 
     renameSync(
       "./test/extract/__mocks__/cache-busting-second-tree",
-      "./test/extract/__mocks__/cache-busting"
+      "./test/extract/__mocks__/cache-busting",
     );
 
     const lSecondResult = extract(
       ["./test/extract/__mocks__/cache-busting/index.ts"],
       lOptions,
-      lResolveOptions
+      lResolveOptions,
     );
 
     renameSync(
       "./test/extract/__mocks__/cache-busting",
-      "./test/extract/__mocks__/cache-busting-second-tree"
+      "./test/extract/__mocks__/cache-busting-second-tree",
     );
 
     expect(lFirstResult).to.deep.equal(lFirstResultFixture);

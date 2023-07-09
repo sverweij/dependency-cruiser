@@ -12,11 +12,11 @@ import { normalizeCruiseOptions } from "../../../src/main/options/normalize.mjs"
 
 const BASIC_RESOLVE_OPTIONS = await normalizeResolveOptions(
   {},
-  normalizeCruiseOptions({})
+  normalizeCruiseOptions({}),
 );
 const RESOLVE_OPTIONS_HEEDING_EXPORTS = await normalizeResolveOptions(
   { exportsFields: ["exports"], conditionNames: ["require", "imports"] },
-  normalizeCruiseOptions({})
+  normalizeCruiseOptions({}),
 );
 describe("[U] extract/resolve/externalModuleHelpers.getPackageJson", () => {
   beforeEach(() => {
@@ -27,8 +27,8 @@ describe("[U] extract/resolve/externalModuleHelpers.getPackageJson", () => {
       getPackageJson(
         "./module-does-not-exist",
         process.cwd(),
-        BASIC_RESOLVE_OPTIONS
-      )
+        BASIC_RESOLVE_OPTIONS,
+      ),
     ).to.be.null;
   });
 
@@ -37,8 +37,8 @@ describe("[U] extract/resolve/externalModuleHelpers.getPackageJson", () => {
       getPackageJson(
         "test/extract/fixtures/deprecated-node-module/require-something-deprecated",
         process.cwd(),
-        BASIC_RESOLVE_OPTIONS
-      )
+        BASIC_RESOLVE_OPTIONS,
+      ),
     ).to.be.null;
   });
 
@@ -47,8 +47,8 @@ describe("[U] extract/resolve/externalModuleHelpers.getPackageJson", () => {
       getPackageJson(
         "./require-something-deprecated",
         "./fixtures/deprecated-node-module/",
-        BASIC_RESOLVE_OPTIONS
-      )
+        BASIC_RESOLVE_OPTIONS,
+      ),
     ).to.be.null;
   });
 
@@ -56,7 +56,7 @@ describe("[U] extract/resolve/externalModuleHelpers.getPackageJson", () => {
     let lPackageJson = getPackageJson(
       "chai",
       process.cwd(),
-      BASIC_RESOLVE_OPTIONS
+      BASIC_RESOLVE_OPTIONS,
     );
 
     expect(lPackageJson).to.be.not.null;
@@ -76,13 +76,13 @@ describe("[U] extract/resolve/externalModuleHelpers.getPackageJson", () => {
     let lPackageJson = getPackageJson(
       "deprecated-at-the-start-for-test-purposes",
       "./test/extract/resolve/__mocks__/deprecated-node-module/",
-      BASIC_RESOLVE_OPTIONS
+      BASIC_RESOLVE_OPTIONS,
     );
 
     expect(lPackageJson).to.be.not.null;
     expect(has(lPackageJson, "name")).to.be.true;
     expect(lPackageJson.name).to.equal(
-      "deprecated-at-the-start-for-test-purposes"
+      "deprecated-at-the-start-for-test-purposes",
     );
   });
 
@@ -90,7 +90,7 @@ describe("[U] extract/resolve/externalModuleHelpers.getPackageJson", () => {
     let lPackageJson = getPackageJson(
       "testinga-two",
       "./test/extract/resolve/__mocks__/unreadable-package-json-because-not-exported",
-      RESOLVE_OPTIONS_HEEDING_EXPORTS
+      RESOLVE_OPTIONS_HEEDING_EXPORTS,
     );
 
     expect(lPackageJson).to.be.not.null;
@@ -126,7 +126,7 @@ describe("[U] extract/resolve/externalModuleHelpers.getPackageRoot", () => {
 
   it("@scoped/bla/subthing => @scoped/bla", () => {
     expect(getPackageRoot("@scoped/bla/subthing/sub/bla.json")).to.equal(
-      "@scoped/bla"
+      "@scoped/bla",
     );
   });
 
@@ -138,7 +138,7 @@ describe("[U] extract/resolve/externalModuleHelpers.getPackageRoot", () => {
 describe("[U] extract/resolve/externalModuleHelpers.getLicense", () => {
   it("returns '' if the module does not exist", () => {
     expect(
-      getLicense("this-module-does-not-exist", ".", BASIC_RESOLVE_OPTIONS)
+      getLicense("this-module-does-not-exist", ".", BASIC_RESOLVE_OPTIONS),
     ).to.equal("");
   });
 
@@ -147,8 +147,8 @@ describe("[U] extract/resolve/externalModuleHelpers.getLicense", () => {
       getLicense(
         "./test/extract/resolve/fixtures/no-package-json",
         ".",
-        BASIC_RESOLVE_OPTIONS
-      )
+        BASIC_RESOLVE_OPTIONS,
+      ),
     ).to.equal("");
   });
 
@@ -157,8 +157,8 @@ describe("[U] extract/resolve/externalModuleHelpers.getLicense", () => {
       getLicense(
         "no-license",
         "./test/extract/resolve/fixtures/licenses/",
-        BASIC_RESOLVE_OPTIONS
-      )
+        BASIC_RESOLVE_OPTIONS,
+      ),
     ).to.equal("");
   });
 
@@ -167,8 +167,8 @@ describe("[U] extract/resolve/externalModuleHelpers.getLicense", () => {
       getLicense(
         "boolean-license",
         "./test/extract/resolve/fixtures/licenses/",
-        BASIC_RESOLVE_OPTIONS
-      )
+        BASIC_RESOLVE_OPTIONS,
+      ),
     ).to.equal("");
   });
 
@@ -177,8 +177,8 @@ describe("[U] extract/resolve/externalModuleHelpers.getLicense", () => {
       getLicense(
         "object-license",
         "./test/extract/resolve/fixtures/licenses/",
-        BASIC_RESOLVE_OPTIONS
-      )
+        BASIC_RESOLVE_OPTIONS,
+      ),
     ).to.equal("");
   });
 
@@ -187,8 +187,8 @@ describe("[U] extract/resolve/externalModuleHelpers.getLicense", () => {
       getLicense(
         "array-licenses",
         "./test/extract/resolve/fixtures/licenses/",
-        BASIC_RESOLVE_OPTIONS
-      )
+        BASIC_RESOLVE_OPTIONS,
+      ),
     ).to.equal("");
   });
 
@@ -197,8 +197,8 @@ describe("[U] extract/resolve/externalModuleHelpers.getLicense", () => {
       getLicense(
         "GPL-license",
         "./test/extract/resolve/__mocks__/licenses/",
-        BASIC_RESOLVE_OPTIONS
-      )
+        BASIC_RESOLVE_OPTIONS,
+      ),
     ).to.equal("GPL-3.0");
   });
 });
@@ -209,8 +209,8 @@ describe("[U] extract/resolve/externalModuleHelpers.dependencyIsDeprecated", () 
       dependencyIsDeprecated(
         "this-module-does-not-exist",
         ".",
-        BASIC_RESOLVE_OPTIONS
-      )
+        BASIC_RESOLVE_OPTIONS,
+      ),
     ).to.equal(false);
   });
 });

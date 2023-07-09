@@ -17,8 +17,8 @@ async function wrappedResolve(pModuleAttributes) {
       {
         bustTheCache: true,
       },
-      {}
-    )
+      {},
+    ),
   );
 }
 
@@ -40,8 +40,8 @@ describe("[I] extract/resolve/index - general", () => {
         },
         join(__dirname, "__mocks__"),
         join(__dirname, "__mocks__", "resolve"),
-        await normalizeResolveOptions({}, {})
-      )
+        await normalizeResolveOptions({}, {}),
+      ),
     ).to.deep.equal({
       coreModule: false,
       couldNotResolve: false,
@@ -60,8 +60,8 @@ describe("[I] extract/resolve/index - general", () => {
         },
         join(__dirname, "__mocks__"),
         join(__dirname, "__mocks__", "resolve"),
-        {}
-      )
+        {},
+      ),
     ).to.deep.equal({
       coreModule: true,
       couldNotResolve: false,
@@ -82,8 +82,8 @@ describe("[I] extract/resolve/index - general", () => {
         join(__dirname, "__mocks__", "followability"),
         {
           bustTheCache: true,
-        }
-      )
+        },
+      ),
     ).to.deep.equal({
       coreModule: false,
       couldNotResolve: true,
@@ -102,8 +102,8 @@ describe("[I] extract/resolve/index - general", () => {
         },
         join(__dirname, "__mocks__"),
         join(__dirname, "__mocks__", "followability"),
-        await normalizeResolveOptions({ bustTheCache: true }, {})
-      )
+        await normalizeResolveOptions({ bustTheCache: true }, {}),
+      ),
     ).to.deep.equal({
       coreModule: false,
       couldNotResolve: false,
@@ -127,9 +127,9 @@ describe("[I] extract/resolve/index - general", () => {
             extensions: [".js", ".json"],
             bustTheCache: true,
           },
-          {}
-        )
-      )
+          {},
+        ),
+      ),
     ).to.deep.equal({
       coreModule: false,
       couldNotResolve: false,
@@ -153,9 +153,9 @@ describe("[I] extract/resolve/index - general", () => {
             extensions: [".js", ".json", ".scss"],
             bustTheCache: true,
           },
-          {}
-        )
-      )
+          {},
+        ),
+      ),
     ).to.deep.equal({
       coreModule: false,
       couldNotResolve: false,
@@ -181,9 +181,9 @@ describe("[I] extract/resolve/index - general", () => {
             },
             bustTheCache: true,
           },
-          {}
-        )
-      )
+          {},
+        ),
+      ),
     ).to.deep.equal({
       coreModule: false,
       couldNotResolve: false,
@@ -210,14 +210,14 @@ describe("[I] extract/resolve/index - general", () => {
                 __dirname,
                 "__mocks__",
                 "localmodulesfix",
-                "localmoduleshere"
+                "localmoduleshere",
               ),
             ],
             bustTheCache: true,
           },
-          {}
-        )
-      )
+          {},
+        ),
+      ),
     ).to.deep.equal({
       coreModule: false,
       couldNotResolve: false,
@@ -236,8 +236,8 @@ describe("[I] extract/resolve/index - general", () => {
         },
         join(__dirname, "__mocks__"),
         join(__dirname, "__mocks__", "resolve"),
-        await normalizeResolveOptions({}, {})
-      )
+        await normalizeResolveOptions({}, {}),
+      ),
     ).to.deep.equal({
       coreModule: false,
       couldNotResolve: false,
@@ -253,7 +253,7 @@ describe("[I] extract/resolve/index - general", () => {
       await wrappedResolve({
         module: "export-testinga/conditionalExports",
         moduleSystem: "cjs",
-      })
+      }),
     ).to.deep.equal({
       coreModule: false,
       couldNotResolve: true,
@@ -279,9 +279,9 @@ describe("[I] extract/resolve/index - general", () => {
             exportsFields: ["exports"],
             conditionNames: ["require"],
           },
-          {}
-        )
-      )
+          {},
+        ),
+      ),
     ).to.deep.equal({
       coreModule: false,
       couldNotResolve: false,
@@ -297,7 +297,7 @@ describe("[I] extract/resolve/index - general", () => {
       await wrappedResolve({
         module: "./#/hashmark.js",
         moduleSystem: "cjs",
-      })
+      }),
     ).to.deep.equal({
       coreModule: false,
       couldNotResolve: false,
@@ -313,7 +313,7 @@ describe("[I] extract/resolve/index - general", () => {
       await wrappedResolve({
         module: "./hashmark-after-this.js#this-is-extra",
         moduleSystem: "cjs",
-      })
+      }),
     ).to.deep.equal({
       coreModule: false,
       couldNotResolve: false,
@@ -337,8 +337,8 @@ describe("[I] extract/resolve/index - general", () => {
         await normalizeResolveOptions({
           bustTheCache: true,
           mainFields: ["main", "types"],
-        })
-      )
+        }),
+      ),
     ).to.deep.equal({
       coreModule: false,
       couldNotResolve: false,

@@ -15,7 +15,7 @@ describe("[I] validate/index - orphans", () => {
 
   it("Skips modules that have no orphan attribute", () => {
     expect(
-      validate.module(lOrphanRuleSet, { source: "something" })
+      validate.module(lOrphanRuleSet, { source: "something" }),
     ).to.deep.equal({ valid: true });
   });
 
@@ -24,7 +24,7 @@ describe("[I] validate/index - orphans", () => {
       validate.module(lOrphanRuleSet, {
         source: "something",
         orphan: true,
-      })
+      }),
     ).to.deep.equal({
       valid: false,
       rules: [
@@ -51,7 +51,7 @@ describe("[I] validate/index - orphans in 'allowed' rules", () => {
       validate.module(lOrphansAllowedRuleSet, {
         source: "something",
         orphan: true,
-      })
+      }),
     ).to.deep.equal({
       valid: false,
       rules: [
@@ -68,7 +68,7 @@ describe("[I] validate/index - orphans in 'allowed' rules", () => {
       validate.module(lOrphansAllowedRuleSet, {
         source: "something",
         orphan: false,
-      })
+      }),
     ).to.deep.equal({ valid: true });
   });
 });
@@ -98,7 +98,7 @@ describe("[I] validate/index - orphans combined with path/ pathNot", () => {
       validate.module(lOrphanPathRuleSet, {
         source: "something",
         orphan: true,
-      })
+      }),
     ).to.deep.equal({ valid: true });
   });
 
@@ -107,7 +107,7 @@ describe("[I] validate/index - orphans combined with path/ pathNot", () => {
       validate.module(lOrphanPathRuleSet, {
         source: "noorphansallowedhere/blah/something.ts",
         orphan: true,
-      })
+      }),
     ).to.deep.equal({
       valid: false,
       rules: [
@@ -124,7 +124,7 @@ describe("[I] validate/index - orphans combined with path/ pathNot", () => {
       validate.module(lOrphanPathNotRuleSet, {
         source: "orphansallowedhere/something",
         orphan: true,
-      })
+      }),
     ).to.deep.equal({ valid: true });
   });
 
@@ -133,7 +133,7 @@ describe("[I] validate/index - orphans combined with path/ pathNot", () => {
       validate.module(lOrphanPathNotRuleSet, {
         source: "blah/something.ts",
         orphan: true,
-      })
+      }),
     ).to.deep.equal({
       valid: false,
       rules: [
@@ -153,8 +153,8 @@ describe("[I] validate/index - orphans combined with path/ pathNot", () => {
           source: "noorphansallowedhere/something.ts",
           orphan: true,
         },
-        {}
-      )
+        {},
+      ),
     ).to.deep.equal({ valid: true });
   });
 });

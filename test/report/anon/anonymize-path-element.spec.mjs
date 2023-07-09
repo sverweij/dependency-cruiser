@@ -8,7 +8,7 @@ describe("[U] report/anon/anonymizePathElement - uncached", () => {
 
   it("'string' => random string", () => {
     expect(anonymizePathElement("string", [], /^$/, false)).to.match(
-      /[a-z]{6}/
+      /[a-z]{6}/,
     );
   });
 
@@ -17,22 +17,22 @@ describe("[U] report/anon/anonymizePathElement - uncached", () => {
 
     expect(anonymizePathElement("one", lWordlist, /^$/, false)).to.equal("aap");
     expect(anonymizePathElement("two", lWordlist, /^$/, false)).to.equal(
-      "noot"
+      "noot",
     );
     expect(anonymizePathElement("three", lWordlist, /^$/, false)).to.match(
-      /[a-z]{5}/
+      /[a-z]{5}/,
     );
   });
 
   it("returns the passed string when it matches the whitelist", () => {
     expect(anonymizePathElement("package", [], /^packages?$/, false)).to.equal(
-      "package"
+      "package",
     );
   });
 
   it("returns the passed string when it does not match the whitelist", () => {
     expect(
-      anonymizePathElement("thing", ["aap", "noot"], /^packages?$/, false)
+      anonymizePathElement("thing", ["aap", "noot"], /^packages?$/, false),
     ).to.equal("aap");
   });
 
@@ -42,8 +42,8 @@ describe("[U] report/anon/anonymizePathElement - uncached", () => {
         "thing.spec.js",
         ["aap", "noot"],
         /^packages?$/,
-        false
-      )
+        false,
+      ),
     ).to.equal("aap.spec.js");
   });
 });

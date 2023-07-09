@@ -18,7 +18,7 @@ describe("[U] enrich/derive/dependents/get-dependents", () => {
           source: "someoneelse",
           dependencies: [],
         },
-      ])
+      ]),
     ).to.deep.equal([]);
   });
 
@@ -29,7 +29,7 @@ describe("[U] enrich/derive/dependents/get-dependents", () => {
           source: "someoneelse",
           dependencies: [{ resolved: "itsnotme" }],
         },
-      ])
+      ]),
     ).to.deep.equal([]);
   });
 
@@ -40,7 +40,7 @@ describe("[U] enrich/derive/dependents/get-dependents", () => {
           source: "someoneelse",
           dependencies: [{ resolved: "itsnotme" }, { resolved: "itsme" }],
         },
-      ])
+      ]),
     ).to.deep.equal(["someoneelse"]);
   });
 
@@ -60,7 +60,7 @@ describe("[U] enrich/derive/dependents/get-dependents", () => {
             { resolved: "itsnotmeeither" },
           ],
         },
-      ])
+      ]),
     ).to.deep.equal(["someoneelse", "someoneelse-again"]);
   });
 });

@@ -6,8 +6,8 @@ describe("[U] graph-utl/compare - rules", () => {
     expect(
       rules(
         { severity: "error", name: "thing" },
-        { severity: "error", name: "thing" }
-      )
+        { severity: "error", name: "thing" },
+      ),
     ).to.equal(0);
   });
 
@@ -15,8 +15,8 @@ describe("[U] graph-utl/compare - rules", () => {
     expect(
       rules(
         { severity: "not defined", name: "thing" },
-        { severity: "error", name: "thing" }
-      )
+        { severity: "error", name: "thing" },
+      ),
     ).to.equal(-1);
   });
 
@@ -24,8 +24,8 @@ describe("[U] graph-utl/compare - rules", () => {
     expect(
       rules(
         { severity: "info", name: "thing" },
-        { severity: "warn", name: "thing" }
-      )
+        { severity: "warn", name: "thing" },
+      ),
     ).to.equal(1);
   });
 
@@ -33,8 +33,8 @@ describe("[U] graph-utl/compare - rules", () => {
     expect(
       rules(
         { severity: "info", name: "aaa" },
-        { severity: "warn", name: "zzz" }
-      )
+        { severity: "warn", name: "zzz" },
+      ),
     ).to.equal(1);
   });
 
@@ -42,8 +42,8 @@ describe("[U] graph-utl/compare - rules", () => {
     expect(
       rules(
         { severity: "info", name: "thing" },
-        { severity: "info", name: "thang" }
-      )
+        { severity: "info", name: "thang" },
+      ),
     ).to.equal(1);
   });
 });

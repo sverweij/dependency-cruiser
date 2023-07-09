@@ -87,7 +87,7 @@ describe("[U] enrich/de-duplicate-violations", () => {
       },
     ];
     expect(deDuplicateViolations(lViolations)).to.deep.equal(
-      lDeDuplicatedViolations
+      lDeDuplicatedViolations,
     );
   });
 
@@ -164,7 +164,7 @@ describe("[U] enrich/de-duplicate-violations", () => {
       },
     ];
     expect(deDuplicateViolations(lViolations)).to.deep.equal(
-      lDeDuplicatedViolations
+      lDeDuplicatedViolations,
     );
   });
 });

@@ -25,7 +25,7 @@ describe("[U] enrich/soften-known-violations - modules violations", () => {
     ];
 
     expect(
-      softenKnownViolations(lModules, lKnownModuleViolations)
+      softenKnownViolations(lModules, lKnownModuleViolations),
     ).to.deep.equal(lModules);
   });
 
@@ -41,7 +41,7 @@ describe("[U] enrich/soften-known-violations - modules violations", () => {
     ];
 
     expect(
-      softenKnownViolations(lModules, lKnownModuleViolations)
+      softenKnownViolations(lModules, lKnownModuleViolations),
     ).to.deep.equal(lModules);
   });
 
@@ -66,7 +66,7 @@ describe("[U] enrich/soften-known-violations - modules violations", () => {
     ];
 
     expect(
-      softenKnownViolations(lModules, lKnownModuleViolations)
+      softenKnownViolations(lModules, lKnownModuleViolations),
     ).to.deep.equal(lSoftenedModules);
   });
 
@@ -91,7 +91,7 @@ describe("[U] enrich/soften-known-violations - modules violations", () => {
     ];
 
     expect(
-      softenKnownViolations(lModules, lKnownModuleViolations, "info")
+      softenKnownViolations(lModules, lKnownModuleViolations, "info"),
     ).to.deep.equal(lSoftenedModules);
   });
 });
@@ -122,7 +122,7 @@ describe("[U] enrich/soften-known-violations - dependency violations", () => {
 
   it("no violations => no violations", () => {
     expect(softenKnownViolations([], lKnownDependencyViolations)).to.deep.equal(
-      []
+      [],
     );
   });
 
@@ -142,7 +142,7 @@ describe("[U] enrich/soften-known-violations - dependency violations", () => {
     ];
 
     expect(
-      softenKnownViolations(lModules, lKnownDependencyViolations)
+      softenKnownViolations(lModules, lKnownDependencyViolations),
     ).to.deep.equal(lModules);
   });
 
@@ -163,7 +163,7 @@ describe("[U] enrich/soften-known-violations - dependency violations", () => {
     ];
 
     expect(
-      softenKnownViolations(lModules, lKnownDependencyViolations)
+      softenKnownViolations(lModules, lKnownDependencyViolations),
     ).to.deep.equal(lModules);
   });
 
@@ -184,7 +184,7 @@ describe("[U] enrich/soften-known-violations - dependency violations", () => {
     ];
 
     expect(
-      softenKnownViolations(lModules, lKnownDependencyViolations)
+      softenKnownViolations(lModules, lKnownDependencyViolations),
     ).to.deep.equal(lModules);
   });
 
@@ -219,7 +219,7 @@ describe("[U] enrich/soften-known-violations - dependency violations", () => {
     ];
 
     expect(
-      softenKnownViolations(lModules, lKnownDependencyViolations)
+      softenKnownViolations(lModules, lKnownDependencyViolations),
     ).to.deep.equal(lSoftenedModules);
   });
 
@@ -254,7 +254,7 @@ describe("[U] enrich/soften-known-violations - dependency violations", () => {
     ];
 
     expect(
-      softenKnownViolations(lModules, lKnownDependencyViolations, "warn")
+      softenKnownViolations(lModules, lKnownDependencyViolations, "warn"),
     ).to.deep.equal(lSoftenedModules);
   });
 
@@ -351,7 +351,7 @@ describe("[U] enrich/soften-known-violations - dependency violations", () => {
     ];
 
     expect(
-      softenKnownViolations(lModules, lKnownCyclicViolations, "info")
+      softenKnownViolations(lModules, lKnownCyclicViolations, "info"),
     ).to.deep.equal(lSoftenedModules);
   });
 
@@ -469,7 +469,7 @@ describe("[U] enrich/soften-known-violations - dependency violations", () => {
       },
     ];
     expect(
-      softenKnownViolations(lModules, lKnownSelfReferenceViolation, "ignore")
+      softenKnownViolations(lModules, lKnownSelfReferenceViolation, "ignore"),
     ).to.deep.equal(lSoftenedModules);
   });
 });

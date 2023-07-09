@@ -5,12 +5,12 @@ import { getASTFromSource } from "../../../src/extract/parse/to-javascript-ast.m
 const extractAMD = (
   pJavaScriptSource,
   pDependencies,
-  pExoticRequireStrings = []
+  pExoticRequireStrings = [],
 ) =>
   extractAMDDeps(
     getASTFromSource({ source: pJavaScriptSource, extension: ".js" }),
     pDependencies,
-    pExoticRequireStrings
+    pExoticRequireStrings,
   );
 
 describe("[U] ast-extractors/extract-AMD-deps", () => {
@@ -19,7 +19,7 @@ describe("[U] ast-extractors/extract-AMD-deps", () => {
 
     extractAMD(
       `define(["./root_one", "./root_two"], function(root_one){ /* do stuff */ });`,
-      lDeps
+      lDeps,
     );
     expect(lDeps).to.deep.equal([
       {

@@ -8,10 +8,10 @@ import normBaseDirectory from "./norm-base-directory.utl.mjs";
 const requireJSON = createRequireJSON(import.meta.url);
 
 const output = normBaseDirectory(
-  requireJSON("./__mocks__/type-only-module-references/output.json")
+  requireJSON("./__mocks__/type-only-module-references/output.json"),
 );
 const outputNoTS = normBaseDirectory(
-  requireJSON("./__mocks__/type-only-module-references/output-no-ts.json")
+  requireJSON("./__mocks__/type-only-module-references/output-no-ts.json"),
 );
 
 use(chaiJSONSchema);
@@ -35,7 +35,7 @@ describe("[E] main.cruise - type only module references", () => {
       {
         tsPreCompilationDeps: true,
       },
-      { bustTheCache: true, resolveLicenses: true }
+      { bustTheCache: true, resolveLicenses: true },
     );
 
     expect(lResult.output).to.deep.equal(output);
@@ -50,7 +50,7 @@ describe("[E] main.cruise - type only module references", () => {
       {
         tsPreCompilationDeps: false,
       },
-      { bustTheCache: true }
+      { bustTheCache: true },
     );
 
     expect(lResult.output).to.deep.equal(outputNoTS);

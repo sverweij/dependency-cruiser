@@ -11,7 +11,7 @@
  *         when dependency-cruiser can't yet process it
  */
 export default function extractBabelConfig(
-  pBabelConfigFileName: string
+  pBabelConfigFileName: string,
 ): Promise<object>;
 
 // regarding the rather unspecific _object_ type - this is what's

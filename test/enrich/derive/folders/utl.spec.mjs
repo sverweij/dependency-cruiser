@@ -10,7 +10,7 @@ import {
 describe("[U] enrich/derive/folders/utl - getAfferentCouplings", () => {
   it("no dependents => 0", () => {
     expect(
-      getAfferentCouplings({ dependents: [] }, "src/whoopla").length
+      getAfferentCouplings({ dependents: [] }, "src/whoopla").length,
     ).to.equal(0);
   });
 
@@ -18,8 +18,8 @@ describe("[U] enrich/derive/folders/utl - getAfferentCouplings", () => {
     expect(
       getAfferentCouplings(
         { dependents: ["src/folder/do-things.mjs"] },
-        "src/folder"
-      ).length
+        "src/folder",
+      ).length,
     ).to.equal(0);
   });
 
@@ -27,8 +27,8 @@ describe("[U] enrich/derive/folders/utl - getAfferentCouplings", () => {
     expect(
       getAfferentCouplings(
         { dependents: ["src/somewhere-else/do-things.mjs"] },
-        "src/whoopla"
-      ).length
+        "src/whoopla",
+      ).length,
     ).to.equal(1);
   });
 
@@ -36,8 +36,8 @@ describe("[U] enrich/derive/folders/utl - getAfferentCouplings", () => {
     expect(
       getAfferentCouplings(
         { dependents: ["src/folder-some-more/do-things.mjs"] },
-        "src/folder"
-      ).length
+        "src/folder",
+      ).length,
     ).to.equal(1);
   });
 
@@ -51,8 +51,8 @@ describe("[U] enrich/derive/folders/utl - getAfferentCouplings", () => {
             "test/folder/index.spec.mjs",
           ],
         },
-        "src/folder"
-      ).length
+        "src/folder",
+      ).length,
       // eslint-disable-next-line no-magic-numbers
     ).to.equal(2);
   });
@@ -61,7 +61,7 @@ describe("[U] enrich/derive/folders/utl - getAfferentCouplings", () => {
 describe("[U] enrich/derive/folders/utl - getEfferentCouplings", () => {
   it("no dependencies => 0", () => {
     expect(
-      getEfferentCouplings({ dependencies: [] }, "src/whoopla").length
+      getEfferentCouplings({ dependencies: [] }, "src/whoopla").length,
     ).to.equal(0);
   });
 });
@@ -93,7 +93,7 @@ describe("[U] enrich/derive/folders/utl - objectToArray", () => {
       object2Array({
         "folder/one": {},
         "folder/two": { attribute: "yes" },
-      })
+      }),
     ).to.deep.equal([
       { name: "folder/one" },
       { name: "folder/two", attribute: "yes" },

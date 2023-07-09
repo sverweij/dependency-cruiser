@@ -192,13 +192,13 @@ describe("[I] enrich/summarize/summarize-folders", () => {
 
   it("returns an empty array when presented with an array of folders that have no violations on them", () => {
     expect(
-      summarizeFolders(FIXTURE_WITHOUT_VIOLATIONS, SDP_RULE_SET)
+      summarizeFolders(FIXTURE_WITHOUT_VIOLATIONS, SDP_RULE_SET),
     ).to.deep.equal([]);
   });
 
   it("returns a summary of the violations when presented with an array of folders with violations (SDP)", () => {
     expect(
-      summarizeFolders(FIXTURE_WITH_SDP_VIOLATION, SDP_RULE_SET)
+      summarizeFolders(FIXTURE_WITH_SDP_VIOLATION, SDP_RULE_SET),
     ).to.deep.equal([
       {
         type: "instability",
@@ -231,7 +231,7 @@ describe("[I] enrich/summarize/summarize-folders", () => {
 
   it("returns a summary of the violations when presented with an array of folders with violations (cycles)", () => {
     expect(
-      summarizeFolders(FIXTURE_WITH_CYCLE_VIOLATION, CYCLE_RULE_SET)
+      summarizeFolders(FIXTURE_WITH_CYCLE_VIOLATION, CYCLE_RULE_SET),
     ).to.deep.equal([
       {
         type: "cycle",

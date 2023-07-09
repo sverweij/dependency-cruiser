@@ -9,8 +9,8 @@ describe("[I] validate/index dependency - generic tests", () => {
       validate.dependency(
         lEmptyRuleSet,
         { source: "koos koets" },
-        { resolved: "robby van de kerkhof" }
-      )
+        { resolved: "robby van de kerkhof" },
+      ),
     ).to.deep.equal({ valid: true });
   });
 
@@ -27,8 +27,8 @@ describe("[I] validate/index dependency - generic tests", () => {
       validate.dependency(
         lEverythingAllowedRuleSet,
         { source: "koos koets" },
-        { resolved: "robby van de kerkhof" }
-      )
+        { resolved: "robby van de kerkhof" },
+      ),
     ).to.deep.equal({ valid: true });
   });
 
@@ -72,8 +72,8 @@ describe("[I] validate/index dependency - generic tests", () => {
       validate.dependency(
         lRuleSet,
         { source: "koos koets" },
-        { resolved: "robby van de kerkhof" }
-      )
+        { resolved: "robby van de kerkhof" },
+      ),
     ).to.deep.equal({
       valid: false,
       rules: [{ severity: "warn", name: "not-in-allowed" }],
@@ -99,8 +99,8 @@ describe("[I] validate/index dependency - generic tests", () => {
       validate.dependency(
         lRuleSet,
         { source: "koos koets" },
-        { resolved: "robby van de kerkhof" }
-      )
+        { resolved: "robby van de kerkhof" },
+      ),
     ).to.deep.equal({
       valid: false,
       rules: [{ severity: "error", name: "not-in-allowed" }],
@@ -123,8 +123,8 @@ describe("[I] validate/index dependency - generic tests", () => {
       validate.dependency(
         lRuleSet,
         { source: "koos koets" },
-        { resolved: "robby van de kerkhof" }
-      )
+        { resolved: "robby van de kerkhof" },
+      ),
     ).to.deep.equal({
       valid: false,
       rules: [{ severity: "warn", name: "unnamed" }],
@@ -156,8 +156,8 @@ describe("[I] validate/index dependency - generic tests", () => {
         { source: "something" },
         {
           resolved: "src/some/thing/else.js",
-        }
-      )
+        },
+      ),
     ).to.deep.equal({
       valid: false,
       rules: [
@@ -230,8 +230,8 @@ describe("[I] validate/index - specific tests", () => {
       validate.dependency(
         lNodeModulesNotAllowedRuleSet,
         { source: "koos koets" },
-        { resolved: "robby van de kerkhof" }
-      )
+        { resolved: "robby van de kerkhof" },
+      ),
     ).to.deep.equal({ valid: true });
   });
 
@@ -240,8 +240,8 @@ describe("[I] validate/index - specific tests", () => {
       validate.dependency(
         lNodeModulesNotAllowedRuleSet,
         { source: "koos koets" },
-        { resolved: "./node_modules/evil-module" }
-      )
+        { resolved: "./node_modules/evil-module" },
+      ),
     ).to.deep.equal({
       valid: false,
       rules: [{ severity: "warn", name: "unnamed" }],
@@ -253,8 +253,8 @@ describe("[I] validate/index - specific tests", () => {
       validate.dependency(
         lNotToSubExceptSubRuleSet,
         { source: "./keek/op/de/sub/week.js" },
-        { resolved: "./keek/op/de/sub/maand.js", coreModule: false }
-      )
+        { resolved: "./keek/op/de/sub/maand.js", coreModule: false },
+      ),
     ).to.deep.equal({ valid: true });
   });
 
@@ -263,8 +263,8 @@ describe("[I] validate/index - specific tests", () => {
       validate.dependency(
         lNotToSubExceptSubRuleSet,
         { source: "./doctor/clavan.js" },
-        { resolved: "./rochebrune.js", coreModule: false }
-      )
+        { resolved: "./rochebrune.js", coreModule: false },
+      ),
     ).to.deep.equal({ valid: true });
   });
 
@@ -273,8 +273,8 @@ describe("[I] validate/index - specific tests", () => {
       validate.dependency(
         lNotToSubExceptSubRuleSet,
         { source: "./doctor/sub/clavan.js" },
-        { resolved: "./rochebrune.js", coreModule: false }
-      )
+        { resolved: "./rochebrune.js", coreModule: false },
+      ),
     ).to.deep.equal({ valid: true });
   });
 
@@ -283,8 +283,8 @@ describe("[I] validate/index - specific tests", () => {
       validate.dependency(
         lNotToSubExceptSubRuleSet,
         { source: "./doctor/clavan.js" },
-        { resolved: "./keek/op/de/sub/week.js", coreModule: false }
-      )
+        { resolved: "./keek/op/de/sub/week.js", coreModule: false },
+      ),
     ).to.deep.equal({
       valid: false,
       rules: [{ severity: "error", name: "not-to-sub-except-sub" }],
@@ -296,8 +296,8 @@ describe("[I] validate/index - specific tests", () => {
       validate.dependency(
         lNotToNotSubRuleSet,
         { source: "./keek/op/de/sub/week.js" },
-        { resolved: "./keek/op/de/sub/maand.js", coreModule: false }
-      )
+        { resolved: "./keek/op/de/sub/maand.js", coreModule: false },
+      ),
     ).to.deep.equal({ valid: true });
   });
 
@@ -306,8 +306,8 @@ describe("[I] validate/index - specific tests", () => {
       validate.dependency(
         lNotToNotSubRuleSet,
         { source: "./amber.js" },
-        { resolved: "./jade.js", coreModule: false }
-      )
+        { resolved: "./jade.js", coreModule: false },
+      ),
     ).to.deep.equal({
       valid: false,
       rules: [{ severity: "error", name: "not-to-not-sub" }],
@@ -323,8 +323,8 @@ describe("[I] validate/index - specific tests", () => {
           module: "chai",
           resolved: "node_modules/chai/index.js",
           dependencyTypes: ["npm-dev"],
-        }
-      )
+        },
+      ),
     ).to.deep.equal({
       valid: false,
       rules: [
@@ -345,8 +345,8 @@ describe("[I] validate/index - specific tests", () => {
           module: "jip",
           resolved: "node_modules/jip/janneke.js",
           dependencyTypes: ["npm"],
-        }
-      )
+        },
+      ),
     ).to.deep.equal({ valid: true });
   });
 });

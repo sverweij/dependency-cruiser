@@ -11,13 +11,13 @@ describe("[U] ast-extractors/extract-swc - regular imports", () => {
           dynamic: false,
           exoticallyRequired: false,
         },
-      ]
+      ],
     );
   });
 
   it("extracts 'import some stuff only'", () => {
     expect(
-      extractWithSwc("import { SomeSingleExport } from './ts-thing';")
+      extractWithSwc("import { SomeSingleExport } from './ts-thing';"),
     ).to.deep.equal([
       {
         module: "./ts-thing",
@@ -31,8 +31,8 @@ describe("[U] ast-extractors/extract-swc - regular imports", () => {
   it("extracts 'import some stuff only and rename that'", () => {
     expect(
       extractWithSwc(
-        "import { SomeSingleExport as RenamedSingleExport } from './ts-thing';"
-      )
+        "import { SomeSingleExport as RenamedSingleExport } from './ts-thing';",
+      ),
     ).to.deep.equal([
       {
         module: "./ts-thing",
@@ -46,8 +46,8 @@ describe("[U] ast-extractors/extract-swc - regular imports", () => {
   it("extracts 'import everything into a variable'", () => {
     expect(
       extractWithSwc(
-        "import * as entireTsOtherThingAsVariable from './ts-thing';"
-      )
+        "import * as entireTsOtherThingAsVariable from './ts-thing';",
+      ),
     ).to.deep.equal([
       {
         module: "./ts-thing",

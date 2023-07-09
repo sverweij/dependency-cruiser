@@ -4,7 +4,7 @@ import extractTypescript from "./extract-typescript.utl.mjs";
 describe("[U] ast-extractors/extract-typescript - triple slash directives", () => {
   it("path", () => {
     expect(
-      extractTypescript('/// <reference path="./ts-thing" />')
+      extractTypescript('/// <reference path="./ts-thing" />'),
     ).to.deep.equal([
       {
         module: "./ts-thing",
@@ -17,7 +17,7 @@ describe("[U] ast-extractors/extract-typescript - triple slash directives", () =
 
   it("types", () => {
     expect(
-      extractTypescript('/// <reference types="./ts-thing-types" />')
+      extractTypescript('/// <reference types="./ts-thing-types" />'),
     ).to.deep.equal([
       {
         module: "./ts-thing-types",
@@ -30,7 +30,7 @@ describe("[U] ast-extractors/extract-typescript - triple slash directives", () =
 
   it("amd-dependencies", () => {
     expect(
-      extractTypescript('/// <amd-dependency path="./ts-thing-types" />')
+      extractTypescript('/// <amd-dependency path="./ts-thing-types" />'),
     ).to.deep.equal([
       {
         module: "./ts-thing-types",

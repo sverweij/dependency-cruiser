@@ -19,7 +19,7 @@ describe("[U] cli/init-config/write-config", () => {
     const lCustomConfigFileName = "depcruise.config.js";
     const lConfigResultFileName = `./${join(
       "../__fixtures__/init-config/no-config-files-exist",
-      lCustomConfigFileName
+      lCustomConfigFileName,
     )}`;
 
     process.chdir(lEmptyDirectory);
@@ -29,7 +29,7 @@ describe("[U] cli/init-config/write-config", () => {
           aap: "noot mies",
           wim: { zus: "jet heide", does: "hok schapen" },
         }`,
-        lCustomConfigFileName
+        lCustomConfigFileName,
       );
 
       const lResult = await import(lConfigResultFileName);

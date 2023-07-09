@@ -23,13 +23,13 @@ describe("[I] validate/index - reachable (in forbidden set)", () => {
   });
   it("Skips modules that have no reachable attribute (reachable false)", () => {
     expect(
-      validate.module(lReachableFalseRuleSet, { source: "something" })
+      validate.module(lReachableFalseRuleSet, { source: "something" }),
     ).to.deep.equal({ valid: true });
   });
 
   it("Skips modules that have no reachable attribute (reachable true)", () => {
     expect(
-      validate.module(lReachableTrueRuleSet, { source: "something" })
+      validate.module(lReachableTrueRuleSet, { source: "something" }),
     ).to.deep.equal({ valid: true });
   });
 
@@ -44,7 +44,7 @@ describe("[I] validate/index - reachable (in forbidden set)", () => {
             value: true,
           },
         ],
-      })
+      }),
     ).to.deep.equal({ valid: true });
   });
 
@@ -59,7 +59,7 @@ describe("[I] validate/index - reachable (in forbidden set)", () => {
             value: true,
           },
         ],
-      })
+      }),
     ).to.deep.equal({ valid: true });
   });
 
@@ -74,7 +74,7 @@ describe("[I] validate/index - reachable (in forbidden set)", () => {
             value: false,
           },
         ],
-      })
+      }),
     ).to.deep.equal({
       valid: false,
       rules: [
@@ -97,7 +97,7 @@ describe("[I] validate/index - reachable (in forbidden set)", () => {
             value: true,
           },
         ],
-      })
+      }),
     ).to.deep.equal({
       valid: false,
       rules: [
@@ -120,7 +120,7 @@ describe("[I] validate/index - reachable (in forbidden set)", () => {
             value: false,
           },
         ],
-      })
+      }),
     ).to.deep.equal({
       valid: false,
       rules: [
@@ -143,7 +143,7 @@ describe("[I] validate/index - reachable (in forbidden set)", () => {
             value: true,
           },
         ],
-      })
+      }),
     ).to.deep.equal({
       valid: false,
       rules: [
@@ -176,7 +176,7 @@ describe("[I] validate/index - reachable (in forbidden set)", () => {
             value: false,
           },
         ],
-      })
+      }),
     ).to.deep.equal({ valid: true });
   });
 
@@ -200,7 +200,7 @@ describe("[I] validate/index - reachable (in forbidden set)", () => {
             value: true,
           },
         ],
-      })
+      }),
     ).to.deep.equal({ valid: true });
   });
 });
@@ -217,7 +217,7 @@ describe("[I] validate/index - reachable (in allowed set)", () => {
     expect(
       validate.module(lReachableAllowedRuleSet, {
         source: "something",
-      })
+      }),
     ).to.deep.equal({
       valid: false,
       rules: [
@@ -240,7 +240,7 @@ describe("[I] validate/index - reachable (in allowed set)", () => {
             asDefinedInRule: "not-in-allowed",
           },
         ],
-      })
+      }),
     ).to.deep.equal({
       valid: true,
     });
@@ -256,7 +256,7 @@ describe("[I] validate/index - reachable (in allowed set)", () => {
             asDefinedInRule: "not-in-allowed",
           },
         ],
-      })
+      }),
     ).to.deep.equal({
       valid: false,
       rules: [
@@ -293,7 +293,7 @@ describe("[I] validate/index - reachable (in allowed set)", () => {
     };
     const lValidationResult = validate.module(
       lReachableCapturingGroupsRuleSet,
-      lModule
+      lModule,
     );
     expect(lValidationResult).to.deep.equal({
       valid: false,

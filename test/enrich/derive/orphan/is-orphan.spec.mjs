@@ -7,7 +7,7 @@ import TWO_MODULES_FIXTURE from "./__mocks__/two-module.mjs";
 describe("[U] enrich/derive/orphan/isOrphan", () => {
   it("flags a single module dependency graph as orphan", () => {
     expect(
-      isOrphan({ source: "./lonely.js", dependencies: [] }, ONE_MODULE_FIXTURE)
+      isOrphan({ source: "./lonely.js", dependencies: [] }, ONE_MODULE_FIXTURE),
     ).to.equal(true);
   });
 
@@ -29,8 +29,8 @@ describe("[U] enrich/derive/orphan/isOrphan", () => {
             },
           ],
         },
-        TWO_MODULES_FIXTURE
-      )
+        TWO_MODULES_FIXTURE,
+      ),
     ).to.equal(false);
   });
 
@@ -41,8 +41,8 @@ describe("[U] enrich/derive/orphan/isOrphan", () => {
           source: "snak.js",
           dependencies: [],
         },
-        TWO_MODULES_FIXTURE
-      )
+        TWO_MODULES_FIXTURE,
+      ),
     ).to.equal(false);
   });
 });

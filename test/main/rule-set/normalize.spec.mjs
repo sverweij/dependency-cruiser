@@ -15,7 +15,7 @@ describe("[U] main/rule-set/normalize", () => {
             to: { path: ".+" },
           },
         ],
-      })
+      }),
     ).to.deep.equal({
       allowed: [
         {
@@ -38,7 +38,7 @@ describe("[U] main/rule-set/normalize", () => {
           },
         ],
         allowedSeverity: "error",
-      })
+      }),
     ).to.deep.equal({
       allowed: [
         {
@@ -62,7 +62,7 @@ describe("[U] main/rule-set/normalize", () => {
             name: "all-ok",
           },
         ],
-      })
+      }),
     ).to.deep.equal({
       forbidden: [
         {
@@ -87,7 +87,7 @@ describe("[U] main/rule-set/normalize", () => {
             name: "all-ok",
           },
         ],
-      })
+      }),
     ).to.deep.equal({
       forbidden: [
         {
@@ -113,7 +113,7 @@ describe("[U] main/rule-set/normalize", () => {
             comment: "this comment is kept",
           },
         ],
-      })
+      }),
     ).to.deep.equal({
       forbidden: [
         {
@@ -140,7 +140,7 @@ describe("[U] main/rule-set/normalize", () => {
             comment: "this comment is kept",
           },
         ],
-      })
+      }),
     ).to.deep.equal({
       forbidden: [],
     });
@@ -158,7 +158,7 @@ describe("[U] main/rule-set/normalize", () => {
             comment: "this comment is kept",
           },
         ],
-      })
+      }),
     ).to.deep.equal({
       required: [],
     });
@@ -174,7 +174,7 @@ describe("[U] main/rule-set/normalize", () => {
           },
         ],
         allowedSeverity: "ignore",
-      })
+      }),
     ).to.deep.equal({});
   });
 
@@ -195,7 +195,7 @@ describe("[U] main/rule-set/normalize", () => {
             },
           },
         ],
-      })
+      }),
     ).to.deep.equal({
       forbidden: [
         {
@@ -231,7 +231,7 @@ describe("[U] main/rule-set/normalize", () => {
             },
           },
         ],
-      })
+      }),
     ).to.deep.equal({
       required: [
         {
@@ -265,7 +265,7 @@ describe("[U] main/rule-set/normalize", () => {
             },
           },
         ],
-      })
+      }),
     ).to.deep.equal({
       allowed: [
         {
@@ -305,7 +305,7 @@ describe("[U] main/rule-set/normalize", () => {
             },
           },
         ],
-      })
+      }),
     ).to.deep.equal({
       forbidden: [
         {
@@ -352,7 +352,7 @@ describe("[U] main/rule-set/normalize", () => {
             },
           },
         ],
-      })
+      }),
     ).to.deep.equal({
       forbidden: [
         {

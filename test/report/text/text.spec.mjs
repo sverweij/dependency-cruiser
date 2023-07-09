@@ -23,10 +23,10 @@ describe("[I] report/text", () => {
     const lExpectedOutput = normalizeNewline(
       readFileSync(
         fileURLToPath(
-          new URL("__fixtures__/dependencies.txt", import.meta.url)
+          new URL("__fixtures__/dependencies.txt", import.meta.url),
         ),
-        "utf8"
-      )
+        "utf8",
+      ),
     );
 
     expect(normalizeNewline(lResult.output)).to.equal(lExpectedOutput);

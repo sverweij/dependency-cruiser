@@ -20,8 +20,8 @@ describe("[I] validate/index - exoticallyRequired", () => {
         {
           resolved: "src/aap/speeltuigen/autoband.ts",
           exoticallyRequired: false,
-        }
-      )
+        },
+      ),
     ).to.deep.equal({ valid: true });
   });
 
@@ -34,8 +34,8 @@ describe("[I] validate/index - exoticallyRequired", () => {
           resolved: "src/aap/speeltuigen/autoband.ts",
           exoticRequire: "notUse",
           exoticallyRequired: true,
-        }
-      )
+        },
+      ),
     ).to.deep.equal({
       rules: [{ name: "no-exotic-requires-period", severity: "warn" }],
       valid: false,
@@ -58,8 +58,8 @@ describe("[I] validate/index - exoticRequire", () => {
       validate.dependency(
         lExoticRequireRuleSet,
         { source: "something" },
-        { resolved: "src/aap/speeltuigen/autoband.ts" }
-      )
+        { resolved: "src/aap/speeltuigen/autoband.ts" },
+      ),
     ).to.deep.equal({ valid: true });
   });
 
@@ -68,8 +68,11 @@ describe("[I] validate/index - exoticRequire", () => {
       validate.dependency(
         lExoticRequireRuleSet,
         { source: "something" },
-        { resolved: "src/aap/speeltuigen/autoband.ts", exoticRequire: "notUse" }
-      )
+        {
+          resolved: "src/aap/speeltuigen/autoband.ts",
+          exoticRequire: "notUse",
+        },
+      ),
     ).to.deep.equal({ valid: true });
   });
 
@@ -78,8 +81,8 @@ describe("[I] validate/index - exoticRequire", () => {
       validate.dependency(
         lExoticRequireRuleSet,
         { source: "something" },
-        { resolved: "src/aap/speeltuigen/autoband.ts", exoticRequire: "use" }
-      )
+        { resolved: "src/aap/speeltuigen/autoband.ts", exoticRequire: "use" },
+      ),
     ).to.deep.equal({
       valid: false,
       rules: [{ name: "no-use-as-exotic-require", severity: "warn" }],
@@ -102,8 +105,8 @@ describe("[I] validate/index - exoticRequireNot", () => {
       validate.dependency(
         lExoticRequireNotRuleSet,
         { source: "something" },
-        { resolved: "src/aap/speeltuigen/autoband.ts" }
-      )
+        { resolved: "src/aap/speeltuigen/autoband.ts" },
+      ),
     ).to.deep.equal({ valid: true });
   });
 
@@ -115,8 +118,8 @@ describe("[I] validate/index - exoticRequireNot", () => {
         {
           resolved: "src/aap/speeltuigen/autoband.ts",
           exoticRequire: "use",
-        }
-      )
+        },
+      ),
     ).to.deep.equal({ valid: true });
   });
 
@@ -128,8 +131,8 @@ describe("[I] validate/index - exoticRequireNot", () => {
         {
           resolved: "src/aap/speeltuigen/autoband.ts",
           exoticRequire: "notuse",
-        }
-      )
+        },
+      ),
     ).to.deep.equal({
       valid: false,
       rules: [{ name: "only-use-as-exotic-require", severity: "warn" }],

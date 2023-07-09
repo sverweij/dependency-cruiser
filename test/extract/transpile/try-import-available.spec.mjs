@@ -23,7 +23,7 @@ describe("[U] extract/transpile/try-import-available", () => {
   it("does not bork when confronted with a local import (resolvable, with a version number)", () => {
     // weirdo country
     expect(tryImportAvailable("./try-import-available.mjs", ">=0")).to.equal(
-      false
+      false,
     );
   });
 });

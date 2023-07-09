@@ -14,7 +14,7 @@ describe("[U] cli/init-config/environment-helpers - isLikelyMonoRepo", () => {
   });
   it("no packages in the array of folders => no mono repo", () => {
     expect(isLikelyMonoRepo(["bin", "src", "node_modules", "test"])).to.equal(
-      false
+      false,
     );
   });
   it("packages in the array of folders => mono repo", () => {
@@ -33,13 +33,13 @@ describe("[U] cli/init-config/environment-helpers - hasTestsWithinSource", () =>
 
   it("When one test directory is also a source directy - tests are in the source", () => {
     expect(hasTestsWithinSource(["src"], ["bin", "src", "types"])).to.equal(
-      true
+      true,
     );
   });
 
   it("When all test directories are also in the source directory array - tests are in the source", () => {
     expect(
-      hasTestsWithinSource(["src", "lib"], ["bin", "src", "types", "lib"])
+      hasTestsWithinSource(["src", "lib"], ["bin", "src", "types", "lib"]),
     ).to.equal(true);
   });
 
@@ -47,8 +47,8 @@ describe("[U] cli/init-config/environment-helpers - hasTestsWithinSource", () =>
     expect(
       hasTestsWithinSource(
         ["src", "lib", "spec"],
-        ["bin", "src", "types", "lib"]
-      )
+        ["bin", "src", "types", "lib"],
+      ),
     ).to.equal(false);
   });
 });

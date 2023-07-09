@@ -29,7 +29,7 @@ describe("[U] extract/helpers - extractModuleAttributes", () => {
 
   it("extracts both protocol and mimeType when they're in the URI", () => {
     expect(
-      extractModuleAttributes("data:application/json,gegevens.json")
+      extractModuleAttributes("data:application/json,gegevens.json"),
     ).to.deep.equal({
       module: "gegevens.json",
       protocol: "data:",
@@ -52,7 +52,7 @@ describe("[U] extract/helpers - extractModuleAttributes", () => {
 
   it("when protocol separator is mistyped, returns it as part of the module name", () => {
     expect(
-      extractModuleAttributes("data:application/json;gegevens.json")
+      extractModuleAttributes("data:application/json;gegevens.json"),
     ).to.deep.equal({
       module: "application/json;gegevens.json",
       protocol: "data:",

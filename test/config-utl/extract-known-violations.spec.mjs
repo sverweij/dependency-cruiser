@@ -54,7 +54,7 @@ describe("[I] config-utl/extractKnownViolations", () => {
             name: "not-reachable-from-folder-index",
           },
         },
-      ]
+      ],
     );
   });
 });

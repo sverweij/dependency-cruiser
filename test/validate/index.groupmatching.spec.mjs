@@ -25,8 +25,8 @@ describe("[I] validate/index group matching - path group matched in a pathnot", 
       validate.dependency(
         parseRuleSet(lGroupToPathNotRuleSet),
         { source: "src/aap/chimpansee.ts" },
-        { resolved: "src/noot/pinda.ts" }
-      )
+        { resolved: "src/noot/pinda.ts" },
+      ),
     ).to.deep.equal({
       valid: false,
       rules: [
@@ -43,8 +43,8 @@ describe("[I] validate/index group matching - path group matched in a pathnot", 
       validate.dependency(
         parseRuleSet(lGroupToPathNotRuleSet),
         { source: "src/aap/chimpansee.ts" },
-        { resolved: "src/shared/bananas.ts" }
-      )
+        { resolved: "src/shared/bananas.ts" },
+      ),
     ).to.deep.equal({ valid: true });
   });
 
@@ -53,8 +53,8 @@ describe("[I] validate/index group matching - path group matched in a pathnot", 
       validate.dependency(
         parseRuleSet(lGroupToPathNotRuleSet),
         { source: "src/aap/chimpansee.ts" },
-        { resolved: "src/aap/oerangoetang.ts" }
-      )
+        { resolved: "src/aap/oerangoetang.ts" },
+      ),
     ).to.deep.equal({ valid: true });
   });
 
@@ -63,8 +63,8 @@ describe("[I] validate/index group matching - path group matched in a pathnot", 
       validate.dependency(
         parseRuleSet(lGroupToPathNotRuleSet),
         { source: "src/aap/chimpansee.ts" },
-        { resolved: "src/aap/speeltuigen/autoband.ts" }
-      )
+        { resolved: "src/aap/speeltuigen/autoband.ts" },
+      ),
     ).to.deep.equal({ valid: true });
   });
 
@@ -73,8 +73,8 @@ describe("[I] validate/index group matching - path group matched in a pathnot", 
       validate.dependency(
         parseRuleSet(lGroupToPathNotRuleSet),
         { source: "src/aap/rekwisieten/touw.ts" },
-        { resolved: "src/aap/speeltuigen/autoband.ts" }
-      )
+        { resolved: "src/aap/speeltuigen/autoband.ts" },
+      ),
     ).to.deep.equal({ valid: true });
   });
 });
@@ -102,8 +102,8 @@ describe("[I] validate/index group matching - second path group matched in a pat
       validate.dependency(
         parseRuleSet(lGroupTwoToPathNotRuleSet),
         { source: "src/aap/chimpansee.ts" },
-        { resolved: "src/noot/pinda.ts" }
-      )
+        { resolved: "src/noot/pinda.ts" },
+      ),
     ).to.deep.equal({
       valid: false,
       rules: [
@@ -120,8 +120,8 @@ describe("[I] validate/index group matching - second path group matched in a pat
       validate.dependency(
         parseRuleSet(lGroupTwoToPathNotRuleSet),
         { source: "src/aap/chimpansee.ts" },
-        { resolved: "src/shared/bananas.ts" }
-      )
+        { resolved: "src/shared/bananas.ts" },
+      ),
     ).to.deep.equal({ valid: true });
   });
 
@@ -130,8 +130,8 @@ describe("[I] validate/index group matching - second path group matched in a pat
       validate.dependency(
         parseRuleSet(lGroupTwoToPathNotRuleSet),
         { source: "src/aap/chimpansee.ts" },
-        { resolved: "src/aap/oerangoetang.ts" }
-      )
+        { resolved: "src/aap/oerangoetang.ts" },
+      ),
     ).to.deep.equal({ valid: true });
   });
 
@@ -140,8 +140,8 @@ describe("[I] validate/index group matching - second path group matched in a pat
       validate.dependency(
         parseRuleSet(lGroupTwoToPathNotRuleSet),
         { source: "src/aap/chimpansee.ts" },
-        { resolved: "src/aap/speeltuigen/autoband.ts" }
-      )
+        { resolved: "src/aap/speeltuigen/autoband.ts" },
+      ),
     ).to.deep.equal({ valid: true });
   });
 
@@ -150,8 +150,8 @@ describe("[I] validate/index group matching - second path group matched in a pat
       validate.dependency(
         parseRuleSet(lGroupTwoToPathNotRuleSet),
         { source: "src/aap/rekwisieten/touw.ts" },
-        { resolved: "src/aap/speeltuigen/autoband.ts" }
-      )
+        { resolved: "src/aap/speeltuigen/autoband.ts" },
+      ),
     ).to.deep.equal({ valid: true });
   });
 });

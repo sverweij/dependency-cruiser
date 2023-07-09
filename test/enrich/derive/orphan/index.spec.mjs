@@ -9,7 +9,7 @@ import TWO_MODULES_AFTER_PROCESSING from "./__mocks__/two-module.afterprocessing
 describe("[U] enrich/derive/orphan/index - orphan detection", () => {
   it('attaches the "orphan" boolean to orphan modules by default', () => {
     expect(orphan(ONE_MODULE_FIXTURE, {})).to.deep.equal(
-      ONE_MODULE_AFTER_PROCESSING
+      ONE_MODULE_AFTER_PROCESSING,
     );
   });
 
@@ -27,13 +27,13 @@ describe("[U] enrich/derive/orphan/index - orphan detection", () => {
             },
           ],
         },
-      })
+      }),
     ).to.deep.equal(ONE_MODULE_AFTER_PROCESSING);
   });
 
   it('does attachs the "orphan" boolean to non-orphan modules with the value "false"', () => {
     expect(orphan(TWO_MODULES_FIXTURE)).to.deep.equal(
-      TWO_MODULES_AFTER_PROCESSING
+      TWO_MODULES_AFTER_PROCESSING,
     );
   });
 });

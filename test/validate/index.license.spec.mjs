@@ -18,8 +18,8 @@ describe("[I] validate/index - license", () => {
       validate.dependency(
         lLicenseRuleSet,
         { source: "something" },
-        { resolved: "src/aap/speeltuigen/autoband.ts" }
-      )
+        { resolved: "src/aap/speeltuigen/autoband.ts" },
+      ),
     ).to.deep.equal({ valid: true });
   });
 
@@ -31,8 +31,8 @@ describe("[I] validate/index - license", () => {
         {
           resolved: "src/aap/speeltuigen/autoband.ts",
           license: "Monkey-PL",
-        }
-      )
+        },
+      ),
     ).to.deep.equal({ valid: true });
   });
 
@@ -44,8 +44,8 @@ describe("[I] validate/index - license", () => {
         {
           resolved: "src/aap/speeltuigen/autoband.ts",
           license: "SomePL-3.1",
-        }
-      )
+        },
+      ),
     ).to.deep.equal({
       valid: false,
       rules: [{ name: "no-somepl-license", severity: "warn" }],
@@ -69,8 +69,8 @@ describe("[I] validate/index - licenseNot", () => {
       validate.dependency(
         lLicenseNotRuleSet,
         { source: "something" },
-        { resolved: "src/aap/speeltuigen/autoband.ts" }
-      )
+        { resolved: "src/aap/speeltuigen/autoband.ts" },
+      ),
     ).to.deep.equal({ valid: true });
   });
 
@@ -82,8 +82,8 @@ describe("[I] validate/index - licenseNot", () => {
         {
           resolved: "src/aap/speeltuigen/autoband.ts",
           license: "SomePL-3.1",
-        }
-      )
+        },
+      ),
     ).to.deep.equal({ valid: true });
   });
 
@@ -95,8 +95,8 @@ describe("[I] validate/index - licenseNot", () => {
         {
           resolved: "src/aap/speeltuigen/autoband.ts",
           license: "Monkey-PL",
-        }
-      )
+        },
+      ),
     ).to.deep.equal({
       valid: false,
       rules: [{ name: "only-somepl-license", severity: "warn" }],

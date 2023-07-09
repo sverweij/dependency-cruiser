@@ -8,16 +8,16 @@ import normBaseDirectory from "./norm-base-directory.utl.mjs";
 const requireJSON = createRequireJSON(import.meta.url);
 
 const tsPreCompFixtureCJS = normBaseDirectory(
-  requireJSON("./__fixtures__/ts-precomp-cjs.json")
+  requireJSON("./__fixtures__/ts-precomp-cjs.json"),
 );
 const tsPreCompFixtureES = normBaseDirectory(
-  requireJSON("./__fixtures__/ts-precomp-es.json")
+  requireJSON("./__fixtures__/ts-precomp-es.json"),
 );
 const tsNoPrecompFixtureCJS = normBaseDirectory(
-  requireJSON("./__fixtures__/ts-no-precomp-cjs.json")
+  requireJSON("./__fixtures__/ts-no-precomp-cjs.json"),
 );
 const tsNoPrecompFixtureES = normBaseDirectory(
-  requireJSON("./__fixtures__/ts-no-precomp-es.json")
+  requireJSON("./__fixtures__/ts-no-precomp-es.json"),
 );
 
 use(chaiJSONSchema);
@@ -40,7 +40,7 @@ describe("[E] main.cruise - tsPreCompilationDeps", () => {
             module: "commonjs",
           },
         },
-      }
+      },
     );
 
     expect(lResult.output).to.deep.equal(tsPreCompFixtureCJS);
@@ -63,7 +63,7 @@ describe("[E] main.cruise - tsPreCompilationDeps", () => {
             module: "es6",
           },
         },
-      }
+      },
     );
 
     expect(lResult.output).to.deep.equal(tsPreCompFixtureES);
@@ -86,7 +86,7 @@ describe("[E] main.cruise - tsPreCompilationDeps", () => {
             module: "commonjs",
           },
         },
-      }
+      },
     );
 
     expect(lResult.output).to.deep.equal(tsNoPrecompFixtureCJS);
@@ -109,7 +109,7 @@ describe("[E] main.cruise - tsPreCompilationDeps", () => {
             module: "es6",
           },
         },
-      }
+      },
     );
 
     expect(lResult.output).to.deep.equal(tsNoPrecompFixtureES);

@@ -4,7 +4,7 @@ import moduleUtl from "../../../src/report/dot/module-utl.mjs";
 describe("[U] report/dot/module-utl", () => {
   it("extractFirstTransgression - keeps as is when there's no transgressions", () => {
     expect(
-      moduleUtl.extractFirstTransgression({ dependencies: [] })
+      moduleUtl.extractFirstTransgression({ dependencies: [] }),
     ).to.deep.equal({
       dependencies: [],
     });
@@ -18,7 +18,7 @@ describe("[U] report/dot/module-utl", () => {
           { name: "error-thing", severity: "error" },
           { name: "warn-thing", severity: "warn" },
         ],
-      })
+      }),
     ).to.deep.equal({
       dependencies: [],
       tooltip: "error-thing",
@@ -40,7 +40,7 @@ describe("[U] report/dot/module-utl", () => {
             ],
           },
         ],
-      })
+      }),
     ).to.deep.equal({
       dependencies: [
         {
@@ -56,7 +56,7 @@ describe("[U] report/dot/module-utl", () => {
 
   it("flatLabel - returns the value of source as label", () => {
     expect(
-      moduleUtl.flatLabel(true)({ source: "aap/noot/mies/wim/zus.jet" })
+      moduleUtl.flatLabel(true)({ source: "aap/noot/mies/wim/zus.jet" }),
     ).to.deep.equal({
       source: "aap/noot/mies/wim/zus.jet",
       label: "<aap/noot/mies/wim/<BR/><B>zus.jet</B>>",
@@ -69,7 +69,7 @@ describe("[U] report/dot/module-utl", () => {
       moduleUtl.flatLabel(true)({
         source: "aap/noot/mies/wim/zus.jet",
         instability: "0.481",
-      })
+      }),
     ).to.deep.equal({
       source: "aap/noot/mies/wim/zus.jet",
       label: `<aap/noot/mies/wim/<BR/><B>zus.jet</B> <FONT color="#808080" point-size="8">48%</FONT>>`,
@@ -83,7 +83,7 @@ describe("[U] report/dot/module-utl", () => {
       moduleUtl.flatLabel(false)({
         source: "aap/noot/mies/wim/zus.jet",
         instability: "0.481",
-      })
+      }),
     ).to.deep.equal({
       source: "aap/noot/mies/wim/zus.jet",
       label: `<aap/noot/mies/wim/<BR/><B>zus.jet</B>>`,

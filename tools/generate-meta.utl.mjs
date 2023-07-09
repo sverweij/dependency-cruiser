@@ -30,4 +30,4 @@ const lGeneratedSource = `/* generated - don't edit */
     supportedTranspilers: ${JSON.stringify($package.supportedTranspilers)}
   }`;
 
-console.log(prettier.format(lGeneratedSource, { parser: "babel" }));
+console.log(await prettier.format(lGeneratedSource, { parser: "babel" }));

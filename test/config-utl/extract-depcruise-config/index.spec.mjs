@@ -15,7 +15,7 @@ describe("[I] config-utl/extract-depcruise-config", () => {
       }
     );
     expect(
-      await loadConfig(join(mockDirectory, "rules.sub-not-allowed-error.json"))
+      await loadConfig(join(mockDirectory, "rules.sub-not-allowed-error.json")),
     ).to.deep.equal(fixture.default);
   });
 
@@ -24,15 +24,15 @@ describe("[I] config-utl/extract-depcruise-config", () => {
       assert: { type: "json" },
     });
     expect(
-      await loadConfig(join(mockDirectory, "extends/extending.json"))
+      await loadConfig(join(mockDirectory, "extends/extending.json")),
     ).to.deep.equal(mergedFixture.default);
   });
 
   it("a rule set with an extends array (0 members) returns that rule set", async () => {
     expect(
       await loadConfig(
-        join(mockDirectory, "extends/extending-array-with-zero-members.json")
-      )
+        join(mockDirectory, "extends/extending-array-with-zero-members.json"),
+      ),
     ).to.deep.equal({
       forbidden: [
         {
@@ -53,8 +53,8 @@ describe("[I] config-utl/extract-depcruise-config", () => {
     );
     expect(
       await loadConfig(
-        join(mockDirectory, "extends/extending-array-with-one-member.json")
-      )
+        join(mockDirectory, "extends/extending-array-with-one-member.json"),
+      ),
     ).to.deep.equal(mergedArrayOneFixture.default);
   });
 
@@ -67,16 +67,16 @@ describe("[I] config-utl/extract-depcruise-config", () => {
     );
     expect(
       await loadConfig(
-        join(mockDirectory, "extends/extending-array-with-two-members.json")
-      )
+        join(mockDirectory, "extends/extending-array-with-two-members.json"),
+      ),
     ).to.deep.equal(mergedArrayTwoFixture.default);
   });
 
   it("a rule set with an extends from node_modules gets merged properly as well", async () => {
     expect(
       await loadConfig(
-        join(mockDirectory, "extends/extending-from-node-modules.json")
-      )
+        join(mockDirectory, "extends/extending-from-node-modules.json"),
+      ),
     ).to.deep.equal({
       allowed: [
         {
@@ -98,10 +98,10 @@ describe("[I] config-utl/extract-depcruise-config", () => {
   it("borks on a circular extends (1 step)", async () => {
     const lMessageOutTake = `config is circular - ${join(
       mockDirectory,
-      "extends/circular-one.js"
+      "extends/circular-one.js",
     )} -> ${join(mockDirectory, "extends/circular-two.js")} -> ${join(
       mockDirectory,
-      "extends/circular-one.js"
+      "extends/circular-one.js",
     )}.`;
     let lError = "none";
 

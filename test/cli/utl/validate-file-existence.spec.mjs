@@ -6,7 +6,7 @@ describe("[U] cli/utl/validateFileExistence", () => {
     expect(() => {
       validateFileExistence("file-or-dir-does-not-exist");
     }).to.throw(
-      "Can't open 'file-or-dir-does-not-exist' for reading. Does it exist?"
+      "Can't open 'file-or-dir-does-not-exist' for reading. Does it exist?",
     );
   });
 

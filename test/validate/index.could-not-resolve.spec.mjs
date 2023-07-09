@@ -21,8 +21,8 @@ describe("[I] validate/index - couldNotResolve", () => {
       validate.dependency(
         lNotToUnresolvableRuleSet,
         { source: "koos koets" },
-        { resolved: "diana charitee", couldNotResolve: false }
-      )
+        { resolved: "diana charitee", couldNotResolve: false },
+      ),
     ).to.deep.equal({ valid: true });
   });
 
@@ -31,8 +31,8 @@ describe("[I] validate/index - couldNotResolve", () => {
       validate.dependency(
         lNotToUnresolvableRuleSet,
         { source: "koos koets" },
-        { resolved: "diana charitee", couldNotResolve: true }
-      )
+        { resolved: "diana charitee", couldNotResolve: true },
+      ),
     ).to.deep.equal({
       valid: false,
       rules: [{ severity: "error", name: "not-to-unresolvable" }],

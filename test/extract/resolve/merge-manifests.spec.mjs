@@ -87,8 +87,8 @@ describe("[U] extract/resolve/get-manifest-dependencies/merge-manifests", () => 
         },
         {
           bundledDependencies: ["bar", "baz", "qux"],
-        }
-      )
+        },
+      ),
     ).to.deep.equal({
       bundledDependencies: ["foo", "bar", "baz", "qux"],
     });
