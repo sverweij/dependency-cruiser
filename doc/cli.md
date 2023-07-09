@@ -306,7 +306,7 @@ Write the output in [TeamCity service message format](https://www.jetbrains.com/
 E.g. to cruise src (using the .dependency-cruiser config) and emit TeamCity messages to stdout:
 
 ```shell
-dependency-cruise -src -T teamcity
+dependency-cruise src -T teamcity
 ```
 
 <details>
@@ -344,7 +344,7 @@ dependency-cruise src -T azure-devops
 ```
 ##vso[task.logissue type=error;sourcepath=src/asneeze.js;code=not-to-dev-dep;]src/asneeze.js -> node_modules/eslint/lib/api.js
 ##vso[task.logissue type=error;sourcepath=src/index.js;code=not-to-unresolvable;]src/index.js -> ./medontexist.json
-##vso[task.logissue type=error;sourcepath=src/index.js;linenumber=0;columnnumber=0;code=not-to-dev-dep;]src/index.js -> node_modules/eslint/lib/api.js
+##vso[task.logissue type=error;sourcepath=src/index.js;code=not-to-dev-dep;]src/index.js -> node_modules/eslint/lib/api.js
 ##vso[task.logissue type=warning;sourcepath=src/orphan.js;code=no-orphans;]src/orphan.js
 ##vso[task.complete result=Failed;]4 dependency violations (3 error, 1 warning/ informational). 8 modules, 7 dependencies cruised
 ```
