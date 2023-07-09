@@ -1,2 +1,2 @@
 ##vso[task.logissue type=warning;sourcepath=src/more-stable.js;code=sdp;]src/more-stable.js -> src/less-stable.js (instability: 42% -> 100%)
-##vso[task.complete result=SucceededWithIssues;]1 dependency violations (0 error, 1 warning/ informational). 3 modules, 3 dependencies cruised
+##vso[task.complete result=Succeeded;]1 dependency violations (0 error, 1 warning/ informational). 3 modules, 3 dependencies cruised

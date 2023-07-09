@@ -1,2 +1,2 @@
 ##vso[task.logissue type=warning;sourcepath=src/hunkydory.js;code=not-to-dev-dep;]src/hunkydory.js -> node_modules/hunky/dist/index.js
-##vso[task.complete result=SucceededWithIssues;]1 dependency violations (0 error, 1 warning/ informational). 2 modules, 1 dependencies cruised
+##vso[task.complete result=Succeeded;]1 dependency violations (0 error, 1 warning/ informational). 2 modules, 1 dependencies cruised

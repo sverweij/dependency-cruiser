@@ -8,7 +8,7 @@ const SEVERITY2VSO_TYPE = new Map([
   // "error" | "warn" | "info" | "ignore"
   ["error", "error"],
   ["warn", "warning"],
-  // azure devops doesn't seem to understand 'info'. We still want to
+  // azure devops doesn't seem to know 'info'. We still want to
   // show them, though, hence:
   ["info", "warning"],
 ]);
@@ -30,7 +30,6 @@ function formatModuleViolation(pViolation) {
 }
 
 /**
- *
  * @param {import("../../types/violations.js").IViolation} pViolation
  * @returns {string}
  */
@@ -93,28 +92,18 @@ function formatViolation(pViolation) {
 }
 
 /**
- *
  * @param {number} pNumberOfErrors
- * @param {number} pNumberOfWarns
- * @param {number} pNumberOfInfos
  *
- * @returns
+ * @returns {string}
  */
-function formatResultStatus(
-  pNumberOfErrors,
-  pNumberOfWarns,
-  pNumberOfInfos,
-  pNumberOfIgnored
-) {
-  if (pNumberOfErrors > 0) {
-    return "Failed";
-  }
-  if (pNumberOfWarns + pNumberOfInfos + pNumberOfIgnored > 0) {
-    return "SucceededWithIssues";
-  }
-  return "Succeeded";
+function formatResultStatus(pNumberOfErrors) {
+  return pNumberOfErrors > 0 ? "Failed" : "Succeeded";
 }
 
+/**
+ * @param {import("../../types/cruise-result.js").ISummary} pMeta
+ * @returns {string}
+ */
 function formatMeta(pMeta) {
   const lWarningCount = pMeta.warn + pMeta.info;
   const lError = `${pMeta.error} error`;
@@ -129,7 +118,6 @@ function sumMeta(pMeta) {
 }
 
 /**
- *
  * @param {number} pNumberOfIgnored
  * @returns {string}
  */
@@ -140,8 +128,8 @@ function formatIgnoreWarning(pNumberOfIgnored) {
 }
 
 /**
- *
  * @param {import("../../types/cruise-result.js").ISummary} pSummary
+ * @returns {string}
  */
 function formatResultMessage(pSummary) {
   let lStatSummary = `${pSummary.totalCruised} modules, ${
@@ -160,15 +148,12 @@ function formatResultMessage(pSummary) {
 }
 
 /**
- *
  * @param {import("../../types/cruise-result.js").ISummary} pSummary
+ * @returns {string}
  */
 function formatSummary(pSummary) {
   return `##vso[task.complete result=${formatResultStatus(
-    pSummary.error,
-    pSummary.warn,
-    pSummary.info,
-    pSummary?.ignore ?? 0
+    pSummary.error
   )};]${formatResultMessage(pSummary)}${EOL}`;
 }
 

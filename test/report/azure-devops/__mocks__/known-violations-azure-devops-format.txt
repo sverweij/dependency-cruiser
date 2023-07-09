@@ -1,1 +1,1 @@
-##vso[task.complete result=SucceededWithIssues;]no dependency violations found - 11 violations ignored  (459 modules, 1093 dependencies cruised)
+##vso[task.complete result=Succeeded;]no dependency violations found - 11 violations ignored  (459 modules, 1093 dependencies cruised)
