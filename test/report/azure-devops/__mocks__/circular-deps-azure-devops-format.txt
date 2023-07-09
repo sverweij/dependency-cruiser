@@ -1,0 +1,4 @@
+##vso[task.logissue type=error;sourcepath=src/some/folder/nested/center.js;code=no-circular;]src/some/folder/nested/center.js -> src/some/folder/loop-a.js -> src/some/folder/loop-b.js -> src/some/folder/nested/center.js
+##vso[task.logissue type=error;sourcepath=src/some/folder/loop-a.js;code=no-circular;]src/some/folder/loop-a.js -> src/some/folder/loop-b.js -> src/some/folder/nested/center.js -> src/some/folder/loop-a.js
+##vso[task.logissue type=error;sourcepath=src/some/folder/loop-b.js;code=no-circular;]src/some/folder/loop-b.js -> src/some/folder/nested/center.js -> src/some/folder/loop-a.js -> src/some/folder/loop-b.js
+##vso[task.complete result=Failed;]3 dependency violations (3 error, 0 warning/ informational). 3 modules, 3 dependencies cruised

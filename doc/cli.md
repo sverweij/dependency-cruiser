@@ -306,7 +306,7 @@ Write the output in [TeamCity service message format](https://www.jetbrains.com/
 E.g. to cruise src (using the .dependency-cruiser config) and emit TeamCity messages to stdout:
 
 ```shell
-dependency-cruise -v -T teamcity  -- src
+dependency-cruise src -T teamcity
 ```
 
 <details>
@@ -327,6 +327,32 @@ dependency-cruise -v -T teamcity  -- src
 
 Just like the `err` reporter the TeamCity reporter has an empty output when there's
 no violations - and a non-zero exit code when there's errors.
+
+#### azure-devops
+
+Write the output in [Azure DevOps logging command format](https://docs.microsoft.com/en-us/azure/devops/pipelines/scripts/logging-commands?view=azure-devops&tabs=bash).
+
+E.g. to cruise src (using the .dependency-cruiser config) and emit Azure DevOps logging commands to stdout:
+
+```shell
+dependency-cruise src -T azure-devops
+```
+
+<details>
+<summary>Sample output</summary>
+
+```
+##vso[task.logissue type=error;sourcepath=src/asneeze.js;code=not-to-dev-dep;]src/asneeze.js -> node_modules/eslint/lib/api.js
+##vso[task.logissue type=error;sourcepath=src/index.js;code=not-to-unresolvable;]src/index.js -> ./medontexist.json
+##vso[task.logissue type=error;sourcepath=src/index.js;code=not-to-dev-dep;]src/index.js -> node_modules/eslint/lib/api.js
+##vso[task.logissue type=warning;sourcepath=src/orphan.js;code=no-orphans;]src/orphan.js
+##vso[task.complete result=Failed;]4 dependency violations (3 error, 1 warning/ informational). 8 modules, 7 dependencies cruised
+```
+
+</details>
+
+When there is no violations, the reporter only emits a `##vso[task.complete result=Succeeded;]`
+line with the number of modules and dependencies cruised.
 
 #### text
 
