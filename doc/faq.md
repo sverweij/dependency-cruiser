@@ -173,7 +173,7 @@ E.g. to focus on stuff _within_ src only and not
 show any test and mock files, you'd do something like this:
 
 ```sh
-depcruise --include-only "^src/" --exclude "mocks\\.ts$|\\.spec\\.ts$" --output-type dot | dot -T svg > dependency-graph.svg
+depcruise src --include-only "^src/" --exclude "mocks\\.ts$|\\.spec\\.ts$" --output-type dot | dot -T svg > dependency-graph.svg
 ```
 
 </details>
@@ -230,7 +230,7 @@ quite a bit.
 To achieve that either pass `-Gsplines=ortho` to dot, e.g. in a complete incantation:
 
 ```sh
-depcruise --config .dependency-cruiser-graph.js --output-type dot -- src | dot -Gsplines=ortho -T svg > dependency-graph-with-orthogonal-edges.svg
+depcruise src --config .dependency-cruiser-graph.js --output-type dot | dot -Gsplines=ortho -T svg > dependency-graph-with-orthogonal-edges.svg
 ```
 
 ... or put it permanently in your dependency-cruiser configuration in the dot
@@ -592,7 +592,7 @@ by typing the module.exports with a comment like so:
 
 ```javascript
 /** @type {import('dependency-cruiser').IConfiguration} */
-module.exports = {
+export default {
   // ... your rules & options
 };
 ```
@@ -620,9 +620,6 @@ module.exports = {
     path e.g. `depcruise src --output-type plugin:$(pwd)/path/to/my-awesome-plugin`
 - before executing the plugin dependency-cruiser checks whether the function
   has the correct signature and whether it can handle minimal input.
-- plugin support is quite new (2021-02), so details like when
-  the plugin gets validated what prefix to use (currently: `plugin:` ) might
-  still change in the coming months.
 
 > See the basic [stats-reporter-plugin](../configs/plugins/stats-reporter-plugin.js)
 > for an example.
@@ -640,10 +637,11 @@ For reporters that should come shipped with dependency-cruiser do this:
       - exitCode: the exit code you want the cli to return when
         the report is done
 - In `report/index.js`
-  - require that module and
-  - add a key to the `TYPE2REPORTER` object with that module as value
-- In `bin/dependency-cruise`
-  - add it to the documentation of the -T option
+  - add a key and the relative path to the module to the TYPE2MODULE
+    map.
+- In `doc/cli.md`
+  - add a paragraph to the `--output-type` section that describes the
+    new output type
 - In `test/report` add unit tests that prove your reporter does what it
   intends.
 
@@ -668,10 +666,9 @@ Recipe for PR's to add an alt-js language:
     your language into JavaScript (preferably ES6 or better, but lower versions
     should work as well). [`typeScriptWrap.js`](../src/extract/transpile/typeScriptWrap.js)
     as an example on how to do this.
-  - in [`meta.js`](../src/extract/transpile/meta.js)
-    - require `./yourLanguageWrap` and
-    - add it to the `extension2wrapper` object with the extensions proper for your
-      language.
+  - in [`extract/transpile/index.js`](../src/extract/transpile/index.js)
+    - for each extension applicable to your language add an entry for `./yourLanguageWrap`
+      to the `EXTENSION2WRAPPER` map.
 - In `test/extract/transpile` add unit tests for `yourLanguageWrap`
 
 ## Road map
