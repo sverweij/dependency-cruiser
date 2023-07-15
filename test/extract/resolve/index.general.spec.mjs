@@ -71,6 +71,46 @@ describe("[I] extract/resolve/index - general", () => {
     });
   });
 
+  it("resolves the 'test'  core module as core module", () => {
+    expect(
+      resolve(
+        {
+          module: "test",
+          moduleSystem: "es6",
+        },
+        join(__dirname, "__mocks__"),
+        join(__dirname, "__mocks__", "resolve"),
+        {},
+      ),
+    ).to.deep.equal({
+      coreModule: true,
+      couldNotResolve: false,
+      dependencyTypes: ["core"],
+      followable: false,
+      resolved: "test",
+    });
+  });
+
+  it("resolves the 'node:test' core module as core module", () => {
+    expect(
+      resolve(
+        {
+          module: "node:test",
+          moduleSystem: "es6",
+        },
+        join(__dirname, "__mocks__"),
+        join(__dirname, "__mocks__", "resolve"),
+        {},
+      ),
+    ).to.deep.equal({
+      coreModule: true,
+      couldNotResolve: false,
+      dependencyTypes: ["core"],
+      followable: false,
+      resolved: "node:test",
+    });
+  });
+
   it("resolves to the moduleName input (and depType 'unknown') when not resolvable on disk", () => {
     expect(
       resolve(
