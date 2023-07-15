@@ -4,27 +4,35 @@ import pathToPosix from "../../utl/path-to-posix.mjs";
 import { isFollowable } from "./module-classifiers.mjs";
 import { resolve } from "./resolve.mjs";
 
+// builtinModules does not expose all builtin modules for #reasons -
+// see https://github.com/nodejs/node/issues/42785. In stead we could use
+// isBuiltin, but that is not available in node 16.14, the lowest version
+// of node dependency-cruiser currently supports. So we add the missing
+// modules here.
+// b.t.w. code is duplicated in resolve-amd.mjs
+const REALLY_BUILTIN_MODULES = builtinModules.concat(["test", "node:test"]);
+
 function addResolutionAttributes(
   pBaseDirectory,
   pModuleName,
   pFileDirectory,
-  pResolveOptions
+  pResolveOptions,
 ) {
   let lReturnValue = {};
 
-  if (builtinModules.includes(pModuleName)) {
+  if (REALLY_BUILTIN_MODULES.includes(pModuleName)) {
     lReturnValue.coreModule = true;
   } else {
     try {
       lReturnValue.resolved = pathToPosix(
         relative(
           pBaseDirectory,
-          resolve(pModuleName, pFileDirectory, pResolveOptions)
-        )
+          resolve(pModuleName, pFileDirectory, pResolveOptions),
+        ),
       );
       lReturnValue.followable = isFollowable(
         lReturnValue.resolved,
-        pResolveOptions
+        pResolveOptions,
       );
     } catch (pError) {
       lReturnValue.couldNotResolve = true;
@@ -40,7 +48,7 @@ export default function resolveCommonJS(
   pStrippedModuleName,
   pBaseDirectory,
   pFileDirectory,
-  pResolveOptions
+  pResolveOptions,
 ) {
   return {
     resolved: pStrippedModuleName,
@@ -51,7 +59,7 @@ export default function resolveCommonJS(
       pBaseDirectory,
       pStrippedModuleName,
       pFileDirectory,
-      pResolveOptions
+      pResolveOptions,
     ),
   };
 }

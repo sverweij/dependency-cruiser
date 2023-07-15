@@ -4,6 +4,14 @@ import { builtinModules } from "node:module";
 import memoize from "lodash/memoize.js";
 import pathToPosix from "../../utl/path-to-posix.mjs";
 
+// builtinModules does not expose all builtin modules for #reasons -
+// see https://github.com/nodejs/node/issues/42785. In stead we could use
+// isBuiltin, but that is not available in node 16.14, the lowest version
+// of node dependency-cruiser currently supports. So we add the missing
+// modules here.
+// b.t.w. code is duplicated in resolve-cjs.mjs
+const REALLY_BUILTIN_MODULES = builtinModules.concat(["test", "node:test"]);
+
 const fileExists = memoize((pFile) => {
   try {
     accessSync(pFile, R_OK);
@@ -16,7 +24,7 @@ const fileExists = memoize((pFile) => {
 
 function guessPath(pBaseDirectory, pFileDirectory, pStrippedModuleName) {
   return pathToPosix(
-    relative(pBaseDirectory, join(pFileDirectory, pStrippedModuleName))
+    relative(pBaseDirectory, join(pFileDirectory, pStrippedModuleName)),
   );
 }
 
@@ -27,8 +35,8 @@ function guessLikelyPath(pBaseDirectory, pFileDirectory, pStrippedModuleName) {
         guessPath(
           pBaseDirectory,
           pFileDirectory,
-          `${pStrippedModuleName}${pExtension}`
-        )
+          `${pStrippedModuleName}${pExtension}`,
+        ),
       )
       .find(fileExists) || pStrippedModuleName
   );
@@ -37,7 +45,7 @@ function guessLikelyPath(pBaseDirectory, pFileDirectory, pStrippedModuleName) {
 export function resolveAMD(
   pStrippedModuleName,
   pBaseDirectory,
-  pFileDirectory
+  pFileDirectory,
 ) {
   // lookups:
   // - [x] could be relative in the end (implemented)
@@ -48,15 +56,15 @@ export function resolveAMD(
   const lResolvedPath = guessLikelyPath(
     pBaseDirectory,
     pFileDirectory,
-    pStrippedModuleName
+    pStrippedModuleName,
   );
 
   return {
     resolved: lResolvedPath,
-    coreModule: builtinModules.includes(pStrippedModuleName),
+    coreModule: REALLY_BUILTIN_MODULES.includes(pStrippedModuleName),
     followable: fileExists(lResolvedPath) && lResolvedPath.endsWith(".js"),
     couldNotResolve:
-      !builtinModules.includes(pStrippedModuleName) &&
+      !REALLY_BUILTIN_MODULES.includes(pStrippedModuleName) &&
       !fileExists(lResolvedPath),
   };
 }
