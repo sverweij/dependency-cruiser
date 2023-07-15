@@ -15,6 +15,7 @@ module.exports = {
     "security/detect-non-literal-fs-filename": "off",
     "unicorn/no-useless-fallback-in-spread": "off", // useful, probably. We'll try it later, though
     "import/exports-last": "off", // Useless remnant of the time when single pass compilers were in vogue
+    "unicorn/no-empty-file": "off", // See https://github.com/sindresorhus/eslint-plugin-unicorn/issues/2175
   },
   overrides: [
     {
