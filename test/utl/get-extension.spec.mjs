@@ -1,32 +1,32 @@
-import { expect } from "chai";
+import { strictEqual } from "node:assert";
 import getExtension from "../../src/utl/get-extension.mjs";
 
 describe("[U] utl/getExtension", () => {
   it(".coffee.md classifies as .coffee.md", () => {
-    expect(getExtension("./aap/noot/mies.coffee.md")).to.equal(".coffee.md");
+    strictEqual(getExtension("./aap/noot/mies.coffee.md"), ".coffee.md");
   });
 
   it(".tea.md classifies as .md", () => {
-    expect(getExtension("./aap/noot/mies.tes.md")).to.equal(".md");
+    strictEqual(getExtension("./aap/noot/mies.tes.md"), ".md");
   });
 
   it("types.d.ts classifies as .d.ts", () => {
-    expect(getExtension("./types/types.d.ts")).to.equal(".d.ts");
+    strictEqual(getExtension("./types/types.d.ts"), ".d.ts");
   });
 
   it("types.d.mts classifies as .d.mts", () => {
-    expect(getExtension("./types/types.d.mts")).to.equal(".d.mts");
+    strictEqual(getExtension("./types/types.d.mts"), ".d.mts");
   });
 
   it("any extension (e.g. .ts) classifies as that", () => {
-    expect(getExtension("./types/typed.ts")).to.equal(".ts");
+    strictEqual(getExtension("./types/typed.ts"), ".ts");
   });
 
   it("any extension (e.g. .js) classifies as that", () => {
-    expect(getExtension("./aap/noot/mies.js")).to.equal(".js");
+    strictEqual(getExtension("./aap/noot/mies.js"), ".js");
   });
 
   it("no extension classifies as nothing", () => {
-    expect(getExtension("./aap/noot/mies")).to.equal("");
+    strictEqual(getExtension("./aap/noot/mies"), "");
   });
 });
