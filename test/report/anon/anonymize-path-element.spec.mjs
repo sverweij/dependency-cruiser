@@ -1,50 +1,47 @@
-import { expect } from "chai";
+import { match, notDeepStrictEqual, strictEqual } from "node:assert";
 import { anonymizePathElement } from "../../../src/report/anon/anonymize-path-element.mjs";
 
 describe("[U] report/anon/anonymizePathElement - uncached", () => {
   it("'' => ''", () => {
-    expect(anonymizePathElement("", [], /^$/, false)).to.equal("");
+    strictEqual(anonymizePathElement("", [], /^$/, false), "");
   });
 
   it("'string' => random string", () => {
-    expect(anonymizePathElement("string", [], /^$/, false)).to.match(
-      /[a-z]{6}/,
-    );
+    match(anonymizePathElement("string", [], /^$/, false), /[a-z]{6}/);
   });
 
   it("consecutive calls with a word list yield words from that list, until empty", () => {
     const lWordlist = ["aap", "noot"];
 
-    expect(anonymizePathElement("one", lWordlist, /^$/, false)).to.equal("aap");
-    expect(anonymizePathElement("two", lWordlist, /^$/, false)).to.equal(
-      "noot",
-    );
-    expect(anonymizePathElement("three", lWordlist, /^$/, false)).to.match(
-      /[a-z]{5}/,
-    );
+    strictEqual(anonymizePathElement("one", lWordlist, /^$/, false), "aap");
+    strictEqual(anonymizePathElement("two", lWordlist, /^$/, false), "noot");
+    match(anonymizePathElement("three", lWordlist, /^$/, false), /[a-z]{5}/);
   });
 
   it("returns the passed string when it matches the whitelist", () => {
-    expect(anonymizePathElement("package", [], /^packages?$/, false)).to.equal(
+    strictEqual(
+      anonymizePathElement("package", [], /^packages?$/, false),
       "package",
     );
   });
 
   it("returns the passed string when it does not match the whitelist", () => {
-    expect(
+    strictEqual(
       anonymizePathElement("thing", ["aap", "noot"], /^packages?$/, false),
-    ).to.equal("aap");
+      "aap",
+    );
   });
 
   it("only replaces the string up till the fist dot", () => {
-    expect(
+    strictEqual(
       anonymizePathElement(
         "thing.spec.js",
         ["aap", "noot"],
         /^packages?$/,
         false,
       ),
-    ).to.equal("aap.spec.js");
+      "aap.spec.js",
+    );
   });
 });
 
@@ -52,12 +49,12 @@ describe("[U] report/anon/anonymizePathElement - cached", () => {
   it("subsequent calls with the same string yield the same result", () => {
     const lFirstResult = anonymizePathElement("yudelyo");
 
-    expect(anonymizePathElement("yudelyo")).to.equal(lFirstResult);
+    strictEqual(anonymizePathElement("yudelyo"), lFirstResult);
   });
 
   it("subsequent calls with different strings yield different results", () => {
     const lFirstResult = anonymizePathElement("yudelyo");
 
-    expect(anonymizePathElement("yoyudel")).to.not.equal(lFirstResult);
+    notDeepStrictEqual(anonymizePathElement("yoyudel"), lFirstResult);
   });
 });

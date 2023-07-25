@@ -1,6 +1,6 @@
-import { expect, use } from "chai";
+import { strictEqual, deepStrictEqual } from "node:assert";
 import _clone from "lodash/clone.js";
-import chaiJSONSchema from "chai-json-schema";
+import Ajv from "ajv";
 import cruiseResultSchema from "../../../src/schema/cruise-result.schema.mjs";
 import { clearCache } from "../../../src/report/anon/anonymize-path-element.mjs";
 import anonymize from "../../../src/report/anon/index.mjs";
@@ -19,7 +19,7 @@ import fixtureFolders from "./__fixtures__/folders.mjs";
 import sourceFolderCycles from "./__mocks__/folder-cycles.mjs";
 import fixtureFolderCycles from "./__fixtures__/folder-cycles.mjs";
 
-use(chaiJSONSchema);
+const ajv = new Ajv();
 
 const META_SYNTACTIC_VARIABLES = [
   "foo",
@@ -53,18 +53,18 @@ describe("[I] report/anon", () => {
     });
     const lOutput = JSON.parse(lResult.output);
 
-    expect(lOutput).to.deep.equal(fixtureReport);
-    expect(lOutput).to.be.jsonSchema(cruiseResultSchema);
-    expect(lResult.exitCode).to.equal(0);
+    deepStrictEqual(lOutput, fixtureReport);
+    ajv.validate(cruiseResultSchema, lOutput);
+    strictEqual(lResult.exitCode, 0);
   });
 
   it("anonymizes a result tree with the word list passed in the result tree", () => {
     const lResult = anonymize(sourceReportWithWordlist);
     const lOutput = JSON.parse(lResult.output);
 
-    expect(lOutput).to.deep.equal(fixtureReportWithWordlist);
-    expect(lOutput).to.be.jsonSchema(cruiseResultSchema);
-    expect(lResult.exitCode).to.equal(0);
+    deepStrictEqual(lOutput, fixtureReportWithWordlist);
+    ajv.validate(cruiseResultSchema, lOutput);
+    strictEqual(lResult.exitCode, 0);
   });
 
   it("anonymizes a result tree with (violated) rules", () => {
@@ -73,9 +73,9 @@ describe("[I] report/anon", () => {
     });
     const lOutput = JSON.parse(lResult.output);
 
-    expect(lOutput).to.deep.equal(fixtureCycle);
-    expect(lOutput).to.be.jsonSchema(cruiseResultSchema);
-    expect(lResult.exitCode).to.equal(0);
+    deepStrictEqual(lOutput, fixtureCycle);
+    ajv.validate(cruiseResultSchema, lOutput);
+    strictEqual(lResult.exitCode, 0);
   });
   it("anonymizes a result tree with (violated) reaches rules", () => {
     const lResult = anonymize(reachesReport, {
@@ -83,9 +83,9 @@ describe("[I] report/anon", () => {
     });
     const lOutput = JSON.parse(lResult.output);
 
-    expect(lOutput).to.deep.equal(fixtureReachesReport);
-    expect(lOutput).to.be.jsonSchema(cruiseResultSchema);
-    expect(lResult.exitCode).to.equal(0);
+    deepStrictEqual(lOutput, fixtureReachesReport);
+    ajv.validate(cruiseResultSchema, lOutput);
+    strictEqual(lResult.exitCode, 0);
   });
   it("anonymizes a result tree with dependents", () => {
     const lResult = anonymize(sourceDependents, {
@@ -93,9 +93,9 @@ describe("[I] report/anon", () => {
     });
     const lOutput = JSON.parse(lResult.output);
 
-    expect(lOutput).to.deep.equal(fixtureDependents);
-    expect(lOutput).to.be.jsonSchema(cruiseResultSchema);
-    expect(lResult.exitCode).to.equal(0);
+    deepStrictEqual(lOutput, fixtureDependents);
+    ajv.validate(cruiseResultSchema, lOutput);
+    strictEqual(lResult.exitCode, 0);
   });
   it("anonymizes a result tree with folders", () => {
     const lResult = anonymize(sourceFolders, {
@@ -103,9 +103,9 @@ describe("[I] report/anon", () => {
     });
     const lOutput = JSON.parse(lResult.output);
 
-    expect(lOutput).to.deep.equal(fixtureFolders);
-    expect(lOutput).to.be.jsonSchema(cruiseResultSchema);
-    expect(lResult.exitCode).to.equal(0);
+    deepStrictEqual(lOutput, fixtureFolders);
+    ajv.validate(cruiseResultSchema, lOutput);
+    strictEqual(lResult.exitCode, 0);
   });
 
   it("anonymizes a result tree with folders that contain folder cycles", () => {
@@ -114,8 +114,8 @@ describe("[I] report/anon", () => {
     });
     const lOutput = JSON.parse(lResult.output);
 
-    expect(lOutput).to.deep.equal(fixtureFolderCycles);
-    expect(lOutput).to.be.jsonSchema(cruiseResultSchema);
-    expect(lResult.exitCode).to.equal(0);
+    deepStrictEqual(lOutput, fixtureFolderCycles);
+    ajv.validate(cruiseResultSchema, lOutput);
+    strictEqual(lResult.exitCode, 0);
   });
 });
