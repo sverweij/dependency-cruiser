@@ -1,9 +1,9 @@
-import { expect } from "chai";
+import { deepStrictEqual } from "node:assert";
 import findContentChanges from "../../src/cache/find-content-changes.mjs";
 
 describe("[U] cache/find-content-changes - cached vs new", () => {
   it("returns files not in directory but in cache as 'ignored' when they're not interesting for diffing", () => {
-    expect(
+    deepStrictEqual(
       findContentChanges(
         ".",
         {
@@ -33,28 +33,29 @@ describe("[U] cache/find-content-changes - cached vs new", () => {
           extensions: new Set([".js"]),
         },
       ),
-    ).to.deep.equal([
-      {
-        name: "consolidated",
-        changeType: "ignored",
-      },
-      {
-        name: "path",
-        changeType: "ignored",
-      },
-      {
-        name: "could-not-resolve.js",
-        changeType: "ignored",
-      },
-      {
-        name: "node_modules/matches-do-not/follow.js",
-        changeType: "ignored",
-      },
-    ]);
+      [
+        {
+          name: "consolidated",
+          changeType: "ignored",
+        },
+        {
+          name: "path",
+          changeType: "ignored",
+        },
+        {
+          name: "could-not-resolve.js",
+          changeType: "ignored",
+        },
+        {
+          name: "node_modules/matches-do-not/follow.js",
+          changeType: "ignored",
+        },
+      ],
+    );
   });
 
   it("returns files not in directory but in cache as 'deleted'", () => {
-    expect(
+    deepStrictEqual(
       findContentChanges(
         ".",
         { modules: [{ source: "only-in-cache-ends-up-as-deleted.js" }] },
@@ -65,16 +66,17 @@ describe("[U] cache/find-content-changes - cached vs new", () => {
           extensions: new Set([".js"]),
         },
       ),
-    ).to.deep.equal([
-      {
-        name: "only-in-cache-ends-up-as-deleted.js",
-        changeType: "deleted",
-      },
-    ]);
+      [
+        {
+          name: "only-in-cache-ends-up-as-deleted.js",
+          changeType: "deleted",
+        },
+      ],
+    );
   });
 
   it("returns files that have been earmarked as not followable as 'ignored'", () => {
-    expect(
+    deepStrictEqual(
       findContentChanges(
         ".",
         {
@@ -93,16 +95,17 @@ describe("[U] cache/find-content-changes - cached vs new", () => {
           extensions: new Set([".js"]),
         },
       ),
-    ).to.deep.equal([
-      {
-        name: "not-in-content-changes-as-extension.weird",
-        changeType: "ignored",
-      },
-    ]);
+      [
+        {
+          name: "not-in-content-changes-as-extension.weird",
+          changeType: "ignored",
+        },
+      ],
+    );
   });
 
   it("returns files both in directory and in cache that are different as 'modified'", () => {
-    expect(
+    deepStrictEqual(
       findContentChanges(
         ".",
         {
@@ -123,22 +126,23 @@ describe("[U] cache/find-content-changes - cached vs new", () => {
           extensions: new Set([".js"]),
         },
       ),
-    ).to.deep.equal([
-      {
-        name: "in-folder-as-well-different-checksum.js",
-        changeType: "modified",
-        checksum: "2jmj7l5rSw0yVb/vlWAYkK/YBwk=",
-      },
-      {
-        name: "in-folder-as-well-no-checksum.js",
-        changeType: "modified",
-        checksum: "2jmj7l5rSw0yVb/vlWAYkK/YBwk=",
-      },
-    ]);
+      [
+        {
+          name: "in-folder-as-well-different-checksum.js",
+          changeType: "modified",
+          checksum: "2jmj7l5rSw0yVb/vlWAYkK/YBwk=",
+        },
+        {
+          name: "in-folder-as-well-no-checksum.js",
+          changeType: "modified",
+          checksum: "2jmj7l5rSw0yVb/vlWAYkK/YBwk=",
+        },
+      ],
+    );
   });
 
   it("returns files both in directory and in cache that are the same as 'unmodified'", () => {
-    expect(
+    deepStrictEqual(
       findContentChanges(
         ".",
         {
@@ -156,19 +160,20 @@ describe("[U] cache/find-content-changes - cached vs new", () => {
           extensions: new Set([".js"]),
         },
       ),
-    ).to.deep.equal([
-      {
-        name: "in-folder-as-well-unmodified.js",
-        changeType: "unmodified",
-        checksum: "2jmj7l5rSw0yVb/vlWAYkK/YBwk=",
-      },
-    ]);
+      [
+        {
+          name: "in-folder-as-well-unmodified.js",
+          changeType: "unmodified",
+          checksum: "2jmj7l5rSw0yVb/vlWAYkK/YBwk=",
+        },
+      ],
+    );
   });
 });
 
 describe("[U] cache/find-content-changes - new vs cached", () => {
   it("returns an empty set when the directory and modules are empty", () => {
-    expect(
+    deepStrictEqual(
       findContentChanges(
         ".",
         { modules: [] },
@@ -179,11 +184,12 @@ describe("[U] cache/find-content-changes - new vs cached", () => {
           extensions: new Set([".js"]),
         },
       ),
-    ).to.deep.equal([]);
+      [],
+    );
   });
 
   it("returns changes when there's file in the directory and modules is empty (extensions only)", () => {
-    expect(
+    deepStrictEqual(
       findContentChanges(
         ".",
         { modules: [] },
@@ -194,17 +200,18 @@ describe("[U] cache/find-content-changes - new vs cached", () => {
           extensions: new Set([".js"]),
         },
       ),
-    ).to.deep.equal([
-      {
-        name: "interesting-extension.js",
-        changeType: "added",
-        checksum: "2jmj7l5rSw0yVb/vlWAYkK/YBwk=",
-      },
-    ]);
+      [
+        {
+          name: "interesting-extension.js",
+          changeType: "added",
+          checksum: "2jmj7l5rSw0yVb/vlWAYkK/YBwk=",
+        },
+      ],
+    );
   });
 
   it("returns changes when there's file in the directory and modules is empty (missing includeOnly filter)", () => {
-    expect(
+    deepStrictEqual(
       findContentChanges(
         ".",
         { modules: [] },
@@ -214,17 +221,18 @@ describe("[U] cache/find-content-changes - new vs cached", () => {
           extensions: new Set([".js"]),
         },
       ),
-    ).to.deep.equal([
-      {
-        name: "interesting-extension.js",
-        changeType: "added",
-        checksum: "2jmj7l5rSw0yVb/vlWAYkK/YBwk=",
-      },
-    ]);
+      [
+        {
+          name: "interesting-extension.js",
+          changeType: "added",
+          checksum: "2jmj7l5rSw0yVb/vlWAYkK/YBwk=",
+        },
+      ],
+    );
   });
 
   it("returns changes when there's file in the directory and modules is empty (exclude filter)", () => {
-    expect(
+    deepStrictEqual(
       findContentChanges(
         ".",
         { modules: [] },
@@ -235,17 +243,18 @@ describe("[U] cache/find-content-changes - new vs cached", () => {
           extensions: new Set([".js"]),
         },
       ),
-    ).to.deep.equal([
-      {
-        name: "interesting-extension.js",
-        changeType: "added",
-        checksum: "2jmj7l5rSw0yVb/vlWAYkK/YBwk=",
-      },
-    ]);
+      [
+        {
+          name: "interesting-extension.js",
+          changeType: "added",
+          checksum: "2jmj7l5rSw0yVb/vlWAYkK/YBwk=",
+        },
+      ],
+    );
   });
 
   it("returns changes when there's file in the directory and modules is empty (includeOnly filter)", () => {
-    expect(
+    deepStrictEqual(
       findContentChanges(
         ".",
         { modules: [] },
@@ -257,17 +266,18 @@ describe("[U] cache/find-content-changes - new vs cached", () => {
           extensions: new Set([".js"]),
         },
       ),
-    ).to.deep.equal([
-      {
-        name: "interesting-as-well.js",
-        changeType: "added",
-        checksum: "2jmj7l5rSw0yVb/vlWAYkK/YBwk=",
-      },
-      {
-        name: "interesting-extension.js",
-        changeType: "added",
-        checksum: "2jmj7l5rSw0yVb/vlWAYkK/YBwk=",
-      },
-    ]);
+      [
+        {
+          name: "interesting-as-well.js",
+          changeType: "added",
+          checksum: "2jmj7l5rSw0yVb/vlWAYkK/YBwk=",
+        },
+        {
+          name: "interesting-extension.js",
+          changeType: "added",
+          checksum: "2jmj7l5rSw0yVb/vlWAYkK/YBwk=",
+        },
+      ],
+    );
   });
 });

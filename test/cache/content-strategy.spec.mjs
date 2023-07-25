@@ -1,4 +1,4 @@
-import { expect } from "chai";
+import { deepStrictEqual, strictEqual } from "node:assert";
 import ContentStrategy from "../../src/cache/content-strategy.mjs";
 
 const INTERESTING_EXTENSIONS = new Set([".aap", ".noot", ".mies"]);
@@ -37,7 +37,7 @@ describe("[U] cache/content-strategy - getRevisionData", () => {
       ],
     };
 
-    expect(
+    deepStrictEqual(
       new ContentStrategy().getRevisionData(
         null,
         null,
@@ -49,11 +49,12 @@ describe("[U] cache/content-strategy - getRevisionData", () => {
           diffListFn: () => lInputChanges,
         },
       ),
-    ).to.deep.equal(lExpected);
+      lExpected,
+    );
   });
 
   it("if there's no changes the change set contains the passed sha & an empty array", () => {
-    expect(
+    deepStrictEqual(
       new ContentStrategy().getRevisionData(
         null,
         null,
@@ -65,16 +66,17 @@ describe("[U] cache/content-strategy - getRevisionData", () => {
           diffListFn: () => [],
         },
       ),
-    ).to.deep.equal({
-      SHA1: DUMMY_SHA,
-      changes: [],
-    });
+      {
+        SHA1: DUMMY_SHA,
+        changes: [],
+      },
+    );
   });
 
   it("returns only the extensions passed", () => {
     const lLimitedExtensions = new Set([".wim", ".noot"]);
 
-    expect(
+    deepStrictEqual(
       new ContentStrategy().getRevisionData(
         ".",
         { modules: [] },
@@ -85,16 +87,17 @@ describe("[U] cache/content-strategy - getRevisionData", () => {
           baseDir: "test/cache/__mocks__/content-strategy/extensions-check",
         },
       ),
-    ).to.deep.equal({
-      SHA1: DUMMY_SHA,
-      changes: [
-        {
-          changeType: "added",
-          name: "noot-extension-hence-returned.noot",
-          checksum: "2jmj7l5rSw0yVb/vlWAYkK/YBwk=",
-        },
-      ],
-    });
+      {
+        SHA1: DUMMY_SHA,
+        changes: [
+          {
+            changeType: "added",
+            name: "noot-extension-hence-returned.noot",
+            checksum: "2jmj7l5rSw0yVb/vlWAYkK/YBwk=",
+          },
+        ],
+      },
+    );
   });
 
   it("returns only the changeTypes passed", () => {
@@ -128,7 +131,7 @@ describe("[U] cache/content-strategy - getRevisionData", () => {
       },
     ];
 
-    expect(
+    deepStrictEqual(
       new ContentStrategy().getRevisionData(
         null,
         null,
@@ -140,24 +143,25 @@ describe("[U] cache/content-strategy - getRevisionData", () => {
           checksumFn: dummyCheckSumFunction,
         },
       ),
-    ).to.deep.equal({
-      SHA1: DUMMY_SHA,
-      changes: [
-        {
-          changeType: "added",
-          name: "added-hence-returned.aap",
-        },
-        {
-          changeType: "added",
-          name: "added-hence-returned.noot",
-        },
-        {
-          changeType: "renamed",
-          name: "renamed-hence-returned.mies",
-          oldName: "old-name.wim",
-        },
-      ],
-    });
+      {
+        SHA1: DUMMY_SHA,
+        changes: [
+          {
+            changeType: "added",
+            name: "added-hence-returned.aap",
+          },
+          {
+            changeType: "added",
+            name: "added-hence-returned.noot",
+          },
+          {
+            changeType: "renamed",
+            name: "renamed-hence-returned.mies",
+            oldName: "old-name.wim",
+          },
+        ],
+      },
+    );
   });
 });
 
@@ -182,52 +186,57 @@ describe("[U] cache/content-strategy - revisionDataEqual", () => {
   ];
 
   it("returns false when revision data objects don't exist", () => {
-    expect(new ContentStrategy().revisionDataEqual(null, null)).to.equal(false);
+    strictEqual(new ContentStrategy().revisionDataEqual(null, null), false);
   });
 
   it("returns false when old revision data object doesn't exist", () => {
-    expect(
+    strictEqual(
       new ContentStrategy().revisionDataEqual(null, {
         SHA1: "some-sha",
         changes: [],
       }),
-    ).to.equal(false);
+      false,
+    );
   });
 
   it("returns false when new revision data object doesn't exist", () => {
-    expect(
+    strictEqual(
       new ContentStrategy().revisionDataEqual(
         { SHA1: "some-sha", changes: [] },
         null,
       ),
-    ).to.equal(false);
+      false,
+    );
   });
 
   it("returns false when changes are not equal", () => {
-    expect(
+    strictEqual(
       new ContentStrategy().revisionDataEqual(
         { SHA1: "some-sha", changes: [] },
         { SHA1: "some-sha", changes: lChanges },
       ),
-    ).to.equal(false);
+      false,
+    );
   });
 
   it("returns true when changes are equal", () => {
-    expect(
+    strictEqual(
       new ContentStrategy().revisionDataEqual(
         { SHA1: "some-sha", changes: lChanges },
         { SHA1: "some-sha", changes: lChanges },
       ),
-    ).to.equal(true);
+      true,
+    );
   });
 
   it("returns true when changes are equal  (even when neither contain changes)", () => {
-    expect(
+    strictEqual(
       new ContentStrategy().revisionDataEqual(
         { SHA1: "some-sha", changes: [] },
         { SHA1: "some-sha", changes: [] },
       ),
-    ).to.equal(true);
+      true,
+    );
   });
 });
 
@@ -265,12 +274,13 @@ describe("[U] cache/content-strategy - prepareRevisionDataForSaving", () => {
       revisionData: lEmptyRevisionData,
     };
 
-    expect(
+    deepStrictEqual(
       new ContentStrategy().prepareRevisionDataForSaving(
         lEmptyCruiseResult,
         lEmptyRevisionData,
       ),
-    ).to.deep.equal(lExpectedCruiseResult);
+      lExpectedCruiseResult,
+    );
   });
 
   it("adds checksums to modules in the cruise result", () => {
@@ -323,12 +333,13 @@ describe("[U] cache/content-strategy - prepareRevisionDataForSaving", () => {
       revisionData: lEmptyRevisionData,
     };
 
-    expect(
+    deepStrictEqual(
       new ContentStrategy().prepareRevisionDataForSaving(
         lEmptyCruiseResult,
         lEmptyRevisionData,
       ),
-    ).to.deep.equal(lExpectedCruiseResult);
+      lExpectedCruiseResult,
+    );
   });
 
   it("removes changes from the revision data that aren't different anymore from the cruise result", () => {
@@ -411,11 +422,12 @@ describe("[U] cache/content-strategy - prepareRevisionDataForSaving", () => {
       },
     };
 
-    expect(
+    deepStrictEqual(
       new ContentStrategy().prepareRevisionDataForSaving(
         lCruiseResult,
         lRevisionData,
       ),
-    ).to.deep.equal(lExpectedCruiseResult);
+      lExpectedCruiseResult,
+    );
   });
 });

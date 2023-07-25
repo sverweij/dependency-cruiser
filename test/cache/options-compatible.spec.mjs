@@ -1,5 +1,5 @@
 /* eslint-disable no-magic-numbers */
-import { expect } from "chai";
+import { strictEqual } from "node:assert";
 import {
   optionIsCompatible,
   filterOptionIsCompatible,
@@ -12,246 +12,261 @@ import {
 
 describe("[U] cache/options-compatible - optionIsCompatible", () => {
   it("if neither filter exists they're compatible", () => {
-    expect(optionIsCompatible()).to.equal(true);
+    strictEqual(optionIsCompatible(), true);
   });
 
   it("if the old option doesn't exist, the new one is not compatible, whatever it is", () => {
-    expect(
+    strictEqual(
       // eslint-disable-next-line no-undefined
       optionIsCompatible(undefined, { path: ["aap", "noot", "mies"] }),
-    ).to.equal(false);
+      false,
+    );
   });
 
   it("if the old option exists, the new one is compatible when it's _exactly_ the same", () => {
-    expect(
+    strictEqual(
       optionIsCompatible(
         { path: ["aap", "noot", "mies"] },
         { path: ["aap", "noot", "mies"] },
       ),
-    ).to.equal(true);
+      true,
+    );
   });
 
   it("if the old option exists, the new one is _not_ compatible when it doesn't exist", () => {
-    expect(
+    strictEqual(
       optionIsCompatible({ path: ["aap", "noot", "mies"] }, null),
-    ).to.equal(false);
+      false,
+    );
   });
 
   it("if the old option exists, the new one is _not_ compatible when it isn't exactly the same", () => {
-    expect(
+    strictEqual(
       optionIsCompatible(
         { path: ["aap", "noot", "mies"] },
         { path: ["aap", "mies"] },
       ),
-    ).to.equal(false);
+      false,
+    );
   });
 
   it("if the old option equals false and the new one is as well, they're compatible", () => {
-    expect(optionIsCompatible(false, false)).to.equal(true);
+    strictEqual(optionIsCompatible(false, false), true);
   });
 
   it("if the old option equals false and the new one is true, they're _not_ compatible", () => {
-    expect(optionIsCompatible(false, true)).to.equal(false);
+    strictEqual(optionIsCompatible(false, true), false);
   });
 });
 
 describe("[U] cache/options-compatible - filterOptionIsCompatible", () => {
   it("if neither filter exists they're compatible", () => {
-    expect(filterOptionIsCompatible()).to.equal(true);
+    strictEqual(filterOptionIsCompatible(), true);
   });
 
   it("if the old (filter) option doesn't exist, the new one is compatible, whatever it is", () => {
-    expect(
+    strictEqual(
       // eslint-disable-next-line no-undefined
       filterOptionIsCompatible(undefined, { path: ["aap", "noot", "mies"] }),
-    ).to.equal(true);
+      true,
+    );
   });
 
   it("if the old (filter) option is null, the new one is compatible, whatever it is", () => {
-    expect(
+    strictEqual(
       filterOptionIsCompatible(null, { path: ["aap", "noot", "mies"] }),
-    ).to.equal(true);
+      true,
+    );
   });
 
   it("if the old (filter) option exists, the new one is compatible when it's _exactly_ the same", () => {
-    expect(
+    strictEqual(
       filterOptionIsCompatible(
         { path: ["aap", "noot", "mies"] },
         { path: ["aap", "noot", "mies"] },
       ),
-    ).to.equal(true);
+      true,
+    );
   });
 
   it("if the old (filter) option exists, the new one is _not_ compatible when it doesn't exist", () => {
-    expect(
+    strictEqual(
       filterOptionIsCompatible({ path: ["aap", "noot", "mies"] }, null),
-    ).to.equal(false);
+      false,
+    );
   });
 
   it("if the old (filter) option exists, the new one is _not_ compatible when it isn't exactly the same", () => {
-    expect(
+    strictEqual(
       filterOptionIsCompatible(
         { path: ["aap", "noot", "mies"] },
         { path: ["aap", "mies"] },
       ),
-    ).to.equal(false);
+      false,
+    );
   });
 
   it("if the old (filter) option equals false and the new one is as well, they're compatible", () => {
-    expect(filterOptionIsCompatible(false, false)).to.equal(true);
+    strictEqual(filterOptionIsCompatible(false, false), true);
   });
 
   it("if the old (filter) option equals false and the new one is true, they're compatible", () => {
-    expect(filterOptionIsCompatible(false, true)).to.equal(true);
+    strictEqual(filterOptionIsCompatible(false, true), true);
   });
 });
 
 describe("[U] cache/options-compatible - includeOnlyIsCompatible", () => {
   it("if neither filter exists they're compatible", () => {
-    expect(includeOnlyIsCompatible()).to.equal(true);
+    strictEqual(includeOnlyIsCompatible(), true);
   });
 
   it("if the old filter doesn't exist, the new one is compatible, whatever it is", () => {
-    expect(
+    strictEqual(
       includeOnlyIsCompatible(null, { path: ["aap", "noot", "mies"] }),
-    ).to.equal(true);
-  });
-
-  it("if the old filter exists, the new one is compatible when it's _exactly_ the same", () => {
-    expect(
-      includeOnlyIsCompatible(["aap", "noot", "mies"], {
-        path: ["aap", "noot", "mies"],
-      }),
-    ).to.equal(true);
-  });
-
-  it("if the old filter exists, the new one is _not_ compatible when it doesn't exist", () => {
-    expect(includeOnlyIsCompatible(["aap", "noot", "mies"], null)).to.equal(
-      false,
+      true,
     );
   });
 
+  it("if the old filter exists, the new one is compatible when it's _exactly_ the same", () => {
+    strictEqual(
+      includeOnlyIsCompatible(["aap", "noot", "mies"], {
+        path: ["aap", "noot", "mies"],
+      }),
+      true,
+    );
+  });
+
+  it("if the old filter exists, the new one is _not_ compatible when it doesn't exist", () => {
+    strictEqual(includeOnlyIsCompatible(["aap", "noot", "mies"], null), false);
+  });
+
   it("if the old filter exists, the new one is _not_ compatible when it isn't exactly the same", () => {
-    expect(
+    strictEqual(
       includeOnlyIsCompatible(["aap", "noot", "mies"], {
         path: ["aap", "mies"],
       }),
-    ).to.equal(false);
+      false,
+    );
   });
 });
 
 describe("[U] cache/options-compatible - limitIsCompatible", () => {
   it("if neither limit exists they're compatible", () => {
-    expect(limitIsCompatible()).to.equal(true);
+    strictEqual(limitIsCompatible(), true);
   });
 
   it("if the old limit doesn't exist compatible", () => {
-    expect(limitIsCompatible(null, 1)).to.equal(true);
+    strictEqual(limitIsCompatible(null, 1), true);
   });
 
   it("if the old limit exists and it's not infinite ('0') it's compatible when it's >= the new value", () => {
-    expect(limitIsCompatible(3, 3)).to.equal(true);
-    expect(limitIsCompatible(3, 2)).to.equal(true);
+    strictEqual(limitIsCompatible(3, 3), true);
+    strictEqual(limitIsCompatible(3, 2), true);
   });
 
   it("if the old limit exists and it's not infinite ('0') it's not compatible when it's < the new value", () => {
-    expect(limitIsCompatible(3, 4)).to.equal(false);
-    expect(limitIsCompatible(3, 0)).to.equal(false);
+    strictEqual(limitIsCompatible(3, 4), false);
+    strictEqual(limitIsCompatible(3, 0), false);
   });
 
   it("if the old limit exists and it's infinite ('0') it's compatible whatever the new value is", () => {
-    expect(limitIsCompatible(0, null)).to.equal(true);
-    expect(limitIsCompatible(0, 0)).to.equal(true);
-    expect(limitIsCompatible(0, 1)).to.equal(true);
-    expect(limitIsCompatible(0, 99)).to.equal(true);
+    strictEqual(limitIsCompatible(0, null), true);
+    strictEqual(limitIsCompatible(0, 0), true);
+    strictEqual(limitIsCompatible(0, 1), true);
+    strictEqual(limitIsCompatible(0, 99), true);
   });
 });
 
 describe("[U] cache/options-compatible - metricsIsCompatible", () => {
   it("if neither metrics exist they're compatible", () => {
-    expect(metricsIsCompatible()).to.equal(true);
+    strictEqual(metricsIsCompatible(), true);
   });
 
   it("is compatible when the old results have metrics and the new options don't", () => {
-    expect(metricsIsCompatible(true, false)).to.equal(true);
+    strictEqual(metricsIsCompatible(true, false), true);
   });
 
   it("is compatible when the old results have metrics and the new options also do", () => {
-    expect(metricsIsCompatible(true, true)).to.equal(true);
+    strictEqual(metricsIsCompatible(true, true), true);
   });
   it("is not compatible when the old results don't have metrics and the new options  do", () => {
-    expect(metricsIsCompatible(false, true)).to.equal(false);
+    strictEqual(metricsIsCompatible(false, true), false);
   });
   it("is compatible when the old results don't have metrics and the new options don't either", () => {
-    expect(metricsIsCompatible(false, false)).to.equal(true);
+    strictEqual(metricsIsCompatible(false, false), true);
   });
 });
 
 describe("[U] cache/options-compatible - cacheOptionIsCompatible", () => {
   it("returns true when both equal 'true'", () => {
-    expect(cacheOptionIsCompatible(true, true)).to.equal(true);
+    strictEqual(cacheOptionIsCompatible(true, true), true);
   });
   it("returns true when are objects & they're 100% equal", () => {
-    expect(
+    strictEqual(
       cacheOptionIsCompatible(
         { folder: "x", strategy: "metadata" },
         { folder: "x", strategy: "metadata" },
       ),
-    ).to.equal(true);
+      true,
+    );
   });
   it("returns false when are objects & the folders differ", () => {
-    expect(
+    strictEqual(
       cacheOptionIsCompatible(
         { folder: "x", strategy: "metadata" },
         { folder: "not-x", strategy: "metadata" },
       ),
-    ).to.equal(false);
+      false,
+    );
   });
   it("returns false when both cache options are objects & the strategies differ", () => {
-    expect(
+    strictEqual(
       cacheOptionIsCompatible(
         { folder: "x", strategy: "metadata" },
         { folder: "x", strategy: "content" },
       ),
-    ).to.equal(false);
+      false,
+    );
   });
   it("returns false when one cache option is an object and the other one isn't", () => {
-    expect(
+    strictEqual(
       cacheOptionIsCompatible(true, { folder: "x", strategy: "metadata" }),
-    ).to.equal(false);
-    expect(
+      false,
+    );
+    strictEqual(
       cacheOptionIsCompatible("x", { folder: "x", strategy: "metadata" }),
-    ).to.equal(false);
+      false,
+    );
   });
 });
 
 describe("[U] cache/options-compatible - optionsAreCompatible", () => {
   it("options are not compatible when there's none in either", () => {
-    expect(optionsAreCompatible({}, {})).to.equal(false);
+    strictEqual(optionsAreCompatible({}, {}), false);
   });
   it("options are compatible when there's none in either (except a cache option)", () => {
-    expect(optionsAreCompatible({ cache: true }, { cache: true })).to.equal(
-      true,
-    );
+    strictEqual(optionsAreCompatible({ cache: true }, { cache: true }), true);
   });
   it("options are compatible when args are exactly equal", () => {
-    expect(
+    strictEqual(
       optionsAreCompatible(
         { args: "aap noot mies", cache: true },
         { args: "aap noot mies", cache: true },
       ),
-    ).to.equal(true);
+      true,
+    );
   });
   it("options are not compatible when args are not exactly equal", () => {
-    expect(
+    strictEqual(
       optionsAreCompatible(
         { args: "aap noot mies", cache: true },
         { args: "aap noot", cache: true },
       ),
-    ).to.equal(false);
+      false,
+    );
   });
   it("options are compatible when also rulesFiles are exactly equal", () => {
-    expect(
+    strictEqual(
       optionsAreCompatible(
         {
           args: "aap",
@@ -266,10 +281,11 @@ describe("[U] cache/options-compatible - optionsAreCompatible", () => {
           cache: true,
         },
       ),
-    ).to.equal(true);
+      true,
+    );
   });
   it("options are not compatible when also tsPreCompilationDeps are not exactly equal", () => {
-    expect(
+    strictEqual(
       optionsAreCompatible(
         {
           args: "aap",
@@ -284,11 +300,12 @@ describe("[U] cache/options-compatible - optionsAreCompatible", () => {
           cache: true,
         },
       ),
-    ).to.equal(false);
+      false,
+    );
   });
 
   it("options are compatible when also includeOnly filters are exactly equal", () => {
-    expect(
+    strictEqual(
       optionsAreCompatible(
         {
           args: "aap",
@@ -305,20 +322,22 @@ describe("[U] cache/options-compatible - optionsAreCompatible", () => {
           cache: true,
         },
       ),
-    ).to.equal(true);
+      true,
+    );
   });
 
   it("options are not compatible when also collapse filters are not compatible equal", () => {
-    expect(
+    strictEqual(
       optionsAreCompatible(
         { args: "aap", rulesFile: "thing.js", collapse: "zus", cache: true },
         { args: "aap", rulesFile: "thing.js", collapse: "jet", cache: true },
       ),
-    ).to.equal(false);
+      false,
+    );
   });
 
   it("options are compatible when also collapse filters are compatible", () => {
-    expect(
+    strictEqual(
       optionsAreCompatible(
         {
           args: "aap",
@@ -334,6 +353,7 @@ describe("[U] cache/options-compatible - optionsAreCompatible", () => {
           cache: true,
         },
       ),
-    ).to.equal(true);
+      true,
+    );
   });
 });
