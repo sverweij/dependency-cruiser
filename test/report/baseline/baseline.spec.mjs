@@ -1,11 +1,11 @@
-import { expect, use } from "chai";
-import chaiJSONSchema from "chai-json-schema";
+import { deepStrictEqual, strictEqual } from "node:assert";
+import Ajv from "ajv";
 import baseline from "../../../src/report/baseline.mjs";
 import { createRequireJSON } from "../../backwards.utl.mjs";
 import baselineSchema from "../../../src/schema/baseline-violations.schema.mjs";
 
 const requireJSON = createRequireJSON(import.meta.url);
-use(chaiJSONSchema);
+const ajv = new Ajv();
 
 describe("[I] report/baseline", () => {
   it("returns an empty array when there's no violations", () => {
@@ -13,9 +13,9 @@ describe("[I] report/baseline", () => {
     const lExpected = [];
     const lResult = baseline(lInput);
 
-    expect(JSON.parse(lResult.output)).to.deep.equal(lExpected);
-    expect(lResult.exitCode).to.equal(0);
-    expect(JSON.parse(lResult.output)).to.be.jsonSchema(baselineSchema);
+    deepStrictEqual(JSON.parse(lResult.output), lExpected);
+    strictEqual(lResult.exitCode, 0);
+    ajv.validate(baselineSchema, JSON.parse(lResult.output));
   });
 
   it("returns the violations in a json object", () => {
@@ -23,8 +23,8 @@ describe("[I] report/baseline", () => {
     const lExpected = requireJSON("./__fixtures__/baseline-result.json");
     const lResult = baseline(lInput);
 
-    expect(JSON.parse(lResult.output)).to.deep.equal(lExpected);
-    expect(lResult.exitCode).to.equal(0);
-    expect(JSON.parse(lResult.output)).to.be.jsonSchema(baselineSchema);
+    deepStrictEqual(JSON.parse(lResult.output), lExpected);
+    strictEqual(lResult.exitCode, 0);
+    ajv.validate(baselineSchema, JSON.parse(lResult.output));
   });
 });
