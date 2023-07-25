@@ -1,7 +1,7 @@
 import { readFileSync } from "node:fs";
 import { join } from "node:path";
 import { fileURLToPath } from "node:url";
-import { expect } from "chai";
+import { deepStrictEqual } from "node:assert";
 // eslint-plugins import and node don't yet understand these 'self references'
 // eslint-disable-next-line import/no-unresolved, node/no-missing-import
 import mermaidReporterPlugin from "dependency-cruiser/mermaid-reporter-plugin";
@@ -22,7 +22,7 @@ const same = (pName, pOptions, pMermaidModule = mermaid) => {
     "utf8",
   );
   const output = pMermaidModule(definition, pOptions).output;
-  expect(output).to.deep.equal(expected);
+  deepStrictEqual(output, expected);
 };
 
 describe("[I] report/mermaid", () => {
