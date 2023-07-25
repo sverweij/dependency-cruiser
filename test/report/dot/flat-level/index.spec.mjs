@@ -1,9 +1,9 @@
+import { deepStrictEqual, strictEqual } from "node:assert";
 import { readFileSync } from "node:fs";
 import { join } from "node:path";
 import { fileURLToPath } from "node:url";
-import { expect } from "chai";
-import { createRequireJSON } from "../../../backwards.utl.mjs";
 import dot from "../../../../src/report/dot/index.mjs";
+import { createRequireJSON } from "../../../backwards.utl.mjs";
 
 const render = dot("flat");
 const requireJSON = createRequireJSON(import.meta.url);
@@ -29,22 +29,22 @@ describe("[I] report/dot/flat-level reporter", () => {
   it("consolidates to flat levels", () => {
     const lReturnValue = render(deps);
 
-    expect(lReturnValue.output).to.deep.equal(flatDot);
-    expect(lReturnValue.exitCode).to.equal(0);
+    deepStrictEqual(lReturnValue.output, flatDot);
+    strictEqual(lReturnValue.exitCode, 0);
   });
 
   it("consolidates module only transgressions correctly", () => {
     const lReturnValue = render(orphans);
 
-    expect(lReturnValue.output).to.deep.equal(flatOrphansDot);
-    expect(lReturnValue.exitCode).to.equal(0);
+    deepStrictEqual(lReturnValue.output, flatOrphansDot);
+    strictEqual(lReturnValue.exitCode, 0);
   });
 
   it("consolidates a slightly larger code base in a timely fashion", () => {
     const lReturnValue = render(rxjs);
 
-    expect(lReturnValue.output).to.deep.equal(flatRxJs);
-    expect(lReturnValue.exitCode).to.equal(0);
+    deepStrictEqual(lReturnValue.output, flatRxJs);
+    strictEqual(lReturnValue.exitCode, 0);
   });
 });
 
