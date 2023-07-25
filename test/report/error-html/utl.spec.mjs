@@ -1,35 +1,37 @@
-import { expect } from "chai";
+/* eslint-disable no-prototype-builtins */
+import { deepStrictEqual, strictEqual } from "node:assert";
 import utl from "../../../src/report/error-html/utl.mjs";
 
 function summaryHasMinimalAttributes(pResult) {
-  expect(pResult).to.haveOwnProperty("depcruiseVersion");
-  expect(pResult).to.haveOwnProperty("runDate");
-  expect(pResult).to.haveOwnProperty("violations");
+  strictEqual(pResult.hasOwnProperty("depcruiseVersion"), true);
+  strictEqual(pResult.hasOwnProperty("runDate"), true);
+  strictEqual(pResult.hasOwnProperty("violations"), true);
 }
 
 describe("[U] report/error-html/utl", () => {
   it("getFormattedAllowedRule - no allowed rule available returns empty array", () => {
-    expect(utl.getFormattedAllowedRule({})).to.deep.equal([]);
+    deepStrictEqual(utl.getFormattedAllowedRule({}), []);
   });
 
   it("getFormattedAllowedRule - empty allowed array returns empty array", () => {
-    expect(utl.getFormattedAllowedRule({ allowed: [] })).to.deep.equal([]);
+    deepStrictEqual(utl.getFormattedAllowedRule({ allowed: [] }), []);
   });
 
   it("getFormattedAllowedRule - one rule with no comment, no severity returns default comment & severity", () => {
-    expect(
+    deepStrictEqual(
       utl.getFormattedAllowedRule({
         allowed: [{ from: {}, to: {} }],
       }),
-    ).to.deep.equal({
-      name: "not-in-allowed",
-      severity: "warn",
-      comment: "-",
-    });
+      {
+        name: "not-in-allowed",
+        severity: "warn",
+        comment: "-",
+      },
+    );
   });
 
   it("getFormattedAllowedRule - a rule with a comment, no severity returns that comment & default severity", () => {
-    expect(
+    deepStrictEqual(
       utl.getFormattedAllowedRule({
         allowed: [
           {
@@ -51,15 +53,16 @@ describe("[U] report/error-html/utl", () => {
           },
         ],
       }),
-    ).to.deep.equal({
-      name: "not-in-allowed",
-      severity: "warn",
-      comment: "this is a comment",
-    });
+      {
+        name: "not-in-allowed",
+        severity: "warn",
+        comment: "this is a comment",
+      },
+    );
   });
 
   it("getFormattedAllowedRule - a rule with a severity, no comment returns a default comment & that severity", () => {
-    expect(
+    deepStrictEqual(
       utl.getFormattedAllowedRule({
         allowed: [
           {
@@ -73,15 +76,16 @@ describe("[U] report/error-html/utl", () => {
         ],
         allowedSeverity: "info",
       }),
-    ).to.deep.equal({
-      name: "not-in-allowed",
-      severity: "info",
-      comment: "-",
-    });
+      {
+        name: "not-in-allowed",
+        severity: "info",
+        comment: "-",
+      },
+    );
   });
 
   it("mergeCountIntoRule - no violation", () => {
-    expect(utl.mergeCountsIntoRule({ name: "blah" }, {})).to.deep.equal({
+    deepStrictEqual(utl.mergeCountsIntoRule({ name: "blah" }, {}), {
       name: "blah",
       count: 0,
       ignoredCount: 0,
@@ -90,24 +94,25 @@ describe("[U] report/error-html/utl", () => {
   });
 
   it("mergeCountIntoRule - some violations", () => {
-    expect(
+    deepStrictEqual(
       utl.mergeCountsIntoRule(
         { name: "blah" },
         { blah: { count: 69, ignoredCount: 0 } },
       ),
-    ).to.deep.equal({
-      name: "blah",
-      count: 69,
-      ignoredCount: 0,
-      unviolated: false,
-    });
+      {
+        name: "blah",
+        count: 69,
+        ignoredCount: 0,
+        unviolated: false,
+      },
+    );
   });
 
   it("formatSummaryForReport - empty", () => {
     const lResult = utl.formatSummaryForReport({});
 
     summaryHasMinimalAttributes(lResult);
-    expect(lResult.violations).to.deep.equal([]);
+    deepStrictEqual(lResult.violations, []);
   });
 
   it("formatSummaryForReport - one module violation", () => {
@@ -122,7 +127,7 @@ describe("[U] report/error-html/utl", () => {
     });
 
     summaryHasMinimalAttributes(lResult);
-    expect(lResult.violations).to.deep.equal([
+    deepStrictEqual(lResult.violations, [
       {
         type: "dependency",
         from: "aap",
@@ -144,7 +149,7 @@ describe("[U] report/error-html/utl", () => {
     });
 
     summaryHasMinimalAttributes(lResult);
-    expect(lResult.violations).to.deep.equal([
+    deepStrictEqual(lResult.violations, [
       {
         type: "module",
         from: "aap",
@@ -165,7 +170,7 @@ describe("[U] report/error-html/utl", () => {
     const lExpectation =
       "thing/a &rightarrow;<br/>b &rightarrow;<br/>thingy/bingy/c &rightarrow;<br/>a";
 
-    expect(utl.determineTo(lInputViolation)).to.deep.equal(lExpectation);
+    deepStrictEqual(utl.determineTo(lInputViolation), lExpectation);
   });
 
   it("determineTo - via violation", () => {
@@ -179,7 +184,7 @@ describe("[U] report/error-html/utl", () => {
     const lExpectation =
       "thing/a<br/>thing/a &rightarrow;<br/>b &rightarrow;<br/>thingy/bingy/c &rightarrow;<br/>a";
 
-    expect(utl.determineTo(lInputViolation)).to.deep.equal(lExpectation);
+    deepStrictEqual(utl.determineTo(lInputViolation), lExpectation);
   });
 
   it("determineTo - dependency violation", () => {
@@ -191,7 +196,7 @@ describe("[U] report/error-html/utl", () => {
 
     const lExpectation = "thing/a";
 
-    expect(utl.determineTo(lInputViolation)).to.deep.equal(lExpectation);
+    deepStrictEqual(utl.determineTo(lInputViolation), lExpectation);
   });
 
   it("determineTo - module violation", () => {
@@ -203,7 +208,7 @@ describe("[U] report/error-html/utl", () => {
 
     const lExpectation = "";
 
-    expect(utl.determineTo(lInputViolation)).to.deep.equal(lExpectation);
+    deepStrictEqual(utl.determineTo(lInputViolation), lExpectation);
   });
 
   it("determineTo - instability violation", () => {
@@ -216,7 +221,7 @@ describe("[U] report/error-html/utl", () => {
 
     const lExpectation = 'b&nbsp;<span class="extra">(I: 100%)</span>';
 
-    expect(utl.determineTo(lInputViolation)).to.deep.equal(lExpectation);
+    deepStrictEqual(utl.determineTo(lInputViolation), lExpectation);
   });
 
   it("determineFromExtras - instability violation", () => {
@@ -229,8 +234,6 @@ describe("[U] report/error-html/utl", () => {
 
     const lExpectation = '&nbsp;<span class="extra">(I: 10%)</span>';
 
-    expect(utl.determineFromExtras(lInputViolation)).to.deep.equal(
-      lExpectation,
-    );
+    deepStrictEqual(utl.determineFromExtras(lInputViolation), lExpectation);
   });
 });
