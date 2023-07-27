@@ -1,5 +1,7 @@
+/* eslint-disable security/detect-non-literal-regexp */
+/* eslint-disable no-regex-spaces */
 import { EOL } from "node:os";
-import { expect } from "chai";
+import { doesNotMatch, match, strictEqual } from "node:assert";
 import metrics from "../../../src/report/metrics.mjs";
 import cruiseResultWithMetricsForModulesAndFolders from "./__mocks/cruise-result-with-metrics-for-modules-and-folders.mjs";
 
@@ -7,8 +9,8 @@ describe("[I] report/metrics", () => {
   it("errors when the input doesn't contain a 'folders' section", () => {
     const lResult = metrics({ modules: [] });
 
-    expect(lResult.exitCode).to.equal(1);
-    expect(lResult.output).to.contain("ERROR");
+    strictEqual(lResult.exitCode, 1);
+    match(lResult.output, /ERROR/);
   });
 
   it("emits folder metrics", () => {
@@ -25,8 +27,8 @@ describe("[I] report/metrics", () => {
       ],
     });
 
-    expect(lResult.exitCode).to.equal(0);
-    expect(lResult.output).to.contain("src       1      1      1    50%");
+    strictEqual(lResult.exitCode, 0);
+    match(lResult.output, /src       1      1      1    50%/);
   });
 
   it("does not emit folder metrics when asked to hide them", () => {
@@ -46,8 +48,8 @@ describe("[I] report/metrics", () => {
       { hideFolders: true },
     );
 
-    expect(lResult.exitCode).to.equal(0);
-    expect(lResult.output).to.not.contain("src       1      1      1    50%");
+    strictEqual(lResult.exitCode, 0);
+    doesNotMatch(lResult.output, /src       1      1      1    50%/);
   });
 
   it("emits module metrics (sorted by instability by default)", () => {
@@ -75,9 +77,12 @@ describe("[I] report/metrics", () => {
       folders: [],
     });
 
-    expect(lResult.exitCode).to.equal(0);
-    expect(lResult.output).to.contain(
-      `src/mies.js      1      1      1    50%${EOL}src/aap.js       1      1      3    25%${EOL}src/noot.js`,
+    strictEqual(lResult.exitCode, 0);
+    match(
+      lResult.output,
+      new RegExp(
+        `src/mies.js      1      1      1    50%${EOL}src/aap.js       1      1      3    25%${EOL}src/noot.js`,
+      ),
     );
   });
 
@@ -109,9 +114,12 @@ describe("[I] report/metrics", () => {
       { orderBy: "name" },
     );
 
-    expect(lResult.exitCode).to.equal(0);
-    expect(lResult.output).to.contain(
-      `src/aap.js       1      1      3    25%${EOL}src/mies.js      1      1      1    50%${EOL}src/noot.js`,
+    strictEqual(lResult.exitCode, 0);
+    match(
+      lResult.output,
+      new RegExp(
+        `src/aap.js       1      1      3    25%${EOL}src/mies.js      1      1      1    50%${EOL}src/noot.js`,
+      ),
     );
   });
 
@@ -143,9 +151,12 @@ describe("[I] report/metrics", () => {
       { hideModules: true },
     );
 
-    expect(lResult.exitCode).to.equal(0);
-    expect(lResult.output).to.not.contain(
-      `src/mies.js      1      1      1     50%${EOL}src/aap.js       1      1      3     25%${EOL}src/noot.js`,
+    strictEqual(lResult.exitCode, 0);
+    doesNotMatch(
+      lResult.output,
+      new RegExp(
+        `src/mies.js      1      1      1     50%${EOL}src/aap.js       1      1      3     25%${EOL}src/noot.js`,
+      ),
     );
   });
 
@@ -154,9 +165,8 @@ describe("[I] report/metrics", () => {
       hideModules: true,
     });
 
-    expect(lResult.exitCode).to.equal(0);
-    expect(lResult.output).to.contain("src");
-    expect(lResult.output).to.contain("src/report");
-    expect(lResult.output).to.not.contain("node_modules");
+    strictEqual(lResult.exitCode, 0);
+    match(lResult.output, /src\/report/);
+    doesNotMatch(lResult.output, /node_modules/);
   });
 });
