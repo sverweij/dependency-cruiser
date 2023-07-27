@@ -2,13 +2,13 @@ import { writeFileSync } from "node:fs";
 import { tmpdir } from "node:os";
 import { join } from "node:path/posix";
 import { expect, use } from "chai";
-import chaiJsonSchema from "chai-json-schema";
+import Ajv from "ajv";
 import buildConfig from "../../../src/cli/init-config/build-config.mjs";
 import normalizeInitOptions from "../../../src/cli/init-config/normalize-init-options.mjs";
 import configurationSchema from "../../../src/schema/configuration.schema.mjs";
 import deleteDammit from "../delete-dammit.utl.cjs";
 
-use(chaiJsonSchema);
+const ajv = new Ajv();
 
 const createConfigNormalized = async (pInitOptions) => {
   const lConfigAsString = buildConfig(normalizeInitOptions(pInitOptions));
@@ -37,7 +37,7 @@ describe("[I] cli/init-config/build-config", () => {
       configType: "preset",
     });
 
-    expect(lResult).to.be.jsonSchema(configurationSchema);
+    ajv.validate(configurationSchema, lResult);
     expect(lResult).to.haveOwnProperty("extends");
     expect(lResult.extends).to.equal(
       "dependency-cruiser/configs/recommended-warn-only",
@@ -49,7 +49,7 @@ describe("[I] cli/init-config/build-config", () => {
 
     const lResult = await createConfigNormalized({});
 
-    expect(lResult).to.be.jsonSchema(configurationSchema);
+    ajv.validate(configurationSchema, lResult);
     expect(lResult).to.not.haveOwnProperty("extends");
   });
 
@@ -61,7 +61,7 @@ describe("[I] cli/init-config/build-config", () => {
       preset: "@my/cool/company/configs/depcruise-preset",
     });
 
-    expect(lResult).to.be.jsonSchema(configurationSchema);
+    ajv.validate(configurationSchema, lResult);
     expect(lResult).to.haveOwnProperty("forbidden");
     expect(lResult.extends).to.equal(
       "@my/cool/company/configs/depcruise-preset",
@@ -76,7 +76,7 @@ describe("[I] cli/init-config/build-config", () => {
       hasTestsOutsideSource: false,
     });
 
-    expect(lResult).to.be.jsonSchema(configurationSchema);
+    ajv.validate(configurationSchema, lResult);
     expect(lResult).to.haveOwnProperty("forbidden");
     expect(
       lResult.forbidden.some((pRule) => pRule.name === "not-to-test"),
@@ -91,7 +91,7 @@ describe("[I] cli/init-config/build-config", () => {
       hasTestsOutsideSource: true,
     });
 
-    expect(lResult).to.be.jsonSchema(configurationSchema);
+    ajv.validate(configurationSchema, lResult);
     expect(lResult).to.haveOwnProperty("forbidden");
     expect(
       lResult.forbidden.some((pRule) => pRule.name === "not-to-test"),
@@ -106,7 +106,7 @@ describe("[I] cli/init-config/build-config", () => {
       webpackConfig: "./webpack.prod.js",
     });
 
-    expect(lResult).to.be.jsonSchema(configurationSchema);
+    ajv.validate(configurationSchema, lResult);
     expect(lResult).to.haveOwnProperty("options");
     expect(lResult.options.webpackConfig).to.deep.equal({
       fileName: "./webpack.prod.js",
@@ -121,7 +121,7 @@ describe("[I] cli/init-config/build-config", () => {
       tsConfig: "./tsconfig.json",
     });
 
-    expect(lResult).to.be.jsonSchema(configurationSchema);
+    ajv.validate(configurationSchema, lResult);
     expect(lResult).to.haveOwnProperty("options");
     expect(lResult.options.tsConfig).to.deep.equal({
       fileName: "./tsconfig.json",

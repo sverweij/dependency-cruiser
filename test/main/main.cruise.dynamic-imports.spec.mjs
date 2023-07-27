@@ -1,5 +1,5 @@
 import { expect, use } from "chai";
-import chaiJSONSchema from "chai-json-schema";
+import Ajv from "ajv";
 import cruiseResultSchema from "../../src/schema/cruise-result.schema.mjs";
 import cruise from "../../src/main/cruise.mjs";
 import { createRequireJSON } from "../backwards.utl.mjs";
@@ -19,7 +19,7 @@ const tsOutpre = normBaseDirectory(
   ),
 );
 
-use(chaiJSONSchema);
+const ajv = new Ajv();
 
 const WORKING_DIRECTORY = process.cwd();
 
@@ -64,7 +64,7 @@ describe("[E] main.cruise - dynamic imports", () => {
     );
 
     expect(lResult.output).to.deep.equal(esOut);
-    expect(lResult.output).to.be.jsonSchema(cruiseResultSchema);
+    ajv.validate(cruiseResultSchema, lResult.output);
   });
 
   it("detects dynamic dependencies in typescript", async () => {
@@ -99,7 +99,7 @@ describe("[E] main.cruise - dynamic imports", () => {
     );
 
     expect(lResult.output).to.deep.equal(tsOut);
-    expect(lResult.output).to.be.jsonSchema(cruiseResultSchema);
+    ajv.validate(cruiseResultSchema, lResult.output);
   });
 
   it("detects dynamic dependencies in typescript when using tsPreCompilationDeps", async () => {
@@ -135,6 +135,6 @@ describe("[E] main.cruise - dynamic imports", () => {
     );
 
     expect(lResult.output).to.deep.equal(tsOutpre);
-    expect(lResult.output).to.be.jsonSchema(cruiseResultSchema);
+    ajv.validate(cruiseResultSchema, lResult.output);
   });
 });

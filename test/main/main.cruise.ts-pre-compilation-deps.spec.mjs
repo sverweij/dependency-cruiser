@@ -1,5 +1,5 @@
 import { expect, use } from "chai";
-import chaiJSONSchema from "chai-json-schema";
+import Ajv from "ajv";
 import cruiseResultSchema from "../../src/schema/cruise-result.schema.mjs";
 import cruise from "../../src/main/cruise.mjs";
 import { createRequireJSON } from "../backwards.utl.mjs";
@@ -20,7 +20,7 @@ const tsNoPrecompFixtureES = normBaseDirectory(
   requireJSON("./__fixtures__/ts-no-precomp-es.json"),
 );
 
-use(chaiJSONSchema);
+const ajv = new Ajv();
 
 describe("[E] main.cruise - tsPreCompilationDeps", () => {
   it("ts-pre-compilation-deps: on, target CJS", async () => {
@@ -44,7 +44,7 @@ describe("[E] main.cruise - tsPreCompilationDeps", () => {
     );
 
     expect(lResult.output).to.deep.equal(tsPreCompFixtureCJS);
-    expect(lResult.output).to.be.jsonSchema(cruiseResultSchema);
+    ajv.validate(cruiseResultSchema, lResult.output);
   });
   it("ts-pre-compilation-deps: on, target ES", async () => {
     const lResult = await cruise(
@@ -67,7 +67,7 @@ describe("[E] main.cruise - tsPreCompilationDeps", () => {
     );
 
     expect(lResult.output).to.deep.equal(tsPreCompFixtureES);
-    expect(lResult.output).to.be.jsonSchema(cruiseResultSchema);
+    ajv.validate(cruiseResultSchema, lResult.output);
   });
   it("ts-pre-compilation-deps: off, target CJS", async () => {
     const lResult = await cruise(
@@ -90,7 +90,7 @@ describe("[E] main.cruise - tsPreCompilationDeps", () => {
     );
 
     expect(lResult.output).to.deep.equal(tsNoPrecompFixtureCJS);
-    expect(lResult.output).to.be.jsonSchema(cruiseResultSchema);
+    ajv.validate(cruiseResultSchema, lResult.output);
   });
   it("ts-pre-compilation-deps: off, target ES", async () => {
     const lResult = await cruise(
@@ -113,6 +113,6 @@ describe("[E] main.cruise - tsPreCompilationDeps", () => {
     );
 
     expect(lResult.output).to.deep.equal(tsNoPrecompFixtureES);
-    expect(lResult.output).to.be.jsonSchema(cruiseResultSchema);
+    ajv.validate(cruiseResultSchema, lResult.output);
   });
 });

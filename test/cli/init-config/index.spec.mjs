@@ -1,12 +1,12 @@
 import { writeFileSync, readFileSync } from "node:fs";
 import { join } from "node:path";
 import { use, expect } from "chai";
-import chaiJsonSchema from "chai-json-schema";
+import Ajv from "ajv";
 import deleteDammit from "../delete-dammit.utl.cjs";
 import initConfig from "../../../src/cli/init-config/index.mjs";
 import configurationSchema from "../../../src/schema/configuration.schema.mjs";
 
-use(chaiJsonSchema);
+const ajv = new Ajv();
 
 const RULES_FILE_JS = ".dependency-cruiser.js";
 
@@ -28,7 +28,7 @@ describe("[I] cli/init-config/index", () => {
       initConfig("notyes");
       const lResult = await import(lConfigResultFileName);
 
-      expect(lResult.default).to.be.jsonSchema(configurationSchema);
+      ajv.validate(configurationSchema, lResult.default);
       expect(lResult.default).to.not.haveOwnProperty("extends");
     } finally {
       deleteDammit(RULES_FILE_JS);
@@ -47,7 +47,7 @@ describe("[I] cli/init-config/index", () => {
       initConfig("preset", lConfig);
       const lResult = await import(lConfigResultFileName);
 
-      expect(lResult.default).to.be.jsonSchema(configurationSchema);
+      ajv.validate(configurationSchema, lResult.default);
       expect(lResult.default).to.haveOwnProperty("extends");
       expect(lResult.default.extends).to.equal(
         "dependency-cruiser/configs/recommended-strict",
@@ -69,7 +69,7 @@ describe("[I] cli/init-config/index", () => {
       initConfig("yes", lConfig);
       const lResult = await import(lConfigResultFileName);
 
-      expect(lResult.default).to.be.jsonSchema(configurationSchema);
+      ajv.validate(configurationSchema, lResult.default);
       expect(lResult.default).to.not.haveOwnProperty("extends");
       expect(lResult.default.options).to.not.haveOwnProperty("tsConfig");
     } finally {
@@ -88,7 +88,7 @@ describe("[I] cli/init-config/index", () => {
       initConfig("yes");
       const lResult = await import(lConfigResultFileName);
 
-      expect(lResult.default).to.be.jsonSchema(configurationSchema);
+      ajv.validate(configurationSchema, lResult.default);
       expect(lResult.default).to.not.haveOwnProperty("extends");
       expect(lResult.default.options).to.haveOwnProperty("tsConfig");
       expect(lResult.default.options.tsConfig).to.deep.equal({
@@ -110,7 +110,7 @@ describe("[I] cli/init-config/index", () => {
       initConfig("yes");
       const lResult = await import(lConfigResultFileName);
 
-      expect(lResult.default).to.be.jsonSchema(configurationSchema);
+      ajv.validate(configurationSchema, lResult.default);
       expect(lResult.default).to.not.haveOwnProperty("extends");
       expect(lResult.default.options).to.haveOwnProperty("webpackConfig");
       expect(lResult.default.options.webpackConfig).to.deep.equal({
@@ -136,7 +136,7 @@ describe("[I] cli/init-config/index", () => {
       initConfig("experimental-scripts");
       const lResult = await import(lConfigResultFileName);
 
-      expect(lResult.default).to.be.jsonSchema(configurationSchema);
+      ajv.validate(configurationSchema, lResult.default);
       expect(
         JSON.parse(readFileSync(lManifestFilename, "utf8")),
       ).to.haveOwnProperty("scripts");
@@ -162,7 +162,7 @@ describe("[I] cli/init-config/index", () => {
       initConfig("experimental-scripts");
       const lResult = await import(lConfigResultFileName);
 
-      expect(lResult.default).to.be.jsonSchema(configurationSchema);
+      ajv.validate(configurationSchema, lResult.default);
       expect(lResult.default).to.deep.equal({});
       expect(
         JSON.parse(readFileSync(lManifestFilename, "utf8")),

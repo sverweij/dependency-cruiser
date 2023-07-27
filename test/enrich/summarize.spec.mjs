@@ -1,12 +1,12 @@
 import { expect, use } from "chai";
-import chaiJSONSchema from "chai-json-schema";
+import Ajv from "ajv";
 import summarize from "../../src/enrich/summarize/index.mjs";
 import cruiseResultSchema from "../../src/schema/cruise-result.schema.mjs";
 import cycleStartsOnOne from "./__mocks__/cycle-starts-on-one.mjs";
 import cycleStartsOnTwo from "./__mocks__/cycle-starts-on-two.mjs";
 import cycleFest from "./__mocks__/cycle-fest.mjs";
 
-use(chaiJSONSchema);
+const ajv = new Ajv();
 
 describe("[I] enrich/summarize", () => {
   it("doesn't add a rule set when there isn't one", () => {
@@ -44,9 +44,7 @@ describe("[I] enrich/summarize", () => {
       violations: [],
       warn: 0,
     });
-    expect({ modules: [], summary: lSummary }).to.be.jsonSchema(
-      cruiseResultSchema,
-    );
+    ajv.validate(cruiseResultSchema, { modules: [], summary: lSummary });
   });
 
   it("consistently summarizes the same circular dependency, regardless the order", () => {
@@ -68,9 +66,7 @@ describe("[I] enrich/summarize", () => {
     const lResult2 = summarize(cycleStartsOnTwo, lOptions, ["src"]);
 
     expect(lResult1).to.deep.equal(lResult2);
-    expect({ modules: [], summary: lResult1 }).to.be.jsonSchema(
-      cruiseResultSchema,
-    );
+    ajv.validate(cruiseResultSchema, { modules: [], summary: lResult1 });
   });
 
   it("summarizes all circular dependencies, even when there's more per thingus", () => {
@@ -145,9 +141,7 @@ describe("[I] enrich/summarize", () => {
     };
     const lSummary = summarize(cycleFest, lOptions, ["src"]);
     expect(lSummary).to.deep.equal(lExpected);
-    expect({ modules: [], summary: lSummary }).to.be.jsonSchema(
-      cruiseResultSchema,
-    );
+    ajv.validate(cruiseResultSchema, { modules: [], summary: lSummary });
   });
 
   it("includes known violations in the summary", () => {
@@ -271,8 +265,6 @@ describe("[I] enrich/summarize", () => {
         ],
       },
     });
-    expect({ modules: [], summary: lSummary }).to.be.jsonSchema(
-      cruiseResultSchema,
-    );
+    ajv.validate(cruiseResultSchema, { modules: [], summary: lSummary });
   });
 });
