@@ -1,6 +1,6 @@
 import { readFileSync } from "node:fs";
 import { fileURLToPath } from "node:url";
-import { expect } from "chai";
+import { strictEqual } from "node:assert";
 import chalk from "chalk";
 import normalizeNewline from "normalize-newline";
 import renderText from "../../../src/report/text.mjs";
@@ -29,8 +29,8 @@ describe("[I] report/text", () => {
       ),
     );
 
-    expect(normalizeNewline(lResult.output)).to.equal(lExpectedOutput);
-    expect(lResult.exitCode).to.equal(0);
+    strictEqual(normalizeNewline(lResult.output), lExpectedOutput);
+    strictEqual(lResult.exitCode, 0);
   });
 
   it("renders dependencies - focused modules highlighted when highlightFocused === true", () => {
@@ -46,7 +46,7 @@ describe("[I] report/text", () => {
       "test/enrich/derive/reachable/index.spec.mjs → \u001B[4msrc/main/rule-set/normalize.js\u001B[24m\n" +
       "test/main/rule-set/normalize.spec.mjs → \u001B[4msrc/main/rule-set/normalize.js\u001B[24m\n" +
       "test/validate/parse-ruleset.utl.mjs → \u001B[4msrc/main/rule-set/normalize.js\u001B[24m\n";
-    expect(normalizeNewline(lResult.output)).to.equal(lExpectedOutput);
+    strictEqual(normalizeNewline(lResult.output), lExpectedOutput);
   });
 
   it("renders dependencies - no highlights when highlightFocused === false", () => {
@@ -62,6 +62,6 @@ describe("[I] report/text", () => {
       "test/enrich/derive/reachable/index.spec.mjs → src/main/rule-set/normalize.js\n" +
       "test/main/rule-set/normalize.spec.mjs → src/main/rule-set/normalize.js\n" +
       "test/validate/parse-ruleset.utl.mjs → src/main/rule-set/normalize.js\n";
-    expect(normalizeNewline(lResult.output)).to.equal(lExpectedOutput);
+    strictEqual(normalizeNewline(lResult.output), lExpectedOutput);
   });
 });
