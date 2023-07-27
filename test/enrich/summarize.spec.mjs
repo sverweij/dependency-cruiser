@@ -23,9 +23,7 @@ describe("[I] enrich/summarize", () => {
       violations: [],
       warn: 0,
     });
-    expect({ modules: [], summary: lSummary }).to.be.jsonSchema(
-      cruiseResultSchema,
-    );
+    ajv.validate(cruiseResultSchema, { modules: [], summary: lSummary });
   });
   it("adds a rule set when there is one", () => {
     const lSummary = summarize([], { ruleSet: { required: [] } }, []);
