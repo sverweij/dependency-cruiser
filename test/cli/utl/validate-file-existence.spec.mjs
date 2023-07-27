@@ -1,5 +1,4 @@
 import { doesNotThrow, throws } from "node:assert";
-import { EOL } from "node:os";
 import validateFileExistence from "../../../src/cli/utl/validate-file-existence.mjs";
 
 describe("[U] cli/utl/validateFileExistence", () => {
@@ -9,7 +8,8 @@ describe("[U] cli/utl/validateFileExistence", () => {
         validateFileExistence("file-or-dir-does-not-exist");
       },
       {
-        message: `Can't open 'file-or-dir-does-not-exist' for reading. Does it exist?${EOL}`,
+        // even on windows it apparently uses \n only, so no need to use EOL
+        message: `Can't open 'file-or-dir-does-not-exist' for reading. Does it exist?\n`,
       },
     );
   });
