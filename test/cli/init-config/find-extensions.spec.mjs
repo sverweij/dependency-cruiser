@@ -1,15 +1,15 @@
-import { expect } from "chai";
+import { deepStrictEqual, throws } from "node:assert";
 import findExtensions from "../../../src/cli/init-config/find-extensions.mjs";
 
 describe("[U] cli/init-config/find-extensions", () => {
   it("returns an empty array of extensions when passed no directories", () => {
-    expect(findExtensions([])).to.deep.equal([]);
+    deepStrictEqual(findExtensions([]), []);
   });
 
   it("throws when passed non-existent folders", () => {
-    expect(() => {
+    throws(() => {
       findExtensions(["yo-this-folder-does-not-exist", "and neither this one"]);
-    }).to.throw(/ENOENT/);
+    }, /ENOENT/);
   });
 
   it("returns an empty array of extension when passed a directory with files that have no extensions", () => {
@@ -18,7 +18,7 @@ describe("[U] cli/init-config/find-extensions", () => {
       scannableExtensions: [".js", ".mjs", ".cjs", ".jsx"],
     });
 
-    expect(lFound).to.deep.equal([]);
+    deepStrictEqual(lFound, []);
   });
 
   it("filters scannable extensions from all extensions", () => {
@@ -27,7 +27,7 @@ describe("[U] cli/init-config/find-extensions", () => {
       scannableExtensions: [".js", ".mjs", ".cjs", ".jsx"],
     });
 
-    expect(lFound).to.deep.equal([".js", ".cjs"]);
+    deepStrictEqual(lFound, [".js", ".cjs"]);
   });
 
   it("sorts by the number of times the extension occurs", () => {
@@ -48,7 +48,7 @@ describe("[U] cli/init-config/find-extensions", () => {
       ],
     });
 
-    expect(lFound).to.deep.equal([".js", ".ts", ".cjs", ".d.mts"]);
+    deepStrictEqual(lFound, [".js", ".ts", ".cjs", ".d.mts"]);
   });
 
   it("ignores path elements that aren't worth scanning", () => {
@@ -71,6 +71,6 @@ describe("[U] cli/init-config/find-extensions", () => {
       ],
     });
 
-    expect(lFound).to.deep.equal([".ts", ".d.mts"]);
+    deepStrictEqual(lFound, [".ts", ".d.mts"]);
   });
 });

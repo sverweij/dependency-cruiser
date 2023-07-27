@@ -1,7 +1,7 @@
 import { writeFileSync } from "node:fs";
 import { tmpdir } from "node:os";
 import { join } from "node:path/posix";
-import { expect, use } from "chai";
+import { expect } from "chai";
 import Ajv from "ajv";
 import buildConfig from "../../../src/cli/init-config/build-config.mjs";
 import normalizeInitOptions from "../../../src/cli/init-config/normalize-init-options.mjs";

@@ -1,6 +1,6 @@
 import { createReadStream } from "node:fs";
 import { Writable } from "node:stream";
-import { expect } from "chai";
+import { strictEqual } from "node:assert";
 import wrapStreamInHTML from "../../../src/cli/tools/wrap-stream-in-html.mjs";
 
 class WriteableExpectStream extends Writable {
@@ -13,10 +13,10 @@ class WriteableExpectStream extends Writable {
   }
 
   end() {
-    expect(this.buffer).to.contain("<html");
-    expect(this.buffer).to.contain("<style>");
-    expect(this.buffer).to.contain('"name": "dependency-cruiser"');
-    expect(this.buffer).to.contain("</html");
+    strictEqual(this.buffer.includes("<html"), true);
+    strictEqual(this.buffer.includes("</style>"), true);
+    strictEqual(this.buffer.includes('"name": "dependency-cruiser"'), true);
+    strictEqual(this.buffer.includes("</html"), true);
   }
 }
 

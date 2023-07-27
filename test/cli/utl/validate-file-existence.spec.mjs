@@ -1,18 +1,22 @@
-import { expect } from "chai";
+import { doesNotThrow, throws } from "node:assert";
+import { EOL } from "node:os";
 import validateFileExistence from "../../../src/cli/utl/validate-file-existence.mjs";
 
 describe("[U] cli/utl/validateFileExistence", () => {
   it("throws when the file or dir passed does not exists", () => {
-    expect(() => {
-      validateFileExistence("file-or-dir-does-not-exist");
-    }).to.throw(
-      "Can't open 'file-or-dir-does-not-exist' for reading. Does it exist?",
+    throws(
+      () => {
+        validateFileExistence("file-or-dir-does-not-exist");
+      },
+      {
+        message: `Can't open 'file-or-dir-does-not-exist' for reading. Does it exist?${EOL}`,
+      },
     );
   });
 
   it("passes when the file or dir passed exists", () => {
-    expect(() => {
+    doesNotThrow(() => {
       validateFileExistence("package.json");
-    }).to.not.throw();
+    });
   });
 });

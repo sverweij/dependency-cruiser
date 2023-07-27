@@ -1,5 +1,6 @@
 /* eslint-disable no-unused-expressions */
 /* eslint-disable no-magic-numbers */
+import { match } from "node:assert";
 import { expect } from "chai";
 import {
   getHeader,
@@ -68,7 +69,8 @@ describe("[U] cli/listeners/performance-log/handlers - getEndText", () => {
   });
 
   it("message contains a line with totals", () => {
-    expect(getEndText(lStateMock, 10, MAX_LEVEL)).to.match(
+    match(
+      getEndText(lStateMock, 10, MAX_LEVEL),
       /really done\n------------- ------------- ------------- ------------- ------------- ------------- ------------- ------------------------------------------\n[ ]*[+-]?[0-9,]+kB[ ]*[+-]?[0-9,]+kB[ ]*[+-]?[0-9,]+kB[ ]*[+-]?[0-9,]+kB[ ]*[0-9,]+ms[ ]*[0-9,]+ms[ ]*[0-9,]+ms/g,
     );
   });

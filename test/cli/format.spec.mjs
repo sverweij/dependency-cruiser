@@ -1,7 +1,7 @@
 /* eslint-disable no-magic-numbers */
 import { readFileSync } from "node:fs";
+import { strictEqual } from "node:assert";
 import { fileURLToPath } from "node:url";
-import { expect } from "chai";
 import format from "../../src/cli/format.mjs";
 import deleteDammit from "./delete-dammit.utl.cjs";
 
@@ -18,8 +18,11 @@ describe("[E] cli/format", () => {
       outputTo: lOutFile,
     });
 
-    expect(readFileSync(lOutFile, "utf8")).to.contain("dependencies cruised");
-    expect(lExitCode).to.equal(0);
+    strictEqual(
+      readFileSync(lOutFile, "utf8").includes("dependencies cruised"),
+      true,
+    );
+    strictEqual(lExitCode, 0);
     deleteDammit(lOutFile);
   });
 
@@ -37,23 +40,35 @@ describe("[E] cli/format", () => {
       },
     );
     const lResult = JSON.parse(readFileSync(lOutFile, "utf8"));
-    expect(lResult.summary.error).to.equal(0);
-    expect(lResult.summary.totalCruised).to.be.lessThan(175);
-    expect(lResult.summary.totalDependenciesCruised).to.be.lessThan(298);
-    expect(lResult.summary.violations.length).to.equal(1);
-    expect(lResult.modules.map((pModule) => pModule.source)).to.not.include(
-      "bin/depcruise-fmt.mjs",
+    strictEqual(lResult.summary.error, 0);
+    strictEqual(lResult.summary.totalCruised < 175, true);
+    strictEqual(lResult.summary.totalDependenciesCruised < 298, true);
+    strictEqual(lResult.summary.violations.length, 1);
+    strictEqual(
+      lResult.modules
+        .map((pModule) => pModule.source)
+        .includes("bin/depcruise-fmt.mjs"),
+      false,
     );
-    expect(lResult.modules.map((pModule) => pModule.source)).to.include(
-      "src/main/index.js",
+    strictEqual(
+      lResult.modules
+        .map((pModule) => pModule.source)
+        .includes("src/main/index.js"),
+      true,
     );
-    expect(lResult.modules.map((pModule) => pModule.source)).to.include(
-      "src/cli/index.js",
+    strictEqual(
+      lResult.modules
+        .map((pModule) => pModule.source)
+        .includes("src/cli/index.js"),
+      true,
     );
-    expect(lResult.modules.map((pModule) => pModule.source)).to.not.include(
-      "src/cli/init-config/index.js",
+    strictEqual(
+      lResult.modules
+        .map((pModule) => pModule.source)
+        .includes("src/cli/init-config/index.js"),
+      false,
     );
-    expect(lExitCode).to.equal(0);
+    strictEqual(lExitCode, 0);
     deleteDammit(lOutFile);
   });
 
@@ -73,7 +88,7 @@ describe("[E] cli/format", () => {
     );
     const lResult = JSON.parse(readFileSync(lOutFile, "utf8"));
 
-    expect(lResult.summary.optionsUsed.prefix).to.equal(lAlternatePrefix);
+    strictEqual(lResult.summary.optionsUsed.prefix, lAlternatePrefix);
 
     deleteDammit(lOutFile);
   });
@@ -90,7 +105,7 @@ describe("[E] cli/format", () => {
       },
     );
 
-    expect(lExitCode).to.equal(2);
+    strictEqual(lExitCode, 2);
     deleteDammit(lOutFile);
   });
 });

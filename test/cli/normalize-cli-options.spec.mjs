@@ -1,5 +1,6 @@
+/* eslint-disable no-prototype-builtins */
 import { fileURLToPath } from "node:url";
-import { expect } from "chai";
+import { deepStrictEqual, strictEqual } from "node:assert";
 import normalizeCliOptions, {
   determineRulesFileName,
 } from "../../src/cli/normalize-cli-options.mjs";
@@ -13,7 +14,7 @@ describe("[I] cli/normalizeCliOptions - regular normalizations", () => {
   });
 
   it("normalizes empty options to no exclude, stdout, json and 'cjs, amd, es6'", async () => {
-    expect(await normalizeCliOptions({})).to.deep.equal({
+    deepStrictEqual(await normalizeCliOptions({}), {
       outputTo: "-",
       outputType: "err",
       validate: false,
@@ -21,9 +22,7 @@ describe("[I] cli/normalizeCliOptions - regular normalizations", () => {
   });
 
   it("normalizes --module-systems cjs,es6 to [cjs, es6]", async () => {
-    expect(
-      await normalizeCliOptions({ moduleSystems: "cjs,es6" }),
-    ).to.deep.equal({
+    deepStrictEqual(await normalizeCliOptions({ moduleSystems: "cjs,es6" }), {
       outputTo: "-",
       outputType: "err",
       moduleSystems: ["cjs", "es6"],
@@ -35,16 +34,12 @@ describe("[I] cli/normalizeCliOptions - regular normalizations", () => {
     const lNormalizedCliOptions = await normalizeCliOptions({
       moduleSystems: " amd,cjs ,  es6 ",
     });
-    expect(lNormalizedCliOptions.moduleSystems).to.deep.equal([
-      "amd",
-      "cjs",
-      "es6",
-    ]);
+    deepStrictEqual(lNormalizedCliOptions.moduleSystems, ["amd", "cjs", "es6"]);
   });
 
   it("-c / --config without params gets translated to -v/ --validate.", async () => {
     process.chdir("test/cli/__fixtures__/normalize-config/json-only");
-    expect(await normalizeCliOptions({ config: true })).to.deep.equal({
+    deepStrictEqual(await normalizeCliOptions({ config: true }), {
       outputTo: "-",
       outputType: "err",
       rulesFile: ".dependency-cruiser.json",
@@ -56,16 +51,17 @@ describe("[I] cli/normalizeCliOptions - regular normalizations", () => {
 
   it("-c / --config with something gets translated to -v/ --validate.", async () => {
     process.chdir("test/cli/__fixtures__/normalize-config/json-only");
-    expect(
+    deepStrictEqual(
       await normalizeCliOptions({ config: ".dependency-cruiser.json" }),
-    ).to.deep.equal({
-      outputTo: "-",
-      outputType: "err",
-      rulesFile: ".dependency-cruiser.json",
-      ruleSet: {},
-      config: ".dependency-cruiser.json",
-      validate: true,
-    });
+      {
+        outputTo: "-",
+        outputType: "err",
+        rulesFile: ".dependency-cruiser.json",
+        ruleSet: {},
+        config: ".dependency-cruiser.json",
+        validate: true,
+      },
+    );
   });
 
   it("-v argument assumes .dependency-cruiser.json for rules (and borks if it doesn't exist)", async () => {
@@ -73,13 +69,13 @@ describe("[I] cli/normalizeCliOptions - regular normalizations", () => {
     try {
       await normalizeCliOptions({ validate: true });
     } catch (pError) {
-      expect(pError.message).to.include(".dependency-cruiser.(c)js");
+      strictEqual(pError.message.includes(".dependency-cruiser.(c)js"), true);
     }
   });
 
   it("-v finds .dependency-cruiser.js when no parameters to it are passed and it exists", async () => {
     process.chdir("test/cli/__fixtures__/normalize-config/js-only");
-    expect(await normalizeCliOptions({ validate: true })).to.deep.equal({
+    deepStrictEqual(await normalizeCliOptions({ validate: true }), {
       outputTo: "-",
       outputType: "err",
       rulesFile: ".dependency-cruiser.js",
@@ -90,7 +86,7 @@ describe("[I] cli/normalizeCliOptions - regular normalizations", () => {
 
   it("-v finds .dependency-cruiser.json when no parameters to it are passed and it exists", async () => {
     process.chdir("test/cli/__fixtures__/normalize-config/json-only");
-    expect(await normalizeCliOptions({ validate: true })).to.deep.equal({
+    deepStrictEqual(await normalizeCliOptions({ validate: true }), {
       outputTo: "-",
       outputType: "err",
       rulesFile: ".dependency-cruiser.json",
@@ -101,7 +97,7 @@ describe("[I] cli/normalizeCliOptions - regular normalizations", () => {
 
   it("-v finds .dependency-cruiser.json when no parameters to it are passed and also the .js variant exists", async () => {
     process.chdir("test/cli/__fixtures__/normalize-config/both-js-and-json");
-    expect(await normalizeCliOptions({ validate: true })).to.deep.equal({
+    deepStrictEqual(await normalizeCliOptions({ validate: true }), {
       outputTo: "-",
       outputType: "err",
       rulesFile: ".dependency-cruiser.json",
@@ -116,72 +112,78 @@ describe("[I] cli/normalizeCliOptions - regular normalizations", () => {
         validate: "./non-existing-config-file-name",
       });
     } catch (pError) {
-      expect(pError.message).to.include("./non-existing-config-file-name");
+      strictEqual(
+        pError.message.includes("non-existing-config-file-name"),
+        true,
+      );
     }
   });
 
   it("-v with parameter uses that parameter as rules file", async () => {
-    expect(
+    deepStrictEqual(
       await normalizeCliOptions({
         validate: "./test/cli/__fixtures__/rules.empty.json",
       }),
-    ).to.deep.equal({
-      outputTo: "-",
-      outputType: "err",
-      rulesFile: "./test/cli/__fixtures__/rules.empty.json",
-      ruleSet: {},
-      validate: true,
-    });
+      {
+        outputTo: "-",
+        outputType: "err",
+        rulesFile: "./test/cli/__fixtures__/rules.empty.json",
+        ruleSet: {},
+        validate: true,
+      },
+    );
   });
 
   it("a rules file with comments gets the comments stripped out & parsed", async () => {
-    expect(
+    deepStrictEqual(
       await normalizeCliOptions({
         validate: "./test/cli/__fixtures__/rules.withcomments.json",
       }),
-    ).to.deep.equal({
-      outputTo: "-",
-      outputType: "err",
-      rulesFile: "./test/cli/__fixtures__/rules.withcomments.json",
-      ruleSet: {
-        forbidden: [
-          {
-            name: "sub-not-allowed",
-            severity: "warn",
-            from: {},
-            to: {
-              path: "sub",
+      {
+        outputTo: "-",
+        outputType: "err",
+        rulesFile: "./test/cli/__fixtures__/rules.withcomments.json",
+        ruleSet: {
+          forbidden: [
+            {
+              name: "sub-not-allowed",
+              severity: "warn",
+              from: {},
+              to: {
+                path: "sub",
+              },
             },
-          },
-        ],
+          ],
+        },
+        validate: true,
       },
-      validate: true,
-    });
+    );
   });
 
   it("accepts and interprets a javascript rule file (relative path)", async () => {
-    expect(
+    deepStrictEqual(
       await normalizeCliOptions({
         validate: "./test/cli/__fixtures__/rules.withcomments.js",
       }),
-    ).to.deep.equal({
-      outputTo: "-",
-      outputType: "err",
-      rulesFile: "./test/cli/__fixtures__/rules.withcomments.js",
-      ruleSet: {
-        forbidden: [
-          {
-            name: "sub-not-allowed",
-            severity: "warn",
-            from: {},
-            to: {
-              path: "sub",
+      {
+        outputTo: "-",
+        outputType: "err",
+        rulesFile: "./test/cli/__fixtures__/rules.withcomments.js",
+        ruleSet: {
+          forbidden: [
+            {
+              name: "sub-not-allowed",
+              severity: "warn",
+              from: {},
+              to: {
+                path: "sub",
+              },
             },
-          },
-        ],
+          ],
+        },
+        validate: true,
       },
-      validate: true,
-    });
+    );
   });
 
   it("accepts and interprets a javascript rule file (absolute path)", async () => {
@@ -189,9 +191,7 @@ describe("[I] cli/normalizeCliOptions - regular normalizations", () => {
       new URL("__fixtures__/rules.withcomments.js", import.meta.url),
     );
 
-    expect(
-      await normalizeCliOptions({ validate: lRulesFileName }),
-    ).to.deep.equal({
+    deepStrictEqual(await normalizeCliOptions({ validate: lRulesFileName }), {
       outputTo: "-",
       outputType: "err",
       rulesFile: lRulesFileName,
@@ -212,140 +212,125 @@ describe("[I] cli/normalizeCliOptions - regular normalizations", () => {
   });
 
   it("defaults tsConfig.fileName to 'tsconfig.json' if it wasn't specified", async () => {
-    expect(
+    deepStrictEqual(
       await normalizeCliOptions({
         validate: "./test/cli/__fixtures__/rules.tsConfigNoFileName.json",
       }),
-    ).to.deep.equal({
-      outputTo: "-",
-      outputType: "err",
-      rulesFile: "./test/cli/__fixtures__/rules.tsConfigNoFileName.json",
-      ruleSet: {
-        options: {
-          tsConfig: {
-            fileName: "tsconfig.json",
-          },
-        },
-      },
-      validate: true,
-    });
-  });
-
-  it("defaults webpackConfig.fileName to 'tsconfig.json' if it wasn't specified", async () => {
-    expect(
-      await normalizeCliOptions({
-        validate: "./test/cli/__fixtures__/rules.webpackConfigNoFileName.json",
-      }),
-    ).to.deep.equal({
-      outputTo: "-",
-      outputType: "err",
-      rulesFile: "./test/cli/__fixtures__/rules.webpackConfigNoFileName.json",
-      ruleSet: {
-        options: {
-          webpackConfig: {
-            fileName: "webpack.config.js",
-          },
-        },
-      },
-      validate: true,
-    });
-  });
-
-  it("progress without parameter defaults to cli-feedback", async () => {
-    expect(await normalizeCliOptions({ progress: true })).to.contain({
-      progress: "cli-feedback",
-    });
-  });
-
-  it("progress with parameter none ends up as progress: none", async () => {
-    expect(
-      await normalizeCliOptions({ progress: "performance-log" }),
-    ).to.contain({
-      progress: "performance-log",
-    });
-  });
-
-  it("cache with value true translates to {}", async () => {
-    expect(await normalizeCliOptions({ cache: true })).to.deep.contain({
-      cache: {},
-    });
-  });
-
-  it("cache with a string value translates to the folder name in the cache option", async () => {
-    expect(await normalizeCliOptions({ cache: "some-string" })).to.deep.contain(
       {
-        cache: { folder: "some-string" },
+        outputTo: "-",
+        outputType: "err",
+        rulesFile: "./test/cli/__fixtures__/rules.tsConfigNoFileName.json",
+        ruleSet: {
+          options: {
+            tsConfig: {
+              fileName: "tsconfig.json",
+            },
+          },
+        },
+        validate: true,
       },
     );
   });
 
-  it("cache with an numerical value (which is invalid) translates to explicitly false cache option", async () => {
-    expect(await normalizeCliOptions({ cache: 481 })).to.deep.contain({
-      cache: false,
-    });
+  it("defaults webpackConfig.fileName to 'tsconfig.json' if it wasn't specified", async () => {
+    deepStrictEqual(
+      await normalizeCliOptions({
+        validate: "./test/cli/__fixtures__/rules.webpackConfigNoFileName.json",
+      }),
+      {
+        outputTo: "-",
+        outputType: "err",
+        rulesFile: "./test/cli/__fixtures__/rules.webpackConfigNoFileName.json",
+        ruleSet: {
+          options: {
+            webpackConfig: {
+              fileName: "webpack.config.js",
+            },
+          },
+        },
+        validate: true,
+      },
+    );
   });
 
-  it("cache with value true translates explicitly false cache option", async () => {
-    expect(await normalizeCliOptions({ cache: false })).to.deep.contain({
-      cache: false,
-    });
+  it("progress without parameter defaults to cli-feedback", async () => {
+    const lResult = await normalizeCliOptions({ progress: true });
+    strictEqual(lResult.progress, "cli-feedback");
+  });
+
+  it("progress with parameter none ends up as progress: none", async () => {
+    const lResult = await normalizeCliOptions({ progress: "none" });
+    strictEqual(lResult.progress, "none");
+  });
+
+  it("cache with value true translates to {}", async () => {
+    const lResult = await normalizeCliOptions({ cache: true });
+    deepStrictEqual(lResult.cache, {});
+  });
+
+  it("cache with a string value translates to the folder name in the cache option", async () => {
+    const lResult = await normalizeCliOptions({ cache: "some-string" });
+    deepStrictEqual(lResult.cache, { folder: "some-string" });
+  });
+
+  it("cache with an numerical value (which is invalid) translates to explicitly false cache option", async () => {
+    const lResult = await normalizeCliOptions({ cache: 481 });
+    strictEqual(lResult.cache, false);
+  });
+
+  it("cache with value false translates explicitly false cache option", async () => {
+    const lResult = await normalizeCliOptions({ cache: false });
+    strictEqual(lResult.cache, false);
   });
 
   it("no cache option translates to still not having a cache option", async () => {
-    expect(
-      await normalizeCliOptions({ "not-a-cache-option": true }),
-    ).to.not.haveOwnProperty("cache");
+    const lResult = await normalizeCliOptions({ "not-a-cache-option": true });
+    strictEqual(lResult.hasOwnProperty("cache"), false);
   });
 
   it("cache-strategy with a string value == 'content' translates to the strategy 'content' in the cache option", async () => {
-    expect(
-      await normalizeCliOptions({ cacheStrategy: "content" }),
-    ).to.deep.contain({
-      cache: { strategy: "content" },
-    });
+    const lResult = await normalizeCliOptions({ cacheStrategy: "content" });
+    deepStrictEqual(lResult.cache, { strategy: "content" });
   });
 
   it("cache-strategy with a string value !== 'content' translates to the strategy 'metadata' in the cache option", async () => {
-    expect(
-      await normalizeCliOptions({ cacheStrategy: "some-string" }),
-    ).to.deep.contain({
-      cache: { strategy: "metadata" },
-    });
+    const lResult = await normalizeCliOptions({ cacheStrategy: "some-string" });
+    deepStrictEqual(lResult.cache, { strategy: "metadata" });
   });
 
   it("cache with a string value & cache-strategy with a string value translates both present in the cache option", async () => {
-    expect(
-      await normalizeCliOptions({
-        cache: "somewhere",
-        cacheStrategy: "some-string",
-      }),
-    ).to.deep.contain({
-      cache: { folder: "somewhere", strategy: "metadata" },
+    const lResult = await normalizeCliOptions({
+      cache: "somewhere",
+      cacheStrategy: "some-string",
+    });
+    deepStrictEqual(lResult.cache, {
+      folder: "somewhere",
+      strategy: "metadata",
     });
   });
 
   it("cache with a value of true & cache-strategy with a string value translates to a cache option with that strategy", async () => {
-    expect(
-      await normalizeCliOptions({ cache: true, cacheStrategy: "metadata" }),
-    ).to.deep.contain({
-      cache: { strategy: "metadata" },
+    const lResult = await normalizeCliOptions({
+      cache: true,
+      cacheStrategy: "metadata",
     });
+    deepStrictEqual(lResult.cache, { strategy: "metadata" });
   });
 
   it("cache with a value of false & cache-strategy with a string value translates to a cache option with that strategy", async () => {
-    expect(
-      await normalizeCliOptions({ cache: false, cacheStrategy: "metadata" }),
-    ).to.deep.contain({
-      cache: { strategy: "metadata" },
+    const lResult = await normalizeCliOptions({
+      cache: false,
+      cacheStrategy: "metadata",
     });
+    deepStrictEqual(lResult.cache, { strategy: "metadata" });
   });
 
   it("cache with a value of true & cache-strategy with a string value translates to a cache option with that strategy x", async () => {
-    expect(
-      await normalizeCliOptions({ cache: true, cacheStrategy: "content" }),
-    ).to.deep.contain({
-      cache: { strategy: "content" },
+    const lResult = await normalizeCliOptions({
+      cache: true,
+      cacheStrategy: "content",
     });
+    deepStrictEqual(lResult.cache, { strategy: "content" });
   });
 });
 
@@ -358,7 +343,7 @@ describe("[I] cli/normalizeCliOptions - known violations", () => {
 
   it("--ignore-known without params gets the default known-violations json", async () => {
     process.chdir("test/cli/__fixtures__/normalize-config/known-violations");
-    expect(await normalizeCliOptions({ ignoreKnown: true })).to.deep.equal({
+    deepStrictEqual(await normalizeCliOptions({ ignoreKnown: true }), {
       outputTo: "-",
       outputType: "err",
       knownViolationsFile: ".dependency-cruiser-known-violations.json",
@@ -369,17 +354,18 @@ describe("[I] cli/normalizeCliOptions - known violations", () => {
 
   it("--ignore-known with params gets the mentioned known-violations", async () => {
     process.chdir("test/cli/__fixtures__/normalize-config/known-violations");
-    expect(
+    deepStrictEqual(
       await normalizeCliOptions({
         ignoreKnown: "custom-known-violations.json",
       }),
-    ).to.deep.equal({
-      outputTo: "-",
-      outputType: "err",
-      knownViolationsFile: "custom-known-violations.json",
-      ignoreKnown: "custom-known-violations.json",
-      validate: false,
-    });
+      {
+        outputTo: "-",
+        outputType: "err",
+        knownViolationsFile: "custom-known-violations.json",
+        ignoreKnown: "custom-known-violations.json",
+        validate: false,
+      },
+    );
   });
 
   it("--ignore-known with non-existing file as param throws", async () => {
@@ -393,22 +379,25 @@ describe("[I] cli/normalizeCliOptions - known violations", () => {
     } catch (pError) {
       lError = pError.toString();
     }
-    expect(lError).to.contain(
-      `Can't open 'this-file-does-not-exist' for reading. Does it exist?`,
+    strictEqual(
+      lError.includes(
+        `Can't open 'this-file-does-not-exist' for reading. Does it exist?`,
+      ),
+      true,
     );
   });
 });
 
 describe("[U] cli/determineRulesFileName", () => {
   it("returns '.dependency-cruiser.json' when no file name is passed", () => {
-    expect(determineRulesFileName()).to.equal(".dependency-cruiser.json");
+    strictEqual(determineRulesFileName(), ".dependency-cruiser.json");
   });
 
   it("returns '.dependency-cruiser.json' when a non-string is passed", () => {
-    expect(determineRulesFileName(true)).to.equal(".dependency-cruiser.json");
+    strictEqual(determineRulesFileName(true), ".dependency-cruiser.json");
   });
 
   it("returns string passed when a string is passed", () => {
-    expect(determineRulesFileName("a string")).to.equal("a string");
+    strictEqual(determineRulesFileName("a string"), "a string");
   });
 });

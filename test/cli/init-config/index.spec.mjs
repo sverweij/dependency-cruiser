@@ -1,6 +1,6 @@
 import { writeFileSync, readFileSync } from "node:fs";
 import { join } from "node:path";
-import { use, expect } from "chai";
+import { expect } from "chai";
 import Ajv from "ajv";
 import deleteDammit from "../delete-dammit.utl.cjs";
 import initConfig from "../../../src/cli/init-config/index.mjs";
