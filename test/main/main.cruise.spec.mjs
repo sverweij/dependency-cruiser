@@ -1,7 +1,7 @@
 import { posix as path } from "node:path";
 import { readFileSync } from "node:fs";
 import { fileURLToPath } from "node:url";
-import { expect, use } from "chai";
+import { expect } from "chai";
 import Ajv from "ajv";
 import pathToPosix from "../../src/utl/path-to-posix.mjs";
 import cruiseResultSchema from "../../src/schema/cruise-result.schema.mjs";

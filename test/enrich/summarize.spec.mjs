@@ -1,4 +1,4 @@
-import { expect, use } from "chai";
+import { expect } from "chai";
 import Ajv from "ajv";
 import summarize from "../../src/enrich/summarize/index.mjs";
 import cruiseResultSchema from "../../src/schema/cruise-result.schema.mjs";

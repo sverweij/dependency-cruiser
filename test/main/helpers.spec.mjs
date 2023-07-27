@@ -1,4 +1,4 @@
-import { expect, use } from "chai";
+import { expect } from "chai";
 import { normalizeREProperties } from "../../src/main/helpers.mjs";
 
 const POTENTIAL_ARRAY_PROPERTIES = ["aap", "noot", "mies", "wim"];
