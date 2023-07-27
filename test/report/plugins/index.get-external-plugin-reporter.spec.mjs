@@ -1,4 +1,3 @@
-/* eslint-disable security/detect-non-literal-regexp */
 import { match, strictEqual } from "node:assert";
 import { join } from "node:path";
 import { fileURLToPath } from "node:url";
@@ -20,9 +19,9 @@ describe("[I] report/plugins - getExternalPluginReporter", () => {
     } catch (pError) {
       lErrorMessage = pError.message;
     }
-    match(
-      lErrorMessage,
-      new RegExp(`${lNoExitCodePlugin} is not a valid plugin`),
+    strictEqual(
+      lErrorMessage.includes(`${lNoExitCodePlugin} is not a valid plugin`),
+      true,
     );
   });
 
@@ -38,9 +37,9 @@ describe("[I] report/plugins - getExternalPluginReporter", () => {
     } catch (pError) {
       lErrorMessage = pError.message;
     }
-    match(
-      lErrorMessage,
-      new RegExp(`${lNoOutputPlugin} is not a valid plugin`),
+    strictEqual(
+      lErrorMessage.includes(`${lNoOutputPlugin} is not a valid plugin`),
+      true,
     );
   });
 
