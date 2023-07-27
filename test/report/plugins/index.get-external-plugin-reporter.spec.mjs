@@ -1,6 +1,7 @@
+/* eslint-disable security/detect-non-literal-regexp */
+import { match, strictEqual } from "node:assert";
 import { join } from "node:path";
 import { fileURLToPath } from "node:url";
-import { expect } from "chai";
 import { getExternalPluginReporter } from "../../../src/report/plugins.mjs";
 
 const __dirname = fileURLToPath(new URL(".", import.meta.url));
@@ -19,8 +20,9 @@ describe("[I] report/plugins - getExternalPluginReporter", () => {
     } catch (pError) {
       lErrorMessage = pError.message;
     }
-    expect(lErrorMessage).to.contain(
-      `${lNoExitCodePlugin} is not a valid plugin`,
+    match(
+      lErrorMessage,
+      new RegExp(`${lNoExitCodePlugin} is not a valid plugin`),
     );
   });
 
@@ -36,8 +38,9 @@ describe("[I] report/plugins - getExternalPluginReporter", () => {
     } catch (pError) {
       lErrorMessage = pError.message;
     }
-    expect(lErrorMessage).to.contain(
-      `${lNoOutputPlugin} is not a valid plugin`,
+    match(
+      lErrorMessage,
+      new RegExp(`${lNoOutputPlugin} is not a valid plugin`),
     );
   });
 
@@ -49,16 +52,18 @@ describe("[I] report/plugins - getExternalPluginReporter", () => {
     } catch (pError) {
       lErrorMessage = pError.message;
     }
-    expect(lErrorMessage).to.contain(
-      "Could not find reporter plugin 'this-plugin-does-not-exist'",
+    match(
+      lErrorMessage,
+      /Could not find reporter plugin 'this-plugin-does-not-exist'/,
     );
   });
 
   it("returns false when it's not a plugin", async () => {
-    expect(
+    strictEqual(
       await getExternalPluginReporter(`whatever-just-not-a-plugin`),
-    ).to.equal(false);
-    expect(getExternalPluginReporter()).to.equal(false);
+      false,
+    );
+    strictEqual(getExternalPluginReporter(), false);
   });
 
   it("throws when the plugin:reporter is not a valid plugin (package ref)", async () => {
@@ -69,7 +74,7 @@ describe("[I] report/plugins - getExternalPluginReporter", () => {
     } catch (pError) {
       lErrorMessage = pError.message;
     }
-    expect(lErrorMessage).to.contain(`watskeburt is not a valid plugin`);
+    match(lErrorMessage, /watskeburt is not a valid plugin/);
   });
 
   it("returns the plugin module when it's valid and exists", async () => {
@@ -81,8 +86,8 @@ describe("[I] report/plugins - getExternalPluginReporter", () => {
       summary: { totalCruised: 0 },
     });
 
-    expect(lResults).to.haveOwnProperty("output");
-    expect(lResults).to.haveOwnProperty("exitCode");
-    expect(lResults.exitCode).to.equal(0);
+    strictEqual(hasOwnProperty.call(lResults, "output"), true);
+    strictEqual(hasOwnProperty.call(lResults, "exitCode"), true);
+    strictEqual(lResults.exitCode, 0);
   });
 });
