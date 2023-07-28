@@ -1,4 +1,4 @@
-import { expect } from "chai";
+import { deepStrictEqual, strictEqual, match } from "node:assert";
 import MetaDataStrategy from "../../src/cache/metadata-strategy.mjs";
 
 const INTERESTING_EXTENSIONS = new Set([".aap", ".noot", ".mies"]);
@@ -40,7 +40,7 @@ describe("[U] cache/metadata-strategy - getRevisionData", () => {
     } catch (pError) {
       lError = pError.message;
     }
-    expect(lError).to.match(/The --cache option works in concert with git/);
+    match(lError, /The --cache option works in concert with git/);
   });
 
   it("if one of the listed changes doesn't exist on disk it gets shasum 'file not found'", async () => {
@@ -51,7 +51,7 @@ describe("[U] cache/metadata-strategy - getRevisionData", () => {
         name: "file-does-not-exist.aap",
       },
     ];
-    const lExpected = {
+    const lLstrictEqualed = {
       SHA1: DUMMY_SHA,
       changes: [
         {
@@ -62,19 +62,18 @@ describe("[U] cache/metadata-strategy - getRevisionData", () => {
       ],
     };
 
-    expect(
-      await new MetaDataStrategy().getRevisionData(
-        null,
-        null,
-        { exclude: {}, includeOnly: {} },
-        {
-          extensions: INTERESTING_EXTENSIONS,
-          interestingChangeTypes: INTERESTING_CHANGE_TYPES,
-          shaRetrievalFn: () => DUMMY_SHA,
-          diffListFn: () => lInputChanges,
-        },
-      ),
-    ).to.deep.equal(lExpected);
+    const lFound = await new MetaDataStrategy().getRevisionData(
+      null,
+      null,
+      { exclude: {}, includeOnly: {} },
+      {
+        extensions: INTERESTING_EXTENSIONS,
+        interestingChangeTypes: INTERESTING_CHANGE_TYPES,
+        shaRetrievalFn: () => DUMMY_SHA,
+        diffListFn: () => lInputChanges,
+      },
+    );
+    deepStrictEqual(lFound, lLstrictEqualed);
   });
 
   it("if a listed change does exist on disk shasum is calculated", async () => {
@@ -85,7 +84,7 @@ describe("[U] cache/metadata-strategy - getRevisionData", () => {
         name: "test/cache/__mocks__/calculate-shasum-of-this.aap",
       },
     ];
-    const lExpected = {
+    const lLstrictEqualed = {
       SHA1: DUMMY_SHA,
       changes: [
         {
@@ -95,39 +94,37 @@ describe("[U] cache/metadata-strategy - getRevisionData", () => {
         },
       ],
     };
-
-    expect(
-      await new MetaDataStrategy().getRevisionData(
-        null,
-        null,
-        { exclude: {}, includeOnly: {} },
-        {
-          extensions: INTERESTING_EXTENSIONS,
-          interestingChangeTypes: INTERESTING_CHANGE_TYPES,
-          shaRetrievalFn: () => DUMMY_SHA,
-          diffListFn: () => lInputChanges,
-        },
-      ),
-    ).to.deep.equal(lExpected);
+    const lFound = await new MetaDataStrategy().getRevisionData(
+      null,
+      null,
+      { exclude: {}, includeOnly: {} },
+      {
+        extensions: INTERESTING_EXTENSIONS,
+        interestingChangeTypes: INTERESTING_CHANGE_TYPES,
+        shaRetrievalFn: () => DUMMY_SHA,
+        diffListFn: () => lInputChanges,
+      },
+    );
+    deepStrictEqual(lFound, lLstrictEqualed);
   });
 
   it("if there's no changes the change set contains the passed sha & an empty array", async () => {
-    expect(
-      await new MetaDataStrategy().getRevisionData(
-        null,
-        null,
-        { exclude: {}, includeOnly: {} },
-        {
-          extensions: INTERESTING_EXTENSIONS,
-          interestingChangeTypes: INTERESTING_CHANGE_TYPES,
-          shaRetrievalFn: () => DUMMY_SHA,
-          diffListFn: () => [],
-        },
-      ),
-    ).to.deep.equal({
+    const lLstrictEqualed = {
       SHA1: DUMMY_SHA,
       changes: [],
-    });
+    };
+    const lFound = await new MetaDataStrategy().getRevisionData(
+      null,
+      null,
+      { exclude: {}, includeOnly: {} },
+      {
+        extensions: INTERESTING_EXTENSIONS,
+        interestingChangeTypes: INTERESTING_CHANGE_TYPES,
+        shaRetrievalFn: () => DUMMY_SHA,
+        diffListFn: () => [],
+      },
+    );
+    deepStrictEqual(lFound, lLstrictEqualed);
   });
 
   it("returns only the extensions passed", async () => {
@@ -156,21 +153,7 @@ describe("[U] cache/metadata-strategy - getRevisionData", () => {
         name: "no-extension-hence-ignored",
       },
     ];
-
-    expect(
-      await new MetaDataStrategy().getRevisionData(
-        null,
-        null,
-        { exclude: {}, includeOnly: {} },
-        {
-          extensions: lLimitedExtensions,
-          interestingChangeTypes: INTERESTING_CHANGE_TYPES,
-          shaRetrievalFn: () => DUMMY_SHA,
-          diffListFn: () => lInputChanges,
-          checksumFn: dummyCheckSumFunction,
-        },
-      ),
-    ).to.deep.equal({
+    const lFound = {
       SHA1: DUMMY_SHA,
       changes: [
         {
@@ -185,7 +168,20 @@ describe("[U] cache/metadata-strategy - getRevisionData", () => {
           checksum: "dummy-checksum",
         },
       ],
-    });
+    };
+    const lstrictEqualed = await new MetaDataStrategy().getRevisionData(
+      null,
+      null,
+      { exclude: {}, includeOnly: {} },
+      {
+        extensions: lLimitedExtensions,
+        interestingChangeTypes: INTERESTING_CHANGE_TYPES,
+        shaRetrievalFn: () => DUMMY_SHA,
+        diffListFn: () => lInputChanges,
+        checksumFn: dummyCheckSumFunction,
+      },
+    );
+    deepStrictEqual(lstrictEqualed, lFound);
   });
 
   it("returns only the changeTypes passed", async () => {
@@ -218,21 +214,7 @@ describe("[U] cache/metadata-strategy - getRevisionData", () => {
         name: "untracked-hence-ignored.aap",
       },
     ];
-
-    expect(
-      await new MetaDataStrategy().getRevisionData(
-        null,
-        null,
-        { exclude: {}, includeOnly: {} },
-        {
-          extensions: INTERESTING_EXTENSIONS,
-          interestingChangeTypes: lLimitedChangeTypes,
-          shaRetrievalFn: () => DUMMY_SHA,
-          diffListFn: () => lInputChanges,
-          checksumFn: dummyCheckSumFunction,
-        },
-      ),
-    ).to.deep.equal({
+    const lLstrictEqualed = {
       SHA1: DUMMY_SHA,
       changes: [
         {
@@ -252,7 +234,21 @@ describe("[U] cache/metadata-strategy - getRevisionData", () => {
           checksum: "dummy-checksum",
         },
       ],
-    });
+    };
+    const lFound = await new MetaDataStrategy().getRevisionData(
+      null,
+      null,
+      { exclude: {}, includeOnly: {} },
+      {
+        extensions: INTERESTING_EXTENSIONS,
+        interestingChangeTypes: lLimitedChangeTypes,
+        shaRetrievalFn: () => DUMMY_SHA,
+        diffListFn: () => lInputChanges,
+        checksumFn: dummyCheckSumFunction,
+      },
+    );
+
+    deepStrictEqual(lLstrictEqualed, lFound);
   });
 
   it("by default only returns a subset of change types", async () => {
@@ -304,21 +300,7 @@ describe("[U] cache/metadata-strategy - getRevisionData", () => {
         name: "ignored-hence-ignored.aap",
       },
     ];
-
-    expect(
-      await new MetaDataStrategy().getRevisionData(
-        null,
-        null,
-        { exclude: {}, includeOnly: {} },
-        {
-          extensions: INTERESTING_EXTENSIONS,
-          // interestingChangeTypes NOT specified here
-          shaRetrievalFn: () => DUMMY_SHA,
-          diffListFn: () => lInputChanges,
-          checksumFn: dummyCheckSumFunction,
-        },
-      ),
-    ).to.deep.equal({
+    const lLstrictEqualed = {
       SHA1: DUMMY_SHA,
       changes: [
         {
@@ -358,7 +340,21 @@ describe("[U] cache/metadata-strategy - getRevisionData", () => {
           checksum: "dummy-checksum",
         },
       ],
-    });
+    };
+    const lFound = await new MetaDataStrategy().getRevisionData(
+      null,
+      null,
+      { exclude: {}, includeOnly: {} },
+      {
+        extensions: INTERESTING_EXTENSIONS,
+        // interestingChangeTypes NOT specified here
+        shaRetrievalFn: () => DUMMY_SHA,
+        diffListFn: () => lInputChanges,
+        checksumFn: dummyCheckSumFunction,
+      },
+    );
+
+    deepStrictEqual(lLstrictEqualed, lFound);
   });
 });
 
@@ -383,62 +379,66 @@ describe("[U] cache/metadata-strategy - revisionDataEqual", () => {
   ];
 
   it("returns false when revision data objects are don't exist", () => {
-    expect(new MetaDataStrategy().revisionDataEqual(null, null)).to.equal(
-      false,
-    );
+    strictEqual(new MetaDataStrategy().revisionDataEqual(null, null), false);
   });
 
   it("returns false when old revision data object doesn't exist", () => {
-    expect(
+    strictEqual(
       new MetaDataStrategy().revisionDataEqual(null, {
         SHA1: "some-sha",
         changes: [],
       }),
-    ).to.equal(false);
+      false,
+    );
   });
 
   it("returns false when new revision data object doesn't exist", () => {
-    expect(
+    strictEqual(
       new MetaDataStrategy().revisionDataEqual(
         { SHA1: "some-sha", changes: [] },
         null,
       ),
-    ).to.equal(false);
+      false,
+    );
   });
 
   it("returns false when sha-sums aren't equal", () => {
-    expect(
+    strictEqual(
       new MetaDataStrategy().revisionDataEqual(
         { SHA1: "some-sha", changes: [] },
         { SHA1: "some-other-sha", changes: [] },
       ),
-    ).to.equal(false);
+      false,
+    );
   });
 
   it("returns false when sha-sums are equal, but changes are not", () => {
-    expect(
+    strictEqual(
       new MetaDataStrategy().revisionDataEqual(
         { SHA1: "some-sha", changes: [] },
         { SHA1: "some-sha", changes: lChanges },
       ),
-    ).to.equal(false);
+      false,
+    );
   });
 
   it("returns true when sha-sums are equal, and changes are as well", () => {
-    expect(
+    strictEqual(
       new MetaDataStrategy().revisionDataEqual(
         { SHA1: "some-sha", changes: lChanges },
         { SHA1: "some-sha", changes: lChanges },
       ),
-    ).to.equal(true);
+      true,
+    );
   });
 
   it("returns true when sha-sums are equal, and changes are as well (even when neither contain changes)", () => {
-    expect(
+    strictEqual(
       new MetaDataStrategy().revisionDataEqual(
         { SHA1: "some-sha", changes: [] },
         { SHA1: "some-sha", changes: [] },
       ),
-    ).to.equal(true);
+      true,
+    );
   });
 });

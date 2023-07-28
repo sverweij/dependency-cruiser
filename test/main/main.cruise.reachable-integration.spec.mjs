@@ -1,11 +1,11 @@
 import { join } from "node:path";
-import { expect, use } from "chai";
-import chaiJSONSchema from "chai-json-schema";
+import { expect } from "chai";
+import Ajv from "ajv";
 import cruise from "../../src/main/cruise.mjs";
 import normalizeOptions from "../../src/cli/normalize-cli-options.mjs";
 import cruiseResultSchema from "../../src/schema/cruise-result.schema.mjs";
 
-use(chaiJSONSchema);
+const ajv = new Ajv();
 
 const WORKING_DIRECTORY = process.cwd();
 
@@ -62,7 +62,7 @@ describe("[E] main.cruise - reachable integration", () => {
         },
       },
     ]);
-    expect(lResult).to.be.jsonSchema(cruiseResultSchema);
+    ajv.validate(cruiseResultSchema, lResult);
   });
 
   it("finds the dead wood from an 'allowed' rule set", async () => {
@@ -96,7 +96,7 @@ describe("[E] main.cruise - reachable integration", () => {
         },
       },
     ]);
-    expect(lResult).to.be.jsonSchema(cruiseResultSchema);
+    ajv.validate(cruiseResultSchema, lResult);
   });
 
   it("finds the stuff that needs to be isolated from an 'allowed' rule set", async () => {
@@ -122,6 +122,6 @@ describe("[E] main.cruise - reachable integration", () => {
         },
       },
     ]);
-    expect(lResult).to.be.jsonSchema(cruiseResultSchema);
+    ajv.validate(cruiseResultSchema, lResult);
   });
 });

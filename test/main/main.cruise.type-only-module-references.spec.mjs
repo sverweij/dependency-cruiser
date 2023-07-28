@@ -1,5 +1,5 @@
-import { expect, use } from "chai";
-import chaiJSONSchema from "chai-json-schema";
+import { deepStrictEqual } from "node:assert";
+import Ajv from "ajv";
 import cruise from "../../src/main/cruise.mjs";
 import cruiseResultSchema from "../../src/schema/cruise-result.schema.mjs";
 import { createRequireJSON } from "../backwards.utl.mjs";
@@ -14,7 +14,7 @@ const outputNoTS = normBaseDirectory(
   requireJSON("./__mocks__/type-only-module-references/output-no-ts.json"),
 );
 
-use(chaiJSONSchema);
+const ajv = new Ajv();
 
 const WORKING_DIRECTORY = process.cwd();
 
@@ -38,8 +38,8 @@ describe("[E] main.cruise - type only module references", () => {
       { bustTheCache: true, resolveLicenses: true },
     );
 
-    expect(lResult.output).to.deep.equal(output);
-    expect(lResult.output).to.be.jsonSchema(cruiseResultSchema);
+    deepStrictEqual(lResult.output, output);
+    ajv.validate(cruiseResultSchema, lResult.output);
   });
 
   it("don't find it when not looking for pre-compilation deps", async () => {
@@ -53,7 +53,7 @@ describe("[E] main.cruise - type only module references", () => {
       { bustTheCache: true },
     );
 
-    expect(lResult.output).to.deep.equal(outputNoTS);
-    expect(lResult.output).to.be.jsonSchema(cruiseResultSchema);
+    deepStrictEqual(lResult.output, outputNoTS);
+    ajv.validate(cruiseResultSchema, lResult.output);
   });
 });

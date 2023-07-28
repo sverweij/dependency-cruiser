@@ -1,4 +1,5 @@
-import { expect } from "chai";
+/* eslint-disable prefer-regex-literals */
+import { match, doesNotMatch, strictEqual } from "node:assert";
 import markdown from "../../../src/report/markdown.mjs";
 import everythingFineResult from "./__mocks__/everything-fine.mjs";
 import validationMoreThanOnce from "./__mocks__/violation-more-than-once.mjs";
@@ -14,11 +15,11 @@ describe("[I] report/markdown", () => {
   it("happy day no errors", () => {
     const lResult = markdown(everythingFineResult);
 
-    expect(lResult.output).to.contain(lDefaultTitle);
-    expect(lResult.output).to.contain(lDefaultSummaryHeader);
-    expect(lResult.output).to.contain(lOkeliDokelyKey);
-    expect(lResult.output).to.contain(lOkeliDokelyHeader);
-    expect(lResult.exitCode).to.equal(0);
+    match(lResult.output, new RegExp(lDefaultTitle));
+    match(lResult.output, new RegExp(lDefaultSummaryHeader));
+    match(lResult.output, new RegExp(lOkeliDokelyKey));
+    match(lResult.output, new RegExp(lOkeliDokelyHeader));
+    strictEqual(lResult.exitCode, 0);
   });
 
   it("happy day no errors - custom options", () => {
@@ -28,116 +29,120 @@ describe("[I] report/markdown", () => {
       summaryHeader: lCustomSummaryHeader,
     });
 
-    expect(lResult.output).to.not.contain(lDefaultTitle);
-    expect(lResult.output).to.not.contain(lDefaultSummaryHeader);
-    expect(lResult.output).to.contain(lCustomSummaryHeader);
-    expect(lResult.output).to.contain(lOkeliDokelyKey);
-    expect(lResult.output).to.contain(lOkeliDokelyHeader);
-    expect(lResult.exitCode).to.equal(0);
+    doesNotMatch(lResult.output, new RegExp(lDefaultTitle));
+    doesNotMatch(lResult.output, new RegExp(lDefaultSummaryHeader));
+    match(lResult.output, new RegExp(lCustomSummaryHeader));
+    match(lResult.output, new RegExp(lOkeliDokelyKey));
+    match(lResult.output, new RegExp(lOkeliDokelyHeader));
+    strictEqual(lResult.exitCode, 0);
   });
 
   it("report with errors", () => {
-    const lReport = markdown(validationMoreThanOnce);
+    const lResult = markdown(validationMoreThanOnce);
 
-    expect(lReport.output).to.not.contain(lOkeliDokelyKey);
-    expect(lReport.output).to.not.contain(lOkeliDokelyHeader);
-    expect(lReport.output).to.contain("<details>");
-    expect(lReport.output).to.contain("All violations");
-    expect(lReport.output).to.contain("**127** modules");
-    expect(lReport.output).to.contain("**259** dependencies");
-    expect(lReport.output).to.contain("**0** errors");
-    expect(lReport.output).to.contain("**1** warnings");
-    expect(lReport.output).to.contain("**2** informational");
+    doesNotMatch(lResult.output, new RegExp(lOkeliDokelyKey));
+    doesNotMatch(lResult.output, new RegExp(lOkeliDokelyHeader));
+    match(lResult.output, /<details>/);
+    match(lResult.output, /All violations/);
+    match(lResult.output, /\*\*127\*\* modules/);
+    match(lResult.output, /\*\*259\*\* dependencies/);
+    match(lResult.output, /\*\*0\*\* errors/);
+    match(lResult.output, /\*\*1\*\* warnings/);
+    match(lResult.output, /\*\*2\*\* informational/);
 
-    expect(lReport.exitCode).to.equal(0);
+    strictEqual(lResult.exitCode, 0);
   });
 
   it("report with errors - custom options", () => {
-    const lReport = markdown(validationMoreThanOnce, {
+    const lResult = markdown(validationMoreThanOnce, {
       collapseDetails: false,
     });
 
-    expect(lReport.output).to.not.contain(lOkeliDokelyKey);
-    expect(lReport.output).to.not.contain(lOkeliDokelyHeader);
-    expect(lReport.output).to.not.contain("<details>");
-    expect(lReport.output).to.contain("All violations");
-    expect(lReport.output).to.contain("**127** modules");
-    expect(lReport.output).to.contain("**259** dependencies");
-    expect(lReport.output).to.contain("**0** errors");
-    expect(lReport.output).to.contain("**1** warnings");
-    expect(lReport.output).to.contain("**2** informational");
+    doesNotMatch(lResult.output, new RegExp(lOkeliDokelyKey));
+    doesNotMatch(lResult.output, new RegExp(lOkeliDokelyHeader));
+    doesNotMatch(lResult.output, /<details>/);
+    match(lResult.output, /All violations/);
+    match(lResult.output, /\*\*127\*\* modules/);
+    match(lResult.output, /\*\*259\*\* dependencies/);
+    match(lResult.output, /\*\*0\*\* errors/);
+    match(lResult.output, /\*\*1\*\* warnings/);
+    match(lResult.output, /\*\*2\*\* informational/);
 
-    expect(lReport.exitCode).to.equal(0);
+    strictEqual(lResult.exitCode, 0);
   });
 
   it("report with violations and ignored violations", () => {
-    const lReport = markdown(validationMoreThanOnceWithAnIgnore);
+    const lResult = markdown(validationMoreThanOnceWithAnIgnore);
 
-    expect(lReport.output).to.not.contain(lOkeliDokelyKey);
-    expect(lReport.output).to.not.contain(lOkeliDokelyHeader);
-    expect(lReport.output).to.contain("All violations");
-    expect(lReport.output).to.contain("**127** modules");
-    expect(lReport.output).to.contain("**259** dependencies");
-    expect(lReport.output).to.contain("**0** errors");
-    expect(lReport.output).to.contain("**0** warnings");
-    expect(lReport.output).to.contain("**1** informational");
-    expect(lReport.output).to.contain("**2** ignored");
-    expect(lReport.output).to.contain(
-      "|:warning:&nbsp;_cli-to-main-only-warn_|**0**|**1**|",
+    doesNotMatch(lResult.output, new RegExp(lOkeliDokelyKey));
+    doesNotMatch(lResult.output, new RegExp(lOkeliDokelyHeader));
+    match(lResult.output, /All violations/);
+    match(lResult.output, /\*\*127\*\* modules/);
+    match(lResult.output, /\*\*259\*\* dependencies/);
+    match(lResult.output, /\*\*0\*\* errors/);
+    match(lResult.output, /\*\*0\*\* warnings/);
+    match(lResult.output, /\*\*1\*\* informational/);
+    match(lResult.output, /\*\*2\*\* ignored/);
+    match(
+      lResult.output,
+      /|:warning:&nbsp;_cli-to-main-only-warn_|\*\*0\*\*|\*\*1\*\*|/,
     );
-    expect(lReport.output).to.contain(
-      ":see_no_evil:&nbsp;_cli-to-main-only-warn_",
-    );
-    expect(lReport.output).to.contain("src/cli/compileConfig/index.js");
+    match(lResult.output, /:see_no_evil:&nbsp;_cli-to-main-only-warn_/);
+    match(lResult.output, /src\/cli\/compileConfig\/index\.js/);
 
-    expect(lReport.exitCode).to.equal(0);
+    strictEqual(lResult.exitCode, 0);
   });
 
   it("report with violations and ignored violations hidden", () => {
-    const lReport = markdown(validationMoreThanOnceWithAnIgnore, {
+    const lResult = markdown(validationMoreThanOnceWithAnIgnore, {
       includeIgnoredInSummary: false,
       includeIgnoredInDetails: false,
     });
 
-    expect(lReport.output).to.not.contain(lOkeliDokelyKey);
-    expect(lReport.output).to.not.contain(lOkeliDokelyHeader);
-    expect(lReport.output).to.contain("All violations");
-    expect(lReport.output).to.contain("**127** modules");
-    expect(lReport.output).to.contain("**259** dependencies");
-    expect(lReport.output).to.contain("**0** errors");
-    expect(lReport.output).to.contain("**0** warnings");
-    expect(lReport.output).to.contain("**1** informational");
-    expect(lReport.output).to.contain("**2** ignored");
-    expect(lReport.output).to.not.contain(
-      "|:warning:&nbsp;_cli-to-main-only-warn_|**0**|**1**|",
+    doesNotMatch(lResult.output, new RegExp(lOkeliDokelyKey));
+    doesNotMatch(lResult.output, new RegExp(lOkeliDokelyHeader));
+    match(lResult.output, /All violations/);
+    match(lResult.output, /\*\*127\*\* modules/);
+    match(lResult.output, /\*\*259\*\* dependencies/);
+    match(lResult.output, /\*\*0\*\* errors/);
+    match(lResult.output, /\*\*0\*\* warnings/);
+    match(lResult.output, /\*\*1\*\* informational/);
+    match(lResult.output, /\*\*2\*\* ignored/);
+    doesNotMatch(
+      lResult.output,
+      /\|:warning:&nbsp;_cli-to-main-only-warn_\|\*\*0*\*\|\*\*1*\*\|/,
     );
-    expect(lReport.output).to.not.contain(
-      ":see_no_evil:&nbsp;_cli-to-main-only-warn_",
+    doesNotMatch(
+      lResult.output,
+      new RegExp(":see_no_evil:&nbsp;_cli-to-main-only-warn_"),
     );
-    expect(lReport.output).to.not.contain("src/cli/compileConfig/index.js");
+    doesNotMatch(lResult.output, new RegExp("src/cli/compileConfig/index.js"));
 
-    expect(lReport.exitCode).to.equal(0);
+    strictEqual(lResult.exitCode, 0);
   });
 
   it("report nicely on orphans, cycles and metric rules", () => {
     const lResult = markdown(orphansCyclesMetrics);
 
-    expect(lResult.output).to.contain(lDefaultTitle);
-    expect(lResult.output).to.contain(lDefaultSummaryHeader);
-    expect(lResult.output).to.not.contain(lOkeliDokelyKey);
-    expect(lResult.output).to.not.contain(lOkeliDokelyHeader);
+    match(lResult.output, new RegExp(lDefaultTitle));
+    match(lResult.output, new RegExp(lDefaultSummaryHeader));
+    doesNotMatch(lResult.output, new RegExp(lOkeliDokelyKey));
+    doesNotMatch(lResult.output, new RegExp(lOkeliDokelyHeader));
 
     // empty 'to' column for module only rules
-    expect(lResult.output).to.contain(
-      "|:exclamation:&nbsp;_no-orphans_|src/schema/baseline-violations.schema.js||",
+    match(
+      lResult.output,
+      /|:exclamation:&nbsp;_no-orphans_|src\/schema\/baseline-violations.schema.js||/,
     );
     // cycles as cycles in the 'to' column:
-    expect(lResult.output).to.contain(
-      "|:warning:&nbsp;_no-folder-cycles_|src/extract/parse|src/extract/transpile &rightarrow;<br/>src/extract/parse|",
+    match(
+      lResult.output,
+      /|:warning:&nbsp;_no-folder-cycles_|src\/extract\/parse|src\/extract\/transpile &rightarrow;<br\/>src\/extract\/parse|/,
     );
     // metrics violations with the 'instability' for the involved modules in:
-    expect(lResult.output).to.contain(
-      '|:grey_exclamation:&nbsp;_SDP_|src/extract/gather-initial-sources.js&nbsp;<span class="extra">(I: 75%)</span>|src/extract/transpile/meta.js&nbsp;<span class="extra">(I: 80%)</span>|',
+    match(
+      lResult.output,
+      /|:grey_exclamation:&nbsp;_SDP_|src\/extract\/gather-initial-sources.js&nbsp;<span class="extra">(I: 75%)<\/span>|src\/extract\/transpile\/meta.js&nbsp;<span class="extra">(I: 80%)<\/span>|/,
     );
   });
 });

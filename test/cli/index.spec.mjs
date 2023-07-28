@@ -1,10 +1,10 @@
-import { unlinkSync, readFileSync } from "node:fs";
+import { readFileSync, unlinkSync } from "node:fs";
 // path.posix instead of path because otherwise on win32 the resulting
 // outputTo would contain \\ instead of / which for this unit test doesn't matter
+import { doesNotThrow, strictEqual, throws } from "node:assert";
 import { join, posix as path } from "node:path";
-import { expect } from "chai";
-import intercept from "intercept-stdout";
 import chalk from "chalk";
+import intercept from "intercept-stdout";
 import cli from "../../src/cli/index.mjs";
 import { assertFileEqual, assertJSONFileEqual } from "./asserthelpers.utl.mjs";
 import deleteDammit from "./delete-dammit.utl.cjs";
@@ -183,7 +183,7 @@ function runFileBasedTests(pModuleType) {
     it(pPair.description, async () => {
       const lExitCode = await cli([pPair.dirOrFile], pPair.options);
 
-      expect(lExitCode).to.equal(pPair.expectExitCode);
+      strictEqual(lExitCode, pPair.expectExitCode);
       if (pPair.options.outputType === "json") {
         assertJSONFileEqual(
           pPair.options.outputTo,
@@ -232,7 +232,7 @@ describe("[E] cli/index", () => {
         },
       );
 
-      expect(lExitCode).to.equal(0);
+      strictEqual(lExitCode, 0);
       assertJSONFileEqual(lOutputTo, path.join(FIX_DIR, lOutputFileName));
     });
 
@@ -246,7 +246,7 @@ describe("[E] cli/index", () => {
       });
       const lExpectedTransgressions = 0;
 
-      expect(lExitCode).to.equal(lExpectedTransgressions);
+      strictEqual(lExitCode, lExpectedTransgressions);
     });
 
     it("returns the number of transgressions if outputType === 'error' ", async () => {
@@ -259,7 +259,7 @@ describe("[E] cli/index", () => {
       });
       const lExpectedTransgressions = 3;
 
-      expect(lExitCode).to.equal(lExpectedTransgressions);
+      strictEqual(lExitCode, lExpectedTransgressions);
     });
 
     it("dependency-cruise -i shows meta info about the current environment", async () => {
@@ -271,9 +271,12 @@ describe("[E] cli/index", () => {
 
       unhookIntercept();
 
-      expect(lExitCode).to.equal(0);
-      expect(lCapturedStdout).to.contain(
-        "If you need a supported, but not enabled transpiler",
+      strictEqual(lExitCode, 0);
+      strictEqual(
+        lCapturedStdout.includes(
+          "If you need a supported, but not enabled transpiler",
+        ),
+        true,
       );
     });
 
@@ -292,9 +295,12 @@ describe("[E] cli/index", () => {
       unhookInterceptStdOut();
       unhookInterceptStdError();
 
-      expect(lExitCode).to.equal(1);
-      expect(lCapturedStderr).to.contain(
-        "ERROR: Can't open 'this-doesnot-exist' for reading. Does it exist?\n",
+      strictEqual(lExitCode, 1);
+      strictEqual(
+        lCapturedStderr.includes(
+          "ERROR: Can't open 'this-doesnot-exist' for reading. Does it exist?\n",
+        ),
+        true,
       );
     });
 
@@ -316,9 +322,12 @@ describe("[E] cli/index", () => {
         lCapturedStderr += pText;
       })();
 
-      expect(lExitCode).to.equal(1);
-      expect(lCapturedStderr).to.contain(
-        "didn't work. Error: ENOENT: no such file or directory, open",
+      strictEqual(lExitCode, 1);
+      strictEqual(
+        lCapturedStderr.includes(
+          "didn't work. Error: ENOENT: no such file or directory, open",
+        ),
+        true,
       );
     });
 
@@ -338,8 +347,11 @@ describe("[E] cli/index", () => {
         lCapturedStderr += pText;
       })();
 
-      expect(lExitCode).to.equal(0);
-      expect(lCapturedStderr).to.contain("no dependency violations found");
+      strictEqual(lExitCode, 0);
+      strictEqual(
+        lCapturedStderr.includes("no dependency violations found"),
+        true,
+      );
     });
 
     it("dependency-cruise --init will generate a rules file and tells that back on stdout", async () => {
@@ -363,9 +375,12 @@ describe("[E] cli/index", () => {
         lCapturedStdout += pText;
       })();
 
-      expect(lExitCode).to.equal(0);
-      expect(lCapturedStdout).to.contain(
-        `Successfully created '${lValidationFileName}'`,
+      strictEqual(lExitCode, 0);
+      strictEqual(
+        lCapturedStdout.includes(
+          `Successfully created '${lValidationFileName}'`,
+        ),
+        true,
       );
       deleteDammit(lValidationFileName);
     });
@@ -383,7 +398,7 @@ describe("[E] cli/index", () => {
         },
       );
 
-      expect(lExitCode).to.equal(0);
+      strictEqual(lExitCode, 0);
       assertJSONFileEqual(lOutputTo, path.join(FIX_DIR, lOutputFileName));
     });
 
@@ -400,7 +415,7 @@ describe("[E] cli/index", () => {
         },
       );
 
-      expect(lExitCode).to.equal(0);
+      strictEqual(lExitCode, 0);
       assertJSONFileEqual(lOutputTo, path.join(FIX_DIR, lOutputFileName));
     });
   });
@@ -420,7 +435,7 @@ describe("[E] cli/index", () => {
       },
     );
 
-    expect(lExitCode).to.equal(0);
+    strictEqual(lExitCode, 0);
     assertJSONFileEqual(lOutputTo, path.join(FIX_DIR, lOutputFileName));
   });
 
@@ -439,7 +454,7 @@ describe("[E] cli/index", () => {
       },
     );
 
-    expect(lExitCode).to.equal(0);
+    strictEqual(lExitCode, 0);
     assertJSONFileEqual(lOutputTo, path.join(FIX_DIR, lOutputFileName));
   });
 
@@ -459,7 +474,7 @@ describe("[E] cli/index", () => {
       },
     );
 
-    expect(lExitCode).to.equal(0);
+    strictEqual(lExitCode, 0);
     assertJSONFileEqual(lOutputTo, path.join(FIX_DIR, lOutputFileName));
   });
 
@@ -475,7 +490,7 @@ describe("[E] cli/index", () => {
         "test/cli/__fixtures__/babel/es6/webpack-cache-bust.config.js",
     });
 
-    expect(lExitCode).to.equal(0);
+    strictEqual(lExitCode, 0);
     assertJSONFileEqual(
       lOutputTo,
       path.join(FIX_DIR, "babel", lOutputFileName),
@@ -494,7 +509,7 @@ describe("[E] cli/index", () => {
         "test/cli/__fixtures__/babel/ts/webpack-cache-bust.config.js",
     });
 
-    expect(lExitCode).to.equal(0);
+    strictEqual(lExitCode, 0);
     assertJSONFileEqual(
       lOutputTo,
       path.join(FIX_DIR, "babel", lOutputFileName),
@@ -515,7 +530,7 @@ describe("[E] cli/index", () => {
       },
     );
 
-    expect(lExitCode).to.equal(lExpectedAmountOfErrors);
+    strictEqual(lExitCode, lExpectedAmountOfErrors);
 
     // assertJSONFileEqual(
     //   lOutputTo,
@@ -539,14 +554,17 @@ describe("[E] cli/index", () => {
       },
     );
 
-    expect(lExitCode).to.equal(lExpectedAmountOfErrors);
-    expect(() => {
+    strictEqual(lExitCode, lExpectedAmountOfErrors);
+    doesNotThrow(() => {
       lResult = readFileSync(lOutputTo, { encoding: "utf8" });
-    }).to.not.throw();
-    expect(lResult).to.contain(
-      "1 dependency violations (1 errors, 0 warnings). 6 modules, 3 dependencies cruised",
+    });
+    strictEqual(
+      lResult.includes(
+        "1 dependency violations (1 errors, 0 warnings). 6 modules, 3 dependencies cruised",
+      ),
+      true,
     );
-    expect(lResult).to.contain("1 known violations ignored");
+    strictEqual(lResult.includes("1 known violations ignored"), true);
   });
 
   it("will barf when the known violations file is invalid", async () => {
@@ -565,10 +583,10 @@ describe("[E] cli/index", () => {
       },
     );
 
-    expect(lExitCode).to.equal(lExpectedAmountOfErrors);
-    expect(() => {
+    strictEqual(lExitCode, lExpectedAmountOfErrors);
+    throws(() => {
       readFileSync(lOutputTo, { encoding: "utf8" });
-    }).to.throw();
+    });
   });
 
   describe("[I] file based tests - commonJS", () => {

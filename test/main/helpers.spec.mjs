@@ -1,8 +1,5 @@
-import { expect, use } from "chai";
-import chaiJSONSchema from "chai-json-schema";
+import { expect } from "chai";
 import { normalizeREProperties } from "../../src/main/helpers.mjs";
-
-use(chaiJSONSchema);
 
 const POTENTIAL_ARRAY_PROPERTIES = ["aap", "noot", "mies", "wim"];
 const ARRAYED_OBJECT = {

@@ -189,7 +189,6 @@
     "@vue/compiler-sfc": "3.3.4",
     "c8": "8.0.0",
     "chai": "4.3.7",
-    "chai-json-schema": "1.5.1",
     "coffeescript": "2.7.0",
     "eslint": "8.45.0",
     "eslint-config-moving-meadow": "4.0.2",

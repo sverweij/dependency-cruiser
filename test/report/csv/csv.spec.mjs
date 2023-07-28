@@ -1,6 +1,6 @@
 import { readFileSync } from "node:fs";
 import { fileURLToPath } from "node:url";
-import { expect } from "chai";
+import { deepStrictEqual, strictEqual } from "node:assert";
 import normalizeNewline from "normalize-newline";
 import render from "../../../src/report/csv.mjs";
 import deps from "./__mocks__/cjs-no-dependency-valid.mjs";
@@ -18,7 +18,7 @@ describe("[I] report/csv reporter", () => {
   it("renders csv", () => {
     const lReturnValue = render(deps);
 
-    expect(normalizeNewline(lReturnValue.output)).to.deep.equal(elementFixture);
-    expect(lReturnValue.exitCode).to.equal(0);
+    deepStrictEqual(normalizeNewline(lReturnValue.output), elementFixture);
+    strictEqual(lReturnValue.exitCode, 0);
   });
 });

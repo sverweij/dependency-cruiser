@@ -1,3 +1,4 @@
+import { strictEqual } from "node:assert";
 import { join } from "node:path";
 import { fileURLToPath } from "node:url";
 import { expect } from "chai";
@@ -23,12 +24,12 @@ describe("[I] main/resolve-options/normalize", () => {
     expect(Object.keys(lNormalizedOptions).length).to.equal(
       lDefaultNoOfResolveOptions,
     );
-    expect(lNormalizedOptions.symlinks).to.equal(false);
-    expect(lNormalizedOptions.tsConfig).to.equal(null);
-    expect(lNormalizedOptions.combinedDependencies).to.equal(false);
+    strictEqual(lNormalizedOptions.symlinks, false);
+    strictEqual(lNormalizedOptions.tsConfig, null);
+    strictEqual(lNormalizedOptions.combinedDependencies, false);
     expect(lNormalizedOptions).to.ownProperty("extensions");
     expect(lNormalizedOptions).to.ownProperty("fileSystem");
-    expect(lNormalizedOptions.useSyncFileSystemCalls).to.equal(true);
+    strictEqual(lNormalizedOptions.useSyncFileSystemCalls, true);
   });
 
   it("does not add the typescript paths plugin to the plugins if no tsConfig is specified", async () => {
@@ -43,13 +44,13 @@ describe("[I] main/resolve-options/normalize", () => {
     expect(Object.keys(lNormalizedOptions).length).to.equal(
       lDefaultNoOfResolveOptions,
     );
-    expect(lNormalizedOptions.symlinks).to.equal(false);
-    expect(lNormalizedOptions.tsConfig).to.equal(null);
-    expect(lNormalizedOptions.combinedDependencies).to.equal(false);
+    strictEqual(lNormalizedOptions.symlinks, false);
+    strictEqual(lNormalizedOptions.tsConfig, null);
+    strictEqual(lNormalizedOptions.combinedDependencies, false);
     expect(lNormalizedOptions).to.ownProperty("extensions");
     expect(lNormalizedOptions).to.ownProperty("fileSystem");
     expect((lNormalizedOptions.plugins || []).length).to.equal(0);
-    expect(lNormalizedOptions.useSyncFileSystemCalls).to.equal(true);
+    strictEqual(lNormalizedOptions.useSyncFileSystemCalls, true);
   });
 
   it("adds the typescript paths plugin to the plugins if a tsConfig is specified, even without a baseUrl", async () => {
@@ -64,13 +65,13 @@ describe("[I] main/resolve-options/normalize", () => {
     expect(Object.keys(lNormalizedOptions).length).to.equal(
       lDefaultNoOfResolveOptions + 1,
     );
-    expect(lNormalizedOptions.symlinks).to.equal(false);
-    expect(lNormalizedOptions.tsConfig).to.equal(TEST_TSCONFIG);
-    expect(lNormalizedOptions.combinedDependencies).to.equal(false);
+    strictEqual(lNormalizedOptions.symlinks, false);
+    strictEqual(lNormalizedOptions.tsConfig, TEST_TSCONFIG);
+    strictEqual(lNormalizedOptions.combinedDependencies, false);
     expect(lNormalizedOptions).to.ownProperty("extensions");
     expect(lNormalizedOptions).to.ownProperty("fileSystem");
     expect((lNormalizedOptions.plugins || []).length).to.equal(1);
-    expect(lNormalizedOptions.useSyncFileSystemCalls).to.equal(true);
+    strictEqual(lNormalizedOptions.useSyncFileSystemCalls, true);
   });
 
   it("adds the typescript paths plugin to the plugins if a tsConfig is specified with a baseUrl and actual paths", async () => {
@@ -85,12 +86,12 @@ describe("[I] main/resolve-options/normalize", () => {
     expect(Object.keys(lNormalizedOptions).length).to.equal(
       lDefaultNoOfResolveOptions + 1,
     );
-    expect(lNormalizedOptions.symlinks).to.equal(false);
-    expect(lNormalizedOptions.tsConfig).to.equal(TEST_TSCONFIG);
-    expect(lNormalizedOptions.combinedDependencies).to.equal(false);
+    strictEqual(lNormalizedOptions.symlinks, false);
+    strictEqual(lNormalizedOptions.tsConfig, TEST_TSCONFIG);
+    strictEqual(lNormalizedOptions.combinedDependencies, false);
     expect(lNormalizedOptions).to.ownProperty("extensions");
     expect(lNormalizedOptions).to.ownProperty("fileSystem");
-    expect(lNormalizedOptions.plugins.length).to.equal(1);
-    expect(lNormalizedOptions.useSyncFileSystemCalls).to.equal(true);
+    strictEqual(lNormalizedOptions.plugins.length, 1);
+    strictEqual(lNormalizedOptions.useSyncFileSystemCalls, true);
   });
 });

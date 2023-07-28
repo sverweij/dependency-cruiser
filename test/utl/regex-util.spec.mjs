@@ -1,41 +1,46 @@
-import { expect } from "chai";
+import { strictEqual } from "node:assert";
 import { replaceGroupPlaceholders } from "../../src/utl/regex-util.mjs";
 
 describe("[U] utl/regex-util", () => {
   it("replaceGroupPlaceholders - leaves re alone if passed empty match result", () => {
-    expect(replaceGroupPlaceholders("$1/aap|noot", [])).to.equal("$1/aap|noot");
+    strictEqual(replaceGroupPlaceholders("$1/aap|noot", []), "$1/aap|noot");
   });
 
   it("replaceGroupPlaceholders - leaves re alone if passed groupless match result", () => {
-    expect(replaceGroupPlaceholders("$1/aap|noot", ["houwoei"])).to.equal(
+    strictEqual(
+      replaceGroupPlaceholders("$1/aap|noot", ["houwoei"]),
       "$1/aap|noot",
     );
   });
 
   it("replaceGroupPlaceholders - replaces if passed groupless match result and a $0", () => {
-    expect(replaceGroupPlaceholders("$0/aap|noot", ["houwoei"])).to.equal(
+    strictEqual(
+      replaceGroupPlaceholders("$0/aap|noot", ["houwoei"]),
       "houwoei/aap|noot",
     );
   });
 
   it("replaceGroupPlaceholders - replaces if passed groupy match result and a $1", () => {
-    expect(
+    strictEqual(
       replaceGroupPlaceholders("$1/aap|noot", ["whole/result/part", "part"]),
-    ).to.equal("part/aap|noot");
+      "part/aap|noot",
+    );
   });
 
   it("replaceGroupPlaceholders - replaces if passed groupy match result and multiple $1", () => {
-    expect(
+    strictEqual(
       replaceGroupPlaceholders("$1|$1/[^/]+/|noot", [
         "whole/result/part",
         "part",
       ]),
-    ).to.equal("part|part/[^/]+/|noot");
+      "part|part/[^/]+/|noot",
+    );
   });
 
   it("replaceGroupPlaceholders - replaces if passed groupy match result and multiple groups", () => {
-    expect(
+    strictEqual(
       replaceGroupPlaceholders("$1|$2", ["start/thing/part", "start", "part"]),
-    ).to.equal("start|part");
+      "start|part",
+    );
   });
 });

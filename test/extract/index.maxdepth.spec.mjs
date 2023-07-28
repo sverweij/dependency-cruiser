@@ -1,13 +1,10 @@
-import { expect, use } from "chai";
-import chaiJSONSchema from "chai-json-schema";
+import { expect } from "chai";
 import extract from "../../src/extract/index.mjs";
 import { normalizeCruiseOptions } from "../../src/main/options/normalize.mjs";
 import normalizeResolveOptions from "../../src/main/resolve-options/normalize.mjs";
 import { createRequireJSON } from "../backwards.utl.mjs";
 
 const requireJSON = createRequireJSON(import.meta.url);
-
-use(chaiJSONSchema);
 
 describe("[I] extract/index - max depth", () => {
   /* eslint no-magic-numbers:0 */
@@ -32,7 +29,7 @@ describe("[I] extract/index - max depth", () => {
       expect(lResult).to.deep.equal(
         requireJSON(`./__fixtures__/max-depth-${pDepth}.json`),
       );
-      // expect(lResult).to.be.jsonSchema(resultSchema);
+      // ajv.validate(resultSchema, lResult);
     }),
   );
 });

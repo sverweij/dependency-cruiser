@@ -1,6 +1,7 @@
+/* eslint-disable security/detect-non-literal-regexp */
 /* eslint-disable no-magic-numbers */
+import { strictEqual, match } from "node:assert";
 import { EOL } from "node:os";
-import { expect } from "chai";
 import chalk from "chalk";
 import render from "../../../src/report/error-long.mjs";
 import okDeps from "./__mocks__/everything-fine.mjs";
@@ -21,39 +22,39 @@ describe("[I] report/error-long", () => {
   it("says everything fine", () => {
     const lResult = render(okDeps);
 
-    expect(lResult.output).to.contain("no dependency violations found");
-    expect(lResult.exitCode).to.equal(0);
+    match(lResult.output, /no dependency violations found/);
+    strictEqual(lResult.exitCode, 0);
   });
   it("renders a bunch of errors", () => {
     const lResult = render(deps);
 
-    expect(lResult.output).to.contain(`error no-leesplank: aap → noot${EOL}`);
-    expect(lResult.output).to.contain(
-      "2 dependency violations (2 errors, 0 warnings). 33 modules, 333 dependencies cruised.",
+    match(lResult.output, new RegExp(`error no-leesplank: aap → noot${EOL}`));
+    match(
+      lResult.output,
+      /2 dependency violations \(2 errors, 0 warnings\)\. 33 modules, 333 dependencies cruised\./,
     );
-    expect(lResult.output).to.contain("    comment to no-leesplank");
-    expect(lResult.exitCode).to.equal(2);
+    match(lResult.output, / {4}comment to no-leesplank/);
+    strictEqual(lResult.exitCode, 2);
   });
   it("renders a bunch of warnings", () => {
     const lResult = render(warnDeps);
 
-    expect(lResult.output).to.contain(
-      "1 dependency violations (0 errors, 1 warnings)",
-    );
-    expect(lResult.exitCode).to.equal(0);
+    match(lResult.output, /1 dependency violations \(0 errors, 1 warnings\)/);
+    strictEqual(lResult.exitCode, 0);
   });
   it("renders module only violations as module only", () => {
     const lResult = render(orphanErrs);
 
-    expect(lResult.output).to.contain(`error no-orphans: remi.js${EOL}`);
-    expect(lResult.output).to.contain(
-      "1 dependency violations (1 errors, 0 warnings). 1 modules, 0 dependencies cruised.",
+    match(lResult.output, new RegExp(`error no-orphans: remi.js${EOL}`));
+    match(
+      lResult.output,
+      /1 dependency violations \(1 errors, 0 warnings\)\. 1 modules, 0 dependencies cruised\./,
     );
-    expect(lResult.exitCode).to.equal(1);
+    strictEqual(lResult.exitCode, 1);
   });
   it("renders a '-' for comment if it couldn't find the rule", () => {
     const lResult = render(errorsAdditionalInfo);
 
-    expect(lResult.output).to.contain("    -");
+    match(lResult.output, / {4}-/);
   });
 });

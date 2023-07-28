@@ -1,5 +1,5 @@
-import { expect, use } from "chai";
-import chaiJSONSchema from "chai-json-schema";
+import { deepStrictEqual } from "node:assert";
+import Ajv from "ajv";
 import cruise from "../../src/main/cruise.mjs";
 import cruiseResultSchema from "../../src/schema/cruise-result.schema.mjs";
 import { createRequireJSON } from "../backwards.utl.mjs";
@@ -14,7 +14,7 @@ const outputWithRules = normBaseDirectory(
   requireJSON("./__mocks__/type-only-imports/output-with-rules.json"),
 );
 
-use(chaiJSONSchema);
+const ajv = new Ajv();
 
 const WORKING_DIRECTORY = process.cwd();
 
@@ -38,8 +38,8 @@ describe("[E] main.cruise - explicitly type only imports", () => {
       { bustTheCache: true, resolveLicenses: false },
     );
 
-    expect(lResult.output).to.deep.equal(output);
-    expect(lResult.output).to.be.jsonSchema(cruiseResultSchema);
+    deepStrictEqual(lResult.output, output);
+    ajv.validate(cruiseResultSchema, lResult.output);
   });
 
   it("flags type only imports when forbidden", async () => {
@@ -65,7 +65,7 @@ describe("[E] main.cruise - explicitly type only imports", () => {
       { bustTheCache: true, resolveLicenses: false },
     );
 
-    expect(lResult.output).to.deep.equal(outputWithRules);
-    expect(lResult.output).to.be.jsonSchema(cruiseResultSchema);
+    deepStrictEqual(lResult.output, outputWithRules);
+    ajv.validate(cruiseResultSchema, lResult.output);
   });
 });

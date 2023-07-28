@@ -1,5 +1,5 @@
-import { expect, use } from "chai";
-import chaiJSONSchema from "chai-json-schema";
+import { deepStrictEqual } from "node:assert";
+import Ajv from "ajv";
 import cruise from "../../src/main/cruise.mjs";
 import cruiseResultSchema from "../../src/schema/cruise-result.schema.mjs";
 import { createRequireJSON } from "../backwards.utl.mjs";
@@ -30,7 +30,7 @@ const folderFixtures = requireJSON(
   "./__fixtures__/cruise-reporterless/folder.json",
 );
 
-use(chaiJSONSchema);
+const ajv = new Ajv();
 
 function runFixture(pFixture) {
   if (!Boolean(pFixture.ignore)) {
@@ -45,10 +45,10 @@ function runFixture(pFixture) {
         },
       );
 
-      expect(lResult.output).to.be.jsonSchema(cruiseResultSchema);
-      expect(lResult.output.modules).to.deep.equal(pFixture.expected);
+      ajv.validate(cruiseResultSchema, lResult.output);
+      deepStrictEqual(lResult.output.modules, pFixture.expected);
       if (lResult.output.folders) {
-        expect(lResult.output.folders).to.deep.equal(pFixture.expectedFolders);
+        deepStrictEqual(lResult.output.folders, pFixture.expectedFolders);
       }
     });
   }

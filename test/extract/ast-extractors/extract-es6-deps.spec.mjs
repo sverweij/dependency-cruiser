@@ -1,3 +1,4 @@
+import { deepStrictEqual } from "node:assert";
 import { expect } from "chai";
 import extractES6Deps from "../../../src/extract/ast-extractors/extract-es6-deps.mjs";
 import { getASTFromSource } from "../../../src/extract/parse/to-javascript-ast.mjs";
@@ -45,7 +46,7 @@ describe("[U] ast-extractors/extract-ES6-deps", () => {
       "import(`./dynamic/${enhop}`).then(pModule => pModule.x);",
       lDeps,
     );
-    expect(lDeps).to.deep.equal([]);
+    deepStrictEqual(lDeps, []);
   });
 
   it("yield a dynamic import yields an import", () => {
@@ -69,7 +70,7 @@ describe("[U] ast-extractors/extract-ES6-deps", () => {
     let lDeps = [];
 
     extractES6("import(42).then(pModule => pModule.x);", lDeps);
-    expect(lDeps).to.deep.equal([]);
+    deepStrictEqual(lDeps, []);
   });
 
   it("dynamic imports of a function call doesn't yield an import", () => {
@@ -82,7 +83,7 @@ describe("[U] ast-extractors/extract-ES6-deps", () => {
         `,
       lDeps,
     );
-    expect(lDeps).to.deep.equal([]);
+    deepStrictEqual(lDeps, []);
   });
 
   it("doesn't get confused about import keywords in jsx components", () => {

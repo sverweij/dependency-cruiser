@@ -1,6 +1,6 @@
+import { strictEqual } from "node:assert";
 import { readFileSync } from "node:fs";
 import { fileURLToPath } from "node:url";
-import { expect } from "chai";
 import render from "../../../src/report/teamcity.mjs";
 import okdeps from "./__mocks__/everything-fine.mjs";
 import moduleErrs from "./__mocks__/module-errors.mjs";
@@ -28,19 +28,27 @@ describe("[I] report/teamcity", () => {
     );
     const lResult = render(okdeps);
 
-    expect(removePerSessionAttributes(lResult.output)).to.equal(lFixture);
-    expect(lResult.exitCode).to.equal(0);
+    strictEqual(
+      removePerSessionAttributes(lResult.output),
+      removePerSessionAttributes(lFixture),
+    );
+    strictEqual(lResult.exitCode, 0);
   });
 
   it("renders module only transgressions", () => {
     const lFixture = readFixture("__mocks__/module-errors-teamcity-format.txt");
     const lResult = render(moduleErrs);
 
-    expect(removePerSessionAttributes(lResult.output)).to.equal(
+    strictEqual(
+      removePerSessionAttributes(lResult.output),
+      removePerSessionAttributes(lFixture),
+    );
+    strictEqual(
+      removePerSessionAttributes(lResult.output),
       removePerSessionAttributes(lFixture),
     );
     // eslint-disable-next-line no-magic-numbers
-    expect(lResult.exitCode).to.equal(5);
+    strictEqual(lResult.exitCode, 5);
   });
 
   it("renders 'required' violations", () => {
@@ -49,44 +57,48 @@ describe("[I] report/teamcity", () => {
     );
     const lResult = render(requiredErrs);
 
-    expect(removePerSessionAttributes(lResult.output)).to.equal(
+    strictEqual(
+      removePerSessionAttributes(lResult.output),
       removePerSessionAttributes(lFixture),
     );
     // eslint-disable-next-line no-magic-numbers
-    expect(lResult.exitCode).to.equal(5);
+    strictEqual(lResult.exitCode, 5);
   });
 
   it("renders circular transgressions", () => {
     const lFixture = readFixture("__mocks__/circular-deps-teamcity-format.txt");
     const lResult = render(circulars);
 
-    expect(removePerSessionAttributes(lResult.output)).to.equal(
+    strictEqual(
+      removePerSessionAttributes(lResult.output),
       removePerSessionAttributes(lFixture),
     );
     // eslint-disable-next-line no-magic-numbers
-    expect(lResult.exitCode).to.equal(3);
+    strictEqual(lResult.exitCode, 3);
   });
 
   it("renders via transgressions", () => {
     const lFixture = readFixture("__mocks__/via-deps-teamcity-format.txt");
     const lResult = render(vias);
 
-    expect(removePerSessionAttributes(lResult.output)).to.equal(
+    strictEqual(
+      removePerSessionAttributes(lResult.output),
       removePerSessionAttributes(lFixture),
     );
     // eslint-disable-next-line no-magic-numbers
-    expect(lResult.exitCode).to.equal(4);
+    strictEqual(lResult.exitCode, 4);
   });
 
   it("renders instability transgressions", () => {
     const lFixture = readFixture("__mocks__/instabilities-teamcity-format.txt");
     const lResult = render(instabilities);
 
-    expect(removePerSessionAttributes(lResult.output)).to.equal(
+    strictEqual(
+      removePerSessionAttributes(lResult.output),
       removePerSessionAttributes(lFixture),
     );
 
-    expect(lResult.exitCode).to.equal(0);
+    strictEqual(lResult.exitCode, 0);
   });
 
   it("renders unsupported error levels (like 'ignore') as 'info'", () => {
@@ -95,11 +107,12 @@ describe("[I] report/teamcity", () => {
     );
     const lResult = render(unsupportedErrorLevels);
 
-    expect(removePerSessionAttributes(lResult.output)).to.equal(
+    strictEqual(
+      removePerSessionAttributes(lResult.output),
       removePerSessionAttributes(lFixture),
     );
     // eslint-disable-next-line no-magic-numbers
-    expect(lResult.exitCode).to.equal(5);
+    strictEqual(lResult.exitCode, 5);
   });
 
   it("renders known errors in a single warning", () => {
@@ -108,9 +121,10 @@ describe("[I] report/teamcity", () => {
     );
     const lResult = render(knownViolations);
 
-    expect(removePerSessionAttributes(lResult.output)).to.equal(
+    strictEqual(
+      removePerSessionAttributes(lResult.output),
       removePerSessionAttributes(lFixture),
     );
-    expect(lResult.exitCode).to.equal(0);
+    strictEqual(lResult.exitCode, 0);
   });
 });

@@ -1,4 +1,4 @@
-import { expect } from "chai";
+import { deepStrictEqual } from "node:assert";
 import nullReporter from "../../../src/report/null.mjs";
 
 const gSmallOKResult = {
@@ -72,14 +72,14 @@ const gSmallNOKResult = {
 describe("[I] report/null", () => {
   it("happy day no errors", () => {
     const lResult = nullReporter(gSmallOKResult);
-    expect(lResult).to.deep.equal({
+    deepStrictEqual(lResult, {
       output: "",
       exitCode: 0,
     });
   });
   it("happy day some errors", () => {
     const lResult = nullReporter(gSmallNOKResult);
-    expect(lResult).to.deep.equal({
+    deepStrictEqual(lResult, {
       output: "",
       exitCode: 3,
     });
