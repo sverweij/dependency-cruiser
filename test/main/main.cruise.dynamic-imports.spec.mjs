@@ -1,4 +1,4 @@
-import { expect } from "chai";
+import { deepStrictEqual } from "node:assert";
 import Ajv from "ajv";
 import cruiseResultSchema from "../../src/schema/cruise-result.schema.mjs";
 import cruise from "../../src/main/cruise.mjs";
@@ -63,7 +63,7 @@ describe("[E] main.cruise - dynamic imports", () => {
       { bustTheCache: true },
     );
 
-    expect(lResult.output).to.deep.equal(esOut);
+    deepStrictEqual(lResult.output, esOut);
     ajv.validate(cruiseResultSchema, lResult.output);
   });
 
@@ -98,7 +98,7 @@ describe("[E] main.cruise - dynamic imports", () => {
       { bustTheCache: true },
     );
 
-    expect(lResult.output).to.deep.equal(tsOut);
+    deepStrictEqual(lResult.output, tsOut);
     ajv.validate(cruiseResultSchema, lResult.output);
   });
 
@@ -134,7 +134,7 @@ describe("[E] main.cruise - dynamic imports", () => {
       { bustTheCache: true },
     );
 
-    expect(lResult.output).to.deep.equal(tsOutpre);
+    deepStrictEqual(lResult.output, tsOutpre);
     ajv.validate(cruiseResultSchema, lResult.output);
   });
 });

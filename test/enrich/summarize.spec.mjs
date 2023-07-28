@@ -1,3 +1,4 @@
+import { deepStrictEqual } from "node:assert";
 import { expect } from "chai";
 import Ajv from "ajv";
 import summarize from "../../src/enrich/summarize/index.mjs";
@@ -63,7 +64,7 @@ describe("[I] enrich/summarize", () => {
     const lResult1 = summarize(cycleStartsOnOne, lOptions, ["src"]);
     const lResult2 = summarize(cycleStartsOnTwo, lOptions, ["src"]);
 
-    expect(lResult1).to.deep.equal(lResult2);
+    deepStrictEqual(lResult1, lResult2);
     ajv.validate(cruiseResultSchema, { modules: [], summary: lResult1 });
   });
 
@@ -138,7 +139,7 @@ describe("[I] enrich/summarize", () => {
       },
     };
     const lSummary = summarize(cycleFest, lOptions, ["src"]);
-    expect(lSummary).to.deep.equal(lExpected);
+    deepStrictEqual(lSummary, lExpected);
     ajv.validate(cruiseResultSchema, { modules: [], summary: lSummary });
   });
 

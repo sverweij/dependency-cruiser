@@ -1,3 +1,4 @@
+import { deepStrictEqual } from "node:assert";
 import { expect } from "chai";
 import extractcommonJSDeps from "../../../src/extract/ast-extractors/extract-cjs-deps.mjs";
 import { getASTFromSource } from "../../../src/extract/parse/to-javascript-ast.mjs";
@@ -74,7 +75,7 @@ describe("[U] ast-extractors/extract-cjs-deps", () => {
       "const need = require; const x = need('./static-required-with-need')",
       lDeps,
     );
-    expect(lDeps).to.deep.equal([]);
+    deepStrictEqual(lDeps, []);
   });
 
   it("require with in an assignment - template literal argument", () => {
@@ -95,7 +96,7 @@ describe("[U] ast-extractors/extract-cjs-deps", () => {
     let lDeps = [];
 
     extractcommonJS("require(42);", lDeps);
-    expect(lDeps).to.deep.equal([]);
+    deepStrictEqual(lDeps, []);
   });
 
   it("non-string argument doesn't yield a dependency (function call)", () => {
@@ -108,6 +109,6 @@ describe("[U] ast-extractors/extract-cjs-deps", () => {
         `,
       lDeps,
     );
-    expect(lDeps).to.deep.equal([]);
+    deepStrictEqual(lDeps, []);
   });
 });

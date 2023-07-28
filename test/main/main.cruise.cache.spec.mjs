@@ -1,3 +1,4 @@
+import { deepStrictEqual } from "node:assert";
 import { rmSync } from "node:fs";
 import { expect } from "chai";
 import Ajv from "ajv";
@@ -31,7 +32,7 @@ describe("[E] main.cruise - cache", () => {
     const lCache = await lCacheInstance.read(CACHE_FOLDER);
     Reflect.deleteProperty(lCache, "revisionData");
 
-    expect(lResult.output).to.deep.equal(lCache);
+    deepStrictEqual(lResult.output, lCache);
     ajv.validate(cruiseResultSchema, lResult.output);
   });
 
@@ -48,7 +49,7 @@ describe("[E] main.cruise - cache", () => {
     const lCache = await lCacheInstance.read(CACHE_FOLDER);
     Reflect.deleteProperty(lCache, "revisionData");
 
-    expect(lResult.output).to.deep.equal(lCache);
+    deepStrictEqual(lResult.output, lCache);
 
     const lResultTwo = await cruise(
       ["test/main/__mocks__/cache"],
@@ -59,7 +60,7 @@ describe("[E] main.cruise - cache", () => {
       {},
     );
     Reflect.deleteProperty(lResultTwo.output, "revisionData");
-    expect(lResultTwo.output).to.deep.equal(lResult.output);
+    deepStrictEqual(lResultTwo.output, lResult.output);
     ajv.validate(cruiseResultSchema, lResultTwo.output);
   });
 
@@ -76,7 +77,7 @@ describe("[E] main.cruise - cache", () => {
     const lOldCache = await lCacheInstance.read(CACHE_FOLDER);
     Reflect.deleteProperty(lOldCache, "revisionData");
 
-    expect(lResult.output).to.deep.equal(lOldCache);
+    deepStrictEqual(lResult.output, lOldCache);
 
     const lResultTwo = await cruise(
       ["test/main/__mocks__/cache test/main/__mocks__/cache-too "],
@@ -90,7 +91,7 @@ describe("[E] main.cruise - cache", () => {
     const lNewCache = await lNewCacheInstance.read(CACHE_FOLDER);
     Reflect.deleteProperty(lNewCache, "revisionData");
     expect(lNewCache).to.not.deep.equal(lOldCache);
-    expect(lNewCache).to.deep.equal(lResultTwo.output);
+    deepStrictEqual(lNewCache, lResultTwo.output);
     ajv.validate(cruiseResultSchema, lNewCache);
   });
 });

@@ -1,5 +1,5 @@
 import { fileURLToPath } from "node:url";
-import { expect } from "chai";
+import { deepStrictEqual } from "node:assert";
 import readConfig from "../../../src/config-utl/extract-depcruise-config/read-config.mjs";
 
 function getFullPath(pRelativePath) {
@@ -11,30 +11,30 @@ describe("[U] config-utl/extract-depcruise-config/read-config", () => {
     const lConfig = await readConfig(
       getFullPath("__mocks__/read-config/dc.js"),
     );
-    expect(lConfig).to.deep.equal({});
+    deepStrictEqual(lConfig, {});
   });
   it("imports when it encounters .cjs", async () => {
     const lConfig = await readConfig(
       getFullPath("__mocks__/read-config/dc.cjs"),
     );
-    expect(lConfig).to.deep.equal({});
+    deepStrictEqual(lConfig, {});
   });
   it("imports when it encounters .mjs", async () => {
     const lConfig = await readConfig(
       getFullPath("__mocks__/read-config/dc.mjs"),
     );
-    expect(lConfig).to.deep.equal({});
+    deepStrictEqual(lConfig, {});
   });
   it("json5 parse when it encounters .json", async () => {
     const lConfig = await readConfig(
       getFullPath("__mocks__/read-config/dc.json"),
     );
-    expect(lConfig).to.deep.equal({});
+    deepStrictEqual(lConfig, {});
   });
   it("json5 parse when it encounters something alien", async () => {
     const lConfig = await readConfig(
       getFullPath("__mocks__/read-config/dc.alien"),
     );
-    expect(lConfig).to.deep.equal({});
+    deepStrictEqual(lConfig, {});
   });
 });

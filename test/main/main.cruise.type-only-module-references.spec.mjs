@@ -1,4 +1,4 @@
-import { expect } from "chai";
+import { deepStrictEqual } from "node:assert";
 import Ajv from "ajv";
 import cruise from "../../src/main/cruise.mjs";
 import cruiseResultSchema from "../../src/schema/cruise-result.schema.mjs";
@@ -38,7 +38,7 @@ describe("[E] main.cruise - type only module references", () => {
       { bustTheCache: true, resolveLicenses: true },
     );
 
-    expect(lResult.output).to.deep.equal(output);
+    deepStrictEqual(lResult.output, output);
     ajv.validate(cruiseResultSchema, lResult.output);
   });
 
@@ -53,7 +53,7 @@ describe("[E] main.cruise - type only module references", () => {
       { bustTheCache: true },
     );
 
-    expect(lResult.output).to.deep.equal(outputNoTS);
+    deepStrictEqual(lResult.output, outputNoTS);
     ajv.validate(cruiseResultSchema, lResult.output);
   });
 });

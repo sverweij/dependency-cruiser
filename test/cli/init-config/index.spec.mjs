@@ -1,5 +1,6 @@
 import { writeFileSync, readFileSync } from "node:fs";
 import { join } from "node:path";
+import { deepStrictEqual } from "node:assert";
 import { expect } from "chai";
 import Ajv from "ajv";
 import deleteDammit from "../delete-dammit.utl.cjs";
@@ -163,7 +164,7 @@ describe("[I] cli/init-config/index", () => {
       const lResult = await import(lConfigResultFileName);
 
       ajv.validate(configurationSchema, lResult.default);
-      expect(lResult.default).to.deep.equal({});
+      deepStrictEqual(lResult.default, {});
       expect(
         JSON.parse(readFileSync(lManifestFilename, "utf8")),
       ).to.haveOwnProperty("scripts");

@@ -1,9 +1,9 @@
+import { deepStrictEqual, strictEqual } from "node:assert";
 import { fileURLToPath } from "node:url";
-import { strictEqual } from "node:assert";
-import omit from "lodash/omit.js";
 import { expect } from "chai";
-import pathToPosix from "../../src/utl/path-to-posix.mjs";
+import omit from "lodash/omit.js";
 import extractBabelConfig from "../../src/config-utl/extract-babel-config.mjs";
+import pathToPosix from "../../src/utl/path-to-posix.mjs";
 
 function getFullPath(pRelativePath) {
   return fileURLToPath(new URL(pRelativePath, import.meta.url));
@@ -117,7 +117,7 @@ describe("[I] config-utl/extract-babel-config", () => {
       getFullPath("./__mocks__/babelconfig/babelrc.with-a-preset.json"),
     );
     strictEqual(lFoundConfig.presets.length, 1);
-    expect(lFoundConfig.presets).to.deep.equal(["@babel/preset-typescript"]);
+    deepStrictEqual(lFoundConfig.presets, ["@babel/preset-typescript"]);
   });
 
   it("throws when a javascript file with a function export is passed", async () => {
