@@ -1,3 +1,4 @@
+import { strictEqual } from "node:assert";
 import { readFileSync } from "node:fs";
 import { join } from "node:path";
 import { fileURLToPath } from "node:url";
@@ -42,7 +43,7 @@ describe("[I] transpile", () => {
       readFileSync(join(__dirname, "__fixtures__", "svelte.js"), "utf8"),
     );
 
-    expect(lObservedOutput).to.equal(lExpectedOutput);
+    strictEqual(lObservedOutput, lExpectedOutput);
   });
 
   it("Does not confuse .ts for .tsx", async () => {
@@ -61,7 +62,7 @@ describe("[I] transpile", () => {
     const lFound = await normalizeSource(
       transpile({ extension: ".ts", source: lInputFixture }),
     );
-    expect(lExpected).to.equal(lFound);
+    strictEqual(lExpected, lFound);
   });
 
   it("Takes a tsconfig and takes that into account on transpilation", async () => {
@@ -92,7 +93,7 @@ describe("[I] transpile", () => {
         lTranspilerOptions,
       ),
     );
-    expect(lExpected).to.equal(lTranspiledFixture);
+    strictEqual(lExpected, lTranspiledFixture);
   });
 });
 

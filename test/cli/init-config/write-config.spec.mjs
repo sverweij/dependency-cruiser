@@ -1,3 +1,4 @@
+import { strictEqual } from "node:assert";
 import { writeFileSync, readFileSync } from "node:fs";
 import { join } from "node:path";
 import { expect } from "chai";
@@ -59,7 +60,7 @@ describe("[U] cli/init-config/write-config", () => {
       expect(pError.message).to.contain("already exists here - leaving it be");
     }
 
-    expect(lStillHere).to.equal(false);
+    strictEqual(lStillHere, false);
 
     expect(readFileSync(RULES_FILE_JS, "utf8")).to.equal("module.exports = {}");
   });

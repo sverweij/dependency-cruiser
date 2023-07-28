@@ -1,3 +1,4 @@
+import { strictEqual } from "node:assert";
 import { expect } from "chai";
 import get from "lodash/get.js";
 import { getASTFromSource } from "../../../src/extract/parse/to-javascript-ast.mjs";
@@ -73,7 +74,7 @@ describe("[U] extract/parse/to-javascript-ast", () => {
       "body[0].declarations.[0].init",
       {},
     );
-    expect(likelyTheArrowExpression.type).to.equal("ArrowFunctionExpression");
+    strictEqual(likelyTheArrowExpression.type, "ArrowFunctionExpression");
     expect(
       get(
         likelyTheArrowExpression,

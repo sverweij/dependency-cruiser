@@ -1,4 +1,5 @@
 import { fileURLToPath } from "node:url";
+import { strictEqual } from "node:assert";
 import { expect } from "chai";
 import loadResolveConfig from "../../src/config-utl/extract-webpack-resolve-config.mjs";
 
@@ -13,7 +14,7 @@ describe("[I] config-utl/extract-webpack-resolve-config - native formats", () =>
     } catch (_pError) {
       lThrown = true;
     }
-    expect(lThrown).to.equal(true);
+    strictEqual(lThrown, true);
   });
 
   it("throws when a non-existing config file is passed", async () => {
@@ -23,7 +24,7 @@ describe("[I] config-utl/extract-webpack-resolve-config - native formats", () =>
     } catch (_pError) {
       lThrown = true;
     }
-    expect(lThrown).to.equal(true);
+    strictEqual(lThrown, true);
   });
 
   it("throws when a config file is passed that does not contain valid javascript", async () => {
@@ -35,7 +36,7 @@ describe("[I] config-utl/extract-webpack-resolve-config - native formats", () =>
     } catch (_pError) {
       lThrown = true;
     }
-    expect(lThrown).to.equal(true);
+    strictEqual(lThrown, true);
   });
 
   it("returns an empty object when a config file is passed without a 'resolve' section", async () => {

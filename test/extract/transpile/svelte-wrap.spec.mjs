@@ -1,3 +1,4 @@
+import { strictEqual } from "node:assert";
 import { readFileSync } from "node:fs";
 import { expect } from "chai";
 import svelteWrap from "../../../src/extract/transpile/svelte-wrap.mjs";
@@ -36,7 +37,7 @@ describe("[I] svelte transpiler", () => {
         ),
       );
 
-      expect(lObserved).to.equal(lExpected);
+      strictEqual(lObserved, lExpected);
     });
   });
 });

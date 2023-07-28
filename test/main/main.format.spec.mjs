@@ -1,4 +1,5 @@
 /* eslint-disable no-magic-numbers */
+import { strictEqual } from "node:assert";
 import { expect } from "chai";
 import format from "../../src/main/format.mjs";
 import { createRequireJSON } from "../backwards.utl.mjs";
@@ -91,8 +92,8 @@ describe("[E] main.format - format", () => {
         },
       },
     ]);
-    expect(lCollapsedResult.summary.totalCruised).to.equal(19);
-    expect(lCollapsedResult.summary.totalDependenciesCruised).to.equal(18);
+    strictEqual(lCollapsedResult.summary.totalCruised, 19);
+    strictEqual(lCollapsedResult.summary.totalDependenciesCruised, 18);
   });
 
   it("returns string with error explanations when asked for the err-long report", async () => {
@@ -122,9 +123,9 @@ describe("[E] main.format - format", () => {
     });
     const lJSONResult = JSON.parse(lResult.output);
     expect(Object.keys(lJSONResult.summary.optionsUsed).length).to.equal(16);
-    expect(lJSONResult.summary.optionsUsed.outputType).to.equal("anon");
-    expect(lJSONResult.summary.optionsUsed.includeOnly).to.equal("^src/");
+    strictEqual(lJSONResult.summary.optionsUsed.outputType, "anon");
+    strictEqual(lJSONResult.summary.optionsUsed.includeOnly, "^src/");
     // without includeOnly it'd be 53
-    expect(lJSONResult.modules.length).to.equal(33);
+    strictEqual(lJSONResult.modules.length, 33);
   });
 });

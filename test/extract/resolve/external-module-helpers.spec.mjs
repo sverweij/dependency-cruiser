@@ -1,3 +1,4 @@
+import { strictEqual } from "node:assert";
 import { expect } from "chai";
 import has from "lodash/has.js";
 import clearCaches from "../../../src/extract/clear-caches.mjs";
@@ -61,7 +62,7 @@ describe("[U] extract/resolve/externalModuleHelpers.getPackageJson", () => {
 
     expect(lPackageJson).to.be.not.null;
     expect(has(lPackageJson, "name")).to.be.true;
-    expect(lPackageJson.name).to.equal("chai");
+    strictEqual(lPackageJson.name, "chai");
   });
 
   it("returns a package.json when there is one (root) - base dir defaults to current working dir", () => {
@@ -69,7 +70,7 @@ describe("[U] extract/resolve/externalModuleHelpers.getPackageJson", () => {
 
     expect(lPackageJson).to.be.not.null;
     expect(has(lPackageJson, "name")).to.be.true;
-    expect(lPackageJson.name).to.equal("chai");
+    strictEqual(lPackageJson.name, "chai");
   });
 
   it("returns a package.json when there is one ('local' node_modules)", () => {
@@ -95,7 +96,7 @@ describe("[U] extract/resolve/externalModuleHelpers.getPackageJson", () => {
 
     expect(lPackageJson).to.be.not.null;
     expect(has(lPackageJson, "name")).to.be.true;
-    expect(lPackageJson.description).to.equal("testinga 2");
+    strictEqual(lPackageJson.description, "testinga 2");
   });
 });
 

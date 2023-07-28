@@ -1,6 +1,6 @@
 /* eslint-disable no-unused-expressions */
 /* eslint-disable no-magic-numbers */
-import { match } from "node:assert";
+import { match, strictEqual } from "node:assert";
 import { expect } from "chai";
 import {
   getHeader,
@@ -48,7 +48,7 @@ describe("[U] cli/listeners/performance-log/handlers - getProgressLine", () => {
     expect(
       getProgressLine("next message", lUpdatableStateMock, 10, MAX_LEVEL),
     ).to.match(/previous message/);
-    expect(lUpdatableStateMock.previousMessage).to.equal("next message");
+    strictEqual(lUpdatableStateMock.previousMessage, "next message");
     expect(lUpdatableStateMock.previousTime).to.not.equal(lPreviousTime);
   });
 });

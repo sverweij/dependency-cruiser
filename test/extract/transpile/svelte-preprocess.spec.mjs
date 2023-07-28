@@ -1,3 +1,4 @@
+import { strictEqual } from "node:assert";
 import { expect } from "chai";
 // eslint-disable-next-line node/file-extension-in-import
 import * as svelteCompiler from "svelte/compiler";
@@ -43,7 +44,7 @@ describe("[U] sync svelte pre-processor", () => {
         },
       });
 
-      expect(lSyncResult).to.equal(lAsyncResult.code);
+      strictEqual(lSyncResult, lAsyncResult.code);
     });
   });
   it("pre-processes svelte like svelte, but sync (with an unavailable wrapper)", async () => {
@@ -51,7 +52,7 @@ describe("[U] sync svelte pre-processor", () => {
     const lSyncResult = sveltePreProcess(lInput, {}, {});
     const lAsyncResult = await svelteCompiler.preprocess(lInput, {});
 
-    expect(lSyncResult).to.equal(lAsyncResult.code);
+    strictEqual(lSyncResult, lAsyncResult.code);
   });
   it("ignores style tags that require a pre-processor", () => {
     const lInput = `<script lang="ts">console.log(713)</script>

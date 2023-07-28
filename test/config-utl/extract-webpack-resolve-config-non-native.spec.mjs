@@ -1,3 +1,4 @@
+import { strictEqual } from "node:assert";
 import { join } from "node:path";
 import { fileURLToPath } from "node:url";
 import { expect } from "chai";
@@ -23,7 +24,7 @@ describe("[I] config-utl/extract-webpack-resolve-config - non-native formats", (
     } catch (_pError) {
       lThrown = true;
     }
-    expect(lThrown).to.equal(true);
+    strictEqual(lThrown, true);
   });
 
   it("throws an error with suggested modules when there's a known loader for the extension, but it isn't installed (livescript)", async () => {

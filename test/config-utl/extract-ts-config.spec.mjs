@@ -156,7 +156,7 @@ describe("[I] config-utl/extract-ts-config - flatten typescript config - 'extend
     // reason or other typescript's TSConfig parser overrides this again with false
     // even though it isn't specified in the file that extends it =>
     // I suspect a bug in typescripts' TSConfig parser ...
-    // expect(lParseResult.compileOnSave).to.equal(true);
+    // strictEqual(lParseResult.compileOnSave, true);
   });
 
   it("returns an object with properties from base, extends & overrides from extends - compilerOptions", () => {

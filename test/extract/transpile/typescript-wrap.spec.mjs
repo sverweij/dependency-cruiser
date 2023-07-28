@@ -1,3 +1,4 @@
+import { strictEqual } from "node:assert";
 import { readFileSync } from "node:fs";
 import { expect } from "chai";
 import normalizeSource from "../normalize-source.utl.mjs";
@@ -27,7 +28,7 @@ describe("[I] typescript transpiler", () => {
         "utf8",
       ),
     );
-    expect(lExpected).to.equal(lFound);
+    strictEqual(lExpected, lFound);
   });
 });
 
@@ -45,7 +46,7 @@ describe("[I] typescript transpiler (tsx)", () => {
     const lFound = await normalizeSource(
       readFileSync("./test/extract/transpile/__fixtures__/tsx.js", "utf8"),
     );
-    expect(lExpected).to.equal(lFound);
+    strictEqual(lExpected, lFound);
   });
 });
 
@@ -63,6 +64,6 @@ describe("[I] typescript transpiler (esm)", () => {
     const lFound = await normalizeSource(
       readFileSync("./test/extract/transpile/__fixtures__/mts.mjs", "utf8"),
     );
-    expect(lExpected).to.equal(lFound);
+    strictEqual(lExpected, lFound);
   });
 });

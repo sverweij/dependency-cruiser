@@ -1,3 +1,4 @@
+import { strictEqual } from "node:assert";
 import { readFileSync } from "node:fs";
 import { expect } from "chai";
 import normalizeSource from "../normalize-source.utl.mjs";
@@ -45,6 +46,6 @@ describe("[I] extract/transpile/babel-wrap", () => {
       "utf8",
     );
 
-    expect(lOutput).to.equal(lExpected);
+    strictEqual(lOutput, lExpected);
   });
 });

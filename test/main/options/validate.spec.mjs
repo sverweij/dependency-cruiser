@@ -1,3 +1,4 @@
+import { strictEqual } from "node:assert";
 import { expect } from "chai";
 import {
   validateCruiseOptions,
@@ -197,7 +198,7 @@ describe("[U] main/options/validate - exclude", () => {
       ruleSet: { options: { exclude: "from the ruleset" } },
     });
 
-    expect(lOptions.exclude).to.equal("from the commandline");
+    strictEqual(lOptions.exclude, "from the commandline");
   });
 
   it("options passed in --validate rule-set drip down to the proper options", () => {
@@ -206,7 +207,7 @@ describe("[U] main/options/validate - exclude", () => {
       ruleSet: { options: { exclude: "from the ruleset" } },
     });
 
-    expect(lOptions.exclude).to.equal("from the ruleset");
-    expect(lOptions.doNotFollow).to.equal("from the commandline");
+    strictEqual(lOptions.exclude, "from the ruleset");
+    strictEqual(lOptions.doNotFollow, "from the commandline");
   });
 });
