@@ -1,4 +1,4 @@
-import { expect } from "chai";
+import { deepStrictEqual } from "node:assert";
 import getDependencies from "../../src/extract/get-dependencies.mjs";
 import { normalizeCruiseOptions } from "../../src/main/options/normalize.mjs";
 import normalizeResolveOptions from "../../src/main/resolve-options/normalize.mjs";
@@ -20,7 +20,7 @@ export function runFixture(pFixture, pParser = "acorn") {
   }
 
   it(`${pFixture.title} (with '${pParser}' as parser)`, async () => {
-    expect(
+    deepStrictEqual(
       getDependencies(
         pFixture.input.fileName,
         normalizeCruiseOptions(lOptions),
@@ -29,6 +29,7 @@ export function runFixture(pFixture, pParser = "acorn") {
           normalizeCruiseOptions(lOptions),
         ),
       ),
-    ).to.deep.equal(pFixture.expected);
+      pFixture.expected,
+    );
   });
 }

@@ -1,13 +1,13 @@
-import { expect } from "chai";
+import { deepStrictEqual } from "node:assert";
 
 import deriveFolders from "../../../../src/enrich/derive/folders/index.mjs";
 
 describe("[U] enrich/derive/folders - folder stability metrics derivation", () => {
   it("doesn't do anything when we're not asking for metrics (metrics nor outputType)", () => {
-    expect(deriveFolders([], {})).to.deep.equal({});
+    deepStrictEqual(deriveFolders([], {}), {});
   });
 
   it("emits folders when we're asking for metrics", () => {
-    expect(deriveFolders([], { metrics: true })).to.deep.equal({ folders: [] });
+    deepStrictEqual(deriveFolders([], { metrics: true }), { folders: [] });
   });
 });

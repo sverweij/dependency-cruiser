@@ -1,4 +1,4 @@
-import { expect } from "chai";
+import { deepStrictEqual } from "node:assert";
 import softenKnownViolations from "../../src/enrich/soften-known-violations.mjs";
 
 describe("[U] enrich/soften-known-violations - modules violations", () => {
@@ -15,7 +15,7 @@ describe("[U] enrich/soften-known-violations - modules violations", () => {
   ];
 
   it("no violations => no violations", () => {
-    expect(softenKnownViolations([], lKnownModuleViolations)).to.deep.equal([]);
+    deepStrictEqual(softenKnownViolations([], lKnownModuleViolations), []);
   });
 
   it("valid modules are kept alone", () => {
@@ -24,9 +24,10 @@ describe("[U] enrich/soften-known-violations - modules violations", () => {
       { source: "alez-houpe.js", valid: true, dependencies: [] },
     ];
 
-    expect(
+    deepStrictEqual(
       softenKnownViolations(lModules, lKnownModuleViolations),
-    ).to.deep.equal(lModules);
+      lModules,
+    );
   });
 
   it("invalid modules that are not in known violations are kept alone", () => {
@@ -40,9 +41,10 @@ describe("[U] enrich/soften-known-violations - modules violations", () => {
       },
     ];
 
-    expect(
+    deepStrictEqual(
       softenKnownViolations(lModules, lKnownModuleViolations),
-    ).to.deep.equal(lModules);
+      lModules,
+    );
   });
 
   it("invalid modules that are in known violations are softened (default to 'ignore')", () => {
@@ -65,9 +67,10 @@ describe("[U] enrich/soften-known-violations - modules violations", () => {
       },
     ];
 
-    expect(
+    deepStrictEqual(
       softenKnownViolations(lModules, lKnownModuleViolations),
-    ).to.deep.equal(lSoftenedModules);
+      lSoftenedModules,
+    );
   });
 
   it("invalid modules that are in known violations are softened (to the specified level)", () => {
@@ -90,9 +93,10 @@ describe("[U] enrich/soften-known-violations - modules violations", () => {
       },
     ];
 
-    expect(
+    deepStrictEqual(
       softenKnownViolations(lModules, lKnownModuleViolations, "info"),
-    ).to.deep.equal(lSoftenedModules);
+      lSoftenedModules,
+    );
   });
 });
 
@@ -121,9 +125,7 @@ describe("[U] enrich/soften-known-violations - dependency violations", () => {
   ];
 
   it("no violations => no violations", () => {
-    expect(softenKnownViolations([], lKnownDependencyViolations)).to.deep.equal(
-      [],
-    );
+    deepStrictEqual(softenKnownViolations([], lKnownDependencyViolations), []);
   });
 
   it("valid dependencies are left alone", () => {
@@ -141,9 +143,10 @@ describe("[U] enrich/soften-known-violations - dependency violations", () => {
       },
     ];
 
-    expect(
+    deepStrictEqual(
       softenKnownViolations(lModules, lKnownDependencyViolations),
-    ).to.deep.equal(lModules);
+      lModules,
+    );
   });
 
   it("invalid dependencies that are not in known violations are left alone (violation not in unknown)", () => {
@@ -162,9 +165,10 @@ describe("[U] enrich/soften-known-violations - dependency violations", () => {
       },
     ];
 
-    expect(
+    deepStrictEqual(
       softenKnownViolations(lModules, lKnownDependencyViolations),
-    ).to.deep.equal(lModules);
+      lModules,
+    );
   });
 
   it("invalid dependencies that are not in known violations are left alone (dependency not in unknown)", () => {
@@ -183,9 +187,10 @@ describe("[U] enrich/soften-known-violations - dependency violations", () => {
       },
     ];
 
-    expect(
+    deepStrictEqual(
       softenKnownViolations(lModules, lKnownDependencyViolations),
-    ).to.deep.equal(lModules);
+      lModules,
+    );
   });
 
   it("invalid dependencies that are in known violations are softened (default to 'ignore')", () => {
@@ -218,9 +223,10 @@ describe("[U] enrich/soften-known-violations - dependency violations", () => {
       },
     ];
 
-    expect(
+    deepStrictEqual(
       softenKnownViolations(lModules, lKnownDependencyViolations),
-    ).to.deep.equal(lSoftenedModules);
+      lSoftenedModules,
+    );
   });
 
   it("invalid dependencies that are in known violations are softened (to the specified level)", () => {
@@ -253,9 +259,10 @@ describe("[U] enrich/soften-known-violations - dependency violations", () => {
       },
     ];
 
-    expect(
+    deepStrictEqual(
       softenKnownViolations(lModules, lKnownDependencyViolations, "warn"),
-    ).to.deep.equal(lSoftenedModules);
+      lSoftenedModules,
+    );
   });
 
   it("invalid circular dependencies that are in known violations are softened (to the specified level)", () => {
@@ -350,9 +357,10 @@ describe("[U] enrich/soften-known-violations - dependency violations", () => {
       },
     ];
 
-    expect(
+    deepStrictEqual(
       softenKnownViolations(lModules, lKnownCyclicViolations, "info"),
-    ).to.deep.equal(lSoftenedModules);
+      lSoftenedModules,
+    );
   });
 
   it("also softens 'self-referencing' modules", () => {
@@ -468,8 +476,9 @@ describe("[U] enrich/soften-known-violations - dependency violations", () => {
         valid: true,
       },
     ];
-    expect(
+    deepStrictEqual(
       softenKnownViolations(lModules, lKnownSelfReferenceViolation, "ignore"),
-    ).to.deep.equal(lSoftenedModules);
+      lSoftenedModules,
+    );
   });
 });

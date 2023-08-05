@@ -1,4 +1,4 @@
-import { expect } from "chai";
+import { deepStrictEqual } from "node:assert";
 import uniqWith from "lodash/uniqWith.js";
 import isSameViolation from "../../src/enrich/summarize/is-same-violation.mjs";
 
@@ -6,7 +6,7 @@ const deDuplicateViolations = (pViolations) =>
   uniqWith(pViolations, isSameViolation);
 describe("[U] enrich/de-duplicate-violations", () => {
   it("no violations => no violations", () => {
-    expect(deDuplicateViolations([])).to.deep.equal([]);
+    deepStrictEqual(deDuplicateViolations([]), []);
   });
   it("non-cyclic violations => same non-cyclic violations", () => {
     const lViolations = [
@@ -27,7 +27,7 @@ describe("[U] enrich/de-duplicate-violations", () => {
         },
       },
     ];
-    expect(deDuplicateViolations(lViolations)).to.deep.equal(lViolations);
+    deepStrictEqual(deDuplicateViolations(lViolations), lViolations);
   });
 
   it("2 violations from different cycles => the 2 same violations", () => {
@@ -51,7 +51,7 @@ describe("[U] enrich/de-duplicate-violations", () => {
         cycle: ["src/report/dot/index.js", "src/report/dot/module-utl.js"],
       },
     ];
-    expect(deDuplicateViolations(lViolations)).to.deep.equal(lViolations);
+    deepStrictEqual(deDuplicateViolations(lViolations), lViolations);
   });
 
   it("2 violations from the same cycle => 1 violation", () => {
@@ -86,7 +86,8 @@ describe("[U] enrich/de-duplicate-violations", () => {
         cycle: ["src/report/dot/module-utl.js", "src/report/dot/index.js"],
       },
     ];
-    expect(deDuplicateViolations(lViolations)).to.deep.equal(
+    deepStrictEqual(
+      deDuplicateViolations(lViolations),
       lDeDuplicatedViolations,
     );
   });
@@ -112,7 +113,7 @@ describe("[U] enrich/de-duplicate-violations", () => {
         cycle: ["src/report/dot/index.js", "src/report/dot/module-utl.js"],
       },
     ];
-    expect(deDuplicateViolations(lViolations)).to.deep.equal(lViolations);
+    deepStrictEqual(deDuplicateViolations(lViolations), lViolations);
   });
 
   it("does not mix up cyclic & non-cyclic violations when de-duplicating", () => {
@@ -163,7 +164,8 @@ describe("[U] enrich/de-duplicate-violations", () => {
         cycle: ["src/report/dot/module-utl.js", "src/report/dot/index.js"],
       },
     ];
-    expect(deDuplicateViolations(lViolations)).to.deep.equal(
+    deepStrictEqual(
+      deDuplicateViolations(lViolations),
       lDeDuplicatedViolations,
     );
   });

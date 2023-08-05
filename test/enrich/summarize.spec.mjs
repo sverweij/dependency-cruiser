@@ -1,5 +1,4 @@
 import { deepStrictEqual } from "node:assert";
-import { expect } from "chai";
 import Ajv from "ajv";
 import summarize from "../../src/enrich/summarize/index.mjs";
 import cruiseResultSchema from "../../src/schema/cruise-result.schema.mjs";
@@ -12,7 +11,7 @@ const ajv = new Ajv();
 describe("[I] enrich/summarize", () => {
   it("doesn't add a rule set when there isn't one", () => {
     const lSummary = summarize([], {}, []);
-    expect(lSummary).to.deep.equal({
+    deepStrictEqual(lSummary, {
       error: 0,
       info: 0,
       ignore: 0,
@@ -28,7 +27,7 @@ describe("[I] enrich/summarize", () => {
   });
   it("adds a rule set when there is one", () => {
     const lSummary = summarize([], { ruleSet: { required: [] } }, []);
-    expect(lSummary).to.deep.equal({
+    deepStrictEqual(lSummary, {
       error: 0,
       info: 0,
       ignore: 0,
@@ -162,9 +161,7 @@ describe("[I] enrich/summarize", () => {
         },
       },
     ];
-    expect(
-      summarize([], { knownViolations: lKnownViolations }, []),
-    ).to.deep.equal({
+    deepStrictEqual(summarize([], { knownViolations: lKnownViolations }, []), {
       error: 0,
       info: 0,
       ignore: 0,
@@ -180,7 +177,7 @@ describe("[I] enrich/summarize", () => {
   });
 
   it("doesn't include known violations key when none exist", () => {
-    expect(summarize([], { knownViolations: [] }, [])).to.deep.equal({
+    deepStrictEqual(summarize([], { knownViolations: [] }, []), {
       error: 0,
       info: 0,
       ignore: 0,
@@ -223,7 +220,7 @@ describe("[I] enrich/summarize", () => {
       [],
     );
 
-    expect(lSummary).to.deep.equal({
+    deepStrictEqual(lSummary, {
       violations: [
         {
           type: "instability",
