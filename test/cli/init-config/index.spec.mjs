@@ -1,7 +1,6 @@
 import { writeFileSync, readFileSync } from "node:fs";
 import { join } from "node:path";
-import { deepStrictEqual } from "node:assert";
-import { expect } from "chai";
+import { deepStrictEqual, strictEqual } from "node:assert";
 import Ajv from "ajv";
 import deleteDammit from "../delete-dammit.utl.cjs";
 import initConfig from "../../../src/cli/init-config/index.mjs";
@@ -18,7 +17,7 @@ describe("[I] cli/init-config/index", () => {
     process.chdir(WORKINGDIR);
   });
 
-  it("init called with a string !== 'preset' creates a self-contained js rules file", async () => {
+  it("init creates a self-contained js rules file", async () => {
     process.chdir("test/cli/__fixtures__/init-config/no-config-files-exist");
     const lConfigResultFileName = `./${join(
       "../__fixtures__/init-config/no-config-files-exist",
@@ -30,31 +29,9 @@ describe("[I] cli/init-config/index", () => {
       const lResult = await import(lConfigResultFileName);
 
       ajv.validate(configurationSchema, lResult.default);
-      expect(lResult.default).to.not.haveOwnProperty("extends");
+      strictEqual(lResult.default.hasOwnProperty("extends"), false);
     } finally {
       deleteDammit(RULES_FILE_JS);
-    }
-  });
-
-  it("init preset creates a preset based js rules file", async () => {
-    process.chdir("test/cli/__fixtures__/init-config/no-config-files-exist");
-    const lConfig = ".dependency-cruiser-preset-based.js";
-    const lConfigResultFileName = `./${join(
-      "../__fixtures__/init-config/no-config-files-exist",
-      lConfig,
-    )}`;
-
-    try {
-      initConfig("preset", lConfig);
-      const lResult = await import(lConfigResultFileName);
-
-      ajv.validate(configurationSchema, lResult.default);
-      expect(lResult.default).to.haveOwnProperty("extends");
-      expect(lResult.default.extends).to.equal(
-        "dependency-cruiser/configs/recommended-strict",
-      );
-    } finally {
-      deleteDammit(lConfig);
     }
   });
 
@@ -71,8 +48,8 @@ describe("[I] cli/init-config/index", () => {
       const lResult = await import(lConfigResultFileName);
 
       ajv.validate(configurationSchema, lResult.default);
-      expect(lResult.default).to.not.haveOwnProperty("extends");
-      expect(lResult.default.options).to.not.haveOwnProperty("tsConfig");
+      strictEqual(lResult.default.hasOwnProperty("extends"), false);
+      strictEqual(lResult.default.options.hasOwnProperty("tsConfig"), false);
     } finally {
       deleteDammit(lConfig);
     }
@@ -90,9 +67,9 @@ describe("[I] cli/init-config/index", () => {
       const lResult = await import(lConfigResultFileName);
 
       ajv.validate(configurationSchema, lResult.default);
-      expect(lResult.default).to.not.haveOwnProperty("extends");
-      expect(lResult.default.options).to.haveOwnProperty("tsConfig");
-      expect(lResult.default.options.tsConfig).to.deep.equal({
+      strictEqual(lResult.default.hasOwnProperty("extends"), false);
+      strictEqual(lResult.default.options.hasOwnProperty("tsConfig"), true);
+      deepStrictEqual(lResult.default.options.tsConfig, {
         fileName: "tsconfig.json",
       });
     } finally {
@@ -112,9 +89,12 @@ describe("[I] cli/init-config/index", () => {
       const lResult = await import(lConfigResultFileName);
 
       ajv.validate(configurationSchema, lResult.default);
-      expect(lResult.default).to.not.haveOwnProperty("extends");
-      expect(lResult.default.options).to.haveOwnProperty("webpackConfig");
-      expect(lResult.default.options.webpackConfig).to.deep.equal({
+      strictEqual(lResult.default.hasOwnProperty("extends"), false);
+      strictEqual(
+        lResult.default.options.hasOwnProperty("webpackConfig"),
+        true,
+      );
+      deepStrictEqual(lResult.default.options.webpackConfig, {
         fileName: "webpack.config.js",
       });
     } finally {
@@ -138,9 +118,9 @@ describe("[I] cli/init-config/index", () => {
       const lResult = await import(lConfigResultFileName);
 
       ajv.validate(configurationSchema, lResult.default);
-      expect(
-        JSON.parse(readFileSync(lManifestFilename, "utf8")),
-      ).to.haveOwnProperty("scripts");
+
+      const lManifest = JSON.parse(readFileSync(lManifestFilename, "utf8"));
+      strictEqual(lManifest.hasOwnProperty("scripts"), true);
     } finally {
       deleteDammit(RULES_FILE_JS);
       deleteDammit(lManifestFilename);
@@ -165,9 +145,9 @@ describe("[I] cli/init-config/index", () => {
 
       ajv.validate(configurationSchema, lResult.default);
       deepStrictEqual(lResult.default, {});
-      expect(
-        JSON.parse(readFileSync(lManifestFilename, "utf8")),
-      ).to.haveOwnProperty("scripts");
+
+      const lManifest = JSON.parse(readFileSync(lManifestFilename, "utf8"));
+      strictEqual(lManifest.hasOwnProperty("scripts"), true);
     } finally {
       deleteDammit(lManifestFilename);
     }

@@ -1,6 +1,4 @@
-export type OneShotConfigIDType = "preset" | "yes" | "experimental-scripts";
-
-export type ConfigTypeType = "preset" | "self-contained";
+export type OneShotConfigIDType = "yes" | "experimental-scripts";
 
 export interface IInitConfig {
   /**
@@ -92,15 +90,6 @@ export interface IInitConfig {
    * (Formatted) date this config is created
    */
   date: string;
-  /**
-   * Whether to use one of the presets (`preset`) or be self contained
-   * (`self-contained`)
-   */
-  configType: ConfigTypeType;
-  /**
-   * For configType === "preset", the name of the preset
-   */
-  preset?: string;
 }
 
 export type IPartialInitConfig = Partial<IInitConfig>;

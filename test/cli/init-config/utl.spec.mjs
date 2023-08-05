@@ -1,16 +1,14 @@
-import { expect } from "chai";
+import { strictEqual } from "node:assert";
 import { folderNameArrayToRE } from "../../../src/cli/init-config/utl.mjs";
 
 describe("[U] cli/init-config/utl - folderNameArrayToRE", () => {
   it("transforms an array of folder names into a regex string - empty", () => {
-    expect(folderNameArrayToRE([])).to.equal("^()");
+    strictEqual(folderNameArrayToRE([]), "^()");
   });
   it("transforms an array of folder names into a regex string - one entry", () => {
-    expect(folderNameArrayToRE(["src"])).to.equal("^(src)");
+    strictEqual(folderNameArrayToRE(["src"]), "^(src)");
   });
   it("transforms an array of folder names into a regex string - more than one entry", () => {
-    expect(folderNameArrayToRE(["bin", "src", "lib"])).to.equal(
-      "^(bin|src|lib)",
-    );
+    strictEqual(folderNameArrayToRE(["bin", "src", "lib"]), "^(bin|src|lib)");
   });
 });

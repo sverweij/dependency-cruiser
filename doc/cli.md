@@ -716,7 +716,9 @@ configuration with some useful rules to the current folder and exits.
 
 The configuration file is larded with documentation to make it easy to tweak.
 
-Use `--config` to have dependency-cruiser take the configuration file into account.
+If you specified a non-default configuration file name, use `--config` to have
+dependency-cruiser take the configuration file into account. If you left the
+default name in place, dependency-cruiser will pick it up automatically.
 
 <details>
 <summary>Some of the rules that will be in the configuration (either directly or from a

@@ -66,13 +66,13 @@ export function compileRunScripts(pInitOptions) {
     const lTestLocations = (pInitOptions.testLocation || []).join(" ");
 
     lReturnValue = {
-      depcruise: `depcruise ${lSourceLocations} ${lTestLocations} --config`,
-      "depcruise:graph": `depcruise ${lSourceLocations} --include-only '${lSourceLocationRE}' --config --output-type dot | dot -T svg | depcruise-wrap-stream-in-html > dependency-graph.html`,
-      "depcruise:graph:dev": `depcruise ${lSourceLocations} --include-only '${lSourceLocationRE}' --prefix vscode://file/$(pwd)/ --config --output-type dot | dot -T svg | depcruise-wrap-stream-in-html | browser`,
-      "depcruise:graph:archi": `depcruise ${lSourceLocations} --include-only '${lSourceLocationRE}' --config --output-type archi | dot -T svg | depcruise-wrap-stream-in-html > high-level-dependency-graph.html`,
-      "depcruise:html": `depcruise ${lSourceLocations} ${lTestLocations} --progress --config --output-type err-html --output-to dependency-violation-report.html`,
-      "depcruise:text": `depcruise ${lSourceLocations} ${lTestLocations} --progress --config --output-type text`,
-      "depcruise:focus": `depcruise ${lSourceLocations} ${lTestLocations} --progress --config --output-type text --focus`,
+      depcruise: `depcruise ${lSourceLocations} ${lTestLocations}`,
+      "depcruise:graph": `depcruise ${lSourceLocations} --include-only '${lSourceLocationRE}' --output-type dot | dot -T svg | depcruise-wrap-stream-in-html > dependency-graph.html`,
+      "depcruise:graph:dev": `depcruise ${lSourceLocations} --include-only '${lSourceLocationRE}' --prefix vscode://file/$(pwd)/ --output-type dot | dot -T svg | depcruise-wrap-stream-in-html | browser`,
+      "depcruise:graph:archi": `depcruise ${lSourceLocations} --include-only '${lSourceLocationRE}' --output-type archi | dot -T svg | depcruise-wrap-stream-in-html > high-level-dependency-graph.html`,
+      "depcruise:html": `depcruise ${lSourceLocations} ${lTestLocations} --progress --output-type err-html --output-to dependency-violation-report.html`,
+      "depcruise:text": `depcruise ${lSourceLocations} ${lTestLocations} --progress --output-type text`,
+      "depcruise:focus": `depcruise ${lSourceLocations} ${lTestLocations} --progress --output-type text --focus`,
     };
   }
 
@@ -118,28 +118,33 @@ export function addRunScriptsToManifest(pManifest, pAdditionalRunScripts) {
 function getSuccessMessage(pDestinationManifestFileName) {
   const lExplanationIndent = 6;
 
-  return EXPERIMENTAL_SCRIPT_DOC.reduce((pAll, pScript) => {
-    return `${pAll}${
-      `\n    ${chalk.green(figures.play)} ${pScript.headline}` +
-      `\n${wrapAndIndent(`${pScript.description}`, lExplanationIndent)}\n\n`
-    }`;
-  }, `  ${chalk.green(figures.tick)} Run scripts added to '${pDestinationManifestFileName}':\n`);
+  return EXPERIMENTAL_SCRIPT_DOC.reduce(
+    (pAll, pScript) => {
+      return `${pAll}${
+        `\n    ${chalk.green(figures.play)} ${pScript.headline}` +
+        `\n${wrapAndIndent(`${pScript.description}`, lExplanationIndent)}\n\n`
+      }`;
+    },
+    `  ${chalk.green(
+      figures.tick,
+    )} Run scripts added to '${pDestinationManifestFileName}':\n`,
+  );
 }
 
 export function writeRunScriptsToManifest(
   pNormalizedInitOptions,
   pManifest = readManifest(),
-  pDestinationManifestFileName = PACKAGE_MANIFEST
+  pDestinationManifestFileName = PACKAGE_MANIFEST,
 ) {
   const lUpdatedManifest = addRunScriptsToManifest(
     pManifest,
-    compileRunScripts(pNormalizedInitOptions)
+    compileRunScripts(pNormalizedInitOptions),
   );
 
   writeFileSync(
     pDestinationManifestFileName,
     JSON.stringify(lUpdatedManifest, null, "  "),
-    "utf8"
+    "utf8",
   );
 
   process.stdout.write(getSuccessMessage(pDestinationManifestFileName));

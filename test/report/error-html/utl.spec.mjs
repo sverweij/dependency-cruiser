@@ -1,4 +1,3 @@
-/* eslint-disable no-prototype-builtins */
 import { deepStrictEqual, strictEqual } from "node:assert";
 import utl from "../../../src/report/error-html/utl.mjs";
 

@@ -1,4 +1,3 @@
-/* eslint-disable no-prototype-builtins */
 import { fileURLToPath } from "node:url";
 import { deepStrictEqual, strictEqual } from "node:assert";
 import normalizeCliOptions, {

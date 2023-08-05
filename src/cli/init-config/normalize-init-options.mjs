@@ -19,9 +19,9 @@ function usesTypeScript(pInitOptions, pExtensions) {
       pInitOptions.tsPreCompilationDeps ||
       (pExtensions || []).some((pExtension) =>
         [".ts", ".tsx", ".d.ts", ".mts", ".d.mts", ".cts", ".d.cts"].includes(
-          pExtension
-        )
-      )
+          pExtension,
+        ),
+      ),
   );
 }
 
@@ -46,15 +46,14 @@ function populate(pInitOptions) {
   const lReturnValue = {
     version: meta.version,
     date: new Date().toJSON(),
-    configType: "self-contained",
     ...pInitOptions,
     sourceLocation: toSourceLocationArray(
-      pInitOptions.sourceLocation || getSourceFolderCandidates()
+      pInitOptions.sourceLocation || getSourceFolderCandidates(),
     ),
     testLocation: pInitOptions.isMonoRepo
       ? []
       : toSourceLocationArray(
-          pInitOptions.testLocation || getTestFolderCandidates()
+          pInitOptions.testLocation || getTestFolderCandidates(),
         ),
   };
   const lExtensions = getExtensions(lReturnValue);
@@ -73,16 +72,12 @@ function populate(pInitOptions) {
  */
 export default function normalizeInitOptions(pInitOptions) {
   let lReturnValue = populate(pInitOptions);
-
-  if (lReturnValue.configType === "preset" && !lReturnValue.preset) {
-    lReturnValue.preset = "dependency-cruiser/configs/recommended-warn-only";
-  }
   if (!has(lReturnValue, "hasTestsOutsideSource")) {
     lReturnValue.hasTestsOutsideSource =
       !pInitOptions.isMonoRepo &&
       !hasTestsWithinSource(
         lReturnValue.testLocation,
-        lReturnValue.sourceLocation
+        lReturnValue.sourceLocation,
       );
   }
   return lReturnValue;

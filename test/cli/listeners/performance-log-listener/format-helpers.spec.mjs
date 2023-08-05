@@ -1,5 +1,5 @@
 /* eslint-disable no-magic-numbers */
-import { expect } from "chai";
+import { match, strictEqual } from "node:assert";
 import chalk from "chalk";
 import {
   formatTime,
@@ -24,27 +24,27 @@ import {
 
 describe("[U] cli/listeners/performance-log/format-helpers - formatTime", () => {
   it("converts to ms, left pads & adds the unit at the end", () => {
-    expect(formatTime(14.88041018)).to.equal("     14,880ms ");
+    strictEqual(formatTime(14.88041018), "     14,880ms ");
   });
 
   it("converts to ms, left pads & adds the unit at the end (0)", () => {
-    expect(formatTime(0)).to.equal("          0ms ");
+    strictEqual(formatTime(0), "          0ms ");
   });
 
   it("converts to ms, left pads & adds the unit at the end (negative numbers)", () => {
-    expect(formatTime(-3.1415926535)).to.equal("     -3,142ms ");
+    strictEqual(formatTime(-3.1415926535), "     -3,142ms ");
   });
 
   it("converts to ms, left pads & adds the unit at the end (null treatment => 0)", () => {
-    expect(formatTime(null)).to.equal("          0ms ");
+    strictEqual(formatTime(null), "          0ms ");
   });
 
   it("converts to ms, left pads & adds the unit at the end (undefined treatment => NaN)", () => {
-    expect(formatTime()).to.equal("        NaNms ");
+    strictEqual(formatTime(), "        NaNms ");
   });
 
   it("converts to ms, left pads & adds the unit at the end (non-number treatment => NaN)", () => {
-    expect(formatTime("not a number")).to.equal("        NaNms ");
+    strictEqual(formatTime("not a number"), "        NaNms ");
   });
 });
 
@@ -60,27 +60,27 @@ describe("[U] cli/listeners/performance-log/format-helpers - formatMemory", () =
   });
 
   it("converts to kB, left pads & adds the unit at the end", () => {
-    expect(formatMemory(4033856)).to.equal("     +3,939kB ");
+    strictEqual(formatMemory(4033856), "     +3,939kB ");
   });
 
   it("converts to kB, left pads & adds the unit at the end (0)", () => {
-    expect(formatMemory(0)).to.equal("          0kB ");
+    strictEqual(formatMemory(0), "          0kB ");
   });
 
   it("converts to kB, left pads & adds the unit at the end (negative numbers)", () => {
-    expect(formatMemory(-403385623)).to.equal("   -393,931kB ");
+    strictEqual(formatMemory(-403385623), "   -393,931kB ");
   });
 
   it("converts to kB, left pads & adds the unit at the end (null)", () => {
-    expect(formatMemory(0)).to.equal("          0kB ");
+    strictEqual(formatMemory(0), "          0kB ");
   });
 
   it("converts to kB, left pads & adds the unit at the end (undefined)", () => {
-    expect(formatMemory()).to.equal("        NaNkB ");
+    strictEqual(formatMemory(), "        NaNkB ");
   });
 
   it("converts to kB, left pads & adds the unit at the end (not a number)", () => {
-    expect(formatMemory("not a number")).to.equal("        NaNkB ");
+    strictEqual(formatMemory("not a number"), "        NaNkB ");
   });
 });
 
@@ -96,7 +96,8 @@ describe("[U] cli/listeners/performance-log/format-helpers - formatPerfLine", ()
       deltaExternal: 0,
       message: "sim sala bim",
     };
-    expect(formatPerfLine(lStats, "sim sala bim")).to.match(
+    match(
+      formatPerfLine(lStats, "sim sala bim"),
       / {0,}\+3,144kB {0,}\+2,420kB {0,}\+2,791kB {0,}0kB  {0,}4ms {0,}16ms {0,}7,635ms sim sala bim\n/,
     );
   });

@@ -1,4 +1,4 @@
-import { expect } from "chai";
+import { deepStrictEqual } from "node:assert";
 import {
   addRunScriptsToManifest,
   compileRunScripts,
@@ -6,34 +6,36 @@ import {
 
 describe("[U] cli/init-config/write-run-scripts-to-manifest - logic", () => {
   it("no manifest and no scripts retain the empty manifest with a scripts section", () => {
-    expect(addRunScriptsToManifest()).to.deep.equal({ scripts: {} });
+    deepStrictEqual(addRunScriptsToManifest(), { scripts: {} });
   });
 
   it("empty manifest and empty scripts object retain the empty manifest with a scripts section", () => {
-    expect(addRunScriptsToManifest({}, {})).to.deep.equal({
+    deepStrictEqual(addRunScriptsToManifest({}, {}), {
       scripts: {},
     });
   });
 
   it("manifest with scripts and empty script object retain the original manifest", () => {
-    expect(
+    deepStrictEqual(
       addRunScriptsToManifest({ scripts: { test: "jest" } }, {}),
-    ).to.deep.equal({ scripts: { test: "jest" } });
+      { scripts: { test: "jest" } },
+    );
   });
 
   it("manifest with scripts and a new script appears in the new manifest", () => {
-    expect(
+    deepStrictEqual(
       addRunScriptsToManifest(
         { scripts: { test: "jest" } },
         { depcruise: "depcruise src -v" },
       ),
-    ).to.deep.equal({
-      scripts: { depcruise: "depcruise src -v", test: "jest" },
-    });
+      {
+        scripts: { depcruise: "depcruise src -v", test: "jest" },
+      },
+    );
   });
 
   it("manifest with scripts and a update script doesn't overwrite in the manifest", () => {
-    expect(
+    deepStrictEqual(
       addRunScriptsToManifest(
         {
           scripts: {
@@ -44,26 +46,27 @@ describe("[U] cli/init-config/write-run-scripts-to-manifest - logic", () => {
         },
         { depcruise: "depcruise src -v" },
       ),
-    ).to.deep.equal({
-      scripts: {
-        test: "jest",
-        depcruise:
-          "depcruise --config custom-cruiser-config.js --err-long bin src test",
+      {
+        scripts: {
+          test: "jest",
+          depcruise:
+            "depcruise --config custom-cruiser-config.js --err-long bin src test",
+        },
       },
-    });
+    );
   });
 });
 
 describe("[U] cli/init-config/write-run-scripts-to-manifest - compile run script", () => {
   it("no sourcelocation no extra scripts (no init options object)", () => {
-    expect(compileRunScripts()).to.deep.equal({});
+    deepStrictEqual(compileRunScripts(), {});
   });
   it("no sourcelocation no extra scripts (empty init options object)", () => {
-    expect(compileRunScripts({}, [])).to.deep.equal({});
+    deepStrictEqual(compileRunScripts({}, []), {});
   });
   it("sourcelocation => bunch of extra scripts (empty init options object)", () => {
     const lRunScripts = compileRunScripts({ sourceLocation: ["src"] });
-    expect(Object.keys(lRunScripts)).to.deep.equal([
+    deepStrictEqual(Object.keys(lRunScripts), [
       "depcruise",
       "depcruise:graph",
       "depcruise:graph:dev",
