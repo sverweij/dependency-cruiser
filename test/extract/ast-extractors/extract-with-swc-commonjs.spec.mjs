@@ -1,53 +1,55 @@
-import { expect } from "chai";
+import { deepStrictEqual } from "node:assert";
 import extractWithSwc from "./extract-with-swc.utl.mjs";
 
 describe("[U] ast-extractors/extract-swc - regular commonjs require", () => {
   it("extracts require of a module that uses an export-equals'", () => {
-    expect(
+    deepStrictEqual(
       extractWithSwc(
         "import thing = require('./thing-that-uses-export-equals');",
       ),
-    ).to.deep.equal([
-      {
-        module: "./thing-that-uses-export-equals",
-        moduleSystem: "cjs",
-        dynamic: false,
-        exoticallyRequired: false,
-      },
-    ]);
+      [
+        {
+          module: "./thing-that-uses-export-equals",
+          moduleSystem: "cjs",
+          dynamic: false,
+          exoticallyRequired: false,
+        },
+      ],
+    );
   });
 
   it("extracts regular require as a const, let or var", () => {
-    expect(
+    deepStrictEqual(
       extractWithSwc(
         `const lala1 = require('legit-one');
                  let lala2 = require('legit-two');
                  var lala3 = require('legit-three');`,
       ),
-    ).to.deep.equal([
-      {
-        module: "legit-one",
-        moduleSystem: "cjs",
-        dynamic: false,
-        exoticallyRequired: false,
-      },
-      {
-        module: "legit-two",
-        moduleSystem: "cjs",
-        dynamic: false,
-        exoticallyRequired: false,
-      },
-      {
-        module: "legit-three",
-        moduleSystem: "cjs",
-        dynamic: false,
-        exoticallyRequired: false,
-      },
-    ]);
+      [
+        {
+          module: "legit-one",
+          moduleSystem: "cjs",
+          dynamic: false,
+          exoticallyRequired: false,
+        },
+        {
+          module: "legit-two",
+          moduleSystem: "cjs",
+          dynamic: false,
+          exoticallyRequired: false,
+        },
+        {
+          module: "legit-three",
+          moduleSystem: "cjs",
+          dynamic: false,
+          exoticallyRequired: false,
+        },
+      ],
+    );
   });
 
   it("extracts regular requires that are not on the top level in the AST", () => {
-    expect(
+    deepStrictEqual(
       extractWithSwc(
         `function f(x) {
                     if(x > 0) {
@@ -62,32 +64,31 @@ describe("[U] ast-extractors/extract-swc - regular commonjs require", () => {
                     }
                 }`,
       ),
-    ).to.deep.equal([
-      {
-        module: "midash",
-        moduleSystem: "cjs",
-        dynamic: false,
-        exoticallyRequired: false,
-      },
-      {
-        module: "slodash",
-        moduleSystem: "cjs",
-        dynamic: false,
-        exoticallyRequired: false,
-      },
-      {
-        module: "hidash",
-        moduleSystem: "cjs",
-        dynamic: false,
-        exoticallyRequired: false,
-      },
-    ]);
+      [
+        {
+          module: "midash",
+          moduleSystem: "cjs",
+          dynamic: false,
+          exoticallyRequired: false,
+        },
+        {
+          module: "slodash",
+          moduleSystem: "cjs",
+          dynamic: false,
+          exoticallyRequired: false,
+        },
+        {
+          module: "hidash",
+          moduleSystem: "cjs",
+          dynamic: false,
+          exoticallyRequired: false,
+        },
+      ],
+    );
   });
 
   it("extracts regular require with a template string without placeholders", () => {
-    expect(
-      extractWithSwc("const lala = require(`thunderscore`)"),
-    ).to.deep.equal([
+    deepStrictEqual(extractWithSwc("const lala = require(`thunderscore`)"), [
       {
         module: "thunderscore",
         moduleSystem: "cjs",
@@ -98,21 +99,22 @@ describe("[U] ast-extractors/extract-swc - regular commonjs require", () => {
   });
 
   it("ignores regular require without parameters", () => {
-    expect(extractWithSwc("const lala = require()")).to.deep.equal([]);
+    deepStrictEqual(extractWithSwc("const lala = require()"), []);
   });
 
   it("ignores regular require with a non-string argument", () => {
-    expect(extractWithSwc("const lala = require(666)")).to.deep.equal([]);
+    deepStrictEqual(extractWithSwc("const lala = require(666)"), []);
   });
 
   it("ignores regular require with a template literal with placeholders", () => {
-    expect(
+    deepStrictEqual(
       // eslint-disable-next-line no-template-curly-in-string
       extractWithSwc("const lala = require(`shwoooop/${blabla}`)"),
-    ).to.deep.equal([]);
+      [],
+    );
   });
 
   it("ignores regular require with a function for a parameter", () => {
-    expect(extractWithSwc("const lala = require(helvete())")).to.deep.equal([]);
+    deepStrictEqual(extractWithSwc("const lala = require(helvete())"), []);
   });
 });

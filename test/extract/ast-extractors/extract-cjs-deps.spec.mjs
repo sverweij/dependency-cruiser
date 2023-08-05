@@ -1,5 +1,4 @@
 import { deepStrictEqual } from "node:assert";
-import { expect } from "chai";
 import extractcommonJSDeps from "../../../src/extract/ast-extractors/extract-cjs-deps.mjs";
 import { getASTFromSource } from "../../../src/extract/parse/to-javascript-ast.mjs";
 
@@ -20,7 +19,7 @@ describe("[U] ast-extractors/extract-cjs-deps", () => {
     let lDeps = [];
 
     extractcommonJS("const x = require('./static')", lDeps);
-    expect(lDeps).to.deep.equal([
+    deepStrictEqual(lDeps, [
       {
         module: "./static",
         moduleSystem: "cjs",
@@ -38,7 +37,7 @@ describe("[U] ast-extractors/extract-cjs-deps", () => {
       lDeps,
       ["need"],
     );
-    expect(lDeps).to.deep.equal([
+    deepStrictEqual(lDeps, [
       {
         module: "./static-required-with-need",
         moduleSystem: "cjs",
@@ -57,7 +56,7 @@ describe("[U] ast-extractors/extract-cjs-deps", () => {
       lDeps,
       ["window.require"],
     );
-    expect(lDeps).to.deep.equal([
+    deepStrictEqual(lDeps, [
       {
         module: "./static-required-with-need",
         moduleSystem: "cjs",
@@ -82,7 +81,7 @@ describe("[U] ast-extractors/extract-cjs-deps", () => {
     let lDeps = [];
 
     extractcommonJS("const x = require(`template-literal`)", lDeps);
-    expect(lDeps).to.deep.equal([
+    deepStrictEqual(lDeps, [
       {
         module: "template-literal",
         moduleSystem: "cjs",
