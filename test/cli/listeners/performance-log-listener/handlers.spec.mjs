@@ -1,7 +1,5 @@
-/* eslint-disable no-unused-expressions */
 /* eslint-disable no-magic-numbers */
-import { match, strictEqual } from "node:assert";
-import { expect } from "chai";
+import { match, notStrictEqual, ok, strictEqual } from "node:assert";
 import {
   getHeader,
   getEndText,
@@ -12,13 +10,13 @@ const MAX_LEVEL = 20;
 
 describe("[U] cli/listeners/performance-log/handlers - getHeader", () => {
   it("when the level is > the max => empty string", () => {
-    expect(getHeader(30, MAX_LEVEL)).to.equal("");
+    strictEqual(getHeader(30, MAX_LEVEL), "");
   });
   it("when the level === the max => non-empty string", () => {
-    expect(getHeader(20, MAX_LEVEL)).to.be.not.empty;
+    ok(getHeader(20, MAX_LEVEL));
   });
   it("when the level is < the max => non-empty string", () => {
-    expect(getHeader(10, MAX_LEVEL)).to.be.not.empty;
+    ok(getHeader(10, MAX_LEVEL));
   });
 });
 
@@ -28,15 +26,13 @@ describe("[U] cli/listeners/performance-log/handlers - getProgressLine", () => {
     previousMessage: "previous message",
   };
   it("when the level is > the max => empty string", () => {
-    expect(getProgressLine("message", lStateMock, 30, MAX_LEVEL)).to.equal("");
+    strictEqual(getProgressLine("message", lStateMock, 30, MAX_LEVEL), "");
   });
   it("when the level === the max => non-empty string", () => {
-    expect(getProgressLine("message", lStateMock, 20, MAX_LEVEL)).to.be.not
-      .empty;
+    ok(getProgressLine("message", lStateMock, 20, MAX_LEVEL));
   });
   it("when the level is < the max => non-empty string", () => {
-    expect(getProgressLine("message", lStateMock, 10, MAX_LEVEL)).to.be.not
-      .empty;
+    ok(getProgressLine("message", lStateMock, 10, MAX_LEVEL));
   });
   it("message contains the previous message - state is updated", () => {
     const lUpdatableStateMock = {
@@ -45,11 +41,12 @@ describe("[U] cli/listeners/performance-log/handlers - getProgressLine", () => {
     };
     const lPreviousTime = lUpdatableStateMock.previousMessage;
 
-    expect(
+    match(
       getProgressLine("next message", lUpdatableStateMock, 10, MAX_LEVEL),
-    ).to.match(/previous message/);
+      /previous message/,
+    );
     strictEqual(lUpdatableStateMock.previousMessage, "next message");
-    expect(lUpdatableStateMock.previousTime).to.not.equal(lPreviousTime);
+    notStrictEqual(lUpdatableStateMock.previousTime, lPreviousTime);
   });
 });
 
@@ -59,13 +56,13 @@ describe("[U] cli/listeners/performance-log/handlers - getEndText", () => {
     previousHeapUsed: process.memoryUsage().heapUsed - 1000,
   };
   it("when the level is > the max => empty string", () => {
-    expect(getEndText(lStateMock, 30, MAX_LEVEL)).to.equal("");
+    strictEqual(getEndText(lStateMock, 30, MAX_LEVEL), "");
   });
   it("when the level === the max => non-empty string", () => {
-    expect(getEndText(lStateMock, 20, MAX_LEVEL)).to.be.not.empty;
+    ok(getEndText(lStateMock, 20, MAX_LEVEL));
   });
   it("when the level is < the max => non-empty string", () => {
-    expect(getEndText(lStateMock, 10, MAX_LEVEL)).to.be.not.empty;
+    ok(getEndText(lStateMock, 10, MAX_LEVEL));
   });
 
   it("message contains a line with totals", () => {

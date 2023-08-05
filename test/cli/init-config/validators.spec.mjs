@@ -1,4 +1,4 @@
-import { expect } from "chai";
+import { strictEqual } from "node:assert";
 import { validateLocation } from "../../../src/cli/init-config/validators.mjs";
 
 describe("[U] cli/init-config/inquirer-validators - validateLocation", () => {
@@ -11,52 +11,56 @@ describe("[U] cli/init-config/inquirer-validators - validateLocation", () => {
   });
 
   it("returns an error message when provided with an empty string", () => {
-    expect(validateLocation("")).to.equal(
+    strictEqual(
+      validateLocation(""),
       "'' doesn't seem to exist - please try again",
     );
   });
 
   it("returns an error message when provided with a non-existing folder name", () => {
     process.chdir(lFixturesDirectory);
-    expect(validateLocation("non-existing-folder")).to.equal(
+    strictEqual(
+      validateLocation("non-existing-folder"),
       "'non-existing-folder' doesn't seem to exist - please try again",
     );
   });
 
   it("returns an error message when provided with a name of a file that is not a folder", () => {
     process.chdir(lFixturesDirectory);
-    expect(validateLocation("existing-file")).to.equal(
+    strictEqual(
+      validateLocation("existing-file"),
       "'existing-file' doesn't seem to be a folder - please try again",
     );
   });
 
   it("returns true when provided with an existing folder", () => {
     process.chdir(lFixturesDirectory);
-    expect(validateLocation("existing-folder")).to.equal(true);
+    strictEqual(validateLocation("existing-folder"), true);
   });
 
   it("returns true when provided with a c.s.l. of existing folders", () => {
     process.chdir(lFixturesDirectory);
-    expect(
+    strictEqual(
       validateLocation("existing-folder, another-existing-folder"),
-    ).to.equal(true);
+      true,
+    );
   });
 
   it("returns an error message when provided with a c.s.l. of existing + non-existing folders", () => {
     process.chdir(lFixturesDirectory);
-    expect(
+    strictEqual(
       validateLocation(
         "existing-folder, non-existing-folder, another-existing-folder",
       ),
-    ).to.equal(
       "'non-existing-folder' doesn't seem to exist - please try again",
     );
   });
 
   it("returns true when provided with an array of existing folders", () => {
     process.chdir(lFixturesDirectory);
-    expect(
+    strictEqual(
       validateLocation(["existing-folder", "another-existing-folder"]),
-    ).to.equal(true);
+      true,
+    );
   });
 });

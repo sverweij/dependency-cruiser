@@ -1,7 +1,7 @@
 import { writeFileSync } from "node:fs";
 import { tmpdir } from "node:os";
 import { join } from "node:path/posix";
-import { expect } from "chai";
+import { deepStrictEqual, ok, strictEqual } from "node:assert";
 import Ajv from "ajv";
 import buildConfig from "../../../src/cli/init-config/build-config.mjs";
 import normalizeInitOptions from "../../../src/cli/init-config/normalize-init-options.mjs";
@@ -31,41 +31,13 @@ describe("[I] cli/init-config/build-config", () => {
     process.chdir(WORKINGDIR);
   });
 
-  it("generates a valid config - configType preset without preset yields warn-only", async () => {
-    process.chdir("test/cli/__fixtures__/init-config/no-config-files-exist");
-    const lResult = await createConfigNormalized({
-      configType: "preset",
-    });
-
-    ajv.validate(configurationSchema, lResult);
-    expect(lResult).to.haveOwnProperty("extends");
-    expect(lResult.extends).to.equal(
-      "dependency-cruiser/configs/recommended-warn-only",
-    );
-  });
-
   it("generates a valid config - with all things in one", async () => {
     process.chdir("test/cli/__fixtures__/init-config/no-config-files-exist");
 
     const lResult = await createConfigNormalized({});
 
     ajv.validate(configurationSchema, lResult);
-    expect(lResult).to.not.haveOwnProperty("extends");
-  });
-
-  it("generates a valid config - extending the passed preset", async () => {
-    process.chdir("test/cli/__fixtures__/init-config/no-config-files-exist");
-
-    const lResult = await createConfigNormalized({
-      configType: "preset",
-      preset: "@my/cool/company/configs/depcruise-preset",
-    });
-
-    ajv.validate(configurationSchema, lResult);
-    expect(lResult).to.haveOwnProperty("forbidden");
-    expect(lResult.extends).to.equal(
-      "@my/cool/company/configs/depcruise-preset",
-    );
+    ok(!lResult.hasOwnProperty("extends"));
   });
 
   it("generates a valid config - tests live with their sources", async () => {
@@ -77,10 +49,11 @@ describe("[I] cli/init-config/build-config", () => {
     });
 
     ajv.validate(configurationSchema, lResult);
-    expect(lResult).to.haveOwnProperty("forbidden");
-    expect(
+    ok(lResult.hasOwnProperty("forbidden"));
+    strictEqual(
       lResult.forbidden.some((pRule) => pRule.name === "not-to-test"),
-    ).to.equal(false);
+      false,
+    );
   });
 
   it("generates a valid config - tests live separately", async () => {
@@ -92,10 +65,11 @@ describe("[I] cli/init-config/build-config", () => {
     });
 
     ajv.validate(configurationSchema, lResult);
-    expect(lResult).to.haveOwnProperty("forbidden");
-    expect(
+    ok(lResult.hasOwnProperty("forbidden"));
+    strictEqual(
       lResult.forbidden.some((pRule) => pRule.name === "not-to-test"),
-    ).to.equal(true);
+      true,
+    );
   });
 
   it("generates a valid config - webpackConfig", async () => {
@@ -107,8 +81,8 @@ describe("[I] cli/init-config/build-config", () => {
     });
 
     ajv.validate(configurationSchema, lResult);
-    expect(lResult).to.haveOwnProperty("options");
-    expect(lResult.options.webpackConfig).to.deep.equal({
+    ok(lResult.hasOwnProperty("options"));
+    deepStrictEqual(lResult.options.webpackConfig, {
       fileName: "./webpack.prod.js",
     });
   });
@@ -122,8 +96,8 @@ describe("[I] cli/init-config/build-config", () => {
     });
 
     ajv.validate(configurationSchema, lResult);
-    expect(lResult).to.haveOwnProperty("options");
-    expect(lResult.options.tsConfig).to.deep.equal({
+    ok(lResult.hasOwnProperty("options"));
+    deepStrictEqual(lResult.options.tsConfig, {
       fileName: "./tsconfig.json",
     });
   });

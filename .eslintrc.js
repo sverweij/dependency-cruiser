@@ -32,6 +32,7 @@ module.exports = {
       rules: {
         "max-lines": "off",
         "max-lines-per-function": "off",
+        "no-prototype-builtins": "off", // perfectly fine to use hasOwnProperty c.s. in tests
         "mocha/valid-suite-description": [
           "error",
           {

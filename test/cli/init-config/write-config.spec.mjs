@@ -1,7 +1,6 @@
-import { strictEqual } from "node:assert";
+import { ok, strictEqual } from "node:assert";
 import { writeFileSync, readFileSync } from "node:fs";
 import { join } from "node:path";
-import { expect } from "chai";
 import deleteDammit from "../delete-dammit.utl.cjs";
 import writeConfig from "../../../src/cli/init-config/write-config.mjs";
 
@@ -35,8 +34,8 @@ describe("[U] cli/init-config/write-config", () => {
 
       const lResult = await import(lConfigResultFileName);
 
-      expect(lResult.default).to.haveOwnProperty("aap");
-      expect(lResult.default).to.haveOwnProperty("wim");
+      ok(lResult.default.hasOwnProperty("aap"));
+      ok(lResult.default.hasOwnProperty("wim"));
     } finally {
       deleteDammit(lCustomConfigFileName);
     }
@@ -57,11 +56,11 @@ describe("[U] cli/init-config/write-config", () => {
       }`);
     } catch (pError) {
       lStillHere = false;
-      expect(pError.message).to.contain("already exists here - leaving it be");
+      ok(pError.message.includes("already exists here - leaving it be"));
     }
 
     strictEqual(lStillHere, false);
 
-    expect(readFileSync(RULES_FILE_JS, "utf8")).to.equal("module.exports = {}");
+    strictEqual(readFileSync(RULES_FILE_JS, "utf8"), "module.exports = {}");
   });
 });

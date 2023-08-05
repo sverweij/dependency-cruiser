@@ -46,14 +46,6 @@ function getOneShotConfig(pOneShotConfigId) {
   };
   /** @type {Map<import("./types").OneShotConfigIDType, import("./types").IPartialInitConfig>} */
   const lOneShotConfigs = new Map([
-    [
-      "preset",
-      {
-        configType: "preset",
-        preset: "dependency-cruiser/configs/recommended-strict",
-        ...lBaseConfig,
-      },
-    ],
     ["yes", lBaseConfig],
     [
       "experimental-scripts",
