@@ -1,5 +1,4 @@
 import { strictEqual } from "node:assert";
-import { expect } from "chai";
 import get from "lodash/get.js";
 import { getASTFromSource } from "../../../src/extract/parse/to-javascript-ast.mjs";
 
@@ -38,13 +37,14 @@ describe("[U] extract/parse/to-javascript-ast", () => {
         },
       },
     );
-    expect(
+    strictEqual(
       get(
         lFoundAST,
         "body[0].declarations[0].init.body.type",
         "not a jsx element",
       ),
-    ).to.equal("JSXElement");
+      "JSXElement",
+    );
   });
 
   it("doesn't have any weird imports when tsx gets transpiled as non-'preserve' ", () => {
@@ -75,22 +75,25 @@ describe("[U] extract/parse/to-javascript-ast", () => {
       {},
     );
     strictEqual(likelyTheArrowExpression.type, "ArrowFunctionExpression");
-    expect(
+    strictEqual(
       get(
         likelyTheArrowExpression,
         "body.callee.type",
         "not a member expression",
       ),
-    ).to.equal("MemberExpression");
-    expect(
+      "MemberExpression",
+    );
+    strictEqual(
       get(likelyTheArrowExpression, "body.callee.object.name", "not react"),
-    ).to.equal("React");
-    expect(
+      "React",
+    );
+    strictEqual(
       get(
         likelyTheArrowExpression,
         "body.callee.property.name",
         "not createElement",
       ),
-    ).to.equal("createElement");
+      "createElement",
+    );
   });
 });
