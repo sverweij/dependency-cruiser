@@ -19,19 +19,6 @@
         "couldNotResolve": false
       },
       {
-        "module": "chai",
-        "resolved": "node_modules/chai/index.js",
-        "moduleSystem": "es6",
-        "coreModule": false,
-        "dependencyTypes": ["npm-dev"],
-        "dynamic": false,
-        "license": "MIT",
-        "followable": true,
-        "exoticallyRequired": false,
-        "matchesDoNotFollow": false,
-        "couldNotResolve": false
-      },
-      {
         "module": "eslint",
         "resolved": "node_modules/eslint/lib/api.js",
         "moduleSystem": "es6",
