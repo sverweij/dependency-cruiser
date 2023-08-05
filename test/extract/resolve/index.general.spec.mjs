@@ -1,6 +1,6 @@
+import { deepStrictEqual } from "node:assert";
 import { join } from "node:path";
 import { fileURLToPath } from "node:url";
-import { expect } from "chai";
 import resolve from "../../../src/extract/resolve/index.mjs";
 import normalizeResolveOptions from "../../../src/main/resolve-options/normalize.mjs";
 
@@ -32,7 +32,7 @@ describe("[I] extract/resolve/index - general", () => {
   });
 
   it("resolves a local dependency to a file on disk", async () => {
-    expect(
+    deepStrictEqual(
       resolve(
         {
           module: "./hots",
@@ -42,17 +42,18 @@ describe("[I] extract/resolve/index - general", () => {
         join(__dirname, "__mocks__", "resolve"),
         await normalizeResolveOptions({}, {}),
       ),
-    ).to.deep.equal({
-      coreModule: false,
-      couldNotResolve: false,
-      dependencyTypes: ["local"],
-      followable: true,
-      resolved: "resolve/hots.js",
-    });
+      {
+        coreModule: false,
+        couldNotResolve: false,
+        dependencyTypes: ["local"],
+        followable: true,
+        resolved: "resolve/hots.js",
+      },
+    );
   });
 
   it("resolves a core module as core module", () => {
-    expect(
+    deepStrictEqual(
       resolve(
         {
           module: "path",
@@ -62,17 +63,18 @@ describe("[I] extract/resolve/index - general", () => {
         join(__dirname, "__mocks__", "resolve"),
         {},
       ),
-    ).to.deep.equal({
-      coreModule: true,
-      couldNotResolve: false,
-      dependencyTypes: ["core"],
-      followable: false,
-      resolved: "path",
-    });
+      {
+        coreModule: true,
+        couldNotResolve: false,
+        dependencyTypes: ["core"],
+        followable: false,
+        resolved: "path",
+      },
+    );
   });
 
   it("resolves the 'test'  core module as core module", () => {
-    expect(
+    deepStrictEqual(
       resolve(
         {
           module: "test",
@@ -82,17 +84,18 @@ describe("[I] extract/resolve/index - general", () => {
         join(__dirname, "__mocks__", "resolve"),
         {},
       ),
-    ).to.deep.equal({
-      coreModule: true,
-      couldNotResolve: false,
-      dependencyTypes: ["core"],
-      followable: false,
-      resolved: "test",
-    });
+      {
+        coreModule: true,
+        couldNotResolve: false,
+        dependencyTypes: ["core"],
+        followable: false,
+        resolved: "test",
+      },
+    );
   });
 
   it("resolves the 'node:test' core module as core module", () => {
-    expect(
+    deepStrictEqual(
       resolve(
         {
           module: "node:test",
@@ -102,17 +105,18 @@ describe("[I] extract/resolve/index - general", () => {
         join(__dirname, "__mocks__", "resolve"),
         {},
       ),
-    ).to.deep.equal({
-      coreModule: true,
-      couldNotResolve: false,
-      dependencyTypes: ["core"],
-      followable: false,
-      resolved: "node:test",
-    });
+      {
+        coreModule: true,
+        couldNotResolve: false,
+        dependencyTypes: ["core"],
+        followable: false,
+        resolved: "node:test",
+      },
+    );
   });
 
   it("resolves to the moduleName input (and depType 'unknown') when not resolvable on disk", () => {
-    expect(
+    deepStrictEqual(
       resolve(
         {
           module: "./doesnotexist",
@@ -124,17 +128,18 @@ describe("[I] extract/resolve/index - general", () => {
           bustTheCache: true,
         },
       ),
-    ).to.deep.equal({
-      coreModule: false,
-      couldNotResolve: true,
-      dependencyTypes: ["unknown"],
-      followable: false,
-      resolved: "./doesnotexist",
-    });
+      {
+        coreModule: false,
+        couldNotResolve: true,
+        dependencyTypes: ["unknown"],
+        followable: false,
+        resolved: "./doesnotexist",
+      },
+    );
   });
 
   it("resolves known non-followables as not followable: json", async () => {
-    expect(
+    deepStrictEqual(
       resolve(
         {
           module: "./something.json",
@@ -144,17 +149,18 @@ describe("[I] extract/resolve/index - general", () => {
         join(__dirname, "__mocks__", "followability"),
         await normalizeResolveOptions({ bustTheCache: true }, {}),
       ),
-    ).to.deep.equal({
-      coreModule: false,
-      couldNotResolve: false,
-      dependencyTypes: ["local"],
-      followable: false,
-      resolved: "followability/something.json",
-    });
+      {
+        coreModule: false,
+        couldNotResolve: false,
+        dependencyTypes: ["local"],
+        followable: false,
+        resolved: "followability/something.json",
+      },
+    );
   });
 
   it("resolves known non-followables as not followable, even when it's a resolve registered extension: json", async () => {
-    expect(
+    deepStrictEqual(
       resolve(
         {
           module: "./something.json",
@@ -170,17 +176,18 @@ describe("[I] extract/resolve/index - general", () => {
           {},
         ),
       ),
-    ).to.deep.equal({
-      coreModule: false,
-      couldNotResolve: false,
-      dependencyTypes: ["local"],
-      followable: false,
-      resolved: "followability/something.json",
-    });
+      {
+        coreModule: false,
+        couldNotResolve: false,
+        dependencyTypes: ["local"],
+        followable: false,
+        resolved: "followability/something.json",
+      },
+    );
   });
 
   it("resolves known non-followables as not followable, even when it's a resolve registered extension: sass", async () => {
-    expect(
+    deepStrictEqual(
       resolve(
         {
           module: "./something.scss",
@@ -196,17 +203,18 @@ describe("[I] extract/resolve/index - general", () => {
           {},
         ),
       ),
-    ).to.deep.equal({
-      coreModule: false,
-      couldNotResolve: false,
-      dependencyTypes: ["local"],
-      followable: false,
-      resolved: "followability/something.scss",
-    });
+      {
+        coreModule: false,
+        couldNotResolve: false,
+        dependencyTypes: ["local"],
+        followable: false,
+        resolved: "followability/something.scss",
+      },
+    );
   });
 
   it("considers passed (webpack) aliases", async () => {
-    expect(
+    deepStrictEqual(
       resolve(
         {
           module: "hoepla/hoi",
@@ -224,17 +232,18 @@ describe("[I] extract/resolve/index - general", () => {
           {},
         ),
       ),
-    ).to.deep.equal({
-      coreModule: false,
-      couldNotResolve: false,
-      dependencyTypes: ["aliased"],
-      followable: true,
-      resolved: "i-got-aliased-to-hoepla/hoi/index.js",
-    });
+      {
+        coreModule: false,
+        couldNotResolve: false,
+        dependencyTypes: ["aliased"],
+        followable: true,
+        resolved: "i-got-aliased-to-hoepla/hoi/index.js",
+      },
+    );
   });
 
   it("considers a passed (webpack) modules array", async () => {
-    expect(
+    deepStrictEqual(
       resolve(
         {
           module: "shared",
@@ -258,17 +267,18 @@ describe("[I] extract/resolve/index - general", () => {
           {},
         ),
       ),
-    ).to.deep.equal({
-      coreModule: false,
-      couldNotResolve: false,
-      dependencyTypes: ["localmodule"],
-      followable: true,
-      resolved: "localmodulesfix/localmoduleshere/shared/index.js",
-    });
+      {
+        coreModule: false,
+        couldNotResolve: false,
+        dependencyTypes: ["localmodule"],
+        followable: true,
+        resolved: "localmodulesfix/localmoduleshere/shared/index.js",
+      },
+    );
   });
 
   it("strips query parameters from file names", async () => {
-    expect(
+    deepStrictEqual(
       resolve(
         {
           module: "./hots.js?blah",
@@ -278,34 +288,36 @@ describe("[I] extract/resolve/index - general", () => {
         join(__dirname, "__mocks__", "resolve"),
         await normalizeResolveOptions({}, {}),
       ),
-    ).to.deep.equal({
-      coreModule: false,
-      couldNotResolve: false,
-      dependencyTypes: ["local"],
-      followable: true,
-      resolved: "resolve/hots.js",
-    });
+      {
+        coreModule: false,
+        couldNotResolve: false,
+        dependencyTypes: ["local"],
+        followable: true,
+        resolved: "resolve/hots.js",
+      },
+    );
   });
 
   it("by default does not look at 'exports' fields in package.json", async () => {
     process.chdir("test/extract/resolve/__mocks__/package-json-with-exports");
-    expect(
+    deepStrictEqual(
       await wrappedResolve({
         module: "export-testinga/conditionalExports",
         moduleSystem: "cjs",
       }),
-    ).to.deep.equal({
-      coreModule: false,
-      couldNotResolve: true,
-      dependencyTypes: ["unknown"],
-      followable: false,
-      resolved: "export-testinga/conditionalExports",
-    });
+      {
+        coreModule: false,
+        couldNotResolve: true,
+        dependencyTypes: ["unknown"],
+        followable: false,
+        resolved: "export-testinga/conditionalExports",
+      },
+    );
   });
 
   it("looks at the 'exports' fields in package.json when enhanced-resolve is instructed to", async () => {
     process.chdir("test/extract/resolve/__mocks__/package-json-with-exports");
-    expect(
+    deepStrictEqual(
       resolve(
         {
           module: "export-testinga/conditionalExports",
@@ -322,51 +334,54 @@ describe("[I] extract/resolve/index - general", () => {
           {},
         ),
       ),
-    ).to.deep.equal({
-      coreModule: false,
-      couldNotResolve: false,
-      dependencyTypes: ["npm-no-pkg"],
-      followable: true,
-      resolved: "node_modules/export-testinga/feature.cjs",
-    });
+      {
+        coreModule: false,
+        couldNotResolve: false,
+        dependencyTypes: ["npm-no-pkg"],
+        followable: true,
+        resolved: "node_modules/export-testinga/feature.cjs",
+      },
+    );
   });
 
   it("Correctly resolves file names with #'s in it (formerly an upstream issue in enhanced-resolve)", async () => {
     process.chdir("test/extract/resolve/__mocks__/resolve-hashmarks");
-    expect(
+    deepStrictEqual(
       await wrappedResolve({
         module: "./#/hashmark.js",
         moduleSystem: "cjs",
       }),
-    ).to.deep.equal({
-      coreModule: false,
-      couldNotResolve: false,
-      dependencyTypes: ["local"],
-      followable: true,
-      resolved: "#/hashmark.js",
-    });
+      {
+        coreModule: false,
+        couldNotResolve: false,
+        dependencyTypes: ["local"],
+        followable: true,
+        resolved: "#/hashmark.js",
+      },
+    );
   });
 
   it("Correctly resolves file names that _correctly_ use #'s (in the 'URL' fashion) in it (formerly an upstream issue in enhanced-resolve)", async () => {
     process.chdir("test/extract/resolve/__mocks__/resolve-hashmarks");
-    expect(
+    deepStrictEqual(
       await wrappedResolve({
         module: "./hashmark-after-this.js#this-is-extra",
         moduleSystem: "cjs",
       }),
-    ).to.deep.equal({
-      coreModule: false,
-      couldNotResolve: false,
-      dependencyTypes: ["local"],
-      // because the extion is '.js#this-is-extra' and not '.js'
-      followable: false,
-      resolved: "hashmark-after-this.js#this-is-extra",
-    });
+      {
+        coreModule: false,
+        couldNotResolve: false,
+        dependencyTypes: ["local"],
+        // because the extion is '.js#this-is-extra' and not '.js'
+        followable: false,
+        resolved: "hashmark-after-this.js#this-is-extra",
+      },
+    );
   });
 
   it("Passes mainFields correctly so it's possible to resolve type-only packages", async () => {
     process.chdir("test/extract/resolve/__mocks__/resolve-type-only-packages");
-    expect(
+    deepStrictEqual(
       resolve(
         {
           module: "lalala-interfaces",
@@ -379,12 +394,13 @@ describe("[I] extract/resolve/index - general", () => {
           mainFields: ["main", "types"],
         }),
       ),
-    ).to.deep.equal({
-      coreModule: false,
-      couldNotResolve: false,
-      dependencyTypes: ["npm-no-pkg"],
-      followable: true,
-      resolved: "node_modules/lalala-interfaces/dist/interfaces/index.d.ts",
-    });
+      {
+        coreModule: false,
+        couldNotResolve: false,
+        dependencyTypes: ["npm-no-pkg"],
+        followable: true,
+        resolved: "node_modules/lalala-interfaces/dist/interfaces/index.d.ts",
+      },
+    );
   });
 });

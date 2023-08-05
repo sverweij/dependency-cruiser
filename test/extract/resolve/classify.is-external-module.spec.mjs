@@ -1,34 +1,36 @@
-import { expect } from "chai";
+import { strictEqual } from "node:assert";
 import { isExternalModule } from "../../../src/extract/resolve/module-classifiers.mjs";
 
 describe("[U] extract/resolve/module-classifiers - isExternalModule", () => {
   it("returns false when passed nothing", () => {
-    expect(isExternalModule()).to.equal(false);
+    strictEqual(isExternalModule(), false);
   });
   it("returns false when passed null", () => {
-    expect(isExternalModule(null)).to.equal(false);
+    strictEqual(isExternalModule(null), false);
   });
   it("returns false when passed an empty string", () => {
-    expect(isExternalModule("")).to.equal(false);
+    strictEqual(isExternalModule(""), false);
   });
   it("returns false when passed a path ", () => {
-    expect(isExternalModule("a-path")).to.equal(false);
+    strictEqual(isExternalModule("a-path"), false);
   });
   it("returns false when passed a path that doesn't include one of the passed external module folders", () => {
-    expect(isExternalModule("a-path", ["node_modules"])).to.equal(false);
+    strictEqual(isExternalModule("a-path", ["node_modules"]), false);
   });
   it("returns true when passed a path that includes the one passed external module folder", () => {
-    expect(
+    strictEqual(
       isExternalModule("node_modules/a-path-to/index.js", ["node_modules"]),
-    ).to.equal(true);
+      true,
+    );
   });
   it("returns true when passed a path that includes one of the passed external module folders", () => {
-    expect(
+    strictEqual(
       isExternalModule("shwok/a-path-to/index.js", [
         "node_modules",
         "node_modules/@types",
         "shwok",
       ]),
-    ).to.equal(true);
+      true,
+    );
   });
 });
