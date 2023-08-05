@@ -1,4 +1,4 @@
-import { expect } from "chai";
+import { deepStrictEqual } from "node:assert";
 import extract from "../../src/extract/index.mjs";
 import { normalizeCruiseOptions } from "../../src/main/options/normalize.mjs";
 import normalizeResolveOptions from "../../src/main/resolve-options/normalize.mjs";
@@ -25,7 +25,8 @@ describe("[I] extract/index - exclude", () => {
       lResolveOptions,
     );
 
-    expect(lResult).to.deep.equal(
+    deepStrictEqual(
+      lResult,
       requireJSON("./__mocks__/exclude/path/es/output.json"),
     );
   });
@@ -48,7 +49,8 @@ describe("[I] extract/index - exclude", () => {
       lResolveOptions,
     );
 
-    expect(lResult).to.deep.equal(
+    deepStrictEqual(
+      lResult,
       requireJSON("./__mocks__/exclude/dynamic/es/output.json"),
     );
   });

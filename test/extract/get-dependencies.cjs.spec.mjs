@@ -1,8 +1,8 @@
+import { deepStrictEqual } from "node:assert";
 import { join } from "node:path";
 import { unlinkSync } from "node:fs";
 import { fileURLToPath } from "node:url";
 import symlinkDir from "symlink-dir";
-import { expect } from "chai";
 import normalizeResolveOptions from "../../src/main/resolve-options/normalize.mjs";
 import { normalizeCruiseOptions } from "../../src/main/options/normalize.mjs";
 import { createRequireJSON } from "../backwards.utl.mjs";
@@ -31,7 +31,7 @@ function runFixture(pFixture, pParser = "acorn") {
   }
 
   it(`${pFixture.title} (with '${pParser}' as parser)`, async () => {
-    expect(
+    deepStrictEqual(
       getDependencies(
         pFixture.input.fileName,
         normalizeCruiseOptions(lOptions),
@@ -40,7 +40,8 @@ function runFixture(pFixture, pParser = "acorn") {
           normalizeCruiseOptions(lOptions),
         ),
       ),
-    ).to.deep.equal(pFixture.expected);
+      pFixture.expected,
+    );
   });
 }
 
@@ -77,26 +78,27 @@ describe("[I] extract/getDependencies - CommonJS - with bangs", () => {
       lOptions,
     );
 
-    expect(
+    deepStrictEqual(
       getDependencies(
         "test/extract/__mocks__/cjs-bangs/index.js",
         lOptions,
         lResolveOptions,
       ),
-    ).to.deep.equal([
-      {
-        resolved: "test/extract/__mocks__/cjs-bangs/dependency.js",
-        coreModule: false,
-        dependencyTypes: ["local"],
-        dynamic: false,
-        followable: true,
-        exoticallyRequired: false,
-        matchesDoNotFollow: false,
-        couldNotResolve: false,
-        module: "ieeeeeeeee!./dependency",
-        moduleSystem: "cjs",
-      },
-    ]);
+      [
+        {
+          resolved: "test/extract/__mocks__/cjs-bangs/dependency.js",
+          coreModule: false,
+          dependencyTypes: ["local"],
+          dynamic: false,
+          followable: true,
+          exoticallyRequired: false,
+          matchesDoNotFollow: false,
+          couldNotResolve: false,
+          module: "ieeeeeeeee!./dependency",
+          moduleSystem: "cjs",
+        },
+      ],
+    );
   });
 
   it("strips multiple inline loader prefixes from the module name when resolving", async () => {
@@ -106,25 +108,26 @@ describe("[I] extract/getDependencies - CommonJS - with bangs", () => {
       lOptions,
     );
 
-    expect(
+    deepStrictEqual(
       getDependencies(
         "test/extract/__mocks__/cjs-multi-bangs/index.js",
         lOptions,
         lResolveOptions,
       ),
-    ).to.deep.equal([
-      {
-        resolved: "test/extract/__mocks__/cjs-multi-bangs/dependency.js",
-        coreModule: false,
-        dependencyTypes: ["local"],
-        dynamic: false,
-        followable: true,
-        exoticallyRequired: false,
-        matchesDoNotFollow: false,
-        couldNotResolve: false,
-        module: "!!aap!noot!mies!./dependency",
-        moduleSystem: "cjs",
-      },
-    ]);
+      [
+        {
+          resolved: "test/extract/__mocks__/cjs-multi-bangs/dependency.js",
+          coreModule: false,
+          dependencyTypes: ["local"],
+          dynamic: false,
+          followable: true,
+          exoticallyRequired: false,
+          matchesDoNotFollow: false,
+          couldNotResolve: false,
+          module: "!!aap!noot!mies!./dependency",
+          moduleSystem: "cjs",
+        },
+      ],
+    );
   });
 });

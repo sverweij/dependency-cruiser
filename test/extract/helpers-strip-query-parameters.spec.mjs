@@ -1,22 +1,24 @@
-import { expect } from "chai";
+import { strictEqual } from "node:assert";
 import { stripQueryParameters } from "../../src/extract/helpers.mjs";
 
 describe("[U] extract/helpers - stripQueryParams", () => {
   it("leaves the empty string alone", () => {
-    expect(stripQueryParameters("")).to.equal("");
+    strictEqual(stripQueryParameters(""), "");
   });
 
   it("leaves paths without query parameters alone", () => {
-    expect(stripQueryParameters("normal/path/would/say.js")).to.equal(
+    strictEqual(
+      stripQueryParameters("normal/path/would/say.js"),
       "normal/path/would/say.js",
     );
   });
 
   it("strips query parameters from paths", () => {
-    expect(
+    strictEqual(
       stripQueryParameters(
         "normal/path/would/say.js?these=are&query=parameters",
       ),
-    ).to.equal("normal/path/would/say.js");
+      "normal/path/would/say.js",
+    );
   });
 });
