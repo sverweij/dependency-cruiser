@@ -1,3 +1,4 @@
+/* eslint-disable import/max-dependencies */
 import { strictEqual, deepStrictEqual } from "node:assert";
 import { beforeEach, describe, it } from "node:test";
 import _clone from "lodash/clone.js";
