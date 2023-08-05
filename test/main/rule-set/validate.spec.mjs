@@ -1,24 +1,27 @@
 import { readFileSync } from "node:fs";
-import { expect } from "chai";
+import { deepStrictEqual, throws } from "node:assert";
 import validate from "../../../src/main/rule-set/validate.mjs";
 
 function shouldBarfWithMessage(pRulesFile, pMessage) {
-  expect(() => {
-    validate(JSON.parse(readFileSync(pRulesFile, "utf8")));
-  }).to.throw(pMessage);
+  throws(
+    () => {
+      validate(JSON.parse(readFileSync(pRulesFile, "utf8")));
+    },
+    { message: pMessage },
+  );
 }
 
 function shouldBeOK(pRulesFile) {
   const lRulesObject = JSON.parse(readFileSync(pRulesFile, "utf8"));
 
-  expect(validate(lRulesObject)).to.deep.equal(lRulesObject);
+  deepStrictEqual(validate(lRulesObject), lRulesObject);
 }
 
 describe("[I] main/rule-set/validate - regular", () => {
   it("barfs on an invalid rules file", () => {
     shouldBarfWithMessage(
       "./test/validate/__mocks__/rules.not-a-valid-rulesfile.json",
-      "The supplied configuration is not valid: data must NOT have additional properties.",
+      "The supplied configuration is not valid: data must NOT have additional properties.\n",
     );
   });
 
@@ -54,7 +57,7 @@ describe("[I] main/rule-set/validate - regular", () => {
     shouldBarfWithMessage(
       "./test/validate/__mocks__/extends/extending.as.number.json",
       "The supplied configuration is not valid: data/extends must be string, data/extends must be " +
-        "array, data/extends must match exactly one schema in oneOf.",
+        "array, data/extends must match exactly one schema in oneOf.\n",
     );
   });
 });
