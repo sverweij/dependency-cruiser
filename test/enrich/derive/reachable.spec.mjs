@@ -1,4 +1,4 @@
-import { expect } from "chai";
+import { deepStrictEqual } from "node:assert";
 import normalize from "../../../src/main/rule-set/normalize.mjs";
 import addReachability from "../../../src/enrich/derive/reachable.mjs";
 import clearExtractCaches from "../../../src/extract/clear-caches.mjs";
@@ -106,11 +106,11 @@ describe("[U] enrich/derive/reachable/index - reachability detection", () => {
     clearExtractCaches();
   });
   it("does not explode when passed an empty graph & an empty rule set", () => {
-    expect(addReachability([], normalize({}))).to.deep.equal([]);
+    deepStrictEqual(addReachability([], normalize({})), []);
   });
 
   it("returns the input graph when passed an empty rule set", () => {
-    expect(addReachability(GRAPH, normalize({}))).to.deep.equal(GRAPH);
+    deepStrictEqual(addReachability(GRAPH, normalize({})), GRAPH);
   });
 
   it('returns the reachability annotated graph when a rule set with forbidden "reachable" in it', () => {
@@ -123,9 +123,10 @@ describe("[U] enrich/derive/reachable/index - reachability detection", () => {
       ],
     };
 
-    expect(
+    deepStrictEqual(
       addReachability(GRAPH, normalize(lForbiddenReachabilityRuleSetHajoo)),
-    ).to.deep.equal(ANNOTATED_GRAPH_FOR_HAJOO);
+      ANNOTATED_GRAPH_FOR_HAJOO,
+    );
   });
 
   it('returns the reachability annotated graph when a rule set with allowed "reachable" in it (with a rule name)', () => {
@@ -195,9 +196,10 @@ describe("[U] enrich/derive/reachable/index - reachability detection", () => {
         ],
       },
     ];
-    expect(
+    deepStrictEqual(
       addReachability(GRAPH, normalize(lForbiddenReachabilityRuleSetHajoo)),
-    ).to.deep.equal(lAnnotatedGraphForHajooAllowed);
+      lAnnotatedGraphForHajooAllowed,
+    );
   });
 
   it('returns the reachability annotated graph when a rule set with allowed "reachable" in it (without a rule name)', () => {
@@ -267,9 +269,10 @@ describe("[U] enrich/derive/reachable/index - reachability detection", () => {
         ],
       },
     ];
-    expect(
+    deepStrictEqual(
       addReachability(GRAPH, normalize(lForbiddenReachabilityRuleSetHajoo)),
-    ).to.deep.equal(lAnnotatedGraphForHajooAllowed);
+      lAnnotatedGraphForHajooAllowed,
+    );
   });
 
   it('returns the reachability annotated graph when a rule set with allowed "reachable" in it (without a rule name - multiple matches)', () => {
@@ -365,9 +368,10 @@ describe("[U] enrich/derive/reachable/index - reachability detection", () => {
         ],
       },
     ];
-    expect(
+    deepStrictEqual(
       addReachability(GRAPH_TWO, normalize(lForbiddenReachabilityRuleSetHajoo)),
-    ).to.deep.equal(lAnnotatedGraphForHajooAllowed);
+      lAnnotatedGraphForHajooAllowed,
+    );
   });
 
   it('returns the reachability annotated graph when passed a rule set with forbidden "reachable" in it (and a pathNot from)', () => {
@@ -380,9 +384,10 @@ describe("[U] enrich/derive/reachable/index - reachability detection", () => {
       ],
     };
 
-    expect(
+    deepStrictEqual(
       addReachability(GRAPH, normalize(lForbiddenReachabilityRuleSetHajoo)),
-    ).to.deep.equal(ANNOTATED_GRAPH_FOR_HAJOO);
+      ANNOTATED_GRAPH_FOR_HAJOO,
+    );
   });
 
   it('returns the reachability annotated graph when with forbidden "reachable" in it that has a pathNot', () => {
@@ -427,9 +432,10 @@ describe("[U] enrich/derive/reachable/index - reachability detection", () => {
       },
     ];
 
-    expect(
+    deepStrictEqual(
       addReachability(GRAPH, normalize(lForbiddenReachabilityRuleSetHajoo)),
-    ).to.deep.equal(lAnnotatedGraphForHajooNoIntermediate);
+      lAnnotatedGraphForHajooNoIntermediate,
+    );
   });
 
   it('returns the reachability annotated graph when with forbidden "reachable" in it that has a path', () => {
@@ -474,9 +480,10 @@ describe("[U] enrich/derive/reachable/index - reachability detection", () => {
       },
     ];
 
-    expect(
+    deepStrictEqual(
       addReachability(GRAPH, normalize(lForbiddenReachabilityRuleSetHajoo)),
-    ).to.deep.equal(lAnnotatedGraphForHajooNoIntermediate);
+      lAnnotatedGraphForHajooNoIntermediate,
+    );
   });
 
   it("clubs together reachability from the same rule", () => {
@@ -598,9 +605,10 @@ describe("[U] enrich/derive/reachable/index - reachability detection", () => {
       },
     ];
 
-    expect(
+    deepStrictEqual(
       addReachability(lSourceGraph, normalize(lPoorMansTestCoverageRule)),
-    ).to.deep.equal(lResultGraph);
+      lResultGraph,
+    );
   });
 
   it("leaves reachability on the same object, but from the another rule alone", () => {
@@ -737,9 +745,10 @@ describe("[U] enrich/derive/reachable/index - reachability detection", () => {
       },
     ];
 
-    expect(
+    deepStrictEqual(
       addReachability(lSourceGraph, normalize(lTwoDifferentRules)),
-    ).to.deep.equal(lResultGraph);
+      lResultGraph,
+    );
   });
 
   it("leaves reaches on the same object, but from the another rule alone", () => {
@@ -835,9 +844,10 @@ describe("[U] enrich/derive/reachable/index - reachability detection", () => {
         dependencies: [{ resolved: "./src/index.js" }],
       },
     ];
-    expect(
+    deepStrictEqual(
       addReachability(lSourceGraph, normalize(lTwoDifferentRules)),
-    ).to.deep.equal(lResultGraph);
+      lResultGraph,
+    );
   });
 
   it("correctly processes capture groups", () => {
@@ -1029,8 +1039,9 @@ describe("[U] enrich/derive/reachable/index - reachability detection", () => {
         dependencies: [],
       },
     ];
-    expect(
+    deepStrictEqual(
       addReachability(lDependencyGraph, normalize(lRuleSetWithCaptureGroup)),
-    ).to.deep.equal(lExpectedGraph);
+      lExpectedGraph,
+    );
   });
 });

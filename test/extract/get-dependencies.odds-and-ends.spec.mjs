@@ -1,4 +1,9 @@
-import { expect } from "chai";
+import {
+  deepStrictEqual,
+  doesNotThrow,
+  strictEqual,
+  throws,
+} from "node:assert";
 import normalizeResolveOptions from "../../src/main/resolve-options/normalize.mjs";
 import { normalizeCruiseOptions } from "../../src/main/options/normalize.mjs";
 import { createRequireJSON } from "../backwards.utl.mjs";
@@ -25,22 +30,20 @@ describe("[I] extract/getDependencies - Error scenarios - ", () => {
       lOptions,
     );
 
-    expect(() =>
-      getDependencies(
-        "test/extract/__mocks__/syntax-error.js",
-        lOptions,
-        lResolveOptions,
-      ),
-    ).to.not.throw(
-      "Extracting dependencies ran afoul of... Unexpected token (1:3)",
+    doesNotThrow(
+      () =>
+        getDependencies(
+          "test/extract/__mocks__/syntax-error.js",
+          lOptions,
+          lResolveOptions,
+        ),
+      /Extracting dependencies ran afoul of... Unexpected token \(1:3\)/,
     );
   });
   it("Raises an exception on non-existing files", () => {
-    expect(() => {
+    throws(() => {
       getDependencies("non-existing-file.md", normalizeCruiseOptions({}), {});
-    }).to.throw(
-      "Extracting dependencies ran afoul of...\n\n  ENOENT: no such file or directory, open ",
-    );
+    }, /Extracting dependencies ran afoul of...\n\n {2}ENOENT: no such file or directory, open /);
   });
 });
 
@@ -57,33 +60,36 @@ describe("[I] extract/getDependencies - even when require gets non-string argume
   });
 
   it("Just skips require(481)", () => {
-    expect(
+    strictEqual(
       getDependencies(
         "./test/extract/__mocks__/cjs-require-non-strings/require-a-number.js",
         lOptions,
         lResolveOptions,
       ).length,
-    ).to.equal(1);
+      1,
+    );
   });
 
   it("Just skips require(a function)", () => {
-    expect(
+    strictEqual(
       getDependencies(
         "./test/extract/__mocks__/cjs-require-non-strings/require-a-function.js",
         lOptions,
         lResolveOptions,
       ).length,
-    ).to.equal(1);
+      1,
+    );
   });
 
   it("Just skips require(an iife)", () => {
-    expect(
+    strictEqual(
       getDependencies(
         "./test/extract/__mocks__/cjs-require-non-strings/require-an-iife.js",
         normalizeCruiseOptions({}),
         {},
       ).length,
-    ).to.equal(1);
+      1,
+    );
   });
 });
 
@@ -97,13 +103,14 @@ describe("[I] extract/getDependencies - include", () => {
       lOptions,
     );
 
-    expect(
+    deepStrictEqual(
       getDependencies(
         "./test/extract/__mocks__/include/src/index.js",
         lOptions,
         lResolveOptions,
       ),
-    ).to.deep.equal([]);
+      [],
+    );
   });
 
   it('only includes dependencies matching the passed "includeOnly" (1)', async () => {
@@ -113,26 +120,27 @@ describe("[I] extract/getDependencies - include", () => {
       lOptions,
     );
 
-    expect(
+    deepStrictEqual(
       getDependencies(
         "./test/extract/__mocks__/include/src/index.js",
         lOptions,
         lResolveOptions,
       ),
-    ).to.deep.equal([
-      {
-        coreModule: false,
-        couldNotResolve: false,
-        dependencyTypes: ["local"],
-        dynamic: false,
-        followable: true,
-        exoticallyRequired: false,
-        matchesDoNotFollow: false,
-        module: "./bla",
-        moduleSystem: "cjs",
-        resolved: "test/extract/__mocks__/include/src/bla.js",
-      },
-    ]);
+      [
+        {
+          coreModule: false,
+          couldNotResolve: false,
+          dependencyTypes: ["local"],
+          dynamic: false,
+          followable: true,
+          exoticallyRequired: false,
+          matchesDoNotFollow: false,
+          module: "./bla",
+          moduleSystem: "cjs",
+          resolved: "test/extract/__mocks__/include/src/bla.js",
+        },
+      ],
+    );
   });
 
   it('only includes dependencies matching the passed "includeOnly" (2)', async () => {
@@ -142,38 +150,39 @@ describe("[I] extract/getDependencies - include", () => {
       lOptions,
     );
 
-    expect(
+    deepStrictEqual(
       getDependencies(
         "./test/extract/__mocks__/include/src/index.js",
         lOptions,
         lResolveOptions,
       ),
-    ).to.deep.equal([
-      {
-        coreModule: false,
-        couldNotResolve: false,
-        dependencyTypes: ["local"],
-        dynamic: false,
-        followable: true,
-        exoticallyRequired: false,
-        matchesDoNotFollow: false,
-        module: "../di",
-        moduleSystem: "cjs",
-        resolved: "test/extract/__mocks__/include/di.js",
-      },
-      {
-        coreModule: false,
-        couldNotResolve: false,
-        dependencyTypes: ["local"],
-        dynamic: false,
-        followable: true,
-        exoticallyRequired: false,
-        matchesDoNotFollow: false,
-        module: "./bla",
-        moduleSystem: "cjs",
-        resolved: "test/extract/__mocks__/include/src/bla.js",
-      },
-    ]);
+      [
+        {
+          coreModule: false,
+          couldNotResolve: false,
+          dependencyTypes: ["local"],
+          dynamic: false,
+          followable: true,
+          exoticallyRequired: false,
+          matchesDoNotFollow: false,
+          module: "../di",
+          moduleSystem: "cjs",
+          resolved: "test/extract/__mocks__/include/di.js",
+        },
+        {
+          coreModule: false,
+          couldNotResolve: false,
+          dependencyTypes: ["local"],
+          dynamic: false,
+          followable: true,
+          exoticallyRequired: false,
+          matchesDoNotFollow: false,
+          module: "./bla",
+          moduleSystem: "cjs",
+          resolved: "test/extract/__mocks__/include/src/bla.js",
+        },
+      ],
+    );
   });
 
   it("annotates the exotic require", async () => {
@@ -183,27 +192,29 @@ describe("[I] extract/getDependencies - include", () => {
       lOptions,
     );
 
-    expect(
+    deepStrictEqual(
       getDependencies(
         "./test/extract/__mocks__/exotic-require/index.js",
         lOptions,
         lResolveOptions,
       ),
-    ).to.deep.equal([
-      {
-        coreModule: false,
-        couldNotResolve: false,
-        dependencyTypes: ["local"],
-        dynamic: false,
-        followable: true,
-        exoticallyRequired: true,
-        matchesDoNotFollow: false,
-        module: "./required-with-need",
-        moduleSystem: "cjs",
-        exoticRequire: "need",
-        resolved: "test/extract/__mocks__/exotic-require/required-with-need.js",
-      },
-    ]);
+      [
+        {
+          coreModule: false,
+          couldNotResolve: false,
+          dependencyTypes: ["local"],
+          dynamic: false,
+          followable: true,
+          exoticallyRequired: true,
+          matchesDoNotFollow: false,
+          module: "./required-with-need",
+          moduleSystem: "cjs",
+          exoticRequire: "need",
+          resolved:
+            "test/extract/__mocks__/exotic-require/required-with-need.js",
+        },
+      ],
+    );
   });
 
   it("does not parse files matching extensions in the extraExtensionsToScan array", async () => {
@@ -215,13 +226,14 @@ describe("[I] extract/getDependencies - include", () => {
       lOptions,
     );
 
-    expect(
+    deepStrictEqual(
       getDependencies(
         "./test/extract/__mocks__/extra-extensions/not-parsed-when-in-extra-extensions.yolo",
         lOptions,
         lResolveOptions,
       ),
-    ).to.deep.equal([]);
+      [],
+    );
   });
 
   it("adds a preCompilationOnly attribute when tsPreCompilationDeps === 'specify'", async () => {
@@ -233,41 +245,42 @@ describe("[I] extract/getDependencies - include", () => {
       lOptions,
     );
 
-    expect(
+    deepStrictEqual(
       getDependencies(
         "./test/extract/__mocks__/specifyTsPreCompilationDeps/index.ts",
         lOptions,
         lResolveOptions,
       ),
-    ).to.deep.equal([
-      {
-        coreModule: false,
-        couldNotResolve: false,
-        dependencyTypes: ["local"],
-        dynamic: false,
-        followable: true,
-        exoticallyRequired: false,
-        matchesDoNotFollow: false,
-        module: "./pre-compilation-only",
-        moduleSystem: "es6",
-        preCompilationOnly: true,
-        resolved:
-          "test/extract/__mocks__/specifyTsPreCompilationDeps/pre-compilation-only.d.ts",
-      },
-      {
-        coreModule: false,
-        couldNotResolve: false,
-        dependencyTypes: ["local"],
-        dynamic: false,
-        followable: true,
-        exoticallyRequired: false,
-        matchesDoNotFollow: false,
-        module: "./real-deal",
-        moduleSystem: "es6",
-        preCompilationOnly: false,
-        resolved:
-          "test/extract/__mocks__/specifyTsPreCompilationDeps/real-deal.ts",
-      },
-    ]);
+      [
+        {
+          coreModule: false,
+          couldNotResolve: false,
+          dependencyTypes: ["local"],
+          dynamic: false,
+          followable: true,
+          exoticallyRequired: false,
+          matchesDoNotFollow: false,
+          module: "./pre-compilation-only",
+          moduleSystem: "es6",
+          preCompilationOnly: true,
+          resolved:
+            "test/extract/__mocks__/specifyTsPreCompilationDeps/pre-compilation-only.d.ts",
+        },
+        {
+          coreModule: false,
+          couldNotResolve: false,
+          dependencyTypes: ["local"],
+          dynamic: false,
+          followable: true,
+          exoticallyRequired: false,
+          matchesDoNotFollow: false,
+          module: "./real-deal",
+          moduleSystem: "es6",
+          preCompilationOnly: false,
+          resolved:
+            "test/extract/__mocks__/specifyTsPreCompilationDeps/real-deal.ts",
+        },
+      ],
+    );
   });
 });

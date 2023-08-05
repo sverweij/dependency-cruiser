@@ -1,7 +1,7 @@
+import { deepStrictEqual } from "node:assert";
 import { posix as path } from "node:path";
 import { readFileSync } from "node:fs";
 import { fileURLToPath } from "node:url";
-import { expect } from "chai";
 import Ajv from "ajv";
 import pathToPosix from "../../src/utl/path-to-posix.mjs";
 import cruiseResultSchema from "../../src/schema/cruise-result.schema.mjs";
@@ -33,7 +33,7 @@ describe("[E] main.cruise - main", () => {
   it("Returns an object when no options are passed", async () => {
     const lResult = await cruise(["test/main/__mocks__/ts"]);
 
-    expect(pathPosixify(lResult.output)).to.deep.equal(tsFixture);
+    deepStrictEqual(pathPosixify(lResult.output), tsFixture);
     ajv.validate(cruiseResultSchema, lResult.output);
   });
 
@@ -44,7 +44,7 @@ describe("[E] main.cruise - main", () => {
       { bustTheCache: true },
     );
 
-    expect(pathPosixify(lResult.output)).to.deep.equal(tsFixture);
+    deepStrictEqual(pathPosixify(lResult.output), tsFixture);
     ajv.validate(cruiseResultSchema, lResult.output);
   });
 
@@ -55,7 +55,7 @@ describe("[E] main.cruise - main", () => {
       { bustTheCache: true },
     );
 
-    expect(pathPosixify(lResult.output)).to.deep.equal(tsxFixture);
+    deepStrictEqual(pathPosixify(lResult.output), tsxFixture);
     ajv.validate(cruiseResultSchema, lResult.output);
   });
 
@@ -66,7 +66,7 @@ describe("[E] main.cruise - main", () => {
       { bustTheCache: true },
     );
 
-    expect(pathPosixify(lResult.output)).to.deep.equal(jsxFixture);
+    deepStrictEqual(pathPosixify(lResult.output), jsxFixture);
     ajv.validate(cruiseResultSchema, lResult.output);
   });
   it("process rulesets in the form a an object instead of json", async () => {
@@ -78,7 +78,7 @@ describe("[E] main.cruise - main", () => {
       { bustTheCache: true },
     );
 
-    expect(pathPosixify(lResult.output)).to.deep.equal(jsxAsObjectFixture);
+    deepStrictEqual(pathPosixify(lResult.output), jsxAsObjectFixture);
     ajv.validate(cruiseResultSchema, lResult.output);
   });
   it("Collapses to a pattern when a collapse pattern is passed", async () => {
@@ -91,7 +91,8 @@ describe("[E] main.cruise - main", () => {
       { bustTheCache: true },
     );
 
-    expect(pathPosixify(lResult.output)).to.deep.equal(
+    deepStrictEqual(
+      pathPosixify(lResult.output),
       normBaseDirectory(
         JSON.parse(
           readFileSync(

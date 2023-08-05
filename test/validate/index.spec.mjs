@@ -1,17 +1,18 @@
-import { expect } from "chai";
+import { deepStrictEqual } from "node:assert";
 import validate from "../../src/validate/index.mjs";
 import parseRuleSet from "./parse-ruleset.utl.mjs";
 
 describe("[I] validate/index dependency - generic tests", () => {
   it("is ok with the empty validation", () => {
     const lEmptyRuleSet = parseRuleSet({});
-    expect(
+    deepStrictEqual(
       validate.dependency(
         lEmptyRuleSet,
         { source: "koos koets" },
         { resolved: "robby van de kerkhof" },
       ),
-    ).to.deep.equal({ valid: true });
+      { valid: true },
+    );
   });
 
   it("is ok with the 'everything allowed' validation", () => {
@@ -23,13 +24,14 @@ describe("[I] validate/index dependency - generic tests", () => {
         },
       ],
     });
-    expect(
+    deepStrictEqual(
       validate.dependency(
         lEverythingAllowedRuleSet,
         { source: "koos koets" },
         { resolved: "robby van de kerkhof" },
       ),
-    ).to.deep.equal({ valid: true });
+      { valid: true },
+    );
   });
 
   it("is ok with the 'everything allowed' validation - even when there's a module only rule in 'forbidden'", () => {
@@ -49,7 +51,7 @@ describe("[I] validate/index dependency - generic tests", () => {
       ],
     });
 
-    expect(validate.module(lRuleSet, { source: "koos koets" })).to.deep.equal({
+    deepStrictEqual(validate.module(lRuleSet, { source: "koos koets" }), {
       valid: true,
     });
   });
@@ -68,16 +70,17 @@ describe("[I] validate/index dependency - generic tests", () => {
       ],
     });
 
-    expect(
+    deepStrictEqual(
       validate.dependency(
         lRuleSet,
         { source: "koos koets" },
         { resolved: "robby van de kerkhof" },
       ),
-    ).to.deep.equal({
-      valid: false,
-      rules: [{ severity: "warn", name: "not-in-allowed" }],
-    });
+      {
+        valid: false,
+        rules: [{ severity: "warn", name: "not-in-allowed" }],
+      },
+    );
   });
 
   it("is ok with the 'impossible to match allowed' validation - errors when configured so", () => {
@@ -95,16 +98,17 @@ describe("[I] validate/index dependency - generic tests", () => {
       allowedSeverity: "error",
     });
 
-    expect(
+    deepStrictEqual(
       validate.dependency(
         lRuleSet,
         { source: "koos koets" },
         { resolved: "robby van de kerkhof" },
       ),
-    ).to.deep.equal({
-      valid: false,
-      rules: [{ severity: "error", name: "not-in-allowed" }],
-    });
+      {
+        valid: false,
+        rules: [{ severity: "error", name: "not-in-allowed" }],
+      },
+    );
   });
 
   it("is ok with the 'nothing allowed' validation", () => {
@@ -119,16 +123,17 @@ describe("[I] validate/index dependency - generic tests", () => {
       ],
     });
 
-    expect(
+    deepStrictEqual(
       validate.dependency(
         lRuleSet,
         { source: "koos koets" },
         { resolved: "robby van de kerkhof" },
       ),
-    ).to.deep.equal({
-      valid: false,
-      rules: [{ severity: "warn", name: "unnamed" }],
-    });
+      {
+        valid: false,
+        rules: [{ severity: "warn", name: "unnamed" }],
+      },
+    );
   });
 
   it("if there's more than one violated rule, both are returned", () => {
@@ -150,7 +155,7 @@ describe("[I] validate/index dependency - generic tests", () => {
       ],
     });
 
-    expect(
+    deepStrictEqual(
       validate.dependency(
         lRuleSet,
         { source: "something" },
@@ -158,13 +163,14 @@ describe("[I] validate/index dependency - generic tests", () => {
           resolved: "src/some/thing/else.js",
         },
       ),
-    ).to.deep.equal({
-      valid: false,
-      rules: [
-        { name: "everything-is-forbidden", severity: "error" },
-        { name: "not-in-allowed", severity: "info" },
-      ],
-    });
+      {
+        valid: false,
+        rules: [
+          { name: "everything-is-forbidden", severity: "error" },
+          { name: "not-in-allowed", severity: "info" },
+        ],
+      },
+    );
   });
 });
 
@@ -226,118 +232,127 @@ describe("[I] validate/index - specific tests", () => {
   });
 
   it("node_modules inhibition - ok", () => {
-    expect(
+    deepStrictEqual(
       validate.dependency(
         lNodeModulesNotAllowedRuleSet,
         { source: "koos koets" },
         { resolved: "robby van de kerkhof" },
       ),
-    ).to.deep.equal({ valid: true });
+      { valid: true },
+    );
   });
 
   it("node_modules inhibition - violation", () => {
-    expect(
+    deepStrictEqual(
       validate.dependency(
         lNodeModulesNotAllowedRuleSet,
         { source: "koos koets" },
         { resolved: "./node_modules/evil-module" },
       ),
-    ).to.deep.equal({
-      valid: false,
-      rules: [{ severity: "warn", name: "unnamed" }],
-    });
+      {
+        valid: false,
+        rules: [{ severity: "warn", name: "unnamed" }],
+      },
+    );
   });
 
   it("not to sub except sub itself - ok - sub to sub", () => {
-    expect(
+    deepStrictEqual(
       validate.dependency(
         lNotToSubExceptSubRuleSet,
         { source: "./keek/op/de/sub/week.js" },
         { resolved: "./keek/op/de/sub/maand.js", coreModule: false },
       ),
-    ).to.deep.equal({ valid: true });
+      { valid: true },
+    );
   });
 
   it("not to sub except sub itself - ok - not sub to not sub", () => {
-    expect(
+    deepStrictEqual(
       validate.dependency(
         lNotToSubExceptSubRuleSet,
         { source: "./doctor/clavan.js" },
         { resolved: "./rochebrune.js", coreModule: false },
       ),
-    ).to.deep.equal({ valid: true });
+      { valid: true },
+    );
   });
 
   it("not to sub except sub itself - ok - sub to not sub", () => {
-    expect(
+    deepStrictEqual(
       validate.dependency(
         lNotToSubExceptSubRuleSet,
         { source: "./doctor/sub/clavan.js" },
         { resolved: "./rochebrune.js", coreModule: false },
       ),
-    ).to.deep.equal({ valid: true });
+      { valid: true },
+    );
   });
 
   it("not to sub except sub itself  - violation - not sub to sub", () => {
-    expect(
+    deepStrictEqual(
       validate.dependency(
         lNotToSubExceptSubRuleSet,
         { source: "./doctor/clavan.js" },
         { resolved: "./keek/op/de/sub/week.js", coreModule: false },
       ),
-    ).to.deep.equal({
-      valid: false,
-      rules: [{ severity: "error", name: "not-to-sub-except-sub" }],
-    });
+      {
+        valid: false,
+        rules: [{ severity: "error", name: "not-to-sub-except-sub" }],
+      },
+    );
   });
 
   it("not to not sub (=> everything must go to 'sub')- ok - sub to sub", () => {
-    expect(
+    deepStrictEqual(
       validate.dependency(
         lNotToNotSubRuleSet,
         { source: "./keek/op/de/sub/week.js" },
         { resolved: "./keek/op/de/sub/maand.js", coreModule: false },
       ),
-    ).to.deep.equal({ valid: true });
+      { valid: true },
+    );
   });
 
   it("not to not sub (=> everything must go to 'sub')- violation - not sub to not sub", () => {
-    expect(
+    deepStrictEqual(
       validate.dependency(
         lNotToNotSubRuleSet,
         { source: "./amber.js" },
         { resolved: "./jade.js", coreModule: false },
       ),
-    ).to.deep.equal({
-      valid: false,
-      rules: [{ severity: "error", name: "not-to-not-sub" }],
-    });
+      {
+        valid: false,
+        rules: [{ severity: "error", name: "not-to-not-sub" }],
+      },
+    );
   });
 
   it("not-to-dev-dep disallows relations to develop dependencies", () => {
-    expect(
+    deepStrictEqual(
       validate.dependency(
         lNotToDevelopmentDependencyRuleSet,
         { source: "src/aap/zus/jet.js" },
         {
-          module: "chai",
-          resolved: "node_modules/chai/index.js",
+          module: "some-module",
+          resolved: "node_modules/some-module/index.js",
           dependencyTypes: ["npm-dev"],
         },
       ),
-    ).to.deep.equal({
-      valid: false,
-      rules: [
-        {
-          name: "not-to-dev-dep",
-          severity: "error",
-        },
-      ],
-    });
+      {
+        valid: false,
+        rules: [
+          {
+            name: "not-to-dev-dep",
+            severity: "error",
+          },
+        ],
+      },
+    );
   });
 
   it("not-to-dev-dep does allow relations to regular dependencies", () => {
-    expect(
+    deepStrictEqual(
       validate.dependency(
         lNotToDevelopmentDependencyRuleSet,
         { source: "src/aap/zus/jet.js" },
@@ -347,6 +362,7 @@ describe("[I] validate/index - specific tests", () => {
           dependencyTypes: ["npm"],
         },
       ),
-    ).to.deep.equal({ valid: true });
+      { valid: true },
+    );
   });
 });

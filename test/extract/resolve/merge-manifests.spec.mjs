@@ -1,4 +1,4 @@
-import { expect } from "chai";
+import { deepStrictEqual } from "node:assert";
 import mergePackages from "../../../src/extract/resolve/merge-manifests.mjs";
 
 const INPUT = {
@@ -60,27 +60,27 @@ const FIXTURE_MERGED = {
 
 describe("[U] extract/resolve/get-manifest-dependencies/merge-manifests", () => {
   it("merging empty packages yields {}", () => {
-    expect(mergePackages({}, {})).to.deep.equal({});
+    deepStrictEqual(mergePackages({}, {}), {});
   });
 
   it("merging close package with a further {} yields close package (without non-dependency-keys)", () => {
-    expect(mergePackages(INPUT, {})).to.deep.equal(FIXTURE);
+    deepStrictEqual(mergePackages(INPUT, {}), FIXTURE);
   });
 
   it("merging close {} package with a further yields further package (without non-dependency-keys)", () => {
-    expect(mergePackages({}, INPUT)).to.deep.equal(FIXTURE);
+    deepStrictEqual(mergePackages({}, INPUT), FIXTURE);
   });
 
   it("merging two identical packages yields the package (without non-dependency-keys)", () => {
-    expect(mergePackages(INPUT, INPUT)).to.deep.equal(FIXTURE);
+    deepStrictEqual(mergePackages(INPUT, INPUT), FIXTURE);
   });
 
   it("merging a close package with a further one yields merged packages, where the close package wins", () => {
-    expect(mergePackages(INPUT, INPUT_FURTHER)).to.deep.equal(FIXTURE_MERGED);
+    deepStrictEqual(mergePackages(INPUT, INPUT_FURTHER), FIXTURE_MERGED);
   });
 
   it("merges bundleDependencies and bundledDependencies into one", () => {
-    expect(
+    deepStrictEqual(
       mergePackages(
         {
           bundleDependencies: ["foo", "bar"],
@@ -89,8 +89,9 @@ describe("[U] extract/resolve/get-manifest-dependencies/merge-manifests", () => 
           bundledDependencies: ["bar", "baz", "qux"],
         },
       ),
-    ).to.deep.equal({
-      bundledDependencies: ["foo", "bar", "baz", "qux"],
-    });
+      {
+        bundledDependencies: ["foo", "bar", "baz", "qux"],
+      },
+    );
   });
 });

@@ -1,5 +1,5 @@
-/* eslint-disable no-unused-expressions */
-import { expect } from "chai";
+/* eslint-disable no-undefined  */
+import { deepStrictEqual, strictEqual } from "node:assert";
 import {
   findRuleByName,
   ruleSetHasLicenseRule,
@@ -12,23 +12,22 @@ describe("[U] graph-utl/rule-set - findRuleByName", () => {
   };
 
   it("returns undefined for null rule set/ null rule name", () => {
-    expect(findRuleByName(null, null)).to.be.undefined;
+    strictEqual(findRuleByName(null, null), undefined);
   });
   it("returns undefined for empty rule set/ null rule name", () => {
-    expect(findRuleByName({}, null)).to.be.undefined;
+    strictEqual(findRuleByName({}, null), undefined);
   });
   it("returns undefined for empty rule set/ non-null rule name", () => {
-    expect(findRuleByName({}, "non-null-rule-name")).to.be.undefined;
+    strictEqual(findRuleByName({}, "non-null-rule-name"), undefined);
   });
   it("returns undefined for undefined rule set/ non-null rule name", () => {
-    // eslint-disable-next-line no-undefined
-    expect(findRuleByName(undefined, "non-null-rule-name")).to.be.undefined;
+    strictEqual(findRuleByName(undefined, "non-null-rule-name"), undefined);
   });
   it("returns undefined if the rule is not in there", () => {
-    expect(findRuleByName(lRuleSet, "another-rule")).to.be.undefined;
+    strictEqual(findRuleByName(lRuleSet, "another-rule"), undefined);
   });
   it("returns the rule if the rule is in there", () => {
-    expect(findRuleByName(lRuleSet, "a-rule")).to.deep.equal({
+    deepStrictEqual(findRuleByName(lRuleSet, "a-rule"), {
       name: "a-rule",
       severity: "warn",
       from: {},
@@ -39,79 +38,88 @@ describe("[U] graph-utl/rule-set - findRuleByName", () => {
 
 describe("[U] graph-utl/rule-set - ruleSetHasLicenseRule", () => {
   it("returns false for an empty rule set", () => {
-    expect(ruleSetHasLicenseRule({})).to.equal(false);
+    strictEqual(ruleSetHasLicenseRule({}), false);
   });
   it("returns false when rule set no rules with license-like attributes", () => {
-    expect(
+    strictEqual(
       ruleSetHasLicenseRule({
         forbidden: [{ from: {}, to: {} }],
         allowed: [{ from: {}, to: {} }],
       }),
-    ).to.equal(false);
+      false,
+    );
   });
   it("returns true when rule set has a forbidden rule with a license attribute", () => {
-    expect(
+    strictEqual(
       ruleSetHasLicenseRule({
         forbidden: [{ from: {}, to: { license: "commercial" } }],
       }),
-    ).to.equal(true);
+      true,
+    );
   });
   it("returns true when rule set doesn't have a forbidden rule with license like attributes", () => {
-    expect(
+    strictEqual(
       ruleSetHasLicenseRule({
         forbidden: [{ from: {}, to: { licenseNot: "" } }],
       }),
-    ).to.equal(true);
+      true,
+    );
   });
   it("returns true when rule set has a forbidden rule with a licenseNot attribute", () => {
-    expect(
+    strictEqual(
       ruleSetHasLicenseRule({
         forbidden: [{ from: {}, to: { licenseNot: "MIT" } }],
       }),
-    ).to.equal(true);
+      true,
+    );
   });
   it("returns true when rule set has an allowed rule with a license attribute", () => {
-    expect(
+    strictEqual(
       ruleSetHasLicenseRule({
         allowed: [{ from: {}, to: { license: "commercial" } }],
       }),
-    ).to.equal(true);
+      true,
+    );
   });
   it("returns true when rule set has an allowed rule with a licenseNot attribute", () => {
-    expect(
+    strictEqual(
       ruleSetHasLicenseRule({
         allowed: [{ from: {}, to: { licenseNot: "MIT" } }],
       }),
-    ).to.equal(true);
+      true,
+    );
   });
 });
 
 describe("[U] graph-utl/rule-set - ruleSetHasDeprecation", () => {
   it("returns false for an empty rule set", () => {
-    expect(ruleSetHasDeprecationRule({})).to.equal(false);
+    strictEqual(ruleSetHasDeprecationRule({}), false);
   });
   it("returns false when rule set no rules with license-like attributes", () => {
-    expect(
+    strictEqual(
       ruleSetHasDeprecationRule({
         forbidden: [{ from: {}, to: { dependencyTypes: ["npm"] } }],
         allowed: [{ from: {}, to: {} }],
       }),
-    ).to.equal(false);
+      false,
+    );
   });
   it("returns true when there's a 'forbidden' rule that checks for external module deprecation", () => {
-    expect(
+    strictEqual(
       ruleSetHasDeprecationRule({
         forbidden: [{ from: {}, to: { dependencyTypes: ["deprecated"] } }],
         allowed: [{ from: {}, to: {} }],
       }),
-    ).to.equal(true);
+      true,
+    );
   });
   it("returns true when there's an 'allowed' rule that checks for external module deprecation", () => {
-    expect(
+    strictEqual(
       ruleSetHasDeprecationRule({
         forbidden: [{ from: {}, to: {} }],
         allowed: [{ from: {}, to: { dependencyTypes: ["deprecated"] } }],
       }),
-    ).to.equal(true);
+      true,
+    );
   });
 });

@@ -1,6 +1,5 @@
-import { deepStrictEqual } from "node:assert";
+import { deepStrictEqual, notDeepStrictEqual } from "node:assert";
 import { rmSync } from "node:fs";
-import { expect } from "chai";
 import Ajv from "ajv";
 import cruiseResultSchema from "../../src/schema/cruise-result.schema.mjs";
 import cruise from "../../src/main/cruise.mjs";
@@ -90,7 +89,7 @@ describe("[E] main.cruise - cache", () => {
     const lNewCacheInstance = new Cache();
     const lNewCache = await lNewCacheInstance.read(CACHE_FOLDER);
     Reflect.deleteProperty(lNewCache, "revisionData");
-    expect(lNewCache).to.not.deep.equal(lOldCache);
+    notDeepStrictEqual(lNewCache, lOldCache);
     deepStrictEqual(lNewCache, lResultTwo.output);
     ajv.validate(cruiseResultSchema, lNewCache);
   });

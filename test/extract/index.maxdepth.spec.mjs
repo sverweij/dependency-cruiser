@@ -1,4 +1,4 @@
-import { expect } from "chai";
+import { deepStrictEqual } from "node:assert";
 import extract from "../../src/extract/index.mjs";
 import { normalizeCruiseOptions } from "../../src/main/options/normalize.mjs";
 import normalizeResolveOptions from "../../src/main/resolve-options/normalize.mjs";
@@ -26,7 +26,8 @@ describe("[I] extract/index - max depth", () => {
       );
       /* eslint import/no-dynamic-require:0, security/detect-non-literal-require:0 */
 
-      expect(lResult).to.deep.equal(
+      deepStrictEqual(
+        lResult,
         requireJSON(`./__fixtures__/max-depth-${pDepth}.json`),
       );
       // ajv.validate(resultSchema, lResult);

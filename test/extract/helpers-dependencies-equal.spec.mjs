@@ -1,22 +1,23 @@
-import { expect } from "chai";
+import { strictEqual } from "node:assert";
 import { dependenciesEqual } from "../../src/extract/helpers.mjs";
 
 describe("[U] extract/helpers - dependencyEqual", () => {
   it("two empty dependencies are equal", () => {
-    expect(dependenciesEqual({})({})).to.equal(true);
+    strictEqual(dependenciesEqual({})({}), true);
   });
 
   it("same module name, same module system => equal", () => {
-    expect(
+    strictEqual(
       dependenciesEqual({ module: "foo", moduleSystem: "es6" })({
         module: "foo",
         moduleSystem: "es6",
       }),
-    ).to.equal(true);
+      true,
+    );
   });
 
   it("same module name, same module system, dynamicmoduleness, exotic require => equal", () => {
-    expect(
+    strictEqual(
       dependenciesEqual({
         module: "foo",
         moduleSystem: "cjs",
@@ -28,11 +29,12 @@ describe("[U] extract/helpers - dependencyEqual", () => {
         dynamic: false,
         exoticRequire: "need",
       }),
-    ).to.equal(true);
+      true,
+    );
   });
 
   it("same module name, different module system => eq", () => {
-    expect(
+    strictEqual(
       dependenciesEqual({
         module: "foo",
         moduleSystem: "es6",
@@ -40,11 +42,12 @@ describe("[U] extract/helpers - dependencyEqual", () => {
         module: "foo",
         moduleSystem: "cjs",
       }),
-    ).to.equal(true);
+      true,
+    );
   });
 
   it("different module name, same module system => neq", () => {
-    expect(
+    strictEqual(
       dependenciesEqual({
         module: "foo",
         moduleSystem: "es6",
@@ -52,11 +55,12 @@ describe("[U] extract/helpers - dependencyEqual", () => {
         module: "bar",
         moduleSystem: "es6",
       }),
-    ).to.equal(false);
+      false,
+    );
   });
 
   it("same module name, same module system, not dynamically required => neq", () => {
-    expect(
+    strictEqual(
       dependenciesEqual({
         module: "foo",
         moduleSystem: "es6",
@@ -65,11 +69,12 @@ describe("[U] extract/helpers - dependencyEqual", () => {
         module: "foo",
         moduleSystem: "es6",
       }),
-    ).to.equal(false);
+      false,
+    );
   });
 
   it("same module name, same module system, not different exotic require => neq", () => {
-    expect(
+    strictEqual(
       dependenciesEqual({
         module: "foo",
         moduleSystem: "es6",
@@ -78,6 +83,7 @@ describe("[U] extract/helpers - dependencyEqual", () => {
         module: "foo",
         moduleSystem: "es6",
       }),
-    ).to.equal(false);
+      false,
+    );
   });
 });

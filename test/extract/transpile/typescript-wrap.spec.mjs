@@ -1,6 +1,5 @@
 import { strictEqual } from "node:assert";
 import { readFileSync } from "node:fs";
-import { expect } from "chai";
 import normalizeSource from "../normalize-source.utl.mjs";
 import typescriptWrap from "../../../src/extract/transpile/typescript-wrap.mjs";
 
@@ -10,7 +9,7 @@ const typeScriptESMWrap = typescriptWrap("esm");
 
 describe("[I] typescript transpiler", () => {
   it("tells the typescript transpiler is available", () => {
-    expect(typeScriptRegularWrap.isAvailable()).to.equal(true);
+    strictEqual(typeScriptRegularWrap.isAvailable(), true);
   });
 
   it("transpiles typescript", async () => {
@@ -34,7 +33,7 @@ describe("[I] typescript transpiler", () => {
 
 describe("[I] typescript transpiler (tsx)", () => {
   it("tells the tsx transpiler is available", () => {
-    expect(typeScriptTsxWrap.isAvailable()).to.equal(true);
+    strictEqual(typeScriptTsxWrap.isAvailable(), true);
   });
 
   it("transpiles tsx", async () => {
@@ -52,7 +51,7 @@ describe("[I] typescript transpiler (tsx)", () => {
 
 describe("[I] typescript transpiler (esm)", () => {
   it("tells the ts transpiler is available for mts (esm) modules", () => {
-    expect(typeScriptESMWrap.isAvailable()).to.equal(true);
+    strictEqual(typeScriptESMWrap.isAvailable(), true);
   });
 
   it("transpiles mts", async () => {

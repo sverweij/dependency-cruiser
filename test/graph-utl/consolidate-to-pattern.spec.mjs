@@ -1,4 +1,4 @@
-import { expect } from "chai";
+import { deepStrictEqual } from "node:assert";
 import consolidateToPattern from "../../src/graph-utl/consolidate-to-pattern.mjs";
 
 describe("[U] graph-utl/consolidateToPattern", () => {
@@ -21,7 +21,7 @@ describe("[U] graph-utl/consolidateToPattern", () => {
       },
     ];
 
-    expect(consolidateToPattern(lInput, "^$")).to.deep.equal(lOutput);
+    deepStrictEqual(consolidateToPattern(lInput, "^$"), lOutput);
   });
 
   it("no match => no squashing", () => {
@@ -43,7 +43,7 @@ describe("[U] graph-utl/consolidateToPattern", () => {
       },
     ];
 
-    expect(consolidateToPattern(lInput, "src/[^/]+")).to.deep.equal(lOutput);
+    deepStrictEqual(consolidateToPattern(lInput, "src/[^/]+"), lOutput);
   });
 
   it("source gets squashed to pattern", () => {
@@ -65,7 +65,7 @@ describe("[U] graph-utl/consolidateToPattern", () => {
       },
     ];
 
-    expect(consolidateToPattern(lInput, "[^/]+")).to.deep.equal(lOutput);
+    deepStrictEqual(consolidateToPattern(lInput, "[^/]+"), lOutput);
   });
 
   it("dependencies' resolved names get squashed as well", () => {
@@ -139,7 +139,7 @@ describe("[U] graph-utl/consolidateToPattern", () => {
       },
     ];
 
-    expect(consolidateToPattern(lInput, "[^/]+/[^/]+")).to.deep.equal(lOutput);
+    deepStrictEqual(consolidateToPattern(lInput, "[^/]+/[^/]+"), lOutput);
   });
 
   it("reconsolidation with the same pattern yields the same result", () => {
@@ -214,7 +214,8 @@ describe("[U] graph-utl/consolidateToPattern", () => {
     ];
 
     const lConsolidated = consolidateToPattern(lInput, "[^/]+/[^/]+");
-    expect(consolidateToPattern(lConsolidated, "[^/]+/[^/]+")).to.deep.equal(
+    deepStrictEqual(
+      consolidateToPattern(lConsolidated, "[^/]+/[^/]+"),
       lOutput,
     );
   });

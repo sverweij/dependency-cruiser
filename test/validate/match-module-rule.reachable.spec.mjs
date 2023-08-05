@@ -1,4 +1,4 @@
-import { expect } from "chai";
+import { strictEqual } from "node:assert";
 import matchModuleRule from "../../src/validate/match-module-rule.mjs";
 
 const EMPTY_RULE = { from: {}, to: {} };
@@ -25,94 +25,104 @@ const ANY_UNREACHABLE_IN_ALLOWED_SET = {
 
 describe("[I] validate/match-module-rule - reachable", () => {
   it("rule without reachable attribute doesn't match reachables (implicit)", () => {
-    expect(matchModuleRule.matchesReachableRule(EMPTY_RULE, {})).to.equal(
-      false,
-    );
+    strictEqual(matchModuleRule.matchesReachableRule(EMPTY_RULE, {}), false);
   });
   it("rule without reachable attribute doesn't match reachables (explicit)", () => {
-    expect(
+    strictEqual(
       matchModuleRule.matchesReachableRule(EMPTY_RULE, {
         reachable: [{ value: false, asDefinedInRule: "no-unreachable" }],
       }),
-    ).to.equal(false);
+      false,
+    );
   });
   it("rule with reachable attribute doesn't match reachables (implicit)", () => {
-    expect(matchModuleRule.matchesReachableRule(ANY_UNREACHABLE, {})).to.equal(
+    strictEqual(
+      matchModuleRule.matchesReachableRule(ANY_UNREACHABLE, {}),
       false,
     );
   });
   it("rule with reachable attribute doesn't match reachables (explicit)", () => {
-    expect(
+    strictEqual(
       matchModuleRule.matchesReachableRule(ANY_UNREACHABLE, {
         reachable: [{ value: true, asDefinedInRule: "no-unreachable" }],
       }),
-    ).to.equal(false);
+      false,
+    );
   });
   it("rule with reachable attribute matches unreachables according to that rule name", () => {
-    expect(
+    strictEqual(
       matchModuleRule.matchesReachableRule(ANY_UNREACHABLE, {
         reachable: [{ value: false, asDefinedInRule: "no-unreachable" }],
       }),
-    ).to.equal(true);
+      true,
+    );
   });
   it("rule with reachable attribute does not match unreachables according to other rule name", () => {
-    expect(
+    strictEqual(
       matchModuleRule.matchesReachableRule(ANY_UNREACHABLE, {
         reachable: [{ value: false, asDefinedInRule: "other-rule-name" }],
       }),
-    ).to.equal(false);
+      false,
+    );
   });
   it("nameless rule with reachable attribute does not match unreachables according to other rule name", () => {
-    expect(
+    strictEqual(
       matchModuleRule.matchesReachableRule(ANY_UNREACHABLE_IN_ALLOWED_SET, {
         reachable: [{ value: false, asDefinedInRule: "other-rule-name" }],
       }),
-    ).to.equal(false);
+      false,
+    );
   });
   it("nameless rule with reachable attribute matchs unreachables according to not-in-allowed", () => {
-    expect(
+    strictEqual(
       matchModuleRule.matchesReachableRule(ANY_UNREACHABLE_IN_ALLOWED_SET, {
         reachable: [{ value: false, asDefinedInRule: "not-in-allowed" }],
       }),
-    ).to.equal(true);
+      true,
+    );
   });
   it("rule with reachable attribute & path matches unreachables according to that rule name in that path", () => {
-    expect(
+    strictEqual(
       matchModuleRule.matchesReachableRule(ANY_UNREACHABLE_WITH_PATH, {
         source: "src/lalala.ts",
         reachable: [{ value: false, asDefinedInRule: "no-unreachable" }],
       }),
-    ).to.equal(true);
+      true,
+    );
   });
   it("rule with reachable attribute & path does not match unreachables according to that rule name and not in that path", () => {
-    expect(
+    strictEqual(
       matchModuleRule.matchesReachableRule(ANY_UNREACHABLE_WITH_PATH, {
         source: "test/lalala.ts",
         reachable: [{ value: false, asDefinedInRule: "no-unreachable" }],
       }),
-    ).to.equal(false);
+      false,
+    );
   });
   it("rule with reachable attribute & path matches reachables according to that rule name in that path", () => {
-    expect(
+    strictEqual(
       matchModuleRule.matchesReachableRule(ANY_REACHABLE_WITH_PATH, {
         source: "src/lalala.ts",
         reachable: [{ value: true, asDefinedInRule: "no-unreachable" }],
       }),
-    ).to.equal(true);
+      true,
+    );
   });
   it("rule with reachable attribute & path does not match unreachables according to that rule name in that path (explicit)", () => {
-    expect(
+    strictEqual(
       matchModuleRule.matchesReachableRule(ANY_REACHABLE_WITH_PATH, {
         source: "src/lalala.ts",
         reachable: [{ value: false, asDefinedInRule: "no-unreachable" }],
       }),
-    ).to.equal(false);
+      false,
+    );
   });
   it("rule with reachable attribute & path does not match unreachables according to that rule name in that path (implicit)", () => {
-    expect(
+    strictEqual(
       matchModuleRule.matchesReachableRule(ANY_REACHABLE_WITH_PATH, {
         source: "src/lalala.ts",
       }),
-    ).to.equal(false);
+      false,
+    );
   });
 });

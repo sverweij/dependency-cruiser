@@ -1,6 +1,6 @@
 import { join } from "node:path";
 import { fileURLToPath } from "node:url";
-import { expect } from "chai";
+import { deepStrictEqual } from "node:assert";
 import extractTSConfig from "../../../src/config-utl/extract-ts-config.mjs";
 import resolve from "../../../src/extract/resolve/index.mjs";
 import normalizeResolveOptions from "../../../src/main/resolve-options/normalize.mjs";
@@ -24,7 +24,7 @@ const PARSED_TSCONFIG_RESOLUTIONS = extractTSConfig(TSCONFIG);
 
 describe("[I] extract/resolve/index - typescript tsconfig processing", () => {
   it("considers a typescript config - non-* alias", async () => {
-    expect(
+    deepStrictEqual(
       resolve(
         {
           module: "shared",
@@ -41,17 +41,18 @@ describe("[I] extract/resolve/index - typescript tsconfig processing", () => {
           PARSED_TSCONFIG,
         ),
       ),
-    ).to.deep.equal({
-      coreModule: false,
-      couldNotResolve: false,
-      dependencyTypes: ["aliased"],
-      followable: true,
-      resolved: "ts-config-with-path/src/shared/index.ts",
-    });
+      {
+        coreModule: false,
+        couldNotResolve: false,
+        dependencyTypes: ["aliased"],
+        followable: true,
+        resolved: "ts-config-with-path/src/shared/index.ts",
+      },
+    );
   });
 
   it("considers a typescript config - combined/* alias", async () => {
-    expect(
+    deepStrictEqual(
       resolve(
         {
           module: "gewoon/wood/tree",
@@ -68,17 +69,18 @@ describe("[I] extract/resolve/index - typescript tsconfig processing", () => {
           PARSED_TSCONFIG,
         ),
       ),
-    ).to.deep.equal({
-      coreModule: false,
-      couldNotResolve: false,
-      dependencyTypes: ["aliased"],
-      followable: true,
-      resolved: "ts-config-with-path/src/common/wood/tree.ts",
-    });
+      {
+        coreModule: false,
+        couldNotResolve: false,
+        dependencyTypes: ["aliased"],
+        followable: true,
+        resolved: "ts-config-with-path/src/common/wood/tree.ts",
+      },
+    );
   });
 
   it("considers a typescript config - * alias", async () => {
-    expect(
+    deepStrictEqual(
       resolve(
         {
           module: "daddayaddaya",
@@ -95,13 +97,14 @@ describe("[I] extract/resolve/index - typescript tsconfig processing", () => {
           PARSED_TSCONFIG,
         ),
       ),
-    ).to.deep.equal({
-      coreModule: false,
-      couldNotResolve: false,
-      dependencyTypes: ["aliased"],
-      followable: true,
-      resolved: "ts-config-with-path/src/typos/daddayaddaya.ts",
-    });
+      {
+        coreModule: false,
+        couldNotResolve: false,
+        dependencyTypes: ["aliased"],
+        followable: true,
+        resolved: "ts-config-with-path/src/typos/daddayaddaya.ts",
+      },
+    );
   });
 
   it("considers a typescript config - no paths, no aliases, resolves relative to baseUrl", async () => {
@@ -112,7 +115,7 @@ describe("[I] extract/resolve/index - typescript tsconfig processing", () => {
       "tsconfig-no-paths.json",
     );
     const PARSED_TSCONFIG_NO_PATHS = extractTSConfig(TSCONFIG_NO_PATHS);
-    expect(
+    deepStrictEqual(
       resolve(
         {
           module: "common/wood/tree",
@@ -129,17 +132,18 @@ describe("[I] extract/resolve/index - typescript tsconfig processing", () => {
           PARSED_TSCONFIG_NO_PATHS,
         ),
       ),
-    ).to.deep.equal({
-      coreModule: false,
-      couldNotResolve: false,
-      dependencyTypes: ["aliased"],
-      followable: true,
-      resolved: "ts-config-with-path/src/common/wood/tree.ts",
-    });
+      {
+        coreModule: false,
+        couldNotResolve: false,
+        dependencyTypes: ["aliased"],
+        followable: true,
+        resolved: "ts-config-with-path/src/common/wood/tree.ts",
+      },
+    );
   });
 
   it("for aliases resolves in the same fashion as the typescript compiler - dts-vs-ts", async () => {
-    expect(
+    deepStrictEqual(
       resolve(
         {
           module: "things/dts-before-ts",
@@ -160,18 +164,19 @@ describe("[I] extract/resolve/index - typescript tsconfig processing", () => {
           PARSED_TSCONFIG_RESOLUTIONS,
         ),
       ),
-    ).to.deep.equal({
-      coreModule: false,
-      couldNotResolve: false,
-      dependencyTypes: ["aliased"],
-      followable: true,
-      resolved:
-        "ts-config-with-path-correct-resolution-prio/src/aliassed/dts-before-ts.ts",
-    });
+      {
+        coreModule: false,
+        couldNotResolve: false,
+        dependencyTypes: ["aliased"],
+        followable: true,
+        resolved:
+          "ts-config-with-path-correct-resolution-prio/src/aliassed/dts-before-ts.ts",
+      },
+    );
   });
 
   it("for aliases resolves in the same fashion as the typescript compiler - js-vs-ts", async () => {
-    expect(
+    deepStrictEqual(
       resolve(
         {
           module: "things/js-before-ts",
@@ -192,18 +197,19 @@ describe("[I] extract/resolve/index - typescript tsconfig processing", () => {
           PARSED_TSCONFIG_RESOLUTIONS,
         ),
       ),
-    ).to.deep.equal({
-      coreModule: false,
-      couldNotResolve: false,
-      dependencyTypes: ["aliased"],
-      followable: true,
-      resolved:
-        "ts-config-with-path-correct-resolution-prio/src/aliassed/js-before-ts.js",
-    });
+      {
+        coreModule: false,
+        couldNotResolve: false,
+        dependencyTypes: ["aliased"],
+        followable: true,
+        resolved:
+          "ts-config-with-path-correct-resolution-prio/src/aliassed/js-before-ts.js",
+      },
+    );
   });
 
   it("gives a different result for the same input without a webpack config", async () => {
-    expect(
+    deepStrictEqual(
       resolve(
         {
           module: "shared",
@@ -218,12 +224,13 @@ describe("[I] extract/resolve/index - typescript tsconfig processing", () => {
           {},
         ),
       ),
-    ).to.deep.equal({
-      coreModule: false,
-      couldNotResolve: true,
-      dependencyTypes: ["unknown"],
-      followable: false,
-      resolved: "shared",
-    });
+      {
+        coreModule: false,
+        couldNotResolve: true,
+        dependencyTypes: ["unknown"],
+        followable: false,
+        resolved: "shared",
+      },
+    );
   });
 });

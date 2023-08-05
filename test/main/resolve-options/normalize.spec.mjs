@@ -1,7 +1,6 @@
-import { strictEqual } from "node:assert";
+import { ok, strictEqual } from "node:assert";
 import { join } from "node:path";
 import { fileURLToPath } from "node:url";
-import { expect } from "chai";
 import { normalizeCruiseOptions } from "../../../src/main/options/normalize.mjs";
 import normalizeResolveOptions from "../../../src/main/resolve-options/normalize.mjs";
 
@@ -21,14 +20,15 @@ describe("[I] main/resolve-options/normalize", () => {
       normalizeCruiseOptions({}),
     );
 
-    expect(Object.keys(lNormalizedOptions).length).to.equal(
+    strictEqual(
+      Object.keys(lNormalizedOptions).length,
       lDefaultNoOfResolveOptions,
     );
     strictEqual(lNormalizedOptions.symlinks, false);
     strictEqual(lNormalizedOptions.tsConfig, null);
     strictEqual(lNormalizedOptions.combinedDependencies, false);
-    expect(lNormalizedOptions).to.ownProperty("extensions");
-    expect(lNormalizedOptions).to.ownProperty("fileSystem");
+    ok(lNormalizedOptions.hasOwnProperty("extensions"));
+    ok(lNormalizedOptions.hasOwnProperty("fileSystem"));
     strictEqual(lNormalizedOptions.useSyncFileSystemCalls, true);
   });
 
@@ -41,15 +41,16 @@ describe("[I] main/resolve-options/normalize", () => {
       lTsconfigContents,
     );
 
-    expect(Object.keys(lNormalizedOptions).length).to.equal(
+    strictEqual(
+      Object.keys(lNormalizedOptions).length,
       lDefaultNoOfResolveOptions,
     );
     strictEqual(lNormalizedOptions.symlinks, false);
     strictEqual(lNormalizedOptions.tsConfig, null);
     strictEqual(lNormalizedOptions.combinedDependencies, false);
-    expect(lNormalizedOptions).to.ownProperty("extensions");
-    expect(lNormalizedOptions).to.ownProperty("fileSystem");
-    expect((lNormalizedOptions.plugins || []).length).to.equal(0);
+    ok(lNormalizedOptions.hasOwnProperty("extensions"));
+    ok(lNormalizedOptions.hasOwnProperty("fileSystem"));
+    strictEqual((lNormalizedOptions.plugins || []).length, 0);
     strictEqual(lNormalizedOptions.useSyncFileSystemCalls, true);
   });
 
@@ -62,15 +63,16 @@ describe("[I] main/resolve-options/normalize", () => {
       lTsconfigContents,
     );
 
-    expect(Object.keys(lNormalizedOptions).length).to.equal(
+    strictEqual(
+      Object.keys(lNormalizedOptions).length,
       lDefaultNoOfResolveOptions + 1,
     );
     strictEqual(lNormalizedOptions.symlinks, false);
     strictEqual(lNormalizedOptions.tsConfig, TEST_TSCONFIG);
     strictEqual(lNormalizedOptions.combinedDependencies, false);
-    expect(lNormalizedOptions).to.ownProperty("extensions");
-    expect(lNormalizedOptions).to.ownProperty("fileSystem");
-    expect((lNormalizedOptions.plugins || []).length).to.equal(1);
+    ok(lNormalizedOptions.hasOwnProperty("extensions"));
+    ok(lNormalizedOptions.hasOwnProperty("fileSystem"));
+    strictEqual((lNormalizedOptions.plugins || []).length, 1);
     strictEqual(lNormalizedOptions.useSyncFileSystemCalls, true);
   });
 
@@ -83,14 +85,15 @@ describe("[I] main/resolve-options/normalize", () => {
       lTsconfigContentsWithBaseURLAndPaths,
     );
 
-    expect(Object.keys(lNormalizedOptions).length).to.equal(
+    strictEqual(
+      Object.keys(lNormalizedOptions).length,
       lDefaultNoOfResolveOptions + 1,
     );
     strictEqual(lNormalizedOptions.symlinks, false);
     strictEqual(lNormalizedOptions.tsConfig, TEST_TSCONFIG);
     strictEqual(lNormalizedOptions.combinedDependencies, false);
-    expect(lNormalizedOptions).to.ownProperty("extensions");
-    expect(lNormalizedOptions).to.ownProperty("fileSystem");
+    ok(lNormalizedOptions.hasOwnProperty("extensions"));
+    ok(lNormalizedOptions.hasOwnProperty("fileSystem"));
     strictEqual(lNormalizedOptions.plugins.length, 1);
     strictEqual(lNormalizedOptions.useSyncFileSystemCalls, true);
   });

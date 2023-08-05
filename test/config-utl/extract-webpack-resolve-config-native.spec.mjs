@@ -1,6 +1,6 @@
 import { fileURLToPath } from "node:url";
-import { strictEqual } from "node:assert";
-import { expect } from "chai";
+import { deepStrictEqual, strictEqual } from "node:assert";
+
 import loadResolveConfig from "../../src/config-utl/extract-webpack-resolve-config.mjs";
 
 function getFullPath(pRelativePath) {
@@ -40,113 +40,121 @@ describe("[I] config-utl/extract-webpack-resolve-config - native formats", () =>
   });
 
   it("returns an empty object when a config file is passed without a 'resolve' section", async () => {
-    expect(
+    deepStrictEqual(
       await loadResolveConfig(
         getFullPath("./__mocks__/webpackconfig/noresolve.config.js"),
       ),
-    ).to.deep.equal({});
+      {},
+    );
   });
 
   it("returns the resolve section of the webpack config if there's any", async () => {
-    expect(
+    deepStrictEqual(
       await loadResolveConfig(
         getFullPath("./__mocks__/webpackconfig/hasaresolve.config.js"),
       ),
-    ).to.deep.equal({
-      alias: {
-        config: "src/config",
-        magic$: "src/merlin/browserify/magic",
+      {
+        alias: {
+          config: "src/config",
+          magic$: "src/merlin/browserify/magic",
+        },
       },
-    });
+    );
   });
 
   it("returns the resolve section of the webpack config if there's any (.mjs variant)", async () => {
-    expect(
+    deepStrictEqual(
       await loadResolveConfig(
         getFullPath("./__mocks__/webpackconfig/webpack.config.mjs"),
       ),
-    ).to.deep.equal({
-      alias: {
-        config: "src/config",
-        magic$: "src/merlin/browserify/magic",
+      {
+        alias: {
+          config: "src/config",
+          magic$: "src/merlin/browserify/magic",
+        },
       },
-    });
+    );
   });
 
   it("returns the production resolve section of the webpack config if that's an environment specific", async () => {
-    expect(
+    deepStrictEqual(
       await loadResolveConfig(
         getFullPath(
           "./__mocks__/webpackconfig/hastwoseparateresolves.config.js",
         ),
         { production: true },
       ),
-    ).to.deep.equal({
-      alias: {
-        config: "src/config",
-        magic$: "src/merlin/browserify/magic",
+      {
+        alias: {
+          config: "src/config",
+          magic$: "src/merlin/browserify/magic",
+        },
       },
-    });
+    );
   });
 
   it("returns the 'other' resolve section of the webpack config if development environment is requested", async () => {
-    expect(
+    deepStrictEqual(
       await loadResolveConfig(
         getFullPath(
           "./__mocks__/webpackconfig/hastwoseparateresolves.config.js",
         ),
         { develop: true },
       ),
-    ).to.deep.equal({
-      alias: {
-        config: "src/dev-config",
-        magic$: "src/merlin/browserify/hipsterlib",
+      {
+        alias: {
+          config: "src/dev-config",
+          magic$: "src/merlin/browserify/hipsterlib",
+        },
       },
-    });
+    );
   });
 
   it("returns the resolve section of the function returning webpack config if there's any", async () => {
-    expect(
+    deepStrictEqual(
       await loadResolveConfig(
         getFullPath(
           "./__mocks__/webpackconfig/aliassy/webpack.functionexport.config.js",
         ),
       ),
-    ).to.deep.equal({
-      alias: {
-        configSpullenAlias: "./configspullen",
+      {
+        alias: {
+          configSpullenAlias: "./configspullen",
+        },
+        bustTheCache: true,
       },
-      bustTheCache: true,
-    });
+    );
   });
 
   it("returns the resolve section of the first element of the array returning webpack config if there's any", async () => {
-    expect(
+    deepStrictEqual(
       await loadResolveConfig(
         getFullPath(
           "./__mocks__/webpackconfig/aliassy/webpack.arrayexport.config.js",
         ),
       ),
-    ).to.deep.equal({
-      alias: {
-        configSpullenAlias: "./configspullen",
+      {
+        alias: {
+          configSpullenAlias: "./configspullen",
+        },
+        bustTheCache: true,
       },
-      bustTheCache: true,
-    });
+    );
   });
 
   it("returns the resolve section of the result of the first element of the array if that's a function", async () => {
-    expect(
+    deepStrictEqual(
       await loadResolveConfig(
         getFullPath(
           "./__mocks__/webpackconfig/aliassy/webpack.functionarrayexport.config.js",
         ),
       ),
-    ).to.deep.equal({
-      alias: {
-        configSpullenAlias: "./configspullen",
+      {
+        alias: {
+          configSpullenAlias: "./configspullen",
+        },
+        bustTheCache: true,
       },
-      bustTheCache: true,
-    });
+    );
   });
 });

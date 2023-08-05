@@ -1,8 +1,8 @@
+import { deepStrictEqual } from "node:assert";
 import { join } from "node:path";
 import { unlinkSync } from "node:fs";
 import { fileURLToPath } from "node:url";
 import symlinkDir from "symlink-dir";
-import { expect } from "chai";
 import normalizeResolveOptions from "../../src/main/resolve-options/normalize.mjs";
 import { normalizeCruiseOptions } from "../../src/main/options/normalize.mjs";
 import { createRequireJSON } from "../backwards.utl.mjs";
@@ -52,13 +52,14 @@ describe("[I] extract/getDependencies - AMD - with bangs", () => {
       lOptions,
     );
 
-    expect(
+    deepStrictEqual(
       getDependencies(
         "test/extract/__mocks__/amd-bangs/root_one.js",
         lOptions,
         lResolveOptions,
       ),
-    ).to.deep.equal(amdBangRequirejs);
+      amdBangRequirejs,
+    );
   });
 
   it("splits bang!./blabla into bang and ./blabla - CommonJS wrapper", async () => {
@@ -68,12 +69,13 @@ describe("[I] extract/getDependencies - AMD - with bangs", () => {
       lOptions,
     );
 
-    expect(
+    deepStrictEqual(
       getDependencies(
         "test/extract/__mocks__/amd-bangs/simplified-commonjs-wrapper.js",
         lOptions,
         lResolveOptions,
       ),
-    ).to.deep.equal(amdBangCJSWrapper);
+      amdBangCJSWrapper,
+    );
   });
 });

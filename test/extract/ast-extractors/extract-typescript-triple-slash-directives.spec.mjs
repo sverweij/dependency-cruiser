@@ -1,11 +1,9 @@
-import { expect } from "chai";
+import { deepStrictEqual } from "node:assert";
 import extractTypescript from "./extract-typescript.utl.mjs";
 
 describe("[U] ast-extractors/extract-typescript - triple slash directives", () => {
   it("path", () => {
-    expect(
-      extractTypescript('/// <reference path="./ts-thing" />'),
-    ).to.deep.equal([
+    deepStrictEqual(extractTypescript('/// <reference path="./ts-thing" />'), [
       {
         module: "./ts-thing",
         moduleSystem: "tsd",
@@ -16,28 +14,30 @@ describe("[U] ast-extractors/extract-typescript - triple slash directives", () =
   });
 
   it("types", () => {
-    expect(
+    deepStrictEqual(
       extractTypescript('/// <reference types="./ts-thing-types" />'),
-    ).to.deep.equal([
-      {
-        module: "./ts-thing-types",
-        moduleSystem: "tsd",
-        dynamic: false,
-        exoticallyRequired: false,
-      },
-    ]);
+      [
+        {
+          module: "./ts-thing-types",
+          moduleSystem: "tsd",
+          dynamic: false,
+          exoticallyRequired: false,
+        },
+      ],
+    );
   });
 
   it("amd-dependencies", () => {
-    expect(
+    deepStrictEqual(
       extractTypescript('/// <amd-dependency path="./ts-thing-types" />'),
-    ).to.deep.equal([
-      {
-        module: "./ts-thing-types",
-        moduleSystem: "tsd",
-        dynamic: false,
-        exoticallyRequired: false,
-      },
-    ]);
+      [
+        {
+          module: "./ts-thing-types",
+          moduleSystem: "tsd",
+          dynamic: false,
+          exoticallyRequired: false,
+        },
+      ],
+    );
   });
 });

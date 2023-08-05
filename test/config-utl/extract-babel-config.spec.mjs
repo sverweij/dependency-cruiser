@@ -1,6 +1,5 @@
-import { deepStrictEqual, strictEqual } from "node:assert";
+import { deepStrictEqual, ok, strictEqual } from "node:assert";
 import { fileURLToPath } from "node:url";
-import { expect } from "chai";
 import omit from "lodash/omit.js";
 import extractBabelConfig from "../../src/config-utl/extract-babel-config.mjs";
 import pathToPosix from "../../src/utl/path-to-posix.mjs";
@@ -74,11 +73,14 @@ describe("[I] config-utl/extract-babel-config", () => {
     const lBabelConfig = await extractBabelConfig(
       getFullPath("./__mocks__/babelconfig/babelrc.empty.json"),
     );
-    expect(lBabelConfig).to.have.property("filename");
-    expect(pathToPosix(lBabelConfig.filename)).to.contain(
-      "/__mocks__/babelconfig/babelrc.empty.json",
+    ok(lBabelConfig.hasOwnProperty("filename"));
+    ok(
+      pathToPosix(lBabelConfig.filename).includes(
+        "/__mocks__/babelconfig/babelrc.empty.json",
+      ),
     );
-    expect(omit(lBabelConfig, "filename")).to.deep.equal(
+    deepStrictEqual(
+      omit(lBabelConfig, "filename"),
       DEFAULT_EMPTY_BABEL_OPTIONS_OBJECT,
     );
   });
@@ -96,11 +98,14 @@ describe("[I] config-utl/extract-babel-config", () => {
         "./__mocks__/babelconfig/no-babel-config-in-this-package.json",
       ),
     );
-    expect(lBabelConfig).to.have.property("filename");
-    expect(pathToPosix(lBabelConfig.filename)).to.contain(
-      "/__mocks__/babelconfig/no-babel-config-in-this-package.json",
+    ok(lBabelConfig.hasOwnProperty("filename"));
+    ok(
+      pathToPosix(lBabelConfig.filename).includes(
+        "/__mocks__/babelconfig/no-babel-config-in-this-package.json",
+      ),
     );
-    expect(omit(lBabelConfig, "filename")).to.deep.equal(
+    deepStrictEqual(
+      omit(lBabelConfig, "filename"),
       DEFAULT_EMPTY_BABEL_OPTIONS_OBJECT,
     );
   });
@@ -153,17 +158,13 @@ describe("[I] config-utl/extract-babel-config", () => {
       getFullPath("./__mocks__/babelconfig-js/babel.es-module.config.mjs"),
     );
     strictEqual(lFoundConfig.plugins.length, 1);
-    expect(lFoundConfig.plugins[0].key).to.deep.equal(
-      "transform-modules-commonjs",
-    );
+    deepStrictEqual(lFoundConfig.plugins[0].key, "transform-modules-commonjs");
   });
   it("returns a babel config even when an es module is passed (.mjs extension)", async () => {
     const lFoundConfig = await extractBabelConfig(
       getFullPath("./__mocks__/babelconfig-js/babel.es-module.config.mjs"),
     );
     strictEqual(lFoundConfig.plugins.length, 1);
-    expect(lFoundConfig.plugins[0].key).to.deep.equal(
-      "transform-modules-commonjs",
-    );
+    deepStrictEqual(lFoundConfig.plugins[0].key, "transform-modules-commonjs");
   });
 });

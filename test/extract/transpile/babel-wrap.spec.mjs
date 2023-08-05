@@ -1,12 +1,11 @@
 import { strictEqual } from "node:assert";
 import { readFileSync } from "node:fs";
-import { expect } from "chai";
 import normalizeSource from "../normalize-source.utl.mjs";
 import wrap from "../../../src/extract/transpile/babel-wrap.mjs";
 
 describe("[I] extract/transpile/babel-wrap", () => {
   it("tells the babel transpiler is available", () => {
-    expect(wrap.isAvailable()).to.equal(true);
+    strictEqual(wrap.isAvailable(), true);
   });
 
   it("transpiles with babel when no babel options are passed", async () => {
@@ -15,7 +14,8 @@ describe("[I] extract/transpile/babel-wrap", () => {
         readFileSync("./test/extract/transpile/__mocks__/babel-in.js", "utf8"),
       ),
     );
-    expect(lOutput).to.equal(
+    strictEqual(
+      lOutput,
       readFileSync(
         "./test/extract/transpile/__fixtures__/babel-out-no-options.js",
         "utf8",

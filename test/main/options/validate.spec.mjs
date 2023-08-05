@@ -1,195 +1,169 @@
-import { strictEqual } from "node:assert";
-import { expect } from "chai";
-import {
-  validateCruiseOptions,
-  validateFormatOptions,
-} from "../../../src/main/options/validate.mjs";
+import { doesNotThrow, strictEqual, throws } from "node:assert";
+import { validateCruiseOptions } from "../../../src/main/options/validate.mjs";
 
 describe("[U] main/options/validate - module systems", () => {
   it("throws when a invalid module system is passed ", () => {
-    expect(() => {
+    throws(() => {
       validateCruiseOptions({
         moduleSystems: ["notavalidmodulesystem"],
       });
-    }).to.throw("Invalid module system list: 'notavalidmodulesystem'\n");
+    }, /Invalid module system list: 'notavalidmodulesystem'/);
   });
 
   it("passes when a valid module system is passed", () => {
-    expect(() => {
+    doesNotThrow(() => {
       validateCruiseOptions({ moduleSystems: ["cjs"] });
-    }).to.not.throw();
+    });
   });
 });
 
 describe("[U] main/options/validate - output types", () => {
   it("throws when a invalid output type is passed ", () => {
-    expect(() => {
+    throws(() => {
       validateCruiseOptions({ outputType: "notAValidOutputType" });
-    }).to.throw("'notAValidOutputType' is not a valid output type.\n");
+    }, /'notAValidOutputType' is not a valid output type\./);
   });
 
   it("passes when a valid output type is passed", () => {
-    expect(() => {
+    doesNotThrow(() => {
       validateCruiseOptions({ outputType: "err" });
-    }).to.not.throw();
+    });
   });
 });
 
 describe("[U] main/options/validate - maxDepth", () => {
   it("throws when a non-integer is passed as maxDepth", () => {
-    expect(() => {
+    throws(() => {
       validateCruiseOptions({ maxDepth: "not an integer" });
-    }).to.throw(
-      "'not an integer' is not a valid depth - use an integer between 0 and 99",
-    );
+    }, /'not an integer' is not a valid depth - use an integer between 0 and 99/);
   });
 
   it("throws when > 99 is passed as maxDepth (string)", () => {
-    expect(() => {
+    throws(() => {
       validateCruiseOptions({ maxDepth: "101" });
-    }).to.throw("'101' is not a valid depth - use an integer between 0 and 99");
+    }, /'101' is not a valid depth - use an integer between 0 and 99/);
   });
 
   it("throws when > 99 is passed as maxDepth (number)", () => {
-    expect(() => {
+    throws(() => {
       validateCruiseOptions({ maxDepth: 101 });
-    }).to.throw("'101' is not a valid depth - use an integer between 0 and 99");
+    }, /'101' is not a valid depth - use an integer between 0 and 99/);
   });
 
   it("throws when < 0 is passed as maxDepth (string)", () => {
-    expect(() => {
+    throws(() => {
       validateCruiseOptions({ maxDepth: "-1" });
-    }).to.throw("'-1' is not a valid depth - use an integer between 0 and 99");
+    }, /'-1' is not a valid depth - use an integer between 0 and 99/);
   });
 
   it("throws when < 0 is passed as maxDepth (number)", () => {
-    expect(() => {
+    throws(() => {
       validateCruiseOptions({ maxDepth: -1 });
-    }).to.throw("'-1' is not a valid depth - use an integer between 0 and 99");
+    }, /'-1' is not a valid depth - use an integer between 0 and 99/);
   });
 
   it("passes when a valid depth is passed as maxDepth (string)", () => {
-    expect(() => {
+    doesNotThrow(() => {
       validateCruiseOptions({ maxDepth: "42" });
-    }).to.not.throw();
+    });
   });
 
   it("passes when a valid depth is passed as maxDepth (number)", () => {
-    expect(() => {
+    doesNotThrow(() => {
       validateCruiseOptions({ maxDepth: 42 });
-    }).to.not.throw();
+    });
   });
 });
 
 describe("[U] main/options/validate - focusDepth", () => {
   it("throws when a non-integer is passed", () => {
-    expect(() => {
+    throws(() => {
       validateCruiseOptions({ focusDepth: "not an integer" });
-    }).to.throw(
-      "'not an integer' is not a valid focus depth - use an integer between 0 and 99",
-    );
+    }, /'not an integer' is not a valid focus depth - use an integer between 0 and 99/);
   });
 
   it("throws when > 99 is passed (string)", () => {
-    expect(() => {
+    throws(() => {
       validateCruiseOptions({ focusDepth: "101" });
-    }).to.throw(
-      "'101' is not a valid focus depth - use an integer between 0 and 99",
-    );
+    }, /'101' is not a valid focus depth - use an integer between 0 and 99/);
   });
 
   it("throws when > 99 is passed as maxDepth (number)", () => {
-    expect(() => {
+    throws(() => {
       validateCruiseOptions({ focusDepth: 101 });
-    }).to.throw(
-      "'101' is not a valid focus depth - use an integer between 0 and 99",
-    );
+    }, /'101' is not a valid focus depth - use an integer between 0 and 99/);
   });
 
   it("throws when < 0 is passed (string)", () => {
-    expect(() => {
+    throws(() => {
       validateCruiseOptions({ focusDepth: "-1" });
-    }).to.throw(
-      "'-1' is not a valid focus depth - use an integer between 0 and 99",
-    );
+    }, /'-1' is not a valid focus depth - use an integer between 0 and 99/);
   });
 
   it("throws when < 0 is passed (number)", () => {
-    expect(() => {
+    throws(() => {
       validateCruiseOptions({ focusDepth: -1 });
-    }).to.throw(
-      "'-1' is not a valid focus depth - use an integer between 0 and 99",
-    );
+    }, /'-1' is not a valid focus depth - use an integer between 0 and 99/);
   });
 
   it("passes when a valid depth is passed (string)", () => {
-    expect(() => {
+    doesNotThrow(() => {
       validateCruiseOptions({ focusDepth: "42" });
-    }).to.not.throw();
+    });
   });
 
   it("passes when a valid depth is passed (number)", () => {
-    expect(() => {
+    doesNotThrow(() => {
       validateCruiseOptions({ focusDepth: 42 });
-    }).to.not.throw();
+    });
   });
 });
 
 describe("[U] main/options/validate - exclude", () => {
   it("throws when --exclude is passed an unsafe regex", () => {
-    expect(() => {
+    throws(() => {
       validateCruiseOptions({ exclude: "([A-Za-z]+)*" });
-    }).to.throw(
-      "The pattern '([A-Za-z]+)*' will probably run very slowly - cowardly refusing to run.\n",
-    );
+    }, /The pattern '\(\[A-Za-z\]\+\)\*' will probably run very slowly - cowardly refusing to run\./);
   });
 
   it("throws when exclude.path is passed an unsafe regex", () => {
-    expect(() => {
+    throws(() => {
       validateCruiseOptions({ exclude: "([A-Za-z]+)*" });
-    }).to.throw(
-      "The pattern '([A-Za-z]+)*' will probably run very slowly - cowardly refusing to run.\n",
-    );
+    }, /The pattern '\(\[A-Za-z\]\+\)\*' will probably run very slowly - cowardly refusing to run\./);
   });
 
   it("throws when exclude.pathNot is passed an unsafe regex", () => {
-    expect(() => {
+    throws(() => {
       validateCruiseOptions({ exclude: "([A-Za-z]+)*" });
-    }).to.throw(
-      "The pattern '([A-Za-z]+)*' will probably run very slowly - cowardly refusing to run.\n",
-    );
+    }, /The pattern '\(\[A-Za-z\]\+\)\*' will probably run very slowly - cowardly refusing to run\./);
   });
 
   it("throws when doNotFollow.pathNot is passed an unsafe regex", () => {
-    expect(() => {
+    throws(() => {
       validateCruiseOptions({ doNotFollow: "([A-Za-z]+)*" });
-    }).to.throw(
-      "The pattern '([A-Za-z]+)*' will probably run very slowly - cowardly refusing to run.\n",
-    );
+    }, /The pattern '\(\[A-Za-z\]\+\)\*' will probably run very slowly - cowardly refusing to run\./);
   });
 
   it("passes when --exclude is passed a safe regex", () => {
-    expect(() => {
+    doesNotThrow(() => {
       validateCruiseOptions({ exclude: "([A-Za-z]+)" });
-    }).to.not.throw();
+    });
   });
 
   it("passes when --validate is passed a safe regex in rule-set.exclude", () => {
-    expect(() => {
+    doesNotThrow(() => {
       validateCruiseOptions({
         ruleSet: { options: { exclude: "([A-Za-z]+)" } },
       });
-    }).to.not.throw();
+    });
   });
 
   it("throws when --validate is passed an unsafe regex in rule-set.exclude", () => {
-    expect(() => {
+    throws(() => {
       validateCruiseOptions({
         ruleSet: { options: { exclude: "(.*)+" } },
       });
-    }).to.throw(
-      "The pattern '(.*)+' will probably run very slowly - cowardly refusing to run.\n",
-    );
+    }, /The pattern '\(\.\*\)\+' will probably run very slowly - cowardly refusing to run\./);
   });
 
   it("command line options trump those passed in --validate rule-set", () => {

@@ -1,4 +1,4 @@
-import { expect } from "chai";
+import { deepStrictEqual } from "node:assert";
 import validate from "../../src/validate/index.mjs";
 import parseRuleSet from "./parse-ruleset.utl.mjs";
 
@@ -14,17 +14,18 @@ describe("[I] validate/index - license", () => {
   });
 
   it("Skips dependencies that have no license attached", () => {
-    expect(
+    deepStrictEqual(
       validate.dependency(
         lLicenseRuleSet,
         { source: "something" },
         { resolved: "src/aap/speeltuigen/autoband.ts" },
       ),
-    ).to.deep.equal({ valid: true });
+      { valid: true },
+    );
   });
 
   it("does not flag dependencies that do not match the license expression", () => {
-    expect(
+    deepStrictEqual(
       validate.dependency(
         lLicenseRuleSet,
         { source: "something" },
@@ -33,11 +34,12 @@ describe("[I] validate/index - license", () => {
           license: "Monkey-PL",
         },
       ),
-    ).to.deep.equal({ valid: true });
+      { valid: true },
+    );
   });
 
   it("flags dependencies that match the license expression", () => {
-    expect(
+    deepStrictEqual(
       validate.dependency(
         lLicenseRuleSet,
         { source: "something" },
@@ -46,10 +48,11 @@ describe("[I] validate/index - license", () => {
           license: "SomePL-3.1",
         },
       ),
-    ).to.deep.equal({
-      valid: false,
-      rules: [{ name: "no-somepl-license", severity: "warn" }],
-    });
+      {
+        valid: false,
+        rules: [{ name: "no-somepl-license", severity: "warn" }],
+      },
+    );
   });
 });
 
@@ -65,17 +68,18 @@ describe("[I] validate/index - licenseNot", () => {
   });
 
   it("Skips dependencies that have no license attached", () => {
-    expect(
+    deepStrictEqual(
       validate.dependency(
         lLicenseNotRuleSet,
         { source: "something" },
         { resolved: "src/aap/speeltuigen/autoband.ts" },
       ),
-    ).to.deep.equal({ valid: true });
+      { valid: true },
+    );
   });
 
   it("does not flag dependencies that do match the license expression", () => {
-    expect(
+    deepStrictEqual(
       validate.dependency(
         lLicenseNotRuleSet,
         { source: "something" },
@@ -84,11 +88,12 @@ describe("[I] validate/index - licenseNot", () => {
           license: "SomePL-3.1",
         },
       ),
-    ).to.deep.equal({ valid: true });
+      { valid: true },
+    );
   });
 
   it("flags dependencies that do not match the license expression", () => {
-    expect(
+    deepStrictEqual(
       validate.dependency(
         lLicenseNotRuleSet,
         { source: "something" },
@@ -97,9 +102,10 @@ describe("[I] validate/index - licenseNot", () => {
           license: "Monkey-PL",
         },
       ),
-    ).to.deep.equal({
-      valid: false,
-      rules: [{ name: "only-somepl-license", severity: "warn" }],
-    });
+      {
+        valid: false,
+        rules: [{ name: "only-somepl-license", severity: "warn" }],
+      },
+    );
   });
 });

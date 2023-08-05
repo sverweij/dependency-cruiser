@@ -1,6 +1,5 @@
 import { strictEqual } from "node:assert";
 import { readFileSync } from "node:fs";
-import { expect } from "chai";
 import svelteWrap from "../../../src/extract/transpile/svelte-wrap.mjs";
 import normalizeSource from "../normalize-source.utl.mjs";
 import typescriptWrap from "../../../src/extract/transpile/typescript-wrap.mjs";
@@ -9,7 +8,7 @@ const wrap = svelteWrap(typescriptWrap(true));
 
 describe("[I] svelte transpiler", () => {
   it("tells the svelte transpiler is available", () => {
-    expect(wrap.isAvailable()).to.equal(true);
+    strictEqual(wrap.isAvailable(), true);
   });
   [
     ["ts", (pSource) => pSource],

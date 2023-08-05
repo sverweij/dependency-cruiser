@@ -1,6 +1,5 @@
 /* eslint-disable no-magic-numbers */
-import { strictEqual } from "node:assert";
-import { expect } from "chai";
+import { deepStrictEqual, ok, strictEqual } from "node:assert";
 import format from "../../src/main/format.mjs";
 import { createRequireJSON } from "../backwards.utl.mjs";
 
@@ -34,8 +33,10 @@ describe("[E] main.format - format", () => {
     } catch (pError) {
       lErrorMessage = pError.message;
     }
-    expect(lErrorMessage).to.contain(
-      "'not-a-valid-reporter' is not a valid output type.",
+    ok(
+      lErrorMessage.includes(
+        "'not-a-valid-reporter' is not a valid output type.",
+      ),
     );
   });
 
@@ -46,8 +47,10 @@ describe("[E] main.format - format", () => {
     } catch (pError) {
       lErrorMessage = pError.message;
     }
-    expect(lErrorMessage).to.contain(
-      "The supplied dependency-cruiser result is not valid:",
+    ok(
+      lErrorMessage.includes(
+        "The supplied dependency-cruiser result is not valid:",
+      ),
     );
   });
 
@@ -58,21 +61,25 @@ describe("[E] main.format - format", () => {
     } catch (pError) {
       lErrorMessage = pError.message;
     }
-    expect(lErrorMessage).to.contain(
-      "The supplied dependency-cruiser result is not valid: data must have required property 'summary'",
+    ok(
+      lErrorMessage.includes(
+        "The supplied dependency-cruiser result is not valid: data must have required property 'summary'",
+      ),
     );
   });
 
   it("returns an error reporter formatted report when presented with a legal result", async () => {
     const lResult = await format(MINIMAL_RESULT, { outputType: "err" });
-    expect(lResult.output).to.contain(
-      "no dependency violations found (0 modules, 0 dependencies cruised)",
+    ok(
+      lResult.output.includes(
+        "no dependency violations found (0 modules, 0 dependencies cruised)",
+      ),
     );
   });
 
   it("returns an json reporter formatted report when presented with a legal result", async () => {
     const lResult = await format(MINIMAL_RESULT, { outputType: "json" });
-    expect(JSON.parse(lResult.output)).to.deep.equal(MINIMAL_RESULT);
+    deepStrictEqual(JSON.parse(lResult.output), MINIMAL_RESULT);
   });
 
   it("returns a collapsed version of the report when passed a collapse option", async () => {
@@ -81,7 +88,7 @@ describe("[E] main.format - format", () => {
     });
     const lCollapsedResult = lResult.output;
 
-    expect(lCollapsedResult.summary.violations).to.deep.equal([
+    deepStrictEqual(lCollapsedResult.summary.violations, [
       {
         type: "dependency",
         from: "src/cli/",
@@ -100,9 +107,11 @@ describe("[E] main.format - format", () => {
     const lErrorLongResult = await format(cruiseResult, {
       outputType: "err-long",
     });
-    expect(lErrorLongResult.output).to.contain("cli-to-main-only-warn:");
-    expect(lErrorLongResult.output).to.contain(
-      "This cli module depends on something not in the public interface",
+    ok(lErrorLongResult.output.includes("cli-to-main-only-warn:"));
+    ok(
+      lErrorLongResult.output.includes(
+        "This cli module depends on something not in the public interface",
+      ),
     );
   });
 
@@ -110,9 +119,11 @@ describe("[E] main.format - format", () => {
     const lErrorResult = await format(cruiseResult, {
       outputType: "err",
     });
-    expect(lErrorResult.output).to.contain("cli-to-main-only-warn:");
-    expect(lErrorResult.output).to.not.contain(
-      "This cli module depends on something not in the public interface",
+    ok(lErrorResult.output.includes("cli-to-main-only-warn:"));
+    ok(
+      !lErrorResult.output.includes(
+        "This cli module depends on something not in the public interface",
+      ),
     );
   });
 
@@ -122,7 +133,7 @@ describe("[E] main.format - format", () => {
       includeOnly: "^src/",
     });
     const lJSONResult = JSON.parse(lResult.output);
-    expect(Object.keys(lJSONResult.summary.optionsUsed).length).to.equal(16);
+    strictEqual(Object.keys(lJSONResult.summary.optionsUsed).length, 16);
     strictEqual(lJSONResult.summary.optionsUsed.outputType, "anon");
     strictEqual(lJSONResult.summary.optionsUsed.includeOnly, "^src/");
     // without includeOnly it'd be 53

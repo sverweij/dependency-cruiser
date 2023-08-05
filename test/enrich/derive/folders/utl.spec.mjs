@@ -1,4 +1,4 @@
-import { expect } from "chai";
+import { deepStrictEqual, strictEqual } from "node:assert";
 
 import {
   getAfferentCouplings,
@@ -9,40 +9,44 @@ import {
 
 describe("[U] enrich/derive/folders/utl - getAfferentCouplings", () => {
   it("no dependents => 0", () => {
-    expect(
+    strictEqual(
       getAfferentCouplings({ dependents: [] }, "src/whoopla").length,
-    ).to.equal(0);
+      0,
+    );
   });
 
   it("dependents from the current folder => 0", () => {
-    expect(
+    strictEqual(
       getAfferentCouplings(
         { dependents: ["src/folder/do-things.mjs"] },
         "src/folder",
       ).length,
-    ).to.equal(0);
+      0,
+    );
   });
 
   it("dependents from another folder => 1", () => {
-    expect(
+    strictEqual(
       getAfferentCouplings(
         { dependents: ["src/somewhere-else/do-things.mjs"] },
         "src/whoopla",
       ).length,
-    ).to.equal(1);
+      1,
+    );
   });
 
   it("dependent from another folder that starts with a similar name => 1", () => {
-    expect(
+    strictEqual(
       getAfferentCouplings(
         { dependents: ["src/folder-some-more/do-things.mjs"] },
         "src/folder",
       ).length,
-    ).to.equal(1);
+      1,
+    );
   });
 
   it("all together now", () => {
-    expect(
+    strictEqual(
       getAfferentCouplings(
         {
           dependents: [
@@ -54,49 +58,49 @@ describe("[U] enrich/derive/folders/utl - getAfferentCouplings", () => {
         "src/folder",
       ).length,
       // eslint-disable-next-line no-magic-numbers
-    ).to.equal(2);
+      2,
+    );
   });
 });
 
 describe("[U] enrich/derive/folders/utl - getEfferentCouplings", () => {
   it("no dependencies => 0", () => {
-    expect(
+    strictEqual(
       getEfferentCouplings({ dependencies: [] }, "src/whoopla").length,
-    ).to.equal(0);
+      0,
+    );
   });
 });
 
 describe("[U] enrich/derive/folders/utl - getParentFolders", () => {
   it("for a parent-less folder just returns that folder", () => {
-    expect(getParentFolders("src")).to.deep.equal(["src"]);
+    deepStrictEqual(getParentFolders("src"), ["src"]);
   });
 
   it("for folder with parents return the parent folder and the folder itself (in that order)", () => {
-    expect(getParentFolders("src/reprot")).to.deep.equal(["src", "src/reprot"]);
+    deepStrictEqual(getParentFolders("src/reprot"), ["src", "src/reprot"]);
   });
   it("for empty folder names return that", () => {
-    expect(getParentFolders("")).to.deep.equal([""]);
+    deepStrictEqual(getParentFolders(""), [""]);
   });
 });
 
 describe("[U] enrich/derive/folders/utl - objectToArray", () => {
   it("no folders in object => empty array", () => {
-    expect(object2Array({})).to.deep.equal([]);
+    deepStrictEqual(object2Array({}), []);
   });
 
   it("slaps keys into a name attribute in objects", () => {
-    expect(object2Array({ thename: {} })).to.deep.equal([{ name: "thename" }]);
+    deepStrictEqual(object2Array({ thename: {} }), [{ name: "thename" }]);
   });
 
   it("slaps keys into a name attribute in objects (multiple)", () => {
-    expect(
+    deepStrictEqual(
       object2Array({
         "folder/one": {},
         "folder/two": { attribute: "yes" },
       }),
-    ).to.deep.equal([
-      { name: "folder/one" },
-      { name: "folder/two", attribute: "yes" },
-    ]);
+      [{ name: "folder/one" }, { name: "folder/two", attribute: "yes" }],
+    );
   });
 });

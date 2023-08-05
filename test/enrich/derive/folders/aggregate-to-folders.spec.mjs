@@ -1,4 +1,4 @@
-import { expect } from "chai";
+import { deepStrictEqual } from "node:assert";
 
 import aggregateToFolders from "../../../../src/enrich/derive/folders/aggregate-to-folders.mjs";
 
@@ -8,38 +8,39 @@ function compareFolders(pLeftFolder, pRightFolder) {
 
 describe("[U] enrich/derive/folders/aggregate-to-folders - folder stability metrics derivation", () => {
   it("no modules no metrics", () => {
-    expect(aggregateToFolders([])).to.deep.equal([]);
+    deepStrictEqual(aggregateToFolders([]), []);
   });
 
   it("no dependencies no dependents", () => {
-    expect(
+    deepStrictEqual(
       aggregateToFolders([
         { source: "src/folder/index.js", dependencies: [], dependents: [] },
       ]).sort(compareFolders),
-    ).to.deep.equal([
-      {
-        name: "src",
-        moduleCount: 1,
-        dependents: [],
-        dependencies: [],
-        afferentCouplings: 0,
-        efferentCouplings: 0,
-        instability: 0,
-      },
-      {
-        name: "src/folder",
-        moduleCount: 1,
-        dependents: [],
-        dependencies: [],
-        afferentCouplings: 0,
-        efferentCouplings: 0,
-        instability: 0,
-      },
-    ]);
+      [
+        {
+          name: "src",
+          moduleCount: 1,
+          dependents: [],
+          dependencies: [],
+          afferentCouplings: 0,
+          efferentCouplings: 0,
+          instability: 0,
+        },
+        {
+          name: "src/folder",
+          moduleCount: 1,
+          dependents: [],
+          dependencies: [],
+          afferentCouplings: 0,
+          efferentCouplings: 0,
+          instability: 0,
+        },
+      ],
+    );
   });
 
   it("dependencies no dependents", () => {
-    expect(
+    deepStrictEqual(
       aggregateToFolders([
         {
           source: "src/folder/index.js",
@@ -52,45 +53,46 @@ describe("[U] enrich/derive/folders/aggregate-to-folders - folder stability metr
           dependents: ["src/folder/index.js"],
         },
       ]).sort(compareFolders),
-    ).to.deep.equal([
-      {
-        name: "src",
-        moduleCount: 2,
-        dependents: [],
-        dependencies: [],
-        afferentCouplings: 0,
-        efferentCouplings: 0,
-        instability: 0,
-      },
-      {
-        name: "src/folder",
-        moduleCount: 1,
-        dependents: [],
-        dependencies: [
-          { name: "src/other-folder", instability: 0, circular: false },
-        ],
-        afferentCouplings: 0,
-        efferentCouplings: 1,
-        instability: 1,
-      },
-      {
-        name: "src/other-folder",
-        moduleCount: 1,
-        dependents: [
-          {
-            name: "src/folder",
-          },
-        ],
-        dependencies: [],
-        afferentCouplings: 1,
-        efferentCouplings: 0,
-        instability: 0,
-      },
-    ]);
+      [
+        {
+          name: "src",
+          moduleCount: 2,
+          dependents: [],
+          dependencies: [],
+          afferentCouplings: 0,
+          efferentCouplings: 0,
+          instability: 0,
+        },
+        {
+          name: "src/folder",
+          moduleCount: 1,
+          dependents: [],
+          dependencies: [
+            { name: "src/other-folder", instability: 0, circular: false },
+          ],
+          afferentCouplings: 0,
+          efferentCouplings: 1,
+          instability: 1,
+        },
+        {
+          name: "src/other-folder",
+          moduleCount: 1,
+          dependents: [
+            {
+              name: "src/folder",
+            },
+          ],
+          dependencies: [],
+          afferentCouplings: 1,
+          efferentCouplings: 0,
+          instability: 0,
+        },
+      ],
+    );
   });
 
   it("dependencies no dependents - non-zero instability", () => {
-    expect(
+    deepStrictEqual(
       aggregateToFolders([
         {
           source: "src/folder/index.js",
@@ -114,66 +116,71 @@ describe("[U] enrich/derive/folders/aggregate-to-folders - folder stability metr
           dependents: ["src/folder/index.js"],
         },
       ]).sort(compareFolders),
-    ).to.deep.equal([
-      {
-        name: "src",
-        moduleCount: 3,
-        dependents: [],
-        dependencies: [],
-        afferentCouplings: 0,
-        efferentCouplings: 0,
-        instability: 0,
-      },
-      {
-        name: "src/folder",
-        moduleCount: 1,
-        dependents: [],
-        dependencies: [
-          { name: "src/other-folder", instability: 0, circular: false },
-          { name: "src/yet-another-folder", instability: 0.5, circular: false },
-        ],
-        afferentCouplings: 0,
-        efferentCouplings: 2,
-        instability: 1,
-      },
-      {
-        name: "src/other-folder",
-        moduleCount: 1,
-        dependents: [
-          { name: "src/folder" },
-          {
-            name: "src/yet-another-folder",
-          },
-        ],
-        dependencies: [],
-        afferentCouplings: 2,
-        efferentCouplings: 0,
-        instability: 0,
-      },
-      {
-        name: "src/yet-another-folder",
-        moduleCount: 1,
-        dependents: [
-          {
-            name: "src/folder",
-          },
-        ],
-        dependencies: [
-          {
-            instability: 0,
-            name: "src/other-folder",
-            circular: false,
-          },
-        ],
-        afferentCouplings: 1,
-        efferentCouplings: 1,
-        instability: 0.5,
-      },
-    ]);
+      [
+        {
+          name: "src",
+          moduleCount: 3,
+          dependents: [],
+          dependencies: [],
+          afferentCouplings: 0,
+          efferentCouplings: 0,
+          instability: 0,
+        },
+        {
+          name: "src/folder",
+          moduleCount: 1,
+          dependents: [],
+          dependencies: [
+            { name: "src/other-folder", instability: 0, circular: false },
+            {
+              name: "src/yet-another-folder",
+              instability: 0.5,
+              circular: false,
+            },
+          ],
+          afferentCouplings: 0,
+          efferentCouplings: 2,
+          instability: 1,
+        },
+        {
+          name: "src/other-folder",
+          moduleCount: 1,
+          dependents: [
+            { name: "src/folder" },
+            {
+              name: "src/yet-another-folder",
+            },
+          ],
+          dependencies: [],
+          afferentCouplings: 2,
+          efferentCouplings: 0,
+          instability: 0,
+        },
+        {
+          name: "src/yet-another-folder",
+          moduleCount: 1,
+          dependents: [
+            {
+              name: "src/folder",
+            },
+          ],
+          dependencies: [
+            {
+              instability: 0,
+              name: "src/other-folder",
+              circular: false,
+            },
+          ],
+          afferentCouplings: 1,
+          efferentCouplings: 1,
+          instability: 0.5,
+        },
+      ],
+    );
   });
 
   it("no dependencies but dependents", () => {
-    expect(
+    deepStrictEqual(
       aggregateToFolders([
         {
           source: "src/folder/index.js",
@@ -181,30 +188,31 @@ describe("[U] enrich/derive/folders/aggregate-to-folders - folder stability metr
           dependents: ["src/other-folder/utensil.js"],
         },
       ]).sort(compareFolders),
-    ).to.deep.equal([
-      {
-        name: "src",
-        moduleCount: 1,
-        dependents: [],
-        dependencies: [],
-        afferentCouplings: 0,
-        efferentCouplings: 0,
-        instability: 0,
-      },
-      {
-        name: "src/folder",
-        moduleCount: 1,
-        dependents: [{ name: "src/other-folder" }],
-        dependencies: [],
-        afferentCouplings: 1,
-        efferentCouplings: 0,
-        instability: 0,
-      },
-    ]);
+      [
+        {
+          name: "src",
+          moduleCount: 1,
+          dependents: [],
+          dependencies: [],
+          afferentCouplings: 0,
+          efferentCouplings: 0,
+          instability: 0,
+        },
+        {
+          name: "src/folder",
+          moduleCount: 1,
+          dependents: [{ name: "src/other-folder" }],
+          dependencies: [],
+          afferentCouplings: 1,
+          efferentCouplings: 0,
+          instability: 0,
+        },
+      ],
+    );
   });
 
   it("handling core modules", () => {
-    expect(
+    deepStrictEqual(
       aggregateToFolders([
         {
           source: "src/index.js",
@@ -212,22 +220,23 @@ describe("[U] enrich/derive/folders/aggregate-to-folders - folder stability metr
           dependents: [],
         },
       ]).sort(compareFolders),
-    ).to.deep.equal([
-      {
-        dependencies: [],
-        dependents: [],
-        moduleCount: -1,
-        name: "fs",
-      },
-      {
-        name: "src",
-        moduleCount: 1,
-        dependents: [],
-        dependencies: [{ name: "fs", instability: 0, circular: false }],
-        afferentCouplings: 0,
-        efferentCouplings: 1,
-        instability: 1,
-      },
-    ]);
+      [
+        {
+          dependencies: [],
+          dependents: [],
+          moduleCount: -1,
+          name: "fs",
+        },
+        {
+          name: "src",
+          moduleCount: 1,
+          dependents: [],
+          dependencies: [{ name: "fs", instability: 0, circular: false }],
+          afferentCouplings: 0,
+          efferentCouplings: 1,
+          instability: 1,
+        },
+      ],
+    );
   });
 });

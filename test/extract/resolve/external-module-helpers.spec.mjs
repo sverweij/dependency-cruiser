@@ -1,6 +1,4 @@
-import { strictEqual } from "node:assert";
-import { expect } from "chai";
-import has from "lodash/has.js";
+import { ok, strictEqual } from "node:assert";
 import clearCaches from "../../../src/extract/clear-caches.mjs";
 import {
   getPackageJson,
@@ -24,53 +22,56 @@ describe("[U] extract/resolve/externalModuleHelpers.getPackageJson", () => {
     clearCaches();
   });
   it("returns null if the module does not exist", () => {
-    expect(
+    strictEqual(
       getPackageJson(
         "./module-does-not-exist",
         process.cwd(),
         BASIC_RESOLVE_OPTIONS,
       ),
-    ).to.be.null;
+      null,
+    );
   });
 
   it("returns null if there's no package.json for the module (no basePath specified)", () => {
-    expect(
+    strictEqual(
       getPackageJson(
         "test/extract/fixtures/deprecated-node-module/require-something-deprecated",
         process.cwd(),
         BASIC_RESOLVE_OPTIONS,
       ),
-    ).to.be.null;
+      null,
+    );
   });
 
   it("returns null if there's no package.json for the module (basePath specified)", () => {
-    expect(
+    strictEqual(
       getPackageJson(
         "./require-something-deprecated",
         "./fixtures/deprecated-node-module/",
         BASIC_RESOLVE_OPTIONS,
       ),
-    ).to.be.null;
+      null,
+    );
   });
 
   it("returns a package.json when there is one (root)", () => {
     let lPackageJson = getPackageJson(
-      "chai",
+      "acorn",
       process.cwd(),
       BASIC_RESOLVE_OPTIONS,
     );
 
-    expect(lPackageJson).to.be.not.null;
-    expect(has(lPackageJson, "name")).to.be.true;
-    strictEqual(lPackageJson.name, "chai");
+    ok(lPackageJson);
+    strictEqual(lPackageJson.hasOwnProperty("name"), true);
+    strictEqual(lPackageJson.name, "acorn");
   });
 
   it("returns a package.json when there is one (root) - base dir defaults to current working dir", () => {
-    let lPackageJson = getPackageJson("chai", null, BASIC_RESOLVE_OPTIONS);
+    let lPackageJson = getPackageJson("acorn", null, BASIC_RESOLVE_OPTIONS);
 
-    expect(lPackageJson).to.be.not.null;
-    expect(has(lPackageJson, "name")).to.be.true;
-    strictEqual(lPackageJson.name, "chai");
+    ok(lPackageJson);
+    strictEqual(lPackageJson.hasOwnProperty("name"), true);
+    strictEqual(lPackageJson.name, "acorn");
   });
 
   it("returns a package.json when there is one ('local' node_modules)", () => {
@@ -80,11 +81,9 @@ describe("[U] extract/resolve/externalModuleHelpers.getPackageJson", () => {
       BASIC_RESOLVE_OPTIONS,
     );
 
-    expect(lPackageJson).to.be.not.null;
-    expect(has(lPackageJson, "name")).to.be.true;
-    expect(lPackageJson.name).to.equal(
-      "deprecated-at-the-start-for-test-purposes",
-    );
+    ok(lPackageJson);
+    strictEqual(lPackageJson.hasOwnProperty("name"), true);
+    strictEqual(lPackageJson.name, "deprecated-at-the-start-for-test-purposes");
   });
 
   it("returns a package.json even when it's not specified in the node modules exports and the regular resolver is supposed to heed those exports", () => {
@@ -94,125 +93,134 @@ describe("[U] extract/resolve/externalModuleHelpers.getPackageJson", () => {
       RESOLVE_OPTIONS_HEEDING_EXPORTS,
     );
 
-    expect(lPackageJson).to.be.not.null;
-    expect(has(lPackageJson, "name")).to.be.true;
+    ok(lPackageJson);
+    strictEqual(lPackageJson.hasOwnProperty("name"), true);
     strictEqual(lPackageJson.description, "testinga 2");
   });
 });
 
 describe("[U] extract/resolve/externalModuleHelpers.getPackageRoot", () => {
   it("returns undefined if called without parameters", () => {
-    expect(typeof getPackageRoot()).to.equal("undefined");
+    strictEqual(typeof getPackageRoot(), "undefined");
   });
 
   it("returns null if called with null", () => {
-    expect(getPackageRoot(null)).to.equal(null);
+    strictEqual(getPackageRoot(null), null);
   });
 
   it("locals unchanged: './localThing' => './localThing'", () => {
-    expect(getPackageRoot("./localThing")).to.equal("./localThing");
+    strictEqual(getPackageRoot("./localThing"), "./localThing");
   });
 
   it("returns the module name unchanged if called with a module name without a '/'", () => {
-    expect(getPackageRoot("lodash")).to.equal("lodash");
+    strictEqual(getPackageRoot("lodash"), "lodash");
   });
 
   it("returns the 'root' of the name when called with a module name with a '/'", () => {
-    expect(getPackageRoot("lodash/fp")).to.equal("lodash");
+    strictEqual(getPackageRoot("lodash/fp"), "lodash");
   });
 
   it("@scoped/bla => @scoped/bla", () => {
-    expect(getPackageRoot("@scoped/bla")).to.equal("@scoped/bla");
+    strictEqual(getPackageRoot("@scoped/bla"), "@scoped/bla");
   });
 
   it("@scoped/bla/subthing => @scoped/bla", () => {
-    expect(getPackageRoot("@scoped/bla/subthing/sub/bla.json")).to.equal(
+    strictEqual(
+      getPackageRoot("@scoped/bla/subthing/sub/bla.json"),
       "@scoped/bla",
     );
   });
 
   it("@scoped => @scoped (note: weird edge case - shouldn't occur)", () => {
-    expect(getPackageRoot("@scoped")).to.equal("@scoped");
+    strictEqual(getPackageRoot("@scoped"), "@scoped");
   });
 });
 
 describe("[U] extract/resolve/externalModuleHelpers.getLicense", () => {
   it("returns '' if the module does not exist", () => {
-    expect(
+    strictEqual(
       getLicense("this-module-does-not-exist", ".", BASIC_RESOLVE_OPTIONS),
-    ).to.equal("");
+      "",
+    );
   });
 
   it("returns '' if the module does exist but has no associated package.json", () => {
-    expect(
+    strictEqual(
       getLicense(
         "./test/extract/resolve/fixtures/no-package-json",
         ".",
         BASIC_RESOLVE_OPTIONS,
       ),
-    ).to.equal("");
+      "",
+    );
   });
 
   it("returns '' if the module does exist, has a package.json, but no license field", () => {
-    expect(
+    strictEqual(
       getLicense(
         "no-license",
         "./test/extract/resolve/fixtures/licenses/",
         BASIC_RESOLVE_OPTIONS,
       ),
-    ).to.equal("");
+      "",
+    );
   });
 
   it("returns '' if the module exists, has a package.json, and a license field that is a boolean", () => {
-    expect(
+    strictEqual(
       getLicense(
         "boolean-license",
         "./test/extract/resolve/fixtures/licenses/",
         BASIC_RESOLVE_OPTIONS,
       ),
-    ).to.equal("");
+      "",
+    );
   });
 
   it("returns '' if the module exists, has a package.json, and a license field that is an object", () => {
-    expect(
+    strictEqual(
       getLicense(
         "object-license",
         "./test/extract/resolve/fixtures/licenses/",
         BASIC_RESOLVE_OPTIONS,
       ),
-    ).to.equal("");
+      "",
+    );
   });
 
   it("returns '' package.json has a licenses field that is an array (and no license field)", () => {
-    expect(
+    strictEqual(
       getLicense(
         "array-licenses",
         "./test/extract/resolve/fixtures/licenses/",
         BASIC_RESOLVE_OPTIONS,
       ),
-    ).to.equal("");
+      "",
+    );
   });
 
   it("returns the license if the module exists, has a package.json, and a string license field", () => {
-    expect(
+    strictEqual(
       getLicense(
         "GPL-license",
         "./test/extract/resolve/__mocks__/licenses/",
         BASIC_RESOLVE_OPTIONS,
       ),
-    ).to.equal("GPL-3.0");
+      "GPL-3.0",
+    );
   });
 });
 
 describe("[U] extract/resolve/externalModuleHelpers.dependencyIsDeprecated", () => {
   it("returns false if the module does not exist", () => {
-    expect(
+    strictEqual(
       dependencyIsDeprecated(
         "this-module-does-not-exist",
         ".",
         BASIC_RESOLVE_OPTIONS,
       ),
-    ).to.equal(false);
+      false,
+    );
   });
 });
 

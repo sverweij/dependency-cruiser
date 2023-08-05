@@ -1,4 +1,4 @@
-import { expect } from "chai";
+import { deepStrictEqual } from "node:assert";
 import validate from "../../src/validate/index.mjs";
 import parseRuleSet from "./parse-ruleset.utl.mjs";
 
@@ -14,26 +14,27 @@ describe("[I] validate/index - orphans", () => {
   });
 
   it("Skips modules that have no orphan attribute", () => {
-    expect(
-      validate.module(lOrphanRuleSet, { source: "something" }),
-    ).to.deep.equal({ valid: true });
+    deepStrictEqual(validate.module(lOrphanRuleSet, { source: "something" }), {
+      valid: true,
+    });
   });
 
   it("Flags modules that are orphans", () => {
-    expect(
+    deepStrictEqual(
       validate.module(lOrphanRuleSet, {
         source: "something",
         orphan: true,
       }),
-    ).to.deep.equal({
-      valid: false,
-      rules: [
-        {
-          name: "no-orphans",
-          severity: "warn",
-        },
-      ],
-    });
+      {
+        valid: false,
+        rules: [
+          {
+            name: "no-orphans",
+            severity: "warn",
+          },
+        ],
+      },
+    );
   });
 });
 describe("[I] validate/index - orphans in 'allowed' rules", () => {
@@ -47,29 +48,31 @@ describe("[I] validate/index - orphans in 'allowed' rules", () => {
   });
 
   it("Flags modules that are orphans if they're in the 'allowed' section", () => {
-    expect(
+    deepStrictEqual(
       validate.module(lOrphansAllowedRuleSet, {
         source: "something",
         orphan: true,
       }),
-    ).to.deep.equal({
-      valid: false,
-      rules: [
-        {
-          name: "not-in-allowed",
-          severity: "warn",
-        },
-      ],
-    });
+      {
+        valid: false,
+        rules: [
+          {
+            name: "not-in-allowed",
+            severity: "warn",
+          },
+        ],
+      },
+    );
   });
 
   it("Leaves modules alone that aren't orphans if there's a rule in the 'allowed' section forbidding them", () => {
-    expect(
+    deepStrictEqual(
       validate.module(lOrphansAllowedRuleSet, {
         source: "something",
         orphan: false,
       }),
-    ).to.deep.equal({ valid: true });
+      { valid: true },
+    );
   });
 });
 
@@ -94,59 +97,63 @@ describe("[I] validate/index - orphans combined with path/ pathNot", () => {
     ],
   });
   it("Leaves modules that are orphans, but that don't match the rule path", () => {
-    expect(
+    deepStrictEqual(
       validate.module(lOrphanPathRuleSet, {
         source: "something",
         orphan: true,
       }),
-    ).to.deep.equal({ valid: true });
+      { valid: true },
+    );
   });
 
   it("Flags modules that are orphans and that match the rule's path", () => {
-    expect(
+    deepStrictEqual(
       validate.module(lOrphanPathRuleSet, {
         source: "noorphansallowedhere/blah/something.ts",
         orphan: true,
       }),
-    ).to.deep.equal({
-      valid: false,
-      rules: [
-        {
-          name: "no-orphans",
-          severity: "error",
-        },
-      ],
-    });
+      {
+        valid: false,
+        rules: [
+          {
+            name: "no-orphans",
+            severity: "error",
+          },
+        ],
+      },
+    );
   });
 
   it("Leaves modules that are orphans, but that do match the rule's pathNot", () => {
-    expect(
+    deepStrictEqual(
       validate.module(lOrphanPathNotRuleSet, {
         source: "orphansallowedhere/something",
         orphan: true,
       }),
-    ).to.deep.equal({ valid: true });
+      { valid: true },
+    );
   });
 
   it("Flags modules that are orphans, but that do not match the rule's pathNot", () => {
-    expect(
+    deepStrictEqual(
       validate.module(lOrphanPathNotRuleSet, {
         source: "blah/something.ts",
         orphan: true,
       }),
-    ).to.deep.equal({
-      valid: false,
-      rules: [
-        {
-          name: "no-orphans",
-          severity: "warn",
-        },
-      ],
-    });
+      {
+        valid: false,
+        rules: [
+          {
+            name: "no-orphans",
+            severity: "warn",
+          },
+        ],
+      },
+    );
   });
 
   it("The 'dependency' validation leaves the module only orphan rule alone", () => {
-    expect(
+    deepStrictEqual(
       validate.dependency(
         lOrphanPathRuleSet,
         {
@@ -155,6 +162,7 @@ describe("[I] validate/index - orphans combined with path/ pathNot", () => {
         },
         {},
       ),
-    ).to.deep.equal({ valid: true });
+      { valid: true },
+    );
   });
 });

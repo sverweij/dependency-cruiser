@@ -1,6 +1,5 @@
 import { renameSync } from "node:fs";
-import { deepStrictEqual } from "node:assert";
-import { expect } from "chai";
+import { deepStrictEqual, notDeepStrictEqual } from "node:assert";
 import extract from "../../src/extract/index.mjs";
 import { createRequireJSON } from "../backwards.utl.mjs";
 import { normalizeCruiseOptions } from "../../src/main/options/normalize.mjs";
@@ -78,6 +77,6 @@ describe("[I] extract/index - cache busting", () => {
 
     deepStrictEqual(lFirstResult, lFirstResultFixture);
     deepStrictEqual(lSecondResult, lSecondResultFixture);
-    expect(lSecondResult).to.not.deep.equal(lFirstResult);
+    notDeepStrictEqual(lSecondResult, lFirstResult);
   });
 });

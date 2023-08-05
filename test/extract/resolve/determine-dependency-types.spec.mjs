@@ -1,13 +1,13 @@
+import { deepStrictEqual } from "node:assert";
 import { resolve } from "node:path";
 import { fileURLToPath } from "node:url";
-import { expect } from "chai";
 import determineDependencyTypes from "../../../src/extract/resolve/determine-dependency-types.mjs";
 
 const __dirname = fileURLToPath(new URL(".", import.meta.url));
 
 describe("[U] extract/resolve/determineDependencyTypes - determine dependencyTypes", () => {
   it("sorts local dependencies into 'local'", () => {
-    expect(
+    deepStrictEqual(
       determineDependencyTypes(
         {
           couldNotResolve: false,
@@ -15,11 +15,12 @@ describe("[U] extract/resolve/determineDependencyTypes - determine dependencyTyp
         },
         "./localthing",
       ),
-    ).to.deep.equal(["local"]);
+      ["local"],
+    );
   });
 
   it("sorts core modules into 'core'", () => {
-    expect(
+    deepStrictEqual(
       determineDependencyTypes(
         {
           couldNotResolve: false,
@@ -28,11 +29,12 @@ describe("[U] extract/resolve/determineDependencyTypes - determine dependencyTyp
         },
         "fs",
       ),
-    ).to.deep.equal(["core"]);
+      ["core"],
+    );
   });
 
   it("sorts unresolvable modules into 'unknown'", () => {
-    expect(
+    deepStrictEqual(
       determineDependencyTypes(
         {
           couldNotResolve: true,
@@ -40,11 +42,12 @@ describe("[U] extract/resolve/determineDependencyTypes - determine dependencyTyp
         },
         "unresolvable-thing",
       ),
-    ).to.deep.equal(["unknown"]);
+      ["unknown"],
+    );
   });
 
   it("sorts node_modules into 'npm-unknown' when no package dependencies were supplied", () => {
-    expect(
+    deepStrictEqual(
       determineDependencyTypes(
         {
           couldNotResolve: false,
@@ -52,11 +55,12 @@ describe("[U] extract/resolve/determineDependencyTypes - determine dependencyTyp
         },
         "cool-module",
       ),
-    ).to.deep.equal(["npm-unknown"]);
+      ["npm-unknown"],
+    );
   });
 
   it("sorts node_modules into 'npm-no-pkg' when they're not in the supplied package dependencies", () => {
-    expect(
+    deepStrictEqual(
       determineDependencyTypes(
         {
           module: "cool-module",
@@ -66,11 +70,12 @@ describe("[U] extract/resolve/determineDependencyTypes - determine dependencyTyp
         "cool-module",
         {},
       ),
-    ).to.deep.equal(["npm-no-pkg"]);
+      ["npm-no-pkg"],
+    );
   });
 
   it("sorts node_modules into 'npm' when they're in the supplied package dependencies", () => {
-    expect(
+    deepStrictEqual(
       determineDependencyTypes(
         {
           module: "cool-module",
@@ -84,11 +89,12 @@ describe("[U] extract/resolve/determineDependencyTypes - determine dependencyTyp
           },
         },
       ),
-    ).to.deep.equal(["npm"]);
+      ["npm"],
+    );
   });
 
   it("sorts node_modules into 'npm-dev' when they're in the supplied package devDependencies", () => {
-    expect(
+    deepStrictEqual(
       determineDependencyTypes(
         {
           couldNotResolve: false,
@@ -101,11 +107,12 @@ describe("[U] extract/resolve/determineDependencyTypes - determine dependencyTyp
           },
         },
       ),
-    ).to.deep.equal(["npm-dev"]);
+      ["npm-dev"],
+    );
   });
 
   it("sorts node_modules into 'npm-dev' when they're in the supplied package devDependencies with an @types scope", () => {
-    expect(
+    deepStrictEqual(
       determineDependencyTypes(
         {
           couldNotResolve: false,
@@ -118,11 +125,12 @@ describe("[U] extract/resolve/determineDependencyTypes - determine dependencyTyp
           },
         },
       ),
-    ).to.deep.equal(["npm-dev"]);
+      ["npm-dev"],
+    );
   });
 
   it("Only picks the 'npm' dependency-type when it's in the manifest as a regular dependency and a devDependencies @types dependency ", () => {
-    expect(
+    deepStrictEqual(
       determineDependencyTypes(
         {
           couldNotResolve: false,
@@ -138,11 +146,12 @@ describe("[U] extract/resolve/determineDependencyTypes - determine dependencyTyp
           },
         },
       ),
-    ).to.deep.equal(["npm"]);
+      ["npm"],
+    );
   });
 
   it("sorts node_modules into 'npm-no-pkg' when they're in the supplied package devDependencies with an @types scope, but the resolve modules don't include 'node_modules/@types'", () => {
-    expect(
+    deepStrictEqual(
       determineDependencyTypes(
         {
           couldNotResolve: false,
@@ -159,11 +168,12 @@ describe("[U] extract/resolve/determineDependencyTypes - determine dependencyTyp
           modules: ["node_modules"],
         },
       ),
-    ).to.deep.equal(["npm-no-pkg"]);
+      ["npm-no-pkg"],
+    );
   });
 
   it("sorts node_modules into 'npm' and 'npm-dev' when they're both the deps and the devDeps", () => {
-    expect(
+    deepStrictEqual(
       determineDependencyTypes(
         {
           couldNotResolve: false,
@@ -179,11 +189,12 @@ describe("[U] extract/resolve/determineDependencyTypes - determine dependencyTyp
           },
         },
       ),
-    ).to.deep.equal(["npm", "npm-dev"]);
+      ["npm", "npm-dev"],
+    );
   });
 
   it("only sorts up to the first / ", () => {
-    expect(
+    deepStrictEqual(
       determineDependencyTypes(
         {
           couldNotResolve: false,
@@ -199,11 +210,12 @@ describe("[U] extract/resolve/determineDependencyTypes - determine dependencyTyp
           },
         },
       ),
-    ).to.deep.equal(["npm"]);
+      ["npm"],
+    );
   });
 
   it("sorts node_modules into 'npm-no-pkg' when they're in a weird *Dependencies in the package.json", () => {
-    expect(
+    deepStrictEqual(
       determineDependencyTypes(
         {
           couldNotResolve: false,
@@ -216,11 +228,12 @@ describe("[U] extract/resolve/determineDependencyTypes - determine dependencyTyp
           },
         },
       ),
-    ).to.deep.equal(["npm-no-pkg"]);
+      ["npm-no-pkg"],
+    );
   });
 
   it("classifies aliased modules as aliased", () => {
-    expect(
+    deepStrictEqual(
       determineDependencyTypes(
         {
           couldNotResolve: false,
@@ -235,11 +248,12 @@ describe("[U] extract/resolve/determineDependencyTypes - determine dependencyTyp
           },
         },
       ),
-    ).to.deep.equal(["aliased"]);
+      ["aliased"],
+    );
   });
 
   it("has a fallback for weirdistan situations", () => {
-    expect(
+    deepStrictEqual(
       determineDependencyTypes(
         {
           couldNotResolve: false,
@@ -252,11 +266,12 @@ describe("[U] extract/resolve/determineDependencyTypes - determine dependencyTyp
           },
         },
       ),
-    ).to.deep.equal(["undetermined"]);
+      ["undetermined"],
+    );
   });
 
   it("classifies local, non-node_modules modules as localmodule", () => {
-    expect(
+    deepStrictEqual(
       determineDependencyTypes(
         {
           couldNotResolve: false,
@@ -269,11 +284,12 @@ describe("[U] extract/resolve/determineDependencyTypes - determine dependencyTyp
           modules: ["node_modules", "src"],
         },
       ),
-    ).to.deep.equal(["localmodule"]);
+      ["localmodule"],
+    );
   });
 
   it("classifies local, non-node_modules modules with an absolute path as localmodule (posix & win32 paths)", () => {
-    expect(
+    deepStrictEqual(
       determineDependencyTypes(
         {
           couldNotResolve: false,
@@ -290,11 +306,12 @@ describe("[U] extract/resolve/determineDependencyTypes - determine dependencyTyp
         },
         resolve(__dirname, "socrates", "hemlock", "src", "bla"),
       ),
-    ).to.deep.equal(["localmodule"]);
+      ["localmodule"],
+    );
   });
 
   it("classifies local, non-node_modules non-modules as undetermined", () => {
-    expect(
+    deepStrictEqual(
       determineDependencyTypes(
         {
           couldNotResolve: false,
@@ -307,11 +324,12 @@ describe("[U] extract/resolve/determineDependencyTypes - determine dependencyTyp
           modules: ["node_modules", "src"],
         },
       ),
-    ).to.deep.equal(["undetermined"]);
+      ["undetermined"],
+    );
   });
 
   it("classifies a type only import as a type-only dependency", () => {
-    expect(
+    deepStrictEqual(
       determineDependencyTypes(
         {
           dependencyTypes: ["type-only"],
@@ -325,6 +343,7 @@ describe("[U] extract/resolve/determineDependencyTypes - determine dependencyTyp
           modules: ["node_modules", "src"],
         },
       ),
-    ).to.deep.equal(["local", "type-only"]);
+      ["local", "type-only"],
+    );
   });
 });

@@ -1,5 +1,4 @@
 import { deepStrictEqual } from "node:assert";
-import { expect } from "chai";
 import extractES6Deps from "../../../src/extract/ast-extractors/extract-es6-deps.mjs";
 import { getASTFromSource } from "../../../src/extract/parse/to-javascript-ast.mjs";
 
@@ -14,7 +13,7 @@ describe("[U] ast-extractors/extract-ES6-deps", () => {
     let lDeps = [];
 
     extractES6("import('./dynamic').then(pModule => pModule.x);", lDeps);
-    expect(lDeps).to.deep.equal([
+    deepStrictEqual(lDeps, [
       {
         module: "./dynamic",
         moduleSystem: "es6",
@@ -28,7 +27,7 @@ describe("[U] ast-extractors/extract-ES6-deps", () => {
     let lDeps = [];
 
     extractES6("import(`./dynamic`).then(pModule => pModule.x);", lDeps);
-    expect(lDeps).to.deep.equal([
+    deepStrictEqual(lDeps, [
       {
         module: "./dynamic",
         moduleSystem: "es6",
@@ -56,7 +55,7 @@ describe("[U] ast-extractors/extract-ES6-deps", () => {
         }`;
 
     extractES6(lYieldImport, lDeps);
-    expect(lDeps).to.deep.equal([
+    deepStrictEqual(lDeps, [
       {
         module: "http",
         moduleSystem: "es6",
@@ -99,7 +98,7 @@ describe("[U] ast-extractors/extract-ES6-deps", () => {
     }`;
 
     extractES6(lInput, lDependencies, ".jsx");
-    expect(lDependencies).to.deep.equal([
+    deepStrictEqual(lDependencies, [
       {
         module: "react",
         moduleSystem: "es6",
@@ -129,7 +128,7 @@ export class ReplicateIssueComponent extends React.Component {
   );
 }`;
     extractES6(lInput, lDependencies, ".jsx");
-    expect(lDependencies).to.deep.equal([
+    deepStrictEqual(lDependencies, [
       {
         module: "react",
         moduleSystem: "es6",
