@@ -1,8 +1,8 @@
+import { strictEqual } from "node:assert";
 import { readFileSync } from "node:fs";
 import { join } from "node:path";
 import { createRequire } from "node:module";
 import { fileURLToPath } from "node:url";
-import { expect } from "chai";
 import normalizeNewline from "normalize-newline";
 
 const require = createRequire(import.meta.url);
@@ -27,13 +27,12 @@ const wrap = proxyquire.load(
 
 describe("[I] vue transpiler", () => {
   it("extracts the script content from a vue SFC", () => {
-    expect(
+    strictEqual(
       normalizeNewline(
         wrap.transpile(
           readFileSync(join(__dirname, "__mocks__/vue.vue"), "utf8"),
         ),
       ),
-    ).to.equal(
       normalizeNewline(
         readFileSync(join(__dirname, "__fixtures__/vue.js"), "utf8"),
       ),
@@ -41,27 +40,29 @@ describe("[I] vue transpiler", () => {
   });
 
   it("returns the empty string from a vue SFC without a script part", () => {
-    expect(
+    strictEqual(
       normalizeNewline(
         wrap.transpile(
           readFileSync(join(__dirname, "__mocks__/vue-noscript.vue"), "utf8"),
         ),
       ),
-    ).to.equal(normalizeNewline(""));
+      normalizeNewline(""),
+    );
   });
 
   it("handles invalid vue (silently - for backwards compatibility with Vue 2)", () => {
-    expect(
+    strictEqual(
       normalizeNewline(
         wrap.transpile(
           readFileSync(join(__dirname, "__mocks__/vue-invalid.vue"), "utf8"),
         ),
       ),
-    ).to.equal(normalizeNewline(""));
+      normalizeNewline(""),
+    );
   });
 
   it("extracts the script setup content from a vue SFC", () => {
-    expect(
+    strictEqual(
       normalizeNewline(
         wrap.transpile(
           readFileSync(
@@ -70,7 +71,6 @@ describe("[I] vue transpiler", () => {
           ),
         ),
       ),
-    ).to.equal(
       normalizeNewline(
         readFileSync(
           join(__dirname, "__fixtures__/vue-script-setup.js"),
@@ -81,7 +81,7 @@ describe("[I] vue transpiler", () => {
   });
 
   it("extracts the script setup content and script content from a vue SFC", () => {
-    expect(
+    strictEqual(
       normalizeNewline(
         wrap.transpile(
           readFileSync(
@@ -90,7 +90,6 @@ describe("[I] vue transpiler", () => {
           ),
         ),
       ),
-    ).to.equal(
       normalizeNewline(
         readFileSync(
           join(__dirname, "__fixtures__/vue-script-setup-and-script.js"),

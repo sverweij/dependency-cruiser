@@ -1,8 +1,8 @@
-import { expect } from "chai";
+import { strictEqual } from "node:assert";
 import wrap from "../../../src/extract/transpile/livescript-wrap.mjs";
 
 describe("[I] livescript transpiler", () => {
   it("tells the livescript transpiler is not available", () => {
-    expect(wrap.isAvailable()).to.equal(false);
+    strictEqual(wrap.isAvailable(), false);
   });
 });

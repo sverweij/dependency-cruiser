@@ -1,5 +1,4 @@
 import { strictEqual } from "node:assert";
-import { expect } from "chai";
 // eslint-disable-next-line node/file-extension-in-import
 import * as svelteCompiler from "svelte/compiler";
 import normalizeNewline from "normalize-newline";
@@ -75,6 +74,6 @@ describe("[U] sync svelte pre-processor", () => {
       </button>`;
     const lResult = sveltePreProcess(lInput, typeScriptWrap, {});
 
-    expect(normalizeNewline(lResult)).to.equal(normalizeNewline(lExpected));
+    strictEqual(normalizeNewline(lResult), normalizeNewline(lExpected));
   });
 });

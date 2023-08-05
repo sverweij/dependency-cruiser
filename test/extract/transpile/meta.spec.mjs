@@ -1,4 +1,4 @@
-import { expect } from "chai";
+import { deepStrictEqual } from "node:assert";
 import {
   getAvailableTranspilers,
   scannableExtensions,
@@ -6,7 +6,7 @@ import {
 
 describe("[U] extract/transpile/meta", () => {
   it("tells which extensions can be scanned", () => {
-    expect(scannableExtensions).to.deep.equal([
+    deepStrictEqual(scannableExtensions, [
       ".js",
       ".cjs",
       ".mjs",
@@ -29,7 +29,7 @@ describe("[U] extract/transpile/meta", () => {
   });
 
   it("returns the available transpilers", () => {
-    expect(getAvailableTranspilers()).to.deep.equal([
+    deepStrictEqual(getAvailableTranspilers(), [
       {
         name: "babel",
         version: ">=7.0.0 <8.0.0",
