@@ -1,6 +1,6 @@
 import { fileURLToPath } from "node:url";
 import { join } from "node:path";
-import { expect } from "chai";
+import { ok, deepStrictEqual } from "node:assert";
 import loadConfig from "../../../src/config-utl/extract-depcruise-config/index.mjs";
 
 const __dirname = fileURLToPath(new URL(".", import.meta.url));
@@ -14,34 +14,37 @@ describe("[I] config-utl/extract-depcruise-config", () => {
         assert: { type: "json" },
       }
     );
-    expect(
+    deepStrictEqual(
       await loadConfig(join(mockDirectory, "rules.sub-not-allowed-error.json")),
-    ).to.deep.equal(fixture.default);
+      fixture.default,
+    );
   });
 
   it("a rule set with an extends returns that rule set, extending the mentioned base", async () => {
     const mergedFixture = await import("./__mocks__/extends/merged.json", {
       assert: { type: "json" },
     });
-    expect(
+    deepStrictEqual(
       await loadConfig(join(mockDirectory, "extends/extending.json")),
-    ).to.deep.equal(mergedFixture.default);
+      mergedFixture.default,
+    );
   });
 
   it("a rule set with an extends array (0 members) returns that rule set", async () => {
-    expect(
+    deepStrictEqual(
       await loadConfig(
         join(mockDirectory, "extends/extending-array-with-zero-members.json"),
       ),
-    ).to.deep.equal({
-      forbidden: [
-        {
-          name: "rule-from-the-base",
-          from: {},
-          to: {},
-        },
-      ],
-    });
+      {
+        forbidden: [
+          {
+            name: "rule-from-the-base",
+            from: {},
+            to: {},
+          },
+        ],
+      },
+    );
   });
 
   it("a rule set with an extends array (1 member) returns that rule set, extending the mentioned base", async () => {
@@ -51,11 +54,12 @@ describe("[I] config-utl/extract-depcruise-config", () => {
         assert: { type: "json" },
       }
     );
-    expect(
+    deepStrictEqual(
       await loadConfig(
         join(mockDirectory, "extends/extending-array-with-one-member.json"),
       ),
-    ).to.deep.equal(mergedArrayOneFixture.default);
+      mergedArrayOneFixture.default,
+    );
   });
 
   it("a rule set with an extends array (>1 member) returns that rule set, extending the mentioned bases", async () => {
@@ -65,34 +69,36 @@ describe("[I] config-utl/extract-depcruise-config", () => {
         assert: { type: "json" },
       }
     );
-    expect(
+    deepStrictEqual(
       await loadConfig(
         join(mockDirectory, "extends/extending-array-with-two-members.json"),
       ),
-    ).to.deep.equal(mergedArrayTwoFixture.default);
+      mergedArrayTwoFixture.default,
+    );
   });
 
   it("a rule set with an extends from node_modules gets merged properly as well", async () => {
-    expect(
+    deepStrictEqual(
       await loadConfig(
         join(mockDirectory, "extends/extending-from-node-modules.json"),
       ),
-    ).to.deep.equal({
-      allowed: [
-        {
-          from: {
-            path: "src",
+      {
+        allowed: [
+          {
+            from: {
+              path: "src",
+            },
+            to: {
+              path: "src",
+            },
           },
-          to: {
-            path: "src",
-          },
+        ],
+        allowedSeverity: "warn",
+        options: {
+          doNotFollow: "node_modules",
         },
-      ],
-      allowedSeverity: "warn",
-      options: {
-        doNotFollow: "node_modules",
       },
-    });
+    );
   });
 
   it("borks on a circular extends (1 step)", async () => {
@@ -111,6 +117,6 @@ describe("[I] config-utl/extract-depcruise-config", () => {
       lError = pError.toString();
     }
 
-    expect(lError).to.contain(lMessageOutTake);
+    ok(lError.includes(lMessageOutTake));
   });
 });

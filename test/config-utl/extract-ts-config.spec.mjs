@@ -1,5 +1,5 @@
 import { fileURLToPath } from "node:url";
-import { expect } from "chai";
+import { deepStrictEqual, throws } from "node:assert";
 import loadTSConfig from "../../src/config-utl/extract-ts-config.mjs";
 import pathToPosix from "../../src/utl/path-to-posix.mjs";
 
@@ -8,101 +8,107 @@ function getFullPath(pRelativePath) {
 }
 describe("[I] config-utl/extract-ts-config - flatten typescript config - simple config scenarios", () => {
   it("throws when no config file name is passed", () => {
-    expect(() => {
+    throws(() => {
       loadTSConfig();
-    }).to.throw();
+    });
   });
 
   it("throws when a non-existing config file is passed", () => {
-    expect(() => {
+    throws(() => {
       loadTSConfig("config-does-not-exist");
-    }).to.throw();
+    });
   });
 
   it("throws when a config file is passed that does not contain valid json", () => {
-    expect(() => {
+    throws(() => {
       loadTSConfig(
         getFullPath("./__mocks__/typescriptconfig/tsconfig.invalid.json"),
       );
-    }).to.throw();
+    });
   });
 
   it("returns an empty object when an empty config file is passed", () => {
-    expect(
+    deepStrictEqual(
       loadTSConfig(
         getFullPath("./__mocks__/typescriptconfig/tsconfig.empty.json"),
       ).options,
-    ).to.deep.equal({
-      configFilePath: pathToPosix(
-        getFullPath("./__mocks__/typescriptconfig/tsconfig.empty.json"),
-      ),
-    });
+      {
+        configFilePath: pathToPosix(
+          getFullPath("./__mocks__/typescriptconfig/tsconfig.empty.json"),
+        ),
+      },
+    );
   });
 
   it("returns an empty object when an empty config file with comments is passed", () => {
-    expect(
+    deepStrictEqual(
       loadTSConfig(
         getFullPath("./__mocks__/typescriptconfig/tsconfig.withcomments.json"),
       ).options,
-    ).to.deep.equal({
-      configFilePath: pathToPosix(
-        getFullPath("./__mocks__/typescriptconfig/tsconfig.withcomments.json"),
-      ),
-    });
+      {
+        configFilePath: pathToPosix(
+          getFullPath(
+            "./__mocks__/typescriptconfig/tsconfig.withcomments.json",
+          ),
+        ),
+      },
+    );
   });
 
   it("returns an object with a bunch of options when the default ('--init') config file is passed", () => {
-    expect(
+    deepStrictEqual(
       loadTSConfig(
         getFullPath(
           "./__mocks__/typescriptconfig/tsconfig.asgeneratedbydefault.json",
         ),
       ).options,
-    ).to.deep.equal({
-      configFilePath: pathToPosix(
-        getFullPath(
-          "./__mocks__/typescriptconfig/tsconfig.asgeneratedbydefault.json",
+      {
+        configFilePath: pathToPosix(
+          getFullPath(
+            "./__mocks__/typescriptconfig/tsconfig.asgeneratedbydefault.json",
+          ),
         ),
-      ),
-      esModuleInterop: true,
-      module: 1,
-      strict: true,
-      target: 1,
-    });
+        esModuleInterop: true,
+        module: 1,
+        strict: true,
+        target: 1,
+      },
+    );
   });
 });
 
 describe("[I] config-utl/extract-ts-config - flatten typescript config - 'extend' config scenarios", () => {
   it("throws when a config file is passed that contains a extends to a non-existing file", () => {
-    expect(() => {
+    throws(() => {
       loadTSConfig(
         getFullPath(
           "./__mocks__/typescriptconfig/tsconfig.extendsnonexisting.json",
         ),
       );
-    }).to.throw();
+    });
   });
 
   it("throws when a config file is passed that has a circular reference", () => {
-    expect(() => {
+    throws(() => {
       loadTSConfig(
         getFullPath("./__mocks__/typescriptconfig/tsconfig.circular.json"),
       );
-    }).to.throw(
-      "error TS18000: Circularity detected while resolving configuration",
-    );
+    }, /error TS18000: Circularity detected while resolving configuration/);
   });
 
   it("returns an empty object (even no 'extend') when a config with an extend to an empty base is passed", () => {
-    expect(
+    deepStrictEqual(
       loadTSConfig(
         getFullPath("./__mocks__/typescriptconfig/tsconfig.simpleextends.json"),
       ).options,
-    ).to.deep.equal({
-      configFilePath: pathToPosix(
-        getFullPath("./__mocks__/typescriptconfig/tsconfig.simpleextends.json"),
-      ),
-    });
+      {
+        configFilePath: pathToPosix(
+          getFullPath(
+            "./__mocks__/typescriptconfig/tsconfig.simpleextends.json",
+          ),
+        ),
+      },
+    );
   });
 
   it("returns an object with properties from base, extends & overrides from extends - non-compilerOptions", () => {
@@ -121,7 +127,7 @@ describe("[I] config-utl/extract-ts-config - flatten typescript config - 'extend
     ] = 1;
 
     /* eslint no-undefined:0 */
-    expect(lParseResult).to.deep.equal({
+    deepStrictEqual(lParseResult, {
       // only in the base
       // filesSpecs: ["./dummysrc.ts"],
       options: {
@@ -160,52 +166,54 @@ describe("[I] config-utl/extract-ts-config - flatten typescript config - 'extend
   });
 
   it("returns an object with properties from base, extends & overrides from extends - compilerOptions", () => {
-    expect(
+    deepStrictEqual(
       loadTSConfig(
         getFullPath(
           "./__mocks__/typescriptconfig/tsconfig.compileroptionsextends.json",
         ),
       ).options,
-    ).to.deep.equal({
-      configFilePath: pathToPosix(
-        getFullPath(
-          "./__mocks__/typescriptconfig/tsconfig.compileroptionsextends.json",
+      {
+        configFilePath: pathToPosix(
+          getFullPath(
+            "./__mocks__/typescriptconfig/tsconfig.compileroptionsextends.json",
+          ),
         ),
-      ),
-      // only in extends:
-      allowJs: true,
-      // overridden from base:
-      allowUnreachableCode: false,
-      // only in base:
-      rootDirs: [
-        pathToPosix(getFullPath("__mocks__/typescriptconfig/foo")),
-        pathToPosix(getFullPath("__mocks__/typescriptconfig/bar")),
-        pathToPosix(getFullPath("__mocks__/typescriptconfig/baz")),
-      ],
-    });
+        // only in extends:
+        allowJs: true,
+        // overridden from base:
+        allowUnreachableCode: false,
+        // only in base:
+        rootDirs: [
+          pathToPosix(getFullPath("__mocks__/typescriptconfig/foo")),
+          pathToPosix(getFullPath("__mocks__/typescriptconfig/bar")),
+          pathToPosix(getFullPath("__mocks__/typescriptconfig/baz")),
+        ],
+      },
+    );
   });
 
   it("returns an object with properties from base, extends compilerOptions.lib array", () => {
-    expect(
+    deepStrictEqual(
       loadTSConfig(
         getFullPath(
           "./__mocks__/typescriptconfig/tsconfig.compileroptionsextendslib.json",
         ),
       ).options,
-    ).to.deep.equal({
-      configFilePath: pathToPosix(
-        getFullPath(
-          "./__mocks__/typescriptconfig/tsconfig.compileroptionsextendslib.json",
+      {
+        configFilePath: pathToPosix(
+          getFullPath(
+            "./__mocks__/typescriptconfig/tsconfig.compileroptionsextendslib.json",
+          ),
         ),
-      ),
-      lib: [
-        // "dom.iterable",
-        "lib.dom.iterable.d.ts",
-        // I'd expected these from base as well as per the specification, but
-        // apparently the typescript TSConfig parser chooses to override instead of extend ...
-        // "es2016.array.include",
-        // "dom"
-      ],
-    });
+        lib: [
+          // "dom.iterable",
+          "lib.dom.iterable.d.ts",
+          // I'd expected these from base as well as per the specification, but
+          // apparently the typescript TSConfig parser chooses to override instead of extend ...
+          // "es2016.array.include",
+          // "dom"
+        ],
+      },
+    );
   });
 });
