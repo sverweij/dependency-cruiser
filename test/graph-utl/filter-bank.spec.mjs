@@ -1,4 +1,4 @@
-import { expect } from "chai";
+import { deepStrictEqual } from "node:assert";
 import { applyFilters } from "../../src/graph-utl/filter-bank.mjs";
 import reportModules from "./__mocks__/report-modules.mjs";
 import reportIndexModule from "./__fixtures__/reaches/report-index-module.mjs";
@@ -55,41 +55,42 @@ const MODULES = [
 
 describe("[U] graph-utl/filter-bank - null's, naughts, and zeros", () => {
   it("returns the input when no filter passed ", () => {
-    expect(applyFilters(MODULES)).to.deep.equal(MODULES);
+    deepStrictEqual(applyFilters(MODULES), MODULES);
   });
 
   it("returns the input when an empty collection of filters is passed ", () => {
-    expect(applyFilters(MODULES, {})).to.deep.equal(MODULES);
+    deepStrictEqual(applyFilters(MODULES, {}), MODULES);
   });
 
   it("returns the input when empty filters are passed (exclude)", () => {
-    expect(
+    deepStrictEqual(
       applyFilters(MODULES, {
         exclude: {},
       }),
-    ).to.deep.equal(MODULES);
+      MODULES,
+    );
   });
   it("returns the input when empty filters are passed (includeOnly)", () => {
-    expect(
+    deepStrictEqual(
       applyFilters(MODULES, {
         includeOnly: {},
       }),
-    ).to.deep.equal(MODULES);
+      MODULES,
+    );
   });
   it("returns the input when empty filters are passed (focus)", () => {
-    expect(
+    deepStrictEqual(
       applyFilters(MODULES, {
         focus: {},
       }),
-    ).to.deep.equal(MODULES);
+      MODULES,
+    );
   });
 });
 
 describe("[U] graph-utl/filter-bank - exclude, includeOnly, reaches, highlight", () => {
   it("returns the input without excluded modules when exclude is passed ", () => {
-    expect(
-      applyFilters(MODULES, { exclude: { path: "^excluded" } }),
-    ).to.deep.equal([
+    deepStrictEqual(applyFilters(MODULES, { exclude: { path: "^excluded" } }), [
       {
         source: "included/index.js",
         dependencies: [
@@ -130,66 +131,71 @@ describe("[U] graph-utl/filter-bank - exclude, includeOnly, reaches, highlight",
   });
 
   it("returns the input with only the included modules when includeOnly is passed ", () => {
-    expect(
+    deepStrictEqual(
       applyFilters(MODULES, { includeOnly: { path: "included" } }),
-    ).to.deep.equal([
-      {
-        source: "included/index.js",
-        dependencies: [
-          { resolved: "also-included/index.js" },
-          { resolved: "included/hoepla.js" },
-        ],
-      },
-      {
-        source: "also-included/index.js",
-        dependencies: [
-          { resolved: "also-included/one-step-down.js" },
-          { resolved: "included/one-step-down-too.js" },
-        ],
-      },
-      {
-        source: "also-included/one-step-down.js",
-        dependencies: [],
-      },
-      {
-        source: "also-included/one-step-down-too.js",
-        dependencies: [],
-      },
-      {
-        source: "included/hoepla.js",
-        dependencies: [],
-      },
-    ]);
+      [
+        {
+          source: "included/index.js",
+          dependencies: [
+            { resolved: "also-included/index.js" },
+            { resolved: "included/hoepla.js" },
+          ],
+        },
+        {
+          source: "also-included/index.js",
+          dependencies: [
+            { resolved: "also-included/one-step-down.js" },
+            { resolved: "included/one-step-down-too.js" },
+          ],
+        },
+        {
+          source: "also-included/one-step-down.js",
+          dependencies: [],
+        },
+        {
+          source: "also-included/one-step-down-too.js",
+          dependencies: [],
+        },
+        {
+          source: "included/hoepla.js",
+          dependencies: [],
+        },
+      ],
+    );
   });
 
   it("reaches: regex selecting no existing module yields an empty array", () => {
-    expect(
+    deepStrictEqual(
       applyFilters(reportModules, {
         reaches: { path: "this-module-does-not-exist" },
       }),
-    ).to.deep.equal([]);
+      [],
+    );
   });
 
   it("reaches: regex selecting only a module without any dependents yields just that module", () => {
-    expect(
+    deepStrictEqual(
       applyFilters(reportModules, {
         reaches: { path: "src/report/index.js" },
       }),
-    ).to.deep.equal(reportIndexModule);
+      reportIndexModule,
+    );
   });
 
   it("reaches: regex selecting a without any dependents yields just that module", () => {
-    expect(
+    deepStrictEqual(
       applyFilters(reportModules, {
         reaches: { path: "src/report/(utl/|anon/anonymize-path-element)" },
       }),
-    ).to.deep.equal(multiModuleRegexResult);
+      multiModuleRegexResult,
+    );
   });
   it("highlight: labels modules with matchesHighlight when they match the highlight", () => {
-    expect(
+    deepStrictEqual(
       applyFilters(reportModules, {
         highlight: { path: "src/report/(utl/|anon/anonymize-path-element)" },
       }),
-    ).to.deep.equal(highlightResult);
+      highlightResult,
+    );
   });
 });

@@ -1,4 +1,4 @@
-import { expect } from "chai";
+import { deepStrictEqual } from "node:assert";
 import consolidateToFolder from "../../src/graph-utl/consolidate-to-folder.mjs";
 
 describe("[U] graph-utl/consolidateToFolder", () => {
@@ -21,7 +21,7 @@ describe("[U] graph-utl/consolidateToFolder", () => {
       },
     ];
 
-    expect(consolidateToFolder(lInput)).to.deep.equal(lOutput);
+    deepStrictEqual(consolidateToFolder(lInput), lOutput);
   });
 
   it("files in the root go to '.'", () => {
@@ -43,7 +43,7 @@ describe("[U] graph-utl/consolidateToFolder", () => {
       },
     ];
 
-    expect(consolidateToFolder(lInput)).to.deep.equal(lOutput);
+    deepStrictEqual(consolidateToFolder(lInput), lOutput);
   });
 
   it("dependencies' resolved names go to their dirname as well ", () => {
@@ -92,6 +92,6 @@ describe("[U] graph-utl/consolidateToFolder", () => {
       },
     ];
 
-    expect(consolidateToFolder(lInput)).to.deep.equal(lOutput);
+    deepStrictEqual(consolidateToFolder(lInput), lOutput);
   });
 });
