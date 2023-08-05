@@ -133,7 +133,7 @@
       "name": "no-inter-module-test",
       "comment": "This test depends on something in the test tree that is neither a utility, nor a mock nor a fixture.",
       "severity": "error",
-      "from": { "path": "(^test/[^\\/]+/)[^\\.]+\\.spec\\.js" },
+      "from": { "path": "(^test/[^\\/]+/)[^\\.]+\\.(spec|test)\\.js" },
       "to": { "path": "^test/[^\\/]+/.+", "pathNot": ["utl", "$1.+\\.json$"] }
     },
     {
@@ -148,7 +148,7 @@
       "comment": "This module depends on a spec files. A spec file should have a single responsibility (testing whether a module function correctly). If there's something in a spec that's of use, factor it out into (e.g.) a separate utility/ helper or mock",
       "severity": "error",
       "from": { "path": "^(src|bin)" },
-      "to": { "path": "^test|\\.spec\\.js$" }
+      "to": { "path": "^test|\\.(spec|test)\\.js$" }
     },
     {
       "name": "no-external-to-here",
@@ -213,7 +213,7 @@
       "name": "not-unreachable-from-test",
       "comment": "This module in src is not reachable by any test. Please provide a test that covers this (poor man's test coverage - this task is better suited for a proper test coverage tool :-) )",
       "severity": "warn",
-      "from": { "path": "\\.spec\\.m?js$" },
+      "from": { "path": "\\.(spec|test)\\.m?js$" },
       "to": {
         "path": "^src",
         "pathNot": ["\\.schema\\.json$", "\\.d\\.ts$", "^src/report/"],

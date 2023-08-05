@@ -1,0 +1,31 @@
+import { deepStrictEqual, strictEqual } from "node:assert";
+import { describe, it } from "node:test";
+import Ajv from "ajv";
+import baseline from "../../../src/report/baseline.mjs";
+import { createRequireJSON } from "../../backwards.utl.mjs";
+import baselineSchema from "../../../src/schema/baseline-violations.schema.mjs";
+
+const requireJSON = createRequireJSON(import.meta.url);
+const ajv = new Ajv();
+
+describe("[I] report/baseline", () => {
+  it("returns an empty array when there's no violations", () => {
+    const lInput = requireJSON("./__mocks__/dc-result-no-violations.json");
+    const lExpected = [];
+    const lResult = baseline(lInput);
+
+    deepStrictEqual(JSON.parse(lResult.output), lExpected);
+    strictEqual(lResult.exitCode, 0);
+    ajv.validate(baselineSchema, JSON.parse(lResult.output));
+  });
+
+  it("returns the violations in a json object", () => {
+    const lInput = requireJSON("./__mocks__/dc-result-with-violations.json");
+    const lExpected = requireJSON("./__fixtures__/baseline-result.json");
+    const lResult = baseline(lInput);
+
+    deepStrictEqual(JSON.parse(lResult.output), lExpected);
+    strictEqual(lResult.exitCode, 0);
+    ajv.validate(baselineSchema, JSON.parse(lResult.output));
+  });
+});

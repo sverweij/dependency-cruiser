@@ -1,9 +1,10 @@
 import { deepStrictEqual } from "node:assert";
+// import { it } from "node:test";
 import getDependencies from "../../src/extract/get-dependencies.mjs";
 import { normalizeCruiseOptions } from "../../src/main/options/normalize.mjs";
 import normalizeResolveOptions from "../../src/main/resolve-options/normalize.mjs";
 
-/* eslint-disable mocha/no-exports */
+// eslint-disable-next-line mocha/no-exports
 export function runFixture(pFixture, pParser = "acorn") {
   const lOptions = {
     parser: pParser,
@@ -26,10 +27,10 @@ export function runFixture(pFixture, pParser = "acorn") {
         normalizeCruiseOptions(lOptions),
         await normalizeResolveOptions(
           { bustTheCache: true, resolveLicenses: true },
-          normalizeCruiseOptions(lOptions),
-        ),
+          normalizeCruiseOptions(lOptions)
+        )
       ),
-      pFixture.expected,
+      pFixture.expected
     );
   });
 }

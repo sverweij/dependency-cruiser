@@ -4,6 +4,7 @@ import {
   strictEqual,
   throws,
 } from "node:assert";
+// import { before, describe, it } from "node:test";
 import normalizeResolveOptions from "../../src/main/resolve-options/normalize.mjs";
 import { normalizeCruiseOptions } from "../../src/main/options/normalize.mjs";
 import { createRequireJSON } from "../backwards.utl.mjs";
@@ -27,7 +28,7 @@ describe("[I] extract/getDependencies - Error scenarios - ", () => {
     const lOptions = normalizeCruiseOptions({});
     const lResolveOptions = await normalizeResolveOptions(
       { bustTheCache: true },
-      lOptions,
+      lOptions
     );
 
     doesNotThrow(
@@ -35,9 +36,9 @@ describe("[I] extract/getDependencies - Error scenarios - ", () => {
         getDependencies(
           "test/extract/__mocks__/syntax-error.js",
           lOptions,
-          lResolveOptions,
+          lResolveOptions
         ),
-      /Extracting dependencies ran afoul of... Unexpected token \(1:3\)/,
+      /Extracting dependencies ran afoul of... Unexpected token \(1:3\)/
     );
   });
   it("Raises an exception on non-existing files", () => {
@@ -51,11 +52,11 @@ describe("[I] extract/getDependencies - even when require gets non-string argume
   let lOptions = {};
   let lResolveOptions = {};
 
-  before("normalize options & resolve options", async () => {
+  before(async () => {
     lOptions = normalizeCruiseOptions({});
     lResolveOptions = await normalizeResolveOptions(
       { bustTheCache: true },
-      lOptions,
+      lOptions
     );
   });
 
@@ -64,9 +65,9 @@ describe("[I] extract/getDependencies - even when require gets non-string argume
       getDependencies(
         "./test/extract/__mocks__/cjs-require-non-strings/require-a-number.js",
         lOptions,
-        lResolveOptions,
+        lResolveOptions
       ).length,
-      1,
+      1
     );
   });
 
@@ -75,9 +76,9 @@ describe("[I] extract/getDependencies - even when require gets non-string argume
       getDependencies(
         "./test/extract/__mocks__/cjs-require-non-strings/require-a-function.js",
         lOptions,
-        lResolveOptions,
+        lResolveOptions
       ).length,
-      1,
+      1
     );
   });
 
@@ -86,9 +87,9 @@ describe("[I] extract/getDependencies - even when require gets non-string argume
       getDependencies(
         "./test/extract/__mocks__/cjs-require-non-strings/require-an-iife.js",
         normalizeCruiseOptions({}),
-        {},
+        {}
       ).length,
-      1,
+      1
     );
   });
 });
@@ -100,16 +101,16 @@ describe("[I] extract/getDependencies - include", () => {
     });
     const lResolveOptions = await normalizeResolveOptions(
       { bustTheCache: true },
-      lOptions,
+      lOptions
     );
 
     deepStrictEqual(
       getDependencies(
         "./test/extract/__mocks__/include/src/index.js",
         lOptions,
-        lResolveOptions,
+        lResolveOptions
       ),
-      [],
+      []
     );
   });
 
@@ -117,14 +118,14 @@ describe("[I] extract/getDependencies - include", () => {
     const lOptions = normalizeCruiseOptions({ includeOnly: "/src/" });
     const lResolveOptions = await normalizeResolveOptions(
       { bustTheCache: true },
-      lOptions,
+      lOptions
     );
 
     deepStrictEqual(
       getDependencies(
         "./test/extract/__mocks__/include/src/index.js",
         lOptions,
-        lResolveOptions,
+        lResolveOptions
       ),
       [
         {
@@ -139,7 +140,7 @@ describe("[I] extract/getDependencies - include", () => {
           moduleSystem: "cjs",
           resolved: "test/extract/__mocks__/include/src/bla.js",
         },
-      ],
+      ]
     );
   });
 
@@ -147,14 +148,14 @@ describe("[I] extract/getDependencies - include", () => {
     const lOptions = normalizeCruiseOptions({ includeOnly: "include" });
     const lResolveOptions = await normalizeResolveOptions(
       { bustTheCache: true },
-      lOptions,
+      lOptions
     );
 
     deepStrictEqual(
       getDependencies(
         "./test/extract/__mocks__/include/src/index.js",
         lOptions,
-        lResolveOptions,
+        lResolveOptions
       ),
       [
         {
@@ -181,7 +182,7 @@ describe("[I] extract/getDependencies - include", () => {
           moduleSystem: "cjs",
           resolved: "test/extract/__mocks__/include/src/bla.js",
         },
-      ],
+      ]
     );
   });
 
@@ -189,14 +190,14 @@ describe("[I] extract/getDependencies - include", () => {
     const lOptions = normalizeCruiseOptions({ exoticRequireStrings: ["need"] });
     const lResolveOptions = await normalizeResolveOptions(
       { bustTheCache: true },
-      lOptions,
+      lOptions
     );
 
     deepStrictEqual(
       getDependencies(
         "./test/extract/__mocks__/exotic-require/index.js",
         lOptions,
-        lResolveOptions,
+        lResolveOptions
       ),
       [
         {
@@ -213,7 +214,7 @@ describe("[I] extract/getDependencies - include", () => {
           resolved:
             "test/extract/__mocks__/exotic-require/required-with-need.js",
         },
-      ],
+      ]
     );
   });
 
@@ -223,16 +224,16 @@ describe("[I] extract/getDependencies - include", () => {
     });
     const lResolveOptions = await normalizeResolveOptions(
       { bustTheCache: true },
-      lOptions,
+      lOptions
     );
 
     deepStrictEqual(
       getDependencies(
         "./test/extract/__mocks__/extra-extensions/not-parsed-when-in-extra-extensions.yolo",
         lOptions,
-        lResolveOptions,
+        lResolveOptions
       ),
-      [],
+      []
     );
   });
 
@@ -242,14 +243,14 @@ describe("[I] extract/getDependencies - include", () => {
     });
     const lResolveOptions = await normalizeResolveOptions(
       { bustTheCache: true },
-      lOptions,
+      lOptions
     );
 
     deepStrictEqual(
       getDependencies(
         "./test/extract/__mocks__/specifyTsPreCompilationDeps/index.ts",
         lOptions,
-        lResolveOptions,
+        lResolveOptions
       ),
       [
         {
@@ -280,7 +281,7 @@ describe("[I] extract/getDependencies - include", () => {
           resolved:
             "test/extract/__mocks__/specifyTsPreCompilationDeps/real-deal.ts",
         },
-      ],
+      ]
     );
   });
 });
