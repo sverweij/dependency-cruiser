@@ -1,4 +1,4 @@
-import { expect } from "chai";
+import { deepStrictEqual } from "node:assert";
 import validate from "../../src/validate/index.mjs";
 import parseRuleSet from "./parse-ruleset.utl.mjs";
 
@@ -15,25 +15,26 @@ describe("[I] index/validate - moreThanOneDependencyType", () => {
       ],
     });
 
-    expect(
+    deepStrictEqual(
       validate.dependency(
         lRuleSet,
         { source: "src/aap/zus/jet.js" },
         {
-          module: "chai",
-          resolved: "node_modules/chai/index.js",
+          module: "sneeze",
+          resolved: "node_modules/sneeze/index.js",
           dependencyTypes: ["npm", "npm-dev"],
         },
       ),
-    ).to.deep.equal({
-      valid: false,
-      rules: [
-        {
-          name: "no-duplicate-dep-types",
-          severity: "warn",
-        },
-      ],
-    });
+      {
+        valid: false,
+        rules: [
+          {
+            name: "no-duplicate-dep-types",
+            severity: "warn",
+          },
+        ],
+      },
+    );
   });
 
   it(`relations with modules of > 1 dep type (e.g. specified in package.json as peer and as dev)`, () => {
@@ -48,24 +49,25 @@ describe("[I] index/validate - moreThanOneDependencyType", () => {
       ],
     });
 
-    expect(
+    deepStrictEqual(
       validate.dependency(
         lRuleSet,
         { source: "src/aap/zus/jet.js" },
         {
-          module: "chai",
-          resolved: "node_modules/chai/index.js",
+          module: "sneeze",
+          resolved: "node_modules/sneeze/index.js",
           dependencyTypes: ["npm-peer"],
         },
       ),
-    ).to.deep.equal({
-      valid: false,
-      rules: [
-        {
-          name: "please-duplicate-dep-types",
-          severity: "warn",
-        },
-      ],
-    });
+      {
+        valid: false,
+        rules: [
+          {
+            name: "please-duplicate-dep-types",
+            severity: "warn",
+          },
+        ],
+      },
+    );
   });
 });

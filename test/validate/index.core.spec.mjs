@@ -1,4 +1,4 @@
-import { expect } from "chai";
+import { deepStrictEqual } from "node:assert";
 import validate from "../../src/validate/index.mjs";
 import parseRuleSet from "./parse-ruleset.utl.mjs";
 
@@ -54,49 +54,53 @@ describe("[I] validate/index - core", () => {
   });
 
   it("not to core - ok", () => {
-    expect(
+    deepStrictEqual(
       validate.dependency(
         lNotToCoreRuleSet,
         { source: "koos koets" },
         { resolved: "path", dependencyTypes: ["npm"] },
       ),
-    ).to.deep.equal({ valid: true });
+      { valid: true },
+    );
   });
 
   it("not to core - violation", () => {
-    expect(
+    deepStrictEqual(
       validate.dependency(
         lNotToCoreRuleSet,
         { source: "koos koets" },
         { resolved: "path", dependencyTypes: ["core"] },
       ),
-    ).to.deep.equal({
-      valid: false,
-      rules: [{ severity: "error", name: "not-to-core" }],
-    });
+      {
+        valid: false,
+        rules: [{ severity: "error", name: "not-to-core" }],
+      },
+    );
   });
 
   it("not to core fs os - ok", () => {
-    expect(
+    deepStrictEqual(
       validate.dependency(
         lNotToCoreSpecificsRuleSet,
         { source: "koos koets" },
         { resolved: "path", dependencyTypes: ["core"] },
       ),
-    ).to.deep.equal({ valid: true });
+      { valid: true },
+    );
   });
 
   it("not to core fs os - violation", () => {
-    expect(
+    deepStrictEqual(
       validate.dependency(
         lNotToCoreSpecificsRuleSet,
         { source: "koos koets" },
         { resolved: "os", dependencyTypes: ["core"] },
       ),
-    ).to.deep.equal({
-      valid: false,
-      rules: [{ severity: "error", name: "not-to-core-fs-os" }],
-    });
+      {
+        valid: false,
+        rules: [{ severity: "error", name: "not-to-core-fs-os" }],
+      },
+    );
   });
 
   it("only to core - via 'allowed' - ok", () => {
@@ -111,13 +115,14 @@ describe("[I] validate/index - core", () => {
       ],
     });
 
-    expect(
+    deepStrictEqual(
       validate.dependency(
         lRuleSet,
         { source: "koos koets" },
         { resolved: "os", dependencyTypes: ["core"] },
       ),
-    ).to.deep.equal({ valid: true });
+      { valid: true },
+    );
   });
 
   it("only to core - with dependencyTypesNot in forbidden - ok", () => {
@@ -134,14 +139,15 @@ describe("[I] validate/index - core", () => {
       ],
     });
 
-    expect(
+    deepStrictEqual(
       validate.dependency(
         lRuleSet,
 
         { source: "koos koets" },
         { resolved: "os", dependencyTypes: ["core"] },
       ),
-    ).to.deep.equal({ valid: true });
+      { valid: true },
+    );
   });
 
   it("only to core - with dependencyTypesNot in forbidden - nok", () => {
@@ -158,21 +164,22 @@ describe("[I] validate/index - core", () => {
       ],
     });
 
-    expect(
+    deepStrictEqual(
       validate.dependency(
         lRuleSet,
         { source: "koos koets" },
         { resolved: "robbie kerkhof", dependencyTypes: ["local"] },
       ),
-    ).to.deep.equal({
-      valid: false,
-      rules: [
-        {
-          name: "only-to-core",
-          severity: "error",
-        },
-      ],
-    });
+      {
+        valid: false,
+        rules: [
+          {
+            name: "only-to-core",
+            severity: "error",
+          },
+        ],
+      },
+    );
   });
 
   it("only to core - via 'allowed' - violation", () => {
@@ -187,38 +194,41 @@ describe("[I] validate/index - core", () => {
       ],
     });
 
-    expect(
+    deepStrictEqual(
       validate.dependency(
         lRuleSet,
         { source: "koos koets" },
         { resolved: "ger hekking", dependencyTypes: ["npm"] },
       ),
-    ).to.deep.equal({
-      valid: false,
-      rules: [{ severity: "warn", name: "not-in-allowed" }],
-    });
+      {
+        valid: false,
+        rules: [{ severity: "warn", name: "not-in-allowed" }],
+      },
+    );
   });
 
   it("only to core - via 'forbidden' - ok", () => {
-    expect(
+    deepStrictEqual(
       validate.dependency(
         lOnlyToCoreViaForbiddenRuleSet,
         { source: "koos koets" },
         { resolved: "os", dependencyTypes: ["core"] },
       ),
-    ).to.deep.equal({ valid: true });
+      { valid: true },
+    );
   });
 
   it("only to core - via 'forbidden' - violation", () => {
-    expect(
+    deepStrictEqual(
       validate.dependency(
         lOnlyToCoreViaForbiddenRuleSet,
         { source: "koos koets" },
         { resolved: "ger hekking", dependencyTypes: ["local"] },
       ),
-    ).to.deep.equal({
-      valid: false,
-      rules: [{ severity: "error", name: "only-to-core" }],
-    });
+      {
+        valid: false,
+        rules: [{ severity: "error", name: "only-to-core" }],
+      },
+    );
   });
 });

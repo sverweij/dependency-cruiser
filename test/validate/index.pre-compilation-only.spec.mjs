@@ -1,4 +1,4 @@
-import { expect } from "chai";
+import { deepStrictEqual } from "node:assert";
 import validate from "../../src/validate/index.mjs";
 import parseRuleSet from "./parse-ruleset.utl.mjs";
 
@@ -15,35 +15,38 @@ describe("[I] validate/index - preCompilationOnly", () => {
     ],
   });
   it("Stuff that still exists after compilation - okeleedokelee", () => {
-    expect(
+    deepStrictEqual(
       validate.dependency(
         lPreCompilationOnlyRuleSet,
         { source: "something" },
         { resolved: "real-stuff-only.ts", preCompilationOnly: false },
       ),
-    ).to.deep.equal({ valid: true });
+      { valid: true },
+    );
   });
 
   it("Stuff that only exists before compilation - flaggeleedaggelee", () => {
-    expect(
+    deepStrictEqual(
       validate.dependency(
         lPreCompilationOnlyRuleSet,
         { source: "something" },
         { resolved: "types.d.ts", preCompilationOnly: true },
       ),
-    ).to.deep.equal({
-      rules: [{ name: "precomp", severity: "warn" }],
-      valid: false,
-    });
+      {
+        rules: [{ name: "precomp", severity: "warn" }],
+        valid: false,
+      },
+    );
   });
 
   it("Unknown whether stuff that only exists before compilation - okeleedokelee", () => {
-    expect(
+    deepStrictEqual(
       validate.dependency(
         lPreCompilationOnlyRuleSet,
         { source: "something" },
         { resolved: "types.d.ts" },
       ),
-    ).to.deep.equal({ valid: true });
+      { valid: true },
+    );
   });
 });

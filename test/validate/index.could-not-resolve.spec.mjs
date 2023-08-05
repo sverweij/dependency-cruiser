@@ -1,4 +1,4 @@
-import { expect } from "chai";
+import { deepStrictEqual } from "node:assert";
 import validate from "../../src/validate/index.mjs";
 import parseRuleSet from "./parse-ruleset.utl.mjs";
 
@@ -17,25 +17,27 @@ describe("[I] validate/index - couldNotResolve", () => {
   });
 
   it("not to unresolvable - ok", () => {
-    expect(
+    deepStrictEqual(
       validate.dependency(
         lNotToUnresolvableRuleSet,
         { source: "koos koets" },
         { resolved: "diana charitee", couldNotResolve: false },
       ),
-    ).to.deep.equal({ valid: true });
+      { valid: true },
+    );
   });
 
   it("not to unresolvable - violation", () => {
-    expect(
+    deepStrictEqual(
       validate.dependency(
         lNotToUnresolvableRuleSet,
         { source: "koos koets" },
         { resolved: "diana charitee", couldNotResolve: true },
       ),
-    ).to.deep.equal({
-      valid: false,
-      rules: [{ severity: "error", name: "not-to-unresolvable" }],
-    });
+      {
+        valid: false,
+        rules: [{ severity: "error", name: "not-to-unresolvable" }],
+      },
+    );
   });
 });

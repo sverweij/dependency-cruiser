@@ -1,4 +1,4 @@
-import { expect } from "chai";
+import { strictEqual } from "node:assert";
 import violatesRequiredRule from "../../src/validate/violates-required-rule.mjs";
 
 const SIMPLE_RULE = {
@@ -23,22 +23,24 @@ const GROUP_MATCHING_RULE = {
 };
 describe("[I] validate/violates-required-rule", () => {
   it("does not violate when the module does not match", () => {
-    expect(
+    strictEqual(
       violatesRequiredRule(SIMPLE_RULE, { source: "does not match" }),
-    ).to.equal(false);
+      false,
+    );
   });
 
   it("violates when the module matches and there's no dependencies", () => {
-    expect(
+    strictEqual(
       violatesRequiredRule(SIMPLE_RULE, {
         source: "controllers/sprockets/fred-controller.ts",
         dependencies: [],
       }),
-    ).to.equal(true);
+      true,
+    );
   });
 
   it("violates when the module matches and there's no matching dependencies", () => {
-    expect(
+    strictEqual(
       violatesRequiredRule(SIMPLE_RULE, {
         source: "controllers/sprockets/fred-controller.ts",
         dependencies: [
@@ -48,11 +50,12 @@ describe("[I] validate/violates-required-rule", () => {
           },
         ],
       }),
-    ).to.equal(true);
+      true,
+    );
   });
 
   it("passes when the module matches and there's a matching dependency", () => {
-    expect(
+    strictEqual(
       violatesRequiredRule(SIMPLE_RULE, {
         source: "controllers/sprockets/fred-controller.ts",
         dependencies: [
@@ -62,11 +65,12 @@ describe("[I] validate/violates-required-rule", () => {
           },
         ],
       }),
-    ).to.equal(false);
+      false,
+    );
   });
 
   it("violates when the module matches and there's no matching dependency (group matching)", () => {
-    expect(
+    strictEqual(
       violatesRequiredRule(GROUP_MATCHING_RULE, {
         source: "test/simsalabim.spec.js",
         dependencies: [
@@ -76,20 +80,22 @@ describe("[I] validate/violates-required-rule", () => {
           },
         ],
       }),
-    ).to.equal(true);
+      true,
+    );
   });
 
   it("violates when the module matches and there's no dependencies (group matching)", () => {
-    expect(
+    strictEqual(
       violatesRequiredRule(GROUP_MATCHING_RULE, {
         source: "test/simsalabim.spec.js",
         dependencies: [],
       }),
-    ).to.equal(true);
+      true,
+    );
   });
 
   it("passes when the module matches and there's no matching dependency (group matching)", () => {
-    expect(
+    strictEqual(
       violatesRequiredRule(GROUP_MATCHING_RULE, {
         source: "test/simsalabim.spec.js",
         dependencies: [
@@ -103,6 +109,7 @@ describe("[I] validate/violates-required-rule", () => {
           },
         ],
       }),
-    ).to.equal(false);
+      false,
+    );
   });
 });

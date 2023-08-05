@@ -1,4 +1,4 @@
-import { expect } from "chai";
+import { strictEqual } from "node:assert";
 import matchModuleRule from "../../src/validate/match-module-rule.mjs";
 
 const EMPTY_RULE = { from: {}, to: {} };
@@ -8,56 +8,63 @@ const ORPHAN_IN_PATH_NOT = { from: { orphan: true, pathNot: "^src" }, to: {} };
 
 describe("[I] validate/match-module-rule - orphan", () => {
   it("rule without orphan attribute doesn't non-orphans (implicit)", () => {
-    expect(matchModuleRule.matchesOrphanRule(EMPTY_RULE, {})).to.equal(false);
+    strictEqual(matchModuleRule.matchesOrphanRule(EMPTY_RULE, {}), false);
   });
   it("rule without orphan attribute doesn't non-orphans (explicit)", () => {
-    expect(
+    strictEqual(
       matchModuleRule.matchesOrphanRule(EMPTY_RULE, { orphan: false }),
-    ).to.equal(false);
+      false,
+    );
   });
   it("rule without orphan attribute doesn't match orphan module", () => {
-    expect(
+    strictEqual(
       matchModuleRule.matchesOrphanRule(EMPTY_RULE, { orphan: true }),
-    ).to.equal(false);
+      false,
+    );
   });
   it("orphan match rule doesn't match non-orphans", () => {
-    expect(matchModuleRule.matchesOrphanRule(ANY_ORPHAN, {})).to.equal(false);
+    strictEqual(matchModuleRule.matchesOrphanRule(ANY_ORPHAN, {}), false);
   });
   it("orphan match rule matches orphans", () => {
-    expect(
+    strictEqual(
       matchModuleRule.matchesOrphanRule(ANY_ORPHAN, { orphan: true }),
-    ).to.equal(true);
+      true,
+    );
   });
   it("orphan match rule with path doesn't match orphans in other paths", () => {
-    expect(
+    strictEqual(
       matchModuleRule.matchesOrphanRule(ORPHAN_IN_PATH, {
         orphan: true,
         source: "test/lalal.spec.ts",
       }),
-    ).to.equal(false);
+      false,
+    );
   });
   it("orphan match rule with path matches orphans in that path", () => {
-    expect(
+    strictEqual(
       matchModuleRule.matchesOrphanRule(ORPHAN_IN_PATH, {
         orphan: true,
         source: "src/lalal.ts",
       }),
-    ).to.equal(true);
+      true,
+    );
   });
   it("orphan match rule with path matches orphans outside that path", () => {
-    expect(
+    strictEqual(
       matchModuleRule.matchesOrphanRule(ORPHAN_IN_PATH_NOT, {
         orphan: true,
         source: "test/lalal.spec.ts",
       }),
-    ).to.equal(true);
+      true,
+    );
   });
   it("orphan match rule with pathNot doesn't match orphans in that path", () => {
-    expect(
+    strictEqual(
       matchModuleRule.matchesOrphanRule(ORPHAN_IN_PATH_NOT, {
         orphan: true,
         source: "src/lalal.ts",
       }),
-    ).to.equal(false);
+      false,
+    );
   });
 });

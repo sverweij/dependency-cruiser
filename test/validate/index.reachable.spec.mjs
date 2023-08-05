@@ -1,4 +1,4 @@
-import { expect } from "chai";
+import { deepStrictEqual } from "node:assert";
 import validate from "../../src/validate/index.mjs";
 import parseRuleSet from "./parse-ruleset.utl.mjs";
 
@@ -22,19 +22,21 @@ describe("[I] validate/index - reachable (in forbidden set)", () => {
     ],
   });
   it("Skips modules that have no reachable attribute (reachable false)", () => {
-    expect(
+    deepStrictEqual(
       validate.module(lReachableFalseRuleSet, { source: "something" }),
-    ).to.deep.equal({ valid: true });
+      { valid: true },
+    );
   });
 
   it("Skips modules that have no reachable attribute (reachable true)", () => {
-    expect(
+    deepStrictEqual(
       validate.module(lReachableTrueRuleSet, { source: "something" }),
-    ).to.deep.equal({ valid: true });
+      { valid: true },
+    );
   });
 
   it("Triggers on modules that have a reachable attribute (non-matching, reachable false)", () => {
-    expect(
+    deepStrictEqual(
       validate.module(lReachableFalseRuleSet, {
         source: "something",
         reachable: [
@@ -45,11 +47,12 @@ describe("[I] validate/index - reachable (in forbidden set)", () => {
           },
         ],
       }),
-    ).to.deep.equal({ valid: true });
+      { valid: true },
+    );
   });
 
   it("Triggers on modules that have a reachable attribute (non-matching, reachable true)", () => {
-    expect(
+    deepStrictEqual(
       validate.module(lReachableTrueRuleSet, {
         source: "something",
         reachable: [
@@ -60,11 +63,12 @@ describe("[I] validate/index - reachable (in forbidden set)", () => {
           },
         ],
       }),
-    ).to.deep.equal({ valid: true });
+      { valid: true },
+    );
   });
 
   it("Triggers on modules that have a reachable attribute (reachable false)", () => {
-    expect(
+    deepStrictEqual(
       validate.module(lReachableFalseRuleSet, {
         source: "something",
         reachable: [
@@ -75,19 +79,20 @@ describe("[I] validate/index - reachable (in forbidden set)", () => {
           },
         ],
       }),
-    ).to.deep.equal({
-      valid: false,
-      rules: [
-        {
-          name: "no-unreachable",
-          severity: "warn",
-        },
-      ],
-    });
+      {
+        valid: false,
+        rules: [
+          {
+            name: "no-unreachable",
+            severity: "warn",
+          },
+        ],
+      },
+    );
   });
 
   it("Triggers on modules that have a reachable attribute (reachable true)", () => {
-    expect(
+    deepStrictEqual(
       validate.module(lReachableTrueRuleSet, {
         source: "something",
         reachable: [
@@ -98,19 +103,20 @@ describe("[I] validate/index - reachable (in forbidden set)", () => {
           },
         ],
       }),
-    ).to.deep.equal({
-      valid: false,
-      rules: [
-        {
-          name: "no-reachable",
-          severity: "warn",
-        },
-      ],
-    });
+      {
+        valid: false,
+        rules: [
+          {
+            name: "no-reachable",
+            severity: "warn",
+          },
+        ],
+      },
+    );
   });
 
   it("Triggers on modules that have a reachable attribute (with a path, reachable false)", () => {
-    expect(
+    deepStrictEqual(
       validate.module(lReachableFalseRuleSet, {
         source: "something",
         reachable: [
@@ -121,19 +127,20 @@ describe("[I] validate/index - reachable (in forbidden set)", () => {
           },
         ],
       }),
-    ).to.deep.equal({
-      valid: false,
-      rules: [
-        {
-          name: "no-unreachable",
-          severity: "warn",
-        },
-      ],
-    });
+      {
+        valid: false,
+        rules: [
+          {
+            name: "no-unreachable",
+            severity: "warn",
+          },
+        ],
+      },
+    );
   });
 
   it("Triggers on modules that have a reachable attribute (with a path, reachable true)", () => {
-    expect(
+    deepStrictEqual(
       validate.module(lReachableTrueRuleSet, {
         source: "something",
         reachable: [
@@ -144,15 +151,16 @@ describe("[I] validate/index - reachable (in forbidden set)", () => {
           },
         ],
       }),
-    ).to.deep.equal({
-      valid: false,
-      rules: [
-        {
-          name: "no-reachable",
-          severity: "warn",
-        },
-      ],
-    });
+      {
+        valid: false,
+        rules: [
+          {
+            name: "no-reachable",
+            severity: "warn",
+          },
+        ],
+      },
+    );
   });
 
   it("Triggers on modules that have a reachable attribute (with a pathNot, reachable false)", () => {
@@ -166,7 +174,7 @@ describe("[I] validate/index - reachable (in forbidden set)", () => {
       ],
     });
 
-    expect(
+    deepStrictEqual(
       validate.module(lReachableFalsePathNotRuleSet, {
         source: "something",
         reachable: [
@@ -177,7 +185,8 @@ describe("[I] validate/index - reachable (in forbidden set)", () => {
           },
         ],
       }),
-    ).to.deep.equal({ valid: true });
+      { valid: true },
+    );
   });
 
   it("Triggers on modules that have a reachable attribute (with a pathNot, reachable true)", () => {
@@ -190,7 +199,7 @@ describe("[I] validate/index - reachable (in forbidden set)", () => {
         },
       ],
     });
-    expect(
+    deepStrictEqual(
       validate.module(lReachableTruePathNotRuleSet, {
         source: "something",
         reachable: [
@@ -201,7 +210,8 @@ describe("[I] validate/index - reachable (in forbidden set)", () => {
           },
         ],
       }),
-    ).to.deep.equal({ valid: true });
+      { valid: true },
+    );
   });
 });
 describe("[I] validate/index - reachable (in allowed set)", () => {
@@ -214,23 +224,24 @@ describe("[I] validate/index - reachable (in allowed set)", () => {
     ],
   });
   it("Triggers on modules that have no reachable attribute ('allowed' rule set)", () => {
-    expect(
+    deepStrictEqual(
       validate.module(lReachableAllowedRuleSet, {
         source: "something",
       }),
-    ).to.deep.equal({
-      valid: false,
-      rules: [
-        {
-          name: "not-in-allowed",
-          severity: "warn",
-        },
-      ],
-    });
+      {
+        valid: false,
+        rules: [
+          {
+            name: "not-in-allowed",
+            severity: "warn",
+          },
+        ],
+      },
+    );
   });
 
   it("Skips on modules that have a reachable attribute (match - 'allowed' rule set)", () => {
-    expect(
+    deepStrictEqual(
       validate.module(lReachableAllowedRuleSet, {
         source: "something",
         reachable: [
@@ -241,13 +252,14 @@ describe("[I] validate/index - reachable (in allowed set)", () => {
           },
         ],
       }),
-    ).to.deep.equal({
-      valid: true,
-    });
+      {
+        valid: true,
+      },
+    );
   });
 
   it("Triggers on modules that have a reachable attribute (no match - 'allowed' rule set)", () => {
-    expect(
+    deepStrictEqual(
       validate.module(lReachableAllowedRuleSet, {
         source: "something",
         reachable: [
@@ -257,15 +269,16 @@ describe("[I] validate/index - reachable (in allowed set)", () => {
           },
         ],
       }),
-    ).to.deep.equal({
-      valid: false,
-      rules: [
-        {
-          name: "not-in-allowed",
-          severity: "warn",
-        },
-      ],
-    });
+      {
+        valid: false,
+        rules: [
+          {
+            name: "not-in-allowed",
+            severity: "warn",
+          },
+        ],
+      },
+    );
   });
 
   it("Respects capturing groups", () => {
@@ -295,7 +308,7 @@ describe("[I] validate/index - reachable (in allowed set)", () => {
       lReachableCapturingGroupsRuleSet,
       lModule,
     );
-    expect(lValidationResult).to.deep.equal({
+    deepStrictEqual(lValidationResult, {
       valid: false,
       rules: [
         {

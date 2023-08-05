@@ -1,4 +1,4 @@
-import { expect } from "chai";
+import { deepStrictEqual } from "node:assert";
 import validate from "../../src/validate/index.mjs";
 import parseRuleSet from "./parse-ruleset.utl.mjs";
 
@@ -13,7 +13,7 @@ describe("[I] validate/index - exoticallyRequired", () => {
     ],
   });
   it("does not flag dependencies that are required with a regular require or import", () => {
-    expect(
+    deepStrictEqual(
       validate.dependency(
         lExoticallyRequiredRuleSet,
         { source: "something" },
@@ -22,11 +22,12 @@ describe("[I] validate/index - exoticallyRequired", () => {
           exoticallyRequired: false,
         },
       ),
-    ).to.deep.equal({ valid: true });
+      { valid: true },
+    );
   });
 
   it("does flag dependencies that are required with any exotic require", () => {
-    expect(
+    deepStrictEqual(
       validate.dependency(
         lExoticallyRequiredRuleSet,
         { source: "something" },
@@ -36,10 +37,11 @@ describe("[I] validate/index - exoticallyRequired", () => {
           exoticallyRequired: true,
         },
       ),
-    ).to.deep.equal({
-      rules: [{ name: "no-exotic-requires-period", severity: "warn" }],
-      valid: false,
-    });
+      {
+        rules: [{ name: "no-exotic-requires-period", severity: "warn" }],
+        valid: false,
+      },
+    );
   });
 });
 
@@ -54,17 +56,18 @@ describe("[I] validate/index - exoticRequire", () => {
     ],
   });
   it("does not flag dependencies that are required with a regular require or import", () => {
-    expect(
+    deepStrictEqual(
       validate.dependency(
         lExoticRequireRuleSet,
         { source: "something" },
         { resolved: "src/aap/speeltuigen/autoband.ts" },
       ),
-    ).to.deep.equal({ valid: true });
+      { valid: true },
+    );
   });
 
   it("does not flag dependencies that are required with an exotic require not in the forbdidden RE", () => {
-    expect(
+    deepStrictEqual(
       validate.dependency(
         lExoticRequireRuleSet,
         { source: "something" },
@@ -73,20 +76,22 @@ describe("[I] validate/index - exoticRequire", () => {
           exoticRequire: "notUse",
         },
       ),
-    ).to.deep.equal({ valid: true });
+      { valid: true },
+    );
   });
 
   it("flags dependencies that are required with a forbidden exotic require", () => {
-    expect(
+    deepStrictEqual(
       validate.dependency(
         lExoticRequireRuleSet,
         { source: "something" },
         { resolved: "src/aap/speeltuigen/autoband.ts", exoticRequire: "use" },
       ),
-    ).to.deep.equal({
-      valid: false,
-      rules: [{ name: "no-use-as-exotic-require", severity: "warn" }],
-    });
+      {
+        valid: false,
+        rules: [{ name: "no-use-as-exotic-require", severity: "warn" }],
+      },
+    );
   });
 });
 
@@ -101,17 +106,18 @@ describe("[I] validate/index - exoticRequireNot", () => {
     ],
   });
   it("does not flag dependencies that are required with a regular require or import", () => {
-    expect(
+    deepStrictEqual(
       validate.dependency(
         lExoticRequireNotRuleSet,
         { source: "something" },
         { resolved: "src/aap/speeltuigen/autoband.ts" },
       ),
-    ).to.deep.equal({ valid: true });
+      { valid: true },
+    );
   });
 
   it("does not flag dependencies that are required with a sanctioned exotic require", () => {
-    expect(
+    deepStrictEqual(
       validate.dependency(
         lExoticRequireNotRuleSet,
         { source: "something" },
@@ -120,11 +126,12 @@ describe("[I] validate/index - exoticRequireNot", () => {
           exoticRequire: "use",
         },
       ),
-    ).to.deep.equal({ valid: true });
+      { valid: true },
+    );
   });
 
   it("flags dependencies are required with an unsanctioned exotic require", () => {
-    expect(
+    deepStrictEqual(
       validate.dependency(
         lExoticRequireNotRuleSet,
         { source: "something" },
@@ -133,9 +140,10 @@ describe("[I] validate/index - exoticRequireNot", () => {
           exoticRequire: "notuse",
         },
       ),
-    ).to.deep.equal({
-      valid: false,
-      rules: [{ name: "only-use-as-exotic-require", severity: "warn" }],
-    });
+      {
+        valid: false,
+        rules: [{ name: "only-use-as-exotic-require", severity: "warn" }],
+      },
+    );
   });
 });

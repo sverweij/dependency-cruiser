@@ -1,4 +1,4 @@
-import { expect } from "chai";
+import { deepStrictEqual } from "node:assert";
 import validate from "../../src/validate/index.mjs";
 import parseRuleSet from "./parse-ruleset.utl.mjs";
 
@@ -17,7 +17,7 @@ describe("[I] [I] validate/index - type-only", () => {
   });
 
   it("only to type-only - with dependencyTypesNot in forbidden, multiple types - ok", () => {
-    expect(
+    deepStrictEqual(
       validate.dependency(
         lTypeOnlyRuleSet,
         { source: "src/koos-koets.ts" },
@@ -26,24 +26,26 @@ describe("[I] [I] validate/index - type-only", () => {
           dependencyTypes: ["type-only", "local"],
         },
       ),
-    ).to.deep.equal({ valid: true });
+      { valid: true },
+    );
   });
 
   it("only to type-only - with dependencyTypesNot in forbidden, multiple types - nok", () => {
-    expect(
+    deepStrictEqual(
       validate.dependency(
         lTypeOnlyRuleSet,
         { source: "src/koos-koets.ts" },
         { resolved: "src/ger-hekking.ts", dependencyTypes: ["local"] },
       ),
-    ).to.deep.equal({
-      valid: false,
-      rules: [
-        {
-          name: "only-to-type-only",
-          severity: "error",
-        },
-      ],
-    });
+      {
+        valid: false,
+        rules: [
+          {
+            name: "only-to-type-only",
+            severity: "error",
+          },
+        ],
+      },
+    );
   });
 });

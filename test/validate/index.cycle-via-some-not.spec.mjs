@@ -1,4 +1,4 @@
-import { expect } from "chai";
+import { deepStrictEqual } from "node:assert";
 import validate from "../../src/validate/index.mjs";
 import parseRuleSet from "./parse-ruleset.utl.mjs";
 
@@ -14,7 +14,7 @@ describe("[I] validate/index dependency - cycle viaSomeNot - with group matching
   };
 
   it("flags when all of the cycle (except the root) is outside the group-matched viaSomeNot", () => {
-    expect(
+    deepStrictEqual(
       validate.dependency(
         parseRuleSet(lCycleButNotViaGroupMatchRuleSet),
         { source: "src/module-a/a.js" },
@@ -29,19 +29,20 @@ describe("[I] validate/index dependency - cycle viaSomeNot - with group matching
           ],
         },
       ),
-    ).to.deep.equal({
-      valid: false,
-      rules: [
-        {
-          name: "no-circular-dependency-of-modules",
-          severity: "warn",
-        },
-      ],
-    });
+      {
+        valid: false,
+        rules: [
+          {
+            name: "no-circular-dependency-of-modules",
+            severity: "warn",
+          },
+        ],
+      },
+    );
   });
 
   it("flags when only one of the cycle is outside the group-matched viaNot", () => {
-    expect(
+    deepStrictEqual(
       validate.dependency(
         parseRuleSet(lCycleButNotViaGroupMatchRuleSet),
         { source: "src/module-a/a.js" },
@@ -56,19 +57,20 @@ describe("[I] validate/index dependency - cycle viaSomeNot - with group matching
           ],
         },
       ),
-    ).to.deep.equal({
-      valid: false,
-      rules: [
-        {
-          name: "no-circular-dependency-of-modules",
-          severity: "warn",
-        },
-      ],
-    });
+      {
+        valid: false,
+        rules: [
+          {
+            name: "no-circular-dependency-of-modules",
+            severity: "warn",
+          },
+        ],
+      },
+    );
   });
 
   it("does not flag when all of the cycle is inside the group-matched viaNot", () => {
-    expect(
+    deepStrictEqual(
       validate.dependency(
         parseRuleSet(lCycleButNotViaGroupMatchRuleSet),
         { source: "src/module-a/a.js" },
@@ -83,9 +85,10 @@ describe("[I] validate/index dependency - cycle viaSomeNot - with group matching
           ],
         },
       ),
-    ).to.deep.equal({
-      valid: true,
-    });
+      {
+        valid: true,
+      },
+    );
   });
 
   it("does not flag when all of the cycle is inside the group-matched viaSomeNot that's represented as an array", () => {
@@ -101,7 +104,7 @@ describe("[I] validate/index dependency - cycle viaSomeNot - with group matching
         },
       ],
     };
-    expect(
+    deepStrictEqual(
       validate.dependency(
         parseRuleSet(lRuleSet),
         { source: "src/module-a/a.js" },
@@ -116,8 +119,9 @@ describe("[I] validate/index dependency - cycle viaSomeNot - with group matching
           ],
         },
       ),
-    ).to.deep.equal({
-      valid: true,
-    });
+      {
+        valid: true,
+      },
+    );
   });
 });
