@@ -19,7 +19,7 @@ function parseAttributes(pString) {
         lAttributes[pAttribute] = true;
       } else {
         lAttributes[pAttribute.slice(0, lEqualsSignIndex)] = "'\"".includes(
-          pAttribute[lEqualsSignIndex + 1]
+          pAttribute[lEqualsSignIndex + 1],
         )
           ? pAttribute.slice(lEqualsSignIndex + 2, -1)
           : pAttribute.slice(lEqualsSignIndex + 1);
@@ -51,7 +51,7 @@ function getSourceReplacer(pTranspiler, pTranspilerOptions) {
       return `<script${lAttributes}>${pTranspiler(
         pSource,
         "dummy-filename",
-        composeTranspilerOptions(pTranspilerOptions)
+        composeTranspilerOptions(pTranspilerOptions),
       )}</script>`;
     } else {
       return pMatch;
@@ -72,13 +72,13 @@ function styleReplacer(pMatch, pAttributes) {
 export default function preProcess(
   pSource,
   pTranspilerWrapper,
-  pTranspilerOptions
+  pTranspilerOptions,
 ) {
   // regexes from
   // github.com/sveltejs/svelte/blob/67dea941bb1e61f0912ebd2257666b899c1ccefa/src/compiler/preprocess/index.ts#L165
-  // eslint-disable-next-line security/detect-unsafe-regex, unicorn/no-unsafe-regex
+  // eslint-disable-next-line security/detect-unsafe-regex
   const lScriptRegex = /<script(\s[^]*?)?(?:>([^]*?)<\/script>|\/>)/gi;
-  // eslint-disable-next-line security/detect-unsafe-regex, unicorn/no-unsafe-regex
+  // eslint-disable-next-line security/detect-unsafe-regex
   const lStyleRegex = /<style(\s[^]*?)?(?:>([^]*?)<\/style>|\/>)/gi;
 
   if (pTranspilerWrapper.isAvailable) {
@@ -86,7 +86,7 @@ export default function preProcess(
       pSource
         .replace(
           lScriptRegex,
-          getSourceReplacer(pTranspilerWrapper.transpile, pTranspilerOptions)
+          getSourceReplacer(pTranspilerWrapper.transpile, pTranspilerOptions),
         )
         // we don't regard styling in our dependency analysis, so we can remove
         // styles that (our instance of) svelte doesn't have pre-processors

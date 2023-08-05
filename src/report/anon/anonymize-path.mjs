@@ -1,7 +1,7 @@
 import { anonymizePathElement } from "./anonymize-path-element.mjs";
 
 export const WHITELIST_RE =
-  // eslint-disable-next-line security/detect-unsafe-regex, unicorn/no-unsafe-regex
+  // eslint-disable-next-line security/detect-unsafe-regex
   /^(|[.]+|~|bin|apps?|cli|src|libs?|configs?|components?|fixtures?|helpers?|i18n|index\.(jsx?|[mc]js|d\.ts|tsx?|vue|coffee|ls)|_?_?mocks?_?_?|node_modules|packages?|package\.json|scripts?|services?|sources?|specs?|_?_?tests?_?_?|types?|uti?ls?)$/;
 
 /**
@@ -24,12 +24,12 @@ export const WHITELIST_RE =
 export function anonymizePath(
   pPath,
   pWordList = [],
-  pWhiteListRE = WHITELIST_RE
+  pWhiteListRE = WHITELIST_RE,
 ) {
   return pPath
     .split("/")
     .map((pPathElement) =>
-      anonymizePathElement(pPathElement, pWordList, pWhiteListRE)
+      anonymizePathElement(pPathElement, pWordList, pWhiteListRE),
     )
     .join("/");
 }

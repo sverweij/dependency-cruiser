@@ -16,7 +16,7 @@ export function detectPreCompilationNess(pTSDependencies, pJSDependencies) {
   return pTSDependencies.map((pTSDependency) =>
     pJSDependencies.some(dependenciesEqual(pTSDependency))
       ? { ...pTSDependency, preCompilationOnly: false }
-      : { ...pTSDependency, preCompilationOnly: true }
+      : { ...pTSDependency, preCompilationOnly: true },
   );
 }
 
@@ -39,8 +39,8 @@ export function detectPreCompilationNess(pTSDependencies, pJSDependencies) {
 export function extractModuleAttributes(pString) {
   let lReturnValue = { module: pString };
   const lModuleAttributes = pString.match(
-    // eslint-disable-next-line security/detect-unsafe-regex, unicorn/no-unsafe-regex
-    /^((node:|file:|data:)(([^,]+),)?)(.+)$/
+    // eslint-disable-next-line security/detect-unsafe-regex
+    /^((node:|file:|data:)(([^,]+),)?)(.+)$/,
   );
   const lProtocolPosition = 2;
   const lMimeTypePosition = 4;
