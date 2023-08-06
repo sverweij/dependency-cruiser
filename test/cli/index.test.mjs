@@ -1,4 +1,4 @@
-import { doesNotThrow, strictEqual, throws } from "node:assert";
+import { doesNotThrow, match, strictEqual, throws } from "node:assert";
 import { readFileSync, unlinkSync } from "node:fs";
 // path.posix instead of path because otherwise on win32 the resulting
 // outputTo would contain \\ instead of / which for this unit test doesn't matter
@@ -212,10 +212,10 @@ describe("[E] cli/index", () => {
   describe("[E] specials", () => {
     let lChalkLevel = chalk.level;
 
-    before("disable chalk coloring", () => {
+    before(() => {
       chalk.level = 0;
     });
-    after("enable chalk coloring again", () => {
+    after(() => {
       chalk.level = lChalkLevel;
     });
     it("dependency-cruises multiple files and folders in one go", async () => {
@@ -297,11 +297,9 @@ describe("[E] cli/index", () => {
       unhookInterceptStdError();
 
       strictEqual(lExitCode, 1);
-      strictEqual(
-        lCapturedStderr.includes(
-          "ERROR: Can't open 'this-doesnot-exist' for reading. Does it exist?\n"
-        ),
-        true
+      match(
+        lCapturedStderr,
+        /ERROR: Can't open 'this-doesnot-exist' for reading\. Does it exist\?\n/
       );
     });
 
