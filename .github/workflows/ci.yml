@@ -109,7 +109,7 @@ jobs:
           npm install
           npm run build
       - run: npm run depcruise
-      - run: node --test --test-reporter ./tools/custom-reporter.mjs test/*.test.mjs test/*/*.test.mjs test/*/*/*.test.mjs test/*/*/*/*.test.mjs
+      - run: node --test --test-reporter ./tools/dots-with-summary.reporter.mjs test/*.test.mjs test/*/*.test.mjs test/*/*/*.test.mjs test/*/*/*/*.test.mjs
 
   check-berry-integration:
     runs-on: ubuntu-latest
