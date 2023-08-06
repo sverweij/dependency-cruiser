@@ -1,6 +1,8 @@
 /* eslint-disable unicorn/no-abusive-eslint-disable, eslint-comments/no-unlimited-disable */
 /* eslint-disable */
 
+import { EOL } from "os";
+
 /*
 data mangle this into some terse text output:
 {
@@ -46,32 +48,90 @@ data mangle this into some terse text output:
   }
 }
 */
-import { format, relative } from "node:path";
+const LOCALE = undefined;
+const gTimeFormat = new Intl.NumberFormat(LOCALE, {
+  style: "unit",
+  unit: "millisecond",
+  unitDisplay: "narrow",
+  maximumFractionDigits: 0,
+}).format;
 
 export default async function* (source) {
-  let stack = [];
+  let lFailStack = [];
+  let lDiagnosticStack = [];
+  let lCount = 0;
+
   for await (const event of source) {
     switch (event.type) {
       case "test:pass":
-        yield ".";
+        // if (lCount < 10) {
+        //   yield JSON.stringify(event, null, 2);
+        //   lCount++;
+        // }
+        if (event.data.details.type === "suite") {
+          yield "";
+        } else if (event.data.skip || event.data.todo) {
+          yield ",";
+        } else {
+          yield ".";
+        }
         break;
       case "test:fail":
-        stack.push(event.data);
-        yield "x";
+        yield "!";
+        break;
+      // case "test:enqueue":
+      //   yield "+";
+      //   break;
+      // case "test:dequeue":
+      //   yield "-";
+      //   break;
+      case "test:diagnostic":
+        lDiagnosticStack.push(event);
+        // yield "D";
+        break;
+      // case "test:stdout":
+      // yield event.data.message;
+      // break;
+      // case "test:stderr":
+      // yield event.data.message;
+      //   break;
+      case "test:coverage":
+        yield "C";
         break;
     }
   }
-  yield `\n` + stack.map(summarizeFailEventToText).join("\n");
+
+  const lDiagnostics = lDiagnosticStack
+    .map(diagnosticToObject)
+    .reduce((pAll, pDiagnostic) => ({ ...pAll, ...pDiagnostic }), {});
+
+  yield EOL +
+    lFailStack.map(summarizeFailsToText).join(EOL) +
+    `${EOL}${lDiagnostics.pass} passing (${gTimeFormat(
+      lDiagnostics.duration_ms,
+    )})${EOL}` +
+    `${lDiagnostics.fail > 0 ? lDiagnostics.fail + " failing" + EOL : ""}` +
+    `${
+      lDiagnostics.skipped > 0 ? lDiagnostics.skipped + " skipped" + EOL : ""
+    }` +
+    `${lDiagnostics.todo > 0 ? lDiagnostics.todo + " todo" + EOL : ""}` +
+    EOL;
 }
 
-function summarizeFailEventToText(pTestResult) {
-  if (pTestResult.details.error.failureType === "testCodeFailure") {
+function summarizeFailsToText(pFailEvent) {
+  if (pFailEvent.details.error.failureType === "testCodeFailure") {
     return (
-      //   `${relative(process.cwd(), pTestResult.file)}\n` +
-      `✘ ${pTestResult.name}\n` + `  ${formatError(pTestResult)}\n\n` //+
+      `✘ ${pFailEvent.name}\n` + `  ${formatError(pFailEvent)}\n\n` //+
       //   `${JSON.stringify(pTestResult, null, 2)}`
     );
   }
+}
+
+function diagnosticToObject(pDiagnosticEvent) {
+  const lReturnValue = {};
+  const [key, value] = pDiagnosticEvent.data.message.split(" ");
+  lReturnValue[key] = value;
+  return lReturnValue;
 }
 
 function formatError(pTestResult) {

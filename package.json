@@ -133,6 +133,7 @@
     "scm:stage": "git add .",
     "test": "LANG=en_US.UTF-8 NODE_OPTIONS=--no-warnings node --test --test-reporter ./tools/custom-reporter.mjs test/*.test.mjs test/*/*.test.mjs test/*/*/*.test.mjs test/*/*/*/*.test.mjs",
     "test:mocha": "LANG=en_US.UTF-8 NODE_OPTIONS=--no-warnings mocha",
+    "test:r": "LANG=en_US.UTF-8 NODE_OPTIONS=--no-warnings node --test --test-reporter ./tools/custom-reporter.mjs test/*.test.mjs",
     "test:i": "LANG=en_US.UTF-8 NODE_OPTIONS=--no-warnings node --test --test-name-pattern=\"^\\[[I]\\]\" --test-reporter ./tools/custom-reporter.mjs test/*.test.mjs test/*/*.test.mjs test/*/*/*.test.mjs test/*/*/*/*.test.mjs",
     "test:u": "LANG=en_US.UTF-8 NODE_OPTIONS=--no-warnings node --test --test-name-pattern=\"^\\[[U]\\]\" --test-reporter ./tools/custom-reporter.mjs test/*.test.mjs test/*/*.test.mjs test/*/*/*.test.mjs test/*/*/*/*.test.mjs",
     "test:e": "LANG=en_US.UTF-8 NODE_OPTIONS=--no-warnings node --test --test-name-pattern=\"^\\[[E]\\]\" --test-reporter ./tools/custom-reporter.mjs test/*.test.mjs test/*/*.test.mjs test/*/*/*.test.mjs test/*/*/*/*.test.mjs",
