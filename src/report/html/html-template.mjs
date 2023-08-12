@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+export default `<!DOCTYPE html>
 <html>
 
 <head>
@@ -85,12 +85,10 @@
       border-right: solid 1px transparent;
     }
 
-    {{!-- row highlight --}}
     tbody tr:hover {
       background-color: lightgrey;
     }
 
-    {{!-- column highlight --}}
     td:hover::after,
     td:focus::after,
     th:hover::after,
@@ -181,45 +179,6 @@
 </head>
 
 <body>
-  <table id="table-rotated">
-    <thead>
-      <tr>
-        <td class="controls top-left">
-          <a id="rotate" href="#table-rotated">rotate</a>
-          <a id="unrotate" href="#">rotate back</a>
-        </td>
-        {{#modules}}<th>
-          <div{{#if coreModule}} class="cell-core-module" {{else}}{{#if couldNotResolve}}
-            class="cell-unresolvable-module" {{/if}}{{/if}}>{{source}}</div>
-        </th>{{/modules}}
-        <td class="top-right"></td>
-      </tr>
-    </thead>
-    <tbody>
-      {{#modules}}
-      <tr>
-        <td
-          class="first-cell{{#if coreModule}} cell-core-module{{else}}{{#if couldNotResolve}} cell-unresolvable-module{{/if}}{{/if}}">
-          {{source}}</td>
-        {{#incidences}}<td class="cell cell-{{incidence}}" {{#if hasRelation}} title="{{# if rule}}{{rule}}:
-    {{/if}}{{../source}} ->
-    {{to}}" {{/if}}></td>{{/incidences}}
-        <td
-          class="first-cell{{#if coreModule}} cell-core-module{{else}}{{#if couldNotResolve}} cell-unresolvable-module{{/if}}{{/if}}">
-          {{source}}</td>
-      </tr>
-      {{/modules}}
-    </tbody>
-    <tfoot>
-      <tr>
-        <td class="bottom-left"></td>
-        {{#modules}}<th>
-          <div{{#if coreModule}} class="cell-core-module" {{else}}{{#if couldNotResolve}}
-            class="cell-unresolvable-module" {{/if}}{{/if}}>{{source}}</div>
-        </th>{{/modules}}
-        <td class="bottom-right"></td>
-      </tr>
-    </tfoot>
-  </table>
+  {{table-here}}
 </body>
-</html>
+</html>`;
