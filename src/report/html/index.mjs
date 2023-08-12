@@ -1,6 +1,10 @@
-import { EOL } from "node:os";
 import dependencyToIncidenceTransformer from "../utl/dependency-to-incidence-transformer.mjs";
 import templateText from "./html-template.mjs";
+
+// should use os.EOL, but it doesn't matter whether we use \r\n or \n here
+// as it's running in the browser anyway, which doesn't care. Also os.EOL will
+// make the test running on windows cry.
+const EOL = "\n";
 
 function addShowTitle(pDependencyEntry) {
   return {
