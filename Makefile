@@ -1,8 +1,7 @@
 .SUFFIXES: .js .css .html
 NODE=node
 RM=rm -f
-GENERATED_SOURCES=src/cli/init-config/config.js.template.js \
-	src/report/dot/dot.template.js \
+GENERATED_SOURCES=src/report/dot/dot.template.js \
 	src/schema/baseline-violations.schema.mjs \
 	src/schema/configuration.schema.mjs \
 	src/schema/cruise-result.schema.mjs \
