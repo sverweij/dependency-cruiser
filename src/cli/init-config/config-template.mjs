@@ -1,4 +1,5 @@
-/** @type {import('dependency-cruiser').IConfiguration} */
+/* eslint-disable max-lines, no-useless-escape */
+export default `/** @type {import('dependency-cruiser').IConfiguration} */
 module.exports = {
   forbidden: [
     {
@@ -125,22 +126,7 @@ module.exports = {
     },
 
     /* rules you might want to tweak for your specific situation: */
-    {{#hasTestsOutsideSource}}
-    {
-      name: 'not-to-test',
-      comment:
-        "This module depends on code within a folder that should only contain tests. As tests don't " +
-        "implement functionality this is odd. Either you're writing a test outside the test folder " +
-        "or there's something in the test folder that isn't a test.",
-      severity: 'error',
-      from: {
-        pathNot: '{{testLocationRE}}'
-      },
-      to: {
-        path: '{{testLocationRE}}'
-      }
-    },
-    {{/hasTestsOutsideSource}}
+    {{notToTestRule}}
     {
       name: 'not-to-spec',
       comment:
@@ -239,7 +225,7 @@ module.exports = {
     // moduleSystems: ['amd', 'cjs', 'es6', 'tsd'],
 
     /* prefix for links in html and svg output (e.g. 'https://github.com/you/yourrepo/blob/develop/'
-       to open it on your online repo or `vscode://file/${process.cwd()}/` to 
+       to open it on your online repo or \`vscode://file/$\{process.cwd()}/\` to 
        open it in visual studio code),
      */
     // prefix: '',
@@ -248,11 +234,7 @@ module.exports = {
        true: also detect dependencies that only exist before typescript-to-javascript compilation
        "specify": for each dependency identify whether it only exists before compilation or also after
      */
-    {{#if tsPreCompilationDeps}}
-    tsPreCompilationDeps: true,
-    {{^}}
-    // tsPreCompilationDeps: false,
-    {{/if}}
+    {{tsPreCompilationDepsAttribute}}
     
     /* 
        list of extensions to scan that aren't javascript or compile-to-javascript. 
@@ -265,11 +247,7 @@ module.exports = {
        folder the cruise is initiated from. Useful for how (some) mono-repos
        manage dependencies & dependency definitions.
      */
-    {{#if combinedDependencies}}
-    combinedDependencies: true,
-    {{^}}
-    // combinedDependencies: false,
-    {{/if}}
+    {{combinedDependenciesAttribute}}
 
     /* if true leave symlinks untouched, otherwise use the realpath */
     // preserveSymlinks: false,
@@ -282,21 +260,7 @@ module.exports = {
        dependency-cruiser's current working directory). When not provided
        defaults to './tsconfig.json'.
      */
-    {{#if useTsConfig}}
-    tsConfig: {
-      fileName: '{{tsConfig}}'
-    },
-    {{^}}
-      {{#if useJsConfig}}
-    tsConfig: {
-      fileName: '{{jsConfig}}'
-    },
-      {{^}}
-    // tsConfig: {
-    //  fileName: './tsconfig.json'
-    // },
-      {{/if}}
-    {{/if}}
+    {{tsOrJsConfigAttribute}}
 
     /* Webpack configuration to use to get resolve options from.
 
@@ -304,23 +268,11 @@ module.exports = {
        to dependency-cruiser's current working directory. When not provided defaults
        to './webpack.conf.js'.
 
-       The (optional) `env` and `arguments` attributes contain the parameters to be passed if
+       The (optional) \`env\` and \`arguments\` attributes contain the parameters to be passed if
        your webpack config is a function and takes them (see webpack documentation
        for details)
      */
-    {{#if useWebpackConfig}}
-    webpackConfig: {
-      fileName: '{{webpackConfig}}',
-      // env: {},
-      // arguments: {},
-    },
-    {{^}}
-    // webpackConfig: {
-    //  fileName: './webpack.config.js',
-    //  env: {},
-    //  arguments: {},
-    // },
-    {{/if}}
+    {{webpackConfigAttribute}}
 
     /* Babel config ('.babelrc', '.babelrc.json', '.babelrc.json5', ...) to use
       for compilation (and whatever other naughty things babel plugins do to
@@ -328,15 +280,7 @@ module.exports = {
       behavior a bit over time (e.g. more precise results for used module 
       systems) without dependency-cruiser getting a major version bump.
      */
-    {{#if useBabelConfig}}
-    babelConfig: {
-      fileName: '{{babelConfig}}'
-    },
-    {{^}}
-    // babelConfig: {
-    //   fileName: './.babelrc'
-    // },
-    {{/if}}
+    {{babelConfigAttribute}}
 
     /* List of strings you have in use in addition to cjs/ es6 requires
        & imports to declare module dependencies. Use this e.g. if you've
@@ -356,13 +300,13 @@ module.exports = {
          ['exports'] when you use packages that use such a field and your environment
          supports it (e.g. node ^12.19 || >=14.7 or recent versions of webpack).
 
-         If you have an `exportsFields` attribute in your webpack config, that one
+         If you have an \`exportsFields\` attribute in your webpack config, that one
          will have precedence over the one specified here.
       */ 
       exportsFields: ["exports"],
       /* List of conditions to check for in the exports field. e.g. use ['imports']
          if you're only interested in exposed es6 modules, ['require'] for commonjs,
-         or all conditions at once `(['import', 'require', 'node', 'default']`)
+         or all conditions at once \`(['import', 'require', 'node', 'default']\`)
          if anything goes for you. Only works when the 'exportsFields' array is
          non-empty.
 
@@ -372,18 +316,14 @@ module.exports = {
       conditionNames: ["import", "require", "node", "default"],
       /*
          The extensions, by default are the same as the ones dependency-cruiser
-         can access (run `npx depcruise --info` to see which ones that are in
+         can access (run \`npx depcruise --info\` to see which ones that are in
          _your_ environment. If that list is larger than what you need (e.g. 
          it contains .js, .jsx, .ts, .tsx, .cts, .mts - but you don't use 
          TypeScript you can pass just the extensions you actually use (e.g. 
          [".js", ".jsx"]). This can speed up the most expensive step in 
          dependency cruising (module resolution) quite a bit.
        */
-      {{#if specifyResolutionExtensions}}
-      extensions: {{{resolutionExtensionsAsString}}},
-      {{^}}
-      // extensions: [".js", ".jsx", ".ts", ".tsx", ".d.ts"],
-      {{/if}}
+      {{extensionsAttribute}}
       /* 
          If your TypeScript project makes use of types specified in 'types'
          fields in package.jsons of external dependencies, specify "types"
@@ -392,11 +332,7 @@ module.exports = {
          this if you're not sure, but still use TypeScript. In a future version
          of dependency-cruiser this will likely become the default.
        */
-      {{#if usesTypeScript}}
-      mainFields: ["main", "types"],
-      {{^}}
-      // mainFields: ["main", "types"],
-      {{/if}}
+      {{mainFieldsAttribute}}
     },
     reporterOptions: {
       dot: {
@@ -483,7 +419,7 @@ module.exports = {
       archi: {
         /* pattern of modules that can be consolidated in the high level
           graphical dependency graph. If you use the high level graphical
-          dependency graph reporter (`archi`) you probably want to tweak
+          dependency graph reporter (\`archi\`) you probably want to tweak
           this collapsePattern to your situation.
         */
         collapsePattern: '^(packages|src|lib|app|bin|test(s?)|spec(s?))/[^/]+|node_modules/(@[^/]+/[^/]+|[^/]+)',
@@ -504,3 +440,4 @@ module.exports = {
   }
 };
 // generated: dependency-cruiser@{{version}} on {{date}}
+`;
