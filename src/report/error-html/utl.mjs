@@ -136,11 +136,11 @@ export function aggregateViolations(pViolations, pRuleSetUsed) {
     );
 }
 
-// export default {
-//   aggregateViolations,
-//   getFormattedAllowedRule,
-//   mergeCountsIntoRule,
-//   formatSummaryForReport,
-//   determineFromExtras,
-//   determineTo,
-// };
+export default {
+  aggregateViolations,
+  getFormattedAllowedRule,
+  mergeCountsIntoRule,
+  formatSummaryForReport,
+  determineFromExtras,
+  determineTo,
+};
