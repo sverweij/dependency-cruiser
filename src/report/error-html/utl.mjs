@@ -47,11 +47,11 @@ function formatModuleTo() {
 
 function formatInstabilityTo(pViolation) {
   return `${pViolation.to}&nbsp;<span class="extra">(I: ${formatPercentage(
-    pViolation.metrics.to.instability
+    pViolation.metrics.to.instability,
   )})</span>`;
 }
 
-function determineTo(pViolation) {
+export function determineTo(pViolation) {
   const lViolationType2Formatter = {
     dependency: formatDependencyTo,
     module: formatModuleTo,
@@ -62,17 +62,17 @@ function determineTo(pViolation) {
   return formatViolation(
     pViolation,
     lViolationType2Formatter,
-    formatDependencyTo
+    formatDependencyTo,
   );
 }
 
 function formatInstabilityFromExtras(pViolation) {
   return `&nbsp;<span class="extra">(I: ${formatPercentage(
-    pViolation.metrics.from.instability
+    pViolation.metrics.from.instability,
   )})</span>`;
 }
 
-function determineFromExtras(pViolation) {
+export function determineFromExtras(pViolation) {
   const lViolationType2Formatter = {
     instability: formatInstabilityFromExtras,
   };
@@ -132,7 +132,7 @@ export function aggregateViolations(pViolations, pRuleSetUsed) {
       (pFirst, pSecond) =>
         Math.sign(pSecond.count - pFirst.count) ||
         Math.sign(pSecond.ignoredCount - pFirst.ignoredCount) ||
-        pFirst.name.localeCompare(pSecond.name)
+        pFirst.name.localeCompare(pSecond.name),
     );
 }
 

@@ -3,6 +3,7 @@ import errorHTML from "../../../src/report/error-html/index.mjs";
 import everythingFineResult from "./__mocks__/everything-fine.mjs";
 import validationMoreThanOnce from "./__mocks__/violation-more-than-once.mjs";
 import validationMoreThanOnceWithAnIgnore from "./__mocks__/violation-more-than-once-with-an-ignore.mjs";
+import orphansCyclesMetrics from "./__mocks__/orphans-cycles-metrics.mjs";
 
 describe("[I] report/error-html", () => {
   const lOkeliDokelyKey = "gummy bears";
@@ -56,5 +57,28 @@ describe("[I] report/error-html", () => {
       /<a href="https:\/\/github.com\/sverweij\/dependency-cruiser\/blob\/develop\/src\/cli\/compileConfig\/index.js">/,
     );
     strictEqual(lResult.exitCode, 0);
+  });
+
+  it("report nicely on orphans, cycles and metric rules", () => {
+    const lResult = errorHTML(orphansCyclesMetrics);
+
+    doesNotMatch(lResult.output, new RegExp(lOkeliDokelyKey));
+    doesNotMatch(lResult.output, new RegExp(lOkeliDokelyHeader));
+
+    // empty 'to' column for module only rules
+    match(
+      lResult.output,
+      />src\/schema\/baseline-violations\.schema\.js<\/a><\/td>[^<]*<td><\/td>/,
+    );
+    // cycles as cycles in the 'to' column:
+    match(
+      lResult.output,
+      /src\/extract\/transpile &rightarrow;<br\/>src\/extract\/parse/,
+    );
+    // metrics violations with the 'instability' for the involved modules in:
+    match(
+      lResult.output,
+      /src\/extract\/transpile\/index\.js<\/a>&nbsp;<span class="extra">\(I: 33%\)<\/span><\/td>[^<]*<td>src\/extract\/transpile\/meta.js&nbsp;<span class="extra">\(I: 80%\)<\/span>/,
+    );
   });
 });
