@@ -278,7 +278,8 @@ export interface ICruiseOptions {
      * A list of main fields in manifests (package.json s). Typically you'd want
      * to keep leave this this on its default (['main']) , but if you e.g. use
      * external packages that only expose types, and you still want references
-     * to these types to be resolved you could expand this to ['main', 'types']
+     * to these types to be resolved you could expand this to
+     * ['main', 'types', 'typings']
      */
     mainFields?: string[];
     /**

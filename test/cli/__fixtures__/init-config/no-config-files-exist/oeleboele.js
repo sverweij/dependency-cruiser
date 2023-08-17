@@ -117,7 +117,7 @@ module.exports = {
     // moduleSystems: ['amd', 'cjs', 'es6', 'tsd'],
 
     /* prefix for links in html and svg output (e.g. 'https://github.com/you/yourrepo/blob/develop/'
-       to open it on your online repo or `vscode://file/${process.cwd()}/` to 
+       to open it on your online repo or `vscode://file/${process.cwd()}/` to
        open it in visual studio code),
      */
     // prefix: '',
@@ -128,10 +128,10 @@ module.exports = {
      */
     // tsPreCompilationDeps: false,
 
-    /* 
-       list of extensions to scan that aren't javascript or compile-to-javascript. 
+    /*
+       list of extensions to scan that aren't javascript or compile-to-javascript.
        Empty by default. Only put extensions in here that you want to take into
-       account that are _not_ parsable. 
+       account that are _not_ parsable.
     */
     // extraExtensionsToScan: [".json", ".jpg", ".png", ".svg", ".webp"],
 
@@ -175,7 +175,7 @@ module.exports = {
     /* Babel config ('.babelrc', '.babelrc.json', '.babelrc.json5', ...) to use
       for compilation (and whatever other naughty things babel plugins do to
       source code). This feature is well tested and usable, but might change
-      behavior a bit over time (e.g. more precise results for used module 
+      behavior a bit over time (e.g. more precise results for used module
       systems) without dependency-cruiser getting a major version bump.
      */
     // babelConfig: {
@@ -217,14 +217,14 @@ module.exports = {
       /*
          The extensions, by default are the same as the ones dependency-cruiser
          can access (run `npx depcruise --info` to see which ones that are in
-         _your_ environment. If that list is larger than what you need (e.g. 
-         it contains .js, .jsx, .ts, .tsx, .cts, .mts - but you don't use 
-         TypeScript you can pass just the extensions you actually use (e.g. 
-         [".js", ".jsx"]). This can speed up the most expensive step in 
+         _your_ environment. If that list is larger than what you need (e.g.
+         it contains .js, .jsx, .ts, .tsx, .cts, .mts - but you don't use
+         TypeScript you can pass just the extensions you actually use (e.g.
+         [".js", ".jsx"]). This can speed up the most expensive step in
          dependency cruising (module resolution) quite a bit.
        */
       // extensions: [".js", ".jsx", ".ts", ".tsx", ".d.ts"],
-      /* 
+      /*
          If your TypeScript project makes use of types specified in 'types'
          fields in package.jsons of external dependencies, specify "types"
          in addition to "main" in here, so enhanced-resolve (the resolver
@@ -232,7 +232,7 @@ module.exports = {
          this if you're not sure, but still use TypeScript. In a future version
          of dependency-cruiser this will likely become the default.
        */
-      // mainFields: ["main", "types"],
+      // mainFields: ["main", "types", "typings"],
     },
     reporterOptions: {
       dot: {
