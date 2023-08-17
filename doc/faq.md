@@ -304,7 +304,7 @@ in that external package package.json e.g. like so:
   // rules: [],
   options: {
     enhancedResolveOptions: {
-      mainFields: ["main", "types"]
+      mainFields: ["main", "types", "typings"]
     }
     // other options ...
   }

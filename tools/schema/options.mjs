@@ -265,7 +265,7 @@ export default {
                 "want to keep leave this this on its default (['main']) , but if " +
                 "you e.g. use external packages that only expose types, and you " +
                 "still want references to these types to be resolved you could expand " +
-                "this to ['main', 'types']",
+                "this to ['main', 'types', 'typings']",
             },
             mainFiles: {
               type: "array",

@@ -99,7 +99,7 @@ function buildWebpackConfigAttribute(pInitOptions) {
       // env: {},
       // arguments: {}
     },`
-    : `// webpackConfig: { 
+    : `// webpackConfig: {
     //  fileName: 'webpack.config.js',
     //  env: {},
     //  arguments: {}
@@ -136,8 +136,8 @@ function buildExtensionsAttribute(pInitOptions) {
  */
 function buildMainFieldsAttribute(pInitOptions) {
   return pInitOptions.usesTypeScript
-    ? `mainFields: ["main", "types"],`
-    : `// mainFields: ["main", "types"],`;
+    ? `mainFields: ["main", "types", "typings"],`
+    : `// mainFields: ["main", "types", "typings"],`;
 }
 
 /**
