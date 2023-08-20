@@ -51,6 +51,7 @@ describe("[I] report/error-html", () => {
     match(lResult.output, /<strong>2<\/strong> ignored/);
     match(lResult.output, /also show ignored violations/);
     match(lResult.output, /<th>ignored<\/th>/);
+    match(lResult.output, /<tr class="ignored">/);
 
     match(
       lResult.output,

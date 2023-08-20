@@ -69,8 +69,12 @@ function constructViolatedRulesTable(pResults) {
   </table>`;
 }
 
+/**
+ * @param {import('../../../types/cruise-result.js').IViolation} pViolation
+ * @returns {string}
+ */
 function getViolationRowClass(pViolation) {
-  return pViolation.ignored ? ' class="ignored"' : "";
+  return pViolation.rule.severity === "ignore" ? ' class="ignored"' : "";
 }
 
 /**
