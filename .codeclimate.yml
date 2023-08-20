@@ -18,5 +18,4 @@ exclude_patterns:
   - "types/"
   - "tools/"
   - "**/node_modules/"
-  - "src/report/**/*.template.js"
   - "src/**/*.schema.mjs"

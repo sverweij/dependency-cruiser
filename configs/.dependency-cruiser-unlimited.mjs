@@ -74,7 +74,7 @@ export default {
             },
             {
               criteria: {
-                source: "^src/meta\\.js$|\\.template\\.js$|\\.schema\\.js$",
+                source: "^src/meta\\.js$|\\.schema\\.js$",
               },
               attributes: { style: "filled" },
             },

@@ -15,7 +15,6 @@
     "tmp*",
     ".mocharc.js",
     ".eslintrc.js",
-    "src/**/*.template.js",
     "src/cli/tools/svg-in-html-snippets/script.snippet.js",
     "src/cli/init-config/get-user-input.mjs",
     "src/cli/listeners/*/index.mjs",

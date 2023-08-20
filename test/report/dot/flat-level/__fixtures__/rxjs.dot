@@ -1,7 +1,7 @@
 strict digraph "dependency-cruiser output"{
     splines="ortho"
-    
-    
+
+
 
     "compat/Rx.ts" [label=<compat/<BR/><B>Rx.ts</B>> tooltip="Rx.ts" URL="compat/Rx.ts" ]
     "compat/Rx.ts" -> "compat/add/observable/bindCallback.ts"

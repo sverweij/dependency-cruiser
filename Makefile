@@ -1,8 +1,7 @@
 .SUFFIXES: .js .css .html
 NODE=node
 RM=rm -f
-GENERATED_SOURCES=src/report/dot/dot.template.js \
-	src/schema/baseline-violations.schema.mjs \
+GENERATED_SOURCES=src/schema/baseline-violations.schema.mjs \
 	src/schema/configuration.schema.mjs \
 	src/schema/cruise-result.schema.mjs \
 	src/schema/baseline-violations.schema.json \
@@ -58,15 +57,12 @@ help:
 	@echo "Useful targets:"
 	@echo
 	@echo "build. When necessary this ..."
-	@echo "  - ... recompiles the handlebar templates"
 	@echo "  - ... re-generates the json schema"
 	@echo
 	@echo "clean. Removes all generated sources."
 	@echo
 
 # production rules
-src/%.template.js: src/%.template.hbs
-	npx handlebars --min --commonjs handlebars/runtime -f $@ $<
 
 src/%.schema.mjs: tools/%.schema.mjs $(SCHEMA_SOURCES) tools/generate-schemas.utl.mjs
 	$(NODE) ./tools/generate-schemas.utl.mjs $@

@@ -1,4 +1,4 @@
-import Handlebars from "handlebars/runtime.js";
+/* eslint-disable prefer-template */
 import get from "lodash/get.js";
 import { applyFilters } from "../../graph-utl/filter-bank.mjs";
 import theming from "./theming.mjs";
@@ -7,7 +7,8 @@ import prepareFolderLevel from "./prepare-folder-level.mjs";
 import prepareCustomLevel from "./prepare-custom-level.mjs";
 import prepareFlatLevel from "./prepare-flat-level.mjs";
 
-await import("./dot.template.js");
+// not importing EOL from "node:os" so output is the same on windows and unices
+const EOL = "\n";
 
 const GRANULARITY2FUNCTION = new Map([
   ["module", prepareCustomLevel],
@@ -16,10 +17,108 @@ const GRANULARITY2FUNCTION = new Map([
   ["flat", prepareFlatLevel],
 ]);
 
+const GRANULARITY2REPORTER_OPTIONS = new Map([
+  ["module", "summary.optionsUsed.reporterOptions.dot"],
+  ["folder", "summary.optionsUsed.reporterOptions.ddot"],
+  ["custom", "summary.optionsUsed.reporterOptions.archi"],
+  ["flat", "summary.optionsUsed.reporterOptions.flat"],
+]);
+
+function buildGraphAttributes(pGraph) {
+  return Boolean(pGraph)
+    ? `    ${moduleUtl.attributizeObject(pGraph || {})}`
+    : "";
+}
+
+function buildNodeAttributes(pNode) {
+  return Boolean(pNode)
+    ? `    node [${moduleUtl.attributizeObject(pNode || {})}]`
+    : "";
+}
+
+function buildEdgeAttributes(pEdge) {
+  return Boolean(pEdge)
+    ? `    edge [${moduleUtl.attributizeObject(pEdge || {})}]`
+    : "";
+}
+
+function buildGeneralAttributes(pTheme) {
+  return (
+    buildGraphAttributes(pTheme.graph) +
+    EOL +
+    buildNodeAttributes(pTheme.node) +
+    EOL +
+    buildEdgeAttributes(pTheme.edge) +
+    EOL
+  );
+}
+
+function buildSingleFlatModule(pModule) {
+  return `"${pModule.source}" [label=${pModule.label} tooltip="${
+    pModule.tooltip
+  }" ${pModule.URL ? 'URL="' + pModule.URL + '" ' : ""}${
+    pModule.themeAttrs ?? ""
+  }]`;
+}
+
+function buildSinglePath(pClustersHaveOwnNode) {
+  return (pPath) => {
+    let lReturnValue = `subgraph "cluster_${pPath.aggregateSnippet}" {label="${pPath.snippet}"`;
+    if (pClustersHaveOwnNode) {
+      lReturnValue += ` "${pPath.aggregateSnippet}" [width="0.05" shape="point" style="invis"]`;
+    }
+    return lReturnValue;
+  };
+}
+
+function buildModuleHierarchy(pModule, pClustersHaveOwnNode) {
+  return (
+    pModule.path.map(buildSinglePath(pClustersHaveOwnNode)).join(" ") +
+    " " +
+    buildSingleFlatModule(pModule) +
+    " }".repeat(pModule.path.length)
+  );
+}
+
+function buildDependency(pModuleSource) {
+  return (pDependency) => {
+    let lReturnValue = `    "${pModuleSource}" -> "${pDependency.resolved}"`;
+    if (pDependency.hasExtraAttributes) {
+      lReturnValue +=
+        " [" +
+        (pDependency?.rule?.name
+          ? `xlabel="${pDependency.rule.name}" tooltip="${pDependency.rule.name}" `
+          : "") +
+        (pDependency?.themeAttrs ?? "") +
+        "]";
+    }
+    return lReturnValue;
+  };
+}
+
+function buildModule(pClustersHaveOwnNode) {
+  return (pModule) => {
+    let lReturnValue = pModule.folder
+      ? `    ${buildModuleHierarchy(pModule, pClustersHaveOwnNode)}`
+      : `    ${buildSingleFlatModule(pModule)}`;
+    if (pModule.dependencies && pModule.dependencies.length > 0) {
+      lReturnValue +=
+        EOL +
+        pModule.dependencies.map(buildDependency(pModule.source)).join(EOL);
+    }
+
+    return lReturnValue;
+  };
+}
+
+function buildModules(pModules, pClustersHaveOwnNode) {
+  return pModules.map(buildModule(pClustersHaveOwnNode)).join(EOL);
+}
+
 function report(
   pResults,
   pGranularity,
-  { theme, collapsePattern, filters, showMetrics }
+  { theme, collapsePattern, filters, showMetrics },
 ) {
   const lTheme = theming.normalizeTheme(theme);
   const lResults = filters
@@ -29,62 +128,59 @@ function report(
       }
     : pResults;
 
-  return Handlebars.templates["dot.template.hbs"]({
-    graphAttrs: moduleUtl.attributizeObject(lTheme.graph || {}),
-    nodeAttrs: moduleUtl.attributizeObject(lTheme.node || {}),
-    edgeAttrs: moduleUtl.attributizeObject(lTheme.edge || {}),
-    clustersHaveOwnNode: "folder" === pGranularity,
-
-    modules: (GRANULARITY2FUNCTION.get(pGranularity) || prepareCustomLevel)(
-      lResults,
-      lTheme,
-      collapsePattern,
-      showMetrics
-    ),
-  });
+  return (
+    'strict digraph "dependency-cruiser output"{' +
+    EOL +
+    buildGeneralAttributes(lTheme) +
+    EOL +
+    buildModules(
+      (GRANULARITY2FUNCTION.get(pGranularity) || prepareCustomLevel)(
+        lResults,
+        lTheme,
+        collapsePattern,
+        showMetrics,
+      ),
+      pGranularity === "folder",
+    ) +
+    EOL +
+    `}${EOL}`
+  );
 }
-
-const GRANULARITY2REPORTER_OPTIONS = new Map([
-  ["module", "summary.optionsUsed.reporterOptions.dot"],
-  ["folder", "summary.optionsUsed.reporterOptions.ddot"],
-  ["custom", "summary.optionsUsed.reporterOptions.archi"],
-  ["flat", "summary.optionsUsed.reporterOptions.flat"],
-]);
 
 function pryReporterOptionsFromResults(pGranularity, pResults) {
   const lFallbackReporterOptions = get(
     pResults,
-    "summary.optionsUsed.reporterOptions.dot"
+    "summary.optionsUsed.reporterOptions.dot",
   );
 
   return get(
     pResults,
     GRANULARITY2REPORTER_OPTIONS.get(pGranularity),
-    lFallbackReporterOptions
+    lFallbackReporterOptions,
   );
 }
 
 function pryThemeFromResults(pGranularity, pResults) {
   const lFallbackTheme = get(
     pResults,
-    "summary.optionsUsed.reporterOptions.dot.theme"
+    "summary.optionsUsed.reporterOptions.dot.theme",
   );
   return get(
     pryReporterOptionsFromResults(pGranularity, pResults),
     "theme",
-    lFallbackTheme
+    lFallbackTheme,
   );
 }
 
 function pryFiltersFromResults(pGranularity, pResults) {
   const lFallbackFilters = get(
     pResults,
-    "summary.optionsUsed.reporterOptions.dot.filters"
+    "summary.optionsUsed.reporterOptions.dot.filters",
   );
   return get(
     pryReporterOptionsFromResults(pGranularity, pResults),
     "filters",
-    lFallbackFilters
+    lFallbackFilters,
   );
 }
 
@@ -99,14 +195,14 @@ function pryCollapsePatternFromResults(pGranularity, pResults) {
   return get(
     pryReporterOptionsFromResults(pGranularity, pResults),
     "collapsePattern",
-    getCollapseFallbackPattern(pGranularity)
+    getCollapseFallbackPattern(pGranularity),
   );
 }
 
 function normalizeDotReporterOptions(
   pDotReporterOptions,
   pGranularity,
-  pResults
+  pResults,
 ) {
   let lDotReporterOptions = pDotReporterOptions || {};
 
@@ -136,7 +232,7 @@ export default function produceDotReporter(pGranularity) {
     const lDotReporterOptions = normalizeDotReporterOptions(
       pDotReporterOptions,
       pGranularity,
-      pResults
+      pResults,
     );
 
     return {
