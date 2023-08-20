@@ -1,7 +1,7 @@
 strict digraph "dependency-cruiser output"{
     splines="ortho"
-    
-    
+
+
 
     "tmp/index.js" [label=<tmp/<BR/><B>index.js</B>> tooltip="index.js" URL="https://github.com/sverweij/dependency-cruiser/blob/develop/tmp/index.js" ]
     "tmp/index.js" -> "tmp/non-orphan.js"

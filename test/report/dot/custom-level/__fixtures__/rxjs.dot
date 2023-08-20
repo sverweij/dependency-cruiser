@@ -1,7 +1,7 @@
 strict digraph "dependency-cruiser output"{
     splines="ortho"
-    
-    
+
+
 
     subgraph "cluster_compat" {label="compat" "compat/Rx.ts" [label=<Rx.ts> tooltip="Rx.ts" URL="compat/Rx.ts" ] }
     "compat/Rx.ts" -> "compat/add"

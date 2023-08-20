@@ -7,7 +7,6 @@ paths:
   - tools/
   - types/
 paths-ignore:
-  - '**/*.template.js'
   - '**/*.schema.mjs'
   - 'test/integration/**'
   - 'test/*/__fixtures__/**'

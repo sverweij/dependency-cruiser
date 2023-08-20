@@ -29,21 +29,21 @@ describe("[I] report/dot/flat-level reporter", () => {
   it("consolidates to flat levels", () => {
     const lReturnValue = render(deps);
 
-    deepStrictEqual(lReturnValue.output, flatDot);
+    strictEqual(lReturnValue.output, flatDot);
     strictEqual(lReturnValue.exitCode, 0);
   });
 
   it("consolidates module only transgressions correctly", () => {
     const lReturnValue = render(orphans);
 
-    deepStrictEqual(lReturnValue.output, flatOrphansDot);
+    strictEqual(lReturnValue.output, flatOrphansDot);
     strictEqual(lReturnValue.exitCode, 0);
   });
 
   it("consolidates a slightly larger code base in a timely fashion", () => {
     const lReturnValue = render(rxjs);
 
-    deepStrictEqual(lReturnValue.output, flatRxJs);
+    strictEqual(lReturnValue.output, flatRxJs);
     strictEqual(lReturnValue.exitCode, 0);
   });
 });

@@ -1,7 +1,7 @@
 strict digraph "dependency-cruiser output"{
     splines="ortho"
-    
-    
+
+
 
     subgraph "cluster_bin" {label="bin" "bin/depcruise-fmt.js" [label=<depcruise-fmt.js> tooltip="depcruise-fmt.js" URL="https://github.com/sverweij/dependency-cruiser/blob/develop/bin/depcruise-fmt.js" ] }
     "bin/depcruise-fmt.js" -> "src/cli"

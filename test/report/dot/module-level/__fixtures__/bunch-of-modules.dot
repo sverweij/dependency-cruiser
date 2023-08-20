@@ -1,7 +1,7 @@
 strict digraph "dependency-cruiser output"{
-    
-    
-    
+
+
+
 
     subgraph "cluster_src" {label="src" "src/coffee.coffee" [label=<coffee.coffee> tooltip="coffee.coffee" URL="src/coffee.coffee" ] }
     subgraph "cluster_src" {label="src" "src/javascript.js" [label=<javascript.js> tooltip="javascript.js" URL="src/javascript.js" ] }

@@ -1,7 +1,7 @@
 strict digraph "dependency-cruiser output"{
-    
-    
-    
+
+
+
 
     subgraph "cluster_bin" {label="bin" "bin/depcruise-baseline.js" [label=<depcruise-baseline.js> tooltip="depcruise-baseline.js" URL="https://github.com/sverweij/dependency-cruiser/blob/develop/bin/depcruise-baseline.js" ] }
     "bin/depcruise-baseline.js" -> "src/cli/index.js"
