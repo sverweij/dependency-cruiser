@@ -1,4 +1,4 @@
-import { deepStrictEqual } from "node:assert";
+import { deepEqual } from "node:assert/strict";
 import validate from "../../src/validate/index.mjs";
 import parseRuleSet from "./parse-ruleset.utl.mjs";
 
@@ -15,7 +15,7 @@ describe("[I] index/validate - moreThanOneDependencyType", () => {
       ],
     });
 
-    deepStrictEqual(
+    deepEqual(
       validate.dependency(
         lRuleSet,
         { source: "src/aap/zus/jet.js" },
@@ -49,7 +49,7 @@ describe("[I] index/validate - moreThanOneDependencyType", () => {
       ],
     });
 
-    deepStrictEqual(
+    deepEqual(
       validate.dependency(
         lRuleSet,
         { source: "src/aap/zus/jet.js" },

@@ -1,4 +1,4 @@
-import { deepStrictEqual, strictEqual } from "node:assert";
+import { deepEqual, equal } from "node:assert/strict";
 import normalizeInitOptions from "../../../src/cli/init-config/normalize-init-options.mjs";
 
 describe("[U] cli/init-config/normalize-init-options", () => {
@@ -13,14 +13,11 @@ describe("[U] cli/init-config/normalize-init-options", () => {
   });
 
   it("If it's a mono repo, doesn't return a testLocation array", () => {
-    deepStrictEqual(
-      normalizeInitOptions({ isMonoRepo: true }).testLocation,
-      [],
-    );
+    deepEqual(normalizeInitOptions({ isMonoRepo: true }).testLocation, []);
   });
 
   it("If it's a mono repo, hasTestOutsideSource is false", () => {
-    strictEqual(
+    equal(
       normalizeInitOptions({ isMonoRepo: true }).hasTestsOutsideSource,
       false,
     );
@@ -28,7 +25,7 @@ describe("[U] cli/init-config/normalize-init-options", () => {
 
   it("If it's a mono repo, foo bar", () => {
     process.chdir("test/cli/init-config/__mocks__/mono-repo-with-other-files");
-    deepStrictEqual(
+    deepEqual(
       normalizeInitOptions({
         isMonoRepo: true,
         specifyResolutionExtensions: true,
@@ -39,12 +36,12 @@ describe("[U] cli/init-config/normalize-init-options", () => {
 
   it("If there's NO TypeScript-ish files in the source folder (nor a tsConfig or tsPreCompilationDeps specified) usesTypeScript is false", () => {
     process.chdir("test/cli/init-config/__mocks__/no-typescript-here");
-    strictEqual(normalizeInitOptions({}).usesTypeScript, false);
+    equal(normalizeInitOptions({}).usesTypeScript, false);
   });
 
   it("If there's NO TypeScript-ish files in the source folder, but a tsConfig is specified usesTypeScript is true", () => {
     process.chdir("test/cli/init-config/__mocks__/no-typescript-here");
-    strictEqual(
+    equal(
       normalizeInitOptions({ tsConfig: "./tsconfig.json" }).usesTypeScript,
       true,
     );
@@ -52,21 +49,18 @@ describe("[U] cli/init-config/normalize-init-options", () => {
 
   it("If there's NO TypeScript-ish files in the source folder, but a tsPreCompilationDeps is specified usesTypeScript is true", () => {
     process.chdir("test/cli/init-config/__mocks__/no-typescript-here");
-    strictEqual(
+    equal(
       normalizeInitOptions({ tsPreCompilationDeps: true }).usesTypeScript,
       true,
     );
   });
   it("If there's TypeScript-ish files in the source folder usesTypeScript is true", () => {
     process.chdir("test/cli/init-config/__mocks__/typescript-here");
-    strictEqual(
-      normalizeInitOptions({ sourceLocation: "src" }).usesTypeScript,
-      true,
-    );
+    equal(normalizeInitOptions({ sourceLocation: "src" }).usesTypeScript, true);
   });
   it("If there's no TypeScript-ish files in the source folder, but there are in the test folder, usesTypeScript is true", () => {
     process.chdir("test/cli/init-config/__mocks__/typescript-in-test-only");
-    strictEqual(
+    equal(
       normalizeInitOptions({
         sourceLocation: "src",
         hasTestsOutsideSource: true,

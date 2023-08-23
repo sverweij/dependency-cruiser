@@ -1,4 +1,4 @@
-import { deepStrictEqual } from "node:assert";
+import { deepEqual } from "node:assert/strict";
 import { posix as path } from "node:path";
 import { readFileSync } from "node:fs";
 import { fileURLToPath } from "node:url";
@@ -33,7 +33,7 @@ describe("[E] main.cruise - main", () => {
   it("Returns an object when no options are passed", async () => {
     const lResult = await cruise(["test/main/__mocks__/ts"]);
 
-    deepStrictEqual(pathPosixify(lResult.output), tsFixture);
+    deepEqual(pathPosixify(lResult.output), tsFixture);
     ajv.validate(cruiseResultSchema, lResult.output);
   });
 
@@ -44,7 +44,7 @@ describe("[E] main.cruise - main", () => {
       { bustTheCache: true },
     );
 
-    deepStrictEqual(pathPosixify(lResult.output), tsFixture);
+    deepEqual(pathPosixify(lResult.output), tsFixture);
     ajv.validate(cruiseResultSchema, lResult.output);
   });
 
@@ -55,7 +55,7 @@ describe("[E] main.cruise - main", () => {
       { bustTheCache: true },
     );
 
-    deepStrictEqual(pathPosixify(lResult.output), tsxFixture);
+    deepEqual(pathPosixify(lResult.output), tsxFixture);
     ajv.validate(cruiseResultSchema, lResult.output);
   });
 
@@ -66,7 +66,7 @@ describe("[E] main.cruise - main", () => {
       { bustTheCache: true },
     );
 
-    deepStrictEqual(pathPosixify(lResult.output), jsxFixture);
+    deepEqual(pathPosixify(lResult.output), jsxFixture);
     ajv.validate(cruiseResultSchema, lResult.output);
   });
   it("process rulesets in the form a an object instead of json", async () => {
@@ -78,7 +78,7 @@ describe("[E] main.cruise - main", () => {
       { bustTheCache: true },
     );
 
-    deepStrictEqual(pathPosixify(lResult.output), jsxAsObjectFixture);
+    deepEqual(pathPosixify(lResult.output), jsxAsObjectFixture);
     ajv.validate(cruiseResultSchema, lResult.output);
   });
   it("Collapses to a pattern when a collapse pattern is passed", async () => {
@@ -91,7 +91,7 @@ describe("[E] main.cruise - main", () => {
       { bustTheCache: true },
     );
 
-    deepStrictEqual(
+    deepEqual(
       pathPosixify(lResult.output),
       normBaseDirectory(
         JSON.parse(

@@ -1,4 +1,4 @@
-import { strictEqual } from "node:assert";
+import { equal } from "node:assert/strict";
 import { anonymizePath } from "../../../src/report/anon/anonymize-path.mjs";
 import { clearCache } from "../../../src/report/anon/anonymize-path-element.mjs";
 
@@ -8,15 +8,15 @@ describe("[U] report/anon/anonymizePath", () => {
   });
 
   it("'' => ''", () => {
-    strictEqual(anonymizePath(""), "");
+    equal(anonymizePath(""), "");
   });
 
   it("'////' => '////'", () => {
-    strictEqual(anonymizePath("////"), "////");
+    equal(anonymizePath("////"), "////");
   });
 
   it("replaces with words from the word list", () => {
-    strictEqual(
+    equal(
       anonymizePath("src/tien/kleine/geitjes/index.ts", ["foo", "bar", "baz"]),
       "src/foo/bar/baz/index.ts",
     );
@@ -25,22 +25,22 @@ describe("[U] report/anon/anonymizePath", () => {
   it("repeat calls with similar paths yield similar anon paths", () => {
     const lWords = ["aap", "noot", "mies", "wim", "zus", "jet", "heide"];
 
-    strictEqual(
+    equal(
       anonymizePath("src/tien/kleine/geitjes/index.ts", lWords),
       "src/aap/noot/mies/index.ts",
     );
 
-    strictEqual(
+    equal(
       anonymizePath("src/tien/kleine/geitjes/tien.ts", lWords),
       "src/aap/noot/mies/aap.ts",
     );
 
-    strictEqual(
+    equal(
       anonymizePath("shwoop/tien/grote/geiten/index.ts", lWords),
       "wim/aap/zus/jet/index.ts",
     );
 
-    strictEqual(
+    equal(
       anonymizePath("test/tien/kleine/geitjes/tien.spec.ts", lWords),
       "test/aap/noot/mies/aap.spec.ts",
     );

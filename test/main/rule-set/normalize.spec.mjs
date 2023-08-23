@@ -1,13 +1,13 @@
-import { deepStrictEqual } from "node:assert";
+import { deepEqual } from "node:assert/strict";
 import normalize from "../../../src/main/rule-set/normalize.mjs";
 
 describe("[U] main/rule-set/normalize", () => {
   it("leaves the empty ruleset alone", () => {
-    deepStrictEqual(normalize({}), {});
+    deepEqual(normalize({}), {});
   });
 
   it("allowed: adds allowedSeverity when it wasn't filled out; adds the 'not-in-allowed' name to the rule", () => {
-    deepStrictEqual(
+    deepEqual(
       normalize({
         allowed: [
           {
@@ -30,7 +30,7 @@ describe("[U] main/rule-set/normalize", () => {
   });
 
   it("allowed: leaves allowedSeverity alone when it wasn't filled; doesn't add severity, but does add name 'not-in-allowed' to the rule", () => {
-    deepStrictEqual(
+    deepEqual(
       normalize({
         allowed: [
           {
@@ -54,7 +54,7 @@ describe("[U] main/rule-set/normalize", () => {
   });
 
   it("corrects the severity to a default when it's not a recognized one", () => {
-    deepStrictEqual(
+    deepEqual(
       normalize({
         forbidden: [
           {
@@ -80,7 +80,7 @@ describe("[U] main/rule-set/normalize", () => {
   });
 
   it("keeps the severity if it's a recognized one", () => {
-    deepStrictEqual(
+    deepEqual(
       normalize({
         forbidden: [
           {
@@ -106,7 +106,7 @@ describe("[U] main/rule-set/normalize", () => {
   });
 
   it("also works for 'forbidden' rules", () => {
-    deepStrictEqual(
+    deepEqual(
       normalize({
         forbidden: [
           {
@@ -134,7 +134,7 @@ describe("[U] main/rule-set/normalize", () => {
   });
 
   it("filters out forbidden rules with severity 'ignore'", () => {
-    deepStrictEqual(
+    deepEqual(
       normalize({
         forbidden: [
           {
@@ -153,7 +153,7 @@ describe("[U] main/rule-set/normalize", () => {
   });
 
   it("filters out required rules with severity 'ignore'", () => {
-    deepStrictEqual(
+    deepEqual(
       normalize({
         required: [
           {
@@ -172,7 +172,7 @@ describe("[U] main/rule-set/normalize", () => {
   });
 
   it("removes the allowed rules & allowedSeverity when allowedSeverity === 'ignore'", () => {
-    deepStrictEqual(
+    deepEqual(
       normalize({
         allowed: [
           {
@@ -187,7 +187,7 @@ describe("[U] main/rule-set/normalize", () => {
   });
 
   it("normalizes arrays of re's in paths to regular regular expressions (forbidden)", () => {
-    deepStrictEqual(
+    deepEqual(
       normalize({
         forbidden: [
           {
@@ -225,7 +225,7 @@ describe("[U] main/rule-set/normalize", () => {
   });
 
   it("normalizes arrays of re's in paths to regular regular expressions (required)", () => {
-    deepStrictEqual(
+    deepEqual(
       normalize({
         required: [
           {
@@ -261,7 +261,7 @@ describe("[U] main/rule-set/normalize", () => {
   });
 
   it("normalizes arrays of re's in paths to regular regular expressions (allowed)", () => {
-    deepStrictEqual(
+    deepEqual(
       normalize({
         allowed: [
           {
@@ -296,7 +296,7 @@ describe("[U] main/rule-set/normalize", () => {
   });
 
   it("normalizes arrays of re's in licenses to regular regular expressions", () => {
-    deepStrictEqual(
+    deepEqual(
       normalize({
         forbidden: [
           {
@@ -344,7 +344,7 @@ describe("[U] main/rule-set/normalize", () => {
   });
 
   it("normalizes arrays of re's in exoticRequires to regular regular expressions", () => {
-    deepStrictEqual(
+    deepEqual(
       normalize({
         forbidden: [
           {

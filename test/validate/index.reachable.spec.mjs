@@ -1,4 +1,4 @@
-import { deepStrictEqual } from "node:assert";
+import { deepEqual } from "node:assert/strict";
 import validate from "../../src/validate/index.mjs";
 import parseRuleSet from "./parse-ruleset.utl.mjs";
 
@@ -22,21 +22,20 @@ describe("[I] validate/index - reachable (in forbidden set)", () => {
     ],
   });
   it("Skips modules that have no reachable attribute (reachable false)", () => {
-    deepStrictEqual(
+    deepEqual(
       validate.module(lReachableFalseRuleSet, { source: "something" }),
       { valid: true },
     );
   });
 
   it("Skips modules that have no reachable attribute (reachable true)", () => {
-    deepStrictEqual(
-      validate.module(lReachableTrueRuleSet, { source: "something" }),
-      { valid: true },
-    );
+    deepEqual(validate.module(lReachableTrueRuleSet, { source: "something" }), {
+      valid: true,
+    });
   });
 
   it("Triggers on modules that have a reachable attribute (non-matching, reachable false)", () => {
-    deepStrictEqual(
+    deepEqual(
       validate.module(lReachableFalseRuleSet, {
         source: "something",
         reachable: [
@@ -52,7 +51,7 @@ describe("[I] validate/index - reachable (in forbidden set)", () => {
   });
 
   it("Triggers on modules that have a reachable attribute (non-matching, reachable true)", () => {
-    deepStrictEqual(
+    deepEqual(
       validate.module(lReachableTrueRuleSet, {
         source: "something",
         reachable: [
@@ -68,7 +67,7 @@ describe("[I] validate/index - reachable (in forbidden set)", () => {
   });
 
   it("Triggers on modules that have a reachable attribute (reachable false)", () => {
-    deepStrictEqual(
+    deepEqual(
       validate.module(lReachableFalseRuleSet, {
         source: "something",
         reachable: [
@@ -92,7 +91,7 @@ describe("[I] validate/index - reachable (in forbidden set)", () => {
   });
 
   it("Triggers on modules that have a reachable attribute (reachable true)", () => {
-    deepStrictEqual(
+    deepEqual(
       validate.module(lReachableTrueRuleSet, {
         source: "something",
         reachable: [
@@ -116,7 +115,7 @@ describe("[I] validate/index - reachable (in forbidden set)", () => {
   });
 
   it("Triggers on modules that have a reachable attribute (with a path, reachable false)", () => {
-    deepStrictEqual(
+    deepEqual(
       validate.module(lReachableFalseRuleSet, {
         source: "something",
         reachable: [
@@ -140,7 +139,7 @@ describe("[I] validate/index - reachable (in forbidden set)", () => {
   });
 
   it("Triggers on modules that have a reachable attribute (with a path, reachable true)", () => {
-    deepStrictEqual(
+    deepEqual(
       validate.module(lReachableTrueRuleSet, {
         source: "something",
         reachable: [
@@ -174,7 +173,7 @@ describe("[I] validate/index - reachable (in forbidden set)", () => {
       ],
     });
 
-    deepStrictEqual(
+    deepEqual(
       validate.module(lReachableFalsePathNotRuleSet, {
         source: "something",
         reachable: [
@@ -199,7 +198,7 @@ describe("[I] validate/index - reachable (in forbidden set)", () => {
         },
       ],
     });
-    deepStrictEqual(
+    deepEqual(
       validate.module(lReachableTruePathNotRuleSet, {
         source: "something",
         reachable: [
@@ -224,7 +223,7 @@ describe("[I] validate/index - reachable (in allowed set)", () => {
     ],
   });
   it("Triggers on modules that have no reachable attribute ('allowed' rule set)", () => {
-    deepStrictEqual(
+    deepEqual(
       validate.module(lReachableAllowedRuleSet, {
         source: "something",
       }),
@@ -241,7 +240,7 @@ describe("[I] validate/index - reachable (in allowed set)", () => {
   });
 
   it("Skips on modules that have a reachable attribute (match - 'allowed' rule set)", () => {
-    deepStrictEqual(
+    deepEqual(
       validate.module(lReachableAllowedRuleSet, {
         source: "something",
         reachable: [
@@ -259,7 +258,7 @@ describe("[I] validate/index - reachable (in allowed set)", () => {
   });
 
   it("Triggers on modules that have a reachable attribute (no match - 'allowed' rule set)", () => {
-    deepStrictEqual(
+    deepEqual(
       validate.module(lReachableAllowedRuleSet, {
         source: "something",
         reachable: [
@@ -308,7 +307,7 @@ describe("[I] validate/index - reachable (in allowed set)", () => {
       lReachableCapturingGroupsRuleSet,
       lModule,
     );
-    deepStrictEqual(lValidationResult, {
+    deepEqual(lValidationResult, {
       valid: false,
       rules: [
         {

@@ -1,20 +1,20 @@
-import { deepStrictEqual } from "node:assert";
+import { deepEqual } from "node:assert/strict";
 import { detectPreCompilationNess } from "../../src/extract/helpers.mjs";
 
 describe("[U] extract/helpers - detectPreCompilationNess", () => {
   it("empty dependency lists yield an empty one", () => {
-    deepStrictEqual(detectPreCompilationNess([], []), []);
+    deepEqual(detectPreCompilationNess([], []), []);
   });
 
   it("deps in the first not in the second get the isPreCompilationOnly attribute", () => {
-    deepStrictEqual(
+    deepEqual(
       detectPreCompilationNess([{ module: "foo", moduleSystem: "es6" }], []),
       [{ module: "foo", moduleSystem: "es6", preCompilationOnly: true }],
     );
   });
 
   it("deps in the first and in the second get the isPreCompilationOnly attribute with value false", () => {
-    deepStrictEqual(
+    deepEqual(
       detectPreCompilationNess(
         [{ module: "foo", moduleSystem: "es6" }],
         [{ module: "foo", moduleSystem: "es6" }],
@@ -24,7 +24,7 @@ describe("[U] extract/helpers - detectPreCompilationNess", () => {
   });
 
   it("deps in the first but not in the second (moduleSystem mismatch only) get the isPreCompilationOnly attribute with value true", () => {
-    deepStrictEqual(
+    deepEqual(
       detectPreCompilationNess(
         [{ module: "foo", moduleSystem: "es6" }],
         [{ module: "foo", moduleSystem: "cjs" }],
@@ -34,7 +34,7 @@ describe("[U] extract/helpers - detectPreCompilationNess", () => {
   });
 
   it("deps only in the second list vanish", () => {
-    deepStrictEqual(
+    deepEqual(
       detectPreCompilationNess([], [{ module: "foo", moduleSystem: "es6" }]),
       [],
     );

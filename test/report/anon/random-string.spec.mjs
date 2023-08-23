@@ -1,9 +1,9 @@
-import { match, strictEqual } from "node:assert";
+import { match, equal } from "node:assert/strict";
 import randomString from "../../../src/report/anon/random-string.mjs";
 
 describe("[U] report/anon/random-string", () => {
   it("returns the empty string when passed the empty string", () => {
-    strictEqual(randomString(""), "");
+    equal(randomString(""), "");
   });
 
   it("returns a lower case ascii character when passed such", () => {
@@ -23,7 +23,7 @@ describe("[U] report/anon/random-string", () => {
   });
 
   it("echoes separators", () => {
-    strictEqual(randomString("-"), "-");
+    equal(randomString("-"), "-");
   });
 
   it("returns a number when passed a number", () => {

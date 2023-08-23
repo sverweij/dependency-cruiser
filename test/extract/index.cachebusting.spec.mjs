@@ -1,5 +1,5 @@
 import { renameSync } from "node:fs";
-import { deepStrictEqual, notDeepStrictEqual } from "node:assert";
+import { deepEqual, notDeepStrictEqual } from "node:assert/strict";
 import extract from "../../src/extract/index.mjs";
 import { createRequireJSON } from "../backwards.utl.mjs";
 import { normalizeCruiseOptions } from "../../src/main/options/normalize.mjs";
@@ -75,8 +75,8 @@ describe("[I] extract/index - cache busting", () => {
       "./test/extract/__mocks__/cache-busting-second-tree",
     );
 
-    deepStrictEqual(lFirstResult, lFirstResultFixture);
-    deepStrictEqual(lSecondResult, lSecondResultFixture);
+    deepEqual(lFirstResult, lFirstResultFixture);
+    deepEqual(lSecondResult, lSecondResultFixture);
     notDeepStrictEqual(lSecondResult, lFirstResult);
   });
 });

@@ -1,4 +1,4 @@
-import { deepStrictEqual } from "node:assert";
+import { deepEqual } from "node:assert/strict";
 import Ajv from "ajv";
 import cruise from "../../src/main/cruise.mjs";
 import cruiseResultSchema from "../../src/schema/cruise-result.schema.mjs";
@@ -46,9 +46,9 @@ function runFixture(pFixture) {
       );
 
       ajv.validate(cruiseResultSchema, lResult.output);
-      deepStrictEqual(lResult.output.modules, pFixture.expected);
+      deepEqual(lResult.output.modules, pFixture.expected);
       if (lResult.output.folders) {
-        deepStrictEqual(lResult.output.folders, pFixture.expectedFolders);
+        deepEqual(lResult.output.folders, pFixture.expectedFolders);
       }
     });
   }

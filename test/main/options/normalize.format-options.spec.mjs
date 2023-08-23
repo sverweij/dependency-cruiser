@@ -1,9 +1,9 @@
-import { deepStrictEqual } from "node:assert";
+import { deepEqual } from "node:assert/strict";
 import { normalizeFormatOptions } from "../../../src/main/options/normalize.mjs";
 
 describe("[U] main/options/normalize - format options", () => {
   it("makes focus strings into an object", () => {
-    deepStrictEqual(
+    deepEqual(
       normalizeFormatOptions({
         focus: "42",
       }).focus,
@@ -14,7 +14,7 @@ describe("[U] main/options/normalize - format options", () => {
   });
 
   it("makes focus strings into an object - with addition of focus depth if it's there", () => {
-    deepStrictEqual(
+    deepEqual(
       normalizeFormatOptions({
         focus: "42",
         focusDepth: 10,
@@ -27,7 +27,7 @@ describe("[U] main/options/normalize - format options", () => {
   });
 
   it("ignores focus depth when there's not also a focus attribute", () => {
-    deepStrictEqual(
+    deepEqual(
       normalizeFormatOptions({
         focusDepth: 10,
       }),
@@ -36,7 +36,7 @@ describe("[U] main/options/normalize - format options", () => {
   });
 
   it("makes exclude arrays into an object with a string", () => {
-    deepStrictEqual(
+    deepEqual(
       normalizeFormatOptions({
         exclude: ["^aap", "^noot", "mies$"],
       }).exclude,
@@ -47,7 +47,7 @@ describe("[U] main/options/normalize - format options", () => {
   });
 
   it("makes exclude object with an array for path into an exclude path with a string for path", () => {
-    deepStrictEqual(
+    deepEqual(
       normalizeFormatOptions({
         exclude: { path: ["^aap", "^noot", "mies$"] },
       }).exclude,
@@ -58,19 +58,19 @@ describe("[U] main/options/normalize - format options", () => {
   });
 
   it("collapse: normalizes a single digit for collapse to a folder depth regex", () => {
-    deepStrictEqual(normalizeFormatOptions({ collapse: "2" }, ["collapse"]), {
+    deepEqual(normalizeFormatOptions({ collapse: "2" }, ["collapse"]), {
       collapse: "node_modules/[^/]+|^[^/]+/[^/]+/",
     });
   });
 
   it("collapse: leaves non-single digits alone", () => {
-    deepStrictEqual(normalizeFormatOptions({ collapse: "22" }, ["collapse"]), {
+    deepEqual(normalizeFormatOptions({ collapse: "22" }, ["collapse"]), {
       collapse: "22",
     });
   });
 
   it("collapse: leaves a normal string/ regex like alone", () => {
-    deepStrictEqual(
+    deepEqual(
       normalizeFormatOptions({ collapse: "^packages/[^/]+" }, ["collapse"]),
       {
         collapse: "^packages/[^/]+",

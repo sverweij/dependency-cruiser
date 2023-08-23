@@ -1,4 +1,4 @@
-import { strictEqual } from "node:assert";
+import { equal } from "node:assert/strict";
 import { readFileSync } from "node:fs";
 import { join } from "node:path";
 import { fileURLToPath } from "node:url";
@@ -72,82 +72,73 @@ const focusMeModulesFixture = readFileSync(
 
 describe("[I] report/dot/module-level reporter", () => {
   it("renders a dot - modules in the root don't come in a cluster", () => {
-    strictEqual(
-      render(clusterLess, { theme: bareTheme }).output,
-      clusterLessFixture,
-    );
+    equal(render(clusterLess, { theme: bareTheme }).output, clusterLessFixture);
   });
 
   it("renders a dot - unresolvable in a sub folder (either existing or not) get labeled as unresolvable", () => {
-    strictEqual(
+    equal(
       render(unresolvableDeps, { theme: bareTheme }).output,
       unresolvableFixture,
     );
   });
 
   it("renders a dot - bare theme matchesDoNotFollow NOT rendered as folders", () => {
-    strictEqual(
+    equal(
       render(doNotFollowDeps, { theme: bareTheme }).output,
       doNotFollowFixture,
     );
   });
 
   it("renders a dot - default color theme matchesDoNotFollow rendered as folders", () => {
-    strictEqual(render(doNotFollowDeps).output, doNotFollowFixtureDefaultTheme);
+    equal(render(doNotFollowDeps).output, doNotFollowFixtureDefaultTheme);
   });
 
   it("renders a dot - bare theme renders modules with module level transgression with NO severity deduced colors", () => {
-    strictEqual(
-      render(orphanDeps, { theme: bareTheme }).output,
-      orphanFixtureBoring,
-    );
+    equal(render(orphanDeps, { theme: bareTheme }).output, orphanFixtureBoring);
   });
 
   it("renders a dot - default theme renders modules with module level transgression with severity deduced colors", () => {
-    strictEqual(render(orphanDeps).output, orphanFixture);
+    equal(render(orphanDeps).output, orphanFixture);
   });
 
   it("renders a dot - uri prefix get concatenated", () => {
-    strictEqual(
-      render(prefixUri, { theme: bareTheme }).output,
-      prefixUriFixture,
-    );
+    equal(render(prefixUri, { theme: bareTheme }).output, prefixUriFixture);
   });
 
   it("renders a dot - non-uri prefixes get path.posix.joined", () => {
-    strictEqual(
+    equal(
       render(prefixNonUri, { theme: bareTheme }).output,
       prefixNonUriFixture,
     );
   });
 
   it("richly colors modules when passed the default theme", () => {
-    strictEqual(
+    equal(
       render(bunchOfModules, { theme: defaultTheme }).output,
       defaultColorFixture,
     );
   });
 
   it("richly colors modules when passed no theme", () => {
-    strictEqual(render(bunchOfModules).output, defaultColorFixture);
+    equal(render(bunchOfModules).output, defaultColorFixture);
   });
 
   it("colors boringly when passed a bare theme", () => {
-    strictEqual(
+    equal(
       render(bunchOfModules, { theme: bareTheme }).output,
       bareColorFixture,
     );
   });
 
   it("Also renders on module level when the reporter granularity isn't specified", () => {
-    strictEqual(
+    equal(
       defaultRender(bunchOfModules, { theme: bareTheme }).output,
       bareColorFixture,
     );
   });
 
   it("applies filter when passed", () => {
-    strictEqual(
+    equal(
       render(focusMeModules, { theme: bareTheme }).output,
       focusMeModulesFixture,
     );

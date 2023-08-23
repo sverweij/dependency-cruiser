@@ -1,28 +1,28 @@
-import { deepStrictEqual, ok, strictEqual } from "node:assert";
+import { deepEqual, ok, equal } from "node:assert/strict";
 import { normalizeCruiseOptions } from "../../../src/main/options/normalize.mjs";
 
 describe("[U] main/options/normalize - cruise options", () => {
   it("ensures maxDepth is an int when passed an int", () => {
-    strictEqual(normalizeCruiseOptions({ maxDepth: 42 }).maxDepth, 42);
+    equal(normalizeCruiseOptions({ maxDepth: 42 }).maxDepth, 42);
   });
 
   it("ensures maxDepth is an int when passed a string", () => {
-    strictEqual(normalizeCruiseOptions({ maxDepth: "42" }).maxDepth, 42);
+    equal(normalizeCruiseOptions({ maxDepth: "42" }).maxDepth, 42);
   });
 
   it("makes doNotFollow strings into an object", () => {
-    deepStrictEqual(normalizeCruiseOptions({ doNotFollow: "42" }).doNotFollow, {
+    deepEqual(normalizeCruiseOptions({ doNotFollow: "42" }).doNotFollow, {
       path: "42",
     });
   });
   it("makes focus strings into an object", () => {
-    deepStrictEqual(normalizeCruiseOptions({ focus: "42" }).focus, {
+    deepEqual(normalizeCruiseOptions({ focus: "42" }).focus, {
       path: "42",
     });
   });
 
   it("makes exclude arrays into an object with a string", () => {
-    deepStrictEqual(
+    deepEqual(
       normalizeCruiseOptions({
         exclude: ["^aap", "^noot", "mies$"],
       }).exclude,
@@ -33,7 +33,7 @@ describe("[U] main/options/normalize - cruise options", () => {
   });
 
   it("makes exclude object with an array for path into an exclude path with a string for path", () => {
-    deepStrictEqual(
+    deepEqual(
       normalizeCruiseOptions({
         exclude: { path: ["^aap", "^noot", "mies$"] },
       }).exclude,
@@ -44,7 +44,7 @@ describe("[U] main/options/normalize - cruise options", () => {
   });
 
   it("de-arrayify's archi reporter options' collapsePattern", () => {
-    deepStrictEqual(
+    deepEqual(
       normalizeCruiseOptions({
         reporterOptions: {
           archi: {
@@ -61,7 +61,7 @@ describe("[U] main/options/normalize - cruise options", () => {
   });
 
   it("de-arrayify's dot reporter options' filters", () => {
-    deepStrictEqual(
+    deepEqual(
       normalizeCruiseOptions({
         reporterOptions: {
           dot: {
@@ -82,28 +82,28 @@ describe("[U] main/options/normalize - cruise options", () => {
   });
 
   it("collapse: normalizes a single digit for collapse to a folder depth regex", () => {
-    strictEqual(
+    equal(
       normalizeCruiseOptions({ collapse: 2 }, ["collapse"]).collapse,
       "node_modules/[^/]+|^[^/]+/[^/]+/",
     );
   });
 
   it("collapse: normalizes a single digit for collapse to a folder depth regex (digit in a string)", () => {
-    strictEqual(
+    equal(
       normalizeCruiseOptions({ collapse: "2" }).collapse,
       "node_modules/[^/]+|^[^/]+/[^/]+/",
     );
   });
 
   it("collapse: leaves non-single digits alone", () => {
-    strictEqual(
+    equal(
       normalizeCruiseOptions({ collapse: "22" }, ["collapse"]).collapse,
       "22",
     );
   });
 
   it("collapse: leaves a normal string/ regex like alone", () => {
-    strictEqual(
+    equal(
       normalizeCruiseOptions({ collapse: "^packages/[^/]+" }, ["collapse"])
         .collapse,
       "^packages/[^/]+",
@@ -111,7 +111,7 @@ describe("[U] main/options/normalize - cruise options", () => {
   });
 
   it("calculates metrics when the selected reporter specifies to show metrics", () => {
-    strictEqual(
+    equal(
       normalizeCruiseOptions({
         outputType: "dot",
         reporterOptions: { dot: { showMetrics: true } },
@@ -121,7 +121,7 @@ describe("[U] main/options/normalize - cruise options", () => {
   });
 
   it("calculates metrics when the selected reporter specifies to not show metrics", () => {
-    strictEqual(
+    equal(
       normalizeCruiseOptions({
         outputType: "dot",
         reporterOptions: { dot: { showMetrics: false } },
@@ -131,7 +131,7 @@ describe("[U] main/options/normalize - cruise options", () => {
   });
 
   it("calculates metrics when the selected reporter doesn't specify to show metrics", () => {
-    strictEqual(
+    equal(
       normalizeCruiseOptions({
         outputType: "dot",
       }).metrics,
@@ -142,13 +142,13 @@ describe("[U] main/options/normalize - cruise options", () => {
 
 describe("[I] normalize cache options", () => {
   it("normalizes cache options into an object - true", () => {
-    deepStrictEqual(normalizeCruiseOptions({ cache: true }).cache, {
+    deepEqual(normalizeCruiseOptions({ cache: true }).cache, {
       folder: "node_modules/.cache/dependency-cruiser",
       strategy: "metadata",
     });
   });
   it("normalizes cache options into an object - string", () => {
-    deepStrictEqual(
+    deepEqual(
       normalizeCruiseOptions({ cache: "some/alternate/folder" }).cache,
       {
         folder: "some/alternate/folder",
@@ -157,14 +157,14 @@ describe("[I] normalize cache options", () => {
     );
   });
   it("normalizes cache options into an object - empty object", () => {
-    deepStrictEqual(normalizeCruiseOptions({ cache: {} }).cache, {
+    deepEqual(normalizeCruiseOptions({ cache: {} }).cache, {
       folder: "node_modules/.cache/dependency-cruiser",
       strategy: "metadata",
     });
   });
 
   it("normalizes cache options into an object - partial object (strategy only)", () => {
-    deepStrictEqual(
+    deepEqual(
       normalizeCruiseOptions({ cache: { strategy: "content" } }).cache,
       {
         folder: "node_modules/.cache/dependency-cruiser",
@@ -173,7 +173,7 @@ describe("[I] normalize cache options", () => {
     );
   });
   it("normalizes cache options into an object - partial object (folder only)", () => {
-    deepStrictEqual(
+    deepEqual(
       normalizeCruiseOptions({
         cache: { folder: "some/alternate/folder" },
       }).cache,
@@ -184,7 +184,7 @@ describe("[I] normalize cache options", () => {
     );
   });
   it("passed false for cache - remains false (no object)", () => {
-    strictEqual(normalizeCruiseOptions({ cache: false }).cache, false);
+    equal(normalizeCruiseOptions({ cache: false }).cache, false);
   });
   it("passed no cache - no cache property", () => {
     ok(!normalizeCruiseOptions({}).hasOwnProperty("cache"));

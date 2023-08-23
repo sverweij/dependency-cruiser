@@ -1,4 +1,4 @@
-import { deepStrictEqual, match, strictEqual } from "node:assert";
+import { deepEqual, match, equal } from "node:assert/strict";
 import { join } from "node:path";
 import { fileURLToPath } from "node:url";
 import loadResolveConfig from "../../src/config-utl/extract-webpack-resolve-config.mjs";
@@ -23,7 +23,7 @@ describe("[I] config-utl/extract-webpack-resolve-config - non-native formats", (
     } catch (_pError) {
       lThrown = true;
     }
-    strictEqual(lThrown, true);
+    equal(lThrown, true);
   });
 
   it("throws an error with suggested modules when there's a known loader for the extension, but it isn't installed (livescript)", async () => {
@@ -54,7 +54,7 @@ describe("[I] config-utl/extract-webpack-resolve-config - non-native formats", (
   });
 
   it("returns contents of the webpack config when the non-native extension _is_ registered", async () => {
-    deepStrictEqual(
+    deepEqual(
       await loadResolveConfig(
         join(__dirname, "__mocks__", "webpackconfig", "webpack.config.json5"),
       ),

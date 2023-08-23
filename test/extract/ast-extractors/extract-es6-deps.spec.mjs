@@ -1,4 +1,4 @@
-import { deepStrictEqual } from "node:assert";
+import { deepEqual } from "node:assert/strict";
 import extractES6Deps from "../../../src/extract/ast-extractors/extract-es6-deps.mjs";
 import { getASTFromSource } from "../../../src/extract/parse/to-javascript-ast.mjs";
 
@@ -13,7 +13,7 @@ describe("[U] ast-extractors/extract-ES6-deps", () => {
     let lDeps = [];
 
     extractES6("import('./dynamic').then(pModule => pModule.x);", lDeps);
-    deepStrictEqual(lDeps, [
+    deepEqual(lDeps, [
       {
         module: "./dynamic",
         moduleSystem: "es6",
@@ -27,7 +27,7 @@ describe("[U] ast-extractors/extract-ES6-deps", () => {
     let lDeps = [];
 
     extractES6("import(`./dynamic`).then(pModule => pModule.x);", lDeps);
-    deepStrictEqual(lDeps, [
+    deepEqual(lDeps, [
       {
         module: "./dynamic",
         moduleSystem: "es6",
@@ -45,7 +45,7 @@ describe("[U] ast-extractors/extract-ES6-deps", () => {
       "import(`./dynamic/${enhop}`).then(pModule => pModule.x);",
       lDeps,
     );
-    deepStrictEqual(lDeps, []);
+    deepEqual(lDeps, []);
   });
 
   it("yield a dynamic import yields an import", () => {
@@ -55,7 +55,7 @@ describe("[U] ast-extractors/extract-ES6-deps", () => {
         }`;
 
     extractES6(lYieldImport, lDeps);
-    deepStrictEqual(lDeps, [
+    deepEqual(lDeps, [
       {
         module: "http",
         moduleSystem: "es6",
@@ -69,7 +69,7 @@ describe("[U] ast-extractors/extract-ES6-deps", () => {
     let lDeps = [];
 
     extractES6("import(42).then(pModule => pModule.x);", lDeps);
-    deepStrictEqual(lDeps, []);
+    deepEqual(lDeps, []);
   });
 
   it("dynamic imports of a function call doesn't yield an import", () => {
@@ -82,7 +82,7 @@ describe("[U] ast-extractors/extract-ES6-deps", () => {
         `,
       lDeps,
     );
-    deepStrictEqual(lDeps, []);
+    deepEqual(lDeps, []);
   });
 
   it("doesn't get confused about import keywords in jsx components", () => {
@@ -98,7 +98,7 @@ describe("[U] ast-extractors/extract-ES6-deps", () => {
     }`;
 
     extractES6(lInput, lDependencies, ".jsx");
-    deepStrictEqual(lDependencies, [
+    deepEqual(lDependencies, [
       {
         module: "react",
         moduleSystem: "es6",
@@ -128,7 +128,7 @@ export class ReplicateIssueComponent extends React.Component {
   );
 }`;
     extractES6(lInput, lDependencies, ".jsx");
-    deepStrictEqual(lDependencies, [
+    deepEqual(lDependencies, [
       {
         module: "react",
         moduleSystem: "es6",

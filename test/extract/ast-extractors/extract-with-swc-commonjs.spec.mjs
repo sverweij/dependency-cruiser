@@ -1,9 +1,9 @@
-import { deepStrictEqual } from "node:assert";
+import { deepEqual } from "node:assert/strict";
 import extractWithSwc from "./extract-with-swc.utl.mjs";
 
 describe("[U] ast-extractors/extract-swc - regular commonjs require", () => {
   it("extracts require of a module that uses an export-equals'", () => {
-    deepStrictEqual(
+    deepEqual(
       extractWithSwc(
         "import thing = require('./thing-that-uses-export-equals');",
       ),
@@ -19,7 +19,7 @@ describe("[U] ast-extractors/extract-swc - regular commonjs require", () => {
   });
 
   it("extracts regular require as a const, let or var", () => {
-    deepStrictEqual(
+    deepEqual(
       extractWithSwc(
         `const lala1 = require('legit-one');
                  let lala2 = require('legit-two');
@@ -49,7 +49,7 @@ describe("[U] ast-extractors/extract-swc - regular commonjs require", () => {
   });
 
   it("extracts regular requires that are not on the top level in the AST", () => {
-    deepStrictEqual(
+    deepEqual(
       extractWithSwc(
         `function f(x) {
                     if(x > 0) {
@@ -88,7 +88,7 @@ describe("[U] ast-extractors/extract-swc - regular commonjs require", () => {
   });
 
   it("extracts regular require with a template string without placeholders", () => {
-    deepStrictEqual(extractWithSwc("const lala = require(`thunderscore`)"), [
+    deepEqual(extractWithSwc("const lala = require(`thunderscore`)"), [
       {
         module: "thunderscore",
         moduleSystem: "cjs",
@@ -99,15 +99,15 @@ describe("[U] ast-extractors/extract-swc - regular commonjs require", () => {
   });
 
   it("ignores regular require without parameters", () => {
-    deepStrictEqual(extractWithSwc("const lala = require()"), []);
+    deepEqual(extractWithSwc("const lala = require()"), []);
   });
 
   it("ignores regular require with a non-string argument", () => {
-    deepStrictEqual(extractWithSwc("const lala = require(666)"), []);
+    deepEqual(extractWithSwc("const lala = require(666)"), []);
   });
 
   it("ignores regular require with a template literal with placeholders", () => {
-    deepStrictEqual(
+    deepEqual(
       // eslint-disable-next-line no-template-curly-in-string
       extractWithSwc("const lala = require(`shwoooop/${blabla}`)"),
       [],
@@ -115,6 +115,6 @@ describe("[U] ast-extractors/extract-swc - regular commonjs require", () => {
   });
 
   it("ignores regular require with a function for a parameter", () => {
-    deepStrictEqual(extractWithSwc("const lala = require(helvete())"), []);
+    deepEqual(extractWithSwc("const lala = require(helvete())"), []);
   });
 });

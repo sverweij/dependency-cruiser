@@ -1,4 +1,4 @@
-import { deepStrictEqual } from "node:assert";
+import { deepEqual } from "node:assert/strict";
 import { join } from "node:path";
 import { unlinkSync } from "node:fs";
 import { fileURLToPath } from "node:url";
@@ -52,7 +52,7 @@ describe("[I] extract/getDependencies - AMD - with bangs", () => {
       lOptions,
     );
 
-    deepStrictEqual(
+    deepEqual(
       getDependencies(
         "test/extract/__mocks__/amd-bangs/root_one.js",
         lOptions,
@@ -69,7 +69,7 @@ describe("[I] extract/getDependencies - AMD - with bangs", () => {
       lOptions,
     );
 
-    deepStrictEqual(
+    deepEqual(
       getDependencies(
         "test/extract/__mocks__/amd-bangs/simplified-commonjs-wrapper.js",
         lOptions,

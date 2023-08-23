@@ -1,14 +1,14 @@
-import { deepStrictEqual, strictEqual } from "node:assert";
+import { deepEqual, equal } from "node:assert/strict";
 
 import deriveModuleMetrics from "../../../../src/enrich/derive/metrics/index.mjs";
 
 describe("[U] enrich/derive/metrics/module - module stability metrics derivation", () => {
   it("doesn't do anything when we're not asking for metrics (metrics nor outputType)", () => {
-    deepStrictEqual(deriveModuleMetrics([], {}), []);
+    deepEqual(deriveModuleMetrics([], {}), []);
   });
 
   it("emits an instability metric when we're asking for metrics", () => {
-    deepStrictEqual(
+    deepEqual(
       deriveModuleMetrics(
         [
           {
@@ -31,7 +31,7 @@ describe("[U] enrich/derive/metrics/module - module stability metrics derivation
   });
 
   it("emits an instability metric when we're asking for outputType === metrics", () => {
-    deepStrictEqual(
+    deepEqual(
       deriveModuleMetrics(
         [
           {
@@ -54,7 +54,7 @@ describe("[U] enrich/derive/metrics/module - module stability metrics derivation
   });
 
   it("emits an instability metric when we're asking for metrics (only dependents)", () => {
-    deepStrictEqual(
+    deepEqual(
       deriveModuleMetrics(
         [
           {
@@ -77,7 +77,7 @@ describe("[U] enrich/derive/metrics/module - module stability metrics derivation
   });
 
   it("emits an instability metric when we're asking for metrics (only dependencies)", () => {
-    strictEqual(
+    equal(
       deriveModuleMetrics(
         [
           {
@@ -93,7 +93,7 @@ describe("[U] enrich/derive/metrics/module - module stability metrics derivation
   });
 
   it("emits an instability metric when we're asking for metrics (dependents as well as dependencies)", () => {
-    strictEqual(
+    equal(
       deriveModuleMetrics(
         [
           {
@@ -110,7 +110,7 @@ describe("[U] enrich/derive/metrics/module - module stability metrics derivation
   });
 
   it("doesn't emit an instability metric when we're asking for metrics on something we don't want to calc them on", () => {
-    deepStrictEqual(
+    deepEqual(
       deriveModuleMetrics(
         [
           {

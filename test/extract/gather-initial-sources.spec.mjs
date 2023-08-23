@@ -1,4 +1,4 @@
-import { deepStrictEqual, strictEqual } from "node:assert";
+import { deepEqual, equal } from "node:assert/strict";
 import { lstatSync } from "node:fs";
 import gatherInitialSources from "../../src/extract/gather-initial-sources.mjs";
 import p2p from "../../src/utl/path-to-posix.mjs";
@@ -14,7 +14,7 @@ const EMPTYOPTIONS = normalizeCruiseOptions({});
 
 describe("[I] extract/gatherInitialSources", () => {
   it("one file stays one file", () => {
-    deepStrictEqual(
+    deepEqual(
       gatherInitialSources(
         ["test/extract/__mocks__/cjs/root_one.js"],
         EMPTYOPTIONS,
@@ -24,7 +24,7 @@ describe("[I] extract/gatherInitialSources", () => {
   });
 
   it("two files from different folders", () => {
-    deepStrictEqual(
+    deepEqual(
       gatherInitialSources(
         [
           "test/extract/__mocks__/cjs/root_one.js",
@@ -40,7 +40,7 @@ describe("[I] extract/gatherInitialSources", () => {
   });
 
   it("expands the scannable files in a folder", () => {
-    deepStrictEqual(
+    deepEqual(
       gatherInitialSources(["test/extract/__mocks__/ts"], EMPTYOPTIONS).map(
         pathToPosix,
       ),
@@ -55,7 +55,7 @@ describe("[I] extract/gatherInitialSources", () => {
   });
 
   it("expands and concats the scannable files in two folders", () => {
-    deepStrictEqual(
+    deepEqual(
       gatherInitialSources(
         ["test/extract/__mocks__/ts", "test/extract/__mocks__/coffee"],
         EMPTYOPTIONS,
@@ -76,7 +76,7 @@ describe("[I] extract/gatherInitialSources", () => {
   });
 
   it("expands and concats the scannable files in two folders + a separate file", () => {
-    deepStrictEqual(
+    deepEqual(
       gatherInitialSources(
         [
           "test/extract/__mocks__/ts",
@@ -102,7 +102,7 @@ describe("[I] extract/gatherInitialSources", () => {
   });
 
   it("filters the 'excluded' pattern from the collection", () => {
-    deepStrictEqual(
+    deepEqual(
       gatherInitialSources(
         [
           "test/extract/__mocks__/ts",
@@ -124,7 +124,7 @@ describe("[I] extract/gatherInitialSources", () => {
   });
 
   it("filters the 'excluded' pattern from the collection - regexp", () => {
-    deepStrictEqual(
+    deepEqual(
       gatherInitialSources(["test/extract/__mocks__/ts"], {
         exclude: { path: "^[a-z]+$" },
       }).map(pathToPosix),
@@ -139,7 +139,7 @@ describe("[I] extract/gatherInitialSources", () => {
   });
 
   it("expands glob patterns (**/*.js)", () => {
-    deepStrictEqual(
+    deepEqual(
       gatherInitialSources(
         ["test/extract/__mocks__/gather-globbing/packages/**/*.js"],
         EMPTYOPTIONS,
@@ -161,7 +161,7 @@ describe("[I] extract/gatherInitialSources", () => {
   });
 
   it("expands glob patterns (**/src/**/*.js)", () => {
-    deepStrictEqual(
+    deepEqual(
       gatherInitialSources(
         ["test/extract/__mocks__/gather-globbing/**/src/**/*.js"],
         EMPTYOPTIONS,
@@ -178,7 +178,7 @@ describe("[I] extract/gatherInitialSources", () => {
   });
 
   it("filters out the stuff in the exclude pattern", () => {
-    deepStrictEqual(
+    deepEqual(
       gatherInitialSources(["test/extract/__mocks__/gather-globbing/**/src"], {
         exclude: { path: "/deep/ly/" },
       }).map(pathToPosix),
@@ -196,7 +196,7 @@ describe("[I] extract/gatherInitialSources", () => {
   });
 
   it("filters out the stuff in the doNotFollow pattern", () => {
-    deepStrictEqual(
+    deepEqual(
       gatherInitialSources(["test/extract/__mocks__/gather-globbing/**/src"], {
         doNotFollow: { path: "/deep/ly/" },
       }).map(pathToPosix),
@@ -214,7 +214,7 @@ describe("[I] extract/gatherInitialSources", () => {
   });
 
   it("only gathers stuff in the includeOnly pattern", () => {
-    deepStrictEqual(
+    deepEqual(
       gatherInitialSources(
         ["test/extract/__mocks__/gather-globbing/packages"],
         {
@@ -232,7 +232,7 @@ describe("[I] extract/gatherInitialSources", () => {
   });
 
   it("also gathers files with extensions in the extra extensions to scan array", () => {
-    deepStrictEqual(
+    deepEqual(
       gatherInitialSources(["test/extract/__mocks__/extra-extensions"], {
         extraExtensionsToScan: [".ratm", ".yolo"],
       }).map(pathToPosix),
@@ -246,7 +246,7 @@ describe("[I] extract/gatherInitialSources", () => {
   });
 
   it("heeds the baseDir", () => {
-    deepStrictEqual(
+    deepEqual(
       gatherInitialSources(
         ["**/src/**/*.js"],
         normalizeCruiseOptions({
@@ -265,13 +265,13 @@ describe("[I] extract/gatherInitialSources", () => {
   });
 
   it("filters invalid symlinks", () => {
-    strictEqual(
+    equal(
       lstatSync(
         "./test/extract/__mocks__/invalid-symlink/index.js",
       ).isSymbolicLink(),
       true,
     );
-    deepStrictEqual(
+    deepEqual(
       gatherInitialSources(["test/extract/__mocks__/invalid-symlink"]),
       [],
     );

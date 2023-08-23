@@ -1,4 +1,4 @@
-import { strictEqual } from "node:assert";
+import { equal } from "node:assert/strict";
 import { readFileSync } from "node:fs";
 import { join } from "node:path";
 import { createRequire } from "node:module";
@@ -27,7 +27,7 @@ const wrap = proxyquire.load(
 
 describe("[I] vue transpiler", () => {
   it("extracts the script content from a vue SFC", () => {
-    strictEqual(
+    equal(
       normalizeNewline(
         wrap.transpile(
           readFileSync(join(__dirname, "__mocks__/vue.vue"), "utf8"),
@@ -40,7 +40,7 @@ describe("[I] vue transpiler", () => {
   });
 
   it("returns the empty string from a vue SFC without a script part", () => {
-    strictEqual(
+    equal(
       normalizeNewline(
         wrap.transpile(
           readFileSync(join(__dirname, "__mocks__/vue-noscript.vue"), "utf8"),
@@ -51,7 +51,7 @@ describe("[I] vue transpiler", () => {
   });
 
   it("handles invalid vue (silently - for backwards compatibility with Vue 2)", () => {
-    strictEqual(
+    equal(
       normalizeNewline(
         wrap.transpile(
           readFileSync(join(__dirname, "__mocks__/vue-invalid.vue"), "utf8"),
@@ -62,7 +62,7 @@ describe("[I] vue transpiler", () => {
   });
 
   it("extracts the script setup content from a vue SFC", () => {
-    strictEqual(
+    equal(
       normalizeNewline(
         wrap.transpile(
           readFileSync(
@@ -81,7 +81,7 @@ describe("[I] vue transpiler", () => {
   });
 
   it("extracts the script setup content and script content from a vue SFC", () => {
-    strictEqual(
+    equal(
       normalizeNewline(
         wrap.transpile(
           readFileSync(

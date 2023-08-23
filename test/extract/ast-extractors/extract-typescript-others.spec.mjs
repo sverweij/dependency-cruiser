@@ -1,4 +1,4 @@
-import { deepStrictEqual } from "node:assert";
+import { deepEqual } from "node:assert/strict";
 import { readFileSync } from "node:fs";
 import { fileURLToPath } from "node:url";
 import extractTypescriptFromAST from "../../../src/extract/ast-extractors/extract-typescript-deps.mjs";
@@ -8,7 +8,7 @@ describe("[U] ast-extractors/extract-typescript - others", () => {
   // recognize union types - which made dependency-cruiser 4.27.1 choke
   // this ut ensures it won't regress
   it("doesn't barf on output from old compiler versions", () => {
-    deepStrictEqual(
+    deepEqual(
       extractTypescriptFromAST(
         JSON.parse(
           readFileSync(

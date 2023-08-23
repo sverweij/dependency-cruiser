@@ -1,4 +1,4 @@
-import { deepStrictEqual } from "node:assert";
+import { deepEqual } from "node:assert/strict";
 import summarizeFolders from "../../src/enrich/summarize/summarize-folders.mjs";
 
 const FIXTURE_WITHOUT_VIOLATIONS = [
@@ -187,75 +187,66 @@ const CYCLE_RULE_SET = {
 
 describe("[I] enrich/summarize/summarize-folders", () => {
   it("returns an empty array when presented with an empty array of folders", () => {
-    deepStrictEqual(summarizeFolders([], SDP_RULE_SET), []);
+    deepEqual(summarizeFolders([], SDP_RULE_SET), []);
   });
 
   it("returns an empty array when presented with an array of folders that have no violations on them", () => {
-    deepStrictEqual(
-      summarizeFolders(FIXTURE_WITHOUT_VIOLATIONS, SDP_RULE_SET),
-      [],
-    );
+    deepEqual(summarizeFolders(FIXTURE_WITHOUT_VIOLATIONS, SDP_RULE_SET), []);
   });
 
   it("returns a summary of the violations when presented with an array of folders with violations (SDP)", () => {
-    deepStrictEqual(
-      summarizeFolders(FIXTURE_WITH_SDP_VIOLATION, SDP_RULE_SET),
-      [
-        {
-          type: "instability",
-          from: "src/cli",
-          to: "src/main",
-          rule: {
-            name: "sdp-folder-level",
-            severity: "info",
+    deepEqual(summarizeFolders(FIXTURE_WITH_SDP_VIOLATION, SDP_RULE_SET), [
+      {
+        type: "instability",
+        from: "src/cli",
+        to: "src/main",
+        rule: {
+          name: "sdp-folder-level",
+          severity: "info",
+        },
+        metrics: {
+          from: {
+            instability: 0.6666666666666666,
           },
-          metrics: {
-            from: {
-              instability: 0.6666666666666666,
-            },
-            to: {
-              instability: 0.7894736842105263,
-            },
+          to: {
+            instability: 0.7894736842105263,
           },
         },
-        {
-          type: "folder",
-          from: "src/cli",
-          to: "src/main",
-          rule: {
-            name: "non-sdp-rule",
-            severity: "info",
-          },
+      },
+      {
+        type: "folder",
+        from: "src/cli",
+        to: "src/main",
+        rule: {
+          name: "non-sdp-rule",
+          severity: "info",
         },
-      ],
-    );
+      },
+    ]);
   });
 
   it("returns a summary of the violations when presented with an array of folders with violations (cycles)", () => {
-    deepStrictEqual(
-      summarizeFolders(FIXTURE_WITH_CYCLE_VIOLATION, CYCLE_RULE_SET),
-      [
-        {
-          type: "cycle",
-          from: "src",
-          to: "bin",
-          rule: {
-            name: "no-folder-cycles",
-            severity: "warn",
-          },
-          cycle: ["bin", "src"],
+    deepEqual(summarizeFolders(FIXTURE_WITH_CYCLE_VIOLATION, CYCLE_RULE_SET), [
+      {
+        type: "cycle",
+        from: "src",
+        to: "bin",
+        rule: {
+          name: "no-folder-cycles",
+          severity: "warn",
         },
-        {
-          type: "cycle",
-          from: "bin",
-          to: "src",
-          rule: {
-            name: "no-folder-cycles",
-            severity: "warn",
-          },
-          cycle: ["src", "bin"],
+        cycle: ["bin", "src"],
+      },
+      {
+        type: "cycle",
+        from: "bin",
+        to: "src",
+        rule: {
+          name: "no-folder-cycles",
+          severity: "warn",
         },
-      ],
-    );
+        cycle: ["src", "bin"],
+      },
+    ]);
   });
 });

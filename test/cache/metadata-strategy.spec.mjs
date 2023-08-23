@@ -1,4 +1,4 @@
-import { deepStrictEqual, strictEqual, match } from "node:assert";
+import { deepEqual, equal, match } from "node:assert/strict";
 import MetaDataStrategy from "../../src/cache/metadata-strategy.mjs";
 
 const INTERESTING_EXTENSIONS = new Set([".aap", ".noot", ".mies"]);
@@ -51,7 +51,7 @@ describe("[U] cache/metadata-strategy - getRevisionData", () => {
         name: "file-does-not-exist.aap",
       },
     ];
-    const lLstrictEqualed = {
+    const lLequaled = {
       SHA1: DUMMY_SHA,
       changes: [
         {
@@ -73,7 +73,7 @@ describe("[U] cache/metadata-strategy - getRevisionData", () => {
         diffListFn: () => lInputChanges,
       },
     );
-    deepStrictEqual(lFound, lLstrictEqualed);
+    deepEqual(lFound, lLequaled);
   });
 
   it("if a listed change does exist on disk shasum is calculated", async () => {
@@ -84,7 +84,7 @@ describe("[U] cache/metadata-strategy - getRevisionData", () => {
         name: "test/cache/__mocks__/calculate-shasum-of-this.aap",
       },
     ];
-    const lLstrictEqualed = {
+    const lLequaled = {
       SHA1: DUMMY_SHA,
       changes: [
         {
@@ -105,11 +105,11 @@ describe("[U] cache/metadata-strategy - getRevisionData", () => {
         diffListFn: () => lInputChanges,
       },
     );
-    deepStrictEqual(lFound, lLstrictEqualed);
+    deepEqual(lFound, lLequaled);
   });
 
   it("if there's no changes the change set contains the passed sha & an empty array", async () => {
-    const lLstrictEqualed = {
+    const lLequaled = {
       SHA1: DUMMY_SHA,
       changes: [],
     };
@@ -124,7 +124,7 @@ describe("[U] cache/metadata-strategy - getRevisionData", () => {
         diffListFn: () => [],
       },
     );
-    deepStrictEqual(lFound, lLstrictEqualed);
+    deepEqual(lFound, lLequaled);
   });
 
   it("returns only the extensions passed", async () => {
@@ -169,7 +169,7 @@ describe("[U] cache/metadata-strategy - getRevisionData", () => {
         },
       ],
     };
-    const lstrictEqualed = await new MetaDataStrategy().getRevisionData(
+    const lequaled = await new MetaDataStrategy().getRevisionData(
       null,
       null,
       { exclude: {}, includeOnly: {} },
@@ -181,7 +181,7 @@ describe("[U] cache/metadata-strategy - getRevisionData", () => {
         checksumFn: dummyCheckSumFunction,
       },
     );
-    deepStrictEqual(lstrictEqualed, lFound);
+    deepEqual(lequaled, lFound);
   });
 
   it("returns only the changeTypes passed", async () => {
@@ -214,7 +214,7 @@ describe("[U] cache/metadata-strategy - getRevisionData", () => {
         name: "untracked-hence-ignored.aap",
       },
     ];
-    const lLstrictEqualed = {
+    const lLequaled = {
       SHA1: DUMMY_SHA,
       changes: [
         {
@@ -248,7 +248,7 @@ describe("[U] cache/metadata-strategy - getRevisionData", () => {
       },
     );
 
-    deepStrictEqual(lLstrictEqualed, lFound);
+    deepEqual(lLequaled, lFound);
   });
 
   it("by default only returns a subset of change types", async () => {
@@ -300,7 +300,7 @@ describe("[U] cache/metadata-strategy - getRevisionData", () => {
         name: "ignored-hence-ignored.aap",
       },
     ];
-    const lLstrictEqualed = {
+    const lLequaled = {
       SHA1: DUMMY_SHA,
       changes: [
         {
@@ -354,7 +354,7 @@ describe("[U] cache/metadata-strategy - getRevisionData", () => {
       },
     );
 
-    deepStrictEqual(lLstrictEqualed, lFound);
+    deepEqual(lLequaled, lFound);
   });
 });
 
@@ -379,11 +379,11 @@ describe("[U] cache/metadata-strategy - revisionDataEqual", () => {
   ];
 
   it("returns false when revision data objects are don't exist", () => {
-    strictEqual(new MetaDataStrategy().revisionDataEqual(null, null), false);
+    equal(new MetaDataStrategy().revisionDataEqual(null, null), false);
   });
 
   it("returns false when old revision data object doesn't exist", () => {
-    strictEqual(
+    equal(
       new MetaDataStrategy().revisionDataEqual(null, {
         SHA1: "some-sha",
         changes: [],
@@ -393,7 +393,7 @@ describe("[U] cache/metadata-strategy - revisionDataEqual", () => {
   });
 
   it("returns false when new revision data object doesn't exist", () => {
-    strictEqual(
+    equal(
       new MetaDataStrategy().revisionDataEqual(
         { SHA1: "some-sha", changes: [] },
         null,
@@ -403,7 +403,7 @@ describe("[U] cache/metadata-strategy - revisionDataEqual", () => {
   });
 
   it("returns false when sha-sums aren't equal", () => {
-    strictEqual(
+    equal(
       new MetaDataStrategy().revisionDataEqual(
         { SHA1: "some-sha", changes: [] },
         { SHA1: "some-other-sha", changes: [] },
@@ -413,7 +413,7 @@ describe("[U] cache/metadata-strategy - revisionDataEqual", () => {
   });
 
   it("returns false when sha-sums are equal, but changes are not", () => {
-    strictEqual(
+    equal(
       new MetaDataStrategy().revisionDataEqual(
         { SHA1: "some-sha", changes: [] },
         { SHA1: "some-sha", changes: lChanges },
@@ -423,7 +423,7 @@ describe("[U] cache/metadata-strategy - revisionDataEqual", () => {
   });
 
   it("returns true when sha-sums are equal, and changes are as well", () => {
-    strictEqual(
+    equal(
       new MetaDataStrategy().revisionDataEqual(
         { SHA1: "some-sha", changes: lChanges },
         { SHA1: "some-sha", changes: lChanges },
@@ -433,7 +433,7 @@ describe("[U] cache/metadata-strategy - revisionDataEqual", () => {
   });
 
   it("returns true when sha-sums are equal, and changes are as well (even when neither contain changes)", () => {
-    strictEqual(
+    equal(
       new MetaDataStrategy().revisionDataEqual(
         { SHA1: "some-sha", changes: [] },
         { SHA1: "some-sha", changes: [] },

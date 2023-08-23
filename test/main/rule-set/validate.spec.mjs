@@ -1,5 +1,5 @@
 import { readFileSync } from "node:fs";
-import { deepStrictEqual, throws } from "node:assert";
+import { deepEqual, throws } from "node:assert/strict";
 import validate from "../../../src/main/rule-set/validate.mjs";
 
 function shouldBarfWithMessage(pRulesFile, pMessage) {
@@ -14,7 +14,7 @@ function shouldBarfWithMessage(pRulesFile, pMessage) {
 function shouldBeOK(pRulesFile) {
   const lRulesObject = JSON.parse(readFileSync(pRulesFile, "utf8"));
 
-  deepStrictEqual(validate(lRulesObject), lRulesObject);
+  deepEqual(validate(lRulesObject), lRulesObject);
 }
 
 describe("[I] main/rule-set/validate - regular", () => {

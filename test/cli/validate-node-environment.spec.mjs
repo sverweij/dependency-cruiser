@@ -1,4 +1,4 @@
-import { doesNotThrow, throws } from "node:assert";
+import { doesNotThrow, throws } from "node:assert/strict";
 import validateNodeEnvironment from "../../src/cli/validate-node-environment.mjs";
 
 describe("[U] cli/validateNodeEnv", () => {

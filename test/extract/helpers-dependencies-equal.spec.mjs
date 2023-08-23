@@ -1,13 +1,13 @@
-import { strictEqual } from "node:assert";
+import { equal } from "node:assert/strict";
 import { dependenciesEqual } from "../../src/extract/helpers.mjs";
 
 describe("[U] extract/helpers - dependencyEqual", () => {
   it("two empty dependencies are equal", () => {
-    strictEqual(dependenciesEqual({})({}), true);
+    equal(dependenciesEqual({})({}), true);
   });
 
   it("same module name, same module system => equal", () => {
-    strictEqual(
+    equal(
       dependenciesEqual({ module: "foo", moduleSystem: "es6" })({
         module: "foo",
         moduleSystem: "es6",
@@ -17,7 +17,7 @@ describe("[U] extract/helpers - dependencyEqual", () => {
   });
 
   it("same module name, same module system, dynamicmoduleness, exotic require => equal", () => {
-    strictEqual(
+    equal(
       dependenciesEqual({
         module: "foo",
         moduleSystem: "cjs",
@@ -34,7 +34,7 @@ describe("[U] extract/helpers - dependencyEqual", () => {
   });
 
   it("same module name, different module system => eq", () => {
-    strictEqual(
+    equal(
       dependenciesEqual({
         module: "foo",
         moduleSystem: "es6",
@@ -47,7 +47,7 @@ describe("[U] extract/helpers - dependencyEqual", () => {
   });
 
   it("different module name, same module system => neq", () => {
-    strictEqual(
+    equal(
       dependenciesEqual({
         module: "foo",
         moduleSystem: "es6",
@@ -60,7 +60,7 @@ describe("[U] extract/helpers - dependencyEqual", () => {
   });
 
   it("same module name, same module system, not dynamically required => neq", () => {
-    strictEqual(
+    equal(
       dependenciesEqual({
         module: "foo",
         moduleSystem: "es6",
@@ -74,7 +74,7 @@ describe("[U] extract/helpers - dependencyEqual", () => {
   });
 
   it("same module name, same module system, not different exotic require => neq", () => {
-    strictEqual(
+    equal(
       dependenciesEqual({
         module: "foo",
         moduleSystem: "es6",

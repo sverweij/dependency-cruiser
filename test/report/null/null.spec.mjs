@@ -1,4 +1,4 @@
-import { deepStrictEqual } from "node:assert";
+import { deepEqual } from "node:assert/strict";
 import nullReporter from "../../../src/report/null.mjs";
 
 const gSmallOKResult = {
@@ -72,14 +72,14 @@ const gSmallNOKResult = {
 describe("[I] report/null", () => {
   it("happy day no errors", () => {
     const lResult = nullReporter(gSmallOKResult);
-    deepStrictEqual(lResult, {
+    deepEqual(lResult, {
       output: "",
       exitCode: 0,
     });
   });
   it("happy day some errors", () => {
     const lResult = nullReporter(gSmallNOKResult);
-    deepStrictEqual(lResult, {
+    deepEqual(lResult, {
       output: "",
       exitCode: 3,
     });

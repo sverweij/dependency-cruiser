@@ -1,4 +1,4 @@
-import { deepStrictEqual } from "node:assert";
+import { deepEqual } from "node:assert/strict";
 import Ajv from "ajv";
 import cruise from "../../src/main/cruise.mjs";
 import cruiseResultSchema from "../../src/schema/cruise-result.schema.mjs";
@@ -38,7 +38,7 @@ describe("[E] main.cruise - explicitly type only imports", () => {
       { bustTheCache: true, resolveLicenses: false },
     );
 
-    deepStrictEqual(lResult.output, output);
+    deepEqual(lResult.output, output);
     ajv.validate(cruiseResultSchema, lResult.output);
   });
 
@@ -65,7 +65,7 @@ describe("[E] main.cruise - explicitly type only imports", () => {
       { bustTheCache: true, resolveLicenses: false },
     );
 
-    deepStrictEqual(lResult.output, outputWithRules);
+    deepEqual(lResult.output, outputWithRules);
     ajv.validate(cruiseResultSchema, lResult.output);
   });
 });

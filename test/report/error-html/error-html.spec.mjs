@@ -1,4 +1,4 @@
-import { match, strictEqual, doesNotMatch } from "node:assert";
+import { match, equal, doesNotMatch } from "node:assert/strict";
 import errorHTML from "../../../src/report/error-html/index.mjs";
 import everythingFineResult from "./__mocks__/everything-fine.mjs";
 import validationMoreThanOnce from "./__mocks__/violation-more-than-once.mjs";
@@ -14,7 +14,7 @@ describe("[I] report/error-html", () => {
 
     match(lResult.output, new RegExp(lOkeliDokelyKey));
     match(lResult.output, new RegExp(lOkeliDokelyHeader));
-    strictEqual(lResult.exitCode, 0);
+    equal(lResult.exitCode, 0);
   });
 
   it("report with errors", () => {
@@ -34,7 +34,7 @@ describe("[I] report/error-html", () => {
       lResult.output,
       /<a href="https:\/\/github.com\/sverweij\/dependency-cruiser\/blob\/develop\/src\/cli\/compileConfig\/index.js">/,
     );
-    strictEqual(lResult.exitCode, 0);
+    equal(lResult.exitCode, 0);
   });
 
   it("report with violations and ignored violations", () => {
@@ -57,7 +57,7 @@ describe("[I] report/error-html", () => {
       lResult.output,
       /<a href="https:\/\/github.com\/sverweij\/dependency-cruiser\/blob\/develop\/src\/cli\/compileConfig\/index.js">/,
     );
-    strictEqual(lResult.exitCode, 0);
+    equal(lResult.exitCode, 0);
   });
 
   it("report nicely on orphans, cycles and metric rules", () => {

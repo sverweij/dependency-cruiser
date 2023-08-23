@@ -1,4 +1,4 @@
-import { ok, strictEqual } from "node:assert";
+import { ok, equal } from "node:assert/strict";
 import { join } from "node:path";
 import { fileURLToPath } from "node:url";
 import { normalizeCruiseOptions } from "../../../src/main/options/normalize.mjs";
@@ -20,16 +20,13 @@ describe("[I] main/resolve-options/normalize", () => {
       normalizeCruiseOptions({}),
     );
 
-    strictEqual(
-      Object.keys(lNormalizedOptions).length,
-      lDefaultNoOfResolveOptions,
-    );
-    strictEqual(lNormalizedOptions.symlinks, false);
-    strictEqual(lNormalizedOptions.tsConfig, null);
-    strictEqual(lNormalizedOptions.combinedDependencies, false);
+    equal(Object.keys(lNormalizedOptions).length, lDefaultNoOfResolveOptions);
+    equal(lNormalizedOptions.symlinks, false);
+    equal(lNormalizedOptions.tsConfig, null);
+    equal(lNormalizedOptions.combinedDependencies, false);
     ok(lNormalizedOptions.hasOwnProperty("extensions"));
     ok(lNormalizedOptions.hasOwnProperty("fileSystem"));
-    strictEqual(lNormalizedOptions.useSyncFileSystemCalls, true);
+    equal(lNormalizedOptions.useSyncFileSystemCalls, true);
   });
 
   it("does not add the typescript paths plugin to the plugins if no tsConfig is specified", async () => {
@@ -41,17 +38,14 @@ describe("[I] main/resolve-options/normalize", () => {
       lTsconfigContents,
     );
 
-    strictEqual(
-      Object.keys(lNormalizedOptions).length,
-      lDefaultNoOfResolveOptions,
-    );
-    strictEqual(lNormalizedOptions.symlinks, false);
-    strictEqual(lNormalizedOptions.tsConfig, null);
-    strictEqual(lNormalizedOptions.combinedDependencies, false);
+    equal(Object.keys(lNormalizedOptions).length, lDefaultNoOfResolveOptions);
+    equal(lNormalizedOptions.symlinks, false);
+    equal(lNormalizedOptions.tsConfig, null);
+    equal(lNormalizedOptions.combinedDependencies, false);
     ok(lNormalizedOptions.hasOwnProperty("extensions"));
     ok(lNormalizedOptions.hasOwnProperty("fileSystem"));
-    strictEqual((lNormalizedOptions.plugins || []).length, 0);
-    strictEqual(lNormalizedOptions.useSyncFileSystemCalls, true);
+    equal((lNormalizedOptions.plugins || []).length, 0);
+    equal(lNormalizedOptions.useSyncFileSystemCalls, true);
   });
 
   it("adds the typescript paths plugin to the plugins if a tsConfig is specified, even without a baseUrl", async () => {
@@ -63,17 +57,17 @@ describe("[I] main/resolve-options/normalize", () => {
       lTsconfigContents,
     );
 
-    strictEqual(
+    equal(
       Object.keys(lNormalizedOptions).length,
       lDefaultNoOfResolveOptions + 1,
     );
-    strictEqual(lNormalizedOptions.symlinks, false);
-    strictEqual(lNormalizedOptions.tsConfig, TEST_TSCONFIG);
-    strictEqual(lNormalizedOptions.combinedDependencies, false);
+    equal(lNormalizedOptions.symlinks, false);
+    equal(lNormalizedOptions.tsConfig, TEST_TSCONFIG);
+    equal(lNormalizedOptions.combinedDependencies, false);
     ok(lNormalizedOptions.hasOwnProperty("extensions"));
     ok(lNormalizedOptions.hasOwnProperty("fileSystem"));
-    strictEqual((lNormalizedOptions.plugins || []).length, 1);
-    strictEqual(lNormalizedOptions.useSyncFileSystemCalls, true);
+    equal((lNormalizedOptions.plugins || []).length, 1);
+    equal(lNormalizedOptions.useSyncFileSystemCalls, true);
   });
 
   it("adds the typescript paths plugin to the plugins if a tsConfig is specified with a baseUrl and actual paths", async () => {
@@ -85,16 +79,16 @@ describe("[I] main/resolve-options/normalize", () => {
       lTsconfigContentsWithBaseURLAndPaths,
     );
 
-    strictEqual(
+    equal(
       Object.keys(lNormalizedOptions).length,
       lDefaultNoOfResolveOptions + 1,
     );
-    strictEqual(lNormalizedOptions.symlinks, false);
-    strictEqual(lNormalizedOptions.tsConfig, TEST_TSCONFIG);
-    strictEqual(lNormalizedOptions.combinedDependencies, false);
+    equal(lNormalizedOptions.symlinks, false);
+    equal(lNormalizedOptions.tsConfig, TEST_TSCONFIG);
+    equal(lNormalizedOptions.combinedDependencies, false);
     ok(lNormalizedOptions.hasOwnProperty("extensions"));
     ok(lNormalizedOptions.hasOwnProperty("fileSystem"));
-    strictEqual(lNormalizedOptions.plugins.length, 1);
-    strictEqual(lNormalizedOptions.useSyncFileSystemCalls, true);
+    equal(lNormalizedOptions.plugins.length, 1);
+    equal(lNormalizedOptions.useSyncFileSystemCalls, true);
   });
 });

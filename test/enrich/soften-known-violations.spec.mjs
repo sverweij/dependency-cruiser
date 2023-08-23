@@ -1,4 +1,4 @@
-import { deepStrictEqual } from "node:assert";
+import { deepEqual } from "node:assert/strict";
 import softenKnownViolations from "../../src/enrich/soften-known-violations.mjs";
 
 describe("[U] enrich/soften-known-violations - modules violations", () => {
@@ -15,7 +15,7 @@ describe("[U] enrich/soften-known-violations - modules violations", () => {
   ];
 
   it("no violations => no violations", () => {
-    deepStrictEqual(softenKnownViolations([], lKnownModuleViolations), []);
+    deepEqual(softenKnownViolations([], lKnownModuleViolations), []);
   });
 
   it("valid modules are kept alone", () => {
@@ -24,7 +24,7 @@ describe("[U] enrich/soften-known-violations - modules violations", () => {
       { source: "alez-houpe.js", valid: true, dependencies: [] },
     ];
 
-    deepStrictEqual(
+    deepEqual(
       softenKnownViolations(lModules, lKnownModuleViolations),
       lModules,
     );
@@ -41,7 +41,7 @@ describe("[U] enrich/soften-known-violations - modules violations", () => {
       },
     ];
 
-    deepStrictEqual(
+    deepEqual(
       softenKnownViolations(lModules, lKnownModuleViolations),
       lModules,
     );
@@ -67,7 +67,7 @@ describe("[U] enrich/soften-known-violations - modules violations", () => {
       },
     ];
 
-    deepStrictEqual(
+    deepEqual(
       softenKnownViolations(lModules, lKnownModuleViolations),
       lSoftenedModules,
     );
@@ -93,7 +93,7 @@ describe("[U] enrich/soften-known-violations - modules violations", () => {
       },
     ];
 
-    deepStrictEqual(
+    deepEqual(
       softenKnownViolations(lModules, lKnownModuleViolations, "info"),
       lSoftenedModules,
     );
@@ -125,7 +125,7 @@ describe("[U] enrich/soften-known-violations - dependency violations", () => {
   ];
 
   it("no violations => no violations", () => {
-    deepStrictEqual(softenKnownViolations([], lKnownDependencyViolations), []);
+    deepEqual(softenKnownViolations([], lKnownDependencyViolations), []);
   });
 
   it("valid dependencies are left alone", () => {
@@ -143,7 +143,7 @@ describe("[U] enrich/soften-known-violations - dependency violations", () => {
       },
     ];
 
-    deepStrictEqual(
+    deepEqual(
       softenKnownViolations(lModules, lKnownDependencyViolations),
       lModules,
     );
@@ -165,7 +165,7 @@ describe("[U] enrich/soften-known-violations - dependency violations", () => {
       },
     ];
 
-    deepStrictEqual(
+    deepEqual(
       softenKnownViolations(lModules, lKnownDependencyViolations),
       lModules,
     );
@@ -187,7 +187,7 @@ describe("[U] enrich/soften-known-violations - dependency violations", () => {
       },
     ];
 
-    deepStrictEqual(
+    deepEqual(
       softenKnownViolations(lModules, lKnownDependencyViolations),
       lModules,
     );
@@ -223,7 +223,7 @@ describe("[U] enrich/soften-known-violations - dependency violations", () => {
       },
     ];
 
-    deepStrictEqual(
+    deepEqual(
       softenKnownViolations(lModules, lKnownDependencyViolations),
       lSoftenedModules,
     );
@@ -259,7 +259,7 @@ describe("[U] enrich/soften-known-violations - dependency violations", () => {
       },
     ];
 
-    deepStrictEqual(
+    deepEqual(
       softenKnownViolations(lModules, lKnownDependencyViolations, "warn"),
       lSoftenedModules,
     );
@@ -357,7 +357,7 @@ describe("[U] enrich/soften-known-violations - dependency violations", () => {
       },
     ];
 
-    deepStrictEqual(
+    deepEqual(
       softenKnownViolations(lModules, lKnownCyclicViolations, "info"),
       lSoftenedModules,
     );
@@ -476,7 +476,7 @@ describe("[U] enrich/soften-known-violations - dependency violations", () => {
         valid: true,
       },
     ];
-    deepStrictEqual(
+    deepEqual(
       softenKnownViolations(lModules, lKnownSelfReferenceViolation, "ignore"),
       lSoftenedModules,
     );

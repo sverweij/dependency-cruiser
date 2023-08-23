@@ -1,4 +1,4 @@
-import { deepStrictEqual } from "node:assert";
+import { deepEqual } from "node:assert/strict";
 import {
   getAvailableTranspilers,
   scannableExtensions,
@@ -6,7 +6,7 @@ import {
 
 describe("[U] extract/transpile/meta", () => {
   it("tells which extensions can be scanned", () => {
-    deepStrictEqual(scannableExtensions, [
+    deepEqual(scannableExtensions, [
       ".js",
       ".cjs",
       ".mjs",
@@ -29,7 +29,7 @@ describe("[U] extract/transpile/meta", () => {
   });
 
   it("returns the available transpilers", () => {
-    deepStrictEqual(getAvailableTranspilers(), [
+    deepEqual(getAvailableTranspilers(), [
       {
         name: "babel",
         version: ">=7.0.0 <8.0.0",

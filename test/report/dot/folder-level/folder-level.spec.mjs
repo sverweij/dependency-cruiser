@@ -1,4 +1,4 @@
-import { deepStrictEqual, strictEqual } from "node:assert";
+import { deepEqual, equal } from "node:assert/strict";
 import { readFileSync } from "node:fs";
 import { join } from "node:path";
 import { fileURLToPath } from "node:url";
@@ -29,22 +29,22 @@ describe("[I] report/dot/folder-level reporter", () => {
   it("consolidates to folder level", () => {
     const lReturnValue = render(deps);
 
-    deepStrictEqual(lReturnValue.output, consolidatedDot);
-    strictEqual(lReturnValue.exitCode, 0);
+    deepEqual(lReturnValue.output, consolidatedDot);
+    equal(lReturnValue.exitCode, 0);
   });
 
   it("consolidates module only transgressions correctly", () => {
     const lReturnValue = render(orphans);
 
-    deepStrictEqual(lReturnValue.output, consolidatedOrphansDot);
-    strictEqual(lReturnValue.exitCode, 0);
+    deepEqual(lReturnValue.output, consolidatedOrphansDot);
+    equal(lReturnValue.exitCode, 0);
   });
 
   it("consolidates a slightly larger code base in a timely fashion", () => {
     const lReturnValue = render(rxjs);
 
-    deepStrictEqual(lReturnValue.output, consolidatedRxJs);
-    strictEqual(lReturnValue.exitCode, 0);
+    deepEqual(lReturnValue.output, consolidatedRxJs);
+    equal(lReturnValue.exitCode, 0);
   });
 });
 

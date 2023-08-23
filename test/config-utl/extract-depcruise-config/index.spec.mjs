@@ -1,6 +1,6 @@
 import { fileURLToPath } from "node:url";
 import { join } from "node:path";
-import { ok, deepStrictEqual } from "node:assert";
+import { ok, deepEqual } from "node:assert/strict";
 import loadConfig from "../../../src/config-utl/extract-depcruise-config/index.mjs";
 
 const __dirname = fileURLToPath(new URL(".", import.meta.url));
@@ -14,7 +14,7 @@ describe("[I] config-utl/extract-depcruise-config", () => {
         assert: { type: "json" },
       }
     );
-    deepStrictEqual(
+    deepEqual(
       await loadConfig(join(mockDirectory, "rules.sub-not-allowed-error.json")),
       fixture.default,
     );
@@ -24,14 +24,14 @@ describe("[I] config-utl/extract-depcruise-config", () => {
     const mergedFixture = await import("./__mocks__/extends/merged.json", {
       assert: { type: "json" },
     });
-    deepStrictEqual(
+    deepEqual(
       await loadConfig(join(mockDirectory, "extends/extending.json")),
       mergedFixture.default,
     );
   });
 
   it("a rule set with an extends array (0 members) returns that rule set", async () => {
-    deepStrictEqual(
+    deepEqual(
       await loadConfig(
         join(mockDirectory, "extends/extending-array-with-zero-members.json"),
       ),
@@ -54,7 +54,7 @@ describe("[I] config-utl/extract-depcruise-config", () => {
         assert: { type: "json" },
       }
     );
-    deepStrictEqual(
+    deepEqual(
       await loadConfig(
         join(mockDirectory, "extends/extending-array-with-one-member.json"),
       ),
@@ -69,7 +69,7 @@ describe("[I] config-utl/extract-depcruise-config", () => {
         assert: { type: "json" },
       }
     );
-    deepStrictEqual(
+    deepEqual(
       await loadConfig(
         join(mockDirectory, "extends/extending-array-with-two-members.json"),
       ),
@@ -78,7 +78,7 @@ describe("[I] config-utl/extract-depcruise-config", () => {
   });
 
   it("a rule set with an extends from node_modules gets merged properly as well", async () => {
-    deepStrictEqual(
+    deepEqual(
       await loadConfig(
         join(mockDirectory, "extends/extending-from-node-modules.json"),
       ),

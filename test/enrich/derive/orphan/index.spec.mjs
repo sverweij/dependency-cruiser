@@ -1,4 +1,4 @@
-import { deepStrictEqual } from "node:assert";
+import { deepEqual } from "node:assert/strict";
 
 import orphan from "../../../../src/enrich/derive/orphan/index.mjs";
 import ONE_MODULE_FIXTURE from "./__mocks__/one-module.mjs";
@@ -8,14 +8,11 @@ import TWO_MODULES_AFTER_PROCESSING from "./__mocks__/two-module.afterprocessing
 
 describe("[U] enrich/derive/orphan/index - orphan detection", () => {
   it('attaches the "orphan" boolean to orphan modules by default', () => {
-    deepStrictEqual(
-      orphan(ONE_MODULE_FIXTURE, {}),
-      ONE_MODULE_AFTER_PROCESSING,
-    );
+    deepEqual(orphan(ONE_MODULE_FIXTURE, {}), ONE_MODULE_AFTER_PROCESSING);
   });
 
   it('attaches the "orphan" boolean to orphan modules if the ruleset requires an orphan check', () => {
-    deepStrictEqual(
+    deepEqual(
       orphan(ONE_MODULE_FIXTURE, {
         validate: true,
         ruleSet: {
@@ -34,6 +31,6 @@ describe("[U] enrich/derive/orphan/index - orphan detection", () => {
   });
 
   it('does attachs the "orphan" boolean to non-orphan modules with the value "false"', () => {
-    deepStrictEqual(orphan(TWO_MODULES_FIXTURE), TWO_MODULES_AFTER_PROCESSING);
+    deepEqual(orphan(TWO_MODULES_FIXTURE), TWO_MODULES_AFTER_PROCESSING);
   });
 });

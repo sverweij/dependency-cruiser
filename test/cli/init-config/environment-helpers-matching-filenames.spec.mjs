@@ -1,4 +1,4 @@
-import { deepStrictEqual, strictEqual } from "node:assert";
+import { deepEqual, equal } from "node:assert/strict";
 import {
   hasTSConfigCandidates,
   getJSConfigCandidates,
@@ -20,25 +20,25 @@ describe("[U] cli/init-config/environment-helpers - getBabelConfigCandidates", (
     process.chdir(
       "test/cli/init-config/__fixtures__/get-matching-filenames-empty",
     );
-    deepStrictEqual(getBabelConfigCandidates(), []);
+    deepEqual(getBabelConfigCandidates(), []);
   });
   it("Returns an empty array when there's only ts configs", () => {
     process.chdir(
       "test/cli/init-config/__fixtures__/get-matching-filenames-ts",
     );
-    deepStrictEqual(getBabelConfigCandidates(), []);
+    deepEqual(getBabelConfigCandidates(), []);
   });
   it("Returns an empty array when there's only webpack configs", () => {
     process.chdir(
       "test/cli/init-config/__fixtures__/get-matching-filenames-webpack",
     );
-    deepStrictEqual(getBabelConfigCandidates(), []);
+    deepEqual(getBabelConfigCandidates(), []);
   });
   it("Returns all babel config variants present in a folder", () => {
     process.chdir(
       "test/cli/init-config/__fixtures__/get-matching-filenames-babel",
     );
-    deepStrictEqual(getBabelConfigCandidates(), [
+    deepEqual(getBabelConfigCandidates(), [
       ".babelrc",
       ".babelrc.json",
       "babel.blabla-config.json",
@@ -50,7 +50,7 @@ describe("[U] cli/init-config/environment-helpers - getBabelConfigCandidates", (
     process.chdir(
       "test/cli/init-config/__fixtures__/get-matching-filenames-babel-manifest",
     );
-    deepStrictEqual(getBabelConfigCandidates(), [
+    deepEqual(getBabelConfigCandidates(), [
       "package.json",
       ".babelrc",
       ".babelrc.json",
@@ -70,25 +70,25 @@ describe("[U] cli/init-config/environment-helpers - hasBabelConfigCandidates", (
     process.chdir(
       "test/cli/init-config/__fixtures__/get-matching-filenames-empty",
     );
-    strictEqual(hasBabelConfigCandidates(), false);
+    equal(hasBabelConfigCandidates(), false);
   });
   it("Returns false when there's only ts configs", () => {
     process.chdir(
       "test/cli/init-config/__fixtures__/get-matching-filenames-ts",
     );
-    strictEqual(hasBabelConfigCandidates(), false);
+    equal(hasBabelConfigCandidates(), false);
   });
   it("Returns false when there's only webpack configs", () => {
     process.chdir(
       "test/cli/init-config/__fixtures__/get-matching-filenames-webpack",
     );
-    strictEqual(hasBabelConfigCandidates(), false);
+    equal(hasBabelConfigCandidates(), false);
   });
   it("Returns true when there's only babel configs", () => {
     process.chdir(
       "test/cli/init-config/__fixtures__/get-matching-filenames-babel",
     );
-    strictEqual(hasBabelConfigCandidates(), true);
+    equal(hasBabelConfigCandidates(), true);
   });
 });
 
@@ -101,25 +101,25 @@ describe("[U] cli/init-config/environment-helpers - getTSConfigCandidates", () =
     process.chdir(
       "test/cli/init-config/__fixtures__/get-matching-filenames-empty",
     );
-    deepStrictEqual(getTSConfigCandidates(), []);
+    deepEqual(getTSConfigCandidates(), []);
   });
   it("Returns an empty array when there's only ts configs", () => {
     process.chdir(
       "test/cli/init-config/__fixtures__/get-matching-filenames-babel",
     );
-    deepStrictEqual(getTSConfigCandidates(), []);
+    deepEqual(getTSConfigCandidates(), []);
   });
   it("Returns an empty array when there's only webpack configs", () => {
     process.chdir(
       "test/cli/init-config/__fixtures__/get-matching-filenames-webpack",
     );
-    deepStrictEqual(getTSConfigCandidates(), []);
+    deepEqual(getTSConfigCandidates(), []);
   });
   it("Returns all ts config variants present in a folder", () => {
     process.chdir(
       "test/cli/init-config/__fixtures__/get-matching-filenames-ts",
     );
-    deepStrictEqual(getTSConfigCandidates(), [
+    deepEqual(getTSConfigCandidates(), [
       "extended-tsconfig-from-base.json",
       "tsconfig.base.json",
       "tsconfig.json",
@@ -136,25 +136,25 @@ describe("[U] cli/init-config/environment-helpers - getJSConfigCandidates", () =
     process.chdir(
       "test/cli/init-config/__fixtures__/get-matching-filenames-empty",
     );
-    deepStrictEqual(getJSConfigCandidates(), []);
+    deepEqual(getJSConfigCandidates(), []);
   });
   it("Returns an empty array when there's only babel configs", () => {
     process.chdir(
       "test/cli/init-config/__fixtures__/get-matching-filenames-babel",
     );
-    deepStrictEqual(getJSConfigCandidates(), []);
+    deepEqual(getJSConfigCandidates(), []);
   });
   it("Returns an empty array when there's only webpack configs", () => {
     process.chdir(
       "test/cli/init-config/__fixtures__/get-matching-filenames-webpack",
     );
-    deepStrictEqual(getJSConfigCandidates(), []);
+    deepEqual(getJSConfigCandidates(), []);
   });
   it("Returns all js config variants present in a folder", () => {
     process.chdir(
       "test/cli/init-config/__fixtures__/get-matching-filenames-ts",
     );
-    deepStrictEqual(getJSConfigCandidates(), [
+    deepEqual(getJSConfigCandidates(), [
       "jsconfig.json",
       "thingie-jsconfig.json",
     ]);
@@ -170,25 +170,25 @@ describe("[U] cli/init-config/environment-helpers - hasTSConfigCandidates", () =
     process.chdir(
       "test/cli/init-config/__fixtures__/get-matching-filenames-empty",
     );
-    strictEqual(hasTSConfigCandidates(), false);
+    equal(hasTSConfigCandidates(), false);
   });
   it("Returns true when there's only ts configs", () => {
     process.chdir(
       "test/cli/init-config/__fixtures__/get-matching-filenames-ts",
     );
-    strictEqual(hasTSConfigCandidates(), true);
+    equal(hasTSConfigCandidates(), true);
   });
   it("Returns false when there's only webpack configs", () => {
     process.chdir(
       "test/cli/init-config/__fixtures__/get-matching-filenames-webpack",
     );
-    strictEqual(hasTSConfigCandidates(), false);
+    equal(hasTSConfigCandidates(), false);
   });
   it("Returns false when there's only babel configs", () => {
     process.chdir(
       "test/cli/init-config/__fixtures__/get-matching-filenames-babel",
     );
-    strictEqual(hasTSConfigCandidates(), false);
+    equal(hasTSConfigCandidates(), false);
   });
 });
 
@@ -201,19 +201,19 @@ describe("[U] cli/init-config/environment-helpers - getWebpackConfigCandidates",
     process.chdir(
       "test/cli/init-config/__fixtures__/get-matching-filenames-empty",
     );
-    deepStrictEqual(getWebpackConfigCandidates(), []);
+    deepEqual(getWebpackConfigCandidates(), []);
   });
   it("Returns an empty array when there's only ts configs", () => {
     process.chdir(
       "test/cli/init-config/__fixtures__/get-matching-filenames-ts",
     );
-    deepStrictEqual(getWebpackConfigCandidates(), []);
+    deepEqual(getWebpackConfigCandidates(), []);
   });
   it("Returns an empty array when there's only webpack configs", () => {
     process.chdir(
       "test/cli/init-config/__fixtures__/get-matching-filenames-webpack",
     );
-    deepStrictEqual(getWebpackConfigCandidates(), [
+    deepEqual(getWebpackConfigCandidates(), [
       "spiderwebpackconfig.cjs",
       "webpack-base-config.js",
       "webpack.conf.json",
@@ -224,7 +224,7 @@ describe("[U] cli/init-config/environment-helpers - getWebpackConfigCandidates",
     process.chdir(
       "test/cli/init-config/__fixtures__/get-matching-filenames-babel",
     );
-    deepStrictEqual(getWebpackConfigCandidates(), []);
+    deepEqual(getWebpackConfigCandidates(), []);
   });
 });
 
@@ -237,25 +237,25 @@ describe("[U] cli/init-config/environment-helpers - hasWebpackConfigCandidates",
     process.chdir(
       "test/cli/init-config/__fixtures__/get-matching-filenames-empty",
     );
-    strictEqual(hasWebpackConfigCandidates(), false);
+    equal(hasWebpackConfigCandidates(), false);
   });
   it("Returns false when there's only ts configs", () => {
     process.chdir(
       "test/cli/init-config/__fixtures__/get-matching-filenames-ts",
     );
-    strictEqual(hasWebpackConfigCandidates(), false);
+    equal(hasWebpackConfigCandidates(), false);
   });
   it("Returns true when there's only webpack configs", () => {
     process.chdir(
       "test/cli/init-config/__fixtures__/get-matching-filenames-webpack",
     );
-    strictEqual(hasWebpackConfigCandidates(), true);
+    equal(hasWebpackConfigCandidates(), true);
   });
   it("Returns false when there's only babel configs", () => {
     process.chdir(
       "test/cli/init-config/__fixtures__/get-matching-filenames-babel",
     );
-    strictEqual(hasWebpackConfigCandidates(), false);
+    equal(hasWebpackConfigCandidates(), false);
   });
 });
 
@@ -266,21 +266,21 @@ describe("[U] cli/init-config/environment-helpers - isTypeModule", () => {
   });
   it("Returns false when there is no manifest", () => {
     process.chdir("test/cli/init-config/__fixtures__/is-type-module-empty");
-    strictEqual(isTypeModule(), false);
+    equal(isTypeModule(), false);
   });
   it("Returns false when there's no type in the manifest", () => {
     process.chdir(
       "test/cli/init-config/__fixtures__/is-type-module-not-present",
     );
-    strictEqual(isTypeModule(), false);
+    equal(isTypeModule(), false);
   });
   it("Returns false when the type in the manifest equals commonjs", () => {
     process.chdir("test/cli/init-config/__fixtures__/is-type-module-commonjs");
-    strictEqual(isTypeModule(), false);
+    equal(isTypeModule(), false);
   });
   it("Returns true when the type in the manifest equals module", () => {
     process.chdir("test/cli/init-config/__fixtures__/is-type-module");
-    strictEqual(isTypeModule(), true);
+    equal(isTypeModule(), true);
   });
 });
 
@@ -291,20 +291,20 @@ describe("[U] cli/init-config/environment-helpers - getDefaultConfigFileName", (
   });
   it("Returns false when there is no manifest", () => {
     process.chdir("test/cli/init-config/__fixtures__/is-type-module-empty");
-    strictEqual(getDefaultConfigFileName(), ".dependency-cruiser.js");
+    equal(getDefaultConfigFileName(), ".dependency-cruiser.js");
   });
   it("Returns false when there's no type in the manifest", () => {
     process.chdir(
       "test/cli/init-config/__fixtures__/is-type-module-not-present",
     );
-    strictEqual(getDefaultConfigFileName(), ".dependency-cruiser.js");
+    equal(getDefaultConfigFileName(), ".dependency-cruiser.js");
   });
   it("Returns false when the type in the manifest equals commonjs", () => {
     process.chdir("test/cli/init-config/__fixtures__/is-type-module-commonjs");
-    strictEqual(getDefaultConfigFileName(), ".dependency-cruiser.js");
+    equal(getDefaultConfigFileName(), ".dependency-cruiser.js");
   });
   it("Returns true when the type in the manifest equals module", () => {
     process.chdir("test/cli/init-config/__fixtures__/is-type-module");
-    strictEqual(getDefaultConfigFileName(), ".dependency-cruiser.cjs");
+    equal(getDefaultConfigFileName(), ".dependency-cruiser.cjs");
   });
 });

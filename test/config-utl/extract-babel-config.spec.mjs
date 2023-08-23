@@ -1,4 +1,4 @@
-import { deepStrictEqual, ok, strictEqual } from "node:assert";
+import { deepEqual, ok, equal } from "node:assert/strict";
 import { fileURLToPath } from "node:url";
 import omit from "lodash/omit.js";
 import extractBabelConfig from "../../src/config-utl/extract-babel-config.mjs";
@@ -32,7 +32,7 @@ describe("[I] config-utl/extract-babel-config", () => {
     } catch (pError) {
       lThrown = true;
     }
-    strictEqual(lThrown, true);
+    equal(lThrown, true);
   });
 
   it("throws when a non-existing config file is passed", async () => {
@@ -42,7 +42,7 @@ describe("[I] config-utl/extract-babel-config", () => {
     } catch (pError) {
       lThrown = true;
     }
-    strictEqual(lThrown, true);
+    equal(lThrown, true);
   });
 
   it("throws when a config file is passed that does not contain valid json5", async () => {
@@ -54,7 +54,7 @@ describe("[I] config-utl/extract-babel-config", () => {
     } catch (pError) {
       lThrown = true;
     }
-    strictEqual(lThrown, true);
+    equal(lThrown, true);
   });
 
   it("throws when a config file is passed contains a non-babel option", async () => {
@@ -66,7 +66,7 @@ describe("[I] config-utl/extract-babel-config", () => {
     } catch (pError) {
       lThrown = true;
     }
-    strictEqual(lThrown, true);
+    equal(lThrown, true);
   });
 
   it("returns a default options object when an empty config file is passed", async () => {
@@ -79,7 +79,7 @@ describe("[I] config-utl/extract-babel-config", () => {
         "/__mocks__/babelconfig/babelrc.empty.json",
       ),
     );
-    deepStrictEqual(
+    deepEqual(
       omit(lBabelConfig, "filename"),
       DEFAULT_EMPTY_BABEL_OPTIONS_OBJECT,
     );
@@ -89,7 +89,7 @@ describe("[I] config-utl/extract-babel-config", () => {
     const lBabelKey = await extractBabelConfig(
       getFullPath("./__mocks__/babelconfig/package.json"),
     );
-    strictEqual(lBabelKey.plugins.length, 1);
+    equal(lBabelKey.plugins.length, 1);
   });
 
   it("returns an empty (/ default) options object when package.json without a babel key is passed", async () => {
@@ -104,7 +104,7 @@ describe("[I] config-utl/extract-babel-config", () => {
         "/__mocks__/babelconfig/no-babel-config-in-this-package.json",
       ),
     );
-    deepStrictEqual(
+    deepEqual(
       omit(lBabelConfig, "filename"),
       DEFAULT_EMPTY_BABEL_OPTIONS_OBJECT,
     );
@@ -114,15 +114,15 @@ describe("[I] config-utl/extract-babel-config", () => {
     const lModule = await extractBabelConfig(
       getFullPath("./__mocks__/babelconfig-js/babel.object-export.config.js"),
     );
-    strictEqual(lModule.plugins.length, 1);
+    equal(lModule.plugins.length, 1);
   });
 
   it("returns a babel config _including_ the array of plugins when a config with presets is passed", async () => {
     const lFoundConfig = await extractBabelConfig(
       getFullPath("./__mocks__/babelconfig/babelrc.with-a-preset.json"),
     );
-    strictEqual(lFoundConfig.presets.length, 1);
-    deepStrictEqual(lFoundConfig.presets, ["@babel/preset-typescript"]);
+    equal(lFoundConfig.presets.length, 1);
+    deepEqual(lFoundConfig.presets, ["@babel/preset-typescript"]);
   });
 
   it("throws when a javascript file with a function export is passed", async () => {
@@ -136,7 +136,7 @@ describe("[I] config-utl/extract-babel-config", () => {
     } catch (pError) {
       lThrown = true;
     }
-    strictEqual(lThrown, true);
+    equal(lThrown, true);
   });
 
   it("throws when a config with an unsupported extension is passed", async () => {
@@ -150,21 +150,21 @@ describe("[I] config-utl/extract-babel-config", () => {
     } catch (pError) {
       lThrown = true;
     }
-    strictEqual(lThrown, true);
+    equal(lThrown, true);
   });
 
   it("returns a babel config even when an es module is passed (.js extension)", async () => {
     const lFoundConfig = await extractBabelConfig(
       getFullPath("./__mocks__/babelconfig-js/babel.es-module.config.mjs"),
     );
-    strictEqual(lFoundConfig.plugins.length, 1);
-    deepStrictEqual(lFoundConfig.plugins[0].key, "transform-modules-commonjs");
+    equal(lFoundConfig.plugins.length, 1);
+    deepEqual(lFoundConfig.plugins[0].key, "transform-modules-commonjs");
   });
   it("returns a babel config even when an es module is passed (.mjs extension)", async () => {
     const lFoundConfig = await extractBabelConfig(
       getFullPath("./__mocks__/babelconfig-js/babel.es-module.config.mjs"),
     );
-    strictEqual(lFoundConfig.plugins.length, 1);
-    deepStrictEqual(lFoundConfig.plugins[0].key, "transform-modules-commonjs");
+    equal(lFoundConfig.plugins.length, 1);
+    deepEqual(lFoundConfig.plugins[0].key, "transform-modules-commonjs");
   });
 });

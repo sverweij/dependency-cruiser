@@ -1,4 +1,4 @@
-import { deepStrictEqual } from "node:assert";
+import { deepEqual } from "node:assert/strict";
 import validate from "../../src/validate/index.mjs";
 import parseRuleSet from "./parse-ruleset.utl.mjs";
 
@@ -15,7 +15,7 @@ describe("[I] validate/index - preCompilationOnly", () => {
     ],
   });
   it("Stuff that still exists after compilation - okeleedokelee", () => {
-    deepStrictEqual(
+    deepEqual(
       validate.dependency(
         lPreCompilationOnlyRuleSet,
         { source: "something" },
@@ -26,7 +26,7 @@ describe("[I] validate/index - preCompilationOnly", () => {
   });
 
   it("Stuff that only exists before compilation - flaggeleedaggelee", () => {
-    deepStrictEqual(
+    deepEqual(
       validate.dependency(
         lPreCompilationOnlyRuleSet,
         { source: "something" },
@@ -40,7 +40,7 @@ describe("[I] validate/index - preCompilationOnly", () => {
   });
 
   it("Unknown whether stuff that only exists before compilation - okeleedokelee", () => {
-    deepStrictEqual(
+    deepEqual(
       validate.dependency(
         lPreCompilationOnlyRuleSet,
         { source: "something" },

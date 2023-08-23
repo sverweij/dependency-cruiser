@@ -1,15 +1,15 @@
-import { deepStrictEqual } from "node:assert";
+import { deepEqual } from "node:assert/strict";
 import moduleUtl from "../../../src/report/dot/module-utl.mjs";
 
 describe("[U] report/dot/module-utl", () => {
   it("extractFirstTransgression - keeps as is when there's no transgressions", () => {
-    deepStrictEqual(moduleUtl.extractFirstTransgression({ dependencies: [] }), {
+    deepEqual(moduleUtl.extractFirstTransgression({ dependencies: [] }), {
       dependencies: [],
     });
   });
 
   it("extractFirstTransgression - adds the first module rule if there's at least one", () => {
-    deepStrictEqual(
+    deepEqual(
       moduleUtl.extractFirstTransgression({
         dependencies: [],
         rules: [
@@ -29,7 +29,7 @@ describe("[U] report/dot/module-utl", () => {
   });
 
   it("extractFirstTransgression - adds the first dependency rule if there's at least one", () => {
-    deepStrictEqual(
+    deepEqual(
       moduleUtl.extractFirstTransgression({
         dependencies: [
           {
@@ -55,7 +55,7 @@ describe("[U] report/dot/module-utl", () => {
   });
 
   it("flatLabel - returns the value of source as label", () => {
-    deepStrictEqual(
+    deepEqual(
       moduleUtl.flatLabel(true)({ source: "aap/noot/mies/wim/zus.jet" }),
       {
         source: "aap/noot/mies/wim/zus.jet",
@@ -66,7 +66,7 @@ describe("[U] report/dot/module-utl", () => {
   });
 
   it("flatLabel - returns the value of source & instability metric as label when instability is known", () => {
-    deepStrictEqual(
+    deepEqual(
       moduleUtl.flatLabel(true)({
         source: "aap/noot/mies/wim/zus.jet",
         instability: "0.481",
@@ -81,7 +81,7 @@ describe("[U] report/dot/module-utl", () => {
   });
 
   it("flatLabel - returns the value of source when instability is known, but showMetrics is false", () => {
-    deepStrictEqual(
+    deepEqual(
       moduleUtl.flatLabel(false)({
         source: "aap/noot/mies/wim/zus.jet",
         instability: "0.481",

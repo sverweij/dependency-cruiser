@@ -1,6 +1,6 @@
 /* eslint-disable security/detect-non-literal-regexp */
 /* eslint-disable no-magic-numbers */
-import { doesNotMatch, match, strictEqual } from "node:assert";
+import { doesNotMatch, match, equal } from "node:assert/strict";
 import { EOL } from "node:os";
 import chalk from "chalk";
 import render from "../../../src/report/error.mjs";
@@ -29,7 +29,7 @@ describe("[I] report/error", () => {
     const lResult = render(okdeps);
 
     match(lResult.output, /no dependency violations found/);
-    strictEqual(lResult.exitCode, 0);
+    equal(lResult.exitCode, 0);
   });
   it("renders a bunch of errors", () => {
     const lResult = render(dependencies);
@@ -40,13 +40,13 @@ describe("[I] report/error", () => {
       /2 dependency violations \(2 errors, 0 warnings\)\. 33 modules, 333 dependencies cruised\./,
     );
     doesNotMatch(lResult.output, / {4}comment to no-leesplank/);
-    strictEqual(lResult.exitCode, 2);
+    equal(lResult.exitCode, 2);
   });
   it("renders a bunch of warnings", () => {
     const lResult = render(onlyWarningDependencies);
 
     match(lResult.output, /1 dependency violations \(0 errors, 1 warnings\)/);
-    strictEqual(lResult.exitCode, 0);
+    equal(lResult.exitCode, 0);
   });
   it("renders module only violations as module only", () => {
     const lResult = render(orphanErrs);
@@ -56,7 +56,7 @@ describe("[I] report/error", () => {
       lResult.output,
       /1 dependency violations \(1 errors, 0 warnings\). 1 modules, 0 dependencies cruised\./,
     );
-    strictEqual(lResult.exitCode, 1);
+    equal(lResult.exitCode, 1);
   });
   it("renders circular violations as circulars", () => {
     const lResult = render(circularErrs);
@@ -77,7 +77,7 @@ describe("[I] report/error", () => {
         `      src/some/folder/loop-a.js →\n      src/some/folder/loop-b.js →\n      src/some/folder/nested/center.js`,
       ),
     );
-    strictEqual(lResult.exitCode, 3);
+    equal(lResult.exitCode, 3);
   });
   it("renders via violations as vias", () => {
     const lResult = render(viaErrs);
@@ -95,7 +95,7 @@ describe("[I] report/error", () => {
       ),
     );
     match(lResult.output, / {6}\(via via\)/);
-    strictEqual(lResult.exitCode, 4);
+    equal(lResult.exitCode, 4);
   });
   it("renders moreUnstable violations with the module & dependents violations", () => {
     const lResult = render(sdpErrors);

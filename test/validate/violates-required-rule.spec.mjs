@@ -1,4 +1,4 @@
-import { strictEqual } from "node:assert";
+import { equal } from "node:assert/strict";
 import violatesRequiredRule from "../../src/validate/violates-required-rule.mjs";
 
 const SIMPLE_RULE = {
@@ -23,14 +23,14 @@ const GROUP_MATCHING_RULE = {
 };
 describe("[I] validate/violates-required-rule", () => {
   it("does not violate when the module does not match", () => {
-    strictEqual(
+    equal(
       violatesRequiredRule(SIMPLE_RULE, { source: "does not match" }),
       false,
     );
   });
 
   it("violates when the module matches and there's no dependencies", () => {
-    strictEqual(
+    equal(
       violatesRequiredRule(SIMPLE_RULE, {
         source: "controllers/sprockets/fred-controller.ts",
         dependencies: [],
@@ -40,7 +40,7 @@ describe("[I] validate/violates-required-rule", () => {
   });
 
   it("violates when the module matches and there's no matching dependencies", () => {
-    strictEqual(
+    equal(
       violatesRequiredRule(SIMPLE_RULE, {
         source: "controllers/sprockets/fred-controller.ts",
         dependencies: [
@@ -55,7 +55,7 @@ describe("[I] validate/violates-required-rule", () => {
   });
 
   it("passes when the module matches and there's a matching dependency", () => {
-    strictEqual(
+    equal(
       violatesRequiredRule(SIMPLE_RULE, {
         source: "controllers/sprockets/fred-controller.ts",
         dependencies: [
@@ -70,7 +70,7 @@ describe("[I] validate/violates-required-rule", () => {
   });
 
   it("violates when the module matches and there's no matching dependency (group matching)", () => {
-    strictEqual(
+    equal(
       violatesRequiredRule(GROUP_MATCHING_RULE, {
         source: "test/simsalabim.spec.js",
         dependencies: [
@@ -85,7 +85,7 @@ describe("[I] validate/violates-required-rule", () => {
   });
 
   it("violates when the module matches and there's no dependencies (group matching)", () => {
-    strictEqual(
+    equal(
       violatesRequiredRule(GROUP_MATCHING_RULE, {
         source: "test/simsalabim.spec.js",
         dependencies: [],
@@ -95,7 +95,7 @@ describe("[I] validate/violates-required-rule", () => {
   });
 
   it("passes when the module matches and there's no matching dependency (group matching)", () => {
-    strictEqual(
+    equal(
       violatesRequiredRule(GROUP_MATCHING_RULE, {
         source: "test/simsalabim.spec.js",
         dependencies: [

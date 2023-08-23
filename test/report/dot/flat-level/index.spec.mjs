@@ -1,4 +1,4 @@
-import { deepStrictEqual, strictEqual } from "node:assert";
+import { deepEqual, equal } from "node:assert/strict";
 import { readFileSync } from "node:fs";
 import { join } from "node:path";
 import { fileURLToPath } from "node:url";
@@ -29,22 +29,22 @@ describe("[I] report/dot/flat-level reporter", () => {
   it("consolidates to flat levels", () => {
     const lReturnValue = render(deps);
 
-    strictEqual(lReturnValue.output, flatDot);
-    strictEqual(lReturnValue.exitCode, 0);
+    equal(lReturnValue.output, flatDot);
+    equal(lReturnValue.exitCode, 0);
   });
 
   it("consolidates module only transgressions correctly", () => {
     const lReturnValue = render(orphans);
 
-    strictEqual(lReturnValue.output, flatOrphansDot);
-    strictEqual(lReturnValue.exitCode, 0);
+    equal(lReturnValue.output, flatOrphansDot);
+    equal(lReturnValue.exitCode, 0);
   });
 
   it("consolidates a slightly larger code base in a timely fashion", () => {
     const lReturnValue = render(rxjs);
 
-    strictEqual(lReturnValue.output, flatRxJs);
-    strictEqual(lReturnValue.exitCode, 0);
+    equal(lReturnValue.output, flatRxJs);
+    equal(lReturnValue.exitCode, 0);
   });
 });
 

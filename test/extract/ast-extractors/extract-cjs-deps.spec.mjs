@@ -1,4 +1,4 @@
-import { deepStrictEqual } from "node:assert";
+import { deepEqual } from "node:assert/strict";
 import extractcommonJSDeps from "../../../src/extract/ast-extractors/extract-cjs-deps.mjs";
 import { getASTFromSource } from "../../../src/extract/parse/to-javascript-ast.mjs";
 
@@ -19,7 +19,7 @@ describe("[U] ast-extractors/extract-cjs-deps", () => {
     let lDeps = [];
 
     extractcommonJS("const x = require('./static')", lDeps);
-    deepStrictEqual(lDeps, [
+    deepEqual(lDeps, [
       {
         module: "./static",
         moduleSystem: "cjs",
@@ -37,7 +37,7 @@ describe("[U] ast-extractors/extract-cjs-deps", () => {
       lDeps,
       ["need"],
     );
-    deepStrictEqual(lDeps, [
+    deepEqual(lDeps, [
       {
         module: "./static-required-with-need",
         moduleSystem: "cjs",
@@ -56,7 +56,7 @@ describe("[U] ast-extractors/extract-cjs-deps", () => {
       lDeps,
       ["window.require"],
     );
-    deepStrictEqual(lDeps, [
+    deepEqual(lDeps, [
       {
         module: "./static-required-with-need",
         moduleSystem: "cjs",
@@ -74,14 +74,14 @@ describe("[U] ast-extractors/extract-cjs-deps", () => {
       "const need = require; const x = need('./static-required-with-need')",
       lDeps,
     );
-    deepStrictEqual(lDeps, []);
+    deepEqual(lDeps, []);
   });
 
   it("require with in an assignment - template literal argument", () => {
     let lDeps = [];
 
     extractcommonJS("const x = require(`template-literal`)", lDeps);
-    deepStrictEqual(lDeps, [
+    deepEqual(lDeps, [
       {
         module: "template-literal",
         moduleSystem: "cjs",
@@ -95,7 +95,7 @@ describe("[U] ast-extractors/extract-cjs-deps", () => {
     let lDeps = [];
 
     extractcommonJS("require(42);", lDeps);
-    deepStrictEqual(lDeps, []);
+    deepEqual(lDeps, []);
   });
 
   it("non-string argument doesn't yield a dependency (function call)", () => {
@@ -108,6 +108,6 @@ describe("[U] ast-extractors/extract-cjs-deps", () => {
         `,
       lDeps,
     );
-    deepStrictEqual(lDeps, []);
+    deepEqual(lDeps, []);
   });
 });

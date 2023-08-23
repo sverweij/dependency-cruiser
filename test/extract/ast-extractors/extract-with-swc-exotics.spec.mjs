@@ -1,9 +1,9 @@
-import { deepStrictEqual } from "node:assert";
+import { deepEqual } from "node:assert/strict";
 import extractWithSwc from "./extract-with-swc.utl.mjs";
 
 describe("[U] ast-extractors/extract-swc - exotics", () => {
   it("doesn't detects 'exotic' dependencies when no exoticRequireStrings were passed", () => {
-    deepStrictEqual(
+    deepEqual(
       extractWithSwc(
         "const want = require; const yo = want('./required-with-want');",
         [],
@@ -13,7 +13,7 @@ describe("[U] ast-extractors/extract-swc - exotics", () => {
   });
 
   it("detects dependencies declared with one function names passed as exoticRequireStrings", () => {
-    deepStrictEqual(
+    deepEqual(
       extractWithSwc(
         "const want = need = require; const yo = want('./required-with-want'); const nope = need('./required-with-need');",
         ["want"],
@@ -31,7 +31,7 @@ describe("[U] ast-extractors/extract-swc - exotics", () => {
   });
 
   it("detects dependencies declared with member expression passed as exoticRequireStrings", () => {
-    deepStrictEqual(
+    deepEqual(
       extractWithSwc(
         "const yo = window.require('./required-with-window-require')",
         ["window.require"],
@@ -49,7 +49,7 @@ describe("[U] ast-extractors/extract-swc - exotics", () => {
   });
 
   it("ignores dependencies declared with member expressions that are not passed as exoticRequireStrings", () => {
-    deepStrictEqual(
+    deepEqual(
       extractWithSwc(
         "const yo = window.require('./required-with-window-require')",
         ["document.want"],
@@ -59,7 +59,7 @@ describe("[U] ast-extractors/extract-swc - exotics", () => {
   });
 
   it("detects dependencies declared with multiple function names passed as exoticRequireStrings", () => {
-    deepStrictEqual(
+    deepEqual(
       extractWithSwc(
         "const want = need = require; const yo = want('./required-with-want'); const nope = need('./required-with-need');",
         ["want", "need"],

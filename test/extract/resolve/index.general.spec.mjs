@@ -1,4 +1,4 @@
-import { deepStrictEqual } from "node:assert";
+import { deepEqual } from "node:assert/strict";
 import { join } from "node:path";
 import { fileURLToPath } from "node:url";
 import resolve from "../../../src/extract/resolve/index.mjs";
@@ -32,7 +32,7 @@ describe("[I] extract/resolve/index - general", () => {
   });
 
   it("resolves a local dependency to a file on disk", async () => {
-    deepStrictEqual(
+    deepEqual(
       resolve(
         {
           module: "./hots",
@@ -53,7 +53,7 @@ describe("[I] extract/resolve/index - general", () => {
   });
 
   it("resolves a core module as core module", () => {
-    deepStrictEqual(
+    deepEqual(
       resolve(
         {
           module: "path",
@@ -74,7 +74,7 @@ describe("[I] extract/resolve/index - general", () => {
   });
 
   it("resolves the 'test'  core module as core module", () => {
-    deepStrictEqual(
+    deepEqual(
       resolve(
         {
           module: "test",
@@ -95,7 +95,7 @@ describe("[I] extract/resolve/index - general", () => {
   });
 
   it("resolves the 'node:test' core module as core module", () => {
-    deepStrictEqual(
+    deepEqual(
       resolve(
         {
           module: "node:test",
@@ -116,7 +116,7 @@ describe("[I] extract/resolve/index - general", () => {
   });
 
   it("resolves to the moduleName input (and depType 'unknown') when not resolvable on disk", () => {
-    deepStrictEqual(
+    deepEqual(
       resolve(
         {
           module: "./doesnotexist",
@@ -139,7 +139,7 @@ describe("[I] extract/resolve/index - general", () => {
   });
 
   it("resolves known non-followables as not followable: json", async () => {
-    deepStrictEqual(
+    deepEqual(
       resolve(
         {
           module: "./something.json",
@@ -160,7 +160,7 @@ describe("[I] extract/resolve/index - general", () => {
   });
 
   it("resolves known non-followables as not followable, even when it's a resolve registered extension: json", async () => {
-    deepStrictEqual(
+    deepEqual(
       resolve(
         {
           module: "./something.json",
@@ -187,7 +187,7 @@ describe("[I] extract/resolve/index - general", () => {
   });
 
   it("resolves known non-followables as not followable, even when it's a resolve registered extension: sass", async () => {
-    deepStrictEqual(
+    deepEqual(
       resolve(
         {
           module: "./something.scss",
@@ -214,7 +214,7 @@ describe("[I] extract/resolve/index - general", () => {
   });
 
   it("considers passed (webpack) aliases", async () => {
-    deepStrictEqual(
+    deepEqual(
       resolve(
         {
           module: "hoepla/hoi",
@@ -243,7 +243,7 @@ describe("[I] extract/resolve/index - general", () => {
   });
 
   it("considers a passed (webpack) modules array", async () => {
-    deepStrictEqual(
+    deepEqual(
       resolve(
         {
           module: "shared",
@@ -278,7 +278,7 @@ describe("[I] extract/resolve/index - general", () => {
   });
 
   it("strips query parameters from file names", async () => {
-    deepStrictEqual(
+    deepEqual(
       resolve(
         {
           module: "./hots.js?blah",
@@ -300,7 +300,7 @@ describe("[I] extract/resolve/index - general", () => {
 
   it("by default does not look at 'exports' fields in package.json", async () => {
     process.chdir("test/extract/resolve/__mocks__/package-json-with-exports");
-    deepStrictEqual(
+    deepEqual(
       await wrappedResolve({
         module: "export-testinga/conditionalExports",
         moduleSystem: "cjs",
@@ -317,7 +317,7 @@ describe("[I] extract/resolve/index - general", () => {
 
   it("looks at the 'exports' fields in package.json when enhanced-resolve is instructed to", async () => {
     process.chdir("test/extract/resolve/__mocks__/package-json-with-exports");
-    deepStrictEqual(
+    deepEqual(
       resolve(
         {
           module: "export-testinga/conditionalExports",
@@ -346,7 +346,7 @@ describe("[I] extract/resolve/index - general", () => {
 
   it("Correctly resolves file names with #'s in it (formerly an upstream issue in enhanced-resolve)", async () => {
     process.chdir("test/extract/resolve/__mocks__/resolve-hashmarks");
-    deepStrictEqual(
+    deepEqual(
       await wrappedResolve({
         module: "./#/hashmark.js",
         moduleSystem: "cjs",
@@ -363,7 +363,7 @@ describe("[I] extract/resolve/index - general", () => {
 
   it("Correctly resolves file names that _correctly_ use #'s (in the 'URL' fashion) in it (formerly an upstream issue in enhanced-resolve)", async () => {
     process.chdir("test/extract/resolve/__mocks__/resolve-hashmarks");
-    deepStrictEqual(
+    deepEqual(
       await wrappedResolve({
         module: "./hashmark-after-this.js#this-is-extra",
         moduleSystem: "cjs",
@@ -381,7 +381,7 @@ describe("[I] extract/resolve/index - general", () => {
 
   it("Passes mainFields correctly so it's possible to resolve type-only packages", async () => {
     process.chdir("test/extract/resolve/__mocks__/resolve-type-only-packages");
-    deepStrictEqual(
+    deepEqual(
       resolve(
         {
           module: "lalala-interfaces",

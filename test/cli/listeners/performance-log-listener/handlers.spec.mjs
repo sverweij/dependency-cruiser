@@ -1,5 +1,5 @@
 /* eslint-disable no-magic-numbers */
-import { match, notStrictEqual, ok, strictEqual } from "node:assert";
+import { match, notStrictEqual, ok, equal } from "node:assert/strict";
 import {
   getHeader,
   getEndText,
@@ -10,7 +10,7 @@ const MAX_LEVEL = 20;
 
 describe("[U] cli/listeners/performance-log/handlers - getHeader", () => {
   it("when the level is > the max => empty string", () => {
-    strictEqual(getHeader(30, MAX_LEVEL), "");
+    equal(getHeader(30, MAX_LEVEL), "");
   });
   it("when the level === the max => non-empty string", () => {
     ok(getHeader(20, MAX_LEVEL));
@@ -26,7 +26,7 @@ describe("[U] cli/listeners/performance-log/handlers - getProgressLine", () => {
     previousMessage: "previous message",
   };
   it("when the level is > the max => empty string", () => {
-    strictEqual(getProgressLine("message", lStateMock, 30, MAX_LEVEL), "");
+    equal(getProgressLine("message", lStateMock, 30, MAX_LEVEL), "");
   });
   it("when the level === the max => non-empty string", () => {
     ok(getProgressLine("message", lStateMock, 20, MAX_LEVEL));
@@ -45,7 +45,7 @@ describe("[U] cli/listeners/performance-log/handlers - getProgressLine", () => {
       getProgressLine("next message", lUpdatableStateMock, 10, MAX_LEVEL),
       /previous message/,
     );
-    strictEqual(lUpdatableStateMock.previousMessage, "next message");
+    equal(lUpdatableStateMock.previousMessage, "next message");
     notStrictEqual(lUpdatableStateMock.previousTime, lPreviousTime);
   });
 });
@@ -56,7 +56,7 @@ describe("[U] cli/listeners/performance-log/handlers - getEndText", () => {
     previousHeapUsed: process.memoryUsage().heapUsed - 1000,
   };
   it("when the level is > the max => empty string", () => {
-    strictEqual(getEndText(lStateMock, 30, MAX_LEVEL), "");
+    equal(getEndText(lStateMock, 30, MAX_LEVEL), "");
   });
   it("when the level === the max => non-empty string", () => {
     ok(getEndText(lStateMock, 20, MAX_LEVEL));

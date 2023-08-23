@@ -1,6 +1,6 @@
 import { readFileSync } from "node:fs";
 import { fileURLToPath } from "node:url";
-import { deepStrictEqual, strictEqual } from "node:assert";
+import { deepEqual, equal } from "node:assert/strict";
 import render from "../../../src/report/html/index.mjs";
 import deps from "./__mocks__/cjs-no-dependency-valid.mjs";
 
@@ -15,7 +15,7 @@ describe("[I] report/html reporter", () => {
   it("renders html - modules in the root don't come in a cluster; and one module could not be resolved", () => {
     const lReturnValue = render(deps);
 
-    deepStrictEqual(lReturnValue.output, elementFixture);
-    strictEqual(lReturnValue.exitCode, 0);
+    deepEqual(lReturnValue.output, elementFixture);
+    equal(lReturnValue.exitCode, 0);
   });
 });

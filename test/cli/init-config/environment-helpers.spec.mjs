@@ -1,4 +1,4 @@
-import { deepStrictEqual, strictEqual } from "node:assert";
+import { deepEqual, equal } from "node:assert/strict";
 import {
   isLikelyMonoRepo,
   hasTestsWithinSource,
@@ -7,44 +7,41 @@ import {
 
 describe("[U] cli/init-config/environment-helpers - isLikelyMonoRepo", () => {
   it("declares the current folder to be not a mono repo", () => {
-    strictEqual(isLikelyMonoRepo(), false);
+    equal(isLikelyMonoRepo(), false);
   });
   it("no folders => no mono repo", () => {
-    strictEqual(isLikelyMonoRepo([]), false);
+    equal(isLikelyMonoRepo([]), false);
   });
   it("no packages in the array of folders => no mono repo", () => {
-    strictEqual(
-      isLikelyMonoRepo(["bin", "src", "node_modules", "test"]),
-      false,
-    );
+    equal(isLikelyMonoRepo(["bin", "src", "node_modules", "test"]), false);
   });
   it("packages in the array of folders => mono repo", () => {
-    strictEqual(isLikelyMonoRepo(["packages"]), true);
+    equal(isLikelyMonoRepo(["packages"]), true);
   });
 });
 
 describe("[U] cli/init-config/environment-helpers - hasTestsWithinSource", () => {
   it("When there's no sign of a separate test directory - tests are in the source", () => {
-    strictEqual(hasTestsWithinSource([]), true);
+    equal(hasTestsWithinSource([]), true);
   });
 
   it("When there's a separate test directory - tests are separate", () => {
-    strictEqual(hasTestsWithinSource(["spec"], ["src"]), false);
+    equal(hasTestsWithinSource(["spec"], ["src"]), false);
   });
 
   it("When one test directory is also a source directy - tests are in the source", () => {
-    strictEqual(hasTestsWithinSource(["src"], ["bin", "src", "types"]), true);
+    equal(hasTestsWithinSource(["src"], ["bin", "src", "types"]), true);
   });
 
   it("When all test directories are also in the source directory array - tests are in the source", () => {
-    strictEqual(
+    equal(
       hasTestsWithinSource(["src", "lib"], ["bin", "src", "types", "lib"]),
       true,
     );
   });
 
   it("When only a part of  test directories are also in the source directory array - tests not in the source (for now)", () => {
-    strictEqual(
+    equal(
       hasTestsWithinSource(
         ["src", "lib", "spec"],
         ["bin", "src", "types", "lib"],
@@ -59,6 +56,6 @@ describe("[U] cli/init-config/environment-helpers - getFolderCandidates", () => 
     const lCandidates = ["src", "bin"];
     const lRealFolders = ["src", "lib", "node_modules"];
 
-    deepStrictEqual(getFolderCandidates(lCandidates)(lRealFolders), ["src"]);
+    deepEqual(getFolderCandidates(lCandidates)(lRealFolders), ["src"]);
   });
 });

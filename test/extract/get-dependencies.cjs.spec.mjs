@@ -1,4 +1,4 @@
-import { deepStrictEqual } from "node:assert";
+import { deepEqual } from "node:assert/strict";
 import { join } from "node:path";
 import { unlinkSync } from "node:fs";
 import { fileURLToPath } from "node:url";
@@ -31,7 +31,7 @@ function runFixture(pFixture, pParser = "acorn") {
   }
 
   it(`${pFixture.title} (with '${pParser}' as parser)`, async () => {
-    deepStrictEqual(
+    deepEqual(
       getDependencies(
         pFixture.input.fileName,
         normalizeCruiseOptions(lOptions),
@@ -78,7 +78,7 @@ describe("[I] extract/getDependencies - CommonJS - with bangs", () => {
       lOptions,
     );
 
-    deepStrictEqual(
+    deepEqual(
       getDependencies(
         "test/extract/__mocks__/cjs-bangs/index.js",
         lOptions,
@@ -108,7 +108,7 @@ describe("[I] extract/getDependencies - CommonJS - with bangs", () => {
       lOptions,
     );
 
-    deepStrictEqual(
+    deepEqual(
       getDependencies(
         "test/extract/__mocks__/cjs-multi-bangs/index.js",
         lOptions,

@@ -1,4 +1,4 @@
-import { deepStrictEqual } from "node:assert";
+import { deepEqual } from "node:assert/strict";
 import { normalizeREProperties } from "../../src/main/helpers.mjs";
 
 const POTENTIAL_ARRAY_PROPERTIES = ["aap", "noot", "mies", "wim"];
@@ -22,19 +22,19 @@ const DE_ARRAYED_OBJECT = {
 
 describe("[U] main/utl/normalize-re-properties", () => {
   it("returns the input when an empty object and an empty array of properties input is passed", () => {
-    deepStrictEqual(normalizeREProperties({}, []), {});
+    deepEqual(normalizeREProperties({}, []), {});
   });
 
   it("returns the input when an any object and an empty array of properties input is passed", () => {
-    deepStrictEqual(normalizeREProperties(ARRAYED_OBJECT, []), ARRAYED_OBJECT);
+    deepEqual(normalizeREProperties(ARRAYED_OBJECT, []), ARRAYED_OBJECT);
   });
 
   it("returns the input when an empty input is passed", () => {
-    deepStrictEqual(normalizeREProperties({}, POTENTIAL_ARRAY_PROPERTIES), {});
+    deepEqual(normalizeREProperties({}, POTENTIAL_ARRAY_PROPERTIES), {});
   });
 
   it("returns the de-arrayed input when an empty input is passed", () => {
-    deepStrictEqual(
+    deepEqual(
       normalizeREProperties(ARRAYED_OBJECT, POTENTIAL_ARRAY_PROPERTIES),
       DE_ARRAYED_OBJECT,
     );

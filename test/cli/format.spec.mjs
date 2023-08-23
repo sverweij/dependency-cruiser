@@ -1,6 +1,6 @@
 /* eslint-disable no-magic-numbers */
 import { readFileSync } from "node:fs";
-import { strictEqual } from "node:assert";
+import { equal } from "node:assert/strict";
 import { fileURLToPath } from "node:url";
 import format from "../../src/cli/format.mjs";
 import deleteDammit from "./delete-dammit.utl.cjs";
@@ -18,11 +18,11 @@ describe("[E] cli/format", () => {
       outputTo: lOutFile,
     });
 
-    strictEqual(
+    equal(
       readFileSync(lOutFile, "utf8").includes("dependencies cruised"),
       true,
     );
-    strictEqual(lExitCode, 0);
+    equal(lExitCode, 0);
     deleteDammit(lOutFile);
   });
 
@@ -40,35 +40,35 @@ describe("[E] cli/format", () => {
       },
     );
     const lResult = JSON.parse(readFileSync(lOutFile, "utf8"));
-    strictEqual(lResult.summary.error, 0);
-    strictEqual(lResult.summary.totalCruised < 175, true);
-    strictEqual(lResult.summary.totalDependenciesCruised < 298, true);
-    strictEqual(lResult.summary.violations.length, 1);
-    strictEqual(
+    equal(lResult.summary.error, 0);
+    equal(lResult.summary.totalCruised < 175, true);
+    equal(lResult.summary.totalDependenciesCruised < 298, true);
+    equal(lResult.summary.violations.length, 1);
+    equal(
       lResult.modules
         .map((pModule) => pModule.source)
         .includes("bin/depcruise-fmt.mjs"),
       false,
     );
-    strictEqual(
+    equal(
       lResult.modules
         .map((pModule) => pModule.source)
         .includes("src/main/index.js"),
       true,
     );
-    strictEqual(
+    equal(
       lResult.modules
         .map((pModule) => pModule.source)
         .includes("src/cli/index.js"),
       true,
     );
-    strictEqual(
+    equal(
       lResult.modules
         .map((pModule) => pModule.source)
         .includes("src/cli/init-config/index.js"),
       false,
     );
-    strictEqual(lExitCode, 0);
+    equal(lExitCode, 0);
     deleteDammit(lOutFile);
   });
 
@@ -88,7 +88,7 @@ describe("[E] cli/format", () => {
     );
     const lResult = JSON.parse(readFileSync(lOutFile, "utf8"));
 
-    strictEqual(lResult.summary.optionsUsed.prefix, lAlternatePrefix);
+    equal(lResult.summary.optionsUsed.prefix, lAlternatePrefix);
 
     deleteDammit(lOutFile);
   });
@@ -105,7 +105,7 @@ describe("[E] cli/format", () => {
       },
     );
 
-    strictEqual(lExitCode, 2);
+    equal(lExitCode, 2);
     deleteDammit(lOutFile);
   });
 });

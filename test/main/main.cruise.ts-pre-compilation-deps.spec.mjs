@@ -1,4 +1,4 @@
-import { deepStrictEqual } from "node:assert";
+import { deepEqual } from "node:assert/strict";
 import Ajv from "ajv";
 import cruiseResultSchema from "../../src/schema/cruise-result.schema.mjs";
 import cruise from "../../src/main/cruise.mjs";
@@ -43,7 +43,7 @@ describe("[E] main.cruise - tsPreCompilationDeps", () => {
       },
     );
 
-    deepStrictEqual(lResult.output, tsPreCompFixtureCJS);
+    deepEqual(lResult.output, tsPreCompFixtureCJS);
     ajv.validate(cruiseResultSchema, lResult.output);
   });
   it("ts-pre-compilation-deps: on, target ES", async () => {
@@ -66,7 +66,7 @@ describe("[E] main.cruise - tsPreCompilationDeps", () => {
       },
     );
 
-    deepStrictEqual(lResult.output, tsPreCompFixtureES);
+    deepEqual(lResult.output, tsPreCompFixtureES);
     ajv.validate(cruiseResultSchema, lResult.output);
   });
   it("ts-pre-compilation-deps: off, target CJS", async () => {
@@ -89,7 +89,7 @@ describe("[E] main.cruise - tsPreCompilationDeps", () => {
       },
     );
 
-    deepStrictEqual(lResult.output, tsNoPrecompFixtureCJS);
+    deepEqual(lResult.output, tsNoPrecompFixtureCJS);
     ajv.validate(cruiseResultSchema, lResult.output);
   });
   it("ts-pre-compilation-deps: off, target ES", async () => {
@@ -112,7 +112,7 @@ describe("[E] main.cruise - tsPreCompilationDeps", () => {
       },
     );
 
-    deepStrictEqual(lResult.output, tsNoPrecompFixtureES);
+    deepEqual(lResult.output, tsNoPrecompFixtureES);
     ajv.validate(cruiseResultSchema, lResult.output);
   });
 });

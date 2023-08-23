@@ -1,6 +1,6 @@
 /* eslint-disable security/detect-non-literal-regexp */
 /* eslint-disable no-magic-numbers */
-import { strictEqual, match } from "node:assert";
+import { equal, match } from "node:assert/strict";
 import { EOL } from "node:os";
 import chalk from "chalk";
 import render from "../../../src/report/error-long.mjs";
@@ -23,7 +23,7 @@ describe("[I] report/error-long", () => {
     const lResult = render(okDeps);
 
     match(lResult.output, /no dependency violations found/);
-    strictEqual(lResult.exitCode, 0);
+    equal(lResult.exitCode, 0);
   });
   it("renders a bunch of errors", () => {
     const lResult = render(deps);
@@ -34,13 +34,13 @@ describe("[I] report/error-long", () => {
       /2 dependency violations \(2 errors, 0 warnings\)\. 33 modules, 333 dependencies cruised\./,
     );
     match(lResult.output, / {4}comment to no-leesplank/);
-    strictEqual(lResult.exitCode, 2);
+    equal(lResult.exitCode, 2);
   });
   it("renders a bunch of warnings", () => {
     const lResult = render(warnDeps);
 
     match(lResult.output, /1 dependency violations \(0 errors, 1 warnings\)/);
-    strictEqual(lResult.exitCode, 0);
+    equal(lResult.exitCode, 0);
   });
   it("renders module only violations as module only", () => {
     const lResult = render(orphanErrs);
@@ -50,7 +50,7 @@ describe("[I] report/error-long", () => {
       lResult.output,
       /1 dependency violations \(1 errors, 0 warnings\)\. 1 modules, 0 dependencies cruised\./,
     );
-    strictEqual(lResult.exitCode, 1);
+    equal(lResult.exitCode, 1);
   });
   it("renders a '-' for comment if it couldn't find the rule", () => {
     const lResult = render(errorsAdditionalInfo);

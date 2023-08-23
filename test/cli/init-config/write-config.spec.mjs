@@ -1,4 +1,4 @@
-import { ok, strictEqual } from "node:assert";
+import { ok, equal } from "node:assert/strict";
 import { writeFileSync, readFileSync } from "node:fs";
 import { join } from "node:path";
 import deleteDammit from "../delete-dammit.utl.cjs";
@@ -59,8 +59,8 @@ describe("[U] cli/init-config/write-config", () => {
       ok(pError.message.includes("already exists here - leaving it be"));
     }
 
-    strictEqual(lStillHere, false);
+    equal(lStillHere, false);
 
-    strictEqual(readFileSync(RULES_FILE_JS, "utf8"), "module.exports = {}");
+    equal(readFileSync(RULES_FILE_JS, "utf8"), "module.exports = {}");
   });
 });

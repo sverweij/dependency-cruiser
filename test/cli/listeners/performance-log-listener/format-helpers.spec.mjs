@@ -1,5 +1,5 @@
 /* eslint-disable no-magic-numbers */
-import { match, strictEqual } from "node:assert";
+import { match, equal } from "node:assert/strict";
 import chalk from "chalk";
 import {
   formatTime,
@@ -24,27 +24,27 @@ import {
 
 describe("[U] cli/listeners/performance-log/format-helpers - formatTime", () => {
   it("converts to ms, left pads & adds the unit at the end", () => {
-    strictEqual(formatTime(14.88041018), "     14,880ms ");
+    equal(formatTime(14.88041018), "     14,880ms ");
   });
 
   it("converts to ms, left pads & adds the unit at the end (0)", () => {
-    strictEqual(formatTime(0), "          0ms ");
+    equal(formatTime(0), "          0ms ");
   });
 
   it("converts to ms, left pads & adds the unit at the end (negative numbers)", () => {
-    strictEqual(formatTime(-3.1415926535), "     -3,142ms ");
+    equal(formatTime(-3.1415926535), "     -3,142ms ");
   });
 
   it("converts to ms, left pads & adds the unit at the end (null treatment => 0)", () => {
-    strictEqual(formatTime(null), "          0ms ");
+    equal(formatTime(null), "          0ms ");
   });
 
   it("converts to ms, left pads & adds the unit at the end (undefined treatment => NaN)", () => {
-    strictEqual(formatTime(), "        NaNms ");
+    equal(formatTime(), "        NaNms ");
   });
 
   it("converts to ms, left pads & adds the unit at the end (non-number treatment => NaN)", () => {
-    strictEqual(formatTime("not a number"), "        NaNms ");
+    equal(formatTime("not a number"), "        NaNms ");
   });
 });
 
@@ -60,27 +60,27 @@ describe("[U] cli/listeners/performance-log/format-helpers - formatMemory", () =
   });
 
   it("converts to kB, left pads & adds the unit at the end", () => {
-    strictEqual(formatMemory(4033856), "     +3,939kB ");
+    equal(formatMemory(4033856), "     +3,939kB ");
   });
 
   it("converts to kB, left pads & adds the unit at the end (0)", () => {
-    strictEqual(formatMemory(0), "          0kB ");
+    equal(formatMemory(0), "          0kB ");
   });
 
   it("converts to kB, left pads & adds the unit at the end (negative numbers)", () => {
-    strictEqual(formatMemory(-403385623), "   -393,931kB ");
+    equal(formatMemory(-403385623), "   -393,931kB ");
   });
 
   it("converts to kB, left pads & adds the unit at the end (null)", () => {
-    strictEqual(formatMemory(0), "          0kB ");
+    equal(formatMemory(0), "          0kB ");
   });
 
   it("converts to kB, left pads & adds the unit at the end (undefined)", () => {
-    strictEqual(formatMemory(), "        NaNkB ");
+    equal(formatMemory(), "        NaNkB ");
   });
 
   it("converts to kB, left pads & adds the unit at the end (not a number)", () => {
-    strictEqual(formatMemory("not a number"), "        NaNkB ");
+    equal(formatMemory("not a number"), "        NaNkB ");
   });
 });
 

@@ -1,4 +1,4 @@
-import { deepStrictEqual } from "node:assert";
+import { deepEqual } from "node:assert/strict";
 import Ajv from "ajv";
 import summarize from "../../src/enrich/summarize/index.mjs";
 import cruiseResultSchema from "../../src/schema/cruise-result.schema.mjs";
@@ -11,7 +11,7 @@ const ajv = new Ajv();
 describe("[I] enrich/summarize", () => {
   it("doesn't add a rule set when there isn't one", () => {
     const lSummary = summarize([], {}, []);
-    deepStrictEqual(lSummary, {
+    deepEqual(lSummary, {
       error: 0,
       info: 0,
       ignore: 0,
@@ -27,7 +27,7 @@ describe("[I] enrich/summarize", () => {
   });
   it("adds a rule set when there is one", () => {
     const lSummary = summarize([], { ruleSet: { required: [] } }, []);
-    deepStrictEqual(lSummary, {
+    deepEqual(lSummary, {
       error: 0,
       info: 0,
       ignore: 0,
@@ -63,7 +63,7 @@ describe("[I] enrich/summarize", () => {
     const lResult1 = summarize(cycleStartsOnOne, lOptions, ["src"]);
     const lResult2 = summarize(cycleStartsOnTwo, lOptions, ["src"]);
 
-    deepStrictEqual(lResult1, lResult2);
+    deepEqual(lResult1, lResult2);
     ajv.validate(cruiseResultSchema, { modules: [], summary: lResult1 });
   });
 
@@ -138,7 +138,7 @@ describe("[I] enrich/summarize", () => {
       },
     };
     const lSummary = summarize(cycleFest, lOptions, ["src"]);
-    deepStrictEqual(lSummary, lExpected);
+    deepEqual(lSummary, lExpected);
     ajv.validate(cruiseResultSchema, { modules: [], summary: lSummary });
   });
 
@@ -161,7 +161,7 @@ describe("[I] enrich/summarize", () => {
         },
       },
     ];
-    deepStrictEqual(summarize([], { knownViolations: lKnownViolations }, []), {
+    deepEqual(summarize([], { knownViolations: lKnownViolations }, []), {
       error: 0,
       info: 0,
       ignore: 0,
@@ -177,7 +177,7 @@ describe("[I] enrich/summarize", () => {
   });
 
   it("doesn't include known violations key when none exist", () => {
-    deepStrictEqual(summarize([], { knownViolations: [] }, []), {
+    deepEqual(summarize([], { knownViolations: [] }, []), {
       error: 0,
       info: 0,
       ignore: 0,
@@ -220,7 +220,7 @@ describe("[I] enrich/summarize", () => {
       [],
     );
 
-    deepStrictEqual(lSummary, {
+    deepEqual(lSummary, {
       violations: [
         {
           type: "instability",

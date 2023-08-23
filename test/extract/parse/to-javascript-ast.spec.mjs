@@ -1,4 +1,4 @@
-import { strictEqual } from "node:assert";
+import { equal } from "node:assert/strict";
 import get from "lodash/get.js";
 import { getASTFromSource } from "../../../src/extract/parse/to-javascript-ast.mjs";
 
@@ -37,7 +37,7 @@ describe("[U] extract/parse/to-javascript-ast", () => {
         },
       },
     );
-    strictEqual(
+    equal(
       get(
         lFoundAST,
         "body[0].declarations[0].init.body.type",
@@ -74,8 +74,8 @@ describe("[U] extract/parse/to-javascript-ast", () => {
       "body[0].declarations.[0].init",
       {},
     );
-    strictEqual(likelyTheArrowExpression.type, "ArrowFunctionExpression");
-    strictEqual(
+    equal(likelyTheArrowExpression.type, "ArrowFunctionExpression");
+    equal(
       get(
         likelyTheArrowExpression,
         "body.callee.type",
@@ -83,11 +83,11 @@ describe("[U] extract/parse/to-javascript-ast", () => {
       ),
       "MemberExpression",
     );
-    strictEqual(
+    equal(
       get(likelyTheArrowExpression, "body.callee.object.name", "not react"),
       "React",
     );
-    strictEqual(
+    equal(
       get(
         likelyTheArrowExpression,
         "body.callee.property.name",

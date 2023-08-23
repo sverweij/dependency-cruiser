@@ -1,6 +1,6 @@
 import { writeFileSync, readFileSync } from "node:fs";
 import { join } from "node:path";
-import { deepStrictEqual, strictEqual } from "node:assert";
+import { deepEqual, equal } from "node:assert/strict";
 import Ajv from "ajv";
 import deleteDammit from "../delete-dammit.utl.cjs";
 import initConfig from "../../../src/cli/init-config/index.mjs";
@@ -29,7 +29,7 @@ describe("[I] cli/init-config/index", () => {
       const lResult = await import(lConfigResultFileName);
 
       ajv.validate(configurationSchema, lResult.default);
-      strictEqual(lResult.default.hasOwnProperty("extends"), false);
+      equal(lResult.default.hasOwnProperty("extends"), false);
     } finally {
       deleteDammit(RULES_FILE_JS);
     }
@@ -48,8 +48,8 @@ describe("[I] cli/init-config/index", () => {
       const lResult = await import(lConfigResultFileName);
 
       ajv.validate(configurationSchema, lResult.default);
-      strictEqual(lResult.default.hasOwnProperty("extends"), false);
-      strictEqual(lResult.default.options.hasOwnProperty("tsConfig"), false);
+      equal(lResult.default.hasOwnProperty("extends"), false);
+      equal(lResult.default.options.hasOwnProperty("tsConfig"), false);
     } finally {
       deleteDammit(lConfig);
     }
@@ -67,9 +67,9 @@ describe("[I] cli/init-config/index", () => {
       const lResult = await import(lConfigResultFileName);
 
       ajv.validate(configurationSchema, lResult.default);
-      strictEqual(lResult.default.hasOwnProperty("extends"), false);
-      strictEqual(lResult.default.options.hasOwnProperty("tsConfig"), true);
-      deepStrictEqual(lResult.default.options.tsConfig, {
+      equal(lResult.default.hasOwnProperty("extends"), false);
+      equal(lResult.default.options.hasOwnProperty("tsConfig"), true);
+      deepEqual(lResult.default.options.tsConfig, {
         fileName: "tsconfig.json",
       });
     } finally {
@@ -89,12 +89,9 @@ describe("[I] cli/init-config/index", () => {
       const lResult = await import(lConfigResultFileName);
 
       ajv.validate(configurationSchema, lResult.default);
-      strictEqual(lResult.default.hasOwnProperty("extends"), false);
-      strictEqual(
-        lResult.default.options.hasOwnProperty("webpackConfig"),
-        true,
-      );
-      deepStrictEqual(lResult.default.options.webpackConfig, {
+      equal(lResult.default.hasOwnProperty("extends"), false);
+      equal(lResult.default.options.hasOwnProperty("webpackConfig"), true);
+      deepEqual(lResult.default.options.webpackConfig, {
         fileName: "webpack.config.js",
       });
     } finally {
@@ -120,7 +117,7 @@ describe("[I] cli/init-config/index", () => {
       ajv.validate(configurationSchema, lResult.default);
 
       const lManifest = JSON.parse(readFileSync(lManifestFilename, "utf8"));
-      strictEqual(lManifest.hasOwnProperty("scripts"), true);
+      equal(lManifest.hasOwnProperty("scripts"), true);
     } finally {
       deleteDammit(RULES_FILE_JS);
       deleteDammit(lManifestFilename);
@@ -144,10 +141,10 @@ describe("[I] cli/init-config/index", () => {
       const lResult = await import(lConfigResultFileName);
 
       ajv.validate(configurationSchema, lResult.default);
-      deepStrictEqual(lResult.default, {});
+      deepEqual(lResult.default, {});
 
       const lManifest = JSON.parse(readFileSync(lManifestFilename, "utf8"));
-      strictEqual(lManifest.hasOwnProperty("scripts"), true);
+      equal(lManifest.hasOwnProperty("scripts"), true);
     } finally {
       deleteDammit(lManifestFilename);
     }

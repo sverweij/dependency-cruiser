@@ -1,4 +1,4 @@
-import { strictEqual } from "node:assert";
+import { equal } from "node:assert/strict";
 import matchModuleRule from "../../src/validate/match-module-rule.mjs";
 
 const EMPTY_RULE = { from: {}, to: {} };
@@ -15,10 +15,10 @@ const ANY_REACHES_IN_ALLOWED = {
 
 describe("[I] validate/match-module-rule - reaches", () => {
   it("rule without reachable attribute doesn't match modules with a reaches (implicit)", () => {
-    strictEqual(matchModuleRule.matchesReachesRule(EMPTY_RULE, {}), false);
+    equal(matchModuleRule.matchesReachesRule(EMPTY_RULE, {}), false);
   });
   it("rule without reachable attribute doesn't match modules with a reaches (explicit)", () => {
-    strictEqual(
+    equal(
       matchModuleRule.matchesReachesRule(EMPTY_RULE, {
         reaches: [
           {
@@ -31,7 +31,7 @@ describe("[I] validate/match-module-rule - reaches", () => {
     );
   });
   it("rule without reachable attribute matches modules with a reaches (explicit)", () => {
-    strictEqual(
+    equal(
       matchModuleRule.matchesReachesRule(ANY_REACHABLE, {
         reaches: [
           {
@@ -44,7 +44,7 @@ describe("[I] validate/match-module-rule - reaches", () => {
     );
   });
   it("rule without reachable attribute matches modules with a reaches (explicit, nameless rule)", () => {
-    strictEqual(
+    equal(
       matchModuleRule.matchesReachesRule(ANY_REACHES_IN_ALLOWED, {
         reaches: [
           {

@@ -1,4 +1,4 @@
-import { deepStrictEqual } from "node:assert";
+import { deepEqual } from "node:assert/strict";
 import validate from "../../src/validate/index.mjs";
 import parseRuleSet from "./parse-ruleset.utl.mjs";
 
@@ -17,7 +17,7 @@ describe("[I] [I] validate/index - type-only", () => {
   });
 
   it("only to type-only - with dependencyTypesNot in forbidden, multiple types - ok", () => {
-    deepStrictEqual(
+    deepEqual(
       validate.dependency(
         lTypeOnlyRuleSet,
         { source: "src/koos-koets.ts" },
@@ -31,7 +31,7 @@ describe("[I] [I] validate/index - type-only", () => {
   });
 
   it("only to type-only - with dependencyTypesNot in forbidden, multiple types - nok", () => {
-    deepStrictEqual(
+    deepEqual(
       validate.dependency(
         lTypeOnlyRuleSet,
         { source: "src/koos-koets.ts" },
